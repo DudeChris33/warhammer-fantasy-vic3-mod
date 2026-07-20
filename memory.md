@@ -1,4 +1,4 @@
-# {{PROJECT_NAME}} Working Memory
+# Warhammer Fantasy Overhaul Working Memory
 
 ## Memory Hygiene Rules
 - Keep compact and current.

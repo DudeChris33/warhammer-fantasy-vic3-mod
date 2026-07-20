@@ -5,12 +5,12 @@ user-invocable: true
 argument-hint: <path to issue or request file>
 ---
 
-Design the implementation approach for a {{PROJECT_NAME}} issue or feature request. Do NOT implement anything.
+Design the implementation approach for a Warhammer Fantasy Overhaul issue or feature request. Do NOT implement anything.
 
 ## Workflow
 
 1. **Read** — Read the issue/request file at $ARGUMENTS (or list open files in `planning/issues/` and `planning/requests/` and ask which one)
-2. **Deep exploration** — Read ALL related source files referenced in the investigation section. Check for existing features, helpers, or patterns that can be reused. {{PLAN_EXPLORE_HINTS: one or two sentences pointing at this project's reference docs — or remove}}
+2. **Deep exploration** — Read ALL related source files referenced in the investigation section. Check for existing features, helpers, or patterns that can be reused. Confirm every effect/trigger/modifier/event target/on_action the plan will rely on against the matching `docs/*.log` file.
 3. **Design** — Create a file-level implementation plan:
 
 ```markdown
@@ -30,8 +30,8 @@ Design the implementation approach for a {{PROJECT_NAME}} issue or feature reque
 - <What could go wrong, boundary conditions>
 
 ### Testing
-- <How to verify — specific test commands, expected results>
-- Must pass: {{PLAN_TEST_CRITERIA: the project's full test command and pass criteria}}
+- <How to verify — specific in-game steps>
+- Must pass: mod loads in Victoria 3 with the change active, and `logs/error.log` shows no new errors referencing this mod's files (see [testing.md](../../rules/testing.md))
 
 ### Docs to Update
 - <Which docs need changes>
@@ -47,4 +47,4 @@ Design the implementation approach for a {{PROJECT_NAME}} issue or feature reque
 - Read all files in scope before designing.
 - Reference actual file paths, function names, and line numbers.
 - Resolve all open questions before marking as planned.
-- {{PLAN_RULES: 1–2 additional project-specific rules, e.g. layers every plan must cover}}
+- Every plan touching user-facing content must include a step for its `localization/english/` (or `localization/replace/english/`) entries.

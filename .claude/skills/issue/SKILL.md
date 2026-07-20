@@ -5,12 +5,12 @@ user-invocable: true
 argument-hint: <description of the problem>
 ---
 
-Investigate a bug in the {{PROJECT_NAME}} project. Do NOT fix it — investigation and documentation only.
+Investigate a bug in the Warhammer Fantasy Overhaul project. Do NOT fix it — investigation and documentation only.
 
 ## Workflow
 
 1. **Parse** — Read the bug description from $ARGUMENTS (or ask user to describe it)
-2. **Investigate** — Read relevant source files, trace the code path. {{ISSUE_INVESTIGATE_HINTS: one or two sentences pointing at this project's reference docs for expected behavior — e.g. its API/command reference and docs index}}
+2. **Investigate** — Read relevant script/loc/gui files, trace the effect/trigger/event chain. Cross-check every effect, trigger, modifier, event target, on_action, or custom localization key against the matching `docs/*.log` file to confirm expected behavior and scope requirements.
 3. **Confirm** — Best-effort confirmation through code analysis. If a regression test is feasible, write and run it to demonstrate the failure.
 4. **Document** — Write `planning/issues/<slug>.md` using this template:
 
@@ -39,7 +39,7 @@ Investigate a bug in the {{PROJECT_NAME}} project. Do NOT fix it — investigati
 - **Code path**: <file:line references>
 - **Regression test**: <test or command sequence that demonstrates the bug>
 - **Related files**: <list of files involved>
-{{ISSUE_EXTRA_FIELDS: extra Investigation bullets this project needs, e.g. cross-layer impact — or remove this line}}
+- **In-game reproduction**: <steps to reproduce and the exact `logs/error.log` line, if any>
 ```
 
 5. **Hand off** — Print the file path and: "Start new session, run `/plan planning/issues/<slug>.md`"
@@ -48,5 +48,5 @@ Investigate a bug in the {{PROJECT_NAME}} project. Do NOT fix it — investigati
 
 - Do NOT fix the bug. Investigation and documentation only.
 - Read files before drawing conclusions.
-- If it's a security bug, flag it explicitly. {{ISSUE_SECURITY_POINTER: where this project's security docs live — or remove}}
-- {{ISSUE_RULES: 1–3 additional project-specific rules, e.g. layers to always check}}
+- If the bug involves non-determinism (would desync multiplayer), flag it explicitly — see [core.md](../../rules/core.md).
+- Always check whether the bug traces to a mismatch with `docs/*.log` (wrong scope, deprecated effect, etc.) before assuming it's a logic error.

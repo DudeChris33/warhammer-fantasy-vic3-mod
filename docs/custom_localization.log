@@ -1,0 +1,3776 @@
+Custom Localization Documentation:
+
+--------------------
+
+treaty_names_custom_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+treaty_commerce_and_navigation_loc
+treaty_amity_and_commerce_loc
+
+--------------------
+
+army_or_navy_custom_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+x_army_custom_loc
+x_navy_custom_loc
+
+--------------------
+
+film_industry_name:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_film_industry_name_default
+
+--------------------
+
+newspaper_type:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_newspaper_truth
+custom_generic_newspaper
+
+--------------------
+
+generic_newspaper_type:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_newspaper_times
+custom_newspaper_gazette
+custom_newspaper_herald
+custom_newspaper_daily
+custom_newspaper_edition
+custom_newspaper_chronicle
+custom_newspaper_evening_news
+custom_newspaper_evening_post
+custom_newspaper_guardian
+custom_newspaper_observer
+custom_newspaper_tribune
+custom_newspaper_standard
+custom_newspaper_journal
+custom_newspaper_globe
+custom_newspaper_daily_news
+custom_newspaper_sentinel
+custom_newspaper_informer
+custom_newspaper_bulletin
+
+--------------------
+
+fast_object_type:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_fast_object_motor_carriage
+custom_fast_object_train
+custom_fast_object_horse
+
+--------------------
+
+automobile_accident_type:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_automobile_accident_type_crash
+custom_automobile_accident_type_wall_crash
+custom_automobile_accident_type_wall_person_hit
+custom_automobile_accident_type_river
+
+--------------------
+
+war_weapons_article:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_weapon_article_machine_gun
+custom_weapon_article_chemical_weapons
+
+--------------------
+
+outlaw_gang_type:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_gang
+custom_brothers
+custom_sisters
+custom_outlaws
+custom_bunch
+custom_wild_bunch
+
+--------------------
+
+serial_killer_modus_operandi:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_disembowled
+custom_face_removed
+custom_surgical
+custom_strangled
+custom_stabbed
+custom_crocodile
+
+--------------------
+
+assassination_type:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+shooting_assassination
+
+--------------------
+
+travelling_verb:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+travelling_verb_arriving
+travelling_verb_visiting
+travelling_verb_driving
+travelling_verb_wrong_turn
+travelling_verb_speech
+travelling_verb_stopped
+
+--------------------
+
+place_event:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+place_event_palace
+place_event_parade
+place_event_parliament
+place_event_townsquare
+place_event_airfield
+place_event_hospital
+place_event_opera
+place_event_destroyer
+
+--------------------
+
+assassin_description:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+assassin_description_young_man
+assassin_description_young_woman
+assassin_description_unemployed
+assassin_description_angry_man
+
+--------------------
+
+assassin_movement:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+assassin_movement_leapt
+assassin_movement_calmly
+assassin_movement_stepped
+assassin_movement_shadows
+assassin_movement_crowd
+
+--------------------
+
+fatal_injury_gunshot:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+fatal_injury_gunshot_head
+fatal_injury_gunshot_heart
+fatal_injury_gunshot_multiple
+fatal_injury_gunshot_dead_guard
+fatal_injury_bomb_thrown
+
+--------------------
+
+assassination_death:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+assassination_death_fatally
+assassination_death_died_instantly
+
+--------------------
+
+assassination_aftermath:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+assassination_aftermath_caught
+assassination_aftermath_cyanide_fail
+assassination_aftermath_cyanide_success
+assassination_aftermath_escape
+assassination_aftermath_shout
+assassination_aftermath_river
+assassination_aftermath_shot
+assassination_aftermath_helpers
+assassination_aftermath_film
+assassination_sewer_escape
+
+--------------------
+
+opera_noun:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_ring
+custom_heart
+custom_throne
+custom_sword
+custom_shield
+custom_maiden
+
+--------------------
+
+opera_genitive:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_of_fire
+custom_of_the_giant
+custom_of_the_sun
+custom_of_the_night
+custom_of_light
+custom_of_darkness
+custom_of_the_lord
+
+--------------------
+
+horny_adjective:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_naughty
+custom_lusty
+custom_filthy
+custom_cheeky
+custom_promiscuous
+custom_shameless
+
+--------------------
+
+job_title:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_maid
+custom_gardener
+custom_chimney_sweep
+custom_train_conductor
+custom_coal_miner
+custom_plumber
+custom_smelter
+custom_bureaucrat
+custom_professor
+custom_nurse
+
+--------------------
+
+alcohol:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_wine
+
+--------------------
+
+GetDivinity:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_gods
+custom_god
+
+--------------------
+
+mother_father:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_mother
+custom_father
+
+--------------------
+
+fiction_cliche:
+
+Scope: country
+Random Valid: no
+
+Entries:
+fanfic_ship_generic
+
+--------------------
+
+country_power:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_great_power
+custom_loc_major_power
+custom_loc_minor_power
+custom_loc_insignificant_power
+
+--------------------
+
+enactment_phase_0:
+
+Scope: country
+Random Valid: no
+
+Entries:
+enactment_phase_0_tec
+enactment_phase_0_courep
+enactment_phase_0_autocracy
+enactment_phase_0_demrep
+enactment_phase_0_conmon
+enactment_phase_0_mon
+enactment_phase_0_generic
+
+--------------------
+
+enactment_phase_1:
+
+Scope: country
+Random Valid: no
+
+Entries:
+enactment_phase_1_tec
+enactment_phase_1_courep
+enactment_phase_1_autocracy
+enactment_phase_1_demrep
+enactment_phase_1_conmon
+enactment_phase_1_mon
+enactment_phase_1_generic
+
+--------------------
+
+enactment_phase_2:
+
+Scope: country
+Random Valid: no
+
+Entries:
+enactment_phase_2_tec
+enactment_phase_2_courep
+enactment_phase_2_autocracy
+enactment_phase_2_demrep
+enactment_phase_2_conmon
+enactment_phase_2_mon
+enactment_phase_2_generic
+
+--------------------
+
+impose_law_error:
+
+Scope: country
+Random Valid: no
+
+Entries:
+IMPOSE_LAW_NO_OPTIONS_COOLDOWN
+IMPOSE_LAW_NO_OPTIONS_JOURNAL_ENTRY
+IMPOSE_LAW_NO_OPTIONS_NO_COOLDOWN
+
+--------------------
+
+GetPromisedTaxLevelOneWord:
+
+Scope: country
+Random Valid: no
+
+Entries:
+tax_low
+tax_very_low
+
+--------------------
+
+expedition_progress_loc:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+expedition_progress_loc_low
+expedition_progress_loc_moderate
+expedition_progress_loc_good
+expedition_progress_loc_very_good
+
+--------------------
+
+expedition_peril_loc:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+expedition_peril_loc_low
+expedition_peril_loc_moderate
+expedition_peril_loc_high
+expedition_peril_loc_very_high
+
+--------------------
+
+dynamic_ship_name:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_ship_sunward_glory
+custom_ship_solar_crown
+custom_ship_holy_radiance
+custom_ship_dawns_vengeance
+custom_ship_sunfire
+custom_ship_sacred_flame
+custom_ship_dragons_meridian
+custom_ship_runner_of_fire
+custom_ship_holy_tempest
+custom_ship_sunderer_of_darkness
+custom_ship_blessed_horizon
+custom_ship_servant_of_the_holy_sun
+custom_ship_sanctified_dawn
+custom_ship_sunspear
+custom_ship_divine_brilliance
+custom_ship_solar_wrath
+custom_ship_holy_sovereign
+custom_ship_dawnbreaker
+custom_ship_gilded_zenith
+custom_ship_akini_triumphant
+custom_ship_glory_of_the_rays
+custom_ship_sunburst_royal
+custom_ship_hallowed_fire
+custom_ship_solar_dominion
+custom_ship_blessed_fury
+custom_ship_heliarch
+custom_ship_holy_dreadnought
+custom_ship_solstice
+custom_ship_suns_mandate
+custom_ship_consecrated_flame
+custom_ship_daystar
+custom_ship_solar_providence
+custom_ship_akinis_judgment
+custom_ship_holy_conflagration
+custom_ship_sundial
+custom_ship_lightbringer
+custom_ship_sacred_akini
+custom_ship_golden_reproval
+custom_ship_dawn_crusader
+custom_ship_sunlit_bastion
+custom_ship_sanctum_of_rays
+custom_ship_blazing_covenant
+custom_ship_holy_castigation
+custom_ship_coronet_of_akini
+custom_ship_prophet_ascendant
+custom_ship_solar_edict
+custom_ship_blessed_scourge
+custom_ship_dawn_regnant
+custom_ship_sunsworn
+custom_ship_sacred_retribution
+custom_ship_noonday_wrath
+custom_ship_holy_endeavour
+custom_ship_gilded_thunderer
+custom_ship_solace_of_heaven
+custom_ship_burning_apostle
+custom_ship_dawns_relentless
+custom_ship_solar_catechism
+custom_ship_akinis_broadside
+custom_ship_sun_imperious
+custom_ship_celestial_hammer
+custom_ship_holy_purgation
+custom_ship_ardent_star
+custom_ship_consecrated_broadside
+custom_ship_equinox
+custom_ship_suns_tithe
+custom_ship_blessed_cannonade
+custom_ship_solarian
+custom_ship_sacred_thunder_of_the_revolution
+custom_ship_aureole
+custom_ship_holy_fortitude
+custom_ship_ember_of_the_faith
+custom_ship_solar_absolution
+custom_ship_resplendent
+custom_ship_sanctified_armament
+custom_ship_revolution_indomitable
+custom_ship_golden_scourge
+custom_ship_suns_fury_unbound
+custom_ship_blazing_sacrament
+custom_ship_helion
+custom_ship_consecrated_vengeance
+custom_ship_revolutions_rebuke
+custom_ship_holy_rampart
+custom_ship_luminarch
+custom_ship_sunclad_sovereign
+custom_ship_blessed_ordnance
+custom_ship_pyre_of_saints
+custom_ship_golden_absolution
+custom_ship_solarian_majesty
+custom_ship_sacred_broadside
+custom_ship_royal_dawnfire_eternal
+custom_ship_holy_devastation
+custom_ship_zenith_of_grace
+custom_ship_burning_mandate
+custom_ship_blessed_inferno
+custom_ship_hallowed_annihilation
+custom_ship_lively_ferret
+custom_ship_speedy_ocelot
+custom_ship_wiley_rabbit
+custom_ship_wiry_coyote
+custom_ship_angry_kisqi
+custom_ship_flying_kiankstauk
+custom_ship_old_bulldog
+custom_ship_wet_stallion
+custom_ship_boisterous_bronco
+custom_ship_ominous_raven
+custom_ship_emerald_owl
+custom_ship_pink_flamingo
+custom_ship_iron_walrus
+custom_ship_dirchelfrobe
+custom_ship_clawibledi
+custom_ship_cusbledi
+custom_ship_prurpicherse
+custom_ship_barjubral
+custom_ship_barjugoner
+custom_ship_loprucual
+custom_ship_denterradrire
+custom_ship_traditrerr
+custom_ship_edruterr
+custom_ship_barjubutra
+custom_ship_clawibutra
+custom_ship_mangobro
+custom_ship_umbrenar
+custom_ship_fol_umbrenar
+custom_ship_fol_lurra
+custom_ship_grapiches
+custom_ship_chabussew
+custom_ship_pledsew
+custom_ship_tradisew
+custom_ship_cletowsew
+custom_ship_onbutra
+custom_ship_chersebledi
+custom_ship_clitresew
+custom_ship_grirrsew
+custom_ship_featherweight
+custom_ship_goldensail
+custom_ship_silksail
+custom_ship_ironflyer
+custom_ship_silversong
+custom_ship_silverflight
+custom_ship_lightningstorm
+custom_ship_thunderhunter
+custom_ship_whitetornado
+custom_ship_oceantornado
+custom_ship_silverwind
+custom_ship_goldengust
+custom_ship_bluehope
+custom_ship_new_umbrenar
+custom_ship_great_umbrenar
+custom_ship_great_lurra
+custom_ship_wingedserpent
+custom_ship_blackbird
+custom_ship_rainbowbird
+custom_ship_whitebird
+custom_ship_brownbird
+custom_ship_highwind
+custom_ship_flysail
+custom_ship_steelbird
+custom_ship_sjiva_laeo
+custom_ship_porajhoqot
+custom_ship_thraeskat_jhao_sjaeong
+custom_ship_ssorkazakc
+custom_ship_ssorkawaa
+custom_ship_thrifaed_jhao_sji_chier_ghae_tri
+custom_ship_zi
+custom_ship_mrieschfrit
+custom_ship_aankqo
+custom_ship_fuchaeosk
+custom_ship_djaah_fuch
+custom_ship_aarhlaesk
+custom_ship_grakc_aasch
+custom_ship_aeofyraot
+custom_ship_muarl_zulat
+custom_ship_mejjirl_naid
+custom_ship_djaah_fuch
+custom_ship_djaah_fuch
+custom_ship_yaasksvorh
+custom_ship_thram_jhao_candang
+custom_ship_caorzakc
+custom_ship_notijaass
+custom_ship_dirbnot_teachat
+custom_ship_sjuaan_sjeasj
+custom_ship_feanth_rhaathaad
+custom_ship_kisqifakhi
+custom_ship_u_jhao_ciacor
+custom_ship_beind_jhao_sjiv
+custom_ship_qie_sjam
+custom_ship_yikc_daern
+custom_ship_jiesjthburlat
+custom_ship_kasnefizr
+custom_ship_giraba
+custom_ship_gonaba
+custom_ship_okaba
+custom_ship_odaraba
+custom_ship_zakhega
+custom_ship_gondbarzuk
+custom_ship_khulega
+custom_ship_ankera
+custom_ship_khazkhuzd
+custom_ship_kasnemia
+custom_ship_khazkhuzd
+custom_ship_enbadfizr
+custom_ship_ingukakh
+custom_ship_khongond
+custom_ship_khazkid
+custom_ship_borseirba
+custom_ship_abakhitieni
+custom_ship_monkugn
+custom_ship_buluk
+custom_ship_mugitnuk
+custom_ship_tieniuk
+custom_ship_zegnbul
+custom_ship_khazkha
+custom_ship_senikha
+custom_ship_korbadna
+custom_ship_jezr
+custom_ship_katnas
+custom_ship_suega
+custom_ship_sadshi
+custom_ship_khazkhom
+custom_ship_vloekgroers
+custom_ship_twusrou
+custom_ship_hasalbak
+custom_ship_bou_hasal
+custom_ship_zwontoeing
+custom_ship_kardwemgroers
+custom_ship_luvrefzals
+custom_ship_kardwemibei
+custom_ship_krakgroers
+custom_ship_beersteur
+custom_ship_keulsvid
+custom_ship_krirsgascho
+custom_ship_spantroftbak
+custom_ship_hiblekrirs
+custom_ship_zwontoevid
+custom_ship_hiblekrirs
+custom_ship_plolfplift
+custom_ship_broktistvest
+custom_ship_zelkehe
+custom_ship_hafakgelt
+custom_ship_schepeibroen
+custom_ship_moergrort
+custom_ship_trepren
+custom_ship_zamertning
+custom_ship_koektprech
+custom_ship_twalkemelf
+custom_ship_seekimdref
+custom_ship_biskulbung
+custom_ship_kocaill
+custom_ship_haiscord
+custom_ship_ifinoskausull
+custom_ship_plujell
+custom_ship_satusoskaufreh
+custom_ship_hokfreh
+custom_ship_yaiksagrai
+custom_ship_grirdakk
+custom_ship_kelar
+custom_ship_nyauwaubu
+custom_ship_nyau_nyauwaubu
+custom_ship_nainnyeut
+custom_ship_pai_hepte
+custom_ship_nainnyeut
+custom_ship_ausese
+custom_ship_ususta
+custom_ship_dairu
+custom_ship_arsintraint
+custom_ship_cambaunggai
+custom_ship_songplufo
+custom_ship_songfroknyu
+custom_ship_songwaih
+custom_ship_keloskaubull
+
+--------------------
+
+generic_worker_profession:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+custom_profession_hatmaker
+custom_profession_watchmaker
+custom_profession_fishmonger
+custom_profession_cooper
+custom_profession_smith
+custom_profession_tailor
+custom_profession_brewer
+
+--------------------
+
+country_legislature_name:
+
+Scope: country
+Random Valid: no
+
+Entries:
+legislature_board_of_directors
+legislature_chamber_of_corporations
+legislature_congress
+legislature_parliament
+
+--------------------
+
+country_red_season_name_dynamic:
+
+Scope: country
+Random Valid: no
+
+Entries:
+red_winter_loc
+red_spring_loc
+red_summer_loc
+red_autumn_loc
+red_summer_loc
+
+--------------------
+
+country_red_season_name:
+
+Scope: country
+Random Valid: no
+
+Entries:
+red_winter_loc
+red_spring_loc
+red_summer_loc
+red_autumn_loc
+red_summer_loc
+
+--------------------
+
+je_bandit_raiding_amount:
+
+Scope: country
+Random Valid: no
+
+Entries:
+je_bandit_raiding_amount_display_max
+je_bandit_raiding_amount_display
+
+--------------------
+
+getDecadeName:
+
+Scope: country
+Random Valid: no
+
+Entries:
+decade_thirties
+decade_forties
+decade_fifties
+decade_sixties
+decade_seventies
+decade_eighties
+decade_nineties
+decade_centennial
+decade_tens
+decade_eighties
+decade_thirties
+decade_new_age
+
+--------------------
+
+azure_pennant_ship_name:
+
+Scope: country
+Random Valid: no
+
+Entries:
+azure_pennant_default_ship
+
+--------------------
+
+magic_reserves_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+MAGIC_EXCESS_EFFECT_HEADER
+MAGIC_DEFICIT_EFFECT_HEADER
+
+--------------------
+
+magic_institution_bonus_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+MAGIC_INSTITUTION_RESERVE_BONUS
+
+--------------------
+
+has_journals_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+ICON_CHECK
+ICON_CROSS
+
+--------------------
+
+has_major_formable_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+ICON_CHECK
+ICON_CROSS
+
+--------------------
+
+country_racial_tech:
+
+Scope: country
+Random Valid: no
+
+Entries:
+MULTIPLE_RACIAL_TECHS
+HUMAN_TECH
+ELF_TECH
+HALFLING_TECH
+GIANT_TECH
+LIZARD_TECH
+OGRE_TECH
+PLANETOUCHED_TECH
+DWARF_TECH
+MIDNIGHT_TECH
+ORC_TECH
+DRAGON_TECH
+GOBLIN_TECH
+AWAKENED_TECH
+HALF_ELF_TECH
+HIADUD_TECH
+GNOME_TECH
+MOUSE_TECH
+BIRD_TECH
+MONSTER_TECH
+NAGA_TECH
+MECHANICAL_TECH
+NO_TECH
+
+--------------------
+
+has_flavored_interest_groups_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+ICON_CHECK
+ICON_CROSS
+
+--------------------
+
+country_flavor_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+country_flavor_loc_default
+
+--------------------
+
+salt_waste_cure_flavor:
+
+Scope: country
+Random Valid: no
+
+Entries:
+salt_waste_cure_flavor_dragon_domain
+salt_waste_cure_flavor_harness
+salt_waste_cure_flavor_default
+
+--------------------
+
+salt_waste_cure_description:
+
+Scope: country
+Random Valid: no
+
+Entries:
+salt_waste_cure_description_dragon_domain
+salt_waste_cure_description_harness
+salt_waste_cure_description_default
+
+--------------------
+
+species_adjective:
+
+Scope: country
+Random Valid: no
+
+Entries:
+adjective_human
+adjective_dwarf
+adjective_elf
+adjective_half_elf
+adjective_gnome
+adjective_dragon
+adjective_realmtouched
+adjective_ogre
+adjective_goblin
+adjective_lizard
+adjective_giant
+adjective_mouse
+adjective_orc
+adjective_halfling
+adjective_bird
+adjective_mechanical
+adjective_monster
+adjective_awakened
+adjective_midnight
+adjective_naga
+adjective_hiadud
+
+--------------------
+
+has_arcana_gryphon:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_gryphon_heading
+custom_loc_gryphon_heading_not
+
+--------------------
+
+has_arcana_justice:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_justice_heading
+custom_loc_justice_heading_not
+
+--------------------
+
+has_arcana_sphinx:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_sphinx_heading
+custom_loc_sphinx_heading_not
+
+--------------------
+
+has_arcana_golem:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_golem_heading
+custom_loc_golem_heading_not
+
+--------------------
+
+has_arcana_unicorn:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_unicorn_heading
+custom_loc_unicorn_heading_not
+
+--------------------
+
+has_arcana_fey:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_fey_heading
+custom_loc_fey_heading_not
+
+--------------------
+
+has_arcana_phoenix:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_phoenix_heading
+custom_loc_phoenix_heading_not
+
+--------------------
+
+has_arcana_djinn:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_djinn_heading
+custom_loc_djinn_heading_not
+
+--------------------
+
+has_arcana_siren:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_siren_heading
+custom_loc_siren_heading_not
+
+--------------------
+
+has_arcana_kraken:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_kraken_heading
+custom_loc_kraken_heading_not
+
+--------------------
+
+has_arcana_fiend:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_fiend_heading
+custom_loc_fiend_heading_not
+
+--------------------
+
+has_arcana_angel:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_angel_heading
+custom_loc_angel_heading_not
+
+--------------------
+
+has_arcana_dragon:
+
+Scope: country
+Random Valid: no
+
+Entries:
+custom_loc_dragon_heading
+custom_loc_dragon_heading_not
+
+--------------------
+
+pro_lobby_demand_text_def:
+
+Scope: country
+Random Valid: no
+
+Entries:
+anti_lobby_proposal_break_alliance_def
+anti_lobby_proposal_revoke_trade_privilege_def
+anti_lobby_proposal_break_defensive_pact_def
+anti_lobby_proposal_embargo_def
+anti_lobby_proposal_rivalry_def
+anti_lobby_proposal_war_def
+anti_lobby_proposal_leave_power_bloc_def
+
+--------------------
+
+anti_lobby_demand_text_def:
+
+Scope: country
+Random Valid: no
+
+Entries:
+anti_lobby_proposal_break_alliance_def
+anti_lobby_proposal_revoke_trade_privilege_def
+anti_lobby_proposal_break_defensive_pact_def
+anti_lobby_proposal_embargo_def
+anti_lobby_proposal_rivalry_def
+anti_lobby_proposal_war_def
+anti_lobby_proposal_leave_power_bloc_def
+
+--------------------
+
+anti_lobby_opportunity_text_def:
+
+Scope: country
+Random Valid: no
+
+Entries:
+pro_lobby_proposal_defensive_pact_def
+pro_lobby_proposal_alliance_def
+pro_lobby_proposal_trade_privilege_def
+pro_lobby_proposal_power_bloc_def
+pro_lobby_proposal_power_bloc_invite_def
+pro_lobby_proposal_investment_agreement_def
+pro_lobby_proposal_military_assistance_def
+
+--------------------
+
+pro_lobby_opportunity_text_def:
+
+Scope: country
+Random Valid: no
+
+Entries:
+pro_lobby_proposal_defensive_pact_def
+pro_lobby_proposal_alliance_def
+pro_lobby_proposal_trade_privilege_def
+pro_lobby_proposal_power_bloc_def
+pro_lobby_proposal_power_bloc_invite_def
+pro_lobby_proposal_investment_agreement_def
+pro_lobby_proposal_military_assistance_def
+
+--------------------
+
+impressive_miltech_text:
+
+Scope: country
+Random Valid: no
+
+Entries:
+impressive_miltech_tanks
+impressive_miltech_breech_loading_artillery
+impressive_miltech_ironclads
+impressive_miltech_auto_machine_guns
+
+--------------------
+
+impressive_cultech_text:
+
+Scope: country
+Random Valid: no
+
+Entries:
+impressive_cultech_film
+impressive_cultech_camera
+impressive_cultech_realism
+impressive_cultech_romanticism
+
+--------------------
+
+eic_plantation_type:
+
+Scope: country
+Random Valid: no
+
+Entries:
+eic_plantation_type_opium
+eic_plantation_type_tea
+eic_plantation_type_dye
+eic_plantation_type_cotton
+eic_plantation_type_tobacco
+
+--------------------
+
+india_oversight_board:
+
+Scope: country
+Random Valid: no
+
+Entries:
+bic_india_office
+bic_board_of_control
+
+--------------------
+
+india_governing_body:
+
+Scope: country
+Random Valid: no
+
+Entries:
+bic_india_council
+bic_court_of_directors
+
+--------------------
+
+sikh_ruler_death_reason:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+sikh_ruler_death_stab
+sikh_ruler_death_poison
+sikh_ruler_death_ceiling_drop
+sikh_ruler_death_fire
+sikh_ruler_death_drowned
+
+--------------------
+
+get_caucasuswar_end_1_options:
+
+Scope: country
+Random Valid: no
+
+Entries:
+caucasuswar_end_1_a_tt
+caucasuswar_end_1_b_tt
+
+--------------------
+
+get_caucasuswar_end_4_nationalist_uprisings:
+
+Scope: country
+Random Valid: no
+
+Entries:
+caucasuswar_end_4_c_tt
+blank
+
+--------------------
+
+get_caucasuswar_end_4_pan_nationalist_uprisings:
+
+Scope: country
+Random Valid: no
+
+Entries:
+caucasuswar_end_4_e_tt
+blank
+
+--------------------
+
+get_caucasuswar_end_2_c:
+
+Scope: country
+Random Valid: no
+
+Entries:
+caucasuswar_end_2_c_tt
+blank
+
+--------------------
+
+illyrian_or_yugoslav_movement:
+
+Scope: country
+Random Valid: no
+
+Entries:
+illyrian_movement
+yugoslav_movement
+
+--------------------
+
+serbia_rival_dynasty_concept:
+
+Scope: country
+Random Valid: no
+
+Entries:
+karadjordjevic_concept
+obrenovic_concept
+
+--------------------
+
+serbia_rival_dynasty_short_concept:
+
+Scope: country
+Random Valid: no
+
+Entries:
+karadjordjevic_concept_short
+obrenovic_concept_short
+
+--------------------
+
+serbia_rival_dynasty:
+
+Scope: country
+Random Valid: no
+
+Entries:
+concept_house_of_karadjordjevic
+concept_house_of_obrenovic
+
+--------------------
+
+serbia_rival_dynasty_short:
+
+Scope: country
+Random Valid: no
+
+Entries:
+concept_house_of_karadjordjevic_short
+concept_house_of_obrenovic_short
+
+--------------------
+
+serbia_ruling_dynasty_concept:
+
+Scope: country
+Random Valid: no
+
+Entries:
+obrenovic_concept
+karadjordjevic_concept
+
+--------------------
+
+serbia_ruling_dynasty_short_concept:
+
+Scope: country
+Random Valid: no
+
+Entries:
+obrenovic_concept_short
+karadjordjevic_concept_short
+
+--------------------
+
+serbia_ruling_dynasty:
+
+Scope: country
+Random Valid: no
+
+Entries:
+concept_house_of_obrenovic
+concept_house_of_karadjordjevic
+
+--------------------
+
+serbia_ruling_dynasty_short:
+
+Scope: country
+Random Valid: no
+
+Entries:
+concept_house_of_obrenovic_short
+concept_house_of_karadjordjevic_short
+
+--------------------
+
+serbia_throne_of_thorns_house_loc:
+
+Scope: country
+Random Valid: no
+
+Entries:
+je_serbian_throne_obrenovic_desc
+je_serbian_throne_karadjordjevic_desc
+
+--------------------
+
+grunderzeit_1_commitment_effects:
+
+Scope: country
+Random Valid: no
+
+Entries:
+grunderzeit.1_low_commitment_effects_string
+grunderzeit.1_high_commitment_effects_string
+
+--------------------
+
+grunderzeit_2_commitment_effects:
+
+Scope: country
+Random Valid: no
+
+Entries:
+grunderzeit.2_low_commitment_effects_string
+grunderzeit.2_high_commitment_effects_string
+
+--------------------
+
+possible_metternich_modifier:
+
+Scope: country
+Random Valid: no
+
+Entries:
+metternich_modifier_t4_display
+metternich_modifier_t3_display
+metternich_modifier_t2_display
+metternich_modifier_t1_display
+
+--------------------
+
+wsr_battle_flavour_defeat:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+battle_flavour_defeat_1
+battle_flavour_defeat_2
+battle_flavour_defeat_3
+battle_flavour_defeat_4
+battle_flavour_defeat_5
+battle_flavour_defeat_6
+battle_flavour_defeat_7
+battle_flavour_defeat_8
+battle_flavour_defeat_9
+battle_flavour_defeat_10
+battle_flavour_defeat_11
+battle_flavour_defeat_12
+
+--------------------
+
+wsr_battle_flavour_victory:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+battle_flavour_victory_1
+battle_flavour_victory_2
+battle_flavour_victory_3
+battle_flavour_victory_4
+battle_flavour_victory_5
+battle_flavour_victory_6
+battle_flavour_victory_7
+battle_flavour_victory_8
+battle_flavour_victory_9
+battle_flavour_victory_10
+battle_flavour_victory_11
+battle_flavour_victory_12
+
+--------------------
+
+wsr_battle_flavour_defence:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+battle_flavour_defence_1
+battle_flavour_defence_2
+battle_flavour_defence_3
+battle_flavour_defence_4
+battle_flavour_defence_5
+battle_flavour_defence_6
+battle_flavour_defence_7
+battle_flavour_defence_8
+battle_flavour_defence_9
+battle_flavour_defence_10
+
+--------------------
+
+wsr_letter:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_letter_1
+wsr_letter_2
+wsr_letter_3
+wsr_letter_4
+wsr_letter_5
+wsr_letter_6
+wsr_letter_7
+wsr_letter_8
+wsr_letter_9
+wsr_letter_10
+
+--------------------
+
+wsr_letter_receiver:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_receiver_1
+wsr_receiver_2
+wsr_receiver_3
+wsr_receiver_4
+wsr_receiver_5
+wsr_receiver_6
+wsr_receiver_7
+wsr_receiver_8
+wsr_receiver_9
+wsr_receiver_10
+
+--------------------
+
+wsr_letter_intro:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_intro_1
+wsr_intro_2
+wsr_intro_3
+wsr_intro_4
+wsr_intro_5
+wsr_intro_6
+wsr_intro_7
+wsr_intro_8
+wsr_intro_9
+wsr_intro_10
+
+--------------------
+
+wsr_letter_outro:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_outro_1
+wsr_outro_2
+wsr_outro_3
+wsr_outro_4
+wsr_outro_5
+wsr_outro_6
+wsr_outro_7
+wsr_outro_8
+wsr_outro_9
+wsr_outro_10
+
+--------------------
+
+wsr_letter_tactics:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_tactics_trench
+wsr_tactics_early
+
+--------------------
+
+wsr_letter_early_tactics:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_overall_tactics_early_1
+wsr_overall_tactics_early_2
+wsr_overall_tactics_early_3
+wsr_overall_tactics_early_4
+wsr_overall_tactics_early_5
+wsr_overall_tactics_early_6
+wsr_overall_tactics_early_7
+wsr_overall_tactics_early_8
+wsr_overall_tactics_early_9
+wsr_overall_tactics_early_10
+
+--------------------
+
+wsr_letter_trench_tactics:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_overall_tactics_trench_1
+wsr_overall_tactics_trench_2
+wsr_overall_tactics_trench_3
+wsr_overall_tactics_trench_4
+wsr_overall_tactics_trench_5
+wsr_overall_tactics_trench_6
+wsr_overall_tactics_trench_7
+wsr_overall_tactics_trench_8
+wsr_overall_tactics_trench_9
+wsr_overall_tactics_trench_10
+
+--------------------
+
+wsr_letter_small_talk:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_small_talk_1
+wsr_small_talk_2
+wsr_small_talk_3
+wsr_small_talk_4
+wsr_small_talk_5
+wsr_small_talk_6
+wsr_small_talk_7
+wsr_small_talk_8
+wsr_small_talk_9
+wsr_small_talk_10
+
+--------------------
+
+wsr_letter_small_talk_end:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_small_talk_end_1
+wsr_small_talk_end_2
+wsr_small_talk_end_3
+wsr_small_talk_end_4
+wsr_small_talk_end_5
+wsr_small_talk_end_6
+wsr_small_talk_end_7
+wsr_small_talk_end_8
+wsr_small_talk_end_9
+wsr_small_talk_end_10
+
+--------------------
+
+wsr_gas_weapon_exists:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_gas_weapon_exist
+wsr_gas_weapon_null
+
+--------------------
+
+wsr_gas_weapon:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_gas_weapon_1
+wsr_gas_weapon_2
+wsr_gas_weapon_3
+wsr_gas_weapon_4
+wsr_gas_weapon_5
+wsr_gas_weapon_6
+wsr_gas_weapon_7
+wsr_gas_weapon_8
+wsr_gas_weapon_9
+wsr_gas_weapon_10
+
+--------------------
+
+wsr_machineguns_exists:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_machineguns_exist
+wsr_machineguns_null
+
+--------------------
+
+wsr_machineguns:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_machineguns_1
+wsr_machineguns_2
+wsr_machineguns_3
+wsr_machineguns_4
+wsr_machineguns_5
+wsr_machineguns_6
+wsr_machineguns_7
+wsr_machineguns_8
+wsr_machineguns_9
+wsr_machineguns_10
+
+--------------------
+
+wsr_planes_exists:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_planes_exist
+wsr_planes_null
+
+--------------------
+
+wsr_planes:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_planes_1
+wsr_planes_2
+wsr_planes_3
+wsr_planes_4
+wsr_planes_5
+wsr_planes_6
+wsr_planes_7
+wsr_planes_8
+wsr_planes_9
+wsr_planes_10
+
+--------------------
+
+wsr_letter_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_letter_1
+wsr_bleak_letter_2
+wsr_bleak_letter_3
+wsr_bleak_letter_4
+wsr_bleak_letter_5
+wsr_bleak_letter_6
+wsr_bleak_letter_7
+wsr_bleak_letter_8
+wsr_bleak_letter_9
+wsr_bleak_letter_10
+
+--------------------
+
+wsr_letter_intro_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_intro_1
+wsr_bleak_intro_2
+wsr_bleak_intro_3
+wsr_bleak_intro_4
+wsr_bleak_intro_5
+wsr_bleak_intro_6
+wsr_bleak_intro_7
+wsr_bleak_intro_8
+wsr_bleak_intro_9
+wsr_bleak_intro_10
+
+--------------------
+
+wsr_letter_outro_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_outro_1
+wsr_bleak_outro_2
+wsr_bleak_outro_3
+wsr_bleak_outro_4
+wsr_bleak_outro_5
+wsr_bleak_outro_6
+wsr_bleak_outro_7
+wsr_bleak_outro_8
+wsr_bleak_outro_9
+wsr_bleak_outro_10
+
+--------------------
+
+wsr_letter_tactics_bleak:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_bleak_tactics_trench
+wsr_bleak_tactics_early
+
+--------------------
+
+wsr_letter_early_tactics_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_overall_tactics_early_1
+wsr_bleak_overall_tactics_early_2
+wsr_bleak_overall_tactics_early_3
+wsr_bleak_overall_tactics_early_4
+wsr_bleak_overall_tactics_early_5
+wsr_bleak_overall_tactics_early_6
+wsr_bleak_overall_tactics_early_7
+wsr_bleak_overall_tactics_early_8
+wsr_bleak_overall_tactics_early_9
+wsr_bleak_overall_tactics_early_10
+
+--------------------
+
+wsr_letter_trench_tactics_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_overall_tactics_trench_1
+wsr_bleak_overall_tactics_trench_2
+wsr_bleak_overall_tactics_trench_3
+wsr_bleak_overall_tactics_trench_4
+wsr_bleak_overall_tactics_trench_5
+wsr_bleak_overall_tactics_trench_6
+wsr_bleak_overall_tactics_trench_7
+wsr_bleak_overall_tactics_trench_8
+wsr_bleak_overall_tactics_trench_9
+wsr_bleak_overall_tactics_trench_10
+
+--------------------
+
+wsr_letter_small_talk_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_small_talk_1
+wsr_bleak_small_talk_2
+wsr_bleak_small_talk_3
+wsr_bleak_small_talk_4
+wsr_bleak_small_talk_5
+wsr_bleak_small_talk_6
+wsr_bleak_small_talk_7
+wsr_bleak_small_talk_8
+wsr_bleak_small_talk_9
+wsr_bleak_small_talk_10
+
+--------------------
+
+wsr_letter_small_talk_end_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_small_talk_end_1
+wsr_bleak_small_talk_end_2
+wsr_bleak_small_talk_end_3
+wsr_bleak_small_talk_end_4
+wsr_bleak_small_talk_end_5
+wsr_bleak_small_talk_end_6
+wsr_bleak_small_talk_end_7
+wsr_bleak_small_talk_end_8
+wsr_bleak_small_talk_end_9
+wsr_bleak_small_talk_end_10
+
+--------------------
+
+wsr_gas_weapon_exists_bleak:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_gas_weapon_bleak_exist
+wsr_gas_weapon_null
+
+--------------------
+
+wsr_gas_weapon_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_gas_weapon_1
+wsr_bleak_gas_weapon_2
+wsr_bleak_gas_weapon_3
+wsr_bleak_gas_weapon_4
+wsr_bleak_gas_weapon_5
+wsr_bleak_gas_weapon_6
+wsr_bleak_gas_weapon_7
+wsr_bleak_gas_weapon_8
+wsr_bleak_gas_weapon_9
+wsr_bleak_gas_weapon_10
+
+--------------------
+
+wsr_machineguns_exists_bleak:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_machineguns_bleak_exist
+wsr_machineguns_null
+
+--------------------
+
+wsr_machineguns_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_machineguns_1
+wsr_bleak_machineguns_2
+wsr_bleak_machineguns_3
+wsr_bleak_machineguns_4
+wsr_bleak_machineguns_5
+wsr_bleak_machineguns_6
+wsr_bleak_machineguns_7
+wsr_bleak_machineguns_8
+wsr_bleak_machineguns_9
+wsr_bleak_machineguns_10
+
+--------------------
+
+wsr_planes_exists_bleak:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_planes_bleak_exist
+wsr_planes_null
+
+--------------------
+
+wsr_planes_bleak:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_bleak_planes_1
+wsr_bleak_planes_2
+wsr_bleak_planes_3
+wsr_bleak_planes_4
+wsr_bleak_planes_5
+wsr_bleak_planes_6
+wsr_bleak_planes_7
+wsr_bleak_planes_8
+wsr_bleak_planes_9
+wsr_bleak_planes_10
+
+--------------------
+
+wsr_letter_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_letter_1
+wsr_neutral_letter_2
+wsr_neutral_letter_3
+wsr_neutral_letter_4
+wsr_neutral_letter_5
+wsr_neutral_letter_6
+wsr_neutral_letter_7
+wsr_neutral_letter_8
+wsr_neutral_letter_9
+wsr_neutral_letter_10
+
+--------------------
+
+wsr_letter_intro_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_intro_1
+wsr_neutral_intro_2
+wsr_neutral_intro_3
+wsr_neutral_intro_4
+wsr_neutral_intro_5
+wsr_neutral_intro_6
+wsr_neutral_intro_7
+wsr_neutral_intro_8
+wsr_neutral_intro_9
+wsr_neutral_intro_10
+
+--------------------
+
+wsr_letter_outro_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_outro_1
+wsr_neutral_outro_2
+wsr_neutral_outro_3
+wsr_neutral_outro_4
+wsr_neutral_outro_5
+wsr_neutral_outro_6
+wsr_neutral_outro_7
+wsr_neutral_outro_8
+wsr_neutral_outro_9
+wsr_neutral_outro_10
+
+--------------------
+
+wsr_letter_tactics_neutral:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_neutral_tactics_trench
+wsr_neutral_tactics_early
+
+--------------------
+
+wsr_letter_early_tactics_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_overall_tactics_early_1
+wsr_neutral_overall_tactics_early_2
+wsr_neutral_overall_tactics_early_3
+wsr_neutral_overall_tactics_early_4
+wsr_neutral_overall_tactics_early_5
+wsr_neutral_overall_tactics_early_6
+wsr_neutral_overall_tactics_early_7
+wsr_neutral_overall_tactics_early_8
+wsr_neutral_overall_tactics_early_9
+wsr_neutral_overall_tactics_early_10
+
+--------------------
+
+wsr_letter_trench_tactics_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_overall_tactics_trench_1
+wsr_neutral_overall_tactics_trench_2
+wsr_neutral_overall_tactics_trench_3
+wsr_neutral_overall_tactics_trench_4
+wsr_neutral_overall_tactics_trench_5
+wsr_neutral_overall_tactics_trench_6
+wsr_neutral_overall_tactics_trench_7
+wsr_neutral_overall_tactics_trench_8
+wsr_neutral_overall_tactics_trench_9
+wsr_neutral_overall_tactics_trench_10
+
+--------------------
+
+wsr_letter_small_talk_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_small_talk_1
+wsr_neutral_small_talk_2
+wsr_neutral_small_talk_3
+wsr_neutral_small_talk_4
+wsr_neutral_small_talk_5
+wsr_neutral_small_talk_6
+wsr_neutral_small_talk_7
+wsr_neutral_small_talk_8
+wsr_neutral_small_talk_9
+wsr_neutral_small_talk_10
+
+--------------------
+
+wsr_letter_small_talk_end_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_small_talk_end_1
+wsr_neutral_small_talk_end_2
+wsr_neutral_small_talk_end_3
+wsr_neutral_small_talk_end_4
+wsr_neutral_small_talk_end_5
+wsr_neutral_small_talk_end_6
+wsr_neutral_small_talk_end_7
+wsr_neutral_small_talk_end_8
+wsr_neutral_small_talk_end_9
+wsr_neutral_small_talk_end_10
+
+--------------------
+
+wsr_gas_weapon_exists_neutral:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_gas_weapon_neutral_exist
+wsr_gas_weapon_null
+
+--------------------
+
+wsr_gas_weapon_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_gas_weapon_1
+wsr_neutral_gas_weapon_2
+wsr_neutral_gas_weapon_3
+wsr_neutral_gas_weapon_4
+wsr_neutral_gas_weapon_5
+wsr_neutral_gas_weapon_6
+wsr_neutral_gas_weapon_7
+wsr_neutral_gas_weapon_8
+wsr_neutral_gas_weapon_9
+wsr_neutral_gas_weapon_10
+
+--------------------
+
+wsr_machineguns_exists_neutral:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_machineguns_neutral_exist
+wsr_machineguns_null
+
+--------------------
+
+wsr_machineguns_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_machineguns_1
+wsr_neutral_machineguns_2
+wsr_neutral_machineguns_3
+wsr_neutral_machineguns_4
+wsr_neutral_machineguns_5
+wsr_neutral_machineguns_6
+wsr_neutral_machineguns_7
+wsr_neutral_machineguns_8
+wsr_neutral_machineguns_9
+wsr_neutral_machineguns_10
+
+--------------------
+
+wsr_planes_exists_neutral:
+
+Scope: country
+Random Valid: no
+
+Entries:
+wsr_planes_neutral_exist
+wsr_planes_null
+
+--------------------
+
+wsr_planes_neutral:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_neutral_planes_1
+wsr_neutral_planes_2
+wsr_neutral_planes_3
+wsr_neutral_planes_4
+wsr_neutral_planes_5
+wsr_neutral_planes_6
+wsr_neutral_planes_7
+wsr_neutral_planes_8
+wsr_neutral_planes_9
+wsr_neutral_planes_10
+
+--------------------
+
+wsr_doves_massacre_day_name:
+
+Scope: country
+Random Valid: no
+
+Entries:
+DAY_MONDAY
+DAY_TUESDAY
+DAY_WEDNESDAY
+DAY_THURSDAY
+DAY_FRIDAY
+DAY_SATURDAY
+DAY_SUNDAY
+
+--------------------
+
+wsr_massacre_name:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_massacre_name_1
+wsr_massacre_name_2
+wsr_massacre_name_3
+wsr_massacre_name_4
+wsr_massacre_name_5
+wsr_massacre_name_6
+wsr_massacre_name_7
+wsr_massacre_name_8
+wsr_massacre_name_9
+wsr_massacre_name_10
+wsr_massacre_name_11
+wsr_massacre_name_12
+wsr_massacre_name_13
+wsr_massacre_name_14
+wsr_massacre_name_15
+
+--------------------
+
+wsr_massacre_day_name_rus:
+
+Scope: country
+Random Valid: yes
+
+Entries:
+wsr_massacre_name_rus_1
+wsr_massacre_name_rus_2
+wsr_massacre_name_rus_3
+
+--------------------
+
+zw_auto_recruit_commander_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_auto_recruit_commander_button_cl_2
+zw_auto_recruit_commander_button_cl_1
+
+--------------------
+
+zw_auto_reassign_commander_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_auto_reassign_commander_button_cl_2
+zw_auto_reassign_commander_button_cl_1
+
+--------------------
+
+zw_min_unit_num_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_min_unit_num_cl_2
+zw_min_unit_num_cl_1
+
+--------------------
+
+zw_preference_ig_armed_forces_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_armed_forces_button_cl_2
+zw_preference_ig_armed_forces_button_cl_1
+
+--------------------
+
+zw_preference_ig_devout_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_devout_button_cl_2
+zw_preference_ig_devout_button_cl_1
+
+--------------------
+
+zw_preference_ig_industrialists_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_industrialists_button_cl_2
+zw_preference_ig_industrialists_button_cl_1
+
+--------------------
+
+zw_preference_ig_intelligentsia_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_intelligentsia_button_cl_2
+zw_preference_ig_intelligentsia_button_cl_1
+
+--------------------
+
+zw_preference_ig_landowners_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_landowners_button_cl_2
+zw_preference_ig_landowners_button_cl_1
+
+--------------------
+
+zw_preference_ig_petty_bourgeoisie_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_petty_bourgeoisie_button_cl_2
+zw_preference_ig_petty_bourgeoisie_button_cl_1
+
+--------------------
+
+zw_preference_ig_rural_folk_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_rural_folk_button_cl_2
+zw_preference_ig_rural_folk_button_cl_1
+
+--------------------
+
+zw_preference_ig_trade_unions_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_preference_ig_trade_unions_button_cl_2
+zw_preference_ig_trade_unions_button_cl_1
+
+--------------------
+
+zw_added_constructons_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_added_constructons_cl_1
+zw_added_constructons_cl_2
+
+--------------------
+
+zw_added_constructons_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_added_constructons_button_cl_1
+zw_added_constructons_button_cl_2
+
+--------------------
+
+zw_more_construction_sectors_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_more_construction_sectors_button_cl_1
+zw_more_construction_sectors_button_cl_2
+
+--------------------
+
+zw_more_construction_sectors_gold_reserves_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_more_construction_sectors_gold_reserves_button_cl_1
+zw_more_construction_sectors_gold_reserves_button_cl_2
+
+--------------------
+
+zw_gov_admin_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_gov_admin_button_cl_1
+zw_gov_admin_button_cl_2
+
+--------------------
+
+zw_gov_admin_for_institution_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_gov_admin_for_institution_button_cl_1
+zw_gov_admin_for_institution_button_cl_2
+
+--------------------
+
+zw_gov_admin_for_tax_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_gov_admin_for_tax_button_cl_1
+zw_gov_admin_for_tax_button_cl_2
+
+--------------------
+
+zw_construct_railway_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_construct_railway_cl_1
+zw_construct_railway_cl_2
+
+--------------------
+
+zw_construct_power_plant_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_construct_power_plant_cl_1
+zw_construct_power_plant_cl_2
+
+--------------------
+
+zw_develop_incorporated_states_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_develop_incorporated_states_button_cl_1
+zw_develop_incorporated_states_button_cl_2
+
+--------------------
+
+zw_expand_building_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_button_cl_1
+zw_expand_building_button_cl_2
+
+--------------------
+
+zw_labor_threshold_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_labor_threshold_button_cl_1
+zw_labor_threshold_button_cl_2
+
+--------------------
+
+zw_expand_building_machine_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_machine_button_cl_1
+zw_expand_building_machine_button_cl_2
+
+--------------------
+
+zw_expand_building_food_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_food_button_cl_1
+zw_expand_building_food_button_cl_2
+
+--------------------
+
+zw_expand_building_clothes_furniture_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_clothes_furniture_button_cl_1
+zw_expand_building_clothes_furniture_button_cl_2
+
+--------------------
+
+zw_expand_building_glassworks_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_glassworks_button_cl_1
+zw_expand_building_glassworks_button_cl_2
+
+--------------------
+
+zw_expand_building_chemical_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_chemical_button_cl_1
+zw_expand_building_chemical_button_cl_2
+
+--------------------
+
+zw_expand_building_electrics_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_electrics_button_cl_1
+zw_expand_building_electrics_button_cl_2
+
+--------------------
+
+zw_expand_building_plantations_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_plantations_button_cl_1
+zw_expand_building_plantations_button_cl_2
+
+--------------------
+
+zw_expand_building_shipyard_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_shipyard_button_cl_1
+zw_expand_building_shipyard_button_cl_2
+
+--------------------
+
+zw_expand_building_military_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_military_button_cl_1
+zw_expand_building_military_button_cl_2
+
+--------------------
+
+zw_expand_building_other_button_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_expand_building_other_button_cl_1
+zw_expand_building_other_button_cl_2
+
+--------------------
+
+zw_ip_supply_chain_num_per_state_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_ip_supply_chain_num_per_state_cl_1
+zw_ip_supply_chain_num_per_state_cl_2
+
+--------------------
+
+zw_ip_labor_per_supply_chain_cl:
+
+Scope: country
+Random Valid: no
+
+Entries:
+zw_ip_labor_per_supply_chain_cl_1
+zw_ip_labor_per_supply_chain_cl_2
+
+--------------------
+
+troop_name:
+
+Scope: building
+Random Valid: no
+
+Entries:
+troop_name_regular
+troop_name_conscript
+
+--------------------
+
+stepping_down_reason:
+
+Scope: character
+Random Valid: yes
+
+Entries:
+custom_loc_personal_reasons
+custom_loc_health_reasons
+custom_loc_scandal
+custom_loc_incompetence
+custom_loc_family
+
+--------------------
+
+personality_traits_loc:
+
+Scope: character
+Random Valid: yes
+
+Entries:
+direct
+persistent
+cautious
+arrogant
+bigoted
+reckless
+tactful
+ambitious
+imperious
+wrathful
+reserved
+cruel
+meticulous
+charismatic
+romantic
+brave
+innovative
+
+--------------------
+
+ordered_personality_traits_loc:
+
+Scope: character
+Random Valid: no
+
+Entries:
+direct
+persistent
+cautious
+arrogant
+bigoted
+reckless
+tactful
+ambitious
+imperious
+wrathful
+reserved
+cruel
+meticulous
+charismatic
+romantic
+brave
+innovative
+
+--------------------
+
+custom_insult_loc:
+
+Scope: character
+Random Valid: yes
+
+Entries:
+basic_insult_custom
+fool_insult_custom
+opium_insult_custom
+syphilis_insult_custom
+alcoholic_insult_custom
+beetle_ear_insult_custom
+
+--------------------
+
+wedding_son_daughter:
+
+Scope: character
+Random Valid: no
+
+Entries:
+royal_marriage_son
+royal_marriage_daughter
+
+--------------------
+
+air_ace_adjective_loc:
+
+Scope: character
+Random Valid: yes
+
+Entries:
+ace_black
+ace_red
+ace_white
+ace_mad
+ace_fighting
+ace_little
+ace_silver
+ace_wild
+
+--------------------
+
+air_ace_noun_loc:
+
+Scope: character
+Random Valid: yes
+
+Entries:
+ace_eagle
+ace_hawk
+ace_fox
+ace_baron
+ace_cat
+ace_knight
+ace_ace
+ace_dragon
+ace_wind
+ace_cowboy
+
+--------------------
+
+getSirMadam:
+
+Scope: character
+Random Valid: no
+
+Entries:
+sir_loc
+madam_loc
+
+--------------------
+
+getMsMr:
+
+Scope: character
+Random Valid: no
+
+Entries:
+mr_loc
+ms_loc
+
+--------------------
+
+ageist_adjective:
+
+Scope: character
+Random Valid: yes
+
+Entries:
+custom_loc_young
+custom_loc_normal_age
+custom_loc_ageing
+
+--------------------
+
+getEmpressEmperor:
+
+Scope: character
+Random Valid: no
+
+Entries:
+RULER_TITLE_EMPEROR
+RULER_TITLE_EMPRESS
+
+--------------------
+
+getQueenKing:
+
+Scope: character
+Random Valid: no
+
+Entries:
+RULER_TITLE_KING
+RULER_TITLE_QUEEN
+
+--------------------
+
+getLadyLord:
+
+Scope: character
+Random Valid: no
+
+Entries:
+TITLE_LADY
+TITLE_LORD
+
+--------------------
+
+getLadyLordSpouse:
+
+Scope: character
+Random Valid: no
+
+Entries:
+TITLE_LORD
+TITLE_LADY
+
+--------------------
+
+drug_type:
+
+Scope: character
+Random Valid: no
+
+Entries:
+custom_alcohol
+custom_opium
+custom_cocaine
+
+--------------------
+
+GetHerselfHimself:
+
+Scope: character
+Random Valid: no
+
+Entries:
+custom_herself
+custom_himself
+
+--------------------
+
+getLover:
+
+Scope: character
+Random Valid: no
+
+Entries:
+custom_suitor
+custom_woman
+
+--------------------
+
+getLovers:
+
+Scope: character
+Random Valid: no
+
+Entries:
+custom_suitors
+custom_women
+
+--------------------
+
+dyer_fate:
+
+Scope: character
+Random Valid: no
+
+Entries:
+dyer_fate_disciplined
+dyer_fate_unrepentant
+
+--------------------
+
+petition_trait_descriptor:
+
+Scope: character
+Random Valid: no
+
+Entries:
+political_operator_trait_tt
+charismatic_trait_tt
+ambitious_trait_tt
+persistent_trait_tt
+
+--------------------
+
+getPLURALDemonym:
+
+Scope: culture
+Random Valid: no
+
+Entries:
+PLURAL_DEMONYM_grendleth
+PLURAL_DEMONYM_wood_giant
+PLURAL_DEMONYM_fire_giant
+PLURAL_DEMONYM_frost_giant
+PLURAL_DEMONYM_cloud_giant
+PLURAL_DEMONYM_toftir_giant
+PLURAL_DEMONYM_bintukin
+PLURAL_DEMONYM_awakened
+PLURAL_DEMONYM_plundboelka
+PLURAL_DEMONYM_praprandgaw
+PLURAL_DEMONYM_sunkissed
+PLURAL_DEMONYM_softpaw
+PLURAL_DEMONYM_meadowguard
+PLURAL_DEMONYM_gnoll
+PLURAL_DEMONYM_jungle_gnoll
+PLURAL_DEMONYM_warren_gnoll
+PLURAL_DEMONYM_soulwrought
+PLURAL_DEMONYM_mutant
+PLURAL_DEMONYM_naga
+PLURAL_DEMONYM_praksian
+PLURAL_DEMONYM_hohatabot
+PLURAL_DEMONYM_hag
+PLURAL_DEMONYM_gulf_naga
+PLURAL_DEMONYM_jungle_naga
+PLURAL_DEMONYM_qadimra
+PLURAL_DEMONYM_navrozdok
+PLURAL_DEMONYM_taiamican
+PLURAL_DEMONYM_koquilla
+PLURAL_DEMONYM_lacertian
+PLURAL_DEMONYM_west_lacertian
+PLURAL_DEMONYM_vindon_lacertian
+PLURAL_DEMONYM_east_lacertian
+PLURAL_DEMONYM_kailando_lacertian
+PLURAL_DEMONYM_whitefeather
+PLURAL_DEMONYM_cliffpercher
+PLURAL_DEMONYM_sandcircler
+PLURAL_DEMONYM_blacktalon
+PLURAL_DEMONYM_ravensworn
+PLURAL_DEMONYM_saglithan
+PLURAL_DEMONYM_onikoku
+PLURAL_DEMONYM_onisazae
+PLURAL_DEMONYM_onghori
+PLURAL_DEMONYM_lusakaran
+PLURAL_DEMONYM_drogori
+PLURAL_DEMONYM_garagoz
+PLURAL_DEMONYM_lomarash
+PLURAL_DEMONYM_tskharvani
+PLURAL_DEMONYM_larltri
+PLURAL_DEMONYM_jimwanth
+PLURAL_DEMONYM_illvasaari
+PLURAL_DEMONYM_kotskarvi
+PLURAL_DEMONYM_aisjie
+PLURAL_DEMONYM_akmuociai
+PLURAL_DEMONYM_pabardian
+PLURAL_DEMONYM_rahoru
+PLURAL_DEMONYM_tqalt
+PLURAL_DEMONYM_atamkumi
+PLURAL_DEMONYM_kaalkid
+PLURAL_DEMONYM_underkaal
+PLURAL_DEMONYM_tozhi
+PLURAL_DEMONYM_nuzaptan
+PLURAL_DEMONYM_buramog
+PLURAL_DEMONYM_korkaz
+PLURAL_DEMONYM_lonolot
+PLURAL_DEMONYM_heykela
+PLURAL_DEMONYM_muhimkela
+PLURAL_DEMONYM_yachaymanchi
+PLURAL_DEMONYM_vandori
+PLURAL_DEMONYM_changeling
+PLURAL_DEMONYM_jazamandroso
+PLURAL_DEMONYM_frostborn
+PLURAL_DEMONYM_vozi
+PLURAL_DEMONYM_castaway_dwarf
+PLURAL_DEMONYM_vynduri
+PLURAL_DEMONYM_lithorin
+PLURAL_DEMONYM_starwoken
+PLURAL_DEMONYM_arcthar
+PLURAL_DEMONYM_hornodukh
+PLURAL_DEMONYM_duneshar
+PLURAL_DEMONYM_yelfi
+PLURAL_DEMONYM_tolorr
+PLURAL_DEMONYM_yakamimbo
+PLURAL_DEMONYM_gobbo_pirate
+PLURAL_DEMONYM_bird_pirate
+PLURAL_DEMONYM_kojiniu
+PLURAL_DEMONYM_puarfejiin
+PLURAL_DEMONYM_xhurlob
+PLURAL_DEMONYM_dales_togrul
+PLURAL_DEMONYM_zangedlittuy
+PLURAL_DEMONYM_xhuron
+PLURAL_DEMONYM_rethrashar
+PLURAL_DEMONYM_varbat
+PLURAL_DEMONYM_rizraflez
+PLURAL_DEMONYM_morevnamarya
+PLURAL_DEMONYM_sarhbalb
+PLURAL_DEMONYM_khanaruk
+PLURAL_DEMONYM_batukai
+PLURAL_DEMONYM_shkemger
+PLURAL_DEMONYM_atiukura
+PLURAL_DEMONYM_kesswenu
+PLURAL_DEMONYM_timari
+PLURAL_DEMONYM_nangarlith
+PLURAL_DEMONYM_seleni
+PLURAL_DEMONYM_cithrel
+PLURAL_DEMONYM_iasi
+PLURAL_DEMONYM_umbradorn
+PLURAL_DEMONYM_aridrun
+PLURAL_DEMONYM_tenfasu
+PLURAL_DEMONYM_lumvareth
+PLURAL_DEMONYM_varilad
+PLURAL_DEMONYM_tefereti
+PLURAL_DEMONYM_kashtarnel
+PLURAL_DEMONYM_erdei
+PLURAL_DEMONYM_rannorian
+PLURAL_DEMONYM_clearbough
+PLURAL_DEMONYM_highland_halfling
+PLURAL_DEMONYM_lowland_halfling
+PLURAL_DEMONYM_coast_halfling
+PLURAL_DEMONYM_rivierling
+PLURAL_DEMONYM_ravikian
+PLURAL_DEMONYM_eestwe
+PLURAL_DEMONYM_keldic
+PLURAL_DEMONYM_bendrioularo
+PLURAL_DEMONYM_florishnom
+PLURAL_DEMONYM_gachscho
+PLURAL_DEMONYM_stranfolk
+PLURAL_DEMONYM_kealohi
+PLURAL_DEMONYM_yrian
+PLURAL_DEMONYM_abati
+PLURAL_DEMONYM_south_sea_ravager
+PLURAL_DEMONYM_whiali
+PLURAL_DEMONYM_enelli
+PLURAL_DEMONYM_vystemian
+PLURAL_DEMONYM_eutrateri
+PLURAL_DEMONYM_pecif
+PLURAL_DEMONYM_astreval_beaver
+PLURAL_DEMONYM_thiralian_beaver
+PLURAL_DEMONYM_bossardi_beaver
+PLURAL_DEMONYM_dumonian_donkey
+PLURAL_DEMONYM_uplander_donkey
+PLURAL_DEMONYM_imperial_donkey
+PLURAL_DEMONYM_ralaurian_donkey
+PLURAL_DEMONYM_dewaric_donkey
+PLURAL_DEMONYM_avalorean_donkey
+PLURAL_DEMONYM_gelidrumin_donkey
+PLURAL_DEMONYM_vairian_penguin
+PLURAL_DEMONYM_whiali_penguin
+PLURAL_DEMONYM_keldic_penguin
+PLURAL_DEMONYM_vystemian_donkey
+PLURAL_DEMONYM_forest_thalorian
+PLURAL_DEMONYM_uplander
+PLURAL_DEMONYM_ralaurian
+PLURAL_DEMONYM_dewaric
+PLURAL_DEMONYM_dorite
+PLURAL_DEMONYM_thiralian
+PLURAL_DEMONYM_ocelian
+PLURAL_DEMONYM_eberri
+PLURAL_DEMONYM_korafri
+PLURAL_DEMONYM_wealder
+PLURAL_DEMONYM_bossardi
+PLURAL_DEMONYM_lomakan
+PLURAL_DEMONYM_bakibi
+PLURAL_DEMONYM_west_lyseian
+PLURAL_DEMONYM_east_lyseian
+PLURAL_DEMONYM_meriwyn
+PLURAL_DEMONYM_jalian
+PLURAL_DEMONYM_nivaskyan
+PLURAL_DEMONYM_varyngi
+PLURAL_DEMONYM_avalorean
+PLURAL_DEMONYM_glethach
+PLURAL_DEMONYM_gelidrumin
+PLURAL_DEMONYM_heartland_thalorian
+PLURAL_DEMONYM_cowboy_thalorian
+PLURAL_DEMONYM_waste_walker
+PLURAL_DEMONYM_vairian
+PLURAL_DEMONYM_achonian
+PLURAL_DEMONYM_cerunite
+PLURAL_DEMONYM_kusichaki
+PLURAL_DEMONYM_dunaq
+PLURAL_DEMONYM_scordian
+PLURAL_DEMONYM_leiner
+PLURAL_DEMONYM_koshiri
+PLURAL_DEMONYM_anwarthi
+PLURAL_DEMONYM_dumonian
+PLURAL_DEMONYM_imperial
+PLURAL_DEMONYM_yanger
+PLURAL_DEMONYM_astreval
+PLURAL_DEMONYM_zakonish
+PLURAL_DEMONYM_lake_thalorian
+PLURAL_DEMONYM_DEFAULT
+
+--------------------
+
+getSingularDemonym:
+
+Scope: culture
+Random Valid: no
+
+Entries:
+SINGULAR_DEMONYM_grendleth
+SINGULAR_DEMONYM_wood_giant
+SINGULAR_DEMONYM_fire_giant
+SINGULAR_DEMONYM_frost_giant
+SINGULAR_DEMONYM_cloud_giant
+SINGULAR_DEMONYM_toftir_giant
+SINGULAR_DEMONYM_bintukin
+SINGULAR_DEMONYM_awakened
+SINGULAR_DEMONYM_plundboelka
+SINGULAR_DEMONYM_praprandgaw
+SINGULAR_DEMONYM_sunkissed
+SINGULAR_DEMONYM_softpaw
+SINGULAR_DEMONYM_meadowguard
+SINGULAR_DEMONYM_gnoll
+SINGULAR_DEMONYM_jungle_gnoll
+SINGULAR_DEMONYM_warren_gnoll
+SINGULAR_DEMONYM_soulwrought
+SINGULAR_DEMONYM_mutant
+SINGULAR_DEMONYM_naga
+SINGULAR_DEMONYM_praksian
+SINGULAR_DEMONYM_hohatabot
+SINGULAR_DEMONYM_hag
+SINGULAR_DEMONYM_gulf_naga
+SINGULAR_DEMONYM_jungle_naga
+SINGULAR_DEMONYM_qadimra
+SINGULAR_DEMONYM_navrozdok
+SINGULAR_DEMONYM_taiamican
+SINGULAR_DEMONYM_koquilla
+SINGULAR_DEMONYM_lacertian
+SINGULAR_DEMONYM_west_lacertian
+SINGULAR_DEMONYM_vindon_lacertian
+SINGULAR_DEMONYM_east_lacertian
+SINGULAR_DEMONYM_kailando_lacertian
+SINGULAR_DEMONYM_whitefeather
+SINGULAR_DEMONYM_cliffpercher
+SINGULAR_DEMONYM_sandcircler
+SINGULAR_DEMONYM_blacktalon
+SINGULAR_DEMONYM_ravensworn
+SINGULAR_DEMONYM_saglithan
+SINGULAR_DEMONYM_onikoku
+SINGULAR_DEMONYM_onisazae
+SINGULAR_DEMONYM_onghori
+SINGULAR_DEMONYM_lusakaran
+SINGULAR_DEMONYM_drogori
+SINGULAR_DEMONYM_garagoz
+SINGULAR_DEMONYM_lomarash
+SINGULAR_DEMONYM_tskharvani
+SINGULAR_DEMONYM_larltri
+SINGULAR_DEMONYM_jimwanth
+SINGULAR_DEMONYM_illvasaari
+SINGULAR_DEMONYM_kotskarvi
+SINGULAR_DEMONYM_aisjie
+SINGULAR_DEMONYM_akmuociai
+SINGULAR_DEMONYM_pabardian
+SINGULAR_DEMONYM_rahoru
+SINGULAR_DEMONYM_tqalt
+SINGULAR_DEMONYM_atamkumi
+SINGULAR_DEMONYM_kaalkid
+SINGULAR_DEMONYM_underkaal
+SINGULAR_DEMONYM_tozhi
+SINGULAR_DEMONYM_nuzaptan
+SINGULAR_DEMONYM_buramog
+SINGULAR_DEMONYM_korkaz
+SINGULAR_DEMONYM_lonolot
+SINGULAR_DEMONYM_heykela
+SINGULAR_DEMONYM_muhimkela
+SINGULAR_DEMONYM_yachaymanchi
+SINGULAR_DEMONYM_vandori
+SINGULAR_DEMONYM_changeling
+SINGULAR_DEMONYM_jazamandroso
+SINGULAR_DEMONYM_frostborn
+SINGULAR_DEMONYM_vozi
+SINGULAR_DEMONYM_castaway_dwarf
+SINGULAR_DEMONYM_vynduri
+SINGULAR_DEMONYM_lithorin
+SINGULAR_DEMONYM_starwoken
+SINGULAR_DEMONYM_arcthar
+SINGULAR_DEMONYM_hornodukh
+SINGULAR_DEMONYM_duneshar
+SINGULAR_DEMONYM_yelfi
+SINGULAR_DEMONYM_tolorr
+SINGULAR_DEMONYM_yakamimbo
+SINGULAR_DEMONYM_gobbo_pirate
+SINGULAR_DEMONYM_bird_pirate
+SINGULAR_DEMONYM_kojiniu
+SINGULAR_DEMONYM_puarfejiin
+SINGULAR_DEMONYM_xhurlob
+SINGULAR_DEMONYM_dales_togrul
+SINGULAR_DEMONYM_zangedlittuy
+SINGULAR_DEMONYM_xhuron
+SINGULAR_DEMONYM_rethrashar
+SINGULAR_DEMONYM_varbat
+SINGULAR_DEMONYM_rizraflez
+SINGULAR_DEMONYM_morevnamarya
+SINGULAR_DEMONYM_sarhbalb
+SINGULAR_DEMONYM_khanaruk
+SINGULAR_DEMONYM_batukai
+SINGULAR_DEMONYM_shkemger
+SINGULAR_DEMONYM_atiukura
+SINGULAR_DEMONYM_kesswenu
+SINGULAR_DEMONYM_timari
+SINGULAR_DEMONYM_nangarlith
+SINGULAR_DEMONYM_seleni
+SINGULAR_DEMONYM_cithrel
+SINGULAR_DEMONYM_iasi
+SINGULAR_DEMONYM_umbradorn
+SINGULAR_DEMONYM_aridrun
+SINGULAR_DEMONYM_tenfasu
+SINGULAR_DEMONYM_lumvareth
+SINGULAR_DEMONYM_varilad
+SINGULAR_DEMONYM_tefereti
+SINGULAR_DEMONYM_kashtarnel
+SINGULAR_DEMONYM_erdei
+SINGULAR_DEMONYM_rannorian
+SINGULAR_DEMONYM_clearbough
+SINGULAR_DEMONYM_highland_halfling
+SINGULAR_DEMONYM_lowland_halfling
+SINGULAR_DEMONYM_coast_halfling
+SINGULAR_DEMONYM_rivierling
+SINGULAR_DEMONYM_eestwe
+SINGULAR_DEMONYM_keldic
+SINGULAR_DEMONYM_ravikian
+SINGULAR_DEMONYM_ravikian
+SINGULAR_DEMONYM_florishnom
+SINGULAR_DEMONYM_gachscho
+SINGULAR_DEMONYM_stranfolk
+SINGULAR_DEMONYM_kealohi
+SINGULAR_DEMONYM_yrian
+SINGULAR_DEMONYM_abati
+SINGULAR_DEMONYM_south_sea_ravager
+SINGULAR_DEMONYM_whiali
+SINGULAR_DEMONYM_enelli
+SINGULAR_DEMONYM_vystemian
+SINGULAR_DEMONYM_eutrateri
+SINGULAR_DEMONYM_astreval_beaver
+SINGULAR_DEMONYM_thiralian_beaver
+SINGULAR_DEMONYM_bossardi_beaver
+SINGULAR_DEMONYM_dumonian_donkey
+SINGULAR_DEMONYM_uplander_donkey
+SINGULAR_DEMONYM_imperial_donkey
+SINGULAR_DEMONYM_ralaurian_donkey
+SINGULAR_DEMONYM_dewaric_donkey
+SINGULAR_DEMONYM_avalorean_donkey
+SINGULAR_DEMONYM_gelidrumin_donkey
+SINGULAR_DEMONYM_vairian_penguin
+SINGULAR_DEMONYM_whiali_penguin
+SINGULAR_DEMONYM_keldic_penguin
+SINGULAR_DEMONYM_vystemian_donkey
+SINGULAR_DEMONYM_pecif
+SINGULAR_DEMONYM_forest_thalorian
+SINGULAR_DEMONYM_uplander
+SINGULAR_DEMONYM_ralaurian
+SINGULAR_DEMONYM_dewaric
+SINGULAR_DEMONYM_dorite
+SINGULAR_DEMONYM_thiralian
+SINGULAR_DEMONYM_ocelian
+SINGULAR_DEMONYM_eberri
+SINGULAR_DEMONYM_korafri
+SINGULAR_DEMONYM_wealder
+SINGULAR_DEMONYM_bossardi
+SINGULAR_DEMONYM_lomakan
+SINGULAR_DEMONYM_bakibi
+SINGULAR_DEMONYM_west_lyseian
+SINGULAR_DEMONYM_east_lyseian
+SINGULAR_DEMONYM_meriwyn
+SINGULAR_DEMONYM_jalian
+SINGULAR_DEMONYM_nivaskyan
+SINGULAR_DEMONYM_varyngi
+SINGULAR_DEMONYM_avalorean
+SINGULAR_DEMONYM_glethach
+SINGULAR_DEMONYM_gelidrumin
+SINGULAR_DEMONYM_heartland_thalorian
+SINGULAR_DEMONYM_cowboy_thalorian
+SINGULAR_DEMONYM_waste_walker
+SINGULAR_DEMONYM_vairian
+SINGULAR_DEMONYM_achonian
+SINGULAR_DEMONYM_cerunite
+SINGULAR_DEMONYM_kusichaki
+SINGULAR_DEMONYM_dunaq
+SINGULAR_DEMONYM_scordian
+SINGULAR_DEMONYM_leiner
+SINGULAR_DEMONYM_koshiri
+SINGULAR_DEMONYM_anwarthi
+SINGULAR_DEMONYM_dumonian
+SINGULAR_DEMONYM_imperial
+SINGULAR_DEMONYM_yanger
+SINGULAR_DEMONYM_astreval
+SINGULAR_DEMONYM_zakonish
+SINGULAR_DEMONYM_lake_thalorian
+SINGULAR_DEMONYM_DEFAULT
+
+--------------------
+
+culture_flavor_loc:
+
+Scope: culture
+Random Valid: no
+
+Entries:
+culture_flavor_loc_default
+dumonian_flavor
+vystemian_flavor
+gelidrumin_flavor
+ralaurian_flavor
+dewaric_flavor
+uplander_flavor
+avalorean_flavor
+whiali_flavor
+vairian_flavor
+cowboy_thalorian_flavor
+heartland_thalorian_flavor
+lake_thalorian_flavor
+forest_thalorian_flavor
+waste_walker_flavor
+ocelian_flavor
+enelli_flavor
+west_lyseian_flavor
+east_lyseian_flavor
+thiralian_flavor
+astreval_flavor
+anwarthi_flavor
+bintukin_flavor
+eutrateri_flavor
+zakonish_flavor
+glethach_flavor
+jalian_flavor
+meriwyn_flavor
+kusichaki_flavor
+dunaq_flavor
+scordian_flavor
+leiner_flavor
+cerunite_flavor
+korafri_flavor
+lomakan_flavor
+bakibi_flavor
+achonian_flavor
+eberri_flavor
+dorite_flavor
+south_sea_ravager_flavor
+nivaskyan_flavor
+varyngi_flavor
+bossardi_flavor
+yanger_flavor
+wealder_flavor
+tefereti_flavor
+nangarlith_flavor
+seleni_flavor
+kashtarnel_flavor
+varilad_flavor
+lumvareth_flavor
+erdei_flavor
+aridrun_flavor
+umbradorn_flavor
+rannorian_flavor
+kesswenu_flavor
+timari_flavor
+arcthar_flavor
+duneshar_flavor
+lithorin_flavor
+starwoken_flavor
+yelfi_flavor
+vozi_flavor
+tolorr_flavor
+vynduri_flavor
+koshiri_flavor
+castaway_dwarf_flavor
+hornodukh_flavor
+buramog_flavor
+korkaz_flavor
+kaalkid_flavor
+tozhi_flavor
+tqalt_flavor
+rahoru_flavor
+atamkumi_flavor
+nuzaptan_flavor
+lonolot_flavor
+khanaruk_flavor
+batukai_flavor
+varbat_flavor
+xhurlobk_flavor
+shkemger_flavor
+atiukura_flavor
+yakamimbo_flavor
+gobbo_pirate_flavor
+bird_pirate_flavor
+kojiniu_flavor
+puarfejiin_flavor
+zangedlittuy_flavor
+sarhbalb_flavor
+morevnamarya_flavor
+rethrashar_flavor
+xhuron_flavor
+dales_togrul_flavor
+ravikian_flavor
+bendrioularo_flavor
+eestwe_flavor
+keldic_flavor
+yrian_flavor
+florishnom_flavor
+gachscho_flavor
+stranfolk_flavor
+kealohi_flavor
+clearbough_flavor
+highland_halfling_flavor
+coast_halfling_flavor
+rivierling_flavor
+frost_giant_flavor
+toftir_giant_flavor
+fire_giant_flavor
+grendleth_flavor
+cloud_giant_flavor
+wood_giant_flavor
+hag_flavor
+gulf_naga_flavor
+jungle_naga_flavor
+hohatabot_flavor
+praksian_flavor
+gnoll_flavor
+jungle_gnoll_flavor
+awakened_flavor
+plundboelka_flavor
+praprandgaw_flavor
+vampire_flavor
+sunkissed_flavor
+mutant_flavor
+illvasaari_flavor
+lusakaran_flavor
+kotskarvi_flavor
+drogori_flavor
+lomarash_flavor
+tskharvani_flavor
+aisjie_flavor
+larltri_flavor
+pabardian_flavor
+jimwanth_flavor
+akmuociai_flavor
+garagoz_flavor
+whitefeather_flavor
+cliffpercher_flavor
+sandcircler_flavor
+blacktalon_flavor
+ravensworn_flavor
+saglithan_flavor
+jazamandroso_flavor
+yachaymanchi_flavor
+vandori_flavor
+changeling_flavor
+qadimra_flavor
+taiamican_flavor
+koquilla_flavor
+navrozdok_flavor
+east_lacertian_flavor
+lacertian_flavor
+kailando_lacertian_flavor
+west_lacertian_flavor
+onikoku_flavor
+onisazae_flavor
+onghori_flavor
+softpaw_flavor
+soulwrought_flavor
+
+--------------------
+
+flavored_name_lobby_pro_country:
+
+Scope: political_lobby
+Random Valid: yes
+
+Entries:
+custom_lobby_union
+custom_lobby_association
+custom_lobby_society
+custom_lobby_friendship_committee
+custom_lobby_fellowship
+custom_lobby_league
+custom_lobby_lobby
+
+--------------------
+
+flavored_name_lobby_anti_country:
+
+Scope: political_lobby
+Random Valid: yes
+
+Entries:
+custom_lobby_association
+custom_lobby_society
+custom_lobby_league
+custom_lobby_lobby
+
+--------------------
+
+flavored_name_lobby_anti_overlord:
+
+Scope: political_lobby
+Random Valid: yes
+
+Entries:
+custom_lobby_league
+custom_lobby_national_congress
+custom_lobby_national_union
+custom_lobby_national_council
+custom_lobby_national_league
+custom_lobby_brotherhood
+custom_lobby_national_committee
+custom_lobby_united_league
+
+--------------------
+
+flavored_name_lobby_pro_overlord:
+
+Scope: political_lobby
+Random Valid: yes
+
+Entries:
+custom_lobby_empire_union
+custom_lobby_loyalist_association
+custom_lobby_union_party
+custom_lobby_covenant
+custom_lobby_loyal_order
+custom_lobby_league_of_loyalists
+
+--------------------
+
+goods_flavor_loc:
+
+Scope: goods
+Random Valid: no
+
+Entries:
+cloudsilver_flavor
+wishstone_flavor
+chimesilt_flavor
+blubber_flavor
+godsblood_flavor
+monster_essence_flavor
+thaumacores_flavor
+goods_flavor_loc_default
+
+--------------------
+
+NegotiationLevelName:
+
+Scope: interest_group
+Random Valid: no
+
+Entries:
+negotiation_tier_1
+negotiation_tier_2
+negotiation_tier_3
+
+--------------------
+
+GetPromisedTaxLevelLoc:
+
+Scope: interest_group
+Random Valid: no
+
+Entries:
+tax_tier_low_short
+tax_tier_low
+tax_tier_very_low
+
+--------------------
+
+BribeLine:
+
+Scope: interest_group
+Random Valid: no
+
+Entries:
+bribe_tier_1
+bribe_tier_2
+bribe_tier_3
+
+--------------------
+
+FailurePromiseLine:
+
+Scope: interest_group
+Random Valid: no
+
+Entries:
+FailurePromiseLine_1
+FailurePromiseLine_2
+FailurePromiseLine_3
+
+--------------------
+
+SOL_commitment_duration:
+
+Scope: interest_group
+Random Valid: no
+
+Entries:
+neg_sol_short_time_loc
+neg_sol_long_time_loc
+
+--------------------
+
+puritan_guard_devout:
+
+Scope: interest_group
+Random Valid: no
+
+Entries:
+ig_generic_puritan_guard
+ig_faithful_puritan_guard
+ig_honorable_puritan_guard
+ig_independent_puritan_guard
+
+--------------------
+
+get_grunderzeit_gdp:
+
+Scope: journal_entry
+Random Valid: no
+
+Entries:
+grunderzeit_gdp_target_met
+grunderzeit_gdp_target_not_met
+
+--------------------
+
+religion_flavor_loc:
+
+Scope: religion
+Random Valid: no
+
+Entries:
+church_of_man_flavor
+orthodox_fosirmi_flavor
+wild_fosirmi_flavor
+southern_fosirmi_flavor
+kragmorn_flavor
+hasal_flavor
+house_of_fate_flavor
+skarrakhlot_flavor
+vurzaratmoda_flavor
+zmikamki_flavor
+salt_crucible_flavor
+religion_flavor_loc_default
+
+--------------------
+
+river_name:
+
+Scope: state
+Random Valid: no
+
+Entries:
+state_trait_rhine_river
+local_river
+
+--------------------
+
+adventurer_coverage_bonus_loc:
+
+Scope: state
+Random Valid: no
+
+Entries:
+ADVENTURER_COVERAGE_BUILDING_BONUS
+
+--------------------
+
+adventurer_coverage_demand_bonus_loc:
+
+Scope: state
+Random Valid: no
+
+Entries:
+ADVENTURER_COVERAGE_POLLUTION
+
+--------------------
+
+adventurer_coverage_demand_veil_bonus_loc:
+
+Scope: state
+Random Valid: no
+
+Entries:
+ADVENTURER_COVERAGE_VEIL_IMPACT
+
+--------------------
+
+adventurer_coverage_demand_urban_bonus_loc:
+
+Scope: state
+Random Valid: no
+
+Entries:
+ADVENTURER_COVERAGE_DEMAND_BASE_VALUE_BONUS
+
+--------------------
+

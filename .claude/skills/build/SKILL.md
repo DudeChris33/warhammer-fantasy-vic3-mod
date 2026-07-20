@@ -5,7 +5,7 @@ user-invocable: true
 argument-hint: <path to planned file>
 ---
 
-Implement a planned {{PROJECT_NAME}} issue or feature request.
+Implement a planned Warhammer Fantasy Overhaul issue or feature request.
 
 ## Workflow
 
@@ -13,14 +13,12 @@ Implement a planned {{PROJECT_NAME}} issue or feature request.
 2. **Read all files in scope** — Read every file listed in the plan before writing any code.
 3. **Confirm** — Present the plan summary to the user. Get explicit confirmation before implementing.
 4. **Implement** — Follow the plan step by step. Adhere to all rules in `.claude/rules/`.
-5. **Test** — Run the test pipeline:
-   {{BUILD_TEST_COMMANDS: replace with an indented fenced block of the real test command(s), the fast variants, and the pass criteria}}
-   - Fix failures in the **code**, not the tests
+5. **Test** — There is no automated test suite (Clausewitz script has no offline validator). Ask the user to load the mod in Victoria 3 and confirm `logs/error.log` (at `Documents/Paradox Interactive/Victoria 3/logs/error.log`) shows no new errors referencing this mod's files — see [testing.md](../../rules/testing.md).
+   - Fix failures in the **script**, not by suppressing the error
 6. **Commit** — Stage specific files only (never `git add -A`). Do not push.
 7. **Spawn post-build agents** in parallel:
-   - **test-runner** — run full test suite for regressions
    - **docs-updater** — update docs based on git diff
-   - **security-review** — review diff for security concerns
+   - **security-review** — review diff for multiplayer-desync and content-integrity concerns
 8. **Resolve** — Append `## Resolution` section to the file:
    ```markdown
    ## Resolution
@@ -38,5 +36,7 @@ Implement a planned {{PROJECT_NAME}} issue or feature request.
 - Confirm before implementing.
 - Read before editing — always.
 - Commit but never push. Stage specific files only.
-- All tests must pass before the task is done.
-- {{BUILD_RULES: 2–4 project-specific must-dos worth repeating here, e.g. required helpers, registration steps, cross-layer sync}}
+- The user must confirm a clean `logs/error.log` before the task is done.
+- Every effect/trigger/modifier/event target/on_action used must be confirmed against `docs/*.log`.
+- Every new user-facing string needs a `localization/english/` (or `localization/replace/english/`) entry.
+- Preserve multiplayer determinism — no non-seeded randomness or debug-only effects.
