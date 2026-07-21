@@ -1,0 +1,42 @@
+{
+  "states": [
+    {
+      "key": "STATE_ALPHA",
+      "kind": "land",
+      "macro": "mainland",
+      "geometry": {
+        "type": "polygon",
+        "polygon": [[18, 8], [74, 8], [74, 52], [18, 52]],
+        "holes": [[[36, 20], [52, 20], [52, 40], [36, 40]]]
+      },
+      "coastal": true,
+      "naval_exit": "STATE_SEA_WEST",
+      "economics": {
+        "subsistence_building": "building_subsistence_farm",
+        "arable_land": 24,
+        "arable_resources": ["building_wheat_farm", "building_livestock_ranch"],
+        "capped_resources": { "building_iron_mine": 4, "building_logging_camp": 3 }
+      },
+      "impassable": [[20, 10], [28, 10], [28, 18], [20, 18]]
+    },
+    {
+      "key": "STATE_BETA",
+      "kind": "land",
+      "macro": "mainland",
+      "geometry": {
+        "type": "polygon",
+        "polygon": [[36, 20], [52, 20], [52, 40], [36, 40]],
+        "holes": []
+      },
+      "coastal": false,
+      "naval_exit": null,
+      "economics": {
+        "subsistence_building": "building_subsistence_farm",
+        "arable_land": 14,
+        "arable_resources": ["building_wheat_farm", "building_livestock_ranch"],
+        "capped_resources": { "building_iron_mine": 2 }
+      },
+      "impassable": null
+    }
+  ]
+}

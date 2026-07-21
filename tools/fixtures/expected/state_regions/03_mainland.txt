@@ -1,0 +1,32 @@
+STATE_ALPHA = {
+    id = 1
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0FCDDB x26E338 x4C3CCD x88ABBF xAE0554 xC51AB1 xEA7446 }
+    impassable = { x0FCDDB }
+    city = xEA7446
+    farm = x26E338
+    mine = xAE0554
+    wood = xC51AB1
+    port = x88ABBF
+    arable_land = 24
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_iron_mine = 4
+        building_logging_camp = 3
+    }
+    naval_exit_id = 3001
+}
+STATE_BETA = {
+    id = 2
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0189A3 x3DF895 x63522A x9FC11C xDC300E }
+    city = x3DF895
+    farm = x0189A3
+    mine = x9FC11C
+    wood = xDC300E
+    arable_land = 14
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_iron_mine = 2
+    }
+}

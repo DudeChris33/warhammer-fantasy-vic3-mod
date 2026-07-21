@@ -1,0 +1,17 @@
+STATE_GAMMA = {
+    id = 4
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0A5AC8 x2FB45D x6C234F x917CE4 xA89241 xCDEBD6 }
+    city = xA89241
+    farm = x0A5AC8
+    mine = x917CE4
+    wood = xCDEBD6
+    port = x2FB45D
+    arable_land = 16
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_fishing_wharf = 3
+        building_logging_camp = 2
+    }
+    naval_exit_id = 3001
+}

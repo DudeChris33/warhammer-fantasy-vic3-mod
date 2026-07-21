@@ -1,0 +1,8 @@
+STATE_SEA_EAST = {
+    id = 3000
+    provinces = { xD35EE9 }
+}
+STATE_SEA_WEST = {
+    id = 3001
+    provinces = { x719662 }
+}

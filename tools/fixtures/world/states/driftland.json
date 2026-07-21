@@ -1,0 +1,23 @@
+{
+  "states": [
+    {
+      "key": "STATE_GAMMA",
+      "kind": "land",
+      "macro": "driftland",
+      "geometry": {
+        "type": "polygon",
+        "polygon": [[112, 20], [140, 20], [140, 44], [112, 44]],
+        "holes": []
+      },
+      "coastal": true,
+      "naval_exit": "STATE_SEA_WEST",
+      "economics": {
+        "subsistence_building": "building_subsistence_farm",
+        "arable_land": 16,
+        "arable_resources": ["building_wheat_farm", "building_livestock_ranch"],
+        "capped_resources": { "building_logging_camp": 2, "building_fishing_wharf": 3 }
+      },
+      "impassable": null
+    }
+  ]
+}

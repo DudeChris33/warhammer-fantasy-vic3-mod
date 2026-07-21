@@ -1,0 +1,10 @@
+# Local virtualenv for the toolchain — never committed (see requirements.txt).
+.venv/
+
+# Python bytecode caches.
+__pycache__/
+*.pyc
+
+# Scratch output from run_fixture.py --check goes to the system temp dir,
+# but ignore any stray local output dir just in case.
+fixtures/_out/

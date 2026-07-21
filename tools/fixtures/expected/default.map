@@ -1,0 +1,11 @@
+provinces = "provinces.png"
+topology = "heightmap.heightmap"
+rivers = "rivers.png"
+adjacencies = "adjacencies.csv"
+wrap_x = yes
+
+sea_starts = {
+	x719662 xD35EE9
+}
+lakes = {
+}

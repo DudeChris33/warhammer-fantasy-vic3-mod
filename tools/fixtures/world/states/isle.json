@@ -1,0 +1,23 @@
+{
+  "states": [
+    {
+      "key": "STATE_DELTA",
+      "kind": "land",
+      "macro": "isle",
+      "geometry": {
+        "type": "polygon",
+        "polygon": [[86, 30], [98, 30], [98, 42], [86, 42]],
+        "holes": []
+      },
+      "coastal": true,
+      "naval_exit": "STATE_SEA_EAST",
+      "economics": {
+        "subsistence_building": "building_subsistence_farm",
+        "arable_land": 8,
+        "arable_resources": ["building_wheat_farm"],
+        "capped_resources": { "building_fishing_wharf": 4 }
+      },
+      "impassable": null
+    }
+  ]
+}

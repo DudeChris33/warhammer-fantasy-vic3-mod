@@ -1,0 +1,13 @@
+# World-map generator/validator toolchain (tools/).
+# Not loaded by Victoria 3 — this stack only runs offline to produce and lint
+# the committed map data. Install into a local virtualenv:
+#
+#   python -m venv tools/.venv
+#   tools/.venv/Scripts/pip install -r tools/requirements.txt   # Windows
+#   tools/.venv/bin/pip install -r tools/requirements.txt        # POSIX
+#
+# Pinned to compatible ranges; the toolchain is deterministic for a fixed
+# stack + fixed SEED (see tools/config/map_config.py).
+
+Pillow>=10,<13
+numpy>=1.26,<3

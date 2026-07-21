@@ -1,0 +1,8 @@
+{
+  "sea_level": 0.35,
+  "coastal_falloff": 5.0,
+  "noise": { "octaves": 3, "amplitude": 0.05, "frequency": 0.02 },
+  "ridges": [
+    { "name": "Fixture Spine", "polyline": [[30, 20], [45, 35], [60, 30]], "height": 0.9 }
+  ]
+}

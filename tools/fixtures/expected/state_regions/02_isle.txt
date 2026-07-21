@@ -1,0 +1,16 @@
+STATE_DELTA = {
+    id = 3
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x189F00 x550DF2 x7A6787 xB6D679 xF3456B }
+    city = x550DF2
+    farm = x189F00
+    mine = xB6D679
+    wood = xF3456B
+    port = x7A6787
+    arable_land = 8
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+        building_fishing_wharf = 4
+    }
+    naval_exit_id = 3000
+}

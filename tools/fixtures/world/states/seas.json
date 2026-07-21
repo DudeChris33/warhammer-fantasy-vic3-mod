@@ -1,0 +1,24 @@
+{
+  "states": [
+    {
+      "key": "STATE_SEA_WEST",
+      "kind": "sea",
+      "macro": "seas",
+      "geometry": { "type": "seeds", "seeds": [[6, 32]] },
+      "coastal": false,
+      "naval_exit": null,
+      "economics": null,
+      "impassable": null
+    },
+    {
+      "key": "STATE_SEA_EAST",
+      "kind": "sea",
+      "macro": "seas",
+      "geometry": { "type": "seeds", "seeds": [[100, 10]] },
+      "coastal": false,
+      "naval_exit": null,
+      "economics": null,
+      "impassable": null
+    }
+  ]
+}
