@@ -172,7 +172,7 @@ Replace vanilla Earth with the entire Warhammer Known World physical map — pro
 
 ### Steps (ordered) — six child build files
 
-1. **[world-map-p1-tooling.md](world-map-p1-tooling.md)** — `tools/` generator + validators + tiger conf, tested offline on a synthetic fixture map. No game-read files touched.
+1. **[world-map-p1-tooling.md](../done/world-map-p1-tooling.md)** — `tools/` generator + validators + tiger conf, tested offline on a synthetic fixture map. No game-read files touched. ✅ **done** (2026-07-20).
 2. **[world-map-p2-heightmap.md](world-map-p2-heightmap.md)** — coastline/relief/river geometry authored as data → heightmap + rivers generated in code; editor repack. Gate: main menu renders on WH terrain, `error.log` clean.
 3. **[world-map-p3-provinces-states.md](world-map-p3-provinces-states.md)** — state-cell geometry authored as data → generator run → provinces.png, state/sea files, `default.map`, adjacencies, strategic regions, loc skeletons. Gate: offline validators pass. **Repo is deliberately unbootable from P3 merge until P4 merge** (new state regions merge-conflict with vanilla's until `replace_paths` land) — run P3 and P4 back-to-back.
 4. **[world-map-p4-scaffold-boot.md](world-map-p4-scaffold-boot.md)** — `replace_paths`, zz scaffold, vanilla-filename overrides, iterative error.log cleanup. Gate (the milestone): **boots into a session, zero mod lines in `error.log`**, editor round-trip, state/SR map modes checked.
