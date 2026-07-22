@@ -279,12 +279,23 @@ def update_manifest(
     Returns a list of human-readable notes about what changed / needs attention."""
     md_text = manifest_path.read_text(encoding="utf-8")
     existing = {r.file: r for r in parse_manifest(md_text)} if MANIFEST_BEGIN in md_text else {}
+
+    # A malformed registration record must not silently flip every 'Registered'
+    # cell to 'no'. Surface it loudly and leave the column untouched (carry each
+    # row's prior value forward) so a bad hand-edit can't quietly rewrite the
+    # manifest's registration state — refresh dims/bytes/SHA regardless.
+    notes: list[str] = []
+    reg_load_error: schema.SchemaError | None = None
     try:
         reg_sources = {r.source for r in schema.load_registrations(registration_dir)}
-    except schema.SchemaError:
+    except schema.SchemaError as exc:
         reg_sources = set()
+        reg_load_error = exc
+        notes.append(
+            f"WARNING: registration records failed to load ({exc}); 'Registered' "
+            f"column left unchanged — fix the record, then re-run --update-manifest"
+        )
 
-    notes: list[str] = []
     rows: list[ManifestRow] = []
     for path in sorted(p for p in sources_dir.iterdir() if p.is_file()):
         prev = existing.get(path.name)
@@ -293,7 +304,10 @@ def update_manifest(
         size = f"{path.stat().st_size:,}"
         origin = prev.origin if prev and prev.origin != _TBD else _TBD
         role = prev.role if prev and prev.role != _TBD else _TBD
-        registered = "yes" if path.name in reg_sources else "no"
+        if reg_load_error is not None:
+            registered = prev.registered if prev else "no"
+        else:
+            registered = "yes" if path.name in reg_sources else "no"
         if prev is None:
             notes.append(f"NEW source '{path.name}' — fill in Origin/Role in SOURCES.md")
         elif prev.sha256 != sha and prev.sha256 != _TBD:
