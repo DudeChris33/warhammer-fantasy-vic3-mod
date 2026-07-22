@@ -15,16 +15,23 @@ Map text and bitmaps additionally have an **offline** validator — there is no
 reason to load the game to catch a duplicate province claim or a missing hub.
 One-time setup: create a local virtualenv and install the pinned deps — see
 `tools/requirements.txt` for the exact commands. Before committing anything
-under `map_data/` (province bitmap, `state_regions/`, `default.map`) or the
-map localization, run:
+under `map_data/` (province bitmap, `state_regions/`, `default.map`), the map
+localization, or the source-registration data (`tools/SOURCES.md`,
+`tools/registration/`), run:
 
 ```
-python tools/validate_map.py         # lints the repo map (repo-relative paths)
-python tools/run_fixture.py --check   # regression-checks the toolchain itself
+python tools/worldgen/sources.py --verify   # source manifest SHA-256 + registration cross-checks
+python tools/validate_map.py                # lints the repo map (repo-relative paths)
+python tools/run_fixture.py --check          # regression-checks the toolchain itself
 ```
 
-Both must pass before the in-game `error.log` check below. This does not replace
-the game load — it catches the offline-detectable class of error first.
+All must pass before the in-game `error.log` check below. This does not replace
+the game load — it catches the offline-detectable class of error first. The
+`sources.py --verify` step confirms the local `sources/` files still match the
+committed SHA-256 manifest — a swapped or edited source that would silently
+change a committed bitmap fails here. Refreshing a source after an *intentional*
+change is the explicit `python tools/worldgen/sources.py --update-manifest`
+action, never a side effect of a generator run.
 
 ## Regression rule
 

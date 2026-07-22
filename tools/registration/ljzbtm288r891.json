@@ -1,0 +1,19 @@
+{
+  "source": "ljzbtm288r891.jpg",
+  "role": "whole_world_height_and_coast",
+  "projection": "natural_earth_2",
+  "precedence": 20,
+  "crop": [150, 95, 3850, 2100],
+  "footprint": [0, 0, 8192, 3616],
+  "notes": "Terraqueous Globe — Natural Earth II oval (per the map's own legend). Crop is the main oval only: the two circular polar insets begin at y=2148 and the title/elevation-legend band sits below the oval, both excluded. Supplies the whole-world colour->height ramp (the -7000..+7000 m diverging legend) plus the whole-world coastline; regional sources override inside their footprints. Control points are recognizable regions read against config/canvas_frame.ANCHORS; S2 fits the NE-II constants against them + config/canvas_frame.TERRAQUEOUS_OVAL.",
+  "control_points": [
+    {"source": [1110, 470],  "canvas": [2125, 695],  "note": "Naggaroth (NW)"},
+    {"source": [1430, 745],  "canvas": [2834, 1205], "note": "Ulthuan ring / Inner Sea"},
+    {"source": [2010, 360],  "canvas": [4118, 491],  "note": "Norsca"},
+    {"source": [2050, 480],  "canvas": [4207, 714],  "note": "Old World / Empire"},
+    {"source": [2050, 950],  "canvas": [4207, 1585], "note": "Land of the Dead / Nehekhara"},
+    {"source": [2350, 520],  "canvas": [4871, 788],  "note": "Dark Lands"},
+    {"source": [2980, 520],  "canvas": [6266, 788],  "note": "Grand Cathay"},
+    {"source": [3440, 620],  "canvas": [7284, 974],  "note": "Nippon"}
+  ]
+}

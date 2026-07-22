@@ -11,3 +11,20 @@
 
 Pillow>=10,<13
 numpy>=1.26,<3
+
+# Added for the source-driven ingestion stage (S2/S3): reprojection
+# (control-point warp fields, coordinate resampling), land/sea segmentation
+# (morphology, thresholding), coastline/river contour tracing, and the
+# vectorized Voronoi/label hot paths that replace the P1 brute-force pure-Python
+# primitives at real-canvas scale. All chosen ops are deterministic given fixed
+# inputs (no wall-clock/OS entropy, no stochastic segmentation).
+#
+# opencv-python was deliberately rejected despite covering the same ops: its
+# threaded/SIMD kernels carry determinism caveats that are a poor fit for a
+# byte-identical multiplayer pipeline. scipy/scikit-image are numpy-backed and
+# deterministic. Lower bounds require numpy-2-compatible builds; upper bounds
+# cap at the majors this toolchain was pinned against.
+# Resolved in tools/.venv: scipy 1.15.3, scikit-image 0.25.2 (numpy 2.2.6,
+# Pillow 12.3.0, Python 3.10.7).
+scipy>=1.13,<1.16
+scikit-image>=0.24,<0.26

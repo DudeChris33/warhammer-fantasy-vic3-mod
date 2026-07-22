@@ -1,0 +1,18 @@
+{
+  "source": "map-the-old-world.jpg",
+  "role": "old_world_state_boundaries",
+  "projection": "control_point_warp",
+  "precedence": 70,
+  "crop": [20, 20, 2996, 2060],
+  "footprint": [3513, 351, 5277, 1725],
+  "notes": "GW regional map, top-down (N at top-right). Authoritative for Old World / Badlands / Dark Lands / Araby / Land of the Dead state & province boundaries. The 'WORLD MAP' locator inset (top-left, ~x[70,530] y[130,510]) and the decorative figures/ship drawn over the ocean must be masked out in S2 segmentation — a single crop bbox cannot exclude interior insets. Control points map recognizable coast/region features to config/canvas_frame.ANCHORS.",
+  "control_points": [
+    {"source": [1418, 104],  "canvas": [4118, 491],  "note": "Norsca"},
+    {"source": [935, 749],   "canvas": [3764, 974],  "note": "Estalia (SW peninsula)"},
+    {"source": [1568, 499],  "canvas": [4207, 714],  "note": "Empire (centre)"},
+    {"source": [694, 1082],  "canvas": [3653, 1456], "note": "Araby (NW desert coast)"},
+    {"source": [1448, 1560], "canvas": [4207, 1585], "note": "Land of the Dead / Khemri"},
+    {"source": [2202, 770],  "canvas": [4871, 788],  "note": "Dark Lands"},
+    {"source": [2714, 1290], "canvas": [5137, 1493], "note": "Dragon Isles (E)"}
+  ]
+}

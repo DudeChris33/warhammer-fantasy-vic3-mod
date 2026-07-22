@@ -1,5 +1,7 @@
 # World Map — The Known World (physical map foundation)
 
+> **Superseded by [world-map-source-driven.md](../requests/world-map-source-driven.md)** (2026-07-21) — the source-driven redo replaces this request and its P2–P4 child plans (geometry is now traced from `sources/` imagery, not hand-encoded). Kept for history; the built P1 tooling stays in `planning/done/`.
+
 | Field | Value |
 |-------|-------|
 | Type | request |

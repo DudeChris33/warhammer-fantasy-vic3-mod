@@ -1,5 +1,7 @@
 # World Map — P4: Scaffold + Boot
 
+> **Superseded by [world-map-source-driven.md](../requests/world-map-source-driven.md)** (2026-07-21) — re-phased into S0–S6; this phase's work is inherited (essentially verbatim) by S4. Kept for history.
+
 | Field | Value |
 |-------|-------|
 | Type | request (child of [world-map.md](world-map.md)) |

@@ -1,0 +1,16 @@
+{
+  "source": "TheEmpire.webp",
+  "role": "empire_internal_subdivision",
+  "projection": "control_point_warp",
+  "precedence": 80,
+  "crop": [20, 20, 1576, 1004],
+  "footprint": [3965, 470, 4495, 945],
+  "notes": "GW Empire provinces map (Reikland, Ostland, Talabecland, Stirland, Averland, Middenland, Nordland, Ostermark, Wissenland, Sylvania, Hochland, Mootland). Nested inside the Old World footprint. Mask out the 'THE EMPIRE' title cartouche (top-left), the compass rose and the scale bar (bottom-right) in S2 segmentation. Sub-feature canvas positions are approximate nested seeds, refined in S3 when the Empire is actually subdivided.",
+  "control_points": [
+    {"source": [375, 691],  "canvas": [4055, 770], "note": "Marienburg (Reik mouth, W coast)"},
+    {"source": [670, 87],   "canvas": [4120, 560], "note": "Erengrad (N Kislev coast)"},
+    {"source": [854, 773],  "canvas": [4210, 835], "note": "Nuln (S centre)"},
+    {"source": [1205, 681], "canvas": [4330, 855], "note": "Black Fire Pass (SE)"},
+    {"source": [1364, 307], "canvas": [4405, 715], "note": "Worlds Edge Mtns (E edge)"}
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "source": "images.steamusercontent.jpg",
+  "role": "global_frame_anchor",
+  "projection": "equirectangular",
+  "precedence": 10,
+  "crop": [0, 40, 637, 355],
+  "footprint": [0, 0, 8192, 3616],
+  "notes": "Already-rectangular whole-world satellite/biome render. Low-res (637x358) so a coarse global frame anchor + land/sea layout reference, not a tracing master. Crop removes the letterbox: pixel analysis found map content in rows 40..354 (a ~40px black bar at top). The four content-band corners map to the canvas corners (x=8192 wraps to 0); Ulthuan pins the interior.",
+  "control_points": [
+    {"source": [0, 40],    "canvas": [0, 0],       "note": "content top-left -> canvas NW"},
+    {"source": [637, 40],  "canvas": [8192, 0],    "note": "content top-right -> canvas NE (wraps)"},
+    {"source": [0, 355],   "canvas": [0, 3616],    "note": "content bottom-left -> canvas SW"},
+    {"source": [637, 355], "canvas": [8192, 3616], "note": "content bottom-right -> canvas SE (wraps)"},
+    {"source": [267, 129], "canvas": [2834, 1205], "note": "Ulthuan ring (interior anchor)"}
+  ]
+}

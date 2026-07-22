@@ -1,0 +1,16 @@
+{
+  "source": "tww3_map_stitched.png",
+  "role": "regional_relief_and_coast",
+  "projection": "control_point_warp",
+  "precedence": 60,
+  "crop": [16, 16, 2515, 1945],
+  "footprint": [1985, 555, 5011, 2263],
+  "notes": "Total War: Warhammer 3 Immortal Empires campaign relief, near-top-down. High-detail coastline + relief for its arc (Naggaroth -> Ulthuan -> Old World -> Southlands -> Dark Lands). tww3_map_stitched.paint is the editable master; this .png is the consumed flat artifact. Mask the TW3 UI arrows (right edge) and the top-right out-of-bounds fog in S2. Ulthuan's ring is the strongest cross-source anchor. For the coastline/relief layer S2 may prefer this inside its footprint over the lower-precedence whole-world layer even where a boundary source overlaps.",
+  "control_points": [
+    {"source": [443, 765],   "canvas": [2834, 1205], "note": "Ulthuan ring (strong anchor)"},
+    {"source": [202, 392],   "canvas": [2125, 695],  "note": "Naggaroth (NW snow)"},
+    {"source": [936, 549],   "canvas": [4207, 714],  "note": "Old World (green upland)"},
+    {"source": [1113, 1216], "canvas": [4207, 1585], "note": "Land of the Dead / Nehekhara"},
+    {"source": [1012, 1412], "canvas": [4340, 2123], "note": "Southland (S desert)"}
+  ]
+}

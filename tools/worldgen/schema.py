@@ -17,6 +17,16 @@ Geometry layout (real world and the ``tools/fixtures/`` synthetic world share it
 Coordinates are in ``provinces.png`` canvas space (P2/P3 share the same canvas).
 A polygon whose x extends past the canvas width encodes a shape that wraps the
 ``x=0`` seam (see ``raster.rasterize_polygon``).
+
+This module also defines the **upstream source-registration schema**
+(:class:`SourceRegistration`) the source-driven ingestion stage consumes: how
+each committed ``tools/registration/<source>.json`` places a reference image onto
+the canvas — projection kind, hand-picked control points (source px <-> canvas
+px), crop, target footprint, and compositing precedence. It is validated on load
+exactly like the geometry schema above; the *dimensioned* cross-checks (control
+points inside the source image, footprint inside the canvas, source present in
+the SHA-256 manifest) live in ``worldgen/sources.py``, mirroring how
+``validate_map`` — not this module — owns the engine-invariant checks.
 """
 
 from __future__ import annotations
@@ -82,6 +92,20 @@ def _as_polygon(value, ctx: str, min_points: int = 3) -> list[Point]:
     if len(pts) < min_points:
         raise SchemaError(f"{ctx}: expected at least {min_points} points, got {len(pts)}")
     return pts
+
+
+def _as_bbox(value, ctx: str) -> tuple[float, float, float, float]:
+    """An axis-aligned pixel box ``[x0, y0, x1, y1]`` with a non-negative origin
+    and ``x0 < x1``, ``y0 < y1``. Used by the source-registration schema for
+    crops (source px) and footprints (canvas px)."""
+    if (not isinstance(value, (list, tuple))) or len(value) != 4:
+        raise SchemaError(f"{ctx}: expected [x0, y0, x1, y1], got {value!r}")
+    x0, y0, x1, y1 = (_as_number(value[i], f"{ctx}[{i}]") for i in range(4))
+    if x0 < 0 or y0 < 0:
+        raise SchemaError(f"{ctx}: box origin must be non-negative, got ({x0}, {y0})")
+    if x1 <= x0 or y1 <= y0:
+        raise SchemaError(f"{ctx}: expected x0<x1 and y0<y1, got ({x0}, {y0}, {x1}, {y1})")
+    return (x0, y0, x1, y1)
 
 
 # ---------------------------------------------------------------------------
@@ -382,6 +406,140 @@ def _cross_check(states: list[State]) -> None:
             raise SchemaError(
                 f"{s.key}: naval_exit '{s.naval_exit}' is not a declared sea zone"
             )
+
+
+# ---------------------------------------------------------------------------
+# Source registration (the upstream ingestion schema)
+# ---------------------------------------------------------------------------
+#
+# Stage-A ingestion (reproject -> segment -> composite) needs to know, per source
+# image, how it lands on the provinces.png canvas. That mapping is committed as
+# ``tools/registration/<source>.json`` and validated here on load, exactly like
+# the downstream geometry schema above — a malformed hand-edit fails loudly at
+# load time instead of silently mis-registering a source. ``sources.py`` adds the
+# dimensioned cross-checks this structural pass deliberately omits (control points
+# inside the source image, footprint inside the canvas, source in the manifest).
+
+#: The projections the ingestion stage knows how to apply.
+#:  * ``natural_earth_2``    — the Terraqueous oval; NE II forward polynomial.
+#:  * ``equirectangular``    — already-rectangular sources (the satellite frame).
+#:  * ``control_point_warp`` — regional maps warped by a control-point field.
+PROJECTION_KINDS = ("natural_earth_2", "equirectangular", "control_point_warp")
+
+#: Minimum control points per projection. A control-point warp needs at least an
+#: affine's worth (3); the parametric projections need 2 to fit scale/placement.
+_MIN_CONTROL_POINTS = {
+    "natural_earth_2": 2,
+    "equirectangular": 2,
+    "control_point_warp": 3,
+}
+
+
+@dataclass(frozen=True)
+class ControlPoint:
+    """One source-pixel <-> canvas-pixel correspondence, hand-picked from a
+    recognizable feature. ``note`` records which feature (a cape, a graticule
+    crossing, an image corner) so the choice is auditable later."""
+
+    source: Point
+    canvas: Point
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str) -> "ControlPoint":
+        source = _as_point(_require(d, "source", ctx), f"{ctx}.source")
+        canvas = _as_point(_require(d, "canvas", ctx), f"{ctx}.canvas")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        for label, (x, y) in (("source", source), ("canvas", canvas)):
+            if x < 0 or y < 0:
+                raise SchemaError(f"{ctx}.{label}: pixel coords must be non-negative, got ({x}, {y})")
+        return cls(source=source, canvas=canvas, note=note)
+
+
+@dataclass(frozen=True)
+class SourceRegistration:
+    """How one reference image registers onto the canvas.
+
+    ``source`` is the image's filename (cross-checked against the SHA-256 manifest
+    by ``sources.py``). ``crop`` (optional, source px) is the region kept — e.g.
+    the Terraqueous oval minus its polar insets. ``footprint`` (canvas px) is the
+    box this source contributes to; on an overlap the higher ``precedence`` wins.
+    """
+
+    source: str
+    role: str
+    projection: str
+    control_points: list[ControlPoint]
+    crop: tuple[float, float, float, float] | None
+    footprint: tuple[float, float, float, float]
+    precedence: int
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str) -> "SourceRegistration":
+        source = _as_str(_require(d, "source", ctx), f"{ctx}.source")
+        ctx = f"{ctx}({source})"
+        role = _as_str(_require(d, "role", ctx), f"{ctx}.role")
+        projection = _as_str(_require(d, "projection", ctx), f"{ctx}.projection")
+        if projection not in PROJECTION_KINDS:
+            raise SchemaError(
+                f"{ctx}.projection: expected one of {PROJECTION_KINDS}, got '{projection}'"
+            )
+
+        cps_raw = _require(d, "control_points", ctx)
+        if not isinstance(cps_raw, list):
+            raise SchemaError(f"{ctx}.control_points: expected a list, got {type(cps_raw).__name__}")
+        control_points = [
+            ControlPoint.from_dict(c, f"{ctx}.control_points[{i}]") for i, c in enumerate(cps_raw)
+        ]
+        need = _MIN_CONTROL_POINTS[projection]
+        if len(control_points) < need:
+            raise SchemaError(
+                f"{ctx}.control_points: {projection} needs at least {need}, got {len(control_points)}"
+            )
+
+        crop_raw = d.get("crop")
+        crop = _as_bbox(crop_raw, f"{ctx}.crop") if crop_raw is not None else None
+        footprint = _as_bbox(_require(d, "footprint", ctx), f"{ctx}.footprint")
+
+        precedence = _as_int(_require(d, "precedence", ctx), f"{ctx}.precedence")
+        if precedence < 0:
+            raise SchemaError(f"{ctx}.precedence: must be >= 0, got {precedence}")
+
+        # A control point's source pixel must fall inside the crop it is measured
+        # against (when one is given) — a point outside the kept region is a
+        # mis-pick that would warp garbage into the canvas.
+        if crop is not None:
+            for i, cp in enumerate(control_points):
+                sx, sy = cp.source
+                if not (crop[0] <= sx <= crop[2] and crop[1] <= sy <= crop[3]):
+                    raise SchemaError(
+                        f"{ctx}.control_points[{i}].source ({sx}, {sy}) lies outside crop {crop}"
+                    )
+
+        return cls(source, role, projection, control_points, crop, footprint, precedence)
+
+
+def load_registration_file(path: Path) -> SourceRegistration:
+    return SourceRegistration.from_dict(_load_json(path), path.name)
+
+
+def load_registrations(registration_dir: str | Path) -> list[SourceRegistration]:
+    """Load + validate every ``tools/registration/*.json`` (sorted, deterministic).
+
+    Raises :class:`SchemaError` on any malformed record or a duplicate source.
+    """
+    root = Path(registration_dir)
+    if not root.is_dir():
+        raise SchemaError(f"registration directory not found: {root}")
+    regs: list[SourceRegistration] = []
+    seen: set[str] = set()
+    for path in sorted(root.glob("*.json")):
+        reg = load_registration_file(path)
+        if reg.source in seen:
+            raise SchemaError(f"duplicate registration for source '{reg.source}'")
+        seen.add(reg.source)
+        regs.append(reg)
+    return regs
 
 
 def _load_json(path: Path) -> dict:

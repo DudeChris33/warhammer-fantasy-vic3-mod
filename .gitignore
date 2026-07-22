@@ -1,0 +1,12 @@
+# Repo-root ignores. Tool-local ignores (.venv, __pycache__, fixture scratch)
+# live in tools/.gitignore and stay there.
+
+# Reference imagery for the source-driven map pipeline. Local-only by decision:
+# third-party IP (GW cartography, a Total War screenshot mosaic, fan maps) plus
+# ~40 MB of binaries. NEVER committed. What IS committed in its place:
+#   - tools/SOURCES.md            (filename + dims + SHA-256 + origin + role)
+#   - tools/registration/*.json   (projection, control points, crop, footprint)
+# so the exact inputs behind every committed bitmap stay auditable without
+# shipping the art. See planning/requests/world-map-source-driven.md (decision #2)
+# and tools/PROVENANCE.md.
+sources/
