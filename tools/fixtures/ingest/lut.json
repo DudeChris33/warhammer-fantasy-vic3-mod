@@ -1,0 +1,18 @@
+{
+  "source": "synthetic_world.png",
+  "measured": "invented — this is the fixture's own palette, not a measurement",
+  "bands": [
+    {"rgb": [40, 60, 90], "low_m": -6000, "high_m": -3000, "label": "deep"},
+    {"rgb": [70, 100, 130], "low_m": -3000, "high_m": -500, "label": "mid"},
+    {"rgb": [110, 140, 170], "low_m": -500, "high_m": 0, "label": "shelf"},
+    {"rgb": [150, 175, 110], "low_m": 0, "high_m": 400, "label": "lowland"},
+    {"rgb": [200, 195, 130], "low_m": 400, "high_m": 1200, "label": "upland"},
+    {"rgb": [205, 150, 110], "low_m": 1200, "high_m": 3000, "label": "hills"},
+    {"rgb": [160, 90, 80], "low_m": 3000, "high_m": 6000, "label": "mountain"}
+  ],
+  "sea_band_count": 3,
+  "paper_rgb": [235, 232, 220],
+  "paper_elevation_m": 250,
+  "ink_rgb": [120, 40, 35],
+  "notes": "Fixture palette — invented, so nothing here derives from third-party art. 'ink_rgb' is not part of the ElevationLUT schema; make_source.py reads it to paint the label/graticule strokes. It is deliberately close to the 'mountain' swatch (distance 44) and dark (luminance 65), which is exactly the relationship the real Terraqueous label red has to the real >7000 m swatch — so the fixture reproduces the failure mode rather than a caricature of it."
+}

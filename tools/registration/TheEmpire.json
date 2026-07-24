@@ -3,14 +3,20 @@
   "role": "empire_internal_subdivision",
   "projection": "control_point_warp",
   "precedence": 80,
+  "layer_precedence": {
+    "coastline": 15,
+    "relief": 15,
+    "rivers": 80,
+    "boundaries": 80
+  },
   "crop": [20, 20, 1576, 1004],
-  "footprint": [3965, 470, 4495, 945],
-  "notes": "GW Empire provinces map (Reikland, Ostland, Talabecland, Stirland, Averland, Middenland, Nordland, Ostermark, Wissenland, Sylvania, Hochland, Mootland). Nested inside the Old World footprint. Mask out the 'THE EMPIRE' title cartouche (top-left), the compass rose and the scale bar (bottom-right) in S2 segmentation. Sub-feature canvas positions are approximate nested seeds, refined in S3 when the Empire is actually subdivided.",
+  "footprint": [3982, 366, 4512, 841],
+  "notes": "GW Empire provinces map (Reikland, Ostland, Talabecland, Stirland, Averland, Middenland, Nordland, Ostermark, Wissenland, Sylvania, Hochland, Mootland). Nested inside the Old World footprint. Canvas coordinates and footprint were shifted in S2 by the Old-World anchor's own correction (+17, -104) so this map stays nested where it belongs. Mask out the 'THE EMPIRE' title cartouche (top-left), the compass rose and the scale bar (bottom-right) when segmenting. Sub-feature canvas positions are approximate nested seeds, refined in S3 when the Empire is actually subdivided; the record carries river precedence because it draws the Reik system in more detail than the world map does.",
   "control_points": [
-    {"source": [375, 691],  "canvas": [4055, 770], "note": "Marienburg (Reik mouth, W coast)"},
-    {"source": [670, 87],   "canvas": [4120, 560], "note": "Erengrad (N Kislev coast)"},
-    {"source": [854, 773],  "canvas": [4210, 835], "note": "Nuln (S centre)"},
-    {"source": [1205, 681], "canvas": [4330, 855], "note": "Black Fire Pass (SE)"},
-    {"source": [1364, 307], "canvas": [4405, 715], "note": "Worlds Edge Mtns (E edge)"}
+    {"source": [375, 691], "canvas": [4072, 666], "note": "Marienburg (Reik mouth, W coast)"},
+    {"source": [670, 87], "canvas": [4137, 456], "note": "Erengrad (N Kislev coast)"},
+    {"source": [854, 773], "canvas": [4227, 731], "note": "Nuln (S centre)"},
+    {"source": [1205, 681], "canvas": [4347, 751], "note": "Black Fire Pass (SE)"},
+    {"source": [1364, 307], "canvas": [4422, 611], "note": "Worlds Edge Mtns (E edge)"}
   ]
 }

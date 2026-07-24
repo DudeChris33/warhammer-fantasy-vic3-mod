@@ -8,3 +8,11 @@ __pycache__/
 # Scratch output from run_fixture.py --check goes to the system temp dir,
 # but ignore any stray local output dir just in case.
 fixtures/_out/
+
+# tools/derived/ holds generated artifacts. Only land_sea_mask.png is a committed
+# deliverable (S3 cuts provinces.png + rivers.png from it); everything else here
+# is a QA/preview render (preview_*, qa_*, ...) regenerable on demand and kept out
+# of the repo.
+derived/*
+!derived/land_sea_mask.png
+

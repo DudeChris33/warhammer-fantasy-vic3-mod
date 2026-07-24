@@ -209,6 +209,69 @@ def load_rivers(path: Path) -> list[River]:
 
 
 # ---------------------------------------------------------------------------
+# River streams (the committed geometry generate_rivers.py rasterizes)
+# ---------------------------------------------------------------------------
+#
+# ``River`` above is the P1 name+polyline stub. A Vic3 ``rivers.png`` needs more
+# than a polyline: every stream has a *source* end and a *mouth* end, the mouth is
+# either the open sea or a confluence into another stream, and the rendered width
+# is an index into vanilla's blue ramp. ``RiverStream`` carries exactly that, and
+# nothing the engine does not consume — the flow topology the generator must get
+# right to produce a valid bitmap.
+
+#: Vanilla's rivers.png blue width ramp (measured from game/map_data/rivers.png).
+#: A stream's ``width`` names its *widest* (downstream) index; the generator ramps
+#: up to it from the narrowest so a river visibly grows toward its mouth, exactly
+#: as vanilla's rivers do (source 3 -> 4 -> 6 -> 8).
+RIVER_WIDTH_RAMP = (3, 4, 6, 8)
+RIVER_MOUTHS = ("sea", "confluence")
+
+
+@dataclass(frozen=True)
+class RiverStream:
+    """One river or tributary: an ordered polyline from source to mouth.
+
+    ``points`` run **source-first**: ``points[0]`` becomes the green spring pixel,
+    ``points[-1]`` the mouth. ``mouth`` is ``"sea"`` (the last pixel must reach
+    open water) or ``"confluence"`` (it must land on another stream, and is marked
+    red so the engine reads the flows as joined). ``width`` is the downstream
+    width index, one of :data:`RIVER_WIDTH_RAMP`.
+    """
+
+    name: str
+    points: list[Point]
+    mouth: str
+    width: int
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str) -> "RiverStream":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        ctx = f"{ctx}({name})"
+        points = _as_polygon(_require(d, "points", ctx), f"{ctx}.points", min_points=2)
+        mouth = _as_str(_require(d, "mouth", ctx), f"{ctx}.mouth")
+        if mouth not in RIVER_MOUTHS:
+            raise SchemaError(f"{ctx}.mouth: expected one of {RIVER_MOUTHS}, got '{mouth}'")
+        width = _as_int(_require(d, "width", ctx), f"{ctx}.width")
+        if width not in RIVER_WIDTH_RAMP:
+            raise SchemaError(f"{ctx}.width: expected one of {RIVER_WIDTH_RAMP}, got {width}")
+        return cls(name=name, points=points, mouth=mouth, width=width)
+
+
+def load_river_streams(path: Path) -> list[RiverStream]:
+    ctx = path.name
+    data = _load_json(path)
+    streams_raw = _require(data, "streams", ctx)
+    if not isinstance(streams_raw, list) or not streams_raw:
+        raise SchemaError(f"{ctx}.streams: expected a non-empty list")
+    streams = [RiverStream.from_dict(s, f"{ctx}.streams[{i}]") for i, s in enumerate(streams_raw)]
+    names = [s.name for s in streams]
+    dupes = {n for n in names if names.count(n) > 1}
+    if dupes:
+        raise SchemaError(f"{ctx}: duplicate stream names {sorted(dupes)}")
+    return streams
+
+
+# ---------------------------------------------------------------------------
 # States (the state-cell partition — land states and single-province sea zones)
 # ---------------------------------------------------------------------------
 
@@ -473,6 +536,20 @@ class SourceRegistration:
     crop: tuple[float, float, float, float] | None
     footprint: tuple[float, float, float, float]
     precedence: int
+    layer_precedence: dict[str, int] = field(default_factory=dict)
+
+    def precedence_for(self, layer: str) -> int:
+        """Precedence for one *kind* of contribution, falling back to the record's
+        overall ``precedence``.
+
+        A source can be authoritative for one thing and useless for another. The
+        Total War relief is the sharpest elevation detail we have, but it is a
+        near-top-down 3-D render registered through five hand-picked points, so
+        it must never be allowed to move a shoreline that the Terraqueous globe
+        pins to sub-pixel accuracy. One number per source cannot express that;
+        ``layer_precedence`` can.
+        """
+        return self.layer_precedence.get(layer, self.precedence)
 
     @classmethod
     def from_dict(cls, d: dict, ctx: str) -> "SourceRegistration":
@@ -505,6 +582,18 @@ class SourceRegistration:
         if precedence < 0:
             raise SchemaError(f"{ctx}.precedence: must be >= 0, got {precedence}")
 
+        lp_raw = d.get("layer_precedence", {})
+        if not isinstance(lp_raw, dict):
+            raise SchemaError(f"{ctx}.layer_precedence: expected an object, got {type(lp_raw).__name__}")
+        layer_precedence: dict[str, int] = {}
+        for k, v in lp_raw.items():
+            if not isinstance(k, str) or not k:
+                raise SchemaError(f"{ctx}.layer_precedence: layer names must be non-empty strings")
+            n = _as_int(v, f"{ctx}.layer_precedence.{k}")
+            if n < 0:
+                raise SchemaError(f"{ctx}.layer_precedence.{k}: must be >= 0, got {n}")
+            layer_precedence[k] = n
+
         # A control point's source pixel must fall inside the crop it is measured
         # against (when one is given) — a point outside the kept region is a
         # mis-pick that would warp garbage into the canvas.
@@ -516,11 +605,105 @@ class SourceRegistration:
                         f"{ctx}.control_points[{i}].source ({sx}, {sy}) lies outside crop {crop}"
                     )
 
-        return cls(source, role, projection, control_points, crop, footprint, precedence)
+        return cls(source, role, projection, control_points, crop, footprint,
+                   precedence, layer_precedence)
 
 
 def load_registration_file(path: Path) -> SourceRegistration:
     return SourceRegistration.from_dict(_load_json(path), path.name)
+
+
+# ---------------------------------------------------------------------------
+# Colour -> elevation LUT (the Terraqueous legend ramp, committed)
+# ---------------------------------------------------------------------------
+#
+# The Terraqueous globe encodes elevation as a stepped colour ramp with a printed
+# legend. Sampling that legend once and committing the result is what makes the
+# heightmap reproducible from (local source + committed data): the LUT is our own
+# measurement of the ramp, not a copy of the artwork.
+
+@dataclass(frozen=True)
+class ElevationBand:
+    """One legend swatch: its sampled colour and the elevation range it means."""
+
+    rgb: tuple[int, int, int]
+    low_m: float
+    high_m: float
+    label: str
+
+    @property
+    def mid_m(self) -> float:
+        return (self.low_m + self.high_m) / 2.0
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str) -> "ElevationBand":
+        rgb_raw = _require(d, "rgb", ctx)
+        if (not isinstance(rgb_raw, (list, tuple))) or len(rgb_raw) != 3:
+            raise SchemaError(f"{ctx}.rgb: expected [r, g, b], got {rgb_raw!r}")
+        rgb = tuple(_as_int(v, f"{ctx}.rgb[{i}]") for i, v in enumerate(rgb_raw))
+        for i, v in enumerate(rgb):
+            if not (0 <= v <= 255):
+                raise SchemaError(f"{ctx}.rgb[{i}]: must be 0..255, got {v}")
+        low = _as_number(_require(d, "low_m", ctx), f"{ctx}.low_m")
+        high = _as_number(_require(d, "high_m", ctx), f"{ctx}.high_m")
+        if high <= low:
+            raise SchemaError(f"{ctx}: expected low_m < high_m, got {low} / {high}")
+        return cls(rgb, low, high, _as_str(d.get("label", ""), f"{ctx}.label"))
+
+
+@dataclass(frozen=True)
+class ElevationLUT:
+    """The sampled ramp. Bands run deepest-first; the first ``sea_band_count``
+    are ocean and the rest are land, which is where the 0 m break sits.
+
+    ``paper_rgb`` is the un-inked page colour. It matters because the Terraqueous
+    oval deliberately leaves the polar Chaos Wastes blank, and blank paper is
+    nearer the deepest-ocean swatch than to any land swatch — without an explicit
+    paper entry the poles would classify as ocean.
+    """
+
+    source: str
+    bands: list[ElevationBand]
+    sea_band_count: int
+    paper_rgb: tuple[int, int, int]
+    paper_elevation_m: float
+
+    @property
+    def land_bands(self) -> list[ElevationBand]:
+        return self.bands[self.sea_band_count:]
+
+
+def load_elevation_lut(path: Path) -> ElevationLUT:
+    ctx = path.name
+    d = _load_json(path)
+    source = _as_str(_require(d, "source", ctx), f"{ctx}.source")
+    bands_raw = _require(d, "bands", ctx)
+    if not isinstance(bands_raw, list) or len(bands_raw) < 2:
+        raise SchemaError(f"{ctx}.bands: expected a list of at least 2 bands")
+    bands = [ElevationBand.from_dict(b, f"{ctx}.bands[{i}]") for i, b in enumerate(bands_raw)]
+    for i in range(1, len(bands)):
+        if bands[i].low_m < bands[i - 1].low_m:
+            raise SchemaError(f"{ctx}.bands[{i}]: bands must be ordered deepest-first")
+
+    sea_n = _as_int(_require(d, "sea_band_count", ctx), f"{ctx}.sea_band_count")
+    if not (0 < sea_n < len(bands)):
+        raise SchemaError(f"{ctx}.sea_band_count: must be between 1 and {len(bands) - 1}, got {sea_n}")
+    # The land/sea split has to land exactly on the ramp's own 0 m break.
+    if bands[sea_n - 1].high_m != 0 or bands[sea_n].low_m != 0:
+        raise SchemaError(
+            f"{ctx}: sea_band_count={sea_n} does not fall on the 0 m break "
+            f"(band {sea_n - 1} ends at {bands[sea_n - 1].high_m}, band {sea_n} starts at {bands[sea_n].low_m})"
+        )
+
+    paper_raw = _require(d, "paper_rgb", ctx)
+    if (not isinstance(paper_raw, (list, tuple))) or len(paper_raw) != 3:
+        raise SchemaError(f"{ctx}.paper_rgb: expected [r, g, b], got {paper_raw!r}")
+    paper = tuple(_as_int(v, f"{ctx}.paper_rgb[{i}]") for i, v in enumerate(paper_raw))
+    paper_m = _as_number(_require(d, "paper_elevation_m", ctx), f"{ctx}.paper_elevation_m")
+    if paper_m <= 0:
+        raise SchemaError(f"{ctx}.paper_elevation_m: blank page is polar land, so it must be > 0")
+
+    return ElevationLUT(source, bands, sea_n, paper, paper_m)
 
 
 def load_registrations(registration_dir: str | Path) -> list[SourceRegistration]:

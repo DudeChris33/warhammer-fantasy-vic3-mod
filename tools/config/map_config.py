@@ -54,6 +54,39 @@ SEA_ID_START = 3000
 WRAP_X = True
 
 # ---------------------------------------------------------------------------
+# heightmap.png encoding (16-bit grayscale)
+# ---------------------------------------------------------------------------
+#
+# Vic3 stores terrain height as a raw uint16 with no scale declared anywhere in
+# script, so the mapping from metres to stored value has to match vanilla's or
+# the relief reads at the wrong vertical scale. Both constants below were
+# *measured* from the shipped 1.13.8 ``game/map_data/heightmap.png`` by splitting
+# its pixels on the real land/sea mask (provinces.png cross-referenced against
+# default.map's sea_starts + lakes):
+#
+#   * land  p1=4738  p5=4886  median=5936  p95=16742  max=53469
+#   * sea   median=0  p95=1246  p99=4162   (61.3% of the canvas is exactly 0)
+#
+# Land's 5th percentile (4886) and its modal shoreline value (4884) put sea level
+# at 4884. Scaling at 5.5 units/m then places Everest (8848 m) at 53548 against
+# vanilla's observed maximum of 53469 — i.e. vanilla is drawn to this exact
+# scale, so we inherit it rather than invent one.
+#
+# Anything below the sea floor clamps to 0, which is why vanilla's deep ocean is
+# a flat 0: -888 m already reaches the bottom of the range.
+
+#: Stored uint16 value representing 0 m (the shoreline).
+HEIGHT_SEA_LEVEL = 4884
+
+#: Stored uint16 units per metre of real elevation.
+HEIGHT_UNITS_PER_METRE = 5.5
+
+#: Land pixels are forced to at least this far above :data:`HEIGHT_SEA_LEVEL`,
+#: and sea pixels at least this far below, so the heightmap's shoreline can never
+#: contradict the committed land/sea mask that provinces.png is built from.
+HEIGHT_SHORE_MARGIN = 16
+
+# ---------------------------------------------------------------------------
 # Localization
 # ---------------------------------------------------------------------------
 

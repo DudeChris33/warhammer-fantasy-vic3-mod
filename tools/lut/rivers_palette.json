@@ -1,0 +1,30 @@
+{
+  "source": "game/map_data/rivers.png (Victoria 3 1.13.8)",
+  "measured": "2026-07-23",
+  "notes": "The exact palette indices Vic3's rivers.png uses, read from the shipped file. Only these entries carry meaning; every other index is padded to black by the writer. Semantics were confirmed empirically: index 254 (grey) covers 67.5% of the canvas and is 99.5% province-sea, index 255 (white) is 99.1% province-land, and the drawn rivers (0.38% of pixels, 97.5% on land) use a green source (0), a red merge marker (1), a yellow split marker (2) and a blue width ramp that widens downstream (3 -> 4 -> 6 -> 8). We reproduce vanilla's palette verbatim so a re-save cannot remap the semantic indices.",
+  "indices": {
+    "source": 0,
+    "merge": 1,
+    "split": 2,
+    "land": 255,
+    "sea": 254
+  },
+  "width_ramp": [3, 4, 6, 8],
+  "palette": {
+    "0": [0, 255, 0],
+    "1": [255, 0, 0],
+    "2": [255, 252, 0],
+    "3": [0, 225, 255],
+    "4": [0, 200, 255],
+    "5": [0, 150, 255],
+    "6": [0, 100, 255],
+    "7": [0, 0, 255],
+    "8": [0, 0, 225],
+    "9": [0, 0, 200],
+    "10": [0, 0, 150],
+    "11": [0, 0, 100],
+    "15": [24, 206, 0],
+    "254": [122, 122, 122],
+    "255": [255, 255, 255]
+  }
+}

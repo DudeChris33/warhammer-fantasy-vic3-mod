@@ -3,17 +3,24 @@
   "role": "whole_world_height_and_coast",
   "projection": "natural_earth_2",
   "precedence": 20,
-  "crop": [150, 95, 3850, 2100],
+  "layer_precedence": {
+    "coastline": 90,
+    "relief": 20
+  },
+  "crop": [134, 132, 3866, 2127],
   "footprint": [0, 0, 8192, 3616],
-  "notes": "Terraqueous Globe — Natural Earth II oval (per the map's own legend). Crop is the main oval only: the two circular polar insets begin at y=2148 and the title/elevation-legend band sits below the oval, both excluded. Supplies the whole-world colour->height ramp (the -7000..+7000 m diverging legend) plus the whole-world coastline; regional sources override inside their footprints. Control points are recognizable regions read against config/canvas_frame.ANCHORS; S2 fits the NE-II constants against them + config/canvas_frame.TERRAQUEOUS_OVAL.",
+  "notes": "Terraqueous Globe - Natural Earth II, stated in the map's own legend ('Compromise pseudocylindrical projection Natural Earth II') and confirmed by measurement. S2 REPLACED S1's hand-picked feature control points with exact graticule crossings: the oval's drawn boundary curve was traced across 2001 rows and the NE-II envelope least-squares fitted to it, giving centre (1999.55, 1129.29), scale sx=702.212 sy=702.683, inlier RMS 0.363 px with every traced row inside 10 px. Two independent checks pass - sx/sy = 0.99933 (isotropic, i.e. drawn to true NE-II proportions, which a wrong polynomial could not produce alongside a sub-pixel envelope fit), and the fitted graticule lands within ~2 px of the map's own printed degree labels (170W at x=234, measured 236; equator y=1129, measured 1130; 20S y=1378, measured 1377). The control points below are that fit evaluated at named graticule crossings, so reproject.py recovers the same four constants from them. Crop is the oval interior, inset ~4 px from the drawn boundary rule so the black envelope line is never sampled; the generator clamps into the crop rather than masking, because the canvas seam at lon +-180 lands exactly on that rule. The polar insets (from y=2148) and the title/legend block sit outside it. Highest coastline precedence: this is the only whole-world source registered to sub-pixel accuracy, so it - not the regional relief - defines the shoreline.",
   "control_points": [
-    {"source": [1110, 470],  "canvas": [2125, 695],  "note": "Naggaroth (NW)"},
-    {"source": [1430, 745],  "canvas": [2834, 1205], "note": "Ulthuan ring / Inner Sea"},
-    {"source": [2010, 360],  "canvas": [4118, 491],  "note": "Norsca"},
-    {"source": [2050, 480],  "canvas": [4207, 714],  "note": "Old World / Empire"},
-    {"source": [2050, 950],  "canvas": [4207, 1585], "note": "Land of the Dead / Nehekhara"},
-    {"source": [2350, 520],  "canvas": [4871, 788],  "note": "Dark Lands"},
-    {"source": [2980, 520],  "canvas": [6266, 788],  "note": "Grand Cathay"},
-    {"source": [3440, 620],  "canvas": [7284, 974],  "note": "Nippon"}
+    {"source": [234.43, 1129.29], "canvas": [227.56, 1808.0], "note": "meridian 170W x equator"},
+    {"source": [1065.07, 1129.29], "canvas": [2048.0, 1808.0], "note": "meridian 90W x equator"},
+    {"source": [1999.55, 1129.29], "canvas": [4096.0, 1808.0], "note": "central meridian x equator"},
+    {"source": [2934.03, 1129.29], "canvas": [6144.0, 1808.0], "note": "meridian 90E x equator"},
+    {"source": [3764.67, 1129.29], "canvas": [7964.44, 1808.0], "note": "meridian 170E x equator"},
+    {"source": [1999.55, 395.26], "canvas": [4096.0, 442.67], "note": "central meridian x 60N"},
+    {"source": [1999.55, 1863.32], "canvas": [4096.0, 3173.33], "note": "central meridian x 60S"},
+    {"source": [847.68, 633.41], "canvas": [1365.33, 897.78], "note": "meridian 120W x 40N"},
+    {"source": [3151.42, 1625.17], "canvas": [6826.67, 2718.22], "note": "meridian 120E x 40S"},
+    {"source": [1999.55, 194.73], "canvas": [4096.0, 0.0], "note": "central meridian x canvas north edge (79.453125N)"},
+    {"source": [1999.55, 2063.85], "canvas": [4096.0, 3616.0], "note": "central meridian x canvas south edge (79.453125S)"}
   ]
 }

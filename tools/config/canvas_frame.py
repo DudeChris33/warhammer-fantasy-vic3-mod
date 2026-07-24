@@ -56,41 +56,60 @@ def canvas_to_lonlat(x: float, y: float) -> tuple[float, float]:
 # Terraqueous NE-II oval reference (SOURCE px of ljzbtm288r891.jpg, 4000x3256)
 # ---------------------------------------------------------------------------
 #
-# The main oval's equatorial and pole-to-pole extents, read from the image and
-# bounded by pixel analysis (its two polar insets begin at y=2148, so the oval
-# bottom is above that). S2's Natural Earth II reprojection fits its projection
-# constants against these + the Terraqueous control points; S1 only needs them to
-# derive the approximate feature anchors below.
+# The main oval's extent. **Measured in S2** (2026-07-23), superseding S1's
+# eyeballed seed: the oval's drawn boundary curve was traced across 2001 rows and
+# the Natural Earth II envelope least-squares fitted to it, giving
+#
+#     centre (1999.55, 1129.29)   scale sx=702.212  sy=702.683
+#     inlier RMS 0.363 px, 100% of traced rows within 10 px
+#
+# Two independent confirmations fall out of that fit: sx/sy = 0.99933 (the oval is
+# drawn to true, isotropic NE-II proportions), and the fitted graticule reproduces
+# the map's own printed degree labels to ~2 px. Deriving the numbers from the
+# projection rather than from feature guesses is what makes the reprojection
+# reproducible; ``worldgen/reproject.py`` re-fits them from the committed control
+# points in ``tools/registration/ljzbtm288r891.json`` on every run.
 
-TERRAQUEOUS_OVAL = {"left": 150, "right": 3850, "top": 95, "bottom": 2045}
+TERRAQUEOUS_OVAL = {"left": 131, "right": 3869, "top": 129, "bottom": 2130}
 
 # ---------------------------------------------------------------------------
 # Feature canvas anchors (approximate S1 seeds)
 # ---------------------------------------------------------------------------
 #
-# Canvas px for recognizable Known World features, derived by treating the
-# Terraqueous oval as if it were equirectangular in its central band (a good
-# approximation near the equator/central meridian, degrading toward the
-# edges/poles). Every registration record pins its control points to these SAME
-# positions, so the mosaic is internally consistent regardless of per-feature
-# error. **Approximate by design** — S2's real NE-II reprojection plus the visual
-# overlay QA pass refine them; they are seeds, not survey coordinates.
+# Canvas px for recognizable Known World features. Every registration record pins
+# its control points to these SAME positions, so the mosaic stays internally
+# consistent regardless of per-feature error.
+#
+# **Refined in S2 (2026-07-23).** S1 seeded these by treating the Terraqueous oval
+# as if it were equirectangular in its central band — an approximation that
+# degrades badly toward the edges. With the real NE-II fit available, each feature
+# the Terraqueous registration had a source pick for was pushed back through the
+# true projection (source px -> lon/lat -> canvas px). The corrections were large:
+# 106 px for the Old World, 283 px for Cathay, 317 px for Naggaroth — i.e. the
+# equirectangular approximation was worth up to ~4 degrees of longitude out
+# toward the limbs, exactly as expected. Features without their own Terraqueous
+# pick were shifted by their nearest refined neighbour's correction, so the set
+# moves as a whole rather than tearing.
+#
+# Still approximate: the underlying source picks are hand-placed to maybe +-30
+# source px (~55 canvas px). These anchor *regional map placement*, not the
+# coastline — the coastline comes from the sub-pixel-registered projection.
 
 ANCHORS: dict[str, tuple[int, int]] = {
-    "naggaroth":          (2125, 695),
-    "ulthuan_ring":       (2834, 1205),
-    "lustria":            (2280, 2216),
-    "norsca":             (4118, 491),
-    "old_world_empire":   (4207, 714),
-    "estalia":            (3764, 974),
-    "araby":              (3653, 1456),
-    "land_of_the_dead":   (4207, 1585),
-    "southland":          (4340, 2123),
-    "dark_lands":         (4871, 788),
-    "dragon_isles":       (5137, 1493),
-    "ogre_kingdoms":      (5602, 695),
-    "grand_cathay":       (6266, 788),
-    "kingdoms_of_ind":    (5912, 1493),
-    "kingdoms_of_kuresh": (6199, 1827),
-    "nippon":             (7284, 974),
+    "naggaroth":          (1826, 590),
+    "ulthuan_ring":       (2789, 1103),
+    "lustria":            (2235, 2114),
+    "norsca":             (4125, 370),
+    "old_world_empire":   (4224, 610),
+    "estalia":            (3781, 870),
+    "araby":              (3654, 1350),
+    "land_of_the_dead":   (4208, 1479),
+    "southland":          (4341, 2017),
+    "dark_lands":         (4966, 686),
+    "dragon_isles":       (5232, 1391),
+    "ogre_kingdoms":      (5866, 593),
+    "grand_cathay":       (6530, 686),
+    "kingdoms_of_ind":    (6176, 1391),
+    "kingdoms_of_kuresh": (6463, 1725),
+    "nippon":             (7527, 873),
 }

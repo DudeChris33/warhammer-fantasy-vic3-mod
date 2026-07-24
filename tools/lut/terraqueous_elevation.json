@@ -1,0 +1,30 @@
+{
+  "source": "ljzbtm288r891.jpg",
+  "measured": "2026-07-23",
+  "legend_bar": {
+    "rows": [2846, 2868],
+    "cols": [1358, 2639],
+    "bands": 14,
+    "note": "The 'metres' diverging ramp under the title block. Bar bounds were found by scanning outward from the bar core until the paper colour resumed (left border rule at x~1356, right at x~2640); the 14 swatches are equal width (91.5 px), which reproduces the plateau spacing measured off the colour profile. Each rgb below is the mean of the middle 40% of its swatch across rows 2846..2868, so JPEG ringing at the swatch seams is excluded (per-channel sd 1.0-4.3)."
+  },
+  "bands": [
+    {"rgb": [210, 209, 197], "low_m": -9000, "high_m": -7000, "label": "< -7000"},
+    {"rgb": [182, 190, 179], "low_m": -7000, "high_m": -5000, "label": "-7000..-5000"},
+    {"rgb": [164, 181, 171], "low_m": -5000, "high_m": -3000, "label": "-5000..-3000"},
+    {"rgb": [145, 159, 150], "low_m": -3000, "high_m": -1000, "label": "-3000..-1000"},
+    {"rgb": [128, 146, 135], "low_m": -1000, "high_m": -200, "label": "-1000..-200"},
+    {"rgb": [121, 135, 127], "low_m": -200, "high_m": 0, "label": "-200..0"},
+    {"rgb": [167, 171, 136], "low_m": 0, "high_m": 200, "label": "0..200"},
+    {"rgb": [201, 197, 160], "low_m": 200, "high_m": 500, "label": "200..500"},
+    {"rgb": [224, 210, 165], "low_m": 500, "high_m": 1000, "label": "500..1000"},
+    {"rgb": [213, 183, 151], "low_m": 1000, "high_m": 2000, "label": "1000..2000"},
+    {"rgb": [206, 161, 137], "low_m": 2000, "high_m": 3000, "label": "2000..3000"},
+    {"rgb": [174, 113, 109], "low_m": 3000, "high_m": 5000, "label": "3000..5000"},
+    {"rgb": [160, 89, 86], "low_m": 5000, "high_m": 7000, "label": "5000..7000"},
+    {"rgb": [142, 64, 57], "low_m": 7000, "high_m": 9000, "label": "> 7000"}
+  ],
+  "sea_band_count": 6,
+  "paper_rgb": [236, 232, 218],
+  "paper_elevation_m": 300,
+  "notes": "Bands 0..5 are ocean, 6..13 are land (the legend's own 0 m break falls between band 5 and band 6). The outermost open-ended bands are given a nominal 2000 m width so a band midpoint exists for them. 'paper_rgb' is the un-inked page colour: the Terraqueous oval deliberately leaves the polar Chaos Wastes blank, so a pixel matching paper inside the canvas is *land* (polar waste), not sea - see worldgen/lut.py."
+}

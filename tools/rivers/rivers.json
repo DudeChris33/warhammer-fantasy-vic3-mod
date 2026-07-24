@@ -1,0 +1,265 @@
+{
+  "_comment": "v1 canon rivers, traced against the reprojected coastline + the Empire rivers map. Endpoints snapped to valid mask pixels by author_rivers.py; courses are best-effort v1 (refined in S6). points are source-first.",
+  "streams": [
+    {
+      "name": "Reik",
+      "mouth": "sea",
+      "width": 6,
+      "points": [
+        [
+          4300,
+          780
+        ],
+        [
+          4235,
+          735
+        ],
+        [
+          4175,
+          692
+        ],
+        [
+          4120,
+          600
+        ],
+        [
+          4085,
+          521
+        ]
+      ]
+    },
+    {
+      "name": "Talabec",
+      "mouth": "confluence",
+      "width": 4,
+      "points": [
+        [
+          4460,
+          655
+        ],
+        [
+          4372,
+          672
+        ],
+        [
+          4278,
+          690
+        ],
+        [
+          4189,
+          702
+        ]
+      ]
+    },
+    {
+      "name": "Stir",
+      "mouth": "confluence",
+      "width": 4,
+      "points": [
+        [
+          4415,
+          832
+        ],
+        [
+          4356,
+          772
+        ],
+        [
+          4301,
+          686
+        ]
+      ]
+    },
+    {
+      "name": "Aver",
+      "mouth": "confluence",
+      "width": 3,
+      "points": [
+        [
+          4362,
+          912
+        ],
+        [
+          4332,
+          852
+        ],
+        [
+          4353,
+          768
+        ]
+      ]
+    },
+    {
+      "name": "Grismerie",
+      "mouth": "sea",
+      "width": 4,
+      "points": [
+        [
+          3860,
+          800
+        ],
+        [
+          3799,
+          782
+        ],
+        [
+          3747,
+          759
+        ]
+      ]
+    },
+    {
+      "name": "Lynsk",
+      "mouth": "sea",
+      "width": 4,
+      "points": [
+        [
+          4610,
+          478
+        ],
+        [
+          4530,
+          446
+        ],
+        [
+          4470,
+          412
+        ],
+        [
+          4479,
+          346
+        ]
+      ]
+    },
+    {
+      "name": "Urskoy",
+      "mouth": "confluence",
+      "width": 3,
+      "points": [
+        [
+          4640,
+          532
+        ],
+        [
+          4560,
+          486
+        ],
+        [
+          4494,
+          426
+        ]
+      ]
+    },
+    {
+      "name": "Blood_River",
+      "mouth": "sea",
+      "width": 4,
+      "points": [
+        [
+          4430,
+          1255
+        ],
+        [
+          4360,
+          1200
+        ],
+        [
+          4300,
+          1150
+        ],
+        [
+          4222,
+          1130
+        ]
+      ]
+    },
+    {
+      "name": "River_Ruin",
+      "mouth": "sea",
+      "width": 4,
+      "points": [
+        [
+          4985,
+          715
+        ],
+        [
+          4900,
+          845
+        ],
+        [
+          4815,
+          1000
+        ],
+        [
+          4772,
+          1195
+        ]
+      ]
+    },
+    {
+      "name": "Amaxon",
+      "mouth": "sea",
+      "width": 4,
+      "points": [
+        [
+          2140,
+          2150
+        ],
+        [
+          2320,
+          2115
+        ],
+        [
+          2460,
+          2100
+        ],
+        [
+          2594,
+          2104
+        ]
+      ]
+    },
+    {
+      "name": "Vitae",
+      "mouth": "sea",
+      "width": 4,
+      "points": [
+        [
+          4520,
+          1990
+        ],
+        [
+          4410,
+          2075
+        ],
+        [
+          4320,
+          2160
+        ],
+        [
+          4280,
+          2202
+        ]
+      ]
+    },
+    {
+      "name": "Mortis",
+      "mouth": "sea",
+      "width": 3,
+      "points": [
+        [
+          4560,
+          2100
+        ],
+        [
+          4610,
+          2055
+        ],
+        [
+          4693,
+          2028
+        ]
+      ]
+    }
+  ]
+}

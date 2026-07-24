@@ -37,7 +37,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import raster, schema, statefile  # noqa: E402
+from worldgen import composite, ingest, raster, reproject, schema, segment, sources, statefile  # noqa: E402
 from worldgen.raster import (  # noqa: E402
     ColorAllocator,
     color_to_hex,
@@ -54,6 +54,21 @@ from worldgen.statefile import ProvinceInfo, compute_centroid, pick_hubs  # noqa
 TOOLS_DIR = Path(__file__).resolve().parent
 WORLD_DIR = TOOLS_DIR / "fixtures" / "world"
 EXPECTED_DIR = TOOLS_DIR / "fixtures" / "expected"
+
+# The S2 ingestion fixture: a synthetic whole-world source (our own pixels, so it
+# is committed and runs on a clean clone) driven through the *same* ingestion core
+# the real generator uses (worldgen.ingest), at a tiny canvas.
+INGEST_DIR = TOOLS_DIR / "fixtures" / "ingest"
+INGEST_MANIFEST = INGEST_DIR / "SOURCES.md"
+INGEST_REG_DIR = INGEST_DIR / "registration"
+INGEST_LUT = INGEST_DIR / "lut.json"
+INGEST_EXPECTED = INGEST_DIR / "expected"
+
+#: Fixture canvas — keeps the real canvas' ~2.266 aspect so lat/lon scaling is
+#: representative; the heightmap is exactly 2x, exercising the upscale-to-mask.
+INGEST_CANVAS = (512, 226)
+INGEST_HEIGHTMAP = (1024, 452)
+INGEST_BLOCK_ROWS = 64
 
 # The fixture uses a tiny canvas (the real map is map_config.PROVINCES_SIZE).
 FIXTURE_CANVAS = (128, 64)  # (width, height)
@@ -395,6 +410,196 @@ def _write_text(path: Path, text: str, bom: bool = False) -> None:
 
 
 # ---------------------------------------------------------------------------
+# S2 ingestion fixture: the source-driven front-end, offline and byte-pinned
+# ---------------------------------------------------------------------------
+
+def build_ingest(out_dir: Path) -> None:
+    """Drive the synthetic source through the real ingestion core into ``out_dir``.
+
+    Deliberately calls the same ``worldgen.ingest`` functions the whole-world
+    generator does — classify/de-ink/despeckle, reproject, clean, encode — so a
+    regression in any of them trips this fixture. The source is loaded through the
+    fixture manifest's SHA-256 guard, exactly as the real run loads its sources,
+    so the verify path is covered too.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    elut = schema.load_elevation_lut(INGEST_LUT)
+    regs = schema.load_registrations(INGEST_REG_DIR)
+    if len(regs) != 1:
+        raise RuntimeError(f"ingest fixture expects exactly one registration, found {len(regs)}")
+    reg = regs[0]
+
+    rgb = sources.load_source_image(reg.source, sources_dir=INGEST_DIR, manifest_path=INGEST_MANIFEST)
+
+    # The synthetic world tiles the globe, so despeckle is wrap-aware; its
+    # features are large relative to a 256 px source, so a small blob threshold
+    # keeps them while still removing the painted speckle.
+    fields = ingest.classify_source(rgb, elut, majority=3, min_blob=8, wrap_x=True)
+    fit = reproject.fit_parametric(reg)
+
+    cw, ch = INGEST_CANVAS
+    land_raw = ingest.reproject_plane(reg, fit, fields.land, cw, ch,
+                                      block_rows=INGEST_BLOCK_ROWS, order=1) > 0.5
+    land = segment.clean_land_mask(land_raw, min_island_area=8, min_lake_area=8,
+                                   close_radius=1, open_radius=1, wrap_x=True)
+    raster.write_mask_png(out_dir / "land_sea_mask.png", land)
+
+    hw, hh = INGEST_HEIGHTMAP
+    height = np.empty((hh, hw), dtype=np.uint16)
+    for y0 in range(0, hh, INGEST_BLOCK_ROWS):
+        y1 = min(hh, y0 + INGEST_BLOCK_ROWS)
+        rows = np.arange(y0, y1)
+        sx, sy = ingest.clamped_source_coords(reg, fit, rows, hw, hh)
+        elev = reproject.resample(fields.elev, sx, sy, order=1).astype(np.float32)
+        blk_land = ingest.upscale2_rows(land, y0, y1)
+        height[y0:y1] = ingest.encode_heightmap(
+            elev, blk_land, sea_level=map_config.HEIGHT_SEA_LEVEL,
+            units_per_metre=map_config.HEIGHT_UNITS_PER_METRE,
+            shore_margin=map_config.HEIGHT_SHORE_MARGIN)
+    raster.write_gray16_png(out_dir / "heightmap.png", height)
+
+    _write_ingest_digest(out_dir / "ingest_stats.txt", reg, fields, land, height)
+
+
+def _write_ingest_digest(path: Path, reg, fields, land: np.ndarray, height: np.ndarray) -> None:
+    """A tiny human-readable digest, so the golden diff is legible as well as byte-exact.
+
+    Everything here is an integer or an exactly-representable value — no floats
+    that could differ in their last digit between platforms and break the
+    byte-exact golden compare.
+    """
+    stats = segment.mask_stats(land, wrap_x=True)
+    lo = map_config.HEIGHT_SEA_LEVEL + map_config.HEIGHT_SHORE_MARGIN
+    hi = map_config.HEIGHT_SEA_LEVEL - map_config.HEIGHT_SHORE_MARGIN
+    lines = [
+        f"source                {reg.source}",
+        f"projection            {reg.projection}",
+        f"ink_source_px         {int(fields.ink.sum())}",
+        f"land_bodies           {stats['land_bodies']}",
+        f"water_bodies          {stats['water_bodies']}",
+        f"land_px               {int(land.sum())}",
+        f"heightmap_min         {int(height.min())}",
+        f"heightmap_max         {int(height.max())}",
+        f"land_at_or_above_lo   {bool((height[height >= map_config.HEIGHT_SEA_LEVEL] >= lo).all())}",
+        f"sea_at_or_below_hi    {bool((height[height < map_config.HEIGHT_SEA_LEVEL] <= hi).all())}",
+        "",
+    ]
+    path.write_bytes("\n".join(lines).encode("utf-8"))
+
+
+def _update_ingest_manifest() -> None:
+    """Refresh the fixture manifest's dims/bytes/SHA for the committed source.
+
+    Deliberately does *not* reuse ``sources.update_manifest``: that sweeps every
+    file in its directory, and the fixture dir also holds ``make_source.py``,
+    ``lut.json`` and this manifest, which must not become manifest rows. This only
+    refreshes rows already declared in the fixture manifest.
+    """
+    md = INGEST_MANIFEST.read_text(encoding="utf-8")
+    rows = []
+    for r in sources.parse_manifest(md):
+        p = INGEST_DIR / r.file
+        rows.append(sources.ManifestRow(
+            r.file, sources.image_dims(p), f"{p.stat().st_size:,}",
+            sources.sha256_of(p), r.origin, r.role, r.registered))
+    INGEST_MANIFEST.write_text(
+        sources._splice_manifest(md, sources.render_table(rows)), encoding="utf-8")
+    print(f"fixture manifest refreshed: {INGEST_MANIFEST}")
+
+
+def check_ingest() -> int:
+    """Determinism + golden + manifest-verify for the ingestion fixture."""
+    errors = sources.verify(sources_dir=INGEST_DIR, manifest_path=INGEST_MANIFEST,
+                            registration_dir=INGEST_REG_DIR)
+    if errors:
+        print("INGEST manifest verification failed:", file=sys.stderr)
+        for e in errors:
+            print(f"  - {e}", file=sys.stderr)
+        return 1
+    print("ingest: fixture manifest SHA-256 + registration checks passed.")
+
+    with tempfile.TemporaryDirectory(prefix="wh_ingest_") as tmp:
+        run1, run2 = Path(tmp) / "run1", Path(tmp) / "run2"
+        build_ingest(run1)
+        build_ingest(run2)
+        det = _diff(_snapshot(run1), _snapshot(run2))
+        if det:
+            print("INGEST DETERMINISM FAILURE:", file=sys.stderr)
+            for p in det:
+                print(f"  - {p}", file=sys.stderr)
+            return 1
+        print("ingest: two runs are byte-identical.")
+
+        if not INGEST_EXPECTED.is_dir():
+            print(f"no ingest golden at {INGEST_EXPECTED}; run --update first.", file=sys.stderr)
+            return 1
+        reg = _diff(_snapshot(run1), _snapshot(INGEST_EXPECTED))
+        if reg:
+            print("INGEST REGRESSION — output differs from committed golden:", file=sys.stderr)
+            for p in reg:
+                print(f"  - {p}", file=sys.stderr)
+            return 1
+        print("ingest: output matches committed golden.")
+    return 0
+
+
+def _selfcheck_rivers() -> None:
+    """Rasterize + validate a tiny synthetic river network (no golden needed).
+
+    Covers worldgen.rivers end to end: a trunk reaching the sea, a tributary
+    merging into it, and — the part most worth pinning — that an invalid geometry
+    (a mouth stranded inland) is *rejected*, so the generator's safety net cannot
+    rot into a no-op.
+    """
+    from worldgen import rivers as rl
+
+    land = np.ones((40, 60), dtype=bool)
+    land[:, 55:] = False  # a sea strip on the right edge
+    palette = rl.RiverPalette({"land": rl.LAND, "sea": rl.SEA, "source": rl.SOURCE},
+                              (3, 4, 6, 8), [(0, 0, 0)] * 256)
+
+    trunk = schema.RiverStream("trunk", [(10, 20), (30, 20), (54, 20)], "sea", 6)
+    trib = schema.RiverStream("trib", [(25, 5), (28, 14), (30, 20)], "confluence", 4)
+    idx = rl.rasterize([trunk, trib], land, palette, wrap_x=False)
+    assert int((idx == rl.SOURCE).sum()) == 2, "one source per stream"
+    assert (idx[:, 55:] == rl.SEA).all(), "sea strip preserved"
+    assert rl.count_2x2_blocks(idx, wrap_x=False) <= rl.MAX_2X2_BLOCKS
+
+    stranded = schema.RiverStream("bad", [(10, 30), (20, 30), (30, 30)], "sea", 3)
+    try:
+        rl.rasterize([stranded], land, palette, wrap_x=False)
+    except rl.RiverError:
+        pass
+    else:  # pragma: no cover
+        raise AssertionError("rivers must reject a sea mouth that never reaches water")
+
+
+def _selfcheck_composite() -> None:
+    """Precedence resolution + tie rejection for worldgen.composite."""
+    shape = (4, 4)
+    base = composite.Mosaic(shape)
+    lo = np.zeros(shape, dtype=np.uint8)
+    hi = np.ones(shape, dtype=np.uint8) * 9
+    valid_all = np.ones(shape, dtype=bool)
+    half = np.zeros(shape, dtype=bool)
+    half[:, :2] = True
+    base.add(composite.Layer("lo", 1, lo, valid_all))
+    base.add(composite.Layer("hi", 5, hi, half))
+    out, covered = base.resolve()
+    assert covered.all(), "one full-coverage layer must cover everything"
+    assert (out[:, :2] == 9).all(), "higher precedence must win where it is valid"
+    assert (out[:, 2:] == 0).all(), "lower precedence fills the rest"
+    # A precedence tie is rejected — the winner would depend on insertion order.
+    try:
+        composite.Mosaic(shape).add(composite.Layer("a", 1, lo, valid_all)) \
+            .add(composite.Layer("b", 1, hi, valid_all))
+    except composite.CompositeError:
+        pass
+    else:  # pragma: no cover
+        raise AssertionError("composite must reject two layers at the same precedence")
+
+
+# ---------------------------------------------------------------------------
 # Self-check: wrap-aware distance across the seam
 # ---------------------------------------------------------------------------
 
@@ -439,6 +644,10 @@ def _diff(a: dict[str, bytes], b: dict[str, bytes]) -> list[str]:
 
 def run_check() -> int:
     _selfcheck_wrap()
+    _selfcheck_composite()
+    print("composite: precedence + tie-rejection self-check passed.")
+    _selfcheck_rivers()
+    print("rivers: rasterize + topology-validation self-check passed.")
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
 
@@ -484,18 +693,31 @@ def run_check() -> int:
             print(f"  - {e}", file=sys.stderr)
         return 1
     print("validate_map: all checks passed.")
+
+    print()
+    rc = check_ingest()
+    if rc != 0:
+        return rc
+
     print("\nFIXTURE OK.")
     return 0
 
 
 def run_update() -> int:
     _selfcheck_wrap()
+    _selfcheck_composite()
+    _selfcheck_rivers()
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
     if EXPECTED_DIR.exists():
         shutil.rmtree(EXPECTED_DIR)
     build_map(world, EXPECTED_DIR, width, height, map_config.WRAP_X, map_config.SEED)
     print(f"wrote golden outputs to {EXPECTED_DIR}")
+
+    if INGEST_EXPECTED.exists():
+        shutil.rmtree(INGEST_EXPECTED)
+    build_ingest(INGEST_EXPECTED)
+    print(f"wrote ingest golden outputs to {INGEST_EXPECTED}")
     return 0
 
 
@@ -504,7 +726,12 @@ def main(argv: list[str] | None = None) -> int:
     group = parser.add_mutually_exclusive_group(required=True)
     group.add_argument("--check", action="store_true", help="regenerate, diff golden, run twice, validate")
     group.add_argument("--update", action="store_true", help="(re)write the golden outputs")
+    group.add_argument("--update-fixture-manifest", action="store_true",
+                       help="refresh the ingestion fixture's SHA-256 manifest (after make_source.py)")
     args = parser.parse_args(argv)
+    if args.update_fixture_manifest:
+        _update_ingest_manifest()
+        return 0
     return run_update() if args.update else run_check()
 
 

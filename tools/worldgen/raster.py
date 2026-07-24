@@ -289,3 +289,81 @@ def read_rgb_png(path) -> np.ndarray:
     """Read a PNG as an ``(H, W, 3)`` uint8 array (forces RGB)."""
     with Image.open(path) as im:
         return np.asarray(im.convert("RGB"), dtype=np.uint8)
+
+
+def write_gray16_png(path, gray: np.ndarray) -> None:
+    """Write an ``(H, W)`` uint16 array as a **true 16-bit** grayscale PNG.
+
+    ``map_data/heightmap.png`` must be 16-bit or the in-game map editor refuses
+    to pack it — an 8-bit file silently loses the entire vertical range. Pillow
+    writes 16-bit grayscale only from mode ``I;16``, and only when the array is
+    little-endian uint16, so both are forced here rather than trusted. Vanilla's
+    own ``heightmap.png`` reads back as mode ``I;16``; so does this.
+    """
+    arr = np.ascontiguousarray(gray, dtype="<u2")
+    if arr.ndim != 2:
+        raise ValueError(f"expected an (H, W) uint16 array, got shape {arr.shape}")
+    im = Image.frombytes("I;16", (arr.shape[1], arr.shape[0]), arr.tobytes())
+    im.save(str(path), format="PNG", optimize=False, compress_level=6)
+
+
+def read_gray16_png(path) -> np.ndarray:
+    """Read a 16-bit grayscale PNG as an ``(H, W)`` uint16 array."""
+    with Image.open(path) as im:
+        if im.mode not in ("I;16", "I;16L", "I;16B", "I"):
+            raise ValueError(f"{path}: expected a 16-bit grayscale PNG, got mode {im.mode}")
+        return np.asarray(im, dtype=np.uint16)
+
+
+def write_mask_png(path, mask: np.ndarray) -> None:
+    """Write a boolean mask as a 1-bit PNG (mode ``1``).
+
+    Used for the committed ``land_sea_mask.png``: at canvas size a 1-bit file is
+    a couple of hundred KB where an RGB one would be tens of MB, and the
+    round-trip is exact, which matters because this mask — not the heightmap — is
+    what defines the coastline every later phase builds on.
+    """
+    arr = np.ascontiguousarray(mask, dtype=bool)
+    if arr.ndim != 2:
+        raise ValueError(f"expected an (H, W) boolean array, got shape {arr.shape}")
+    Image.fromarray(arr).save(str(path), format="PNG", optimize=False, compress_level=6)
+
+
+def read_mask_png(path) -> np.ndarray:
+    """Read a 1-bit mask PNG back as a boolean ``(H, W)`` array."""
+    with Image.open(path) as im:
+        return np.asarray(im.convert("1"), dtype=bool)
+
+
+def write_indexed_png(path, index: np.ndarray, palette: list[Color]) -> None:
+    """Write an ``(H, W)`` uint8 index array as a palette PNG (mode ``P``).
+
+    ``map_data/rivers.png`` is a palette image whose *index* values are semantic
+    (source / merge / split / flow width / land / sea), so the file must keep its
+    indices exactly — any conversion through RGB would let a re-save remap them.
+    The palette is padded to the full 256 entries because Pillow writes only as
+    many entries as it is given, and vanilla's file carries all 256.
+    """
+    arr = np.ascontiguousarray(index, dtype=np.uint8)
+    if arr.ndim != 2:
+        raise ValueError(f"expected an (H, W) uint8 array, got shape {arr.shape}")
+    if len(palette) > 256:
+        raise ValueError(f"palette has {len(palette)} entries, max 256")
+    flat: list[int] = []
+    for c in palette:
+        flat.extend(int(v) for v in c)
+    flat.extend([0] * (768 - len(flat)))
+    im = Image.fromarray(arr, mode="P")
+    im.putpalette(flat)
+    im.save(str(path), format="PNG", optimize=False, compress_level=6)
+
+
+def read_indexed_png(path) -> tuple[np.ndarray, list[Color]]:
+    """Read a palette PNG as ``(index_array, palette)`` without touching indices."""
+    with Image.open(path) as im:
+        if im.mode != "P":
+            raise ValueError(f"{path}: expected a palette PNG, got mode {im.mode}")
+        flat = im.getpalette() or []
+        flat = list(flat) + [0] * (768 - len(flat))
+        palette = [(flat[i * 3], flat[i * 3 + 1], flat[i * 3 + 2]) for i in range(256)]
+        return np.asarray(im, dtype=np.uint8), palette

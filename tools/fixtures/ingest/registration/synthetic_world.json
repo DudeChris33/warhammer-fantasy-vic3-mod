@@ -1,0 +1,21 @@
+{
+  "source": "synthetic_world.png",
+  "role": "fixture_whole_world",
+  "projection": "equirectangular",
+  "precedence": 20,
+  "layer_precedence": {
+    "coastline": 90,
+    "relief": 20
+  },
+  "crop": [0, 0, 256, 128],
+  "footprint": [0, 0, 8192, 3616],
+  "notes": "Registers the synthetic fixture world edge-to-edge on the canvas. Uses the 'equirectangular' projection deliberately: after the whole-world satellite render was de-registered in S2 that code path lost its only production consumer, and an untested branch in a reprojection module is exactly the kind of thing that rots silently. The four corners fix the placement; the two interior points are redundant with them by construction, so fit_parametric's reported residual stays a real conditioning check rather than a fitted-away one.",
+  "control_points": [
+    {"source": [0, 0], "canvas": [0, 0], "note": "NW corner"},
+    {"source": [256, 0], "canvas": [8192, 0], "note": "NE corner (wraps)"},
+    {"source": [0, 128], "canvas": [0, 3616], "note": "SW corner"},
+    {"source": [256, 128], "canvas": [8192, 3616], "note": "SE corner (wraps)"},
+    {"source": [128, 64], "canvas": [4096, 1808], "note": "centre"},
+    {"source": [64, 32], "canvas": [2048, 904], "note": "NW quarter"}
+  ]
+}
