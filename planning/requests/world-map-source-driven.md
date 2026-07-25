@@ -520,8 +520,123 @@ it to `planning/done/` waits for S6.
     INFO items deferred to S2: exact-pin `scipy`/`scikit-image` (or add a lock)
     before real reprojection lands; per-layer (relief vs. boundary) precedence.
 
-### S2–S6 — pending
+### S2 — reproject + whole-world heightmap / coastline / rivers ✅ built (2026-07-24), **game gate pending**
 
-Not yet built. **S2** (reproject + whole-world heightmap / coastline / rivers) is
-the next `/build`; its gate needs the in-game map-editor heightmap repack + boot
-to the main menu (a desktop-client step per `tools/MAP_RUNBOOK.md`). S3–S6 follow.
+- **Commits**: `64bf2f0` — "World map S2: reproject + whole-world heightmap /
+  coastline / rivers" (40 files); `8e2a371` — "derive rivers from terrain
+  drainage, not hand-drawn lines" (11 files).
+- **Summary**:
+  - **Reprojection**: `tools/worldgen/reproject.py` — Natural Earth II forward
+    polynomial (constants from PROJ's `natearth2.cpp`) + a control-point
+    thin-plate warp. The Terraqueous oval's projection was **measured, not
+    assumed**: its drawn boundary was traced across 2001 rows and the NE-II
+    envelope least-squares fitted, giving centre (1999.55, 1129.29), scale
+    702.21/702.69, **inlier RMS 0.363 px**. Two independent confirmations —
+    `sx/sy = 0.99933` (isotropic, as a true NE-II rendering must be) and the
+    fitted graticule landing within ~2 px of the map's own printed degree labels.
+    `tools/registration/ljzbtm288r891.json` was re-cut to exact graticule
+    crossings, and `config/canvas_frame.ANCHORS` refined through the true
+    projection (corrections up to 317 px — S1's equirectangular approximation was
+    ~4° of longitude out toward the limbs).
+  - **Elevation**: `tools/lut/terraqueous_elevation.json` — the 14-band legend
+    ramp sampled from the source (per-channel sd 1.0–4.3); `worldgen/lut.py`
+    classifies, then **erases the map's own lettering and graticule** (ink
+    classifies as the >7000 m swatch — measured 6003 m mean against 822 m for
+    land overall — so without this every place name embossed into the heightmap
+    as a mountain range) and inpaints from non-ink neighbours.
+  - **Heightmap**: `map_data/heightmap.png`, 16384×7232 true 16-bit. The uint16
+    encoding was **measured from vanilla** rather than invented: splitting the
+    shipped heightmap on the real land/sea mask puts sea level at **4884** and
+    the scale at **5.5 units/m** (which places Everest at 53548 against vanilla's
+    observed max of 53469). TW3 relief is composited as *zero-mean* high-frequency
+    detail on land only, so it sharpens ridges but cannot move a coastline.
+  - **Coastline**: committed `tools/derived/land_sea_mask.png` — 27.85% land, 36
+    land bodies, 11 water bodies. The mask is authored once at canvas resolution
+    and forced onto the heightmap (nearest 2×, exact by construction), so the
+    relief shoreline can never contradict the mask S3 cuts provinces from.
+  - **Rivers**: `map_data/rivers.png` — **derived from the terrain**, not drawn.
+    `worldgen/hydro.py` (priority-flood depression fill → D8 flow direction →
+    flow accumulation → headwaters) yields the drainage network; 85,579 river px
+    across ~1,300 branches, vanilla palette (measured exactly from the shipped
+    file: 254=sea, 255=land, 0=source, 1=merge, 3–11 width ramp), 0 2×2 blocks.
+    Mouths meet the coast **by construction** — the same land mask produced both.
+  - **Toolchain rework**: `worldgen/ingest.py` holds the shared classify →
+    reproject → clean → encode core that *both* the real generator and the
+    fixture run (the generator does not live only in the test harness);
+    `raster.py` gained 16-bit gray / 1-bit mask / indexed-palette IO;
+    `composite.py` resolves layers by **per-layer** precedence (coastline vs
+    relief — closing the S1 review's deferred item) and rejects precedence ties;
+    `qa_overlay.py` renders the fidelity-QA overlays.
+  - **Fixture**: `tools/fixtures/ingest/` — a synthetic whole-world source of our
+    own pixels (so it is committed and runs on a clean clone) carrying every
+    feature the real pipeline must survive: seam-crossing landmass, lake, island,
+    label/graticule ink, speckle. Byte-exact goldens; plus composite and rivers
+    self-checks in `run_fixture.py`.
+- **Tests / gate (offline, all green)**:
+  - `python tools/worldgen/sources.py --verify` — manifest SHA-256 + registration
+    cross-checks pass.
+  - `python tools/run_fixture.py --check` — determinism, goldens, validators, the
+    new ingestion fixture, and the composite/rivers self-checks all pass.
+  - **All three generators byte-deterministic**: re-running
+    `generate_heightmap.py` / `generate_rivers.py` reproduces `heightmap.png`,
+    `rivers.png`, and `land_sea_mask.png` byte-for-byte (independently confirmed
+    by the security-review agent in fresh processes).
+  - **Fidelity QA**: the Terraqueous overlay shows the generated coastline
+    tracing every landmass, with the NE-II graticule resolving to a straight
+    orthogonal grid — the visual confirmation that the projection is right.
+- **⚠ Not yet done — the S2 game gate**: the in-game **map-editor heightmap
+  repack** + boot to the main menu with a clean `error.log`. Click-by-click steps
+  are in `tools/MAP_RUNBOOK.md` (§ S2). The map will *look* wrong at this gate
+  (WH relief under vanilla provinces) — that is the intended de-risk, isolating
+  the editor+boot loop before the S3 province overhaul.
+- **Decisions taken during the build** (deviations from the plan, with cause):
+  - **The satellite render was de-registered.** S1 gave it the "coarse global
+    frame anchor" role; measured, it does not register — sweeping latitude
+    half-span 60°–100° and longitude offset ±20° gave 63.9%–69.0% agreement with
+    **no peak**, against a 60.0% chance level. A correct registration produces a
+    sharp maximum. Its record was deleted rather than left committed-but-wrong
+    (the exact class of silently-wrong data the SHA guard exists to prevent); the
+    frame is now set by the 0.363 px NE-II fit. Its S1 crop was also wrong (the
+    letterbox is left/right, not top). Documented in `tools/SOURCES.md`.
+  - **Rivers are DEM-derived, superseding the plan's "traced from regional
+    sources".** Tracing was attempted and failed on measurement: the Old World
+    map's control-point warp is badly misregistered (visible in
+    `qa_map-the-old-world.png`), the Terraqueous river lines segment into ≤25 px
+    fragments, and the Empire map's rivers do not colour-separate. A first pass
+    of hand-authored polylines was built, shipped, and then **rejected by the
+    user as inadequate** — correctly; they were sparse and straight. Deriving the
+    drainage from the heightmap is both better-looking and structurally sound.
+  - **Canon river naming deferred to S6** (it already owned the naming pass). The
+    user annotated the Empire map with canon courses in red; it is recorded as a
+    **topology guide** (which channel is the Reik), not geometry, since the
+    courses come from the DEM. Stroke extraction is solved and documented:
+    difference the annotated map against the clean one, which isolates the
+    strokes and cancels the coats of arms (bright red in both).
+  - **`scipy`/`scikit-image` exact-pinned** (S1 review INFO item): the ingestion
+    fixture's goldens are byte-exact and these libraries' float output can differ
+    across versions.
+- **Post-build agent review**:
+  - *docs-updater* — updated `CLAUDE.md` (tools row, the now-false "only
+    `.gitkeep`" claim, `map_data/` in the build+test loop, a non-negotiable
+    against hand-editing generated bitmaps), `.claude/rules/testing.md` (the
+    generators + the ingestion fixture), and `tools/fixtures/README.md`.
+    Correctly left `docs/` and the scripting/loc rules alone — S2 adds no
+    `common/`/`localization/` content.
+  - *security-review* — **no MP-desync risk and no SHA-guard bypass**, verified
+    empirically rather than by reading: two independent real-process runs
+    reproduced the committed bitmaps exactly, and every `sources/` read goes
+    through `load_source_image`. Two WARNING-level latent validator gaps, **both
+    fixed in `8e2a371`**: (1) river vertices were not bounds-checked and
+    out-of-canvas ones were silently clipped, letting a *discontiguous* path pass
+    every check — now rejected at load, plus an 8-adjacency contiguity assertion;
+    (2) the 2×2-block rule was a raw count that could not distinguish real
+    junctions from a parallel run — now also gates on the longest contiguous run,
+    with both limits **calibrated against vanilla** (21 blocks, longest run 5)
+    after the first-cut limit was found to reject vanilla's own file.
+
+### S3–S6 — pending
+
+**S3** (provinces + states from the composited label mask) is the next `/build`,
+and can start from the committed `land_sea_mask.png` without re-running ingestion.
+S4 (scaffold + boot), S5 (terrain + visuals), S6 (regions + canon naming, now
+including river identification from the annotated Empire map) follow.
