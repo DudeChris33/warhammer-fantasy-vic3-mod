@@ -244,7 +244,7 @@ class RiverStream:
     width: int
 
     @classmethod
-    def from_dict(cls, d: dict, ctx: str) -> "RiverStream":
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "RiverStream":
         name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
         ctx = f"{ctx}({name})"
         points = _as_polygon(_require(d, "points", ctx), f"{ctx}.points", min_points=2)
@@ -254,16 +254,30 @@ class RiverStream:
         width = _as_int(_require(d, "width", ctx), f"{ctx}.width")
         if width not in RIVER_WIDTH_RAMP:
             raise SchemaError(f"{ctx}.width: expected one of {RIVER_WIDTH_RAMP}, got {width}")
+
+        # Bounds-check against the canvas when it is known. Without this a
+        # mistyped vertex is silently dropped by the rasterizer's clip, leaving a
+        # river that teleports across the gap — which passes every downstream
+        # check because none of them assert contiguity. Fail loudly at load
+        # instead, matching how ControlPoint rejects impossible coordinates.
+        if canvas is not None:
+            cw, ch = canvas
+            for i, (px, py) in enumerate(points):
+                if not (0 <= px <= cw and 0 <= py <= ch):
+                    raise SchemaError(
+                        f"{ctx}.points[{i}]: ({px}, {py}) is outside the canvas {cw}x{ch}"
+                    )
         return cls(name=name, points=points, mouth=mouth, width=width)
 
 
-def load_river_streams(path: Path) -> list[RiverStream]:
+def load_river_streams(path: Path, canvas: tuple[int, int] | None = None) -> list[RiverStream]:
     ctx = path.name
     data = _load_json(path)
     streams_raw = _require(data, "streams", ctx)
     if not isinstance(streams_raw, list) or not streams_raw:
         raise SchemaError(f"{ctx}.streams: expected a non-empty list")
-    streams = [RiverStream.from_dict(s, f"{ctx}.streams[{i}]") for i, s in enumerate(streams_raw)]
+    streams = [RiverStream.from_dict(s, f"{ctx}.streams[{i}]", canvas)
+               for i, s in enumerate(streams_raw)]
     names = [s.name for s in streams]
     dupes = {n for n in names if names.count(n) > 1}
     if dupes:

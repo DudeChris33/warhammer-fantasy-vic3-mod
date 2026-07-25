@@ -27,6 +27,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 import numpy as np
+from scipy import ndimage
 from skimage.draw import line as _bres_line
 
 from worldgen import raster, schema
@@ -235,6 +236,18 @@ def _validate(streams, paths, idx, land, wrap_x) -> None:
 
     for st in streams:
         path = paths[st.name]
+        # The path is one connected 8-adjacent run. Without this, an out-of-range
+        # or mistyped vertex whose pixels get clipped leaves a river that jumps a
+        # gap — and every other check here would still pass, because they only
+        # look at endpoints and per-pixel properties.
+        for i in range(1, len(path)):
+            (ax, ay), (bx, by) = path[i - 1], path[i]
+            dx = min(abs(ax - bx), w - abs(ax - bx)) if wrap_x else abs(ax - bx)
+            if max(dx, abs(ay - by)) > 1:
+                raise RiverError(
+                    f"{st.name}: path is not contiguous — ({ax}, {ay}) to ({bx}, {by}) "
+                    f"jumps {max(dx, abs(ay - by))} px (a clipped or mistyped vertex?)"
+                )
         # Every river pixel is on land (a river drawn across the sea is malformed).
         for (x, y) in path:
             if not land[y, x]:
@@ -253,30 +266,56 @@ def _validate(streams, paths, idx, land, wrap_x) -> None:
             if not any((nx, ny) in others for nx, ny in _neighbors8(mx, my, w, h, wrap_x)):
                 raise RiverError(f"{st.name}: confluence mouth ({mx}, {my}) touches no other stream")
 
-    n_blocks = count_2x2_blocks(idx, wrap_x)
-    # Vic3 tolerates incidental 2x2 blocks: its own shipped rivers.png has 21, all
-    # at wide-river bends and confluences. We only fail on a count high enough to
-    # mean a *systematic* fault — two rivers running adjacent for a stretch — which
-    # the junction thinner should already have prevented. A handful at genuine
-    # confluences is normal and left alone.
+    n_blocks, longest_run = measure_2x2_blocks(idx, wrap_x)
+    # Vic3 tolerates incidental 2x2 blocks: its own shipped rivers.png has 21, at
+    # wide-river bends and confluences. So a raw count alone is the wrong test —
+    # it cannot tell 20 blocks scattered across 20 real junctions from 20 in a row,
+    # which is what "two streams traced parallel instead of merging" looks like and
+    # is the actual defect worth catching. Gate on both: a generous global cap, and
+    # a much tighter cap on the longest *contiguous run* of blocks.
     if n_blocks > MAX_2X2_BLOCKS:
         raise RiverError(
             f"{n_blocks} 2x2 river blocks exceeds the tolerance of {MAX_2X2_BLOCKS} "
-            f"(vanilla ships 21) — two streams are probably running parallel"
+            f"(vanilla ships 21) — streams are probably running parallel"
+        )
+    if longest_run > MAX_2X2_RUN:
+        raise RiverError(
+            f"a run of {longest_run} connected 2x2 river blocks exceeds the limit of "
+            f"{MAX_2X2_RUN} — two streams run adjacent for a stretch instead of merging"
         )
 
 
-#: Above this, a 2x2-block count means a systematic authoring fault, not the
-#: incidental bends vanilla itself carries (21). Comfortably above vanilla's count.
+#: Above this, a 2x2-block count means a systematic fault, not the incidental
+#: bends vanilla itself carries (21). Comfortably above vanilla's count.
 MAX_2X2_BLOCKS = 30
+
+#: Longest run of *connected* 2x2 blocks. A parallel-running pair of streams
+#: produces one block per row, so a long run is the signature of that defect,
+#: whereas a genuine junction or wide-river bend produces only a few.
+#: Calibrated against vanilla, not guessed: the shipped 1.13.8 rivers.png has 21
+#: blocks with a longest run of **5**, so anything at or below 5 demonstrably
+#: occurs in cartography the engine itself ships. 8 leaves headroom above that
+#: while still catching a parallel run, which reaches into the tens.
+MAX_2X2_RUN = 8
+
+
+def measure_2x2_blocks(idx: np.ndarray, wrap_x: bool) -> tuple[int, int]:
+    """``(total 2x2 all-river blocks, largest connected run of them)``."""
+    is_river = ~np.isin(idx, [LAND, SEA])
+    b = np.roll(is_river, -1, axis=1) if wrap_x else np.pad(is_river[:, 1:], ((0, 0), (0, 1)))
+    block = is_river[:-1, :] & is_river[1:, :] & b[:-1, :] & b[1:, :]
+    total = int(block.sum())
+    if total == 0:
+        return 0, 0
+    lab, n = ndimage.label(block, structure=np.ones((3, 3)))
+    if n == 0:
+        return total, 0
+    return total, int(np.bincount(lab.ravel())[1:].max())
 
 
 def count_2x2_blocks(idx: np.ndarray, wrap_x: bool) -> int:
     """Number of 2x2 all-river blocks (rivers should be ~1px; a few are normal)."""
-    is_river = ~np.isin(idx, [LAND, SEA])
-    b = np.roll(is_river, -1, axis=1) if wrap_x else np.pad(is_river[:, 1:], ((0, 0), (0, 1)))
-    block = is_river[:-1, :] & is_river[1:, :] & b[:-1, :] & b[1:, :]
-    return int(block.sum())
+    return measure_2x2_blocks(idx, wrap_x)[0]
 
 
 def write_rivers_png(path, idx: np.ndarray, palette: RiverPalette) -> None:

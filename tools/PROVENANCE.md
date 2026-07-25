@@ -47,5 +47,6 @@ boundaries, and the date traced.
 | Region | Sources consulted | Phase | Date |
 |---|---|---|---|
 | Whole-world coastline + heightmap | Terraqueous Globe (NE-II reproject → LUT elevation + land/sea mask); TW3 stitched relief composited as high-frequency detail inside its footprint | S2 | 2026-07-23 |
-| v1 canon rivers (Reik/Talabec/Stir/Aver, Grismerie, Lynsk/Urskoy, Blood River, River Ruin, Amaxon, Vitae/Mortis) | *The Empire of Man* rivers map (Empire system topology) + the reprojected coastline (`land_sea_mask.png`) for mouths; courses hand-authored in `tools/rivers/rivers.json` and rasterized to a valid `rivers.png` | S2 | 2026-07-23 |
+| Whole-world river network | **Derived, not traced** — drainage computed from the committed `heightmap.png` + `land_sea_mask.png` (depression fill -> D8 flow direction -> flow accumulation). No source imagery contributes geometry, so no third-party cartography is embedded in the result; the rivers follow our own generated terrain. Supersedes the hand-authored v1 polylines. | S2 | 2026-07-24 |
+| Canon river *identification* (deferred to S6) | User-annotated *The Empire of Man* map (`TheEmpireRivers - drawn on.jpg`, canon courses drawn in red) — consulted as a **topology guide** for which DEM channel is the Reik/Talabec/Stir/Aver etc. Not warped, contributes no geometry. | S6 | pending |
 | _S1 fixtures use the synthetic `tools/fixtures/` world (invented, not derived from any source)._ | — | S1 | 2026-07-21 |

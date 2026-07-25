@@ -1,8 +1,13 @@
 # Fixture: synthetic world
 
-A tiny (128×64) hand-built world that exercises the whole generator + validator
-path offline, with **zero game dependency**. `tools/run_fixture.py` rasterizes
-`world/` into `expected/` and regression-checks it byte-for-byte.
+A tiny (128×64) hand-built world that exercises the province/state generator +
+validator path offline, with **zero game dependency**. `tools/run_fixture.py`
+rasterizes `world/` into `expected/` and regression-checks it byte-for-byte.
+
+The separate source-driven whole-world ingestion pipeline (heightmap/coastline/
+rivers, added S2) has its own fixture and README — see
+`tools/fixtures/ingest/README.md`. Both fixtures run under the same
+`tools/run_fixture.py --check` / `--update`.
 
 ## `world/` — committed input geometry
 
@@ -11,7 +16,7 @@ path offline, with **zero game dependency**. `tools/run_fixture.py` rasterizes
 | `coastlines/mainland.json` | Big rectangular landmass (holds ALPHA + BETA). |
 | `coastlines/driftland.json` | Landmass whose x extends past the canvas width (112→140) — it **wraps the `x=0` seam**. |
 | `coastlines/isle.json` | Small island (holds DELTA). |
-| `relief.json`, `rivers.json` | Schema-valid relief/river data (loaded + validated; heightmap/rivers rasterization is P2). |
+| `relief.json`, `rivers.json` | Schema-valid relief/river data for this fixture (loaded + validated; not rasterized to pixels here — the whole-world heightmap/rivers pipeline is the separate `tools/fixtures/ingest/` fixture above). |
 | `states/*.json` | The state-cell partition — see below. |
 
 ## The four land states + two sea zones

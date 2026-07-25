@@ -34,7 +34,8 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | File | Dims | Bytes | SHA-256 | Origin | Role | Registered |
 |---|---|---|---|---|---|---|
 | TheEmpire.webp | 1596x1024 | 682,992 | e19ad56e0b21023955f3ed91301073aba03efe08b4506b4d6f3e5b4fab51adff | Games Workshop — The Empire provinces map | Empire internal subdivision | yes |
-| TheEmpireRivers.jpg | 1920x1301 | 1,466,126 | 8c3f93454483dc261f933ad3d43530495cb11111071de2511669ac50f5ad2528 | Games Workshop / Warhammer Community — "The Empire of Man" map | Empire river system reference (Reik/Talabec/Stir/Aver) — consulted for the v1 river courses in tools/rivers/rivers.json, not warped | no |
+| TheEmpireRivers - drawn on.jpg | 1920x1301 | 1,463,260 | e4d4d67afb4705d7e7c139ecd5a0cd0233adff80100939328451b6ecce384ff4 | The above, with canon river courses drawn on in red by the user | Canon-river TOPOLOGY guide for the S6 naming pass — which DEM channel is which. Contributes no geometry (see below) | no |
+| TheEmpireRivers.jpg | 1920x1301 | 1,466,126 | 8c3f93454483dc261f933ad3d43530495cb11111071de2511669ac50f5ad2528 | Games Workshop / Warhammer Community — "The Empire of Man" map | Clean counterpart of the annotated map — differencing the two isolates the annotation | no |
 | Warhammer_olde_world_map.webp | 1434x975 | 442,484 | d8aad1d1697980aab21f95e5724a9f95d5889656cac73cb66dd5cab578d094f5 | Fan cartography — "Landes and Seas of the Worlde" | Naming + extent confirmation (S6 naming pass) | no |
 | images.steamusercontent.jpg | 637x358 | 43,099 | 8b90bae2e491a366a8c5deb3f1e8d9307dac6b8658d0fd7d62bb9c6de242d95b | Fan whole-world satellite/biome render (Steam Workshop) | DE-REGISTERED in S2 - does not register (see below) | no |
 | ljzbtm288r891.jpg | 4000x3256 | 2,292,545 | c4021e28d8d58bc3f91733df72ee9b7b398f922bb565b0478d3743446d8c15f3 | Fan cartography — "Terraqueous Globe", Kartografia Niepraktyczna 2022 | Whole-world heightmap (NE-II colour-to-height ramp) + coastline | yes |
@@ -56,6 +57,22 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | updated-warhammer-the-old-world-map-v0-eyiuahz1swhg1.webp | 640x938 | 135,766 | 4559b8beb215f976ef8aed1339ef94c36dcf2d40ccb9cb88cc863d8b5cac05da | Games Workshop — updated Old World relief map | Old World relief cross-check (S6) | no |
 | wahafa-world-map.jpg | 547x365 | 32,445 | 69f7f4a483dd1976234e1399c88e59225093db101d8af8ba2c974f62d6257bd1 | Fan cartography — "wahafa" whole-world map | Whole-world coastline / extent cross-reference (unregistered) | no |
 <!-- MANIFEST:END -->
+
+## The annotated Empire map (`TheEmpireRivers - drawn on.jpg`)
+
+The user drew the canon Empire river courses onto the GW map in bright red. It is
+a **topology guide for S6**, not a geometry source: it records which rivers exist
+and how they join, while the actual courses in `map_data/rivers.png` come from the
+heightmap's own drainage (see [PROVENANCE.md](PROVENANCE.md)). That split is
+deliberate — the annotation is freehand and the underlying map is a stylised
+illustration that does not register tightly, so letting it place pixels would put
+rivers off-valley; letting it *label* them cannot.
+
+Extracting the strokes is a solved step: **difference it against the clean
+`TheEmpireRivers.jpg`** (the same image without the annotation). The strokes are
+exactly what changed. This also disposes of the coats of arms, which are bright
+red in *both* images and therefore cancel — no colour threshold or shape
+heuristic survives contact with heraldry, but a difference does.
 
 ## De-registered in S2: `images.steamusercontent.jpg`
 

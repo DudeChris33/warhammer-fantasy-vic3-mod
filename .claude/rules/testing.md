@@ -15,9 +15,9 @@ Map text and bitmaps additionally have an **offline** validator — there is no
 reason to load the game to catch a duplicate province claim or a missing hub.
 One-time setup: create a local virtualenv and install the pinned deps — see
 `tools/requirements.txt` for the exact commands. Before committing anything
-under `map_data/` (province bitmap, `state_regions/`, `default.map`), the map
-localization, or the source-registration data (`tools/SOURCES.md`,
-`tools/registration/`), run:
+under `map_data/` (province bitmap, `heightmap.png`, `rivers.png`,
+`state_regions/`, `default.map`), the map localization, or the
+source-registration data (`tools/SOURCES.md`, `tools/registration/`), run:
 
 ```
 python tools/worldgen/sources.py --verify   # source manifest SHA-256 + registration cross-checks
@@ -32,6 +32,15 @@ committed SHA-256 manifest — a swapped or edited source that would silently
 change a committed bitmap fails here. Refreshing a source after an *intentional*
 change is the explicit `python tools/worldgen/sources.py --update-manifest`
 action, never a side effect of a generator run.
+
+`map_data/heightmap.png` and `map_data/rivers.png` are generated, not
+hand-authored: after an intentional source/LUT/registration change, regenerate
+them with `python tools/generate_heightmap.py` and `python
+tools/generate_rivers.py` and re-run the checks above before committing.
+`run_fixture.py --check` also regression-checks the source-driven ingestion
+pipeline itself (LUT classification, reprojection, segmentation, compositing,
+river rasterization) against a committed synthetic fixture
+(`tools/fixtures/ingest/`), independent of the real `sources/`.
 
 ## Regression rule
 
