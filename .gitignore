@@ -10,3 +10,6 @@
 # shipping the art. See planning/requests/world-map-source-driven.md (decision #2)
 # and tools/PROVENANCE.md.
 sources/
+
+*.log
+*.bak
