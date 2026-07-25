@@ -520,11 +520,12 @@ it to `planning/done/` waits for S6.
     INFO items deferred to S2: exact-pin `scipy`/`scikit-image` (or add a lock)
     before real reprojection lands; per-layer (relief vs. boundary) precedence.
 
-### S2 — reproject + whole-world heightmap / coastline / rivers ✅ built (2026-07-24), **game gate pending**
+### S2 — reproject + whole-world heightmap / coastline / rivers ✅ **COMPLETE (2026-07-25), game gate PASSED**
 
 - **Commits**: `64bf2f0` — "World map S2: reproject + whole-world heightmap /
   coastline / rivers" (40 files); `8e2a371` — "derive rivers from terrain
-  drainage, not hand-drawn lines" (11 files).
+  drainage, not hand-drawn lines" (11 files); `7b77a3c` — resolution;
+  `856df98` — "commit the map-editor heightmap pack — gate PASSED".
 - **Summary**:
   - **Reprojection**: `tools/worldgen/reproject.py` — Natural Earth II forward
     polynomial (constants from PROJ's `natearth2.cpp`) + a control-point
@@ -584,11 +585,32 @@ it to `planning/done/` waits for S6.
   - **Fidelity QA**: the Terraqueous overlay shows the generated coastline
     tracing every landmass, with the NE-II graticule resolving to a straight
     orthogonal grid — the visual confirmation that the projection is right.
-- **⚠ Not yet done — the S2 game gate**: the in-game **map-editor heightmap
-  repack** + boot to the main menu with a clean `error.log`. Click-by-click steps
-  are in `tools/MAP_RUNBOOK.md` (§ S2). The map will *look* wrong at this gate
-  (WH relief under vanilla provinces) — that is the intended de-risk, isolating
-  the editor+boot loop before the S3 province overhaul.
+- **✅ Game gate PASSED (2026-07-25, `856df98`)**: the user ran the map-editor
+  repack and launched the game. `error.log` came back **381 lines with zero
+  referencing this mod**, `map_data`, or `heightmap` — its contents were
+  pre-existing engine/DLC noise (`MISSING_DLC_ENTRY`, `pdx_data_factory` version
+  promotion) plus other mods' game rules read from old autosaves (`wsr_*`,
+  `bloodtithe_mode`, `animal_kingdoms`). Committed the editor's pack
+  (`packed_heightmap.png` 14.3 MB, `indirection_heightmap.png`,
+  `heightmap.heightmap`, `nodes.dat`).
+  - **The editor validated the heightmap encoding independently**: it accepted the
+    16-bit file and repacked it *without altering a single elevation value*
+    (verified pixel-for-pixel), and the packed output's max of 48725 tracks our
+    heightmap's 48766 against vanilla's 53469 — so the measured `4884` / `5.5
+    units per metre` encoding is confirmed by the engine's own tooling, not just
+    by our analysis.
+  - **`heightmap.png` was re-saved by the editor** (45.9 → 50.6 MB) but is
+    pixel-identical, so only the PNG encoding changed; the committed copy was
+    restored to the generator's output to keep it byte-reproducible.
+  - **⚠ The editor writes into the BASE GAME folder.** It overwrote
+    `steamapps/.../Victoria 3/game/map_data/`'s packed set and `nodes.dat` **and
+    also `provinces.png` plus the entire `state_regions/` directory** — none of
+    which the repack should touch. Recovery is Steam → Verify integrity of game
+    files. Those base-game files are deliberately **not** committed here (the
+    re-saved `provinces.png`/`state_regions/` are vanilla's real-world Earth data,
+    not ours — committing base-game content would be an IP problem besides being
+    wrong). Documented prominently at the top of `tools/MAP_RUNBOOK.md`, since S4
+    and S5 also drive the editor.
 - **Decisions taken during the build** (deviations from the plan, with cause):
   - **The satellite render was de-registered.** S1 gave it the "coarse global
     frame anchor" role; measured, it does not register — sweeping latitude
@@ -640,3 +662,11 @@ it to `planning/done/` waits for S6.
 and can start from the committed `land_sea_mask.png` without re-running ingestion.
 S4 (scaffold + boot), S5 (terrain + visuals), S6 (regions + canon naming, now
 including river identification from the annotated Empire map) follow.
+
+**Carry into S3/S4:**
+- Back up `game/map_data/` before any editor session (see the runbook warning).
+- `nodes.dat` will need regenerating once real provinces exist.
+- The two working-tree changes the user made and S2 deliberately left alone: the
+  repo-root `.gitignore` (`*.log`, `*.bak`) and `.metadata/metadata.json`'s
+  supported-game-version bump to **1.13.9** — `CLAUDE.md` still documents 1.13.8,
+  so one of the two needs reconciling.
