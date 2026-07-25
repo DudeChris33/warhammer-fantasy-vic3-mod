@@ -3,6 +3,16 @@
 # their line endings, or the regenerated (LF) bytes would differ from the checked-out
 # copies and the determinism check would fail on machines with autocrlf enabled.
 tools/fixtures/expected/** -text
+
+# The map-editor artifacts under map_data/ are written by the Victoria 3 client,
+# not authored here, and must be checked out exactly as it wrote them.
+# `heightmap.heightmap` is a text descriptor the editor emits with a BOM and LF
+# endings; letting git normalize it to CRLF would mean the working copy no longer
+# matches the bytes the editor produced (and would show as a spurious diff after
+# every repack). The PNG/DAT siblings are binary and are marked so explicitly.
+map_data/heightmap.heightmap -text
+map_data/nodes.dat binary
+map_data/*.png binary
 map_data/heightmap.png filter=lfs diff=lfs merge=lfs -text
 map_data/packed_heightmap.png filter=lfs diff=lfs merge=lfs -text
 map_data/nodes.dat filter=lfs diff=lfs merge=lfs -text
