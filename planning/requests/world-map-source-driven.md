@@ -800,6 +800,69 @@ it to `planning/done/` waits for S6.
     derive the id bands that were checked against them, so the band check was
     validating itself.
 
+### S3a — post-review rework (2026-07-25), REVIEW GATE NOT PASSED
+
+The user reviewed `qa_state_labels.png` and rejected it: *"terrible, its all swirly,
+brettonia is a combined 3 states despite being at least the size of france, there
+are some weird spiky bits on the corners"*. All three were correct and all three
+had measurable causes. **S3a stays open**; a re-plan (S3a-2) is agreed.
+
+**Fixed and committed (`c6849a4`):**
+- **Swirls were the WARP, not the partition.** The fold check added earlier
+  forbade the warp inverting but said nothing about shear. Measured over land:
+  anisotropy median 2.63, p90 6.85, **p99 20.1, max 394** — a cell traced out of a
+  20:1-stretched neighbourhood arrives as a curved ribbon. The source side was
+  fine throughout (Lustria alone yields 104 clean province-shaped cells).
+  Refinement now rejects any candidate whose Jacobian singular-value ratio exceeds
+  3. Both fits return 0.000% folded at p99 exactly 3.00. **IoU is not a sufficient
+  objective on its own** — it measures whether silhouettes agree and says nothing
+  about whether interior borders survive the warp.
+- **Bretonnia collapsed** because coastal slivers were judged against 0.25x the
+  target state size (3,129 px), which sits *above* the median warped source cell
+  (3,648 px) — deleting ~half the traced network and refilling by Voronoi. Now
+  judged relative to each cell's own largest piece: 424 surviving cells -> 1,005.
+- **Corner spikes**: `warp_cells` enforced the source crop but ignored the
+  registration's declared canvas footprint, so every source emitted extrapolated
+  cells far outside where it was fitted (a thin-plate spline degrades to its
+  affine trend there). Footprint now enforced.
+
+**Primary source changed (`c6849a4`)** — `total_war_map_colored.png` supersedes the
+IE parchment family: flat-fill ocean gives an **exact** silhouette (no threshold
+fitted), black lines over flat terrain fills give 748 clean cells with no ink
+test / lettering / shadow band, ~1:1 against the 659 target, fitted IoU 0.6617 vs
+the parchment's 0.6193 under identical constraints. Current output: **613 land +
+108 sea**, mean land state 13,457 px, cells compact and following the map.
+
+**Name binding added (`601be43`)** — `tools/regions/named_regions.json` +
+`total_war_states_per_strat_region.jpg` registered (the IE frame a 4th time,
+2048/3703 = 1593/2880 = 0.553, so a free `frame_alias`).
+
+**⚠ THE BLOCKER FOR S3a-2 — measured, do not re-derive:** the macro grouping does
+**not** correspond to the 17 named regions. Binding the anchors against it, five
+macros are each claimed by 2–3 regions — macro 2 = Naggaroth+Ulthuan, 4 =
+Norsca+Empire, 6 = Badlands+Southlands, 7 = Mountains of Mourn+Islands, 9 = N.
+Chaos Wastes+Bretonnia+Southern Realms. So *"Bretonnia has 20 cells"* is
+meaningless, and per-region quotas cannot be enforced on this grouping without
+silently giving one region's states to another. The 16 contours from
+`pizqenw9rd791.jpg` are internally consistent but are not the user's 17 regions.
+The named map's own contours are the right basis; a first extraction pass gets
+**11 of 17** — the misses are where label text crosses a contour and breaks the
+loop, the same failure `regions_from_contours(seal_border=True)` already solves
+for the polar regions.
+
+**Other carry-forward:**
+- The parchment master was deleted from `sources/` mid-session and restored. Its
+  three `frame_alias` records were **baked standalone** (the affines were measured
+  exactly, so the parent's control points transfer without loss). The master now
+  carries **no registration record** — it is read by filename purely as the clean
+  counterpart for macro differencing. `frame_alias` still has a production
+  consumer (`ie_named_regions`) and full fixture coverage.
+- Old World mod map still unregistered. Its own cell network is a viable land
+  silhouette (the union of its small cells); the user's hand-drawn sea hatching
+  calibrated a luminance cut to 81% balanced accuracy, which is measurable but far
+  short of the flat-filled map's exact silhouette.
+- `macro_15` has 0 cells; S3b must skip empty macros.
+
 ### S3b–S6 — pending
 
 **S3 was re-planned on 2026-07-25 into S3a + S3b** — see
