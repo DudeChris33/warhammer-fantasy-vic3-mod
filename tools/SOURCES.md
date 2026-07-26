@@ -36,12 +36,12 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | 3274025515_preview_WH3 climate map 6.0.3.jpg | 2471x1922 | 2,022,554 | fae9e090f0b2ffba1f82008dec5c2c36cf6a03dd0eaca0808b8822ba7b413edb | Fan mod ("WH3 climate map", Steam Workshop preview) — Immortal Empires frame, flat climate fills | **Registration objective** — its flat fills give the land silhouette that makes the IE fit measurable against our own mask. Frame alias of the parchment master (exact 0.6673 scale). Terrain/biome input for S5 | yes |
 | Immortal-Empires-Map-Feature-Image-scaled.jpg | 2560x1440 | 885,605 | 64d88c294a0547c61c4faa77564c3bc253ae275d5ace3e86abe48eaa19a9ce76 | Creative Assembly / press — Immortal Empires campaign map feature image | **Primary boundary line network** — unlabelled, so no text occlusion. Frame alias of the parchment master (16:9 vertical crop, measured by NCC) | yes |
 | Major_Trade_Routes_of_the_Old_World_Map.webp | 1947x1404 | 690,310 | 12026b1e21ad7b9467ff1e3d597e98492739af19e2d8cf97407ddf5d28f7b919 | Games Workshop — "Major Trade Routes of the Old World" | Manifest only, unregistered — S6 reference | no |
-| TheEmpire.webp | 1596x1024 | 682,992 | e19ad56e0b21023955f3ed91301073aba03efe08b4506b4d6f3e5b4fab51adff | Games Workshop — The Empire provinces map | Empire internal subdivision | yes |
+| TheEmpire.webp | 1596x1024 | 682,992 | e19ad56e0b21023955f3ed91301073aba03efe08b4506b4d6f3e5b4fab51adff | Games Workshop — The Empire provinces map | Empire internal subdivision. **NOT USABLE FOR GEOMETRY** (measured S3a) — misregistered off the coast, and not a chloropleth (see below) | yes |
 | TheEmpireRivers - drawn on.jpg | 1920x1301 | 1,463,260 | e4d4d67afb4705d7e7c139ecd5a0cd0233adff80100939328451b6ecce384ff4 | The above, with canon river courses drawn on in red by the user | Canon-river TOPOLOGY guide for the S6 naming pass — which DEM channel is which. Contributes no geometry (see below) | no |
 | TheEmpireRivers.jpg | 1920x1301 | 1,466,126 | 8c3f93454483dc261f933ad3d43530495cb11111071de2511669ac50f5ad2528 | Games Workshop / Warhammer Community — "The Empire of Man" map | Clean counterpart of the annotated map — differencing the two isolates the annotation | no |
 | Warhammer_olde_world_map.webp | 1434x975 | 442,484 | d8aad1d1697980aab21f95e5724a9f95d5889656cac73cb66dd5cab578d094f5 | Fan cartography — "Landes and Seas of the Worlde" | Naming + extent confirmation (S6 naming pass) | no |
 | images.steamusercontent.jpg | 637x358 | 43,099 | 8b90bae2e491a366a8c5deb3f1e8d9307dac6b8658d0fd7d62bb9c6de242d95b | Fan whole-world satellite/biome render (Steam Workshop) | DE-REGISTERED in S2 - does not register (see below) | no |
-| map-the-old-world.jpg | 3016x2080 | 1,140,330 | 80ae22f4aa384049cd42e70ade67db4f57853e6e91c9fbed30458dd9a69c1f91 | Games Workshop — Warhammer: The Old World world map | Old World / Badlands / Dark Lands / Araby / Land of the Dead boundaries | yes |
+| map-the-old-world.jpg | 3016x2080 | 1,140,330 | 80ae22f4aa384049cd42e70ade67db4f57853e6e91c9fbed30458dd9a69c1f91 | Games Workshop — Warhammer: The Old World world map | Old World / Badlands / Dark Lands / Araby / Land of the Dead boundaries. **NOT USABLE FOR GEOMETRY** (measured S3a) — misregistered off the coast, and not a chloropleth (see below) | yes |
 | pizqenw9rd791.jpg | 3703x2880 | 3,819,973 | 0085135bcdc9bc312c92be3abbe4afa7d25a32e8a5dddc4685cf3188637572d3 | Fan annotation of the IE parchment master (Reddit) — macro-region outlines + printed province counts | **Macro grouping** — pixel-aligned twin of the master, so differencing the two isolates hue-separable macro contours. Frame alias (identity) | yes |
 | terraqueous_globe.jpg | 4000x3256 | 2,292,545 | c4021e28d8d58bc3f91733df72ee9b7b398f922bb565b0478d3743446d8c15f3 | Fan cartography — "Terraqueous Globe", Kartografia Niepraktyczna 2022 | Whole-world heightmap (NE-II colour-to-height ramp) + coastline. **The single geometric authority** (S3a decision #1) — every other source projects onto it | yes |
 | the-old-world-all-faction-starting-position-map-v3-0-updated-v0-ml2lq3qfofad1.png | 4096x4096 | 8,332,865 | 93f5c7b4791d7a02b60eeb4ba96bf5abc66ad4d650978d1990b022840de903a3 | Fan cartography — "The Old World, all faction starting positions v3.0" | **Denser Old World boundary network** — a line chloropleth, markedly denser than IE over the same arc. Higher precedence inside a masked footprint; the four corner vignettes + the Galleon's Graveyard spiral are excluded (they take cartographic liberties — user-flagged) | no |
@@ -99,6 +99,25 @@ lines and names only, never coastline**: the committed `land_sea_mask.png` is th
 sole coastline authority (user decision #1, 2026-07-25), which is exactly what
 makes a rubber-sheeted registration acceptable here. Local scale error moves an
 interior border a few pixels inside a landmass; it cannot put a coast in the sea.
+
+## Not usable for geometry (S3a): `map-the-old-world.jpg`, `TheEmpire.webp`
+
+Both were registered in S1 for Old World / Empire boundaries; S3a measured two
+independent, either-one-disqualifying findings for each: **misregistered** (the
+QA overlay shows the committed coastline cutting across the drawn landmass — S2
+shifted the canvas-side control points to follow the refined
+`config/canvas_frame.ANCHORS` but never re-verified them against the generated
+mask), and **not a chloropleth** (both are relief illustrations with lettered
+labels, so even a correct registration would yield no traceable closed region
+boundaries — the decisive finding, since re-registering would not have helped).
+This is why S3a took the Immortal Empires parchment family instead.
+
+The records are **kept, not deleted** (user decision #4, 2026-07-25): their
+source-side landmark picks are still good and a future re-registration should
+start from them, but nothing may consume either for geometry until the canvas
+side is re-picked against the committed mask. See the `notes` field in
+`registration/map-the-old-world.json` / `registration/TheEmpire.json` and
+[PROVENANCE.md](PROVENANCE.md).
 
 ## The annotated Empire map (`TheEmpireRivers - drawn on.jpg`)
 

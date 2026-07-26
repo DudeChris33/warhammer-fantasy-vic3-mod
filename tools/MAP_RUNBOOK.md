@@ -158,6 +158,7 @@ Its gate is offline plus one human judgement:
 python tools/worldgen/sources.py --verify
 python tools/validate_map.py --labels
 python tools/run_fixture.py --check
+python tools/qa_overlay.py --labels          # writes tools/derived/qa_state_labels.png
 ```
 
 then **look at `tools/derived/qa_state_labels.png` and read

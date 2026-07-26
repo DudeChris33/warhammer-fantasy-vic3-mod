@@ -16,7 +16,7 @@ the line we do not cross. Only our own derived pixels are committed.
 
 ## Reference sources (consulted for geometry/relief only)
 
-The full, hash-pinned list is in [SOURCES.md](SOURCES.md). State as of S2:
+The full, hash-pinned list is in [SOURCES.md](SOURCES.md). State as of S3a:
 
 - **"Terraqueous Globe"** (fan cartography, Natural Earth II) — **the whole-world
   coastline + colour→height ramp.** Its NE-II projection was fitted to sub-pixel
@@ -61,5 +61,5 @@ boundaries, and the date traced.
 | Whole-world coastline + heightmap | Terraqueous Globe (NE-II reproject → LUT elevation + land/sea mask); TW3 stitched relief composited as high-frequency detail inside its footprint | S2 | 2026-07-23 |
 | Whole-world river network | **Derived, not traced** — drainage computed from the committed `heightmap.png` + `land_sea_mask.png` (depression fill -> D8 flow direction -> flow accumulation). No source imagery contributes geometry, so no third-party cartography is embedded in the result; the rivers follow our own generated terrain. Supersedes the hand-authored v1 polylines. | S2 | 2026-07-24 |
 | Canon river *identification* (deferred to S6) | User-annotated *The Empire of Man* map (`TheEmpireRivers - drawn on.jpg`, canon courses drawn in red) — consulted as a **topology guide** for which DEM channel is the Reik/Talabec/Stir/Aver etc. Not warped, contributes no geometry. | S6 | pending |
-| Whole-world state boundaries (the committed state-label layer) | **Immortal Empires parchment map + its unlabelled feature-image sibling**, traced as line networks and warped onto the Terraqueous geometry. They contribute interior borders only: every cell is intersected with the committed `land_sea_mask.png` and watershedded to tile it, so no coastline in the result comes from them. Macro grouping from the annotated twin, recovered by differencing it against the clean master. ~3% of land has no source and carries seeded fallback cells. | S3a | 2026-07-25 |
+| Whole-world state boundaries (the committed state-label layer) | **Immortal Empires parchment map + its unlabelled feature-image sibling**, traced as line networks and warped onto the Terraqueous geometry. They contribute interior borders only: every cell is intersected with the committed `land_sea_mask.png` and watershedded to tile it, so no coastline in the result comes from them. Macro grouping from the annotated twin, recovered by differencing it against the clean master. 2.4% of land has no source and carries seeded fallback cells. | S3a | 2026-07-25 |
 | _S1/S2/S3a fixtures use synthetic worlds under `tools/fixtures/` (invented by their own `make_source.py`, not derived from any source)._ | — | S1–S3a | 2026-07-21 |
