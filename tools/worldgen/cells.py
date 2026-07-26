@@ -494,6 +494,36 @@ def sea_zones(water: np.ndarray, count: int, wrap_x: bool = True) -> np.ndarray:
 # Committed IO
 # ---------------------------------------------------------------------------
 
+def coastal_labels(labels: np.ndarray, land: np.ndarray, wrap_x: bool = True) -> np.ndarray:
+    """Boolean table, indexed by label, of which land cells touch water.
+
+    4-connected, and wrap-aware on x only — the canvas is periodic in longitude
+    but its top and bottom edges are the polar cut, not ocean, so a cell on the
+    north edge is not coastal by virtue of the edge.
+
+    Lives here rather than in the generator because three callers need the same
+    answer: the generator writes it into the index, the boundary fixture writes
+    it into its own, and S3b turns it into `port` + `naval_exit_id`, which the
+    state schema requires to agree. ``validate_map`` deliberately does *not* use
+    this function — it recomputes the same fact a different way, so the two can
+    disagree and the check has something to catch.
+    """
+    sea = ~land
+    nb = np.zeros_like(sea)
+    if wrap_x:
+        nb |= np.roll(sea, 1, axis=1)
+        nb |= np.roll(sea, -1, axis=1)
+    else:
+        nb[:, 1:] |= sea[:, :-1]
+        nb[:, :-1] |= sea[:, 1:]
+    nb[:-1] |= sea[1:]
+    nb[1:] |= sea[:-1]
+    touching = np.unique(labels[nb & land])
+    out = np.zeros(int(labels.max()) + 1, dtype=bool)
+    out[touching[touching > 0]] = True
+    return out
+
+
 def write_labels(path, labels: np.ndarray) -> None:
     """Write the label layer as a lossless 16-bit grayscale PNG.
 

@@ -629,12 +629,7 @@ def build_boundary(out_dir: Path) -> None:
     cells.write_labels(out_dir / "state_labels.png", labels)
 
     areas = np.bincount(labels.ravel(), minlength=n_land + int(sea.max()) + 1)
-    coast = np.zeros_like(land)
-    coast[:, :-1] |= ~land[:, 1:]
-    coast[:, 1:] |= ~land[:, :-1]
-    coast[:-1] |= ~land[1:]
-    coast[1:] |= ~land[:-1]
-    coastal = set(np.unique(labels[coast & land]).tolist())
+    coastal = cells.coastal_labels(labels, land, wrap_x=True)
     index = {
         "canvas": list(BOUNDARY_CANVAS),
         "land_cells": n_land,
@@ -647,7 +642,7 @@ def build_boundary(out_dir: Path) -> None:
              # to be exercised without inventing a second annotated image.
              "macro": 1 if i <= n_land else 0,
              "area": int(areas[i]),
-             "coastal": bool(i in coastal) if i <= n_land else True}
+             "coastal": bool(coastal[i]) if i <= n_land else True}
             for i in range(1, n_land + int(sea.max()) + 1)
         ],
     }

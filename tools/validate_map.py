@@ -525,12 +525,32 @@ def validate_labels(labels_path: Path, mask_path: Path, index_path: Path,
                 f"{n_land + 1}..{n_land + n_sea}"
             )
             break
-    listed = {c["label"] for c in index["cells"]}
+    listed_ids = [c["label"] for c in index["cells"]]
+    listed = set(listed_ids)
+    if len(listed_ids) != len(listed):
+        # A duplicate entry is invisible to a set comparison, and the two copies
+        # can disagree about area, macro and coastal — so whichever one a later
+        # phase happens to read decides the answer.
+        seen: set[int] = set()
+        dupes = sorted({i for i in listed_ids if i in seen or seen.add(i)})
+        errors.append(
+            f"{len(dupes)} label(s) appear more than once in the index "
+            f"(first few: {dupes[:5]})"
+        )
     present = land_ids | sea_ids
     for missing in sorted(present - listed)[:5]:
         errors.append(f"label {missing} is in the raster but not in the index")
     for extra in sorted(listed - present)[:5]:
         errors.append(f"label {extra} is in the index but not in the raster")
+
+    # The summary counts derive the id bands checked above, so they have to agree
+    # with the entries they summarise or the band check is validating itself.
+    for kind, declared in (("land", n_land), ("sea", n_sea)):
+        actual = sum(1 for c in index["cells"] if c["kind"] == kind)
+        if actual != declared:
+            errors.append(
+                f"index declares {declared} {kind} cells but lists {actual} of them"
+            )
 
     # 4. Every cell is one connected region. A state in two pieces is not a state.
     comp = cells.components(labels, wrap_x)
@@ -557,6 +577,30 @@ def validate_labels(labels_path: Path, mask_path: Path, index_path: Path,
         if c["kind"] == "land" and not c["macro"]:
             errors.append(f"land cell {c['label']} has no macro region")
             break
+
+    # 6b. The index's `coastal` flag must match the raster. This one earns its
+    #     keep downstream: S3b turns `coastal` into `port` + `naval_exit_id`, and
+    #     the state schema then *requires* the two to agree — so a wrong flag here
+    #     surfaces as a confusing schema failure a phase later, pointing at the
+    #     wrong file. Recomputed deliberately by a different route than
+    #     `cells.coastal_labels` (a dilation of the sea mask rather than four
+    #     shifts of it), so the two implementations can disagree and this check
+    #     has something to catch beyond a corrupted index.
+    from scipy import ndimage
+
+    sea = ~land
+    pad = 1 if wrap_x else 0
+    padded = np.concatenate([sea[:, -pad:], sea, sea[:, :pad]], axis=1) if pad else sea
+    grown = ndimage.binary_dilation(padded, structure=ndimage.generate_binary_structure(2, 1))
+    grown = grown[:, pad:-pad] if pad else grown
+    touching = set(np.unique(labels[grown & land]).tolist()) - {0}
+    bad = [c["label"] for c in index["cells"]
+           if c["kind"] == "land" and bool(c["coastal"]) != (c["label"] in touching)]
+    if bad:
+        errors.append(
+            f"{len(bad)} land cell(s) have a `coastal` flag that disagrees with the "
+            f"mask (first few: {bad[:5]})"
+        )
 
     # 7. No avoidably-degenerate cell. S3b cuts provinces out of each state, and a
     #    state a few pixels across cannot carry one. But a small *island* is a

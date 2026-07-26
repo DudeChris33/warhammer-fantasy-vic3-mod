@@ -270,20 +270,6 @@ def assign_macros(land_labels: np.ndarray, regs: dict[str, schema.SourceRegistra
                    "macro_filled_from_neighbour": unassigned}
 
 
-def coastal_flags(labels: np.ndarray, land: np.ndarray) -> np.ndarray:
-    """Which labels touch water (wrap-aware on x, not on y)."""
-    sea = ~land
-    nb = np.zeros_like(sea)
-    nb |= np.roll(sea, 1, axis=1)
-    nb |= np.roll(sea, -1, axis=1)
-    nb[:-1] |= sea[1:]
-    nb[1:] |= sea[:-1]
-    touching = np.unique(labels[nb & land])
-    out = np.zeros(int(labels.max()) + 1, dtype=bool)
-    out[touching[touching > 0]] = True
-    return out
-
-
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -321,7 +307,7 @@ def main(argv: list[str] | None = None) -> int:
     if int((labels == 0).sum()):
         raise SystemExit("the label layer has unlabelled pixels")
 
-    coastal = coastal_flags(land_labels, land)
+    coastal = cells.coastal_labels(land_labels, land, WRAP_X)
     areas = np.bincount(labels.ravel(), minlength=n_land + n_sea + 1)
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
