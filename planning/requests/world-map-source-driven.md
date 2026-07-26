@@ -658,7 +658,7 @@ it to `planning/done/` waits for S6.
 
 ### S3a — boundary ingestion → committed state-label layer ✅ built (2026-07-25)
 
-- **Commit**: `<pending>` — "World map S3a: boundary ingestion → committed state-label layer".
+- **Commit**: `5bafc8b` — "World map S3a: boundary ingestion → committed state-label layer".
 - **Summary**:
   - **Unblocked**: `ljzbtm288r891.jpg` → `terraqueous_globe.jpg` absorbed
     everywhere (manifest row, registration record, `generate_heightmap.py`, the
