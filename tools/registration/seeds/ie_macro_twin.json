@@ -1,0 +1,16 @@
+{
+  "source": "pizqenw9rd791.jpg",
+  "record_stem": "ie_macro_twin",
+  "objective": "frame_alias",
+
+  "_comment": "The macro-annotated twin is the parchment master with region contours and province counts drawn on top; it is the SAME FILE underneath (identical 3703x2880 dims, grayscale correlation 0.803, median absolute difference 3 over the unannotated area). The alias is therefore the identity, and any future correction to the master's control points reaches this record for free.",
+  "frame_alias": {"of": "wh3_dlc_ie_parchment_map_english.jpg", "scale": [1.0, 1.0], "offset": [0.0, 0.0]},
+
+  "record": {
+    "role": "ie_macro_grouping",
+    "precedence": 35,
+    "layer_precedence": {"macro": 90, "boundaries": 0, "coastline": 0, "relief": 0},
+    "crop": [40, 40, 3663, 2840],
+    "notes": "Annotated twin of the IE parchment master: each macro region outlined in a saturated hue and labelled with its Immortal Empires province count. Consumed by worldgen/macro.py, which recovers the contours by DIFFERENCING this against the clean master rather than by thresholding it - a difference cancels the coats of arms and other artwork present in both, which no colour rule survives. Contributes macro grouping only: boundary/coastline/relief precedence 0, because its added strokes would read as spurious province borders. The printed counts (Empire 22, Cathay 19, Lustria 21, ...) are carried in macro.PRINTED_COUNTS as a sanity check on the grouping, never as a target for our own state count."
+  }
+}

@@ -1,0 +1,154 @@
+{
+ "canvas": [
+  256,
+  112
+ ],
+ "land_cells": 13,
+ "sea_cells": 5,
+ "cells": [
+  {
+   "label": 1,
+   "kind": "land",
+   "key": "STATE_FIXTURE_001",
+   "macro": 1,
+   "area": 1343,
+   "coastal": true
+  },
+  {
+   "label": 2,
+   "kind": "land",
+   "key": "STATE_FIXTURE_002",
+   "macro": 1,
+   "area": 997,
+   "coastal": true
+  },
+  {
+   "label": 3,
+   "kind": "land",
+   "key": "STATE_FIXTURE_003",
+   "macro": 1,
+   "area": 1410,
+   "coastal": true
+  },
+  {
+   "label": 4,
+   "kind": "land",
+   "key": "STATE_FIXTURE_004",
+   "macro": 1,
+   "area": 718,
+   "coastal": true
+  },
+  {
+   "label": 5,
+   "kind": "land",
+   "key": "STATE_FIXTURE_005",
+   "macro": 1,
+   "area": 1440,
+   "coastal": true
+  },
+  {
+   "label": 6,
+   "kind": "land",
+   "key": "STATE_FIXTURE_006",
+   "macro": 1,
+   "area": 1087,
+   "coastal": true
+  },
+  {
+   "label": 7,
+   "kind": "land",
+   "key": "STATE_FIXTURE_007",
+   "macro": 1,
+   "area": 1858,
+   "coastal": false
+  },
+  {
+   "label": 8,
+   "kind": "land",
+   "key": "STATE_FIXTURE_008",
+   "macro": 1,
+   "area": 935,
+   "coastal": true
+  },
+  {
+   "label": 9,
+   "kind": "land",
+   "key": "STATE_FIXTURE_009",
+   "macro": 1,
+   "area": 503,
+   "coastal": true
+  },
+  {
+   "label": 10,
+   "kind": "land",
+   "key": "STATE_FIXTURE_010",
+   "macro": 1,
+   "area": 867,
+   "coastal": true
+  },
+  {
+   "label": 11,
+   "kind": "land",
+   "key": "STATE_FIXTURE_011",
+   "macro": 1,
+   "area": 1212,
+   "coastal": true
+  },
+  {
+   "label": 12,
+   "kind": "land",
+   "key": "STATE_FIXTURE_012",
+   "macro": 1,
+   "area": 625,
+   "coastal": true
+  },
+  {
+   "label": 13,
+   "kind": "land",
+   "key": "STATE_FIXTURE_013",
+   "macro": 1,
+   "area": 89,
+   "coastal": true
+  },
+  {
+   "label": 14,
+   "kind": "sea",
+   "key": "STATE_SEA_001",
+   "macro": 0,
+   "area": 4825,
+   "coastal": true
+  },
+  {
+   "label": 15,
+   "kind": "sea",
+   "key": "STATE_SEA_002",
+   "macro": 0,
+   "area": 2500,
+   "coastal": true
+  },
+  {
+   "label": 16,
+   "kind": "sea",
+   "key": "STATE_SEA_003",
+   "macro": 0,
+   "area": 285,
+   "coastal": true
+  },
+  {
+   "label": 17,
+   "kind": "sea",
+   "key": "STATE_SEA_004",
+   "macro": 0,
+   "area": 2633,
+   "coastal": true
+  },
+  {
+   "label": 18,
+   "kind": "sea",
+   "key": "STATE_SEA_005",
+   "macro": 0,
+   "area": 5345,
+   "coastal": true
+  }
+ ]
+}

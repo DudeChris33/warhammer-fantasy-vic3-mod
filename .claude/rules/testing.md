@@ -21,6 +21,7 @@ source-registration data (`tools/SOURCES.md`, `tools/registration/`), run:
 
 ```
 python tools/worldgen/sources.py --verify   # source manifest SHA-256 + registration cross-checks
+python tools/validate_map.py --labels        # the state-label layer tiles the land/sea mask exactly
 python tools/validate_map.py                # lints the repo map (repo-relative paths)
 python tools/run_fixture.py --check          # regression-checks the toolchain itself
 ```
@@ -33,14 +34,27 @@ change a committed bitmap fails here. Refreshing a source after an *intentional*
 change is the explicit `python tools/worldgen/sources.py --update-manifest`
 action, never a side effect of a generator run.
 
-`map_data/heightmap.png` and `map_data/rivers.png` are generated, not
-hand-authored: after an intentional source/LUT/registration change, regenerate
-them with `python tools/generate_heightmap.py` and `python
-tools/generate_rivers.py` and re-run the checks above before committing.
-`run_fixture.py --check` also regression-checks the source-driven ingestion
-pipeline itself (LUT classification, reprojection, segmentation, compositing,
-river rasterization) against a committed synthetic fixture
-(`tools/fixtures/ingest/`), independent of the real `sources/`.
+`map_data/heightmap.png`, `map_data/rivers.png` and
+`tools/derived/state_labels.png` are generated, not hand-authored: after an
+intentional source/LUT/registration change, regenerate them with `python
+tools/generate_heightmap.py`, `python tools/generate_rivers.py` and `python
+tools/generate_state_labels.py`, and re-run the checks above before committing.
+`--labels` is only meaningful once the state-label layer exists; `validate_map.py`
+with no flag needs `map_data/provinces.png`, which arrives in S3b.
+
+Registration records (`tools/registration/*.json`) are machine-fitted, not
+hand-written: re-derive with `python tools/fit_registration.py --seed <stem>`
+after editing the corresponding seed in `tools/registration/seeds/`. Like
+`--update-manifest`, that is an explicit authoring action and never part of the
+gate.
+
+`run_fixture.py --check` also regression-checks the source-driven pipeline itself
+against committed synthetic fixtures, independent of the real `sources/`:
+`tools/fixtures/ingest/` covers LUT classification, reprojection, segmentation,
+compositing and river rasterization; `tools/fixtures/boundary/` covers the
+boundary path (local-contrast ink, complement labelling, the `frame_alias` warp,
+precedence stacking, mask intersection, nearest-label fill, density
+reconciliation and sea zones).
 
 ## Regression rule
 

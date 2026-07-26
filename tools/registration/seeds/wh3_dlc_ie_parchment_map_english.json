@@ -1,0 +1,57 @@
+{
+  "source": "wh3_dlc_ie_parchment_map_english.jpg",
+  "master_shape": [2880, 3703],
+  "objective": "silhouette",
+  "footprint_pad": 96,
+
+  "_comment_silhouette": "The parchment master itself has no land/sea signal a threshold can find - its sea is the same paper as its land, distinguished only by a drawn shore wash. Its climate-map sibling paints every land region in a saturated fill, so it is the only member of the family whose land is measurable, and it is therefore the objective the whole family is fitted on. to_master_scale converts climate px to master px (3703/2471, 2880/1922), measured exactly. The exclude box is the legend panel, which is correctly detected as painted and is simply not terrain.",
+  "silhouette": {
+    "from": "3274025515_preview_WH3 climate map 6.0.3.jpg",
+    "to_master_scale": [1.4985835, 1.4984391],
+    "exclude": [[2040, 0, 2471, 400]],
+    "min_component": 400
+  },
+
+  "_comment_coarse": "Sweep bounds narrowed around a first, deliberately wide reconnaissance sweep (scale 0.45-1.15 step 0.025 on both axes, offsets -60..120 step 6, 705600 candidates, 723 s) which peaked at scale (0.625, 0.475) offset (90, -42) with two-sided IoU 0.5017 against a ~0.225 chance level for masks of these land fractions. The bounds here still bracket that peak by several grid steps on every axis, so the maximum is interior rather than on a boundary. Values are in reduced pixels: silhouette downsampled by src_step, canvas by canvas_step.",
+  "coarse": {
+    "src_step": 4,
+    "canvas_step": 16,
+    "scale_x": [0.5, 0.75, 0.0125],
+    "scale_y": [0.38, 0.58, 0.0125],
+    "offset_x": [54, 126, 6],
+    "offset_y": [-78, -6, 6]
+  },
+
+  "_comment_lattice": "9x7 over the master frame. Spacing is ~440 master px, roughly 700 canvas px - fine enough for the lattice to absorb Ulthuan being drawn about twice its true size relative to the world, which no affine can express.",
+  "lattice": {"nx": 10, "ny": 8, "inset": 0.02},
+  "refine": {
+    "stages": [
+      {"step": 32, "radii": [192, 96, 48], "passes": 1},
+      {"step": 16, "radii": [24, 12], "passes": 1}
+    ]
+  },
+
+  "_comment_landmarks": "Hand-identified features, source side on the parchment master and anchor side on the Terraqueous globe. These take NO part in the silhouette fit - they are the independent check reported as landmark_check_px, and the fallback objective for sources with no measurable silhouette. Anchor pixels become canvas pixels through the committed NE-II fit, so no canvas coordinate here is eyeballed.",
+  "landmarks": [
+    {"name": "ulthuan_ring",        "source": [648, 793],   "anchor": [1443, 686]},
+    {"name": "naggaroth",           "source": [251, 714],   "anchor": [1086, 449]},
+    {"name": "lustria",             "source": [370, 2142],  "anchor": [1186, 1234]},
+    {"name": "empire_reikland",     "source": [1322, 1005], "anchor": [2000, 440]},
+    {"name": "araby",               "source": [1222, 2155], "anchor": [1714, 837]},
+    {"name": "southlands_central",  "source": [1613, 2380], "anchor": [2000, 1163]},
+    {"name": "darklands",           "source": [2222, 1031], "anchor": [2286, 543]},
+    {"name": "mountains_of_mourn",  "source": [2671, 1177], "anchor": [2571, 457]},
+    {"name": "grand_cathay",        "source": [3055, 1415], "anchor": [3029, 586]},
+    {"name": "eastern_steppes",     "source": [3253, 754],  "anchor": [2857, 349]},
+    {"name": "kislev_troll_country","source": [1719, 569],  "anchor": [2120, 320]},
+    {"name": "norsca",              "source": [1322, 378],  "anchor": [2000, 323]}
+  ],
+
+  "record": {
+    "role": "ie_boundary_frame_master",
+    "precedence": 40,
+    "layer_precedence": {"boundaries": 40, "coastline": 5, "relief": 5},
+    "crop": [40, 40, 3663, 2840],
+    "notes": "Immortal Empires parchment campaign map - the FRAME MASTER for the IE family. Its three siblings (pizqenw9rd791.jpg, the climate map, the feature image) carry frame_alias records pointing here rather than duplicating these control points, so a correction made here reaches all four. Contributes INTERIOR BOUNDARY LINES AND NAMES ONLY, never coastline (user decision #1/#2, 2026-07-25): tools/derived/land_sea_mask.png is the sole coastline authority, which is what makes a rubber-sheeted registration acceptable - local scale error moves an interior border a few px inside a landmass and cannot put a coast in the sea. Hence coastline/relief precedence 5, boundaries 40. This record is MACHINE-FITTED by tools/fit_registration.py from tools/registration/seeds/wh3_dlc_ie_parchment_map_english.json; re-derive rather than hand-edit."
+  }
+}

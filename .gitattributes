@@ -3,7 +3,13 @@
 # their line endings, or the regenerated (LF) bytes would differ from the checked-out
 # copies and the determinism check would fail on machines with autocrlf enabled.
 tools/fixtures/expected/** -text
+tools/fixtures/ingest/expected/** -text
+tools/fixtures/boundary/expected/** -text
+tools/fixtures/boundary/*.png binary
 
+# The committed derived rasters are generated bitmaps, diffed byte-for-byte by
+# the generators' own determinism check. Same reasoning as above.
+tools/derived/*.png binary
 # The map-editor artifacts under map_data/ are written by the Victoria 3 client,
 # not authored here, and must be checked out exactly as it wrote them.
 # `heightmap.heightmap` is a text descriptor the editor emits with a BOM and LF

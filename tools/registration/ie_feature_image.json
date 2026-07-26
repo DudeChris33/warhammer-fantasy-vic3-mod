@@ -1,0 +1,37 @@
+{
+  "role": "ie_boundary_primary",
+  "precedence": 50,
+  "layer_precedence": {
+    "boundaries": 50,
+    "coastline": 5,
+    "relief": 5,
+    "macro": 0
+  },
+  "crop": [
+    8,
+    8,
+    2552,
+    1432
+  ],
+  "notes": "Immortal Empires feature image - the PRIMARY boundary line network for S3a. It is the same map as the parchment master with the lettering removed, which matters more than it sounds: on the master, a place name lying across a border merges the two cells either side of it, and no amount of inpainting fully recovers a boundary that was never drawn under the text. Here there is no text to occlude anything, so the cell network comes out closed. It costs coverage - the crop drops the polar Chaos Wastes, the far Eastern Steppes and the eastern edge of Cathay - which is exactly the gap the master is kept registered to fill, at lower precedence. Higher boundary precedence than the master (50 vs 40) for that reason. Contributes no coastline: the committed land mask is the coastline authority.",
+  "source": "Immortal-Empires-Map-Feature-Image-scaled.jpg",
+  "projection": "frame_alias",
+  "frame_alias": {
+    "of": "wh3_dlc_ie_parchment_map_english.jpg",
+    "scale": [
+      1.4390625,
+      1.4388889
+    ],
+    "offset": [
+      8.0,
+      224.0
+    ]
+  },
+  "control_points": [],
+  "footprint": [
+    1064.0,
+    0.0,
+    7680.0,
+    2552.0
+  ]
+}

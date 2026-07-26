@@ -145,5 +145,37 @@ encoding.
 
 ---
 
+## S3a — state-label layer (no desktop step)
+
+S3a touches **no game-read file**: it produces `tools/derived/state_labels.png`,
+its index, and `COVERAGE.md`, all of which the engine never sees. There is no
+editor session and no boot gate. It is listed here only so the absence is
+deliberate rather than an omission.
+
+Its gate is offline plus one human judgement:
+
+```
+python tools/worldgen/sources.py --verify
+python tools/validate_map.py --labels
+python tools/run_fixture.py --check
+```
+
+then **look at `tools/derived/qa_state_labels.png` and read
+`tools/derived/COVERAGE.md`**. Registration quality is not knowable until the
+overlay renders, which is exactly why S3a was split out ahead of S3b: a
+control-point correction here costs one re-fit, whereas the same correction after
+40k provinces have been cut costs a full regeneration.
+
+Re-deriving a registration is an explicit authoring action, not part of the gate:
+
+```
+python tools/fit_registration.py --seed <stem>      # rewrites tools/registration/<stem>.json
+python tools/generate_state_labels.py --preview     # then regenerate the layer
+```
+
+**Carry into S4:** `nodes.dat` must be regenerated in the editor once real
+provinces exist (S3b). Back up `game/map_data/` before that session — see the
+warning at the top of this file.
+
 <!-- ## S4 — nodes.dat + session boot -->
 <!-- ## S5 — object locators + spline regeneration -->

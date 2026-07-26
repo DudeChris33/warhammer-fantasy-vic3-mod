@@ -73,6 +73,34 @@ NE2_XMAX = float(ne2_forward(np.pi, 0.0)[0])
 NE2_YMAX = float(ne2_forward(0.0, np.pi / 2)[1])
 
 
+def ne2_inverse(x, y):
+    """Inverse of :func:`ne2_forward` — normalized ``(x, y)`` back to radians.
+
+    NE II has no closed-form inverse, but it does not need a 2-D solver either:
+    ``y`` is a function of latitude alone and strictly increasing in it, so one
+    monotonic 1-D solve recovers phi, after which lam falls out by a single
+    division. Bisection over the fixed bracket [-pi/2, pi/2] for a fixed 60
+    iterations is deterministic to the last bit — no convergence tolerance whose
+    trip point could vary with the input, which a byte-exact pipeline cannot have.
+
+    The forward direction is what the generators use; this exists so a feature
+    *identified on the Terraqueous source* can be converted into an exact canvas
+    position, which is how the other sources' control points are anchored.
+    """
+    y = np.asarray(y, dtype=np.float64)
+    lo = np.full(y.shape, -np.pi / 2)
+    hi = np.full(y.shape, np.pi / 2)
+    for _ in range(60):
+        mid = 0.5 * (lo + hi)
+        too_low = ne2_forward(0.0, mid)[1] < y
+        lo = np.where(too_low, mid, lo)
+        hi = np.where(too_low, hi, mid)
+    phi = 0.5 * (lo + hi)
+    # x = lam * f(phi); recover f(phi) by projecting a unit longitude.
+    f = ne2_forward(1.0, phi)[0]
+    return np.asarray(x, dtype=np.float64) / f, phi
+
+
 def _project_norm(kind: str, lon_deg, lat_deg):
     """Normalized projected coordinates for a projection kind (y up)."""
     if kind == "natural_earth_2":
@@ -126,6 +154,32 @@ class ParametricFit:
     def to_source(self, lon_deg, lat_deg):
         X, Y = _project_norm(self.kind, lon_deg, lat_deg)
         return self.cx + self.sx * X, self.cy - self.sy * Y
+
+    def to_lonlat(self, source_x, source_y):
+        """Inverse: source pixel -> ``(lon, lat)`` in degrees."""
+        X = (np.asarray(source_x, dtype=np.float64) - self.cx) / self.sx
+        Y = (self.cy - np.asarray(source_y, dtype=np.float64)) / self.sy
+        if self.kind == "natural_earth_2":
+            lam, phi = ne2_inverse(X, Y)
+            return np.degrees(lam), np.degrees(phi)
+        if self.kind == "equirectangular":
+            return X, Y
+        raise ValueError(f"{self.kind} is not a parametric projection")
+
+    def to_canvas(self, source_x, source_y, width: int, height: int):
+        """Source pixel -> canvas pixel on a ``width`` x ``height`` plate carree.
+
+        This is the bridge that lets every other source's control points be
+        anchored to the Terraqueous globe: identify a named feature on the globe,
+        and this returns the canvas pixel it occupies — exactly, through the same
+        fitted projection the committed mask was built with, rather than by
+        eyeballing the mask.
+        """
+        lon, lat = self.to_lonlat(source_x, source_y)
+        px_lon = width / (canvas_frame.LON_MAX - canvas_frame.LON_MIN)
+        px_lat = height / (canvas_frame.LAT_MAX - canvas_frame.LAT_MIN)
+        return ((lon - canvas_frame.LON_MIN) * px_lon,
+                (canvas_frame.LAT_MAX - lat) * px_lat)
 
 
 class RegistrationError(RuntimeError):
@@ -217,6 +271,67 @@ def fit_warp(reg: schema.SourceRegistration) -> WarpFit:
     back = rbf(dst)
     r = (back - src).ravel()
     return WarpFit(rbf, float(np.sqrt((r ** 2).mean())), float(np.abs(r).max()))
+
+
+@dataclass(frozen=True)
+class AliasFit:
+    """A sibling's canvas -> source field, borrowed from its parent's warp.
+
+    The parent maps canvas px to *parent* source px; the committed affine then
+    carries those into this source's own pixel grid. Composing rather than
+    re-fitting is the whole point: a correction to the parent's control points
+    reaches every sibling on the next run, and no sibling can drift from the
+    frame it is supposed to share.
+    """
+
+    parent: WarpFit
+    parent_source: str
+    scale: tuple[float, float]
+    offset: tuple[float, float]
+
+    def to_source_px(self, canvas_x, canvas_y):
+        px, py = self.parent.to_source_px(canvas_x, canvas_y)
+        return (px - self.offset[0]) / self.scale[0], (py - self.offset[1]) / self.scale[1]
+
+    @property
+    def rms_px(self) -> float:
+        return self.parent.rms_px
+
+    @property
+    def max_px(self) -> float:
+        return self.parent.max_px
+
+
+def fit_alias(reg: schema.SourceRegistration,
+              regs_by_source: dict[str, schema.SourceRegistration]) -> AliasFit:
+    """Resolve a ``frame_alias`` record against its parent registration."""
+    if not reg.is_alias:
+        raise RegistrationError(f"{reg.source}: fit_alias needs a frame_alias record")
+    parent = regs_by_source.get(reg.frame_alias.of)
+    if parent is None:
+        raise RegistrationError(
+            f"{reg.source}: frame_alias parent '{reg.frame_alias.of}' is not registered"
+        )
+    if parent.projection != "control_point_warp":
+        raise RegistrationError(
+            f"{reg.source}: frame_alias parent '{parent.source}' is {parent.projection}; "
+            f"only a control_point_warp parent is supported"
+        )
+    return AliasFit(fit_warp(parent), parent.source, reg.frame_alias.scale, reg.frame_alias.offset)
+
+
+def fit_placement(reg: schema.SourceRegistration,
+                  regs_by_source: dict[str, schema.SourceRegistration] | None = None):
+    """The canvas -> source field for any record kind.
+
+    Returns a :class:`WarpFit`/:class:`AliasFit` (``to_source_px``) for the warp
+    kinds, or a :class:`ParametricFit` (``to_source``) for the analytic ones.
+    """
+    if reg.is_alias:
+        return fit_alias(reg, regs_by_source or {})
+    if reg.projection == "control_point_warp":
+        return fit_warp(reg)
+    return fit_parametric(reg)
 
 
 # ---------------------------------------------------------------------------

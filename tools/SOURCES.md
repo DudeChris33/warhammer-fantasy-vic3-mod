@@ -33,13 +33,18 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 <!-- MANIFEST:BEGIN -->
 | File | Dims | Bytes | SHA-256 | Origin | Role | Registered |
 |---|---|---|---|---|---|---|
+| 3274025515_preview_WH3 climate map 6.0.3.jpg | 2471x1922 | 2,022,554 | fae9e090f0b2ffba1f82008dec5c2c36cf6a03dd0eaca0808b8822ba7b413edb | Fan mod ("WH3 climate map", Steam Workshop preview) — Immortal Empires frame, flat climate fills | **Registration objective** — its flat fills give the land silhouette that makes the IE fit measurable against our own mask. Frame alias of the parchment master (exact 0.6673 scale). Terrain/biome input for S5 | yes |
+| Immortal-Empires-Map-Feature-Image-scaled.jpg | 2560x1440 | 885,605 | 64d88c294a0547c61c4faa77564c3bc253ae275d5ace3e86abe48eaa19a9ce76 | Creative Assembly / press — Immortal Empires campaign map feature image | **Primary boundary line network** — unlabelled, so no text occlusion. Frame alias of the parchment master (16:9 vertical crop, measured by NCC) | yes |
+| Major_Trade_Routes_of_the_Old_World_Map.webp | 1947x1404 | 690,310 | 12026b1e21ad7b9467ff1e3d597e98492739af19e2d8cf97407ddf5d28f7b919 | Games Workshop — "Major Trade Routes of the Old World" | Manifest only, unregistered — S6 reference | no |
 | TheEmpire.webp | 1596x1024 | 682,992 | e19ad56e0b21023955f3ed91301073aba03efe08b4506b4d6f3e5b4fab51adff | Games Workshop — The Empire provinces map | Empire internal subdivision | yes |
 | TheEmpireRivers - drawn on.jpg | 1920x1301 | 1,463,260 | e4d4d67afb4705d7e7c139ecd5a0cd0233adff80100939328451b6ecce384ff4 | The above, with canon river courses drawn on in red by the user | Canon-river TOPOLOGY guide for the S6 naming pass — which DEM channel is which. Contributes no geometry (see below) | no |
 | TheEmpireRivers.jpg | 1920x1301 | 1,466,126 | 8c3f93454483dc261f933ad3d43530495cb11111071de2511669ac50f5ad2528 | Games Workshop / Warhammer Community — "The Empire of Man" map | Clean counterpart of the annotated map — differencing the two isolates the annotation | no |
 | Warhammer_olde_world_map.webp | 1434x975 | 442,484 | d8aad1d1697980aab21f95e5724a9f95d5889656cac73cb66dd5cab578d094f5 | Fan cartography — "Landes and Seas of the Worlde" | Naming + extent confirmation (S6 naming pass) | no |
 | images.steamusercontent.jpg | 637x358 | 43,099 | 8b90bae2e491a366a8c5deb3f1e8d9307dac6b8658d0fd7d62bb9c6de242d95b | Fan whole-world satellite/biome render (Steam Workshop) | DE-REGISTERED in S2 - does not register (see below) | no |
-| ljzbtm288r891.jpg | 4000x3256 | 2,292,545 | c4021e28d8d58bc3f91733df72ee9b7b398f922bb565b0478d3743446d8c15f3 | Fan cartography — "Terraqueous Globe", Kartografia Niepraktyczna 2022 | Whole-world heightmap (NE-II colour-to-height ramp) + coastline | yes |
 | map-the-old-world.jpg | 3016x2080 | 1,140,330 | 80ae22f4aa384049cd42e70ade67db4f57853e6e91c9fbed30458dd9a69c1f91 | Games Workshop — Warhammer: The Old World world map | Old World / Badlands / Dark Lands / Araby / Land of the Dead boundaries | yes |
+| pizqenw9rd791.jpg | 3703x2880 | 3,819,973 | 0085135bcdc9bc312c92be3abbe4afa7d25a32e8a5dddc4685cf3188637572d3 | Fan annotation of the IE parchment master (Reddit) — macro-region outlines + printed province counts | **Macro grouping** — pixel-aligned twin of the master, so differencing the two isolates hue-separable macro contours. Frame alias (identity) | yes |
+| terraqueous_globe.jpg | 4000x3256 | 2,292,545 | c4021e28d8d58bc3f91733df72ee9b7b398f922bb565b0478d3743446d8c15f3 | Fan cartography — "Terraqueous Globe", Kartografia Niepraktyczna 2022 | Whole-world heightmap (NE-II colour-to-height ramp) + coastline. **The single geometric authority** (S3a decision #1) — every other source projects onto it | yes |
+| the-old-world-all-faction-starting-position-map-v3-0-updated-v0-ml2lq3qfofad1.png | 4096x4096 | 8,332,865 | 93f5c7b4791d7a02b60eeb4ba96bf5abc66ad4d650978d1990b022840de903a3 | Fan cartography — "The Old World, all faction starting positions v3.0" | **Denser Old World boundary network** — a line chloropleth, markedly denser than IE over the same arc. Higher precedence inside a masked footprint; the four corner vignettes + the Galleon's Graveyard spiral are excluded (they take cartographic liberties — user-flagged) | no |
 | the_old_world_bot_left.png | 1195x683 | 1,542,117 | adf58b58178b2de1fb58b3f3d84038125809a8b5b2c4b727f5467f185bde856d | Games Workshop — hi-res Old World map (interactive tiles) | Pre-stitch tile (bot-left) of the hi-res Old World map — S3 boundaries | no |
 | the_old_world_bot_right.png | 1191x676 | 1,586,780 | 6462a83e8084bc01da73082d7e4099f897c4b6fdb6405e03c410a4213bf2743d | Games Workshop — hi-res Old World map (interactive tiles) | Pre-stitch tile (bot-right) of the hi-res Old World map — S3 boundaries | no |
 | the_old_world_mid_bot_left.png | 1192x680 | 1,610,370 | 31e87b7948fac60aca9e475eda8a4bc3b8938958e2a8a169e1889637f002bb91 | Games Workshop — hi-res Old World map (interactive tiles) | Pre-stitch tile (mid-bot-left) of the hi-res Old World map — S3 boundaries | no |
@@ -56,7 +61,44 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | tww3_map_top_right.png | 1919x1079 | 3,657,669 | d77d5441291a5960aaf6851870a92fbf85cab4c0ffa43b578b0086063e61eea5 | Total War: Warhammer 3 campaign map screenshot | Pre-stitch tile of tww3_map_stitched.png | no |
 | updated-warhammer-the-old-world-map-v0-eyiuahz1swhg1.webp | 640x938 | 135,766 | 4559b8beb215f976ef8aed1339ef94c36dcf2d40ccb9cb88cc863d8b5cac05da | Games Workshop — updated Old World relief map | Old World relief cross-check (S6) | no |
 | wahafa-world-map.jpg | 547x365 | 32,445 | 69f7f4a483dd1976234e1399c88e59225093db101d8af8ba2c974f62d6257bd1 | Fan cartography — "wahafa" whole-world map | Whole-world coastline / extent cross-reference (unregistered) | no |
+| wh3_dlc_ie_parchment_map_english.jpg | 3703x2880 | 3,225,567 | f6e4f53ea80673bb9b792f11b1ac1de387bb8e07757f8a384aa40fd8aea757c1 | Creative Assembly — Total War: Warhammer 3 Immortal Empires parchment campaign map (English) | **The IE frame master** — carries the dense control-point warp its three siblings alias. Extends boundary coverage past the feature image's crop (polar Wastes, full Cathay, Eastern Steppes); canon province names for S6 | yes |
 <!-- MANIFEST:END -->
+
+## Renamed in S3a: `ljzbtm288r891.jpg` → `terraqueous_globe.jpg`
+
+The Terraqueous globe was carrying its upload-site filename. It was renamed on
+disk to something legible; the **bytes are unchanged**, so its SHA-256
+(`c4021e28…`) still matches the row that pinned the committed
+`map_data/heightmap.png` and `land_sea_mask.png`. Provenance therefore survives
+the rename intact — this is a relabelled row, not a new source. The registration
+record moved with it (`registration/terraqueous_globe.json`), as did the
+references in `generate_heightmap.py`, `lut/terraqueous_elevation.json` and
+`config/canvas_frame.py`.
+
+## The Immortal Empires frame family (S3a)
+
+Four sources are the **same picture at different crops and scales**, so one
+registration record carries the control points and the other three declare a
+`frame_alias` to it (see [registration/](registration/) and the `frame_alias`
+projection kind in `worldgen/schema.py`). The relationships were measured, not
+assumed:
+
+| Source | Relationship to the master | How measured |
+|---|---|---|
+| `wh3_dlc_ie_parchment_map_english.jpg` | **the master** (3703×2880) | — |
+| `pizqenw9rd791.jpg` | identity — pixel-aligned twin | identical dims, grayscale corr 0.803, median abs-diff 3 |
+| `3274025515_preview_WH3 climate map 6.0.3.jpg` | scale 0.6673 | exactly `2471/3703 = 1922/2880` |
+| `Immortal-Empires-Map-Feature-Image-scaled.jpg` | full width `x[8..3692]`, crop `y[224..2296]`, ratio 1.4391/1.4389 | multi-scale NCC, peak 0.6701 |
+
+That collapses four control-point authoring jobs into one, and means a
+control-point correction propagates to all four automatically. Immortal Empires
+is a *playable* map rather than a globe — Ulthuan is drawn roughly twice as large
+relative to the world as it is on the Terraqueous globe — so the master's record
+is a dense thin-plate warp, never an affine. It contributes **interior boundary
+lines and names only, never coastline**: the committed `land_sea_mask.png` is the
+sole coastline authority (user decision #1, 2026-07-25), which is exactly what
+makes a rubber-sheeted registration acceptable here. Local scale error moves an
+interior border a few pixels inside a landmass; it cannot put a coast in the sea.
 
 ## The annotated Empire map (`TheEmpireRivers - drawn on.jpg`)
 

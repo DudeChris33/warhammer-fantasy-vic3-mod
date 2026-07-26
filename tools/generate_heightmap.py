@@ -3,7 +3,7 @@
 
 Pipeline::
 
-    sources/ljzbtm288r891.jpg  (SHA-256 verified)
+    sources/terraqueous_globe.jpg  (SHA-256 verified)
         -> denoise -> LUT classify        (elevation + land, at SOURCE res)
         -> NE-II reproject                (to canvas res, blocked)
         -> morphological cleanup          -> tools/derived/land_sea_mask.png
@@ -54,7 +54,7 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 MAP_DATA_DIR = REPO_ROOT / "map_data"
 LUT_PATH = TOOLS_DIR / "lut" / "terraqueous_elevation.json"
 
-TERRAQUEOUS = "ljzbtm288r891.jpg"
+TERRAQUEOUS = "terraqueous_globe.jpg"
 TWW3 = "tww3_map_stitched.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE

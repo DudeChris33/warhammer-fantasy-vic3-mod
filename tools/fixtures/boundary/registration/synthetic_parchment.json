@@ -1,0 +1,19 @@
+{
+  "source": "synthetic_parchment.png",
+  "role": "fixture_boundary_master",
+  "projection": "control_point_warp",
+  "precedence": 40,
+  "layer_precedence": {"boundaries": 40, "coastline": 0},
+  "crop": [4, 4, 316, 236],
+  "footprint": [0, 0, 8192, 3616],
+  "notes": "The synthetic parchment's placement on the fixture canvas. Control points are stated in REAL canvas pixels (8192x3616) even though the fixture canvas is 256x112, so sources.verify's bounds checks exercise the same code path they do for a real record; worldgen.cells.warp_cells takes the canvas coordinate system as canvas_shape, exactly as reproject.source_coords_warp already does for the heightmap grid. The centre point is deliberately off the affine the corners imply (it maps 4224/1808 where an affine would put 4096/1760), so the fixture actually exercises the thin-plate term rather than a warp that happens to be affine.",
+  "control_points": [
+    {"source": [8, 8], "canvas": [640, 320], "note": "frame NW"},
+    {"source": [312, 8], "canvas": [7552, 320], "note": "frame NE"},
+    {"source": [8, 232], "canvas": [640, 3232], "note": "frame SW"},
+    {"source": [312, 232], "canvas": [7552, 3232], "note": "frame SE"},
+    {"source": [160, 8], "canvas": [4096, 320], "note": "frame N mid"},
+    {"source": [160, 232], "canvas": [4096, 3232], "note": "frame S mid"},
+    {"source": [160, 120], "canvas": [4224, 1808], "note": "centre, pulled off the affine"}
+  ]
+}

@@ -42,15 +42,16 @@ CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 STEP = 8
 
 
-def warp_source(reg: schema.SourceRegistration, rgb: np.ndarray, w: int, h: int):
+def warp_source(reg: schema.SourceRegistration, rgb: np.ndarray, w: int, h: int,
+                regs_by_source: dict[str, schema.SourceRegistration] | None = None):
     """Warp a source's RGB onto a (w, h) reduced canvas. Returns (rgb, valid)."""
     xs = (np.arange(w, dtype=np.float64) + 0.5) * (CANVAS_W / w)
     ys = (np.arange(h, dtype=np.float64) + 0.5) * (CANVAS_H / h)
     gx = np.broadcast_to(xs[None, :], (h, w))
     gy = np.broadcast_to(ys[:, None], (h, w))
 
-    if reg.projection == "control_point_warp":
-        fit = reproject.fit_warp(reg)
+    if reg.projection in ("control_point_warp", "frame_alias"):
+        fit = reproject.fit_placement(reg, regs_by_source)
         sx, sy = fit.to_source_px(gx, gy)
         x0, y0, x1, y1 = reg.footprint
         valid = (gx >= x0) & (gx <= x1) & (gy >= y0) & (gy <= y1)
@@ -77,12 +78,93 @@ def warp_source(reg: schema.SourceRegistration, rgb: np.ndarray, w: int, h: int)
     return out, valid
 
 
+def state_label_overlay(step: int) -> int:
+    """Render the artifact the S3a gate asks a human to look at.
+
+    Three things have to be judgeable at a glance, so each gets its own visual
+    channel rather than a separate image:
+
+    * **Do the cells follow the map?** Every cell is tinted by its macro region
+      and outlined, so a cell that ignored the source network — or one that a
+      torn warp split in two — reads as a shape that does not belong.
+    * **Does the layer respect the coastline?** The mask's own shoreline is drawn
+      over the top in magenta. Any cell boundary that crosses it is the failure
+      the mask-authority rule exists to prevent.
+    * **Where did the fit put the frame?** The registered control points are
+      marked, so a region of the map with no nearby control point — where a
+      thin-plate warp is extrapolating rather than interpolating — is visible
+      rather than something you have to know to look for.
+    """
+    import json
+
+    from worldgen import cells, schema
+
+    labels_path = DERIVED_DIR / "state_labels.png"
+    index_path = DERIVED_DIR / "state_labels_index.json"
+    if not labels_path.is_file():
+        raise SystemExit(f"{labels_path} not found — run tools/generate_state_labels.py first")
+
+    labels = cells.read_labels(labels_path)[::step, ::step]
+    land = raster.read_mask_png(MASK_PATH)[::step, ::step]
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+    n_land = int(index["land_cells"])
+    macro_of = np.zeros(int(labels.max()) + 1, dtype=np.int32)
+    for c in index["cells"]:
+        if c["kind"] == "land":
+            macro_of[c["label"]] = c["macro"]
+
+    # A fixed, high-separation hue wheel: adjacent macros must not be adjacent
+    # colours, or a mis-grouped cell hides in a neighbour's shade.
+    hues = np.array([
+        (214, 64, 64), (64, 150, 214), (110, 190, 90), (222, 168, 60),
+        (168, 104, 200), (86, 196, 190), (226, 120, 170), (150, 150, 96),
+        (96, 128, 214), (200, 96, 60), (120, 200, 140), (190, 190, 214),
+        (150, 96, 96), (96, 170, 120), (214, 140, 96), (130, 130, 170),
+    ], dtype=np.uint8)
+    img = np.zeros(labels.shape + (3,), dtype=np.uint8)
+    img[land] = hues[macro_of[labels[land]] % len(hues)]
+    img[~land] = (28, 42, 70)
+
+    # Cell outlines: a pixel differing from the neighbour to its right or below.
+    edge = np.zeros(labels.shape, dtype=bool)
+    edge[:, :-1] |= labels[:, :-1] != labels[:, 1:]
+    edge[:-1, :] |= labels[:-1, :] != labels[1:, :]
+    img[edge] = (img[edge] * 0.35).astype(np.uint8)
+
+    coast = land ^ ndimage.binary_erosion(land, np.ones((3, 3)))
+    img[coast] = (255, 0, 255)
+
+    for reg in schema.load_registrations(sources.REGISTRATION_DIR):
+        if reg.projection != "control_point_warp":
+            continue
+        for cp in reg.control_points:
+            x, y = int(cp.canvas[0] // step), int(cp.canvas[1] // step)
+            if 0 <= y < img.shape[0] and 0 <= x < img.shape[1]:
+                img[max(0, y - 1):y + 2, max(0, x - 1):x + 2] = (255, 255, 255)
+
+    out = DERIVED_DIR / "qa_state_labels.png"
+    raster.write_rgb_png(out, img)
+    land_areas = np.bincount(labels[land].ravel(), minlength=n_land + 1)[1:n_land + 1]
+    print(f"{out.name}: {n_land} land cells + {int(index['sea_cells'])} sea zones, "
+          f"{len(np.unique(macro_of[1:]))} macro regions")
+    print(f"  land cell area (full-res px): mean {int(land_areas.mean()) * step * step:,}  "
+          f"target {int(index.get('target_area', 0)):,}")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("source", nargs="?", help="one source filename (default: all registered)")
     p.add_argument("--step", type=int, default=STEP, help="canvas downscale factor")
+    p.add_argument("--labels", action="store_true",
+                   help="render the S3a state-label overlay instead of per-source overlays")
     args = p.parse_args(argv)
+
+    if args.labels:
+        if not MASK_PATH.is_file():
+            raise SystemExit(f"{MASK_PATH} not found — run tools/generate_heightmap.py first")
+        return state_label_overlay(args.step)
 
     if not MASK_PATH.is_file():
         raise SystemExit(f"{MASK_PATH} not found — run tools/generate_heightmap.py first")
@@ -91,7 +173,9 @@ def main(argv: list[str] | None = None) -> int:
     small = land[::args.step, ::args.step][:h, :w]
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
 
-    regs = schema.load_registrations(sources.REGISTRATION_DIR)
+    all_regs = schema.load_registrations(sources.REGISTRATION_DIR)
+    by_source = {r.source: r for r in all_regs}
+    regs = all_regs
     if args.source:
         regs = [r for r in regs if r.source == args.source]
         if not regs:
@@ -103,7 +187,7 @@ def main(argv: list[str] | None = None) -> int:
         except sources.ManifestError as exc:
             print(f"{reg.source}: skipped — {exc}")
             continue
-        warped, valid = warp_source(reg, rgb, w, h)
+        warped, valid = warp_source(reg, rgb, w, h, by_source)
 
         # Our coastline drawn over the source: a 1px outline of the mask, in a
         # colour no reference map uses, so any offset is unmistakable.

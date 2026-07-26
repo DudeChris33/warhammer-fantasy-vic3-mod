@@ -501,14 +501,19 @@ def _cross_check(states: list[State]) -> None:
 #:  * ``natural_earth_2``    — the Terraqueous oval; NE II forward polynomial.
 #:  * ``equirectangular``    — already-rectangular sources (the satellite frame).
 #:  * ``control_point_warp`` — regional maps warped by a control-point field.
-PROJECTION_KINDS = ("natural_earth_2", "equirectangular", "control_point_warp")
+#:  * ``frame_alias``        — a crop/rescale of another registered source; it
+#:                             borrows that source's control points rather than
+#:                             duplicating them (see :class:`FrameAlias`).
+PROJECTION_KINDS = ("natural_earth_2", "equirectangular", "control_point_warp", "frame_alias")
 
 #: Minimum control points per projection. A control-point warp needs at least an
-#: affine's worth (3); the parametric projections need 2 to fit scale/placement.
+#: affine's worth (3); the parametric projections need 2 to fit scale/placement;
+#: an alias needs none, because its placement comes entirely from its parent.
 _MIN_CONTROL_POINTS = {
     "natural_earth_2": 2,
     "equirectangular": 2,
     "control_point_warp": 3,
+    "frame_alias": 0,
 }
 
 
@@ -534,6 +539,43 @@ class ControlPoint:
 
 
 @dataclass(frozen=True)
+class FrameAlias:
+    """This source is a crop/rescale of another registered source's frame.
+
+    Four of the Immortal Empires references are the *same picture* at different
+    crops and scales (measured — see ``tools/SOURCES.md``). Authoring dense
+    control points four times would be four chances to author them inconsistently,
+    and a later correction would have to be applied four times. Instead one record
+    carries the warp and the siblings declare the fixed affine that takes their
+    own pixels into its:
+
+        parent_px = source_px * scale + offset
+
+    ``scale`` is deliberately expressed in the direction that needs no division —
+    a sibling at 0.6673x the master records ``scale = 1/0.6673``, computed once
+    here rather than inverted at every call site.
+    """
+
+    of: str
+    scale: Point
+    offset: Point
+
+    def to_parent_px(self, x, y):
+        """Map this source's pixel coordinates into the parent's."""
+        return (x * self.scale[0] + self.offset[0],
+                y * self.scale[1] + self.offset[1])
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str) -> "FrameAlias":
+        of = _as_str(_require(d, "of", ctx), f"{ctx}.of")
+        scale = _as_point(_require(d, "scale", ctx), f"{ctx}.scale")
+        offset = _as_point(_require(d, "offset", ctx), f"{ctx}.offset")
+        if scale[0] <= 0 or scale[1] <= 0:
+            raise SchemaError(f"{ctx}.scale: must be positive, got {scale}")
+        return cls(of=of, scale=scale, offset=offset)
+
+
+@dataclass(frozen=True)
 class SourceRegistration:
     """How one reference image registers onto the canvas.
 
@@ -551,6 +593,11 @@ class SourceRegistration:
     footprint: tuple[float, float, float, float]
     precedence: int
     layer_precedence: dict[str, int] = field(default_factory=dict)
+    frame_alias: FrameAlias | None = None
+
+    @property
+    def is_alias(self) -> bool:
+        return self.projection == "frame_alias"
 
     def precedence_for(self, layer: str) -> int:
         """Precedence for one *kind* of contribution, falling back to the record's
@@ -608,6 +655,30 @@ class SourceRegistration:
                 raise SchemaError(f"{ctx}.layer_precedence.{k}: must be >= 0, got {n}")
             layer_precedence[k] = n
 
+        alias_raw = d.get("frame_alias")
+        if projection == "frame_alias":
+            if alias_raw is None:
+                raise SchemaError(f"{ctx}: projection 'frame_alias' requires a 'frame_alias' block")
+            if not isinstance(alias_raw, dict):
+                raise SchemaError(f"{ctx}.frame_alias: expected an object, got {type(alias_raw).__name__}")
+            frame_alias = FrameAlias.from_dict(alias_raw, f"{ctx}.frame_alias")
+            if frame_alias.of == source:
+                raise SchemaError(f"{ctx}.frame_alias.of: a source cannot alias itself")
+            # Control points on an alias would be silently ignored, which is worse
+            # than refusing them: the author would think they had an effect.
+            if control_points:
+                raise SchemaError(
+                    f"{ctx}: a frame_alias takes its placement from '{frame_alias.of}' — "
+                    f"remove its {len(control_points)} control point(s) and correct the parent instead"
+                )
+        else:
+            if alias_raw is not None:
+                raise SchemaError(
+                    f"{ctx}: 'frame_alias' is only meaningful with projection 'frame_alias', "
+                    f"not '{projection}'"
+                )
+            frame_alias = None
+
         # A control point's source pixel must fall inside the crop it is measured
         # against (when one is given) — a point outside the kept region is a
         # mis-pick that would warp garbage into the canvas.
@@ -620,7 +691,7 @@ class SourceRegistration:
                     )
 
         return cls(source, role, projection, control_points, crop, footprint,
-                   precedence, layer_precedence)
+                   precedence, layer_precedence, frame_alias)
 
 
 def load_registration_file(path: Path) -> SourceRegistration:

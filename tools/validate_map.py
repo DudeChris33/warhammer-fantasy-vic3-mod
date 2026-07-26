@@ -462,12 +462,151 @@ def _check_loc_coverage(states: list[ParsedState], loc_dir: Path) -> list[str]:
 
 
 # ---------------------------------------------------------------------------
+# The S3a state-label layer (--labels)
+# ---------------------------------------------------------------------------
+#
+# S3a produces a label layer, not provinces — so it needs its own lint. The
+# checks are the engine invariants restated one level up: what "every province is
+# in exactly one state" becomes when the states themselves are the thing being
+# built. Catching a gap or a straddling cell here is what makes an S3a
+# control-point correction cheap; discovering it after 40k provinces have been
+# cut from the layer is not.
+
+def validate_labels(labels_path: Path, mask_path: Path, index_path: Path,
+                    wrap_x: bool = True, min_cell_area: int = 256) -> list[str]:
+    """Check that the state-label layer tiles the committed land/sea mask exactly."""
+    import json
+
+    from worldgen import cells
+
+    errors: list[str] = []
+    for path in (labels_path, mask_path, index_path):
+        if not path.is_file():
+            errors.append(f"missing {path}")
+    if errors:
+        return errors
+
+    labels = cells.read_labels(labels_path)
+    land = _read_mask(mask_path)
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+
+    if labels.shape != land.shape:
+        return [f"label layer {labels.shape} does not match the mask {land.shape}"]
+
+    n_land = int(index["land_cells"])
+    n_sea = int(index["sea_cells"])
+
+    # 1. Total partition: no unlabelled pixel anywhere.
+    blank = int((labels == 0).sum())
+    if blank:
+        errors.append(f"{blank:,} pixels carry no label — the layer does not tile the canvas")
+
+    # 2. No cell straddles the coastline. This is the invariant that keeps the
+    #    mask authoritative: a label with pixels on both sides would mean a state
+    #    that is partly a sea zone, which the engine has no representation for.
+    land_ids = set(np.unique(labels[land]).tolist())
+    sea_ids = set(np.unique(labels[~land]).tolist())
+    both = sorted(land_ids & sea_ids)
+    if both:
+        errors.append(
+            f"{len(both)} label(s) span land and sea (first few: {both[:5]}) — "
+            f"a cell must be wholly one or the other"
+        )
+
+    # 3. The index and the raster agree about which labels exist and what they are.
+    for i in sorted(land_ids):
+        if not (1 <= i <= n_land):
+            errors.append(f"land pixel carries label {i}, outside the land band 1..{n_land}")
+            break
+    for i in sorted(sea_ids):
+        if not (n_land < i <= n_land + n_sea):
+            errors.append(
+                f"water pixel carries label {i}, outside the sea band "
+                f"{n_land + 1}..{n_land + n_sea}"
+            )
+            break
+    listed = {c["label"] for c in index["cells"]}
+    present = land_ids | sea_ids
+    for missing in sorted(present - listed)[:5]:
+        errors.append(f"label {missing} is in the raster but not in the index")
+    for extra in sorted(listed - present)[:5]:
+        errors.append(f"label {extra} is in the index but not in the raster")
+
+    # 4. Every cell is one connected region. A state in two pieces is not a state.
+    comp = cells.components(labels, wrap_x)
+    pairs = np.unique(np.stack([labels.ravel(), comp.ravel()], axis=1), axis=0)
+    counts = np.bincount(pairs[:, 0].astype(np.int64), minlength=int(labels.max()) + 1)
+    torn = np.flatnonzero(counts > 1)
+    if torn.size:
+        errors.append(
+            f"{torn.size} cell(s) are disconnected (first few: {torn[:5].tolist()})"
+        )
+
+    # 5. Areas in the index match the raster, so downstream code can trust it
+    #    without recomputing over 30 megapixels.
+    areas = np.bincount(labels.ravel(), minlength=n_land + n_sea + 1)
+    for c in index["cells"]:
+        if int(areas[c["label"]]) != int(c["area"]):
+            errors.append(
+                f"label {c['label']}: index says {c['area']} px, raster has {areas[c['label']]}"
+            )
+            break
+
+    # 6. Every land cell has a macro region — S3b groups strategic regions by it.
+    for c in index["cells"]:
+        if c["kind"] == "land" and not c["macro"]:
+            errors.append(f"land cell {c['label']} has no macro region")
+            break
+
+    # 7. No avoidably-degenerate cell. S3b cuts provinces out of each state, and a
+    #    state a few pixels across cannot carry one. But a small *island* is a
+    #    legitimately small state — vanilla ships several — and there is nothing to
+    #    merge it into, so the rule is "below the floor **and** adjacent to another
+    #    cell of the same kind", i.e. it could have been merged and was not.
+    tiny = [i for i in sorted(land_ids | sea_ids)
+            if i > 0 and int(areas[i]) < int(min_cell_area)]
+    if tiny:
+        same_kind_nb: dict[int, bool] = {i: False for i in tiny}
+        pairs = np.concatenate([
+            np.stack([labels[:, :-1].ravel(), labels[:, 1:].ravel()], axis=1),
+            np.stack([labels[:-1, :].ravel(), labels[1:, :].ravel()], axis=1),
+            np.stack([labels[:, -1].ravel(), labels[:, 0].ravel()], axis=1)
+            if wrap_x else np.empty((0, 2), dtype=labels.dtype),
+        ])
+        pairs = np.unique(pairs[pairs[:, 0] != pairs[:, 1]], axis=0)
+        tiny_set = set(tiny)
+        for a, b in pairs.tolist():
+            for u, v in ((a, b), (b, a)):
+                if u in tiny_set and ((u in land_ids) == (v in land_ids)):
+                    same_kind_nb[u] = True
+        mergeable = [i for i in tiny if same_kind_nb[i]]
+        if mergeable:
+            smallest = min(mergeable, key=lambda i: areas[i])
+            errors.append(
+                f"{len(mergeable)} cell(s) are below the {min_cell_area} px floor and "
+                f"have a same-kind neighbour to merge into "
+                f"(smallest: label {smallest} at {int(areas[smallest])} px)"
+            )
+    return errors
+
+
+def _read_mask(path: Path) -> np.ndarray:
+    from worldgen.raster import read_mask_png
+
+    return read_mask_png(path)
+
+
+# ---------------------------------------------------------------------------
 # CLI
 # ---------------------------------------------------------------------------
 
 def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--fixture", action="store_true", help="lint tools/fixtures/expected/ instead of the repo map")
+    p.add_argument("--labels", action="store_true", help="lint the S3a state-label layer instead of the province map")
+    p.add_argument("--labels-path", type=Path, help="path to state_labels.png")
+    p.add_argument("--mask-path", type=Path, help="path to land_sea_mask.png")
+    p.add_argument("--index-path", type=Path, help="path to state_labels_index.json")
     p.add_argument("--provinces", type=Path, help="path to provinces.png")
     p.add_argument("--state-regions", type=Path, help="path to state_regions/ directory")
     p.add_argument("--default-map", type=Path, help="path to default.map")
@@ -502,6 +641,23 @@ def _resolve_paths(args: argparse.Namespace) -> dict[str, Path]:
 
 def main(argv: list[str] | None = None) -> int:
     args = _build_parser().parse_args(argv)
+
+    if args.labels:
+        derived = TOOLS_DIR / "derived"
+        errors = validate_labels(
+            labels_path=args.labels_path or derived / "state_labels.png",
+            mask_path=args.mask_path or derived / "land_sea_mask.png",
+            index_path=args.index_path or derived / "state_labels_index.json",
+            wrap_x=map_config.WRAP_X,
+        )
+        if errors:
+            print(f"validate_map --labels: {len(errors)} error(s):", file=sys.stderr)
+            for e in errors:
+                print(f"  - {e}", file=sys.stderr)
+            return 1
+        print("validate_map --labels: the state-label layer tiles the mask exactly.")
+        return 0
+
     paths = _resolve_paths(args)
     errors = validate(
         provinces_path=paths["provinces"],

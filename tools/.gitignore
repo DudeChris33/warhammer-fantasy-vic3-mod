@@ -9,10 +9,18 @@ __pycache__/
 # but ignore any stray local output dir just in case.
 fixtures/_out/
 
-# tools/derived/ holds generated artifacts. Only land_sea_mask.png is a committed
-# deliverable (S3 cuts provinces.png + rivers.png from it); everything else here
-# is a QA/preview render (preview_*, qa_*, ...) regenerable on demand and kept out
-# of the repo.
+# tools/derived/ holds generated artifacts. Most of it is a QA/preview render
+# (preview_*, qa_*, ...) regenerable on demand and kept out of the repo. The
+# committed deliverables are listed explicitly:
+#   land_sea_mask.png         the coastline authority (S2); S3b cuts provinces from it
+#   state_labels.png          the state-cell partition (S3a); S3b's direct input
+#   state_labels_index.json   per-cell macro / area / coastal flag / provisional key
+#   COVERAGE.md               the achieved-vs-target density report
+# The two rasters and the index are consumed by later phases, so they have to
+# travel with the repo; COVERAGE.md is the record of where the sources fall short.
 derived/*
 !derived/land_sea_mask.png
+!derived/state_labels.png
+!derived/state_labels_index.json
+!derived/COVERAGE.md
 

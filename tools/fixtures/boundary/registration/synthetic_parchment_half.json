@@ -1,0 +1,13 @@
+{
+  "source": "synthetic_parchment_half.png",
+  "role": "fixture_boundary_alias",
+  "projection": "frame_alias",
+  "frame_alias": {"of": "synthetic_parchment.png", "scale": [2.0, 2.0], "offset": [0.0, 0.0]},
+  "precedence": 20,
+  "layer_precedence": {"boundaries": 20, "coastline": 0},
+  "crop": [2, 2, 158, 118],
+  "footprint": [0, 0, 8192, 3616],
+  "control_points": [],
+  "notes": "Exactly half the master's resolution (make_source.py writes src[::2, ::2]), so parent_px = sibling_px * 2 with no offset. It exists to pin the frame_alias path: the fixture asserts this sibling lands on the SAME canvas cells as its parent, which is the property the real IE family depends on and the one that would break silently if the alias composition were ever inverted. Lower boundary precedence than the master, so the fixture also exercises precedence ordering with two layers that overlap completely.",
+  "control_points_note": "empty by schema rule — an alias borrows its parent's points"
+}

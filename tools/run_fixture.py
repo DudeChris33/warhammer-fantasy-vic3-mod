@@ -26,6 +26,7 @@ from __future__ import annotations
 import argparse
 import filecmp
 import hashlib
+import json
 import random
 import shutil
 import sys
@@ -37,7 +38,10 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import composite, ingest, raster, reproject, schema, segment, sources, statefile  # noqa: E402
+from worldgen import (  # noqa: E402
+    cells, composite, ingest, macro, parchment, raster, reproject, schema, segment,
+    sources, statefile,
+)
 from worldgen.raster import (  # noqa: E402
     ColorAllocator,
     color_to_hex,
@@ -69,6 +73,19 @@ INGEST_EXPECTED = INGEST_DIR / "expected"
 INGEST_CANVAS = (512, 226)
 INGEST_HEIGHTMAP = (1024, 452)
 INGEST_BLOCK_ROWS = 64
+
+# The S3a boundary fixture: a synthetic parchment plus a half-scale frame_alias
+# sibling, carried through the *same* extract -> warp -> intersect -> tile path
+# the real state-label generator uses, at a tiny canvas.
+BOUNDARY_DIR = TOOLS_DIR / "fixtures" / "boundary"
+BOUNDARY_MANIFEST = BOUNDARY_DIR / "SOURCES.md"
+BOUNDARY_REG_DIR = BOUNDARY_DIR / "registration"
+BOUNDARY_MASK = BOUNDARY_DIR / "mask.png"
+BOUNDARY_EXPECTED = BOUNDARY_DIR / "expected"
+BOUNDARY_CANVAS = (256, 112)  # (width, height)
+#: Cell counts for the fixture, scaled down from the real targets.
+BOUNDARY_LAND_CELLS = 12
+BOUNDARY_SEA_ZONES = 5
 
 # The fixture uses a tiny canvas (the real map is map_config.PROVINCES_SIZE).
 FIXTURE_CANVAS = (128, 64)  # (width, height)
@@ -487,24 +504,24 @@ def _write_ingest_digest(path: Path, reg, fields, land: np.ndarray, height: np.n
     path.write_bytes("\n".join(lines).encode("utf-8"))
 
 
-def _update_ingest_manifest() -> None:
-    """Refresh the fixture manifest's dims/bytes/SHA for the committed source.
+def _update_fixture_manifest(manifest: Path, root: Path) -> None:
+    """Refresh a fixture manifest's dims/bytes/SHA for its committed sources.
 
     Deliberately does *not* reuse ``sources.update_manifest``: that sweeps every
-    file in its directory, and the fixture dir also holds ``make_source.py``,
-    ``lut.json`` and this manifest, which must not become manifest rows. This only
-    refreshes rows already declared in the fixture manifest.
+    file in its directory, and a fixture dir also holds ``make_source.py``,
+    ``lut.json``, a mask and the manifest itself, none of which must become
+    manifest rows. This only refreshes rows already declared.
     """
-    md = INGEST_MANIFEST.read_text(encoding="utf-8")
+    md = manifest.read_text(encoding="utf-8")
     rows = []
     for r in sources.parse_manifest(md):
-        p = INGEST_DIR / r.file
+        p = root / r.file
         rows.append(sources.ManifestRow(
             r.file, sources.image_dims(p), f"{p.stat().st_size:,}",
             sources.sha256_of(p), r.origin, r.role, r.registered))
-    INGEST_MANIFEST.write_text(
+    manifest.write_text(
         sources._splice_manifest(md, sources.render_table(rows)), encoding="utf-8")
-    print(f"fixture manifest refreshed: {INGEST_MANIFEST}")
+    print(f"fixture manifest refreshed: {manifest}")
 
 
 def check_ingest() -> int:
@@ -541,6 +558,208 @@ def check_ingest() -> int:
             return 1
         print("ingest: output matches committed golden.")
     return 0
+
+
+def build_boundary(out_dir: Path) -> None:
+    """Drive the synthetic parchment through the real S3a boundary path.
+
+    Deliberately calls the same ``worldgen.parchment`` / ``worldgen.cells``
+    functions ``generate_state_labels.py`` does — ink threshold, complement
+    labelling, warp, precedence stack, mask intersection, tear repair,
+    nearest-label fill, density reconciliation, sea zones — so a regression in
+    any of them trips this golden. The sources are loaded through the fixture
+    manifest's SHA-256 guard, exactly as the real run loads its sources.
+    """
+    out_dir.mkdir(parents=True, exist_ok=True)
+    regs = {r.source: r for r in schema.load_registrations(BOUNDARY_REG_DIR)}
+    land = raster.read_mask_png(BOUNDARY_MASK)
+    w, h = BOUNDARY_CANVAS
+    canvas_shape = (map_config.PROVINCES_SIZE[1], map_config.PROVINCES_SIZE[0])
+
+    layers = []
+    warped_by_source = {}
+    for name in sorted(regs):
+        reg = regs[name]
+        rgb = sources.load_source_image(name, sources_dir=BOUNDARY_DIR,
+                                        manifest_path=BOUNDARY_MANIFEST)
+        # Scale the ink window with the source, so the half-scale sibling sees the
+        # same neighbourhood in map terms rather than twice as much of the map.
+        win = max(5, int(round(21 * rgb.shape[1] / 320)) | 1)
+        ink = parchment.ink_mask(rgb, window=win, offset=10)
+        src_cells, _ = parchment.cells_from_ink(ink, max(10, 40 * rgb.shape[1] // 320))
+        lab, inside = cells.warp_cells(reg, regs, src_cells.astype(np.int32), (h, w),
+                                       block_rows=32, canvas_shape=canvas_shape)
+        warped_by_source[name] = lab
+        layers.append((name, reg.precedence_for("boundaries"), lab, inside))
+
+    # The property the whole alias mechanism rests on: a sibling must land in the
+    # same canvas *place* as its parent. Deliberately not tested as pixel-exact
+    # equality — the sibling is half resolution, so its traced boundaries really
+    # do fall a pixel either side of the parent's, and demanding they coincide
+    # would be testing the resampler rather than the alias. What must hold is
+    # that every boundary is within a couple of pixels of the corresponding one:
+    # an inverted or offset alias composition misses by hundreds.
+    agree = _edge_proximity(warped_by_source["synthetic_parchment.png"],
+                            warped_by_source["synthetic_parchment_half.png"])
+    if agree < 0.95:
+        raise RuntimeError(
+            f"frame_alias sibling does not land where its parent does — only "
+            f"{100 * agree:.1f}% of its cell boundaries fall within 2 px of the parent's"
+        )
+
+    labels = cells.stack_layers(layers, (h, w))
+    labels[~land] = 0
+    labels = cells.split_disconnected(labels, wrap_x=True)
+    labels = cells.fill_nearest(labels, land, wrap_x=True, pad=32)
+    labels[~land] = 0
+    labels = cells.split_disconnected(labels, wrap_x=True)
+    labels = cells.merge_to_target(labels, BOUNDARY_LAND_CELLS, wrap_x=True)
+    target = int(land.sum() // BOUNDARY_LAND_CELLS)
+    labels = cells.split_large(labels, int(target * 2.2), target, wrap_x=True)
+    labels = cells.merge_small(labels, int(target * 0.35), wrap_x=True)
+    labels = cells.split_disconnected(labels, wrap_x=True)
+    labels = cells.merge_small(labels, 20, wrap_x=True)
+    labels = cells.split_disconnected(labels, wrap_x=True)
+    n_land = int(labels.max())
+
+    sea = cells.sea_zones(~land, BOUNDARY_SEA_ZONES, wrap_x=True)
+    labels[~land] = sea[~land] + n_land
+    if int((labels == 0).sum()):
+        raise RuntimeError("boundary fixture left pixels unlabelled")
+    cells.write_labels(out_dir / "state_labels.png", labels)
+
+    areas = np.bincount(labels.ravel(), minlength=n_land + int(sea.max()) + 1)
+    coast = np.zeros_like(land)
+    coast[:, :-1] |= ~land[:, 1:]
+    coast[:, 1:] |= ~land[:, :-1]
+    coast[:-1] |= ~land[1:]
+    coast[1:] |= ~land[:-1]
+    coastal = set(np.unique(labels[coast & land]).tolist())
+    index = {
+        "canvas": list(BOUNDARY_CANVAS),
+        "land_cells": n_land,
+        "sea_cells": int(sea.max()),
+        "cells": [
+            {"label": i, "kind": "land" if i <= n_land else "sea",
+             "key": (f"STATE_FIXTURE_{i:03d}" if i <= n_land else f"STATE_SEA_{i - n_land:03d}"),
+             # The fixture has no macro source, so every land cell takes macro 1 —
+             # enough for the --labels lint's "every land cell has a macro" check
+             # to be exercised without inventing a second annotated image.
+             "macro": 1 if i <= n_land else 0,
+             "area": int(areas[i]),
+             "coastal": bool(i in coastal) if i <= n_land else True}
+            for i in range(1, n_land + int(sea.max()) + 1)
+        ],
+    }
+    (out_dir / "state_labels_index.json").write_bytes(
+        (json.dumps(index, indent=1) + "\n").encode("utf-8"))
+
+    stats = [
+        f"land_px               {int(land.sum())}",
+        f"land_cells            {n_land}",
+        f"sea_zones             {int(sea.max())}",
+        f"alias_edge_agreement  {round(agree, 4)}",
+        f"min_land_area         {int(np.bincount(labels.ravel())[1:n_land + 1].min())}",
+        f"max_land_area         {int(np.bincount(labels.ravel())[1:n_land + 1].max())}",
+        "",
+    ]
+    (out_dir / "boundary_stats.txt").write_bytes("\n".join(stats).encode("utf-8"))
+
+
+def _edge_proximity(a: np.ndarray, b: np.ndarray, tol: int = 2) -> float:
+    """Fraction of ``b``'s cell boundaries lying within ``tol`` px of one of ``a``'s."""
+    from scipy import ndimage
+
+    def edges(x: np.ndarray) -> np.ndarray:
+        e = np.zeros(x.shape, dtype=bool)
+        e[:, :-1] |= x[:, :-1] != x[:, 1:]
+        e[:-1, :] |= x[:-1, :] != x[1:, :]
+        return e
+
+    ea, eb = edges(a), edges(b)
+    if not eb.any():
+        return 0.0
+    near = ndimage.binary_dilation(ea, np.ones((2 * tol + 1, 2 * tol + 1), bool))
+    return float(near[eb].mean())
+
+
+def check_boundary() -> int:
+    """Determinism + golden + manifest-verify for the boundary fixture."""
+    errors = sources.verify(sources_dir=BOUNDARY_DIR, manifest_path=BOUNDARY_MANIFEST,
+                            registration_dir=BOUNDARY_REG_DIR)
+    if errors:
+        print("BOUNDARY manifest verification failed:", file=sys.stderr)
+        for e in errors:
+            print(f"  - {e}", file=sys.stderr)
+        return 1
+    print("boundary: fixture manifest SHA-256 + registration checks passed.")
+
+    with tempfile.TemporaryDirectory(prefix="wh_boundary_") as tmp:
+        run1, run2 = Path(tmp) / "run1", Path(tmp) / "run2"
+        build_boundary(run1)
+        build_boundary(run2)
+        det = _diff(_snapshot(run1), _snapshot(run2))
+        if det:
+            print("BOUNDARY DETERMINISM FAILURE:", file=sys.stderr)
+            for p in det:
+                print(f"  - {p}", file=sys.stderr)
+            return 1
+        print("boundary: two runs are byte-identical.")
+
+        if not BOUNDARY_EXPECTED.is_dir():
+            print(f"no boundary golden at {BOUNDARY_EXPECTED}; run --update first.", file=sys.stderr)
+            return 1
+        reg = _diff(_snapshot(run1), _snapshot(BOUNDARY_EXPECTED))
+        if reg:
+            print("BOUNDARY REGRESSION — output differs from committed golden:", file=sys.stderr)
+            for p in reg:
+                print(f"  - {p}", file=sys.stderr)
+            return 1
+        print("boundary: output matches committed golden.")
+
+        import validate_map
+        errs = validate_map.validate_labels(
+            labels_path=BOUNDARY_EXPECTED / "state_labels.png",
+            mask_path=BOUNDARY_MASK,
+            index_path=BOUNDARY_EXPECTED / "state_labels_index.json",
+            wrap_x=True,
+            # Scaled to the fixture canvas: 256x112 against the real 8192x3616 is
+            # a 1024x area ratio, so the real 256 px floor is well under a pixel
+            # here. 20 px still catches a degenerate cell at this size.
+            min_cell_area=20,
+        )
+        if errs:
+            print("BOUNDARY --labels lint failed:", file=sys.stderr)
+            for e in errs:
+                print(f"  - {e}", file=sys.stderr)
+            return 1
+        print("boundary: --labels lint passed on the golden layer.")
+    return 0
+
+
+def _selfcheck_cells() -> None:
+    """Wrap-aware component labelling and the nearest-label fill, in isolation.
+
+    The seam is where a label layer goes wrong invisibly: a landmass split at
+    x=0/x=W-1 becomes two states that look correct on every map mode and are
+    wrong in every adjacency. Pinning it here means the fixture fails rather than
+    the game.
+    """
+    a = np.zeros((8, 16), dtype=np.int32)
+    a[2:6, 14:] = 7
+    a[2:6, :2] = 7
+    comp = cells.components(a, wrap_x=True)
+    assert len(np.unique(comp[a == 7])) == 1, "a label crossing the seam is one component"
+    comp_nowrap = cells.components(a, wrap_x=False)
+    assert len(np.unique(comp_nowrap[a == 7])) == 2, "...and two when x does not wrap"
+
+    b = np.zeros((6, 12), dtype=np.int32)
+    b[3, 0] = 1
+    b[3, 11] = 2
+    within = np.ones(b.shape, dtype=bool)
+    filled = cells.fill_nearest(b, within, wrap_x=True, pad=6)
+    assert int(filled[3, 10]) == 2 and int(filled[3, 1]) == 1
+    assert (filled != 0).all(), "the fill must leave nothing unlabelled"
 
 
 def _selfcheck_rivers() -> None:
@@ -646,6 +865,8 @@ def run_check() -> int:
     _selfcheck_wrap()
     _selfcheck_composite()
     print("composite: precedence + tie-rejection self-check passed.")
+    _selfcheck_cells()
+    print("cells: wrap-aware components + nearest-label fill self-check passed.")
     _selfcheck_rivers()
     print("rivers: rasterize + topology-validation self-check passed.")
     world = schema.load_world(WORLD_DIR)
@@ -699,6 +920,11 @@ def run_check() -> int:
     if rc != 0:
         return rc
 
+    print()
+    rc = check_boundary()
+    if rc != 0:
+        return rc
+
     print("\nFIXTURE OK.")
     return 0
 
@@ -706,6 +932,7 @@ def run_check() -> int:
 def run_update() -> int:
     _selfcheck_wrap()
     _selfcheck_composite()
+    _selfcheck_cells()
     _selfcheck_rivers()
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
@@ -718,6 +945,11 @@ def run_update() -> int:
         shutil.rmtree(INGEST_EXPECTED)
     build_ingest(INGEST_EXPECTED)
     print(f"wrote ingest golden outputs to {INGEST_EXPECTED}")
+
+    if BOUNDARY_EXPECTED.exists():
+        shutil.rmtree(BOUNDARY_EXPECTED)
+    build_boundary(BOUNDARY_EXPECTED)
+    print(f"wrote boundary golden outputs to {BOUNDARY_EXPECTED}")
     return 0
 
 
@@ -730,7 +962,8 @@ def main(argv: list[str] | None = None) -> int:
                        help="refresh the ingestion fixture's SHA-256 manifest (after make_source.py)")
     args = parser.parse_args(argv)
     if args.update_fixture_manifest:
-        _update_ingest_manifest()
+        _update_fixture_manifest(INGEST_MANIFEST, INGEST_DIR)
+        _update_fixture_manifest(BOUNDARY_MANIFEST, BOUNDARY_DIR)
         return 0
     return run_update() if args.update else run_check()
 

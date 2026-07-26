@@ -4,10 +4,16 @@ A tiny (128×64) hand-built world that exercises the province/state generator +
 validator path offline, with **zero game dependency**. `tools/run_fixture.py`
 rasterizes `world/` into `expected/` and regression-checks it byte-for-byte.
 
-The separate source-driven whole-world ingestion pipeline (heightmap/coastline/
-rivers, added S2) has its own fixture and README — see
-`tools/fixtures/ingest/README.md`. Both fixtures run under the same
-`tools/run_fixture.py --check` / `--update`.
+Two further fixtures cover the source-driven front end, each with its own
+committed synthetic source (our own pixels, so they run on a clean clone with no
+`sources/` present):
+
+| Fixture | Covers | README |
+|---|---|---|
+| `ingest/` | whole-world ingestion — LUT classification, reprojection, segmentation, compositing, river rasterization (S2) | `ingest/README.md` |
+| `boundary/` | the boundary path — local-contrast ink, complement labelling, the `frame_alias` warp, precedence stacking, mask intersection, nearest-label fill, density reconciliation, sea zones (S3a) | `boundary/make_source.py` docstring |
+
+All three run under the same `tools/run_fixture.py --check` / `--update`.
 
 ## `world/` — committed input geometry
 

@@ -1,0 +1,906 @@
+{
+  "role": "ie_boundary_frame_master",
+  "precedence": 40,
+  "layer_precedence": {
+    "boundaries": 40,
+    "coastline": 5,
+    "relief": 5
+  },
+  "crop": [
+    40,
+    40,
+    3663,
+    2840
+  ],
+  "notes": "Immortal Empires parchment campaign map - the FRAME MASTER for the IE family. Its three siblings (pizqenw9rd791.jpg, the climate map, the feature image) carry frame_alias records pointing here rather than duplicating these control points, so a correction made here reaches all four. Contributes INTERIOR BOUNDARY LINES AND NAMES ONLY, never coastline (user decision #1/#2, 2026-07-25): tools/derived/land_sea_mask.png is the sole coastline authority, which is what makes a rubber-sheeted registration acceptable - local scale error moves an interior border a few px inside a landmass and cannot put a coast in the sea. Hence coastline/relief precedence 5, boundaries 40. This record is MACHINE-FITTED by tools/fit_registration.py from tools/registration/seeds/wh3_dlc_ie_parchment_map_english.json; re-derive rather than hand-edit. FIT: {\"coarse_iou\": 0.5017, \"folded_fraction\": 1e-05, \"landmark_check_px\": {\"max\": 1079.0, \"mean\": 503.3}, \"landmarks\": 12, \"lattice\": \"10x8\", \"method\": \"coarse affine + thin-plate lattice refined on two-sided silhouette IoU\", \"move\": {\"max_px\": 710.4364855495528, \"mean_px\": 246.63202298333925, \"n\": 80, \"p90_px\": 445.7208059450531}, \"refined_iou\": 0.7173}",
+  "source": "wh3_dlc_ie_parchment_map_english.jpg",
+  "projection": "control_point_warp",
+  "footprint": [
+    1273.079,
+    0.0,
+    7984.871000000001,
+    3413.7772000000004
+  ],
+  "control_points": [
+    {
+      "source": [
+        74.1,
+        509.9
+      ],
+      "canvas": [
+        2245.1,
+        0.0
+      ],
+      "note": "lattice 0"
+    },
+    {
+      "source": [
+        469.0,
+        509.9
+      ],
+      "canvas": [
+        2302.8,
+        60.4
+      ],
+      "note": "lattice 1"
+    },
+    {
+      "source": [
+        864.0,
+        509.9
+      ],
+      "canvas": [
+        3164.6,
+        180.4
+      ],
+      "note": "lattice 2"
+    },
+    {
+      "source": [
+        1259.0,
+        509.9
+      ],
+      "canvas": [
+        3990.3,
+        0.0
+      ],
+      "note": "lattice 3"
+    },
+    {
+      "source": [
+        1654.0,
+        509.9
+      ],
+      "canvas": [
+        4204.1,
+        60.4
+      ],
+      "note": "lattice 4"
+    },
+    {
+      "source": [
+        2049.0,
+        509.9
+      ],
+      "canvas": [
+        4885.9,
+        108.4
+      ],
+      "note": "lattice 5"
+    },
+    {
+      "source": [
+        2444.0,
+        509.9
+      ],
+      "canvas": [
+        5423.6,
+        360.4
+      ],
+      "note": "lattice 6"
+    },
+    {
+      "source": [
+        2839.0,
+        509.9
+      ],
+      "canvas": [
+        6297.4,
+        108.4
+      ],
+      "note": "lattice 7"
+    },
+    {
+      "source": [
+        3234.0,
+        509.9
+      ],
+      "canvas": [
+        7267.1,
+        96.0
+      ],
+      "note": "lattice 8"
+    },
+    {
+      "source": [
+        3628.9,
+        509.9
+      ],
+      "canvas": [
+        7612.9,
+        156.4
+      ],
+      "note": "lattice 9"
+    },
+    {
+      "source": [
+        74.1,
+        841.6
+      ],
+      "canvas": [
+        1369.1,
+        234.3
+      ],
+      "note": "lattice 10"
+    },
+    {
+      "source": [
+        469.0,
+        841.6
+      ],
+      "canvas": [
+        2290.8,
+        642.3
+      ],
+      "note": "lattice 11"
+    },
+    {
+      "source": [
+        864.0,
+        841.6
+      ],
+      "canvas": [
+        3368.6,
+        822.3
+      ],
+      "note": "lattice 12"
+    },
+    {
+      "source": [
+        1259.0,
+        841.6
+      ],
+      "canvas": [
+        4122.3,
+        690.3
+      ],
+      "note": "lattice 13"
+    },
+    {
+      "source": [
+        1654.0,
+        841.6
+      ],
+      "canvas": [
+        4336.1,
+        306.3
+      ],
+      "note": "lattice 14"
+    },
+    {
+      "source": [
+        2049.0,
+        841.6
+      ],
+      "canvas": [
+        5101.9,
+        330.3
+      ],
+      "note": "lattice 15"
+    },
+    {
+      "source": [
+        2444.0,
+        841.6
+      ],
+      "canvas": [
+        5543.6,
+        474.3
+      ],
+      "note": "lattice 16"
+    },
+    {
+      "source": [
+        2839.0,
+        841.6
+      ],
+      "canvas": [
+        6513.4,
+        294.3
+      ],
+      "note": "lattice 17"
+    },
+    {
+      "source": [
+        3234.0,
+        841.6
+      ],
+      "canvas": [
+        7507.1,
+        282.3
+      ],
+      "note": "lattice 18"
+    },
+    {
+      "source": [
+        3628.9,
+        841.6
+      ],
+      "canvas": [
+        7648.9,
+        306.3
+      ],
+      "note": "lattice 19"
+    },
+    {
+      "source": [
+        74.1,
+        1173.3
+      ],
+      "canvas": [
+        1369.1,
+        984.2
+      ],
+      "note": "lattice 20"
+    },
+    {
+      "source": [
+        469.0,
+        1173.3
+      ],
+      "canvas": [
+        2542.8,
+        996.2
+      ],
+      "note": "lattice 21"
+    },
+    {
+      "source": [
+        864.0,
+        1173.3
+      ],
+      "canvas": [
+        3080.6,
+        1020.2
+      ],
+      "note": "lattice 22"
+    },
+    {
+      "source": [
+        1259.0,
+        1173.3
+      ],
+      "canvas": [
+        3786.3,
+        888.2
+      ],
+      "note": "lattice 23"
+    },
+    {
+      "source": [
+        1654.0,
+        1173.3
+      ],
+      "canvas": [
+        4636.1,
+        1272.2
+      ],
+      "note": "lattice 24"
+    },
+    {
+      "source": [
+        2049.0,
+        1173.3
+      ],
+      "canvas": [
+        4873.9,
+        948.2
+      ],
+      "note": "lattice 25"
+    },
+    {
+      "source": [
+        2444.0,
+        1173.3
+      ],
+      "canvas": [
+        5639.6,
+        1176.2
+      ],
+      "note": "lattice 26"
+    },
+    {
+      "source": [
+        2839.0,
+        1173.3
+      ],
+      "canvas": [
+        6213.4,
+        780.2
+      ],
+      "note": "lattice 27"
+    },
+    {
+      "source": [
+        3234.0,
+        1173.3
+      ],
+      "canvas": [
+        7135.1,
+        972.2
+      ],
+      "note": "lattice 28"
+    },
+    {
+      "source": [
+        3628.9,
+        1173.3
+      ],
+      "canvas": [
+        7480.9,
+        912.2
+      ],
+      "note": "lattice 29"
+    },
+    {
+      "source": [
+        74.1,
+        1504.9
+      ],
+      "canvas": [
+        1477.1,
+        1482.1
+      ],
+      "note": "lattice 30"
+    },
+    {
+      "source": [
+        469.0,
+        1504.9
+      ],
+      "canvas": [
+        2302.8,
+        1110.1
+      ],
+      "note": "lattice 31"
+    },
+    {
+      "source": [
+        864.0,
+        1504.9
+      ],
+      "canvas": [
+        3032.6,
+        1422.1
+      ],
+      "note": "lattice 32"
+    },
+    {
+      "source": [
+        1259.0,
+        1504.9
+      ],
+      "canvas": [
+        3618.3,
+        1470.1
+      ],
+      "note": "lattice 33"
+    },
+    {
+      "source": [
+        1654.0,
+        1504.9
+      ],
+      "canvas": [
+        4240.1,
+        1278.1
+      ],
+      "note": "lattice 34"
+    },
+    {
+      "source": [
+        2049.0,
+        1504.9
+      ],
+      "canvas": [
+        4885.9,
+        1146.1
+      ],
+      "note": "lattice 35"
+    },
+    {
+      "source": [
+        2444.0,
+        1504.9
+      ],
+      "canvas": [
+        5519.6,
+        1266.1
+      ],
+      "note": "lattice 36"
+    },
+    {
+      "source": [
+        2839.0,
+        1504.9
+      ],
+      "canvas": [
+        6117.4,
+        1458.1
+      ],
+      "note": "lattice 37"
+    },
+    {
+      "source": [
+        3234.0,
+        1504.9
+      ],
+      "canvas": [
+        7027.1,
+        1218.1
+      ],
+      "note": "lattice 38"
+    },
+    {
+      "source": [
+        3628.9,
+        1504.9
+      ],
+      "canvas": [
+        7552.9,
+        1278.1
+      ],
+      "note": "lattice 39"
+    },
+    {
+      "source": [
+        74.1,
+        1836.6
+      ],
+      "canvas": [
+        1669.1,
+        1704.0
+      ],
+      "note": "lattice 40"
+    },
+    {
+      "source": [
+        469.0,
+        1836.6
+      ],
+      "canvas": [
+        2134.8,
+        1524.0
+      ],
+      "note": "lattice 41"
+    },
+    {
+      "source": [
+        864.0,
+        1836.6
+      ],
+      "canvas": [
+        3236.6,
+        1800.0
+      ],
+      "note": "lattice 42"
+    },
+    {
+      "source": [
+        1259.0,
+        1836.6
+      ],
+      "canvas": [
+        3882.3,
+        2088.0
+      ],
+      "note": "lattice 43"
+    },
+    {
+      "source": [
+        1654.0,
+        1836.6
+      ],
+      "canvas": [
+        4024.1,
+        1548.0
+      ],
+      "note": "lattice 44"
+    },
+    {
+      "source": [
+        2049.0,
+        1836.6
+      ],
+      "canvas": [
+        4873.9,
+        1488.0
+      ],
+      "note": "lattice 45"
+    },
+    {
+      "source": [
+        2444.0,
+        1836.6
+      ],
+      "canvas": [
+        5363.6,
+        1692.0
+      ],
+      "note": "lattice 46"
+    },
+    {
+      "source": [
+        2839.0,
+        1836.6
+      ],
+      "canvas": [
+        6237.4,
+        2088.0
+      ],
+      "note": "lattice 47"
+    },
+    {
+      "source": [
+        3234.0,
+        1836.6
+      ],
+      "canvas": [
+        6631.1,
+        2052.0
+      ],
+      "note": "lattice 48"
+    },
+    {
+      "source": [
+        3628.9,
+        1836.6
+      ],
+      "canvas": [
+        7036.9,
+        1596.0
+      ],
+      "note": "lattice 49"
+    },
+    {
+      "source": [
+        74.1,
+        2168.3
+      ],
+      "canvas": [
+        1561.1,
+        2009.9
+      ],
+      "note": "lattice 50"
+    },
+    {
+      "source": [
+        469.0,
+        2168.3
+      ],
+      "canvas": [
+        2158.8,
+        2129.9
+      ],
+      "note": "lattice 51"
+    },
+    {
+      "source": [
+        864.0,
+        2168.3
+      ],
+      "canvas": [
+        3224.6,
+        1949.9
+      ],
+      "note": "lattice 52"
+    },
+    {
+      "source": [
+        1259.0,
+        2168.3
+      ],
+      "canvas": [
+        4002.3,
+        2237.9
+      ],
+      "note": "lattice 53"
+    },
+    {
+      "source": [
+        1654.0,
+        2168.3
+      ],
+      "canvas": [
+        4048.1,
+        2033.9
+      ],
+      "note": "lattice 54"
+    },
+    {
+      "source": [
+        2049.0,
+        2168.3
+      ],
+      "canvas": [
+        4657.9,
+        2177.9
+      ],
+      "note": "lattice 55"
+    },
+    {
+      "source": [
+        2444.0,
+        2168.3
+      ],
+      "canvas": [
+        5531.6,
+        2429.9
+      ],
+      "note": "lattice 56"
+    },
+    {
+      "source": [
+        2839.0,
+        2168.3
+      ],
+      "canvas": [
+        6177.4,
+        2129.9
+      ],
+      "note": "lattice 57"
+    },
+    {
+      "source": [
+        3234.0,
+        2168.3
+      ],
+      "canvas": [
+        7051.1,
+        2201.9
+      ],
+      "note": "lattice 58"
+    },
+    {
+      "source": [
+        3628.9,
+        2168.3
+      ],
+      "canvas": [
+        7240.9,
+        2021.9
+      ],
+      "note": "lattice 59"
+    },
+    {
+      "source": [
+        74.1,
+        2500.0
+      ],
+      "canvas": [
+        1717.1,
+        2543.9
+      ],
+      "note": "lattice 60"
+    },
+    {
+      "source": [
+        469.0,
+        2500.0
+      ],
+      "canvas": [
+        2602.8,
+        2723.9
+      ],
+      "note": "lattice 61"
+    },
+    {
+      "source": [
+        864.0,
+        2500.0
+      ],
+      "canvas": [
+        3020.6,
+        2459.9
+      ],
+      "note": "lattice 62"
+    },
+    {
+      "source": [
+        1259.0,
+        2500.0
+      ],
+      "canvas": [
+        3570.3,
+        2699.9
+      ],
+      "note": "lattice 63"
+    },
+    {
+      "source": [
+        1654.0,
+        2500.0
+      ],
+      "canvas": [
+        4264.1,
+        2543.9
+      ],
+      "note": "lattice 64"
+    },
+    {
+      "source": [
+        2049.0,
+        2500.0
+      ],
+      "canvas": [
+        4645.9,
+        2687.9
+      ],
+      "note": "lattice 65"
+    },
+    {
+      "source": [
+        2444.0,
+        2500.0
+      ],
+      "canvas": [
+        5555.6,
+        2543.9
+      ],
+      "note": "lattice 66"
+    },
+    {
+      "source": [
+        2839.0,
+        2500.0
+      ],
+      "canvas": [
+        5865.4,
+        2495.9
+      ],
+      "note": "lattice 67"
+    },
+    {
+      "source": [
+        3234.0,
+        2500.0
+      ],
+      "canvas": [
+        6763.1,
+        2675.9
+      ],
+      "note": "lattice 68"
+    },
+    {
+      "source": [
+        3628.9,
+        2500.0
+      ],
+      "canvas": [
+        7300.9,
+        2267.9
+      ],
+      "note": "lattice 69"
+    },
+    {
+      "source": [
+        74.1,
+        2831.6
+      ],
+      "canvas": [
+        2077.1,
+        2945.8
+      ],
+      "note": "lattice 70"
+    },
+    {
+      "source": [
+        469.0,
+        2831.6
+      ],
+      "canvas": [
+        2506.8,
+        2945.8
+      ],
+      "note": "lattice 71"
+    },
+    {
+      "source": [
+        864.0,
+        2831.6
+      ],
+      "canvas": [
+        2888.6,
+        2753.8
+      ],
+      "note": "lattice 72"
+    },
+    {
+      "source": [
+        1259.0,
+        2831.6
+      ],
+      "canvas": [
+        3426.3,
+        2765.8
+      ],
+      "note": "lattice 73"
+    },
+    {
+      "source": [
+        1654.0,
+        2831.6
+      ],
+      "canvas": [
+        4180.1,
+        2669.8
+      ],
+      "note": "lattice 74"
+    },
+    {
+      "source": [
+        2049.0,
+        2831.6
+      ],
+      "canvas": [
+        4597.9,
+        2897.8
+      ],
+      "note": "lattice 75"
+    },
+    {
+      "source": [
+        2444.0,
+        2831.6
+      ],
+      "canvas": [
+        5123.6,
+        2945.8
+      ],
+      "note": "lattice 76"
+    },
+    {
+      "source": [
+        2839.0,
+        2831.6
+      ],
+      "canvas": [
+        6429.4,
+        2933.8
+      ],
+      "note": "lattice 77"
+    },
+    {
+      "source": [
+        3234.0,
+        2831.6
+      ],
+      "canvas": [
+        6895.1,
+        3137.8
+      ],
+      "note": "lattice 78"
+    },
+    {
+      "source": [
+        3628.9,
+        2831.6
+      ],
+      "canvas": [
+        7888.9,
+        3317.8
+      ],
+      "note": "lattice 79"
+    }
+  ]
+}

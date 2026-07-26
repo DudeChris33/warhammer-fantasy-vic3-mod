@@ -656,17 +656,627 @@ it to `planning/done/` waits for S6.
     with both limits **calibrated against vanilla** (21 blocks, longest run 5)
     after the first-cut limit was found to reject vanilla's own file.
 
-### S3–S6 — pending
+### S3a — boundary ingestion → committed state-label layer ✅ built (2026-07-25)
 
-**S3** (provinces + states from the composited label mask) is the next `/build`,
-and can start from the committed `land_sea_mask.png` without re-running ingestion.
-S4 (scaffold + boot), S5 (terrain + visuals), S6 (regions + canon naming, now
+- **Commit**: `<pending>` — "World map S3a: boundary ingestion → committed state-label layer".
+- **Summary**:
+  - **Unblocked**: `ljzbtm288r891.jpg` → `terraqueous_globe.jpg` absorbed
+    everywhere (manifest row, registration record, `generate_heightmap.py`, the
+    LUT, `canvas_frame.py` prose). Bytes unchanged, so SHA `c4021e28…` still
+    matches and the committed heightmap's provenance pin survives. Six new
+    manifest rows. `CLAUDE.md` 1.13.8 → **1.13.9**, matching the committed
+    `.metadata/metadata.json`.
+  - **`frame_alias` schema**: a new projection kind carrying `of` / `scale` /
+    `offset`, so a sibling of a registered source borrows its control points
+    instead of duplicating them. Rejects self-alias, rejects control points on an
+    alias, and `sources.py` rejects a missing or chained parent. Four IE sources
+    now share **one** dense warp; a correction to it reaches all four.
+  - **Registration is machine-fitted, not eyeballed**
+    (`tools/fit_registration.py` + `worldgen/register.py`): coarse affine sweep →
+    thin-plate lattice refined by **two-sided IoU** of the climate map's land
+    silhouette against our own committed mask. The plan's two documented dead
+    ends were avoided by construction (one-sided objective; brute-force
+    4-parameter grid over full masks). **IoU 0.5017 (affine) → 0.7173 (lattice)**
+    against a ~0.225 chance level for masks of these land fractions.
+  - **The fit is fold-free.** The first, unconstrained fit scored higher (0.7320)
+    but was **folded over 21% of the covered canvas** — a warp mapping two canvas
+    regions onto one source region. That was the direct cause of ribbon-shaped
+    states striping Lustria, the southern Old World and southern Cathay in the
+    first generated layer. Refinement now rejects any candidate whose Jacobian
+    determinant goes non-positive; the committed fit folds over **0.001%**, and
+    the ribbons are gone. Trading 0.015 of IoU for an injective warp is the whole
+    of that decision.
+  - **Boundary extraction** (`worldgen/parchment.py`): local-contrast ink (the
+    parchment's vignetting defeats any global threshold), then labelling the
+    **complement** so closed cells fall out and a broken line merges two cells
+    rather than yielding an open polyline. 1112 cells from the unlabelled feature
+    image, 1143 from the lettered master.
+  - **Partition** (`worldgen/cells.py`): warp nearest → stack by precedence →
+    intersect the committed mask → drop coastal clipping fragments → seed the
+    uncovered → nearest-label fill → reconcile density. Wrap-aware throughout
+    (seam components stitched by union-find over the single column pair
+    4-connectivity allows).
+  - **Macro grouping** (`worldgen/macro.py`): the annotated twin differenced
+    against the clean master — which cancels the coats of arms that no colour
+    rule survives — then the complement labelled. Recovers **exactly 16** regions,
+    matching the 16 the map itself prints; the generator treats any other count
+    as a hard failure.
+  - **Output**: committed `tools/derived/state_labels.png` (16-bit grayscale, not
+    palette — 751 cells exceeds a palette's 256 entries), `state_labels_index.json`,
+    and `COVERAGE.md`. **643 land + 108 sea = 751 cells** against vanilla's
+    659 + 103 = 762; mean land cell **12,829 px** against the 12,517 px target.
+- **Tests / gate (offline, all green)**:
+  - `python tools/worldgen/sources.py --verify` — manifest SHA-256 + registration
+    cross-checks, including the new alias-parent checks.
+  - `python tools/validate_map.py --labels` — the layer tiles the mask exactly:
+    no unlabelled pixel, no cell spanning land and sea, index ↔ raster agreement,
+    every cell 4-connected, every land cell has a macro, no avoidably-degenerate
+    cell.
+  - `python tools/run_fixture.py --check` — all three fixtures pass, including the
+    new `tools/fixtures/boundary/` synthetic parchment (own pixels, runs on a
+    clean clone) covering ink → complement → `frame_alias` warp → precedence
+    stack → mask intersection → fill → reconciliation → sea zones, plus a
+    `cells` self-check pinning wrap-aware components and the seam fill.
+  - **Generator byte-deterministic**: a full re-run reproduced
+    `state_labels.png`, `state_labels_index.json` and `COVERAGE.md` byte-for-byte.
+  - **No in-game gate** — S3a touches no game-read file, by design.
+- **⏳ Awaiting the review gate**: the user reviews
+  `tools/derived/qa_state_labels.png` and `tools/derived/COVERAGE.md`. Fidelity is
+  a review call, never a boot gate.
+- **Decisions taken during the build** (deviations from the plan, with cause):
+  - **The Old World mod map was NOT registered.** The plan listed it as a second
+    dense warp. It has **no measurable objective**: unlike the IE family, its open
+    ocean is the same parchment as its land, so a threshold finds the dark coastal
+    shadow band rather than the coast (measured — 78% "land" at the best
+    threshold, including the Great Ocean). Registering it would have meant
+    hand-picked control points with no way to score them, and the hand-landmark
+    error is measured at **~500 canvas px mean** — far worse than the fitted warp
+    it would sit beside. Committing a placement we cannot measure is the exact
+    failure mode S2 rejected when it de-registered the satellite render. It stays
+    in the manifest, unregistered, and `COVERAGE.md` names it as candidate #1 with
+    **the viable approach recorded**: its cell network covers only land, so the
+    union of its small cells *is* a land silhouette that can be scored exactly the
+    way the IE family was. This is the "report the gap rather than silently
+    coarsen" behaviour decision #6 asks for.
+  - **Coverage is better than the plan predicted.** The plan expected ~40% of land
+    to need mask-derived fallback cells; the IE frame reaches further than that
+    estimate and only **2.4%** does. Ind, Khuresh, Nippon and the far Eastern
+    Steppes get their macro from the nearest neighbour rather than from a contour.
+  - **`state_labels.png` is 16-bit grayscale, not indexed** — 751 cells cannot fit
+    a 256-entry palette. Same lossless guarantee, and `raster.write_gray16_png`
+    already existed.
+  - **Fragments are dropped, not merged.** Clipping source cells to our coastline
+    shaves a sliver off every coastal one; merging them chained sliver to sliver
+    into ribbon states. Dropping them back to the nearest-label fill produces
+    compact shapes. Measured: 40,129 slivers under the first approach.
+  - **The `validate_map.py` rework was split as the plan's amendment directed** —
+    S3a got the `--labels` mode and the vectorized fill; the `ProvinceBitmap` →
+    `ndimage` conversion stays in S3b, where `provinces.png` first exists.
+- **Known, recorded, not blocking**:
+  - **`macro_15` has 0 cells.** Its contour lies entirely off our canvas (the
+    Southern Chaos Wastes fringe). S3b must skip empty macros rather than emit an
+    empty strategic region.
+  - Three land cells are 208–247 px — genuine islands in the committed mask, with
+    no neighbour to merge into. The `--labels` floor check allows a sub-floor cell
+    only when it has no same-kind neighbour, which is the honest invariant.
+  - The landmark cross-check (~500 px mean) measures the hand-read landmark
+    positions, not the fit; the landmarks take no part in the silhouette
+    optimisation and exist as an independent sanity signal and as the fallback
+    objective for sources without a silhouette.
+
+### S3b–S6 — pending
+
+**S3 was re-planned on 2026-07-25 into S3a + S3b** — see
+[Plan — S3 re-planned as S3a + S3b](#plan--s3-re-planned-as-s3a--s3b-2026-07-25)
+at the end of this file, which supersedes the `S3` step list in the master plan
+above. **S3a is built** (see above). **S3b** (generation) is next and must be
+built back-to-back with S4, since the repo is unbootable between them. S4
+(scaffold + boot), S5 (terrain + visuals), S6 (regions + canon naming, now
 including river identification from the annotated Empire map) follow.
 
-**Carry into S3/S4:**
+**Carry into S3b/S4:**
+- S3b consumes `tools/derived/state_labels.png` + `state_labels_index.json`
+  directly; it needs neither `sources/` nor a re-fit.
+- **Skip empty macros** when emitting strategic regions — `macro_15` has 0 cells.
+- The `ProvinceBitmap` → `ndimage` conversion in `validate_map.py` belongs to
+  S3b, where `provinces.png` first exists (the `--labels` half landed in S3a).
 - Back up `game/map_data/` before any editor session (see the runbook warning).
 - `nodes.dat` will need regenerating once real provinces exist.
-- The two working-tree changes the user made and S2 deliberately left alone: the
-  repo-root `.gitignore` (`*.log`, `*.bak`) and `.metadata/metadata.json`'s
-  supported-game-version bump to **1.13.9** — `CLAUDE.md` still documents 1.13.8,
-  so one of the two needs reconciling.
+- ~~`CLAUDE.md` still documents 1.13.8~~ — reconciled in S3a to **1.13.9**,
+  matching the committed `.metadata/metadata.json`.
+
+---
+
+## S3 pre-build investigation (2026-07-25) — returned to planning, no code written
+
+A `/build` of S3 was started and stopped at the confirmation step: measurement
+showed S3's step 1 ("traced Old World / Empire boundaries from
+`map-the-old-world.jpg` + `TheEmpire.webp`") is not viable as written, and the
+user then supplied a much better source set. Findings are recorded here so the
+re-plan starts from evidence. **No repo file was modified; the working tree is
+unchanged.**
+
+### 1. The S1-registered regional sources cannot supply boundaries
+
+- **`map-the-old-world.jpg`** — the QA overlay (`tools/qa_overlay.py`) shows the
+  committed coastline cutting straight across the middle of GW's landmass. Cause:
+  S2 shifted the *canvas-side* control points to follow the refined
+  `config/canvas_frame.ANCHORS` but never re-verified them against the generated
+  mask. A thin-plate warp is exact at its control points, so the residual is in
+  the points themselves.
+- **`TheEmpire.webp`** — warps to a rotated parallelogram sitting off the coast.
+- **Neither is a chloropleth.** Both are relief illustrations with lettered
+  labels, so even a correct registration yields no traceable region boundaries.
+  This is the decisive point: re-registering them would not have helped.
+- User decision: **annotate and keep** both records (their *source*-side picks
+  are still good); record the measured misregistration and mark them not usable
+  for geometry until re-registered.
+
+### 2. `tww3_map_stitched.png` registers well but its borders do not extract
+
+Best-registering of the regional sources — Ulthuan's ring lands almost exactly on
+ours. It **does** draw region borders, but as a ~1 px tan line over olive terrain.
+Both a colour top-hat on `R−B` and on `R−G` (the better discriminator: borders run
+R>G, green terrain runs G>R), and an 8-direction linear-opening line filter,
+return terrain texture rather than the border network. Result is fragmentary, not
+closed cells. **Verdict: not a boundary source; genuinely good terrain/biome
+input for S5.**
+
+### 3. New sources supplied by the user (in `sources/`, not yet in the manifest)
+
+| File | Dims | What it is |
+|---|---|---|
+| `wh3_dlc_ie_parchment_map_english.jpg` | 3703×2880 | **IE parchment master** — province boundaries + canon province names |
+| `pizqenw9rd791.jpg` | 3703×2880 | Pixel-aligned twin — **macro-region outlines with counts** (Empire 22, Bretonnia 8, Ulthuan 15, Cathay 19, Lustria 21, Naggaroth 18, Southlands 18, Darklands 18, Badlands+WEM 18, Norsca 9, Kislev 8, Ogre Kingdoms 7, Southern Realms 7, N Chaos Wastes 13, S Chaos Wastes 4, Eastern Steppes) |
+| `3274025515_preview_WH3 climate map 6.0.3.jpg` | 2471×1922 | Same frame at 0.6673×, **flat climate fills** (12-class legend) |
+| `Immortal-Empires-Map-Feature-Image-scaled.jpg` | 2560×1440 | Separate 16:9 crop, **unlabelled** — cleanest lines, no text occlusion |
+| `the-old-world-all-faction-starting-position-map-v3-0-updated-v0-ml2lq3qfofad1.png` | 4096×4096 | Denser Old World only. User-flagged: **takes liberties with the four corner insets, the Galleon's Graveyard, and other spots** — mask those out |
+
+**Measured framing relationships** (grayscale correlation at 400 px wide):
+master ↔ macro twin `corr 0.803` at identical dims → same frame, pixel-aligned.
+Climate map is the same frame scaled by exactly `2471/3703 = 1922/2880 = 0.6673`
+(aspect 1.2856 vs 1.2858). Feature image `corr 0.164`, aspect 1.778 → different
+crop. **One registration record therefore serves master + macro twin + climate
+map**; the feature image needs its own.
+
+### 4. The climate map is the first regional source with a real land signal
+
+Painted-region vs bare-parchment separates cleanly on **chromaticity distance
+from the parchment ramp**: `r=R/(R+G+B)`, `g=G/(R+G+B)`, parchment reference
+`r=0.4436 g=0.3344` (median of a known-sea block), threshold `d>0.04`, then
+`binary_opening(3×3)` + `binary_closing(5×5)`, legend box masked out. Yields a
+clean world silhouette. This is what makes the IE registration *measurable*
+rather than hand-guessed — unlike every earlier regional source.
+
+### 5. The IE frame cannot be registered by a single affine — a rubber-sheet is required
+
+Ulthuan's ring, the one unmistakable landmark in both:
+
+| | ours (Terraqueous canvas) | IE frame | implied scale |
+|---|---|---|---|
+| Ulthuan bbox | 457 × 451 px | 329 × 359 px | **sx 1.39 / sy 1.26** |
+| Naggaroth→Cathay world span | — | — | **~2.5–2.8** |
+
+Ulthuan is drawn roughly **twice as large relative to the world** on the IE map.
+Immortal Empires is a playable map, not a globe. **A dense thin-plate
+control-point warp is required** — `reproject.fit_warp` (`RBFInterpolator`,
+`thin_plate_spline`, `degree=1`) already does this, so this is a control-point
+*authoring* job, not new code.
+
+**Two search approaches that failed — do not repeat them:**
+- *One-sided objective* ("fraction of painted px landing on our land") is
+  degenerate: maximised by squashing the map onto the biggest continent. Peaked
+  flat at 0.674 against a 0.278 chance level, with `sy` running off the bottom of
+  the grid. Use a two-sided IoU.
+- *Brute-force 4-parameter IoU grid* (93k evaluations over full masks) does not
+  finish in reasonable time. Seed from landmark correspondences, then refine
+  locally.
+
+### 6. User decision (2026-07-25): Terraqueous is the single geometric authority
+
+> "the terraqueous globe images remains our most true source, so use the other
+> images to project onto it rather than taking some sort of combination of all
+> sources"
+
+Consequences, which the re-plan should treat as fixed:
+- The IE maps contribute **interior boundary lines and names only — never
+  coastline**. The committed `land_sea_mask.png` defines the coast.
+- This is precisely what makes a rubber-sheeted registration acceptable: local
+  scale error moves an interior border a few pixels inside a landmass, and cannot
+  put a coast in the sea.
+- Extracted cells must be **intersected with the committed mask and watershedded
+  so they tile it exactly** — the engine invariant is that every land pixel
+  belongs to exactly one state.
+
+### 7. Coverage gap — a mask-derived fallback is needed regardless
+
+The IE frame stops around Cathay. **Ind, Khuresh, Nippon, the far Eastern Steppes
+and the polar Chaos Wastes have no registered boundary source.** Roughly 40% of
+the world's land needs mask-derived cells whatever else is done.
+
+### 8. ⚠ Live repo blocker: `sources.py --verify` now FAILS
+
+`sources/tww3_map_stitched.png` and `tww3_map_stitched.paint` were **removed from
+`sources/` during this session**. They remain manifest rows, so:
+
+```
+python tools/worldgen/sources.py --verify     # 2 errors — files missing locally
+python tools/generate_heightmap.py            # refuses to run (verifies first, by design)
+```
+
+The committed `heightmap.png` / `rivers.png` are unaffected and the S2 game gate
+still stands — but **the heightmap is no longer regenerable.** TW3 is the
+relief-detail layer S2 composites onto land. Resolve by either restoring the two
+files (preferred — the manifest SHA-256s will re-verify), or de-registering TW3,
+which changes the heightmap and costs a fresh map-editor repack.
+
+Deliberately **not** "fixed" by `--update-manifest`: that would drop the rows and
+silently orphan the committed heightmap's provenance pin, which is the exact
+failure mode the SHA guard exists to prevent.
+
+### 9. Toolchain rework still required at real-canvas scale (unchanged)
+
+- Promote `build_partition` / `allocate_colors` / `repair_connectivity` /
+  `merge_small_land` out of `run_fixture.py` into importable `worldgen` modules.
+- `validate_map.ProvinceBitmap` builds per-colour Python pixel lists — at
+  8192×3616 that is ~29.6M tuples. Must move to `ndimage` / `skimage.measure`
+  labelling before it can lint the real map.
+- `raster.voronoi_labels` is O(pixels × seeds) pure Python; needs
+  `distance_transform_edt` or a mask-constrained watershed.
+
+### 10. Suggested re-phasing for `/plan`
+
+Split S3, sized like S0/S1 and S2:
+
+- **S3a — boundary ingestion.** Manifest rows + one registration record for the
+  IE frame (dense hand-picked control points), boundary-network extraction,
+  macro grouping from the annotated twin, cells projected onto the Terraqueous
+  mask and watershedded to tile it exactly. Output: a committed state-label
+  layer. Gate: offline + a QA overlay reviewed by the user.
+- **S3b — generation.** `provinces.png` (~40k), `state_regions/`, `default.map`,
+  `adjacencies.csv`, `province_terrains.txt`, `common/strategic_regions/`, loc
+  skeletons, `validate_map.py` rework. Gate: offline validators. Repo stays
+  unbootable until S4.
+
+Splitting lets the boundary layer be reviewed *before* 40k provinces are cut from
+it, making a control-point correction a cheap iteration rather than a full
+regeneration. Names stay in S6, which becomes "attach canon names to cells that
+already exist" rather than "work out where regions are."
+
+### Vanilla format facts confirmed this session (for S3b)
+
+- `provinces.png` is **mode RGB**, 8192×3616, 40,875 unique colours, 2.85 MB.
+- `province_terrains.txt`: 40,876 lines (header + one per province), format
+  `xRRGGBB="terrain"`, no spaces. 106 `"ocean"`, 52 `"lakes"`.
+- Land SR blocks carry `capital_province = xRRGGBB` + `map_color = { R G B }`
+  (vanilla mixes 0–1 floats and 0–255 ints); **water SRs carry only
+  `states = { … }`** and vanilla has one water SR per sea zone.
+- Vanilla has **47 land strategic regions** across 7 files.
+- State blocks quote province tokens (`provinces = { "x0974E5" … }`, `city =
+  "x9686A5"`); `statefile.py` emits them unquoted, which is Exether-verified and
+  parses — left alone so the P1 fixture golden stays stable.
+- `subsistence_building = "building_subsistence_farm"` / `"..._pasture"`;
+  `arable_resources = { "building_rye_farm" … }`; `capped_resources = {
+  building_iron_mine = 60 … }`.
+- Terrain keys available: `plains ocean lakes river forest hills mountain jungle
+  wetland desert tundra savanna snow` (+ farmland/urban specials).
+- `adjacencies.csv` header: `From;To;Type;Through;start_x;start_y;stop_x;stop_y;adjacency_rule_name;Comment`.
+
+---
+
+## Plan — S3 re-planned as S3a + S3b (2026-07-25)
+
+**Supersedes the 10-step `S3 — Provinces + states from the composited label mask`
+block in the master plan above.** That step list assumed boundaries would come from
+`map-the-old-world.jpg` + `TheEmpire.webp`; the pre-build investigation measured
+that to be unviable and the user then supplied a better source set. Everything
+else in the master plan (canvas, `wrap_x`, Chaos Wastes fringe, Voronoi
+subdivision, scaffold model, loc conventions, determinism-by-committed-bitmaps)
+is unchanged and still inherited.
+
+### Measurements taken this planning session
+
+Recorded so `/build` starts from evidence and does not re-derive them.
+
+- **The live blocker is not what §8 recorded.** `tww3_map_stitched.png` /
+  `.paint` have been **restored** and both re-verify against the manifest
+  (`f975c35d…`, `94b5726b…`). The single remaining `--verify` failure is that
+  `sources/ljzbtm288r891.jpg` was **renamed** to `terraqueous_globe.jpg` —
+  byte-identical, SHA-256 `c4021e28…` still matches its manifest row. Provenance
+  is intact; this is a rename to absorb, not a lost source.
+- **Six** unmanifested files, not five — §3's table misses
+  `Major_Trade_Routes_of_the_Old_World_Map.webp` (1947×1404).
+- **One registration serves four IE sources.** The feature image was matched
+  against the parchment master by multi-scale NCC: it is the **same frame**, full
+  width `x[8..3692]`, vertically cropped `y[224..2296]`, isotropic ratio
+  **1.4391 / 1.4389**, peak **NCC 0.6701**. With the twin (pixel-identical,
+  median abs-diff 3) and the climate map (exactly `2471/3703 = 1922/2880 =
+  0.6673`), all four relate to master pixel coordinates by a fixed affine.
+  §3's "the feature image needs its own [record]" is superseded — collapsing
+  four control-point authoring jobs into one.
+- **Line extraction is viable.** A crude local-contrast ink threshold
+  (`V < local_mean(41) − 14`, 16.47% ink) on the *unlabelled* feature image
+  already yields **757 closed cells > 150 px** (634 > 400, 519 > 800, 395 >
+  1500) by labelling the complement. Tuning is a build task; feasibility is not
+  in question.
+- **The macro twin differences out cleanly.** 6.22% of pixels differ at
+  threshold 80, and there the twin carries saturated hues (median RGB
+  `(79,125,49)`) over parchment (`(211,169,117)`) — closed, hue-separable macro
+  contours, one per region, plus printed province counts.
+- **The Old World mod map is a dense line chloropleth**, not flat faction fills
+  (4096×4096, mode `P`, 38 palette indices — a posterized parchment ramp). Its
+  cell network is markedly denser than IE's over the same arc. The four corner
+  circular vignettes and the Galleon's Graveyard spiral are plainly visible and
+  must be masked, as the user flagged.
+- **Density target, pinned against vanilla**: **659 land + 103 sea = 762** state
+  blocks; 40,875 provinces (40,717 land after 106 `ocean` + 52 `lakes`) =
+  **61.8 land provinces per land state**. Our committed mask is **8,249,246 land
+  px** (27.85%), so vanilla-order granularity means a **mean land state of
+  ~12,500 px (~112×112)**.
+
+### User decisions taken this session (fixed — not open questions)
+
+1. **Terraqueous globe is the single geometric authority.** Other sources project
+   onto it; never blend or average. Committed `tools/derived/land_sea_mask.png`
+   defines the coastline, full stop.
+2. IE maps contribute **interior boundary lines and region names only — never
+   coastline.** Extracted cells are intersected with the committed mask and
+   watershedded so they tile it exactly.
+3. The IE frame needs a **dense thin-plate control-point warp**, not an affine
+   (Ulthuan is drawn ~2× large relative to the world). `reproject.fit_warp`
+   already supports this — an authoring job, not new code.
+4. The misregistered `map-the-old-world.jpg` / `TheEmpire.webp` records are
+   **kept but annotated**, not deleted.
+5. Canon naming stays in **S6**.
+6. **Target vanilla-order granularity (~700–760 states) everywhere**, using
+   whatever sources are available to get there — including the denser Old World
+   mod map. Where no source can reach vanilla density, the build **reports the
+   gap** so more sources can be found, rather than silently coarsening.
+7. Adopt `terraqueous_globe.jpg` as the repo-side filename (the SHA row is
+   unchanged, so the committed heightmap's provenance pin survives).
+
+### Evaluating the proposed S3a / S3b split — endorsed, with one amendment
+
+The split is right, but the load-bearing reason is not size: **S3a's gate is a
+human judgment call (does the border layer look right?), S3b's is
+machine-checkable.** Registration quality is not knowable until the overlay
+renders, and the previous session already dead-ended on two registration
+searches — so iteration must be *expected and cheap*. Bundling 40k provinces and
+nine text/loc deliverables behind a subjective gate makes every control-point
+correction a full regeneration.
+
+**Amendment:** do not move "the `validate_map.py` rework" wholesale into S3b.
+Split it by what exists when — S3a needs the vectorized watershed / nearest-label
+fill and a new `--labels` mode to lint its own layer; the `ProvinceBitmap` →
+`ndimage` conversion belongs in S3b, where `provinces.png` first exists.
+
+---
+
+## Plan — S3a: boundary ingestion → committed state-label layer
+
+### Objective
+
+Produce one committed, reviewable **state-label layer** that tiles
+`tools/derived/land_sea_mask.png` exactly at vanilla-order granularity, by
+projecting the IE and Old World line networks onto the Terraqueous geometry —
+plus a coverage report naming every region that still needs a source.
+
+### Source roles
+
+| Source | Job in S3a |
+|---|---|
+| `Immortal-Empires-Map-Feature-Image-scaled.jpg` | **Primary line network** — unlabelled, cleanest, no text occlusion |
+| `wh3_dlc_ie_parchment_map_english.jpg` | **Extends coverage** to the polar Chaos Wastes / full Cathay / Eastern Steppes the feature image crops off; needs text erasure. Also the canon province names for S6 |
+| `pizqenw9rd791.jpg` | **Macro grouping** — diff vs master isolates hue-separable macro contours + printed counts |
+| `3274025515_preview_WH3 climate map 6.0.3.jpg` | **Registration objective** — its flat fills give the land silhouette that makes the IE fit *measurable*. Also a terrain/biome input for S5 |
+| `the-old-world-…-v3-0-…ml2lq3qfofad1.png` | **Denser Old World boundary network**, higher precedence inside a masked footprint |
+| `Major_Trade_Routes_of_the_Old_World_Map.webp` | Manifest only, unregistered — S6 reference |
+
+### Steps (ordered)
+
+1. **Unblock + manifest hygiene** — `tools/SOURCES.md`,
+   `tools/registration/ljzbtm288r891.json` → `terraqueous_globe.json`, plus the
+   prose references in `tools/PROVENANCE.md` and
+   `tools/config/canvas_frame.py:56`. Add six manifest rows for the new sources.
+   Annotate `map-the-old-world.json` / `TheEmpire.json` `notes` with the measured
+   misregistration — kept, never consumed for geometry (decision #4; `notes` is
+   already a tolerated free-form key, no schema change needed). Fix
+   `CLAUDE.md:3` (1.13.8 → **1.13.9**; `.metadata/metadata.json` was committed at
+   1.13.9 in `02765db`, closing half of S2's carry-forward item).
+2. **`tools/worldgen/schema.py:504-512`** — add a `frame_alias` projection kind
+   (`_MIN_CONTROL_POINTS = 0`) and a `FrameAlias` block (`of`, `scale`,
+   `offset`). Lets a sibling carry a real registration record — so
+   `sources.py`'s `Registered=yes ↔ record exists` cross-check keeps working —
+   without duplicating control points. Matching cross-check in
+   `tools/worldgen/sources.py:188-204`: an alias's parent must exist and must not
+   itself be an alias.
+3. **`tools/worldgen/parchment.py`** (new) — the three primitives every IE
+   sibling shares: chromaticity silhouette (`r=R/(R+G+B)`, parchment reference
+   `r=0.4436 g=0.3344`, `d>0.04`, `binary_opening(3×3)` + `binary_closing(5×5)`,
+   legend box masked — per investigation §4); local-contrast ink threshold; and
+   text/label erasure by inpainting from non-ink neighbours (the technique
+   `worldgen/lut.py` already uses for the Terraqueous lettering).
+4. **`tools/worldgen/register.py`** (new) + the registration records — the
+   authoring loop that avoids both documented dead ends: seed from ~15
+   hand-picked landmark pairs, then optimise **two-sided IoU** of the climate
+   silhouette against the committed mask as a **bounded local search per control
+   point** (not a global parameter grid), densifying wherever residual is worst.
+   Emits a per-landmark residual + global IoU report. Produces
+   `tools/registration/wh3_dlc_ie_parchment_map_english.json` (dense
+   `control_point_warp`), three `frame_alias` records (twin / climate / feature,
+   seeded from the affines measured above), and
+   `tools/registration/the-old-world-…json` (a second dense warp, with `crop`
+   plus an inset mask excluding the four corner vignettes and the Galleon's
+   Graveyard).
+5. **`tools/worldgen/cells.py`** (new) — ink threshold → label the **complement**
+   (closed cells fall out; no line-following, so broken ink merges two cells
+   rather than yielding an open polyline) → warp to canvas (`order=0`) →
+   **intersect with the committed mask** → mask-constrained watershed so every
+   land pixel carries exactly one label → seeded-Voronoi fallback where no source
+   covers → density reconciliation (merge below / split above) toward **659 land
+   cells at ~12,500 px mean**. Sea zones from the mask's water components → ~103.
+   Overlaps resolved by `composite.Layer` precedence, **never blended**: OW mod
+   map > IE feature image > IE parchment master > fallback.
+6. **`tools/worldgen/macro.py`** (new) — diff master vs twin, hue-cluster the
+   contours into the ~16 macro regions, assign each cell its macro by
+   containment. The twin's printed counts (Empire 22, Cathay 19, Lustria 21, …)
+   become a checked invariant on the grouping.
+7. **`tools/generate_state_labels.py`** (new) → committed
+   `tools/derived/state_labels.png` (indexed, lossless),
+   `tools/derived/state_labels_index.json` (label id → provisional `STATE_*` key,
+   macro, coastal flag, area), and **`tools/derived/COVERAGE.md`** — per-region
+   achieved density against the 12,500 px target, explicitly naming where a new
+   source would help (decision #6).
+8. **`tools/qa_overlay.py`** — add the state-label overlay (cells over the mask,
+   macro tint, registration residuals). This is the artifact the user reviews.
+9. **`tools/validate_map.py`** — new `--labels` mode (`ndimage`-based): the label
+   layer tiles the mask exactly (no gap, no overlap, no label straddling sea),
+   every cell 4-connected, every cell has a macro, counts within tolerance.
+10. **`tools/run_fixture.py`** — synthetic boundary fixture of our own pixels: a
+    tiny invented parchment with a known cell network plus a `frame_alias`
+    sibling, carried byte-exact through extract → warp → intersect → watershed.
+11. **Docs** — `tools/SOURCES.md`, `tools/PROVENANCE.md`,
+    `.claude/rules/testing.md` (the new offline commands), `CLAUDE.md` tools row.
+
+### Gate (S3a)
+
+`python tools/worldgen/sources.py --verify` · `python tools/validate_map.py
+--labels` · `python tools/run_fixture.py --check` · generators re-run
+byte-identical · **user reviews `qa_state_labels.png` + `COVERAGE.md`**.
+No game load — S3a touches no game-read file.
+
+---
+
+## Plan — S3b: generation from the committed label layer
+
+### Objective
+
+Generate every `map_data/` and `common/` artifact from the committed state-label
+layer. Mechanical, machine-checkable; the repo is intentionally unbootable until
+S4, so S3b and S4 are built back-to-back.
+
+### Steps (ordered)
+
+1. **`tools/worldgen/partition.py`** (new) — promote `build_partition`,
+   `repair_connectivity`, `merge_small_land`, `allocate_colors` out of
+   `tools/run_fixture.py:116-291` into importable modules, **vectorized**
+   (`scipy.ndimage.distance_transform_edt` with horizontal wrap-padding,
+   replacing `raster.voronoi_labels` (`tools/worldgen/raster.py:142`), which is
+   O(pixels × seeds) pure Python). The generator must not live only in the test
+   harness.
+2. **`tools/generate_provinces.py`** (new) → **`map_data/provinces.png`** —
+   wrap-aware Voronoi subdivision of each label cell at **~62 provinces per land
+   state** → ~40.8k, matching vanilla's 40,875. Mode RGB, pixel-exact, every
+   province a unique `xRRGGBB` via the existing `ColorAllocator`.
+3. **`tools/generate_state_regions.py`** (new, reuses
+   `tools/worldgen/statefile.py`) → **`map_data/state_regions/NN_<macro>.txt`** +
+   **`99_seas.txt`**.
+4. **`tools/generate_default_map.py`** (new) → **`map_data/default.map`**
+   (`wrap_x = yes`, full `sea_starts`, stateless `lakes`).
+5. **`tools/generate_adjacencies.py`** (new) → **`map_data/adjacencies.csv`**
+   (confirmed 10-column header).
+6. **`map_data/province_terrains.txt`** — placeholder (land→`plains`,
+   sea→`ocean`, lakes→`lakes`) so S4 can boot; S5 regenerates it properly.
+7. **`common/strategic_regions/<area>_strategic_regions.txt`** +
+   **`water_strategic_regions.txt`** — ~47 land SRs from the macro grouping
+   (`capital_province` + `map_color`), one water SR per sea zone (`states` only).
+   Every state in exactly one SR.
+8. **`localization/english/map/wh_{states,seas,strategic_regions}_l_english.yml`**
+   — `# AUTOGEN` skeletons for every key S3b introduces (UTF-8 BOM, `l_english:`).
+   Canon names stay in S6.
+9. **`tools/validate_map.py`** — convert `ProvinceBitmap`
+   (`tools/validate_map.py:171-201`) to `ndimage.label`; its per-colour Python
+   pixel lists are ~29.6M tuples at real canvas scale. Enable the full check set.
+10. **`tools/run_fixture.py`** — extend the goldens through the generation path.
+11. **Docs / rules** — `.claude/rules/scripting.md` (Naming) and
+    `.claude/rules/localization.md` record the `wh_` prefix,
+    `localization/english/map/`, `NN_<macro>.txt` and
+    `<area>_strategic_regions.txt` conventions as the first such files land.
+
+### Gate (S3b)
+
+`python tools/validate_map.py` · `vic3-tiger` · `python tools/run_fixture.py
+--check` all pass. No game-load gate — the boot gate is S4.
+
+---
+
+### Design Decisions
+
+- **One IE frame record + three `frame_alias` siblings** — measured, not assumed
+  (NCC 0.6701; ratios 1.4391/1.4389; 0.6673 exact). A control-point correction
+  propagates to all four sources automatically.
+- **The climate map is the registration *objective*** — the only IE sibling with
+  a measurable land signal, so the fit is scored against our own committed mask
+  rather than eyeballed. This is what makes the IE registration measurable where
+  every earlier regional source was not.
+- **Two-sided IoU, locally refined per control point** — the investigation's §5
+  records exactly why the one-sided objective is degenerate and why the
+  brute-force 4-parameter grid does not finish. Neither is repeated.
+- **Barrier/complement labelling, not line tracing** — closed cells fall out of
+  labelling the complement; a break in the ink merges two cells (recoverable)
+  instead of producing an open polyline (not).
+- **Watershed-to-tile, never blend** — decision #1/#2. The mask is authority;
+  source cells only *partition* it, so a rubber-sheet's local scale error moves
+  an interior border a few px inside a landmass and can never put a coast in the
+  sea.
+- **Density reconciled to vanilla order (659 land / 103 sea)** per decision #6,
+  with `COVERAGE.md` flagging where a source is missing rather than silently
+  coarsening.
+- **Split by gate type, not by size** — S3a ends on human review, S3b on
+  machine checks; the `validate_map.py` rework splits by what exists when.
+
+### Edge Cases
+
+- **Text bridging two cells** on the parchment master merges them. Mitigated by
+  making the *unlabelled* feature image primary and using the master only to
+  extend coverage beyond its crop, plus the inpaint erasure in `parchment.py`.
+- **OW ↔ IE footprint seam**: two sources of different natural density meet.
+  Precedence resolves *which* source, but the density reconciliation must run
+  across the seam, not per-footprint, or the join will be visible.
+- **~40% of land has no boundary source** (Ind, Khuresh, Nippon, far Eastern
+  Steppes, polar Wastes) — mask-derived fallback cells are required regardless,
+  seeded to match the source cells' area distribution so density looks
+  continuous. `COVERAGE.md` names these explicitly.
+- **Chaos Wastes fringe** cells straddling the canvas top/bottom cut — the
+  hybrid-fringe rule (innermost band `impassable` inside ordinary edge states)
+  is inherited and applies to cells, not polygons.
+- **Wrap seam** at `x=0/8191` — the watershed and the province Voronoi both
+  wrap-pad; cells crossing the seam must stay one label.
+- **Label raster must stay lossless indexed PNG** — a lossy re-save silently
+  invents labels. `raster.write_indexed_png` already enforces this.
+- **Registration drift** — the thin-plate warp is exact *at* its control points,
+  so residual concentrates between them; densification, not re-fitting, is the
+  correction.
+
+### Testing
+
+- **Offline, both milestones**: `python tools/worldgen/sources.py --verify`,
+  `python tools/validate_map.py` (`--labels` in S3a), `python
+  tools/run_fixture.py --check`, and a byte-identical re-run of every generator.
+- **S3a review gate**: the user inspects `tools/derived/qa_state_labels.png` and
+  `tools/derived/COVERAGE.md`. Fidelity is a review call, never a boot gate.
+- **No in-game `error.log` gate for S3a or S3b** — neither adds a file the engine
+  parses in isolation, and the repo is deliberately unbootable between S3b and
+  S4. The boot gate (mod loads in Victoria 3, zero `logs/error.log` lines
+  referencing this mod's files — see [testing.md](../../.claude/rules/testing.md))
+  arrives at **S4**, which S3b must therefore be built back-to-back with.
+
+### Docs to Update
+
+- `tools/SOURCES.md` — rename row, six new rows, the annotated misregistration
+  notes (S3a step 1).
+- `tools/PROVENANCE.md` — the new IE / Old World sources and the frame-alias
+  chain (S3a).
+- `tools/MAP_RUNBOOK.md` — no editor step in S3a/S3b, but `nodes.dat` needs
+  regenerating once real provinces exist (carry into S4).
+- `CLAUDE.md` — tools row (ingestion now emits the state-label layer) and the
+  supported-game-version line (1.13.8 → 1.13.9).
+- `.claude/rules/testing.md` — the `--labels` lint and the boundary fixture.
+- `.claude/rules/scripting.md` + `.claude/rules/localization.md` — the naming and
+  loc conventions, when the first `common/` and `localization/` files land (S3b).
+
+### Note (not a plan step)
+
+The repo-root `.gitignore` now carries `*.log`, which would catch `docs/*.log` if
+they were ever deleted and re-added. They are currently tracked, so they are
+safe — recorded here as a latent footgun, not an action.

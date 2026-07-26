@@ -197,6 +197,27 @@ def verify(
     for reg in regs:
         if reg.source not in by_file:
             errors.append(f"registration '{reg.source}' has no row in {manifest_path.name}")
+
+    # 2b. Frame aliases: the parent must be a real registration, and must not
+    #     itself be an alias. Both are structural facts the per-file schema pass
+    #     cannot see, and either one silently breaks the borrowed placement — an
+    #     alias of a missing parent has no warp at all, and a chain of aliases
+    #     would mean a control-point correction reaches some siblings and not
+    #     others, which is precisely what the alias mechanism exists to prevent.
+    for reg in regs:
+        if not reg.is_alias:
+            continue
+        parent = reg_by_source.get(reg.frame_alias.of)
+        if parent is None:
+            errors.append(
+                f"{reg.source}: frame_alias.of '{reg.frame_alias.of}' has no registration record"
+            )
+        elif parent.is_alias:
+            errors.append(
+                f"{reg.source}: frame_alias.of '{reg.frame_alias.of}' is itself an alias — "
+                f"aliases must point at a source that carries real control points"
+            )
+
     for r in rows:
         if r.is_registered and r.file not in reg_by_source:
             errors.append(f"manifest marks '{r.file}' Registered=yes but no registration record exists")

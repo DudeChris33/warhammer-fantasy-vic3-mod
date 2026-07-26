@@ -53,7 +53,7 @@ def canvas_to_lonlat(x: float, y: float) -> tuple[float, float]:
 
 
 # ---------------------------------------------------------------------------
-# Terraqueous NE-II oval reference (SOURCE px of ljzbtm288r891.jpg, 4000x3256)
+# Terraqueous NE-II oval reference (SOURCE px of terraqueous_globe.jpg, 4000x3256)
 # ---------------------------------------------------------------------------
 #
 # The main oval's extent. **Measured in S2** (2026-07-23), superseding S1's
@@ -68,7 +68,7 @@ def canvas_to_lonlat(x: float, y: float) -> tuple[float, float]:
 # the map's own printed degree labels to ~2 px. Deriving the numbers from the
 # projection rather than from feature guesses is what makes the reprojection
 # reproducible; ``worldgen/reproject.py`` re-fits them from the committed control
-# points in ``tools/registration/ljzbtm288r891.json`` on every run.
+# points in ``tools/registration/terraqueous_globe.json`` on every run.
 
 TERRAQUEOUS_OVAL = {"left": 131, "right": 3869, "top": 129, "bottom": 2130}
 
