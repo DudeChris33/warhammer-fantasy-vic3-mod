@@ -1,0 +1,61 @@
+{
+  "_comment": [
+    "Binds region NAMES to geometry, and records the per-region state-count",
+    "requirements. Everything the user specifies is expressed in names ('Bretonnia",
+    "must have at least 15 state regions'), and the label layer otherwise knows only",
+    "anonymous macro contours - so without this file no requirement can be checked.",
+    "",
+    "Each anchor is a pixel on total_war_states_per_strat_region.jpg, taken at that",
+    "region's printed label, which by construction lies inside the region it names.",
+    "The anchor is pushed onto the canvas through that source's committed",
+    "registration and the macro region containing it takes the name. Binding by",
+    "containment rather than by contour id matters because contour ids are assigned",
+    "in raster order and change whenever the extraction is re-tuned; an anchor does",
+    "not.",
+    "",
+    "min_states is the USER REQUIREMENT (2026-07-25). tww3_states is what Total War:",
+    "Warhammer 3 does with the same region - a reference for proportions only,",
+    "explicitly not a source of truth, and it totals 554 against our 600-700 band."
+  ],
+
+  "anchor_source": "total_war_states_per_strat_region.jpg",
+  "total_states": {"min": 600, "max": 700},
+
+  "regions": [
+    {"name": "northern_chaos_wastes", "anchor": [373, 44],   "tww3_states": 48, "min_states": 20},
+    {"name": "naggaroth",             "anchor": [154, 388],  "tww3_states": 56, "min_states": 40},
+    {"name": "ulthuan",               "anchor": [351, 600],  "tww3_states": 34, "min_states": 25},
+    {"name": "norsca",                "anchor": [761, 222],  "tww3_states": 27, "min_states": 20},
+    {"name": "kislev",                "anchor": [1002, 315], "tww3_states": 14, "min_states": 10},
+    {"name": "the_empire",            "anchor": [827, 453],  "tww3_states": 51, "min_states": 30},
+    {"name": "bretonnia",             "anchor": [622, 585],  "tww3_states": 15, "min_states": 15},
+    {"name": "athel_loren",           "anchor": [727, 688],  "tww3_states": 5,  "min_states": 5},
+    {"name": "southern_realms",       "anchor": [688, 775],  "tww3_states": 17, "min_states": 17},
+    {"name": "badlands_and_mountains","anchor": [983, 834],  "tww3_states": 57, "min_states": 40},
+    {"name": "darklands",             "anchor": [1251, 717], "tww3_states": 33, "min_states": 30},
+    {"name": "mountains_of_mourn",    "anchor": [1463, 622], "tww3_states": 19, "min_states": 14},
+    {"name": "grand_cathay",          "anchor": [1799, 585], "tww3_states": 45, "min_states": 40},
+    {"name": "lustria",               "anchor": [161, 1112], "tww3_states": 57, "min_states": 40},
+    {"name": "southlands",            "anchor": [965, 1170], "tww3_states": 54, "min_states": 40},
+    {"name": "islands",               "anchor": [1316, 1360],"tww3_states": 8,  "min_states": 6},
+    {"name": "southern_chaos_wastes", "anchor": [717, 1558], "tww3_states": 14, "min_states": 10}
+  ],
+
+  "_comment_pending": [
+    "NOT YET IMPLEMENTED - these need sub-region footprints or point anchors finer",
+    "than the macro layer provides, and are recorded here so the next milestone",
+    "starts from the requirement rather than rediscovering it:",
+    "  own state region : Massif Orcal (in Bretonnia), Laurelorn Forest, the Middle",
+    "                     Mountains and the Moot (all in the Empire), Skavenblight,",
+    "                     Sartosa (both in the Southern Realms), Albion (an island),",
+    "                     the Oak of Ages (in Athel Loren), and three for the Great",
+    "                     Bastion (in Cathay)",
+    "  sub-region quota : Estalia >= 5, Tilea >= 4, Border Princes >= 6 (all inside",
+    "                     Southern Realms, excluding the internal mountains);",
+    "                     Crater of Zharr >= 10 (inside the Darklands, ideally",
+    "                     matching the Old World mod map)",
+    "  navigable rivers : Ruin, Reik, Talabec, Stir, Lynsk and Cathay's main rivers",
+    "                     need strait crossings - an S3b adjacencies.csv and S6",
+    "                     strait_definitions deliverable, not a label-layer one"
+  ]
+}

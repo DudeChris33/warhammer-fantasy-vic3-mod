@@ -1,0 +1,37 @@
+{
+  "role": "named_macro_regions",
+  "precedence": 36,
+  "layer_precedence": {
+    "macro": 95,
+    "boundaries": 0,
+    "coastline": 0,
+    "relief": 0
+  },
+  "crop": [
+    20,
+    20,
+    2028,
+    1573
+  ],
+  "notes": "The IE parchment with each strategic region outlined in a distinct colour AND LABELLED BY NAME, plus that region's state count in Total War: Warhammer 3. This is what binds names to geometry: every requirement the user states is expressed in names ('Bretonnia must have at least 15 state regions'), and before this source the pipeline knew only anonymous macro contours. It supersedes pizqenw9rd791.jpg for macro grouping - 17 named regions against that map's 16 unnamed ones, and it separates Athel Loren from Bretonnia and Mountains of Mourn from the Darklands, which the older annotation merges. The printed counts are a REFERENCE for how another game apportioned the same world, explicitly not a source of truth (user, 2026-07-25); they total 554 against our 600-700 target band, so they inform proportions rather than absolute numbers.",
+  "source": "total_war_states_per_strat_region.jpg",
+  "projection": "frame_alias",
+  "frame_alias": {
+    "of": "pizqenw9rd791.jpg",
+    "scale": [
+      1.8081055,
+      1.8079096
+    ],
+    "offset": [
+      0.0,
+      0.0
+    ]
+  },
+  "control_points": [],
+  "footprint": [
+    1368.0,
+    0.0,
+    7904.0,
+    3264.0
+  ]
+}

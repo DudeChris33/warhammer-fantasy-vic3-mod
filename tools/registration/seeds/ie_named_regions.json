@@ -1,0 +1,20 @@
+{
+  "source": "total_war_states_per_strat_region.jpg",
+  "record_stem": "ie_named_regions",
+  "objective": "frame_alias",
+
+  "_comment": "The same Immortal Empires parchment frame again, at 2048x1593 against the master's 3703x2880 - the ratios agree to five decimals (2048/3703 = 0.55306, 1593/2880 = 0.55312), so it is a pure rescale and needs no control points of its own. It aliases pizqenw9rd791.jpg rather than the master because the master carries no registration record: it contributes only its unannotated pixels, for differencing, and the twin is pixel-identical to it. scale converts THIS source's pixels into the twin's, so it is the reciprocal of 0.553.",
+  "frame_alias": {
+    "of": "pizqenw9rd791.jpg",
+    "scale": [1.8081055, 1.8079096],
+    "offset": [0.0, 0.0]
+  },
+
+  "record": {
+    "role": "named_macro_regions",
+    "precedence": 36,
+    "layer_precedence": {"macro": 95, "boundaries": 0, "coastline": 0, "relief": 0},
+    "crop": [20, 20, 2028, 1573],
+    "notes": "The IE parchment with each strategic region outlined in a distinct colour AND LABELLED BY NAME, plus that region's state count in Total War: Warhammer 3. This is what binds names to geometry: every requirement the user states is expressed in names ('Bretonnia must have at least 15 state regions'), and before this source the pipeline knew only anonymous macro contours. It supersedes pizqenw9rd791.jpg for macro grouping - 17 named regions against that map's 16 unnamed ones, and it separates Athel Loren from Bretonnia and Mountains of Mourn from the Darklands, which the older annotation merges. The printed counts are a REFERENCE for how another game apportioned the same world, explicitly not a source of truth (user, 2026-07-25); they total 554 against our 600-700 target band, so they inform proportions rather than absolute numbers."
+  }
+}
