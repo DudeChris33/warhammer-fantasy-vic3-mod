@@ -763,6 +763,42 @@ it to `planning/done/` waits for S6.
     positions, not the fit; the landmarks take no part in the silhouette
     optimisation and exist as an independent sanity signal and as the fallback
     objective for sources without a silhouette.
+- **Post-build agent review**:
+  - *docs-updater* — four real gaps, all fixed in `72ba846`. It verified every
+    command, flag and path in the updated docs by running them, and checked the
+    committed-vs-gitignored claims against both `.gitignore` files. (1)
+    `SOURCES.md`'s manifest `Role` cells for `TheEmpire.webp` and
+    `map-the-old-world.jpg` still read as active boundary sources, contradicting
+    the S3a measurement in their own registration `notes` — annotated, plus a
+    section explaining the two disqualifying findings. (2) `PROVENANCE.md` said
+    "State as of S2" over an S3a list. (3) It rounded the uncovered-land figure to
+    "~3%" where everywhere else states the measured 2.4%. (4) `MAP_RUNBOOK.md`'s
+    S3a gate said to look at `qa_state_labels.png` without listing
+    `qa_overlay.py --labels`, the only command that writes it.
+  - *security-review* — **no critical findings, no MP-desync risk, no IP leak**,
+    all verified by attack rather than by reading. It re-ran the generator in a
+    fresh process (635 s) and confirmed all three outputs byte-identical; it
+    tampered with both a source file and a manifest row and confirmed
+    `--verify`, the generator and `fit_registration.py` all refuse before doing
+    any expensive work; it fed six hostile `frame_alias` record shapes
+    (self-alias, alias-of-alias, missing parent, control points on an alias,
+    `frame_alias` on a non-alias projection, non-positive scale) and confirmed
+    each is rejected with a specific error; it confirmed nothing under `sources/`
+    has ever been committed (full history), and regenerated the boundary fixture
+    PNGs to prove they are our own pixels. It also confirmed the wrap-seam
+    handling is doing real work — the same array is correctly *not* flagged torn
+    with `wrap_x=True` and *is* with `wrap_x=False`.
+    **Three WARNING-level validator gaps, all fixed in `351a99f`**, each
+    demonstrated with a constructed layer that passed the gate while being
+    invalid: (1) the index's `coastal` flag was never cross-checked against the
+    mask — an index with the flags fully inverted passed clean, and S3b turns
+    `coastal` into `port` + `naval_exit_id`, which the state schema then requires
+    to agree; the new check recomputes the fact by a *different* route than the
+    generator, so it catches a logic bug and not merely a corrupted index. (2)
+    Duplicate `label` entries were absorbed by a set comprehension, leaving which
+    copy wins up to read order. (3) The top-level `land_cells`/`sea_cells` counts
+    derive the id bands that were checked against them, so the band check was
+    validating itself.
 
 ### S3b–S6 — pending
 
