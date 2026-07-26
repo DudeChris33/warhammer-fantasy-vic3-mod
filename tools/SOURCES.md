@@ -18,6 +18,39 @@ Only our own derived pixels (`map_data/*.png`, …) are committed; consulting th
 references for geometry is standard fan-mod practice, copying their pixels is the
 line we do not cross (see [PROVENANCE.md](PROVENANCE.md)).
 
+## The Terraqueous Globe is the most trusted source, and the shape we aim for
+
+**`terraqueous_globe.jpg` outranks every other source in this manifest.** It is
+the single geometric authority (user decision #1, 2026-07-25): its coastline is
+the shape the finished map is meant to have, and every other reference is
+*projected onto it* rather than averaged with it. Where a source disagrees with
+the globe about where land is, the globe is right by definition and the other
+source is misregistered.
+
+Concretely, and non-negotiably:
+
+- The committed `tools/derived/land_sea_mask.png` is derived from it and **is the
+  coastline**. Nothing else may move a shoreline — not the Total War relief, not
+  the Immortal Empires parchment family, not a future source.
+- Other sources contribute only things the globe cannot supply: **interior
+  boundaries**, **macro grouping**, **names**, and **high-frequency relief
+  detail** composited as zero-mean texture on land. All of it is clipped to the
+  mask.
+- A new source's registration is *scored against the mask*, so "does it agree
+  with the globe" is the measurement that decides whether it may be used at all
+  (see `tools/fit_registration.py`). This is how the satellite render came to be
+  de-registered in S2 and how the two GW regional maps came to be marked not
+  usable for geometry in S3a.
+
+It earns that standing by measurement, not by preference. Its Natural Earth II
+projection was fitted to its own drawn envelope at **0.363 px RMS** across 2001
+traced rows, with two independent confirmations: the fitted axes are isotropic to
+within 0.07% (as a true NE-II rendering must be), and the fitted graticule lands
+within ~2 px of the degree labels the map itself prints. No other source in this
+folder is registered to anywhere near that accuracy — the next best are
+rubber-sheeted playable-game maps whose landmasses are drawn at deliberately
+wrong relative sizes.
+
 ## Verifying / refreshing
 
 ```
