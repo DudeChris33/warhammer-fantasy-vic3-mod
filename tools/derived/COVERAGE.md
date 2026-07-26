@@ -9,8 +9,8 @@ would help rather than the build silently coarsening.
 
 - Target: **659 land states** (vanilla's own count) at a mean
   of **12,517 canvas px** each, plus **103 sea zones**.
-- Achieved: **643 land cells** (mean 12,829 px, median 11,967 px, min 208, max 31,533) and **108 sea zones**.
-- Cells traced from a source before filling: **2,255**.
+- Achieved: **613 land cells** (mean 13,457 px, median 12,664 px, min 208, max 35,384) and **108 sea zones**.
+- Cells traced from a source before filling: **1,860**.
 
 ## Source coverage
 
@@ -18,13 +18,13 @@ Boundary sources, highest precedence first — the area a layer *offers*, not
 the area it wins:
 
 ```
-  precedence  50  Immortal-Empires-Map-Feature-Image-scaled.jpg    covers  48.4% of canvas
-  precedence  40  wh3_dlc_ie_parchment_map_english.jpg             covers  58.9% of canvas
+  precedence  95  total_war_map_colored.png                        covers  58.8% of canvas
+  precedence  50  Immortal-Empires-Map-Feature-Image-scaled.jpg    covers  45.9% of canvas
 ```
 
 ## The gap
 
-**2.4% of land has no boundary source at all** and is partitioned by
+**2.5% of land has no boundary source at all** and is partitioned by
 seeded fallback cells at the target density. This is expected, not a defect:
 the Immortal Empires frame stops around Cathay, so the Kingdoms of Ind,
 Khuresh, Nippon, the far Eastern Steppes and the polar Chaos Wastes have no
@@ -50,21 +50,21 @@ Named candidates for closing it, in order of expected value:
 ## Macro grouping
 
 - 16 contours recovered from the annotated twin (it prints 16 region labels).
-- 95 cells fell outside every contour and took their macro from the nearest neighbour — these are mostly the uncovered regions above.
+- 106 cells fell outside every contour and took their macro from the nearest neighbour — these are mostly the uncovered regions above.
 
-  macro_01                        2 cells
-  macro_02                       80 cells
-  macro_03                       28 cells
-  macro_04                       59 cells
-  macro_05                       57 cells
-  macro_06                       69 cells
-  macro_07                       51 cells
-  macro_08                      138 cells
-  macro_09                       13 cells
-  macro_10                        5 cells
-  macro_11                        7 cells
-  macro_12                       13 cells
-  macro_13                        9 cells
-  macro_14                       79 cells
-  macro_15                        0 cells
-  macro_16                       33 cells
+  macro_01                        3 cells
+  macro_02                       74 cells
+  macro_03                       49 cells
+  macro_04                       40 cells
+  macro_05                       43 cells
+  macro_06                       62 cells
+  macro_07                       56 cells
+  macro_08                      130 cells
+  macro_09                       20 cells
+  macro_10                        0 cells
+  macro_11                       18 cells
+  macro_12                       18 cells
+  macro_13                        3 cells
+  macro_14                       72 cells
+  macro_15                        1 cells
+  macro_16                       24 cells

@@ -187,7 +187,8 @@ def warp_mask(src_pts: np.ndarray, canvas_pts: np.ndarray, src_mask: np.ndarray,
     if inside.any():
         land[inside] = src_mask[np.rint(sy[inside]).astype(np.int64).clip(0, ih - 1),
                                 np.rint(sx[inside]).astype(np.int64).clip(0, iw - 1)]
-    return WarpResult(land, inside, fold_fraction(sx, sy, inside))
+    folded, aniso = warp_metrics(sx, sy, inside)
+    return WarpResult(land, inside, folded, aniso)
 
 
 @dataclass(frozen=True)
@@ -195,32 +196,56 @@ class WarpResult:
     land: np.ndarray
     inside: np.ndarray
     folded: float
+    anisotropy: float
 
     def __iter__(self):
         # Kept unpackable as (land, inside) so existing two-value call sites read
-        # naturally; `folded` is asked for by name where it matters.
+        # naturally; the quality metrics are asked for by name where they matter.
         return iter((self.land, self.inside))
 
 
-def fold_fraction(sx: np.ndarray, sy: np.ndarray, inside: np.ndarray | None = None) -> float:
-    """Fraction of the sampled area where the warp turns itself inside out.
+def warp_metrics(sx: np.ndarray, sy: np.ndarray,
+                 inside: np.ndarray | None = None) -> tuple[float, float]:
+    """``(folded_fraction, anisotropy_p99)`` for a canvas -> source coordinate field.
 
-    A thin-plate spline through independently-placed control points is under no
-    obligation to stay injective, and when it folds, two separate parts of the
-    canvas sample the *same* part of the source. That is not a small error: the
-    cells traced out of the folded band come back as long thin ribbons running
-    across whole continents, which is what a first, unconstrained fit produced —
-    21% of the covered canvas was inside a fold, and Lustria, the southern Old
-    World and southern Cathay were visibly striped because of it.
+    Both come from the Jacobian, and both describe ways a thin-plate spline
+    through independently-placed control points can be geometrically useless while
+    still scoring well on overlap.
 
-    The test is the sign of the Jacobian determinant of the canvas -> source map.
-    Positive everywhere means orientation-preserving, i.e. locally one-to-one.
+    **Folding** — the determinant going non-positive — means two separate parts of
+    the canvas sample the same part of the source. An early unconstrained fit
+    folded over 21% of the covered canvas.
+
+    **Anisotropy** — the ratio of the Jacobian's singular values — is the subtler
+    and, as it turned out, the more damaging one. A warp can be perfectly
+    injective and still stretch every neighbourhood 20:1, and a cell traced out of
+    such a neighbourhood arrives as a long curved smear. The fit that passed the
+    fold check still ran a median anisotropy of 2.63 with a 99th percentile of 20
+    and a maximum of 394, and that is exactly what the reviewer saw as "all
+    swirly": not a partition artefact at all, but every province in the source
+    being drawn out into a ribbon on the way onto the canvas.
+
+    The 99th percentile rather than the maximum, because a single pixel at a
+    control point can spike without meaning anything, while a p99 of 20 means a
+    fifth of a continent is smeared.
     """
     dxdy, dxdx = np.gradient(sx)
     dydy, dydx = np.gradient(sy)
     det = dxdx * dydy - dxdy * dydx
-    sel = det if inside is None else det[inside]
-    return 0.0 if sel.size == 0 else float((sel <= 0).mean())
+    sel_det = det if inside is None else det[inside]
+    if sel_det.size == 0:
+        return 0.0, 1.0
+    folded = float((sel_det <= 0).mean())
+
+    # Singular values of [[dxdx, dxdy], [dydx, dydy]] from its Frobenius norm and
+    # determinant — no per-pixel SVD needed.
+    frob = dxdx ** 2 + dxdy ** 2 + dydx ** 2 + dydy ** 2
+    disc = np.sqrt(np.maximum(0.0, frob ** 2 - 4.0 * det ** 2))
+    hi = np.sqrt(np.maximum(1e-12, (frob + disc) / 2.0))
+    lo = np.sqrt(np.maximum(1e-12, (frob - disc) / 2.0))
+    ratio = hi / np.maximum(lo, 1e-6)
+    sel = ratio if inside is None else ratio[inside]
+    return folded, float(np.percentile(sel, 99))
 
 
 def refine(src_pts: np.ndarray, canvas_pts: np.ndarray, src_mask: np.ndarray,
@@ -228,7 +253,8 @@ def refine(src_pts: np.ndarray, canvas_pts: np.ndarray, src_mask: np.ndarray,
            step: int = 16, radii: tuple[float, ...] = (128.0, 48.0, 16.0),
            passes: int = 2, log=None,
            bounds: tuple[float, float] | None = None,
-           max_fold: float = 0.0) -> tuple[np.ndarray, float]:
+           max_fold: float = 0.0,
+           max_anisotropy: float = 3.0) -> tuple[np.ndarray, float]:
     """Coordinate descent: move each control point's canvas position to raise IoU.
 
     Each point is tried at its current position and at eight neighbours a given
@@ -250,15 +276,22 @@ def refine(src_pts: np.ndarray, canvas_pts: np.ndarray, src_mask: np.ndarray,
     query = query_grid(shape, step)
 
     def score(pts: np.ndarray) -> float:
-        """IoU, or -1 for a candidate that folds the warp.
+        """IoU, or -1 for a candidate whose warp is not geometrically usable.
 
-        Rejecting outright rather than penalising is deliberate: a fold is not a
-        slightly worse registration, it is a warp that maps two places to one and
-        cannot be traced from. Since the affine seed is fold-free by construction
-        and every accepted move is checked, the fit stays injective throughout.
+        Rejecting outright rather than penalising is deliberate: neither a fold
+        nor a 20:1 shear is a slightly-worse registration — one maps two places to
+        one, the other turns every province it carries into a smear. The affine
+        seed satisfies both bounds by construction and every accepted move is
+        rechecked, so the fit stays usable throughout rather than being repaired
+        afterwards.
+
+        The cost of the constraint is real and worth stating: overlap alone always
+        prefers the freer warp, so a bounded fit scores lower. It is still the
+        better registration, because IoU measures whether the *silhouettes* agree
+        and says nothing about whether the interior borders survive the trip.
         """
         r = warp_mask(src_pts, pts, src_mask, shape, src_scale, step=step, query=query)
-        if r.folded > max_fold:
+        if r.folded > max_fold or r.anisotropy > max_anisotropy:
             return -1.0
         return two_sided_iou(r.land[:small.shape[0], :small.shape[1]], small)
 

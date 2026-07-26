@@ -178,6 +178,12 @@ def warp_cells(reg: schema.SourceRegistration,
     inside = np.zeros(shape, dtype=bool)
     ih, iw = src_labels.shape
     x0, y0, x1, y1 = reg.crop if reg.crop is not None else (0, 0, iw, ih)
+    # Honour the declared canvas footprint as well as the source crop. A
+    # thin-plate spline degrades to its affine trend outside the control-point
+    # hull, and the footprint is exactly the hull's box — so without this test a
+    # source keeps "contributing" cells far beyond anywhere it was ever fitted,
+    # which is what put spiky extrapolated slivers in the canvas corners.
+    fx0, fy0, fx1, fy1 = reg.footprint
     xs = (np.arange(w, dtype=np.float64) + 0.5) * sxc
     for r0 in range(0, h, block_rows):
         r1 = min(h, r0 + block_rows)
@@ -189,7 +195,8 @@ def warp_cells(reg: schema.SourceRegistration,
         # including its own ink lines. It is deliberately not "where this source
         # has a cell": stack_layers needs to suppress lower layers across the ink
         # too, or the layer underneath shows through every boundary line.
-        covers = (sx >= x0) & (sx <= x1) & (sy >= y0) & (sy <= y1)
+        covers = ((sx >= x0) & (sx <= x1) & (sy >= y0) & (sy <= y1)
+                  & (gx >= fx0) & (gx <= fx1) & (gy >= fy0) & (gy <= fy1))
         inside[r0:r1] = covers
         if not covers.any():
             continue
@@ -304,28 +311,40 @@ def merge_small(labels: np.ndarray, min_area: int, wrap_x: bool = True,
     return renumber(lab)
 
 
-def drop_small(labels: np.ndarray, min_area: int) -> np.ndarray:
-    """Unlabel cells below ``min_area`` instead of merging them.
+def prune_slivers(labels: np.ndarray, wrap_x: bool = True,
+                  min_fraction: float = 0.35) -> np.ndarray:
+    """Split cells into connected pieces, keeping each cell's substantial ones.
 
-    Dropping and re-filling is not the same as merging, and the difference is
-    visible in the finished map. Our coastline is not the source's, so clipping
-    the source cells to the committed mask shaves a sliver off every coastal one.
-    Merged, those slivers join to whichever neighbour they share most border with
-    — which for a sliver is usually *another sliver*, and the chain comes out as a
-    long ribbon state hugging the coast. Dropped, the same pixels go back to
-    :func:`fill_nearest`, which hands each one to its genuinely nearest cell and
-    produces compact shapes.
+    Clipping the source cells to our own coastline is violent: the reference
+    map's coast is not ours, so a cell straddling the shore comes back as one
+    real piece plus a scatter of slivers strung along the mismatch. Measured on
+    the Immortal Empires feature image, intersecting 852 masked cells with the
+    mask and splitting them produced **2028 pieces with a median area of 112 px**
+    — the real cells were still there, buried in an order of magnitude more
+    rubble.
 
-    Runs on the labels as given: callers should have split disconnected pieces
-    first, or a cell's total area will hide a sliver limb.
+    The discrimination has to be **relative to the cell's own largest piece**,
+    not against an absolute area. An earlier version compared every piece to a
+    fraction of the *target state size*, which at 3,129 px sat above the median
+    warped source cell of 3,648 px — so it deleted roughly half of the genuine
+    boundary network and refilled the space by Voronoi. That is what made whole
+    regions come out as a handful of swirled blobs: the borders being drawn were
+    mostly not the map's any more.
+
+    Each surviving piece becomes its own label, because a cell torn in two by a
+    strait is two states.
     """
-    areas = np.bincount(labels.ravel())
-    small = np.zeros(len(areas), dtype=bool)
-    small[1:] = areas[1:] < int(min_area)
-    small[0] = False
-    out = labels.copy()
-    out[small[labels]] = 0
-    return out
+    comp = components(labels, wrap_x)
+    comp[labels == 0] = 0
+    n = int(comp.max()) + 1
+    sizes = np.bincount(comp.ravel(), minlength=n)
+    parent = np.zeros(n, dtype=labels.dtype)
+    parent[comp.ravel()] = labels.ravel()
+    biggest = np.zeros(int(labels.max()) + 1, dtype=sizes.dtype)
+    np.maximum.at(biggest, parent[1:], sizes[1:])
+    keep = np.zeros(n, dtype=bool)
+    keep[1:] = sizes[1:] >= np.maximum(1, min_fraction * biggest[parent[1:]])
+    return renumber(np.where(keep[comp], comp, 0))
 
 
 def merge_to_target(labels: np.ndarray, target: int, wrap_x: bool = True,

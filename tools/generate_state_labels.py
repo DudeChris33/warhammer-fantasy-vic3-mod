@@ -74,11 +74,13 @@ TARGET_SEA_ZONES = 103
 MIN_AREA_FRACTION = 0.35
 MAX_AREA_FRACTION = 2.2
 
-#: Clipping the source cells to our own coastline shaves a sliver off every
-#: coastal one. A traced piece below this fraction of the target is treated as
-#: that clipping artefact rather than as a state, and handed back to the fill —
-#: see ``cells.drop_small`` for why dropping beats merging here.
-FRAGMENT_FRACTION = 0.25
+#: A connected piece smaller than this fraction of its own source cell's largest
+#: piece is coastal rubble from clipping to our mask, not a state. Expressed
+#: relative to the cell, never to the target size: the traced cells are ~3.4x
+#: FINER than a vanilla state (median 3,648 px against a 12,517 px target), so an
+#: absolute threshold near the target deletes the boundary network itself. See
+#: ``cells.prune_slivers``.
+SLIVER_FRACTION = 0.35
 
 #: Absolute floor on a cell's area, matching the minimum island the land mask
 #: itself keeps (``generate_heightmap.MIN_FEATURE_AREA``). Any real island
@@ -101,10 +103,24 @@ BOUNDARY_LAYER = "boundaries"
 #: TheEmpire.webp) still declare one, and both are measured to be misregistered
 #: and are annotated as unusable for geometry. Naming the consumers here means
 #: adding a source is a deliberate edit, not a side effect of a precedence.
-BOUNDARY_SOURCES = (
-    "Immortal-Empires-Map-Feature-Image-scaled.jpg",
-    "wh3_dlc_ie_parchment_map_english.jpg",
-)
+#: name -> how its cells are extracted. ``flat_colour`` for a map whose ocean is
+#: a flat fill and whose region lines are drawn over flat terrain fills;
+#: ``ink`` for a textured parchment needing a local-contrast threshold.
+BOUNDARY_SOURCES = {
+    "total_war_map_colored.png": "flat_colour",
+    "Immortal-Empires-Map-Feature-Image-scaled.jpg": "ink",
+}
+
+#: Off-map background and legend panels, in each source's own pixels.
+BOUNDARY_EXCLUDE = {
+    "total_war_map_colored.png": [(0, 2450, 330, 3010)],
+}
+
+#: The clean counterpart the macro-annotated twin is differenced against. Named
+#: by filename rather than looked up by registration role: it contributes no
+#: geometry at all, only its unannotated pixels, so requiring it to carry a
+#: registration record would be asserting a placement nothing uses.
+MACRO_CLEAN_MASTER = "wh3_dlc_ie_parchment_map_english.jpg"
 
 #: Ink-threshold parameters for the parchment line networks.
 INK_WINDOW = 41
@@ -117,12 +133,20 @@ def log(msg: str) -> None:
     print(msg, flush=True)
 
 
-def extract_source_cells(reg: schema.SourceRegistration) -> np.ndarray:
+def extract_source_cells(reg: schema.SourceRegistration, kind: str) -> np.ndarray:
     """Trace one source's boundary network into a cell-label image."""
     rgb = sources.load_source_image(reg.source)
-    ink = parchment.ink_mask(rgb, window=INK_WINDOW, offset=INK_OFFSET)
-    lab, n = parchment.cells_from_ink(ink, MIN_SOURCE_CELL)
-    log(f"  {reg.source:<48} ink {ink.mean():.3f}  cells {n}")
+    exclude = BOUNDARY_EXCLUDE.get(reg.source, [])
+    if kind == "flat_colour":
+        lab, land = parchment.flat_map_cells(rgb, min_area=MIN_SOURCE_CELL,
+                                             exclude=exclude)
+        n = int(lab.max())
+        log(f"  {reg.source:<44} flat  land {land.mean():.3f}  cells {n}")
+    else:
+        ink = parchment.ink_mask(rgb, window=INK_WINDOW, offset=INK_OFFSET,
+                                 exclude=exclude)
+        lab, n = parchment.cells_from_ink(ink, MIN_SOURCE_CELL)
+        log(f"  {reg.source:<44} ink   {ink.mean():.3f}  cells {n}")
     return lab.astype(np.int32)
 
 
@@ -132,11 +156,11 @@ def build_layers(regs: dict[str, schema.SourceRegistration]
     layers: list[tuple[str, int, np.ndarray, np.ndarray]] = []
     covered = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
     report: list[str] = []
-    for name in BOUNDARY_SOURCES:
+    for name, kind in BOUNDARY_SOURCES.items():
         reg = regs.get(name)
         if reg is None:
             raise SystemExit(f"{name} has no registration record — run tools/fit_registration.py")
-        src = extract_source_cells(reg)
+        src = extract_source_cells(reg, kind)
         t0 = time.time()
         lab, inside = cells.warp_cells(reg, regs, src, (CANVAS_H, CANVAS_W))
         covered |= inside
@@ -199,17 +223,16 @@ def build_land_cells(land: np.ndarray, regs: dict[str, schema.SourceRegistration
     stacked[~land] = 0
     log(f"  {int((stacked > 0).sum()) / land.sum() * 100:.1f}% of land carries a source cell")
 
-    # A rubber-sheeted warp can tear one source cell into pieces on opposite
-    # sides of a strait; each piece has to become its own state.
-    stacked = cells.split_disconnected(stacked, WRAP_X)
+    # Clipping to the mask tears each cell into one real piece plus coastal
+    # rubble. Keep the substantial pieces (each becomes its own state — a cell cut
+    # in two by a strait is two states) and hand the rubble back to the fill.
+    before = int(stacked.max())
+    stacked = cells.prune_slivers(stacked, WRAP_X, SLIVER_FRACTION)
+    log(f"  {before} masked cells -> {int(stacked.max())} substantial pieces "
+        f"(slivers below {SLIVER_FRACTION:.0%} of their own cell go back to the fill)")
 
     target = int(land.sum() // TARGET_LAND_STATES)
     stats["target_area"] = target
-    before = int(stacked.max())
-    stacked = cells.drop_small(stacked, int(target * FRAGMENT_FRACTION))
-    log(f"  dropped {before - len(np.unique(stacked)) + 1} coastal fragments below "
-        f"{int(target * FRAGMENT_FRACTION):,} px back to the fill")
-
     stacked, uncovered_frac = seed_uncovered(stacked, land, target)
     stats["uncovered_land_fraction"] = round(uncovered_frac, 4)
 
@@ -243,19 +266,32 @@ def assign_macros(land_labels: np.ndarray, regs: dict[str, schema.SourceRegistra
                   ) -> tuple[np.ndarray, dict]:
     """Group land cells into macro regions from the annotated twin."""
     twin_reg = next((r for r in regs.values() if r.role == "ie_macro_grouping"), None)
-    master = next((r for r in regs.values() if r.role == "ie_boundary_frame_master"), None)
-    if twin_reg is None or master is None:
-        raise SystemExit("macro grouping needs the annotated twin and the frame master")
+    if twin_reg is None:
+        raise SystemExit("macro grouping needs the annotated twin")
     twin = sources.load_source_image(twin_reg.source)
-    clean = sources.load_source_image(master.source)
-    ann = macro.annotation_mask(twin, clean)
+
+    # Preferred path: difference the twin against the clean master, which cancels
+    # everything present in both (notably the coats of arms) and leaves exactly
+    # what the annotator drew. Falls back to a saturation threshold on the twin
+    # alone when the master is not available, which is measurably worse — see
+    # macro.contours_from_twin.
+    degraded = False
+    try:
+        ann = macro.annotation_mask(twin, sources.load_source_image(MACRO_CLEAN_MASTER))
+    except (sources.ManifestError, FileNotFoundError) as exc:
+        log(f"  WARNING: clean master unavailable ({exc})")
+        ann, degraded = macro.contours_from_twin(twin), True
+
     regions, n = macro.regions_from_contours(ann)
     declared = len(macro.PRINTED_COUNTS)
     log(f"  {n} macro contours recovered (twin declares {declared})")
-    # A checked invariant, not a warning: silently producing two Empires (or
-    # none) is the failure this grouping is most prone to, and it would not be
-    # visible until strategic regions were generated from it in S3b.
-    if n != declared:
+    if degraded:
+        log("  WARNING: macro grouping ran WITHOUT the clean master — regions that "
+            "failed to close have merged into neighbours, so some states are "
+            "grouped into the wrong macro. Restore the master and regenerate.")
+    elif n != declared:
+        # With the master available this is a hard failure: silently producing two
+        # Empires (or none) would not surface until S3b built strategic regions.
         raise SystemExit(
             f"macro grouping recovered {n} regions but the annotated twin labels "
             f"{declared} — re-tune worldgen/macro.py rather than proceeding"
@@ -267,7 +303,8 @@ def assign_macros(land_labels: np.ndarray, regs: dict[str, schema.SourceRegistra
     table = macro.fill_missing(table, land_labels, WRAP_X)
     log(f"  {unassigned} cells took their macro from a neighbour")
     return table, {"macro_regions": n, "macro_declared": len(macro.PRINTED_COUNTS),
-                   "macro_filled_from_neighbour": unassigned}
+                   "macro_filled_from_neighbour": unassigned,
+                   "macro_degraded": degraded}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -409,6 +446,13 @@ def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
         "",
         f"- {stats['macro_regions']} contours recovered from the annotated twin "
         f"(it prints {stats['macro_declared']} region labels).",
+    ] + ([
+        "- **⚠ DEGRADED: the clean master was unavailable**, so the contours came from a",
+        "  saturation threshold on the twin alone rather than from differencing the two.",
+        "  Regions that failed to close have merged into neighbours, which means some",
+        "  states are grouped into the wrong macro — silently. Restore",
+        "  `wh3_dlc_ie_parchment_map_english.jpg` to `sources/` and regenerate.",
+    ] if stats.get("macro_degraded") else []) + [
         f"- {stats['macro_filled_from_neighbour']} cells fell outside every contour and took "
         "their macro from the nearest neighbour — these are mostly the uncovered regions above.",
         "",

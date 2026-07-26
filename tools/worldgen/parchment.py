@@ -117,6 +117,66 @@ def erase_ink(rgb: np.ndarray, ink: np.ndarray) -> np.ndarray:
     return out
 
 
+#: Flat ocean fill on the coloured Total War map, sampled from it directly.
+FLAT_SEA_RGB = (16, 6, 175)
+#: Off-map background / land base tone on the same map.
+FLAT_PAPER_RGB = (211, 189, 140)
+
+
+def flat_sea_mask(rgb: np.ndarray, tolerance: int = 60) -> np.ndarray:
+    """Sea on a flat-filled map, by distance to the committed ocean colour.
+
+    A map whose ocean is a single flat colour needs no threshold *fitting* at
+    all: the answer is exact up to the anti-aliased pixel at each coastline. This
+    is worth far more than it sounds. Every other source here forced a judgement
+    call about where the water started — a chromaticity distance on the parchment
+    family, a calibrated luminance cut on the Old World map that reached only 81%
+    balanced accuracy — and a registration can be no better than the silhouette it
+    is scored against.
+    """
+    d = np.abs(rgb.astype(np.int16) - np.array(FLAT_SEA_RGB, dtype=np.int16)).max(axis=2)
+    return d <= int(tolerance)
+
+
+def flat_map_cells(rgb: np.ndarray, min_area: int = 300,
+                   max_area_fraction: float = 0.012,
+                   line_luminance: int = 90,
+                   exclude: list[tuple[int, int, int, int]] | None = None
+                   ) -> tuple[np.ndarray, np.ndarray]:
+    """``(cell_labels, land)`` for a flat-filled map with drawn region lines.
+
+    The barrier is the union of the ocean and the drawn black lines, so labelling
+    the complement yields the land regions directly — no local-contrast ink test,
+    no text to inpaint, no coastal shadow band to mistake for a border.
+
+    ``max_area_fraction`` drops the handful of enormous "cells" that are not
+    regions at all: the off-map background outside the map's own frame, and the
+    legend panel. They are separated from real regions by two orders of magnitude
+    in area (the largest is 5.8% of the image against a 0.05% median), so the cut
+    is not delicate. Land is then defined as the union of the surviving cells,
+    which is a cleaner statement of "inside the map, and not sea" than any
+    colour test could give.
+    """
+    dark = rgb.astype(np.int16).max(axis=2) < int(line_luminance)
+    sea = flat_sea_mask(rgb)
+    barrier = dark | sea
+    for x0, y0, x1, y1 in (exclude or []):
+        barrier[int(y0):int(y1), int(x0):int(x1)] = True
+    lab, _ = cells_from_ink(barrier, min_area)
+    sizes = np.bincount(lab.ravel())
+    too_big = np.zeros(len(sizes), dtype=bool)
+    too_big[1:] = sizes[1:] > max_area_fraction * rgb.shape[0] * rgb.shape[1]
+    lab = np.where(too_big[lab], 0, lab)
+    return renumber_cells(lab), lab > 0
+
+
+def renumber_cells(labels: np.ndarray) -> np.ndarray:
+    """Compact cell ids to ``1..k``, preserving 0."""
+    uniq, inv = np.unique(labels, return_inverse=True)
+    out = inv.reshape(labels.shape).astype(np.int32)
+    return out if uniq[0] == 0 else out + 1
+
+
 def cells_from_ink(ink: np.ndarray, min_area: int = 150) -> tuple[np.ndarray, int]:
     """Label the *complement* of the ink network — every enclosed cell falls out.
 

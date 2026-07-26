@@ -83,13 +83,34 @@ def load_seed(stem: str) -> dict:
 
 
 def silhouette(spec: dict) -> tuple[np.ndarray, tuple[float, float]]:
-    """The land mask used as the fitting objective, plus its scale to the master frame."""
+    """The land mask used as the fitting objective, plus its scale to the master frame.
+
+    Two kinds of source, two ways of getting there:
+
+    ``flat_colour``
+        The map's ocean is a single flat fill, so land is exactly the union of
+        the regions its own drawn lines enclose. No threshold is fitted and
+        nothing is guessed.
+
+    ``painted`` (default)
+        A textured parchment, where land has to be separated from paper by
+        chromaticity distance. Approximate by nature — kept because it is the
+        only thing that works on the Immortal Empires family.
+    """
     rgb = sources.load_source_image(spec["from"])
+    scale = tuple(float(v) for v in spec.get("to_master_scale", (1.0, 1.0)))
+    if spec.get("kind") == "flat_colour":
+        _, land = parchment.flat_map_cells(
+            rgb,
+            min_area=int(spec.get("min_component", 300)),
+            max_area_fraction=float(spec.get("max_area_fraction", 0.012)),
+            exclude=[tuple(b) for b in spec.get("exclude", [])])
+        return land, scale
     m = parchment.painted_mask(rgb, exclude=[tuple(b) for b in spec.get("exclude", [])])
     keep = int(spec.get("min_component", 400))
     m = segment.drop_small_components(m, keep, wrap_x=False)
     m = ~segment.drop_small_components(~m, keep, wrap_x=False)
-    return m, tuple(float(v) for v in spec.get("to_master_scale", (1.0, 1.0)))
+    return m, scale
 
 
 def anchor_landmarks(seed: dict) -> tuple[np.ndarray, np.ndarray]:
@@ -237,8 +258,10 @@ def fit_source(stem: str, log=print) -> dict:
     # folds on a reduced grid, so a fold narrower than that grid could survive.
     final = register.warp_mask(src_pts, canvas_pts, sil, land.shape, to_master, step=8)
     info["folded_fraction"] = round(final.folded, 5)
-    log(f"fold check    {100 * final.folded:.3f}% of the covered canvas folds "
-        f"(checked at 8 px, refined at {seed['refine']['stages'][-1]['step']} px)")
+    info["anisotropy_p99"] = round(final.anisotropy, 2)
+    log(f"warp quality  {100 * final.folded:.3f}% folded, anisotropy p99 "
+        f"{final.anisotropy:.2f} (checked at 8 px, refined at "
+        f"{seed['refine']['stages'][-1]['step']} px)")
     info["lattice"] = f"{lat['nx']}x{lat['ny']}"
     seed_canvas = np.asarray(seed_canvas)
     info["move"] = register.residual_report(src_pts, canvas_pts, seed_canvas)

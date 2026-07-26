@@ -76,6 +76,26 @@ def annotation_mask(twin: np.ndarray, clean: np.ndarray, threshold: int = 50,
     return (d > int(threshold)) & (sat > int(min_saturation))
 
 
+def contours_from_twin(twin: np.ndarray, min_saturation: int = 100) -> np.ndarray:
+    """Fallback: recover the macro contours from the annotated twin **alone**.
+
+    Used only when the clean master is unavailable, because it is measurably
+    worse. Differencing the two images isolates exactly what the annotator added
+    and nothing else; a saturation threshold on the twin cannot distinguish an
+    added contour from the map's own saturated artwork — the coats of arms are
+    the obvious case, and no colour rule survives contact with heraldry.
+
+    Measured on this source: differencing recovers **16** regions, matching the
+    16 the map itself labels. This fallback recovers **13**. The three it loses
+    merge into neighbours, so the states in them are grouped into the wrong
+    strategic region rather than left ungrouped — a silent error, which is why
+    the caller must report having fallen back to it.
+    """
+    mx = twin.max(axis=2).astype(np.int16)
+    mn = twin.min(axis=2).astype(np.int16)
+    return (mx - mn) > int(min_saturation)
+
+
 def regions_from_contours(contour: np.ndarray, min_area: int = 20000,
                           close_radius: int = 17, seal_border: bool = True
                           ) -> tuple[np.ndarray, int]:
