@@ -805,7 +805,9 @@ it to `planning/done/` waits for S6.
 The user reviewed `qa_state_labels.png` and rejected it: *"terrible, its all swirly,
 brettonia is a combined 3 states despite being at least the size of france, there
 are some weird spiky bits on the corners"*. All three were correct and all three
-had measurable causes. **S3a stays open**; a re-plan (S3a-2) is agreed.
+had measurable causes. **S3a stays open**; a re-plan (S3a-2) is agreed —
+see [Plan — S3a-2](#plan--s3a-2-named-region-binding--per-region-density-2026-07-26)
+at the end of this file (planned 2026-07-26).
 
 **Fixed and committed (`c6849a4`):**
 - **Swirls were the WARP, not the partition.** The fold check added earlier
@@ -1153,6 +1155,14 @@ fill and a new `--labels` mode to lint its own layer; the `ProvinceBitmap` →
 
 ## Plan — S3a: boundary ingestion → committed state-label layer
 
+> **Superseded (2026-07-26) by
+> [Plan — S3a-2](#plan--s3a-2-named-region-binding--per-region-density-2026-07-26)**
+> at the end of this file. S3a was built and its review gate rejected; the swirl /
+> density / spike fixes and the primary-source change are already committed, but
+> the macro layer this plan produces does not correspond to the user's named
+> regions, so per-region requirements cannot be enforced on it. Everything below
+> is retained as the record of what was built.
+
 ### Objective
 
 Produce one committed, reviewable **state-label layer** that tiles
@@ -1379,3 +1389,417 @@ S4, so S3b and S4 are built back-to-back.
 The repo-root `.gitignore` now carries `*.log`, which would catch `docs/*.log` if
 they were ever deleted and re-added. They are currently tracked, so they are
 safe — recorded here as a latent footgun, not an action.
+
+---
+
+## Plan — S3a-2: named-region binding + per-region density (2026-07-26)
+
+**Supersedes the `Plan — S3a` block above.** S3a's offline gate passed and its
+**review gate did not** (see *S3a — post-review rework, REVIEW GATE NOT PASSED*).
+The swirl / density / spike bugs are fixed and committed (`c6849a4`); the primary
+boundary source is now `total_war_map_colored.png` and the current output — 613
+land + 108 sea cells — is geometrically sound. What S3a never had a scope for is
+the thing the user's requirements are actually expressed in: **named regions**.
+`tools/regions/named_regions.json` (`601be43`) binds the names; the macro layer
+underneath them does not correspond to them, so no per-region requirement can be
+enforced. S3a-2 replaces that layer.
+
+Everything else in the master plan (canvas, `wrap_x`, Chaos Wastes fringe,
+Voronoi subdivision in S3b, scaffold model, loc conventions,
+determinism-by-committed-bitmaps, Terraqueous as the single geometric authority)
+is unchanged and still inherited.
+
+### Objective
+
+Bind every land cell to one of the user's named regions, extracted from
+`total_war_states_per_strat_region.jpg`'s own 17 labelled contours, and drive
+density from **per-region** quotas rather than one global number — so that
+"Bretonnia has at least 15 states" is a statement the generator can check
+instead of a statement about an anonymous blob.
+
+### What S3a-2 must deliver
+
+1. Named-region contours extracted from `total_war_states_per_strat_region.jpg`,
+   replacing the 16 anonymous macros from `pizqenw9rd791.jpg`.
+2. Every cell bound to a named region.
+3. Density reconciliation driven by per-region quotas, total 600–700 land states.
+4. Eleven forced single states: Massif Orcal, Laurelorn Forest, Middle Mountains,
+   the Moot, Skavenblight, Sartosa, Albion, the Oak of Ages, and three for the
+   Great Bastion.
+5. Sub-region quotas: Estalia ≥ 5, Tilea ≥ 4, Border Princes ≥ 6 (excluding the
+   internal mountains), Crater of Zharr ≥ 10.
+
+**Out of scope, confirmed with the user:** navigable rivers (Ruin, Reik, Talabec,
+Stir, Lynsk, Cathay's main rivers) and their strait crossings. `rivers.png`
+already exists from S2, `adjacencies.csv` is an S3b deliverable and
+`strait_definitions` an S6 one; canon river naming is already deferred to S6.
+*Carry-forward:* a state spanning both banks of a navigable river makes a
+crossing meaningless — checkable in S3b, not an S3a-2 deliverable.
+
+### Measurements taken this planning session
+
+Recorded so `/build` starts from evidence. All figures are from the local
+sources through the committed registrations; none of the S3a diagnosis is
+re-derived here.
+
+**The 11-of-17 result is reproduced, and the six misses have three distinct
+causes — not one.**
+
+- A union-of-all-strokes barrier with a single global closing radius recovers
+  **11–12 of 17** (r=5 → 12, r=7 → 11, r=9 → 11, r=13 → 12, r=21 → 11). There is
+  **no radius that works**: r=21 closes Darklands but merges Bretonnia + Athel
+  Loren + Southern Realms, and r=9 merges Norsca + Kislev.
+- **Mountains of Mourn has no contour colour of its own.** It is enclosed by
+  Darklands' red on the west, the slate coastline on the north and Grand Cathay's
+  yellow on the east. Any per-colour extraction fails for it by construction; a
+  **union** barrier is mandatory.
+- **"Islands" is eight separate small light-blue loops**, and its printed label —
+  where the anchor sits — is in open sea *outside* every one of them. Regions must
+  support **multiple anchors**, and the anchor cannot always be the label.
+- **Label text overprints coloured lines.** Under a *single-colour* mask that
+  leaves a glyph-width gap and the loop opens; under the *union* mask the text is
+  itself barrier and the loop stays closed. This is why the union is the right
+  primitive and per-colour is not.
+- **The slate coastline stroke is the weakest-detected class** — neutral grey at
+  mid luminance, drawn directly over the map's own dark coastal shadow band.
+  Widening its saturation window from 0.14 to 0.22 alone closed the Darklands
+  loop. It bounds Northern Chaos Wastes, Mountains of Mourn and Grand Cathay, so
+  three of the six misses trace to this one class.
+
+**Anchor quality (the anchors themselves are good; four do not resolve).**
+Pushed through the committed `ie_named_regions` registration onto the canvas:
+
+| Anchor residual | Regions |
+|---|---|
+| 0.1–0.6 source px (exact) | naggaroth, ulthuan, athel_loren, badlands_and_mountains, darklands, mountains_of_mourn, grand_cathay, lustria, southlands, southern_realms |
+| 14–34 px (lands on stroke/water, still usable) | kislev 14.1, the_empire 23.1, bretonnia 34.1 |
+| 138–292 px (**does not resolve**) | norsca 138.2, islands 145.2, southern_chaos_wastes 204.2, northern_chaos_wastes 291.8 |
+
+The four that fail do so for structural reasons: the two Chaos Wastes labels sit
+off our canvas (above y=0 / below the polar cut), and Norsca's and Islands'
+labels land on water.
+
+**Collisions on the canvas** (barrier = warped strokes ∪ sea ∪ outside-coverage,
+at canvas/2): 12 of 17 anchors claim distinct components; three components are
+double-claimed — `norsca + the_empire`, `southlands + southern_chaos_wastes`,
+and `darklands + mountains_of_mourn + grand_cathay` (one component holding
+**34.1% of all land**).
+
+**Land no named contour encloses: 33.4%.** Largest patches, canvas px bounding
+boxes: 12.35% at x 3234–5206 / y 104–1756 (the fringe north of Kislev running
+east into the Steppes); 4.48% at x 940–2232 / y 88–964 (northern Naggaroth);
+2.91% at x 6198–7006 / y 1626–2544 and 1.22% at x 7026–7456 / y 1032–1428 (Ind /
+Khuresh); 1.45% at x 1234–1942 / y 944–1722. Separately, **5.6% of land falls
+outside the named map's declared footprint entirely** (the polar strips and
+Naggaroth's western flank). Only **2.03%** of land maps east of source x=1900, so
+the sheet does cover the world — the gap is *undrawn regions*, not a missing
+frame.
+
+**The primary boundary source carries two signals S3a never used.**
+
+- **It prints the place names.** `Massif Orcal`, `Laurelorn`, `Oak of Ages`,
+  `Skavenblight` and `Sartosa` are all labelled, and each sits inside its own
+  drawn cell. Anchors picked there carry **zero cross-frame error**, because it is
+  the same source the cells come from.
+- **Its legend is machine-readable.** 24 faction swatches in a single column
+  inside the panel already committed as `BOUNDARY_EXCLUDE`
+  (`(0, 2450, 330, 3010)`), each a flat distinct colour, with `Tilea`, `Estalia`,
+  `Border Princes` and `Chaos Dwarfs` among them. Settlement dots match those
+  swatches exactly, so the sub-regions are locatable in the cells' own frame.
+  Dot counts are a *locator*, not a density driver — Cathay has 12 dots against a
+  40-state minimum.
+- Also measured, recorded as an available signal rather than a deliverable: the
+  map draws **two line weights**. Eroding the ink by one step leaves a coarser
+  network of **282 cells** (against 672 for the full network); a second erosion
+  collapses it to 138. That intermediate level looks like realm borders and is a
+  fallback locator if the dot colours prove insufficient.
+
+### User decisions taken this session (fixed — not open questions)
+
+1. **Unclaimed land goes to a single catch-all region.** One `outer_world`
+   region holds everything the 17 do not cover, with its own minimum. The 17
+   quotas stay honest; Nippon and the Eastern Steppes share a strategic region,
+   which is accepted.
+2. **The budget is apportioned by the printed TW3 counts**, not by land area:
+   scale the `tww3_states` column (total 554) to the budget with `min_states` as
+   a floor.
+3. **Forced-state anchors are picked by the build from the primary map's own
+   printed place names**, and the user reviews them in the QA overlay rather than
+   supplying positions.
+
+**Consequence the decisions create, resolved here.** Scaling `tww3_states`
+straight to 660 gives the 17 regions **661 states** and leaves nothing for the
+catch-all — which holds Ind, Khuresh, Nippon, Araby and the Eastern Steppes. The
+allocation is therefore two-stage: the catch-all takes an **area-proportional**
+share of the budget first, then the 17 split the remainder by TW3 share with
+`min_states` as a floor, and a single scale factor is bisected so the grand total
+lands in 600–700. Worked at a 20% catch-all: 132 + 528 = **660**, every minimum
+satisfied (`bretonnia` 15 and `southern_realms` 17 become floor-bound; the rest
+clear on TW3 share).
+
+**Recorded, not acted on:** Southern Realms' minimum of 17 is *exactly* consumed
+by its own sub-quotas (Estalia 5 + Tilea 4 + Border Princes 6 = 15) plus its two
+forced singles (Skavenblight, Sartosa), leaving zero for the internal mountains
+or the Estalian coast. TW3-proportional gives it 20, so it clears — but only by
+three. Flagged rather than silently raised.
+
+### Answers to the open questions the user asked the plan to resolve
+
+**Is per-region quota enforcement a change to the reconciliation step only, or
+does the cell extraction need to run per region?**
+
+**Reconciliation only — but the ordering must change.** Extraction stays global:
+the warp, the precedence stack, the mask intersection and the nearest-label fill
+are whole-canvas operations, and slicing them per region would put a seam at
+every region border and break the wrap handling that
+`tools/worldgen/cells.py:67` and `:117` exist to provide. What moves is the
+**binding**: `generate_state_labels.assign_macros` (`tools/generate_state_labels.py:265`)
+runs *after* `build_land_cells` has already reconciled density
+(`tools/generate_state_labels.py:248-257`). It must run *before*. Reconciliation
+then needs three surgical changes in `cells.py`: a merge candidate must lie in
+the same region, each region carries its own target instead of the single
+`TARGET_LAND_STATES` (`tools/generate_state_labels.py:67`), and cells straddling
+a region border are cut at it first so a region's count is exact.
+
+**Is the Old World mod map worth registering for Crater of Zharr density?**
+
+**No.** Three reasons, all measured. (1) It has no exact silhouette — the
+hand-calibrated luminance cut reaches 81% balanced accuracy, against the flat
+map's *exact* flat-fill ocean — so its fit would be scored on a noisy objective
+while sitting beside a source fitted at IoU 0.6617. (2) The requirement is a
+**count**, not a geometry; a count is met by splitting an existing cell and needs
+only a footprint for the Crater. (3) The primary source already draws the Crater
+with its own lines and marks it with Chaos Dwarf settlement dots (10 detected) in
+the same frame as the cells, so a sub-region locator is available at zero
+registration cost. If the Crater's *shape* is later wanted to match the Old World
+mod map, that is a separate registration task with its own measurable objective —
+recorded in `COVERAGE.md`, not done here.
+
+**How does a forced single state survive the merge/split passes without
+distorting its neighbours?**
+
+A `locked` boolean table threaded through reconciliation. A locked cell is never
+a merge **source** (never merged away) and never a merge **target** (nothing
+merges into it, which would grow it); `split_large` skips it; and if
+`split_disconnected` tears it, only the piece containing its anchor stays locked
+— the rest is released back into reconciliation, so a lock can never pin a
+two-island state. The neighbour effect is bounded and stated plainly: a small
+neighbour that would have merged into the locked cell must merge into its
+next-best neighbour instead, on a shorter shared border, giving a slightly worse
+shape — one merge decision per lock, eleven locks. The alternative, letting the
+lock absorb its neighbours, is what actually distorts. Bookkeeping: a locked cell
+counts toward its region's quota, and the region's remaining target is
+`quota - locked_in_region`, so locks cannot push a region over budget.
+
+### Design
+
+**Region identity is read off the map, not inferred.** The named map encodes each
+region with a distinct stroke colour. The committed input per region is therefore
+its **contour colour class(es)** plus **one or more anchors** — a small,
+human-checkable table. The colour palette itself is *sampled from the image* and
+committed, never guessed.
+
+**The barrier is the union of all strokes, with the region's own classes closed
+first.** This is the load-bearing decision and both halves matter:
+
+- *Union*, because a region can be bounded by its neighbours' lines (Mountains of
+  Mourn) and because overprinted text must act as barrier rather than as a gap.
+- *Own classes closed first*, because closing a single colour can only thicken
+  that region's own boundary — it can **never** merge two regions drawn in
+  different colours, which is exactly what a global closing radius does. This is
+  what breaks the r=21-fixes-Darklands-but-merges-Bretonnia deadlock.
+
+Sea and the source's declared footprint are additional barriers, so every coastal
+region boundary is our own mask's coastline by construction and the slate
+coastline stroke stops being load-bearing.
+
+**Extraction failures are surfaced, never absorbed.** Two anchors landing in one
+component is a hard error naming both regions — the silent mis-grouping that made
+S3a's layer unusable cannot recur. Where a loop still leaks after closing, the
+repair is an authored `seals` entry (a source-px segment closing a measured gap),
+which is auditable and whose effect is measurable: the region's component becomes
+plausible or it does not.
+
+**Leak detection has an independent signal.** The map prints each region's TW3
+state count and `named_regions.json` already records it. A region whose extracted
+area is wildly out of proportion to its printed count is evidence of a leak
+(today: Mountains of Mourn at 18.2% of land with 19 printed, against Grand Cathay
+at 16.4% with 45). This is a cheap automatic check that does not depend on the
+extraction being right.
+
+**Cross-frame drift is accepted and reported.** Cells come from
+`total_war_map_colored.png` (its own 80-point warp, IoU 0.6617); regions come
+from the IE frame (`ie_named_regions` → `ie_macro_twin`, 80 control points). Cells
+take their region by **pixel majority**, which absorbs drift smaller than a cell,
+and because regions tile by whole cells the visible border always follows a state
+border. `COVERAGE.md` reports the fraction of cells whose region majority is thin
+(< 60%), which is the honest measure of how much the two frames disagree.
+
+### Steps (ordered)
+
+1. **`tools/regions/named_regions.json`** — schema extension, all committed and
+   hand-checkable:
+   - per region: `contour_colours` (list of palette class names — Mountains of
+     Mourn gets `["red","slate","yellow"]`, Islands `["lightblue"]`), `anchors`
+     (list, superseding the single `anchor`), optional `seals`
+     (source-px segments closing a measured gap), optional `close_radius`.
+   - top level: `contour_palette` (class name → RGB **sampled from the source**),
+     `catch_all` (`{"name": "outer_world", "min_states": …}`), `budget`
+     (`{"min": 600, "max": 700, "prefer": 660}`), `allocation:
+     "tww3_proportional"`.
+   - new `forced_states` — 11 entries, each `{name, region, anchor_source,
+     anchor, label_read}`, where `label_read` records the printed place name the
+     anchor was taken from so the user can verify the same spot.
+   - new `sub_regions` — `{name, region, min_states, locator}` for Estalia,
+     Tilea, Border Princes, Crater of Zharr; `locator` is
+     `{"kind": "legend_dots", "faction": "Estalia"}`.
+   - re-author the four anchors measured not to resolve (northern/southern Chaos
+     Wastes, Norsca, Islands) and add per-loop anchors for Islands.
+2. **`tools/worldgen/regions.py`** (new) — the named-region extraction:
+   `stroke_classes()` (HSV rules + committed palette), `region_barrier()` (union
+   ∪ closed own-classes ∪ drawn seals), `extract()` (label the complement, claim
+   by anchor), `to_canvas()` (warp nearest, stack into a region raster, reject
+   overlaps), plus the gates `check_disjoint()` and `check_proportions()` (area
+   vs printed TW3 count).
+3. **`tools/worldgen/legend.py`** (new, small) — sample the 24 legend swatches
+   from the committed panel box, bind them to faction names in printed order, and
+   locate settlement dots by exact swatch colour + blob-size filter. Consumed only
+   by the sub-region locators.
+4. **`tools/worldgen/macro.py`** — keep the generic `assign` (`:152`) and
+   `fill_missing` (`:179`); retire the `pizqenw9rd791` contour path
+   (`annotation_mask` `:58`, `contours_from_twin` `:79`,
+   `regions_from_contours` `:99`) and the `PRINTED_COUNTS` `:38` hard-fail as the
+   grouping authority. `ie_macro_twin.json` **stays** — it is the frame parent
+   `ie_named_regions` aliases.
+5. **`tools/worldgen/cells.py`** — make reconciliation region-aware and
+   lock-aware: thread `group` and `locked` through `_neighbour_pairs` (`:255`),
+   `merge_small` (`:278`), `merge_to_target` (`:350`) and `split_large` (`:400`)
+   in one pass over the canvas rather than 18 masked passes; add
+   `split_at_group()` to cut cells at region borders.
+6. **`tools/generate_state_labels.py`** — re-order and re-target:
+   `build_land_cells` (`:213`) stops after the fill; new `assign_regions`
+   replaces `assign_macros` (`:265`); `split_at_group`; `apply_forced_states`
+   (locks); `resolve_sub_regions`; new `reconcile_per_region` runs merge/split per
+   region against its quota and per sub-region against its minimum. Index gains
+   `region`, `sub_region`, `forced`; the provisional key (`:366`) becomes
+   `STATE_<REGION>_NNNN`. `render_coverage` (`:388`) gains the per-region table:
+   area, quota, achieved, whether the minimum bound, forced states, sub-region
+   quotas, thin-majority cell fraction, and the catch-all report.
+7. **`tools/validate_map.py`** — extend `validate_labels` (`:475`): replace "every
+   land cell has a macro" (`:575`) with "has a **named** region drawn from the
+   committed list"; add per-region `min_states`, total in the 600–700 band, every
+   forced state is exactly one cell containing its anchor, every sub-region
+   minimum met, and no cell straddling two regions — each recomputed from the
+   committed rasters by a different route than the generator, per the discipline
+   the S3a security review established.
+8. **`tools/qa_overlay.py`** — rebuild `state_label_overlay` (`:81`) as the review
+   artifact: tint by named region, draw region borders heavier than cell borders,
+   mark each forced state, and print region name + achieved/quota.
+9. **`tools/run_fixture.py`** + **`tools/fixtures/boundary/`** — extend the
+   synthetic sheet (our own pixels, runs on a clean clone) to cover the four hard
+   cases measured above: a region with no colour of its own, a multi-loop region,
+   a loop with text overprinting it, and a forced state plus a sub-region quota.
+   Byte-exact goldens.
+10. **Docs** — `tools/SOURCES.md` (the named map becomes the grouping authority;
+    `pizqenw9rd791.jpg` keeps its record as the alias frame parent but its
+    contours are no longer consumed), `CLAUDE.md` tools row.
+
+**No localization step and no in-game gate.** S3a-2 writes only under `tools/`,
+which the game never loads, and adds no effect / trigger / modifier / event
+target — so `docs/*.log` has nothing to confirm for it. Loc keys arrive with S3b.
+
+### Design Decisions
+
+- **Union barrier with per-region colour closing** — the only formulation that
+  survives all three measured failure modes at once. A global radius cannot (r=21
+  fixes Darklands, merges Bretonnia + Athel Loren + Southern Realms); per-colour
+  alone cannot (Mountains of Mourn has no colour of its own).
+- **Sea and footprint as barriers** — makes every coastal region boundary our own
+  committed coastline by construction, and demotes the slate coastline stroke,
+  the weakest-detected class, from load-bearing to redundant.
+- **Two anchors in one component is a hard error** — the S3a failure was a
+  grouping that was silently wrong. Loud beats coarse.
+- **Printed TW3 counts as an independent leak signal** — an area/count
+  disproportion catches a leak without depending on the extraction being right.
+- **Forced-state anchors on the primary source, not the named map** — the primary
+  source prints the place names *and* is the frame the cells come from, so the
+  anchor lands on the intended cell with no cross-frame error.
+- **Legend dots for sub-regions** — measurable, in the cells' own frame, and free.
+  Preferred over registering the Old World mod map, whose silhouette is 81%
+  accurate against an exact alternative.
+- **Catch-all region rather than nearest-region absorption** (user decision) —
+  absorption would let Grand Cathay swallow Ind, Khuresh and Nippon, which is the
+  precise failure that made the macro layer unusable.
+- **Two-stage budget** (area for the catch-all, TW3 share for the 17) — a single
+  TW3 scaling gives the 17 regions 661 of a 700 budget and starves the catch-all.
+
+### Edge Cases
+
+- **A region still leaking after closing** — repaired by an authored `seals`
+  segment, not by raising the global radius. Effect is measurable: the component
+  becomes plausible or it does not.
+- **A cell straddling a region border** — cut at the border (`split_at_group`)
+  before reconciliation, so region counts are exact and no state spans two
+  strategic regions in S3b.
+- **A forced state torn by the mask** (Sartosa, Albion are islands) — only the
+  piece containing the anchor stays locked; the rest is released.
+- **A forced state whose anchor's cell is already huge** — locking would freeze an
+  oversized state. The build must report any locked cell above the region's mean
+  and let the user decide; splitting a locked cell silently would defeat the lock.
+- **The Great Bastion is a wall, not a cell** — its three states must be cut from
+  the border cells along Cathay's northern frontier rather than claimed from the
+  traced network. Explicitly on the review list.
+- **A sub-region minimum exceeding its region's quota** — Southern Realms is
+  within three states of this today. Detected and reported as an error naming both
+  numbers, not silently satisfied by overrunning the region.
+- **Cross-frame drift at region borders** — absorbed by cell-majority assignment;
+  the thin-majority fraction is reported in `COVERAGE.md`.
+- **Wrap seam** — regions, like cells, must stay one label across `x=0/8191`; all
+  reconciliation stays wrap-aware.
+- **The catch-all swallowing a genuine region** — its area is reported per
+  connected patch with bounding boxes, so a patch large enough to deserve its own
+  name is visible rather than buried in a total.
+
+### Testing / Gate (S3a-2)
+
+Offline, exactly the commands `.claude/rules/testing.md` already specifies:
+
+```
+python tools/worldgen/sources.py --verify
+python tools/validate_map.py --labels
+python tools/run_fixture.py --check
+```
+
+plus a byte-identical re-run of `tools/generate_state_labels.py`.
+
+**Self-gate before the user is asked to look** — the build must reach all of
+these before rendering the review artifact, and report the failing ones rather
+than proceeding:
+
+- all 18 regions (17 named + catch-all) claim **disjoint** territory;
+- every region meets its `min_states`; total land states in **600–700**;
+- all 11 forced states exist, each exactly one cell containing its anchor;
+- every sub-region meets its minimum;
+- land bound to a named region is materially above today's 66.6%.
+
+**Review gate (the milestone):** the user inspects
+`tools/derived/qa_state_labels.png` and `tools/derived/COVERAGE.md` — region
+tints, region borders, forced-state marks, and the per-region achieved/quota
+table. Fidelity is a review call, never a boot gate.
+
+**No in-game `error.log` gate** — S3a-2 touches no game-read file, by design. The
+boot gate remains S4.
+
+### Docs to Update
+
+- `tools/SOURCES.md` — the named map becomes the region-grouping authority;
+  `pizqenw9rd791.jpg` keeps its registration as the alias frame parent but its
+  contours are no longer consumed; record the legend panel as a consumed signal.
+- `tools/derived/COVERAGE.md` — regenerated by the generator (never hand-edited),
+  now carrying the per-region quota table and the catch-all patch report.
+- `CLAUDE.md` — `tools/` row: the ingestion stage now emits a named-region layer
+  and `tools/regions/` is hand-authored input, not generated.
+- `.claude/rules/testing.md` — no new command; confirm the `--labels` description
+  still matches once the checks are extended.
+- Not updated: `docs/*.log` (generated by the game), `.claude/rules/scripting.md`
+  and `localization.md` (no `common/` or `localization/` content lands until S3b).

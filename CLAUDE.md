@@ -45,10 +45,18 @@ All `common/*` and top-level content folders currently contain only `.gitkeep` �
   - `/request <description>` — explore + document a feature request
   - `/plan <path/to/file.md>` — design implementation approach
   - `/build <path/to/file.md>` — implement, test, commit, review
+  - `/review-panel <target>` — convene the five-expert review panel on a plan, a diff, or a rendered artifact
   - `/project-memory` — show memory state
-- **Sub-agents** in `.claude/agents/` are spawned by `/build`:
-  - `docs-updater` — update docs from diff
-  - `security-review` — review diff for MP-desync and content-integrity risks
+- **Sub-agents** in `.claude/agents/`:
+  - Spawned by `/build`:
+    - `docs-updater` — update docs from diff
+    - `security-review` — review diff for MP-desync and content-integrity risks
+  - Spawned by `/review-panel` (read-only reviewers; they never edit):
+    - `loremaster` — Warhammer Fantasy canon: names, places, factions, era, tone
+    - `cartographer` — map craft: shapes, borders, projection, legibility
+    - `geographer` — physical plausibility: elevation, climate, coasts, rivers
+    - `vic3-modding-expert` — engine correctness: script, formats, loc, determinism
+    - `game-designer` — play and scope: granularity, systems fit, sequencing
 
 ## Workflow chain
 
@@ -66,6 +74,11 @@ Bug or feature idea
 ```
 
 `/plan` must never be skipped — it's where file-level decisions get pinned down.
+
+`/review-panel` is optional and can be run at any point on the chain — most usefully
+on a `## Plan` before `/build` commits to it, and on the rendered artifact once
+`/build` has produced one. It appends a `## Review Panel` section and never edits
+mod content. Its ruling is advisory: on anything visual the user is the final gate.
 
 ## Planning directory
 
