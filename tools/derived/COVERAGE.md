@@ -9,8 +9,18 @@ would help rather than the build silently coarsening.
 
 - Target: **659 land states** (vanilla's own count) at a mean
   of **12,517 canvas px** each, plus **103 sea zones**.
-- Achieved: **613 land cells** (mean 13,457 px, median 12,664 px, min 208, max 35,384) and **108 sea zones**.
-- Cells traced from a source before filling: **1,860**.
+- Achieved: **695 land cells** (mean 11,869 px, median 10,769 px, min 208, max 32,983) and **108 sea zones**.
+- Cells traced from a source before filling: **2,565**.
+
+## Lettering bridge (the parchment master)
+
+- Traced cells before bridging detected labels into the barrier: **1,210**.
+- After: **1,816** (+50.1%) — this is the measurement that says whether the glyph detector earned its dependency.
+- Largest traced cell after bridging: **821,279 px** (source pixels, before warping onto the canvas or clipping to the mask). A faint or broken ruled line, not a text problem — recoverable by `split_large`, reported here rather than hidden.
+
+- Within the parchment master's own footprint, **74.3%** of land carries a traced cell (the rest falls through to the mask-wide seeded fallback below, same as everywhere else).
+
+- **Drawn versus tessellated**: **71.4%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
 
 ## Source coverage
 
@@ -19,12 +29,12 @@ the area it wins:
 
 ```
   precedence  95  total_war_map_colored.png                        covers  58.8% of canvas
-  precedence  50  Immortal-Empires-Map-Feature-Image-scaled.jpg    covers  45.9% of canvas
+  precedence 100  wh3_dlc_ie_parchment_map_english.jpg             covers  60.5% of canvas
 ```
 
 ## The gap
 
-**2.5% of land has no boundary source at all** and is partitioned by
+**1.1% of land has no boundary source at all** and is partitioned by
 seeded fallback cells at the target density. This is expected, not a defect:
 the Immortal Empires frame stops around Cathay, so the Kingdoms of Ind,
 Khuresh, Nippon, the far Eastern Steppes and the polar Chaos Wastes have no
@@ -50,21 +60,21 @@ Named candidates for closing it, in order of expected value:
 ## Macro grouping
 
 - 16 contours recovered from the annotated twin (it prints 16 region labels).
-- 106 cells fell outside every contour and took their macro from the nearest neighbour — these are mostly the uncovered regions above.
+- 128 cells fell outside every contour and took their macro from the nearest neighbour — these are mostly the uncovered regions above.
 
-  macro_01                        3 cells
-  macro_02                       74 cells
-  macro_03                       49 cells
-  macro_04                       40 cells
-  macro_05                       43 cells
-  macro_06                       62 cells
-  macro_07                       56 cells
-  macro_08                      130 cells
-  macro_09                       20 cells
-  macro_10                        0 cells
-  macro_11                       18 cells
-  macro_12                       18 cells
-  macro_13                        3 cells
-  macro_14                       72 cells
-  macro_15                        1 cells
-  macro_16                       24 cells
+  macro_01                        7 cells
+  macro_02                       92 cells
+  macro_03                       45 cells
+  macro_04                       49 cells
+  macro_05                       48 cells
+  macro_06                       73 cells
+  macro_07                       64 cells
+  macro_08                      135 cells
+  macro_09                       23 cells
+  macro_10                        1 cells
+  macro_11                       19 cells
+  macro_12                       16 cells
+  macro_13                        4 cells
+  macro_14                       89 cells
+  macro_15                        0 cells
+  macro_16                       30 cells

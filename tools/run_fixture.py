@@ -578,6 +578,7 @@ def build_boundary(out_dir: Path) -> None:
 
     layers = []
     warped_by_source = {}
+    bridge_stats = []
     for name in sorted(regs):
         reg = regs[name]
         rgb = sources.load_source_image(name, sources_dir=BOUNDARY_DIR,
@@ -585,12 +586,36 @@ def build_boundary(out_dir: Path) -> None:
         # Scale the ink window with the source, so the half-scale sibling sees the
         # same neighbourhood in map terms rather than twice as much of the map.
         win = max(5, int(round(21 * rgb.shape[1] / 320)) | 1)
+        min_area = max(10, 40 * rgb.shape[1] // 320)
         ink = parchment.ink_mask(rgb, window=win, offset=10)
-        src_cells, _ = parchment.cells_from_ink(ink, max(10, 40 * rgb.shape[1] // 320))
+        # Mirror generate_state_labels.py's ink_bridged path so a regression in
+        # glyph_mask/label_blobs trips this golden too: detect glyph-shaped ink,
+        # close/dilate it into the barrier, and re-trace.
+        _, before = parchment.cells_from_ink(ink, min_area)
+        glyphs = parchment.glyph_mask(ink)
+        blobs = parchment.label_blobs(glyphs)
+        barrier = ink | (blobs > 0)
+        src_cells, after = parchment.cells_from_ink(barrier, min_area)
+        bridge_stats.append((name, before, after))
         lab, inside = cells.warp_cells(reg, regs, src_cells.astype(np.int32), (h, w),
                                        block_rows=32, canvas_shape=canvas_shape)
         warped_by_source[name] = lab
         layers.append((name, reg.precedence_for("boundaries"), lab, inside))
+
+    # The measurement the acceptance criterion demands: bridging the fixture's
+    # deliberate letter-interrupted border must recover more cells than the raw
+    # ink saw. Checked on the full-scale source only — the glyph thresholds are
+    # absolute pixel sizes (matching the real master's fixed resolution, not
+    # scaled per source), so the half-scale alias sibling's letters fall below
+    # GLYPH_MIN_HEIGHT and legitimately do not bridge; that asymmetry is itself
+    # expected, not a fixture bug.
+    master_before, master_after = next(
+        (b, a) for n, b, a in bridge_stats if n == "synthetic_parchment.png")
+    if master_after <= master_before:
+        raise RuntimeError(
+            f"glyph bridging did not recover more cells than plain ink tracing: {bridge_stats}"
+        )
+    bridge_stats = [f"{n}: {b} -> {a}" for n, b, a in bridge_stats]
 
     # The property the whole alias mechanism rests on: a sibling must land in the
     # same canvas *place* as its parent. Deliberately not tested as pixel-exact
@@ -656,8 +681,8 @@ def build_boundary(out_dir: Path) -> None:
         f"alias_edge_agreement  {round(agree, 4)}",
         f"min_land_area         {int(np.bincount(labels.ravel())[1:n_land + 1].min())}",
         f"max_land_area         {int(np.bincount(labels.ravel())[1:n_land + 1].max())}",
-        "",
-    ]
+        "bridging (before -> after, per source):",
+    ] + [f"  {s}" for s in bridge_stats] + [""]
     (out_dir / "boundary_stats.txt").write_bytes("\n".join(stats).encode("utf-8"))
 
 

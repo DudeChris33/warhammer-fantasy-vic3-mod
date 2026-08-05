@@ -1977,3 +1977,26 @@ in [s3a2-review-panel-handoff.md](s3a2-review-panel-handoff.md) §11.
 - Engine hard limit on states per strategic region — **unverified**.
 - Any state-region rename/alias mechanism — **unverified**.
 - Cross-Python-version generator reproducibility — not gated.
+
+## Superseded in part — 2026-07-28
+
+The S3a-2 plan above (BLOCKed by the review panel the same day) is **superseded
+in part** by
+[world-map-parchment-areas-onto-globe.md](world-map-parchment-areas-onto-globe.md).
+Reading the blocking findings, most trace to one root cause: the pipeline had
+geometry with no names, so names had to be reattached by inference. Registering
+the Immortal Empires parchment master directly (rather than only as the
+macro-annotated twin's differencing counterpart) and tracing its own line
+network with lettering bridged means the state layer is drawn-and-named
+geometry instead of anonymous contours plus inferred labels — dissolving the
+five blocking findings rather than mitigating them (all eleven forced states
+have a printed anchor; the sub-region quotas have a printed footprint to count
+inside; names come from the same artwork as the geometry, so there is no
+macro/name mismatch to reconcile).
+
+**Not superseded**: the two mask-level blockers (polar fringe, corner
+splinters — both live in `land_sea_mask.png`, not in this layer) and the
+sea-chloropleth premise, which the new request's own planning measured and
+retired (the parchment draws almost no dividing rules over open water; named
+seas become seeded partition anchors instead). Navigable-river topology stays
+owned by this file's `_comment_pending` block, deferred to S3b/S6.

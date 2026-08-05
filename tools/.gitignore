@@ -24,3 +24,9 @@ derived/*
 !derived/state_labels_index.json
 !derived/COVERAGE.md
 
+# derived/named/ is the S3a-2 review deliverable from render_named_map.py
+# --tiles: flat-tinted state cells drawn from our own pixels only (no source
+# art), so — unlike the rest of derived/ — it is meant to be committed.
+!derived/named/
+!derived/named/*.png
+

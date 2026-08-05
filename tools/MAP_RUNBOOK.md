@@ -174,6 +174,31 @@ python tools/fit_registration.py --seed <stem>      # rewrites tools/registratio
 python tools/generate_state_labels.py --preview     # then regenerate the layer
 ```
 
+### S3a — named chloropleth (parchment areas onto the globe)
+
+`world-map-parchment-areas-onto-globe.md` registers the Immortal Empires
+parchment master directly (rather than only as the macro-annotated twin's
+differencing counterpart) and promotes it to the primary boundary source,
+with its lettering *bridged* into the traced barrier instead of erased. Two
+new authoring/render commands, both outside the gate:
+
+```
+python tools/fit_registration.py --seed wh3_dlc_ie_parchment_map_english   # the master itself
+python tools/render_named_map.py --globe            # local-only globe-space review render
+python tools/render_named_map.py --tiles            # committed per-macro tiles + index.png
+```
+
+`--globe` writes `tools/derived/globe_named_review.png` — a copy of
+`terraqueous_globe.jpg` with the projected cell network outlined, embedding
+source pixels, so it is **never committed** (gitignored by default) and is
+the render **sent to the user** for the Stage A visual gate. `--tiles` writes
+`tools/derived/named/*.png` — flat macro-tinted cells drawn from our own
+pixels only, which **are** committed (`tools/.gitignore` carries an explicit
+negation for `derived/named/`).
+
+Stage B (transcribing the printed names and binding them to cells) is a
+separate follow-on request; Stage A's renders show geometry only, unnamed.
+
 **Carry into S4:** `nodes.dat` must be regenerated in the editor once real
 provinces exist (S3b). Back up `game/map_data/` before that session — see the
 warning at the top of this file.

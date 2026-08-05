@@ -27,9 +27,17 @@ The full, hash-pinned list is in [SOURCES.md](SOURCES.md). State as of S3a:
   footprint (zero-mean, so it sharpens ridges but never moves a coast). Registered.
 - **Creative Assembly — Total War: Warhammer 3 Immortal Empires campaign map**
   (parchment master, and its macro-annotated twin, climate-map and feature-image
-  siblings) — **interior state boundaries and macro grouping only, never
-  coastline** (S3a). One dense thin-plate registration serves all four; the other
-  three declare a `frame_alias` to it. Registered.
+  siblings) — **interior state boundaries, macro grouping, and printed names
+  only, never coastline** (S3a / world-map-parchment-areas-onto-globe.md,
+  2026-07-28). The master carries the family's one dense thin-plate
+  registration (fitted against the climate-map sibling's silhouette, 12
+  held-out landmarks); the other three declare a `frame_alias` directly to it.
+  Its lettering is *bridged* into the traced barrier rather than erased —
+  detected glyph-shaped ink closes the physical gaps a printed label leaves in
+  the ruled line, recovering cells a break would otherwise merge. Registered.
+  It is the primary boundary source; the flat-filled Total War map
+  (`total_war_map_colored.png`) is now the complement, winning only outside
+  the master's coverage.
 - **Games Workshop — *Warhammer: The Old World* world map** — registered in S1 for
   Old World boundaries; **measured in S3a to be misregistered *and* not a
   chloropleth**, so it contributes no geometry. Record kept and annotated rather
@@ -62,4 +70,5 @@ boundaries, and the date traced.
 | Whole-world river network | **Derived, not traced** — drainage computed from the committed `heightmap.png` + `land_sea_mask.png` (depression fill -> D8 flow direction -> flow accumulation). No source imagery contributes geometry, so no third-party cartography is embedded in the result; the rivers follow our own generated terrain. Supersedes the hand-authored v1 polylines. | S2 | 2026-07-24 |
 | Canon river *identification* (deferred to S6) | User-annotated *The Empire of Man* map (`TheEmpireRivers - drawn on.jpg`, canon courses drawn in red) — consulted as a **topology guide** for which DEM channel is the Reik/Talabec/Stir/Aver etc. Not warped, contributes no geometry. | S6 | pending |
 | Whole-world state boundaries (the committed state-label layer) | **Immortal Empires parchment map + its unlabelled feature-image sibling**, traced as line networks and warped onto the Terraqueous geometry. They contribute interior borders only: every cell is intersected with the committed `land_sea_mask.png` and watershedded to tile it, so no coastline in the result comes from them. Macro grouping from the annotated twin, recovered by differencing it against the clean master. 2.4% of land has no source and carries seeded fallback cells. | S3a | 2026-07-25 |
+| Whole-world state boundaries, geometry stage (registration + tracing only; names deferred to Stage B) | **Immortal Empires parchment master**, registered directly (silhouette via the climate-map sibling, `refined_iou` 0.6193) and promoted to the primary boundary source; its lettering is bridged into the barrier rather than erased. The unlabelled feature image is no longer traced for geometry (superseded by the master's superset coverage) but its registration stays as Stage B's text-mask cross-check. `total_war_map_colored.png` demoted to complement (wins only outside the master's footprint). | S3a (world-map-parchment-areas-onto-globe.md) | 2026-07-28 |
 | _S1/S2/S3a fixtures use synthetic worlds under `tools/fixtures/` (invented by their own `make_source.py`, not derived from any source)._ | — | S1–S3a | 2026-07-21 |

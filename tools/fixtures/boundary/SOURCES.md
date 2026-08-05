@@ -19,6 +19,6 @@ python tools/run_fixture.py --update
 <!-- MANIFEST:BEGIN -->
 | File | Dims | Bytes | SHA-256 | Origin | Role | Registered |
 |---|---|---|---|---|---|---|
-| synthetic_parchment.png | 320x240 | 9,691 | 8a110cf28a844b915a05545108a6c37cf46f2880ebddeedea91ea80da6d5d5d4 | Invented for this fixture by make_source.py | Synthetic boundary-network source (frame master) | yes |
-| synthetic_parchment_half.png | 160x120 | 3,585 | 8a3633097949d2d860f18734e751be5b6b1b4feb53694e1238d2f8d54fe828c3 | Invented for this fixture by make_source.py | Half-scale sibling — exercises the frame_alias path | yes |
+| synthetic_parchment.png | 320x240 | 9,781 | a9fd0b81776016ce2e46a54d001aae4ed24874e6e2721a847a17e0a94fdd1f19 | Invented for this fixture by make_source.py | Synthetic boundary-network source (frame master) | yes |
+| synthetic_parchment_half.png | 160x120 | 3,718 | bc36b5ff38f688f96b804bf5bb541278d1e06b221744e6743873686c522c0faf | Invented for this fixture by make_source.py | Half-scale sibling — exercises the frame_alias path | yes |
 <!-- MANIFEST:END -->

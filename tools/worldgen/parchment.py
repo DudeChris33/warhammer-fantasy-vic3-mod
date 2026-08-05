@@ -101,6 +101,91 @@ def ink_mask(rgb: np.ndarray, window: int = INK_WINDOW, offset: float = INK_OFFS
     return m
 
 
+#: Ink-threshold offset tuned for the IE parchment master
+#: (``world-map-parchment-areas-onto-globe.md`` measurement 4): a sweep with
+#: bridging active found usable cells rising from 885 (offset 12) to 915
+#: (offset 9) to 920 (offset 7, but at 26.5% ink — the cost is starting to
+#: outrun the recovery). 9 is the adopted value.
+INK_OFFSET_MASTER = 9
+
+#: Glyph-shaped ink component thresholds (measurement 2): letters on the master
+#: separate cleanly from the boundary-line network by shape alone — 3,854
+#: compact blobs holding 292k ink px at a 9-16 px glyph height, against 4 giant
+#: connected components holding 1.19M of the 1.68M ink px (the line network
+#: itself). These bounds sit generously around that measured range so a bold
+#: numeral or a punctuation mark still qualifies, while the line network's
+#: components — long, thin, and mostly-empty inside their own bounding box —
+#: do not.
+GLYPH_MIN_AREA = 20
+GLYPH_MAX_SIDE = 60
+GLYPH_MIN_HEIGHT = 6
+GLYPH_MIN_FILL = 0.15
+
+#: Anisotropic closing structure for bridging detected glyphs into a barrier
+#: (measurement 3): wide on x because letter spacing within a printed word is
+#: horizontal, short on y so the bridge does not reach into an unrelated ruled
+#: line a few pixels above or below the label.
+LABEL_CLOSE = (7, 21)
+
+
+def glyph_mask(ink: np.ndarray) -> np.ndarray:
+    """Ink pixels belonging to a small, compact (glyph-shaped) component.
+
+    The parchment's ink separates cleanly into two populations by shape: the
+    ruled boundary/river network is a handful of huge, thin, sparsely-filled
+    connected components, while lettering is thousands of small, squarish,
+    densely-filled ones (measurement 2). Filtering on area, bounding-box side
+    length, minimum height and fill ratio keeps the second population and
+    drops the first, with no OCR engine involved. 4-connectivity matches
+    :func:`cells_from_ink`'s own test, so a glyph and the line network never
+    disagree about where one component ends and the next begins.
+    """
+    lab, n = ndimage.label(ink)
+    if n == 0:
+        return np.zeros_like(ink)
+    sizes = np.bincount(lab.ravel(), minlength=n + 1)
+    keep = np.zeros(n + 1, dtype=bool)
+    for i, sl in enumerate(ndimage.find_objects(lab), start=1):
+        if sl is None:
+            continue
+        area = int(sizes[i])
+        if area < GLYPH_MIN_AREA:
+            continue
+        h, w = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+        if h > GLYPH_MAX_SIDE or w > GLYPH_MAX_SIDE or h < GLYPH_MIN_HEIGHT:
+            continue
+        if area / (h * w) < GLYPH_MIN_FILL:
+            continue
+        keep[i] = True
+    return keep[lab]
+
+
+def label_blobs(glyphs: np.ndarray) -> np.ndarray:
+    """Group glyph pixels into per-label regions, closing the letter spacing.
+
+    A printed label is a run of separate glyph components with gaps between
+    letters and words; closing with :data:`LABEL_CLOSE` bridges those gaps into
+    one blob per label, and the trailing 3x3 dilation thickens the result just
+    enough to fuse with the interrupted ruled line either side of it. Returns
+    an ``int32`` label image (0 = not part of any blob) rather than a boolean
+    mask, so a caller needing a specific label's bounding box, centroid or
+    pixel footprint (Stage B's binding) gets it for free instead of re-deriving
+    connected components later.
+
+    Measured and rejected (measurement 5): closing the *whole ink barrier*
+    rather than only the detected glyphs makes the largest traced cell worse
+    (852k -> 2.19M px at a 3x3 close) — it bridges real gaps between unrelated
+    cells, not just letter spacing. Do not retry that.
+    """
+    if not glyphs.any():
+        return np.zeros(glyphs.shape, dtype=np.int32)
+    ch, cw = LABEL_CLOSE
+    closed = ndimage.binary_closing(glyphs, structure=np.ones((ch, cw), bool))
+    dilated = ndimage.binary_dilation(closed, structure=np.ones((3, 3), bool))
+    lab, _ = ndimage.label(dilated)
+    return lab.astype(np.int32)
+
+
 def erase_ink(rgb: np.ndarray, ink: np.ndarray) -> np.ndarray:
     """Fill ink pixels from the nearest non-ink pixel, per channel.
 

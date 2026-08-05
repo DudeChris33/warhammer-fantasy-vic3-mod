@@ -17,6 +17,11 @@ ingestion has to survive, so a regression in any of them trips the golden:
   not produce an open polyline.
 * **lettering over the lines** — the unrecoverable one, and the reason the
   unlabelled feature image outranks the lettered master in the real pipeline.
+* **a ruled border interrupted by a run of glyph-shaped blobs** — the
+  recoverable-via-bridging case (``worldgen.parchment.glyph_mask`` /
+  ``label_blobs``): the cartographer breaks the line to make room for a label,
+  leaving a physical gap that plain ``cells_from_ink`` cannot see across, but
+  which the detected glyphs — closed and dilated into the barrier — do.
 * **a seam-crossing landmass and an enclosed lake in the mask** — so the
   wrap-aware component labelling and the sea-zone split are exercised rather
   than assumed.
@@ -61,6 +66,40 @@ def _line(img: np.ndarray, x0: int, y0: int, x1: int, y1: int, skip: tuple[int, 
         img[max(0, y - 1):y + 1, max(0, x - 1):x + 1] = INK
 
 
+def _line_with_label_gap(img: np.ndarray, y: int, x0: int, x1: int,
+                         gap: tuple[int, int], n_glyphs: int = 3,
+                         glyph_w: int = 7, glyph_h: int = 8, spacing: int = 4,
+                         margin: int = 1) -> None:
+    """A ruled line broken to make room for a run of glyph-shaped ink blobs.
+
+    The line is drawn solid except for ``gap`` (x-offsets from ``x0``, same
+    convention as ``_line``'s ``skip``), filled by ``n_glyphs`` compact blocks:
+    ``margin`` px of real paper between the line stubs and the outermost
+    blocks, ``spacing`` px between blocks. Both are small enough for a 3x3
+    dilation plus ``worldgen.parchment.LABEL_CLOSE`` to bridge — but they are
+    real gaps in the raw ink, so plain ``cells_from_ink`` still sees an open
+    border, and only bridging the *detected glyphs* closes it.
+
+    ``_line``'s own 2-px-wide dab means the line resuming right after the gap
+    paints one column *before* its nominal start too (the dab is centred on
+    ``x``, covering ``x-1:x+1``) — so the right edge of the usable gap is one
+    column narrower than ``gap`` alone would suggest. Accounted for here
+    rather than left as an off-by-one for the next person to rediscover.
+    """
+    _line(img, x0, y, x1, y, skip=gap)
+    ga = x0 + gap[0]
+    gb_effective = x0 + gap[1] - 1  # the resuming dab's one-column backward bleed
+    start = ga + margin
+    end = gb_effective - margin  # exclusive-ish: last glyph must end at or before this
+    total = n_glyphs * glyph_w + (n_glyphs - 1) * spacing
+    if start + total - 1 > end:
+        raise ValueError(f"label run ({total} px) does not fit the gap ({end - start + 1} px)")
+    x = start
+    for _ in range(n_glyphs):
+        img[y - glyph_h // 2:y + glyph_h // 2, x:x + glyph_w] = INK
+        x += glyph_w + spacing
+
+
 def build_source() -> np.ndarray:
     img = np.zeros((SRC_H, SRC_W, 3), dtype=np.uint8)
     img[:] = PAPER
@@ -89,6 +128,10 @@ def build_source() -> np.ndarray:
     # A boundary with a gap in the middle: the two cells it separates must come
     # back as one, not as an open line.
     _line(img, 130, 200, 215, 200, skip=(30, 55))
+
+    # A boundary interrupted by letter-shaped blobs rather than a plain gap —
+    # the case only glyph detection + bridging (not plain ink) can close.
+    _line_with_label_gap(img, 52, 8, SRC_W - 8, gap=(140, 172))
 
     # "Lettering": a blob of ink sitting across a line, as a place name does.
     img[92:100, 150:186] = INK

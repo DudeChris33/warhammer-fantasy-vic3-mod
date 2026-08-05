@@ -108,7 +108,7 @@ BOUNDARY_LAYER = "boundaries"
 #: ``ink`` for a textured parchment needing a local-contrast threshold.
 BOUNDARY_SOURCES = {
     "total_war_map_colored.png": "flat_colour",
-    "Immortal-Empires-Map-Feature-Image-scaled.jpg": "ink",
+    "wh3_dlc_ie_parchment_map_english.jpg": "ink_bridged",
 }
 
 #: Off-map background and legend panels, in each source's own pixels.
@@ -133,43 +133,76 @@ def log(msg: str) -> None:
     print(msg, flush=True)
 
 
-def extract_source_cells(reg: schema.SourceRegistration, kind: str) -> np.ndarray:
-    """Trace one source's boundary network into a cell-label image."""
+def extract_source_cells(reg: schema.SourceRegistration, kind: str
+                         ) -> tuple[np.ndarray, dict]:
+    """Trace one source's boundary network into a cell-label image.
+
+    Returns ``(labels, extra)`` — ``extra`` carries source-specific headline
+    metrics (currently only the ``ink_bridged`` path's before/after bridging
+    counts) that the caller folds into the coverage report.
+    """
     rgb = sources.load_source_image(reg.source)
     exclude = BOUNDARY_EXCLUDE.get(reg.source, [])
+    extra: dict = {}
     if kind == "flat_colour":
         lab, land = parchment.flat_map_cells(rgb, min_area=MIN_SOURCE_CELL,
                                              exclude=exclude)
         n = int(lab.max())
         log(f"  {reg.source:<44} flat  land {land.mean():.3f}  cells {n}")
+    elif kind == "ink_bridged":
+        # Lettering interrupts the ruled border to make room for the label,
+        # which cells_from_ink's complement-labelling turns into a MERGE of the
+        # cells either side — the unrecoverable failure mode (11 of 17 contours
+        # on the first parchment pass). Filling the detected label footprint
+        # into the barrier bridges the gap; cells.fill_nearest then hands the
+        # bridge back to its neighbours downstream, converting the merge into a
+        # recoverable "border a few px off" (world-map-parchment-areas-onto-globe.md,
+        # measurement 3: +46% usable cells at this offset).
+        ink = parchment.ink_mask(rgb, window=INK_WINDOW,
+                                 offset=parchment.INK_OFFSET_MASTER, exclude=exclude)
+        _, before = parchment.cells_from_ink(ink, MIN_SOURCE_CELL)
+        glyphs = parchment.glyph_mask(ink)
+        blobs = parchment.label_blobs(glyphs)
+        barrier = ink | (blobs > 0)
+        lab, n = parchment.cells_from_ink(barrier, MIN_SOURCE_CELL)
+        sizes = np.bincount(lab.ravel())
+        largest = int(sizes[1:].max()) if n else 0
+        extra = {"traced_cells_before_bridge": before, "traced_cells_after_bridge": n,
+                 "largest_traced_cell_px": largest}
+        log(f"  {reg.source:<44} ink+bridge  {barrier.mean():.3f}  "
+            f"cells {before} -> {n}  (largest {largest:,} px)")
     else:
         ink = parchment.ink_mask(rgb, window=INK_WINDOW, offset=INK_OFFSET,
                                  exclude=exclude)
         lab, n = parchment.cells_from_ink(ink, MIN_SOURCE_CELL)
         log(f"  {reg.source:<44} ink   {ink.mean():.3f}  cells {n}")
-    return lab.astype(np.int32)
+    return lab.astype(np.int32), extra
 
 
 def build_layers(regs: dict[str, schema.SourceRegistration]
-                 ) -> tuple[np.ndarray, np.ndarray, list[str]]:
+                 ) -> tuple[np.ndarray, np.ndarray, list[str], dict, dict[str, np.ndarray]]:
     """Warp every boundary source onto the canvas and stack it by precedence."""
     layers: list[tuple[str, int, np.ndarray, np.ndarray]] = []
     covered = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
     report: list[str] = []
+    extra_stats: dict = {}
+    inside_by_source: dict[str, np.ndarray] = {}
     for name, kind in BOUNDARY_SOURCES.items():
         reg = regs.get(name)
         if reg is None:
             raise SystemExit(f"{name} has no registration record — run tools/fit_registration.py")
-        src = extract_source_cells(reg, kind)
+        src, extra = extract_source_cells(reg, kind)
+        extra_stats.update(extra)
         t0 = time.time()
         lab, inside = cells.warp_cells(reg, regs, src, (CANVAS_H, CANVAS_W))
         covered |= inside
+        inside_by_source[name] = inside
         prec = reg.precedence_for(BOUNDARY_LAYER)
         layers.append((name, prec, lab, inside))
         report.append(f"  precedence {prec:>3}  {name:<48} covers {100 * inside.mean():5.1f}% of canvas")
         log(f"  warped {name} in {time.time() - t0:.0f}s "
             f"(covers {100 * inside.mean():.1f}% of canvas)")
-    return cells.stack_layers(layers, (CANVAS_H, CANVAS_W)), covered, report
+    return cells.stack_layers(layers, (CANVAS_H, CANVAS_W)), covered, report, extra_stats, inside_by_source
 
 
 def seed_uncovered(labels: np.ndarray, land: np.ndarray, target: int) -> tuple[np.ndarray, float]:
@@ -214,9 +247,21 @@ def build_land_cells(land: np.ndarray, regs: dict[str, schema.SourceRegistration
                      ) -> tuple[np.ndarray, dict]:
     stats: dict = {}
     log("tracing boundary sources:")
-    stacked, covered, prec_report = build_layers(regs)
+    stacked, covered, prec_report, extra_stats, inside_by_source = build_layers(regs)
     stats["precedence"] = prec_report
     stats["source_cells"] = int(stacked.max())
+    stats.update(extra_stats)
+
+    # IE-footprint land coverage: of the land the parchment master's own warp
+    # reaches at all (its footprint, not the whole canvas — the frame stops
+    # around Cathay), how much carries a traced cell rather than falling
+    # through to the mask-wide seeded fallback below.
+    ie_inside = inside_by_source.get(MACRO_CLEAN_MASTER)
+    if ie_inside is not None:
+        ie_land = ie_inside & land
+        if ie_land.any():
+            stats["ie_footprint_land_coverage"] = round(
+                float((stacked > 0)[ie_land].sum()) / float(ie_land.sum()), 4)
 
     # The mask is the coastline authority: a source cell that spills into the sea
     # is clipped here and can never move a coast (user decision #1/#2).
@@ -230,6 +275,16 @@ def build_land_cells(land: np.ndarray, regs: dict[str, schema.SourceRegistration
     stacked = cells.prune_slivers(stacked, WRAP_X, SLIVER_FRACTION)
     log(f"  {before} masked cells -> {int(stacked.max())} substantial pieces "
         f"(slivers below {SLIVER_FRACTION:.0%} of their own cell go back to the fill)")
+
+    # The "drawn versus tessellated" measure: land carrying a traced, substantial
+    # source cell at this point in the pipeline, before any fallback seeding or
+    # nearest-label fill invents boundary the sources never drew. Approximate in
+    # one direction: split_large can still cut a *synthetic* border through a
+    # traced cell's interior later if it comes out oversized, so this is an
+    # upper bound on truly-drawn area, not an exact one — reported as such in
+    # COVERAGE.md rather than overclaimed.
+    traced_land_px = int((stacked > 0)[land].sum())
+    stats["traced_land_fraction"] = round(traced_land_px / float(land.sum()), 4)
 
     target = int(land.sum() // TARGET_LAND_STATES)
     stats["target_area"] = target
@@ -407,6 +462,39 @@ def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
         f"min {int(land_areas.min()):,}, max {int(land_areas.max()):,}) "
         f"and **{n_sea} sea zones**.",
         f"- Cells traced from a source before filling: **{stats['source_cells']:,}**.",
+        "",
+    ]
+    if "traced_cells_before_bridge" in stats:
+        lines += [
+            "## Lettering bridge (the parchment master)",
+            "",
+            f"- Traced cells before bridging detected labels into the barrier: "
+            f"**{stats['traced_cells_before_bridge']:,}**.",
+            f"- After: **{stats['traced_cells_after_bridge']:,}** "
+            f"({100 * (stats['traced_cells_after_bridge'] / max(1, stats['traced_cells_before_bridge']) - 1):+.1f}%) "
+            "— this is the measurement that says whether the glyph detector earned its "
+            "dependency.",
+            f"- Largest traced cell after bridging: **{stats['largest_traced_cell_px']:,} px** "
+            "(source pixels, before warping onto the canvas or clipping to the mask). A "
+            "faint or broken ruled line, not a text problem — recoverable by `split_large`, "
+            "reported here rather than hidden.",
+            "",
+        ]
+    if "ie_footprint_land_coverage" in stats:
+        lines += [
+            f"- Within the parchment master's own footprint, "
+            f"**{100 * stats['ie_footprint_land_coverage']:.1f}%** of land carries a traced "
+            "cell (the rest falls through to the mask-wide seeded fallback below, same as "
+            "everywhere else).",
+            "",
+        ]
+    lines += [
+        f"- **Drawn versus tessellated**: **{100 * stats['traced_land_fraction']:.1f}%** of "
+        "final land area belongs to a cell that carries a traced source boundary "
+        "(an upper bound — `split_large` can still cut a synthetic border through a "
+        "traced cell's interior if it comes out oversized, so the true drawn share is "
+        "this number or lower, never higher). The rest is seeded fallback or "
+        "nearest-label fill: tessellated, not drawn.",
         "",
         "## Source coverage",
         "",
