@@ -1,7 +1,14 @@
-"""Reprojection — place a registered source image onto the plate-carree canvas.
+"""Reprojection — place a registered source image onto the Miller canvas.
+
+The canvas is Miller cylindrical (see ``config/canvas_frame``, which measures the
+frame off vanilla's own shipped bitmap). Nothing in this module hardcodes that:
+every canvas <-> lon/lat conversion below delegates to ``canvas_frame``'s two
+helpers, so the frame is defined in exactly one place. Miller's inverse is closed
+form, so no iterative solver enters the pipeline and byte-exact regeneration
+survives the change.
 
 Stage-A ingestion has to reconcile three different source geometries onto one
-frame (see ``config/canvas_frame``):
+frame:
 
 ``natural_earth_2``
     The Terraqueous globe is drawn in the Natural Earth II pseudocylindrical
@@ -167,19 +174,21 @@ class ParametricFit:
         raise ValueError(f"{self.kind} is not a parametric projection")
 
     def to_canvas(self, source_x, source_y, width: int, height: int):
-        """Source pixel -> canvas pixel on a ``width`` x ``height`` plate carree.
+        """Source pixel -> canvas pixel on a ``width`` x ``height`` Miller grid.
 
         This is the bridge that lets every other source's control points be
         anchored to the Terraqueous globe: identify a named feature on the globe,
         and this returns the canvas pixel it occupies — exactly, through the same
         fitted projection the committed mask was built with, rather than by
         eyeballing the mask.
+
+        It is also why the whole seed-driven registration family follows a frame
+        change for free: ``fit_registration.anchor_landmarks`` stores landmarks as
+        *globe source px* and calls this at fit time, so re-running the fit is all
+        a reframe needs.
         """
         lon, lat = self.to_lonlat(source_x, source_y)
-        px_lon = width / (canvas_frame.LON_MAX - canvas_frame.LON_MIN)
-        px_lat = height / (canvas_frame.LAT_MAX - canvas_frame.LAT_MIN)
-        return ((lon - canvas_frame.LON_MIN) * px_lon,
-                (canvas_frame.LAT_MAX - lat) * px_lat)
+        return canvas_frame.lonlat_to_canvas(lon, lat, width, height)
 
 
 class RegistrationError(RuntimeError):
@@ -190,8 +199,8 @@ def fit_parametric(reg: schema.SourceRegistration) -> ParametricFit:
     """Least-squares fit a parametric registration from its control points.
 
     Each control point pins a canvas pixel to a source pixel. The canvas pixel
-    carries a (lon, lat) by definition of the plate-carree frame, so projecting
-    it gives a normalized coordinate, and the source pixel is then an affine
+    carries a (lon, lat) by definition of the Miller frame, so projecting it
+    gives a normalized coordinate, and the source pixel is then an affine
     function of that — two independent 2-parameter linear fits, solved exactly.
 
     The returned residuals are the honest measure of how well the record
@@ -206,11 +215,11 @@ def fit_parametric(reg: schema.SourceRegistration) -> ParametricFit:
         cxx, cyy = cp.canvas
         # A control point on the wrap seam is recorded at x = WIDTH; keep it
         # there rather than folding to 0, or the fit sees lon -180 for a +180
-        # feature and the scale collapses.
-        lo = canvas_frame.LON_MIN + cxx / (canvas_frame.WIDTH / 360.0)
-        la = canvas_frame.LAT_MAX - cyy / (canvas_frame.HEIGHT / (canvas_frame.LAT_MAX - canvas_frame.LAT_MIN))
-        lon.append(lo)
-        lat.append(la)
+        # feature and the scale collapses. ``canvas_to_lonlat`` does not fold,
+        # which is exactly why it is the direction used here.
+        lo, la = canvas_frame.canvas_to_lonlat(cxx, cyy)
+        lon.append(float(lo))
+        lat.append(float(la))
         sxp.append(cp.source[0])
         syp.append(cp.source[1])
 
@@ -344,12 +353,15 @@ def canvas_lonlat(y_rows: np.ndarray, width: int, height: int):
     Returned as ``(lon[1, W], lat[R, 1])`` so callers broadcast instead of
     materialising two full R x W float64 grids — at heightmap resolution that
     difference is gigabytes.
+
+    Miller keeps that separability: longitude still depends only on x and
+    latitude only on y, so each axis is converted on its own vector and the
+    unused argument is a scalar the helper ignores.
     """
-    px_per_deg_lon = width / (canvas_frame.LON_MAX - canvas_frame.LON_MIN)
-    px_per_deg_lat = height / (canvas_frame.LAT_MAX - canvas_frame.LAT_MIN)
-    xs = np.arange(width, dtype=np.float64) + 0.5
-    lon = (canvas_frame.LON_MIN + xs / px_per_deg_lon)[None, :]
-    lat = (canvas_frame.LAT_MAX - (y_rows.astype(np.float64) + 0.5) / px_per_deg_lat)[:, None]
+    xs = (np.arange(width, dtype=np.float64) + 0.5)[None, :]
+    ys = (y_rows.astype(np.float64) + 0.5)[:, None]
+    lon, _ = canvas_frame.canvas_to_lonlat(xs, 0.0, width, height)
+    _, lat = canvas_frame.canvas_to_lonlat(0.0, ys, width, height)
     return lon, lat
 
 

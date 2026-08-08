@@ -7,14 +7,31 @@ elevation field and a land mask by nearest-swatch classification.
 
 Two things stop that from being naive nearest-neighbour:
 
-* **Paper.** The oval leaves the polar Chaos Wastes un-inked, and blank page is
-  closer in RGB to the deepest-ocean swatch than to any land swatch. The LUT
-  carries an explicit paper entry classified as land, so the poles come out as
-  waste rather than as the world's deepest trench.
 * **Texture.** The scan carries a paper grain and JPEG ringing, both of which
   push individual pixels across swatch boundaries. Classification runs on a
   lightly median-filtered copy, which removes the speckle without moving edges
   the way a blur would.
+* **Ink.** The map letters its regions and rules its graticule over the terrain
+  wash; both classify as the darkest (highest) swatch. See
+  :func:`unexplained_ink`.
+
+**Paper is deliberately *not* a swatch** (changed 2026-08-04). The oval leaves the
+polar Chaos Wastes un-inked, and blank page is closer in RGB to the deepest-ocean
+swatch than to any land swatch — so the LUT used to carry an explicit paper entry
+classified as land. Measurement retired that rule rather than retuning it: the
+committed ``paper_rgb`` [236,232,218] and band 0 [210,209,197] are 40.6 RGB units
+apart, while the actual polar page tone measures 42 units from paper and *closer
+to band 0*, and a 3-unit perturbation of either constant swings 37 percentage
+points of the polar band between land and ocean. That is an ill-conditioned
+decision, not a mistyped constant, and no value of it is right.
+
+The replacement is **spatial, not colorimetric**, and lives in
+``worldgen/ingest.polar_waste``: blank polar page is the region reachable from the
+oval's north rim, and a real abyssal basin is not. Measured on this source, 98.6%
+of band-0 pixels sit in enclosed components the rim flood never reaches, so the
+two populations separate by construction rather than by threshold luck.
+``paper_elevation_m`` survives in the LUT because it is still the elevation that
+rule assigns; ``paper_rgb`` survives only as a record of the measurement.
 
 Classification is a pure function of the pixels and the committed LUT, so the
 derived elevation is reproducible for a fixed source (whose bytes ``sources.py``
@@ -40,28 +57,39 @@ def denoise(rgb: np.ndarray, size: int = 3) -> np.ndarray:
 
 
 def _palette(lut: schema.ElevationLUT):
-    """Swatch colours + their elevations + land flags, paper appended last."""
-    colors = [b.rgb for b in lut.bands] + [lut.paper_rgb]
-    elevs = [b.mid_m for b in lut.bands] + [lut.paper_elevation_m]
-    is_land = [i >= lut.sea_band_count for i in range(len(lut.bands))] + [True]
+    """The legend's swatch colours + their elevations + land flags.
+
+    **The 14 terrain bands only** — ``paper_rgb`` is not a member. Adding it back
+    would restore a two-way tie between blank page and the deepest-ocean swatch
+    that no threshold resolves; see the module docstring.
+    """
+    colors = [b.rgb for b in lut.bands]
+    elevs = [b.mid_m for b in lut.bands]
+    is_land = [i >= lut.sea_band_count for i in range(len(lut.bands))]
     return (np.array(colors, dtype=np.float32),
             np.array(elevs, dtype=np.float32),
             np.array(is_land, dtype=bool))
 
 
 def classify(rgb: np.ndarray, lut: schema.ElevationLUT, block_rows: int = 512):
-    """``(elevation_m, is_land, distance)`` for an ``(H, W, 3)`` uint8 image.
+    """``(elevation_m, is_land, distance, band)`` for an ``(H, W, 3)`` uint8 image.
 
     ``distance`` is the RGB distance to the winning swatch — a per-pixel measure
     of how well the LUT actually explains the image. The generators report its
     distribution so a source that does not match the committed ramp (a different
     edition of the map, say) is visible rather than silently averaged in.
+
+    ``band`` is the winning swatch's index, deepest-first. The spatial polar rule
+    needs it: blank page now classifies as band 0 (the deepest ocean swatch) at a
+    conspicuously poor distance, and that pair is what marks a pixel as "not
+    terrain colour at all" before connectivity decides what it actually is.
     """
     colors, elevs, land = _palette(lut)
     h, w, _ = rgb.shape
     elevation = np.empty((h, w), dtype=np.float32)
     is_land = np.empty((h, w), dtype=bool)
     dist = np.empty((h, w), dtype=np.float32)
+    band = np.empty((h, w), dtype=np.int16)
 
     # Blocked so the (rows x W x swatches) distance stack stays bounded.
     for y0 in range(0, h, block_rows):
@@ -71,8 +99,30 @@ def classify(rgb: np.ndarray, lut: schema.ElevationLUT, block_rows: int = 512):
         idx = np.argmin(d2, axis=2)
         elevation[y0:y1] = elevs[idx]
         is_land[y0:y1] = land[idx]
+        band[y0:y1] = idx.astype(np.int16)
         dist[y0:y1] = np.sqrt(np.take_along_axis(d2, idx[:, :, None], axis=2)[:, :, 0])
-    return elevation, is_land, dist
+    return elevation, is_land, dist, band
+
+
+def distance_to_paper(rgb: np.ndarray, lut: schema.ElevationLUT) -> np.ndarray:
+    """RGB distance to the un-inked page colour.
+
+    Paper is not a classification swatch (see :func:`_palette`), but it is still
+    something the image legitimately *contains*, and :func:`unexplained_ink` asks
+    a different question from :func:`classify`: not "which band is this?" but
+    "is this explained by anything on the page at all?" For that question, page
+    counts.
+
+    Keeping the two apart matters more than it sounds. When paper was first
+    dropped from the palette without this, every page-toned pixel became 40+ units
+    from its nearest swatch, which is past ``INK_MAX_DISTANCE`` — so the de-ink
+    pass grew from 6.96% of the crop to 18.24%, quietly replacing a ninth of the
+    map with nearest-neighbour fill. The classification tie and the ink test are
+    separate concerns and now use separate distances.
+    """
+    paper = np.array(lut.paper_rgb, dtype=np.float32)
+    d = rgb.astype(np.float32) - paper
+    return np.sqrt((d * d).sum(axis=2))
 
 
 #: A pixel further than this from every swatch is not terrain colour at all.

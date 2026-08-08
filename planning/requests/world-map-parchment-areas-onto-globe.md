@@ -3,9 +3,15 @@
 | Field | Value |
 |-------|-------|
 | Type | request |
-| Status | planned |
+| Status | superseded |
 | Date | 2026-07-28 |
 | Priority | high |
+
+> **Superseded (2026-08-04) by
+> [world-map-miller-projection-canvas.md](world-map-miller-projection-canvas.md).**
+> Its Stage A/B work is built on the plate-carrée canvas and would have to be
+> re-based onto the Miller frame. The traced-geometry code itself survives
+> (committed in `72d797d`); the plan around it does not.
 
 ## Description
 

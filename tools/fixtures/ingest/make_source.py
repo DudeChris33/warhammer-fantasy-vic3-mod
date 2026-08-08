@@ -16,7 +16,14 @@ feature the real pipeline has to survive:
 * **ink strokes** — a "label" block and thin ruled lines drawn across land in a
   dark colour close to the highest-elevation swatch, reproducing the exact defect
   that embossed place names into the real heightmap as mountain ranges;
-* single-pixel speckle, for the majority filter.
+* single-pixel speckle, for the majority filter;
+* **a blank polar band touching the north rim, and an enclosed basin painted the
+  same colour** at mid-latitude — the pair that the spatial polar rule has to
+  tell apart. Both classify as the deepest-ocean band at a poor distance, so no
+  colour test can separate them; only connectivity to the rim can. The band must
+  come out as land at the waste elevation, the basin must stay ocean. This is the
+  direct regression test for the defect that shipped a polar fringe of "deepest
+  trench" where the Chaos Wastes belong.
 
 Re-run after an intentional change, then ``run_fixture.py --update``::
 
@@ -38,6 +45,21 @@ from worldgen import raster  # noqa: E402
 
 W, H = 256, 128
 
+#: Rows of blank page along the north rim — the polar Chaos Wastes stand-in.
+#: ``run_fixture`` probes this box and asserts it comes out LAND.
+POLAR_BAND = (0, 0, W, 7)          # x0, y0, x1, y1
+
+#: An enclosed patch of the *same* blank-page colour, walled off from the rim by
+#: ordinary (non-page) ocean. ``run_fixture`` probes it and asserts it stays SEA.
+#: This is the load-bearing half of the polar test: page tone and the deepest
+#: ocean swatch are colorimetrically identical, so the ONLY thing that may
+#: distinguish "polar page (land)" from "enclosed deep basin (sea)" is whether a
+#: path of page-band ocean reaches the map edge. The wall is why the fixture's
+#: ocean background is a mid-depth band, not the deepest one — see :func:`build`.
+#: Placed clear of both continents' shelf rings, clear of the polar band, and
+#: clear of the ruled graticule rows so nothing else explains the result.
+ENCLOSED_BASIN = (205.0, 22.0, 10.0, 7.0)   # cx, cy, rx, ry
+
 
 def build() -> np.ndarray:
     lut = json.loads((HERE / "lut.json").read_text(encoding="utf-8"))
@@ -47,8 +69,18 @@ def build() -> np.ndarray:
     shelf = np.array(bands[sea_n - 1]["rgb"], dtype=np.uint8)
     land_swatches = [np.array(b["rgb"], dtype=np.uint8) for b in bands[sea_n:]]
 
+    # The open-ocean background is the mid-depth (shelf) band, NOT the deepest.
+    # This is deliberate and it mirrors the real source: the deepest-ocean swatch
+    # is colorimetrically identical to blank polar page, so if it tiled the open
+    # sea, every deep basin would be one connected page-band region reaching the
+    # map edge and the spatial polar rule could not tell page from abyss. On the
+    # real map the deepest swatch appears only in enclosed trenches walled by
+    # shallower ocean; here the two page-band regions are the edge-touching polar
+    # band (-> land) and the walled ENCLOSED_BASIN (-> sea), and the band-2
+    # background is the wall between them. Band 0 is still walked for the ramp
+    # test — the page-toned regions classify to it.
     img = np.zeros((H, W, 3), dtype=np.uint8)
-    img[:, :] = deep
+    img[:, :] = shelf
 
     yy, xx = np.mgrid[0:H, 0:W]
 
@@ -78,6 +110,17 @@ def build() -> np.ndarray:
     shelf_ring = (~land) & (np.minimum(ra, rb) <= 1.45)
     img[shelf_ring] = shelf
     img[lake] = shelf
+
+    # --- blank page: the pair the spatial polar rule has to tell apart ----
+    # Both are painted the identical colour and both classify to band 0 at a
+    # distance no threshold can use. The only difference between them is that one
+    # touches the north rim and the other does not, which is exactly the
+    # distinction the rule is built on.
+    page = np.array(lut["paper_rgb"], dtype=np.uint8)
+    px0, py0, px1, py1 = POLAR_BAND
+    img[py0:py1, px0:px1] = page
+    bcx, bcy, brx, bry = ENCLOSED_BASIN
+    img[((xx - bcx) / brx) ** 2 + ((yy - bcy) / bry) ** 2 <= 1.0] = page
 
     # --- ink: the defect this fixture exists to catch --------------------
     ink = np.array(lut["ink_rgb"], dtype=np.uint8)

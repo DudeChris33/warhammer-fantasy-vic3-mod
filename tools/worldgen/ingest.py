@@ -10,9 +10,14 @@ and both callers import it.
 
 The steps, in order (source space, then canvas space):
 
-    denoise -> classify -> de-ink -> despeckle -> smooth      (source res)
-    reproject -> clean land mask                              (canvas res)
-    encode with the shoreline forced to the mask             (heightmap res)
+    denoise -> classify -> polar rule -> de-ink -> smooth     (source res)
+    reproject -> clean land mask (area despeckle lives here)  (canvas res)
+    encode with the shoreline forced to the mask              (heightmap res)
+
+Area despeckling sits on the canvas side on purpose: the source-to-canvas stretch
+runs 4.0x to 15.4x across the band, so a threshold in source pixels does not mean
+one thing. Canvas area is *screen* area, which is what the player and the engine
+both see.
 
 Everything is deterministic: no RNG, no wall-clock, no threaded kernels — the
 same inputs give byte-identical output, which is what the fixture pins.
@@ -23,8 +28,159 @@ from __future__ import annotations
 from dataclasses import dataclass
 
 import numpy as np
+from scipy import ndimage
 
 from worldgen import lut, reproject, schema, segment
+
+# ---------------------------------------------------------------------------
+# The spatial polar rule
+# ---------------------------------------------------------------------------
+
+
+#: Swatch indices blank page is allowed to classify as. Page is pale, and the
+#: ramp's palest swatches are its *deepest* ocean, so page lands on band 0 or —
+#: where the scan runs slightly darker — band 1. Both are needed: the southern
+#: page wedge that reaches up between the arms of the Kuresh peninsula classifies
+#: as band 1, and restricting to band 0 alone breaks the flood's connectivity
+#: there and leaves a semicircular hole in drawn land.
+#:
+#: Widening it is safe, and that is measured rather than assumed: the flood's
+#: stopping latitude is **unchanged** between {0}, {0,1} and {0,1,2} (north
+#: 60.0/59.1/59.1 N, south -52.95 S in all three). If widening were letting the
+#: flood into real ocean the stopping point would move. Band 2 is left out
+#: because it buys nothing and is a genuinely common abyssal depth.
+PAGE_BANDS = (0, 1)
+
+
+@dataclass(frozen=True)
+class PolarRim:
+    """Where blank page may be reached from, for :func:`polar_waste`.
+
+    The reference map leaves the polar Chaos Wastes un-inked at **both** poles.
+    Deciding what that blank page *means* used to be a colour comparison, and it
+    was ill-conditioned to the point of being unusable (see ``worldgen/lut``).
+    This carries the geometry the replacement rule needs instead.
+
+    The rule in one sentence: *blank page is what you can reach from the edge of
+    the drawn world without crossing terrain.* The map has two such edges, and
+    both are needed — the southern one is not cropped away by the Miller reframe
+    the way the plan assumed. It reaches to -52.95 S, which is 4.5 degrees inside
+    the canvas.
+
+    ``envelope``
+        Source-shaped bool: pixels inside the map's drawn envelope. Keeps the
+        flood off the page margin, the title block and the polar insets, all of
+        which are the same blank page and none of which are the world.
+    ``north_seed`` / ``south_seed``
+        Source row ranges to seed each flood from — a band rather than a single
+        row, so one row of drawn boundary rule cannot starve it. ``south_seed``
+        may be ``None`` for a source with no southern page.
+    ``north_limit`` / ``south_limit``
+        Hard caps: the north flood may not pass south of ``north_limit``, the
+        south flood may not pass north of ``south_limit``. Safety nets, measured
+        not to bind — see ``generate_heightmap.POLAR_FLOOD_*``.
+    ``min_distance``
+        Defaults to **0, i.e. off**, and that default is a measurement, not
+        laziness. The intuition it was written for — that blank page sits far
+        from the deepest-ocean swatch while real ocean sits on it, so distance
+        could act as a barrier — is false on this source: sampled across the
+        on-canvas polar band, page classifies as band 0 at a median distance of
+        **10.0** (p95 26.8), the same neighbourhood as genuine deep ocean. Page
+        and abyss are colorimetrically indistinguishable. That is the whole
+        reason this rule is spatial, and a non-zero barrier here does not make it
+        safer — it just deletes most of the polar band from consideration. Left
+        as a knob for a future source whose page really does separate.
+    """
+
+    envelope: np.ndarray
+    north_seed: tuple[int, int]
+    north_limit: int
+    south_seed: tuple[int, int] | None = None
+    south_limit: int | None = None
+    min_distance: float = 0.0
+    bands: tuple[int, ...] = PAGE_BANDS
+
+
+@dataclass(frozen=True)
+class PolarReport:
+    """What :func:`polar_waste` actually did, so the build can report it."""
+
+    flipped: int          # pixels the rim floods claimed as waste
+    enclosed: int         # page-band pixels they did NOT reach (the real basins)
+    eligible: int         # page-band pixels considered at all
+    band_zero: int        # page-band pixels in the envelope, total
+    north_row: int        # southernmost row the NORTH flood reached (-1 if none)
+    south_row: int        # northernmost row the SOUTH flood reached (-1 if none)
+
+    @property
+    def enclosed_fraction(self) -> float:
+        return self.enclosed / self.band_zero if self.band_zero else 0.0
+
+
+def polar_waste(band: np.ndarray, dist: np.ndarray, rim: PolarRim):
+    """``(mask, report)`` — blank polar page, found by connectivity not colour.
+
+    The rule in one sentence: *blank page is what you can reach from the top of
+    the map without crossing terrain.* An enclosed basin in the middle of an
+    ocean is unreachable by construction, however similar its colour, which is
+    the thing no RGB threshold could deliver.
+
+    Implemented as a labelling rather than an explicit flood loop, so there is no
+    iteration order to get wrong and the result is byte-reproducible:
+    ``ndimage.label`` is deterministic, and the seed labels are taken through a
+    sorted ``np.unique``.
+    """
+    in_env = np.isin(band, rim.bands) & rim.envelope
+    eligible = in_env.copy()
+    if rim.min_distance > 0:
+        eligible &= dist > rim.min_distance
+
+    def flood(seed_rows: tuple[int, int], lo: int, hi: int) -> np.ndarray:
+        e = eligible.copy()
+        e[:max(0, lo)] = False
+        e[min(e.shape[0], hi):] = False
+        labels, _ = ndimage.label(e)
+        seed = labels[seed_rows[0]:seed_rows[1]]
+        picked = np.unique(seed[seed > 0])
+        return np.isin(labels, picked) if picked.size else np.zeros_like(e)
+
+    h = band.shape[0]
+    north = flood(rim.north_seed, rim.north_seed[0], rim.north_limit)
+    south = (flood(rim.south_seed, rim.south_limit, rim.south_seed[1])
+             if rim.south_seed is not None else np.zeros_like(eligible))
+    mask = north | south
+
+    nr = np.nonzero(north.any(axis=1))[0]
+    sr = np.nonzero(south.any(axis=1))[0]
+    return mask, PolarReport(
+        flipped=int(mask.sum()),
+        enclosed=int((in_env & ~mask).sum()),
+        eligible=int(eligible.sum()),
+        band_zero=int(in_env.sum()),
+        north_row=int(nr.max()) if nr.size else -1,
+        south_row=int(sr.min()) if sr.size else -1,
+    )
+
+
+def ne2_envelope(fit, shape: tuple[int, int]) -> np.ndarray:
+    """Source-shaped bool: pixels inside the drawn Natural Earth II oval.
+
+    The oval's half-width at a given latitude is ``sx * pi * f(phi)`` — the same
+    forward polynomial the reprojection uses — so this is the fitted envelope
+    itself, not an eyeballed ellipse.
+    """
+    h, w = shape
+    ys = np.arange(h, dtype=np.float64) + 0.5
+    _, phi = reproject.ne2_inverse(np.zeros_like(ys), (fit.cy - ys) / fit.sy)
+    half = fit.sx * np.pi * np.asarray(reproject.ne2_forward(1.0, phi)[0])
+    xs = np.arange(w, dtype=np.float64) + 0.5
+    return np.abs(xs[None, :] - fit.cx) <= half[:, None]
+
+
+def source_row_for_lat(fit, lat_deg: float) -> int:
+    """The source row a latitude falls on. Latitude-only, so it is a constant row."""
+    y = reproject.ne2_forward(0.0, np.radians(lat_deg))[1]
+    return int(round(fit.cy - fit.sy * float(y)))
 
 # ---------------------------------------------------------------------------
 # Source-space classification (the novel de-ink / despeckle stage)
@@ -37,15 +193,18 @@ class SourceFields:
 
     ``elev`` is smoothed metres, ``land`` a smoothed 0..1 land fraction (float so
     the reprojected shoreline lands on a sub-pixel boundary rather than a
-    stair-stepped one). ``dist`` (colour distance to the winning swatch) and
-    ``ink`` (the erased lettering/graticule mask) are carried out for the caller
-    to report on — they are diagnostics, not further inputs.
+    stair-stepped one). ``dist`` (colour distance to the winning swatch), ``ink``
+    (the erased lettering/graticule mask) and ``polar`` (what the rim flood
+    claimed) are carried out for the caller to report on — they are diagnostics,
+    not further inputs.
     """
 
     elev: np.ndarray
     land: np.ndarray
     dist: np.ndarray
     ink: np.ndarray
+    polar: np.ndarray
+    polar_report: PolarReport | None = None
 
 
 def classify_source(
@@ -55,10 +214,10 @@ def classify_source(
     denoise_size: int = 3,
     ink_dilate: int = lut.INK_DILATE,
     majority: int = 7,
-    min_blob: int = 900,
     wrap_x: bool = False,
     elev_sigma: float = 2.0,
     land_sigma: float = 1.0,
+    polar_rim: PolarRim | None = None,
 ) -> SourceFields:
     """Colour image -> smoothed elevation + land fraction, with ink removed.
 
@@ -69,25 +228,47 @@ def classify_source(
     reprojected — a stroke is still a few pixels wide here and its neighbours can
     fill it; after a 2-4x upscale it would be an unfixable ridge.
 
+    ``polar_rim`` turns on the spatial polar-waste rule (:func:`polar_waste`).
+    It runs *before* de-inking, because a pixel the flood has already decided is
+    blank page must not then be inpainted from its neighbours.
+
+    **Area despeckling is deliberately not done here.** It used to be — a
+    ``min_blob`` in *source* pixels — but the source-to-canvas stretch runs from
+    4.0x at the equator to 15.4x at the top of the band, so a fixed source
+    threshold meant an effective canvas threshold that varied 3.8x across the map
+    and was tightest exactly where the artwork is least reliable. It now happens
+    once, on the canvas, where area is screen area and one number means one thing
+    (``generate_heightmap.CANVAS_MIN_BLOB``). ``majority`` stays here: it targets
+    drawn strokes, which are genuinely source-scale features.
+
     ``wrap_x`` is False for a cropped whole-world source (its left/right edges are
     the antimeridian, not neighbours) and True for a synthetic source that tiles
-    the globe. The despeckle filters honour it so a coastline on the seam is not
+    the globe. The majority filter honours it so a coastline on the seam is not
     tulipped by edge effects.
     """
     den = lut.denoise(rgb, denoise_size)
-    elev, is_land, dist = lut.classify(den, elut)
+    elev, is_land, dist, band = lut.classify(den, elut)
 
-    ink = lut.unexplained_ink(den, dist, dilate=ink_dilate)
+    polar = np.zeros(is_land.shape, dtype=bool)
+    report = None
+    if polar_rim is not None:
+        polar, report = polar_waste(band, dist, polar_rim)
+        elev = np.where(polar, np.float32(elut.paper_elevation_m), elev)
+        is_land = is_land | polar
+
+    # Ink is judged against terrain *or* page: blank page is not ink, even though
+    # it is deliberately not a classification swatch. See lut.distance_to_paper.
+    explained = np.minimum(dist, lut.distance_to_paper(den, elut))
+    ink = lut.unexplained_ink(den, explained, dilate=ink_dilate) & ~polar
     elev = lut.inpaint_nearest(elev, ink)
     is_land = lut.inpaint_nearest(is_land, ink)
 
     is_land = segment.majority_filter(is_land, majority, wrap_x=wrap_x)
-    is_land = segment.drop_small_components(is_land, min_blob, wrap_x=wrap_x)
-    is_land = ~segment.drop_small_components(~is_land, min_blob, wrap_x=wrap_x)
 
     elev = lut.smooth_elevation(elev, sigma=elev_sigma)
     land_f = lut.smooth_elevation(is_land.astype(np.float32), sigma=land_sigma)
-    return SourceFields(elev=elev, land=land_f, dist=dist, ink=ink)
+    return SourceFields(elev=elev, land=land_f, dist=dist, ink=ink,
+                        polar=polar, polar_report=report)
 
 
 # ---------------------------------------------------------------------------

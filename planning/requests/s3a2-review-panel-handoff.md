@@ -1,5 +1,17 @@
 # S3a-2 review panel — handoff prompts
 
+| Field | Value |
+|-------|-------|
+| Status | superseded |
+
+> **Superseded (2026-08-04) by
+> [world-map-miller-projection-canvas.md](world-map-miller-projection-canvas.md).**
+> The plan these findings blocked no longer exists in the form they were written
+> against. The findings themselves were not answered here and are not silently
+> dropped: the two mask-level blockers are fixed in that request's Phase 4, and
+> the naming/density work is recorded under its "Now unowned" section as needing
+> its own request.
+
 The five-expert review panel sat on the **S3a-2 plan**
 (`planning/requests/world-map-source-driven.md:1395-1806`) on **2026-07-28** and
 returned a unanimous **BLOCK** — loremaster, cartographer, geographer,

@@ -76,10 +76,29 @@ TWW3_DETAIL_M = 260.0
 TWW3_DETAIL_SIGMA = 24.0
 
 #: Minimum area, in canvas pixels, for an island or inland water body to survive
-#: the final cleanup. 256 px is a ~16x16 blob, roughly 0.7 degrees square — below
-#: that a feature cannot carry even one province, so keeping it would only add
-#: engine objects nobody can see or play. Real archipelagos worth naming are
-#: placed deliberately in a later phase, not rescued from resampling noise.
+#: the final cleanup — and, since 2026-08-04, the **only** area despeckle in the
+#: pipeline (the latitude-blind source-side ``SOURCE_MIN_BLOB = 900`` was retired,
+#: because 900 source px is 3,617 canvas px at the equator but 13,828 at the top
+#: of the band, so one number there meant four different things).
+#:
+#: 256 px is a ~16x16 blob. It is deliberately **not** raised to the retired
+#: filter's equatorial equivalent, and that was tried and rejected on evidence:
+#:
+#:     threshold   land bodies   land %
+#:           256            93    36.57
+#:           900            53    36.61
+#:          1800            36    36.56     <- the old pipeline's effective value
+#:          3600            25    36.52
+#:
+#: 3,600 deletes 68 island groups while moving total land by 0.05%, and the ones
+#: it deletes are drawn, named features — the Devourer Islands, the Lumbria
+#: Archipelago, the Isles of Doom, the Isle of Dawn, Tol Elasor, the Stars
+#: Archipelago, the chain off Naggaroth. Even 1,800 (what the old two-stage
+#: pipeline effectively enforced) loses the Turtle Islands and the Sea of
+#: Serpents chain. The reference map draws these deliberately and the mod's own
+#: named-region requirements depend on them, so fidelity wins: the de-ink pass
+#: already removes lettering, which is what the retired source filter was really
+#: guarding against.
 CANVAS_MIN_BLOB = 256
 
 
@@ -102,16 +121,56 @@ def load_registrations() -> dict[str, schema.SourceRegistration]:
     return regs
 
 
-#: Majority-filter window applied to the source-space land flag. Sized to lose
-#: the map's drawn strokes (graticule, rivers, borders) without moving coasts.
-SOURCE_MAJORITY = 7
+#: Majority-filter window applied to the source-space land flag, purely to remove
+#: salt-and-pepper misclassification. Reduced from 7 to 3 (2026-08-04) for the
+#: same reason ``SOURCE_MIN_BLOB`` was retired: a 7x7 window is size-thresholding
+#: dressed as denoising, and it erases every small island at source resolution —
+#: measured on this source, it deleted the Devourer Islands, the Lost Isles of
+#: Elithis and a dozen coastal flecks *before* they could ever reach the canvas.
+#: The jobs it used to double as are now owned where they belong: drawn ink
+#: (graticule, lettering, borders) is removed by ``lut.unexplained_ink``, and
+#: rivers drawn in ocean-blue over land close up as sub-256px "lakes" under the
+#: canvas-side ``clean_land_mask``. What is left for the source filter is genuine
+#: single-pixel speckle, which a 3x3 majority clears. The ingestion fixture has
+#: run at 3 all along, so this is a validated value, not a new one.
+#:
+#: The very faintest archipelagos (Lumbria, the outer Devourer flecks) are drawn
+#: as scattered 12-20px specks at the source's own noise floor and are not
+#: reliably separable from ocean texture at any filter width; those are the
+#: deliberate-placement work the source-driven plan always reserved for a later
+#: phase, not signal to be rescued here.
+SOURCE_MAJORITY = 3
 
-#: Minimum area, in *source* pixels, for a land or water blob to survive.
-#: Place-name lettering set over the ocean is the target: each glyph is a
-#: few hundred pixels, so it is removed here, at native size, where it is still
-#: recognisably small — after reprojection to a 4x wider canvas the same glyph
-#: would be several thousand pixels and indistinguishable from a real island.
-SOURCE_MIN_BLOB = 900
+#: Hard caps on the two polar-waste floods — safety nets **measured not to bind**.
+#: Removing them changes nothing: each flood stops on its own where the drawn
+#: coastline closes, the north at 59.14N and the south at -52.95S. Measured
+#: 2026-08-04 by sweeping the north cap from 70N to no cap at all:
+#:
+#:     cap 70N -> 237,251 px, stops at 70.06N   (clipped by the cap)
+#:     cap 65N -> 244,853 px, stops at 65.11N   (clipped by the cap)
+#:     cap 55N -> 247,501 px, stops at 60.02N   (stops on its own)
+#:     no cap  -> 247,501 px, stops at 60.02N   (identical)
+#:
+#: Both are therefore set well *beyond* the natural stopping point, so the
+#: geometry decides the answer and the cap only catches a genuine escape.
+#:
+#: The southern flood is not optional and the plan was wrong to assume the reframe
+#: deleted it: the map's southern blank page reaches 4.5 degrees inside the canvas
+#: bottom edge, and where it wedges up between the two arms of the Kuresh
+#: peninsula it cut a semicircular hole out of drawn land.
+POLAR_FLOOD_NORTH_LAT = 50.0
+POLAR_FLOOD_SOUTH_LAT = -45.0
+
+#: Each flood must stop at least this far short of its cap. This is the escape
+#: test, and it is self-validating in a way a fixed area or fraction is not: if a
+#: flood ever *reaches* its cap, that means it would have kept going, which is
+#: exactly the failure — a gap in the drawn coastline letting blank page leak into
+#: real ocean. Currently 9.1 degrees of headroom north, 7.9 south.
+POLAR_FLOOD_HEADROOM_DEG = 1.0
+
+#: Source rows of each rim used to seed its flood. A band, not a single row, so
+#: one row of drawn boundary rule cannot starve it.
+POLAR_SEED_DEPTH = 8
 
 
 def _crop_inside(reg: schema.SourceRegistration, shape) -> np.ndarray:
@@ -130,25 +189,75 @@ def _crop_inside(reg: schema.SourceRegistration, shape) -> np.ndarray:
     return inside
 
 
-def terraqueous_fields(reg: schema.SourceRegistration, elut: schema.ElevationLUT, t0: float):
+def _lat_of_source_row(fit, row: int) -> float:
+    """Latitude of a Terraqueous source row (latitude-only under NE-II)."""
+    if row < 0:
+        return 90.0
+    _, phi = reproject.ne2_inverse(0.0, (fit.cy - row) / fit.sy)
+    return float(np.degrees(phi))
+
+
+def terraqueous_fields(reg: schema.SourceRegistration, elut: schema.ElevationLUT,
+                       fit, t0: float):
     """Classified elevation + land mask in Terraqueous source pixel space.
 
     Thin wrapper over :func:`ingest.classify_source` (the shared core the fixture
-    also runs) that adds the whole-world reporting.
+    also runs) that adds the whole-world reporting and builds the polar rim from
+    the fitted NE-II envelope.
     """
     rgb = sources.load_source_image(TERRAQUEOUS)
     log(f"  loaded {TERRAQUEOUS} {rgb.shape[1]}x{rgb.shape[0]}", t0)
     inside = _crop_inside(reg, rgb.shape[:2])
 
+    top_row = int(reg.crop[1]) if reg.crop is not None else 0
+    bot_row = int(reg.crop[3]) if reg.crop is not None else rgb.shape[0]
+    rim = ingest.PolarRim(
+        envelope=ingest.ne2_envelope(fit, rgb.shape[:2]),
+        north_seed=(top_row, top_row + POLAR_SEED_DEPTH),
+        north_limit=ingest.source_row_for_lat(fit, POLAR_FLOOD_NORTH_LAT),
+        south_seed=(bot_row - POLAR_SEED_DEPTH, bot_row),
+        south_limit=ingest.source_row_for_lat(fit, POLAR_FLOOD_SOUTH_LAT),
+    )
+    log(f"  polar rims: north seeds rows {rim.north_seed[0]}-{rim.north_seed[1]} "
+        f"(capped {POLAR_FLOOD_NORTH_LAT:.0f}N), south seeds rows {rim.south_seed[0]}-"
+        f"{rim.south_seed[1]} (capped {POLAR_FLOOD_SOUTH_LAT:.0f}S); "
+        f"page bands {rim.bands}", t0)
+
     fields = ingest.classify_source(
         rgb, elut, denoise_size=3, majority=SOURCE_MAJORITY,
-        min_blob=SOURCE_MIN_BLOB, wrap_x=False,
+        wrap_x=False, polar_rim=rim,
     )
     log(f"  LUT colour distance: median {np.median(fields.dist[inside]):.1f} "
         f"p95 {np.percentile(fields.dist[inside], 95):.1f}", t0)
+
+    pr = fields.polar_report
+    if pr is not None:
+        n_lat = _lat_of_source_row(fit, pr.north_row)
+        s_lat = _lat_of_source_row(fit, pr.south_row) if pr.south_row >= 0 else -90.0
+        log(f"  polar waste rule: {pr.flipped:,} px flipped to land at "
+            f"{elut.paper_elevation_m:.0f} m; {pr.enclosed:,} of {pr.band_zero:,} page-band px "
+            f"({100 * pr.enclosed_fraction:.1f}%) are enclosed basins the floods never "
+            f"reached and stay ocean", t0)
+        log(f"    north flood stopped at {n_lat:.2f}N ({n_lat - POLAR_FLOOD_NORTH_LAT:.1f} deg "
+            f"of headroom); south flood stopped at {s_lat:.2f}N "
+            f"({POLAR_FLOOD_SOUTH_LAT - s_lat:.1f} deg) — the drawn coastline stopped both, "
+            f"not the caps")
+        if n_lat < POLAR_FLOOD_NORTH_LAT + POLAR_FLOOD_HEADROOM_DEG:
+            raise SystemExit(
+                f"north polar flood reached {n_lat:.2f}N, within {POLAR_FLOOD_HEADROOM_DEG} deg "
+                f"of its {POLAR_FLOOD_NORTH_LAT}N cap — it was clipped, meaning it would have "
+                f"continued. Blank page has leaked into real ocean. Do not use this output."
+            )
+        if s_lat > POLAR_FLOOD_SOUTH_LAT - POLAR_FLOOD_HEADROOM_DEG:
+            raise SystemExit(
+                f"south polar flood reached {s_lat:.2f}N, within {POLAR_FLOOD_HEADROOM_DEG} deg "
+                f"of its {POLAR_FLOOD_SOUTH_LAT}S cap — it was clipped, meaning it would have "
+                f"continued. Blank page has leaked into real ocean. Do not use this output."
+            )
+
     log(f"  ink (lettering/graticule) erased: {100 * fields.ink[inside].mean():.2f}% "
         f"of the crop, inpainted from nearest non-ink neighbours", t0)
-    log(f"  source land fraction after despeckle: {100 * (fields.land[inside] > 0.5).mean():.1f}%", t0)
+    log(f"  source land fraction: {100 * (fields.land[inside] > 0.5).mean():.1f}%", t0)
     return fields.elev, fields.land, fields.dist
 
 
@@ -265,7 +374,7 @@ def main(argv: list[str] | None = None) -> int:
         f"({'isotropic, as a true NE-II rendering must be' if aniso < 0.01 else 'WARNING: not isotropic'})")
 
     log("classifying the Terraqueous ramp...")
-    elev_src, land_src_f, _dist = terraqueous_fields(reg, elut, t0)
+    elev_src, land_src_f, _dist = terraqueous_fields(reg, elut, fit, t0)
 
     log(f"reprojecting to canvas {CANVAS_W}x{CANVAS_H}...")
     terra_land = ingest.reproject_plane(
@@ -295,12 +404,19 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("coastline mosaic left pixels uncovered — no source claims them")
 
     log("cleaning the land/sea mask...")
+    pre = segment.mask_stats(land_raw, wrap_x=map_config.WRAP_X)
     land = segment.clean_land_mask(land_raw, min_island_area=CANVAS_MIN_BLOB,
                                    min_lake_area=CANVAS_MIN_BLOB,
                                    close_radius=2, open_radius=2, wrap_x=map_config.WRAP_X)
     stats = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
     log(f"  land {100 * stats['land_fraction']:.2f}%  "
         f"land bodies {stats['land_bodies']}  water bodies {stats['water_bodies']}", t0)
+    # The despeckle delta, reported rather than assumed: this is the whole
+    # measurement behind moving the threshold from source px to canvas px.
+    log(f"  despeckle at {CANVAS_MIN_BLOB:,} canvas px: land bodies "
+        f"{pre['land_bodies']} -> {stats['land_bodies']}, water bodies "
+        f"{pre['water_bodies']} -> {stats['water_bodies']}")
+    _report_polar_band(land, t0)
     raster.write_mask_png(DERIVED_DIR / "land_sea_mask.png", land)
     log(f"  wrote {DERIVED_DIR / 'land_sea_mask.png'}", t0)
 
@@ -344,6 +460,58 @@ def main(argv: list[str] | None = None) -> int:
         _write_preview_gray(height, DERIVED_DIR / "preview_heightmap.png")
     log("done.", t0)
     return 0
+
+
+#: The band the polar acceptance test looks at, and the shape of the artifact it
+#: is looking for. A needle is long, thin and small-ish: a spike of reprojected
+#: polar noise, not a landmass. Both numbers are generous — the real needles from
+#: the plate-carree build were far thinner than 8:1.
+POLAR_TEST_ROWS = 260
+POLAR_NEEDLE_ASPECT = 8.0
+POLAR_NEEDLE_MAX_AREA = 40_000
+
+
+def _report_polar_band(land: np.ndarray, t0: float) -> None:
+    """The polar acceptance test, measured and printed rather than assumed.
+
+    Note what is **not** tested: land on canvas row 0. That was the old
+    criterion, and it is the wrong one. Polar waste *is* land — canon (the Chaos
+    Wastes are frozen waste, not ocean), the LUT's own ``paper_elevation_m``, and
+    vanilla itself all agree: 42.7% of vanilla's own heightmap rows 0-200 sit
+    above the ocean floor, because it ships Greenland and the Arctic at its top
+    edge. A straight cut of land at the top of the map is what a correct build of
+    this world looks like, so the row-0 land fraction is *reported* here, not
+    failed on.
+    """
+    from scipy import ndimage
+
+    band = land[:POLAR_TEST_ROWS]
+    lab, n = ndimage.label(band)
+    needles = []
+    if n:
+        objs = ndimage.find_objects(lab)
+        areas = np.bincount(lab.ravel(), minlength=n + 1)
+        for i, sl in enumerate(objs, start=1):
+            if sl is None:
+                continue
+            h = sl[0].stop - sl[0].start
+            w = sl[1].stop - sl[1].start
+            aspect = max(h, w) / max(1, min(h, w))
+            if aspect > POLAR_NEEDLE_ASPECT and areas[i] < POLAR_NEEDLE_MAX_AREA:
+                needles.append((int(areas[i]), h, w))
+
+    log(f"  polar band (rows 0..{POLAR_TEST_ROWS}): {n} land components, "
+        f"{100 * band.mean():.1f}% land", t0)
+    log(f"    row 0 land {100 * land[0].mean():.1f}%  "
+        f"row {land.shape[0] - 1} land {100 * land[-1].mean():.1f}%  "
+        f"(reported, not gated — see _report_polar_band)")
+    if needles:
+        log(f"    WARNING: {len(needles)} needle-shaped component(s) "
+            f"(aspect > {POLAR_NEEDLE_ASPECT:.0f}, area < {POLAR_NEEDLE_MAX_AREA:,}): "
+            f"{needles[:5]}")
+    else:
+        log(f"    no needle-shaped components (aspect > {POLAR_NEEDLE_ASPECT:.0f} "
+            f"and area < {POLAR_NEEDLE_MAX_AREA:,}) — the spikes are gone")
 
 
 def _write_preview(mask: np.ndarray, path: Path, step: int = 8) -> None:

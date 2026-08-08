@@ -2,17 +2,17 @@
   "source": "synthetic_world.png",
   "measured": "invented — this is the fixture's own palette, not a measurement",
   "bands": [
-    {"rgb": [40, 60, 90], "low_m": -6000, "high_m": -3000, "label": "deep"},
-    {"rgb": [70, 100, 130], "low_m": -3000, "high_m": -500, "label": "mid"},
-    {"rgb": [110, 140, 170], "low_m": -500, "high_m": 0, "label": "shelf"},
+    {"rgb": [205, 208, 200], "low_m": -6000, "high_m": -3000, "label": "deep"},
+    {"rgb": [150, 170, 160], "low_m": -3000, "high_m": -500, "label": "mid"},
+    {"rgb": [115, 140, 130], "low_m": -500, "high_m": 0, "label": "shelf"},
     {"rgb": [150, 175, 110], "low_m": 0, "high_m": 400, "label": "lowland"},
     {"rgb": [200, 195, 130], "low_m": 400, "high_m": 1200, "label": "upland"},
     {"rgb": [205, 150, 110], "low_m": 1200, "high_m": 3000, "label": "hills"},
     {"rgb": [160, 90, 80], "low_m": 3000, "high_m": 6000, "label": "mountain"}
   ],
   "sea_band_count": 3,
-  "paper_rgb": [235, 232, 220],
+  "paper_rgb": [232, 230, 218],
   "paper_elevation_m": 250,
   "ink_rgb": [120, 40, 35],
-  "notes": "Fixture palette — invented, so nothing here derives from third-party art. 'ink_rgb' is not part of the ElevationLUT schema; make_source.py reads it to paint the label/graticule strokes. It is deliberately close to the 'mountain' swatch (distance 44) and dark (luminance 65), which is exactly the relationship the real Terraqueous label red has to the real >7000 m swatch — so the fixture reproduces the failure mode rather than a caricature of it."
+  "notes": "Fixture palette — invented, so nothing here derives from third-party art. The OCEAN ramp runs pale-at-depth, like the real Terraqueous diverging ramp, and this is load-bearing rather than decorative: the defect the polar rule exists to fix is that blank page is nearest to the DEEPEST-ocean swatch, which can only happen when the deepest swatch is pale. 'paper_rgb' [232,230,218] sits 39.2 units from band 0 and 100 from the next-nearest band, mirroring the real map's 40.6 / 38.3 — close enough to band 0 that no colour threshold separates them, which is the whole point, and bright enough (luminance 227) to stay clear of the ink test. Paper is NOT a classification swatch; see worldgen/lut.py. 'ink_rgb' is not part of the ElevationLUT schema either; make_source.py reads it to paint the label/graticule strokes. It is deliberately nearest the 'mountain' swatch and dark (luminance 65), the same relationship the real Terraqueous label red has to the real >7000 m swatch — so the fixture reproduces the failure mode rather than a caricature of it."
 }

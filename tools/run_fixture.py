@@ -448,10 +448,18 @@ def build_ingest(out_dir: Path) -> None:
 
     rgb = sources.load_source_image(reg.source, sources_dir=INGEST_DIR, manifest_path=INGEST_MANIFEST)
 
-    # The synthetic world tiles the globe, so despeckle is wrap-aware; its
-    # features are large relative to a 256 px source, so a small blob threshold
-    # keeps them while still removing the painted speckle.
-    fields = ingest.classify_source(rgb, elut, majority=3, min_blob=8, wrap_x=True)
+    # The synthetic world is rectangular and fills the frame, so its "drawn
+    # envelope" is the whole image. The southern cap is set to half the source
+    # height on purpose: the enclosed basin sits well inside that range, so what
+    # excludes it is genuinely its lack of a path to the rim and not the cap
+    # quietly doing the work.
+    rim = ingest.PolarRim(
+        envelope=np.ones(rgb.shape[:2], dtype=bool),
+        north_seed=(0, 8),
+        north_limit=rgb.shape[0] // 2,
+    )
+    # The synthetic world tiles the globe, so the majority filter is wrap-aware.
+    fields = ingest.classify_source(rgb, elut, majority=3, wrap_x=True, polar_rim=rim)
     fit = reproject.fit_parametric(reg)
 
     cw, ch = INGEST_CANVAS
@@ -488,6 +496,7 @@ def _write_ingest_digest(path: Path, reg, fields, land: np.ndarray, height: np.n
     stats = segment.mask_stats(land, wrap_x=True)
     lo = map_config.HEIGHT_SEA_LEVEL + map_config.HEIGHT_SHORE_MARGIN
     hi = map_config.HEIGHT_SEA_LEVEL - map_config.HEIGHT_SHORE_MARGIN
+    pr = fields.polar_report
     lines = [
         f"source                {reg.source}",
         f"projection            {reg.projection}",
@@ -499,9 +508,54 @@ def _write_ingest_digest(path: Path, reg, fields, land: np.ndarray, height: np.n
         f"heightmap_max         {int(height.max())}",
         f"land_at_or_above_lo   {bool((height[height >= map_config.HEIGHT_SEA_LEVEL] >= lo).all())}",
         f"sea_at_or_below_hi    {bool((height[height < map_config.HEIGHT_SEA_LEVEL] <= hi).all())}",
+        f"polar_flipped_px      {pr.flipped if pr else 0}",
+        f"polar_enclosed_px     {pr.enclosed if pr else 0}",
+        f"polar_band_is_land    {_probe_polar_band(fields)}",
+        f"enclosed_basin_is_sea {_probe_enclosed_basin(fields)}",
         "",
     ]
     path.write_bytes("\n".join(lines).encode("utf-8"))
+
+
+def _fixture_source_geometry():
+    """The two probe regions, imported from the script that paints them.
+
+    Imported rather than re-typed: a probe box that drifted away from the feature
+    it is supposed to be measuring would land on plain ocean and make
+    ``enclosed_basin_is_sea`` pass for the wrong reason — a test that cannot fail
+    is worse than no test.
+    """
+    import importlib.util
+
+    spec = importlib.util.spec_from_file_location(
+        "_ingest_make_source", INGEST_DIR / "make_source.py")
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod.POLAR_BAND, mod.ENCLOSED_BASIN
+
+
+#: Rows to leave off the polar band's southern edge when probing it. ``land`` is a
+#: *smoothed* fraction (``land_sigma``), so the coast at the band's edge is a soft
+#: ramp by design — including it would test the blur rather than the rule, which
+#: is the same reason the basin probe uses a core.
+_PROBE_MARGIN = 3
+
+
+def _probe_polar_band(fields) -> bool:
+    """Did the blank band along the north rim come out as land?"""
+    (x0, y0, x1, y1), _ = _fixture_source_geometry()
+    return bool((fields.land[y0:y1 - _PROBE_MARGIN, x0:x1] > 0.5).all())
+
+
+def _probe_enclosed_basin(fields) -> bool:
+    """Did the identically-coloured enclosed basin stay sea?"""
+    _, (cx, cy, rx, ry) = _fixture_source_geometry()
+    h, w = fields.land.shape
+    yy, xx = np.mgrid[0:h, 0:w]
+    # Probe the basin's core only: its rim is a colour boundary the smoothing
+    # deliberately softens, so including it would test the blur, not the rule.
+    core = ((xx - cx) / (rx * 0.6)) ** 2 + ((yy - cy) / (ry * 0.6)) ** 2 <= 1.0
+    return bool((fields.land[core] <= 0.5).all())
 
 
 def _update_fixture_manifest(manifest: Path, root: Path) -> None:

@@ -3,9 +3,19 @@
 | Field | Value |
 |-------|-------|
 | Type | bug |
-| Status | open |
+| Status | superseded |
 | Date | 2026-07-26 |
 | Severity | high |
+
+> **Superseded (2026-08-04) by
+> [world-map-miller-projection-canvas.md](world-map-miller-projection-canvas.md),
+> which absorbs the fix rather than deferring it.** That request's Phase 4 removes
+> both root causes (paper leaves the nearest-RGB palette in favour of a spatial
+> north-rim rule; the latitude-blind despeckle moves canvas-side), and the reframe
+> deletes the southern half of the defect outright. This issue's acceptance
+> criteria carry over, **minus** "no land pixels on canvas row 0" — vanilla ships
+> 42.7% of its own heightmap rows 0–200 above the ocean floor, so polar waste
+> reaching the top edge is correct, not a defect.
 
 ## Description
 

@@ -10,15 +10,43 @@
     "boundaries": 70
   },
   "crop": [20, 20, 2996, 2060],
-  "footprint": [3530, 247, 5294, 1621],
-  "notes": "*** NOT USABLE FOR GEOMETRY (measured, S3a 2026-07-25). *** Two independent findings, either one disqualifying: (1) MISREGISTERED - the QA overlay (tools/qa_overlay.py -> derived/qa_map-the-old-world.png) shows the committed coastline cutting straight across the middle of the drawn landmass. Cause: S2 shifted the CANVAS-side control points to follow the refined config/canvas_frame.ANCHORS but never re-verified them against the generated mask, and a thin-plate warp is exact at its control points, so the whole residual sits in the picks themselves. (2) NOT A CHLOROPLETH - it is a relief illustration with lettered labels, so even a perfect registration yields no traceable closed region boundaries. (2) is the decisive one: re-registering would not have helped, which is why S3a took the IE parchment family instead. The record is KEPT, not deleted (user decision #4, 2026-07-25) because its SOURCE-side picks are still good landmark identifications and a future re-registration should start from them. Until the canvas side is re-picked against the committed mask, nothing may consume this record for geometry. Original S1/S2 notes follow. --- GW regional map, top-down (N at top-right). Authoritative for Old World / Badlands / Dark Lands / Araby / Land of the Dead state & province boundaries (S3), and for the v1 canon river courses (S2) - it is the only registered source that draws named rivers legibly, hence rivers precedence 90. Canvas coordinates and footprint were shifted in S2 to follow the refined config/canvas_frame.ANCHORS. The 'WORLD MAP' locator inset (top-left, ~x[70,530] y[130,510]) and the decorative figures/ship drawn over the ocean must be masked out when segmenting - a single crop bbox cannot exclude an interior inset. Low coastline precedence: a stylised illustration should not be allowed to move the shoreline the Terraqueous NE-II fit sets.",
+  "footprint": [3532.0, 266.89, 5296.0, 1954.59],
+  "notes": "*** NOT USABLE FOR GEOMETRY (measured, S3a 2026-07-25). *** Two independent findings, either one disqualifying: (1) MISREGISTERED - the QA overlay (tools/qa_overlay.py -> derived/qa_map-the-old-world.png) shows the committed coastline cutting straight across the middle of the drawn landmass. Cause: S2 shifted the CANVAS-side control points to follow the refined config/canvas_frame.ANCHORS but never re-verified them against the generated mask, and a thin-plate warp is exact at its control points, so the whole residual sits in the picks themselves. (2) NOT A CHLOROPLETH - it is a relief illustration with lettered labels, so even a perfect registration yields no traceable closed region boundaries. (2) is the decisive one: re-registering would not have helped, which is why S3a took the IE parchment family instead. The record is KEPT, not deleted (user decision #4, 2026-07-25) because its SOURCE-side picks are still good landmark identifications and a future re-registration should start from them. Until the canvas side is re-picked against the committed mask, nothing may consume this record for geometry. Original S1/S2 notes follow. --- GW regional map, top-down (N at top-right). Authoritative for Old World / Badlands / Dark Lands / Araby / Land of the Dead state & province boundaries (S3), and for the v1 canon river courses (S2) - it is the only registered source that draws named rivers legibly, hence rivers precedence 90. Canvas coordinates and footprint were shifted in S2 to follow the refined config/canvas_frame.ANCHORS. The 'WORLD MAP' locator inset (top-left, ~x[70,530] y[130,510]) and the decorative figures/ship drawn over the ocean must be masked out when segmenting - a single crop bbox cannot exclude an interior inset. Low coastline precedence: a stylised illustration should not be allowed to move the shoreline the Terraqueous NE-II fit sets. MIGRATED to the Miller canvas frame (migrate_frame_coords.py, 2026-08-04). Control points and footprint were carried through lon/lat, not re-picked: canvas px -> old plate carree -> lon/lat -> Miller. The source-side picks are untouched, so the features they name are unchanged.",
   "control_points": [
-    {"source": [1418, 104], "canvas": [4125, 370], "note": "Norsca"},
-    {"source": [935, 749], "canvas": [3781, 870], "note": "Estalia (SW peninsula)"},
-    {"source": [1568, 499], "canvas": [4224, 610], "note": "Empire (centre)"},
-    {"source": [694, 1082], "canvas": [3654, 1350], "note": "Araby (NW desert coast)"},
-    {"source": [1448, 1560], "canvas": [4208, 1479], "note": "Land of the Dead / Khemri"},
-    {"source": [2202, 770], "canvas": [4966, 686], "note": "Dark Lands"},
-    {"source": [2714, 1290], "canvas": [5232, 1391], "note": "Dragon Isles (E)"}
+    {
+      "source": [1418, 104],
+      "canvas": [4127.0, 470.15],
+      "note": "Norsca"
+    },
+    {
+      "source": [935, 749],
+      "canvas": [3783.0, 1147.46],
+      "note": "Estalia (SW peninsula)"
+    },
+    {
+      "source": [1568, 499],
+      "canvas": [4226.0, 818.77],
+      "note": "Empire (centre)"
+    },
+    {
+      "source": [694, 1082],
+      "canvas": [3656.0, 1677.85],
+      "note": "Araby (NW desert coast)"
+    },
+    {
+      "source": [1448, 1560],
+      "canvas": [4210.0, 1810.74],
+      "note": "Land of the Dead / Khemri"
+    },
+    {
+      "source": [2202, 770],
+      "canvas": [4968.0, 919.16],
+      "note": "Dark Lands"
+    },
+    {
+      "source": [2714, 1290],
+      "canvas": [5234.0, 1720.37],
+      "note": "Dragon Isles (E)"
+    }
   ]
 }

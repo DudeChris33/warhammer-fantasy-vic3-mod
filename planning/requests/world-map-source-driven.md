@@ -3,9 +3,15 @@
 | Field | Value |
 |-------|-------|
 | Type | request |
-| Status | planned |
+| Status | superseded |
 | Date | 2026-07-21 |
 | Priority | high |
+
+> **Superseded (2026-08-04) by
+> [world-map-miller-projection-canvas.md](world-map-miller-projection-canvas.md).**
+> Every artifact this request produced was built on the plate-carrée canvas that
+> request replaces. Its *measurements* remain citable — a measurement does not go
+> stale — but none of its rulings, sequencing or open questions bind further work.
 
 > **Supersedes [world-map.md](world-map.md) and its child plans [world-map-p2-heightmap.md](world-map-p2-heightmap.md) / [world-map-p3-provinces-states.md](world-map-p3-provinces-states.md) / [world-map-p4-scaffold-boot.md](world-map-p4-scaffold-boot.md).** Same end goal (entire Known World physical map + throwaway scaffold that boots into a session), same canvas, same MP-safety model. What changes is the **front of the pipeline**: geometry is now **derived from committed reference imagery** (`sources/`) instead of hand-encoded as JSON coordinate lists. The built P1 toolchain ([world-map-p1-tooling.md](../done/world-map-p1-tooling.md)) is **reused**, not discarded — this redo replaces the geometry-authoring model, not the whole toolchain.
 

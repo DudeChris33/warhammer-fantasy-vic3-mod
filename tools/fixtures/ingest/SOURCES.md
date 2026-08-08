@@ -19,5 +19,5 @@ python tools/run_fixture.py --update
 <!-- MANIFEST:BEGIN -->
 | File | Dims | Bytes | SHA-256 | Origin | Role | Registered |
 |---|---|---|---|---|---|---|
-| synthetic_world.png | 256x128 | 2,323 | 808b54756f36e3c2401a0905602b1918fdf3fc0984ffdeea687ec89e4137d46f | Invented for this fixture by make_source.py | Synthetic whole-world ingestion source | yes |
+| synthetic_world.png | 256x128 | 1,977 | e1fda3165b0df41bc03392d83040abb05d586f0dc8da39a9900938a6dd369844 | Invented for this fixture by make_source.py | Synthetic whole-world ingestion source | yes |
 <!-- MANIFEST:END -->

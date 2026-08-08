@@ -159,6 +159,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--step", type=int, default=STEP, help="canvas downscale factor")
     p.add_argument("--labels", action="store_true",
                    help="render the S3a state-label overlay instead of per-source overlays")
+    p.add_argument("--plain", action="store_true",
+                   help="write the warped source alone, with no mask blended over it "
+                        "(and without needing land_sea_mask.png to exist)")
     args = p.parse_args(argv)
 
     if args.labels:
@@ -166,11 +169,28 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit(f"{MASK_PATH} not found — run tools/generate_heightmap.py first")
         return state_label_overlay(args.step)
 
-    if not MASK_PATH.is_file():
-        raise SystemExit(f"{MASK_PATH} not found — run tools/generate_heightmap.py first")
-    land = raster.read_mask_png(MASK_PATH)
-    h, w = land.shape[0] // args.step, land.shape[1] // args.step
-    small = land[::args.step, ::args.step][:h, :w]
+    # --plain is what you want when the question is "where does this source land
+    # on the canvas?" rather than "does it agree with our coastline?" — notably
+    # after a frame change, when the committed mask is the *old* frame's and
+    # drawing it over the top would be actively misleading.
+    # The reduced grid has to stay a *uniform* scaling of the canvas, or the
+    # Miller frame cannot say what latitude its rows are (canvas_frame._scale
+    # refuses a grid that is not). Integer-dividing both axes does not give that
+    # for a step that divides 8192 but not 3616 — step 6 lands on 1365x602 where
+    # the frame wants 603 — so the height is derived from the width instead.
+    w = CANVAS_W // args.step
+    h = round(CANVAS_H * w / CANVAS_W)
+
+    small = None
+    if not args.plain:
+        if not MASK_PATH.is_file():
+            raise SystemExit(f"{MASK_PATH} not found — run tools/generate_heightmap.py first "
+                             f"(or pass --plain to skip the coastline overlay)")
+        land = raster.read_mask_png(MASK_PATH)
+        small = land[::args.step, ::args.step][:h, :w]
+        if small.shape != (h, w):
+            raise SystemExit(f"--step {args.step} gives a {small.shape[1]}x{small.shape[0]} "
+                             f"mask slice but the frame wants {w}x{h}; use a smaller step")
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
 
     all_regs = schema.load_registrations(sources.REGISTRATION_DIR)
@@ -189,12 +209,13 @@ def main(argv: list[str] | None = None) -> int:
             continue
         warped, valid = warp_source(reg, rgb, w, h, by_source)
 
-        # Our coastline drawn over the source: a 1px outline of the mask, in a
-        # colour no reference map uses, so any offset is unmistakable.
-        edge = small ^ ndimage.binary_erosion(small, np.ones((3, 3)))
         img = warped.copy()
         img[~valid] = (img[~valid] * 0.25).astype(np.uint8)
-        img[edge] = (255, 0, 255)
+        if small is not None:
+            # Our coastline drawn over the source: a 1px outline of the mask, in
+            # a colour no reference map uses, so any offset is unmistakable.
+            edge = small ^ ndimage.binary_erosion(small, np.ones((3, 3)))
+            img[edge] = (255, 0, 255)
 
         out = DERIVED_DIR / f"qa_{Path(reg.source).stem}.png"
         raster.write_rgb_png(out, img)

@@ -9,18 +9,62 @@
   },
   "crop": [134, 132, 3866, 2127],
   "footprint": [0, 0, 8192, 3616],
-  "notes": "Terraqueous Globe - Natural Earth II, stated in the map's own legend ('Compromise pseudocylindrical projection Natural Earth II') and confirmed by measurement. S2 REPLACED S1's hand-picked feature control points with exact graticule crossings: the oval's drawn boundary curve was traced across 2001 rows and the NE-II envelope least-squares fitted to it, giving centre (1999.55, 1129.29), scale sx=702.212 sy=702.683, inlier RMS 0.363 px with every traced row inside 10 px. Two independent checks pass - sx/sy = 0.99933 (isotropic, i.e. drawn to true NE-II proportions, which a wrong polynomial could not produce alongside a sub-pixel envelope fit), and the fitted graticule lands within ~2 px of the map's own printed degree labels (170W at x=234, measured 236; equator y=1129, measured 1130; 20S y=1378, measured 1377). The control points below are that fit evaluated at named graticule crossings, so reproject.py recovers the same four constants from them. Crop is the oval interior, inset ~4 px from the drawn boundary rule so the black envelope line is never sampled; the generator clamps into the crop rather than masking, because the canvas seam at lon +-180 lands exactly on that rule. The polar insets (from y=2148) and the title/legend block sit outside it. Highest coastline precedence: this is the only whole-world source registered to sub-pixel accuracy, so it - not the regional relief - defines the shoreline.",
+  "notes": "Terraqueous Globe - Natural Earth II, stated in the map's own legend ('Compromise pseudocylindrical projection Natural Earth II') and confirmed by measurement. The NE-II envelope was fitted in S2 (2026-07-23) by tracing the oval's drawn boundary curve across 2001 rows and least-squares fitting the envelope to it, giving centre (1999.55, 1129.29), scale sx=702.2114 sy=702.6857, inlier RMS 0.363 px with every traced row inside 10 px. Two independent checks pass - sx/sy = 0.99933 (isotropic, i.e. drawn to true NE-II proportions, which a wrong polynomial could not produce alongside a sub-pixel envelope fit), and the fitted graticule lands within ~2 px of the map's own printed degree labels (170W at x=234, measured 236; equator y=1129, measured 1130; 20S y=1378, measured 1377). RE-EMITTED for the Miller canvas (2026-08-04): the S2 fit above is a property of the ARTWORK, not of the canvas, so it was recovered unchanged from the previous record (0.0019 px rms) and re-evaluated at graticule crossings inside the new band. The two old polar picks could not be migrated - they sat at lat +-79.453125, which under Miller is y = -258.6 and +4463.2, off the canvas - so the edge picks are now the band's own limits, 74.9052N and 57.4084S. reproject.py recovers the same four constants from this table to 0.002 px. Crop is the oval interior, inset ~4 px from the drawn boundary rule so the black envelope line is never sampled; the generator clamps into the crop rather than masking, because the canvas seam at lon +-180 lands exactly on that rule. The polar insets (from y=2148) and the title/legend block sit outside it. Highest coastline precedence: this is the only whole-world source registered to sub-pixel accuracy, so it - not the regional relief - defines the shoreline. MIGRATED to the Miller canvas frame (migrate_frame_coords.py, 2026-08-04).",
   "control_points": [
-    {"source": [234.43, 1129.29], "canvas": [227.56, 1808.0], "note": "meridian 170W x equator"},
-    {"source": [1065.07, 1129.29], "canvas": [2048.0, 1808.0], "note": "meridian 90W x equator"},
-    {"source": [1999.55, 1129.29], "canvas": [4096.0, 1808.0], "note": "central meridian x equator"},
-    {"source": [2934.03, 1129.29], "canvas": [6144.0, 1808.0], "note": "meridian 90E x equator"},
-    {"source": [3764.67, 1129.29], "canvas": [7964.44, 1808.0], "note": "meridian 170E x equator"},
-    {"source": [1999.55, 395.26], "canvas": [4096.0, 442.67], "note": "central meridian x 60N"},
-    {"source": [1999.55, 1863.32], "canvas": [4096.0, 3173.33], "note": "central meridian x 60S"},
-    {"source": [847.68, 633.41], "canvas": [1365.33, 897.78], "note": "meridian 120W x 40N"},
-    {"source": [3151.42, 1625.17], "canvas": [6826.67, 2718.22], "note": "meridian 120E x 40S"},
-    {"source": [1999.55, 194.73], "canvas": [4096.0, 0.0], "note": "central meridian x canvas north edge (79.453125N)"},
-    {"source": [1999.55, 2063.85], "canvas": [4096.0, 3616.0], "note": "central meridian x canvas south edge (79.453125S)"}
+    {
+      "source": [234.43, 1129.29],
+      "canvas": [229.56, 2142.0],
+      "note": "meridian 170W x equator"
+    },
+    {
+      "source": [1065.07, 1129.29],
+      "canvas": [2050.0, 2142.0],
+      "note": "meridian 90W x equator"
+    },
+    {
+      "source": [1999.55, 1129.29],
+      "canvas": [4098.0, 2142.0],
+      "note": "central meridian x equator"
+    },
+    {
+      "source": [2934.03, 1129.29],
+      "canvas": [6146.0, 2142.0],
+      "note": "meridian 90E x equator"
+    },
+    {
+      "source": [3764.67, 1129.29],
+      "canvas": [7966.44, 2142.0],
+      "note": "meridian 170E x equator"
+    },
+    {
+      "source": [1999.55, 395.26],
+      "canvas": [4098.0, 581.57],
+      "note": "central meridian x 60N"
+    },
+    {
+      "source": [1999.55, 1746.89],
+      "canvas": [4098.0, 3385.35],
+      "note": "central meridian x 50S"
+    },
+    {
+      "source": [847.68, 633.41],
+      "canvas": [1367.33, 1180.4],
+      "note": "meridian 120W x 40N"
+    },
+    {
+      "source": [3151.42, 1625.17],
+      "canvas": [6828.67, 3103.6],
+      "note": "meridian 120E x 40S"
+    },
+    {
+      "source": [1999.55, 238.18],
+      "canvas": [4098.0, -0.0],
+      "note": "central meridian x canvas north edge (74.9052N)"
+    },
+    {
+      "source": [1999.55, 1833.89],
+      "canvas": [4098.0, 3616.0],
+      "note": "central meridian x canvas south edge (57.4084S)"
+    }
   ]
 }
