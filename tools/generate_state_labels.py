@@ -99,7 +99,7 @@ UNCOVERED_DISTANCE = 72.0
 BOUNDARY_LAYER = "boundaries"
 
 #: Sources consumed for boundaries. Membership is explicit rather than "every
-#: record with a boundary precedence": two S1 records (map-the-old-world.jpg,
+#: record with a boundary precedence": two S1 records (old_world_terrain.jpg,
 #: TheEmpire.webp) still declare one, and both are measured to be misregistered
 #: and are annotated as unusable for geometry. Naming the consumers here means
 #: adding a source is a deliberate edit, not a side effect of a precedence.
@@ -107,20 +107,20 @@ BOUNDARY_LAYER = "boundaries"
 #: a flat fill and whose region lines are drawn over flat terrain fills;
 #: ``ink`` for a textured parchment needing a local-contrast threshold.
 BOUNDARY_SOURCES = {
-    "total_war_map_colored.png": "flat_colour",
-    "wh3_dlc_ie_parchment_map_english.jpg": "ink_bridged",
+    "tww3_colored.png": "flat_colour",
+    "tww3_ie_parchment.jpg": "ink_bridged",
 }
 
 #: Off-map background and legend panels, in each source's own pixels.
 BOUNDARY_EXCLUDE = {
-    "total_war_map_colored.png": [(0, 2450, 330, 3010)],
+    "tww3_colored.png": [(0, 2450, 330, 3010)],
 }
 
 #: The clean counterpart the macro-annotated twin is differenced against. Named
 #: by filename rather than looked up by registration role: it contributes no
 #: geometry at all, only its unannotated pixels, so requiring it to carry a
 #: registration record would be asserting a placement nothing uses.
-MACRO_CLEAN_MASTER = "wh3_dlc_ie_parchment_map_english.jpg"
+MACRO_CLEAN_MASTER = "tww3_ie_parchment.jpg"
 
 #: Ink-threshold parameters for the parchment line networks.
 INK_WINDOW = 41
@@ -319,10 +319,23 @@ def build_land_cells(land: np.ndarray, regs: dict[str, schema.SourceRegistration
 
 def assign_macros(land_labels: np.ndarray, regs: dict[str, schema.SourceRegistration]
                   ) -> tuple[np.ndarray, dict]:
-    """Group land cells into macro regions from the annotated twin."""
+    """Group land cells into macro regions from the annotated twin.
+
+    Degrades to "no macro grouping" (every cell reports macro 0, the existing
+    "outside every macro region" sentinel — see ``macro.assign``) rather than
+    aborting the whole run when no source carries the ``ie_macro_grouping``
+    role. The twin (``pizqenw9rd791.jpg``) was retired from the manifest in the
+    August 2026 sources/ reorg with no replacement registered; restore a
+    twin-equivalent source and register it with that role to bring grouping back.
+    """
     twin_reg = next((r for r in regs.values() if r.role == "ie_macro_grouping"), None)
     if twin_reg is None:
-        raise SystemExit("macro grouping needs the annotated twin")
+        log("  WARNING: no source carries the ie_macro_grouping role — skipping "
+            "macro grouping, every cell reports macro 0")
+        table = np.zeros(int(land_labels.max()) + 1, dtype=np.int32)
+        return table, {"macro_regions": 0, "macro_declared": len(macro.PRINTED_COUNTS),
+                       "macro_filled_from_neighbour": 0, "macro_degraded": False,
+                       "macro_skipped": True}
     twin = sources.load_source_image(twin_reg.source)
 
     # Preferred path: difference the twin against the clean master, which cancels
@@ -516,7 +529,7 @@ def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
         "",
         "Named candidates for closing it, in order of expected value:",
         "",
-        "1. **`the-old-world-...-v3-0-...ml2lq3qfofad1.png`** (already in the manifest,",
+        "1. **`tww3_old_world_mod_parchment.png`** (already in the manifest,",
         "   deliberately unregistered in S3a — see `tools/SOURCES.md`). A denser line",
         "   chloropleth over the Old World arc. It would raise density where we already",
         "   have coverage rather than close the gap, but it is the cheapest next step:",
@@ -532,15 +545,26 @@ def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
         "",
         "## Macro grouping",
         "",
-        f"- {stats['macro_regions']} contours recovered from the annotated twin "
-        f"(it prints {stats['macro_declared']} region labels).",
-    ] + ([
-        "- **⚠ DEGRADED: the clean master was unavailable**, so the contours came from a",
-        "  saturation threshold on the twin alone rather than from differencing the two.",
-        "  Regions that failed to close have merged into neighbours, which means some",
-        "  states are grouped into the wrong macro — silently. Restore",
-        "  `wh3_dlc_ie_parchment_map_english.jpg` to `sources/` and regenerate.",
-    ] if stats.get("macro_degraded") else []) + [
+    ] + (
+        [
+            "- **⚠ SKIPPED: no source carries the `ie_macro_grouping` role.** The annotated",
+            "  twin (`pizqenw9rd791.jpg`) was retired from the manifest in the August 2026",
+            "  sources/ reorg with nothing registered in its place. Every cell reports macro",
+            "  0 (unassigned) below. Register a twin-equivalent source with that role to",
+            "  bring grouping back.",
+            "",
+        ] if stats.get("macro_skipped") else
+        [
+            f"- {stats['macro_regions']} contours recovered from the annotated twin "
+            f"(it prints {stats['macro_declared']} region labels).",
+        ] + ([
+            "- **⚠ DEGRADED: the clean master was unavailable**, so the contours came from a",
+            "  saturation threshold on the twin alone rather than from differencing the two.",
+            "  Regions that failed to close have merged into neighbours, which means some",
+            "  states are grouped into the wrong macro — silently. Restore",
+            "  `tww3_ie_parchment.jpg` to `sources/` and regenerate.",
+        ] if stats.get("macro_degraded") else [])
+    ) + [
         f"- {stats['macro_filled_from_neighbour']} cells fell outside every contour and took "
         "their macro from the nearest neighbour — these are mostly the uncovered regions above.",
         "",

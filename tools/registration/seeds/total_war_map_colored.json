@@ -1,12 +1,12 @@
 {
-  "source": "total_war_map_colored.png",
+  "source": "tww3_colored.png",
   "master_shape": [3010, 4726],
   "objective": "silhouette",
   "footprint_pad": 96,
 
   "_comment_silhouette": "This map's ocean is a single FLAT FILL (16,6,175), so land is exact rather than thresholded - the union of the regions its own drawn black lines enclose, minus the handful of oversized 'cells' that are the off-map background and the legend panel. Every other source here forced a judgement about where water started: a chromaticity distance on the Immortal Empires parchment, and on the Old World fan map a luminance cut that even after being calibrated against hand-drawn sea markings reached only 81% balanced accuracy. A registration can be no better than the silhouette it is scored against, which is why this source displaced the IE family as primary.",
   "silhouette": {
-    "from": "total_war_map_colored.png",
+    "from": "tww3_colored.png",
     "kind": "flat_colour",
     "to_master_scale": [1.0, 1.0],
     "min_component": 300,

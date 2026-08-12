@@ -5,7 +5,7 @@
 
   "_comment": "Same frame as the parchment master, matched by multi-scale normalised cross-correlation: full width x[8..3692] of the master over this image's 2560 px, vertically cropped to y[224..2296] over its 1440 px, isotropic ratio 1.4391 / 1.4389, peak NCC 0.6701. scale converts this source's pixels into master pixels; offset is where the crop starts.",
   "frame_alias": {
-    "of": "wh3_dlc_ie_parchment_map_english.jpg",
+    "of": "tww3_ie_parchment.jpg",
     "scale": [1.4390625, 1.4388889],
     "offset": [8.0, 224.0]
   },

@@ -35,7 +35,7 @@ import numpy as np
 from scipy import ndimage
 
 #: Chromaticity of the bare IE parchment, measured as the median of a known
-#: open-sea block on ``3274025515_preview_WH3 climate map 6.0.3.jpg``.
+#: open-sea block on ``tww3_climate.jpg`` (was ``3274025515_preview_WH3 climate map 6.0.3.jpg``).
 PARCHMENT_RG = (0.4436, 0.3344)
 
 #: Chromaticity distance beyond which a pixel is "painted" rather than paper.

@@ -17,7 +17,7 @@
   "source": "total_war_states_per_strat_region.jpg",
   "projection": "frame_alias",
   "frame_alias": {
-    "of": "wh3_dlc_ie_parchment_map_english.jpg",
+    "of": "tww3_ie_parchment.jpg",
     "scale": [
       1.8081055,
       1.8079096

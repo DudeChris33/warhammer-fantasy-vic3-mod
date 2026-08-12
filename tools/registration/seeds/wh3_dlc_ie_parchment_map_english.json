@@ -1,12 +1,12 @@
 {
-  "source": "wh3_dlc_ie_parchment_map_english.jpg",
+  "source": "tww3_ie_parchment.jpg",
   "master_shape": [2880, 3703],
   "objective": "silhouette",
   "footprint_pad": 96,
 
   "_comment_silhouette": "The parchment master itself has no land/sea signal a threshold can find - its sea is the same paper as its land, distinguished only by a drawn shore wash. Its climate-map sibling paints every land region in a saturated fill, so it is the only member of the family whose land is measurable, and it is therefore the objective the whole family is fitted on. to_master_scale converts climate px to master px (3703/2471, 2880/1922), measured exactly. The exclude box is the legend panel, which is correctly detected as painted and is simply not terrain.",
   "silhouette": {
-    "from": "3274025515_preview_WH3 climate map 6.0.3.jpg",
+    "from": "tww3_climate.jpg",
     "to_master_scale": [1.4985835, 1.4984391],
     "exclude": [[2040, 0, 2471, 400]],
     "min_component": 400

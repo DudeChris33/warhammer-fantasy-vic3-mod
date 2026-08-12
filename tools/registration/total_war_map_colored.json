@@ -14,7 +14,7 @@
     3000
   ],
   "notes": "Flat-filled fan map of the Total War Warhammer world with region boundaries drawn as black lines - the PRIMARY boundary source from S3a onward. Three properties put it ahead of everything else tried: its ocean is a flat fill so the land silhouette is exact rather than thresholded; its region lines sit on flat terrain fills, so labelling the complement gives 681 clean closed cells with no local-contrast ink test, no lettering to inpaint and no coastal shadow band to mistake for a border; and 681 cells against our 659 land-state target means the source's own regions become our states almost one-for-one, instead of a thousand noisy cells being merged down. Contributes interior boundaries only - never coastline (coastline precedence 5). The committed land_sea_mask.png remains the sole coastline authority. MACHINE-FITTED by tools/fit_registration.py from tools/registration/seeds/total_war_map_colored.json; re-derive rather than hand-edit. FIT: {\"anisotropy_p99\": 3.0, \"coarse_iou\": 0.5352, \"folded_fraction\": 0.0, \"landmark_check_px\": {\"max\": 844.6, \"mean\": 312.2}, \"landmarks\": 10, \"lattice\": \"10x8\", \"method\": \"coarse affine + thin-plate lattice refined on two-sided silhouette IoU\", \"move\": {\"max_px\": 373.7378760575385, \"mean_px\": 147.49949658012667, \"n\": 80, \"p90_px\": 272.3646726733283}, \"refined_iou\": 0.6617}",
-  "source": "total_war_map_colored.png",
+  "source": "tww3_colored.png",
   "projection": "control_point_warp",
   "footprint": [
     756.5129999999999,

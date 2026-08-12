@@ -15,7 +15,7 @@ signal, so a regression is visible without opening the image.
 Usage::
 
     python tools/qa_overlay.py                    # every registered source
-    python tools/qa_overlay.py map-the-old-world.jpg
+    python tools/qa_overlay.py old_world_terrain.jpg
 """
 
 from __future__ import annotations

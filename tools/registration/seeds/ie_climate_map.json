@@ -1,10 +1,10 @@
 {
-  "source": "3274025515_preview_WH3 climate map 6.0.3.jpg",
+  "source": "tww3_climate.jpg",
   "record_stem": "ie_climate_map",
   "objective": "frame_alias",
 
   "_comment": "Same frame as the parchment master, scaled by exactly 2471/3703 = 1922/2880. scale converts THIS source's pixels into master pixels, so it is the reciprocal: 3703/2471 = 1.4985835 and 2880/1922 = 1.4984391. The two axes differ in the fifth decimal, so both are carried rather than one averaged figure. This is the sibling whose flat climate fills gave the master's registration a measurable objective in the first place (see the master's record).",
-  "frame_alias": {"of": "wh3_dlc_ie_parchment_map_english.jpg", "scale": [1.4985835, 1.4984391], "offset": [0.0, 0.0]},
+  "frame_alias": {"of": "tww3_ie_parchment.jpg", "scale": [1.4985835, 1.4984391], "offset": [0.0, 0.0]},
 
   "record": {
     "role": "ie_climate_registration_objective",
