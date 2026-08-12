@@ -14,7 +14,9 @@ There is no compiler and no automated test suite for Clausewitz script — valid
 Map text and bitmaps additionally have an **offline** validator — there is no
 reason to load the game to catch a duplicate province claim or a missing hub.
 One-time setup: create a local virtualenv and install the pinned deps — see
-`tools/requirements.txt` for the exact commands. Before committing anything
+`tools/requirements.txt` for the exact commands. The project convention is a
+`tools/.venv` (already gitignored) — activate it before running any `tools/`
+script. Before committing anything
 under `map_data/` (province bitmap, `heightmap.png`, `rivers.png`,
 `state_regions/`, `default.map`), the map localization, or the
 source-registration data (`tools/SOURCES.md`, `tools/registration/`), run:

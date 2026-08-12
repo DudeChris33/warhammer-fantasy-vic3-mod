@@ -55,13 +55,17 @@ Key artifacts and facts:
 - `tools/derived/land_sea_mask.png` — the land/sea authority downstream.
 - `map_data/rivers.png` — generated river network; palette semantics measured from
   vanilla in `tools/lut/rivers_palette.json` and `tools/worldgen/schema.py`.
-- `tools/config/canvas_frame.py` — the frame. `LAT_MAX = 79.453125`; the canvas is
-  8192 px wide and knowingly extends past what the trusted source draws.
+- `tools/config/canvas_frame.py` — the frame, **Miller cylindrical**:
+  `LAT_TOP ≈ 74.905N`, `LAT_BOTTOM ≈ 57.408S`, measured from vanilla and pinned to
+  the user's drawn northern limit. The canvas top edge sits on that line; the
+  band is asymmetric because the whole forced latitude cut is spent in the south.
 - `sources/terraqueous_globe.jpg` — designated trusted silhouette, sole owner of
   the coastline layer (`layer_precedence.coastline: 90`).
-- `tools/generate_heightmap.py` — `CANVAS_MIN_BLOB = 256`, `SOURCE_MIN_BLOB = 900`;
-  both thresholds are fixed in *source* pixels against a latitude-dependent
-  reprojection stretch (~2.3x area difference between the equator and 79.45N).
+- `tools/generate_heightmap.py` — `CANVAS_MIN_BLOB = 256` (the sole area
+  despeckle, in *canvas* px), `SOURCE_MAJORITY = 3` (source-side denoise only).
+  Area control is canvas-side on purpose: under Miller the source-to-canvas
+  stretch runs ~4x in area between the equator and the top edge, so a source-px
+  threshold is latitude-blind.
 
 Measure with the committed venv, using the repo's own idiom:
 
@@ -74,8 +78,9 @@ rewrites committed artifacts.
 
 ## Physical checklist
 
-**Latitude and climate.** The frame runs to 79.45N. Check that polar bands are
-polar (frozen waste, ice), that the tropics sit where the sources put them, and
+**Latitude and climate.** The frame runs to 74.9N at the top edge and 57.4S at
+the bottom. Check that polar bands are polar (frozen waste, ice), that the tropics
+sit where the sources put them, and
 that biome assignment tracks latitude and elevation rather than source ink colour.
 Cathay, Lustria, the Southlands and Nehekhara should not share a climate band with
 Norsca.

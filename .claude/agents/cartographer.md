@@ -52,10 +52,11 @@ generators (`tools/generate_heightmap.py`, `generate_rivers.py`,
 `tools/derived/state_labels.png`) and QA renders (`tools/derived/qa_*.png`,
 `preview_*.png`).
 
-The canvas is 8192 px wide; the frame is defined in
-`tools/config/canvas_frame.py` (`LAT_MAX = 79.453125`).
-`sources/terraqueous_globe.jpg` is the designated trusted silhouette and sole
-owner of the coastline layer.
+The canvas is 8192 px wide; the frame is **Miller cylindrical**, defined in
+`tools/config/canvas_frame.py` (`LAT_TOP ≈ 74.905N`, `LAT_BOTTOM ≈ 57.408S`,
+measured from vanilla's own bitmap and pinned to the user's drawn northern
+limit). `sources/terraqueous_globe.jpg` is the designated trusted silhouette and
+sole owner of the coastline layer.
 
 Measure with the committed venv, using the repo's own idiom:
 
@@ -94,9 +95,10 @@ and map-sheet borders promoted to coastline are a known failure mode here.
 nothing about whether interior borders survived the warp. Check warp anisotropy
 (the committed bound is 3.0; the failure measured median 2.63, p90 6.85, p99 20.1,
 max 394). Check that a declared registration footprint is actually enforced, not
-merely recorded. Check reprojection stretch: canvas-px-per-source-px varies ~2.3x
-in area between the equator and 79.45N, so any threshold fixed in source pixels is
-latitude-blind and behaves differently at the poles.
+merely recorded. Check reprojection stretch: under Miller, canvas-px-per-source-px
+varies ~4x in area between the equator and the 74.9N top edge, so any threshold
+fixed in source pixels is latitude-blind and behaves differently at the poles —
+which is exactly why area despeckling now lives canvas-side.
 
 **Anchors and labels.** Region names bind to geometry by anchor point, never by
 contour id (ids are assigned in raster order and reshuffle whenever extraction is
