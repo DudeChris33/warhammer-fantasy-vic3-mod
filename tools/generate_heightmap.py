@@ -6,7 +6,10 @@ Pipeline::
     sources/terraqueous_globe.jpg  (SHA-256 verified)
         -> denoise -> LUT classify        (elevation + land, at SOURCE res)
         -> NE-II reproject                (to canvas res, blocked)
-        -> morphological cleanup          -> tools/derived/land_sea_mask.png
+        -> morphological cleanup
+        -> keep ocean + curated lakes,    (fill enclosed false water — rivers drawn
+           fill the rest of the water      in ocean-blue, flooded marshes — to land)
+                                          -> tools/derived/land_sea_mask.png
         -> reproject at heightmap res
         -> + TW3 high-frequency relief    (inside its footprint, land only)
         -> encode + clamp to the mask     -> map_data/heightmap.png
@@ -53,6 +56,7 @@ REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
 MAP_DATA_DIR = REPO_ROOT / "map_data"
 LUT_PATH = TOOLS_DIR / "lut" / "terraqueous_elevation.json"
+INLAND_LAKES_PATH = TOOLS_DIR / "config" / "inland_lakes.json"
 
 TERRAQUEOUS = "terraqueous_globe.jpg"
 TWW3 = "tww3_map_stitched.png"
@@ -416,6 +420,38 @@ def main(argv: list[str] | None = None) -> int:
     log(f"  despeckle at {CANVAS_MIN_BLOB:,} canvas px: land bodies "
         f"{pre['land_bodies']} -> {stats['land_bodies']}, water bodies "
         f"{pre['water_bodies']} -> {stats['water_bodies']}")
+
+    # --- keep the ocean + curated lakes, fill the rest of the enclosed water ---
+    # The classifier reads drawn rivers (ocean-blue) and flooded marshes as
+    # enclosed water bodies the map does not mean. Fill every enclosed body to
+    # land except a committed allowlist of genuine lakes/seas keyed by a stable
+    # interior seed pixel (config/inland_lakes.json); the open ocean is kept
+    # automatically as the single largest water component. This subsumes the
+    # sub-256 lake despeckle above (it fills every enclosed body regardless of
+    # size), while min_island_area — the archipelago-preserving island floor —
+    # is untouched.
+    lakes = schema.load_inland_lakes(INLAND_LAKES_PATH, canvas=(CANVAS_W, CANVAS_H))
+    on_land = [lk.name for lk in lakes if land[lk.seed[1], lk.seed[0]]]
+    if on_land:
+        raise SystemExit(
+            f"inland-lake seed(s) fell on land after cleanup: {on_land}. clean_land_mask's "
+            f"close/open runs first, so each seed must be re-measured against the freshly "
+            f"generated mask (tools/derived/land_sea_mask.png) before use — refusing to "
+            f"silently drop a kept lake."
+        )
+    land_before_keep = land
+    land = segment.keep_ocean_and_lakes(
+        land, [lk.seed for lk in lakes], wrap_x=map_config.WRAP_X)
+    after = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
+    filled_px = int((land & ~land_before_keep).sum())
+    filled_bodies = stats["water_bodies"] - after["water_bodies"]
+    log(f"  inland water: kept the open ocean + {len(lakes)} curated bodies, filled "
+        f"{filled_bodies} enclosed bodies ({filled_px:,} px, "
+        f"{100 * filled_px / land.size:.3f}% of canvas) to land", t0)
+    log(f"    water bodies {stats['water_bodies']} -> {after['water_bodies']}; "
+        f"land now {100 * after['land_fraction']:.2f}%  "
+        f"(kept: {', '.join(lk.name for lk in lakes)})")
+
     _report_polar_band(land, t0)
     raster.write_mask_png(DERIVED_DIR / "land_sea_mask.png", land)
     log(f"  wrote {DERIVED_DIR / 'land_sea_mask.png'}", t0)

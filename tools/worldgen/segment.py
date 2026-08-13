@@ -120,6 +120,72 @@ def clean_land_mask(land: np.ndarray, min_island_area: int = 24,
     return m
 
 
+def keep_ocean_and_lakes(land: np.ndarray, keep_seeds, wrap_x: bool = True) -> np.ndarray:
+    """Fill every enclosed water body to land, keeping the ocean and named lakes.
+
+    The colour classifier leaves hundreds of enclosed (non-ocean-connected) water
+    bodies the map does not mean — rivers drawn in ocean-blue, marshes flooded to
+    a shallow-ocean tone. This labels the water (wrap-aware), keeps the single
+    largest component (the open ocean) plus every component that contains one of
+    ``keep_seeds`` — each an ``(x, y)`` interior water pixel of a body to preserve
+    — and sets all other water to land.
+
+    Additive and deterministic: it never removes land, relies only on
+    ``ndimage.label``'s fixed 4-connectivity and a sorted seed set (no RNG), and
+    leaves the coastline of the kept bodies exactly where it was. A seed that
+    resolves to land (label 0) is ignored here; the caller is expected to assert
+    its seeds are water first, so a mis-entered seed fails loudly upstream rather
+    than silently dropping a lake.
+    """
+    water = ~land
+    lab, n = _label_wrap(water, wrap_x)
+    if n == 0:
+        return land.copy()
+    sizes = np.bincount(lab.ravel())
+    sizes[0] = 0                        # label 0 is land, never the open ocean
+    keep = {int(sizes.argmax())}        # the open ocean = largest water component
+    for (x, y) in sorted(keep_seeds):
+        lbl = int(lab[y, x])
+        if lbl != 0:
+            keep.add(lbl)
+    kept_water = np.isin(lab, np.array(sorted(keep), dtype=lab.dtype))
+    return land | (water & ~kept_water)
+
+
+def _label_wrap(mask: np.ndarray, wrap_x: bool) -> tuple[np.ndarray, int]:
+    """4-connected component labels of ``mask``, stitching the x=0/x=W-1 seam.
+
+    ``ndimage.label`` has no periodic mode. Padding by a column and trimming does
+    not unify a seam-crossing body — the two edges keep the interior copy's label,
+    which differ — so the seam is stitched explicitly: the only cross-seam
+    adjacencies under 4-connectivity are ``(y, 0)`` next to ``(y, W-1)``, so one
+    pass down that column pair with a union-find is exact. Returns ``(labels,
+    n_components)`` where 0 is background; the returned ``n`` is the count *before*
+    the stitch (an upper bound, sufficient for the caller's "any components?"
+    guard).
+    """
+    lab, n = ndimage.label(mask)        # default structure is 4-connectivity
+    if not wrap_x or n == 0:
+        return lab, n
+    seam = np.flatnonzero(mask[:, 0] & mask[:, -1])
+    if seam.size:
+        parent = np.arange(n + 1)
+
+        def find(a: int) -> int:
+            while parent[a] != a:
+                parent[a] = parent[parent[a]]
+                a = parent[a]
+            return a
+
+        for y in seam.tolist():
+            ra, rb = find(int(lab[y, 0])), find(int(lab[y, -1]))
+            if ra != rb:
+                parent[max(ra, rb)] = min(ra, rb)
+        remap = np.array([find(i) for i in range(n + 1)], dtype=lab.dtype)
+        lab = remap[lab]
+    return lab, n
+
+
 def mask_stats(land: np.ndarray, wrap_x: bool = True) -> dict:
     """Descriptive counts for the build log / validator."""
     pad = 1 if wrap_x else 0

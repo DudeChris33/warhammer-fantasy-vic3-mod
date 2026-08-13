@@ -3,11 +3,11 @@
   8192,
   3616
  ],
- "land_cells": 771,
- "sea_cells": 177,
+ "land_cells": 772,
+ "sea_cells": 106,
  "target_land_states": 659,
  "target_sea_zones": 103,
- "target_area": 16401,
+ "target_area": 16564,
  "cells": [
   {
    "label": 1,
@@ -70,7 +70,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0008",
    "macro": 0,
-   "area": 23602,
+   "area": 23235,
    "coastal": false
   },
   {
@@ -78,7 +78,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0009",
    "macro": 0,
-   "area": 15507,
+   "area": 13213,
    "coastal": false
   },
   {
@@ -86,7 +86,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0010",
    "macro": 0,
-   "area": 21465,
+   "area": 35994,
    "coastal": false
   },
   {
@@ -94,7 +94,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0011",
    "macro": 0,
-   "area": 19134,
+   "area": 19070,
    "coastal": false
   },
   {
@@ -102,7 +102,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0012",
    "macro": 0,
-   "area": 7717,
+   "area": 17015,
    "coastal": false
   },
   {
@@ -110,15 +110,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0013",
    "macro": 0,
-   "area": 18180,
-   "coastal": true
+   "area": 6860,
+   "coastal": false
   },
   {
    "label": 14,
    "kind": "land",
    "key": "STATE_MACRO00_0014",
    "macro": 0,
-   "area": 6174,
+   "area": 18180,
    "coastal": true
   },
   {
@@ -126,7 +126,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0015",
    "macro": 0,
-   "area": 13984,
+   "area": 6174,
    "coastal": true
   },
   {
@@ -134,7 +134,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0016",
    "macro": 0,
-   "area": 404,
+   "area": 13984,
    "coastal": true
   },
   {
@@ -142,7 +142,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0017",
    "macro": 0,
-   "area": 1152,
+   "area": 404,
    "coastal": true
   },
   {
@@ -150,7 +150,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0018",
    "macro": 0,
-   "area": 5952,
+   "area": 1152,
    "coastal": true
   },
   {
@@ -158,7 +158,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0019",
    "macro": 0,
-   "area": 10800,
+   "area": 5952,
    "coastal": true
   },
   {
@@ -166,7 +166,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0020",
    "macro": 0,
-   "area": 5856,
+   "area": 10800,
    "coastal": true
   },
   {
@@ -174,7 +174,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0021",
    "macro": 0,
-   "area": 13764,
+   "area": 5856,
    "coastal": true
   },
   {
@@ -182,7 +182,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0022",
    "macro": 0,
-   "area": 3229,
+   "area": 13764,
    "coastal": true
   },
   {
@@ -190,7 +190,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0023",
    "macro": 0,
-   "area": 733,
+   "area": 3229,
    "coastal": true
   },
   {
@@ -198,7 +198,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0024",
    "macro": 0,
-   "area": 13903,
+   "area": 733,
    "coastal": true
   },
   {
@@ -206,7 +206,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0025",
    "macro": 0,
-   "area": 355,
+   "area": 13903,
    "coastal": true
   },
   {
@@ -214,7 +214,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0026",
    "macro": 0,
-   "area": 15398,
+   "area": 355,
    "coastal": true
   },
   {
@@ -222,7 +222,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0027",
    "macro": 0,
-   "area": 11791,
+   "area": 15398,
    "coastal": true
   },
   {
@@ -230,55 +230,55 @@
    "kind": "land",
    "key": "STATE_MACRO00_0028",
    "macro": 0,
-   "area": 10431,
-   "coastal": false
+   "area": 11791,
+   "coastal": true
   },
   {
    "label": 29,
    "kind": "land",
    "key": "STATE_MACRO00_0029",
    "macro": 0,
-   "area": 9081,
-   "coastal": true
+   "area": 10431,
+   "coastal": false
   },
   {
    "label": 30,
    "kind": "land",
    "key": "STATE_MACRO00_0030",
    "macro": 0,
-   "area": 25651,
-   "coastal": true
+   "area": 9514,
+   "coastal": false
   },
   {
    "label": 31,
    "kind": "land",
    "key": "STATE_MACRO00_0031",
    "macro": 0,
-   "area": 34384,
-   "coastal": true
+   "area": 26255,
+   "coastal": false
   },
   {
    "label": 32,
    "kind": "land",
    "key": "STATE_MACRO00_0032",
    "macro": 0,
-   "area": 13312,
-   "coastal": true
+   "area": 35073,
+   "coastal": false
   },
   {
    "label": 33,
    "kind": "land",
    "key": "STATE_MACRO00_0033",
    "macro": 0,
-   "area": 10970,
-   "coastal": true
+   "area": 13268,
+   "coastal": false
   },
   {
    "label": 34,
    "kind": "land",
    "key": "STATE_MACRO00_0034",
    "macro": 0,
-   "area": 34489,
+   "area": 11387,
    "coastal": false
   },
   {
@@ -286,7 +286,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0035",
    "macro": 0,
-   "area": 9394,
+   "area": 34489,
    "coastal": false
   },
   {
@@ -294,15 +294,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0036",
    "macro": 0,
-   "area": 19416,
-   "coastal": true
+   "area": 9394,
+   "coastal": false
   },
   {
    "label": 37,
    "kind": "land",
    "key": "STATE_MACRO00_0037",
    "macro": 0,
-   "area": 15658,
+   "area": 19820,
    "coastal": false
   },
   {
@@ -310,7 +310,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0038",
    "macro": 0,
-   "area": 6396,
+   "area": 15658,
    "coastal": false
   },
   {
@@ -318,7 +318,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0039",
    "macro": 0,
-   "area": 13817,
+   "area": 6396,
    "coastal": false
   },
   {
@@ -326,7 +326,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0040",
    "macro": 0,
-   "area": 5762,
+   "area": 13817,
    "coastal": false
   },
   {
@@ -334,15 +334,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0041",
    "macro": 0,
-   "area": 24514,
-   "coastal": true
+   "area": 25985,
+   "coastal": false
   },
   {
    "label": 42,
    "kind": "land",
    "key": "STATE_MACRO00_0042",
    "macro": 0,
-   "area": 14847,
+   "area": 24790,
    "coastal": false
   },
   {
@@ -350,7 +350,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0043",
    "macro": 0,
-   "area": 32040,
+   "area": 14847,
    "coastal": false
   },
   {
@@ -358,7 +358,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0044",
    "macro": 0,
-   "area": 7202,
+   "area": 32040,
    "coastal": false
   },
   {
@@ -366,7 +366,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0045",
    "macro": 0,
-   "area": 8980,
+   "area": 7202,
    "coastal": false
   },
   {
@@ -374,15 +374,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0046",
    "macro": 0,
-   "area": 31569,
-   "coastal": true
+   "area": 8980,
+   "coastal": false
   },
   {
    "label": 47,
    "kind": "land",
    "key": "STATE_MACRO00_0047",
    "macro": 0,
-   "area": 25894,
+   "area": 31569,
    "coastal": true
   },
   {
@@ -390,15 +390,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0048",
    "macro": 0,
-   "area": 11858,
-   "coastal": false
+   "area": 25894,
+   "coastal": true
   },
   {
    "label": 49,
    "kind": "land",
    "key": "STATE_MACRO00_0049",
    "macro": 0,
-   "area": 16588,
+   "area": 11858,
    "coastal": false
   },
   {
@@ -406,7 +406,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0050",
    "macro": 0,
-   "area": 13363,
+   "area": 16588,
    "coastal": false
   },
   {
@@ -414,7 +414,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0051",
    "macro": 0,
-   "area": 32563,
+   "area": 13363,
    "coastal": false
   },
   {
@@ -422,32 +422,32 @@
    "kind": "land",
    "key": "STATE_MACRO00_0052",
    "macro": 0,
-   "area": 19977,
-   "coastal": true
+   "area": 20074,
+   "coastal": false
   },
   {
    "label": 53,
    "kind": "land",
    "key": "STATE_MACRO00_0053",
    "macro": 0,
-   "area": 20074,
-   "coastal": false
+   "area": 6400,
+   "coastal": true
   },
   {
    "label": 54,
    "kind": "land",
    "key": "STATE_MACRO00_0054",
    "macro": 0,
-   "area": 6400,
-   "coastal": true
+   "area": 16928,
+   "coastal": false
   },
   {
    "label": 55,
    "kind": "land",
    "key": "STATE_MACRO00_0055",
    "macro": 0,
-   "area": 16538,
-   "coastal": true
+   "area": 32517,
+   "coastal": false
   },
   {
    "label": 56,
@@ -470,15 +470,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0058",
    "macro": 0,
-   "area": 14927,
-   "coastal": true
+   "area": 14995,
+   "coastal": false
   },
   {
    "label": 59,
    "kind": "land",
    "key": "STATE_MACRO00_0059",
    "macro": 0,
-   "area": 30776,
+   "area": 31821,
    "coastal": true
   },
   {
@@ -510,16 +510,16 @@
    "kind": "land",
    "key": "STATE_MACRO00_0063",
    "macro": 0,
-   "area": 6821,
-   "coastal": true
+   "area": 19582,
+   "coastal": false
   },
   {
    "label": 64,
    "kind": "land",
    "key": "STATE_MACRO00_0064",
    "macro": 0,
-   "area": 19518,
-   "coastal": false
+   "area": 6821,
+   "coastal": true
   },
   {
    "label": 65,
@@ -542,7 +542,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0067",
    "macro": 0,
-   "area": 33866,
+   "area": 20318,
    "coastal": true
   },
   {
@@ -550,23 +550,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0068",
    "macro": 0,
-   "area": 20017,
-   "coastal": true
+   "area": 21248,
+   "coastal": false
   },
   {
    "label": 69,
    "kind": "land",
    "key": "STATE_MACRO00_0069",
    "macro": 0,
-   "area": 22781,
-   "coastal": true
+   "area": 6041,
+   "coastal": false
   },
   {
    "label": 70,
    "kind": "land",
    "key": "STATE_MACRO00_0070",
    "macro": 0,
-   "area": 6041,
+   "area": 19061,
    "coastal": false
   },
   {
@@ -574,15 +574,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0071",
    "macro": 0,
-   "area": 18945,
-   "coastal": true
+   "area": 22785,
+   "coastal": false
   },
   {
    "label": 72,
    "kind": "land",
    "key": "STATE_MACRO00_0072",
    "macro": 0,
-   "area": 19747,
+   "area": 25627,
    "coastal": true
   },
   {
@@ -590,8 +590,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0073",
    "macro": 0,
-   "area": 25627,
-   "coastal": true
+   "area": 15822,
+   "coastal": false
   },
   {
    "label": 74,
@@ -606,7 +606,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0075",
    "macro": 0,
-   "area": 12519,
+   "area": 20819,
    "coastal": false
   },
   {
@@ -614,7 +614,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0076",
    "macro": 0,
-   "area": 20819,
+   "area": 20167,
    "coastal": false
   },
   {
@@ -622,15 +622,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0077",
    "macro": 0,
-   "area": 20167,
-   "coastal": false
+   "area": 34104,
+   "coastal": true
   },
   {
    "label": 78,
    "kind": "land",
    "key": "STATE_MACRO00_0078",
    "macro": 0,
-   "area": 34104,
+   "area": 12788,
    "coastal": true
   },
   {
@@ -638,7 +638,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0079",
    "macro": 0,
-   "area": 12788,
+   "area": 11146,
    "coastal": true
   },
   {
@@ -646,7 +646,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0080",
    "macro": 0,
-   "area": 11146,
+   "area": 13872,
    "coastal": true
   },
   {
@@ -654,39 +654,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0081",
    "macro": 0,
-   "area": 13872,
-   "coastal": true
+   "area": 25759,
+   "coastal": false
   },
   {
    "label": 82,
    "kind": "land",
    "key": "STATE_MACRO00_0082",
    "macro": 0,
-   "area": 25759,
-   "coastal": false
+   "area": 22861,
+   "coastal": true
   },
   {
    "label": 83,
    "kind": "land",
    "key": "STATE_MACRO00_0083",
    "macro": 0,
-   "area": 22861,
-   "coastal": true
+   "area": 13885,
+   "coastal": false
   },
   {
    "label": 84,
    "kind": "land",
    "key": "STATE_MACRO00_0084",
    "macro": 0,
-   "area": 13418,
-   "coastal": true
+   "area": 21601,
+   "coastal": false
   },
   {
    "label": 85,
    "kind": "land",
    "key": "STATE_MACRO00_0085",
    "macro": 0,
-   "area": 21601,
+   "area": 8090,
    "coastal": false
   },
   {
@@ -694,7 +694,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0086",
    "macro": 0,
-   "area": 8090,
+   "area": 33494,
    "coastal": false
   },
   {
@@ -702,15 +702,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0087",
    "macro": 0,
-   "area": 33188,
-   "coastal": true
+   "area": 16586,
+   "coastal": false
   },
   {
    "label": 88,
    "kind": "land",
    "key": "STATE_MACRO00_0088",
    "macro": 0,
-   "area": 16586,
+   "area": 29427,
    "coastal": false
   },
   {
@@ -718,7 +718,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0089",
    "macro": 0,
-   "area": 29427,
+   "area": 27955,
    "coastal": false
   },
   {
@@ -726,7 +726,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0090",
    "macro": 0,
-   "area": 27653,
+   "area": 20730,
    "coastal": true
   },
   {
@@ -734,47 +734,47 @@
    "kind": "land",
    "key": "STATE_MACRO00_0091",
    "macro": 0,
-   "area": 20730,
-   "coastal": true
+   "area": 16673,
+   "coastal": false
   },
   {
    "label": 92,
    "kind": "land",
    "key": "STATE_MACRO00_0092",
    "macro": 0,
-   "area": 16673,
-   "coastal": false
+   "area": 16274,
+   "coastal": true
   },
   {
    "label": 93,
    "kind": "land",
    "key": "STATE_MACRO00_0093",
    "macro": 0,
-   "area": 16274,
-   "coastal": true
+   "area": 12935,
+   "coastal": false
   },
   {
    "label": 94,
    "kind": "land",
    "key": "STATE_MACRO00_0094",
    "macro": 0,
-   "area": 12935,
-   "coastal": false
+   "area": 15536,
+   "coastal": true
   },
   {
    "label": 95,
    "kind": "land",
    "key": "STATE_MACRO00_0095",
    "macro": 0,
-   "area": 15536,
-   "coastal": true
+   "area": 32120,
+   "coastal": false
   },
   {
    "label": 96,
    "kind": "land",
    "key": "STATE_MACRO00_0096",
    "macro": 0,
-   "area": 32120,
+   "area": 10330,
    "coastal": false
   },
   {
@@ -782,16 +782,16 @@
    "kind": "land",
    "key": "STATE_MACRO00_0097",
    "macro": 0,
-   "area": 10330,
-   "coastal": false
+   "area": 9738,
+   "coastal": true
   },
   {
    "label": 98,
    "kind": "land",
    "key": "STATE_MACRO00_0098",
    "macro": 0,
-   "area": 9738,
-   "coastal": true
+   "area": 14482,
+   "coastal": false
   },
   {
    "label": 99,
@@ -806,39 +806,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0100",
    "macro": 0,
-   "area": 12197,
-   "coastal": true
+   "area": 24661,
+   "coastal": false
   },
   {
    "label": 101,
    "kind": "land",
    "key": "STATE_MACRO00_0101",
    "macro": 0,
-   "area": 24644,
-   "coastal": true
+   "area": 25175,
+   "coastal": false
   },
   {
    "label": 102,
    "kind": "land",
    "key": "STATE_MACRO00_0102",
    "macro": 0,
-   "area": 25175,
-   "coastal": false
+   "area": 8711,
+   "coastal": true
   },
   {
    "label": 103,
    "kind": "land",
    "key": "STATE_MACRO00_0103",
    "macro": 0,
-   "area": 8711,
-   "coastal": true
+   "area": 26196,
+   "coastal": false
   },
   {
    "label": 104,
    "kind": "land",
    "key": "STATE_MACRO00_0104",
    "macro": 0,
-   "area": 26196,
+   "area": 8938,
    "coastal": false
   },
   {
@@ -846,7 +846,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0105",
    "macro": 0,
-   "area": 8938,
+   "area": 7904,
    "coastal": false
   },
   {
@@ -854,7 +854,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0106",
    "macro": 0,
-   "area": 7904,
+   "area": 12209,
    "coastal": false
   },
   {
@@ -862,24 +862,24 @@
    "kind": "land",
    "key": "STATE_MACRO00_0107",
    "macro": 0,
-   "area": 12209,
-   "coastal": false
+   "area": 22269,
+   "coastal": true
   },
   {
    "label": 108,
    "kind": "land",
    "key": "STATE_MACRO00_0108",
    "macro": 0,
-   "area": 22269,
-   "coastal": true
+   "area": 20623,
+   "coastal": false
   },
   {
    "label": 109,
    "kind": "land",
    "key": "STATE_MACRO00_0109",
    "macro": 0,
-   "area": 20722,
-   "coastal": false
+   "area": 21512,
+   "coastal": true
   },
   {
    "label": 110,
@@ -910,23 +910,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0113",
    "macro": 0,
-   "area": 7089,
-   "coastal": true
+   "area": 7315,
+   "coastal": false
   },
   {
    "label": 114,
    "kind": "land",
    "key": "STATE_MACRO00_0114",
    "macro": 0,
-   "area": 17931,
-   "coastal": true
+   "area": 6749,
+   "coastal": false
   },
   {
    "label": 115,
    "kind": "land",
    "key": "STATE_MACRO00_0115",
    "macro": 0,
-   "area": 21553,
+   "area": 17931,
    "coastal": true
   },
   {
@@ -958,8 +958,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0119",
    "macro": 0,
-   "area": 17079,
-   "coastal": true
+   "area": 17366,
+   "coastal": false
   },
   {
    "label": 120,
@@ -974,7 +974,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0121",
    "macro": 0,
-   "area": 8170,
+   "area": 6234,
    "coastal": true
   },
   {
@@ -982,7 +982,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0122",
    "macro": 0,
-   "area": 6234,
+   "area": 38671,
    "coastal": true
   },
   {
@@ -990,7 +990,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0123",
    "macro": 0,
-   "area": 37940,
+   "area": 7141,
    "coastal": true
   },
   {
@@ -998,7 +998,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0124",
    "macro": 0,
-   "area": 6476,
+   "area": 11304,
    "coastal": true
   },
   {
@@ -1006,39 +1006,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0125",
    "macro": 0,
-   "area": 7141,
-   "coastal": true
+   "area": 21871,
+   "coastal": false
   },
   {
    "label": 126,
    "kind": "land",
    "key": "STATE_MACRO00_0126",
    "macro": 0,
-   "area": 11304,
-   "coastal": true
+   "area": 21736,
+   "coastal": false
   },
   {
    "label": 127,
    "kind": "land",
    "key": "STATE_MACRO00_0127",
    "macro": 0,
-   "area": 21871,
-   "coastal": false
+   "area": 15048,
+   "coastal": true
   },
   {
    "label": 128,
    "kind": "land",
    "key": "STATE_MACRO00_0128",
    "macro": 0,
-   "area": 21578,
-   "coastal": true
+   "area": 28548,
+   "coastal": false
   },
   {
    "label": 129,
    "kind": "land",
    "key": "STATE_MACRO00_0129",
    "macro": 0,
-   "area": 5869,
+   "area": 21318,
    "coastal": true
   },
   {
@@ -1046,7 +1046,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0130",
    "macro": 0,
-   "area": 28548,
+   "area": 27372,
    "coastal": false
   },
   {
@@ -1054,23 +1054,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0131",
    "macro": 0,
-   "area": 20888,
-   "coastal": true
+   "area": 20181,
+   "coastal": false
   },
   {
    "label": 132,
    "kind": "land",
    "key": "STATE_MACRO00_0132",
    "macro": 0,
-   "area": 27372,
-   "coastal": false
+   "area": 11041,
+   "coastal": true
   },
   {
    "label": 133,
    "kind": "land",
    "key": "STATE_MACRO00_0133",
    "macro": 0,
-   "area": 20181,
+   "area": 9689,
    "coastal": false
   },
   {
@@ -1078,15 +1078,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0134",
    "macro": 0,
-   "area": 11041,
-   "coastal": true
+   "area": 9268,
+   "coastal": false
   },
   {
    "label": 135,
    "kind": "land",
    "key": "STATE_MACRO00_0135",
    "macro": 0,
-   "area": 9689,
+   "area": 11358,
    "coastal": false
   },
   {
@@ -1094,23 +1094,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0136",
    "macro": 0,
-   "area": 9268,
-   "coastal": false
+   "area": 10245,
+   "coastal": true
   },
   {
    "label": 137,
    "kind": "land",
    "key": "STATE_MACRO00_0137",
    "macro": 0,
-   "area": 11358,
-   "coastal": false
+   "area": 7355,
+   "coastal": true
   },
   {
    "label": 138,
    "kind": "land",
    "key": "STATE_MACRO00_0138",
    "macro": 0,
-   "area": 10245,
+   "area": 14991,
    "coastal": true
   },
   {
@@ -1118,23 +1118,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0139",
    "macro": 0,
-   "area": 7355,
-   "coastal": true
+   "area": 23718,
+   "coastal": false
   },
   {
    "label": 140,
    "kind": "land",
    "key": "STATE_MACRO00_0140",
    "macro": 0,
-   "area": 14991,
-   "coastal": true
+   "area": 18776,
+   "coastal": false
   },
   {
    "label": 141,
    "kind": "land",
    "key": "STATE_MACRO00_0141",
    "macro": 0,
-   "area": 23718,
+   "area": 25863,
    "coastal": false
   },
   {
@@ -1142,71 +1142,71 @@
    "kind": "land",
    "key": "STATE_MACRO00_0142",
    "macro": 0,
-   "area": 18429,
-   "coastal": true
+   "area": 6800,
+   "coastal": false
   },
   {
    "label": 143,
    "kind": "land",
    "key": "STATE_MACRO00_0143",
    "macro": 0,
-   "area": 24648,
-   "coastal": true
+   "area": 15052,
+   "coastal": false
   },
   {
    "label": 144,
    "kind": "land",
    "key": "STATE_MACRO00_0144",
    "macro": 0,
-   "area": 6800,
-   "coastal": false
+   "area": 22068,
+   "coastal": true
   },
   {
    "label": 145,
    "kind": "land",
    "key": "STATE_MACRO00_0145",
    "macro": 0,
-   "area": 15052,
-   "coastal": false
+   "area": 12959,
+   "coastal": true
   },
   {
    "label": 146,
    "kind": "land",
    "key": "STATE_MACRO00_0146",
    "macro": 0,
-   "area": 22068,
-   "coastal": true
+   "area": 13553,
+   "coastal": false
   },
   {
    "label": 147,
    "kind": "land",
    "key": "STATE_MACRO00_0147",
    "macro": 0,
-   "area": 12541,
-   "coastal": true
+   "area": 29391,
+   "coastal": false
   },
   {
    "label": 148,
    "kind": "land",
    "key": "STATE_MACRO00_0148",
    "macro": 0,
-   "area": 13553,
-   "coastal": false
+   "area": 16462,
+   "coastal": true
   },
   {
    "label": 149,
    "kind": "land",
    "key": "STATE_MACRO00_0149",
    "macro": 0,
-   "area": 29391,
-   "coastal": false
+   "area": 12371,
+   "coastal": true
   },
   {
    "label": 150,
    "kind": "land",
    "key": "STATE_MACRO00_0150",
    "macro": 0,
-   "area": 16462,
+   "area": 21434,
    "coastal": true
   },
   {
@@ -1214,31 +1214,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0151",
    "macro": 0,
-   "area": 12527,
-   "coastal": true
+   "area": 19822,
+   "coastal": false
   },
   {
    "label": 152,
    "kind": "land",
    "key": "STATE_MACRO00_0152",
    "macro": 0,
-   "area": 21304,
-   "coastal": true
+   "area": 6874,
+   "coastal": false
   },
   {
    "label": 153,
    "kind": "land",
    "key": "STATE_MACRO00_0153",
    "macro": 0,
-   "area": 19822,
-   "coastal": false
+   "area": 14038,
+   "coastal": true
   },
   {
    "label": 154,
    "kind": "land",
    "key": "STATE_MACRO00_0154",
    "macro": 0,
-   "area": 6823,
+   "area": 27606,
    "coastal": true
   },
   {
@@ -1246,23 +1246,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0155",
    "macro": 0,
-   "area": 14038,
-   "coastal": true
+   "area": 18813,
+   "coastal": false
   },
   {
    "label": 156,
    "kind": "land",
    "key": "STATE_MACRO00_0156",
    "macro": 0,
-   "area": 21851,
-   "coastal": true
+   "area": 14945,
+   "coastal": false
   },
   {
    "label": 157,
    "kind": "land",
    "key": "STATE_MACRO00_0157",
    "macro": 0,
-   "area": 18813,
+   "area": 9038,
    "coastal": false
   },
   {
@@ -1270,15 +1270,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0158",
    "macro": 0,
-   "area": 14471,
-   "coastal": true
+   "area": 12467,
+   "coastal": false
   },
   {
    "label": 159,
    "kind": "land",
    "key": "STATE_MACRO00_0159",
    "macro": 0,
-   "area": 9038,
+   "area": 5927,
    "coastal": false
   },
   {
@@ -1286,7 +1286,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0160",
    "macro": 0,
-   "area": 12467,
+   "area": 6545,
    "coastal": false
   },
   {
@@ -1294,47 +1294,47 @@
    "kind": "land",
    "key": "STATE_MACRO00_0161",
    "macro": 0,
-   "area": 5927,
-   "coastal": false
+   "area": 28501,
+   "coastal": true
   },
   {
    "label": 162,
    "kind": "land",
    "key": "STATE_MACRO00_0162",
    "macro": 0,
-   "area": 12010,
-   "coastal": true
+   "area": 15689,
+   "coastal": false
   },
   {
    "label": 163,
    "kind": "land",
    "key": "STATE_MACRO00_0163",
    "macro": 0,
-   "area": 28229,
-   "coastal": true
+   "area": 15965,
+   "coastal": false
   },
   {
    "label": 164,
    "kind": "land",
    "key": "STATE_MACRO00_0164",
    "macro": 0,
-   "area": 15689,
-   "coastal": false
+   "area": 288,
+   "coastal": true
   },
   {
    "label": 165,
    "kind": "land",
    "key": "STATE_MACRO00_0165",
    "macro": 0,
-   "area": 15965,
-   "coastal": false
+   "area": 13412,
+   "coastal": true
   },
   {
    "label": 166,
    "kind": "land",
    "key": "STATE_MACRO00_0166",
    "macro": 0,
-   "area": 288,
+   "area": 545,
    "coastal": true
   },
   {
@@ -1342,47 +1342,47 @@
    "kind": "land",
    "key": "STATE_MACRO00_0167",
    "macro": 0,
-   "area": 13412,
-   "coastal": true
+   "area": 6279,
+   "coastal": false
   },
   {
    "label": 168,
    "kind": "land",
    "key": "STATE_MACRO00_0168",
    "macro": 0,
-   "area": 545,
-   "coastal": true
+   "area": 12676,
+   "coastal": false
   },
   {
    "label": 169,
    "kind": "land",
    "key": "STATE_MACRO00_0169",
    "macro": 0,
-   "area": 6279,
-   "coastal": false
+   "area": 14349,
+   "coastal": true
   },
   {
    "label": 170,
    "kind": "land",
    "key": "STATE_MACRO00_0170",
    "macro": 0,
-   "area": 12681,
-   "coastal": true
+   "area": 22526,
+   "coastal": false
   },
   {
    "label": 171,
    "kind": "land",
    "key": "STATE_MACRO00_0171",
    "macro": 0,
-   "area": 13756,
-   "coastal": true
+   "area": 15556,
+   "coastal": false
   },
   {
    "label": 172,
    "kind": "land",
    "key": "STATE_MACRO00_0172",
    "macro": 0,
-   "area": 22526,
+   "area": 30923,
    "coastal": false
   },
   {
@@ -1390,7 +1390,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0173",
    "macro": 0,
-   "area": 15556,
+   "area": 13890,
    "coastal": false
   },
   {
@@ -1398,7 +1398,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0174",
    "macro": 0,
-   "area": 13890,
+   "area": 12311,
    "coastal": false
   },
   {
@@ -1406,7 +1406,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0175",
    "macro": 0,
-   "area": 27815,
+   "area": 19310,
    "coastal": true
   },
   {
@@ -1414,31 +1414,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0176",
    "macro": 0,
-   "area": 11792,
-   "coastal": true
+   "area": 20963,
+   "coastal": false
   },
   {
    "label": 177,
    "kind": "land",
    "key": "STATE_MACRO00_0177",
    "macro": 0,
-   "area": 18502,
-   "coastal": true
+   "area": 16562,
+   "coastal": false
   },
   {
    "label": 178,
    "kind": "land",
    "key": "STATE_MACRO00_0178",
    "macro": 0,
-   "area": 20963,
-   "coastal": false
+   "area": 21182,
+   "coastal": true
   },
   {
    "label": 179,
    "kind": "land",
    "key": "STATE_MACRO00_0179",
    "macro": 0,
-   "area": 16562,
+   "area": 23283,
    "coastal": false
   },
   {
@@ -1446,15 +1446,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0180",
    "macro": 0,
-   "area": 21182,
-   "coastal": true
+   "area": 12591,
+   "coastal": false
   },
   {
    "label": 181,
    "kind": "land",
    "key": "STATE_MACRO00_0181",
    "macro": 0,
-   "area": 22985,
+   "area": 7879,
    "coastal": true
   },
   {
@@ -1462,7 +1462,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0182",
    "macro": 0,
-   "area": 12709,
+   "area": 15315,
    "coastal": false
   },
   {
@@ -1470,15 +1470,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0183",
    "macro": 0,
-   "area": 7879,
-   "coastal": true
+   "area": 6685,
+   "coastal": false
   },
   {
    "label": 184,
    "kind": "land",
    "key": "STATE_MACRO00_0184",
    "macro": 0,
-   "area": 6685,
+   "area": 22727,
    "coastal": false
   },
   {
@@ -1486,7 +1486,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0185",
    "macro": 0,
-   "area": 22727,
+   "area": 25088,
    "coastal": false
   },
   {
@@ -1494,7 +1494,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0186",
    "macro": 0,
-   "area": 25088,
+   "area": 8760,
    "coastal": false
   },
   {
@@ -1502,7 +1502,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0187",
    "macro": 0,
-   "area": 8760,
+   "area": 21442,
    "coastal": false
   },
   {
@@ -1510,15 +1510,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0188",
    "macro": 0,
-   "area": 20962,
-   "coastal": true
+   "area": 19635,
+   "coastal": false
   },
   {
    "label": 189,
    "kind": "land",
    "key": "STATE_MACRO00_0189",
    "macro": 0,
-   "area": 19635,
+   "area": 14652,
    "coastal": false
   },
   {
@@ -1526,7 +1526,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0190",
    "macro": 0,
-   "area": 14379,
+   "area": 10497,
    "coastal": true
   },
   {
@@ -1534,7 +1534,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0191",
    "macro": 0,
-   "area": 10497,
+   "area": 6491,
    "coastal": true
   },
   {
@@ -1542,23 +1542,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0192",
    "macro": 0,
-   "area": 6491,
-   "coastal": true
+   "area": 17702,
+   "coastal": false
   },
   {
    "label": 193,
    "kind": "land",
    "key": "STATE_MACRO00_0193",
    "macro": 0,
-   "area": 17702,
-   "coastal": false
+   "area": 8356,
+   "coastal": true
   },
   {
    "label": 194,
    "kind": "land",
    "key": "STATE_MACRO00_0194",
    "macro": 0,
-   "area": 8356,
+   "area": 9233,
    "coastal": true
   },
   {
@@ -1566,15 +1566,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0195",
    "macro": 0,
-   "area": 28715,
-   "coastal": true
+   "area": 29551,
+   "coastal": false
   },
   {
    "label": 196,
    "kind": "land",
    "key": "STATE_MACRO00_0196",
    "macro": 0,
-   "area": 9233,
+   "area": 538,
    "coastal": true
   },
   {
@@ -1582,7 +1582,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0197",
    "macro": 0,
-   "area": 14897,
+   "area": 18859,
    "coastal": true
   },
   {
@@ -1590,23 +1590,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0198",
    "macro": 0,
-   "area": 538,
-   "coastal": true
+   "area": 21363,
+   "coastal": false
   },
   {
    "label": 199,
    "kind": "land",
    "key": "STATE_MACRO00_0199",
    "macro": 0,
-   "area": 16301,
-   "coastal": false
+   "area": 10009,
+   "coastal": true
   },
   {
    "label": 200,
    "kind": "land",
    "key": "STATE_MACRO00_0200",
    "macro": 0,
-   "area": 18859,
+   "area": 28428,
    "coastal": true
   },
   {
@@ -1614,7 +1614,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0201",
    "macro": 0,
-   "area": 21363,
+   "area": 15440,
    "coastal": false
   },
   {
@@ -1622,15 +1622,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0202",
    "macro": 0,
-   "area": 7499,
-   "coastal": true
+   "area": 28501,
+   "coastal": false
   },
   {
    "label": 203,
    "kind": "land",
    "key": "STATE_MACRO00_0203",
    "macro": 0,
-   "area": 28428,
+   "area": 23977,
    "coastal": true
   },
   {
@@ -1638,15 +1638,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0204",
    "macro": 0,
-   "area": 16203,
-   "coastal": true
+   "area": 10999,
+   "coastal": false
   },
   {
    "label": 205,
    "kind": "land",
    "key": "STATE_MACRO00_0205",
    "macro": 0,
-   "area": 28501,
+   "area": 7429,
    "coastal": false
   },
   {
@@ -1654,31 +1654,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0206",
    "macro": 0,
-   "area": 25561,
-   "coastal": true
+   "area": 13743,
+   "coastal": false
   },
   {
    "label": 207,
    "kind": "land",
    "key": "STATE_MACRO00_0207",
    "macro": 0,
-   "area": 23708,
-   "coastal": true
+   "area": 19307,
+   "coastal": false
   },
   {
    "label": 208,
    "kind": "land",
    "key": "STATE_MACRO00_0208",
    "macro": 0,
-   "area": 7429,
-   "coastal": false
+   "area": 4834,
+   "coastal": true
   },
   {
    "label": 209,
    "kind": "land",
    "key": "STATE_MACRO00_0209",
    "macro": 0,
-   "area": 19307,
+   "area": 12180,
    "coastal": false
   },
   {
@@ -1686,7 +1686,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0210",
    "macro": 0,
-   "area": 12391,
+   "area": 13855,
    "coastal": true
   },
   {
@@ -1694,7 +1694,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0211",
    "macro": 0,
-   "area": 4834,
+   "area": 460,
    "coastal": true
   },
   {
@@ -1702,7 +1702,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0212",
    "macro": 0,
-   "area": 12180,
+   "area": 15711,
    "coastal": false
   },
   {
@@ -1710,23 +1710,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0213",
    "macro": 0,
-   "area": 10094,
-   "coastal": true
+   "area": 10399,
+   "coastal": false
   },
   {
    "label": 214,
    "kind": "land",
    "key": "STATE_MACRO00_0214",
    "macro": 0,
-   "area": 460,
-   "coastal": true
+   "area": 6526,
+   "coastal": false
   },
   {
    "label": 215,
    "kind": "land",
    "key": "STATE_MACRO00_0215",
    "macro": 0,
-   "area": 15711,
+   "area": 20096,
    "coastal": false
   },
   {
@@ -1734,7 +1734,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0216",
    "macro": 0,
-   "area": 6282,
+   "area": 6819,
    "coastal": true
   },
   {
@@ -1742,7 +1742,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0217",
    "macro": 0,
-   "area": 6819,
+   "area": 7973,
    "coastal": true
   },
   {
@@ -1750,8 +1750,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0218",
    "macro": 0,
-   "area": 18112,
-   "coastal": true
+   "area": 18309,
+   "coastal": false
   },
   {
    "label": 219,
@@ -1766,15 +1766,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0220",
    "macro": 0,
-   "area": 15227,
-   "coastal": true
+   "area": 7120,
+   "coastal": false
   },
   {
    "label": 221,
    "kind": "land",
    "key": "STATE_MACRO00_0221",
    "macro": 0,
-   "area": 7120,
+   "area": 16078,
    "coastal": false
   },
   {
@@ -1782,7 +1782,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0222",
    "macro": 0,
-   "area": 14689,
+   "area": 5884,
    "coastal": true
   },
   {
@@ -1814,15 +1814,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0226",
    "macro": 0,
-   "area": 10271,
-   "coastal": true
+   "area": 10805,
+   "coastal": false
   },
   {
    "label": 227,
    "kind": "land",
    "key": "STATE_MACRO00_0227",
    "macro": 0,
-   "area": 12385,
+   "area": 6064,
    "coastal": false
   },
   {
@@ -1830,31 +1830,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0228",
    "macro": 0,
-   "area": 6064,
-   "coastal": false
+   "area": 25773,
+   "coastal": true
   },
   {
    "label": 229,
    "kind": "land",
    "key": "STATE_MACRO00_0229",
    "macro": 0,
-   "area": 25773,
-   "coastal": true
+   "area": 13388,
+   "coastal": false
   },
   {
    "label": 230,
    "kind": "land",
    "key": "STATE_MACRO00_0230",
    "macro": 0,
-   "area": 13444,
-   "coastal": true
+   "area": 10442,
+   "coastal": false
   },
   {
    "label": 231,
    "kind": "land",
    "key": "STATE_MACRO00_0231",
    "macro": 0,
-   "area": 11265,
+   "area": 14599,
    "coastal": true
   },
   {
@@ -1870,8 +1870,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0233",
    "macro": 0,
-   "area": 29412,
-   "coastal": true
+   "area": 29293,
+   "coastal": false
   },
   {
    "label": 234,
@@ -1886,7 +1886,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0235",
    "macro": 0,
-   "area": 6210,
+   "area": 28862,
    "coastal": true
   },
   {
@@ -1894,7 +1894,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0236",
    "macro": 0,
-   "area": 24378,
+   "area": 26281,
    "coastal": true
   },
   {
@@ -1902,7 +1902,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0237",
    "macro": 0,
-   "area": 6073,
+   "area": 9087,
    "coastal": true
   },
   {
@@ -1918,7 +1918,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0239",
    "macro": 0,
-   "area": 6734,
+   "area": 6990,
    "coastal": true
   },
   {
@@ -1926,8 +1926,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0240",
    "macro": 0,
-   "area": 13066,
-   "coastal": true
+   "area": 13206,
+   "coastal": false
   },
   {
    "label": 241,
@@ -1942,8 +1942,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0242",
    "macro": 0,
-   "area": 13964,
-   "coastal": true
+   "area": 13592,
+   "coastal": false
   },
   {
    "label": 243,
@@ -1982,23 +1982,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0247",
    "macro": 0,
-   "area": 16114,
-   "coastal": true
+   "area": 14459,
+   "coastal": false
   },
   {
    "label": 248,
    "kind": "land",
    "key": "STATE_MACRO00_0248",
    "macro": 0,
-   "area": 13965,
-   "coastal": true
+   "area": 23840,
+   "coastal": false
   },
   {
    "label": 249,
    "kind": "land",
    "key": "STATE_MACRO00_0249",
    "macro": 0,
-   "area": 23162,
+   "area": 40630,
    "coastal": true
   },
   {
@@ -2006,15 +2006,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0250",
    "macro": 0,
-   "area": 24652,
-   "coastal": true
+   "area": 12666,
+   "coastal": false
   },
   {
    "label": 251,
    "kind": "land",
    "key": "STATE_MACRO00_0251",
    "macro": 0,
-   "area": 12666,
+   "area": 30986,
    "coastal": false
   },
   {
@@ -2022,8 +2022,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0252",
    "macro": 0,
-   "area": 30986,
-   "coastal": false
+   "area": 10158,
+   "coastal": true
   },
   {
    "label": 253,
@@ -2038,23 +2038,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0254",
    "macro": 0,
-   "area": 33081,
-   "coastal": true
+   "area": 34751,
+   "coastal": false
   },
   {
    "label": 255,
    "kind": "land",
    "key": "STATE_MACRO00_0255",
    "macro": 0,
-   "area": 28235,
-   "coastal": true
+   "area": 16352,
+   "coastal": false
   },
   {
    "label": 256,
    "kind": "land",
    "key": "STATE_MACRO00_0256",
    "macro": 0,
-   "area": 16352,
+   "area": 9399,
    "coastal": false
   },
   {
@@ -2062,7 +2062,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0257",
    "macro": 0,
-   "area": 9005,
+   "area": 14308,
    "coastal": true
   },
   {
@@ -2070,15 +2070,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0258",
    "macro": 0,
-   "area": 14308,
-   "coastal": true
+   "area": 6225,
+   "coastal": false
   },
   {
    "label": 259,
    "kind": "land",
    "key": "STATE_MACRO00_0259",
    "macro": 0,
-   "area": 6225,
+   "area": 13968,
    "coastal": false
   },
   {
@@ -2086,7 +2086,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0260",
    "macro": 0,
-   "area": 13968,
+   "area": 35774,
    "coastal": false
   },
   {
@@ -2094,7 +2094,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0261",
    "macro": 0,
-   "area": 16140,
+   "area": 27953,
    "coastal": true
   },
   {
@@ -2102,15 +2102,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0262",
    "macro": 0,
-   "area": 35413,
-   "coastal": true
+   "area": 10850,
+   "coastal": false
   },
   {
    "label": 263,
    "kind": "land",
    "key": "STATE_MACRO00_0263",
    "macro": 0,
-   "area": 19120,
+   "area": 3296,
    "coastal": true
   },
   {
@@ -2118,79 +2118,79 @@
    "kind": "land",
    "key": "STATE_MACRO00_0264",
    "macro": 0,
-   "area": 10850,
-   "coastal": false
+   "area": 10223,
+   "coastal": true
   },
   {
    "label": 265,
    "kind": "land",
    "key": "STATE_MACRO00_0265",
    "macro": 0,
-   "area": 3296,
-   "coastal": true
+   "area": 28680,
+   "coastal": false
   },
   {
    "label": 266,
    "kind": "land",
    "key": "STATE_MACRO00_0266",
    "macro": 0,
-   "area": 28680,
-   "coastal": false
+   "area": 24859,
+   "coastal": true
   },
   {
    "label": 267,
    "kind": "land",
    "key": "STATE_MACRO00_0267",
    "macro": 0,
-   "area": 24225,
-   "coastal": true
+   "area": 31134,
+   "coastal": false
   },
   {
    "label": 268,
    "kind": "land",
    "key": "STATE_MACRO00_0268",
    "macro": 0,
-   "area": 29857,
-   "coastal": true
+   "area": 10528,
+   "coastal": false
   },
   {
    "label": 269,
    "kind": "land",
    "key": "STATE_MACRO00_0269",
    "macro": 0,
-   "area": 9715,
-   "coastal": true
+   "area": 21734,
+   "coastal": false
   },
   {
    "label": 270,
    "kind": "land",
    "key": "STATE_MACRO00_0270",
    "macro": 0,
-   "area": 21733,
-   "coastal": true
+   "area": 14902,
+   "coastal": false
   },
   {
    "label": 271,
    "kind": "land",
    "key": "STATE_MACRO00_0271",
    "macro": 0,
-   "area": 10369,
-   "coastal": true
+   "area": 7180,
+   "coastal": false
   },
   {
    "label": 272,
    "kind": "land",
    "key": "STATE_MACRO00_0272",
    "macro": 0,
-   "area": 7855,
-   "coastal": true
+   "area": 32585,
+   "coastal": false
   },
   {
    "label": 273,
    "kind": "land",
    "key": "STATE_MACRO00_0273",
    "macro": 0,
-   "area": 14881,
+   "area": 12356,
    "coastal": true
   },
   {
@@ -2198,47 +2198,47 @@
    "kind": "land",
    "key": "STATE_MACRO00_0274",
    "macro": 0,
-   "area": 32408,
-   "coastal": true
+   "area": 13083,
+   "coastal": false
   },
   {
    "label": 275,
    "kind": "land",
    "key": "STATE_MACRO00_0275",
    "macro": 0,
-   "area": 12356,
-   "coastal": true
+   "area": 10127,
+   "coastal": false
   },
   {
    "label": 276,
    "kind": "land",
    "key": "STATE_MACRO00_0276",
    "macro": 0,
-   "area": 22053,
-   "coastal": true
+   "area": 7567,
+   "coastal": false
   },
   {
    "label": 277,
    "kind": "land",
    "key": "STATE_MACRO00_0277",
    "macro": 0,
-   "area": 10652,
-   "coastal": true
+   "area": 14996,
+   "coastal": false
   },
   {
    "label": 278,
    "kind": "land",
    "key": "STATE_MACRO00_0278",
    "macro": 0,
-   "area": 9753,
-   "coastal": true
+   "area": 16742,
+   "coastal": false
   },
   {
    "label": 279,
    "kind": "land",
    "key": "STATE_MACRO00_0279",
    "macro": 0,
-   "area": 8927,
+   "area": 38793,
    "coastal": false
   },
   {
@@ -2246,15 +2246,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0280",
    "macro": 0,
-   "area": 7567,
-   "coastal": false
+   "area": 12390,
+   "coastal": true
   },
   {
    "label": 281,
    "kind": "land",
    "key": "STATE_MACRO00_0281",
    "macro": 0,
-   "area": 15001,
+   "area": 11080,
    "coastal": true
   },
   {
@@ -2262,23 +2262,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0282",
    "macro": 0,
-   "area": 38470,
-   "coastal": true
+   "area": 17047,
+   "coastal": false
   },
   {
    "label": 283,
    "kind": "land",
    "key": "STATE_MACRO00_0283",
    "macro": 0,
-   "area": 12390,
-   "coastal": true
+   "area": 19414,
+   "coastal": false
   },
   {
    "label": 284,
    "kind": "land",
    "key": "STATE_MACRO00_0284",
    "macro": 0,
-   "area": 20374,
+   "area": 18330,
    "coastal": true
   },
   {
@@ -2286,7 +2286,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0285",
    "macro": 0,
-   "area": 19414,
+   "area": 11190,
    "coastal": false
   },
   {
@@ -2294,23 +2294,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0286",
    "macro": 0,
-   "area": 22600,
-   "coastal": true
+   "area": 10074,
+   "coastal": false
   },
   {
    "label": 287,
    "kind": "land",
    "key": "STATE_MACRO00_0287",
    "macro": 0,
-   "area": 10594,
-   "coastal": true
+   "area": 21065,
+   "coastal": false
   },
   {
    "label": 288,
    "kind": "land",
    "key": "STATE_MACRO00_0288",
    "macro": 0,
-   "area": 16512,
+   "area": 22872,
    "coastal": true
   },
   {
@@ -2318,7 +2318,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0289",
    "macro": 0,
-   "area": 20390,
+   "area": 10374,
    "coastal": true
   },
   {
@@ -2326,39 +2326,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0290",
    "macro": 0,
-   "area": 22684,
-   "coastal": true
+   "area": 8221,
+   "coastal": false
   },
   {
    "label": 291,
    "kind": "land",
    "key": "STATE_MACRO00_0291",
    "macro": 0,
-   "area": 10374,
-   "coastal": true
+   "area": 19187,
+   "coastal": false
   },
   {
    "label": 292,
    "kind": "land",
    "key": "STATE_MACRO00_0292",
    "macro": 0,
-   "area": 19187,
-   "coastal": false
+   "area": 19820,
+   "coastal": true
   },
   {
    "label": 293,
    "kind": "land",
    "key": "STATE_MACRO00_0293",
    "macro": 0,
-   "area": 19820,
-   "coastal": true
+   "area": 15038,
+   "coastal": false
   },
   {
    "label": 294,
    "kind": "land",
    "key": "STATE_MACRO00_0294",
    "macro": 0,
-   "area": 15038,
+   "area": 7372,
    "coastal": false
   },
   {
@@ -2366,15 +2366,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0295",
    "macro": 0,
-   "area": 8317,
-   "coastal": true
+   "area": 13522,
+   "coastal": false
   },
   {
    "label": 296,
    "kind": "land",
    "key": "STATE_MACRO00_0296",
    "macro": 0,
-   "area": 7372,
+   "area": 19538,
    "coastal": false
   },
   {
@@ -2382,15 +2382,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0297",
    "macro": 0,
-   "area": 13522,
-   "coastal": false
+   "area": 16464,
+   "coastal": true
   },
   {
    "label": 298,
    "kind": "land",
    "key": "STATE_MACRO00_0298",
    "macro": 0,
-   "area": 19538,
+   "area": 6597,
    "coastal": false
   },
   {
@@ -2398,23 +2398,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0299",
    "macro": 0,
-   "area": 16490,
-   "coastal": true
+   "area": 13322,
+   "coastal": false
   },
   {
    "label": 300,
    "kind": "land",
    "key": "STATE_MACRO00_0300",
    "macro": 0,
-   "area": 13346,
-   "coastal": true
+   "area": 14244,
+   "coastal": false
   },
   {
    "label": 301,
    "kind": "land",
    "key": "STATE_MACRO00_0301",
    "macro": 0,
-   "area": 14244,
+   "area": 15914,
    "coastal": false
   },
   {
@@ -2422,15 +2422,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0302",
    "macro": 0,
-   "area": 6093,
-   "coastal": true
+   "area": 6427,
+   "coastal": false
   },
   {
    "label": 303,
    "kind": "land",
    "key": "STATE_MACRO00_0303",
    "macro": 0,
-   "area": 15833,
+   "area": 538,
    "coastal": true
   },
   {
@@ -2438,7 +2438,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0304",
    "macro": 0,
-   "area": 538,
+   "area": 5979,
    "coastal": true
   },
   {
@@ -2446,7 +2446,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0305",
    "macro": 0,
-   "area": 6925,
+   "area": 12267,
    "coastal": true
   },
   {
@@ -2454,7 +2454,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0306",
    "macro": 0,
-   "area": 5979,
+   "area": 9060,
    "coastal": true
   },
   {
@@ -2462,7 +2462,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0307",
    "macro": 0,
-   "area": 9060,
+   "area": 486,
    "coastal": true
   },
   {
@@ -2470,7 +2470,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0308",
    "macro": 0,
-   "area": 22844,
+   "area": 30679,
    "coastal": true
   },
   {
@@ -2478,16 +2478,16 @@
    "kind": "land",
    "key": "STATE_MACRO00_0309",
    "macro": 0,
-   "area": 486,
-   "coastal": true
+   "area": 7991,
+   "coastal": false
   },
   {
    "label": 310,
    "kind": "land",
    "key": "STATE_MACRO00_0310",
    "macro": 0,
-   "area": 7837,
-   "coastal": true
+   "area": 7195,
+   "coastal": false
   },
   {
    "label": 311,
@@ -2502,7 +2502,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0312",
    "macro": 0,
-   "area": 34079,
+   "area": 7251,
    "coastal": false
   },
   {
@@ -2510,7 +2510,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0313",
    "macro": 0,
-   "area": 10634,
+   "area": 34079,
    "coastal": false
   },
   {
@@ -2518,8 +2518,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0314",
    "macro": 0,
-   "area": 6516,
-   "coastal": true
+   "area": 10634,
+   "coastal": false
   },
   {
    "label": 315,
@@ -2550,7 +2550,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0318",
    "macro": 0,
-   "area": 33403,
+   "area": 33408,
    "coastal": true
   },
   {
@@ -2558,15 +2558,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0319",
    "macro": 0,
-   "area": 28602,
-   "coastal": true
+   "area": 19036,
+   "coastal": false
   },
   {
    "label": 320,
    "kind": "land",
    "key": "STATE_MACRO00_0320",
    "macro": 0,
-   "area": 19036,
+   "area": 7740,
    "coastal": false
   },
   {
@@ -2574,7 +2574,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0321",
    "macro": 0,
-   "area": 7963,
+   "area": 26153,
    "coastal": true
   },
   {
@@ -2582,7 +2582,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0322",
    "macro": 0,
-   "area": 25844,
+   "area": 417,
    "coastal": true
   },
   {
@@ -2590,15 +2590,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0323",
    "macro": 0,
-   "area": 417,
-   "coastal": true
+   "area": 29336,
+   "coastal": false
   },
   {
    "label": 324,
    "kind": "land",
    "key": "STATE_MACRO00_0324",
    "macro": 0,
-   "area": 29141,
+   "area": 469,
    "coastal": true
   },
   {
@@ -2606,7 +2606,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0325",
    "macro": 0,
-   "area": 469,
+   "area": 447,
    "coastal": true
   },
   {
@@ -2614,7 +2614,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0326",
    "macro": 0,
-   "area": 447,
+   "area": 31836,
    "coastal": true
   },
   {
@@ -2622,7 +2622,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0327",
    "macro": 0,
-   "area": 30909,
+   "area": 17261,
    "coastal": true
   },
   {
@@ -2646,15 +2646,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0330",
    "macro": 0,
-   "area": 17960,
-   "coastal": true
+   "area": 18001,
+   "coastal": false
   },
   {
    "label": 331,
    "kind": "land",
    "key": "STATE_MACRO00_0331",
    "macro": 0,
-   "area": 16704,
+   "area": 16550,
    "coastal": true
   },
   {
@@ -2670,7 +2670,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0333",
    "macro": 0,
-   "area": 9700,
+   "area": 10007,
    "coastal": true
   },
   {
@@ -2678,7 +2678,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0334",
    "macro": 0,
-   "area": 27621,
+   "area": 28098,
    "coastal": true
   },
   {
@@ -2686,23 +2686,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0335",
    "macro": 0,
-   "area": 30689,
-   "coastal": true
+   "area": 31008,
+   "coastal": false
   },
   {
    "label": 336,
    "kind": "land",
    "key": "STATE_MACRO00_0336",
    "macro": 0,
-   "area": 9302,
-   "coastal": true
+   "area": 514,
+   "coastal": false
   },
   {
    "label": 337,
    "kind": "land",
    "key": "STATE_MACRO00_0337",
    "macro": 0,
-   "area": 296,
+   "area": 9606,
    "coastal": true
   },
   {
@@ -2710,7 +2710,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0338",
    "macro": 0,
-   "area": 991,
+   "area": 296,
    "coastal": true
   },
   {
@@ -2718,7 +2718,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0339",
    "macro": 0,
-   "area": 10341,
+   "area": 991,
    "coastal": true
   },
   {
@@ -2726,7 +2726,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0340",
    "macro": 0,
-   "area": 16048,
+   "area": 11143,
    "coastal": true
   },
   {
@@ -2734,7 +2734,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0341",
    "macro": 0,
-   "area": 7093,
+   "area": 16048,
    "coastal": true
   },
   {
@@ -2742,7 +2742,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0342",
    "macro": 0,
-   "area": 8298,
+   "area": 7254,
    "coastal": false
   },
   {
@@ -2750,7 +2750,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0343",
    "macro": 0,
-   "area": 11336,
+   "area": 8298,
    "coastal": false
   },
   {
@@ -2758,7 +2758,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0344",
    "macro": 0,
-   "area": 15871,
+   "area": 17399,
    "coastal": false
   },
   {
@@ -2766,15 +2766,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0345",
    "macro": 0,
-   "area": 13477,
-   "coastal": true
+   "area": 11336,
+   "coastal": false
   },
   {
    "label": 346,
    "kind": "land",
    "key": "STATE_MACRO00_0346",
    "macro": 0,
-   "area": 16498,
+   "area": 15871,
    "coastal": false
   },
   {
@@ -2782,7 +2782,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0347",
    "macro": 0,
-   "area": 7088,
+   "area": 13842,
    "coastal": false
   },
   {
@@ -2790,7 +2790,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0348",
    "macro": 0,
-   "area": 9768,
+   "area": 16498,
    "coastal": false
   },
   {
@@ -2798,15 +2798,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0349",
    "macro": 0,
-   "area": 10981,
-   "coastal": true
+   "area": 7088,
+   "coastal": false
   },
   {
    "label": 350,
    "kind": "land",
    "key": "STATE_MACRO00_0350",
    "macro": 0,
-   "area": 20033,
+   "area": 9768,
    "coastal": false
   },
   {
@@ -2814,7 +2814,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0351",
    "macro": 0,
-   "area": 497,
+   "area": 10502,
    "coastal": true
   },
   {
@@ -2822,15 +2822,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0352",
    "macro": 0,
-   "area": 13495,
-   "coastal": true
+   "area": 20033,
+   "coastal": false
   },
   {
    "label": 353,
    "kind": "land",
    "key": "STATE_MACRO00_0353",
    "macro": 0,
-   "area": 27061,
+   "area": 497,
    "coastal": true
   },
   {
@@ -2838,7 +2838,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0354",
    "macro": 0,
-   "area": 12523,
+   "area": 6002,
    "coastal": true
   },
   {
@@ -2846,7 +2846,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0355",
    "macro": 0,
-   "area": 8179,
+   "area": 13495,
    "coastal": true
   },
   {
@@ -2854,15 +2854,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0356",
    "macro": 0,
-   "area": 8046,
-   "coastal": true
+   "area": 20973,
+   "coastal": false
   },
   {
    "label": 357,
    "kind": "land",
    "key": "STATE_MACRO00_0357",
    "macro": 0,
-   "area": 19615,
+   "area": 26527,
    "coastal": false
   },
   {
@@ -2870,39 +2870,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0358",
    "macro": 0,
-   "area": 5867,
-   "coastal": false
+   "area": 8046,
+   "coastal": true
   },
   {
    "label": 359,
    "kind": "land",
    "key": "STATE_MACRO00_0359",
    "macro": 0,
-   "area": 13628,
-   "coastal": true
+   "area": 19615,
+   "coastal": false
   },
   {
    "label": 360,
    "kind": "land",
    "key": "STATE_MACRO00_0360",
    "macro": 0,
-   "area": 15784,
-   "coastal": true
+   "area": 6510,
+   "coastal": false
   },
   {
    "label": 361,
    "kind": "land",
    "key": "STATE_MACRO00_0361",
    "macro": 0,
-   "area": 10869,
-   "coastal": true
+   "area": 5867,
+   "coastal": false
   },
   {
    "label": 362,
    "kind": "land",
    "key": "STATE_MACRO00_0362",
    "macro": 0,
-   "area": 26734,
+   "area": 15784,
    "coastal": true
   },
   {
@@ -2910,7 +2910,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0363",
    "macro": 0,
-   "area": 304,
+   "area": 10485,
    "coastal": true
   },
   {
@@ -2918,23 +2918,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0364",
    "macro": 0,
-   "area": 19746,
-   "coastal": true
+   "area": 10786,
+   "coastal": false
   },
   {
    "label": 365,
    "kind": "land",
    "key": "STATE_MACRO00_0365",
    "macro": 0,
-   "area": 20568,
-   "coastal": false
+   "area": 26734,
+   "coastal": true
   },
   {
    "label": 366,
    "kind": "land",
    "key": "STATE_MACRO00_0366",
    "macro": 0,
-   "area": 9158,
+   "area": 304,
    "coastal": true
   },
   {
@@ -2942,15 +2942,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0367",
    "macro": 0,
-   "area": 24818,
-   "coastal": true
+   "area": 19784,
+   "coastal": false
   },
   {
    "label": 368,
    "kind": "land",
    "key": "STATE_MACRO00_0368",
    "macro": 0,
-   "area": 14893,
+   "area": 13460,
    "coastal": true
   },
   {
@@ -2958,7 +2958,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0369",
    "macro": 0,
-   "area": 19246,
+   "area": 20568,
    "coastal": false
   },
   {
@@ -2966,7 +2966,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0370",
    "macro": 0,
-   "area": 12920,
+   "area": 14893,
    "coastal": true
   },
   {
@@ -2974,15 +2974,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0371",
    "macro": 0,
-   "area": 6980,
-   "coastal": true
+   "area": 12971,
+   "coastal": false
   },
   {
    "label": 372,
    "kind": "land",
    "key": "STATE_MACRO00_0372",
    "macro": 0,
-   "area": 522,
+   "area": 6980,
    "coastal": true
   },
   {
@@ -2990,7 +2990,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0373",
    "macro": 0,
-   "area": 9375,
+   "area": 522,
    "coastal": true
   },
   {
@@ -2998,7 +2998,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0374",
    "macro": 0,
-   "area": 10082,
+   "area": 10135,
    "coastal": false
   },
   {
@@ -3006,15 +3006,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0375",
    "macro": 0,
-   "area": 1381,
-   "coastal": true
+   "area": 10082,
+   "coastal": false
   },
   {
    "label": 376,
    "kind": "land",
    "key": "STATE_MACRO00_0376",
    "macro": 0,
-   "area": 35885,
+   "area": 24279,
    "coastal": false
   },
   {
@@ -3022,23 +3022,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0377",
    "macro": 0,
-   "area": 22175,
-   "coastal": true
+   "area": 35885,
+   "coastal": false
   },
   {
    "label": 378,
    "kind": "land",
    "key": "STATE_MACRO00_0378",
    "macro": 0,
-   "area": 3581,
-   "coastal": true
+   "area": 15108,
+   "coastal": false
   },
   {
    "label": 379,
    "kind": "land",
    "key": "STATE_MACRO00_0379",
    "macro": 0,
-   "area": 14276,
+   "area": 3581,
    "coastal": true
   },
   {
@@ -3046,8 +3046,8 @@
    "kind": "land",
    "key": "STATE_MACRO00_0380",
    "macro": 0,
-   "area": 10301,
-   "coastal": false
+   "area": 20033,
+   "coastal": true
   },
   {
    "label": 381,
@@ -3070,15 +3070,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0383",
    "macro": 0,
-   "area": 13322,
-   "coastal": true
+   "area": 7793,
+   "coastal": false
   },
   {
    "label": 384,
    "kind": "land",
    "key": "STATE_MACRO00_0384",
    "macro": 0,
-   "area": 30152,
+   "area": 13322,
    "coastal": true
   },
   {
@@ -3086,23 +3086,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0385",
    "macro": 0,
-   "area": 6453,
-   "coastal": true
+   "area": 829,
+   "coastal": false
   },
   {
    "label": 386,
    "kind": "land",
    "key": "STATE_MACRO00_0386",
    "macro": 0,
-   "area": 9750,
-   "coastal": false
+   "area": 30152,
+   "coastal": true
   },
   {
    "label": 387,
    "kind": "land",
    "key": "STATE_MACRO00_0387",
    "macro": 0,
-   "area": 653,
+   "area": 6453,
    "coastal": true
   },
   {
@@ -3110,15 +3110,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0388",
    "macro": 0,
-   "area": 770,
-   "coastal": true
+   "area": 9750,
+   "coastal": false
   },
   {
    "label": 389,
    "kind": "land",
    "key": "STATE_MACRO00_0389",
    "macro": 0,
-   "area": 1656,
+   "area": 653,
    "coastal": true
   },
   {
@@ -3126,39 +3126,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0390",
    "macro": 0,
-   "area": 13192,
-   "coastal": false
+   "area": 770,
+   "coastal": true
   },
   {
    "label": 391,
    "kind": "land",
    "key": "STATE_MACRO00_0391",
    "macro": 0,
-   "area": 18508,
-   "coastal": false
+   "area": 1656,
+   "coastal": true
   },
   {
    "label": 392,
    "kind": "land",
    "key": "STATE_MACRO00_0392",
    "macro": 0,
-   "area": 22934,
-   "coastal": true
+   "area": 13192,
+   "coastal": false
   },
   {
    "label": 393,
    "kind": "land",
    "key": "STATE_MACRO00_0393",
    "macro": 0,
-   "area": 20946,
-   "coastal": true
+   "area": 18508,
+   "coastal": false
   },
   {
    "label": 394,
    "kind": "land",
    "key": "STATE_MACRO00_0394",
    "macro": 0,
-   "area": 5757,
+   "area": 24425,
    "coastal": true
   },
   {
@@ -3166,15 +3166,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0395",
    "macro": 0,
-   "area": 31031,
-   "coastal": true
+   "area": 21207,
+   "coastal": false
   },
   {
    "label": 396,
    "kind": "land",
    "key": "STATE_MACRO00_0396",
    "macro": 0,
-   "area": 298,
+   "area": 31031,
    "coastal": true
   },
   {
@@ -3182,7 +3182,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0397",
    "macro": 0,
-   "area": 10560,
+   "area": 298,
    "coastal": true
   },
   {
@@ -3190,7 +3190,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0398",
    "macro": 0,
-   "area": 7254,
+   "area": 10560,
    "coastal": true
   },
   {
@@ -3198,7 +3198,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0399",
    "macro": 0,
-   "area": 300,
+   "area": 7254,
    "coastal": true
   },
   {
@@ -3206,7 +3206,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0400",
    "macro": 0,
-   "area": 21647,
+   "area": 300,
    "coastal": true
   },
   {
@@ -3214,7 +3214,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0401",
    "macro": 0,
-   "area": 28904,
+   "area": 21948,
    "coastal": false
   },
   {
@@ -3222,23 +3222,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0402",
    "macro": 0,
-   "area": 15918,
-   "coastal": true
+   "area": 28904,
+   "coastal": false
   },
   {
    "label": 403,
    "kind": "land",
    "key": "STATE_MACRO00_0403",
    "macro": 0,
-   "area": 14865,
-   "coastal": true
+   "area": 16053,
+   "coastal": false
   },
   {
    "label": 404,
    "kind": "land",
    "key": "STATE_MACRO00_0404",
    "macro": 0,
-   "area": 26665,
+   "area": 14865,
    "coastal": true
   },
   {
@@ -3246,15 +3246,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0405",
    "macro": 0,
-   "area": 30252,
-   "coastal": true
+   "area": 26895,
+   "coastal": false
   },
   {
    "label": 406,
    "kind": "land",
    "key": "STATE_MACRO00_0406",
    "macro": 0,
-   "area": 984,
+   "area": 30252,
    "coastal": true
   },
   {
@@ -3262,7 +3262,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0407",
    "macro": 0,
-   "area": 3649,
+   "area": 984,
    "coastal": true
   },
   {
@@ -3270,15 +3270,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0408",
    "macro": 0,
-   "area": 6187,
-   "coastal": false
+   "area": 3649,
+   "coastal": true
   },
   {
    "label": 409,
    "kind": "land",
    "key": "STATE_MACRO00_0409",
    "macro": 0,
-   "area": 11211,
+   "area": 6187,
    "coastal": false
   },
   {
@@ -3286,7 +3286,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0410",
    "macro": 0,
-   "area": 17664,
+   "area": 11211,
    "coastal": false
   },
   {
@@ -3294,7 +3294,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0411",
    "macro": 0,
-   "area": 8321,
+   "area": 9005,
    "coastal": false
   },
   {
@@ -3302,7 +3302,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0412",
    "macro": 0,
-   "area": 13503,
+   "area": 17664,
    "coastal": false
   },
   {
@@ -3310,71 +3310,71 @@
    "kind": "land",
    "key": "STATE_MACRO00_0413",
    "macro": 0,
-   "area": 25807,
-   "coastal": true
+   "area": 8321,
+   "coastal": false
   },
   {
    "label": 414,
    "kind": "land",
    "key": "STATE_MACRO00_0414",
    "macro": 0,
-   "area": 22252,
-   "coastal": true
+   "area": 13503,
+   "coastal": false
   },
   {
    "label": 415,
    "kind": "land",
    "key": "STATE_MACRO00_0415",
    "macro": 0,
-   "area": 43090,
-   "coastal": true
+   "area": 26050,
+   "coastal": false
   },
   {
    "label": 416,
    "kind": "land",
    "key": "STATE_MACRO00_0416",
    "macro": 0,
-   "area": 11803,
-   "coastal": true
+   "area": 22840,
+   "coastal": false
   },
   {
    "label": 417,
    "kind": "land",
    "key": "STATE_MACRO00_0417",
    "macro": 0,
-   "area": 14185,
-   "coastal": false
+   "area": 43090,
+   "coastal": true
   },
   {
    "label": 418,
    "kind": "land",
    "key": "STATE_MACRO00_0418",
    "macro": 0,
-   "area": 9978,
-   "coastal": false
+   "area": 11803,
+   "coastal": true
   },
   {
    "label": 419,
    "kind": "land",
    "key": "STATE_MACRO00_0419",
    "macro": 0,
-   "area": 8190,
-   "coastal": true
+   "area": 14185,
+   "coastal": false
   },
   {
    "label": 420,
    "kind": "land",
    "key": "STATE_MACRO00_0420",
    "macro": 0,
-   "area": 7761,
-   "coastal": true
+   "area": 9978,
+   "coastal": false
   },
   {
    "label": 421,
    "kind": "land",
    "key": "STATE_MACRO00_0421",
    "macro": 0,
-   "area": 7206,
+   "area": 8190,
    "coastal": true
   },
   {
@@ -3382,15 +3382,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0422",
    "macro": 0,
-   "area": 8584,
-   "coastal": false
+   "area": 7761,
+   "coastal": true
   },
   {
    "label": 423,
    "kind": "land",
    "key": "STATE_MACRO00_0423",
    "macro": 0,
-   "area": 10245,
+   "area": 7206,
    "coastal": true
   },
   {
@@ -3398,23 +3398,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0424",
    "macro": 0,
-   "area": 18042,
-   "coastal": true
+   "area": 8584,
+   "coastal": false
   },
   {
    "label": 425,
    "kind": "land",
    "key": "STATE_MACRO00_0425",
    "macro": 0,
-   "area": 14653,
-   "coastal": false
+   "area": 10245,
+   "coastal": true
   },
   {
    "label": 426,
    "kind": "land",
    "key": "STATE_MACRO00_0426",
    "macro": 0,
-   "area": 16532,
+   "area": 18928,
    "coastal": false
   },
   {
@@ -3422,7 +3422,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0427",
    "macro": 0,
-   "area": 16300,
+   "area": 14653,
    "coastal": false
   },
   {
@@ -3430,7 +3430,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0428",
    "macro": 0,
-   "area": 10368,
+   "area": 16532,
    "coastal": false
   },
   {
@@ -3438,15 +3438,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0429",
    "macro": 0,
-   "area": 30961,
-   "coastal": true
+   "area": 16300,
+   "coastal": false
   },
   {
    "label": 430,
    "kind": "land",
    "key": "STATE_MACRO00_0430",
    "macro": 0,
-   "area": 17339,
+   "area": 10368,
    "coastal": false
   },
   {
@@ -3454,7 +3454,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0431",
    "macro": 0,
-   "area": 928,
+   "area": 31009,
    "coastal": true
   },
   {
@@ -3462,7 +3462,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0432",
    "macro": 0,
-   "area": 32069,
+   "area": 17339,
    "coastal": false
   },
   {
@@ -3470,7 +3470,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0433",
    "macro": 0,
-   "area": 459,
+   "area": 928,
    "coastal": true
   },
   {
@@ -3478,15 +3478,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0434",
    "macro": 0,
-   "area": 790,
-   "coastal": true
+   "area": 32069,
+   "coastal": false
   },
   {
    "label": 435,
    "kind": "land",
    "key": "STATE_MACRO00_0435",
    "macro": 0,
-   "area": 14718,
+   "area": 459,
    "coastal": true
   },
   {
@@ -3494,15 +3494,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0436",
    "macro": 0,
-   "area": 20444,
-   "coastal": false
+   "area": 790,
+   "coastal": true
   },
   {
    "label": 437,
    "kind": "land",
    "key": "STATE_MACRO00_0437",
    "macro": 0,
-   "area": 10588,
+   "area": 14699,
    "coastal": true
   },
   {
@@ -3510,15 +3510,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0438",
    "macro": 0,
-   "area": 19993,
-   "coastal": true
+   "area": 20444,
+   "coastal": false
   },
   {
    "label": 439,
    "kind": "land",
    "key": "STATE_MACRO00_0439",
    "macro": 0,
-   "area": 15021,
+   "area": 10588,
    "coastal": true
   },
   {
@@ -3526,15 +3526,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0440",
    "macro": 0,
-   "area": 17428,
-   "coastal": false
+   "area": 19993,
+   "coastal": true
   },
   {
    "label": 441,
    "kind": "land",
    "key": "STATE_MACRO00_0441",
    "macro": 0,
-   "area": 6556,
+   "area": 15021,
    "coastal": true
   },
   {
@@ -3542,23 +3542,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0442",
    "macro": 0,
-   "area": 561,
-   "coastal": true
+   "area": 17428,
+   "coastal": false
   },
   {
    "label": 443,
    "kind": "land",
    "key": "STATE_MACRO00_0443",
    "macro": 0,
-   "area": 14973,
-   "coastal": false
+   "area": 6556,
+   "coastal": true
   },
   {
    "label": 444,
    "kind": "land",
    "key": "STATE_MACRO00_0444",
    "macro": 0,
-   "area": 36803,
+   "area": 561,
    "coastal": true
   },
   {
@@ -3566,7 +3566,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0445",
    "macro": 0,
-   "area": 6076,
+   "area": 14973,
    "coastal": false
   },
   {
@@ -3574,7 +3574,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0446",
    "macro": 0,
-   "area": 9235,
+   "area": 36803,
    "coastal": true
   },
   {
@@ -3582,15 +3582,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0447",
    "macro": 0,
-   "area": 24355,
-   "coastal": true
+   "area": 6060,
+   "coastal": false
   },
   {
    "label": 448,
    "kind": "land",
    "key": "STATE_MACRO00_0448",
    "macro": 0,
-   "area": 15920,
+   "area": 9235,
    "coastal": true
   },
   {
@@ -3598,7 +3598,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0449",
    "macro": 0,
-   "area": 9110,
+   "area": 24355,
    "coastal": true
   },
   {
@@ -3606,23 +3606,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0450",
    "macro": 0,
-   "area": 260,
-   "coastal": true
+   "area": 15916,
+   "coastal": false
   },
   {
    "label": 451,
    "kind": "land",
    "key": "STATE_MACRO00_0451",
    "macro": 0,
-   "area": 11832,
-   "coastal": false
+   "area": 9092,
+   "coastal": true
   },
   {
    "label": 452,
    "kind": "land",
    "key": "STATE_MACRO00_0452",
    "macro": 0,
-   "area": 15996,
+   "area": 260,
    "coastal": true
   },
   {
@@ -3630,15 +3630,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0453",
    "macro": 0,
-   "area": 7673,
-   "coastal": true
+   "area": 11832,
+   "coastal": false
   },
   {
    "label": 454,
    "kind": "land",
    "key": "STATE_MACRO00_0454",
    "macro": 0,
-   "area": 12804,
+   "area": 19151,
    "coastal": true
   },
   {
@@ -3646,7 +3646,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0455",
    "macro": 0,
-   "area": 35429,
+   "area": 7673,
    "coastal": true
   },
   {
@@ -3654,15 +3654,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0456",
    "macro": 0,
-   "area": 15223,
-   "coastal": true
+   "area": 16647,
+   "coastal": false
   },
   {
    "label": 457,
    "kind": "land",
    "key": "STATE_MACRO00_0457",
    "macro": 0,
-   "area": 8027,
+   "area": 17146,
    "coastal": true
   },
   {
@@ -3670,15 +3670,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0458",
    "macro": 0,
-   "area": 24868,
-   "coastal": true
+   "area": 11689,
+   "coastal": false
   },
   {
    "label": 459,
    "kind": "land",
    "key": "STATE_MACRO00_0459",
    "macro": 0,
-   "area": 5754,
+   "area": 8834,
    "coastal": true
   },
   {
@@ -3686,7 +3686,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0460",
    "macro": 0,
-   "area": 8202,
+   "area": 24868,
    "coastal": true
   },
   {
@@ -3694,7 +3694,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0461",
    "macro": 0,
-   "area": 11276,
+   "area": 17496,
    "coastal": true
   },
   {
@@ -3702,7 +3702,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0462",
    "macro": 0,
-   "area": 19216,
+   "area": 8202,
    "coastal": true
   },
   {
@@ -3710,7 +3710,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0463",
    "macro": 0,
-   "area": 11653,
+   "area": 11276,
    "coastal": true
   },
   {
@@ -3718,7 +3718,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0464",
    "macro": 0,
-   "area": 8408,
+   "area": 19491,
    "coastal": true
   },
   {
@@ -3726,7 +3726,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0465",
    "macro": 0,
-   "area": 8728,
+   "area": 11653,
    "coastal": true
   },
   {
@@ -3734,15 +3734,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0466",
    "macro": 0,
-   "area": 13824,
-   "coastal": false
+   "area": 8408,
+   "coastal": true
   },
   {
    "label": 467,
    "kind": "land",
    "key": "STATE_MACRO00_0467",
    "macro": 0,
-   "area": 11421,
+   "area": 8728,
    "coastal": true
   },
   {
@@ -3750,23 +3750,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0468",
    "macro": 0,
-   "area": 25536,
-   "coastal": true
+   "area": 13824,
+   "coastal": false
   },
   {
    "label": 469,
    "kind": "land",
    "key": "STATE_MACRO00_0469",
    "macro": 0,
-   "area": 3410,
-   "coastal": true
+   "area": 22734,
+   "coastal": false
   },
   {
    "label": 470,
    "kind": "land",
    "key": "STATE_MACRO00_0470",
    "macro": 0,
-   "area": 6493,
+   "area": 3410,
    "coastal": true
   },
   {
@@ -3774,23 +3774,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0471",
    "macro": 0,
-   "area": 23623,
-   "coastal": true
+   "area": 7384,
+   "coastal": false
   },
   {
    "label": 472,
    "kind": "land",
    "key": "STATE_MACRO00_0472",
    "macro": 0,
-   "area": 7301,
-   "coastal": false
+   "area": 6493,
+   "coastal": true
   },
   {
    "label": 473,
    "kind": "land",
    "key": "STATE_MACRO00_0473",
    "macro": 0,
-   "area": 7600,
+   "area": 23618,
    "coastal": true
   },
   {
@@ -3798,16 +3798,16 @@
    "kind": "land",
    "key": "STATE_MACRO00_0474",
    "macro": 0,
-   "area": 8290,
-   "coastal": true
+   "area": 7301,
+   "coastal": false
   },
   {
    "label": 475,
    "kind": "land",
    "key": "STATE_MACRO00_0475",
    "macro": 0,
-   "area": 19988,
-   "coastal": true
+   "area": 20346,
+   "coastal": false
   },
   {
    "label": 476,
@@ -3830,23 +3830,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0478",
    "macro": 0,
-   "area": 19088,
-   "coastal": true
+   "area": 7051,
+   "coastal": false
   },
   {
    "label": 479,
    "kind": "land",
    "key": "STATE_MACRO00_0479",
    "macro": 0,
-   "area": 6715,
-   "coastal": true
+   "area": 13553,
+   "coastal": false
   },
   {
    "label": 480,
    "kind": "land",
    "key": "STATE_MACRO00_0480",
    "macro": 0,
-   "area": 11849,
+   "area": 19088,
    "coastal": true
   },
   {
@@ -3854,7 +3854,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0481",
    "macro": 0,
-   "area": 32154,
+   "area": 6715,
    "coastal": true
   },
   {
@@ -3862,7 +3862,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0482",
    "macro": 0,
-   "area": 29759,
+   "area": 11849,
    "coastal": true
   },
   {
@@ -3870,7 +3870,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0483",
    "macro": 0,
-   "area": 10242,
+   "area": 32154,
    "coastal": true
   },
   {
@@ -3878,15 +3878,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0484",
    "macro": 0,
-   "area": 6174,
-   "coastal": false
+   "area": 29759,
+   "coastal": true
   },
   {
    "label": 485,
    "kind": "land",
    "key": "STATE_MACRO00_0485",
    "macro": 0,
-   "area": 396,
+   "area": 10221,
    "coastal": true
   },
   {
@@ -3894,23 +3894,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0486",
    "macro": 0,
-   "area": 21312,
-   "coastal": true
+   "area": 6174,
+   "coastal": false
   },
   {
    "label": 487,
    "kind": "land",
    "key": "STATE_MACRO00_0487",
    "macro": 0,
-   "area": 19267,
-   "coastal": false
+   "area": 27366,
+   "coastal": true
   },
   {
    "label": 488,
    "kind": "land",
    "key": "STATE_MACRO00_0488",
    "macro": 0,
-   "area": 22118,
+   "area": 396,
    "coastal": true
   },
   {
@@ -3918,7 +3918,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0489",
    "macro": 0,
-   "area": 24207,
+   "area": 19267,
    "coastal": false
   },
   {
@@ -3926,7 +3926,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0490",
    "macro": 0,
-   "area": 5905,
+   "area": 22118,
    "coastal": true
   },
   {
@@ -3934,7 +3934,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0491",
    "macro": 0,
-   "area": 11083,
+   "area": 24207,
    "coastal": false
   },
   {
@@ -3942,47 +3942,47 @@
    "kind": "land",
    "key": "STATE_MACRO00_0492",
    "macro": 0,
-   "area": 6199,
-   "coastal": false
+   "area": 5905,
+   "coastal": true
   },
   {
    "label": 493,
    "kind": "land",
    "key": "STATE_MACRO00_0493",
    "macro": 0,
-   "area": 42881,
-   "coastal": true
+   "area": 11083,
+   "coastal": false
   },
   {
    "label": 494,
    "kind": "land",
    "key": "STATE_MACRO00_0494",
    "macro": 0,
-   "area": 18325,
-   "coastal": true
+   "area": 6199,
+   "coastal": false
   },
   {
    "label": 495,
    "kind": "land",
    "key": "STATE_MACRO00_0495",
    "macro": 0,
-   "area": 7411,
-   "coastal": true
+   "area": 43498,
+   "coastal": false
   },
   {
    "label": 496,
    "kind": "land",
    "key": "STATE_MACRO00_0496",
    "macro": 0,
-   "area": 14449,
-   "coastal": true
+   "area": 18798,
+   "coastal": false
   },
   {
    "label": 497,
    "kind": "land",
    "key": "STATE_MACRO00_0497",
    "macro": 0,
-   "area": 27138,
+   "area": 14449,
    "coastal": true
   },
   {
@@ -3990,7 +3990,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0498",
    "macro": 0,
-   "area": 17165,
+   "area": 27138,
    "coastal": true
   },
   {
@@ -3998,7 +3998,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0499",
    "macro": 0,
-   "area": 3986,
+   "area": 17165,
    "coastal": true
   },
   {
@@ -4006,7 +4006,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0500",
    "macro": 0,
-   "area": 8924,
+   "area": 3986,
    "coastal": true
   },
   {
@@ -4014,7 +4014,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0501",
    "macro": 0,
-   "area": 344,
+   "area": 8385,
    "coastal": true
   },
   {
@@ -4022,7 +4022,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0502",
    "macro": 0,
-   "area": 29685,
+   "area": 344,
    "coastal": true
   },
   {
@@ -4030,7 +4030,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0503",
    "macro": 0,
-   "area": 17126,
+   "area": 29085,
    "coastal": true
   },
   {
@@ -4038,39 +4038,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0504",
    "macro": 0,
-   "area": 21975,
-   "coastal": false
+   "area": 17126,
+   "coastal": true
   },
   {
    "label": 505,
    "kind": "land",
    "key": "STATE_MACRO00_0505",
    "macro": 0,
-   "area": 10238,
-   "coastal": true
+   "area": 19947,
+   "coastal": false
   },
   {
    "label": 506,
    "kind": "land",
    "key": "STATE_MACRO00_0506",
    "macro": 0,
-   "area": 258,
-   "coastal": true
+   "area": 21975,
+   "coastal": false
   },
   {
    "label": 507,
    "kind": "land",
    "key": "STATE_MACRO00_0507",
    "macro": 0,
-   "area": 11137,
-   "coastal": true
+   "area": 13494,
+   "coastal": false
   },
   {
    "label": 508,
    "kind": "land",
    "key": "STATE_MACRO00_0508",
    "macro": 0,
-   "area": 31840,
+   "area": 258,
    "coastal": true
   },
   {
@@ -4078,7 +4078,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0509",
    "macro": 0,
-   "area": 7580,
+   "area": 12046,
    "coastal": true
   },
   {
@@ -4086,7 +4086,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0510",
    "macro": 0,
-   "area": 12730,
+   "area": 32097,
    "coastal": true
   },
   {
@@ -4094,7 +4094,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0511",
    "macro": 0,
-   "area": 2773,
+   "area": 7580,
    "coastal": true
   },
   {
@@ -4102,31 +4102,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0512",
    "macro": 0,
-   "area": 9115,
-   "coastal": false
+   "area": 12658,
+   "coastal": true
   },
   {
    "label": 513,
    "kind": "land",
    "key": "STATE_MACRO00_0513",
    "macro": 0,
-   "area": 10977,
-   "coastal": false
+   "area": 2773,
+   "coastal": true
   },
   {
    "label": 514,
    "kind": "land",
    "key": "STATE_MACRO00_0514",
    "macro": 0,
-   "area": 6022,
-   "coastal": true
+   "area": 9115,
+   "coastal": false
   },
   {
    "label": 515,
    "kind": "land",
    "key": "STATE_MACRO00_0515",
    "macro": 0,
-   "area": 18691,
+   "area": 10977,
    "coastal": false
   },
   {
@@ -4134,7 +4134,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0516",
    "macro": 0,
-   "area": 519,
+   "area": 6022,
    "coastal": true
   },
   {
@@ -4142,23 +4142,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0517",
    "macro": 0,
-   "area": 34334,
-   "coastal": true
+   "area": 18691,
+   "coastal": false
   },
   {
    "label": 518,
    "kind": "land",
    "key": "STATE_MACRO00_0518",
    "macro": 0,
-   "area": 10653,
-   "coastal": false
+   "area": 519,
+   "coastal": true
   },
   {
    "label": 519,
    "kind": "land",
    "key": "STATE_MACRO00_0519",
    "macro": 0,
-   "area": 12606,
+   "area": 36013,
    "coastal": false
   },
   {
@@ -4166,15 +4166,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0520",
    "macro": 0,
-   "area": 13724,
-   "coastal": true
+   "area": 10653,
+   "coastal": false
   },
   {
    "label": 521,
    "kind": "land",
    "key": "STATE_MACRO00_0521",
    "macro": 0,
-   "area": 10632,
+   "area": 12606,
    "coastal": false
   },
   {
@@ -4182,23 +4182,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0522",
    "macro": 0,
-   "area": 7794,
-   "coastal": true
+   "area": 14543,
+   "coastal": false
   },
   {
    "label": 523,
    "kind": "land",
    "key": "STATE_MACRO00_0523",
    "macro": 0,
-   "area": 9964,
-   "coastal": true
+   "area": 10632,
+   "coastal": false
   },
   {
    "label": 524,
    "kind": "land",
    "key": "STATE_MACRO00_0524",
    "macro": 0,
-   "area": 16047,
+   "area": 7794,
    "coastal": true
   },
   {
@@ -4206,7 +4206,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0525",
    "macro": 0,
-   "area": 7314,
+   "area": 9964,
    "coastal": true
   },
   {
@@ -4214,31 +4214,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0526",
    "macro": 0,
-   "area": 24453,
-   "coastal": false
+   "area": 16047,
+   "coastal": true
   },
   {
    "label": 527,
    "kind": "land",
    "key": "STATE_MACRO00_0527",
    "macro": 0,
-   "area": 10593,
-   "coastal": false
+   "area": 7314,
+   "coastal": true
   },
   {
    "label": 528,
    "kind": "land",
    "key": "STATE_MACRO00_0528",
    "macro": 0,
-   "area": 17918,
-   "coastal": true
+   "area": 24453,
+   "coastal": false
   },
   {
    "label": 529,
    "kind": "land",
    "key": "STATE_MACRO00_0529",
    "macro": 0,
-   "area": 6833,
+   "area": 10593,
    "coastal": false
   },
   {
@@ -4246,31 +4246,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0530",
    "macro": 0,
-   "area": 12621,
-   "coastal": false
+   "area": 17918,
+   "coastal": true
   },
   {
    "label": 531,
    "kind": "land",
    "key": "STATE_MACRO00_0531",
    "macro": 0,
-   "area": 7372,
-   "coastal": true
+   "area": 6833,
+   "coastal": false
   },
   {
    "label": 532,
    "kind": "land",
    "key": "STATE_MACRO00_0532",
    "macro": 0,
-   "area": 10135,
-   "coastal": true
+   "area": 12621,
+   "coastal": false
   },
   {
    "label": 533,
    "kind": "land",
    "key": "STATE_MACRO00_0533",
    "macro": 0,
-   "area": 409,
+   "area": 7372,
    "coastal": true
   },
   {
@@ -4278,31 +4278,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0534",
    "macro": 0,
-   "area": 12888,
-   "coastal": false
+   "area": 10135,
+   "coastal": true
   },
   {
    "label": 535,
    "kind": "land",
    "key": "STATE_MACRO00_0535",
    "macro": 0,
-   "area": 7124,
-   "coastal": false
+   "area": 409,
+   "coastal": true
   },
   {
    "label": 536,
    "kind": "land",
    "key": "STATE_MACRO00_0536",
    "macro": 0,
-   "area": 259,
-   "coastal": true
+   "area": 12888,
+   "coastal": false
   },
   {
    "label": 537,
    "kind": "land",
    "key": "STATE_MACRO00_0537",
    "macro": 0,
-   "area": 15149,
+   "area": 7124,
    "coastal": false
   },
   {
@@ -4310,7 +4310,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0538",
    "macro": 0,
-   "area": 19630,
+   "area": 259,
    "coastal": true
   },
   {
@@ -4318,7 +4318,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0539",
    "macro": 0,
-   "area": 18245,
+   "area": 15149,
    "coastal": false
   },
   {
@@ -4326,31 +4326,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0540",
    "macro": 0,
-   "area": 11114,
-   "coastal": false
+   "area": 20322,
+   "coastal": true
   },
   {
    "label": 541,
    "kind": "land",
    "key": "STATE_MACRO00_0541",
    "macro": 0,
-   "area": 8655,
-   "coastal": true
+   "area": 18245,
+   "coastal": false
   },
   {
    "label": 542,
    "kind": "land",
    "key": "STATE_MACRO00_0542",
    "macro": 0,
-   "area": 29245,
-   "coastal": true
+   "area": 11114,
+   "coastal": false
   },
   {
    "label": 543,
    "kind": "land",
    "key": "STATE_MACRO00_0543",
    "macro": 0,
-   "area": 15307,
+   "area": 8655,
    "coastal": true
   },
   {
@@ -4358,15 +4358,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0544",
    "macro": 0,
-   "area": 8948,
-   "coastal": false
+   "area": 30528,
+   "coastal": true
   },
   {
    "label": 545,
    "kind": "land",
    "key": "STATE_MACRO00_0545",
    "macro": 0,
-   "area": 12297,
+   "area": 15307,
    "coastal": true
   },
   {
@@ -4374,23 +4374,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0546",
    "macro": 0,
-   "area": 27599,
-   "coastal": true
+   "area": 8948,
+   "coastal": false
   },
   {
    "label": 547,
    "kind": "land",
    "key": "STATE_MACRO00_0547",
    "macro": 0,
-   "area": 21002,
-   "coastal": true
+   "area": 12342,
+   "coastal": false
   },
   {
    "label": 548,
    "kind": "land",
    "key": "STATE_MACRO00_0548",
    "macro": 0,
-   "area": 19491,
+   "area": 27599,
    "coastal": true
   },
   {
@@ -4398,15 +4398,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0549",
    "macro": 0,
-   "area": 11027,
-   "coastal": false
+   "area": 21002,
+   "coastal": true
   },
   {
    "label": 550,
    "kind": "land",
    "key": "STATE_MACRO00_0550",
    "macro": 0,
-   "area": 12153,
+   "area": 19491,
    "coastal": true
   },
   {
@@ -4414,7 +4414,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0551",
    "macro": 0,
-   "area": 24740,
+   "area": 11027,
    "coastal": false
   },
   {
@@ -4422,7 +4422,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0552",
    "macro": 0,
-   "area": 23200,
+   "area": 12281,
    "coastal": true
   },
   {
@@ -4430,15 +4430,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0553",
    "macro": 0,
-   "area": 21606,
-   "coastal": true
+   "area": 24740,
+   "coastal": false
   },
   {
    "label": 554,
    "kind": "land",
    "key": "STATE_MACRO00_0554",
    "macro": 0,
-   "area": 17043,
+   "area": 23608,
    "coastal": true
   },
   {
@@ -4446,15 +4446,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0555",
    "macro": 0,
-   "area": 11221,
-   "coastal": true
+   "area": 21866,
+   "coastal": false
   },
   {
    "label": 556,
    "kind": "land",
    "key": "STATE_MACRO00_0556",
    "macro": 0,
-   "area": 12733,
+   "area": 17043,
    "coastal": true
   },
   {
@@ -4462,7 +4462,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0557",
    "macro": 0,
-   "area": 12098,
+   "area": 11221,
    "coastal": true
   },
   {
@@ -4470,7 +4470,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0558",
    "macro": 0,
-   "area": 29287,
+   "area": 12733,
    "coastal": true
   },
   {
@@ -4478,7 +4478,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0559",
    "macro": 0,
-   "area": 947,
+   "area": 12098,
    "coastal": true
   },
   {
@@ -4486,39 +4486,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0560",
    "macro": 0,
-   "area": 21449,
-   "coastal": false
+   "area": 29287,
+   "coastal": true
   },
   {
    "label": 561,
    "kind": "land",
    "key": "STATE_MACRO00_0561",
    "macro": 0,
-   "area": 10080,
-   "coastal": false
+   "area": 947,
+   "coastal": true
   },
   {
    "label": 562,
    "kind": "land",
    "key": "STATE_MACRO00_0562",
    "macro": 0,
-   "area": 2414,
-   "coastal": true
+   "area": 21449,
+   "coastal": false
   },
   {
    "label": 563,
    "kind": "land",
    "key": "STATE_MACRO00_0563",
    "macro": 0,
-   "area": 18349,
-   "coastal": true
+   "area": 10080,
+   "coastal": false
   },
   {
    "label": 564,
    "kind": "land",
    "key": "STATE_MACRO00_0564",
    "macro": 0,
-   "area": 1893,
+   "area": 2414,
    "coastal": true
   },
   {
@@ -4526,7 +4526,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0565",
    "macro": 0,
-   "area": 9550,
+   "area": 18349,
    "coastal": true
   },
   {
@@ -4534,15 +4534,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0566",
    "macro": 0,
-   "area": 7485,
-   "coastal": false
+   "area": 1893,
+   "coastal": true
   },
   {
    "label": 567,
    "kind": "land",
    "key": "STATE_MACRO00_0567",
    "macro": 0,
-   "area": 19815,
+   "area": 9550,
    "coastal": true
   },
   {
@@ -4550,15 +4550,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0568",
    "macro": 0,
-   "area": 16264,
-   "coastal": true
+   "area": 7485,
+   "coastal": false
   },
   {
    "label": 569,
    "kind": "land",
    "key": "STATE_MACRO00_0569",
    "macro": 0,
-   "area": 416,
+   "area": 19815,
    "coastal": true
   },
   {
@@ -4566,7 +4566,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0570",
    "macro": 0,
-   "area": 17591,
+   "area": 16264,
    "coastal": true
   },
   {
@@ -4574,7 +4574,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0571",
    "macro": 0,
-   "area": 22665,
+   "area": 416,
    "coastal": true
   },
   {
@@ -4582,7 +4582,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0572",
    "macro": 0,
-   "area": 13419,
+   "area": 17591,
    "coastal": true
   },
   {
@@ -4590,7 +4590,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0573",
    "macro": 0,
-   "area": 7413,
+   "area": 22958,
    "coastal": true
   },
   {
@@ -4598,7 +4598,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0574",
    "macro": 0,
-   "area": 12936,
+   "area": 13419,
    "coastal": true
   },
   {
@@ -4606,7 +4606,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0575",
    "macro": 0,
-   "area": 19373,
+   "area": 7413,
    "coastal": true
   },
   {
@@ -4614,7 +4614,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0576",
    "macro": 0,
-   "area": 7535,
+   "area": 12936,
    "coastal": true
   },
   {
@@ -4622,15 +4622,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0577",
    "macro": 0,
-   "area": 9827,
-   "coastal": false
+   "area": 19373,
+   "coastal": true
   },
   {
    "label": 578,
    "kind": "land",
    "key": "STATE_MACRO00_0578",
    "macro": 0,
-   "area": 8016,
+   "area": 7187,
    "coastal": false
   },
   {
@@ -4638,15 +4638,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0579",
    "macro": 0,
-   "area": 14398,
-   "coastal": true
+   "area": 9827,
+   "coastal": false
   },
   {
    "label": 580,
    "kind": "land",
    "key": "STATE_MACRO00_0580",
    "macro": 0,
-   "area": 19006,
+   "area": 8016,
    "coastal": false
   },
   {
@@ -4654,23 +4654,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0581",
    "macro": 0,
-   "area": 5992,
-   "coastal": false
+   "area": 14398,
+   "coastal": true
   },
   {
    "label": 582,
    "kind": "land",
    "key": "STATE_MACRO00_0582",
    "macro": 0,
-   "area": 9167,
-   "coastal": true
+   "area": 19006,
+   "coastal": false
   },
   {
    "label": 583,
    "kind": "land",
    "key": "STATE_MACRO00_0583",
    "macro": 0,
-   "area": 7835,
+   "area": 5992,
    "coastal": false
   },
   {
@@ -4678,15 +4678,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0584",
    "macro": 0,
-   "area": 1589,
-   "coastal": true
+   "area": 9785,
+   "coastal": false
   },
   {
    "label": 585,
    "kind": "land",
    "key": "STATE_MACRO00_0585",
    "macro": 0,
-   "area": 6955,
+   "area": 7835,
    "coastal": false
   },
   {
@@ -4694,7 +4694,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0586",
    "macro": 0,
-   "area": 19683,
+   "area": 1589,
    "coastal": true
   },
   {
@@ -4702,23 +4702,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0587",
    "macro": 0,
-   "area": 1765,
-   "coastal": true
+   "area": 6955,
+   "coastal": false
   },
   {
    "label": 588,
    "kind": "land",
    "key": "STATE_MACRO00_0588",
    "macro": 0,
-   "area": 7324,
-   "coastal": false
+   "area": 19683,
+   "coastal": true
   },
   {
    "label": 589,
    "kind": "land",
    "key": "STATE_MACRO00_0589",
    "macro": 0,
-   "area": 13083,
+   "area": 1765,
    "coastal": true
   },
   {
@@ -4726,15 +4726,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0590",
    "macro": 0,
-   "area": 8939,
-   "coastal": true
+   "area": 7324,
+   "coastal": false
   },
   {
    "label": 591,
    "kind": "land",
    "key": "STATE_MACRO00_0591",
    "macro": 0,
-   "area": 26793,
+   "area": 13083,
    "coastal": true
   },
   {
@@ -4742,7 +4742,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0592",
    "macro": 0,
-   "area": 18742,
+   "area": 8939,
    "coastal": true
   },
   {
@@ -4750,15 +4750,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0593",
    "macro": 0,
-   "area": 12029,
-   "coastal": false
+   "area": 26793,
+   "coastal": true
   },
   {
    "label": 594,
    "kind": "land",
    "key": "STATE_MACRO00_0594",
    "macro": 0,
-   "area": 8306,
+   "area": 18742,
    "coastal": true
   },
   {
@@ -4766,23 +4766,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0595",
    "macro": 0,
-   "area": 6088,
-   "coastal": true
+   "area": 12029,
+   "coastal": false
   },
   {
    "label": 596,
    "kind": "land",
    "key": "STATE_MACRO00_0596",
    "macro": 0,
-   "area": 6174,
-   "coastal": false
+   "area": 8306,
+   "coastal": true
   },
   {
    "label": 597,
    "kind": "land",
    "key": "STATE_MACRO00_0597",
    "macro": 0,
-   "area": 1216,
+   "area": 6085,
    "coastal": true
   },
   {
@@ -4790,7 +4790,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0598",
    "macro": 0,
-   "area": 27013,
+   "area": 6174,
    "coastal": false
   },
   {
@@ -4798,7 +4798,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0599",
    "macro": 0,
-   "area": 11923,
+   "area": 1216,
    "coastal": true
   },
   {
@@ -4806,7 +4806,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0600",
    "macro": 0,
-   "area": 18152,
+   "area": 27013,
    "coastal": false
   },
   {
@@ -4814,15 +4814,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0601",
    "macro": 0,
-   "area": 6892,
-   "coastal": false
+   "area": 11923,
+   "coastal": true
   },
   {
    "label": 602,
    "kind": "land",
    "key": "STATE_MACRO00_0602",
    "macro": 0,
-   "area": 11890,
+   "area": 18087,
    "coastal": false
   },
   {
@@ -4830,31 +4830,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0603",
    "macro": 0,
-   "area": 12695,
-   "coastal": true
+   "area": 6892,
+   "coastal": false
   },
   {
    "label": 604,
    "kind": "land",
    "key": "STATE_MACRO00_0604",
    "macro": 0,
-   "area": 706,
-   "coastal": true
+   "area": 11890,
+   "coastal": false
   },
   {
    "label": 605,
    "kind": "land",
    "key": "STATE_MACRO00_0605",
    "macro": 0,
-   "area": 20362,
-   "coastal": false
+   "area": 12695,
+   "coastal": true
   },
   {
    "label": 606,
    "kind": "land",
    "key": "STATE_MACRO00_0606",
    "macro": 0,
-   "area": 413,
+   "area": 706,
    "coastal": true
   },
   {
@@ -4862,7 +4862,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0607",
    "macro": 0,
-   "area": 6739,
+   "area": 20362,
    "coastal": false
   },
   {
@@ -4870,15 +4870,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0608",
    "macro": 0,
-   "area": 6877,
-   "coastal": false
+   "area": 413,
+   "coastal": true
   },
   {
    "label": 609,
    "kind": "land",
    "key": "STATE_MACRO00_0609",
    "macro": 0,
-   "area": 7770,
+   "area": 6739,
    "coastal": false
   },
   {
@@ -4886,23 +4886,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0610",
    "macro": 0,
-   "area": 16490,
-   "coastal": true
+   "area": 6877,
+   "coastal": false
   },
   {
    "label": 611,
    "kind": "land",
    "key": "STATE_MACRO00_0611",
    "macro": 0,
-   "area": 12051,
-   "coastal": true
+   "area": 7770,
+   "coastal": false
   },
   {
    "label": 612,
    "kind": "land",
    "key": "STATE_MACRO00_0612",
    "macro": 0,
-   "area": 16302,
+   "area": 16490,
    "coastal": true
   },
   {
@@ -4910,7 +4910,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0613",
    "macro": 0,
-   "area": 2019,
+   "area": 12051,
    "coastal": true
   },
   {
@@ -4918,7 +4918,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0614",
    "macro": 0,
-   "area": 390,
+   "area": 16112,
    "coastal": true
   },
   {
@@ -4926,7 +4926,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0615",
    "macro": 0,
-   "area": 1141,
+   "area": 2019,
    "coastal": true
   },
   {
@@ -4934,7 +4934,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0616",
    "macro": 0,
-   "area": 6436,
+   "area": 390,
    "coastal": true
   },
   {
@@ -4942,15 +4942,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0617",
    "macro": 0,
-   "area": 12785,
-   "coastal": false
+   "area": 1141,
+   "coastal": true
   },
   {
    "label": 618,
    "kind": "land",
    "key": "STATE_MACRO00_0618",
    "macro": 0,
-   "area": 17313,
+   "area": 6436,
    "coastal": true
   },
   {
@@ -4958,7 +4958,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0619",
    "macro": 0,
-   "area": 8427,
+   "area": 12785,
    "coastal": false
   },
   {
@@ -4966,7 +4966,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0620",
    "macro": 0,
-   "area": 17408,
+   "area": 17313,
    "coastal": true
   },
   {
@@ -4974,15 +4974,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0621",
    "macro": 0,
-   "area": 9371,
-   "coastal": true
+   "area": 8427,
+   "coastal": false
   },
   {
    "label": 622,
    "kind": "land",
    "key": "STATE_MACRO00_0622",
    "macro": 0,
-   "area": 936,
+   "area": 17408,
    "coastal": true
   },
   {
@@ -4990,15 +4990,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0623",
    "macro": 0,
-   "area": 12482,
-   "coastal": false
+   "area": 9371,
+   "coastal": true
   },
   {
    "label": 624,
    "kind": "land",
    "key": "STATE_MACRO00_0624",
    "macro": 0,
-   "area": 273,
+   "area": 936,
    "coastal": true
   },
   {
@@ -5006,7 +5006,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0625",
    "macro": 0,
-   "area": 7763,
+   "area": 12482,
    "coastal": false
   },
   {
@@ -5014,31 +5014,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0626",
    "macro": 0,
-   "area": 10167,
-   "coastal": false
+   "area": 273,
+   "coastal": true
   },
   {
    "label": 627,
    "kind": "land",
    "key": "STATE_MACRO00_0627",
    "macro": 0,
-   "area": 35934,
-   "coastal": true
+   "area": 7763,
+   "coastal": false
   },
   {
    "label": 628,
    "kind": "land",
    "key": "STATE_MACRO00_0628",
    "macro": 0,
-   "area": 39910,
-   "coastal": true
+   "area": 10167,
+   "coastal": false
   },
   {
    "label": 629,
    "kind": "land",
    "key": "STATE_MACRO00_0629",
    "macro": 0,
-   "area": 11433,
+   "area": 35989,
    "coastal": true
   },
   {
@@ -5046,7 +5046,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0630",
    "macro": 0,
-   "area": 8229,
+   "area": 40819,
    "coastal": true
   },
   {
@@ -5054,15 +5054,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0631",
    "macro": 0,
-   "area": 22718,
-   "coastal": false
+   "area": 11433,
+   "coastal": true
   },
   {
    "label": 632,
    "kind": "land",
    "key": "STATE_MACRO00_0632",
    "macro": 0,
-   "area": 258,
+   "area": 15432,
    "coastal": true
   },
   {
@@ -5070,15 +5070,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0633",
    "macro": 0,
-   "area": 15793,
-   "coastal": true
+   "area": 22718,
+   "coastal": false
   },
   {
    "label": 634,
    "kind": "land",
    "key": "STATE_MACRO00_0634",
    "macro": 0,
-   "area": 13770,
+   "area": 258,
    "coastal": true
   },
   {
@@ -5086,7 +5086,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0635",
    "macro": 0,
-   "area": 36579,
+   "area": 15793,
    "coastal": true
   },
   {
@@ -5094,7 +5094,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0636",
    "macro": 0,
-   "area": 272,
+   "area": 14120,
    "coastal": true
   },
   {
@@ -5102,7 +5102,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0637",
    "macro": 0,
-   "area": 18208,
+   "area": 36579,
    "coastal": true
   },
   {
@@ -5110,7 +5110,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0638",
    "macro": 0,
-   "area": 18952,
+   "area": 272,
    "coastal": true
   },
   {
@@ -5118,7 +5118,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0639",
    "macro": 0,
-   "area": 16201,
+   "area": 18208,
    "coastal": true
   },
   {
@@ -5126,15 +5126,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0640",
    "macro": 0,
-   "area": 7122,
-   "coastal": true
+   "area": 22899,
+   "coastal": false
   },
   {
    "label": 641,
    "kind": "land",
    "key": "STATE_MACRO00_0641",
    "macro": 0,
-   "area": 7595,
+   "area": 13470,
    "coastal": true
   },
   {
@@ -5142,7 +5142,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0642",
    "macro": 0,
-   "area": 16309,
+   "area": 7122,
    "coastal": true
   },
   {
@@ -5150,47 +5150,47 @@
    "kind": "land",
    "key": "STATE_MACRO00_0643",
    "macro": 0,
-   "area": 19885,
-   "coastal": false
+   "area": 7595,
+   "coastal": true
   },
   {
    "label": 644,
    "kind": "land",
    "key": "STATE_MACRO00_0644",
    "macro": 0,
-   "area": 5931,
-   "coastal": false
+   "area": 16309,
+   "coastal": true
   },
   {
    "label": 645,
    "kind": "land",
    "key": "STATE_MACRO00_0645",
    "macro": 0,
-   "area": 17780,
-   "coastal": true
+   "area": 7606,
+   "coastal": false
   },
   {
    "label": 646,
    "kind": "land",
    "key": "STATE_MACRO00_0646",
    "macro": 0,
-   "area": 12415,
-   "coastal": true
+   "area": 5931,
+   "coastal": false
   },
   {
    "label": 647,
    "kind": "land",
    "key": "STATE_MACRO00_0647",
    "macro": 0,
-   "area": 14322,
-   "coastal": true
+   "area": 12227,
+   "coastal": false
   },
   {
    "label": 648,
    "kind": "land",
    "key": "STATE_MACRO00_0648",
    "macro": 0,
-   "area": 22182,
+   "area": 13061,
    "coastal": false
   },
   {
@@ -5198,31 +5198,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0649",
    "macro": 0,
-   "area": 32357,
-   "coastal": true
+   "area": 8705,
+   "coastal": false
   },
   {
    "label": 650,
    "kind": "land",
    "key": "STATE_MACRO00_0650",
    "macro": 0,
-   "area": 17209,
-   "coastal": true
+   "area": 15213,
+   "coastal": false
   },
   {
    "label": 651,
    "kind": "land",
    "key": "STATE_MACRO00_0651",
    "macro": 0,
-   "area": 13795,
-   "coastal": true
+   "area": 22182,
+   "coastal": false
   },
   {
    "label": 652,
    "kind": "land",
    "key": "STATE_MACRO00_0652",
    "macro": 0,
-   "area": 14819,
+   "area": 30350,
    "coastal": false
   },
   {
@@ -5230,15 +5230,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0653",
    "macro": 0,
-   "area": 8082,
-   "coastal": false
+   "area": 17209,
+   "coastal": true
   },
   {
    "label": 654,
    "kind": "land",
    "key": "STATE_MACRO00_0654",
    "macro": 0,
-   "area": 14733,
+   "area": 13795,
    "coastal": true
   },
   {
@@ -5246,7 +5246,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0655",
    "macro": 0,
-   "area": 21521,
+   "area": 14819,
    "coastal": false
   },
   {
@@ -5254,31 +5254,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0656",
    "macro": 0,
-   "area": 1054,
-   "coastal": true
+   "area": 8082,
+   "coastal": false
   },
   {
    "label": 657,
    "kind": "land",
    "key": "STATE_MACRO00_0657",
    "macro": 0,
-   "area": 14685,
-   "coastal": false
+   "area": 14733,
+   "coastal": true
   },
   {
    "label": 658,
    "kind": "land",
    "key": "STATE_MACRO00_0658",
    "macro": 0,
-   "area": 961,
-   "coastal": true
+   "area": 17419,
+   "coastal": false
   },
   {
    "label": 659,
    "kind": "land",
    "key": "STATE_MACRO00_0659",
    "macro": 0,
-   "area": 33800,
+   "area": 1054,
    "coastal": true
   },
   {
@@ -5286,23 +5286,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0660",
    "macro": 0,
-   "area": 9071,
-   "coastal": true
+   "area": 14685,
+   "coastal": false
   },
   {
    "label": 661,
    "kind": "land",
    "key": "STATE_MACRO00_0661",
    "macro": 0,
-   "area": 6430,
-   "coastal": false
+   "area": 961,
+   "coastal": true
   },
   {
    "label": 662,
    "kind": "land",
    "key": "STATE_MACRO00_0662",
    "macro": 0,
-   "area": 27679,
+   "area": 33800,
    "coastal": true
   },
   {
@@ -5310,7 +5310,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0663",
    "macro": 0,
-   "area": 12464,
+   "area": 9071,
    "coastal": true
   },
   {
@@ -5318,15 +5318,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0664",
    "macro": 0,
-   "area": 288,
-   "coastal": true
+   "area": 24129,
+   "coastal": false
   },
   {
    "label": 665,
    "kind": "land",
    "key": "STATE_MACRO00_0665",
    "macro": 0,
-   "area": 8325,
+   "area": 6430,
    "coastal": false
   },
   {
@@ -5334,23 +5334,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0666",
    "macro": 0,
-   "area": 11664,
-   "coastal": true
+   "area": 20249,
+   "coastal": false
   },
   {
    "label": 667,
    "kind": "land",
    "key": "STATE_MACRO00_0667",
    "macro": 0,
-   "area": 278,
-   "coastal": true
+   "area": 18475,
+   "coastal": false
   },
   {
    "label": 668,
    "kind": "land",
    "key": "STATE_MACRO00_0668",
    "macro": 0,
-   "area": 2207,
+   "area": 288,
    "coastal": true
   },
   {
@@ -5358,15 +5358,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0669",
    "macro": 0,
-   "area": 16054,
-   "coastal": true
+   "area": 8325,
+   "coastal": false
   },
   {
    "label": 670,
    "kind": "land",
    "key": "STATE_MACRO00_0670",
    "macro": 0,
-   "area": 19284,
+   "area": 11921,
    "coastal": true
   },
   {
@@ -5374,7 +5374,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0671",
    "macro": 0,
-   "area": 1607,
+   "area": 278,
    "coastal": true
   },
   {
@@ -5382,7 +5382,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0672",
    "macro": 0,
-   "area": 6172,
+   "area": 2207,
    "coastal": true
   },
   {
@@ -5390,7 +5390,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0673",
    "macro": 0,
-   "area": 20785,
+   "area": 14455,
    "coastal": true
   },
   {
@@ -5398,7 +5398,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0674",
    "macro": 0,
-   "area": 15423,
+   "area": 19284,
    "coastal": true
   },
   {
@@ -5406,7 +5406,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0675",
    "macro": 0,
-   "area": 29799,
+   "area": 23350,
    "coastal": true
   },
   {
@@ -5414,15 +5414,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0676",
    "macro": 0,
-   "area": 13606,
-   "coastal": true
+   "area": 10980,
+   "coastal": false
   },
   {
    "label": 677,
    "kind": "land",
    "key": "STATE_MACRO00_0677",
    "macro": 0,
-   "area": 632,
+   "area": 15423,
    "coastal": true
   },
   {
@@ -5430,7 +5430,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0678",
    "macro": 0,
-   "area": 8369,
+   "area": 29799,
    "coastal": true
   },
   {
@@ -5438,23 +5438,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0679",
    "macro": 0,
-   "area": 20040,
-   "coastal": true
+   "area": 12752,
+   "coastal": false
   },
   {
    "label": 680,
    "kind": "land",
    "key": "STATE_MACRO00_0680",
    "macro": 0,
-   "area": 24559,
-   "coastal": false
+   "area": 632,
+   "coastal": true
   },
   {
    "label": 681,
    "kind": "land",
    "key": "STATE_MACRO00_0681",
    "macro": 0,
-   "area": 5720,
+   "area": 8289,
    "coastal": true
   },
   {
@@ -5462,7 +5462,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0682",
    "macro": 0,
-   "area": 10521,
+   "area": 20040,
    "coastal": true
   },
   {
@@ -5470,15 +5470,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0683",
    "macro": 0,
-   "area": 10494,
-   "coastal": true
+   "area": 36402,
+   "coastal": false
   },
   {
    "label": 684,
    "kind": "land",
    "key": "STATE_MACRO00_0684",
    "macro": 0,
-   "area": 12088,
+   "area": 5720,
    "coastal": true
   },
   {
@@ -5486,7 +5486,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0685",
    "macro": 0,
-   "area": 7984,
+   "area": 10639,
    "coastal": true
   },
   {
@@ -5494,7 +5494,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0686",
    "macro": 0,
-   "area": 33791,
+   "area": 10494,
    "coastal": true
   },
   {
@@ -5502,15 +5502,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0687",
    "macro": 0,
-   "area": 14376,
-   "coastal": true
+   "area": 11176,
+   "coastal": false
   },
   {
    "label": 688,
    "kind": "land",
    "key": "STATE_MACRO00_0688",
    "macro": 0,
-   "area": 9482,
+   "area": 7984,
    "coastal": true
   },
   {
@@ -5518,7 +5518,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0689",
    "macro": 0,
-   "area": 9399,
+   "area": 33954,
    "coastal": true
   },
   {
@@ -5526,23 +5526,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0690",
    "macro": 0,
-   "area": 426,
-   "coastal": true
+   "area": 10721,
+   "coastal": false
   },
   {
    "label": 691,
    "kind": "land",
    "key": "STATE_MACRO00_0691",
    "macro": 0,
-   "area": 11842,
-   "coastal": false
+   "area": 14376,
+   "coastal": true
   },
   {
    "label": 692,
    "kind": "land",
    "key": "STATE_MACRO00_0692",
    "macro": 0,
-   "area": 24507,
+   "area": 7428,
    "coastal": false
   },
   {
@@ -5550,7 +5550,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0693",
    "macro": 0,
-   "area": 16266,
+   "area": 426,
    "coastal": true
   },
   {
@@ -5558,23 +5558,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0694",
    "macro": 0,
-   "area": 11753,
-   "coastal": true
+   "area": 24507,
+   "coastal": false
   },
   {
    "label": 695,
    "kind": "land",
    "key": "STATE_MACRO00_0695",
    "macro": 0,
-   "area": 10085,
-   "coastal": false
+   "area": 19762,
+   "coastal": true
   },
   {
    "label": 696,
    "kind": "land",
    "key": "STATE_MACRO00_0696",
    "macro": 0,
-   "area": 17622,
+   "area": 13025,
    "coastal": false
   },
   {
@@ -5582,31 +5582,31 @@
    "kind": "land",
    "key": "STATE_MACRO00_0697",
    "macro": 0,
-   "area": 335,
-   "coastal": true
+   "area": 10085,
+   "coastal": false
   },
   {
    "label": 698,
    "kind": "land",
    "key": "STATE_MACRO00_0698",
    "macro": 0,
-   "area": 15017,
-   "coastal": true
+   "area": 12610,
+   "coastal": false
   },
   {
    "label": 699,
    "kind": "land",
    "key": "STATE_MACRO00_0699",
    "macro": 0,
-   "area": 5758,
-   "coastal": false
+   "area": 335,
+   "coastal": true
   },
   {
    "label": 700,
    "kind": "land",
    "key": "STATE_MACRO00_0700",
    "macro": 0,
-   "area": 881,
+   "area": 15017,
    "coastal": true
   },
   {
@@ -5614,23 +5614,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0701",
    "macro": 0,
-   "area": 9535,
-   "coastal": false
+   "area": 881,
+   "coastal": true
   },
   {
    "label": 702,
    "kind": "land",
    "key": "STATE_MACRO00_0702",
    "macro": 0,
-   "area": 1849,
-   "coastal": true
+   "area": 9535,
+   "coastal": false
   },
   {
    "label": 703,
    "kind": "land",
    "key": "STATE_MACRO00_0703",
    "macro": 0,
-   "area": 13155,
+   "area": 1849,
    "coastal": true
   },
   {
@@ -5638,7 +5638,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0704",
    "macro": 0,
-   "area": 23409,
+   "area": 12758,
    "coastal": false
   },
   {
@@ -5646,23 +5646,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0705",
    "macro": 0,
-   "area": 306,
-   "coastal": true
+   "area": 7085,
+   "coastal": false
   },
   {
    "label": 706,
    "kind": "land",
    "key": "STATE_MACRO00_0706",
    "macro": 0,
-   "area": 300,
-   "coastal": true
+   "area": 23409,
+   "coastal": false
   },
   {
    "label": 707,
    "kind": "land",
    "key": "STATE_MACRO00_0707",
    "macro": 0,
-   "area": 9531,
+   "area": 306,
    "coastal": true
   },
   {
@@ -5670,7 +5670,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0708",
    "macro": 0,
-   "area": 8591,
+   "area": 300,
    "coastal": true
   },
   {
@@ -5678,15 +5678,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0709",
    "macro": 0,
-   "area": 6295,
-   "coastal": false
+   "area": 9531,
+   "coastal": true
   },
   {
    "label": 710,
    "kind": "land",
    "key": "STATE_MACRO00_0710",
    "macro": 0,
-   "area": 18106,
+   "area": 8591,
    "coastal": true
   },
   {
@@ -5694,15 +5694,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0711",
    "macro": 0,
-   "area": 16857,
-   "coastal": true
+   "area": 6295,
+   "coastal": false
   },
   {
    "label": 712,
    "kind": "land",
    "key": "STATE_MACRO00_0712",
    "macro": 0,
-   "area": 22487,
+   "area": 18106,
    "coastal": true
   },
   {
@@ -5710,7 +5710,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0713",
    "macro": 0,
-   "area": 6119,
+   "area": 17206,
    "coastal": false
   },
   {
@@ -5718,7 +5718,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0714",
    "macro": 0,
-   "area": 16964,
+   "area": 22487,
    "coastal": true
   },
   {
@@ -5726,15 +5726,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0715",
    "macro": 0,
-   "area": 18150,
-   "coastal": true
+   "area": 6119,
+   "coastal": false
   },
   {
    "label": 716,
    "kind": "land",
    "key": "STATE_MACRO00_0716",
    "macro": 0,
-   "area": 11950,
+   "area": 16964,
    "coastal": true
   },
   {
@@ -5742,7 +5742,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0717",
    "macro": 0,
-   "area": 26138,
+   "area": 18290,
    "coastal": true
   },
   {
@@ -5750,23 +5750,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0718",
    "macro": 0,
-   "area": 10156,
-   "coastal": false
+   "area": 11950,
+   "coastal": true
   },
   {
    "label": 719,
    "kind": "land",
    "key": "STATE_MACRO00_0719",
    "macro": 0,
-   "area": 10552,
-   "coastal": false
+   "area": 26138,
+   "coastal": true
   },
   {
    "label": 720,
    "kind": "land",
    "key": "STATE_MACRO00_0720",
    "macro": 0,
-   "area": 9152,
+   "area": 10156,
    "coastal": false
   },
   {
@@ -5774,23 +5774,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0721",
    "macro": 0,
-   "area": 1385,
-   "coastal": true
+   "area": 10552,
+   "coastal": false
   },
   {
    "label": 722,
    "kind": "land",
    "key": "STATE_MACRO00_0722",
    "macro": 0,
-   "area": 25772,
-   "coastal": true
+   "area": 9152,
+   "coastal": false
   },
   {
    "label": 723,
    "kind": "land",
    "key": "STATE_MACRO00_0723",
    "macro": 0,
-   "area": 8336,
+   "area": 1385,
    "coastal": true
   },
   {
@@ -5798,7 +5798,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0724",
    "macro": 0,
-   "area": 17008,
+   "area": 26029,
    "coastal": true
   },
   {
@@ -5806,15 +5806,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0725",
    "macro": 0,
-   "area": 6462,
-   "coastal": false
+   "area": 8336,
+   "coastal": true
   },
   {
    "label": 726,
    "kind": "land",
    "key": "STATE_MACRO00_0726",
    "macro": 0,
-   "area": 10691,
+   "area": 17008,
    "coastal": true
   },
   {
@@ -5822,23 +5822,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0727",
    "macro": 0,
-   "area": 1354,
-   "coastal": true
+   "area": 6462,
+   "coastal": false
   },
   {
    "label": 728,
    "kind": "land",
    "key": "STATE_MACRO00_0728",
    "macro": 0,
-   "area": 22950,
-   "coastal": false
+   "area": 10691,
+   "coastal": true
   },
   {
    "label": 729,
    "kind": "land",
    "key": "STATE_MACRO00_0729",
    "macro": 0,
-   "area": 11418,
+   "area": 1354,
    "coastal": true
   },
   {
@@ -5846,15 +5846,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0730",
    "macro": 0,
-   "area": 13581,
-   "coastal": true
+   "area": 22950,
+   "coastal": false
   },
   {
    "label": 731,
    "kind": "land",
    "key": "STATE_MACRO00_0731",
    "macro": 0,
-   "area": 1277,
+   "area": 11418,
    "coastal": true
   },
   {
@@ -5862,7 +5862,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0732",
    "macro": 0,
-   "area": 29114,
+   "area": 13581,
    "coastal": true
   },
   {
@@ -5870,39 +5870,39 @@
    "kind": "land",
    "key": "STATE_MACRO00_0733",
    "macro": 0,
-   "area": 15774,
-   "coastal": false
+   "area": 1277,
+   "coastal": true
   },
   {
    "label": 734,
    "kind": "land",
    "key": "STATE_MACRO00_0734",
    "macro": 0,
-   "area": 12340,
-   "coastal": false
+   "area": 29114,
+   "coastal": true
   },
   {
    "label": 735,
    "kind": "land",
    "key": "STATE_MACRO00_0735",
    "macro": 0,
-   "area": 6103,
-   "coastal": true
+   "area": 15774,
+   "coastal": false
   },
   {
    "label": 736,
    "kind": "land",
    "key": "STATE_MACRO00_0736",
    "macro": 0,
-   "area": 15436,
-   "coastal": true
+   "area": 12340,
+   "coastal": false
   },
   {
    "label": 737,
    "kind": "land",
    "key": "STATE_MACRO00_0737",
    "macro": 0,
-   "area": 341,
+   "area": 6103,
    "coastal": true
   },
   {
@@ -5910,15 +5910,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0738",
    "macro": 0,
-   "area": 12721,
-   "coastal": false
+   "area": 15515,
+   "coastal": true
   },
   {
    "label": 739,
    "kind": "land",
    "key": "STATE_MACRO00_0739",
    "macro": 0,
-   "area": 17378,
+   "area": 341,
    "coastal": true
   },
   {
@@ -5926,15 +5926,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0740",
    "macro": 0,
-   "area": 11839,
-   "coastal": true
+   "area": 12721,
+   "coastal": false
   },
   {
    "label": 741,
    "kind": "land",
    "key": "STATE_MACRO00_0741",
    "macro": 0,
-   "area": 485,
+   "area": 17576,
    "coastal": true
   },
   {
@@ -5942,7 +5942,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0742",
    "macro": 0,
-   "area": 1542,
+   "area": 11839,
    "coastal": true
   },
   {
@@ -5950,7 +5950,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0743",
    "macro": 0,
-   "area": 14182,
+   "area": 485,
    "coastal": true
   },
   {
@@ -5958,7 +5958,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0744",
    "macro": 0,
-   "area": 6980,
+   "area": 1542,
    "coastal": true
   },
   {
@@ -5966,7 +5966,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0745",
    "macro": 0,
-   "area": 11520,
+   "area": 14182,
    "coastal": true
   },
   {
@@ -5974,15 +5974,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0746",
    "macro": 0,
-   "area": 8601,
-   "coastal": false
+   "area": 6980,
+   "coastal": true
   },
   {
    "label": 747,
    "kind": "land",
    "key": "STATE_MACRO00_0747",
    "macro": 0,
-   "area": 25738,
+   "area": 11520,
    "coastal": true
   },
   {
@@ -5990,23 +5990,23 @@
    "kind": "land",
    "key": "STATE_MACRO00_0748",
    "macro": 0,
-   "area": 30040,
-   "coastal": true
+   "area": 8601,
+   "coastal": false
   },
   {
    "label": 749,
    "kind": "land",
    "key": "STATE_MACRO00_0749",
    "macro": 0,
-   "area": 22584,
-   "coastal": false
+   "area": 25738,
+   "coastal": true
   },
   {
    "label": 750,
    "kind": "land",
    "key": "STATE_MACRO00_0750",
    "macro": 0,
-   "area": 17066,
+   "area": 30040,
    "coastal": true
   },
   {
@@ -6014,15 +6014,15 @@
    "kind": "land",
    "key": "STATE_MACRO00_0751",
    "macro": 0,
-   "area": 269,
-   "coastal": true
+   "area": 22584,
+   "coastal": false
   },
   {
    "label": 752,
    "kind": "land",
    "key": "STATE_MACRO00_0752",
    "macro": 0,
-   "area": 557,
+   "area": 17066,
    "coastal": true
   },
   {
@@ -6030,7 +6030,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0753",
    "macro": 0,
-   "area": 6707,
+   "area": 269,
    "coastal": true
   },
   {
@@ -6038,7 +6038,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0754",
    "macro": 0,
-   "area": 10948,
+   "area": 557,
    "coastal": true
   },
   {
@@ -6046,7 +6046,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0755",
    "macro": 0,
-   "area": 989,
+   "area": 6707,
    "coastal": true
   },
   {
@@ -6054,7 +6054,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0756",
    "macro": 0,
-   "area": 6055,
+   "area": 10948,
    "coastal": true
   },
   {
@@ -6062,7 +6062,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0757",
    "macro": 0,
-   "area": 10371,
+   "area": 989,
    "coastal": true
   },
   {
@@ -6070,7 +6070,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0758",
    "macro": 0,
-   "area": 15990,
+   "area": 16426,
    "coastal": true
   },
   {
@@ -6078,7 +6078,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0759",
    "macro": 0,
-   "area": 1156,
+   "area": 15990,
    "coastal": true
   },
   {
@@ -6086,7 +6086,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0760",
    "macro": 0,
-   "area": 350,
+   "area": 1156,
    "coastal": true
   },
   {
@@ -6094,7 +6094,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0761",
    "macro": 0,
-   "area": 19159,
+   "area": 350,
    "coastal": true
   },
   {
@@ -6102,7 +6102,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0762",
    "macro": 0,
-   "area": 1406,
+   "area": 19159,
    "coastal": true
   },
   {
@@ -6110,7 +6110,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0763",
    "macro": 0,
-   "area": 2857,
+   "area": 1406,
    "coastal": true
   },
   {
@@ -6118,7 +6118,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0764",
    "macro": 0,
-   "area": 13971,
+   "area": 2857,
    "coastal": true
   },
   {
@@ -6126,7 +6126,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0765",
    "macro": 0,
-   "area": 12602,
+   "area": 13971,
    "coastal": true
   },
   {
@@ -6134,7 +6134,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0766",
    "macro": 0,
-   "area": 17129,
+   "area": 12602,
    "coastal": true
   },
   {
@@ -6142,7 +6142,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0767",
    "macro": 0,
-   "area": 33547,
+   "area": 17129,
    "coastal": true
   },
   {
@@ -6150,7 +6150,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0768",
    "macro": 0,
-   "area": 11112,
+   "area": 33547,
    "coastal": true
   },
   {
@@ -6158,7 +6158,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0769",
    "macro": 0,
-   "area": 6382,
+   "area": 11112,
    "coastal": true
   },
   {
@@ -6166,7 +6166,7 @@
    "kind": "land",
    "key": "STATE_MACRO00_0770",
    "macro": 0,
-   "area": 326,
+   "area": 6382,
    "coastal": true
   },
   {
@@ -6174,1423 +6174,863 @@
    "kind": "land",
    "key": "STATE_MACRO00_0771",
    "macro": 0,
-   "area": 231,
+   "area": 326,
    "coastal": true
   },
   {
    "label": 772,
-   "kind": "sea",
-   "key": "STATE_SEA_0001",
+   "kind": "land",
+   "key": "STATE_MACRO00_0772",
    "macro": 0,
-   "area": 18675770,
+   "area": 231,
    "coastal": true
   },
   {
    "label": 773,
    "kind": "sea",
-   "key": "STATE_SEA_0002",
+   "key": "STATE_SEA_0001",
    "macro": 0,
-   "area": 373,
+   "area": 130829,
    "coastal": true
   },
   {
    "label": 774,
    "kind": "sea",
-   "key": "STATE_SEA_0003",
+   "key": "STATE_SEA_0002",
    "macro": 0,
-   "area": 586,
+   "area": 197546,
    "coastal": true
   },
   {
    "label": 775,
    "kind": "sea",
-   "key": "STATE_SEA_0004",
+   "key": "STATE_SEA_0003",
    "macro": 0,
-   "area": 472,
+   "area": 327123,
    "coastal": true
   },
   {
    "label": 776,
    "kind": "sea",
-   "key": "STATE_SEA_0005",
+   "key": "STATE_SEA_0004",
    "macro": 0,
-   "area": 837,
+   "area": 136048,
    "coastal": true
   },
   {
    "label": 777,
    "kind": "sea",
-   "key": "STATE_SEA_0006",
+   "key": "STATE_SEA_0005",
    "macro": 0,
-   "area": 689,
+   "area": 84435,
    "coastal": true
   },
   {
    "label": 778,
    "kind": "sea",
-   "key": "STATE_SEA_0007",
+   "key": "STATE_SEA_0006",
    "macro": 0,
-   "area": 590,
+   "area": 78431,
    "coastal": true
   },
   {
    "label": 779,
    "kind": "sea",
-   "key": "STATE_SEA_0008",
+   "key": "STATE_SEA_0007",
    "macro": 0,
-   "area": 301,
+   "area": 74738,
    "coastal": true
   },
   {
    "label": 780,
    "kind": "sea",
-   "key": "STATE_SEA_0009",
+   "key": "STATE_SEA_0008",
    "macro": 0,
-   "area": 315,
+   "area": 190818,
    "coastal": true
   },
   {
    "label": 781,
    "kind": "sea",
-   "key": "STATE_SEA_0010",
+   "key": "STATE_SEA_0009",
    "macro": 0,
-   "area": 331,
+   "area": 50792,
    "coastal": true
   },
   {
    "label": 782,
    "kind": "sea",
-   "key": "STATE_SEA_0011",
+   "key": "STATE_SEA_0010",
    "macro": 0,
-   "area": 798,
+   "area": 122381,
    "coastal": true
   },
   {
    "label": 783,
    "kind": "sea",
-   "key": "STATE_SEA_0012",
+   "key": "STATE_SEA_0011",
    "macro": 0,
-   "area": 347,
+   "area": 219650,
    "coastal": true
   },
   {
    "label": 784,
    "kind": "sea",
-   "key": "STATE_SEA_0013",
+   "key": "STATE_SEA_0012",
    "macro": 0,
-   "area": 551,
+   "area": 107603,
    "coastal": true
   },
   {
    "label": 785,
    "kind": "sea",
-   "key": "STATE_SEA_0014",
+   "key": "STATE_SEA_0013",
    "macro": 0,
-   "area": 270,
+   "area": 96108,
    "coastal": true
   },
   {
    "label": 786,
    "kind": "sea",
-   "key": "STATE_SEA_0015",
-   "macro": 0,
-   "area": 306,
-   "coastal": true
-  },
-  {
-   "label": 787,
-   "kind": "sea",
-   "key": "STATE_SEA_0016",
-   "macro": 0,
-   "area": 358,
-   "coastal": true
-  },
-  {
-   "label": 788,
-   "kind": "sea",
-   "key": "STATE_SEA_0017",
-   "macro": 0,
-   "area": 608,
-   "coastal": true
-  },
-  {
-   "label": 789,
-   "kind": "sea",
-   "key": "STATE_SEA_0018",
-   "macro": 0,
-   "area": 528,
-   "coastal": true
-  },
-  {
-   "label": 790,
-   "kind": "sea",
-   "key": "STATE_SEA_0019",
-   "macro": 0,
-   "area": 287,
-   "coastal": true
-  },
-  {
-   "label": 791,
-   "kind": "sea",
-   "key": "STATE_SEA_0020",
+   "key": "STATE_SEA_0014",
    "macro": 0,
    "area": 2120,
    "coastal": true
   },
   {
-   "label": 792,
+   "label": 787,
    "kind": "sea",
-   "key": "STATE_SEA_0021",
+   "key": "STATE_SEA_0015",
    "macro": 0,
-   "area": 671,
+   "area": 292654,
    "coastal": true
   },
   {
-   "label": 793,
+   "label": 788,
    "kind": "sea",
-   "key": "STATE_SEA_0022",
+   "key": "STATE_SEA_0016",
    "macro": 0,
-   "area": 256,
+   "area": 255114,
    "coastal": true
   },
   {
-   "label": 794,
+   "label": 789,
    "kind": "sea",
-   "key": "STATE_SEA_0023",
-   "macro": 0,
-   "area": 683,
-   "coastal": true
-  },
-  {
-   "label": 795,
-   "kind": "sea",
-   "key": "STATE_SEA_0024",
+   "key": "STATE_SEA_0017",
    "macro": 0,
    "area": 1205,
    "coastal": true
   },
   {
-   "label": 796,
+   "label": 790,
    "kind": "sea",
-   "key": "STATE_SEA_0025",
+   "key": "STATE_SEA_0018",
    "macro": 0,
-   "area": 347,
+   "area": 307583,
    "coastal": true
   },
   {
-   "label": 797,
+   "label": 791,
    "kind": "sea",
-   "key": "STATE_SEA_0026",
+   "key": "STATE_SEA_0019",
    "macro": 0,
-   "area": 621,
+   "area": 330591,
    "coastal": true
   },
   {
-   "label": 798,
+   "label": 792,
    "kind": "sea",
-   "key": "STATE_SEA_0027",
+   "key": "STATE_SEA_0020",
    "macro": 0,
-   "area": 353,
+   "area": 121409,
    "coastal": true
   },
   {
-   "label": 799,
+   "label": 793,
    "kind": "sea",
-   "key": "STATE_SEA_0028",
-   "macro": 0,
-   "area": 848,
-   "coastal": true
-  },
-  {
-   "label": 800,
-   "kind": "sea",
-   "key": "STATE_SEA_0029",
-   "macro": 0,
-   "area": 355,
-   "coastal": true
-  },
-  {
-   "label": 801,
-   "kind": "sea",
-   "key": "STATE_SEA_0030",
-   "macro": 0,
-   "area": 469,
-   "coastal": true
-  },
-  {
-   "label": 802,
-   "kind": "sea",
-   "key": "STATE_SEA_0031",
-   "macro": 0,
-   "area": 355,
-   "coastal": true
-  },
-  {
-   "label": 803,
-   "kind": "sea",
-   "key": "STATE_SEA_0032",
-   "macro": 0,
-   "area": 263,
-   "coastal": true
-  },
-  {
-   "label": 804,
-   "kind": "sea",
-   "key": "STATE_SEA_0033",
-   "macro": 0,
-   "area": 508,
-   "coastal": true
-  },
-  {
-   "label": 805,
-   "kind": "sea",
-   "key": "STATE_SEA_0034",
-   "macro": 0,
-   "area": 393,
-   "coastal": true
-  },
-  {
-   "label": 806,
-   "kind": "sea",
-   "key": "STATE_SEA_0035",
-   "macro": 0,
-   "area": 334,
-   "coastal": true
-  },
-  {
-   "label": 807,
-   "kind": "sea",
-   "key": "STATE_SEA_0036",
-   "macro": 0,
-   "area": 298,
-   "coastal": true
-  },
-  {
-   "label": 808,
-   "kind": "sea",
-   "key": "STATE_SEA_0037",
-   "macro": 0,
-   "area": 1509,
-   "coastal": true
-  },
-  {
-   "label": 809,
-   "kind": "sea",
-   "key": "STATE_SEA_0038",
-   "macro": 0,
-   "area": 283,
-   "coastal": true
-  },
-  {
-   "label": 810,
-   "kind": "sea",
-   "key": "STATE_SEA_0039",
-   "macro": 0,
-   "area": 284,
-   "coastal": true
-  },
-  {
-   "label": 811,
-   "kind": "sea",
-   "key": "STATE_SEA_0040",
-   "macro": 0,
-   "area": 814,
-   "coastal": true
-  },
-  {
-   "label": 812,
-   "kind": "sea",
-   "key": "STATE_SEA_0041",
-   "macro": 0,
-   "area": 450,
-   "coastal": true
-  },
-  {
-   "label": 813,
-   "kind": "sea",
-   "key": "STATE_SEA_0042",
-   "macro": 0,
-   "area": 259,
-   "coastal": true
-  },
-  {
-   "label": 814,
-   "kind": "sea",
-   "key": "STATE_SEA_0043",
+   "key": "STATE_SEA_0021",
    "macro": 0,
    "area": 4844,
    "coastal": true
   },
   {
-   "label": 815,
+   "label": 794,
    "kind": "sea",
-   "key": "STATE_SEA_0044",
+   "key": "STATE_SEA_0022",
    "macro": 0,
-   "area": 480,
+   "area": 223747,
    "coastal": true
   },
   {
-   "label": 816,
+   "label": 795,
    "kind": "sea",
-   "key": "STATE_SEA_0045",
+   "key": "STATE_SEA_0023",
    "macro": 0,
    "area": 2065,
    "coastal": true
   },
   {
-   "label": 817,
+   "label": 796,
    "kind": "sea",
-   "key": "STATE_SEA_0046",
+   "key": "STATE_SEA_0024",
    "macro": 0,
-   "area": 1000,
+   "area": 254860,
    "coastal": true
   },
   {
-   "label": 818,
+   "label": 797,
    "kind": "sea",
-   "key": "STATE_SEA_0047",
-   "macro": 0,
-   "area": 435,
-   "coastal": true
-  },
-  {
-   "label": 819,
-   "kind": "sea",
-   "key": "STATE_SEA_0048",
-   "macro": 0,
-   "area": 420,
-   "coastal": true
-  },
-  {
-   "label": 820,
-   "kind": "sea",
-   "key": "STATE_SEA_0049",
-   "macro": 0,
-   "area": 266,
-   "coastal": true
-  },
-  {
-   "label": 821,
-   "kind": "sea",
-   "key": "STATE_SEA_0050",
-   "macro": 0,
-   "area": 311,
-   "coastal": true
-  },
-  {
-   "label": 822,
-   "kind": "sea",
-   "key": "STATE_SEA_0051",
-   "macro": 0,
-   "area": 282,
-   "coastal": true
-  },
-  {
-   "label": 823,
-   "kind": "sea",
-   "key": "STATE_SEA_0052",
-   "macro": 0,
-   "area": 285,
-   "coastal": true
-  },
-  {
-   "label": 824,
-   "kind": "sea",
-   "key": "STATE_SEA_0053",
-   "macro": 0,
-   "area": 341,
-   "coastal": true
-  },
-  {
-   "label": 825,
-   "kind": "sea",
-   "key": "STATE_SEA_0054",
-   "macro": 0,
-   "area": 319,
-   "coastal": true
-  },
-  {
-   "label": 826,
-   "kind": "sea",
-   "key": "STATE_SEA_0055",
-   "macro": 0,
-   "area": 259,
-   "coastal": true
-  },
-  {
-   "label": 827,
-   "kind": "sea",
-   "key": "STATE_SEA_0056",
-   "macro": 0,
-   "area": 417,
-   "coastal": true
-  },
-  {
-   "label": 828,
-   "kind": "sea",
-   "key": "STATE_SEA_0057",
-   "macro": 0,
-   "area": 403,
-   "coastal": true
-  },
-  {
-   "label": 829,
-   "kind": "sea",
-   "key": "STATE_SEA_0058",
-   "macro": 0,
-   "area": 485,
-   "coastal": true
-  },
-  {
-   "label": 830,
-   "kind": "sea",
-   "key": "STATE_SEA_0059",
-   "macro": 0,
-   "area": 897,
-   "coastal": true
-  },
-  {
-   "label": 831,
-   "kind": "sea",
-   "key": "STATE_SEA_0060",
-   "macro": 0,
-   "area": 563,
-   "coastal": true
-  },
-  {
-   "label": 832,
-   "kind": "sea",
-   "key": "STATE_SEA_0061",
-   "macro": 0,
-   "area": 751,
-   "coastal": true
-  },
-  {
-   "label": 833,
-   "kind": "sea",
-   "key": "STATE_SEA_0062",
-   "macro": 0,
-   "area": 681,
-   "coastal": true
-  },
-  {
-   "label": 834,
-   "kind": "sea",
-   "key": "STATE_SEA_0063",
-   "macro": 0,
-   "area": 615,
-   "coastal": true
-  },
-  {
-   "label": 835,
-   "kind": "sea",
-   "key": "STATE_SEA_0064",
-   "macro": 0,
-   "area": 474,
-   "coastal": true
-  },
-  {
-   "label": 836,
-   "kind": "sea",
-   "key": "STATE_SEA_0065",
+   "key": "STATE_SEA_0025",
    "macro": 0,
    "area": 3012,
    "coastal": true
   },
   {
-   "label": 837,
+   "label": 798,
    "kind": "sea",
-   "key": "STATE_SEA_0066",
+   "key": "STATE_SEA_0026",
    "macro": 0,
-   "area": 1076,
+   "area": 209332,
    "coastal": true
   },
   {
-   "label": 838,
+   "label": 799,
    "kind": "sea",
-   "key": "STATE_SEA_0067",
-   "macro": 0,
-   "area": 609,
-   "coastal": true
-  },
-  {
-   "label": 839,
-   "kind": "sea",
-   "key": "STATE_SEA_0068",
-   "macro": 0,
-   "area": 282,
-   "coastal": true
-  },
-  {
-   "label": 840,
-   "kind": "sea",
-   "key": "STATE_SEA_0069",
-   "macro": 0,
-   "area": 1164,
-   "coastal": true
-  },
-  {
-   "label": 841,
-   "kind": "sea",
-   "key": "STATE_SEA_0070",
-   "macro": 0,
-   "area": 726,
-   "coastal": true
-  },
-  {
-   "label": 842,
-   "kind": "sea",
-   "key": "STATE_SEA_0071",
-   "macro": 0,
-   "area": 403,
-   "coastal": true
-  },
-  {
-   "label": 843,
-   "kind": "sea",
-   "key": "STATE_SEA_0072",
-   "macro": 0,
-   "area": 299,
-   "coastal": true
-  },
-  {
-   "label": 844,
-   "kind": "sea",
-   "key": "STATE_SEA_0073",
-   "macro": 0,
-   "area": 292,
-   "coastal": true
-  },
-  {
-   "label": 845,
-   "kind": "sea",
-   "key": "STATE_SEA_0074",
+   "key": "STATE_SEA_0027",
    "macro": 0,
    "area": 1245,
    "coastal": true
   },
   {
-   "label": 846,
+   "label": 800,
    "kind": "sea",
-   "key": "STATE_SEA_0075",
+   "key": "STATE_SEA_0028",
    "macro": 0,
-   "area": 417,
+   "area": 202129,
    "coastal": true
   },
   {
-   "label": 847,
+   "label": 801,
    "kind": "sea",
-   "key": "STATE_SEA_0076",
-   "macro": 0,
-   "area": 286,
-   "coastal": true
-  },
-  {
-   "label": 848,
-   "kind": "sea",
-   "key": "STATE_SEA_0077",
-   "macro": 0,
-   "area": 306,
-   "coastal": true
-  },
-  {
-   "label": 849,
-   "kind": "sea",
-   "key": "STATE_SEA_0078",
-   "macro": 0,
-   "area": 660,
-   "coastal": true
-  },
-  {
-   "label": 850,
-   "kind": "sea",
-   "key": "STATE_SEA_0079",
-   "macro": 0,
-   "area": 1052,
-   "coastal": true
-  },
-  {
-   "label": 851,
-   "kind": "sea",
-   "key": "STATE_SEA_0080",
-   "macro": 0,
-   "area": 358,
-   "coastal": true
-  },
-  {
-   "label": 852,
-   "kind": "sea",
-   "key": "STATE_SEA_0081",
-   "macro": 0,
-   "area": 340,
-   "coastal": true
-  },
-  {
-   "label": 853,
-   "kind": "sea",
-   "key": "STATE_SEA_0082",
-   "macro": 0,
-   "area": 305,
-   "coastal": true
-  },
-  {
-   "label": 854,
-   "kind": "sea",
-   "key": "STATE_SEA_0083",
-   "macro": 0,
-   "area": 451,
-   "coastal": true
-  },
-  {
-   "label": 855,
-   "kind": "sea",
-   "key": "STATE_SEA_0084",
-   "macro": 0,
-   "area": 618,
-   "coastal": true
-  },
-  {
-   "label": 856,
-   "kind": "sea",
-   "key": "STATE_SEA_0085",
-   "macro": 0,
-   "area": 340,
-   "coastal": true
-  },
-  {
-   "label": 857,
-   "kind": "sea",
-   "key": "STATE_SEA_0086",
-   "macro": 0,
-   "area": 849,
-   "coastal": true
-  },
-  {
-   "label": 858,
-   "kind": "sea",
-   "key": "STATE_SEA_0087",
-   "macro": 0,
-   "area": 380,
-   "coastal": true
-  },
-  {
-   "label": 859,
-   "kind": "sea",
-   "key": "STATE_SEA_0088",
-   "macro": 0,
-   "area": 841,
-   "coastal": true
-  },
-  {
-   "label": 860,
-   "kind": "sea",
-   "key": "STATE_SEA_0089",
-   "macro": 0,
-   "area": 486,
-   "coastal": true
-  },
-  {
-   "label": 861,
-   "kind": "sea",
-   "key": "STATE_SEA_0090",
-   "macro": 0,
-   "area": 1123,
-   "coastal": true
-  },
-  {
-   "label": 862,
-   "kind": "sea",
-   "key": "STATE_SEA_0091",
-   "macro": 0,
-   "area": 519,
-   "coastal": true
-  },
-  {
-   "label": 863,
-   "kind": "sea",
-   "key": "STATE_SEA_0092",
-   "macro": 0,
-   "area": 269,
-   "coastal": true
-  },
-  {
-   "label": 864,
-   "kind": "sea",
-   "key": "STATE_SEA_0093",
-   "macro": 0,
-   "area": 330,
-   "coastal": true
-  },
-  {
-   "label": 865,
-   "kind": "sea",
-   "key": "STATE_SEA_0094",
-   "macro": 0,
-   "area": 390,
-   "coastal": true
-  },
-  {
-   "label": 866,
-   "kind": "sea",
-   "key": "STATE_SEA_0095",
+   "key": "STATE_SEA_0029",
    "macro": 0,
    "area": 4562,
    "coastal": true
   },
   {
-   "label": 867,
+   "label": 802,
    "kind": "sea",
-   "key": "STATE_SEA_0096",
+   "key": "STATE_SEA_0030",
    "macro": 0,
-   "area": 556,
+   "area": 136340,
    "coastal": true
   },
   {
-   "label": 868,
+   "label": 803,
    "kind": "sea",
-   "key": "STATE_SEA_0097",
-   "macro": 0,
-   "area": 619,
-   "coastal": true
-  },
-  {
-   "label": 869,
-   "kind": "sea",
-   "key": "STATE_SEA_0098",
-   "macro": 0,
-   "area": 487,
-   "coastal": true
-  },
-  {
-   "label": 870,
-   "kind": "sea",
-   "key": "STATE_SEA_0099",
+   "key": "STATE_SEA_0031",
    "macro": 0,
    "area": 1956,
    "coastal": true
   },
   {
-   "label": 871,
+   "label": 804,
    "kind": "sea",
-   "key": "STATE_SEA_0100",
+   "key": "STATE_SEA_0032",
    "macro": 0,
-   "area": 288,
+   "area": 28791,
    "coastal": true
   },
   {
-   "label": 872,
+   "label": 805,
    "kind": "sea",
-   "key": "STATE_SEA_0101",
+   "key": "STATE_SEA_0033",
    "macro": 0,
-   "area": 473,
+   "area": 269675,
    "coastal": true
   },
   {
-   "label": 873,
+   "label": 806,
    "kind": "sea",
-   "key": "STATE_SEA_0102",
+   "key": "STATE_SEA_0034",
    "macro": 0,
-   "area": 847,
+   "area": 31336,
    "coastal": true
   },
   {
-   "label": 874,
+   "label": 807,
    "kind": "sea",
-   "key": "STATE_SEA_0103",
+   "key": "STATE_SEA_0035",
    "macro": 0,
-   "area": 792,
+   "area": 211851,
    "coastal": true
   },
   {
-   "label": 875,
+   "label": 808,
    "kind": "sea",
-   "key": "STATE_SEA_0104",
+   "key": "STATE_SEA_0036",
    "macro": 0,
-   "area": 610,
+   "area": 10801,
    "coastal": true
   },
   {
-   "label": 876,
+   "label": 809,
    "kind": "sea",
-   "key": "STATE_SEA_0105",
+   "key": "STATE_SEA_0037",
    "macro": 0,
-   "area": 637,
+   "area": 428185,
    "coastal": true
   },
   {
-   "label": 877,
+   "label": 810,
    "kind": "sea",
-   "key": "STATE_SEA_0106",
-   "macro": 0,
-   "area": 313,
-   "coastal": true
-  },
-  {
-   "label": 878,
-   "kind": "sea",
-   "key": "STATE_SEA_0107",
-   "macro": 0,
-   "area": 360,
-   "coastal": true
-  },
-  {
-   "label": 879,
-   "kind": "sea",
-   "key": "STATE_SEA_0108",
-   "macro": 0,
-   "area": 963,
-   "coastal": true
-  },
-  {
-   "label": 880,
-   "kind": "sea",
-   "key": "STATE_SEA_0109",
-   "macro": 0,
-   "area": 493,
-   "coastal": true
-  },
-  {
-   "label": 881,
-   "kind": "sea",
-   "key": "STATE_SEA_0110",
-   "macro": 0,
-   "area": 304,
-   "coastal": true
-  },
-  {
-   "label": 882,
-   "kind": "sea",
-   "key": "STATE_SEA_0111",
-   "macro": 0,
-   "area": 393,
-   "coastal": true
-  },
-  {
-   "label": 883,
-   "kind": "sea",
-   "key": "STATE_SEA_0112",
-   "macro": 0,
-   "area": 415,
-   "coastal": true
-  },
-  {
-   "label": 884,
-   "kind": "sea",
-   "key": "STATE_SEA_0113",
-   "macro": 0,
-   "area": 488,
-   "coastal": true
-  },
-  {
-   "label": 885,
-   "kind": "sea",
-   "key": "STATE_SEA_0114",
-   "macro": 0,
-   "area": 815,
-   "coastal": true
-  },
-  {
-   "label": 886,
-   "kind": "sea",
-   "key": "STATE_SEA_0115",
-   "macro": 0,
-   "area": 791,
-   "coastal": true
-  },
-  {
-   "label": 887,
-   "kind": "sea",
-   "key": "STATE_SEA_0116",
-   "macro": 0,
-   "area": 323,
-   "coastal": true
-  },
-  {
-   "label": 888,
-   "kind": "sea",
-   "key": "STATE_SEA_0117",
-   "macro": 0,
-   "area": 927,
-   "coastal": true
-  },
-  {
-   "label": 889,
-   "kind": "sea",
-   "key": "STATE_SEA_0118",
-   "macro": 0,
-   "area": 446,
-   "coastal": true
-  },
-  {
-   "label": 890,
-   "kind": "sea",
-   "key": "STATE_SEA_0119",
+   "key": "STATE_SEA_0038",
    "macro": 0,
    "area": 1036,
    "coastal": true
   },
   {
-   "label": 891,
+   "label": 811,
    "kind": "sea",
-   "key": "STATE_SEA_0120",
+   "key": "STATE_SEA_0039",
    "macro": 0,
-   "area": 319,
+   "area": 246767,
    "coastal": true
   },
   {
-   "label": 892,
+   "label": 812,
    "kind": "sea",
-   "key": "STATE_SEA_0121",
+   "key": "STATE_SEA_0040",
    "macro": 0,
-   "area": 801,
+   "area": 79976,
    "coastal": true
   },
   {
-   "label": 893,
+   "label": 813,
    "kind": "sea",
-   "key": "STATE_SEA_0122",
+   "key": "STATE_SEA_0041",
    "macro": 0,
-   "area": 261,
+   "area": 281722,
    "coastal": true
   },
   {
-   "label": 894,
+   "label": 814,
    "kind": "sea",
-   "key": "STATE_SEA_0123",
+   "key": "STATE_SEA_0042",
    "macro": 0,
-   "area": 429,
+   "area": 282029,
    "coastal": true
   },
   {
-   "label": 895,
+   "label": 815,
    "kind": "sea",
-   "key": "STATE_SEA_0124",
+   "key": "STATE_SEA_0043",
    "macro": 0,
-   "area": 269,
+   "area": 105758,
    "coastal": true
   },
   {
-   "label": 896,
+   "label": 816,
    "kind": "sea",
-   "key": "STATE_SEA_0125",
+   "key": "STATE_SEA_0044",
    "macro": 0,
-   "area": 378,
+   "area": 330606,
    "coastal": true
   },
   {
-   "label": 897,
+   "label": 817,
    "kind": "sea",
-   "key": "STATE_SEA_0126",
+   "key": "STATE_SEA_0045",
    "macro": 0,
-   "area": 620,
+   "area": 113266,
    "coastal": true
   },
   {
-   "label": 898,
+   "label": 818,
    "kind": "sea",
-   "key": "STATE_SEA_0127",
+   "key": "STATE_SEA_0046",
    "macro": 0,
-   "area": 622,
+   "area": 102808,
    "coastal": true
   },
   {
-   "label": 899,
+   "label": 819,
    "kind": "sea",
-   "key": "STATE_SEA_0128",
-   "macro": 0,
-   "area": 14261,
-   "coastal": true
-  },
-  {
-   "label": 900,
-   "kind": "sea",
-   "key": "STATE_SEA_0129",
-   "macro": 0,
-   "area": 282,
-   "coastal": true
-  },
-  {
-   "label": 901,
-   "kind": "sea",
-   "key": "STATE_SEA_0130",
-   "macro": 0,
-   "area": 319,
-   "coastal": true
-  },
-  {
-   "label": 902,
-   "kind": "sea",
-   "key": "STATE_SEA_0131",
+   "key": "STATE_SEA_0047",
    "macro": 0,
    "area": 4187,
    "coastal": true
   },
   {
-   "label": 903,
+   "label": 820,
    "kind": "sea",
-   "key": "STATE_SEA_0132",
+   "key": "STATE_SEA_0048",
    "macro": 0,
-   "area": 327,
+   "area": 139607,
    "coastal": true
   },
   {
-   "label": 904,
+   "label": 821,
    "kind": "sea",
-   "key": "STATE_SEA_0133",
+   "key": "STATE_SEA_0049",
    "macro": 0,
-   "area": 287,
+   "area": 178749,
    "coastal": true
   },
   {
-   "label": 905,
+   "label": 822,
    "kind": "sea",
-   "key": "STATE_SEA_0134",
+   "key": "STATE_SEA_0050",
    "macro": 0,
-   "area": 336,
+   "area": 58814,
    "coastal": true
   },
   {
-   "label": 906,
+   "label": 823,
    "kind": "sea",
-   "key": "STATE_SEA_0135",
+   "key": "STATE_SEA_0051",
    "macro": 0,
-   "area": 450,
+   "area": 45112,
    "coastal": true
   },
   {
-   "label": 907,
+   "label": 824,
    "kind": "sea",
-   "key": "STATE_SEA_0136",
+   "key": "STATE_SEA_0052",
    "macro": 0,
-   "area": 285,
+   "area": 286438,
    "coastal": true
   },
   {
-   "label": 908,
+   "label": 825,
    "kind": "sea",
-   "key": "STATE_SEA_0137",
+   "key": "STATE_SEA_0053",
    "macro": 0,
-   "area": 358,
+   "area": 325921,
    "coastal": true
   },
   {
-   "label": 909,
+   "label": 826,
    "kind": "sea",
-   "key": "STATE_SEA_0138",
+   "key": "STATE_SEA_0054",
    "macro": 0,
-   "area": 274,
+   "area": 297847,
    "coastal": true
   },
   {
-   "label": 910,
+   "label": 827,
    "kind": "sea",
-   "key": "STATE_SEA_0139",
+   "key": "STATE_SEA_0055",
    "macro": 0,
-   "area": 562,
+   "area": 214360,
    "coastal": true
   },
   {
-   "label": 911,
+   "label": 828,
    "kind": "sea",
-   "key": "STATE_SEA_0140",
+   "key": "STATE_SEA_0056",
    "macro": 0,
-   "area": 454,
+   "area": 287919,
    "coastal": true
   },
   {
-   "label": 912,
+   "label": 829,
    "kind": "sea",
-   "key": "STATE_SEA_0141",
+   "key": "STATE_SEA_0057",
    "macro": 0,
-   "area": 1136,
+   "area": 168901,
    "coastal": true
   },
   {
-   "label": 913,
+   "label": 830,
    "kind": "sea",
-   "key": "STATE_SEA_0142",
+   "key": "STATE_SEA_0058",
    "macro": 0,
-   "area": 433,
+   "area": 270975,
    "coastal": true
   },
   {
-   "label": 914,
+   "label": 831,
    "kind": "sea",
-   "key": "STATE_SEA_0143",
+   "key": "STATE_SEA_0059",
    "macro": 0,
-   "area": 399,
+   "area": 79704,
    "coastal": true
   },
   {
-   "label": 915,
+   "label": 832,
    "kind": "sea",
-   "key": "STATE_SEA_0144",
+   "key": "STATE_SEA_0060",
    "macro": 0,
-   "area": 257,
+   "area": 408704,
    "coastal": true
   },
   {
-   "label": 916,
+   "label": 833,
    "kind": "sea",
-   "key": "STATE_SEA_0145",
+   "key": "STATE_SEA_0061",
    "macro": 0,
-   "area": 534,
+   "area": 5198,
    "coastal": true
   },
   {
-   "label": 917,
+   "label": 834,
    "kind": "sea",
-   "key": "STATE_SEA_0146",
+   "key": "STATE_SEA_0062",
    "macro": 0,
-   "area": 285,
+   "area": 289654,
    "coastal": true
   },
   {
-   "label": 918,
+   "label": 835,
    "kind": "sea",
-   "key": "STATE_SEA_0147",
+   "key": "STATE_SEA_0063",
    "macro": 0,
-   "area": 617,
+   "area": 140386,
    "coastal": true
   },
   {
-   "label": 919,
+   "label": 836,
    "kind": "sea",
-   "key": "STATE_SEA_0148",
-   "macro": 0,
-   "area": 820,
-   "coastal": true
-  },
-  {
-   "label": 920,
-   "kind": "sea",
-   "key": "STATE_SEA_0149",
-   "macro": 0,
-   "area": 791,
-   "coastal": true
-  },
-  {
-   "label": 921,
-   "kind": "sea",
-   "key": "STATE_SEA_0150",
-   "macro": 0,
-   "area": 553,
-   "coastal": true
-  },
-  {
-   "label": 922,
-   "kind": "sea",
-   "key": "STATE_SEA_0151",
-   "macro": 0,
-   "area": 315,
-   "coastal": true
-  },
-  {
-   "label": 923,
-   "kind": "sea",
-   "key": "STATE_SEA_0152",
-   "macro": 0,
-   "area": 492,
-   "coastal": true
-  },
-  {
-   "label": 924,
-   "kind": "sea",
-   "key": "STATE_SEA_0153",
-   "macro": 0,
-   "area": 405,
-   "coastal": true
-  },
-  {
-   "label": 925,
-   "kind": "sea",
-   "key": "STATE_SEA_0154",
+   "key": "STATE_SEA_0064",
    "macro": 0,
    "area": 2343,
    "coastal": true
   },
   {
-   "label": 926,
+   "label": 837,
    "kind": "sea",
-   "key": "STATE_SEA_0155",
+   "key": "STATE_SEA_0065",
    "macro": 0,
-   "area": 350,
+   "area": 307819,
    "coastal": true
   },
   {
-   "label": 927,
+   "label": 838,
    "kind": "sea",
-   "key": "STATE_SEA_0156",
+   "key": "STATE_SEA_0066",
    "macro": 0,
-   "area": 909,
+   "area": 225714,
    "coastal": true
   },
   {
-   "label": 928,
+   "label": 839,
    "kind": "sea",
-   "key": "STATE_SEA_0157",
+   "key": "STATE_SEA_0067",
    "macro": 0,
-   "area": 370,
+   "area": 3064,
    "coastal": true
   },
   {
-   "label": 929,
+   "label": 840,
    "kind": "sea",
-   "key": "STATE_SEA_0158",
+   "key": "STATE_SEA_0068",
    "macro": 0,
-   "area": 1317,
+   "area": 150262,
    "coastal": true
   },
   {
-   "label": 930,
+   "label": 841,
    "kind": "sea",
-   "key": "STATE_SEA_0159",
+   "key": "STATE_SEA_0069",
    "macro": 0,
-   "area": 1563,
+   "area": 279393,
    "coastal": true
   },
   {
-   "label": 931,
+   "label": 842,
    "kind": "sea",
-   "key": "STATE_SEA_0160",
-   "macro": 0,
-   "area": 441,
-   "coastal": true
-  },
-  {
-   "label": 932,
-   "kind": "sea",
-   "key": "STATE_SEA_0161",
-   "macro": 0,
-   "area": 403,
-   "coastal": true
-  },
-  {
-   "label": 933,
-   "kind": "sea",
-   "key": "STATE_SEA_0162",
-   "macro": 0,
-   "area": 5213,
-   "coastal": true
-  },
-  {
-   "label": 934,
-   "kind": "sea",
-   "key": "STATE_SEA_0163",
-   "macro": 0,
-   "area": 1936,
-   "coastal": true
-  },
-  {
-   "label": 935,
-   "kind": "sea",
-   "key": "STATE_SEA_0164",
-   "macro": 0,
-   "area": 2670,
-   "coastal": true
-  },
-  {
-   "label": 936,
-   "kind": "sea",
-   "key": "STATE_SEA_0165",
-   "macro": 0,
-   "area": 313,
-   "coastal": true
-  },
-  {
-   "label": 937,
-   "kind": "sea",
-   "key": "STATE_SEA_0166",
+   "key": "STATE_SEA_0070",
    "macro": 0,
    "area": 1714,
    "coastal": true
   },
   {
-   "label": 938,
+   "label": 843,
    "kind": "sea",
-   "key": "STATE_SEA_0167",
+   "key": "STATE_SEA_0071",
    "macro": 0,
-   "area": 310,
+   "area": 127422,
    "coastal": true
   },
   {
-   "label": 939,
+   "label": 844,
    "kind": "sea",
-   "key": "STATE_SEA_0168",
+   "key": "STATE_SEA_0072",
    "macro": 0,
-   "area": 308,
+   "area": 312061,
    "coastal": true
   },
   {
-   "label": 940,
+   "label": 845,
    "kind": "sea",
-   "key": "STATE_SEA_0169",
+   "key": "STATE_SEA_0073",
    "macro": 0,
-   "area": 457,
+   "area": 348998,
    "coastal": true
   },
   {
-   "label": 941,
+   "label": 846,
    "kind": "sea",
-   "key": "STATE_SEA_0170",
+   "key": "STATE_SEA_0074",
    "macro": 0,
-   "area": 563,
+   "area": 233481,
    "coastal": true
   },
   {
-   "label": 942,
+   "label": 847,
    "kind": "sea",
-   "key": "STATE_SEA_0171",
+   "key": "STATE_SEA_0075",
    "macro": 0,
-   "area": 357,
+   "area": 292589,
    "coastal": true
   },
   {
-   "label": 943,
+   "label": 848,
    "kind": "sea",
-   "key": "STATE_SEA_0172",
+   "key": "STATE_SEA_0076",
    "macro": 0,
-   "area": 2704,
+   "area": 216374,
    "coastal": true
   },
   {
-   "label": 944,
+   "label": 849,
    "kind": "sea",
-   "key": "STATE_SEA_0173",
+   "key": "STATE_SEA_0077",
    "macro": 0,
-   "area": 721,
+   "area": 224304,
    "coastal": true
   },
   {
-   "label": 945,
+   "label": 850,
    "kind": "sea",
-   "key": "STATE_SEA_0174",
+   "key": "STATE_SEA_0078",
    "macro": 0,
-   "area": 398,
+   "area": 137924,
    "coastal": true
   },
   {
-   "label": 946,
+   "label": 851,
    "kind": "sea",
-   "key": "STATE_SEA_0175",
+   "key": "STATE_SEA_0079",
    "macro": 0,
-   "area": 397,
+   "area": 363675,
    "coastal": true
   },
   {
-   "label": 947,
+   "label": 852,
    "kind": "sea",
-   "key": "STATE_SEA_0176",
+   "key": "STATE_SEA_0080",
    "macro": 0,
-   "area": 349,
+   "area": 271324,
    "coastal": true
   },
   {
-   "label": 948,
+   "label": 853,
    "kind": "sea",
-   "key": "STATE_SEA_0177",
+   "key": "STATE_SEA_0081",
    "macro": 0,
-   "area": 277,
+   "area": 126409,
+   "coastal": true
+  },
+  {
+   "label": 854,
+   "kind": "sea",
+   "key": "STATE_SEA_0082",
+   "macro": 0,
+   "area": 292885,
+   "coastal": true
+  },
+  {
+   "label": 855,
+   "kind": "sea",
+   "key": "STATE_SEA_0083",
+   "macro": 0,
+   "area": 268856,
+   "coastal": true
+  },
+  {
+   "label": 856,
+   "kind": "sea",
+   "key": "STATE_SEA_0084",
+   "macro": 0,
+   "area": 437271,
+   "coastal": true
+  },
+  {
+   "label": 857,
+   "kind": "sea",
+   "key": "STATE_SEA_0085",
+   "macro": 0,
+   "area": 330427,
+   "coastal": true
+  },
+  {
+   "label": 858,
+   "kind": "sea",
+   "key": "STATE_SEA_0086",
+   "macro": 0,
+   "area": 226274,
+   "coastal": true
+  },
+  {
+   "label": 859,
+   "kind": "sea",
+   "key": "STATE_SEA_0087",
+   "macro": 0,
+   "area": 311562,
+   "coastal": true
+  },
+  {
+   "label": 860,
+   "kind": "sea",
+   "key": "STATE_SEA_0088",
+   "macro": 0,
+   "area": 244659,
+   "coastal": true
+  },
+  {
+   "label": 861,
+   "kind": "sea",
+   "key": "STATE_SEA_0089",
+   "macro": 0,
+   "area": 236233,
+   "coastal": true
+  },
+  {
+   "label": 862,
+   "kind": "sea",
+   "key": "STATE_SEA_0090",
+   "macro": 0,
+   "area": 326915,
+   "coastal": true
+  },
+  {
+   "label": 863,
+   "kind": "sea",
+   "key": "STATE_SEA_0091",
+   "macro": 0,
+   "area": 233290,
+   "coastal": true
+  },
+  {
+   "label": 864,
+   "kind": "sea",
+   "key": "STATE_SEA_0092",
+   "macro": 0,
+   "area": 221817,
+   "coastal": true
+  },
+  {
+   "label": 865,
+   "kind": "sea",
+   "key": "STATE_SEA_0093",
+   "macro": 0,
+   "area": 253287,
+   "coastal": true
+  },
+  {
+   "label": 866,
+   "kind": "sea",
+   "key": "STATE_SEA_0094",
+   "macro": 0,
+   "area": 101051,
+   "coastal": true
+  },
+  {
+   "label": 867,
+   "kind": "sea",
+   "key": "STATE_SEA_0095",
+   "macro": 0,
+   "area": 157468,
+   "coastal": true
+  },
+  {
+   "label": 868,
+   "kind": "sea",
+   "key": "STATE_SEA_0096",
+   "macro": 0,
+   "area": 205331,
+   "coastal": true
+  },
+  {
+   "label": 869,
+   "kind": "sea",
+   "key": "STATE_SEA_0097",
+   "macro": 0,
+   "area": 234461,
+   "coastal": true
+  },
+  {
+   "label": 870,
+   "kind": "sea",
+   "key": "STATE_SEA_0098",
+   "macro": 0,
+   "area": 87279,
+   "coastal": true
+  },
+  {
+   "label": 871,
+   "kind": "sea",
+   "key": "STATE_SEA_0099",
+   "macro": 0,
+   "area": 155438,
+   "coastal": true
+  },
+  {
+   "label": 872,
+   "kind": "sea",
+   "key": "STATE_SEA_0100",
+   "macro": 0,
+   "area": 68559,
+   "coastal": true
+  },
+  {
+   "label": 873,
+   "kind": "sea",
+   "key": "STATE_SEA_0101",
+   "macro": 0,
+   "area": 138409,
+   "coastal": true
+  },
+  {
+   "label": 874,
+   "kind": "sea",
+   "key": "STATE_SEA_0102",
+   "macro": 0,
+   "area": 150094,
+   "coastal": true
+  },
+  {
+   "label": 875,
+   "kind": "sea",
+   "key": "STATE_SEA_0103",
+   "macro": 0,
+   "area": 146947,
+   "coastal": true
+  },
+  {
+   "label": 876,
+   "kind": "sea",
+   "key": "STATE_SEA_0104",
+   "macro": 0,
+   "area": 113623,
+   "coastal": true
+  },
+  {
+   "label": 877,
+   "kind": "sea",
+   "key": "STATE_SEA_0105",
+   "macro": 0,
+   "area": 114780,
+   "coastal": true
+  },
+  {
+   "label": 878,
+   "kind": "sea",
+   "key": "STATE_SEA_0106",
+   "macro": 0,
+   "area": 125920,
    "coastal": true
   }
  ]

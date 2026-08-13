@@ -8,8 +8,8 @@ would help rather than the build silently coarsening.
 ## Density
 
 - Target: **659 land states** (vanilla's own count) at a mean
-  of **16,401 canvas px** each, plus **103 sea zones**.
-- Achieved: **771 land cells** (mean 14,019 px, median 12,733 px, min 231, max 43,090) and **177 sea zones**.
+  of **16,564 canvas px** each, plus **103 sea zones**.
+- Achieved: **772 land cells** (mean 14,140 px, median 12,998 px, min 231, max 43,498) and **106 sea zones**.
 - Cells traced from a source before filling: **2,565**.
 
 ## Lettering bridge (the parchment master)
@@ -20,7 +20,7 @@ would help rather than the build silently coarsening.
 
 - Within the parchment master's own footprint, **73.7%** of land carries a traced cell (the rest falls through to the mask-wide seeded fallback below, same as everywhere else).
 
-- **Drawn versus tessellated**: **68.8%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
+- **Drawn versus tessellated**: **69.0%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
 
 ## Source coverage
 

@@ -286,6 +286,81 @@ def load_river_streams(path: Path, canvas: tuple[int, int] | None = None) -> lis
 
 
 # ---------------------------------------------------------------------------
+# Inland lakes (the enclosed-water keep-list the land/sea mask generator reads)
+# ---------------------------------------------------------------------------
+#
+# The Terraqueous globe draws rivers in ocean-blue and floods some marshes to a
+# shallow-ocean tone, so the classifier leaves hundreds of enclosed (non-ocean-
+# connected) "lakes" the map does not mean. ``generate_heightmap.py`` fills every
+# enclosed water body to land EXCEPT the genuine ones listed here — identified by
+# a stable interior *seed pixel* rather than an area threshold (a size cut cannot
+# separate the 14k-px false Marshes-of-Madness blob from a ~4k-px real lake) or a
+# component index (labels are not stable across regenerations).
+
+@dataclass(frozen=True)
+class InlandLake:
+    """One enclosed water body to keep as water.
+
+    ``seed`` is a guaranteed-interior water pixel (canvas px, integer) naming the
+    body's connected component. ``kind`` is ``lake`` (an impassable lake
+    downstream in S3b) or ``sea`` (an ocean-connected navigable sea zone modelled
+    like Ulthuan's Inner Sea). The binary land/sea mask keeps every listed body
+    identically as water; ``kind`` only records the distinction the later
+    default.map / states pass consumes.
+    """
+
+    name: str
+    seed: tuple[int, int]
+    kind: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "InlandLake":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        ctx = f"{ctx}({name})"
+        seed_raw = _require(d, "seed", ctx)
+        if (not isinstance(seed_raw, (list, tuple))) or len(seed_raw) != 2:
+            raise SchemaError(f"{ctx}.seed: expected an [x, y] pixel pair, got {seed_raw!r}")
+        sx = _as_int(seed_raw[0], f"{ctx}.seed[0]")
+        sy = _as_int(seed_raw[1], f"{ctx}.seed[1]")
+        if sx < 0 or sy < 0:
+            raise SchemaError(f"{ctx}.seed: pixel coords must be non-negative, got ({sx}, {sy})")
+        if canvas is not None:
+            cw, ch = canvas
+            if not (0 <= sx < cw and 0 <= sy < ch):
+                raise SchemaError(f"{ctx}.seed: ({sx}, {sy}) is outside the canvas {cw}x{ch}")
+        kind = _as_str(_require(d, "kind", ctx), f"{ctx}.kind")
+        if kind not in ("lake", "sea"):
+            raise SchemaError(f"{ctx}.kind: expected 'lake' or 'sea', got '{kind}'")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(name=name, seed=(sx, sy), kind=kind, note=note)
+
+
+def load_inland_lakes(path: Path, canvas: tuple[int, int] | None = None) -> list[InlandLake]:
+    """Load + validate the committed inland-lake keep-list (sorted by name).
+
+    Bounds-checks each seed against ``canvas`` when it is known, exactly like
+    :class:`RiverStream`. Raises :class:`SchemaError` on any malformed body or a
+    duplicate name.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    bodies_raw = _require(data, "bodies", ctx)
+    if not isinstance(bodies_raw, list) or not bodies_raw:
+        raise SchemaError(f"{ctx}.bodies: expected a non-empty list")
+    bodies = [InlandLake.from_dict(b, f"{ctx}.bodies[{i}]", canvas)
+              for i, b in enumerate(bodies_raw)]
+    names = [b.name for b in bodies]
+    dupes = {n for n in names if names.count(n) > 1}
+    if dupes:
+        raise SchemaError(f"{ctx}: duplicate body names {sorted(dupes)}")
+    bodies.sort(key=lambda b: b.name)
+    return bodies
+
+
+# ---------------------------------------------------------------------------
 # States (the state-cell partition — land states and single-province sea zones)
 # ---------------------------------------------------------------------------
 

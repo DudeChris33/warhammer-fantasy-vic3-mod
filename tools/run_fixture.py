@@ -836,6 +836,42 @@ def _selfcheck_cells() -> None:
     assert (filled != 0).all(), "the fill must leave nothing unlabelled"
 
 
+def _selfcheck_segment_lakes() -> None:
+    """The enclosed-water keep rule, in isolation (no golden needed).
+
+    Pins the property generate_heightmap.py relies on: keep the open ocean and
+    every seeded body, fill every other enclosed body to land — and that the seam
+    merge is wrap-aware, so seeding one side of a body split across x=0/x=W-1
+    keeps both halves.
+    """
+    # Ocean strip on the left (largest water component), plus two enclosed lakes:
+    # one seeded (kept), one not (filled).
+    land = np.ones((12, 20), dtype=bool)
+    land[:, :6] = False          # open ocean
+    land[3:5, 10:12] = False     # lake A — seeded, must survive
+    land[8:10, 15:17] = False    # lake B — unseeded, must fill
+    out = segment.keep_ocean_and_lakes(land, [(10, 3)], wrap_x=False)
+    assert not out[0, 0], "the open ocean must stay water"
+    assert not out[3, 10], "a keep-seeded enclosed body must stay water"
+    assert out[8, 15], "an unseeded enclosed body must fill to land"
+    assert (out | ~land).all(), "the keep step is additive — it must never remove land"
+
+    # A body split across the wrap seam is one component: seeding either side keeps
+    # both halves.
+    w = np.ones((6, 10), dtype=bool)
+    w[0, :] = False              # ocean row (largest water component)
+    w[2:4, 0] = False            # left half of a seam-wrapped body
+    w[2:4, 9] = False            # right half
+    out2 = segment.keep_ocean_and_lakes(w, [(9, 2)], wrap_x=True)
+    assert not out2[2, 0] and not out2[2, 9], \
+        "seeding one side of a seam-wrapped body must keep both halves"
+    # Without wrap the two halves are separate; seeding the right leaves the left
+    # unseeded, so it fills.
+    out3 = segment.keep_ocean_and_lakes(w, [(9, 2)], wrap_x=False)
+    assert out3[2, 0] and not out3[2, 9], \
+        "without wrap the seam halves are distinct — only the seeded one survives"
+
+
 def _selfcheck_rivers() -> None:
     """Rasterize + validate a tiny synthetic river network (no golden needed).
 
@@ -983,6 +1019,8 @@ def run_check() -> int:
     print("composite: precedence + tie-rejection self-check passed.")
     _selfcheck_cells()
     print("cells: wrap-aware components + nearest-label fill self-check passed.")
+    _selfcheck_segment_lakes()
+    print("segment: enclosed-water keep (ocean + seeded lakes) self-check passed.")
     _selfcheck_rivers()
     print("rivers: rasterize + topology-validation self-check passed.")
     world = schema.load_world(WORLD_DIR)
