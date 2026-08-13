@@ -39,7 +39,8 @@ Provenance of the three constants, which is deliberately not uniform:
     asymmetric because Earth's landmasses are, and the Warhammer world has Chaos
     Wastes at *both* poles. The user resolved it by drawing a northern limit on a
     local-only annotated copy of the globe
-    (``sources/terraqueous_globe_for_reprojection.jpg``, 2026-07-29); recovered by
+    (``sources/terraqueous_globe_with_NS_lines.jpg``, 2026-07-29; renamed since,
+    bytes unchanged); recovered by
     differencing against the clean source, that line is source row 238.183 =
     **74.9050 N**. ``Y0 = 2142.0`` puts the canvas top edge exactly on it.
 

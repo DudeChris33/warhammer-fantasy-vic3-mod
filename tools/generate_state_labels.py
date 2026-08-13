@@ -99,10 +99,10 @@ UNCOVERED_DISTANCE = 72.0
 BOUNDARY_LAYER = "boundaries"
 
 #: Sources consumed for boundaries. Membership is explicit rather than "every
-#: record with a boundary precedence": two S1 records (old_world_terrain.jpg,
-#: TheEmpire.webp) still declare one, and both are measured to be misregistered
-#: and are annotated as unusable for geometry. Naming the consumers here means
-#: adding a source is a deliberate edit, not a side effect of a precedence.
+#: record with a boundary precedence": the S1 record old_world_terrain.jpg still
+#: declares one, yet is measured to be misregistered and annotated as unusable for
+#: geometry. Naming the consumers here means adding a source is a deliberate edit,
+#: not a side effect of a precedence.
 #: name -> how its cells are extracted. ``flat_colour`` for a map whose ocean is
 #: a flat fill and whose region lines are drawn over flat terrain fills;
 #: ``ink`` for a textured parchment needing a local-contrast threshold.

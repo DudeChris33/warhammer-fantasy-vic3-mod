@@ -907,6 +907,46 @@ def _selfcheck_wrap() -> None:
     assert near < 5.0 < far
 
 
+def _selfcheck_frame() -> None:
+    """The Miller canvas frame: exact round trip, and a guard against a bad grid.
+
+    The frame is the one piece of this toolchain whose correctness is a *maths*
+    property rather than a golden bitmap, so it is checked as maths. The invariant
+    is deliberately asymmetric — ``lonlat_to_canvas`` folds x into ``[0, width)``
+    while ``canvas_to_lonlat`` does not, because ``fit_parametric`` needs a seam
+    control point recorded at ``x = WIDTH`` to read back as +180 — so the round
+    trip is *latitude exact everywhere, longitude exact modulo width*. It is
+    checked at both the provinces grid and the 2x heightmap grid, since every real
+    consumer runs at one of those two scales.
+    """
+    from config import canvas_frame as cf
+
+    for w, h in (map_config.PROVINCES_SIZE, map_config.HEIGHTMAP_SIZE):
+        xs = np.linspace(0.0, w, 419)
+        ys = np.linspace(0.0, h, 419)
+        gx, gy = np.meshgrid(xs, ys)
+        lon, lat = cf.canvas_to_lonlat(gx, gy, w, h)
+        rx, ry = cf.lonlat_to_canvas(lon, lat, w, h)
+        dlat = float(np.abs(ry - gy).max())
+        dlon = float(np.abs(((rx - gx + w / 2) % w) - w / 2).max())
+        assert dlat < 1e-6, f"frame latitude round trip off by {dlat:.2e}px at {w}x{h}"
+        assert dlon < 1e-6, f"frame longitude round trip off by {dlon:.2e}px (mod width) at {w}x{h}"
+
+    # The uniform-grid guard must fire on a grid whose height is not width*H/W —
+    # under Miller a non-multiple grid would distort latitude silently, so the
+    # frame refuses it rather than guessing.
+    raised = False
+    try:
+        cf.lonlat_to_canvas(0.0, 0.0, cf.WIDTH, cf.HEIGHT - 1)
+    except ValueError:
+        raised = True
+    assert raised, "canvas frame accepted a non-uniformly-scaled grid — the guard is broken"
+
+    # The band the frame actually claims, pinned so a fat-fingered constant is caught.
+    assert abs(cf.LAT_TOP - 74.9052) < 1e-3, f"LAT_TOP drifted to {cf.LAT_TOP}"
+    assert abs(cf.LAT_BOTTOM - (-57.4084)) < 1e-3, f"LAT_BOTTOM drifted to {cf.LAT_BOTTOM}"
+
+
 # ---------------------------------------------------------------------------
 # Comparison helpers
 # ---------------------------------------------------------------------------
@@ -937,6 +977,8 @@ def _diff(a: dict[str, bytes], b: dict[str, bytes]) -> list[str]:
 
 def run_check() -> int:
     _selfcheck_wrap()
+    _selfcheck_frame()
+    print("frame: Miller round-trip + uniform-grid guard self-check passed.")
     _selfcheck_composite()
     print("composite: precedence + tie-rejection self-check passed.")
     _selfcheck_cells()

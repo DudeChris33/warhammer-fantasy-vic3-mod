@@ -8,8 +8,8 @@ would help rather than the build silently coarsening.
 ## Density
 
 - Target: **659 land states** (vanilla's own count) at a mean
-  of **12,517 canvas px** each, plus **103 sea zones**.
-- Achieved: **695 land cells** (mean 11,869 px, median 10,769 px, min 208, max 32,983) and **108 sea zones**.
+  of **16,401 canvas px** each, plus **103 sea zones**.
+- Achieved: **771 land cells** (mean 14,019 px, median 12,733 px, min 231, max 43,090) and **177 sea zones**.
 - Cells traced from a source before filling: **2,565**.
 
 ## Lettering bridge (the parchment master)
@@ -18,9 +18,9 @@ would help rather than the build silently coarsening.
 - After: **1,816** (+50.1%) — this is the measurement that says whether the glyph detector earned its dependency.
 - Largest traced cell after bridging: **821,279 px** (source pixels, before warping onto the canvas or clipping to the mask). A faint or broken ruled line, not a text problem — recoverable by `split_large`, reported here rather than hidden.
 
-- Within the parchment master's own footprint, **74.3%** of land carries a traced cell (the rest falls through to the mask-wide seeded fallback below, same as everywhere else).
+- Within the parchment master's own footprint, **73.7%** of land carries a traced cell (the rest falls through to the mask-wide seeded fallback below, same as everywhere else).
 
-- **Drawn versus tessellated**: **71.4%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
+- **Drawn versus tessellated**: **68.8%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
 
 ## Source coverage
 
@@ -28,13 +28,13 @@ Boundary sources, highest precedence first — the area a layer *offers*, not
 the area it wins:
 
 ```
-  precedence  95  total_war_map_colored.png                        covers  58.8% of canvas
-  precedence 100  wh3_dlc_ie_parchment_map_english.jpg             covers  60.5% of canvas
+  precedence  95  tww3_colored.png                                 covers  70.0% of canvas
+  precedence 100  tww3_ie_parchment.jpg                            covers  71.3% of canvas
 ```
 
 ## The gap
 
-**1.1% of land has no boundary source at all** and is partitioned by
+**3.7% of land has no boundary source at all** and is partitioned by
 seeded fallback cells at the target density. This is expected, not a defect:
 the Immortal Empires frame stops around Cathay, so the Kingdoms of Ind,
 Khuresh, Nippon, the far Eastern Steppes and the polar Chaos Wastes have no
@@ -43,7 +43,7 @@ correctly; they are simply not tracing anything.
 
 Named candidates for closing it, in order of expected value:
 
-1. **`the-old-world-...-v3-0-...ml2lq3qfofad1.png`** (already in the manifest,
+1. **`tww3_old_world_mod_parchment.png`** (already in the manifest,
    deliberately unregistered in S3a — see `tools/SOURCES.md`). A denser line
    chloropleth over the Old World arc. It would raise density where we already
    have coverage rather than close the gap, but it is the cheapest next step:
@@ -59,22 +59,11 @@ Named candidates for closing it, in order of expected value:
 
 ## Macro grouping
 
-- 16 contours recovered from the annotated twin (it prints 16 region labels).
-- 128 cells fell outside every contour and took their macro from the nearest neighbour — these are mostly the uncovered regions above.
+- **⚠ SKIPPED: no source carries the `ie_macro_grouping` role.** The annotated
+  twin (`pizqenw9rd791.jpg`) was retired from the manifest in the August 2026
+  sources/ reorg with nothing registered in its place. Every cell reports macro
+  0 (unassigned) below. Register a twin-equivalent source with that role to
+  bring grouping back.
 
-  macro_01                        7 cells
-  macro_02                       92 cells
-  macro_03                       45 cells
-  macro_04                       49 cells
-  macro_05                       48 cells
-  macro_06                       73 cells
-  macro_07                       64 cells
-  macro_08                      135 cells
-  macro_09                       23 cells
-  macro_10                        1 cells
-  macro_11                       19 cells
-  macro_12                       16 cells
-  macro_13                        4 cells
-  macro_14                       89 cells
-  macro_15                        0 cells
-  macro_16                       30 cells
+- 0 cells fell outside every contour and took their macro from the nearest neighbour — these are mostly the uncovered regions above.
+
