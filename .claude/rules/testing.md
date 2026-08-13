@@ -38,9 +38,10 @@ action, never a side effect of a generator run.
 
 `map_data/heightmap.png`, `map_data/rivers.png` and
 `tools/derived/state_labels.png` are generated, not hand-authored: after an
-intentional source/LUT/registration change, regenerate them with `python
-tools/generate_heightmap.py`, `python tools/generate_rivers.py` and `python
-tools/generate_state_labels.py`, and re-run the checks above before committing.
+intentional source/LUT/registration/`tools/config/inland_lakes.json` change,
+regenerate them with `python tools/generate_heightmap.py`, `python
+tools/generate_rivers.py` and `python tools/generate_state_labels.py`, and
+re-run the checks above before committing.
 `--labels` is only meaningful once the state-label layer exists; `validate_map.py`
 with no flag needs `map_data/provinces.png`, which arrives in S3b.
 
@@ -49,6 +50,13 @@ hand-written: re-derive with `python tools/fit_registration.py --seed <stem>`
 after editing the corresponding seed in `tools/registration/seeds/`. Like
 `--update-manifest`, that is an explicit authoring action and never part of the
 gate.
+
+`tools/config/inland_lakes.json` is hand-authored geographic data, like a
+registration seed: it lists the genuine enclosed lakes/seas to keep as water
+(by interior seed pixel) when `generate_heightmap.py` fills false enclosed
+water (drawn rivers, flooded marshes) to land. Edit it deliberately and
+regenerate the heightmap through it — never infer or hand-edit it from a
+regenerated bitmap.
 
 `run_fixture.py --check` also regression-checks the source-driven pipeline itself
 against committed synthetic fixtures, independent of the real `sources/`:
