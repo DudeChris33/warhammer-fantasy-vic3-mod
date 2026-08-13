@@ -105,6 +105,18 @@ TWW3_DETAIL_SIGMA = 24.0
 #: guarding against.
 CANVAS_MIN_BLOB = 256
 
+#: Tripwire fraction for the enclosed-water fill (``segment.keep_ocean_and_lakes``).
+#: That fill trusts "largest water component = the open ocean" and fills every
+#: other enclosed body to land unless it carries an ``inland_lakes.json`` seed. If
+#: any body it is about to fill exceeds this fraction of the ocean's own area the
+#: run aborts, on the reasoning that a drawn river or flooded marsh is never a
+#: meaningful fraction of the ocean — so a large second body means the ocean split
+#: (a land bridge, a future source change) and a real sea is about to vanish. The
+#: current worst case is the 14,261-px Marshes blob at 0.08% of the 18.6M-px
+#: ocean, so 2% is ~25x of headroom over anything legitimate while still tripping
+#: long before a second continent-sized sea could be erased.
+OCEAN_SPLIT_FRACTION = 0.02
+
 
 def log(msg: str, t0: float | None = None) -> None:
     stamp = f"  [{time.time() - t0:5.1f}s]" if t0 is not None else ""
@@ -439,18 +451,35 @@ def main(argv: list[str] | None = None) -> int:
             f"generated mask (tools/derived/land_sea_mask.png) before use — refusing to "
             f"silently drop a kept lake."
         )
-    land_before_keep = land
-    land = segment.keep_ocean_and_lakes(
-        land, [lk.seed for lk in lakes], wrap_x=map_config.WRAP_X)
+    land, keep_report = segment.keep_ocean_and_lakes(
+        land, [lk.seed for lk in lakes], wrap_x=map_config.WRAP_X, return_report=True)
     after = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
-    filled_px = int((land & ~land_before_keep).sum())
-    filled_bodies = stats["water_bodies"] - after["water_bodies"]
-    log(f"  inland water: kept the open ocean + {len(lakes)} curated bodies, filled "
-        f"{filled_bodies} enclosed bodies ({filled_px:,} px, "
-        f"{100 * filled_px / land.size:.3f}% of canvas) to land", t0)
+    log(f"  inland water: kept the open ocean + {keep_report['kept_bodies']} curated bodies, "
+        f"filled {keep_report['filled_bodies']} enclosed bodies ({keep_report['filled_px']:,} px, "
+        f"{100 * keep_report['filled_px'] / land.size:.3f}% of canvas) to land", t0)
     log(f"    water bodies {stats['water_bodies']} -> {after['water_bodies']}; "
         f"land now {100 * after['land_fraction']:.2f}%  "
         f"(kept: {', '.join(lk.name for lk in lakes)})")
+
+    # Tripwire (security review 2026-08-12): the fill trusts "largest water
+    # component = the open ocean". That holds today (one 18.6M-px ocean, the next
+    # body is the 14k-px Marshes blob), but if a future source change ever split
+    # the ocean into two large masses, the second would be silently filled to land
+    # unless a seed happened to sit in it. A body about to be filled that is any
+    # sizeable fraction of the ocean is never a drawn river or marsh — fail loudly.
+    largest_filled = keep_report["largest_filled_px"]
+    ocean_px = keep_report["ocean_px"]
+    if ocean_px and largest_filled > OCEAN_SPLIT_FRACTION * ocean_px:
+        raise SystemExit(
+            f"largest enclosed body about to be filled is {largest_filled:,} px, "
+            f"{100 * largest_filled / ocean_px:.1f}% of the {ocean_px:,}-px ocean "
+            f"(cap {100 * OCEAN_SPLIT_FRACTION:.0f}%). The ocean may have split into two "
+            f"components — add an inland_lakes.json seed for the second body if it is a real "
+            f"sea, or investigate the source change. Refusing to fill it silently."
+        )
+    log(f"    largest filled body {largest_filled:,} px "
+        f"({100 * largest_filled / ocean_px:.2f}% of the ocean; cap "
+        f"{100 * OCEAN_SPLIT_FRACTION:.0f}%) — the ocean is one component")
 
     _report_polar_band(land, t0)
     raster.write_mask_png(DERIVED_DIR / "land_sea_mask.png", land)

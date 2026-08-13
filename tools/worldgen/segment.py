@@ -120,7 +120,8 @@ def clean_land_mask(land: np.ndarray, min_island_area: int = 24,
     return m
 
 
-def keep_ocean_and_lakes(land: np.ndarray, keep_seeds, wrap_x: bool = True) -> np.ndarray:
+def keep_ocean_and_lakes(land: np.ndarray, keep_seeds, wrap_x: bool = True,
+                         return_report: bool = False):
     """Fill every enclosed water body to land, keeping the ocean and named lakes.
 
     The colour classifier leaves hundreds of enclosed (non-ocean-connected) water
@@ -136,20 +137,40 @@ def keep_ocean_and_lakes(land: np.ndarray, keep_seeds, wrap_x: bool = True) -> n
     resolves to land (label 0) is ignored here; the caller is expected to assert
     its seeds are water first, so a mis-entered seed fails loudly upstream rather
     than silently dropping a lake.
+
+    With ``return_report=True`` also returns a dict of measured component sizes
+    (``ocean_px``, ``kept_bodies``, ``filled_bodies``, ``filled_px``,
+    ``largest_filled_px``) so the caller can log and guard the "largest component
+    is the ocean" assumption without re-labelling.
     """
     water = ~land
     lab, n = _label_wrap(water, wrap_x)
     if n == 0:
-        return land.copy()
+        out = land.copy()
+        if not return_report:
+            return out
+        return out, {"ocean_px": 0, "kept_bodies": 0, "filled_bodies": 0,
+                     "filled_px": 0, "largest_filled_px": 0}
     sizes = np.bincount(lab.ravel())
     sizes[0] = 0                        # label 0 is land, never the open ocean
-    keep = {int(sizes.argmax())}        # the open ocean = largest water component
+    ocean = int(sizes.argmax())         # the open ocean = largest water component
+    keep = {ocean}
     for (x, y) in sorted(keep_seeds):
         lbl = int(lab[y, x])
         if lbl != 0:
             keep.add(lbl)
     kept_water = np.isin(lab, np.array(sorted(keep), dtype=lab.dtype))
-    return land | (water & ~kept_water)
+    out = land | (water & ~kept_water)
+    if not return_report:
+        return out
+    filled = [int(sizes[i]) for i in range(1, sizes.size) if sizes[i] > 0 and i not in keep]
+    return out, {
+        "ocean_px": int(sizes[ocean]),
+        "kept_bodies": len(keep) - 1,
+        "filled_bodies": len(filled),
+        "filled_px": int(sum(filled)),
+        "largest_filled_px": max(filled, default=0),
+    }
 
 
 def _label_wrap(mask: np.ndarray, wrap_x: bool) -> tuple[np.ndarray, int]:
