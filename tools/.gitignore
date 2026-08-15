@@ -30,10 +30,3 @@ derived/*
 !derived/named/
 !derived/named/*.png
 
-# Kept as a worked example of the paired-anchor-dot registration workflow
-# (user draws matched colored dots on a region-crop source + the reprojected
-# globe; a thin-plate through the pairs places the crop). The Empire tile of
-# tww3_old_world_mod_parchment, warped through 9 dots, with the mask coastline
-# overlaid. A reference render, not a pipeline input.
-!derived/empire_anchor_dot_warp_example.png
-

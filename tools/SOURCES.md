@@ -76,10 +76,10 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | satellite_globe.jpg | 637x358 | 43,099 | 8b90bae2e491a366a8c5deb3f1e8d9307dac6b8658d0fd7d62bb9c6de242d95b | Fan whole-world satellite/biome render (Steam Workshop) | DE-REGISTERED in S2 - does not register (see below) | no |
 | start_warhammer_old_world_z10.png | 6658x9824 | 120,598,002 | 856dfa35a633a3e7dead1972a37660791fc2b8fcbb18a59f3a535b2d3109428a | Games Workshop — official "Warhammer: The Old World" interactive map (start-warhammer.com), zoom-10 base tile layer, stitched by us (TMS tiles, transparent border cropped) | Highest-resolution whole-continent Old World reference in the folder. Base tile ART ONLY — the site's interactive city/army/region markers are separate overlays and are NOT baked in. Naming + extent + coastline/relief cross-reference (S6). Unregistered | no |
 | terraqueous_globe.jpg | 4000x3256 | 2,292,545 | c4021e28d8d58bc3f91733df72ee9b7b398f922bb565b0478d3743446d8c15f3 | Fan cartography — "Terraqueous Globe", Kartografia Niepraktyczna 2022 | Whole-world heightmap (NE-II colour-to-height ramp) + coastline. **The single geometric authority** (S3a decision #1) — every other source projects onto it | yes |
-| terraqueous_globe_reprojected - coasts.paint | n/a | 62,117,962 | 93d51e6dd1dbddcfd34d151a5dc7adfed36197ab791da069ba74c10aff72b874 | Derived from `terraqueous_globe_reprojected.png` (user, August 2026; still being edited locally) | Editable master of the .png below | no |
-| terraqueous_globe_reprojected - coasts.png | 8192x3616 | 62,797,507 | b68ed04f28c66a17745132ea63c67ebc69113460f96126f009bfb4d0578d735c | Derived from `terraqueous_globe_reprojected.png` (user, August 2026) | The hand-traced coastline (magenta line on the Miller-reprojected canvas, 8192x3616) that `generate_coastline_mask.py` consumes as the coastline authority (user decision, 2026-08-14: "the traced coastline wins") — supersedes the height-ramp coast extraction. Renamed from `terraqueous_globe_reprojected - rivers.{paint,png}` (was misidentified as a river-course layer, "unconfirmed, flag if wrong") once its actual role was confirmed | no |
+| terraqueous_globe_reprojected - coasts.paint | n/a | 62,119,228 | 15e2684fa627eaf405f5a43d2ae53e9d935e294b72b6e1eff05b73d86eb9f655 | Derived from `terraqueous_globe_reprojected.png` (user, August 2026; still being edited locally) | Editable master of the .png below | no |
+| terraqueous_globe_reprojected - coasts.png | 8192x3616 | 62,794,431 | f302d433a8f6271a5a29938b604ea728a7e752f38dbf7c94dd17788647282cd5 | Derived from `terraqueous_globe_reprojected.png` (user, August 2026) | The hand-traced coastline (magenta line on the Miller-reprojected canvas, 8192x3616) that `generate_coastline_mask.py` consumes as the coastline authority (user decision, 2026-08-14: "the traced coastline wins") — supersedes the height-ramp coast extraction. Renamed from `terraqueous_globe_reprojected - rivers.{paint,png}` (was misidentified as a river-course layer, "unconfirmed, flag if wrong") once its actual role was confirmed | no |
 | terraqueous_globe_reprojected.png | 8192x3616 | 30,471,432 | 604fc9f92848fc25590f0a7d69b54a46dea79bd1acbc578f250304d36b06888c | Derived from `terraqueous_globe.jpg` (user, August 2026) | `terraqueous_globe.jpg` reprojected from its native Natural Earth II to Miller cylindrical — the mod canvas's own projection (see `config/canvas_frame.py`). Canvas-sized (8192x3616 = WIDTH x HEIGHT). Not yet consumed by any script; `generate_heightmap.py` currently reprojects `terraqueous_globe.jpg` itself via its NE-II fit rather than reading a pre-reprojected copy | no |
-| terraqueous_globe_reprojected_no_text.png | 8192x3616 | 27,927,346 | 0bf9c22e33b1ba9457b20a7cd1ce694b59cdff794261f0a7dbd0113e6ed8de15 | TBD | TBD | no |
+| terraqueous_globe_reprojected_no_text.png | 8192x3616 | 27,725,205 | 5db4c45ff0ce949b5835326cb4074a8a72874ffdd2ff658fcd595e2424e9bc1e | TBD | TBD | no |
 | terraqueous_globe_with_NS_lines.jpg | 4000x3256 | 4,397,707 | 179ea7271e2adc0d509bce5358d40c3a60a36c251309dac4377a5acef0ca1c9c | TBD | TBD | no |
 | the_empire_1.jpg | 5426x5091 | 22,888,291 | d12726947a3afaee43bbc174dbe95cba1288e7bf4dbf542e0a6a86065642bb29 | TBD | TBD | no |
 | the_empire_2.jpg | 1920x1301 | 1,466,126 | 8c3f93454483dc261f933ad3d43530495cb11111071de2511669ac50f5ad2528 | Games Workshop / Warhammer Community — "The Empire of Man" map | Clean counterpart of the annotated map — differencing the two isolates the annotation | no |
@@ -89,30 +89,53 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | tww3_colored.png | 4726x3010 | 1,467,069 | d3962b9e28a49765c6c6f236b89b67924d06019835bcc857a51b41e5602b3817 | Fan cartography - flat-filled Total War: Warhammer world map with region boundaries | Demoted from primary to **complement** boundary source (world-map-parchment-areas-onto-globe.md, 2026-07-28): boundary precedence 95, below the parchment master's 100, so it now wins only outside the master's coverage. Flat blue ocean still gives an EXACT land/sea silhouette (no threshold is fitted), and black region lines over flat terrain fills yield 681 clean closed cells across the whole Known World, against our 659 land-state target — the 748-vs-681 clean-cell discrepancy flagged in the S3a-2 review remains explicitly unresolved. See below | yes |
 | tww3_ie_parchment.jpg | 3703x2880 | 3,225,567 | f6e4f53ea80673bb9b792f11b1ac1de387bb8e07757f8a384aa40fd8aea757c1 | Creative Assembly - Total War: Warhammer 3 Immortal Empires parchment campaign map (English) | **PRIMARY BOUNDARY + NAME SOURCE (world-map-parchment-areas-onto-globe.md, 2026-07-28)** - registered by `tools/fit_registration.py --seed wh3_dlc_ie_parchment_map_english` (silhouette objective via the climate map sibling, 10x8 lattice, 12 held-out landmarks). Fit: `refined_iou` 0.6193, `folded_fraction` 0%, `anisotropy_p99` 3.00, `landmark_check_px` mean 426.9 / max 872.1 - reported against the family's only other comparable record (`total_war_map_colored.json`: mean 312.2 / max 844.6, refined_iou 0.6617) as somewhat weaker but consistent (0% folding, same anisotropy), explained by the parchment's silhouette coming via a rescaled sibling rather than an exact flat-fill silhouette. The family's `ie_macro_twin.json` control points (baked standalone when the master was previously absent from `sources/`) reproduce EXACTLY (0.0 px mean/max) against this fit, confirming full reproducibility with the existing placement. Its interior line network is traced with lettering bridged (not erased) into the barrier, and its printed names are the S3a-2 review panel's missing name-to-geometry binding. Also the differencing counterpart for macro grouping (unchanged role). | yes |
 | tww3_old_world_mod_parchment.png | 4096x4096 | 8,332,865 | 93f5c7b4791d7a02b60eeb4ba96bf5abc66ad4d650978d1990b022840de903a3 | Fan cartography — "The Old World, all faction starting positions v3.0" | **Denser Old World boundary network** — a line chloropleth, markedly denser than IE over the same arc. Higher precedence inside a masked footprint; the four corner vignettes + the Galleon's Graveyard spiral are excluded (they take cartographic liberties — user-flagged) | no |
+| tww3_old_world_mod_parchment_bretonnia.png | 1598x1789 | 2,703,109 | 52272c13257154f98f0c7d69d08db0068abbae79b99c7708a6ae7ac2358c118c | Dot-free, alpha-masked crop of `tww3_old_world_mod_parchment.png`, cut by the user for the paired-anchor-dot workflow (2026-08-14) — actually spans the whole south-west block (Bretonnia + Estalia + Tilea), named "bretonnia" per the user's request | Registered by `tools/fit_registration.py --seed tww3_old_world_mod_parchment_bretonnia` (objective=landmarks, 11 user-drawn paired anchor dots read direct off `terraqueous_globe_reprojected.png`, 6x6 lattice). Places the tile only — contributes no coastline (mask stays sole authority) and no geometry yet; boundary extraction deferred to S6. PROVISIONAL until the user accepts the diagnostic render | yes |
+| tww3_old_world_mod_parchment_empire.png | 1149x1167 | 1,346,687 | 9183ec0d80cadef0ba558c203252ce39eb1954e1e58a0811c4ceae0ebbf3225a | Dot-free, alpha-masked crop of `tww3_old_world_mod_parchment.png` (Norsca/Bretonnia/Estalia/Tilea alpha-erased away), cut by the user for the paired-anchor-dot workflow (2026-08-14) | Registered by `tools/fit_registration.py --seed tww3_old_world_mod_parchment_empire` (objective=landmarks, 9 user-drawn paired anchor dots read direct off `terraqueous_globe_reprojected.png`, 6x6 lattice). Places the tile only — contributes no coastline (mask stays sole authority) and no geometry yet; boundary extraction deferred to S6 | yes |
 | white_dwarf_world_map.png | 4524x3093 | 1,960,224 | c5a4c6708600fedbfe404c59a7c8d6ab5745eea6e4d35a28180ef13932b37be7 | TBD | TBD | no |
 <!-- MANIFEST:END -->
 
-## Local organisation: descriptive flat filenames, no subfolders
+## Local organisation: descriptive filenames; consumed sources stay flat
 
-`sources/` is kept **flat** (no subfolders): `tools/worldgen/sources.py` only
-ever looks up `sources/<basename>` directly — it does **not** search
-subfolders recursively, despite an earlier draft of this file claiming
-otherwise. A file dropped in a subfolder is invisible to `--verify`,
-`--update-manifest`, and `load_source_image`. Until that lookup is made
-recursive (not currently planned — the churn of keeping every script and
-registration record in sync with a moving basename was judged not worth it),
-subfolders are not a safe way to organise this folder.
+Every source `load_source_image` actually reads — anything with a manifest row
+above — must sit directly in `sources/`: `tools/worldgen/sources.py` looks up
+`sources/<basename>` and does **not** search subfolders recursively, so a
+consumed file dropped in a subfolder is invisible to `--verify`,
+`--update-manifest`, and `load_source_image`.
 
-What subfolders would have bought — grouping related sources — is instead done
-with a filename prefix that names the family the source belongs to (e.g.
-`tww3_*` for the Total War: Warhammer 3 / Immortal Empires parchment family,
-`old_world_*` for Games Workshop's Old World tabletop maps, `the_empire_*` for
-Empire-specific references, `terraqueous_globe*` for the globe and its
-derivatives). Sorted alphabetically, same-prefix files land next to each other
-in a flat listing without needing a folder. The manifest's `File` column stays
-a bare filename either way; renaming a source here means updating this
-manifest row plus every registration record / generator-script constant that
-names it — see the August 2026 reorg note below for what that touched.
+Grouping related sources is done with a filename prefix that names the family
+the source belongs to (e.g. `tww3_*` for the Total War: Warhammer 3 / Immortal
+Empires parchment family, `old_world_*` for Games Workshop's Old World tabletop
+maps, `the_empire_*` for Empire-specific references, `terraqueous_globe*` for
+the globe and its derivatives). Sorted alphabetically, same-prefix files land
+next to each other in a flat listing without needing a folder. The manifest's
+`File` column stays a bare filename either way; renaming a source here means
+updating this manifest row plus every registration record / generator-script
+constant that names it — see the August 2026 reorg note below for what that
+touched.
+
+`sources/dots/` is the one subfolder in use, and it works precisely because
+nothing in it is consumed: it holds the visual record of the paired-anchor-dot
+registration workflow (see the Immortal Empires/Old World per-region carves
+below) — `terraqueous_globe_reprojected - dots_1.png` / `- dots_2.png` (the
+canvas frame with the Empire's 9 / Bretonnia's 11 dots marked),
+`tww3_old_world_mod_parchment - dots_1.png` / `- dots_2.png` (the matching
+Empire/Bretonnia region crops with their dots still on), and the two composite
+QA renders `empire_anchor_dot_warp_example.png` /
+`bretonnia_anchor_dot_warp_example.png` (the warped tile with the mask
+coastline overlaid). None of these is ever passed to `load_source_image` — they
+are dot-picking references and finished-workflow illustrations, not pipeline
+inputs — so they get no manifest row and no SHA-256 tracking; `--verify` and
+`--update-manifest` correctly ignore the whole subfolder. A future subfolder is
+fine on the same condition: nothing in it may be a name any script loads.
+
+`empire_anchor_dot_warp_example.png` previously lived at
+`tools/derived/empire_anchor_dot_warp_example.png`, committed via a `tools/
+.gitignore` allowlist line specifically because `sources/` is blanket-gitignored
+and `tools/derived/` is not. Moving it here (alongside its new Bretonnia
+counterpart) means both worked-example renders are now local-only, like every
+other file in `sources/` — flag if that loss of git tracking wasn't intended;
+the alternative is a matching allowlist line for `sources/dots/*_warp_example.png`
+in the root `.gitignore`, which is otherwise a blanket `sources/` ignore.
 
 ## Renamed: `the-old-world-all-faction-starting-position-map-v3-0-updated-v0-ml2lq3qfofad1{, - Copy}.png`
 
