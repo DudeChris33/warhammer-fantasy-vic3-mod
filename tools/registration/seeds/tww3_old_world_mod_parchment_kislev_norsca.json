@@ -1,0 +1,35 @@
+{
+  "source": "tww3_old_world_mod_parchment_kislev_norsca.png",
+  "master_shape": [1436, 2939],
+  "objective": "landmarks",
+  "footprint_pad": 32,
+
+  "_comment": "PER-REGION KISLEV+NORSCA tile of the TWW3 Old World mod parchment, placed by the paired-anchor-dot workflow (the same one validated on the Empire, 2026-08-14). The whole-map fit of this source is impossible — it draws different regions at inconsistent scale, so no single warp reconciles it (see the landmark-accuracy wall). Instead the user cropped Kislev+Norsca out (alpha-erasing everything outside it) and drew 13 matched colour dots on the crop AND on terraqueous_globe_reprojected.png, which IS the canvas/mask frame (8192x3616). The dot centroids, recovered by exact RGB, give 13 source<->canvas correspondences; a thin-plate through them places the tile exactly at every dot. objective=landmarks means NO silhouette fit (the drift-prone stage), just the interpolation. master_shape is the crop's native (h,w) = (1436,2939); the source is the dot-free, alpha-masked crop. This record only PLACES the tile (like the Empire tile); no geometry is extracted yet.",
+
+  "_comment_lattice": "6x6 over the crop (~490 master px horizontal spacing, ~239 vertical). The 13 dots span the region's coastal extremes (blue at the far-west tip, red far-east in Kislev, cyan at the north coast, yellow at the southern Kislev border); the lattice regularises the thin-plate and captures its affine trend out to the crop corners, where it extrapolates beyond the dot hull.",
+  "lattice": {"nx": 6, "ny": 6, "inset": 0.03},
+
+  "_comment_landmarks": "source px = dot centroid in the crop's own 2939x1436 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew. All 13 colours present in both frames (10 initial + orange/spring_green/azure added in the second pass). These ARE the fit (not a held-out check) for objective=landmarks.",
+  "landmarks": [
+    {"name": "cyan",         "source": [1339.0, 46.0],   "canvas": [4292.0, 188.0]},
+    {"name": "spring_green", "source": [739.0, 194.0],   "canvas": [4001.0, 270.0]},
+    {"name": "orange",       "source": [1810.0, 240.0],  "canvas": [4513.0, 301.0]},
+    {"name": "pink",         "source": [2154.0, 287.0],  "canvas": [4635.0, 284.0]},
+    {"name": "periwinkle",   "source": [1961.0, 524.0],  "canvas": [4478.0, 430.0]},
+    {"name": "green",        "source": [1609.0, 566.0],  "canvas": [4339.0, 454.0]},
+    {"name": "azure",        "source": [1317.0, 630.0],  "canvas": [4213.0, 481.0]},
+    {"name": "violet",       "source": [1094.0, 649.0],  "canvas": [4131.0, 503.0]},
+    {"name": "red",          "source": [2401.0, 704.0],  "canvas": [4682.0, 518.0]},
+    {"name": "blue",         "source": [96.0, 710.0],    "canvas": [3831.0, 527.0]},
+    {"name": "rose",         "source": [548.0, 792.0],   "canvas": [3965.0, 565.0]},
+    {"name": "magenta",      "source": [1391.0, 919.0],  "canvas": [4247.0, 632.0]},
+    {"name": "yellow",       "source": [1720.0, 1315.0], "canvas": [4467.0, 774.0]}
+  ],
+
+  "record": {
+    "role": "old_world_boundary_network_kislev_norsca",
+    "precedence": 35,
+    "layer_precedence": {"boundaries": 5, "coastline": 5, "relief": 5},
+    "notes": "PROVISIONAL. Kislev+Norsca crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_kislev_norsca (objective=landmarks; 10 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to Kislev+Norsca — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are PROVISIONAL placement values, to be revisited when boundary extraction lands (S6). MACHINE-FITTED; re-derive from the seed, do not hand-edit."
+  }
+}
