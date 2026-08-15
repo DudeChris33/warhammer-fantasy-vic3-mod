@@ -1,0 +1,33 @@
+{
+  "source": "tww3_old_world_mod_parchment_bretonnia.png",
+  "master_shape": [1789, 1598],
+  "objective": "landmarks",
+  "footprint_pad": 32,
+
+  "_comment": "PER-REGION BRETONNIA tile of the TWW3 Old World mod parchment, placed by the paired-anchor-dot workflow (the same one validated on the Empire, user idea 2026-08-14). PROVISIONAL — awaiting the user's visual verdict. As with the Empire, the whole-map fit of this source is impossible (it draws different regions at inconsistent scale, see the landmark-accuracy wall), so the user cropped the region out (alpha-erasing the surrounding ocean and two enclosed-water holes) and drew 11 matched colour dots on the crop AND on terraqueous_globe_reprojected.png, which IS the canvas/mask frame (8192x3616). SCOPE NOTE: this crop actually spans the whole south-west block (Bretonnia + Estalia + Tilea, Lyonesse->Los Cabos->Sartosa->Black Gulf), not Bretonnia alone; the dots are spread across all three to the coastal extremes. Named 'bretonnia' per the user's request; rename if a tighter crop was meant. The dot centroids, recovered by exact RGB, give 11 source<->canvas correspondences; a thin-plate through them places the tile exactly at every dot. objective=landmarks means NO silhouette fit (the drift-prone stage), just the interpolation. master_shape is the crop's native (h,w) = (1789,1598); the source is the dot-free, alpha-masked crop (produced on accept, step 6). This record only PLACES the tile (like the Empire tile / old_world_black_white_colored); no geometry is extracted yet. ITER 2: two dots added at the user's direction to correct the first render — violet on the Estalia west-coast extreme (a span that had no anchor between periwinkle and cyan, so the coast bowed inside the mask line) and rose on the southern/Tilean island coast.",
+
+  "_comment_lattice": "6x6 over the crop (~265 master px spacing), mirroring the Empire seed. The 9 dots reach the coastal extremes of the block; the lattice regularises the thin-plate and captures its affine trend out to the crop corners, where it extrapolates beyond the dot hull.",
+  "lattice": {"nx": 6, "ny": 6, "inset": 0.03},
+
+  "_comment_landmarks": "source px = dot centroid in the crop's own 1598x1789 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew (RGB codes supplied by the user). Recovered by exact-RGB compact-component centroid (recover_dots4.py, tol 20); pale_cyan needs the tight tolerance on the globe because the pale sea/ice band overlaps (200,255,255) at loose tolerance. The two ITER-2 dots: violet (128,0,255), rose (255,0,128) — chosen zero-match in both images and >=100 per-channel clear of the existing 9. An affine through all 11 has mean residual 9.4 px / max 21.5 px on the canvas (pink & rose, the south coast, where the added dots deliberately pull the warp off the affine trend); no outlier -> the pairing is internally consistent. These ARE the fit (not a held-out check) for objective=landmarks.",
+  "landmarks": [
+    {"name": "red",        "source": [1098.5, 141.5],  "canvas": [3951.5, 713.5]},
+    {"name": "magenta",    "source": [752.5, 205.5],   "canvas": [3795.5, 737.5]},
+    {"name": "yellow",     "source": [802.5, 575.5],   "canvas": [3817.5, 893.5]},
+    {"name": "pale_cyan",  "source": [1253.5, 645.5],  "canvas": [4012.5, 925.5]},
+    {"name": "periwinkle", "source": [279.5, 769.5],   "canvas": [3586.5, 975.5]},
+    {"name": "violet",     "source": [186.5, 1043.5],  "canvas": [3529.5, 1076.5]},
+    {"name": "blue",       "source": [806.5, 861.5],   "canvas": [3818.5, 1019.5]},
+    {"name": "cyan",       "source": [101.5, 1240.5],  "canvas": [3509.5, 1167.5]},
+    {"name": "rose",       "source": [668.5, 1514.5],  "canvas": [3775.5, 1282.5]},
+    {"name": "green",      "source": [1240.5, 1587.5], "canvas": [4015.5, 1297.5]},
+    {"name": "pink",       "source": [854.5, 1710.5],  "canvas": [3827.5, 1331.5]}
+  ],
+
+  "record": {
+    "role": "old_world_boundary_network_bretonnia",
+    "precedence": 35,
+    "layer_precedence": {"boundaries": 5, "coastline": 5, "relief": 5},
+    "notes": "Bretonnia (south-west block: Bretonnia + Estalia + Tilea) crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_bretonnia (objective=landmarks; 9 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to this block — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in, the same as the Empire tile. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, to be revisited when boundary extraction lands (S6). PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit."
+  }
+}
