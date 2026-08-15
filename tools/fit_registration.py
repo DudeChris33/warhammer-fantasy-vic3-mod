@@ -99,6 +99,37 @@ def silhouette(spec: dict) -> tuple[np.ndarray, tuple[float, float]]:
     """
     rgb = sources.load_source_image(spec["from"])
     scale = tuple(float(v) for v in spec.get("to_master_scale", (1.0, 1.0)))
+    if spec.get("kind") == "flat_sea":
+        # Land = everything that is not the map's own flat ocean colour, cleaned.
+        # Unlike ``flat_colour`` (which labels the complement of ocean+drawn-lines
+        # into region cells), this keeps the land solid — right for a map whose land
+        # is dense monochrome line-art, where cell-labelling would fragment it and
+        # drop it under ``min_area``. ``exclude`` boxes are forced to sea, for a
+        # logo or cartouche floating over open ocean.
+        sea = parchment.flat_sea_mask(
+            rgb, tolerance=int(spec.get("sea_tolerance", 60)),
+            sea_rgb=tuple(int(v) for v in spec.get("sea_rgb", parchment.FLAT_SEA_RGB)))
+        land = ~sea
+        keep = int(spec.get("min_component", 5000))
+        land = segment.drop_small_components(land, keep, wrap_x=False)
+        land = ~segment.drop_small_components(~land, keep, wrap_x=False)
+        for x0, y0, x1, y1 in (tuple(b) for b in spec.get("exclude", [])):
+            land[int(y0):int(y1), int(x0):int(x1)] = False
+        return land, scale
+    if spec.get("kind") == "blue_sea":
+        # Ocean is blue-DOMINANT but brightness-varying (a relief/satellite world
+        # map), so hue not distance separates it; a dark frame/letterbox is dropped
+        # as land=False. Like flat_sea, keeps the land solid.
+        sea = parchment.blue_sea_mask(rgb, r_margin=int(spec.get("r_margin", 18)),
+                                      g_margin=int(spec.get("g_margin", 6)))
+        dark = rgb.max(axis=2) < int(spec.get("frame_dark", 40))
+        land = ~sea & ~dark
+        keep = int(spec.get("min_component", 4000))
+        land = segment.drop_small_components(land, keep, wrap_x=False)
+        land = ~segment.drop_small_components(~land, keep, wrap_x=False)
+        for x0, y0, x1, y1 in (tuple(b) for b in spec.get("exclude", [])):
+            land[int(y0):int(y1), int(x0):int(x1)] = False
+        return land, scale
     if spec.get("kind") == "flat_colour":
         _, land = parchment.flat_map_cells(
             rgb,
@@ -116,15 +147,33 @@ def silhouette(spec: dict) -> tuple[np.ndarray, tuple[float, float]]:
 def anchor_landmarks(seed: dict) -> tuple[np.ndarray, np.ndarray]:
     """``(source_px, canvas_px)`` for the seed's hand-identified landmarks.
 
-    The canvas side is *computed*, never typed: each landmark records where the
-    feature sits on the Terraqueous globe, and that pixel is pushed through the
-    committed NE-II fit to get its canvas position.
+    A landmark's canvas position is established one of two ways — never typed as a
+    raw canvas pixel picked by eye against the mask:
+
+    * ``"anchor"`` — a pixel on the Terraqueous globe (``terraqueous_globe.jpg``),
+      pushed through the committed NE-II fit. Keeps the landmark inside the globe's
+      0.363 px envelope (user decision #1: one geometric authority).
+    * ``"canvas"`` — a pixel read straight off ``terraqueous_globe_reprojected.png``,
+      which *is* the canvas/mask frame (8192x3616; the mask was traced from it), so
+      the feature's canvas position is its pixel with no fit in between. This is the
+      paired-anchor-dot workflow: the user marks matched colour dots on a region
+      crop and on the reprojected globe, and the recovered dot centroids come in
+      here already in canvas space.
+
+    The globe fit is built lazily, only if some landmark needs it, so a seed whose
+    landmarks are all ``canvas``-anchored does not require the globe registration
+    to be present.
     """
-    regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
-    fit = reproject.fit_parametric(regs[ANCHOR_SOURCE])
+    fit = None
     src, canvas = [], []
     for lm in seed["landmarks"]:
         src.append(lm["source"])
+        if "canvas" in lm:
+            canvas.append([float(lm["canvas"][0]), float(lm["canvas"][1])])
+            continue
+        if fit is None:
+            regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
+            fit = reproject.fit_parametric(regs[ANCHOR_SOURCE])
         cx, cy = fit.to_canvas(lm["anchor"][0], lm["anchor"][1], CANVAS_W, CANVAS_H)
         canvas.append([float(cx), float(cy)])
     return np.array(src, dtype=np.float64), np.array(canvas, dtype=np.float64)
@@ -185,7 +234,14 @@ def fit_source(stem: str, log=print) -> dict:
     master_shape = tuple(seed["master_shape"])  # (h, w) of the frame control points live in
 
     lm_src, lm_canvas = anchor_landmarks(seed)
-    log(f"landmarks     {len(lm_src)} (canvas positions derived through {ANCHOR_SOURCE})")
+    n_direct = sum(1 for lm in seed["landmarks"] if "canvas" in lm)
+    if n_direct == 0:
+        how = f"canvas positions derived through {ANCHOR_SOURCE}"
+    elif n_direct == len(seed["landmarks"]):
+        how = "canvas positions read direct off the reprojected globe"
+    else:
+        how = f"{n_direct} direct + {len(seed['landmarks']) - n_direct} through {ANCHOR_SOURCE}"
+    log(f"landmarks     {len(lm_src)} ({how})")
 
     info: dict = {"landmarks": int(len(lm_src))}
 
@@ -197,6 +253,45 @@ def fit_source(stem: str, log=print) -> dict:
         rbf = RBFInterpolator(lm_src, lm_canvas, kernel="thin_plate_spline", degree=1)
         canvas_pts = register.clamp_canvas(rbf(src_pts), CANVAS_W, CANVAS_H)
         info["method"] = "thin-plate interpolation of landmarks (no silhouette objective)"
+        return _emit(seed, src_pts, canvas_pts, info, log)
+
+    if objective == "landmark_refine":
+        # Landmark thin-plate placement used as the SEED for a LOCAL silhouette
+        # refine. For a partial-coverage, mostly-land regional tile the global
+        # silhouette IoU is a bad objective (it inflates the land block off the
+        # coastline — measured on old_world_black_white_colored: coarse pinned to
+        # the scale ceiling, landmark residual ballooning 253->828 px). So the
+        # landmarks fix the frame and the refine is given only small per-point
+        # radii: it snaps the coasts where there is sea contrast without being able
+        # to rescale the whole map.
+        sil, to_master = silhouette(seed["silhouette"])
+        log(f"silhouette    {seed['silhouette']['from']} {sil.shape} land {sil.mean():.3f}")
+        src_pts = register.lattice(master_shape, seed["lattice"]["nx"], seed["lattice"]["ny"],
+                                   float(seed["lattice"].get("inset", 0.02)))
+        rbf = RBFInterpolator(lm_src, lm_canvas, kernel="thin_plate_spline", degree=1)
+        seed_canvas = register.clamp_canvas(rbf(src_pts), CANVAS_W, CANVAS_H)
+        canvas_pts, iou = seed_canvas, 0.0
+        t0 = time.time()
+        for i, stage in enumerate(seed["refine"]["stages"]):
+            log(f"  stage {i + 1}: step {stage['step']} radii {stage['radii']}")
+            canvas_pts, iou = register.refine(
+                src_pts, canvas_pts, sil, land, src_scale=to_master,
+                step=int(stage["step"]), radii=tuple(float(v) for v in stage["radii"]),
+                passes=int(stage.get("passes", 1)), log=log,
+                bounds=(float(CANVAS_W), float(CANVAS_H)))
+        log(f"refined IoU   {iou:.4f}  ({time.time() - t0:.0f}s)")
+        info["method"] = "landmark thin-plate placement + local silhouette refine (small radii)"
+        info["refined_iou"] = round(float(iou), 4)
+        final = register.warp_mask(src_pts, canvas_pts, sil, land.shape, to_master, step=8)
+        info["folded_fraction"] = round(final.folded, 5)
+        info["anisotropy_p99"] = round(final.anisotropy, 2)
+        log(f"warp quality  {100 * final.folded:.3f}% folded, anisotropy p99 {final.anisotropy:.2f}")
+        info["lattice"] = f"{seed['lattice']['nx']}x{seed['lattice']['ny']}"
+        info["move"] = register.residual_report(src_pts, canvas_pts, np.asarray(seed_canvas))
+        rbf2 = RBFInterpolator(src_pts, canvas_pts, kernel="thin_plate_spline", degree=1)
+        d = np.hypot(*(rbf2(lm_src) - lm_canvas).T)
+        info["landmark_check_px"] = {"mean": round(float(d.mean()), 1), "max": round(float(d.max()), 1)}
+        log(f"landmark drift mean {d.mean():.0f} px, max {d.max():.0f} px (from seed after refine)")
         return _emit(seed, src_pts, canvas_pts, info, log)
 
     sil, to_master = silhouette(seed["silhouette"])
