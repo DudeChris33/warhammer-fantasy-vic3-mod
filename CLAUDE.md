@@ -106,6 +106,42 @@ on a `## Plan` before `/build` commits to it, and on the rendered artifact once
 `/build` has produced one. It appends a `## Review Panel` section and never edits
 mod content. Its ruling is advisory: on anything visual the user is the final gate.
 
+## Autonomy model
+
+The generation/iteration loop is where to run long and unattended; sourcing and the
+visual verdict are where to stop and hand back. Don't invert this — the failures on
+this project have come from stopping too early inside the loop (at an offline-green
+checkpoint) and from trying to own the two ends that are the user's.
+
+**Run autonomously, without pausing for approval, inside the tooling loop:** edit a
+generator / LUT / `tools/registration/seeds/` / `tools/config/inland_lakes.json`, then
+re-derive (`fit_registration.py`, `generate_heightmap.py`, `generate_rivers.py`,
+`generate_state_labels.py`) → run the full offline gate in
+[testing.md](.claude/rules/testing.md) (`sources.py --verify`, `validate_map.py [--labels]`,
+`run_fixture.py --check`) → **render the map and send the PNG** → read it, diagnose,
+and go again. Iterate this loop to convergence on your own; a green offline gate is a
+precondition to continue, never a stopping point. Chain several regen→render passes in
+one turn rather than surfacing after each.
+
+**Always stop and hand back to the user for:**
+
+- **Sourcing.** Choosing, adding, swapping, or marking up imagery in `sources/` is the
+  user's — it's third-party IP tracked only by SHA manifest, and better source beats
+  more tuning. If a result is capped by the source, say so and ask for imagery; do not
+  browse for or substitute your own. `--update-manifest` follows a user source change,
+  never precedes one.
+- **The visual verdict.** On any rendered map the user is the final gate. Render, send,
+  and state what you see and what you'd change — then wait for accept/reject. Never
+  bank a map as done, and never commit map bitmaps, on offline checks alone; the
+  rendered artifact is the real gate (this is the lesson that keeps recurring).
+- **Irreversible or scope-widening steps** already fenced elsewhere: `git commit` only
+  when the loop has converged and the user has accepted the visual; `git push`, new
+  top-level folders, and anything the Non-negotiables list forbids.
+
+When a request is loop-shaped ("get the coastline right", "fix the enclosed water"),
+treat it as: iterate the tooling loop to convergence, render, and return with the PNG
+plus a recommendation — not as a single edit-then-ask cycle.
+
 ## Planning directory
 
 - `planning/issues/` — open bugs
