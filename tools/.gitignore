@@ -30,3 +30,11 @@ derived/*
 !derived/named/
 !derived/named/*.png
 
+# Kept as a worked example of the paired-anchor-dot registration workflow: the
+# Empire tile of tww3_old_world_mod_parchment, warped through its 9 dots, with
+# the current mask coastline overlaid via tools/qa_overlay.py. Our own
+# generated composite, not third-party source art, so — unlike the raw dot
+# images and crops under sources/dots/ (real reference imagery, rightly never
+# committed) — this one has always been meant to travel with the repo.
+!derived/empire_anchor_dot_warp_example.png
+
