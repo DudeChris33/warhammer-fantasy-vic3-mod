@@ -1,31 +1,29 @@
 {
   "source": "tww3_old_world_mod_parchment_empire.png",
-  "master_shape": [1167, 1149],
+  "master_shape": [1469, 1456],
   "objective": "landmarks",
   "footprint_pad": 32,
 
-  "_comment": "PER-REGION EMPIRE tile of the TWW3 Old World mod parchment, placed by the paired-anchor-dot workflow (user idea, 2026-08-14). The whole-map fit of this source is impossible — it draws different regions at inconsistent scale, so no single warp reconciles it (see the landmark-accuracy wall). Instead the user cropped the Empire out (alpha-erasing Norsca/Bretonnia/Estalia/Tilea) and drew 9 matched colour dots on the crop AND on terraqueous_globe_reprojected.png, which IS the canvas/mask frame (8192x3616). The dot centroids, recovered by exact RGB, give 9 source<->canvas correspondences; a thin-plate through them places the Empire exactly at every dot. objective=landmarks means NO silhouette fit (the drift-prone stage), just the interpolation. master_shape is the crop's native (h,w) = (1167,1149); the source is the dot-free, alpha-masked crop. This record only PLACES the tile (like old_world_black_white_colored); no geometry is extracted yet.",
+  "_comment": "PER-REGION EMPIRE tile of the TWW3 Old World mod parchment, placed by the paired-anchor-dot workflow (user idea, 2026-08-14). The whole-map fit of this source is impossible - it draws different regions at inconsistent scale, so no single warp reconciles it (see the landmark-accuracy wall). The user crops the Empire out (alpha-erasing the rest) and draws matched colour dots on the crop AND on terraqueous_globe_reprojected.png, which IS the canvas/mask frame (8192x3616). The dot centroids, recovered by exact RGB, give source<->canvas correspondences. THIS revision (2026-08-17, dots_1) uses 7 paired dots spread to the region's edges - the original 3 (purple/orange/lime) plus four pushed toward the west and south perimeter (crimson far-west, mint far-south, olive north-centre, green south-west). With 7 (>=4) landmarks the thin-plate has a nonzero kernel term, so fit_registration.py bounds the lattice to the dots' hull+pad rather than the full frame - the deliberate fix the earlier 3-dot note foresaw for the 9-dot comb-smear: MORE, edge-spread dots, not fewer clustered ones. The 7-pair global-affine residual is a tight mean 6.7 / max 10.5 px (the Empire barely curves under the source's projection: x/y affine scales ~0.446/~0.420, near-isotropic), so the thin-plate absorbs only small non-affine wrinkles at each dot. master_shape is the crop's native (h,w) = (1469,1456); the source is the dot-free, alpha-masked crop. This record only PLACES the tile; no geometry is extracted yet.",
 
-  "_comment_lattice": "6x6 over the crop (~190 master px spacing). The 9 dots cluster in the Empire interior + north/west coast; the lattice regularises the thin-plate and captures its affine trend out to the crop corners, where it extrapolates beyond the dot hull. The dot-free south-central band (below the green/blue dots) is the one extrapolated strip.",
+  "_comment_lattice": "6x6 over the dots' hull (fit_registration.py bounds the lattice to hull+pad for a 4+-dot thin-plate, because the r^2 log r kernel blows up outside the support hull and every downstream consumer re-fits its own RBF through the emitted control points - one wild extrapolated point smears into comb-streaks, as the 9-dot Empire tile showed on all four edges, 2026-08-16). The 7 dots span the Empire's perimeter (crimson at the far-west edge, mint at the far-south, purple at the north, lime at the east, green/olive across the interior-north), so the hull covers most of the crop and the periphery the lattice must extrapolate over is small.",
   "lattice": {"nx": 6, "ny": 6, "inset": 0.03},
 
-  "_comment_landmarks": "source px = dot centroid in the crop's own 1149x1167 frame; canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew. These ARE the fit (not a held-out check) for objective=landmarks.",
+  "_comment_landmarks": "source px = dot centroid in the crop's own 1456x1469 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew (pure marker palette: every channel in {0,63,127,191,255}). All 7 marker colours were present in both frames as a single 12-px component each (4x4 bbox), no strays. These 7 ARE the fit for objective=landmarks. purple/orange/lime carry over unchanged from the prior 3-dot revision; crimson/mint/olive/green are the new edge-spread additions in dots_1.",
   "landmarks": [
-    {"name": "yellow",       "source": [88.5, 239.5],   "canvas": [3972.5, 712.5]},
-    {"name": "magenta",      "source": [270.5, 64.5],   "canvas": [4061.5, 629.5]},
-    {"name": "cyan",         "source": [483.5, 68.5],   "canvas": [4148.5, 635.5]},
-    {"name": "pale_yellow",  "source": [471.5, 770.5],  "canvas": [4140.5, 949.5]},
-    {"name": "pale_magenta", "source": [703.5, 56.5],   "canvas": [4246.5, 629.5]},
-    {"name": "pale_cyan",    "source": [622.5, 441.5],  "canvas": [4203.5, 807.5]},
-    {"name": "red",          "source": [923.5, 384.5],  "canvas": [4335.5, 778.5]},
-    {"name": "green",        "source": [1034.5, 884.5], "canvas": [4389.5, 996.5]},
-    {"name": "blue",         "source": [155.5, 520.5],  "canvas": [3997.5, 838.5]}
+    {"name": "purple",  "source": [716.5, 128.5],  "canvas": [4246.5, 631.5]},
+    {"name": "crimson", "source": [66.5, 294.5],   "canvas": [3953.5, 711.5]},
+    {"name": "olive",   "source": [517.5, 542.5],  "canvas": [4158.5, 817.5]},
+    {"name": "orange",  "source": [868.5, 474.5],  "canvas": [4302.5, 793.5]},
+    {"name": "green",   "source": [537.5, 829.5],  "canvas": [4160.5, 941.5]},
+    {"name": "lime",    "source": [979.5, 942.5],  "canvas": [4364.5, 987.5]},
+    {"name": "mint",    "source": [774.5, 1424.5], "canvas": [4262.5, 1178.5]}
   ],
 
   "record": {
     "role": "old_world_boundary_network_empire",
     "precedence": 35,
     "layer_precedence": {"boundaries": 5, "coastline": 5, "relief": 5},
-    "notes": "Empire crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_empire (objective=landmarks; 9 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to the Empire — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, to be revisited when boundary extraction lands (S6). MACHINE-FITTED; re-derive from the seed, do not hand-edit."
+    "notes": "PROVISIONAL. Empire crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_empire (objective=landmarks; 7 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png, dots_1 revision => thin-plate placement, lattice bounded to hull+pad; 6x6 lattice). A DENSE Old World boundary network confined to the Empire - the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, to be revisited when boundary extraction lands (S6). PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit."
   }
 }
