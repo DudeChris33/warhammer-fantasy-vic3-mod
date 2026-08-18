@@ -38,3 +38,13 @@ derived/*
 # committed) — this one has always been meant to travel with the repo.
 !derived/empire_anchor_dot_warp_example.png
 
+# The CURRENT worked example of the workflow (supersedes the Empire one, which
+# was done first and is not the best): the Badlands + Nehekhara tile, its clean
+# dot-free source thin-plate-warped onto the canvas through its 16 landmark dots
+# (of 17 marked; interior 'yellow' held out), with the mask coastline in cyan
+# and the 16 dots as red rings on a neutral gray backdrop (the Dark Lands render
+# style), cropped to the fitted footprint. Referenced by
+# planning/requests/register-old-world-region-anchor-dot-handoff.md. Our own
+# generated composite, not third-party source art, so it travels with the repo.
+!derived/badlands_nehekhara_anchor_dot_warp_example.png
+
