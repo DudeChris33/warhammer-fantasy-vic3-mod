@@ -1,0 +1,38 @@
+{
+  "source": "tww3_old_world_mod_parchment_badlands_nehekhara.png",
+  "master_shape": [2567, 3462],
+  "objective": "landmarks",
+  "footprint_pad": 32,
+
+  "_comment": "PER-REGION BADLANDS + NEHEKHARA tile of the TWW3 Old World mod parchment, placed by the paired-anchor-dot workflow (the same one validated on the Empire, then Bretonnia, Kislev+Norsca and the Dark Lands, 2026-08-14/17). The whole-map fit of this source is impossible — it draws different regions at inconsistent scale, so no single warp reconciles it (see the landmark-accuracy wall). Instead the user cropped the southern Old World arc out (alpha-erasing everything outside it) and drew 17 matched colour dots on the crop AND on terraqueous_globe_reprojected.png, which IS the canvas/mask frame (8192x3616). The dot centroids, recovered by exact RGB, give 16 source<->canvas correspondences used as landmarks (the interior south-central 'yellow' dot of the 17 was held out on the user's A/B request, 2026-08-17); a thin-plate through them places the tile exactly at every landmark. objective=landmarks means NO silhouette fit (the drift-prone stage), just the interpolation. master_shape is the crop's native (h,w) = (2567,3462); the source is the dot-free, alpha-masked crop. This record only PLACES the tile (like the Empire/Bretonnia/Kislev/Dark Lands tiles); no geometry is extracted yet.",
+
+  "_comment_lattice": "6x6 over the crop (~577 master px horizontal spacing, ~428 vertical). The 16 landmark dots span the region's coastal/edge extremes — teal at the far-west peninsula tip, purple/navy along the north edge, cyan/lavender far-east, rose on the west coast, mint/chartreuse/olive across the interior — so the thin-plate is anchored to the perimeter, not just the middle; the lattice regularises it and captures the affine trend out to the crop corners, where it extrapolates beyond the dot hull. Global-affine residual of the 16 pairs is mean 34 / max 89 px (the interior/southern points, where the source's inconsistent-scale projection curves most); the x/y affine scales differ (~0.427 vs ~0.358), which is exactly that inconsistent inter-region scale — non-affine curvature the thin-plate absorbs exactly at each dot. Holding out the interior south-central yellow dot removed the largest local interior pull and lowered the residual from 39/112 (17 pairs) to 34/89.",
+  "lattice": {"nx": 6, "ny": 6, "inset": 0.03},
+
+  "_comment_landmarks": "source px = dot centroid in the crop's own 3462x2567 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew (pure marker palette: every channel in {0,63,127,191,255}). All 17 marker colours were present in both frames as a single 12-px component each (4x4 bbox), no strays; 16 are used here as landmarks. The interior south-central 'yellow' dot (crop [2126.5,1888.5] / canvas [4264.5,1613.5]) is HELD OUT per the user's A/B compare (2026-08-17) — it is still a marker in the crop image and gets inpainted out with the rest when the clean source is derived; it simply takes no part in the fit. These 16 ARE the fit (not a held-out check) for objective=landmarks.",
+  "landmarks": [
+    {"name": "purple",     "source": [2201.5, 262.5],  "canvas": [4393.5, 1016.5]},
+    {"name": "maroon",     "source": [1926.5, 683.5],  "canvas": [4260.5, 1177.5]},
+    {"name": "mint",       "source": [1530.5, 755.5],  "canvas": [4090.5, 1202.5]},
+    {"name": "chartreuse", "source": [1324.5, 1039.5], "canvas": [3995.5, 1307.5]},
+    {"name": "olive",      "source": [1093.5, 1139.5], "canvas": [3889.5, 1341.5]},
+    {"name": "orange",     "source": [1228.5, 1335.5], "canvas": [3982.5, 1413.5]},
+    {"name": "green",      "source": [1295.5, 2071.5], "canvas": [4001.5, 1675.5]},
+    {"name": "lime",       "source": [1625.5, 2137.5], "canvas": [4105.5, 1697.5]},
+    {"name": "red",        "source": [2243.5, 1498.5], "canvas": [4513.5, 1478.5]},
+    {"name": "magenta",    "source": [2680.5, 1669.5], "canvas": [4649.5, 1534.5]},
+    {"name": "lavender",   "source": [3031.5, 2267.5], "canvas": [4775.5, 1741.5]},
+    {"name": "cyan",       "source": [2987.5, 2493.5], "canvas": [4758.5, 1808.5]},
+    {"name": "blue",       "source": [2806.5, 1815.5], "canvas": [4699.5, 1580.5]},
+    {"name": "rose",       "source": [768.5, 1696.5],  "canvas": [3833.5, 1538.5]},
+    {"name": "teal",       "source": [298.5, 1451.5],  "canvas": [3686.5, 1449.5]},
+    {"name": "navy",       "source": [1581.5, 980.5],  "canvas": [4115.5, 1286.5]}
+  ],
+
+  "record": {
+    "role": "old_world_boundary_network_badlands_nehekhara",
+    "precedence": 35,
+    "layer_precedence": {"boundaries": 5, "coastline": 5, "relief": 5},
+    "notes": "PROVISIONAL. Badlands + Nehekhara crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_badlands_nehekhara (objective=landmarks; 16 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png, of 17 marked — interior south-central 'yellow' held out per the user's A/B compare; 6x6 lattice). A DENSE Old World boundary network confined to the southern Old World arc (Badlands, Border Princes, the Dead Sea coast toward Nehekhara) — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, to be revisited when boundary extraction lands (S6). PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit."
+  }
+}
