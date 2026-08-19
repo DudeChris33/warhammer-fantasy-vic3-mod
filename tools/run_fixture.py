@@ -632,16 +632,24 @@ def build_boundary(out_dir: Path) -> None:
 
     layers = []
     warped_by_source = {}
+    inside_by_source = {}
     bridge_stats = []
+    crop_probe: dict = {}
     for name in sorted(regs):
         reg = regs[name]
-        rgb = sources.load_source_image(name, sources_dir=BOUNDARY_DIR,
-                                        manifest_path=BOUNDARY_MANIFEST)
+        # Load through the RGBA guard exactly as the generator does: opaque sources
+        # come back with alpha None (byte-identical to load_source_image), and the
+        # alpha-masked crop comes back with its footprint mask.
+        rgb, alpha = sources.load_source_image_rgba(name, sources_dir=BOUNDARY_DIR,
+                                                    manifest_path=BOUNDARY_MANIFEST)
+        valid = alpha > 0 if alpha is not None else None
         # Scale the ink window with the source, so the half-scale sibling sees the
         # same neighbourhood in map terms rather than twice as much of the map.
         win = max(5, int(round(21 * rgb.shape[1] / 320)) | 1)
         min_area = max(10, 40 * rgb.shape[1] // 320)
         ink = parchment.ink_mask(rgb, window=win, offset=10)
+        if valid is not None:
+            ink = ink | ~valid   # transparent = barrier, no cell there (generator parity)
         # Mirror generate_state_labels.py's ink_bridged path so a regression in
         # glyph_mask/label_blobs trips this golden too: detect glyph-shaped ink,
         # close/dilate it into the barrier, and re-trace.
@@ -652,9 +660,45 @@ def build_boundary(out_dir: Path) -> None:
         src_cells, after = parchment.cells_from_ink(barrier, min_area)
         bridge_stats.append((name, before, after))
         lab, inside = cells.warp_cells(reg, regs, src_cells.astype(np.int32), (h, w),
-                                       block_rows=32, canvas_shape=canvas_shape)
+                                       block_rows=32, canvas_shape=canvas_shape,
+                                       src_valid=valid)
+        if valid is not None:
+            # The buggy path for the same crop: coverage with the alpha ignored.
+            # Used only to assert the src_valid path actually shrinks coverage to
+            # the opaque footprint and keeps the lower layer showing through.
+            _, inside_novalid = cells.warp_cells(reg, regs, src_cells.astype(np.int32),
+                                                 (h, w), block_rows=32,
+                                                 canvas_shape=canvas_shape)
+            crop_probe = {"name": name, "cov": inside, "cov_novalid": inside_novalid}
         warped_by_source[name] = lab
+        inside_by_source[name] = inside
         layers.append((name, reg.precedence_for("boundaries"), lab, inside))
+
+    # The src_valid / alpha-footprint path: the crop must contribute only where its
+    # alpha is opaque, and a lower-precedence layer's cell must survive showing
+    # through its transparent hole rather than being blanked and Voronoi-refilled
+    # (the exact failure a .convert("RGB") that dropped the alpha would cause).
+    if not crop_probe:
+        raise RuntimeError("boundary fixture has no alpha-masked crop — the src_valid path is untested")
+    cov, cov_novalid = crop_probe["cov"], crop_probe["cov_novalid"]
+    if not (cov <= cov_novalid).all() or cov.sum() >= cov_novalid.sum():
+        raise RuntimeError(
+            "alpha-masked crop coverage was not clipped to its opaque footprint: "
+            f"valid {int(cov.sum())} px vs alpha-ignored {int(cov_novalid.sum())} px"
+        )
+    hole = cov_novalid & ~cov & land
+    stack_valid = cells.stack_layers(layers, (h, w))
+    stack_novalid = cells.stack_layers(
+        [(n, p, lab, cov_novalid if n == crop_probe["name"] else ins)
+         for (n, p, lab, ins) in layers], (h, w))
+    survived = int((stack_valid[hole] > 0).sum())
+    blanked = int((stack_novalid[hole] > 0).sum())
+    if not (survived > 0 and blanked == 0):
+        raise RuntimeError(
+            "the lower layer did not survive the crop's transparent hole: "
+            f"src_valid kept {survived} labelled px there, alpha-ignored kept {blanked} "
+            "(expected >0 and 0 respectively)"
+        )
 
     # The measurement the acceptance criterion demands: bridging the fixture's
     # deliberate letter-interrupted border must recover more cells than the raw
@@ -1011,6 +1055,40 @@ def _diff(a: dict[str, bytes], b: dict[str, bytes]) -> list[str]:
 # CLI
 # ---------------------------------------------------------------------------
 
+def _selfcheck_marker() -> None:
+    """The border-markup extraction, in isolation (no golden needed).
+
+    Pins ``parchment.marker_barrier``: the user's hand-drawn marker lines plus the
+    map's rivers become the barrier, while roads and terrain — dark but *thin* —
+    are ignored. A synthetic tile carries all three: two magenta borders, a thick
+    dark river band, and a thin dark road. With rivers on, the magenta borders and
+    the river carve a 3x2 grid (6 cells); with rivers off, only the magenta borders
+    act, giving 3 columns — which also proves the thin road never becomes a border
+    (or the rivers-off count would be 6, not 3).
+    """
+    from worldgen import parchment as P
+
+    h, w = 100, 150
+    rgb = np.full((h, w, 3), (185, 150, 110), dtype=np.uint8)  # parchment
+    rgb[24:26, :] = (60, 45, 30)      # thin ROAD (dark) — must be ignored
+    rgb[60:70, :] = (25, 18, 12)      # thick RIVER band — a real border
+    rgb[:, 48:51] = (255, 0, 255)     # magenta border 1
+    rgb[:, 98:101] = (255, 0, 255)    # magenta border 2
+    valid = np.ones((h, w), dtype=bool)
+    valid[:, 145:] = False            # a transparent footprint strip
+
+    barrier, mf, rf = P.marker_barrier(rgb, (255, 0, 255), tol=70, dilate=0,
+                                       rivers={"darkness": 60, "open": 2, "dilate": 1},
+                                       valid=valid)
+    _, n = P.cells_from_ink(barrier, 50)
+    assert n == 6, f"marker + river should carve 6 cells, got {n}"
+    barrier0, _, _ = P.marker_barrier(rgb, (255, 0, 255), tol=70, dilate=0,
+                                      rivers=None, valid=valid)
+    _, n0 = P.cells_from_ink(barrier0, 50)
+    assert n0 == 3, f"marker alone should carve 3 columns (road ignored), got {n0}"
+    assert mf > 0 and rf > 0, "marker and river fractions must be positive"
+
+
 def run_check() -> int:
     _selfcheck_wrap()
     _selfcheck_frame()
@@ -1023,6 +1101,8 @@ def run_check() -> int:
     print("segment: enclosed-water keep (ocean + seeded lakes) self-check passed.")
     _selfcheck_rivers()
     print("rivers: rasterize + topology-validation self-check passed.")
+    _selfcheck_marker()
+    print("marker: border-markup extraction (rivers in, roads ignored) self-check passed.")
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
 

@@ -153,7 +153,8 @@ def warp_cells(reg: schema.SourceRegistration,
                regs_by_source: dict[str, schema.SourceRegistration],
                src_labels: np.ndarray, shape: tuple[int, int],
                block_rows: int = 256,
-               canvas_shape: tuple[int, int] | None = None
+               canvas_shape: tuple[int, int] | None = None,
+               src_valid: np.ndarray | None = None
                ) -> tuple[np.ndarray, np.ndarray]:
     """Warp a source's cell labels onto the canvas. Returns ``(labels, inside)``.
 
@@ -167,6 +168,15 @@ def warp_cells(reg: schema.SourceRegistration,
     exact function on a 256 px canvas while its committed record still states
     control points in real canvas pixels, so ``sources.verify`` can bounds-check
     them the same way it checks every other record.
+
+    ``src_valid`` is an optional ``src_labels``-shaped boolean mask of the source
+    pixels this record is allowed to contribute from — an alpha-masked region crop
+    passes its ``alpha>0`` here. It is warped nearest alongside the labels and
+    intersected into ``inside``, so the source's *coverage* (what ``stack_layers``
+    uses to suppress lower layers) shrinks to the valid footprint. Without it a
+    crop would blank IE/``tww3_colored`` inside its own transparent holes and then
+    Voronoi-fill them. Default ``None`` leaves ``inside`` and the warped labels
+    byte-identical for every opaque caller.
     """
     h, w = shape
     ch, cw = canvas_shape if canvas_shape is not None else shape
@@ -197,11 +207,17 @@ def warp_cells(reg: schema.SourceRegistration,
         # too, or the layer underneath shows through every boundary line.
         covers = ((sx >= x0) & (sx <= x1) & (sy >= y0) & (sy <= y1)
                   & (gx >= fx0) & (gx <= fx1) & (gy >= fy0) & (gy <= fy1))
-        inside[r0:r1] = covers
         if not covers.any():
+            inside[r0:r1] = covers
             continue
         ix = np.rint(sx).astype(np.int64).clip(0, iw - 1)
         iy = np.rint(sy).astype(np.int64).clip(0, ih - 1)
+        # Alpha footprint: a crop only covers where its source pixel is opaque, so
+        # its transparent holes leave the lower layers showing through instead of
+        # being suppressed and re-filled. Sampled nearest, matching the label warp.
+        if src_valid is not None:
+            covers = covers & src_valid[iy, ix]
+        inside[r0:r1] = covers
         blk = src_labels[iy, ix]
         take = covers & (blk != 0)
         out[r0:r1][take] = blk[take]
@@ -275,18 +291,52 @@ def _neighbour_pairs(labels: np.ndarray, wrap_x: bool = True) -> dict[int, dict[
     return pairs
 
 
+def _cell_floors(lab: np.ndarray, floor_map: np.ndarray, n: int, default: int) -> np.ndarray:
+    """Per-cell minimum area: the majority ``floor_map`` value over each cell.
+
+    A cell whose pixels mostly fall on a ``floor_map`` value > 0 (a denser region
+    with its own floor) takes that value; a cell mostly outside every such region
+    keeps ``default``. Majority (not mere presence) so a cell straddling a region
+    edge is governed by where most of it sits. Only a few distinct floor values
+    exist, so this is a handful of ``bincount``s, not a per-cell loop.
+    """
+    areas = np.bincount(lab.ravel(), minlength=n)
+    floors = np.full(n, default, dtype=np.int64)
+    best = np.zeros(n, dtype=np.int64)
+    for fv in np.unique(floor_map):
+        if fv <= 0:
+            continue
+        c = np.bincount(lab[floor_map == fv].ravel(), minlength=n)
+        take = (c > best) & (c * 2 > areas)
+        floors[take] = int(fv)
+        best[take] = c[take]
+    return floors
+
+
 def merge_small(labels: np.ndarray, min_area: int, wrap_x: bool = True,
-                rounds: int = 12) -> np.ndarray:
+                rounds: int = 12, floor_map: np.ndarray | None = None) -> np.ndarray:
     """Merge cells below ``min_area`` into the neighbour they share most border with.
 
     Ties break on the lower label id, so the result does not depend on dictionary
     ordering. Repeats until stable, because merging two small cells can still
     leave one under the threshold.
+
+    ``floor_map`` is an optional canvas-shaped int array of *per-region* floors: a
+    cell whose majority falls on a value > 0 uses that value instead of
+    ``min_area``. The reconciliation is tuned to vanilla-sized cells (~17k px),
+    which would merge a denser region away; a smaller floor there lets that density
+    survive while the rest of the map still reconciles to vanilla granularity. The
+    Old World uses this to give ink-traced macros one floor and the user's clean
+    hand-drawn marker macros a much lighter one. Default ``None`` is byte-identical.
     """
     lab = labels.copy()
     for _ in range(rounds):
         areas = np.bincount(lab.ravel())
-        small = [i for i in range(1, len(areas)) if 0 < areas[i] < min_area]
+        if floor_map is not None:
+            floors = _cell_floors(lab, floor_map, len(areas), min_area)
+            small = [i for i in range(1, len(areas)) if 0 < areas[i] < floors[i]]
+        else:
+            small = [i for i in range(1, len(areas)) if 0 < areas[i] < min_area]
         if not small:
             break
         pairs = _neighbour_pairs(lab, wrap_x)
@@ -348,8 +398,18 @@ def prune_slivers(labels: np.ndarray, wrap_x: bool = True,
 
 
 def merge_to_target(labels: np.ndarray, target: int, wrap_x: bool = True,
-                    tolerance: float = 0.03, rounds: int = 8, log=None) -> np.ndarray:
+                    tolerance: float = 0.03, rounds: int = 8, log=None,
+                    floor_map: np.ndarray | None = None) -> np.ndarray:
     """Merge upward until the cell count is near ``target``.
+
+    ``floor_map`` (a canvas-shaped int array) marks denser regions — the Old World
+    crop footprints — that reconcile to their own per-region floor instead of
+    following the global count snap. The count merge otherwise eats the finest
+    cells first, which are exactly the dense Old World ones; here a cell inside a
+    region coalesces toward that region's floor across every round (proper
+    coalescence), while cells outside every region follow the count ``cut``. The
+    count still includes region cells, so a large protected region plateaus the
+    snap above ``target`` rather than merging the region away — the intended trade.
 
     A fixed minimum area cannot hit a cell *count*: how many cells a threshold
     removes depends on the area distribution, which changes as soon as the first
@@ -371,7 +431,8 @@ def merge_to_target(labels: np.ndarray, target: int, wrap_x: bool = True,
             break
         order = np.sort(areas[live])
         cut = int(order[min(n - 1, n - target)])
-        lab = split_disconnected(merge_small(lab, cut, wrap_x, rounds=3), wrap_x)
+        lab = split_disconnected(
+            merge_small(lab, cut, wrap_x, rounds=3, floor_map=floor_map), wrap_x)
         if log:
             log(f"    round {r + 1}: {n} -> {int(lab.max())} cells (merged below {cut:,} px)")
     return lab

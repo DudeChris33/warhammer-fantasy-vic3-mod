@@ -67,12 +67,42 @@ WRAP_X = map_config.WRAP_X
 TARGET_LAND_STATES = 659
 TARGET_SEA_ZONES = 103
 
+#: The density *count* snap targets the TOP of the user's 600–700 band, not the
+#: vanilla 659, so density reconciliation never merges a legitimate cell away just
+#: to hit the point count — the 2026-08-15 decision to prefer satisfying the Old
+#: World ``min_states`` over snapping the total. ``TARGET_LAND_STATES`` still sets
+#: the *mean cell size* (``target_area``) that drives split-large / merge-small, so
+#: individual cells stay vanilla-sized; only the global count is allowed to drift
+#: up into the band as the denser Old World sources supply real cells.
+MERGE_TARGET_LAND_STATES = 700
+
 #: How far a cell may sit from the target before it is merged away or split up.
 #: Deliberately loose: real states vary hugely in size, and forcing them towards
 #: uniformity would erase the source's information, which is the whole point of
 #: tracing rather than tessellating.
 MIN_AREA_FRACTION = 0.35
 MAX_AREA_FRACTION = 2.2
+
+#: The merge floor inside the Old World crop footprints, as a fraction of the mean
+#: cell area — deliberately far below ``MIN_AREA_FRACTION``. The Old World mod
+#: parchment draws a province network an order of magnitude finer than a vanilla
+#: state (Empire source cells average a few hundred px), and the user's per-macro
+#: minimums (Empire ≥30 in a small footprint) require cells much smaller than
+#: vanilla. Reconciling the Old World to the global floor merges that density clean
+#: away (Empire fell to 11 of 30); this smaller floor lets it survive while the
+#: rest of the map still reconciles to vanilla granularity. Tuned against the
+#: `*_anchor_dot_warp_example.png` references + the user's per-macro minimums
+#: (Empire ≥30, Bretonnia+Estalia+Tilea ≥24, Kislev+Norsca ≥30, Darklands ≥30):
+#: state-, not province-, granularity. Bracketed: 0.35 (vanilla floor) gave Empire
+#: 11, 0.15 gave 113; this targets ~35–45 per crop.
+OLD_WORLD_MIN_AREA_FRACTION = 0.13
+
+#: The merge floor for a macro whose borders were **hand-drawn** by the user
+#: (``marker_lines``) rather than ink-traced. Those cells ARE the states the user
+#: wants — there is no province noise to reconcile away — so they get a floor just
+#: above rubble, preserving essentially every drawn cell (only coastal-clip
+#: fragments below it merge). Much lighter than the ink floor above.
+OLD_WORLD_MARKER_MIN_AREA_FRACTION = 0.05
 
 #: A connected piece smaller than this fraction of its own source cell's largest
 #: piece is coastal rubble from clipping to our mask, not a state. Expressed
@@ -103,12 +133,51 @@ BOUNDARY_LAYER = "boundaries"
 #: declares one, yet is measured to be misregistered and annotated as unusable for
 #: geometry. Naming the consumers here means adding a source is a deliberate edit,
 #: not a side effect of a precedence.
-#: name -> how its cells are extracted. ``flat_colour`` for a map whose ocean is
-#: a flat fill and whose region lines are drawn over flat terrain fills;
-#: ``ink`` for a textured parchment needing a local-contrast threshold.
+#: name -> how its cells are extracted. A bare string is the extraction kind;
+#: a dict is ``{"kind": ..., "ink": {...glyph/window overrides...}}`` for a source
+#: whose lines/lettering sit at a different pixel scale than the IE master, whose
+#: ink constants the bare-string sources inherit. ``flat_colour`` for a map whose
+#: ocean is a flat fill and whose region lines are drawn over flat terrain fills;
+#: ``ink``/``ink_bridged`` for a textured parchment needing a local-contrast
+#: threshold (``ink_bridged`` also bridges lettering into the barrier).
+#:
+#: The three remaining ``tww3_old_world_mod_parchment_*`` crops are the denser
+#: Old World boundary network, one per-region tile placed by the paired-anchor-dot
+#: workflow. Each carries an intentional binary alpha mask (transparent = regions
+#: cut away), honoured as its contributing footprint (see ``extract_source_cells``
+#: and ``warp_cells``'s ``src_valid``), and a boundary precedence (110–113) above
+#: IE (100) and ``tww3_colored`` (95) so its lines win *inside its own footprint*
+#: only. NOTE 2026-08-17: their backing source files (and the Empire crop,
+#: imperial_provinces.png, since removed below) are currently missing from
+#: sources/ — the registrations are kept (not deleted) pending either their
+#: restoration or a replacement registration for claude_old_world_state_regions.png
+#: (the new unified marker-line source), which needs its own paired-anchor-dot fit
+#: before it can stand in — a whole-map frame_alias isn't possible because the
+#: master (tww3_old_world_mod_parchment.png) was never itself registered, only
+#: these per-region crops were (a whole-map fit is defeated by inconsistent
+#: regional scale, the same reason the crop workflow exists at all).
 BOUNDARY_SOURCES = {
     "tww3_colored.png": "flat_colour",
     "tww3_ie_parchment.jpg": "ink_bridged",
+    # The three macros are still ink-traced pending their own border markup;
+    # they carry roads until then, but reach usable density.
+    "tww3_old_world_mod_parchment_bretonnia.png": {"kind": "ink_bridged"},
+    "tww3_old_world_mod_parchment_kislev_norsca.png": {"kind": "ink_bridged"},
+    "tww3_old_world_mod_parchment_dark_lands.png": {"kind": "ink_bridged"},
+}
+
+#: The Old World macro footprints, measured directly from each crop's warped
+#: ``alpha>0`` mask, and the user's per-macro state-count minimums (2026-08-15;
+#: from ``tools/regions/named_regions.json`` — the_empire 30, bretonnia 15,
+#: kislev 10, darklands 30). Because the annotated-twin macro grouping is blocked
+#: (see :func:`assign_macros`), the crop footprints ARE the Old World macros for
+#: counting: this measures density where the request is judged, without the twin.
+#: imperial_provinces.png (the_empire) removed 2026-08-17 — its source file is
+#: gone; no replacement wired in yet (see BOUNDARY_SOURCES note above).
+OLD_WORLD_CROP_MIN_STATES = {
+    "tww3_old_world_mod_parchment_bretonnia.png": ("bretonnia+estalia+tilea", 24),
+    "tww3_old_world_mod_parchment_kislev_norsca.png": ("kislev+norsca", 30),
+    "tww3_old_world_mod_parchment_dark_lands.png": ("darklands", 30),
 }
 
 #: Off-map background and legend panels, in each source's own pixels.
@@ -133,20 +202,103 @@ def log(msg: str) -> None:
     print(msg, flush=True)
 
 
-def extract_source_cells(reg: schema.SourceRegistration, kind: str
-                         ) -> tuple[np.ndarray, dict]:
+#: Default marker colour + tolerance for the ``marker_lines`` kind — pure magenta,
+#: absent from the warm-brown parchment so it isolates exactly. A source overrides
+#: per-record via ``marker_rgb`` / ``marker_tol`` in its ``BOUNDARY_SOURCES`` spec.
+MARKER_RGB = (255, 0, 255)
+MARKER_TOL = 80
+
+
+def _normalize_source_spec(spec) -> tuple[str, dict]:
+    """``BOUNDARY_SOURCES`` value -> ``(kind, params)``.
+
+    A bare string is a kind with no overrides; a dict carries a ``kind`` plus the
+    rest of its keys as params (``ink`` overrides for the parchment kinds,
+    ``marker_rgb`` / ``marker_tol`` / ``min_source_cell`` for ``marker_lines``), so
+    a source tunes its own extraction without disturbing the others.
+    """
+    if isinstance(spec, str):
+        return spec, {}
+    params = dict(spec)
+    return params.pop("kind"), params
+
+
+def _borrow_parent_footprint(reg: schema.SourceRegistration,
+                             shape: tuple[int, int]) -> np.ndarray | None:
+    """Resample a frame_alias parent's ``alpha>0`` mask into this source's frame.
+
+    The border-markup crop the user draws on is a wider, fully-opaque re-crop of
+    the same parchment, placed as a ``frame_alias`` of a narrower alpha-masked
+    tile. It has no alpha of its own, so it would otherwise cover — and suppress
+    the lower boundary layers across — everything it depicts, including the
+    surroundings it happens to include. Borrowing the parent tile's accepted alpha
+    footprint (``parent_px = child_px*scale + offset``, so the inverse index is a
+    per-axis affine — separable, no interpolation) clips it to exactly the region
+    the parent was placed for. Returns ``None`` if the parent is itself opaque.
+    """
+    fa = reg.frame_alias
+    _, palpha = sources.load_source_image_rgba(fa.of)
+    if palpha is None:
+        return None
+    pmask = palpha > 0
+    ph, pw = pmask.shape
+    h, w = shape
+    px = np.rint(np.arange(w) * fa.scale[0] + fa.offset[0]).astype(np.int64)
+    py = np.rint(np.arange(h) * fa.scale[1] + fa.offset[1]).astype(np.int64)
+    vx, vy = (px >= 0) & (px < pw), (py >= 0) & (py < ph)
+    sampled = pmask[np.ix_(py.clip(0, ph - 1), px.clip(0, pw - 1))]
+    return sampled & np.outer(vy, vx)
+
+
+def extract_source_cells(reg: schema.SourceRegistration, spec
+                         ) -> tuple[np.ndarray, dict, np.ndarray | None]:
     """Trace one source's boundary network into a cell-label image.
 
-    Returns ``(labels, extra)`` — ``extra`` carries source-specific headline
-    metrics (currently only the ``ink_bridged`` path's before/after bridging
-    counts) that the caller folds into the coverage report.
+    Returns ``(labels, extra, valid)`` — ``extra`` carries source-specific
+    headline metrics (the ``ink_bridged`` path's before/after bridging counts)
+    that the caller folds into the coverage report, and ``valid`` is the source's
+    ``alpha>0`` footprint mask (``None`` for an opaque source). An alpha-masked
+    region crop's transparent pixels are forced into the ink barrier so no cell
+    forms there and no cell leaks across a transparent hole, and ``valid`` is
+    passed to :func:`worldgen.cells.warp_cells` so the crop only *covers* — and
+    therefore only suppresses the lower boundary layers — inside that footprint.
     """
-    rgb = sources.load_source_image(reg.source)
+    kind, params = _normalize_source_spec(spec)
+    ink_params = params.get("ink", {})
+    rgb, alpha = sources.load_source_image_rgba(reg.source)
+    valid = alpha > 0 if alpha is not None else None
+    if valid is None and reg.is_alias:
+        # An opaque frame_alias (the user's wider border-markup re-crop) borrows
+        # its parent tile's accepted alpha footprint so it contributes only there.
+        valid = _borrow_parent_footprint(reg, rgb.shape[:2])
     exclude = BOUNDARY_EXCLUDE.get(reg.source, [])
+    win = int(ink_params.get("window", INK_WINDOW))
+    min_cell = int(params.get("min_source_cell", ink_params.get("min_source_cell", MIN_SOURCE_CELL)))
+    glyph_kw = {k: ink_params[k] for k in ("min_area", "max_side", "min_height", "min_fill")
+                if k in ink_params}
     extra: dict = {}
-    if kind == "flat_colour":
-        lab, land = parchment.flat_map_cells(rgb, min_area=MIN_SOURCE_CELL,
-                                             exclude=exclude)
+    if kind == "marker_lines":
+        # The user has hand-drawn the state-region boundaries in a pure marker
+        # colour (the border-markup workflow — the sister of the paired-anchor-dot
+        # placement). Only those lines, the map's own rivers, and the coast are the
+        # barrier; roads, province lines, terrain and lettering are ignored. The
+        # user draws red only for the *land* borders and leaves the rivers to close
+        # the rest (they deliberately stop each red line at a river), so the rivers
+        # — the thick, very-dark bands, isolated from thin ink by an opening — are
+        # detected and unioned in. The marker is dilated a little to bridge the
+        # small gaps where two hand-drawn segments don't quite meet at a junction.
+        # The enclosed cells are the states the user drew — nothing to reconcile.
+        barrier, marker_frac, rivers_frac = parchment.marker_barrier(
+            rgb, marker_rgb=params.get("marker_rgb", MARKER_RGB),
+            tol=int(params.get("marker_tol", MARKER_TOL)),
+            dilate=int(params.get("marker_dilate", 2)),
+            rivers=params.get("rivers"), valid=valid)
+        lab, n = parchment.cells_from_ink(barrier, min_cell)
+        extra = {"marker_line_fraction": round(marker_frac, 4),
+                 "marker_rivers_fraction": round(rivers_frac, 4)}
+        log(f"  {reg.source:<44} marker {marker_frac:.4f} rivers {rivers_frac:.3f}  cells {n}")
+    elif kind == "flat_colour":
+        lab, land = parchment.flat_map_cells(rgb, min_area=min_cell, exclude=exclude)
         n = int(lab.max())
         log(f"  {reg.source:<44} flat  land {land.mean():.3f}  cells {n}")
     elif kind == "ink_bridged":
@@ -158,13 +310,18 @@ def extract_source_cells(reg: schema.SourceRegistration, kind: str
         # bridge back to its neighbours downstream, converting the merge into a
         # recoverable "border a few px off" (world-map-parchment-areas-onto-globe.md,
         # measurement 3: +46% usable cells at this offset).
-        ink = parchment.ink_mask(rgb, window=INK_WINDOW,
-                                 offset=parchment.INK_OFFSET_MASTER, exclude=exclude)
-        _, before = parchment.cells_from_ink(ink, MIN_SOURCE_CELL)
-        glyphs = parchment.glyph_mask(ink)
+        off = float(ink_params.get("offset", parchment.INK_OFFSET_MASTER))
+        ink = parchment.ink_mask(rgb, window=win, offset=off, exclude=exclude)
+        if valid is not None:
+            # Transparent = barrier: no cell forms in a cut-away region, and the
+            # complement labelling cannot leak one cell across a transparent hole
+            # into another.
+            ink = ink | ~valid
+        _, before = parchment.cells_from_ink(ink, min_cell)
+        glyphs = parchment.glyph_mask(ink, **glyph_kw)
         blobs = parchment.label_blobs(glyphs)
         barrier = ink | (blobs > 0)
-        lab, n = parchment.cells_from_ink(barrier, MIN_SOURCE_CELL)
+        lab, n = parchment.cells_from_ink(barrier, min_cell)
         sizes = np.bincount(lab.ravel())
         largest = int(sizes[1:].max()) if n else 0
         extra = {"traced_cells_before_bridge": before, "traced_cells_after_bridge": n,
@@ -172,11 +329,13 @@ def extract_source_cells(reg: schema.SourceRegistration, kind: str
         log(f"  {reg.source:<44} ink+bridge  {barrier.mean():.3f}  "
             f"cells {before} -> {n}  (largest {largest:,} px)")
     else:
-        ink = parchment.ink_mask(rgb, window=INK_WINDOW, offset=INK_OFFSET,
-                                 exclude=exclude)
-        lab, n = parchment.cells_from_ink(ink, MIN_SOURCE_CELL)
+        off = float(ink_params.get("offset", INK_OFFSET))
+        ink = parchment.ink_mask(rgb, window=win, offset=off, exclude=exclude)
+        if valid is not None:
+            ink = ink | ~valid
+        lab, n = parchment.cells_from_ink(ink, min_cell)
         log(f"  {reg.source:<44} ink   {ink.mean():.3f}  cells {n}")
-    return lab.astype(np.int32), extra
+    return lab.astype(np.int32), extra, valid
 
 
 def build_layers(regs: dict[str, schema.SourceRegistration]
@@ -187,14 +346,14 @@ def build_layers(regs: dict[str, schema.SourceRegistration]
     report: list[str] = []
     extra_stats: dict = {}
     inside_by_source: dict[str, np.ndarray] = {}
-    for name, kind in BOUNDARY_SOURCES.items():
+    for name, spec in BOUNDARY_SOURCES.items():
         reg = regs.get(name)
         if reg is None:
             raise SystemExit(f"{name} has no registration record — run tools/fit_registration.py")
-        src, extra = extract_source_cells(reg, kind)
+        src, extra, valid = extract_source_cells(reg, spec)
         extra_stats.update(extra)
         t0 = time.time()
-        lab, inside = cells.warp_cells(reg, regs, src, (CANVAS_H, CANVAS_W))
+        lab, inside = cells.warp_cells(reg, regs, src, (CANVAS_H, CANVAS_W), src_valid=valid)
         covered |= inside
         inside_by_source[name] = inside
         prec = reg.precedence_for(BOUNDARY_LAYER)
@@ -244,13 +403,19 @@ def seed_uncovered(labels: np.ndarray, land: np.ndarray, target: int) -> tuple[n
 
 
 def build_land_cells(land: np.ndarray, regs: dict[str, schema.SourceRegistration]
-                     ) -> tuple[np.ndarray, dict]:
+                     ) -> tuple[np.ndarray, dict, dict[str, np.ndarray]]:
     stats: dict = {}
     log("tracing boundary sources:")
     stacked, covered, prec_report, extra_stats, inside_by_source = build_layers(regs)
     stats["precedence"] = prec_report
     stats["source_cells"] = int(stacked.max())
     stats.update(extra_stats)
+
+    # Each Old World crop's warped alpha>0 footprint (now that inside is clipped by
+    # src_valid) IS its macro footprint — the twin macro grouping is blocked, so
+    # these masks are what render_coverage counts cells against per named macro.
+    crop_footprints = {name: inside_by_source[name].copy() & land
+                       for name in OLD_WORLD_CROP_MIN_STATES if name in inside_by_source}
 
     # IE-footprint land coverage: of the land the parchment master's own warp
     # reaches at all (its footprint, not the whole canvas — the frame stops
@@ -297,24 +462,51 @@ def build_land_cells(land: np.ndarray, regs: dict[str, schema.SourceRegistration
     stacked = cells.split_disconnected(stacked, WRAP_X)
     log(f"  {int(stacked.max())} cells after fill")
 
+    # Per-region merge floors: cells inside an Old World crop footprint reconcile
+    # to a much finer floor than the vanilla-sized rest of the map, and an
+    # ink-traced macro (province noise to coalesce) uses a coarser floor than a
+    # macro whose borders the user hand-drew as clean states (nothing to reconcile
+    # — preserve them). A cell outside every footprint keeps the vanilla floor.
+    floor_map = np.zeros(land.shape, dtype=np.int32)
+    ow_floor = int(target * OLD_WORLD_MIN_AREA_FRACTION)
+    ow_marker_floor = int(target * OLD_WORLD_MARKER_MIN_AREA_FRACTION)
+    for name, mask in crop_footprints.items():
+        kind = _normalize_source_spec(BOUNDARY_SOURCES[name])[0]
+        floor_map[mask] = ow_marker_floor if kind == "marker_lines" else ow_floor
+    stats["old_world_floor"] = ow_floor
+    stats["old_world_marker_floor"] = ow_marker_floor
+    log(f"  Old World footprint {100 * (floor_map > 0).mean():.1f}% of canvas; "
+        f"floors ink {ow_floor:,} / marker {ow_marker_floor:,} px "
+        f"(vs {int(target * MIN_AREA_FRACTION):,} elsewhere)")
+
     log("  reconciling density...")
     # Merge first, split second. The other order splits a large cell into pieces
-    # that the merge pass then puts straight back together.
-    stacked = cells.merge_to_target(stacked, TARGET_LAND_STATES, WRAP_X, log=log)
+    # that the merge pass then puts straight back together. The Old World keeps its
+    # per-region floor throughout via floor_map.
+    stacked = cells.merge_to_target(stacked, MERGE_TARGET_LAND_STATES, WRAP_X,
+                                    log=log, floor_map=floor_map)
     stacked = cells.split_large(stacked, int(target * MAX_AREA_FRACTION), target, WRAP_X)
-    stacked = cells.merge_small(stacked, int(target * MIN_AREA_FRACTION), WRAP_X)
-    # Splitting torn cells can strand a handful of pixels: a merge that chained
-    # A -> B -> C leaves A's pixels next to C without touching it. Sweep those up
-    # against an absolute floor, then re-split, so no state comes out smaller
-    # than the smallest island the mask itself is allowed to keep.
-    stacked = cells.split_disconnected(stacked, WRAP_X)
-    stacked = cells.merge_small(stacked, MIN_CELL_AREA, WRAP_X)
-    stacked = cells.split_disconnected(stacked, WRAP_X)
+    stacked = cells.merge_small(stacked, int(target * MIN_AREA_FRACTION), WRAP_X,
+                                floor_map=floor_map)
+    # Absolute-floor cleanup, iterated to a joint fixpoint: absorb any sub-floor
+    # rubble into a neighbour (merge_small), then split torn cells into connected
+    # pieces (split_disconnected). The loop ends only in a round where *neither*
+    # step changes anything — at which point no sub-floor cell still has a same-kind
+    # neighbour to merge into AND every cell is connected, which is exactly the pair
+    # of conditions validate_map --labels checks. Ending on either step alone trades
+    # one violation for the other, so both must be no-ops in the same round.
+    for _ in range(20):
+        a = int(stacked.max())
+        stacked = cells.merge_small(stacked, MIN_CELL_AREA, WRAP_X)
+        b = int(stacked.max())
+        stacked = cells.split_disconnected(stacked, WRAP_X)
+        if a == b == int(stacked.max()):
+            break
     log(f"  {int(stacked.max())} land cells (target {TARGET_LAND_STATES})")
 
     if int((stacked == 0)[land].sum()):
         raise SystemExit("land pixels left unlabelled — the layer does not tile the mask")
-    return stacked, stats
+    return stacked, stats, crop_footprints
 
 
 def assign_macros(land_labels: np.ndarray, regs: dict[str, schema.SourceRegistration]
@@ -323,19 +515,45 @@ def assign_macros(land_labels: np.ndarray, regs: dict[str, schema.SourceRegistra
 
     Degrades to "no macro grouping" (every cell reports macro 0, the existing
     "outside every macro region" sentinel — see ``macro.assign``) rather than
-    aborting the whole run when no source carries the ``ie_macro_grouping``
-    role. The twin (``pizqenw9rd791.jpg``) was retired from the manifest in the
-    August 2026 sources/ reorg with no replacement registered; restore a
-    twin-equivalent source and register it with that role to bring grouping back.
+    aborting the whole run when no *frame-aligned* twin is available.
+
+    The pixel-difference path (:func:`macro.annotation_mask`) differences the twin
+    against the clean master pixel-for-pixel, so it needs a twin in the master's
+    own frame (matching dims). The only macro source currently registered is
+    ``named_macro_regions`` (``tww3_states_per_strat_region.jpg``), a rescaled
+    ``frame_alias`` of the master — it cannot feed that path, and re-tooling
+    ``macro.py`` to warp the alias into the master frame is a separate request.
+    That is the accurate diagnosis this reports; the Old World per-crop counts
+    above stand in for the macros this round.
     """
-    twin_reg = next((r for r in regs.values() if r.role == "ie_macro_grouping"), None)
+    twin_reg = next((r for r in regs.values()
+                     if r.role == "ie_macro_grouping" and not r.is_alias), None)
     if twin_reg is None:
-        log("  WARNING: no source carries the ie_macro_grouping role — skipping "
-            "macro grouping, every cell reports macro 0")
+        macro_src = next((r for r in regs.values() if r.role == "named_macro_regions"), None)
+        if macro_src is not None and macro_src.is_alias:
+            reason = (
+                f"the only macro source ({macro_src.source}, role 'named_macro_regions') "
+                f"is a frame_alias of {macro_src.frame_alias.of} "
+                f"(scale {macro_src.frame_alias.scale[0]:.3f}), not a frame-aligned twin. "
+                "macro.annotation_mask differences the twin against the clean master "
+                "pixel-for-pixel and needs matching dims, so a rescaled alias cannot feed "
+                "it. Warping the alias into the master frame is a separate request."
+            )
+        elif macro_src is not None:
+            reason = (
+                f"the macro source {macro_src.source} (role 'named_macro_regions') is "
+                "registered but not in the master frame the pixel-difference path needs."
+            )
+        else:
+            reason = (
+                "no source carries a macro-grouping role (neither a frame-aligned "
+                "'ie_macro_grouping' twin nor 'named_macro_regions')."
+            )
+        log(f"  WARNING: macro grouping SKIPPED — {reason} Every cell reports macro 0.")
         table = np.zeros(int(land_labels.max()) + 1, dtype=np.int32)
         return table, {"macro_regions": 0, "macro_declared": len(macro.PRINTED_COUNTS),
                        "macro_filled_from_neighbour": 0, "macro_degraded": False,
-                       "macro_skipped": True}
+                       "macro_skipped": True, "macro_skip_reason": reason}
     twin = sources.load_source_image(twin_reg.source)
 
     # Preferred path: difference the twin against the clean master, which cancels
@@ -395,7 +613,7 @@ def main(argv: list[str] | None = None) -> int:
     log(f"land mask     {land.shape} land {100 * land.mean():.2f}% ({int(land.sum()):,} px)")
     regs = {r.source: r for r in schema.load_registrations(sources.REGISTRATION_DIR)}
 
-    land_labels, stats = build_land_cells(land, regs)
+    land_labels, stats, crop_footprints = build_land_cells(land, regs)
     n_land = int(land_labels.max())
 
     log("macro grouping:")
@@ -444,7 +662,8 @@ def main(argv: list[str] | None = None) -> int:
     log(f"wrote {INDEX_PATH.relative_to(TOOLS_DIR.parent)}")
 
     COVERAGE_PATH.write_text(
-        render_coverage(stats, macro_of, areas, n_land, n_sea), encoding="utf-8")
+        render_coverage(stats, macro_of, areas, n_land, n_sea, land_labels, crop_footprints),
+        encoding="utf-8")
     log(f"wrote {COVERAGE_PATH.relative_to(TOOLS_DIR.parent)}")
 
     if args.preview:
@@ -453,8 +672,28 @@ def main(argv: list[str] | None = None) -> int:
     return 0
 
 
+def old_world_crop_counts(land_labels: np.ndarray, n_land: int,
+                          crop_footprints: dict[str, np.ndarray]) -> dict[str, int]:
+    """Land cells whose majority area falls inside each crop's warped footprint.
+
+    Majority-by-area (not centroid) so a cell straddling a footprint edge is
+    attributed to whichever crop holds most of it, and — the footprints being
+    alpha-disjoint — to at most one. This is the density measurement the request
+    is judged on, taken directly from the crop footprints because the annotated
+    twin's macro grouping is blocked (see :func:`assign_macros`).
+    """
+    total = np.bincount(land_labels.ravel(), minlength=n_land + 1)
+    counts: dict[str, int] = {}
+    for name, mask in crop_footprints.items():
+        inside = np.bincount(land_labels[mask].ravel(), minlength=n_land + 1)
+        majority = inside[1:n_land + 1] * 2 > total[1:n_land + 1]
+        counts[name] = int(majority.sum())
+    return counts
+
+
 def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
-                    n_land: int, n_sea: int) -> str:
+                    n_land: int, n_sea: int, land_labels: np.ndarray,
+                    crop_footprints: dict[str, np.ndarray]) -> str:
     """The honest report: where the sources reach, and where they do not."""
     land_areas = areas[1:n_land + 1]
     target = stats["target_area"]
@@ -509,6 +748,43 @@ def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
         "this number or lower, never higher). The rest is seeded fallback or "
         "nearest-label fill: tessellated, not drawn.",
         "",
+    ]
+
+    # The Old World macros this request is judged on. Counted straight from each
+    # crop's warped alpha>0 footprint, because the annotated-twin macro grouping is
+    # blocked (see the Macro grouping section below) — the crops ARE these macros.
+    counts = old_world_crop_counts(land_labels, n_land, crop_footprints)
+    lines += [
+        "## Old World density (this request's gate)",
+        "",
+        "Land cells whose majority area lands inside each Old World crop's warped",
+        "`alpha>0` footprint, against the user's per-macro `min_states` "
+        "(`tools/regions/named_regions.json`). The crop footprints are the macros",
+        "here because the twin grouping is blocked (below).",
+        "",
+    ]
+    if counts:
+        for name, (label, minimum) in OLD_WORLD_CROP_MIN_STATES.items():
+            got = counts.get(name)
+            if got is None:
+                lines.append(f"- **{label}**: crop not warped (no footprint) — investigate.")
+                continue
+            ok = "✅" if got >= minimum else "⚠ SHORT"
+            lines.append(f"- **{label}**: {got} cells (min {minimum}) {ok}")
+        short = [OLD_WORLD_CROP_MIN_STATES[n][0] for n, c in counts.items()
+                 if c < OLD_WORLD_CROP_MIN_STATES[n][1]]
+        if short:
+            lines += [
+                "",
+                f"⚠ Below minimum: {', '.join(short)}. Either the crop's boundary lines "
+                "are under-tracing (tune its ink params) or the source genuinely draws "
+                "fewer regions there than required — named honestly here rather than "
+                "merged up to hit a number.",
+            ]
+    else:
+        lines.append("- No Old World crop footprints reached the canvas — check the registrations.")
+    lines += [
+        "",
         "## Source coverage",
         "",
         "Boundary sources, highest precedence first — the area a layer *offers*, not",
@@ -529,13 +805,10 @@ def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
         "",
         "Named candidates for closing it, in order of expected value:",
         "",
-        "1. **`tww3_old_world_mod_parchment.png`** (already in the manifest,",
-        "   deliberately unregistered in S3a — see `tools/SOURCES.md`). A denser line",
-        "   chloropleth over the Old World arc. It would raise density where we already",
-        "   have coverage rather than close the gap, but it is the cheapest next step:",
-        "   a viable measurable objective exists for it (its own cell network covers",
-        "   only land, so the union of its small cells *is* a land silhouette that can",
-        "   be scored the same way the IE family was).",
+        "1. **The Old World mod parchment crops** (`tww3_old_world_mod_parchment_*`)",
+        "   are now wired in — see the Old World density section above. They raise",
+        "   density inside their own footprints rather than closing this gap, which is",
+        "   the whole east/polar coverage hole, not the Old World.",
         "2. **A boundary source for Ind / Khuresh / Nippon.** Nothing in `sources/`",
         "   draws provinces there. This is the real gap and no reprocessing of the",
         "   current set will close it.",
@@ -547,11 +820,10 @@ def render_coverage(stats: dict, macro_of: np.ndarray, areas: np.ndarray,
         "",
     ] + (
         [
-            "- **⚠ SKIPPED: no source carries the `ie_macro_grouping` role.** The annotated",
-            "  twin (`pizqenw9rd791.jpg`) was retired from the manifest in the August 2026",
-            "  sources/ reorg with nothing registered in its place. Every cell reports macro",
-            "  0 (unassigned) below. Register a twin-equivalent source with that role to",
-            "  bring grouping back.",
+            "- **⚠ SKIPPED — macro grouping did not run.**",
+            f"  {stats.get('macro_skip_reason', '')}",
+            "  Every land cell reports macro 0 (unassigned) below; the Old World per-crop",
+            "  counts above stand in for the macros this round.",
             "",
         ] if stats.get("macro_skipped") else
         [

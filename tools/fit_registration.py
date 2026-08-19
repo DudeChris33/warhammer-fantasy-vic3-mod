@@ -247,12 +247,48 @@ def fit_source(stem: str, log=print) -> dict:
 
     if objective == "landmarks":
         # No measurable silhouette: interpolate the landmarks and stop. Exact at
-        # every landmark, affine trend between them.
-        src_pts = register.lattice(master_shape, seed["lattice"]["nx"], seed["lattice"]["ny"],
-                                   float(seed["lattice"].get("inset", 0.02)))
+        # every landmark.
+        #
+        # thin_plate_spline's kernel (r^2 log r) grows without bound away from its
+        # support points, so how far the lattice may safely reach past the dots
+        # depends on whether the fit has a kernel term at all:
+        #
+        # * With <= 3 non-collinear landmarks the degree-1 solve has ZERO kernel
+        #   weight — the fit is exactly its affine trend, which extrapolates
+        #   safely and uniformly. The lattice can (and should) span the whole
+        #   master frame, so an affine placement from 3 well-spread dots covers
+        #   the entire region with no streaking. This is the clean way to place a
+        #   tile: 3 dots, pure affine.
+        # * With 4+ landmarks the kernel term is nonzero and blows up outside the
+        #   dots' hull. A lattice point tens-to-hundreds of px past the nearest
+        #   dot then gets an unstable canvas position, and because every consumer
+        #   (qa_overlay, generate_state_labels) re-fits its own RBF through the
+        #   emitted control points, that one bad point smears into comb-streaks
+        #   across nearby valid content (observed on the 9-dot Empire tile,
+        #   2026-08-16: all four edges). So the lattice is bounded to hull + pad,
+        #   trading periphery coverage for a stable warp; recovering that edge
+        #   coverage is a sourcing question (dots nearer the edge), not tooling.
         rbf = RBFInterpolator(lm_src, lm_canvas, kernel="thin_plate_spline", degree=1)
+        if len(lm_src) <= 3:
+            src_pts = register.lattice(master_shape, seed["lattice"]["nx"],
+                                       seed["lattice"]["ny"],
+                                       float(seed["lattice"].get("inset", 0.02)))
+            log(f"affine placement from {len(lm_src)} landmarks (full-frame lattice, "
+                f"master {master_shape[1]}x{master_shape[0]})")
+            info["method"] = f"affine placement from {len(lm_src)} landmarks (full-frame lattice)"
+        else:
+            pad = float(seed["lattice"].get("hull_pad", 64))
+            x0 = max(0.0, float(lm_src[:, 0].min()) - pad)
+            y0 = max(0.0, float(lm_src[:, 1].min()) - pad)
+            x1 = min(float(master_shape[1]), float(lm_src[:, 0].max()) + pad)
+            y1 = min(float(master_shape[0]), float(lm_src[:, 1].max()) + pad)
+            log(f"lattice hull  x[{x0:.0f},{x1:.0f}] y[{y0:.0f},{y1:.0f}]  (pad {pad:.0f}px, "
+                f"master {master_shape[1]}x{master_shape[0]})")
+            src_pts = register.lattice_box((x0, y0, x1, y1), seed["lattice"]["nx"],
+                                           seed["lattice"]["ny"])
+            info["method"] = "thin-plate interpolation of landmarks, lattice bounded to hull+pad"
+            info["lattice_hull_box"] = [round(x0, 1), round(y0, 1), round(x1, 1), round(y1, 1)]
         canvas_pts = register.clamp_canvas(rbf(src_pts), CANVAS_W, CANVAS_H)
-        info["method"] = "thin-plate interpolation of landmarks (no silhouette objective)"
         return _emit(seed, src_pts, canvas_pts, info, log)
 
     if objective == "landmark_refine":

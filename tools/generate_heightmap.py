@@ -32,9 +32,13 @@ every such disagreement is a coastal province the engine renders underwater.
 
 Usage::
 
-    python tools/generate_heightmap.py            # write mask + heightmap
-    python tools/generate_heightmap.py --mask-only # skip the 16-bit heightmap
-    python tools/generate_heightmap.py --preview   # + downscaled PNGs for eyeballing
+    python tools/generate_heightmap.py                    # write mask + heightmap
+    python tools/generate_heightmap.py --mask-only         # skip the 16-bit heightmap
+    python tools/generate_heightmap.py --preview           # + downscaled PNGs for eyeballing
+    python tools/generate_heightmap.py --use-existing-mask # load tools/derived/land_sea_mask.png
+                                                            # as-is instead of deriving it from
+                                                            # source, and build the heightmap
+                                                            # from that (hand-painted mask)
 """
 
 from __future__ import annotations
@@ -367,7 +371,13 @@ def main(argv: list[str] | None = None) -> int:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--mask-only", action="store_true", help="stop after land_sea_mask.png")
     p.add_argument("--preview", action="store_true", help="also write downscaled preview PNGs")
+    p.add_argument("--use-existing-mask", action="store_true",
+                   help="load tools/derived/land_sea_mask.png as-is (e.g. hand-painted) "
+                        "instead of deriving it from source; incompatible with --mask-only")
     args = p.parse_args(argv)
+    if args.use_existing_mask and args.mask_only:
+        p.error("--use-existing-mask and --mask-only are mutually exclusive "
+                "(there is nothing left to do: the mask is already the input)")
 
     t0 = time.time()
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
@@ -392,98 +402,117 @@ def main(argv: list[str] | None = None) -> int:
     log("classifying the Terraqueous ramp...")
     elev_src, land_src_f, _dist = terraqueous_fields(reg, elut, fit, t0)
 
-    log(f"reprojecting to canvas {CANVAS_W}x{CANVAS_H}...")
-    terra_land = ingest.reproject_plane(
-        reg, fit, land_src_f, CANVAS_W, CANVAS_H, block_rows=BLOCK_ROWS, order=1) > 0.5
-    log(f"  raw land fraction {100 * terra_land.mean():.2f}%", t0)
+    if args.use_existing_mask:
+        # The mask is a hand-authored input here, like a registration seed or
+        # inland_lakes.json — not something this run derives. elev_src above is
+        # still needed (the heightmap's elevation field), but the land/sea split
+        # comes from the committed file, untouched.
+        mask_path = DERIVED_DIR / "land_sea_mask.png"
+        log(f"loading existing mask {mask_path} (--use-existing-mask, skipping derivation)...")
+        land = raster.read_mask_png(mask_path)
+        if land.shape != (CANVAS_H, CANVAS_W):
+            raise SystemExit(
+                f"{mask_path}: expected {CANVAS_W}x{CANVAS_H}, got "
+                f"{land.shape[1]}x{land.shape[0]}"
+            )
+        log(f"  land {100 * land.mean():.2f}% of canvas", t0)
+        _report_polar_band(land, t0)
+        # Re-write in the canonical 1-bit encoding (round-trips exactly for an
+        # already-binary mask) so the committed file matches write_mask_png's format.
+        raster.write_mask_png(mask_path, land)
+    else:
+        log(f"reprojecting to canvas {CANVAS_W}x{CANVAS_H}...")
+        terra_land = ingest.reproject_plane(
+            reg, fit, land_src_f, CANVAS_W, CANVAS_H, block_rows=BLOCK_ROWS, order=1) > 0.5
+        log(f"  raw land fraction {100 * terra_land.mean():.2f}%", t0)
 
-    # --- coastline mosaic ------------------------------------------------
-    # Resolved by *layer* precedence, not the records' overall precedence: the
-    # Terraqueous globe is registered to sub-pixel accuracy and so owns the
-    # shoreline (coastline 90) even though the regional sources outrank it for
-    # boundaries and relief. Today it is the only layer that wins any pixel; the
-    # mosaic is here so adding a better-registered regional coastline later is a
-    # data change rather than a code change, and so the report says out loud
-    # which source actually decided each part of the world.
-    log("compositing the coastline layer...")
-    mosaic = composite.Mosaic((CANVAS_H, CANVAS_W))
-    mosaic.add(composite.Layer(
-        name=f"{TERRAQUEOUS} (NE-II)",
-        precedence=reg.precedence_for("coastline"),
-        data=terra_land,
-        valid=np.ones((CANVAS_H, CANVAS_W), dtype=bool),
-    ))
-    land_raw, covered = mosaic.resolve()
-    for line in mosaic.coverage_report():
-        print(line)
-    if not covered.all():
-        raise SystemExit("coastline mosaic left pixels uncovered — no source claims them")
+        # --- coastline mosaic ------------------------------------------------
+        # Resolved by *layer* precedence, not the records' overall precedence: the
+        # Terraqueous globe is registered to sub-pixel accuracy and so owns the
+        # shoreline (coastline 90) even though the regional sources outrank it for
+        # boundaries and relief. Today it is the only layer that wins any pixel; the
+        # mosaic is here so adding a better-registered regional coastline later is a
+        # data change rather than a code change, and so the report says out loud
+        # which source actually decided each part of the world.
+        log("compositing the coastline layer...")
+        mosaic = composite.Mosaic((CANVAS_H, CANVAS_W))
+        mosaic.add(composite.Layer(
+            name=f"{TERRAQUEOUS} (NE-II)",
+            precedence=reg.precedence_for("coastline"),
+            data=terra_land,
+            valid=np.ones((CANVAS_H, CANVAS_W), dtype=bool),
+        ))
+        land_raw, covered = mosaic.resolve()
+        for line in mosaic.coverage_report():
+            print(line)
+        if not covered.all():
+            raise SystemExit("coastline mosaic left pixels uncovered — no source claims them")
 
-    log("cleaning the land/sea mask...")
-    pre = segment.mask_stats(land_raw, wrap_x=map_config.WRAP_X)
-    land = segment.clean_land_mask(land_raw, min_island_area=CANVAS_MIN_BLOB,
-                                   min_lake_area=CANVAS_MIN_BLOB,
-                                   close_radius=2, open_radius=2, wrap_x=map_config.WRAP_X)
-    stats = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
-    log(f"  land {100 * stats['land_fraction']:.2f}%  "
-        f"land bodies {stats['land_bodies']}  water bodies {stats['water_bodies']}", t0)
-    # The despeckle delta, reported rather than assumed: this is the whole
-    # measurement behind moving the threshold from source px to canvas px.
-    log(f"  despeckle at {CANVAS_MIN_BLOB:,} canvas px: land bodies "
-        f"{pre['land_bodies']} -> {stats['land_bodies']}, water bodies "
-        f"{pre['water_bodies']} -> {stats['water_bodies']}")
+        log("cleaning the land/sea mask...")
+        pre = segment.mask_stats(land_raw, wrap_x=map_config.WRAP_X)
+        land = segment.clean_land_mask(land_raw, min_island_area=CANVAS_MIN_BLOB,
+                                       min_lake_area=CANVAS_MIN_BLOB,
+                                       close_radius=2, open_radius=2, wrap_x=map_config.WRAP_X)
+        stats = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
+        log(f"  land {100 * stats['land_fraction']:.2f}%  "
+            f"land bodies {stats['land_bodies']}  water bodies {stats['water_bodies']}", t0)
+        # The despeckle delta, reported rather than assumed: this is the whole
+        # measurement behind moving the threshold from source px to canvas px.
+        log(f"  despeckle at {CANVAS_MIN_BLOB:,} canvas px: land bodies "
+            f"{pre['land_bodies']} -> {stats['land_bodies']}, water bodies "
+            f"{pre['water_bodies']} -> {stats['water_bodies']}")
 
-    # --- keep the ocean + curated lakes, fill the rest of the enclosed water ---
-    # The classifier reads drawn rivers (ocean-blue) and flooded marshes as
-    # enclosed water bodies the map does not mean. Fill every enclosed body to
-    # land except a committed allowlist of genuine lakes/seas keyed by a stable
-    # interior seed pixel (config/inland_lakes.json); the open ocean is kept
-    # automatically as the single largest water component. This subsumes the
-    # sub-256 lake despeckle above (it fills every enclosed body regardless of
-    # size), while min_island_area — the archipelago-preserving island floor —
-    # is untouched.
-    lakes = schema.load_inland_lakes(INLAND_LAKES_PATH, canvas=(CANVAS_W, CANVAS_H))
-    on_land = [lk.name for lk in lakes if land[lk.seed[1], lk.seed[0]]]
-    if on_land:
-        raise SystemExit(
-            f"inland-lake seed(s) fell on land after cleanup: {on_land}. clean_land_mask's "
-            f"close/open runs first, so each seed must be re-measured against the freshly "
-            f"generated mask (tools/derived/land_sea_mask.png) before use — refusing to "
-            f"silently drop a kept lake."
-        )
-    land, keep_report = segment.keep_ocean_and_lakes(
-        land, [lk.seed for lk in lakes], wrap_x=map_config.WRAP_X, return_report=True)
-    after = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
-    log(f"  inland water: kept the open ocean + {keep_report['kept_bodies']} curated bodies, "
-        f"filled {keep_report['filled_bodies']} enclosed bodies ({keep_report['filled_px']:,} px, "
-        f"{100 * keep_report['filled_px'] / land.size:.3f}% of canvas) to land", t0)
-    log(f"    water bodies {stats['water_bodies']} -> {after['water_bodies']}; "
-        f"land now {100 * after['land_fraction']:.2f}%  "
-        f"(kept: {', '.join(lk.name for lk in lakes)})")
+        # --- keep the ocean + curated lakes, fill the rest of the enclosed water ---
+        # The classifier reads drawn rivers (ocean-blue) and flooded marshes as
+        # enclosed water bodies the map does not mean. Fill every enclosed body to
+        # land except a committed allowlist of genuine lakes/seas keyed by a stable
+        # interior seed pixel (config/inland_lakes.json); the open ocean is kept
+        # automatically as the single largest water component. This subsumes the
+        # sub-256 lake despeckle above (it fills every enclosed body regardless of
+        # size), while min_island_area — the archipelago-preserving island floor —
+        # is untouched.
+        lakes = schema.load_inland_lakes(INLAND_LAKES_PATH, canvas=(CANVAS_W, CANVAS_H))
+        on_land = [lk.name for lk in lakes if land[lk.seed[1], lk.seed[0]]]
+        if on_land:
+            raise SystemExit(
+                f"inland-lake seed(s) fell on land after cleanup: {on_land}. clean_land_mask's "
+                f"close/open runs first, so each seed must be re-measured against the freshly "
+                f"generated mask (tools/derived/land_sea_mask.png) before use — refusing to "
+                f"silently drop a kept lake."
+            )
+        land, keep_report = segment.keep_ocean_and_lakes(
+            land, [lk.seed for lk in lakes], wrap_x=map_config.WRAP_X, return_report=True)
+        after = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
+        log(f"  inland water: kept the open ocean + {keep_report['kept_bodies']} curated bodies, "
+            f"filled {keep_report['filled_bodies']} enclosed bodies ({keep_report['filled_px']:,} px, "
+            f"{100 * keep_report['filled_px'] / land.size:.3f}% of canvas) to land", t0)
+        log(f"    water bodies {stats['water_bodies']} -> {after['water_bodies']}; "
+            f"land now {100 * after['land_fraction']:.2f}%  "
+            f"(kept: {', '.join(lk.name for lk in lakes)})")
 
-    # Tripwire (security review 2026-08-12): the fill trusts "largest water
-    # component = the open ocean". That holds today (one 18.6M-px ocean, the next
-    # body is the 14k-px Marshes blob), but if a future source change ever split
-    # the ocean into two large masses, the second would be silently filled to land
-    # unless a seed happened to sit in it. A body about to be filled that is any
-    # sizeable fraction of the ocean is never a drawn river or marsh — fail loudly.
-    largest_filled = keep_report["largest_filled_px"]
-    ocean_px = keep_report["ocean_px"]
-    if ocean_px and largest_filled > OCEAN_SPLIT_FRACTION * ocean_px:
-        raise SystemExit(
-            f"largest enclosed body about to be filled is {largest_filled:,} px, "
-            f"{100 * largest_filled / ocean_px:.1f}% of the {ocean_px:,}-px ocean "
-            f"(cap {100 * OCEAN_SPLIT_FRACTION:.0f}%). The ocean may have split into two "
-            f"components — add an inland_lakes.json seed for the second body if it is a real "
-            f"sea, or investigate the source change. Refusing to fill it silently."
-        )
-    log(f"    largest filled body {largest_filled:,} px "
-        f"({100 * largest_filled / ocean_px:.2f}% of the ocean; cap "
-        f"{100 * OCEAN_SPLIT_FRACTION:.0f}%) — the ocean is one component")
+        # Tripwire (security review 2026-08-12): the fill trusts "largest water
+        # component = the open ocean". That holds today (one 18.6M-px ocean, the next
+        # body is the 14k-px Marshes blob), but if a future source change ever split
+        # the ocean into two large masses, the second would be silently filled to land
+        # unless a seed happened to sit in it. A body about to be filled that is any
+        # sizeable fraction of the ocean is never a drawn river or marsh — fail loudly.
+        largest_filled = keep_report["largest_filled_px"]
+        ocean_px = keep_report["ocean_px"]
+        if ocean_px and largest_filled > OCEAN_SPLIT_FRACTION * ocean_px:
+            raise SystemExit(
+                f"largest enclosed body about to be filled is {largest_filled:,} px, "
+                f"{100 * largest_filled / ocean_px:.1f}% of the {ocean_px:,}-px ocean "
+                f"(cap {100 * OCEAN_SPLIT_FRACTION:.0f}%). The ocean may have split into two "
+                f"components — add an inland_lakes.json seed for the second body if it is a real "
+                f"sea, or investigate the source change. Refusing to fill it silently."
+            )
+        log(f"    largest filled body {largest_filled:,} px "
+            f"({100 * largest_filled / ocean_px:.2f}% of the ocean; cap "
+            f"{100 * OCEAN_SPLIT_FRACTION:.0f}%) — the ocean is one component")
 
-    _report_polar_band(land, t0)
-    raster.write_mask_png(DERIVED_DIR / "land_sea_mask.png", land)
-    log(f"  wrote {DERIVED_DIR / 'land_sea_mask.png'}", t0)
+        _report_polar_band(land, t0)
+        raster.write_mask_png(DERIVED_DIR / "land_sea_mask.png", land)
+        log(f"  wrote {DERIVED_DIR / 'land_sea_mask.png'}", t0)
 
     if args.preview:
         _write_preview(land, DERIVED_DIR / "preview_land_sea.png")

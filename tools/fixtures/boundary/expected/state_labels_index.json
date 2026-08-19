@@ -19,7 +19,7 @@
    "kind": "land",
    "key": "STATE_FIXTURE_002",
    "macro": 1,
-   "area": 608,
+   "area": 1871,
    "coastal": true
   },
   {
@@ -27,7 +27,7 @@
    "kind": "land",
    "key": "STATE_FIXTURE_003",
    "macro": 1,
-   "area": 1653,
+   "area": 467,
    "coastal": true
   },
   {
@@ -35,8 +35,8 @@
    "kind": "land",
    "key": "STATE_FIXTURE_004",
    "macro": 1,
-   "area": 802,
-   "coastal": false
+   "area": 1484,
+   "coastal": true
   },
   {
    "label": 5,
@@ -51,7 +51,7 @@
    "kind": "land",
    "key": "STATE_FIXTURE_006",
    "macro": 1,
-   "area": 770,
+   "area": 1273,
    "coastal": true
   },
   {
@@ -59,23 +59,23 @@
    "kind": "land",
    "key": "STATE_FIXTURE_007",
    "macro": 1,
-   "area": 1087,
-   "coastal": true
+   "area": 600,
+   "coastal": false
   },
   {
    "label": 8,
    "kind": "land",
    "key": "STATE_FIXTURE_008",
    "macro": 1,
-   "area": 1858,
-   "coastal": false
+   "area": 814,
+   "coastal": true
   },
   {
    "label": 9,
    "kind": "land",
    "key": "STATE_FIXTURE_009",
    "macro": 1,
-   "area": 503,
+   "area": 772,
    "coastal": true
   },
   {
@@ -83,7 +83,7 @@
    "kind": "land",
    "key": "STATE_FIXTURE_010",
    "macro": 1,
-   "area": 867,
+   "area": 1151,
    "coastal": true
   },
   {
@@ -91,7 +91,7 @@
    "kind": "land",
    "key": "STATE_FIXTURE_011",
    "macro": 1,
-   "area": 1212,
+   "area": 928,
    "coastal": true
   },
   {

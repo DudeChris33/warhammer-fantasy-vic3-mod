@@ -138,6 +138,50 @@ def build_source() -> np.ndarray:
     return img
 
 
+#: The crop's alpha footprint on the 320x240 source: opaque only right of this x
+#: (its "region"), with a transparent rectangular hole punched inside the opaque
+#: part. Both are exercised — no cell may form left of the split or inside the
+#: hole, and the base layer's cell must survive showing through the hole.
+CROP_SPLIT_X = 150
+CROP_HOLE = (206, 96, 262, 152)  # x0, y0, x1, y1 in source px
+
+
+def build_crop() -> np.ndarray:
+    """An alpha-masked region crop of the master, for the ``src_valid`` path.
+
+    Frame-aligned to the master (its registration reuses the master's control
+    points), so it overlays the same canvas place. It carries:
+
+    * **a binary alpha mask** — opaque only right of :data:`CROP_SPLIT_X`, with a
+      transparent hole (:data:`CROP_HOLE`) inside the opaque part. This is the
+      intentional footprint the real region crops carry, and the exact thing
+      ``.convert("RGB")`` drops. The fixture asserts the crop contributes cells
+      only where ``alpha>0`` and that a lower-precedence layer's cell survives
+      showing through the hole rather than being blanked and Voronoi-refilled.
+    * **an extra interior line the master lacks** (a horizontal rule across its
+      footprint), so where it is opaque and outranks the master it visibly
+      *densifies* — the whole reason a denser boundary crop is wired in.
+
+    Written RGBA; every opaque pixel copies the master so the ink test sees the
+    same paper, and the transparent pixels are left black (alpha 0 excludes them).
+    """
+    rgb = build_source()
+    # A boundary the master does not draw here, so the crop subdivides its own
+    # footprint more finely than the layer beneath it.
+    _line(rgb, CROP_SPLIT_X, 120, SRC_W - 8, 120)
+    rgba = np.zeros((SRC_H, SRC_W, 4), dtype=np.uint8)
+    rgba[..., :3] = rgb
+    alpha = np.zeros((SRC_H, SRC_W), dtype=np.uint8)
+    alpha[:, CROP_SPLIT_X:] = 255
+    x0, y0, x1, y1 = CROP_HOLE
+    alpha[y0:y1, x0:x1] = 0
+    rgba[..., 3] = alpha
+    # Zero the RGB of transparent pixels too, so the file cannot smuggle geometry
+    # in through a channel the alpha says is absent.
+    rgba[alpha == 0, :3] = 0
+    return rgba
+
+
 def build_mask() -> np.ndarray:
     """A canvas-resolution land mask with the awkward cases in it."""
     land = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
@@ -159,9 +203,12 @@ def main() -> int:
     raster.write_rgb_png(HERE / "synthetic_parchment.png", src)
     # The alias sibling: exactly half scale, so parent_px = sibling_px * 2.
     raster.write_rgb_png(HERE / "synthetic_parchment_half.png", src[::2, ::2])
+    # The alpha-masked region crop: exercises the src_valid / alpha-footprint path.
+    raster.write_rgba_png(HERE / "synthetic_parchment_crop.png", build_crop())
     raster.write_mask_png(HERE / "mask.png", build_mask())
     print(f"wrote synthetic_parchment.png {src.shape[1]}x{src.shape[0]}, "
-          f"synthetic_parchment_half.png, mask.png {CANVAS_W}x{CANVAS_H}")
+          f"synthetic_parchment_half.png, synthetic_parchment_crop.png, "
+          f"mask.png {CANVAS_W}x{CANVAS_H}")
     return 0
 
 

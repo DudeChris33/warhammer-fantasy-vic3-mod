@@ -286,6 +286,48 @@ def load_source_image(
         return np.asarray(im.convert("RGB"), dtype=np.uint8)
 
 
+def load_source_image_rgba(
+    filename: str,
+    sources_dir: Path = SOURCES_DIR,
+    manifest_path: Path = MANIFEST_PATH,
+):
+    """Return ``(rgb, alpha)`` for a source, after the same SHA-256 guard as
+    :func:`load_source_image`.
+
+    ``rgb`` is an ``(H, W, 3)`` uint8 array exactly as :func:`load_source_image`
+    would return. ``alpha`` is an ``(H, W)`` uint8 array **only** when the source
+    carries a genuine transparency mask (some pixel below 255); it is ``None`` for
+    a fully-opaque source or one with no alpha channel at all. This is the single
+    authority for a crop's real footprint: the paired-anchor-dot region crops carry
+    an intentional binary alpha mask (transparent = excluded regions), and
+    ``.convert("RGB")`` silently drops it — so a boundary source that must honour
+    that mask reads it here rather than inferring it from the lattice-bbox
+    footprint, which includes the transparent corners.
+    """
+    import numpy as np
+    from PIL import Image
+
+    rows = {r.file: r for r in parse_manifest(manifest_path.read_text(encoding="utf-8"))}
+    if filename not in rows:
+        raise ManifestError(f"'{filename}' is not in {manifest_path.name}")
+    path = sources_dir / filename
+    if not path.is_file():
+        raise ManifestError(f"sources/{filename} is missing locally")
+    actual = sha256_of(path)
+    if actual != rows[filename].sha256:
+        raise ManifestError(
+            f"{filename}: SHA-256 mismatch (manifest {rows[filename].sha256[:12]}… "
+            f"local {actual[:12]}…) — refusing to read an unverified source"
+        )
+    with Image.open(path) as im:
+        rgb = np.asarray(im.convert("RGB"), dtype=np.uint8)
+        if im.mode in ("RGBA", "LA", "PA") or "transparency" in im.info:
+            alpha = np.asarray(im.convert("RGBA"), dtype=np.uint8)[..., 3]
+            if int(alpha.min()) < 255:
+                return rgb, alpha
+        return rgb, None
+
+
 # ---------------------------------------------------------------------------
 # Manifest refresh (the only sanctioned way the committed hashes change)
 # ---------------------------------------------------------------------------

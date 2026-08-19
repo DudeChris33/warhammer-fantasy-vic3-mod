@@ -3,7 +3,8 @@ land_cells            13
 sea_zones             5
 alias_edge_agreement  1.0
 min_land_area         89
-max_land_area         1858
+max_land_area         1871
 bridging (before -> after, per source):
   synthetic_parchment.png: 23 -> 24
+  synthetic_parchment_crop.png: 12 -> 13
   synthetic_parchment_half.png: 23 -> 23

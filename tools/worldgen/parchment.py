@@ -47,6 +47,46 @@ INK_WINDOW = 41
 INK_OFFSET = 14
 
 
+def _disk(radius: int) -> np.ndarray:
+    """A boolean disk structuring element of the given radius (>=0)."""
+    if radius <= 0:
+        return np.ones((1, 1), bool)
+    y, x = np.ogrid[-radius:radius + 1, -radius:radius + 1]
+    return x * x + y * y <= radius * radius
+
+
+def marker_barrier(rgb: np.ndarray, marker_rgb=(255, 0, 255), tol: int = 80,
+                   dilate: int = 2, rivers: dict | None = None,
+                   valid: np.ndarray | None = None) -> tuple[np.ndarray, float, float]:
+    """Barrier from user-drawn marker lines (+ optional rivers + alpha), for the
+    border-markup workflow. Returns ``(barrier, marker_fraction, river_fraction)``.
+
+    The user hand-draws state-region borders in a pure ``marker_rgb`` (magenta,
+    or red), leaving gaps at the map's rivers, which they intend as the remaining
+    borders. So the barrier is: the marker colour (detected by max-channel distance,
+    dilated a little to bridge the small gaps where two hand-drawn segments miss at
+    a junction) OR the rivers (the thick, very-dark bands, isolated from thin ink —
+    roads, province lines, lettering — by a morphological opening so only they
+    survive) OR the transparent footprint edge. Everything not one of those is
+    ignored, which is the whole point: no roads, no terrain, no ink noise.
+    """
+    marker = np.abs(rgb.astype(np.int16) - np.array(marker_rgb, dtype=np.int16)).max(axis=2) <= tol
+    barrier = ndimage.binary_dilation(marker, _disk(dilate)) if dilate else marker.copy()
+    river_frac = 0.0
+    if rivers:
+        v = rgb.astype(np.int16).max(axis=2)
+        riv = ndimage.binary_opening(v < int(rivers.get("darkness", 100)),
+                                     _disk(int(rivers.get("open", 3))))
+        riv = ndimage.binary_dilation(riv, _disk(int(rivers.get("dilate", 2))))
+        if valid is not None:
+            riv &= valid  # only the region's own rivers, not a coast shadow outside it
+        barrier |= riv
+        river_frac = float(riv[valid].mean()) if valid is not None else float(riv.mean())
+    if valid is not None:
+        barrier |= ~valid
+    return barrier, float(marker.mean()), river_frac
+
+
 def chromaticity(rgb: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     """``(r, g)`` normalised chromaticity — each channel over the pixel's total.
 
@@ -128,7 +168,9 @@ GLYPH_MIN_FILL = 0.15
 LABEL_CLOSE = (7, 21)
 
 
-def glyph_mask(ink: np.ndarray) -> np.ndarray:
+def glyph_mask(ink: np.ndarray, min_area: int = GLYPH_MIN_AREA,
+               max_side: int = GLYPH_MAX_SIDE, min_height: int = GLYPH_MIN_HEIGHT,
+               min_fill: float = GLYPH_MIN_FILL) -> np.ndarray:
     """Ink pixels belonging to a small, compact (glyph-shaped) component.
 
     The parchment's ink separates cleanly into two populations by shape: the
@@ -139,6 +181,11 @@ def glyph_mask(ink: np.ndarray) -> np.ndarray:
     drops the first, with no OCR engine involved. 4-connectivity matches
     :func:`cells_from_ink`'s own test, so a glyph and the line network never
     disagree about where one component ends and the next begins.
+
+    The four thresholds default to the constants tuned on the IE parchment master
+    (fixed resolution) but are overridable per source: a region crop drawn at a
+    different pixel scale can have letters that fall outside the master's absolute
+    glyph-size window, so it passes its own bounds rather than mis-detecting them.
     """
     lab, n = ndimage.label(ink)
     if n == 0:
@@ -149,12 +196,12 @@ def glyph_mask(ink: np.ndarray) -> np.ndarray:
         if sl is None:
             continue
         area = int(sizes[i])
-        if area < GLYPH_MIN_AREA:
+        if area < min_area:
             continue
         h, w = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
-        if h > GLYPH_MAX_SIDE or w > GLYPH_MAX_SIDE or h < GLYPH_MIN_HEIGHT:
+        if h > max_side or w > max_side or h < min_height:
             continue
-        if area / (h * w) < GLYPH_MIN_FILL:
+        if area / (h * w) < min_fill:
             continue
         keep[i] = True
     return keep[lab]
@@ -208,8 +255,9 @@ FLAT_SEA_RGB = (16, 6, 175)
 FLAT_PAPER_RGB = (211, 189, 140)
 
 
-def flat_sea_mask(rgb: np.ndarray, tolerance: int = 60) -> np.ndarray:
-    """Sea on a flat-filled map, by distance to the committed ocean colour.
+def flat_sea_mask(rgb: np.ndarray, tolerance: int = 60,
+                  sea_rgb: tuple[int, int, int] = FLAT_SEA_RGB) -> np.ndarray:
+    """Sea on a flat-filled map, by distance to a flat ocean colour.
 
     A map whose ocean is a single flat colour needs no threshold *fitting* at
     all: the answer is exact up to the anti-aliased pixel at each coastline. This
@@ -218,9 +266,32 @@ def flat_sea_mask(rgb: np.ndarray, tolerance: int = 60) -> np.ndarray:
     family, a calibrated luminance cut on the Old World map that reached only 81%
     balanced accuracy — and a registration can be no better than the silhouette it
     is scored against.
+
+    ``sea_rgb`` defaults to the Total War coloured map's ocean (:data:`FLAT_SEA_RGB`)
+    but is overridable per source: a different flat-ocean map (e.g. the hand-filled
+    Old World black/white map, whose blue is RGB(63,72,204) — 66 away from the TW
+    blue, past this default tolerance) supplies its own sampled sea colour rather
+    than being forced onto a reference it does not match.
     """
-    d = np.abs(rgb.astype(np.int16) - np.array(FLAT_SEA_RGB, dtype=np.int16)).max(axis=2)
+    d = np.abs(rgb.astype(np.int16) - np.array(sea_rgb, dtype=np.int16)).max(axis=2)
     return d <= int(tolerance)
+
+
+def blue_sea_mask(rgb: np.ndarray, r_margin: int = 18, g_margin: int = 6) -> np.ndarray:
+    """Sea on a map whose ocean is blue-*dominant* but brightness-varying.
+
+    A relief/satellite world map (e.g. the Fahran "Warhammer World Map") shades its
+    ocean from near-black at the coast to a lighter open-water blue — an 80+ range
+    on the blue channel — so a distance-to-one-colour test (:func:`flat_sea_mask`)
+    is useless (either it misses the coastal water or it swallows the dark land).
+    What is invariant is the *hue*: open water always has blue clearly above red and
+    green, while grey/green/brown relief never does. Measured on that source, this
+    rule gives land fraction 0.366 against the committed mask's 0.369.
+    """
+    r = rgb[..., 0].astype(np.int16)
+    g = rgb[..., 1].astype(np.int16)
+    b = rgb[..., 2].astype(np.int16)
+    return (b - r > int(r_margin)) & (b - g > int(g_margin))
 
 
 def flat_map_cells(rgb: np.ndarray, min_area: int = 300,

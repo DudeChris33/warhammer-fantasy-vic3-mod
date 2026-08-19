@@ -1,0 +1,19 @@
+{
+  "source": "synthetic_parchment_crop.png",
+  "role": "fixture_boundary_crop",
+  "projection": "control_point_warp",
+  "precedence": 50,
+  "layer_precedence": {"boundaries": 50, "coastline": 0},
+  "crop": [4, 4, 316, 236],
+  "footprint": [0, 0, 8192, 3616],
+  "notes": "An alpha-masked region crop of the fixture master, frame-aligned to it (it reuses the master's control points, so it warps onto the same canvas place). It carries a binary alpha mask (make_source.build_crop: opaque only right of CROP_SPLIT_X, with a transparent hole punched inside) and an extra interior line the master lacks, at boundary precedence 50 — above the master (40) and the alias sibling (20). It exists to pin the src_valid / alpha-footprint path: the fixture asserts the crop contributes cells ONLY where alpha>0, and that the master's cell survives showing through the crop's transparent hole rather than being blanked and Voronoi-refilled — the exact failure a `.convert(\"RGB\")` that dropped the alpha would produce.",
+  "control_points": [
+    {"source": [8, 8], "canvas": [640, 320], "note": "frame NW"},
+    {"source": [312, 8], "canvas": [7552, 320], "note": "frame NE"},
+    {"source": [8, 232], "canvas": [640, 3232], "note": "frame SW"},
+    {"source": [312, 232], "canvas": [7552, 3232], "note": "frame SE"},
+    {"source": [160, 8], "canvas": [4096, 320], "note": "frame N mid"},
+    {"source": [160, 232], "canvas": [4096, 3232], "note": "frame S mid"},
+    {"source": [160, 120], "canvas": [4224, 1808], "note": "centre, pulled off the affine (matches master)"}
+  ]
+}

@@ -291,6 +291,22 @@ def read_rgb_png(path) -> np.ndarray:
         return np.asarray(im.convert("RGB"), dtype=np.uint8)
 
 
+def write_rgba_png(path, rgba: np.ndarray) -> None:
+    """Write an ``(H, W, 4)`` uint8 array as a lossless RGBA PNG.
+
+    The alpha plane is the point: the boundary fixture's synthetic region crop
+    carries a binary alpha mask (transparent = excluded), so this preserves it
+    exactly rather than flattening onto a background. Deterministic on the same
+    terms as :func:`write_rgb_png` — no palette, no timestamp, fixed compression.
+    """
+    arr = np.ascontiguousarray(rgba, dtype=np.uint8)
+    if arr.ndim != 3 or arr.shape[2] != 4:
+        raise ValueError(f"expected an (H, W, 4) uint8 array, got shape {arr.shape}")
+    Image.fromarray(arr, mode="RGBA").save(
+        str(path), format="PNG", optimize=False, compress_level=6
+    )
+
+
 def write_gray16_png(path, gray: np.ndarray) -> None:
     """Write an ``(H, W)`` uint16 array as a **true 16-bit** grayscale PNG.
 
