@@ -102,6 +102,20 @@ escalate.
     tests ran and what stood in for them — and anything left open. Keep the
     report as small as the change.
 
+## This project (Warhammer Fantasy / Victoria 3)
+
+Multiplayer-synchronized Victoria 3 mod, **no offline test suite** — so the tier
+you pick in step 3 means what it means in `maestro-scope`'s project section:
+`targeted`/`full` for a script/loc/gui/events change is a **game load the user
+performs** — mod loaded in Victoria 3, `logs/error.log` clean of this mod's files
+(`.claude/rules/testing.md`) — not a command you can auto-run. `map_data/`
+changes run the offline lint (`sources.py --verify`, `validate_map.py`,
+`run_fixture.py --check`) and are only truly done once the user accepts the
+rendered PNG. Confirm every effect/trigger/modifier against `docs/*.log` before
+using it, give every user-facing string a `localization/` key, and add no
+non-seeded randomness. A vibe touching `common/`/`events/`/`gui/`/`localization/`
+should also get the `security-review` agent over its diff before close-out.
+
 ## Board Touchpoints
 
 - **During the build the board is not part of this flow.** No tracking items,

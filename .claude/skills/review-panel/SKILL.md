@@ -7,8 +7,9 @@ argument-hint: <planning file | artifact path | commit range | "working" | quest
 
 Convene the Warhammer Fantasy Overhaul review panel. Five specialists review the
 same target independently and in parallel; you merge their verdicts into one
-ruling. **Nothing is fixed here** — the panel produces findings, and `/issue` or
-`/plan` acts on them.
+ruling. **Nothing is fixed here** — the panel produces findings; the maestro
+skills act on them (`/maestro-task` to file a fix as a board item, `/maestro-scope`
+to re-plan an existing one).
 
 The panel is advisory. On anything visual, **the user is the final gate** — a panel
 PASS never substitutes for the user looking at the render.
@@ -143,20 +144,24 @@ sheet, and be honest when it is one.
 ### 5. Record
 
 If the target was a planning file, offer to append the report as a
-`## Review Panel — <YYYY-MM-DD>` section. **Ask before writing** — the user may
-want to act on it first. This project records review outcomes in the plan of
-record (see commit `6a3ee9d`, which recorded a rejection), so a rejection is worth
-writing down as much as a pass.
+`## Review Panel — <YYYY-MM-DD>` section. If it was a **maestro board item** (its
+workspec or `## Plan`), the equivalent record is a comment on that item through
+the maestro skills — offer that instead. **Ask before writing either** — the user
+may want to act on it first. This project records review outcomes in the record of
+the work (see commit `6a3ee9d`, which recorded a rejection), so a rejection is
+worth writing down as much as a pass.
 
-Do not move the file between `planning/` folders — that is `/build`'s job.
+The panel changes no board stage and moves no file between `planning/` folders —
+it only records findings; acting on them is a scope/build skill's job.
 
 ### 6. Hand off
 
 State plainly what happens next:
 
-- BLOCK on a defect → `/issue <description>`
-- BLOCK on the approach → `/plan <path>` to re-plan
-- PASS WITH CONCERNS → `/build <path>`, carrying the concerns
+- BLOCK on a defect → `/maestro-task <description>` to file it (or, on an existing
+  board item, record the finding on the item)
+- BLOCK on the approach → `/maestro-scope <item-id>` to re-plan
+- PASS WITH CONCERNS → `/maestro-build <item-id>`, carrying the concerns
 - Visual target → render the artifact and **send it to the user**, who is the real
   gate
 

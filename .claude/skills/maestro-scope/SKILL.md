@@ -294,6 +294,36 @@ item, ask for the right id — never go hunting for the item they probably meant
    (`/maestro-build 431 432 438`, or `/maestro-auto` for the unsupervised
    route), in the build order the cross-check produced.
 
+## This project (Warhammer Fantasy / Victoria 3) — what the tier means here
+
+This repo is a multiplayer-synchronized Victoria 3 mod with **no offline test
+suite** — Clausewitz script has no compiler. The tier taxonomy below still
+applies, but "the run" is this project's actual validation (see
+`.claude/rules/testing.md`), and most of it is a **game load the user performs**,
+not a command a build can auto-run:
+
+- **`none`** — as generic: docs, prose, comments, planning files; nothing to load.
+- **`targeted` / `full`** — for script/loc/gui/events changes these collapse to
+  the same thing: **load the mod in Victoria 3 and confirm `logs/error.log` shows
+  no new line referencing this mod's files.** Name that as the `run`; the build
+  hands it to the user and records their result. There is no green baseline to
+  take because there is no suite.
+- **`map_data/` changes carry an auto-runnable gate on top:** the offline
+  pre-commit lint (`sources.py --verify`, `validate_map.py [--labels]`,
+  `run_fixture.py --check`) runs before the game load and IS the build's
+  baseline. But a green offline gate is never the real verdict on a visual map
+  change — the rendered PNG is, and that is the user's per the autonomy model in
+  `CLAUDE.md`. Scope a visual map item as `full`, with the rendered-artifact
+  review named as its evidence.
+
+Two more scoping duties specific to this repo:
+
+- Before the plan relies on any effect/trigger/modifier/event
+  target/on_action/custom-loc key, confirm it in the matching `docs/*.log`, and
+  cite the file where the plan uses it.
+- Every user-facing string the plan introduces gets an explicit localization
+  step (`localization/english/`, or `.../replace/...` for a vanilla override).
+
 ## Verification Tier — how much testing this change actually needs
 
 **A scoping decision, and it belongs here.** By step 4 you know the change's

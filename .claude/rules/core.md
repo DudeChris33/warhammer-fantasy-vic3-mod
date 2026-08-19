@@ -51,4 +51,4 @@ On conflict, fix the losing side and update it to match.
 - [ ] No non-deterministic script added
 - [ ] Mod loaded in-game and `logs/error.log` checked clean for this mod's files (see [testing.md](testing.md))
 - [ ] Only specific, relevant files staged — no `git add -A`
-- [ ] Request/issue file moved to `planning/done/` with resolution filled in
+- [ ] Board item landed at `review`/`done` with its activity trail updated (commits, verification) — via the maestro MCP, not a local file move

@@ -284,6 +284,38 @@ probably meant.
     the owner intact, and tell the user where it stands — in the same
     TL;DR-first shape.
 
+## This project (Warhammer Fantasy / Victoria 3)
+
+`CLAUDE.md` and `.claude/rules/` govern; the specifics that change how a build
+runs in this multiplayer-synchronized Victoria 3 mod:
+
+- **There is no offline test suite.** For script/loc/gui/events changes,
+  verification is loading the mod in Victoria 3 and confirming `logs/error.log`
+  (`Documents/Paradox Interactive/Victoria 3/logs/error.log`) has no new line
+  referencing this mod's files — see `.claude/rules/testing.md`. It cannot be
+  auto-run, so hand the user that load-and-check step, record their result on the
+  trail, and **never report the item verified off anything but a clean
+  `logs/error.log` they confirmed.** Fix failures in the script, never by
+  suppressing the log line.
+- **`map_data/` changes** additionally run the offline lint FIRST
+  (`sources.py --verify`, `validate_map.py [--labels]`, `run_fixture.py --check`)
+  — that part IS auto-runnable and is the closest thing to a baseline. A visual
+  map change is only truly done once the user accepts the rendered PNG (autonomy
+  model in `CLAUDE.md`); a green lint is not a pass.
+- **Confirm before you use it** — every effect/trigger/modifier/event
+  target/on_action/custom-loc key against the matching `docs/*.log`.
+- **Localization** — every user-facing string gets its `localization/english/`
+  (or `.../replace/...`) key.
+- **Determinism** — no non-seeded randomness or debug-only effects; it desyncs
+  multiplayer.
+- **Post-build review agents.** After committing (before the closing report),
+  spawn in parallel — the same review the old `/build` ran:
+  - `docs-updater` — update `CLAUDE.md`/`.claude/rules/` from the git diff.
+  - `security-review` — audit the diff for MP-desync and content-integrity risks.
+
+  Fold their findings into the closing report; act on anything critical before
+  landing the item.
+
 ## Verification Across Several Items
 
 One closing run for the whole set, never one sweep per item.

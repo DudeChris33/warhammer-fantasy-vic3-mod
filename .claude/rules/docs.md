@@ -9,7 +9,7 @@
 
 - Script changes (`common/`, `events/`) — no doc update needed unless they change a project-specific convention worth capturing in `.claude/rules/scripting.md`.
 - New reusable pattern established (e.g. first naming convention for a folder) — record it in the matching `.claude/rules/*.md` file so the next task doesn't reinvent it.
-- Planning files (`planning/issues/`, `planning/requests/`) — updated by the `/issue`, `/request`, `/plan`, `/build` skills, not manually.
+- Work-tracking records — the workspec, its `## Plan`, and the activity trail — live on the **maestro board** and are updated by the `/maestro-task`, `/maestro-scope`, `/maestro-build` (and `/maestro-auto`, `/maestro-vibe`) skills via the maestro MCP, not by hand. `planning/` no longer tracks open work (see `CLAUDE.md`).
 
 ## Rules
 

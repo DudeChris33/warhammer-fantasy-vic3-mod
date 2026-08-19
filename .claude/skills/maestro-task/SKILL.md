@@ -195,6 +195,27 @@ in the spec where it arises, not invented meta syntax.
 `/maestro-scope` appends its `## Plan` below this, at the same level as
 `## Spec`, and keeps the human block true as understanding changes.
 
+## This project (Warhammer Fantasy / Victoria 3)
+
+This repo is a Victoria 3 total-conversion mod — Clausewitz script (`.txt`), PDX
+GUI (`.gui`), localization (`.yml`) — and multiplayer-synchronized. `CLAUDE.md`
+and `.claude/rules/` are the authority; a few things shape every workspec filed
+here, so fold them into the spec's Investigation while exploring:
+
+- **Confirm the engine supports it first.** Every effect, trigger, modifier,
+  event target, on_action or custom-loc key a request assumes must exist in the
+  matching `docs/*.log` (read-only game dumps) — if it doesn't, say so in the
+  spec rather than filing an impossible ask.
+- **Localization impact.** Any new user-facing text needs a
+  `localization/english/` key (or `localization/replace/english/` for a vanilla
+  override) — name the keys in the spec.
+- **Determinism.** Anything that could desync a multiplayer game (non-seeded
+  randomness, debug-only effects) is a `Kind: bug` of the highest severity — flag
+  it explicitly.
+- **A bug's reproduction is a game observation.** There is no offline validator,
+  so capture the exact `logs/error.log` line if there is one, or the observed
+  in-game behavior, in the spec.
+
 ## Rules
 
 - Do NOT implement anything. Exploration and documentation only.

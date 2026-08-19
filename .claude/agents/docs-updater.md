@@ -28,7 +28,7 @@ Update Warhammer Fantasy Overhaul documentation to reflect recent script/content
 - `CLAUDE.md` — project map
 - `.claude/rules/core.md`, `scripting.md`, `localization.md`, `interface.md`, `testing.md`, `docs.md` — per-domain conventions
 - `docs/*.log` — read-only, game-generated script reference
-- `planning/` — issue/request/plan tracking, updated by the skills, not this agent
+- Work tracking lives on the **maestro board** (via the maestro MCP), updated by the `/maestro-*` skills — not this agent, and not `planning/` (which now holds only review-panel targets, backlog/rejected notes, and gitignored `.cache/` scratch)
 
 ## Rules
 

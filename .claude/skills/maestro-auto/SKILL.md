@@ -440,6 +440,25 @@ Then:
 
 Nothing is `done` mid-run: until the sweep runs, the truth is "built".
 
+## This project (Warhammer Fantasy / Victoria 3)
+
+Multiplayer-synchronized Victoria 3 mod with **no offline test suite** (see
+`maestro-scope`'s and `maestro-build`'s project sections, which the scoping and
+build sub-agents follow). Two things the orchestrator owns at batch level:
+
+- **The closing "run" is the user's, not yours.** For script/loc/gui/events
+  changes verification is a game load the user performs — mod in Victoria 3,
+  `logs/error.log` clean of this mod's files (`.claude/rules/testing.md`) — so
+  there is no auto-runnable closing suite and no green baseline; hand the batch's
+  load-and-check to the user and record the result. `map_data/` items carry the
+  auto-runnable offline lint (`sources.py --verify`, `validate_map.py`,
+  `run_fixture.py --check`), and a visual map change is only done once the user
+  accepts the rendered PNG — scope those `full` with the render as evidence.
+- **Run the post-build review once, after every branch has merged**: spawn
+  `docs-updater` (docs/rules from the batch diff) and `security-review`
+  (MP-desync + content-integrity audit) over the combined tree, and fold their
+  findings into the final report — the same review the old `/build` ran per item.
+
 ## Failure Policy
 
 - **A failed item does not fail the batch.** Post a blocker comment, leave it at
