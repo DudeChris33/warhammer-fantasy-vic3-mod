@@ -3,9 +3,16 @@
 | Field | Value |
 |-------|-------|
 | Type | request |
-| Status | planned |
+| Status | resolved |
 | Date | 2026-07-29 |
 | Priority | high |
+
+> **Resolved.** Both deliverables shipped: the Miller frame switch landed in
+> commit `44995ed` ("World map: switch the ingestion canvas to Miller
+> cylindrical"), and the downstream re-fits + regenerated artifacts were adopted
+> in `3d3d88e`. `canvas_frame.py` is Miller, every canvas-side control point was
+> migrated, and the plate-carrée-derived artifacts were regenerated. Frame params
+> of record: Y0=2142, band +74.9/−57.4. Filed to `planning/done/` on 2026-08-18.
 
 ## Description
 
