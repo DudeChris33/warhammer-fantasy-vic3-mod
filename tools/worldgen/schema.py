@@ -361,6 +361,88 @@ def load_inland_lakes(path: Path, canvas: tuple[int, int] | None = None) -> list
 
 
 # ---------------------------------------------------------------------------
+# Out-of-scope continents (the placeholder-cell seed list the label generator reads)
+# ---------------------------------------------------------------------------
+#
+# The map is rescoped to the Old World (board item #2207). Land the user did not
+# draw into ``sources/old_world_regions.png`` collapses to one impassable
+# placeholder cell per major continent; this hand-authored list names those
+# continents and seeds them. Like ``inland_lakes.json`` it is deliberate
+# geographic input — a seed is a guaranteed-interior pixel of the out-of-scope
+# component it claims — and, unlike a bitmap, is edited by hand and the generator
+# regenerated through it, never inferred from a regenerated layer.
+#
+# ``generate_state_labels.py`` labels the connected components of
+# ``land ∧ ¬in_scope``; each seed here CLAIMS the component it lands in, a
+# component claimed by two or more seeds is split geodesically between them
+# (Naggaroth/Lustria are one physical landmass), and small unclaimed components
+# fold into the nearest placeholder. A seed on water or on in-scope land, or an
+# unclaimed component above the audit floor, is a hard error — a forgotten
+# continent must be a deliberate config edit, never silently an island.
+
+@dataclass(frozen=True)
+class OutOfScopeContinent:
+    """One out-of-scope major landmass to collapse to a single placeholder cell.
+
+    ``seed`` is a guaranteed-interior land pixel (canvas px, integer) of the
+    out-of-scope component this entry claims — the same seed-pixel idiom as
+    :class:`InlandLake`, and for the same reason (a component index is not stable
+    across regenerations; an interior pixel is). ``name`` becomes the placeholder
+    cell's ``STATE_OOS_<NAME_UPPER>`` key and its localized display name.
+    """
+
+    name: str
+    seed: tuple[int, int]
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "OutOfScopeContinent":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        ctx = f"{ctx}({name})"
+        seed_raw = _require(d, "seed", ctx)
+        if (not isinstance(seed_raw, (list, tuple))) or len(seed_raw) != 2:
+            raise SchemaError(f"{ctx}.seed: expected an [x, y] pixel pair, got {seed_raw!r}")
+        sx = _as_int(seed_raw[0], f"{ctx}.seed[0]")
+        sy = _as_int(seed_raw[1], f"{ctx}.seed[1]")
+        if sx < 0 or sy < 0:
+            raise SchemaError(f"{ctx}.seed: pixel coords must be non-negative, got ({sx}, {sy})")
+        if canvas is not None:
+            cw, ch = canvas
+            if not (0 <= sx < cw and 0 <= sy < ch):
+                raise SchemaError(f"{ctx}.seed: ({sx}, {sy}) is outside the canvas {cw}x{ch}")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(name=name, seed=(sx, sy), note=note)
+
+
+def load_out_of_scope_continents(path: Path, canvas: tuple[int, int] | None = None
+                                 ) -> list[OutOfScopeContinent]:
+    """Load + validate the committed out-of-scope continent seed list.
+
+    Bounds-checks each seed against ``canvas`` when known and rejects a duplicate
+    name, exactly like :func:`load_inland_lakes`. **Unlike** that loader this one
+    preserves the file's authored order rather than sorting by name: the order is
+    the placeholder cells' numbering and presentation order (config order → label
+    ``n_in+1 .. n_in+M`` → the EDT tie-break's "lower placeholder index"), so it is
+    a meaningful, author-controlled sequence, not an incidental one.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    conts_raw = _require(data, "continents", ctx)
+    if not isinstance(conts_raw, list) or not conts_raw:
+        raise SchemaError(f"{ctx}.continents: expected a non-empty list")
+    conts = [OutOfScopeContinent.from_dict(c, f"{ctx}.continents[{i}]", canvas)
+             for i, c in enumerate(conts_raw)]
+    names = [c.name for c in conts]
+    dupes = {n for n in names if names.count(n) > 1}
+    if dupes:
+        raise SchemaError(f"{ctx}: duplicate continent names {sorted(dupes)}")
+    return conts
+
+
+# ---------------------------------------------------------------------------
 # States (the state-cell partition — land states and single-province sea zones)
 # ---------------------------------------------------------------------------
 
