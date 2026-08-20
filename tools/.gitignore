@@ -48,3 +48,16 @@ derived/*
 # generated composite, not third-party source art, so it travels with the repo.
 !derived/badlands_nehekhara_anchor_dot_warp_example.png
 
+# The remaining per-region anchor-dot renders plus the combined nine-zone
+# coverage render (all five parchment tiles composited on one canvas) — same
+# status as the two examples above: our own generated composites, not
+# third-party source art, so they travel with the repo. Explicit per-file lines
+# (not a glob) so the commit surface of derived/ stays name-pinned. All six are
+# regenerated — never hand-edited — by tools/render_anchor_dot_example.py
+# (--all), from the clean sources tools/inpaint_dot_markers.py re-derives out of
+# the user's marked dot crops in sources/dots/.
+!derived/bretonnia_anchor_dot_warp_example.png
+!derived/kislev_norsca_anchor_dot_warp_example.png
+!derived/dark_lands_anchor_dot_warp_example.png
+!derived/old_world_anchor_dot_warp_combined.png
+

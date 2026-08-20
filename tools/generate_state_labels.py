@@ -145,17 +145,21 @@ BOUNDARY_LAYER = "boundaries"
 #: Old World boundary network, one per-region tile placed by the paired-anchor-dot
 #: workflow. Each carries an intentional binary alpha mask (transparent = regions
 #: cut away), honoured as its contributing footprint (see ``extract_source_cells``
-#: and ``warp_cells``'s ``src_valid``), and a boundary precedence (110–113) above
-#: IE (100) and ``tww3_colored`` (95) so its lines win *inside its own footprint*
-#: only. NOTE 2026-08-17: their backing source files (and the Empire crop,
-#: imperial_provinces.png, since removed below) are currently missing from
-#: sources/ — the registrations are kept (not deleted) pending either their
-#: restoration or a replacement registration for claude_old_world_state_regions.png
-#: (the new unified marker-line source), which needs its own paired-anchor-dot fit
-#: before it can stand in — a whole-map frame_alias isn't possible because the
-#: master (tww3_old_world_mod_parchment.png) was never itself registered, only
-#: these per-region crops were (a whole-map fit is defeated by inconsistent
-#: regional scale, the same reason the crop workflow exists at all).
+#: and ``warp_cells``'s ``src_valid``). Their committed records carry a LIVE
+#: boundaries precedence only for dark_lands (113 — above IE's 100 and
+#: ``tww3_colored``'s 95, so its lines win inside its own footprint); bretonnia
+#: and kislev_norsca still carry the provisional placement value 5, so those two
+#: currently contribute BELOW IE wherever both cover. NOTE 2026-08-20: all five
+#: per-region crops (these three plus the empire and badlands_nehekhara tiles,
+#: not yet wired in here) exist in sources/ again, re-derived from the user's
+#: surviving marked dot crops by tools/inpaint_dot_markers.py. Wiring empire +
+#: badlands_nehekhara into BOUNDARY_SOURCES / OLD_WORLD_CROP_MIN_STATES and
+#: promoting the four inert precedences (5 -> live values) are deliberately
+#: deferred to board item #2207 — promotion means seed edits + record
+#: re-derives, and the legacy-fit records (bretonnia, kislev_norsca) would
+#: shrink to their dot hull + pad on a re-derive (fit_registration.py's
+#: hull-bounded lattice), so recovering their periphery needs edge dots from
+#: the user first.
 BOUNDARY_SOURCES = {
     "tww3_colored.png": "flat_colour",
     "tww3_ie_parchment.jpg": "ink_bridged",

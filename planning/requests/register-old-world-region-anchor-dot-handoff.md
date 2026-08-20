@@ -83,3 +83,38 @@ workflow. **Badlands + Nehekhara is the worked template — read these first:**
 * Holding out an interior dot can lower the residual (Badlands 17→16 dropped 39/112 to
   34/89 px) but leaves that feature positioned only by the thin-plate trend — it's a
   visual-verdict tradeoff, mine to call.
+
+---
+
+## Current state (2026-08-20, board item #2174 close-out)
+
+All six placed sources exist in `sources/` again — the five parchment region
+tiles (Empire, Bretonnia+Estalia+Tilea, Kislev+Norsca, Dark Lands,
+Badlands+Nehekhara) plus the northern relief crop
+(`start_warhammer_old_world_northern.png`) — re-derived from the surviving marked
+dot crops in `sources/dots/`. `sources.py --verify` and `run_fixture.py --check`
+are green; the manifest (`tools/SOURCES.md`) is reconciled and re-swept.
+
+Steps 5 and 6 of the workflow above are now **committed scripts**, not session code:
+
+* **Step 6 (clean source):** `python tools/inpaint_dot_markers.py --seed <stem>
+  --dots <path>` — exact-RGB marker detection, seed-landmark centroid cross-check
+  (wrong-file guard), dilated nearest-opaque-donor inpaint, alpha byte-identical,
+  zero-marker-px assert. `--diff-against <existing>` guards a re-derivation against
+  an already-accepted clean source. Two pre-convention crops (bretonnia, kislev)
+  use off-palette dot colours; the script samples the dot colour at the seed
+  landmark position as a fallback, still exact-RGB.
+* **Step 5 (render):** `python tools/render_anchor_dot_example.py --all` — warps
+  each clean source through its **committed** record (no re-fit) in the accepted
+  style, writing `tools/derived/<region>_anchor_dot_warp_example.png` plus the
+  combined nine-zone `old_world_anchor_dot_warp_combined.png`.
+
+**Legacy-fit caveat for any future re-derive.** `fit_registration.py`'s landmarks
+objective was rewritten (4580e9c) to bound the lattice to the dot hull + pad for
+≥4 landmarks. The bretonnia, kislev_norsca, dark_lands and start_warhammer records
+predate that (full-frame lattice) — **re-deriving them today changes their geometry
+and shrinks their footprint to the dot hull + pad.** Recovering the lost periphery
+needs edge dots from the user (a sourcing step). #2174 therefore ran **no** fit
+re-derives; it only re-derived the clean image bytes (which `objective: landmarks`
+never reads) and re-rendered through the unchanged records. Precedence promotion
+and the empire/badlands boundary wiring are board item #2207.
