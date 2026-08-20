@@ -6,11 +6,17 @@
 #   tools/.venv/Scripts/pip install -r tools/requirements.txt   # Windows
 #   tools/.venv/bin/pip install -r tools/requirements.txt        # POSIX
 #
-# Pinned to compatible ranges; the toolchain is deterministic for a fixed
-# stack + fixed SEED (see tools/config/map_config.py).
+# The toolchain is deterministic for a fixed stack + fixed SEED (see
+# tools/config/map_config.py).
+#
+# numpy/Pillow were compatible ranges until 2026-08-20; now exact-pinned like
+# scipy/scikit-image below, for the same reason: the EXACT-PINNED policy only
+# protects regeneration reproducibility if the whole stack is pinned, and a
+# venv rebuild on a fresh machine (this one arrived via a device migration)
+# must land on the bytes the goldens were recorded against.
 
-Pillow>=10,<13
-numpy>=1.26,<3
+Pillow==12.3.0
+numpy==2.2.6
 
 # Added for the source-driven ingestion stage (S2/S3): reprojection
 # (control-point warp fields, coordinate resampling), land/sea segmentation
@@ -32,6 +38,7 @@ numpy>=1.26,<3
 # static files, identical on every client); this pin protects *regeneration*
 # reproducibility. Resolves the S1 security-review INFO item. Bump deliberately,
 # then re-run run_fixture.py --update and review the golden diff.
-# Stack: numpy 2.2.6, Pillow 12.3.0, Python 3.10.7.
+# Stack: numpy 2.2.6, Pillow 12.3.0, Python 3.10.7 (goldens re-verified
+# byte-exact on Python 3.10.11 after the 2026-08-20 venv rebuild).
 scipy==1.15.3
 scikit-image==0.25.2
