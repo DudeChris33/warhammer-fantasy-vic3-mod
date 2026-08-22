@@ -36,12 +36,16 @@ change a committed bitmap fails here. Refreshing a source after an *intentional*
 change is the explicit `python tools/worldgen/sources.py --update-manifest`
 action, never a side effect of a generator run.
 
-`map_data/heightmap.png`, `map_data/rivers.png` and
-`tools/derived/state_labels.png` are generated, not hand-authored: after an
+`map_data/heightmap.png`, `map_data/rivers.png`,
+`tools/derived/state_labels.png` and `tools/derived/sea_zones.png` (+
+`tools/derived/sea_zones_index.json`) are generated, not hand-authored: after an
 intentional source/LUT/registration/`tools/config/inland_lakes.json` change,
 regenerate them with `python tools/generate_heightmap.py`, `python
-tools/generate_rivers.py` and `python tools/generate_state_labels.py`, and
-re-run the checks above before committing.
+tools/generate_rivers.py`, `python tools/generate_state_labels.py` and `python
+tools/generate_sea_zones.py`, and re-run the checks above before committing.
+`generate_sea_zones.py` is decoupled from the land cut — it reads the committed
+`land_sea_mask.png` and the hand-drawn purple boundary source directly, and is
+not wired into `state_labels.png`.
 `--labels` is only meaningful once the state-label layer exists; `validate_map.py`
 with no flag needs `map_data/provinces.png`, which arrives in S3b.
 
@@ -64,7 +68,10 @@ against committed synthetic fixtures, independent of the real `sources/`:
 compositing and river rasterization; `tools/fixtures/boundary/` covers the
 boundary path (local-contrast ink, complement labelling, the `frame_alias` warp,
 precedence stacking, mask intersection, nearest-label fill, density
-reconciliation and sea zones).
+reconciliation and sea zones). It also self-checks `worldgen/sea_zones.py`
+in isolation (no golden fixture): a purple line drawn in the water splits it
+into zones, a purple mark drawn on land is ignored, every water pixel ends up
+labelled and no land pixel does, and two runs are byte-identical.
 
 ## Regression rule
 
