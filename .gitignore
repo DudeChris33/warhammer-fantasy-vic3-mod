@@ -38,3 +38,6 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+
+# maestro skills scratch copies of workspecs
+planning/.cache/
