@@ -947,6 +947,31 @@ def _selfcheck_rivers() -> None:
         raise AssertionError("rivers must reject a sea mouth that never reaches water")
 
 
+def _selfcheck_sea_zones() -> None:
+    """Drawn sea-zone extraction (worldgen.sea_zones), in isolation (no golden).
+
+    Pins the property generate_sea_zones.py relies on: a purple line drawn *in
+    the water* splits it into separate zones, a purple mark drawn *on land* does
+    not, every water pixel ends up labelled and no land pixel does, and two runs
+    are byte-identical.
+    """
+    from worldgen import sea_zones as sz
+
+    H, W = 16, 32
+    land = np.zeros((H, W), dtype=bool)
+    land[:, 8:12] = True                     # a vertical land strip: west + east water
+    drawn = np.full((H, W, 3), 180, dtype=np.uint8)
+    drawn[:, 22] = (127, 0, 255)             # purple divider across the east water
+    drawn[8, 9] = (127, 0, 255)              # a purple mark on land — must not split water
+
+    zones = sz.extract(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
+    assert int(zones.max()) == 3, f"west + (east split in two) = 3 zones, got {zones.max()}"
+    assert (zones[~land] > 0).all(), "every water pixel must be labelled"
+    assert (zones[land] == 0).all(), "no land pixel may be labelled"
+    z2 = sz.extract(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
+    assert np.array_equal(zones, z2), "two runs must be byte-identical"
+
+
 def _selfcheck_composite() -> None:
     """Precedence resolution + tie rejection for worldgen.composite."""
     shape = (4, 4)
@@ -1103,6 +1128,8 @@ def run_check() -> int:
     print("rivers: rasterize + topology-validation self-check passed.")
     _selfcheck_marker()
     print("marker: border-markup extraction (rivers in, roads ignored) self-check passed.")
+    _selfcheck_sea_zones()
+    print("sea_zones: drawn-line extraction (in-water splits, land marks ignored) self-check passed.")
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
 

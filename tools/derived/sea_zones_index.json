@@ -1,0 +1,1089 @@
+{
+ "canvas": [
+  8192,
+  3616
+ ],
+ "sea_zones": 154,
+ "id_start": 3000,
+ "source": "terraqueous_globe_reprojected - sea_zones.png",
+ "cells": [
+  {
+   "label": 1,
+   "key": "STATE_SEA_0001",
+   "id": 3000,
+   "area": 885057,
+   "coastal": true
+  },
+  {
+   "label": 2,
+   "key": "STATE_SEA_0002",
+   "id": 3001,
+   "area": 56067,
+   "coastal": true
+  },
+  {
+   "label": 3,
+   "key": "STATE_SEA_0003",
+   "id": 3002,
+   "area": 442662,
+   "coastal": false
+  },
+  {
+   "label": 4,
+   "key": "STATE_SEA_0004",
+   "id": 3003,
+   "area": 77842,
+   "coastal": true
+  },
+  {
+   "label": 5,
+   "key": "STATE_SEA_0005",
+   "id": 3004,
+   "area": 239155,
+   "coastal": false
+  },
+  {
+   "label": 6,
+   "key": "STATE_SEA_0006",
+   "id": 3005,
+   "area": 124236,
+   "coastal": true
+  },
+  {
+   "label": 7,
+   "key": "STATE_SEA_0007",
+   "id": 3006,
+   "area": 46785,
+   "coastal": true
+  },
+  {
+   "label": 8,
+   "key": "STATE_SEA_0008",
+   "id": 3007,
+   "area": 153385,
+   "coastal": true
+  },
+  {
+   "label": 9,
+   "key": "STATE_SEA_0009",
+   "id": 3008,
+   "area": 3899,
+   "coastal": true
+  },
+  {
+   "label": 10,
+   "key": "STATE_SEA_0010",
+   "id": 3009,
+   "area": 11486,
+   "coastal": true
+  },
+  {
+   "label": 11,
+   "key": "STATE_SEA_0011",
+   "id": 3010,
+   "area": 967783,
+   "coastal": false
+  },
+  {
+   "label": 12,
+   "key": "STATE_SEA_0012",
+   "id": 3011,
+   "area": 2029,
+   "coastal": true
+  },
+  {
+   "label": 13,
+   "key": "STATE_SEA_0013",
+   "id": 3012,
+   "area": 29549,
+   "coastal": true
+  },
+  {
+   "label": 14,
+   "key": "STATE_SEA_0014",
+   "id": 3013,
+   "area": 2396,
+   "coastal": true
+  },
+  {
+   "label": 15,
+   "key": "STATE_SEA_0015",
+   "id": 3014,
+   "area": 69699,
+   "coastal": true
+  },
+  {
+   "label": 16,
+   "key": "STATE_SEA_0016",
+   "id": 3015,
+   "area": 2251,
+   "coastal": true
+  },
+  {
+   "label": 17,
+   "key": "STATE_SEA_0017",
+   "id": 3016,
+   "area": 65323,
+   "coastal": true
+  },
+  {
+   "label": 18,
+   "key": "STATE_SEA_0018",
+   "id": 3017,
+   "area": 20651,
+   "coastal": true
+  },
+  {
+   "label": 19,
+   "key": "STATE_SEA_0019",
+   "id": 3018,
+   "area": 2604,
+   "coastal": true
+  },
+  {
+   "label": 20,
+   "key": "STATE_SEA_0020",
+   "id": 3019,
+   "area": 128194,
+   "coastal": true
+  },
+  {
+   "label": 21,
+   "key": "STATE_SEA_0021",
+   "id": 3020,
+   "area": 1817,
+   "coastal": true
+  },
+  {
+   "label": 22,
+   "key": "STATE_SEA_0022",
+   "id": 3021,
+   "area": 4009,
+   "coastal": true
+  },
+  {
+   "label": 23,
+   "key": "STATE_SEA_0023",
+   "id": 3022,
+   "area": 20997,
+   "coastal": true
+  },
+  {
+   "label": 24,
+   "key": "STATE_SEA_0024",
+   "id": 3023,
+   "area": 1844,
+   "coastal": true
+  },
+  {
+   "label": 25,
+   "key": "STATE_SEA_0025",
+   "id": 3024,
+   "area": 8252,
+   "coastal": true
+  },
+  {
+   "label": 26,
+   "key": "STATE_SEA_0026",
+   "id": 3025,
+   "area": 6888,
+   "coastal": true
+  },
+  {
+   "label": 27,
+   "key": "STATE_SEA_0027",
+   "id": 3026,
+   "area": 141170,
+   "coastal": false
+  },
+  {
+   "label": 28,
+   "key": "STATE_SEA_0028",
+   "id": 3027,
+   "area": 2367,
+   "coastal": true
+  },
+  {
+   "label": 29,
+   "key": "STATE_SEA_0029",
+   "id": 3028,
+   "area": 44736,
+   "coastal": false
+  },
+  {
+   "label": 30,
+   "key": "STATE_SEA_0030",
+   "id": 3029,
+   "area": 1908,
+   "coastal": true
+  },
+  {
+   "label": 31,
+   "key": "STATE_SEA_0031",
+   "id": 3030,
+   "area": 24128,
+   "coastal": false
+  },
+  {
+   "label": 32,
+   "key": "STATE_SEA_0032",
+   "id": 3031,
+   "area": 2527,
+   "coastal": true
+  },
+  {
+   "label": 33,
+   "key": "STATE_SEA_0033",
+   "id": 3032,
+   "area": 75891,
+   "coastal": true
+  },
+  {
+   "label": 34,
+   "key": "STATE_SEA_0034",
+   "id": 3033,
+   "area": 980,
+   "coastal": true
+  },
+  {
+   "label": 35,
+   "key": "STATE_SEA_0035",
+   "id": 3034,
+   "area": 19552,
+   "coastal": true
+  },
+  {
+   "label": 36,
+   "key": "STATE_SEA_0036",
+   "id": 3035,
+   "area": 6191,
+   "coastal": true
+  },
+  {
+   "label": 37,
+   "key": "STATE_SEA_0037",
+   "id": 3036,
+   "area": 32364,
+   "coastal": true
+  },
+  {
+   "label": 38,
+   "key": "STATE_SEA_0038",
+   "id": 3037,
+   "area": 188203,
+   "coastal": false
+  },
+  {
+   "label": 39,
+   "key": "STATE_SEA_0039",
+   "id": 3038,
+   "area": 2370,
+   "coastal": true
+  },
+  {
+   "label": 40,
+   "key": "STATE_SEA_0040",
+   "id": 3039,
+   "area": 526,
+   "coastal": true
+  },
+  {
+   "label": 41,
+   "key": "STATE_SEA_0041",
+   "id": 3040,
+   "area": 38965,
+   "coastal": true
+  },
+  {
+   "label": 42,
+   "key": "STATE_SEA_0042",
+   "id": 3041,
+   "area": 57031,
+   "coastal": true
+  },
+  {
+   "label": 43,
+   "key": "STATE_SEA_0043",
+   "id": 3042,
+   "area": 17524,
+   "coastal": true
+  },
+  {
+   "label": 44,
+   "key": "STATE_SEA_0044",
+   "id": 3043,
+   "area": 1749,
+   "coastal": true
+  },
+  {
+   "label": 45,
+   "key": "STATE_SEA_0045",
+   "id": 3044,
+   "area": 751530,
+   "coastal": false
+  },
+  {
+   "label": 46,
+   "key": "STATE_SEA_0046",
+   "id": 3045,
+   "area": 1428,
+   "coastal": true
+  },
+  {
+   "label": 47,
+   "key": "STATE_SEA_0047",
+   "id": 3046,
+   "area": 33219,
+   "coastal": true
+  },
+  {
+   "label": 48,
+   "key": "STATE_SEA_0048",
+   "id": 3047,
+   "area": 28179,
+   "coastal": true
+  },
+  {
+   "label": 49,
+   "key": "STATE_SEA_0049",
+   "id": 3048,
+   "area": 2115,
+   "coastal": true
+  },
+  {
+   "label": 50,
+   "key": "STATE_SEA_0050",
+   "id": 3049,
+   "area": 57656,
+   "coastal": true
+  },
+  {
+   "label": 51,
+   "key": "STATE_SEA_0051",
+   "id": 3050,
+   "area": 39986,
+   "coastal": true
+  },
+  {
+   "label": 52,
+   "key": "STATE_SEA_0052",
+   "id": 3051,
+   "area": 26413,
+   "coastal": true
+  },
+  {
+   "label": 53,
+   "key": "STATE_SEA_0053",
+   "id": 3052,
+   "area": 45945,
+   "coastal": true
+  },
+  {
+   "label": 54,
+   "key": "STATE_SEA_0054",
+   "id": 3053,
+   "area": 12150,
+   "coastal": true
+  },
+  {
+   "label": 55,
+   "key": "STATE_SEA_0055",
+   "id": 3054,
+   "area": 6735,
+   "coastal": true
+  },
+  {
+   "label": 56,
+   "key": "STATE_SEA_0056",
+   "id": 3055,
+   "area": 261723,
+   "coastal": false
+  },
+  {
+   "label": 57,
+   "key": "STATE_SEA_0057",
+   "id": 3056,
+   "area": 2876,
+   "coastal": true
+  },
+  {
+   "label": 58,
+   "key": "STATE_SEA_0058",
+   "id": 3057,
+   "area": 67534,
+   "coastal": false
+  },
+  {
+   "label": 59,
+   "key": "STATE_SEA_0059",
+   "id": 3058,
+   "area": 27411,
+   "coastal": true
+  },
+  {
+   "label": 60,
+   "key": "STATE_SEA_0060",
+   "id": 3059,
+   "area": 27321,
+   "coastal": true
+  },
+  {
+   "label": 61,
+   "key": "STATE_SEA_0061",
+   "id": 3060,
+   "area": 2257,
+   "coastal": true
+  },
+  {
+   "label": 62,
+   "key": "STATE_SEA_0062",
+   "id": 3061,
+   "area": 27750,
+   "coastal": true
+  },
+  {
+   "label": 63,
+   "key": "STATE_SEA_0063",
+   "id": 3062,
+   "area": 46439,
+   "coastal": true
+  },
+  {
+   "label": 64,
+   "key": "STATE_SEA_0064",
+   "id": 3063,
+   "area": 1836,
+   "coastal": false
+  },
+  {
+   "label": 65,
+   "key": "STATE_SEA_0065",
+   "id": 3064,
+   "area": 11170,
+   "coastal": true
+  },
+  {
+   "label": 66,
+   "key": "STATE_SEA_0066",
+   "id": 3065,
+   "area": 60010,
+   "coastal": true
+  },
+  {
+   "label": 67,
+   "key": "STATE_SEA_0067",
+   "id": 3066,
+   "area": 52948,
+   "coastal": true
+  },
+  {
+   "label": 68,
+   "key": "STATE_SEA_0068",
+   "id": 3067,
+   "area": 98316,
+   "coastal": true
+  },
+  {
+   "label": 69,
+   "key": "STATE_SEA_0069",
+   "id": 3068,
+   "area": 58189,
+   "coastal": true
+  },
+  {
+   "label": 70,
+   "key": "STATE_SEA_0070",
+   "id": 3069,
+   "area": 1758463,
+   "coastal": false
+  },
+  {
+   "label": 71,
+   "key": "STATE_SEA_0071",
+   "id": 3070,
+   "area": 50396,
+   "coastal": true
+  },
+  {
+   "label": 72,
+   "key": "STATE_SEA_0072",
+   "id": 3071,
+   "area": 21341,
+   "coastal": true
+  },
+  {
+   "label": 73,
+   "key": "STATE_SEA_0073",
+   "id": 3072,
+   "area": 20426,
+   "coastal": true
+  },
+  {
+   "label": 74,
+   "key": "STATE_SEA_0074",
+   "id": 3073,
+   "area": 4037,
+   "coastal": true
+  },
+  {
+   "label": 75,
+   "key": "STATE_SEA_0075",
+   "id": 3074,
+   "area": 5916,
+   "coastal": false
+  },
+  {
+   "label": 76,
+   "key": "STATE_SEA_0076",
+   "id": 3075,
+   "area": 28108,
+   "coastal": true
+  },
+  {
+   "label": 77,
+   "key": "STATE_SEA_0077",
+   "id": 3076,
+   "area": 42695,
+   "coastal": true
+  },
+  {
+   "label": 78,
+   "key": "STATE_SEA_0078",
+   "id": 3077,
+   "area": 43069,
+   "coastal": true
+  },
+  {
+   "label": 79,
+   "key": "STATE_SEA_0079",
+   "id": 3078,
+   "area": 231600,
+   "coastal": false
+  },
+  {
+   "label": 80,
+   "key": "STATE_SEA_0080",
+   "id": 3079,
+   "area": 1648,
+   "coastal": true
+  },
+  {
+   "label": 81,
+   "key": "STATE_SEA_0081",
+   "id": 3080,
+   "area": 254468,
+   "coastal": false
+  },
+  {
+   "label": 82,
+   "key": "STATE_SEA_0082",
+   "id": 3081,
+   "area": 33131,
+   "coastal": true
+  },
+  {
+   "label": 83,
+   "key": "STATE_SEA_0083",
+   "id": 3082,
+   "area": 42092,
+   "coastal": true
+  },
+  {
+   "label": 84,
+   "key": "STATE_SEA_0084",
+   "id": 3083,
+   "area": 2498,
+   "coastal": true
+  },
+  {
+   "label": 85,
+   "key": "STATE_SEA_0085",
+   "id": 3084,
+   "area": 51185,
+   "coastal": true
+  },
+  {
+   "label": 86,
+   "key": "STATE_SEA_0086",
+   "id": 3085,
+   "area": 89783,
+   "coastal": false
+  },
+  {
+   "label": 87,
+   "key": "STATE_SEA_0087",
+   "id": 3086,
+   "area": 27495,
+   "coastal": false
+  },
+  {
+   "label": 88,
+   "key": "STATE_SEA_0088",
+   "id": 3087,
+   "area": 7902,
+   "coastal": false
+  },
+  {
+   "label": 89,
+   "key": "STATE_SEA_0089",
+   "id": 3088,
+   "area": 19189,
+   "coastal": true
+  },
+  {
+   "label": 90,
+   "key": "STATE_SEA_0090",
+   "id": 3089,
+   "area": 37487,
+   "coastal": true
+  },
+  {
+   "label": 91,
+   "key": "STATE_SEA_0091",
+   "id": 3090,
+   "area": 46358,
+   "coastal": true
+  },
+  {
+   "label": 92,
+   "key": "STATE_SEA_0092",
+   "id": 3091,
+   "area": 7282,
+   "coastal": true
+  },
+  {
+   "label": 93,
+   "key": "STATE_SEA_0093",
+   "id": 3092,
+   "area": 72029,
+   "coastal": true
+  },
+  {
+   "label": 94,
+   "key": "STATE_SEA_0094",
+   "id": 3093,
+   "area": 38817,
+   "coastal": true
+  },
+  {
+   "label": 95,
+   "key": "STATE_SEA_0095",
+   "id": 3094,
+   "area": 9023,
+   "coastal": false
+  },
+  {
+   "label": 96,
+   "key": "STATE_SEA_0096",
+   "id": 3095,
+   "area": 14684,
+   "coastal": true
+  },
+  {
+   "label": 97,
+   "key": "STATE_SEA_0097",
+   "id": 3096,
+   "area": 25580,
+   "coastal": true
+  },
+  {
+   "label": 98,
+   "key": "STATE_SEA_0098",
+   "id": 3097,
+   "area": 24599,
+   "coastal": true
+  },
+  {
+   "label": 99,
+   "key": "STATE_SEA_0099",
+   "id": 3098,
+   "area": 38940,
+   "coastal": true
+  },
+  {
+   "label": 100,
+   "key": "STATE_SEA_0100",
+   "id": 3099,
+   "area": 16220,
+   "coastal": false
+  },
+  {
+   "label": 101,
+   "key": "STATE_SEA_0101",
+   "id": 3100,
+   "area": 40012,
+   "coastal": true
+  },
+  {
+   "label": 102,
+   "key": "STATE_SEA_0102",
+   "id": 3101,
+   "area": 35516,
+   "coastal": true
+  },
+  {
+   "label": 103,
+   "key": "STATE_SEA_0103",
+   "id": 3102,
+   "area": 11444,
+   "coastal": true
+  },
+  {
+   "label": 104,
+   "key": "STATE_SEA_0104",
+   "id": 3103,
+   "area": 55380,
+   "coastal": true
+  },
+  {
+   "label": 105,
+   "key": "STATE_SEA_0105",
+   "id": 3104,
+   "area": 99683,
+   "coastal": true
+  },
+  {
+   "label": 106,
+   "key": "STATE_SEA_0106",
+   "id": 3105,
+   "area": 860703,
+   "coastal": false
+  },
+  {
+   "label": 107,
+   "key": "STATE_SEA_0107",
+   "id": 3106,
+   "area": 1761,
+   "coastal": true
+  },
+  {
+   "label": 108,
+   "key": "STATE_SEA_0108",
+   "id": 3107,
+   "area": 37154,
+   "coastal": true
+  },
+  {
+   "label": 109,
+   "key": "STATE_SEA_0109",
+   "id": 3108,
+   "area": 17801,
+   "coastal": true
+  },
+  {
+   "label": 110,
+   "key": "STATE_SEA_0110",
+   "id": 3109,
+   "area": 42009,
+   "coastal": true
+  },
+  {
+   "label": 111,
+   "key": "STATE_SEA_0111",
+   "id": 3110,
+   "area": 773365,
+   "coastal": false
+  },
+  {
+   "label": 112,
+   "key": "STATE_SEA_0112",
+   "id": 3111,
+   "area": 1356218,
+   "coastal": false
+  },
+  {
+   "label": 113,
+   "key": "STATE_SEA_0113",
+   "id": 3112,
+   "area": 9677,
+   "coastal": false
+  },
+  {
+   "label": 114,
+   "key": "STATE_SEA_0114",
+   "id": 3113,
+   "area": 24008,
+   "coastal": true
+  },
+  {
+   "label": 115,
+   "key": "STATE_SEA_0115",
+   "id": 3114,
+   "area": 50125,
+   "coastal": true
+  },
+  {
+   "label": 116,
+   "key": "STATE_SEA_0116",
+   "id": 3115,
+   "area": 59383,
+   "coastal": true
+  },
+  {
+   "label": 117,
+   "key": "STATE_SEA_0117",
+   "id": 3116,
+   "area": 10226,
+   "coastal": false
+  },
+  {
+   "label": 118,
+   "key": "STATE_SEA_0118",
+   "id": 3117,
+   "area": 52433,
+   "coastal": true
+  },
+  {
+   "label": 119,
+   "key": "STATE_SEA_0119",
+   "id": 3118,
+   "area": 1217130,
+   "coastal": false
+  },
+  {
+   "label": 120,
+   "key": "STATE_SEA_0120",
+   "id": 3119,
+   "area": 384168,
+   "coastal": false
+  },
+  {
+   "label": 121,
+   "key": "STATE_SEA_0121",
+   "id": 3120,
+   "area": 24234,
+   "coastal": true
+  },
+  {
+   "label": 122,
+   "key": "STATE_SEA_0122",
+   "id": 3121,
+   "area": 36286,
+   "coastal": true
+  },
+  {
+   "label": 123,
+   "key": "STATE_SEA_0123",
+   "id": 3122,
+   "area": 34784,
+   "coastal": true
+  },
+  {
+   "label": 124,
+   "key": "STATE_SEA_0124",
+   "id": 3123,
+   "area": 1113,
+   "coastal": true
+  },
+  {
+   "label": 125,
+   "key": "STATE_SEA_0125",
+   "id": 3124,
+   "area": 47098,
+   "coastal": true
+  },
+  {
+   "label": 126,
+   "key": "STATE_SEA_0126",
+   "id": 3125,
+   "area": 5230,
+   "coastal": true
+  },
+  {
+   "label": 127,
+   "key": "STATE_SEA_0127",
+   "id": 3126,
+   "area": 35994,
+   "coastal": true
+  },
+  {
+   "label": 128,
+   "key": "STATE_SEA_0128",
+   "id": 3127,
+   "area": 35771,
+   "coastal": true
+  },
+  {
+   "label": 129,
+   "key": "STATE_SEA_0129",
+   "id": 3128,
+   "area": 3354,
+   "coastal": true
+  },
+  {
+   "label": 130,
+   "key": "STATE_SEA_0130",
+   "id": 3129,
+   "area": 28548,
+   "coastal": true
+  },
+  {
+   "label": 131,
+   "key": "STATE_SEA_0131",
+   "id": 3130,
+   "area": 92722,
+   "coastal": true
+  },
+  {
+   "label": 132,
+   "key": "STATE_SEA_0132",
+   "id": 3131,
+   "area": 14538,
+   "coastal": true
+  },
+  {
+   "label": 133,
+   "key": "STATE_SEA_0133",
+   "id": 3132,
+   "area": 48781,
+   "coastal": false
+  },
+  {
+   "label": 134,
+   "key": "STATE_SEA_0134",
+   "id": 3133,
+   "area": 11830,
+   "coastal": true
+  },
+  {
+   "label": 135,
+   "key": "STATE_SEA_0135",
+   "id": 3134,
+   "area": 42821,
+   "coastal": true
+  },
+  {
+   "label": 136,
+   "key": "STATE_SEA_0136",
+   "id": 3135,
+   "area": 34452,
+   "coastal": true
+  },
+  {
+   "label": 137,
+   "key": "STATE_SEA_0137",
+   "id": 3136,
+   "area": 45123,
+   "coastal": true
+  },
+  {
+   "label": 138,
+   "key": "STATE_SEA_0138",
+   "id": 3137,
+   "area": 12099,
+   "coastal": true
+  },
+  {
+   "label": 139,
+   "key": "STATE_SEA_0139",
+   "id": 3138,
+   "area": 982800,
+   "coastal": false
+  },
+  {
+   "label": 140,
+   "key": "STATE_SEA_0140",
+   "id": 3139,
+   "area": 35650,
+   "coastal": true
+  },
+  {
+   "label": 141,
+   "key": "STATE_SEA_0141",
+   "id": 3140,
+   "area": 5988,
+   "coastal": true
+  },
+  {
+   "label": 142,
+   "key": "STATE_SEA_0142",
+   "id": 3141,
+   "area": 33282,
+   "coastal": true
+  },
+  {
+   "label": 143,
+   "key": "STATE_SEA_0143",
+   "id": 3142,
+   "area": 45658,
+   "coastal": true
+  },
+  {
+   "label": 144,
+   "key": "STATE_SEA_0144",
+   "id": 3143,
+   "area": 30076,
+   "coastal": true
+  },
+  {
+   "label": 145,
+   "key": "STATE_SEA_0145",
+   "id": 3144,
+   "area": 56844,
+   "coastal": false
+  },
+  {
+   "label": 146,
+   "key": "STATE_SEA_0146",
+   "id": 3145,
+   "area": 29369,
+   "coastal": true
+  },
+  {
+   "label": 147,
+   "key": "STATE_SEA_0147",
+   "id": 3146,
+   "area": 67438,
+   "coastal": true
+  },
+  {
+   "label": 148,
+   "key": "STATE_SEA_0148",
+   "id": 3147,
+   "area": 1085092,
+   "coastal": false
+  },
+  {
+   "label": 149,
+   "key": "STATE_SEA_0149",
+   "id": 3148,
+   "area": 721370,
+   "coastal": false
+  },
+  {
+   "label": 150,
+   "key": "STATE_SEA_0150",
+   "id": 3149,
+   "area": 9760,
+   "coastal": false
+  },
+  {
+   "label": 151,
+   "key": "STATE_SEA_0151",
+   "id": 3150,
+   "area": 526041,
+   "coastal": false
+  },
+  {
+   "label": 152,
+   "key": "STATE_SEA_0152",
+   "id": 3151,
+   "area": 36130,
+   "coastal": true
+  },
+  {
+   "label": 153,
+   "key": "STATE_SEA_0153",
+   "id": 3152,
+   "area": 7213,
+   "coastal": false
+  },
+  {
+   "label": 154,
+   "key": "STATE_SEA_0154",
+   "id": 3153,
+   "area": 126139,
+   "coastal": true
+  }
+ ]
+}
