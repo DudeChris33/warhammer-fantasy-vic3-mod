@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
-"""S2 generator: the whole-world land/sea mask and 16-bit heightmap.
+"""S2 generator: the 16-bit heightmap, clamped to the committed land/sea mask.
 
 Pipeline::
 
     sources/terraqueous_globe.jpg  (SHA-256 verified)
-        -> denoise -> LUT classify        (elevation + land, at SOURCE res)
-        -> NE-II reproject                (to canvas res, blocked)
-        -> morphological cleanup
-        -> keep ocean + curated lakes,    (fill enclosed false water — rivers drawn
-           fill the rest of the water      in ocean-blue, flooded marshes — to land)
-                                          -> tools/derived/land_sea_mask.png
-        -> reproject at heightmap res
+        -> denoise -> LUT classify        (elevation field, at SOURCE res)
+        -> NE-II reproject at heightmap res
         -> + TW3 high-frequency relief    (inside its footprint, land only)
         -> encode + clamp to the mask     -> map_data/heightmap.png
 
-Two ordering decisions carry most of the quality:
+    tools/derived/land_sea_mask.png       (read as-is — the committed land/sea mask,
+        (the coastline authority)          produced by generate_coastline_mask.py from
+                                           the user's traced coastline in sources/.
+                                           This generator consumes the mask; it never
+                                           re-derives the shoreline — user decision,
+                                           2026-08-22: the traced coastline wins.)
+
+Two decisions carry most of the quality:
 
 **Classify before reprojecting.** The LUT runs on the 4000x3256 source (13 M px),
 not on the 16384x7232 target (118 M px). That is ~9x less work, and more
@@ -22,8 +24,8 @@ importantly it means the *elevation field* is what gets interpolated rather than
 the *colours* — bilinear between two swatch colours can land on a third swatch's
 colour and produce elevations that appear nowhere in the legend.
 
-**The mask, not the elevation, defines the coastline.** The mask is built once at
-canvas resolution and then forced onto the heightmap (nearest 2x, exact by
+**The mask, not the elevation, defines the coastline.** The committed mask is read
+at canvas resolution and then forced onto the heightmap (nearest 2x, exact by
 construction since the heightmap is exactly twice the canvas). Any land pixel is
 pushed above sea level and any sea pixel below it, so the heightmap shoreline can
 never contradict the mask that provinces.png will be cut from. Without that,
@@ -32,13 +34,8 @@ every such disagreement is a coastal province the engine renders underwater.
 
 Usage::
 
-    python tools/generate_heightmap.py                    # write mask + heightmap
-    python tools/generate_heightmap.py --mask-only         # skip the 16-bit heightmap
-    python tools/generate_heightmap.py --preview           # + downscaled PNGs for eyeballing
-    python tools/generate_heightmap.py --use-existing-mask # load tools/derived/land_sea_mask.png
-                                                            # as-is instead of deriving it from
-                                                            # source, and build the heightmap
-                                                            # from that (hand-painted mask)
+    python tools/generate_heightmap.py            # write map_data/heightmap.png
+    python tools/generate_heightmap.py --preview  # + downscaled PNGs for eyeballing
 """
 
 from __future__ import annotations
@@ -53,14 +50,13 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import composite, ingest, raster, reproject, segment, sources, schema  # noqa: E402
+from worldgen import ingest, raster, reproject, sources, schema  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
 MAP_DATA_DIR = REPO_ROOT / "map_data"
 LUT_PATH = TOOLS_DIR / "lut" / "terraqueous_elevation.json"
-INLAND_LAKES_PATH = TOOLS_DIR / "config" / "inland_lakes.json"
 
 TERRAQUEOUS = "terraqueous_globe.jpg"
 TWW3 = "tww3_map_stitched.png"
@@ -82,45 +78,6 @@ TWW3_DETAIL_M = 260.0
 
 #: Sigma (in canvas px) of the low-pass used to extract that detail.
 TWW3_DETAIL_SIGMA = 24.0
-
-#: Minimum area, in canvas pixels, for an island or inland water body to survive
-#: the final cleanup — and, since 2026-08-04, the **only** area despeckle in the
-#: pipeline (the latitude-blind source-side ``SOURCE_MIN_BLOB = 900`` was retired,
-#: because 900 source px is 3,617 canvas px at the equator but 13,828 at the top
-#: of the band, so one number there meant four different things).
-#:
-#: 256 px is a ~16x16 blob. It is deliberately **not** raised to the retired
-#: filter's equatorial equivalent, and that was tried and rejected on evidence:
-#:
-#:     threshold   land bodies   land %
-#:           256            93    36.57
-#:           900            53    36.61
-#:          1800            36    36.56     <- the old pipeline's effective value
-#:          3600            25    36.52
-#:
-#: 3,600 deletes 68 island groups while moving total land by 0.05%, and the ones
-#: it deletes are drawn, named features — the Devourer Islands, the Lumbria
-#: Archipelago, the Isles of Doom, the Isle of Dawn, Tol Elasor, the Stars
-#: Archipelago, the chain off Naggaroth. Even 1,800 (what the old two-stage
-#: pipeline effectively enforced) loses the Turtle Islands and the Sea of
-#: Serpents chain. The reference map draws these deliberately and the mod's own
-#: named-region requirements depend on them, so fidelity wins: the de-ink pass
-#: already removes lettering, which is what the retired source filter was really
-#: guarding against.
-CANVAS_MIN_BLOB = 256
-
-#: Tripwire fraction for the enclosed-water fill (``segment.keep_ocean_and_lakes``).
-#: That fill trusts "largest water component = the open ocean" and fills every
-#: other enclosed body to land unless it carries an ``inland_lakes.json`` seed. If
-#: any body it is about to fill exceeds this fraction of the ocean's own area the
-#: run aborts, on the reasoning that a drawn river or flooded marsh is never a
-#: meaningful fraction of the ocean — so a large second body means the ocean split
-#: (a land bridge, a future source change) and a real sea is about to vanish. The
-#: current worst case is the 14,261-px Marshes blob at 0.08% of the 18.6M-px
-#: ocean, so 2% is ~25x of headroom over anything legitimate while still tripping
-#: long before a second continent-sized sea could be erased.
-OCEAN_SPLIT_FRACTION = 0.02
-
 
 def log(msg: str, t0: float | None = None) -> None:
     stamp = f"  [{time.time() - t0:5.1f}s]" if t0 is not None else ""
@@ -369,15 +326,8 @@ def tww3_detail(regs, land_mask: np.ndarray, t0: float):
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--mask-only", action="store_true", help="stop after land_sea_mask.png")
     p.add_argument("--preview", action="store_true", help="also write downscaled preview PNGs")
-    p.add_argument("--use-existing-mask", action="store_true",
-                   help="load tools/derived/land_sea_mask.png as-is (e.g. hand-painted) "
-                        "instead of deriving it from source; incompatible with --mask-only")
     args = p.parse_args(argv)
-    if args.use_existing_mask and args.mask_only:
-        p.error("--use-existing-mask and --mask-only are mutually exclusive "
-                "(there is nothing left to do: the mask is already the input)")
 
     t0 = time.time()
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
@@ -399,127 +349,27 @@ def main(argv: list[str] | None = None) -> int:
     log(f"  anisotropy |sx/sy - 1| = {aniso:.5f} "
         f"({'isotropic, as a true NE-II rendering must be' if aniso < 0.01 else 'WARNING: not isotropic'})")
 
-    log("classifying the Terraqueous ramp...")
-    elev_src, land_src_f, _dist = terraqueous_fields(reg, elut, fit, t0)
+    log("classifying the Terraqueous elevation ramp...")
+    elev_src, _land_src, _dist = terraqueous_fields(reg, elut, fit, t0)
 
-    if args.use_existing_mask:
-        # The mask is a hand-authored input here, like a registration seed or
-        # inland_lakes.json — not something this run derives. elev_src above is
-        # still needed (the heightmap's elevation field), but the land/sea split
-        # comes from the committed file, untouched.
-        mask_path = DERIVED_DIR / "land_sea_mask.png"
-        log(f"loading existing mask {mask_path} (--use-existing-mask, skipping derivation)...")
-        land = raster.read_mask_png(mask_path)
-        if land.shape != (CANVAS_H, CANVAS_W):
-            raise SystemExit(
-                f"{mask_path}: expected {CANVAS_W}x{CANVAS_H}, got "
-                f"{land.shape[1]}x{land.shape[0]}"
-            )
-        log(f"  land {100 * land.mean():.2f}% of canvas", t0)
-        _report_polar_band(land, t0)
-        # Re-write in the canonical 1-bit encoding (round-trips exactly for an
-        # already-binary mask) so the committed file matches write_mask_png's format.
-        raster.write_mask_png(mask_path, land)
-    else:
-        log(f"reprojecting to canvas {CANVAS_W}x{CANVAS_H}...")
-        terra_land = ingest.reproject_plane(
-            reg, fit, land_src_f, CANVAS_W, CANVAS_H, block_rows=BLOCK_ROWS, order=1) > 0.5
-        log(f"  raw land fraction {100 * terra_land.mean():.2f}%", t0)
-
-        # --- coastline mosaic ------------------------------------------------
-        # Resolved by *layer* precedence, not the records' overall precedence: the
-        # Terraqueous globe is registered to sub-pixel accuracy and so owns the
-        # shoreline (coastline 90) even though the regional sources outrank it for
-        # boundaries and relief. Today it is the only layer that wins any pixel; the
-        # mosaic is here so adding a better-registered regional coastline later is a
-        # data change rather than a code change, and so the report says out loud
-        # which source actually decided each part of the world.
-        log("compositing the coastline layer...")
-        mosaic = composite.Mosaic((CANVAS_H, CANVAS_W))
-        mosaic.add(composite.Layer(
-            name=f"{TERRAQUEOUS} (NE-II)",
-            precedence=reg.precedence_for("coastline"),
-            data=terra_land,
-            valid=np.ones((CANVAS_H, CANVAS_W), dtype=bool),
-        ))
-        land_raw, covered = mosaic.resolve()
-        for line in mosaic.coverage_report():
-            print(line)
-        if not covered.all():
-            raise SystemExit("coastline mosaic left pixels uncovered — no source claims them")
-
-        log("cleaning the land/sea mask...")
-        pre = segment.mask_stats(land_raw, wrap_x=map_config.WRAP_X)
-        land = segment.clean_land_mask(land_raw, min_island_area=CANVAS_MIN_BLOB,
-                                       min_lake_area=CANVAS_MIN_BLOB,
-                                       close_radius=2, open_radius=2, wrap_x=map_config.WRAP_X)
-        stats = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
-        log(f"  land {100 * stats['land_fraction']:.2f}%  "
-            f"land bodies {stats['land_bodies']}  water bodies {stats['water_bodies']}", t0)
-        # The despeckle delta, reported rather than assumed: this is the whole
-        # measurement behind moving the threshold from source px to canvas px.
-        log(f"  despeckle at {CANVAS_MIN_BLOB:,} canvas px: land bodies "
-            f"{pre['land_bodies']} -> {stats['land_bodies']}, water bodies "
-            f"{pre['water_bodies']} -> {stats['water_bodies']}")
-
-        # --- keep the ocean + curated lakes, fill the rest of the enclosed water ---
-        # The classifier reads drawn rivers (ocean-blue) and flooded marshes as
-        # enclosed water bodies the map does not mean. Fill every enclosed body to
-        # land except a committed allowlist of genuine lakes/seas keyed by a stable
-        # interior seed pixel (config/inland_lakes.json); the open ocean is kept
-        # automatically as the single largest water component. This subsumes the
-        # sub-256 lake despeckle above (it fills every enclosed body regardless of
-        # size), while min_island_area — the archipelago-preserving island floor —
-        # is untouched.
-        lakes = schema.load_inland_lakes(INLAND_LAKES_PATH, canvas=(CANVAS_W, CANVAS_H))
-        on_land = [lk.name for lk in lakes if land[lk.seed[1], lk.seed[0]]]
-        if on_land:
-            raise SystemExit(
-                f"inland-lake seed(s) fell on land after cleanup: {on_land}. clean_land_mask's "
-                f"close/open runs first, so each seed must be re-measured against the freshly "
-                f"generated mask (tools/derived/land_sea_mask.png) before use — refusing to "
-                f"silently drop a kept lake."
-            )
-        land, keep_report = segment.keep_ocean_and_lakes(
-            land, [lk.seed for lk in lakes], wrap_x=map_config.WRAP_X, return_report=True)
-        after = segment.mask_stats(land, wrap_x=map_config.WRAP_X)
-        log(f"  inland water: kept the open ocean + {keep_report['kept_bodies']} curated bodies, "
-            f"filled {keep_report['filled_bodies']} enclosed bodies ({keep_report['filled_px']:,} px, "
-            f"{100 * keep_report['filled_px'] / land.size:.3f}% of canvas) to land", t0)
-        log(f"    water bodies {stats['water_bodies']} -> {after['water_bodies']}; "
-            f"land now {100 * after['land_fraction']:.2f}%  "
-            f"(kept: {', '.join(lk.name for lk in lakes)})")
-
-        # Tripwire (security review 2026-08-12): the fill trusts "largest water
-        # component = the open ocean". That holds today (one 18.6M-px ocean, the next
-        # body is the 14k-px Marshes blob), but if a future source change ever split
-        # the ocean into two large masses, the second would be silently filled to land
-        # unless a seed happened to sit in it. A body about to be filled that is any
-        # sizeable fraction of the ocean is never a drawn river or marsh — fail loudly.
-        largest_filled = keep_report["largest_filled_px"]
-        ocean_px = keep_report["ocean_px"]
-        if ocean_px and largest_filled > OCEAN_SPLIT_FRACTION * ocean_px:
-            raise SystemExit(
-                f"largest enclosed body about to be filled is {largest_filled:,} px, "
-                f"{100 * largest_filled / ocean_px:.1f}% of the {ocean_px:,}-px ocean "
-                f"(cap {100 * OCEAN_SPLIT_FRACTION:.0f}%). The ocean may have split into two "
-                f"components — add an inland_lakes.json seed for the second body if it is a real "
-                f"sea, or investigate the source change. Refusing to fill it silently."
-            )
-        log(f"    largest filled body {largest_filled:,} px "
-            f"({100 * largest_filled / ocean_px:.2f}% of the ocean; cap "
-            f"{100 * OCEAN_SPLIT_FRACTION:.0f}%) — the ocean is one component")
-
-        _report_polar_band(land, t0)
-        raster.write_mask_png(DERIVED_DIR / "land_sea_mask.png", land)
-        log(f"  wrote {DERIVED_DIR / 'land_sea_mask.png'}", t0)
+    # The land/sea split is the committed mask, produced by generate_coastline_mask.py
+    # from the user's traced coastline in sources/ — this generator consumes it and
+    # never re-derives the shoreline (user decision, 2026-08-22: the traced coastline
+    # wins). elev_src above is still needed for the heightmap's elevation field; only
+    # the land/sea classification it also computed is discarded in favour of the mask.
+    mask_path = DERIVED_DIR / "land_sea_mask.png"
+    log(f"loading the committed land/sea mask {mask_path}...")
+    land = raster.read_mask_png(mask_path)
+    if land.shape != (CANVAS_H, CANVAS_W):
+        raise SystemExit(
+            f"{mask_path}: expected {CANVAS_W}x{CANVAS_H}, got "
+            f"{land.shape[1]}x{land.shape[0]}"
+        )
+    log(f"  land {100 * land.mean():.2f}% of canvas", t0)
+    _report_polar_band(land, t0)
 
     if args.preview:
         _write_preview(land, DERIVED_DIR / "preview_land_sea.png")
-
-    if args.mask_only:
-        log("--mask-only: stopping before the heightmap.")
-        return 0
 
     log("building relief detail...")
     detail, detail_valid = tww3_detail(regs, land, t0)

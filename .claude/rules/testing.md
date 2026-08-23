@@ -36,13 +36,17 @@ change a committed bitmap fails here. Refreshing a source after an *intentional*
 change is the explicit `python tools/worldgen/sources.py --update-manifest`
 action, never a side effect of a generator run.
 
-`map_data/heightmap.png`, `map_data/rivers.png`,
+`tools/derived/land_sea_mask.png`, `map_data/heightmap.png`, `map_data/rivers.png`,
 `tools/derived/state_labels.png` and `tools/derived/sea_zones.png` (+
 `tools/derived/sea_zones_index.json`) are generated, not hand-authored: after an
-intentional source/LUT/registration/`tools/config/inland_lakes.json` change,
-regenerate them with `python tools/generate_heightmap.py`, `python
+intentional source/LUT/registration change, regenerate them with `python
+tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png`, which it
+flood-fills from the user's traced coastline in `sources/land_sea_mask.png`),
+`python tools/generate_heightmap.py` (which now *consumes* that mask — the old
+height-ramp mask derivation was deleted 2026-08-22), `python
 tools/generate_rivers.py`, `python tools/generate_state_labels.py` and `python
-tools/generate_sea_zones.py`, and re-run the checks above before committing.
+tools/generate_sea_zones.py`, and re-run the checks above before committing. The
+mask moves first; every downstream layer is regenerated from it.
 `generate_sea_zones.py` is decoupled from the land cut — it reads the committed
 `land_sea_mask.png` and the hand-drawn purple boundary source directly, and is
 not wired into `state_labels.png`.
@@ -57,10 +61,12 @@ gate.
 
 `tools/config/inland_lakes.json` is hand-authored geographic data, like a
 registration seed: it lists the genuine enclosed lakes/seas to keep as water
-(by interior seed pixel) when `generate_heightmap.py` fills false enclosed
-water (drawn rivers, flooded marshes) to land. Edit it deliberately and
-regenerate the heightmap through it — never infer or hand-edit it from a
-regenerated bitmap.
+(by interior seed pixel) when the mask pipeline distinguishes them from false
+enclosed water (drawn rivers, flooded marshes). **As of 2026-08-22 no code reads
+it**: `generate_coastline_mask.py`, now the sole owner of `land_sea_mask.png`,
+classifies enclosed seas as water by coastline parity alone, needing no lake
+list. The file (and `schema.load_inland_lakes`) is orphaned pending a decision to
+keep or retire it.
 
 `run_fixture.py --check` also regression-checks the source-driven pipeline itself
 against committed synthetic fixtures, independent of the real `sources/`:

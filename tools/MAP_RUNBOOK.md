@@ -69,7 +69,8 @@ committed.
 
 ```
 python tools/worldgen/sources.py --verify   # sources match the manifest
-python tools/generate_heightmap.py           # -> map_data/heightmap.png (+ tools/derived/land_sea_mask.png)
+python tools/generate_coastline_mask.py      # -> tools/derived/land_sea_mask.png (from the traced coastline)
+python tools/generate_heightmap.py           # -> map_data/heightmap.png (consumes the mask above)
 python tools/generate_rivers.py              # -> map_data/rivers.png
 python tools/run_fixture.py --check          # determinism + goldens + validators
 ```

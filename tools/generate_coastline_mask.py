@@ -2,13 +2,15 @@
 """Land/sea mask from the hand-traced coastline — the coastline authority.
 
 The user traced the world's entire coastline as a magenta (255,0,255) line
-directly on the canvas-space reprojected globe
-(``sources/terraqueous_globe_reprojected - coasts.png``, 8192×3616 = the mod
-canvas). Because it is drawn in canvas space it needs no registration, and because
-it is a deliberate hand-trace it supersedes the height-ramp extraction that
+directly on the canvas-space reprojected globe and exported it as the black-plus-
+magenta ``sources/land_sea_mask.png`` (8192×3616 = the mod canvas; the same
+magenta network also carried in ``terraqueous_globe_reprojected - coasts.png``).
+Because it is drawn in canvas space it needs no registration, and because it is a
+deliberate hand-trace it supersedes the height-ramp extraction that
 ``generate_heightmap.py`` used to derive the coast (user decision, 2026-08-14: "the
-traced coastline wins"). This tool is now the owner of ``land_sea_mask.png``;
-``generate_heightmap.py`` consumes the mask rather than re-deriving the shoreline.
+traced coastline wins"; the ramp derivation was deleted 2026-08-22). This tool is
+the sole owner of ``land_sea_mask.png``; ``generate_heightmap.py`` consumes the
+mask rather than re-deriving the shoreline.
 
 Land vs sea is decided by **coastline topology**, not by globe colour (the globe's
 sea is a desaturated grey that no hue test separates from land — the very problem
@@ -49,7 +51,7 @@ from worldgen import raster, sources  # noqa: E402
 Image.MAX_IMAGE_PIXELS = None
 
 TOOLS_DIR = Path(__file__).resolve().parent
-DEFAULT_SOURCE = "terraqueous_globe_reprojected - coasts.png"
+DEFAULT_SOURCE = "land_sea_mask.png"
 DEFAULT_OUT = TOOLS_DIR / "derived" / "land_sea_mask.png"
 
 #: Ignore land specks smaller than this many px when reporting (not when masking).
