@@ -52,6 +52,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
 from worldgen import raster, reproject, schema  # noqa: E402
+from worldgen import sources as sources_mod  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 SEED_DIR = TOOLS_DIR / "registration" / "seeds"
@@ -110,7 +111,7 @@ def out_name(stem: str) -> str:
 
 def load_source_rgba(name: str) -> tuple[np.ndarray, np.ndarray | None]:
     """``(rgb, alpha)`` read directly from ``sources/`` (see module docstring)."""
-    path = SOURCES_DIR / name
+    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
     if not path.is_file():
         raise SystemExit(f"sources/{name} is missing — restore it first (tools/inpaint_dot_markers.py)")
     with Image.open(path) as im:

@@ -55,6 +55,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
 from worldgen import raster, schema, scope  # noqa: E402
+from worldgen import sources as sources_mod  # noqa: E402
 import generate_state_labels as gsl  # noqa: E402  (import-safe: work is under __main__)
 
 TOOLS_DIR = Path(__file__).resolve().parent
@@ -91,7 +92,7 @@ def load_rgba(name: str) -> np.ndarray:
     from ``convert("RGBA")`` — so ``P``/``RGBA``/``LA`` all read the same way the
     shipped loader would. A fully-opaque source yields an all-255 alpha.
     """
-    path = SOURCES_DIR / name
+    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
     if not path.is_file():
         raise SystemExit(f"sources/{name} is missing")
     with Image.open(path) as im:
@@ -101,7 +102,7 @@ def load_rgba(name: str) -> np.ndarray:
 
 def load_rgb(name: str) -> np.ndarray:
     """HxWx3 uint8 read directly from ``sources/`` (palette/RGBA flattened to RGB)."""
-    path = SOURCES_DIR / name
+    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
     if not path.is_file():
         raise SystemExit(f"sources/{name} is missing")
     with Image.open(path) as im:

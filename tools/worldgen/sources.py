@@ -47,6 +47,13 @@ SOURCES_DIR = REPO_ROOT / "sources"
 MANIFEST_PATH = TOOLS_DIR / "SOURCES.md"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
+#: ``sources/`` is organized into subfolders by role (raw references in
+#: ``originals/``, GIMP editable masters in ``gimp/``, the paired-anchor-dot
+#: workflow's crops/examples in ``dots/``) — a file may live directly under
+#: ``sources/`` or in one of these. ``WIP/`` holds local scratch not tracked in
+#: the manifest, so it is deliberately excluded from both search and refresh.
+SOURCE_SUBDIRS = ("originals", "gimp", "dots")
+
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"
 
@@ -86,6 +93,22 @@ def sha256_of(path: Path) -> str:
         for chunk in iter(lambda: fh.read(1 << 20), b""):
             h.update(chunk)
     return h.hexdigest()
+
+
+def resolve_source_path(name: str, sources_dir: Path = SOURCES_DIR) -> Path:
+    """Find a manifest filename under ``sources_dir``, checking the root first
+    and then each of :data:`SOURCE_SUBDIRS`. Returns ``sources_dir / name``
+    (whether or not it exists) when no match is found, so callers get the same
+    "expected here" path in their missing-file errors as before subfolders
+    existed."""
+    direct = sources_dir / name
+    if direct.is_file():
+        return direct
+    for sub in SOURCE_SUBDIRS:
+        candidate = sources_dir / sub / name
+        if candidate.is_file():
+            return candidate
+    return direct
 
 
 def image_dims(path: Path) -> str:
@@ -169,7 +192,7 @@ def verify(
 
     # 1. Every manifest row's local file exists and matches its committed hash.
     for r in rows:
-        path = sources_dir / r.file
+        path = resolve_source_path(r.file, sources_dir)
         if not path.is_file():
             errors.append(f"manifest lists '{r.file}' but sources/{r.file} is missing locally")
             continue
@@ -228,7 +251,7 @@ def verify(
     #    dims): control points inside the source image, footprint inside the canvas.
     w_canvas, h_canvas = canvas_frame.WIDTH, canvas_frame.HEIGHT
     for reg in regs:
-        path = sources_dir / reg.source
+        path = resolve_source_path(reg.source, sources_dir)
         sw = sh = None
         if path.is_file():
             dims = image_dims(path)
@@ -273,7 +296,7 @@ def load_source_image(
     rows = {r.file: r for r in parse_manifest(manifest_path.read_text(encoding="utf-8"))}
     if filename not in rows:
         raise ManifestError(f"'{filename}' is not in {manifest_path.name}")
-    path = sources_dir / filename
+    path = resolve_source_path(filename, sources_dir)
     if not path.is_file():
         raise ManifestError(f"sources/{filename} is missing locally")
     actual = sha256_of(path)
@@ -310,7 +333,7 @@ def load_source_image_rgba(
     rows = {r.file: r for r in parse_manifest(manifest_path.read_text(encoding="utf-8"))}
     if filename not in rows:
         raise ManifestError(f"'{filename}' is not in {manifest_path.name}")
-    path = sources_dir / filename
+    path = resolve_source_path(filename, sources_dir)
     if not path.is_file():
         raise ManifestError(f"sources/{filename} is missing locally")
     actual = sha256_of(path)
@@ -359,8 +382,28 @@ def update_manifest(
             f"column left unchanged — fix the record, then re-run --update-manifest"
         )
 
+    discovered: dict[str, Path] = {}
+    dupes: list[str] = []
+    search_dirs = [sources_dir] + [sources_dir / sub for sub in SOURCE_SUBDIRS]
+    for d in search_dirs:
+        if not d.is_dir():
+            continue
+        for path in d.iterdir():
+            if not path.is_file():
+                continue
+            if path.name in discovered:
+                dupes.append(path.name)
+                continue
+            discovered[path.name] = path
+    if dupes:
+        raise ManifestError(
+            "duplicate source filename(s) across sources/ and its subfolders — "
+            f"rename one of each: {', '.join(sorted(set(dupes)))}"
+        )
+
     rows: list[ManifestRow] = []
-    for path in sorted(p for p in sources_dir.iterdir() if p.is_file()):
+    for name in sorted(discovered):
+        path = discovered[name]
         prev = existing.get(path.name)
         dims = image_dims(path)
         sha = sha256_of(path)

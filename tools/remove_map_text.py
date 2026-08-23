@@ -44,6 +44,7 @@ Usage (from the repo root, with tools/.venv active):
     python tools/remove_map_text.py --src A.png --out B.png
 """
 import argparse
+import sys
 from pathlib import Path
 
 import numpy as np
@@ -52,8 +53,13 @@ from scipy import ndimage as ndi
 import cv2
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SRC = ROOT / "sources" / "terraqueous_globe_reprojected.png"
-DEFAULT_OUT = ROOT / "sources" / "terraqueous_globe_reprojected_no_text.png"
+sys.path.insert(0, str(ROOT / "tools"))
+from worldgen import sources as sources_mod  # noqa: E402
+
+SOURCES_DIR = ROOT / "sources"
+DEFAULT_SRC = sources_mod.resolve_source_path("terraqueous_globe_reprojected.png", SOURCES_DIR)
+#: Local scratch, not manifest-tracked — see ``sources/WIP/``.
+DEFAULT_OUT = SOURCES_DIR / "WIP" / "terraqueous_globe_reprojected_no_text.png"
 QA_DIR = ROOT / "tools" / "derived"
 
 

@@ -67,6 +67,8 @@ from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen import sources as sources_mod  # noqa: E402
+
 TOOLS_DIR = Path(__file__).resolve().parent
 SEED_DIR = TOOLS_DIR / "registration" / "seeds"
 SOURCES_DIR = TOOLS_DIR.parent / "sources"
@@ -338,7 +340,7 @@ def main(argv: list[str] | None = None) -> int:
     dots_path = Path(args.dots)
     if not dots_path.is_file():
         raise SystemExit(f"no dots file at {dots_path}")
-    out_path = Path(args.out) if args.out else SOURCES_DIR / seed["source"]
+    out_path = Path(args.out) if args.out else sources_mod.resolve_source_path(seed["source"], SOURCES_DIR)
 
     rgb, alpha = load_dots_image(dots_path)
     h, w = rgb.shape[:2]
