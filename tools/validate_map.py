@@ -747,6 +747,17 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
         if int(c["id"]) != want:
             errors.append(f"label {lab}: index id {c['id']} != expected {want} for a {c['kind']} province")
             break
+    # Per-kind formula compliance is not enough — the land and sea bands must not
+    # overlap. A province id is a globally-unique handle (vanilla definition.csv
+    # shares one id space across land and sea), so a collision between a land and a
+    # sea province is invalid content that would propagate downstream.
+    ids = [int(c["id"]) for c in index["cells"]]
+    if len(set(ids)) != len(ids):
+        from collections import Counter
+        dup = [i for i, n in Counter(ids).items() if n > 1]
+        errors.append(
+            f"{len(dup)} province id(s) are shared by more than one province — the "
+            f"land and sea id bands overlap (first few: {sorted(dup)[:5]})")
 
     # 5. Every province is one connected region (a province in two pieces is none).
     comp = cells.components(labels, wrap_x)

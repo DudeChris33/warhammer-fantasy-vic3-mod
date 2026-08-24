@@ -166,6 +166,14 @@ def main(argv: list[str] | None = None) -> int:
     land_coastal = cells.coastal_labels(land_lab, land, WRAP_X)
     sea_coastal = cells.coastal_labels(sea_lab, ~land, WRAP_X)
 
+    # Provinces share ONE continuous id space, exactly as vanilla's definition.csv
+    # does — a province id is a unique sequential handle, and the bitmap colour is
+    # the real key. The state-region id bands (map_config.LAND_ID_START /
+    # SEA_ID_START, the vanilla 3000+ sea-STATE band) are NOT reused here: at
+    # province scale the ~5,800 land ids would run straight through the 3000 sea
+    # band and collide. So id == label: land 1..N, sea N+1..N+M, globally unique.
+    land_id_start = map_config.LAND_ID_START  # 1
+    sea_id_start = n_land + 1
     entries = []
     n_impassable = 0
     for lab in range(1, n_land + 1):
@@ -177,7 +185,7 @@ def main(argv: list[str] | None = None) -> int:
             "kind": "land",
             "color": color,
             "hex": raster.color_to_hex(color),
-            "id": map_config.LAND_ID_START + (lab - 1),
+            "id": land_id_start + (lab - 1),  # == lab
             "area": int(areas[lab]),
             "coastal": bool(land_coastal[lab]) if lab < len(land_coastal) else False,
             "impassable": impassable,
@@ -190,7 +198,7 @@ def main(argv: list[str] | None = None) -> int:
             "kind": "sea",
             "color": color,
             "hex": raster.color_to_hex(color),
-            "id": map_config.SEA_ID_START + (s - 1),
+            "id": sea_id_start + (s - 1),  # == lab, continues after the land band
             "area": int(areas[lab]),
             "coastal": bool(sea_coastal[s]) if s < len(sea_coastal) else False,
             "impassable": False,  # sea provinces are navigable, never impassable
@@ -203,8 +211,8 @@ def main(argv: list[str] | None = None) -> int:
         "land_provinces": n_land,
         "sea_provinces": n_sea,
         "impassable_land_provinces": n_impassable,
-        "land_id_start": map_config.LAND_ID_START,
-        "sea_id_start": map_config.SEA_ID_START,
+        "land_id_start": land_id_start,
+        "sea_id_start": sea_id_start,
         "cells": entries,
     }
     INDEX_PATH.write_text(json.dumps(index, indent=1) + "\n", encoding="utf-8")

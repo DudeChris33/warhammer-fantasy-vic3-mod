@@ -22,10 +22,9 @@ under `map_data/` (province bitmap, `heightmap.png`, `rivers.png`,
 source-registration data (`tools/SOURCES.md`, `tools/registration/`), run:
 
 ```
-python tools/worldgen/sources.py --verify   # source manifest SHA-256 + registration cross-checks
-python tools/validate_map.py --labels        # the state-label layer tiles the land/sea mask exactly
-python tools/validate_map.py                # lints the repo map (repo-relative paths)
-python tools/run_fixture.py --check          # regression-checks the toolchain itself
+python tools/worldgen/sources.py --verify       # source manifest SHA-256 + registration cross-checks
+python tools/validate_map.py --province-bitmap   # the province bitmap tiles the mask + agrees with its index and the sea layer
+python tools/run_fixture.py --check              # regression-checks the toolchain itself
 ```
 
 All must pass before the in-game `error.log` check below. This does not replace
@@ -37,21 +36,39 @@ change is the explicit `python tools/worldgen/sources.py --update-manifest`
 action, never a side effect of a generator run.
 
 `tools/derived/land_sea_mask.png`, `map_data/heightmap.png`, `map_data/rivers.png`,
-`tools/derived/state_labels.png` and `tools/derived/sea_zones.png` (+
-`tools/derived/sea_zones_index.json`) are generated, not hand-authored: after an
+`tools/derived/state_labels.png`, `tools/derived/sea_zones.png` (+
+`tools/derived/sea_zones_index.json`) and `map_data/provinces.png` (+
+`tools/derived/provinces_index.json`) are generated, not hand-authored: after an
 intentional source/LUT/registration change, regenerate them with `python
-tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png`, which it
-flood-fills from the user's traced coastline in `sources/land_sea_mask.png`),
-`python tools/generate_heightmap.py` (which now *consumes* that mask — the old
+tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png` — either
+flood-filled from the user's traced coastline in `sources/land_sea_mask.png`, or,
+with `--from-fill`, read directly when that source is already a finished
+black/white land fill rather than a coastline trace), `python
+tools/generate_heightmap.py` (which now *consumes* that mask — the old
 height-ramp mask derivation was deleted 2026-08-22), `python
-tools/generate_rivers.py`, `python tools/generate_state_labels.py` and `python
-tools/generate_sea_zones.py`, and re-run the checks above before committing. The
-mask moves first; every downstream layer is regenerated from it.
-`generate_sea_zones.py` is decoupled from the land cut — it reads the committed
-`land_sea_mask.png` and the hand-drawn purple boundary source directly, and is
-not wired into `state_labels.png`.
-`--labels` is only meaningful once the state-label layer exists; `validate_map.py`
-with no flag needs `map_data/provinces.png`, which arrives in S3b.
+tools/generate_rivers.py`, `python tools/generate_state_labels.py`, `python
+tools/generate_sea_zones.py` and `python tools/generate_provinces.py`, and re-run
+the checks above before committing. The mask moves first; every downstream layer
+is regenerated from it.
+`generate_sea_zones.py` and `generate_provinces.py` are both decoupled from the
+land cut — each reads the committed `land_sea_mask.png` and its own hand-drawn
+source directly (the purple sea-zone network, the magenta state-region network),
+and neither is wired into `state_labels.png`. `generate_provinces.py` (board
+#2773) folds the already-committed `sea_zones.png` in as the sea provinces
+(labels `N+1..N+M` after land `1..N`); the land side comes from
+`tools/worldgen/land_provinces.py`, the land mirror of `worldgen/sea_zones.py` —
+it flood-fills the hand-drawn magenta network into barrier-respecting state
+regions, then subdivides each drawn region into provinces (no province crosses a
+magenta line); an out-of-scope far continent with no interior magenta is
+classified a placeholder and kept whole as one impassable province.
+`worldgen/sea_zones.py`'s `extract` also gained a `split_disconnected`
+connectivity repair (the nearest-label fill can tear a zone into two
+disconnected pieces sharing one label; `land_provinces.regions` mirrors the
+same repair).
+`--labels` is only meaningful once the state-label layer exists; the plain
+`validate_map.py` (no flag) additionally needs `state_regions/*.txt`, which
+hasn't been authored yet (S3b) — until then, `--province-bitmap` is the check
+for `map_data/provinces.png` itself.
 
 Registration records (`tools/registration/*.json`) are machine-fitted, not
 hand-written: re-derive with `python tools/fit_registration.py --seed <stem>`
@@ -77,7 +94,13 @@ precedence stacking, mask intersection, nearest-label fill, density
 reconciliation and sea zones). It also self-checks `worldgen/sea_zones.py`
 in isolation (no golden fixture): a purple line drawn in the water splits it
 into zones, a purple mark drawn on land is ignored, every water pixel ends up
-labelled and no land pixel does, and two runs are byte-identical.
+labelled and no land pixel does, and two runs are byte-identical. It likewise
+self-checks `worldgen/land_provinces.py` in isolation: a magenta line drawn on
+land splits it into regions while a magenta mark in water is ignored, a
+landmass dense with interior magenta is classed drawn and one bare of it a
+placeholder, subdividing a drawn region never crosses the magenta boundary
+while a placeholder region stays one province, every land pixel ends up
+labelled and no water pixel does, and two runs are byte-identical.
 
 ## Regression rule
 

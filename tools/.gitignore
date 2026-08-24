@@ -19,6 +19,7 @@ fixtures/_out/
 # The two rasters and the index are consumed by later phases, so they have to
 # travel with the repo; COVERAGE.md is the record of where the sources fall short.
 derived/*
+!derived/land_sea_mask.png
 !derived/state_labels.png
 !derived/state_labels_index.json
 !derived/COVERAGE.md

@@ -4,15 +4,15 @@
 # provinces.png exists; every zone is passable (no impassable blocks).
 # Regenerate — never hand-edit.
 
-STATE_SEA_OF_CHILL_01 = {
+STATE_SEA_OF_CHAOS_01 = {
 	id = 3000
 	provinces = { xD35EE9 }
 }
-STATE_SEA_OF_CHAOS_01 = {
+STATE_SEA_OF_CHAOS_02 = {
 	id = 3001
 	provinces = { x719662 }
 }
-STATE_SEA_OF_CHAOS_02 = {
+STATE_FROZEN_SEA_01 = {
 	id = 3002
 	provinces = { x0FCDDB }
 }
@@ -24,71 +24,71 @@ STATE_SEA_OF_CHAOS_04 = {
 	id = 3004
 	provinces = { x4C3CCD }
 }
-STATE_SEA_OF_CHAOS_05 = {
+STATE_SEA_OF_OBLIVION_01 = {
 	id = 3005
 	provinces = { xEA7446 }
 }
-STATE_SEA_OF_RAGE_01 = {
+STATE_SEA_OF_CHAOS_05 = {
 	id = 3006
 	provinces = { x88ABBF }
 }
-STATE_FROZEN_SEA_01 = {
+STATE_SEA_OF_MALICE_01 = {
 	id = 3007
 	provinces = { x26E338 }
 }
-STATE_SEA_OF_CHAOS_07 = {
+STATE_SEA_OF_MALICE_02 = {
 	id = 3008
 	provinces = { xC51AB1 }
 }
-STATE_SEA_OF_CHAOS_08 = {
+STATE_SEA_OF_MALICE_03 = {
 	id = 3009
 	provinces = { x63522A }
 }
-STATE_SEA_OF_CHAOS_06 = {
+STATE_SEA_OF_OBLIVION_02 = {
 	id = 3010
 	provinces = { x0189A3 }
 }
-STATE_SEA_OF_OBLIVION_01 = {
+STATE_SEA_OF_MALICE_04 = {
 	id = 3011
 	provinces = { x9FC11C }
 }
-STATE_SEA_OF_CHAOS_09 = {
+STATE_SEA_OF_MALICE_05 = {
 	id = 3012
 	provinces = { x3DF895 }
 }
-STATE_SEA_OF_MALICE_01 = {
+STATE_FROZEN_SEA_02 = {
 	id = 3013
 	provinces = { xDC300E }
 }
-STATE_SEA_OF_MALICE_02 = {
+STATE_SEA_OF_CLAWS_01 = {
 	id = 3014
 	provinces = { x7A6787 }
 }
-STATE_SEA_OF_MALICE_03 = {
+STATE_SEA_OF_CLAWS_02 = {
 	id = 3015
 	provinces = { x189F00 }
 }
-STATE_SEA_OF_MALICE_04 = {
+STATE_SEA_OF_CHAOS_06 = {
 	id = 3016
 	provinces = { xB6D679 }
 }
-STATE_SEA_OF_MALICE_05 = {
+STATE_FROZEN_SEA_03 = {
 	id = 3017
 	provinces = { x550DF2 }
 }
-STATE_SEA_OF_MALICE_06 = {
+STATE_SEA_OF_RAGE_01 = {
 	id = 3018
 	provinces = { xF3456B }
 }
-STATE_SEA_OF_OBLIVION_02 = {
+STATE_SEA_OF_CLAWS_03 = {
 	id = 3019
 	provinces = { x917CE4 }
 }
-STATE_FROZEN_SEA_02 = {
+STATE_SEA_OF_MALICE_06 = {
 	id = 3020
 	provinces = { x2FB45D }
 }
-STATE_SEA_OF_CHAOS_10 = {
+STATE_FAR_OCEAN_01 = {
 	id = 3021
 	provinces = { xCDEBD6 }
 }
@@ -96,55 +96,55 @@ STATE_SEA_OF_OBLIVION_03 = {
 	id = 3022
 	provinces = { x6C234F }
 }
-STATE_SEA_OF_CLAWS_01 = {
+STATE_SEA_OF_CLAWS_04 = {
 	id = 3023
 	provinces = { x0A5AC8 }
 }
-STATE_SEA_OF_CLAWS_02 = {
+STATE_SEA_OF_RAGE_02 = {
 	id = 3024
 	provinces = { xA89241 }
 }
-STATE_SEA_OF_CLAWS_03 = {
+STATE_SEA_OF_RAGE_03 = {
 	id = 3025
 	provinces = { x46C9BA }
 }
-STATE_FROZEN_SEA_03 = {
+STATE_SEA_OF_MALICE_07 = {
 	id = 3026
 	provinces = { xE50133 }
 }
-STATE_SEA_OF_CLAWS_04 = {
+STATE_SEA_OF_CLAWS_05 = {
 	id = 3027
 	provinces = { x8338AC }
 }
-STATE_SEA_OF_CLAWS_05 = {
+STATE_FROZEN_SEA_04 = {
 	id = 3028
 	provinces = { x217025 }
 }
-STATE_SEA_OF_CLAWS_06 = {
+STATE_SEA_OF_MALICE_08 = {
 	id = 3029
 	provinces = { xBFA79E }
 }
-STATE_FROZEN_SEA_04 = {
+STATE_SEA_OF_MALICE_09 = {
 	id = 3030
 	provinces = { x5DDF17 }
 }
-STATE_SEA_OF_CHAOS_11 = {
+STATE_SEA_OF_CLAWS_06 = {
 	id = 3031
 	provinces = { xFC1690 }
 }
-STATE_FROZEN_SEA_05 = {
+STATE_SEA_OF_FEUDS_01 = {
 	id = 3032
 	provinces = { x9A4E09 }
 }
-STATE_FROZEN_SEA_06 = {
+STATE_SEA_OF_CLAWS_07 = {
 	id = 3033
 	provinces = { x388582 }
 }
-STATE_SEA_OF_RAGE_02 = {
+STATE_SEA_OF_MIST_01 = {
 	id = 3034
 	provinces = { xD6BCFB }
 }
-STATE_SEA_OF_CLAWS_07 = {
+STATE_SEA_OF_MALICE_10 = {
 	id = 3035
 	provinces = { x74F474 }
 }
@@ -156,1443 +156,655 @@ STATE_SEA_OF_CLAWS_09 = {
 	id = 3037
 	provinces = { xB16366 }
 }
-STATE_FROZEN_SEA_07 = {
+STATE_SEA_OF_MIST_02 = {
 	id = 3038
 	provinces = { x4F9ADF }
 }
-STATE_SEA_OF_CLAWS_10 = {
+STATE_SEA_OF_WRATH_01 = {
 	id = 3039
 	provinces = { xEDD258 }
 }
-STATE_SEA_OF_CLAWS_11 = {
+STATE_SEA_OF_CLAWS_10 = {
 	id = 3040
 	provinces = { x8C09D1 }
 }
-STATE_SEA_OF_MALICE_07 = {
+STATE_BLACK_GULF_01 = {
 	id = 3041
 	provinces = { x2A414A }
 }
-STATE_FROZEN_SEA_08 = {
+STATE_SEA_OF_MIST_03 = {
 	id = 3042
 	provinces = { xC878C3 }
 }
-STATE_SEA_OF_CLAWS_12 = {
+STATE_FROZEN_SEA_05 = {
 	id = 3043
 	provinces = { x66B03C }
 }
-STATE_SEA_OF_CLAWS_13 = {
+STATE_SEA_OF_CLAWS_11 = {
 	id = 3044
 	provinces = { x04E7B5 }
 }
-STATE_FAR_OCEAN_01 = {
+STATE_SEA_OF_CLAWS_12 = {
 	id = 3045
 	provinces = { xA31F2E }
 }
-STATE_FROZEN_SEA_09 = {
+STATE_SEA_OF_MIST_04 = {
 	id = 3046
 	provinces = { x4156A7 }
 }
-STATE_SEA_OF_MALICE_08 = {
+STATE_LIZARD_SEA_01 = {
 	id = 3047
 	provinces = { xDF8E20 }
 }
-STATE_SEA_OF_CLAWS_14 = {
+STATE_SEA_OF_FEUDS_02 = {
 	id = 3048
 	provinces = { x7DC599 }
 }
-STATE_SEA_OF_MALICE_09 = {
+STATE_SEA_OF_CLAWS_13 = {
 	id = 3049
 	provinces = { x1BFD12 }
 }
-STATE_SEA_OF_CLAWS_15 = {
+STATE_SEA_OF_MIST_05 = {
 	id = 3050
 	provinces = { xBA348B }
 }
-STATE_SEA_OF_CLAWS_16 = {
+STATE_SEA_OF_CLAWS_14 = {
 	id = 3051
 	provinces = { x586C04 }
 }
-STATE_SEA_OF_CLAWS_17 = {
+STATE_BITTER_SEA_01 = {
 	id = 3052
 	provinces = { xF6A37D }
 }
-STATE_SEA_OF_CLAWS_18 = {
+STATE_SEA_OF_MALICE_11 = {
 	id = 3053
 	provinces = { x94DAF6 }
 }
-STATE_SEA_OF_CLAWS_19 = {
+STATE_SEA_OF_FEUDS_03 = {
 	id = 3054
 	provinces = { x33126F }
 }
-STATE_SEA_OF_CLAWS_20 = {
+STATE_SEA_OF_CLAWS_15 = {
 	id = 3055
 	provinces = { xD149E8 }
 }
-STATE_SEA_OF_CLAWS_21 = {
+STATE_SEA_OF_MIST_06 = {
 	id = 3056
 	provinces = { x6F8161 }
 }
-STATE_SEA_OF_CLAWS_22 = {
+STATE_SEA_OF_RAGE_04 = {
 	id = 3057
 	provinces = { x0DB8DA }
 }
-STATE_FROZEN_SEA_10 = {
+STATE_BLACK_GULF_02 = {
 	id = 3058
 	provinces = { xABF053 }
 }
-STATE_SEA_OF_CLAWS_23 = {
+STATE_SEA_OF_RAGE_05 = {
 	id = 3059
 	provinces = { x4A27CC }
 }
-STATE_SEA_OF_FEUDS_01 = {
+STATE_SEA_OF_CLAWS_16 = {
 	id = 3060
 	provinces = { xE85F45 }
 }
-STATE_SEA_OF_MALICE_10 = {
+STATE_SEA_OF_RAGE_06 = {
 	id = 3061
 	provinces = { x8696BE }
 }
-STATE_FROZEN_SEA_11 = {
+STATE_BLACK_GULF_03 = {
 	id = 3062
 	provinces = { x24CE37 }
 }
-STATE_SEA_OF_CLAWS_24 = {
+STATE_SEA_OF_RAGE_07 = {
 	id = 3063
 	provinces = { xC305B0 }
 }
-STATE_SEA_OF_CLAWS_25 = {
+STATE_BLACK_GULF_04 = {
 	id = 3064
 	provinces = { x613D29 }
 }
-STATE_FAR_OCEAN_02 = {
+STATE_BLACK_GULF_05 = {
 	id = 3065
 	provinces = { xFF74A2 }
 }
-STATE_SEA_OF_MALICE_11 = {
+STATE_SOUTHERN_SEA_01 = {
 	id = 3066
 	provinces = { x9DAC1B }
 }
-STATE_FROZEN_SEA_12 = {
+STATE_BLACK_GULF_06 = {
 	id = 3067
 	provinces = { x3BE394 }
 }
-STATE_SEA_OF_CLAWS_26 = {
+STATE_SEA_OF_MALICE_12 = {
 	id = 3068
 	provinces = { xDA1B0D }
 }
-STATE_SEA_OF_MIST_01 = {
+STATE_SEA_OF_SQUALLS_01 = {
 	id = 3069
 	provinces = { x785286 }
 }
-STATE_SEA_OF_CLAWS_27 = {
+STATE_SEA_OF_WRATH_02 = {
 	id = 3070
 	provinces = { x1689FF }
 }
-STATE_FROZEN_SEA_13 = {
+STATE_SEA_OF_FEUDS_04 = {
 	id = 3071
 	provinces = { xB4C178 }
 }
-STATE_SEA_OF_MALICE_12 = {
+STATE_SEA_OF_RAGE_08 = {
 	id = 3072
 	provinces = { x52F8F1 }
 }
-STATE_SEA_OF_MALICE_13 = {
+STATE_SEA_OF_RAGE_09 = {
 	id = 3073
 	provinces = { xF1306A }
 }
-STATE_SEA_OF_CLAWS_28 = {
+STATE_BLACK_GULF_07 = {
 	id = 3074
 	provinces = { x8F67E3 }
 }
-STATE_FROZEN_SEA_14 = {
+STATE_SEA_OF_SERPENTS_01 = {
 	id = 3075
 	provinces = { x2D9F5C }
 }
-STATE_SEA_OF_CLAWS_29 = {
+STATE_FAR_OCEAN_02 = {
 	id = 3076
 	provinces = { xCBD6D5 }
 }
-STATE_SEA_OF_MALICE_14 = {
+STATE_BLACK_GULF_08 = {
 	id = 3077
 	provinces = { x6A0E4E }
 }
-STATE_SEA_OF_MIST_02 = {
+STATE_SOUTHERN_SEA_02 = {
 	id = 3078
 	provinces = { x0845C7 }
 }
-STATE_SEA_OF_WRATH_01 = {
+STATE_SEA_OF_FEUDS_05 = {
 	id = 3079
 	provinces = { xA67D40 }
 }
-STATE_SEA_OF_CLAWS_30 = {
+STATE_SEA_OF_WRATH_03 = {
 	id = 3080
 	provinces = { x44B4B9 }
 }
-STATE_SEA_OF_CLAWS_31 = {
+STATE_BITTER_SEA_02 = {
 	id = 3081
 	provinces = { xE2EC32 }
 }
-STATE_SEA_OF_CLAWS_32 = {
+STATE_SEA_OF_FEUDS_06 = {
 	id = 3082
 	provinces = { x8123AB }
 }
-STATE_SEA_OF_CLAWS_33 = {
+STATE_SEA_OF_MIST_07 = {
 	id = 3083
 	provinces = { x1F5B24 }
 }
-STATE_SEA_OF_MIST_03 = {
+STATE_CORSAIR_CHANNEL_01 = {
 	id = 3084
 	provinces = { xBD929D }
 }
-STATE_SEA_OF_CLAWS_34 = {
+STATE_SEA_OF_RAGE_10 = {
 	id = 3085
 	provinces = { x5BCA16 }
 }
-STATE_FROZEN_SEA_15 = {
+STATE_SOUTHERN_SEA_03 = {
 	id = 3086
 	provinces = { xFA018F }
 }
-STATE_SEA_OF_CLAWS_35 = {
+STATE_SOUTHERN_SEA_04 = {
 	id = 3087
 	provinces = { x983908 }
 }
-STATE_SEA_OF_CLAWS_36 = {
+STATE_SOUTHERN_SEA_05 = {
 	id = 3088
 	provinces = { x367081 }
 }
-STATE_SEA_OF_MIST_04 = {
+STATE_LIZARD_SEA_02 = {
 	id = 3089
 	provinces = { xD4A7FA }
 }
-STATE_SEA_OF_CLAWS_37 = {
+STATE_SEA_OF_WRATH_04 = {
 	id = 3090
 	provinces = { x72DF73 }
 }
-STATE_LIZARD_SEA_01 = {
+STATE_SOUTHERN_SEA_06 = {
 	id = 3091
 	provinces = { x1116EC }
 }
-STATE_SEA_OF_WRATH_02 = {
+STATE_FAR_OCEAN_03 = {
 	id = 3092
 	provinces = { xAF4E65 }
 }
-STATE_SEA_OF_CLAWS_38 = {
+STATE_FAR_OCEAN_04 = {
 	id = 3093
 	provinces = { x4D85DE }
 }
-STATE_SEA_OF_CLAWS_39 = {
+STATE_FAR_OCEAN_05 = {
 	id = 3094
 	provinces = { xEBBD57 }
 }
-STATE_SEA_OF_FEUDS_02 = {
+STATE_SOUTHERN_SEA_07 = {
 	id = 3095
 	provinces = { x89F4D0 }
 }
-STATE_SEA_OF_CLAWS_40 = {
+STATE_BITTER_SEA_03 = {
 	id = 3096
 	provinces = { x282C49 }
 }
-STATE_SEA_OF_MALICE_15 = {
+STATE_SEA_OF_SERPENTS_02 = {
 	id = 3097
 	provinces = { xC663C2 }
 }
-STATE_SEA_OF_CLAWS_41 = {
+STATE_BITTER_SEA_04 = {
 	id = 3098
 	provinces = { x649B3B }
 }
-STATE_SEA_OF_CLAWS_42 = {
+STATE_CORSAIR_CHANNEL_02 = {
 	id = 3099
 	provinces = { x02D2B4 }
 }
-STATE_SEA_OF_CLAWS_43 = {
+STATE_BITTER_SEA_05 = {
 	id = 3100
 	provinces = { xA10A2D }
 }
-STATE_SEA_OF_MIST_05 = {
+STATE_SEA_OF_SERPENTS_03 = {
 	id = 3101
 	provinces = { x3F41A6 }
 }
-STATE_SEA_OF_WRATH_03 = {
+STATE_SEA_OF_SERPENTS_04 = {
 	id = 3102
 	provinces = { xDD791F }
 }
-STATE_SEA_OF_CLAWS_44 = {
+STATE_GREAT_OCEAN_01 = {
 	id = 3103
 	provinces = { x7BB098 }
 }
-STATE_SEA_OF_CLAWS_45 = {
+STATE_CORSAIR_CHANNEL_03 = {
 	id = 3104
 	provinces = { x19E811 }
 }
-STATE_SEA_OF_CLAWS_46 = {
+STATE_SOUTHERN_SEA_08 = {
 	id = 3105
 	provinces = { xB81F8A }
 }
-STATE_FROZEN_SEA_16 = {
+STATE_SEA_OF_SERPENTS_05 = {
 	id = 3106
 	provinces = { x565703 }
 }
-STATE_SEA_OF_CLAWS_48 = {
+STATE_SEA_OF_FEAR_01 = {
 	id = 3107
 	provinces = { xF48E7C }
 }
-STATE_SEA_OF_CLAWS_49 = {
+STATE_JADE_SEA_01 = {
 	id = 3108
 	provinces = { x92C5F5 }
 }
-STATE_SEA_OF_CLAWS_47 = {
+STATE_SEA_OF_WRATH_05 = {
 	id = 3109
 	provinces = { x30FD6E }
 }
-STATE_SEA_OF_CLAWS_51 = {
+STATE_SEA_OF_WRATH_06 = {
 	id = 3110
 	provinces = { xCF34E7 }
 }
-STATE_SEA_OF_CLAWS_50 = {
+STATE_JADE_SEA_02 = {
 	id = 3111
 	provinces = { x6D6C60 }
 }
-STATE_LIZARD_SEA_02 = {
+STATE_SEA_OF_SERPENTS_06 = {
 	id = 3112
 	provinces = { x0BA3D9 }
 }
-STATE_SEA_OF_MALICE_16 = {
+STATE_BLACK_GULF_09 = {
 	id = 3113
 	provinces = { xA9DB52 }
 }
-STATE_BITTER_SEA_01 = {
+STATE_LIZARD_SEA_03 = {
 	id = 3114
 	provinces = { x4812CB }
 }
-STATE_SEA_OF_WRATH_04 = {
+STATE_JADE_SEA_03 = {
 	id = 3115
 	provinces = { xE64A44 }
 }
-STATE_SEA_OF_WRATH_05 = {
+STATE_LIZARD_SEA_04 = {
 	id = 3116
 	provinces = { x8481BD }
 }
-STATE_SEA_OF_MALICE_17 = {
+STATE_SEA_OF_SERPENTS_07 = {
 	id = 3117
 	provinces = { x22B936 }
 }
-STATE_BLACK_GULF_01 = {
+STATE_SEA_OF_FEAR_02 = {
 	id = 3118
 	provinces = { xC0F0AF }
 }
-STATE_SEA_OF_FEUDS_03 = {
+STATE_BITTER_SEA_06 = {
 	id = 3119
 	provinces = { x5F2828 }
 }
-STATE_BLACK_GULF_02 = {
+STATE_SEA_OF_WRATH_07 = {
 	id = 3120
 	provinces = { xFD5FA1 }
 }
-STATE_SEA_OF_CLAWS_52 = {
+STATE_GREAT_OCEAN_02 = {
 	id = 3121
 	provinces = { x9B971A }
 }
-STATE_SEA_OF_MALICE_18 = {
+STATE_BLACK_GULF_10 = {
 	id = 3122
 	provinces = { x39CE93 }
 }
-STATE_SEA_OF_MALICE_19 = {
+STATE_BITTER_SEA_07 = {
 	id = 3123
 	provinces = { xD8060C }
 }
-STATE_SEA_OF_CLAWS_53 = {
+STATE_SEA_OF_SQUALLS_02 = {
 	id = 3124
 	provinces = { x763D85 }
 }
-STATE_SEA_OF_WRATH_06 = {
+STATE_SEA_OF_SERPENTS_08 = {
 	id = 3125
 	provinces = { x1474FE }
 }
-STATE_SEA_OF_WRATH_07 = {
+STATE_BITTER_SEA_08 = {
 	id = 3126
 	provinces = { xB2AC77 }
 }
-STATE_SEA_OF_RAGE_03 = {
+STATE_SEA_OF_WEIRD_WAVES_01 = {
 	id = 3127
 	provinces = { x50E3F0 }
 }
-STATE_SEA_OF_WRATH_08 = {
+STATE_SEA_OF_WEIRD_WAVES_02 = {
 	id = 3128
 	provinces = { xEF1B69 }
 }
-STATE_SEA_OF_WRATH_09 = {
+STATE_SEA_OF_SERPENTS_09 = {
 	id = 3129
 	provinces = { x8D52E2 }
 }
-STATE_SEA_OF_MIST_06 = {
+STATE_JADE_SEA_04 = {
 	id = 3130
 	provinces = { x2B8A5B }
 }
-STATE_BLACK_GULF_03 = {
+STATE_GREAT_OCEAN_03 = {
 	id = 3131
 	provinces = { xC9C1D4 }
 }
-STATE_BLACK_GULF_04 = {
+STATE_SOUTHERN_SEA_09 = {
 	id = 3132
 	provinces = { x67F94D }
 }
-STATE_BLACK_GULF_05 = {
+STATE_SEA_OF_FEAR_03 = {
 	id = 3133
 	provinces = { x0630C6 }
 }
-STATE_SEA_OF_CLAWS_54 = {
+STATE_JADE_SEA_05 = {
 	id = 3134
 	provinces = { xA4683F }
 }
-STATE_BLACK_GULF_06 = {
+STATE_SEA_OF_SERPENTS_10 = {
 	id = 3135
 	provinces = { x429FB8 }
 }
-STATE_BLACK_GULF_07 = {
+STATE_SEA_OF_SERPENTS_11 = {
 	id = 3136
 	provinces = { xE0D731 }
 }
-STATE_SEA_OF_MALICE_20 = {
+STATE_GREAT_OCEAN_04 = {
 	id = 3137
 	provinces = { x7F0EAA }
 }
-STATE_BLACK_GULF_08 = {
+STATE_SEA_OF_WEIRD_WAVES_03 = {
 	id = 3138
 	provinces = { x1D4623 }
 }
-STATE_BLACK_GULF_11 = {
+STATE_GREAT_OCEAN_05 = {
 	id = 3139
 	provinces = { xBB7D9C }
 }
-STATE_SEA_OF_WRATH_10 = {
+STATE_SEA_OF_SERPENTS_12 = {
 	id = 3140
 	provinces = { x59B515 }
 }
-STATE_BLACK_GULF_10 = {
+STATE_SEA_OF_SQUALLS_03 = {
 	id = 3141
 	provinces = { xF7EC8E }
 }
-STATE_BLACK_GULF_09 = {
+STATE_JADE_SEA_06 = {
 	id = 3142
 	provinces = { x962407 }
 }
-STATE_SEA_OF_CLAWS_55 = {
+STATE_GREAT_OCEAN_06 = {
 	id = 3143
 	provinces = { x345B80 }
 }
-STATE_BLACK_GULF_12 = {
+STATE_SEA_OF_FEAR_04 = {
 	id = 3144
 	provinces = { xD292F9 }
 }
-STATE_BITTER_SEA_02 = {
+STATE_SEA_OF_SQUALLS_04 = {
 	id = 3145
 	provinces = { x70CA72 }
 }
-STATE_SEA_OF_WRATH_11 = {
+STATE_GREAT_OCEAN_07 = {
 	id = 3146
 	provinces = { x0F01EB }
 }
-STATE_LIZARD_SEA_03 = {
+STATE_GREAT_OCEAN_08 = {
 	id = 3147
 	provinces = { xAD3964 }
 }
-STATE_SEA_OF_WRATH_12 = {
+STATE_OCEAN_OF_DREAD_01 = {
 	id = 3148
 	provinces = { x4B70DD }
 }
-STATE_SEA_OF_RAGE_04 = {
+STATE_JADE_SEA_07 = {
 	id = 3149
 	provinces = { xE9A856 }
 }
-STATE_BLACK_GULF_13 = {
+STATE_SEA_OF_FEAR_05 = {
 	id = 3150
 	provinces = { x87DFCF }
 }
-STATE_SEA_OF_MALICE_21 = {
+STATE_JADE_SEA_08 = {
 	id = 3151
 	provinces = { x261748 }
 }
-STATE_SEA_OF_MALICE_22 = {
+STATE_JADE_SEA_09 = {
 	id = 3152
 	provinces = { xC44EC1 }
 }
-STATE_SEA_OF_CLAWS_56 = {
+STATE_JADE_SEA_10 = {
 	id = 3153
 	provinces = { x62863A }
 }
-STATE_SEA_OF_WRATH_13 = {
+STATE_SEA_OF_WEIRD_WAVES_04 = {
 	id = 3154
 	provinces = { x00BDB3 }
 }
-STATE_BITTER_SEA_03 = {
+STATE_SEA_OF_FEAR_06 = {
 	id = 3155
 	provinces = { x9EF52C }
 }
-STATE_SEA_OF_MALICE_23 = {
+STATE_SEA_OF_WEIRD_WAVES_05 = {
 	id = 3156
 	provinces = { x3D2CA5 }
 }
-STATE_SEA_OF_RAGE_05 = {
+STATE_FAR_OCEAN_06 = {
 	id = 3157
 	provinces = { xDB641E }
 }
-STATE_SEA_OF_MALICE_24 = {
+STATE_OCEAN_OF_DREAD_02 = {
 	id = 3158
 	provinces = { x799B97 }
 }
-STATE_SEA_OF_WRATH_14 = {
+STATE_GREAT_OCEAN_09 = {
 	id = 3159
 	provinces = { x17D310 }
 }
-STATE_BLACK_GULF_14 = {
+STATE_SEA_OF_FEAR_07 = {
 	id = 3160
 	provinces = { xB60A89 }
 }
-STATE_BITTER_SEA_04 = {
+STATE_SEA_OF_FEAR_08 = {
 	id = 3161
 	provinces = { x544202 }
 }
-STATE_LIZARD_SEA_04 = {
+STATE_SEA_OF_WEIRD_WAVES_06 = {
 	id = 3162
 	provinces = { xF2797B }
 }
-STATE_BLACK_GULF_15 = {
+STATE_SEA_OF_WEIRD_WAVES_07 = {
 	id = 3163
 	provinces = { x90B0F4 }
 }
-STATE_BLACK_GULF_16 = {
+STATE_OCEAN_OF_DREAD_03 = {
 	id = 3164
 	provinces = { x2EE86D }
 }
-STATE_SEA_OF_WRATH_15 = {
+STATE_SEA_OF_SQUALLS_05 = {
 	id = 3165
 	provinces = { xCD1FE6 }
 }
-STATE_SEA_OF_WRATH_16 = {
+STATE_JADE_SEA_11 = {
 	id = 3166
 	provinces = { x6B575F }
 }
-STATE_BLACK_GULF_17 = {
+STATE_JADE_SEA_12 = {
 	id = 3167
 	provinces = { x098ED8 }
 }
-STATE_SEA_OF_MALICE_25 = {
+STATE_GREAT_OCEAN_10 = {
 	id = 3168
 	provinces = { xA7C651 }
 }
-STATE_BLACK_GULF_18 = {
+STATE_JADE_SEA_13 = {
 	id = 3169
 	provinces = { x45FDCA }
 }
-STATE_SEA_OF_MALICE_26 = {
+STATE_GREAT_OCEAN_11 = {
 	id = 3170
 	provinces = { xE43543 }
 }
-STATE_SEA_OF_WRATH_17 = {
+STATE_GREAT_OCEAN_12 = {
 	id = 3171
 	provinces = { x826CBC }
 }
-STATE_SEA_OF_MALICE_27 = {
+STATE_GREAT_OCEAN_13 = {
 	id = 3172
 	provinces = { x20A435 }
 }
-STATE_BLACK_GULF_19 = {
+STATE_FAR_OCEAN_07 = {
 	id = 3173
 	provinces = { xBEDBAE }
 }
-STATE_SEA_OF_WRATH_18 = {
+STATE_GREAT_OCEAN_14 = {
 	id = 3174
 	provinces = { x5D1327 }
 }
-STATE_BITTER_SEA_05 = {
+STATE_JADE_SEA_14 = {
 	id = 3175
 	provinces = { xFB4AA0 }
 }
-STATE_BLACK_GULF_20 = {
+STATE_GREAT_OCEAN_15 = {
 	id = 3176
 	provinces = { x998219 }
 }
-STATE_BITTER_SEA_06 = {
+STATE_SEA_OF_FEAR_09 = {
 	id = 3177
 	provinces = { x37B992 }
 }
-STATE_BLACK_GULF_21 = {
+STATE_OCEAN_OF_DREAD_04 = {
 	id = 3178
 	provinces = { xD5F10B }
 }
-STATE_SOUTHERN_SEA_01 = {
+STATE_JADE_SEA_15 = {
 	id = 3179
 	provinces = { x742884 }
 }
-STATE_BLACK_GULF_22 = {
+STATE_JADE_SEA_16 = {
 	id = 3180
 	provinces = { x125FFD }
 }
-STATE_BITTER_SEA_07 = {
+STATE_JADE_SEA_17 = {
 	id = 3181
 	provinces = { xB09776 }
 }
-STATE_SOUTHERN_SEA_02 = {
+STATE_JADE_SEA_18 = {
 	id = 3182
 	provinces = { x4ECEEF }
 }
-STATE_LIZARD_SEA_05 = {
+STATE_JADE_SEA_19 = {
 	id = 3183
 	provinces = { xED0668 }
 }
-STATE_BLACK_GULF_23 = {
+STATE_OCEAN_OF_DREAD_05 = {
 	id = 3184
 	provinces = { x8B3DE1 }
 }
-STATE_LIZARD_SEA_06 = {
+STATE_OCEAN_OF_DREAD_06 = {
 	id = 3185
 	provinces = { x29755A }
 }
-STATE_LIZARD_SEA_07 = {
+STATE_FAR_OCEAN_08 = {
 	id = 3186
 	provinces = { xC7ACD3 }
 }
-STATE_SEA_OF_SERPENTS_01 = {
+STATE_GREAT_OCEAN_16 = {
 	id = 3187
 	provinces = { x65E44C }
 }
-STATE_LIZARD_SEA_08 = {
+STATE_GREAT_OCEAN_17 = {
 	id = 3188
 	provinces = { x041BC5 }
 }
-STATE_SOUTHERN_SEA_03 = {
+STATE_JADE_SEA_20 = {
 	id = 3189
 	provinces = { xA2533E }
 }
-STATE_BITTER_SEA_08 = {
+STATE_JADE_SEA_21 = {
 	id = 3190
 	provinces = { x408AB7 }
 }
-STATE_SEA_OF_FEUDS_04 = {
+STATE_GREAT_OCEAN_18 = {
 	id = 3191
 	provinces = { xDEC230 }
 }
-STATE_BITTER_SEA_09 = {
+STATE_GREAT_OCEAN_19 = {
 	id = 3192
 	provinces = { x7CF9A9 }
 }
-STATE_SEA_OF_RAGE_06 = {
+STATE_GREAT_OCEAN_20 = {
 	id = 3193
 	provinces = { x1B3122 }
 }
-STATE_LIZARD_SEA_09 = {
+STATE_GREAT_OCEAN_21 = {
 	id = 3194
 	provinces = { xB9689B }
 }
-STATE_BLACK_GULF_24 = {
+STATE_OCEAN_OF_DREAD_07 = {
 	id = 3195
 	provinces = { x57A014 }
 }
-STATE_LIZARD_SEA_10 = {
+STATE_GREAT_OCEAN_22 = {
 	id = 3196
 	provinces = { xF5D78D }
 }
-STATE_BITTER_SEA_10 = {
+STATE_OCEAN_OF_DREAD_08 = {
 	id = 3197
 	provinces = { x940F06 }
 }
-STATE_LIZARD_SEA_11 = {
+STATE_GREAT_OCEAN_23 = {
 	id = 3198
 	provinces = { x32467F }
 }
-STATE_FAR_OCEAN_03 = {
+STATE_OCEAN_OF_DREAD_09 = {
 	id = 3199
 	provinces = { xD07DF8 }
 }
-STATE_SEA_OF_SERPENTS_02 = {
+STATE_OCEAN_OF_DREAD_10 = {
 	id = 3200
 	provinces = { x6EB571 }
-}
-STATE_LIZARD_SEA_12 = {
-	id = 3201
-	provinces = { x0CECEA }
-}
-STATE_SEA_OF_SQUALLS_01 = {
-	id = 3202
-	provinces = { xAB2463 }
-}
-STATE_BLACK_GULF_25 = {
-	id = 3203
-	provinces = { x495BDC }
-}
-STATE_SOUTHERN_SEA_04 = {
-	id = 3204
-	provinces = { xE79355 }
-}
-STATE_LIZARD_SEA_13 = {
-	id = 3205
-	provinces = { x85CACE }
-}
-STATE_SEA_OF_WRATH_19 = {
-	id = 3206
-	provinces = { x240247 }
-}
-STATE_LIZARD_SEA_14 = {
-	id = 3207
-	provinces = { xC239C0 }
-}
-STATE_SOUTHERN_SEA_05 = {
-	id = 3208
-	provinces = { x607139 }
-}
-STATE_BITTER_SEA_11 = {
-	id = 3209
-	provinces = { xFEA8B2 }
-}
-STATE_SEA_OF_SQUALLS_02 = {
-	id = 3210
-	provinces = { x9CE02B }
-}
-STATE_SOUTHERN_SEA_06 = {
-	id = 3211
-	provinces = { x3B17A4 }
-}
-STATE_SEA_OF_RAGE_07 = {
-	id = 3212
-	provinces = { xD94F1D }
-}
-STATE_SEA_OF_WRATH_20 = {
-	id = 3213
-	provinces = { x778696 }
-}
-STATE_BITTER_SEA_12 = {
-	id = 3214
-	provinces = { x15BE0F }
-}
-STATE_LIZARD_SEA_15 = {
-	id = 3215
-	provinces = { xB3F588 }
-}
-STATE_SEA_OF_MIST_07 = {
-	id = 3216
-	provinces = { x522D01 }
-}
-STATE_SEA_OF_RAGE_08 = {
-	id = 3217
-	provinces = { xF0647A }
-}
-STATE_CORSAIR_CHANNEL_01 = {
-	id = 3218
-	provinces = { x8E9BF3 }
-}
-STATE_LIZARD_SEA_16 = {
-	id = 3219
-	provinces = { x2CD36C }
-}
-STATE_SEA_OF_SQUALLS_03 = {
-	id = 3220
-	provinces = { xCB0AE5 }
-}
-STATE_BITTER_SEA_13 = {
-	id = 3221
-	provinces = { x69425E }
-}
-STATE_SEA_OF_FEUDS_05 = {
-	id = 3222
-	provinces = { x0779D7 }
-}
-STATE_SEA_OF_FEUDS_06 = {
-	id = 3223
-	provinces = { xA5B150 }
-}
-STATE_SEA_OF_FEUDS_07 = {
-	id = 3224
-	provinces = { x43E8C9 }
-}
-STATE_BITTER_SEA_14 = {
-	id = 3225
-	provinces = { xE22042 }
-}
-STATE_SEA_OF_WRATH_21 = {
-	id = 3226
-	provinces = { x8057BB }
-}
-STATE_SEA_OF_FEUDS_08 = {
-	id = 3227
-	provinces = { x1E8F34 }
-}
-STATE_SEA_OF_SQUALLS_04 = {
-	id = 3228
-	provinces = { xBCC6AD }
-}
-STATE_BITTER_SEA_15 = {
-	id = 3229
-	provinces = { x5AFE26 }
-}
-STATE_SEA_OF_WRATH_22 = {
-	id = 3230
-	provinces = { xF9359F }
-}
-STATE_SEA_OF_SQUALLS_05 = {
-	id = 3231
-	provinces = { x976D18 }
-}
-STATE_SOUTHERN_SEA_07 = {
-	id = 3232
-	provinces = { x35A491 }
-}
-STATE_SEA_OF_SQUALLS_06 = {
-	id = 3233
-	provinces = { xD3DC0A }
-}
-STATE_SEA_OF_FEUDS_09 = {
-	id = 3234
-	provinces = { x721383 }
-}
-STATE_SOUTHERN_SEA_08 = {
-	id = 3235
-	provinces = { x104AFC }
-}
-STATE_SEA_OF_WRATH_23 = {
-	id = 3236
-	provinces = { xAE8275 }
-}
-STATE_BITTER_SEA_16 = {
-	id = 3237
-	provinces = { x4CB9EE }
-}
-STATE_SEA_OF_FEUDS_10 = {
-	id = 3238
-	provinces = { xEAF167 }
-}
-STATE_SEA_OF_WRATH_24 = {
-	id = 3239
-	provinces = { x8928E0 }
-}
-STATE_SEA_OF_FEUDS_11 = {
-	id = 3240
-	provinces = { x276059 }
-}
-STATE_SEA_OF_FEUDS_12 = {
-	id = 3241
-	provinces = { xC597D2 }
-}
-STATE_SEA_OF_SQUALLS_07 = {
-	id = 3242
-	provinces = { x63CF4B }
-}
-STATE_BITTER_SEA_17 = {
-	id = 3243
-	provinces = { x0206C4 }
-}
-STATE_BITTER_SEA_18 = {
-	id = 3244
-	provinces = { xA03E3D }
-}
-STATE_LIZARD_SEA_17 = {
-	id = 3245
-	provinces = { x3E75B6 }
-}
-STATE_SEA_OF_FEUDS_13 = {
-	id = 3246
-	provinces = { xDCAD2F }
-}
-STATE_LIZARD_SEA_18 = {
-	id = 3247
-	provinces = { x7AE4A8 }
-}
-STATE_SEA_OF_WRATH_25 = {
-	id = 3248
-	provinces = { x191C21 }
-}
-STATE_LIZARD_SEA_19 = {
-	id = 3249
-	provinces = { xB7539A }
-}
-STATE_SEA_OF_WRATH_26 = {
-	id = 3250
-	provinces = { x558B13 }
-}
-STATE_SEA_OF_FEUDS_14 = {
-	id = 3251
-	provinces = { xF3C28C }
-}
-STATE_FAR_OCEAN_04 = {
-	id = 3252
-	provinces = { x91FA05 }
-}
-STATE_CORSAIR_CHANNEL_02 = {
-	id = 3253
-	provinces = { x30317E }
-}
-STATE_BITTER_SEA_19 = {
-	id = 3254
-	provinces = { xCE68F7 }
-}
-STATE_FAR_OCEAN_05 = {
-	id = 3255
-	provinces = { x6CA070 }
-}
-STATE_SEA_OF_FEUDS_15 = {
-	id = 3256
-	provinces = { x0AD7E9 }
-}
-STATE_LIZARD_SEA_20 = {
-	id = 3257
-	provinces = { xA90F62 }
-}
-STATE_SEA_OF_WRATH_27 = {
-	id = 3258
-	provinces = { x4746DB }
-}
-STATE_FAR_OCEAN_06 = {
-	id = 3259
-	provinces = { xE57E54 }
-}
-STATE_SEA_OF_WRATH_28 = {
-	id = 3260
-	provinces = { x83B5CD }
-}
-STATE_FAR_OCEAN_07 = {
-	id = 3261
-	provinces = { x21ED46 }
-}
-STATE_SOUTHERN_SEA_09 = {
-	id = 3262
-	provinces = { xC024BF }
-}
-STATE_BITTER_SEA_20 = {
-	id = 3263
-	provinces = { x5E5C38 }
-}
-STATE_SEA_OF_FEUDS_16 = {
-	id = 3264
-	provinces = { xFC93B1 }
-}
-STATE_SEA_OF_SERPENTS_03 = {
-	id = 3265
-	provinces = { x9ACB2A }
-}
-STATE_BITTER_SEA_21 = {
-	id = 3266
-	provinces = { x3902A3 }
-}
-STATE_BITTER_SEA_22 = {
-	id = 3267
-	provinces = { xD73A1C }
-}
-STATE_SEA_OF_FEUDS_17 = {
-	id = 3268
-	provinces = { x757195 }
-}
-STATE_BITTER_SEA_23 = {
-	id = 3269
-	provinces = { x13A90E }
-}
-STATE_SEA_OF_FEUDS_18 = {
-	id = 3270
-	provinces = { xB1E087 }
-}
-STATE_SEA_OF_FEUDS_19 = {
-	id = 3271
-	provinces = { x501800 }
-}
-STATE_SEA_OF_FEUDS_20 = {
-	id = 3272
-	provinces = { xEE4F79 }
-}
-STATE_SEA_OF_SERPENTS_04 = {
-	id = 3273
-	provinces = { x8C86F2 }
-}
-STATE_CORSAIR_CHANNEL_03 = {
-	id = 3274
-	provinces = { x2ABE6B }
-}
-STATE_BITTER_SEA_24 = {
-	id = 3275
-	provinces = { xC8F5E4 }
-}
-STATE_SEA_OF_WRATH_29 = {
-	id = 3276
-	provinces = { x672D5D }
-}
-STATE_BITTER_SEA_25 = {
-	id = 3277
-	provinces = { x0564D6 }
-}
-STATE_BITTER_SEA_26 = {
-	id = 3278
-	provinces = { xA39C4F }
-}
-STATE_BITTER_SEA_27 = {
-	id = 3279
-	provinces = { x41D3C8 }
-}
-STATE_BITTER_SEA_28 = {
-	id = 3280
-	provinces = { xE00B41 }
-}
-STATE_CORSAIR_CHANNEL_04 = {
-	id = 3281
-	provinces = { x7E42BA }
-}
-STATE_SEA_OF_WRATH_30 = {
-	id = 3282
-	provinces = { x1C7A33 }
-}
-STATE_SEA_OF_SERPENTS_06 = {
-	id = 3283
-	provinces = { xBAB1AC }
-}
-STATE_SEA_OF_SERPENTS_05 = {
-	id = 3284
-	provinces = { x58E925 }
-}
-STATE_GREAT_OCEAN_01 = {
-	id = 3285
-	provinces = { xF7209E }
-}
-STATE_SEA_OF_WRATH_31 = {
-	id = 3286
-	provinces = { x955817 }
-}
-STATE_SEA_OF_WRATH_32 = {
-	id = 3287
-	provinces = { x338F90 }
-}
-STATE_SOUTHERN_SEA_10 = {
-	id = 3288
-	provinces = { xD1C709 }
-}
-STATE_SOUTHERN_SEA_11 = {
-	id = 3289
-	provinces = { x6FFE82 }
-}
-STATE_SEA_OF_FEAR_01 = {
-	id = 3290
-	provinces = { x0E35FB }
-}
-STATE_JADE_SEA_01 = {
-	id = 3291
-	provinces = { xAC6D74 }
-}
-STATE_CORSAIR_CHANNEL_05 = {
-	id = 3292
-	provinces = { x4AA4ED }
-}
-STATE_CORSAIR_CHANNEL_06 = {
-	id = 3293
-	provinces = { xE8DC66 }
-}
-STATE_SOUTHERN_SEA_12 = {
-	id = 3294
-	provinces = { x8713DF }
-}
-STATE_CORSAIR_CHANNEL_07 = {
-	id = 3295
-	provinces = { x254B58 }
-}
-STATE_SEA_OF_WRATH_33 = {
-	id = 3296
-	provinces = { xC382D1 }
-}
-STATE_CORSAIR_CHANNEL_08 = {
-	id = 3297
-	provinces = { x61BA4A }
-}
-STATE_JADE_SEA_02 = {
-	id = 3298
-	provinces = { xFFF1C3 }
-}
-STATE_SEA_OF_SERPENTS_07 = {
-	id = 3299
-	provinces = { x9E293C }
-}
-STATE_SEA_OF_SERPENTS_08 = {
-	id = 3300
-	provinces = { x3C60B5 }
-}
-STATE_BLACK_GULF_26 = {
-	id = 3301
-	provinces = { xDA982E }
-}
-STATE_SOUTHERN_SEA_13 = {
-	id = 3302
-	provinces = { x78CFA7 }
-}
-STATE_SOUTHERN_SEA_14 = {
-	id = 3303
-	provinces = { x170720 }
-}
-STATE_BLACK_GULF_27 = {
-	id = 3304
-	provinces = { xB53E99 }
-}
-STATE_LIZARD_SEA_21 = {
-	id = 3305
-	provinces = { x537612 }
-}
-STATE_BLACK_GULF_28 = {
-	id = 3306
-	provinces = { xF1AD8B }
-}
-STATE_SOUTHERN_SEA_15 = {
-	id = 3307
-	provinces = { x8FE504 }
-}
-STATE_JADE_SEA_03 = {
-	id = 3308
-	provinces = { x2E1C7D }
-}
-STATE_LIZARD_SEA_22 = {
-	id = 3309
-	provinces = { xCC53F6 }
-}
-STATE_SEA_OF_SERPENTS_09 = {
-	id = 3310
-	provinces = { x6A8B6F }
-}
-STATE_SEA_OF_WRATH_34 = {
-	id = 3311
-	provinces = { x08C2E8 }
-}
-STATE_SOUTHERN_SEA_16 = {
-	id = 3312
-	provinces = { xA6FA61 }
-}
-STATE_SEA_OF_FEAR_02 = {
-	id = 3313
-	provinces = { x4531DA }
-}
-STATE_SEA_OF_WRATH_35 = {
-	id = 3314
-	provinces = { xE36953 }
-}
-STATE_BITTER_SEA_29 = {
-	id = 3315
-	provinces = { x81A0CC }
-}
-STATE_SOUTHERN_SEA_17 = {
-	id = 3316
-	provinces = { x1FD845 }
-}
-STATE_SOUTHERN_SEA_18 = {
-	id = 3317
-	provinces = { xBE0FBE }
-}
-STATE_SOUTHERN_SEA_19 = {
-	id = 3318
-	provinces = { x5C4737 }
-}
-STATE_SOUTHERN_SEA_20 = {
-	id = 3319
-	provinces = { xFA7EB0 }
-}
-STATE_SOUTHERN_SEA_21 = {
-	id = 3320
-	provinces = { x98B629 }
-}
-STATE_SOUTHERN_SEA_22 = {
-	id = 3321
-	provinces = { x36EDA2 }
-}
-STATE_SOUTHERN_SEA_23 = {
-	id = 3322
-	provinces = { xD5251B }
-}
-STATE_SOUTHERN_SEA_24 = {
-	id = 3323
-	provinces = { x735C94 }
-}
-STATE_BITTER_SEA_30 = {
-	id = 3324
-	provinces = { x11940D }
-}
-STATE_SEA_OF_SQUALLS_08 = {
-	id = 3325
-	provinces = { xAFCB86 }
-}
-STATE_SEA_OF_SERPENTS_10 = {
-	id = 3326
-	provinces = { x4E02FF }
-}
-STATE_SEA_OF_WEIRD_WAVES_01 = {
-	id = 3327
-	provinces = { xEC3A78 }
-}
-STATE_SEA_OF_WEIRD_WAVES_02 = {
-	id = 3328
-	provinces = { x8A71F1 }
-}
-STATE_SEA_OF_SERPENTS_11 = {
-	id = 3329
-	provinces = { x28A96A }
-}
-STATE_JADE_SEA_04 = {
-	id = 3330
-	provinces = { xC6E0E3 }
-}
-STATE_SOUTHERN_SEA_25 = {
-	id = 3331
-	provinces = { x65185C }
-}
-STATE_GREAT_OCEAN_02 = {
-	id = 3332
-	provinces = { x034FD5 }
-}
-STATE_SEA_OF_FEAR_03 = {
-	id = 3333
-	provinces = { xA1874E }
-}
-STATE_JADE_SEA_05 = {
-	id = 3334
-	provinces = { x3FBEC7 }
-}
-STATE_GREAT_OCEAN_03 = {
-	id = 3335
-	provinces = { xDDF640 }
-}
-STATE_SEA_OF_WEIRD_WAVES_03 = {
-	id = 3336
-	provinces = { x7C2DB9 }
-}
-STATE_GREAT_OCEAN_04 = {
-	id = 3337
-	provinces = { x1A6532 }
-}
-STATE_SEA_OF_SERPENTS_12 = {
-	id = 3338
-	provinces = { xB89CAB }
-}
-STATE_SEA_OF_SQUALLS_09 = {
-	id = 3339
-	provinces = { x56D424 }
-}
-STATE_JADE_SEA_06 = {
-	id = 3340
-	provinces = { xF50B9D }
-}
-STATE_GREAT_OCEAN_05 = {
-	id = 3341
-	provinces = { x934316 }
-}
-STATE_SEA_OF_SQUALLS_10 = {
-	id = 3342
-	provinces = { x317A8F }
-}
-STATE_SEA_OF_FEAR_04 = {
-	id = 3343
-	provinces = { xCFB208 }
-}
-STATE_GREAT_OCEAN_06 = {
-	id = 3344
-	provinces = { x6DE981 }
-}
-STATE_GREAT_OCEAN_07 = {
-	id = 3345
-	provinces = { x0C20FA }
-}
-STATE_OCEAN_OF_DREAD_01 = {
-	id = 3346
-	provinces = { xAA5873 }
-}
-STATE_JADE_SEA_07 = {
-	id = 3347
-	provinces = { x488FEC }
-}
-STATE_SEA_OF_FEAR_05 = {
-	id = 3348
-	provinces = { xE6C765 }
-}
-STATE_JADE_SEA_08 = {
-	id = 3349
-	provinces = { x84FEDE }
-}
-STATE_JADE_SEA_09 = {
-	id = 3350
-	provinces = { x233657 }
-}
-STATE_SEA_OF_FEAR_06 = {
-	id = 3351
-	provinces = { xC16DD0 }
-}
-STATE_SEA_OF_WEIRD_WAVES_04 = {
-	id = 3352
-	provinces = { x5FA549 }
-}
-STATE_SEA_OF_WEIRD_WAVES_05 = {
-	id = 3353
-	provinces = { xFDDCC2 }
-}
-STATE_FAR_OCEAN_08 = {
-	id = 3354
-	provinces = { x9C143B }
-}
-STATE_OCEAN_OF_DREAD_02 = {
-	id = 3355
-	provinces = { x3A4BB4 }
-}
-STATE_GREAT_OCEAN_08 = {
-	id = 3356
-	provinces = { xD8832D }
-}
-STATE_SEA_OF_FEAR_07 = {
-	id = 3357
-	provinces = { x76BAA6 }
-}
-STATE_OCEAN_OF_DREAD_03 = {
-	id = 3358
-	provinces = { x14F21F }
-}
-STATE_SEA_OF_SQUALLS_11 = {
-	id = 3359
-	provinces = { xB32998 }
-}
-STATE_JADE_SEA_10 = {
-	id = 3360
-	provinces = { x516111 }
-}
-STATE_GREAT_OCEAN_09 = {
-	id = 3361
-	provinces = { xEF988A }
-}
-STATE_JADE_SEA_11 = {
-	id = 3362
-	provinces = { x8DD003 }
-}
-STATE_GREAT_OCEAN_10 = {
-	id = 3363
-	provinces = { x2C077C }
-}
-STATE_GREAT_OCEAN_11 = {
-	id = 3364
-	provinces = { xCA3EF5 }
-}
-STATE_GREAT_OCEAN_12 = {
-	id = 3365
-	provinces = { x68766E }
-}
-STATE_FAR_OCEAN_09 = {
-	id = 3366
-	provinces = { x06ADE7 }
-}
-STATE_GREAT_OCEAN_13 = {
-	id = 3367
-	provinces = { xA4E560 }
-}
-STATE_FAR_OCEAN_10 = {
-	id = 3368
-	provinces = { x431CD9 }
-}
-STATE_FAR_OCEAN_11 = {
-	id = 3369
-	provinces = { xE15452 }
-}
-STATE_FAR_OCEAN_12 = {
-	id = 3370
-	provinces = { x7F8BCB }
-}
-STATE_JADE_SEA_12 = {
-	id = 3371
-	provinces = { x1DC344 }
-}
-STATE_GREAT_OCEAN_14 = {
-	id = 3372
-	provinces = { xBBFABD }
-}
-STATE_SEA_OF_FEAR_08 = {
-	id = 3373
-	provinces = { x5A3236 }
-}
-STATE_OCEAN_OF_DREAD_04 = {
-	id = 3374
-	provinces = { xF869AF }
-}
-STATE_JADE_SEA_13 = {
-	id = 3375
-	provinces = { x96A128 }
-}
-STATE_JADE_SEA_14 = {
-	id = 3376
-	provinces = { x34D8A1 }
-}
-STATE_JADE_SEA_15 = {
-	id = 3377
-	provinces = { xD3101A }
-}
-STATE_OCEAN_OF_DREAD_05 = {
-	id = 3378
-	provinces = { x714793 }
-}
-STATE_OCEAN_OF_DREAD_06 = {
-	id = 3379
-	provinces = { x0F7F0C }
-}
-STATE_FAR_OCEAN_13 = {
-	id = 3380
-	provinces = { xADB685 }
-}
-STATE_GREAT_OCEAN_15 = {
-	id = 3381
-	provinces = { x4BEDFE }
-}
-STATE_JADE_SEA_16 = {
-	id = 3382
-	provinces = { xEA2577 }
-}
-STATE_GREAT_OCEAN_16 = {
-	id = 3383
-	provinces = { x885CF0 }
-}
-STATE_JADE_SEA_17 = {
-	id = 3384
-	provinces = { x269469 }
-}
-STATE_JADE_SEA_18 = {
-	id = 3385
-	provinces = { xC4CBE2 }
-}
-STATE_GREAT_OCEAN_17 = {
-	id = 3386
-	provinces = { x63035B }
-}
-STATE_GREAT_OCEAN_18 = {
-	id = 3387
-	provinces = { x013AD4 }
-}
-STATE_GREAT_OCEAN_19 = {
-	id = 3388
-	provinces = { x9F724D }
-}
-STATE_GREAT_OCEAN_20 = {
-	id = 3389
-	provinces = { x3DA9C6 }
-}
-STATE_OCEAN_OF_DREAD_07 = {
-	id = 3390
-	provinces = { xDBE13F }
-}
-STATE_GREAT_OCEAN_21 = {
-	id = 3391
-	provinces = { x7A18B8 }
-}
-STATE_OCEAN_OF_DREAD_08 = {
-	id = 3392
-	provinces = { x185031 }
-}
-STATE_GREAT_OCEAN_22 = {
-	id = 3393
-	provinces = { xB687AA }
-}
-STATE_OCEAN_OF_DREAD_09 = {
-	id = 3394
-	provinces = { x54BF23 }
-}
-STATE_OCEAN_OF_DREAD_10 = {
-	id = 3395
-	provinces = { xF2F69C }
-}
-STATE_JADE_SEA_19 = {
-	id = 3396
-	provinces = { x912E15 }
-}
-STATE_JADE_SEA_20 = {
-	id = 3397
-	provinces = { x2F658E }
 }
