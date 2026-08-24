@@ -443,6 +443,162 @@ def load_out_of_scope_continents(path: Path, canvas: tuple[int, int] | None = No
 
 
 # ---------------------------------------------------------------------------
+# Canon sea groups (the sea-zone naming config generate_sea_zones.py reads)
+# ---------------------------------------------------------------------------
+#
+# The 154 hand-drawn sea zones (board #2593) are numbered placeholders. Board
+# #2698 gives each a Warhammer-canon sea group — the Sea of Claws, the Great
+# Ocean, the Black Gulf, ... — printed on the Terraqueous globe itself. Like
+# ``inland_lakes.json`` / ``out_of_scope_continents.json`` this is hand-authored
+# geographic input: each canon sea is named and located by a set of
+# guaranteed-interior water **seed pixels** (a label id is opaque and only stable
+# while the partition is), and ``sea_naming.assign`` gives every zone the canon
+# sea owning the plurality of its pixels in a wrap-aware seed-Voronoi. An
+# ``override`` reassigns a single mis-assigned zone to a different canon sea,
+# keyed on an interior pixel of the zone — never a label id, for the same reason.
+#
+# The order of ``canon_seas`` is the deterministic canon-index tie-break (a
+# plurality tie goes to the lower canon index), so — like
+# ``load_out_of_scope_continents`` — this loader PRESERVES the authored order and
+# does NOT sort. Seeds must be unique across all seas (two seas seeding one pixel
+# is last-writer-wins in the seed raster — a silent authoring bug), so that is a
+# hard error here. Seed-on-water is checked by the generator, not here: the
+# canvas water mask is not available at schema-load time.
+
+@dataclass(frozen=True)
+class CanonSea:
+    """One canon sea group: a name, a display name, and its seed pixels.
+
+    ``name`` is the ``STATE_``-suffix token (uppercase/underscore only, so
+    ``STATE_<name>`` is a legal key); the per-zone key becomes
+    ``STATE_<name>_NN``. ``display_name`` is the shared localized text every zone
+    in the group carries. ``seeds`` are guaranteed-interior water pixels (canvas
+    px, integer) that source the Voronoi assignment — at least one.
+    """
+
+    name: str
+    display_name: str
+    seeds: tuple[tuple[int, int], ...]
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "CanonSea":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        if not all(c.isupper() or c == "_" or c.isdigit() for c in name) or not name[0].isalpha():
+            raise SchemaError(
+                f"{ctx}.name: must be uppercase letters/digits/underscore and start with a "
+                f"letter (so STATE_{name} is a legal key), got '{name}'"
+            )
+        ctx = f"{ctx}({name})"
+        display_name = _as_str(_require(d, "display_name", ctx), f"{ctx}.display_name")
+        if not display_name:
+            raise SchemaError(f"{ctx}.display_name: must be a non-empty string")
+        seeds = _as_seed_list(_require(d, "seeds", ctx), f"{ctx}.seeds", canvas)
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(name=name, display_name=display_name, seeds=seeds, note=note)
+
+
+@dataclass(frozen=True)
+class SeaZoneOverride:
+    """Reassign one mis-assigned zone to a different canon sea.
+
+    ``zone_seed`` is a guaranteed-interior pixel of the zone to reassign (never a
+    label id); ``canon_sea`` is the ``name`` of a declared :class:`CanonSea`.
+    """
+
+    zone_seed: tuple[int, int]
+    canon_sea: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "SeaZoneOverride":
+        (seed,) = _as_seed_list([_require(d, "zone_seed", ctx)], f"{ctx}.zone_seed", canvas)
+        canon_sea = _as_str(_require(d, "canon_sea", ctx), f"{ctx}.canon_sea")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(zone_seed=seed, canon_sea=canon_sea, note=note)
+
+
+@dataclass(frozen=True)
+class SeaZoneConfig:
+    """The whole ``tools/config/sea_zones.json`` — canon seas + overrides."""
+
+    canon_seas: tuple[CanonSea, ...]
+    overrides: tuple[SeaZoneOverride, ...]
+
+
+def _as_seed_list(value, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> tuple[tuple[int, int], ...]:
+    """A non-empty list of integer ``[x, y]`` pixel pairs, bounds-checked against
+    ``canvas`` when it is known — the same seed-pixel idiom as :class:`InlandLake`."""
+    if not isinstance(value, list) or not value:
+        raise SchemaError(f"{ctx}: expected a non-empty list of [x, y] pixel pairs")
+    out: list[tuple[int, int]] = []
+    for i, seed_raw in enumerate(value):
+        if (not isinstance(seed_raw, (list, tuple))) or len(seed_raw) != 2:
+            raise SchemaError(f"{ctx}[{i}]: expected an [x, y] pixel pair, got {seed_raw!r}")
+        sx = _as_int(seed_raw[0], f"{ctx}[{i}][0]")
+        sy = _as_int(seed_raw[1], f"{ctx}[{i}][1]")
+        if sx < 0 or sy < 0:
+            raise SchemaError(f"{ctx}[{i}]: pixel coords must be non-negative, got ({sx}, {sy})")
+        if canvas is not None:
+            cw, ch = canvas
+            if not (0 <= sx < cw and 0 <= sy < ch):
+                raise SchemaError(f"{ctx}[{i}]: ({sx}, {sy}) is outside the canvas {cw}x{ch}")
+        out.append((sx, sy))
+    return tuple(out)
+
+
+def load_sea_zones(path: Path, canvas: tuple[int, int] | None = None) -> SeaZoneConfig:
+    """Load + validate the committed canon-sea seed config (authored order kept).
+
+    Bounds-checks every seed against ``canvas`` when known and rejects a duplicate
+    canon-sea name, exactly like :func:`load_out_of_scope_continents`. Additionally
+    hard-errors on a **duplicate seed pixel across all canon seas** (two seas
+    seeding one pixel is last-writer-wins in the seed raster — a silent authoring
+    bug), and on an override whose ``canon_sea`` does not resolve to a declared
+    name. Preserves authored order — it is the deterministic canon-index tie-break.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    seas_raw = _require(data, "canon_seas", ctx)
+    if not isinstance(seas_raw, list) or not seas_raw:
+        raise SchemaError(f"{ctx}.canon_seas: expected a non-empty list")
+    seas = [CanonSea.from_dict(s, f"{ctx}.canon_seas[{i}]", canvas)
+            for i, s in enumerate(seas_raw)]
+
+    names = [s.name for s in seas]
+    dupes = {n for n in names if names.count(n) > 1}
+    if dupes:
+        raise SchemaError(f"{ctx}: duplicate canon-sea names {sorted(dupes)}")
+
+    seen_seeds: dict[tuple[int, int], str] = {}
+    for s in seas:
+        for seed in s.seeds:
+            if seed in seen_seeds:
+                raise SchemaError(
+                    f"{ctx}: seed pixel {list(seed)} is claimed by both "
+                    f"'{seen_seeds[seed]}' and '{s.name}' — seeds must be unique"
+                )
+            seen_seeds[seed] = s.name
+
+    overrides_raw = data.get("overrides", [])
+    if not isinstance(overrides_raw, list):
+        raise SchemaError(f"{ctx}.overrides: expected a list, got {type(overrides_raw).__name__}")
+    overrides = [SeaZoneOverride.from_dict(o, f"{ctx}.overrides[{i}]", canvas)
+                 for i, o in enumerate(overrides_raw)]
+    declared = set(names)
+    for i, o in enumerate(overrides):
+        if o.canon_sea not in declared:
+            raise SchemaError(
+                f"{ctx}.overrides[{i}].canon_sea: '{o.canon_sea}' is not a declared canon sea"
+            )
+    return SeaZoneConfig(canon_seas=tuple(seas), overrides=tuple(overrides))
+
+
+# ---------------------------------------------------------------------------
 # States (the state-cell partition — land states and single-province sea zones)
 # ---------------------------------------------------------------------------
 

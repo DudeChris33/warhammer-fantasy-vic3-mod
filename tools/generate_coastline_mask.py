@@ -65,6 +65,22 @@ def coast_line(rgb: np.ndarray) -> np.ndarray:
     return ndimage.binary_dilation(line, iterations=2)
 
 
+def filled_mask(rgb: np.ndarray, log=print) -> np.ndarray:
+    """Land/sea directly from a **finished** black/white fill (white = land).
+
+    When the user hands over the land/sea split already filled in — a two-colour
+    black (sea) / white (land) raster in canvas space — there is no coastline to
+    flood-fill: the mask *is* the source. This reads white as land directly, so
+    the user's own fill is the coastline authority verbatim (user directive,
+    2026-08-23: "no regenerating the mask, just use the one in sources/"). Any
+    anti-aliased grey at the black/white edge is decided by majority (>127).
+    """
+    land = (rgb.astype(np.int64).sum(axis=2) > 383)  # nearer white than black
+    log(f"filled mask: land fraction {land.mean():.3f} "
+        f"(white=land, {int(land.sum()):,} px)")
+    return land
+
+
 def _crisp_labels(line: np.ndarray) -> tuple[np.ndarray, int]:
     """Label the regions between the lines, then assign each line pixel to its
     nearest region so the land/sea boundary is a crisp 1 px shoreline rather than
@@ -126,13 +142,16 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--direct", action="store_true",
                    help="read the source file directly, bypassing the manifest guard "
                         "(for a candidate run before the source is manifested)")
+    p.add_argument("--from-fill", action="store_true",
+                   help="the source is a finished black/white land fill (white=land), "
+                        "not a magenta coastline trace — use it directly, no flood-fill")
     args = p.parse_args(argv)
 
     if args.direct:
         rgb = np.asarray(Image.open(Path("sources") / args.source).convert("RGB"))
     else:
         rgb = sources.load_source_image(args.source)
-    land = land_mask(rgb)
+    land = filled_mask(rgb) if args.from_fill else land_mask(rgb)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     raster.write_mask_png(args.out, land)
     print(f"wrote {args.out}")

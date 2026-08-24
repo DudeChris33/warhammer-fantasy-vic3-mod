@@ -23,8 +23,11 @@ Two variants, **one displacement field, two sampling orders**:
 
 The comparison the user is making is exactly that crisp-vs-smooth tradeoff, so the
 two renders must be pixel-comparable: they share one drape footprint (the alpha
-gates are *always* nearest — only the painting RGB sampling changes) and one crop
-box.
+gates are *always* nearest — only the painting RGB sampling changes) and one output
+frame.
+
+By default the output is the whole reprojected-globe canvas (8192×3616); ``--crop``
+trims it to the placed states' bounding box (plus ``--pad``) instead.
 
 **Placement.** The five crops are axis-aligned pixel cutouts of the master
 parchment, so each crop's integer offset ``(dx, dy)`` inside the master is
@@ -52,9 +55,9 @@ argmax, and no RNG or wall-clock enters.
 
 Usage::
 
-    python tools/project_regions.py                    # both variants
+    python tools/project_regions.py                    # both variants, full globe frame
     python tools/project_regions.py --variant nearest
-    python tools/project_regions.py --pad 128
+    python tools/project_regions.py --crop --pad 128   # trim to the placed states
 """
 
 from __future__ import annotations
@@ -89,9 +92,10 @@ GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 COAST_SOURCE = "terraqueous_globe_reprojected - coasts.png"
 
 #: The five Old World parchment crops, in the fixed compositing order used by
-#: ``render_anchor_dot_example.FIVE_PARCHMENT`` (later crops win where warped alpha
-#: overlaps along shared borders; the crops' alpha masks are cut disjoint, so
-#: overlap is a border-pixel affair, not a design decision).
+#: ``render_anchor_dot_example.FIVE_PARCHMENT``. The crops' alpha masks are **not**
+#: disjoint — ~15% of covered master pixels fall under two or more crops — so the
+#: order is a real precedence: the last crop covering a master pixel owns it (see
+#: :func:`master_owner`), which is what keeps overlap-zone lines from doubling.
 FIVE_CROPS = (
     "tww3_old_world_mod_parchment_bretonnia.png",
     "tww3_old_world_mod_parchment_empire.png",
@@ -166,16 +170,48 @@ def crop_offsets(master_gray: np.ndarray,
     return offsets
 
 
+def master_owner(crop_rgba: dict[str, np.ndarray],
+                 offsets: dict[str, tuple[int, int]],
+                 master_shape: tuple[int, int]) -> np.ndarray:
+    """Partition the master frame among the crops — ``owner[my, mx]`` = crop index.
+
+    The five crops' alpha masks are **not** disjoint: ~15% of covered master pixels
+    fall under two or more crops (the Bretonnia/Empire/Badlands stack is under
+    three). Without a partition each such master pixel — a border line included —
+    is warped once per covering crop through that crop's *different* registration
+    field, landing at slightly different canvas positions: the doubled/tripled
+    lines. Assigning every master pixel to a single crop places each line once.
+
+    Ownership follows the ``FIVE_CROPS`` compositing order — the **last** crop
+    covering a pixel wins, the same "later crops win" convention the per-canvas
+    overwrite already used, now decided on the master frame where it actually
+    removes the double-placement. ``-1`` marks master pixels no crop covers.
+    """
+    owner = np.full(master_shape, -1, dtype=np.int32)
+    for i, name in enumerate(FIVE_CROPS):
+        a = crop_rgba[name][..., 3] > ALPHA_VALID
+        dx, dy = offsets[name]
+        ch, cw = a.shape
+        sub = owner[dy:dy + ch, dx:dx + cw]
+        sub[a] = i
+    return owner
+
+
 def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
                    paint_rgba: np.ndarray, crop_rgba: dict[str, np.ndarray],
                    offsets: dict[str, tuple[int, int]],
-                   globe_rgb: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+                   globe_rgb: np.ndarray, owner: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
     """Drape the painting onto a copy of the globe. Returns ``(canvas_rgb, placed)``.
 
     ``order`` is the painting-RGB sampling order (0 nearest, 1 bilinear). **Both
     alpha gates are always nearest** so the two variants share an identical drape
     footprint — the only difference between them is fill/border crispness. Elsewhere
     the globe shows through.
+
+    ``owner`` (from :func:`master_owner`) partitions the master frame so each master
+    pixel is drawn by exactly one crop: a crop paints a canvas pixel only where it
+    owns the master pixel it maps to, so lines in the crops' overlap zones are placed
+    once rather than doubled per covering crop.
     """
     canvas_rgb = globe_rgb.copy()
     placed = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
@@ -183,8 +219,9 @@ def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
     ph, pw = paint_rgba.shape[:2]
     paint_planes = [paint_rgba[..., c].astype(np.float32) for c in range(3)]
     paint_alpha = paint_rgba[..., 3].astype(np.float32)
+    owner_f = owner.astype(np.float32)
 
-    for name in FIVE_CROPS:
+    for idx, name in enumerate(FIVE_CROPS):
         reg = regs[name]
         dx, dy = offsets[name]
         crop_alpha = crop_rgba[name][..., 3].astype(np.float32)
@@ -209,7 +246,9 @@ def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
             in_master = (mx >= 0) & (mx <= pw - 1) & (my >= 0) & (my <= ph - 1)
             ca = reproject.resample(crop_alpha, sx_c, sy_c, order=0)
             pa = reproject.resample(paint_alpha, mx, my, order=0)
-            valid = in_crop & in_master & (ca > ALPHA_VALID) & (pa > ALPHA_VALID)
+            own = reproject.resample(owner_f, mx, my, order=0)
+            valid = (in_crop & in_master & (ca > ALPHA_VALID) & (pa > ALPHA_VALID)
+                     & (np.rint(own) == idx))
             if not valid.any():
                 continue
 
@@ -248,22 +287,24 @@ def placement_box(placed: np.ndarray, pad: int) -> tuple[int, int, int, int]:
     return (x0, y0, x1, y1)
 
 
-def build(variants: list[str], pad: int, out_prefix: str) -> list[Path]:
+def build(variants: list[str], pad: int, out_prefix: str,
+          paint_source: str = PAINT_SOURCE, overlay_coasts: bool = True,
+          full_frame: bool = True, globe_source: str = GLOBE_SOURCE) -> list[Path]:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     for name in FIVE_CROPS:
         if name not in regs:
             raise SystemExit(f"{name}: no committed registration record")
 
     master_rgb = load_rgb(MASTER_SOURCE)
-    paint_rgba = load_rgba(PAINT_SOURCE)
+    paint_rgba = load_rgba(paint_source)
     crop_rgba = {name: load_rgba(name) for name in FIVE_CROPS}
-    globe_rgb = load_rgb(GLOBE_SOURCE)
-    coasts_rgb = load_rgb(COAST_SOURCE)
+    globe_rgb = load_rgb(globe_source)
+    coasts_rgb = load_rgb(COAST_SOURCE) if overlay_coasts else None
 
     if globe_rgb.shape[1] != CANVAS_W or globe_rgb.shape[0] != CANVAS_H:
-        raise SystemExit(f"{GLOBE_SOURCE} is {globe_rgb.shape[1]}x{globe_rgb.shape[0]}, "
+        raise SystemExit(f"{globe_source} is {globe_rgb.shape[1]}x{globe_rgb.shape[0]}, "
                          f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
-    if coasts_rgb.shape[:2] != globe_rgb.shape[:2]:
+    if coasts_rgb is not None and coasts_rgb.shape[:2] != globe_rgb.shape[:2]:
         raise SystemExit(f"{COAST_SOURCE} is {coasts_rgb.shape[1]}x{coasts_rgb.shape[0]}, "
                          f"expected {CANVAS_W}x{CANVAS_H} to match the globe")
     if master_rgb.shape[:2] != paint_rgba.shape[:2]:
@@ -278,14 +319,22 @@ def build(variants: list[str], pad: int, out_prefix: str) -> list[Path]:
     master_gray = master_rgb.astype(np.float32).mean(axis=2)
     offsets = crop_offsets(master_gray, crop_rgba)
 
+    # Partition the master among the crops so overlap-zone lines are placed once.
+    owner = master_owner(crop_rgba, offsets, paint_rgba.shape[:2])
+    covered = (owner >= 0).sum()
+    raw = sum(int((crop_rgba[n][..., 3] > ALPHA_VALID).sum()) for n in FIVE_CROPS)
+    log(f"master owner  {covered:,} px owned; {raw - covered:,} overlap px "
+        f"({100.0 * (raw - covered) / max(raw, 1):.1f}%) resolved to a single crop")
+
     # The nearest pass fixes the shared crop box (both passes drape the same
     # footprint, since the alpha gates do not depend on `order`).
-    base_rgb, placed = place_painting(0, regs, paint_rgba, crop_rgba, offsets, globe_rgb)
-    box = placement_box(placed, pad)
+    base_rgb, placed = place_painting(0, regs, paint_rgba, crop_rgba, offsets, globe_rgb, owner)
+    box = (0, 0, CANVAS_W, CANVAS_H) if full_frame else placement_box(placed, pad)
     x0, y0, x1, y1 = box
     log(f"placed        {100.0 * placed.mean():.3f}% of the frame "
         f"({int(placed.sum()):,} px)")
-    log(f"crop box      canvas [{x0}, {y0}, {x1}, {y1}]  ({x1 - x0}x{y1 - y0})")
+    label = "full frame" if full_frame else "crop box"
+    log(f"{label:<13} canvas [{x0}, {y0}, {x1}, {y1}]  ({x1 - x0}x{y1 - y0})")
 
     order_by_variant = {"nearest": 0, "bilinear": 1}
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
@@ -293,8 +342,8 @@ def build(variants: list[str], pad: int, out_prefix: str) -> list[Path]:
     for variant in variants:
         order = order_by_variant[variant]
         canvas_rgb = base_rgb if order == 0 else place_painting(
-            order, regs, paint_rgba, crop_rgba, offsets, globe_rgb)[0]
-        n_coast = overlay_coast(canvas_rgb, coasts_rgb)
+            order, regs, paint_rgba, crop_rgba, offsets, globe_rgb, owner)[0]
+        n_coast = overlay_coast(canvas_rgb, coasts_rgb) if coasts_rgb is not None else 0
         crop = canvas_rgb[y0:y1, x0:x1].copy()
         out_path = DERIVED_DIR / f"{out_prefix}_{variant}.png"
         Image.fromarray(crop, mode="RGB").save(out_path)
@@ -310,13 +359,29 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--variant", choices=("both", "nearest", "bilinear"), default="both",
                    help="which warp variant(s) to emit (default both)")
     p.add_argument("--pad", type=int, default=CROP_PAD,
-                   help=f"framing pad in canvas px around the placed states (default {CROP_PAD})")
+                   help=f"framing pad in canvas px around the placed states, with --crop "
+                        f"(default {CROP_PAD}; ignored on the default full frame)")
     p.add_argument("--out-prefix", default=OUT_PREFIX_DEFAULT,
                    help=f"output filename prefix under tools/derived/ (default {OUT_PREFIX_DEFAULT})")
+    p.add_argument("--paint", default=PAINT_SOURCE,
+                   help=f"the master-frame painting (4096², RGBA) to drape (default {PAINT_SOURCE}); "
+                        f"e.g. 'old_world_state_regions - borders_only.png' drapes only the "
+                        f"magenta border network so the globe shows through everywhere else")
+    p.add_argument("--no-coast", action="store_true",
+                   help="skip the cyan coastline reference overlay (drape the painting alone)")
+    p.add_argument("--crop", action="store_true",
+                   help="crop to the placed states' bounding box (+--pad) instead of the "
+                        "default full reprojected-globe canvas (8192x3616)")
+    p.add_argument("--globe", default=GLOBE_SOURCE,
+                   help=f"the backdrop to drape the painting over (default {GLOBE_SOURCE}); "
+                        f"must share the canvas frame ({CANVAS_W}x{CANVAS_H}), e.g. "
+                        f"'terraqueous_globe_reprojected - sea_zones.png'")
     args = p.parse_args(argv)
 
     variants = ["nearest", "bilinear"] if args.variant == "both" else [args.variant]
-    build(variants, args.pad, args.out_prefix)
+    build(variants, args.pad, args.out_prefix,
+          paint_source=args.paint, overlay_coasts=not args.no_coast,
+          full_frame=not args.crop, globe_source=args.globe)
     return 0
 
 

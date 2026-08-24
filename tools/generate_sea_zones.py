@@ -38,13 +38,15 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import cells, raster, sea_zones, sources  # noqa: E402
+from worldgen import cells, raster, schema, sea_naming, sea_zones, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+CONFIG_DIR = TOOLS_DIR / "config"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 LABELS_PATH = DERIVED_DIR / "sea_zones.png"
 INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
+SEA_ZONES_CONFIG = CONFIG_DIR / "sea_zones.json"
 
 SEA_ZONES_SOURCE = "terraqueous_globe_reprojected - sea_zones.png"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
@@ -52,9 +54,13 @@ WRAP_X = map_config.WRAP_X
 
 #: Dilate the drawn line this many px to bridge anti-aliased gaps; drop zone
 #: fragments below the floor. Both are stable knobs, committed here so the layer
-#: is reproducible from source alone.
+#: is reproducible from source alone. The floor exists only to swallow the thin
+#: offcuts the extraction leaves where the drawn line runs just off the mask
+#: coast (and sub-pixel dilation dust) — every offcut is coastline-hugging, not a
+#: hand-drawn open-water zone. Set ``--merge-floor 1`` to keep every region
+#: between the drawn lines (the user's partition verbatim, nothing merged).
 LINE_DILATE = 2
-MERGE_FLOOR = 1200
+MERGE_FLOOR = 1
 
 
 def log(msg: str, t0: float | None = None) -> None:
@@ -63,8 +69,13 @@ def log(msg: str, t0: float | None = None) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
-    argparse.ArgumentParser(description=__doc__,
-                            formatter_class=argparse.RawDescriptionHelpFormatter).parse_args(argv)
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--merge-floor", type=int, default=MERGE_FLOOR,
+                    help=f"drop zone fragments below this many px (default {MERGE_FLOOR} = keep all "
+                         f"regions the drawn lines make; raise it to swallow coastline offcuts)")
+    args = ap.parse_args(argv)
+    merge_floor = args.merge_floor
     t0 = time.time()
 
     if not MASK_PATH.is_file():
@@ -83,11 +94,20 @@ def main(argv: list[str] | None = None) -> int:
 
     drawn = sources.load_source_image(SEA_ZONES_SOURCE)  # manifest-guarded RGB
     log("extracting hand-drawn sea zones ...", t0)
-    zones = sea_zones.extract(land, drawn, LINE_DILATE, MERGE_FLOOR, WRAP_X, log=log)
+    zones = sea_zones.extract(land, drawn, LINE_DILATE, merge_floor, WRAP_X, log=log)
     n = int(zones.max())
 
     coastal = cells.coastal_labels(zones, ~land, WRAP_X)  # inverted mask -> sea zones touching land
     areas = np.bincount(zones.ravel(), minlength=n + 1)
+
+    # Canon naming (board #2698): give every zone a Warhammer sea group + key from
+    # the hand-authored seed config, via a per-pixel seed-Voronoi plurality. The
+    # index becomes fully self-describing (key / sea_group / display_name), so the
+    # loc generator reads it alone and config-to-loc drift is impossible.
+    config = schema.load_sea_zones(SEA_ZONES_CONFIG, canvas=(CANVAS_W, CANVAS_H))
+    log(f"naming {n} zones from {len(config.canon_seas)} canon seas "
+        f"({len(config.overrides)} overrides) ...", t0)
+    naming = sea_naming.assign(zones, land, config, WRAP_X, log=log)
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     cells.write_labels(LABELS_PATH, zones)
@@ -98,10 +118,13 @@ def main(argv: list[str] | None = None) -> int:
         "sea_zones": n,
         "id_start": map_config.SEA_ID_START,
         "source": SEA_ZONES_SOURCE,
+        "config": SEA_ZONES_CONFIG.name,
         "cells": [
             {
                 "label": i,
-                "key": f"STATE_SEA_{i:04d}",
+                "key": naming[i].key,
+                "sea_group": naming[i].sea_group,
+                "display_name": naming[i].display_name,
                 "id": map_config.SEA_ID_START + (i - 1),
                 "area": int(areas[i]),
                 "coastal": bool(coastal[i]),

@@ -1,0 +1,29 @@
+{
+ "note": "Canon Warhammer sea groups for the 154 hand-drawn sea zones (board #2698). Each canon sea is located by guaranteed-interior water SEED PIXELS in provinces.png canvas space (x, y), read off the sea names printed on tools/derived/seas_partition_review.png (the Terraqueous globe with the user's purple zone boundaries). worldgen.sea_naming.assign grows a wrap-aware seed-Voronoi over the water mask and gives each zone the canon sea owning the plurality of its pixels; the per-zone key is STATE_<name>_NN. `overrides` reassign a single mis-assigned zone to a different canon sea, keyed on an interior pixel of THAT zone (never a label id). Authored order is the deterministic canon-index tie-break (a plurality tie goes to the earlier sea) — do not reorder casually. Hand-authored geographic data like tools/config/inland_lakes.json: edit deliberately, then regenerate through generate_sea_zones.py; never infer from a bitmap. No `impassable` field anywhere (2026-08-22 decision: 1800s steamships cross open ocean).",
+ "canon_seas": [
+  { "name": "SEA_OF_OBLIVION", "display_name": "Sea of Oblivion", "seeds": [[333, 380], [200, 560]], "note": "Far north-west corner, north of Naggaroth." },
+  { "name": "FAR_OCEAN", "display_name": "Far Ocean", "seeds": [[750, 2450], [500, 3050], [1400, 2850], [420, 2000], [950, 1550]], "note": "The vast western open ocean; wraps toward the eastern seaboard." },
+  { "name": "SEA_OF_CHILL", "display_name": "Sea of Chill", "seeds": [[2200, 260], [2393, 414]], "note": "North of Naggaroth's Land of Chill." },
+  { "name": "SEA_OF_MALICE", "display_name": "Sea of Malice", "seeds": [[1900, 500], [2015, 743]], "note": "East of Naggaroth." },
+  { "name": "SEA_OF_CHAOS", "display_name": "Sea of Chaos", "seeds": [[3530, 300], [3120, 210], [3900, 260]], "note": "The northern polar sea above Norsca and Albion." },
+  { "name": "SEA_OF_CLAWS", "display_name": "Sea of Claws", "seeds": [[4113, 600], [4337, 769]], "note": "Between Norsca, the Empire and Bretonnia." },
+  { "name": "FROZEN_SEA", "display_name": "Frozen Sea", "seeds": [[4620, 400]], "note": "North-eastern inlet by Kislev; may fold into a neighbour if it is not its own zone." },
+  { "name": "SEA_OF_FEUDS", "display_name": "Sea of Feuds", "seeds": [[2520, 990], [2604, 1189]], "note": "East of Naggaroth, west of Ulthuan." },
+  { "name": "SEA_OF_MIST", "display_name": "Sea of Mist", "seeds": [[3313, 1050], [3200, 1260]], "note": "West of the Old World, between Ulthuan and Bretonnia/Estalia." },
+  { "name": "SEA_OF_SERPENTS", "display_name": "Sea of Serpents", "seeds": [[2483, 1683], [2200, 1760]], "note": "South of Naggaroth's New World." },
+  { "name": "SEA_OF_SQUALLS", "display_name": "Sea of Squalls", "seeds": [[1508, 1866], [1589, 1742]], "note": "North-west of Lustria." },
+  { "name": "SOUTHERN_SEA", "display_name": "Southern Sea", "seeds": [[3780, 1383], [3635, 1485]], "note": "South of Estalia and Tilea, north of Araby." },
+  { "name": "CORSAIR_CHANNEL", "display_name": "Corsair Channel", "seeds": [[3230, 1470]], "note": "South of Ulthuan; small, may fold into the Sea of Mist / Southern Sea." },
+  { "name": "GREAT_OCEAN", "display_name": "Great Ocean", "seeds": [[3313, 2341], [2900, 2900], [3600, 3100], [3200, 1950], [4050, 2600]], "note": "The great central-southern ocean between Lustria, Ulthuan and the Southlands." },
+  { "name": "BLACK_GULF", "display_name": "Black Gulf", "seeds": [[4092, 1213]], "note": "The gulf east of Tilea (matches tools/config/inland_lakes.json black_gulf)." },
+  { "name": "BITTER_SEA", "display_name": "Bitter Sea", "seeds": [[4913, 1567]], "note": "East of the Dark Lands, by the Dragon Isles." },
+  { "name": "LIZARD_SEA", "display_name": "Lizard Sea", "seeds": [[5430, 1633]], "note": "By the Dragon Isles, east of the Dark Lands." },
+  { "name": "SEA_OF_FEAR", "display_name": "Sea of Fear", "seeds": [[5213, 1875], [5100, 2050]], "note": "East of the Southlands' Serpent Coast." },
+  { "name": "SEA_OF_WEIRD_WAVES", "display_name": "Sea of Weird Waves", "seeds": [[5943, 2133]], "note": "Between the Kingdoms of Ind and Kuresh." },
+  { "name": "OCEAN_OF_DREAD", "display_name": "Ocean of Dread", "seeds": [[5330, 2875], [5560, 3150], [6050, 3300], [5000, 3400]], "note": "The southern ocean south of Kuresh and the Southlands." },
+  { "name": "SEA_OF_WRATH", "display_name": "Sea of Wrath", "seeds": [[6927, 1492]], "note": "East of Grand Cathay, west of Tempest Land." },
+  { "name": "SEA_OF_RAGE", "display_name": "Sea of Rage", "seeds": [[7377, 1067], [7877, 680]], "note": "East of Grand Cathay and Nippon; the north-eastern seaboard." },
+  { "name": "JADE_SEA", "display_name": "Jade Sea", "seeds": [[7143, 2050], [7500, 2400], [7057, 2722]], "note": "The far-eastern sea by the Lumbria Archipelago and the Isle of Rising Sun." }
+ ],
+ "overrides": []
+}

@@ -972,6 +972,127 @@ def _selfcheck_sea_zones() -> None:
     assert np.array_equal(zones, z2), "two runs must be byte-identical"
 
 
+def _selfcheck_land_provinces() -> None:
+    """Drawn land-province cut (worldgen.land_provinces), in isolation (no golden).
+
+    Pins the properties generate_provinces.py relies on: a magenta line drawn on
+    land splits it into regions while a magenta mark in water is ignored; a
+    landmass dense with interior magenta is classed drawn and one bare of it is a
+    placeholder; ``subdivide`` cuts a drawn region into several provinces that
+    never cross the magenta boundary (each province lies in one region) while a
+    placeholder region stays a single province; every land pixel is labelled and
+    no water pixel is; and two runs are byte-identical.
+    """
+    from worldgen import land_provinces as lp
+
+    H, W = 20, 40
+    land = np.zeros((H, W), dtype=bool)
+    land[2:18, 2:18] = True          # drawn landmass (interior magenta line)
+    land[2:18, 25:35] = True         # placeholder landmass (no magenta)
+    drawn = np.full((H, W, 3), 180, dtype=np.uint8)
+    drawn[2:18, 9] = (255, 0, 255)   # magenta divider through the drawn landmass
+    drawn[10, 21] = (255, 0, 255)    # a magenta mark in the water — must be ignored
+
+    reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
+    assert int(reg.max()) == 3, f"2 drawn regions + 1 placeholder = 3, got {reg.max()}"
+    assert (reg[land] > 0).all(), "every land pixel must carry a region"
+    assert (reg[~land] == 0).all(), "no water pixel may carry a region (water mark ignored)"
+
+    dmask = lp.drawn_mask(land, lp.magenta_lines(drawn), wrap_x=False,
+                          interior_dist=2, reach=10)
+    # The interior-magenta blob covers the drawn landmass and reaches nowhere near
+    # the bare one, so subdivide subdivides the first and keeps the second whole.
+    assert dmask[2:18, 25:35].mean() < 0.5, "the bare landmass must be classed placeholder"
+    assert dmask[2:18, 2:18].mean() > 0.5, "the interior-magenta landmass must be classed drawn"
+
+    prov, is_placeholder = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
+    assert int(prov.max()) >= 6, f"drawn regions must subdivide, got {prov.max()} provinces"
+    assert (prov[land] > 0).all() and (prov[~land] == 0).all(), "provinces must tile land only"
+    # No province crosses a magenta boundary: each province lies in one region.
+    for lab in range(1, int(prov.max()) + 1):
+        regs_here = np.unique(reg[prov == lab])
+        assert len(regs_here) == 1, f"province {lab} spans regions {regs_here.tolist()}"
+    # The placeholder landmass stays exactly one province, flagged out-of-scope.
+    placeholder_provs = np.unique(prov[2:18, 25:35])
+    assert len(placeholder_provs) == 1, \
+        f"placeholder landmass must be one province, got {placeholder_provs.tolist()}"
+    assert is_placeholder[placeholder_provs[0]], "the placeholder province must be flagged"
+    # A subdivided (drawn) province must NOT be flagged out-of-scope.
+    drawn_prov = int(prov[9, 5])  # inside the drawn landmass
+    assert not is_placeholder[drawn_prov], "a drawn Old-World province must not be flagged"
+
+    p2, ip2 = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
+    assert np.array_equal(prov, p2), "two runs must be byte-identical"
+    assert np.array_equal(is_placeholder, ip2), "placeholder flags must be byte-identical too"
+
+
+def _selfcheck_sea_naming() -> None:
+    """Canon sea naming (worldgen.sea_naming), in isolation (no golden).
+
+    Pins the properties generate_sea_zones.py relies on: per-pixel seed-Voronoi
+    plurality assigns each zone to a canon sea, the ordinal NN follows the zones'
+    wrap-robust first pixel, an override reassigns a single zone, a canon sea that
+    wins nothing raises a loud warning (not a silent pass), an override on land is
+    a hard error, and two runs are byte-identical.
+    """
+    from worldgen import sea_naming as sn
+    from worldgen import cells as _cells
+    from worldgen import schema as _schema
+
+    # All-water canvas, four side-by-side zones (x: 0-9, 10-19, 20-29, 30-39).
+    H, W = 8, 40
+    land = np.zeros((H, W), dtype=bool)
+    sea = np.zeros((H, W), dtype=np.int32)
+    sea[:, 0:10] = 1
+    sea[:, 10:20] = 2
+    sea[:, 20:30] = 3
+    sea[:, 30:40] = 4
+
+    west = _schema.CanonSea("WEST", "West Sea", ((2, 4), (12, 4)), "")
+    east = _schema.CanonSea("EAST", "East Sea", ((25, 4), (35, 4)), "")
+    ghost = _schema.CanonSea("GHOST", "Ghost Sea", ((19, 4),), "")  # dominated in zone 2
+    cfg = _schema.SeaZoneConfig(canon_seas=(west, east, ghost), overrides=())
+
+    msgs: list[str] = []
+    res = sn.assign(sea, land, cfg, wrap_x=False, log=msgs.append)
+    assert res[1].sea_group == "WEST" and res[2].sea_group == "WEST", res
+    assert res[3].sea_group == "EAST" and res[4].sea_group == "EAST", res
+    # Ordinal follows first raster pixel: zone 1 (x=0) before zone 2 (x=10).
+    assert res[1].key == "STATE_WEST_01" and res[2].key == "STATE_WEST_02", res
+    assert res[3].key == "STATE_EAST_01" and res[4].key == "STATE_EAST_02", res
+    assert res[1].display_name == "West Sea", res
+    assert any("GHOST won 0 zones" in m for m in msgs), msgs
+
+    # Two runs byte-identical.
+    res2 = sn.assign(sea, land, cfg, wrap_x=False, log=None)
+    assert res == res2, "sea naming must be deterministic"
+
+    # An override reassigns a single zone, keyed on an interior pixel of it.
+    cfg_ov = _schema.SeaZoneConfig(
+        canon_seas=(west, east, ghost),
+        overrides=(_schema.SeaZoneOverride((35, 4), "WEST", ""),),
+    )
+    res_ov = sn.assign(sea, land, cfg_ov, wrap_x=False, log=None)
+    assert res_ov[4].sea_group == "WEST", res_ov
+    assert res_ov[4].key == "STATE_WEST_03", res_ov  # renumbered within WEST
+
+    # An override pixel on land is a hard error.
+    land_hole = land.copy()
+    sea_hole = sea.copy()
+    land_hole[4, 5] = True
+    sea_hole[4, 5] = 0
+    cfg_bad = _schema.SeaZoneConfig(
+        canon_seas=(west, east),
+        overrides=(_schema.SeaZoneOverride((5, 4), "WEST", ""),),
+    )
+    try:
+        sn.assign(sea_hole, land_hole, cfg_bad, wrap_x=False, log=None)
+    except _cells.CellError:
+        pass
+    else:  # pragma: no cover
+        raise AssertionError("an override on a land pixel must raise CellError")
+
+
 def _selfcheck_composite() -> None:
     """Precedence resolution + tie rejection for worldgen.composite."""
     shape = (4, 4)
@@ -1130,6 +1251,12 @@ def run_check() -> int:
     print("marker: border-markup extraction (rivers in, roads ignored) self-check passed.")
     _selfcheck_sea_zones()
     print("sea_zones: drawn-line extraction (in-water splits, land marks ignored) self-check passed.")
+    _selfcheck_land_provinces()
+    print("land_provinces: drawn-region cut (barrier-respecting subdivision, placeholder whole) "
+          "self-check passed.")
+    _selfcheck_sea_naming()
+    print("sea_naming: canon plurality assignment + ordinal + override + zero-zone warning "
+          "self-check passed.")
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
 

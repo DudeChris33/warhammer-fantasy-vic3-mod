@@ -70,6 +70,12 @@ def extract(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
 
     # Crisp 1-px boundaries: each barrier pixel takes the nearest region's label.
     zones = cells.fill_nearest(zones, water, wrap_x)
+    # The nearest-label fill measures Euclidean distance, which can tear a zone
+    # into disconnected pieces sharing one label (a bay owning a patch of the same
+    # ocean across a headland, or a 2-px offcut pinched apart at a diagonal). A sea
+    # zone in two pieces is not one naval zone, so split them — the same
+    # connectivity repair the land side runs — before the offcut merge.
+    zones = cells.split_disconnected(zones, wrap_x)
     # Drop stray slivers (coastal-trace offcuts, accidental marks).
     zones = cells.merge_small(zones, merge_floor, wrap_x)
     zones = cells.renumber(zones)

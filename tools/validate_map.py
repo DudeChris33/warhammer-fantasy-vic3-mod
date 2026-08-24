@@ -634,6 +634,171 @@ def validate_labels(labels_path: Path, mask_path: Path, index_path: Path,
     return errors
 
 
+# ---------------------------------------------------------------------------
+# The first-pass province bitmap (--province-bitmap)
+# ---------------------------------------------------------------------------
+#
+# Board #2773 produces the RGB province image + its index directly from the
+# drawn source, ahead of the state_regions/*.txt text the repo-form validator
+# needs. This is the RGB mirror of validate_labels: the same engine invariants
+# ("every pixel one province, no province straddles the coast, every province one
+# connected region") restated on the colour bitmap, cross-checked against the
+# committed index and the committed sea-zone layer.
+
+def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
+                       sea_labels_path: Path, wrap_x: bool = True,
+                       min_cell_area: int = 4) -> list[str]:
+    """Check the first-pass province bitmap tiles the mask exactly and agrees with
+    its index and the committed sea-zone layer."""
+    import json
+
+    from worldgen import cells
+    from worldgen.raster import read_rgb_png
+
+    errors: list[str] = []
+    for path in (provinces_path, mask_path, index_path, sea_labels_path):
+        if not path.is_file():
+            errors.append(f"missing {path}")
+    if errors:
+        return errors
+
+    rgb = read_rgb_png(provinces_path)
+    land = _read_mask(mask_path)
+    index = json.loads(index_path.read_text(encoding="utf-8"))
+
+    if rgb.shape[:2] != land.shape:
+        return [f"province bitmap {rgb.shape[:2]} does not match the mask {land.shape}"]
+
+    n_land = int(index["land_provinces"])
+    n_sea = int(index["sea_provinces"])
+
+    # Pack each pixel's colour into one 24-bit key; map keys to index labels.
+    key = ((rgb[..., 0].astype(np.int64) << 16)
+           | (rgb[..., 1].astype(np.int64) << 8)
+           | rgb[..., 2].astype(np.int64))
+
+    # 1. The (0,0,0) sentinel must never appear as a province colour.
+    if bool((key == 0).any()):
+        errors.append(f"{int((key == 0).sum()):,} pixel(s) are (0,0,0) — the reserved sentinel")
+
+    color_to_label: dict[int, int] = {}
+    dup_colors: list[int] = []
+    for c in index["cells"]:
+        r, g, b = c["color"]
+        k = (int(r) << 16) | (int(g) << 8) | int(b)
+        if k in color_to_label:
+            dup_colors.append(k)
+        color_to_label[k] = int(c["label"])
+    if dup_colors:
+        errors.append(f"{len(dup_colors)} colour(s) are shared by more than one province in the index")
+
+    uniq, inv = np.unique(key, return_inverse=True)
+    lut = np.array([color_to_label.get(int(k), -1) for k in uniq], dtype=np.int64)
+    unknown = [int(k) for k, lab in zip(uniq.tolist(), lut.tolist()) if lab < 0 and k != 0]
+    if unknown:
+        errors.append(
+            f"{len(unknown)} colour(s) appear in the bitmap but not the index "
+            f"(first few hex: {[f'{k:06X}' for k in unknown[:5]]})")
+    labels = np.where(lut[inv].reshape(key.shape) < 0, 0, lut[inv].reshape(key.shape)).astype(np.int32)
+
+    # 2. No province straddles the coast (the mask stays authoritative).
+    land_ids = set(np.unique(labels[land]).tolist()) - {0}
+    sea_ids = set(np.unique(labels[~land]).tolist()) - {0}
+    both = sorted(land_ids & sea_ids)
+    if both:
+        errors.append(
+            f"{len(both)} province(s) span land and sea (first few: {both[:5]}) — "
+            f"a province must be wholly one or the other")
+
+    # 3. Land labels 1..n_land, sea labels n_land+1..n_land+n_sea.
+    for i in sorted(land_ids):
+        if not (1 <= i <= n_land):
+            errors.append(f"land pixel carries label {i}, outside the land band 1..{n_land}")
+            break
+    for i in sorted(sea_ids):
+        if not (n_land < i <= n_land + n_sea):
+            errors.append(
+                f"water pixel carries label {i}, outside the sea band "
+                f"{n_land + 1}..{n_land + n_sea}")
+            break
+
+    # 4. Index kinds/ids/areas agree with the raster.
+    listed = {c["label"] for c in index["cells"]}
+    present = land_ids | sea_ids
+    for missing in sorted(present - listed)[:5]:
+        errors.append(f"label {missing} is in the bitmap but not the index")
+    for extra in sorted(listed - present)[:5]:
+        errors.append(f"label {extra} is in the index but not the bitmap")
+    for kind, declared in (("land", n_land), ("sea", n_sea)):
+        actual = sum(1 for c in index["cells"] if c["kind"] == kind)
+        if actual != declared:
+            errors.append(f"index declares {declared} {kind} provinces but lists {actual}")
+    areas = np.bincount(labels.ravel(), minlength=n_land + n_sea + 1)
+    for c in index["cells"]:
+        lab = int(c["label"])
+        if lab <= n_land + n_sea and int(areas[lab]) != int(c["area"]):
+            errors.append(f"label {lab}: index says {c['area']} px, raster has {int(areas[lab])}")
+            break
+    # Id bands: land id = land_id_start + (label-1); sea id = sea_id_start + (sea_index-1).
+    lid, sid = int(index["land_id_start"]), int(index["sea_id_start"])
+    for c in index["cells"]:
+        lab = int(c["label"])
+        want = lid + (lab - 1) if c["kind"] == "land" else sid + (lab - n_land - 1)
+        if int(c["id"]) != want:
+            errors.append(f"label {lab}: index id {c['id']} != expected {want} for a {c['kind']} province")
+            break
+
+    # 5. Every province is one connected region (a province in two pieces is none).
+    comp = cells.components(labels, wrap_x)
+    pairs = np.unique(np.stack([labels.ravel(), comp.ravel()], axis=1), axis=0)
+    counts = np.bincount(pairs[:, 0].astype(np.int64), minlength=int(labels.max()) + 1)
+    torn = np.flatnonzero(counts > 1)
+    torn = torn[torn > 0]
+    if torn.size:
+        errors.append(f"{torn.size} province(s) are disconnected (first few: {torn[:5].tolist()})")
+
+    # 6. The sea province count matches the committed sea-zone layer.
+    sea_lab = cells.read_labels(sea_labels_path)
+    committed_sea = int(sea_lab.max())
+    if committed_sea != n_sea:
+        errors.append(
+            f"index has {n_sea} sea provinces but {sea_labels_path.name} has {committed_sea}")
+    if sea_lab.shape == land.shape and not bool((( sea_lab > 0) == ~land).all()):
+        errors.append(f"{sea_labels_path.name} does not tile this mask's water exactly")
+
+    # 7. No avoidably-degenerate LAND province: below the floor AND with a
+    #    same-kind neighbour it could have merged into (a lone small island is
+    #    legitimate). Restricted to land, which this generator subdivides and so
+    #    controls; the sea provinces are a faithful 1:1 copy of the committed,
+    #    separately-gated sea-zone layer (whose own policy deliberately keeps thin
+    #    coastal inlets, merge_floor=1), and check 6 already ties their count to
+    #    that layer — re-flagging them here would be a false positive this
+    #    generator cannot fix without diverging from the sea layer.
+    tiny = [i for i in sorted(land_ids) if i > 0 and int(areas[i]) < int(min_cell_area)]
+    if tiny:
+        adj = np.concatenate([
+            np.stack([labels[:, :-1].ravel(), labels[:, 1:].ravel()], axis=1),
+            np.stack([labels[:-1, :].ravel(), labels[1:, :].ravel()], axis=1),
+            np.stack([labels[:, -1].ravel(), labels[:, 0].ravel()], axis=1)
+            if wrap_x else np.empty((0, 2), dtype=labels.dtype),
+        ])
+        adj = np.unique(adj[adj[:, 0] != adj[:, 1]], axis=0)
+        tiny_set = set(tiny)
+        same_kind_nb = {i: False for i in tiny}
+        for a, b in adj.tolist():
+            for u, v in ((a, b), (b, a)):
+                if u in tiny_set and v > 0 and ((u in land_ids) == (v in land_ids)):
+                    same_kind_nb[u] = True
+        mergeable = [i for i in tiny if same_kind_nb[i]]
+        if mergeable:
+            smallest = min(mergeable, key=lambda i: areas[i])
+            errors.append(
+                f"{len(mergeable)} province(s) are below the {min_cell_area} px floor and have a "
+                f"same-kind neighbour to merge into (smallest: label {smallest} at "
+                f"{int(areas[smallest])} px)")
+    return errors
+
+
 def _read_mask(path: Path) -> np.ndarray:
     from worldgen.raster import read_mask_png
 
@@ -648,7 +813,10 @@ def _build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--fixture", action="store_true", help="lint tools/fixtures/expected/ instead of the repo map")
     p.add_argument("--labels", action="store_true", help="lint the S3a state-label layer instead of the province map")
+    p.add_argument("--province-bitmap", action="store_true",
+                   help="lint the first-pass province bitmap (RGB + index) instead of the repo map text")
     p.add_argument("--labels-path", type=Path, help="path to state_labels.png")
+    p.add_argument("--sea-labels-path", type=Path, help="path to sea_zones.png")
     p.add_argument("--mask-path", type=Path, help="path to land_sea_mask.png")
     p.add_argument("--index-path", type=Path, help="path to state_labels_index.json")
     p.add_argument("--provinces", type=Path, help="path to provinces.png")
@@ -700,6 +868,25 @@ def main(argv: list[str] | None = None) -> int:
                 print(f"  - {e}", file=sys.stderr)
             return 1
         print("validate_map --labels: the state-label layer tiles the mask exactly.")
+        return 0
+
+    if args.province_bitmap:
+        derived = TOOLS_DIR / "derived"
+        errors = validate_provinces(
+            provinces_path=args.provinces or REPO_ROOT / "map_data" / "provinces.png",
+            mask_path=args.mask_path or derived / "land_sea_mask.png",
+            index_path=args.index_path or derived / "provinces_index.json",
+            sea_labels_path=args.sea_labels_path or derived / "sea_zones.png",
+            wrap_x=map_config.WRAP_X,
+            min_cell_area=args.min_province_area,
+        )
+        if errors:
+            print(f"validate_map --province-bitmap: {len(errors)} error(s):", file=sys.stderr)
+            for e in errors:
+                print(f"  - {e}", file=sys.stderr)
+            return 1
+        print("validate_map --province-bitmap: the province bitmap tiles the mask and agrees "
+              "with its index + the sea layer.")
         return 0
 
     paths = _resolve_paths(args)
