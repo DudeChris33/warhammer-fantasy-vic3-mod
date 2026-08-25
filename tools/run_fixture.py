@@ -1005,7 +1005,7 @@ def _selfcheck_land_provinces() -> None:
     assert dmask[2:18, 25:35].mean() < 0.5, "the bare landmass must be classed placeholder"
     assert dmask[2:18, 2:18].mean() > 0.5, "the interior-magenta landmass must be classed drawn"
 
-    prov, is_placeholder = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
+    prov, is_placeholder, reg_of = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
     assert int(prov.max()) >= 6, f"drawn regions must subdivide, got {prov.max()} provinces"
     assert (prov[land] > 0).all() and (prov[~land] == 0).all(), "provinces must tile land only"
     # No province crosses a magenta boundary: each province lies in one region.
@@ -1021,9 +1021,26 @@ def _selfcheck_land_provinces() -> None:
     drawn_prov = int(prov[9, 5])  # inside the drawn landmass
     assert not is_placeholder[drawn_prov], "a drawn Old-World province must not be flagged"
 
-    p2, ip2 = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
+    # The region grouping generate_provinces.py serializes into land_regions_index.json:
+    # reg_of maps every province label to exactly one region, and the inversion is total.
+    assert int(reg_of[0]) == 0, "water must map to region 0"
+    groups: dict[int, list[int]] = {}
+    for lab in range(1, int(prov.max()) + 1):
+        r = int(reg_of[lab])
+        assert r >= 1, f"province {lab} maps to no region (reg_of={r})"
+        groups.setdefault(r, []).append(lab)
+    grouped = sorted(p for members in groups.values() for p in members)
+    assert grouped == list(range(1, int(prov.max()) + 1)), \
+        "the region grouping must cover every land province exactly once (totality)"
+    # The placeholder landmass's province is the sole member of its own region.
+    ph = int(placeholder_provs[0])
+    assert groups[int(reg_of[ph])] == [ph], \
+        "the placeholder province must be the only member of its region"
+
+    p2, ip2, ro2 = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
     assert np.array_equal(prov, p2), "two runs must be byte-identical"
     assert np.array_equal(is_placeholder, ip2), "placeholder flags must be byte-identical too"
+    assert np.array_equal(reg_of, ro2), "the region grouping must be byte-identical too"
 
 
 def _selfcheck_sea_naming() -> None:

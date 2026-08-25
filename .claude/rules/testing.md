@@ -38,7 +38,8 @@ action, never a side effect of a generator run.
 `tools/derived/land_sea_mask.png`, `map_data/heightmap.png`, `map_data/rivers.png`,
 `tools/derived/state_labels.png`, `tools/derived/sea_zones.png` (+
 `tools/derived/sea_zones_index.json`) and `map_data/provinces.png` (+
-`tools/derived/provinces_index.json`) are generated, not hand-authored: after an
+`tools/derived/provinces_index.json` + `tools/derived/land_regions_index.json`, the
+region→province grouping) are generated, not hand-authored: after an
 intentional source/LUT/registration change, regenerate them with `python
 tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png` — either
 flood-filled from the user's traced coastline in `sources/land_sea_mask.png`, or,
