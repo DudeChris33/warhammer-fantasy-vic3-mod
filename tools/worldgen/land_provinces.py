@@ -230,7 +230,7 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     Returns ``(labels, is_placeholder)``: the province label layer (``1..N``, 0 on
     water) and a boolean table indexed by label, ``True`` for an **out-of-scope
     placeholder** province (a far continent outside the drawn Old World, which the
-    generator marks impassable). After the per-region cut,
+    generator marks as a passable placeholder). After the per-region cut,
     :func:`worldgen.cells.split_disconnected` repairs any seam a fill tore,
     sub-floor offcuts merge into a neighbour, and the labels renumber to ``1..N``.
     """

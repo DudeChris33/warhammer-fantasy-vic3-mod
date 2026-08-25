@@ -60,7 +60,10 @@ and neither is wired into `state_labels.png`. `generate_provinces.py` (board
 it flood-fills the hand-drawn magenta network into barrier-respecting state
 regions, then subdivides each drawn region into provinces (no province crosses a
 magenta line); an out-of-scope far continent with no interior magenta is
-classified a placeholder and kept whole as one impassable province.
+classified a placeholder and kept whole as one passable placeholder province (Vic3
+stacks every hub on one province, so a landmass needs only one passable province
+to boot as a legal state; `impassable` is uniformly `false` on land, and the
+out-of-scope signal is carried separately as the `placeholder` flag).
 `worldgen/sea_zones.py`'s `extract` also gained a `split_disconnected`
 connectivity repair (the nearest-label fill can tear a zone into two
 disconnected pieces sharing one label; `land_provinces.regions` mirrors the

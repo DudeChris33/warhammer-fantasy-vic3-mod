@@ -175,11 +175,17 @@ def main(argv: list[str] | None = None) -> int:
     land_id_start = map_config.LAND_ID_START  # 1
     sea_id_start = n_land + 1
     entries = []
-    n_impassable = 0
+    n_placeholder = 0
     for lab in range(1, n_land + 1):
         color = tuple(int(v) for v in palette[lab])
-        impassable = bool(is_placeholder[lab]) if lab < len(is_placeholder) else False
-        n_impassable += impassable
+        # Out-of-scope far continents are kept whole but emitted PASSABLE: Vic3
+        # stacks every hub on one province (vanilla STATE_DELAWARE/STATE_BUKOVINA),
+        # so a landmass boots as a legal one-province state. The out-of-scope
+        # signal is preserved separately as `placeholder` for downstream state
+        # emission; `impassable` now honestly means impassable and is uniformly
+        # False on land.
+        placeholder = bool(is_placeholder[lab]) if lab < len(is_placeholder) else False
+        n_placeholder += placeholder
         entries.append({
             "label": lab,
             "kind": "land",
@@ -188,7 +194,8 @@ def main(argv: list[str] | None = None) -> int:
             "id": land_id_start + (lab - 1),  # == lab
             "area": int(areas[lab]),
             "coastal": bool(land_coastal[lab]) if lab < len(land_coastal) else False,
-            "impassable": impassable,
+            "impassable": False,  # every land province is passable now
+            "placeholder": placeholder,  # out-of-scope land kept whole, undetailed
         })
     for s in range(1, n_sea + 1):
         lab = n_land + s
@@ -202,6 +209,7 @@ def main(argv: list[str] | None = None) -> int:
             "area": int(areas[lab]),
             "coastal": bool(sea_coastal[s]) if s < len(sea_coastal) else False,
             "impassable": False,  # sea provinces are navigable, never impassable
+            "placeholder": False,  # schema symmetry with land entries
         })
 
     index = {
@@ -210,7 +218,8 @@ def main(argv: list[str] | None = None) -> int:
         "sea_source": SEA_LABELS_PATH.name,
         "land_provinces": n_land,
         "sea_provinces": n_sea,
-        "impassable_land_provinces": n_impassable,
+        "impassable_land_provinces": 0,  # nothing is impassable — every landmass boots
+        "placeholder_land_provinces": n_placeholder,  # out-of-scope land kept whole
         "land_id_start": land_id_start,
         "sea_id_start": sea_id_start,
         "cells": entries,
@@ -219,7 +228,7 @@ def main(argv: list[str] | None = None) -> int:
     log(f"wrote {INDEX_PATH.relative_to(REPO_ROOT)}", t0)
 
     land_areas = areas[1:n_land + 1]
-    log(f"done: {n_land} land provinces ({n_impassable} out-of-scope impassable placeholders) "
+    log(f"done: {n_land} land provinces ({n_placeholder} out-of-scope passable placeholders) "
         f"(area min {int(land_areas.min()):,} / median {int(np.median(land_areas)):,} / "
         f"max {int(land_areas.max()):,} px), {n_sea} sea provinces", t0)
     return 0
