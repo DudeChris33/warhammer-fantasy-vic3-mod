@@ -1,0 +1,23 @@
+root_owns_state_in_region = { #checks if any_scope_state owned by root
+	any_scope_state = {
+		owner = root
+	}
+}
+
+# Harvest Condition Triggers
+
+is_vulnerable_to_disease_outbreak = {
+	always = yes
+}
+
+is_vulnerable_to_extreme_winds = {
+	always = yes
+}
+
+has_potential_for_pollinator_surge = {
+	always = yes
+}
+
+has_potential_for_optimal_sunlight = {
+	always = yes
+}
