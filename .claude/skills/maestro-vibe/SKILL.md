@@ -7,13 +7,14 @@ description: >-
   leaves a born-done history item on the board at close-out.
 user-invocable: true
 argument-hint: <small feature/bug/tweak description(s)>
-maestro-skill-version: 10
+maestro-skill-version: 12
 ---
 
 # Maestro Vibe — One Session, No Board Ceremony
 
 Same build discipline as `/maestro-build` — conventions, tests, commits,
-honest reporting — with no board ceremony: no workspec, no `## Plan` push, no
+honest reporting — with no board ceremony: no workspec, no `## Approach`
+push, no
 stage flips, and no generated planning snapshot. The board hears about it once, at
 close-out (step 9).
 
@@ -78,6 +79,9 @@ escalate.
    tests. Escalate a tier if the diff outgrew it; never quietly relax one.
 7. Update docs/changelog per the repo's conventions if behavior changed.
 8. Commit per the repo's git conventions (no push unless its rules say so).
+   If the ask arrived as a board comment, the closing comment answers it with
+   `comment_on_item(..., addresses=[<that note id>])` — the ack that clears
+   the item's unaddressed flag (maestro-build's comment round-trip rule).
 9. **File the history item** — one board item on the repo's maestro board
    (`.claude/maestro.json`), born done:
    - Title `Vibe: <what shipped>`, stage = the board's done value, owner = the
@@ -101,20 +105,6 @@ escalate.
     verified — the tier, what ran, and at `none` the plain statement that no
     tests ran and what stood in for them — and anything left open. Keep the
     report as small as the change.
-
-## This project (Warhammer Fantasy / Victoria 3)
-
-Multiplayer-synchronized Victoria 3 mod, **no offline test suite** — so the tier
-you pick in step 3 means what it means in `maestro-scope`'s project section:
-`targeted`/`full` for a script/loc/gui/events change is a **game load the user
-performs** — mod loaded in Victoria 3, `logs/error.log` clean of this mod's files
-(`.claude/rules/testing.md`) — not a command you can auto-run. `map_data/`
-changes run the offline lint (`sources.py --verify`, `validate_map.py`,
-`run_fixture.py --check`) and are only truly done once the user accepts the
-rendered PNG. Confirm every effect/trigger/modifier against `docs/*.log` before
-using it, give every user-facing string a `localization/` key, and add no
-non-seeded randomness. A vibe touching `common/`/`events/`/`gui/`/`localization/`
-should also get the `security-review` agent over its diff before close-out.
 
 ## Board Touchpoints
 
