@@ -1,0 +1,19 @@
+﻿l_english:
+ # No new loc keys required for this file.
+ #
+ # common/modifier_type_definitions/*.txt declare *modifier type* schemas only
+ # (decimals, color, percent/boolean, prefix/suffix, game_data.ai_value, script_only,
+ # tags) — Victoria 3 auto-generates each static modifier's UI text (name +
+ # description) from the type's identifier and these formatting fields; there is no
+ # desc/display_name/loc-key field on a modifier_type_definitions entry to satisfy.
+ # docs/modifiers.log confirms this: it lists a generated "Name"/"Description" pair
+ # per modifier type key, sourced from the engine's own naming convention rather than
+ # a loc key this folder would define.
+ #
+ # The two prefix/suffix references used in this folder (prefix="MONEY_PREFIX",
+ # suffix="per_wealth") point at pre-existing vanilla engine formatting loc keys
+ # unrelated to this file's content — they are not overridden or duplicated here.
+ #
+ # This file exists so the folder has an accompanying localization/english/ entry per
+ # project convention; it is intentionally empty of keys until a Warhammer-specific
+ # modifier type (added outside this restoration) needs explicit display text.

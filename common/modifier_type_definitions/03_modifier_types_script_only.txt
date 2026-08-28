@@ -1,0 +1,318 @@
+﻿character_battle_condition_dug_in_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_charted_terrain_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_rapid_advance_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_camouflaged_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_logistics_secured_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_mud_mult={
+	script_only = yes
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_broken_supply_line_mult={
+	script_only = yes
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_exhausted_mult={
+	script_only = yes
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_lost_mult={
+	script_only = yes
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_surprise_maneuver_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_aggressive_maneuver_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_careful_maneuver_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_blunder_mult={
+	script_only = yes
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_poor_visibility_mult={
+	script_only = yes
+	decimals=0
+	color=bad
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_good_visibility_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_rough_waters_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_strong_winds_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_death_from_below_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_ramming_maneuver_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_battle_condition_guerilla_ambush_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+character_expedition_events_explorer_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+country_expedition_events_explorer_mult={
+	script_only = yes
+	decimals=0
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+interest_group_in_government_attraction_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_total_combat_width_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+state_trade_center_max_limit_add={
+	script_only = yes
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_naval_condition_strong_winds_chance_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_naval_condition_calm_waters_chance_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_naval_condition_fog_chance_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_naval_condition_cyclone_chance_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_naval_condition_ice_chance_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_naval_condition_rough_waters_chance_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+battle_naval_condition_tropical_storm_chance_mult={
+	script_only = yes
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
