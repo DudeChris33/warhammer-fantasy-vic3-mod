@@ -20,12 +20,6 @@
 		}
 		add = 1
 	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_hindu_caste_enforced
-		}
-		add = 1
-	}
 }
 
 ideology_traditionalist_disfavoured_laws = {
@@ -83,12 +77,6 @@ ideology_traditionalist_minoritarian_favoured_laws = {
 		}
 		add = 1
 	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_hindu_caste_enforced
-		}
-		add = 1
-	}
 }
 
 ideology_traditionalist_minoritarian_disfavoured_laws = {
@@ -142,10 +130,7 @@ ideology_nihilist_favoured_laws = {
 	}
 	if = {
 		limit = {
-			OR = {
-				has_law_or_variant = law_type:law_affirmative_action
-				has_law_or_variant = law_type:law_hindu_caste_not_enforced
-			}
+			has_law_or_variant = law_type:law_affirmative_action
 		}
 		add = 1
 	}
@@ -167,12 +152,6 @@ ideology_nihilist_disfavoured_laws = {
 	if = {
 		limit = {
 			has_law_or_variant = law_type:law_state_religion
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_hindu_caste_enforced
 		}
 		add = 1
 	}
@@ -434,12 +413,6 @@ ideology_social_democrat_disfavoured_laws = {
 	if = {
 		limit = {
 				has_law_or_variant = law_type:law_combination_acts
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-				has_law_or_variant = law_type:law_hindu_caste_enforced
 		}
 		add = 1
 	}
