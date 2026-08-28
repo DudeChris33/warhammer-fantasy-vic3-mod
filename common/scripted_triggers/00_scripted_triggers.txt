@@ -1,4 +1,4 @@
-country_has_voting_franchise = {
+﻿country_has_voting_franchise = {
 	custom_tooltip = {
 		text = is_democratic_tt
 		OR = {
@@ -1482,4 +1482,39 @@ movement_is_conservative = {
         is_political_movement_type = movement_religious_majority
         is_political_movement_type = movement_cultural_majority
     }
+}
+
+# Restored separately: originally defined in vanilla's DLC-story files (deleted
+# wholesale elsewhere in this folder) but are themselves fully generic mechanics
+# needed by other restored files.
+country_has_monarchy_law = {
+	OR = {
+		has_law = law_type:law_monarchy
+		has_law = law_type:law_social_monarchy
+	}
+}
+
+country_has_non_monarchy_law = {
+	OR = {
+		has_law = law_type:law_chiefdom
+		has_law = law_type:law_colonial_administration
+		has_law = law_type:law_parliamentary_republic
+		has_law = law_type:law_theocracy
+		has_law = law_type:law_council_republic
+		has_law = law_type:law_corporate_state
+	}
+}
+
+ig_counts_as_marginal = {
+	trigger_if = {
+		limit = {
+			owner ?= {
+				country_has_voting_franchise = yes
+			}
+		}
+		ig_clout < define:NPolitics|MARGINAL_IG_THRESHOLD
+	}
+	trigger_else = {
+		is_marginal = yes
+	}
 }

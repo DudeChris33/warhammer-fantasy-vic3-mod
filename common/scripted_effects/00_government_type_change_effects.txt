@@ -1,4 +1,4 @@
-change_to_parliamentary_elective = {
+﻿change_to_parliamentary_elective = {
 	if = {
 		limit = {
 			government_transfer_of_power = hereditary

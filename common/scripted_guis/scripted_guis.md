@@ -1,4 +1,4 @@
-# Structure
+﻿# Structure
 	scripted_gui_key = {
 		scope = < string >			# What scope type this SGUI is available to
 		is_shown = { trigger }		# Determines whether the SGUI is shown / available to a player

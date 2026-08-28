@@ -39,13 +39,6 @@ cultural_community_creation_weight = {
 
 		if = {
 			limit = {
-				on_river = yes
-			}
-			add = 0.001
-		}
-
-		if = {
-			limit = {
 				is_coastal = yes
 			}
 			add = 0.001

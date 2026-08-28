@@ -1,4 +1,4 @@
-free_cotton_producing_arable_land = {
+﻿free_cotton_producing_arable_land = {
 	value = 0
 	every_scope_state = {
 		limit = {

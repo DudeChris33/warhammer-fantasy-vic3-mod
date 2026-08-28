@@ -1,4 +1,4 @@
-debug_kill_character_sgui = {
+﻿debug_kill_character_sgui = {
     scope = character
 
     effect = {

@@ -1,4 +1,4 @@
-years_since_game_start = {
+﻿years_since_game_start = {
 	value = year
 	subtract = 1836
 }

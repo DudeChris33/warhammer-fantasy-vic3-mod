@@ -1,4 +1,4 @@
-neighbor_events_1 = {
+﻿neighbor_events_1 = {
 	type = country
 	texture = "gfx/interface/icons/notification_icons/influence.dds"
 

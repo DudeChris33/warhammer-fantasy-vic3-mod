@@ -1,4 +1,4 @@
-#	Example:
+﻿#	Example:
 #
 #	example_effect = {
 #		x = 100
@@ -16,7 +16,6 @@
 resign_and_retire = {
 	remove_character_role = politician
 	remove_character_role = ruler
-	on_remove_ruler_effects = yes
 	retire_character = yes
 }
 

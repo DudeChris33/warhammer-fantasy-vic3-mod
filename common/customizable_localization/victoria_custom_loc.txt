@@ -1,4 +1,4 @@
-pro_lobby_demand_text_def = {
+﻿pro_lobby_demand_text_def = {
 	type = country
 	text = { # Break Alliance
 		trigger = {

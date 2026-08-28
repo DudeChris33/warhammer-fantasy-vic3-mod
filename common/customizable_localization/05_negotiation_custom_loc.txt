@@ -1,4 +1,4 @@
-generic_worker_profession = {
+﻿generic_worker_profession = {
 	type = country
 	random_valid = yes
 	text = {
