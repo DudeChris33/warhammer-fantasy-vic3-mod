@@ -51,8 +51,6 @@ pm_serfdom_no = {
 		law_tenant_farmers
 		law_commercialized_agriculture
 		law_collectivized_agriculture
-		law_latifundias
-		law_expanded_latifundias
 	}
 
 	building_modifiers = {
@@ -65,7 +63,7 @@ pm_serfdom_no = {
 pm_corvee_labor = {
 	texture = "gfx/interface/icons/production_method_icons/corvee_labor.dds"
 	unlocking_laws = {
-		law_manorialism
+		law_serfdom
 	}
 	building_modifiers = {
 		workforce_scaled = {

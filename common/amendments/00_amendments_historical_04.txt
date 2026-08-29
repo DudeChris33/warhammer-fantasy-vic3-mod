@@ -1,0 +1,184 @@
+﻿amendment_racialized_subjecthood = {
+
+	parent = law_racial_segregation
+
+	allowed_laws = {
+		law_subjecthood
+	}
+
+	modifier = {
+		country_acceptance_shared_heritage_trait_add = 40
+		country_acceptance_shared_heritage_trait_group_add = 30
+		country_acceptance_no_shared_heritage_trait_add = -5
+	}
+
+	possible = {
+		has_law = law_type:law_colonial_administration
+	}
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+		OR = {
+			is_interest_group_type = ig_armed_forces
+			is_interest_group_type = ig_industrialists
+		}
+	}
+
+	ai_will_revoke = {
+		always = no
+	}
+
+	can_repeal = { # For the tooltip
+		NOT = {
+			has_law = law_type:law_colonial_administration
+		}
+	}
+
+	amendment_activism_multiplier = 0.5
+}
+
+amendment_electoral_clientelism = {
+
+	parent = law_oligarchy
+
+	allowed_laws = {
+		law_oligarchy
+		law_landed_voting
+		law_wealth_voting
+		law_census_voting
+		law_universal_suffrage
+	}
+
+	modifier = {
+		country_authority_mult = 0.10
+		country_electoral_confidence_impact_mult = -0.25
+	}
+
+	possible = {
+		modifier:country_forbid_electoral_fraud_bool = no
+	}
+
+	can_repeal = {
+		legitimacy >= legitimacy_to_repeal_amendment
+		hidden_trigger = {
+			has_variable = electoral_fraud_abolish_var
+		}
+		trigger_if = {
+			limit = {
+				has_variable = electoral_fraud_abolish_var
+			}
+			custom_tooltip = {
+				text = caciquismo_can_be_abolished_tt
+				var:electoral_fraud_abolish_var >= 5
+			}
+		}
+	}
+
+	ai_will_revoke = {
+		always = no
+	}
+
+	would_sponsor = {
+		OR = {
+			is_interest_group_type = ig_landowners
+			is_interest_group_type = ig_industrialists
+			AND = {
+				exists = scope:approval
+				scope:approval > 0
+			}
+		}
+	}
+
+	amendment_activism_multiplier = 0.5
+}
+
+amendment_tradition_of_free_elections = {
+
+	parent = law_universal_suffrage
+
+	allowed_laws = {
+		law_oligarchy
+		law_landed_voting
+		law_wealth_voting
+		law_census_voting
+		law_universal_suffrage
+	}
+
+	modifier = {
+		country_forbid_electoral_fraud_bool = yes
+		country_legitimacy_base_add = 10
+		country_enactment_success_chance_law_autocracy_add = -0.10
+		country_enactment_success_chance_law_oligarchy_add = -0.10
+		country_enactment_success_chance_law_technocracy_add = -0.10
+		country_enactment_success_chance_law_anarchy_add = -0.10
+		# Intended that there is no defence against Single Party State
+	}
+
+	possible = {
+		always = yes # Handled by special logic
+	}
+
+	can_repeal = {
+		OR = {
+			AND = {
+				custom_tooltip = {
+					text = ruler_wants_dictatorship_tt
+					ruler = {
+						OR = {
+							law_enactment_stance = {
+								law = law_type:law_autocracy
+								value > 0
+							}
+							law_enactment_stance = {
+								law = law_type:law_technocracy
+								value > 0
+							}
+							law_enactment_stance = {
+								law = law_type:law_single_party_state
+								value > 0
+							}
+						}
+					}
+				}
+				custom_tooltip = {
+					text = any_government_ig_wants_dictatorship_tt
+					any_interest_group = {
+						is_powerful = yes
+						is_in_government = yes
+						OR = {
+							law_enactment_stance = {
+								law = law_type:law_autocracy
+								value > 0
+							}
+							law_enactment_stance = {
+								law = law_type:law_technocracy
+								value > 0
+							}
+							law_enactment_stance = {
+								law = law_type:law_single_party_state
+								value > 0
+							}
+						}
+					}
+				}
+				legitimacy >= legitimacy_to_repeal_amendment
+			}
+		}
+	}
+
+	ai_will_revoke = {
+		always = no
+	}
+
+	would_sponsor = {
+		AND = {
+			exists = scope:approval
+			scope:approval > 0
+		}
+	}
+
+	amendment_activism_multiplier = 0.25
+}
