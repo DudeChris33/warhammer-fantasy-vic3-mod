@@ -1,1 +1,105 @@
-﻿
+﻿# Old World cultures — Kislev. Schema mirrors common/cultures/00_norsca.txt, the
+# verified reference entry for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+#   noble_last_names / male_regal_first_names / female_regal_first_names are OPTIONAL (confirmed
+#                against vanilla, where many cultures omit them) and are used here only for the
+#                cultures that have a real aristocracy in Warhammer lore.
+#   graphics/ethnicities — vanilla portrait ids, confirmed present in the vanilla
+#                common/culture_graphics/ and common/ethnicities/ databases. Custom art is out of
+#                scope for epic #3404.
+# Multi-word names use vanilla's underscore convention (de_Lyonesse), displayed via the loc key.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Board item #3407 (epic #3404).
+
+################ Gospodar — the ruling southern stock, Russian-courtly register ################
+
+gospodar = {
+	color= rgb{ 122 146 178 }
+	religion = cult_of_ursun
+	heritage = heritage_kislevite_human
+	language = sphere_kislevarin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Boris Kazimir Fyodor Mikhail Dmitri Yevgeni Vladimir Radomir Grigori Bogdan
+		Anatoli Vsevolod Rostislav Miroslav Vasili Konstantin Oleg Ratibor Sviatopolk Yaromir
+		Danil Lubomir Stanislav Zorislav
+	}
+
+	female_common_first_names = {
+		Katarin Anastasya Yelena Marya Tatyana Sofya Ludmila Nadya Zoya Praskovya
+		Militsa Miroslava Yaroslava Darya Agrafena Vasilisa Rada Lada Kseniya Svetlana
+		Olyana Vsevolodna Zlata Bogdana
+	}
+
+	noble_last_names = {
+		Bokha Zolotov Dobrynin Velikin Ostrov Yarozin Krasnov Sobiesk Mirovic Radomirov
+		Gospodarin Tzarov
+	}
+
+	common_last_names = {
+		Volkov Medvedin Sokolov Bortnik Zimin Rybakov Snegov Morozin Lisin Yablonev
+		Dubrov Vetrov Kamenev Belov Chernin Ledov
+	}
+
+	male_regal_first_names = {
+		Boris Radii Vladimir Konstantin Bogdan Vsevolod Yaromir
+	}
+
+	female_regal_first_names = {
+		Katarin Miska Anastasya Yelena Sofya Militsa
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = slavic_brown_hair
+		1 = slavic_dark_hair
+	}
+}
+
+################ Ungol — the older northern stock; steppe-inflected, no boyar aristocracy ################
+
+ungol = {
+	color= rgb{ 148 138 106 }
+	religion = cult_of_ursun
+	heritage = heritage_kislevite_human
+	language = sphere_kislevarin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Aydar Bekhan Chagan Dorgan Ergun Iskar Karsan Mirek Nogai Orkhan
+		Pavlek Rurek Sabin Tarkan Ulan Vasek Yaruk Zhelko Bataar Tugan
+		Kesar Otchi
+	}
+
+	female_common_first_names = {
+		Ayla Borka Chelka Dilnara Ganna Ilka Jarka Kesha Malka Narin
+		Oksa Radka Selka Tamira Ulka Verka Yana Zorka Altani Bereke
+		Kumis Sarnai
+	}
+
+	common_last_names = {
+		Aydarov Bekhanin Chaganov Dorganin Ergunov Karsanov Nogaiev Orkhanin Tarkanov Yarukov
+		Bataarin Tuganov Ulanov Zhelkov Hawkfeather Steppeborn Coldwind
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = slavic_dark_hair
+		1 = central_asian
+	}
+}

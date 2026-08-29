@@ -1,1 +1,709 @@
-﻿
+﻿# Old World cultures — the Empire. Schema mirrors common/cultures/00_norsca.txt, the
+# verified reference entry for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+#   noble_last_names / male_regal_first_names / female_regal_first_names are OPTIONAL (confirmed
+#                against vanilla, where many cultures omit them) and are used here only for the
+#                cultures that have a real aristocracy in Warhammer lore — the ten Electorates,
+#                Solland (a lost Electorate that still keeps its houses), the Sylvanian gentry
+#                (noble houses only — Sylvania's rulers are vampires, not sylvanian humans) and
+#                the von Carstein aristocracy itself. The Moot has an Elder, not a monarch, so
+#                halfling carries common name lists only.
+#   graphics/ethnicities — vanilla portrait ids, confirmed present in the vanilla
+#                common/culture_graphics/ and common/ethnicities/ databases. Custom art is out of
+#                scope for epic #3404.
+# Multi-word names use vanilla's underscore convention (von_Bildhofen), displayed via the loc key.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_empire_l_english.yml.
+# Board item #3406 (epic #3404).
+
+################ Reiklander — the Imperial heartland; classical Reikspiel, Sigmarite ################
+
+reiklander = {
+	color= rgb{ 178 58 58 }
+	religion = cult_of_sigmar
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Sigmund Wilhelm Karl Balthasar Matthias Ottokar Leopold Theodor Gottfried Friedrich
+		Bernhardt Adolphus Markus Rudiger Aldebrand Luitpold Eberhard Maximilian Johannes Christoph
+		Hieronymus Sebastian
+	}
+
+	female_common_first_names = {
+		Adela Marlena Gisela Katarina Elsbeth Ottilie Brunhild Klara Josefine Theodora
+		Magdalena Amalia Rosamund Luitgard Emilia Hildegarde Kunigunde Reinhilde Griselda Margarethe
+		Sabine Veronika Agathe Dorothea
+	}
+
+	noble_last_names = {
+		von_Bildhofen von_Tasseninck von_Jungfreud von_Krieglitz von_Saponatheim von_Wallenstein
+		von_Altdorf von_Grunburg von_Kemperbad von_Auerswald von_Hohenbach von_Stolzberg
+		von_Eisenhof von_Reiklund von_Ubersreik von_Helmgart
+	}
+
+	common_last_names = {
+		Schmidt Baecker Keller Fischer Wagner Zimmermann Hoffmann Brandt
+		Kaufmann Krause Reinholt Vogel Weber Schreiber Lindner Kohler
+	}
+
+	male_regal_first_names = {
+		Sigmund Wilhelm Karl Luitpold Leopold Matthias Maximilian
+	}
+
+	female_regal_first_names = {
+		Adela Theodora Magdalena Ottilie Margarethe
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_blond
+	}
+}
+
+################ Middenlander — the Ulrican north; wolf, winter and iron ################
+
+middenlander = {
+	color= rgb{ 62 74 96 }
+	religion = cult_of_ulric
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Mandred Valdemar Ulrich Wolmar Eberhardt Hartwin Kurt Reinmar Sigwald Detlef
+		Arnulf Gerwulf Isbrand Wulfram Odger Bernwald Volkmar Rutger Hagbert Erwin
+		Gotthard Sturmfried Wendelin
+	}
+
+	female_common_first_names = {
+		Ulrika Hildrun Gerlinde Adelheid Brunhilda Wolfhilde Berthild Sighilde Ottilia Kriemhild
+		Elfriede Waltraud Irmgard Gundrada Mechthild Rotraud Hedda Wulfrid Alvara Notburga
+		Winfrieda Frostgard
+	}
+
+	noble_last_names = {
+		von_Todbringer von_Bergenhaft von_Eisenwald von_Ulricsberg von_Winterhelm von_Grimminhagen
+		von_Carroburg von_Delberz von_Schoninghagen von_Warrenburg von_Nordhelm von_Wolfhart
+	}
+
+	common_last_names = {
+		Eisenbrandt Winterhalter Jagerbach Stahlhauer Rauchfang Kaltenbach Hammerschlag Wolfsberg
+		Grimmelshausen Eisenhauer Frostmann Schneeberg Wolfstein Habermann Brenner Streng
+	}
+
+	male_regal_first_names = {
+		Mandred Valdemar Ulrich Sigwald Gotthard Volkmar
+	}
+
+	female_regal_first_names = {
+		Ulrika Adelheid Kriemhild Berthild Waltraud
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_blond
+		1 = caucasian_northern_brown_hair
+	}
+}
+
+################ Nordlander — Ulrican, salt-bitten; the coast that watches Norsca ################
+
+nordlander = {
+	color= rgb{ 44 92 116 }
+	religion = cult_of_ulric
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Theodoric Werner Gerhardt Roderich Alrik Torsten Ansgar Haldred Ingomar Sturmvold
+		Nordfried Egmont Osric Hildebrand Meinhard Falkwin Erlend Aldric Gunbrand Seewald
+		Hartmann Klaus
+	}
+
+	female_common_first_names = {
+		Sieglind Bregitta Anselma Marike Wendelina Hertha Nordwyn Almuth Gundela Ilsabet
+		Rikke Thorlinde Meike Bernhilde Saskia Griet Hanneke Wibke Elke Malvina
+		Sturmgard Ottoline
+	}
+
+	noble_last_names = {
+		von_Gausser von_Salzenmund von_Dietershafen von_Hargendorf von_Seebruck von_Hafenmund
+		von_Kaltsee von_Nordwacht von_Bremwald von_Sturmhafen von_Ostenbruck von_Halsberg
+	}
+
+	common_last_names = {
+		Netzer Fischbein Salzmann Reeder Kuttner Strandholt Nebelmann Ankerbach
+		Segelhorst Hafner Kaltwasser Dunenberg Sturmfels Walfanger Krabbe Seebold
+	}
+
+	male_regal_first_names = {
+		Theodoric Roderich Werner Osric Alrik
+	}
+
+	female_regal_first_names = {
+		Sieglind Anselma Bernhilde Hertha
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_blond
+		1 = caucasian_northern_brown_hair
+	}
+}
+
+################ Hochlander — the hunting province; Taalite, at home under the trees ################
+
+hochlander = {
+	color= rgb{ 74 112 62 }
+	religion = old_faith
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Wolfgang Hartwig Reiner Volkert Dagobert Adalwin Brandolf Gernot Hunfried Waldemar
+		Eberwin Radulf Grimwald Aloys Bertram Ehrenfried Falco Kuno Lambert Norbert
+		Sylvan Vitus
+	}
+
+	female_common_first_names = {
+		Grunhilde Almira Birke Eichlinde Hasela Linde Rosalind Waldburga Hildeborg Ottilda
+		Sabina Ursel Farina Gerhild Adelmut Bertrudis Cordula Hedwiga Isentrud Jutta
+		Salvia Wilburga
+	}
+
+	noble_last_names = {
+		von_Ludenhof von_Hergig von_Esselfurt von_Tannenwald von_Hirschberg von_Eichwald
+		von_Jagdhof von_Falkenhorst von_Waldeck von_Grunthal von_Rehberg von_Bergwacht
+	}
+
+	common_last_names = {
+		Jager Forster Holzer Kohlmann Wildbrecht Bogner Pfeiffer Harzmann
+		Wurzel Kienbaum Fuchsbau Rehwald Dachsler Bruchmann Moosbach Tannbaum
+	}
+
+	male_regal_first_names = {
+		Wolfgang Hartwig Dagobert Waldemar Gernot
+	}
+
+	female_regal_first_names = {
+		Grunhilde Waldburga Hildeborg Rosalind
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_ginger
+	}
+}
+
+################ Ostlander — Ulrican, hard-bitten; the marsh-and-forest frontier ################
+
+ostlander = {
+	color= rgb{ 86 88 104 }
+	religion = cult_of_ulric
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Valmir Hertwig Berthold Gundolf Marcolf Stefan Wenzel Otbert Reimund Sigbert
+		Ansgrim Dietwald Gerbrand Harald Ulfgar Rothgar Ekkehard Mundolf Weland Rangulf
+		Vilbert Sindolf
+	}
+
+	female_common_first_names = {
+		Wolfrada Ingunde Dagmar Reinhilda Gertrud Ermgard Sturmhild Bruna Hildeswinde Odila
+		Rutgard Sigrada Walpurga Eisgard Frowina Osburga Nanthild Kunhild Radegund Tetta
+		Ymma Amalburga
+	}
+
+	noble_last_names = {
+		von_Raukov von_Wolfenburg von_Salkalten von_Ferlangen von_Bohsenfels von_Ostwald
+		von_Kalthaus von_Erlenmoor von_Trollhalt von_Steinfurt von_Marschwald von_Nebelbruck
+	}
+
+	common_last_names = {
+		Ackermann Torfhauer Marschner Kreuzer Ratsberg Wendtland Sumpfer Kohlbrand
+		Eichler Ostbeck Kaltwald Grenzmann Wachtmann Fahrmann Bruchner Sturmbeck
+	}
+
+	male_regal_first_names = {
+		Valmir Hertwig Berthold Rothgar Ekkehard
+	}
+
+	female_regal_first_names = {
+		Wolfrada Gertrud Walpurga Dagmar
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_northern_brown_hair
+		1 = caucasian_blond
+	}
+}
+
+################ Ostermarker — the eastern march; Reikspiel salted with Kislevarin ################
+
+ostermarker = {
+	color= rgb{ 122 102 72 }
+	religion = cult_of_sigmar
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Kasimir Wolodar Ludomir Bogumil Ottoslav Dietmir Wenzeslas Radovan Gerimir Stanek
+		Jaromar Velten Ondrej Miloslav Bratomir Erdwin Zbignev Vlastimir Tomasz Marek
+		Radek Borislav
+	}
+
+	female_common_first_names = {
+		Milena Zdenka Bozena Wanda Jelena Radmila Vlasta Hanka Dobromira Lenka
+		Marta Ludmilla Ostara Veselka Bogumila Krystyna Dragomira Ivanka Nezhda Slavena
+		Wilhelmine Otylia
+	}
+
+	noble_last_names = {
+		von_Hertwig von_Bechafen von_Mordheim von_Ostwacht von_Grenzstadt von_Wolodarov
+		von_Kasimirov von_Ostrograd von_Sternberg von_Wachsen von_Bergwald von_Steinhaus
+	}
+
+	common_last_names = {
+		Kaminsky Novak Bauerbach Wolodin Zelenka Petrik Havlik Rybnik
+		Dorfmann Grenzer Weichsel Steppke Ostrovsky Malinek Hrabal Wendisch
+	}
+
+	male_regal_first_names = {
+		Kasimir Wolodar Ottoslav Wenzeslas Bogumil
+	}
+
+	female_regal_first_names = {
+		Milena Bozena Ludmilla Krystyna
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_brown_hair
+		1 = caucasian_dark_hair
+		1 = slavic_brown_hair
+	}
+}
+
+################ Talabeclander — the great forest; Taalite to the marrow ################
+
+talabeclander = {
+	color= rgb{ 88 118 68 }
+	religion = old_faith
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Alwin Gunnolf Marbod Tassilo Wichard Eginhard Rulf Aldhelm Warin Frowald
+		Hermann Sieghard Odo Baldwin Immo Liudolf Hunold Manfred Wulfgar Ewald
+		Reinald Teutwald
+	}
+
+	female_common_first_names = {
+		Taalia Erlinde Hulda Sigilind Ratrud Wendelgard Alberada Gisla Ida Thiadrada
+		Aloysia Bilihild Emmerhild Frideswind Hazelin Irminlinde Lioba Nantwina Oda Reginhild
+		Swanhild Verena
+	}
+
+	noble_last_names = {
+		von_Feuerbach von_Talabheim von_Volgen von_Eichenwald von_Hirschfeld von_Kriegshof
+		von_Taalwald von_Schwarzwasser von_Rothenburg von_Auerbach von_Lindenhof von_Weissbruck
+	}
+
+	common_last_names = {
+		Flossmann Baumbach Waldhuter Rehberger Astbach Grunhalm Pilzner Kranichmann
+		Otterbach Laubwald Beerholt Wurzelmann Hirschner Farnkraut Elstermann Kesselbach
+	}
+
+	male_regal_first_names = {
+		Alwin Tassilo Hermann Manfred Baldwin
+	}
+
+	female_regal_first_names = {
+		Taalia Hulda Verena Wendelgard
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_ginger
+	}
+}
+
+################ Stirlander — the poor south-east; plain-spoken, Sigmarite, Sylvania at its back ################
+
+stirlander = {
+	color= rgb{ 132 62 92 }
+	religion = cult_of_sigmar
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Alberich Ruprecht Hans Jorg Veit Michel Barthel Kilian Lorenz Melchior
+		Gregor Urban Simon Thoman Ambros Balthes Casper Nikolas Sebald Wendelmar
+		Gebhardt Leonhard Achaz
+	}
+
+	female_common_first_names = {
+		Barbel Christel Else Grete Lene Liesl Margret Metta Trine Ursula
+		Apollonia Benedikta Dorthe Eva Franziska Helena Johanna Lisbeth Marthe Regina
+		Susanna Wibrandis
+	}
+
+	noble_last_names = {
+		von_Haupt_Anderssen von_Wurtbad von_Leicheberg von_Steinhardt von_Aschaffen von_Furtwald
+		von_Marbad von_Siebenhugel von_Grauwald von_Stirberg von_Hallstadt von_Waldenhof
+	}
+
+	common_last_names = {
+		Halmer Garbe Schollen Rubemann Pflugner Grabner Sensmann Korbach
+		Heuwald Dreschler Milchner Kornbrecht Rodmann Gansbauer Weidner Kruger
+	}
+
+	male_regal_first_names = {
+		Alberich Ruprecht Leonhard Gregor Melchior
+	}
+
+	female_regal_first_names = {
+		Helena Johanna Regina Ursula
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Averlander — the rich, loud south; gold, cattle and swagger ################
+
+averlander = {
+	color= rgb{ 214 182 58 }
+	religion = cult_of_sigmar
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Marius Augustin Fabian Cornelius Emil Julius Damian Florian Konradin Valentin
+		Severin Maximilus Adrian Benedikt Cyprian Dominik Elias Gabriel Hyazinth Ignatz
+		Lucius Tiberius Vincenz
+	}
+
+	female_common_first_names = {
+		Aurelia Camilla Cecilie Emilie Flavia Gloriana Henrietta Isolda Juliana Klarissa
+		Laetitia Marcelline Octavia Philippa Rosalinde Seraphina Sibylla Theresia Valeria Wilhelmia
+		Xaveria Zenobia
+	}
+
+	noble_last_names = {
+		von_Leitdorf von_Averheim von_Sonnefurt von_Streissen von_Goldenhof von_Weissenberg
+		von_Heideck von_Averbach von_Rechthof von_Sommerfeld von_Kronenberg von_Zechlin
+		von_Blutroth von_Prunkstein
+	}
+
+	common_last_names = {
+		Goldschmid Rindler Almhirt Kasemann Weinbrand Sonnenberg Rossmann Ochsner
+		Heuberger Milchbauer Prunkhorst Silberhaar Ehrenreich Wohlstand Bierbaum Kutscher
+	}
+
+	male_regal_first_names = {
+		Marius Julius Cornelius Valentin Augustin
+	}
+
+	female_regal_first_names = {
+		Aurelia Octavia Theresia Gloriana
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_blond
+	}
+}
+
+################ Wissenlander — the sober south-west; ore, guilds and grey stone ################
+
+wissenlander = {
+	color= rgb{ 112 112 134 }
+	religion = cult_of_sigmar
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Anton Gerold Rickard Hilmar Odilo Wilbrand Arnolt Detmar Egino Gozbert
+		Helferich Isenbard Lutwin Meginhard Ortwin Poppo Ruthard Siegwin Trutmann Udalric
+		Wolbero Zeisolf
+	}
+
+	female_common_first_names = {
+		Adelgunde Bertrun Clementia Edelgard Fridarun Gerburg Hazecha Irmintrud Judintha Liutgarde
+		Malinda Notgard Odalinde Petrissa Richgard Salome Truda Uta Volkhild Wendula
+		Zita Hilburg
+	}
+
+	noble_last_names = {
+		von_Liebwitz von_Pfeildorf von_Meissen von_Wissenburg von_Grauberg von_Silberberg
+		von_Steingart von_Halbach von_Rothstein von_Erzberg von_Dammheim von_Kaltenhof
+	}
+
+	common_last_names = {
+		Erzmann Schmelzer Stollner Grubner Amboss Zunftner Rechner Buchbinder
+		Munzer Glockner Feilner Drahtner Schiefer Bleimann Kupfner Giesser
+	}
+
+	male_regal_first_names = {
+		Anton Gerold Ruthard Ortwin Udalric
+	}
+
+	female_regal_first_names = {
+		Adelgunde Edelgard Liutgarde Clementia
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Sylvanian — the living of Sylvania; archaic, funerary, Morrite ################
+# Not the vampires — these are the peasants and petty gentry who bury their dead deep and
+# salt the graves against their own lords. Noble houses survive as old boyar-ish lines, but
+# no regal names: Sylvania's crown belongs to the von Carsteins, not to sylvanian humans.
+
+sylvanian = {
+	color= rgb{ 62 52 72 }
+	religion = cult_of_morr
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Dragos Mircea Radu Bogdanu Stefanu Vlastek Ondru Grigor Milosh Zorec
+		Danko Ilyan Marku Tudor Sorin Costel Nicu Petru Sandu Vasilu
+		Horea Lupu Anghel
+	}
+
+	female_common_first_names = {
+		Ileana Ruxandra Voica Smaranda Anica Draga Stanca Zamfira Marioara Lenuta
+		Sanda Tudora Floarea Cerna Mortisa Vidra Neaga Olenka Radica Silvia
+		Vesna Zorina
+	}
+
+	noble_last_names = {
+		Sczarny Vukovin Zelesny Ratislavu Bohomil Grabowicz Marnov Ostrovin
+		Piotrovin Zhelezny Krakenov Dragomirov Vranov Lupescu Cernescu
+	}
+
+	common_last_names = {
+		Grabnik Mogila Pogrebin Nachtmann Kerzner Totengraber Leichenhof Wachsmann
+		Nebelin Kreuzhof Aschenmann Sargbauer Knochner Rabenhof Grufthaus Dornbach
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_northern_dark_hair
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Vampire — the von Carstein aristocracy; the same tongue, colder ################
+# A DIFFERENT racial heritage from the sylvanian humans they rule (heritage_vampire, in the
+# undead trait group) while sharing sphere_reikspiel with them. The lists are deliberately
+# sparse: there are very few vampires, and their get are fewer still. The common_last_names
+# are the names their thralls and mortal households carry.
+# ethnicities: vanilla ships no undead template, so the palest caucasian morphs stand in —
+# same treatment as mousillon in #3407. Custom art is out of scope for epic #3404.
+
+vampire = {
+	color= rgb{ 94 32 44 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Vlad Mannfred Walach Kryzstoff Sigismund Adalbert Vitalis Malachar Erasmus Cassimir
+		Dieterich Ruthven Valdred Nyklaus
+	}
+
+	female_common_first_names = {
+		Isabella Elisse Melisandra Carmilla Ondriana Vasilika Seraphita Morgianne Ravenna Sabathine
+		Valeska Yelisandra Corvina Drusilla
+	}
+
+	noble_last_names = {
+		von_Carstein von_Drakenhof von_Templehof von_Nachthafen von_Grausberg
+		von_Blutstein von_Todesheim von_Aschenwald von_Sternheim von_Mordenburg
+	}
+
+	common_last_names = {
+		Blutlos Kaltherz Nachtschatten Grabesstill Aschenblut
+		Dornwald Schattenhof Winterblut Mondlicht Leichenwacht
+	}
+
+	male_regal_first_names = {
+		Vlad Mannfred Sigismund Walach Adalbert Kryzstoff
+	}
+
+	female_regal_first_names = {
+		Isabella Carmilla Melisandra Ravenna Drusilla
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}
+
+################ Sollander — the province that was; archaic, preserved, unforgiving ################
+# Solland was sacked by Gorbad Ironclaw and swallowed by Wissenland; its Runefang was lost with
+# Count Eldred. Sollanders keep an older Reikspiel than their neighbours and keep their houses
+# and their grudges with it, so noble and regal lists survive a province that does not.
+
+sollander = {
+	color= rgb{ 168 138 52 }
+	religion = cult_of_sigmar
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Eldred Baldemar Godwin Hartmut Ansehelm Berengar Dietbald Ekbert Folkmar Gundahar
+		Hildmar Ingelram Landric Mundhar Oswin Rotgar Sigehelm Theudmar Waldram Wulfhere
+		Ymbert Ziegmar
+	}
+
+	female_common_first_names = {
+		Adalsind Berhtgund Ermenhild Fridegund Gertrudis Hadewig Iselinde Leudgard Meginhild Nothgund
+		Ostrun Ratgund Sunnhild Theudlinde Waldrada Ymbertha Aldgund Berngard Cunihild Dagoberta
+		Erlgard Hrotsuit
+	}
+
+	noble_last_names = {
+		von_Sollandt von_Merogens von_Sonnenmark von_Goldfluss von_Alt_Solland von_Grabenfeld
+		von_Wallenheim von_Sturmwacht von_Eldrichshof von_Sonnenklamm von_Trauerstein von_Ehrenberg
+	}
+
+	common_last_names = {
+		Grollmann Rachbach Unvergessen Blutschuld Klagemann Sonnenschmied Runenfaust Ackerholt
+		Weinhalter Grabenmann Zornhoff Trauermann Erbenhof Verlorner Grimmbart Alterhof
+	}
+
+	male_regal_first_names = {
+		Eldred Baldemar Berengar Theudmar Gundahar Oswin
+	}
+
+	female_regal_first_names = {
+		Adalsind Ermenhild Waldrada Sunnhild Gertrudis
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_blond
+	}
+}
+
+################ Halfling — the Moot; hearth, field and second breakfast ################
+# Citizens of the Empire and a distinct race (heritage_halfling, its own trait group), speaking
+# Reikspiel like their neighbours. The Moot is led by an Elder, not a monarch, so there are no
+# noble or regal name lists. Surnames are doubled-barrel homestead names.
+# ethnicities: vanilla ships no halfling analogue and no short-stature morph; the rural caucasian
+# morphs are a deliberate STAND-IN pending custom art, which is out of scope for epic #3404.
+
+halfling = {
+	color= rgb{ 150 172 92 }
+	religion = old_faith
+	heritage = heritage_halfling
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Hisme Pippick Barnabas Cobbin Grubbin Milo Tobin Rufus Elmo Gundel
+		Perrin Stubbin Wenlo Dorbin Halwin Josef Ambrit Fenwick Gorbin Lumpin
+		Nubbin Sedge
+	}
+
+	female_common_first_names = {
+		Mancy Poppy Bramble Tilly Nessa Marjoram Hazel Primrose Damsy Clover
+		Buttercup Nutmeg Sorrel Bryony Cressie Pearline Mabbet Orla Quilla Thistle
+		Wynne Yolla Juniper
+	}
+
+	common_last_names = {
+		Applebarrow Butterbrook Hearthfield Mossbottom Barleycorn Honeypot Thatchmore Cheeseholm
+		Pumpkinvale Nutley Turnipfield Loamhollow Beerbelly Crumbfield Puddlefoot Gooseberry
+		Cabbagepatch Meadowbank
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_ginger
+	}
+}

@@ -1,1 +1,108 @@
-﻿
+﻿# Old World cultures — the Badlands. Schema mirrors common/cultures/00_norsca.txt and
+# 10_dark_lands.txt, the verified reference entries for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+# graphics/ethnicities — vanilla ships NO greenskin portrait set. The values used below are
+#                deliberate STAND-INS chosen only so the culture renders at all; they are a
+#                placeholder pending custom greenskin art (out of scope for epic #3404) and carry
+#                no lore claim whatsoever about what orcs or goblins look like.
+# FEMALE NAME LISTS: greenskins are canonically fungal and sexless — there are no female orcs or
+#                goblins in the setting. Victoria 3 nevertheless requires both pop sexes to draw
+#                names, so female_common_first_names is populated from the SAME register and word
+#                pool as the male list rather than inventing a separate "female greenskin" naming
+#                tradition. This is a deliberate engine accommodation, not lore.
+# Orc and goblin share heritage_group_greenskin with heritage_hobgoblin (#3408): greenskins are
+# mutually tolerant AS A RACE. The running orc/goblin feud is carried entirely by the religion
+# split — orcs put Gork (brutal cunning, strength-forward) first, goblins put Mork (cunning
+# brutality) first — not by heritage.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs
+# its six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_badlands_l_english.yml.
+# Board item #3409 (epic #3404).
+
+################ Orc — the Waaagh! made flesh; strength first, Gork first ################
+# Register: crude, guttural, monosyllabic to two-syllable, hard consonants and clustered
+# stops (gr-, kr-, thr-, -gg, -kk, -rok). Canon-first where it fits (Grimgor, Gorbad, Azhag,
+# Urgok, Wurrzag, Gorfang, Grom, Morglum, Gnashrak, Ugezod, Borgut).
+# Last names are EARNED BOASTFUL EPITHETS, not family names — orcs have no lineage, no
+# ancestry and no inheritance, so there is no noble list and no regal list either: a Warboss
+# is whoever is currently biggest, and stops being one the moment he is not.
+
+orc = {
+	color= rgb{ 74 106 46 }
+	religion = gork_and_mork
+	heritage = heritage_orc
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Grimgor Gorbad Azhag Urgok Wurrzag Gorfang Grom Morglum Uzgul Gnashrak
+		Ugezod Borgut Ghazak Krugg Zogrod Rukgar Grukk Brugg Nazgrim Skarrok
+		Vagrok Bruzgul Karrok Drokk
+	}
+
+	female_common_first_names = {
+		Grimga Gorbaza Azhaga Urgaka Wurrza Gorfa Gromma Morgla Uzgulla Gnasha
+		Ugza Borga Ghaza Krugga Zogra Rukga Grukka Brugga Nazga Skarrza
+		Vagra Bruzga Karra Drokka
+	}
+
+	common_last_names = {
+		Ironhide Skullsplitta Ardfist Facebreaka Ironclaw Bonecrusha Krumpa Boarrida
+		Manmangla Gutrippa Redfang Bigteef Stonesmasha Trollcrusha Elfstompa Deffgrinda
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Goblin — the same Waaagh!, from underneath; cunning first, Mork first ################
+# Register deliberately CONTRASTED against orc and meant to be read side by side with it:
+# longer, whinier, sibilant and diminutive-heavy (sn-, sk-, wh-, -ik, -it, -la, -kla), where
+# the orc list is short and hammered. Canon-first where it fits (Skarsnik, Snagla, Grizzlemaw).
+# Last names are sneak-and-trade epithets rather than deeds of arms.
+# No noble or regal lists: goblins follow whoever has the biggest orc standing behind him.
+
+goblin = {
+	color= rgb{ 148 170 84 }
+	religion = mork_and_gork
+	heritage = heritage_goblin
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Skarsnik Snagla Grizzlemaw Snikkit Nibbla Sneekit Wizzlesnik Grubnik Skittersnag Nagrik
+		Snitterling Wheezle Skrikka Gnawbit Sliverspit Snarlik Fizzlik Nasknik Twitchik Weezul
+		Snotlik Grippit Skabnik Squigbit
+	}
+
+	female_common_first_names = {
+		Skarsna Snikkla Grizzla Wheezla Skrikla Gnawla Sliverla Snarla Fizzla Naskla
+		Twitcha Weezla Snotla Grippa Skabla Squigla Snittera Wizzla Grubla Nagra
+		Skittera Sneeka Snaggla Yakkla
+	}
+
+	common_last_names = {
+		Backstabba Nightcreep Poisontooth Shadowsneak Coincutter Squigherder Netcasta Deffsneak
+		Whinebag Snotgobbla Cavecrawla Lampsnuffa Tunnelrat Fungusgatherer Bootlicka Trapsetta
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_northern_dark_hair
+	}
+}

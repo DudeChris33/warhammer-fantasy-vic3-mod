@@ -15,3 +15,312 @@ norscan_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_norscan_cultural_acceptance_add = 1
 }
+
+# ---- Board item #3407, Northern & Western Realms cultures ----
+
+gospodar_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_gospodar_cultural_acceptance_add = 1
+}
+
+gospodar_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_gospodar_cultural_acceptance_add = 1
+}
+
+ungol_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ungol_cultural_acceptance_add = 1
+}
+
+ungol_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ungol_cultural_acceptance_add = 1
+}
+
+bretonnian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_bretonnian_cultural_acceptance_add = 1
+}
+
+bretonnian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_bretonnian_cultural_acceptance_add = 1
+}
+
+mousillon_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_mousillon_cultural_acceptance_add = 1
+}
+
+mousillon_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_mousillon_cultural_acceptance_add = 1
+}
+
+tilean_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_tilean_cultural_acceptance_add = 1
+}
+
+tilean_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_tilean_cultural_acceptance_add = 1
+}
+
+estalian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_estalian_cultural_acceptance_add = 1
+}
+
+estalian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_estalian_cultural_acceptance_add = 1
+}
+
+border_princer_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_border_princer_cultural_acceptance_add = 1
+}
+
+border_princer_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_border_princer_cultural_acceptance_add = 1
+}
+
+# ---- Board item #3406, the Empire's cultures ----
+
+reiklander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_reiklander_cultural_acceptance_add = 1
+}
+
+reiklander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_reiklander_cultural_acceptance_add = 1
+}
+
+middenlander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_middenlander_cultural_acceptance_add = 1
+}
+
+middenlander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_middenlander_cultural_acceptance_add = 1
+}
+
+nordlander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_nordlander_cultural_acceptance_add = 1
+}
+
+nordlander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_nordlander_cultural_acceptance_add = 1
+}
+
+hochlander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_hochlander_cultural_acceptance_add = 1
+}
+
+hochlander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_hochlander_cultural_acceptance_add = 1
+}
+
+ostlander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ostlander_cultural_acceptance_add = 1
+}
+
+ostlander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ostlander_cultural_acceptance_add = 1
+}
+
+ostermarker_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_ostermarker_cultural_acceptance_add = 1
+}
+
+ostermarker_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_ostermarker_cultural_acceptance_add = 1
+}
+
+talabeclander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_talabeclander_cultural_acceptance_add = 1
+}
+
+talabeclander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_talabeclander_cultural_acceptance_add = 1
+}
+
+stirlander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_stirlander_cultural_acceptance_add = 1
+}
+
+stirlander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_stirlander_cultural_acceptance_add = 1
+}
+
+averlander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_averlander_cultural_acceptance_add = 1
+}
+
+averlander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_averlander_cultural_acceptance_add = 1
+}
+
+wissenlander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_wissenlander_cultural_acceptance_add = 1
+}
+
+wissenlander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_wissenlander_cultural_acceptance_add = 1
+}
+
+sylvanian_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_sylvanian_cultural_acceptance_add = 1
+}
+
+sylvanian_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_sylvanian_cultural_acceptance_add = 1
+}
+
+vampire_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_vampire_cultural_acceptance_add = 1
+}
+
+vampire_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_vampire_cultural_acceptance_add = 1
+}
+
+sollander_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_sollander_cultural_acceptance_add = 1
+}
+
+sollander_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_sollander_cultural_acceptance_add = 1
+}
+
+halfling_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_halfling_cultural_acceptance_add = 1
+}
+
+halfling_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_halfling_cultural_acceptance_add = 1
+}
+
+
+# ---- Board item #3408, Karaz Ankor & Dark Lands cultures ----
+
+dawi_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_cultural_acceptance_add = 1
+}
+
+dawi_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_cultural_acceptance_add = 1
+}
+
+dawi_grey_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_grey_cultural_acceptance_add = 1
+}
+
+dawi_grey_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_grey_cultural_acceptance_add = 1
+}
+
+dawi_norse_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_norse_cultural_acceptance_add = 1
+}
+
+dawi_norse_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_norse_cultural_acceptance_add = 1
+}
+
+dawi_badlands_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_badlands_cultural_acceptance_add = 1
+}
+
+dawi_badlands_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_badlands_cultural_acceptance_add = 1
+}
+
+dawi_zharr_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_zharr_cultural_acceptance_add = 1
+}
+
+dawi_zharr_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_zharr_cultural_acceptance_add = 1
+}
+
+hobgoblin_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_hobgoblin_cultural_acceptance_add = 1
+}
+
+hobgoblin_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_hobgoblin_cultural_acceptance_add = 1
+}
+
+# ---- Board item #3409, Badlands & Nehekhara cultures ----
+
+orc_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_orc_cultural_acceptance_add = 1
+}
+
+orc_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_orc_cultural_acceptance_add = 1
+}
+
+goblin_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_goblin_cultural_acceptance_add = 1
+}
+
+goblin_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_goblin_cultural_acceptance_add = 1
+}
+
+nehekharan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_nehekharan_cultural_acceptance_add = 1
+}
+
+nehekharan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_nehekharan_cultural_acceptance_add = 1
+}
