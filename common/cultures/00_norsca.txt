@@ -1,1 +1,47 @@
-﻿
+﻿# Old World cultures — Norsca. Each culture carries:
+#   color   — 0-1 RGB, thematic, cosmetic only.
+#   religion — a religion id from common/religions/00_religions.txt.
+#   traits  — the racial-heritage trait (common/discrimination_traits/00_heritages.txt) and the language
+#             trait (01_languages.txt) from #3405. Heritage and language are NOT separate culture fields;
+#             they are discrimination-trait ids listed inside this one block.
+#   ethnicities/graphics — VANILLA portrait templates used as PLACEHOLDERS (custom art is out of scope,
+#             epic #3404). Exact vanilla ids must be confirmed on the Vic3 box; a wrong name is a
+#             missing-texture warning, not a parse error.
+# NOTE: this file currently contains only the spike culture (norscan) as part of a batch-wide schema
+#       verification (board items #3406-#3409). The remaining Northern & Western Realms cultures
+#       (kislev, brettonia, southern_realms) are NOT yet authored, pending confirmation that this
+#       schema loads clean in-game.
+# Board item #3407 (epic #3404).
+
+norscan = {
+	color = { 0.35 0.45 0.55 }
+	religion = chaos_undivided
+	traits = { heritage_norscan_human sphere_norscan }
+
+	male_common_first_names = {
+		Bjarni Skarl Ulfr Egil Haraldr Sveinn Throgg Gunnar Ketil Arnvid
+		Hrothgar Sigvaldi Vandrad Eirik Halfdan Ottar Styrbjorn Thorvald Grimnir Asgrim
+	}
+
+	female_common_first_names = {
+		Astrid Sigrun Hilde Freydis Thora Gudrun Ingrid Solveig Ragnhild Brynja
+		Katla Yrsa Halla Svala Runa Bergljot Thordis Aslaug Vigdis Eyra
+	}
+
+	common_last_names = {
+		Bjarnisson Ulfsson Egilsson Haraldsson Ketilsson Thorvaldsson Grimsson Ottarsson
+		Sveinsson Sigvaldsson Wolfkin Bloodaxe Icebound Stormborn Seawolf
+	}
+
+	noble_last_names = {
+		Skaeling Sarl Baersonling Graeling Bjornling Aeslings Vanaheimr Jarlsblood
+	}
+
+	ethnicities = {
+		10 = caucasian_blond # PLACEHOLDER — vanilla ethnicity id, confirm exact name on the Vic3 box
+	}
+
+	graphics = european
+
+	obsessions = { }
+}
