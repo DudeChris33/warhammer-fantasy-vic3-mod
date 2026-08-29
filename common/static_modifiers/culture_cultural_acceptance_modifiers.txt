@@ -229,3 +229,66 @@ halfling_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_halfling_cultural_acceptance_add = 1
 }
+
+
+# ---- Board item #3408, Karaz Ankor & Dark Lands cultures ----
+
+dawi_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_cultural_acceptance_add = 1
+}
+
+dawi_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_cultural_acceptance_add = 1
+}
+
+dawi_grey_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_grey_cultural_acceptance_add = 1
+}
+
+dawi_grey_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_grey_cultural_acceptance_add = 1
+}
+
+dawi_norse_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_norse_cultural_acceptance_add = 1
+}
+
+dawi_norse_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_norse_cultural_acceptance_add = 1
+}
+
+dawi_badlands_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_badlands_cultural_acceptance_add = 1
+}
+
+dawi_badlands_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_badlands_cultural_acceptance_add = 1
+}
+
+dawi_zharr_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_zharr_cultural_acceptance_add = 1
+}
+
+dawi_zharr_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_zharr_cultural_acceptance_add = 1
+}
+
+hobgoblin_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_hobgoblin_cultural_acceptance_add = 1
+}
+
+hobgoblin_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_hobgoblin_cultural_acceptance_add = 1
+}

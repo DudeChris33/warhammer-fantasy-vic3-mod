@@ -229,3 +229,66 @@ halfling_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_halfling_standard_of_living_add = 1
 }
+
+
+# ---- Board item #3408, Karaz Ankor & Dark Lands cultures ----
+
+dawi_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_dawi_standard_of_living_add = 1
+}
+
+dawi_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_dawi_standard_of_living_add = 1
+}
+
+dawi_grey_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_dawi_grey_standard_of_living_add = 1
+}
+
+dawi_grey_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_dawi_grey_standard_of_living_add = 1
+}
+
+dawi_norse_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_dawi_norse_standard_of_living_add = 1
+}
+
+dawi_norse_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_dawi_norse_standard_of_living_add = 1
+}
+
+dawi_badlands_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_dawi_badlands_standard_of_living_add = 1
+}
+
+dawi_badlands_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_dawi_badlands_standard_of_living_add = 1
+}
+
+dawi_zharr_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_dawi_zharr_standard_of_living_add = 1
+}
+
+dawi_zharr_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_dawi_zharr_standard_of_living_add = 1
+}
+
+hobgoblin_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_hobgoblin_standard_of_living_add = 1
+}
+
+hobgoblin_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_hobgoblin_standard_of_living_add = 1
+}

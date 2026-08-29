@@ -182,3 +182,53 @@ country_fervor_target_halfling_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #3408, Karaz Ankor & Dark Lands cultures ----
+
+country_fervor_target_dawi_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_dawi_grey_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_dawi_norse_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_dawi_badlands_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_dawi_zharr_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_hobgoblin_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
