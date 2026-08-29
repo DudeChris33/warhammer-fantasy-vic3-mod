@@ -17,7 +17,7 @@ Covers Clausewitz script: game database definitions in `common/` and event files
 
 ## Naming
 
-- No existing script files exist yet to establish a project-specific naming convention — when authoring the first files in a folder, pick clear, descriptive snake_case filenames (e.g. `buildings_empire.txt`) and stay consistent with whatever is chosen going forward.
+- The first established convention is the culture foundation (#3405): zero-padded `NN_<topic>.txt` filenames within a database folder, ordered by loading/reading precedence (e.g. `common/discrimination_trait_groups/00_heritage_groups.txt`, `01_language_groups.txt`, `02_religious_heritage_groups.txt`; `common/religions/00_religions.txt`). When a folder has no such convention yet, pick a clear, descriptive snake_case filename (with or without a numeric prefix, e.g. `buildings_empire.txt`) and stay consistent with whatever is chosen going forward.
 
 ## Forbidden
 
