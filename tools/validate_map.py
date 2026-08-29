@@ -810,6 +810,121 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
     return errors
 
 
+# ---------------------------------------------------------------------------
+# The sea engine files (--sea)
+# ---------------------------------------------------------------------------
+#
+# Board #2929 emits the sea side of the map (99_seas.txt + default.map sea_starts
+# + water strategic regions) ahead of the land states, so the full no-flag
+# validator cannot pass yet (it requires every province colour claimed). This is
+# the sea-only subset: the colour chain that MUST hold for the seas to load —
+# every 99_seas colour is a real provinces.png sea colour and is listed in
+# sea_starts — plus the two cross-file invariants the game would otherwise only
+# reveal as a load error (every sea state grouped into exactly one water strategic
+# region; every sea state localized).
+
+_REGION_HEADER = re.compile(r"(region_\w+)\s*=\s*\{")
+
+
+def _parse_strategic_region_states(path: Path) -> dict[str, list[str]]:
+    """Map each ``region_*`` key to the ``STATE_*`` keys in its ``states`` block."""
+    text = path.read_text(encoding="utf-8-sig")
+    out: dict[str, list[str]] = {}
+    idx = 0
+    while True:
+        m = _REGION_HEADER.search(text, idx)
+        if not m:
+            break
+        open_idx = text.index("{", m.end() - 1)
+        close_idx = _match_braces(text, open_idx)
+        body = text[open_idx + 1 : close_idx]
+        states_block = _extract_block(body, "states")
+        members = re.findall(r"STATE_\w+", states_block) if states_block else []
+        out[m.group(1)] = members
+        idx = close_idx + 1
+    return out
+
+
+def validate_sea(
+    seas_txt_path: Path,
+    default_map_path: Path,
+    provinces_index_path: Path,
+    strategic_regions_dir: Path,
+    loc_dir: Path,
+) -> list[str]:
+    """Sea-only subset check (board #2929) — the sea colour chain + cross-file invariants."""
+    import json
+
+    errors: list[str] = []
+    for path in (seas_txt_path, default_map_path, provinces_index_path):
+        if not path.is_file():
+            errors.append(f"missing {path}")
+    if errors:
+        return errors
+
+    sea_states = parse_state_file(seas_txt_path)
+    if not sea_states:
+        return [f"no sea states found in {seas_txt_path}"]
+
+    seas_colors: set[Color] = set()
+    for st in sea_states:
+        seas_colors.update(st.provinces)
+        if st.impassable:
+            errors.append(f"{st.key} ({st.filename}): sea state declares impassable "
+                          f"(2026-08-22 decision: every zone passable)")
+
+    dm_text = default_map_path.read_text(encoding="utf-8-sig")
+    sea_starts = _parse_color_field(dm_text, "sea_starts")
+
+    prov_index = json.loads(provinces_index_path.read_text(encoding="utf-8"))
+    prov_sea_colors = {
+        tuple(int(v) for v in c["color"])
+        for c in prov_index["cells"] if c.get("kind") == "sea"
+    }
+
+    from worldgen.raster import color_to_hex
+
+    # 1. Every 99_seas colour is listed in default.map sea_starts.
+    for color in sorted(seas_colors - sea_starts):
+        errors.append(f"sea colour {color_to_hex(color)} in 99_seas.txt is absent from "
+                      f"default.map sea_starts")
+    # 2. No stray sea_starts colour that no sea state claims.
+    for color in sorted(sea_starts - seas_colors):
+        errors.append(f"sea colour {color_to_hex(color)} in default.map sea_starts is "
+                      f"claimed by no state in 99_seas.txt")
+    # 3. Every 99_seas colour is a real provinces.png sea colour.
+    for color in sorted(seas_colors - prov_sea_colors):
+        errors.append(f"sea colour {color_to_hex(color)} in 99_seas.txt is not a sea colour "
+                      f"in provinces_index.json (absent from provinces.png)")
+
+    # 4. Every sea state is in exactly one water strategic region.
+    region_map: dict[str, list[str]] = {}
+    wsr_path = strategic_regions_dir / "water_strategic_regions.txt"
+    if not wsr_path.is_file():
+        errors.append(f"missing {wsr_path}")
+    else:
+        region_map = _parse_strategic_region_states(wsr_path)
+    membership: dict[str, list[str]] = {}
+    for region, members in region_map.items():
+        for state in members:
+            membership.setdefault(state, []).append(region)
+    for st in sorted(sea_states, key=lambda s: s.key):
+        regions = membership.get(st.key, [])
+        if not regions:
+            errors.append(f"{st.key}: not assigned to any water strategic region")
+        elif len(regions) > 1:
+            errors.append(f"{st.key}: assigned to multiple water strategic regions: "
+                          f"{', '.join(regions)}")
+
+    # 5. Every sea state is localized.
+    loc_keys = _parse_loc_keys(loc_dir)
+    for st in sorted(sea_states, key=lambda s: s.key):
+        if st.key not in loc_keys:
+            errors.append(f"{st.key}: no localization entry under {loc_dir}")
+
+    return errors
+
+
 def _read_mask(path: Path) -> np.ndarray:
     from worldgen.raster import read_mask_png
 
@@ -826,6 +941,8 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--labels", action="store_true", help="lint the S3a state-label layer instead of the province map")
     p.add_argument("--province-bitmap", action="store_true",
                    help="lint the first-pass province bitmap (RGB + index) instead of the repo map text")
+    p.add_argument("--sea", action="store_true",
+                   help="lint the sea engine files only (99_seas + sea_starts + water regions + loc)")
     p.add_argument("--labels-path", type=Path, help="path to state_labels.png")
     p.add_argument("--sea-labels-path", type=Path, help="path to sea_zones.png")
     p.add_argument("--mask-path", type=Path, help="path to land_sea_mask.png")
@@ -898,6 +1015,25 @@ def main(argv: list[str] | None = None) -> int:
             return 1
         print("validate_map --province-bitmap: the province bitmap tiles the mask and agrees "
               "with its index + the sea layer.")
+        return 0
+
+    if args.sea:
+        derived = TOOLS_DIR / "derived"
+        errors = validate_sea(
+            seas_txt_path=(args.state_regions or REPO_ROOT / "map_data" / "state_regions")
+            / "99_seas.txt",
+            default_map_path=args.default_map or REPO_ROOT / "map_data" / "default.map",
+            provinces_index_path=args.index_path or derived / "provinces_index.json",
+            strategic_regions_dir=REPO_ROOT / "common" / "strategic_regions",
+            loc_dir=args.loc_dir or REPO_ROOT / "localization" / "english" / "map",
+        )
+        if errors:
+            print(f"validate_map --sea: {len(errors)} error(s):", file=sys.stderr)
+            for e in errors:
+                print(f"  - {e}", file=sys.stderr)
+            return 1
+        print("validate_map --sea: 99_seas colours are all in sea_starts and are real "
+              "provinces.png sea colours; every sea state grouped and localized.")
         return 0
 
     paths = _resolve_paths(args)

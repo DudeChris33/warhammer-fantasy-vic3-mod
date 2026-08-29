@@ -54,6 +54,7 @@ MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 SEA_LABELS_PATH = DERIVED_DIR / "sea_zones.png"
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 INDEX_PATH = DERIVED_DIR / "provinces_index.json"
+LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
 
 STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
@@ -119,8 +120,8 @@ def main(argv: list[str] | None = None) -> int:
     mag = land_provinces.magenta_lines(drawn)
     dmask = land_provinces.drawn_mask(land, mag, WRAP_X, log=log)
     log("subdividing the drawn regions into provinces ...", t0)
-    land_lab, is_placeholder = land_provinces.subdivide(reg, land, dmask, args.target,
-                                                        WRAP_X, args.min_area, log=log)
+    land_lab, is_placeholder, reg_of = land_provinces.subdivide(reg, land, dmask, args.target,
+                                                                WRAP_X, args.min_area, log=log)
     n_land = int(land_lab.max())
 
     sea_lab = cells.read_labels(SEA_LABELS_PATH)
@@ -175,11 +176,17 @@ def main(argv: list[str] | None = None) -> int:
     land_id_start = map_config.LAND_ID_START  # 1
     sea_id_start = n_land + 1
     entries = []
-    n_impassable = 0
+    n_placeholder = 0
     for lab in range(1, n_land + 1):
         color = tuple(int(v) for v in palette[lab])
-        impassable = bool(is_placeholder[lab]) if lab < len(is_placeholder) else False
-        n_impassable += impassable
+        # Out-of-scope far continents are kept whole but emitted PASSABLE: Vic3
+        # stacks every hub on one province (vanilla STATE_DELAWARE/STATE_BUKOVINA),
+        # so a landmass boots as a legal one-province state. The out-of-scope
+        # signal is preserved separately as `placeholder` for downstream state
+        # emission; `impassable` now honestly means impassable and is uniformly
+        # False on land.
+        placeholder = bool(is_placeholder[lab]) if lab < len(is_placeholder) else False
+        n_placeholder += placeholder
         entries.append({
             "label": lab,
             "kind": "land",
@@ -188,7 +195,8 @@ def main(argv: list[str] | None = None) -> int:
             "id": land_id_start + (lab - 1),  # == lab
             "area": int(areas[lab]),
             "coastal": bool(land_coastal[lab]) if lab < len(land_coastal) else False,
-            "impassable": impassable,
+            "impassable": False,  # every land province is passable now
+            "placeholder": placeholder,  # out-of-scope land kept whole, undetailed
         })
     for s in range(1, n_sea + 1):
         lab = n_land + s
@@ -202,6 +210,7 @@ def main(argv: list[str] | None = None) -> int:
             "area": int(areas[lab]),
             "coastal": bool(sea_coastal[s]) if s < len(sea_coastal) else False,
             "impassable": False,  # sea provinces are navigable, never impassable
+            "placeholder": False,  # schema symmetry with land entries
         })
 
     index = {
@@ -210,7 +219,8 @@ def main(argv: list[str] | None = None) -> int:
         "sea_source": SEA_LABELS_PATH.name,
         "land_provinces": n_land,
         "sea_provinces": n_sea,
-        "impassable_land_provinces": n_impassable,
+        "impassable_land_provinces": 0,  # nothing is impassable — every landmass boots
+        "placeholder_land_provinces": n_placeholder,  # out-of-scope land kept whole
         "land_id_start": land_id_start,
         "sea_id_start": sea_id_start,
         "cells": entries,
@@ -218,8 +228,60 @@ def main(argv: list[str] | None = None) -> int:
     INDEX_PATH.write_text(json.dumps(index, indent=1) + "\n", encoding="utf-8")
     log(f"wrote {INDEX_PATH.relative_to(REPO_ROOT)}", t0)
 
+    # Persist the land province -> state-region grouping that subdivide already
+    # computed in reg_of and used to throw away. #2930 emits land state_regions/*.txt
+    # from this — the land mirror of sea_zones_index.json. Region-keyed, carrying
+    # province LABELS only; provinces_index.json stays the colour authority. This
+    # block writes a SEPARATE file and reads nothing above, so provinces.png and
+    # provinces_index.json are byte-identical whether or not it runs.
+    reg_count = int(reg.max())
+    reg_areas = np.bincount(reg.ravel(), minlength=reg_count + 1)
+    groups: dict[int, list[int]] = {}
+    for lab in range(1, n_land + 1):
+        groups.setdefault(int(reg_of[lab]), []).append(lab)
+    # Totality, asserted on the REAL data at generation time (validate_map.py
+    # --province-bitmap does not read this file, so a broken grouping must fail
+    # loudly here): every land province lands in exactly one region, and every
+    # region 1..R is populated.
+    grouped = sorted(p for members in groups.values() for p in members)
+    if grouped != list(range(1, n_land + 1)):
+        raise SystemExit(
+            f"land region grouping is not total: {len(grouped)} grouped provinces "
+            f"vs {n_land} land provinces")
+    if set(groups) != set(range(1, reg_count + 1)):
+        raise SystemExit(
+            f"land region grouping skips or invents a region id: got {sorted(groups)}, "
+            f"expected 1..{reg_count}")
+    region_cells = []
+    n_drawn_regions = 0
+    for r in range(1, reg_count + 1):
+        members = sorted(groups[r])
+        # A region is wholly drawn or wholly placeholder (a magenta barrier cannot
+        # cross water, so a region nests in one landmass); all == any here.
+        placeholder = all(bool(is_placeholder[lab]) for lab in members)
+        n_drawn_regions += not placeholder
+        region_cells.append({
+            "region": r,
+            "kind": "placeholder" if placeholder else "drawn",
+            "area": int(reg_areas[r]),
+            "provinces": members,
+        })
+    land_regions = {
+        "canvas": [CANVAS_W, CANVAS_H],
+        "source": STATE_REGIONS_SOURCE,
+        "land_provinces": n_land,
+        "regions": reg_count,
+        "drawn_regions": n_drawn_regions,
+        "placeholder_regions": reg_count - n_drawn_regions,
+        "cells": region_cells,
+    }
+    LAND_REGIONS_INDEX_PATH.write_text(json.dumps(land_regions, indent=1) + "\n", encoding="utf-8")
+    log(f"wrote {LAND_REGIONS_INDEX_PATH.relative_to(REPO_ROOT)} "
+        f"({reg_count} regions: {n_drawn_regions} drawn, "
+        f"{reg_count - n_drawn_regions} placeholder)", t0)
+
     land_areas = areas[1:n_land + 1]
-    log(f"done: {n_land} land provinces ({n_impassable} out-of-scope impassable placeholders) "
+    log(f"done: {n_land} land provinces ({n_placeholder} out-of-scope passable placeholders) "
         f"(area min {int(land_areas.min()):,} / median {int(np.median(land_areas)):,} / "
         f"max {int(land_areas.max()):,} px), {n_sea} sea provinces", t0)
     return 0

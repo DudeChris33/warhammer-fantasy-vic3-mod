@@ -10,7 +10,7 @@ description: >-
   and only for decisions that change the shape of the work.
 user-invocable: true
 argument-hint: <item-ids, e.g. "431" or "431 432 438" (omit to pick from the board)>
-maestro-skill-version: 15
+maestro-skill-version: 22
 ---
 
 # Maestro Auto — Scope + Build, One Gate
@@ -56,6 +56,13 @@ those skills also take one id or many (`/maestro-scope 431 432`,
 `/maestro-build 431 432`) when only that half of the journey is wanted.
 `/maestro-auto` is for approve-once, read-the-result, at any N.
 
+**Ids that are the roster of an approved Plan belong to `/maestro-run`** — it
+takes the Plan's own id, runs its waves in the order the board holds, and gates
+on the roster approval a human already recorded there rather than on a yes in
+this session. `/maestro-auto` is for **flat filed items with no Plan**: it
+classifies them itself, derives its own build order, and creates the approval
+gate as it goes.
+
 ## Board Resolution
 
 Same as `maestro-task`: read Maestro's `.claude/maestro.json` repo config; on any miss, resolve via
@@ -98,7 +105,19 @@ sub-agent context.
 Renew by 40 minutes, immediately before and after long waits/commands, and
 before accepting a sub-agent result. Keep waits short enough to heartbeat.
 Lost/expired/replaced ownership means report that the advisory signal is gone
-and do not pretend it remains held; it does not gate a claim or push. Check in
+and do not pretend it remains held; it does not gate a claim or push.
+
+**The orchestrator checks in (progress) on behalf of each running build.**
+Sub-agents never hold tokens, so the renewal you already make per lease
+carries the report: `activity` says what that item's build is doing right now
+("sub-agent building", "merging branch", "closing test run"), and on a build
+lease `criteria` + `criteria_count` tick the item's `### Acceptance Criteria`
+ordinals as the sub-agent's results come back. Check in at natural boundaries
+— dispatch, return, merge, blocker — still no later than 40 minutes apart; it
+writes no trail note. After any reacquire the report starts empty, so re-post
+the full criteria state on the first check-in of the new generation.
+
+Check in (return)
 each scope lease after its plan push and
 each build lease after its final stage write or blocker comment, plus every
 failure, cancellation, or dropped-item terminal path. After an outage, reread
@@ -121,8 +140,9 @@ before replaying queued board writes.
    below, the classification here, and the rules each item names. (Older server
    without the tool: `get_board_item(item)` plus one `list_boards(<workspace>)`
    for the names, and say you fell back.) Classify:
-   - `inbox`, no `## Plan` → **scope then build**
-   - `planned`, has `## Plan` → **build only** (skip phases 1-2)
+   - `inbox`, no `## Approach` (nor legacy `## Plan`) → **scope then build**
+   - `planned`, has `## Approach` (or legacy `## Plan`) → **build only**
+     (skip phases 1-2)
    - `stage.is_parked` → **reject**, always. Parking is a deliberate "not now"
      and its plan is presumed stale; it is resumed and re-scoped first.
    - already `building`, or owned by someone else (`people` names them) → ask
@@ -133,15 +153,21 @@ before replaying queued board writes.
    user away to another skill. At the other end, more than about six items in
    one run is an unreviewable diff, not autonomy: propose a first batch of the
    highest-priority items and say what you left for the next run.
-4. Each packet already carries the rules its own workspec names (`rules.applied`,
+4. Every packet LEADS with `unaddressed_comments` — human steering nobody has
+   answered. Address each first, per maestro-build's rule
+   (`comment_on_item(..., addresses=[...])` or `"all"`; a comment that
+   changes an item's shape re-routes it to **scope then build**): the done
+   flip is refused while directives remain, so an unaddressed comment left
+   for the closing pass fails the run at its last step.
+5. Each packet already carries the rules its own workspec names (`rules.applied`,
    with unresolved slugs in `rules.missing` — say those out loud). Call
    `get_workspace_context(workspace)` once only for what the packets do not
    carry: workspace rules no item references, or the `challenge` doc the scoping
    sub-agents need.
-5. **Admit the batch** — run the wrong-id gate below and get a yes, before any
+6. **Admit the batch** — run the wrong-id gate below and get a yes, before any
    agent spawns. Not the phase-4 gate: this asks "are these the right items?",
    that asks "is this the right plan?".
-6. **No baseline yet** — the tier that decides whether the run needs one arrives
+7. **No baseline yet** — the tier that decides whether the run needs one arrives
    with the plans (phase 1), and scoping is read-only. See "Verification".
 
 ## Naming an Item
@@ -226,7 +252,7 @@ Brief: the `maestro-scope` workflow for exactly one item — read every file the
 workspec references, check existing patterns and helpers in the target app, fetch
 framework docs when framework features are involved — and **return the complete
 updated description as its result**: the human block, the `## Spec`, and the
-`## Plan` it just wrote (objective, ordered steps with file paths, design
+`## Approach` it just wrote (objective, ordered steps with file paths, design
 decisions with rationale, edge cases, testing plan, documentation plan), in
 `maestro-scope`'s plan style — each fact once, conclusions not investigation.
 
@@ -251,6 +277,23 @@ Also require, returned separately:
 
 Give each agent the workspec, the workspace rule docs, and read access to the
 repo. Forbid edits: phase 1 writes nothing but its own answer.
+
+**Milestone stamp is INHERIT-ONLY in this run.** An unattended run stamps
+what the parent already carries — the parent's milestone column value goes
+into the item's phase-4 push `values` — and NOTHING else: never
+`manage_milestone(create)`, never ask mid-run, never derive one from a due
+date (`maestro-scope`'s reuse-before-create rule is for interactive
+sessions; unattended creation is both a silent write the human never asked
+for and a duplicate-create race between parallel sub-agents scoping
+siblings of one dated Plan). Items with no parent signal stay unstamped;
+the phase-4 gate lists each item's milestone (or "no milestone") so the
+human assigns at approval — that listing IS this run's "ask once".
+
+**Horizon stamp is inherit-or-default-`next`, never a question.** On a
+horizon-purpose board an item keeps the horizon value it has; one with none
+is stamped `next` at the phase-4 push (only when the column defines it).
+Never ask mid-run and never stamp `now` unattended — urgency is the
+human's call, made at the gate or on the board.
 
 ## Phase 2 — Challenge
 
@@ -320,7 +363,9 @@ Then present **one** consolidated brief and stop for approval — the user's sin
 decision point, so complete and short:
 
 - **The batch** — one line per item: markdown link, plan in a sentence, size
-  (commits / tests / docs), verification tier.
+  (commits / tests / docs), verification tier, and its milestone (or "no
+  milestone") — the run is inherit-only, so this line is where the human
+  assigns the unstamped ones.
 - **Build order** — the sequence, and any dependency that forced it.
 - **How the batch gets verified** — the batch tier, what the closing run will be,
   whether a baseline is coming, and any tier phase 3 escalated with why. The user
@@ -440,25 +485,6 @@ Then:
 
 Nothing is `done` mid-run: until the sweep runs, the truth is "built".
 
-## This project (Warhammer Fantasy / Victoria 3)
-
-Multiplayer-synchronized Victoria 3 mod with **no offline test suite** (see
-`maestro-scope`'s and `maestro-build`'s project sections, which the scoping and
-build sub-agents follow). Two things the orchestrator owns at batch level:
-
-- **The closing "run" is the user's, not yours.** For script/loc/gui/events
-  changes verification is a game load the user performs — mod in Victoria 3,
-  `logs/error.log` clean of this mod's files (`.claude/rules/testing.md`) — so
-  there is no auto-runnable closing suite and no green baseline; hand the batch's
-  load-and-check to the user and record the result. `map_data/` items carry the
-  auto-runnable offline lint (`sources.py --verify`, `validate_map.py`,
-  `run_fixture.py --check`), and a visual map change is only done once the user
-  accepts the rendered PNG — scope those `full` with the render as evidence.
-- **Run the post-build review once, after every branch has merged**: spawn
-  `docs-updater` (docs/rules from the batch diff) and `security-review`
-  (MP-desync + content-integrity audit) over the combined tree, and fold their
-  findings into the final report — the same review the old `/build` ran per item.
-
 ## Failure Policy
 
 - **A failed item does not fail the batch.** Post a blocker comment, leave it at
@@ -497,6 +523,14 @@ Never stop to ask a question the repo, its rules, or the workspec answers. And
 never suppress a question because the run was supposed to be autonomous — an
 unasked question becomes a wrong diff.
 
+**An unattended run never approves a plan.** The user's yes at the gate is
+this run's approval and lives on the trail; `approve_board_item_plan` and
+`request_board_item_rescope` record a HUMAN's per-item decision and are called
+only on an explicit human instruction given in this session — never inferred,
+never on the run's own judgment. The tools refuse agent-kind credentials; on
+the user's credential, relay a decision only when they actually said it, with
+`client=`/`model=` stamped so the record shows a session wrote it.
+
 ## Final Report
 
 TL;DR-first, once, for the batch. Every item a markdown link (see "Naming an
@@ -521,7 +555,8 @@ point at them.
 - Spawning a scoping agent against a roster the user has not confirmed — phase 4
   pushes plans to items before approval
 - Building any item the user did not approve at the gate
-- Building an item with no `## Plan`, a `parked` item, or one owned by someone
+- Building an item with no `## Approach` (nor legacy `## Plan`), a `parked`
+  item, or one owned by someone
   else without asking
 - Concurrent builds in a repo with a shared test port, database, or working tree
 - Letting sub-agents write to the board, or reporting a sub-agent's claimed test
@@ -531,5 +566,7 @@ point at them.
   tier below the one approved at the gate
 - Building a `full`-tier batch without a baseline, or taking a baseline for a
   batch that has no `full` item in it
+- Calling the plan-approval or re-scope decision tools without an explicit
+  human instruction from this session — the unattended run never approves
 - Skipping the challenge phase, the coherence pass, or the gate to "save time"
 - Leaving any item's stage stale when the run ends

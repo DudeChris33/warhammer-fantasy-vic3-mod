@@ -1,0 +1,15 @@
+﻿l_english:
+ # No new loc keys required for this file.
+ #
+ # common/messages/00_messages.txt and 01_event_messages.txt define notification
+ # *metadata* only (type, group, texture, notification_type, color, popup_name,
+ # on_created_soundeffect, days) — they carry no inline title/description text or
+ # loc-key fields of their own. The display text for a message is looked up by the
+ # game using the message's own key name (e.g. je_secret_police_research_identification_complete)
+ # against whatever loc file defines that key's title/desc — for the entries restored
+ # here, that's the vanilla events/journal_entries loc, which is restored/authored by
+ # this epic's events/ and journal_entry_groups/ items, not by common/messages/.
+ #
+ # This file exists so the folder has an accompanying localization/english/ entry per
+ # project convention; it is intentionally empty of keys until a Warhammer-specific
+ # message (added outside this restoration) needs new display text.

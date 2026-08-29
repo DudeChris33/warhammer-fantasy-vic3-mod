@@ -1,0 +1,17 @@
+﻿country_limit_officers_qualifications_to_upper_strata = {
+	script_only = yes
+	color=neutral
+	boolean=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+country_electoral_confidence_over_time={
+	script_only = yes
+	color=good
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}

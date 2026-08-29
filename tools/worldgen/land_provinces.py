@@ -217,7 +217,7 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np
 
 def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
               wrap_x: bool = True, min_area: int = 400, log=None
-              ) -> tuple[np.ndarray, np.ndarray]:
+              ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
     ``reg`` is the state-region layer from :func:`regions` (``1..R``, 0 on water);
@@ -227,12 +227,23 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     largest-remainder rule with each drawn region guaranteed at least one. A
     placeholder region (outside ``drawn``) is kept whole — one province.
 
-    Returns ``(labels, is_placeholder)``: the province label layer (``1..N``, 0 on
-    water) and a boolean table indexed by label, ``True`` for an **out-of-scope
-    placeholder** province (a far continent outside the drawn Old World, which the
-    generator marks impassable). After the per-region cut,
-    :func:`worldgen.cells.split_disconnected` repairs any seam a fill tore,
-    sub-floor offcuts merge into a neighbour, and the labels renumber to ``1..N``.
+    Returns ``(labels, is_placeholder, reg_of)``:
+
+    * ``labels`` — the province label layer (``1..N``, 0 on water).
+    * ``is_placeholder`` — a boolean table indexed by label, ``True`` for an
+      **out-of-scope placeholder** province (a far continent outside the drawn Old
+      World, which the generator marks as a passable placeholder).
+    * ``reg_of`` — a table indexed by province label (``reg_of[0] == 0`` for
+      water), giving the ``1..R`` state-region id from ``reg`` that each province
+      lies in. Each province lies wholly in one region, so this is well defined;
+      :func:`generate_provinces` inverts it into the region → provinces grouping
+      persisted as ``land_regions_index.json`` (the land mirror of
+      ``sea_zones_index.json``). Province labels/colours are untouched by this
+      return, so ``provinces.png`` stays byte-identical.
+
+    After the per-region cut, :func:`worldgen.cells.split_disconnected` repairs any
+    seam a fill tore, sub-floor offcuts merge into a neighbour, and the labels
+    renumber to ``1..N``.
     """
     n = int(reg.max())
     areas = np.bincount(reg.ravel(), minlength=n + 1)
@@ -300,4 +311,4 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     if log:
         log(f"  {int(out.max())} land provinces "
             f"({int(is_placeholder[1:].sum())} out-of-scope placeholders)")
-    return out, is_placeholder
+    return out, is_placeholder, reg_of

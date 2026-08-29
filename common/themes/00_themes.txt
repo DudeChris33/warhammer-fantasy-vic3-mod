@@ -1,0 +1,119 @@
+﻿##########################################################################################################################################################################
+########################################################################### DEFAULT ######################################################################################
+##########################################################################################################################################################################
+gui_skin_base = {
+	category = ui_skin_theme
+	bulk_selection_group = "default"
+
+	ui_skin = "default"
+
+	dynamic_weight = 1.0
+}
+
+main_menu_image_base = {
+	category = main_menu_image_theme
+	video = "gfx/interface/illustrations/frontend/menu_video.bk2"
+	bulk_selection_group = "default"
+}
+
+papermap_base = {
+	category = papermap_theme
+	bulk_selection_group = "default"
+
+	papermap_textures_file = "gfx/map/textures/maptextures.settings"
+
+	map_object = {
+		pdxmesh = "papermap_extension_top_mesh"
+		locator = "papermap_extension_top_locator"
+	}
+
+	map_object = {
+		pdxmesh = "papermap_extension_bottom_mesh"
+		locator = "papermap_extension_bottom_locator"
+	}
+
+	dynamic_weight = 1.0
+}
+
+table_base = {
+	category = table_top_theme
+	bulk_selection_group = "default"
+
+	map_object = {
+		pdxmesh = "papermap_table_top_mesh"
+		locator = "papermap_table_top_locator"
+	}
+
+	map_object = {
+		pdxmesh = "papermap_table_bottom_mesh"
+		locator = "papermap_table_bottom_locator"
+	}
+
+	dynamic_weight = 1.0
+}
+
+papermap_object_divider = {
+	category = table_asset_1_theme
+	bulk_selection_group = "default"
+
+	map_object = {
+		pdxmesh = papermap_object_divider_mesh
+		locator = papermap_object_1_locator
+	}
+
+	dynamic_weight = 1.0
+}
+
+papermap_object_compass = {
+	category = table_asset_2_theme
+	bulk_selection_group = "default"
+
+	map_object = {
+		pdxmesh = papermap_object_compass_mesh
+		locator = papermap_object_2_locator
+	}
+
+	dynamic_weight = 1.0
+}
+
+papermap_cigarbox = {
+	category = table_asset_3_theme
+	bulk_selection_group = "default"
+
+	map_object = {
+		pdxmesh = papermap_cigarbox_01_mesh
+		locator = papermap_object_3_locator
+	}
+
+	dynamic_weight = 1.0
+}
+
+papermap_letter = {
+	category = table_asset_4_theme
+	bulk_selection_group = "default"
+
+	map_object = {
+		pdxmesh = papermap_letter_mesh
+		locator = papermap_object_4_locator
+	}
+
+	dynamic_weight = 1.0
+}
+
+papermap_cloth_default = {
+	category = table_asset_cloth_theme
+	bulk_selection_group = "default"
+
+	map_object = {
+		pdxmesh = papermap_cloth_01_mesh
+		locator = papermap_cloth_locator
+	}
+
+	dynamic_weight = 1.0
+}
+
+########## PAST ##########
+main_menu_image_og = {
+	category = main_menu_image_theme
+	video = "gfx/interface/illustrations/frontend/menu_video_og.bk2"
+}

@@ -8,7 +8,7 @@ description: >-
   over MCP. It never asks a person to write the words.
 user-invocable: true
 argument-hint: <version to cut (omit to use the next one the release process will mint)>
-maestro-skill-version: 3
+maestro-skill-version: 4
 ---
 
 # Release Note — write what shipped, for the people who use it
@@ -68,23 +68,26 @@ the file IS the mechanism.
    **never write a note from commit subjects alone**. (There is no repo
    changelog; it was retired 2026-07-31.)
 2. **Pick the version — it must match what `publish.sh` will mint.** The
-   script bumps the PATCH on every deploy, so the note for "the next publish"
-   is `current + 0.0.1`; read current from `config/settings/version.py`. For a
-   deliberate minor or major cut, bump the version yourself first with
-   `bin/versioning` and name the note accordingly — `publish.sh` nags on an
-   `x.y.0` with no note.
+   script bumps the part it is TOLD to, defaulting to the patch, so the note
+   for a plain "next publish" is `current + 0.0.1`; read current from
+   `config/settings/version.py`. For a deliberate cut, the publish itself
+   names the part — `./publish.sh --minor` (or `--major`, or
+   `--set X.Y.Z`) — so name the note for the version that flag will produce
+   and let the publish mint it. Do not bump by hand first; `publish.sh` nags
+   on an `x.y.0` with no note.
 3. **Write `<version>.md`** into the notes directory with the `---`-delimited
    header: `version:` (MUST equal the filename stem — the loader skips a
    mismatch), `date:` as YYYY-MM-DD, `title:`. Then the body.
 4. **Voice and shape** — see `## Voice` below.
-5. **Validate**: `bin/run_tests -t test_maestro.27_test_releases`. The suite
+5. **Validate**: `bin/run_tests --nomojo -t test_maestro.27_test_releases`. The suite
    parses every shipped note and fails on a version/filename mismatch or a
    malformed header. The test runner starts and owns its own server on a port
    derived for this checkout — do not start a server first and do not go
    hunting for a port number.
 6. **Commit the note with (or right after) the code it describes** so it is
    reviewed as part of that diff and deploys with it. Then `./publish.sh`
-   ships it; check the bump the script prints equals the note's version.
+   ships it — with the part flag the note was named for (`--minor` for a
+   feature release); check the version the script prints equals the note's.
 
 ## Mode B — any other repo (filed to Maestro over MCP)
 

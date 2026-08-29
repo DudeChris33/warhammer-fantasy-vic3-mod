@@ -18,14 +18,22 @@ One-time setup: create a local virtualenv and install the pinned deps — see
 `tools/.venv` (already gitignored) — activate it before running any `tools/`
 script. Before committing anything
 under `map_data/` (province bitmap, `heightmap.png`, `rivers.png`,
-`state_regions/`, `default.map`), the map localization, or the
-source-registration data (`tools/SOURCES.md`, `tools/registration/`), run:
+`state_regions/`, `default.map`, `adjacencies.csv`), the water strategic regions
+(`common/strategic_regions/water_strategic_regions.txt`), the map localization, or
+the source-registration data (`tools/SOURCES.md`, `tools/registration/`), run:
 
 ```
 python tools/worldgen/sources.py --verify       # source manifest SHA-256 + registration cross-checks
 python tools/validate_map.py --province-bitmap   # the province bitmap tiles the mask + agrees with its index and the sea layer
+python tools/validate_map.py --sea               # sea engine files: 99_seas colours ⊆ sea_starts ⊆ provinces.png sea colours; every sea state grouped + localized
 python tools/run_fixture.py --check              # regression-checks the toolchain itself
 ```
+
+The `--sea` subset check is the sea-side gate for board #2929's emitted files
+(`99_seas.txt`, `default.map` `sea_starts`, `water_strategic_regions.txt`, the sea
+loc). It substitutes for the full no-flag `validate_map.py`, which cannot pass
+until the land states also exist (it requires *every* province colour claimed by a
+state) — that full crosscheck runs at milestone integration.
 
 All must pass before the in-game `error.log` check below. This does not replace
 the game load — it catches the offline-detectable class of error first. The
@@ -38,7 +46,8 @@ action, never a side effect of a generator run.
 `tools/derived/land_sea_mask.png`, `map_data/heightmap.png`, `map_data/rivers.png`,
 `tools/derived/state_labels.png`, `tools/derived/sea_zones.png` (+
 `tools/derived/sea_zones_index.json`) and `map_data/provinces.png` (+
-`tools/derived/provinces_index.json`) are generated, not hand-authored: after an
+`tools/derived/provinces_index.json` + `tools/derived/land_regions_index.json`, the
+region→province grouping) are generated, not hand-authored: after an
 intentional source/LUT/registration change, regenerate them with `python
 tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png` — either
 flood-filled from the user's traced coastline in `sources/land_sea_mask.png`, or,
@@ -50,6 +59,13 @@ tools/generate_rivers.py`, `python tools/generate_state_labels.py`, `python
 tools/generate_sea_zones.py` and `python tools/generate_provinces.py`, and re-run
 the checks above before committing. The mask moves first; every downstream layer
 is regenerated from it.
+The sea engine files `map_data/state_regions/99_seas.txt`,
+`common/strategic_regions/water_strategic_regions.txt`, and `map_data/default.map`'s
+`sea_starts` block are emitted by `python tools/generate_sea_regions.py` (board
+#2929) — it joins `provinces_index.json` (colours) with `sea_zones_index.json`
+(canon keys/ids), so regenerate rather than hand-edit them (`default.map`'s other
+keys and `adjacencies.csv`'s strait rows stay hand-authored). The old staged
+`tools/derived/seas_99_seas.txt` / `seas_sea_starts.txt` are removed.
 `generate_sea_zones.py` and `generate_provinces.py` are both decoupled from the
 land cut — each reads the committed `land_sea_mask.png` and its own hand-drawn
 source directly (the purple sea-zone network, the magenta state-region network),
@@ -60,7 +76,10 @@ and neither is wired into `state_labels.png`. `generate_provinces.py` (board
 it flood-fills the hand-drawn magenta network into barrier-respecting state
 regions, then subdivides each drawn region into provinces (no province crosses a
 magenta line); an out-of-scope far continent with no interior magenta is
-classified a placeholder and kept whole as one impassable province.
+classified a placeholder and kept whole as one passable placeholder province (Vic3
+stacks every hub on one province, so a landmass needs only one passable province
+to boot as a legal state; `impassable` is uniformly `false` on land, and the
+out-of-scope signal is carried separately as the `placeholder` flag).
 `worldgen/sea_zones.py`'s `extract` also gained a `split_disconnected`
 connectivity repair (the nearest-label fill can tear a zone into two
 disconnected pieces sharing one label; `land_provinces.regions` mirrors the

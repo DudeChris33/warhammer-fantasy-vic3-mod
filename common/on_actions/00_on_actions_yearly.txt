@@ -1,0 +1,28 @@
+﻿# Fired off on_yearly_pulse_character
+# Restored from vanilla, stripped of all real-world/DLC-story content. Vanilla's narrative
+# flavor-event lists (on_yearly_events, russian_monarchy_yearly_events,
+# japan_monarchy_yearly_events, austrian_monarchy_yearly_events,
+# portugal_single_fire_yearly_events, spain_single_fire_yearly_events,
+# springtime_of_peoples_yearly_events, bp1_misc_yearly_events, ep1_misc_yearly_events,
+# indochina_yearly_events, exiles_yearly_events, historical_agitators_yearly_events,
+# slavery_abolition_yearly_events, lobby_yearly_events, krakatoa_yearly_events,
+# tunguska_yearly_events, british_dictate_yearly_events, ip2_misc_yearly_events,
+# famine_yearly_events, kamehameha_coin_toss, ryukyu_rivalry_coin_toss, japan_yearly_events,
+# japan_earthquake_events) referenced only real-world/DLC-specific events and characters and
+# are not restored. on_wounded is pure generic game-mechanic scaffolding with no real-world
+# references and is still called by common/on_actions/00_code_on_actions.txt.
+
+# On wounded
+on_wounded = {
+	trigger = {
+		has_trait = wounded
+	}
+	effect = {
+		random_list = {
+			80 = {}
+			20 = {
+				remove_trait = wounded
+			}
+		}
+	}
+}

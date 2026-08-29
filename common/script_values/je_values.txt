@@ -1,0 +1,49 @@
+﻿free_cotton_producing_arable_land = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			can_construct_building = building_cotton_plantation
+		}
+		add = this.free_arable_land
+	}
+}
+
+free_opium_producing_arable_land = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			can_construct_building = building_opium_plantation
+		}
+		add = this.free_arable_land
+	}
+}
+
+free_tea_producing_arable_land = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			can_construct_building = building_tea_plantation
+		}
+		add = this.free_arable_land
+	}
+}
+
+free_dye_producing_arable_land = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			can_construct_building = building_dye_plantation
+		}
+		add = this.free_arable_land
+	}
+}
+
+free_tobacco_producing_arable_land = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			can_construct_building = building_tobacco_plantation
+		}
+		add = this.free_arable_land
+	}
+}
