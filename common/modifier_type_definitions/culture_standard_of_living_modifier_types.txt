@@ -1,0 +1,12 @@
+﻿# Registers the state_<culture>_standard_of_living_add modifier TYPES used by the
+# matching static_modifier blocks in common/static_modifiers/culture_*_modifiers.txt.
+# One declaration per culture; appended to by later culture-authoring items in epic #3404.
+# Board item #3407.
+
+state_norscan_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

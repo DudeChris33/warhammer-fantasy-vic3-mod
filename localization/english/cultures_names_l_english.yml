@@ -4,6 +4,12 @@
  # every unique name in the mod, and is APPENDED to by each culture-authoring item in epic
  # #3404 (#3406, #3407, #3408, #3409) — never recreated per culture file.
  # Board item #3407 (epic #3404).
+ # Before adding a name here, check that vanilla's localization/english/names_l_english.yml
+ # (which this mod loads unmodified) does not already ship that exact key — and likewise any
+ # future localization/replace/english/ override of it. A key defined in both places is a
+ # duplicate-key error in the game log. This file carries ONLY names vanilla does not already
+ # provide a display key for; names that vanilla already keys stay in the culture's name lists
+ # in common/cultures/*.txt but get no entry here.
 
  # norscan — male common first names
  Bjarni:0 "Bjarni"
@@ -11,9 +17,7 @@
  Ulfr:0 "Ulfr"
  Egil:0 "Egil"
  Haraldr:0 "Haraldr"
- Sveinn:0 "Sveinn"
  Throgg:0 "Throgg"
- Gunnar:0 "Gunnar"
  Ketil:0 "Ketil"
  Arnvid:0 "Arnvid"
  Hrothgar:0 "Hrothgar"
@@ -22,21 +26,16 @@
  Eirik:0 "Eirik"
  Halfdan:0 "Halfdan"
  Ottar:0 "Ottar"
- Styrbjorn:0 "Styrbjorn"
- Thorvald:0 "Thorvald"
  Grimnir:0 "Grimnir"
  Asgrim:0 "Asgrim"
 
  # norscan — female common first names
- Astrid:0 "Astrid"
  Sigrun:0 "Sigrun"
  Hilde:0 "Hilde"
  Freydis:0 "Freydis"
  Thora:0 "Thora"
  Gudrun:0 "Gudrun"
- Ingrid:0 "Ingrid"
  Solveig:0 "Solveig"
- Ragnhild:0 "Ragnhild"
  Brynja:0 "Brynja"
  Katla:0 "Katla"
  Yrsa:0 "Yrsa"
@@ -68,7 +67,6 @@
  Thorvaldsson:0 "Thorvaldsson"
  Grimsson:0 "Grimsson"
  Ottarsson:0 "Ottarsson"
- Sveinsson:0 "Sveinsson"
  Sigvaldsson:0 "Sigvaldsson"
  Wolfkin:0 "Wolfkin"
  Bloodaxe:0 "Bloodaxe"
