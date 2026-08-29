@@ -87,3 +87,145 @@ border_princer_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_border_princer_standard_of_living_add = 1
 }
+
+# ---- Board item #3406, the Empire's cultures ----
+
+reiklander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_reiklander_standard_of_living_add = 1
+}
+
+reiklander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_reiklander_standard_of_living_add = 1
+}
+
+middenlander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_middenlander_standard_of_living_add = 1
+}
+
+middenlander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_middenlander_standard_of_living_add = 1
+}
+
+nordlander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_nordlander_standard_of_living_add = 1
+}
+
+nordlander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_nordlander_standard_of_living_add = 1
+}
+
+hochlander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_hochlander_standard_of_living_add = 1
+}
+
+hochlander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_hochlander_standard_of_living_add = 1
+}
+
+ostlander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ostlander_standard_of_living_add = 1
+}
+
+ostlander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ostlander_standard_of_living_add = 1
+}
+
+ostermarker_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ostermarker_standard_of_living_add = 1
+}
+
+ostermarker_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ostermarker_standard_of_living_add = 1
+}
+
+talabeclander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_talabeclander_standard_of_living_add = 1
+}
+
+talabeclander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_talabeclander_standard_of_living_add = 1
+}
+
+stirlander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_stirlander_standard_of_living_add = 1
+}
+
+stirlander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_stirlander_standard_of_living_add = 1
+}
+
+averlander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_averlander_standard_of_living_add = 1
+}
+
+averlander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_averlander_standard_of_living_add = 1
+}
+
+wissenlander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_wissenlander_standard_of_living_add = 1
+}
+
+wissenlander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_wissenlander_standard_of_living_add = 1
+}
+
+sylvanian_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_sylvanian_standard_of_living_add = 1
+}
+
+sylvanian_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_sylvanian_standard_of_living_add = 1
+}
+
+vampire_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_vampire_standard_of_living_add = 1
+}
+
+vampire_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_vampire_standard_of_living_add = 1
+}
+
+sollander_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_sollander_standard_of_living_add = 1
+}
+
+sollander_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_sollander_standard_of_living_add = 1
+}
+
+halfling_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_halfling_standard_of_living_add = 1
+}
+
+halfling_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_halfling_standard_of_living_add = 1
+}
