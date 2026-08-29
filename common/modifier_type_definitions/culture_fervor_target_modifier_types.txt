@@ -10,3 +10,61 @@ country_fervor_target_norscan_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #3407, Northern & Western Realms cultures ----
+
+country_fervor_target_gospodar_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_ungol_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_bretonnian_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_mousillon_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_tilean_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_estalian_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_border_princer_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

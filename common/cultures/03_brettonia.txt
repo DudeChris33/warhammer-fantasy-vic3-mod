@@ -1,1 +1,108 @@
-﻿
+﻿# Old World cultures — Bretonnia. Schema mirrors common/cultures/00_norsca.txt, the
+# verified reference entry for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+#   noble_last_names / male_regal_first_names / female_regal_first_names are OPTIONAL (confirmed
+#                against vanilla, where many cultures omit them) and are used here only for the
+#                cultures that have a real aristocracy in Warhammer lore.
+#   graphics/ethnicities — vanilla portrait ids, confirmed present in the vanilla
+#                common/culture_graphics/ and common/ethnicities/ databases. Custom art is out of
+#                scope for epic #3404.
+# Multi-word names use vanilla's underscore convention (de_Lyonesse), displayed via the loc key.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Board item #3407 (epic #3404).
+
+################ Bretonnian — chivalric Old French register, a real feudal aristocracy ################
+
+bretonnian = {
+	color= rgb{ 66 104 168 }
+	religion = the_lady
+	heritage = heritage_bretonnian_human
+	language = sphere_bretonnian
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Gilles Louen Thierry Renaud Alberic Corentin Armand Guillaume Hugues Jerrod
+		Chilfroy Baudouin Fastred Gaubert Tancred Eudes Bohemond Raoul Anselme Gaspard
+		Floribert Marcus Adalbrand Yvain
+	}
+
+	female_common_first_names = {
+		Isabeau Repanse Adele Blanchefleur Cerise Elienne Genevieve Heloise Isolde Jehanne
+		Mathilde Odile Perrette Sybille Yvette Alienor Constance Melisende Bertrade Guenievre
+		Clarisse Aveline
+	}
+
+	noble_last_names = {
+		de_Lyonesse de_Bastonne de_Bordeleaux de_Couronne de_Gisoreux de_Montfort de_Carcassonne
+		de_Quenelles de_Parravon d_Artois d_Aquitaine de_Brionne de_Languille de_Beaulieu
+		de_Montauban de_Sangreal
+	}
+
+	common_last_names = {
+		Boulanger Charpentier Bouvier Meunier Chevrier Tonnelier Fauconnier Bergier
+		Vigneron Charretier Poulain Laboureur Faucheur Sabotier Chandelier Marechal
+	}
+
+	male_regal_first_names = {
+		Louen Gilles Tancred Bohemond Guillaume Baudouin Eudes
+	}
+
+	female_regal_first_names = {
+		Isabeau Repanse Alienor Guenievre Constance Melisende
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_brown_hair
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Mousillon — Bretonnia's rotten limb: the same tongue, archaic and grim ################
+# Deliberately NOT a foreign people: the register is French like bretonnian, skewed older and
+# funerary. A damned duchy under the Red Duke's shadow, so no regal or noble name lists.
+
+mousillon = {
+	color= rgb{ 46 58 46 }
+	religion = cult_of_nagash
+	heritage = heritage_mousillon
+	language = sphere_bretonnian
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Merovech Landuin Maldred Balduin Corbin Drogo Fulk Gerbold Hardouin Ithier
+		Jocelin Lothair Mauger Osmond Payen Raimbaut Sagremor Thibaut Vulmar Waleran
+		Gondemar Aymeric
+	}
+
+	female_common_first_names = {
+		Alix Berthe Clotilde Doucette Emmeline Fauvette Gisele Havoise Ismene Jourdaine
+		Liesse Mahaut Nicolette Orable Peronelle Richilde Sanchie Tiphaine Ursine Ysabeau
+		Melusine Aude
+	}
+
+	common_last_names = {
+		Corbeau Malfleur Sanglier Noirval Charnier Cendrier Tombelaine Rouille
+		Blanchemort Grisaille Lamproie Vaseux Sombreval Ossuaire Fangeux Linceul
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_northern_dark_hair
+		1 = caucasian_blond
+	}
+}

@@ -15,3 +15,75 @@ norscan_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_norscan_standard_of_living_add = 1
 }
+
+# ---- Board item #3407, Northern & Western Realms cultures ----
+
+gospodar_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_gospodar_standard_of_living_add = 1
+}
+
+gospodar_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_gospodar_standard_of_living_add = 1
+}
+
+ungol_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ungol_standard_of_living_add = 1
+}
+
+ungol_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ungol_standard_of_living_add = 1
+}
+
+bretonnian_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_bretonnian_standard_of_living_add = 1
+}
+
+bretonnian_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_bretonnian_standard_of_living_add = 1
+}
+
+mousillon_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_mousillon_standard_of_living_add = 1
+}
+
+mousillon_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_mousillon_standard_of_living_add = 1
+}
+
+tilean_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_tilean_standard_of_living_add = 1
+}
+
+tilean_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_tilean_standard_of_living_add = 1
+}
+
+estalian_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_estalian_standard_of_living_add = 1
+}
+
+estalian_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_estalian_standard_of_living_add = 1
+}
+
+border_princer_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_border_princer_standard_of_living_add = 1
+}
+
+border_princer_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_border_princer_standard_of_living_add = 1
+}
