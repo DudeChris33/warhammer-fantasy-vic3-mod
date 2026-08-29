@@ -26,9 +26,9 @@ ocean (median −888 m, the clamped abyssal floor) with a scalloped, spiked sout
 edge and stray needle islands — because the trusted source *draws no terrain*
 north of ~72.5–74.5N, the classifier fell through to a deep-ocean swatch, and the
 sheet's torn artistic edge became the coastline. The Chaos Wastes are land. That
-failure is documented in `planning/issues/chaos-wastes-polar-fringe-misclassified.md`.
-Read it before reviewing anything polar, and do not re-derive what it already
-measures.
+failure and its fix are documented in
+`planning/done/world-map-miller-projection-canvas.md` (Phase 4). Read it before
+reviewing anything polar, and do not re-derive what it already measures.
 
 ## Scope
 

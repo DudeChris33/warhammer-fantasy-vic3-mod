@@ -71,8 +71,8 @@ BOM. A missing key shows the raw key in-game or crashes some UI lookups. Also fl
 hardcoded display text in script — presentation belongs in loc.
 
 **Map data formats.** This is where the project currently lives, so be precise, and
-verify against the vanilla install rather than from memory. Facts already confirmed
-and recorded in `planning/requests/world-map-source-driven.md`:
+verify against the vanilla install rather than from memory. Facts measured directly
+against the vanilla 1.13.9 install:
 
 - `provinces.png` is mode RGB, 8192×3616, 40,875 unique colours in vanilla — one
   colour per province, and colour collisions silently merge provinces.
@@ -83,7 +83,10 @@ and recorded in `planning/requests/world-map-source-driven.md`:
   water state regions carry only `states = { … }`, one per sea zone.
 - `adjacencies.csv` header:
   `From;To;Type;Through;start_x;start_y;stop_x;stop_y;adjacency_rule_name;Comment`.
-- Vanilla has 47 land strategic regions across 7 files.
+- Vanilla has **36** land strategic regions across 6 files (mean 18.8 states, max
+  47 in `region_southern_europe`) plus 105 water in a 7th — re-verify before citing;
+  an earlier planning draft mis-transcribed this as "47 across 7 files" (that 47 is
+  actually `region_southern_europe`'s own state count, not the region count).
 - `heightmap.png` and `rivers.png` have specific encodings — see
   `tools/config/map_config.py` and `tools/lut/rivers_palette.json`, both measured
   from vanilla 1.13.8.
