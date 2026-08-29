@@ -1,0 +1,32 @@
+# Racial heritages (type = heritage). Each names its racial heritage group.
+# Board item #3405 (epic #3404).
+
+# Old World humans — one group, near-total mutual acceptance (a unified Empire, tolerant neighbours).
+heritage_imperial_human = { type = heritage  trait_group = heritage_group_old_world_human }
+heritage_bretonnian_human = { type = heritage  trait_group = heritage_group_old_world_human }
+heritage_kislevite_human = { type = heritage  trait_group = heritage_group_old_world_human }
+heritage_norscan_human = { type = heritage  trait_group = heritage_group_old_world_human }
+heritage_tilean_human = { type = heritage  trait_group = heritage_group_old_world_human }
+heritage_estalian_human = { type = heritage  trait_group = heritage_group_old_world_human }
+heritage_border_prince_human = { type = heritage  trait_group = heritage_group_old_world_human }
+
+# Halflings
+heritage_halfling = { type = heritage  trait_group = heritage_group_halfling }
+
+# Dwarfs
+heritage_dawi = { type = heritage  trait_group = heritage_group_dawi }
+
+# Chaos Dwarfs — a distinct, Chaos-mutated race; separate group is deliberate (hated on sight).
+heritage_dawi_zharr = { type = heritage  trait_group = heritage_group_dawi_zharr }
+
+# Greenskins
+heritage_orc = { type = heritage  trait_group = heritage_group_greenskin }
+heritage_goblin = { type = heritage  trait_group = heritage_group_greenskin }
+heritage_hobgoblin = { type = heritage  trait_group = heritage_group_greenskin }
+
+# Nehekharan — kept apart from the western undead (Tomb Kings are enemies of vampires, not kin).
+heritage_nehekharan = { type = heritage  trait_group = heritage_group_nehekharan }
+
+# Undead — Sylvanian vampires and the damned of Mousillon.
+heritage_vampire = { type = heritage  trait_group = heritage_group_undead }
+heritage_mousillon = { type = heritage  trait_group = heritage_group_undead }

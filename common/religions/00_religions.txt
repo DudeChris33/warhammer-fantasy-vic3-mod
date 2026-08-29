@@ -1,0 +1,147 @@
+# The 18 Old World religions. Each carries:
+#   icon    — a VANILLA religion_icons .dds used as a PLACEHOLDER (custom art is out of scope, epic #3404).
+#             Exact vanilla filenames must be confirmed on the Vic3 box; a wrong name is a missing-texture
+#             warning, not a parse error.
+#   heritage — the religious-heritage trait (common/discrimination_traits/02_religious_heritages.txt) whose
+#             group drives religious discrimination.
+#   color   — 0-1 RGB, thematic, cosmetic only.
+#   taboos  — empty for now; taboos reference goods ids and common/goods/ is not yet authored (a later pass).
+# Board item #3405 (epic #3404).
+
+################ Old World pantheon — all share heritage_old_world_pantheon (one religious stock) ################
+
+cult_of_sigmar = {
+	icon = "gfx/interface/icons/religion_icons/protestant.dds"
+	heritage = heritage_old_world_pantheon
+	color = { 0.85 0.68 0.20 }
+	taboos = { }
+}
+
+cult_of_ulric = {
+	icon = "gfx/interface/icons/religion_icons/orthodox.dds"
+	heritage = heritage_old_world_pantheon
+	color = { 0.55 0.65 0.72 }
+	taboos = { }
+}
+
+old_faith = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_old_world_pantheon
+	color = { 0.30 0.45 0.25 }
+	taboos = { }
+}
+
+the_lady = {
+	icon = "gfx/interface/icons/religion_icons/catholic.dds"
+	heritage = heritage_old_world_pantheon
+	color = { 0.60 0.75 0.85 }
+	taboos = { }
+}
+
+cult_of_myrmidia = {
+	icon = "gfx/interface/icons/religion_icons/catholic.dds"
+	heritage = heritage_old_world_pantheon
+	color = { 0.72 0.52 0.30 }
+	taboos = { }
+}
+
+cult_of_ursun = {
+	icon = "gfx/interface/icons/religion_icons/orthodox.dds"
+	heritage = heritage_old_world_pantheon
+	color = { 0.50 0.28 0.20 }
+	taboos = { }
+}
+
+cult_of_morr = {
+	icon = "gfx/interface/icons/religion_icons/oriental_orthodox.dds"
+	heritage = heritage_old_world_pantheon
+	color = { 0.25 0.18 0.30 }
+	taboos = { }
+}
+
+################ Ancestor gods (dwarfs) ################
+
+cult_of_ancestors = {
+	icon = "gfx/interface/icons/religion_icons/confucian.dds"
+	heritage = heritage_ancestor_cult
+	color = { 0.55 0.55 0.55 }
+	taboos = { }
+}
+
+################ Chaos — all six share heritage_chaos_worship (reviled equally) ################
+
+cult_of_khorne = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_chaos_worship
+	color = { 0.60 0.08 0.08 }
+	taboos = { }
+}
+
+cult_of_nurgle = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_chaos_worship
+	color = { 0.45 0.50 0.20 }
+	taboos = { }
+}
+
+cult_of_tzeentch = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_chaos_worship
+	color = { 0.35 0.30 0.70 }
+	taboos = { }
+}
+
+cult_of_slaanesh = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_chaos_worship
+	color = { 0.85 0.45 0.65 }
+	taboos = { }
+}
+
+chaos_undivided = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_chaos_worship
+	color = { 0.20 0.15 0.18 }
+	taboos = { }
+}
+
+cult_of_hashut = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_chaos_worship
+	color = { 0.28 0.22 0.20 }
+	taboos = { }
+}
+
+################ Greenskin gods — both share heritage_greenskin_faith ################
+
+gork_and_mork = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_greenskin_faith
+	color = { 0.30 0.55 0.20 }
+	taboos = { }
+}
+
+mork_and_gork = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_greenskin_faith
+	color = { 0.55 0.60 0.20 }
+	taboos = { }
+}
+
+################ Mortuary cult (Tomb Kings) ################
+
+mortuary_cult = {
+	icon = "gfx/interface/icons/religion_icons/oriental_orthodox.dds"
+	heritage = heritage_mortuary_rites
+	color = { 0.80 0.72 0.40 }
+	taboos = { }
+}
+
+################ Undeath (Sylvanian vampires + Mousillon) ################
+
+cult_of_nagash = {
+	icon = "gfx/interface/icons/religion_icons/oriental_orthodox.dds"
+	heritage = heritage_nagashite
+	color = { 0.20 0.30 0.22 }
+	taboos = { }
+}

@@ -1,0 +1,11 @@
+# Religious-heritage traits (type = heritage). Each religion's `heritage =` points at one of these.
+# One trait per group (decision #2 / review panel 2026-08-28): the Old World pantheon is a single
+# shared religious stock — its cults coexist, so inter-cult friction comes through the religion axis,
+# not a heritage split. Board item #3405 (epic #3404).
+
+heritage_old_world_pantheon = { type = heritage  trait_group = heritage_group_old_world_pantheon }
+heritage_ancestor_cult = { type = heritage  trait_group = heritage_group_ancestor_gods }
+heritage_chaos_worship = { type = heritage  trait_group = heritage_group_chaos }
+heritage_greenskin_faith = { type = heritage  trait_group = heritage_group_greenskin_gods }
+heritage_mortuary_rites = { type = heritage  trait_group = heritage_group_mortuary_cult }
+heritage_nagashite = { type = heritage  trait_group = heritage_group_undeath }

@@ -1,0 +1,10 @@
+# Language groups — the tongue buckets. Sharing a group eases assimilation.
+# The western Old-Worlder tongues (reikspiel/bretonnian/tilean/estalian) share one group;
+# khazalid + khazalid_zharr share one (canon dialect kinship). Board item #3405 (epic #3404).
+
+sphere_group_old_world = { type = language }
+sphere_group_khazalid = { type = language }
+sphere_group_kislevarin = { type = language }
+sphere_group_norscan = { type = language }
+sphere_group_nehekharan = { type = language }
+sphere_group_greenskin = { type = language }

@@ -1,0 +1,18 @@
+# Languages (type = language). Each names its language group.
+# Board item #3405 (epic #3404).
+
+# Western Old-Worlder tongues — grouped for eased mutual assimilation.
+sphere_reikspiel = { type = language  trait_group = sphere_group_old_world }
+sphere_bretonnian = { type = language  trait_group = sphere_group_old_world }
+sphere_tilean = { type = language  trait_group = sphere_group_old_world }
+sphere_estalian = { type = language  trait_group = sphere_group_old_world }
+
+# Khazalid and its debased Chaos-Dwarf dialect share a root.
+sphere_khazalid = { type = language  trait_group = sphere_group_khazalid }
+sphere_khazalid_zharr = { type = language  trait_group = sphere_group_khazalid }
+
+# Distinct tongues, each its own group.
+sphere_kislevarin = { type = language  trait_group = sphere_group_kislevarin }
+sphere_norscan = { type = language  trait_group = sphere_group_norscan }
+sphere_nehekharan = { type = language  trait_group = sphere_group_nehekharan }
+sphere_greenskin = { type = language  trait_group = sphere_group_greenskin }

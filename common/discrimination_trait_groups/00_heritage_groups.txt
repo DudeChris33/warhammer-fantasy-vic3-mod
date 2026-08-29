@@ -1,0 +1,11 @@
+# Racial heritage groups — the ancestral "blood" buckets every Old World people belongs to.
+# Sharing a group = partial mutual acceptance; sharing a trait within it = near-total.
+# Group type must match its member traits (heritage). Board item #3405 (epic #3404).
+
+heritage_group_old_world_human = { type = heritage }
+heritage_group_halfling = { type = heritage }
+heritage_group_dawi = { type = heritage }
+heritage_group_dawi_zharr = { type = heritage }
+heritage_group_greenskin = { type = heritage }
+heritage_group_nehekharan = { type = heritage }
+heritage_group_undead = { type = heritage }
