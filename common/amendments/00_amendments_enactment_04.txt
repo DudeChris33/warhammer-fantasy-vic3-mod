@@ -224,14 +224,12 @@ amendment_cult_of_personality = {
 
 	would_sponsor = {
 		OR = {
-			has_ideology = ideology:ideology_caudillismo
 			has_ideology = ideology:ideology_reactionary
 			leader = {
 				OR = {
 					has_ideology = ideology:ideology_authoritarian
 					has_ideology = ideology:ideology_fascist
 					has_ideology = ideology:ideology_integralist
-					has_ideology = ideology:ideology_despotic_utopian
 				}
 			}
 		}

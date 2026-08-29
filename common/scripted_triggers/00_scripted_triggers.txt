@@ -652,20 +652,14 @@ has_paternalist_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_paternalistic
 		has_ideology = ideology:ideology_magnatial
-		has_ideology = ideology:ideology_moderantist
 		ig_has_carlist_ideology = yes
 		has_ideology = ideology:ideology_scholar_paternalistic
-		has_ideology = ideology:ideology_junker_paternalistic
-		has_ideology = ideology:ideology_papal_paternalistic
-		has_ideology = ideology:ideology_japan_paternalistic
 	}
 }
 
 has_hierarchic_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_hierarchic
-		has_ideology = ideology:ideology_japan_hierarchic
-		has_ideology = ideology:ideology_japan_hierarchic_2
 	}
 }
 
@@ -853,8 +847,6 @@ ig_is_reactionary = {
 				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_royalist
 				has_ideology = ideology:ideology_orleanist
-				has_ideology = ideology:ideology_bonapartist
-				has_ideology = ideology:ideology_legitimist
 				has_ideology = ideology:ideology_theocrat
 			}
 		}
@@ -1069,10 +1061,8 @@ ig_is_anti_dreyfusard = {
 			has_ideology = ideology:ideology_authoritarian
 		}
 		leader = {
-			has_ideology = ideology:ideology_legitimist
 		}
 		leader = {
-			has_ideology = ideology:ideology_bonapartist
 		}
 		leader = {
 			has_ideology = ideology:ideology_orleanist
@@ -1222,7 +1212,6 @@ has_reactionary_ideology = {
 			has_ideology = ideology:ideology_integralist
 			has_ideology = ideology:ideology_ethno_nationalist
 			has_ideology = ideology:ideology_theocrat
-			has_ideology = ideology:ideology_legitimist
 			has_ideology = ideology:ideology_luddite
 			has_ideology = ideology:ideology_corporatist_leader
 			character_has_carlist_ideology = yes
@@ -1240,7 +1229,6 @@ has_conservative_ideology = {
 			has_ideology = ideology:ideology_slaver
 			has_ideology = ideology:ideology_royalist
 			has_ideology = ideology:ideology_orleanist
-			has_ideology = ideology:ideology_bonapartist
 			has_ideology = ideology:ideology_theocrat
 			has_ideology = ideology:ideology_corporatist_leader
 			has_ideology = ideology:ideology_authoritarian
@@ -1253,8 +1241,6 @@ has_monarchist_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_royalist
 		has_ideology = ideology:ideology_orleanist
-		has_ideology = ideology:ideology_bonapartist
-		has_ideology = ideology:ideology_legitimist
 		character_has_carlist_ideology = yes
 		character_has_miguelist_ideology = yes
 	}

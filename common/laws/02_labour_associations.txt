@@ -50,7 +50,6 @@
 				OR = {
 					has_ideology = ideology:ideology_traditionalist
 					has_ideology = ideology:ideology_traditionalist_minoritarian
-					has_ideology = ideology:ideology_legitimist
 				}
 			}
 		}
@@ -330,7 +329,6 @@ law_corporatized_unions = {
 				has_ideology = ideology:ideology_corporatist
 				leader ?= {
 					OR = {
-						has_ideology = ideology:ideology_bonapartist
 						has_ideology = ideology:ideology_fascist
 						has_ideology = ideology:ideology_integralist
 						has_ideology = ideology:ideology_corporatist_leader
