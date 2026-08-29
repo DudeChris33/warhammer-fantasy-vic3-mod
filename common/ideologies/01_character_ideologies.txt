@@ -7332,9 +7332,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 	}
 
 	non_interest_group_leader_weight = {
-				else = {
-			value = 50
-		}
+		value = 50
 
 		# More likely among angry IGs outside of a technocracy
 		if = {

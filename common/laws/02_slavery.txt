@@ -157,7 +157,6 @@ law_debt_slavery = {
 
 	disallowing_laws = {
 		law_multicultural
-		law_affirmative_action
 	}
 
 	on_activate = {
@@ -232,7 +231,6 @@ law_slave_trade = {
 	disallowing_laws = {
 		law_cultural_exclusion
 		law_multicultural
-		law_affirmative_action
 	}
 
 	on_activate = {
