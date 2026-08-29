@@ -1,0 +1,77 @@
+﻿l_english:
+ # Per-name display keys for every name string used in common/cultures/*.txt.
+ # Names are global in Victoria 3, not per-culture: this one shared file carries a key for
+ # every unique name in the mod, and is APPENDED to by each culture-authoring item in epic
+ # #3404 (#3406, #3407, #3408, #3409) — never recreated per culture file.
+ # Board item #3407 (epic #3404).
+
+ # norscan — male common first names
+ Bjarni:0 "Bjarni"
+ Skarl:0 "Skarl"
+ Ulfr:0 "Ulfr"
+ Egil:0 "Egil"
+ Haraldr:0 "Haraldr"
+ Sveinn:0 "Sveinn"
+ Throgg:0 "Throgg"
+ Gunnar:0 "Gunnar"
+ Ketil:0 "Ketil"
+ Arnvid:0 "Arnvid"
+ Hrothgar:0 "Hrothgar"
+ Sigvaldi:0 "Sigvaldi"
+ Vandrad:0 "Vandrad"
+ Eirik:0 "Eirik"
+ Halfdan:0 "Halfdan"
+ Ottar:0 "Ottar"
+ Styrbjorn:0 "Styrbjorn"
+ Thorvald:0 "Thorvald"
+ Grimnir:0 "Grimnir"
+ Asgrim:0 "Asgrim"
+
+ # norscan — female common first names
+ Astrid:0 "Astrid"
+ Sigrun:0 "Sigrun"
+ Hilde:0 "Hilde"
+ Freydis:0 "Freydis"
+ Thora:0 "Thora"
+ Gudrun:0 "Gudrun"
+ Ingrid:0 "Ingrid"
+ Solveig:0 "Solveig"
+ Ragnhild:0 "Ragnhild"
+ Brynja:0 "Brynja"
+ Katla:0 "Katla"
+ Yrsa:0 "Yrsa"
+ Halla:0 "Halla"
+ Svala:0 "Svala"
+ Runa:0 "Runa"
+ Bergljot:0 "Bergljot"
+ Thordis:0 "Thordis"
+ Aslaug:0 "Aslaug"
+ Vigdis:0 "Vigdis"
+ Eyra:0 "Eyra"
+
+ # norscan — noble last names
+ Skaeling:0 "Skaeling"
+ Sarl:0 "Sarl"
+ Baersonling:0 "Baersonling"
+ Graeling:0 "Graeling"
+ Bjornling:0 "Bjornling"
+ Aeslings:0 "Aeslings"
+ Vanaheimr:0 "Vanaheimr"
+ Jarlsblood:0 "Jarlsblood"
+
+ # norscan — common last names
+ Bjarnisson:0 "Bjarnisson"
+ Ulfsson:0 "Ulfsson"
+ Egilsson:0 "Egilsson"
+ Haraldsson:0 "Haraldsson"
+ Ketilsson:0 "Ketilsson"
+ Thorvaldsson:0 "Thorvaldsson"
+ Grimsson:0 "Grimsson"
+ Ottarsson:0 "Ottarsson"
+ Sveinsson:0 "Sveinsson"
+ Sigvaldsson:0 "Sigvaldsson"
+ Wolfkin:0 "Wolfkin"
+ Bloodaxe:0 "Bloodaxe"
+ Icebound:0 "Icebound"
+ Stormborn:0 "Stormborn"
+ Seawolf:0 "Seawolf"

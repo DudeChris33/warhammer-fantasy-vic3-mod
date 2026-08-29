@@ -1,0 +1,17 @@
+﻿# Per-culture fervor-target static modifiers. Victoria 3 requires BOTH a
+# _positive and a _negative definition for every culture id in common/cultures/; a missing pair
+# is an in-game error. Both variants carry magnitude 1 — that is the vanilla shape (confirmed
+# against the vanilla common/static_modifiers/ reference) and is mirrored here deliberately.
+# This file is APPENDED to by each culture-authoring item in epic #3404 (#3406, #3407, #3408,
+# #3409) as new cultures are added.
+# Board item #3407 (epic #3404).
+
+norscan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_norscan_add = 1
+}
+
+norscan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_norscan_add = 1
+}
