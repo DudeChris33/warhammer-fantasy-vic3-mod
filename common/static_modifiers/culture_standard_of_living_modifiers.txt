@@ -292,3 +292,35 @@ hobgoblin_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_hobgoblin_standard_of_living_add = 1
 }
+
+# ---- Board item #3409, Badlands & Nehekhara cultures ----
+
+orc_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_orc_standard_of_living_add = 1
+}
+
+orc_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_orc_standard_of_living_add = 1
+}
+
+goblin_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_goblin_standard_of_living_add = 1
+}
+
+goblin_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_goblin_standard_of_living_add = 1
+}
+
+nehekharan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_nehekharan_standard_of_living_add = 1
+}
+
+nehekharan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_nehekharan_standard_of_living_add = 1
+}

@@ -292,3 +292,35 @@ hobgoblin_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_hobgoblin_cultural_acceptance_add = 1
 }
+
+# ---- Board item #3409, Badlands & Nehekhara cultures ----
+
+orc_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_orc_cultural_acceptance_add = 1
+}
+
+orc_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_orc_cultural_acceptance_add = 1
+}
+
+goblin_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_goblin_cultural_acceptance_add = 1
+}
+
+goblin_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_goblin_cultural_acceptance_add = 1
+}
+
+nehekharan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_nehekharan_cultural_acceptance_add = 1
+}
+
+nehekharan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_nehekharan_cultural_acceptance_add = 1
+}

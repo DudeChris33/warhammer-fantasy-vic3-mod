@@ -232,3 +232,29 @@ country_fervor_target_hobgoblin_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #3409, Badlands & Nehekhara cultures ----
+
+country_fervor_target_orc_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_goblin_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_nehekharan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

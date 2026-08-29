@@ -232,3 +232,29 @@ country_hobgoblin_cultural_acceptance_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #3409, Badlands & Nehekhara cultures ----
+
+country_orc_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_goblin_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_nehekharan_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

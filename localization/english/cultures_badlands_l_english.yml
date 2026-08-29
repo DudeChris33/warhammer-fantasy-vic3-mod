@@ -1,0 +1,6 @@
+﻿l_english:
+ # Culture display names for common/cultures/06_badlands.txt.
+ # One loc file per culture script file (per-name display keys live in the shared
+ # cultures_names_l_english.yml). Board item #3409 (epic #3404).
+ orc:0 "Orc"
+ goblin:0 "Goblin"
