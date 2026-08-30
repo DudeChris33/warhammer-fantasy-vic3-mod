@@ -16,7 +16,7 @@ Filed by epic #3414 (child #3415).
 - [x] 01 Kislev (10)
 - [x] 02 Empire (16)
 - [x] 03 Bretonnia (15)
-- [ ] 04 Karaz Ankor
+- [x] 04 Karaz Ankor (18)
 - [ ] 05 Southern Realms
 - [ ] 06 Badlands
 - [ ] 07 Nehekhara
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 51 tags** (4 formables, 47 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 69 tags** (5 formables, 64 starts). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -43,12 +43,9 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   collisions if vanilla defs still loaded. Only this registry's own uniqueness matters.
 - **Machine-verified within this file:** every code is exactly 3 uppercase ASCII letters, all are
   unique (zero collisions), roster⇔index parity holds, and every Old-World primary culture referenced
-  exists in `common/cultures/*.txt` (#3404) — **except the documented forward-refs below.**
-- **Forward-referenced cultures (pending authoring in epic #3404, not this docs-only item):**
-  `marienburger` (Marienburg/Wasteland) and `sylvanian_vampire` (the von Carstein vampire realm). These
-  are design decisions recorded here — Chris approved splitting Sylvania into a human tag and a vampire
-  tag, and giving Marienburg its own culture. The culture *files* are authored in the culture epic, so
-  these two ids are intentionally not yet live and are excluded from the culture-exists check.
+  exists in `common/cultures/*.txt` (#3404) — including `marienburger` and `sylvanian_vampire`,
+  authored by board item #3415 (the culture originally shipped as bare `vampire` was renamed to
+  `sylvanian_vampire` to leave room for other future Old World vampire bloodlines).
 
 ## Conventions
 
@@ -84,6 +81,7 @@ AES
 AQU
 ART
 AVE
+AZL
 BAE
 BAS
 BJO
@@ -91,18 +89,32 @@ BOL
 BOR
 BRE
 BRI
+BVR
 CAR
 COU
 DOL
+DRZ
+EKR
 EMP
 ERE
 GIS
 GRA
+GUN
 HAS
 HOC
+KAD
+KAG
+KAK
+KAZ
+KEP
+KHI
 KIS
+KNO
+KRD
 KSV
+KUN
 KVE
+KVN
 LAN
 LYO
 MID
@@ -120,6 +132,7 @@ REI
 ROP
 SAR
 SKA
+SLV
 SOL
 STI
 SYL
@@ -127,10 +140,12 @@ TAL
 TRO
 UNG
 VAR
+VLG
 VOL
 VSY
 WAS
 WIS
+ZHU
 ```
 
 ## Deferred check (owned by epic #3414)
@@ -209,8 +224,8 @@ sylvanian_vampire, and marienburger (Marienburg seceded — reintegration is a f
 | SOL | `02_empire` | Solland | start | `sollander` | Sudenburg | destroyed province claimant |
 | MOO | `02_empire` | The Moot | start | `halfling` | Eicheschatten | halfling homeland |
 | SYL | `02_empire` | Sylvania (human) | start | `sylvanian` | Drakenhof | the living population of Sylvania |
-| VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start — **culture pending #3404** |
-| WAS | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state — **culture pending #3404** |
+| VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start |
+| WAS | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
 
 ### 03 BRETTONIA (bretonnian, mousillon) — 15 tags; BRE formable
 
@@ -236,3 +251,33 @@ Mousillon's cursed culture is excluded, parallel to EMP excluding the vampire cu
 | LAN | `03_brettonia` | L'Anguille | start | `bretonnian` | L'Anguille |  |
 | PAR | `03_brettonia` | Parravon | start | `bretonnian` | Parravon |  |
 | MOU | `03_brettonia` | Mousillon | start | `mousillon` | Mousillon | the cursed city / undead |
+
+### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_badlands) — 18 tags; KAZ formable
+
+10 active holds + Karak Angazbar (seed "Karak Azgaraz" corrected) + 7 ruined/fallen holds (all
+sourced). **Ruined holds keep a dwarf tag even though they are occupied at game start** — they are
+releasable "reclaim" realms (per Chris). Their current greenskin/Skaven occupiers are *separate* tags:
+the greenskin occupiers (Red Eye Mountain, Black Crag, etc.) are added in 06 Badlands; Skaven have no
+region yet (under-empire, a future epic). KAZ (the reunited Everlasting Realm) carries **all four**
+dwarf cultures. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| KAZ | `04_karaz_ankor` | Karaz Ankor | formable | `dawi`, `dawi_grey`, `dawi_norse`, `dawi_badlands` | Karaz-a-Karak | the Everlasting Realm reunited (all dwarf cultures) |
+| KAK | `04_karaz_ankor` | Karaz-a-Karak | start | `dawi` | Karaz-a-Karak | the High King's hold (Everpeak) |
+| ZHU | `04_karaz_ankor` | Zhufbar | start | `dawi` | Zhufbar |  |
+| KAD | `04_karaz_ankor` | Karak Kadrin | start | `dawi` | Karak Kadrin | Slayer Keep |
+| AZL | `04_karaz_ankor` | Karak Azul | start | `dawi_badlands` | Karak Azul | southern hold |
+| KEP | `04_karaz_ankor` | Karak Eight Peaks | start | `dawi_badlands` | Karak Eight Peaks | contested / reclamation |
+| BVR | `04_karaz_ankor` | Barak Varr | start | `dawi` | Barak Varr | the sea-hold |
+| KNO | `04_karaz_ankor` | Karak Norn | start | `dawi_grey` | Karak Norn | Grey Mountains |
+| KHI | `04_karaz_ankor` | Karak Hirn | start | `dawi_grey` | Karak Hirn | Vaults / Grey Mountains |
+| KRD | `04_karaz_ankor` | Kraka Drak | start | `dawi_norse` | Kraka Drak | Norse dwarf hold |
+| KAG | `04_karaz_ankor` | Karak Angazbar | start | `dawi_badlands` | Karak Angazbar | Black Mountains ("Irongate"); seed name corrected |
+| KUN | `04_karaz_ankor` | Karak Ungor | start | `dawi` | Karak Ungor | ruined (occupier "Red Eye Mountain" is a separate 06 tag) |
+| KVN | `04_karaz_ankor` | Karak Varn | start | `dawi` | Karak Varn | ruined, flooded (Skaven/Night Goblin occupier separate) |
+| EKR | `04_karaz_ankor` | Ekrund | start | `dawi_badlands` | Ekrund | ruined, Black Gulf mines (Orc occupier separate) |
+| GUN | `04_karaz_ankor` | Mount Gunbad | start | `dawi` | Mount Gunbad | ruined, brightstone mines (Night Goblin occupier separate) |
+| DRZ | `04_karaz_ankor` | Karak Drazh | start | `dawi_badlands` | Karak Drazh | ruined -469 IC (Orc occupier "Black Crag" is a separate 06 tag) |
+| VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
+| SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
