@@ -19,7 +19,7 @@ Filed by epic #3414 (child #3415).
 - [x] 04 Karaz Ankor (18)
 - [x] 05 Southern Realms (14)
 - [x] 06 Badlands (12)
-- [ ] 07 Nehekhara
+- [x] 07 Nehekhara (11)
 - [ ] 10 Dark Lands
 - [ ] 08 Araby
 - [ ] 09 Southlands
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 95 tags** (7 formables, 88 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 106 tags** (7 formables, 99 starts). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -46,10 +46,12 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   exists in `common/cultures/*.txt` (#3404) — including `marienburger` and `sylvanian_vampire`,
   authored under the culture epic #3404 (the culture originally drafted as bare `vampire` was renamed
   to `sylvanian_vampire` to leave room for other future Old World vampire bloodlines).
-- **One forward-referenced culture pending authoring in epic #3404:** `sartosan` — a melting-pot
-  Tilean-pirate culture for Sartosa (modeled on vanilla's Maltese). Design decision approved by Chris
-  (2026-08-30). The culture *file* is authored in the culture epic, so this id is intentionally not
-  yet live and is excluded from the culture-exists check.
+- **Forward-referenced cultures pending authoring in epic #3404** (design decisions approved by Chris
+  2026-08-30; culture *files* authored in the culture epic, so these ids are intentionally not yet live
+  and are excluded from the culture-exists check):
+  - `sartosan` — a melting-pot Tilean-pirate culture for Sartosa (modeled on vanilla's Maltese).
+  - `lahmian_vampire` — the Lahmian vampire bloodline (Neferata's) for the tomb-city of Lahmia.
+  - `savage_orc` — the Savage Orc subculture (Southlands heartland); see region 09.
 
 ## Conventions
 
@@ -88,6 +90,7 @@ AVE
 AZL
 BAE
 BAS
+BHA
 BIL
 BJO
 BKA
@@ -121,9 +124,11 @@ ICL
 KAD
 KAG
 KAK
+KAS
 KAZ
 KEP
 KHI
+KHM
 KIS
 KNO
 KRD
@@ -131,23 +136,30 @@ KSV
 KUN
 KVE
 KVN
+LAH
 LAN
 LUC
+LYB
 LYO
 MAG
+MAH
 MID
 MIR
 MNF
 MOO
 MOU
+NEH
 NLD
 NSC
+NUM
 OSM
 OST
 PAR
 PAV
 PRA
+QUA
 QUE
+RAS
 RDV
 RED
 REI
@@ -176,6 +188,7 @@ VSY
 WAS
 WIS
 ZHU
+ZND
 ```
 
 ## Deferred check (owned by epic #3414)
@@ -370,3 +383,25 @@ Bloody Spearz · Scabby Eye · Necksnappers · Deff Grindaz · Drippin Fangs · 
 Da Mad Howlerz · Creeping Death · Red Cloud · Blue Vipers · Teef Snatchaz · Da Cage Breakaz · Broken
 Chainz (14 available). "Dark Land Orcs" belongs to 10 Dark Lands; Karak Varn's Skaven occupiers await a
 future under-empire epic (no region yet).
+
+### 07 NEHEKHARA (nehekharan, lahmian_vampire) — 11 tags; NEH formable
+
+The tomb-cities of the Tomb Kings. **Lahmia (`LAH`) carries a bespoke `lahmian_vampire` culture** —
+Neferata's bloodline, the cradle of vampires (culture **pending #3404**). All other cities are
+`nehekharan` (the ancient Tomb Kings civilization). NEH (Settra reunites the Land of the Dead) is
+`nehekharan` only — the Lahmian vampires are Settra's enemies, not part of his realm. **Nagashizzar has
+no tag** — reserved for a future Skaven clan (no Skaven region yet). (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| NEH | `07_nehekhara` | Nehekhara | formable | `nehekharan` | Khemri | Settra reunites the Land of the Dead |
+| KHM | `07_nehekhara` | Khemri | start | `nehekharan` | Khemri | Settra's city (the capital) |
+| ZND | `07_nehekhara` | Zandri | start | `nehekharan` | Zandri |  |
+| NUM | `07_nehekhara` | Numas | start | `nehekharan` | Numas |  |
+| LAH | `07_nehekhara` | Lahmia | start | `lahmian_vampire` | Lahmia | cradle of vampires (Neferata) — **culture pending #3404** |
+| LYB | `07_nehekhara` | Lybaras | start | `nehekharan` | Lybaras | Queen Khalida |
+| RAS | `07_nehekhara` | Rasetra | start | `nehekharan` | Rasetra |  |
+| MAH | `07_nehekhara` | Mahrak | start | `nehekharan` | Mahrak | City of the Dead |
+| QUA | `07_nehekhara` | Quatar | start | `nehekharan` | Quatar | City of the Springs of the Dead |
+| BHA | `07_nehekhara` | Bhagar | start | `nehekharan` | Bhagar | the Dune-Sea oasis |
+| KAS | `07_nehekhara` | Ka-Sabar | start | `nehekharan` | Ka-Sabar | City of Bronze |
