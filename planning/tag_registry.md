@@ -26,7 +26,7 @@ Filed by epic #3414 (child #3415).
 - [x] 11 Ogre Kingdoms (12)
 - [x] 12 Eastern Steppes (4)
 - [x] 13 Cathay (11)
-- [ ] 14 Ind
+- [~] 14 Ind — **DEFERRED** (0 tags; no canon supply in tabletop or Total War — Chris, 2026-08-30)
 - [ ] 15 Khuresh
 - [ ] 16 Nippon
 - [ ] 17 Ulthuan
