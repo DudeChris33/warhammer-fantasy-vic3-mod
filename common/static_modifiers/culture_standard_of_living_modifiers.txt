@@ -200,14 +200,14 @@ sylvanian_standard_of_living_modifier_negative = {
 	state_sylvanian_standard_of_living_add = 1
 }
 
-vampire_standard_of_living_modifier_positive = {
+sylvanian_vampire_standard_of_living_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	state_vampire_standard_of_living_add = 1
+	state_sylvanian_vampire_standard_of_living_add = 1
 }
 
-vampire_standard_of_living_modifier_negative = {
+sylvanian_vampire_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	state_vampire_standard_of_living_add = 1
+	state_sylvanian_vampire_standard_of_living_add = 1
 }
 
 sollander_standard_of_living_modifier_positive = {
@@ -323,4 +323,16 @@ nehekharan_standard_of_living_modifier_positive = {
 nehekharan_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_nehekharan_standard_of_living_add = 1
+}
+
+# ---- Board item #3415, tag registry forward-refs (Marienburg) ----
+
+marienburger_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_marienburger_standard_of_living_add = 1
+}
+
+marienburger_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_marienburger_standard_of_living_add = 1
 }

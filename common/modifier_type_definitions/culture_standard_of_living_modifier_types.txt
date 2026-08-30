@@ -159,7 +159,7 @@ state_sylvanian_standard_of_living_add={
 	}
 }
 
-state_vampire_standard_of_living_add={
+state_sylvanian_vampire_standard_of_living_add={
 	decimals=1
 	color=good
 	game_data={
@@ -252,6 +252,16 @@ state_goblin_standard_of_living_add={
 }
 
 state_nehekharan_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Board item #3415, tag registry forward-refs (Marienburg) ----
+
+state_marienburger_standard_of_living_add={
 	decimals=1
 	color=good
 	game_data={

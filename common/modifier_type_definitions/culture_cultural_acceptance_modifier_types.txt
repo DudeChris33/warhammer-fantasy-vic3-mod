@@ -159,7 +159,7 @@ country_sylvanian_cultural_acceptance_add={
 	}
 }
 
-country_vampire_cultural_acceptance_add={
+country_sylvanian_vampire_cultural_acceptance_add={
 	decimals=1
 	color=good
 	game_data={
@@ -252,6 +252,16 @@ country_goblin_cultural_acceptance_add={
 }
 
 country_nehekharan_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Board item #3415, tag registry forward-refs (Marienburg) ----
+
+country_marienburger_cultural_acceptance_add={
 	decimals=1
 	color=good
 	game_data={

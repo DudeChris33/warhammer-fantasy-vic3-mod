@@ -200,14 +200,14 @@ sylvanian_fervor_target_modifier_negative = {
 	country_fervor_target_sylvanian_add = 1
 }
 
-vampire_fervor_target_modifier_positive = {
+sylvanian_vampire_fervor_target_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	country_fervor_target_vampire_add = 1
+	country_fervor_target_sylvanian_vampire_add = 1
 }
 
-vampire_fervor_target_modifier_negative = {
+sylvanian_vampire_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	country_fervor_target_vampire_add = 1
+	country_fervor_target_sylvanian_vampire_add = 1
 }
 
 sollander_fervor_target_modifier_positive = {
@@ -323,4 +323,16 @@ nehekharan_fervor_target_modifier_positive = {
 nehekharan_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_nehekharan_add = 1
+}
+
+# ---- Board item #3415, tag registry forward-refs (Marienburg) ----
+
+marienburger_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_marienburger_add = 1
+}
+
+marienburger_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_marienburger_add = 1
 }

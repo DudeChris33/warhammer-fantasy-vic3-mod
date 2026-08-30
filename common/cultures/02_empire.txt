@@ -22,7 +22,7 @@
 # one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
 # six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
 # Culture display names live in localization/english/cultures_empire_l_english.yml.
-# Board item #3406 (epic #3404).
+# Board item #3406 (epic #3404); sylvanian_vampire rename + marienburger addition, board item #3415.
 
 ################ Reiklander — the Imperial heartland; classical Reikspiel, Sigmarite ################
 
@@ -561,15 +561,18 @@ sylvanian = {
 	}
 }
 
-################ Vampire — the von Carstein aristocracy; the same tongue, colder ################
+################ Sylvanian Vampire — the von Carstein aristocracy; the same tongue, colder ################
 # A DIFFERENT racial heritage from the sylvanian humans they rule (heritage_vampire, in the
 # undead trait group) while sharing sphere_reikspiel with them. The lists are deliberately
 # sparse: there are very few vampires, and their get are fewer still. The common_last_names
 # are the names their thralls and mortal households carry.
 # ethnicities: vanilla ships no undead template, so the palest caucasian morphs stand in —
 # same treatment as mousillon in #3407. Custom art is out of scope for epic #3404.
+# Named sylvanian_vampire (not the bare "vampire" this culture originally shipped as) to leave
+# room for other Old World vampire bloodlines (Lahmia, Strigany, Blood Dragons, etc.) each
+# getting their own distinct culture id later without colliding with this one. Board item #3415.
 
-vampire = {
+sylvanian_vampire = {
 	color= rgb{ 94 32 44 }
 	religion = cult_of_nagash
 	heritage = heritage_vampire
@@ -705,5 +708,50 @@ halfling = {
 	ethnicities = {
 		2 = caucasian_brown_hair
 		1 = caucasian_ginger
+	}
+}
+
+################ Marienburger — Marienburg, the seceded Wasteland; mercantile, Reikspiel-rooted ################
+# Westerland seceded from the Empire; its capital Marienburg is ruled by a merchant Directorate of
+# Guilders, not a monarch — like the Moot, no regal name lists. Noble last names instead represent
+# the patrician Guilder houses (the mercantile aristocracy that actually rules the city), with a
+# distinct Dutch/Flemish-flavoured naming convention (van_ prefix) that marks Marienburg's cultural
+# drift from the Empire's von_ Electorates even though it shares their heritage, religion and
+# tongue. Board item #3415 (epic #3404).
+
+marienburger = {
+	color= rgb{ 46 130 122 }
+	religion = cult_of_sigmar
+	heritage = heritage_imperial_human
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Willem Hendrik Joost Cornelis Pieter Dirk Casper Barend Gerrit Thijs
+		Wouter Floris Reinout Marten Bastiaan Job Sander Frans Huibert Coen
+	}
+
+	female_common_first_names = {
+		Anneke Marieke Femke Jolanda Wilhelmina Trijn Aaltje Cato Neeltje Sanneke
+		Beatrix Ymkje Lysbeth Janneke Mechteld Rixt Aleid Wiebke Corneli
+	}
+
+	noble_last_names = {
+		van_der_Vaal van_Rijker van_Kessel van_Hoogland van_der_Meer van_Zeevliet
+		van_Duinhaven van_Stroomberg van_Handelaer van_Koopstad van_Gulden van_Marburg
+	}
+
+	common_last_names = {
+		Coopman Makelaar Vishandel Wolhandel Bontmaker Schipper Loodsman Waagmeester
+		Muntman Pakhuysen Kruidenier Wisselaar Veerman Zeeman Tolman Ketelaer
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_blond
+		1 = caucasian_brown_hair
 	}
 }

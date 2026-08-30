@@ -159,7 +159,7 @@ country_fervor_target_sylvanian_add={
 	}
 }
 
-country_fervor_target_vampire_add={
+country_fervor_target_sylvanian_vampire_add={
 	decimals=1
 	color=good
 	game_data={
@@ -252,6 +252,16 @@ country_fervor_target_goblin_add={
 }
 
 country_fervor_target_nehekharan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Board item #3415, tag registry forward-refs (Marienburg) ----
+
+country_fervor_target_marienburger_add={
 	decimals=1
 	color=good
 	game_data={
