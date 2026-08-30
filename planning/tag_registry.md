@@ -24,7 +24,7 @@ Filed by epic #3414 (child #3415).
 - [x] 08 Araby (10)
 - [x] 09 Southlands (8)
 - [x] 11 Ogre Kingdoms (12)
-- [ ] 12 Eastern Steppes
+- [x] 12 Eastern Steppes (4)
 - [ ] 13 Cathay
 - [ ] 14 Ind
 - [ ] 15 Khuresh
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 142 tags** (10 formables, 132 starts) — Old World tranche complete; distant tranche
+**Approved so far: 146 tags** (10 formables, 136 starts) — Old World tranche complete; distant tranche
 in progress. Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -140,6 +140,7 @@ HAS
 HGK
 HHZ
 HOC
+HUN
 ICL
 IRN
 KAD
@@ -155,7 +156,9 @@ KIS
 KNO
 KRD
 KSV
+KUL
 KUN
+KUR
 KVE
 KVN
 LAH
@@ -208,6 +211,7 @@ TAL
 THG
 TIL
 TOB
+TON
 TPK
 TRA
 TRO
@@ -524,3 +528,18 @@ blank. (Approved 2026-08-30.)
 **Density reserve (not yet allocated).** Confirmed TW:W Ogre Kingdoms faction names for a denser roster:
 Bloodmaw · Fleshgreeders · Fulg · Lazarghs · Loose Tooth · Mountaineaters · Ogre Rebels · Sabreskin ·
 Treehammers · Flamegullets · Sharktooth · Stoneshatter · The Famished · Rock Clubs (14 available).
+
+### 12 EASTERN STEPPES (PLACEHOLDER) — 4 tags; no formable
+
+The Chaos marauder confederations of the far eastern steppes (north/east of the Worlds Edge). Held at
+the 4 confederations (Chris) — the many named Hung/Kurgan sub-tribes (Yin, Chi-An, Mung, Aghols…) are
+generic marauder flavor and left as a reserve. **No formable** (no canon united-steppes polity). Their
+loose confederation status is intended to be represented by a government/law variant (as with the
+Border Princes) — a later `common/` authoring task, out of scope here. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| KUR | `12_eastern_steppes` | Kurgan | start | `PLACEHOLDER` | — | Chaos marauder confederation; decentralization → a later law/government-type variant |
+| HUN | `12_eastern_steppes` | Hung | start | `PLACEHOLDER` | — | eastern Chaos marauder confederation |
+| KUL | `12_eastern_steppes` | Kul | start | `PLACEHOLDER` | — | Asavar Kul's great host (Great War against Chaos) |
+| TON | `12_eastern_steppes` | Tong | start | `PLACEHOLDER` | — | steppe tribe |
