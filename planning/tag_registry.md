@@ -14,7 +14,7 @@ Filed by epic #3414 (child #3415).
 
 - [x] 00 Norsca (10)
 - [x] 01 Kislev (10)
-- [ ] 02 Empire
+- [x] 02 Empire (16)
 - [ ] 03 Bretonnia
 - [ ] 04 Karaz Ankor
 - [ ] 05 Southern Realms
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 20 tags** (2 formables, 18 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 36 tags** (3 formables, 33 starts). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -43,7 +43,12 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   collisions if vanilla defs still loaded. Only this registry's own uniqueness matters.
 - **Machine-verified within this file:** every code is exactly 3 uppercase ASCII letters, all are
   unique (zero collisions), roster⇔index parity holds, and every Old-World primary culture referenced
-  exists in `common/cultures/*.txt` (#3404).
+  exists in `common/cultures/*.txt` (#3404) — **except the documented forward-refs below.**
+- **Forward-referenced cultures (pending authoring in epic #3404, not this docs-only item):**
+  `marienburger` (Marienburg/Wasteland) and `sylvanian_vampire` (the von Carstein vampire realm). These
+  are design decisions recorded here — Chris approved splitting Sylvania into a human tag and a vampire
+  tag, and giving Marienburg its own culture. The culture *files* are authored in the culture epic, so
+  these two ids are intentionally not yet live and are excluded from the culture-exists check.
 
 ## Conventions
 
@@ -76,25 +81,41 @@ and loc, and are painful to rename later.
 
 ```
 AES
+AVE
 BAE
 BJO
 BOL
 DOL
+EMP
 ERE
 GRA
 HAS
+HOC
 KIS
 KSV
 KVE
+MID
+MOO
+NLD
 NSC
+OSM
+OST
 PRA
+REI
 ROP
 SAR
 SKA
+SOL
+STI
+SYL
+TAL
 TRO
 UNG
 VAR
 VOL
+VSY
+WAS
+WIS
 ```
 
 ## Deferred check (owned by epic #3414)
@@ -143,3 +164,35 @@ oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (App
 | VOL | `01_kislev` | Volksgrad | start | `gospodar` | Volksgrad | oblast town |
 | DOL | `01_kislev` | Dolgan | start | `ungol` | — | old eastern horse-tribe |
 | ROP | `01_kislev` | Roppsmenn | start | `ungol` | — | old northern tribe |
+
+### 02 EMPIRE (per province culture) — 16 tags; EMP formable
+
+10 Electoral provinces + Solland + The Moot + Sylvania + Marienburg (the seceded Wasteland). Sylvania
+split into a human tag (`SYL`) and a Vampire tag (`VSY`, von Carstein) per Chris. Marienburg (`WAS`)
+gets its own bespoke culture. Big density lever untaken: WFRP baronies/free-towns (Bergsburg,
+Ubersreik, Bögenhafen…) could push this to 28–38, but they are RPG settlements, not well-attested
+startable realms — held at honest depth. (Approved 2026-08-30.)
+
+**`EMP` United Empire** carries all 12 human province cultures as its primary-culture set:
+reiklander, middenlander, nordlander, hochlander, ostlander, ostermarker, talabeclander, stirlander,
+averlander, wissenlander, sollander, sylvanian (human). **Excludes** halfling (the Moot),
+sylvanian_vampire, and marienburger (Marienburg seceded — reintegration is a future journal event).
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| EMP | `02_empire` | The Empire | formable | `reiklander`, `middenlander`, `nordlander`, `hochlander`, `ostlander`, `ostermarker`, `talabeclander`, `stirlander`, `averlander`, `wissenlander`, `sollander`, `sylvanian` | Altdorf | Karl Franz unifies the Electorates; excl. halfling / sylvanian_vampire / marienburger |
+| REI | `02_empire` | Reikland | start | `reiklander` | Altdorf |  |
+| MID | `02_empire` | Middenland | start | `middenlander` | Middenheim |  |
+| NLD | `02_empire` | Nordland | start | `nordlander` | Salzenmund |  |
+| HOC | `02_empire` | Hochland | start | `hochlander` | Hergig |  |
+| OST | `02_empire` | Ostland | start | `ostlander` | Wolfenburg |  |
+| OSM | `02_empire` | Ostermark | start | `ostermarker` | Bechafen |  |
+| TAL | `02_empire` | Talabecland | start | `talabeclander` | Talabheim |  |
+| STI | `02_empire` | Stirland | start | `stirlander` | Wurtbad |  |
+| AVE | `02_empire` | Averland | start | `averlander` | Averheim |  |
+| WIS | `02_empire` | Wissenland | start | `wissenlander` | Nuln |  |
+| SOL | `02_empire` | Solland | start | `sollander` | Sudenburg | destroyed province claimant |
+| MOO | `02_empire` | The Moot | start | `halfling` | Eicheschatten | halfling homeland |
+| SYL | `02_empire` | Sylvania (human) | start | `sylvanian` | Drakenhof | the living population of Sylvania |
+| VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start — **culture pending #3404** |
+| WAS | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state — **culture pending #3404** |
