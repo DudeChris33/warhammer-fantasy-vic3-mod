@@ -18,7 +18,7 @@ Filed by epic #3414 (child #3415).
 - [x] 03 Bretonnia (15)
 - [x] 04 Karaz Ankor (18)
 - [x] 05 Southern Realms (14)
-- [ ] 06 Badlands
+- [x] 06 Badlands (12)
 - [ ] 07 Nehekhara
 - [ ] 10 Dark Lands
 - [ ] 08 Araby
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 83 tags** (7 formables, 76 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 95 tags** (7 formables, 88 starts). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -90,15 +90,22 @@ BAE
 BAS
 BIL
 BJO
+BKA
+BLV
+BNR
 BOL
 BOR
 BPR
 BRE
 BRI
+BRN
+BSB
+BTO
 BVR
 CAR
 CNT
 COU
+CRM
 DOL
 DRZ
 EKR
@@ -110,6 +117,7 @@ GRA
 GUN
 HAS
 HOC
+ICL
 KAD
 KAG
 KAK
@@ -140,11 +148,15 @@ PAR
 PAV
 PRA
 QUE
+RDV
+RED
 REI
 REM
+RFG
 ROP
 SAR
 SKA
+SKZ
 SLV
 SOL
 SRT
@@ -327,3 +339,34 @@ both `tilean` and `sartosan`. (Approved 2026-08-30.)
 | MAG | `05_southern_realms` | Magritta | start | `estalian` | Magritta |  |
 | CNT | `05_southern_realms` | Cantonia | start | `estalian` | Cantonia | minor Estalian kingdom |
 | BPR | `05_southern_realms` | Border Princes | start | `border_princer` | — | loose principalities; decentralization → a later law/government-type variant |
+
+### 06 BADLANDS (orc, goblin) — 12 tags; no formable
+
+Greenskin tribes/strongholds of the Badlands / World's Edge. **Chris approved Total War: Warhammer as a
+name source for this region** (in addition to tabletop), so names blend both. Deduplicated so no polity
+is double-tagged by tribe *and* stronghold (Red Fangs = Black Crag; Ironclaw = Iron Rock; Crooked Moon =
+Karak Eight Peaks; Grimgor's Red Eye = ex-Karak Ungor). **No WAAAGH! formable** (Chris dropped it).
+Savage Orcs are handled in 09 Southlands (their canon heartland) with a new `savage_orc` culture — see
+that region. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| RED | `06_badlands` | Red Eye | start | `orc` | Red Eye | Grimgor Ironhide's 'Ardboyz; ex-Karak Ungor |
+| CRM | `06_badlands` | Crooked Moon | start | `goblin` | — | Skarsnik's Night Goblins; Karak Eight Peaks |
+| BKA | `06_badlands` | Broken Axe | start | `goblin` | — | Grom the Paunch (Goblin); Misty Mountain |
+| RFG | `06_badlands` | Red Fangs | start | `orc` | Black Crag | Gorfang Rotgut; holds Black Crag (ex-Karak Drazh) |
+| ICL | `06_badlands` | Ironclaw | start | `orc` | Iron Rock | Gorbad Ironclaw; holds Iron Rock (N. Badlands) |
+| BSB | `06_badlands` | Bloody Sunz | start | `orc` | — | Grumlok & Gazbag; Badlands orc tribe |
+| BNR | `06_badlands` | Bonerattlaz | start | `orc` | — | Azhag the Slaughterer; N. World's Edge |
+| BTO | `06_badlands` | Broken Tooth | start | `orc` | — | Crusher Zogoth; pre-Gorbad Iron Rock (historical) |
+| BRN | `06_badlands` | Broken Nose | start | `goblin` | — | Goblin tribe of the Vaults |
+| BLV | `06_badlands` | Black Venom | start | `goblin` | — | Forest Goblin tribe, S. of Black Fire Pass |
+| RDV | `06_badlands` | Redvenom | start | `goblin` | — | Snagla Grobspit's Forest Goblins |
+| SKZ | `06_badlands` | Skullsmasherz | start | `orc` | — | Ugrok Craktoof; Grey Mtns / Bretonnia border |
+
+**Density reserve (not yet allocated — add later if Chris wants a denser Badlands).** Confirmed TW:W
+Greenskins faction names, race/location wiki-unstated (would be representative orc/goblin tribes):
+Bloody Spearz · Scabby Eye · Necksnappers · Deff Grindaz · Drippin Fangs · Dimmed Sunz · Moon Howlerz ·
+Da Mad Howlerz · Creeping Death · Red Cloud · Blue Vipers · Teef Snatchaz · Da Cage Breakaz · Broken
+Chainz (14 available). "Dark Land Orcs" belongs to 10 Dark Lands; Karak Varn's Skaven occupiers await a
+future under-empire epic (no region yet).
