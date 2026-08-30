@@ -20,7 +20,7 @@ Filed by epic #3414 (child #3415).
 - [x] 05 Southern Realms (14)
 - [x] 06 Badlands (12)
 - [x] 07 Nehekhara (11)
-- [ ] 10 Dark Lands
+- [x] 10 Dark Lands (6)
 - [ ] 08 Araby
 - [ ] 09 Southlands
 - [ ] 11 Ogre Kingdoms
@@ -33,7 +33,8 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 106 tags** (7 formables, 99 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 112 tags** (9 formables, 103 starts) — Old World tranche (00–07, 10) complete.
+Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -116,9 +117,11 @@ EMP
 ERE
 EST
 GIS
+GOR
 GRA
 GUN
 HAS
+HGK
 HOC
 ICL
 KAD
@@ -129,6 +132,7 @@ KAZ
 KEP
 KHI
 KHM
+KHN
 KIS
 KNO
 KRD
@@ -148,6 +152,7 @@ MIR
 MNF
 MOO
 MOU
+MZN
 NEH
 NLD
 NSC
@@ -180,6 +185,7 @@ TOB
 TRA
 TRO
 UNG
+UZK
 VAR
 VER
 VLG
@@ -187,6 +193,7 @@ VOL
 VSY
 WAS
 WIS
+ZHA
 ZHU
 ZND
 ```
@@ -405,3 +412,19 @@ no tag** — reserved for a future Skaven clan (no Skaven region yet). (Approved
 | QUA | `07_nehekhara` | Quatar | start | `nehekharan` | Quatar | City of the Springs of the Dead |
 | BHA | `07_nehekhara` | Bhagar | start | `nehekharan` | Bhagar | the Dune-Sea oasis |
 | KAS | `07_nehekhara` | Ka-Sabar | start | `nehekharan` | Ka-Sabar | City of Bronze |
+
+### 10 DARK LANDS (dawi_zharr, hobgoblin) — 6 tags; ZHA + KHN formables
+
+The Chaos Dwarfs (Dawi Zharr) and their hobgoblin vassals. Canon-thin beyond Zharr-Naggrund; held at 6
+(Chris approved as-is). Two formables — Chaos Dwarfs and hobgoblins are distinct peoples with separate
+unifiers. "Dark Land Orcs" (a TW:W Greenskins faction) could be added here later if a greenskin Dark
+Lands tag is wanted. (Approved 2026-08-30. Closes the Old World tranche.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| ZHA | `10_dark_lands` | Dawi Zharr Empire | formable | `dawi_zharr` | Zharr-Naggrund | the Chaos Dwarf empire |
+| MZN | `10_dark_lands` | Mingol Zharr-Naggrund | start | `dawi_zharr` | Zharr-Naggrund | the Tower of Zharr (capital) |
+| GOR | `10_dark_lands` | Gorgoth | start | `dawi_zharr` | Gorgoth | Chaos Dwarf hold |
+| UZK | `10_dark_lands` | Uzkulak | start | `dawi_zharr` | Uzkulak | Port of Zharr |
+| KHN | `10_dark_lands` | Great Khanate | formable | `hobgoblin` | — | Hobgobla-Khan unites the hobgoblins |
+| HGK | `10_dark_lands` | Hobgobla-Khan | start | `hobgoblin` | — | the great hobgoblin realm |
