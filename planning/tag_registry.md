@@ -15,7 +15,7 @@ Filed by epic #3414 (child #3415).
 - [x] 00 Norsca (10)
 - [x] 01 Kislev (10)
 - [x] 02 Empire (16)
-- [ ] 03 Bretonnia
+- [x] 03 Bretonnia (15)
 - [ ] 04 Karaz Ankor
 - [ ] 05 Southern Realms
 - [ ] 06 Badlands
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 36 tags** (3 formables, 33 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 51 tags** (4 formables, 47 starts). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -81,26 +81,41 @@ and loc, and are painful to rename later.
 
 ```
 AES
+AQU
+ART
 AVE
 BAE
+BAS
 BJO
 BOL
+BOR
+BRE
+BRI
+CAR
+COU
 DOL
 EMP
 ERE
+GIS
 GRA
 HAS
 HOC
 KIS
 KSV
 KVE
+LAN
+LYO
 MID
+MNF
 MOO
+MOU
 NLD
 NSC
 OSM
 OST
+PAR
 PRA
+QUE
 REI
 ROP
 SAR
@@ -196,3 +211,28 @@ sylvanian_vampire, and marienburger (Marienburg seceded — reintegration is a f
 | SYL | `02_empire` | Sylvania (human) | start | `sylvanian` | Drakenhof | the living population of Sylvania |
 | VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start — **culture pending #3404** |
 | WAS | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state — **culture pending #3404** |
+
+### 03 BRETTONIA (bretonnian, mousillon) — 15 tags; BRE formable
+
+The 14 dukedoms are confirmed complete canon — no 15th, and Mousillon is one of the 14 (the cursed
+dukedom, no ruling Duke). At honest ceiling (no density lever). BRE formable is `bretonnian` only —
+Mousillon's cursed culture is excluded, parallel to EMP excluding the vampire culture. (Approved
+2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| BRE | `03_brettonia` | Bretonnia | formable | `bretonnian` | Couronne | the King unites the dukedoms (excl. Mousillon) |
+| COU | `03_brettonia` | Couronne | start | `bretonnian` | Couronne |  |
+| LYO | `03_brettonia` | Lyonesse | start | `bretonnian` | Lyonesse |  |
+| ART | `03_brettonia` | Artois | start | `bretonnian` | Artois |  |
+| GIS | `03_brettonia` | Gisoreaux | start | `bretonnian` | Gisoreaux | spelling corrected from seed |
+| MNF | `03_brettonia` | Montfort | start | `bretonnian` | Montfort |  |
+| BAS | `03_brettonia` | Bastonne | start | `bretonnian` | Bastonne | birthplace of Gilles le Breton |
+| AQU | `03_brettonia` | Aquitaine | start | `bretonnian` | Aquitaine |  |
+| QUE | `03_brettonia` | Quenelles | start | `bretonnian` | Quenelles |  |
+| CAR | `03_brettonia` | Carcassonne | start | `bretonnian` | Carcassonne |  |
+| BRI | `03_brettonia` | Brionne | start | `bretonnian` | Brionne |  |
+| BOR | `03_brettonia` | Bordeleaux | start | `bretonnian` | Bordeleaux |  |
+| LAN | `03_brettonia` | L'Anguille | start | `bretonnian` | L'Anguille |  |
+| PAR | `03_brettonia` | Parravon | start | `bretonnian` | Parravon |  |
+| MOU | `03_brettonia` | Mousillon | start | `mousillon` | Mousillon | the cursed city / undead |
