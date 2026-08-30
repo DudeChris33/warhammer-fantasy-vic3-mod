@@ -13,7 +13,7 @@ Filed by epic #3414 (child #3415).
 ### Regions approved (Phase B walk)
 
 - [x] 00 Norsca (10)
-- [ ] 01 Kislev
+- [x] 01 Kislev (10)
 - [ ] 02 Empire
 - [ ] 03 Bretonnia
 - [ ] 04 Karaz Ankor
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 10 tags** (1 formable, 9 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 20 tags** (2 formables, 18 starts). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -78,13 +78,23 @@ and loc, and are painful to rename later.
 AES
 BAE
 BJO
+BOL
+DOL
+ERE
 GRA
 HAS
+KIS
+KSV
 KVE
 NSC
+PRA
+ROP
 SAR
 SKA
+TRO
+UNG
 VAR
+VOL
 ```
 
 ## Deferred check (owned by epic #3414)
@@ -114,3 +124,22 @@ ceiling ~10–12 (deeper Norse "tribes" are fan/homebrew). Seed's Skjaelings/Sor
 | VAR | `00_norsca` | Varg | start | `norscan` | — | northern Chaos-touched tribe |
 | HAS | `00_norsca` | Hastlings | start | `norscan` | — | High Tribe near the Chaos Wastes |
 | KVE | `00_norsca` | Kvelligs | start | `norscan` | — | High Tribe near the Chaos Wastes |
+
+### 01 KISLEV (gospodar, ungol) — 10 tags; KIS formable
+
+3 cities + Ungol/Gospodar peoples are solid; Troll Country, Dolgan, Roppsmenn, Bolgasgrad, Volksgrad
+are medium-confidence (wiki-aggregated). Density lever: many more RPG-sourcebook villages exist if
+oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| KIS | `01_kislev` | Kislev (Tzardom) | formable | `gospodar`, `ungol` | — | United Kislev — both founding peoples |
+| KSV | `01_kislev` | Kislev | start | `gospodar` | Kislev | the capital oblast, Tzarina's seat |
+| ERE | `01_kislev` | Erengrad | start | `ungol` | Erengrad | western Ungol-leaning port |
+| PRA | `01_kislev` | Praag | start | `gospodar` | Praag | northern frontier city |
+| UNG | `01_kislev` | Ungol Horse-Tribes | start | `ungol` | — | nomadic steppe Ungols |
+| TRO | `01_kislev` | Troll Country | start | `ungol` | — | far-NW frontier oblast |
+| BOL | `01_kislev` | Bolgasgrad | start | `gospodar` | Bolgasgrad | northern oblast town |
+| VOL | `01_kislev` | Volksgrad | start | `gospodar` | Volksgrad | oblast town |
+| DOL | `01_kislev` | Dolgan | start | `ungol` | — | old eastern horse-tribe |
+| ROP | `01_kislev` | Roppsmenn | start | `ungol` | — | old northern tribe |
