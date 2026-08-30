@@ -23,7 +23,7 @@ Filed by epic #3414 (child #3415).
 - [x] 10 Dark Lands (6)
 - [x] 08 Araby (10)
 - [x] 09 Southlands (8)
-- [ ] 11 Ogre Kingdoms
+- [x] 11 Ogre Kingdoms (12)
 - [ ] 12 Eastern Steppes
 - [ ] 13 Cathay
 - [ ] 14 Ind
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 130 tags** (10 formables, 120 starts) — Old World tranche complete; distant tranche
+**Approved so far: 142 tags** (10 formables, 132 starts) — Old World tranche complete; distant tranche
 in progress. Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -85,6 +85,7 @@ and loc, and are painful to rename later.
 
 ```
 AES
+AGF
 AHK
 ANT
 AQU
@@ -96,6 +97,7 @@ BAE
 BAS
 BCB
 BEL
+BGZ
 BHA
 BHZ
 BIL
@@ -117,6 +119,7 @@ CNT
 COP
 COU
 CRM
+CXC
 DOL
 DRZ
 EKR
@@ -124,8 +127,12 @@ ELK
 EMP
 ERE
 EST
+EYB
+FSM
 FYR
+GGT
 GIS
+GLG
 GOR
 GRA
 GUN
@@ -134,6 +141,7 @@ HGK
 HHZ
 HOC
 ICL
+IRN
 KAD
 KAG
 KAK
@@ -158,6 +166,7 @@ LYB
 LYO
 MAG
 MAH
+MAW
 MID
 MIR
 MNF
@@ -184,16 +193,19 @@ REI
 REM
 RFG
 ROP
+RSK
 SAR
 SKA
 SKZ
 SLV
 SNK
 SOL
+SOM
 SRT
 STI
 SYL
 TAL
+THG
 TIL
 TOB
 TPK
@@ -486,3 +498,29 @@ Lizardmen live in Lustria (19). (Approved 2026-08-30.)
 | HHZ | `09_southlands` | Headhuntaz | start | `savage_orc` | — | nomadic Savage Orcs |
 | WWG | `09_southlands` | Waaagh-Waaagh | start | `savage_orc` | — | "the greatest" Savage Orc tribe, Southlands |
 | WSK | `09_southlands` | White Skullz | start | `savage_orc` | — | Savage Orcs who raid Araby |
+
+### 11 OGRE KINGDOMS (PLACEHOLDER) — 12 tags; no formable
+
+Ogre tribes of the Mountains of Mourn. Names blend tabletop + Total War: Warhammer (Chris approved TW as
+a source here, as with the greenskins). **No formable** (Chris dropped OGR). Ogres are semi-nomadic with
+**no named capital** in canon (the Great Maw crater is the spiritual center) — placeholder capitals stay
+blank. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| GGT | `11_ogre_kingdoms` | Goldtooth | start | `PLACEHOLDER` | — | Greasus Goldtooth (Overtyrant) |
+| IRN | `11_ogre_kingdoms` | Ironskin | start | `PLACEHOLDER` | — | Ghark Ironskin |
+| GLG | `11_ogre_kingdoms` | Golgfag's Maneaters | start | `PLACEHOLDER` | — | Golgfag Maneater (mercenaries) |
+| MAW | `11_ogre_kingdoms` | Disciples of the Maw | start | `PLACEHOLDER` | — | Skrag the Slaughterer |
+| BGZ | `11_ogre_kingdoms` | Blood Guzzlers | start | `PLACEHOLDER` | — | Bul Mallet-hands; Vale of Webs |
+| EYB | `11_ogre_kingdoms` | Eyebiter | start | `PLACEHOLDER` | — | Malron Eyebiter |
+| RSK | `11_ogre_kingdoms` | Rock Skulls | start | `PLACEHOLDER` | — | break boulders with their heads |
+| CXC | `11_ogre_kingdoms` | Crossed Clubs | start | `PLACEHOLDER` | — | roaming braggart Maneaters |
+| AGF | `11_ogre_kingdoms` | Angry Fist | start | `PLACEHOLDER` | — | most "advanced" tribe; assailed Karak Azorn |
+| THG | `11_ogre_kingdoms` | Thunderguts | start | `PLACEHOLDER` | — | named tribe |
+| FSM | `11_ogre_kingdoms` | Feastmaster | start | `PLACEHOLDER` | — | TW:W minor faction |
+| SOM | `11_ogre_kingdoms` | Sons of the Mountain | start | `PLACEHOLDER` | — | TW:W minor faction |
+
+**Density reserve (not yet allocated).** Confirmed TW:W Ogre Kingdoms faction names for a denser roster:
+Bloodmaw · Fleshgreeders · Fulg · Lazarghs · Loose Tooth · Mountaineaters · Ogre Rebels · Sabreskin ·
+Treehammers · Flamegullets · Sharktooth · Stoneshatter · The Famished · Rock Clubs (14 available).
