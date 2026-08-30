@@ -17,7 +17,7 @@ Filed by epic #3414 (child #3415).
 - [x] 02 Empire (16)
 - [x] 03 Bretonnia (15)
 - [x] 04 Karaz Ankor (18)
-- [ ] 05 Southern Realms
+- [x] 05 Southern Realms (14)
 - [ ] 06 Badlands
 - [ ] 07 Nehekhara
 - [ ] 10 Dark Lands
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 69 tags** (5 formables, 64 starts). Content is **honest, well-attested Warhammer
+**Approved so far: 83 tags** (7 formables, 76 starts). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -44,8 +44,12 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
 - **Machine-verified within this file:** every code is exactly 3 uppercase ASCII letters, all are
   unique (zero collisions), roster⇔index parity holds, and every Old-World primary culture referenced
   exists in `common/cultures/*.txt` (#3404) — including `marienburger` and `sylvanian_vampire`,
-  authored by board item #3415 (the culture originally shipped as bare `vampire` was renamed to
-  `sylvanian_vampire` to leave room for other future Old World vampire bloodlines).
+  authored under the culture epic #3404 (the culture originally drafted as bare `vampire` was renamed
+  to `sylvanian_vampire` to leave room for other future Old World vampire bloodlines).
+- **One forward-referenced culture pending authoring in epic #3404:** `sartosan` — a melting-pot
+  Tilean-pirate culture for Sartosa (modeled on vanilla's Maltese). Design decision approved by Chris
+  (2026-08-30). The culture *file* is authored in the culture epic, so this id is intentionally not
+  yet live and is excluded from the culture-exists check.
 
 ## Conventions
 
@@ -84,19 +88,23 @@ AVE
 AZL
 BAE
 BAS
+BIL
 BJO
 BOL
 BOR
+BPR
 BRE
 BRI
 BVR
 CAR
+CNT
 COU
 DOL
 DRZ
 EKR
 EMP
 ERE
+EST
 GIS
 GRA
 GUN
@@ -116,8 +124,11 @@ KUN
 KVE
 KVN
 LAN
+LUC
 LYO
+MAG
 MID
+MIR
 MNF
 MOO
 MOU
@@ -126,20 +137,27 @@ NSC
 OSM
 OST
 PAR
+PAV
 PRA
 QUE
 REI
+REM
 ROP
 SAR
 SKA
 SLV
 SOL
+SRT
 STI
 SYL
 TAL
+TIL
+TOB
+TRA
 TRO
 UNG
 VAR
+VER
 VLG
 VOL
 VSY
@@ -281,3 +299,31 @@ dwarf cultures. (Approved 2026-08-30.)
 | DRZ | `04_karaz_ankor` | Karak Drazh | start | `dawi_badlands` | Karak Drazh | ruined -469 IC (Orc occupier "Black Crag" is a separate 06 tag) |
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
+
+### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer) — 14 tags; TIL/EST formables
+
+8 Tilean city-states + 3 Estalian kingdoms + one Border Princes tag. Tilea/Estalia held at their
+well-known city-states (approved as-is by Chris — the deep Tilean/Estalian/Border-Prince supply lever
+left untaken). **Sartosa (`SRT`) gets its own bespoke `sartosan` culture** — a melting-pot Tilean-
+pirate people modeled on vanilla's Maltese (culture **pending #3404**; the Total War "vampire-pirate
+Sartosa" is not tabletop canon, so Sartosa stays a human pirate haven). **One Border Princes tag
+(`BPR`)** — its canonical decentralization is intended to be represented by a government/law variant, a
+later `common/` authoring task (out of scope for this docs-only registry). TIL (united Tilea) carries
+both `tilean` and `sartosan`. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| TIL | `05_southern_realms` | Tilea | formable | `tilean`, `sartosan` | Miragliano | the city-states unite (incl. Sartosa) |
+| MIR | `05_southern_realms` | Miragliano | start | `tilean` | Miragliano |  |
+| LUC | `05_southern_realms` | Luccini | start | `tilean` | Luccini |  |
+| REM | `05_southern_realms` | Remas | start | `tilean` | Remas |  |
+| TOB | `05_southern_realms` | Tobaro | start | `tilean` | Tobaro |  |
+| TRA | `05_southern_realms` | Trantio | start | `tilean` | Trantio |  |
+| PAV | `05_southern_realms` | Pavona | start | `tilean` | Pavona |  |
+| VER | `05_southern_realms` | Verezzo | start | `tilean` | Verezzo |  |
+| SRT | `05_southern_realms` | Sartosa | start | `sartosan` | Sartosa | pirate haven; melting-pot culture — **pending #3404** |
+| EST | `05_southern_realms` | Estalia | formable | `estalian` | Magritta | the kingdoms unite |
+| BIL | `05_southern_realms` | Bilbali | start | `estalian` | Bilbali |  |
+| MAG | `05_southern_realms` | Magritta | start | `estalian` | Magritta |  |
+| CNT | `05_southern_realms` | Cantonia | start | `estalian` | Cantonia | minor Estalian kingdom |
+| BPR | `05_southern_realms` | Border Princes | start | `border_princer` | — | loose principalities; decentralization → a later law/government-type variant |
