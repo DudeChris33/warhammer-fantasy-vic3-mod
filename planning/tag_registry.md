@@ -28,7 +28,7 @@ Filed by epic #3414 (child #3415).
 - [x] 13 Cathay (11)
 - [~] 14 Ind — **DEFERRED** (0 tags; no canon supply in tabletop or Total War — Chris, 2026-08-30)
 - [~] 15 Khuresh — **DEFERRED** (0 tags; near-zero canon, no Total War faction — Chris, 2026-08-30)
-- [ ] 16 Nippon
+- [~] 16 Nippon — **DEFERRED** (0 tags; only medium-confidence secondary-source names, no Total War faction — Chris, 2026-08-30)
 - [ ] 17 Ulthuan
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
