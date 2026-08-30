@@ -21,7 +21,7 @@ Filed by epic #3414 (child #3415).
 - [x] 06 Badlands (12)
 - [x] 07 Nehekhara (11)
 - [x] 10 Dark Lands (6)
-- [ ] 08 Araby
+- [x] 08 Araby (10)
 - [ ] 09 Southlands
 - [ ] 11 Ogre Kingdoms
 - [ ] 12 Eastern Steppes
@@ -33,8 +33,8 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 112 tags** (9 formables, 103 starts) — Old World tranche (00–07, 10) complete.
-Content is **honest, well-attested Warhammer
+**Approved so far: 122 tags** (10 formables, 112 starts) — Old World tranche complete; distant tranche
+in progress. Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -85,12 +85,16 @@ and loc, and are painful to rename later.
 
 ```
 AES
+AHK
+ANT
 AQU
+ARB
 ART
 AVE
 AZL
 BAE
 BAS
+BEL
 BHA
 BIL
 BJO
@@ -108,14 +112,17 @@ BTO
 BVR
 CAR
 CNT
+COP
 COU
 CRM
 DOL
 DRZ
 EKR
+ELK
 EMP
 ERE
 EST
+FYR
 GIS
 GOR
 GRA
@@ -142,6 +149,7 @@ KVE
 KVN
 LAH
 LAN
+LSK
 LUC
 LYB
 LYO
@@ -152,11 +160,13 @@ MIR
 MNF
 MOO
 MOU
+MTK
 MZN
 NEH
 NLD
 NSC
 NUM
+ORG
 OSM
 OST
 PAR
@@ -428,3 +438,24 @@ Lands tag is wanted. (Approved 2026-08-30. Closes the Old World tranche.)
 | UZK | `10_dark_lands` | Uzkulak | start | `dawi_zharr` | Uzkulak | Port of Zharr |
 | KHN | `10_dark_lands` | Great Khanate | formable | `hobgoblin` | — | Hobgobla-Khan unites the hobgoblins |
 | HGK | `10_dark_lands` | Hobgobla-Khan | start | `hobgoblin` | — | the great hobgoblin realm |
+
+### 08 ARABY (PLACEHOLDER + bretonnian crusaders) — 10 tags; ARB formable
+
+Arabyan city-states (culture `PLACEHOLDER` until a future epic) + two **Bretonnian crusader** holdings
+from the Great Crusade Against Araby (both `bretonnian`, sourced tabletop canon). Both crusader colonies
+historically *fell* (Fyrus to an Arabyan uprising; Antoch razed by Lizardmen), so they are reclaim /
+crusader-revival starts. Fyrus itself is kept as a releasable **Arabyan** tag; the Knights of Origo
+(the order that once held it) are a separate Bretonnian tag. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| ARB | `08_araby` | Sultanate of Araby | formable | `PLACEHOLDER` | Al-Haikk | the sultanates unite |
+| AHK | `08_araby` | Al-Haikk | start | `PLACEHOLDER` | Al-Haikk | the Golden City (Jaffar's capital) |
+| COP | `08_araby` | Copher | start | `PLACEHOLDER` | Copher | spice-port; crusader landing site |
+| LSK | `08_araby` | Lashiek | start | `PLACEHOLDER` | Lashiek | City of Corsairs; besieged in the Crusades |
+| MTK | `08_araby` | Martek | start | `PLACEHOLDER` | Martek | desert city |
+| BEL | `08_araby` | Bel-Aliad | start | `PLACEHOLDER` | Bel-Aliad | ruined "City of Dust" (revive/ruin start) |
+| ELK | `08_araby` | El-Kalabad | start | `PLACEHOLDER` | El-Kalabad | desert city |
+| FYR | `08_araby` | Fyrus | start | `PLACEHOLDER` | Fyrus | Arabyan island (releasable; once held by the Knights of Origo) |
+| ORG | `08_araby` | Knights of Origo | start | `bretonnian` | Fyrus | Bretonnian crusader order (Holy Order of Saint Origo) |
+| ANT | `08_araby` | Antoch | start | `bretonnian` | Antoch | "the Crusader City", Gulf of Medes (razed by Lizardmen) |
