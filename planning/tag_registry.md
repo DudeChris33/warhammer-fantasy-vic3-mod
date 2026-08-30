@@ -25,7 +25,7 @@ Filed by epic #3414 (child #3415).
 - [x] 09 Southlands (8)
 - [x] 11 Ogre Kingdoms (12)
 - [x] 12 Eastern Steppes (4)
-- [ ] 13 Cathay
+- [x] 13 Cathay (11)
 - [ ] 14 Ind
 - [ ] 15 Khuresh
 - [ ] 16 Nippon
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 146 tags** (10 formables, 136 starts) — Old World tranche complete; distant tranche
+**Approved so far: 157 tags** (11 formables, 146 starts) — Old World tranche complete; distant tranche
 in progress. Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -119,7 +119,9 @@ CNT
 COP
 COU
 CRM
+CTH
 CXC
+DGF
 DOL
 DRZ
 EKR
@@ -129,7 +131,10 @@ ERE
 EST
 EYB
 FSM
+FUC
+FUH
 FYR
+GBS
 GGT
 GIS
 GLG
@@ -172,12 +177,14 @@ MAH
 MAW
 MID
 MIR
+MKY
 MNF
 MOO
 MOU
 MTK
 MZN
 NEH
+NGA
 NLD
 NSC
 NUM
@@ -198,7 +205,10 @@ RFG
 ROP
 RSK
 SAR
+SHW
+SHY
 SKA
+SKT
 SKZ
 SLV
 SNK
@@ -223,6 +233,7 @@ VLG
 VOL
 VSY
 WAS
+WEI
 WIS
 WSK
 WWG
@@ -543,3 +554,25 @@ Border Princes) — a later `common/` authoring task, out of scope here. (Approv
 | HUN | `12_eastern_steppes` | Hung | start | `PLACEHOLDER` | — | eastern Chaos marauder confederation |
 | KUL | `12_eastern_steppes` | Kul | start | `PLACEHOLDER` | — | Asavar Kul's great host (Great War against Chaos) |
 | TON | `12_eastern_steppes` | Tong | start | `PLACEHOLDER` | — | steppe tribe |
+
+### 13 CATHAY (PLACEHOLDER) — 11 tags; CTH formable
+
+Grand Cathay, sourced from Total War: Warhammer 3 / Warhammer: The Old World (2023+) — old tabletop had
+no named Cathayan provinces (Chris approved the newer canon layer). The five Dragon-regent provinces +
+the Imperial core are the divided starts; **CTH** (note: not `CAT`) is the reunified-empire formable.
+Non-canon names dropped (Xicoatl = a Lizardmen site; "Turtle City" = the Turtle Gate; Longshan/Baxil/
+Bei-Sang = unsourced). All PLACEHOLDER culture. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| CTH | `13_cathay` | Grand Cathay | formable | `PLACEHOLDER` | Wei-jin | the Celestial Empire reunified under the Dragon Emperor |
+| WEI | `13_cathay` | Imperial Provinces (Wei-jin) | start | `PLACEHOLDER` | Wei-jin | the Dragon Emperor & Moon Empress; the Celestial City |
+| NGA | `13_cathay` | Northern Provinces (Nan-Gau) | start | `PLACEHOLDER` | Nan-Gau | Miao Ying the Storm-Dragon; commands the Great Bastion |
+| SHY | `13_cathay` | Western Provinces (Shang-Yang) | start | `PLACEHOLDER` | Shang-Yang | Zhao Ming the Iron-Dragon; Ivory Road |
+| SHW | `13_cathay` | Central Provinces (Shang Wu) | start | `PLACEHOLDER` | Shang Wu | Yuan Bo the Jade-Dragon; Administrator of the Realm |
+| FUC | `13_cathay` | Eastern Provinces (Fu-Chow) | start | `PLACEHOLDER` | Fu-Chow | Yin-Yin the Sea-Dragon; greatest port |
+| FUH | `13_cathay` | Southern Provinces (Fu-Hung) | start | `PLACEHOLDER` | Fu-Hung | Li Dao the Fire-Dragon; "the Chanting City" |
+| GBS | `13_cathay` | The Great Bastion | start | `PLACEHOLDER` | — | the Great Wall garrison (Dragon/Snake/Turtle Gates) |
+| MKY | `13_cathay` | Mountains of Heaven | start | `PLACEHOLDER` | — | the Monkey King (autonomous usurper) |
+| SKT | `13_cathay` | The Sky-Titans | start | `PLACEHOLDER` | — | ancient allied giants gifted gunpowder |
+| DGF | `13_cathay` | The Grand Dragon Fleet | start | `PLACEHOLDER` | Fu-Chow | Cathay's imperial navy (the Jade Fleet) |
