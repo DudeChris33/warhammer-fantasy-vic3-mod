@@ -22,7 +22,7 @@ Filed by epic #3414 (child #3415).
 - [x] 07 Nehekhara (11)
 - [x] 10 Dark Lands (6)
 - [x] 08 Araby (10)
-- [ ] 09 Southlands
+- [x] 09 Southlands (8)
 - [ ] 11 Ogre Kingdoms
 - [ ] 12 Eastern Steppes
 - [ ] 13 Cathay
@@ -33,7 +33,7 @@ Filed by epic #3414 (child #3415).
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 122 tags** (10 formables, 112 starts) — Old World tranche complete; distant tranche
+**Approved so far: 130 tags** (10 formables, 120 starts) — Old World tranche complete; distant tranche
 in progress. Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -94,8 +94,10 @@ AVE
 AZL
 BAE
 BAS
+BCB
 BEL
 BHA
+BHZ
 BIL
 BJO
 BKA
@@ -129,6 +131,7 @@ GRA
 GUN
 HAS
 HGK
+HHZ
 HOC
 ICL
 KAD
@@ -185,6 +188,7 @@ SAR
 SKA
 SKZ
 SLV
+SNK
 SOL
 SRT
 STI
@@ -192,6 +196,7 @@ SYL
 TAL
 TIL
 TOB
+TPK
 TRA
 TRO
 UNG
@@ -203,8 +208,11 @@ VOL
 VSY
 WAS
 WIS
+WSK
+WWG
 ZHA
 ZHU
+ZLA
 ZND
 ```
 
@@ -459,3 +467,22 @@ crusader-revival starts. Fyrus itself is kept as a releasable **Arabyan** tag; t
 | FYR | `08_araby` | Fyrus | start | `PLACEHOLDER` | Fyrus | Arabyan island (releasable; once held by the Knights of Origo) |
 | ORG | `08_araby` | Knights of Origo | start | `bretonnian` | Fyrus | Bretonnian crusader order (Holy Order of Saint Origo) |
 | ANT | `08_araby` | Antoch | start | `bretonnian` | Antoch | "the Crusader City", Gulf of Medes (razed by Lizardmen) |
+
+### 09 SOUTHLANDS (PLACEHOLDER + savage_orc) — 8 tags; no formable
+
+The Southlands are canon-thin for *human/native* realms (Zlatlan is the one named Lizardmen temple-city
+here; the western coast has only unnamed Arabyan colonies). The real supply is the **Savage Orcs**,
+whose canon heartland is the Southlands jungles — they get the new `savage_orc` culture (**pending
+#3404**). No "Southlands" reserve formable (Chris — too vague to be worth one right now). The bulk of
+Lizardmen live in Lustria (19). (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| ZLA | `09_southlands` | Zlatlan | start | `PLACEHOLDER` | Zlatlan | Lizardmen temple-city (Southlands) |
+| TPK | `09_southlands` | Top-knotz | start | `savage_orc` | — | Savage Orcs, Black Gulf coast — **culture pending #3404** |
+| BHZ | `09_southlands` | Bloody Handz | start | `savage_orc` | — | Wurrzag da Great Green Prophet (Dragonback foothills) |
+| BCB | `09_southlands` | Boneclubs | start | `savage_orc` | — | Savage Orc jungle tribe |
+| SNK | `09_southlands` | Snakeskinz | start | `savage_orc` | — | Savage Orc jungle tribe (Boneclubs' rivals) |
+| HHZ | `09_southlands` | Headhuntaz | start | `savage_orc` | — | nomadic Savage Orcs |
+| WWG | `09_southlands` | Waaagh-Waaagh | start | `savage_orc` | — | "the greatest" Savage Orc tribe, Southlands |
+| WSK | `09_southlands` | White Skullz | start | `savage_orc` | — | Savage Orcs who raid Araby |
