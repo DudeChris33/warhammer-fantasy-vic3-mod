@@ -1,27 +1,4 @@
 ﻿### Regencies are split off into government_types/01_regencies
-gov_domain_alliance = {
-	transfer_of_power = hereditary
-
-	male_ruler = "DAIMYO_TITLE"
-	female_ruler = "DAIMYO_TITLE"
-
-	male_heir = "RULER_TITLE_HEIR_APPARENT"
-	female_heir = "RULER_TITLE_HEIR_APPARENT"
-
-	possible = {
-
-		NOT = { is_subject_type = subject_type_crown_land }
-		has_gov_regency = no
-	}
-
-	on_government_type_change = {
-		change_to_hereditary = yes
-	}
-	on_post_government_type_change = {
-		post_change_to_hereditary = yes
-	}
-}
-
 gov_crown_land_governor_generic = {
 	transfer_of_power = dictatorial
 
