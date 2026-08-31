@@ -30,10 +30,10 @@ Filed by epic #3414 (child #3415).
 - [~] 15 Khuresh — **DEFERRED** (0 tags; near-zero canon, no Total War faction — Chris, 2026-08-30)
 - [~] 16 Nippon — **DEFERRED** (0 tags; only medium-confidence secondary-source names, no Total War faction — Chris, 2026-08-30)
 - [x] 17 Ulthuan (11)
-- [ ] 18 Naggaroth
+- [x] 18 Naggaroth (7)
 - [ ] 19 Lustria
 
-**Approved so far: 168 tags** (12 formables, 156 starts) — Old World tranche complete; distant tranche
+**Approved so far: 175 tags** (13 formables, 162 starts) — Old World tranche complete; distant tranche
 in progress. Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -118,6 +118,7 @@ BVR
 CAL
 CAR
 CHR
+CLK
 CNT
 COP
 COT
@@ -141,12 +142,15 @@ FUH
 FYR
 GBS
 GGT
+GHR
 GIS
 GLG
 GOR
 GRA
 GUN
+HAR
 HAS
+HGF
 HGK
 HHZ
 HOC
@@ -163,6 +167,7 @@ KHI
 KHM
 KHN
 KIS
+KKR
 KNO
 KRD
 KSV
@@ -189,8 +194,10 @@ MOO
 MOU
 MTK
 MZN
+NAG
 NEH
 NGA
+NGD
 NGY
 NLD
 NSC
@@ -611,3 +618,21 @@ All PLACEHOLDER culture (High Elf cultures are a future epic). (Approved 2026-08
 | YVR | `17_ulthuan` | Yvresse | start | `PLACEHOLDER` | Tor Yvresse | the misty realm |
 | ELL | `17_ulthuan` | Ellyrion | start | `PLACEHOLDER` | Tor Elyr | horse-country |
 | COT | `17_ulthuan` | Cothique | start | `PLACEHOLDER` | — | eastern coastal realm |
+
+### 18 NAGGAROTH (Dark Elves, PLACEHOLDER) — 7 tags; NAG formable
+
+The six Black Cities of Naggaroth + NAG formable (Malekith unites Naggaroth under the Witch King). All
+PLACEHOLDER culture (Dark Elf cultures are a future epic). **Open question — Athel Toralien & elven
+colonies:** Athel Toralien was dropped here; it and other Sundering-era/Old-World elf colonies (High &
+Dark) are deferred to a future "elven colonies" pass, likely their own cross-region treatment rather
+than one Naggaroth row. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| NAG | `18_naggaroth` | Naggaroth | formable | `PLACEHOLDER` | Naggarond | the Witch King's realm united |
+| NGD | `18_naggaroth` | Naggarond | start | `PLACEHOLDER` | Naggarond | the Tower of Cold (Malekith's capital) |
+| HAR | `18_naggaroth` | Har Ganeth | start | `PLACEHOLDER` | Har Ganeth | City of Executioners (cult of Khaine) |
+| GHR | `18_naggaroth` | Ghrond | start | `PLACEHOLDER` | Ghrond | the North Tower (Morathi's Dark Convent) |
+| CLK | `18_naggaroth` | Clar Karond | start | `PLACEHOLDER` | Clar Karond | Tower of Doom (Black Ark shipyards) |
+| KKR | `18_naggaroth` | Karond Kar | start | `PLACEHOLDER` | Karond Kar | Slaver's Gate / Tower of Despair |
+| HGF | `18_naggaroth` | Hag Graef | start | `PLACEHOLDER` | Hag Graef | the Dark Crag (second city) |
