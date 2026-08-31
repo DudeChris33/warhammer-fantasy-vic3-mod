@@ -1,1 +1,3 @@
-﻿
+﻿# Intentionally empty: overrides vanilla's real-world character_role_emperor_of_japan
+# (suppressed, no Warhammer Fantasy equivalent yet). common/character_roles is not in
+# replace_paths, so this same-filename override is what removes it.
