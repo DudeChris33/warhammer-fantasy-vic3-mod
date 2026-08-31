@@ -7,8 +7,10 @@ Filed by epic #3414 (child #3415).
 > **Assembled region-by-region with per-region approval (Chris).** Codes were allocated *globally* in
 > a whole-world draft (see `planning/.cache/tag_registry.draft.md`); regions are appended here only
 > once approved. Approved codes are frozen (append-only) — later regions add new unique codes, never
-> rename a shipped one. The whole-world honest-canon draft totals 161 tags; this file grows to that as
-> regions are approved.
+> rename a shipped one. The honest-canon draft opened at 161; the final roster is **193 tags** — the
+> Old World stayed at honest tabletop depth, while several distant regions (Badlands, Ogres, Cathay,
+> Lustria) were expanded using Total War: Warhammer as an approved name source, and Ind/Khuresh/Nippon
+> were deferred as too canon-thin to fill without inventing.
 
 ### Regions approved (Phase B walk)
 
@@ -31,10 +33,10 @@ Filed by epic #3414 (child #3415).
 - [~] 16 Nippon — **DEFERRED** (0 tags; only medium-confidence secondary-source names, no Total War faction — Chris, 2026-08-30)
 - [x] 17 Ulthuan (11)
 - [x] 18 Naggaroth (7)
-- [ ] 19 Lustria
+- [x] 19 Lustria (18)
 
-**Approved so far: 175 tags** (13 formables, 162 starts) — Old World tranche complete; distant tranche
-in progress. Content is **honest, well-attested Warhammer
+**Total: 193 tags** (15 formables, 178 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+Nippon deferred with 0). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -93,6 +95,7 @@ ARB
 ART
 AVE
 AVL
+AXL
 AZL
 BAE
 BAS
@@ -117,7 +120,9 @@ BTO
 BVR
 CAL
 CAR
+CHQ
 CHR
+CHU
 CLK
 CNT
 COP
@@ -150,13 +155,16 @@ GRA
 GUN
 HAR
 HAS
+HEX
 HGF
 HGK
 HHZ
 HOC
+HUA
 HUN
 ICL
 IRN
+ITZ
 KAD
 KAG
 KAK
@@ -169,6 +177,7 @@ KHN
 KIS
 KKR
 KNO
+KON
 KRD
 KSV
 KUL
@@ -181,6 +190,7 @@ LAN
 LOT
 LSK
 LUC
+LUS
 LYB
 LYO
 MAG
@@ -205,9 +215,12 @@ NUM
 ORG
 OSM
 OST
+OYX
+PAH
 PAR
 PAV
 PRA
+QTZ
 QUA
 QUE
 RAS
@@ -229,6 +242,7 @@ SLV
 SNK
 SOL
 SOM
+SPZ
 SRT
 STI
 SYL
@@ -236,6 +250,9 @@ TAL
 THG
 TIL
 TIR
+TLA
+TLN
+TLX
 TOB
 TON
 TPK
@@ -254,6 +271,9 @@ WEI
 WIS
 WSK
 WWG
+XAH
+XHO
+XLA
 YVR
 ZHA
 ZHU
@@ -636,3 +656,33 @@ than one Naggaroth row. (Approved 2026-08-30.)
 | CLK | `18_naggaroth` | Clar Karond | start | `PLACEHOLDER` | Clar Karond | Tower of Doom (Black Ark shipyards) |
 | KKR | `18_naggaroth` | Karond Kar | start | `PLACEHOLDER` | Karond Kar | Slaver's Gate / Tower of Despair |
 | HGF | `18_naggaroth` | Hag Graef | start | `PLACEHOLDER` | Hag Graef | the Dark Crag (second city) |
+
+### 19 LUSTRIA (Lizardmen, PLACEHOLDER) — 18 tags; LUS formable
+
+The temple-cities of the Lizardmen, at max density (Chris approved TW:W as a name source, as with the
+greenskins/Cathay). LUS is the Slann reuniting the Old Ones' dominion. All rows are **Lustrian** —
+Southlands Lizardmen (Zlatlan; the TW factions Kroq-Gar/Tiktaq'to) are excluded from this file per
+Chris and live in 09 Southlands. Sourced corrections: "Spektotl"→Spektazuma; "Zaqua" unverified
+(dropped); Tlanxla and "Tlanxa" are one city (TLN), Tlax is separate (TLA). Sentinels of Xeti and 8
+lower-detail cities held as reserve. All PLACEHOLDER culture. (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| LUS | `19_lustria` | Lustria | formable | `PLACEHOLDER` | Itza | the Old Ones' dominion united |
+| ITZ | `19_lustria` | Itza | start | `PLACEHOLDER` | Itza | the First City (Lord Kroak / Gor-Rok) |
+| HEX | `19_lustria` | Hexoatl | start | `PLACEHOLDER` | Hexoatl | City of the Sun (Mazdamundi) |
+| XLA | `19_lustria` | Xlanhuapec | start | `PLACEHOLDER` | Xlanhuapec | City of Mists |
+| TLX | `19_lustria` | Tlaxtlan | start | `PLACEHOLDER` | Tlaxtlan | City of the Moon |
+| CHQ | `19_lustria` | Chaqua | start | `PLACEHOLDER` | Chaqua | City of Gold |
+| PAH | `19_lustria` | Pahuax | start | `PLACEHOLDER` | Pahuax | Oxyotl's home (Ghosts of Pahuax) |
+| XAH | `19_lustria` | Xahutec | start | `PLACEHOLDER` | Xahutec | City of Echoes (ruined by a Chaos portal) |
+| QTZ | `19_lustria` | Quetza | start | `PLACEHOLDER` | Quetza | the Defiled (Clan Pestilens) |
+| HUA | `19_lustria` | Huatl | start | `PLACEHOLDER` | Huatl | City of Reawakening (being re-founded) |
+| OYX | `19_lustria` | Oyxl | start | `PLACEHOLDER` | Oyxl | the Eternal City (ruined by Daemons) |
+| XHO | `19_lustria` | Xhotl | start | `PLACEHOLDER` | Xhotl | City of Fate (Kroq-Gar's stand) |
+| AXL | `19_lustria` | Axlotl | start | `PLACEHOLDER` | Axlotl | the Star City |
+| CHU | `19_lustria` | Chupayotl | start | `PLACEHOLDER` | Chupayotl | the Sunken City (SE Lustria) |
+| KON | `19_lustria` | Konquata | start | `PLACEHOLDER` | Konquata | youngest temple-city (founded 2520 IC) |
+| TLN | `19_lustria` | Tlanxla | start | `PLACEHOLDER` | Tlanxla | City of the Sky (destroyed in the Catastrophe) |
+| SPZ | `19_lustria` | Spektazuma | start | `PLACEHOLDER` | Spektazuma | City of Lenses (ruined) |
+| TLA | `19_lustria` | Tlax | start | `PLACEHOLDER` | Tlax | City of Ghosts (ruined) |
