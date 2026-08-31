@@ -29,11 +29,11 @@ Filed by epic #3414 (child #3415).
 - [~] 14 Ind — **DEFERRED** (0 tags; no canon supply in tabletop or Total War — Chris, 2026-08-30)
 - [~] 15 Khuresh — **DEFERRED** (0 tags; near-zero canon, no Total War faction — Chris, 2026-08-30)
 - [~] 16 Nippon — **DEFERRED** (0 tags; only medium-confidence secondary-source names, no Total War faction — Chris, 2026-08-30)
-- [ ] 17 Ulthuan
+- [x] 17 Ulthuan (11)
 - [ ] 18 Naggaroth
 - [ ] 19 Lustria
 
-**Approved so far: 157 tags** (11 formables, 146 starts) — Old World tranche complete; distant tranche
+**Approved so far: 168 tags** (12 formables, 156 starts) — Old World tranche complete; distant tranche
 in progress. Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -92,6 +92,7 @@ AQU
 ARB
 ART
 AVE
+AVL
 AZL
 BAE
 BAS
@@ -114,9 +115,12 @@ BRN
 BSB
 BTO
 BVR
+CAL
 CAR
+CHR
 CNT
 COP
+COT
 COU
 CRM
 CTH
@@ -126,6 +130,7 @@ DOL
 DRZ
 EKR
 ELK
+ELL
 EMP
 ERE
 EST
@@ -168,6 +173,7 @@ KVE
 KVN
 LAH
 LAN
+LOT
 LSK
 LUC
 LYB
@@ -185,6 +191,7 @@ MTK
 MZN
 NEH
 NGA
+NGY
 NLD
 NSC
 NUM
@@ -204,6 +211,7 @@ REM
 RFG
 ROP
 RSK
+SAP
 SAR
 SHW
 SHY
@@ -220,11 +228,13 @@ SYL
 TAL
 THG
 TIL
+TIR
 TOB
 TON
 TPK
 TRA
 TRO
+ULT
 UNG
 UZK
 VAR
@@ -237,6 +247,7 @@ WEI
 WIS
 WSK
 WWG
+YVR
 ZHA
 ZHU
 ZLA
@@ -576,3 +587,27 @@ Bei-Sang = unsourced). All PLACEHOLDER culture. (Approved 2026-08-30.)
 | MKY | `13_cathay` | Mountains of Heaven | start | `PLACEHOLDER` | — | the Monkey King (autonomous usurper) |
 | SKT | `13_cathay` | The Sky-Titans | start | `PLACEHOLDER` | — | ancient allied giants gifted gunpowder |
 | DGF | `13_cathay` | The Grand Dragon Fleet | start | `PLACEHOLDER` | Fu-Chow | Cathay's imperial navy (the Jade Fleet) |
+
+> **Regions 14 Ind, 15 Khuresh, 16 Nippon — DEFERRED (0 tags).** Ind and Khuresh have no named realms in
+> either tabletop or Total War; Nippon has only medium-confidence secondary-source names. All three are
+> left for a future epic rather than padded with invented or low-confidence tags. (Chris, 2026-08-30.)
+
+### 17 ULTHUAN (High Elves, PLACEHOLDER) — 11 tags; ULT formable
+
+The Ten Kingdoms of Ulthuan — confirmed complete canon (high confidence). ULT is the Phoenix King
+reuniting them. Nagarythe is kept as a normal High Elf kingdom (Shadow Warriors era, post-Sundering).
+All PLACEHOLDER culture (High Elf cultures are a future epic). (Approved 2026-08-30.)
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| ULT | `17_ulthuan` | Ulthuan | formable | `PLACEHOLDER` | Lothern | the Phoenix King's realm united |
+| LOT | `17_ulthuan` | Eataine (Lothern) | start | `PLACEHOLDER` | Lothern | realm of the Sea Lords; the capital |
+| CAL | `17_ulthuan` | Caledor | start | `PLACEHOLDER` | Tor Caled | dragon princes |
+| SAP | `17_ulthuan` | Saphery | start | `PLACEHOLDER` | Saphery | land of mages |
+| NGY | `17_ulthuan` | Nagarythe | start | `PLACEHOLDER` | — | the Shadowlands (Shadow Warriors) |
+| TIR | `17_ulthuan` | Tiranoc | start | `PLACEHOLDER` | Tor Anroc | the drowned kingdom / charioteers |
+| CHR | `17_ulthuan` | Chrace | start | `PLACEHOLDER` | Tor Achare | home of the White Lions |
+| AVL | `17_ulthuan` | Avelorn | start | `PLACEHOLDER` | — | the Everqueen's realm |
+| YVR | `17_ulthuan` | Yvresse | start | `PLACEHOLDER` | Tor Yvresse | the misty realm |
+| ELL | `17_ulthuan` | Ellyrion | start | `PLACEHOLDER` | Tor Elyr | horse-country |
+| COT | `17_ulthuan` | Cothique | start | `PLACEHOLDER` | — | eastern coastal realm |
