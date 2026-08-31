@@ -652,7 +652,6 @@ has_paternalist_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_paternalistic
 		has_ideology = ideology:ideology_magnatial
-		ig_has_carlist_ideology = yes
 		has_ideology = ideology:ideology_scholar_paternalistic
 	}
 }
@@ -846,7 +845,6 @@ ig_is_reactionary = {
 				has_ideology = ideology:ideology_fascist
 				has_ideology = ideology:ideology_integralist
 				has_ideology = ideology:ideology_royalist
-				has_ideology = ideology:ideology_orleanist
 				has_ideology = ideology:ideology_theocrat
 			}
 		}
@@ -1061,13 +1059,6 @@ ig_is_anti_dreyfusard = {
 			has_ideology = ideology:ideology_authoritarian
 		}
 		leader = {
-		}
-		leader = {
-		}
-		leader = {
-			has_ideology = ideology:ideology_orleanist
-		}
-		leader = {
 			has_ideology = ideology:ideology_royalist
 		}
 	}
@@ -1214,8 +1205,6 @@ has_reactionary_ideology = {
 			has_ideology = ideology:ideology_theocrat
 			has_ideology = ideology:ideology_luddite
 			has_ideology = ideology:ideology_corporatist_leader
-			character_has_carlist_ideology = yes
-			character_has_miguelist_ideology = yes
 		}
 	}
 }
@@ -1228,7 +1217,6 @@ has_conservative_ideology = {
 			has_ideology = ideology:ideology_traditionalist_minoritarian
 			has_ideology = ideology:ideology_slaver
 			has_ideology = ideology:ideology_royalist
-			has_ideology = ideology:ideology_orleanist
 			has_ideology = ideology:ideology_theocrat
 			has_ideology = ideology:ideology_corporatist_leader
 			has_ideology = ideology:ideology_authoritarian
@@ -1240,9 +1228,6 @@ has_conservative_ideology = {
 has_monarchist_ideology = {
 	OR = {
 		has_ideology = ideology:ideology_royalist
-		has_ideology = ideology:ideology_orleanist
-		character_has_carlist_ideology = yes
-		character_has_miguelist_ideology = yes
 	}
 }
 

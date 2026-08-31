@@ -1,0 +1,108 @@
+﻿enacting_more_permissive_labour_associations_law = {
+	OR = {
+		AND = {
+			OR = {
+				has_law_or_variant = law_type:law_guild_system
+				has_law_or_variant = law_type:law_combination_acts
+			}
+			OR = {
+				is_enacting_law = law_type:law_anti_strike_laws
+				is_enacting_law = law_type:law_right_to_associate
+			}
+		}
+		AND = {
+			OR = {
+				has_law_or_variant = law_type:law_anti_strike_laws
+				has_law_or_variant = law_type:law_corporatized_unions
+			}
+			is_enacting_law = law_type:law_right_to_associate
+		}
+	}
+}
+
+enacting_less_permissive_labour_associations_law = {
+	OR = {
+		AND = {
+			OR = {
+				has_law_or_variant = law_type:law_right_to_associate
+			}
+			OR = {
+				is_enacting_law = law_type:law_corporatized_unions
+				is_enacting_law = law_type:law_combination_acts
+				is_enacting_law = law_type:law_anti_strike_laws
+			}
+		}
+		AND = {
+			has_law_or_variant = law_type:law_anti_strike_laws
+			OR = {
+				is_enacting_law = law_type:law_combination_acts
+				is_enacting_law = law_type:law_corporatized_unions
+			}
+		}
+		AND = {
+			has_law_or_variant = law_type:law_corporatized_unions
+			is_enacting_law = law_type:law_combination_acts
+		}
+	}
+}
+
+is_abolishing_subjecthood = {
+	has_law_or_variant = law_type:law_subjecthood
+	OR = {
+		is_enacting_law = law_type:law_ethnostate
+		is_enacting_law = law_type:law_national_supremacy
+		is_enacting_law = law_type:law_racial_segregation
+		is_enacting_law = law_type:law_cultural_exclusion
+		is_enacting_law = law_type:law_multicultural
+	}
+}
+
+any_neighbouring_country_has_same_movement_type_as_root = { # Used when ROOT is a political movement, checks for any neighbouring country having a political movement of this type
+	owner ?= {
+		any_neighbouring_state = {
+			owner = {
+				prestige > ROOT.owner.prestige
+				any_political_movement = {
+					type = ROOT.type
+				}
+			}
+		}
+	}
+}
+
+country_can_have_cultural_minority_movement_of_culture = { # Fired from the on_national_awakening_started on_action, has all of its scopes
+	NOT = {
+		any_political_movement = {
+			culture ?= scope:culture
+		}
+	}
+	OR = {
+		any_scope_state = {
+			state_region = {
+				is_homeland = scope:culture
+			}
+			culture_percent_state = {
+				target = scope:culture
+				value >= 0.2
+			}
+		}
+		AND = {
+			culture_percent_country = {
+				target = scope:culture
+				value >= 0.1
+			}
+			cultural_acceptance_base = { target = scope:culture value <= acceptance_status_2 }
+		}
+	}
+}
+
+is_citizenship_law = {
+	OR = {
+		type ?= law_type:law_subjecthood
+		type ?= law_type:law_ethnostate
+		type ?= law_type:law_national_supremacy
+		type ?= law_type:law_racial_segregation
+		type ?= law_type:law_cultural_exclusion
+		type ?= law_type:law_multicultural
+	}
+}

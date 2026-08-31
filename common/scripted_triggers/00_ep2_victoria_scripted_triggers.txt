@@ -1,0 +1,182 @@
+﻿pop_typically_counts_as_middle_strata = { # Pop scope
+    OR = {
+        is_pop_type = shopkeepers
+        is_pop_type = engineers
+        is_pop_type = bureaucrats
+        is_pop_type = officers
+        is_pop_type = academics
+        is_pop_type = clergymen
+        is_pop_type = farmers
+    }
+}
+
+character_has_been_patronized = {
+    trigger_if = {
+        limit = {
+            AND = {
+                has_role_of_type = agitator
+                OR = {
+                    has_role_of_type = general
+                    has_role_of_type = admiral
+                }
+            }
+        }
+        has_modifier = modifier_agitator_commander_political_patronage
+    }
+    trigger_else_if = {
+        limit = {
+            has_role_of_type = agitator
+        }
+        has_modifier = modifier_agitator_political_patronage
+    }
+    trigger_else_if = {
+        limit = {
+            NOT = {
+                has_role_of_type = politician
+            }
+            OR = {
+                has_role_of_type = general
+                has_role_of_type = admiral
+            }
+        }
+        has_modifier = modifier_commander_political_patronage
+    }
+    trigger_else = {
+        has_modifier = modifier_political_patronage
+    }
+}
+
+character_has_been_ostracized = {
+    trigger_if = {
+        limit = {
+            AND = {
+                has_role_of_type = agitator
+                OR = {
+                    has_role_of_type = general
+                    has_role_of_type = admiral
+                }
+            }
+        }
+        has_modifier = modifier_agitator_commander_political_smears
+    }
+    trigger_else_if = {
+        limit = {
+            has_role_of_type = agitator
+        }
+        has_modifier = modifier_agitator_political_smears
+    }
+    trigger_else_if = {
+        limit = {
+            NOT = {
+                has_role_of_type = politician
+            }
+            OR = {
+                has_role_of_type = general
+                has_role_of_type = admiral
+            }
+        }
+        has_modifier = modifier_commander_political_smears
+    }
+    trigger_else = {
+        has_modifier = modifier_political_smears
+    }
+}
+
+owner_is_root_or_subject_of_root = {
+    OR = {
+        owner = ROOT
+        owner = {
+            is_subject_of = ROOT
+        }
+    }
+}
+
+character_has_valid_reason_for_coup = {
+    save_temporary_scope_as = coupist_to_be
+    OR = {
+        owner ?= { # Case 1 - owner is enacting a law the character does not approve of
+            save_temporary_scope_as = couped_to_be
+            exists = currently_enacting_law
+            OR = {
+                scope:coupist_to_be ?= {
+                    law_enactment_stance = { # Refers to any_scope_character
+                        law = scope:couped_to_be.currently_enacting_law.type # Refers to owner
+                        value < neutral # Disapproves of the law
+                    }
+                }
+                AND = {
+                    scope:coupist_to_be ?= {
+                        law_enactment_stance = { # Refers to any_scope_character
+                            law = scope:couped_to_be.currently_enacting_law.type # Refers to owner
+                            value < approve # Character does not approve of the law
+                        }
+                        interest_group ?= {
+                            law_enactment_stance = { # Refers to any_scope_character's interest group
+                                law = scope:couped_to_be.currently_enacting_law.type # Refers to owner
+                                value < neutral # Interest group opposes the law
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        this.interest_group = {
+            OR = {
+                has_modifier = modifier_failed_to_meet_petition # Case 2 - owner has failed a petition for this.interest_group
+                has_modifier = negotiation_failed_quest # Case 3 - owner has failed a negotiation for this.interest_group
+            }
+        }
+        # Not in this trigger, but exposed elsewhere:
+        # Case 5 - Foreign-Backed Coup
+        # Case 6 - Foreign-Backed Coup
+    }
+}
+
+country_has_isolationism = {
+    has_law = law_type:law_isolationism
+}
+
+law_is_governance_principles_law = { # law scope
+    OR = {
+        type ?= law_type:law_monarchy
+        type ?= law_type:law_theocracy
+        type ?= law_type:law_social_monarchy
+        type ?= law_type:law_corporate_state
+        type ?= law_type:law_chiefdom
+        type ?= law_type:law_presidential_republic
+        type ?= law_type:law_parliamentary_republic
+        type ?= law_type:law_council_republic
+    }
+}
+
+country_has_nobility = {
+    OR = {
+        has_law_or_variant = law_type:law_theocracy
+        country_has_monarchy_law = yes
+        AND = {
+            has_law = law_type:law_colonial_administration
+            overlord ?= {
+                country_has_nobility = yes
+            }
+        }
+    }
+}
+
+country_has_springtime_revolution = {
+    any_civil_war = {
+        is_civil_war_type = revolution
+        civil_war_progress >= $THRESHOLD$
+        custom_tooltip = {
+            text = caused_by_liberal_or_socialist_movement_tt
+            political_movement ?= {
+                OR = {
+                    movement_is_liberal = yes
+                    movement_is_socialist = yes
+                }
+            }
+        }
+    }
+    capital = {
+        is_in_revolt = yes
+    }
+}

@@ -9,10 +9,7 @@ gov_domain_alliance = {
 	female_heir = "RULER_TITLE_HEIR_APPARENT"
 
 	possible = {
-		is_domain_alliance_gov = yes
 
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
 	}
@@ -37,7 +34,6 @@ gov_crown_land_governor_generic = {
 			has_law = law_type:law_monarchy
 		}
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -60,12 +56,8 @@ gov_enlightened_despotate = {
 	possible = {
 		has_law = law_type:law_monarchy
 		has_law_or_variant = law_type:law_technocracy
-		country_is_not_dual_or_triple_monarchy_subject = yes
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -94,7 +86,6 @@ gov_decentralized_realm = {
 		#country_tier = principality
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -126,11 +117,8 @@ gov_absolute_empire = {
 			has_variable = orleanist_restoration_var
 			has_variable = legitimist_restoration_var
 		}
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -165,11 +153,8 @@ gov_feudal_empire = {
 			has_variable = orleanist_restoration_var
 			has_variable = legitimist_restoration_var
 		}
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -203,11 +188,8 @@ gov_empire = {
 			has_variable = orleanist_restoration_var
 			has_variable = legitimist_restoration_var
 		}
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -239,11 +221,8 @@ gov_constitutional_empire = {
 			has_variable = orleanist_restoration_var
 			has_variable = legitimist_restoration_var
 		}
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -267,12 +246,8 @@ gov_absolute_kingdom = {
 		has_law = law_type:law_monarchy
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = kingdom
-		country_is_not_dual_or_triple_monarchy_subject = yes
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -302,7 +277,6 @@ gov_feudal_kingdom = {
 		country_tier = kingdom
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -329,12 +303,8 @@ gov_kingdom = {
 			has_law_or_variant = law_type:law_technocracy
 		}
 		country_tier = kingdom
-		country_is_not_dual_or_triple_monarchy_subject = yes
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -358,12 +328,8 @@ gov_constitutional_kingdom = {
 		has_law = law_type:law_monarchy
 		country_has_voting_franchise = yes
 		country_tier = kingdom
-		country_is_not_dual_or_triple_monarchy_subject = yes
-		country_is_not_united_kingdom_overlord = yes
-		country_is_not_united_kingdom_subject = yes
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -391,7 +357,6 @@ gov_absolute_county = {
 		country_tier = city_state
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -420,7 +385,6 @@ gov_constitutional_county = {
 
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -452,7 +416,6 @@ gov_county = {
 
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -481,7 +444,6 @@ gov_absolute_duchy = {
 		country_tier = principality
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -509,7 +471,6 @@ gov_constitutional_duchy = {
 		country_tier = principality
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -540,7 +501,6 @@ gov_duchy = {
 		country_tier = principality
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -568,7 +528,6 @@ gov_absolute_principality = {
 			has_variable = king_sounds_better
 		}
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -596,7 +555,6 @@ gov_principality = {
 		}
 		country_tier = principality
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -622,7 +580,6 @@ gov_constitutional_principality = {
 		country_has_voting_franchise = yes
 		country_tier = principality
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -647,7 +604,6 @@ gov_absolute_grand_duchy = {
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = grand_principality
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -676,7 +632,6 @@ gov_grand_duchy = {
 		country_tier = grand_principality
 
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -703,7 +658,6 @@ gov_constitutional_grand_duchy = {
 		country_tier = grand_principality
 
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -728,7 +682,6 @@ gov_absolute_grand_principality = {
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = grand_principality
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -756,7 +709,6 @@ gov_grand_principality = {
 		}
 		country_tier = grand_principality
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
@@ -782,7 +734,6 @@ gov_constitutional_grand_principality = {
 		country_has_voting_franchise = yes
 		country_tier = grand_principality
 		has_gov_regency = no
-		is_domain_alliance_gov = no
 	}
 
 	on_government_type_change = {
