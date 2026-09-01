@@ -21,3 +21,51 @@ has_potential_for_pollinator_surge = {
 has_potential_for_optimal_sunlight = {
 	always = yes
 }
+
+has_potential_for_moderate_rainfall = {
+	always = yes
+}
+
+is_vulnerable_to_droughts = {
+	always = yes
+}
+
+is_vulnerable_to_floods = {
+	always = yes
+}
+
+is_vulnerable_to_frosts = {
+	always = yes
+}
+
+is_vulnerable_to_wildfires = {
+	always = yes
+}
+
+is_vulnerable_to_hailstorm = {
+	always = yes
+}
+
+is_vulnerable_to_locust_swarms = {
+	always = yes
+}
+
+is_vulnerable_to_heatwaves = {
+	always = yes
+}
+
+is_vulnerable_to_torrential_rains = {
+	always = yes
+}
+
+is_vulnerable_to_earthquakes = {
+	always = yes
+}
+
+is_vulnerable_to_ice = {
+	always = yes
+}
+
+is_vulnerable_to_tropical_storm = {
+	always = yes
+}

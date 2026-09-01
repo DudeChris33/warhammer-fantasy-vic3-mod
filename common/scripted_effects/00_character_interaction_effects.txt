@@ -1,0 +1,74 @@
+﻿# Scripted effects required by common/character_interactions/.
+# Restored from vanilla 00_victoria_scripted_effects.txt with real-world content
+# removed (the Metternich hidden_effect that un-immortalised a specific historical
+# character template).
+
+exile_character_with_martyrdom = {
+	save_scope_as = martyred_exile_scope
+	if = {
+		limit = {
+			NOT = {
+				has_modifier = modifier_political_martyr
+			}
+		}
+		add_modifier = modifier_political_martyr
+	}
+	if = {
+		limit = {
+			NOT = {
+				has_variable = exile_pool_culling_immunity
+			}
+		}
+		set_variable = {
+			name = exile_pool_culling_immunity
+			days = very_short_modifier_time
+		}
+	}
+	if = {
+		limit = {
+			owner ?= {
+				NOT = {
+					any_primary_culture = {
+						this = scope:martyred_exile_scope.culture
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_country = {
+					NOT = {
+						this = scope:martyred_exile_scope.owner
+					}
+					any_primary_culture = {
+						this = scope:martyred_exile_scope.culture
+					}
+				}
+			}
+			ordered_country = {
+				limit = {
+					NOT = {
+						this = scope:martyred_exile_scope.owner
+					}
+					any_primary_culture = {
+						this = scope:martyred_exile_scope.culture
+					}
+				}
+				order_by = country_rank
+				position = 0
+				check_range_bounds = no
+				create_diplomatic_catalyst = {
+					type = catalyst_exiled_culture_member
+					target = scope:martyred_exile_scope.owner
+				}
+			}
+		}
+	}
+	if = {
+		limit = { is_in_exile_pool = no }
+		exile_character = yes
+	}
+	hidden_effect = {
+		clean_up_exile_character_roles = yes
+	}
+}

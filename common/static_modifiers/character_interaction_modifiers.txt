@@ -1,0 +1,113 @@
+﻿# Static modifiers required by common/character_interactions/.
+# Restored verbatim from vanilla (agitators_3_modifiers.txt, content_304_modifiers.txt,
+# 00_ep2_04_modifiers.txt) - only the generic entries the restored interactions
+# actually reference; the surrounding real-world content files are not restored.
+
+# --- exile_character / invite_exile ---
+in_exile_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_health_add = -0.25
+}
+
+modifier_political_martyr = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_positive.dds
+	character_popularity_add = 25
+}
+
+modifier_exiled_leader = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -5
+}
+
+# --- arrange_accident ---
+modifier_government_accident_attempt = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fire_negative.dds
+	political_movement_radicalism_add = 0.15
+}
+
+# --- patronize ---
+modifier_granted_character_patronage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_authority_cost_add = 1 # Multiplied by patronize_authority_cost
+}
+
+modifier_patronized_leader = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 2
+}
+
+modifier_patronized_politician = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 1
+}
+
+modifier_political_patronage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	character_prominence_add = 20 # Slightly less prominence than becoming an IG leader
+}
+
+modifier_agitator_political_patronage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	character_popularity_add = 25
+}
+
+modifier_commander_political_patronage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	character_prominence_add = 20 # Slightly less prominence than becoming an IG leader
+	character_loyalty_add = 10
+}
+
+modifier_agitator_commander_political_patronage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	character_popularity_add = 25
+	character_loyalty_add = 10
+}
+
+# --- ostracize ---
+modifier_smeared_character = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_authority_cost_add = 1 # Multiplied by ostracize_authority_cost
+}
+
+modifier_ostracized_leader = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -2
+}
+
+modifier_ostracized_politician = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -1
+}
+
+modifier_political_smears = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_prominence_add = -20 # Slightly less prominence than being a child
+}
+
+modifier_agitator_political_smears = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_popularity_add = -25
+}
+
+modifier_commander_political_smears = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_prominence_add = -20 # Slightly less prominence than becoming an IG leader
+	character_loyalty_add = -10
+}
+
+modifier_agitator_commander_political_smears = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	character_popularity_add = -25
+	character_loyalty_add = -10
+}
+
+# --- grant_peerage ---
+modifier_granted_character_peerage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_authority_cost_add = 1 # Multiplied by peerage_authority_cost
+}
+
+modifier_granted_peerage = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	interest_group_approval_add = 1
+}

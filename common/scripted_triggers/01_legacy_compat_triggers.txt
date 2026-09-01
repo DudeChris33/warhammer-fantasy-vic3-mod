@@ -1,0 +1,12 @@
+﻿# Compatibility stubs for scripted triggers referenced by vanilla files that this
+# mod does not blank via replace_paths (so vanilla's copy still loads), but whose
+# original definitions were pure real-world content and were not restored.
+#
+# is_in_guerilla_war: vanilla's definition was entirely about the Carlist Wars,
+# which do not exist in this setting. common/battle_conditions is NOT in
+# replace_paths, so vanilla's 00_battle_conditions.txt loads and references this
+# trigger 21 times. Defined as a constant "no" - deterministic and semantically
+# equivalent to "no such war exists".
+is_in_guerilla_war = {
+	always = no
+}

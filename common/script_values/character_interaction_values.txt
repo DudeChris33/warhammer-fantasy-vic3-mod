@@ -1,0 +1,24 @@
+﻿# Authority costs used by common/character_interactions/.
+# Restored verbatim from vanilla ep2_japan_values.txt - only the generic values the
+# restored interactions reference; the surrounding real-world content is not restored.
+
+patronize_authority_cost = { # In character scope
+	value = 100 # Baseline
+	if = {
+		limit = {
+			OR = {
+				has_trait = opium_addiction
+				has_trait = alcoholic
+				has_trait = cocaine_addiction
+				has_trait = expensive_tastes
+			}
+		}
+		add = 50
+	}
+}
+
+ostracize_authority_cost = { # In character scope
+	value = 100 # Baseline
+}
+
+peerage_authority_cost = 25
