@@ -40,6 +40,50 @@ class SeaZoneName(NamedTuple):
     display_name: str  # the shared localized display text
 
 
+def apply_naming_overrides(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
+                           config: schema.SeaZoneConfig
+                           ) -> tuple[dict[int, "SeaZoneName"], set[int]]:
+    """Overlay merge names and the impassable flag onto an :func:`assign` result.
+
+    A "merge" does **not** relabel pixels: fusing separate water bodies into one
+    province produces a disconnected province bitmap, which Vic3 rejects (found
+    2026-08-31 trying to fuse the three Maelstrom pieces — none of them touch).
+    Instead every zone in a :class:`schema.SeaZoneMerge` keeps its own label and
+    province colour but is given the *same* key (so the emitter groups them into
+    one multi-province ``STATE_<name>``, exactly how vanilla lists several
+    province colours under one ``impassable = { ... }`` — see
+    ``tools/generate_sea_regions.py``) and the same sea_group/display_name.
+
+    Returns the patched naming dict and the set of impassable labels (every
+    zone in an ``impassable``-flagged merge, plus every ``impassable_seeds``
+    pixel). Raises :class:`cells.CellError` if a merge/impassable seed is not on
+    a sea zone.
+    """
+    naming = dict(naming)
+    impassable: set[int] = set()
+    for m in config.merges:
+        key = f"STATE_{m.name}_01"
+        for (sx, sy) in m.seeds:
+            lab = int(zones[sy, sx])
+            if lab == 0:
+                raise cells.CellError(
+                    f"merge '{m.name}' seed ({sx}, {sy}) is not on a sea zone (it is on land) — "
+                    f"the seed is wrong or stale"
+                )
+            naming[lab] = SeaZoneName(key=key, sea_group=m.name, display_name=m.display_name)
+            if m.impassable:
+                impassable.add(lab)
+    for (sx, sy) in config.impassable_seeds:
+        lab = int(zones[sy, sx])
+        if lab == 0:
+            raise cells.CellError(
+                f"impassable seed ({sx}, {sy}) is not on a sea zone (it is on land) — "
+                f"the seed is wrong or stale"
+            )
+        impassable.add(lab)
+    return naming, impassable
+
+
 def _seed_owner(sea_labels: np.ndarray, land: np.ndarray,
                 config: schema.SeaZoneConfig, wrap_x: bool, log=None) -> np.ndarray:
     """Wrap-aware seed-Voronoi owner (canon index + 1) over the water mask.

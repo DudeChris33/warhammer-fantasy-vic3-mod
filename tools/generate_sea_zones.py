@@ -14,8 +14,11 @@ bootable-map milestone will turn into ``provinces.png`` sea provinces +
 
 The layer is **not** wired into ``state_labels.png`` (that generator is blocked
 on an unrelated land-boundary precedence collision); it is a standalone,
-decoupled sea layer keyed on the vanilla 3000+ sea-state id band. Naming
-(canon sea groups), impassable flags and adjacencies are a follow-up.
+decoupled sea layer keyed on the vanilla 3000+ sea-state id band. Canon-sea
+naming, zone merges (``config.merges``) and impassable flags
+(``config.impassable_seeds`` and per-merge ``impassable``) all come from the
+hand-authored ``tools/config/sea_zones.json``; adjacencies are still a
+follow-up.
 
 Deterministic: a pure function of the committed mask + the manifested drawn
 source. Regenerate through it after an intentional source/mask change; never
@@ -57,10 +60,13 @@ WRAP_X = map_config.WRAP_X
 #: is reproducible from source alone. The floor exists only to swallow the thin
 #: offcuts the extraction leaves where the drawn line runs just off the mask
 #: coast (and sub-pixel dilation dust) — every offcut is coastline-hugging, not a
-#: hand-drawn open-water zone. Set ``--merge-floor 1`` to keep every region
-#: between the drawn lines (the user's partition verbatim, nothing merged).
+#: hand-drawn open-water zone. 50 sits well below the smallest real hand-drawn
+#: zone seen so far (354px, a river-mouth pocket) and comfortably above the
+#: largest pure line-intersection artifact (16px) — confirmed 2026-08-31 against
+#: the user's naming pass, which flagged every sub-floor fragment as "not real".
+#: Set ``--merge-floor 1`` to keep every region between the drawn lines verbatim.
 LINE_DILATE = 2
-MERGE_FLOOR = 1
+MERGE_FLOOR = 50
 
 
 def log(msg: str, t0: float | None = None) -> None:
@@ -92,6 +98,8 @@ def main(argv: list[str] | None = None) -> int:
                          f"{land.shape[1]}x{land.shape[0]}")
     log(f"land mask {land.shape} land {100 * land.mean():.2f}%", t0)
 
+    config = schema.load_sea_zones(SEA_ZONES_CONFIG, canvas=(CANVAS_W, CANVAS_H))
+
     drawn = sources.load_source_image(SEA_ZONES_SOURCE)  # manifest-guarded RGB
     log("extracting hand-drawn sea zones ...", t0)
     zones = sea_zones.extract(land, drawn, LINE_DILATE, merge_floor, WRAP_X, log=log)
@@ -104,10 +112,11 @@ def main(argv: list[str] | None = None) -> int:
     # the hand-authored seed config, via a per-pixel seed-Voronoi plurality. The
     # index becomes fully self-describing (key / sea_group / display_name), so the
     # loc generator reads it alone and config-to-loc drift is impossible.
-    config = schema.load_sea_zones(SEA_ZONES_CONFIG, canvas=(CANVAS_W, CANVAS_H))
     log(f"naming {n} zones from {len(config.canon_seas)} canon seas "
-        f"({len(config.overrides)} overrides) ...", t0)
+        f"({len(config.overrides)} overrides, {len(config.merges)} merges, "
+        f"{len(config.impassable_seeds)} standalone impassable) ...", t0)
     naming = sea_naming.assign(zones, land, config, WRAP_X, log=log)
+    naming, impassable = sea_naming.apply_naming_overrides(naming, zones, config)
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     cells.write_labels(LABELS_PATH, zones)
@@ -128,6 +137,7 @@ def main(argv: list[str] | None = None) -> int:
                 "id": map_config.SEA_ID_START + (i - 1),
                 "area": int(areas[i]),
                 "coastal": bool(coastal[i]),
+                "impassable": i in impassable,
             }
             for i in range(1, n + 1)
         ],

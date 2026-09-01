@@ -1,5 +1,5 @@
 {
- "note": "Canon Warhammer sea groups for the 154 hand-drawn sea zones (board #2698). Each canon sea is located by guaranteed-interior water SEED PIXELS in provinces.png canvas space (x, y), read off the sea names printed on tools/derived/seas_partition_review.png (the Terraqueous globe with the user's purple zone boundaries). worldgen.sea_naming.assign grows a wrap-aware seed-Voronoi over the water mask and gives each zone the canon sea owning the plurality of its pixels; the per-zone key is STATE_<name>_NN. `overrides` reassign a single mis-assigned zone to a different canon sea, keyed on an interior pixel of THAT zone (never a label id). Authored order is the deterministic canon-index tie-break (a plurality tie goes to the earlier sea) — do not reorder casually. Hand-authored geographic data like tools/config/inland_lakes.json: edit deliberately, then regenerate through generate_sea_zones.py; never infer from a bitmap. No `impassable` field anywhere (2026-08-22 decision: 1800s steamships cross open ocean).",
+ "note": "Canon Warhammer sea groups for the hand-drawn sea zones (board #2698). Each canon sea is located by guaranteed-interior water SEED PIXELS in provinces.png canvas space (x, y), read off the sea names printed on tools/derived/seas_partition_review.png (the Terraqueous globe with the user's purple zone boundaries). worldgen.sea_naming.assign grows a wrap-aware seed-Voronoi over the water mask and gives each zone the canon sea owning the plurality of its pixels; the per-zone key is STATE_<name>_NN. `overrides` reassign a single mis-assigned zone to a different canon sea, keyed on an interior pixel of THAT zone (never a label id). Authored order is the deterministic canon-index tie-break (a plurality tie goes to the earlier sea) — do not reorder casually. Hand-authored geographic data like tools/config/inland_lakes.json: edit deliberately, then regenerate through generate_sea_zones.py; never infer from a bitmap. `merges` fuse several zones into one standalone-named province (its own name, not a canon-sea NN slot) and can flag the result impassable; `impassable_seeds` flags an ordinary zone impassable without renaming or merging it. The 2026-08-22 'no impassable sea province' decision (1800s steamships cross open ocean) stands as the DEFAULT; these are the 2026-08-31 exceptions the user named during the naming pass — a supernatural whirlpool (Maelstrom) and open-water expanses the user wants unsailable for other reasons.",
  "canon_seas": [
   { "name": "SEA_OF_OBLIVION", "display_name": "Sea of Oblivion", "seeds": [[333, 380], [200, 560]], "note": "Far north-west corner, north of Naggaroth." },
   { "name": "FAR_OCEAN", "display_name": "Far Ocean", "seeds": [[750, 2450], [500, 3050], [1400, 2850], [420, 2000], [950, 1550]], "note": "The vast western open ocean; wraps toward the eastern seaboard." },
@@ -25,5 +25,15 @@
   { "name": "SEA_OF_RAGE", "display_name": "Sea of Rage", "seeds": [[7377, 1067], [7877, 680]], "note": "East of Grand Cathay and Nippon; the north-eastern seaboard." },
   { "name": "JADE_SEA", "display_name": "Jade Sea", "seeds": [[7143, 2050], [7500, 2400], [7057, 2722]], "note": "The far-eastern sea by the Lumbria Archipelago and the Isle of Rising Sun." }
  ],
- "overrides": []
+ "overrides": [],
+ "merges": [
+  { "name": "MAELSTROM", "display_name": "Maelstrom", "impassable": true,
+    "seeds": [[890, 618], [889, 676], [993, 1328]],
+    "note": "The three zones the user flagged 'Maelstrom (impassible)' during the 2026-08-31 naming pass, fused into one impassable whirlpool province. All three sit off Naggaroth's north-western coast." }
+ ],
+ "impassable_seeds": [
+  [5886, 2706], [5110, 3615], [3694, 3615], [3205, 2525], [3708, 2379],
+  [3883, 2579], [2919, 1865], [3337, 1287], [2945, 493], [3576, 364], [2244, 1530],
+  [1198, 1560], [1348, 1690]
+ ]
 }

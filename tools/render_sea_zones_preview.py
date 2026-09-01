@@ -193,7 +193,8 @@ def render_named(t0: float) -> int:
 
 def _zone_anchors(sea: np.ndarray, n: int) -> dict[int, tuple[int, int]]:
     """Each zone's centroid snapped to one of its own pixels — a guaranteed-interior
-    ``(x, y)`` anchor for the printed number and for an override seed."""
+    ``(x, y)`` anchor for an override seed (one representative pixel is enough for
+    that; see :func:`_zone_anchors_multi` for the printed numbers)."""
     ys, xs = np.nonzero(sea > 0)
     labs = sea[ys, xs]
     order = np.argsort(labs, kind="stable")
@@ -207,6 +208,49 @@ def _zone_anchors(sea: np.ndarray, n: int) -> dict[int, tuple[int, int]]:
         cx, cy = zx.mean(), zy.mean()
         j = int(np.argmin((zx - cx) ** 2 + (zy - cy) ** 2))
         out[int(lab)] = (int(zx[j]), int(zy[j]))
+    return out
+
+
+def _zone_anchors_multi(sea: np.ndarray, n: int) -> dict[int, list[tuple[int, int]]]:
+    """Every zone's numbered anchor(s) for the review render: one per significant
+    disconnected *visual* fragment (plain, non-wrap 8-connectivity — this is about
+    what a viewer sees on the flat canvas, not the wrap-aware zone topology).
+
+    A zone that spans the wrap seam (``worldgen.cells`` correctly keeps it one
+    zone) shows up as 2+ separate patches on the cut-open map; a single
+    centroid-snapped anchor lands in only one of them — or, if the centroid pulls
+    toward the seam, arguably neither. Found 2026-09-01: three FAR_OCEAN zones
+    each wrapping pole-to-pole with no visible number on either edge. Every
+    fragment at least 2,000px or 5% of the zone's total area (whichever is
+    smaller) gets its own number, so a viewer never has to go hunting.
+    """
+    out: dict[int, list[tuple[int, int]]] = {}
+    for lab in range(1, n + 1):
+        mask = sea == lab
+        total = int(mask.sum())
+        if total == 0:
+            out[lab] = []
+            continue
+        comp, ncomp = ndimage.label(mask, structure=np.ones((3, 3)))
+        floor = min(2000, max(1, int(total * 0.05)))
+        anchors = []
+        sizes = ndimage.sum(mask, comp, range(1, ncomp + 1))
+        for ci in range(1, ncomp + 1):
+            if sizes[ci - 1] < floor:
+                continue
+            cys, cxs = np.nonzero(comp == ci)
+            cx, cy = cxs.mean(), cys.mean()
+            j = int(np.argmin((cxs - cx) ** 2 + (cys - cy) ** 2))
+            anchors.append((int(cxs[j]), int(cys[j])))
+        if not anchors:
+            # every fragment was below the floor (a very scattered sliver) —
+            # fall back to the single largest so the zone still gets a number.
+            biggest = int(np.argmax(sizes)) + 1
+            cys, cxs = np.nonzero(comp == biggest)
+            cx, cy = cxs.mean(), cys.mean()
+            j = int(np.argmin((cxs - cx) ** 2 + (cys - cy) ** 2))
+            anchors = [(int(cxs[j]), int(cys[j]))]
+        out[lab] = anchors
     return out
 
 
@@ -233,22 +277,26 @@ def render_numbered(t0: float) -> int:
     img[ndimage.binary_dilation(_zone_edges(sea, WRAP_X), iterations=1)] = (20, 20, 20)
     img = img.clip(0, 255).astype(np.uint8)
 
-    anchors = _zone_anchors(sea, n)
+    anchors = _zone_anchors(sea, n)  # one seed pixel per zone, for the table
+    anchors_multi = _zone_anchors_multi(sea, n)  # every visible fragment, for the numbers
     pil = Image.fromarray(img, "RGB")
     draw = ImageDraw.Draw(pil)
     font = _load_font(34)
+    n_labels_drawn = 0
     for lab in range(1, n + 1):
-        ax, ay = anchors[lab]
         text = str(lab)
         bbox = draw.textbbox((0, 0), text, font=font)
-        pos = (ax - (bbox[2] - bbox[0]) // 2, ay - (bbox[3] - bbox[1]) // 2)
-        for dx in (-2, 0, 2):
-            for dy in (-2, 0, 2):
-                draw.text((pos[0] + dx, pos[1] + dy), text, font=font, fill=(0, 0, 0))
-        draw.text(pos, text, font=font, fill=(255, 255, 0))
+        for (ax, ay) in anchors_multi[lab]:
+            pos = (ax - (bbox[2] - bbox[0]) // 2, ay - (bbox[3] - bbox[1]) // 2)
+            for dx in (-2, 0, 2):
+                for dy in (-2, 0, 2):
+                    draw.text((pos[0] + dx, pos[1] + dy), text, font=font, fill=(0, 0, 0))
+            draw.text(pos, text, font=font, fill=(255, 255, 0))
+            n_labels_drawn += 1
     img = np.asarray(pil, dtype=np.uint8)
 
-    _write(img, NUMBERED_OUT_PATH, NUMBERED_OUT_HALF_PATH, f"{n} numbered zones")
+    _write(img, NUMBERED_OUT_PATH, NUMBERED_OUT_HALF_PATH,
+          f"{n} numbered zones, {n_labels_drawn} labels drawn")
 
     lines = ["# Zone number -> current canon sea + an interior pixel (for a sea_zones.json",
              "# override: {\"zone_seed\": [x, y], \"canon_sea\": \"<NAME>\"}). Board #2698.",

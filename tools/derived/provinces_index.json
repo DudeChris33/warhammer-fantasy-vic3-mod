@@ -6,8 +6,9 @@
  "source": "terraqueous_globe_reprojected - state_regions.png",
  "sea_source": "sea_zones.png",
  "land_provinces": 5816,
- "sea_provinces": 328,
+ "sea_provinces": 215,
  "impassable_land_provinces": 0,
+ "impassable_sea_provinces": 14,
  "placeholder_land_provinces": 427,
  "land_id_start": 1,
  "sea_id_start": 5817,
@@ -87262,7 +87263,7 @@
    ],
    "hex": "x4FA3E1",
    "id": 5817,
-   "area": 390415,
+   "area": 392431,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87277,7 +87278,7 @@
    ],
    "hex": "xEDDB5A",
    "id": 5818,
-   "area": 773,
+   "area": 80765,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87292,7 +87293,7 @@
    ],
    "hex": "x8C12D3",
    "id": 5819,
-   "area": 248,
+   "area": 85066,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87307,7 +87308,7 @@
    ],
    "hex": "x2A4A4C",
    "id": 5820,
-   "area": 171,
+   "area": 90911,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87322,7 +87323,7 @@
    ],
    "hex": "xC881C5",
    "id": 5821,
-   "area": 13,
+   "area": 114310,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87337,7 +87338,7 @@
    ],
    "hex": "x66B93E",
    "id": 5822,
-   "area": 571,
+   "area": 88375,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87352,9 +87353,9 @@
    ],
    "hex": "x04F0B7",
    "id": 5823,
-   "area": 80759,
-   "coastal": true,
-   "impassable": false,
+   "area": 474443,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -87367,7 +87368,7 @@
    ],
    "hex": "xA32830",
    "id": 5824,
-   "area": 85066,
+   "area": 77842,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87382,9 +87383,9 @@
    ],
    "hex": "x415FA9",
    "id": 5825,
-   "area": 90908,
-   "coastal": true,
-   "impassable": false,
+   "area": 172447,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -87397,7 +87398,7 @@
    ],
    "hex": "xDF9722",
    "id": 5826,
-   "area": 112125,
+   "area": 125517,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87412,7 +87413,7 @@
    ],
    "hex": "x7DCE9B",
    "id": 5827,
-   "area": 975,
+   "area": 46546,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87427,7 +87428,7 @@
    ],
    "hex": "x1C0614",
    "id": 5828,
-   "area": 374,
+   "area": 153674,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87442,8 +87443,8 @@
    ],
    "hex": "xBA3D8D",
    "id": 5829,
-   "area": 836,
-   "coastal": true,
+   "area": 12390,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -87457,7 +87458,7 @@
    ],
    "hex": "x587506",
    "id": 5830,
-   "area": 237,
+   "area": 3899,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87472,7 +87473,7 @@
    ],
    "hex": "xF6AC7F",
    "id": 5831,
-   "area": 88669,
+   "area": 11486,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87487,7 +87488,7 @@
    ],
    "hex": "x94E3F8",
    "id": 5832,
-   "area": 474443,
+   "area": 1875656,
    "coastal": false,
    "impassable": false,
    "placeholder": false
@@ -87502,8 +87503,8 @@
    ],
    "hex": "x331B71",
    "id": 5833,
-   "area": 77842,
-   "coastal": true,
+   "area": 10525,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -87517,8 +87518,8 @@
    ],
    "hex": "xD152EA",
    "id": 5834,
-   "area": 172447,
-   "coastal": false,
+   "area": 79519,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -87532,7 +87533,7 @@
    ],
    "hex": "x6F8A63",
    "id": 5835,
-   "area": 3,
+   "area": 2029,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87547,7 +87548,7 @@
    ],
    "hex": "x0DC1DC",
    "id": 5836,
-   "area": 6,
+   "area": 29549,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87562,7 +87563,7 @@
    ],
    "hex": "xABF955",
    "id": 5837,
-   "area": 125507,
+   "area": 2396,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87577,7 +87578,7 @@
    ],
    "hex": "x4A30CE",
    "id": 5838,
-   "area": 46546,
+   "area": 69698,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87592,7 +87593,7 @@
    ],
    "hex": "xE86847",
    "id": 5839,
-   "area": 19093,
+   "area": 2251,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87607,8 +87608,8 @@
    ],
    "hex": "x869FC0",
    "id": 5840,
-   "area": 12390,
-   "coastal": false,
+   "area": 65323,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -87622,8 +87623,8 @@
    ],
    "hex": "x24D739",
    "id": 5841,
-   "area": 49378,
-   "coastal": false,
+   "area": 20651,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -87637,7 +87638,7 @@
    ],
    "hex": "xC30EB2",
    "id": 5842,
-   "area": 20114,
+   "area": 2604,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87652,7 +87653,7 @@
    ],
    "hex": "x61462B",
    "id": 5843,
-   "area": 3895,
+   "area": 21957,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87667,7 +87668,7 @@
    ],
    "hex": "xFF7DA4",
    "id": 5844,
-   "area": 11482,
+   "area": 39411,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87682,7 +87683,7 @@
    ],
    "hex": "x9DB51D",
    "id": 5845,
-   "area": 22142,
+   "area": 1817,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87697,8 +87698,8 @@
    ],
    "hex": "x3BEC96",
    "id": 5846,
-   "area": 1875656,
-   "coastal": false,
+   "area": 4009,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -87712,9 +87713,9 @@
    ],
    "hex": "xDA240F",
    "id": 5847,
-   "area": 4,
+   "area": 82260,
    "coastal": true,
-   "impassable": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -87727,7 +87728,7 @@
    ],
    "hex": "x785B88",
    "id": 5848,
-   "area": 4,
+   "area": 21001,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87742,8 +87743,8 @@
    ],
    "hex": "x169301",
    "id": 5849,
-   "area": 3,
-   "coastal": true,
+   "area": 6368,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -87757,8 +87758,8 @@
    ],
    "hex": "xB4CA7A",
    "id": 5850,
-   "area": 10525,
-   "coastal": false,
+   "area": 438,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -87772,7 +87773,7 @@
    ],
    "hex": "x5301F3",
    "id": 5851,
-   "area": 79516,
+   "area": 254,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87787,9 +87788,9 @@
    ],
    "hex": "xF1396C",
    "id": 5852,
-   "area": 2029,
-   "coastal": true,
-   "impassable": false,
+   "area": 293791,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -87802,7 +87803,7 @@
    ],
    "hex": "x8F70E5",
    "id": 5853,
-   "area": 3,
+   "area": 1816,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87817,7 +87818,7 @@
    ],
    "hex": "x2DA85E",
    "id": 5854,
-   "area": 29549,
+   "area": 8252,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87832,7 +87833,7 @@
    ],
    "hex": "xCBDFD7",
    "id": 5855,
-   "area": 2396,
+   "area": 2110,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87847,7 +87848,7 @@
    ],
    "hex": "x6A1750",
    "id": 5856,
-   "area": 69698,
+   "area": 141169,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87862,7 +87863,7 @@
    ],
    "hex": "x084EC9",
    "id": 5857,
-   "area": 2251,
+   "area": 981,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87877,7 +87878,7 @@
    ],
    "hex": "xA68642",
    "id": 5858,
-   "area": 65310,
+   "area": 656,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87892,7 +87893,7 @@
    ],
    "hex": "x44BDBB",
    "id": 5859,
-   "area": 42650,
+   "area": 1908,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87907,7 +87908,7 @@
    ],
    "hex": "xE2F534",
    "id": 5860,
-   "area": 20651,
+   "area": 859,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87922,7 +87923,7 @@
    ],
    "hex": "x812CAD",
    "id": 5861,
-   "area": 2604,
+   "area": 730,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87937,7 +87938,7 @@
    ],
    "hex": "x1F6426",
    "id": 5862,
-   "area": 10,
+   "area": 4541,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87952,7 +87953,7 @@
    ],
    "hex": "xBD9B9F",
    "id": 5863,
-   "area": 23430,
+   "area": 1537,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87967,7 +87968,7 @@
    ],
    "hex": "x5BD318",
    "id": 5864,
-   "area": 18404,
+   "area": 990,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87982,7 +87983,7 @@
    ],
    "hex": "xFA0A91",
    "id": 5865,
-   "area": 1817,
+   "area": 75886,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -87997,7 +87998,7 @@
    ],
    "hex": "x98420A",
    "id": 5866,
-   "area": 3,
+   "area": 980,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88012,8 +88013,8 @@
    ],
    "hex": "x367983",
    "id": 5867,
-   "area": 3,
-   "coastal": true,
+   "area": 13962,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -88027,7 +88028,7 @@
    ],
    "hex": "xD4B0FC",
    "id": 5868,
-   "area": 4,
+   "area": 477,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88042,7 +88043,7 @@
    ],
    "hex": "x72E875",
    "id": 5869,
-   "area": 4009,
+   "area": 19552,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88057,7 +88058,7 @@
    ],
    "hex": "x111FEE",
    "id": 5870,
-   "area": 471,
+   "area": 5701,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88072,7 +88073,7 @@
    ],
    "hex": "xAF5767",
    "id": 5871,
-   "area": 20996,
+   "area": 32364,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88087,8 +88088,8 @@
    ],
    "hex": "x4D8EE0",
    "id": 5872,
-   "area": 6368,
-   "coastal": false,
+   "area": 1171,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -88102,7 +88103,7 @@
    ],
    "hex": "xEBC659",
    "id": 5873,
-   "area": 1885,
+   "area": 11085,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88117,7 +88118,7 @@
    ],
    "hex": "x89FDD2",
    "id": 5874,
-   "area": 438,
+   "area": 354,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88132,7 +88133,7 @@
    ],
    "hex": "x28354B",
    "id": 5875,
-   "area": 254,
+   "area": 2370,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88147,8 +88148,8 @@
    ],
    "hex": "xC66CC4",
    "id": 5876,
-   "area": 293791,
-   "coastal": false,
+   "area": 526,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -88162,7 +88163,7 @@
    ],
    "hex": "x64A43D",
    "id": 5877,
-   "area": 1816,
+   "area": 38965,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88177,7 +88178,7 @@
    ],
    "hex": "x02DBB6",
    "id": 5878,
-   "area": 8249,
+   "area": 962,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88192,7 +88193,7 @@
    ],
    "hex": "xA1132F",
    "id": 5879,
-   "area": 3,
+   "area": 17520,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88207,7 +88208,7 @@
    ],
    "hex": "x3F4AA8",
    "id": 5880,
-   "area": 2110,
+   "area": 57031,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88222,7 +88223,7 @@
    ],
    "hex": "xDD8221",
    "id": 5881,
-   "area": 141169,
+   "area": 955,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88237,7 +88238,7 @@
    ],
    "hex": "x7BB99A",
    "id": 5882,
-   "area": 77963,
+   "area": 1749,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88252,7 +88253,7 @@
    ],
    "hex": "x19F113",
    "id": 5883,
-   "area": 1637,
+   "area": 1428,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88267,7 +88268,7 @@
    ],
    "hex": "xB8288C",
    "id": 5884,
-   "area": 2,
+   "area": 33218,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88282,7 +88283,7 @@
    ],
    "hex": "x566005",
    "id": 5885,
-   "area": 1,
+   "area": 18207,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88297,7 +88298,7 @@
    ],
    "hex": "xF4977E",
    "id": 5886,
-   "area": 1908,
+   "area": 21704,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88312,7 +88313,7 @@
    ],
    "hex": "x92CEF7",
    "id": 5887,
-   "area": 859,
+   "area": 617,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88327,7 +88328,7 @@
    ],
    "hex": "x310670",
    "id": 5888,
-   "area": 5,
+   "area": 571,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88342,7 +88343,7 @@
    ],
    "hex": "xCF3DE9",
    "id": 5889,
-   "area": 730,
+   "area": 6256,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88357,7 +88358,7 @@
    ],
    "hex": "x6D7562",
    "id": 5890,
-   "area": 21412,
+   "area": 1498,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88372,7 +88373,7 @@
    ],
    "hex": "x0BACDB",
    "id": 5891,
-   "area": 2,
+   "area": 9457,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88387,7 +88388,7 @@
    ],
    "hex": "xA9E454",
    "id": 5892,
-   "area": 4,
+   "area": 55153,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88402,7 +88403,7 @@
    ],
    "hex": "x481BCD",
    "id": 5893,
-   "area": 4541,
+   "area": 10138,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88417,7 +88418,7 @@
    ],
    "hex": "xE65346",
    "id": 5894,
-   "area": 1537,
+   "area": 26413,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88432,7 +88433,7 @@
    ],
    "hex": "x848ABF",
    "id": 5895,
-   "area": 990,
+   "area": 12463,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88447,7 +88448,7 @@
    ],
    "hex": "x22C238",
    "id": 5896,
-   "area": 75881,
+   "area": 45945,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88462,7 +88463,7 @@
    ],
    "hex": "xC0F9B1",
    "id": 5897,
-   "area": 980,
+   "area": 12150,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88477,9 +88478,9 @@
    ],
    "hex": "x5F312A",
    "id": 5898,
-   "area": 13962,
+   "area": 261723,
    "coastal": false,
-   "impassable": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -88492,7 +88493,7 @@
    ],
    "hex": "xFD68A3",
    "id": 5899,
-   "area": 477,
+   "area": 6735,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88507,7 +88508,7 @@
    ],
    "hex": "x9BA01C",
    "id": 5900,
-   "area": 5,
+   "area": 2503,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88522,7 +88523,7 @@
    ],
    "hex": "x39D795",
    "id": 5901,
-   "area": 19552,
+   "area": 2305,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88537,7 +88538,7 @@
    ],
    "hex": "xD80F0E",
    "id": 5902,
-   "area": 5701,
+   "area": 27413,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88552,7 +88553,7 @@
    ],
    "hex": "x764687",
    "id": 5903,
-   "area": 32364,
+   "area": 27321,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88567,7 +88568,7 @@
    ],
    "hex": "x147E00",
    "id": 5904,
-   "area": 1171,
+   "area": 2257,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88582,8 +88583,8 @@
    ],
    "hex": "xB2B579",
    "id": 5905,
-   "area": 11085,
-   "coastal": true,
+   "area": 33612,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -88597,7 +88598,7 @@
    ],
    "hex": "x50ECF2",
    "id": 5906,
-   "area": 1,
+   "area": 16174,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88612,7 +88613,7 @@
    ],
    "hex": "xEF246B",
    "id": 5907,
-   "area": 354,
+   "area": 27748,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88627,7 +88628,7 @@
    ],
    "hex": "x8D5BE4",
    "id": 5908,
-   "area": 2370,
+   "area": 46440,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88642,7 +88643,7 @@
    ],
    "hex": "x2B935D",
    "id": 5909,
-   "area": 526,
+   "area": 13088,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88657,7 +88658,7 @@
    ],
    "hex": "xC9CAD6",
    "id": 5910,
-   "area": 38961,
+   "area": 10641,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88672,7 +88673,7 @@
    ],
    "hex": "x68024F",
    "id": 5911,
-   "area": 3,
+   "area": 60500,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88687,7 +88688,7 @@
    ],
    "hex": "x0639C8",
    "id": 5912,
-   "area": 962,
+   "area": 52950,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88702,7 +88703,7 @@
    ],
    "hex": "xA47141",
    "id": 5913,
-   "area": 17520,
+   "area": 18466,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88717,7 +88718,7 @@
    ],
    "hex": "x42A8BA",
    "id": 5914,
-   "area": 57030,
+   "area": 27426,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88732,7 +88733,7 @@
    ],
    "hex": "xE0E033",
    "id": 5915,
-   "area": 955,
+   "area": 50396,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88747,7 +88748,7 @@
    ],
    "hex": "x7F17AC",
    "id": 5916,
-   "area": 1,
+   "area": 20426,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88762,7 +88763,7 @@
    ],
    "hex": "x1D4F25",
    "id": 5917,
-   "area": 4,
+   "area": 19411,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88777,7 +88778,7 @@
    ],
    "hex": "xBB869E",
    "id": 5918,
-   "area": 1749,
+   "area": 4037,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88792,9 +88793,9 @@
    ],
    "hex": "x59BE17",
    "id": 5919,
-   "area": 4,
+   "area": 21059,
    "coastal": true,
-   "impassable": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -88807,8 +88808,8 @@
    ],
    "hex": "xF7F590",
    "id": 5920,
-   "area": 4,
-   "coastal": true,
+   "area": 5916,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -88822,8 +88823,8 @@
    ],
    "hex": "x962D09",
    "id": 5921,
-   "area": 1428,
-   "coastal": true,
+   "area": 12636,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -88837,7 +88838,7 @@
    ],
    "hex": "x346482",
    "id": 5922,
-   "area": 2,
+   "area": 28108,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88852,7 +88853,7 @@
    ],
    "hex": "xD29BFB",
    "id": 5923,
-   "area": 2,
+   "area": 28668,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88867,7 +88868,7 @@
    ],
    "hex": "x70D374",
    "id": 5924,
-   "area": 33218,
+   "area": 43069,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88882,7 +88883,7 @@
    ],
    "hex": "x0F0AED",
    "id": 5925,
-   "area": 4,
+   "area": 42693,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88897,9 +88898,9 @@
    ],
    "hex": "xAD4266",
    "id": 5926,
-   "area": 18205,
-   "coastal": true,
-   "impassable": false,
+   "area": 243806,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -88912,7 +88913,7 @@
    ],
    "hex": "x4B79DF",
    "id": 5927,
-   "area": 21700,
+   "area": 18439,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88927,8 +88928,8 @@
    ],
    "hex": "xE9B158",
    "id": 5928,
-   "area": 2,
-   "coastal": true,
+   "area": 931409,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -88942,7 +88943,7 @@
    ],
    "hex": "x87E8D1",
    "id": 5929,
-   "area": 4,
+   "area": 1648,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88957,8 +88958,8 @@
    ],
    "hex": "x26204A",
    "id": 5930,
-   "area": 617,
-   "coastal": true,
+   "area": 273231,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -88972,7 +88973,7 @@
    ],
    "hex": "xC457C3",
    "id": 5931,
-   "area": 571,
+   "area": 3879,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -88987,7 +88988,7 @@
    ],
    "hex": "x628F3C",
    "id": 5932,
-   "area": 6251,
+   "area": 33133,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89002,7 +89003,7 @@
    ],
    "hex": "x00C6B5",
    "id": 5933,
-   "area": 1498,
+   "area": 42092,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89017,7 +89018,7 @@
    ],
    "hex": "x9EFE2E",
    "id": 5934,
-   "area": 9457,
+   "area": 1633,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89032,7 +89033,7 @@
    ],
    "hex": "x3D35A7",
    "id": 5935,
-   "area": 4,
+   "area": 11366,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89047,9 +89048,9 @@
    ],
    "hex": "xDB6D20",
    "id": 5936,
-   "area": 55147,
+   "area": 10374,
    "coastal": true,
-   "impassable": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -89062,7 +89063,7 @@
    ],
    "hex": "x79A499",
    "id": 5937,
-   "area": 10138,
+   "area": 51185,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89077,8 +89078,8 @@
    ],
    "hex": "x17DC12",
    "id": 5938,
-   "area": 4,
-   "coastal": true,
+   "area": 13562,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89092,8 +89093,8 @@
    ],
    "hex": "xB6138B",
    "id": 5939,
-   "area": 26413,
-   "coastal": true,
+   "area": 89781,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89107,8 +89108,8 @@
    ],
    "hex": "x544B04",
    "id": 5940,
-   "area": 12463,
-   "coastal": true,
+   "area": 15293,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89122,8 +89123,8 @@
    ],
    "hex": "xF2827D",
    "id": 5941,
-   "area": 3,
-   "coastal": true,
+   "area": 7902,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89137,7 +89138,7 @@
    ],
    "hex": "x90B9F6",
    "id": 5942,
-   "area": 45945,
+   "area": 29846,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89152,7 +89153,7 @@
    ],
    "hex": "x2EF16F",
    "id": 5943,
-   "area": 12150,
+   "area": 12321,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89167,7 +89168,7 @@
    ],
    "hex": "xCD28E8",
    "id": 5944,
-   "area": 4,
+   "area": 865,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89182,8 +89183,8 @@
    ],
    "hex": "x6B6061",
    "id": 5945,
-   "area": 261723,
-   "coastal": false,
+   "area": 18557,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -89197,7 +89198,7 @@
    ],
    "hex": "x0997DA",
    "id": 5946,
-   "area": 6735,
+   "area": 19189,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89212,7 +89213,7 @@
    ],
    "hex": "xA7CF53",
    "id": 5947,
-   "area": 2501,
+   "area": 59683,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89227,7 +89228,7 @@
    ],
    "hex": "x4606CC",
    "id": 5948,
-   "area": 2305,
+   "area": 396,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89242,7 +89243,7 @@
    ],
    "hex": "xE43E45",
    "id": 5949,
-   "area": 27411,
+   "area": 46358,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89257,8 +89258,8 @@
    ],
    "hex": "x8275BE",
    "id": 5950,
-   "area": 27321,
-   "coastal": true,
+   "area": 14693,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89272,7 +89273,7 @@
    ],
    "hex": "x20AD37",
    "id": 5951,
-   "area": 2257,
+   "area": 7282,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89287,7 +89288,7 @@
    ],
    "hex": "xBEE4B0",
    "id": 5952,
-   "area": 16,
+   "area": 212071,
    "coastal": false,
    "impassable": false,
    "placeholder": false
@@ -89302,8 +89303,8 @@
    ],
    "hex": "x5D1C29",
    "id": 5953,
-   "area": 33596,
-   "coastal": false,
+   "area": 71794,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -89317,7 +89318,7 @@
    ],
    "hex": "xFB53A2",
    "id": 5954,
-   "area": 16174,
+   "area": 38817,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89332,8 +89333,8 @@
    ],
    "hex": "x998B1B",
    "id": 5955,
-   "area": 27748,
-   "coastal": true,
+   "area": 9023,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89347,7 +89348,7 @@
    ],
    "hex": "x37C294",
    "id": 5956,
-   "area": 1,
+   "area": 25599,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89362,7 +89363,7 @@
    ],
    "hex": "xD5FA0D",
    "id": 5957,
-   "area": 5,
+   "area": 14684,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89377,7 +89378,7 @@
    ],
    "hex": "x743186",
    "id": 5958,
-   "area": 46440,
+   "area": 24595,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89392,7 +89393,7 @@
    ],
    "hex": "x1268FF",
    "id": 5959,
-   "area": 1,
+   "area": 38940,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89407,8 +89408,8 @@
    ],
    "hex": "xB0A078",
    "id": 5960,
-   "area": 2,
-   "coastal": true,
+   "area": 6831,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89422,8 +89423,8 @@
    ],
    "hex": "x4ED7F1",
    "id": 5961,
-   "area": 5,
-   "coastal": true,
+   "area": 16220,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89437,7 +89438,7 @@
    ],
    "hex": "xED0F6A",
    "id": 5962,
-   "area": 4,
+   "area": 40247,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89452,7 +89453,7 @@
    ],
    "hex": "x8B46E3",
    "id": 5963,
-   "area": 5,
+   "area": 35516,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89467,7 +89468,7 @@
    ],
    "hex": "x297E5C",
    "id": 5964,
-   "area": 13083,
+   "area": 11444,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89482,7 +89483,7 @@
    ],
    "hex": "xC7B5D5",
    "id": 5965,
-   "area": 10633,
+   "area": 99691,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89497,9 +89498,9 @@
    ],
    "hex": "x65ED4E",
    "id": 5966,
-   "area": 4,
-   "coastal": true,
-   "impassable": false,
+   "area": 543972,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -89512,7 +89513,7 @@
    ],
    "hex": "x0424C7",
    "id": 5967,
-   "area": 60498,
+   "area": 37154,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89527,7 +89528,7 @@
    ],
    "hex": "xA25C40",
    "id": 5968,
-   "area": 2,
+   "area": 1761,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89542,7 +89543,7 @@
    ],
    "hex": "x4093B9",
    "id": 5969,
-   "area": 52946,
+   "area": 17801,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89557,7 +89558,7 @@
    ],
    "hex": "xDECB32",
    "id": 5970,
-   "area": 3,
+   "area": 42009,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89572,8 +89573,8 @@
    ],
    "hex": "x7D02AB",
    "id": 5971,
-   "area": 5,
-   "coastal": true,
+   "area": 11378,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89587,7 +89588,7 @@
    ],
    "hex": "x1B3A24",
    "id": 5972,
-   "area": 3,
+   "area": 61384,
    "coastal": false,
    "impassable": false,
    "placeholder": false
@@ -89602,9 +89603,9 @@
    ],
    "hex": "xB9719D",
    "id": 5973,
-   "area": 5,
+   "area": 92450,
    "coastal": false,
-   "impassable": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -89617,8 +89618,8 @@
    ],
    "hex": "x57A916",
    "id": 5974,
-   "area": 18463,
-   "coastal": true,
+   "area": 49571,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89632,7 +89633,7 @@
    ],
    "hex": "xF5E08F",
    "id": 5975,
-   "area": 27426,
+   "area": 21021,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89647,7 +89648,7 @@
    ],
    "hex": "x941808",
    "id": 5976,
-   "area": 50396,
+   "area": 12420,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89662,7 +89663,7 @@
    ],
    "hex": "x324F81",
    "id": 5977,
-   "area": 2,
+   "area": 24008,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89677,7 +89678,7 @@
    ],
    "hex": "xD086FA",
    "id": 5978,
-   "area": 3,
+   "area": 50125,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89692,7 +89693,7 @@
    ],
    "hex": "x6EBE73",
    "id": 5979,
-   "area": 20424,
+   "area": 59383,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89707,7 +89708,7 @@
    ],
    "hex": "x0CF5EC",
    "id": 5980,
-   "area": 19408,
+   "area": 52433,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89722,7 +89723,7 @@
    ],
    "hex": "xAB2D65",
    "id": 5981,
-   "area": 4037,
+   "area": 24236,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89737,7 +89738,7 @@
    ],
    "hex": "x4964DE",
    "id": 5982,
-   "area": 21056,
+   "area": 36288,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89752,8 +89753,8 @@
    ],
    "hex": "xE79C57",
    "id": 5983,
-   "area": 3,
-   "coastal": true,
+   "area": 125645,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89767,8 +89768,8 @@
    ],
    "hex": "x85D3D0",
    "id": 5984,
-   "area": 5916,
-   "coastal": false,
+   "area": 34786,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -89782,7 +89783,7 @@
    ],
    "hex": "x240B49",
    "id": 5985,
-   "area": 12636,
+   "area": 12671,
    "coastal": false,
    "impassable": false,
    "placeholder": false
@@ -89797,9 +89798,9 @@
    ],
    "hex": "xC242C2",
    "id": 5986,
-   "area": 28105,
-   "coastal": true,
-   "impassable": false,
+   "area": 707160,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -89812,8 +89813,8 @@
    ],
    "hex": "x607A3B",
    "id": 5987,
-   "area": 28666,
-   "coastal": true,
+   "area": 14727,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89827,8 +89828,8 @@
    ],
    "hex": "xFEB1B4",
    "id": 5988,
-   "area": 43069,
-   "coastal": true,
+   "area": 18387,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89842,8 +89843,8 @@
    ],
    "hex": "x9CE92D",
    "id": 5989,
-   "area": 42693,
-   "coastal": true,
+   "area": 16143,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89857,7 +89858,7 @@
    ],
    "hex": "x3B20A6",
    "id": 5990,
-   "area": 243806,
+   "area": 13107,
    "coastal": false,
    "impassable": false,
    "placeholder": false
@@ -89872,8 +89873,8 @@
    ],
    "hex": "xD9581F",
    "id": 5991,
-   "area": 18439,
-   "coastal": true,
+   "area": 14181,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89887,8 +89888,8 @@
    ],
    "hex": "x778F98",
    "id": 5992,
-   "area": 931409,
-   "coastal": false,
+   "area": 1113,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -89902,8 +89903,8 @@
    ],
    "hex": "x15C711",
    "id": 5993,
-   "area": 1648,
-   "coastal": true,
+   "area": 4356118,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89917,7 +89918,7 @@
    ],
    "hex": "xB3FE8A",
    "id": 5994,
-   "area": 3,
+   "area": 47098,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89932,8 +89933,8 @@
    ],
    "hex": "x523603",
    "id": 5995,
-   "area": 273211,
-   "coastal": false,
+   "area": 5230,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -89947,7 +89948,7 @@
    ],
    "hex": "xF06D7C",
    "id": 5996,
-   "area": 3,
+   "area": 35994,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89962,8 +89963,8 @@
    ],
    "hex": "x8EA4F5",
    "id": 5997,
-   "area": 3875,
-   "coastal": true,
+   "area": 9486,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -89977,7 +89978,7 @@
    ],
    "hex": "x2CDC6E",
    "id": 5998,
-   "area": 33133,
+   "area": 35771,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -89992,7 +89993,7 @@
    ],
    "hex": "xCB13E7",
    "id": 5999,
-   "area": 2,
+   "area": 31902,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90007,7 +90008,7 @@
    ],
    "hex": "x694B60",
    "id": 6000,
-   "area": 3,
+   "area": 10727,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90022,9 +90023,9 @@
    ],
    "hex": "x0782D9",
    "id": 6001,
-   "area": 42089,
-   "coastal": true,
-   "impassable": false,
+   "area": 49775,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -90037,7 +90038,7 @@
    ],
    "hex": "xA5BA52",
    "id": 6002,
-   "area": 3,
+   "area": 14538,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90052,7 +90053,7 @@
    ],
    "hex": "x43F1CB",
    "id": 6003,
-   "area": 2,
+   "area": 51585,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90067,8 +90068,8 @@
    ],
    "hex": "xE22944",
    "id": 6004,
-   "area": 1633,
-   "coastal": true,
+   "area": 48781,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90082,7 +90083,7 @@
    ],
    "hex": "x8060BD",
    "id": 6005,
-   "area": 11361,
+   "area": 11842,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90097,7 +90098,7 @@
    ],
    "hex": "x1E9836",
    "id": 6006,
-   "area": 10359,
+   "area": 42823,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90112,7 +90113,7 @@
    ],
    "hex": "xBCCFAF",
    "id": 6007,
-   "area": 51185,
+   "area": 35450,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90127,7 +90128,7 @@
    ],
    "hex": "x5B0728",
    "id": 6008,
-   "area": 13562,
+   "area": 9647,
    "coastal": false,
    "impassable": false,
    "placeholder": false
@@ -90142,7 +90143,7 @@
    ],
    "hex": "xF93EA1",
    "id": 6009,
-   "area": 4,
+   "area": 10524,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90157,8 +90158,8 @@
    ],
    "hex": "x97761A",
    "id": 6010,
-   "area": 3,
-   "coastal": true,
+   "area": 10251,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90172,9 +90173,9 @@
    ],
    "hex": "x35AD93",
    "id": 6011,
-   "area": 89781,
+   "area": 1004407,
    "coastal": false,
-   "impassable": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -90187,7 +90188,7 @@
    ],
    "hex": "xD3E50C",
    "id": 6012,
-   "area": 2,
+   "area": 45121,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90202,8 +90203,8 @@
    ],
    "hex": "x721C85",
    "id": 6013,
-   "area": 15293,
-   "coastal": false,
+   "area": 12106,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -90217,8 +90218,8 @@
    ],
    "hex": "x1053FE",
    "id": 6014,
-   "area": 7902,
-   "coastal": false,
+   "area": 35640,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -90232,8 +90233,8 @@
    ],
    "hex": "xAE8B77",
    "id": 6015,
-   "area": 20,
-   "coastal": false,
+   "area": 36715,
+   "coastal": true,
    "impassable": false,
    "placeholder": false
   },
@@ -90247,7 +90248,7 @@
    ],
    "hex": "x4CC2F0",
    "id": 6016,
-   "area": 29846,
+   "area": 33282,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90262,9 +90263,9 @@
    ],
    "hex": "xEAFA69",
    "id": 6017,
-   "area": 2,
-   "coastal": true,
-   "impassable": false,
+   "area": 1145332,
+   "coastal": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -90277,8 +90278,8 @@
    ],
    "hex": "x8931E2",
    "id": 6018,
-   "area": 12321,
-   "coastal": true,
+   "area": 13590,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90292,8 +90293,8 @@
    ],
    "hex": "x27695B",
    "id": 6019,
-   "area": 865,
-   "coastal": true,
+   "area": 26078,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90307,7 +90308,7 @@
    ],
    "hex": "xC5A0D4",
    "id": 6020,
-   "area": 4,
+   "area": 35066,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90322,7 +90323,7 @@
    ],
    "hex": "x63D84D",
    "id": 6021,
-   "area": 1,
+   "area": 45658,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90337,7 +90338,7 @@
    ],
    "hex": "x020FC6",
    "id": 6022,
-   "area": 18546,
+   "area": 29368,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90352,8 +90353,8 @@
    ],
    "hex": "xA0473F",
    "id": 6023,
-   "area": 4,
-   "coastal": true,
+   "area": 32035,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90367,8 +90368,8 @@
    ],
    "hex": "x3E7EB8",
    "id": 6024,
-   "area": 19189,
-   "coastal": true,
+   "area": 9758,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90382,7 +90383,7 @@
    ],
    "hex": "xDCB631",
    "id": 6025,
-   "area": 3,
+   "area": 45592,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90397,8 +90398,8 @@
    ],
    "hex": "x7AEDAA",
    "id": 6026,
-   "area": 2,
-   "coastal": true,
+   "area": 6282,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90412,7 +90413,7 @@
    ],
    "hex": "x192523",
    "id": 6027,
-   "area": 3,
+   "area": 36130,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90427,8 +90428,8 @@
    ],
    "hex": "xB75C9C",
    "id": 6028,
-   "area": 4,
-   "coastal": true,
+   "area": 38756,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90442,8 +90443,8 @@
    ],
    "hex": "x559415",
    "id": 6029,
-   "area": 1,
-   "coastal": true,
+   "area": 7213,
+   "coastal": false,
    "impassable": false,
    "placeholder": false
   },
@@ -90457,7 +90458,7 @@
    ],
    "hex": "xF3CB8E",
    "id": 6030,
-   "area": 2,
+   "area": 67607,
    "coastal": true,
    "impassable": false,
    "placeholder": false
@@ -90472,1701 +90473,6 @@
    ],
    "hex": "x920307",
    "id": 6031,
-   "area": 4,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6032,
-   "kind": "sea",
-   "color": [
-    48,
-    58,
-    128
-   ],
-   "hex": "x303A80",
-   "id": 6032,
-   "area": 59683,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6033,
-   "kind": "sea",
-   "color": [
-    206,
-    113,
-    249
-   ],
-   "hex": "xCE71F9",
-   "id": 6033,
-   "area": 396,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6034,
-   "kind": "sea",
-   "color": [
-    108,
-    169,
-    114
-   ],
-   "hex": "x6CA972",
-   "id": 6034,
-   "area": 2,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6035,
-   "kind": "sea",
-   "color": [
-    10,
-    224,
-    235
-   ],
-   "hex": "x0AE0EB",
-   "id": 6035,
-   "area": 46356,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6036,
-   "kind": "sea",
-   "color": [
-    169,
-    24,
-    100
-   ],
-   "hex": "xA91864",
-   "id": 6036,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6037,
-   "kind": "sea",
-   "color": [
-    71,
-    79,
-    221
-   ],
-   "hex": "x474FDD",
-   "id": 6037,
-   "area": 14693,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6038,
-   "kind": "sea",
-   "color": [
-    229,
-    135,
-    86
-   ],
-   "hex": "xE58756",
-   "id": 6038,
-   "area": 7282,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6039,
-   "kind": "sea",
-   "color": [
-    131,
-    190,
-    207
-   ],
-   "hex": "x83BECF",
-   "id": 6039,
-   "area": 212071,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6040,
-   "kind": "sea",
-   "color": [
-    33,
-    246,
-    72
-   ],
-   "hex": "x21F648",
-   "id": 6040,
-   "area": 71788,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6041,
-   "kind": "sea",
-   "color": [
-    192,
-    45,
-    193
-   ],
-   "hex": "xC02DC1",
-   "id": 6041,
-   "area": 38814,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6042,
-   "kind": "sea",
-   "color": [
-    94,
-    101,
-    58
-   ],
-   "hex": "x5E653A",
-   "id": 6042,
-   "area": 9023,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6043,
-   "kind": "sea",
-   "color": [
-    252,
-    156,
-    179
-   ],
-   "hex": "xFC9CB3",
-   "id": 6043,
-   "area": 25599,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6044,
-   "kind": "sea",
-   "color": [
-    154,
-    212,
-    44
-   ],
-   "hex": "x9AD42C",
-   "id": 6044,
-   "area": 14684,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6045,
-   "kind": "sea",
-   "color": [
-    57,
-    11,
-    165
-   ],
-   "hex": "x390BA5",
-   "id": 6045,
-   "area": 24592,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6046,
-   "kind": "sea",
-   "color": [
-    215,
-    67,
-    30
-   ],
-   "hex": "xD7431E",
-   "id": 6046,
-   "area": 38937,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6047,
-   "kind": "sea",
-   "color": [
-    117,
-    122,
-    151
-   ],
-   "hex": "x757A97",
-   "id": 6047,
-   "area": 2,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6048,
-   "kind": "sea",
-   "color": [
-    19,
-    178,
-    16
-   ],
-   "hex": "x13B210",
-   "id": 6048,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6049,
-   "kind": "sea",
-   "color": [
-    177,
-    233,
-    137
-   ],
-   "hex": "xB1E989",
-   "id": 6049,
-   "area": 6831,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6050,
-   "kind": "sea",
-   "color": [
-    80,
-    33,
-    2
-   ],
-   "hex": "x502102",
-   "id": 6050,
-   "area": 16220,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6051,
-   "kind": "sea",
-   "color": [
-    238,
-    88,
-    123
-   ],
-   "hex": "xEE587B",
-   "id": 6051,
-   "area": 40247,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6052,
-   "kind": "sea",
-   "color": [
-    140,
-    143,
-    244
-   ],
-   "hex": "x8C8FF4",
-   "id": 6052,
-   "area": 35516,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6053,
-   "kind": "sea",
-   "color": [
-    42,
-    199,
-    109
-   ],
-   "hex": "x2AC76D",
-   "id": 6053,
-   "area": 11444,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6054,
-   "kind": "sea",
-   "color": [
-    200,
-    254,
-    230
-   ],
-   "hex": "xC8FEE6",
-   "id": 6054,
-   "area": 99691,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6055,
-   "kind": "sea",
-   "color": [
-    103,
-    54,
-    95
-   ],
-   "hex": "x67365F",
-   "id": 6055,
-   "area": 543972,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6056,
-   "kind": "sea",
-   "color": [
-    5,
-    109,
-    216
-   ],
-   "hex": "x056DD8",
-   "id": 6056,
-   "area": 37154,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6057,
-   "kind": "sea",
-   "color": [
-    163,
-    165,
-    81
-   ],
-   "hex": "xA3A551",
-   "id": 6057,
-   "area": 1761,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6058,
-   "kind": "sea",
-   "color": [
-    65,
-    220,
-    202
-   ],
-   "hex": "x41DCCA",
-   "id": 6058,
-   "area": 17801,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6059,
-   "kind": "sea",
-   "color": [
-    224,
-    20,
-    67
-   ],
-   "hex": "xE01443",
-   "id": 6059,
-   "area": 42009,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6060,
-   "kind": "sea",
-   "color": [
-    126,
-    75,
-    188
-   ],
-   "hex": "x7E4BBC",
-   "id": 6060,
-   "area": 11378,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6061,
-   "kind": "sea",
-   "color": [
-    28,
-    131,
-    53
-   ],
-   "hex": "x1C8335",
-   "id": 6061,
-   "area": 61384,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6062,
-   "kind": "sea",
-   "color": [
-    186,
-    186,
-    174
-   ],
-   "hex": "xBABAAE",
-   "id": 6062,
-   "area": 92450,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6063,
-   "kind": "sea",
-   "color": [
-    88,
-    242,
-    39
-   ],
-   "hex": "x58F227",
-   "id": 6063,
-   "area": 49571,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6064,
-   "kind": "sea",
-   "color": [
-    247,
-    41,
-    160
-   ],
-   "hex": "xF729A0",
-   "id": 6064,
-   "area": 21021,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6065,
-   "kind": "sea",
-   "color": [
-    149,
-    97,
-    25
-   ],
-   "hex": "x956119",
-   "id": 6065,
-   "area": 12416,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6066,
-   "kind": "sea",
-   "color": [
-    51,
-    152,
-    146
-   ],
-   "hex": "x339892",
-   "id": 6066,
-   "area": 4,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6067,
-   "kind": "sea",
-   "color": [
-    209,
-    208,
-    11
-   ],
-   "hex": "xD1D00B",
-   "id": 6067,
-   "area": 24008,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6068,
-   "kind": "sea",
-   "color": [
-    112,
-    7,
-    132
-   ],
-   "hex": "x700784",
-   "id": 6068,
-   "area": 50125,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6069,
-   "kind": "sea",
-   "color": [
-    14,
-    62,
-    253
-   ],
-   "hex": "x0E3EFD",
-   "id": 6069,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6070,
-   "kind": "sea",
-   "color": [
-    172,
-    118,
-    118
-   ],
-   "hex": "xAC7676",
-   "id": 6070,
-   "area": 59383,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6071,
-   "kind": "sea",
-   "color": [
-    74,
-    173,
-    239
-   ],
-   "hex": "x4AADEF",
-   "id": 6071,
-   "area": 52433,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6072,
-   "kind": "sea",
-   "color": [
-    232,
-    229,
-    104
-   ],
-   "hex": "xE8E568",
-   "id": 6072,
-   "area": 24236,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6073,
-   "kind": "sea",
-   "color": [
-    135,
-    28,
-    225
-   ],
-   "hex": "x871CE1",
-   "id": 6073,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6074,
-   "kind": "sea",
-   "color": [
-    37,
-    84,
-    90
-   ],
-   "hex": "x25545A",
-   "id": 6074,
-   "area": 36283,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6075,
-   "kind": "sea",
-   "color": [
-    195,
-    139,
-    211
-   ],
-   "hex": "xC38BD3",
-   "id": 6075,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6076,
-   "kind": "sea",
-   "color": [
-    97,
-    195,
-    76
-   ],
-   "hex": "x61C34C",
-   "id": 6076,
-   "area": 125645,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6077,
-   "kind": "sea",
-   "color": [
-    255,
-    250,
-    197
-   ],
-   "hex": "xFFFAC5",
-   "id": 6077,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6078,
-   "kind": "sea",
-   "color": [
-    158,
-    50,
-    62
-   ],
-   "hex": "x9E323E",
-   "id": 6078,
-   "area": 34786,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6079,
-   "kind": "sea",
-   "color": [
-    60,
-    105,
-    183
-   ],
-   "hex": "x3C69B7",
-   "id": 6079,
-   "area": 12671,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6080,
-   "kind": "sea",
-   "color": [
-    218,
-    161,
-    48
-   ],
-   "hex": "xDAA130",
-   "id": 6080,
-   "area": 707160,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6081,
-   "kind": "sea",
-   "color": [
-    120,
-    216,
-    169
-   ],
-   "hex": "x78D8A9",
-   "id": 6081,
-   "area": 14727,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6082,
-   "kind": "sea",
-   "color": [
-    23,
-    16,
-    34
-   ],
-   "hex": "x171022",
-   "id": 6082,
-   "area": 18387,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6083,
-   "kind": "sea",
-   "color": [
-    181,
-    71,
-    155
-   ],
-   "hex": "xB5479B",
-   "id": 6083,
-   "area": 16143,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6084,
-   "kind": "sea",
-   "color": [
-    83,
-    127,
-    20
-   ],
-   "hex": "x537F14",
-   "id": 6084,
-   "area": 13107,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6085,
-   "kind": "sea",
-   "color": [
-    241,
-    182,
-    141
-   ],
-   "hex": "xF1B68D",
-   "id": 6085,
-   "area": 14181,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6086,
-   "kind": "sea",
-   "color": [
-    143,
-    238,
-    6
-   ],
-   "hex": "x8FEE06",
-   "id": 6086,
-   "area": 1113,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6087,
-   "kind": "sea",
-   "color": [
-    46,
-    37,
-    127
-   ],
-   "hex": "x2E257F",
-   "id": 6087,
-   "area": 4356118,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6088,
-   "kind": "sea",
-   "color": [
-    204,
-    92,
-    248
-   ],
-   "hex": "xCC5CF8",
-   "id": 6088,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6089,
-   "kind": "sea",
-   "color": [
-    106,
-    148,
-    113
-   ],
-   "hex": "x6A9471",
-   "id": 6089,
-   "area": 47095,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6090,
-   "kind": "sea",
-   "color": [
-    8,
-    203,
-    234
-   ],
-   "hex": "x08CBEA",
-   "id": 6090,
-   "area": 5230,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6091,
-   "kind": "sea",
-   "color": [
-    167,
-    3,
-    99
-   ],
-   "hex": "xA70363",
-   "id": 6091,
-   "area": 35991,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6092,
-   "kind": "sea",
-   "color": [
-    69,
-    58,
-    220
-   ],
-   "hex": "x453ADC",
-   "id": 6092,
-   "area": 9486,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6093,
-   "kind": "sea",
-   "color": [
-    227,
-    114,
-    85
-   ],
-   "hex": "xE37255",
-   "id": 6093,
-   "area": 35771,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6094,
-   "kind": "sea",
-   "color": [
-    129,
-    169,
-    206
-   ],
-   "hex": "x81A9CE",
-   "id": 6094,
-   "area": 31902,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6095,
-   "kind": "sea",
-   "color": [
-    31,
-    225,
-    71
-   ],
-   "hex": "x1FE147",
-   "id": 6095,
-   "area": 4,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6096,
-   "kind": "sea",
-   "color": [
-    190,
-    24,
-    192
-   ],
-   "hex": "xBE18C0",
-   "id": 6096,
-   "area": 10720,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6097,
-   "kind": "sea",
-   "color": [
-    92,
-    80,
-    57
-   ],
-   "hex": "x5C5039",
-   "id": 6097,
-   "area": 49775,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6098,
-   "kind": "sea",
-   "color": [
-    250,
-    135,
-    178
-   ],
-   "hex": "xFA87B2",
-   "id": 6098,
-   "area": 14538,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6099,
-   "kind": "sea",
-   "color": [
-    152,
-    191,
-    43
-   ],
-   "hex": "x98BF2B",
-   "id": 6099,
-   "area": 51576,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6100,
-   "kind": "sea",
-   "color": [
-    54,
-    246,
-    164
-   ],
-   "hex": "x36F6A4",
-   "id": 6100,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6101,
-   "kind": "sea",
-   "color": [
-    213,
-    46,
-    29
-   ],
-   "hex": "xD52E1D",
-   "id": 6101,
-   "area": 48781,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6102,
-   "kind": "sea",
-   "color": [
-    115,
-    101,
-    150
-   ],
-   "hex": "x736596",
-   "id": 6102,
-   "area": 11842,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6103,
-   "kind": "sea",
-   "color": [
-    17,
-    157,
-    15
-   ],
-   "hex": "x119D0F",
-   "id": 6103,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6104,
-   "kind": "sea",
-   "color": [
-    175,
-    212,
-    136
-   ],
-   "hex": "xAFD488",
-   "id": 6104,
-   "area": 5,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6105,
-   "kind": "sea",
-   "color": [
-    78,
-    12,
-    1
-   ],
-   "hex": "x4E0C01",
-   "id": 6105,
-   "area": 42823,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6106,
-   "kind": "sea",
-   "color": [
-    236,
-    67,
-    122
-   ],
-   "hex": "xEC437A",
-   "id": 6106,
-   "area": 35444,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6107,
-   "kind": "sea",
-   "color": [
-    138,
-    122,
-    243
-   ],
-   "hex": "x8A7AF3",
-   "id": 6107,
-   "area": 1,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6108,
-   "kind": "sea",
-   "color": [
-    40,
-    178,
-    108
-   ],
-   "hex": "x28B26C",
-   "id": 6108,
-   "area": 4,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6109,
-   "kind": "sea",
-   "color": [
-    198,
-    233,
-    229
-   ],
-   "hex": "xC6E9E5",
-   "id": 6109,
-   "area": 1,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6110,
-   "kind": "sea",
-   "color": [
-    101,
-    33,
-    94
-   ],
-   "hex": "x65215E",
-   "id": 6110,
-   "area": 9647,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6111,
-   "kind": "sea",
-   "color": [
-    3,
-    88,
-    215
-   ],
-   "hex": "x0358D7",
-   "id": 6111,
-   "area": 10512,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6112,
-   "kind": "sea",
-   "color": [
-    161,
-    144,
-    80
-   ],
-   "hex": "xA19050",
-   "id": 6112,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6113,
-   "kind": "sea",
-   "color": [
-    63,
-    199,
-    201
-   ],
-   "hex": "x3FC7C9",
-   "id": 6113,
-   "area": 10251,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6114,
-   "kind": "sea",
-   "color": [
-    221,
-    255,
-    66
-   ],
-   "hex": "xDDFF42",
-   "id": 6114,
-   "area": 1004407,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6115,
-   "kind": "sea",
-   "color": [
-    124,
-    54,
-    187
-   ],
-   "hex": "x7C36BB",
-   "id": 6115,
-   "area": 45121,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6116,
-   "kind": "sea",
-   "color": [
-    26,
-    110,
-    52
-   ],
-   "hex": "x1A6E34",
-   "id": 6116,
-   "area": 4,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6117,
-   "kind": "sea",
-   "color": [
-    184,
-    165,
-    173
-   ],
-   "hex": "xB8A5AD",
-   "id": 6117,
-   "area": 12106,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6118,
-   "kind": "sea",
-   "color": [
-    86,
-    221,
-    38
-   ],
-   "hex": "x56DD26",
-   "id": 6118,
-   "area": 35640,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6119,
-   "kind": "sea",
-   "color": [
-    245,
-    20,
-    159
-   ],
-   "hex": "xF5149F",
-   "id": 6119,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6120,
-   "kind": "sea",
-   "color": [
-    147,
-    76,
-    24
-   ],
-   "hex": "x934C18",
-   "id": 6120,
-   "area": 36711,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6121,
-   "kind": "sea",
-   "color": [
-    49,
-    131,
-    145
-   ],
-   "hex": "x318391",
-   "id": 6121,
-   "area": 4,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6122,
-   "kind": "sea",
-   "color": [
-    207,
-    187,
-    10
-   ],
-   "hex": "xCFBB0A",
-   "id": 6122,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6123,
-   "kind": "sea",
-   "color": [
-    109,
-    242,
-    131
-   ],
-   "hex": "x6DF283",
-   "id": 6123,
-   "area": 33282,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6124,
-   "kind": "sea",
-   "color": [
-    12,
-    41,
-    252
-   ],
-   "hex": "x0C29FC",
-   "id": 6124,
-   "area": 1145332,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6125,
-   "kind": "sea",
-   "color": [
-    170,
-    97,
-    117
-   ],
-   "hex": "xAA6175",
-   "id": 6125,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6126,
-   "kind": "sea",
-   "color": [
-    72,
-    152,
-    238
-   ],
-   "hex": "x4898EE",
-   "id": 6126,
-   "area": 1,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6127,
-   "kind": "sea",
-   "color": [
-    230,
-    208,
-    103
-   ],
-   "hex": "xE6D067",
-   "id": 6127,
-   "area": 13590,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6128,
-   "kind": "sea",
-   "color": [
-    133,
-    7,
-    224
-   ],
-   "hex": "x8507E0",
-   "id": 6128,
-   "area": 26078,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6129,
-   "kind": "sea",
-   "color": [
-    35,
-    63,
-    89
-   ],
-   "hex": "x233F59",
-   "id": 6129,
-   "area": 35066,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6130,
-   "kind": "sea",
-   "color": [
-    193,
-    118,
-    210
-   ],
-   "hex": "xC176D2",
-   "id": 6130,
-   "area": 45658,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6131,
-   "kind": "sea",
-   "color": [
-    95,
-    174,
-    75
-   ],
-   "hex": "x5FAE4B",
-   "id": 6131,
-   "area": 29368,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6132,
-   "kind": "sea",
-   "color": [
-    253,
-    229,
-    196
-   ],
-   "hex": "xFDE5C4",
-   "id": 6132,
-   "area": 32035,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6133,
-   "kind": "sea",
-   "color": [
-    156,
-    29,
-    61
-   ],
-   "hex": "x9C1D3D",
-   "id": 6133,
-   "area": 9758,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6134,
-   "kind": "sea",
-   "color": [
-    58,
-    84,
-    182
-   ],
-   "hex": "x3A54B6",
-   "id": 6134,
-   "area": 45586,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6135,
-   "kind": "sea",
-   "color": [
-    216,
-    140,
-    47
-   ],
-   "hex": "xD88C2F",
-   "id": 6135,
-   "area": 6282,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6136,
-   "kind": "sea",
-   "color": [
-    118,
-    195,
-    168
-   ],
-   "hex": "x76C3A8",
-   "id": 6136,
-   "area": 2,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6137,
-   "kind": "sea",
-   "color": [
-    20,
-    251,
-    33
-   ],
-   "hex": "x14FB21",
-   "id": 6137,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6138,
-   "kind": "sea",
-   "color": [
-    179,
-    50,
-    154
-   ],
-   "hex": "xB3329A",
-   "id": 6138,
-   "area": 2,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6139,
-   "kind": "sea",
-   "color": [
-    81,
-    106,
-    19
-   ],
-   "hex": "x516A13",
-   "id": 6139,
-   "area": 3,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6140,
-   "kind": "sea",
-   "color": [
-    239,
-    161,
-    140
-   ],
-   "hex": "xEFA18C",
-   "id": 6140,
-   "area": 36130,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6141,
-   "kind": "sea",
-   "color": [
-    141,
-    217,
-    5
-   ],
-   "hex": "x8DD905",
-   "id": 6141,
-   "area": 38756,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6142,
-   "kind": "sea",
-   "color": [
-    44,
-    16,
-    126
-   ],
-   "hex": "x2C107E",
-   "id": 6142,
-   "area": 7213,
-   "coastal": false,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6143,
-   "kind": "sea",
-   "color": [
-    202,
-    71,
-    247
-   ],
-   "hex": "xCA47F7",
-   "id": 6143,
-   "area": 67607,
-   "coastal": true,
-   "impassable": false,
-   "placeholder": false
-  },
-  {
-   "label": 6144,
-   "kind": "sea",
-   "color": [
-    104,
-    127,
-    112
-   ],
-   "hex": "x687F70",
-   "id": 6144,
    "area": 58899,
    "coastal": true,
    "impassable": false,

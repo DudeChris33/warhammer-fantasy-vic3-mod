@@ -89,8 +89,17 @@ def extract(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     # zone in two pieces is not one naval zone, so split them — the same
     # connectivity repair the land side runs — before the offcut merge.
     zones = cells.split_disconnected(zones, wrap_x)
-    # Drop stray slivers (coastal-trace offcuts, accidental marks).
-    zones = cells.merge_small(zones, merge_floor, wrap_x)
+    # The hard edge barrier above (necessarily) orphans a sliver of the border row
+    # wherever land reaches nearly to the canvas edge: split_disconnected correctly
+    # severs that 1px-tall seam-artifact from the real zone below it, but with a
+    # low merge_floor it then survives as its own fake "zone" (2026-08-31: several
+    # hundred-px slivers along row 0, none of them anything the user drew). These
+    # are never real regardless of size, so they get a floor of their own — well
+    # above the largest one observed — while everywhere else keeps merge_floor.
+    border_floor = np.zeros(zones.shape, dtype=np.int32)
+    border_floor[0, :] = 2000
+    border_floor[-1, :] = 2000
+    zones = cells.merge_small(zones, merge_floor, wrap_x, floor_map=border_floor)
     zones = cells.renumber(zones)
     if int((zones == 0).sum()) != int(land.sum()):
         raise cells.CellError(

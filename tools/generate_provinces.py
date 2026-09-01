@@ -52,6 +52,7 @@ REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 SEA_LABELS_PATH = DERIVED_DIR / "sea_zones.png"
+SEA_ZONES_INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
@@ -131,6 +132,17 @@ def main(argv: list[str] | None = None) -> int:
     n_sea = int(sea_lab.max())
     log(f"{n_land} land provinces + {n_sea} sea provinces", t0)
 
+    if not SEA_ZONES_INDEX_PATH.is_file():
+        raise SystemExit(f"{SEA_ZONES_INDEX_PATH} not found — run tools/generate_sea_zones.py first")
+    sea_zones_index = json.loads(SEA_ZONES_INDEX_PATH.read_text(encoding="utf-8"))
+    sea_impassable = {int(c["label"]): bool(c.get("impassable", False))
+                      for c in sea_zones_index["cells"]}
+    if set(sea_impassable) != set(range(1, n_sea + 1)):
+        raise SystemExit(
+            f"{SEA_ZONES_INDEX_PATH.name} cells don't match {SEA_LABELS_PATH.name}'s "
+            f"{n_sea} labels 1..{n_sea} — regenerate sea zones first"
+        )
+
     # Cross-consistency: the committed sea layer must tile exactly this mask's
     # water, and the land cut exactly its land. A stale sea/mask mismatch is a
     # hard failure — regenerate sea_zones.png — not a silently wrong bitmap.
@@ -209,7 +221,7 @@ def main(argv: list[str] | None = None) -> int:
             "id": sea_id_start + (s - 1),  # == lab, continues after the land band
             "area": int(areas[lab]),
             "coastal": bool(sea_coastal[s]) if s < len(sea_coastal) else False,
-            "impassable": False,  # sea provinces are navigable, never impassable
+            "impassable": sea_impassable[s],  # from sea_zones_index.json (config-driven)
             "placeholder": False,  # schema symmetry with land entries
         })
 
@@ -220,6 +232,7 @@ def main(argv: list[str] | None = None) -> int:
         "land_provinces": n_land,
         "sea_provinces": n_sea,
         "impassable_land_provinces": 0,  # nothing is impassable — every landmass boots
+        "impassable_sea_provinces": sum(sea_impassable.values()),  # from sea_zones.json config
         "placeholder_land_provinces": n_placeholder,  # out-of-scope land kept whole
         "land_id_start": land_id_start,
         "sea_id_start": sea_id_start,

@@ -522,11 +522,55 @@ class SeaZoneOverride:
 
 
 @dataclass(frozen=True)
+class SeaZoneMerge:
+    """Fuse several drawn zones into one named province, bypassing canon-sea
+    Voronoi naming entirely (its own ``name``/``display_name``, not a group NN).
+
+    ``seeds`` are guaranteed-interior pixels of the zones to fuse — at least two,
+    since a "merge" of one zone is just an override. ``impassable`` marks the
+    resulting single province unsailable (2026-08-31 exception to the
+    2026-08-22 "no impassable sea province" decision: a supernatural whirlpool,
+    not open ocean real-world ships would cross).
+    """
+
+    name: str
+    display_name: str
+    seeds: tuple[tuple[int, int], ...]
+    impassable: bool
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "SeaZoneMerge":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        if not all(c.isupper() or c == "_" or c.isdigit() for c in name) or not name[0].isalpha():
+            raise SchemaError(
+                f"{ctx}.name: must be uppercase letters/digits/underscore and start with a "
+                f"letter (so STATE_{name} is a legal key), got '{name}'"
+            )
+        ctx = f"{ctx}({name})"
+        display_name = _as_str(_require(d, "display_name", ctx), f"{ctx}.display_name")
+        if not display_name:
+            raise SchemaError(f"{ctx}.display_name: must be a non-empty string")
+        seeds = _as_seed_list(_require(d, "seeds", ctx), f"{ctx}.seeds", canvas)
+        if len(seeds) < 2:
+            raise SchemaError(f"{ctx}.seeds: a merge needs at least 2 zones, got {len(seeds)}")
+        impassable = bool(d.get("impassable", False))
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(name=name, display_name=display_name, seeds=seeds,
+                    impassable=impassable, note=note)
+
+
+@dataclass(frozen=True)
 class SeaZoneConfig:
     """The whole ``tools/config/sea_zones.json`` — canon seas + overrides."""
 
     canon_seas: tuple[CanonSea, ...]
     overrides: tuple[SeaZoneOverride, ...]
+    merges: tuple[SeaZoneMerge, ...] = ()
+    impassable_seeds: tuple[tuple[int, int], ...] = ()
 
 
 def _as_seed_list(value, ctx: str, canvas: tuple[int, int] | None = None
@@ -549,6 +593,15 @@ def _as_seed_list(value, ctx: str, canvas: tuple[int, int] | None = None
                 raise SchemaError(f"{ctx}[{i}]: ({sx}, {sy}) is outside the canvas {cw}x{ch}")
         out.append((sx, sy))
     return tuple(out)
+
+
+def _as_seed_list_or_empty(value, ctx: str, canvas: tuple[int, int] | None = None
+                           ) -> tuple[tuple[int, int], ...]:
+    """Like :func:`_as_seed_list`, but ``[]``/absent is valid (no impassable seeds
+    declared) rather than an error."""
+    if isinstance(value, list) and not value:
+        return ()
+    return _as_seed_list(value, ctx, canvas)
 
 
 def load_sea_zones(path: Path, canvas: tuple[int, int] | None = None) -> SeaZoneConfig:
@@ -595,7 +648,41 @@ def load_sea_zones(path: Path, canvas: tuple[int, int] | None = None) -> SeaZone
             raise SchemaError(
                 f"{ctx}.overrides[{i}].canon_sea: '{o.canon_sea}' is not a declared canon sea"
             )
-    return SeaZoneConfig(canon_seas=tuple(seas), overrides=tuple(overrides))
+
+    merges_raw = data.get("merges", [])
+    if not isinstance(merges_raw, list):
+        raise SchemaError(f"{ctx}.merges: expected a list, got {type(merges_raw).__name__}")
+    merges = [SeaZoneMerge.from_dict(m, f"{ctx}.merges[{i}]", canvas)
+              for i, m in enumerate(merges_raw)]
+    merge_names = [m.name for m in merges]
+    dupe_merge_names = {n for n in merge_names if merge_names.count(n) > 1}
+    if dupe_merge_names:
+        raise SchemaError(f"{ctx}: duplicate merge names {sorted(dupe_merge_names)}")
+    name_collisions = declared & set(merge_names)
+    if name_collisions:
+        raise SchemaError(
+            f"{ctx}: merge name(s) {sorted(name_collisions)} collide with a declared canon sea"
+        )
+    for m in merges:
+        for seed in m.seeds:
+            if seed in seen_seeds:
+                raise SchemaError(
+                    f"{ctx}: merge '{m.name}' seed {list(seed)} is already claimed by "
+                    f"canon sea '{seen_seeds[seed]}' — seeds must be unique across the file"
+                )
+            seen_seeds[seed] = f"merge:{m.name}"
+
+    impassable_raw = data.get("impassable_seeds", [])
+    impassable_seeds = _as_seed_list_or_empty(impassable_raw, f"{ctx}.impassable_seeds", canvas)
+    for seed in impassable_seeds:
+        if seed in seen_seeds and not seen_seeds[seed].startswith("merge:"):
+            raise SchemaError(
+                f"{ctx}.impassable_seeds: {list(seed)} is also a canon-sea seed "
+                f"('{seen_seeds[seed]}') — pick a different interior pixel"
+            )
+
+    return SeaZoneConfig(canon_seas=tuple(seas), overrides=tuple(overrides),
+                          merges=tuple(merges), impassable_seeds=impassable_seeds)
 
 
 # ---------------------------------------------------------------------------

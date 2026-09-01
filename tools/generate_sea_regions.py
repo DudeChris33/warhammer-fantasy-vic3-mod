@@ -23,9 +23,15 @@ Writes (all deterministic — pure functions of the two committed indices):
 
 * ``localization/english/map/wh_seas_l_english.yml`` — the canon sea loc (BOM,
   ``l_english:`` header, one ``KEY:0 "Display"`` per zone). Unchanged behaviour.
-* ``map_data/state_regions/99_seas.txt`` — one passable single-province
-  ``STATE_* { id provinces }`` block per zone (no ``impassable`` — 2026-08-22
-  decision). Colours from ``provinces.png``, ids/keys from the canon index.
+* ``map_data/state_regions/99_seas.txt`` — one ``STATE_* { id provinces }``
+  block per zone, passable by default (2026-08-22 decision: 1800s steamships
+  cross open ocean). Cells sharing a ``key`` (a ``schema.SeaZoneMerge``, e.g.
+  the Maelstrom) become one multi-province state instead — merging their
+  *pixels* into one province would be disconnected and Vic3 rejects that, so
+  each keeps its own province colour and the block lists them all, with
+  ``impassable = { ... }`` added when the group is flagged impassable
+  (2026-08-31 exception). Colours from ``provinces.png``, ids/keys from the
+  canon index.
 * ``map_data/default.map`` — in-place block-replace of only the ``sea_starts``
   body with the 201 sea colours; every other key is left byte-for-byte untouched.
 * ``common/strategic_regions/water_strategic_regions.txt`` — one ``states``-only
@@ -126,27 +132,61 @@ def _join_colors(zone_cells: list[dict], prov_index: dict) -> dict[int, raster.C
 # Renderers
 # ---------------------------------------------------------------------------
 
+def _group_by_key(cells: list[dict]) -> list[list[dict]]:
+    """Cells sharing a ``key`` are one Vic3 *state* with several provinces — a
+    :class:`schema.SeaZoneMerge` (2026-08-31: e.g. the three separate Maelstrom
+    water bodies) gives its members an identical key for exactly this reason,
+    since fusing their pixels into one province would be disconnected and Vic3
+    rejects that. Grouped in ascending-label order within the group, groups
+    themselves ordered by their lowest member label (both for reproducibility)."""
+    groups: dict[str, list[dict]] = {}
+    for c in cells:
+        groups.setdefault(c["key"], []).append(c)
+    ordered = sorted(groups.values(), key=lambda g: min(m["label"] for m in g))
+    return [sorted(g, key=lambda c: c["label"]) for g in ordered]
+
+
 def _render_loc(cells: list[dict]) -> str:
-    """The committed sea loc: one ``KEY:0 "Display"`` per zone, canon (no marker)."""
+    """The committed sea loc: one ``KEY:0 "Display"`` per *state* (cells sharing
+    a key are one merged state — see :func:`_group_by_key` — and get one line,
+    or the loc carries a duplicate key)."""
     lines = ["l_english:"]
+    seen: dict[str, str] = {}
     for c in sorted(cells, key=lambda c: c["key"]):
-        lines.append(f' {c["key"]}:0 "{c["display_name"]}"')
+        seen.setdefault(c["key"], c["display_name"])
+    for key in sorted(seen):
+        lines.append(f' {key}:0 "{seen[key]}"')
     return "\n".join(lines) + "\n"
 
 
-def _render_sea_state(key: str, state_id: int, color: raster.Color) -> str:
-    """One passable single-province sea-zone block (no ``impassable``, unquoted colour)."""
-    return (
-        f"{key} = {{\n"
-        f"{INDENT}id = {state_id}\n"
-        f"{INDENT}provinces = {{ {raster.color_to_hex(color)} }}\n"
-        "}"
-    )
+def _render_sea_state(key: str, state_id: int, colors: list[raster.Color],
+                      impassable: bool) -> str:
+    """One sea-zone block: passable by default, or every listed province
+    impassable if any member of the group is (2026-08-31 exception to the
+    2026-08-22 "no impassable sea province" decision — a merged group is
+    impassable as a whole, not province-by-province)."""
+    hexes = [raster.color_to_hex(c) for c in colors]
+    lines = [
+        f"{key} = {{",
+        f"{INDENT}id = {state_id}",
+        f"{INDENT}provinces = {{ {' '.join(hexes)} }}",
+    ]
+    if impassable:
+        lines.append(f"{INDENT}impassable = {{ {' '.join(hexes)} }}")
+    lines.append("}")
+    return "\n".join(lines)
 
 
 def _render_99_seas(cells: list[dict], colors: dict[int, raster.Color]) -> str:
-    blocks = [_render_sea_state(c["key"], c["id"], colors[c["label"]])
-              for c in sorted(cells, key=lambda c: c["label"])]
+    blocks = [
+        _render_sea_state(
+            group[0]["key"],
+            min(c["id"] for c in group),
+            [colors[c["label"]] for c in group],
+            any(c.get("impassable", False) for c in group),
+        )
+        for group in _group_by_key(cells)
+    ]
     return "\n\n".join(blocks) + "\n"
 
 
@@ -155,15 +195,15 @@ def _render_water_strategic_regions(cells: list[dict]) -> str:
 
     Vanilla ``water_strategic_regions.txt`` blocks are minimal (``states`` only,
     no ``capital_province`` / ``map_color``) and load, so this override matches
-    that shape. Every sea state lands in exactly one region — its group.
+    that shape. Every sea state lands in exactly one region — its group. A
+    merged state (several cells sharing a key) contributes its key only once.
     """
-    groups: dict[str, list[dict]] = {}
+    groups: dict[str, list[str]] = {}
     for c in cells:
-        groups.setdefault(c["sea_group"], []).append(c)
+        groups.setdefault(c["sea_group"], []).append(c["key"])
     blocks = []
     for group in sorted(groups):
-        members = sorted(groups[group], key=lambda c: c["label"])
-        keys = " ".join(m["key"] for m in members)
+        keys = " ".join(sorted(set(groups[group])))
         blocks.append(
             f"region_{group.lower()} = {{\n"
             f"{INDENT}states = {{ {keys} }}\n"
@@ -256,7 +296,9 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- 2. 99_seas.txt --------------------------------------------------
     _write_bytes(SEAS_TXT_PATH, _render_99_seas(cells, colors), bom=True)
-    print(f"wrote {SEAS_TXT_PATH.relative_to(MOD_ROOT)}  ({len(cells)} states)")
+    n_states = len(_group_by_key(cells))
+    print(f"wrote {SEAS_TXT_PATH.relative_to(MOD_ROOT)}  "
+          f"({n_states} states, {len(cells)} provinces)")
 
     # --- 3. default.map sea_starts (in-place block replace) --------------
     dm_text = DEFAULT_MAP_PATH.read_text(encoding="utf-8")
