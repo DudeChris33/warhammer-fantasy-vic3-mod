@@ -1425,7 +1425,6 @@ movement_is_liberal = {
 			is_political_movement_type = movement_labor
 			is_political_movement_type = movement_positivist
 			is_political_movement_type = movement_anti_slavery
-			is_political_movement_type = movement_utilitarian
 			is_political_movement_type = movement_modernizer
 		}
     }
@@ -1443,9 +1442,6 @@ movement_is_conservative = {
     OR = {
         is_political_movement_type = movement_royalist_constitutional
         is_political_movement_type = movement_royalist_absolutist
-        is_political_movement_type = movement_orleanist
-        is_political_movement_type = movement_legitimist
-        is_political_movement_type = movement_bonapartist
         is_political_movement_type = movement_reactionary
         is_political_movement_type = movement_corporatist
         is_political_movement_type = movement_fascist
@@ -1458,6 +1454,32 @@ movement_is_conservative = {
 # Restored separately: originally defined in vanilla's DLC-story files (deleted
 # wholesale elsewhere in this folder) but are themselves fully generic mechanics
 # needed by other restored files.
+country_has_voting_franchise = {
+	custom_tooltip = {
+		text = is_democratic_tt
+		OR = {
+			modifier:country_voting_power_base_add > 0
+			modifier:country_voting_power_from_literacy_add > 0
+			modifier:country_voting_power_wealth_threshold_add > 0
+			modifier:country_academics_voting_power_add > 0
+			modifier:country_aristocrats_voting_power_add > 0
+			modifier:country_bureaucrats_voting_power_add > 0
+			modifier:country_capitalists_voting_power_add > 0
+			modifier:country_clergymen_voting_power_add > 0
+			modifier:country_clerks_voting_power_add > 0
+			modifier:country_engineers_voting_power_add > 0
+			modifier:country_farmers_voting_power_add > 0
+			modifier:country_laborers_voting_power_add > 0
+			modifier:country_machinists_voting_power_add > 0
+			modifier:country_officers_voting_power_add > 0
+			modifier:country_peasants_voting_power_add > 0
+			modifier:country_shopkeepers_voting_power_add > 0
+			modifier:country_slaves_voting_power_add > 0
+			modifier:country_soldiers_voting_power_add > 0
+		}
+	}
+}
+
 country_has_monarchy_law = {
 	OR = {
 		has_law = law_type:law_monarchy
