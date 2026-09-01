@@ -1124,18 +1124,6 @@ movement_cultural_minority = {
 		if = {
 			limit = {
 				owner = {
-					has_modifier = modifier_polish_organic_statute
-				}
-			}
-			add = {
-				desc = "modifier_polish_organic_statute"
-				value = 0.15
-			}
-		}
-
-		if = {
-			limit = {
-				owner = {
 					any_neighbouring_state = {
 						owner = {
 							NOT = { THIS = ROOT.owner }

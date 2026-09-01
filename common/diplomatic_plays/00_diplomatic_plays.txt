@@ -341,7 +341,6 @@ dp_make_tributary = {
 
 	possible = {
 		aggressive_diplomatic_plays_permitted = yes
-		NOT = { scope:target_country = { has_modifier = modifier_ryukyu_rivalry_secured_neutrality } }
 	}
 
 	ai_acceptance_max = 90
@@ -360,7 +359,6 @@ dp_make_dominion = {
 
 	possible = {
 		aggressive_diplomatic_plays_permitted = yes
-		NOT = { scope:target_country = { has_modifier = modifier_ryukyu_rivalry_secured_neutrality } }
 	}
 
 	ai_acceptance_max = 90
@@ -379,7 +377,6 @@ dp_make_protectorate = {
 
 	possible = {
 		aggressive_diplomatic_plays_permitted = yes
-		NOT = { scope:target_country = { has_modifier = modifier_ryukyu_rivalry_secured_neutrality } }
 	}
 
 	ai_acceptance_max = 90
