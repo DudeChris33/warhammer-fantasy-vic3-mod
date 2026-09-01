@@ -85,6 +85,18 @@ Most `common/*` and top-level content folders still contain only `.gitkeep`. Aut
 
   First run in this repo needs a `.claude/maestro.json` (`{"workspace", "board"}`)
   — the maestro skills prompt to create it if it's missing.
+- **Memory is cross-device via maestro knowledge.** This project is worked from
+  multiple machines. Claude Code's own memory (`~/.claude/projects/.../memory/`,
+  per user/feedback/project/reference — see the memory-system instructions in the
+  system prompt) lives on one machine only and does not follow the repo. Whenever
+  you save one of those memories, also call the maestro MCP's `add_knowledge`
+  (project id in `.claude/maestro.json`) with the same content, so it is visible
+  from every device. Map memory `type` to knowledge `kind`: `feedback` → `rule`,
+  `project` → `decision` (or `pattern`/`reference` when that fits the content
+  better), `reference` → `reference`, `user` → `rule`. Before trusting a
+  cross-device fact, prefer `search_knowledge` (workspace/project-wide) over the
+  local memory files, since the local files may be stale or absent on the current
+  machine.
 - **Sub-agents** in `.claude/agents/`:
   - Spawned by `/maestro-build`, `/maestro-auto` and `/maestro-vibe` after a build:
     - `docs-updater` — update docs from diff
