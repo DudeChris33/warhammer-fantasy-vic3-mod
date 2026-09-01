@@ -50,7 +50,13 @@ from worldgen import cells
 #: anti-aliasing. Disjoint from the sea-zone purple band
 #: (:data:`worldgen.sea_zones._PURPLE_RED` = (60, 195)): magenta's red channel is
 #: pinned high, purple's is mid — 0 overlapping px in the real source.
-_MAGENTA = {"r": 195, "g": 80, "b": 190}
+#: The 2026-08-31 state_regions.png re-export split this into two near-identical
+#: shades — pure magenta (255,0,255) and a second (255,0,127) — an artifact of
+#: how the coastline and interior-border GIMP layers flattened, not a meaningful
+#: distinction (confirmed against the source: only these two colours occupy the
+#: r>195,g<80 band, one drawing both coastline and interior borders together).
+#: The blue floor is lowered to catch both.
+_MAGENTA = {"r": 195, "g": 80, "b": 100}
 
 #: A magenta pixel counts toward the drawn zone only if it sits at least this many
 #: px from any coast — the drawn source paints the *coastline* magenta too, and

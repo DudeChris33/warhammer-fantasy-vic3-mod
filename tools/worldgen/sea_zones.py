@@ -61,6 +61,19 @@ def extract(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     if log:
         log(f"  purple line {int(line.sum()):,} px, in-water barrier {int(barrier.sum()):,} px")
 
+    # The coastline mask leaves the canvas's top and bottom rows entirely water
+    # (a permanent 1px seam — the Miller crop never reaches a real pole, so there's
+    # no coastline pixel to close it there). Left open, that seam silently connects
+    # every bay touching either edge to every other one clear across the map's
+    # width, so a hand-drawn divider near one edge can fail to split anything even
+    # though the flood-fill and barrier detection are both working correctly
+    # (2026-08-31: a Norsca headland's line stayed one zone this way). Treat both
+    # edge rows as a hard boundary — no zone may connect through them.
+    edge_barrier = np.zeros_like(barrier)
+    edge_barrier[0, :] = True
+    edge_barrier[-1, :] = True
+    barrier = barrier | (edge_barrier & water)
+
     # Connected components of the water minus the in-water barrier (wrap-aware).
     free = water & ~barrier
     comp = cells.components(free.astype(np.int32), wrap_x)
