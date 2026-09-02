@@ -1,12 +1,15 @@
-Sea zone naming worksheet v6 (216 zones)
-Answers carried forward from sea_zone_naming_worksheet_v5.txt (214 zones,
-current committed tools/derived/sea_zones.png) by per-old-zone pixel-footprint
-plurality, onto the regen from the edited
-"terraqueous_globe_reprojected - sea_zones.png" (216 zones).
+Sea zone naming worksheet (217 zones)
+Answers carried forward from the previous 216-zone pass by single-anchor-pixel
+remap (each old zone's guaranteed-interior anchor pixel, read off the committed
+tools/derived/seas_numbered_index.txt before it was regenerated, looked up in the
+current tools/derived/sea_zones.png) -- NOT full pixel-footprint plurality like the
+214->216 pass, because the 216-zone bitmap itself was never committed/snapshotted
+before the source was edited again to 217 zones. Spot-check names near any boundary
+that moved.
 MAELSTROM = the impassable whirlpool (one zone, already handled).
 LAKE = an inland lake wrongly caught as a sea zone (left as a sea zone for now, per your note).
 IMPASSABLE = one of the other zones flagged impassable -- still needs its own name.
-[CONFLICT: ...] = two or more different v5 answers plurality-mapped to this same new zone;
+[CONFLICT: ...] = two or more different prior answers mapped to this same new zone;
 pick one (or write a new consolidated name) and retype (see notes below).
 
   1. [SEA_OF_RAGE] Western Sea of Oblivion
@@ -141,89 +144,90 @@ pick one (or write a new consolidated name) and retype (see notes below).
 130. [SEA_OF_SQUALLS] Gulf of Lustria
 131. [SEA_OF_WEIRD_WAVES] ____________________
 132. [SEA_OF_SERPENTS] Scorpion Coast
-133. [SEA_OF_WEIRD_WAVES] ____________________
-134. [JADE_SEA] Lumbria-Nippon Channel Placeholder
-135. [SEA_OF_WEIRD_WAVES] ____________________
-136. [SEA_OF_SERPENTS] Tarantula Coast
-137. [JADE_SEA] Isle of Rising Sun Bypass
-138. [GREAT_OCEAN] ____________________
-139. [SOUTHERN_SEA] Gulf of Medes
-140. [SEA_OF_FEAR] ____________________
-141. [JADE_SEA] ____________________
-142. [GREAT_OCEAN] Estalian Passage Placeholder
-143. [SEA_OF_WEIRD_WAVES] Ind Southern Coast Placeholder
-144. [GREAT_OCEAN] Araby Coast Placeholder
-145. [SEA_OF_SERPENTS] Lustria Northern Bay Placeholder
-146. [JADE_SEA] Lumbria Archipelago
-147. [JADE_SEA] Devourer-Nippon Channel Placeholder
-148. [GREAT_OCEAN] Northern Great Ocean [IMPASSABLE]
-149. [SEA_OF_FEAR] Meeting of Sun and Stars Placeholder
-150. [SEA_OF_SQUALLS] ____________________
-151. [GREAT_OCEAN] ____________________
-152. [GREAT_OCEAN] Vampire Coast
-153. [SEA_OF_WEIRD_WAVES] Western Sea of Weird Waves
-154. [SEA_OF_WEIRD_WAVES] Eastern Sea of Weird Waves
-155. [SEA_OF_SQUALLS] ____________________
+133. [SEA_OF_SQUALLS] Sea of Squalls
+134. [SEA_OF_WEIRD_WAVES] ____________________
+135. [JADE_SEA] Lumbria-Nippon Channel Placeholder
+136. [SEA_OF_WEIRD_WAVES] ____________________
+137. [SEA_OF_SERPENTS] Tarantula Coast
+138. [JADE_SEA] Isle of Rising Sun Bypass
+139. [GREAT_OCEAN] ____________________
+140. [SOUTHERN_SEA] Gulf of Medes
+141. [SEA_OF_FEAR] ____________________
+142. [JADE_SEA] ____________________
+143. [GREAT_OCEAN] Estalian Passage Placeholder
+144. [SEA_OF_WEIRD_WAVES] Ind Southern Coast Placeholder
+145. [GREAT_OCEAN] Araby Coast Placeholder
+146. [SEA_OF_SERPENTS] Lustria Northern Bay Placeholder
+147. [JADE_SEA] Lumbria Archipelago
+148. [JADE_SEA] Devourer-Nippon Channel Placeholder
+149. [GREAT_OCEAN] Northern Great Ocean [IMPASSABLE]
+150. [SEA_OF_FEAR] Meeting of Sun and Stars Placeholder
+151. [SEA_OF_SQUALLS] ____________________
+152. [GREAT_OCEAN] ____________________
+153. [GREAT_OCEAN] Vampire Coast
+154. [SEA_OF_WEIRD_WAVES] Western Sea of Weird Waves
+155. [SEA_OF_WEIRD_WAVES] Eastern Sea of Weird Waves
 156. [SEA_OF_SQUALLS] ____________________
-157. [JADE_SEA] Devourer-Lumbria Channel Placeholder
-158. [JADE_SEA] Devourer Islands
-159. [JADE_SEA] ____________________
-160. [SEA_OF_FEAR] ____________________
-161. [SEA_OF_WEIRD_WAVES] ____________________
-162. [GREAT_OCEAN] ____________________
-163. [SEA_OF_FEAR] ____________________
+157. [SEA_OF_SQUALLS] ____________________
+158. [JADE_SEA] Devourer-Lumbria Channel Placeholder
+159. [JADE_SEA] Devourer Islands
+160. [JADE_SEA] ____________________
+161. [SEA_OF_FEAR] ____________________
+162. [SEA_OF_WEIRD_WAVES] ____________________
+163. [GREAT_OCEAN] ____________________
 164. [SEA_OF_FEAR] ____________________
-165. [FAR_OCEAN] Central Far Ocean Passage
+165. [SEA_OF_FEAR] ____________________
 166. [FAR_OCEAN] Central Far Ocean Passage
 167. [FAR_OCEAN] Central Far Ocean Passage
-168. [SEA_OF_SQUALLS] Central Far Ocean Passage
-169. [OCEAN_OF_DREAD] Sun Island Southern Coast Placeholder
-170. [SEA_OF_SQUALLS] ____________________
-171. [OCEAN_OF_DREAD] Ocean of Dread [IMPASSABLE]
-172. [FAR_OCEAN] Southern Far Ocean [IMPASSABLE]
-173. [JADE_SEA] ____________________
-174. [GREAT_OCEAN] ____________________
-175. [GREAT_OCEAN] Central Great Ocean Passage
-176. [JADE_SEA] ____________________
-177. [GREAT_OCEAN] Northern Mangrove Coast
-178. [GREAT_OCEAN] ____________________
-179. [FAR_OCEAN] ____________________
-180. [GREAT_OCEAN] Central Great Ocean Passage
-181. [GREAT_OCEAN] Central Great Ocean [IMPASSABLE]
-182. [GREAT_OCEAN] Churning Gulf
-183. [FAR_OCEAN] ____________________
-184. [GREAT_OCEAN] Central Great Ocean Passage
-185. [JADE_SEA] Mo Farah Chanel
-186. [GREAT_OCEAN] Isles of Doom
-187. [OCEAN_OF_DREAD] ____________________
+168. [FAR_OCEAN] Central Far Ocean Passage
+169. [SEA_OF_SQUALLS] Central Far Ocean Passage
+170. [OCEAN_OF_DREAD] Sun Island Southern Coast Placeholder
+171. [SEA_OF_SQUALLS] ____________________
+172. [OCEAN_OF_DREAD] Ocean of Dread [IMPASSABLE]
+173. [FAR_OCEAN] Southern Far Ocean [IMPASSABLE]
+174. [JADE_SEA] ____________________
+175. [GREAT_OCEAN] ____________________
+176. [GREAT_OCEAN] Central Great Ocean Passage
+177. [JADE_SEA] ____________________
+178. [GREAT_OCEAN] Northern Mangrove Coast
+179. [GREAT_OCEAN] ____________________
+180. [FAR_OCEAN] ____________________
+181. [GREAT_OCEAN] Central Great Ocean Passage
+182. [GREAT_OCEAN] Central Great Ocean [IMPASSABLE]
+183. [GREAT_OCEAN] Churning Gulf
+184. [FAR_OCEAN] ____________________
+185. [GREAT_OCEAN] Central Great Ocean Passage
+186. [JADE_SEA] Mo Farah Chanel
+187. [GREAT_OCEAN] Isles of Doom
 188. [OCEAN_OF_DREAD] ____________________
-189. [JADE_SEA] ____________________
-190. [OCEAN_OF_DREAD] ____________________
-191. [FAR_OCEAN] ____________________
-192. [OCEAN_OF_DREAD] Western Gates of Calith
-193. [OCEAN_OF_DREAD] Tor Elasor
-194. [FAR_OCEAN] ____________________
-195. [GREAT_OCEAN] Southern Mangrove Coast
-196. [JADE_SEA] ____________________
-197. [JADE_SEA] Eastern Gates of Calith
-198. [GREAT_OCEAN] ____________________
+189. [OCEAN_OF_DREAD] ____________________
+190. [JADE_SEA] ____________________
+191. [OCEAN_OF_DREAD] ____________________
+192. [FAR_OCEAN] ____________________
+193. [OCEAN_OF_DREAD] Western Gates of Calith
+194. [OCEAN_OF_DREAD] Tor Elasor
+195. [FAR_OCEAN] ____________________
+196. [GREAT_OCEAN] Southern Mangrove Coast
+197. [JADE_SEA] ____________________
+198. [JADE_SEA] Eastern Gates of Calith
 199. [GREAT_OCEAN] ____________________
-200. [GREAT_OCEAN] Isle of Dusk Bypass
-201. [JADE_SEA] ____________________
-202. [GREAT_OCEAN] ____________________
-203. [GREAT_OCEAN] Guano Rocks Bypass
-204. [GREAT_OCEAN] ____________________
-205. [GREAT_OCEAN] Southern Great Ocean Passage
-206. [GREAT_OCEAN] Southern Great Ocean [IMPASSABLE]
-207. [GREAT_OCEAN] Southern Great Ocean Passage
-208. [OCEAN_OF_DREAD] Isle of Dawn Bypass
-209. [GREAT_OCEAN] Southern Great Ocean Passage
-210. [OCEAN_OF_DREAD] ____________________
-211. [JADE_SEA] ____________________
-212. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+200. [GREAT_OCEAN] ____________________
+201. [GREAT_OCEAN] Isle of Dusk Bypass
+202. [JADE_SEA] ____________________
+203. [GREAT_OCEAN] ____________________
+204. [GREAT_OCEAN] Guano Rocks Bypass
+205. [GREAT_OCEAN] ____________________
+206. [GREAT_OCEAN] Southern Great Ocean Passage
+207. [GREAT_OCEAN] Southern Great Ocean [IMPASSABLE]
+208. [GREAT_OCEAN] Southern Great Ocean Passage
+209. [OCEAN_OF_DREAD] Isle of Dawn Bypass
+210. [GREAT_OCEAN] Southern Great Ocean Passage
+211. [OCEAN_OF_DREAD] ____________________
+212. [JADE_SEA] ____________________
 213. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
-214. [OCEAN_OF_DREAD] Southern Ocean of Dread [IMPASSABLE]
-215. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+214. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+215. [OCEAN_OF_DREAD] Southern Ocean of Dread [IMPASSABLE]
 216. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+217. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
 
--- 141 names carried forward, 0 conflicts, 75 still blank (1 of those flagged IMPASSABLE) --
+-- 159 names carried forward, 0 conflicts, 58 still blank (0 of those flagged IMPASSABLE) --
