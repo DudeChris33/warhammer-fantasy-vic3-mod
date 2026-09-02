@@ -1,0 +1,229 @@
+Sea zone naming worksheet v6 (216 zones)
+Answers carried forward from sea_zone_naming_worksheet_v5.txt (214 zones,
+current committed tools/derived/sea_zones.png) by per-old-zone pixel-footprint
+plurality, onto the regen from the edited
+"terraqueous_globe_reprojected - sea_zones.png" (216 zones).
+MAELSTROM = the impassable whirlpool (one zone, already handled).
+LAKE = an inland lake wrongly caught as a sea zone (left as a sea zone for now, per your note).
+IMPASSABLE = one of the other zones flagged impassable -- still needs its own name.
+[CONFLICT: ...] = two or more different v5 answers plurality-mapped to this same new zone;
+pick one (or write a new consolidated name) and retype (see notes below).
+
+  1. [SEA_OF_RAGE] Western Sea of Oblivion
+  2. [SEA_OF_CHILL] Shard Coast
+  3. [SEA_OF_CHAOS] Sea of Chaos [IMPASSABLE]
+  4. [SEA_OF_CHILL] Sea of Chill
+  5. [FROZEN_SEA] Frozen Sea
+  6. [SEA_OF_CHAOS] Kraken Sea
+  7. [SEA_OF_OBLIVION] Eastern Sea of Oblivion
+  8. [SEA_OF_OBLIVION] Ironfrost Bay
+  9. [SEA_OF_MALICE] Sea of Malice
+ 10. [SEA_OF_CHAOS] Gloomwrack Strait
+ 11. [SEA_OF_MALICE] The Underway
+ 12. [SEA_OF_MALICE] Gulf of Naggarond
+ 13. [SEA_OF_OBLIVION] Northern Far Ocean [IMPASSABLE]
+ 14. [SEA_OF_CHILL] Karond Kar Bypass
+ 15. [SEA_OF_CHILL] Forbidding Coast
+ 16. [FROZEN_SEA] Drakefjord Bay
+ 17. [SEA_OF_CLAWS] Gulf of Kislev
+ 18. [SEA_OF_CLAWS] Sea of Blades
+ 19. [SEA_OF_CHAOS] Coast of Albion
+ 20. [FROZEN_SEA] Bay of Uzkulak
+ 21. [SEA_OF_RAGE] ____________________
+ 22. [SEA_OF_CLAWS] Sea of Claws
+ 23. [SEA_OF_MALICE] Cold Water Lakes
+ 24. [SEA_OF_OBLIVION] Near Iron Coast Placeholder
+ 25. [SEA_OF_OBLIVION] Far Iron Coast Placeholder
+ 26. [SEA_OF_CLAWS] River Lynsk
+ 27. [SEA_OF_MALICE] LAKE
+ 28. [MAELSTROM] The Maelstrom [IMPASSABLE]
+ 29. [SEA_OF_CLAWS] Coast of Lyonesse
+ 30. [FROZEN_SEA] LAKE
+ 31. [FROZEN_SEA] LAKE
+ 32. [SEA_OF_MIST] Eastern Albion Channel
+ 33. [FROZEN_SEA] Upper River Ruin
+ 34. [SEA_OF_MALICE] ____________________
+ 35. [SEA_OF_CLAWS] Manaanspoort Sea
+ 36. [SEA_OF_FEUDS] Sea of Feuds
+ 37. [SEA_OF_CLAWS] Urskoy River
+ 38. [SEA_OF_MIST] Western Albion Channel
+ 39. [SEA_OF_CLAWS] Upper Talabec River
+ 40. [SEA_OF_MALICE] LAKE
+ 41. [SEA_OF_CLAWS] Lower Reik River
+ 42. [SEA_OF_CLAWS] Lower Talabec River
+ 43. [SEA_OF_WRATH] ____________________
+ 44. [SEA_OF_CLAWS] Lower River Grismerie
+ 45. [BLACK_GULF] Upper River Grismerie
+ 46. [SEA_OF_MIST] Northern Shifting Isles
+ 47. [FROZEN_SEA] LAKE
+ 48. [SEA_OF_CLAWS] Middle Reik River
+ 49. [SEA_OF_MIST] Gulf of Bidouze
+ 50. [LIZARD_SEA] ____________________
+ 51. [SEA_OF_FEUDS] Coast of Nagarythe
+ 52. [SEA_OF_CLAWS] Stir River
+ 53. [FAR_OCEAN] Northern Boiling Sea
+ 54. [SEA_OF_CLAWS] Wissenland Estuary
+ 55. [BITTER_SEA] Middle River Ruin
+ 56. [SEA_OF_MALICE] LAKE
+ 57. [SEA_OF_FEUDS] Clawed Coast
+ 58. [SEA_OF_CLAWS] Aver River
+ 59. [SEA_OF_MIST] Coast of Estalia
+ 60. [SEA_OF_RAGE] Sea of Rage
+ 61. [BLACK_GULF] Upper Reik River
+ 62. [SEA_OF_CLAWS] LAKE
+ 63. [SEA_OF_OBLIVION] Upper Far Ocean Passage
+ 64. [SEA_OF_OBLIVION] Upper Far Ocean Passage
+ 65. [SEA_OF_RAGE] Upper Far Ocean Passage
+ 66. [BLACK_GULF] River Brienne
+ 67. [FAR_OCEAN] ____________________
+ 68. [SEA_OF_WRATH] ____________________
+ 69. [FAR_OCEAN] Northern Far Ocean [IMPASSABLE]
+ 70. [SEA_OF_MIST] Sea of Mist [IMPASSABLE]
+ 71. [FAR_OCEAN] Southern Boiling Sea
+ 72. [BLACK_GULF] River of Echoes
+ 73. [BLACK_GULF] River Limnalla
+ 74. [SOUTHERN_SEA] Abasko Coast
+ 75. [BLACK_GULF] Gulf of Pearls
+ 76. [SOUTHERN_SEA] Bay of Quietude
+ 77. [SEA_OF_SERPENTS] Bleak Coast
+ 78. [SEA_OF_WRATH] ____________________
+ 79. [SEA_OF_FEUDS] Sunken Lands
+ 80. [SOUTHERN_SEA] Tilean Sea
+ 81. [SEA_OF_RAGE] ____________________
+ 82. [BLACK_GULF] Black Gulf
+ 83. [FAR_OCEAN] Witch Sea
+ 84. [SEA_OF_SQUALLS] ____________________
+ 85. [BLACK_GULF] Lagoon of Tears
+ 86. [SEA_OF_SERPENTS] Sea of Serpents [IMPASSABLE]
+ 87. [SEA_OF_FEUDS] Sea of Dusk
+ 88. [SEA_OF_WRATH] ____________________
+ 89. [BITTER_SEA] Lower River Ruin
+ 90. [SOUTHERN_SEA] South Sea
+ 91. [FAR_OCEAN] ____________________
+ 92. [SEA_OF_FEUDS] Sea of Dreams
+ 93. [CORSAIR_CHANNEL] Southern Shifting Isles
+ 94. [SOUTHERN_SEA] Pirates' Current
+ 95. [FAR_OCEAN] Beast Isle Pass Placeholder
+ 96. [LIZARD_SEA] Lizard Sea
+ 97. [SOUTHERN_SEA] Charnel Deeps
+ 98. [SEA_OF_WRATH] Sea of Wrath
+ 99. [FAR_OCEAN] Ashen Coast
+100. [CORSAIR_CHANNEL] ____________________
+101. [SOUTHERN_SEA] Pirate Coast
+102. [BITTER_SEA] Eastern Bitter Sea
+103. [SEA_OF_SERPENTS] Coast of Caledor
+104. [BITTER_SEA] Sour Sea
+105. [FAR_OCEAN] The Broken Lands [IMPASSABLE]
+106. [BITTER_SEA] Western Bitter Sea
+107. [FAR_OCEAN] ____________________
+108. [SEA_OF_SERPENTS] ____________________
+109. [SEA_OF_SERPENTS] Straits of Lothern
+110. [CORSAIR_CHANNEL] Sorcerers Islands
+111. [SOUTHERN_SEA] Great Mortis River
+112. [SEA_OF_FEAR] Sea of Fear
+113. [FAR_OCEAN] ____________________
+114. [JADE_SEA] ____________________
+115. [JADE_SEA] ____________________
+116. [CORSAIR_CHANNEL] Corsair Channel
+117. [BLACK_GULF] Upper Mortis River
+118. [SEA_OF_SQUALLS] Near Sulpheret Coast
+119. [SEA_OF_SQUALLS] Sulpheret Islands [IMPASSABLE]
+120. [LIZARD_SEA] ____________________
+121. [GREAT_OCEAN] Northwestern Great Ocean [IMPASSABLE]
+122. [JADE_SEA] Jade Sea
+123. [SEA_OF_SERPENTS] South Ulthuan Passage Placeholder
+124. [SEA_OF_FEAR] Dragon Isles Bypass
+125. [SEA_OF_WRATH] ____________________
+126. [GREAT_OCEAN] ____________________
+127. [BLACK_GULF] Ash River
+128. [SEA_OF_SQUALLS] Far Sulpheret Coast
+129. [BITTER_SEA] Serpent Coast
+130. [SEA_OF_SQUALLS] Gulf of Lustria
+131. [SEA_OF_WEIRD_WAVES] ____________________
+132. [SEA_OF_SERPENTS] Scorpion Coast
+133. [SEA_OF_WEIRD_WAVES] ____________________
+134. [JADE_SEA] Lumbria-Nippon Channel Placeholder
+135. [SEA_OF_WEIRD_WAVES] ____________________
+136. [SEA_OF_SERPENTS] Tarantula Coast
+137. [JADE_SEA] Isle of Rising Sun Bypass
+138. [GREAT_OCEAN] ____________________
+139. [SOUTHERN_SEA] Gulf of Medes
+140. [SEA_OF_FEAR] ____________________
+141. [JADE_SEA] ____________________
+142. [GREAT_OCEAN] Estalian Passage Placeholder
+143. [SEA_OF_WEIRD_WAVES] Ind Southern Coast Placeholder
+144. [GREAT_OCEAN] Araby Coast Placeholder
+145. [SEA_OF_SERPENTS] Lustria Northern Bay Placeholder
+146. [JADE_SEA] Lumbria Archipelago
+147. [JADE_SEA] Devourer-Nippon Channel Placeholder
+148. [GREAT_OCEAN] Northern Great Ocean [IMPASSABLE]
+149. [SEA_OF_FEAR] Meeting of Sun and Stars Placeholder
+150. [SEA_OF_SQUALLS] ____________________
+151. [GREAT_OCEAN] ____________________
+152. [GREAT_OCEAN] Vampire Coast
+153. [SEA_OF_WEIRD_WAVES] Western Sea of Weird Waves
+154. [SEA_OF_WEIRD_WAVES] Eastern Sea of Weird Waves
+155. [SEA_OF_SQUALLS] ____________________
+156. [SEA_OF_SQUALLS] ____________________
+157. [JADE_SEA] Devourer-Lumbria Channel Placeholder
+158. [JADE_SEA] Devourer Islands
+159. [JADE_SEA] ____________________
+160. [SEA_OF_FEAR] ____________________
+161. [SEA_OF_WEIRD_WAVES] ____________________
+162. [GREAT_OCEAN] ____________________
+163. [SEA_OF_FEAR] ____________________
+164. [SEA_OF_FEAR] ____________________
+165. [FAR_OCEAN] Central Far Ocean Passage
+166. [FAR_OCEAN] Central Far Ocean Passage
+167. [FAR_OCEAN] Central Far Ocean Passage
+168. [SEA_OF_SQUALLS] Central Far Ocean Passage
+169. [OCEAN_OF_DREAD] Sun Island Southern Coast Placeholder
+170. [SEA_OF_SQUALLS] ____________________
+171. [OCEAN_OF_DREAD] Ocean of Dread [IMPASSABLE]
+172. [FAR_OCEAN] Southern Far Ocean [IMPASSABLE]
+173. [JADE_SEA] ____________________
+174. [GREAT_OCEAN] ____________________
+175. [GREAT_OCEAN] Central Great Ocean Passage
+176. [JADE_SEA] ____________________
+177. [GREAT_OCEAN] Northern Mangrove Coast
+178. [GREAT_OCEAN] ____________________
+179. [FAR_OCEAN] ____________________
+180. [GREAT_OCEAN] Central Great Ocean Passage
+181. [GREAT_OCEAN] Central Great Ocean [IMPASSABLE]
+182. [GREAT_OCEAN] Churning Gulf
+183. [FAR_OCEAN] ____________________
+184. [GREAT_OCEAN] Central Great Ocean Passage
+185. [JADE_SEA] Mo Farah Chanel
+186. [GREAT_OCEAN] Isles of Doom
+187. [OCEAN_OF_DREAD] ____________________
+188. [OCEAN_OF_DREAD] ____________________
+189. [JADE_SEA] ____________________
+190. [OCEAN_OF_DREAD] ____________________
+191. [FAR_OCEAN] ____________________
+192. [OCEAN_OF_DREAD] Western Gates of Calith
+193. [OCEAN_OF_DREAD] Tor Elasor
+194. [FAR_OCEAN] ____________________
+195. [GREAT_OCEAN] Southern Mangrove Coast
+196. [JADE_SEA] ____________________
+197. [JADE_SEA] Eastern Gates of Calith
+198. [GREAT_OCEAN] ____________________
+199. [GREAT_OCEAN] ____________________
+200. [GREAT_OCEAN] Isle of Dusk Bypass
+201. [JADE_SEA] ____________________
+202. [GREAT_OCEAN] ____________________
+203. [GREAT_OCEAN] Guano Rocks Bypass
+204. [GREAT_OCEAN] ____________________
+205. [GREAT_OCEAN] Southern Great Ocean Passage
+206. [GREAT_OCEAN] Southern Great Ocean [IMPASSABLE]
+207. [GREAT_OCEAN] Southern Great Ocean Passage
+208. [OCEAN_OF_DREAD] Isle of Dawn Bypass
+209. [GREAT_OCEAN] Southern Great Ocean Passage
+210. [OCEAN_OF_DREAD] ____________________
+211. [JADE_SEA] ____________________
+212. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+213. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+214. [OCEAN_OF_DREAD] Southern Ocean of Dread [IMPASSABLE]
+215. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+216. [OCEAN_OF_DREAD] Southern Ocean of Dread Passage
+
+-- 141 names carried forward, 0 conflicts, 75 still blank (1 of those flagged IMPASSABLE) --
