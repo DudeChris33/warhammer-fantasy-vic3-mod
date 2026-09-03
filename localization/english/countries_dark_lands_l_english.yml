@@ -1,0 +1,15 @@
+﻿l_english:
+ # Country display names and adjectives for common/country_definitions/10_dark_lands.txt.
+ # One name key (the tag) + one adjective key (<TAG>_ADJ) per tag. Board item #3418 (epic #3414).
+ ZHA:0 "Dawi Zharr Empire"
+ ZHA_ADJ:0 "Dawi Zharr"
+ MZN:0 "Mingol Zharr-Naggrund"
+ MZN_ADJ:0 "Zharr-Naggrundi"
+ GOR:0 "Gorgoth"
+ GOR_ADJ:0 "Gorgothi"
+ UZK:0 "Uzkulak"
+ UZK_ADJ:0 "Uzkulaki"
+ KHN:0 "Great Khanate"
+ KHN_ADJ:0 "Hobgoblin"
+ HGK:0 "Hobgobla-Khan"
+ HGK_ADJ:0 "Hobgobla-Khani"

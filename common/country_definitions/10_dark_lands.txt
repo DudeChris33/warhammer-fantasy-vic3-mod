@@ -1,0 +1,79 @@
+# Country tags — the Dark Lands. Board item #3418 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "10 DARK LANDS".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers. Derived from the polity's own culture color in
+#                  common/cultures/10_dark_lands.txt: dawi_zharr ash-black/ember (72 60 58),
+#                  hobgoblin olive-green (118 128 74).
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/10_dark_lands.txt
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_dark_lands_l_english.yml.
+# The ZHA and KHN formation rules live in common/country_formation/10_dark_lands_formables.txt.
+
+################ ZHA — the Dawi Zharr Empire; the Chaos Dwarf realm united ################
+# Formable only. Darker ash-black than MZN's ziggurat-city so the formable reads distinctly.
+
+ZHA = {
+	color = { 54 44 42 }
+	country_type = recognized
+	tier = empire
+	cultures = { dawi_zharr }
+	# capital: Zharr-Naggrund — TODO once land state-regions exist
+}
+
+################ MZN — Mingol Zharr-Naggrund; the Tower of Zharr ################
+# The capital polity of the Chaos Dwarfs — the ziggurat-city itself.
+
+MZN = {
+	color = { 72 60 58 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { dawi_zharr }
+	# capital: Zharr-Naggrund — TODO once land state-regions exist
+}
+
+################ GOR — Gorgoth; a Chaos Dwarf hold ################
+
+GOR = {
+	color = { 108 62 44 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_zharr }
+	# capital: Gorgoth — TODO once land state-regions exist
+}
+
+################ UZK — Uzkulak; the Port of Zharr ################
+
+UZK = {
+	color = { 90 78 72 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_zharr }
+	# capital: Uzkulak — TODO once land state-regions exist
+}
+
+################ KHN — the Great Khanate; Hobgobla-Khan unites the hobgoblins ################
+# Formable only. unrecognized: a Dark Lands khanate is no part of the recognized Old World order.
+
+KHN = {
+	color = { 96 106 58 }
+	country_type = unrecognized
+	tier = empire
+	cultures = { hobgoblin }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ HGK — Hobgobla-Khan; the great hobgoblin realm ################
+
+HGK = {
+	color = { 118 128 74 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { hobgoblin }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}

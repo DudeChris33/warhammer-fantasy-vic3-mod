@@ -1,0 +1,205 @@
+# Country tags — the Karaz Ankor, the Dwarf Empire. Board item #3418 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "04 KARAZ ANKOR".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers. Derived from the polity's own culture color in
+#                  common/cultures/04_karaz_ankor.txt so tag and culture read as one thing:
+#                  dawi reddish (156 44 40), dawi_grey grey-blue (128 128 132), dawi_norse cold
+#                  blue (96 140 168), dawi_badlands earthy brown (110 74 48). The seven ruined
+#                  holds take a desaturated variant of their own culture's color.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/04_karaz_ankor.txt
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_karaz_ankor_l_english.yml.
+# The KAZ formation rule lives in common/country_formation/04_karaz_ankor_formables.txt.
+#
+# The seven ruined holds (KUN, KVN, EKR, GUN, DRZ, VLG, SLV) are kept as dwarf tags even though
+# each is occupied by greenskins or Skaven at game start — they are releasable "reclaim" realms.
+# Their occupiers are separate tags (the greenskin ones in 06_badlands). city_state tier reflects
+# that a reclaim realm is a rump claimant, not a functioning hold.
+
+################ KAZ — Karaz Ankor; the Everlasting Realm reunited ################
+# Formable only: carries ALL FOUR dwarf cultures — the reunion of the whole Dawi people, not of
+# one branch. Deeper than KAK's heartland red so the formable reads distinctly on the map.
+
+KAZ = {
+	color = { 122 30 26 }
+	country_type = recognized
+	tier = empire
+	cultures = { dawi dawi_grey dawi_norse dawi_badlands }
+	# capital: Karaz-a-Karak — TODO once land state-regions exist
+}
+
+################ KAK — Karaz-a-Karak; the High King's hold (Everpeak) ################
+
+KAK = {
+	color = { 156 44 40 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { dawi }
+	# capital: Karaz-a-Karak — TODO once land state-regions exist
+}
+
+################ ZHU — Zhufbar; the hold of the water-wheels and forges ################
+
+ZHU = {
+	color = { 184 78 44 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi }
+	# capital: Zhufbar — TODO once land state-regions exist
+}
+
+################ KAD — Karak Kadrin; the Slayer Keep ################
+
+KAD = {
+	color = { 200 112 56 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi }
+	# capital: Karak Kadrin — TODO once land state-regions exist
+}
+
+################ BVR — Barak Varr; the sea-hold ################
+
+BVR = {
+	color = { 140 52 66 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi }
+	# capital: Barak Varr — TODO once land state-regions exist
+}
+
+################ AZL — Karak Azul; the southern hold ################
+
+AZL = {
+	color = { 128 86 52 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_badlands }
+	# capital: Karak Azul — TODO once land state-regions exist
+}
+
+################ KEP — Karak Eight Peaks; contested, the great reclamation ################
+
+KEP = {
+	color = { 152 108 62 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_badlands }
+	# capital: Karak Eight Peaks — TODO once land state-regions exist
+}
+
+################ KAG — Karak Angazbar; the Black Mountains "Irongate" ################
+
+KAG = {
+	color = { 100 68 42 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_badlands }
+	# capital: Karak Angazbar — TODO once land state-regions exist
+}
+
+################ KNO — Karak Norn; the Grey Mountains ################
+
+KNO = {
+	color = { 118 126 138 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_grey }
+	# capital: Karak Norn — TODO once land state-regions exist
+}
+
+################ KHI — Karak Hirn; the Vaults ################
+
+KHI = {
+	color = { 96 104 118 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_grey }
+	# capital: Karak Hirn — TODO once land state-regions exist
+}
+
+################ KRD — Kraka Drak; the Norse dwarf hold, the long watch ################
+
+KRD = {
+	color = { 96 140 168 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi_norse }
+	# capital: Kraka Drak — TODO once land state-regions exist
+}
+
+################ KUN — Karak Ungor; ruined (the Red Eye Mountain) ################
+
+KUN = {
+	color = { 122 78 74 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { dawi }
+	# capital: Karak Ungor — TODO once land state-regions exist
+}
+
+################ KVN — Karak Varn; ruined and flooded ################
+
+KVN = {
+	color = { 104 72 76 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { dawi }
+	# capital: Karak Varn — TODO once land state-regions exist
+}
+
+################ GUN — Mount Gunbad; ruined, the brightstone mines ################
+
+GUN = {
+	color = { 134 92 84 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { dawi }
+	# capital: Mount Gunbad — TODO once land state-regions exist
+}
+
+################ VLG — Karak Vlag; ruined, the far north, destroyed by Chaos ################
+
+VLG = {
+	color = { 96 66 68 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { dawi }
+	# capital: Karak Vlag — TODO once land state-regions exist
+}
+
+################ SLV — Mount Silverspear; ruined mine of the Silver Road ################
+
+SLV = {
+	color = { 146 106 100 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { dawi }
+	# capital: Mount Silverspear — TODO once land state-regions exist
+}
+
+################ EKR — Ekrund; ruined, the Black Gulf mines ################
+
+EKR = {
+	color = { 118 100 80 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { dawi_badlands }
+	# capital: Ekrund — TODO once land state-regions exist
+}
+
+################ DRZ — Karak Drazh; ruined -469 IC (the Black Crag) ################
+
+DRZ = {
+	color = { 92 78 64 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { dawi_badlands }
+	# capital: Karak Drazh — TODO once land state-regions exist
+}

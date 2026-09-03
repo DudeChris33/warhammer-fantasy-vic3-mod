@@ -1,0 +1,40 @@
+# Country formation — the Karaz Ankor. Board item #3418 (epic #3414).
+# KAZ (Karaz Ankor) is the region's only formable; every other 04_karaz_ankor tag is a start tag.
+#
+# Deliberately minor/culture-based in shape: no unification_play, leadership_play or
+# geographic_region key. common/diplomatic_plays and common/geographic_regions are blanked via
+# .metadata/metadata.json's replace_paths and hold no entries, so referencing either would point at
+# content that does not exist. Revisit when those databases are authored.
+# Triggers used below are confirmed in docs/triggers.log (both country scope):
+#   is_country_type = <country type>
+#   country_has_primary_culture = <culture>
+#
+# All four dwarf cultures qualify: the Everlasting Realm is the reunion of the whole Dawi people,
+# heartland, Grey Mountains, Norse and Badlands holds alike (planning/tag_registry.md, region 04).
+#
+# TODO (post-states epic): add state/province requirements. use_culture_states +
+# required_states_fraction currently gate on nothing real — no land map_data/state_regions/ exist
+# yet — so KAZ is trivially formable by almost any dwarf country. Tighten once land states land.
+
+KAZ = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		# Unlike EMP/BRE/NSC, the country-type gate is NOT `is_country_type = recognized`: only
+		# KAK (the High King's hold) is a recognized dwarf tag — every other hold is unrecognized,
+		# and gating on `recognized` alone would silently make KAZ formable by KAK and nobody else.
+		# The pair below still excludes colonial/company/decentralized countries.
+		OR = {
+			is_country_type = recognized
+			is_country_type = unrecognized
+		}
+		OR = {
+			country_has_primary_culture = cu:dawi
+			country_has_primary_culture = cu:dawi_grey
+			country_has_primary_culture = cu:dawi_norse
+			country_has_primary_culture = cu:dawi_badlands
+		}
+	}
+}
