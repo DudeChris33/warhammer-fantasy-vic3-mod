@@ -3,8 +3,6 @@
  # Loc-only registry parity: common/country_definitions/ for this region is deferred until
  # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
  # Board item #3420 (epic #3414).
- ARB:0 "Sultanate of Araby"
- ARB_ADJ:0 "Arabyan"
  AHK:0 "Al-Haikk"
  AHK_ADJ:0 "Al-Haikki"
  COP:0 "Copher"
@@ -13,13 +11,9 @@
  LSK_ADJ:0 "Lashiekan"
  MTK:0 "Martek"
  MTK_ADJ:0 "Martekan"
- BEL:0 "Bel-Aliad"
- BEL_ADJ:0 "Bel-Aliadan"
  ELK:0 "El-Kalabad"
  ELK_ADJ:0 "El-Kalabadi"
  FYR:0 "Fyrus"
  FYR_ADJ:0 "Fyrusi"
- ORG:0 "Knights of Origo"
- ORG_ADJ:0 "Origan"
  ANT:0 "Antoch"
  ANT_ADJ:0 "Antochi"

@@ -3,10 +3,6 @@
  # Loc-only registry parity: common/country_definitions/ for this region is deferred until
  # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
  # Board item #3420 (epic #3414).
- KUR:0 "Kurgan"
- KUR_ADJ:0 "Kurgan"
- HUN:0 "Hung"
- HUN_ADJ:0 "Hung"
  KUL:0 "Kul"
  KUL_ADJ:0 "Kul"
  TON:0 "Tong"
