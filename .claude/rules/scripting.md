@@ -37,6 +37,62 @@ Every culture additionally requires, elsewhere:
 
 These three modifier-type files and three static-modifier files are append-only — every later culture-authoring item adds its own entries to the existing files rather than creating new ones per culture.
 
+## `common/country_definitions/` + `common/country_formation/` entry schema (epic #3414, #3416)
+
+Neither database is documented in `docs/*.log`; these shapes were confirmed against the vanilla
+install during scoping. Neither folder is listed in `.metadata/metadata.json`'s `replace_paths`, so
+vanilla's own tags still load and this mod's files only *add* to them.
+
+Files follow the same `NN_<region>.txt` shape as `common/cultures/` — one file per Old World region,
+named for the region it covers (`02_empire.txt`), with formables split into a sibling
+`common/country_formation/NN_<region>_formables.txt`. The tag roster itself is frozen in
+`planning/tag_registry.md` (epic #3414); check a code there before authoring it.
+
+A country definition entry:
+
+```
+TAG = {
+	color = { R G B }
+	country_type = recognized | unrecognized | colonial | company | decentralized
+	tier = city_state | principality | grand_principality | kingdom | hegemony | empire
+	cultures = { culture_id_1 culture_id_2 ... }
+}
+```
+
+- `color` uses the **brace** form `{ R G B }` (0-255 integers), not `common/cultures/`' `rgb{ }`.
+  Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
+  a formable that has no culture of its own takes a distinct shade of its heartland's color.
+- `cultures` ids must exist in the matching `common/cultures/NN_<region>.txt`.
+- **`capital` is deliberately omitted** on every tag this mod ships (established by board item
+  #3416). No land `map_data/state_regions/` exist yet — only the sea zones emitted by
+  `tools/generate_sea_regions.py` — so any `capital = STATE_*` would dangle. Record the intended
+  capital as a `# capital: <Name> — TODO once land state-regions exist` comment and add the real
+  field once land states are authored.
+
+A formation entry stays in the **minor/culture-based shape**:
+
+```
+TAG = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		is_country_type = recognized
+		OR = { country_has_primary_culture = cu:<culture> ... }
+	}
+}
+```
+
+Do **not** add `unification_play`, `leadership_play`, `geographic_region` or any other
+major-formation key until `common/diplomatic_plays` and `common/geographic_regions` are authored —
+both are currently blanked via `replace_paths` and hold no entries, so a reference would dangle.
+`is_country_type` and `country_has_primary_culture` are both confirmed country-scope triggers in
+`docs/triggers.log`.
+
+Loc lives in `localization/english/countries_<region>_l_english.yml`, one file per script file, with
+two keys per tag: the bare tag (display name) and `<TAG>_ADJ` (adjective).
+
 ## Forbidden
 
 - No non-deterministic effects (see [core.md](core.md) Determinism).

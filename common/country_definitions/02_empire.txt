@@ -1,0 +1,184 @@
+# Country tags — the Empire. Board item #3416 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "02 EMPIRE".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers. Reuses the polity's already-shipped culture
+#                  color from common/cultures/02_empire.txt so tag and culture read as one thing.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/02_empire.txt
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_empire_l_english.yml.
+# The EMP formation rule lives in common/country_formation/02_empire_formables.txt.
+
+################ EMP — The Empire; the formable unified realm of Sigmar ################
+# Formable only: carries all twelve human Electorate cultures. Excludes halfling, marienburger
+# (seceded) and sylvanian_vampire (the von Carstein regime is not an Imperial culture).
+# Deeper imperial red than REI's reiklander crimson so the formable reads distinctly on the map.
+
+EMP = {
+	color = { 122 26 32 }
+	country_type = recognized
+	tier = empire
+	cultures = {
+		reiklander middenlander nordlander hochlander ostlander ostermarker
+		talabeclander stirlander averlander wissenlander sollander sylvanian
+	}
+	# capital: Altdorf — TODO once land state-regions exist
+}
+
+################ REI — Reikland; the Imperial heartland ################
+
+REI = {
+	color = { 178 58 58 }
+	country_type = recognized
+	tier = grand_principality
+	cultures = { reiklander }
+	# capital: Altdorf — TODO once land state-regions exist
+}
+
+################ MID — Middenland; the Ulrican north ################
+
+MID = {
+	color = { 62 74 96 }
+	country_type = recognized
+	tier = grand_principality
+	cultures = { middenlander }
+	# capital: Middenheim — TODO once land state-regions exist
+}
+
+################ NLD — Nordland; the coast that watches Norsca ################
+
+NLD = {
+	color = { 44 92 116 }
+	country_type = recognized
+	tier = principality
+	cultures = { nordlander }
+	# capital: Salzenmund — TODO once land state-regions exist
+}
+
+################ HOC — Hochland; the hunting province ################
+
+HOC = {
+	color = { 74 112 62 }
+	country_type = recognized
+	tier = principality
+	cultures = { hochlander }
+	# capital: Hergig — TODO once land state-regions exist
+}
+
+################ OST — Ostland; the marsh-and-forest frontier ################
+
+OST = {
+	color = { 86 88 104 }
+	country_type = recognized
+	tier = principality
+	cultures = { ostlander }
+	# capital: Wolfenburg — TODO once land state-regions exist
+}
+
+################ OSM — Ostermark; the eastern march ################
+
+OSM = {
+	color = { 122 102 72 }
+	country_type = recognized
+	tier = principality
+	cultures = { ostermarker }
+	# capital: Bechafen — TODO once land state-regions exist
+}
+
+################ TAL — Talabecland; the great forest ################
+
+TAL = {
+	color = { 88 118 68 }
+	country_type = recognized
+	tier = grand_principality
+	cultures = { talabeclander }
+	# capital: Talabheim — TODO once land state-regions exist
+}
+
+################ STI — Stirland; the poor south-east ################
+
+STI = {
+	color = { 132 62 92 }
+	country_type = recognized
+	tier = principality
+	cultures = { stirlander }
+	# capital: Wurtbad — TODO once land state-regions exist
+}
+
+################ AVE — Averland; the rich, loud south ################
+
+AVE = {
+	color = { 214 182 58 }
+	country_type = recognized
+	tier = principality
+	cultures = { averlander }
+	# capital: Averheim — TODO once land state-regions exist
+}
+
+################ WIS — Wissenland; the sober south-west ################
+
+WIS = {
+	color = { 112 112 134 }
+	country_type = recognized
+	tier = principality
+	cultures = { wissenlander }
+	# capital: Nuln — TODO once land state-regions exist
+}
+
+################ SOL — Solland; the destroyed province's claimant ################
+
+SOL = {
+	color = { 168 138 52 }
+	country_type = recognized
+	tier = principality
+	cultures = { sollander }
+	# capital: Sudenburg — TODO once land state-regions exist
+}
+
+################ MOO — The Moot; the halfling homeland ################
+# Led by an Elder, not a monarch — the smallest tier the game offers.
+
+MOO = {
+	color = { 150 172 92 }
+	country_type = recognized
+	tier = city_state
+	cultures = { halfling }
+	# capital: Eicheschatten — TODO once land state-regions exist
+}
+
+################ SYL — Sylvania (human); the living population ################
+
+SYL = {
+	color = { 62 52 72 }
+	country_type = recognized
+	tier = principality
+	cultures = { sylvanian }
+	# capital: Drakenhof — TODO once land state-regions exist
+}
+
+################ VSY — Sylvania (Vampire); the von Carstein regime ################
+# unrecognized: the Empire does not accept the von Carsteins as a legitimate Electoral house.
+
+VSY = {
+	color = { 94 32 44 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { sylvanian_vampire }
+	# capital: Drakenhof — TODO once land state-regions exist
+}
+
+################ WAS — Marienburg; the seceded Wasteland ################
+# A merchant Directorate, not a monarchy — a city-state in tier as well as in character.
+
+WAS = {
+	color = { 46 130 122 }
+	country_type = recognized
+	tier = city_state
+	cultures = { marienburger }
+	# capital: Marienburg — TODO once land state-regions exist
+}
