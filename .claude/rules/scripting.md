@@ -8,6 +8,26 @@ Covers Clausewitz script: game database definitions in `common/` and event files
 - `events/` holds event files as flat `.txt` files (no subfolders currently). Every event file must declare a unique `namespace = <name>` at the top, and every event id must be `namespace.NNNN`.
 - Reusable script logic (a check or calculation used in more than one place) belongs in `common/scripted_effects/`, `common/scripted_triggers/`, or `common/scripted_values/` rather than being duplicated inline.
 
+## `.metadata/metadata.json` `replace_paths`
+
+`replace_paths` can only name folders under `common/`, `events/`, or `map_data/` — those
+are the three trees the engine will blank per the loader's own rules; nothing else is a
+valid entry.
+
+A folder goes in `replace_paths` once this mod blanks and/or replaces **every** vanilla
+file that folder ships — whether by authoring full replacement content for each file
+(same filename, new body) or by leaving some deliberately empty. Once it's listed, the
+engine doesn't load any of vanilla's files for that folder at all, so any per-file
+"blank" stub that existed only to suppress a vanilla file becomes redundant — remove
+those stubs when the folder is added. A folder that only replaces *some* of vanilla's
+files for a database (leaving the rest to merge in normally) does not qualify — see the
+`character_roles` example in `CLAUDE.md`.
+
+Every folder listed in `replace_paths` must be tracked by git even when this mod hasn't
+authored any content for it yet — git doesn't track empty directories, so give it a
+`.gitkeep`. A folder that already carries real authored files doesn't need one; add
+`.gitkeep` only where nothing else keeps the folder present.
+
 ## Patterns
 
 - Validate every effect/trigger/modifier against `docs/effects.log`, `docs/triggers.log`, or `docs/modifiers.log` before use — these logs list the exact scope requirements.
@@ -53,11 +73,13 @@ named for the region it covers (`02_empire.txt`), with formables split into a si
 `NN_<region>.txt` for the region it's physically located in, even when its culture is defined in a
 different (and, since `common/cultures/` now groups by race rather than region, differently-named)
 `common/cultures/` file — that's a legal cross-file reference, since culture ids are global. Example:
-`MOR` (Massif Orcal, a Greenskin holdout in the Bretonnian heartland) is defined in `03_brettonia.txt`
-and uses `orc`/`goblin` culture ids from `common/cultures/greenskin.txt`, because it's geographically
-part of Bretonnia even though its population isn't bretonnian. Contrast `SKZ` (Grey Mountains, on
-Bretonnia's *border*), which stays in `06_badlands.txt` because that mountain range is Badlands
-territory, not Bretonnian.
+`MOR` (Massif Orcal, a Greenskin holdout in the Bretonnian heartland) and `SKZ` (Skullsmasherz, the
+Grey Mountains on Bretonnia's southern flank) are both defined in `03_brettonia.txt` and use
+`orc`/`goblin` culture ids from `common/cultures/greenskin.txt`, because both sit geographically
+inside/against Bretonnia even though their population isn't bretonnian. A tag near a region border
+needs a real judgment call on which side it reads as — `SKZ` was first drafted in `06_badlands.txt`
+on the assumption a border mountain range defaults to the neighboring region's own tag file, then
+moved once Chris confirmed it reads as Bretonnian geography instead (2026-09-03).
 
 A country definition entry:
 
