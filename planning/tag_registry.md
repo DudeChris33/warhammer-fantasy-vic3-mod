@@ -17,10 +17,10 @@ Filed by epic #3414 (child #3415).
 - [x] 00 Norsca (9)
 - [x] 01 Kislev (10)
 - [x] 02 Empire (18)
-- [x] 03 Bretonnia (16)
+- [x] 03 Bretonnia (17)
 - [x] 04 Karaz Ankor (18)
 - [x] 05 Southern Realms (14)
-- [x] 06 Badlands (12)
+- [x] 06 Badlands (11)
 - [x] 07 Nehekhara (11)
 - [x] 10 Dark Lands (6)
 - [x] 08 Araby (10)
@@ -382,7 +382,7 @@ the Eastern Steppes marauders, a later decision).
 | WAS | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
 | BRK | `02_empire` | Brass Keep | start | `PLACEHOLDER` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket" |
 
-### 03 BRETTONIA (bretonnian, mousillon) — 16 tags; BRE formable
+### 03 BRETTONIA (bretonnian, mousillon) — 17 tags; BRE formable
 
 The 14 dukedoms are confirmed complete canon — no 15th, and Mousillon is one of the 14 (the cursed
 dukedom, no ruling Duke). At honest ceiling (no density lever). BRE formable is `bretonnian` only —
@@ -399,6 +399,12 @@ tribal-society naming convention — because no well-attested tribe/warlord name
 checked tabletop, *Warhammer: The Old World* Lexicanum, and Total War, and rejected a fan site's
 "Evil Sunz Tribe" claim as unreliable (not in any GW/wiki source, and suspiciously duplicates a
 40K Ork klan name). Revisit if a real name ever surfaces.
+
+**`SKZ` Skullsmasherz** moved here from `06_badlands` on manual audit (2026-09-03) — Ugrok
+Craktoof's orc tribe, holding the Grey Mountains on Bretonnia's southern flank. Reclassified as
+Bretonnian geography (the border range itself, not Badlands territory beyond it), same
+geography-not-culture filing principle as `MOR` above; `orc` culture id is a cross-file reference
+to `common/cultures/greenskin.txt`.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -418,8 +424,9 @@ checked tabletop, *Warhammer: The Old World* Lexicanum, and Total War, and rejec
 | PAR | `03_brettonia` | Parravon | start | `bretonnian` | Parravon |  |
 | MOU | `03_brettonia` | Mousillon | start | `mousillon` | Mousillon | the cursed city / undead |
 | MOR | `03_brettonia` | Massif Orcal | start | `orc`, `goblin` | Massif Orcal | remnant Greenskin holdout, Bretonnian heartland; named by location, no tribe attested — TODO revisit |
+| SKZ | `03_brettonia` | Skullsmasherz | start | `orc` | — | Ugrok Craktoof; Grey Mtns, Bretonnia's southern flank |
 
-### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_badlands) — 18 tags; KAZ formable
+### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_ancestral) — 18 tags; KAZ formable
 
 10 active holds + Karak Angazbar (seed "Karak Azgaraz" corrected) + 7 ruined/fallen holds (all
 sourced). **Ruined holds keep a dwarf tag even though they are occupied at game start** — they are
@@ -428,24 +435,43 @@ the greenskin occupiers (Red Eye Mountain, Black Crag, etc.) are added in 06 Bad
 region yet (under-empire, a future epic). KAZ (the reunited Everlasting Realm) carries **all four**
 dwarf cultures. (Approved 2026-08-30.)
 
+**`dawi_badlands` renamed to `dawi_ancestral`** on manual audit (2026-09-03), reframed by age
+rather than by which region they currently occupy. Per Dwarf founding-migration lore (Total
+War/Fandom, consistent with tabletop): the Dawi founded their FIRST holds in the deep south (Karak
+Zorn's kin — Karak Azul, Karak Eight Peaks, Karak Angazbar, Ekrund, Karak Drazh) and only
+afterward pushed north into the World's Edge heartland (`dawi`, Karaz-a-Karak) where the High
+King's throne and the greatest numbers ended up — then further north still, generations later, to
+found the Norse holds (`dawi_norse`). So the real seniority order is `dawi_ancestral` (eldest) →
+`dawi` (dominant but younger) → `dawi_norse` (youngest, most isolated). `dawi_ancestral`'s flavor
+now centers on ancestor-pride and eldest-blood alongside its very real siege history, rather than
+being defined by "the Badlands" — the hostile region its enemies, not its own people, gave the
+name to. `dawi_grey` (Grey Mountains/Vaults, the trading holds) sits outside this age axis — a
+lateral, not generational, distinction — and was left unchanged. See
+`common/cultures/dwarven.txt` for the full writeup.
+
+**All sixteen non-formable holds recognized** (manual audit, 2026-09-03) — every dwarf tag in this
+region is now `country_type = recognized` (previously only KAZ and KAK were; every other hold was
+`unrecognized`). KAZ's formation gate simplified back to a bare `is_country_type = recognized`,
+matching EMP/BRE, now that the old mixed-type OR-pair workaround is no longer needed.
+
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
-| KAZ | `04_karaz_ankor` | Karaz Ankor | formable | `dawi`, `dawi_grey`, `dawi_norse`, `dawi_badlands` | Karaz-a-Karak | the Everlasting Realm reunited (all dwarf cultures) |
+| KAZ | `04_karaz_ankor` | Karaz Ankor | formable | `dawi`, `dawi_grey`, `dawi_norse`, `dawi_ancestral` | Karaz-a-Karak | the Everlasting Realm reunited (all dwarf cultures) |
 | KAK | `04_karaz_ankor` | Karaz-a-Karak | start | `dawi` | Karaz-a-Karak | the High King's hold (Everpeak) |
 | ZHU | `04_karaz_ankor` | Zhufbar | start | `dawi` | Zhufbar |  |
 | KAD | `04_karaz_ankor` | Karak Kadrin | start | `dawi` | Karak Kadrin | Slayer Keep |
-| AZL | `04_karaz_ankor` | Karak Azul | start | `dawi_badlands` | Karak Azul | southern hold |
-| KEP | `04_karaz_ankor` | Karak Eight Peaks | start | `dawi_badlands` | Karak Eight Peaks | contested / reclamation |
+| AZL | `04_karaz_ankor` | Karak Azul | start | `dawi_ancestral` | Karak Azul | southern hold |
+| KEP | `04_karaz_ankor` | Karak Eight Peaks | start | `dawi_ancestral` | Karak Eight Peaks | contested / reclamation |
 | BVR | `04_karaz_ankor` | Barak Varr | start | `dawi` | Barak Varr | the sea-hold |
 | KNO | `04_karaz_ankor` | Karak Norn | start | `dawi_grey` | Karak Norn | Grey Mountains |
 | KHI | `04_karaz_ankor` | Karak Hirn | start | `dawi_grey` | Karak Hirn | Vaults / Grey Mountains |
 | KRD | `04_karaz_ankor` | Kraka Drak | start | `dawi_norse` | Kraka Drak | Norse dwarf hold |
-| KAG | `04_karaz_ankor` | Karak Angazbar | start | `dawi_badlands` | Karak Angazbar | Black Mountains ("Irongate"); seed name corrected |
+| KAG | `04_karaz_ankor` | Karak Angazbar | start | `dawi_ancestral` | Karak Angazbar | Black Mountains ("Irongate"); seed name corrected |
 | KUN | `04_karaz_ankor` | Karak Ungor | start | `dawi` | Karak Ungor | ruined (occupier "Red Eye Mountain" is a separate 06 tag) |
 | KVN | `04_karaz_ankor` | Karak Varn | start | `dawi` | Karak Varn | ruined, flooded (Skaven/Night Goblin occupier separate) |
-| EKR | `04_karaz_ankor` | Ekrund | start | `dawi_badlands` | Ekrund | ruined, Black Gulf mines (Orc occupier separate) |
+| EKR | `04_karaz_ankor` | Ekrund | start | `dawi_ancestral` | Ekrund | ruined, Black Gulf mines (Orc occupier separate) |
 | GUN | `04_karaz_ankor` | Mount Gunbad | start | `dawi` | Mount Gunbad | ruined, brightstone mines (Night Goblin occupier separate) |
-| DRZ | `04_karaz_ankor` | Karak Drazh | start | `dawi_badlands` | Karak Drazh | ruined -469 IC (Orc occupier "Black Crag" is a separate 06 tag) |
+| DRZ | `04_karaz_ankor` | Karak Drazh | start | `dawi_ancestral` | Karak Drazh | ruined -469 IC (Orc occupier "Black Crag" is a separate 06 tag) |
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
@@ -477,7 +503,7 @@ both `tilean` and `sartosan`. (Approved 2026-08-30.)
 | CNT | `05_southern_realms` | Cantonia | start | `estalian` | Cantonia | minor Estalian kingdom |
 | BPR | `05_southern_realms` | Border Princes | start | `border_princer` | — | loose principalities; decentralization → a later law/government-type variant |
 
-### 06 BADLANDS (orc, goblin) — 12 tags; no formable
+### 06 BADLANDS (orc, goblin) — 11 tags; no formable
 
 Greenskin tribes/strongholds of the Badlands / World's Edge. **Chris approved Total War: Warhammer as a
 name source for this region** (in addition to tabletop), so names blend both. Deduplicated so no polity
@@ -488,19 +514,21 @@ that region. (Approved 2026-08-30.)
 
 **`common/country_definitions/` files are organized by geography, not by culture (Chris,
 2026-09-03):** a tag's script entry lives in the file for the region it's physically located in,
-even if its culture is defined elsewhere. `SKZ` (Grey Mountains, on Bretonnia's *border/flank*) is
-geographically Badlands territory and stays here; Massif Orcal (`MOR`, in the Bretonnian
-*heartland*, above the Forest of Chalons) is geographically inside Bretonnia and is defined in
-`03_brettonia.txt` instead — see that region's entry for its full writeup, including the
-tribal-naming-convention exception it represents. It still uses `orc`/`goblin` culture ids from
+even if its culture is defined elsewhere. Two Greenskin tags physically on/inside Bretonnia are
+defined in `03_brettonia.txt` instead of here — Massif Orcal (`MOR`, the Bretonnian *heartland*
+above the Forest of Chalons) from the start, and Skullsmasherz (`SKZ`, the Grey Mountains on
+Bretonnia's southern flank) moved there on a later manual audit the same day, once Chris confirmed
+the border range itself reads as Bretonnian rather than Badlands geography — see that region's
+entry for both tags' full writeup. Both still use `orc`/`goblin` culture ids from
 `common/cultures/greenskin.txt` (a cross-file culture reference; those are the mod's only
 Greenskin cultures).
 
 **Naming convention (Chris, 2026-09-03):** tribal societies — Norsca, Greenskins (this region and
-Bretonnia's `MOR`), Ogre Kingdoms — are named by tribe, not by location/stronghold; Skaven (no
-region yet) will likewise be named by clan, not location, once authored. Audited against this on
-2026-09-03: Norsca and Ogre Kingdoms were already fully tribe-named; this region's own roster was
-already tribe-named (`MOR`, the one location-named exception, lives in Bretonnia's file instead).
+Bretonnia's `MOR`/`SKZ`), Ogre Kingdoms — are named by tribe, not by location/stronghold; Skaven
+(no region yet) will likewise be named by clan, not location, once authored. Audited against this
+on 2026-09-03: Norsca and Ogre Kingdoms were already fully tribe-named; this region's own roster
+was already tribe-named (`MOR`, the one location-named exception, lives in Bretonnia's file
+instead).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -515,7 +543,6 @@ already tribe-named (`MOR`, the one location-named exception, lives in Bretonnia
 | BRN | `06_badlands` | Broken Nose | start | `goblin` | — | Goblin tribe of the Vaults |
 | BLV | `06_badlands` | Black Venom | start | `goblin` | — | Forest Goblin tribe, S. of Black Fire Pass |
 | RDV | `06_badlands` | Redvenom | start | `goblin` | — | Snagla Grobspit's Forest Goblins |
-| SKZ | `06_badlands` | Skullsmasherz | start | `orc` | — | Ugrok Craktoof; Grey Mtns / Bretonnia border |
 
 **Density reserve (not yet allocated — add later if Chris wants a denser Badlands).** Confirmed TW:W
 Greenskins faction names, race/location wiki-unstated (would be representative orc/goblin tribes):

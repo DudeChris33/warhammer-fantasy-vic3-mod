@@ -12,7 +12,7 @@
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
 # intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_empire_l_english.yml.
-# The EMP formation rule lives in common/country_formation/02_empire_formables.txt.
+# The EMP and VEM formation rules live in common/country_formation/02_empire_formables.txt.
 
 ################ EMP — The Empire; the formable unified realm of Sigmar ################
 # Formable only: carries all twelve human Electorate cultures. Excludes halfling, marienburger
@@ -55,7 +55,7 @@ MID = {
 NLD = {
 	color = { 44 92 116 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { nordlander }
 	# capital: Salzenmund — TODO once land state-regions exist
 }
@@ -65,7 +65,7 @@ NLD = {
 HOC = {
 	color = { 74 112 62 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { hochlander }
 	# capital: Hergig — TODO once land state-regions exist
 }
@@ -75,7 +75,7 @@ HOC = {
 OST = {
 	color = { 86 88 104 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { ostlander }
 	# capital: Wolfenburg — TODO once land state-regions exist
 }
@@ -85,7 +85,7 @@ OST = {
 OSM = {
 	color = { 122 102 72 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { ostermarker }
 	# capital: Bechafen — TODO once land state-regions exist
 }
@@ -105,7 +105,7 @@ TAL = {
 STI = {
 	color = { 132 62 92 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { stirlander }
 	# capital: Wurtbad — TODO once land state-regions exist
 }
@@ -115,7 +115,7 @@ STI = {
 AVE = {
 	color = { 214 182 58 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { averlander }
 	# capital: Averheim — TODO once land state-regions exist
 }
@@ -125,7 +125,7 @@ AVE = {
 WIS = {
 	color = { 112 112 134 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { wissenlander }
 	# capital: Nuln — TODO once land state-regions exist
 }
@@ -135,18 +135,18 @@ WIS = {
 SOL = {
 	color = { 168 138 52 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { sollander }
 	# capital: Sudenburg — TODO once land state-regions exist
 }
 
 ################ MOO — The Moot; the halfling homeland ################
-# Led by an Elder, not a monarch — the smallest tier the game offers.
+# Not a recognized Electorate — an unrecognized principality of Elder-led shire-moots.
 
 MOO = {
 	color = { 150 172 92 }
-	country_type = recognized
-	tier = city_state
+	country_type = unrecognized
+	tier = principality
 	cultures = { halfling }
 	# capital: Eicheschatten — TODO once land state-regions exist
 }
@@ -156,7 +156,7 @@ MOO = {
 SYL = {
 	color = { 62 52 72 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { sylvanian }
 	# capital: Drakenhof — TODO once land state-regions exist
 }
@@ -167,18 +167,32 @@ SYL = {
 VSY = {
 	color = { 94 32 44 }
 	country_type = unrecognized
-	tier = principality
+	tier = grand_principality
 	cultures = { sylvanian_vampire }
 	# capital: Drakenhof — TODO once land state-regions exist
 }
 
+################ VEM — the Von Carstein Empire; the von Carsteins' Empire-wide conquest ################
+# Formable only: VSY conquers the whole Empire and seats itself on Altdorf. Still purely
+# sylvanian_vampire in culture — this is a conquest tag, not a cultural unification, unlike EMP.
+# unrecognized, same as VSY: no Imperial or foreign power accepts an undead throne as legitimate,
+# however much territory it actually holds.
+# TODO: tag/display name "Von Carstein Empire" is a placeholder — revisit for a better in-world name.
+
+VEM = {
+	color = { 58 20 28 }
+	country_type = unrecognized
+	tier = empire
+	cultures = { sylvanian_vampire }
+	# capital: Altdorf (seized from the Empire) — TODO once land state-regions exist
+}
+
 ################ WAS — Marienburg; the seceded Wasteland ################
-# A merchant Directorate, not a monarchy — a city-state in tier as well as in character.
 
 WAS = {
 	color = { 46 130 122 }
 	country_type = recognized
-	tier = city_state
+	tier = grand_principality
 	cultures = { marienburger }
 	# capital: Marienburg — TODO once land state-regions exist
 }

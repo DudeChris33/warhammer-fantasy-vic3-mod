@@ -5,7 +5,7 @@
 #   color        — { R G B } with 0-255 integers. Derived from the polity's own culture color in
 #                  common/cultures/dwarven.txt so tag and culture read as one thing:
 #                  dawi reddish (156 44 40), dawi_grey grey-blue (128 128 132), dawi_norse cold
-#                  blue (96 140 168), dawi_badlands earthy brown (110 74 48). The seven ruined
+#                  blue (96 140 168), dawi_ancestral earthy brown (110 74 48). The seven ruined
 #                  holds take a desaturated variant of their own culture's color.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
@@ -30,7 +30,7 @@ KAZ = {
 	color = { 122 30 26 }
 	country_type = recognized
 	tier = empire
-	cultures = { dawi dawi_grey dawi_norse dawi_badlands }
+	cultures = { dawi dawi_grey dawi_norse dawi_ancestral }
 	# capital: Karaz-a-Karak — TODO once land state-regions exist
 }
 
@@ -48,7 +48,7 @@ KAK = {
 
 ZHU = {
 	color = { 184 78 44 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
 	cultures = { dawi }
 	# capital: Zhufbar — TODO once land state-regions exist
@@ -58,7 +58,7 @@ ZHU = {
 
 KAD = {
 	color = { 200 112 56 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
 	cultures = { dawi }
 	# capital: Karak Kadrin — TODO once land state-regions exist
@@ -68,7 +68,7 @@ KAD = {
 
 BVR = {
 	color = { 140 52 66 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
 	cultures = { dawi }
 	# capital: Barak Varr — TODO once land state-regions exist
@@ -78,9 +78,9 @@ BVR = {
 
 AZL = {
 	color = { 128 86 52 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
-	cultures = { dawi_badlands }
+	cultures = { dawi_ancestral }
 	# capital: Karak Azul — TODO once land state-regions exist
 }
 
@@ -88,9 +88,9 @@ AZL = {
 
 KEP = {
 	color = { 152 108 62 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
-	cultures = { dawi_badlands }
+	cultures = { dawi_ancestral }
 	# capital: Karak Eight Peaks — TODO once land state-regions exist
 }
 
@@ -98,9 +98,9 @@ KEP = {
 
 KAG = {
 	color = { 100 68 42 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
-	cultures = { dawi_badlands }
+	cultures = { dawi_ancestral }
 	# capital: Karak Angazbar — TODO once land state-regions exist
 }
 
@@ -108,7 +108,7 @@ KAG = {
 
 KNO = {
 	color = { 118 126 138 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
 	cultures = { dawi_grey }
 	# capital: Karak Norn — TODO once land state-regions exist
@@ -118,7 +118,7 @@ KNO = {
 
 KHI = {
 	color = { 96 104 118 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
 	cultures = { dawi_grey }
 	# capital: Karak Hirn — TODO once land state-regions exist
@@ -128,7 +128,7 @@ KHI = {
 
 KRD = {
 	color = { 96 140 168 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = principality
 	cultures = { dawi_norse }
 	# capital: Kraka Drak — TODO once land state-regions exist
@@ -138,7 +138,7 @@ KRD = {
 
 KUN = {
 	color = { 122 78 74 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = city_state
 	cultures = { dawi }
 	# capital: Karak Ungor — TODO once land state-regions exist
@@ -148,7 +148,7 @@ KUN = {
 
 KVN = {
 	color = { 104 72 76 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = city_state
 	cultures = { dawi }
 	# capital: Karak Varn — TODO once land state-regions exist
@@ -158,7 +158,7 @@ KVN = {
 
 GUN = {
 	color = { 134 92 84 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = city_state
 	cultures = { dawi }
 	# capital: Mount Gunbad — TODO once land state-regions exist
@@ -168,7 +168,7 @@ GUN = {
 
 VLG = {
 	color = { 96 66 68 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = city_state
 	cultures = { dawi }
 	# capital: Karak Vlag — TODO once land state-regions exist
@@ -178,7 +178,7 @@ VLG = {
 
 SLV = {
 	color = { 146 106 100 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = city_state
 	cultures = { dawi }
 	# capital: Mount Silverspear — TODO once land state-regions exist
@@ -188,9 +188,9 @@ SLV = {
 
 EKR = {
 	color = { 118 100 80 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = city_state
-	cultures = { dawi_badlands }
+	cultures = { dawi_ancestral }
 	# capital: Ekrund — TODO once land state-regions exist
 }
 
@@ -198,8 +198,8 @@ EKR = {
 
 DRZ = {
 	color = { 92 78 64 }
-	country_type = unrecognized
+	country_type = recognized
 	tier = city_state
-	cultures = { dawi_badlands }
+	cultures = { dawi_ancestral }
 	# capital: Karak Drazh — TODO once land state-regions exist
 }

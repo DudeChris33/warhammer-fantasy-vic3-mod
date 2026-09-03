@@ -34,13 +34,13 @@ KSV = {
 	# capital: Kislev — TODO once land state-regions exist
 }
 
-################ ERE — Erengrad; the western Ungol-leaning port ################
+################ ERE — Erengrad; the western port city, gospodar-founded amid Ungol lands ################
 
 ERE = {
 	color = { 84 152 160 }
 	country_type = recognized
-	tier = city_state
-	cultures = { ungol }
+	tier = principality
+	cultures = { gospodar ungol }
 	# capital: Erengrad — TODO once land state-regions exist
 }
 
@@ -49,7 +49,7 @@ ERE = {
 PRA = {
 	color = { 148 86 96 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { gospodar }
 	# capital: Praag — TODO once land state-regions exist
 }
@@ -79,7 +79,7 @@ TRO = {
 BOL = {
 	color = { 108 124 150 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { gospodar }
 	# capital: Bolgasgrad — TODO once land state-regions exist
 }
@@ -89,7 +89,7 @@ BOL = {
 VOL = {
 	color = { 138 160 190 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { gospodar }
 	# capital: Volksgrad — TODO once land state-regions exist
 }

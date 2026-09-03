@@ -170,3 +170,35 @@ MOU = {
 	cultures = { mousillon }
 	# capital: Mousillon — TODO once land state-regions exist
 }
+
+################ MOR — Massif Orcal; the Greenskin holdout above the Forest of Chalons ################
+# Not a dukedom — a remnant Orc & Goblin holdout inside Bretonnian territory, never fully cleared
+# when the kingdom was founded. cultures reference orc/goblin from common/cultures/greenskin.txt
+# (cross-file reference; those are the mod's only Greenskin cultures, and this holding is
+# geographically Bretonnian rather than Badlands, per Chris). No named warlord or tribe attested —
+# checked against tabletop, Old World Lexicanum, and Total War; a fan-site "Evil Sunz Tribe" claim
+# was rejected as unreliable (not in any GW/wiki source, and suspiciously duplicates a 40K Ork klan
+# name) — see planning/tag_registry.md. Named by location rather than tribe as a flagged exception
+# to this mod's tribal-society naming convention; revisit if a real name ever surfaces.
+
+MOR = {
+	color = { 92 118 56 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc goblin }
+	# capital: Massif Orcal — TODO once land state-regions exist
+}
+
+################ SKZ — Skullsmasherz; the Grey Mountains warband on Bretonnia's southern flank ################
+# Not a dukedom — Ugrok Craktoof's orc tribe, holding the Grey Mountains against Bretonnia's
+# southern march. Moved here from 06_badlands.txt (manual audit, 2026-09-03): geographically this
+# is Bretonnia's border range, not Badlands territory. cultures reference orc from
+# common/cultures/greenskin.txt (cross-file reference, as with MOR above).
+
+SKZ = {
+	color = { 72 110 54 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}

@@ -14,7 +14,7 @@
 #   country_has_primary_culture = <culture>
 #
 # The country-type gate is a recognized/unrecognized pair rather than the bare
-# `is_country_type = recognized` used by EMP/BRE/NSC: the Dark Lands roster mixes both types
+# `is_country_type = recognized` used by EMP/BRE: the Dark Lands roster mixes both types
 # (MZN recognized, GOR/UZK/HGK unrecognized), and gating on `recognized` alone would silently
 # exclude most of the countries these formables are meant for. The pair still excludes
 # colonial/company/decentralized countries.

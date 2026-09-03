@@ -17,11 +17,28 @@
 # here carries a loaned FIRST name; only dawi_grey takes a light minority of Reikspiel-loan
 # SURNAMES, from centuries of Empire and Bretonnian trade.
 #
-# dawi_badlands is filed here, with its kin, rather than by the geography of the Badlands: culture
-# files in this mod group by RACE/CULTURE-GROUP, not by the geography of the states a culture
-# happens to occupy — the convention this file originated, now applied mod-wide (dark_lands'
-# Chaos Dwarfs are likewise filed by kin in common/cultures/chaos_dwarf.txt, and their Hobgoblin
-# hirelings by kin in common/cultures/greenskin.txt).
+# dawi_ancestral (formerly dawi_badlands, renamed on manual audit 2026-09-03) is filed here, with
+# its kin, rather than by the geography of the Badlands: culture files in this mod group by
+# RACE/CULTURE-GROUP, not by the geography of the states a culture happens to occupy — the
+# convention this file originated, now applied mod-wide (dark_lands' Chaos Dwarfs are likewise
+# filed by kin in common/cultures/chaos_dwarf.txt, and their Hobgoblin hirelings by kin in
+# common/cultures/greenskin.txt).
+#
+# AGE, NOT JUST GEOGRAPHY (per Chris, 2026-09-03; confirmed via Total War/Fandom lore on the
+# Dwarfs' founding migration): the Dawi did not spread outward evenly from one ancestral seat.
+# They founded their FIRST holds in the deep south (Karak Zorn and its kin, near modern Karak
+# Azul/Eight Peaks/Ekrund/Drazh) and only afterward pushed north into the World's Edge heartland
+# (Karaz-a-Karak) where gold and gromril were richest — the heartland is where the High King's
+# throne and the greatest numbers ended up, but it is NOT the oldest Dawi stock. Dwarfs went
+# further north still, generations later, to found the Norse holds. So the real seniority order,
+# oldest to youngest, is: dawi_ancestral (the First Holds) → dawi (the World's Edge expansion,
+# now dominant in numbers and political weight) → dawi_norse (the last, most isolated push). This
+# reframes dawi_ancestral from "the holds that happen to sit in the Badlands and keep losing
+# ground" to "the eldest kin, who hold the oldest ancestor-lore and privately regard even
+# Karaz-a-Karak as comparatively young" — the sieges they've suffered are real, but not their
+# whole identity. dawi_grey (the Grey Mountains/Vaults trading holds) sits outside this
+# seniority axis entirely — theirs is a lateral distinction (constant contact with umgi traders),
+# not a generational one, so it is left as-is.
 #
 # graphics/ethnicities — vanilla ships no dwarf portrait set. `european` plus the ginger- and
 #                brown-weighted caucasian morphs is a deliberate STAND-IN, chosen as the closest
@@ -34,9 +51,11 @@
 # Board item #3408 (epic #3404).
 
 ################ Dawi — the World's Edge heartland; the baseline Khazalid register ################
-# Karaz-a-Karak and the great eastern holds. Hard consonants, doubled consonants, -rik/-gar/-nir
-# endings; surnames built from the crafts, the holds and the Great Book of Grudges. Regal names
-# are the High King's line.
+# Karaz-a-Karak and the great eastern holds — the most numerous Dawi and the seat of the High
+# King, but the SECOND wave of the founding migration, not the first: they settled the World's
+# Edge after the ancestral southern holds (dawi_ancestral) were already old. Hard consonants,
+# doubled consonants, -rik/-gar/-nir endings; surnames built from the crafts, the holds and the
+# Great Book of Grudges. Regal names are the High King's line.
 
 dawi = {
 	color= rgb{ 156 44 40 }
@@ -139,10 +158,13 @@ dawi_grey = {
 }
 
 ################ Dawi Norse — Kraka Drak and the northern holds; the long watch ################
-# Isolated in the Norscan mountains, generations of contact with Norsii raiders and the armies
-# of Chaos. The same Khazalid stems pushed colder and harder — Kraka/Drak/Skag elements and
-# -akk/-ulf endings borrowed from the tongue of their neighbours-and-enemies. Surnames are
-# about ice, the sea, the raid and the watch that never ends.
+# The YOUNGEST branch by founding order — settled generations after the World's Edge heartland,
+# pushing north past it into the Norscan mountains — yet the most estranged: total isolation from
+# the rest of Karaz Ankor (Norsii raiders, the armies of Chaos, millennia with no contact) bred a
+# people whose kings owe no fealty to the High King, however young their stock. The same Khazalid
+# stems pushed colder and harder — Kraka/Drak/Skag elements and -akk/-ulf endings borrowed from
+# the tongue of their neighbours-and-enemies. Surnames are about ice, the sea, the raid and the
+# watch that never ends.
 
 dawi_norse = {
 	color= rgb{ 96 140 168 }
@@ -191,13 +213,18 @@ dawi_norse = {
 	}
 }
 
-################ Dawi Badlands — the southern holds and Karak Eight Peaks ################
-# Karak Eight Peaks, Karak Azul, Barak Varr and the ruins between them: centuries under siege by
-# greenskin and skaven, holds lost and holds retaken. The first-name stock is the heartland's,
-# with the softer entries dropped. Surnames are dominated by grudge, loss, defence and the Eight
-# Peaks themselves; the regal list is the reclaimer-king's line.
+################ Dawi Ancestral — the First Holds, eldest kin of the Dawi (formerly "Dawi Badlands") ################
+# Karak Zorn's kin: Karak Eight Peaks, Karak Azul, Ekrund, Karak Drazh and the ruins between
+# them — founded generations before the World's Edge heartland even existed, by common reckoning
+# the eldest living Dawi stock, keepers of the oldest ancestor-lore and the earliest Books of
+# Grudges. Now centuries under siege by greenskin and skaven, holds lost and holds retaken — but
+# the sieges are not the whole of who they are: privately, they regard even Karaz-a-Karak's dawi
+# as the "young" branch, whatever power the High King wields. First-name stock is the heartland's,
+# with the softer entries dropped. Surnames blend that ancestor-pride (first-days, eldest-blood)
+# with the very real grudge/loss/defence of their long siege; the regal list is the unbroken
+# elder-king's line.
 
-dawi_badlands = {
+dawi_ancestral = {
 	color= rgb{ 110 74 48 }
 	religion = cult_of_ancestors
 	heritage = heritage_dawi
@@ -220,13 +247,13 @@ dawi_badlands = {
 	}
 
 	noble_last_names = {
-		Eightpeaks Grudgebound Lostholm Siegewarden Vengeancesworn Deepwatch
-		Thronelost Bloodgrudge Ruinhold Reclaimer Oathbound Silentking
+		Eightpeaks Thronelost Reclaimer Oathbound Silentking Deepwatch
+		Eldrune Firstforged Elderstone Foreborn Oldwarden Firstoath
 	}
 
 	common_last_names = {
-		Grudgeborn Siegebeard Lastwall Bonecounter Tunnelfist Ashenbeard Widowbrow Sorrowhand
-		Hollowdelve Ruinfist Gravewarden Vengefist Blackpeak Ironvigil Losthammer Grudgeteller
+		Grudgeborn Siegebeard Lastwall Bonecounter Ashenbeard Sorrowhand Ruinfist Gravewarden
+		Eldstone Firstblood Oldkin Ancientvow Eldwarden Foredelve Elderhand Firstwatch
 	}
 
 	male_regal_first_names = {

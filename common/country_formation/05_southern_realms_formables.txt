@@ -20,7 +20,7 @@
 
 ################ TIL — Tilea ################
 # The country-type gate is a recognized/unrecognized pair (the #3418 pattern), not the bare
-# `is_country_type = recognized` used by EMP/BRE/NSC: TIL's own roster mixes both — the seven Tilean
+# `is_country_type = recognized` used by EMP/BRE: TIL's own roster mixes both — the seven Tilean
 # city-states are recognized but SRT/Sartosa is unrecognized, and Sartosa is explicitly part of a
 # united Tilea (it is in TIL's cultures list). Gating on `recognized` alone would lock the pirates
 # out of the unification they are named in. The pair still excludes colonial/company/decentralized.

@@ -145,14 +145,3 @@ RDV = {
 	cultures = { goblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
 }
-
-################ SKZ — Skullsmasherz ################
-# Ugrok Craktoof; the Grey Mountains, on Bretonnia’s flank
-
-SKZ = {
-	color = { 72 110 54 }
-	country_type = decentralized
-	tier = principality
-	cultures = { orc }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
-}

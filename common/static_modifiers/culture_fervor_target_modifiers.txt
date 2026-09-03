@@ -1,4 +1,4 @@
-﻿# Per-culture fervor-target static modifiers. Victoria 3 requires BOTH a
+# Per-culture fervor-target static modifiers. Victoria 3 requires BOTH a
 # _positive and a _negative definition for every culture id in common/cultures/; a missing pair
 # is an in-game error. Both variants carry magnitude 1 — that is the vanilla shape (confirmed
 # against the vanilla common/static_modifiers/ reference) and is mirrored here deliberately.
@@ -263,14 +263,14 @@ dawi_norse_fervor_target_modifier_negative = {
 	country_fervor_target_dawi_norse_add = 1
 }
 
-dawi_badlands_fervor_target_modifier_positive = {
+dawi_ancestral_fervor_target_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	country_fervor_target_dawi_badlands_add = 1
+	country_fervor_target_dawi_ancestral_add = 1
 }
 
-dawi_badlands_fervor_target_modifier_negative = {
+dawi_ancestral_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	country_fervor_target_dawi_badlands_add = 1
+	country_fervor_target_dawi_ancestral_add = 1
 }
 
 dawi_zharr_fervor_target_modifier_positive = {

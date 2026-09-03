@@ -1,4 +1,4 @@
-﻿# Registers the country_fervor_target_<culture>_add modifier TYPES used by the
+# Registers the country_fervor_target_<culture>_add modifier TYPES used by the
 # matching static_modifier blocks in common/static_modifiers/culture_*_modifiers.txt.
 # One declaration per culture; appended to by later culture-authoring items in epic #3404.
 # Board item #3407.
@@ -209,7 +209,7 @@ country_fervor_target_dawi_norse_add={
 	}
 }
 
-country_fervor_target_dawi_badlands_add={
+country_fervor_target_dawi_ancestral_add={
 	decimals=1
 	color=good
 	game_data={
