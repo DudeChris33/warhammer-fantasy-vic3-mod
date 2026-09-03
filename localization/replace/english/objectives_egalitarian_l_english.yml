@@ -1,0 +1,30 @@
+﻿l_english:
+ # Warhammer Fantasy reskin of the vanilla Egalitarian Society player-objective text
+ # (common/objectives/01_player_objectives.txt and its subgoals/journal entries).
+ # localization/ is never replace_path'd, so every key below is already defined by
+ # vanilla localization/english/objectives_l_english.yml -- these are overrides and
+ # must live here, not in localization/english/, or they would duplicate-key.
+ # Vanilla ships these keys with no version suffix (implicitly 0); :1 wins.
+ # egalitarian_objective_note_loc and je_liberate_the_slaves_invalid_tooltip are
+ # deliberately NOT overridden -- the first is setting-neutral mechanical text, the
+ # second is a dead vanilla key (no invalid block exists on that journal entry).
+
+ je_objective_encourage_liberal_ideas:1 "Give the Scholars a Seat"
+ je_objective_encourage_liberal_ideas_reason:1 "New thinking does not begin in a palace. It begins in the lecture halls and printing houses, where engineers, physicians and pamphleteers argue over what a realm owes the people who live in it. Those men have no voice at our council table. Until they do, every reform we attempt will be granted from above and withdrawn just as easily -- so our first task is to make the learned a power in this realm, not a curiosity kept in its universities."
+
+ je_liberate_the_slaves:1 "Strike Off the Chains"
+ je_liberate_the_slaves_reason:1 "We share a world with powers built on the chain. The Chaos Dwarfs of Zharr-Naggrund work captives to death in the pits and furnaces of the Plain of Zharrduk. The Black Arks come out of the western dark to take whole villages off our coasts, and the Naggarothi think our people a harvest. Norscan longships work the Sea of Claws for the same trade. We cannot say a word against any of them while chattel bondage is still lawful within our own borders -- our protest would be a merchant's complaint about a rival, not a matter of principle. Abolish it here, and our objection to them becomes something the world must answer."
+
+ je_pass_laws:1 "Set It Down in Law"
+ je_pass_laws_reason:1 "Sentiment is not a statute. With our reformers seated in government we should spend that influence while we have it and write the change into the law books themselves, where a change of ministry cannot simply undo it.
+
+NOTE: Regressing any of these laws after completing this Journal will result in this Journal being hidden until the law is enacted again."
+
+ je_public_services:1 "The Realm's Common Works"
+ je_public_services_reason:1 "Laws on parchment feed nobody. With the statutes in place we should build out our [Concept('concept_institution','$concept_institutions$')] -- schools, physicians, relief for the crippled and the old -- until they reach the least of our subjects and not merely the guildsman with coin enough to pay.$egalitarian_objective_note_loc$"
+
+ je_women_and_children:1 "The Franchise Widened"
+ je_women_and_children_reason:1 "Our charters and electoral colleges still count the same narrow list of names they did three centuries ago: masters of guilds, holders of land, heads of houses. The women who keep half of those workshops running hold no vote in them, and children are put to the loom before they are put to a letter. If the reform is to mean anything it must reach them too.$egalitarian_objective_note_loc$"
+
+ je_egalitarian_society:1 "A Realm Worth Copying"
+ je_egalitarian_society_reason:1 "The laws are written and the works are built. What remains is the harder thing: to see them actually told in the lives of our people -- fewer bound to another man's field, more able to read the laws that govern them, and a decent living for all of them. Do that, and the other great realms of the Old World will send men to study how it was done.$egalitarian_objective_note_loc$"
