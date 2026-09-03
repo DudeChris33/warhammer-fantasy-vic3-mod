@@ -1,0 +1,147 @@
+# Country tags — Nehekhara. Board item #3419 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "07 NEHEKHARA".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers. Seeded from the nehekharan culture color in
+#                  common/cultures/07_nehekhara.txt (204 178 96): a sand/bronze/turquoise family,
+#                  bronze for the smith-cities and turquoise for the two river-and-sea cities.
+#                  LAH takes the lahmian_vampire culture color unchanged — a dark carmine-violet
+#                  that belongs to no part of the Tomb Kings' palette, which is the point.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/07_nehekhara.txt
+#
+# Every tag here is unrecognized: the risen dead of the Great Land keep no place in the recognized
+# order of the living Old World, whatever their own antiquity. The tomb-cities are kingdoms (each
+# has its Tomb King), NEH is the empire that reunites them, and LAH is a lone city_state.
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_nehekhara_l_english.yml.
+# The NEH formation rule lives in common/country_formation/07_nehekhara_formables.txt.
+
+################ NEH — Nehekhara; Settra reunites the Land of the Dead ################
+# Formable only. nehekharan ONLY: the Lahmian vampires are Settra's enemies, not his subjects, and
+# the registry is explicit that LAH is no part of a reunited Nehekhara.
+# A brighter sand than KHM's so the formable reads distinctly from Settra's own city.
+
+NEH = {
+	color = { 220 196 118 }
+	country_type = unrecognized
+	tier = empire
+	cultures = { nehekharan }
+	# capital: Khemri — TODO once land state-regions exist
+}
+
+################ KHM — Khemri ################
+# Settra the Imperishable’s own city, the seat of the Great Land
+
+KHM = {
+	color = { 204 178 96 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Khemri — TODO once land state-regions exist
+}
+
+################ ZND — Zandri ################
+# the port at the mouth of the Mortis; turquoise for the sea
+
+ZND = {
+	color = { 108 150 148 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Zandri — TODO once land state-regions exist
+}
+
+################ NUM — Numas ################
+# the city of the horse-lords of the upper Mortis
+
+NUM = {
+	color = { 190 160 84 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Numas — TODO once land state-regions exist
+}
+
+################ LAH — Lahmia; the cradle of vampires ################
+# Neferata’s city, and a pariah even among the dead: the Mortuary Cult’s own risen kings make
+# war on the Nagashite bloodline that grew here. A city_state, not a kingdom — Lahmia rules
+# nothing but itself, and everything around it wants it gone.
+
+LAH = {
+	color = { 108 34 78 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { lahmian_vampire }
+	# capital: Lahmia — TODO once land state-regions exist
+}
+
+################ LYB — Lybaras ################
+# Queen Khalida’s city of astronomers and scholars
+
+LYB = {
+	color = { 118 158 140 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Lybaras — TODO once land state-regions exist
+}
+
+################ RAS — Rasetra ################
+# the jungle-march city, the Tomb Kings’ southern spear
+
+RAS = {
+	color = { 166 134 72 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Rasetra — TODO once land state-regions exist
+}
+
+################ MAH — Mahrak ################
+# the City of the Dead; the necropolis of the gods
+
+MAH = {
+	color = { 178 156 104 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Mahrak — TODO once land state-regions exist
+}
+
+################ QUA — Quatar ################
+# the White Palace; the City of the Springs of the Dead
+
+QUA = {
+	color = { 196 186 150 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Quatar — TODO once land state-regions exist
+}
+
+################ BHA — Bhagar ################
+# the oasis city of the Dune-Sea
+
+BHA = {
+	color = { 210 168 92 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Bhagar — TODO once land state-regions exist
+}
+
+################ KAS — Ka-Sabar ################
+# the City of Bronze; bronze, for the forges
+
+KAS = {
+	color = { 150 108 56 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { nehekharan }
+	# capital: Ka-Sabar — TODO once land state-regions exist
+}

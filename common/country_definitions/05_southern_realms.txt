@@ -1,0 +1,171 @@
+# Country tags — the Southern Realms. Board item #3419 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "05 SOUTHERN REALMS".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers. Seeded from the polity's own culture color in
+#                  common/cultures/05_southern_realms.txt: tilean warm ochre (176 132 68), estalian
+#                  terracotta-crimson (190 96 74), border_princer dun (132 116 96). The Tilean
+#                  city-states spread across an ochre/terracotta/sea-green family; the Estalian
+#                  kingdoms across crimson/gold. SRT is deliberately OFF that palette — black and
+#                  blood-red — because Sartosa is nobody's city-state, it is the pirates'.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/05_southern_realms.txt
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_southern_realms_l_english.yml.
+# The TIL and EST formation rules live in common/country_formation/05_southern_realms_formables.txt.
+
+################ TIL — Tilea; the city-states unite ################
+# Formable only. Carries sartosan as well as tilean: a united Tilea takes Sartosa in with it.
+# A lighter, brighter ochre than MIR's so the formable reads distinctly from any one city-state.
+
+TIL = {
+	color = { 196 152 78 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { tilean sartosan }
+	# capital: Miragliano — TODO once land state-regions exist
+}
+
+################ MIR — Miragliano; the marsh-city of the Prince of Miragliano ################
+
+MIR = {
+	color = { 176 132 68 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Miragliano — TODO once land state-regions exist
+}
+
+################ LUC — Luccini; the southern city-state of the Prince's arena ################
+
+LUC = {
+	color = { 198 158 96 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Luccini — TODO once land state-regions exist
+}
+
+################ REM — Remas; the greatest of the Tilean city-states ################
+
+REM = {
+	color = { 158 106 62 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Remas — TODO once land state-regions exist
+}
+
+################ TOB — Tobaro; the cliff-port over the Tilean Sea ################
+# Sea-green rather than ochre: Tobaro is a sea power carved into the rock above the water.
+
+TOB = {
+	color = { 96 138 128 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Tobaro — TODO once land state-regions exist
+}
+
+################ TRA — Trantio; the marble city of the hills ################
+
+TRA = {
+	color = { 186 142 96 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Trantio — TODO once land state-regions exist
+}
+
+################ PAV — Pavona; the inland city-state ################
+
+PAV = {
+	color = { 142 118 74 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Pavona — TODO once land state-regions exist
+}
+
+################ VER — Verezzo; the city of scholars and merchant-clerks ################
+
+VER = {
+	color = { 168 152 96 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Verezzo — TODO once land state-regions exist
+}
+
+################ SRT — Sartosa; the pirate haven ################
+# unrecognized: a pirate island run by elected Pirate Princes is no part of the recognized Old World
+# order, however Tilean its people are. Black and blood-red, deliberately off the Tilean palette.
+
+SRT = {
+	color = { 42 20 24 }
+	country_type = unrecognized
+	tier = city_state
+	cultures = { sartosan }
+	# capital: Sartosa — TODO once land state-regions exist
+}
+
+################ EST — Estalia; the kingdoms unite ################
+# Formable only. A brighter crimson than any single kingdom's so the formable reads distinctly.
+
+EST = {
+	color = { 214 96 76 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { estalian }
+	# capital: Magritta — TODO once land state-regions exist
+}
+
+################ BIL — Bilbali; the northern Estalian kingdom ################
+
+BIL = {
+	color = { 190 96 74 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { estalian }
+	# capital: Bilbali — TODO once land state-regions exist
+}
+
+################ MAG — Magritta; the southern port kingdom ################
+
+MAG = {
+	color = { 172 62 56 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { estalian }
+	# capital: Magritta — TODO once land state-regions exist
+}
+
+################ CNT — Cantonia; a minor Estalian kingdom ################
+
+CNT = {
+	color = { 206 148 74 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { estalian }
+	# capital: Cantonia — TODO once land state-regions exist
+}
+
+################ BPR — the Border Princes; the belt of petty realms ################
+# ONE representative tag for a whole belt of tiny, short-lived principalities, per the registry.
+# decentralized rather than recognized/unrecognized: Vic3's decentralized country type models exactly
+# this — territory that is inhabited and contested but not coordinated by a single coherent state —
+# and that is a truer picture of the Border Princes than pretending the belt is one principality.
+# The registry records the canonical decentralization as a later government/law-variant task; this
+# country_type is the tag-level half of it.
+
+BPR = {
+	color = { 132 116 96 }
+	country_type = decentralized
+	tier = principality
+	cultures = { border_princer }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}

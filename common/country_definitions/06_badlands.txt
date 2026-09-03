@@ -1,0 +1,158 @@
+# Country tags — the Badlands. Board item #3419 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "06 BADLANDS".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers. Orc tags sit in the earthy mid-green band seeded
+#                  from the orc culture color in common/cultures/06_badlands.txt (74 106 46);
+#                  goblin tags sit in a DELIBERATELY darker moss/black-green band rather than the
+#                  goblin culture's own pale green (148 170 84), so that on a map crowded with
+#                  twelve greenskin tags the orc tribes and the goblin tribes read apart at a
+#                  glance. That is the one place this file departs from the "reuse the culture
+#                  color" convention, and it departs on purpose.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/06_badlands.txt
+#
+# ALL TWELVE are decentralized/principality. Greenskin tribes and WAAAGH!s are not states: they hold
+# no court, sign no treaty and keep no border, and Vic3's decentralized country type is the closest
+# thing the engine has to that. The principality tier keeps them small without implying a crown.
+#
+# NO FORMABLE in this region — Chris dropped the Grand WAAAGH! (WAG), so there is deliberately no
+# common/country_formation/06_badlands_formables.txt and no WAG tag reserved.
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_badlands_l_english.yml.
+
+################ RED — Red Eye ################
+# Grimgor Ironhide’s ’Ardboyz; the ex-dwarf hold of Karak Ungor
+
+RED = {
+	color = { 96 124 50 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: Red Eye — TODO once land state-regions exist
+}
+
+################ CRM — Crooked Moon ################
+# Skarsnik’s Night Goblins, squatting in Karak Eight Peaks
+
+CRM = {
+	color = { 42 62 38 }
+	country_type = decentralized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ BKA — Broken Axe ################
+# Grom the Paunch’s goblins of the Misty Mountain
+
+BKA = {
+	color = { 54 74 42 }
+	country_type = decentralized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ RFG — Red Fangs ################
+# Gorfang Rotgut; holds Black Crag, the ex-dwarf Karak Drazh
+
+RFG = {
+	color = { 78 100 40 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: Black Crag — TODO once land state-regions exist
+}
+
+################ ICL — Ironclaw ################
+# Gorbad Ironclaw; holds the Iron Rock in the northern Badlands
+
+ICL = {
+	color = { 110 132 58 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: Iron Rock — TODO once land state-regions exist
+}
+
+################ BSB — Bloody Sunz ################
+# Grumlok and Gazbag’s Badlands orc tribe
+
+BSB = {
+	color = { 66 96 42 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ BNR — Bonerattlaz ################
+# Azhag the Slaughterer; the northern World’s Edge
+
+BNR = {
+	color = { 88 108 52 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ BTO — Broken Tooth ################
+# Crusher Zogoth; the Iron Rock before Gorbad took it
+
+BTO = {
+	color = { 102 116 44 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ BRN — Broken Nose ################
+# a goblin tribe of the Vaults
+
+BRN = {
+	color = { 36 54 34 }
+	country_type = decentralized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ BLV — Black Venom ################
+# Forest Goblins south of Black Fire Pass
+
+BLV = {
+	color = { 48 66 30 }
+	country_type = decentralized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ RDV — Redvenom ################
+# Snagla Grobspit’s Forest Goblins
+
+RDV = {
+	color = { 60 80 46 }
+	country_type = decentralized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}
+
+################ SKZ — Skullsmasherz ################
+# Ugrok Craktoof; the Grey Mountains, on Bretonnia’s flank
+
+SKZ = {
+	color = { 72 110 54 }
+	country_type = decentralized
+	tier = principality
+	cultures = { orc }
+	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+}

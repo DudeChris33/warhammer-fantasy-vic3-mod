@@ -1,0 +1,60 @@
+# Country formation — the Southern Realms. Board item #3419 (epic #3414).
+# TWO formables in this one region file (one file per region, not per formable):
+#   TIL — Tilea, formed when the Tilean city-states unite
+#   EST — Estalia, formed when the Estalian kingdoms unite
+# Tilea and Estalia are separate peoples with separate unifications, so each gets its own entry with
+# its own culture gate. Every other 05_southern_realms tag is a start tag; BPR has no formable at all
+# (the Border Princes' whole character is that they never unite).
+#
+# Deliberately minor/culture-based in shape: no unification_play, leadership_play or
+# geographic_region key. common/diplomatic_plays and common/geographic_regions are blanked via
+# .metadata/metadata.json's replace_paths and hold no entries, so referencing either would point at
+# content that does not exist. Revisit when those databases are authored.
+# Triggers used below are confirmed in docs/triggers.log (both country scope):
+#   is_country_type = <country type>
+#   country_has_primary_culture = <culture>
+#
+# TODO (post-states epic): add state/province requirements. use_culture_states +
+# required_states_fraction currently gate on nothing real — no land map_data/state_regions/ exist
+# yet — so both formables are trivially reachable. Tighten once land states land.
+
+################ TIL — Tilea ################
+# The country-type gate is a recognized/unrecognized pair (the #3418 pattern), not the bare
+# `is_country_type = recognized` used by EMP/BRE/NSC: TIL's own roster mixes both — the seven Tilean
+# city-states are recognized but SRT/Sartosa is unrecognized, and Sartosa is explicitly part of a
+# united Tilea (it is in TIL's cultures list). Gating on `recognized` alone would lock the pirates
+# out of the unification they are named in. The pair still excludes colonial/company/decentralized.
+# The culture gate is likewise an OR: tilean OR sartosan, matching TIL's cultures = { tilean sartosan }.
+
+TIL = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		OR = {
+			is_country_type = recognized
+			is_country_type = unrecognized
+		}
+		OR = {
+			country_has_primary_culture = cu:tilean
+			country_has_primary_culture = cu:sartosan
+		}
+	}
+}
+
+################ EST — Estalia ################
+# The bare `is_country_type = recognized` gate is correct here, unlike TIL's: every Estalian start
+# tag (BIL, MAG, CNT) is recognized, so there is no unrecognized country this formable is meant for
+# and no reason to widen the gate.
+
+EST = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		is_country_type = recognized
+		country_has_primary_culture = cu:estalian
+	}
+}

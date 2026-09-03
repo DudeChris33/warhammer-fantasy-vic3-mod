@@ -1,0 +1,41 @@
+# Country formation — Nehekhara. Board item #3419 (epic #3414).
+# ONE formable in this region: NEH, the reunited Land of the Dead, formed when Settra brings the
+# tomb-cities back under Khemri. Every other 07_nehekhara tag is a start tag.
+#
+# The culture gate is `nehekharan` ALONE, deliberately. planning/tag_registry.md is explicit that
+# the Lahmian vampires are Settra's enemies and no part of his realm, so LAH/lahmian_vampire is
+# excluded from this formation exactly as it is excluded from NEH's own cultures list in
+# common/country_definitions/07_nehekhara.txt.
+#
+# Deliberately minor/culture-based in shape: no unification_play, leadership_play or
+# geographic_region key. common/diplomatic_plays and common/geographic_regions are blanked via
+# .metadata/metadata.json's replace_paths and hold no entries, so referencing either would point at
+# content that does not exist. Revisit when those databases are authored.
+# Triggers used below are confirmed in docs/triggers.log (both country scope):
+#   is_country_type = <country type>
+#   country_has_primary_culture = <culture>
+#
+# The country-type gate is a recognized/unrecognized pair (the #3418 pattern): every Nehekharan tag
+# is unrecognized, so the bare `is_country_type = recognized` used by EMP/BRE/NSC would exclude
+# every single country this formable exists for. The pair still excludes
+# colonial/company/decentralized countries.
+#
+# TODO (post-states epic): add state/province requirements. use_culture_states +
+# required_states_fraction currently gate on nothing real — no land map_data/state_regions/ exist
+# yet — so this formable is trivially reachable. Tighten once land states land.
+
+################ NEH — Nehekhara ################
+
+NEH = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		OR = {
+			is_country_type = recognized
+			is_country_type = unrecognized
+		}
+		country_has_primary_culture = cu:nehekharan
+	}
+}
