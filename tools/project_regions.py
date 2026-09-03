@@ -241,6 +241,16 @@ def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
     pixel is drawn by exactly one crop: a crop paints a canvas pixel only where it
     owns the master pixel it maps to, so lines in the crops' overlap zones are placed
     once rather than doubled per covering crop.
+
+    That per-master-pixel ownership is decided independently of any one crop's
+    canvas-space footprint, so a master pixel can end up owned by a crop whose own
+    ``footprint_box`` does not reach the canvas location a *different*, non-owning
+    crop maps it to — every crop that could have drawn it there defers to an owner
+    that never visits that pixel, leaving a gash of bare globe along the seam. A
+    second, owner-blind fallback pass (last crop in :data:`FIVE_CROPS` order wins,
+    same as the owner rule) fills exactly those still-unplaced pixels; it never
+    touches a pixel the first pass already placed, so it cannot reintroduce the
+    doubled lines the ownership pass exists to prevent.
     """
     canvas_rgb = globe_rgb.copy()
     placed = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
@@ -250,46 +260,53 @@ def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
     paint_alpha = paint_rgba[..., 3].astype(np.float32)
     owner_f = owner.astype(np.float32)
 
-    for idx, name in enumerate(FIVE_CROPS):
-        reg = regs[name]
-        dx, dy = offsets[name]
-        crop_alpha = crop_rgba[name][..., 3].astype(np.float32)
-        ch, cw = crop_rgba[name].shape[:2]
-        fit = reproject.fit_placement(reg, regs)
-        bx0, by0, bx1, by1 = footprint_box(reg)
-        if bx1 <= bx0 or by1 <= by0:
-            raise SystemExit(f"{name}: empty footprint box {reg.footprint}")
+    def paint_pass(require_owner: bool) -> None:
+        for idx, name in enumerate(FIVE_CROPS):
+            reg = regs[name]
+            dx, dy = offsets[name]
+            crop_alpha = crop_rgba[name][..., 3].astype(np.float32)
+            ch, cw = crop_rgba[name].shape[:2]
+            fit = reproject.fit_placement(reg, regs)
+            bx0, by0, bx1, by1 = footprint_box(reg)
+            if bx1 <= bx0 or by1 <= by0:
+                raise SystemExit(f"{name}: empty footprint box {reg.footprint}")
 
-        gx = (np.arange(bx0, bx1, dtype=np.float64) + 0.5)[None, :]
-        for yb in range(by0, by1, ROW_BLOCK):
-            ye = min(yb + ROW_BLOCK, by1)
-            gy = (np.arange(yb, ye, dtype=np.float64) + 0.5)[:, None]
-            gxb = np.broadcast_to(gx, (ye - yb, bx1 - bx0))
-            gyb = np.broadcast_to(gy, (ye - yb, bx1 - bx0))
-            # canvas -> crop px, then crop -> master px by the exact cutout offset.
-            sx_c, sy_c = fit.to_source_px(gxb, gyb)
-            mx = sx_c + dx
-            my = sy_c + dy
+            gx = (np.arange(bx0, bx1, dtype=np.float64) + 0.5)[None, :]
+            for yb in range(by0, by1, ROW_BLOCK):
+                ye = min(yb + ROW_BLOCK, by1)
+                gy = (np.arange(yb, ye, dtype=np.float64) + 0.5)[:, None]
+                gxb = np.broadcast_to(gx, (ye - yb, bx1 - bx0))
+                gyb = np.broadcast_to(gy, (ye - yb, bx1 - bx0))
+                # canvas -> crop px, then crop -> master px by the exact cutout offset.
+                sx_c, sy_c = fit.to_source_px(gxb, gyb)
+                mx = sx_c + dx
+                my = sy_c + dy
 
-            in_crop = (sx_c >= 0) & (sx_c <= cw - 1) & (sy_c >= 0) & (sy_c <= ch - 1)
-            in_master = (mx >= 0) & (mx <= pw - 1) & (my >= 0) & (my <= ph - 1)
-            ca = reproject.resample(crop_alpha, sx_c, sy_c, order=0)
-            pa = reproject.resample(paint_alpha, mx, my, order=0)
-            own = reproject.resample(owner_f, mx, my, order=0)
-            valid = (in_crop & in_master & (ca > ALPHA_VALID) & (pa > ALPHA_VALID)
-                     & (np.rint(own) == idx))
-            if not valid.any():
-                continue
+                in_crop = (sx_c >= 0) & (sx_c <= cw - 1) & (sy_c >= 0) & (sy_c <= ch - 1)
+                in_master = (mx >= 0) & (mx <= pw - 1) & (my >= 0) & (my <= ph - 1)
+                ca = reproject.resample(crop_alpha, sx_c, sy_c, order=0)
+                pa = reproject.resample(paint_alpha, mx, my, order=0)
+                view_placed = placed[yb:ye, bx0:bx1]
+                valid = in_crop & in_master & (ca > ALPHA_VALID) & (pa > ALPHA_VALID)
+                if require_owner:
+                    own = reproject.resample(owner_f, mx, my, order=0)
+                    valid &= (np.rint(own) == idx)
+                else:
+                    valid &= ~view_placed
+                if not valid.any():
+                    continue
 
-            block = np.empty((ye - yb, bx1 - bx0, 3), dtype=np.uint8)
-            for c in range(3):
-                block[..., c] = np.clip(
-                    reproject.resample(paint_planes[c], mx, my, order=order), 0, 255
-                ).astype(np.uint8)
-            view_rgb = canvas_rgb[yb:ye, bx0:bx1]
-            view_placed = placed[yb:ye, bx0:bx1]
-            view_rgb[valid] = block[valid]
-            view_placed |= valid
+                block = np.empty((ye - yb, bx1 - bx0, 3), dtype=np.uint8)
+                for c in range(3):
+                    block[..., c] = np.clip(
+                        reproject.resample(paint_planes[c], mx, my, order=order), 0, 255
+                    ).astype(np.uint8)
+                view_rgb = canvas_rgb[yb:ye, bx0:bx1]
+                view_rgb[valid] = block[valid]
+                view_placed |= valid
+
+    paint_pass(require_owner=True)
+    paint_pass(require_owner=False)
     return canvas_rgb, placed
 
 
