@@ -93,6 +93,33 @@ both are currently blanked via `replace_paths` and hold no entries, so a referen
 Loc lives in `localization/english/countries_<region>_l_english.yml`, one file per script file, with
 two keys per tag: the bare tag (display name) and `<TAG>_ADJ` (adjective).
 
+## `common/scripted_triggers/` compatibility stubs (#3447)
+
+Vanilla folders that are *not* in `replace_paths` (e.g. `common/battle_conditions/`, and the
+`gfx/` building/train/ship graphics data) still load and still call scripted triggers whose own
+definitions this mod declined to restore. When a dropped vanilla trigger's real body transitively
+depends on `replace_paths`-blanked data — `is_in_geographic_region = geographic_region_*`,
+`cu:<real-world culture>` ids, `heritage_group_*` discrimination trait groups, journal entries —
+**restore it as a stub under its original name** rather than porting the vanilla body, which would
+only dangle. Keep the stub bodies to `always = no` / `always = yes` (both confirmed in
+`docs/triggers.log`) so they stay deterministic. Where the vanilla body ports cleanly because it
+depends only on engine-side keys rather than content ids (e.g. `has_culture_graphics = european`),
+restore it verbatim instead of stubbing.
+
+Every stub must record, in a comment above it, **whether it is a true no-op or silently prunes
+dependent content** — do not present all stubs as clean equivalences. Most graphics-selection
+triggers are genuine no-ops: a false result just falls through to the default visual variant.
+`is_in_guerilla_war` in `01_legacy_compat_triggers.txt` is the counter-example and the model for
+the disclosure: stubbing it false permanently disables the ~6 vanilla battle-condition variants
+gated on it evaluating `= yes`, which is the right call today but is a disclosed content gap with a
+follow-up owed. Pick the stub value that matches vanilla's own fallback semantics — a trigger that
+is vanilla's `NOR`-over-everything catch-all (e.g. `gfx_has_no_culture_trains_trigger`) stubs to
+`yes`, not `no`.
+
+Compatibility stubs live either in `01_legacy_compat_triggers.txt` (cross-cutting one-offs) or in a
+file named after the vanilla file they stand in for (`00_gfx_buildings_graphics_triggers.txt`).
+Before adding one, grep `common/` for the trigger id — a duplicate definition is a game-log error.
+
 ## Forbidden
 
 - No non-deterministic effects (see [core.md](core.md) Determinism).

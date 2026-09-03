@@ -7,6 +7,18 @@
 # replace_paths, so vanilla's 00_battle_conditions.txt loads and references this
 # trigger 21 times. Defined as a constant "no" - deterministic and semantically
 # equivalent to "no such war exists".
+#
+# DISCLOSED CONTENT GAP (audit #3447): this is NOT a harmless no-op. Vanilla's
+# only definition (ip4_carlist_war_triggers.txt) checks
+# is_involved_in_journal_entry = je_the_first_carlist_war plus
+# has_global_variable = carlist_war_skirmish_phase - both Carlist-War-only state
+# that cannot exist here (common/journal_entries is blanked; nothing sets that
+# global). Of the 21 references in vanilla's 00_battle_conditions.txt, roughly
+# six require this trigger to evaluate = yes to unlock a battle-condition
+# variant, so stubbing to "no" permanently disables those variants. That is the
+# correct call while no WH-native guerrilla/insurgency mechanic exists, but it
+# is a content gap, not a clean equivalence: a follow-up item should design a
+# WH-native guerrilla/insurgency flag and re-wire those variants onto it.
 is_in_guerilla_war = {
 	always = no
 }
