@@ -17,7 +17,8 @@ Covers Clausewitz script: game database definitions in `common/` and event files
 
 ## Naming
 
-- The first established convention is the culture foundation (#3405): zero-padded `NN_<topic>.txt` filenames within a database folder, ordered by loading/reading precedence (e.g. `common/discrimination_trait_groups/00_heritage_groups.txt`, `01_language_groups.txt`, `02_religious_heritage_groups.txt`; `common/religions/00_religions.txt`). When a folder has no such convention yet, pick a clear, descriptive snake_case filename (with or without a numeric prefix, e.g. `buildings_empire.txt`) and stay consistent with whatever is chosen going forward. `common/cultures/` follows the same `NN_<region>.txt` shape, one file per Old World region (`00_norsca.txt`, `01_kislev.txt`, `02_empire.txt`, etc.), with every culture belonging to that region defined inside it.
+- The first established convention is the culture foundation (#3405): zero-padded `NN_<topic>.txt` filenames within a database folder, ordered by loading/reading precedence (e.g. `common/discrimination_trait_groups/00_heritage_groups.txt`, `01_language_groups.txt`, `02_religious_heritage_groups.txt`; `common/religions/00_religions.txt`). When a folder has no such convention yet, pick a clear, descriptive snake_case filename (with or without a numeric prefix, e.g. `buildings_empire.txt`) and stay consistent with whatever is chosen going forward. `common/country_definitions/` and `common/country_formation/` follow that `NN_<region>.txt` shape, one file per Old World region — see their own schema section below.
+- `common/cultures/` instead groups by RACE/CULTURE-GROUP, not by region: a plain descriptive snake_case filename per group (`norscan_humans.txt`, `imperial_humans.txt`, `dwarven.txt`, `greenskin.txt`, `vampire.txt`, `chaos_dwarf.txt`, `nehekharan_araby.txt`, etc.), with every culture belonging to that race/group defined inside it regardless of which region's states its population actually lives in (Chris, 2026-09-03; supersedes this folder's original `NN_<region>.txt` layout from board item #3405). A culture id is global and referenced by other files (e.g. `common/country_definitions/`) purely by id, so this reshuffle never touches those ids — only which file defines them.
 
 ## `common/cultures/` entry schema (epic #3404, #3406-#3409)
 
@@ -48,6 +49,16 @@ named for the region it covers (`02_empire.txt`), with formables split into a si
 `common/country_formation/NN_<region>_formables.txt`. The tag roster itself is frozen in
 `planning/tag_registry.md` (epic #3414); check a code there before authoring it.
 
+**A tag's file is chosen by geography, not by its culture (Chris, 2026-09-03).** A tag lives in the
+`NN_<region>.txt` for the region it's physically located in, even when its culture is defined in a
+different (and, since `common/cultures/` now groups by race rather than region, differently-named)
+`common/cultures/` file — that's a legal cross-file reference, since culture ids are global. Example:
+`MOR` (Massif Orcal, a Greenskin holdout in the Bretonnian heartland) is defined in `03_brettonia.txt`
+and uses `orc`/`goblin` culture ids from `common/cultures/greenskin.txt`, because it's geographically
+part of Bretonnia even though its population isn't bretonnian. Contrast `SKZ` (Grey Mountains, on
+Bretonnia's *border*), which stays in `06_badlands.txt` because that mountain range is Badlands
+territory, not Bretonnian.
+
 A country definition entry:
 
 ```
@@ -62,7 +73,7 @@ TAG = {
 - `color` uses the **brace** form `{ R G B }` (0-255 integers), not `common/cultures/`' `rgb{ }`.
   Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
-- `cultures` ids must exist in the matching `common/cultures/NN_<region>.txt`.
+- `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see the Naming section above; no longer a matching-region file).
 - **`capital` is deliberately omitted** on every tag this mod ships (established by board item
   #3416). No land `map_data/state_regions/` exist yet — only the sea zones emitted by
   `tools/generate_sea_regions.py` — so any `capital = STATE_*` would dangle. Record the intended

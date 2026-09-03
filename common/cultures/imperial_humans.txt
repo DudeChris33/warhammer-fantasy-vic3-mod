@@ -1,4 +1,4 @@
-﻿# Old World cultures — the Empire. Schema mirrors common/cultures/00_norsca.txt, the
+﻿# Old World cultures — Imperial humans. Schema mirrors common/cultures/norscan_humans.txt, the
 # verified reference entry for this mod. Each culture carries:
 #   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
 #   religion   — a religion id from common/religions/00_religions.txt.
@@ -10,10 +10,13 @@
 #   noble_last_names / male_regal_first_names / female_regal_first_names are OPTIONAL (confirmed
 #                against vanilla, where many cultures omit them) and are used here only for the
 #                cultures that have a real aristocracy in Warhammer lore — the ten Electorates,
-#                Solland (a lost Electorate that still keeps its houses), the Sylvanian gentry
-#                (noble houses only — Sylvania's rulers are vampires, not sylvanian humans) and
-#                the von Carstein aristocracy itself. The Moot has an Elder, not a monarch, so
-#                halfling carries common name lists only.
+#                Solland (a lost Electorate that still keeps its houses) and the Sylvanian gentry
+#                (noble houses only — Sylvania's rulers are vampires, not sylvanian humans, and are
+#                filed separately in common/cultures/vampire.txt). The Moot has an Elder, not a
+#                monarch, so halfling carries common name lists only. Halfling is a distinct race
+#                (heritage_halfling, its own trait group) rather than an Imperial human culture, but
+#                is kept in this file rather than split out: it is the only culture of its kind, an
+#                Empire-only people speaking Reikspiel alongside its neighbours here.
 #   graphics/ethnicities — vanilla portrait ids, confirmed present in the vanilla
 #                common/culture_graphics/ and common/ethnicities/ databases. Custom art is out of
 #                scope for epic #3404.
@@ -21,7 +24,7 @@
 # Every name string used below also needs a matching localization key unless vanilla already ships
 # one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
 # six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
-# Culture display names live in localization/english/cultures_empire_l_english.yml.
+# Culture display names live in localization/english/cultures_imperial_humans_l_english.yml.
 # Board item #3406 (epic #3404); sylvanian_vampire rename + marienburger addition, board item #3415.
 
 ################ Reiklander — the Imperial heartland; classical Reikspiel, Sigmarite ################
@@ -521,6 +524,8 @@ wissenlander = {
 # Not the vampires — these are the peasants and petty gentry who bury their dead deep and
 # salt the graves against their own lords. Noble houses survive as old boyar-ish lines, but
 # no regal names: Sylvania's crown belongs to the von Carsteins, not to sylvanian humans.
+# The von Carstein aristocracy itself is a different race, filed separately as sylvanian_vampire
+# in common/cultures/vampire.txt.
 
 sylvanian = {
 	color= rgb{ 62 52 72 }
@@ -558,62 +563,6 @@ sylvanian = {
 	ethnicities = {
 		2 = caucasian_northern_dark_hair
 		1 = caucasian_dark_hair
-	}
-}
-
-################ Sylvanian Vampire — the von Carstein aristocracy; the same tongue, colder ################
-# A DIFFERENT racial heritage from the sylvanian humans they rule (heritage_vampire, in the
-# undead trait group) while sharing sphere_reikspiel with them. The lists are deliberately
-# sparse: there are very few vampires, and their get are fewer still. The common_last_names
-# are the names their thralls and mortal households carry.
-# ethnicities: vanilla ships no undead template, so the palest caucasian morphs stand in —
-# same treatment as mousillon in #3407. Custom art is out of scope for epic #3404.
-# Named sylvanian_vampire (not the bare "vampire" this culture originally shipped as) to leave
-# room for other Old World vampire bloodlines (Lahmia, Strigany, Blood Dragons, etc.) each
-# getting their own distinct culture id later without colliding with this one. Board item #3415.
-
-sylvanian_vampire = {
-	color= rgb{ 94 32 44 }
-	religion = cult_of_nagash
-	heritage = heritage_vampire
-	language = sphere_reikspiel
-
-	obsessions = { }
-
-	traditions = { }
-
-	male_common_first_names = {
-		Vlad Mannfred Walach Kryzstoff Sigismund Adalbert Vitalis Malachar Erasmus Cassimir
-		Dieterich Ruthven Valdred Nyklaus
-	}
-
-	female_common_first_names = {
-		Isabella Elisse Melisandra Carmilla Ondriana Vasilika Seraphita Morgianne Ravenna Sabathine
-		Valeska Yelisandra Corvina Drusilla
-	}
-
-	noble_last_names = {
-		von_Carstein von_Drakenhof von_Templehof von_Nachthafen von_Grausberg
-		von_Blutstein von_Todesheim von_Aschenwald von_Sternheim von_Mordenburg
-	}
-
-	common_last_names = {
-		Blutlos Kaltherz Nachtschatten Grabesstill Aschenblut
-		Dornwald Schattenhof Winterblut Mondlicht Leichenwacht
-	}
-
-	male_regal_first_names = {
-		Vlad Mannfred Sigismund Walach Adalbert Kryzstoff
-	}
-
-	female_regal_first_names = {
-		Isabella Carmilla Melisandra Ravenna Drusilla
-	}
-
-	graphics = european
-	ethnicities = {
-		3 = caucasian_northern_dark_hair
-		1 = caucasian_northern_brown_hair
 	}
 }
 
@@ -669,48 +618,6 @@ sollander = {
 	}
 }
 
-################ Halfling — the Moot; hearth, field and second breakfast ################
-# Citizens of the Empire and a distinct race (heritage_halfling, its own trait group), speaking
-# Reikspiel like their neighbours. The Moot is led by an Elder, not a monarch, so there are no
-# noble or regal name lists. Surnames are doubled-barrel homestead names.
-# ethnicities: vanilla ships no halfling analogue and no short-stature morph; the rural caucasian
-# morphs are a deliberate STAND-IN pending custom art, which is out of scope for epic #3404.
-
-halfling = {
-	color= rgb{ 150 172 92 }
-	religion = old_faith
-	heritage = heritage_halfling
-	language = sphere_reikspiel
-
-	obsessions = { }
-
-	traditions = { }
-
-	male_common_first_names = {
-		Hisme Pippick Barnabas Cobbin Grubbin Milo Tobin Rufus Elmo Gundel
-		Perrin Stubbin Wenlo Dorbin Halwin Josef Ambrit Fenwick Gorbin Lumpin
-		Nubbin Sedge
-	}
-
-	female_common_first_names = {
-		Mancy Poppy Bramble Tilly Nessa Marjoram Hazel Primrose Damsy Clover
-		Buttercup Nutmeg Sorrel Bryony Cressie Pearline Mabbet Orla Quilla Thistle
-		Wynne Yolla Juniper
-	}
-
-	common_last_names = {
-		Applebarrow Butterbrook Hearthfield Mossbottom Barleycorn Honeypot Thatchmore Cheeseholm
-		Pumpkinvale Nutley Turnipfield Loamhollow Beerbelly Crumbfield Puddlefoot Gooseberry
-		Cabbagepatch Meadowbank
-	}
-
-	graphics = european
-	ethnicities = {
-		2 = caucasian_brown_hair
-		1 = caucasian_ginger
-	}
-}
-
 ################ Marienburger — Marienburg, the seceded Wasteland; mercantile, Reikspiel-rooted ################
 # Westerland seceded from the Empire; its capital Marienburg is ruled by a merchant Directorate of
 # Guilders, not a monarch — like the Moot, no regal name lists. Noble last names instead represent
@@ -753,5 +660,47 @@ marienburger = {
 	ethnicities = {
 		2 = caucasian_blond
 		1 = caucasian_brown_hair
+	}
+}
+
+################ Halfling — the Moot; hearth, field and second breakfast ################
+# Citizens of the Empire and a distinct race (heritage_halfling, its own trait group), speaking
+# Reikspiel like their neighbours. The Moot is led by an Elder, not a monarch, so there are no
+# noble or regal name lists. Surnames are doubled-barrel homestead names.
+# ethnicities: vanilla ships no halfling analogue and no short-stature morph; the rural caucasian
+# morphs are a deliberate STAND-IN pending custom art, which is out of scope for epic #3404.
+
+halfling = {
+	color= rgb{ 150 172 92 }
+	religion = old_faith
+	heritage = heritage_halfling
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Hisme Pippick Barnabas Cobbin Grubbin Milo Tobin Rufus Elmo Gundel
+		Perrin Stubbin Wenlo Dorbin Halwin Josef Ambrit Fenwick Gorbin Lumpin
+		Nubbin Sedge
+	}
+
+	female_common_first_names = {
+		Mancy Poppy Bramble Tilly Nessa Marjoram Hazel Primrose Damsy Clover
+		Buttercup Nutmeg Sorrel Bryony Cressie Pearline Mabbet Orla Quilla Thistle
+		Wynne Yolla Juniper
+	}
+
+	common_last_names = {
+		Applebarrow Butterbrook Hearthfield Mossbottom Barleycorn Honeypot Thatchmore Cheeseholm
+		Pumpkinvale Nutley Turnipfield Loamhollow Beerbelly Crumbfield Puddlefoot Gooseberry
+		Cabbagepatch Meadowbank
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_ginger
 	}
 }

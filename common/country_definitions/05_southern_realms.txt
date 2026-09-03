@@ -3,14 +3,14 @@
 #
 # Entry schema (see .claude/rules/scripting.md):
 #   color        — { R G B } with 0-255 integers. Seeded from the polity's own culture color in
-#                  common/cultures/05_southern_realms.txt: tilean warm ochre (176 132 68), estalian
+#                  common/cultures/southern_realms_humans.txt: tilean warm ochre (176 132 68), estalian
 #                  terracotta-crimson (190 96 74), border_princer dun (132 116 96). The Tilean
 #                  city-states spread across an ochre/terracotta/sea-green family; the Estalian
 #                  kingdoms across crimson/gold. SRT is deliberately OFF that palette — black and
 #                  blood-red — because Sartosa is nobody's city-state, it is the pirates'.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/05_southern_realms.txt
+#   cultures     — culture ids from common/cultures/southern_realms_humans.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The

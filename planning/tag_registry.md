@@ -14,10 +14,10 @@ Filed by epic #3414 (child #3415).
 
 ### Regions approved (Phase B walk)
 
-- [x] 00 Norsca (10)
+- [x] 00 Norsca (9)
 - [x] 01 Kislev (10)
-- [x] 02 Empire (16)
-- [x] 03 Bretonnia (15)
+- [x] 02 Empire (18)
+- [x] 03 Bretonnia (16)
 - [x] 04 Karaz Ankor (18)
 - [x] 05 Southern Realms (14)
 - [x] 06 Badlands (12)
@@ -35,7 +35,7 @@ Filed by epic #3414 (child #3415).
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (18)
 
-**Total: 193 tags** (15 formables, 178 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 195 tags** (15 formables, 180 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -114,6 +114,7 @@ BOR
 BPR
 BRE
 BRI
+BRK
 BRN
 BSB
 BTO
@@ -201,6 +202,7 @@ MIR
 MKY
 MNF
 MOO
+MOR
 MOU
 MTK
 MZN
@@ -210,7 +212,6 @@ NGA
 NGD
 NGY
 NLD
-NSC
 NUM
 ORG
 OSM
@@ -262,6 +263,7 @@ ULT
 UNG
 UZK
 VAR
+VEM
 VER
 VLG
 VOL
@@ -290,15 +292,18 @@ epic, not tag-uniqueness concerns.)
 
 ## Roster
 
-### 00 NORSCA (norscan) — 10 tags; NSC formable
+### 00 NORSCA (norscan) — 9 tags; no formable
 
 7 core High Tribes are solid canon; Hastlings + Kvelligs are medium-confidence High Tribes. Honest
 ceiling ~10–12 (deeper Norse "tribes" are fan/homebrew). Seed's Skjaelings/Sortsvinar dropped
-(unverified — Chris's call, approved 2026-08-30).
+(unverified — Chris's call, approved 2026-08-30). NSC unifier tag dropped on manual audit — the
+High Tribes keep their own identity even after mass conquest; a unification journal entry may
+represent this later instead of a formable country. All nine tribes are `grand_principality` tier,
+`unrecognized` type (raiding tribes under a jarl, not part of any order the civilised south
+recognises); a future country type may be added to represent tribal societies more precisely.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
-| NSC | `00_norsca` | Norsca (united Norsii) | formable | `norscan` | — | unifier of the tribes |
 | SAR | `00_norsca` | Sarls | start | `norscan` | Sortsvinar coast | Wolf of the Sea |
 | AES | `00_norsca` | Aeslings | start | `norscan` | — | Slaanesh-leaning tribe |
 | BAE | `00_norsca` | Baersonlings | start | `norscan` | — | reavers, on speaking terms w/ humanity |
@@ -319,7 +324,7 @@ oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (App
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | KIS | `01_kislev` | Kislev (Tzardom) | formable | `gospodar`, `ungol` | — | United Kislev — both founding peoples |
 | KSV | `01_kislev` | Kislev | start | `gospodar` | Kislev | the capital oblast, Tzarina's seat |
-| ERE | `01_kislev` | Erengrad | start | `ungol` | Erengrad | western Ungol-leaning port |
+| ERE | `01_kislev` | Erengrad | start | `gospodar`, `ungol` | Erengrad | western port city, gospodar-founded amid Ungol lands |
 | PRA | `01_kislev` | Praag | start | `gospodar` | Praag | northern frontier city |
 | UNG | `01_kislev` | Ungol Horse-Tribes | start | `ungol` | — | nomadic steppe Ungols |
 | TRO | `01_kislev` | Troll Country | start | `ungol` | — | far-NW frontier oblast |
@@ -328,7 +333,7 @@ oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (App
 | DOL | `01_kislev` | Dolgan | start | `ungol` | — | old eastern horse-tribe |
 | ROP | `01_kislev` | Roppsmenn | start | `ungol` | — | old northern tribe |
 
-### 02 EMPIRE (per province culture) — 16 tags; EMP formable
+### 02 EMPIRE (per province culture) — 18 tags; EMP + VEM formable
 
 10 Electoral provinces + Solland + The Moot + Sylvania + Marienburg (the seceded Wasteland). Sylvania
 split into a human tag (`SYL`) and a Vampire tag (`VSY`, von Carstein) per Chris. Marienburg (`WAS`)
@@ -340,6 +345,21 @@ startable realms — held at honest depth. (Approved 2026-08-30.)
 reiklander, middenlander, nordlander, hochlander, ostlander, ostermarker, talabeclander, stirlander,
 averlander, wissenlander, sollander, sylvanian (human). **Excludes** halfling (the Moot),
 sylvanian_vampire, and marienburger (Marienburg seceded — reintegration is a future journal event).
+
+**`VEM` The Von Carstein Empire** (name is a placeholder — TODO, revisit for a better in-world
+name) — a second, later-added formable (manual audit, 2026-09-03): VSY conquers the whole Empire
+and seats itself on Altdorf instead of the human Electorates unifying. Purely `sylvanian_vampire`
+in culture (a conquest tag, not a cultural unification like EMP), `empire` tier, `unrecognized`
+type like its parent VSY. All ten Elector Counts plus Marienburg, Sylvania (human), and Solland are
+`grand_principality`; the Moot is `principality` and `unrecognized` (not a recognized Electorate).
+
+**`BRK` Brass Keep** — registry-only for now (manual audit, 2026-09-03), like the Eastern Steppes
+Chaos tags: a Nurgle-held fortress in the Middle Mountains (Hochland/Middenland/Ostland border),
+captured in the Great War against Chaos (2302 IC per *Warhammer: The Old World*/Lexicanum) and
+never retaken; the Empire contains rather than besieges it via "the Picket." `PLACEHOLDER` culture
+— no Chaos-marauder/cultist culture is authored anywhere in `common/cultures/` yet, so no
+`common/country_definitions` entry exists until that's resolved (possibly a culture shared with
+the Eastern Steppes marauders, a later decision).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -358,14 +378,27 @@ sylvanian_vampire, and marienburger (Marienburg seceded — reintegration is a f
 | MOO | `02_empire` | The Moot | start | `halfling` | Eicheschatten | halfling homeland |
 | SYL | `02_empire` | Sylvania (human) | start | `sylvanian` | Drakenhof | the living population of Sylvania |
 | VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start |
+| VEM | `02_empire` | The Von Carstein Empire | formable | `sylvanian_vampire` | Altdorf | VSY conquers the whole Empire; name TODO |
 | WAS | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
+| BRK | `02_empire` | Brass Keep | start | `PLACEHOLDER` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket" |
 
-### 03 BRETTONIA (bretonnian, mousillon) — 15 tags; BRE formable
+### 03 BRETTONIA (bretonnian, mousillon) — 16 tags; BRE formable
 
 The 14 dukedoms are confirmed complete canon — no 15th, and Mousillon is one of the 14 (the cursed
 dukedom, no ruling Duke). At honest ceiling (no density lever). BRE formable is `bretonnian` only —
 Mousillon's cursed culture is excluded, parallel to EMP excluding the vampire culture. (Approved
 2026-08-30.)
+
+**`MOR` Massif Orcal** added on manual audit (2026-09-03) — not a dukedom, a remnant Orc & Goblin
+holdout in the Bretonnian heartland above the Forest of Chalons, never fully cleared when the
+kingdom was founded. Lives here rather than in `06_badlands` because `common/country_definitions/`
+files are organized by geography, not culture (see that region's entry); its `orc`/`goblin`
+culture ids are a cross-file reference to `common/cultures/greenskin.txt`, the mod's only
+Greenskin cultures. Named by location rather than tribe — a flagged exception to this mod's
+tribal-society naming convention — because no well-attested tribe/warlord name exists for it;
+checked tabletop, *Warhammer: The Old World* Lexicanum, and Total War, and rejected a fan site's
+"Evil Sunz Tribe" claim as unreliable (not in any GW/wiki source, and suspiciously duplicates a
+40K Ork klan name). Revisit if a real name ever surfaces.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -384,6 +417,7 @@ Mousillon's cursed culture is excluded, parallel to EMP excluding the vampire cu
 | LAN | `03_brettonia` | L'Anguille | start | `bretonnian` | L'Anguille |  |
 | PAR | `03_brettonia` | Parravon | start | `bretonnian` | Parravon |  |
 | MOU | `03_brettonia` | Mousillon | start | `mousillon` | Mousillon | the cursed city / undead |
+| MOR | `03_brettonia` | Massif Orcal | start | `orc`, `goblin` | Massif Orcal | remnant Greenskin holdout, Bretonnian heartland; named by location, no tribe attested — TODO revisit |
 
 ### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_badlands) — 18 tags; KAZ formable
 
@@ -451,6 +485,22 @@ is double-tagged by tribe *and* stronghold (Red Fangs = Black Crag; Ironclaw = I
 Karak Eight Peaks; Grimgor's Red Eye = ex-Karak Ungor). **No WAAAGH! formable** (Chris dropped it).
 Savage Orcs are handled in 09 Southlands (their canon heartland) with a new `savage_orc` culture — see
 that region. (Approved 2026-08-30.)
+
+**`common/country_definitions/` files are organized by geography, not by culture (Chris,
+2026-09-03):** a tag's script entry lives in the file for the region it's physically located in,
+even if its culture is defined elsewhere. `SKZ` (Grey Mountains, on Bretonnia's *border/flank*) is
+geographically Badlands territory and stays here; Massif Orcal (`MOR`, in the Bretonnian
+*heartland*, above the Forest of Chalons) is geographically inside Bretonnia and is defined in
+`03_brettonia.txt` instead — see that region's entry for its full writeup, including the
+tribal-naming-convention exception it represents. It still uses `orc`/`goblin` culture ids from
+`common/cultures/greenskin.txt` (a cross-file culture reference; those are the mod's only
+Greenskin cultures).
+
+**Naming convention (Chris, 2026-09-03):** tribal societies — Norsca, Greenskins (this region and
+Bretonnia's `MOR`), Ogre Kingdoms — are named by tribe, not by location/stronghold; Skaven (no
+region yet) will likewise be named by clan, not location, once authored. Audited against this on
+2026-09-03: Norsca and Ogre Kingdoms were already fully tribe-named; this region's own roster was
+already tribe-named (`MOR`, the one location-named exception, lives in Bretonnia's file instead).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|

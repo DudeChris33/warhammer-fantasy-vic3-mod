@@ -1,6 +1,6 @@
-﻿# Old World cultures — the Karaz Ankor, the Dwarf Empire. Schema mirrors
-# common/cultures/00_norsca.txt and 02_empire.txt, the verified reference entries for this mod.
-# Each culture carries:
+﻿# Old World cultures — the Dawi, the Dwarf Empire's people. Schema mirrors
+# common/cultures/norscan_humans.txt and common/cultures/imperial_humans.txt, the verified
+# reference entries for this mod. Each culture carries:
 #   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
 #   religion   — a religion id from common/religions/00_religions.txt.
 #   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
@@ -17,8 +17,11 @@
 # here carries a loaned FIRST name; only dawi_grey takes a light minority of Reikspiel-loan
 # SURNAMES, from centuries of Empire and Bretonnian trade.
 #
-# dawi_badlands is filed here, with its kin, rather than in 06_badlands.txt: culture files in
-# this mod group by RACE, not by the geography of the states a culture happens to occupy.
+# dawi_badlands is filed here, with its kin, rather than by the geography of the Badlands: culture
+# files in this mod group by RACE/CULTURE-GROUP, not by the geography of the states a culture
+# happens to occupy — the convention this file originated, now applied mod-wide (dark_lands'
+# Chaos Dwarfs are likewise filed by kin in common/cultures/chaos_dwarf.txt, and their Hobgoblin
+# hirelings by kin in common/cultures/greenskin.txt).
 #
 # graphics/ethnicities — vanilla ships no dwarf portrait set. `european` plus the ginger- and
 #                brown-weighted caucasian morphs is a deliberate STAND-IN, chosen as the closest
@@ -27,7 +30,7 @@
 # Every name string used below also needs a matching localization key unless vanilla already
 # ships one — see localization/english/cultures_names_l_english.yml. Every culture additionally
 # needs its six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
-# Culture display names live in localization/english/cultures_karaz_ankor_l_english.yml.
+# Culture display names live in localization/english/cultures_dwarven_l_english.yml.
 # Board item #3408 (epic #3404).
 
 ################ Dawi — the World's Edge heartland; the baseline Khazalid register ################

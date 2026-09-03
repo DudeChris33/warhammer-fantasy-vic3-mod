@@ -1,6 +1,8 @@
 ﻿l_english:
- # Culture display names for common/cultures/10_dark_lands.txt.
+ # Culture display names for common/cultures/dwarven.txt.
  # One loc file per culture script file (per-name display keys live in the shared
  # cultures_names_l_english.yml). Board item #3408 (epic #3404).
- dawi_zharr:0 "Dawi Zharr"
- hobgoblin:0 "Hobgoblin"
+ dawi:0 "Dawi"
+ dawi_grey:0 "Grey Dawi"
+ dawi_norse:0 "Norse Dawi"
+ dawi_badlands:0 "Badlands Dawi"

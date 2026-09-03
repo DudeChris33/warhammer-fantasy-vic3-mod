@@ -3,11 +3,11 @@
 #
 # Entry schema (see .claude/rules/scripting.md):
 #   color        — { R G B } with 0-255 integers. Derived from the polity's own culture color in
-#                  common/cultures/10_dark_lands.txt: dawi_zharr ash-black/ember (72 60 58),
+#                  common/cultures/chaos_dwarf.txt: dawi_zharr ash-black/ember (72 60 58),
 #                  hobgoblin olive-green (118 128 74).
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/10_dark_lands.txt
+#   cultures     — culture ids from common/cultures/chaos_dwarf.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The

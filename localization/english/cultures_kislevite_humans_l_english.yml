@@ -1,5 +1,5 @@
 ﻿l_english:
- # Culture display names for common/cultures/01_kislev.txt.
+ # Culture display names for common/cultures/kislevite_humans.txt.
  # One loc file per culture script file (per-name display keys live in the shared
  # cultures_names_l_english.yml). Board item #3407 (epic #3404).
  gospodar:0 "Gospodar"

@@ -1,5 +1,6 @@
-﻿# Old World cultures — the Badlands. Schema mirrors common/cultures/00_norsca.txt and
-# 10_dark_lands.txt, the verified reference entries for this mod. Each culture carries:
+﻿# Old World cultures — the greenskins (orcs, goblins and their Hobgobla Khanate kin). Schema
+# mirrors common/cultures/norscan_humans.txt and common/cultures/chaos_dwarf.txt, the verified
+# reference entries for this mod. Each culture carries:
 #   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
 #   religion   — a religion id from common/religions/00_religions.txt.
 #   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
@@ -10,21 +11,24 @@
 # graphics/ethnicities — vanilla ships NO greenskin portrait set. The values used below are
 #                deliberate STAND-INS chosen only so the culture renders at all; they are a
 #                placeholder pending custom greenskin art (out of scope for epic #3404) and carry
-#                no lore claim whatsoever about what orcs or goblins look like.
-# FEMALE NAME LISTS: greenskins are canonically fungal and sexless — there are no female orcs or
-#                goblins in the setting. Victoria 3 nevertheless requires both pop sexes to draw
-#                names, so female_common_first_names is populated from the SAME register and word
-#                pool as the male list rather than inventing a separate "female greenskin" naming
-#                tradition. This is a deliberate engine accommodation, not lore.
-# Orc and goblin share heritage_group_greenskin with heritage_hobgoblin (#3408): greenskins are
-# mutually tolerant AS A RACE. The running orc/goblin feud is carried entirely by the religion
-# split — orcs put Gork (brutal cunning, strength-forward) first, goblins put Mork (cunning
-# brutality) first — not by heritage.
+#                no lore claim whatsoever about what orcs, goblins or hobgoblins look like.
+# FEMALE NAME LISTS: greenskins are canonically fungal and sexless — there are no female orcs,
+#                goblins or hobgoblins in the setting. Victoria 3 nevertheless requires both pop
+#                sexes to draw names, so female_common_first_names is populated from the SAME
+#                register and word pool as the male list rather than inventing a separate "female
+#                greenskin" naming tradition. This is a deliberate engine accommodation, not lore.
+# Orc, goblin and hobgoblin share heritage_group_greenskin (#3408): greenskins are mutually
+# tolerant AS A RACE. The running orc/goblin feud is carried entirely by the religion split — orcs
+# put Gork (brutal cunning, strength-forward) first, goblins put Mork (cunning brutality) first —
+# not by heritage. Hobgoblin is filed here with its greenskin kin rather than with the Chaos
+# Dwarfs it serves in common/cultures/chaos_dwarf.txt: culture files in this mod group by
+# RACE/CULTURE-GROUP, not by the geography of the states a culture happens to occupy or the
+# masters it happens to serve — see common/cultures/dwarven.txt for the convention's origin case.
 # Every name string used below also needs a matching localization key unless vanilla already ships
 # one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs
 # its six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
-# Culture display names live in localization/english/cultures_badlands_l_english.yml.
-# Board item #3409 (epic #3404).
+# Culture display names live in localization/english/cultures_greenskin_l_english.yml.
+# Board items #3408, #3409 (epic #3404).
 
 ################ Orc — the Waaagh! made flesh; strength first, Gork first ################
 # Register: crude, guttural, monosyllabic to two-syllable, hard consonants and clustered
@@ -104,5 +108,49 @@ goblin = {
 	graphics = european
 	ethnicities = {
 		1 = caucasian_northern_dark_hair
+	}
+}
+
+################ Hobgoblin — the Hobgobla Khanate; the Chaos Dwarfs' hired treachery ################
+# Greenskins, not dwarfs: heritage_hobgoblin sits in heritage_group_greenskin alongside orc and
+# goblin, and they speak sphere_greenskin. Names are short, guttural and two-syllable, with a
+# steppe overlay from the Khanate — the Khan-derived titles (Khagan, Noyan, Bahadur, Tarkhan)
+# appear as SURNAMES, not as honorifics baked into given names. The remaining surnames run to
+# backstabbing, theft and treachery, which is what hobgoblins are known for on every side of
+# every deal. They serve the Chaos Dwarfs (common/cultures/chaos_dwarf.txt) and hold no
+# aristocracy of their own, so there are no noble or regal name lists.
+# graphics/ethnicities: the east-Asian steppe-nomad set is a stand-in chosen to match the
+# Khanate register — see the file header.
+
+hobgoblin = {
+	color= rgb{ 118 128 74 }
+	religion = mork_and_gork
+	heritage = heritage_hobgoblin
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Grishak Nakku Bolgut Skarnu Ghazbu Rukkat Zoggu Hobbak Kurgat Tulgu
+		Vurmak Ghulnu Snaggu Bortok Yashku Zarnok Mokku Durgat Ekku Rashnu
+		Golbat Tarnok Uzgu Vashku
+	}
+
+	female_common_first_names = {
+		Grisha Nakka Bolga Skorra Ghazba Rukka Zogga Hobba Kurga Tulga
+		Vurma Ghulna Snagga Borta Yashka Zarna Mokka Durga Ekka Rashna
+		Golba Uzga
+	}
+
+	common_last_names = {
+		Backbiter Throatcutter Knifegrin Poisonhand Slavetaker Wolfrider Khagan Noyan
+		Bahadur Tarkhan Nightthief Purseslitter Coinpincher Falsefriend Bonepicker Saddleborn
+	}
+
+	graphics = east_asian
+	ethnicities = {
+		1 = central_asian
 	}
 }

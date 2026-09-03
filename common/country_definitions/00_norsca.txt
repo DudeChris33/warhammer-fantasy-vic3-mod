@@ -5,7 +5,7 @@
 #   color        — { R G B } with 0-255 integers.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/00_norsca.txt
+#   cultures     — culture ids from common/cultures/norscan_humans.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The

@@ -1,5 +1,5 @@
 ﻿l_english:
- # Culture display names for common/cultures/02_empire.txt.
+ # Culture display names for common/cultures/imperial_humans.txt.
  # One loc file per culture script file (per-name display keys live in the shared
  # cultures_names_l_english.yml). Board item #3406 (epic #3404).
  reiklander:0 "Reiklander"
@@ -13,7 +13,6 @@
  averlander:0 "Averlander"
  wissenlander:0 "Wissenlander"
  sylvanian:0 "Sylvanian"
- sylvanian_vampire:0 "Vampire"
  sollander:0 "Sollander"
  halfling:0 "Halfling"
  marienburger:0 "Marienburger"

@@ -1,5 +1,6 @@
-﻿# Old World cultures — the Southern Realms. Schema mirrors common/cultures/00_norsca.txt, the
-# verified reference entry for this mod. Each culture carries:
+﻿# Old World cultures — the Southern Realms (Tilea, Estalia, the Border Princes, Sartosa). Schema
+# mirrors common/cultures/norscan_humans.txt, the verified reference entry for this mod. Each
+# culture carries:
 #   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
 #   religion   — a religion id from common/religions/00_religions.txt.
 #   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.

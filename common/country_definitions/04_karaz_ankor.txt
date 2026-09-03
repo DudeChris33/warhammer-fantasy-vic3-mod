@@ -3,13 +3,13 @@
 #
 # Entry schema (see .claude/rules/scripting.md):
 #   color        — { R G B } with 0-255 integers. Derived from the polity's own culture color in
-#                  common/cultures/04_karaz_ankor.txt so tag and culture read as one thing:
+#                  common/cultures/dwarven.txt so tag and culture read as one thing:
 #                  dawi reddish (156 44 40), dawi_grey grey-blue (128 128 132), dawi_norse cold
 #                  blue (96 140 168), dawi_badlands earthy brown (110 74 48). The seven ruined
 #                  holds take a desaturated variant of their own culture's color.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/04_karaz_ankor.txt
+#   cultures     — culture ids from common/cultures/dwarven.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The

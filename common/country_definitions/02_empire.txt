@@ -3,10 +3,10 @@
 #
 # Entry schema (see .claude/rules/scripting.md):
 #   color        — { R G B } with 0-255 integers. Reuses the polity's already-shipped culture
-#                  color from common/cultures/02_empire.txt so tag and culture read as one thing.
+#                  color from common/cultures/imperial_humans.txt so tag and culture read as one thing.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/02_empire.txt
+#   cultures     — culture ids from common/cultures/imperial_humans.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
