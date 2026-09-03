@@ -1,0 +1,22 @@
+﻿l_english:
+ # Warhammer Fantasy reskin of the vanilla tutorial text (common/objectives/00_objective_tutorial.txt,
+ # common/objective_subgoals/00_subgoals_tutorial.txt, common/journal_entries/00_tutorial.txt).
+ # Narrow override: only the vanilla keys whose prose names the real world. Every other tutorial
+ # key still resolves from vanilla localization/english/tutorial_l_english.yml, which this mod does
+ # not blank. Version suffixes are bumped one above vanilla so these definitions win.
+
+ # --- sg_colonize_state / je_tutorial_colonize_state: reframed from imperial colonisation to
+ # --- pushing settlement out into the untamed lands beyond a realm's borders.
+ je_tutorial_colonize_state:1 "Settle the Frontier"
+ je_tutorial_colonize_state_reason:2 "The wilds beyond our borders answer to no throne. We should press outward, [Concept('concept_colony','$concept_colonizing$')] a [concept_decentralized_nation] and make the frontier ours."
+ je_tutorial_colonize_state_status:2 "Plant a settlement in [JournalEntry.GetTarget.GetState.GetName]"
+ je_tutorial_colonize_state_status_first:1 "Found a [concept_colony] somewhere in the untamed lands"
+ je_tutorial_colonize_state_status_second:1 "Grow or conquer the surrounding wilds until the [concept_colony] covers the whole [concept_state_region]"
+ je_tutorial_colonize_state_grow_a_colony:1 "Have fully [Concept('concept_colony','$concept_colonized$')] a [concept_state_region]"
+
+ # --- lesson_basics (fired by objective_tutorial on_start): drops "the Industrial Revolution",
+ # --- "the Congress of Vienna" and "Europe" without pinning the mod to an invented dated event.
+ lesson_basics_welcome_desc:4 "A new age is dawning over the Old World. [GetPlayer.GetRuler.GetFullName] is [GetPlayer.GetRuler.GetPrimaryRoleTitle] of [GetPlayer.GetName]. Steam, powder and iron are remaking the realms, and cataclysmic upheaval follows in their wake. The settlements that once kept the peace between the great realms have long since frayed, and ambition is stirring again among the [Concept('concept_great_power', '$concept_great_powers$')]. It will be up to you to guide [GetPlayer.GetName] to glory over the century to come.\n\nThere is no one way to 'win' in Victoria 3. You set your own goals and experience different stories in the process of pursuing them."
+
+ # --- sg_enact_institution_law: drops the real-world "Victorian era".
+ lesson_enact_institution_law_complete_desc:1 "You have managed to reform the first of many [Concept('concept_law','$concept_laws$')] on your country's journey through this new age! Over time you will learn which combinations of government [Concept('concept_interest_group','$concept_interest_groups$')], [concept_clout], [concept_legitimacy], and [Concept('concept_political_movement', '$concept_political_movements$')] provide you with the best opportunities to pass the $concept_laws$ you desire. Until then, don't be afraid to experiment!"
