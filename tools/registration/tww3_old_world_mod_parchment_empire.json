@@ -6,16 +6,115 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL. Empire crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_empire (objective=landmarks; 7 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png, dots_1 revision => thin-plate placement, lattice bounded to hull+pad; 6x6 lattice). A DENSE Old World boundary network confined to the Empire - the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, to be revisited when boundary extraction lands (S6). PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 7, \"lattice_hull_box\": [2.5, 64.5, 1043.5, 1469.0], \"method\": \"thin-plate interpolation of landmarks, lattice bounded to hull+pad\"}",
+  "notes": "PROVISIONAL. Empire crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_empire (objective=landmarks; 7 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png, dots_1 revision => thin-plate placement, lattice bounded to hull+pad; 6x6 lattice). A DENSE Old World boundary network confined to the Empire - the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, to be revisited when boundary extraction lands (S6). PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 9, \"lattice_hull_box\": [2.5, 64.5, 1147.5, 1469.0], \"method\": \"thin-plate interpolation of landmarks, lattice bounded to hull+pad\"}",
   "source": "tww3_old_world_mod_parchment_empire.png",
   "projection": "control_point_warp",
   "footprint": [
-    3875.9995166133613,
-    570.8153388039349,
-    4424.770161570755,
-    1234.6373371894545
+    3875.7094354885608,
+    570.3661821810781,
+    4471.138578014957,
+    1234.777076012809
   ],
   "control_points": [
+    {
+      "source": [
+        716.5,
+        128.5
+      ],
+      "canvas": [
+        4246.5,
+        631.5
+      ],
+      "note": "purple"
+    },
+    {
+      "source": [
+        66.5,
+        294.5
+      ],
+      "canvas": [
+        3953.5,
+        711.5
+      ],
+      "note": "crimson"
+    },
+    {
+      "source": [
+        517.5,
+        542.5
+      ],
+      "canvas": [
+        4158.5,
+        817.5
+      ],
+      "note": "olive"
+    },
+    {
+      "source": [
+        868.5,
+        474.5
+      ],
+      "canvas": [
+        4302.5,
+        793.5
+      ],
+      "note": "orange"
+    },
+    {
+      "source": [
+        537.5,
+        829.5
+      ],
+      "canvas": [
+        4160.5,
+        941.5
+      ],
+      "note": "green"
+    },
+    {
+      "source": [
+        979.5,
+        942.5
+      ],
+      "canvas": [
+        4364.5,
+        987.5
+      ],
+      "note": "lime"
+    },
+    {
+      "source": [
+        774.5,
+        1424.5
+      ],
+      "canvas": [
+        4262.5,
+        1178.5
+      ],
+      "note": "mint"
+    },
+    {
+      "source": [
+        1083.5,
+        370.5
+      ],
+      "canvas": [
+        4400.5,
+        742.5
+      ],
+      "note": "cobalt"
+    },
+    {
+      "source": [
+        1039.5,
+        522.5
+      ],
+      "canvas": [
+        4378.5,
+        801.5
+      ],
+      "note": "amethyst"
+    },
     {
       "source": [
         2.5,
@@ -23,62 +122,62 @@
       ],
       "canvas": [
         3926.2,
-        611.0
+        611.2
       ],
       "note": "lattice 0"
     },
     {
       "source": [
-        210.7,
+        231.5,
         64.5
       ],
       "canvas": [
-        4022.0,
-        608.1
+        4031.4,
+        607.5
       ],
       "note": "lattice 1"
     },
     {
       "source": [
-        418.9,
+        460.5,
         64.5
       ],
       "canvas": [
-        4116.6,
-        605.0
+        4135.0,
+        603.9
       ],
       "note": "lattice 2"
     },
     {
       "source": [
-        627.1,
+        689.5,
         64.5
       ],
       "canvas": [
-        4208.8,
-        602.8
+        4235.8,
+        602.4
       ],
       "note": "lattice 3"
     },
     {
       "source": [
-        835.3,
+        918.5,
         64.5
       ],
       "canvas": [
-        4298.1,
-        604.1
+        4334.6,
+        606.3
       ],
       "note": "lattice 4"
     },
     {
       "source": [
-        1043.5,
+        1147.5,
         64.5
       ],
       "canvas": [
-        4387.9,
-        606.9
+        4435.6,
+        607.7
       ],
       "note": "lattice 5"
     },
@@ -89,62 +188,62 @@
       ],
       "canvas": [
         3923.6,
-        734.1
+        734.2
       ],
       "note": "lattice 6"
     },
     {
       "source": [
-        210.7,
+        231.5,
         345.4
       ],
       "canvas": [
-        4020.3,
-        732.1
+        4029.9,
+        731.6
       ],
       "note": "lattice 7"
     },
     {
       "source": [
-        418.9,
+        460.5,
         345.4
       ],
       "canvas": [
-        4115.6,
+        4134.0,
         730.1
       ],
       "note": "lattice 8"
     },
     {
       "source": [
-        627.1,
+        689.5,
         345.4
       ],
       "canvas": [
-        4205.2,
-        730.7
+        4231.0,
+        733.3
       ],
       "note": "lattice 9"
     },
     {
       "source": [
-        835.3,
+        918.5,
         345.4
       ],
       "canvas": [
-        4290.8,
-        733.9
+        4326.9,
+        735.4
       ],
       "note": "lattice 10"
     },
     {
       "source": [
-        1043.5,
+        1147.5,
         345.4
       ],
       "canvas": [
-        4381.9,
-        735.1
+        4430.2,
+        730.4
       ],
       "note": "lattice 11"
     },
@@ -155,62 +254,62 @@
       ],
       "canvas": [
         3921.0,
-        854.4
+        854.3
       ],
       "note": "lattice 12"
     },
     {
       "source": [
-        210.7,
+        231.5,
         626.3
       ],
       "canvas": [
-        4017.4,
-        853.8
+        4027.0,
+        853.3
       ],
       "note": "lattice 13"
     },
     {
       "source": [
-        418.9,
+        460.5,
         626.3
       ],
       "canvas": [
-        4112.9,
-        853.7
+        4131.6,
+        853.6
       ],
       "note": "lattice 14"
     },
     {
       "source": [
-        627.1,
+        689.5,
         626.3
       ],
       "canvas": [
-        4203.3,
-        855.7
+        4229.3,
+        857.0
       ],
       "note": "lattice 15"
     },
     {
       "source": [
-        835.3,
+        918.5,
         626.3
       ],
       "canvas": [
-        4291.1,
-        858.5
+        4326.7,
+        852.8
       ],
       "note": "lattice 16"
     },
     {
       "source": [
-        1043.5,
+        1147.5,
         626.3
       ],
       "canvas": [
-        4384.2,
-        858.1
+        4430.4,
+        843.3
       ],
       "note": "lattice 17"
     },
@@ -220,63 +319,63 @@
         907.2
       ],
       "canvas": [
-        3916.6,
+        3916.5,
         972.4
       ],
       "note": "lattice 18"
     },
     {
       "source": [
-        210.7,
+        231.5,
         907.2
       ],
       "canvas": [
-        4011.8,
-        972.4
+        4021.2,
+        972.3
       ],
       "note": "lattice 19"
     },
     {
       "source": [
-        418.9,
+        460.5,
         907.2
       ],
       "canvas": [
-        4106.0,
-        973.0
+        4124.8,
+        973.3
       ],
       "note": "lattice 20"
     },
     {
       "source": [
-        627.1,
+        689.5,
         907.2
       ],
       "canvas": [
-        4200.6,
-        973.7
+        4229.4,
+        974.6
       ],
       "note": "lattice 21"
     },
     {
       "source": [
-        835.3,
+        918.5,
         907.2
       ],
       "canvas": [
-        4297.1,
-        973.8
+        4335.7,
+        973.6
       ],
       "note": "lattice 22"
     },
     {
       "source": [
-        1043.5,
+        1147.5,
         907.2
       ],
       "canvas": [
-        4392.8,
-        973.1
+        4438.6,
+        967.1
       ],
       "note": "lattice 23"
     },
@@ -286,63 +385,63 @@
         1188.1
       ],
       "canvas": [
-        3912.0,
-        1088.1
+        3911.9,
+        1088.3
       ],
       "note": "lattice 24"
     },
     {
       "source": [
-        210.7,
+        231.5,
         1188.1
       ],
       "canvas": [
-        4007.0,
-        1087.4
+        4016.4,
+        1087.5
       ],
       "note": "lattice 25"
     },
     {
       "source": [
-        418.9,
+        460.5,
         1188.1
       ],
       "canvas": [
-        4102.1,
-        1086.7
+        4121.2,
+        1087.1
       ],
       "note": "lattice 26"
     },
     {
       "source": [
-        627.1,
+        689.5,
         1188.1
       ],
       "canvas": [
-        4198.1,
-        1085.8
+        4227.3,
+        1086.9
       ],
       "note": "lattice 27"
     },
     {
       "source": [
-        835.3,
+        918.5,
         1188.1
       ],
       "canvas": [
-        4295.4,
-        1085.1
+        4334.4,
+        1086.3
       ],
       "note": "lattice 28"
     },
     {
       "source": [
-        1043.5,
+        1147.5,
         1188.1
       ],
       "canvas": [
-        4391.8,
-        1084.8
+        4439.1,
+        1083.1
       ],
       "note": "lattice 29"
     },
@@ -352,63 +451,63 @@
         1469.0
       ],
       "canvas": [
-        3908.0,
-        1202.6
+        3907.7,
+        1202.8
       ],
       "note": "lattice 30"
     },
     {
       "source": [
-        210.7,
+        231.5,
         1469.0
       ],
       "canvas": [
-        4003.0,
-        1201.1
+        4012.3,
+        1201.0
       ],
       "note": "lattice 31"
     },
     {
       "source": [
-        418.9,
+        460.5,
         1469.0
       ],
       "canvas": [
-        4098.1,
-        1199.3
+        4117.1,
+        1199.0
       ],
       "note": "lattice 32"
     },
     {
       "source": [
-        627.1,
+        689.5,
         1469.0
       ],
       "canvas": [
-        4193.7,
-        1197.4
+        4222.4,
+        1196.8
       ],
       "note": "lattice 33"
     },
     {
       "source": [
-        835.3,
+        918.5,
         1469.0
       ],
       "canvas": [
-        4290.0,
-        1196.3
+        4328.8,
+        1195.8
       ],
       "note": "lattice 34"
     },
     {
       "source": [
-        1043.5,
+        1147.5,
         1469.0
       ],
       "canvas": [
-        4386.7,
-        1196.5
+        4434.7,
+        1194.8
       ],
       "note": "lattice 35"
     }

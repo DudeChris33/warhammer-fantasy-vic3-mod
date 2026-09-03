@@ -9,7 +9,7 @@
   "_comment_lattice": "6x6 over the crop (~490 master px horizontal spacing, ~239 vertical). The 13 dots span the region's coastal extremes (blue at the far-west tip, red far-east in Kislev, cyan at the north coast, yellow at the southern Kislev border); the lattice regularises the thin-plate and captures its affine trend out to the crop corners, where it extrapolates beyond the dot hull.",
   "lattice": {"nx": 6, "ny": 6, "inset": 0.03},
 
-  "_comment_landmarks": "source px = dot centroid in the crop's own 2939x1436 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew. All 13 colours present in both frames (10 initial + orange/spring_green/azure added in the second pass). These ARE the fit (not a held-out check) for objective=landmarks.",
+  "_comment_landmarks": "source px = dot centroid in the crop's own 2939x1436 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew. 13 colours (10 initial + orange/spring_green/azure added in the second pass) are on the reference '- dots_3.png' files. 'lime' (2026-09-02) was drawn straight onto the production crop/canvas pair instead of the reference files — it sat undetected as a stray marker pixel in tww3_old_world_mod_parchment_kislev_norsca.png until diagnosed, confirmed intentional by the user, and added here. 'indigo'/'sea_green'/'cornflower' (2026-09-02) followed on the reference '- dots_3.png' files (not baked into the production crop, the normal convention), extending coverage south of the original 14; 'cornflower' shares its (127,127,255) colour with the unrelated 'periwinkle' landmark by coincidence (both were suggested from the same small unused-colour list) but sits at a completely different crop position, confirmed not a duplicate, and was given a distinct name to keep the seed unambiguous. Only 'lime' is actually baked into the production crop and needs one tools/inpaint_dot_markers.py pass to pull it back out. These ARE the fit (not a held-out check) for objective=landmarks. 2026-09-03: 'yellow's canvas position was stale by ~90px (recorded [4467,774], the dot on terraqueous_globe_reprojected.png actually centroids at [4382.5,803.5]) — a leftover from before dots_3.png's current revision, never re-verified when this seed was assembled. Confirmed by re-scanning every landmark's colour against the current dots_3 files: all 16 others matched within rounding, only yellow was off. This bad pairing (a fine crop-side point yanked toward the wrong canvas target) is the likely real cause of the local warp distortion diagnosed near Shirokij Forest/Southern Oblast — corrected here.",
   "landmarks": [
     {"name": "cyan",         "source": [1339.0, 46.0],   "canvas": [4292.0, 188.0]},
     {"name": "spring_green", "source": [739.0, 194.0],   "canvas": [4001.0, 270.0]},
@@ -23,7 +23,11 @@
     {"name": "blue",         "source": [96.0, 710.0],    "canvas": [3831.0, 527.0]},
     {"name": "rose",         "source": [548.0, 792.0],   "canvas": [3965.0, 565.0]},
     {"name": "magenta",      "source": [1391.0, 919.0],  "canvas": [4247.0, 632.0]},
-    {"name": "yellow",       "source": [1720.0, 1315.0], "canvas": [4467.0, 774.0]}
+    {"name": "yellow",       "source": [1720.0, 1315.0], "canvas": [4382.5, 803.5]},
+    {"name": "lime",         "source": [1873.5, 849.5],  "canvas": [4456.5, 596.5]},
+    {"name": "cornflower",   "source": [1671.5, 1000.5], "canvas": [4361.5, 667.5]},
+    {"name": "indigo",       "source": [1760.5, 1163.5], "canvas": [4400.5, 745.5]},
+    {"name": "sea_green",    "source": [1610.5, 1237.5], "canvas": [4332.5, 776.5]}
   ],
 
   "record": {
