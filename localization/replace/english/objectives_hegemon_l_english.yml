@@ -1,0 +1,39 @@
+﻿l_english:
+ # Warhammer Fantasy reskin of the vanilla Hegemon player-objective text
+ # (common/objectives/01_player_objectives.txt and its subgoals/journal entries).
+ # localization/ is never replace_path'd, so every key below is already defined by
+ # vanilla localization/english/objectives_l_english.yml -- these are overrides and
+ # must live here, not in localization/english/, or they would duplicate-key.
+ # Vanilla ships these keys with no version suffix (implicitly 0); :1 wins.
+ # je_african_colonies / je_african_colonies_reason are deliberately NOT overridden --
+ # that entry is renamed to je_new_world_colonies and keyed in localization/english/.
+
+ je_colonization_laws:1 "A Colonising Power"
+ je_colonization_laws_reason:1 "Hegemony begins at the edge of the map, not the edge of our fields. Our statutes still bind us to our own borders, and while they stand we cannot plant a single settlement beyond them. The law must be amended before the ships can sail."
+
+ je_expand_navy_and_army:1 "Bolstering the Host"
+ je_expand_navy_and_army_reason:1 "With our first settlements planted, we must be ready for the worst. Our host need not be the mightiest in the world, but it should be heavy enough that no neighbouring realm thinks a [concept_diplomatic_play] against us a cheap afternoon's work."
+
+ je_form_alliance:1 "Bind Others to Us"
+ je_form_alliance_reason:1 "Spears and hulls are not our only defence. Oaths sworn between courts have held back invasions that no army could. We should bind the great realms to us, so that any power reaching for what is ours must reckon with more than our own banners."
+
+ je_take_subject:1 "Rule Through Others"
+ je_take_subject_reason:1 "Our strength is settled; now it should be felt abroad. A handful of lesser realms brought under our protection -- their tribute paid to us, their envoys speaking our words -- will carry our writ further than any march of conquest."
+
+ je_increase_technology:1 "Sharpen Our Advantage"
+ je_increase_technology_reason:1 "Numbers alone win nothing but graves. We should not have to spend a generation of soldiers where the right gun, the right hull and the right physician would do. Put the finest work of our engineers and scholars into their hands."
+
+ je_greatest_power:1 "The Greatest Power"
+ je_greatest_power_reason:1 "The other courts already name us a great power. That is not enough. Let it be plain to every throne, hold and horde that we stand first among them all, and that we have no equal."
+
+ je_greater_power:1 "A Great Power"
+ je_greater_power_reason:1 "We have been a power in our own corner of the world and no further. It is time to settle our standing for good and take our seat among the great realms, so that our word carries in halls where it was once ignored."
+
+ je_great_power:1 "A Major Power"
+ je_great_power_reason:1 "We have never been counted among the strong, and that ends now. We will not remain a small mark on somebody else's map, with a voice too quiet for the great courts to trouble themselves over."
+
+ je_unrecognized_power:1 "A Recognised Realm"
+ je_unrecognized_power_reason:1 "The old crowns hold us beneath their notice and treat our envoys as beggars at the gate. Through labour and hard struggle we shall put that lie to rest, and take by right a respected place among the realms of the world."
+
+ je_the_hegemon:1 "The Hegemon"
+ je_the_hegemon_reason:1 "We have shown the world what we are. We have come a very long way. What remains is the plainest measure of all -- the sheer weight of people living under our rule and the rule of those sworn to us."

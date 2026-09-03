@@ -1,0 +1,11 @@
+﻿l_english:
+ # New keys for the Hegemon player objective's Old World replacement for vanilla's
+ # African-colonies step (common/journal_entries/00_player_objectives_hegemon.txt,
+ # common/objective_subgoals/01_subgoals_player_objectives_hegemon.txt).
+ # Nothing under these names exists in vanilla, so they belong here rather than in
+ # localization/replace/english/.
+
+ je_new_world_colonies:0 "Colonies Beyond the Great Ocean"
+ je_new_world_colonies_reason:0 "Our laws no longer forbid it, so our ships should turn west and south. The steaming jungles and open coasts beyond the Great Ocean are claimed by no crown of the Old World, and a realm that plants its banner there first will draw wealth from lands its rivals have only heard rumour of."
+ je_new_world_colonies_own_a_colony:0 "Hold an unincorporated colony in the far frontier"
+ je_new_world_colonies_own_whole_state_region:0 "Hold the whole of that region, sharing it with no other realm"
