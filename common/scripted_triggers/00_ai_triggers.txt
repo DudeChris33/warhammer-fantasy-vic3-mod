@@ -204,20 +204,30 @@ ai_country_is_valid_colonization_target = {
 # cu:korean, AFG_appealed_to_GBR, sided_with_korean_gov, etc.) - none of which
 # exist in this mod. No partial-keep case exists; defined as a constant "no"
 # per the same disclosed-stub convention as is_in_guerilla_war
-# (01_legacy_compat_triggers.txt, audit #3447). $TARGET$ is accepted and
-# unused, matching vanilla's parameterized-trigger call shape.
+# (01_legacy_compat_triggers.txt, audit #3447).
+#
+# $TARGET$ must actually appear in the body or the engine rejects the call
+# site's TARGET = ... argument ("Compiling source ... failed for unknown
+# arguments: TARGET" / "Scripted trigger should have no arguments" - caught
+# by an in-game load after the first stub draft omitted it). $TARGET$ = {
+# always = yes } is a harmless, always-true use of the parameter on whatever
+# scope the caller passes, so the always = no still governs the result.
 has_je_befriend_reason = {
 	always = no
+	$TARGET$ = { always = yes }
 }
 
 has_je_protect_reason = {
 	always = no
+	$TARGET$ = { always = yes }
 }
 
 has_je_conquest_reason = {
 	always = no
+	$TARGET$ = { always = yes }
 }
 
 has_je_subjugation_reason = {
 	always = no
+	$TARGET$ = { always = yes }
 }
