@@ -1,0 +1,172 @@
+# Country tags — Bretonnia. Board item #3417 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "03 BRETTONIA".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/03_brettonia.txt
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_brettonia_l_english.yml.
+# The BRE formation rule lives in common/country_formation/03_brettonia_formables.txt.
+
+################ BRE — Bretonnia; the formable kingdom of the united dukedoms ################
+# Formable only: bretonnian ONLY. The mousillon culture is excluded — the cursed dukedom is
+# no part of the King's realm, parallel to EMP excluding sylvanian_vampire.
+
+BRE = {
+	color = { 46 80 148 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { bretonnian }
+	# capital: Couronne — TODO once land state-regions exist
+}
+
+# The fourteen dukedoms below are recognized principalities — including Mousillon, which is
+# still nominally a duchy of Bretonnia however cursed its ruling line.
+
+################ COU — Couronne; the royal dukedom of the north ################
+
+COU = {
+	color = { 66 104 168 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Couronne — TODO once land state-regions exist
+}
+
+################ LYO — Lyonesse; the storm-beaten northern coast ################
+
+LYO = {
+	color = { 96 140 196 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Lyonesse — TODO once land state-regions exist
+}
+
+################ ART — Artois; the forested north ################
+
+ART = {
+	color = { 168 140 60 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Artois — TODO once land state-regions exist
+}
+
+################ GIS — Gisoreaux; the northern march ################
+
+GIS = {
+	color = { 122 92 150 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Gisoreaux — TODO once land state-regions exist
+}
+
+################ MNF — Montfort; the mountain gate to the Empire ################
+
+MNF = {
+	color = { 88 112 128 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Montfort — TODO once land state-regions exist
+}
+
+################ BAS — Bastonne; birthplace of Gilles le Breton ################
+
+BAS = {
+	color = { 196 168 72 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Bastonne — TODO once land state-regions exist
+}
+
+################ AQU — Aquitaine; the western coast ################
+
+AQU = {
+	color = { 42 122 138 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Aquitaine — TODO once land state-regions exist
+}
+
+################ QUE — Quenelles; the forest dukedom by Athel Loren ################
+
+QUE = {
+	color = { 76 132 90 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Quenelles — TODO once land state-regions exist
+}
+
+################ CAR — Carcassonne; the southern march against the greenskins ################
+
+CAR = {
+	color = { 176 96 52 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Carcassonne — TODO once land state-regions exist
+}
+
+################ BRI — Brionne; the river dukedom of hard men ################
+
+BRI = {
+	color = { 148 62 74 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Brionne — TODO once land state-regions exist
+}
+
+################ BOR — Bordeleaux; the great southern port ################
+
+BOR = {
+	color = { 122 48 96 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Bordeleaux — TODO once land state-regions exist
+}
+
+################ LAN — L'Anguille; the northern sea-gate ################
+
+LAN = {
+	color = { 60 148 164 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: L'Anguille — TODO once land state-regions exist
+}
+
+################ PAR — Parravon; the eyrie above the Grismerie ################
+
+PAR = {
+	color = { 158 158 178 }
+	country_type = recognized
+	tier = principality
+	cultures = { bretonnian }
+	# capital: Parravon — TODO once land state-regions exist
+}
+
+################ MOU — Mousillon; the cursed dukedom ################
+# Deliberately off-palette: the sickly green-black of the mousillon culture, reading as apart
+# from the heraldic blue-and-gold of the other thirteen. Recognized on paper — the duchy
+# still exists in law — but excluded from BRE's formation.
+
+MOU = {
+	color = { 46 58 46 }
+	country_type = recognized
+	tier = principality
+	cultures = { mousillon }
+	# capital: Mousillon — TODO once land state-regions exist
+}

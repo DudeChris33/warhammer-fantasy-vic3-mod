@@ -1,0 +1,26 @@
+# Country formation — Kislev. Board item #3417 (epic #3414).
+# KIS (the Tzardom of Kislev) is the region's only formable; every other 01_kislev tag is a start tag.
+#
+# Deliberately minor/culture-based in shape: no unification_play, leadership_play or
+# geographic_region key. common/diplomatic_plays and common/geographic_regions are blanked via
+# .metadata/metadata.json's replace_paths and hold no entries, so referencing either would point at
+# content that does not exist. Revisit when those databases are authored.
+# Triggers used below are confirmed in docs/triggers.log (both country scope):
+#   is_country_type = <country type>
+#   country_has_primary_culture = <culture>
+
+# United Kislev is formable by EITHER founding people — gospodar or ungol.
+
+KIS = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		is_country_type = recognized
+		OR = {
+			country_has_primary_culture = cu:gospodar
+			country_has_primary_culture = cu:ungol
+		}
+	}
+}

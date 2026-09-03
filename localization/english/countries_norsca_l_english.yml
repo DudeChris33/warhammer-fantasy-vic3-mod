@@ -1,0 +1,23 @@
+﻿l_english:
+ # Country display names and adjectives for common/country_definitions/00_norsca.txt.
+ # One name key (the tag) + one adjective key (<TAG>_ADJ) per tag. Board item #3417 (epic #3414).
+ NSC:0 "Norsca"
+ NSC_ADJ:0 "Norscan"
+ SAR:0 "Sarls"
+ SAR_ADJ:0 "Sarl"
+ AES:0 "Aeslings"
+ AES_ADJ:0 "Aesling"
+ BAE:0 "Baersonlings"
+ BAE_ADJ:0 "Baersonling"
+ BJO:0 "Bjornlings"
+ BJO_ADJ:0 "Bjornling"
+ SKA:0 "Skaelings"
+ SKA_ADJ:0 "Skaeling"
+ GRA:0 "Graelings"
+ GRA_ADJ:0 "Graeling"
+ VAR:0 "Varg"
+ VAR_ADJ:0 "Varg"
+ HAS:0 "Hastlings"
+ HAS_ADJ:0 "Hastling"
+ KVE:0 "Kvelligs"
+ KVE_ADJ:0 "Kvellig"

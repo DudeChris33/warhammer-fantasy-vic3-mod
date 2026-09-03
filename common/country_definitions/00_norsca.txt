@@ -1,0 +1,119 @@
+# Country tags — Norsca. Board item #3417 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "00 NORSCA".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/00_norsca.txt
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_norsca_l_english.yml.
+# The NSC formation rule lives in common/country_formation/00_norsca_formables.txt.
+
+################ NSC — Norsca; the formable realm of the united Norsii ################
+# Formable only: the unifier of the High Tribes. A deeper, colder shade of the norscan
+# culture blue so the united realm reads distinctly from any single tribe.
+
+NSC = {
+	color = { 72 96 122 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+# The nine High Tribes below are all unrecognized principalities: raiding tribes under a jarl,
+# not polities the civilised south recognises as part of any legitimate order.
+
+################ SAR — Sarls; the Wolf of the Sea ################
+
+SAR = {
+	color = { 96 124 148 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: Sortsvinar coast — TODO once land state-regions exist
+}
+
+################ AES — Aeslings; the Slaanesh-leaning tribe ################
+
+AES = {
+	color = { 128 108 140 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ BAE — Baersonlings; reavers still on speaking terms with humanity ################
+
+BAE = {
+	color = { 108 122 118 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ BJO — Bjornlings; traders, fishers and sailors ################
+
+BJO = {
+	color = { 86 138 146 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ SKA — Skaelings; the Khorne-leaning tribe ################
+
+SKA = {
+	color = { 140 94 90 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ GRA — Graelings; Tzeentch-leaning sea raiders ################
+
+GRA = {
+	color = { 92 106 158 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ VAR — Varg; the northern Chaos-touched tribe ################
+
+VAR = {
+	color = { 118 118 128 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ HAS — Hastlings; a High Tribe near the Chaos Wastes ################
+
+HAS = {
+	color = { 74 110 104 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ KVE — Kvelligs; a High Tribe near the Chaos Wastes ################
+
+KVE = {
+	color = { 100 92 112 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}

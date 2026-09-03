@@ -1,0 +1,23 @@
+﻿l_english:
+ # Country display names and adjectives for common/country_definitions/01_kislev.txt.
+ # One name key (the tag) + one adjective key (<TAG>_ADJ) per tag. Board item #3417 (epic #3414).
+ KIS:0 "Kislev"
+ KIS_ADJ:0 "Kislevite"
+ KSV:0 "Kislev"
+ KSV_ADJ:0 "Kislevite"
+ ERE:0 "Erengrad"
+ ERE_ADJ:0 "Erengradi"
+ PRA:0 "Praag"
+ PRA_ADJ:0 "Praagi"
+ UNG:0 "Ungol Horse-Tribes"
+ UNG_ADJ:0 "Ungol"
+ TRO:0 "Troll Country"
+ TRO_ADJ:0 "Troll Country"
+ BOL:0 "Bolgasgrad"
+ BOL_ADJ:0 "Bolgasgradi"
+ VOL:0 "Volksgrad"
+ VOL_ADJ:0 "Volksgradi"
+ DOL:0 "Dolgan"
+ DOL_ADJ:0 "Dolgan"
+ ROP:0 "Roppsmenn"
+ ROP_ADJ:0 "Roppsmenn"

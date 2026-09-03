@@ -1,0 +1,115 @@
+# Country tags — Kislev. Board item #3417 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "01 KISLEV".
+#
+# Entry schema (see .claude/rules/scripting.md):
+#   color        — { R G B } with 0-255 integers.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/01_kislev.txt
+#
+# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
+# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# Country display names/adjectives live in localization/english/countries_kislev_l_english.yml.
+# The KIS formation rule lives in common/country_formation/01_kislev_formables.txt.
+
+################ KIS — Kislev; the formable united Tzardom ################
+# Formable only: United Kislev carries BOTH founding peoples, gospodar and ungol.
+
+KIS = {
+	color = { 96 128 168 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { gospodar ungol }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ KSV — Kislev; the capital oblast and the Tzarina's seat ################
+
+KSV = {
+	color = { 122 146 178 }
+	country_type = recognized
+	tier = principality
+	cultures = { gospodar }
+	# capital: Kislev — TODO once land state-regions exist
+}
+
+################ ERE — Erengrad; the western Ungol-leaning port ################
+
+ERE = {
+	color = { 84 152 160 }
+	country_type = recognized
+	tier = city_state
+	cultures = { ungol }
+	# capital: Erengrad — TODO once land state-regions exist
+}
+
+################ PRA — Praag; the scarred northern frontier city ################
+
+PRA = {
+	color = { 148 86 96 }
+	country_type = recognized
+	tier = city_state
+	cultures = { gospodar }
+	# capital: Praag — TODO once land state-regions exist
+}
+
+################ UNG — Ungol Horse-Tribes; the nomadic steppe Ungols ################
+
+UNG = {
+	color = { 148 138 106 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ungol }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ TRO — Troll Country; the far north-western frontier oblast ################
+
+TRO = {
+	color = { 132 148 156 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ungol }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ BOL — Bolgasgrad; a northern oblast town ################
+
+BOL = {
+	color = { 108 124 150 }
+	country_type = recognized
+	tier = city_state
+	cultures = { gospodar }
+	# capital: Bolgasgrad — TODO once land state-regions exist
+}
+
+################ VOL — Volksgrad; an oblast town ################
+
+VOL = {
+	color = { 138 160 190 }
+	country_type = recognized
+	tier = city_state
+	cultures = { gospodar }
+	# capital: Volksgrad — TODO once land state-regions exist
+}
+
+################ DOL — Dolgan; the old eastern horse-tribe ################
+
+DOL = {
+	color = { 166 150 112 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ungol }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
+
+################ ROP — Roppsmenn; the old northern tribe ################
+
+ROP = {
+	color = { 124 132 110 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ungol }
+	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+}
