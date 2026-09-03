@@ -1,0 +1,19 @@
+﻿l_english:
+ # Country display names and adjectives for the 18 Naggaroth tag roster (planning/tag_registry.md).
+ # Loc-only registry parity: common/country_definitions/ for this region is deferred until
+ # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
+ # Board item #3420 (epic #3414).
+ NAG:0 "Naggaroth"
+ NAG_ADJ:0 "Naggarothi"
+ NGD:0 "Naggarond"
+ NGD_ADJ:0 "Naggarond"
+ HAR:0 "Har Ganeth"
+ HAR_ADJ:0 "Har Ganeth"
+ GHR:0 "Ghrond"
+ GHR_ADJ:0 "Ghrond"
+ CLK:0 "Clar Karond"
+ CLK_ADJ:0 "Clar Karond"
+ KKR:0 "Karond Kar"
+ KKR_ADJ:0 "Karond Kar"
+ HGF:0 "Hag Graef"
+ HGF_ADJ:0 "Hag Graef"

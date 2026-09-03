@@ -1,0 +1,27 @@
+﻿l_english:
+ # Country display names and adjectives for the 13 Cathay tag roster (planning/tag_registry.md).
+ # Loc-only registry parity: common/country_definitions/ for this region is deferred until
+ # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
+ # Board item #3420 (epic #3414).
+ CTH:0 "Grand Cathay"
+ CTH_ADJ:0 "Cathayan"
+ WEI:0 "Imperial Provinces (Wei-jin)"
+ WEI_ADJ:0 "Wei-jin"
+ NGA:0 "Northern Provinces (Nan-Gau)"
+ NGA_ADJ:0 "Nan-Gau"
+ SHY:0 "Western Provinces (Shang-Yang)"
+ SHY_ADJ:0 "Shang-Yang"
+ SHW:0 "Central Provinces (Shang Wu)"
+ SHW_ADJ:0 "Shang Wu"
+ FUC:0 "Eastern Provinces (Fu-Chow)"
+ FUC_ADJ:0 "Fu-Chow"
+ FUH:0 "Southern Provinces (Fu-Hung)"
+ FUH_ADJ:0 "Fu-Hung"
+ GBS:0 "The Great Bastion"
+ GBS_ADJ:0 "Great Bastion"
+ MKY:0 "Mountains of Heaven"
+ MKY_ADJ:0 "Heaven-Mountain"
+ SKT:0 "The Sky-Titans"
+ SKT_ADJ:0 "Sky-Titan"
+ DGF:0 "The Grand Dragon Fleet"
+ DGF_ADJ:0 "Dragon Fleet"

@@ -1,0 +1,27 @@
+﻿l_english:
+ # Country display names and adjectives for the 17 Ulthuan tag roster (planning/tag_registry.md).
+ # Loc-only registry parity: common/country_definitions/ for this region is deferred until
+ # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
+ # Board item #3420 (epic #3414).
+ ULT:0 "Ulthuan"
+ ULT_ADJ:0 "Ulthuani"
+ LOT:0 "Eataine (Lothern)"
+ LOT_ADJ:0 "Eatainian"
+ CAL:0 "Caledor"
+ CAL_ADJ:0 "Caledorian"
+ SAP:0 "Saphery"
+ SAP_ADJ:0 "Sapherian"
+ NGY:0 "Nagarythe"
+ NGY_ADJ:0 "Nagarythan"
+ TIR:0 "Tiranoc"
+ TIR_ADJ:0 "Tiranocii"
+ CHR:0 "Chrace"
+ CHR_ADJ:0 "Chracian"
+ AVL:0 "Avelorn"
+ AVL_ADJ:0 "Avelornian"
+ YVR:0 "Yvresse"
+ YVR_ADJ:0 "Yvressian"
+ ELL:0 "Ellyrion"
+ ELL_ADJ:0 "Ellyrian"
+ COT:0 "Cothique"
+ COT_ADJ:0 "Cothiquean"

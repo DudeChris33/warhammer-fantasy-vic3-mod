@@ -1,0 +1,21 @@
+﻿l_english:
+ # Country display names and adjectives for the 09 Southlands tag roster (planning/tag_registry.md).
+ # Loc-only registry parity: common/country_definitions/ for this region is deferred until
+ # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
+ # Board item #3420 (epic #3414).
+ ZLA:0 "Zlatlan"
+ ZLA_ADJ:0 "Zlatlani"
+ TPK:0 "Top-knotz"
+ TPK_ADJ:0 "Top-knotz"
+ BHZ:0 "Bloody Handz"
+ BHZ_ADJ:0 "Bloody Handz"
+ BCB:0 "Boneclubs"
+ BCB_ADJ:0 "Boneclub"
+ SNK:0 "Snakeskinz"
+ SNK_ADJ:0 "Snakeskinz"
+ HHZ:0 "Headhuntaz"
+ HHZ_ADJ:0 "Headhuntaz"
+ WWG:0 "Waaagh-Waaagh"
+ WWG_ADJ:0 "Waaagh-Waaagh"
+ WSK:0 "White Skullz"
+ WSK_ADJ:0 "White Skullz"

@@ -1,0 +1,29 @@
+﻿l_english:
+ # Country display names and adjectives for the 11 Ogre Kingdoms tag roster (planning/tag_registry.md).
+ # Loc-only registry parity: common/country_definitions/ for this region is deferred until
+ # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
+ # Board item #3420 (epic #3414).
+ GGT:0 "Goldtooth"
+ GGT_ADJ:0 "Goldtooth"
+ IRN:0 "Ironskin"
+ IRN_ADJ:0 "Ironskin"
+ GLG:0 "Golgfag's Maneaters"
+ GLG_ADJ:0 "Maneater"
+ MAW:0 "Disciples of the Maw"
+ MAW_ADJ:0 "Maw Disciple"
+ BGZ:0 "Blood Guzzlers"
+ BGZ_ADJ:0 "Blood Guzzler"
+ EYB:0 "Eyebiter"
+ EYB_ADJ:0 "Eyebiter"
+ RSK:0 "Rock Skulls"
+ RSK_ADJ:0 "Rock Skull"
+ CXC:0 "Crossed Clubs"
+ CXC_ADJ:0 "Crossed Club"
+ AGF:0 "Angry Fist"
+ AGF_ADJ:0 "Angry Fist"
+ THG:0 "Thunderguts"
+ THG_ADJ:0 "Thunderguts"
+ FSM:0 "Feastmaster"
+ FSM_ADJ:0 "Feastmaster"
+ SOM:0 "Sons of the Mountain"
+ SOM_ADJ:0 "Mountain-Son"
