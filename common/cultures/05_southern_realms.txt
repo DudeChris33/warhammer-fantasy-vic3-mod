@@ -157,3 +157,54 @@ border_princer = {
 		1 = slavic_brown_hair
 	}
 }
+
+################ Sartosan — the pirate haven; a Tilean melting pot with a stolen tongue ################
+# Sartosa is Tilean at the root — heritage_tilean_human, sphere_tilean, cult_of_myrmidia, the same
+# stock and creed as the mainland city-states — but centuries of raiding, sacking and re-taking have
+# salted it with Estalian, Arabyan and Norscan loanwords, which is why the name lists below are
+# deliberately mixed the way border_princer's are. Names shared with another culture are intentional
+# and need no second loc key (names are global in Victoria 3). The first-name lists are drawn
+# wholly from the Tilean, Estalian and Norscan pools this mod already ships and keys — that mix IS
+# the melting pot — while the surnames are newly-coined Sartosan sea-names.
+# NO noble_last_names and NO regal name lists: Sartosa has no monarch and no bloodline aristocracy —
+# the Pirate Princes are elected, deposed and drowned, and the island's households carry trade and
+# sea-nicknames rather than dynastic surnames. Same treatment as border_princer above.
+# graphics/ethnicities are tilean's verbatim: the same portrait stock, no separate art.
+# The Total War "vampire-pirate Sartosa" is not tabletop canon — this is a human pirate haven.
+# Board item #3419 (epic #3404), forward-referenced by tag SRT in planning/tag_registry.md.
+
+sartosan = {
+	color= rgb{ 150 96 56 }
+	religion = cult_of_myrmidia
+	heritage = heritage_tilean_human
+	language = sphere_tilean
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Ricco Alessio Federigo Guido Niccolo Orsino Rinaldo Gianbattista
+		Bartolo Iago Lope Manolo Tello
+		Ottar Ketil Skarl Vandrad
+	}
+
+	female_common_first_names = {
+		Fiametta Nicoletta Orsola Portia Rosalba Serafina Alessandra Chiara Ginevra Simonetta
+		Fiorenza Allegra
+		Feliciana Guiomar Mencia Paloma Mariela
+		Sigrun Hilde Freydis Katla
+	}
+
+	common_last_names = {
+		Rompivento Nerofumo Malvento Salmastro Quattromani Ancorotto Sperone Mareggia
+		Scogliera Mezzaluna Sciabolanera Sanguevento Ferro_Rosso Ossobianco
+		Al_Sartosa Ravnsson
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_dark_hair
+		1 = caucasian_brown_hair
+	}
+}

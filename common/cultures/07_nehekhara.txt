@@ -77,3 +77,63 @@ nehekharan = {
 		1 = arab
 	}
 }
+
+################ Lahmian Vampire — Neferata's bloodline; the cradle of vampires ################
+# The FIRST vampires: Neferata of Lahmia drank Nagash's Elixir and made her court immortal. They are
+# Nehekharan-born (sphere_nehekharan — they speak the tongue of the Great Land) but a DIFFERENT
+# racial heritage from the nehekharan Tomb Kings they seceded from: heritage_vampire, in
+# heritage_group_undead, the Nagashite line — and cult_of_nagash, not the mortuary_cult. That split
+# is deliberate and is this culture's whole thesis: Settra's dead and Neferata's dead are enemies.
+# The Nagashite names the nehekharan culture above deliberately EXCLUDES are reserved here and here
+# only: Neferata, W'soran, Ushoran, Abhorash and the rest of Lahmia's immortal court.
+# W'soran is encoded as the token Wsoran — the apostrophe is rendered through its loc key, the same
+# way multi-word names are handled via the underscore convention.
+# Lahmia has a real, still-reigning queen, so this culture DOES get noble last names and regal
+# first-name lists — unlike sartosan in 05_southern_realms.txt.
+# graphics/ethnicities are sylvanian_vampire's verbatim (common/cultures/02_empire.txt): vanilla
+# ships no undead portrait set, and custom art is out of scope for epic #3404.
+# Board item #3419 (epic #3404), forward-referenced by tag LAH in planning/tag_registry.md.
+
+lahmian_vampire = {
+	color= rgb{ 108 34 78 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_nehekharan
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Wsoran Ushoran Abhorash Ankhat Harakhte Maatmeses Vashanesh Zoraster Sethep Rakhis
+		Nebtu Zephret Khaledh Amunhet
+	}
+
+	female_common_first_names = {
+		Neferata Naaima Khemalla Zabbai Rasha_bint_Yusuf Anmar_bint_Arabi Sethenna Neithara
+		Iryset Meresut Ankharet Sabbatha
+	}
+
+	noble_last_names = {
+		of_Lahmia Bloodroyal Nightcrowned Deathless Firstborn Moonveiled
+		Elixirborn Crimsonhand
+	}
+
+	common_last_names = {
+		of_Lahmia Bloodbound Cupbearer Templeblood Silkbound Ashenveil Redwatch Nightservant
+	}
+
+	male_regal_first_names = {
+		Ushoran Abhorash Wsoran Vashanesh Ankhat
+	}
+
+	female_regal_first_names = {
+		Neferata Naaima Khemalla Zabbai Rasha_bint_Yusuf
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}

@@ -336,3 +336,25 @@ marienburger_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_marienburger_add = 1
 }
+
+# ---- Board item #3419, tag registry forward-refs (Sartosa, Lahmia) ----
+
+sartosan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_sartosan_add = 1
+}
+
+sartosan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_sartosan_add = 1
+}
+
+lahmian_vampire_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_lahmian_vampire_add = 1
+}
+
+lahmian_vampire_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_lahmian_vampire_add = 1
+}

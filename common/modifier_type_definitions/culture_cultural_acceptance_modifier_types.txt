@@ -268,3 +268,21 @@ country_marienburger_cultural_acceptance_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #3419, tag registry forward-refs (Sartosa, Lahmia) ----
+
+country_sartosan_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_lahmian_vampire_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

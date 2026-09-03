@@ -420,7 +420,7 @@ dwarf cultures. (Approved 2026-08-30.)
 8 Tilean city-states + 3 Estalian kingdoms + one Border Princes tag. Tilea/Estalia held at their
 well-known city-states (approved as-is by Chris — the deep Tilean/Estalian/Border-Prince supply lever
 left untaken). **Sartosa (`SRT`) gets its own bespoke `sartosan` culture** — a melting-pot Tilean-
-pirate people modeled on vanilla's Maltese (culture **pending #3404**; the Total War "vampire-pirate
+pirate people modeled on vanilla's Maltese (culture authored by #3419; the Total War "vampire-pirate
 Sartosa" is not tabletop canon, so Sartosa stays a human pirate haven). **One Border Princes tag
 (`BPR`)** — its canonical decentralization is intended to be represented by a government/law variant, a
 later `common/` authoring task (out of scope for this docs-only registry). TIL (united Tilea) carries
@@ -436,7 +436,7 @@ both `tilean` and `sartosan`. (Approved 2026-08-30.)
 | TRA | `05_southern_realms` | Trantio | start | `tilean` | Trantio |  |
 | PAV | `05_southern_realms` | Pavona | start | `tilean` | Pavona |  |
 | VER | `05_southern_realms` | Verezzo | start | `tilean` | Verezzo |  |
-| SRT | `05_southern_realms` | Sartosa | start | `sartosan` | Sartosa | pirate haven; melting-pot culture — **pending #3404** |
+| SRT | `05_southern_realms` | Sartosa | start | `sartosan` | Sartosa | pirate haven; melting-pot culture |
 | EST | `05_southern_realms` | Estalia | formable | `estalian` | Magritta | the kingdoms unite |
 | BIL | `05_southern_realms` | Bilbali | start | `estalian` | Bilbali |  |
 | MAG | `05_southern_realms` | Magritta | start | `estalian` | Magritta |  |
@@ -477,7 +477,7 @@ future under-empire epic (no region yet).
 ### 07 NEHEKHARA (nehekharan, lahmian_vampire) — 11 tags; NEH formable
 
 The tomb-cities of the Tomb Kings. **Lahmia (`LAH`) carries a bespoke `lahmian_vampire` culture** —
-Neferata's bloodline, the cradle of vampires (culture **pending #3404**). All other cities are
+Neferata's bloodline, the cradle of vampires (culture authored by #3419). All other cities are
 `nehekharan` (the ancient Tomb Kings civilization). NEH (Settra reunites the Land of the Dead) is
 `nehekharan` only — the Lahmian vampires are Settra's enemies, not part of his realm. **Nagashizzar has
 no tag** — reserved for a future Skaven clan (no Skaven region yet). (Approved 2026-08-30.)
@@ -488,7 +488,7 @@ no tag** — reserved for a future Skaven clan (no Skaven region yet). (Approved
 | KHM | `07_nehekhara` | Khemri | start | `nehekharan` | Khemri | Settra's city (the capital) |
 | ZND | `07_nehekhara` | Zandri | start | `nehekharan` | Zandri |  |
 | NUM | `07_nehekhara` | Numas | start | `nehekharan` | Numas |  |
-| LAH | `07_nehekhara` | Lahmia | start | `lahmian_vampire` | Lahmia | cradle of vampires (Neferata) — **culture pending #3404** |
+| LAH | `07_nehekhara` | Lahmia | start | `lahmian_vampire` | Lahmia | cradle of vampires (Neferata) |
 | LYB | `07_nehekhara` | Lybaras | start | `nehekharan` | Lybaras | Queen Khalida |
 | RAS | `07_nehekhara` | Rasetra | start | `nehekharan` | Rasetra |  |
 | MAH | `07_nehekhara` | Mahrak | start | `nehekharan` | Mahrak | City of the Dead |

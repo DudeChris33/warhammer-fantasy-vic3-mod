@@ -336,3 +336,25 @@ marienburger_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_marienburger_standard_of_living_add = 1
 }
+
+# ---- Board item #3419, tag registry forward-refs (Sartosa, Lahmia) ----
+
+sartosan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_sartosan_standard_of_living_add = 1
+}
+
+sartosan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_sartosan_standard_of_living_add = 1
+}
+
+lahmian_vampire_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_lahmian_vampire_standard_of_living_add = 1
+}
+
+lahmian_vampire_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_lahmian_vampire_standard_of_living_add = 1
+}

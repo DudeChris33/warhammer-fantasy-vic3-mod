@@ -336,3 +336,25 @@ marienburger_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_marienburger_cultural_acceptance_add = 1
 }
+
+# ---- Board item #3419, tag registry forward-refs (Sartosa, Lahmia) ----
+
+sartosan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_sartosan_cultural_acceptance_add = 1
+}
+
+sartosan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_sartosan_cultural_acceptance_add = 1
+}
+
+lahmian_vampire_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_lahmian_vampire_cultural_acceptance_add = 1
+}
+
+lahmian_vampire_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_lahmian_vampire_cultural_acceptance_add = 1
+}

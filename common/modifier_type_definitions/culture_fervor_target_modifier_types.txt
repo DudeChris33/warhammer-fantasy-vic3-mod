@@ -268,3 +268,21 @@ country_fervor_target_marienburger_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #3419, tag registry forward-refs (Sartosa, Lahmia) ----
+
+country_fervor_target_sartosan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_lahmian_vampire_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
