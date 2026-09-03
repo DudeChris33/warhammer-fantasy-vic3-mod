@@ -53,11 +53,21 @@ Everything is deterministic for a fixed stack: the placement is the committed
 thin-plate fields with fixed sampling orders, the offsets are an exact-pixel
 argmax, and no RNG or wall-clock enters.
 
+**Borders-only.** ``--borders-only`` derives a magenta-only painting from
+``--paint`` at render time — every pixel further than ``--magenta-tol`` (Euclidean,
+default 12) from pure magenta (``255,0,255``) gets alpha 0, so only the boundary
+network drapes onto the globe and the globe's own terrain shows through
+everywhere else, including inside a crop's own footprint. This supersedes keeping
+a hand-exported ``old_world_state_regions - borders_only.png`` in sync by hand;
+that static file predates this flag and stays for reference (a magenta-only
+threshold of the live painting reproduces it to 34 antialiased px out of ~655k).
+
 Usage::
 
     python tools/project_regions.py                    # both variants, full globe frame
     python tools/project_regions.py --variant nearest
     python tools/project_regions.py --crop --pad 128   # trim to the placed states
+    python tools/project_regions.py --borders-only     # magenta network only, globe shows through
 """
 
 from __future__ import annotations
@@ -113,6 +123,8 @@ ALPHA_VALID = 127.5
 ROW_BLOCK = 64
 #: Framing pad (canvas px) around the placed states' bounding box.
 CROP_PAD = 64
+#: Default Euclidean RGB tolerance for --borders-only's magenta match.
+MAGENTA_TOL_DEFAULT = 12.0
 
 OUT_PREFIX_DEFAULT = "old_world_state_regions_on_globe"
 
@@ -137,6 +149,23 @@ def load_rgba(name: str) -> np.ndarray:
         raise SystemExit(f"sources/{name} is missing")
     with Image.open(path) as im:
         return np.asarray(im.convert("RGBA"), dtype=np.uint8).copy()
+
+
+def borders_only_rgba(paint_rgba: np.ndarray, tol: float) -> np.ndarray:
+    """Zero the alpha of every pixel more than ``tol`` from pure magenta.
+
+    Keeps the RGB untouched (still magenta where kept) and never *adds* alpha —
+    a pixel already transparent in ``paint_rgba`` stays transparent. This is the
+    programmatic equivalent of ``sources/old_world_state_regions - borders_only.png``:
+    a state-fill-and-border painting reduced to just the ``255,0,255`` boundary
+    network, so draping it leaves the globe's own terrain showing everywhere else.
+    """
+    r, g, b = MAGENTA_RGB
+    delta = paint_rgba[..., :3].astype(np.float32) - np.array([r, g, b], dtype=np.float32)
+    dist = np.sqrt((delta ** 2).sum(axis=2))
+    out = paint_rgba.copy()
+    out[..., 3] = np.where(dist <= tol, out[..., 3], 0)
+    return out
 
 
 def footprint_box(reg: schema.SourceRegistration) -> tuple[int, int, int, int]:
@@ -212,6 +241,16 @@ def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
     pixel is drawn by exactly one crop: a crop paints a canvas pixel only where it
     owns the master pixel it maps to, so lines in the crops' overlap zones are placed
     once rather than doubled per covering crop.
+
+    That per-master-pixel ownership is decided independently of any one crop's
+    canvas-space footprint, so a master pixel can end up owned by a crop whose own
+    ``footprint_box`` does not reach the canvas location a *different*, non-owning
+    crop maps it to — every crop that could have drawn it there defers to an owner
+    that never visits that pixel, leaving a gash of bare globe along the seam. A
+    second, owner-blind fallback pass (last crop in :data:`FIVE_CROPS` order wins,
+    same as the owner rule) fills exactly those still-unplaced pixels; it never
+    touches a pixel the first pass already placed, so it cannot reintroduce the
+    doubled lines the ownership pass exists to prevent.
     """
     canvas_rgb = globe_rgb.copy()
     placed = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
@@ -221,46 +260,53 @@ def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
     paint_alpha = paint_rgba[..., 3].astype(np.float32)
     owner_f = owner.astype(np.float32)
 
-    for idx, name in enumerate(FIVE_CROPS):
-        reg = regs[name]
-        dx, dy = offsets[name]
-        crop_alpha = crop_rgba[name][..., 3].astype(np.float32)
-        ch, cw = crop_rgba[name].shape[:2]
-        fit = reproject.fit_placement(reg, regs)
-        bx0, by0, bx1, by1 = footprint_box(reg)
-        if bx1 <= bx0 or by1 <= by0:
-            raise SystemExit(f"{name}: empty footprint box {reg.footprint}")
+    def paint_pass(require_owner: bool) -> None:
+        for idx, name in enumerate(FIVE_CROPS):
+            reg = regs[name]
+            dx, dy = offsets[name]
+            crop_alpha = crop_rgba[name][..., 3].astype(np.float32)
+            ch, cw = crop_rgba[name].shape[:2]
+            fit = reproject.fit_placement(reg, regs)
+            bx0, by0, bx1, by1 = footprint_box(reg)
+            if bx1 <= bx0 or by1 <= by0:
+                raise SystemExit(f"{name}: empty footprint box {reg.footprint}")
 
-        gx = (np.arange(bx0, bx1, dtype=np.float64) + 0.5)[None, :]
-        for yb in range(by0, by1, ROW_BLOCK):
-            ye = min(yb + ROW_BLOCK, by1)
-            gy = (np.arange(yb, ye, dtype=np.float64) + 0.5)[:, None]
-            gxb = np.broadcast_to(gx, (ye - yb, bx1 - bx0))
-            gyb = np.broadcast_to(gy, (ye - yb, bx1 - bx0))
-            # canvas -> crop px, then crop -> master px by the exact cutout offset.
-            sx_c, sy_c = fit.to_source_px(gxb, gyb)
-            mx = sx_c + dx
-            my = sy_c + dy
+            gx = (np.arange(bx0, bx1, dtype=np.float64) + 0.5)[None, :]
+            for yb in range(by0, by1, ROW_BLOCK):
+                ye = min(yb + ROW_BLOCK, by1)
+                gy = (np.arange(yb, ye, dtype=np.float64) + 0.5)[:, None]
+                gxb = np.broadcast_to(gx, (ye - yb, bx1 - bx0))
+                gyb = np.broadcast_to(gy, (ye - yb, bx1 - bx0))
+                # canvas -> crop px, then crop -> master px by the exact cutout offset.
+                sx_c, sy_c = fit.to_source_px(gxb, gyb)
+                mx = sx_c + dx
+                my = sy_c + dy
 
-            in_crop = (sx_c >= 0) & (sx_c <= cw - 1) & (sy_c >= 0) & (sy_c <= ch - 1)
-            in_master = (mx >= 0) & (mx <= pw - 1) & (my >= 0) & (my <= ph - 1)
-            ca = reproject.resample(crop_alpha, sx_c, sy_c, order=0)
-            pa = reproject.resample(paint_alpha, mx, my, order=0)
-            own = reproject.resample(owner_f, mx, my, order=0)
-            valid = (in_crop & in_master & (ca > ALPHA_VALID) & (pa > ALPHA_VALID)
-                     & (np.rint(own) == idx))
-            if not valid.any():
-                continue
+                in_crop = (sx_c >= 0) & (sx_c <= cw - 1) & (sy_c >= 0) & (sy_c <= ch - 1)
+                in_master = (mx >= 0) & (mx <= pw - 1) & (my >= 0) & (my <= ph - 1)
+                ca = reproject.resample(crop_alpha, sx_c, sy_c, order=0)
+                pa = reproject.resample(paint_alpha, mx, my, order=0)
+                view_placed = placed[yb:ye, bx0:bx1]
+                valid = in_crop & in_master & (ca > ALPHA_VALID) & (pa > ALPHA_VALID)
+                if require_owner:
+                    own = reproject.resample(owner_f, mx, my, order=0)
+                    valid &= (np.rint(own) == idx)
+                else:
+                    valid &= ~view_placed
+                if not valid.any():
+                    continue
 
-            block = np.empty((ye - yb, bx1 - bx0, 3), dtype=np.uint8)
-            for c in range(3):
-                block[..., c] = np.clip(
-                    reproject.resample(paint_planes[c], mx, my, order=order), 0, 255
-                ).astype(np.uint8)
-            view_rgb = canvas_rgb[yb:ye, bx0:bx1]
-            view_placed = placed[yb:ye, bx0:bx1]
-            view_rgb[valid] = block[valid]
-            view_placed |= valid
+                block = np.empty((ye - yb, bx1 - bx0, 3), dtype=np.uint8)
+                for c in range(3):
+                    block[..., c] = np.clip(
+                        reproject.resample(paint_planes[c], mx, my, order=order), 0, 255
+                    ).astype(np.uint8)
+                view_rgb = canvas_rgb[yb:ye, bx0:bx1]
+                view_rgb[valid] = block[valid]
+                view_placed |= valid
+
+    paint_pass(require_owner=True)
+    paint_pass(require_owner=False)
     return canvas_rgb, placed
 
 
@@ -289,7 +335,8 @@ def placement_box(placed: np.ndarray, pad: int) -> tuple[int, int, int, int]:
 
 def build(variants: list[str], pad: int, out_prefix: str,
           paint_source: str = PAINT_SOURCE, overlay_coasts: bool = True,
-          full_frame: bool = True, globe_source: str = GLOBE_SOURCE) -> list[Path]:
+          full_frame: bool = True, globe_source: str = GLOBE_SOURCE,
+          borders_only: bool = False, magenta_tol: float = MAGENTA_TOL_DEFAULT) -> list[Path]:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     for name in FIVE_CROPS:
         if name not in regs:
@@ -297,6 +344,12 @@ def build(variants: list[str], pad: int, out_prefix: str,
 
     master_rgb = load_rgb(MASTER_SOURCE)
     paint_rgba = load_rgba(paint_source)
+    if borders_only:
+        before = int((paint_rgba[..., 3] > 0).sum())
+        paint_rgba = borders_only_rgba(paint_rgba, magenta_tol)
+        after = int((paint_rgba[..., 3] > 0).sum())
+        log(f"borders-only  kept {after:,} of {before:,} painted px "
+            f"(magenta tol {magenta_tol})")
     crop_rgba = {name: load_rgba(name) for name in FIVE_CROPS}
     globe_rgb = load_rgb(globe_source)
     coasts_rgb = load_rgb(COAST_SOURCE) if overlay_coasts else None
@@ -376,12 +429,24 @@ def main(argv: list[str] | None = None) -> int:
                    help=f"the backdrop to drape the painting over (default {GLOBE_SOURCE}); "
                         f"must share the canvas frame ({CANVAS_W}x{CANVAS_H}), e.g. "
                         f"'terraqueous_globe_reprojected - sea_zones.png'")
+    p.add_argument("--borders-only", action="store_true",
+                   help="derive a magenta-only painting from --paint at render time "
+                        "(alpha zeroed beyond --magenta-tol of pure magenta), so only "
+                        "the boundary network drapes and the globe's own terrain shows "
+                        "through everywhere else, including inside a crop's footprint")
+    p.add_argument("--magenta-tol", type=float, default=MAGENTA_TOL_DEFAULT,
+                   help=f"--borders-only's Euclidean RGB match tolerance to pure magenta "
+                        f"(default {MAGENTA_TOL_DEFAULT})")
     args = p.parse_args(argv)
 
     variants = ["nearest", "bilinear"] if args.variant == "both" else [args.variant]
-    build(variants, args.pad, args.out_prefix,
+    out_prefix = args.out_prefix
+    if args.borders_only and out_prefix == OUT_PREFIX_DEFAULT:
+        out_prefix = f"{out_prefix}_borders_only"
+    build(variants, args.pad, out_prefix,
           paint_source=args.paint, overlay_coasts=not args.no_coast,
-          full_frame=not args.crop, globe_source=args.globe)
+          full_frame=not args.crop, globe_source=args.globe,
+          borders_only=args.borders_only, magenta_tol=args.magenta_tol)
     return 0
 
 

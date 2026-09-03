@@ -270,7 +270,7 @@ def fit_source(stem: str, log=print) -> dict:
         #   coverage is a sourcing question (dots nearer the edge), not tooling.
         rbf = RBFInterpolator(lm_src, lm_canvas, kernel="thin_plate_spline", degree=1)
         if len(lm_src) <= 3:
-            src_pts = register.lattice(master_shape, seed["lattice"]["nx"],
+            lat_pts = register.lattice(master_shape, seed["lattice"]["nx"],
                                        seed["lattice"]["ny"],
                                        float(seed["lattice"].get("inset", 0.02)))
             log(f"affine placement from {len(lm_src)} landmarks (full-frame lattice, "
@@ -284,12 +284,24 @@ def fit_source(stem: str, log=print) -> dict:
             y1 = min(float(master_shape[0]), float(lm_src[:, 1].max()) + pad)
             log(f"lattice hull  x[{x0:.0f},{x1:.0f}] y[{y0:.0f},{y1:.0f}]  (pad {pad:.0f}px, "
                 f"master {master_shape[1]}x{master_shape[0]})")
-            src_pts = register.lattice_box((x0, y0, x1, y1), seed["lattice"]["nx"],
+            lat_pts = register.lattice_box((x0, y0, x1, y1), seed["lattice"]["nx"],
                                            seed["lattice"]["ny"])
             info["method"] = "thin-plate interpolation of landmarks, lattice bounded to hull+pad"
             info["lattice_hull_box"] = [round(x0, 1), round(y0, 1), round(x1, 1), round(y1, 1)]
-        canvas_pts = register.clamp_canvas(rbf(src_pts), CANVAS_W, CANVAS_H)
-        return _emit(seed, src_pts, canvas_pts, info, log)
+        lat_canvas = register.clamp_canvas(rbf(lat_pts), CANVAS_W, CANVAS_H)
+        # Emit the landmarks themselves alongside the lattice samples: a consumer
+        # re-fits its own thin-plate through whatever control points are committed
+        # (project_regions.py, generate_state_labels.py), and a lattice grid is
+        # sparse relative to a locally dense landmark cluster — bare lattice
+        # samples let that re-fit drift tens of px off a landmark it sits between
+        # (measured 72px at this crop's tightest cluster, dark_lands item #3476).
+        # Including the landmarks restores the "exact at every landmark" this
+        # objective already promises, at every consumer, not just this fit.
+        src_pts = np.concatenate([lm_src, lat_pts])
+        canvas_pts = np.concatenate([lm_canvas, lat_canvas])
+        names = [lm["name"] for lm in seed["landmarks"]]
+        return _emit(seed, src_pts, canvas_pts,
+                     info, log, notes=lambda i: names[i] if i < len(names) else f"lattice {i - len(names)}")
 
     if objective == "landmark_refine":
         # Landmark thin-plate placement used as the SEED for a LOCAL silhouette
@@ -409,7 +421,8 @@ def fit_source(stem: str, log=print) -> dict:
     return _emit(seed, src_pts, canvas_pts, info, log)
 
 
-def _emit(seed: dict, src_pts: np.ndarray, canvas_pts: np.ndarray, info: dict, log) -> dict:
+def _emit(seed: dict, src_pts: np.ndarray, canvas_pts: np.ndarray, info: dict, log,
+          notes=lambda i: f"lattice {i}") -> dict:
     rec = dict(seed["record"])
     rec["source"] = seed["source"]
     rec["projection"] = "control_point_warp"
@@ -424,8 +437,7 @@ def _emit(seed: dict, src_pts: np.ndarray, canvas_pts: np.ndarray, info: dict, l
         min(float(CANVAS_H), float(canvas_pts[:, 1].max()) + pad),
     ]
     rec["notes"] = rec.get("notes", "").rstrip() + " FIT: " + json.dumps(info, sort_keys=True)
-    rec["control_points"] = register.to_records(
-        src_pts, canvas_pts, lambda i: f"lattice {i}")
+    rec["control_points"] = register.to_records(src_pts, canvas_pts, notes)
     log(f"control points {len(rec['control_points'])}")
     return rec
 
