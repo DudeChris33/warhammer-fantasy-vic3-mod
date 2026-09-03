@@ -9,7 +9,10 @@
 # so the exact inputs behind every committed bitmap stay auditable without
 # shipping the art. See planning/requests/world-map-source-driven.md (decision #2)
 # and tools/PROVENANCE.md.
-sources/
+sources/*
+# Exception: sources/dots/ is the user's own registration-dot/warp-preview
+# renders (not third-party reference imagery) — committed via Git LFS.
+!sources/dots/
 
 *.log
 *.bak
