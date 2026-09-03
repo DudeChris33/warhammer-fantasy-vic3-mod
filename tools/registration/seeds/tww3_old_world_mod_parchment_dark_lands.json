@@ -9,7 +9,7 @@
   "_comment_lattice": "6x6 over the crop (~327 master px horizontal spacing, ~463 vertical). The 14 dots span the region's coastal/edge extremes (blue at the far-west tip, rose far-east, azure/orange along the north edge, magenta/spring_green/cyan at the south, plus periwinkle SW and salmon SE added in the second pass to anchor the previously dot-sparse southern band); the lattice regularises the thin-plate and captures its affine trend out to the crop corners, where it extrapolates beyond the dot hull. Global-affine residual of the 14 pairs is mean 23 / max 68 px (blue, the west coastal tip) — non-affine curvature the thin-plate absorbs exactly at each dot.",
   "lattice": {"nx": 6, "ny": 6, "inset": 0.03},
 
-  "_comment_landmarks": "source px = dot centroid in the crop's own 1965x2779 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew (pure marker palette: every channel in {0,127,255}). All 14 colours present in both frames as a single 12-px component each; the globe's stray (127,0,0) specks are natural pixels, absent from the crop, and correctly excluded. periwinkle and salmon were added in a second pass to anchor the southern band. These ARE the fit (not a held-out check) for objective=landmarks.",
+  "_comment_landmarks": "source px = dot centroid in the crop's own 1965x2779 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by the colour the user drew. All 22 colours present in both frames as a single 12-px component each; the globe's stray (127,0,0) specks are natural pixels, absent from the crop, and correctly excluded. periwinkle and salmon were added in a second pass to anchor the southern band; navy/teal/lime/purple/pale_turquoise/orchid were added in a third pass (item #3476) to close a reported border/terrain drift specifically in the Ash Ridge Mts / Plain of Bones / Gorgoth pocket (source x:570-1330, y:1760-2200), which the second pass's periwinkle/salmon pair bracketed but did not densely cover; gold/hot_pink were added in a fourth pass (item #3476), east of the third-pass cluster near violet/rose, no longer constrained to the {0,127,255}-per-channel marker palette the first 20 dots used. These ARE the fit (not a held-out check) for objective=landmarks.",
   "landmarks": [
     {"name": "blue",         "source": [79.5, 1234.5],   "canvas": [4390.5, 995.5]},
     {"name": "azure",        "source": [743.5, 164.5],   "canvas": [4674.5, 501.5]},
@@ -24,13 +24,21 @@
     {"name": "orange",       "source": [1013.5, 330.5],  "canvas": [4797.5, 592.5]},
     {"name": "yellow",       "source": [1506.5, 2221.5], "canvas": [4981.5, 1371.5]},
     {"name": "periwinkle",   "source": [64.5, 2397.5],   "canvas": [4492.5, 1437.5]},
-    {"name": "salmon",       "source": [1875.5, 2418.5], "canvas": [5109.5, 1439.5]}
+    {"name": "salmon",       "source": [1875.5, 2418.5], "canvas": [5109.5, 1439.5]},
+    {"name": "navy",           "source": [570.5, 2192.5],  "canvas": [4674.5, 1354.5]},
+    {"name": "teal",           "source": [1045.5, 2144.5], "canvas": [4891.5, 1377.5]},
+    {"name": "lime",           "source": [789.5, 2147.5],  "canvas": [4782.5, 1287.5]},
+    {"name": "purple",         "source": [1093.5, 1760.5], "canvas": [4787.5, 1146.5]},
+    {"name": "pale_turquoise", "source": [729.5, 1820.5],  "canvas": [4699.5, 1218.5]},
+    {"name": "orchid",         "source": [1331.5, 1843.5], "canvas": [4872.5, 1153.5]},
+    {"name": "gold",           "source": [1812.5, 1948.5], "canvas": [5094.5, 1276.5]},
+    {"name": "hot_pink",       "source": [1647.5, 2109.5], "canvas": [5023.5, 1336.5]}
   ],
 
   "record": {
     "role": "old_world_boundary_network_dark_lands",
     "precedence": 35,
     "layer_precedence": {"boundaries": 113, "coastline": 5, "relief": 5},
-    "notes": "PROVISIONAL. Dark Lands crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_dark_lands (objective=landmarks; 14 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to the Dark Lands — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. CONSUMED as an ink_bridged boundary source (generate_state_labels.py), clipped to its alpha>0 footprint, at boundaries precedence 113 — above IE (100) and tww3_colored (95) so its lines win inside its own footprint only. Contributes NO coastline (the mask remains the sole authority, user decision #1); coastline/relief precedence stay provisional lows. PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit."
+    "notes": "PROVISIONAL. Dark Lands crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_dark_lands (objective=landmarks; 22 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to the Dark Lands — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. CONSUMED as an ink_bridged boundary source (generate_state_labels.py), clipped to its alpha>0 footprint, at boundaries precedence 113 — above IE (100) and tww3_colored (95) so its lines win inside its own footprint only. Contributes NO coastline (the mask remains the sole authority, user decision #1); coastline/relief precedence stay provisional lows. PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit."
   }
 }
