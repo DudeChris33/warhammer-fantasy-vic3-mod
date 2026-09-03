@@ -53,11 +53,21 @@ Everything is deterministic for a fixed stack: the placement is the committed
 thin-plate fields with fixed sampling orders, the offsets are an exact-pixel
 argmax, and no RNG or wall-clock enters.
 
+**Borders-only.** ``--borders-only`` derives a magenta-only painting from
+``--paint`` at render time — every pixel further than ``--magenta-tol`` (Euclidean,
+default 12) from pure magenta (``255,0,255``) gets alpha 0, so only the boundary
+network drapes onto the globe and the globe's own terrain shows through
+everywhere else, including inside a crop's own footprint. This supersedes keeping
+a hand-exported ``old_world_state_regions - borders_only.png`` in sync by hand;
+that static file predates this flag and stays for reference (a magenta-only
+threshold of the live painting reproduces it to 34 antialiased px out of ~655k).
+
 Usage::
 
     python tools/project_regions.py                    # both variants, full globe frame
     python tools/project_regions.py --variant nearest
     python tools/project_regions.py --crop --pad 128   # trim to the placed states
+    python tools/project_regions.py --borders-only     # magenta network only, globe shows through
 """
 
 from __future__ import annotations
@@ -113,6 +123,8 @@ ALPHA_VALID = 127.5
 ROW_BLOCK = 64
 #: Framing pad (canvas px) around the placed states' bounding box.
 CROP_PAD = 64
+#: Default Euclidean RGB tolerance for --borders-only's magenta match.
+MAGENTA_TOL_DEFAULT = 12.0
 
 OUT_PREFIX_DEFAULT = "old_world_state_regions_on_globe"
 
@@ -137,6 +149,23 @@ def load_rgba(name: str) -> np.ndarray:
         raise SystemExit(f"sources/{name} is missing")
     with Image.open(path) as im:
         return np.asarray(im.convert("RGBA"), dtype=np.uint8).copy()
+
+
+def borders_only_rgba(paint_rgba: np.ndarray, tol: float) -> np.ndarray:
+    """Zero the alpha of every pixel more than ``tol`` from pure magenta.
+
+    Keeps the RGB untouched (still magenta where kept) and never *adds* alpha —
+    a pixel already transparent in ``paint_rgba`` stays transparent. This is the
+    programmatic equivalent of ``sources/old_world_state_regions - borders_only.png``:
+    a state-fill-and-border painting reduced to just the ``255,0,255`` boundary
+    network, so draping it leaves the globe's own terrain showing everywhere else.
+    """
+    r, g, b = MAGENTA_RGB
+    delta = paint_rgba[..., :3].astype(np.float32) - np.array([r, g, b], dtype=np.float32)
+    dist = np.sqrt((delta ** 2).sum(axis=2))
+    out = paint_rgba.copy()
+    out[..., 3] = np.where(dist <= tol, out[..., 3], 0)
+    return out
 
 
 def footprint_box(reg: schema.SourceRegistration) -> tuple[int, int, int, int]:
@@ -289,7 +318,8 @@ def placement_box(placed: np.ndarray, pad: int) -> tuple[int, int, int, int]:
 
 def build(variants: list[str], pad: int, out_prefix: str,
           paint_source: str = PAINT_SOURCE, overlay_coasts: bool = True,
-          full_frame: bool = True, globe_source: str = GLOBE_SOURCE) -> list[Path]:
+          full_frame: bool = True, globe_source: str = GLOBE_SOURCE,
+          borders_only: bool = False, magenta_tol: float = MAGENTA_TOL_DEFAULT) -> list[Path]:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     for name in FIVE_CROPS:
         if name not in regs:
@@ -297,6 +327,12 @@ def build(variants: list[str], pad: int, out_prefix: str,
 
     master_rgb = load_rgb(MASTER_SOURCE)
     paint_rgba = load_rgba(paint_source)
+    if borders_only:
+        before = int((paint_rgba[..., 3] > 0).sum())
+        paint_rgba = borders_only_rgba(paint_rgba, magenta_tol)
+        after = int((paint_rgba[..., 3] > 0).sum())
+        log(f"borders-only  kept {after:,} of {before:,} painted px "
+            f"(magenta tol {magenta_tol})")
     crop_rgba = {name: load_rgba(name) for name in FIVE_CROPS}
     globe_rgb = load_rgb(globe_source)
     coasts_rgb = load_rgb(COAST_SOURCE) if overlay_coasts else None
@@ -376,12 +412,24 @@ def main(argv: list[str] | None = None) -> int:
                    help=f"the backdrop to drape the painting over (default {GLOBE_SOURCE}); "
                         f"must share the canvas frame ({CANVAS_W}x{CANVAS_H}), e.g. "
                         f"'terraqueous_globe_reprojected - sea_zones.png'")
+    p.add_argument("--borders-only", action="store_true",
+                   help="derive a magenta-only painting from --paint at render time "
+                        "(alpha zeroed beyond --magenta-tol of pure magenta), so only "
+                        "the boundary network drapes and the globe's own terrain shows "
+                        "through everywhere else, including inside a crop's footprint")
+    p.add_argument("--magenta-tol", type=float, default=MAGENTA_TOL_DEFAULT,
+                   help=f"--borders-only's Euclidean RGB match tolerance to pure magenta "
+                        f"(default {MAGENTA_TOL_DEFAULT})")
     args = p.parse_args(argv)
 
     variants = ["nearest", "bilinear"] if args.variant == "both" else [args.variant]
-    build(variants, args.pad, args.out_prefix,
+    out_prefix = args.out_prefix
+    if args.borders_only and out_prefix == OUT_PREFIX_DEFAULT:
+        out_prefix = f"{out_prefix}_borders_only"
+    build(variants, args.pad, out_prefix,
           paint_source=args.paint, overlay_coasts=not args.no_coast,
-          full_frame=not args.crop, globe_source=args.globe)
+          full_frame=not args.crop, globe_source=args.globe,
+          borders_only=args.borders_only, magenta_tol=args.magenta_tol)
     return 0
 
 
