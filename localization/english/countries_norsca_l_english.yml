@@ -1,8 +1,6 @@
 ﻿l_english:
  # Country display names and adjectives for common/country_definitions/00_norsca.txt.
  # One name key (the tag) + one adjective key (<TAG>_ADJ) per tag. Board item #3417 (epic #3414).
- SAR:0 "Sarls"
- SAR_ADJ:0 "Sarl"
  AES:0 "Aeslings"
  AES_ADJ:0 "Aesling"
  BAE:0 "Baersonlings"
