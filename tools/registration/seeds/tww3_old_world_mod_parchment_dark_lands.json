@@ -1,5 +1,6 @@
 {
   "source": "tww3_old_world_mod_parchment_dark_lands.png",
+  "dots_source": "tww3_old_world_mod_parchment - dots_4.png",
   "master_shape": [2779, 1965],
   "objective": "landmarks",
   "footprint_pad": 32,

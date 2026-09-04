@@ -1,5 +1,6 @@
 {
   "source": "tww3_old_world_mod_parchment_kislev_norsca.png",
+  "dots_source": "tww3_old_world_mod_parchment - dots_3.png",
   "master_shape": [1436, 2939],
   "objective": "landmarks",
   "footprint_pad": 32,
