@@ -414,8 +414,8 @@ region_lustria_northern_bay_placeholder = {
 	states = { STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER }
 }
 
-region_maelstrom_01 = {
-	states = { STATE_MAELSTROM_01 }
+region_maelstrom = {
+	states = { STATE_MAELSTROM }
 }
 
 region_manaanspoort_sea = {

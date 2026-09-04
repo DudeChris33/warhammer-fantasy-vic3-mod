@@ -135,7 +135,7 @@ STATE_SEA_OF_MALICE_02 = {
 	provinces = { x61462B }
 }
 
-STATE_MAELSTROM_01 = {
+STATE_MAELSTROM = {
 	id = 3027
 	provinces = { xFF7DA4 }
 	impassable = { xFF7DA4 }

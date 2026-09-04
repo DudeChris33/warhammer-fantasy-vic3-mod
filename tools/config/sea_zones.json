@@ -26,11 +26,7 @@
   { "name": "JADE_SEA", "display_name": "Jade Sea", "seeds": [[7143, 2050], [7500, 2400], [7057, 2722]], "note": "The far-eastern sea by the Lumbria Archipelago and the Isle of Rising Sun." }
  ],
  "overrides": [],
- "merges": [
-  { "name": "MAELSTROM", "display_name": "Maelstrom", "impassable": true,
-    "seeds": [[890, 618], [889, 676], [993, 1328]],
-    "note": "The three zones the user flagged 'Maelstrom (impassible)' during the 2026-08-31 naming pass, fused into one impassable whirlpool province. All three sit off Naggaroth's north-western coast." }
- ],
+ "merges": [],
  "impassable_seeds": [
   [3227, 367],
   [821, 979],
@@ -45,7 +41,10 @@
   [2225, 3090],
   [3499, 2808],
   [3279, 3382],
-  [5281, 3452]
+  [5281, 3452],
+  [890, 618],
+  [889, 676],
+  [993, 1328]
  ],
  "zone_names": [
   { "seed": [6692, 0], "display_name": "Western Sea of Oblivion" },
@@ -60,6 +59,7 @@
   { "seed": [3817, 406], "display_name": "Gloomwrack Strait" },
   { "seed": [1301, 367], "display_name": "The Underway" },
   { "seed": [1551, 417], "display_name": "Gulf of Naggarond" },
+  { "seed": [890, 618], "display_name": "Maelstrom" },
   { "seed": [821, 979], "display_name": "Northern Far Ocean" },
   { "seed": [2596, 484], "display_name": "Karond Kar Bypass" },
   { "seed": [2424, 651], "display_name": "Forbidding Coast" },

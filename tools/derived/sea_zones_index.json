@@ -280,8 +280,8 @@
   },
   {
    "label": 28,
-   "key": "STATE_MAELSTROM_01",
-   "sea_group": "MAELSTROM",
+   "key": "STATE_MAELSTROM",
+   "sea_group": "FAR_OCEAN",
    "display_name": "Maelstrom",
    "id": 3027,
    "area": 82260,
