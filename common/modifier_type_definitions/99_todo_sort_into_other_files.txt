@@ -1162,3 +1162,88 @@ country_soldiers_voting_power_add={
 		ai_value=0
 	}
 }
+
+# Board item #3536 (parent #3292): restored verbatim from vanilla after being
+# collaterally trimmed during the #3405/#3407 culture-modifier-type split.
+country_institution_colonial_affairs_max_investment_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_institution_social_security_max_investment_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_institution_workplace_safety_max_investment_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_institution_schools_max_investment_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_institution_police_max_investment_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_institution_health_system_max_investment_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_institution_home_affairs_max_investment_add={
+	decimals=0
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_academics_pol_str_mult={
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+country_soldiers_pol_str_mult={
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
+
+country_clerks_pol_str_mult={
+	decimals=0
+	color=neutral
+	percent=yes
+	game_data={
+		ai_value=0
+	}
+}
