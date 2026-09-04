@@ -6,7 +6,7 @@ reads and (by default) overwrites a mask under the local-only, gitignored
 pixel becomes white.
 
 Usage (from the repo root, with tools/.venv active):
-    python tools/binarize_magenta_mask.py                       # overwrite sources/land_sea_mask.png
+    python tools/binarize_magenta_mask.py                       # overwrite sources/gimp_exports/land_sea_mask.png
     python tools/binarize_magenta_mask.py --src A.png --out B.png
 """
 import argparse
@@ -16,7 +16,7 @@ import numpy as np
 from PIL import Image
 
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SRC = ROOT / "sources" / "land_sea_mask.png"
+DEFAULT_SRC = ROOT / "sources" / "gimp_exports" / "land_sea_mask.png"
 
 MAGENTA = (255, 0, 255)
 BLACK = (0, 0, 0)

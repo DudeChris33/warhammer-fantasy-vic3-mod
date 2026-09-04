@@ -48,11 +48,12 @@ MANIFEST_PATH = TOOLS_DIR / "SOURCES.md"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
 #: ``sources/`` is organized into subfolders by role (raw references in
-#: ``originals/``, GIMP editable masters in ``gimp/``, the paired-anchor-dot
-#: workflow's crops/examples in ``dots/``) — a file may live directly under
-#: ``sources/`` or in one of these. ``WIP/`` holds local scratch not tracked in
-#: the manifest, so it is deliberately excluded from both search and refresh.
-SOURCE_SUBDIRS = ("originals", "gimp", "dots")
+#: ``originals/``, GIMP editable masters in ``gimp/``, GIMP-exported PNGs in
+#: ``gimp_exports/``, the paired-anchor-dot workflow's crops/examples in
+#: ``dots/``) — a file may live directly under ``sources/`` or in one of
+#: these. ``WIP/`` holds local scratch not tracked in the manifest, so it is
+#: deliberately excluded from both search and refresh.
+SOURCE_SUBDIRS = ("originals", "gimp", "gimp_exports", "dots")
 
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"
