@@ -1,0 +1,14 @@
+﻿l_english:
+ # Warhammer Fantasy reskin of the vanilla Economic Dominance player-objective text
+ # (common/objectives/01_player_objectives.txt and its subgoals/journal entries).
+ # localization/ is never replace_path'd, so every key below is already defined by
+ # vanilla localization/english/objectives_l_english.yml -- these are overrides and
+ # must live here, not in localization/english/, or they would duplicate-key.
+ # Vanilla ships these keys with no version suffix (implicitly 0); :1 wins.
+ # This chain is almost entirely production mechanics with very little real-world
+ # flavor in its loc text, so only the two keys with explicit globe-scale framing
+ # are overridden below -- everything else reads fine as-is.
+
+ je_specialized_goods_reason:1 "We should look to diversify our goods production further. We have started production of one good, but if we begin producing even more expensive goods, we will be able to export it to every corner of the Old World."
+
+ je_strong_market_reason:1 "The time has come to establish ourselves as the largest and most powerful market in the Old World."
