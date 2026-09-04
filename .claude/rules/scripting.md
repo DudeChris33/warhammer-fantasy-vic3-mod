@@ -58,6 +58,31 @@ Every culture additionally requires, elsewhere:
 
 These three modifier-type files and three static-modifier files are append-only — every later culture-authoring item adds its own entries to the existing files rather than creating new ones per culture.
 
+## `common/religions/` standard-of-living + icon requirements (board #3541)
+
+Religions carry the same standard-of-living obligation as cultures, and it is a **hard engine
+error** if missed (`religion.cpp:92 Missing religion sol static modifier`). Every religion id in
+`common/religions/` additionally requires, elsewhere:
+
+- one `state_<religion>_standard_of_living_add` modifier-type registration (`{decimals=1 color=good
+  game_data={ai_value=0}}`) in `common/modifier_type_definitions/religion_standard_of_living_modifier_types.txt`
+  — vanilla keeps these in its own `99_todo_sort_into_other_files.txt`, this repo splits them out to
+  mirror the culture equivalent;
+- a `<religion>_standard_of_living_modifier_positive` / `_negative` static-modifier pair in
+  `common/static_modifiers/religion_standard_of_living_modifiers.txt`, both magnitude `1`, differing
+  only by icon — genuine vanilla behavior, confirmed against vanilla's own
+  `common/static_modifiers/08_religion_standard_of_living.txt`, not a mistake to "fix".
+
+Both files are **append-only**: a later religion adds its entries to them rather than creating new
+per-religion files.
+
+A religion's `icon` must name a file that actually exists under vanilla's
+`gfx/interface/icons/religion_icons/`, or it is a `virtualfilesystem.cpp:569` missing-texture error.
+The full vanilla set is: `animist`, `atheist`, `catholic`, `confucianism`, `coptic`, `gelugpa`,
+`hindu`, `ibadi`, `jewish`, `mahayana`, `orthodox`, `protestant`, `shiite`, `shinto`, `sikh`,
+`sunni`, `theravada` (all `.dds`). Note `confucianism`, not `confucian`, and there is no
+`oriental_orthodox` — use `coptic`. These vanilla icons are placeholders pending custom art.
+
 ## `common/country_definitions/` + `common/country_formation/` entry schema (epic #3414, #3416)
 
 Neither database is documented in `docs/*.log`; these shapes were confirmed against the vanilla

@@ -1,0 +1,198 @@
+﻿# Per-religion standard-of-living static modifiers. Victoria 3 requires BOTH a
+# _positive and a _negative definition for every religion id in common/religions/; a missing pair
+# is a hard engine error (religion.cpp:92 "Missing religion sol static modifier"). Both variants
+# carry magnitude 1 — that is the vanilla shape (confirmed against vanilla's own
+# common/static_modifiers/08_religion_standard_of_living.txt), not a mistake to "fix"; the pair
+# differs only by icon.
+# This file is APPENDED to as new religions are added.
+# Board item #3541 (epic #3404).
+
+cult_of_sigmar_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_sigmar_standard_of_living_add = 1
+}
+
+cult_of_sigmar_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_sigmar_standard_of_living_add = 1
+}
+
+cult_of_ulric_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_ulric_standard_of_living_add = 1
+}
+
+cult_of_ulric_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_ulric_standard_of_living_add = 1
+}
+
+old_faith_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_old_faith_standard_of_living_add = 1
+}
+
+old_faith_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_old_faith_standard_of_living_add = 1
+}
+
+the_lady_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_the_lady_standard_of_living_add = 1
+}
+
+the_lady_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_the_lady_standard_of_living_add = 1
+}
+
+cult_of_myrmidia_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_myrmidia_standard_of_living_add = 1
+}
+
+cult_of_myrmidia_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_myrmidia_standard_of_living_add = 1
+}
+
+cult_of_ursun_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_ursun_standard_of_living_add = 1
+}
+
+cult_of_ursun_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_ursun_standard_of_living_add = 1
+}
+
+cult_of_morr_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_morr_standard_of_living_add = 1
+}
+
+cult_of_morr_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_morr_standard_of_living_add = 1
+}
+
+# ---- Ancestor gods (dwarfs) ----
+
+cult_of_ancestors_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_ancestors_standard_of_living_add = 1
+}
+
+cult_of_ancestors_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_ancestors_standard_of_living_add = 1
+}
+
+# ---- Chaos ----
+
+cult_of_khorne_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_khorne_standard_of_living_add = 1
+}
+
+cult_of_khorne_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_khorne_standard_of_living_add = 1
+}
+
+cult_of_nurgle_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_nurgle_standard_of_living_add = 1
+}
+
+cult_of_nurgle_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_nurgle_standard_of_living_add = 1
+}
+
+cult_of_tzeentch_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_tzeentch_standard_of_living_add = 1
+}
+
+cult_of_tzeentch_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_tzeentch_standard_of_living_add = 1
+}
+
+cult_of_slaanesh_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_slaanesh_standard_of_living_add = 1
+}
+
+cult_of_slaanesh_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_slaanesh_standard_of_living_add = 1
+}
+
+chaos_undivided_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_chaos_undivided_standard_of_living_add = 1
+}
+
+chaos_undivided_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_chaos_undivided_standard_of_living_add = 1
+}
+
+cult_of_hashut_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_hashut_standard_of_living_add = 1
+}
+
+cult_of_hashut_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_hashut_standard_of_living_add = 1
+}
+
+# ---- Greenskin gods ----
+
+gork_and_mork_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_gork_and_mork_standard_of_living_add = 1
+}
+
+gork_and_mork_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_gork_and_mork_standard_of_living_add = 1
+}
+
+mork_and_gork_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_mork_and_gork_standard_of_living_add = 1
+}
+
+mork_and_gork_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_mork_and_gork_standard_of_living_add = 1
+}
+
+# ---- Mortuary cult (Tomb Kings) ----
+
+mortuary_cult_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_mortuary_cult_standard_of_living_add = 1
+}
+
+mortuary_cult_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_mortuary_cult_standard_of_living_add = 1
+}
+
+# ---- Undeath ----
+
+cult_of_nagash_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_nagash_standard_of_living_add = 1
+}
+
+cult_of_nagash_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_nagash_standard_of_living_add = 1
+}

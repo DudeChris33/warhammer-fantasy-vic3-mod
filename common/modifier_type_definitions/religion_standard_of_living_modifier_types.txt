@@ -1,0 +1,160 @@
+﻿# Registers the state_<religion>_standard_of_living_add modifier TYPES used by the
+# matching static_modifier blocks in common/static_modifiers/religion_standard_of_living_modifiers.txt.
+# One declaration per religion in common/religions/; APPENDED to as later religions are added.
+# Vanilla keeps these in common/modifier_type_definitions/99_todo_sort_into_other_files.txt; this repo
+# splits them into their own file, mirroring culture_standard_of_living_modifier_types.txt.
+# Board item #3541 (epic #3404).
+
+state_cult_of_sigmar_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_ulric_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_old_faith_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_the_lady_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_myrmidia_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_ursun_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_morr_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Ancestor gods (dwarfs) ----
+
+state_cult_of_ancestors_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Chaos ----
+
+state_cult_of_khorne_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_nurgle_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_tzeentch_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_slaanesh_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_chaos_undivided_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_cult_of_hashut_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Greenskin gods ----
+
+state_gork_and_mork_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_mork_and_gork_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Mortuary cult (Tomb Kings) ----
+
+state_mortuary_cult_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Undeath ----
+
+state_cult_of_nagash_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

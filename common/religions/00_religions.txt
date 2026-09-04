@@ -1,7 +1,8 @@
 ﻿# The 18 Old World religions. Each carries:
 #   icon    — a VANILLA religion_icons .dds used as a PLACEHOLDER (custom art is out of scope, epic #3404).
-#             Exact vanilla filenames must be confirmed on the Vic3 box; a wrong name is a missing-texture
-#             warning, not a parse error.
+#             Every filename below is CONFIRMED present in vanilla gfx/interface/icons/religion_icons/
+#             (board item #3541 fixed four that were not: oriental_orthodox -> coptic, confucian ->
+#             confucianism). Keep placeholders to that confirmed list pending custom art.
 #   heritage — the religious-heritage trait (common/discrimination_traits/02_religious_heritages.txt) whose
 #             group drives religious discrimination.
 #   color   — 0-1 RGB, thematic, cosmetic only.
@@ -53,7 +54,7 @@ cult_of_ursun = {
 }
 
 cult_of_morr = {
-	icon = "gfx/interface/icons/religion_icons/oriental_orthodox.dds"
+	icon = "gfx/interface/icons/religion_icons/coptic.dds"
 	heritage = heritage_old_world_pantheon
 	color = { 0.25 0.18 0.30 }
 	taboos = { }
@@ -62,7 +63,7 @@ cult_of_morr = {
 ################ Ancestor gods (dwarfs) ################
 
 cult_of_ancestors = {
-	icon = "gfx/interface/icons/religion_icons/confucian.dds"
+	icon = "gfx/interface/icons/religion_icons/confucianism.dds"
 	heritage = heritage_ancestor_cult
 	color = { 0.55 0.55 0.55 }
 	taboos = { }
@@ -131,7 +132,7 @@ mork_and_gork = {
 ################ Mortuary cult (Tomb Kings) ################
 
 mortuary_cult = {
-	icon = "gfx/interface/icons/religion_icons/oriental_orthodox.dds"
+	icon = "gfx/interface/icons/religion_icons/coptic.dds"
 	heritage = heritage_mortuary_rites
 	color = { 0.80 0.72 0.40 }
 	taboos = { }
@@ -140,7 +141,7 @@ mortuary_cult = {
 ################ Undeath (Sylvanian vampires + Mousillon) ################
 
 cult_of_nagash = {
-	icon = "gfx/interface/icons/religion_icons/oriental_orthodox.dds"
+	icon = "gfx/interface/icons/religion_icons/coptic.dds"
 	heritage = heritage_nagashite
 	color = { 0.20 0.30 0.22 }
 	taboos = { }
