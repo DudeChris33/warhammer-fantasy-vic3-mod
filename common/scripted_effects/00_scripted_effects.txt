@@ -686,21 +686,17 @@ re_add_prestige_good_je_if_lost = {
 # whose good was solely produced by the company being disbanded, covering the
 # case where the JE had already completed (and was therefore removed) before the
 # company was dissolved.
-re_add_disbanded_company_prestige_good_jes = {
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_clothes_var JE = je_prestige_goods_clothes }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_groceries_var JE = je_prestige_goods_groceries }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_furniture_var JE = je_prestige_goods_furniture }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_fertilizer_var JE = je_prestige_goods_fertilizer }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_tools_var JE = je_prestige_goods_tools }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_fish_var JE = je_prestige_goods_fish }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_meat_var JE = je_prestige_goods_meat }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_coffee_var JE = je_prestige_goods_coffee }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_steel_var JE = je_prestige_goods_steel }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_opium_var JE = je_prestige_goods_opium }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_small_arms_var JE = je_prestige_goods_small_arms }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_artillery_var JE = je_prestige_goods_artillery }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_merchant_marine_var JE = je_prestige_goods_merchant_marine }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_grain_var JE = je_prestige_goods_grain }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_paper_var JE = je_prestige_goods_paper }
-	re_add_prestige_good_je_if_lost = { UNLOCK_VAR = prestige_good_generic_explosives_var JE = je_prestige_goods_explosives }
-}
+#
+# INERT STUB — content-pruning, not a true no-op (board #3540). All 16 calls
+# below substituted concrete je_prestige_goods_* ids into a journal-entry
+# existence check in re_add_prestige_good_je_if_lost; none of those journal
+# entries exist (common/journal_entries is blanked/deferred in this mod and
+# was never restored), so jomini raised "Invalid database object" once per id
+# at load. Stubbing this caller empty leaves re_add_prestige_good_je_if_lost
+# and rebind_prestige_good_company permanently uncalled/dead — their own
+# parameterized template bodies are never re-validated by jomini without a
+# concrete call site, so both stay defined untouched. Practical effect: when
+# a company disbands, a lost generic prestige-good's journal entry is no
+# longer re-added — the generic prestige-good re-add-on-disband mechanic is
+# disabled until common/journal_entries is authored.
+re_add_disbanded_company_prestige_good_jes = { }
