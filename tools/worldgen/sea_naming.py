@@ -40,6 +40,31 @@ class SeaZoneName(NamedTuple):
     display_name: str  # the shared localized display text
 
 
+def apply_zone_names(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
+                     config: schema.SeaZoneConfig) -> dict[int, "SeaZoneName"]:
+    """Overlay the per-zone naming worksheet's individual display names.
+
+    Unlike a merge, this does not touch ``key``/``sea_group`` — a named zone keeps
+    its ordinary ``STATE_<group>_NN`` key, only ``display_name`` changes. Applied
+    before :func:`apply_naming_overrides` so a merge (which does replace the key)
+    still wins for any zone that is both individually named and merged. Raises
+    :class:`cells.CellError` if a ``zone_names`` seed is not on a sea zone.
+    """
+    naming = dict(naming)
+    for zn in config.zone_names:
+        sx, sy = zn.seed
+        lab = int(zones[sy, sx])
+        if lab == 0:
+            raise cells.CellError(
+                f"zone_names seed ({sx}, {sy}) is not on a sea zone (it is on land) — "
+                f"the seed is wrong or stale"
+            )
+        prev = naming[lab]
+        naming[lab] = SeaZoneName(key=prev.key, sea_group=prev.sea_group,
+                                  display_name=zn.display_name)
+    return naming
+
+
 def apply_naming_overrides(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
                            config: schema.SeaZoneConfig
                            ) -> tuple[dict[int, "SeaZoneName"], set[int]]:

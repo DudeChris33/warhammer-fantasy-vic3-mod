@@ -564,6 +564,34 @@ class SeaZoneMerge:
 
 
 @dataclass(frozen=True)
+class SeaZoneDisplayName:
+    """Give one individual zone its own display name, leaving its canon-sea key
+    (``STATE_<group>_NN``) and sea_group untouched — only the loc text changes.
+
+    From the per-zone naming worksheet (``tools/config/sea_zone_naming_worksheet.txt``,
+    board #2698 follow-up): each hand-drawn zone gets a real place name (e.g. "Shard
+    Coast") rather than sharing its whole canon sea's generic display name. ``seed``
+    is a guaranteed-interior pixel of the zone (never a label id, for the same
+    reason as :class:`SeaZoneOverride`) — it may equal an ``impassable_seeds`` entry
+    for the same zone; naming and passability are independent.
+    """
+
+    seed: tuple[int, int]
+    display_name: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "SeaZoneDisplayName":
+        (seed,) = _as_seed_list([_require(d, "seed", ctx)], f"{ctx}.seed", canvas)
+        display_name = _as_str(_require(d, "display_name", ctx), f"{ctx}.display_name")
+        if not display_name:
+            raise SchemaError(f"{ctx}.display_name: must be a non-empty string")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(seed=seed, display_name=display_name, note=note)
+
+
+@dataclass(frozen=True)
 class SeaZoneConfig:
     """The whole ``tools/config/sea_zones.json`` — canon seas + overrides."""
 
@@ -571,6 +599,7 @@ class SeaZoneConfig:
     overrides: tuple[SeaZoneOverride, ...]
     merges: tuple[SeaZoneMerge, ...] = ()
     impassable_seeds: tuple[tuple[int, int], ...] = ()
+    zone_names: tuple[SeaZoneDisplayName, ...] = ()
 
 
 def _as_seed_list(value, ctx: str, canvas: tuple[int, int] | None = None
@@ -681,8 +710,23 @@ def load_sea_zones(path: Path, canvas: tuple[int, int] | None = None) -> SeaZone
                 f"('{seen_seeds[seed]}') — pick a different interior pixel"
             )
 
+    names_raw = data.get("zone_names", [])
+    if not isinstance(names_raw, list):
+        raise SchemaError(f"{ctx}.zone_names: expected a list, got {type(names_raw).__name__}")
+    zone_names = [SeaZoneDisplayName.from_dict(zn, f"{ctx}.zone_names[{i}]", canvas)
+                  for i, zn in enumerate(names_raw)]
+    seen_name_seeds: set[tuple[int, int]] = set()
+    for zn in zone_names:
+        if zn.seed in seen_name_seeds:
+            raise SchemaError(
+                f"{ctx}.zone_names: seed pixel {list(zn.seed)} is claimed by more than one "
+                f"zone_names entry — seeds must be unique within zone_names"
+            )
+        seen_name_seeds.add(zn.seed)
+
     return SeaZoneConfig(canon_seas=tuple(seas), overrides=tuple(overrides),
-                          merges=tuple(merges), impassable_seeds=impassable_seeds)
+                          merges=tuple(merges), impassable_seeds=impassable_seeds,
+                          zone_names=tuple(zone_names))
 
 
 # ---------------------------------------------------------------------------
