@@ -16,9 +16,7 @@
  je_liberate_the_slaves_reason:1 "We share a world with powers built on the chain. The Chaos Dwarfs of Zharr-Naggrund work captives to death in the pits and furnaces of the Plain of Zharrduk. The Black Arks come out of the western dark to take whole villages off our coasts, and the Naggarothi think our people a harvest. Norscan longships work the Sea of Claws for the same trade. We cannot say a word against any of them while chattel bondage is still lawful within our own borders -- our protest would be a merchant's complaint about a rival, not a matter of principle. Abolish it here, and our objection to them becomes something the world must answer."
 
  je_pass_laws:1 "Set It Down in Law"
- je_pass_laws_reason:1 "Sentiment is not a statute. With our reformers seated in government we should spend that influence while we have it and write the change into the law books themselves, where a change of ministry cannot simply undo it.
-
-NOTE: Regressing any of these laws after completing this Journal will result in this Journal being hidden until the law is enacted again."
+ je_pass_laws_reason:1 "Sentiment is not a statute. With our reformers seated in government we should spend that influence while we have it and write the change into the law books themselves, where a change of ministry cannot simply undo it.\n\nNOTE: Regressing any of these laws after completing this Journal will result in this Journal being hidden until the law is enacted again."
 
  je_public_services:1 "The Realm's Common Works"
  je_public_services_reason:1 "Laws on parchment feed nobody. With the statutes in place we should build out our [Concept('concept_institution','$concept_institutions$')] -- schools, physicians, relief for the crippled and the old -- until they reach the least of our subjects and not merely the guildsman with coin enough to pay.$egalitarian_objective_note_loc$"
