@@ -2,9 +2,13 @@
 
 Board #2698, follow-up to the #2593 partition. The 154 zones from
 ``worldgen.sea_zones.extract`` are numbered placeholders; this gives each one a
-canon sea group (the Sea of Claws, the Great Ocean, the Black Gulf, ...) and a
-key of the form ``STATE_<SEA_GROUP>_NN``, from the hand-authored seed config
-``tools/config/sea_zones.json`` (``schema.load_sea_zones``).
+canon sea group (the Sea of Claws, the Great Ocean, the Black Gulf, ...) from the
+hand-authored seed config ``tools/config/sea_zones.json`` (``schema.load_sea_zones``).
+:func:`assign` gives every zone a provisional ``STATE_<SEA_GROUP>_NN`` key;
+:func:`rekey_by_display_name` then rebuilds each non-merged zone's key from its
+own final display name (``STATE_<NAME>_NN``) once :func:`apply_zone_names` has
+overlaid the per-zone worksheet names, so the key that lands in ``99_seas.txt``
+matches the name a player actually sees rather than its parent sea group.
 
 The assignment is a **per-pixel seed-Voronoi plurality**, deliberately NOT
 nearest-seed-of-centroid: the hand-drawn zones are crescent / seam-crossing
@@ -25,6 +29,7 @@ label id as the final tie-break.
 
 from __future__ import annotations
 
+import re
 from typing import NamedTuple
 
 import numpy as np
@@ -67,7 +72,7 @@ def apply_zone_names(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
 
 def apply_naming_overrides(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
                            config: schema.SeaZoneConfig
-                           ) -> tuple[dict[int, "SeaZoneName"], set[int]]:
+                           ) -> tuple[dict[int, "SeaZoneName"], set[int], set[int]]:
     """Overlay merge names and the impassable flag onto an :func:`assign` result.
 
     A "merge" does **not** relabel pixels: fusing separate water bodies into one
@@ -79,13 +84,16 @@ def apply_naming_overrides(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
     province colours under one ``impassable = { ... }`` — see
     ``tools/generate_sea_regions.py``) and the same sea_group/display_name.
 
-    Returns the patched naming dict and the set of impassable labels (every
-    zone in an ``impassable``-flagged merge, plus every ``impassable_seeds``
-    pixel). Raises :class:`cells.CellError` if a merge/impassable seed is not on
-    a sea zone.
+    Returns the patched naming dict, the set of impassable labels (every zone in
+    an ``impassable``-flagged merge, plus every ``impassable_seeds`` pixel), and
+    the set of merged labels (every zone folded into a :class:`schema.SeaZoneMerge`
+    — :func:`rekey_by_display_name` must leave these alone, since their shared key
+    is what groups them into one state, not a per-zone name derivation). Raises
+    :class:`cells.CellError` if a merge/impassable seed is not on a sea zone.
     """
     naming = dict(naming)
     impassable: set[int] = set()
+    merged: set[int] = set()
     for m in config.merges:
         key = f"STATE_{m.name}_01"
         for (sx, sy) in m.seeds:
@@ -96,6 +104,7 @@ def apply_naming_overrides(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
                     f"the seed is wrong or stale"
                 )
             naming[lab] = SeaZoneName(key=key, sea_group=m.name, display_name=m.display_name)
+            merged.add(lab)
             if m.impassable:
                 impassable.add(lab)
     for (sx, sy) in config.impassable_seeds:
@@ -106,7 +115,49 @@ def apply_naming_overrides(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
                 f"the seed is wrong or stale"
             )
         impassable.add(lab)
-    return naming, impassable
+    return naming, impassable, merged
+
+
+def _slugify(display_name: str) -> str:
+    """``STATE_`` key stem for a display name: upper-case, non-alnum runs -> ``_``."""
+    slug = re.sub(r"[^A-Z0-9]+", "_", display_name.upper()).strip("_")
+    return slug or "SEA"
+
+
+def rekey_by_display_name(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
+                          skip: set[int]) -> dict[int, "SeaZoneName"]:
+    """Replace each zone's ``STATE_<sea_group>_NN`` key with one built from its own
+    final ``display_name`` instead of its parent canon sea group.
+
+    Applied last, after :func:`apply_zone_names` has overlaid the per-zone
+    worksheet names: without this, an individually named zone (e.g. "Shard
+    Coast") kept the key of the generic sea group it was assigned to (e.g.
+    ``STATE_SEA_OF_CHILL_01``), so the id in ``99_seas.txt`` and the loc key told
+    a different story than the name a player actually sees. ``skip`` (the merged
+    labels from :func:`apply_naming_overrides`) is left untouched — a merge's
+    shared key is what groups its several zones into one Vic3 state, not a name
+    derivation to repeat per zone.
+
+    Several zones can legitimately share a display name (repeated placeholder
+    names like "Central Far Ocean Passage"), so the ``NN`` ordinal still
+    disambiguates within each name, ordered by the zones' wrap-robust first pixel
+    for reproducibility — the same rule :func:`assign` uses within a sea group.
+    """
+    naming = dict(naming)
+    first = _zone_first_pixel(zones, int(zones.max()))
+    groups: dict[str, list[int]] = {}
+    for lab, nm in naming.items():
+        if lab in skip:
+            continue
+        groups.setdefault(_slugify(nm.display_name), []).append(lab)
+    for slug, labels in groups.items():
+        ordered = sorted(labels, key=lambda l: (first[l][0], first[l][1], l))
+        width = max(2, len(str(len(ordered))))
+        for ordinal, lab in enumerate(ordered, start=1):
+            prev = naming[lab]
+            naming[lab] = SeaZoneName(key=f"STATE_{slug}_{ordinal:0{width}d}",
+                                      sea_group=prev.sea_group, display_name=prev.display_name)
+    return naming
 
 
 def _seed_owner(sea_labels: np.ndarray, land: np.ndarray,

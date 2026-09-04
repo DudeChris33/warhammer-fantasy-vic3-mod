@@ -118,7 +118,8 @@ def main(argv: list[str] | None = None) -> int:
         f"{len(config.zone_names)} individually named) ...", t0)
     naming = sea_naming.assign(zones, land, config, WRAP_X, log=log)
     naming = sea_naming.apply_zone_names(naming, zones, config)
-    naming, impassable = sea_naming.apply_naming_overrides(naming, zones, config)
+    naming, impassable, merged = sea_naming.apply_naming_overrides(naming, zones, config)
+    naming = sea_naming.rekey_by_display_name(naming, zones, merged)
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     cells.write_labels(LABELS_PATH, zones)

@@ -565,8 +565,10 @@ class SeaZoneMerge:
 
 @dataclass(frozen=True)
 class SeaZoneDisplayName:
-    """Give one individual zone its own display name, leaving its canon-sea key
-    (``STATE_<group>_NN``) and sea_group untouched — only the loc text changes.
+    """Give one individual zone its own display name, leaving its sea_group
+    untouched (only the loc text and, downstream via
+    ``sea_naming.rekey_by_display_name``, the zone's own key change — the group
+    it was Voronoi-assigned to is still recorded for reference).
 
     From the per-zone naming worksheet (``tools/config/sea_zone_naming_worksheet.txt``,
     board #2698 follow-up): each hand-drawn zone gets a real place name (e.g. "Shard
