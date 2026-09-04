@@ -1,0 +1,14 @@
+﻿##Define journal entry groups here:
+
+# journalentrygroup_mygroup = {
+# context = none/country
+# }
+
+je_group_objectives = {
+	context = country
+	updates_strategic_region_stances = yes
+}
+
+je_group_tutorial = {
+	context = country
+}

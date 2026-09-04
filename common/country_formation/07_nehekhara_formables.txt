@@ -16,7 +16,7 @@
 #   country_has_primary_culture = <culture>
 #
 # The country-type gate is a recognized/unrecognized pair (the #3418 pattern): every Nehekharan tag
-# is unrecognized, so the bare `is_country_type = recognized` used by EMP/BRE/NSC would exclude
+# is unrecognized, so the bare `is_country_type = recognized` used by EMP/BRE would exclude
 # every single country this formable exists for. The pair still excludes
 # colonial/company/decentralized countries.
 #

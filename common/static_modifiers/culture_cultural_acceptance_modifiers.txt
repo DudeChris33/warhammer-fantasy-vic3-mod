@@ -1,4 +1,4 @@
-﻿# Per-culture cultural-acceptance static modifiers. Victoria 3 requires BOTH a
+# Per-culture cultural-acceptance static modifiers. Victoria 3 requires BOTH a
 # _positive and a _negative definition for every culture id in common/cultures/; a missing pair
 # is an in-game error. Both variants carry magnitude 1 — that is the vanilla shape (confirmed
 # against the vanilla common/static_modifiers/ reference) and is mirrored here deliberately.
@@ -263,14 +263,14 @@ dawi_norse_cultural_acceptance_modifier_negative = {
 	country_dawi_norse_cultural_acceptance_add = 1
 }
 
-dawi_badlands_cultural_acceptance_modifier_positive = {
+dawi_ancestral_cultural_acceptance_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	country_dawi_badlands_cultural_acceptance_add = 1
+	country_dawi_ancestral_cultural_acceptance_add = 1
 }
 
-dawi_badlands_cultural_acceptance_modifier_negative = {
+dawi_ancestral_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	country_dawi_badlands_cultural_acceptance_add = 1
+	country_dawi_ancestral_cultural_acceptance_add = 1
 }
 
 dawi_zharr_cultural_acceptance_modifier_positive = {

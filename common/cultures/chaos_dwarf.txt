@@ -1,0 +1,79 @@
+﻿# Old World cultures — the Chaos Dwarfs of Zharr Naggrund. Schema mirrors
+# common/cultures/norscan_humans.txt and common/cultures/dwarven.txt, the verified reference
+# entries for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+# graphics/ethnicities — vanilla ships no Chaos Dwarf portrait set. The values used below are
+#                deliberate STAND-INS pending custom art, which is out of scope for epic #3404.
+# Every name string used below also needs a matching localization key unless vanilla already
+# ships one — see localization/english/cultures_names_l_english.yml. Every culture additionally
+# needs its six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_chaos_dwarf_l_english.yml.
+# Their Hobgoblin hirelings are a separate race (heritage_group_greenskin) filed by kin in
+# common/cultures/greenskin.txt rather than here — culture files in this mod group by
+# RACE/CULTURE-GROUP, not by the geography of the states a culture happens to occupy or the
+# masters it happens to serve.
+# Board item #3408 (epic #3404).
+
+################ Dawi Zharr — the Chaos Dwarfs of Zharr Naggrund ################
+# A DIFFERENT racial heritage from the Dawi (heritage_dawi_zharr, its own trait group — the
+# Chaos Dwarfs are hated on sight by every other race, and by their own kin above all), but
+# their tongue is still Khazalid, debased: sphere_khazalid_zharr shares sphere_group_khazalid
+# with true Khazalid, so a true dwarf understands a Chaos Dwarf perfectly well and hates what he
+# hears. The names keep the Khazalid consonant skeleton but lean into zh/kh/gh digraphs, and
+# every ancestor-honouring element has been replaced with fire, iron, bull, ash and chain.
+# noble_last_names carry the priest-caste and slaver titles plus the ziggurat-cities themselves;
+# the regal lists are the Sorcerer-Prophets.
+# ethnicities: the darkest caucasian morphs are a stand-in — see the file header.
+
+dawi_zharr = {
+	color= rgb{ 72 60 58 }
+	religion = cult_of_hashut
+	heritage = heritage_dawi_zharr
+	language = sphere_khazalid_zharr
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Zhargh Ghorkul Khazragh Astragh Drazhak Ushkhar Bhalgar Zharrik Ghazul Nakhar
+		Tzargul Umbragh Zhulkar Ghadrik Kharnok Bhazur Ashgar Zhorrim Ghulzar Drakhut
+		Ozgar Khaldur Zhaggur Nimrakh
+	}
+
+	female_common_first_names = {
+		Zhargra Ghorla Zharrina Astrala Drazhla Ushkha Bhalgra Zhurin Ghazra Nakhra
+		Tzargra Umbragra Zhulka Ghadra Kharna Bhazra Ashgra Zhorra Ghulza Drakhra
+		Ozgra Nimra
+	}
+
+	noble_last_names = {
+		Ashenpriest Bullcrowned Flamewarden Chainlord Hashutsworn Emberdespot
+		Ironoverseer Cinderthrone Zharr_Naggrund Uzkulak Gorgoth Mingol
+	}
+
+	common_last_names = {
+		Slagbeard Ashfist Brassbrow Chainbearer Whipmaster Furnaceborn Sulphurhand Boltclad
+		Kilnbrow Sootbeard Bullhorn Scoriafist Blackmarch Ashvein Smeltbrow Barbedhand
+	}
+
+	male_regal_first_names = {
+		Zhargh Khazragh Astragh Drazhak Ghazul
+	}
+
+	female_regal_first_names = {
+		Zhargra Zharrina Astrala Ghazra
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_dark_hair
+		1 = caucasian_northern_dark_hair
+	}
+}

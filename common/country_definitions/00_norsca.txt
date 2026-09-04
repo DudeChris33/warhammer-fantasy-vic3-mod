@@ -5,26 +5,17 @@
 #   color        — { R G B } with 0-255 integers.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/00_norsca.txt
+#   cultures     — culture ids from common/cultures/norscan_humans.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
 # intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_norsca_l_english.yml.
-# The NSC formation rule lives in common/country_formation/00_norsca_formables.txt.
+# No formable for this region — see common/country_formation/00_norsca_formables.txt.
 
-################ NSC — Norsca; the formable realm of the united Norsii ################
-# Formable only: the unifier of the High Tribes. A deeper, colder shade of the norscan
-# culture blue so the united realm reads distinctly from any single tribe.
-
-NSC = {
-	color = { 72 96 122 }
-	country_type = recognized
-	tier = kingdom
-	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
-}
-
+# No NSC unifier tag: the High Tribes don't merge into one polity even after a mass conquest —
+# tribal identity persists. A unification journal entry may represent this later instead.
+#
 # The nine High Tribes below are all unrecognized principalities: raiding tribes under a jarl,
 # not polities the civilised south recognises as part of any legitimate order.
 

@@ -3,7 +3,7 @@
 #
 # Entry schema (see .claude/rules/scripting.md):
 #   color        — { R G B } with 0-255 integers. Orc tags sit in the earthy mid-green band seeded
-#                  from the orc culture color in common/cultures/06_badlands.txt (74 106 46);
+#                  from the orc culture color in common/cultures/greenskin.txt (74 106 46);
 #                  goblin tags sit in a DELIBERATELY darker moss/black-green band rather than the
 #                  goblin culture's own pale green (148 170 84), so that on a map crowded with
 #                  twelve greenskin tags the orc tribes and the goblin tribes read apart at a
@@ -11,7 +11,7 @@
 #                  color" convention, and it departs on purpose.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/06_badlands.txt
+#   cultures     — culture ids from common/cultures/greenskin.txt
 #
 # ALL TWELVE are decentralized/principality. Greenskin tribes and WAAAGH!s are not states: they hold
 # no court, sign no treaty and keep no border, and Vic3's decentralized country type is the closest
@@ -143,16 +143,5 @@ RDV = {
 	country_type = decentralized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
-}
-
-################ SKZ — Skullsmasherz ################
-# Ugrok Craktoof; the Grey Mountains, on Bretonnia’s flank
-
-SKZ = {
-	color = { 72 110 54 }
-	country_type = decentralized
-	tier = principality
-	cultures = { orc }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
 }

@@ -263,3 +263,153 @@ gfx_military_unit_is_mechanized = {
 	}
 
 }
+
+
+#################################################################
+#####				TRAIN CULTURE TRIGGERS					#####
+#################################################################
+#
+# Vanilla's bodies for these are entirely cu:<real-world culture> lists
+# (british/north_german/french/russian/yankee/...) that do not exist in this
+# mod, so they are restored as stubs under their original names rather than
+# ported. They only ever selected a regional *visual variant* of the train
+# model, so a permanently-false result falls through to the default variant:
+# a true no-op. gfx_has_no_culture_trains_trigger is the vanilla fallback
+# (NOR over that same list), so its faithful stub is "yes".
+
+gfx_has_british_trains_trigger = {
+	always = no
+}
+
+gfx_has_german_trains_trigger = {
+	always = no
+}
+
+gfx_has_french_trains_trigger = {
+	always = no
+}
+
+gfx_has_russian_trains_trigger = {
+	always = no
+}
+
+gfx_has_american_trains_trigger = {
+	always = no
+}
+
+gfx_has_no_culture_trains_trigger = {
+	always = yes
+}
+
+
+#################################################################
+#####				SHIP CULTURE TRIGGERS					#####
+#################################################################
+#
+# Same reasoning: vanilla's bodies hardcode cu:turkish / cu:misri / cu:greek
+# and heritage_group_* ids from the real-world discrimination-trait set, none
+# of which exist in this mod. Stubbed false; the default ship visual applies.
+
+gfx_dhow_ship_trigger = {
+	always = no
+}
+
+gfx_junk_ship_trigger = {
+	always = no
+}
+
+gfx_marmara_ship_trigger = {
+	always = no
+}
+
+
+#################################################################
+#####			MILITARY MOBILIZATION CULTURE TRIGGERS		#####
+#################################################################
+# Restored verbatim from vanilla - has_culture_graphics keys are engine-side
+# graphics culture keys, not real-world culture ids, so these bodies port as-is.
+
+gfx_military_mobilization_culture_is_european = {
+
+	any_primary_culture = { has_culture_graphics = european }
+
+}
+
+gfx_military_mobilization_culture_is_african = {
+
+	any_primary_culture = { has_culture_graphics = african }
+
+}
+
+gfx_military_mobilization_culture_is_arabic = {
+
+	any_primary_culture = { has_culture_graphics = arabic }
+
+}
+
+gfx_military_mobilization_culture_is_east_asian = {
+
+	any_primary_culture = { has_culture_graphics = east_asian }
+
+}
+
+gfx_military_mobilization_culture_is_south_asian = {
+
+	any_primary_culture = { has_culture_graphics = south_asian }
+
+}
+
+
+#################################################################
+#####				MILITARY CULTURE TRIGGERS				#####
+#################################################################
+
+gfx_military_deploy_culture_is_european = {
+
+	scope:military_formation = {
+		any_combat_unit = {
+			culture = { has_culture_graphics = european }
+		}
+	}
+
+}
+
+gfx_military_deploy_culture_is_african = {
+
+	scope:military_formation = {
+		any_combat_unit = {
+			culture = { has_culture_graphics = african }
+		}
+	}
+
+}
+
+gfx_military_deploy_culture_is_arabic = {
+
+	scope:military_formation = {
+		any_combat_unit = {
+			culture = { has_culture_graphics = arabic }
+		}
+	}
+
+}
+
+gfx_military_deploy_culture_is_east_asian = {
+
+	scope:military_formation = {
+		any_combat_unit = {
+			culture = { has_culture_graphics = east_asian }
+		}
+	}
+
+}
+
+gfx_military_deploy_culture_is_south_asian = {
+
+	scope:military_formation = {
+		any_combat_unit = {
+			culture = { has_culture_graphics = south_asian }
+		}
+	}
+
+}

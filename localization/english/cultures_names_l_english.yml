@@ -1624,7 +1624,7 @@
  Chillforge:0 "Chillforge"
  Watchkeeper:0 "Watchkeeper"
 
- # dawi_badlands — male common first names
+ # dawi_ancestral — male common first names
  Belgrim:0 "Belgrim"
  Kazrak:0 "Kazrak"
  Thargrim:0 "Thargrim"
@@ -1648,7 +1648,7 @@
  Thorrak:0 "Thorrak"
  Grundrak:0 "Grundrak"
 
- # dawi_badlands — female common first names
+ # dawi_ancestral — female common first names
  Belgrid:0 "Belgrid"
  Kazra:0 "Kazra"
  Thargrid:0 "Thargrid"
@@ -1671,37 +1671,37 @@
  Thorra:0 "Thorra"
  Grundra:0 "Grundra"
 
- # dawi_badlands — noble last names
+ # dawi_ancestral — noble last names
  Eightpeaks:0 "Eightpeaks"
- Grudgebound:0 "Grudgebound"
- Lostholm:0 "Lostholm"
- Siegewarden:0 "Siegewarden"
- Vengeancesworn:0 "Vengeancesworn"
- Deepwatch:0 "Deepwatch"
  Thronelost:0 "Thronelost"
- Bloodgrudge:0 "Bloodgrudge"
- Ruinhold:0 "Ruinhold"
  Reclaimer:0 "Reclaimer"
  Oathbound:0 "Oathbound"
  Silentking:0 "Silentking"
+ Deepwatch:0 "Deepwatch"
+ Eldrune:0 "Eldrune"
+ Firstforged:0 "Firstforged"
+ Elderstone:0 "Elderstone"
+ Foreborn:0 "Foreborn"
+ Oldwarden:0 "Oldwarden"
+ Firstoath:0 "Firstoath"
 
- # dawi_badlands — common last names
+ # dawi_ancestral — common last names
  Grudgeborn:0 "Grudgeborn"
  Siegebeard:0 "Siegebeard"
  Lastwall:0 "Lastwall"
  Bonecounter:0 "Bonecounter"
- Tunnelfist:0 "Tunnelfist"
  Ashenbeard:0 "Ashenbeard"
- Widowbrow:0 "Widowbrow"
  Sorrowhand:0 "Sorrowhand"
- Hollowdelve:0 "Hollowdelve"
  Ruinfist:0 "Ruinfist"
  Gravewarden:0 "Gravewarden"
- Vengefist:0 "Vengefist"
- Blackpeak:0 "Blackpeak"
- Ironvigil:0 "Ironvigil"
- Losthammer:0 "Losthammer"
- Grudgeteller:0 "Grudgeteller"
+ Eldstone:0 "Eldstone"
+ Firstblood:0 "Firstblood"
+ Oldkin:0 "Oldkin"
+ Ancientvow:0 "Ancientvow"
+ Eldwarden:0 "Eldwarden"
+ Foredelve:0 "Foredelve"
+ Elderhand:0 "Elderhand"
+ Firstwatch:0 "Firstwatch"
 
  # dawi_zharr — male common first names
  Zhargh:0 "Zhargh"

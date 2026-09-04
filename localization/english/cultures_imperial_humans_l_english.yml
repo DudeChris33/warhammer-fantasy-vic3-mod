@@ -1,0 +1,18 @@
+﻿l_english:
+ # Culture display names for common/cultures/imperial_humans.txt.
+ # One loc file per culture script file (per-name display keys live in the shared
+ # cultures_names_l_english.yml). Board item #3406 (epic #3404).
+ reiklander:0 "Reiklander"
+ middenlander:0 "Middenlander"
+ nordlander:0 "Nordlander"
+ hochlander:0 "Hochlander"
+ ostlander:0 "Ostlander"
+ ostermarker:0 "Ostermarker"
+ talabeclander:0 "Talabeclander"
+ stirlander:0 "Stirlander"
+ averlander:0 "Averlander"
+ wissenlander:0 "Wissenlander"
+ sylvanian:0 "Sylvanian"
+ sollander:0 "Sollander"
+ halfling:0 "Halfling"
+ marienburger:0 "Marienburger"

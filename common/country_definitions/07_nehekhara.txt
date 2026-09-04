@@ -3,13 +3,13 @@
 #
 # Entry schema (see .claude/rules/scripting.md):
 #   color        — { R G B } with 0-255 integers. Seeded from the nehekharan culture color in
-#                  common/cultures/07_nehekhara.txt (204 178 96): a sand/bronze/turquoise family,
+#                  common/cultures/nehekharan_araby.txt (204 178 96): a sand/bronze/turquoise family,
 #                  bronze for the smith-cities and turquoise for the two river-and-sea cities.
 #                  LAH takes the lahmian_vampire culture color unchanged — a dark carmine-violet
 #                  that belongs to no part of the Tomb Kings' palette, which is the point.
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
-#   cultures     — culture ids from common/cultures/07_nehekhara.txt
+#   cultures     — culture ids from common/cultures/nehekharan_araby.txt
 #
 # Every tag here is unrecognized: the risen dead of the Great Land keep no place in the recognized
 # order of the living Old World, whatever their own antiquity. The tomb-cities are kingdoms (each

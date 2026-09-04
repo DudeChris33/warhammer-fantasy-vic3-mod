@@ -1,0 +1,38 @@
+﻿# Root = State Region
+#
+# Vanilla's common/scripted_triggers/00_gfx_buildings_graphics_triggers.txt is not
+# restored: every body there is built on is_in_geographic_region = geographic_region_*
+# and cu:<real-world culture> ids that do not exist in this mod (common/geographic_regions
+# is blanked via replace_paths and holds no entries; the Old World cultures carry none of
+# those ids). common/buildings is likewise blanked, but vanilla's gfx/ building-graphics
+# data still references these six trigger names, so they are restored as stubs under their
+# original names to keep the references resolvable.
+#
+# Each is a true no-op for this mod: they only ever selected a regional *visual variant*
+# of a building model, and a permanently-false result simply falls through to the default
+# variant. No gameplay content is gated on them. Replace a stub with a real WH-native
+# body once regional building art exists.
+
+us_american_buildings_trigger = {
+	always = no
+}
+
+latin_american_buildings_trigger = {
+	always = no
+}
+
+balkan_buildings_trigger = {
+	always = no
+}
+
+french_buildings_trigger = {
+	always = no
+}
+
+indian_buildings_trigger = {
+	always = no
+}
+
+japanese_buildings_trigger = {
+	always = no
+}

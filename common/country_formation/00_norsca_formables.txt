@@ -1,21 +1,4 @@
-﻿# Country formation — Norsca. Board item #3417 (epic #3414).
-# NSC (Norsca) is the region's only formable; every other 00_norsca tag is a start tag.
-#
-# Deliberately minor/culture-based in shape: no unification_play, leadership_play or
-# geographic_region key. common/diplomatic_plays and common/geographic_regions are blanked via
-# .metadata/metadata.json's replace_paths and hold no entries, so referencing either would point at
-# content that does not exist. Revisit when those databases are authored.
-# Triggers used below are confirmed in docs/triggers.log (both country scope):
-#   is_country_type = <country type>
-#   country_has_primary_culture = <culture>
-
-NSC = {
-	use_culture_states = yes
-	required_states_fraction = 0.75
-	ai_will_do = { always = yes }
-
-	possible = {
-		is_country_type = recognized
-		country_has_primary_culture = cu:norscan
-	}
-}
+# Country formation — Norsca. Board item #3417 (epic #3414).
+# No formable currently: the NSC unifier tag was removed on manual audit — the High Tribes don't
+# merge into one polity even after a mass conquest, tribal identity persists. A unification
+# journal entry may represent this later instead of a formable country.

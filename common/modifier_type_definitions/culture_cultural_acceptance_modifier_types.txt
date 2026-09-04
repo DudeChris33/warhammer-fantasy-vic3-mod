@@ -1,4 +1,4 @@
-﻿# Registers the country_<culture>_cultural_acceptance_add modifier TYPES used by the
+# Registers the country_<culture>_cultural_acceptance_add modifier TYPES used by the
 # matching static_modifier blocks in common/static_modifiers/culture_*_modifiers.txt.
 # One declaration per culture; appended to by later culture-authoring items in epic #3404.
 # Board item #3407.
@@ -209,7 +209,7 @@ country_dawi_norse_cultural_acceptance_add={
 	}
 }
 
-country_dawi_badlands_cultural_acceptance_add={
+country_dawi_ancestral_cultural_acceptance_add={
 	decimals=1
 	color=good
 	game_data={

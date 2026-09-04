@@ -1,0 +1,140 @@
+﻿# Old World cultures — the vampire bloodlines. Schema mirrors common/cultures/norscan_humans.txt,
+# the verified reference entry for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+# Every culture here shares heritage_vampire (heritage_group_undead) and cult_of_nagash, but keeps
+# the LANGUAGE of the mortal population it rose from — sylvanian_vampire speaks sphere_reikspiel,
+# lahmian_vampire speaks sphere_nehekharan — because vampires are risen from among their own
+# subjects, not a people apart with a tongue of their own. This is what keeps them filed as
+# separate cultures rather than one shared "vampire" culture id. Culture files in this mod group
+# by RACE/CULTURE-GROUP, not by the geography of the states a culture happens to occupy: both
+# bloodlines below were previously filed alongside the mortal cultures they rose from
+# (common/cultures/imperial_humans.txt, common/cultures/nehekharan_araby.txt) and are gathered here
+# instead — see common/cultures/dwarven.txt for the convention's origin case.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_vampire_l_english.yml.
+# Board items #3406, #3409, #3415, #3419 (epic #3404).
+
+################ Sylvanian Vampire — the von Carstein aristocracy; the same tongue, colder ################
+# A DIFFERENT racial heritage from the sylvanian humans they rule (heritage_vampire, in the
+# undead trait group) while sharing sphere_reikspiel with them. The lists are deliberately
+# sparse: there are very few vampires, and their get are fewer still. The common_last_names
+# are the names their thralls and mortal households carry.
+# ethnicities: vanilla ships no undead template, so the palest caucasian morphs stand in —
+# same treatment as mousillon in #3407. Custom art is out of scope for epic #3404.
+# Named sylvanian_vampire (not the bare "vampire" this culture originally shipped as) to leave
+# room for other Old World vampire bloodlines (Lahmia, Strigany, Blood Dragons, etc.) each
+# getting their own distinct culture id without colliding with this one. Board item #3415.
+
+sylvanian_vampire = {
+	color= rgb{ 94 32 44 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Vlad Mannfred Walach Kryzstoff Sigismund Adalbert Vitalis Malachar Erasmus Cassimir
+		Dieterich Ruthven Valdred Nyklaus
+	}
+
+	female_common_first_names = {
+		Isabella Elisse Melisandra Carmilla Ondriana Vasilika Seraphita Morgianne Ravenna Sabathine
+		Valeska Yelisandra Corvina Drusilla
+	}
+
+	noble_last_names = {
+		von_Carstein von_Drakenhof von_Templehof von_Nachthafen von_Grausberg
+		von_Blutstein von_Todesheim von_Aschenwald von_Sternheim von_Mordenburg
+	}
+
+	common_last_names = {
+		Blutlos Kaltherz Nachtschatten Grabesstill Aschenblut
+		Dornwald Schattenhof Winterblut Mondlicht Leichenwacht
+	}
+
+	male_regal_first_names = {
+		Vlad Mannfred Sigismund Walach Adalbert Kryzstoff
+	}
+
+	female_regal_first_names = {
+		Isabella Carmilla Melisandra Ravenna Drusilla
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}
+
+################ Lahmian Vampire — Neferata's bloodline; the cradle of vampires ################
+# The FIRST vampires: Neferata of Lahmia drank Nagash's Elixir and made her court immortal. They are
+# Nehekharan-born (sphere_nehekharan — they speak the tongue of the Great Land) but a DIFFERENT
+# racial heritage from the nehekharan Tomb Kings they seceded from: heritage_vampire, in
+# heritage_group_undead, the Nagashite line — and cult_of_nagash, not the mortuary_cult. That split
+# is deliberate and is this culture's whole thesis: Settra's dead and Neferata's dead are enemies.
+# The Nagashite names the nehekharan culture (common/cultures/nehekharan_araby.txt) deliberately
+# EXCLUDES are reserved here and here only: Neferata, W'soran, Ushoran, Abhorash and the rest of
+# Lahmia's immortal court.
+# W'soran is encoded as the token Wsoran — the apostrophe is rendered through its loc key, the same
+# way multi-word names are handled via the underscore convention.
+# Lahmia has a real, still-reigning queen, so this culture DOES get noble last names and regal
+# first-name lists — unlike sartosan in common/cultures/southern_realms_humans.txt.
+# graphics/ethnicities are sylvanian_vampire's verbatim: vanilla ships no undead portrait set, and
+# custom art is out of scope for epic #3404.
+# Board item #3419 (epic #3404), forward-referenced by tag LAH in planning/tag_registry.md.
+
+lahmian_vampire = {
+	color= rgb{ 108 34 78 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_nehekharan
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Wsoran Ushoran Abhorash Ankhat Harakhte Maatmeses Vashanesh Zoraster Sethep Rakhis
+		Nebtu Zephret Khaledh Amunhet
+	}
+
+	female_common_first_names = {
+		Neferata Naaima Khemalla Zabbai Rasha_bint_Yusuf Anmar_bint_Arabi Sethenna Neithara
+		Iryset Meresut Ankharet Sabbatha
+	}
+
+	noble_last_names = {
+		of_Lahmia Bloodroyal Nightcrowned Deathless Firstborn Moonveiled
+		Elixirborn Crimsonhand
+	}
+
+	common_last_names = {
+		of_Lahmia Bloodbound Cupbearer Templeblood Silkbound Ashenveil Redwatch Nightservant
+	}
+
+	male_regal_first_names = {
+		Ushoran Abhorash Wsoran Vashanesh Ankhat
+	}
+
+	female_regal_first_names = {
+		Neferata Naaima Khemalla Zabbai Rasha_bint_Yusuf
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}
