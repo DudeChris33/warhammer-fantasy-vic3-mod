@@ -88285,7 +88285,7 @@
    "id": 5885,
    "area": 2021060,
    "coastal": false,
-   "impassable": false,
+   "impassable": true,
    "placeholder": false
   },
   {
@@ -89245,7 +89245,7 @@
    "id": 5949,
    "area": 58764,
    "coastal": false,
-   "impassable": true,
+   "impassable": false,
    "placeholder": false
   },
   {

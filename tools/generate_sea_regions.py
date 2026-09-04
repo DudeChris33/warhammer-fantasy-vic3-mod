@@ -35,7 +35,9 @@ Writes (all deterministic — pure functions of the two committed indices):
 * ``map_data/default.map`` — in-place block-replace of only the ``sea_starts``
   body with the 201 sea colours; every other key is left byte-for-byte untouched.
 * ``common/strategic_regions/water_strategic_regions.txt`` — one ``states``-only
-  region per canon ``sea_group`` (filename overrides vanilla's dangling file).
+  region per sea *state* by default (2026-09-03: 1 state = 1 region unless a
+  future explicit exception groups several; filename overrides vanilla's
+  dangling file).
 * ``map_data/adjacencies.csv`` — created header-only when absent (fixes the
   ``default.map`` reference); strait/canal pairs are a user-driven follow-up
   against the rendered map, so an existing authored file is left untouched.
@@ -191,22 +193,28 @@ def _render_99_seas(cells: list[dict], colors: dict[int, raster.Color]) -> str:
 
 
 def _render_water_strategic_regions(cells: list[dict]) -> str:
-    """One ``states``-only water region per canon ``sea_group``.
+    """One ``states``-only water region per sea *state*, by default.
 
     Vanilla ``water_strategic_regions.txt`` blocks are minimal (``states`` only,
     no ``capital_province`` / ``map_color``) and load, so this override matches
-    that shape. Every sea state lands in exactly one region — its group. A
-    merged state (several cells sharing a key) contributes its key only once.
+    that shape. Earlier this grouped every state under its canon ``sea_group``
+    (23 seas -> ~24 sprawling regions); the default is now 1 state = 1 region, so
+    naval AI/strategic scoring for one small strait isn't bundled with every
+    other state across its whole canon sea. A merged state (several cells
+    sharing a key, e.g. the Maelstrom) still contributes its key only once.
+    Region name comes from the state's own key (lower-cased, ``STATE_`` prefix
+    dropped) so it stays legible and collision-free the same way the key itself
+    now does (``sea_naming.rekey_by_display_name``). Grouping several states
+    into one region is a deliberate future exception, not the default — none are
+    declared yet.
     """
-    groups: dict[str, list[str]] = {}
-    for c in cells:
-        groups.setdefault(c["sea_group"], []).append(c["key"])
+    keys = sorted({c["key"] for c in cells})
     blocks = []
-    for group in sorted(groups):
-        keys = " ".join(sorted(set(groups[group])))
+    for key in keys:
+        region = "region_" + key[len("STATE_"):].lower()
         blocks.append(
-            f"region_{group.lower()} = {{\n"
-            f"{INDENT}states = {{ {keys} }}\n"
+            f"{region} = {{\n"
+            f"{INDENT}states = {{ {key} }}\n"
             "}"
         )
     return "\n\n".join(blocks) + "\n"
@@ -308,8 +316,8 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- 4. water strategic regions --------------------------------------
     _write_bytes(STRATEGIC_REGIONS_PATH, _render_water_strategic_regions(cells), bom=True)
-    n_groups = len({c["sea_group"] for c in cells})
-    print(f"wrote {STRATEGIC_REGIONS_PATH.relative_to(MOD_ROOT)}  ({n_groups} regions)")
+    n_regions = len({c["key"] for c in cells})
+    print(f"wrote {STRATEGIC_REGIONS_PATH.relative_to(MOD_ROOT)}  ({n_regions} regions)")
 
     # --- 5. adjacencies.csv (header-only when absent) --------------------
     if not ADJACENCIES_PATH.is_file():
@@ -341,7 +349,7 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("invariant: default.map sea_starts replace is not idempotent")
 
     print(f"ok: {len(cells)} zones joined; {len(seas_colors)} colours in "
-          f"99_seas == sea_starts; {n_groups} water regions; loc complete")
+          f"99_seas == sea_starts; {n_regions} water regions; loc complete")
     return 0
 
 

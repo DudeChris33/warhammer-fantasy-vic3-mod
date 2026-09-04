@@ -1,7 +1,7 @@
 """The ingestion core — one code path shared by the real run and the fixture.
 
 ``generate_heightmap.py`` orchestrates the real whole-world build (logging,
-mosaic, the TW3 relief layer, the map-editor hand-off); the offline fixture
+mosaic, the colored_globe relief layer, the map-editor hand-off); the offline fixture
 (``run_fixture.py``) drives a tiny synthetic world through the same steps. If the
 two used *different* code, the fixture would regression-test a parallel
 reimplementation and prove nothing about the generator. So every step that is not
@@ -207,6 +207,76 @@ class SourceFields:
     polar_report: PolarReport | None = None
 
 
+def graticule_mask(lum: np.ndarray, *, bg: int = 9, coherence: int = 21,
+                   threshold: float = 6.0, dilate: int = 1) -> np.ndarray:
+    """Boolean mask of the source's ruled graticule — thin, straight, *dark* lines.
+
+    The reference globe rules a latitude/longitude graticule directly over the
+    terrain wash. Most of it is dark enough for :func:`lut.unexplained_ink` to
+    catch, but its faintest segments (a dip of only ~10 luminance over the wash)
+    slip under the ink thresholds, classify into a neighbouring elevation band,
+    and survive as a regular grid embossed into the heightmap — visible even
+    zoomed out.
+
+    A plain darkness test cannot separate that faint graticule from ordinary
+    terrain speckle. What distinguishes a graticule line is **structure**: it is
+    dark relative to its *perpendicular* neighbours and it stays dark *coherently
+    along its own axis* for a long run. This detector encodes exactly that, once
+    per axis:
+
+    * ``bg`` — a median over a short perpendicular window is the local background
+      a line pixel is measured against (a line 1-3 px wide is invisible to a
+      median that wide, so the median is the terrain *without* the line).
+    * ``coherence`` — the perpendicular-darkness is averaged along the line axis;
+      a real line reinforces over that run while isolated speckle averages toward
+      zero. ``threshold`` is the surviving averaged darkness that counts as a line.
+
+    Broad dark terrain (a mountain shadow, a forest) is not thin, so it never
+    enters the perpendicular-darkness in the first place; that is what keeps this
+    off real relief. ``dilate`` grows the mask to swallow each line's anti-aliased
+    shoulder. All parameters are in source pixels.
+    """
+    from scipy import ndimage
+    lum = lum.astype(np.float32)
+    bg_h = ndimage.median_filter(lum, footprint=np.ones((1, bg), bool))
+    v = ndimage.uniform_filter1d(np.clip(bg_h - lum, 0, None), coherence, axis=0, mode="nearest")
+    bg_v = ndimage.median_filter(lum, footprint=np.ones((bg, 1), bool))
+    h = ndimage.uniform_filter1d(np.clip(bg_v - lum, 0, None), coherence, axis=1, mode="nearest")
+    mask = (v > threshold) | (h > threshold)
+    if dilate > 0:
+        mask = ndimage.binary_dilation(mask, iterations=int(dilate))
+    return mask
+
+
+def degrid_rgb(rgb: np.ndarray, *, sigma: float = 3.0, **mask_kw) -> np.ndarray:
+    """Repair the ruled graticule in ``rgb`` *before* it is classified.
+
+    Removing the graticule from the classified *elevation* is the wrong order:
+    once a dark line has classified into the >7000 m band it is a thin ridge, and
+    filling that ridge with :func:`lut.inpaint_nearest` leaves a seam straight
+    down its centre (nearest-fill of an axis-aligned strip meets in the middle).
+    So this fixes the *input* instead — it replaces the graticule pixels' colour
+    with a **normalized-convolution** estimate of the terrain colour underneath
+    (a Gaussian-weighted average of the non-graticule neighbours on *both* sides),
+    which interpolates across the line without a centre seam. Classification then
+    never sees a line to emboss.
+
+    Only pixels in :func:`graticule_mask` change; everything else is byte-for-byte
+    the input. Deterministic (median + Gaussian, no RNG).
+    """
+    from scipy import ndimage
+    lum = rgb.astype(np.float32).mean(axis=2)
+    mask = graticule_mask(lum, **mask_kw)
+    valid = (~mask).astype(np.float32)
+    denom = ndimage.gaussian_filter(valid, sigma)
+    out = rgb.astype(np.float32).copy()
+    for c in range(rgb.shape[2]):
+        num = ndimage.gaussian_filter(rgb[..., c].astype(np.float32) * valid, sigma)
+        filled = num / np.maximum(denom, 1e-6)
+        out[..., c][mask] = filled[mask]
+    return out.astype(rgb.dtype)
+
+
 def classify_source(
     rgb: np.ndarray,
     elut: schema.ElevationLUT,
@@ -218,6 +288,8 @@ def classify_source(
     elev_sigma: float = 2.0,
     land_sigma: float = 1.0,
     polar_rim: PolarRim | None = None,
+    degrid: bool = False,
+    despeckle: int = 0,
 ) -> SourceFields:
     """Colour image -> smoothed elevation + land fraction, with ink removed.
 
@@ -247,6 +319,10 @@ def classify_source(
     tulipped by edge effects.
     """
     den = lut.denoise(rgb, denoise_size)
+    if degrid:
+        # Repair the ruled graticule in the colour image before it can classify
+        # into a band and emboss a regular grid into the elevation. See degrid_rgb.
+        den = degrid_rgb(den)
     elev, is_land, dist, band = lut.classify(den, elut)
 
     polar = np.zeros(is_land.shape, dtype=bool)
@@ -266,6 +342,15 @@ def classify_source(
     is_land = segment.majority_filter(is_land, majority, wrap_x=wrap_x)
 
     elev = lut.smooth_elevation(elev, sigma=elev_sigma)
+    if despeckle:
+        # A light *uniform* median removes isolated single-pixel band-jitter (the
+        # LUT turns every small colour wobble in the painted terrain wash into a
+        # one-pixel bump) so the relief layer added downstream — colored_globe's
+        # high-frequency texture — lands on a clean base instead of stacking on the
+        # LUT's own speckle. Deliberately uniform, not the old low-ground-weighted
+        # flatten: vanilla's plains are textured, not dead-flat, so this only kills
+        # per-pixel noise and leaves real relief for the relief layer to sit on.
+        elev = ndimage.median_filter(elev, size=despeckle).astype(np.float32)
     land_f = lut.smooth_elevation(is_land.astype(np.float32), sigma=land_sigma)
     return SourceFields(elev=elev, land=land_f, dist=dist, ink=ink,
                         polar=polar, polar_report=report)

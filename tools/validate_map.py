@@ -866,12 +866,17 @@ def validate_sea(
     if not sea_states:
         return [f"no sea states found in {seas_txt_path}"]
 
+    from worldgen.raster import color_to_hex
+
     seas_colors: set[Color] = set()
+    declared_impassable: set[Color] = set()
     for st in sea_states:
         seas_colors.update(st.provinces)
-        if st.impassable:
-            errors.append(f"{st.key} ({st.filename}): sea state declares impassable "
-                          f"(2026-08-22 decision: every zone passable)")
+        declared_impassable.update(st.impassable)
+        for color in st.impassable:
+            if color not in st.provinces:
+                errors.append(f"{st.key} ({st.filename}): impassable colour "
+                              f"{color_to_hex(color)} is not one of its own provinces")
 
     dm_text = default_map_path.read_text(encoding="utf-8-sig")
     sea_starts = _parse_color_field(dm_text, "sea_starts")
@@ -881,8 +886,10 @@ def validate_sea(
         tuple(int(v) for v in c["color"])
         for c in prov_index["cells"] if c.get("kind") == "sea"
     }
-
-    from worldgen.raster import color_to_hex
+    prov_impassable_colors = {
+        tuple(int(v) for v in c["color"])
+        for c in prov_index["cells"] if c.get("kind") == "sea" and c.get("impassable")
+    }
 
     # 1. Every 99_seas colour is listed in default.map sea_starts.
     for color in sorted(seas_colors - sea_starts):
@@ -896,6 +903,15 @@ def validate_sea(
     for color in sorted(seas_colors - prov_sea_colors):
         errors.append(f"sea colour {color_to_hex(color)} in 99_seas.txt is not a sea colour "
                       f"in provinces_index.json (absent from provinces.png)")
+    # 3b. Impassable declarations agree between 99_seas.txt and provinces_index.json
+    # (the 2026-08-22 "every zone passable" default stands, with the 2026-08-31
+    # exceptions named in tools/config/sea_zones.json's merges/impassable_seeds).
+    for color in sorted(declared_impassable - prov_impassable_colors):
+        errors.append(f"sea colour {color_to_hex(color)} declared impassable in 99_seas.txt "
+                      f"but not flagged impassable in provinces_index.json")
+    for color in sorted(prov_impassable_colors - declared_impassable):
+        errors.append(f"sea colour {color_to_hex(color)} flagged impassable in "
+                      f"provinces_index.json but not declared impassable in 99_seas.txt")
 
     # 4. Every sea state is in exactly one water strategic region.
     region_map: dict[str, list[str]] = {}

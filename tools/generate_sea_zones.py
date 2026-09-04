@@ -114,9 +114,12 @@ def main(argv: list[str] | None = None) -> int:
     # loc generator reads it alone and config-to-loc drift is impossible.
     log(f"naming {n} zones from {len(config.canon_seas)} canon seas "
         f"({len(config.overrides)} overrides, {len(config.merges)} merges, "
-        f"{len(config.impassable_seeds)} standalone impassable) ...", t0)
+        f"{len(config.impassable_seeds)} standalone impassable, "
+        f"{len(config.zone_names)} individually named) ...", t0)
     naming = sea_naming.assign(zones, land, config, WRAP_X, log=log)
-    naming, impassable = sea_naming.apply_naming_overrides(naming, zones, config)
+    naming = sea_naming.apply_zone_names(naming, zones, config)
+    naming, impassable, merged = sea_naming.apply_naming_overrides(naming, zones, config)
+    naming = sea_naming.rekey_by_display_name(naming, zones, merged)
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     cells.write_labels(LABELS_PATH, zones)

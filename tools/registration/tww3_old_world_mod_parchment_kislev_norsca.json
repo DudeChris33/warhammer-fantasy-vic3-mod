@@ -6,14 +6,14 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL. Kislev+Norsca crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_kislev_norsca (objective=landmarks; 10 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to Kislev+Norsca — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are PROVISIONAL placement values, to be revisited when boundary extraction lands (S6). MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 17, \"lattice_hull_box\": [32.0, 0.0, 2465.0, 1379.0], \"method\": \"thin-plate interpolation of landmarks, lattice bounded to hull+pad\"}",
+  "notes": "PROVISIONAL. Kislev+Norsca crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_kislev_norsca (objective=landmarks; 10 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to Kislev+Norsca — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are PROVISIONAL placement values, to be revisited when boundary extraction lands (S6). MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 16, \"lattice_hull_box\": [32.0, 0.0, 2465.0, 1379.0], \"method\": \"thin-plate interpolation of landmarks, lattice bounded to hull+pad\"}",
   "source": "tww3_old_world_mod_parchment_kislev_norsca.png",
   "projection": "control_point_warp",
   "footprint": [
-    3760.405397841826,
-    94.23724517326546,
-    4853.083131050748,
-    880.59837580451
+    3758.6527977290607,
+    135.55806684676622,
+    4830.841471902595,
+    876.3462289567752
   ],
   "control_points": [
     {
@@ -48,17 +48,6 @@
         301.0
       ],
       "note": "orange"
-    },
-    {
-      "source": [
-        2154.0,
-        287.0
-      ],
-      "canvas": [
-        4635.0,
-        284.0
-      ],
-      "note": "pink"
     },
     {
       "source": [
@@ -209,8 +198,8 @@
         0.0
       ],
       "canvas": [
-        3792.4,
-        175.8
+        3790.7,
+        180.2
       ],
       "note": "lattice 0"
     },
@@ -220,8 +209,8 @@
         0.0
       ],
       "canvas": [
-        3939.2,
-        172.2
+        3938.1,
+        174.9
       ],
       "note": "lattice 1"
     },
@@ -231,8 +220,8 @@
         0.0
       ],
       "canvas": [
-        4129.7,
-        166.3
+        4129.2,
+        167.6
       ],
       "note": "lattice 2"
     },
@@ -242,8 +231,8 @@
         0.0
       ],
       "canvas": [
-        4383.4,
-        168.1
+        4382.6,
+        170.1
       ],
       "note": "lattice 3"
     },
@@ -253,8 +242,8 @@
         0.0
       ],
       "canvas": [
-        4627.9,
-        155.7
+        4616.8,
+        183.5
       ],
       "note": "lattice 4"
     },
@@ -264,8 +253,8 @@
         0.0
       ],
       "canvas": [
-        4821.1,
-        126.2
+        4798.8,
+        181.9
       ],
       "note": "lattice 5"
     },
@@ -275,8 +264,8 @@
         275.8
       ],
       "canvas": [
-        3794.5,
-        313.6
+        3793.7,
+        315.7
       ],
       "note": "lattice 6"
     },
@@ -286,8 +275,8 @@
         275.8
       ],
       "canvas": [
-        3931.9,
-        312.0
+        3931.7,
+        312.6
       ],
       "note": "lattice 7"
     },
@@ -297,8 +286,8 @@
         275.8
       ],
       "canvas": [
-        4104.8,
-        309.7
+        4105.2,
+        308.6
       ],
       "note": "lattice 8"
     },
@@ -308,8 +297,8 @@
         275.8
       ],
       "canvas": [
-        4338.1,
-        311.5
+        4339.6,
+        307.8
       ],
       "note": "lattice 9"
     },
@@ -319,8 +308,8 @@
         275.8
       ],
       "canvas": [
-        4565.6,
-        300.2
+        4559.3,
+        316.0
       ],
       "note": "lattice 10"
     },
@@ -330,8 +319,8 @@
         275.8
       ],
       "canvas": [
-        4772.5,
-        272.1
+        4756.0,
+        313.2
       ],
       "note": "lattice 11"
     },
@@ -341,8 +330,8 @@
         551.6
       ],
       "canvas": [
-        3805.0,
-        450.0
+        3804.7,
+        450.6
       ],
       "note": "lattice 12"
     },
@@ -352,8 +341,8 @@
         551.6
       ],
       "canvas": [
-        3943.6,
-        448.7
+        3943.5,
+        448.8
       ],
       "note": "lattice 13"
     },
@@ -363,8 +352,8 @@
         551.6
       ],
       "canvas": [
-        4098.5,
-        454.0
+        4098.6,
+        453.6
       ],
       "note": "lattice 14"
     },
@@ -375,7 +364,7 @@
       ],
       "canvas": [
         4291.1,
-        444.0
+        443.8
       ],
       "note": "lattice 15"
     },
@@ -396,8 +385,8 @@
         551.6
       ],
       "canvas": [
-        4727.4,
-        430.0
+        4721.6,
+        444.6
       ],
       "note": "lattice 17"
     },
@@ -407,8 +396,8 @@
         827.4
       ],
       "canvas": [
-        3812.9,
-        584.2
+        3813.2,
+        583.4
       ],
       "note": "lattice 18"
     },
@@ -419,7 +408,7 @@
       ],
       "canvas": [
         3957.8,
-        581.9
+        581.8
       ],
       "note": "lattice 19"
     },
@@ -430,7 +419,7 @@
       ],
       "canvas": [
         4104.6,
-        591.3
+        591.4
       ],
       "note": "lattice 20"
     },
@@ -440,8 +429,8 @@
         827.4
       ],
       "canvas": [
-        4284.6,
-        583.5
+        4284.4,
+        584.0
       ],
       "note": "lattice 21"
     },
@@ -451,8 +440,8 @@
         827.4
       ],
       "canvas": [
-        4496.0,
-        585.5
+        4496.6,
+        583.8
       ],
       "note": "lattice 22"
     },
@@ -462,8 +451,8 @@
         827.4
       ],
       "canvas": [
-        4705.7,
-        581.1
+        4707.6,
+        576.2
       ],
       "note": "lattice 23"
     },
@@ -473,8 +462,8 @@
         1103.2
       ],
       "canvas": [
-        3812.1,
-        716.7
+        3813.3,
+        713.9
       ],
       "note": "lattice 24"
     },
@@ -484,8 +473,8 @@
         1103.2
       ],
       "canvas": [
-        3962.3,
-        715.5
+        3962.8,
+        714.2
       ],
       "note": "lattice 25"
     },
@@ -495,8 +484,8 @@
         1103.2
       ],
       "canvas": [
-        4111.6,
-        720.9
+        4111.8,
+        720.4
       ],
       "note": "lattice 26"
     },
@@ -506,8 +495,8 @@
         1103.2
       ],
       "canvas": [
-        4285.2,
-        718.5
+        4285.3,
+        718.3
       ],
       "note": "lattice 27"
     },
@@ -517,8 +506,8 @@
         1103.2
       ],
       "canvas": [
-        4497.7,
-        717.2
+        4498.8,
+        714.5
       ],
       "note": "lattice 28"
     },
@@ -528,8 +517,8 @@
         1103.2
       ],
       "canvas": [
-        4698.2,
-        714.4
+        4702.2,
+        704.4
       ],
       "note": "lattice 29"
     },
@@ -539,8 +528,8 @@
         1379.0
       ],
       "canvas": [
-        3807.4,
-        848.6
+        3809.6,
+        843.2
       ],
       "note": "lattice 30"
     },
@@ -550,8 +539,8 @@
         1379.0
       ],
       "canvas": [
-        3961.9,
-        846.5
+        3963.2,
+        843.2
       ],
       "note": "lattice 31"
     },
@@ -561,8 +550,8 @@
         1379.0
       ],
       "canvas": [
-        4115.5,
-        846.2
+        4116.3,
+        844.3
       ],
       "note": "lattice 32"
     },
@@ -572,8 +561,8 @@
         1379.0
       ],
       "canvas": [
-        4287.4,
-        838.0
+        4287.7,
+        837.3
       ],
       "note": "lattice 33"
     },
@@ -583,8 +572,8 @@
         1379.0
       ],
       "canvas": [
-        4492.5,
-        835.0
+        4494.2,
+        830.9
       ],
       "note": "lattice 34"
     },
@@ -594,8 +583,8 @@
         1379.0
       ],
       "canvas": [
-        4692.2,
-        840.2
+        4697.0,
+        828.2
       ],
       "note": "lattice 35"
     }

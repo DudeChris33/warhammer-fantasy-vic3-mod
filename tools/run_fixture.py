@@ -1109,6 +1109,61 @@ def _selfcheck_sea_naming() -> None:
     else:  # pragma: no cover
         raise AssertionError("an override on a land pixel must raise CellError")
 
+    # rekey_by_display_name: an individually named zone's key follows its own
+    # name, not its parent sea group's generic STATE_<group>_NN.
+    zone_names = (
+        _schema.SeaZoneDisplayName((2, 4), "Shard Coast", ""),  # zone 1, was STATE_WEST_01
+    )
+    cfg_named = _schema.SeaZoneConfig(canon_seas=(west, east, ghost), overrides=(),
+                                      zone_names=zone_names)
+    named = sn.assign(sea, land, cfg_named, wrap_x=False, log=None)
+    named = sn.apply_zone_names(named, sea, cfg_named)
+    assert named[1].display_name == "Shard Coast" and named[1].key == "STATE_WEST_01", named
+    named, impassable, merged = sn.apply_naming_overrides(named, sea, cfg_named)
+    assert not impassable and not merged, (impassable, merged)
+    rekeyed = sn.rekey_by_display_name(named, sea, merged)
+    # A name no other zone shares gets a bare key, no ordinal — there is only
+    # one Shard Coast.
+    assert rekeyed[1].key == "STATE_SHARD_COAST", rekeyed
+    # A zone that kept its group's generic name is rekeyed from that name too, so
+    # the key still matches what the player sees for it (zone 2's key becomes its
+    # own display name "West Sea", not left as "WEST") — and it too is unique
+    # within this fixture (zone 1 no longer shares "West Sea"), so no ordinal.
+    assert rekeyed[2].display_name == "West Sea" and rekeyed[2].key == "STATE_WEST_SEA", \
+        rekeyed
+    # Zones 3 and 4 both carry the East canon sea's shared generic name, so they
+    # DO collide and keep the disambiguating ordinal.
+    assert rekeyed[3].key == "STATE_EAST_SEA_01" and rekeyed[4].key == "STATE_EAST_SEA_02", \
+        rekeyed
+
+    # Two zones sharing a display name are disambiguated by ordinal, ordered by
+    # first pixel (zone 3 before zone 4), not left colliding on one key.
+    dup_names = (
+        _schema.SeaZoneDisplayName((25, 4), "Twin Strait", ""),
+        _schema.SeaZoneDisplayName((35, 4), "Twin Strait", ""),
+    )
+    cfg_dup = _schema.SeaZoneConfig(canon_seas=(west, east, ghost), overrides=(),
+                                    zone_names=dup_names)
+    dup = sn.assign(sea, land, cfg_dup, wrap_x=False, log=None)
+    dup = sn.apply_zone_names(dup, sea, cfg_dup)
+    dup, _, dup_merged = sn.apply_naming_overrides(dup, sea, cfg_dup)
+    dup = sn.rekey_by_display_name(dup, sea, dup_merged)
+    assert dup[3].key == "STATE_TWIN_STRAIT_01" and dup[4].key == "STATE_TWIN_STRAIT_02", dup
+
+    # A merge's zones keep their shared key (the STATE grouping mechanism) rather
+    # than being rekeyed individually from their own display name.
+    merge_cfg = _schema.SeaZoneConfig(
+        canon_seas=(west, east, ghost), overrides=(),
+        merges=(_schema.SeaZoneMerge("WHIRLPOOL", "Whirlpool", ((2, 4), (12, 4)),
+                                     impassable=True, note=""),),
+    )
+    mrg = sn.assign(sea, land, merge_cfg, wrap_x=False, log=None)
+    mrg = sn.apply_zone_names(mrg, sea, merge_cfg)
+    mrg, mrg_impassable, mrg_merged = sn.apply_naming_overrides(mrg, sea, merge_cfg)
+    assert mrg_merged == {1, 2} and mrg_impassable == {1, 2}, (mrg_merged, mrg_impassable)
+    mrg = sn.rekey_by_display_name(mrg, sea, mrg_merged)
+    assert mrg[1].key == "STATE_WHIRLPOOL_01" and mrg[2].key == "STATE_WHIRLPOOL_01", mrg
+
 
 def _selfcheck_composite() -> None:
     """Precedence resolution + tie rejection for worldgen.composite."""

@@ -7,6 +7,7 @@
 # 2026-09-03: user decision — commit sources/ in full (private repo, tired of
 # manually shifting ~2.3GB between devices), large binaries via Git LFS (see
 # .gitattributes). SOURCES.md + registration/*.json remain the provenance record.
+sources/gimp_exports/
 
 *.log
 *.bak

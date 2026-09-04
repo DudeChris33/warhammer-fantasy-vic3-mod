@@ -4,9 +4,9 @@
 Pipeline::
 
     sources/terraqueous_globe.jpg  (SHA-256 verified)
-        -> denoise -> LUT classify        (elevation field, at SOURCE res)
+        -> denoise -> de-grid -> LUT classify -> despeckle  (elevation field, at SOURCE res)
         -> NE-II reproject at heightmap res
-        -> + TW3 high-frequency relief    (inside its footprint, land only)
+        -> + colored_globe high-frequency relief  (everywhere on land, zero-mean)
         -> encode + clamp to the mask     -> map_data/heightmap.png
 
     tools/derived/land_sea_mask.png       (read as-is — the committed land/sea mask,
@@ -59,7 +59,13 @@ MAP_DATA_DIR = REPO_ROOT / "map_data"
 LUT_PATH = TOOLS_DIR / "lut" / "terraqueous_elevation.json"
 
 TERRAQUEOUS = "terraqueous_globe.jpg"
-TWW3 = "tww3_map_stitched.png"
+
+#: The relief-detail source: Fahran's whole-world shaded-relief render, already
+#: registered (``tools/registration/colored_globe.json``, a control-point warp
+#: over ~the full canvas). It replaces the retired ``tww3_map_stitched.png``,
+#: which left this path returning nothing. Its high-frequency luminance is the
+#: relief texture added everywhere on land.
+RELIEF_SOURCE = "colored_globe.jpg"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 HEIGHT_W, HEIGHT_H = map_config.HEIGHTMAP_SIZE
@@ -69,15 +75,37 @@ HEIGHT_W, HEIGHT_H = map_config.HEIGHTMAP_SIZE
 #: ~2 MB per row — so this is the knob that keeps the run inside a few hundred MB.
 BLOCK_ROWS = 256
 
-#: Amplitude, in metres, of the high-frequency detail borrowed from the TW3
-#: relief. Deliberately small: it sharpens ridge and valley texture that the
-#: 14-band LUT cannot resolve, without letting a five-point warp restate absolute
-#: elevation. The TW3 render is a shaded 3-D view, not an elevation ramp, so its
-#: *absolute* brightness means nothing — only its local variation is information.
-TWW3_DETAIL_M = 260.0
+#: Amplitude, in metres, of the high-frequency relief borrowed from
+#: ``colored_globe``. Applied EVERYWHERE on land (not gated to mountains), so a
+#: plate that the 14-band LUT renders flat picks up the base game's natural
+#: "detail everywhere" texture. ``colored_globe`` is a shaded-relief render, not
+#: an elevation ramp, so its *absolute* brightness means nothing — only its local
+#: variation is information — which is why the layer is zero-mean: it can add a
+#: ridge crest and a valley floor but never restate a region's base elevation, so
+#: the loose control-point fit (landmark mean ~552 px) misplaces *texture*, never
+#: land. 100 m is the user-confirmed amplitude (2026-09-03): a 200/150/120/100/50
+#: sweep was rendered hypsometrically and calibrated against vanilla's own
+#: heightmap — 200 read too busy/directional, 50 lost the "detail everywhere",
+#: and 100 was chosen as the calm-but-textured balance closest to vanilla.
+RELIEF_DETAIL_M = 100.0
 
-#: Sigma (in canvas px) of the low-pass used to extract that detail.
-TWW3_DETAIL_SIGMA = 24.0
+#: Sigma (in canvas px) of the low-pass used to extract that relief. This is the
+#: primary anti-JPEG-noise lever: ``colored_globe`` is only ~1551x938 usable,
+#: upscaled ~5.1x onto the 8192-wide canvas, so a small sigma samples right at the
+#: JPEG/block-noise floor and the amplitude renormalization would amplify 8x8
+#: block edges to full amplitude. Raise it (48/64) to push the passband onto real
+#: shaded-relief structure. If block/noise amplification survives sigma tuning it
+#: is a source-resolution wall, not a tuning target — hand back for a higher-res
+#: relief source rather than grinding parameters.
+RELIEF_DETAIL_SIGMA = 24.0
+
+#: Canvas-px erosion of the land mask before the relief is masked to land. The
+#: loose ``colored_globe`` fit displaces its own sharp land/ocean luminance edge
+#: up to ~880 px inland of the true coast; high-passed, that edge is a coherent
+#: ridge, so without this it would stamp a "ghost coastline" along the real shore.
+#: Dropping the coastal band where the displaced edge lands removes it. Start
+#: small; widen only if the render shows a coastal rim.
+COAST_INSET = 3
 
 def log(msg: str, t0: float | None = None) -> None:
     stamp = f"  [{time.time() - t0:5.1f}s]" if t0 is not None else ""
@@ -202,7 +230,7 @@ def terraqueous_fields(reg: schema.SourceRegistration, elut: schema.ElevationLUT
 
     fields = ingest.classify_source(
         rgb, elut, denoise_size=3, majority=SOURCE_MAJORITY,
-        wrap_x=False, polar_rim=rim,
+        wrap_x=False, polar_rim=rim, degrid=True, despeckle=3,
     )
     log(f"  LUT colour distance: median {np.median(fields.dist[inside]):.1f} "
         f"p95 {np.percentile(fields.dist[inside], 95):.1f}", t0)
@@ -239,24 +267,29 @@ def terraqueous_fields(reg: schema.SourceRegistration, elut: schema.ElevationLUT
 
 
 # ---------------------------------------------------------------------------
-# TW3 relief detail
+# colored_globe relief detail
 # ---------------------------------------------------------------------------
 
-def tww3_detail(regs, land_mask: np.ndarray, t0: float):
-    """Zero-mean high-frequency relief from the TW3 render, at canvas res.
+def relief_detail(regs, land_mask: np.ndarray, t0: float):
+    """Zero-mean high-frequency relief from ``colored_globe``, at canvas res.
 
     Returns ``(detail_m, valid)`` or ``(None, None)`` when the source is absent.
     The detail is a high-pass of the render's luminance: subtract a heavy
-    Gaussian, normalise by a robust spread, scale to ``TWW3_DETAIL_M``. Being
-    zero-mean is the whole point — it can add a ridge crest and a valley floor
-    but cannot raise or lower a region's base elevation, so a registration error
-    shows up as misplaced texture rather than as a displaced landmass.
+    Gaussian, normalise by a robust spread, scale to ``RELIEF_DETAIL_M``, and add
+    it **everywhere on land** (not gated to mountains) so plains and steppes pick
+    up the base game's natural texture. Being zero-mean is the whole point — it
+    can add a ridge crest and a valley floor but cannot raise or lower a region's
+    base elevation, so the loose control-point fit shows up as misplaced texture
+    rather than as a displaced landmass. The land mask is eroded by ``COAST_INSET``
+    first, so ``colored_globe``'s own sharp land/ocean edge — displaced inland by
+    the loose fit — cannot stamp a coherent "ghost coastline" ridge along the real
+    shore.
     """
-    reg = regs.get(TWW3)
+    reg = regs.get(RELIEF_SOURCE)
     if reg is None:
         return None, None
-    rgb = sources.load_source_image(TWW3)
-    log(f"  loaded {TWW3} {rgb.shape[1]}x{rgb.shape[0]}", t0)
+    rgb = sources.load_source_image(RELIEF_SOURCE)
+    log(f"  loaded {RELIEF_SOURCE} {rgb.shape[1]}x{rgb.shape[0]}", t0)
     fit = reproject.fit_warp(reg)
     log(f"  warp fit: interpolation residual rms {fit.rms_px:.3g} px", t0)
 
@@ -284,15 +317,19 @@ def tww3_detail(regs, land_mask: np.ndarray, t0: float):
         patch[by:be] = reproject.resample(luminance, sx, sy, order=1)
 
     from scipy import ndimage
-    high = patch - ndimage.gaussian_filter(patch, sigma=TWW3_DETAIL_SIGMA, mode="nearest")
+    high = patch - ndimage.gaussian_filter(patch, sigma=RELIEF_DETAIL_SIGMA, mode="nearest")
     spread = float(np.percentile(np.abs(high), 90)) or 1.0
-    high = np.clip(high / spread, -2.0, 2.0) * TWW3_DETAIL_M
+    high = np.clip(high / spread, -2.0, 2.0) * RELIEF_DETAIL_M
 
     detail[y0:y1, x0:x1] = high
     valid[y0:y1, x0:x1] = inside
-    valid &= land_mask          # relief detail on land only; the sea floor is flat
-    log(f"  TW3 detail: covers {100 * valid.mean():.2f}% of canvas "
-        f"(+-{TWW3_DETAIL_M:.0f} m, spread {spread:.1f} lum)", t0)
+    # Relief detail on land only (the sea floor is flat), and dropped from a
+    # COAST_INSET-px coastal band so the loose fit's displaced land/ocean edge
+    # cannot stamp a ghost coastline. Erosion, not the raw mask.
+    coast = ndimage.binary_erosion(land_mask, iterations=COAST_INSET) if COAST_INSET > 0 else land_mask
+    valid &= coast
+    log(f"  colored_globe relief: covers {100 * valid.mean():.2f}% of canvas "
+        f"(+-{RELIEF_DETAIL_M:.0f} m, spread {spread:.1f} lum, coast inset {COAST_INSET}px)", t0)
     return detail, valid
 
 
@@ -372,7 +409,7 @@ def main(argv: list[str] | None = None) -> int:
         _write_preview(land, DERIVED_DIR / "preview_land_sea.png")
 
     log("building relief detail...")
-    detail, detail_valid = tww3_detail(regs, land, t0)
+    detail, detail_valid = relief_detail(regs, land, t0)
 
     log(f"writing heightmap {HEIGHT_W}x{HEIGHT_H} (16-bit)...")
     height = np.empty((HEIGHT_H, HEIGHT_W), dtype=np.uint16)
