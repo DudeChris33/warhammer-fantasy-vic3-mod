@@ -223,22 +223,6 @@ ideology_traditionalist = { # Average Progressiveness - -70
 			}
 		}
 
-		# More likely under Alexander III
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexander_iii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = {
-				value = 75
-				desc = "ALEXANDER_III"
-			}
-		}
-
 		if = {
 			limit = {
 				OR = {
@@ -279,19 +263,6 @@ ideology_traditionalist = { # Average Progressiveness - -70
 				value = owner.ideology_traditionalist_favoured_laws
 				multiply = 17
 			}
-		}
-
-		# More likely under Alexander III
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexander_iii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = 75
 		}
 
 		if = {
@@ -416,22 +387,6 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 			}
 		}
 
-		# More likely under Alexander III
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexander_iii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = {
-				value = 75
-				desc = "ALEXANDER_III"
-			}
-		}
-
 		if = {
 			limit = {
 				OR = {
@@ -472,19 +427,6 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 				value = owner.ideology_traditionalist_minoritarian_favoured_laws
 				multiply = 17
 			}
-		}
-
-		# More likely under Alexander III
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexander_iii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = 75
 		}
 
 		if = {
@@ -2715,21 +2657,6 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 				desc = "SPA_CONSERVATIVE_VICTORY"
 			}
 		}
-		# More likely under Alexei II
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexei_ii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = {
-				value = 50
-				desc = "ALEXEI_II"
-			}
-		}
 		if = {
 			limit = {
 				OR = {
@@ -2794,18 +2721,6 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 				}
 			}
 			add = 25
-		}
-		# More likely under Alexei II
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexei_ii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = 50
 		}
 		if = {
 			limit = {
@@ -5852,21 +5767,6 @@ ideology_market_liberal = { # Average Progressiveness - 4
 				desc = "concept_great_power"
 			}
 		}
-		# More likely under Alexander II
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexander_ii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = {
-				value = 75
-				desc = "ALEXANDER_II"
-			}
-		}
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
@@ -6034,18 +5934,6 @@ ideology_market_liberal = { # Average Progressiveness - 4
 				}
 			}
 			add = 25
-		}
-		# More likely under Alexander II
-		if = {
-			limit = {
-				owner = {
-					any_scope_character = {
-						has_template = RUS_alexander_ii
-						is_ruler_of_own_country = yes
-					}
-				}
-			}
-			add = 75
 		}
 		if = {
 			limit = {
