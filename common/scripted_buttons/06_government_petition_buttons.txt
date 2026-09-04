@@ -6,7 +6,10 @@
 		scope:journal_entry = {
 			NOT = { has_variable = has_been_abandoned }
 		}
-		has_journal_entry = je_government_petition
+		# #3540: common/journal_entries is blanked (replace_paths) so je_government_petition
+		# never exists; this button's only caller is vanilla's journal-entry file itself, which
+		# never loads either — already unreachable, so this is a true no-op stub, not a content cut.
+		always = no
 	}
 
 	possible = {
@@ -86,7 +89,10 @@ je_government_petition_extension_button = {
 		scope:journal_entry = {
 			NOT = { has_variable = has_been_abandoned }
 		}
-		has_journal_entry = je_government_petition
+		# #3540: common/journal_entries is blanked (replace_paths) so je_government_petition
+		# never exists; this button's only caller is vanilla's journal-entry file itself, which
+		# never loads either — already unreachable, so this is a true no-op stub, not a content cut.
+		always = no
 	}
 
 	possible = {

@@ -6,7 +6,10 @@
 		scope:journal_entry = {
 			NOT = { has_variable = has_been_abandoned }
 		}
-		has_journal_entry = je_law_imposition
+		# #3540: common/journal_entries is blanked (replace_paths) so je_law_imposition never
+		# exists; this button's only caller is vanilla's journal-entry file itself, which never
+		# loads either — already unreachable, so this is a true no-op stub, not a content cut.
+		always = no
 		NOT = {
 			has_law = scope:foreign_imposition_law.type
 		}
@@ -98,7 +101,10 @@ button_refuse_law_imposition = {
 		scope:journal_entry = {
 			NOT = { has_variable = has_been_abandoned }
 		}
-		has_journal_entry = je_law_imposition
+		# #3540: common/journal_entries is blanked (replace_paths) so je_law_imposition never
+		# exists; this button's only caller is vanilla's journal-entry file itself, which never
+		# loads either — already unreachable, so this is a true no-op stub, not a content cut.
+		always = no
 		NOT = {
 			has_law = scope:foreign_imposition_law.type
 		}

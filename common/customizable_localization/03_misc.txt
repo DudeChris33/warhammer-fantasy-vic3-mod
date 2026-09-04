@@ -266,13 +266,10 @@ impose_law_error = {
 		}
 	}
 
-	text = {
-		localization_key = IMPOSE_LAW_NO_OPTIONS_JOURNAL_ENTRY
-		trigger = {
-			has_journal_entry = je_law_imposition
-		}
-	}
-
+	# #3540: dropped the IMPOSE_LAW_NO_OPTIONS_JOURNAL_ENTRY text = { } entry — its trigger checked
+	# for the presence of the je_law_imposition journal entry, which can never be true
+	# (common/journal_entries is blanked via replace_paths), so this entry could never be
+	# selected. The catch-all entry below still guarantees the loc always resolves.
 	text = {
 		localization_key = IMPOSE_LAW_NO_OPTIONS_NO_COOLDOWN
 		trigger = {

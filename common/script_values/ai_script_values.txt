@@ -196,24 +196,12 @@ wanted_army_size_script_value = {
 		subtract = diplomatic_pact_expense_ratio
 	}
 
+	# #3540: dropped an `if` whose limit checked for the presence of the je_negotiate_army_quest
+	# journal entry — that entry can never exist (common/journal_entries is blanked via
+	# replace_paths), so the limit was permanently false and the block never contributed to this
+	# min = { }.
 	min = {
 		value = 1
-
-		if = { #If accepted Negotiation quest, build barracks until JE ends
-			limit = {
-				has_journal_entry = je_negotiate_army_quest
-			}
-			add = {
-				every_interest_group = { #first get the desired app from the IG
-					limit = {
-						has_variable = desired_army_size
-					}
-					add = var:desired_army_size
-				}
-				divide = average_barracks_power_projection #divide by the amount of barracks this will need based on average barracks power projection
-				multiply = 1.10 #safety margin
-			}
-		}
 	}
 }
 
