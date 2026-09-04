@@ -19,54 +19,27 @@
                 scope:character ?= {
                     OR = {
                         has_role_of_type = agitator
-                        has_template = fra_delescluze_character_template # Never ever give Louis Delescluze a hat, any hat. His forehead is too powerful.
-                        has_template = BRZ_getulio_vargas_character_template # Vargas is forbidden from wearing hats.
-                        has_template = jhn_rani_of_jhansi # lakshmibai's hair is actually a hat
-                        has_template = BIC_jiddu_krishnamurti
-                        has_template = BIC_khudiram_bose
-                        has_template = BIC_amy_carmichael
-                        has_template = BIC_charles_canning
-                        has_template = BIC_henry_petty-fitzmaurice
-                        has_template = BIC_jamshedji_tata
-                        has_template = BIC_pandita_ramabai_sarasvati
-                        has_template = BIC_reginald_dyer
-                        has_template = aus_klemens_von_metternich
-                        has_template = mon_dordije_petrovic_njegos
-                        has_template = PHI_manuel_blanco_ramos
-                        has_template = RUS_alexander_fyodorovich_kerensky # His forehead is also too powerful
-                        has_template = fra_auguste_comte_character_template
+                        # wh-overhaul (board #3540): dropped 16 OR branches checking has_template against real-world
+                        # character_templates entries this mod's epic #3292 restore never brought
+                        # back; has_role_of_type = agitator above still selects no headgear for
+                        # agitators.
                     }
                     is_historical = yes
-                    NOR = {
-                        has_template = rus_lenin_character_template
-                        has_template = gbr_pankhurst_character_template
-                        has_template = agitator_emiliano_zapata
-                        has_template = ruler_karl_marx
-                        has_template = GBR_thomas_ismay
-                        has_template = GBR_joseph_ismay
-                    }
+                    # wh-overhaul (board #3540): dropped a NOR = { has_template = ... } exclusion list entirely -- all 6
+                    # ids (rus_lenin_character_template, gbr_pankhurst_character_template,
+                    # agitator_emiliano_zapata, ruler_karl_marx, GBR_thomas_ismay,
+                    # GBR_joseph_ismay) are real-world character_templates entries this mod's
+                    # epic #3292 restore never brought back; with every branch always false the
+                    # NOR was already a permanent no-op.
                 }
             }
         }
-        weight = {
-            base = 0
-            modifier = {
-                add = 5000
-                scope:pop ?= {
-                    is_pop_type = clergymen
-                    religion = {
-                        has_discrimination_trait = heritage_christian
-                    }
-                    culture = {
-                        OR = {
-                            has_discrimination_trait_group = heritage_group_middle_eastern
-                            has_discrimination_trait = heritage_abyssinian
-                            cu:circassian = this
-                        }
-                    }
-                }
-            }
-        }
+        # wh-overhaul (board #3540): dropped the entire second weight block -- its sole modifier required
+        # has_discrimination_trait = heritage_christian on religion (bare, required)
+        # and an OR of has_discrimination_trait_group = heritage_group_middle_eastern
+        # / has_discrimination_trait = heritage_abyssinian on culture, none of which
+        # are part of this mod's Warhammer discrimination traits, so the block
+        # contributed nothing.
     }
 
 ### AGITATORS ###
@@ -151,9 +124,10 @@
             modifier = {
                 add = 90000
                 OR = {
-                    scope:character ?= {
-                        has_template = BRZ_virgulino_ferreira
-                    }
+                    # wh-overhaul (board #3540): dropped an OR branch checking has_template = BRZ_virgulino_ferreira --
+                    # a real-world Lampiao character_templates entry this mod's epic #3292
+                    # restore never brought back; the culture-based branch below still selects
+                    # this headgear.
                     scope:character ?= {
                         AND = {
                             exists = cu:nordestino
@@ -180,29 +154,10 @@
         }
     }
 
-    arabic_agitator_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = arabic_headgear_agitators
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 1000
-                scope:character ?= {
-                    culture = {
-                        has_discrimination_trait_group = heritage_group_middle_eastern
-                        NOT = { has_discrimination_trait_group = language_group_turkic }
-                    }
-                }
-                agitator_character_trigger = yes
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped arabic_agitator_headgear entirely -- its headgear weight depended on
+    # heritage_group_middle_eastern, language_group_turkic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     korean_agitator_headgear = {
         dna_modifiers = {
@@ -255,214 +210,51 @@
 
 ### HISTORICAL CHARACTER CLOTHING ###
 
-    historical_lenin_headgear = {
-        dna_modifiers = {
-            accessory = {
-               mode = add
-               gene = headgear
-               template = slavic_headgear_agitator_lenin
-               range = { 0 1.0 }
-            }
-        }
+    # wh-overhaul (board #3540): dropped historical_lenin_headgear entirely -- its headgear weight depended on
+    # rus_lenin_character_template, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    has_template = rus_lenin_character_template
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped historical_emmeline_pankhurst_headgear entirely -- its headgear weight depended on
+    # gbr_pankhurst_character_template, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    historical_emmeline_pankhurst_headgear = {
-        dna_modifiers = {
+    # wh-overhaul (board #3540): dropped historical_zapata_headgear entirely -- its headgear weight depended on
+    # agitator_emiliano_zapata, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-           accessory = {
-               mode = add
-               gene = headgear
-               template = female_headgear_agitator_pankhurst
-               range = { 0 0.1 }
-            }
-        }
+    # wh-overhaul (board #3540): dropped historical_reza_pahlavi_headgear entirely -- its headgear weight depended on
+    # PER_reza_pahlavi, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    has_template = gbr_pankhurst_character_template
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped naser_qajar_headgear entirely -- its headgear weight depended on
+    # per_nasir_al_din_qajar_template, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    historical_zapata_headgear = {
-        dna_modifiers = {
-            accessory = {
-               mode = add
-               gene = headgear
-               template = south_american_headgear_agitators
-               range = { 0 0.1}
-            }
-        }
+	# wh-overhaul (board #3540): dropped historical_tatya_tope_hat entirely -- its headgear weight depended on
+	# gwa_general_tope, real-world character_templates/discrimination-trait id(s)
+	# this mod's epic #3292/#3405 restores never brought back, so the
+	# entry's weight was permanently 0.
 
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    has_template = agitator_emiliano_zapata
-                }
-            }
-        }
-    }
+	# wh-overhaul (board #3540): dropped historical_jankoji_rao_scindia_ii_hat entirely -- its headgear weight depended on
+	# GWA_jankoji_roa_scindia, real-world character_templates/discrimination-trait id(s)
+	# this mod's epic #3292/#3405 restores never brought back, so the
+	# entry's weight was permanently 0.
 
-    historical_reza_pahlavi_headgear = {
-        dna_modifiers = {
-            accessory = {
-               mode = add
-               gene = headgear
-               template = reza_shah_pahlavi_cap
-               range = { 0 1.0 }
-            }
-        }
-
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-
-                has_dlc_feature = ep1_cosmetics
-
-                scope:character ?= {
-                    has_template = PER_reza_pahlavi
-                }
-            }
-        }
-    }
-
-    naser_qajar_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = arabic_naser_qajar
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-
-                has_dlc_feature = ep1_cosmetics
-
-                scope:character ?= {
-                    age > 12
-                    has_template = per_nasir_al_din_qajar_template
-                    is_ruler_of_own_country = yes
-                }
-            }
-        }
-    }
-
-	historical_tatya_tope_hat = {
-		dna_modifiers = {
-			accessory = {
-				mode = add
-				gene = headgear
-				template = tatya_tope
-				range = { 0 1 }
-			}
-		}
-		weight = {
-            base = 0
-            modifier = {
-                add = 90000
-
-                has_dlc_feature = ip2_cosmetics
-
-                scope:character ?= {
-                    has_template = gwa_general_tope
-                }
-            }
-        } }
-
-	historical_jankoji_rao_scindia_ii_hat = {
-		dna_modifiers = {
-			accessory = {
-				mode = add
-				gene = headgear
-				template = jayaji_rao_scindia
-				range = { 0 1 }
-			}
-				}
-		weight = {
-            base = 0
-            modifier = {
-                add = 90000
-
-                has_dlc_feature = ip2_cosmetics
-
-                scope:character ?= {
-                    has_template = GWA_jankoji_roa_scindia
-                }
-            }
-        }
-	}
-
-    historical_maharaja_singh_hat = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = maharaja_singh_01
-                range = { 0 1 }
-            }
-                }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-
-                has_dlc_feature = ip2_cosmetics
-
-                scope:character ?= {
-                    AND = {
-                        is_adult = yes
-                        has_template = pan_duleep_singh
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped historical_maharaja_singh_hat entirely -- its headgear weight depended on
+    # pan_duleep_singh, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
 
-    historical_indian_high_02_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = headgear_indian_high_02
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-
-                has_dlc_feature = ip2_cosmetics
-
-                scope:character ?= {
-                    has_template = BIC_mithuben_petit
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped historical_indian_high_02_headgear entirely -- its headgear weight depended on
+    # BIC_mithuben_petit, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     historical_india_royalty_03_headgear = {
         dna_modifiers = {
@@ -475,13 +267,10 @@
         }
         weight = {
             base = 0
-            modifier = {
-                add = 90000
-                has_dlc_feature = ip2_cosmetics
-                scope:character ?= {
-                    has_template = BIC_JOD_pratap_singh_of_idar
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier gated on has_template =
+            # BIC_JOD_pratap_singh_of_idar -- a real-world Rajput-prince
+            # character_templates entry this mod's epic #3292 restore never brought
+            # back; the rajput-culture modifier below is unaffected.
             modifier = {
                 add = 1000
                 has_dlc_feature = ip2_cosmetics
@@ -519,23 +308,10 @@
         }
         weight = {
             base = 0
-            modifier = {
-                add = 90000
-                has_dlc_feature = ip2_cosmetics
-                scope:character ?= {
-                    has_template = BIC_JOD_pratap_singh_of_idar
-                    owner ?= {
-                        OR = {
-                            c:GBR ?= this
-                            AND = {
-                                exists = top_overlord
-                                exists = c:GBR
-                                top_overlord = c:GBR
-                            }
-                        }
-                    }
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier gated on has_template =
+            # BIC_JOD_pratap_singh_of_idar -- a real-world Rajput-prince
+            # character_templates entry this mod's epic #3292 restore never brought
+            # back; the rajput-culture modifier below is unaffected.
             modifier = {
                 add = 1000
                 has_dlc_feature = ip2_cosmetics
@@ -566,434 +342,100 @@
         }
     }
 
-    historical_jawaharlal_nehru_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = ghandi_topi_01
-                accessory = male_headgear_ghandi_topi_01
-            }
-        }
+    # wh-overhaul (board #3540): dropped historical_jawaharlal_nehru_headgear entirely -- its headgear weight depended on
+    # BIC_jawaharlal_nehru, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                has_dlc_feature = ip2_cosmetics
-                scope:character ?= {
-                    has_template = BIC_jawaharlal_nehru
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped count_dracula entirely -- its headgear weight depended on
+    # canonic_count_dracula, exile_count_dracula, ruler_abraham_lincoln, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    count_dracula = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = european_tophat
-                range = { 0 1 }
-            }
-        }
+    # wh-overhaul (board #3540): dropped frankensteins_monster entirely -- its headgear weight depended on
+    # adam_1, adam_2, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
+    # wh-overhaul (board #3540): dropped historical_muhammad_ali_jinnah_headgear entirely -- its headgear weight depended on
+    # BIC_muhammad_ali_jinnah, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                scope:character ?= {
-                    OR = {
-                        has_template = canonic_count_dracula
-                        has_template = exile_count_dracula
-                        has_template = ruler_abraham_lincoln
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped indian_dwarkanath_tagore_headgear entirely -- its headgear weight depended on
+    # BIC_dwarkanath_tagore, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    frankensteins_monster = {
-        dna_modifiers = {
-            # No hat for Frankenstein
-        }
-        weight = {
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    OR = {
-                        has_template = adam_1
-                        has_template = adam_2
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped indian_bhagat_singh_headgear entirely -- its headgear weight depended on
+    # BIC_bhagat_singh, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    historical_muhammad_ali_jinnah_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = headgear_muhammad_ali_jinnah
-                accessory = male_headgear_historical_muhammad_ali_jinnah
-            }
-        }
+    # wh-overhaul (board #3540): dropped indian_radhakanta_deb_headgear entirely -- its headgear weight depended on
+    # BIC_radhakanta_deb, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
+    # wh-overhaul (board #3540): dropped ceo_talaat_harb_headgear entirely -- its headgear weight depended on
+    # EGY_talaat_harb, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                scope:character ?= {
-                    has_template = BIC_muhammad_ali_jinnah
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped ceo_isambard_kingdom_brunel_headgear entirely -- its headgear weight depended on
+    # GBR_isambard_kingdom_brunel, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    indian_dwarkanath_tagore_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = indian_dwarkanath_tagore
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
+    # wh-overhaul (board #3540): dropped HBC_george_simpson_headgear entirely -- its headgear weight depended on
+    # HBC_george_simpson, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                has_dlc_feature = ip2_cosmetics
+    # wh-overhaul (board #3540): dropped BIC_george_eden_headgear entirely -- its headgear weight depended on
+    # BIC_george_eden, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                scope:character ?= {
-                    has_template = BIC_dwarkanath_tagore
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped USA_thomas_edison_headgear entirely -- its headgear weight depended on
+    # usa_thomas_edison_character_template, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    indian_bhagat_singh_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = bhagat_singh
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
+    # wh-overhaul (board #3540): dropped USA_robert_e_lee_wilson_headgear entirely -- its headgear weight depended on
+    # usa_robert_e_lee_wilson, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                has_dlc_feature = ip2_cosmetics
+    # wh-overhaul (board #3540): dropped GBR_john_maple_headgear entirely -- its headgear weight depended on
+    # GBR_john_maple, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                scope:character ?= {
-                    has_template = BIC_bhagat_singh
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped SAF_cecil_rhodes_headgear entirely -- its headgear weight depended on
+    # SAF_cecil_rhodes, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    indian_radhakanta_deb_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = radhakanta_deb
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
+    # wh-overhaul (board #3540): dropped NOR_sam_eyde_headgear entirely -- its headgear weight depended on
+    # NOR_sam_eyde, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                has_dlc_feature = ip2_cosmetics
+    # wh-overhaul (board #3540): dropped petar_II_headgear entirely -- its headgear weight depended on
+    # mon_petar_II_petrovic_njegos, mon_nikola_petrovic_njegos, mon_general_novica_cerovic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                scope:character ?= {
-                    has_template = BIC_radhakanta_deb
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped ali_pasha_rizvanbegovic_headgear entirely -- its headgear weight depended on
+    # mon_ali_pasha_rizvanbegovic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-    ceo_talaat_harb_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = arabic_fez
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                has_dlc_feature = mp1_cosmetics
-                scope:character ?= {
-                     AND = {
-                        has_template = EGY_talaat_harb
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    ceo_isambard_kingdom_brunel_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = european_executive_hats
-                accessory = male_headgear_european_common_02
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                has_dlc_feature = mp1_cosmetics
-                scope:character ?= {
-                    AND = {
-                        has_template = GBR_isambard_kingdom_brunel
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    HBC_george_simpson_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = no_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    AND = {
-                        has_template = HBC_george_simpson
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    BIC_george_eden_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = no_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    AND = {
-                        has_template = BIC_george_eden
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    USA_thomas_edison_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = no_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    AND = {
-                        has_template = usa_thomas_edison_character_template
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    USA_robert_e_lee_wilson_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = no_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    AND = {
-                        has_template = usa_robert_e_lee_wilson
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    GBR_john_maple_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = no_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    AND = {
-                        has_template = GBR_john_maple
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    SAF_cecil_rhodes_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = no_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    AND = {
-                        has_template = SAF_cecil_rhodes
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    NOR_sam_eyde_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = no_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    AND = {
-                        has_template = NOR_sam_eyde
-                        has_role_of_type = executive
-                    }
-                }
-            }
-        }
-    }
-
-    petar_II_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = male_headgear_historical
-                accessory = male_headgear_petar_ii_petrovic_njegos
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    OR = {
-                        has_template = mon_petar_II_petrovic_njegos
-                        has_template = mon_nikola_petrovic_njegos
-                        has_template = mon_general_novica_cerovic
-                    }
-                }
-            }
-        }
-    }
-
-    ali_pasha_rizvanbegovic_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = abdul_hamid_ii_fez
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    has_template = mon_ali_pasha_rizvanbegovic
-                }
-            }
-        }
-    }
-
-    mirko_petrovic_njegos_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = cossack_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    has_template = mon_general_mirko_petrovic_njegos
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped mirko_petrovic_njegos_headgear entirely -- its headgear weight depended on
+    # mon_general_mirko_petrovic_njegos, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
 
 ### END OF HISTORICAL CLOTHING ###
@@ -1099,15 +541,10 @@
                     }
                 }
             }
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    OR = {
-                        has_template = agitator_alfred_hugenberg
-                        has_template = agitator_john_stuart_mill
-                    }
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier requiring OR = { has_template =
+            # agitator_alfred_hugenberg, has_template = agitator_john_stuart_mill } --
+            # real-world character_templates entries this mod's epic #3292 restore
+            # never brought back; the montenegrin/serbian modifier above is unaffected.
         }
     }
 
@@ -1591,87 +1028,15 @@
         }
     }
 
-    british_military_soldier_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = gb_01
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 500
+    # wh-overhaul (board #3540): dropped british_military_soldier_headgear entirely -- its headgear weight depended on
+    # heritage_group_european, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                scope:pop ?= {
-                    culture = {
-                        has_discrimination_trait_group = heritage_group_european
-                    }
-                    owner = {
-                        c:GBR ?= this
-                    }
-                    workplace ?= {
-                        OR = {
-                            is_building_type = building_barrack
-                            is_building_type = building_conscription_center
-                            is_building_type = building_army_logistics_center
-                        }
-                    }
-                }
-                OR = {
-                    soldier_clothes_pop_trigger = yes
-                    officers_clothes_pop_trigger = yes
-                }
-
-                c:GBR ?= {
-                    NOT = { has_technology_researched = repeaters }
-                }
-            }
-        }
-    }
-
-    british_military_soldier_mid_late_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = european_military_headgear
-                accessory = male_headgear_european_military_09
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 500
-
-                scope:pop ?= {
-                    culture = {
-                        has_discrimination_trait_group = heritage_group_european
-                    }
-                    owner = {
-                        c:GBR ?= this
-                    }
-                    workplace ?= {
-                        OR = {
-                            is_building_type = building_barrack
-                            is_building_type = building_conscription_center
-                            is_building_type = building_army_logistics_center
-                        }
-                    }
-                }
-                OR = {
-                    soldier_clothes_pop_trigger = yes
-                    officers_clothes_pop_trigger = yes
-                }
-
-                c:GBR ?= {
-                    has_technology_researched = repeaters
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped british_military_soldier_mid_late_headgear entirely -- its headgear weight depended on
+    # heritage_group_european, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     british_military_headgear_late = {
         dna_modifiers = {
@@ -1799,37 +1164,10 @@
         }
     }
 
-    french_military_headgear_early_soldier = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = french_military_headgear
-                accessory = male_headgear_shako_hat_01_french
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 100
-                scope:pop ?= {
-                    culture = {
-                        has_discrimination_trait_group = heritage_group_european
-                    }
-                    owner = {
-                        c:FRA ?= this
-                        NOT = {
-                            has_technology_researched = repeaters
-                        }
-                    }
-                }
-                OR = {
-                    soldier_clothes_pop_trigger = yes
-                    officers_clothes_pop_trigger = yes
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped french_military_headgear_early_soldier entirely -- its headgear weight depended on
+    # heritage_group_european, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     french_military_headgear = {
         dna_modifiers = {
@@ -1862,22 +1200,10 @@
                     }
                 }
             }
-            modifier = {
-                add = 100
-                scope:pop ?= {
-                    culture = {
-                        has_discrimination_trait_group = heritage_group_european
-                    }
-                    owner = {
-                        c:FRA ?= this
-                        has_technology_researched = repeaters
-                    }
-                }
-                OR = {
-                    soldier_clothes_pop_trigger = yes
-                    officers_clothes_pop_trigger = yes
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier requiring has_discrimination_trait_group =
+            # heritage_group_european on culture (bare, required) -- not part of this
+            # mod's Warhammer discrimination traits; the repeaters-tech modifier above
+            # is unaffected.
         }
     }
 
@@ -3683,9 +3009,10 @@
                 }
                 spanish_empire_clothes_trigger = yes
                 OR = {
-                    scope:character ?= {
-                        has_template = SPA_baldomero_espartero
-                    }
+                    # wh-overhaul (board #3540): dropped an OR branch checking has_template = SPA_baldomero_espartero --
+                    # a real-world Spanish-marshal character_templates entry this mod's epic
+                    # #3292 restore never brought back; the other branches still select this
+                    # headgear.
                     military_marshal_clothes_trigger = yes
                     AND = {
                         armed_forces_clothes_trigger = yes
@@ -4382,7 +3709,10 @@
                         AND = {
                             OR = {
                                 has_variable = ethiopian_emperor
-                                has_template = eth_sahle_dengel_solomon
+                                # wh-overhaul (board #3540): dropped an OR branch checking has_template = eth_sahle_dengel_solomon --
+                                # a real-world Ethiopian-emperor character_templates entry this mod's epic
+                                # #3292 restore never brought back; the has_variable branch above is
+                                # unaffected.
                             }
                             owner ?= {
                                 OR = {
@@ -4419,15 +3749,10 @@
                     is_ruler_of_own_country = yes
                 }
             }
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    OR = {
-                        has_template = BIC_lakshmeshwar_singh
-                        has_template = KAS_gulab_singh
-                    }
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier requiring OR = { has_template =
+            # BIC_lakshmeshwar_singh, has_template = KAS_gulab_singh } -- real-world
+            # character_templates entries this mod's epic #3292 restore never brought
+            # back; the ruler-based modifier above is unaffected.
         }
     }
 
@@ -4477,15 +3802,10 @@
                 indian_clothes_pop_trigger = yes
                 upper_clothes_pop_trigger = yes
             }
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    OR = {
-                        has_template = PAN_chand_kaur
-                        has_template = PAN_jind_kaur
-                    }
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier requiring OR = { has_template = PAN_chand_kaur,
+            # has_template = PAN_jind_kaur } -- real-world character_templates entries
+            # this mod's epic #3292 restore never brought back; the pop-based modifier
+            # above is unaffected.
         }
     }
 
@@ -4526,26 +3846,10 @@
         }
         weight = {
             base = 0
-            modifier = {
-                add = 500
-
-                scope:character ?= {
-                    is_adult = yes
-
-                    NOT = { has_role_of_type = agitator }
-
-                    religion = {
-                        has_discrimination_trait = heritage_islamic
-                        NOT = { rel:ibadi = this }
-                    }
-                    culture = {
-                        OR = {
-                            cu:bedouin = this
-                            cu:mashriqi = this
-                        }
-                    }
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier requiring has_discrimination_trait =
+            # heritage_islamic on religion (bare, required) -- not part of this mod's
+            # Warhammer discrimination traits; the pop-based modifier below is
+            # unaffected.
             modifier = {
                 add = 500
 
@@ -4590,60 +3894,16 @@
                     }
                 }
             }
-            modifier = {
-                add = 90000
-                scope:character ?= {
-                    OR = {
-                        has_template = BIC_narayan_lokhande
-                        has_template = PAN_lal_singh
-                        has_template = BIC_udham_singh
-                        has_template = BIC_lala_lajpat_rai
-                    }
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier requiring OR = { has_template =
+            # BIC_narayan_lokhande, PAN_lal_singh, BIC_udham_singh, BIC_lala_lajpat_rai }
+            # -- real-world character_templates entries this mod's epic #3292 restore
+            # never brought back; the culture-based modifier above is unaffected.
         }
     }
-    zanj_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = zanj_headwear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 600
-                scope:character ?= {
-                    culture = {
-                        has_discrimination_trait = heritage_eastern_bantu
-                        has_discrimination_trait_group = language_group_bantu
-                    }
-                    religion = {
-                        has_discrimination_trait = heritage_islamic
-                    }
-                    is_adult = yes
-                }
-            }
-
-            modifier = {
-                add = 600
-
-                scope:pop ?= {
-                    culture = {
-                        has_discrimination_trait = heritage_eastern_bantu
-                        has_discrimination_trait_group = language_group_bantu
-                    }
-                    religion = {
-                        has_discrimination_trait = heritage_islamic
-                    }
-                }
-                upper_clothes_pop_trigger = yes
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped zanj_headgear entirely -- its headgear weight depended on
+    # heritage_eastern_bantu, language_group_bantu, heritage_islamic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
     north_african_headgear = {
         dna_modifiers = {
             accessory = {
@@ -4725,11 +3985,11 @@
                 add = 200
                 AND = {
                     arabic_clothes_trigger = yes
-                    scope:character ?= {
-                        culture = {
-                            NOT = { has_discrimination_trait_group = heritage_group_central_asian }
-                        }
-                    }
+                    # wh-overhaul (board #3540): dropped a scope:character branch checking NOT = {
+                    # has_discrimination_trait_group = heritage_group_central_asian } -- not part
+                    # of this mod's Warhammer discrimination traits (NOT of an always-false
+                    # check was already a permanent no-op); arabic_clothes_trigger and
+                    # arabic_fez_trigger still gate this headgear.
                     arabic_fez_trigger = yes
                 }
             }
@@ -4816,77 +4076,17 @@
             }
         }
     }
-    african_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = african_common_headgear
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 100
-                scope:character ?= {
-                    culture = {
-                        OR = {
-                            has_discrimination_trait = heritage_guinean
-                            has_discrimination_trait = heritage_east_african
-                        }
-                        NOR = {
-                            has_discrimination_trait = heritage_abyssinian
-                            has_discrimination_trait_group = language_group_bantu
-                            THIS = cu:maasai
-                        }
-                    }
-                }
-            }
-            modifier = {
-                add = 100
-                scope:pop ?= {
-                    culture = {
-                        OR = {
-                            has_discrimination_trait = heritage_guinean
-                            has_discrimination_trait = heritage_east_african
-                        }
-                        NOR = {
-                            has_discrimination_trait = heritage_abyssinian
-                            has_discrimination_trait_group = language_group_bantu
-                            THIS = cu:maasai
-                        }
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped african_headgear entirely -- its headgear weight depended on
+    # heritage_guinean, heritage_east_african, heritage_abyssinian, language_group_bantu, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
 #Pops
 
-    arabic_low_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = arabic_low_tier
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 100
-                arabic_clothes_pop_trigger = yes
-                poor_clothes_pop_trigger = yes
-                scope:pop ?= {
-                    religion = {
-                        has_discrimination_trait = heritage_islamic
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped arabic_low_headgear entirely -- its headgear weight depended on
+    # heritage_islamic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     central_asian_headgear = {
         dna_modifiers = {
@@ -4907,29 +4107,10 @@
         }
     }
 
-    mongol_noble_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = mongolian_hats
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 100
-                exists = scope:pop
-                scope:pop = {
-                    is_pop_type = aristocrats
-                    culture = {
-                        has_discrimination_trait_group = language_group_mongolic
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped mongol_noble_headgear entirely -- its headgear weight depended on
+    # language_group_mongolic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     chinese_common_headgear = {
         dna_modifiers = {
@@ -5026,7 +4207,10 @@
                             is_ruler_of_own_country = no
                             is_heir_of_own_country = no # Be dignified!
                         }
-                        has_template = usa_lincoln_character_template
+                        # wh-overhaul (board #3540): dropped an OR branch checking has_template =
+                        # usa_lincoln_character_template -- a real-world character_templates entry
+                        # this mod's epic #3292 restore never brought back; the interest-group
+                        # branch above still selects this headgear.
                     }
                 }
             }
@@ -5214,63 +4398,10 @@
         }
     }
 
-    slavik_kokoshnik_headgear = {
-        dna_modifiers = {
-           accessory = {
-               mode = add
-               gene = headgear
-               template = female_headgear_slavic_kokoshnik
-               range = { 0 1 }
-            }
-        }
-
-        weight = {
-            base = 0
-            modifier = {
-                add = 11000
-                has_cosmetic_dlc = "Dawn of Wonder"
-                OR = {
-                    AND = {
-                        scope:character ?= {
-                            culture = {
-                                has_discrimination_trait = heritage_east_slavic
-                            }
-                            is_female = yes
-                            OR = {
-                                has_variable = getting_married
-                                has_modifier = marriage_popularity
-                            }
-                        }
-                    }
-                    AND = {
-                        upper_clothes_pop_trigger = yes
-                        scope:pop ?= { # Wear this clothing either during Midsummer or during a Royal Wedding
-                            culture = {
-                                has_discrimination_trait = heritage_east_slavic
-                            }
-                            OR = {
-                                scope:pop ?= {
-                                    month = 5 # June. The trigger for months is on a 0-11 scale.
-                                }
-                                owner = {
-                                    OR = {
-                                        has_modifier = royal_marriage
-                                        any_scope_character = {
-                                            OR = {
-                                                is_ruler_of_own_country = yes
-                                                is_heir_of_own_country = yes
-                                            }
-                                            has_modifier = marriage_popularity
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped slavik_kokoshnik_headgear entirely -- its headgear weight depended on
+    # heritage_east_slavic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     midsummer_headgear = {
         dna_modifiers = {
@@ -5445,56 +4576,10 @@
         }
     }
 
-    persian_landowners_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = arabic_landowners_hat
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 5000
-
-                has_dlc_feature = ep1_cosmetics
-
-                OR = {
-                    scope:pop ?= {
-                        is_pop_type = aristocrats
-                        culture = {
-                            has_discrimination_trait_group = language_group_iranic
-                        }
-                    }
-                    scope:character ?= {
-                        is_interest_group_type = ig_landowners
-                        age > 12
-                        has_role_of_type = politician
-                        NAND = {    # monarchs never wear this hat
-                            is_ruler_of_own_country = yes
-                            owner ?={
-                                has_law_or_variant = law_type:law_monarchy
-                            }
-                        }
-                        culture = {
-                            has_discrimination_trait_group = language_group_iranic
-                        }
-                    }
-                }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 80008
-                scope:character ?= {
-                    has_template = BIC_maulana_azad
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped persian_landowners_headgear entirely -- its headgear weight depended on
+    # language_group_iranic, BIC_maulana_azad, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     persian_monarch_headgear = {
         dna_modifiers = {
@@ -5572,170 +4657,20 @@
         }
     }
 
-    persian_agitator_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = male_headgear_arabic_sattar_khan
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 10000
+    # wh-overhaul (board #3540): dropped persian_agitator_headgear entirely -- its headgear weight depended on
+    # language_group_iranic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                has_dlc_feature = ep1_cosmetics
+    # wh-overhaul (board #3540): dropped dost_mohammad_khan_headgear entirely -- its headgear weight depended on
+    # language_group_iranic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
-                scope:character ?= {
-                    has_role_of_type = agitator
-                    is_ruler_of_own_country = no
-                    culture = {
-                        has_discrimination_trait_group = language_group_iranic
-                    }
-                }
-            }
-        }
-    }
-
-    dost_mohammad_khan_headgear = {
-        dna_modifiers = {
-            accessory = {
-                mode = add
-                gene = headgear
-                template = arabic_turban_mohammad_khan
-                range = { 0 1 } # For the randomness to work correctly
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 10000
-
-                has_dlc_feature = ep1_cosmetics
-
-                scope:character ?= {
-                    is_ruler_of_own_country = yes
-                    owner ?= {
-                        has_law_or_variant = law_type:law_monarchy
-                        OR = {
-                            c:AFG ?= this
-                            can_form_nation = AFG
-                        }
-                    }
-                    culture = {
-                        has_discrimination_trait_group = language_group_iranic
-                    }
-                }
-            }
-        }
-    }
-
-    chokha_cherkeska_cossack_clothes = {
-        dna_modifiers = {
-             accessory = {
-                mode = add
-                gene = headgear
-                template = cossack_headgear
-                range = { 0 1 }
-            }
-        }
-        weight = {
-            base = 0
-            modifier = {
-                add = 10000
-                scope:character ?= {
-                    age > 12
-                    culture = {
-                        OR = {
-                            has_discrimination_trait = heritage_caucasian
-                            has_discrimination_trait = heritage_north_caucasian
-                        }
-                    }
-                }
-                OR = {
-                    scope:character ?= {
-                        is_ruler_of_own_country = yes
-                        owner ?= {
-                            has_law_or_variant = law_type:law_monarchy
-                        }
-                    }
-                    military_clothes_trigger = yes
-                    AND = {
-                        armed_forces_clothes_trigger = yes
-                        politician_clothes_trigger = yes
-                    }
-                }
-            }
-            modifier = {
-                add = 20000
-                scope:pop ?= {
-                    OR = {
-                        AND = {
-                            culture = {
-                                OR = {
-                                    has_discrimination_trait = heritage_caucasian
-                                    has_discrimination_trait = heritage_north_caucasian
-                                }
-                            }
-                            OR = {
-                                is_pop_type = soldiers
-                                is_pop_type = officers
-                                is_pop_type = farmers
-                            }
-                        }
-                        AND = {
-                            culture = {
-                                has_discrimination_trait = heritage_east_slavic
-                            }
-                            state = {
-                                OR = {
-                                    state_region = s:STATE_KUBAN
-                                    state_region = s:STATE_STAVROPOL
-                                    state_region = s:STATE_DAGESTAN
-                                    state_region = s:STATE_NORTH_CAUCASUS
-                                    state_region = s:STATE_ROSTOV
-                                    state_region = s:STATE_KALMYKIA
-                                    state_region = s:STATE_ASTRAKHAN
-                                }
-                            }
-                            OR = {
-                                is_pop_type = soldiers
-                                is_pop_type = officers
-                                is_pop_type = farmers
-                            }
-                        }
-                    }
-                }
-            }
-            modifier = {
-                add = 20000
-                scope:character ?= {
-                    age > 12
-                    culture = {
-                        has_discrimination_trait = heritage_east_slavic
-                    }
-                    owner ?= {
-                        c:RUS ?= this
-                    }
-                    is_ruler_of_own_country = no
-                    is_heir_of_own_country = no
-                    OR = {
-                        has_trait = bandit
-                        has_trait = social_bandit
-                        AND = {
-                            has_role_of_type = general
-                            OR = {
-                                has_trait = celebrity_commander
-                                has_trait = pillager
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    # wh-overhaul (board #3540): dropped chokha_cherkeska_cossack_clothes entirely -- its headgear weight depended on
+    # heritage_caucasian, heritage_north_caucasian, heritage_east_slavic, real-world character_templates/discrimination-trait id(s)
+    # this mod's epic #3292/#3405 restores never brought back, so the
+    # entry's weight was permanently 0.
 
     academic_headgear = {
         dna_modifiers = {
@@ -5880,44 +4815,13 @@
                     is_ruler_of_own_country = yes
                 }
             }
-            modifier = { # this actually works pretty well as a taqiya skullcap lmao
-                add = 2000
-
-                scope:character ?= {
-                    religion = {
-                        has_discrimination_trait = heritage_islamic
-                    }
-                    culture = {
-                        OR = {
-                            cu:mashriqi = this
-                            cu:somali = this
-                        }
-                    }
-                    is_ruler_of_own_country = no
-                    NOT = { has_role_of_type = agitator }
-                    has_role_of_type = politician
-                    OR = {
-                        is_interest_group_type = ig_devout
-                        has_trait = pious
-                    }
-                }
-            }
-            modifier = { # this actually works pretty well as a taqiya skullcap lmao
-                add = 2000
-
-                scope:pop ?= {
-                    is_pop_type = clergymen
-                    religion = {
-                        has_discrimination_trait = heritage_islamic
-                    }
-                    culture = {
-                        OR = {
-                            cu:mashriqi = this
-                            cu:somali = this
-                        }
-                    }
-                }
-            }
+            # wh-overhaul (board #3540): dropped a weight modifier requiring has_discrimination_trait =
+            # heritage_islamic on religion (bare, required) -- not part of this mod's
+            # Warhammer discrimination traits; the Papal-ruler modifier above is
+            # unaffected.
+            # wh-overhaul (board #3540): dropped a weight modifier requiring has_discrimination_trait =
+            # heritage_islamic on religion (bare, required) -- not part of this mod's
+            # Warhammer discrimination traits.
         }
     }
 
@@ -5941,7 +4845,10 @@
 
                 scope:character ?= {
                     religion = rel:catholic
-                    NOT = { has_template = FRA_francois-rene_de_chateaubriand }
+                    # wh-overhaul (board #3540): dropped a NOT = { has_template = FRA_francois-rene_de_chateaubriand }
+                    # exclusion -- a real-world character_templates entry this mod's epic #3292
+                    # restore never brought back; NOT of an always-false check was already a
+                    # permanent no-op.
                     OR = {
                         AND = {
                             politician_clothes_trigger = yes
@@ -5998,7 +4905,10 @@
                 military_clothes_trigger = no
                 scope:character ?= {
                     religion = rel:catholic
-                    NOT = { has_template = FRA_francois-rene_de_chateaubriand }
+                    # wh-overhaul (board #3540): dropped a NOT = { has_template = FRA_francois-rene_de_chateaubriand }
+                    # exclusion -- a real-world character_templates entry this mod's epic #3292
+                    # restore never brought back; NOT of an always-false check was already a
+                    # permanent no-op.
                     NAND = {
                         c:PAP.ruler ?= this # Cannot be the Pope
                     }
@@ -6042,7 +4952,10 @@
                 scope:character ?= {
                     month = 11
                     religion = rel:catholic
-                    NOT = { has_template = FRA_francois-rene_de_chateaubriand }
+                    # wh-overhaul (board #3540): dropped a NOT = { has_template = FRA_francois-rene_de_chateaubriand }
+                    # exclusion -- a real-world character_templates entry this mod's epic #3292
+                    # restore never brought back; NOT of an always-false check was already a
+                    # permanent no-op.
                     OR = {
                         AND = {
                             politician_clothes_trigger = yes
@@ -6191,20 +5104,11 @@
                 }
             }
         }
-        weight = {
-            base = 0
-            modifier = {
-                add = 90000
-                has_dlc_feature = ip2_cosmetics
-                scope:character ?= {
-                    OR = {
-                        has_template = BIC_bal_gangadhar_tilak
-                        has_template = BIC_gopal_gokhale
-                        has_template = BIC_damodar_hari_chapekar
-                    }
-                }
-            }
-        }
+        # wh-overhaul (board #3540): dropped the entry's final weight block -- its sole modifier required
+        # OR = { has_template = BIC_bal_gangadhar_tilak, BIC_gopal_gokhale,
+        # BIC_damodar_hari_chapekar }, all real-world character_templates entries
+        # this mod's epic #3292 restore never brought back; the other weight
+        # blocks above are unaffected.
     }
 
     european_executive_headgear = {

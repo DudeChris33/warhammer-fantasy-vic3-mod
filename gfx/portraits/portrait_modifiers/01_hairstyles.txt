@@ -1,0 +1,317 @@
+﻿# wh-overhaul (#3540): same-path override of vanilla's 01_hairstyles.txt to strip
+# dangling refs confirmed by in-game error.log — real-world content this mod
+# deliberately never authored (epic #3292's common/character_templates restore and the
+# Warhammer heritage/language discrimination-trait system that replaced vanilla's
+# real-world common/discrimination_traits). Four whole variant entries were dropped
+# rather than left as permanently-zero-weight stubs, since each one's only modifier was
+# entirely gated on the dangling id(s):
+#   - buddhist_monk_non_hair: both OR branches AND'd
+#     `has_discrimination_trait = heritage_dharmic`.
+#   - lakshimbai_hairstyle: gated on `has_template = jhn_rani_of_jhansi`
+#     (Rani Lakshmibai of Jhansi) — a portrait built for one specific character.
+#   - frankensteins_monster: gated on `has_template = adam_1` / `adam_2`.
+#   - korean_queen_hairstyle: gated on `has_discrimination_trait = heritage_korean`.
+hairstyles = {
+	usage = game
+	selection_behavior = weighted_random
+	fallback = no_hair
+
+    no_hair = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = hairstyles
+                template = no_hairstyles
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+        }
+    }
+
+    #european_hair_styles = {
+    #    dna_modifiers = {
+    #        accessory = {
+    #            mode = add
+    #            gene = hairstyles
+    #            template = european_hairstyles
+    #            range = { 0 1 } # For the randomness to work correctly
+    #       }
+    #     }
+    #
+    #   weight = {
+    #       base = 0
+    #       modifier = {
+    #            add = 100
+    #            AND = {
+    #                exists = scope:character
+    #                    scope:character = {
+    #                         european_clothes_trigger = yes
+    #                    }
+    #            }
+    #
+    #
+    #      }
+    #   }
+    #}
+
+    chinese_manchu_queue_hairstyle = {
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = hairstyles
+                template = chinese_hairstyles # note that chinese_hairstyles only inlcude Manchu hairstyles atm.
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+                OR = {
+                    chinese_manchu_queue_hairstyle_pops_trigger = yes
+                    chinese_manchu_queue_hairstyle_character_trigger = yes
+                }
+            }
+        }
+    }
+
+#    chinese_hair_styles = {
+#        dna_modifiers = {
+#            accessory = {
+#                mode = add
+#                gene = hairstyles
+#                template = chinese_hairstyles
+#                range = { 0 1 } # For the randomness to work correctly
+#            }
+#        }
+#        weight = {
+#            base = 0
+#            modifier = {
+#                add = 100
+#                OR = {
+#                    chinese_court_clothes_trigger = yes
+#                    chinese_imperial_clothes_trigger = yes
+#                }
+#            }
+#        }
+#    }
+
+    japanese_hair_styles = {
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = hairstyles
+                template = japanese_hairstyles
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 1000
+                AND = {
+                    exists = scope:pop
+                    scope:pop = {
+                        culture = cu:japanese
+                        japanese_restoration_trigger = no
+                    }
+                    poor_clothes_pop_trigger = no
+                }
+            }
+        }
+    }
+
+    japanese_characters_hair_styles = {
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = hairstyles
+                template = japanese_hairstyles
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 1000
+                scope:character ?= {
+                    culture = cu:japanese
+                    OR = {
+                        japanese_restoration_trigger = no
+                        has_ideology = ideology:ideology_traditionalist
+                    }
+                    OR = {
+                        has_role_of_type = general
+                        AND = {
+                            has_role_of_type = politician
+                            is_ruler_of_own_country = no
+                            OR = {
+                                is_interest_group_type = ig_armed_forces
+                                is_interest_group_type = ig_landowners
+                            }
+                        }
+                        has_ideology = ideology:ideology_traditionalist
+                    }
+                }
+                agitator_character_trigger = no
+            }
+        }
+    }
+
+    american_military_hair = {
+        # this hairstyle exists to avoid clipping issues with certain hairstyles when combined with US military headgear
+        # when updating triggers on this, please update american_military_hairstyles in game\gfx\portraits\portrait_modifiers\01_headgear.txt as well so that triggers continue to match up
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = hairstyles
+                template = american_military_hairstyles
+                range = { 0 1 }
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+                OR = {
+                    AND = {
+                        OR = {
+                            american_clothes_trigger = yes
+                            AND = {
+                                exists = c:CSA
+                                OR = {
+                                    AND = {
+                                        exists = scope:character
+                                        scope:character = {
+											exists = home_country
+											home_country = c:CSA
+                                            is_female = no
+										}
+                                    }
+                                    AND = {
+                                        exists = scope:pop
+                                        scope:pop = { home_country = c:CSA }
+                                    }
+                                }
+                            }
+                            AND = {
+                                exists = c:BRZ
+                                OR = {
+                                    AND = {
+                                        exists = scope:character
+                                        scope:character = {
+                                            exists = home_country
+                                            home_country = c:BRZ
+                                            is_female = no
+                                        }
+                                    }
+                                    AND = {
+                                        exists = scope:pop
+                                        scope:pop = { home_country = c:BRZ }
+                                    }
+                                }
+
+                            }
+                        }
+                        OR = {
+                            AND = {
+                                exists = scope:character
+                                scope:character = {
+                                    has_role_of_type = general
+                                    is_female = no
+                                }
+                            }
+                            AND = {
+                                politician_clothes_trigger = yes
+                                armed_forces_clothes_trigger = yes
+                            }
+                            AND = {
+                                scope:pop ?= {
+                                    is_pop_type = soldiers
+                                    is_pop_type = officers
+                                }
+                            }
+                        }
+                    }
+                    AND = {
+                        native_north_american_clothes_trigger = yes
+                        ruler_clothes_trigger = yes
+                        scope:character = {
+                            is_ruler_of_own_country = yes
+                            is_female = no
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    european_peasant_hair = {
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = hairstyles
+                template = european_peasant_hair
+                range = { 0 1 }
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+                european_clothes_pop_trigger = yes
+                poor_clothes_pop_trigger = yes
+            }
+        }
+    }
+
+    # wh-overhaul (#3540): dropped vanilla's `buddhist_monk_non_hair` entry — its only
+    # modifier's OR had `has_discrimination_trait = heritage_dharmic` AND'd into both
+    # branches (pop-scope and character-scope), a real-world discrimination trait this
+    # mod's Warhammer heritage/language system replaced (see
+    # common/discrimination_traits/). With that condition required in every branch, the
+    # bonus could never apply, so the whole variant entry was dropped rather than left
+    # as a permanently-zero-weight stub.
+
+    indian_peasant_hairstyle = {
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = hairstyles
+                template = indian_low_hairstyles
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+                indian_clothes_pop_trigger = yes
+                upper_clothes_pop_trigger = no
+            }
+        }
+    }
+
+    # wh-overhaul (#3540): dropped vanilla's `lakshimbai_hairstyle` entry — its only
+    # modifier gated on `has_template = jhn_rani_of_jhansi` (Rani Lakshmibai of Jhansi),
+    # a real-world historical character template this mod's common/character_templates
+    # never authored. The entry's hairstyle existed solely to render that one
+    # character, so the whole variant entry was dropped rather than left as a
+    # permanently-zero-weight stub.
+
+    # wh-overhaul (#3540): dropped vanilla's `frankensteins_monster` entry — its only
+    # modifier gated on `has_template = adam_1` / `has_template = adam_2`, real-world
+    # historical character templates this mod's common/character_templates never
+    # authored. The entry's hairstyle existed solely to render those two characters, so
+    # the whole variant entry was dropped rather than left as a permanently-zero-weight
+    # stub.
+
+    # wh-overhaul (#3540): dropped vanilla's `korean_queen_hairstyle` entry — its only
+    # modifier gated on `has_discrimination_trait = heritage_korean` (culture-scope), a
+    # real-world discrimination trait this mod's Warhammer heritage/language system
+    # replaced (see common/discrimination_traits/). With that condition required, the
+    # bonus could never apply, so the whole variant entry was dropped rather than left
+    # as a permanently-zero-weight stub.
+}

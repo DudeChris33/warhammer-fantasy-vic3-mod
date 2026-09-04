@@ -1,0 +1,195 @@
+﻿# wh-overhaul (#3540): same-path override of vanilla's 01_beards.txt to strip dangling
+# refs confirmed by in-game error.log — real-world content this mod deliberately never
+# authored (epic #3292's common/character_templates restore and the Warhammer
+# heritage/language discrimination-trait system that replaced vanilla's real-world
+# common/discrimination_traits). See the inline comments below for each specific drop:
+#   - arabic_beards: trimmed 6 dangling `has_template = oma_*`/`zan_*` alternatives
+#     (real-world Omani/Zanzibari sultan character templates) and dropped a modifier
+#     block AND'd on `has_discrimination_trait = heritage_islamic`.
+#   - full_facial_hair: whole entry dropped — its only modifier required
+#     `has_discrimination_trait = heritage_jewish` in both OR branches.
+#   - old_man_pedro: whole entry dropped — its only modifier required
+#     `has_template = BRZ_emperor_pedro_02` (a real-world Brazilian emperor template).
+beards = {
+    	usage = game
+    	selection_behavior = weighted_random
+    	fallback = no_beard
+
+    no_beard = {
+         dna_modifiers = {
+             accessory = {
+                 mode = add
+                 gene = beards
+                 template = no_beard
+                 range = { 0 1 } # For the randomness to work correctly
+             }
+         }
+
+         weight = {
+             base = 0
+         }
+    }
+
+    asian_beards = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = beards
+                template = asian_beards
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+                exists = scope:character
+                scope:character = {
+                    age > 16
+                    is_historical = no
+                }
+                OR = {
+                    chinese_court_clothes_trigger = yes
+                    chinese_imperial_clothes_trigger = yes
+                    east_asian_clothes_pop_trigger = yes
+                }
+            }
+        }
+    }
+
+    african_beards = {
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = beards
+                template = african_beards
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+                exists = scope:character
+                scope:character = {
+                    age > 16
+                    is_historical = no
+                }
+                OR = {
+                    african_clothes_trigger = yes
+                    african_diaspora_pop_clothes_trigger = yes
+                }
+            }
+        }
+    }
+
+    arabic_beards = {
+        dna_modifiers = {
+            accessory = {
+                mode = replace
+                gene = beards
+                template = arabic_beards
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+                OR = {
+                    arabic_clothes_trigger = yes
+                    arabic_clothes_pop_trigger = yes
+                }
+                scope:character ?= {
+                    age > 16
+                    # wh-overhaul (#3540): dropped 6 `has_template = oma_*` / `zan_*`
+                    # alternatives here (real-world Omani and Zanzibari sultan character
+                    # templates) — dangling refs, this mod's common/character_templates
+                    # never authored them. `is_historical = no` is the sole surviving
+                    # OR alternative below.
+                    OR = {
+                        is_historical = no
+                    }
+                }
+            }
+
+            modifier = {
+                add = 100
+
+                scope:character ?= {
+                    age > 16
+                    # no scripted DNA for any historical Swahili characters so there's no scripted portraits for this conflict with, yet
+                    culture = cu:swahili
+                }
+            }
+
+            # wh-overhaul (#3540): dropped a modifier block that AND'd
+            # `has_discrimination_trait = heritage_islamic` (a real-world discrimination
+            # trait this mod's Warhammer heritage/language system replaced — see
+            # common/discrimination_traits/) onto a swahili-clergy arabic-beard bonus;
+            # that condition was required, so the whole bonus never applied.
+        }
+    }
+
+    persian_mustaches = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = mustaches
+                template = european_mustaches
+                range = { 0.33 1 }
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                add = 100
+
+                scope:pop ?= {
+                    culture = cu:persian
+                }
+            }
+        }
+    }
+
+    european_beards = {
+        dna_modifiers = {
+            accessory = {
+                mode = add
+                gene = beards
+                template = african_beards
+                range = { 0 1 } # For the randomness to work correctly
+            }
+        }
+        weight = {
+            base = 0
+            modifier = {
+                exists = scope:character
+                scope:character = {
+                    age > 16
+                    is_historical = no
+                }
+                add = 100
+                OR = {
+                    arabic_clothes_trigger = yes
+                    arabic_clothes_pop_trigger = yes
+                }
+            }
+        }
+    }
+
+    # wh-overhaul (#3540): dropped vanilla's `full_facial_hair` entry — its only
+    # modifier gated on `has_discrimination_trait = heritage_jewish` in both branches
+    # of an OR (character-scope and pop-scope), a real-world discrimination trait this
+    # mod's Warhammer heritage/language system replaced (see
+    # common/discrimination_traits/). With that condition required in every branch, the
+    # bonus could never apply — a hollow shell if kept, so the whole variant entry was
+    # dropped rather than left as a permanently-zero-weight stub.
+
+    # wh-overhaul (#3540): dropped vanilla's `old_man_pedro` entry — its only modifier
+    # gated on `has_template = BRZ_emperor_pedro_02` (Pedro II of Brazil, a real-world
+    # historical character template this mod's common/character_templates never
+    # authored). The entry's beard/mustache combination existed solely to render that
+    # one character, so the whole variant entry was dropped rather than left as a
+    # permanently-zero-weight stub.
+}
