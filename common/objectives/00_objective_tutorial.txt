@@ -2,6 +2,9 @@
 	enabled_background = "gfx/interface/icons/objectives/learn.dds"
 	icon = "gfx/interface/icons/event_icons/tutorial_icon.dds"
 
+	# TBD: not final, revisit once more of the Old World is authored
+	recommended_tags = { REI COU KSV MIR }
+
 	recommended_game_rules = { lenient_ai_behavior low_ai_aggression loyalties_grace_period_long }
 
 	objective_subgoals = {

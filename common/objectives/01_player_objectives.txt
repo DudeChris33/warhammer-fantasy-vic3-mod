@@ -2,6 +2,8 @@
 	enabled_background = "gfx/interface/icons/objectives/economic_dominance_illu.dds"
 	icon = "gfx/interface/icons/objectives/economic_dominance.dds"
 
+	recommended_tags = { ERE WAS BOR BVR }
+
 	objective_subgoals = {
 		sg_expand_goods_production
 
@@ -29,6 +31,8 @@ objective_hegemon = {
 	enabled_background = "gfx/interface/icons/objectives/hegemon_illu.dds"
 	icon = "gfx/interface/icons/objectives/hegemon.dds"
 
+	recommended_tags = { REI VSY ICL KHM MZN }
+
 	objective_subgoals = {
 		sg_colonization_laws
 		sg_new_world_colonies
@@ -53,6 +57,8 @@ objective_hegemon = {
 objective_egalitarian_society = {
 	enabled_background = "gfx/interface/icons/objectives/egalitarian_society_illu.dds"
 	icon = "gfx/interface/icons/objectives/egalitarian_society.dds"
+
+	recommended_tags = { KSV COU }
 
 	objective_subgoals = {
 		sg_encourage_liberal_ideas
