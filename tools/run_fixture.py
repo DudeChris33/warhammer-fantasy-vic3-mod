@@ -1122,12 +1122,17 @@ def _selfcheck_sea_naming() -> None:
     named, impassable, merged = sn.apply_naming_overrides(named, sea, cfg_named)
     assert not impassable and not merged, (impassable, merged)
     rekeyed = sn.rekey_by_display_name(named, sea, merged)
-    assert rekeyed[1].key == "STATE_SHARD_COAST_01", rekeyed
+    # A name no other zone shares gets a bare key, no ordinal — there is only
+    # one Shard Coast.
+    assert rekeyed[1].key == "STATE_SHARD_COAST", rekeyed
     # A zone that kept its group's generic name is rekeyed from that name too, so
-    # the key still matches what the player sees for it (STATE_WEST_02 -> the
-    # zone's own display name "West Sea", not left as "WEST").
-    assert rekeyed[2].display_name == "West Sea" and rekeyed[2].key == "STATE_WEST_SEA_01", \
+    # the key still matches what the player sees for it (zone 2's key becomes its
+    # own display name "West Sea", not left as "WEST") — and it too is unique
+    # within this fixture (zone 1 no longer shares "West Sea"), so no ordinal.
+    assert rekeyed[2].display_name == "West Sea" and rekeyed[2].key == "STATE_WEST_SEA", \
         rekeyed
+    # Zones 3 and 4 both carry the East canon sea's shared generic name, so they
+    # DO collide and keep the disambiguating ordinal.
     assert rekeyed[3].key == "STATE_EAST_SEA_01" and rekeyed[4].key == "STATE_EAST_SEA_02", \
         rekeyed
 

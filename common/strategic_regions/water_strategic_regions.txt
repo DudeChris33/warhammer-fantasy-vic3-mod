@@ -1,41 +1,41 @@
-﻿region_abasko_coast_01 = {
-	states = { STATE_ABASKO_COAST_01 }
+﻿region_abasko_coast = {
+	states = { STATE_ABASKO_COAST }
 }
 
-region_araby_coast_placeholder_01 = {
-	states = { STATE_ARABY_COAST_PLACEHOLDER_01 }
+region_araby_coast_placeholder = {
+	states = { STATE_ARABY_COAST_PLACEHOLDER }
 }
 
-region_ashen_coast_01 = {
-	states = { STATE_ASHEN_COAST_01 }
+region_ashen_coast = {
+	states = { STATE_ASHEN_COAST }
 }
 
-region_ash_river_01 = {
-	states = { STATE_ASH_RIVER_01 }
+region_ash_river = {
+	states = { STATE_ASH_RIVER }
 }
 
-region_aver_river_01 = {
-	states = { STATE_AVER_RIVER_01 }
+region_aver_river = {
+	states = { STATE_AVER_RIVER }
 }
 
-region_bay_of_quietude_01 = {
-	states = { STATE_BAY_OF_QUIETUDE_01 }
+region_bay_of_quietude = {
+	states = { STATE_BAY_OF_QUIETUDE }
 }
 
-region_bay_of_uzkulak_01 = {
-	states = { STATE_BAY_OF_UZKULAK_01 }
+region_bay_of_uzkulak = {
+	states = { STATE_BAY_OF_UZKULAK }
 }
 
-region_beast_isle_pass_placeholder_01 = {
-	states = { STATE_BEAST_ISLE_PASS_PLACEHOLDER_01 }
+region_beast_isle_pass_placeholder = {
+	states = { STATE_BEAST_ISLE_PASS_PLACEHOLDER }
 }
 
-region_black_gulf_01 = {
-	states = { STATE_BLACK_GULF_01 }
+region_black_gulf = {
+	states = { STATE_BLACK_GULF }
 }
 
-region_bleak_coast_01 = {
-	states = { STATE_BLEAK_COAST_01 }
+region_bleak_coast = {
+	states = { STATE_BLEAK_COAST }
 }
 
 region_central_far_ocean_passage_01 = {
@@ -54,8 +54,8 @@ region_central_far_ocean_passage_04 = {
 	states = { STATE_CENTRAL_FAR_OCEAN_PASSAGE_04 }
 }
 
-region_central_great_ocean_01 = {
-	states = { STATE_CENTRAL_GREAT_OCEAN_01 }
+region_central_great_ocean = {
+	states = { STATE_CENTRAL_GREAT_OCEAN }
 }
 
 region_central_great_ocean_passage_01 = {
@@ -70,40 +70,40 @@ region_central_great_ocean_passage_03 = {
 	states = { STATE_CENTRAL_GREAT_OCEAN_PASSAGE_03 }
 }
 
-region_charnel_deeps_01 = {
-	states = { STATE_CHARNEL_DEEPS_01 }
+region_charnel_deeps = {
+	states = { STATE_CHARNEL_DEEPS }
 }
 
-region_churning_gulf_01 = {
-	states = { STATE_CHURNING_GULF_01 }
+region_churning_gulf = {
+	states = { STATE_CHURNING_GULF }
 }
 
-region_clawed_coast_01 = {
-	states = { STATE_CLAWED_COAST_01 }
+region_clawed_coast = {
+	states = { STATE_CLAWED_COAST }
 }
 
-region_coast_of_albion_01 = {
-	states = { STATE_COAST_OF_ALBION_01 }
+region_coast_of_albion = {
+	states = { STATE_COAST_OF_ALBION }
 }
 
-region_coast_of_caledor_01 = {
-	states = { STATE_COAST_OF_CALEDOR_01 }
+region_coast_of_caledor = {
+	states = { STATE_COAST_OF_CALEDOR }
 }
 
-region_coast_of_estalia_01 = {
-	states = { STATE_COAST_OF_ESTALIA_01 }
+region_coast_of_estalia = {
+	states = { STATE_COAST_OF_ESTALIA }
 }
 
-region_coast_of_lyonesse_01 = {
-	states = { STATE_COAST_OF_LYONESSE_01 }
+region_coast_of_lyonesse = {
+	states = { STATE_COAST_OF_LYONESSE }
 }
 
-region_coast_of_nagarythe_01 = {
-	states = { STATE_COAST_OF_NAGARYTHE_01 }
+region_coast_of_nagarythe = {
+	states = { STATE_COAST_OF_NAGARYTHE }
 }
 
-region_cold_water_lakes_01 = {
-	states = { STATE_COLD_WATER_LAKES_01 }
+region_cold_water_lakes = {
+	states = { STATE_COLD_WATER_LAKES }
 }
 
 region_corsair_channel_01 = {
@@ -114,52 +114,52 @@ region_corsair_channel_02 = {
 	states = { STATE_CORSAIR_CHANNEL_02 }
 }
 
-region_devourer_islands_01 = {
-	states = { STATE_DEVOURER_ISLANDS_01 }
+region_devourer_islands = {
+	states = { STATE_DEVOURER_ISLANDS }
 }
 
-region_devourer_lumbria_channel_placeholder_01 = {
-	states = { STATE_DEVOURER_LUMBRIA_CHANNEL_PLACEHOLDER_01 }
+region_devourer_lumbria_channel_placeholder = {
+	states = { STATE_DEVOURER_LUMBRIA_CHANNEL_PLACEHOLDER }
 }
 
-region_devourer_nippon_channel_placeholder_01 = {
-	states = { STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER_01 }
+region_devourer_nippon_channel_placeholder = {
+	states = { STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER }
 }
 
-region_dragon_isles_bypass_01 = {
-	states = { STATE_DRAGON_ISLES_BYPASS_01 }
+region_dragon_isles_bypass = {
+	states = { STATE_DRAGON_ISLES_BYPASS }
 }
 
-region_drakefjord_bay_01 = {
-	states = { STATE_DRAKEFJORD_BAY_01 }
+region_drakefjord_bay = {
+	states = { STATE_DRAKEFJORD_BAY }
 }
 
-region_eastern_albion_channel_01 = {
-	states = { STATE_EASTERN_ALBION_CHANNEL_01 }
+region_eastern_albion_channel = {
+	states = { STATE_EASTERN_ALBION_CHANNEL }
 }
 
-region_eastern_bitter_sea_01 = {
-	states = { STATE_EASTERN_BITTER_SEA_01 }
+region_eastern_bitter_sea = {
+	states = { STATE_EASTERN_BITTER_SEA }
 }
 
-region_eastern_gates_of_calith_01 = {
-	states = { STATE_EASTERN_GATES_OF_CALITH_01 }
+region_eastern_gates_of_calith = {
+	states = { STATE_EASTERN_GATES_OF_CALITH }
 }
 
-region_eastern_sea_of_oblivion_01 = {
-	states = { STATE_EASTERN_SEA_OF_OBLIVION_01 }
+region_eastern_sea_of_oblivion = {
+	states = { STATE_EASTERN_SEA_OF_OBLIVION }
 }
 
-region_eastern_sea_of_weird_waves_01 = {
-	states = { STATE_EASTERN_SEA_OF_WEIRD_WAVES_01 }
+region_eastern_sea_of_weird_waves = {
+	states = { STATE_EASTERN_SEA_OF_WEIRD_WAVES }
 }
 
-region_estalian_passage_placeholder_01 = {
-	states = { STATE_ESTALIAN_PASSAGE_PLACEHOLDER_01 }
+region_estalian_passage_placeholder = {
+	states = { STATE_ESTALIAN_PASSAGE_PLACEHOLDER }
 }
 
-region_far_iron_coast_placeholder_01 = {
-	states = { STATE_FAR_IRON_COAST_PLACEHOLDER_01 }
+region_far_iron_coast_placeholder = {
+	states = { STATE_FAR_IRON_COAST_PLACEHOLDER }
 }
 
 region_far_ocean_01 = {
@@ -194,12 +194,12 @@ region_far_ocean_08 = {
 	states = { STATE_FAR_OCEAN_08 }
 }
 
-region_far_sulpheret_coast_01 = {
-	states = { STATE_FAR_SULPHERET_COAST_01 }
+region_far_sulpheret_coast = {
+	states = { STATE_FAR_SULPHERET_COAST }
 }
 
-region_forbidding_coast_01 = {
-	states = { STATE_FORBIDDING_COAST_01 }
+region_forbidding_coast = {
+	states = { STATE_FORBIDDING_COAST }
 }
 
 region_frozen_sea_01 = {
@@ -218,12 +218,12 @@ region_frozen_sea_04 = {
 	states = { STATE_FROZEN_SEA_04 }
 }
 
-region_gloomwrack_strait_01 = {
-	states = { STATE_GLOOMWRACK_STRAIT_01 }
+region_gloomwrack_strait = {
+	states = { STATE_GLOOMWRACK_STRAIT }
 }
 
-region_great_mortis_river_01 = {
-	states = { STATE_GREAT_MORTIS_RIVER_01 }
+region_great_mortis_river = {
+	states = { STATE_GREAT_MORTIS_RIVER }
 }
 
 region_great_ocean_01 = {
@@ -266,56 +266,56 @@ region_great_ocean_10 = {
 	states = { STATE_GREAT_OCEAN_10 }
 }
 
-region_guano_rocks_bypass_01 = {
-	states = { STATE_GUANO_ROCKS_BYPASS_01 }
+region_guano_rocks_bypass = {
+	states = { STATE_GUANO_ROCKS_BYPASS }
 }
 
-region_gulf_of_bidouze_01 = {
-	states = { STATE_GULF_OF_BIDOUZE_01 }
+region_gulf_of_bidouze = {
+	states = { STATE_GULF_OF_BIDOUZE }
 }
 
-region_gulf_of_kislev_01 = {
-	states = { STATE_GULF_OF_KISLEV_01 }
+region_gulf_of_kislev = {
+	states = { STATE_GULF_OF_KISLEV }
 }
 
-region_gulf_of_lustria_01 = {
-	states = { STATE_GULF_OF_LUSTRIA_01 }
+region_gulf_of_lustria = {
+	states = { STATE_GULF_OF_LUSTRIA }
 }
 
-region_gulf_of_medes_01 = {
-	states = { STATE_GULF_OF_MEDES_01 }
+region_gulf_of_medes = {
+	states = { STATE_GULF_OF_MEDES }
 }
 
-region_gulf_of_naggarond_01 = {
-	states = { STATE_GULF_OF_NAGGAROND_01 }
+region_gulf_of_naggarond = {
+	states = { STATE_GULF_OF_NAGGAROND }
 }
 
-region_gulf_of_pearls_01 = {
-	states = { STATE_GULF_OF_PEARLS_01 }
+region_gulf_of_pearls = {
+	states = { STATE_GULF_OF_PEARLS }
 }
 
-region_ind_southern_coast_placeholder_01 = {
-	states = { STATE_IND_SOUTHERN_COAST_PLACEHOLDER_01 }
+region_ind_southern_coast_placeholder = {
+	states = { STATE_IND_SOUTHERN_COAST_PLACEHOLDER }
 }
 
-region_ironfrost_bay_01 = {
-	states = { STATE_IRONFROST_BAY_01 }
+region_ironfrost_bay = {
+	states = { STATE_IRONFROST_BAY }
 }
 
-region_isles_of_doom_01 = {
-	states = { STATE_ISLES_OF_DOOM_01 }
+region_isles_of_doom = {
+	states = { STATE_ISLES_OF_DOOM }
 }
 
-region_isle_of_dawn_bypass_01 = {
-	states = { STATE_ISLE_OF_DAWN_BYPASS_01 }
+region_isle_of_dawn_bypass = {
+	states = { STATE_ISLE_OF_DAWN_BYPASS }
 }
 
-region_isle_of_dusk_bypass_01 = {
-	states = { STATE_ISLE_OF_DUSK_BYPASS_01 }
+region_isle_of_dusk_bypass = {
+	states = { STATE_ISLE_OF_DUSK_BYPASS }
 }
 
-region_isle_of_rising_sun_bypass_01 = {
-	states = { STATE_ISLE_OF_RISING_SUN_BYPASS_01 }
+region_isle_of_rising_sun_bypass = {
+	states = { STATE_ISLE_OF_RISING_SUN_BYPASS }
 }
 
 region_jade_sea_01 = {
@@ -362,16 +362,16 @@ region_jade_sea_11 = {
 	states = { STATE_JADE_SEA_11 }
 }
 
-region_karond_kar_bypass_01 = {
-	states = { STATE_KAROND_KAR_BYPASS_01 }
+region_karond_kar_bypass = {
+	states = { STATE_KAROND_KAR_BYPASS }
 }
 
-region_kraken_sea_01 = {
-	states = { STATE_KRAKEN_SEA_01 }
+region_kraken_sea = {
+	states = { STATE_KRAKEN_SEA }
 }
 
-region_lagoon_of_tears_01 = {
-	states = { STATE_LAGOON_OF_TEARS_01 }
+region_lagoon_of_tears = {
+	states = { STATE_LAGOON_OF_TEARS }
 }
 
 region_lizard_sea_01 = {
@@ -386,68 +386,68 @@ region_lizard_sea_03 = {
 	states = { STATE_LIZARD_SEA_03 }
 }
 
-region_lower_reik_river_01 = {
-	states = { STATE_LOWER_REIK_RIVER_01 }
+region_lower_reik_river = {
+	states = { STATE_LOWER_REIK_RIVER }
 }
 
-region_lower_river_grismerie_01 = {
-	states = { STATE_LOWER_RIVER_GRISMERIE_01 }
+region_lower_river_grismerie = {
+	states = { STATE_LOWER_RIVER_GRISMERIE }
 }
 
-region_lower_river_ruin_01 = {
-	states = { STATE_LOWER_RIVER_RUIN_01 }
+region_lower_river_ruin = {
+	states = { STATE_LOWER_RIVER_RUIN }
 }
 
-region_lower_talabec_river_01 = {
-	states = { STATE_LOWER_TALABEC_RIVER_01 }
+region_lower_talabec_river = {
+	states = { STATE_LOWER_TALABEC_RIVER }
 }
 
-region_lumbria_archipelago_01 = {
-	states = { STATE_LUMBRIA_ARCHIPELAGO_01 }
+region_lumbria_archipelago = {
+	states = { STATE_LUMBRIA_ARCHIPELAGO }
 }
 
-region_lumbria_nippon_channel_placeholder_01 = {
-	states = { STATE_LUMBRIA_NIPPON_CHANNEL_PLACEHOLDER_01 }
+region_lumbria_nippon_channel_placeholder = {
+	states = { STATE_LUMBRIA_NIPPON_CHANNEL_PLACEHOLDER }
 }
 
-region_lustria_northern_bay_placeholder_01 = {
-	states = { STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER_01 }
+region_lustria_northern_bay_placeholder = {
+	states = { STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER }
 }
 
 region_maelstrom_01 = {
 	states = { STATE_MAELSTROM_01 }
 }
 
-region_manaanspoort_sea_01 = {
-	states = { STATE_MANAANSPOORT_SEA_01 }
+region_manaanspoort_sea = {
+	states = { STATE_MANAANSPOORT_SEA }
 }
 
-region_meeting_of_sun_and_stars_placeholder_01 = {
-	states = { STATE_MEETING_OF_SUN_AND_STARS_PLACEHOLDER_01 }
+region_meeting_of_sun_and_stars_placeholder = {
+	states = { STATE_MEETING_OF_SUN_AND_STARS_PLACEHOLDER }
 }
 
-region_middle_reik_river_01 = {
-	states = { STATE_MIDDLE_REIK_RIVER_01 }
+region_middle_reik_river = {
+	states = { STATE_MIDDLE_REIK_RIVER }
 }
 
-region_middle_river_ruin_01 = {
-	states = { STATE_MIDDLE_RIVER_RUIN_01 }
+region_middle_river_ruin = {
+	states = { STATE_MIDDLE_RIVER_RUIN }
 }
 
-region_mo_farah_chanel_01 = {
-	states = { STATE_MO_FARAH_CHANEL_01 }
+region_mo_farah_chanel = {
+	states = { STATE_MO_FARAH_CHANEL }
 }
 
-region_near_iron_coast_placeholder_01 = {
-	states = { STATE_NEAR_IRON_COAST_PLACEHOLDER_01 }
+region_near_iron_coast_placeholder = {
+	states = { STATE_NEAR_IRON_COAST_PLACEHOLDER }
 }
 
-region_near_sulpheret_coast_01 = {
-	states = { STATE_NEAR_SULPHERET_COAST_01 }
+region_near_sulpheret_coast = {
+	states = { STATE_NEAR_SULPHERET_COAST }
 }
 
-region_northern_boiling_sea_01 = {
-	states = { STATE_NORTHERN_BOILING_SEA_01 }
+region_northern_boiling_sea = {
+	states = { STATE_NORTHERN_BOILING_SEA }
 }
 
 region_northern_far_ocean_01 = {
@@ -458,20 +458,20 @@ region_northern_far_ocean_02 = {
 	states = { STATE_NORTHERN_FAR_OCEAN_02 }
 }
 
-region_northern_great_ocean_01 = {
-	states = { STATE_NORTHERN_GREAT_OCEAN_01 }
+region_northern_great_ocean = {
+	states = { STATE_NORTHERN_GREAT_OCEAN }
 }
 
-region_northern_mangrove_coast_01 = {
-	states = { STATE_NORTHERN_MANGROVE_COAST_01 }
+region_northern_mangrove_coast = {
+	states = { STATE_NORTHERN_MANGROVE_COAST }
 }
 
-region_northern_shifting_isles_01 = {
-	states = { STATE_NORTHERN_SHIFTING_ISLES_01 }
+region_northern_shifting_isles = {
+	states = { STATE_NORTHERN_SHIFTING_ISLES }
 }
 
-region_northwestern_great_ocean_01 = {
-	states = { STATE_NORTHWESTERN_GREAT_OCEAN_01 }
+region_northwestern_great_ocean = {
+	states = { STATE_NORTHWESTERN_GREAT_OCEAN }
 }
 
 region_ocean_of_dread_01 = {
@@ -494,44 +494,44 @@ region_ocean_of_dread_05 = {
 	states = { STATE_OCEAN_OF_DREAD_05 }
 }
 
-region_pirates_current_01 = {
-	states = { STATE_PIRATES_CURRENT_01 }
+region_pirates_current = {
+	states = { STATE_PIRATES_CURRENT }
 }
 
-region_pirate_coast_01 = {
-	states = { STATE_PIRATE_COAST_01 }
+region_pirate_coast = {
+	states = { STATE_PIRATE_COAST }
 }
 
-region_river_brienne_01 = {
-	states = { STATE_RIVER_BRIENNE_01 }
+region_river_brienne = {
+	states = { STATE_RIVER_BRIENNE }
 }
 
-region_river_limnalla_01 = {
-	states = { STATE_RIVER_LIMNALLA_01 }
+region_river_limnalla = {
+	states = { STATE_RIVER_LIMNALLA }
 }
 
-region_river_lynsk_01 = {
-	states = { STATE_RIVER_LYNSK_01 }
+region_river_lynsk = {
+	states = { STATE_RIVER_LYNSK }
 }
 
-region_river_of_echoes_01 = {
-	states = { STATE_RIVER_OF_ECHOES_01 }
+region_river_of_echoes = {
+	states = { STATE_RIVER_OF_ECHOES }
 }
 
-region_scorpion_coast_01 = {
-	states = { STATE_SCORPION_COAST_01 }
+region_scorpion_coast = {
+	states = { STATE_SCORPION_COAST }
 }
 
-region_sea_of_blades_01 = {
-	states = { STATE_SEA_OF_BLADES_01 }
+region_sea_of_blades = {
+	states = { STATE_SEA_OF_BLADES }
 }
 
-region_sea_of_chaos_01 = {
-	states = { STATE_SEA_OF_CHAOS_01 }
+region_sea_of_chaos = {
+	states = { STATE_SEA_OF_CHAOS }
 }
 
-region_sea_of_chill_01 = {
-	states = { STATE_SEA_OF_CHILL_01 }
+region_sea_of_chill = {
+	states = { STATE_SEA_OF_CHILL }
 }
 
 region_sea_of_claws_01 = {
@@ -542,12 +542,12 @@ region_sea_of_claws_02 = {
 	states = { STATE_SEA_OF_CLAWS_02 }
 }
 
-region_sea_of_dreams_01 = {
-	states = { STATE_SEA_OF_DREAMS_01 }
+region_sea_of_dreams = {
+	states = { STATE_SEA_OF_DREAMS }
 }
 
-region_sea_of_dusk_01 = {
-	states = { STATE_SEA_OF_DUSK_01 }
+region_sea_of_dusk = {
+	states = { STATE_SEA_OF_DUSK }
 }
 
 region_sea_of_fear_01 = {
@@ -570,8 +570,8 @@ region_sea_of_fear_05 = {
 	states = { STATE_SEA_OF_FEAR_05 }
 }
 
-region_sea_of_feuds_01 = {
-	states = { STATE_SEA_OF_FEUDS_01 }
+region_sea_of_feuds = {
+	states = { STATE_SEA_OF_FEUDS }
 }
 
 region_sea_of_malice_01 = {
@@ -594,8 +594,8 @@ region_sea_of_malice_05 = {
 	states = { STATE_SEA_OF_MALICE_05 }
 }
 
-region_sea_of_mist_01 = {
-	states = { STATE_SEA_OF_MIST_01 }
+region_sea_of_mist = {
+	states = { STATE_SEA_OF_MIST }
 }
 
 region_sea_of_rage_01 = {
@@ -682,32 +682,32 @@ region_sea_of_wrath_06 = {
 	states = { STATE_SEA_OF_WRATH_06 }
 }
 
-region_serpent_coast_01 = {
-	states = { STATE_SERPENT_COAST_01 }
+region_serpent_coast = {
+	states = { STATE_SERPENT_COAST }
 }
 
-region_shard_coast_01 = {
-	states = { STATE_SHARD_COAST_01 }
+region_shard_coast = {
+	states = { STATE_SHARD_COAST }
 }
 
-region_sorcerers_islands_01 = {
-	states = { STATE_SORCERERS_ISLANDS_01 }
+region_sorcerers_islands = {
+	states = { STATE_SORCERERS_ISLANDS }
 }
 
-region_sour_sea_01 = {
-	states = { STATE_SOUR_SEA_01 }
+region_sour_sea = {
+	states = { STATE_SOUR_SEA }
 }
 
-region_southern_boiling_sea_01 = {
-	states = { STATE_SOUTHERN_BOILING_SEA_01 }
+region_southern_boiling_sea = {
+	states = { STATE_SOUTHERN_BOILING_SEA }
 }
 
-region_southern_far_ocean_01 = {
-	states = { STATE_SOUTHERN_FAR_OCEAN_01 }
+region_southern_far_ocean = {
+	states = { STATE_SOUTHERN_FAR_OCEAN }
 }
 
-region_southern_great_ocean_01 = {
-	states = { STATE_SOUTHERN_GREAT_OCEAN_01 }
+region_southern_great_ocean = {
+	states = { STATE_SOUTHERN_GREAT_OCEAN }
 }
 
 region_southern_great_ocean_passage_01 = {
@@ -722,12 +722,12 @@ region_southern_great_ocean_passage_03 = {
 	states = { STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_03 }
 }
 
-region_southern_mangrove_coast_01 = {
-	states = { STATE_SOUTHERN_MANGROVE_COAST_01 }
+region_southern_mangrove_coast = {
+	states = { STATE_SOUTHERN_MANGROVE_COAST }
 }
 
-region_southern_ocean_of_dread_01 = {
-	states = { STATE_SOUTHERN_OCEAN_OF_DREAD_01 }
+region_southern_ocean_of_dread = {
+	states = { STATE_SOUTHERN_OCEAN_OF_DREAD }
 }
 
 region_southern_ocean_of_dread_passage_01 = {
@@ -746,56 +746,56 @@ region_southern_ocean_of_dread_passage_04 = {
 	states = { STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_04 }
 }
 
-region_southern_shifting_isles_01 = {
-	states = { STATE_SOUTHERN_SHIFTING_ISLES_01 }
+region_southern_shifting_isles = {
+	states = { STATE_SOUTHERN_SHIFTING_ISLES }
 }
 
-region_south_sea_01 = {
-	states = { STATE_SOUTH_SEA_01 }
+region_south_sea = {
+	states = { STATE_SOUTH_SEA }
 }
 
-region_south_ulthuan_passage_placeholder_01 = {
-	states = { STATE_SOUTH_ULTHUAN_PASSAGE_PLACEHOLDER_01 }
+region_south_ulthuan_passage_placeholder = {
+	states = { STATE_SOUTH_ULTHUAN_PASSAGE_PLACEHOLDER }
 }
 
-region_stir_river_01 = {
-	states = { STATE_STIR_RIVER_01 }
+region_stir_river = {
+	states = { STATE_STIR_RIVER }
 }
 
-region_straits_of_lothern_01 = {
-	states = { STATE_STRAITS_OF_LOTHERN_01 }
+region_straits_of_lothern = {
+	states = { STATE_STRAITS_OF_LOTHERN }
 }
 
-region_sulpheret_islands_01 = {
-	states = { STATE_SULPHERET_ISLANDS_01 }
+region_sulpheret_islands = {
+	states = { STATE_SULPHERET_ISLANDS }
 }
 
-region_sunken_lands_01 = {
-	states = { STATE_SUNKEN_LANDS_01 }
+region_sunken_lands = {
+	states = { STATE_SUNKEN_LANDS }
 }
 
-region_sun_island_southern_coast_placeholder_01 = {
-	states = { STATE_SUN_ISLAND_SOUTHERN_COAST_PLACEHOLDER_01 }
+region_sun_island_southern_coast_placeholder = {
+	states = { STATE_SUN_ISLAND_SOUTHERN_COAST_PLACEHOLDER }
 }
 
-region_tarantula_coast_01 = {
-	states = { STATE_TARANTULA_COAST_01 }
+region_tarantula_coast = {
+	states = { STATE_TARANTULA_COAST }
 }
 
-region_the_broken_lands_01 = {
-	states = { STATE_THE_BROKEN_LANDS_01 }
+region_the_broken_lands = {
+	states = { STATE_THE_BROKEN_LANDS }
 }
 
-region_the_underway_01 = {
-	states = { STATE_THE_UNDERWAY_01 }
+region_the_underway = {
+	states = { STATE_THE_UNDERWAY }
 }
 
-region_tilean_sea_01 = {
-	states = { STATE_TILEAN_SEA_01 }
+region_tilean_sea = {
+	states = { STATE_TILEAN_SEA }
 }
 
-region_tor_elasor_01 = {
-	states = { STATE_TOR_ELASOR_01 }
+region_tor_elasor = {
+	states = { STATE_TOR_ELASOR }
 }
 
 region_upper_far_ocean_passage_01 = {
@@ -810,58 +810,58 @@ region_upper_far_ocean_passage_03 = {
 	states = { STATE_UPPER_FAR_OCEAN_PASSAGE_03 }
 }
 
-region_upper_mortis_river_01 = {
-	states = { STATE_UPPER_MORTIS_RIVER_01 }
+region_upper_mortis_river = {
+	states = { STATE_UPPER_MORTIS_RIVER }
 }
 
-region_upper_reik_river_01 = {
-	states = { STATE_UPPER_REIK_RIVER_01 }
+region_upper_reik_river = {
+	states = { STATE_UPPER_REIK_RIVER }
 }
 
-region_upper_river_grismerie_01 = {
-	states = { STATE_UPPER_RIVER_GRISMERIE_01 }
+region_upper_river_grismerie = {
+	states = { STATE_UPPER_RIVER_GRISMERIE }
 }
 
-region_upper_river_ruin_01 = {
-	states = { STATE_UPPER_RIVER_RUIN_01 }
+region_upper_river_ruin = {
+	states = { STATE_UPPER_RIVER_RUIN }
 }
 
-region_upper_talabec_river_01 = {
-	states = { STATE_UPPER_TALABEC_RIVER_01 }
+region_upper_talabec_river = {
+	states = { STATE_UPPER_TALABEC_RIVER }
 }
 
-region_urskoy_river_01 = {
-	states = { STATE_URSKOY_RIVER_01 }
+region_urskoy_river = {
+	states = { STATE_URSKOY_RIVER }
 }
 
-region_vampire_coast_01 = {
-	states = { STATE_VAMPIRE_COAST_01 }
+region_vampire_coast = {
+	states = { STATE_VAMPIRE_COAST }
 }
 
-region_western_albion_channel_01 = {
-	states = { STATE_WESTERN_ALBION_CHANNEL_01 }
+region_western_albion_channel = {
+	states = { STATE_WESTERN_ALBION_CHANNEL }
 }
 
-region_western_bitter_sea_01 = {
-	states = { STATE_WESTERN_BITTER_SEA_01 }
+region_western_bitter_sea = {
+	states = { STATE_WESTERN_BITTER_SEA }
 }
 
-region_western_gates_of_calith_01 = {
-	states = { STATE_WESTERN_GATES_OF_CALITH_01 }
+region_western_gates_of_calith = {
+	states = { STATE_WESTERN_GATES_OF_CALITH }
 }
 
-region_western_sea_of_oblivion_01 = {
-	states = { STATE_WESTERN_SEA_OF_OBLIVION_01 }
+region_western_sea_of_oblivion = {
+	states = { STATE_WESTERN_SEA_OF_OBLIVION }
 }
 
-region_western_sea_of_weird_waves_01 = {
-	states = { STATE_WESTERN_SEA_OF_WEIRD_WAVES_01 }
+region_western_sea_of_weird_waves = {
+	states = { STATE_WESTERN_SEA_OF_WEIRD_WAVES }
 }
 
-region_wissenland_estuary_01 = {
-	states = { STATE_WISSENLAND_ESTUARY_01 }
+region_wissenland_estuary = {
+	states = { STATE_WISSENLAND_ESTUARY }
 }
 
-region_witch_sea_01 = {
-	states = { STATE_WITCH_SEA_01 }
+region_witch_sea = {
+	states = { STATE_WITCH_SEA }
 }

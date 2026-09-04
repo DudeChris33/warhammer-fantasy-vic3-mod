@@ -142,6 +142,9 @@ def rekey_by_display_name(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
     names like "Central Far Ocean Passage"), so the ``NN`` ordinal still
     disambiguates within each name, ordered by the zones' wrap-robust first pixel
     for reproducibility — the same rule :func:`assign` uses within a sea group.
+    A name that is not shared gets a bare ``STATE_<NAME>`` key with no ordinal —
+    "Shard Coast" is the only Shard Coast, so ``STATE_SHARD_COAST_01`` would
+    imply a second one that does not exist.
     """
     naming = dict(naming)
     first = _zone_first_pixel(zones, int(zones.max()))
@@ -152,6 +155,11 @@ def rekey_by_display_name(naming: dict[int, "SeaZoneName"], zones: np.ndarray,
         groups.setdefault(_slugify(nm.display_name), []).append(lab)
     for slug, labels in groups.items():
         ordered = sorted(labels, key=lambda l: (first[l][0], first[l][1], l))
+        if len(ordered) == 1:
+            prev = naming[ordered[0]]
+            naming[ordered[0]] = SeaZoneName(key=f"STATE_{slug}", sea_group=prev.sea_group,
+                                             display_name=prev.display_name)
+            continue
         width = max(2, len(str(len(ordered))))
         for ordinal, lab in enumerate(ordered, start=1):
             prev = naming[lab]
