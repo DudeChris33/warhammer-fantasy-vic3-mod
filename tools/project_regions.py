@@ -53,14 +53,19 @@ Everything is deterministic for a fixed stack: the placement is the committed
 thin-plate fields with fixed sampling orders, the offsets are an exact-pixel
 argmax, and no RNG or wall-clock enters.
 
-**Borders-only.** ``--borders-only`` derives a magenta-only painting from
-``--paint`` at render time — every pixel further than ``--magenta-tol`` (Euclidean,
-default 12) from pure magenta (``255,0,255``) gets alpha 0, so only the boundary
-network drapes onto the globe and the globe's own terrain shows through
-everywhere else, including inside a crop's own footprint. This supersedes keeping
-a hand-exported ``old_world_state_regions - borders_only.png`` in sync by hand;
-that static file predates this flag and stays for reference (a magenta-only
-threshold of the live painting reproduces it to 34 antialiased px out of ~655k).
+**Borders-only.** ``--borders-only`` extracts just the magenta boundary network
+from the *finished* drape — every pixel further than ``--magenta-tol`` (Euclidean,
+default 12) from pure magenta (``255,0,255``) reverts to the globe (see
+:func:`extract_borders`) — rather than filtering the painting's alpha down to a
+magenta-only sliver *before* warping it. The two are not equivalent: the whole
+painting (fills and borders both) is what :func:`canvas_owner` partitions the
+canvas against, and a magenta-only alpha starves that partition of the broad,
+stable coverage signal it needs — the "how deep inside my own territory" score
+along a 1-3px-wide line is near-zero on both sides of it, so the ownership seam
+ends up hugging and running parallel to the very line it should be deciding,
+producing a doubled "tram track" wherever that happens. This
+supersedes keeping a hand-exported ``old_world_state_regions - borders_only.png``
+in sync by hand; that static file predates this flag and stays for reference.
 
 Usage::
 
@@ -152,21 +157,44 @@ def load_rgba(name: str) -> np.ndarray:
         return np.asarray(im.convert("RGBA"), dtype=np.uint8).copy()
 
 
-def borders_only_rgba(paint_rgba: np.ndarray, tol: float) -> np.ndarray:
-    """Zero the alpha of every pixel more than ``tol`` from pure magenta.
+def extract_borders(canvas_rgb: np.ndarray, globe_rgb: np.ndarray, placed: np.ndarray,
+                    tol: float) -> np.ndarray:
+    """Reduce a finished full-painting composite to just its magenta boundary network.
 
-    Keeps the RGB untouched (still magenta where kept) and never *adds* alpha —
-    a pixel already transparent in ``paint_rgba`` stays transparent. This is the
-    programmatic equivalent of ``sources/old_world_state_regions - borders_only.png``:
-    a state-fill-and-border painting reduced to just the ``255,0,255`` boundary
-    network, so draping it leaves the globe's own terrain showing everywhere else.
+    This runs *after* :func:`place_painting` has draped the whole opaque painting
+    (fills and borders both) onto the globe — never before. Two independent
+    warps of the master painting (each of the five crops' own thin-plate fit)
+    disagree with each other by a few pixels along their shared canvas territory;
+    :func:`canvas_owner` already picks a single, stable owner per pixel to stop
+    that from creating two competing renditions in the same spot, but only when
+    it is fed a *stable* coverage signal to partition against — the whole opaque
+    painting's own alpha (see ``build``'s ``owner_paint``), a broad, contiguous
+    region. Filtering the painting down to a bare magenta thread *before* warping
+    (as this function's predecessor, ``borders_only_rgba``, did) starves
+    ``canvas_owner`` of that broad signal: a 1-3px-wide drawn line's own alpha is
+    only ever true in a thin band around itself, so the two crops' "how deep
+    inside my own territory" distance-transform scores are near-zero on both
+    sides of it, and the partition boundary ends up hugging and running parallel
+    to the drawn line for long stretches instead of crossing it cleanly — visible
+    as a "tram track" double line wherever that happens. Extracting magenta from
+    the finished, already-correctly-owned composite instead sidesteps the whole
+    problem: there is only ever one rendition of any given pixel to threshold.
+
+    ``placed`` restricts the test to pixels :func:`place_painting` actually drew
+    (so a coincidental near-magenta terrain color on the untouched globe is never
+    picked up), and the alpha here is a smooth ``1 - distance/tol`` falloff rather
+    than a hard cutoff — the composite was already resampled at the requested
+    order (nearest or bilinear) by ``place_painting``, so this only decides how
+    much of that already-placed color to keep, not where to resample from again.
     """
     r, g, b = MAGENTA_RGB
-    delta = paint_rgba[..., :3].astype(np.float32) - np.array([r, g, b], dtype=np.float32)
+    delta = canvas_rgb.astype(np.float32) - np.array([r, g, b], dtype=np.float32)
     dist = np.sqrt((delta ** 2).sum(axis=2))
-    out = paint_rgba.copy()
-    out[..., 3] = np.where(dist <= tol, out[..., 3], 0)
-    return out
+    alpha = np.clip(1.0 - dist / tol, 0.0, 1.0) * placed
+    bg = globe_rgb.astype(np.float32)
+    mg = np.array(MAGENTA_RGB, dtype=np.float32)
+    out = bg * (1.0 - alpha[..., None]) + mg * alpha[..., None]
+    return np.clip(out, 0, 255).astype(np.uint8)
 
 
 def footprint_box(reg: schema.SourceRegistration) -> tuple[int, int, int, int]:
@@ -310,6 +338,10 @@ def place_painting(order: int, regs: dict[str, schema.SourceRegistration],
     array back through each crop's own warp). A pixel is left unplaced only where
     no crop's own coverage reaches it at all — true gaps outside every footprint,
     not a fallback case to patch here.
+
+    This always drapes the *whole* painting (fills and borders both), never a
+    magenta-only slice — see ``build``'s ``owner_paint`` and :func:`extract_borders`
+    for why a magenta-only painting must not reach this function or ``canvas_owner``.
     """
     canvas_rgb = globe_rgb.copy()
     placed = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
@@ -395,13 +427,10 @@ def build(variants: list[str], pad: int, out_prefix: str,
             raise SystemExit(f"{name}: no committed registration record")
 
     master_rgb = load_rgb(MASTER_SOURCE)
+    # Always drape the *whole* painting (fills + borders), even for --borders-only:
+    # see extract_borders for why a magenta-only alpha must never reach canvas_owner
+    # or place_painting.
     paint_rgba = load_rgba(paint_source)
-    if borders_only:
-        before = int((paint_rgba[..., 3] > 0).sum())
-        paint_rgba = borders_only_rgba(paint_rgba, magenta_tol)
-        after = int((paint_rgba[..., 3] > 0).sum())
-        log(f"borders-only  kept {after:,} of {before:,} painted px "
-            f"(magenta tol {magenta_tol})")
     crop_rgba = {name: load_rgba(name) for name in FIVE_CROPS}
     globe_rgb = load_rgb(globe_source)
     coasts_rgb = load_rgb(COAST_SOURCE) if overlay_coasts else None
@@ -425,7 +454,13 @@ def build(variants: list[str], pad: int, out_prefix: str,
     offsets = crop_offsets(master_gray, crop_rgba)
 
     # Partition the canvas among the crops so overlap-zone lines are placed once,
-    # by whichever crop's own coverage runs deepest at that pixel.
+    # by whichever crop's own coverage runs deepest at that pixel. This must use
+    # the *whole* painting's own alpha — a broad, stable coverage blob — even when
+    # --borders-only was requested: a magenta-only alpha is only ever true in a
+    # thin band around a drawn line, so the two crops' "how deep in my own
+    # territory" scores are both near-zero there and the partition boundary ends
+    # up hugging and running parallel to the very line it should be deciding
+    # ownership of (see extract_borders).
     owner = canvas_owner(regs, crop_rgba, offsets, paint_rgba)
     covered = int((owner >= 0).sum())
     log(f"canvas owner  {covered:,} canvas px assigned a single owning crop")
@@ -445,8 +480,13 @@ def build(variants: list[str], pad: int, out_prefix: str,
     written: list[Path] = []
     for variant in variants:
         order = order_by_variant[variant]
-        canvas_rgb = base_rgb if order == 0 else place_painting(
-            order, regs, paint_rgba, crop_rgba, offsets, globe_rgb, owner)[0]
+        canvas_rgb, variant_placed = (base_rgb, placed) if order == 0 else place_painting(
+            order, regs, paint_rgba, crop_rgba, offsets, globe_rgb, owner)
+        if borders_only:
+            canvas_rgb = extract_borders(canvas_rgb, globe_rgb, variant_placed, magenta_tol)
+            kept = int((canvas_rgb != globe_rgb).any(axis=2).sum())
+            log(f"borders-only  {variant}: kept {kept:,} px within {magenta_tol} of magenta "
+                f"(of {int(variant_placed.sum()):,} placed)")
         n_coast = overlay_coast(canvas_rgb, coasts_rgb) if coasts_rgb is not None else 0
         crop = canvas_rgb[y0:y1, x0:x1].copy()
         out_path = DERIVED_DIR / f"{out_prefix}_{variant}.png"
@@ -469,8 +509,8 @@ def main(argv: list[str] | None = None) -> int:
                    help=f"output filename prefix under tools/derived/ (default {OUT_PREFIX_DEFAULT})")
     p.add_argument("--paint", default=PAINT_SOURCE,
                    help=f"the master-frame painting (4096², RGBA) to drape (default {PAINT_SOURCE}); "
-                        f"e.g. 'old_world_state_regions - borders_only.png' drapes only the "
-                        f"magenta border network so the globe shows through everywhere else")
+                        f"always draped in full (fills and borders) — use --borders-only to "
+                        f"reduce the *output* to just the boundary network")
     p.add_argument("--no-coast", action="store_true",
                    help="skip the cyan coastline reference overlay (drape the painting alone)")
     p.add_argument("--crop", action="store_true",
@@ -481,10 +521,12 @@ def main(argv: list[str] | None = None) -> int:
                         f"must share the canvas frame ({CANVAS_W}x{CANVAS_H}), e.g. "
                         f"'terraqueous_globe_reprojected - sea_zones.png'")
     p.add_argument("--borders-only", action="store_true",
-                   help="derive a magenta-only painting from --paint at render time "
-                        "(alpha zeroed beyond --magenta-tol of pure magenta), so only "
-                        "the boundary network drapes and the globe's own terrain shows "
-                        "through everywhere else, including inside a crop's footprint")
+                   help="extract just the magenta boundary network from the finished drape "
+                        "(pixels within --magenta-tol of pure magenta), so only the border "
+                        "lines show and the globe's own terrain shows through everywhere "
+                        "else, including inside a crop's footprint — the painting itself is "
+                        "still draped in full (fills and all) so canvas_owner keeps a stable, "
+                        "broad-coverage partition; see extract_borders")
     p.add_argument("--magenta-tol", type=float, default=MAGENTA_TOL_DEFAULT,
                    help=f"--borders-only's Euclidean RGB match tolerance to pure magenta "
                         f"(default {MAGENTA_TOL_DEFAULT})")
