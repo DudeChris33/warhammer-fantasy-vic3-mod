@@ -1,0 +1,24 @@
+﻿# Restored verbatim from vanilla common/static_modifiers/content_304_modifiers.txt
+# Board item #3539 (parent epic #3292): common/static_modifiers/ is listed in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are
+# not loaded at all. These generic modifiers were dropped when this mod's copy of
+# the folder was authored, leaving live has_modifier / add_modifier references
+# dangling. Bodies are unchanged from vanilla.
+
+# vanilla: common/static_modifiers/content_304_modifiers.txt:319
+modifier_corporate_state_trade_unions_bias = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	interest_group_ig_trade_unions_pol_str_mult = 0.15
+}
+
+# vanilla: common/static_modifiers/content_304_modifiers.txt:324
+modifier_corporate_state_industrialists_bias = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	interest_group_ig_industrialists_pol_str_mult = 0.15
+}
+
+# vanilla: common/static_modifiers/content_304_modifiers.txt:329
+modifier_corporate_state_intelligentsia_bias = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	interest_group_ig_intelligentsia_pol_str_mult = 0.15
+}

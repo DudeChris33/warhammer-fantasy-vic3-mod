@@ -1,0 +1,89 @@
+﻿# Restored verbatim from vanilla common/static_modifiers/00_ip4_04_modifiers.txt
+# Board item #3539 (parent epic #3292): common/static_modifiers/ is listed in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are
+# not loaded at all. These generic modifiers were dropped when this mod's copy of
+# the folder was authored, leaving live has_modifier / add_modifier references
+# dangling. Bodies are unchanged from vanilla.
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:1
+modifier_regency = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.15
+}
+
+# These modifiers are to increase the clout of the heir's IG. This is not an ideal
+# solution, but the way modifier propagation works means that it's the best/most
+# visible solution. (vanilla comment, 00_ip4_04_modifiers.txt:7)
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:8
+modifier_regency_landowners = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_landowners_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:15
+modifier_regency_devout = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_devout_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:22
+modifier_regency_petty_bourgeoisie = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_petty_bourgeoisie_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:29
+modifier_regency_industrialists = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_industrialists_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:36
+modifier_regency_trade_unions = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_trade_unions_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:43
+modifier_regency_intelligentsia = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_intelligentsia_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:50
+modifier_regency_armed_forces = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_armed_forces_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:57
+modifier_regency_rural_folk = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -10
+	country_law_enactment_speed_mult = -0.25
+	interest_group_ig_rural_folk_pol_str_mult = 0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:463
+modifier_government_recently_couped = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	country_legitimacy_base_add = 50
+	country_opposition_ig_approval_add = -3
+	country_block_government_reform_bool = yes
+}

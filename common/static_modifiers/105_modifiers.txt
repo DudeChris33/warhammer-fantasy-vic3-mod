@@ -1,0 +1,18 @@
+﻿# Restored verbatim from vanilla common/static_modifiers/105_modifiers.txt
+# Board item #3539 (parent epic #3292): common/static_modifiers/ is listed in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are
+# not loaded at all. These generic modifiers were dropped when this mod's copy of
+# the folder was authored, leaving live has_modifier / add_modifier references
+# dangling. Bodies are unchanged from vanilla.
+
+# vanilla: common/static_modifiers/105_modifiers.txt:343
+post_revolutionary_fervor = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 25
+}
+
+# vanilla: common/static_modifiers/105_modifiers.txt:348
+counter_revolutionary_fervor = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 25
+}

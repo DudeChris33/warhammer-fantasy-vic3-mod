@@ -380,12 +380,6 @@ law_racial_segregation = {
 			}
 			custom_tooltip = fervor_effects_ld_tt
 		}
-		if = {
-			limit = {
-				has_modifier = modifier_polish_organic_statute
-			}
-			remove_modifier = modifier_polish_organic_statute
-		}
 	}
 
 	can_impose = {
@@ -503,12 +497,6 @@ law_cultural_exclusion = {
 				is_subject = yes
 			}
 			custom_tooltip = fervor_effects_ld_tt
-		}
-		if = {
-			limit = {
-				has_modifier = modifier_polish_organic_statute
-			}
-			remove_modifier = modifier_polish_organic_statute
 		}
 	}
 
@@ -630,12 +618,6 @@ law_multicultural = {
 				is_subject = yes
 			}
 			custom_tooltip = fervor_effects_ld_tt
-		}
-		if = {
-			limit = {
-				has_modifier = modifier_polish_organic_statute
-			}
-			remove_modifier = modifier_polish_organic_statute
 		}
 	}
 
