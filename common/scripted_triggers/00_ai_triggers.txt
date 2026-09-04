@@ -70,12 +70,17 @@ ai_desires_target_state = {
 	}
 }
 
+# NOTE (board #3540, epic #3292): this trigger and the two below it originally
+# reasoned about je_government_petition / je_government_petition_negotiation_version(_b)
+# / je_law_imposition - REAL vanilla mechanics (power-bloc law imposition, interest-group
+# petition negotiation), not flavor content. Their journal entries were never authored
+# here (common/journal_entries is blanked/deferred per epic #3292's wholesale deferral),
+# so has_journal_entry on them is a permanent false and every branch/AND that depended on
+# them has been dropped per the port-vs-stub decision rule in .claude/rules/scripting.md.
+# This is a disclosed gap: it strips the AI's ability to reason about active law-imposition
+# and petition-negotiation journal entries via these three triggers specifically.
 has_enactment_je_or_law_commitment = {
 	OR = {
-		has_journal_entry = je_government_petition
-		has_journal_entry = je_law_imposition
-		has_journal_entry = je_government_petition_negotiation_version
-		has_journal_entry = je_government_petition_negotiation_version_b
 		has_any_law_commitment = yes
 	}
 }
@@ -99,39 +104,12 @@ ai_has_reasons_to_not_oppose_law = {
 				}
 			}
 		}
-		AND = {
-			has_journal_entry = je_government_petition
-			var:desired_law_var ?= scope:law
-		}
-		AND = {
-			OR = {
-				has_journal_entry = je_government_petition_negotiation_version
-				has_journal_entry = je_government_petition_negotiation_version_b
-			}
-			any_interest_group = {
-				has_variable = desired_law_var
-				var:desired_law_var	?= scope:law
-			}
-		}
-		AND = {
-			has_journal_entry = je_law_imposition
-			imposed_law ?= scope:law.type
-		}
 	}
 }
 
 ai_has_enact_weight_modifier_journal_entries = {
 	OR = {
 		has_law_commitment = scope:law.type
-		AND = {
-			has_journal_entry = je_government_petition
-			has_variable = desired_law_var
-			scope:law = var:desired_law_var
-		}
-		AND = {
-			has_journal_entry = je_law_imposition
-			scope:law = imposed_law
-		}
 	}
 }
 

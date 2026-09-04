@@ -139,24 +139,19 @@ is_easy_law = { #within 10 of passing, or easy to pass, and a good idea
     }
 }
 
+# NOTE (board #3540, epic #3292): the trigger_if guarded on
+# je_government_petition_negotiation_version (a REAL vanilla petition-negotiation
+# journal entry, not flavor) was dropped here and at every other site below in this
+# file - its journal entry was never authored (common/journal_entries blanked/deferred
+# per epic #3292) so has_journal_entry on it is a permanent false, making the guarded
+# body dead code with no trigger_else sibling to fall back to. Disclosed gap: this
+# specifically disables the "already has a pending desired-law var from an active
+# petition negotiation" duplicate-check.
 neg_universal_law_checks = { #error free way to check these are not in same law group, or that the desired law is already enacted
     currently_active_law_in_group != scope:law.currently_active_law_in_group
     scope:ig.owner = {
         NOT = {
             has_law = prev.type
-        }
-    }
-    trigger_if = {
-        limit = {
-            scope:ig.owner = {
-                has_journal_entry = je_government_petition_negotiation_version
-            }
-        }
-        NOT = {
-            any_interest_group = {
-                has_variable = desired_law_var
-                var:desired_law_var.type = prev.type
-            }
         }
     }
 }
@@ -197,6 +192,11 @@ neg_option_2_trigger = {
     }
 }
 
+# NOTE (board #3540, epic #3292): trigger_if guarded on je_negotiate_army_quest (a REAL
+# vanilla IG petition-negotiation journal entry) dropped - never authored here
+# (common/journal_entries blanked/deferred), no trigger_else to fall back to. Disclosed
+# gap: this specifically disables the "duplicate army-quest promise already pending"
+# check for the armed-forces IG negotiation option.
 neg_option_3_trigger = {
     NOT = {
         scope:ig = {
@@ -206,16 +206,15 @@ neg_option_3_trigger = {
     scope:ig = {
         is_interest_group_type = ig_armed_forces
     }
-    trigger_if = {
-        limit = {
-            has_journal_entry = je_negotiate_army_quest
-        }
-        any_interest_group = {
-            var:promise_quest_type ?= 1
-        }
-    }
 }
 
+# NOTE (board #3540, epic #3292): the owner={ NOT={ has_journal_entry = ... } } clause
+# guarding "max 2 law promises" against je_government_petition_negotiation_version_b
+# (a REAL vanilla petition-negotiation journal entry) was dropped whole - never
+# authored here (common/journal_entries blanked/deferred), and NOT of a permanent-false
+# check is a permanent-true no-op conjunct, so the owner={} scope switch it lived in is
+# now pointless too. Disclosed gap: this specifically disables the max-2-law-promises
+# cap on this negotiation option.
 neg_option_4_trigger = {
     scope:ig = {
         OR = {
@@ -225,11 +224,6 @@ neg_option_4_trigger = {
         }
         NOT = {
             has_modifier = active_ig_promise
-        }
-        owner = {
-            NOT = { #max 2 law promises
-                has_journal_entry = je_government_petition_negotiation_version_b
-            }
         }
     }
 }
@@ -248,10 +242,13 @@ neg_option_5_trigger = { #checks if a valid promise building_type was set.
             var:promise_quest_degree != 4
         }
     }
-    NOR = {
-        has_journal_entry = je_negotiate_buildings
-    }
 }
+# NOTE (board #3540, epic #3292): neg_option_5_trigger above dropped its trailing
+# NOR = { has_journal_entry = je_negotiate_buildings } - a REAL vanilla IG petition-
+# negotiation journal entry check, never authored here (common/journal_entries
+# blanked/deferred). NOR of a permanent-false check is a permanent-true no-op conjunct.
+# Disclosed gap: this specifically disables the "no duplicate building-promise
+# negotiation already pending" dedup check for this option.
 
 neg_option_6_trigger = { #checks if a valid promise building_group was set. Arable land is checked during the setting of building group
     exists = scope:ig.var:promised_building_group
@@ -267,19 +264,25 @@ neg_option_6_trigger = { #checks if a valid promise building_group was set. Arab
             var:promise_quest_degree != 4
         }
     }
-    NOR = {
-        has_journal_entry = je_negotiate_building_group
-    }
 }
+# NOTE (board #3540, epic #3292): neg_option_6_trigger above dropped its trailing
+# NOR = { has_journal_entry = je_negotiate_building_group } - a REAL vanilla IG
+# petition-negotiation journal entry check, never authored here (common/journal_entries
+# blanked/deferred). NOR of a permanent-false check is a permanent-true no-op conjunct.
+# Disclosed gap: this specifically disables the "no duplicate building-group-promise
+# negotiation already pending" dedup check for this option.
 
+# NOTE (board #3540, epic #3292): neg_option_7_trigger below dropped its
+# NOT = { has_journal_entry = je_negotiate_taxes } conjunct - a REAL vanilla IG
+# petition-negotiation journal entry check, never authored here (common/journal_entries
+# blanked/deferred). NOT of a permanent-false check is a permanent-true no-op conjunct.
+# Disclosed gap: this specifically disables the "no duplicate tax-promise negotiation
+# already pending" dedup check for this option.
 neg_option_7_trigger = { #checks taxes are not already low and no other similar promise exists.
     NOT = {
         scope:ig = {
             has_modifier = active_ig_promise
         }
-    }
-    NOT = {
-        has_journal_entry = je_negotiate_taxes
     }
     root = {
         tax_level > low
@@ -304,15 +307,18 @@ neg_option_8_trigger = { #law_amendment_is_available.
     }
 }
 
+# NOTE (board #3540, epic #3292): neg_option_9_trigger below dropped its trailing
+# NOT = { has_journal_entry = je_negotiate_sol } conjunct - a REAL vanilla IG
+# petition-negotiation journal entry check, never authored here (common/journal_entries
+# blanked/deferred). NOT of a permanent-false check is a permanent-true no-op conjunct.
+# Disclosed gap: this specifically disables the "no duplicate standard-of-living-promise
+# negotiation already pending" dedup check for this option.
 neg_option_9_trigger = { #cannot be easy promise, too easy.
     NOT = {
         scope:ig = {
             has_modifier = active_ig_promise
             var:promise_quest_degree != 1
         }
-    }
-    NOT = {
-        has_journal_entry = je_negotiate_sol
     }
 }
 
