@@ -148,8 +148,11 @@ BOUNDARY_LAYER = "boundaries"
 #: and ``warp_cells``'s ``src_valid``). Their committed records carry a LIVE
 #: boundaries precedence only for dark_lands (113 — above IE's 100 and
 #: ``tww3_colored``'s 95, so its lines win inside its own footprint); bretonnia
-#: and kislev_norsca still carry the provisional placement value 5, so those two
-#: currently contribute BELOW IE wherever both cover. NOTE 2026-08-20: all five
+#: (5) and kislev_norsca (6, bumped 2026-09-04 from the 5 both provisionally
+#: shared — a genuine tie, rejected outright by ``stack_layers`` regardless of
+#: whether the two footprints overlap) still carry provisional placement
+#: values, so those two currently contribute BELOW IE wherever both cover.
+#: NOTE 2026-08-20: all five
 #: per-region crops (these three plus the empire and badlands_nehekhara tiles,
 #: not yet wired in here) exist in sources/ again, re-derived from the user's
 #: surviving marked dot crops by tools/inpaint_dot_markers.py. Wiring empire +
@@ -241,7 +244,7 @@ def _borrow_parent_footprint(reg: schema.SourceRegistration,
     the parent was placed for. Returns ``None`` if the parent is itself opaque.
     """
     fa = reg.frame_alias
-    _, palpha = sources.load_source_image_rgba(fa.of)
+    _, palpha = sources.load_or_derive_image_rgba(fa.of)
     if palpha is None:
         return None
     pmask = palpha > 0
@@ -269,7 +272,7 @@ def extract_source_cells(reg: schema.SourceRegistration, spec
     """
     kind, params = _normalize_source_spec(spec)
     ink_params = params.get("ink", {})
-    rgb, alpha = sources.load_source_image_rgba(reg.source)
+    rgb, alpha = sources.load_or_derive_image_rgba(reg.source)
     valid = alpha > 0 if alpha is not None else None
     if valid is None and reg.is_alias:
         # An opaque frame_alias (the user's wider border-markup re-crop) borrows
