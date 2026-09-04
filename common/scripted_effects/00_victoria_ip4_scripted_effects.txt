@@ -1,0 +1,215 @@
+﻿# Restored/ported from vanilla common/scripted_effects/00_victoria_ip4_scripted_effects.txt
+# Board item #3537 (parent epic #3292): common/scripted_effects/ is listed in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are not
+# loaded at all. The seven effects below were dropped when this mod's copy of the folder
+# was authored, leaving live call sites in common/laws/00_distribution_of_power.txt and
+# common/laws/00_governance_principles.txt calling undefined effects.
+#
+# Each entry is labelled CLEAN PORT (vanilla body verbatim), PARTIAL PORT (vanilla body
+# with named branches dropped, and what that prunes disclosed) or INERT STUB (empty body,
+# with whether it is a true no-op disclosed). See .claude/rules/scripting.md.
+
+# CLEAN PORT (#3537) - vanilla body verbatim.
+# vanilla: 00_victoria_ip4_scripted_effects.txt:1878
+# Depends only on content this mod ships: active_law:lawgroup_distribution_of_power,
+# amendment_type:amendment_electoral_clientelism (common/amendments/00_amendments_historical_04.txt)
+# and modifier:country_forbid_electoral_fraud_bool
+# (common/modifier_type_definitions/12_ip4_script_modifiers.txt).
+handle_possible_absent_caciquismo_variables = {
+	if = {
+		limit = {
+			active_law:lawgroup_distribution_of_power ?= {
+				has_amendment = amendment_type:amendment_electoral_clientelism
+			}
+			NOT = {
+				has_variable = caciquismo_var
+			}
+		}
+		set_variable = caciquismo_var
+	}
+	if = {
+		limit = {
+			modifier:country_forbid_electoral_fraud_bool = no
+			NOT = {
+				active_law:lawgroup_distribution_of_power ?= {
+					has_amendment = amendment_type:amendment_electoral_clientelism
+				}
+			}
+			NOT = {
+				has_variable = electoral_fraud_abolish_var
+			}
+		}
+		set_variable = { name = electoral_fraud_abolish_var value = 0 }
+	}
+}
+
+# CLEAN PORT (#3537) - vanilla body verbatim.
+# vanilla: 00_victoria_ip4_scripted_effects.txt:1808
+inherit_caciquismo_effect = {
+	if = {
+		limit = {
+			has_variable = caciquismo_var
+		}
+		scope:relevant_voting_law ?= {
+			add_amendment = {
+				type = amendment_electoral_clientelism
+				sponsor = PREV.ig:ig_landowners
+				cooldown = 1200
+			}
+		}
+	}
+}
+
+# CLEAN PORT (#3537) - vanilla body verbatim.
+# vanilla: 00_victoria_ip4_scripted_effects.txt:1823
+inherit_free_elections_effect = {
+	if = {
+		limit = {
+			has_variable = free_elections_var
+		}
+		scope:relevant_voting_law ?= {
+			add_amendment = {
+				type = amendment_tradition_of_free_elections
+				sponsor = PREV.ig:ig_intelligentsia
+				cooldown = 1200
+			}
+		}
+	}
+}
+
+# CLEAN PORT (#3537) - vanilla body verbatim.
+# vanilla: 00_victoria_ip4_scripted_effects.txt:1196
+# Both ideologies are shipped by this mod (common/ideologies/00_ig_ideologies.txt), and the
+# custom_tooltip key switch_from_colonial_slavery_to_pro_slavery_tt resolves from vanilla's
+# own localization/english/laws_l_english.yml, which this mod does not override - so no
+# localization work is owed here.
+switch_from_colonial_slavery_to_pro_slavery = {
+	save_temporary_scope_as = landowners_scope
+	custom_tooltip = {
+		text = switch_from_colonial_slavery_to_pro_slavery_tt
+		if = {
+			limit = {
+				has_ideology = ideology:ideology_pro_slavery_colonial
+			}
+			remove_ideology = ideology_pro_slavery_colonial
+		}
+		if = {
+			limit = {
+				NOT = { has_ideology = ideology:ideology_pro_slavery }
+			}
+			add_ideology = ideology_pro_slavery
+		}
+	}
+}
+
+# PARTIAL PORT (#3537). vanilla: 00_victoria_ip4_scripted_effects.txt:2528
+# The initial set_electoral_confidence and the closing set_variable are verbatim.
+# modifier_recent_election_initialisation is undefined in this mod (common/static_modifiers
+# has no such entry, and that folder is in replace_paths so vanilla's copy does not load).
+# has_modifier / add_modifier / remove_modifier on an undefined named modifier is a HARD
+# LOAD ERROR, so those three calls are dropped.
+# In vanilla those three calls are the ENTIRE body of the
+# `game_date > 1836.1.1 / country_has_voting_franchise = yes / eagle_burger_freedom_index < 0.8`
+# branch, so once they are dropped nothing is left for that branch to do and the branch
+# itself is dropped rather than left as an empty `if` (see the note in the item report -
+# the plan assumed the branch also carried set_electoral_confidence / set_variable calls;
+# vanilla's does not). The gate trigger itself is fine: country_has_voting_franchise is
+# defined in common/scripted_triggers/00_scripted_triggers.txt.
+# DISCLOSED GAP: the decaying election-initialisation legitimacy penalty applied to
+# low-freedom-index countries starting after 1836.1.1 is not applied at all. A follow-up may
+# restore modifier_recent_election_initialisation to common/static_modifiers/ and, with it,
+# this branch.
+initialize_electoral_confidence = {
+	set_electoral_confidence = {
+		value = 1
+		multiply = eagle_burger_freedom_index
+	}
+	set_variable = electoral_confidence_initialized
+}
+
+# CLEAN PORT (#3537) - vanilla body verbatim, applied in country scope.
+# vanilla: 00_victoria_ip4_scripted_effects.txt:309
+# All nine regency modifiers this removes (modifier_regency plus the eight per-interest-group
+# variants) were restored as real static modifiers by board item #3539 in
+# common/static_modifiers/00_ip4_04_modifiers.txt, so nothing here dangles and no stub is
+# needed. Called from common/laws/00_governance_principles.txt (two call sites).
+remove_regency_modifier = {
+	if = {
+		limit = {
+			ruler ?= {
+				is_immortal = yes
+				has_variable = regent_immortality_var
+			}
+		}
+		ruler ?= {
+			set_character_immortal = no
+			remove_variable = regent_immortality_var
+		}
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_landowners
+		}
+		remove_modifier = modifier_regency_landowners
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_devout
+		}
+		remove_modifier = modifier_regency_devout
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_petty_bourgeoisie
+		}
+		remove_modifier = modifier_regency_petty_bourgeoisie
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_industrialists
+		}
+		remove_modifier = modifier_regency_industrialists
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_trade_unions
+		}
+		remove_modifier = modifier_regency_trade_unions
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_intelligentsia
+		}
+		remove_modifier = modifier_regency_intelligentsia
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_armed_forces
+		}
+		remove_modifier = modifier_regency_armed_forces
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency_rural_folk
+		}
+		remove_modifier = modifier_regency_rural_folk
+	}
+	if = {
+		limit = {
+			has_modifier = modifier_regency
+		}
+		remove_modifier = modifier_regency
+	}
+}
+
+# INERT STUB (#3537) - TRUE NO-OP. vanilla: 00_victoria_ip4_scripted_effects.txt:2558
+# Vanilla's body removed seven real-world event modifiers (missouri_compromise,
+# modifier_portugal_liberal_hegemony, modifier_libertad_igualdad_fraternidad,
+# modifier_governors_policy, modifier_anti_electorialism,
+# modifier_farmers_voting_conservative, modifier_political_involvement_welcomed) when a
+# franchise law changed. None of the seven is defined anywhere in this mod (verified by grep
+# over common/) and none is real-world-portable, so there is genuinely nothing to clean up -
+# and porting the body would be a hard load error on every one of them.
+# Called from common/laws/00_distribution_of_power.txt (six call sites).
+cleanup_voting_strength_modifiers = {
+}

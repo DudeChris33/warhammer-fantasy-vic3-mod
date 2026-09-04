@@ -1,0 +1,63 @@
+﻿# Restored/ported from vanilla common/scripted_effects/00_victoria_ep2_scripted_effects.txt
+# Board item #3537 (parent epic #3292): common/scripted_effects/ is in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are not loaded.
+# Both effects below are called from common/laws/00_governance_principles.txt (five call
+# sites between them) and were left undefined when this mod's copy of the folder was authored.
+
+# INERT STUB (#3537) - TRUE NO-OP for this mod. vanilla: 00_victoria_ep2_scripted_effects.txt:2597
+# Vanilla's body strips the Japanese Emperor trait/role from c:JAP's characters and downgrades
+# law_neo_absolutism / law_bakufu to law_autocracy. None of that content exists here:
+# common/character_roles/02_unique_roles.txt is a deliberately empty override of
+# character_role_emperor_of_japan, special_character_japanese_emperor and je_meiji_restoration
+# are undefined, and common/laws defines neither law_neo_absolutism nor law_bakufu.
+# Called from common/laws/00_governance_principles.txt (one direct call site) and from
+# transition_off_of_monarchy_effects below.
+# NOTE: if a WH-native absolutist law variant is ever added above law_autocracy, this is the
+# hook that must demote it on a republican transition.
+transition_off_of_monarchy_law_effects = {
+}
+
+# PARTIAL PORT (#3537). vanilla: 00_victoria_ep2_scripted_effects.txt:2647
+# The two effect calls and the constitutionalist -> republican ideology swap are verbatim;
+# both ideologies ship in common/ideologies/.
+# common/journal_entries is blanked via replace_paths and je_abolish_monarchy is undefined.
+# has_journal_entry on a missing journal-entry type is a HARD LOAD ERROR, so vanilla's
+# `NOR = { has_journal_entry = je_abolish_monarchy has_variable = monarchy_stamped_out_var }`
+# guard is narrowed to the has_variable half alone. add_journal_entry on a missing type is
+# only silently inert rather than an error, but the `add_journal_entry = { type =
+# je_abolish_monarchy }` line is dropped too, for hygiene.
+# DISCLOSED GAP: no journal entry tracks the abolition of monarchy, and the guard is now
+# weaker than vanilla's - a country that has already begun abolishing the monarchy is no
+# longer detected by its journal entry, only by monarchy_stamped_out_var, so
+# abolishing_monarchy_var can be re-zeroed in a case vanilla would have skipped.
+# The set_variable IS preserved and does matter: abolishing_monarchy_var and
+# monarchy_stamped_out_var are read elsewhere in this mod (common/on_actions/,
+# common/political_movements/ and common/ideologies/).
+# A follow-up should author a WH-native je_abolish_monarchy and restore the full guard.
+transition_off_of_monarchy_effects = {
+	crown_land_republic_effect = yes
+	transition_off_of_monarchy_law_effects = yes
+	if = {
+		limit = {
+			any_interest_group = {
+				has_ideology = ideology:ideology_constitutionalist
+			}
+		}
+		every_interest_group = {
+			limit = {
+				has_ideology = ideology:ideology_constitutionalist
+			}
+			remove_ideology = ideology_constitutionalist
+			add_ideology = ideology_republican
+		}
+	}
+	if = {
+		limit = {
+			NOT = { has_variable = monarchy_stamped_out_var }
+		}
+		set_variable = {
+			name = abolishing_monarchy_var
+			value = 0
+		}
+	}
+}

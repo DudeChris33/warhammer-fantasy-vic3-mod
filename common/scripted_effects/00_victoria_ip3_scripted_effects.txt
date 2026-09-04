@@ -1,0 +1,31 @@
+﻿# Restored from vanilla common/scripted_effects/00_victoria_ip3_scripted_effects.txt
+# Board item #3537 (parent epic #3292): common/scripted_effects/ is in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are not loaded.
+# Only the one generic effect below was dropped and is still called - by
+# transition_off_of_monarchy_effects in 00_victoria_ep2_scripted_effects.txt, which
+# common/laws/00_governance_principles.txt calls from four law on_activate blocks.
+
+# CLEAN PORT (#3537) - vanilla body verbatim.
+# vanilla: 00_victoria_ip3_scripted_effects.txt:1280
+# Depends only on common/subject_types (subject_type_crown_land, subject_type_puppet), which
+# is NOT in replace_paths, so vanilla's own definitions load normally. is_subject_type and
+# is_direct_subject_of are confirmed in docs/triggers.log; change_subject_type in
+# docs/effects.log; any_subject_or_below / every_subject_or_below are already used
+# error-free elsewhere in this mod (common/diplomatic_actions/39_subjects_support_regime.txt).
+crown_land_republic_effect = {
+	if = {
+		limit = {
+			any_subject_or_below = {
+				is_subject_type = subject_type_crown_land
+				is_direct_subject_of = ROOT
+			}
+		}
+		every_subject_or_below = {
+			limit = {
+				is_subject_type = subject_type_crown_land
+				is_direct_subject_of = ROOT
+			}
+			change_subject_type = subject_type_puppet
+		}
+	}
+}

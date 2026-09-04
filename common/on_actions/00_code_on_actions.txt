@@ -2247,6 +2247,53 @@ on_amendment_repealed = {
 	effect = {}
 }
 
+# Root = Country
+# scope:amendment = amendment that timed out
+# scope:law = law the amendment was attached to
+# CLEAN PORT (#3537) - vanilla body verbatim. The notification message amendment_timed_out
+# is shipped by this mod in common/messages/00_messages.txt.
+on_amendment_timeout = {
+	effect = {
+		scope:amendment.type = {
+			save_scope_as = timed_out_amendment_type
+		}
+		scope:law = {
+			post_notification = amendment_timed_out
+		}
+	}
+}
+
+# Root = Character (the promoted commander)
+# scope:count = number of IGs that received unnecessary_promotion modifier (0 if promotion was not unnecessary)
+# CLEAN PORT (#3537) - vanilla body verbatim. Pure variable bookkeeping, no real-world
+# content. Note that achievement_everyone_disliked_that_var is currently written but never
+# read: common/achievements is blanked, so nothing consumes it. Harmless, and it keeps the
+# hook faithful to vanilla for whenever achievements are restored.
+on_commander_promoted = {
+	effect = {
+		if = {
+			limit = {
+				scope:count >= 7
+			}
+			owner = {
+				set_variable = achievement_everyone_disliked_that_var
+			}
+		}
+	}
+}
+
+# Root = New host country that inherited the treaty ports (e.g. a victorious revolution or annexation)
+# scope:target_country = Foreign power that holds the inherited treaty port(s)
+# INERT STUB (#3537). Vanilla fired treaty_port_inheritance_events.1 as a popup. events/ is
+# blanked via replace_paths and this mod has authored no events at all, so that event id
+# would dangle.
+# DISCLOSED GAP: no notification fires when treaty ports are inherited - the engine-side
+# transfer still happens, only the player-facing popup is missing. The hook scaffolding is
+# kept so a WH-native event can be attached later.
+on_treaty_ports_inherited = {
+	effect = {}
+}
+
 # Root = Invader Country
 # scope:invasion = the invasion
 # scope:target_state = the invaded state

@@ -126,18 +126,49 @@ both are currently blanked via `replace_paths` and hold no entries, so a referen
 Loc lives in `localization/english/countries_<region>_l_english.yml`, one file per script file, with
 two keys per tag: the bare tag (display name) and `<TAG>_ADJ` (adjective).
 
-## `common/scripted_triggers/` compatibility stubs (#3447)
+## Compatibility stubs and partial ports (#3447, widened #3537)
 
-Vanilla folders that are *not* in `replace_paths` (e.g. `common/battle_conditions/`, and the
-`gfx/` building/train/ship graphics data) still load and still call scripted triggers whose own
-definitions this mod declined to restore. When a dropped vanilla trigger's real body transitively
-depends on `replace_paths`-blanked data — `is_in_geographic_region = geographic_region_*`,
-`cu:<real-world culture>` ids, `heritage_group_*` discrimination trait groups, journal entries —
-**restore it as a stub under its original name** rather than porting the vanilla body, which would
-only dangle. Keep the stub bodies to `always = no` / `always = yes` (both confirmed in
-`docs/triggers.log`) so they stay deterministic. Where the vanilla body ports cleanly because it
-depends only on engine-side keys rather than content ids (e.g. `has_culture_graphics = european`),
-restore it verbatim instead of stubbing.
+Applies to `common/scripted_triggers/`, `common/scripted_effects/` and `common/on_actions/` alike.
+
+Two kinds of caller keep calling script this mod declined to restore. Either the calling file
+belongs to a folder that is *not* in `replace_paths` (e.g. `common/battle_conditions/`, and the
+`gfx/` building/train/ship graphics data), so vanilla's own copy still loads and still calls it; or
+the calling file was itself restored into this mod by epic #3292 and its body kept a call that the
+restoration pass did not bring across (`is_princely_state`, called from this mod's own
+`common/ai_strategies/` files). Both fail the same way and take the same remedy; note which one a
+new stub belongs to, since the second is self-inflicted.
+
+Every restoration falls into one of three categories, and the comment above the entry must say
+which:
+
+- **Clean port** — the vanilla body depends only on engine-side keys or on content this mod
+  actually ships, so restore it verbatim. Record the vanilla file and line.
+- **Partial port** — most of the vanilla body ports, but named branches must be dropped. The
+  comment must name *exactly* which branches were dropped, why, and what that prunes in play. A
+  partial port whose comment only says "adapted" is not acceptable. If dropping the offending
+  calls empties an `if` branch outright, drop the branch too rather than leaving an effect-less
+  `if`.
+- **Inert stub** — an empty body (`{ }` for a scripted effect, `effect = {}` for an on_action,
+  `always = no` / `always = yes` for a trigger; all confirmed valid, and vanilla itself ships an
+  empty-bodied scripted effect in `00_starting_inventions.txt`). Keep trigger stubs to a constant
+  so they stay deterministic, and pick the value matching vanilla's own fallback semantics — a
+  trigger that is vanilla's `NOR`-over-everything catch-all (e.g.
+  `gfx_has_no_culture_trains_trigger`) stubs to `yes`, not `no`.
+
+### Port-vs-stub decision rule (load-error taxonomy, confirmed #3537)
+
+What forces a drop is whether the reference is a *hard load error* or merely inert:
+
+| Reference to a missing object | Consequence |
+|---|---|
+| `has_modifier` / `add_modifier` / `remove_modifier` on an undefined named modifier | **hard load error** — must be dropped or the modifier restored |
+| `has_journal_entry` on a missing journal-entry type | **hard load error** — must be dropped |
+| `add_journal_entry` on a missing journal-entry type | silently inert — drop for hygiene, but it is not what forces a partial port |
+
+So a body that only *adds* a missing journal entry can be ported and trimmed at leisure, while one
+that *checks* a missing modifier or journal entry cannot be ported at all until the object exists.
+Prefer restoring the missing object where it is generic (board #3539 restored the nine regency
+modifiers, which turned `remove_regency_modifier` from a planned stub into a clean port).
 
 Every stub must record, in a comment above it, **whether it is a true no-op or silently prunes
 dependent content** — do not present all stubs as clean equivalences. Most graphics-selection
@@ -145,13 +176,17 @@ triggers are genuine no-ops: a false result just falls through to the default vi
 `is_in_guerilla_war` in `01_legacy_compat_triggers.txt` is the counter-example and the model for
 the disclosure: stubbing it false permanently disables the ~6 vanilla battle-condition variants
 gated on it evaluating `= yes`, which is the right call today but is a disclosed content gap with a
-follow-up owed. Pick the stub value that matches vanilla's own fallback semantics — a trigger that
-is vanilla's `NOR`-over-everything catch-all (e.g. `gfx_has_no_culture_trains_trigger`) stubs to
-`yes`, not `no`.
+follow-up owed. `is_princely_state` (#3537) is the same shape on the effects/AI side: four
+`common/ai_strategies/` branches prune when it returns no.
 
-Compatibility stubs live either in `01_legacy_compat_triggers.txt` (cross-cutting one-offs) or in a
-file named after the vanilla file they stand in for (`00_gfx_buildings_graphics_triggers.txt`).
-Before adding one, grep `common/` for the trigger id — a duplicate definition is a game-log error.
+Compatibility triggers live either in `01_legacy_compat_triggers.txt` (cross-cutting one-offs) or in
+a file named after the vanilla file they stand in for (`00_gfx_buildings_graphics_triggers.txt`).
+Restored scripted effects follow the second shape only — one file per vanilla file, under vanilla's
+own filename (`00_victoria_ip4_scripted_effects.txt`, `00_victoria_ip3_scripted_effects.txt`,
+`00_victoria_ep2_scripted_effects.txt`, #3537), carrying just the entries that file's live call
+sites still need. Restored on_actions go into the existing `common/on_actions/00_code_on_actions.txt`
+beside their vanilla neighbours, keeping vanilla's `# Root = …` / `# scope:… =` header comments.
+Before adding any of them, grep `common/` for the id — a duplicate definition is a game-log error.
 
 ## Forbidden
 

@@ -1,6 +1,18 @@
-﻿# Compatibility stubs for scripted triggers referenced by vanilla files that this
-# mod does not blank via replace_paths (so vanilla's copy still loads), but whose
-# original definitions were pure real-world content and were not restored.
+﻿# Compatibility stubs for scripted triggers whose original vanilla definitions were
+# pure real-world content and were not restored, but which are still called by live
+# script in this mod. Two distinct classes live here:
+#
+#   1. Un-restored callee, vanilla caller. The calling file belongs to a folder this
+#      mod does NOT blank via replace_paths, so vanilla's own copy still loads and
+#      still calls the trigger (is_in_guerilla_war, below).
+#   2. Un-restored callee, restored caller. The calling file was itself restored into
+#      this mod from vanilla by epic #3292's restoration work, and its body kept a
+#      call to a trigger that restoration did not bring across (is_princely_state,
+#      below - called from this mod's own common/ai_strategies/ files).
+#
+# Both classes fail the same way (an undefined trigger) and take the same remedy, but
+# the second is self-inflicted by a restoration pass rather than inherited from
+# vanilla's loader, so note which one a new stub belongs to.
 #
 # is_in_guerilla_war: vanilla's definition was entirely about the Carlist Wars,
 # which do not exist in this setting. common/battle_conditions is NOT in
@@ -20,5 +32,26 @@
 # is a content gap, not a clean equivalence: a follow-up item should design a
 # WH-native guerrilla/insurgency flag and re-wire those variants onto it.
 is_in_guerilla_war = {
+	always = no
+}
+
+# is_princely_state (class 2 above): vanilla's definition
+# (00_scripted_triggers.txt:1842) is entirely British-Raj content - it gates on
+# is_in_geographic_region = geographic_region_india, then ORs eighteen
+# gov_princely_state_* / gov_regency_princely_state_* government types plus a
+# republican-fallback branch keyed on rel:hindu / rel:sunni / rel:shiite and
+# subjecthood to c:GBR / c:BIC / c:BHT. common/geographic_regions is blanked and
+# empty, common/government_types defines no princely_state variant, and none of
+# those tags or religions exist here. Stubbed to a constant "no" - deterministic,
+# and semantically "no such polity exists in this setting".
+#
+# DISCLOSED CONTENT GAP (#3537): this is NOT a pure no-op. Four call sites in this
+# mod's own restored AI strategy files prune when it returns no -
+# common/ai_strategies/01_admin_strategies.txt (two), 02_subject_diplomatic_strategies.txt
+# and 03_political_strategies.txt. Those branches tuned AI behavior for princely
+# states specifically; with the stub they fall through to generic behavior, which is
+# the correct outcome today. If a WH-native vassal-principality archetype is ever
+# designed, this is the hook to re-point those branches at.
+is_princely_state = {
 	always = no
 }
