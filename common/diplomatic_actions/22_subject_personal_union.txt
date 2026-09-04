@@ -32,10 +32,13 @@
 			always = no
 		}
 
+		# PARTIAL PORT (has_law taxonomy, #3537-adjacent): vanilla also excludes
+		# law_bakufu here, but common/laws (replace_paths) never defines it — has_law
+		# on an undefined law_type is a hard load error (same class as has_modifier /
+		# has_journal_entry). Dropped the NOT branch rather than stub the whole trigger.
 		requirement_to_maintain = {
 			trigger = {
 				country_has_monarchy_law = yes
-				NOT = { has_law = law_type:law_bakufu } # I have seen things
 			}
 		}
 
@@ -43,7 +46,6 @@
 			trigger = {
 				scope:target_country = {
 					country_has_monarchy_law = yes
-					NOT = { has_law = law_type:law_bakufu }
 				}
 			}
 		}
