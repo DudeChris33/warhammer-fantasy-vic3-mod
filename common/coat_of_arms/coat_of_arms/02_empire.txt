@@ -1,0 +1,306 @@
+# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per epic #3621 child #3622 — the 17
+# Empire country tags (common/country_definitions/02_empire.txt, same order).
+# Composed entirely from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems,
+# neither blanked by replace_paths) and this mod's named_colors palette
+# (common/named_colors/00_coa_colors.txt + 01_wh_coa_colors.txt). Loremaster-consulted
+# during scoping (see #3622's pushed description for the full per-tag design table,
+# confidence labels, and the "decisions to confirm" list). Each block below records
+# its provenance bucket per the epic's "record every substitution" acceptance
+# criterion. Requires common/flag_definitions/02_empire.txt (this mod's DEFAULT
+# flag_definitions block is unconditional at priority = 0 and would otherwise mask
+# every one of these — see that file's header) to actually render in-game.
+
+# EMP — canon-firm: double-headed Imperial eagle, black/gold on red. No substitution.
+EMP = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "red"
+
+	colored_emblem = {
+		texture = "ce_eagle_double_headed.dds"
+		color1 = "black"
+		color2 = "golden"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# REI — griffon is canon-firm for Reikland but no griffon art exists in vanilla;
+# disclosed substitution: ce_ahom_winged_lion (eagle-fore/lion-hind, one step from
+# a griffon). Red/white is Reikland's own canon state-uniform tincture.
+REI = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "red"
+	color2 = "white"
+
+	colored_emblem = {
+		texture = "ce_ahom_winged_lion.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# MID — Ulric's device is canon-firm a white wolf; no wolf/canine art exists in the
+# vanilla catalog (re-swept, confirmed). Disclosed fallback: a recoloured
+# ce_lion_rampant as a generic rampant-beast silhouette — the loremaster's stated
+# fallback, not its preferred option. Deliberately NOT ce_wolfsangel (real-world
+# Nazi association despite genuine pre-WWII heraldic origin).
+MID = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "blue"
+
+	colored_emblem = {
+		texture = "ce_lion_rampant.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# NLD — blue/yellow is canon-firm (Nordland state uniform). No canon blazon
+# confirmed (unverified): a watch-star (the coast that watches Norsca), chosen
+# over a ship so Nordland and Marienburg don't duplicate.
+NLD = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "blue"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# HOC — green/red is canon-firm (Hochland state uniform). Hunting-horn/longrifle
+# identity is canon-firm but no horn art exists and a stag would duplicate
+# Talabecland; disclosed invention: a hunting spearhead.
+HOC = {
+	pattern = "pattern_vertical_split_01.tga"
+	color1 = "green"
+	color2 = "red"
+
+	colored_emblem = {
+		texture = "ce_spearhead.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# OST — black/white is canon-firm (Ostland's very distinctive uniform). Ox/bull-head
+# identity is soft; uses the _mecklenburg variant (distinct art from Averland's
+# ce_bull_head) so the two provinces don't render identically recoloured.
+OST = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_bull_head_mecklenburg.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# OSM — purple/yellow is soft canon (widely reproduced). No canon blazon
+# (unverified): a six-point ward-star for the eastern march watch, disclosed
+# invention.
+OSM = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_star_06.dds"
+		color1 = "yellow"
+		color2 = "yellow"
+		instance = { position = { 0.5 0.5 } scale = { 0.5 0.5 } }
+	}
+}
+
+# TAL — red/yellow and the stag/antler association (Taal, patron of Talabheim, is
+# the stag god) are both canon-firm — the strongest canon pick in this file.
+# ce_kanty_antlers (a paired-antlers "attires" charge), scaled up and centred.
+TAL = {
+	pattern = "pattern_vertical_split_01.tga"
+	color1 = "red"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_kanty_antlers.dds"
+		color1 = "brown"
+		color2 = "brown"
+		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
+	}
+}
+
+# STI — green/yellow is soft (a live web search during the loremaster consult
+# confirmed this pairing, not a fetched/cited source). Skull/death association is
+# soft (grave-haunted march bordering Sylvania); no skull art exists — a bone-white
+# ce_crescent_large stands in, distinct from SYL's Morrslieb-green crescent below.
+STI = {
+	pattern = "pattern_border_of_2.dds"
+	color1 = "green"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_crescent_large.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# AVE — black/yellow (canon-firm) and the bull (canon-firm identity, Averheim's
+# herds) both confirmed; gets the primary ce_bull_head art over Ostland per the
+# loremaster's tie-break. ce_bull_head has zero vanilla usages anywhere (confirmed
+# by grep) so its real colour-slot count is unverified, unlike every other emblem
+# in this file — all three slots specified defensively as the same tone.
+AVE = {
+	pattern = "pattern_solid.tga"
+	color1 = "yellow"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_bull_head.dds"
+		color1 = "black"
+		color2 = "black"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# WIS — white/grey is canon-firm (Wissenland's sober tone). Nuln's Imperial Gunnery
+# School/artillery primacy is canon-firm identity; cannon-as-blazon is unverified
+# but loremaster-approved as disclosed invention.
+WIS = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "white"
+	color2 = "grey"
+
+	colored_emblem = {
+		texture = "ce_cannon.dds"
+		color1 = "grey"
+		color2 = "black"
+		color3 = "orange"
+		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
+	}
+}
+
+# SOL — canon-firm: Solland's Sun / the Sun-Maker runefang, lost with the province
+# to Gorbad Ironclaw. Strongest canon signal in the whole set. Dark-red mourning
+# field marks the province as a dead claimant, not a living state.
+SOL = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_sun_radiant.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "orange"
+		instance = { position = { 0.5 0.5 } scale = { 0.85 0.85 } }
+	}
+}
+
+# MOO — halfling agrarian identity is canon-firm (the Moot's food contribution to
+# the Empire); no specific blazon exists (unverified) — a wheat-sheaf, kept modest
+# per the loremaster's tone note (patronised backwater, not a shire idyll).
+MOO = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	color2 = "green"
+
+	colored_emblem = {
+		texture = "ce_wheat_garb.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# SYL — purple/black is canon-firm for Sylvania. Sickly-green crescent (Morrslieb,
+# the Chaos moon long-associated with Sylvania/the vampires in canon) replaces the
+# original cross idea (a cross reads Sigmarite — wrong faith), per loremaster
+# correction. This is the tame (human-population) version of the tag.
+SYL = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_crescent_large.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# VSY — the von Carstein regime: same Morrslieb-crescent motif as SYL, corrupted —
+# black field (vs. SYL's purple), plus a black/blood-red winged-beast charge
+# (bat-adjacent per the loremaster's guidance) layered in, so it reads as SYL's
+# identity gone wrong, not an unrelated design.
+VSY = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_crescent_large.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+	colored_emblem = {
+		texture = "ce_ahom_winged_lion.dds"
+		color1 = "red_dark"
+		color2 = "red_dark"
+		color3 = "black"
+		instance = { position = { 0.72 0.3 } scale = { 0.5 0.5 } }
+	}
+}
+
+# VEM — EMP's own eagle, recoloured blood-red/black instead of black/gold: the
+# Empire's own symbol corrupted by conquest. Deliberately legible as "EMP's eagle,
+# wrong" rather than a new design, to read as the conquest tag it is.
+VEM = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_eagle_double_headed.dds"
+		color1 = "red_dark"
+		color2 = "black"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# MAR — mercantile port-city identity is canon-firm (the Directorate, seceded IC
+# 2429); ship-as-blazon is unverified but loremaster-approved, and gets the claim
+# over Nordland (stronger thematic fit). Existing map colour (teal) already reads
+# as maritime — kept as the field.
+MAR = {
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+	color2 = "teal"
+
+	colored_emblem = {
+		texture = "ce_ship_manchester.dds"
+		color1 = "white"
+		color2 = "golden"
+		color3 = "teal"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}

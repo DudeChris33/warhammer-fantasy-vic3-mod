@@ -1,0 +1,147 @@
+# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at
+# priority = 0 — so "no flag definition is applicable for a country" (vanilla's
+# own tag-as-COA_KEY fallback condition, see that file's vanilla header comment
+# at .../game/common/flag_definitions/00_flag_definitions.txt:1-14) never fires
+# for any tag. Without a higher-priority tag-named list here, every bespoke COA
+# in common/coat_of_arms/coat_of_arms/02_empire.txt (#3622, epic #3621) would
+# parse but sit unused behind default_flag. Each list below is a single
+# unconditional block at priority = 100 — above #3552's priority = 0 DEFAULT,
+# below vanilla's own conditional range of 100-2000 for future per-tag variants.
+# `always = yes` confirmed valid at docs/triggers.log.
+
+EMP = {
+	flag_definition = {
+		coa = EMP
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+REI = {
+	flag_definition = {
+		coa = REI
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MID = {
+	flag_definition = {
+		coa = MID
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+NLD = {
+	flag_definition = {
+		coa = NLD
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+HOC = {
+	flag_definition = {
+		coa = HOC
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+OST = {
+	flag_definition = {
+		coa = OST
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+OSM = {
+	flag_definition = {
+		coa = OSM
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TAL = {
+	flag_definition = {
+		coa = TAL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+STI = {
+	flag_definition = {
+		coa = STI
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+AVE = {
+	flag_definition = {
+		coa = AVE
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+WIS = {
+	flag_definition = {
+		coa = WIS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SOL = {
+	flag_definition = {
+		coa = SOL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MOO = {
+	flag_definition = {
+		coa = MOO
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SYL = {
+	flag_definition = {
+		coa = SYL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+VSY = {
+	flag_definition = {
+		coa = VSY
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+VEM = {
+	flag_definition = {
+		coa = VEM
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MAR = {
+	flag_definition = {
+		coa = MAR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
