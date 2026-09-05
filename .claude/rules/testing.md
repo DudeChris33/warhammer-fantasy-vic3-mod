@@ -77,19 +77,27 @@ The sea engine files `map_data/state_regions/99_seas.txt`,
 (canon keys/ids), so regenerate rather than hand-edit them (`default.map`'s other
 keys and `adjacencies.csv`'s strait rows stay hand-authored). The old staged
 `tools/derived/seas_99_seas.txt` / `seas_sea_starts.txt` are removed.
-`map_data/state_regions/00_norsca.txt`, `common/strategic_regions/land_strategic_regions.txt`
+`map_data/state_regions/NN_<stem>.txt` (all 20),
+`common/strategic_regions/{old_world,southlands,out_of_scope}_strategic_regions.txt`
 and `localization/english/map/wh_land_states_l_english.yml` are emitted the same
-way by `python tools/generate_land_regions.py` (board #2930) — it joins
-`land_regions_index.json` (708 regions) with `provinces_index.json` and
-`sea_zones_index.json` (naval-exit resolution by real land↔sea pixel adjacency);
-regenerate rather than hand-edit. All 708 regions land in one file with one
-strategic region — the 20-file realm split is deferred to #2931, so nothing here
-survives that rewrite. `tools/render_land_regions_preview.py` is the matching
-**dev-only** naming aid, outside the gate above: a numbered review PNG + CSV
-worksheet, draping the real TWW3 parchment art under the tinted regions via
+way by `python tools/generate_land_regions.py` (boards #2930/#2931) — it joins
+`land_regions_index.json` (369 regions: 267 drawn + 102 out-of-scope placeholders)
+with `provinces_index.json` and `sea_zones_index.json` (naval-exit resolution by
+real land↔sea pixel adjacency), then routes each region through
+`tools/worldgen/land_naming.py` for its canon realm (a per-region pixel-plurality
+vote against `sources/terraqueous_globe_reprojected - strategic_regions.png`,
+classified by `tools/config/strategic_region_colors.json`) and canon name (from
+the persisted, hand-edited `tools/config/land_regions_worksheet.csv`, or its
+out-of-scope continent's name from `tools/config/out_of_scope_continents.json`);
+regenerate rather than hand-edit any of the emitted files.
+`tools/render_land_regions_preview.py` is the matching **dev-only** review
+render, outside the gate above: a numbered review PNG + a `tools/derived/`
+worksheet sidecar that round-trips names already committed in
+`tools/config/land_regions_worksheet.csv` forward (never overwrites them),
+draping the real TWW3 parchment art under the tinted regions via
 `tools/project_regions.py`'s existing five-crop registration wherever it covers
 the canvas (an `on_parchment` CSV column flags which regions that is), so the
-person doing #2931's naming pass reads real printed names off the render
+person doing the canon-naming pass reads real printed names off the render
 directly. Two earlier automated-guess attempts were tried and dropped
 (2026-09-05): nearest real-world vanilla Vic3 state by lon/lat (a coincidental-
 Earth-geography heuristic the user rejected outright) and OCR of the parchment

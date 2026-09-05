@@ -1,1 +1,220 @@
-﻿
+﻿STATE_FLEETPORT_OF_TERROR = {
+    id = 116
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x086F46 x1F84A3 x2DC8DB x44DE38 x6A37CD x814D2A x8F9162 xA6A6BF xBDBC1C xCC0054 xCC53F6 xE315B1 xF159E9 }
+    city = x6A37CD
+    farm = x086F46
+    mine = x8F9162
+    wood = xF159E9
+    port = xCC53F6
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3096
+}
+STATE_NECROPOLIS_OF_ZANDRI = {
+    id = 117
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x065A45 x1D6FA2 x2BB3DA x42C937 x59DE94 x6822CC x7F3829 x81A0CC xA491BE xBBA71B xC9EB53 xE100B0 }
+    city = x42C937
+    farm = x065A45
+    mine = x7F3829
+    wood = xC9EB53
+    port = xE100B0
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3110
+}
+STATE_GREAT_MORTIS_DELTA = {
+    id = 118
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x3126ED x568082 x92EF74 xA6FA61 xB84909 xF4B7FB }
+    city = x568082
+    farm = x3126ED
+    mine = xA6FA61
+    wood = xB84909
+    port = xF4B7FB
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3110
+}
+STATE_KHEMRIAN_DESERT = {
+    id = 121
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0D1669 x15E78E x242BC6 x3B4123 x49855B x525680 x609AB8 x6EDEF0 x77B015 x85F44D x9D09AA xAB4DE2 xB41F07 xC2633F xD9789C xE7BCD4 xF08DF9 xFA7EB0 xFED231 }
+    city = xFED231
+    farm = x0D1669
+    mine = x85F44D
+    wood = xFA7EB0
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+}
+STATE_ROAD_OF_KINGS = {
+    id = 122
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0B0168 x47705A x6CC9EF x735C94 xA938E1 xCE9276 }
+    city = x6CC9EF
+    farm = x0B0168
+    mine = x735C94
+    wood = xCE9276
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+}
+STATE_SWAMP_OF_TERROR = {
+    id = 123
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x1B5AA1 x326FFE x57C993 x7D2328 x943885 xB9921A xBE0FBE xD0A777 xF6010C }
+    city = x57C993
+    farm = x1B5AA1
+    mine = x943885
+    wood = xD0A777
+    port = xF6010C
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3110
+}
+STATE_CITY_OF_KINGS = {
+    id = 124
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x1DECC3 x350220 x5A5BB5 x717112 x7FB54A x96CAA7 xBC243C xC6E0E3 xD33999 xF8932E }
+    city = x5A5BB5
+    farm = x1DECC3
+    mine = x96CAA7
+    wood = xD33999
+    port = xF8932E
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3110
+}
+STATE_LOWER_RIVER_MORTIS = {
+    id = 125
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x037954 x1A8EB1 x28D2E9 x3FE846 x56FDA3 x6541DB x7C5738 x8A9B70 x936C95 xA1B0CD xB8C62A xC70A62 xDE1FBF xEC3A78 xEC63F7 xF5351C }
+    city = xA1B0CD
+    farm = x037954
+    mine = x936C95
+    wood = xF5351C
+    port = x8A9B70
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3110
+}
+STATE_UPPER_ASH_RIVER = {
+    id = 184
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x034FD5 }
+    city = x034FD5
+    farm = x034FD5
+    mine = x034FD5
+    wood = x034FD5
+    port = x034FD5
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3126
+}
+STATE_LOWER_ASH_RIVER = {
+    id = 185
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x65185C }
+    city = x65185C
+    farm = x65185C
+    mine = x65185C
+    wood = x65185C
+    port = x65185C
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3126
+}
+STATE_FALLOW_FIELDS = {
+    id = 186
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x06D766 x0C4A79 x151B9E x235FD6 x2C30FB x31A40E x3A7533 x434658 x48B96B x518A90 x5FCEC8 x689FED x6E1300 x76E425 x85285D x8A71F1 x8DF982 x9C3DBA xA50EDF xAA81F2 xB35317 xC1974F xCA6874 xCFDB87 xD8ACAC xE17DD1 xE6F0E4 xEFC209 xFE0641 }
+    city = x151B9E
+    farm = x06D766
+    mine = x8A71F1
+    wood = xFE0641
+    port = x2C30FB
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3126
+}
+STATE_THE_SCARAB_CITY = {
+    id = 187
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x1945A0 x305AFD x3E9F35 x55B492 x7B0E27 x922384 xA067BC xB77D19 xD5251B xDCD6AE xF3EC0B }
+    city = xDCD6AE
+    farm = x1945A0
+    mine = x7B0E27
+    wood = xF3EC0B
+    port = xB77D19
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3116
+}
+STATE_NECROPOLIS_OF_NUMAS = {
+    id = 188
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x11940D x2216C5 x392C22 x5E85B7 x83DF4C x9AF4A9 xC04E3E xE5A7D3 xFCBD30 }
+    city = x2216C5
+    farm = x11940D
+    mine = x83DF4C
+    wood = xFCBD30
+    port = x9AF4A9
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3116
+}
+STATE_MORTIS_TARN = {
+    id = 190
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x023043 x07A356 x10747B x1EB8B3 x2789D8 x2CFCEB x35CE10 x441248 x4CE36D x5B27A5 x63F8CA x696BDD x723D02 x80813A x89525F x8EC572 x979697 x98B629 xA5DACF xAEABF4 xBCF02C xC5C151 xCB3464 xD40589 xE249C1 xEB1AE6 xF95F1E }
+    city = x80813A
+    farm = x023043
+    mine = x723D02
+    wood = xF95F1E
+    port = xEB1AE6
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3116
+}

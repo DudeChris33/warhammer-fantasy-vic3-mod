@@ -1,1 +1,80 @@
-﻿
+﻿STATE_LAND_164 = {
+    id = 164
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x2C077C }
+    city = x2C077C
+    farm = x2C077C
+    mine = x2C077C
+    wood = x2C077C
+    port = x2C077C
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3196
+}
+STATE_LAND_165 = {
+    id = 165
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x76BAA6 }
+    city = x76BAA6
+    farm = x76BAA6
+    mine = x76BAA6
+    wood = x76BAA6
+    port = x76BAA6
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3176
+}
+STATE_LAND_166 = {
+    id = 166
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x233657 }
+    city = x233657
+    farm = x233657
+    mine = x233657
+    wood = x233657
+    port = x233657
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3159
+}
+STATE_LAND_168 = {
+    id = 168
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x934316 }
+    city = x934316
+    farm = x934316
+    mine = x934316
+    wood = x934316
+    port = x934316
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3161
+}
+STATE_LAND_169 = {
+    id = 169
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x68766E }
+    city = x68766E
+    farm = x68766E
+    mine = x68766E
+    wood = x68766E
+    port = x68766E
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3210
+}
