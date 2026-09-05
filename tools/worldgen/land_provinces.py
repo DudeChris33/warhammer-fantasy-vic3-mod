@@ -221,6 +221,75 @@ def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndar
     return cells.renumber(remap[reg])
 
 
+#: How far :func:`apply_land_region_merges` searches outward from an anchor
+#: for a labelled (non-zero) region pixel, in case the exact stored pixel
+#: rounds onto a barrier/off-region gap.
+_MERGE_ANCHOR_SEARCH_RADIUS = 6
+
+
+def _region_near(reg: np.ndarray, x: int, y: int, max_radius: int) -> int:
+    """The region label at ``(x, y)``, or the nearest labelled pixel within
+    ``max_radius`` (0 if none — the anchor missed land entirely)."""
+    h, w = reg.shape
+    for r in range(max_radius + 1):
+        y0, y1 = max(0, y - r), min(h, y + r + 1)
+        x0, x1 = max(0, x - r), min(w, x + r + 1)
+        sub = reg[y0:y1, x0:x1]
+        nz = sub[sub > 0]
+        if nz.size:
+            return int(nz[0])
+    return 0
+
+
+def apply_land_region_merges(reg: np.ndarray, merges: list["schema.LandRegionMerge"],
+                             log=None) -> np.ndarray:
+    """Force-union the regions owning each merge pair's two anchors, directly.
+
+    Resolves each anchor straight to a region label (:func:`_region_near`) and
+    unions the two labels in one shared union-find pass — so a chain of pairs
+    that shares an anchor (A merges into B, B merges into C) unions all three,
+    which a "paint a zone per pair" scheme (this function's first cut) gets
+    wrong whenever two pairs share the *exact* same anchor pixel: the second
+    pair's marker silently overwrites the first's zone there, breaking the
+    chain in two. Resolving to region labels up front sidesteps that
+    entirely — there is no zone array for one stamp to clobber another's.
+    """
+    n = int(reg.max())
+    parent = np.arange(n + 1)
+
+    def find(a: int) -> int:
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return int(a)
+
+    def union(a: int, b: int) -> None:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[max(ra, rb)] = min(ra, rb)
+
+    merged_any = False
+    for m in merges:
+        ax, ay = m.anchor_a
+        bx, by = m.anchor_b
+        ra = _region_near(reg, ax, ay, _MERGE_ANCHOR_SEARCH_RADIUS)
+        rb = _region_near(reg, bx, by, _MERGE_ANCHOR_SEARCH_RADIUS)
+        if ra <= 0 or rb <= 0:
+            if log:
+                log(f"  land region merge override skipped (anchor missed land): {m.note}")
+            continue
+        if find(ra) != find(rb):
+            union(ra, rb)
+            merged_any = True
+            if log:
+                log(f"  land region merge override: regions {ra},{rb} -> {find(ra)}  ({m.note})")
+
+    if not merged_any:
+        return reg
+    remap = np.array([find(i) for i in range(n + 1)], dtype=reg.dtype)
+    return cells.renumber(remap[reg])
+
+
 def drawn_mask(land: np.ndarray, mag: np.ndarray, wrap_x: bool = True,
                interior_dist: int = _INTERIOR_COAST_DIST,
                reach: int = _DRAWN_REACH, log=None) -> np.ndarray:

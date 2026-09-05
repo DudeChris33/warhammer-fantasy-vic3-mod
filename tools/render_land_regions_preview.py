@@ -275,6 +275,18 @@ def _region_on_parchment(lab: np.ndarray, placed: np.ndarray, n_regions: int) ->
     return out
 
 
+#: Prefixes marking a worksheet "name" cell as an instruction to act on
+#: (Chris, 2026-09-05: "the notes in parentheses are just for me, your tasks
+#: are the ones in caps") rather than an actual canon name — used to pick the
+#: real name over a now-satisfied merge instruction when two carried-forward
+#: names land on the same post-merge region.
+_DIRECTIVE_PREFIXES = ("MERGE INTO", "SHOULD BE", "NEEDS CLOSER LOOK", "MALFORMED")
+
+
+def _is_directive_name(name: str) -> bool:
+    return name.strip().upper().startswith(_DIRECTIVE_PREFIXES)
+
+
 def _label_font_size(area: int) -> int:
     """Region area (px) -> label font size, scaled by sqrt(area) and clamped
     to [:data:`LABEL_FONT_MIN`, :data:`LABEL_FONT_MAX`] — a small ribbon
@@ -411,7 +423,18 @@ def main(argv: list[str] | None = None) -> int:
                     continue
                 if new_label in name_by_new_label and name_by_new_label[new_label] != name:
                     conflicts.append(new_label)
-                    continue  # first writer wins; keep whichever was already attached
+                    # A merge override (tools/config/land_region_merges.json)
+                    # routinely lands an instruction string ("MERGE INTO 57")
+                    # on the same region as the real name it pointed at
+                    # ("Marienburg") — prefer the real name over the
+                    # now-satisfied instruction rather than whichever
+                    # happened to be read first.
+                    if _is_directive_name(name) and not _is_directive_name(name_by_new_label[new_label]):
+                        continue
+                    if not _is_directive_name(name) and _is_directive_name(name_by_new_label[new_label]):
+                        name_by_new_label[new_label] = name
+                        continue
+                    continue  # both/neither are directives: first writer wins
                 name_by_new_label.setdefault(new_label, name)
     if orphaned:
         print(f"WARNING: {len(orphaned)} name(s) could not be relocated (their anchor point is no "

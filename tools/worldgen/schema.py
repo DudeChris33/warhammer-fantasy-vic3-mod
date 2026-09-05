@@ -443,6 +443,53 @@ def load_out_of_scope_continents(path: Path, canvas: tuple[int, int] | None = No
 
 
 # ---------------------------------------------------------------------------
+# Land-region merge overrides (board #2930 follow-up: judgement-call merges)
+# ---------------------------------------------------------------------------
+#
+# Some land regions the drawn magenta network keeps separate should still ship
+# as one state regardless — a deliberate editorial call (2026-09-05: "unify
+# regardless of lines"), not a flood-fill/merge-floor artifact like the
+# tiny-island problem or the too-aggressive MERGE_FLOOR that #2930 already
+# fixed. Unlike :class:`OutOfScopeContinent` or the tiny-island override (both
+# painted), a merge pair is authored as two precise pixel **anchors** — in
+# practice copied straight from the naming worksheet's own anchor_x/anchor_y
+# columns, since those already pin an exact interior point of each region.
+
+@dataclass(frozen=True)
+class LandRegionMerge:
+    """One judgement-call merge: the regions owning ``anchor_a`` and
+    ``anchor_b`` are force-unioned regardless of any magenta line between
+    them. Transitive chains (A merges into B, B into C) are fine — the
+    consuming union-find does not care which pair record supplies which leg."""
+
+    anchor_a: tuple[int, int]
+    anchor_b: tuple[int, int]
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "LandRegionMerge":
+        (a,) = _as_seed_list([_require(d, "anchor_a", ctx)], f"{ctx}.anchor_a", canvas)
+        (b,) = _as_seed_list([_require(d, "anchor_b", ctx)], f"{ctx}.anchor_b", canvas)
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(anchor_a=a, anchor_b=b, note=note)
+
+
+def load_land_region_merges(path: Path, canvas: tuple[int, int] | None = None
+                            ) -> list[LandRegionMerge]:
+    """Load + validate the committed land-region merge overrides (authored
+    order preserved — it has no semantic meaning here, but matches the other
+    loaders' convention of not reordering hand-authored input)."""
+    ctx = path.name
+    data = _load_json(path)
+    merges_raw = _require(data, "merges", ctx)
+    if not isinstance(merges_raw, list) or not merges_raw:
+        raise SchemaError(f"{ctx}.merges: expected a non-empty list")
+    return [LandRegionMerge.from_dict(m, f"{ctx}.merges[{i}]", canvas)
+            for i, m in enumerate(merges_raw)]
+
+
+# ---------------------------------------------------------------------------
 # Canon sea groups (the sea-zone naming config generate_sea_zones.py reads)
 # ---------------------------------------------------------------------------
 #

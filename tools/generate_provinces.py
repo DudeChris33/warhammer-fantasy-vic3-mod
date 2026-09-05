@@ -28,6 +28,15 @@ neighbour to qualify for the region stage's share-a-border merge, so left alone
 every one of them becomes its own micro state-region. Absent entirely (nothing
 drawn yet) is the default and changes nothing.
 
+Optionally also reads ``tools/config/land_region_merges.json`` (board #2930
+follow-up, 2026-09-05): judgement-call region merges authored as precise pixel
+anchor pairs (typically copied from the naming worksheet's own anchor_x/
+anchor_y columns) rather than drawn — "unify regardless of lines," for pairs
+that read as one state even though the magenta network keeps them apart.
+Combined with the tiny-island zones (disjoint id ranges) into one override
+layer before the region stage's usual merge machinery runs. Absent entirely
+changes nothing.
+
 Deterministic: a pure function of the committed mask + sea layer + the manifested
 drawn source + ``map_config.SEED``, so a re-run reproduces byte-identical output —
 the determinism core.md requires of a multiplayer-synchronized mod. Regenerate
@@ -52,7 +61,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import cells, land_provinces, raster, sources  # noqa: E402
+from worldgen import cells, land_provinces, raster, schema, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
@@ -73,6 +82,10 @@ STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
 #: exist yet, generation proceeds with no overrides, exactly as before this
 #: existed.
 ISLAND_OVERRIDES_SOURCE = "terraqueous_globe_reprojected - tiny_islands_merger.png"
+#: Optional — judgement-call region merges authored as pixel anchor pairs
+#: rather than drawn. See land_provinces.apply_land_region_merges / the module
+#: docstring. Absent entirely, generation proceeds with no overrides.
+LAND_REGION_MERGES_CONFIG = TOOLS_DIR / "config" / "land_region_merges.json"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
 
@@ -160,6 +173,11 @@ def main(argv: list[str] | None = None) -> int:
     log("flood-filling the magenta network into state regions ...", t0)
     reg = land_provinces.regions(land, drawn, LINE_DILATE, args.merge_floor, WRAP_X, log=log,
                                  island_overrides=island_overrides)
+
+    if LAND_REGION_MERGES_CONFIG.is_file():
+        merges = schema.load_land_region_merges(LAND_REGION_MERGES_CONFIG, canvas=(CANVAS_W, CANVAS_H))
+        reg = land_provinces.apply_land_region_merges(reg, merges, log=log)
+        log(f"land region merge overrides: {len(merges)} judgement-call pair(s) applied", t0)
     mag = land_provinces.magenta_lines(drawn)
     dmask = land_provinces.drawn_mask(land, mag, WRAP_X, log=log)
     log("subdividing the drawn regions into provinces ...", t0)
