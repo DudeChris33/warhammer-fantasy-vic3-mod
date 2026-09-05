@@ -31,16 +31,27 @@ the five crops reach and the plain reprojected globe everywhere else (every
 placeholder/out-of-scope region, plus any drawn region outside the five crops'
 coverage).
 
-**Disclosed limitation**: 708 regions (many 1-few-px placeholder slivers)
-cannot all carry a legible on-image label — only regions at or above
-``MIN_LABEL_AREA`` get one. The CSV sidecar (``land_regions_worksheet.csv``,
-sorted by area descending) is the exhaustive reference for the rest, mirroring
+**Disclosed limitation**: 708 regions (many 1-few-px placeholder slivers, plus
+plenty of thin river-bounded ribbons among the 281 drawn ones — Chris draws a
+lot of state borders along rivers) cannot all carry a legible on-image label
+at one fixed size — the label font scales with ``sqrt(area)`` (see
+``_label_font_size``, clamped to ``LABEL_FONT_MIN..LABEL_FONT_MAX``) so a
+small region still gets a small but legible number instead of either an
+oversized glyph or, as the first cut of this tool did at a flat 4000 px floor,
+silently no number at all (that dropped 119 of the 281 drawn regions — 42% of
+them, since the median drawn region is only ~4600 px). Only regions at or
+above ``MIN_LABEL_AREA`` (now 150 px — just above the sub-4px degenerate-
+province floor #2927 owns) get any label. The CSV sidecar
+(``land_regions_worksheet.csv``, sorted by area descending) is the exhaustive
+reference for the rest, mirroring
 ``tools/config/sea_zone_naming_worksheet.txt``'s pattern: the image serves the
 large, eyeball-able regions; the sidecar is the exhaustive list. Its
 ``on_parchment`` column flags whether that region's centroid falls under real
 parchment art (a name can be read off the render) or the plain-globe fallback
 (no real Warhammer map covers it — placeholders and any drawn region outside
-the five crops).
+the five crops). ``name`` is the one column meant for a human to actually fill
+in — blank on a fresh run, and carried forward (never wiped) across re-runs so
+naming progress survives a later regeneration.
 
 Local-only output: embeds source pixels, so it lands under ``tools/derived/``,
 which ``tools/.gitignore`` excludes from the repo — never shipped content,
@@ -85,10 +96,24 @@ CSV_PATH = DERIVED_DIR / "land_regions_worksheet.csv"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
 
-#: Only a region at or above this pixel area gets an on-image number label —
-#: below this the text would not be legible at canvas scale. Every region,
-#: regardless of size, still gets a CSV row.
-MIN_LABEL_AREA = 4000
+#: Only a region at or above this pixel area gets an on-image number label at
+#: all — below this there is no room for even the smallest legible glyph.
+#: Every region, regardless of size, still gets a CSV row. Many drawn regions
+#: are thin river-bounded ribbons rather than round blobs (Chris, 2026-09-05:
+#: "I use rivers as borders for a lot of them"), so a single fixed area floor
+#: either mislabels most of them as "too small" or oversizes the number for
+#: the smallest ones — hence the font also scales with area (see
+#: :func:`_label_font_size`). Lowered from 4000 (which silently dropped 119 of
+#: the 281 drawn regions — 42% — because the median drawn region is only 4609
+#: px) to 150, just above the sub-4px degenerate-province floor #2927 owns.
+MIN_LABEL_AREA = 150
+
+#: Label font size floor/ceiling (px) and the sqrt(area) scale between them —
+#: a small ribbon region gets a small but still legible number instead of
+#: either an oversized glyph or no number at all.
+LABEL_FONT_MIN = 12
+LABEL_FONT_MAX = 30
+LABEL_FONT_AREA_SCALE = 0.45
 
 EDGE_RGB = (20, 20, 20)
 
@@ -201,6 +226,16 @@ def _region_on_parchment(lab: np.ndarray, placed: np.ndarray, n_regions: int) ->
     return out
 
 
+def _label_font_size(area: int) -> int:
+    """Region area (px) -> label font size, scaled by sqrt(area) and clamped
+    to [:data:`LABEL_FONT_MIN`, :data:`LABEL_FONT_MAX`] — a small ribbon
+    region gets a small but still-legible number rather than an oversized
+    glyph spilling over its neighbours, and a big region gets a properly
+    readable one instead of the old fixed 28px for everyone."""
+    size = int(round(LABEL_FONT_AREA_SCALE * (area ** 0.5)))
+    return max(LABEL_FONT_MIN, min(LABEL_FONT_MAX, size))
+
+
 def _load_font(size: int) -> ImageFont.ImageFont:
     try:
         return ImageFont.load_default(size=size)
@@ -249,17 +284,21 @@ def main(argv: list[str] | None = None) -> int:
 
     pil_img = Image.fromarray(img, "RGB")
     draw = ImageDraw.Draw(pil_img)
-    font = _load_font(28)
+    font_cache: dict[int, ImageFont.ImageFont] = {}
     n_labelled = 0
     for region_id in range(1, n_regions + 1):
-        if areas.get(region_id, 0) < MIN_LABEL_AREA:
+        area = areas.get(region_id, 0)
+        if area < MIN_LABEL_AREA:
             continue
+        size = _label_font_size(area)
+        font = font_cache.setdefault(size, _load_font(size))
         x, y = float(cx[region_id]), float(cy[region_id])
         text = str(region_id)
         draw.text((x, y), text, fill=(255, 255, 255), font=font, anchor="mm",
-                  stroke_width=2, stroke_fill=(0, 0, 0))
+                  stroke_width=max(1, size // 14), stroke_fill=(0, 0, 0))
         n_labelled += 1
-    log(f"labelled {n_labelled}/{n_regions} regions on-image (>= {MIN_LABEL_AREA} px)", t0)
+    log(f"labelled {n_labelled}/{n_regions} regions on-image (>= {MIN_LABEL_AREA} px, "
+        f"font {LABEL_FONT_MIN}-{LABEL_FONT_MAX}px scaled by area)", t0)
 
     out_rgb = np.asarray(pil_img, dtype=np.uint8)
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
@@ -270,6 +309,18 @@ def main(argv: list[str] | None = None) -> int:
     print(f"wrote {OUT_HALF_PATH}  ({CANVAS_W // 2}x{CANVAS_H // 2})")
 
     # --- CSV worksheet: every region, sorted by area descending ------------
+    # `name` is the one column meant for a human to fill in (the actual canon
+    # name read off the render, for #2931's pass to consume) — a re-run must
+    # never wipe it, so any name already on disk for a region id is carried
+    # forward rather than the file being regenerated blank every time.
+    existing_names: dict[int, str] = {}
+    if CSV_PATH.is_file():
+        with CSV_PATH.open("r", newline="", encoding="utf-8") as fh:
+            for row in csv.DictReader(fh):
+                name = (row.get("name") or "").strip()
+                if name:
+                    existing_names[int(row["region_id"])] = name
+
     n_on_parchment = 0
     rows = []
     for region_id in range(1, n_regions + 1):
@@ -277,6 +328,7 @@ def main(argv: list[str] | None = None) -> int:
         n_on_parchment += flag
         rows.append({
             "region_id": region_id,
+            "name": existing_names.get(region_id, ""),
             "kind": kinds.get(region_id, ""),
             "area_px": areas.get(region_id, 0),
             "on_parchment": flag,
@@ -287,7 +339,7 @@ def main(argv: list[str] | None = None) -> int:
         writer.writeheader()
         writer.writerows(rows)
     print(f"wrote {CSV_PATH}  ({len(rows)} rows, sorted by area descending, "
-          f"{n_on_parchment} on real parchment art)")
+          f"{n_on_parchment} on real parchment art, {len(existing_names)} name(s) carried forward)")
 
     log(f"done: {n_regions} regions rendered", t0)
     return 0
