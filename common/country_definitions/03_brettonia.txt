@@ -183,7 +183,7 @@ MOU = {
 
 MOR = {
 	color = { 92 118 56 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc goblin }
 	# capital: Massif Orcal — TODO once land state-regions exist
@@ -197,7 +197,7 @@ MOR = {
 
 SKZ = {
 	color = { 72 110 54 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist

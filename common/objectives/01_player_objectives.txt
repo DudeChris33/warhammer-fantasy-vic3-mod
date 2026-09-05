@@ -2,7 +2,7 @@
 	enabled_background = "gfx/interface/icons/objectives/economic_dominance_illu.dds"
 	icon = "gfx/interface/icons/objectives/economic_dominance.dds"
 
-	recommended_tags = { ERE WAS BOR BVR }
+	recommended_tags = { ERE MAR BOR BVR }
 
 	objective_subgoals = {
 		sg_expand_goods_production

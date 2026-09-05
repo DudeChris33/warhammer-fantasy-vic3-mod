@@ -19,8 +19,9 @@
 #
 # The seven ruined holds (KUN, KVN, EKR, GUN, DRZ, VLG, SLV) are kept as dwarf tags even though
 # each is occupied by greenskins or Skaven at game start — they are releasable "reclaim" realms.
-# Their occupiers are separate tags (the greenskin ones in 06_badlands). city_state tier reflects
-# that a reclaim realm is a rump claimant, not a functioning hold.
+# Their occupiers are separate tags (the greenskin ones in 06_badlands). Tiers set 2026-09-04
+# (Chris): DRZ is grand_principality, the other six ruined holds are principality — the earlier
+# city_state tier (rump claimant, not a functioning hold) was dropped.
 
 ################ KAZ — Karaz Ankor; the Everlasting Realm reunited ################
 # Formable only: carries ALL FOUR dwarf cultures — the reunion of the whole Dawi people, not of
@@ -29,7 +30,7 @@
 KAZ = {
 	color = { 122 30 26 }
 	country_type = recognized
-	tier = empire
+	tier = hegemony
 	cultures = { dawi dawi_grey dawi_norse dawi_ancestral }
 	# capital: Karaz-a-Karak — TODO once land state-regions exist
 }
@@ -39,7 +40,7 @@ KAZ = {
 KAK = {
 	color = { 156 44 40 }
 	country_type = recognized
-	tier = kingdom
+	tier = grand_principality
 	cultures = { dawi }
 	# capital: Karaz-a-Karak — TODO once land state-regions exist
 }
@@ -89,7 +90,7 @@ AZL = {
 KEP = {
 	color = { 152 108 62 }
 	country_type = recognized
-	tier = principality
+	tier = grand_principality
 	cultures = { dawi_ancestral }
 	# capital: Karak Eight Peaks — TODO once land state-regions exist
 }
@@ -139,7 +140,7 @@ KRD = {
 KUN = {
 	color = { 122 78 74 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { dawi }
 	# capital: Karak Ungor — TODO once land state-regions exist
 }
@@ -149,7 +150,7 @@ KUN = {
 KVN = {
 	color = { 104 72 76 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { dawi }
 	# capital: Karak Varn — TODO once land state-regions exist
 }
@@ -159,7 +160,7 @@ KVN = {
 GUN = {
 	color = { 134 92 84 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { dawi }
 	# capital: Mount Gunbad — TODO once land state-regions exist
 }
@@ -169,7 +170,7 @@ GUN = {
 VLG = {
 	color = { 96 66 68 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { dawi }
 	# capital: Karak Vlag — TODO once land state-regions exist
 }
@@ -179,7 +180,7 @@ VLG = {
 SLV = {
 	color = { 146 106 100 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { dawi }
 	# capital: Mount Silverspear — TODO once land state-regions exist
 }
@@ -189,7 +190,7 @@ SLV = {
 EKR = {
 	color = { 118 100 80 }
 	country_type = recognized
-	tier = city_state
+	tier = principality
 	cultures = { dawi_ancestral }
 	# capital: Ekrund — TODO once land state-regions exist
 }
@@ -199,7 +200,7 @@ EKR = {
 DRZ = {
 	color = { 92 78 64 }
 	country_type = recognized
-	tier = city_state
+	tier = grand_principality
 	cultures = { dawi_ancestral }
 	# capital: Karak Drazh — TODO once land state-regions exist
 }

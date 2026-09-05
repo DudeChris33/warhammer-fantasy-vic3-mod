@@ -1,6 +1,8 @@
 ﻿l_english:
  # Country display names and adjectives for common/country_definitions/05_southern_realms.txt.
  # One name key (the tag) + one adjective key (<TAG>_ADJ) per tag. Board item #3419 (epic #3414).
+ USR:0 "United Southern Realms"
+ USR_ADJ:0 "Southron"
  TIL:0 "Tilea"
  TIL_ADJ:0 "Tilean"
  MIR:0 "Miragliano"

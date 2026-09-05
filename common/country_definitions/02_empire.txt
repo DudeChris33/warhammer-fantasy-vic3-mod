@@ -55,7 +55,7 @@ MID = {
 NLD = {
 	color = { 44 92 116 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { nordlander }
 	# capital: Salzenmund — TODO once land state-regions exist
 }
@@ -65,7 +65,7 @@ NLD = {
 HOC = {
 	color = { 74 112 62 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { hochlander }
 	# capital: Hergig — TODO once land state-regions exist
 }
@@ -75,7 +75,7 @@ HOC = {
 OST = {
 	color = { 86 88 104 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { ostlander }
 	# capital: Wolfenburg — TODO once land state-regions exist
 }
@@ -85,7 +85,7 @@ OST = {
 OSM = {
 	color = { 122 102 72 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { ostermarker }
 	# capital: Bechafen — TODO once land state-regions exist
 }
@@ -95,7 +95,7 @@ OSM = {
 TAL = {
 	color = { 88 118 68 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { talabeclander }
 	# capital: Talabheim — TODO once land state-regions exist
 }
@@ -105,7 +105,7 @@ TAL = {
 STI = {
 	color = { 132 62 92 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { stirlander }
 	# capital: Wurtbad — TODO once land state-regions exist
 }
@@ -115,7 +115,7 @@ STI = {
 AVE = {
 	color = { 214 182 58 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { averlander }
 	# capital: Averheim — TODO once land state-regions exist
 }
@@ -135,7 +135,7 @@ WIS = {
 SOL = {
 	color = { 168 138 52 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { sollander }
 	# capital: Sudenburg — TODO once land state-regions exist
 }
@@ -167,7 +167,7 @@ SYL = {
 VSY = {
 	color = { 94 32 44 }
 	country_type = unrecognized
-	tier = grand_principality
+	tier = kingdom
 	cultures = { sylvanian_vampire }
 	# capital: Drakenhof — TODO once land state-regions exist
 }
@@ -187,12 +187,12 @@ VEM = {
 	# capital: Altdorf (seized from the Empire) — TODO once land state-regions exist
 }
 
-################ WAS — Marienburg; the seceded Wasteland ################
+################ MAR — Marienburg; the seceded Wasteland ################
 
-WAS = {
+MAR = {
 	color = { 46 130 122 }
 	country_type = recognized
-	tier = grand_principality
+	tier = principality
 	cultures = { marienburger }
 	# capital: Marienburg — TODO once land state-regions exist
 }

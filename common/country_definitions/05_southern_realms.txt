@@ -16,7 +16,19 @@
 # sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
 # intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_southern_realms_l_english.yml.
-# The TIL and EST formation rules live in common/country_formation/05_southern_realms_formables.txt.
+# The TIL, EST and USR formation rules live in common/country_formation/05_southern_realms_formables.txt.
+
+################ USR — United Southern Realms; Tilea, Estalia, Sartosa and the Border Princes united ################
+# Added 2026-09-04 (Chris): a third, region-wide formable above TIL/EST — carries every culture in
+# the region so any of its four peoples can lead the unification. empire tier, recognized.
+
+USR = {
+	color = { 176 60 44 }
+	country_type = recognized
+	tier = empire
+	cultures = { tilean sartosan estalian border_princer }
+	# capital: TODO once land state-regions exist
+}
 
 ################ TIL — Tilea; the city-states unite ################
 # Formable only. Carries sartosan as well as tilean: a united Tilea takes Sartosa in with it.
@@ -129,7 +141,7 @@ EST = {
 BIL = {
 	color = { 190 96 74 }
 	country_type = recognized
-	tier = kingdom
+	tier = grand_principality
 	cultures = { estalian }
 	# capital: Bilbali — TODO once land state-regions exist
 }
@@ -139,7 +151,7 @@ BIL = {
 MAG = {
 	color = { 172 62 56 }
 	country_type = recognized
-	tier = kingdom
+	tier = grand_principality
 	cultures = { estalian }
 	# capital: Magritta — TODO once land state-regions exist
 }
@@ -149,23 +161,21 @@ MAG = {
 CNT = {
 	color = { 206 148 74 }
 	country_type = recognized
-	tier = kingdom
+	tier = principality
 	cultures = { estalian }
 	# capital: Cantonia — TODO once land state-regions exist
 }
 
 ################ BPR — the Border Princes; the belt of petty realms ################
 # ONE representative tag for a whole belt of tiny, short-lived principalities, per the registry.
-# decentralized rather than recognized/unrecognized: Vic3's decentralized country type models exactly
-# this — territory that is inhabited and contested but not coordinated by a single coherent state —
-# and that is a truer picture of the Border Princes than pretending the belt is one principality.
-# The registry records the canonical decentralization as a later government/law-variant task; this
-# country_type is the tag-level half of it.
+# country_type = recognized (Chris, 2026-09-04) — supersedes the original decentralized choice.
+# The registry's canonical decentralization is still intended as a later government/law-variant
+# task; that no longer rides on this tag's country_type.
 
 BPR = {
 	color = { 132 116 96 }
-	country_type = decentralized
-	tier = principality
+	country_type = recognized
+	tier = kingdom
 	cultures = { border_princer }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
 }

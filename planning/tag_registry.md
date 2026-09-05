@@ -14,12 +14,12 @@ Filed by epic #3414 (child #3415).
 
 ### Regions approved (Phase B walk)
 
-- [x] 00 Norsca (9)
+- [x] 00 Norsca (12)
 - [x] 01 Kislev (10)
 - [x] 02 Empire (18)
 - [x] 03 Bretonnia (17)
 - [x] 04 Karaz Ankor (18)
-- [x] 05 Southern Realms (14)
+- [x] 05 Southern Realms (15)
 - [x] 06 Badlands (11)
 - [x] 07 Nehekhara (11)
 - [x] 10 Dark Lands (6)
@@ -33,9 +33,9 @@ Filed by epic #3414 (child #3415).
 - [~] 16 Nippon — **DEFERRED** (0 tags; only medium-confidence secondary-source names, no Total War faction — Chris, 2026-08-30)
 - [x] 17 Ulthuan (11)
 - [x] 18 Naggaroth (7)
-- [x] 19 Lustria (18)
+- [x] 19 Lustria (19)
 
-**Total: 195 tags** (15 formables, 180 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 200 tags** (16 formables, 184 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -196,6 +196,7 @@ LYB
 LYO
 MAG
 MAH
+MAR
 MAW
 MID
 MIR
@@ -237,12 +238,15 @@ SAR
 SHW
 SHY
 SKA
+SKG
 SKT
 SKZ
 SLV
+SNA
 SNK
 SOL
 SOM
+SOR
 SPZ
 SRT
 STI
@@ -261,6 +265,8 @@ TRA
 TRO
 ULT
 UNG
+URS
+USR
 UZK
 VAR
 VEM
@@ -268,7 +274,6 @@ VER
 VLG
 VOL
 VSY
-WAS
 WEI
 WIS
 WSK
@@ -292,15 +297,28 @@ epic, not tag-uniqueness concerns.)
 
 ## Roster
 
-### 00 NORSCA (norscan) — 9 tags; no formable
+### 00 NORSCA (norscan) — 12 tags; no formable
 
-7 core High Tribes are solid canon; Hastlings + Kvelligs are medium-confidence High Tribes. Honest
-ceiling ~10–12 (deeper Norse "tribes" are fan/homebrew). Seed's Skjaelings/Sortsvinar dropped
-(unverified — Chris's call, approved 2026-08-30). NSC unifier tag dropped on manual audit — the
-High Tribes keep their own identity even after mass conquest; a unification journal entry may
-represent this later instead of a formable country. All nine tribes are `grand_principality` tier,
-`unrecognized` type (raiding tribes under a jarl, not part of any order the civilised south
-recognises); a future country type may be added to represent tribal societies more precisely.
+7 core High Tribes are solid canon; Hastlings + Kvelligs are medium-confidence High Tribes. Seed's
+Skjaelings/Sortsvinar were originally dropped as unverified (Chris's call, approved 2026-08-30), but
+a later lore audit (2026-09-04) turned up a solid primary-source cite for Sortsvinaer — see below.
+NSC unifier tag dropped on manual audit — the High Tribes keep their own identity even after mass
+conquest; a unification journal entry may represent this later instead of a formable country. All
+tribes are `grand_principality` tier, `unrecognized` type (raiding tribes under a jarl, not part of
+any order the civilised south recognises); a future country type may be added to represent tribal
+societies more precisely. **Exception:** the three lesser tribes added below (SNA/SOR/URS) are
+`principality` tier, not `grand_principality` — smaller gatherings than the seven High Tribes and
+Hastlings/Kvelligs, still `unrecognized` (Chris, 2026-09-04).
+
+**Three lesser tribes added** on a lore-audit pass (2026-09-04, Chris): *Warhammer: The Old World*
+Rulebook (pg. 82-83/224) names Snaegr, Sortsvinaer and Ursfjordings as the Norse's three known
+"lesser tribes" — smaller gatherings bound by familial/martial/religious ties rather than the
+seven great High Tribes. This directly re-supports Sortsvinaer, previously dropped as unverified.
+Ursfjordings' hold of Ursfjord (Goromandy Mountains) is also home to Beorg Bearstruck's "Bearmen of
+Urslo" mercenary warband — a sub-group of the tribe, not a separate tag. Other lore-audited
+candidates (Fjaergard, Tribe of the Crow, Tribe of the Mighty Serpent — all solidly sourced) were
+not added this pass; Iron Wolves was rejected as now culturally Kurgan, not Norscan (Eastern
+Steppes material instead), and Skeggi was added to 19 Lustria instead of here (see that region).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -313,6 +331,9 @@ recognises); a future country type may be added to represent tribal societies mo
 | VAR | `00_norsca` | Varg | start | `norscan` | — | northern Chaos-touched tribe |
 | HAS | `00_norsca` | Hastlings | start | `norscan` | — | High Tribe near the Chaos Wastes |
 | KVE | `00_norsca` | Kvelligs | start | `norscan` | — | High Tribe near the Chaos Wastes |
+| SNA | `00_norsca` | Snaegr | start | `norscan` | — | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook) |
+| SOR | `00_norsca` | Sortsvinaer | start | `norscan` | — | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook); re-supports the seed name dropped in the original draft |
+| URS | `00_norsca` | Ursfjordings | start | `norscan` | Ursfjord | `principality`/`unrecognized`; lesser tribe, Goromandy Mtns; home hold of Beorg Bearstruck's Bearmen of Urslo warband |
 
 ### 01 KISLEV (gospodar, ungol) — 10 tags; KIS formable
 
@@ -336,7 +357,7 @@ oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (App
 ### 02 EMPIRE (per province culture) — 18 tags; EMP + VEM formable
 
 10 Electoral provinces + Solland + The Moot + Sylvania + Marienburg (the seceded Wasteland). Sylvania
-split into a human tag (`SYL`) and a Vampire tag (`VSY`, von Carstein) per Chris. Marienburg (`WAS`)
+split into a human tag (`SYL`) and a Vampire tag (`VSY`, von Carstein) per Chris. Marienburg (`MAR`)
 gets its own bespoke culture. Big density lever untaken: WFRP baronies/free-towns (Bergsburg,
 Ubersreik, Bögenhafen…) could push this to 28–38, but they are RPG settlements, not well-attested
 startable realms — held at honest depth. (Approved 2026-08-30.)
@@ -350,8 +371,10 @@ sylvanian_vampire, and marienburger (Marienburg seceded — reintegration is a f
 name) — a second, later-added formable (manual audit, 2026-09-03): VSY conquers the whole Empire
 and seats itself on Altdorf instead of the human Electorates unifying. Purely `sylvanian_vampire`
 in culture (a conquest tag, not a cultural unification like EMP), `empire` tier, `unrecognized`
-type like its parent VSY. All ten Elector Counts plus Marienburg, Sylvania (human), and Solland are
-`grand_principality`; the Moot is `principality` and `unrecognized` (not a recognized Electorate).
+type like its parent VSY. Reikland, Middenland and Wissenland are `grand_principality`; the other
+seven Electors, Marienburg and Solland are `principality` (Chris, 2026-09-04); Sylvania (human) stays
+`grand_principality`; Sylvania (Vampire) is `kingdom` (Chris, 2026-09-04); the Moot is `principality`
+and `unrecognized` (not a recognized Electorate).
 
 **`BRK` Brass Keep** — registry-only for now (manual audit, 2026-09-03), like the Eastern Steppes
 Chaos tags: a Nurgle-held fortress in the Middle Mountains (Hochland/Middenland/Ostland border),
@@ -379,7 +402,7 @@ the Eastern Steppes marauders, a later decision).
 | SYL | `02_empire` | Sylvania (human) | start | `sylvanian` | Drakenhof | the living population of Sylvania |
 | VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start |
 | VEM | `02_empire` | The Von Carstein Empire | formable | `sylvanian_vampire` | Altdorf | VSY conquers the whole Empire; name TODO |
-| WAS | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
+| MAR | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
 | BRK | `02_empire` | Brass Keep | start | `PLACEHOLDER` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket" |
 
 ### 03 BRETTONIA (bretonnian, mousillon) — 17 tags; BRE formable
@@ -475,7 +498,7 @@ matching EMP/BRE, now that the old mixed-type OR-pair workaround is no longer ne
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
-### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer) — 14 tags; TIL/EST formables
+### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer) — 15 tags; TIL/EST/USR formables
 
 8 Tilean city-states + 3 Estalian kingdoms + one Border Princes tag. Tilea/Estalia held at their
 well-known city-states (approved as-is by Chris — the deep Tilean/Estalian/Border-Prince supply lever
@@ -486,8 +509,16 @@ Sartosa" is not tabletop canon, so Sartosa stays a human pirate haven). **One Bo
 later `common/` authoring task (out of scope for this docs-only registry). TIL (united Tilea) carries
 both `tilean` and `sartosan`. (Approved 2026-08-30.)
 
+**`USR` United Southern Realms** added on manual audit (2026-09-04, Chris) — a third, region-wide
+formable above TIL/EST, `empire` tier, `recognized`, carrying all four regional cultures
+(`tilean`, `sartosan`, `estalian`, `border_princer`) so any of the region's peoples can lead the
+unification. Same pass: BIL and MAG raised to `grand_principality`, CNT set to `principality`
+(previously all three were `kingdom`, level with EST's own formable); BPR changed from
+`decentralized`/`principality` to `recognized`/`kingdom`.
+
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
+| USR | `05_southern_realms` | United Southern Realms | formable | `tilean`, `sartosan`, `estalian`, `border_princer` | — | region-wide unification above TIL/EST |
 | TIL | `05_southern_realms` | Tilea | formable | `tilean`, `sartosan` | Miragliano | the city-states unite (incl. Sartosa) |
 | MIR | `05_southern_realms` | Miragliano | start | `tilean` | Miragliano |  |
 | LUC | `05_southern_realms` | Luccini | start | `tilean` | Luccini |  |
@@ -734,18 +765,28 @@ than one Naggaroth row. (Approved 2026-08-30.)
 | KKR | `18_naggaroth` | Karond Kar | start | `PLACEHOLDER` | Karond Kar | Slaver's Gate / Tower of Despair |
 | HGF | `18_naggaroth` | Hag Graef | start | `PLACEHOLDER` | Hag Graef | the Dark Crag (second city) |
 
-### 19 LUSTRIA (Lizardmen, PLACEHOLDER) — 18 tags; LUS formable
+### 19 LUSTRIA (Lizardmen, PLACEHOLDER + norscan) — 19 tags; LUS formable
 
 The temple-cities of the Lizardmen, at max density (Chris approved TW:W as a name source, as with the
-greenskins/Cathay). LUS is the Slann reuniting the Old Ones' dominion. All rows are **Lustrian** —
-Southlands Lizardmen (Zlatlan; the TW factions Kroq-Gar/Tiktaq'to) are excluded from this file per
-Chris and live in 09 Southlands. Sourced corrections: "Spektotl"→Spektazuma; "Zaqua" unverified
-(dropped); Tlanxla and "Tlanxa" are one city (TLN), Tlax is separate (TLA). Sentinels of Xeti and 8
-lower-detail cities held as reserve. All PLACEHOLDER culture. (Approved 2026-08-30.)
+greenskins/Cathay). LUS is the Slann reuniting the Old Ones' dominion. All Lizardmen rows are
+**Lustrian** — Southlands Lizardmen (Zlatlan; the TW factions Kroq-Gar/Tiktaq'to) are excluded from
+this file per Chris and live in 09 Southlands. Sourced corrections: "Spektotl"→Spektazuma; "Zaqua"
+unverified (dropped); Tlanxla and "Tlanxa" are one city (TLN), Tlax is separate (TLA). Sentinels of
+Xeti and 8 lower-detail cities held as reserve. All Lizardmen rows PLACEHOLDER culture. (Approved
+2026-08-30.)
+
+**`SKG` Skeggi** added on a lore-audit pass (2026-09-04, Chris) — the Norscan colony in Lustria
+founded 888 IC by Losteriksson of the Bjornlings, who named it for his daughter, the first child
+born there (White Dwarf 309, "The Norse of Lustria"). Unlike the Lizardmen rows, it takes the real
+`norscan` culture (already authored, #3404) rather than `PLACEHOLDER` — the same precedent as 08
+Araby's Bretonnian crusader tags (`ORG`/`ANT`) carrying a real culture inside an otherwise-placeholder
+region. `principality` tier, `unrecognized` type (a colony, not a recognized Lustrian power) —
+matches the tier/type given to Norsca's own new lesser-tribe tags the same pass (Chris, 2026-09-04).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | LUS | `19_lustria` | Lustria | formable | `PLACEHOLDER` | Itza | the Old Ones' dominion united |
+| SKG | `19_lustria` | Skeggi | start | `norscan` | Skeggi | `principality`/`unrecognized`; Norscan colony, founded 888 IC by Losteriksson of the Bjornlings |
 | ITZ | `19_lustria` | Itza | start | `PLACEHOLDER` | Itza | the First City (Lord Kroak / Gor-Rok) |
 | HEX | `19_lustria` | Hexoatl | start | `PLACEHOLDER` | Hexoatl | City of the Sun (Mazdamundi) |
 | XLA | `19_lustria` | Xlanhuapec | start | `PLACEHOLDER` | Xlanhuapec | City of Mists |

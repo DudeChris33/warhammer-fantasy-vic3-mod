@@ -13,9 +13,11 @@
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/greenskin.txt
 #
-# ALL TWELVE are decentralized/principality. Greenskin tribes and WAAAGH!s are not states: they hold
-# no court, sign no treaty and keep no border, and Vic3's decentralized country type is the closest
-# thing the engine has to that. The principality tier keeps them small without implying a crown.
+# ALL TWELVE are unrecognized/principality (Chris, 2026-09-04 — supersedes the original decentralized
+# choice). Greenskin tribes and WAAAGH!s hold no court and sign no treaty, but unrecognized (not
+# accepted as a legitimate power by the civilised order) reads better than decentralized (uncoordinated
+# territory) for a tribe that IS coordinated by its warlord. The principality tier keeps them small
+# without implying a crown.
 #
 # NO FORMABLE in this region — Chris dropped the Grand WAAAGH! (WAG), so there is deliberately no
 # common/country_formation/06_badlands_formables.txt and no WAG tag reserved.
@@ -30,7 +32,7 @@
 
 RED = {
 	color = { 96 124 50 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
 	# capital: Red Eye — TODO once land state-regions exist
@@ -41,7 +43,7 @@ RED = {
 
 CRM = {
 	color = { 42 62 38 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
@@ -52,7 +54,7 @@ CRM = {
 
 BKA = {
 	color = { 54 74 42 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
@@ -63,7 +65,7 @@ BKA = {
 
 RFG = {
 	color = { 78 100 40 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
 	# capital: Black Crag — TODO once land state-regions exist
@@ -74,7 +76,7 @@ RFG = {
 
 ICL = {
 	color = { 110 132 58 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
 	# capital: Iron Rock — TODO once land state-regions exist
@@ -85,7 +87,7 @@ ICL = {
 
 BSB = {
 	color = { 66 96 42 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
@@ -96,7 +98,7 @@ BSB = {
 
 BNR = {
 	color = { 88 108 52 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
@@ -107,7 +109,7 @@ BNR = {
 
 BTO = {
 	color = { 102 116 44 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
@@ -118,7 +120,7 @@ BTO = {
 
 BRN = {
 	color = { 36 54 34 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
@@ -129,7 +131,7 @@ BRN = {
 
 BLV = {
 	color = { 48 66 30 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
@@ -140,7 +142,7 @@ BLV = {
 
 RDV = {
 	color = { 60 80 46 }
-	country_type = decentralized
+	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
