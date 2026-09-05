@@ -1,0 +1,15 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load — the engine-required default_revolutionary_canton must be
+# re-authored here (the flag_definitions schema defaults revolutionary_canton to this
+# key). Its texture (ce_revolution_tear.dds) comes from vanilla gfx/coat_of_arms/,
+# which is NOT blanked and stays loadable; its colours (black, highlight) come from
+# this mod's common/named_colors/00_coa_colors.txt.
+# Clean port of vanilla common/coat_of_arms/coat_of_arms/02_revolutionary_cantons.txt (#3552).
+default_revolutionary_canton = {
+	colored_emblem = {
+		texture = "ce_revolution_tear.dds"
+		color1 = "black"
+		color2 = "black"
+		color3 = "highlight"
+	}
+}

@@ -1,0 +1,13 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. This is the placeholder fallback coat of arms referenced by
+# this mod's common/flag_definitions/00_flag_definitions.txt DEFAULT template's
+# `coa = default_flag`. This mod ships NO per-tag coats of arms yet — board #3552 is a
+# crash fix, not an art pass; bespoke per-tag COAs are epic #3621 — so every country
+# resolves to this single COA until those are authored. Solid field, no emblem:
+# intentionally NOT invented heraldry. pattern_solid.tga comes from vanilla
+# gfx/coat_of_arms/ (not blanked); grey_observer from common/named_colors/00_coa_colors.txt.
+default_flag = {
+	pattern = "pattern_solid.tga"
+	color1 = "grey_observer"
+	color2 = "grey_observer"
+}
