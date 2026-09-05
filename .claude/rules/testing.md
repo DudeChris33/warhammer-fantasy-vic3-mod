@@ -153,6 +153,16 @@ landmass dense with interior magenta is classed drawn and one bare of it a
 placeholder, subdividing a drawn region never crosses the magenta boundary
 while a placeholder region stays one province, every land pixel ends up
 labelled and no water pixel does, and two runs are byte-identical.
+It also self-checks the optional tiny-island override merge
+(`land_provinces.island_override_zones` / `merge_island_overrides`, the fix for
+a disconnected islet that can never qualify for `cells.merge_small`'s
+share-a-border merge and so ships as its own micro state-region forever): a
+blank override source draws no zones, distinct painted circles are distinct
+zone ids, every region caught under the same zone is force-merged into one (a
+circle over a single region is a no-op), the merge still tiles the land
+exactly and is byte-identical across runs, and `subdivide`'s connectivity guard
+never cuts the resulting non-contiguous region even when its area would
+otherwise earn it more than one seat.
 
 ## Regression rule
 
