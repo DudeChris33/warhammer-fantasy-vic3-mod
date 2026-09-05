@@ -401,9 +401,17 @@ def _check_coastal_naval_exit(
     return errors
 
 
+#: Above this many pixels, a per-pixel Python BFS (`connected_components`)
+#: builds enough `(x, y)` tuples/sets to exhaust memory — only a couple dozen
+#: out-of-scope placeholder provinces are this large, so they take the
+#: vectorized `mask_component_sizes` path instead; everything smaller keeps
+#: the original BFS.
+_LARGE_PROVINCE_PX = 100_000
+
+
 def _check_degenerate_provinces(bitmap: ProvinceBitmap, min_area: int,
                                 archipelago_colors: set[Color] = frozenset()) -> list[str]:
-    from worldgen.raster import color_to_hex
+    from worldgen.raster import color_to_hex, mask_component_sizes
 
     errors = []
     for color in sorted(bitmap.colors):
@@ -418,14 +426,23 @@ def _check_degenerate_provinces(bitmap: ProvinceBitmap, min_area: int,
             # ships exactly this shape (e.g. Micronesia's province colour spans
             # 23 disconnected pixel blobs), so being torn is not itself a bug.
             continue
-        comps = connected_components(
-            bitmap.pixels[color], bitmap.width, bitmap.height, bitmap.wrap_x
-        )
-        if len(comps) > 1:
-            sizes = ", ".join(str(len(c)) for c in sorted(comps, key=len, reverse=True))
+        if area > _LARGE_PROVINCE_PX:
+            r, g, b = color
+            code = (r << 16) | (g << 8) | b
+            mask = bitmap._code == code
+            sizes = sorted(mask_component_sizes(mask, bitmap.wrap_x), reverse=True)
+            num_components = len(sizes)
+        else:
+            comps = connected_components(
+                bitmap.pixels[color], bitmap.width, bitmap.height, bitmap.wrap_x
+            )
+            sizes = sorted((len(c) for c in comps), reverse=True)
+            num_components = len(comps)
+        if num_components > 1:
+            sizes_str = ", ".join(str(s) for s in sizes)
             errors.append(
                 f"province {color_to_hex(color)} is disconnected: "
-                f"{len(comps)} components (sizes {sizes})"
+                f"{num_components} components (sizes {sizes_str})"
             )
     return errors
 

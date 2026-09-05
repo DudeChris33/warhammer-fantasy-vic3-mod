@@ -12,6 +12,7 @@ import math
 
 import numpy as np
 from PIL import Image, ImageDraw
+from skimage import measure
 
 Color = tuple[int, int, int]
 Point = tuple[float, float]
@@ -296,6 +297,46 @@ def connected_components(
                     stack.append(nb)
         components.append(comp)
     return components
+
+
+def mask_component_sizes(mask: np.ndarray, wrap_x: bool = True) -> list[int]:
+    """4-connected component pixel-counts of the ``True`` cells in ``mask``.
+
+    A vectorized counterpart to :func:`connected_components` for provinces too
+    large for a per-pixel Python BFS (a several-million-pixel out-of-scope
+    placeholder builds millions of ``(x, y)`` tuples and exhausts memory).
+    Callers here only ever need component *sizes*, never pixel-level detail, so
+    this skips the pixel-set bookkeeping and works directly on the array via
+    ``skimage.measure.label``, stitching the ``x=0``/``x=width-1`` seam the same
+    way ``worldgen.cells.components`` does: under 4-connectivity the only
+    cross-seam adjacencies are between column 0 and the last column, so a single
+    pass down that pair plus a union-find is exact.
+    """
+    labels = measure.label(mask, connectivity=1, background=0).astype(np.int64)
+    if wrap_x and labels.shape[1] > 1:
+        left, right = labels[:, 0], labels[:, -1]
+        pair = (left != 0) & (right != 0) & (left != right)
+        if pair.any():
+            n = int(labels.max()) + 1
+            parent = np.arange(n, dtype=np.int64)
+
+            def find(x: int) -> int:
+                while parent[x] != x:
+                    parent[x] = parent[parent[x]]
+                    x = parent[x]
+                return int(x)
+
+            for a, b in zip(left[pair].tolist(), right[pair].tolist()):
+                ra, rb = find(a), find(b)
+                if ra != rb:
+                    parent[max(ra, rb)] = min(ra, rb)
+            remap = np.array([find(i) for i in range(n)], dtype=np.int64)
+            labels = remap[labels]
+    foreground = labels[mask]
+    if foreground.size == 0:
+        return []
+    counts = np.bincount(foreground)
+    return [int(c) for c in counts if c > 0]
 
 
 # ---------------------------------------------------------------------------

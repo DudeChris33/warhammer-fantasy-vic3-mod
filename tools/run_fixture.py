@@ -880,6 +880,47 @@ def _selfcheck_cells() -> None:
     assert (filled != 0).all(), "the fill must leave nothing unlabelled"
 
 
+def _selfcheck_mask_component_sizes() -> None:
+    """`raster.mask_component_sizes` agrees with the pixel-set BFS it replaces.
+
+    `validate_map.py`'s degenerate-province check used to run
+    `connected_components` (a pure-Python BFS over `(x, y)` tuples) on every
+    province colour; a several-million-pixel out-of-scope placeholder built
+    enough tuples/sets to raise a `MemoryError`. `mask_component_sizes` is the
+    vectorized replacement for provinces above that size — this pins that it
+    reports the same component count and sizes as the BFS on a contiguous
+    blob, a genuinely torn province, and a component that only connects
+    through the x=0/x=width-1 wrap seam (where a bug would most likely hide).
+    """
+    def bfs_sizes(mask: np.ndarray, wrap_x: bool) -> list[int]:
+        h, w = mask.shape
+        pixels = [(x, y) for y in range(h) for x in range(w) if mask[y, x]]
+        comps = connected_components(pixels, w, h, wrap_x)
+        return sorted((len(c) for c in comps), reverse=True)
+
+    def vec_sizes(mask: np.ndarray, wrap_x: bool) -> list[int]:
+        return sorted(raster.mask_component_sizes(mask, wrap_x), reverse=True)
+
+    # One contiguous blob.
+    a = np.zeros((8, 16), dtype=bool)
+    a[2:6, 4:10] = True
+    assert vec_sizes(a, True) == bfs_sizes(a, True) == [24]
+
+    # Genuinely torn into two same-coloured pieces, away from the seam.
+    b = np.zeros((8, 16), dtype=bool)
+    b[1:3, 2:4] = True   # 4 px
+    b[5:7, 9:13] = True  # 8 px
+    assert vec_sizes(b, True) == bfs_sizes(b, True) == [8, 4]
+
+    # Only connects across the x=0/x=width-1 seam.
+    c = np.zeros((8, 16), dtype=bool)
+    c[2:6, 14:] = True
+    c[2:6, :2] = True
+    assert vec_sizes(c, True) == bfs_sizes(c, True) == [16]
+    # ...and is two components when x does not wrap.
+    assert vec_sizes(c, False) == bfs_sizes(c, False) == [8, 8]
+
+
 def _selfcheck_segment_lakes() -> None:
     """The enclosed-water keep rule, in isolation (no golden needed).
 
@@ -1438,6 +1479,8 @@ def run_check() -> int:
     print("composite: precedence + tie-rejection self-check passed.")
     _selfcheck_cells()
     print("cells: wrap-aware components + nearest-label fill self-check passed.")
+    _selfcheck_mask_component_sizes()
+    print("raster: vectorized mask_component_sizes matches the pixel-set BFS self-check passed.")
     _selfcheck_segment_lakes()
     print("segment: enclosed-water keep (ocean + seeded lakes) self-check passed.")
     _selfcheck_rivers()
