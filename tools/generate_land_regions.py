@@ -11,7 +11,13 @@ colour authority ``tools/derived/provinces_index.json`` and the sea canon
   region (all 708), with hubs, placeholder economics and, for coastal regions,
   ``port`` + ``naval_exit_id``. **No realm/macro split** — every region lands
   in this single file (user decision 2026-09-04; #2931 does the real 20-file
-  division). The other 19 macro stub files are left untouched.
+  division). The other 19 macro stub files are left untouched. ``NNN`` is
+  **not** the raw ``land_regions_index.json`` region label (flood-fill
+  discovery order, geographically scattered) — see
+  ``worldgen.land_state_numbering.compute_state_numbers``, which Hilbert-orders
+  region centroids so neighbouring regions get numerically close ids (Chris,
+  2026-09-05). ``render_land_regions_preview.py`` imports the same function,
+  so its on-image numbers and CSV ids always match what actually ships here.
 * ``common/strategic_regions/land_strategic_regions.txt`` — one
   ``region_old_world`` block covering every land state (a real per-realm split
   is #2931's job too; nothing here is designed to survive that rewrite).
@@ -53,7 +59,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import raster, schema  # noqa: E402
+from worldgen import land_state_numbering, raster, schema  # noqa: E402
 from worldgen.statefile import (  # noqa: E402
     ProvinceInfo,
     pick_hubs,
@@ -336,9 +342,21 @@ def main(argv: list[str] | None = None) -> int:
     lab, cos_t, sin_t, y = _land_pixel_theta(labels, land_mask, CANVAS_W)
     identity = np.arange(n_land + 1, dtype=np.int64)
     prov_cx, prov_cy, prov_counts = _circular_centroids(lab, cos_t, sin_t, y, identity, n_land, CANVAS_W)
+    region_cx, region_cy, region_counts = _circular_centroids(
+        lab, cos_t, sin_t, y, region_of, n_regions, CANVAS_W)
     if not (prov_counts[1:] > 0).all():
         raise SystemExit("a land province has no pixels in provinces.png")
-    log("province centroids computed", t0)
+    if not (region_counts[1:] > 0).all():
+        raise SystemExit("a land region has no pixels in provinces.png")
+    log("province + region centroids computed", t0)
+
+    # --- geographic renumbering: raw region label -> STATE id/key ordinal --
+    # land_regions_index.json's "region" field is flood-fill discovery order,
+    # not geographic order (Chris, 2026-09-05: neighbouring regions were
+    # getting wildly different numbers) — Hilbert-order the centroids instead,
+    # shared with render_land_regions_preview.py so the two never drift apart.
+    state_number = land_state_numbering.compute_state_numbers(region_cx, region_cy, n_regions)
+    log("region ids Hilbert-ordered into STATE numbers", t0)
 
     # --- naval_exit: region -> bordering sea-state id ----------------------
     sea_state_of_zone = _sea_state_of_zone(sea_index["cells"], n_sea)
@@ -364,14 +382,15 @@ def main(argv: list[str] | None = None) -> int:
     first_city_color: raster.Color | None = None
     n_stacked = 0
 
-    for cell in sorted(land_regions["cells"], key=lambda c: c["region"]):
+    for cell in sorted(land_regions["cells"], key=lambda c: int(state_number[int(c["region"])])):
         region_id = int(cell["region"])
+        state_num = int(state_number[region_id])
         members = cell["provinces"]
-        key = f"STATE_LAND_{region_id:03d}"
+        key = f"STATE_LAND_{state_num:03d}"
         if key in sea_keys:
             raise SystemExit(f"key collision: {key} is also defined in {SEAS_TXT_PATH.name}")
-        if not (map_config.LAND_ID_START <= region_id < map_config.SEA_ID_START):
-            raise SystemExit(f"{key}: id {region_id} outside land band "
+        if not (map_config.LAND_ID_START <= state_num < map_config.SEA_ID_START):
+            raise SystemExit(f"{key}: id {state_num} outside land band "
                              f"[{map_config.LAND_ID_START}, {map_config.SEA_ID_START})")
 
         infos = [
@@ -414,9 +433,9 @@ def main(argv: list[str] | None = None) -> int:
                 )
 
         province_colors = [info.color for info in infos]
-        blocks.append(render_land_state(state, region_id, province_colors, hubs, [], naval_exit_id))
+        blocks.append(render_land_state(state, state_num, province_colors, hubs, [], naval_exit_id))
         loc_keys.append(key)
-        if region_id == 1:
+        if state_num == 1:
             first_city_color = hubs["city"]
 
     log(f"{len(blocks)} land states emitted ({n_stacked} hub-stacked placeholder/small regions)", t0)
@@ -430,7 +449,7 @@ def main(argv: list[str] | None = None) -> int:
     log(f"wrote {LOC_PATH.relative_to(MOD_ROOT)}  ({len(loc_keys)} entries)", t0)
 
     # --- write the land strategic region -------------------------------------
-    assert first_city_color is not None, "region 1 must exist and have been emitted"
+    assert first_city_color is not None, "the region numbered STATE_LAND_001 must exist and have been emitted"
     map_color = raster.ColorAllocator(map_config.SEED).allocate()
     _write_bytes(
         STRATEGIC_REGIONS_PATH,

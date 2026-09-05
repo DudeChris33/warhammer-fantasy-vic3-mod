@@ -42,8 +42,8 @@ silently no number at all (that dropped 119 of the 281 drawn regions — 42% of
 them, since the median drawn region is only ~4600 px). Only regions at or
 above ``MIN_LABEL_AREA`` (now 150 px — just above the sub-4px degenerate-
 province floor #2927 owns) get any label. The CSV sidecar
-(``land_regions_worksheet.csv``, sorted by area descending) is the exhaustive
-reference for the rest, mirroring
+(``land_regions_worksheet.csv``, sorted by id — see ``region_id`` below) is
+the exhaustive reference for the rest, mirroring
 ``tools/config/sea_zone_naming_worksheet.txt``'s pattern: the image serves the
 large, eyeball-able regions; the sidecar is the exhaustive list. Its
 ``on_parchment`` column flags whether that region's centroid falls under real
@@ -51,7 +51,12 @@ parchment art (a name can be read off the render) or the plain-globe fallback
 (no real Warhammer map covers it — placeholders and any drawn region outside
 the five crops). ``name`` is the one column meant for a human to actually fill
 in — blank on a fresh run, and carried forward (never wiped) across re-runs so
-naming progress survives a later regeneration.
+naming progress survives a later regeneration. ``region_id`` (2026-09-05: Chris
+noticed neighbouring regions had wildly different numbers and asked for this)
+is Hilbert-ordered by region centroid via
+``worldgen.land_state_numbering.compute_state_numbers`` — the same function
+``generate_land_regions.py`` uses for the actual ``STATE_LAND_NNN`` ids it
+ships, so a number here always means the same region there.
 
 Local-only output: embeds source pixels, so it lands under ``tools/derived/``,
 which ``tools/.gitignore`` excludes from the repo — never shipped content,
@@ -77,7 +82,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
 import project_regions as pr  # noqa: E402 — reuses its five-crop registration + drape
-from worldgen import raster, schema  # noqa: E402
+from worldgen import land_state_numbering, raster, schema  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -266,6 +271,10 @@ def main(argv: list[str] | None = None) -> int:
     on_parchment = _region_on_parchment(lab, placed, n_regions)
 
     cx, cy = _region_centroids(lab, n_regions, CANVAS_W)
+    # Same Hilbert-ordered renumbering generate_land_regions.py uses for the
+    # emitted STATE_LAND_NNN ids, imported from the one shared place — so the
+    # number drawn here and written to the CSV always matches what shipped.
+    state_number = land_state_numbering.compute_state_numbers(cx, cy, n_regions)
 
     palette = _spread_palette(n_regions)
     tint = palette[lab]
@@ -293,7 +302,7 @@ def main(argv: list[str] | None = None) -> int:
         size = _label_font_size(area)
         font = font_cache.setdefault(size, _load_font(size))
         x, y = float(cx[region_id]), float(cy[region_id])
-        text = str(region_id)
+        text = str(int(state_number[region_id]))
         draw.text((x, y), text, fill=(255, 255, 255), font=font, anchor="mm",
                   stroke_width=max(1, size // 14), stroke_fill=(0, 0, 0))
         n_labelled += 1
@@ -308,10 +317,14 @@ def main(argv: list[str] | None = None) -> int:
     half.save(OUT_HALF_PATH, format="PNG", optimize=False, compress_level=6)
     print(f"wrote {OUT_HALF_PATH}  ({CANVAS_W // 2}x{CANVAS_H // 2})")
 
-    # --- CSV worksheet: every region, sorted by area descending ------------
-    # `name` is the one column meant for a human to fill in (the actual canon
-    # name read off the render, for #2931's pass to consume) — a re-run must
-    # never wipe it, so any name already on disk for a region id is carried
+    # --- CSV worksheet: every region, sorted by id --------------------------
+    # `region_id` is the Hilbert-ordered STATE number (matches the on-image
+    # label and the actual STATE_LAND_NNN shipped by generate_land_regions.py
+    # — never the raw land_regions_index.json region label), sorted ascending
+    # per Chris's request (2026-09-05) rather than the old area-descending
+    # order. `name` is the one column meant for a human to fill in (the actual
+    # canon name read off the render, for #2931's pass to consume) — a re-run
+    # must never wipe it, so any name already on disk for an id is carried
     # forward rather than the file being regenerated blank every time.
     existing_names: dict[int, str] = {}
     if CSV_PATH.is_file():
@@ -324,21 +337,22 @@ def main(argv: list[str] | None = None) -> int:
     n_on_parchment = 0
     rows = []
     for region_id in range(1, n_regions + 1):
+        state_id = int(state_number[region_id])
         flag = bool(on_parchment[region_id])
         n_on_parchment += flag
         rows.append({
-            "region_id": region_id,
-            "name": existing_names.get(region_id, ""),
+            "region_id": state_id,
+            "name": existing_names.get(state_id, ""),
             "kind": kinds.get(region_id, ""),
             "area_px": areas.get(region_id, 0),
             "on_parchment": flag,
         })
-    rows.sort(key=lambda r: -r["area_px"])
+    rows.sort(key=lambda r: r["region_id"])
     with CSV_PATH.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
-    print(f"wrote {CSV_PATH}  ({len(rows)} rows, sorted by area descending, "
+    print(f"wrote {CSV_PATH}  ({len(rows)} rows, sorted by id, "
           f"{n_on_parchment} on real parchment art, {len(existing_names)} name(s) carried forward)")
 
     log(f"done: {n_regions} regions rendered", t0)
