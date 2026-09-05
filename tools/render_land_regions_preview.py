@@ -58,6 +58,16 @@ is Hilbert-ordered by region centroid via
 ``generate_land_regions.py`` uses for the actual ``STATE_LAND_NNN`` ids it
 ships, so a number here always means the same region there.
 
+Ids are **not** a stable identity across regenerations, though — a region
+split or merge (the tiny-island fix already did this once; the border
+corrections Chris is drawing against ``old_world_state_regions.png`` will do
+it again) changes the region count, which reshuffles every Hilbert rank. So a
+name is never carried forward by matching the old ``region_id`` — it is
+relocated by ``anchor_x``/``anchor_y`` (every row's own centroid pixel,
+written every run), by looking up which region owns that physical spot on the
+CURRENT map. A name whose anchor pixel is no longer land drops with a loud
+stderr warning rather than silently reattaching to the wrong region.
+
 Local-only output: embeds source pixels, so it lands under ``tools/derived/``,
 which ``tools/.gitignore`` excludes from the repo — never shipped content,
 purely a naming aid for #2931.
@@ -321,31 +331,77 @@ def main(argv: list[str] | None = None) -> int:
     # `region_id` is the Hilbert-ordered STATE number (matches the on-image
     # label and the actual STATE_LAND_NNN shipped by generate_land_regions.py
     # — never the raw land_regions_index.json region label), sorted ascending
-    # per Chris's request (2026-09-05) rather than the old area-descending
-    # order. `name` is the one column meant for a human to fill in (the actual
-    # canon name read off the render, for #2931's pass to consume) — a re-run
-    # must never wipe it, so any name already on disk for an id is carried
-    # forward rather than the file being regenerated blank every time.
-    existing_names: dict[int, str] = {}
+    # per Chris's request (2026-09-05). `name` is the one column meant for a
+    # human to fill in (the actual canon name read off the render, for #2931's
+    # pass to consume).
+    #
+    # Ids are NOT a stable identity across runs — a region split/merge (e.g.
+    # the tiny-island fix, or the border corrections Chris is still drawing
+    # against old_world_state_regions.png) changes the region count, which
+    # reshuffles every Hilbert rank. Matching a carried-forward name by its old
+    # `region_id` would silently reattach it to a different, unrelated region.
+    # Instead every row also carries `anchor_x`/`anchor_y` — the region's own
+    # centroid pixel at write time — and a name is carried forward by relocating
+    # that anchor pixel in the CURRENT region-label raster (`lab`): whichever
+    # region now owns that physical spot on the map inherits the name, no
+    # matter what id it was or is assigned. A region that vanished entirely
+    # (its anchor pixel is no longer land) drops its name with a loud warning
+    # instead of a silent, wrong reattachment.
+    # One-time migration for rows written before anchor_x/anchor_y existed:
+    # fall back to matching by the old region_id directly. Only valid because
+    # the region set has not changed since that row was written (no anchor to
+    # relocate by yet) — every row gets a real anchor from this run on, so
+    # this branch fires at most once per pre-existing name.
+    label_of_state_id = {int(state_number[r]): r for r in range(1, n_regions + 1)}
+
+    name_by_new_label: dict[int, str] = {}
+    orphaned: list[tuple[str, int, int]] = []
+    conflicts: list[int] = []
     if CSV_PATH.is_file():
         with CSV_PATH.open("r", newline="", encoding="utf-8") as fh:
             for row in csv.DictReader(fh):
                 name = (row.get("name") or "").strip()
-                if name:
-                    existing_names[int(row["region_id"])] = name
+                if not name:
+                    continue
+                ax_raw, ay_raw = row.get("anchor_x"), row.get("anchor_y")
+                if ax_raw and ay_raw:
+                    ax, ay = int(float(ax_raw)), int(float(ay_raw))
+                    new_label = int(lab[ay, ax]) if (0 <= ax < CANVAS_W and 0 <= ay < CANVAS_H) else 0
+                else:
+                    old_id = int(row["region_id"]) if row.get("region_id") else None
+                    new_label = label_of_state_id.get(old_id, 0) if old_id is not None else 0
+                    ax, ay = -1, -1
+                if new_label <= 0:
+                    orphaned.append((name, ax, ay))
+                    continue
+                if new_label in name_by_new_label and name_by_new_label[new_label] != name:
+                    conflicts.append(new_label)
+                    continue  # first writer wins; keep whichever was already attached
+                name_by_new_label.setdefault(new_label, name)
+    if orphaned:
+        print(f"WARNING: {len(orphaned)} name(s) could not be relocated (their anchor point is no "
+              f"longer land) and were dropped: {[n for n, _, _ in orphaned]}", file=sys.stderr)
+    if conflicts:
+        print(f"WARNING: {len(conflicts)} region(s) had more than one carried-forward name land on "
+              f"them (a merge) — kept the first, discarded the rest", file=sys.stderr)
 
     n_on_parchment = 0
+    n_carried = 0
     rows = []
     for region_id in range(1, n_regions + 1):
         state_id = int(state_number[region_id])
         flag = bool(on_parchment[region_id])
         n_on_parchment += flag
+        name = name_by_new_label.get(region_id, "")
+        n_carried += bool(name)
         rows.append({
             "region_id": state_id,
-            "name": existing_names.get(state_id, ""),
+            "name": name,
             "kind": kinds.get(region_id, ""),
             "area_px": areas.get(region_id, 0),
             "on_parchment": flag,
+            "anchor_x": int(round(float(cx[region_id]))),
+            "anchor_y": int(round(float(cy[region_id]))),
         })
     rows.sort(key=lambda r: r["region_id"])
     with CSV_PATH.open("w", newline="", encoding="utf-8") as fh:
@@ -353,7 +409,7 @@ def main(argv: list[str] | None = None) -> int:
         writer.writeheader()
         writer.writerows(rows)
     print(f"wrote {CSV_PATH}  ({len(rows)} rows, sorted by id, "
-          f"{n_on_parchment} on real parchment art, {len(existing_names)} name(s) carried forward)")
+          f"{n_on_parchment} on real parchment art, {n_carried} name(s) carried forward)")
 
     log(f"done: {n_regions} regions rendered", t0)
     return 0

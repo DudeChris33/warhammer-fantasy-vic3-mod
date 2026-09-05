@@ -79,8 +79,16 @@ WRAP_X = map_config.WRAP_X
 #: Dilate the drawn magenta line this many px to bridge anti-aliased gaps.
 LINE_DILATE = 2
 #: Swallow region-stage offcuts below this many px (thin coastline-hugging slivers
-#: the magenta-doubling-as-coast leaves) before the province cut.
-MERGE_FLOOR = 1200
+#: the magenta-doubling-as-coast leaves) before the province cut. Lowered from
+#: 1200 to 300 (board #2930 follow-up, 2026-09-05): 1200 was also swallowing
+#: genuinely-drawn small states before they ever became separate regions —
+#: confirmed by comparing against the user's hand-painted
+#: old_world_state_regions.png (several regions the user flagged as
+#: incorrectly merged had their border already present in the drawn magenta
+#: source; the region-merge step was erasing it, not a missing line). 300
+#: recovers 21 more drawn regions (260->281) with no new coastal-sliver noise
+#: found on inspection.
+MERGE_FLOOR = 300
 #: Target number of land-province seats shared across the drawn regions (user
 #: directive 2026-08-23: the ~677 raw magenta cells are state-region hints, too
 #: coarse for provinces — subdivide to ≥5,000 land provinces). Set above 5,000 so
