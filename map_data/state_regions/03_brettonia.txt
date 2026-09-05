@@ -170,7 +170,7 @@ STATE_MASSIF_ORCAL = {
         building_logging_camp = 10
     }
 }
-STATE_AQUITAINE = {
+STATE_LAND_070 = {
     id = 70
     subsistence_building = "building_subsistence_farm"
     provinces = { x0DA632 x24BB8F x32FFC7 x4A1524 x612A81 x62863A x6F6EB9 x868416 xABDDAB xC2F308 xD13740 xE84C9D xFF61FA }

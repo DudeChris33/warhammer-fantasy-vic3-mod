@@ -93,6 +93,7 @@ PROVINCES_PNG_PATH = MOD_ROOT / "map_data" / "provinces.png"
 SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
 
 WORKSHEET_PATH = TOOLS_DIR / "config" / "land_regions_worksheet.csv"
+VANILLA_STATE_LOC_KEYS_PATH = TOOLS_DIR / "config" / "vanilla_state_loc_keys.txt"
 STRATEGIC_COLORS_PATH = TOOLS_DIR / "config" / "strategic_region_colors.json"
 STRATEGIC_PNG_PATH = MOD_ROOT / "sources" / "terraqueous_globe_reprojected - strategic_regions.png"
 OUT_OF_SCOPE_CONTINENTS_PATH = TOOLS_DIR / "config" / "out_of_scope_continents.json"
@@ -476,10 +477,15 @@ def main(argv: list[str] | None = None) -> int:
     if dupe_names:
         log(f"WARNING: {len(dupe_names)} worksheet name(s) used more than once: {sorted(dupe_names)}", t0)
 
-    # --- key-collision guard against the sea file --------------------------
+    # --- key-collision guard against the sea file + vanilla's own loc keys --
     sea_keys: set[str] = set()
     if SEAS_TXT_PATH.is_file():
         sea_keys = set(re.findall(r"(STATE_\w+)\s*=\s*\{", SEAS_TXT_PATH.read_text(encoding="utf-8-sig")))
+    vanilla_keys = {
+        line.strip() for line in VANILLA_STATE_LOC_KEYS_PATH.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.startswith("#")
+    }
+    reserved_keys = sea_keys | vanilla_keys
 
     # Named-region STATE keys derive from the worksheet name itself (user
     # decision 2026-09-05), not the numeric STATE_LAND_NNN placeholder — an
@@ -488,18 +494,21 @@ def main(argv: list[str] | None = None) -> int:
     derived_keys = land_naming.derive_state_keys(worksheet)
 
     # A land name can legitimately coincide with an already-emitted sea zone's
-    # name (e.g. a coastal region named after the bay it borders) — the plan's
-    # own edge case says to surface this, not silently invent a workaround.
-    # Falling back to the numeric key for just the colliding region (rather
-    # than hard-erroring the whole build over one shared name) is the
-    # least-surprising resolution: the sea side keeps its name, this land
-    # region keeps a stable numeric id, and the clash is still logged loudly.
-    colliding = {sn: key for sn, key in derived_keys.items() if key in sea_keys}
+    # name (e.g. a coastal region named after the bay it borders), or with a
+    # real-world vanilla state name an Old-World region happens to echo (found
+    # 2026-09-05 via an in-game duplicate-loc-key error: STATE_AQUITAINE also
+    # names a vanilla French state) — the plan's own edge case says to surface
+    # this, not silently invent a workaround. Falling back to the numeric key
+    # for just the colliding region (rather than hard-erroring the whole build
+    # over one shared name) is the least-surprising resolution: the sea/vanilla
+    # side keeps its name, this land region keeps a stable numeric id, and the
+    # clash is still logged loudly.
+    colliding = {sn: key for sn, key in derived_keys.items() if key in reserved_keys}
     if colliding:
         for sn in colliding:
             del derived_keys[sn]
-        log(f"WARNING: {len(colliding)} land name(s) collide with an existing sea-zone key — "
-            f"kept numeric STATE_LAND_NNN for these instead: "
+        log(f"WARNING: {len(colliding)} land name(s) collide with an existing sea-zone or vanilla "
+            f"state key — kept numeric STATE_LAND_NNN for these instead: "
             f"{sorted((sn, colliding[sn]) for sn in colliding)}", t0)
 
     continents = schema.load_out_of_scope_continents(OUT_OF_SCOPE_CONTINENTS_PATH,
@@ -668,6 +677,9 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("invariant: land state keys are not unique")
     if keys_emitted & sea_keys:
         raise SystemExit(f"invariant: key collision with 99_seas.txt: {keys_emitted & sea_keys}")
+    if keys_emitted & vanilla_keys:
+        raise SystemExit(f"invariant: key collision with a vanilla state loc key: "
+                         f"{keys_emitted & vanilla_keys}")
     all_region_keys = {k for keys in keys_by_realm.values() for k in keys} | set(oos_keys)
     if all_region_keys != keys_emitted:
         raise SystemExit("invariant: every emitted land state must belong to exactly one strategic region")
