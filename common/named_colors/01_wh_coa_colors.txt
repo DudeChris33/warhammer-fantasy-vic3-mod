@@ -1,0 +1,6 @@
+﻿# Mod-native coat-of-arms colours — not a vanilla port. First used by epic #3621's
+# Empire heraldry (#3622); append further entries here as later regions need
+# tinctures the vanilla coa_colors palette (00_coa_colors.txt) doesn't cover.
+colors = {
+	morrslieb_green = hsv360 { 80 45 55 }
+}

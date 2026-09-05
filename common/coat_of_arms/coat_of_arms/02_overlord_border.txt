@@ -1,0 +1,14 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load — the engine-required default_border_canton default must be
+# re-authored here. Vanilla ships this canton with its body commented out (the
+# colored_emblem is dormant), so this is a byte-faithful clean port of that dormant
+# form — no live emblem, hence no texture/colour dependency to satisfy today.
+# Clean port of vanilla common/coat_of_arms/coat_of_arms/02_overlord_border.txt (#3552).
+default_border_canton = {
+#	colored_emblem = {
+#		texture = "ce_border_overlord.dds"
+#		color1 = "yellow_light"
+#		color2 = "yellow_dark"
+#		color3 = "highlight"
+#	}
+}

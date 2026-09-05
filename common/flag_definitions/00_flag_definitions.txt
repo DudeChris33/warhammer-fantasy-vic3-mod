@@ -1,0 +1,39 @@
+﻿# common/flag_definitions is a replace_paths folder, so vanilla's flag definitions do
+# NOT load at all — this mod must supply its own DEFAULT list. The engine requires the
+# DEFAULT template to exist AND be complete: with the folder blanked and empty it
+# asserts IsDefaultTemplateComplete( GetDefaultTemplate() ) and crashes on load
+# (board #3552; crash dumps victoria3_01260803_204022 .. victoria3_01260804_191904).
+#
+# PARTIAL PORT of vanilla common/flag_definitions/00_flag_definitions.txt.
+# Vanilla's DEFAULT list carried seven conditional flag_definition blocks; ALL of them
+# are dropped here because each dangles under this mod's blanked content:
+#   - coa = list "chartered_company" (priority 1000) — the `list` keyword resolves a
+#     template in common/coat_of_arms/template_lists, which this mod blanks (replace_paths)
+#     and ships empty, so the list dangles; its trigger also references vanilla tags
+#     c:BIC / c:HBC / c:ALK, none of which this mod defines.
+#   - coa = list "communist" (priority 1000) — dangles: template_lists is blanked/empty.
+#   - coa = list "anarchy" (priority 2000) — dangles: template_lists is blanked/empty.
+#   - coa = colonial_southern_africa (priority 100) — a real-world colonial subject COA
+#     whose key does not exist in this mod's blanked common/coat_of_arms/coat_of_arms.
+#   - coa = colonial_congo (priority 100) — dangles: colonial COA key absent, as above.
+#   - coa = colonial_senegal (priority 100) — dangles: colonial COA key absent, as above.
+#   - coa = colonial_zanj (priority 100) — dangles: colonial COA key absent, as above.
+#
+# What this prunes in play: the subject/chartered-company, communist, anarchy, and the
+# four real-world colonial subject flag variants. This mod does not currently produce
+# ANY of those with distinct coat-of-arms art, so nothing visible is lost today — every
+# country falls through to the single unconditional block below.
+#
+# The one block that remains is an unconditional fallback pointing at this mod's
+# placeholder default_flag COA (common/coat_of_arms/coat_of_arms/00_default_flag.txt),
+# so DEFAULT is complete and every country resolves to a valid flag. `always = yes`
+# is a confirmed trigger (docs/triggers.log). Bespoke per-tag flags are epic #3621.
+DEFAULT = {
+	flag_definition = {
+		coa = default_flag
+		priority = 0
+		trigger = {
+			always = yes
+		}
+	}
+}

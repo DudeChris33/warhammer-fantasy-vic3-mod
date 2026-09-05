@@ -1,0 +1,10 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load — the engine-required NULL default coat of arms must be
+# re-authored here. Its art (pattern_solid.tga) comes from vanilla gfx/coat_of_arms/,
+# which is NOT blanked and stays loadable; its colour (grey_observer) comes from this
+# mod's common/named_colors/00_coa_colors.txt.
+# Clean port of vanilla common/coat_of_arms/coat_of_arms/00_null.txt (#3552).
+NULL = {
+	pattern = "pattern_solid.tga"
+	color1 = "grey_observer"
+}

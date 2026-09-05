@@ -1,0 +1,95 @@
+﻿# common/character_templates is a replace_paths folder, so vanilla's copy of this file
+# does NOT load — the engine-required "default" character template must be re-authored
+# here. Its absence asserts IsDefaultTemplateComplete( GetDefaultTemplate() ) and then
+# crashes on load (board #3292; a second engine-required-DEFAULT gap distinct from the
+# flag_definitions one fixed by #3552 — see crash dumps victoria3_01260803_204022 ..
+# victoria3_01260804_200904, where the flag cache-miss disappeared but this assertion
+# remained). #3540 flagged this "DEFAULT character-template assertion" to track separately.
+#
+# CLEAN PORT of vanilla common/character_templates/00_default_template.txt (1.13.11):
+# every trait/trait-group its trait_generation block references — trait_child and the
+# personality/skill/condition groups — exists in this mod's restored common/character_traits
+# (epic #3292 item #3293), so the body ports verbatim with nothing pruned.
+
+### HARDCODED ###
+# Must have one entry of the "default" template, the template itself can be modified but one instance of it MUST exist with all parameters filled out
+
+# As of 1.12, there's a few different ways to specify roles, all of these can be mixed together so long as the roles are compatible
+# ruler = yes, heir = yes, executive = yes etc - old method, works as before as a shortcut to assign the archetype and its associated auto-assigned roles
+# role = ruler/heir/agitator/politician/executive/general/admiral/other - assigns the archetype and its associated auto-assigned roles
+# role = <database key> - assigns role from database + any archetype auto-assigned roles
+
+default = {
+	first_name = culture 		# Picks a random first and last name from the culture, combines those together to make one name
+	last_name = culture
+	historical = no
+	religion = random_accepted # Valid inputs: random_accepted/random/specific key. random & random_accepted weight based on share of political strength within the character's culture. If home region is specified, random is based on home state, otherwise home country.
+	culture = ig_before_random_accepted # Valid inputs: primary_culture/random_accepted/random/ig_before_primary_culture/ig_before_random_accepted/ig_before_random/specific key. random/random_accepted weight based on share of political strength within the country. If home region is specified, random is based on home state, otherwise home country.
+	female = no
+	home_region = random		# valid inputs: state region key, state scope, random
+	holding_type = random		# valid inputs: building type key, building type scope, random
+	dna = random 				# Generate random dna from a random ethnicity in the culture
+	age = default 				# A random age base on AGE_GENERATION_STARTVAL + ( random_int % ( AGE_GENERATION_DICE_ROLL_MAGNITUDE + 1 ) )
+	interest_group = random 	# Select a random interest group based on clout
+	commander_rank = default	# commander rank if this character would be a military commander
+	trait_generation = { 		# this effect will run as soon as the character is created (should only be used for traits)
+		if = {
+			limit = {
+				trait_value > 0
+			}
+			set_variable = has_historical_traits
+			add_experience = trait_value
+		}
+		else = {
+			add_experience = 4
+		}
+
+		if = {
+			limit = {
+				is_adult = no
+			}
+			add_trait = trait_child
+		}
+		if = {
+			limit = {
+				is_adult = yes
+				trait_value = 0
+			}
+			add_random_trait = personality
+			if = {
+				limit = {
+					OR = {
+						NOT = { has_variable = has_historical_traits }
+						trait_value <= 3
+					}
+				}
+				add_random_trait = skill
+			}
+		}
+
+		if = {
+			limit = {
+				age >= 45
+				trait_value < 8
+			}
+			random_list = {
+				33 = {}
+				33 = { add_experience = 1 }
+				33 = {
+					add_experience = 2
+					add_random_trait = skill
+				}
+			}
+		}
+		if = {
+			limit = {
+				age >= 30
+				NOT = { has_variable = has_historical_traits }
+			}
+			random_list = {
+				95 = {}
+				5 = { add_random_trait = condition }
+			}
+		}
+	}
+}
