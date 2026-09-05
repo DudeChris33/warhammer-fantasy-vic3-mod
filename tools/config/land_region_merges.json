@@ -13,6 +13,14 @@
     {"anchor_a": [4143, 1052], "anchor_b": [4200, 1042], "note": "235 -> 236 (Solland)"},
     {"anchor_a": [4770, 595], "anchor_b": [4776, 549], "note": "296 -> 295 (Zorn Uzkul)"},
     {"anchor_a": [4167, 1001], "anchor_b": [4129, 983], "note": "330 -> 331 (Wissenland)"},
-    {"anchor_a": [4229, 249], "anchor_b": [4311, 237], "note": "375 -> 374 (North Cape)"}
+    {"anchor_a": [4229, 249], "anchor_b": [4311, 237], "note": "375 -> 374 (North Cape)"},
+    {"anchor_a": [3975, 903], "anchor_b": [3931, 853], "note": "61 -> 54 (Montfort)"},
+    {"anchor_a": [3666, 965], "anchor_b": [3690, 1018], "note": "77 -> 78 (Cantabrio Road)"},
+    {"anchor_a": [3510, 1167], "anchor_b": [3549, 1103], "note": "82 -> 83 (Miramar Hills)"},
+    {"anchor_a": [3690, 1195], "anchor_b": [3761, 1199], "note": "87 -> 88 (River Riaza)"},
+    {"anchor_a": [3691, 1454], "anchor_b": [3699, 1502], "note": "116 -> 117 (Horn of Araby)"},
+    {"anchor_a": [4595, 469], "anchor_b": [4643, 518], "note": "352 -> 292 (Goromadny Coast)"},
+    {"anchor_a": [4537, 433], "anchor_b": [4524, 472], "note": "355 -> 354 (Frozen Coast)"},
+    {"anchor_a": [4462, 450], "anchor_b": [4443, 388], "note": "360 -> 359 (Gianthome Mountains) -- supersedes an earlier 360->357 call, since dropped"}
   ]
 }

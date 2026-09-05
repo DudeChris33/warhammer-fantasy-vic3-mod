@@ -1,1099 +1,1099 @@
 ﻿STATE_WESTERN_SEA_OF_OBLIVION = {
 	id = 3000
-	provinces = { xE0B1E1 }
+	provinces = { x0FA88B }
 }
 
 STATE_SHARD_COAST = {
 	id = 3001
-	provinces = { x7EE95A }
+	provinces = { xADE004 }
 }
 
 STATE_SEA_OF_CHAOS = {
 	id = 3002
-	provinces = { x1D20D3 }
-	impassable = { x1D20D3 }
+	provinces = { x4C177D }
+	impassable = { x4C177D }
 }
 
 STATE_SEA_OF_CHILL = {
 	id = 3003
-	provinces = { xBB584C }
+	provinces = { xEA4EF6 }
 }
 
 STATE_FROZEN_SEA_01 = {
 	id = 3004
-	provinces = { x598FC5 }
+	provinces = { x88866F }
 }
 
 STATE_KRAKEN_SEA = {
 	id = 3005
-	provinces = { xF7C73E }
+	provinces = { x26BDE8 }
 }
 
 STATE_EASTERN_SEA_OF_OBLIVION = {
 	id = 3006
-	provinces = { x95FEB7 }
+	provinces = { xC4F561 }
 }
 
 STATE_IRONFROST_BAY = {
 	id = 3007
-	provinces = { x343630 }
+	provinces = { x632CDA }
 }
 
 STATE_SEA_OF_MALICE_01 = {
 	id = 3008
-	provinces = { xD26DA9 }
+	provinces = { x016453 }
 }
 
 STATE_GLOOMWRACK_STRAIT = {
 	id = 3009
-	provinces = { x70A522 }
+	provinces = { x9F9BCC }
 }
 
 STATE_THE_UNDERWAY = {
 	id = 3010
-	provinces = { x0EDC9B }
+	provinces = { x3DD345 }
 }
 
 STATE_GULF_OF_NAGGAROND = {
 	id = 3011
-	provinces = { xAD1414 }
+	provinces = { xDC0ABE }
 }
 
 STATE_NORTHERN_FAR_OCEAN_01 = {
 	id = 3012
-	provinces = { x4B4B8D }
-	impassable = { x4B4B8D }
+	provinces = { x7A4237 }
+	impassable = { x7A4237 }
 }
 
 STATE_KAROND_KAR_BYPASS = {
 	id = 3013
-	provinces = { xE98306 }
+	provinces = { x1879B0 }
 }
 
 STATE_FORBIDDING_COAST = {
 	id = 3014
-	provinces = { x87BA7F }
+	provinces = { xB6B129 }
 }
 
 STATE_DRAKEFJORD_BAY = {
 	id = 3015
-	provinces = { x25F1F8 }
+	provinces = { x54E8A2 }
 }
 
 STATE_GULF_OF_KISLEV = {
 	id = 3016
-	provinces = { xC42971 }
+	provinces = { xF3201B }
 }
 
 STATE_SEA_OF_BLADES = {
 	id = 3017
-	provinces = { x6260EA }
+	provinces = { x915794 }
 }
 
 STATE_COAST_OF_ALBION = {
 	id = 3018
-	provinces = { x009863 }
+	provinces = { x2F8F0D }
 }
 
 STATE_BAY_OF_UZKULAK = {
 	id = 3019
-	provinces = { x9ECFDC }
+	provinces = { xCDC686 }
 }
 
 STATE_SEA_OF_RAGE_01 = {
 	id = 3020
-	provinces = { x3D0755 }
+	provinces = { x6BFDFF }
 }
 
 STATE_SEA_OF_CLAWS_01 = {
 	id = 3021
-	provinces = { xDB3ECE }
+	provinces = { x0A3578 }
 }
 
 STATE_COLD_WATER_LAKES = {
 	id = 3022
-	provinces = { x797647 }
+	provinces = { xA86CF1 }
 }
 
 STATE_NEAR_IRON_COAST_PLACEHOLDER = {
 	id = 3023
-	provinces = { x17ADC0 }
+	provinces = { x46A46A }
 }
 
 STATE_FAR_IRON_COAST_PLACEHOLDER = {
 	id = 3024
-	provinces = { xB5E539 }
+	provinces = { xE4DBE3 }
 }
 
 STATE_RIVER_LYNSK = {
 	id = 3025
-	provinces = { x541CB2 }
+	provinces = { x83135C }
 }
 
 STATE_SEA_OF_MALICE_02 = {
 	id = 3026
-	provinces = { xF2542B }
+	provinces = { x214AD5 }
 }
 
 STATE_MAELSTROM = {
 	id = 3027
-	provinces = { x908BA4 }
-	impassable = { x908BA4 }
+	provinces = { xBF824E }
+	impassable = { xBF824E }
 }
 
 STATE_COAST_OF_LYONESSE = {
 	id = 3028
-	provinces = { x2EC31D }
+	provinces = { x5DB9C7 }
 }
 
 STATE_FROZEN_SEA_02 = {
 	id = 3029
-	provinces = { xCCFA96 }
+	provinces = { xFBF140 }
 }
 
 STATE_FROZEN_SEA_03 = {
 	id = 3030
-	provinces = { x6B320F }
+	provinces = { x9A28B9 }
 }
 
 STATE_EASTERN_ALBION_CHANNEL = {
 	id = 3031
-	provinces = { x096988 }
+	provinces = { x386032 }
 }
 
 STATE_UPPER_RIVER_RUIN = {
 	id = 3032
-	provinces = { xA7A101 }
+	provinces = { xD697AB }
 }
 
 STATE_SEA_OF_MALICE_03 = {
 	id = 3033
-	provinces = { x45D87A }
+	provinces = { x74CF24 }
 }
 
 STATE_MANAANSPOORT_SEA = {
 	id = 3034
-	provinces = { xE40FF3 }
+	provinces = { x13069D }
 }
 
 STATE_SEA_OF_FEUDS = {
 	id = 3035
-	provinces = { x82476C }
+	provinces = { xB13E16 }
 }
 
 STATE_URSKOY_RIVER = {
 	id = 3036
-	provinces = { x207EE5 }
+	provinces = { x4F758F }
 }
 
 STATE_WESTERN_ALBION_CHANNEL = {
 	id = 3037
-	provinces = { xBEB65E }
+	provinces = { xEDAD08 }
 }
 
 STATE_UPPER_TALABEC_RIVER = {
 	id = 3038
-	provinces = { x5CEDD7 }
+	provinces = { x8BE481 }
 }
 
 STATE_SEA_OF_MALICE_04 = {
 	id = 3039
-	provinces = { xFB2550 }
+	provinces = { x2A1BFA }
 }
 
 STATE_LOWER_REIK_RIVER = {
 	id = 3040
-	provinces = { x995CC9 }
+	provinces = { xC85373 }
 }
 
 STATE_LOWER_TALABEC_RIVER = {
 	id = 3041
-	provinces = { x379442 }
+	provinces = { x668AEC }
 }
 
 STATE_SEA_OF_WRATH_01 = {
 	id = 3042
-	provinces = { xD5CBBB }
+	provinces = { x04C265 }
 }
 
 STATE_LOWER_RIVER_GRISMERIE = {
 	id = 3043
-	provinces = { x740334 }
+	provinces = { xA2F9DE }
 }
 
 STATE_UPPER_RIVER_GRISMERIE = {
 	id = 3044
-	provinces = { x123AAD }
+	provinces = { x413157 }
 }
 
 STATE_NORTHERN_SHIFTING_ISLES = {
 	id = 3045
-	provinces = { xB07226 }
+	provinces = { xDF68D0 }
 }
 
 STATE_FROZEN_SEA_04 = {
 	id = 3046
-	provinces = { x4EA99F }
+	provinces = { x7DA049 }
 }
 
 STATE_MIDDLE_REIK_RIVER = {
 	id = 3047
-	provinces = { xECE118 }
+	provinces = { x1BD7C2 }
 }
 
 STATE_GULF_OF_BIDOUZE = {
 	id = 3048
-	provinces = { x8B1891 }
+	provinces = { xBA0F3B }
 }
 
 STATE_LIZARD_SEA_01 = {
 	id = 3049
-	provinces = { x29500A }
+	provinces = { x5846B4 }
 }
 
 STATE_COAST_OF_NAGARYTHE = {
 	id = 3050
-	provinces = { xC78783 }
+	provinces = { xF67E2D }
 }
 
 STATE_STIR_RIVER = {
 	id = 3051
-	provinces = { x65BEFC }
+	provinces = { x94B5A6 }
 }
 
 STATE_NORTHERN_BOILING_SEA = {
 	id = 3052
-	provinces = { x03F675 }
+	provinces = { x32ED1F }
 }
 
 STATE_WISSENLAND_ESTUARY = {
 	id = 3053
-	provinces = { xA22DEE }
+	provinces = { xD12498 }
 }
 
 STATE_MIDDLE_RIVER_RUIN = {
 	id = 3054
-	provinces = { x406567 }
+	provinces = { x6F5C11 }
 }
 
 STATE_SEA_OF_MALICE_05 = {
 	id = 3055
-	provinces = { xDE9CE0 }
+	provinces = { x0D938A }
 }
 
 STATE_CLAWED_COAST = {
 	id = 3056
-	provinces = { x7CD459 }
+	provinces = { xABCB03 }
 }
 
 STATE_AVER_RIVER = {
 	id = 3057
-	provinces = { x1B0BD2 }
+	provinces = { x4A027C }
 }
 
 STATE_COAST_OF_ESTALIA = {
 	id = 3058
-	provinces = { xB9434B }
+	provinces = { xE839F5 }
 }
 
 STATE_SEA_OF_RAGE_02 = {
 	id = 3059
-	provinces = { x577AC4 }
+	provinces = { x86716E }
 }
 
 STATE_UPPER_REIK_RIVER = {
 	id = 3060
-	provinces = { xF5B23D }
+	provinces = { x24A8E7 }
 }
 
 STATE_SEA_OF_CLAWS_02 = {
 	id = 3061
-	provinces = { x93E9B6 }
+	provinces = { xC2E060 }
 }
 
 STATE_UPPER_FAR_OCEAN_PASSAGE_01 = {
 	id = 3062
-	provinces = { x32212F }
+	provinces = { x6117D9 }
 }
 
 STATE_UPPER_FAR_OCEAN_PASSAGE_02 = {
 	id = 3063
-	provinces = { xD058A8 }
+	provinces = { xFF4F52 }
 }
 
 STATE_UPPER_FAR_OCEAN_PASSAGE_03 = {
 	id = 3064
-	provinces = { x6E9021 }
+	provinces = { x9D86CB }
 }
 
 STATE_RIVER_BRIENNE = {
 	id = 3065
-	provinces = { x0CC79A }
+	provinces = { x3BBE44 }
 }
 
 STATE_FAR_OCEAN_01 = {
 	id = 3066
-	provinces = { xAAFF13 }
+	provinces = { xD9F5BD }
 }
 
 STATE_SEA_OF_WRATH_02 = {
 	id = 3067
-	provinces = { x49368C }
+	provinces = { x782D36 }
 }
 
 STATE_NORTHERN_FAR_OCEAN_02 = {
 	id = 3068
-	provinces = { xE76E05 }
-	impassable = { xE76E05 }
+	provinces = { x1664AF }
+	impassable = { x1664AF }
 }
 
 STATE_SEA_OF_MIST = {
 	id = 3069
-	provinces = { x85A57E }
-	impassable = { x85A57E }
+	provinces = { xB49C28 }
+	impassable = { xB49C28 }
 }
 
 STATE_SOUTHERN_BOILING_SEA = {
 	id = 3070
-	provinces = { x23DCF7 }
+	provinces = { x52D3A1 }
 }
 
 STATE_RIVER_OF_ECHOES = {
 	id = 3071
-	provinces = { xC21470 }
+	provinces = { xF10B1A }
 }
 
 STATE_RIVER_LIMNALLA = {
 	id = 3072
-	provinces = { x604BE9 }
+	provinces = { x8F4293 }
 }
 
 STATE_ABASKO_COAST = {
 	id = 3073
-	provinces = { xFE8362 }
+	provinces = { x2D7A0C }
 }
 
 STATE_GULF_OF_PEARLS = {
 	id = 3074
-	provinces = { x9CBADB }
+	provinces = { xCBB185 }
 }
 
 STATE_BAY_OF_QUIETUDE = {
 	id = 3075
-	provinces = { x3AF254 }
+	provinces = { x69E8FE }
 }
 
 STATE_BLEAK_COAST = {
 	id = 3076
-	provinces = { xD929CD }
+	provinces = { x082077 }
 }
 
 STATE_SEA_OF_WRATH_03 = {
 	id = 3077
-	provinces = { x776146 }
+	provinces = { xA657F0 }
 }
 
 STATE_SUNKEN_LANDS = {
 	id = 3078
-	provinces = { x1598BF }
+	provinces = { x448F69 }
 }
 
 STATE_TILEAN_SEA = {
 	id = 3079
-	provinces = { xB3D038 }
+	provinces = { xE2C6E2 }
 }
 
 STATE_SEA_OF_RAGE_03 = {
 	id = 3080
-	provinces = { x5207B1 }
+	provinces = { x80FE5B }
 }
 
 STATE_BLACK_GULF = {
 	id = 3081
-	provinces = { xF03F2A }
+	provinces = { x1F35D4 }
 }
 
 STATE_WITCH_SEA = {
 	id = 3082
-	provinces = { x8E76A3 }
+	provinces = { xBD6D4D }
 }
 
 STATE_SEA_OF_SQUALLS_01 = {
 	id = 3083
-	provinces = { x2CAE1C }
+	provinces = { x5BA4C6 }
 }
 
 STATE_LAGOON_OF_TEARS = {
 	id = 3084
-	provinces = { xCAE595 }
+	provinces = { xF9DC3F }
 }
 
 STATE_SEA_OF_SERPENTS_01 = {
 	id = 3085
-	provinces = { x691D0E }
-	impassable = { x691D0E }
+	provinces = { x9813B8 }
+	impassable = { x9813B8 }
 }
 
 STATE_SEA_OF_DUSK = {
 	id = 3086
-	provinces = { x075487 }
+	provinces = { x364B31 }
 }
 
 STATE_SEA_OF_WRATH_04 = {
 	id = 3087
-	provinces = { xA58C00 }
+	provinces = { xD482AA }
 }
 
 STATE_LOWER_RIVER_RUIN = {
 	id = 3088
-	provinces = { x43C379 }
+	provinces = { x72BA23 }
 }
 
 STATE_SOUTH_SEA = {
 	id = 3089
-	provinces = { xE1FAF2 }
+	provinces = { x10F19C }
 }
 
 STATE_FAR_OCEAN_02 = {
 	id = 3090
-	provinces = { x80326B }
+	provinces = { xAF2915 }
 }
 
 STATE_SEA_OF_DREAMS = {
 	id = 3091
-	provinces = { x1E69E4 }
+	provinces = { x4D608E }
 }
 
 STATE_SOUTHERN_SHIFTING_ISLES = {
 	id = 3092
-	provinces = { xBCA15D }
+	provinces = { xEB9807 }
 }
 
 STATE_PIRATES_CURRENT = {
 	id = 3093
-	provinces = { x5AD8D6 }
+	provinces = { x89CF80 }
 }
 
 STATE_BEAST_ISLE_PASS_PLACEHOLDER = {
 	id = 3094
-	provinces = { xF9104F }
+	provinces = { x2806F9 }
 }
 
 STATE_LIZARD_SEA_02 = {
 	id = 3095
-	provinces = { x9747C8 }
+	provinces = { xC63E72 }
 }
 
 STATE_CHARNEL_DEEPS = {
 	id = 3096
-	provinces = { x357F41 }
+	provinces = { x6475EB }
 }
 
 STATE_SEA_OF_WRATH_05 = {
 	id = 3097
-	provinces = { xD3B6BA }
+	provinces = { x02AD64 }
 }
 
 STATE_ASHEN_COAST = {
 	id = 3098
-	provinces = { x71EE33 }
+	provinces = { xA0E4DD }
 }
 
 STATE_CORSAIR_CHANNEL_01 = {
 	id = 3099
-	provinces = { x1025AC }
+	provinces = { x3F1C56 }
 }
 
 STATE_PIRATE_COAST = {
 	id = 3100
-	provinces = { xAE5D25 }
+	provinces = { xDD53CF }
 }
 
 STATE_EASTERN_BITTER_SEA = {
 	id = 3101
-	provinces = { x4C949E }
+	provinces = { x7B8B48 }
 }
 
 STATE_COAST_OF_CALEDOR = {
 	id = 3102
-	provinces = { xEACC17 }
+	provinces = { x19C2C1 }
 }
 
 STATE_SOUR_SEA = {
 	id = 3103
-	provinces = { x890390 }
+	provinces = { xB7FA3A }
 }
 
 STATE_THE_BROKEN_LANDS = {
 	id = 3104
-	provinces = { x273B09 }
-	impassable = { x273B09 }
+	provinces = { x5631B3 }
+	impassable = { x5631B3 }
 }
 
 STATE_WESTERN_BITTER_SEA = {
 	id = 3105
-	provinces = { xC57282 }
+	provinces = { xF4692C }
 }
 
 STATE_FAR_OCEAN_03 = {
 	id = 3106
-	provinces = { x63A9FB }
+	provinces = { x92A0A5 }
 }
 
 STATE_SEA_OF_SERPENTS_02 = {
 	id = 3107
-	provinces = { x01E174 }
+	provinces = { x30D81E }
 }
 
 STATE_STRAITS_OF_LOTHERN = {
 	id = 3108
-	provinces = { xA018ED }
+	provinces = { xCF0F97 }
 }
 
 STATE_SORCERERS_ISLANDS = {
 	id = 3109
-	provinces = { x3E5066 }
+	provinces = { x6D4710 }
 }
 
 STATE_GREAT_MORTIS_RIVER = {
 	id = 3110
-	provinces = { xDC87DF }
+	provinces = { x0B7E89 }
 }
 
 STATE_SEA_OF_FEAR_01 = {
 	id = 3111
-	provinces = { x7ABF58 }
+	provinces = { xA9B602 }
 }
 
 STATE_FAR_OCEAN_04 = {
 	id = 3112
-	provinces = { x18F6D1 }
+	provinces = { x47ED7B }
 }
 
 STATE_JADE_SEA_01 = {
 	id = 3113
-	provinces = { xB72E4A }
+	provinces = { xE624F4 }
 }
 
 STATE_JADE_SEA_02 = {
 	id = 3114
-	provinces = { x5565C3 }
+	provinces = { x845C6D }
 }
 
 STATE_CORSAIR_CHANNEL_02 = {
 	id = 3115
-	provinces = { xF39D3C }
+	provinces = { x2293E6 }
 }
 
 STATE_UPPER_MORTIS_RIVER = {
 	id = 3116
-	provinces = { x91D4B5 }
+	provinces = { xC0CB5F }
 }
 
 STATE_NEAR_SULPHERET_COAST = {
 	id = 3117
-	provinces = { x300C2E }
+	provinces = { x5F02D8 }
 }
 
 STATE_SULPHERET_ISLANDS = {
 	id = 3118
-	provinces = { xCE43A7 }
-	impassable = { xCE43A7 }
+	provinces = { xFD3A51 }
+	impassable = { xFD3A51 }
 }
 
 STATE_LIZARD_SEA_03 = {
 	id = 3119
-	provinces = { x6C7B20 }
+	provinces = { x9B71CA }
 }
 
 STATE_NORTHWESTERN_GREAT_OCEAN = {
 	id = 3120
-	provinces = { x0AB299 }
-	impassable = { x0AB299 }
+	provinces = { x39A943 }
+	impassable = { x39A943 }
 }
 
 STATE_JADE_SEA_03 = {
 	id = 3121
-	provinces = { xA8EA12 }
+	provinces = { xD7E0BC }
 }
 
 STATE_SOUTH_ULTHUAN_PASSAGE_PLACEHOLDER = {
 	id = 3122
-	provinces = { x47218B }
+	provinces = { x761835 }
 }
 
 STATE_DRAGON_ISLES_BYPASS = {
 	id = 3123
-	provinces = { xE55904 }
+	provinces = { x144FAE }
 }
 
 STATE_SEA_OF_WRATH_06 = {
 	id = 3124
-	provinces = { x83907D }
+	provinces = { xB28727 }
 }
 
 STATE_GREAT_OCEAN_01 = {
 	id = 3125
-	provinces = { x21C7F6 }
+	provinces = { x50BEA0 }
 }
 
 STATE_ASH_RIVER = {
 	id = 3126
-	provinces = { xBFFF6F }
+	provinces = { xEEF619 }
 }
 
 STATE_FAR_SULPHERET_COAST = {
 	id = 3127
-	provinces = { x5E36E8 }
+	provinces = { x8D2D92 }
 }
 
 STATE_SERPENT_COAST = {
 	id = 3128
-	provinces = { xFC6E61 }
+	provinces = { x2B650B }
 }
 
 STATE_GULF_OF_LUSTRIA = {
 	id = 3129
-	provinces = { x9AA5DA }
+	provinces = { xC99C84 }
 }
 
 STATE_SEA_OF_WEIRD_WAVES_01 = {
 	id = 3130
-	provinces = { x38DD53 }
+	provinces = { x67D3FD }
 }
 
 STATE_SCORPION_COAST = {
 	id = 3131
-	provinces = { xD714CC }
+	provinces = { x060B76 }
 }
 
 STATE_SEA_OF_SQUALLS_02 = {
 	id = 3132
-	provinces = { x754C45 }
+	provinces = { xA442EF }
 }
 
 STATE_SEA_OF_WEIRD_WAVES_02 = {
 	id = 3133
-	provinces = { x1383BE }
+	provinces = { x427A68 }
 }
 
 STATE_LUMBRIA_NIPPON_CHANNEL_PLACEHOLDER = {
 	id = 3134
-	provinces = { xB1BB37 }
+	provinces = { xE0B1E1 }
 }
 
 STATE_SEA_OF_WEIRD_WAVES_03 = {
 	id = 3135
-	provinces = { x4FF2B0 }
+	provinces = { x7EE95A }
 }
 
 STATE_TARANTULA_COAST = {
 	id = 3136
-	provinces = { xEE2A29 }
+	provinces = { x1D20D3 }
 }
 
 STATE_ISLE_OF_RISING_SUN_BYPASS = {
 	id = 3137
-	provinces = { x8C61A2 }
+	provinces = { xBB584C }
 }
 
 STATE_GREAT_OCEAN_02 = {
 	id = 3138
-	provinces = { x2A991B }
+	provinces = { x598FC5 }
 }
 
 STATE_GULF_OF_MEDES = {
 	id = 3139
-	provinces = { xC8D094 }
+	provinces = { xF7C73E }
 }
 
 STATE_SEA_OF_FEAR_02 = {
 	id = 3140
-	provinces = { x67080D }
+	provinces = { x95FEB7 }
 }
 
 STATE_JADE_SEA_04 = {
 	id = 3141
-	provinces = { x053F86 }
+	provinces = { x343630 }
 }
 
 STATE_ESTALIAN_PASSAGE_PLACEHOLDER = {
 	id = 3142
-	provinces = { xA376FF }
+	provinces = { xD26DA9 }
 }
 
 STATE_IND_SOUTHERN_COAST_PLACEHOLDER = {
 	id = 3143
-	provinces = { x41AE78 }
+	provinces = { x70A522 }
 }
 
 STATE_ARABY_COAST_PLACEHOLDER = {
 	id = 3144
-	provinces = { xDFE5F1 }
+	provinces = { x0EDC9B }
 }
 
 STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER = {
 	id = 3145
-	provinces = { x7E1D6A }
+	provinces = { xAD1414 }
 }
 
 STATE_LUMBRIA_ARCHIPELAGO = {
 	id = 3146
-	provinces = { x1C54E3 }
+	provinces = { x4B4B8D }
 }
 
 STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER = {
 	id = 3147
-	provinces = { xBA8C5C }
+	provinces = { xE98306 }
 }
 
 STATE_NORTHERN_GREAT_OCEAN = {
 	id = 3148
-	provinces = { x58C3D5 }
-	impassable = { x58C3D5 }
+	provinces = { x87BA7F }
+	impassable = { x87BA7F }
 }
 
 STATE_MEETING_OF_SUN_AND_STARS_PLACEHOLDER = {
 	id = 3149
-	provinces = { xF6FB4E }
+	provinces = { x25F1F8 }
 }
 
 STATE_SEA_OF_SQUALLS_03 = {
 	id = 3150
-	provinces = { x9532C7 }
+	provinces = { xC42971 }
 }
 
 STATE_GREAT_OCEAN_03 = {
 	id = 3151
-	provinces = { x336A40 }
+	provinces = { x6260EA }
 }
 
 STATE_VAMPIRE_COAST = {
 	id = 3152
-	provinces = { xD1A1B9 }
+	provinces = { x009863 }
 }
 
 STATE_WESTERN_SEA_OF_WEIRD_WAVES = {
 	id = 3153
-	provinces = { x6FD932 }
+	provinces = { x9ECFDC }
 }
 
 STATE_EASTERN_SEA_OF_WEIRD_WAVES = {
 	id = 3154
-	provinces = { x0E10AB }
+	provinces = { x3D0755 }
 }
 
 STATE_SEA_OF_SQUALLS_04 = {
 	id = 3155
-	provinces = { xAC4824 }
+	provinces = { xDB3ECE }
 }
 
 STATE_SEA_OF_SQUALLS_05 = {
 	id = 3156
-	provinces = { x4A7F9D }
+	provinces = { x797647 }
 }
 
 STATE_DEVOURER_LUMBRIA_CHANNEL_PLACEHOLDER = {
 	id = 3157
-	provinces = { xE8B716 }
+	provinces = { x17ADC0 }
 }
 
 STATE_DEVOURER_ISLANDS = {
 	id = 3158
-	provinces = { x86EE8F }
+	provinces = { xB5E539 }
 }
 
 STATE_JADE_SEA_05 = {
 	id = 3159
-	provinces = { x252608 }
+	provinces = { x541CB2 }
 }
 
 STATE_SEA_OF_FEAR_03 = {
 	id = 3160
-	provinces = { xC35D81 }
+	provinces = { xF2542B }
 }
 
 STATE_SEA_OF_WEIRD_WAVES_04 = {
 	id = 3161
-	provinces = { x6194FA }
+	provinces = { x908BA4 }
 }
 
 STATE_GREAT_OCEAN_04 = {
 	id = 3162
-	provinces = { xFFCC73 }
+	provinces = { x2EC31D }
 }
 
 STATE_SEA_OF_FEAR_04 = {
 	id = 3163
-	provinces = { x9E03EC }
+	provinces = { xCCFA96 }
 }
 
 STATE_SEA_OF_FEAR_05 = {
 	id = 3164
-	provinces = { x3C3B65 }
+	provinces = { x6B320F }
 }
 
 STATE_CENTRAL_FAR_OCEAN_PASSAGE_01 = {
 	id = 3165
-	provinces = { xDA72DE }
+	provinces = { x096988 }
 }
 
 STATE_CENTRAL_FAR_OCEAN_PASSAGE_02 = {
 	id = 3166
-	provinces = { x78AA57 }
+	provinces = { xA7A101 }
 }
 
 STATE_CENTRAL_FAR_OCEAN_PASSAGE_03 = {
 	id = 3167
-	provinces = { x16E1D0 }
+	provinces = { x45D87A }
 }
 
 STATE_CENTRAL_FAR_OCEAN_PASSAGE_04 = {
 	id = 3168
-	provinces = { xB51949 }
+	provinces = { xE40FF3 }
 }
 
 STATE_SUN_ISLAND_SOUTHERN_COAST_PLACEHOLDER = {
 	id = 3169
-	provinces = { x5350C2 }
+	provinces = { x82476C }
 }
 
 STATE_SEA_OF_SQUALLS_06 = {
 	id = 3170
-	provinces = { xF1883B }
+	provinces = { x207EE5 }
 }
 
 STATE_OCEAN_OF_DREAD_01 = {
 	id = 3171
-	provinces = { x8FBFB4 }
-	impassable = { x8FBFB4 }
+	provinces = { xBEB65E }
+	impassable = { xBEB65E }
 }
 
 STATE_SOUTHERN_FAR_OCEAN = {
 	id = 3172
-	provinces = { x2DF72D }
-	impassable = { x2DF72D }
+	provinces = { x5CEDD7 }
+	impassable = { x5CEDD7 }
 }
 
 STATE_JADE_SEA_06 = {
 	id = 3173
-	provinces = { xCC2EA6 }
+	provinces = { xFB2550 }
 }
 
 STATE_GREAT_OCEAN_05 = {
 	id = 3174
-	provinces = { x6A661F }
+	provinces = { x995CC9 }
 }
 
 STATE_CENTRAL_GREAT_OCEAN_PASSAGE_01 = {
 	id = 3175
-	provinces = { x089D98 }
+	provinces = { x379442 }
 }
 
 STATE_JADE_SEA_07 = {
 	id = 3176
-	provinces = { xA6D511 }
+	provinces = { xD5CBBB }
 }
 
 STATE_NORTHERN_MANGROVE_COAST = {
 	id = 3177
-	provinces = { x450C8A }
+	provinces = { x740334 }
 }
 
 STATE_GREAT_OCEAN_06 = {
 	id = 3178
-	provinces = { xE34403 }
+	provinces = { x123AAD }
 }
 
 STATE_FAR_OCEAN_05 = {
 	id = 3179
-	provinces = { x817B7C }
+	provinces = { xB07226 }
 }
 
 STATE_CENTRAL_GREAT_OCEAN_PASSAGE_02 = {
 	id = 3180
-	provinces = { x1FB2F5 }
+	provinces = { x4EA99F }
 }
 
 STATE_CENTRAL_GREAT_OCEAN = {
 	id = 3181
-	provinces = { xBDEA6E }
-	impassable = { xBDEA6E }
+	provinces = { xECE118 }
+	impassable = { xECE118 }
 }
 
 STATE_CHURNING_GULF = {
 	id = 3182
-	provinces = { x5C21E7 }
+	provinces = { x8B1891 }
 }
 
 STATE_FAR_OCEAN_06 = {
 	id = 3183
-	provinces = { xFA5960 }
+	provinces = { x29500A }
 }
 
 STATE_CENTRAL_GREAT_OCEAN_PASSAGE_03 = {
 	id = 3184
-	provinces = { x9890D9 }
+	provinces = { xC78783 }
 }
 
 STATE_MO_FARAH_CHANEL = {
 	id = 3185
-	provinces = { x36C852 }
+	provinces = { x65BEFC }
 }
 
 STATE_ISLES_OF_DOOM = {
 	id = 3186
-	provinces = { xD4FFCB }
+	provinces = { x03F675 }
 }
 
 STATE_OCEAN_OF_DREAD_02 = {
 	id = 3187
-	provinces = { x733744 }
+	provinces = { xA22DEE }
 }
 
 STATE_OCEAN_OF_DREAD_03 = {
 	id = 3188
-	provinces = { x116EBD }
+	provinces = { x406567 }
 }
 
 STATE_JADE_SEA_08 = {
 	id = 3189
-	provinces = { xAFA636 }
+	provinces = { xDE9CE0 }
 }
 
 STATE_OCEAN_OF_DREAD_04 = {
 	id = 3190
-	provinces = { x4DDDAF }
+	provinces = { x7CD459 }
 }
 
 STATE_FAR_OCEAN_07 = {
 	id = 3191
-	provinces = { xEC1528 }
+	provinces = { x1B0BD2 }
 }
 
 STATE_WESTERN_GATES_OF_CALITH = {
 	id = 3192
-	provinces = { x8A4CA1 }
+	provinces = { xB9434B }
 }
 
 STATE_TOR_ELASOR = {
 	id = 3193
-	provinces = { x28841A }
+	provinces = { x577AC4 }
 }
 
 STATE_FAR_OCEAN_08 = {
 	id = 3194
-	provinces = { xC6BB93 }
+	provinces = { xF5B23D }
 }
 
 STATE_SOUTHERN_MANGROVE_COAST = {
 	id = 3195
-	provinces = { x64F30C }
+	provinces = { x93E9B6 }
 }
 
 STATE_JADE_SEA_09 = {
 	id = 3196
-	provinces = { x032A85 }
+	provinces = { x32212F }
 }
 
 STATE_EASTERN_GATES_OF_CALITH = {
 	id = 3197
-	provinces = { xA161FE }
+	provinces = { xD058A8 }
 }
 
 STATE_GREAT_OCEAN_07 = {
 	id = 3198
-	provinces = { x3F9977 }
+	provinces = { x6E9021 }
 }
 
 STATE_GREAT_OCEAN_08 = {
 	id = 3199
-	provinces = { xDDD0F0 }
+	provinces = { x0CC79A }
 }
 
 STATE_ISLE_OF_DUSK_BYPASS = {
 	id = 3200
-	provinces = { x7C0869 }
+	provinces = { xAAFF13 }
 }
 
 STATE_JADE_SEA_10 = {
 	id = 3201
-	provinces = { x1A3FE2 }
+	provinces = { x49368C }
 }
 
 STATE_GREAT_OCEAN_09 = {
 	id = 3202
-	provinces = { xB8775B }
+	provinces = { xE76E05 }
 }
 
 STATE_GUANO_ROCKS_BYPASS = {
 	id = 3203
-	provinces = { x56AED4 }
+	provinces = { x85A57E }
 }
 
 STATE_GREAT_OCEAN_10 = {
 	id = 3204
-	provinces = { xF4E64D }
+	provinces = { x23DCF7 }
 }
 
 STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_01 = {
 	id = 3205
-	provinces = { x931DC6 }
+	provinces = { xC21470 }
 }
 
 STATE_SOUTHERN_GREAT_OCEAN = {
 	id = 3206
-	provinces = { x31553F }
-	impassable = { x31553F }
+	provinces = { x604BE9 }
+	impassable = { x604BE9 }
 }
 
 STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_02 = {
 	id = 3207
-	provinces = { xCF8CB8 }
+	provinces = { xFE8362 }
 }
 
 STATE_ISLE_OF_DAWN_BYPASS = {
 	id = 3208
-	provinces = { x6DC431 }
+	provinces = { x9CBADB }
 }
 
 STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_03 = {
 	id = 3209
-	provinces = { x0BFBAA }
+	provinces = { x3AF254 }
 }
 
 STATE_OCEAN_OF_DREAD_05 = {
 	id = 3210
-	provinces = { xAA3323 }
+	provinces = { xD929CD }
 }
 
 STATE_JADE_SEA_11 = {
 	id = 3211
-	provinces = { x486A9C }
+	provinces = { x776146 }
 }
 
 STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_01 = {
 	id = 3212
-	provinces = { xE6A215 }
+	provinces = { x1598BF }
 }
 
 STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_02 = {
 	id = 3213
-	provinces = { x84D98E }
+	provinces = { xB3D038 }
 }
 
 STATE_SOUTHERN_OCEAN_OF_DREAD = {
 	id = 3214
-	provinces = { x231107 }
-	impassable = { x231107 }
+	provinces = { x5207B1 }
+	impassable = { x5207B1 }
 }
 
 STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_03 = {
 	id = 3215
-	provinces = { xC14880 }
+	provinces = { xF03F2A }
 }
 
 STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_04 = {
 	id = 3216
-	provinces = { x5F7FF9 }
+	provinces = { x8E76A3 }
 }
