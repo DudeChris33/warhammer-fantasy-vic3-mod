@@ -231,6 +231,40 @@ def _region_centroids(lab: np.ndarray, n_regions: int, width: int):
     return cx, cy
 
 
+def _snap_centroids_onto_region(lab: np.ndarray, cx: np.ndarray, cy: np.ndarray,
+                                n_regions: int) -> tuple[np.ndarray, np.ndarray]:
+    """Move any centroid that landed off its own region to the nearest pixel
+    that actually belongs to that region.
+
+    The circular-mean estimator is exact for a convex blob but can place a
+    concave or oddly-shaped region's "centroid" outside the region entirely
+    (a crescent's mean sits in the gap) — measured at roughly 1% of regions.
+    A centroid on water breaks two things downstream: the on-image number
+    gets drawn off the tinted area, and the CSV worksheet's anchor_x/anchor_y
+    (used to relocate a carried-forward name on the next regen) resolve to no
+    region at all, silently dropping the name. One global nearest-pixel pass
+    (an indexed distance transform, not a per-region search) fixes both.
+    """
+    cx_i = np.clip(np.round(cx).astype(np.int64), 0, lab.shape[1] - 1)
+    cy_i = np.clip(np.round(cy).astype(np.int64), 0, lab.shape[0] - 1)
+    on_region = lab[cy_i, cx_i] == np.arange(n_regions + 1)
+    bad = np.flatnonzero(~on_region)
+    bad = bad[(bad >= 1) & (bad <= n_regions)]
+    if not bad.size:
+        return cx, cy
+    out_cx, out_cy = cx.copy(), cy.copy()
+    for r in bad.tolist():
+        # nearest LAND pixel to the (possibly off-region) centroid is not
+        # necessarily this region's own — so search the region's own mask.
+        ys, xs = np.nonzero(lab == r)
+        if ys.size == 0:
+            continue
+        d2 = (xs.astype(np.float64) - cx[r]) ** 2 + (ys.astype(np.float64) - cy[r]) ** 2
+        i = int(np.argmin(d2))
+        out_cx[r], out_cy[r] = float(xs[i]), float(ys[i])
+    return out_cx, out_cy
+
+
 def _region_on_parchment(lab: np.ndarray, placed: np.ndarray, n_regions: int) -> np.ndarray:
     """Per region: does the majority of its area fall under real parchment art?"""
     total = np.bincount(lab.ravel(), minlength=n_regions + 1)
@@ -281,6 +315,7 @@ def main(argv: list[str] | None = None) -> int:
     on_parchment = _region_on_parchment(lab, placed, n_regions)
 
     cx, cy = _region_centroids(lab, n_regions, CANVAS_W)
+    cx, cy = _snap_centroids_onto_region(lab, cx, cy, n_regions)
     # Same Hilbert-ordered renumbering generate_land_regions.py uses for the
     # emitted STATE_LAND_NNN ids, imported from the one shared place — so the
     # number drawn here and written to the CSV always matches what shipped.
