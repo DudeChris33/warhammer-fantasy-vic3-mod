@@ -84,13 +84,18 @@ way by `python tools/generate_land_regions.py` (board #2930) — it joins
 `sea_zones_index.json` (naval-exit resolution by real land↔sea pixel adjacency);
 regenerate rather than hand-edit. All 708 regions land in one file with one
 strategic region — the 20-file realm split is deferred to #2931, so nothing here
-survives that rewrite. It also writes two **dev-only** naming aids, outside the
-gate above (each has its own totality self-check instead):
-`tools/derived/land_region_name_guesses.json` (nearest-vanilla-state guess per
-region, consumed by `tools/render_land_regions_preview.py`'s numbered review
-render + CSV worksheet) built from `tools/build_vanilla_state_lonlat.py`'s
-one-off, rerunnable `tools/derived/vanilla_state_lonlat.json` — none of these
-three are shipped content. `python tools/run_fixture.py --check` also exercises
+survives that rewrite. `tools/render_land_regions_preview.py` is the matching
+**dev-only** naming aid, outside the gate above: a numbered review PNG + CSV
+worksheet, draping the real TWW3 parchment art under the tinted regions via
+`tools/project_regions.py`'s existing five-crop registration wherever it covers
+the canvas (an `on_parchment` CSV column flags which regions that is), so the
+person doing #2931's naming pass reads real printed names off the render
+directly. Two earlier automated-guess attempts were tried and dropped
+(2026-09-05): nearest real-world vanilla Vic3 state by lon/lat (a coincidental-
+Earth-geography heuristic the user rejected outright) and OCR of the parchment
+itself (Tesseract garbled almost everything on the stylised, curved-baseline
+font even after rotation sweeps, contrast stretching and despeckling). Neither
+tool nor its derived output exists any more. `python tools/run_fixture.py --check` also exercises
 `worldgen.statefile.stack_hubs`, the hub-stacking fallback `pick_hubs` cannot
 cover (a state with fewer passable provinces than it needs — every placeholder
 and any small drawn region).

@@ -1,25 +1,50 @@
 #!/usr/bin/env python3
-"""Review render: the 708 land regions, numbered, over the reprojected globe.
+"""Review render: the 708 land regions, numbered, over the real TWW3 parchment.
 
 Board #2930's dev-only naming aid, mirroring ``render_provinces_preview.py``'s
-committed-data + reprojected-globe-overlay pattern
-(``feedback-review-render-on-reprojected-globe``): reads the *committed*
-``map_data/provinces.png`` + ``tools/derived/land_regions_index.json`` +
-``tools/derived/provinces_index.json`` + the name guesses from
-``tools/derived/land_region_name_guesses.json`` (run ``generate_land_regions.py``
-first), tints every region with a spread-palette colour and draws its number at
-its centroid.
+committed-data + registered-source-overlay pattern. Superseded 2026-09-05: the
+first cut of this tool guessed a name per region from the nearest **real-world**
+vanilla Vic3 state by longitude/latitude — a coincidental-Earth-geography
+heuristic the user rejected outright (this is a fictional world; Earth
+proximity means nothing). OCR of the actual named parchment
+(``sources/originals/tww3_old_world_mod_parchment.png``) was tried next and
+failed in practice — Tesseract garbled almost everything on this stylised,
+curved-baseline hand-drawn font even after rotation sweeps, contrast
+stretching and despeckling (best results were fragments like "tern"/"blast"
+for "Eastern Oblast"). The user chose to drop automated guessing entirely.
+
+This version instead **drapes the real parchment art itself** under the
+numbered regions, reusing ``project_regions.py``'s existing five-crop
+registration (Bretonnia, Empire, Kislev+Norsca, Dark Lands,
+Badlands+Nehekhara — the same thin-plate warps #2709's QA render uses to drape
+the user's hand-painted state layer) instead of computing a guess: pass the
+master parchment itself as the "painting" to drape, so the actual printed
+place names show through under the region tinting/numbers wherever those five
+crops cover the canvas. The person doing #2931's naming pass reads real names
+directly off the render — no algorithmic guess, no dictionary, no OCR.
+
+Reads the *committed* ``map_data/provinces.png`` + ``tools/derived/
+land_regions_index.json`` + ``tools/derived/provinces_index.json`` (run
+``generate_land_regions.py`` first), tints every region with a spread-palette
+colour and draws its number at its centroid, over the parchment drape where
+the five crops reach and the plain reprojected globe everywhere else (every
+placeholder/out-of-scope region, plus any drawn region outside the five crops'
+coverage).
 
 **Disclosed limitation**: 708 regions (many 1-few-px placeholder slivers)
 cannot all carry a legible on-image label — only regions at or above
 ``MIN_LABEL_AREA`` get one. The CSV sidecar (``land_regions_worksheet.csv``,
 sorted by area descending) is the exhaustive reference for the rest, mirroring
 ``tools/config/sea_zone_naming_worksheet.txt``'s pattern: the image serves the
-large, eyeball-able regions; the sidecar is the exhaustive list.
+large, eyeball-able regions; the sidecar is the exhaustive list. Its
+``on_parchment`` column flags whether that region's centroid falls under real
+parchment art (a name can be read off the render) or the plain-globe fallback
+(no real Warhammer map covers it — placeholders and any drawn region outside
+the five crops).
 
-Local-only output: embeds the source globe pixels, so it lands under
-``tools/derived/``, which ``tools/.gitignore`` excludes from the repo — never
-shipped content, purely a naming aid for #2931.
+Local-only output: embeds source pixels, so it lands under ``tools/derived/``,
+which ``tools/.gitignore`` excludes from the repo — never shipped content,
+purely a naming aid for #2931.
 
 Usage::
 
@@ -40,7 +65,8 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import raster, sources  # noqa: E402
+import project_regions as pr  # noqa: E402 — reuses its five-crop registration + drape
+from worldgen import raster, schema  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -51,13 +77,11 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
-NAME_GUESS_PATH = DERIVED_DIR / "land_region_name_guesses.json"
 
 OUT_PATH = DERIVED_DIR / "land_regions_preview.png"
 OUT_HALF_PATH = DERIVED_DIR / "land_regions_preview_half.png"
 CSV_PATH = DERIVED_DIR / "land_regions_worksheet.csv"
 
-GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
 
@@ -72,6 +96,34 @@ EDGE_RGB = (20, 20, 20)
 def log(msg: str, t0: float | None = None) -> None:
     prefix = f"[{time.time() - t0:6.1f}s] " if t0 is not None else ""
     print(prefix + msg, flush=True)
+
+
+def _parchment_drape(t0: float) -> tuple[np.ndarray, np.ndarray]:
+    """The real TWW3 parchment art draped over the globe via the five registered
+    crops (canvas RGB, ``placed`` mask) — reuses ``project_regions.py``'s own
+    registration/warp pipeline wholesale, passing the master parchment itself
+    as the thing to drape (instead of the user's separate hand-painted state
+    layer) so the actual printed place names show through."""
+    regs = {r.source: r for r in schema.load_registrations(pr.REGISTRATION_DIR)}
+    for name in pr.FIVE_CROPS:
+        if name not in regs:
+            raise SystemExit(f"{name}: no committed registration record")
+
+    master_rgb = pr.load_rgb(pr.MASTER_SOURCE)
+    paint_rgba = pr.load_rgba(pr.MASTER_SOURCE)  # drape the parchment itself, not a painting
+    crop_rgba = {name: pr.load_or_derive_rgba(name) for name in pr.FIVE_CROPS}
+    globe_rgb = pr.load_rgb(pr.GLOBE_SOURCE)
+    if globe_rgb.shape[1] != CANVAS_W or globe_rgb.shape[0] != CANVAS_H:
+        raise SystemExit(f"{pr.GLOBE_SOURCE} is {globe_rgb.shape[1]}x{globe_rgb.shape[0]}, "
+                         f"expected {CANVAS_W}x{CANVAS_H}")
+
+    master_gray = master_rgb.astype(np.float32).mean(axis=2)
+    offsets = pr.crop_offsets(master_gray, crop_rgba)
+    log("five parchment crops located in the master frame", t0)
+    owner = pr.canvas_owner(regs, crop_rgba, offsets, paint_rgba)
+    canvas_rgb, placed = pr.place_painting(0, regs, paint_rgba, crop_rgba, offsets, globe_rgb, owner)
+    log(f"parchment drape placed {100.0 * placed.mean():.2f}% of the frame", t0)
+    return canvas_rgb, placed
 
 
 def _build_region_labels(rgb: np.ndarray, prov_cells: list[dict],
@@ -139,6 +191,16 @@ def _region_centroids(lab: np.ndarray, n_regions: int, width: int):
     return cx, cy
 
 
+def _region_on_parchment(lab: np.ndarray, placed: np.ndarray, n_regions: int) -> np.ndarray:
+    """Per region: does the majority of its area fall under real parchment art?"""
+    total = np.bincount(lab.ravel(), minlength=n_regions + 1)
+    on = np.bincount(lab[placed].ravel(), minlength=n_regions + 1)
+    out = np.zeros(n_regions + 1, dtype=bool)
+    nz = total > 0
+    out[nz] = on[nz] * 2 > total[nz]
+    return out
+
+
 def _load_font(size: int) -> ImageFont.ImageFont:
     try:
         return ImageFont.load_default(size=size)
@@ -155,8 +217,6 @@ def main(argv: list[str] | None = None) -> int:
 
     prov_index = json.loads(PROVINCES_INDEX_PATH.read_text(encoding="utf-8"))
     land_regions = json.loads(LAND_REGIONS_INDEX_PATH.read_text(encoding="utf-8"))
-    name_guesses = (json.loads(NAME_GUESS_PATH.read_text(encoding="utf-8"))
-                    if NAME_GUESS_PATH.is_file() else {})
     n_land = int(prov_index["land_provinces"])
     n_regions = int(land_regions["regions"])
 
@@ -167,17 +227,22 @@ def main(argv: list[str] | None = None) -> int:
     lab = _build_region_labels(rgb, prov_index["cells"], land_regions["cells"], n_land)
     log(f"{n_regions} region labels built", t0)
 
+    backdrop, placed = _parchment_drape(t0)
+    on_parchment = _region_on_parchment(lab, placed, n_regions)
+
     cx, cy = _region_centroids(lab, n_regions, CANVAS_W)
 
     palette = _spread_palette(n_regions)
     tint = palette[lab]
-    globe = sources.load_source_image(GLOBE_SOURCE).astype(np.float64)
-    img = globe.copy()
+    img = backdrop.astype(np.float64)
     filled = lab > 0
-    img[filled] = 0.45 * globe[filled] + 0.55 * tint[filled]
+    # A lighter tint than render_provinces_preview.py's 0.55 — the parchment's
+    # own printed place names must stay legible underneath, which is the whole
+    # point of draping the real parchment here instead of the globe.
+    img[filled] = 0.75 * backdrop[filled] + 0.25 * tint[filled]
     img[ndimage.binary_dilation(_edges(lab, WRAP_X), iterations=1)] = EDGE_RGB
     img = img.clip(0, 255).astype(np.uint8)
-    log("tinted overlay composited", t0)
+    log("tinted overlay composited over the parchment drape", t0)
 
     areas = {int(c["region"]): int(c["area"]) for c in land_regions["cells"]}
     kinds = {int(c["region"]): c["kind"] for c in land_regions["cells"]}
@@ -205,24 +270,24 @@ def main(argv: list[str] | None = None) -> int:
     print(f"wrote {OUT_HALF_PATH}  ({CANVAS_W // 2}x{CANVAS_H // 2})")
 
     # --- CSV worksheet: every region, sorted by area descending ------------
+    n_on_parchment = 0
     rows = []
     for region_id in range(1, n_regions + 1):
-        guess = name_guesses.get(str(region_id), {})
+        flag = bool(on_parchment[region_id])
+        n_on_parchment += flag
         rows.append({
             "region_id": region_id,
             "kind": kinds.get(region_id, ""),
             "area_px": areas.get(region_id, 0),
-            "guess_key": guess.get("guess_key", ""),
-            "guess_lon": guess.get("guess_lon", ""),
-            "guess_lat": guess.get("guess_lat", ""),
-            "distance_deg": guess.get("distance_deg", ""),
+            "on_parchment": flag,
         })
     rows.sort(key=lambda r: -r["area_px"])
     with CSV_PATH.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
-    print(f"wrote {CSV_PATH}  ({len(rows)} rows, sorted by area descending)")
+    print(f"wrote {CSV_PATH}  ({len(rows)} rows, sorted by area descending, "
+          f"{n_on_parchment} on real parchment art)")
 
     log(f"done: {n_regions} regions rendered", t0)
     return 0

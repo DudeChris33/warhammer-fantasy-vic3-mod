@@ -18,16 +18,17 @@ colour authority ``tools/derived/provinces_index.json`` and the sea canon
 * ``localization/english/map/wh_land_states_l_english.yml`` — placeholder loc,
   one ``STATE_*:0 "<pretty name>" # AUTOGEN`` per state.
 
-Plus two **dev-only** artifacts (never shipped content, gitignored under
-``tools/derived/``), a naming aid for the user's canon pass in #2931:
-
-* ``tools/derived/land_region_name_guesses.json`` — per region, the nearest
-  real-world vanilla Vic3 state by longitude/latitude (a coincidental-
-  proximity heuristic on a fictional world, not a geographic claim — see
-  ``tools/build_vanilla_state_lonlat.py``, which this script's guess step
-  consumes and which must be run at least once first).
-* run ``tools/render_land_regions_preview.py`` afterwards for the numbered
-  review render + CSV worksheet.
+Run ``tools/render_land_regions_preview.py`` afterwards for the numbered
+review render + CSV worksheet — a naming aid for the user's canon pass in
+#2931. It drapes the real TWW3 parchment art under the numbered regions
+(reusing ``project_regions.py``'s five-crop registration) rather than
+guessing a name algorithmically: an earlier cut of this pipeline guessed the
+nearest real-world vanilla Vic3 state by longitude/latitude (rejected —
+coincidental Earth-geography proximity means nothing on a fictional world),
+and OCR of the parchment itself was tried and failed in practice (Tesseract
+garbled almost everything on this stylised, curved-baseline font). The user
+chose to drop automated guessing and read real names off the render instead
+(2026-09-05).
 
 Deterministic: a pure function of the three committed indices +
 ``map_data/provinces.png`` + ``map_config.SEED`` (only used for the strategic
@@ -51,7 +52,7 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config import canvas_frame, map_config  # noqa: E402
+from config import map_config  # noqa: E402
 from worldgen import raster, schema  # noqa: E402
 from worldgen.statefile import (  # noqa: E402
     ProvinceInfo,
@@ -70,13 +71,11 @@ PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 SEA_ZONES_INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
 PROVINCES_PNG_PATH = MOD_ROOT / "map_data" / "provinces.png"
 SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
-VANILLA_LONLAT_PATH = DERIVED_DIR / "vanilla_state_lonlat.json"
 
 STATE_FILE_PATH = MOD_ROOT / "map_data" / "state_regions" / "00_norsca.txt"
 STRATEGIC_REGIONS_PATH = MOD_ROOT / "common" / "strategic_regions" / "land_strategic_regions.txt"
 LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_land_states_l_english.yml"
 BUILDINGS_DIR = MOD_ROOT / "common" / "buildings"
-NAME_GUESS_PATH = DERIVED_DIR / "land_region_name_guesses.json"
 
 BOM = b"\xef\xbb\xbf"
 INDENT = "\t"
@@ -275,19 +274,6 @@ def _render_loc(keys: list[str]) -> str:
 
 
 # ---------------------------------------------------------------------------
-# Nearest-vanilla-state name guess (dev-only, never shipped — see docstring)
-# ---------------------------------------------------------------------------
-
-def _nearest_vanilla_state(lon: float, lat: float, names: list[str],
-                           lons: np.ndarray, lats: np.ndarray) -> tuple[str, float]:
-    dlon = (lon - lons + 180.0) % 360.0 - 180.0
-    dlat = lat - lats
-    dist = np.sqrt(dlon * dlon + dlat * dlat)
-    idx = int(np.argmin(dist))
-    return names[idx], float(dist[idx])
-
-
-# ---------------------------------------------------------------------------
 # Driver
 # ---------------------------------------------------------------------------
 
@@ -350,26 +336,14 @@ def main(argv: list[str] | None = None) -> int:
     lab, cos_t, sin_t, y = _land_pixel_theta(labels, land_mask, CANVAS_W)
     identity = np.arange(n_land + 1, dtype=np.int64)
     prov_cx, prov_cy, prov_counts = _circular_centroids(lab, cos_t, sin_t, y, identity, n_land, CANVAS_W)
-    region_cx, region_cy, region_counts = _circular_centroids(
-        lab, cos_t, sin_t, y, region_of, n_regions, CANVAS_W)
     if not (prov_counts[1:] > 0).all():
         raise SystemExit("a land province has no pixels in provinces.png")
-    log("province + region centroids computed", t0)
+    log("province centroids computed", t0)
 
     # --- naval_exit: region -> bordering sea-state id ----------------------
     sea_state_of_zone = _sea_state_of_zone(sea_index["cells"], n_sea)
     naval_exit_choice = _naval_exit_choices(labels, n_land, region_of, sea_state_of_zone)
     log(f"naval_exit adjacency resolved for {len(naval_exit_choice)} coastal region(s)", t0)
-
-    # --- vanilla name-guess table (dev-only) -------------------------------
-    if not VANILLA_LONLAT_PATH.is_file():
-        raise SystemExit(
-            f"{VANILLA_LONLAT_PATH} not found — run tools/build_vanilla_state_lonlat.py first"
-        )
-    vanilla_lonlat = json.loads(VANILLA_LONLAT_PATH.read_text(encoding="utf-8"))
-    v_names = sorted(vanilla_lonlat)
-    v_lons = np.array([vanilla_lonlat[n][0] for n in v_names], dtype=np.float64)
-    v_lats = np.array([vanilla_lonlat[n][1] for n in v_names], dtype=np.float64)
 
     # --- placeholder economics (verified building ids, shared by every state)
     econ = schema.Economics(
@@ -387,7 +361,6 @@ def main(argv: list[str] | None = None) -> int:
     # --- per-region emission -------------------------------------------------
     blocks: list[str] = []
     loc_keys: list[str] = []
-    name_guesses: dict[str, dict] = {}
     first_city_color: raster.Color | None = None
     n_stacked = 0
 
@@ -446,15 +419,6 @@ def main(argv: list[str] | None = None) -> int:
         if region_id == 1:
             first_city_color = hubs["city"]
 
-        lon, lat = canvas_frame.canvas_to_lonlat(float(region_cx[region_id]), float(region_cy[region_id]))
-        guess_key, dist = _nearest_vanilla_state(float(lon), float(lat), v_names, v_lons, v_lats)
-        name_guesses[str(region_id)] = {
-            "guess_key": guess_key,
-            "guess_lon": vanilla_lonlat[guess_key][0],
-            "guess_lat": vanilla_lonlat[guess_key][1],
-            "distance_deg": round(dist, 4),
-        }
-
     log(f"{len(blocks)} land states emitted ({n_stacked} hub-stacked placeholder/small regions)", t0)
 
     # --- write the state file ----------------------------------------------
@@ -474,15 +438,6 @@ def main(argv: list[str] | None = None) -> int:
         bom=True,
     )
     log(f"wrote {STRATEGIC_REGIONS_PATH.relative_to(MOD_ROOT)}  (1 region, {len(loc_keys)} states)", t0)
-
-    # --- write the dev-only name-guess table ---------------------------------
-    if len(name_guesses) != n_regions:
-        raise SystemExit(
-            f"name-guess totality failed: {len(name_guesses)} guesses for {n_regions} regions"
-        )
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    NAME_GUESS_PATH.write_text(json.dumps(name_guesses, indent=1, sort_keys=True) + "\n", encoding="utf-8")
-    log(f"wrote {NAME_GUESS_PATH.relative_to(MOD_ROOT)}  ({len(name_guesses)} guesses, dev-only)", t0)
 
     # --- assertions -----------------------------------------------------------
     ids = [int(re.search(r"\bid\s*=\s*(\d+)", b).group(1)) for b in blocks]
