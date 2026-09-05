@@ -237,6 +237,7 @@ def validate(
     loc_dir: Path,
     min_province_area: int = 4,
     wrap_x: bool = True,
+    provinces_index_path: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -274,9 +275,22 @@ def validate(
     errors += _check_hub_membership(states)
     errors += _check_required_hubs(land_states)
     errors += _check_id_bands(land_states, sea_states)
+    # Deliberately non-contiguous provinces (island-override merges — see
+    # land_provinces.merge_island_overrides) carry an `archipelago` flag in
+    # provinces_index.json; a torn province is only a real bug when it isn't
+    # one of these. Optional: the fixture's golden bitmap has no index file
+    # and never needed the concept, so an absent path just means no exceptions.
+    archipelago_colors: set[Color] = set()
+    if provinces_index_path is not None and provinces_index_path.is_file():
+        import json
+
+        prov_index = json.loads(provinces_index_path.read_text(encoding="utf-8"))
+        archipelago_colors = {
+            tuple(c["color"]) for c in prov_index["cells"] if c.get("archipelago")
+        }
     if bitmap is not None:
         errors += _check_coastal_naval_exit(land_states, sea_states, bitmap, sea_colors)
-        errors += _check_degenerate_provinces(bitmap, min_province_area)
+        errors += _check_degenerate_provinces(bitmap, min_province_area, archipelago_colors)
         errors += _check_bitmap_state_crosscheck(bitmap, states, sea_colors, lake_colors)
         errors += _check_lakes_stateless(states, lake_colors)
     errors += _check_loc_coverage(states, loc_dir)
@@ -387,7 +401,8 @@ def _check_coastal_naval_exit(
     return errors
 
 
-def _check_degenerate_provinces(bitmap: ProvinceBitmap, min_area: int) -> list[str]:
+def _check_degenerate_provinces(bitmap: ProvinceBitmap, min_area: int,
+                                archipelago_colors: set[Color] = frozenset()) -> list[str]:
     from worldgen.raster import color_to_hex
 
     errors = []
@@ -398,6 +413,11 @@ def _check_degenerate_provinces(bitmap: ProvinceBitmap, min_area: int) -> list[s
                 f"province {color_to_hex(color)} is degenerate: {area} px "
                 f"(< {min_area})"
             )
+        if color in archipelago_colors:
+            # Deliberately non-contiguous (an island-override merge) — vanilla
+            # ships exactly this shape (e.g. Micronesia's province colour spans
+            # 23 disconnected pixel blobs), so being torn is not itself a bug.
+            continue
         comps = connected_components(
             bitmap.pixels[color], bitmap.width, bitmap.height, bitmap.wrap_x
         )
@@ -759,14 +779,26 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
             f"{len(dup)} province id(s) are shared by more than one province — the "
             f"land and sea id bands overlap (first few: {sorted(dup)[:5]})")
 
-    # 5. Every province is one connected region (a province in two pieces is none).
+    # 5. Every province is one connected region, UNLESS it's a deliberate
+    # island-override archipelago (several islands merged under one label by
+    # land_provinces.merge_island_overrides) — vanilla ships exactly this shape
+    # (e.g. Micronesia's province colour spans 23 disconnected pixel blobs), so
+    # a torn province is only an error when it isn't flagged as one.
+    archipelago_labels = {int(c["label"]) for c in index["cells"] if c.get("archipelago")}
     comp = cells.components(labels, wrap_x)
     pairs = np.unique(np.stack([labels.ravel(), comp.ravel()], axis=1), axis=0)
     counts = np.bincount(pairs[:, 0].astype(np.int64), minlength=int(labels.max()) + 1)
-    torn = np.flatnonzero(counts > 1)
-    torn = torn[torn > 0]
-    if torn.size:
-        errors.append(f"{torn.size} province(s) are disconnected (first few: {torn[:5].tolist()})")
+    torn = set(np.flatnonzero(counts > 1).tolist()) - {0}
+    unexpected = sorted(torn - archipelago_labels)
+    if unexpected:
+        errors.append(
+            f"{len(unexpected)} province(s) are disconnected without being flagged "
+            f"archipelago (first few: {unexpected[:5]})")
+    stale_flags = sorted(archipelago_labels - torn)
+    if stale_flags:
+        errors.append(
+            f"{len(stale_flags)} province(s) are flagged archipelago but are actually "
+            f"contiguous (first few: {stale_flags[:5]})")
 
     # 6. The sea province count matches the committed sea-zone layer.
     sea_lab = cells.read_labels(sea_labels_path)
@@ -1060,6 +1092,8 @@ def main(argv: list[str] | None = None) -> int:
         loc_dir=paths["loc_dir"],
         min_province_area=args.min_province_area,
         wrap_x=map_config.WRAP_X,
+        provinces_index_path=None if args.fixture else
+        (args.index_path or TOOLS_DIR / "derived" / "provinces_index.json"),
     )
     if errors:
         print(f"validate_map: {len(errors)} error(s):", file=sys.stderr)

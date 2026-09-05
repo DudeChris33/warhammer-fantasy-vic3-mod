@@ -1005,8 +1005,10 @@ def _selfcheck_land_provinces() -> None:
     assert dmask[2:18, 25:35].mean() < 0.5, "the bare landmass must be classed placeholder"
     assert dmask[2:18, 2:18].mean() > 0.5, "the interior-magenta landmass must be classed drawn"
 
-    prov, is_placeholder, reg_of = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
+    prov, is_placeholder, reg_of, is_archipelago = lp.subdivide(
+        reg, land, dmask, target=6, wrap_x=False, min_area=1)
     assert int(prov.max()) >= 6, f"drawn regions must subdivide, got {prov.max()} provinces"
+    assert not is_archipelago.any(), "no province here is an island-override merge"
     assert (prov[land] > 0).all() and (prov[~land] == 0).all(), "provinces must tile land only"
     # No province crosses a magenta boundary: each province lies in one region.
     for lab in range(1, int(prov.max()) + 1):
@@ -1037,10 +1039,11 @@ def _selfcheck_land_provinces() -> None:
     assert groups[int(reg_of[ph])] == [ph], \
         "the placeholder province must be the only member of its region"
 
-    p2, ip2, ro2 = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
+    p2, ip2, ro2, ia2 = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
     assert np.array_equal(prov, p2), "two runs must be byte-identical"
     assert np.array_equal(is_placeholder, ip2), "placeholder flags must be byte-identical too"
     assert np.array_equal(reg_of, ro2), "the region grouping must be byte-identical too"
+    assert np.array_equal(is_archipelago, ia2), "archipelago flags must be byte-identical too"
 
 
 def _selfcheck_island_overrides() -> None:
@@ -1065,13 +1068,19 @@ def _selfcheck_island_overrides() -> None:
 
     # A blank overrides source yields no zones at all.
     blank = np.full((H, W, 3), 255, dtype=np.uint8)
-    assert not lp.island_override_zones(blank).any(), "a blank source must draw no zones"
+    assert not lp.island_override_zones(blank, wrap_x=False).any(), "a blank source must draw no zones"
 
+    # A drawn ring — the user's real idiom — never touches what it encloses;
+    # both islets sit in the hollow interior, not on the ring itself.
     overrides = np.full((H, W, 3), 255, dtype=np.uint8)
-    overrides[0:3, 29:36] = (255, 0, 0)  # one circle spanning both islets
-    zones = lp.island_override_zones(overrides)
-    assert int(zones.max()) == 1, f"one painted circle must be one zone, got {zones.max()}"
-    assert zones[1, 30] == 1 and zones[1, 34] == 1, "both islets must fall inside the zone"
+    overrides[0, 28:37] = (255, 0, 0)
+    overrides[3, 28:37] = (255, 0, 0)
+    overrides[0:4, 28] = (255, 0, 0)
+    overrides[0:4, 36] = (255, 0, 0)
+    zones = lp.island_override_zones(overrides, wrap_x=False)
+    assert int(zones.max()) == 1, f"one drawn ring must be one zone, got {zones.max()}"
+    assert zones[1, 30] == 1 and zones[1, 34] == 1, \
+        "both islets must fall inside the ring's filled interior"
 
     reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
     assert int(reg.max()) == 3, f"main landmass + 2 islets = 3, got {reg.max()}"
@@ -1107,6 +1116,22 @@ def _selfcheck_island_overrides() -> None:
     other_id = next(i for i in range(1, int(merged.max()) + 1) if i != merged_id)
     assert lp._is_connected(merged == other_id, wrap_x=False), \
         "an ordinary contiguous region must read as connected"
+
+    # End to end through subdivide(): the merged archipelago ships as exactly
+    # one non-contiguous province, correctly flagged is_archipelago — vanilla
+    # ships this shape for real (Micronesia's province colour spans 23
+    # disconnected blobs), so this is the deliberate case validate_map.py's
+    # own connectivity check must let through instead of rejecting.
+    dmask = lp.drawn_mask(land, lp.magenta_lines(drawn), wrap_x=False,
+                          interior_dist=0, reach=1)
+    prov, is_placeholder, reg_of, is_archipelago = lp.subdivide(
+        merged, land, dmask, target=merged.max(), wrap_x=False, min_area=1)
+    island_prov = int(prov[1, 30])
+    assert island_prov == int(prov[1, 34]), \
+        "the merged islets must ship as exactly one province"
+    assert is_archipelago[island_prov], "the merged province must be flagged archipelago"
+    main_prov = int(prov[9, 5])
+    assert not is_archipelago[main_prov], "an ordinary contiguous province must not be flagged"
 
 
 def _selfcheck_stack_hubs() -> None:

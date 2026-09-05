@@ -146,7 +146,7 @@ def main(argv: list[str] | None = None) -> int:
         if overrides_rgb.shape[:2] != (CANVAS_H, CANVAS_W):
             raise SystemExit(f"{ISLAND_OVERRIDES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
                              f"{overrides_rgb.shape[1]}x{overrides_rgb.shape[0]}")
-        island_overrides = land_provinces.island_override_zones(overrides_rgb)
+        island_overrides = land_provinces.island_override_zones(overrides_rgb, WRAP_X)
         log(f"island overrides: {int(island_overrides.max())} hand-drawn circle(s)", t0)
 
     log("flood-filling the magenta network into state regions ...", t0)
@@ -155,8 +155,8 @@ def main(argv: list[str] | None = None) -> int:
     mag = land_provinces.magenta_lines(drawn)
     dmask = land_provinces.drawn_mask(land, mag, WRAP_X, log=log)
     log("subdividing the drawn regions into provinces ...", t0)
-    land_lab, is_placeholder, reg_of = land_provinces.subdivide(reg, land, dmask, args.target,
-                                                                WRAP_X, args.min_area, log=log)
+    land_lab, is_placeholder, reg_of, is_archipelago = land_provinces.subdivide(
+        reg, land, dmask, args.target, WRAP_X, args.min_area, log=log)
     n_land = int(land_lab.max())
 
     sea_lab = cells.read_labels(SEA_LABELS_PATH)
@@ -223,6 +223,7 @@ def main(argv: list[str] | None = None) -> int:
     sea_id_start = n_land + 1
     entries = []
     n_placeholder = 0
+    n_archipelago = 0
     for lab in range(1, n_land + 1):
         color = tuple(int(v) for v in palette[lab])
         # Out-of-scope far continents are kept whole but emitted PASSABLE: Vic3
@@ -233,6 +234,12 @@ def main(argv: list[str] | None = None) -> int:
         # False on land.
         placeholder = bool(is_placeholder[lab]) if lab < len(is_placeholder) else False
         n_placeholder += placeholder
+        # Genuinely non-contiguous (several islands under one label, from a
+        # deliberate island-override merge) — legal per vanilla precedent (e.g.
+        # Micronesia's province colour spans 23 disconnected blobs), so
+        # validate_map.py reads this flag to tell it apart from a torn province.
+        archipelago = bool(is_archipelago[lab]) if lab < len(is_archipelago) else False
+        n_archipelago += archipelago
         entries.append({
             "label": lab,
             "kind": "land",
@@ -243,6 +250,7 @@ def main(argv: list[str] | None = None) -> int:
             "coastal": bool(land_coastal[lab]) if lab < len(land_coastal) else False,
             "impassable": False,  # every land province is passable now
             "placeholder": placeholder,  # out-of-scope land kept whole, undetailed
+            "archipelago": archipelago,  # several islands merged under one label
         })
     for s in range(1, n_sea + 1):
         lab = n_land + s
@@ -257,6 +265,7 @@ def main(argv: list[str] | None = None) -> int:
             "coastal": bool(sea_coastal[s]) if s < len(sea_coastal) else False,
             "impassable": sea_impassable[s],  # from sea_zones_index.json (config-driven)
             "placeholder": False,  # schema symmetry with land entries
+            "archipelago": False,  # schema symmetry with land entries
         })
 
     index = {
@@ -268,6 +277,7 @@ def main(argv: list[str] | None = None) -> int:
         "impassable_land_provinces": 0,  # nothing is impassable — every landmass boots
         "impassable_sea_provinces": sum(sea_impassable.values()),  # from sea_zones.json config
         "placeholder_land_provinces": n_placeholder,  # out-of-scope land kept whole
+        "archipelago_land_provinces": n_archipelago,  # islands merged by an override circle
         "land_id_start": land_id_start,
         "sea_id_start": sea_id_start,
         "cells": entries,
@@ -328,7 +338,8 @@ def main(argv: list[str] | None = None) -> int:
         f"{reg_count - n_drawn_regions} placeholder)", t0)
 
     land_areas = areas[1:n_land + 1]
-    log(f"done: {n_land} land provinces ({n_placeholder} out-of-scope passable placeholders) "
+    log(f"done: {n_land} land provinces ({n_placeholder} out-of-scope passable placeholders, "
+        f"{n_archipelago} island-override archipelagos) "
         f"(area min {int(land_areas.min()):,} / median {int(np.median(land_areas)):,} / "
         f"max {int(land_areas.max()):,} px), {n_sea} sea provinces", t0)
     return 0

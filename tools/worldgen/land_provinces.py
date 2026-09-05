@@ -140,25 +140,40 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     return reg
 
 
-def island_override_zones(rgb: np.ndarray, background_min: int = 250) -> np.ndarray:
+#: The user's island-override ring colour (pure red 255,0,0), tolerant of
+#: anti-aliasing. Disjoint from the state-region magenta network (255,0,255):
+#: this colour's blue channel is pinned low, magenta's is pinned high.
+_ISLAND_MARK = {"r": 200, "g": 80, "b": 80}
+
+
+def island_override_zones(rgb: np.ndarray, wrap_x: bool = True) -> np.ndarray:
     """Zone id per user-drawn island-override circle (0 = nothing drawn there).
 
     The source (``sources/terraqueous_globe_reprojected - tiny_islands_merger.png``,
-    optional — see :func:`merge_island_overrides`) is a blank/near-white canvas
-    the user paints solid filled circles onto, any colour, around each cluster of
+    optional — see :func:`merge_island_overrides`) has the user draw a closed
+    **ring** (pure red 255,0,0, tolerant of anti-aliasing) around each cluster of
     tiny islands that should be forced into a single province: a disconnected
     islet has no land neighbour to qualify for :func:`worldgen.cells.merge_small`'s
     share-a-border merge, so left alone every one of them ships as its own micro
-    state-region forever. Any pixel that isn't near-white counts as "painted";
-    connected components of the painted pixels are the distinct zones. Two
-    circles that touch or overlap simply become one zone, which is harmless —
-    everything either one covers still ends up merged together.
+    state-region forever. The ring never touches the islands it encloses, so its
+    interior is filled (``scipy.ndimage.binary_fill_holes``) before labelling —
+    the zone a ring marks is everything *inside* it, not the drawn line itself.
+    Distinct rings become distinct connected components/zone ids once filled;
+    two rings that touch or overlap simply become one zone, which is harmless —
+    everything either one encloses still ends up merged together.
     """
-    painted = np.any(rgb.astype(np.int16) < background_min, axis=-1)
-    if not painted.any():
+    r, g, b = rgb[..., 0].astype(int), rgb[..., 1].astype(int), rgb[..., 2].astype(int)
+    ring = (r > _ISLAND_MARK["r"]) & (g < _ISLAND_MARK["g"]) & (b < _ISLAND_MARK["b"])
+    if not ring.any():
         return np.zeros(rgb.shape[:2], dtype=np.int32)
-    comp = cells.components(painted.astype(np.int32), wrap_x=False)
-    return cells.renumber(np.where(painted, comp, 0))
+    if wrap_x:
+        pad = rgb.shape[1]
+        padded = np.concatenate([ring[:, -pad:], ring, ring[:, :pad]], axis=1)
+        filled = ndimage.binary_fill_holes(padded)[:, pad:-pad]
+    else:
+        filled = ndimage.binary_fill_holes(ring)
+    comp = cells.components(filled.astype(np.int32), wrap_x)
+    return cells.renumber(np.where(filled, comp, 0))
 
 
 def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndarray,
@@ -336,7 +351,7 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     largest-remainder rule with each drawn region guaranteed at least one. A
     placeholder region (outside ``drawn``) is kept whole — one province.
 
-    Returns ``(labels, is_placeholder, reg_of)``:
+    Returns ``(labels, is_placeholder, reg_of, is_archipelago)``:
 
     * ``labels`` — the province label layer (``1..N``, 0 on water).
     * ``is_placeholder`` — a boolean table indexed by label, ``True`` for an
@@ -349,6 +364,14 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
       persisted as ``land_regions_index.json`` (the land mirror of
       ``sea_zones_index.json``). Province labels/colours are untouched by this
       return, so ``provinces.png`` stays byte-identical.
+    * ``is_archipelago`` — a boolean table indexed by label, ``True`` for a
+      province that is genuinely non-contiguous — several disconnected islands
+      sharing one label, the deliberate outcome of an island-override merge
+      (:func:`merge_island_overrides`) rather than a flood-fill bug. Vanilla
+      ships exactly this shape (e.g. Micronesia's province colour spanning 23
+      disconnected pixel blobs), so this is not itself invalid; it's the flag
+      ``generate_provinces.py`` records so a validator can tell a deliberate
+      archipelago apart from an accidentally torn province.
 
     After the per-region cut, :func:`worldgen.cells.split_disconnected` repairs any
     seam a fill tore, sub-floor offcuts merge into a neighbour, and the labels
@@ -423,7 +446,19 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     reg_of[out.ravel()] = reg.ravel()
     is_placeholder = ~is_drawn[reg_of]
     is_placeholder[0] = False
+
+    # Flag every genuinely non-contiguous province (an island-override merge
+    # that was never cut, per the connectivity guard above) so a validator can
+    # tell it apart from an accidentally torn one. One global connected-
+    # components pass, exactly the check validate_map.py itself runs.
+    comp = cells.components(out, wrap_x)
+    pairs = np.unique(np.stack([out.ravel(), comp.ravel()], axis=1), axis=0)
+    counts = np.bincount(pairs[:, 0].astype(np.int64), minlength=int(out.max()) + 1)
+    is_archipelago = counts > 1
+    is_archipelago[0] = False
+
     if log:
         log(f"  {int(out.max())} land provinces "
-            f"({int(is_placeholder[1:].sum())} out-of-scope placeholders)")
-    return out, is_placeholder, reg_of
+            f"({int(is_placeholder[1:].sum())} out-of-scope placeholders, "
+            f"{int(is_archipelago.sum())} archipelagos)")
+    return out, is_placeholder, reg_of, is_archipelago
