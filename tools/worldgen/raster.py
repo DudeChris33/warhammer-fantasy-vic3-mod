@@ -85,6 +85,38 @@ class ColorAllocator:
 
 
 # ---------------------------------------------------------------------------
+# Hilbert-curve locality index
+# ---------------------------------------------------------------------------
+
+def hilbert_index(x: float, y: float, order_bits: int) -> int:
+    """Hilbert-curve distance for ``(x, y)`` on a ``2**order_bits`` square grid.
+
+    A space-filling curve with far better 2D locality than a raster/serpentine
+    scan (a raster scan jumps clear across the grid at every row wrap; a
+    Hilbert curve never does) — used to turn a set of 2D points into a linear
+    order where nearby points get nearby ranks (board #2930: geographically
+    neighbouring land regions getting numerically close STATE ids). Standard
+    integer algorithm (Wikipedia's ``xy2d``); ``x``/``y`` are floored to
+    integers and must satisfy ``0 <= x, y < 2**order_bits``.
+    """
+    n = 1 << order_bits
+    xi, yi = int(x), int(y)
+    d = 0
+    s = n // 2
+    while s > 0:
+        rx = 1 if (xi & s) > 0 else 0
+        ry = 1 if (yi & s) > 0 else 0
+        d += s * s * ((3 * rx) ^ ry)
+        if ry == 0:
+            if rx == 1:
+                xi = s - 1 - xi
+                yi = s - 1 - yi
+            xi, yi = yi, xi
+        s //= 2
+    return d
+
+
+# ---------------------------------------------------------------------------
 # Wrap-aware distance
 # ---------------------------------------------------------------------------
 

@@ -88,7 +88,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import reproject, schema, scope  # noqa: E402
+from worldgen import derive_crop, reproject, schema, scope  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
@@ -155,6 +155,22 @@ def load_rgba(name: str) -> np.ndarray:
         raise SystemExit(f"sources/{name} is missing")
     with Image.open(path) as im:
         return np.asarray(im.convert("RGBA"), dtype=np.uint8).copy()
+
+
+def load_or_derive_rgba(name: str) -> np.ndarray:
+    """Like load_rgba, but derives the five parchment crops on demand from
+    their dots sheet (still read directly, no manifest guard — same
+    QA-render convention as the rest of this loader) instead of a
+    pre-baked file (board #3570)."""
+    seed_path = derive_crop.SEED_DIR / f"{Path(name).stem}.json"
+    seed = derive_crop.load_seed(Path(name).stem) if seed_path.is_file() else None
+    dots_source = seed.get("dots_source") if seed else None
+    if dots_source:
+        dots_rgba = load_rgba(dots_source)
+        out_rgb, out_alpha = derive_crop.derive_clean_source(
+            dots_rgba[..., :3], dots_rgba[..., 3], seed)
+        return np.dstack([out_rgb, out_alpha])
+    return load_rgba(name)
 
 
 def extract_borders(canvas_rgb: np.ndarray, globe_rgb: np.ndarray, placed: np.ndarray,
@@ -431,7 +447,7 @@ def build(variants: list[str], pad: int, out_prefix: str,
     # see extract_borders for why a magenta-only alpha must never reach canvas_owner
     # or place_painting.
     paint_rgba = load_rgba(paint_source)
-    crop_rgba = {name: load_rgba(name) for name in FIVE_CROPS}
+    crop_rgba = {name: load_or_derive_rgba(name) for name in FIVE_CROPS}
     globe_rgb = load_rgb(globe_source)
     coasts_rgb = load_rgb(COAST_SOURCE) if overlay_coasts else None
 

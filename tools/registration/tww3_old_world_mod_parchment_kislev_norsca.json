@@ -2,9 +2,9 @@
   "role": "old_world_boundary_network_kislev_norsca",
   "precedence": 35,
   "layer_precedence": {
-    "boundaries": 5,
-    "coastline": 5,
-    "relief": 5
+    "boundaries": 6,
+    "coastline": 6,
+    "relief": 6
   },
   "notes": "PROVISIONAL. Kislev+Norsca crop of the TWW3 Old World mod parchment ('The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_kislev_norsca (objective=landmarks; 10 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 6x6 lattice). A DENSE Old World boundary network confined to Kislev+Norsca — the whole-source fit is defeated by its inconsistent inter-region scale, so this per-region carve is the way in. Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are PROVISIONAL placement values, to be revisited when boundary extraction lands (S6). MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 16, \"lattice_hull_box\": [32.0, 0.0, 2465.0, 1379.0], \"method\": \"thin-plate interpolation of landmarks, lattice bounded to hull+pad\"}",
   "source": "tww3_old_world_mod_parchment_kislev_norsca.png",

@@ -51,7 +51,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import raster, reproject, schema  # noqa: E402
+from worldgen import derive_crop, raster, reproject, schema  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
@@ -110,6 +110,21 @@ def out_name(stem: str) -> str:
 
 
 def load_source_rgba(name: str) -> tuple[np.ndarray, np.ndarray | None]:
+    """(rgb, alpha) — derives the five parchment crops on demand from their
+    dots sheet (board #3570); everything else is still read directly from
+    sources/ per this module's own no-manifest-guard convention."""
+    stem = name[:-4] if name.endswith(".png") else name
+    seed_path = derive_crop.SEED_DIR / f"{stem}.json"
+    if seed_path.is_file():
+        seed = derive_crop.load_seed(stem)
+        dots_source = seed.get("dots_source")
+        if dots_source:
+            dots_rgb, dots_alpha = _read_source_rgba(dots_source)
+            return derive_crop.derive_clean_source(dots_rgb, dots_alpha, seed)
+    return _read_source_rgba(name)
+
+
+def _read_source_rgba(name: str) -> tuple[np.ndarray, np.ndarray | None]:
     """``(rgb, alpha)`` read directly from ``sources/`` (see module docstring)."""
     path = sources_mod.resolve_source_path(name, SOURCES_DIR)
     if not path.is_file():

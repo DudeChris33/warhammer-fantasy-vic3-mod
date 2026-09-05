@@ -30,6 +30,7 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import json
 import sys
 from dataclasses import dataclass
 from pathlib import Path
@@ -39,7 +40,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from config import canvas_frame  # noqa: E402
-from worldgen import schema  # noqa: E402
+from worldgen import derive_crop, schema  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent.parent
 REPO_ROOT = TOOLS_DIR.parent
@@ -48,11 +49,12 @@ MANIFEST_PATH = TOOLS_DIR / "SOURCES.md"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
 #: ``sources/`` is organized into subfolders by role (raw references in
-#: ``originals/``, GIMP editable masters in ``gimp/``, the paired-anchor-dot
-#: workflow's crops/examples in ``dots/``) — a file may live directly under
-#: ``sources/`` or in one of these. ``WIP/`` holds local scratch not tracked in
-#: the manifest, so it is deliberately excluded from both search and refresh.
-SOURCE_SUBDIRS = ("originals", "gimp", "dots")
+#: ``originals/``, GIMP editable masters in ``gimp/``, GIMP-exported PNGs in
+#: ``gimp_exports/``, the paired-anchor-dot workflow's crops/examples in
+#: ``dots/``) — a file may live directly under ``sources/`` or in one of
+#: these. ``WIP/`` holds local scratch not tracked in the manifest, so it is
+#: deliberately excluded from both search and refresh.
+SOURCE_SUBDIRS = ("originals", "gimp", "gimp_exports", "dots")
 
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"
@@ -218,8 +220,16 @@ def verify(
     reg_by_source = {r.source: r for r in regs}
 
     for reg in regs:
-        if reg.source not in by_file:
+        if reg.source in by_file:
+            continue
+        seed = _derived_seed(reg.source)
+        if seed is None:
             errors.append(f"registration '{reg.source}' has no row in {manifest_path.name}")
+        elif seed["dots_source"] not in by_file:
+            errors.append(
+                f"registration '{reg.source}' derives from '{seed['dots_source']}' "
+                f"which has no row in {manifest_path.name}"
+            )
 
     # 2b. Frame aliases: the parent must be a real registration, and must not
     #     itself be an alias. Both are structural facts the per-file schema pass
@@ -251,12 +261,17 @@ def verify(
     #    dims): control points inside the source image, footprint inside the canvas.
     w_canvas, h_canvas = canvas_frame.WIDTH, canvas_frame.HEIGHT
     for reg in regs:
-        path = resolve_source_path(reg.source, sources_dir)
-        sw = sh = None
-        if path.is_file():
-            dims = image_dims(path)
-            if dims != _NA_DIMS:
-                sw, sh = (int(v) for v in dims.split("x"))
+        seed = _derived_seed(reg.source)
+        if seed is not None:
+            mh, mw = seed["master_shape"]
+            sw, sh = int(mw), int(mh)
+        else:
+            sw = sh = None
+            path = resolve_source_path(reg.source, sources_dir)
+            if path.is_file():
+                dims = image_dims(path)
+                if dims != _NA_DIMS:
+                    sw, sh = (int(v) for v in dims.split("x"))
 
         x0, y0, x1, y1 = reg.footprint
         if not (0 <= x0 < x1 <= w_canvas and 0 <= y0 < y1 <= h_canvas):
@@ -349,6 +364,32 @@ def load_source_image_rgba(
             if int(alpha.min()) < 255:
                 return rgb, alpha
         return rgb, None
+
+
+def _derived_seed(source: str) -> dict | None:
+    """The parsed seed dict for `source` if its registration seed declares
+    a dots_source (this source is derived on demand rather than
+    manifest-tracked on its own), else None."""
+    seed_path = REGISTRATION_DIR / "seeds" / f"{Path(source).stem}.json"
+    if not seed_path.is_file():
+        return None
+    seed = json.loads(seed_path.read_text(encoding="utf-8"))
+    return seed if "dots_source" in seed else None
+
+
+def load_or_derive_image_rgba(
+    filename: str,
+    sources_dir: Path = SOURCES_DIR,
+    manifest_path: Path = MANIFEST_PATH,
+):
+    """Like :func:`load_source_image_rgba`, but derives on demand when the
+    source's registration seed names a ``dots_source`` instead of reading
+    ``filename`` as its own manifest-tracked file (board #3570)."""
+    seed = _derived_seed(filename)
+    if seed is not None:
+        rgb, alpha = load_source_image_rgba(seed["dots_source"], sources_dir, manifest_path)
+        return derive_crop.derive_clean_source(rgb, alpha, seed)
+    return load_source_image_rgba(filename, sources_dir, manifest_path)
 
 
 # ---------------------------------------------------------------------------

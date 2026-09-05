@@ -53,7 +53,7 @@ from worldgen.raster import (  # noqa: E402
     voronoi_labels,
     write_rgb_png,
 )
-from worldgen.statefile import ProvinceInfo, compute_centroid, pick_hubs  # noqa: E402
+from worldgen.statefile import ProvinceInfo, compute_centroid, pick_hubs, stack_hubs  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 WORLD_DIR = TOOLS_DIR / "fixtures" / "world"
@@ -1043,6 +1043,104 @@ def _selfcheck_land_provinces() -> None:
     assert np.array_equal(reg_of, ro2), "the region grouping must be byte-identical too"
 
 
+def _selfcheck_island_overrides() -> None:
+    """Tiny-island override merge (worldgen.land_provinces), in isolation.
+
+    Pins the properties generate_provinces.py relies on: island_override_zones
+    reads distinct painted circles as distinct zone ids and a blank source as no
+    zones at all; merge_island_overrides unions every region caught under the
+    same zone into one (a circle over a single region is a no-op); the merge
+    result still tiles the land exactly and is byte-identical across two runs;
+    and subdivide's connectivity guard keeps a merged, non-contiguous archipelago
+    as exactly one province even when its area earns it more than one seat.
+    """
+    from worldgen import land_provinces as lp
+
+    H, W = 20, 40
+    land = np.zeros((H, W), dtype=bool)
+    land[2:18, 2:18] = True          # main landmass, undivided
+    land[1, 30] = True               # islet A, far from the landmass
+    land[1, 34] = True               # islet B, far from the landmass and from A
+    drawn = np.full((H, W, 3), 180, dtype=np.uint8)  # no magenta anywhere
+
+    # A blank overrides source yields no zones at all.
+    blank = np.full((H, W, 3), 255, dtype=np.uint8)
+    assert not lp.island_override_zones(blank).any(), "a blank source must draw no zones"
+
+    overrides = np.full((H, W, 3), 255, dtype=np.uint8)
+    overrides[0:3, 29:36] = (255, 0, 0)  # one circle spanning both islets
+    zones = lp.island_override_zones(overrides)
+    assert int(zones.max()) == 1, f"one painted circle must be one zone, got {zones.max()}"
+    assert zones[1, 30] == 1 and zones[1, 34] == 1, "both islets must fall inside the zone"
+
+    reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
+    assert int(reg.max()) == 3, f"main landmass + 2 islets = 3, got {reg.max()}"
+    islet_a, islet_b = int(reg[1, 30]), int(reg[1, 34])
+    assert islet_a != islet_b, "the two islets must start as separate regions"
+
+    merged = lp.merge_island_overrides(reg, land, zones, wrap_x=False)
+    assert int((merged == 0).sum()) == int((~land).sum()), "the merge must still tile the land exactly"
+    assert merged[1, 30] == merged[1, 34], "both islets must end up under one region id"
+    m2 = lp.merge_island_overrides(reg, land, zones, wrap_x=False)
+    assert np.array_equal(merged, m2), "two runs must be byte-identical"
+
+    # A circle drawn over a single region is a no-op.
+    single = np.zeros((H, W), dtype=np.int32)
+    single[1, 30] = 1
+    unchanged = lp.merge_island_overrides(reg, land, single, wrap_x=False)
+    assert np.array_equal(unchanged, reg), "a circle over one region must change nothing"
+
+    # regions() applies the override itself when given island_overrides=.
+    reg_direct = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False,
+                            island_overrides=zones)
+    assert reg_direct[1, 30] == reg_direct[1, 34], \
+        "regions() must apply island_overrides internally"
+
+    # subdivide's connectivity guard: a merged, disconnected region (two islets
+    # sharing one label) must never be cut, no matter how many seats its area
+    # would otherwise earn — tested directly against the private helper so the
+    # assertion doesn't hinge on the largest-remainder seat allocation's output.
+    merged_id = int(merged[1, 30])
+    assert not lp._is_connected(merged == merged_id, wrap_x=False), \
+        "two islets merged under one label must read as disconnected"
+    # A normal, single-piece region reads as connected.
+    other_id = next(i for i in range(1, int(merged.max()) + 1) if i != merged_id)
+    assert lp._is_connected(merged == other_id, wrap_x=False), \
+        "an ordinary contiguous region must read as connected"
+
+
+def _selfcheck_stack_hubs() -> None:
+    """Hub-stacking fallback (worldgen.statefile.stack_hubs), in isolation.
+
+    Pins the property board #2930's placeholder/small-region states rely on: a
+    single passable province stacks every hub onto itself (k=1, vanilla
+    STATE_MALTA precedent — city+port on one province, farm+mine+wood on
+    another), a state with fewer passable provinces than pick_hubs needs
+    cycles city/farm/mine/wood deterministically across what it has
+    (``ordered[i % k]``), the port prefers a coastal candidate over a larger
+    non-coastal one, and a landlocked state never gets a port hub at all.
+    """
+    solo = [ProvinceInfo(color=(10, 20, 30), centroid=(5.0, 5.0), area=100,
+                        coastal=True, impassable=False)]
+    hubs = stack_hubs(solo, coastal=True)
+    assert hubs["port"] == hubs["city"] == hubs["farm"] == hubs["mine"] == hubs["wood"] == (10, 20, 30), hubs
+
+    two = [
+        ProvinceInfo(color=(1, 1, 1), centroid=(1.0, 1.0), area=50, coastal=True, impassable=False),
+        ProvinceInfo(color=(2, 2, 2), centroid=(2.0, 2.0), area=200, coastal=False, impassable=False),
+    ]
+    hubs2 = stack_hubs(two, coastal=True)
+    assert hubs2["port"] == (1, 1, 1), "port must prefer the coastal candidate even if smaller"
+    assert hubs2["city"] == (1, 1, 1) and hubs2["farm"] == (2, 2, 2), hubs2
+    assert hubs2["mine"] == (1, 1, 1) and hubs2["wood"] == (2, 2, 2), "cycling must wrap i % k"
+
+    landlocked = stack_hubs(
+        [ProvinceInfo(color=(9, 9, 9), centroid=(0.0, 0.0), area=1, coastal=False, impassable=False)],
+        coastal=False,
+    )
+    assert "port" not in landlocked, "a landlocked state must not get a port hub"
+
+
 def _selfcheck_sea_naming() -> None:
     """Canon sea naming (worldgen.sea_naming), in isolation (no golden).
 
@@ -1326,6 +1424,12 @@ def run_check() -> int:
     _selfcheck_land_provinces()
     print("land_provinces: drawn-region cut (barrier-respecting subdivision, placeholder whole) "
           "self-check passed.")
+    _selfcheck_island_overrides()
+    print("land_provinces: tiny-island override merge (circle -> zone -> forced single "
+          "province) self-check passed.")
+    _selfcheck_stack_hubs()
+    print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
+          "preference) self-check passed.")
     _selfcheck_sea_naming()
     print("sea_naming: canon plurality assignment + ordinal + override + zero-zone warning "
           "self-check passed.")

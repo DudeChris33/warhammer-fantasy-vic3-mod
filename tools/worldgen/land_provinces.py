@@ -86,7 +86,8 @@ def magenta_lines(rgb: np.ndarray) -> np.ndarray:
 
 
 def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
-            merge_floor: int = 1200, wrap_x: bool = True, log=None) -> np.ndarray:
+            merge_floor: int = 1200, wrap_x: bool = True, log=None,
+            island_overrides: np.ndarray | None = None) -> np.ndarray:
     """State-region labels (0 on water, ``1..n`` per region) from the drawn network.
 
     ``land`` is the boolean land mask; ``drawn`` is the RGB state-region source.
@@ -94,6 +95,13 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     minus the in-land magenta barrier into connected regions, give each barrier
     pixel the nearest region's label (crisp 1-px boundaries), **split any region
     the fill tore into disconnected pieces**, then merge sub-floor offcuts.
+
+    ``island_overrides``, when given, is a canvas-shaped int array as returned by
+    :func:`island_override_zones` — 0 where the user drew nothing, a distinct id
+    per hand-drawn circle otherwise. Every region caught under the same circle is
+    force-merged into one (see :func:`merge_island_overrides`) as the very last
+    step, after the normal barrier/fill/merge machinery — the tiny-island fix for
+    an archipelago that would otherwise ship as one micro state-region per islet.
     """
     mag = magenta_lines(drawn)
     if dilate:
@@ -120,6 +128,8 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     reg = cells.split_disconnected(reg, wrap_x)
     reg = cells.merge_small(reg, merge_floor, wrap_x)
     reg = cells.renumber(reg)
+    if island_overrides is not None and island_overrides.any():
+        reg = merge_island_overrides(reg, land, island_overrides, wrap_x, log=log)
     if int((reg == 0).sum()) != int((~land).sum()):
         raise cells.CellError(
             "region layer does not tile the land exactly: "
@@ -128,6 +138,72 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     if log:
         log(f"  {int(reg.max())} state regions")
     return reg
+
+
+def island_override_zones(rgb: np.ndarray, background_min: int = 250) -> np.ndarray:
+    """Zone id per user-drawn island-override circle (0 = nothing drawn there).
+
+    The source (``sources/terraqueous_globe_reprojected - tiny_islands_merger.png``,
+    optional — see :func:`merge_island_overrides`) is a blank/near-white canvas
+    the user paints solid filled circles onto, any colour, around each cluster of
+    tiny islands that should be forced into a single province: a disconnected
+    islet has no land neighbour to qualify for :func:`worldgen.cells.merge_small`'s
+    share-a-border merge, so left alone every one of them ships as its own micro
+    state-region forever. Any pixel that isn't near-white counts as "painted";
+    connected components of the painted pixels are the distinct zones. Two
+    circles that touch or overlap simply become one zone, which is harmless —
+    everything either one covers still ends up merged together.
+    """
+    painted = np.any(rgb.astype(np.int16) < background_min, axis=-1)
+    if not painted.any():
+        return np.zeros(rgb.shape[:2], dtype=np.int32)
+    comp = cells.components(painted.astype(np.int32), wrap_x=False)
+    return cells.renumber(np.where(painted, comp, 0))
+
+
+def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndarray,
+                           wrap_x: bool = True, log=None) -> np.ndarray:
+    """Force every region caught under the same override circle to merge into one.
+
+    ``overrides`` is an :func:`island_override_zones` layer. For each zone, every
+    region with at least one land pixel under it is unioned together (a circle
+    touching only one region is a no-op). :func:`subdivide` never crosses a
+    magenta boundary and only ever cuts a *connected* region (see its own
+    connectivity guard), so a merged, non-contiguous archipelago always ships
+    whole as a single province — exactly the override this exists for.
+    """
+    n = int(reg.max())
+    parent = np.arange(n + 1)
+
+    def find(a: int) -> int:
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return int(a)
+
+    def union(a: int, b: int) -> None:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[max(ra, rb)] = min(ra, rb)
+
+    merged_any = False
+    for z in range(1, int(overrides.max()) + 1):
+        here = (overrides == z) & land
+        if not here.any():
+            continue
+        ids = sorted(int(i) for i in np.unique(reg[here]) if i > 0)
+        if len(ids) <= 1:
+            continue
+        for i in ids[1:]:
+            union(ids[0], i)
+        merged_any = True
+        if log:
+            log(f"  island override zone {z}: merging regions {ids} -> {find(ids[0])}")
+
+    if not merged_any:
+        return reg
+    remap = np.array([find(i) for i in range(n + 1)], dtype=reg.dtype)
+    return cells.renumber(remap[reg])
 
 
 def drawn_mask(land: np.ndarray, mag: np.ndarray, wrap_x: bool = True,
@@ -168,6 +244,33 @@ def drawn_mask(land: np.ndarray, mag: np.ndarray, wrap_x: bool = True,
             f"{int(out.sum()):,} px ({100 * out.sum() / max(1, land.sum()):.0f}% of land, "
             f"reach {reach})")
     return out
+
+
+def _is_connected(mask: np.ndarray, wrap_x: bool) -> bool:
+    """Whether ``mask``'s True pixels form a single connected piece, wrap-aware.
+
+    Cropped to the mask's own bounding box (cheap even at canvas scale) with the
+    same seam-roll :func:`_subdivide_cell` uses, so a region straddling the
+    antimeridian isn't mistaken for two pieces. :func:`subdivide` calls this
+    before cutting a region into more than one seat: an island-override merge
+    (:func:`merge_island_overrides`) can hand it a region that is legitimately
+    several islands sharing one label, and farthest-point seeding across that
+    disconnected mask would carve up an archipelago the user asked to stay whole.
+    """
+    m = mask
+    if wrap_x:
+        cols = np.flatnonzero(m.any(axis=0))
+        if cols.size and cols[0] == 0 and cols[-1] == m.shape[1] - 1 and len(cols) < m.shape[1]:
+            gap = np.flatnonzero(np.diff(cols) > 1)
+            if gap.size:
+                shift = m.shape[1] - int(cols[gap[0] + 1])
+                m = np.roll(m, shift, axis=1)
+    ys, xs = np.nonzero(m)
+    if ys.size == 0:
+        return True
+    box = m[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+    _, n = ndimage.label(box)
+    return n <= 1
 
 
 def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np.ndarray:
@@ -290,6 +393,12 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
         if k <= 1:
             continue
         m = reg == i
+        if not _is_connected(m, wrap_x):
+            # An island-override merge (merge_island_overrides) can hand this
+            # region several disconnected islets sharing one label — an area
+            # share large enough to earn >1 seat doesn't change that the user
+            # asked for exactly one province here, so it stays whole.
+            continue
         pieces = _subdivide_cell(m, k, min_area, wrap_x)  # labels 1..p on the region
         p = int(pieces.max())
         # Piece 1 keeps the region's own label i; pieces 2..p get fresh labels.

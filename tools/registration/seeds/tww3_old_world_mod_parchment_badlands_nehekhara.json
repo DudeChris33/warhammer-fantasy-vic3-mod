@@ -1,5 +1,6 @@
 {
   "source": "tww3_old_world_mod_parchment_badlands_nehekhara.png",
+  "dots_source": "tww3_old_world_mod_parchment - dots_6.png",
   "master_shape": [2567, 3462],
   "objective": "landmarks",
   "footprint_pad": 32,

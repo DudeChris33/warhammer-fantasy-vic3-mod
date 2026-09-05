@@ -21,6 +21,13 @@ interior magenta stays a single placeholder province. Land provinces take labels
 ``1..N``, sea provinces ``N+1..N+M``; a seeded ``ColorAllocator`` gives each a
 unique RGB colour.
 
+Optionally also reads ``sources/terraqueous_globe_reprojected - tiny_islands_merger.png``
+(the tiny-island fix): the user paints filled circles around clusters of tiny
+islands that should ship as one province each — a disconnected islet has no land
+neighbour to qualify for the region stage's share-a-border merge, so left alone
+every one of them becomes its own micro state-region. Absent entirely (nothing
+drawn yet) is the default and changes nothing.
+
 Deterministic: a pure function of the committed mask + sea layer + the manifested
 drawn source + ``map_config.SEED``, so a re-run reproduces byte-identical output —
 the determinism core.md requires of a multiplayer-synchronized mod. Regenerate
@@ -58,6 +65,14 @@ INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
 
 STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
+#: Optional — the user draws filled circles on a blank canvas of this name to
+#: mark clusters of tiny islands that should ship as one province each (the
+#: tiny-island problem: a disconnected islet has no land neighbour to qualify
+#: for cells.merge_small's share-a-border merge, so left alone every one of
+#: them becomes its own micro state-region). Not required: if the file doesn't
+#: exist yet, generation proceeds with no overrides, exactly as before this
+#: existed.
+ISLAND_OVERRIDES_SOURCE = "terraqueous_globe_reprojected - tiny_islands_merger.png"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
 
@@ -116,8 +131,27 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"{STATE_REGIONS_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
                          f"{drawn.shape[1]}x{drawn.shape[0]}")
 
+    island_overrides = None
+    overrides_path = sources.resolve_source_path(ISLAND_OVERRIDES_SOURCE)
+    if overrides_path.is_file():
+        manifest_rows = {r.file for r in sources.parse_manifest(
+            sources.MANIFEST_PATH.read_text(encoding="utf-8"))}
+        if ISLAND_OVERRIDES_SOURCE not in manifest_rows:
+            raise SystemExit(
+                f"{overrides_path} exists locally but is not registered in "
+                f"{sources.MANIFEST_PATH.name} — run "
+                "`python tools/worldgen/sources.py --update-manifest` after drawing it"
+            )
+        overrides_rgb = sources.load_source_image(ISLAND_OVERRIDES_SOURCE)
+        if overrides_rgb.shape[:2] != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{ISLAND_OVERRIDES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
+                             f"{overrides_rgb.shape[1]}x{overrides_rgb.shape[0]}")
+        island_overrides = land_provinces.island_override_zones(overrides_rgb)
+        log(f"island overrides: {int(island_overrides.max())} hand-drawn circle(s)", t0)
+
     log("flood-filling the magenta network into state regions ...", t0)
-    reg = land_provinces.regions(land, drawn, LINE_DILATE, args.merge_floor, WRAP_X, log=log)
+    reg = land_provinces.regions(land, drawn, LINE_DILATE, args.merge_floor, WRAP_X, log=log,
+                                 island_overrides=island_overrides)
     mag = land_provinces.magenta_lines(drawn)
     dmask = land_provinces.drawn_mask(land, mag, WRAP_X, log=log)
     log("subdividing the drawn regions into provinces ...", t0)
