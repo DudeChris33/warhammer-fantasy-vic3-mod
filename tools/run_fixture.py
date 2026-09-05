@@ -53,7 +53,7 @@ from worldgen.raster import (  # noqa: E402
     voronoi_labels,
     write_rgb_png,
 )
-from worldgen.statefile import ProvinceInfo, compute_centroid, pick_hubs  # noqa: E402
+from worldgen.statefile import ProvinceInfo, compute_centroid, pick_hubs, stack_hubs  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 WORLD_DIR = TOOLS_DIR / "fixtures" / "world"
@@ -1043,6 +1043,38 @@ def _selfcheck_land_provinces() -> None:
     assert np.array_equal(reg_of, ro2), "the region grouping must be byte-identical too"
 
 
+def _selfcheck_stack_hubs() -> None:
+    """Hub-stacking fallback (worldgen.statefile.stack_hubs), in isolation.
+
+    Pins the property board #2930's placeholder/small-region states rely on: a
+    single passable province stacks every hub onto itself (k=1, vanilla
+    STATE_MALTA precedent — city+port on one province, farm+mine+wood on
+    another), a state with fewer passable provinces than pick_hubs needs
+    cycles city/farm/mine/wood deterministically across what it has
+    (``ordered[i % k]``), the port prefers a coastal candidate over a larger
+    non-coastal one, and a landlocked state never gets a port hub at all.
+    """
+    solo = [ProvinceInfo(color=(10, 20, 30), centroid=(5.0, 5.0), area=100,
+                        coastal=True, impassable=False)]
+    hubs = stack_hubs(solo, coastal=True)
+    assert hubs["port"] == hubs["city"] == hubs["farm"] == hubs["mine"] == hubs["wood"] == (10, 20, 30), hubs
+
+    two = [
+        ProvinceInfo(color=(1, 1, 1), centroid=(1.0, 1.0), area=50, coastal=True, impassable=False),
+        ProvinceInfo(color=(2, 2, 2), centroid=(2.0, 2.0), area=200, coastal=False, impassable=False),
+    ]
+    hubs2 = stack_hubs(two, coastal=True)
+    assert hubs2["port"] == (1, 1, 1), "port must prefer the coastal candidate even if smaller"
+    assert hubs2["city"] == (1, 1, 1) and hubs2["farm"] == (2, 2, 2), hubs2
+    assert hubs2["mine"] == (1, 1, 1) and hubs2["wood"] == (2, 2, 2), "cycling must wrap i % k"
+
+    landlocked = stack_hubs(
+        [ProvinceInfo(color=(9, 9, 9), centroid=(0.0, 0.0), area=1, coastal=False, impassable=False)],
+        coastal=False,
+    )
+    assert "port" not in landlocked, "a landlocked state must not get a port hub"
+
+
 def _selfcheck_sea_naming() -> None:
     """Canon sea naming (worldgen.sea_naming), in isolation (no golden).
 
@@ -1326,6 +1358,9 @@ def run_check() -> int:
     _selfcheck_land_provinces()
     print("land_provinces: drawn-region cut (barrier-respecting subdivision, placeholder whole) "
           "self-check passed.")
+    _selfcheck_stack_hubs()
+    print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
+          "preference) self-check passed.")
     _selfcheck_sea_naming()
     print("sea_naming: canon plurality assignment + ordinal + override + zero-zone warning "
           "self-check passed.")

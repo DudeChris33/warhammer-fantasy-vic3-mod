@@ -27,13 +27,24 @@ python tools/worldgen/sources.py --verify       # source manifest SHA-256 + regi
 python tools/validate_map.py --province-bitmap   # the province bitmap tiles the mask + agrees with its index and the sea layer
 python tools/validate_map.py --sea               # sea engine files: 99_seas colours ⊆ sea_starts ⊆ provinces.png sea colours; every sea state grouped + localized
 python tools/run_fixture.py --check              # regression-checks the toolchain itself
+python tools/validate_map.py                     # full crosscheck (needs both sea + land states — see below)
 ```
 
 The `--sea` subset check is the sea-side gate for board #2929's emitted files
 (`99_seas.txt`, `default.map` `sea_starts`, `water_strategic_regions.txt`, the sea
-loc). It substitutes for the full no-flag `validate_map.py`, which cannot pass
-until the land states also exist (it requires *every* province colour claimed by a
-state) — that full crosscheck runs at milestone integration.
+loc), useful on its own when only the sea side has changed. The full no-flag
+`validate_map.py` needs *every* province colour claimed by a state, land and sea
+both — it started passing once board #2930 emitted the land states
+(`00_norsca.txt`) alongside the already-shipped sea files, and stays the gate to
+run whenever either side changes. **A province-bitmap regen invalidates both
+emitted state files, not just the one whose input changed**: `99_seas.txt`'s
+colours are `provinces_index.json`-label-keyed (`land_provinces + zone_label`), so
+a `generate_provinces.py` run that changes the land province count shifts every
+sea colour even though nothing about the sea zones themselves changed — this bit
+board #2930 (the committed `99_seas.txt` had gone stale after a source update
+regenerated `provinces.png`, 714→708 regions). Re-run **both**
+`generate_sea_regions.py` and `generate_land_regions.py` after any
+`generate_provinces.py` regen, not just the one whose upstream index moved.
 
 All must pass before the in-game `error.log` check below. This does not replace
 the game load — it catches the offline-detectable class of error first. The
@@ -66,6 +77,23 @@ The sea engine files `map_data/state_regions/99_seas.txt`,
 (canon keys/ids), so regenerate rather than hand-edit them (`default.map`'s other
 keys and `adjacencies.csv`'s strait rows stay hand-authored). The old staged
 `tools/derived/seas_99_seas.txt` / `seas_sea_starts.txt` are removed.
+`map_data/state_regions/00_norsca.txt`, `common/strategic_regions/land_strategic_regions.txt`
+and `localization/english/map/wh_land_states_l_english.yml` are emitted the same
+way by `python tools/generate_land_regions.py` (board #2930) — it joins
+`land_regions_index.json` (708 regions) with `provinces_index.json` and
+`sea_zones_index.json` (naval-exit resolution by real land↔sea pixel adjacency);
+regenerate rather than hand-edit. All 708 regions land in one file with one
+strategic region — the 20-file realm split is deferred to #2931, so nothing here
+survives that rewrite. It also writes two **dev-only** naming aids, outside the
+gate above (each has its own totality self-check instead):
+`tools/derived/land_region_name_guesses.json` (nearest-vanilla-state guess per
+region, consumed by `tools/render_land_regions_preview.py`'s numbered review
+render + CSV worksheet) built from `tools/build_vanilla_state_lonlat.py`'s
+one-off, rerunnable `tools/derived/vanilla_state_lonlat.json` — none of these
+three are shipped content. `python tools/run_fixture.py --check` also exercises
+`worldgen.statefile.stack_hubs`, the hub-stacking fallback `pick_hubs` cannot
+cover (a state with fewer passable provinces than it needs — every placeholder
+and any small drawn region).
 `generate_sea_zones.py` and `generate_provinces.py` are both decoupled from the
 land cut — each reads the committed `land_sea_mask.png` and its own hand-drawn
 source directly (the purple sea-zone network, the magenta state-region network),

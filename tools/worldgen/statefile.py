@@ -114,6 +114,35 @@ def pick_hubs(
     return hubs
 
 
+def stack_hubs(provinces: list[ProvinceInfo], coastal: bool) -> dict[str, Color]:
+    """Fallback hub placement for a state with fewer passable provinces than
+    :func:`pick_hubs` needs (board #2930: every single-province placeholder
+    state, and any small drawn region).
+
+    ``city``/``farm``/``mine``/``wood`` cycle across whatever passable
+    provinces exist (sorted by colour, ``ordered[i % k]``), so a 1-province
+    state stacks every hub on that one province. ``port`` (coastal states
+    only) is the largest-area coastal candidate (falling back to the largest
+    candidate overall if none happen to be individually coastal), independent
+    of the cycle. Legal per vanilla precedent (``STATE_MALTA`` stacks
+    city+port on one province, farm+mine+wood on another) and the validator's
+    own rule (hub membership only requires a hub be one of the state's own
+    provinces, never distinct from the others).
+    """
+    if not provinces:
+        raise HubError("cannot stack hubs onto an empty province list")
+    hubs: dict[str, Color] = {}
+    if coastal:
+        coastal_candidates = [p for p in provinces if p.coastal] or list(provinces)
+        port = max(coastal_candidates, key=lambda p: (p.area, tuple(-c for c in p.color)))
+        hubs["port"] = port.color
+    ordered = sorted(provinces, key=lambda p: p.color)
+    k = len(ordered)
+    for i, name in enumerate(("city", "farm", "mine", "wood")):
+        hubs[name] = ordered[i % k].color
+    return hubs
+
+
 def _state_centroid(provinces: list[ProvinceInfo], width: int, wrap_x: bool) -> Point:
     """Area-weighted centroid of a state's provinces (wrap-aware)."""
     total = sum(p.area for p in provinces)
