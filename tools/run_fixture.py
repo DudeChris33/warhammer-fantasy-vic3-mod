@@ -1158,21 +1158,95 @@ def _selfcheck_island_overrides() -> None:
     assert lp._is_connected(merged == other_id, wrap_x=False), \
         "an ordinary contiguous region must read as connected"
 
+    # override_fused_labels is the discriminator subdivide uses to tell an
+    # island-override archipelago (keep whole) from a merge-fused disconnected
+    # region (cut per piece). Assert its CONTENT, not just that it runs: the
+    # merged islets' label is the only archipelago-exempt label here. This is the
+    # sole exerciser of the archipelago branch on a machine without the island
+    # source (island_overrides=None ⟹ empty set in a bare local run).
+    keep_whole = lp.override_fused_labels(merged, land, zones)
+    assert keep_whole == {merged_id}, \
+        f"override_fused_labels must return exactly the archipelago label, got {keep_whole}"
+
     # End to end through subdivide(): the merged archipelago ships as exactly
     # one non-contiguous province, correctly flagged is_archipelago — vanilla
     # ships this shape for real (Micronesia's province colour spans 23
     # disconnected blobs), so this is the deliberate case validate_map.py's
-    # own connectivity check must let through instead of rejecting.
+    # own connectivity check must let through instead of rejecting. keep_whole
+    # is required now: without it the default-empty set would cut the archipelago
+    # per piece (the #3664 behaviour for a merge-fused region).
     dmask = lp.drawn_mask(land, lp.magenta_lines(drawn), wrap_x=False,
                           interior_dist=0, reach=1)
     prov, is_placeholder, reg_of, is_archipelago = lp.subdivide(
-        merged, land, dmask, target=merged.max(), wrap_x=False, min_area=1)
+        merged, land, dmask, target=merged.max(), wrap_x=False, min_area=1,
+        keep_whole=keep_whole)
     island_prov = int(prov[1, 30])
     assert island_prov == int(prov[1, 34]), \
         "the merged islets must ship as exactly one province"
     assert is_archipelago[island_prov], "the merged province must be flagged archipelago"
     main_prov = int(prov[9, 5])
     assert not is_archipelago[main_prov], "an ordinary contiguous province must not be flagged"
+
+
+def _selfcheck_merge_fused() -> None:
+    """Merge-fused disconnected region cut per piece (#3664), in isolation.
+
+    Pins the #3664 fix: a drawn region that ``apply_land_region_merges`` fused
+    across water (two non-touching landmasses under one label) is cut **per
+    connected piece** — each piece gets its own provinces, no province spans the
+    two pieces, none is flagged an archipelago — while the SAME region, told to
+    stay whole via ``keep_whole``, ships as exactly one non-contiguous province.
+    ``keep_whole`` (from ``override_fused_labels``) is what tells the two apart;
+    connectivity alone cannot. Two runs of the cut path are byte-identical.
+    """
+    from worldgen import land_provinces as lp
+
+    H, W = 20, 40
+    land = np.zeros((H, W), dtype=bool)
+    land[2:18, 2:10] = True          # west block
+    land[2:18, 14:22] = True         # east block, separated by water (cols 10-13)
+    drawn = np.full((H, W, 3), 180, dtype=np.uint8)
+    # A short interior magenta stroke in each block that does NOT span it, so each
+    # block stays one region yet is classed drawn (interior magenta present).
+    drawn[8:12, 5] = (255, 0, 255)
+    drawn[8:12, 17] = (255, 0, 255)
+
+    reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
+    assert int(reg.max()) == 2, f"two separate blocks = 2 regions, got {reg.max()}"
+
+    # Fuse the two regions across the water (a judgement-call merge). anchors (x, y).
+    merges = [schema.LandRegionMerge(anchor_a=(5, 10), anchor_b=(17, 10), note="test")]
+    reg_m = lp.apply_land_region_merges(reg, merges)
+    assert int(reg_m.max()) == 1, f"the merge must union both blocks into one label, got {reg_m.max()}"
+    assert not lp._is_connected(reg_m == 1, wrap_x=False), \
+        "the merged region must be disconnected (its halves never touch)"
+
+    dmask = lp.drawn_mask(land, lp.magenta_lines(drawn), wrap_x=False,
+                          interior_dist=1, reach=12)
+    assert dmask[reg_m == 1].mean() > 0.5, "the merged region must be classed drawn"
+
+    # keep_whole empty ⟹ merge-fused region cut per connected piece.
+    prov, is_placeholder, reg_of, ia = lp.subdivide(
+        reg_m, land, dmask, target=4, wrap_x=False, min_area=1, keep_whole=set())
+    assert int(prov.max()) >= 2, f"a merge-fused region must be cut, got {prov.max()} provinces"
+    west = set(int(p) for p in np.unique(prov[2:18, 2:10]))
+    east = set(int(p) for p in np.unique(prov[2:18, 14:22]))
+    assert west and east, "each block must carry at least one province"
+    assert west.isdisjoint(east), \
+        f"no province may span the two disconnected pieces: west {west} east {east}"
+    assert not ia.any(), "a per-piece-cut merge-fused province is contiguous, never an archipelago"
+
+    # keep_whole={1} ⟹ the SAME region stays whole as one non-contiguous province.
+    provk, _, _, iak = lp.subdivide(
+        reg_m, land, dmask, target=4, wrap_x=False, min_area=1, keep_whole={1})
+    kept = set(int(p) for p in np.unique(provk[land]))
+    assert kept == {int(provk[3, 5])}, f"a kept-whole region must be one province, got {kept}"
+    assert iak[int(provk[3, 5])], "the kept-whole non-contiguous province must be flagged archipelago"
+
+    # The cut path is byte-identical across two runs.
+    prov2, _, _, _ = lp.subdivide(
+        reg_m, land, dmask, target=4, wrap_x=False, min_area=1, keep_whole=set())
+    assert np.array_equal(prov, prov2), "two runs of the per-piece cut must be byte-identical"
 
 
 def _selfcheck_stack_hubs() -> None:
@@ -1495,6 +1569,9 @@ def run_check() -> int:
     _selfcheck_island_overrides()
     print("land_provinces: tiny-island override merge (circle -> zone -> forced single "
           "province) self-check passed.")
+    _selfcheck_merge_fused()
+    print("land_provinces: merge-fused disconnected region cut per piece "
+          "(archipelago kept whole via keep_whole) self-check passed.")
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")
