@@ -321,7 +321,12 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- 5. adjacencies.csv (header-only when absent) --------------------
     if not ADJACENCIES_PATH.is_file():
-        _write_bytes(ADJACENCIES_PATH, ADJACENCIES_HEADER + "\n", bom=False)
+        # No trailing newline: the engine reads every line after the header as a
+        # data row, so a trailing "\n" makes an empty line 2 that fails with
+        # map.cpp:264 "Failed to read province string" (#3542). Vanilla ends the
+        # file at its last row with no trailing newline; a header-only file is
+        # the header line alone.
+        _write_bytes(ADJACENCIES_PATH, ADJACENCIES_HEADER, bom=False)
         print(f"wrote {ADJACENCIES_PATH.relative_to(MOD_ROOT)}  (header only)")
     else:
         print(f"kept  {ADJACENCIES_PATH.relative_to(MOD_ROOT)}  (already authored)")

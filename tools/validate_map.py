@@ -894,12 +894,53 @@ def _parse_strategic_region_states(path: Path) -> dict[str, list[str]]:
     return out
 
 
+ADJACENCIES_HEADER = (
+    "From;To;Type;Through;start_x;start_y;stop_x;stop_y;adjacency_rule_name;Comment"
+)
+
+
+def _check_adjacencies(path: Path) -> list[str]:
+    """adjacencies.csv must parse cleanly (board #3542).
+
+    The engine reads every ``\\n``-separated line after the header as a data row,
+    so a trailing newline after a header-only file makes an empty "line 2" that
+    fails with ``map.cpp:264 Failed to read province string``. Vanilla ends the
+    file at its last row with no trailing newline; a header-only file is the
+    header line alone. Reject any empty line and any data row whose column count
+    or first field is malformed."""
+    errors: list[str] = []
+    if not path.is_file():
+        return errors  # header-only file is created by generate_sea_regions.py when absent
+    text = path.read_text(encoding="utf-8-sig")
+    lines = text.split("\n")
+    ncols = ADJACENCIES_HEADER.count(";") + 1
+    for i, raw in enumerate(lines, start=1):
+        line = raw.rstrip("\r")
+        if i == 1:
+            if line != ADJACENCIES_HEADER:
+                errors.append(f"adjacencies.csv line 1 is not the expected header row")
+            continue
+        if line == "":
+            errors.append(f"adjacencies.csv line {i} is blank - the engine reads it as a "
+                          f"malformed data row (Failed to read province string)")
+            continue
+        if line.startswith("#"):
+            continue
+        fields = line.split(";")
+        if len(fields) != ncols:
+            errors.append(f"adjacencies.csv line {i} has {len(fields)} fields, expected {ncols}")
+        elif fields[0].strip() == "":
+            errors.append(f"adjacencies.csv line {i} has an empty From province id")
+    return errors
+
+
 def validate_sea(
     seas_txt_path: Path,
     default_map_path: Path,
     provinces_index_path: Path,
     strategic_regions_dir: Path,
     loc_dir: Path,
+    adjacencies_path: Path | None = None,
 ) -> list[str]:
     """Sea-only subset check (board #2929) — the sea colour chain + cross-file invariants."""
     import json
@@ -986,6 +1027,10 @@ def validate_sea(
     for st in sorted(sea_states, key=lambda s: s.key):
         if st.key not in loc_keys:
             errors.append(f"{st.key}: no localization entry under {loc_dir}")
+
+    # 6. adjacencies.csv parses cleanly (board #3542).
+    if adjacencies_path is not None:
+        errors.extend(_check_adjacencies(adjacencies_path))
 
     return errors
 
@@ -1091,6 +1136,7 @@ def main(argv: list[str] | None = None) -> int:
             provinces_index_path=args.index_path or derived / "provinces_index.json",
             strategic_regions_dir=REPO_ROOT / "common" / "strategic_regions",
             loc_dir=args.loc_dir or REPO_ROOT / "localization" / "english" / "map",
+            adjacencies_path=REPO_ROOT / "map_data" / "adjacencies.csv",
         )
         if errors:
             print(f"validate_map --sea: {len(errors)} error(s):", file=sys.stderr)
