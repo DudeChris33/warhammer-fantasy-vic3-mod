@@ -192,6 +192,20 @@ absent from `keep_whole`) is cut **per connected piece** — each piece gets its
 own province(s), no province spans the two pieces, none is flagged an
 archipelago — while the same region told to stay whole via `keep_whole` ships as
 one non-contiguous province; two runs of the cut path are byte-identical.
+Two more self-checks cover the lore-hubs machinery (board #3665):
+`_selfcheck_seeded_cut` pins `cells.merge_small(protected=)` (a protected
+sub-floor cell survives the merge floor that would otherwise fold it away),
+`cells._farthest_seeds(fixed=)` (a fixed seed always comes first, and
+`fixed=None` stays byte-identical to the original farthest-point path), and
+`subdivide(region_seeds=)` end to end — every anchor gets its own province,
+no anchor province crosses a magenta region boundary, an unseeded region
+stays byte-identical to the `region_seeds=None` cut, an anchor in a
+`keep_whole` archipelago or a non-drawn region hard-errors, and the cut is
+deterministic. `_selfcheck_hub_validator` exercises `validate_map._check_hub_anchors`
+on a synthetic bitmap and state list: a clean port anchor passes; a port
+anchor resolved onto a non-coastal, non-declared province fails; a missing
+`HUB_NAME` loc key fails; and a stale index entry (resolved colour no longer
+matching the anchor's province) fails.
 
 ## Regression rule
 
