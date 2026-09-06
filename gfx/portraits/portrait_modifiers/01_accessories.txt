@@ -927,7 +927,7 @@
                     scope:character ?= {
                         home_country ?= {
                             is_subject = no
-                            always = no  # [#3662] was: c:PRA ?= this
+                            always = no  # [#3662] was: c:PRA ?= this — PRA resolves (mod reuses vanilla's id for Praag); force-neutralized so it never drives real-world Peruvian-sash art for a Praag/Kislev character
                         }
                     }
                 }

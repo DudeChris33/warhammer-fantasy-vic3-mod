@@ -3599,7 +3599,7 @@
                 scope:pop ?= {
                     home_country = {
                         any_scope_character = {
-                            always = no # Garibaldi can be an agitator or general or politician, it's all valid
+                            always = no  # [#3662] was: is_unification_candidate = ITA — Garibaldi can be an agitator or general or politician, it's all valid
                         }
                         OR = {
                             always = no  # [#3662] was: is_unification_candidate = ITA
@@ -3940,7 +3940,7 @@
                 add = 10000
                 scope:character ?= {
                     owner ?= {
-                        always = no  # [#3662] was: c:MOR ?= this
+                        always = no  # [#3662] was: c:MOR ?= this — MOR resolves (mod reuses vanilla's Morocco id for Massif Orcal); force-neutralized so it never drives Moroccan royal art for Massif Orcal's greenskin ruler
                         has_law = law_type:law_monarchy
                     }
                     OR = {
@@ -4891,7 +4891,7 @@
                     # restore never brought back; NOT of an always-false check was already a
                     # permanent no-op.
                     NAND = {
-                        always = no # Cannot be the Pope
+                        always = no  # [#3662] was: c:PAP.ruler ?= this — Cannot be the Pope
                     }
                     OR = {
                         always = no  # [#3662] was: has_variable = cardinal_var

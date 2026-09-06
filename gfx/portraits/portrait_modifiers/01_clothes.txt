@@ -634,7 +634,7 @@ clothes = {
             modifier = {
                 add = 90000
                 scope:character ?= {
-                    always = no # uses variable rather than template
+                    always = no  # [#3662] was: has_variable = mazzini_var (real-world event flag, never set) — uses variable rather than template
                     NOR = {
                         has_role_of_type = general
                         has_role_of_type = admiral
@@ -3733,7 +3733,7 @@ clothes = {
                     home_country = {
                         any_scope_character = {
                             OR = {
-                                always = no # Garibaldi can be an agitator or general or politician, it's all valid
+                                always = no  # [#3662] was: is_unification_candidate = ITA — Garibaldi can be an agitator or general or politician, it's all valid
                                 # wh-overhaul (board #3540): dropped an OR branch checking has_template = garibaldi_character_template
                                 # (the vanilla comment called it a redundant double-check) -- a real-world
                                 # Garibaldi character_templates entry this mod's epic #3292 restore never
@@ -5410,7 +5410,7 @@ clothes = {
                         home_country ?= { always = no }
                         home_country ?= {
                             always = no  # [#3662] was: c:CRO ?= this
-                            always = no # Intentional
+                            always = no  # [#3662] was: exists = c:HUN — Intentional
                             NOT = {
                                 always = no  # [#3662] was: has_variable = triune_kingdom_var
                             }
@@ -10622,7 +10622,7 @@ clothes = {
                 add = 10000
                 scope:character ?= {
                     owner ?= {
-                        always = no  # [#3662] was: c:MOR ?= this
+                        always = no  # [#3662] was: c:MOR ?= this — MOR resolves (mod reuses vanilla's Morocco id for Massif Orcal); force-neutralized so it never drives Moroccan royal art for Massif Orcal's greenskin ruler
                         has_law = law_type:law_monarchy
                     }
                     OR = {
@@ -10816,7 +10816,7 @@ clothes = {
                     # a real-world character_templates entry this mod's epic #3292 restore never
                     # brought back; NOT of an always-false check was already a permanent no-op.
                     NAND = {
-                        always = no # Cannot be the Pope
+                        always = no  # [#3662] was: c:PAP.ruler ?= this — Cannot be the Pope
                     }
                     OR = {
                         always = no  # [#3662] was: has_variable = cardinal_var
