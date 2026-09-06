@@ -168,9 +168,16 @@ share-a-border merge and so ships as its own micro state-region forever): a
 blank override source draws no zones, distinct painted circles are distinct
 zone ids, every region caught under the same zone is force-merged into one (a
 circle over a single region is a no-op), the merge still tiles the land
-exactly and is byte-identical across runs, and `subdivide`'s connectivity guard
-never cuts the resulting non-contiguous region even when its area would
-otherwise earn it more than one seat.
+exactly and is byte-identical across runs, and `subdivide` keeps such an
+island-override archipelago whole (via the `keep_whole` set from
+`land_provinces.override_fused_labels`) no matter how many seats its area earns.
+A separate self-check (`_selfcheck_merge_fused`, board #3664) covers the
+counterpart case: a **merge-fused** disconnected region (two non-touching drawn
+regions unioned by `apply_land_region_merges`, not under an island circle, so
+absent from `keep_whole`) is cut **per connected piece** — each piece gets its
+own province(s), no province spans the two pieces, none is flagged an
+archipelago — while the same region told to stay whole via `keep_whole` ships as
+one non-contiguous province; two runs of the cut path are byte-identical.
 
 ## Regression rule
 

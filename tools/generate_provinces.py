@@ -188,9 +188,32 @@ def main(argv: list[str] | None = None) -> int:
         log(f"land region merge overrides: {len(merges)} judgement-call pair(s) applied", t0)
     mag = land_provinces.magenta_lines(drawn)
     dmask = land_provinces.drawn_mask(land, mag, WRAP_X, log=log)
+
+    # Which region labels are island-override archipelagos (kept whole even when
+    # disconnected). A disconnected drawn region NOT in this set is a merge-fused
+    # region (apply_land_region_merges unioned two non-touching labels), which
+    # subdivide now cuts per connected piece — the #3664 fix.
+    keep_whole = land_provinces.override_fused_labels(reg, land, island_overrides)
+    # Overlap guard (deterministic, non-fatal): if a merge anchor resolves into a
+    # label that is also an island-override archipelago, keep_whole wins and that
+    # (mainland) state stays whole — the #3664 symptom would persist. Absent from
+    # the current mainland anchors; warn so the config author moves the anchor.
+    if LAND_REGION_MERGES_CONFIG.is_file() and keep_whole:
+        touched = set()
+        for m in merges:
+            touched.add(land_provinces._region_near(
+                reg, m.anchor_a[0], m.anchor_a[1], land_provinces._MERGE_ANCHOR_SEARCH_RADIUS))
+            touched.add(land_provinces._region_near(
+                reg, m.anchor_b[0], m.anchor_b[1], land_provinces._MERGE_ANCHOR_SEARCH_RADIUS))
+        overlap = keep_whole & (touched - {0})
+        if overlap:
+            log(f"WARNING: land-region merge anchors resolve into island-override "
+                f"label(s) {sorted(overlap)} — those states will stay whole; move the "
+                f"anchor or split the config", t0)
+
     log("subdividing the drawn regions into provinces ...", t0)
     land_lab, is_placeholder, reg_of, is_archipelago = land_provinces.subdivide(
-        reg, land, dmask, args.target, WRAP_X, args.min_area, log=log)
+        reg, land, dmask, args.target, WRAP_X, args.min_area, log=log, keep_whole=keep_whole)
     n_land = int(land_lab.max())
 
     sea_lab = cells.read_labels(SEA_LABELS_PATH)

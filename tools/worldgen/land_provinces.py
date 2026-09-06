@@ -221,6 +221,37 @@ def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndar
     return cells.renumber(remap[reg])
 
 
+def override_fused_labels(reg: np.ndarray, land: np.ndarray,
+                          overrides: np.ndarray | None) -> set[int]:
+    """Final region labels that carry land under any island-override circle.
+
+    These are the archipelago-exempt labels :func:`subdivide` must keep whole: the
+    same ``(overrides == z) & land`` predicate :func:`merge_island_overrides` used
+    to fuse them, run once more against the **final** ``reg`` (post
+    :func:`regions` + :func:`apply_land_region_merges`), so it is robust to both
+    internal renumbers — both merge steps only *union* labels then
+    :func:`worldgen.cells.renumber` (never split, never move geometry), so
+    ``reg[(overrides == z) & land]`` yields the final fused label for circle ``z``
+    directly.
+
+    A label under a circle is returned even if it happens to be connected
+    (harmless — :func:`subdivide` only consults this set in its disconnected
+    branch); a disconnected label **not** in this set is a merge-fused region
+    (:func:`apply_land_region_merges`), which :func:`subdivide` cuts per connected
+    piece. ``overrides is None`` (no island-override source drawn) ⟹ empty set, so
+    every disconnected drawn region is cut — correct, since the only other source
+    of a disconnected label is a merge.
+    """
+    if overrides is None:
+        return set()
+    out: set[int] = set()
+    for z in range(1, int(overrides.max()) + 1):
+        here = (overrides == z) & land
+        if here.any():
+            out.update(int(i) for i in np.unique(reg[here]) if i > 0)
+    return out
+
+
 #: How far :func:`apply_land_region_merges` searches outward from an anchor
 #: for a labelled (non-zero) region pixel, in case the exact stored pixel
 #: rounds onto a barrier/off-region gap.
@@ -409,8 +440,9 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np
 
 
 def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
-              wrap_x: bool = True, min_area: int = 400, log=None
-              ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+              wrap_x: bool = True, min_area: int = 400, log=None,
+              keep_whole: set[int] | None = None
+              ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
     ``reg`` is the state-region layer from :func:`regions` (``1..R``, 0 on water);
@@ -419,6 +451,17 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     among the **drawn** regions only, proportional to area under the
     largest-remainder rule with each drawn region guaranteed at least one. A
     placeholder region (outside ``drawn``) is kept whole — one province.
+
+    ``keep_whole`` is the set of region labels that must never be cut even when
+    disconnected — the island-override archipelagos, from
+    :func:`override_fused_labels`. A **disconnected** drawn region that is *not* in
+    ``keep_whole`` is a merge-fused region (:func:`apply_land_region_merges` unioned
+    two non-touching labels) and is cut **per connected piece** (its seats shared
+    across pieces by area, each piece ≥ 1 province, ``_subdivide_cell`` per piece,
+    the region label used exactly once region-wide); a disconnected region *in*
+    ``keep_whole`` stays whole as one province. Connectivity alone cannot tell the
+    two apart, which is why the set is threaded in. ``keep_whole is None`` ⟹ empty
+    set (every disconnected drawn region is cut — the merge-fused case).
 
     Returns ``(labels, is_placeholder, reg_of, is_archipelago)``:
 
@@ -446,6 +489,7 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     seam a fill tore, sub-floor offcuts merge into a neighbour, and the labels
     renumber to ``1..N``.
     """
+    keep = keep_whole or set()
     n = int(reg.max())
     areas = np.bincount(reg.ravel(), minlength=n + 1)
     drawn_area = np.bincount(reg[drawn & land].ravel(), minlength=n + 1)
@@ -482,24 +526,63 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     nxt = n + 1
     for i in drawn_ids:
         k = seat_by_id[i]
-        if k <= 1:
-            continue
         m = reg == i
-        if not _is_connected(m, wrap_x):
-            # An island-override merge (merge_island_overrides) can hand this
-            # region several disconnected islets sharing one label — an area
-            # share large enough to earn >1 seat doesn't change that the user
-            # asked for exactly one province here, so it stays whole.
+        if _is_connected(m, wrap_x):
+            # Contiguous drawn region: the ordinary single-cell cut.
+            if k <= 1:
+                continue
+            pieces = _subdivide_cell(m, k, min_area, wrap_x)  # labels 1..p on the region
+            p = int(pieces.max())
+            # Piece 1 keeps the region's own label i; pieces 2..p get fresh labels.
+            ids = np.zeros(p + 1, dtype=np.int32)
+            ids[1] = i
+            for j in range(2, p + 1):
+                ids[j] = nxt
+                nxt += 1
+            out[m] = ids[pieces[m]]
             continue
-        pieces = _subdivide_cell(m, k, min_area, wrap_x)  # labels 1..p on the region
-        p = int(pieces.max())
-        # Piece 1 keeps the region's own label i; pieces 2..p get fresh labels.
-        ids = np.zeros(p + 1, dtype=np.int32)
-        ids[1] = i
-        for j in range(2, p + 1):
-            ids[j] = nxt
-            nxt += 1
-        out[m] = ids[pieces[m]]
+
+        # --- disconnected region ---
+        if i in keep:
+            # An island-override merge (merge_island_overrides) fused several
+            # disconnected islets into one label on purpose — the user asked for
+            # exactly one province here, so it stays whole regardless of seats.
+            continue
+        # A merge-fused drawn region (apply_land_region_merges unioned two
+        # non-touching labels): its halves are separate landmasses, so cut each
+        # connected piece on its own. cells.components is the same wrap-aware
+        # primitive _is_connected agrees with, so a seam-wrapped region is one
+        # piece here too. Seats are shared across the pieces by area (each piece
+        # ≥ 1), and the region label i is assigned exactly once across all pieces
+        # so the region does not remain a single disconnected label.
+        comp = cells.components(m.astype(np.int32), wrap_x)
+        comp = cells.renumber(np.where(m, comp, 0))  # 0 off-region, 1..c per piece
+        c = int(comp.max())
+        piece_areas = np.bincount(comp.ravel(), minlength=c + 1)[1:].astype(np.float64)
+        pk = np.ones(c, dtype=int)
+        spare = max(0, k - c)  # k < c ⟹ spare 0, one province per piece
+        if spare and piece_areas.sum() > 0:
+            quota = piece_areas / piece_areas.sum() * spare
+            base = np.floor(quota).astype(int)
+            rem = spare - int(base.sum())
+            order = np.argsort(-(quota - base), kind="stable")
+            base[order[:rem]] += 1
+            pk += base
+        first = True
+        for cid in range(1, c + 1):
+            pm = comp == cid
+            sub = _subdivide_cell(pm, int(pk[cid - 1]), min_area, wrap_x)  # 1..q on piece
+            q = int(sub.max())
+            ids = np.zeros(q + 1, dtype=np.int32)
+            start = 1
+            if first:
+                ids[1] = i  # region label used exactly once, region-wide
+                start = 2
+                first = False
+            for j in range(start, q + 1):
+                ids[j] = nxt
+                nxt += 1
+            out[pm] = ids[sub[pm]]
 
     out = cells.renumber(out)
     if int((out == 0).sum()) != int((~land).sum()):
@@ -516,10 +599,11 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     is_placeholder = ~is_drawn[reg_of]
     is_placeholder[0] = False
 
-    # Flag every genuinely non-contiguous province (an island-override merge
-    # that was never cut, per the connectivity guard above) so a validator can
-    # tell it apart from an accidentally torn one. One global connected-
-    # components pass, exactly the check validate_map.py itself runs.
+    # Flag every genuinely non-contiguous province (an island-override
+    # archipelago in keep_whole, which the loop above leaves whole; a merge-fused
+    # disconnected region is now cut per piece and so is contiguous) so a
+    # validator can tell it apart from an accidentally torn one. One global
+    # connected-components pass, exactly the check validate_map.py itself runs.
     comp = cells.components(out, wrap_x)
     pairs = np.unique(np.stack([out.ravel(), comp.ravel()], axis=1), axis=0)
     counts = np.bincount(pairs[:, 0].astype(np.int64), minlength=int(out.max()) + 1)
