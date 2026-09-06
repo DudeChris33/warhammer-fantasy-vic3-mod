@@ -53,7 +53,7 @@ Copy what's needed into this mod folder and modify the copy.
 | `events/` | Event script files (`.txt`) |
 | `gui/` | Custom UI widget definitions (`.gui`) |
 | `interface/` | `.gfx` sprite/icon definitions referenced by `gui/` |
-| `gfx/` | Art assets — flags, interface icons, loadingscreens, map, models, particles, portraits |
+| `gfx/` | Art assets — flags, interface icons, loadingscreens, map, models, particles, portraits. `gfx/` can't be blanked via `replace_paths` (only `common/`/`events/`/`map_data/` are eligible), so the authored overrides in `gfx/portraits/portrait_modifiers/01_*.txt` (5 files) and `gfx/map/city_data/city_types/*` still merge vanilla's script underneath — see `.claude/rules/scripting.md`'s `gfx/` real-world-reference keep-list (board #3662) for how their dangling real-world script refs are neutralized (`always = no`) rather than deleted. |
 | `localization/english/` | Loc entries for new content (`.yml`, `l_english:` header) |
 | `localization/replace/english/` | Loc entries that override base-game vanilla text |
 | `map_data/` | Map/state region modifications |
