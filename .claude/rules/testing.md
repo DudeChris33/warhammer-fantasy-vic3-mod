@@ -90,6 +90,20 @@ classified by `tools/config/strategic_region_colors.json`) and canon name (from
 the persisted, hand-edited `tools/config/land_regions_worksheet.csv`, or its
 out-of-scope continent's name from `tools/config/out_of_scope_continents.json`);
 regenerate rather than hand-edit any of the emitted files.
+**Lore hubs (board #3665)**: `tools/config/hub_worksheet.json` is a hand-authored,
+regenerate-through input (like the naming worksheet) — one settlement per row,
+pinned to a canvas anchor. A change to it forces the **full**
+`generate_provinces.py → generate_sea_regions.py **and** generate_land_regions.py`
+cascade + re-validate, because a seeded anchor reshuffles every province colour
+(the global sorted-label `ColorAllocator`), exactly like any other
+`generate_provinces.py` regen. It writes `tools/derived/hub_anchors_index.json`
+(the anchor→province authority — regenerate, never hand-edit) and the generated
+loc `localization/english/map/wh_hub_names_l_english.yml`, which joins the map-loc
+gate. `python tools/validate_map.py` (full) runs `_check_hub_anchors` on the real
+map when that index exists; `python tools/render_hubs_preview.py` is the dev-only
+review render (source-dependent, gitignored `tools/derived/` output). Absent (no
+worksheet), every one of these paths is dormant and the map is byte-identical to a
+no-hub run.
 `tools/render_land_regions_preview.py` is the matching **dev-only** review
 render, outside the gate above: a numbered review PNG + a `tools/derived/`
 worksheet sidecar that round-trips names already committed in
