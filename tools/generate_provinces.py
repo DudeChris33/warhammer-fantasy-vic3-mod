@@ -247,8 +247,9 @@ def main(argv: list[str] | None = None) -> int:
                     f"host a distinct hub province; move the anchor")
             region_seeds.setdefault(rid, []).append((rx, ry))
             hub_rows.append((r, rid, (rx, ry)))
-        # Same-state anchors must clear MIN_ANCHOR_SEP (region-aware; different
-        # states may be arbitrarily close).
+        # Same-region anchors must clear MIN_ANCHOR_SEP (a drawn region is 1:1 with
+        # an emitted state today, so this is "same state"; anchors in different
+        # regions may be arbitrarily close).
         for rid, pts in region_seeds.items():
             for a in range(len(pts)):
                 for b in range(a + 1, len(pts)):

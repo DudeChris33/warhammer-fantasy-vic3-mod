@@ -98,12 +98,19 @@ def pick_hubs(
     hubs: dict[str, Color] = {}
     pool = list(candidates)
 
-    # Preassigned slots first: fix each and drop its province from the pool.
+    # Preassigned slots first: fix each and drop its province from the pool. A
+    # colour that is not one of the state's own passable provinces (a stale
+    # hub_anchors_index, or an impassable province) is a hard error here rather
+    # than a silently-wrong hub the offline validator has to catch later.
     by_color = {p.color: p for p in candidates}
     for hub, col in pre.items():
-        hubs[hub] = col
         prov = by_color.get(col)
-        if prov is not None and prov in pool:
+        if prov is None:
+            raise HubError(
+                f"{state.key}: preassigned {hub} colour {col} is not one of the "
+                f"state's passable provinces (stale hub_anchors_index.json?)")
+        hubs[hub] = col
+        if prov in pool:
             pool.remove(prov)
 
     if state.coastal and "port" not in hubs:
@@ -161,7 +168,14 @@ def stack_hubs(provinces: list[ProvinceInfo], coastal: bool,
     """
     if not provinces:
         raise HubError("cannot stack hubs onto an empty province list")
-    hubs: dict[str, Color] = dict(preassigned or {})
+    pre = preassigned or {}
+    prov_colors = {p.color for p in provinces}
+    for hub, col in pre.items():
+        if col not in prov_colors:
+            raise HubError(
+                f"preassigned {hub} colour {col} is not one of the state's provinces "
+                f"(stale hub_anchors_index.json?)")
+    hubs: dict[str, Color] = dict(pre)
     if coastal and "port" not in hubs:
         coastal_candidates = [p for p in provinces if p.coastal] or list(provinces)
         port = max(coastal_candidates, key=lambda p: (p.area, tuple(-c for c in p.color)))

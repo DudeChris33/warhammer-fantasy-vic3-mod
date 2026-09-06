@@ -1364,6 +1364,31 @@ def _selfcheck_seeded_cut() -> None:
         pass
 
 
+    # --- wrap_x=True: the seam-shift anchor translation, the one piece of genuinely
+    # new coordinate math (production runs map_config.WRAP_X). A region straddling
+    # the antimeridian with anchors near both seam edges must still give each anchor
+    # its own contiguous province (the ((ax+shift)%W)-x0 mapping in _subdivide_cell).
+    Hw, Ww = 16, 40
+    landw = np.zeros((Hw, Ww), dtype=bool)
+    landw[3:13, 0:5] = True             # west of the seam
+    landw[3:13, 35:40] = True           # east of the seam, adjacent across x=0/x=W-1
+    drawnw = np.full((Hw, Ww, 3), 180, dtype=np.uint8)
+    drawnw[6:10, 2] = (255, 0, 255)     # short interior magenta (marks drawn, no split)
+    drawnw[6:10, 37] = (255, 0, 255)
+    regw = lp.regions(landw, drawnw, dilate=1, merge_floor=1, wrap_x=True)
+    rlabel = int(regw[7, 0])
+    assert rlabel > 0 and int(regw[7, 39]) == rlabel,         "the seam-straddling land must be ONE region under wrap"
+    assert lp._is_connected(regw == rlabel, wrap_x=True), "one connected seam-wrapping region"
+    dmaskw = lp.drawn_mask(landw, lp.magenta_lines(drawnw), wrap_x=True, interior_dist=1, reach=10)
+    aw1, aw2 = (0, 5), (39, 10)         # anchors near opposite seam edges
+    provw, _, _, iaw = lp.subdivide(regw, landw, dmaskw, target=4, wrap_x=True, min_area=1,
+                                    region_seeds={rlabel: [aw1, aw2]})
+    assert int(provw[aw1[1], aw1[0]]) != int(provw[aw2[1], aw2[0]]),         "each seam-side anchor must get its own province under wrap"
+    for a in (aw1, aw2):
+        assert list(np.unique(regw[provw == int(provw[a[1], a[0]])])) == [rlabel],             "a seam-wrapped anchor province must stay inside its own region"
+    assert not iaw.any(), "seam-wrapping provinces are contiguous under wrap, never archipelago"
+
+
 def _selfcheck_hub_validator() -> None:
     """The #3665 validate_map hub-anchor check, on a synthetic bitmap + states —
     a passing case and three failing cases, so the check can actually fail."""
