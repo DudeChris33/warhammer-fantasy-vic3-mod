@@ -24,7 +24,7 @@ the source-registration data (`tools/SOURCES.md`, `tools/registration/`), run:
 
 ```
 python tools/worldgen/sources.py --verify       # source manifest SHA-256 + registration cross-checks
-python tools/validate_map.py --province-bitmap   # the province bitmap tiles the mask + agrees with its index and the sea layer
+python tools/validate_map.py --province-bitmap   # the province bitmap tiles the mask + agrees with its index and the sea layer, and (if present) province_terrains.txt
 python tools/validate_map.py --sea               # sea engine files: 99_seas colours ⊆ sea_starts ⊆ provinces.png sea colours; every sea state grouped + localized
 python tools/run_fixture.py --check              # regression-checks the toolchain itself
 python tools/validate_map.py                     # full crosscheck (needs both sea + land states — see below)
@@ -45,6 +45,11 @@ board #2930 (the committed `99_seas.txt` had gone stale after a source update
 regenerated `provinces.png`, 714→708 regions). Re-run **both**
 `generate_sea_regions.py` and `generate_land_regions.py` after any
 `generate_provinces.py` regen, not just the one whose upstream index moved.
+`tools/generate_province_terrains.py` (board #2968) is the same colour-keyed
+fragility class and belongs in that same re-run set once its output ships — see
+below; today its generated `map_data/province_terrains.txt` is not committed
+(the province cut is still churning, #3663/#3664/#3705), so there is nothing
+yet to go stale.
 
 All must pass before the in-game `error.log` check below. This does not replace
 the game load — it catches the offline-detectable class of error first. The
@@ -90,6 +95,20 @@ classified by `tools/config/strategic_region_colors.json`) and canon name (from
 the persisted, hand-edited `tools/config/land_regions_worksheet.csv`, or its
 out-of-scope continent's name from `tools/config/out_of_scope_continents.json`);
 regenerate rather than hand-edit any of the emitted files.
+`map_data/province_terrains.txt` (board #2968) is the map-config counterpart,
+emitted by `python tools/generate_province_terrains.py` from
+`provinces_index.json`'s `cells` — one `x<HEX>="terrain"` line per province,
+sorted by id, land → `"plains"` and sea → `"ocean"` (both defined in
+`common/terrain/01_terrain.txt`), a uniform placeholder baseline standing in for
+a future sourcing-driven terrain pass. `validate_map.py --province-bitmap`'s
+check 8 (`validate_province_terrains`) verifies it, when present, is a bijection
+with the index colours and that every terrain id is defined in `common/terrain`;
+its **absence is a clean skip, not an error** — same convention as
+`_check_adjacencies`. The generated file is **deferred**: it is the same
+colour-keyed fragility class as `99_seas.txt`/the land `state_regions/*.txt` and
+is not committed until the province cut settles (#3663/#3664/#3705), at which
+point it joins the "re-run after a `generate_provinces.py` regen" set alongside
+`generate_sea_regions.py` and `generate_land_regions.py`.
 **Lore hubs (board #3665)**: `tools/config/hub_worksheet.json` is a hand-authored,
 regenerate-through input (like the naming worksheet) — one settlement per row,
 pinned to a canvas anchor. A change to it forces the **full**
@@ -207,6 +226,13 @@ on a synthetic bitmap and state list: a clean port anchor passes; a port
 anchor resolved onto a non-coastal, non-declared province fails; a missing
 `HUB_NAME` loc key fails; and a stale index entry (resolved colour no longer
 matching the anchor's province) fails.
+`_selfcheck_province_terrains` (board #2968) exercises
+`generate_province_terrains.py` and `validate_map.validate_province_terrains` in
+isolation: land cells emit `"plains"` and sea cells `"ocean"`, lines are
+sorted by integer id (not index order), two runs are byte-identical, an empty
+cell list is refused rather than writing a truncated file, and the emitted file
+round-trips cleanly through the validator, whose bijection and valid-id checks
+each fail on a missing line, an extra line, and an undefined terrain id.
 
 ## Regression rule
 
