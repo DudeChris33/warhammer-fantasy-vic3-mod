@@ -1364,6 +1364,40 @@ def _selfcheck_seeded_cut() -> None:
         pass
 
 
+def _selfcheck_hub_validator() -> None:
+    """The #3665 validate_map hub-anchor check, on a synthetic bitmap + states —
+    a passing case and three failing cases, so the check can actually fail."""
+    import validate_map as vm
+    from pathlib import Path
+
+    A, B, SEA = (10, 20, 30), (40, 50, 60), (0, 0, 200)
+    rgb = np.zeros((10, 10, 3), dtype=np.uint8)
+    rgb[:, 0:4] = A          # province A, non-coastal
+    rgb[:, 4:7] = B          # province B, coastal (adjacent to the sea block)
+    rgb[:, 7:10] = SEA       # sea
+    with tempfile.TemporaryDirectory() as td:
+        png = Path(td) / "p.png"
+        write_rgb_png(png, rgb)
+        bitmap = vm.ProvinceBitmap(png, wrap_x=False)
+    sea_colors = {SEA}
+    st = vm.ParsedState("STATE_TEST", "02_empire.txt")
+    st.provinces = [A, B]
+    st.hubs = {"city": A, "port": B, "farm": A, "mine": A, "wood": A}
+    states = [st]
+    loc_keys = {"HUB_NAME_STATE_TEST_port"}
+
+    def _idx(color, resolved=(5, 5), name="Marienburg"):
+        return {"hubs": [{"name": name, "hub": "port", "resolved": list(resolved),
+                          "province_color": list(color), "province_label": 2}]}
+
+    assert vm._check_hub_anchors(bitmap, states, sea_colors, loc_keys, _idx(B)) == [],         "a clean port hub anchor must pass"
+    assert vm._check_hub_anchors(bitmap, states, sea_colors, loc_keys, _idx(A, resolved=(2, 5))),         "a port anchor on a non-coastal, non-declared province must fail"
+    miss = vm._check_hub_anchors(bitmap, states, sea_colors, set(), _idx(B))
+    assert any("missing loc key" in e for e in miss), f"missing HUB_NAME must fail, got {miss}"
+    stale = vm._check_hub_anchors(bitmap, states, sea_colors, loc_keys, _idx((99, 99, 99)))
+    assert any("stale index" in e for e in stale), f"a stale index colour must fail, got {stale}"
+
+
 def _selfcheck_stack_hubs() -> None:
     """Hub-stacking fallback (worldgen.statefile.stack_hubs), in isolation.
 
@@ -1690,6 +1724,9 @@ def run_check() -> int:
     _selfcheck_seeded_cut()
     print("land_provinces: hub-anchor seeded cut (own-province seeds, boundary kept, "
           "unseeded byte-identical, protected pieces, hard errors) self-check passed.")
+    _selfcheck_hub_validator()
+    print("validate_map: hub-anchor check (own-state hub, port coastal, HUB_NAME loc, "
+          "stale-index detection) self-check passed.")
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")

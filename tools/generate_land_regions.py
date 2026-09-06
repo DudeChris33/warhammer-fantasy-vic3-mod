@@ -89,6 +89,10 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
 PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 SEA_ZONES_INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
+#: Optional — the anchor -> seeded-province index written by generate_provinces.py
+#: (#3665). Present only when a hub worksheet exists; read here to pick each listed
+#: settlement's province as its state's hub and emit the HUB_NAME loc.
+HUB_ANCHORS_INDEX_PATH = DERIVED_DIR / "hub_anchors_index.json"
 PROVINCES_PNG_PATH = MOD_ROOT / "map_data" / "provinces.png"
 SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
 
@@ -101,6 +105,7 @@ OUT_OF_SCOPE_CONTINENTS_PATH = TOOLS_DIR / "config" / "out_of_scope_continents.j
 STATE_REGIONS_DIR = MOD_ROOT / "map_data" / "state_regions"
 STRATEGIC_REGIONS_DIR = MOD_ROOT / "common" / "strategic_regions"
 LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_land_states_l_english.yml"
+HUB_LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_hub_names_l_english.yml"
 BUILDINGS_DIR = MOD_ROOT / "common" / "buildings"
 
 BOM = b"\xef\xbb\xbf"
@@ -332,6 +337,17 @@ def _render_loc(keys: list[str], canon_names: dict[str, str]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def _render_hub_loc(entries: list[tuple[str, str]]) -> str:
+    """The ``HUB_NAME_<STATE_KEY>_<hub>`` loc file (board #3665), vanilla's shape in
+    ``game/localization/english/hub_names_l_english.yml``. Only listed hubs get a
+    key — an unlisted hub falls through to the engine default (no entry)."""
+    lines = ["l_english:"]
+    for loc_key, name in entries:
+        escaped = name.replace('"', '\\"')
+        lines.append(f' {loc_key}:0 "{escaped}"')
+    return "\n".join(lines) + "\n"
+
+
 # ---------------------------------------------------------------------------
 # Driver
 # ---------------------------------------------------------------------------
@@ -547,6 +563,24 @@ def main(argv: list[str] | None = None) -> int:
     loc_keys: list[str] = []
     n_stacked = 0
 
+    # Anchor-driven hubs (#3665): the persisted anchor -> seeded-province index is
+    # the single authority — no re-resolving an anchor from the bitmap. Map each
+    # state region to {hub: (color, name)}; a duplicate (region, hub) is an error.
+    hub_by_region: dict[int, dict[str, tuple[raster.Color, str]]] = {}
+    if HUB_ANCHORS_INDEX_PATH.is_file():
+        hub_index = json.loads(HUB_ANCHORS_INDEX_PATH.read_text(encoding="utf-8"))
+        for h in hub_index["hubs"]:
+            rid = int(h["region"])
+            slot = hub_by_region.setdefault(rid, {})
+            if h["hub"] in slot:
+                raise SystemExit(
+                    f"{HUB_ANCHORS_INDEX_PATH.name}: region {rid} has two '{h['hub']}' hubs "
+                    f"('{slot[h['hub']][1]}' and '{h['name']}') — one worksheet row per (state, hub)")
+            slot[h["hub"]] = (tuple(int(v) for v in h["province_color"]), h["name"])
+    hub_loc_entries: list[tuple[str, str]] = []
+    hub_unlisted_states = 0          # in-scope drawn states with an auto-picked slot
+    hub_unnamed_regions: list[str] = []  # listed hubs whose region has no canon name
+
     for cell in sorted(land_regions["cells"], key=lambda c: int(state_number[int(c["region"])])):
         region_id = int(cell["region"])
         state_num = int(state_number[region_id])
@@ -603,11 +637,25 @@ def main(argv: list[str] | None = None) -> int:
             impassable=None,
         )
 
+        # Listed settlements (#3665) preassign their seeded province to a hub slot;
+        # unlisted slots fall through to the geometric auto-pick.
+        anchor_hubs = hub_by_region.get(region_id, {})
+        preassigned = {hub: col for hub, (col, _nm) in anchor_hubs.items()} or None
         if len(infos) >= needed:
-            hubs = pick_hubs(state, infos, CANVAS_W, WRAP_X)
+            hubs = pick_hubs(state, infos, CANVAS_W, WRAP_X, preassigned=preassigned)
         else:
-            hubs = stack_hubs(infos, coastal)
+            hubs = stack_hubs(infos, coastal, preassigned=preassigned)
             n_stacked += 1
+        # HUB_NAME loc for every listed hub, keyed on the state's EMITTED key (never
+        # a stored key — the emitted key is what actually ships).
+        for hub, (_col, hubname) in anchor_hubs.items():
+            hub_loc_entries.append((f"HUB_NAME_{key}_{hub}", hubname))
+        if anchor_hubs and is_drawn and not name:
+            hub_unnamed_regions.append(key)  # a churny STATE_LAND_NNN key
+        if is_drawn:
+            slots = {"city", "port", "farm", "mine", "wood"} if coastal else {"city", "farm", "mine", "wood"}
+            if slots - set(anchor_hubs):
+                hub_unlisted_states += 1
 
         naval_exit_id = None
         if coastal:
@@ -645,6 +693,17 @@ def main(argv: list[str] | None = None) -> int:
     # --- write the loc -------------------------------------------------------
     _write_bytes(LOC_PATH, _render_loc(loc_keys, canon_names), bom=True)
     log(f"wrote {LOC_PATH.relative_to(MOD_ROOT)}  ({len(loc_keys)} entries)", t0)
+
+    # --- write the hub-name loc (#3665) -------------------------------------
+    if hub_loc_entries:
+        _write_bytes(HUB_LOC_PATH, _render_hub_loc(hub_loc_entries), bom=True)
+        log(f"wrote {HUB_LOC_PATH.relative_to(MOD_ROOT)}  ({len(hub_loc_entries)} hub name(s))", t0)
+        if hub_unlisted_states:
+            log(f"  note: {hub_unlisted_states} in-scope drawn state(s) have auto-picked "
+                f"(unlisted) hub slots — name them in hub_worksheet.json to override", t0)
+        if hub_unnamed_regions:
+            log(f"  WARNING: {len(hub_unnamed_regions)} listed hub(s) sit in an unnamed region "
+                f"(churny STATE_LAND_NNN loc key): {sorted(set(hub_unnamed_regions))[:8]}", t0)
 
     # --- write the strategic regions, grouped by continent (board #2931) ----
     color_alloc = raster.ColorAllocator(map_config.SEED)

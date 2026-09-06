@@ -65,6 +65,7 @@ def pick_hubs(
     provinces: list[ProvinceInfo],
     width: int,
     wrap_x: bool = True,
+    preassigned: dict[str, Color] | None = None,
 ) -> dict[str, Color]:
     """Auto-pick ``city``/``farm``/``mine``/``wood`` (+ ``port`` if coastal).
 
@@ -76,7 +77,14 @@ def pick_hubs(
 
     Impassable provinces are excluded from every hub. Raises :class:`HubError`
     if there are too few passable provinces.
+
+    ``preassigned`` (a ``{hub: Color}`` map from the hub worksheet, #3665) fixes
+    those slots to the given province colours and removes those provinces from the
+    pool before the remaining slots are auto-picked, so a listed settlement always
+    wins its slot and is never re-picked for another. ``preassigned=None`` is
+    byte-identical to the original auto-pick.
     """
+    pre = preassigned or {}
     candidates = sorted(
         (p for p in provinces if not p.impassable), key=lambda p: p.color
     )
@@ -90,7 +98,15 @@ def pick_hubs(
     hubs: dict[str, Color] = {}
     pool = list(candidates)
 
-    if state.coastal:
+    # Preassigned slots first: fix each and drop its province from the pool.
+    by_color = {p.color: p for p in candidates}
+    for hub, col in pre.items():
+        hubs[hub] = col
+        prov = by_color.get(col)
+        if prov is not None and prov in pool:
+            pool.remove(prov)
+
+    if state.coastal and "port" not in hubs:
         coastal_candidates = [p for p in pool if p.coastal]
         if not coastal_candidates:
             raise HubError(f"{state.key}: coastal state has no coastal province for a port")
@@ -98,23 +114,33 @@ def pick_hubs(
         hubs["port"] = port.color
         pool.remove(port)
 
-    state_centroid = _state_centroid(pool, width, wrap_x)
-    city = min(
-        pool,
-        key=lambda p: (_wrap_dist2(p.centroid, state_centroid, width, wrap_x), p.color),
-    )
-    hubs["city"] = city.color
-    pool.remove(city)
+    if "city" not in hubs:
+        state_centroid = _state_centroid(pool, width, wrap_x)
+        city = min(
+            pool,
+            key=lambda p: (_wrap_dist2(p.centroid, state_centroid, width, wrap_x), p.color),
+        )
+        hubs["city"] = city.color
+        pool.remove(city)
 
-    # Spread farm/mine/wood across the sorted remainder.
+    # Spread the remaining farm/mine/wood across the sorted remainder. With none
+    # preassigned this is the original [0, mid, last] triple, byte-identical.
     pool.sort(key=lambda p: p.color)
-    idx = [0, len(pool) // 2, len(pool) - 1]
-    for name, i in zip(("farm", "mine", "wood"), idx):
-        hubs[name] = pool[i].color
+    remaining = [n for n in ("farm", "mine", "wood") if n not in hubs]
+    if remaining:
+        if len(remaining) == 3:
+            idx = [0, len(pool) // 2, len(pool) - 1]
+        elif len(remaining) == 2:
+            idx = [0, len(pool) - 1]
+        else:
+            idx = [len(pool) // 2]
+        for name, i in zip(remaining, idx):
+            hubs[name] = pool[i].color
     return hubs
 
 
-def stack_hubs(provinces: list[ProvinceInfo], coastal: bool) -> dict[str, Color]:
+def stack_hubs(provinces: list[ProvinceInfo], coastal: bool,
+               preassigned: dict[str, Color] | None = None) -> dict[str, Color]:
     """Fallback hub placement for a state with fewer passable provinces than
     :func:`pick_hubs` needs (board #2930: every single-province placeholder
     state, and any small drawn region).
@@ -128,17 +154,22 @@ def stack_hubs(provinces: list[ProvinceInfo], coastal: bool) -> dict[str, Color]
     city+port on one province, farm+mine+wood on another) and the validator's
     own rule (hub membership only requires a hub be one of the state's own
     provinces, never distinct from the others).
+
+    ``preassigned`` (a ``{hub: Color}`` map, #3665) fixes those slots to the
+    listed settlement's province; the remaining slots cycle over the pool as
+    before. ``preassigned=None`` is byte-identical to the original stacking.
     """
     if not provinces:
         raise HubError("cannot stack hubs onto an empty province list")
-    hubs: dict[str, Color] = {}
-    if coastal:
+    hubs: dict[str, Color] = dict(preassigned or {})
+    if coastal and "port" not in hubs:
         coastal_candidates = [p for p in provinces if p.coastal] or list(provinces)
         port = max(coastal_candidates, key=lambda p: (p.area, tuple(-c for c in p.color)))
         hubs["port"] = port.color
     ordered = sorted(provinces, key=lambda p: p.color)
     k = len(ordered)
-    for i, name in enumerate(("city", "farm", "mine", "wood")):
+    remaining = [n for n in ("city", "farm", "mine", "wood") if n not in hubs]
+    for i, name in enumerate(remaining):
         hubs[name] = ordered[i % k].color
     return hubs
 
