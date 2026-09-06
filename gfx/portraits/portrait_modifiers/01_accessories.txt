@@ -61,7 +61,7 @@
                         native_american_clothes_pop_trigger = yes
                         AND = {
                             scope:pop ?= {
-                                NOT = { culture = cu:inuit }
+                                NOT = { always = no }
                             }
                         }
                     }
@@ -69,7 +69,7 @@
 
                 scope:pop ?= {
                     NAND = {
-                        religion = rel:catholic
+                        always = no  # [#3662] was: religion = rel:catholic
                         month = 1 # Carnival is /usually/ in February
                     }
                 }
@@ -96,11 +96,11 @@
                     monarchy_clothes_trigger = yes
                     age > 12
     				OR = {
-    					NOT = { exists = c:PAP }
+    					NOT = { always = no }
     					AND = {
-    						exists = c:PAP
+    						always = no  # [#3662] was: exists = c:PAP
 							exists = home_country
-    						NOT = { home_country = c:PAP }
+    						NOT = { always = no }
     					}
     				}
     			}
@@ -167,7 +167,7 @@
                                 }
                             }
                         }
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -197,7 +197,7 @@
                     is_adult = yes
                     OR = {
                         commander_rank >= 5
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -242,7 +242,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -273,7 +273,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -304,7 +304,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -335,7 +335,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -367,7 +367,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -399,7 +399,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -430,7 +430,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -461,7 +461,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -492,7 +492,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -523,7 +523,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -554,7 +554,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -585,7 +585,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -616,7 +616,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -647,7 +647,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -678,7 +678,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -714,7 +714,7 @@
                     OR = {
                         commander_rank >= 5
                         is_ruler_of_own_country = yes
-                        has_variable = golpista_var
+                        always = no  # [#3662] was: has_variable = golpista_var
                     }
     			}
     		}
@@ -797,14 +797,7 @@
                     has_dlc_feature = ip4_content
                 }
     			spanish_empire_clothes_trigger = yes
-                c:SPA ?= {
-                    has_variable = spain_republic_2
-                    OR = {
-                        has_law = law_type:law_presidential_republic
-                        has_law = law_type:law_parliamentary_republic
-                        has_law = law_type:law_council_republic
-                    }
-                }
+                always = no  # [#3662] neutralized c:SPA scope block (real-world tag, unauthored)
                 OR = {
                     ruler_clothes_trigger = yes
                     agitator_character_trigger = yes
@@ -836,14 +829,7 @@
                     has_dlc_feature = ip4_content
                 }
     			spanish_empire_clothes_trigger = yes
-                c:SPA ?= {
-                    has_variable = spain_republic_3
-                    OR = {
-                        has_law = law_type:law_presidential_republic
-                        has_law = law_type:law_parliamentary_republic
-                        has_law = law_type:law_council_republic
-                    }
-                }
+                always = no  # [#3662] neutralized c:SPA scope block (real-world tag, unauthored)
                 OR = {
                     ruler_clothes_trigger = yes
                     agitator_character_trigger = yes
@@ -941,7 +927,7 @@
                     scope:character ?= {
                         home_country ?= {
                             is_subject = no
-                            c:PRA ?= this
+                            always = no  # [#3662] was: c:PRA ?= this
                         }
                     }
                 }
@@ -1411,8 +1397,8 @@
                     exists = home_country
                     home_country = {
                         OR = {
-                            c:PRU ?= this
-                            was_formed_from = PRU
+                            always = no  # [#3662] was: c:PRU ?= this
+                            always = no  # [#3662] was: was_formed_from = PRU
                         }
                     }
                     is_adult = yes
@@ -1472,8 +1458,8 @@
                         scope:character = {
 							exists = home_country
                             home_country = {
-                                exists = c:CSA
-                                c:CSA = this
+                                always = no  # [#3662] was: exists = c:CSA
+                                always = no  # [#3662] was: c:CSA = this
                                 is_subject = no
                             }
                         }
@@ -1523,15 +1509,13 @@
             modifier = {
                 add = 10000
 
-                c:PER ?= {
-                    NOT = { has_technology_researched = bolt_action_rifles }
-                }
+                always = no  # [#3662] neutralized c:PER scope block (real-world tag, unauthored)
 
                 scope:character ?= {
                     OR = {
                         AND = {
-                            exists = c:PER
-                            home_country ?= c:PER
+                            always = no  # [#3662] was: exists = c:PER
+                            always = no  # [#3662] was: home_country ?= c:PER
                         } 
                     }
                     is_ruler_of_own_country = no
@@ -1549,9 +1533,9 @@
 
                 scope:character ?= {
                     exists = owner
-                    exists = c:TUR
+                    always = no  # [#3662] was: exists = c:TUR
                     owner ?= {
-                        c:TUR = this
+                        always = no  # [#3662] was: c:TUR = this
                     }
                     monarchy_clothes_trigger = yes
                     is_female = no
@@ -1626,9 +1610,9 @@
                         ruler_clothes_trigger = yes
                         NOT = {
                             scope:character = {
-    							exists = c:PAP
+    							always = no  # [#3662] was: exists = c:PAP
 								exists = home_country
-                                home_country = c:PAP
+                                always = no  # [#3662] was: home_country = c:PAP
                             }
                         }
                     }
@@ -1672,12 +1656,10 @@
             modifier = { # I am forcing American generals to wear commander accessories
                 add = 90000
 
-                c:USA ?= {
-                    NOT = { has_technology_researched = bolt_action_rifles }
-                }
+                always = no  # [#3662] neutralized c:USA scope block (real-world tag, unauthored)
 
                 scope:character ?= {
-                    owner ?= c:USA
+                    always = no  # [#3662] was: owner ?= c:USA
                     has_role_of_type = general
                     is_ruler_of_own_country = no
                 }
@@ -1711,11 +1693,11 @@
             modifier = {
                 add = 10000
 
-                exists = c:EGY
+                always = no  # [#3662] was: exists = c:EGY
                 scope:character ?= {
                     is_female = no
                     owner ?= {
-                        c:EGY = this
+                        always = no  # [#3662] was: c:EGY = this
                     }
                     OR = {
                         has_role_of_type = general
@@ -1826,8 +1808,8 @@
                         }
                     }
                     NOR = {
-                        culture ?= { cu:hungarian ?= this }
-                        home_country ?= { c:HUN ?= this }
+                        culture ?= { always = no }
+                        home_country ?= { always = no }
                     }
                 }
                 austrian_empire_clothes_trigger = yes
@@ -1884,7 +1866,7 @@
                 AND = {
                     exists = scope:character
                     scope:character = {
-                      has_variable = expedition_trading_gifts
+                      always = no  # [#3662] was: has_variable = expedition_trading_gifts
                     }  
                 }     
 			}
@@ -1908,7 +1890,7 @@
                 scope:character ?= {
                     is_ruler_of_own_country = yes
                     owner ?= {
-                        c:CHI ?= this
+                        always = no  # [#3662] was: c:CHI ?= this
                         has_law_or_variant = law_type:law_monarchy
                     }
                 }
@@ -1957,9 +1939,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2196,8 +2178,8 @@
                         exists = scope:character
                         scope:character = {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                             }
                         }
                     }
@@ -2224,9 +2206,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2243,8 +2225,8 @@
                         exists = scope:character
                         scope:character = {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                             }
                         }
                     }
@@ -2332,9 +2314,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2385,9 +2367,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2447,9 +2429,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2500,9 +2482,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2562,9 +2544,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2615,9 +2597,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2676,9 +2658,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2728,9 +2710,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2789,9 +2771,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2838,8 +2820,8 @@
                             NOT = {
                                 culture = {
                                     OR = {
-                                        cu:bedouin = this
-                                        cu:mashriqi = this
+                                        always = no  # [#3662] was: cu:bedouin = this
+                                        always = no  # [#3662] was: cu:mashriqi = this
                                     }
                                 }
                             }
@@ -2863,7 +2845,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:MUG ?= this
+                            always = no  # [#3662] was: c:MUG ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -2871,7 +2853,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:PER ?= this
+                            always = no  # [#3662] was: c:PER ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -2918,8 +2900,8 @@
                             NOT = {
                                 culture = {
                                     OR = {
-                                        cu:bedouin = this
-                                        cu:mashriqi = this
+                                        always = no  # [#3662] was: cu:bedouin = this
+                                        always = no  # [#3662] was: cu:mashriqi = this
                                     }
                                 }
                             }
@@ -2943,7 +2925,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:MUG ?= this
+                            always = no  # [#3662] was: c:MUG ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -2951,7 +2933,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:PER ?= this
+                            always = no  # [#3662] was: c:PER ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -2998,8 +2980,8 @@
                             NOT = {
                                 culture = {
                                     OR = {
-                                        cu:bedouin = this
-                                        cu:mashriqi = this
+                                        always = no  # [#3662] was: cu:bedouin = this
+                                        always = no  # [#3662] was: cu:mashriqi = this
                                     }
                                 }
                             }
@@ -3023,7 +3005,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:MUG ?= this
+                            always = no  # [#3662] was: c:MUG ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -3031,7 +3013,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:PER ?= this
+                            always = no  # [#3662] was: c:PER ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -3078,8 +3060,8 @@
                             NOT = {
                                 culture = {
                                     OR = {
-                                        cu:bedouin = this
-                                        cu:mashriqi = this
+                                        always = no  # [#3662] was: cu:bedouin = this
+                                        always = no  # [#3662] was: cu:mashriqi = this
                                     }
                                 }
                             }
@@ -3103,7 +3085,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:MUG ?= this
+                            always = no  # [#3662] was: c:MUG ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -3111,7 +3093,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:PER ?= this
+                            always = no  # [#3662] was: c:PER ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -3158,8 +3140,8 @@
                             NOT = {
                                 culture = {
                                     OR = {
-                                        cu:bedouin = this
-                                        cu:mashriqi = this
+                                        always = no  # [#3662] was: cu:bedouin = this
+                                        always = no  # [#3662] was: cu:mashriqi = this
                                     }
                                 }
                             }
@@ -3183,7 +3165,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:MUG ?= this
+                            always = no  # [#3662] was: c:MUG ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -3191,7 +3173,7 @@
                         is_ruler_of_own_country = yes
                         is_female = no
                         owner ?= {
-                            c:PER ?= this
+                            always = no  # [#3662] was: c:PER ?= this
                             has_law_or_variant = law_type:law_monarchy
                         }
                     }
@@ -3304,8 +3286,8 @@
                             exists = scope:character
                             scope:character = {
                                 OR = {
-                                    culture = cu:cherokee
-                                    culture = cu:muskogean
+                                    always = no  # [#3662] was: culture = cu:cherokee
+                                    always = no  # [#3662] was: culture = cu:muskogean
                                 }
                             }
                         }
@@ -3334,7 +3316,7 @@
                     # the NOR's truth value, so has_variable = is_stirner_var
                     # alone now carries the same effect the full list did.
                     NOR = {
-                        has_variable = is_stirner_var
+                        always = no  # [#3662] was: has_variable = is_stirner_var
                     }
                 }
             }
@@ -3408,9 +3390,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -3456,9 +3438,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -3504,9 +3486,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -3552,9 +3534,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -3600,9 +3582,9 @@
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes

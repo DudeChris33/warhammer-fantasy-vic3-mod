@@ -131,8 +131,8 @@ clothes = {
                             south_american_clothes_character_trigger = yes
                             scope:character ?= {
                                 NOR = {
-                                    culture = cu:paulista
-                                    culture = cu:sulista
+                                    always = no  # [#3662] was: culture = cu:paulista
+                                    always = no  # [#3662] was: culture = cu:sulista
                                 }
                             }
                         }
@@ -143,8 +143,8 @@ clothes = {
                         exists = scope:character
                         scope:character = {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                             }
                         }
                         ruler_clothes_trigger = yes
@@ -269,18 +269,18 @@ clothes = {
                 south_american_clothes_character_trigger = yes
                 scope:character ?= {
                     NOR = {
-                        culture = cu:brazilian
+                        always = no  # [#3662] was: culture = cu:brazilian
                         AND = {
-                            exists = cu:nordestino
-                            culture = cu:nordestino
+                            always = no  # [#3662] was: exists = cu:nordestino
+                            always = no  # [#3662] was: culture = cu:nordestino
                         }
                         AND = {
-                            exists = cu:paulista
-                            culture = cu:paulista
+                            always = no  # [#3662] was: exists = cu:paulista
+                            always = no  # [#3662] was: culture = cu:paulista
                         }
                         AND = {
-                            exists = cu:sulista
-                            culture = cu:sulista
+                            always = no  # [#3662] was: exists = cu:sulista
+                            always = no  # [#3662] was: culture = cu:sulista
                         }
 
                     }
@@ -322,14 +322,14 @@ clothes = {
                     AND = {
                         scope:character ?= {
                             OR = {
-                                culture = cu:brazilian
+                                always = no  # [#3662] was: culture = cu:brazilian
                                 AND = {
-                                    exists = cu:nordestino
-                                    culture = cu:nordestino
+                                    always = no  # [#3662] was: exists = cu:nordestino
+                                    always = no  # [#3662] was: culture = cu:nordestino
                                 }
                                 AND = {
-                                    exists = cu:amazonic
-                                    culture = cu:amazonic
+                                    always = no  # [#3662] was: exists = cu:amazonic
+                                    always = no  # [#3662] was: culture = cu:amazonic
                                 }
                             }
                         }
@@ -373,11 +373,11 @@ clothes = {
                 add = 100
                 scope:character ?= {
                     OR = {
-                        culture = cu:japanese
+                        always = no  # [#3662] was: culture = cu:japanese
                         AND = {
-                            culture = cu:ainu
+                            always = no  # [#3662] was: culture = cu:ainu
                             home_country ?= {
-                                country_has_primary_culture = cu:japanese
+                                always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                             }
                         }
                     }
@@ -602,7 +602,7 @@ clothes = {
             modifier = {
                 add = 90000
                 scope:character ?= {
-                    has_variable = is_stirner_var
+                    always = no  # [#3662] was: has_variable = is_stirner_var
                     NOR = {
                         has_role_of_type = general
                         has_role_of_type = admiral
@@ -634,7 +634,7 @@ clothes = {
             modifier = {
                 add = 90000
                 scope:character ?= {
-                    has_variable = mazzini_var # uses variable rather than template
+                    always = no # uses variable rather than template
                     NOR = {
                         has_role_of_type = general
                         has_role_of_type = admiral
@@ -732,8 +732,8 @@ clothes = {
                 OR = {
                     AND = {
                         scope:pop ?= {
-                            exists = c:PER
-                            owner ?= c:PER
+                            always = no  # [#3662] was: exists = c:PER
+                            always = no  # [#3662] was: owner ?= c:PER
                         }
                         OR = {
                             soldier_clothes_pop_trigger = yes
@@ -743,7 +743,7 @@ clothes = {
                     AND = {
                         scope:character ?= {
                             home_country ?= {
-                                c:PER ?= this
+                                always = no  # [#3662] was: c:PER ?= this
                             }
                             OR = {
                                 has_role_of_type = general
@@ -769,9 +769,7 @@ clothes = {
                         }
                     }
                 }
-                c:PER ?= {
-                    has_technology_researched = bolt_action_rifles
-                }
+                always = no  # [#3662] neutralized c:PER scope block (real-world tag, unauthored)
             }
         }
     }
@@ -808,10 +806,10 @@ clothes = {
                     is_ruler_of_own_country = yes
                     owner ?= {
                         NOT = { has_law_or_variant = law_type:law_monarchy }
-                        c:BIC ?= this
+                        always = no  # [#3662] was: c:BIC ?= this
                         is_subject_type = subject_type_colony # Only when it's the British Raj, not the British East India Company
-                        exists = c:GBR
-                        is_subject_of = c:GBR
+                        always = no  # [#3662] was: exists = c:GBR
+                        always = no  # [#3662] was: is_subject_of = c:GBR
                     }
                 }
             }
@@ -1045,7 +1043,7 @@ clothes = {
                 has_dlc_feature = ip2_cosmetics
                 scope:character ?= {
                     is_female = no
-                    culture = { cu:rajput = this }
+                    culture = { always = no }
                     OR = {
                         has_role_of_type = general
                         AND = {
@@ -1293,7 +1291,7 @@ clothes = {
                         AND = {
                             exists = scope:pop
                             scope:pop = {
-                                NOT = { culture = cu:inuit }
+                                NOT = { always = no }
                             }
                         }
                     }
@@ -1396,10 +1394,10 @@ clothes = {
                     }
                     OR = {
                         culture = {
-                            cu:vietnamese = this
+                            always = no  # [#3662] was: cu:vietnamese = this
                         }
                         owner ?= {
-                            c:DAI ?= this
+                            always = no  # [#3662] was: c:DAI ?= this
                         }
                     }
                 }
@@ -1435,7 +1433,7 @@ clothes = {
                                 # heritage_abyssinian / heritage_southern_bantu -- real-world heritage ids this
                                 # mod's Warhammer discrimination traits do not have; the cu:swahili branch
                                 # still excludes Swahili characters from this outfit.
-                                cu:swahili = this
+                                always = no  # [#3662] was: cu:swahili = this
                             }
                         }
                     }
@@ -1469,8 +1467,8 @@ clothes = {
                             exists = scope:character
                             scope:character = {
                                 OR = {
-                                    culture = cu:cherokee
-                                    culture = cu:muskogean
+                                    always = no  # [#3662] was: culture = cu:cherokee
+                                    always = no  # [#3662] was: culture = cu:muskogean
                                 }
                             }
                         }
@@ -1515,9 +1513,9 @@ clothes = {
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -1564,9 +1562,9 @@ clothes = {
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:malagasy
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:malagasy
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -1701,8 +1699,8 @@ clothes = {
                             exists = scope:character
                             scope:character = {
                                 OR = {
-                                    culture = cu:cherokee
-                                    culture = cu:muskogean
+                                    always = no  # [#3662] was: culture = cu:cherokee
+                                    always = no  # [#3662] was: culture = cu:muskogean
                                 }
                             }
                         }
@@ -1773,8 +1771,8 @@ clothes = {
                         exists = scope:character
                         scope:character = {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                             }
                         }
                     }
@@ -1793,9 +1791,9 @@ clothes = {
                 scope:character = {
                     NOT = {
                         AND = {
-                            exists = c:PRU
+                            always = no  # [#3662] was: exists = c:PRU
                             exists = home_country
-                            home_country = c:PRU
+                            always = no  # [#3662] was: home_country = c:PRU
                         }
                     }
                     owner ?= {
@@ -1860,8 +1858,8 @@ clothes = {
                         exists = scope:character
                         scope:character = {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                             }
                         }
                     }
@@ -1880,9 +1878,9 @@ clothes = {
                 scope:character = {
                     NOT = {
                         AND = {
-                            exists = c:PRU
+                            always = no  # [#3662] was: exists = c:PRU
                             exists = home_country
-                            home_country = c:PRU
+                            always = no  # [#3662] was: home_country = c:PRU
                         }
                     }
                     owner ?= {
@@ -1935,8 +1933,8 @@ clothes = {
                         exists = scope:character
                         scope:character = {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                             }
                         }
                     }
@@ -1958,9 +1956,9 @@ clothes = {
                 scope:character = {
                     NOT = {
                         AND = {
-                            exists = c:PRU
+                            always = no  # [#3662] was: exists = c:PRU
                             exists = home_country
-                            home_country = c:PRU
+                            always = no  # [#3662] was: home_country = c:PRU
                         }
                     }
                     owner ?= {
@@ -1995,8 +1993,8 @@ clothes = {
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2065,8 +2063,8 @@ clothes = {
                     european_clothes_trigger = yes
                     scope:character ?= {
                         OR = {
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     african_diaspora_clothes_trigger = yes
@@ -2131,9 +2129,7 @@ clothes = {
 
                 has_dlc_feature = ep1_cosmetics
 
-                c:USA ?= {
-                    NOT = { has_technology_researched = rifling }
-                }
+                always = no  # [#3662] neutralized c:USA scope block (real-world tag, unauthored)
                 american_clothes_pop_trigger = yes
                 OR = {
                     officers_clothes_pop_trigger = yes
@@ -2220,9 +2216,7 @@ clothes = {
             base = 0
             modifier = {
                 add = 20000
-                c:USA ?= {
-                    has_technology_researched = bolt_action_rifles
-                }
+                always = no  # [#3662] neutralized c:USA scope block (real-world tag, unauthored)
                 american_clothes_pop_trigger = yes
                 OR = {
                     soldier_clothes_pop_trigger = yes
@@ -2270,9 +2264,7 @@ clothes = {
             modifier = {
                 add = 25000
                 has_dlc_feature = ep1_cosmetics
-                c:USA ?= {
-                    has_technology_researched = bolt_action_rifles
-                }
+                always = no  # [#3662] neutralized c:USA scope block (real-world tag, unauthored)
                 OR = {
                     AND = {
                         american_clothes_pop_trigger = yes
@@ -2281,7 +2273,7 @@ clothes = {
                     AND = {
                         scope:character ?= {
                             exists = home_country
-                            home_country = c:USA
+                            always = no  # [#3662] was: home_country = c:USA
                             is_female = no
                             OR = {
                                 has_role_of_type = general
@@ -2340,14 +2332,14 @@ clothes = {
             base = 0
             modifier = {
                 add = 10000
-                exists = c:CSA
+                always = no  # [#3662] was: exists = c:CSA
                 OR = {
                     AND = {
                         exists = scope:character
                         scope:character = {
                             is_adult = yes
                             exists = home_country
-                            home_country = c:CSA
+                            always = no  # [#3662] was: home_country = c:CSA
                             OR = {
                                 has_role_of_type = general
                                 monarchy_clothes_trigger = yes
@@ -2365,7 +2357,7 @@ clothes = {
                         exists = scope:pop
                         scope:pop = {
                             is_pop_type = officers
-                            home_country = c:CSA
+                            always = no  # [#3662] was: home_country = c:CSA
                         }
                     }
                 }
@@ -2393,10 +2385,10 @@ clothes = {
             modifier = {
                 add = 10000
 
-                exists = c:CSA
+                always = no  # [#3662] was: exists = c:CSA
                 exists = scope:pop
                 scope:pop = {
-                    home_country = c:CSA
+                    always = no  # [#3662] was: home_country = c:CSA
                     is_pop_type = soldiers
                 }
             }
@@ -2592,7 +2584,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -2629,9 +2621,9 @@ clothes = {
             modifier = {
                 add = 10
                 scope:pop ?= {
-                    culture = cu:japanese
+                    always = no  # [#3662] was: culture = cu:japanese
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = yes
                 }
@@ -2709,14 +2701,10 @@ clothes = {
                 OR = {
                     AND = {
                         # innovative generals wear modern uniforms slightly earlier
-                        c:FRA ?= {
-                            has_technology_researched = bolt_action_rifles
-                        }
+                        always = no  # [#3662] neutralized c:FRA scope block (real-world tag, unauthored)
                         scope:character ?= { has_trait = innovative }
                     }
-                    c:FRA ?= {
-                        has_technology_researched = automatic_machine_guns
-                    }
+                    always = no  # [#3662] neutralized c:FRA scope block (real-world tag, unauthored)
                 }
             }
         }
@@ -2769,9 +2757,7 @@ clothes = {
                     officers_clothes_pop_trigger = yes
                 }
 
-                c:FRA ?= {
-                    has_technology_researched = automatic_machine_guns
-                }
+                always = no  # [#3662] neutralized c:FRA scope block (real-world tag, unauthored)
             }
         }
     }
@@ -2850,7 +2836,7 @@ clothes = {
                 add = 10000
                 scope:pop ?= {
                     owner ?= {
-                        c:PER ?= this
+                        always = no  # [#3662] was: c:PER ?= this
                     }
                     OR = {
                         is_pop_type = soldiers
@@ -2860,14 +2846,12 @@ clothes = {
             }
             modifier = {
                 add = 10000
-                c:PER ?= {
-                    NOT = { has_technology_researched = bolt_action_rifles }
-                }
+                always = no  # [#3662] neutralized c:PER scope block (real-world tag, unauthored)
                 scope:character ?= {
                     OR = {
                         AND = {
-                            exists = c:PER
-                            home_country ?= c:PER
+                            always = no  # [#3662] was: exists = c:PER
+                            always = no  # [#3662] was: home_country ?= c:PER
                         }
                     }
                     is_ruler_of_own_country = no
@@ -2911,8 +2895,8 @@ clothes = {
                 scope:pop ?= {
                     owner ?= {
                         OR = {
-                            c:EGY ?= this
-                            c:ZAN ?= this
+                            always = no  # [#3662] was: c:EGY ?= this
+                            always = no  # [#3662] was: c:ZAN ?= this
                         }
                     }
                 }
@@ -2924,11 +2908,11 @@ clothes = {
             modifier = {
                 add = 10000
                 NOT = { has_dlc_feature = ep1_cosmetics }
-                exists = c:EGY
+                always = no  # [#3662] was: exists = c:EGY
                 scope:character ?= {
                     is_female = no
                     owner ?= {
-                        c:EGY = this
+                        always = no  # [#3662] was: c:EGY = this
                     }
                     OR = {
                         has_role_of_type = general
@@ -2944,12 +2928,12 @@ clothes = {
             }
             modifier = {
                 add = 10000
-                exists = c:ZAN
+                always = no  # [#3662] was: exists = c:ZAN
                 scope:character ?= {
                     is_female = no
                     is_ruler_of_own_country = no
                     owner ?= {
-                        c:ZAN = this
+                        always = no  # [#3662] was: c:ZAN = this
                     }
                     OR = {
                         has_role_of_type = general
@@ -2967,7 +2951,7 @@ clothes = {
                 add = 10000
                 scope:character ?= {
                     religion = {
-                        rel:ibadi = this
+                        always = no  # [#3662] was: rel:ibadi = this
                     }
                     OR = {
                         AND = {
@@ -2989,7 +2973,7 @@ clothes = {
                 add = 10000
                 scope:pop ?= {
                     religion = {
-                        rel:ibadi = this
+                        always = no  # [#3662] was: rel:ibadi = this
                     }
                     is_pop_type = clergymen
                 }
@@ -3017,11 +3001,11 @@ clothes = {
             modifier = {
                 add = 100000
                 has_dlc_feature = ep1_cosmetics
-                exists = c:EGY
+                always = no  # [#3662] was: exists = c:EGY
                 scope:character ?= {
                     is_female = no
                     owner ?= {
-                        c:EGY = this
+                        always = no  # [#3662] was: c:EGY = this
                     }
                     OR = {
                         has_role_of_type = general
@@ -3646,14 +3630,14 @@ clothes = {
                     AND = {
                         scope:character ?= {
                             is_adult = yes
-                            exists = c:BRZ
+                            always = no  # [#3662] was: exists = c:BRZ
                             home_country ?= {
                                 OR = {
                                     AND = {
-                                        c:BRZ = this
+                                        always = no  # [#3662] was: c:BRZ = this
                                         is_subject = no # preventing uniform conflicts if BRZ becomes a subject of another country with puppet uniforms
                                     }
-                                    is_subject_of = c:BRZ
+                                    always = no  # [#3662] was: is_subject_of = c:BRZ
                                 }
                             }
                         }
@@ -3671,14 +3655,14 @@ clothes = {
                     }
                     AND = {
                         scope:pop ?= {
-                            exists = c:BRZ
+                            always = no  # [#3662] was: exists = c:BRZ
                             home_country = {
                                 OR = {
                                     AND = {
-                                        c:BRZ = this
+                                        always = no  # [#3662] was: c:BRZ = this
                                         is_subject = no # preventing uniform conflicts if BRZ becomes a subject of another country with puppet uniforms
                                     }
-                                    is_subject_of = c:BRZ
+                                    always = no  # [#3662] was: is_subject_of = c:BRZ
                                 }
                             }
                         }
@@ -3710,14 +3694,14 @@ clothes = {
             modifier = {
                 add = 10000
                 scope:pop ?= {
-                    exists = c:BRZ
+                    always = no  # [#3662] was: exists = c:BRZ
                     home_country = {
                         OR = {
                             AND = {
-                                c:BRZ = this
+                                always = no  # [#3662] was: c:BRZ = this
                                 is_subject = no # preventing uniform conflicts if BRZ becomes a subject of another country with puppet uniforms
                             }
-                            is_subject_of = c:BRZ
+                            always = no  # [#3662] was: is_subject_of = c:BRZ
                         }
                     }
                 }
@@ -3749,7 +3733,7 @@ clothes = {
                     home_country = {
                         any_scope_character = {
                             OR = {
-                                has_variable = garibaldi_var # Garibaldi can be an agitator or general or politician, it's all valid
+                                always = no # Garibaldi can be an agitator or general or politician, it's all valid
                                 # wh-overhaul (board #3540): dropped an OR branch checking has_template = garibaldi_character_template
                                 # (the vanilla comment called it a redundant double-check) -- a real-world
                                 # Garibaldi character_templates entry this mod's epic #3292 restore never
@@ -3757,10 +3741,10 @@ clothes = {
                             }
                         }
                         OR = {
-                            is_unification_candidate = ITA
+                            always = no  # [#3662] was: is_unification_candidate = ITA
                             AND = {
-                                exists = c:ITA
-                                c:ITA = this
+                                always = no  # [#3662] was: exists = c:ITA
+                                always = no  # [#3662] was: c:ITA = this
                             }
                         }
                     }
@@ -3799,10 +3783,10 @@ clothes = {
             modifier = {
                 add = 11000
                 scope:pop ?= {
-                    culture = cu:japanese
+                    always = no  # [#3662] was: culture = cu:japanese
                     is_pop_type = soldiers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3843,10 +3827,10 @@ clothes = {
                 add = 11000
                 NOT = { has_dlc_feature = ep2_cosmetics }
                 scope:pop ?= {
-                    culture = cu:japanese
+                    always = no  # [#3662] was: culture = cu:japanese
                     is_pop_type = officers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3871,7 +3855,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3912,10 +3896,10 @@ clothes = {
                 add  = 11000
                 has_dlc_feature = ep2_cosmetics
                 scope:pop ?= {
-                    culture = cu:japanese
+                    always = no  # [#3662] was: culture = cu:japanese
                     is_pop_type = officers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3940,7 +3924,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3990,7 +3974,7 @@ clothes = {
                 scope:pop ?= {
                     is_pop_type = soldiers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = rifling
                     }
                     japanese_restoration_trigger = yes
@@ -4034,7 +4018,7 @@ clothes = {
                 scope:pop ?= {
                     is_pop_type = officers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = rifling
                     }
                     japanese_restoration_trigger = yes
@@ -4094,7 +4078,7 @@ clothes = {
                         has_role_of_type = ruler
                         owner ?= { 
                             has_law = law_type:law_monarchy
-                            has_variable = japan_restoration_complete
+                            always = no  # [#3662] was: has_variable = japan_restoration_complete
                         }
                     }
                     OR = {
@@ -4105,7 +4089,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = rifling
                     }
                     japanese_restoration_trigger = yes
@@ -4168,7 +4152,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = yes
                 }
@@ -4218,7 +4202,7 @@ clothes = {
                 scope:pop ?= {
                     is_pop_type = soldiers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = bolt_action_rifles
                     }
                     japanese_restoration_trigger = yes
@@ -4263,7 +4247,7 @@ clothes = {
                 scope:pop ?= {
                     is_pop_type = officers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = bolt_action_rifles
                     }
                     japanese_restoration_trigger = yes
@@ -4278,7 +4262,7 @@ clothes = {
                         has_role_of_type = ruler
                         owner ?= { 
                             has_law = law_type:law_monarchy
-                            has_variable = japan_restoration_complete
+                            always = no  # [#3662] was: has_variable = japan_restoration_complete
                         }
                     }
                     OR = {
@@ -4289,7 +4273,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = bolt_action_rifles
                     }
                     japanese_restoration_trigger = yes
@@ -4340,7 +4324,7 @@ clothes = {
                 scope:pop ?= {
                     is_pop_type = soldiers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = automatic_machine_guns
                     }
                     japanese_restoration_trigger = yes
@@ -4383,10 +4367,10 @@ clothes = {
                 add  = 13500
 
                 scope:pop ?= {
-                    culture = cu:japanese
+                    always = no  # [#3662] was: culture = cu:japanese
                     is_pop_type = officers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = automatic_machine_guns
                     }
                     japanese_restoration_trigger = yes
@@ -4401,7 +4385,7 @@ clothes = {
                         has_role_of_type = ruler
                         owner ?= { 
                             has_law = law_type:law_monarchy
-                            has_variable = japan_restoration_complete
+                            always = no  # [#3662] was: has_variable = japan_restoration_complete
                         }
                     }
                     OR = {
@@ -4412,7 +4396,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         has_technology_researched = automatic_machine_guns
                     }
                     japanese_restoration_trigger = yes
@@ -4457,7 +4441,7 @@ clothes = {
                 scope:pop ?= {
                     is_pop_type = soldiers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         OR = {
                             has_technology_researched = chemical_warfare
                             has_technology_researched = concrete_fortifications
@@ -4509,7 +4493,7 @@ clothes = {
                 scope:pop ?= {
                     is_pop_type = officers
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         OR = {
                             has_technology_researched = chemical_warfare
                             has_technology_researched = concrete_fortifications
@@ -4531,7 +4515,7 @@ clothes = {
                         has_role_of_type = ruler
                         owner ?= { 
                             has_law = law_type:law_monarchy
-                            has_variable = japan_restoration_complete
+                            always = no  # [#3662] was: has_variable = japan_restoration_complete
                         }
                     }
                     OR = {
@@ -4542,7 +4526,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                         OR = {
                             has_technology_researched = chemical_warfare
                             has_technology_researched = concrete_fortifications
@@ -4600,7 +4584,7 @@ clothes = {
                         has_role_of_type = politician
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = yes
 
@@ -4651,7 +4635,7 @@ clothes = {
                         has_role_of_type = politician
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = yes
                     
@@ -4702,7 +4686,7 @@ clothes = {
                         has_role_of_type = politician
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = yes
                     
@@ -4753,7 +4737,7 @@ clothes = {
                         has_role_of_type = politician
                     }
                     owner ?= {
-                        country_has_primary_culture = cu:japanese
+                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = yes
                     
@@ -4798,7 +4782,7 @@ clothes = {
                     OR = {
                         AND = {
                             owner ?= {
-                                country_has_primary_culture = cu:japanese
+                                always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                             }
                             japanese_restoration_trigger = yes
                         }
@@ -4860,8 +4844,8 @@ clothes = {
                         }
                     }
                     NOR = {
-                        culture ?= { cu:hungarian ?= this }
-                        home_country ?= { c:HUN ?= this }
+                        culture ?= { always = no }
+                        home_country ?= { always = no }
                     }
                 }
                 austrian_empire_clothes_trigger = yes
@@ -4927,8 +4911,8 @@ clothes = {
                         }
                     }
                     NOR = {
-                        culture ?= { cu:hungarian ?= this }
-                        home_country ?= { c:HUN ?= this }
+                        culture ?= { always = no }
+                        home_country ?= { always = no }
                     }
                 }
                 austrian_empire_clothes_trigger = yes
@@ -5087,8 +5071,8 @@ clothes = {
                         has_technology_researched = automatic_machine_guns
                     }
                     NOR = {
-                        culture ?= { cu:hungarian ?= this }
-                        home_country ?= { c:HUN ?= this }
+                        culture ?= { always = no }
+                        home_country ?= { always = no }
                     }
                 }
                 austrian_empire_clothes_trigger = yes
@@ -5157,8 +5141,8 @@ clothes = {
                         has_technology_researched = automatic_machine_guns
                     }
                     NOR = {
-                        culture ?= { cu:hungarian ?= this }
-                        home_country ?= { c:HUN ?= this }
+                        culture ?= { always = no }
+                        home_country ?= { always = no }
                     }
                 }
                 austrian_empire_clothes_trigger = yes
@@ -5422,21 +5406,21 @@ clothes = {
                 scope:character ?= {
                     is_adult = yes
                     OR = {
-                        culture ?= { cu:hungarian ?= this }
-                        home_country ?= { c:HUN ?= this }
+                        culture ?= { always = no }
+                        home_country ?= { always = no }
                         home_country ?= {
-                            c:CRO ?= this
-                            exists = c:HUN # Intentional
+                            always = no  # [#3662] was: c:CRO ?= this
+                            always = no # Intentional
                             NOT = {
-                                has_variable = triune_kingdom_var
+                                always = no  # [#3662] was: has_variable = triune_kingdom_var
                             }
                         }
                     }
                     NOT = {
                         home_country ?= {
-                            exists = c:AUS
-                            is_subject_of = c:AUS
-                            is_diplomatic_play_enemy_of = c:AUS
+                            always = no  # [#3662] was: exists = c:AUS
+                            always = no  # [#3662] was: is_subject_of = c:AUS
+                            always = no  # [#3662] was: is_diplomatic_play_enemy_of = c:AUS
                         }
                     }
                 }
@@ -5512,14 +5496,14 @@ clothes = {
                         has_technology_researched = automatic_machine_guns
                     }
                     OR = {
-                        culture ?= { cu:hungarian ?= this }
-                        home_country ?= { c:HUN ?= this }
+                        culture ?= { always = no }
+                        home_country ?= { always = no }
                     }
                     NOT = {
                         home_country ?= {
-                            exists = c:AUS
-                            is_subject_of = c:AUS
-                            is_diplomatic_play_enemy_of = c:AUS
+                            always = no  # [#3662] was: exists = c:AUS
+                            always = no  # [#3662] was: is_subject_of = c:AUS
+                            always = no  # [#3662] was: is_diplomatic_play_enemy_of = c:AUS
                         }
                     }
                 }
@@ -7141,7 +7125,7 @@ clothes = {
                 romanian_clothes_trigger = yes
                 scope:character ?= {
                     owner ?= {
-                        c:WAL ?= this
+                        always = no  # [#3662] was: c:WAL ?= this
                     }
                 }
                 has_dlc_feature = ip3_cosmetics
@@ -7196,7 +7180,7 @@ clothes = {
                 add = 20000
                 scope:pop ?= {
                     home_country ?= {
-                        c:WAL ?= this
+                        always = no  # [#3662] was: c:WAL ?= this
                         NOT = {
                             has_technology_researched = rifling
                         }
@@ -7240,8 +7224,8 @@ clothes = {
                 scope:pop ?= {
                     home_country ?= {
                         OR = {
-                            c:MOL ?= this
-                            c:ROM ?= this
+                            always = no  # [#3662] was: c:MOL ?= this
+                            always = no  # [#3662] was: c:ROM ?= this
                         }
                         NOT = {
                             has_technology_researched = rifling
@@ -7289,8 +7273,8 @@ clothes = {
                 scope:pop ?= {
                     home_country ?= {
                         OR = {
-                            c:MOL ?= this
-                            c:ROM ?= this
+                            always = no  # [#3662] was: c:MOL ?= this
+                            always = no  # [#3662] was: c:ROM ?= this
                         }
                         NOT = {
                             has_technology_researched = rifling
@@ -7354,8 +7338,8 @@ clothes = {
                 scope:character ?= {
                     owner ?= {
                         OR = {
-                            c:MOL ?= this
-                            c:ROM ?= this
+                            always = no  # [#3662] was: c:MOL ?= this
+                            always = no  # [#3662] was: c:ROM ?= this
                         }
                     }
                 }
@@ -9995,7 +9979,7 @@ clothes = {
                         spanish_clothes_pop_trigger = yes
                         scope:pop.state = {
                             NOT = {
-                                is_in_geographic_region = geographic_region_europe
+                                always = no  # [#3662] was: is_in_geographic_region = geographic_region_europe
                             }
                         }
                     }
@@ -10101,8 +10085,8 @@ clothes = {
                             exists = scope:character
                             scope:character = {
                                 OR = {
-                                    culture = cu:cherokee
-                                    culture = cu:muskogean
+                                    always = no  # [#3662] was: culture = cu:cherokee
+                                    always = no  # [#3662] was: culture = cu:muskogean
                                 }
                             }
                         }
@@ -10177,8 +10161,8 @@ clothes = {
                             exists = scope:character
                             scope:character = {
                                 OR = {
-                                    culture = cu:cherokee
-                                    culture = cu:muskogean
+                                    always = no  # [#3662] was: culture = cu:cherokee
+                                    always = no  # [#3662] was: culture = cu:muskogean
                                 }
                             }
                         }
@@ -10232,8 +10216,8 @@ clothes = {
                     exists = home_country
                     home_country = {
                         OR = {
-                            c:PRU ?= this
-                            was_formed_from = PRU
+                            always = no  # [#3662] was: c:PRU ?= this
+                            always = no  # [#3662] was: was_formed_from = PRU
                         }
                     }
                     is_adult = yes
@@ -10393,17 +10377,17 @@ clothes = {
                 scope:character ?= {
                     OR = {
                         AND = {
-                            has_culture = cu:japanese
+                            always = no  # [#3662] was: has_culture = cu:japanese
                             monarchy_clothes_trigger = no
                         }
                         OR = {
                             AND = {
-                                culture = cu:ainu
+                                always = no  # [#3662] was: culture = cu:ainu
                                 home_country ?= {
-                                    country_has_primary_culture = cu:japanese
+                                    always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                                 }
                             }
-                            has_culture = cu:ryukyuan
+                            always = no  # [#3662] was: has_culture = cu:ryukyuan
                         }
                     }
                     japanese_restoration_trigger = no
@@ -10440,14 +10424,14 @@ clothes = {
 
                 scope:character ?= {
                     OR = {
-                        culture = cu:japanese
+                        always = no  # [#3662] was: culture = cu:japanese
                         AND = {
-                            culture = cu:ainu
+                            always = no  # [#3662] was: culture = cu:ainu
                             home_country ?= {
-                                country_has_primary_culture = cu:japanese
+                                always = no  # [#3662] was: country_has_primary_culture = cu:japanese
                             }
                         }
-                        culture = cu:ryukyuan
+                        always = no  # [#3662] was: culture = cu:ryukyuan
                     }
                 }
             }
@@ -10536,7 +10520,7 @@ clothes = {
                             is_adult = no
                             NOT = {
                                 owner ?= {
-                                    has_variable = KOR_korean_empire_declared
+                                    always = no  # [#3662] was: has_variable = KOR_korean_empire_declared
                                 }
                             }
                         }
@@ -10571,7 +10555,7 @@ clothes = {
                                 # wh-overhaul (board #3540): dropped an OR branch checking has_discrimination_trait = heritage_abyssinian --
                                 # not part of this mod's Warhammer discrimination traits; the cu:swahili branch
                                 # still selects this outfit for Swahili characters.
-                                cu:swahili = this
+                                always = no  # [#3662] was: cu:swahili = this
                             }
                         }
                     }
@@ -10638,7 +10622,7 @@ clothes = {
                 add = 10000
                 scope:character ?= {
                     owner ?= {
-                        c:MOR ?= this
+                        always = no  # [#3662] was: c:MOR ?= this
                         has_law = law_type:law_monarchy
                     }
                     OR = {
@@ -10673,22 +10657,22 @@ clothes = {
                         OR = {
                             owner ?= {
                                 has_law_or_variant = law_type:law_monarchy
-                                c:ETH ?= this
+                                always = no  # [#3662] was: c:ETH ?= this
                             }
                             AND = {
                                 OR = {
-                                    has_variable = ethiopian_emperor
+                                    always = no  # [#3662] was: has_variable = ethiopian_emperor
                                     # wh-overhaul (board #3540): dropped an OR branch checking has_template = eth_sahle_dengel_solomon --
                                     # a real-world Ethiopian-emperor character_templates entry this mod's epic
                                     # #3292 restore never brought back; the has_variable branch above is unaffected.
                                 }
                                 owner ?= {
                                     OR = {
-                                        c:SHW ?= this
-                                        c:WLO ?= this
-                                        c:TGR ?= this
-                                        c:BGM ?= this
-                                        c:GJM ?= this
+                                        always = no  # [#3662] was: c:SHW ?= this
+                                        always = no  # [#3662] was: c:WLO ?= this
+                                        always = no  # [#3662] was: c:TGR ?= this
+                                        always = no  # [#3662] was: c:BGM ?= this
+                                        always = no  # [#3662] was: c:GJM ?= this
                                     }
                                 }
                             }
@@ -10731,22 +10715,22 @@ clothes = {
                     OR = {
                         owner ?= {
                             has_law_or_variant = law_type:law_monarchy
-                            c:ETH ?= this
+                            always = no  # [#3662] was: c:ETH ?= this
                         }
                         AND = {
                             OR = {
-                                has_variable = ethiopian_emperor
+                                always = no  # [#3662] was: has_variable = ethiopian_emperor
                                 # wh-overhaul (board #3540): dropped an OR branch checking has_template = eth_sahle_dengel_solomon --
                                 # a real-world Ethiopian-emperor character_templates entry this mod's epic
                                 # #3292 restore never brought back; the has_variable branch above is unaffected.
                             }
                             owner ?= {
                                 OR = {
-                                    c:SHW ?= this
-                                    c:WLO ?= this
-                                    c:TGR ?= this
-                                    c:BGM ?= this
-                                    c:GJM ?= this
+                                    always = no  # [#3662] was: c:SHW ?= this
+                                    always = no  # [#3662] was: c:WLO ?= this
+                                    always = no  # [#3662] was: c:TGR ?= this
+                                    always = no  # [#3662] was: c:BGM ?= this
+                                    always = no  # [#3662] was: c:GJM ?= this
                                 }
                             }
                         }
@@ -10827,23 +10811,23 @@ clothes = {
                 add = 6000
                 military_clothes_trigger = no
                 scope:character ?= {
-                    religion = rel:catholic
+                    always = no  # [#3662] was: religion = rel:catholic
                     # wh-overhaul (board #3540): dropped a NOT = { has_template = FRA_francois-rene_de_chateaubriand } exclusion --
                     # a real-world character_templates entry this mod's epic #3292 restore never
                     # brought back; NOT of an always-false check was already a permanent no-op.
                     NAND = {
-                        c:PAP.ruler ?= this # Cannot be the Pope
+                        always = no # Cannot be the Pope
                     }
                     OR = {
-                        has_variable = cardinal_var
+                        always = no  # [#3662] was: has_variable = cardinal_var
                         AND = {
                             is_interest_group_type = ig_devout
                             has_role_of_type = politician
                             owner ?= {
-                                country_has_state_religion = rel:catholic
+                                always = no  # [#3662] was: country_has_state_religion = rel:catholic
                                 OR = {
-                                    c:POR ?= this
-                                    c:PAP ?= this
+                                    always = no  # [#3662] was: c:POR ?= this
+                                    always = no  # [#3662] was: c:PAP ?= this
                                     country_tier = empire
                                     country_tier = hegemony
                                 }
@@ -10872,7 +10856,7 @@ clothes = {
                 military_clothes_trigger = no
                 scope:character ?= {
                     month = 11
-                    religion = rel:catholic
+                    always = no  # [#3662] was: religion = rel:catholic
                     # wh-overhaul (board #3540): dropped a NOT = { has_template = FRA_francois-rene_de_chateaubriand } exclusion --
                     # a real-world character_templates entry this mod's epic #3292 restore never
                     # brought back; NOT of an always-false check was already a permanent no-op.
@@ -10884,10 +10868,10 @@ clothes = {
                                 devout_clothes_trigger = yes
                                 AND = {
                                     exists = scope:character
-                                    exists = c:PAP
+                                    always = no  # [#3662] was: exists = c:PAP
                                     scope:character = {
                                         exists = home_country
-                                        home_country = c:PAP
+                                        always = no  # [#3662] was: home_country = c:PAP
                                         has_ideology = ideology:ideology_theocrat
                                     }
                                 }
@@ -10898,7 +10882,7 @@ clothes = {
                             ruler_clothes_trigger = yes
                             owner ?= {
                                 has_law = law_type:law_theocracy
-                                NOT = { c:PAP ?= this }
+                                NOT = { always = no }
                             }
                         }
                     }
@@ -10908,7 +10892,7 @@ clothes = {
                 add = 7000
                 scope:pop ?= {
                     is_pop_type = clergymen
-                    religion = rel:catholic
+                    always = no  # [#3662] was: religion = rel:catholic
                     month = 11
                 }
             }
@@ -10937,8 +10921,8 @@ clothes = {
                 scope:character ?= {
                     religion = {
                         OR = {
-                            rel:orthodox = this
-                            rel:oriental_orthodox = this
+                            always = no  # [#3662] was: rel:orthodox = this
+                            always = no  # [#3662] was: rel:oriental_orthodox = this
                         }
                     }
                     OR = {
@@ -10970,8 +10954,8 @@ clothes = {
                     is_pop_type = clergymen
                     religion = {
                         OR = {
-                            rel:orthodox = this
-                            rel:oriental_orthodox = this
+                            always = no  # [#3662] was: rel:orthodox = this
+                            always = no  # [#3662] was: rel:oriental_orthodox = this
                         }
                     }
                 }
@@ -10996,14 +10980,14 @@ clothes = {
                     is_ruler_of_own_country = yes
                     is_female = no
                     religion = {
-                        rel:catholic = this
+                        always = no  # [#3662] was: rel:catholic = this
                     }
                     owner ?= {
                         OR = {
-                            c:PAP ?= this
+                            always = no  # [#3662] was: c:PAP ?= this
                             AND = {
-                                c:ITA ?= this
-                                was_formed_from = PAP
+                                always = no  # [#3662] was: c:ITA ?= this
+                                always = no  # [#3662] was: was_formed_from = PAP
                             }
                         }
                         has_law_or_variant = law_type:law_theocracy
@@ -11052,14 +11036,14 @@ clothes = {
                 scope:character = {
                     OR = {
                         AND = {
-                            culture = cu:ainu
+                            always = no  # [#3662] was: culture = cu:ainu
                             home_country ?= {
-                                NOT = { country_has_primary_culture = cu:japanese }
+                                NOT = { always = no }
                             }
                         }
-                        culture = cu:inuit
-                        culture = cu:siberian
-                        culture = cu:yakut
+                        always = no  # [#3662] was: culture = cu:inuit
+                        always = no  # [#3662] was: culture = cu:siberian
+                        always = no  # [#3662] was: culture = cu:yakut
                     }
                 }
             }
@@ -11099,7 +11083,7 @@ clothes = {
                 add = 100
                 exists = scope:character
                 scope:character = {
-                    culture = cu:sami
+                    always = no  # [#3662] was: culture = cu:sami
                 }
             }
         }
@@ -11218,8 +11202,8 @@ indigenous_oceanic_pop_clothes = {
                     AND = {
                         scope:character ?= {
                             home_country ?= {
-                                exists = c:HAW
-                                c:HAW = this
+                                always = no  # [#3662] was: exists = c:HAW
+                                always = no  # [#3662] was: c:HAW = this
                             }
                         }
                         OR = {
@@ -11243,8 +11227,8 @@ indigenous_oceanic_pop_clothes = {
                             exists = scope:pop
                             scope:pop = {
                                 home_country = {
-                                    exists = c:HAW
-                                    c:HAW = this
+                                    always = no  # [#3662] was: exists = c:HAW
+                                    always = no  # [#3662] was: c:HAW = this
                                 }
                             }
                         }
@@ -11253,8 +11237,8 @@ indigenous_oceanic_pop_clothes = {
                             scope:character = {
                                 exists = home_country
                                 home_country = {
-                                    exists = c:HAW
-                                    c:HAW = this
+                                    always = no  # [#3662] was: exists = c:HAW
+                                    always = no  # [#3662] was: c:HAW = this
                                 }
                             }
                         }
@@ -11514,7 +11498,7 @@ indigenous_oceanic_pop_clothes = {
                     is_ruler_of_own_country = yes
                     is_female = no
                     owner ?= {
-                        c:MUG ?= this
+                        always = no  # [#3662] was: c:MUG ?= this
                         has_law_or_variant = law_type:law_monarchy
                     }
                 }
@@ -11544,7 +11528,7 @@ indigenous_oceanic_pop_clothes = {
                 scope:character ?= {
                     is_adult = yes
                     owner ?= {
-                        c:MUG ?= this
+                        always = no  # [#3662] was: c:MUG ?= this
                     }
                     is_heir_of_own_country = yes
                 }
@@ -11674,7 +11658,7 @@ indigenous_oceanic_pop_clothes = {
                 indian_clothes_pop_trigger = yes
                 clergy_clothes_pop_trigger = yes
                 scope:pop = {
-                    religion = rel:animist
+                    always = no  # [#3662] was: religion = rel:animist
                 }
             }
         }
@@ -11728,7 +11712,7 @@ indigenous_oceanic_pop_clothes = {
                     AND = {
                         clergy_clothes_pop_trigger = yes
                         scope:pop = {
-                            religion = rel:sikh
+                            always = no  # [#3662] was: religion = rel:sikh
                         }
                     }
                     scope:character ?= { # Also used for Landowners IG leaders
@@ -11753,7 +11737,7 @@ indigenous_oceanic_pop_clothes = {
                             # wh-overhaul (board #3540): dropped an OR branch checking has_discrimination_trait_group =
                             # heritage_group_south_asian -- not part of this mod's Warhammer discrimination
                             # traits; the religion = rel:sikh branch below still selects this outfit.
-                            religion = rel:sikh
+                            always = no  # [#3662] was: religion = rel:sikh
                         }
                     }
                 }
@@ -11858,13 +11842,13 @@ indigenous_oceanic_pop_clothes = {
                             AND = {
                                 exists = scope:pop
                                 scope:pop = {
-                                    culture = cu:berber
+                                    always = no  # [#3662] was: culture = cu:berber
                                 }
                             }
                             AND = {
                                 exists = scope:pop
                                 scope:pop = {
-                                    culture = cu:tuareg
+                                    always = no  # [#3662] was: culture = cu:tuareg
                                 }
                             }
                         }
@@ -11998,8 +11982,8 @@ indigenous_oceanic_pop_clothes = {
                         OR = {
                             scope:pop ?= {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                                     }
                                 }
                                 AND = {
@@ -12011,7 +11995,7 @@ indigenous_oceanic_pop_clothes = {
                             AND = {
                                 korean_clothes_pop_trigger = yes
                                 scope:pop ?= {
-                                    owner ?= { has_variable = KOR_korean_empire_declared }
+                                    owner ?= { always = no }
                                 }
                             }
                         }
@@ -12461,13 +12445,13 @@ indigenous_oceanic_pop_clothes = {
                     OR = {
                         AND = {
                             has_role_of_type = ruler
-                            owner ?= { has_variable = japan_restoration_complete }
+                            owner ?= { always = no }
                         }
                         AND = {
                             has_role_of_type = heir
-                            owner ?= { has_variable = japan_restoration_complete }
+                            owner ?= { always = no }
                         }
-                        has_role = character_role_emperor_of_japan
+                        always = no  # [#3662] was: has_role = character_role_emperor_of_japan
                     }
                     is_adult = yes
                     is_female = no
@@ -12530,13 +12514,13 @@ indigenous_oceanic_pop_clothes = {
                     OR = {
                         AND = {
                             has_role_of_type = ruler
-                            owner ?= { has_variable = japan_restoration_complete }
+                            owner ?= { always = no }
                         }
                         AND = {
                             has_role_of_type = heir
-                            owner ?= { has_variable = japan_restoration_complete }
+                            owner ?= { always = no }
                         }
-                        has_role = character_role_emperor_of_japan
+                        always = no  # [#3662] was: has_role = character_role_emperor_of_japan
                     }
                     is_female = no
                     owner ?= {
@@ -12570,7 +12554,7 @@ indigenous_oceanic_pop_clothes = {
                 add = 10000
                 AND = {
                     scope:pop ?= {
-                        culture = cu:japanese
+                        always = no  # [#3662] was: culture = cu:japanese
                         japanese_restoration_trigger = yes
                     }
                     OR = {
@@ -12618,7 +12602,7 @@ indigenous_oceanic_pop_clothes = {
                     scope:character ?= {
                         is_adult = yes
                         owner ?= {
-                            has_variable = KOR_korean_empire_declared
+                            always = no  # [#3662] was: has_variable = KOR_korean_empire_declared
                         }
                     }
                     OR = {
@@ -12666,7 +12650,7 @@ indigenous_oceanic_pop_clothes = {
                     korean_clothes_pop_trigger = yes
                     scope:pop ?= {
                         owner ?= {
-                            has_variable = KOR_korean_empire_declared
+                            always = no  # [#3662] was: has_variable = KOR_korean_empire_declared
                         }
                     }
                     OR = {
@@ -12709,8 +12693,8 @@ indigenous_oceanic_pop_clothes = {
                         exists = scope:pop
                         scope:pop = {
                             home_country = {
-                                exists = c:PRU
-                                c:PRU = this
+                                always = no  # [#3662] was: exists = c:PRU
+                                always = no  # [#3662] was: c:PRU = this
                             }
                         }
                         OR = {
@@ -12728,8 +12712,8 @@ indigenous_oceanic_pop_clothes = {
                             }
                             exists = home_country
                             home_country = {
-                                exists = c:PRU
-                                c:PRU = this
+                                always = no  # [#3662] was: exists = c:PRU
+                                always = no  # [#3662] was: c:PRU = this
                             }
                         }
                     }
@@ -12846,13 +12830,13 @@ indigenous_oceanic_pop_clothes = {
                         AND = {
                             exists = scope:pop
                             scope:pop = {
-                                culture = cu:berber
+                                always = no  # [#3662] was: culture = cu:berber
                             }
                         }
                         AND = {
                             exists = scope:pop
                             scope:pop = {
-                                culture = cu:tuareg
+                                always = no  # [#3662] was: culture = cu:tuareg
                             }
                         }
                     }
@@ -12888,13 +12872,13 @@ indigenous_oceanic_pop_clothes = {
                             AND = {
                                 exists = scope:pop
                                 scope:pop = {
-                                    culture = cu:berber
+                                    always = no  # [#3662] was: culture = cu:berber
                                 }
                             }
                             AND = {
                                 exists = scope:pop
                                 scope:pop = {
-                                    culture = cu:tuareg
+                                    always = no  # [#3662] was: culture = cu:tuareg
                                 }
                             }
                         }
@@ -12932,10 +12916,10 @@ indigenous_oceanic_pop_clothes = {
                     is_ruler_of_own_country = yes
                     is_female = no
                     OR = {
-                        has_culture = cu:zulu
-                        has_culture = cu:nguni
-                        has_culture = cu:xhosa
-                        has_culture = cu:sotho
+                        always = no  # [#3662] was: has_culture = cu:zulu
+                        always = no  # [#3662] was: has_culture = cu:nguni
+                        always = no  # [#3662] was: has_culture = cu:xhosa
+                        always = no  # [#3662] was: has_culture = cu:sotho
                     }
                 }
             }
@@ -12960,10 +12944,10 @@ indigenous_oceanic_pop_clothes = {
                     is_heir_of_own_country = yes
                     is_female = no
                     OR = {
-                        has_culture = cu:zulu
-                        has_culture = cu:nguni
-                        has_culture = cu:xhosa
-                        has_culture = cu:sotho
+                        always = no  # [#3662] was: has_culture = cu:zulu
+                        always = no  # [#3662] was: has_culture = cu:nguni
+                        always = no  # [#3662] was: has_culture = cu:xhosa
+                        always = no  # [#3662] was: has_culture = cu:sotho
                     }
                 }
             }
@@ -12993,10 +12977,10 @@ indigenous_oceanic_pop_clothes = {
                 OR = {
                     scope:pop ?= {
                         OR = {
-                            culture = cu:zulu
-                            culture = cu:nguni
-                            culture = cu:xhosa
-                            culture = cu:sotho
+                            always = no  # [#3662] was: culture = cu:zulu
+                            always = no  # [#3662] was: culture = cu:nguni
+                            always = no  # [#3662] was: culture = cu:xhosa
+                            always = no  # [#3662] was: culture = cu:sotho
                         }
                         OR = {
                             is_pop_type = aristocrats
@@ -13008,10 +12992,10 @@ indigenous_oceanic_pop_clothes = {
                         has_role_of_type = general
                         is_ruler_of_own_country = no
                         OR = {
-                            has_culture = cu:zulu
-                            has_culture = cu:nguni
-                            has_culture = cu:xhosa
-                            has_culture = cu:sotho
+                            always = no  # [#3662] was: has_culture = cu:zulu
+                            always = no  # [#3662] was: has_culture = cu:nguni
+                            always = no  # [#3662] was: has_culture = cu:xhosa
+                            always = no  # [#3662] was: has_culture = cu:sotho
                         }
                     }
                 }
@@ -13092,8 +13076,8 @@ indigenous_oceanic_pop_clothes = {
                     native_american_clothes_pop_trigger = yes
                     scope:pop = {
                         NOR = {
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                     OR = {
@@ -13166,9 +13150,9 @@ indigenous_oceanic_pop_clothes = {
                 scope:character = {
                     is_female = no
                     NOR = {
-                        culture = cu:inuit
-                        culture = cu:cherokee
-                        culture = cu:muskogean
+                        always = no  # [#3662] was: culture = cu:inuit
+                        always = no  # [#3662] was: culture = cu:cherokee
+                        always = no  # [#3662] was: culture = cu:muskogean
                     }
                 }
             }
@@ -13223,9 +13207,9 @@ indigenous_oceanic_pop_clothes = {
                     is_ruler_of_own_country = no
                     NOT = {
                         OR = {
-                            culture = cu:inuit
-                            culture = cu:cherokee
-                            culture = cu:muskogean
+                            always = no  # [#3662] was: culture = cu:inuit
+                            always = no  # [#3662] was: culture = cu:cherokee
+                            always = no  # [#3662] was: culture = cu:muskogean
                         }
                     }
                 }
@@ -13254,14 +13238,14 @@ indigenous_oceanic_pop_clothes = {
                 scope:pop ?= {
                     is_pop_type = clergymen
                     NOR = {
-                        religion = rel:oriental_orthodox
+                        always = no  # [#3662] was: religion = rel:oriental_orthodox
                         culture = {
                             OR = {
                                 # wh-overhaul (board #3540): dropped two OR branches checking has_discrimination_trait_group =
                                 # heritage_group_middle_eastern / has_discrimination_trait = heritage_abyssinian --
                                 # not part of this mod's Warhammer discrimination traits; the cu:circassian
                                 # branch still excludes Circassian clergy from this outfit.
-                                cu:circassian = this
+                                always = no  # [#3662] was: cu:circassian = this
                             }
                         }
                     }
@@ -13286,7 +13270,7 @@ indigenous_oceanic_pop_clothes = {
                 OR = {
                     muslim_clothes_pop_trigger = yes
                     scope:pop ?= {
-                        religion = rel:oriental_orthodox
+                        always = no  # [#3662] was: religion = rel:oriental_orthodox
                     }
                     AND = {
                         european_clothes_pop_trigger = no
@@ -13324,8 +13308,8 @@ indigenous_oceanic_pop_clothes = {
                 scope:character ?= {
                     religion = {
                         OR = {
-                            rel:orthodox = this
-                            rel:oriental_orthodox = this
+                            always = no  # [#3662] was: rel:orthodox = this
+                            always = no  # [#3662] was: rel:oriental_orthodox = this
                         }
                     }
                     OR = {
@@ -13357,8 +13341,8 @@ indigenous_oceanic_pop_clothes = {
                     is_pop_type = clergymen
                     religion = {
                         OR = {
-                            rel:orthodox = this
-                            rel:oriental_orthodox = this
+                            always = no  # [#3662] was: rel:orthodox = this
+                            always = no  # [#3662] was: rel:oriental_orthodox = this
                         }
                     }
                 }
@@ -13400,7 +13384,7 @@ indigenous_oceanic_pop_clothes = {
                         # not part of this mod's Warhammer discrimination traits; religion = rel:shinto
                         # below still selects this outfit for Shinto rulers.
                         #religion = rel:sikh
-                        religion = rel:shinto
+                        always = no  # [#3662] was: religion = rel:shinto
                     }
                     exists = home_country
                     home_country = {
@@ -13446,7 +13430,7 @@ indigenous_oceanic_pop_clothes = {
                         indian_clothes_trigger = yes
                         scope:character ?= {
                             is_female = yes
-                            religion = rel:hindu
+                            always = no  # [#3662] was: religion = rel:hindu
                             month = 10 # November. The trigger for months is on a 0-11 scale.
                         }
                     }
@@ -13513,7 +13497,7 @@ indigenous_oceanic_pop_clothes = {
                     upper_clothes_pop_trigger = yes
                 }
                 scope:pop ?= {
-                    religion = rel:catholic
+                    always = no  # [#3662] was: religion = rel:catholic
                     month = 1 # Carnival is /usually/ in February
                 }
             }
@@ -13549,26 +13533,26 @@ indigenous_oceanic_pop_clothes = {
                     scope:character ?= { # Sulista, Platinean, Argentine and Uruguayan RF & TU leaders and Brazilian RF & TU leaders post-Sulista integration should wear this
                         OR = {
                             AND = {
-                                exists = cu:sulista
-                                culture = cu:sulista
+                                always = no  # [#3662] was: exists = cu:sulista
+                                always = no  # [#3662] was: culture = cu:sulista
                             }
                             AND = {
-                                exists = cu:platinean
-                                culture = cu:platinean
+                                always = no  # [#3662] was: exists = cu:platinean
+                                always = no  # [#3662] was: culture = cu:platinean
                             }
                             AND = {
-                                exists = cu:argentine
-                                culture = cu:argentine
+                                always = no  # [#3662] was: exists = cu:argentine
+                                always = no  # [#3662] was: culture = cu:argentine
                             }
                             AND = {
-                                exists = cu:uruguayan
-                                culture = cu:uruguayan
+                                always = no  # [#3662] was: exists = cu:uruguayan
+                                always = no  # [#3662] was: culture = cu:uruguayan
                             }
-                            culture = cu:afro_brazilian
+                            always = no  # [#3662] was: culture = cu:afro_brazilian
                             AND = {
-                                culture = cu:brazilian
+                                always = no  # [#3662] was: culture = cu:brazilian
                                 home_country ?= {
-                                    has_variable = sulistas_integrated
+                                    always = no  # [#3662] was: has_variable = sulistas_integrated
                                 }
                             }
                         }
@@ -13590,26 +13574,26 @@ indigenous_oceanic_pop_clothes = {
                     scope:pop ?= {
                         OR = {
                             AND = {
-                                exists = cu:sulista
-                                culture = cu:sulista
+                                always = no  # [#3662] was: exists = cu:sulista
+                                always = no  # [#3662] was: culture = cu:sulista
                             }
                             AND = {
-                                exists = cu:platinean
-                                culture = cu:platinean
+                                always = no  # [#3662] was: exists = cu:platinean
+                                always = no  # [#3662] was: culture = cu:platinean
                             }
                             AND = {
-                                exists = cu:argentine
-                                culture = cu:argentine
+                                always = no  # [#3662] was: exists = cu:argentine
+                                always = no  # [#3662] was: culture = cu:argentine
                             }
                             AND = {
-                                exists = cu:uruguayan
-                                culture = cu:uruguayan
+                                always = no  # [#3662] was: exists = cu:uruguayan
+                                always = no  # [#3662] was: culture = cu:uruguayan
                             }
-                            culture = cu:afro_brazilian
+                            always = no  # [#3662] was: culture = cu:afro_brazilian
                             AND = {
-                                culture = cu:brazilian
+                                always = no  # [#3662] was: culture = cu:brazilian
                                 owner ?= {
-                                    has_variable = sulistas_integrated
+                                    always = no  # [#3662] was: has_variable = sulistas_integrated
                                 }
                             }
                         }
@@ -13623,22 +13607,22 @@ indigenous_oceanic_pop_clothes = {
                         is_in_exile_pool = yes
                         OR = {
                             AND = {
-                                exists = cu:sulista
-                                culture = cu:sulista
+                                always = no  # [#3662] was: exists = cu:sulista
+                                always = no  # [#3662] was: culture = cu:sulista
                             }
                             AND = {
-                                exists = cu:platinean
-                                culture = cu:platinean
+                                always = no  # [#3662] was: exists = cu:platinean
+                                always = no  # [#3662] was: culture = cu:platinean
                             }
                             AND = {
-                                exists = cu:argentine
-                                culture = cu:argentine
+                                always = no  # [#3662] was: exists = cu:argentine
+                                always = no  # [#3662] was: culture = cu:argentine
                             }
                             AND = {
-                                exists = cu:uruguayan
-                                culture = cu:uruguayan
+                                always = no  # [#3662] was: exists = cu:uruguayan
+                                always = no  # [#3662] was: culture = cu:uruguayan
                             }
-                            culture = cu:brazilian
+                            always = no  # [#3662] was: culture = cu:brazilian
                         }
                     }
                 }
@@ -13746,9 +13730,9 @@ indigenous_oceanic_pop_clothes = {
                 add = 10000
                 scope:character ?= {
                     exists = owner
-                    exists = c:TUR
+                    always = no  # [#3662] was: exists = c:TUR
                     owner ?= {
-                        c:TUR = this
+                        always = no  # [#3662] was: c:TUR = this
                     }
                     monarchy_clothes_trigger = yes
                     is_female = no
@@ -13790,12 +13774,12 @@ indigenous_oceanic_pop_clothes = {
                 add = 10000
                 OR = {
                     AND = {
-                        exists = c:TUR
+                        always = no  # [#3662] was: exists = c:TUR
                         scope:character ?= {
                             is_adult = yes
                             is_ruler_of_own_country = no
                             owner ?= {
-                                c:TUR = this
+                                always = no  # [#3662] was: c:TUR = this
                             }
                         }
                         OR = {
@@ -13810,10 +13794,10 @@ indigenous_oceanic_pop_clothes = {
                         }
                     }
                     AND = {
-                        exists = c:TUR
+                        always = no  # [#3662] was: exists = c:TUR
                         scope:pop ?= {
                             owner ?= {
-                                c:TUR = this
+                                always = no  # [#3662] was: c:TUR = this
                             }
                         }
                         officers_clothes_pop_trigger = yes
@@ -13848,8 +13832,8 @@ indigenous_oceanic_pop_clothes = {
                     AND = {
                         scope:character ?= {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                             }
                         }
                     }
@@ -13929,10 +13913,10 @@ indigenous_oceanic_pop_clothes = {
                         african_diaspora_clothes_trigger = yes
                         scope:character ?= {
                             OR = {
-                                culture = cu:cherokee
-                                culture = cu:muskogean
+                                always = no  # [#3662] was: culture = cu:cherokee
+                                always = no  # [#3662] was: culture = cu:muskogean
                                 AND = {
-                                    culture = cu:japanese
+                                    always = no  # [#3662] was: culture = cu:japanese
                                     japanese_restoration_trigger = yes
                                 }
                             }
@@ -13998,8 +13982,8 @@ indigenous_oceanic_pop_clothes = {
                         # + has_discrimination_trait_group = language_group_bantu + heritage_islamic --
                         # not part of this mod's Warhammer discrimination traits; the bedouin/mashriqi
                         # culture branches below still select this outfit.
-                        culture = { cu:bedouin = this }
-                        culture = { cu:mashriqi = this }
+                        culture = { always = no }
+                        culture = { always = no }
                     }
                 }
             }
@@ -14021,7 +14005,7 @@ indigenous_oceanic_pop_clothes = {
                 add = 5000
                 scope:character ?= {
                     culture = {
-                        cu:bedouin = this
+                        always = no  # [#3662] was: cu:bedouin = this
                     }
                     is_ruler_of_own_country = no
                     NOR = {
@@ -14042,7 +14026,7 @@ indigenous_oceanic_pop_clothes = {
                 poor_clothes_pop_trigger = yes
                 scope:pop ?= {
                     culture = {
-                        cu:bedouin = this
+                        always = no  # [#3662] was: cu:bedouin = this
                     }
                 }
             }
@@ -14053,11 +14037,11 @@ indigenous_oceanic_pop_clothes = {
             modifier = {
                 add = 5000
                 scope:pop ?= {
-                    culture = cu:bedouin
+                    always = no  # [#3662] was: culture = cu:bedouin
                     owner ?= {
                         OR = {
-                            c:OMA ?= this
-                            c:ZAN ?= this
+                            always = no  # [#3662] was: c:OMA ?= this
+                            always = no  # [#3662] was: c:ZAN ?= this
                         }
                     }
                 }
@@ -14089,7 +14073,7 @@ indigenous_oceanic_pop_clothes = {
                 add = 4000
                 scope:character ?= {
                     culture = {
-                        cu:somali = this
+                        always = no  # [#3662] was: cu:somali = this
                     }
                 }
             }
@@ -14097,7 +14081,7 @@ indigenous_oceanic_pop_clothes = {
                 add = 500
                 scope:pop ?= {
                     culture = {
-                        cu:somali = this
+                        always = no  # [#3662] was: cu:somali = this
                     }
                 }
             }
@@ -14163,16 +14147,16 @@ indigenous_oceanic_pop_clothes = {
                 scope:character ?= {
                     culture = {
                         OR = {
-                            cu:boer = this
-                            cu:griqua = this
+                            always = no  # [#3662] was: cu:boer = this
+                            always = no  # [#3662] was: cu:griqua = this
                         }
                     }
 
                     home_country ?= {
-                        NOT = { c:SAF ?= this }
+                        NOT = { always = no }
                         OR = {
-                            country_has_primary_culture = cu:boer
-                            country_has_primary_culture = cu:griqua
+                            always = no  # [#3662] was: country_has_primary_culture = cu:boer
+                            always = no  # [#3662] was: country_has_primary_culture = cu:griqua
                         }
                     }
                     OR = {
@@ -14215,15 +14199,15 @@ indigenous_oceanic_pop_clothes = {
                 scope:pop ?= {
                     culture = {
                         OR = {
-                            cu:boer = this
-                            cu:griqua = this
+                            always = no  # [#3662] was: cu:boer = this
+                            always = no  # [#3662] was: cu:griqua = this
                         }
                     }
                     owner = {
-                        NOT = { c:SAF ?= this }
+                        NOT = { always = no }
                         OR = {
-                            country_has_primary_culture = cu:boer
-                            country_has_primary_culture = cu:griqua
+                            always = no  # [#3662] was: country_has_primary_culture = cu:boer
+                            always = no  # [#3662] was: country_has_primary_culture = cu:griqua
                         }
                     }
                 }
@@ -14242,10 +14226,10 @@ indigenous_oceanic_pop_clothes = {
                 scope:character ?= {
                     has_role_of_type = politician
                     OR = {
-                        has_culture = cu:zulu
-                        has_culture = cu:nguni
-                        has_culture = cu:xhosa
-                        has_culture = cu:sotho
+                        always = no  # [#3662] was: has_culture = cu:zulu
+                        always = no  # [#3662] was: has_culture = cu:nguni
+                        always = no  # [#3662] was: has_culture = cu:xhosa
+                        always = no  # [#3662] was: has_culture = cu:sotho
                     }
                     owner ?= {
                         OR = {

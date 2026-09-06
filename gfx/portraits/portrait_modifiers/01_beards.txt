@@ -119,7 +119,7 @@ beards = {
                 scope:character ?= {
                     age > 16
                     # no scripted DNA for any historical Swahili characters so there's no scripted portraits for this conflict with, yet
-                    culture = cu:swahili
+                    always = no  # [#3662] was: culture = cu:swahili
                 }
             }
 
@@ -146,7 +146,7 @@ beards = {
                 add = 100
 
                 scope:pop ?= {
-                    culture = cu:persian
+                    always = no  # [#3662] was: culture = cu:persian
                 }
             }
         }

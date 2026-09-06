@@ -114,7 +114,7 @@ hairstyles = {
                 AND = {
                     exists = scope:pop
                     scope:pop = {
-                        culture = cu:japanese
+                        always = no  # [#3662] was: culture = cu:japanese
                         japanese_restoration_trigger = no
                     }
                     poor_clothes_pop_trigger = no
@@ -137,7 +137,7 @@ hairstyles = {
             modifier = {
                 add = 1000
                 scope:character ?= {
-                    culture = cu:japanese
+                    always = no  # [#3662] was: culture = cu:japanese
                     OR = {
                         japanese_restoration_trigger = no
                         has_ideology = ideology:ideology_traditionalist
@@ -180,36 +180,36 @@ hairstyles = {
                         OR = {
                             american_clothes_trigger = yes
                             AND = {
-                                exists = c:CSA
+                                always = no  # [#3662] was: exists = c:CSA
                                 OR = {
                                     AND = {
                                         exists = scope:character
                                         scope:character = {
 											exists = home_country
-											home_country = c:CSA
+											always = no  # [#3662] was: home_country = c:CSA
                                             is_female = no
 										}
                                     }
                                     AND = {
                                         exists = scope:pop
-                                        scope:pop = { home_country = c:CSA }
+                                        scope:pop = { always = no }
                                     }
                                 }
                             }
                             AND = {
-                                exists = c:BRZ
+                                always = no  # [#3662] was: exists = c:BRZ
                                 OR = {
                                     AND = {
                                         exists = scope:character
                                         scope:character = {
                                             exists = home_country
-                                            home_country = c:BRZ
+                                            always = no  # [#3662] was: home_country = c:BRZ
                                             is_female = no
                                         }
                                     }
                                     AND = {
                                         exists = scope:pop
-                                        scope:pop = { home_country = c:BRZ }
+                                        scope:pop = { always = no }
                                     }
                                 }
 
