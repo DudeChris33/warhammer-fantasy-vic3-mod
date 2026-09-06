@@ -200,8 +200,9 @@ sub-floor cell survives the merge floor that would otherwise fold it away),
 `subdivide(region_seeds=)` end to end — every anchor gets its own province,
 no anchor province crosses a magenta region boundary, an unseeded region
 stays byte-identical to the `region_seeds=None` cut, an anchor in a
-`keep_whole` archipelago or a non-drawn region hard-errors, and the cut is
-deterministic. `_selfcheck_hub_validator` exercises `validate_map._check_hub_anchors`
+`keep_whole` archipelago or a non-drawn region hard-errors, the cut is
+deterministic, and a `wrap_x=True` case exercises the seam-shift anchor
+translation the production `WRAP_X` uses. `_selfcheck_hub_validator` exercises `validate_map._check_hub_anchors`
 on a synthetic bitmap and state list: a clean port anchor passes; a port
 anchor resolved onto a non-coastal, non-declared province fails; a missing
 `HUB_NAME` loc key fails; and a stale index entry (resolved colour no longer
