@@ -1,19 +1,20 @@
 {
   "source": "start_warhammer_old_world_northern.png",
+  "dots_source": "old_world_z10 - dots_5.png",
   "master_shape": [
     4958,
     6134
   ],
   "objective": "landmarks",
   "footprint_pad": 32,
-  "_comment": "PROVISIONAL. NORTHERN OLD WORLD tile carved from the Games Workshop 'Warhammer: The Old World' interactive map (start_warhammer_old_world_z10.png, the stitched z10 relief tiles), placed by the paired-anchor-dot workflow validated on the Empire (2026-08-14). The user cropped the northern Old World out of the parent tile map and drew matched colour dots on the crop AND on terraqueous_globe_reprojected.png, which IS the canvas/mask frame (8192x3616). The dots use a 5-LEVEL-per-channel marker palette (each channel in {0,63,127,191,255}); each is a single compact 4x4 (12 px) blob. Recovering ALL non-grayscale ink in the grayscale crop finds 42 dots; 39 pair to a single clean canonical dot on the globe directly, and 2 more (maroon 127,0,0 and dark-maroon 63,0,0, which collide with the globe's natural dark-red speckle) are recovered by predicting their globe position through the fit and finding the lone canonical dot within ~15 px of the prediction. The user then flagged the top-edge dot c_3f00ff (63,0,255) as an incorrect pick and it was removed, leaving 40 pairs. objective=landmarks means NO silhouette fit (the drift-prone stage), just thin-plate interpolation. master_shape is the crop's native (h,w)=(4958,6134); the source will be the dot-free crop. This record only PLACES the tile; no geometry is extracted yet. Exclusion of the out-of-scope area is done by the CROP itself (the user cropped the parent down to the northern Old World rectangle) rather than by an alpha mask, so the whole opaque frame is intentionally in-scope and 'warp alpha>0 only' warps the full rectangle by design. ONE dot dropped as globe-side unrecoverable: muddy-teal (63,127,127) — no canonical dot found near its predicted globe position (the user did not place it on the globe). The two dark-red dots that first looked unrecoverable (maroon and dark-maroon) were recovered by the fit-predicted windowed search described above. NOTE: unlike the tww3 parchment tiles this is a grayscale RELIEF map, not a drawn-boundary network, so its downstream consumption is undecided (placement-only for now).",
+  "_comment": "PROVISIONAL. NORTHERN OLD WORLD tile carved from the Games Workshop 'Warhammer: The Old World' interactive map (start_warhammer_old_world_z10.png, the stitched z10 relief tiles), placed by the paired-anchor-dot workflow validated on the Empire (2026-08-14). The user cropped the northern Old World out of the parent tile map and drew matched colour dots on the crop AND on terraqueous_globe_reprojected.png, which IS the canvas/mask frame (8192x3616). The dots use a 5-LEVEL-per-channel marker palette (each channel in {0,63,127,191,255}); each is a single compact 4x4 (12 px) blob. Recovering ALL non-grayscale ink in the grayscale crop finds 42 dots; 39 pair to a single clean canonical dot on the globe directly, and 2 more (maroon 127,0,0 and dark-maroon 63,0,0, which collide with the globe's natural dark-red speckle) are recovered by predicting their globe position through the fit and finding the lone canonical dot within ~15 px of the prediction. The user then flagged the top-edge dot c_3f00ff (63,0,255) as an incorrect pick and it was removed, leaving 40 pairs. objective=landmarks means NO silhouette fit (the drift-prone stage), just thin-plate interpolation. master_shape is the crop's native (h,w)=(4958,6134); the source will be the dot-free crop. This record only PLACES the tile; no geometry is extracted yet. Exclusion of the out-of-scope area is done by the CROP itself (the user cropped the parent down to the northern Old World rectangle) rather than by an alpha mask, so the whole opaque frame is intentionally in-scope and 'warp alpha>0 only' warps the full rectangle by design. ONE dot dropped as globe-side unrecoverable: muddy-teal (63,127,127) — no canonical dot found near its predicted globe position (the user did not place it on the globe). The two dark-red dots that first looked unrecoverable (maroon and dark-maroon) were recovered by the fit-predicted windowed search described above. NOTE: unlike the tww3 parchment tiles this is a grayscale RELIEF map, not a drawn-boundary network, so its downstream consumption is undecided (placement-only for now). 2026-09-06: four more pairs added directly to 'old_world_z10 - dots_5.png'/'terraqueous_globe_reprojected - dots_5.png' (the two working dot-marked files that combine into the tools/derived preview, not committed) — c_ffbf7f and c_007fbf are brand-new landmarks near the top-edge/north-coast gap, c_3f00ff is the same top-edge dot re-added at a corrected position (its earlier pick was flagged bad and removed), and c_7fbfff was added alongside it to break an initial same-colour collision (the user first re-placed c_3f00ff twice by mistake, then repainted one of the pair to a distinct colour) — all four paired unambiguously by exact colour match, no windowed-search recovery needed. A fifth pair, c_bfbf00, was added right after. 45 pairs total.",
   "_comment_lattice": "16x16 over the crop (~380 master px horizontal spacing, ~310 vertical). With 39 landmarks a coarse 6x6=36-point lattice UNDER-samples the landmark field and smooths it away (measured: the resampled warp drifted up to 33 px from the dots; 12x12 cut that to 11); 16x16=256 points sample the 39-landmark thin-plate densely enough that the committed control_points reproduce every dot to mean 2 / max 5 px (the 5 px is the lone top-edge dot in the steep-gradient zone; the rest sub-pixel). The 39 dots blanket the crop interior AND its coastal/edge extremes; the lattice carries the affine trend into the crop corners, where it extrapolates beyond the dot hull. The far-south dots carry the largest non-affine curvature, which the thin-plate absorbs exactly at each dot. NOTE the northern Norsca coast is still dot-sparse: after c_3f00ff was removed the top edge is anchored only by c_3f00bf on the west shore, so the north coast is loose against the mask pending more northern dots.",
   "lattice": {
     "nx": 16,
     "ny": 16,
     "inset": 0.03
   },
-  "_comment_landmarks": "source px = dot centroid in the crop's own 6134x4958 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by exact 5-level palette colour; name is the dot's 6-digit hex (c_RRGGBB). Each is a single compact 4x4 component in both frames. 40 pairs (38 direct + 2 dark-red recovered via fit-predicted windowed search); muddy-teal (63,127,127) excluded as not-on-globe, and c_3f00ff removed as a user-flagged bad pick. These ARE the fit (not a held-out check) for objective=landmarks.",
+  "_comment_landmarks": "source px = dot centroid in the crop's own 6134x4958 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). Paired by exact 5-level palette colour; name is the dot's 6-digit hex (c_RRGGBB). Each is a single compact 4x4 component in both frames. 45 pairs (38 direct + 2 dark-red recovered via fit-predicted windowed search + 5 added 2026-09-06 to firm up the north coast: c_ffbf7f, c_7fbfff, c_3f00ff (corrected re-pick), c_007fbf, c_bfbf00); muddy-teal (63,127,127) excluded as not-on-globe. These ARE the fit (not a held-out check) for objective=landmarks.",
   "landmarks": [
     {
       "name": "c_3f00bf",
@@ -453,6 +454,61 @@
       "canvas": [
         3627.5,
         990.5
+      ]
+    },
+    {
+      "name": "c_ffbf7f",
+      "source": [
+        581.5,
+        1565.5
+      ],
+      "canvas": [
+        3867.5,
+        566.5
+      ]
+    },
+    {
+      "name": "c_7fbfff",
+      "source": [
+        5382.5,
+        2085.5
+      ],
+      "canvas": [
+        5030.5,
+        962.5
+      ]
+    },
+    {
+      "name": "c_3f00ff",
+      "source": [
+        5589.5,
+        3359.5
+      ],
+      "canvas": [
+        5095.5,
+        1275.5
+      ]
+    },
+    {
+      "name": "c_007fbf",
+      "source": [
+        5457.5,
+        3804.5
+      ],
+      "canvas": [
+        5023.5,
+        1338.5
+      ]
+    },
+    {
+      "name": "c_bfbf00",
+      "source": [
+        2666.5,
+        429.5
+      ],
+      "canvas": [
+        4472.5,
+        343.5
       ]
     }
   ],

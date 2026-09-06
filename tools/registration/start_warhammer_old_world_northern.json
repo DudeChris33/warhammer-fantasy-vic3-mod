@@ -6,2829 +6,3324 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL — PLACEMENT ONLY, downstream consumption undecided. Northern Old World crop of the Games Workshop 'Warhammer: The Old World' interactive map (start_warhammer_old_world_z10.png, stitched z10 relief tiles), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed start_warhammer_old_world_northern (objective=landmarks; 40 user-drawn paired anchor dots, 5-level marker palette; 16x16 lattice; 38 read direct off terraqueous_globe_reprojected.png + 2 dark-red dots recovered by fit-predicted windowed search; muddy-teal 63,127,127 dropped as not-on-globe, and c_3f00ff removed as a user-flagged bad pick). Unlike the tww3 Old World mod parchment tiles this is a GRAYSCALE RELIEF tile with NO drawn boundary network, so it is NOT an ink_bridged boundary source; its role/precedence here are provisional lows pending the user's decision on how (or whether) it is consumed. Out-of-scope area is excluded by the crop itself (not by alpha), so the full opaque rectangle is in-scope by design. Contributes NO coastline (the mask remains the sole authority, user decision #1). PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 40, \"method\": \"thin-plate interpolation of landmarks (no silhouette objective)\"}",
+  "notes": "PROVISIONAL — PLACEMENT ONLY, downstream consumption undecided. Northern Old World crop of the Games Workshop 'Warhammer: The Old World' interactive map (start_warhammer_old_world_z10.png, stitched z10 relief tiles), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed start_warhammer_old_world_northern (objective=landmarks; 40 user-drawn paired anchor dots, 5-level marker palette; 16x16 lattice; 38 read direct off terraqueous_globe_reprojected.png + 2 dark-red dots recovered by fit-predicted windowed search; muddy-teal 63,127,127 dropped as not-on-globe, and c_3f00ff removed as a user-flagged bad pick). Unlike the tww3 Old World mod parchment tiles this is a GRAYSCALE RELIEF tile with NO drawn boundary network, so it is NOT an ink_bridged boundary source; its role/precedence here are provisional lows pending the user's decision on how (or whether) it is consumed. Out-of-scope area is excluded by the crop itself (not by alpha), so the full opaque rectangle is in-scope by design. Contributes NO coastline (the mask remains the sole authority, user decision #1). PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 45, \"lattice_hull_box\": [28.5, 365.5, 5743.5, 4810.5], \"method\": \"thin-plate interpolation of landmarks, lattice bounded to hull+pad\"}",
   "source": "start_warhammer_old_world_northern.png",
   "projection": "control_point_warp",
   "footprint": [
-    3466.5160949615047,
-    84.61515545175385,
-    5351.9377045026085,
-    1656.7556595421274
+    3420.964424663333,
+    146.80810665828054,
+    5280.320324264142,
+    1668.6323657670212
   ],
   "control_points": [
     {
       "source": [
-        184.0,
-        148.7
+        1045.5,
+        708.5
       ],
       "canvas": [
-        3758.0,
-        116.6
+        3952.5,
+        319.5
+      ],
+      "note": "c_3f00bf"
+    },
+    {
+      "source": [
+        3175.5,
+        738.5
+      ],
+      "canvas": [
+        4524.5,
+        435.5
+      ],
+      "note": "c_ffbf00"
+    },
+    {
+      "source": [
+        2612.5,
+        837.5
+      ],
+      "canvas": [
+        4354.5,
+        436.5
+      ],
+      "note": "c_ffff00"
+    },
+    {
+      "source": [
+        1913.5,
+        1075.5
+      ],
+      "canvas": [
+        4141.5,
+        488.5
+      ],
+      "note": "c_7fff00"
+    },
+    {
+      "source": [
+        2176.5,
+        1068.5
+      ],
+      "canvas": [
+        4213.5,
+        494.5
+      ],
+      "note": "c_bfff00"
+    },
+    {
+      "source": [
+        2345.5,
+        1338.5
+      ],
+      "canvas": [
+        4249.5,
+        584.5
+      ],
+      "note": "c_7f007f"
+    },
+    {
+      "source": [
+        2033.5,
+        1547.5
+      ],
+      "canvas": [
+        4150.5,
+        635.5
+      ],
+      "note": "c_ff007f"
+    },
+    {
+      "source": [
+        2382.5,
+        1513.5
+      ],
+      "canvas": [
+        4260.5,
+        647.5
+      ],
+      "note": "c_bf007f"
+    },
+    {
+      "source": [
+        4133.5,
+        1305.5
+      ],
+      "canvas": [
+        4742.5,
+        657.5
+      ],
+      "note": "c_bfbf00"
+    },
+    {
+      "source": [
+        1474.5,
+        1795.5
+      ],
+      "canvas": [
+        3986.5,
+        676.5
+      ],
+      "note": "c_7f00bf"
+    },
+    {
+      "source": [
+        1396.5,
+        1883.5
+      ],
+      "canvas": [
+        3950.5,
+        710.5
+      ],
+      "note": "c_bf00bf"
+    },
+    {
+      "source": [
+        522.5,
+        2104.5
+      ],
+      "canvas": [
+        3703.5,
+        729.5
+      ],
+      "note": "c_3fff00"
+    },
+    {
+      "source": [
+        1013.5,
+        2146.5
+      ],
+      "canvas": [
+        3836.5,
+        763.5
+      ],
+      "note": "c_3f007f"
+    },
+    {
+      "source": [
+        2780.5,
+        1923.5
+      ],
+      "canvas": [
+        4334.5,
+        779.5
+      ],
+      "note": "c_ff00ff"
+    },
+    {
+      "source": [
+        1580.5,
+        2165.5
+      ],
+      "canvas": [
+        3997.5,
+        791.5
+      ],
+      "note": "c_ff00bf"
+    },
+    {
+      "source": [
+        4879.5,
+        1720.5
+      ],
+      "canvas": [
+        4926.5,
+        817.5
+      ],
+      "note": "c_bf0000"
+    },
+    {
+      "source": [
+        1639.5,
+        2327.5
+      ],
+      "canvas": [
+        4000.5,
+        838.5
+      ],
+      "note": "c_7f00ff"
+    },
+    {
+      "source": [
+        2719.5,
+        2281.5
+      ],
+      "canvas": [
+        4311.5,
+        882.5
+      ],
+      "note": "c_ff7f7f"
+    },
+    {
+      "source": [
+        904.5,
+        2595.5
+      ],
+      "canvas": [
+        3795.5,
+        883.5
+      ],
+      "note": "c_3fbf00"
+    },
+    {
+      "source": [
+        2166.5,
+        2429.5
+      ],
+      "canvas": [
+        4145.5,
+        898.5
+      ],
+      "note": "c_bf00ff"
+    },
+    {
+      "source": [
+        1000.5,
+        2825.5
+      ],
+      "canvas": [
+        3803.5,
+        944.5
+      ],
+      "note": "c_3f7f00"
+    },
+    {
+      "source": [
+        2225.5,
+        2755.5
+      ],
+      "canvas": [
+        4148.5,
+        987.5
+      ],
+      "note": "c_ffff7f"
+    },
+    {
+      "source": [
+        3043.5,
+        2663.5
+      ],
+      "canvas": [
+        4390.5,
+        995.5
+      ],
+      "note": "c_ffbf7f"
+    },
+    {
+      "source": [
+        884.5,
+        3098.5
+      ],
+      "canvas": [
+        3759.5,
+        1012.5
+      ],
+      "note": "c_3f3f00"
+    },
+    {
+      "source": [
+        1606.5,
+        3077.5
+      ],
+      "canvas": [
+        3959.5,
+        1041.5
+      ],
+      "note": "c_3f003f"
+    },
+    {
+      "source": [
+        1523.5,
+        3520.5
+      ],
+      "canvas": [
+        3919.5,
+        1146.5
+      ],
+      "note": "c_ff7fff"
+    },
+    {
+      "source": [
+        5679.5,
+        2742.5
+      ],
+      "canvas": [
+        5151.5,
+        1157.5
+      ],
+      "note": "c_ff0000"
+    },
+    {
+      "source": [
+        92.5,
+        3816.5
+      ],
+      "canvas": [
+        3508.5,
+        1167.5
+      ],
+      "note": "c_ffbfff"
+    },
+    {
+      "source": [
+        2608.5,
+        3490.5
+      ],
+      "canvas": [
+        4217.5,
+        1186.5
+      ],
+      "note": "c_ff7fbf"
+    },
+    {
+      "source": [
+        2146.5,
+        3729.5
+      ],
+      "canvas": [
+        4085.5,
+        1224.5
+      ],
+      "note": "c_ffbfbf"
+    },
+    {
+      "source": [
+        2270.5,
+        3948.5
+      ],
+      "canvas": [
+        4110.5,
+        1279.5
+      ],
+      "note": "c_3fff3f"
+    },
+    {
+      "source": [
+        1309.5,
+        4291.5
+      ],
+      "canvas": [
+        3815.5,
+        1306.5
+      ],
+      "note": "c_3f7f3f"
+    },
+    {
+      "source": [
+        1600.5,
+        4363.5
+      ],
+      "canvas": [
+        3901.5,
+        1350.5
+      ],
+      "note": "c_ffffbf"
+    },
+    {
+      "source": [
+        1809.5,
+        4602.5
+      ],
+      "canvas": [
+        3978.5,
+        1406.5
+      ],
+      "note": "c_3fbf3f"
+    },
+    {
+      "source": [
+        3314.5,
+        4455.5
+      ],
+      "canvas": [
+        4502.5,
+        1441.5
+      ],
+      "note": "c_7fbf00"
+    },
+    {
+      "source": [
+        5414.5,
+        4272.5
+      ],
+      "canvas": [
+        4947.5,
+        1468.5
+      ],
+      "note": "c_7f7f00"
+    },
+    {
+      "source": [
+        3665.5,
+        4657.5
+      ],
+      "canvas": [
+        4577.5,
+        1497.5
+      ],
+      "note": "c_bf7f00"
+    },
+    {
+      "source": [
+        3808.5,
+        4746.5
+      ],
+      "canvas": [
+        4614.5,
+        1534.5
+      ],
+      "note": "c_ff7f00"
+    },
+    {
+      "source": [
+        4011.5,
+        936.5
+      ],
+      "canvas": [
+        4733.5,
+        545.5
+      ],
+      "note": "c_7f0000"
+    },
+    {
+      "source": [
+        406.5,
+        3069.5
+      ],
+      "canvas": [
+        3627.5,
+        990.5
+      ],
+      "note": "c_3f0000"
+    },
+    {
+      "source": [
+        581.5,
+        1565.5
+      ],
+      "canvas": [
+        3867.5,
+        566.5
+      ],
+      "note": "c_ffbf7f"
+    },
+    {
+      "source": [
+        5382.5,
+        2085.5
+      ],
+      "canvas": [
+        5030.5,
+        962.5
+      ],
+      "note": "c_7fbfff"
+    },
+    {
+      "source": [
+        5589.5,
+        3359.5
+      ],
+      "canvas": [
+        5095.5,
+        1275.5
+      ],
+      "note": "c_3f00ff"
+    },
+    {
+      "source": [
+        5457.5,
+        3804.5
+      ],
+      "canvas": [
+        5023.5,
+        1338.5
+      ],
+      "note": "c_007fbf"
+    },
+    {
+      "source": [
+        2666.5,
+        429.5
+      ],
+      "canvas": [
+        4472.5,
+        343.5
+      ],
+      "note": "c_bfbf00"
+    },
+    {
+      "source": [
+        28.5,
+        365.5
+      ],
+      "canvas": [
+        3790.5,
+        178.8
       ],
       "note": "lattice 0"
     },
     {
       "source": [
-        568.4,
-        148.7
+        409.5,
+        365.5
       ],
       "canvas": [
-        3864.0,
-        130.9
+        3865.7,
+        192.9
       ],
       "note": "lattice 1"
     },
     {
       "source": [
-        952.8,
-        148.7
+        790.5,
+        365.5
       ],
       "canvas": [
-        3967.9,
-        147.5
+        3934.0,
+        209.0
       ],
       "note": "lattice 2"
     },
     {
       "source": [
-        1337.2,
-        148.7
+        1171.5,
+        365.5
       ],
       "canvas": [
-        4068.0,
-        167.4
+        4014.5,
+        230.9
       ],
       "note": "lattice 3"
     },
     {
       "source": [
-        1721.6,
-        148.7
+        1552.5,
+        365.5
       ],
       "canvas": [
-        4166.5,
-        188.6
+        4120.3,
+        258.3
       ],
       "note": "lattice 4"
     },
     {
       "source": [
-        2106.0,
-        148.7
+        1933.5,
+        365.5
       ],
       "canvas": [
-        4267.3,
-        208.0
+        4241.3,
+        285.2
       ],
       "note": "lattice 5"
     },
     {
       "source": [
-        2490.4,
-        148.7
+        2314.5,
+        365.5
       ],
       "canvas": [
-        4371.9,
-        226.1
+        4370.0,
+        308.5
       ],
       "note": "lattice 6"
     },
     {
       "source": [
-        2874.8,
-        148.7
+        2695.5,
+        365.5
       ],
       "canvas": [
-        4479.0,
-        245.7
+        4492.7,
+        328.9
       ],
       "note": "lattice 7"
     },
     {
       "source": [
-        3259.2,
-        148.7
+        3076.5,
+        365.5
       ],
       "canvas": [
-        4585.3,
-        268.2
+        4575.6,
+        340.3
       ],
       "note": "lattice 8"
     },
     {
       "source": [
-        3643.6,
-        148.7
+        3457.5,
+        365.5
       ],
       "canvas": [
-        4688.8,
-        292.8
+        4660.7,
+        357.5
       ],
       "note": "lattice 9"
     },
     {
       "source": [
-        4028.0,
-        148.7
+        3838.5,
+        365.5
       ],
       "canvas": [
-        4790.7,
-        318.1
+        4754.6,
+        380.8
       ],
       "note": "lattice 10"
     },
     {
       "source": [
-        4412.4,
-        148.7
+        4219.5,
+        365.5
       ],
       "canvas": [
-        4892.9,
-        343.4
+        4852.4,
+        406.8
       ],
       "note": "lattice 11"
     },
     {
       "source": [
-        4796.8,
-        148.7
+        4600.5,
+        365.5
       ],
       "canvas": [
-        4996.9,
-        368.6
+        4951.3,
+        434.1
       ],
       "note": "lattice 12"
     },
     {
       "source": [
-        5181.2,
-        148.7
+        4981.5,
+        365.5
       ],
       "canvas": [
-        5103.0,
-        394.1
+        5049.8,
+        462.3
       ],
       "note": "lattice 13"
     },
     {
       "source": [
-        5565.6,
-        148.7
+        5362.5,
+        365.5
       ],
       "canvas": [
-        5211.0,
-        419.6
+        5148.5,
+        491.5
       ],
       "note": "lattice 14"
     },
     {
       "source": [
-        5950.0,
-        148.7
+        5743.5,
+        365.5
       ],
       "canvas": [
-        5319.9,
-        444.8
+        5248.3,
+        521.1
       ],
       "note": "lattice 15"
     },
     {
       "source": [
-        184.0,
-        459.4
+        28.5,
+        661.8
       ],
       "canvas": [
-        3735.3,
-        209.5
+        3777.9,
+        265.3
       ],
       "note": "lattice 16"
     },
     {
       "source": [
-        568.4,
-        459.4
+        409.5,
+        661.8
       ],
       "canvas": [
-        3841.9,
-        223.4
+        3854.4,
+        278.7
       ],
       "note": "lattice 17"
     },
     {
       "source": [
-        952.8,
-        459.4
+        790.5,
+        661.8
       ],
       "canvas": [
-        3946.6,
-        239.5
+        3914.4,
+        293.4
       ],
       "note": "lattice 18"
     },
     {
       "source": [
-        1337.2,
-        459.4
+        1171.5,
+        661.8
       ],
       "canvas": [
-        4045.4,
-        260.8
+        3982.7,
+        314.1
       ],
       "note": "lattice 19"
     },
     {
       "source": [
-        1721.6,
-        459.4
+        1552.5,
+        661.8
       ],
       "canvas": [
-        4141.9,
-        283.8
+        4082.8,
+        342.4
       ],
       "note": "lattice 20"
     },
     {
       "source": [
-        2106.0,
-        459.4
+        1933.5,
+        661.8
       ],
       "canvas": [
-        4242.0,
-        302.5
+        4194.7,
+        367.5
       ],
       "note": "lattice 21"
     },
     {
       "source": [
-        2490.4,
-        459.4
+        2314.5,
+        661.8
       ],
       "canvas": [
-        4348.0,
-        318.0
+        4309.7,
+        383.8
       ],
       "note": "lattice 22"
     },
     {
       "source": [
-        2874.8,
-        459.4
+        2695.5,
+        661.8
       ],
       "canvas": [
-        4457.7,
-        336.1
+        4419.3,
+        397.1
       ],
       "note": "lattice 23"
     },
     {
       "source": [
-        3259.2,
-        459.4
+        3076.5,
+        661.8
       ],
       "canvas": [
-        4565.7,
-        358.3
+        4514.6,
+        411.6
       ],
       "note": "lattice 24"
     },
     {
       "source": [
-        3643.6,
-        459.4
+        3457.5,
+        661.8
       ],
       "canvas": [
-        4668.8,
-        382.9
+        4611.9,
+        432.5
       ],
       "note": "lattice 25"
     },
     {
       "source": [
-        4028.0,
-        459.4
+        3838.5,
+        661.8
       ],
       "canvas": [
-        4770.0,
-        408.0
+        4714.9,
+        458.3
       ],
       "note": "lattice 26"
     },
     {
       "source": [
-        4412.4,
-        459.4
+        4219.5,
+        661.8
       ],
       "canvas": [
-        4872.0,
-        432.5
+        4818.8,
+        485.3
       ],
       "note": "lattice 27"
     },
     {
       "source": [
-        4796.8,
-        459.4
+        4600.5,
+        661.8
       ],
       "canvas": [
-        4976.3,
-        457.1
+        4921.5,
+        512.8
       ],
       "note": "lattice 28"
     },
     {
       "source": [
-        5181.2,
-        459.4
+        4981.5,
+        661.8
       ],
       "canvas": [
-        5083.4,
-        482.4
+        5021.8,
+        541.2
       ],
       "note": "lattice 29"
     },
     {
       "source": [
-        5565.6,
-        459.4
+        5362.5,
+        661.8
       ],
       "canvas": [
-        5192.9,
-        508.0
+        5121.1,
+        570.9
       ],
       "note": "lattice 30"
     },
     {
       "source": [
-        5950.0,
-        459.4
+        5743.5,
+        661.8
       ],
       "canvas": [
-        5303.3,
-        533.3
+        5221.9,
+        601.1
       ],
       "note": "lattice 31"
     },
     {
       "source": [
-        184.0,
-        770.1
+        28.5,
+        958.2
       ],
       "canvas": [
-        3711.1,
-        304.2
+        3767.3,
+        354.3
       ],
       "note": "lattice 32"
     },
     {
       "source": [
-        568.4,
-        770.1
+        409.5,
+        958.2
       ],
       "canvas": [
-        3817.5,
-        318.3
+        3852.9,
+        368.2
       ],
       "note": "lattice 33"
     },
     {
       "source": [
-        952.8,
-        770.1
+        790.5,
+        958.2
       ],
       "canvas": [
-        3922.7,
-        334.1
+        3913.6,
+        383.3
       ],
       "note": "lattice 34"
     },
     {
       "source": [
-        1337.2,
-        770.1
+        1171.5,
+        958.2
       ],
       "canvas": [
-        4021.1,
-        356.4
+        3972.2,
+        403.2
       ],
       "note": "lattice 35"
     },
     {
       "source": [
-        1721.6,
-        770.1
+        1552.5,
+        958.2
       ],
       "canvas": [
-        4116.3,
-        381.5
+        4057.4,
+        429.7
       ],
       "note": "lattice 36"
     },
     {
       "source": [
-        2106.0,
-        770.1
+        1933.5,
+        958.2
       ],
       "canvas": [
-        4216.3,
-        399.4
+        4157.4,
+        454.3
       ],
       "note": "lattice 37"
     },
     {
       "source": [
-        2490.4,
-        770.1
+        2314.5,
+        958.2
       ],
       "canvas": [
-        4324.0,
-        411.4
+        4260.9,
+        464.5
       ],
       "note": "lattice 38"
     },
     {
       "source": [
-        2874.8,
-        770.1
+        2695.5,
+        958.2
       ],
       "canvas": [
-        4435.9,
-        428.5
+        4360.6,
+        473.8
       ],
       "note": "lattice 39"
     },
     {
       "source": [
-        3259.2,
-        770.1
+        3076.5,
+        958.2
       ],
       "canvas": [
-        4545.3,
-        449.9
+        4466.5,
+        491.1
       ],
       "note": "lattice 40"
     },
     {
       "source": [
-        3643.6,
-        770.1
+        3457.5,
+        958.2
       ],
       "canvas": [
-        4647.9,
-        473.9
+        4573.0,
+        513.3
       ],
       "note": "lattice 41"
     },
     {
       "source": [
-        4028.0,
-        770.1
+        3838.5,
+        958.2
       ],
       "canvas": [
-        4749.1,
-        498.3
+        4682.2,
+        539.4
       ],
       "note": "lattice 42"
     },
     {
       "source": [
-        4412.4,
-        770.1
+        4219.5,
+        958.2
       ],
       "canvas": [
-        4851.1,
-        521.5
+        4790.8,
+        566.1
       ],
       "note": "lattice 43"
     },
     {
       "source": [
-        4796.8,
-        770.1
+        4600.5,
+        958.2
       ],
       "canvas": [
-        4955.8,
-        545.3
+        4896.3,
+        592.4
       ],
       "note": "lattice 44"
     },
     {
       "source": [
-        5181.2,
-        770.1
+        4981.5,
+        958.2
       ],
       "canvas": [
-        5064.3,
-        570.5
+        4997.1,
+        620.4
       ],
       "note": "lattice 45"
     },
     {
       "source": [
-        5565.6,
-        770.1
+        5362.5,
+        958.2
       ],
       "canvas": [
-        5175.7,
-        596.4
+        5095.9,
+        650.7
       ],
       "note": "lattice 46"
     },
     {
       "source": [
-        5950.0,
-        770.1
+        5743.5,
+        958.2
       ],
       "canvas": [
-        5287.9,
-        621.9
+        5197.3,
+        681.6
       ],
       "note": "lattice 47"
     },
     {
       "source": [
-        184.0,
-        1080.8
+        28.5,
+        1254.5
       ],
       "canvas": [
-        3685.6,
-        400.4
+        3750.0,
+        445.2
       ],
       "note": "lattice 48"
     },
     {
       "source": [
-        568.4,
-        1080.8
+        409.5,
+        1254.5
       ],
       "canvas": [
-        3790.7,
-        415.7
+        3851.4,
+        460.6
       ],
       "note": "lattice 49"
     },
     {
       "source": [
-        952.8,
-        1080.8
+        790.5,
+        1254.5
       ],
       "canvas": [
-        3895.0,
-        432.4
+        3917.4,
+        477.0
       ],
       "note": "lattice 50"
     },
     {
       "source": [
-        1337.2,
-        1080.8
+        1171.5,
+        1254.5
       ],
       "canvas": [
-        3995.7,
-        453.0
+        3966.5,
+        495.6
       ],
       "note": "lattice 51"
     },
     {
       "source": [
-        1721.6,
-        1080.8
+        1552.5,
+        1254.5
       ],
       "canvas": [
-        4092.4,
-        478.3
+        4041.1,
+        517.2
       ],
       "note": "lattice 52"
     },
     {
       "source": [
-        2106.0,
-        1080.8
+        1933.5,
+        1254.5
       ],
       "canvas": [
-        4193.1,
-        496.5
+        4135.4,
+        541.6
       ],
       "note": "lattice 53"
     },
     {
       "source": [
-        2490.4,
-        1080.8
+        2314.5,
+        1254.5
       ],
       "canvas": [
-        4303.1,
-        507.7
+        4241.9,
+        555.6
       ],
       "note": "lattice 54"
     },
     {
       "source": [
-        2874.8,
-        1080.8
+        2695.5,
+        1254.5
       ],
       "canvas": [
-        4414.5,
-        524.3
+        4341.4,
+        567.4
       ],
       "note": "lattice 55"
     },
     {
       "source": [
-        3259.2,
-        1080.8
+        3076.5,
+        1254.5
       ],
       "canvas": [
-        4522.2,
-        543.6
+        4440.9,
+        580.8
       ],
       "note": "lattice 56"
     },
     {
       "source": [
-        3643.6,
-        1080.8
+        3457.5,
+        1254.5
       ],
       "canvas": [
-        4626.2,
-        565.3
+        4547.9,
+        599.9
       ],
       "note": "lattice 57"
     },
     {
       "source": [
-        4028.0,
-        1080.8
+        3838.5,
+        1254.5
       ],
       "canvas": [
-        4728.4,
-        587.8
+        4659.2,
+        623.7
       ],
       "note": "lattice 58"
     },
     {
       "source": [
-        4412.4,
-        1080.8
+        4219.5,
+        1254.5
       ],
       "canvas": [
-        4830.7,
-        609.6
+        4770.2,
+        648.6
       ],
       "note": "lattice 59"
     },
     {
       "source": [
-        4796.8,
-        1080.8
+        4600.5,
+        1254.5
       ],
       "canvas": [
-        4935.8,
-        632.8
+        4876.6,
+        672.6
       ],
       "note": "lattice 60"
     },
     {
       "source": [
-        5181.2,
-        1080.8
+        4981.5,
+        1254.5
       ],
       "canvas": [
-        5046.3,
-        658.3
+        4976.3,
+        699.9
       ],
       "note": "lattice 61"
     },
     {
       "source": [
-        5565.6,
-        1080.8
+        5362.5,
+        1254.5
       ],
       "canvas": [
-        5160.2,
-        684.8
+        5073.0,
+        731.1
       ],
       "note": "lattice 62"
     },
     {
       "source": [
-        5950.0,
-        1080.8
+        5743.5,
+        1254.5
       ],
       "canvas": [
-        5274.2,
-        710.5
+        5174.9,
+        762.8
       ],
       "note": "lattice 63"
     },
     {
       "source": [
-        184.0,
-        1391.5
+        28.5,
+        1550.8
       ],
       "canvas": [
-        3660.2,
-        497.2
+        3713.5,
+        537.0
       ],
       "note": "lattice 64"
     },
     {
       "source": [
-        568.4,
-        1391.5
+        409.5,
+        1550.8
       ],
       "canvas": [
-        3763.6,
-        514.0
+        3825.3,
+        553.9
       ],
       "note": "lattice 65"
     },
     {
       "source": [
-        952.8,
-        1391.5
+        790.5,
+        1550.8
       ],
       "canvas": [
-        3867.3,
-        531.6
+        3897.2,
+        572.1
       ],
       "note": "lattice 66"
     },
     {
       "source": [
-        1337.2,
-        1391.5
+        1171.5,
+        1550.8
       ],
       "canvas": [
-        3972.6,
-        548.1
+        3944.5,
+        590.3
       ],
       "note": "lattice 67"
     },
     {
       "source": [
-        1721.6,
-        1391.5
+        1552.5,
+        1550.8
       ],
       "canvas": [
-        4074.6,
-        568.8
+        4025.6,
+        603.5
       ],
       "note": "lattice 68"
     },
     {
       "source": [
-        2106.0,
-        1391.5
+        1933.5,
+        1550.8
       ],
       "canvas": [
-        4177.6,
-        592.0
+        4122.2,
+        629.1
       ],
       "note": "lattice 69"
     },
     {
       "source": [
-        2490.4,
-        1391.5
+        2314.5,
+        1550.8
       ],
       "canvas": [
-        4291.8,
-        609.6
+        4239.0,
+        655.9
       ],
       "note": "lattice 70"
     },
     {
       "source": [
-        2874.8,
-        1391.5
+        2695.5,
+        1550.8
       ],
       "canvas": [
-        4394.9,
-        622.4
+        4332.6,
+        665.1
       ],
       "note": "lattice 71"
     },
     {
       "source": [
-        3259.2,
-        1391.5
+        3076.5,
+        1550.8
       ],
       "canvas": [
-        4499.9,
-        637.7
+        4426.5,
+        673.5
       ],
       "note": "lattice 72"
     },
     {
       "source": [
-        3643.6,
-        1391.5
+        3457.5,
+        1550.8
       ],
       "canvas": [
-        4605.4,
-        656.3
+        4532.5,
+        688.8
       ],
       "note": "lattice 73"
     },
     {
       "source": [
-        4028.0,
-        1391.5
+        3838.5,
+        1550.8
       ],
       "canvas": [
-        4709.2,
-        676.4
+        4643.7,
+        708.8
       ],
       "note": "lattice 74"
     },
     {
       "source": [
-        4412.4,
-        1391.5
+        4219.5,
+        1550.8
       ],
       "canvas": [
-        4812.0,
-        697.1
+        4754.8,
+        730.5
       ],
       "note": "lattice 75"
     },
     {
       "source": [
-        4796.8,
-        1391.5
+        4600.5,
+        1550.8
       ],
       "canvas": [
-        4917.5,
-        719.8
+        4861.5,
+        752.7
       ],
       "note": "lattice 76"
     },
     {
       "source": [
-        5181.2,
-        1391.5
+        4981.5,
+        1550.8
       ],
       "canvas": [
-        5030.5,
-        745.9
+        4959.3,
+        779.5
       ],
       "note": "lattice 77"
     },
     {
       "source": [
-        5565.6,
-        1391.5
+        5362.5,
+        1550.8
       ],
       "canvas": [
-        5147.4,
-        773.4
+        5051.8,
+        812.2
       ],
       "note": "lattice 78"
     },
     {
       "source": [
-        5950.0,
-        1391.5
+        5743.5,
+        1550.8
       ],
       "canvas": [
-        5262.8,
-        799.2
+        5155.6,
+        844.6
       ],
       "note": "lattice 79"
     },
     {
       "source": [
-        184.0,
-        1702.2
+        28.5,
+        1847.2
       ],
       "canvas": [
-        3636.8,
-        593.0
+        3655.8,
+        628.0
       ],
       "note": "lattice 80"
     },
     {
       "source": [
-        568.4,
-        1702.2
+        409.5,
+        1847.2
       ],
       "canvas": [
-        3739.1,
-        611.0
+        3747.6,
+        646.3
       ],
       "note": "lattice 81"
     },
     {
       "source": [
-        952.8,
-        1702.2
+        790.5,
+        1847.2
       ],
       "canvas": [
-        3841.7,
-        630.5
+        3832.6,
+        665.1
       ],
       "note": "lattice 82"
     },
     {
       "source": [
-        1337.2,
-        1702.2
+        1171.5,
+        1847.2
       ],
       "canvas": [
-        3949.6,
-        646.0
+        3903.5,
+        688.0
       ],
       "note": "lattice 83"
     },
     {
       "source": [
-        1721.6,
-        1702.2
+        1552.5,
+        1847.2
       ],
       "canvas": [
-        4062.0,
-        658.4
+        4004.6,
+        695.6
       ],
       "note": "lattice 84"
     },
     {
       "source": [
-        2106.0,
-        1702.2
+        1933.5,
+        1847.2
       ],
       "canvas": [
-        4167.2,
-        687.1
+        4111.9,
+        716.9
       ],
       "note": "lattice 85"
     },
     {
       "source": [
-        2490.4,
-        1702.2
+        2314.5,
+        1847.2
       ],
       "canvas": [
-        4277.7,
-        708.7
+        4221.3,
+        743.3
       ],
       "note": "lattice 86"
     },
     {
       "source": [
-        2874.8,
-        1702.2
+        2695.5,
+        1847.2
       ],
       "canvas": [
-        4373.7,
-        717.4
+        4317.3,
+        755.4
       ],
       "note": "lattice 87"
     },
     {
       "source": [
-        3259.2,
-        1702.2
+        3076.5,
+        1847.2
       ],
       "canvas": [
-        4480.3,
-        730.5
+        4415.9,
+        764.1
       ],
       "note": "lattice 88"
     },
     {
       "source": [
-        3643.6,
-        1702.2
+        3457.5,
+        1847.2
       ],
       "canvas": [
-        4587.9,
-        746.8
+        4523.0,
+        776.9
       ],
       "note": "lattice 89"
     },
     {
       "source": [
-        4028.0,
-        1702.2
+        3838.5,
+        1847.2
       ],
       "canvas": [
-        4693.3,
-        765.1
+        4633.5,
+        793.3
       ],
       "note": "lattice 90"
     },
     {
       "source": [
-        4412.4,
-        1702.2
+        4219.5,
+        1847.2
       ],
       "canvas": [
-        4797.3,
-        784.9
+        4743.3,
+        812.3
       ],
       "note": "lattice 91"
     },
     {
       "source": [
-        4796.8,
-        1702.2
+        4600.5,
+        1847.2
       ],
       "canvas": [
-        4903.3,
-        807.0
+        4848.7,
+        833.7
       ],
       "note": "lattice 92"
     },
     {
       "source": [
-        5181.2,
-        1702.2
+        4981.5,
+        1847.2
       ],
       "canvas": [
-        5019.1,
-        834.1
+        4943.7,
+        860.9
       ],
       "note": "lattice 93"
     },
     {
       "source": [
-        5565.6,
-        1702.2
+        5362.5,
+        1847.2
       ],
       "canvas": [
-        5138.3,
-        862.3
+        5033.1,
+        894.5
       ],
       "note": "lattice 94"
     },
     {
       "source": [
-        5950.0,
-        1702.2
+        5743.5,
+        1847.2
       ],
       "canvas": [
-        5254.0,
-        887.9
+        5142.5,
+        926.9
       ],
       "note": "lattice 95"
     },
     {
       "source": [
-        184.0,
-        2012.9
+        28.5,
+        2143.5
       ],
       "canvas": [
-        3617.2,
-        686.8
+        3598.9,
+        717.1
       ],
       "note": "lattice 96"
     },
     {
       "source": [
-        568.4,
-        2012.9
+        409.5,
+        2143.5
       ],
       "canvas": [
-        3720.3,
-        704.6
+        3672.9,
+        735.7
       ],
       "note": "lattice 97"
     },
     {
       "source": [
-        952.8,
-        2012.9
+        790.5,
+        2143.5
       ],
       "canvas": [
-        3824.3,
-        723.2
+        3776.0,
+        752.4
       ],
       "note": "lattice 98"
     },
     {
       "source": [
-        1337.2,
-        2012.9
+        1171.5,
+        2143.5
       ],
       "canvas": [
-        3927.1,
-        746.6
+        3877.4,
+        772.4
       ],
       "note": "lattice 99"
     },
     {
       "source": [
-        1721.6,
-        2012.9
+        1552.5,
+        2143.5
       ],
       "canvas": [
-        4046.1,
-        752.8
+        3990.0,
+        784.9
       ],
       "note": "lattice 100"
     },
     {
       "source": [
-        2106.0,
-        2012.9
+        1933.5,
+        2143.5
       ],
       "canvas": [
-        4152.1,
-        777.1
+        4096.3,
+        803.2
       ],
       "note": "lattice 101"
     },
     {
       "source": [
-        2490.4,
-        2012.9
+        2314.5,
+        2143.5
       ],
       "canvas": [
-        4257.5,
-        797.7
+        4203.8,
+        827.2
       ],
       "note": "lattice 102"
     },
     {
       "source": [
-        2874.8,
-        2012.9
+        2695.5,
+        2143.5
       ],
       "canvas": [
-        4357.5,
-        808.6
+        4307.9,
+        842.2
       ],
       "note": "lattice 103"
     },
     {
       "source": [
-        3259.2,
-        2012.9
+        3076.5,
+        2143.5
       ],
       "canvas": [
-        4466.7,
-        821.3
+        4410.3,
+        852.0
       ],
       "note": "lattice 104"
     },
     {
       "source": [
-        3643.6,
-        2012.9
+        3457.5,
+        2143.5
       ],
       "canvas": [
-        4575.4,
-        836.2
+        4517.6,
+        862.8
       ],
       "note": "lattice 105"
     },
     {
       "source": [
-        4028.0,
-        2012.9
+        3838.5,
+        2143.5
       ],
       "canvas": [
-        4682.1,
-        853.3
+        4627.0,
+        876.5
       ],
       "note": "lattice 106"
     },
     {
       "source": [
-        4412.4,
-        2012.9
+        4219.5,
+        2143.5
       ],
       "canvas": [
-        4788.1,
-        872.9
+        4735.5,
+        893.6
       ],
       "note": "lattice 107"
     },
     {
       "source": [
-        4796.8,
-        2012.9
+        4600.5,
+        2143.5
       ],
       "canvas": [
-        4897.2,
-        895.9
+        4839.2,
+        915.1
       ],
       "note": "lattice 108"
     },
     {
       "source": [
-        5181.2,
-        2012.9
+        4981.5,
+        2143.5
       ],
       "canvas": [
-        5013.9,
-        923.2
+        4934.1,
+        943.1
       ],
       "note": "lattice 109"
     },
     {
       "source": [
-        5565.6,
-        2012.9
+        5362.5,
+        2143.5
       ],
       "canvas": [
-        5133.1,
-        951.4
+        5026.3,
+        976.6
       ],
       "note": "lattice 110"
     },
     {
       "source": [
-        5950.0,
-        2012.9
+        5743.5,
+        2143.5
       ],
       "canvas": [
-        5247.3,
-        976.0
+        5142.2,
+        1008.3
       ],
       "note": "lattice 111"
     },
     {
       "source": [
-        184.0,
-        2323.6
+        28.5,
+        2439.8
       ],
       "canvas": [
-        3601.9,
-        777.7
+        3562.9,
+        803.2
       ],
       "note": "lattice 112"
     },
     {
       "source": [
-        568.4,
-        2323.6
+        409.5,
+        2439.8
       ],
       "canvas": [
-        3709.2,
-        794.7
+        3649.7,
+        820.9
       ],
       "note": "lattice 113"
     },
     {
       "source": [
-        952.8,
-        2323.6
+        790.5,
+        2439.8
       ],
       "canvas": [
-        3816.5,
-        810.5
+        3762.8,
+        836.8
       ],
       "note": "lattice 114"
     },
     {
       "source": [
-        1337.2,
-        2323.6
+        1171.5,
+        2439.8
       ],
       "canvas": [
-        3917.8,
-        827.2
+        3868.2,
+        851.4
       ],
       "note": "lattice 115"
     },
     {
       "source": [
-        1721.6,
-        2323.6
+        1552.5,
+        2439.8
       ],
       "canvas": [
-        4024.1,
-        841.4
+        3969.8,
+        866.2
       ],
       "note": "lattice 116"
     },
     {
       "source": [
-        2106.0,
-        2323.6
+        1933.5,
+        2439.8
       ],
       "canvas": [
-        4133.8,
-        865.5
+        4077.9,
+        886.8
       ],
       "note": "lattice 117"
     },
     {
       "source": [
-        2490.4,
-        2323.6
+        2314.5,
+        2439.8
       ],
       "canvas": [
-        4244.9,
-        885.5
+        4188.5,
+        909.2
       ],
       "note": "lattice 118"
     },
     {
       "source": [
-        2874.8,
-        2323.6
+        2695.5,
+        2439.8
       ],
       "canvas": [
-        4352.9,
-        898.7
+        4299.1,
+        925.3
       ],
       "note": "lattice 119"
     },
     {
       "source": [
-        3259.2,
-        2323.6
+        3076.5,
+        2439.8
       ],
       "canvas": [
-        4459.6,
-        909.9
+        4405.9,
+        936.1
       ],
       "note": "lattice 120"
     },
     {
       "source": [
-        3643.6,
-        2323.6
+        3457.5,
+        2439.8
       ],
       "canvas": [
-        4567.4,
-        923.5
+        4513.8,
+        945.6
       ],
       "note": "lattice 121"
     },
     {
       "source": [
-        4028.0,
-        2323.6
+        3838.5,
+        2439.8
       ],
       "canvas": [
-        4674.8,
-        940.0
+        4623.2,
+        957.3
       ],
       "note": "lattice 122"
     },
     {
       "source": [
-        4412.4,
-        2323.6
+        4219.5,
+        2439.8
       ],
       "canvas": [
-        4782.7,
-        959.7
+        4731.3,
+        972.8
       ],
       "note": "lattice 123"
     },
     {
       "source": [
-        4796.8,
-        2323.6
+        4600.5,
+        2439.8
       ],
       "canvas": [
-        4894.1,
-        983.4
+        4835.9,
+        993.9
       ],
       "note": "lattice 124"
     },
     {
       "source": [
-        5181.2,
-        2323.6
+        4981.5,
+        2439.8
       ],
       "canvas": [
-        5011.1,
-        1011.0
+        4936.9,
+        1022.0
       ],
       "note": "lattice 125"
     },
     {
       "source": [
-        5565.6,
-        2323.6
+        5362.5,
+        2439.8
       ],
       "canvas": [
-        5129.4,
-        1039.1
+        5041.9,
+        1055.4
       ],
       "note": "lattice 126"
     },
     {
       "source": [
-        5950.0,
-        2323.6
+        5743.5,
+        2439.8
       ],
       "canvas": [
-        5240.6,
-        1062.2
+        5156.0,
+        1087.0
       ],
       "note": "lattice 127"
     },
     {
       "source": [
-        184.0,
-        2634.4
+        28.5,
+        2736.2
       ],
       "canvas": [
-        3587.8,
-        865.3
+        3542.8,
+        886.2
       ],
       "note": "lattice 128"
     },
     {
       "source": [
-        568.4,
-        2634.4
+        409.5,
+        2736.2
       ],
       "canvas": [
-        3697.4,
-        881.0
+        3640.8,
+        902.4
       ],
       "note": "lattice 129"
     },
     {
       "source": [
-        952.8,
-        2634.4
+        790.5,
+        2736.2
       ],
       "canvas": [
-        3805.5,
-        895.0
+        3753.3,
+        915.8
       ],
       "note": "lattice 130"
     },
     {
       "source": [
-        1337.2,
-        2634.4
+        1171.5,
+        2736.2
       ],
       "canvas": [
-        3903.5,
-        909.7
+        3854.9,
+        928.9
       ],
       "note": "lattice 131"
     },
     {
       "source": [
-        1721.6,
-        2634.4
+        1552.5,
+        2736.2
       ],
       "canvas": [
-        4008.0,
-        928.4
+        3957.0,
+        947.4
       ],
       "note": "lattice 132"
     },
     {
       "source": [
-        2106.0,
-        2634.4
+        1933.5,
+        2736.2
       ],
       "canvas": [
-        4118.9,
-        949.8
+        4064.6,
+        967.5
       ],
       "note": "lattice 133"
     },
     {
       "source": [
-        2490.4,
-        2634.4
+        2314.5,
+        2736.2
       ],
       "canvas": [
-        4230.8,
-        968.5
+        4174.9,
+        986.9
       ],
       "note": "lattice 134"
     },
     {
       "source": [
-        2874.8,
-        2634.4
+        2695.5,
+        2736.2
       ],
       "canvas": [
-        4342.7,
-        982.6
+        4284.9,
+        1003.4
       ],
       "note": "lattice 135"
     },
     {
       "source": [
-        3259.2,
-        2634.4
+        3076.5,
+        2736.2
       ],
       "canvas": [
-        4452.8,
-        994.6
+        4397.6,
+        1015.3
       ],
       "note": "lattice 136"
     },
     {
       "source": [
-        3643.6,
-        2634.4
+        3457.5,
+        2736.2
       ],
       "canvas": [
-        4561.6,
-        1007.9
+        4509.6,
+        1024.6
       ],
       "note": "lattice 137"
     },
     {
       "source": [
-        4028.0,
-        2634.4
+        3838.5,
+        2736.2
       ],
       "canvas": [
-        4669.8,
-        1024.0
+        4620.7,
+        1035.0
       ],
       "note": "lattice 138"
     },
     {
       "source": [
-        4412.4,
-        2634.4
+        4219.5,
+        2736.2
       ],
       "canvas": [
-        4778.0,
-        1043.4
+        4729.5,
+        1048.9
       ],
       "note": "lattice 139"
     },
     {
       "source": [
-        4796.8,
-        2634.4
+        4600.5,
+        2736.2
       ],
       "canvas": [
-        4889.2,
-        1067.0
+        4835.9,
+        1068.4
       ],
       "note": "lattice 140"
     },
     {
       "source": [
-        5181.2,
-        2634.4
+        4981.5,
+        2736.2
       ],
       "canvas": [
-        5005.1,
-        1094.4
+        4942.6,
+        1095.2
       ],
       "note": "lattice 141"
     },
     {
       "source": [
-        5565.6,
-        2634.4
+        5362.5,
+        2736.2
       ],
       "canvas": [
-        5122.6,
-        1122.8
+        5055.1,
+        1128.4
       ],
       "note": "lattice 142"
     },
     {
       "source": [
-        5950.0,
-        2634.4
+        5743.5,
+        2736.2
       ],
       "canvas": [
-        5230.1,
-        1144.0
+        5168.7,
+        1160.7
       ],
       "note": "lattice 143"
     },
     {
       "source": [
-        184.0,
-        2945.1
+        28.5,
+        3032.5
       ],
       "canvas": [
-        3572.3,
-        949.7
+        3528.3,
+        966.5
       ],
       "note": "lattice 144"
     },
     {
       "source": [
-        568.4,
-        2945.1
+        409.5,
+        3032.5
       ],
       "canvas": [
-        3680.0,
-        963.2
+        3629.9,
+        981.0
       ],
       "note": "lattice 145"
     },
     {
       "source": [
-        952.8,
-        2945.1
+        790.5,
+        3032.5
       ],
       "canvas": [
-        3784.8,
-        974.3
+        3736.7,
+        992.5
       ],
       "note": "lattice 146"
     },
     {
       "source": [
-        1337.2,
-        2945.1
+        1171.5,
+        3032.5
       ],
       "canvas": [
-        3889.4,
-        992.0
+        3840.2,
+        1006.4
       ],
       "note": "lattice 147"
     },
     {
       "source": [
-        1721.6,
-        2945.1
+        1552.5,
+        3032.5
       ],
       "canvas": [
-        3996.3,
-        1012.5
+        3946.0,
+        1026.9
       ],
       "note": "lattice 148"
     },
     {
       "source": [
-        2106.0,
-        2945.1
+        1933.5,
+        3032.5
       ],
       "canvas": [
-        4104.8,
-        1030.9
+        4052.4,
+        1045.5
       ],
       "note": "lattice 149"
     },
     {
       "source": [
-        2490.4,
-        2945.1
+        2314.5,
+        3032.5
       ],
       "canvas": [
-        4213.1,
-        1048.0
+        4158.1,
+        1062.7
       ],
       "note": "lattice 150"
     },
     {
       "source": [
-        2874.8,
-        2945.1
+        2695.5,
+        3032.5
       ],
       "canvas": [
-        4327.1,
-        1062.5
+        4267.6,
+        1078.2
       ],
       "note": "lattice 151"
     },
     {
       "source": [
-        3259.2,
-        2945.1
+        3076.5,
+        3032.5
       ],
       "canvas": [
-        4443.9,
-        1075.5
+        4386.5,
+        1090.4
       ],
       "note": "lattice 152"
     },
     {
       "source": [
-        3643.6,
-        2945.1
+        3457.5,
+        3032.5
       ],
       "canvas": [
-        4556.9,
-        1089.0
+        4505.4,
+        1100.0
       ],
       "note": "lattice 153"
     },
     {
       "source": [
-        4028.0,
-        2945.1
+        3838.5,
+        3032.5
       ],
       "canvas": [
-        4665.7,
-        1104.6
+        4619.3,
+        1109.5
       ],
       "note": "lattice 154"
     },
     {
       "source": [
-        4412.4,
-        2945.1
+        4219.5,
+        3032.5
       ],
       "canvas": [
-        4772.4,
-        1123.3
+        4728.3,
+        1121.6
       ],
       "note": "lattice 155"
     },
     {
       "source": [
-        4796.8,
-        2945.1
+        4600.5,
+        3032.5
       ],
       "canvas": [
-        4880.4,
-        1145.5
+        4834.8,
+        1138.3
       ],
       "note": "lattice 156"
     },
     {
       "source": [
-        5181.2,
-        2945.1
+        4981.5,
+        3032.5
       ],
       "canvas": [
-        4991.9,
-        1171.1
+        4942.3,
+        1161.8
       ],
       "note": "lattice 157"
     },
     {
       "source": [
-        5565.6,
-        2945.1
+        5362.5,
+        3032.5
       ],
       "canvas": [
-        5104.9,
-        1197.5
+        5052.7,
+        1193.3
       ],
       "note": "lattice 158"
     },
     {
       "source": [
-        5950.0,
-        2945.1
+        5743.5,
+        3032.5
       ],
       "canvas": [
-        5210.2,
-        1218.3
+        5159.1,
+        1225.3
       ],
       "note": "lattice 159"
     },
     {
       "source": [
-        184.0,
-        3255.8
+        28.5,
+        3328.8
       ],
       "canvas": [
-        3557.3,
-        1031.1
+        3514.5,
+        1044.1
       ],
       "note": "lattice 160"
     },
     {
       "source": [
-        568.4,
-        3255.8
+        409.5,
+        3328.8
       ],
       "canvas": [
-        3663.4,
-        1042.9
+        3616.4,
+        1056.7
       ],
       "note": "lattice 161"
     },
     {
       "source": [
-        952.8,
-        3255.8
+        790.5,
+        3328.8
       ],
       "canvas": [
-        3770.4,
-        1054.8
+        3721.9,
+        1067.5
       ],
       "note": "lattice 162"
     },
     {
       "source": [
-        1337.2,
-        3255.8
+        1171.5,
+        3328.8
       ],
       "canvas": [
-        3877.6,
-        1072.1
+        3827.8,
+        1082.0
       ],
       "note": "lattice 163"
     },
     {
       "source": [
-        1721.6,
-        3255.8
+        1552.5,
+        3328.8
       ],
       "canvas": [
-        3985.5,
-        1092.2
+        3935.7,
+        1101.7
       ],
       "note": "lattice 164"
     },
     {
       "source": [
-        2106.0,
-        3255.8
+        1933.5,
+        3328.8
       ],
       "canvas": [
-        4090.4,
-        1109.4
+        4041.1,
+        1120.0
       ],
       "note": "lattice 165"
     },
     {
       "source": [
-        2490.4,
-        3255.8
+        2314.5,
+        3328.8
       ],
       "canvas": [
-        4193.9,
-        1125.2
+        4142.3,
+        1136.1
       ],
       "note": "lattice 166"
     },
     {
       "source": [
-        2874.8,
-        3255.8
+        2695.5,
+        3328.8
       ],
       "canvas": [
-        4312.2,
-        1139.9
+        4251.1,
+        1150.9
       ],
       "note": "lattice 167"
     },
     {
       "source": [
-        3259.2,
-        3255.8
+        3076.5,
+        3328.8
       ],
       "canvas": [
-        4437.6,
-        1153.5
+        4379.1,
+        1163.2
       ],
       "note": "lattice 168"
     },
     {
       "source": [
-        3643.6,
-        3255.8
+        3457.5,
+        3328.8
       ],
       "canvas": [
-        4554.9,
-        1167.1
+        4504.5,
+        1173.0
       ],
       "note": "lattice 169"
     },
     {
       "source": [
-        4028.0,
-        3255.8
+        3838.5,
+        3328.8
       ],
       "canvas": [
-        4662.9,
-        1182.1
+        4619.7,
+        1182.0
       ],
       "note": "lattice 170"
     },
     {
       "source": [
-        4412.4,
-        3255.8
+        4219.5,
+        3328.8
       ],
       "canvas": [
-        4765.6,
-        1199.4
+        4726.6,
+        1192.2
       ],
       "note": "lattice 171"
     },
     {
       "source": [
-        4796.8,
-        3255.8
+        4600.5,
+        3328.8
       ],
       "canvas": [
-        4867.4,
-        1219.2
+        4829.9,
+        1205.2
       ],
       "note": "lattice 172"
     },
     {
       "source": [
-        5181.2,
-        3255.8
+        4981.5,
+        3328.8
       ],
       "canvas": [
-        4971.6,
-        1241.5
+        4933.8,
+        1222.8
       ],
       "note": "lattice 173"
     },
     {
       "source": [
-        5565.6,
-        3255.8
+        5362.5,
+        3328.8
       ],
       "canvas": [
-        5077.8,
-        1264.8
+        5038.1,
+        1249.6
       ],
       "note": "lattice 174"
     },
     {
       "source": [
-        5950.0,
-        3255.8
+        5743.5,
+        3328.8
       ],
       "canvas": [
-        5182.0,
-        1285.8
+        5137.6,
+        1282.3
       ],
       "note": "lattice 175"
     },
     {
       "source": [
-        184.0,
-        3566.5
+        28.5,
+        3625.2
       ],
       "canvas": [
-        3543.6,
-        1109.3
+        3500.6,
+        1119.0
       ],
       "note": "lattice 176"
     },
     {
       "source": [
-        568.4,
-        3566.5
+        409.5,
+        3625.2
       ],
       "canvas": [
-        3647.8,
-        1118.7
+        3601.8,
+        1129.2
       ],
       "note": "lattice 177"
     },
     {
       "source": [
-        952.8,
-        3566.5
+        790.5,
+        3625.2
       ],
       "canvas": [
-        3753.8,
-        1129.7
+        3705.7,
+        1138.2
       ],
       "note": "lattice 178"
     },
     {
       "source": [
-        1337.2,
-        3566.5
+        1171.5,
+        3625.2
       ],
       "canvas": [
-        3863.1,
-        1147.2
+        3812.2,
+        1152.4
       ],
       "note": "lattice 179"
     },
     {
       "source": [
-        1721.6,
-        3566.5
+        1552.5,
+        3625.2
       ],
       "canvas": [
-        3972.9,
-        1167.7
+        3921.8,
+        1172.8
       ],
       "note": "lattice 180"
     },
     {
       "source": [
-        2106.0,
-        3566.5
+        1933.5,
+        3625.2
       ],
       "canvas": [
-        4079.8,
-        1184.6
+        4029.9,
+        1191.4
       ],
       "note": "lattice 181"
     },
     {
       "source": [
-        2490.4,
-        3566.5
+        2314.5,
+        3625.2
       ],
       "canvas": [
-        4181.7,
-        1199.8
+        4132.6,
+        1206.7
       ],
       "note": "lattice 182"
     },
     {
       "source": [
-        2874.8,
-        3566.5
+        2695.5,
+        3625.2
       ],
       "canvas": [
-        4307.4,
-        1215.0
+        4246.1,
+        1221.6
       ],
       "note": "lattice 183"
     },
     {
       "source": [
-        3259.2,
-        3566.5
+        3076.5,
+        3625.2
       ],
       "canvas": [
-        4439.9,
-        1229.2
+        4381.7,
+        1234.7
       ],
       "note": "lattice 184"
     },
     {
       "source": [
-        3643.6,
-        3566.5
+        3457.5,
+        3625.2
       ],
       "canvas": [
-        4558.2,
-        1242.7
+        4509.7,
+        1244.8
       ],
       "note": "lattice 185"
     },
     {
       "source": [
-        4028.0,
-        3566.5
+        3838.5,
+        3625.2
       ],
       "canvas": [
-        4662.3,
-        1257.2
+        4622.2,
+        1253.5
       ],
       "note": "lattice 186"
     },
     {
       "source": [
-        4412.4,
-        3566.5
+        4219.5,
+        3625.2
       ],
       "canvas": [
-        4758.4,
-        1272.9
+        4723.8,
+        1262.8
       ],
       "note": "lattice 187"
     },
     {
       "source": [
-        4796.8,
-        3566.5
+        4600.5,
+        3625.2
       ],
       "canvas": [
-        4852.0,
-        1289.7
+        4820.5,
+        1272.5
       ],
       "note": "lattice 188"
     },
     {
       "source": [
-        5181.2,
-        3566.5
+        4981.5,
+        3625.2
       ],
       "canvas": [
-        4947.3,
-        1308.2
+        4917.4,
+        1283.3
       ],
       "note": "lattice 189"
     },
     {
       "source": [
-        5565.6,
-        3566.5
+        5362.5,
+        3625.2
       ],
       "canvas": [
-        5047.3,
-        1328.8
+        5017.1,
+        1298.9
       ],
       "note": "lattice 190"
     },
     {
       "source": [
-        5950.0,
-        3566.5
+        5743.5,
+        3625.2
       ],
       "canvas": [
-        5150.6,
-        1350.2
+        5111.3,
+        1332.6
       ],
       "note": "lattice 191"
     },
     {
       "source": [
-        184.0,
-        3877.2
+        28.5,
+        3921.5
       ],
       "canvas": [
-        3530.3,
-        1183.8
+        3486.8,
+        1190.1
       ],
       "note": "lattice 192"
     },
     {
       "source": [
-        568.4,
-        3877.2
+        409.5,
+        3921.5
       ],
       "canvas": [
-        3632.6,
-        1190.7
+        3587.3,
+        1198.3
       ],
       "note": "lattice 193"
     },
     {
       "source": [
-        952.8,
-        3877.2
+        790.5,
+        3921.5
       ],
       "canvas": [
-        3736.2,
-        1199.8
+        3689.4,
+        1205.2
       ],
       "note": "lattice 194"
     },
     {
       "source": [
-        1337.2,
-        3877.2
+        1171.5,
+        3921.5
       ],
       "canvas": [
-        3843.5,
-        1217.9
+        3794.1,
+        1218.3
       ],
       "note": "lattice 195"
     },
     {
       "source": [
-        1721.6,
-        3877.2
+        1552.5,
+        3921.5
       ],
       "canvas": [
-        3955.3,
-        1241.4
+        3903.2,
+        1241.9
       ],
       "note": "lattice 196"
     },
     {
       "source": [
-        2106.0,
-        3877.2
+        1933.5,
+        3921.5
       ],
       "canvas": [
-        4066.6,
-        1257.3
+        4015.5,
+        1261.3
       ],
       "note": "lattice 197"
     },
     {
       "source": [
-        2490.4,
-        3877.2
+        2314.5,
+        3921.5
       ],
       "canvas": [
-        4181.6,
-        1272.2
+        4124.4,
+        1275.0
       ],
       "note": "lattice 198"
     },
     {
       "source": [
-        2874.8,
-        3877.2
+        2695.5,
+        3921.5
       ],
       "canvas": [
-        4318.3,
-        1288.7
+        4255.1,
+        1291.2
       ],
       "note": "lattice 199"
     },
     {
       "source": [
-        3259.2,
-        3877.2
+        3076.5,
+        3921.5
       ],
       "canvas": [
-        4453.3,
-        1303.5
+        4395.4,
+        1305.7
       ],
       "note": "lattice 200"
     },
     {
       "source": [
-        3643.6,
-        3877.2
+        3457.5,
+        3921.5
       ],
       "canvas": [
-        4566.9,
-        1316.6
+        4521.2,
+        1316.2
       ],
       "note": "lattice 201"
     },
     {
       "source": [
-        4028.0,
-        3877.2
+        3838.5,
+        3921.5
       ],
       "canvas": [
-        4663.6,
-        1330.9
+        4626.1,
+        1325.3
       ],
       "note": "lattice 202"
     },
     {
       "source": [
-        4412.4,
-        3877.2
+        4219.5,
+        3921.5
       ],
       "canvas": [
-        4751.9,
-        1345.6
+        4719.6,
+        1335.3
       ],
       "note": "lattice 203"
     },
     {
       "source": [
-        4796.8,
-        3877.2
+        4600.5,
+        3921.5
       ],
       "canvas": [
-        4836.5,
-        1359.4
+        4807.1,
+        1344.4
       ],
       "note": "lattice 204"
     },
     {
       "source": [
-        5181.2,
-        3877.2
+        4981.5,
+        3921.5
       ],
       "canvas": [
-        4922.5,
-        1373.8
+        4893.3,
+        1352.5
       ],
       "note": "lattice 205"
     },
     {
       "source": [
-        5565.6,
-        3877.2
+        5362.5,
+        3921.5
       ],
       "canvas": [
-        5016.7,
-        1392.1
+        4984.1,
+        1362.9
       ],
       "note": "lattice 206"
     },
     {
       "source": [
-        5950.0,
-        3877.2
+        5743.5,
+        3921.5
       ],
       "canvas": [
-        5120.0,
-        1414.2
+        5076.5,
+        1394.1
       ],
       "note": "lattice 207"
     },
     {
       "source": [
-        184.0,
-        4187.9
+        28.5,
+        4217.8
       ],
       "canvas": [
-        3517.3,
-        1254.5
+        3473.8,
+        1257.7
       ],
       "note": "lattice 208"
     },
     {
       "source": [
-        568.4,
-        4187.9
+        409.5,
+        4217.8
       ],
       "canvas": [
-        3619.1,
-        1260.5
+        3574.2,
+        1265.0
       ],
       "note": "lattice 209"
     },
     {
       "source": [
-        952.8,
-        4187.9
+        790.5,
+        4217.8
       ],
       "canvas": [
-        3721.3,
-        1267.8
+        3675.8,
+        1270.9
       ],
       "note": "lattice 210"
     },
     {
       "source": [
-        1337.2,
-        4187.9
+        1171.5,
+        4217.8
       ],
       "canvas": [
-        3826.7,
-        1285.9
+        3779.2,
+        1282.1
       ],
       "note": "lattice 211"
     },
     {
       "source": [
-        1721.6,
-        4187.9
+        1552.5,
+        4217.8
       ],
       "canvas": [
-        3942.2,
-        1315.7
+        3888.9,
+        1312.2
       ],
       "note": "lattice 212"
     },
     {
       "source": [
-        2106.0,
-        4187.9
+        1933.5,
+        4217.8
       ],
       "canvas": [
-        4063.0,
-        1329.0
+        4009.4,
+        1330.2
       ],
       "note": "lattice 213"
     },
     {
       "source": [
-        2490.4,
-        4187.9
+        2314.5,
+        4217.8
       ],
       "canvas": [
-        4192.5,
-        1344.0
+        4131.8,
+        1343.5
       ],
       "note": "lattice 214"
     },
     {
       "source": [
-        2874.8,
-        4187.9
+        2695.5,
+        4217.8
       ],
       "canvas": [
-        4336.9,
-        1361.6
+        4270.4,
+        1360.5
       ],
       "note": "lattice 215"
     },
     {
       "source": [
-        3259.2,
-        4187.9
+        3076.5,
+        4217.8
       ],
       "canvas": [
-        4473.4,
-        1377.2
+        4414.1,
+        1376.9
       ],
       "note": "lattice 216"
     },
     {
       "source": [
-        3643.6,
-        4187.9
+        3457.5,
+        4217.8
       ],
       "canvas": [
-        4576.6,
-        1388.9
+        4534.2,
+        1387.4
       ],
       "note": "lattice 217"
     },
     {
       "source": [
-        4028.0,
-        4187.9
+        3838.5,
+        4217.8
       ],
       "canvas": [
-        4665.1,
-        1405.0
+        4627.9,
+        1397.7
       ],
       "note": "lattice 218"
     },
     {
       "source": [
-        4412.4,
-        4187.9
+        4219.5,
+        4217.8
       ],
       "canvas": [
-        4746.7,
-        1419.5
+        4714.1,
+        1411.0
       ],
       "note": "lattice 219"
     },
     {
       "source": [
-        4796.8,
-        4187.9
+        4600.5,
+        4217.8
       ],
       "canvas": [
-        4823.7,
-        1430.6
+        4792.3,
+        1421.9
       ],
       "note": "lattice 220"
     },
     {
       "source": [
-        5181.2,
-        4187.9
+        4981.5,
+        4217.8
       ],
       "canvas": [
-        4901.3,
-        1441.3
+        4866.4,
+        1432.8
       ],
       "note": "lattice 221"
     },
     {
       "source": [
-        5565.6,
-        4187.9
+        5362.5,
+        4217.8
       ],
       "canvas": [
-        4990.4,
-        1457.4
+        4942.5,
+        1449.4
       ],
       "note": "lattice 222"
     },
     {
       "source": [
-        5950.0,
-        4187.9
+        5743.5,
+        4217.8
       ],
       "canvas": [
-        5093.9,
-        1480.4
+        5037.8,
+        1472.9
       ],
       "note": "lattice 223"
     },
     {
       "source": [
-        184.0,
-        4498.6
+        28.5,
+        4514.2
       ],
       "canvas": [
-        3506.6,
-        1324.8
+        3462.5,
+        1325.0
       ],
       "note": "lattice 224"
     },
     {
       "source": [
-        568.4,
-        4498.6
+        409.5,
+        4514.2
       ],
       "canvas": [
-        3609.4,
-        1331.2
+        3563.9,
+        1332.3
       ],
       "note": "lattice 225"
     },
     {
       "source": [
-        952.8,
-        4498.6
+        790.5,
+        4514.2
       ],
       "canvas": [
-        3713.5,
-        1339.1
+        3667.0,
+        1339.0
       ],
       "note": "lattice 226"
     },
     {
       "source": [
-        1337.2,
-        4498.6
+        1171.5,
+        4514.2
       ],
       "canvas": [
-        3822.3,
-        1357.9
+        3773.4,
+        1351.3
       ],
       "note": "lattice 227"
     },
     {
       "source": [
-        1721.6,
-        4498.6
+        1552.5,
+        4514.2
       ],
       "canvas": [
-        3944.9,
-        1383.1
+        3888.8,
+        1377.9
       ],
       "note": "lattice 228"
     },
     {
       "source": [
-        2106.0,
-        4498.6
+        1933.5,
+        4514.2
       ],
       "canvas": [
-        4073.5,
-        1397.3
+        4016.9,
+        1393.6
       ],
       "note": "lattice 229"
     },
     {
       "source": [
-        2490.4,
-        4498.6
+        2314.5,
+        4514.2
       ],
       "canvas": [
-        4207.8,
-        1414.8
+        4145.1,
+        1410.6
       ],
       "note": "lattice 230"
     },
     {
       "source": [
-        2874.8,
-        4498.6
+        2695.5,
+        4514.2
       ],
       "canvas": [
-        4351.2,
-        1433.3
+        4283.4,
+        1429.3
       ],
       "note": "lattice 231"
     },
     {
       "source": [
-        3259.2,
-        4498.6
+        3076.5,
+        4514.2
       ],
       "canvas": [
-        4486.0,
-        1449.5
+        4424.2,
+        1447.0
       ],
       "note": "lattice 232"
     },
     {
       "source": [
-        3643.6,
-        4498.6
+        3457.5,
+        4514.2
       ],
       "canvas": [
-        4576.7,
-        1459.1
+        4536.4,
+        1457.1
       ],
       "note": "lattice 233"
     },
     {
       "source": [
-        4028.0,
-        4498.6
+        3838.5,
+        4514.2
       ],
       "canvas": [
-        4664.8,
-        1481.9
+        4624.4,
+        1472.3
       ],
       "note": "lattice 234"
     },
     {
       "source": [
-        4412.4,
-        4498.6
+        4219.5,
+        4514.2
       ],
       "canvas": [
-        4742.7,
-        1495.9
+        4707.4,
+        1490.5
       ],
       "note": "lattice 235"
     },
     {
       "source": [
-        4796.8,
-        4498.6
+        4600.5,
+        4514.2
       ],
       "canvas": [
-        4815.2,
-        1505.0
+        4778.8,
+        1503.1
       ],
       "note": "lattice 236"
     },
     {
       "source": [
-        5181.2,
-        4498.6
+        4981.5,
+        4514.2
       ],
       "canvas": [
-        4889.4,
-        1514.2
+        4846.1,
+        1516.6
       ],
       "note": "lattice 237"
     },
     {
       "source": [
-        5565.6,
-        4498.6
+        5362.5,
+        4514.2
       ],
       "canvas": [
-        4975.3,
-        1528.9
+        4918.2,
+        1534.5
       ],
       "note": "lattice 238"
     },
     {
       "source": [
-        5950.0,
-        4498.6
+        5743.5,
+        4514.2
       ],
       "canvas": [
-        5075.5,
-        1550.6
+        5009.3,
+        1555.4
       ],
       "note": "lattice 239"
     },
     {
       "source": [
-        184.0,
-        4809.3
+        28.5,
+        4810.5
       ],
       "canvas": [
-        3498.5,
-        1396.4
+        3453.0,
+        1393.2
       ],
       "note": "lattice 240"
     },
     {
       "source": [
-        568.4,
-        4809.3
+        409.5,
+        4810.5
       ],
       "canvas": [
-        3603.8,
-        1403.8
+        3556.3,
+        1401.2
       ],
       "note": "lattice 241"
     },
     {
       "source": [
-        952.8,
-        4809.3
+        790.5,
+        4810.5
       ],
       "canvas": [
-        3711.9,
-        1413.5
+        3662.5,
+        1409.5
       ],
       "note": "lattice 242"
     },
     {
       "source": [
-        1337.2,
-        4809.3
+        1171.5,
+        4810.5
       ],
       "canvas": [
-        3826.9,
-        1429.6
+        3773.8,
+        1422.4
       ],
       "note": "lattice 243"
     },
     {
       "source": [
-        1721.6,
-        4809.3
+        1552.5,
+        4810.5
       ],
       "canvas": [
-        3953.1,
-        1447.6
+        3895.0,
+        1440.8
       ],
       "note": "lattice 244"
     },
     {
       "source": [
-        2106.0,
-        4809.3
+        1933.5,
+        4810.5
       ],
       "canvas": [
-        4083.2,
-        1465.6
+        4023.7,
+        1458.0
       ],
       "note": "lattice 245"
     },
     {
       "source": [
-        2490.4,
-        4809.3
+        2314.5,
+        4810.5
       ],
       "canvas": [
-        4216.7,
-        1485.3
+        4153.0,
+        1478.0
       ],
       "note": "lattice 246"
     },
     {
       "source": [
-        2874.8,
-        4809.3
+        2695.5,
+        4810.5
       ],
       "canvas": [
-        4352.8,
-        1504.4
+        4287.1,
+        1498.2
       ],
       "note": "lattice 247"
     },
     {
       "source": [
-        3259.2,
-        4809.3
+        3076.5,
+        4810.5
       ],
       "canvas": [
-        4475.5,
-        1520.5
+        4417.5,
+        1516.3
       ],
       "note": "lattice 248"
     },
     {
       "source": [
-        3643.6,
-        4809.3
+        3457.5,
+        4810.5
       ],
       "canvas": [
-        4571.9,
-        1537.3
+        4524.8,
+        1530.0
       ],
       "note": "lattice 249"
     },
     {
       "source": [
-        4028.0,
-        4809.3
+        3838.5,
+        4810.5
       ],
       "canvas": [
-        4662.6,
-        1562.1
+        4620.0,
+        1553.8
       ],
       "note": "lattice 250"
     },
     {
       "source": [
-        4412.4,
-        4809.3
+        4219.5,
+        4810.5
       ],
       "canvas": [
-        4738.2,
-        1573.5
+        4698.7,
+        1571.2
       ],
       "note": "lattice 251"
     },
     {
       "source": [
-        4796.8,
-        4809.3
+        4600.5,
+        4810.5
       ],
       "canvas": [
-        4809.8,
-        1581.9
+        4766.8,
+        1584.6
       ],
       "note": "lattice 252"
     },
     {
       "source": [
-        5181.2,
-        4809.3
+        4981.5,
+        4810.5
       ],
       "canvas": [
-        4884.2,
-        1591.2
+        4832.8,
+        1599.1
       ],
       "note": "lattice 253"
     },
     {
       "source": [
-        5565.6,
-        4809.3
+        5362.5,
+        4810.5
       ],
       "canvas": [
-        4968.4,
-        1605.2
+        4905.3,
+        1616.5
       ],
       "note": "lattice 254"
     },
     {
       "source": [
-        5950.0,
-        4809.3
+        5743.5,
+        4810.5
       ],
       "canvas": [
-        5064.0,
-        1624.8
+        4991.6,
+        1636.6
       ],
       "note": "lattice 255"
     }
