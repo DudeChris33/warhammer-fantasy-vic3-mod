@@ -1,12 +1,12 @@
 ﻿STATE_SOUTHERN_OBLAST = {
     id = 307
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0CFABF x15CBE4 x24101C x2CE141 x325454 x3B2579 x4969B1 x523AD6 x57ADE9 x607F0E x6EC346 x77946B x85D8A3 x8EA9C8 x941CDB x9CEE00 xAB3238 xB4035D xB97670 xC24795 xD08BCD xD95CF2 xE7A12A xEBBD57 xF0724F xF5E562 xFEB687 }
-    city = x77946B
+    provinces = { x0CFABF x15CBE4 x1B3EF7 x24101C x325454 x3B2579 x4969B1 x523AD6 x57ADE9 x607F0E x6EC346 x77946B x85D8A3 x8EA9C8 x941CDB x9CEE00 xAB3238 xB4035D xB97670 xC24795 xD08BCD xD95CF2 xE7A12A xEBBD57 xF0724F xF5E562 xFEB687 }
+    city = xD95CF2
     farm = x0CFABF
     mine = x8EA9C8
     wood = xFEB687
-    port = xB97670
+    port = x1B3EF7
     arable_land = 10
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {

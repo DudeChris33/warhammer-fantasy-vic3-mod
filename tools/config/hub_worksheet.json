@@ -1,0 +1,10 @@
+{
+ "_comment": "Hand-authored lore-hub settlement list (board #3665). One row per named hub: `state` is a human label (logs only), `hub` is city|port|farm|mine|wood, `name` is the display text, `anchor` is a canvas [x,y] pixel that generate_provinces.py seeds a distinct province at and generate_land_regions.py picks as that state's hub. Identity is the anchor geometry, never a stored STATE_ key. This is the proving slice (#3665 AC-8): 5 Empire provincial capitals as city hubs, carried end-to-end before the realm children (#3666+) fill in every state's five hubs.",
+ "hubs": [
+  {"state": "Reikland Proper", "hub": "city", "name": "Altdorf", "anchor": [4091, 898], "source": "canon: Imperial capital, Reikland (WFRP)"},
+  {"state": "Middenland Proper", "hub": "city", "name": "Middenheim", "anchor": [4149, 753], "source": "canon: capital of Middenland (WFRP)"},
+  {"state": "Hochland", "hub": "city", "name": "Hergig", "anchor": [4221, 772], "source": "canon: capital of Hochland (WFRP)"},
+  {"state": "East Averland", "hub": "city", "name": "Averheim", "anchor": [4253, 999], "source": "canon: capital of Averland (WFRP)"},
+  {"state": "East Stirland", "hub": "city", "name": "Wurtbad", "anchor": [4239, 926], "source": "canon: capital of Stirland (WFRP)"}
+ ]
+}
