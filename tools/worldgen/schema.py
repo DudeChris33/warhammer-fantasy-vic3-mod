@@ -490,6 +490,89 @@ def load_land_region_merges(path: Path, canvas: tuple[int, int] | None = None
 
 
 # ---------------------------------------------------------------------------
+# Hub worksheet (the settlement list the lore-hub tooling reads, board #3665)
+# ---------------------------------------------------------------------------
+#
+# A hand-authored, regenerate-through JSON input (sibling of
+# ``land_region_merges.json``) — one row per named hub. Each row pins a
+# settlement to a canvas ``anchor`` pixel; ``generate_provinces.py`` resolves that
+# anchor to a state region and seeds a distinct province there, and
+# ``generate_land_regions.py`` picks that province as the state's ``hub`` and emits
+# its ``HUB_NAME_*`` loc. The anchor pixel IS the row's identity (objection 3): no
+# ``STATE_`` key is stored, because the Hilbert STATE number churns on any region
+# change and a name collision falls back to a bare number — both unstable. ``state``
+# is a human label surfaced in logs only, never parsed into a key.
+
+#: The five hub slots every state has, matching vanilla's hub kinds.
+_HUB_TYPES = ("city", "port", "farm", "mine", "wood")
+
+
+@dataclass(frozen=True)
+class HubRow:
+    """One named hub: a settlement pinned to a canvas ``anchor`` pixel.
+
+    ``state`` is a free-text human label (logs only). ``hub`` is one of
+    :data:`_HUB_TYPES`. ``name`` is the display text. ``source`` is a canon
+    citation or the literal ``invented``. ``anchor`` is a single canvas ``[x, y]``
+    pixel, bounds-checked exactly like :class:`LandRegionMerge.anchor_a`.
+    """
+
+    state: str
+    hub: str
+    name: str
+    anchor: tuple[int, int]
+    source: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "HubRow":
+        state = _as_str(_require(d, "state", ctx), f"{ctx}.state")
+        if not state:
+            raise SchemaError(f"{ctx}.state: must be a non-empty string")
+        ctx = f"{ctx}({state})"
+        hub = _as_str(_require(d, "hub", ctx), f"{ctx}.hub")
+        if hub not in _HUB_TYPES:
+            raise SchemaError(f"{ctx}.hub: must be one of {list(_HUB_TYPES)}, got '{hub}'")
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        (anchor,) = _as_seed_list([_require(d, "anchor", ctx)], f"{ctx}.anchor", canvas)
+        source = _as_str(_require(d, "source", ctx), f"{ctx}.source")
+        if not source:
+            raise SchemaError(f"{ctx}.source: must be a non-empty string (canon citation or 'invented')")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(state=state, hub=hub, name=name, anchor=anchor, source=source, note=note)
+
+
+def load_hub_worksheet(path: Path, canvas: tuple[int, int] | None = None) -> list[HubRow]:
+    """Load + validate the committed hub worksheet (authored order preserved).
+
+    Bounds-checks every anchor against ``canvas`` when known, and rejects a
+    **duplicate exact anchor pixel** across rows — two hubs on one pixel is
+    last-writer-wins in the seed raster, a silent authoring bug (the same rule
+    :func:`load_sea_zones` uses for its seed pixels). Region-aware checks (an anchor
+    resolving to no region, two anchors of the same state too close together) need
+    the canvas region layer and are enforced by ``generate_provinces.py``, not here.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    hubs_raw = _require(data, "hubs", ctx)
+    if not isinstance(hubs_raw, list) or not hubs_raw:
+        raise SchemaError(f"{ctx}.hubs: expected a non-empty list")
+    rows = [HubRow.from_dict(h, f"{ctx}.hubs[{i}]", canvas) for i, h in enumerate(hubs_raw)]
+
+    seen: dict[tuple[int, int], str] = {}
+    for r in rows:
+        if r.anchor in seen:
+            raise SchemaError(
+                f"{ctx}: anchor pixel {list(r.anchor)} is claimed by both "
+                f"'{seen[r.anchor]}' and '{r.name}' — anchors must be unique"
+            )
+        seen[r.anchor] = r.name
+    return rows
+
+
+# ---------------------------------------------------------------------------
 # Canon sea groups (the sea-zone naming config generate_sea_zones.py reads)
 # ---------------------------------------------------------------------------
 #

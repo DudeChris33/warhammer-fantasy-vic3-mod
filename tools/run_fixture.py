@@ -1275,6 +1275,95 @@ def _selfcheck_merge_fused() -> None:
     assert not iaw.any(),         "a seam-wrapping province is contiguous under wrap, never flagged archipelago"
 
 
+def _selfcheck_seeded_cut() -> None:
+    """Hub-anchor seeded province cut (#3665), in isolation (no golden).
+
+    Pins the properties generate_provinces.py relies on: cells.merge_small never
+    folds a protected piece away; cells._farthest_seeds pins fixed seeds first and
+    is byte-identical without them; subdivide with region_seeds gives every anchor
+    its own province, never crosses a magenta region boundary, keeps an unseeded
+    region byte-identical to the region_seeds=None cut, hard-errors on an anchor in
+    a keep_whole archipelago or a non-drawn region, and is deterministic.
+    """
+    from worldgen import land_provinces as lp
+    from worldgen import cells as C
+
+    # --- cells.merge_small(protected=) primitive ---
+    lab = np.full((10, 10), 2, dtype=np.int32)
+    lab[0, 0] = 1                       # a 1-px cell below the floor
+    unprot = C.merge_small(lab, 5, wrap_x=False)
+    assert int(len(np.unique(unprot))) == 1, "unprotected sub-floor cell must be folded away"
+    prot = C.merge_small(lab, 5, wrap_x=False, protected={1})
+    assert int(len(np.unique(prot))) == 2 and prot[0, 0] != prot[5, 5],         "a protected sub-floor cell must survive"
+
+    # --- cells._farthest_seeds(fixed=) primitive ---
+    pix = np.column_stack(np.nonzero(np.ones((6, 6), dtype=bool)))
+    base = C._farthest_seeds(pix, 3)
+    assert np.array_equal(base, C._farthest_seeds(pix, 3, fixed=None)),         "fixed=None must be byte-identical to the original farthest-point path"
+    seeded = C._farthest_seeds(pix, 3, fixed=np.array([[0, 0]]))
+    assert len(seeded) == 3 and tuple(seeded[0]) == (0, 0), "fixed seed must come first"
+
+    # --- subdivide(region_seeds=) end to end ---
+    H, W = 24, 48
+    land = np.zeros((H, W), dtype=bool)
+    land[3:21, 3:21] = True             # drawn block, split by a divider into 2 regions
+    land[3:12, 30:40] = True            # a separate placeholder block (no magenta)
+    drawn = np.full((H, W, 3), 180, dtype=np.uint8)
+    drawn[3:21, 11] = (255, 0, 255)     # interior magenta divider
+
+    reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
+    west = int(reg[7, 5]); east = int(reg[7, 15]); placeholder = int(reg[6, 32])
+    assert west > 0 and east > 0 and placeholder > 0 and len({west, east, placeholder}) == 3,         f"expected 3 distinct regions, got west={west} east={east} placeholder={placeholder}"
+    dmask = lp.drawn_mask(land, lp.magenta_lines(drawn), wrap_x=False, interior_dist=1, reach=12)
+    assert dmask[reg == west].mean() > 0.5 and dmask[reg == east].mean() > 0.5,         "both halves of the drawn block must be classed drawn"
+    assert dmask[reg == placeholder].mean() < 0.5, "the bare block must be classed placeholder"
+
+    a1, a2 = (5, 7), (7, 17)            # two anchors in the WEST region, far apart
+    prov, _, _, _ = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1,
+                                 region_seeds={west: [a1, a2]})
+    p1, p2 = int(prov[a1[1], a1[0]]), int(prov[a2[1], a2[0]])
+    assert p1 != p2, "each anchor must land in its own province"
+    for lab_id in (p1, p2):
+        assert list(np.unique(reg[prov == lab_id])) == [west],             "an anchor province must lie wholly inside its own region"
+    # No province anywhere crosses a magenta region boundary.
+    for lab_id in range(1, int(prov.max()) + 1):
+        regs_here = np.unique(reg[prov == lab_id])
+        assert len(regs_here) == 1, f"province {lab_id} spans regions {regs_here.tolist()}"
+
+    # An UNSEEDED region is byte-identical (as a partition) to the region_seeds=None cut.
+    prov0, _, _, _ = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1)
+    def _canon(arr, mask):
+        out = np.zeros(arr.shape, dtype=np.int64)
+        lut: dict[int, int] = {}
+        for idx in np.flatnonzero(mask.ravel()):
+            v = int(arr.ravel()[idx])
+            if v not in lut:
+                lut[v] = len(lut) + 1
+            out.ravel()[idx] = lut[v]
+        return out
+    east_mask = reg == east
+    assert np.array_equal(_canon(prov, east_mask), _canon(prov0, east_mask)),         "an unseeded region's cut must be byte-identical to the no-seed run"
+
+    # Determinism: two seeded runs are byte-identical.
+    prov_b, _, _, _ = lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1,
+                                   region_seeds={west: [a1, a2]})
+    assert np.array_equal(prov, prov_b), "two seeded runs must be byte-identical"
+
+    # Hard errors: anchor in a keep_whole archipelago, or in a non-drawn region.
+    try:
+        lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1,
+                     keep_whole={west}, region_seeds={west: [a1]})
+        raise AssertionError("anchor in a keep_whole region must be a hard error")
+    except C.CellError:
+        pass
+    try:
+        lp.subdivide(reg, land, dmask, target=6, wrap_x=False, min_area=1,
+                     region_seeds={placeholder: [(32, 6)]})
+        raise AssertionError("anchor in a non-drawn (placeholder) region must be a hard error")
+    except C.CellError:
+        pass
+
+
 def _selfcheck_stack_hubs() -> None:
     """Hub-stacking fallback (worldgen.statefile.stack_hubs), in isolation.
 
@@ -1598,6 +1687,9 @@ def run_check() -> int:
     _selfcheck_merge_fused()
     print("land_provinces: merge-fused disconnected region cut per piece "
           "(archipelago kept whole via keep_whole) self-check passed.")
+    _selfcheck_seeded_cut()
+    print("land_provinces: hub-anchor seeded cut (own-province seeds, boundary kept, "
+          "unseeded byte-identical, protected pieces, hard errors) self-check passed.")
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")

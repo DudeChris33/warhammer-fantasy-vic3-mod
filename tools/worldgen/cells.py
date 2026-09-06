@@ -314,7 +314,8 @@ def _cell_floors(lab: np.ndarray, floor_map: np.ndarray, n: int, default: int) -
 
 
 def merge_small(labels: np.ndarray, min_area: int, wrap_x: bool = True,
-                rounds: int = 12, floor_map: np.ndarray | None = None) -> np.ndarray:
+                rounds: int = 12, floor_map: np.ndarray | None = None,
+                protected: set[int] | None = None) -> np.ndarray:
     """Merge cells below ``min_area`` into the neighbour they share most border with.
 
     Ties break on the lower label id, so the result does not depend on dictionary
@@ -328,7 +329,15 @@ def merge_small(labels: np.ndarray, min_area: int, wrap_x: bool = True,
     survive while the rest of the map still reconciles to vanilla granularity. The
     Old World uses this to give ink-traced macros one floor and the user's clean
     hand-drawn marker macros a much lighter one. Default ``None`` is byte-identical.
+
+    ``protected`` (a set of label ids) is never folded *away* — a protected label
+    below the floor is left in place; other slivers may still merge *into* it. This
+    is #3665's "``merge_small`` never folds an anchor-bearing piece into a piece
+    without one": pass the anchor pieces' labels, and a deliberately-small seeded
+    hub province survives the sliver sweep instead of being swallowed. Default
+    ``None`` is byte-identical.
     """
+    prot = protected or set()
     lab = labels.copy()
     for _ in range(rounds):
         areas = np.bincount(lab.ravel())
@@ -337,6 +346,8 @@ def merge_small(labels: np.ndarray, min_area: int, wrap_x: bool = True,
             small = [i for i in range(1, len(areas)) if 0 < areas[i] < floors[i]]
         else:
             small = [i for i in range(1, len(areas)) if 0 < areas[i] < min_area]
+        if prot:
+            small = [i for i in small if i not in prot]
         if not small:
             break
         pairs = _neighbour_pairs(lab, wrap_x)
@@ -438,7 +449,8 @@ def merge_to_target(labels: np.ndarray, target: int, wrap_x: bool = True,
     return lab
 
 
-def _farthest_seeds(pixels: np.ndarray, k: int) -> np.ndarray:
+def _farthest_seeds(pixels: np.ndarray, k: int,
+                    fixed: np.ndarray | None = None) -> np.ndarray:
     """``k`` well-spread pixels from an ``(N, 2)`` array, deterministically.
 
     Farthest-point sampling from the first pixel in raster order: no RNG, no
@@ -446,16 +458,38 @@ def _farthest_seeds(pixels: np.ndarray, k: int) -> np.ndarray:
     seeds. k-means would be better spread but iterates to a floating-point
     tolerance, which is exactly the kind of near-tie a byte-exact pipeline should
     not build on.
+
+    ``fixed`` (an ``(a, 2)`` array of pre-chosen pixel rows) pins the first ``a``
+    seeds — the hub anchors (#3665). The running min-distance array is seeded from
+    **all** fixed points (not just ``pixels[0]``), so the remaining ``k - a``
+    farthest-point picks spread away from every anchor at once; the return is
+    ``fixed`` followed by those picks. Callers guarantee ``k >= a``. ``fixed=None``
+    is byte-identical to the original farthest-point path.
     """
-    chosen = [0]
-    if k <= 1:
+    if fixed is None or len(fixed) == 0:
+        chosen = [0]
+        if k <= 1:
+            return pixels[chosen]
+        d = ((pixels - pixels[0]) ** 2).sum(axis=1).astype(np.float64)
+        for _ in range(k - 1):
+            i = int(np.argmax(d))
+            chosen.append(i)
+            d = np.minimum(d, ((pixels - pixels[i]) ** 2).sum(axis=1))
         return pixels[chosen]
-    d = ((pixels - pixels[0]) ** 2).sum(axis=1).astype(np.float64)
-    for _ in range(k - 1):
+
+    fixed = np.asarray(fixed).reshape(-1, 2)
+    a = len(fixed)
+    d = np.full(len(pixels), np.inf, dtype=np.float64)
+    for f in fixed:
+        d = np.minimum(d, ((pixels - f) ** 2).sum(axis=1))
+    extra: list[int] = []
+    for _ in range(max(0, k - a)):
         i = int(np.argmax(d))
-        chosen.append(i)
+        extra.append(i)
         d = np.minimum(d, ((pixels - pixels[i]) ** 2).sum(axis=1))
-    return pixels[chosen]
+    if extra:
+        return np.concatenate([fixed.astype(pixels.dtype), pixels[extra]], axis=0)
+    return fixed.astype(pixels.dtype)
 
 
 def split_large(labels: np.ndarray, max_area: int, target_area: int,
