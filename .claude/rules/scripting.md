@@ -213,6 +213,64 @@ sites still need. Restored on_actions go into the existing `common/on_actions/00
 beside their vanilla neighbours, keeping vanilla's `# Root = …` / `# scope:… =` header comments.
 Before adding any of them, grep `common/` for the id — a duplicate definition is a game-log error.
 
+## `gfx/` real-world-reference keep-list + neutralization (board #3662)
+
+The 15 authored `gfx/` override files — `gfx/portraits/portrait_modifiers/01_{accessories,beards,
+clothes,hairstyles,headgear}.txt` and `gfx/map/city_data/city_types/*` (10) — reuse vanilla
+portrait/city selection wholesale because the Warhammer world resembles ours. `gfx/` is **not**
+blankable (only `common/`/`events/`/`map_data/` are eligible for `replace_paths`), so vanilla's gfx
+always merges underneath and these files only override specific vanilla filenames. That makes
+resolution **per-reference, never per-file deletion**: deleting an override re-exposes vanilla's
+real-world refs and reverts prior fixes.
+
+### The criterion — generic concept vs. real-world specific, applied by resolve-or-dangle
+
+Keep a script reference when the referenced id **resolves** to something this mod (or still-loaded
+generic vanilla content) actually defines; treat it as a real-world specific to neutralize when it
+**dangles** because it named real-world content the conversion deleted/never authored. The axis is
+generic-vs-specific, **not the trigger family** — the same family sits on both sides (a generic
+`has_law = law_type:law_monarchy` stays; a `culture = cu:japanese` goes). Check each id against the
+**engine authority for its family**, not against a name or a planning doc:
+
+| Family (live token) | Resolves against | This mod |
+|---|---|---|
+| `cu:<id>` / `culture[= /?=]` / `has_culture` / `country_has_primary_culture` | `common/cultures/*.txt` | 34 WH cultures; every real-world id dangles |
+| `c:<TAG>` / `exists`/`home_country`/`owner`/`was_formed_from`/`is_unification_candidate`/`c:TAG ?= {…}` | `common/country_definitions/*.txt` (**not** `planning/tag_registry.md`, which lists unauthored placeholders) | WH tags; `MOR`/`PRA` coincidentally resolve (Massif Orcal/Praag) but are **force-neutralized** — Chris's call, they'd otherwise drive real-world Moroccan/Prussian art for those polities |
+| `rel:<id>` / `religion` / `country_has_state_religion` | `common/religions/00_religions.txt` | `cult_of_*`/`old_faith`/…; catholic/hindu/shinto/… dangle |
+| `has_variable` / `has_global_variable` | (runtime flags) | real-world event flags set only by blanked `events/*` → permanently unset → always neutralize; **never load-errors, so the static classifier is the only authority that catches these** |
+| `is_in_geographic_region` | `common/geographic_regions/` (empty) | always dangles |
+| `has_role = character_role_emperor_of_japan` | `common/character_roles/` (not blanked → resolves) | **force-neutralized** — resolves but real-world (#3410 Entry 2) |
+| `has_law` / `has_technology_researched` / `has_ideology` / `has_trait` / `has_role_of_type`, all `graphical_culture`/`graphics`/`dna_modifiers` scaffolding, and every real-world-*named*-but-defined `*_clothes`/`*_buildings` scripted_trigger | resolve → **KEEP** | name is not the test: `spanish_clothes_pop_trigger`/`french_buildings_trigger` resolve and stay |
+
+`city_types/*` carry no live real-world refs — the 3–4 landmark buildings (`building_eiffel_tower`,
+`building_suez_canal`, `building_panama_canal`, `building_victoria_terminus`) were removed live by
+#3538 and survive only in each file's header comment; the remaining `building_*` are generic
+buildings that resolve. Read-through only, no edits.
+
+### Neutralize, don't delete (Chris, this session)
+
+The mod will **repurpose most of these entries** for WH content later, so **preserve all scaffolding**
+(the variant, its `dna_modifiers`/art template, and every `modifier`/`OR`/`AND`/`NOT` wrapper) and
+neutralize only the dangling **leaf condition** by replacing it with `always = no`, tagged
+`# [#3662] was: <original>`. This is **behaviour-neutral**: a comparison to a non-existent id is
+always false, and so is `always = no`, so every boolean wrapper keeps its truth value
+(`NOT { always = no }` stays always-true, an `OR`-branch stays dead, a required gate stays
+never-firing) — and it also fixes the load-errors that strong `cu:`/`c:` links throw. A
+`c:<TAG> ?= { … }` scope-switch block collapses to a single `always = no` (naming the tag in a
+comment). **Do not delete whole variants/modifiers/branches** — that was the earlier approach and was
+reverted. Repurposing later is a one-line swap of `always = no` for the real WH trigger.
+
+### Verification (no offline validator exists for gfx script)
+
+A static live-ref classifier that enumerates **every** reference family (not a pre-listed subset —
+that is how `has_variable`/`was_formed_from` were nearly missed) and computes resolve/dangle against
+the per-family engine authority above is the completeness gate; it must report **zero** live
+(non-comment) dangling occurrences. Pair it with a brace-balance / entry-count check (entry counts
+must be **unchanged** — nothing deleted) and a malformed-pattern / empty-block scan, then the
+mandatory in-game `error.log` gate ([testing.md](testing.md)). error.log alone under-counts (only
+the first parse/lookup failure per file surfaces, and `has_variable` never errors), so it is the
+no-regression authority, not the completeness authority.
+
 ## Forbidden
 
 - No non-deterministic effects (see [core.md](core.md) Determinism).
