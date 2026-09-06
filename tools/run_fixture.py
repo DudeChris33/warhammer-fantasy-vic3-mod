@@ -1248,6 +1248,32 @@ def _selfcheck_merge_fused() -> None:
         reg_m, land, dmask, target=4, wrap_x=False, min_area=1, keep_whole=set())
     assert np.array_equal(prov, prov2), "two runs of the per-piece cut must be byte-identical"
 
+    # --- wrap_x=True is the production path (map_config.WRAP_X). The merge-fused
+    # branch leans on cells.components (piece split, land_provinces.py) and
+    # _is_connected (branch test) agreeing about the antimeridian seam -- two
+    # independently-implemented wrap mechanisms. Exercise a seam-wrapping piece so
+    # a spurious cross-seam split can't hide behind the wrap_x=False cases above. ---
+    Hw, Ww = 16, 40
+    landw = np.zeros((Hw, Ww), dtype=bool)
+    landw[4:12, 0:5] = True           # west half of a seam-wrapping piece
+    landw[4:12, 36:40] = True         # east half -- adjacent across x=0 / x=W-1
+    landw[4:12, 18:24] = True         # a second, separate piece (water between)
+    regw = np.where(landw, 1, 0).astype(np.int32)   # one region, two pieces
+    # _is_connected and cells.components must AGREE: the region is disconnected
+    # (the second block never touches the wrapping one), and the wrapping half is
+    # ONE piece across the seam -- so exactly 2 pieces, not 3.
+    assert not lp._is_connected(regw == 1, wrap_x=True),         "the region is two water-separated pieces -> disconnected under wrap"
+    compw = cells.renumber(np.where(regw == 1,
+                                    cells.components((regw == 1).astype(np.int32), True), 0))
+    assert int(compw.max()) == 2,         f"cells.components must stitch the seam-wrapping half into ONE piece (2 total), got {compw.max()}"
+    provw, _, _, iaw = lp.subdivide(
+        regw, landw, landw.copy(), target=4, wrap_x=True, min_area=1, keep_whole=set())
+    wrap_piece = set(int(p) for p in np.unique(provw[4:12, 0:5])) |         set(int(p) for p in np.unique(provw[4:12, 36:40]))
+    other_piece = set(int(p) for p in np.unique(provw[4:12, 18:24]))
+    assert wrap_piece and other_piece, "each piece must carry provinces"
+    assert wrap_piece.isdisjoint(other_piece),         f"no province may span the two pieces across the seam: {wrap_piece} vs {other_piece}"
+    assert not iaw.any(),         "a seam-wrapping province is contiguous under wrap, never flagged archipelago"
+
 
 def _selfcheck_stack_hubs() -> None:
     """Hub-stacking fallback (worldgen.statefile.stack_hubs), in isolation.
