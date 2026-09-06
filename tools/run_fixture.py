@@ -1455,6 +1455,60 @@ def _selfcheck_stack_hubs() -> None:
     assert "port" not in landlocked, "a landlocked state must not get a port hub"
 
 
+def _selfcheck_province_terrains() -> None:
+    """province_terrains.txt generator + validator (board #2968), in isolation.
+
+    Pins what generate_province_terrains.py and validate_map.validate_province_terrains
+    rely on: land cells emit ``"plains"`` and sea cells ``"ocean"``; lines are
+    sorted by integer id (not index order); two runs are byte-identical; an empty
+    cell list is refused rather than writing a truncated file; and the emitted file
+    round-trips cleanly through the validator, whose bijection + valid-id checks can
+    actually fail (a missing line, an extra line, and an undefined terrain id all
+    error).
+    """
+    import generate_province_terrains as gpt
+    import validate_map as vm
+
+    # Deliberately id-out-of-order in the list, to prove the sort by id.
+    cells = [
+        {"hex": "xDDEEFF", "kind": "sea", "id": 3},
+        {"hex": "xAABBCC", "kind": "land", "id": 1},
+        {"hex": "x112233", "kind": "land", "id": 2},
+    ]
+    text = gpt.render_terrains(cells)
+    body = [ln for ln in text.splitlines() if not ln.startswith("#")]
+    assert body == ['xAABBCC="plains"', 'x112233="plains"', 'xDDEEFF="ocean"'], body
+    assert text.endswith("\n") and "\r" not in text, "LF newlines, trailing newline"
+    assert text == gpt.render_terrains(cells), "two runs must be byte-identical"
+
+    try:
+        gpt.render_terrains([])
+    except SystemExit:
+        pass
+    else:  # pragma: no cover
+        raise AssertionError("an empty cell list must be refused, not written")
+
+    # A terrain-defs file defining exactly the two ids the generator emits.
+    with tempfile.TemporaryDirectory() as td:
+        defs = Path(td) / "01_terrain.txt"
+        defs.write_text("plains = {\n\tweight = 1\n}\nocean = {\n\tweight = 1\n}\n")
+        assert vm._terrain_ids(defs) == {"plains", "ocean"}, "only column-0 keys are terrain ids"
+
+        terrains = Path(td) / "province_terrains.txt"
+        terrains.write_text(text)
+        assert vm.validate_province_terrains(cells, terrains, defs) == [], \
+            "the generator's own output must validate clean"
+
+        # Missing line, extra line, and an undefined id each error.
+        (Path(td) / "miss.txt").write_text('xAABBCC="plains"\n')
+        assert vm.validate_province_terrains(cells, Path(td) / "miss.txt", defs)
+        (Path(td) / "extra.txt").write_text(text + 'x445566="plains"\n')
+        assert vm.validate_province_terrains(cells, Path(td) / "extra.txt", defs)
+        (Path(td) / "badid.txt").write_text('xAABBCC="steppe"\nx112233="plains"\nxDDEEFF="ocean"\n')
+        assert any("not defined" in e
+                   for e in vm.validate_province_terrains(cells, Path(td) / "badid.txt", defs))
+
+
 def _selfcheck_sea_naming() -> None:
     """Canon sea naming (worldgen.sea_naming), in isolation (no golden).
 
@@ -1755,6 +1809,9 @@ def run_check() -> int:
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")
+    _selfcheck_province_terrains()
+    print("province_terrains: generator (plains/ocean, id-sorted, deterministic) + validator "
+          "(bijection, valid ids, negative cases) self-check passed.")
     _selfcheck_sea_naming()
     print("sea_naming: canon plurality assignment + ordinal + override + zero-zone warning "
           "self-check passed.")

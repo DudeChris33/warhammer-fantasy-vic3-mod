@@ -786,14 +786,24 @@ def validate_labels(labels_path: Path, mask_path: Path, index_path: Path,
 def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
                        sea_labels_path: Path, wrap_x: bool = True,
                        min_cell_area: int = 4,
-                       hub_anchors_index_path: Path | None = None) -> list[str]:
+                       hub_anchors_index_path: Path | None = None,
+                       province_terrains_path: Path | None = None,
+                       terrain_defs_path: Path | None = None) -> list[str]:
     """Check the first-pass province bitmap tiles the mask exactly and agrees with
     its index and the committed sea-zone layer.
 
     ``hub_anchors_index_path`` (#3665, optional): the seeded hub provinces are
     deliberately kept small and are exempted from the avoidably-degenerate check 7
     (they were placed on purpose, like an archipelago); the hard <4px floor still
-    applies to them."""
+    applies to them.
+
+    ``province_terrains_path`` / ``terrain_defs_path`` (#2968, optional): when the
+    generated ``map_data/province_terrains.txt`` is present, check 8 verifies it is
+    a bijection with the index colours and that every terrain id is defined in the
+    mod's ``common/terrain``. The file is deliberately **deferred** (built by
+    ``generate_province_terrains.py`` but not committed until the province cut
+    settles), so its *absence* is the expected state and is not an error — the
+    same convention as ``adjacencies.csv`` in ``_check_adjacencies``."""
     import json
 
     from worldgen import cells
@@ -968,6 +978,83 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
                 f"{len(mergeable)} province(s) are below the {min_cell_area} px floor and have a "
                 f"same-kind neighbour to merge into (smallest: label {smallest} at "
                 f"{int(areas[smallest])} px)")
+
+    # 8. province_terrains.txt bijection + valid terrain ids (#2968), when present.
+    #    The file is deferred until the province cut settles, so absence is fine;
+    #    when it IS there it must be a 1:1 map of the index colours to defined
+    #    terrain ids. index<->PNG bijection is proven above, so terrain<->index
+    #    plus index<->PNG gives terrain<->PNG in this one gate run.
+    if province_terrains_path is not None and province_terrains_path.is_file():
+        errors.extend(validate_province_terrains(
+            index["cells"], province_terrains_path,
+            terrain_defs_path or (REPO_ROOT / "common" / "terrain" / "01_terrain.txt")))
+    return errors
+
+
+_TERRAIN_LINE = re.compile(r'^\s*(x[0-9A-Fa-f]{6})\s*=\s*"([^"]+)"\s*$')
+_TERRAIN_DEF = re.compile(r'^([A-Za-z_][A-Za-z0-9_]*)\s*=\s*\{', re.MULTILINE)
+
+
+def _terrain_ids(defs_path: Path) -> set[str]:
+    """Top-level ``<id> = {`` keys from the mod's ``common/terrain`` file.
+
+    ``common/terrain`` is in ``replace_paths``, so vanilla's terrain types do NOT
+    load and only these ids are valid province-terrain values."""
+    text = defs_path.read_text(encoding="utf-8-sig")
+    # Only column-0 definitions are terrain types; nested ``weight = {`` etc. are
+    # indented, so anchoring on a line start (no leading whitespace) excludes them.
+    return {m.group(1) for m in _TERRAIN_DEF.finditer(text)
+            if m.start() == 0 or text[m.start() - 1] == "\n"}
+
+
+def validate_province_terrains(cells: list[dict], terrains_path: Path,
+                               terrain_defs_path: Path) -> list[str]:
+    """``province_terrains.txt`` is a bijection with the index colours, and every
+    terrain value is a defined mod terrain id (board #2968).
+
+    Pure over its inputs (cells + two files) so ``run_fixture.py`` can self-check
+    it. Checks, in order: every line is well-formed; no hex appears twice; the set
+    of file hexes equals the set of index hexes (nothing missing, nothing extra);
+    every terrain id is defined in ``common/terrain``."""
+    errors: list[str] = []
+    valid_ids = _terrain_ids(terrain_defs_path)
+    if not valid_ids:
+        errors.append(f"{terrain_defs_path.name}: no terrain ids parsed — cannot validate terrains")
+        return errors
+
+    file_hexes: set[str] = set()
+    dup_hexes: list[str] = []
+    bad_ids: list[str] = []
+    for i, raw in enumerate(terrains_path.read_text(encoding="utf-8-sig").splitlines(), start=1):
+        line = raw.strip()
+        if not line or line.startswith("#"):
+            continue
+        m = _TERRAIN_LINE.match(line)
+        if not m:
+            errors.append(f"province_terrains.txt line {i} is malformed: {line!r}")
+            continue
+        hexkey, terrain = m.group(1).upper(), m.group(2)
+        if hexkey in file_hexes:
+            dup_hexes.append(hexkey)
+        file_hexes.add(hexkey)
+        if terrain not in valid_ids:
+            bad_ids.append(terrain)
+    if dup_hexes:
+        errors.append(f"{len(dup_hexes)} province colour(s) appear on more than one "
+                      f"province_terrains.txt line (first few: {sorted(set(dup_hexes))[:5]})")
+    if bad_ids:
+        errors.append(f"{len(set(bad_ids))} terrain id(s) are not defined in "
+                      f"{terrain_defs_path.name} (first few: {sorted(set(bad_ids))[:5]})")
+
+    index_hexes = {c["hex"].upper() for c in cells}
+    missing = index_hexes - file_hexes
+    extra = file_hexes - index_hexes
+    if missing:
+        errors.append(f"{len(missing)} province colour(s) in the index have no "
+                      f"province_terrains.txt line (first few: {sorted(missing)[:5]})")
+    if extra:
+        errors.append(f"{len(extra)} province_terrains.txt line(s) reference a colour "
+                      f"absent from the index (first few: {sorted(extra)[:5]})")
     return errors
 
 
@@ -1230,6 +1317,8 @@ def main(argv: list[str] | None = None) -> int:
             wrap_x=map_config.WRAP_X,
             min_cell_area=args.min_province_area,
             hub_anchors_index_path=derived / "hub_anchors_index.json",
+            province_terrains_path=REPO_ROOT / "map_data" / "province_terrains.txt",
+            terrain_defs_path=REPO_ROOT / "common" / "terrain" / "01_terrain.txt",
         )
         if errors:
             print(f"validate_map --province-bitmap: {len(errors)} error(s):", file=sys.stderr)

@@ -204,5 +204,82 @@ separate follow-on request; Stage A's renders show geometry only, unnamed.
 provinces exist (S3b). Back up `game/map_data/` before that session — see the
 warning at the top of this file.
 
-<!-- ## S4 — nodes.dat + session boot -->
+## S4 — heightmap repack + session boot (the real-province boot)
+
+**Goal of this step:** the offline tools have now cut real whole-world provinces
+(`map_data/provinces.png`, board #2773) and emitted every text map-config file —
+the sea engine (`99_seas.txt`, `default.map` `sea_starts`,
+`water_strategic_regions.txt`, #2929), the land states (`state_regions/*.txt`,
+#2930/#2931), a header-only `adjacencies.csv` (#3542), and now
+`province_terrains.txt` (#2968). What is still missing is the **compressed
+topology the engine actually reads at runtime**: `packed_heightmap.png`,
+`indirection_heightmap.png`, a refreshed `heightmap.heightmap`, and a `nodes.dat`
+regenerated against the new provinces. Those are **desktop-only** — only the
+in-game map editor's repack produces them (exactly as in S2). This step is the
+integration close-out of the **#2700 bootable-map milestone**; the offline tools
+cannot perform it.
+
+### 0. Offline first (already done by the tools)
+
+Regenerate `province_terrains.txt` alongside the sea/land emitters — a
+`generate_provinces.py` regen reshuffles every province colour (#3705), so all
+three colour-keyed emitters must re-run together, then re-validate:
+
+```
+python tools/generate_provinces.py            # -> map_data/provinces.png (+ derived indices)
+python tools/generate_sea_regions.py          # -> 99_seas.txt + default.map sea_starts + water regions
+python tools/generate_land_regions.py         # -> state_regions/*.txt + strategic regions + loc
+python tools/generate_province_terrains.py    # -> map_data/province_terrains.txt (#2968)
+python tools/worldgen/sources.py --verify
+python tools/validate_map.py --province-bitmap # now also checks province_terrains coverage
+python tools/validate_map.py --sea
+python tools/validate_map.py                   # full crosscheck (land + sea states)
+python tools/run_fixture.py --check
+```
+
+### 1. Repack the heightmap in the map editor
+
+Identical mechanics to S2 §1 — launch with `-debug_mode`, open the **Map
+Editor**, trigger the heightmap **repack / pack** action, **Save**. It writes into
+the mod's `map_data/`:
+- `packed_heightmap.png`
+- `indirection_heightmap.png`
+- `heightmap.heightmap`
+- `nodes.dat` (regenerated for the new provinces)
+
+> **⚠ The editor writes into the BASE GAME folder** — see the warning at the top
+> of this file. Back up `game/map_data/` (or be ready to *Verify integrity of game
+> files*) before running it, and check the base-game folder's timestamps
+> afterwards, not just `git status` in the mod.
+
+### 2. Commit only the intended files
+
+```
+git status -s map_data/
+```
+
+Commit `packed_heightmap.png`, `indirection_heightmap.png`,
+`heightmap.heightmap`, and `nodes.dat`.
+
+- **`git restore map_data/heightmap.png`** if the editor re-encoded it (it did in
+  S2 — grew but stayed pixel-identical); the committed copy must remain the
+  *generator's* byte-for-byte output.
+- **Do NOT commit the editor's own `province_terrains.txt` rewrite.** The map
+  editor regenerates that file from *painted* terrain, which this mod does not yet
+  have, so its output is garbage. The committed authority is
+  `generate_province_terrains.py`'s output (a uniform plains/ocean placeholder);
+  `git restore map_data/province_terrains.txt` if the editor touched it.
+- Anything else the editor touched (locators, base-game files) does **not** get
+  committed here.
+
+### 3. Boot gate
+
+1. Relaunch the mod and **load into a session** (a session is required now —
+   provinces, states, and terrain are all real, so main-menu parsing alone won't
+   exercise them).
+2. Open `Documents/Paradox Interactive/Victoria 3/logs/error.log`.
+3. **Gate: zero lines referencing this mod's files, and no crash on map load.**
+   Fix the **source** (a generator, the registration data, or a state/terrain
+   emitter), never the `error.log` or a game-owned file.
+
 <!-- ## S5 — object locators + spline regeneration -->
