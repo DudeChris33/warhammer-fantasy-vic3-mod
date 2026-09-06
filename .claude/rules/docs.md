@@ -10,6 +10,7 @@
 - Script changes (`common/`, `events/`) — no doc update needed unless they change a project-specific convention worth capturing in `.claude/rules/scripting.md`.
 - New reusable pattern established (e.g. first naming convention for a folder) — record it in the matching `.claude/rules/*.md` file so the next task doesn't reinvent it.
 - Work-tracking records — the workspec, its `## Plan`, and the activity trail — live on the **maestro board** and are updated by the `/maestro-task`, `/maestro-scope`, `/maestro-build` (and `/maestro-auto`, `/maestro-vibe`) skills via the maestro MCP, not by hand. `planning/` no longer tracks open work (see `CLAUDE.md`).
+- **`.claude/rules/*.md` is mirrored to the maestro workspace (id 70) as `rule`-kind workspace docs** (`upsert_workspace_doc`, slugs `rules-core`/`rules-docs`/`rules-interface`/`rules-localization`/`rules-scripting`/`rules-testing`; uploaded 2026-09-05, see the `rules-sync-maintenance` doc for the full mapping) so every device working this project sees the same conventions — Claude Code's own rule-loading is per-machine, not synced. **Whenever a rule file changes, re-run `upsert_workspace_doc` for its matching slug** to push the update; a new rule file needs a new `rules-<name>` slug added to the mapping doc.
 
 ## Rules
 
