@@ -258,18 +258,35 @@ def override_fused_labels(reg: np.ndarray, land: np.ndarray,
 _MERGE_ANCHOR_SEARCH_RADIUS = 6
 
 
-def _region_near(reg: np.ndarray, x: int, y: int, max_radius: int) -> int:
-    """The region label at ``(x, y)``, or the nearest labelled pixel within
-    ``max_radius`` (0 if none — the anchor missed land entirely)."""
+def resolve_anchor(reg: np.ndarray, x: int, y: int, max_radius: int
+                   ) -> tuple[int, tuple[int, int]]:
+    """The region label at ``(x, y)`` **and the pixel it was read from**, or the
+    nearest labelled pixel within ``max_radius``. Returns ``(0, (x, y))`` if none —
+    the anchor missed land entirely. The pixel-returning sibling of
+    :func:`_region_near` (#3665): the hub seeding needs the exact resolved pixel,
+    not just the label, so the same pixel can be handed to ``_subdivide_cell`` as a
+    fixed Voronoi seed and later read back for the persisted hub→province index.
+
+    The search order (expanding square, first non-zero in raster order within each
+    ring) is identical to :func:`_region_near`, so the label returned here always
+    matches what ``apply_land_region_merges`` resolves.
+    """
     h, w = reg.shape
     for r in range(max_radius + 1):
         y0, y1 = max(0, y - r), min(h, y + r + 1)
         x0, x1 = max(0, x - r), min(w, x + r + 1)
         sub = reg[y0:y1, x0:x1]
-        nz = sub[sub > 0]
-        if nz.size:
-            return int(nz[0])
-    return 0
+        ys, xs = np.nonzero(sub > 0)
+        if ys.size:
+            ry, rx = int(ys[0]) + y0, int(xs[0]) + x0
+            return int(reg[ry, rx]), (rx, ry)
+    return 0, (x, y)
+
+
+def _region_near(reg: np.ndarray, x: int, y: int, max_radius: int) -> int:
+    """The region label at ``(x, y)``, or the nearest labelled pixel within
+    ``max_radius`` (0 if none — the anchor missed land entirely)."""
+    return resolve_anchor(reg, x, y, max_radius)[0]
 
 
 def apply_land_region_merges(reg: np.ndarray, merges: list["schema.LandRegionMerge"],
@@ -388,7 +405,8 @@ def _is_connected(mask: np.ndarray, wrap_x: bool) -> bool:
     return n <= 1
 
 
-def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np.ndarray:
+def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
+                    anchors: list[tuple[int, int]] | None = None) -> np.ndarray:
     """Cut one region ``mask`` into pieces, returning a canvas-shaped int array
     with contiguous labels ``1..m`` (``m <= k``) on the region and 0 elsewhere.
 
@@ -405,6 +423,14 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np
     this region's pixels (``local`` is the region's boolean mask), so
     ``merge_small`` only ever joins two pieces of the same region; the surrounding
     0s are background it cannot merge into.
+
+    ``anchors`` (#3665) is a list of canvas ``(x, y)`` hub anchors that fall inside
+    this ``mask``. Each becomes a **fixed** first Voronoi seed, so a distinct
+    province forms at every anchor; ``cells._farthest_seeds`` fills the remaining
+    ``k - len(anchors)`` seats (callers guarantee ``k >= len(anchors)``). After the
+    fill+split, the anchor-bearing pieces are passed to ``merge_small`` as
+    ``protected`` so a deliberately-small hub province is never swallowed. The mask
+    is untouched. ``anchors=None`` is byte-identical to the original cut.
     """
     m = mask
     shift = 0
@@ -419,7 +445,19 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np
     y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
     local = m[y0:y1, x0:x1]
     pix = np.column_stack(np.nonzero(local))
-    seeds = cells._farthest_seeds(pix, k)
+    # Translate canvas anchors into local box coords, applying the same seam roll.
+    W = mask.shape[1]
+    anchor_local: list[tuple[int, int]] = []
+    if anchors:
+        for ax, ay in anchors:
+            ly = int(ay) - int(y0)
+            lx = ((int(ax) + shift) % W) - int(x0)
+            anchor_local.append((ly, lx))
+    if anchor_local:
+        fixed = np.array(anchor_local, dtype=pix.dtype)
+        seeds = cells._farthest_seeds(pix, k, fixed=fixed)
+    else:
+        seeds = cells._farthest_seeds(pix, k)
     seed_img = np.zeros(local.shape, dtype=np.int32)
     seed_img[tuple(seeds.T)] = np.arange(1, len(seeds) + 1, dtype=np.int32)
     # Nearest labelled seed for every region pixel — one EDT over the box.
@@ -428,7 +466,11 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np
     # concavity tore, then swallow sub-floor slivers into a same-region neighbour.
     filled = np.where(local, filled, 0)
     filled = cells.split_disconnected(filled, wrap_x=False)
-    filled = cells.merge_small(filled, min_area, wrap_x=False)
+    protected: set[int] | None = None
+    if anchor_local:
+        protected = {int(filled[ly, lx]) for ly, lx in anchor_local}
+        protected.discard(0)
+    filled = cells.merge_small(filled, min_area, wrap_x=False, protected=protected)
     filled = cells.renumber(filled)
     patch = np.zeros_like(m, dtype=np.int32)
     patch[y0:y1, x0:x1] = filled
@@ -441,7 +483,8 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool) -> np
 
 def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
               wrap_x: bool = True, min_area: int = 400, log=None,
-              keep_whole: set[int] | None = None
+              keep_whole: set[int] | None = None,
+              region_seeds: dict[int, list[tuple[int, int]]] | None = None
               ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -462,6 +505,15 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     ``keep_whole`` stays whole as one province. Connectivity alone cannot tell the
     two apart, which is why the set is threaded in. ``keep_whole is None`` ⟹ empty
     set (every disconnected drawn region is cut — the merge-fused case).
+
+    ``region_seeds`` (#3665) is ``{region_label: [(x, y), ...]}`` of hub anchors,
+    each an already-resolved in-region pixel. A region carrying anchors is cut so a
+    distinct province forms at every anchor: its seat count is bumped to at least
+    its anchor count, the anchors are forwarded to ``_subdivide_cell`` as fixed
+    seeds (routed to the right connected piece in the merge-fused branch), and the
+    anchor pieces survive ``merge_small``. An anchor targeting a ``keep_whole``
+    archipelago or a non-drawn region is a hard error. ``region_seeds=None`` keeps
+    every region byte-identical to today.
 
     Returns ``(labels, is_placeholder, reg_of, is_archipelago)``:
 
@@ -490,6 +542,7 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     renumber to ``1..N``.
     """
     keep = keep_whole or set()
+    seeds_by_region = region_seeds or {}
     n = int(reg.max())
     areas = np.bincount(reg.ravel(), minlength=n + 1)
     drawn_area = np.bincount(reg[drawn & land].ravel(), minlength=n + 1)
@@ -500,6 +553,20 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     is_drawn[1:] = drawn_area[1:] * 2 > areas[1:]
     drawn_ids = [i for i in range(1, n + 1) if is_drawn[i] and areas[i] > 0]
     drawn_areas = np.array([areas[i] for i in drawn_ids], dtype=np.float64)
+
+    # Hub anchors (#3665) can only seed a distinct province in a drawn, cuttable
+    # region — never a keep_whole archipelago (stays one province) or a placeholder.
+    if seeds_by_region:
+        drawn_set = set(drawn_ids)
+        for rid, pts in seeds_by_region.items():
+            if rid in keep:
+                raise cells.CellError(
+                    f"hub anchor(s) {pts} target region {rid}, a keep_whole "
+                    f"island-override archipelago — it cannot host a distinct hub province")
+            if rid not in drawn_set:
+                raise cells.CellError(
+                    f"hub anchor(s) {pts} target region {rid}, which is not a drawn "
+                    f"in-scope state (placeholder or empty)")
 
     # Largest-remainder seat allocation across the drawn regions: one each, then
     # the remaining seats by area share, so the totals add up exactly.
@@ -512,6 +579,13 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
         order = np.argsort(-(quota - base), kind="stable")
         base[order[:rem]] += 1
         seats += base
+    # A seeded region needs at least as many seats as it has distinct anchors, so
+    # every hub can get its own province (soft-target drift is fine, per #3664).
+    if seeds_by_region:
+        for idx, i in enumerate(drawn_ids):
+            a = len(seeds_by_region.get(i, ()))
+            if a > seats[idx]:
+                seats[idx] = a
     seat_by_id = dict(zip(drawn_ids, seats.tolist()))
     if log:
         log(f"  {len(drawn_ids)} drawn regions, {n - len(drawn_ids)} placeholder; "
@@ -527,11 +601,14 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     for i in drawn_ids:
         k = seat_by_id[i]
         m = reg == i
+        anchors = seeds_by_region.get(i)
         if _is_connected(m, wrap_x):
             # Contiguous drawn region: the ordinary single-cell cut.
             if k <= 1:
+                # One seat: the whole region is one province. If it carries a
+                # single anchor, that province IS the hub — no cut needed.
                 continue
-            pieces = _subdivide_cell(m, k, min_area, wrap_x)  # labels 1..p on the region
+            pieces = _subdivide_cell(m, k, min_area, wrap_x, anchors=anchors)  # 1..p on region
             p = int(pieces.max())
             # Piece 1 keeps the region's own label i; pieces 2..p get fresh labels.
             ids = np.zeros(p + 1, dtype=np.int32)
@@ -568,10 +645,22 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
             order = np.argsort(-(quota - base), kind="stable")
             base[order[:rem]] += 1
             pk += base
+        # Route each anchor to the connected piece it falls in, and make sure that
+        # piece has at least as many seats as it carries anchors (#3665).
+        piece_seeds: dict[int, list[tuple[int, int]]] = {}
+        if anchors:
+            for ax, ay in anchors:
+                cid = int(comp[ay, ax])
+                if cid > 0:
+                    piece_seeds.setdefault(cid, []).append((ax, ay))
+            for cid, pts in piece_seeds.items():
+                if len(pts) > pk[cid - 1]:
+                    pk[cid - 1] = len(pts)
         first = True
         for cid in range(1, c + 1):
             pm = comp == cid
-            sub = _subdivide_cell(pm, int(pk[cid - 1]), min_area, wrap_x)  # 1..q on piece
+            sub = _subdivide_cell(pm, int(pk[cid - 1]), min_area, wrap_x,
+                                  anchors=piece_seeds.get(cid))  # 1..q on piece
             q = int(sub.max())
             ids = np.zeros(q + 1, dtype=np.int32)
             start = 1

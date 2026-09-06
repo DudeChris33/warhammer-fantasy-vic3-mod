@@ -1,0 +1,119 @@
+{
+ "canvas": [
+  8192,
+  3616
+ ],
+ "source": "hub_worksheet.json",
+ "hubs": [
+  {
+   "state": "Reikland Proper",
+   "hub": "city",
+   "name": "Altdorf",
+   "source": "canon: Imperial capital, Reikland (WFRP)",
+   "anchor": [
+    4091,
+    898
+   ],
+   "resolved": [
+    4091,
+    898
+   ],
+   "region": 129,
+   "province_label": 2265,
+   "province_color": [
+    13,
+    245,
+    1
+   ],
+   "province_hex": "x0DF501"
+  },
+  {
+   "state": "Middenland Proper",
+   "hub": "city",
+   "name": "Middenheim",
+   "source": "canon: capital of Middenland (WFRP)",
+   "anchor": [
+    4149,
+    753
+   ],
+   "resolved": [
+    4149,
+    753
+   ],
+   "region": 86,
+   "province_label": 1639,
+   "province_color": [
+    42,
+    79,
+    31
+   ],
+   "province_hex": "x2A4F1F"
+  },
+  {
+   "state": "Hochland",
+   "hub": "city",
+   "name": "Hergig",
+   "source": "canon: capital of Hochland (WFRP)",
+   "anchor": [
+    4221,
+    772
+   ],
+   "resolved": [
+    4221,
+    772
+   ],
+   "region": 93,
+   "province_label": 1785,
+   "province_color": [
+    101,
+    242,
+    33
+   ],
+   "province_hex": "x65F221"
+  },
+  {
+   "state": "East Averland",
+   "hub": "city",
+   "name": "Averheim",
+   "source": "canon: capital of Averland (WFRP)",
+   "anchor": [
+    4253,
+    999
+   ],
+   "resolved": [
+    4253,
+    999
+   ],
+   "region": 162,
+   "province_label": 2896,
+   "province_color": [
+    8,
+    176,
+    64
+   ],
+   "province_hex": "x08B040"
+  },
+  {
+   "state": "East Stirland",
+   "hub": "city",
+   "name": "Wurtbad",
+   "source": "canon: capital of Stirland (WFRP)",
+   "anchor": [
+    4239,
+    926
+   ],
+   "resolved": [
+    4239,
+    926
+   ],
+   "region": 138,
+   "province_label": 2478,
+   "province_color": [
+    178,
+    28,
+    174
+   ],
+   "province_hex": "xB21CAE"
+  }
+ ]
+}

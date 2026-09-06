@@ -86,6 +86,21 @@ ISLAND_OVERRIDES_SOURCE = "terraqueous_globe_reprojected - tiny_islands_merger.p
 #: rather than drawn. See land_provinces.apply_land_region_merges / the module
 #: docstring. Absent entirely, generation proceeds with no overrides.
 LAND_REGION_MERGES_CONFIG = TOOLS_DIR / "config" / "land_region_merges.json"
+#: Optional — the hand-authored lore-hub settlement list (board #3665). Each row
+#: pins a settlement to a canvas anchor pixel; a distinct province is seeded there
+#: and picked as that state's hub downstream. Absent entirely, generation proceeds
+#: with no seeded provinces (byte-identical to a no-worksheet run).
+HUB_WORKSHEET_CONFIG = TOOLS_DIR / "config" / "hub_worksheet.json"
+#: The single anchor -> seeded-province authority (board #3665): written here after
+#: the cut so generate_land_regions.py (hub pick) and validate_map.py never
+#: re-resolve an anchor independently and disagree. Only written when the worksheet
+#: exists.
+HUB_ANCHORS_INDEX_PATH = DERIVED_DIR / "hub_anchors_index.json"
+#: Two hub anchors of the SAME state closer than this (Euclidean px) are a hard
+#: error at generate time — defence-in-depth so a seeded piece can't collapse below
+#: min_area (the anchor pieces are also `protected` in merge_small, the real
+#: guarantee). Anchors in different states may be arbitrarily close.
+MIN_ANCHOR_SEP = 16
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
 
@@ -211,9 +226,46 @@ def main(argv: list[str] | None = None) -> int:
                 f"label(s) {sorted(overlap)} — those states will stay whole; move the "
                 f"anchor or split the config", t0)
 
+    # Hub worksheet (#3665): resolve each settlement anchor to a state region and
+    # seed a distinct province there. Guarded like land_region_merges.json — absent,
+    # region_seeds stays empty and the cut is byte-identical to a no-worksheet run.
+    hub_rows: list = []  # (HubRow, region_label, (rx, ry)) for the persisted index
+    region_seeds: dict[int, list[tuple[int, int]]] = {}
+    if HUB_WORKSHEET_CONFIG.is_file():
+        rows = schema.load_hub_worksheet(HUB_WORKSHEET_CONFIG, canvas=(CANVAS_W, CANVAS_H))
+        rad = land_provinces._MERGE_ANCHOR_SEARCH_RADIUS
+        for r in rows:
+            rid, (rx, ry) = land_provinces.resolve_anchor(reg, r.anchor[0], r.anchor[1], rad)
+            if rid <= 0:
+                raise SystemExit(
+                    f"{HUB_WORKSHEET_CONFIG.name}: hub '{r.name}' ({r.state}/{r.hub}) anchor "
+                    f"{list(r.anchor)} missed land — no region within {rad}px")
+            if rid in keep_whole:
+                raise SystemExit(
+                    f"{HUB_WORKSHEET_CONFIG.name}: hub '{r.name}' anchor {list(r.anchor)} "
+                    f"resolves into island-override archipelago region {rid} — it can never "
+                    f"host a distinct hub province; move the anchor")
+            region_seeds.setdefault(rid, []).append((rx, ry))
+            hub_rows.append((r, rid, (rx, ry)))
+        # Same-region anchors must clear MIN_ANCHOR_SEP (a drawn region is 1:1 with
+        # an emitted state today, so this is "same state"; anchors in different
+        # regions may be arbitrarily close).
+        for rid, pts in region_seeds.items():
+            for a in range(len(pts)):
+                for b in range(a + 1, len(pts)):
+                    (x1, y1), (x2, y2) = pts[a], pts[b]
+                    d2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
+                    if d2 < MIN_ANCHOR_SEP ** 2:
+                        raise SystemExit(
+                            f"{HUB_WORKSHEET_CONFIG.name}: two hub anchors of region {rid} are "
+                            f"{d2 ** 0.5:.1f}px apart (< {MIN_ANCHOR_SEP}) — they may collapse "
+                            f"into one province; separate them")
+        log(f"hub worksheet: {len(rows)} settlement(s) -> {len(region_seeds)} seeded region(s)", t0)
+
     log("subdividing the drawn regions into provinces ...", t0)
     land_lab, is_placeholder, reg_of, is_archipelago = land_provinces.subdivide(
-        reg, land, dmask, args.target, WRAP_X, args.min_area, log=log, keep_whole=keep_whole)
+        reg, land, dmask, args.target, WRAP_X, args.min_area, log=log, keep_whole=keep_whole,
+        region_seeds=region_seeds or None)
     n_land = int(land_lab.max())
 
     sea_lab = cells.read_labels(SEA_LABELS_PATH)
@@ -258,6 +310,31 @@ def main(argv: list[str] | None = None) -> int:
     for lab in range(1, total + 1):
         palette[lab] = alloc.allocate()
     rgb = palette[labels]
+
+    # Persist the anchor -> seeded-province index (#3665): the single authority the
+    # hub pick (generate_land_regions.py) and validate_map.py read, so neither
+    # re-resolves an anchor from the bitmap and disagrees with the cut. Written only
+    # when the worksheet exists; everything above reads none of it, so provinces.png
+    # / provinces_index.json stay byte-identical to a no-worksheet run.
+    if hub_rows:
+        hub_index = {"canvas": [CANVAS_W, CANVAS_H], "source": HUB_WORKSHEET_CONFIG.name, "hubs": []}
+        for r, rid, (rx, ry) in hub_rows:
+            plab = int(land_lab[ry, rx])
+            pcol = tuple(int(v) for v in palette[plab])
+            hub_index["hubs"].append({
+                "state": r.state,
+                "hub": r.hub,
+                "name": r.name,
+                "source": r.source,
+                "anchor": [int(r.anchor[0]), int(r.anchor[1])],
+                "resolved": [int(rx), int(ry)],
+                "region": int(rid),
+                "province_label": plab,
+                "province_color": list(pcol),
+                "province_hex": raster.color_to_hex(pcol),
+            })
+        HUB_ANCHORS_INDEX_PATH.write_text(json.dumps(hub_index, indent=1) + "\n", encoding="utf-8")
+        log(f"wrote {HUB_ANCHORS_INDEX_PATH.relative_to(REPO_ROOT)}  ({len(hub_rows)} hub(s))", t0)
 
     PROVINCES_PATH.parent.mkdir(parents=True, exist_ok=True)
     raster.write_rgb_png(PROVINCES_PATH, rgb)

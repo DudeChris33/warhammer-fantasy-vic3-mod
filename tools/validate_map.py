@@ -238,6 +238,7 @@ def validate(
     min_province_area: int = 4,
     wrap_x: bool = True,
     provinces_index_path: Path | None = None,
+    hub_anchors_index_path: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -288,11 +289,26 @@ def validate(
         archipelago_colors = {
             tuple(c["color"]) for c in prov_index["cells"] if c.get("archipelago")
         }
+    # Hub-anchor exemptions + checks (#3665). Anchor-flagged province colours are
+    # deliberately kept small (a hub seeded near a region edge), so they are
+    # exempted from the disconnected/degenerate sweep the same way archipelagos are;
+    # the hard < min_area flag still stands. Present only when a worksheet exists.
+    anchor_colors: set[Color] = set()
+    hub_index: dict | None = None
+    if hub_anchors_index_path is not None and hub_anchors_index_path.is_file() and bitmap is not None:
+        import json
+
+        hub_index = json.loads(hub_anchors_index_path.read_text(encoding="utf-8"))
+        anchor_colors = {tuple(int(v) for v in h["province_color"]) for h in hub_index["hubs"]}
     if bitmap is not None:
         errors += _check_coastal_naval_exit(land_states, sea_states, bitmap, sea_colors)
-        errors += _check_degenerate_provinces(bitmap, min_province_area, archipelago_colors)
+        errors += _check_degenerate_provinces(
+            bitmap, min_province_area, archipelago_colors | anchor_colors)
         errors += _check_bitmap_state_crosscheck(bitmap, states, sea_colors, lake_colors)
         errors += _check_lakes_stateless(states, lake_colors)
+        if hub_index is not None:
+            errors += _check_hub_anchors(
+                bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
     errors += _check_loc_coverage(states, loc_dir)
     return errors
 
@@ -330,6 +346,91 @@ def _check_hub_membership(states: list[ParsedState]) -> list[str]:
                     f"{st.key} ({st.filename}): {hub_name} {color_to_hex(color)} "
                     f"is on an impassable province"
                 )
+    return errors
+
+
+def _check_hub_anchors(bitmap: "ProvinceBitmap", states: list[ParsedState],
+                       sea_colors: set[Color], loc_keys: set[str],
+                       hub_index: dict) -> list[str]:
+    """#3665 hub-anchor checks, straight off the bitmap so they can catch a
+    disagreement between the seeded cut and the emitted state (they never re-read
+    the derived index for the answer, only for which pixel to look at):
+
+    * each anchor's resolved pixel is in-canvas and its provinces.png colour is a
+      LAND colour that matches the index (a stale index vs a re-cut bitmap fails);
+    * that colour is claimed by exactly one state, and that state declares it as
+      its ``<hub_type>`` hub — proving both "picked as the hub" and "hub in its own
+      state" in one check;
+    * a ``port`` anchor's province is coastal;
+    * the ``HUB_NAME_<state_key>_<hub>`` loc key exists;
+    * two anchors of one state share a province only when the state has fewer
+      provinces than its distinct anchor hubs (the legitimate stacking case).
+    """
+    from worldgen.raster import color_to_hex
+
+    errors: list[str] = []
+    W, H = bitmap.width, bitmap.height
+    owner: dict[Color, ParsedState] = {}
+    dup: set[Color] = set()
+    for st in states:
+        for col in st.provinces:
+            if col in owner:
+                dup.add(col)
+            owner[col] = st
+    coastal = bitmap.coastal_colors(sea_colors)
+    per_state: dict[str, list[tuple[str, Color, ParsedState]]] = {}
+
+    for h in hub_index["hubs"]:
+        name = h["name"]
+        rx, ry = int(h["resolved"][0]), int(h["resolved"][1])
+        hub = h["hub"]
+        idx_col = tuple(int(v) for v in h["province_color"])
+        if not (0 <= rx < W and 0 <= ry < H):
+            errors.append(f"hub '{name}' resolved pixel ({rx},{ry}) is outside the {W}x{H} canvas")
+            continue
+        code = int(bitmap._code[ry, rx])
+        actual = ((code >> 16) & 0xFF, (code >> 8) & 0xFF, code & 0xFF)
+        if actual != idx_col:
+            errors.append(
+                f"hub '{name}': hub_anchors_index colour {color_to_hex(idx_col)} != "
+                f"provinces.png colour {color_to_hex(actual)} at ({rx},{ry}) — stale index")
+            continue
+        if actual in sea_colors:
+            errors.append(f"hub '{name}': anchor province {color_to_hex(actual)} is sea, not land")
+            continue
+        st = owner.get(actual)
+        if st is None:
+            errors.append(f"hub '{name}': anchor province {color_to_hex(actual)} is claimed by no state")
+            continue
+        if actual in dup:
+            errors.append(f"hub '{name}': anchor province {color_to_hex(actual)} is claimed by multiple states")
+        declared = st.hubs.get(hub)
+        if declared != actual:
+            errors.append(
+                f"hub '{name}' ({st.key}): province {color_to_hex(actual)} is not the state's "
+                f"'{hub}' hub (declared {color_to_hex(declared) if declared else 'none'})")
+        if hub == "port" and actual not in coastal:
+            errors.append(
+                f"hub '{name}' ({st.key}): a port anchor must be coastal, {color_to_hex(actual)} is not")
+        lk = f"HUB_NAME_{st.key}_{hub}"
+        if lk not in loc_keys:
+            errors.append(f"hub '{name}' ({st.key}): missing loc key {lk}")
+        per_state.setdefault(st.key, []).append((hub, actual, st))
+
+    for skey, items in per_state.items():
+        by_prov: dict[Color, list[str]] = {}
+        for hub, col, _st in items:
+            by_prov.setdefault(col, []).append(hub)
+        for col, hubs_here in by_prov.items():
+            if len(hubs_here) > 1:
+                st = items[0][2]
+                n_prov = len(set(st.provinces))
+                n_hubs = len({hub for hub, _c, _s in items})
+                if n_prov >= n_hubs:
+                    errors.append(
+                        f"{skey}: hubs {sorted(hubs_here)} share province {color_to_hex(col)}, "
+                        f"but the state has {n_prov} provinces for {n_hubs} distinct anchor hub(s) "
+                        f"— give them separate provinces")
     return errors
 
 
@@ -684,9 +785,15 @@ def validate_labels(labels_path: Path, mask_path: Path, index_path: Path,
 
 def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
                        sea_labels_path: Path, wrap_x: bool = True,
-                       min_cell_area: int = 4) -> list[str]:
+                       min_cell_area: int = 4,
+                       hub_anchors_index_path: Path | None = None) -> list[str]:
     """Check the first-pass province bitmap tiles the mask exactly and agrees with
-    its index and the committed sea-zone layer."""
+    its index and the committed sea-zone layer.
+
+    ``hub_anchors_index_path`` (#3665, optional): the seeded hub provinces are
+    deliberately kept small and are exempted from the avoidably-degenerate check 7
+    (they were placed on purpose, like an archipelago); the hard <4px floor still
+    applies to them."""
     import json
 
     from worldgen import cells
@@ -834,7 +941,12 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
     #    coastal inlets, merge_floor=1), and check 6 already ties their count to
     #    that layer — re-flagging them here would be a false positive this
     #    generator cannot fix without diverging from the sea layer.
-    tiny = [i for i in sorted(land_ids) if i > 0 and int(areas[i]) < int(min_cell_area)]
+    anchor_labels: set[int] = set()
+    if hub_anchors_index_path is not None and hub_anchors_index_path.is_file():
+        hub_index = json.loads(hub_anchors_index_path.read_text(encoding="utf-8"))
+        anchor_labels = {int(h["province_label"]) for h in hub_index["hubs"]}
+    tiny = [i for i in sorted(land_ids)
+            if i > 0 and int(areas[i]) < int(min_cell_area) and i not in anchor_labels]
     if tiny:
         adj = np.concatenate([
             np.stack([labels[:, :-1].ravel(), labels[:, 1:].ravel()], axis=1),
@@ -1117,6 +1229,7 @@ def main(argv: list[str] | None = None) -> int:
             sea_labels_path=args.sea_labels_path or derived / "sea_zones.png",
             wrap_x=map_config.WRAP_X,
             min_cell_area=args.min_province_area,
+            hub_anchors_index_path=derived / "hub_anchors_index.json",
         )
         if errors:
             print(f"validate_map --province-bitmap: {len(errors)} error(s):", file=sys.stderr)
@@ -1157,6 +1270,8 @@ def main(argv: list[str] | None = None) -> int:
         wrap_x=map_config.WRAP_X,
         provinces_index_path=None if args.fixture else
         (args.index_path or TOOLS_DIR / "derived" / "provinces_index.json"),
+        hub_anchors_index_path=None if args.fixture else
+        (TOOLS_DIR / "derived" / "hub_anchors_index.json"),
     )
     if errors:
         print(f"validate_map: {len(errors)} error(s):", file=sys.stderr)

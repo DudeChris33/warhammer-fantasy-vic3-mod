@@ -90,6 +90,20 @@ classified by `tools/config/strategic_region_colors.json`) and canon name (from
 the persisted, hand-edited `tools/config/land_regions_worksheet.csv`, or its
 out-of-scope continent's name from `tools/config/out_of_scope_continents.json`);
 regenerate rather than hand-edit any of the emitted files.
+**Lore hubs (board #3665)**: `tools/config/hub_worksheet.json` is a hand-authored,
+regenerate-through input (like the naming worksheet) — one settlement per row,
+pinned to a canvas anchor. A change to it forces the **full**
+`generate_provinces.py → generate_sea_regions.py **and** generate_land_regions.py`
+cascade + re-validate, because a seeded anchor reshuffles every province colour
+(the global sorted-label `ColorAllocator`), exactly like any other
+`generate_provinces.py` regen. It writes `tools/derived/hub_anchors_index.json`
+(the anchor→province authority — regenerate, never hand-edit) and the generated
+loc `localization/english/map/wh_hub_names_l_english.yml`, which joins the map-loc
+gate. `python tools/validate_map.py` (full) runs `_check_hub_anchors` on the real
+map when that index exists; `python tools/render_hubs_preview.py` is the dev-only
+review render (source-dependent, gitignored `tools/derived/` output). Absent (no
+worksheet), every one of these paths is dormant and the map is byte-identical to a
+no-hub run.
 `tools/render_land_regions_preview.py` is the matching **dev-only** review
 render, outside the gate above: a numbered review PNG + a `tools/derived/`
 worksheet sidecar that round-trips names already committed in
@@ -178,6 +192,21 @@ absent from `keep_whole`) is cut **per connected piece** — each piece gets its
 own province(s), no province spans the two pieces, none is flagged an
 archipelago — while the same region told to stay whole via `keep_whole` ships as
 one non-contiguous province; two runs of the cut path are byte-identical.
+Two more self-checks cover the lore-hubs machinery (board #3665):
+`_selfcheck_seeded_cut` pins `cells.merge_small(protected=)` (a protected
+sub-floor cell survives the merge floor that would otherwise fold it away),
+`cells._farthest_seeds(fixed=)` (a fixed seed always comes first, and
+`fixed=None` stays byte-identical to the original farthest-point path), and
+`subdivide(region_seeds=)` end to end — every anchor gets its own province,
+no anchor province crosses a magenta region boundary, an unseeded region
+stays byte-identical to the `region_seeds=None` cut, an anchor in a
+`keep_whole` archipelago or a non-drawn region hard-errors, the cut is
+deterministic, and a `wrap_x=True` case exercises the seam-shift anchor
+translation the production `WRAP_X` uses. `_selfcheck_hub_validator` exercises `validate_map._check_hub_anchors`
+on a synthetic bitmap and state list: a clean port anchor passes; a port
+anchor resolved onto a non-coastal, non-declared province fails; a missing
+`HUB_NAME` loc key fails; and a stale index entry (resolved colour no longer
+matching the anchor's province) fails.
 
 ## Regression rule
 
