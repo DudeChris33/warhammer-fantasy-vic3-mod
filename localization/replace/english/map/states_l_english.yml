@@ -68,7 +68,7 @@
  STATE_QUENELLES:0 "Quenelles"
  STATE_GRAVE_OF_CUILEUX:0 "Grave of Cuileux"
  STATE_MASSIF_ORCAL:0 "Massif Orcal"
- STATE_LAND_070:0 "Aquitaine"
+ STATE_AQUITAINE:0 "Aquitaine"
  STATE_WYDRIOTH:0 "Wydrioth"
  STATE_BORDELEAUX:0 "Bordeleaux"
  STATE_MOUSILLON:0 "Mousillon"
