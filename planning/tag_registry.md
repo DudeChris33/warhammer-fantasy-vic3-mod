@@ -19,7 +19,7 @@ Filed by epic #3414 (child #3415).
 - [x] 02 Empire (18)
 - [x] 03 Bretonnia (17)
 - [x] 04 Karaz Ankor (18)
-- [x] 05 Southern Realms (26)
+- [x] 05 Southern Realms (27)
 - [x] 06 Badlands (11)
 - [x] 07 Nehekhara (11)
 - [x] 10 Dark Lands (6)
@@ -35,7 +35,7 @@ Filed by epic #3414 (child #3415).
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (19)
 
-**Total: 211 tags** (16 formables, 195 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 212 tags** (16 formables, 196 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -135,6 +135,7 @@ CTH
 CXC
 DGF
 DOL
+DON
 DRZ
 DUN
 EKR
@@ -509,7 +510,7 @@ matching EMP/BRE, now that the old mixed-type OR-pair workaround is no longer ne
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
-### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer, gospodar, ungol, sylvanian_vampire) — 26 tags; TIL/EST/USR formables
+### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer, gospodar, ungol, sylvanian_vampire) — 27 tags; TIL/EST/USR formables
 
 8 Tilean city-states + 3 Estalian kingdoms + one Border Princes tag. Tilea/Estalia held at their
 well-known city-states (approved as-is by Chris — the deep Tilean/Estalian/Border-Prince supply lever
@@ -540,6 +541,16 @@ outlier cultures are cross-file references (to `kislevite_humans.txt` and `vampi
 same geography-not-culture filing `MOR`/`SKZ` use. No new formable — these are start fragments
 under the existing `USR`/`TIL` unifiers.
 
+**Donalba (`DON`) added** (2026-09-06, Chris) — an eighth `tilean`-culture city-state, read off the
+same z10 map on a follow-up pass over the Tilean roster: the eastern Tilean frontier city on the
+Lissa Road below Aegis Castle (gold-sun-on-purple arms). It was the only shielded Tilean realm the
+map showed that wasn't already tagged — the map's other Tilean shields all matched existing tags
+(the green Trantine-Hills shield is Trantio's own arms, `TRA`, not a separate realm). Its purple
+color is deliberately off the Tilean ochre/terracotta/sea-green family, matching its own heraldry
+(as `SRT` is off-palette). Two Myrmidia-blazoned kite shields on the Black Peninsula (near Tor Anrok
+and Monte Castello) were left untagged — they read as Myrmidian cult/martial holdings, not Tilean
+city-states, and carry no legible settlement name.
+
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | USR | `05_southern_realms` | United Southern Realms | formable | `tilean`, `sartosan`, `estalian`, `border_princer` | — | region-wide unification above TIL/EST |
@@ -551,6 +562,7 @@ under the existing `USR`/`TIL` unifiers.
 | TRA | `05_southern_realms` | Trantio | start | `tilean` | Trantio |  |
 | PAV | `05_southern_realms` | Pavona | start | `tilean` | Pavona |  |
 | VER | `05_southern_realms` | Verezzo | start | `tilean` | Verezzo |  |
+| DON | `05_southern_realms` | Donalba | start | `tilean` | Donalba | Tilean frontier city-state on the Lissa Road, below Aegis Castle (z10 map) |
 | SRT | `05_southern_realms` | Sartosa | start | `sartosan` | Sartosa | pirate haven; melting-pot culture |
 | EST | `05_southern_realms` | Estalia | formable | `estalian` | Magritta | the kingdoms unite |
 | BIL | `05_southern_realms` | Bilbali | start | `estalian` | Bilbali |  |

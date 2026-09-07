@@ -113,6 +113,20 @@ VER = {
 	# capital: Verezzo — TODO once land state-regions exist
 }
 
+################ DON — Donalba; the sun-blazon frontier city on the Lissa Road ################
+# Added 2026-09-06 (Chris): a Tilean city-state read off sources/originals/old_world_z10.png —
+# the eastern Tilean frontier below Aegis Castle at the edge of Kharnos Forest, and the only
+# shielded Tilean realm on that map not already tagged. Muted plum echoes its gold-sun-on-purple
+# heraldry, deliberately off the Tilean ochre/terracotta/sea-green family (as SRT is off-palette).
+
+DON = {
+	color = { 120 82 128 }
+	country_type = recognized
+	tier = city_state
+	cultures = { tilean }
+	# capital: Donalba — TODO once land state-regions exist
+}
+
 ################ SRT — Sartosa; the pirate haven ################
 # unrecognized: a pirate island run by elected Pirate Princes is no part of the recognized Old World
 # order, however Tilean its people are. Black and blood-red, deliberately off the Tilean palette.
