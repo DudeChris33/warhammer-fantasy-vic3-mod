@@ -71,9 +71,19 @@ committed.
 python tools/worldgen/sources.py --verify   # sources match the manifest
 python tools/generate_coastline_mask.py      # -> tools/derived/land_sea_mask.png (from the traced coastline)
 python tools/generate_heightmap.py           # -> map_data/heightmap.png (consumes the mask above)
-python tools/generate_rivers.py              # -> map_data/rivers.png
+python tools/generate_rivers.py              # -> map_data/rivers.png (from the user's cyan river trace; board #3703)
 python tools/run_fixture.py --check          # determinism + goldens + validators
 ```
+
+> **Rivers are source-driven (board #3703), not heightmap drainage.**
+> `generate_rivers.py` reads the hand-traced pure-cyan (`0,255,255`) river network
+> (`sources/terraqueous_globe_reprojected - rivers.png`, canvas-native — or the
+> layers in `tools/config/river_sources.json`) and the optional anchor-keyed names
+> in `tools/config/canon_river_names.json`, not the terrain. Regenerating the real
+> `map_data/rivers.png` is a **user-gated visual step**: render it with `python
+> tools/render_rivers_preview.py`, send the PNG, and only commit the bitmap after
+> the user accepts it. Until a trace is accepted, the tooling ships green on the
+> `run_fixture.py --check` synthetic fixtures with no new `rivers.png` committed.
 
 Confirm `git status` shows `map_data/heightmap.png`, `map_data/rivers.png`, and
 `tools/derived/land_sea_mask.png` staged/modified. Everything else in

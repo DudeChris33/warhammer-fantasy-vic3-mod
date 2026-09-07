@@ -109,6 +109,35 @@ colour-keyed fragility class as `99_seas.txt`/the land `state_regions/*.txt` and
 is not committed until the province cut settles (#3663/#3664/#3705), at which
 point it joins the "re-run after a `generate_provinces.py` regen" set alongside
 `generate_sea_regions.py` and `generate_land_regions.py`.
+**Canon rivers (board #3703)**: `map_data/rivers.png` is **source-driven**, not
+heightmap-derived. The canon rivers are hand-traced as a pure-cyan (`0,255,255`)
+line network on the canvas (`sources/terraqueous_globe_reprojected - rivers.png`,
+1:1, no registration — or several layers declared in the optional hand-authored
+`tools/config/river_sources.json`). A source change follows the usual authoring
+cascade: edit/redraw the trace → `python tools/worldgen/sources.py
+--update-manifest` (an explicit user action) → `python tools/generate_rivers.py`
+(→ `map_data/rivers.png` + the committed `tools/derived/rivers_index.json`) →
+`python tools/validate_map.py` (full) → `python tools/render_rivers_preview.py`
+→ **send the render, get the user's visual verdict** → commit. `generate_rivers.py`
+is decoupled from the province cut (it reads the committed `land_sea_mask.png` +
+the cyan trace + the heightmap for flow tie-breaks), so a `generate_provinces.py`
+regen does **not** invalidate `rivers.png` — but a *province* regen does move the
+state colours the `rivers_index.json` `state_keys` join reads, so re-run
+`generate_rivers.py` after one if you need the index's `state_keys` current. The
+full `validate_map.py` run gains a `_check_rivers` (indices ⊆ the vanilla
+semantic set, every river pixel on land, sea mouths touch water, source/merge
+well-formed, the 2×2-block caps, and the `canon_rivers.csv` (river, state)
+coverage cross-check when that file exists) **gated on
+`tools/config/canon_river_names.json` existing** — absent (Phase A) the check is
+skipped so today's bogus heightmap-drainage bitmap does not redden the committed
+gate. `python tools/run_fixture.py --check` exercises the extraction
+(`worldgen/river_network.py`) and the validator in isolation on synthetic drawn
+networks (Strahler stems with one source per headwater; stranded line, closed
+loop and divergent delta fork each rejected; a short spur pruned; a wrap-seam
+stem; byte-identical reruns) and `validate_map._check_rivers` (on-land,
+sea-mouth-touches-water, in-set indices, negative cases). Phase A ships the
+tooling green on those fixtures with **no `rivers.png` regenerated or committed**;
+regenerating the real bitmap is the user-gated Phase-B step above.
 **Lore hubs (board #3665)**: `tools/config/hub_worksheet.json` is a hand-authored,
 regenerate-through input (like the naming worksheet) — one settlement per row,
 pinned to a canvas anchor. A change to it forces the **full**
@@ -233,6 +262,17 @@ sorted by integer id (not index order), two runs are byte-identical, an empty
 cell list is refused rather than writing a truncated file, and the emitted file
 round-trips cleanly through the validator, whose bijection and valid-id checks
 each fail on a missing line, an extra line, and an undefined terrain id.
+`_selfcheck_river_extraction` (board #3703) exercises `worldgen/river_network.py`
+on synthetic cyan networks: a Y-junction stitches maximal Strahler stems with one
+green source per headwater and a red MERGE at the confluence (source count ==
+headwater count, not per-segment), streams run source-first, an anchor names
+exactly one stream, the trunk widens downstream, and two runs are byte-identical;
+a stranded inland line, a closed loop and a divergent delta fork are each hard
+errors; a short spur is pruned rather than becoming a fake headwater; and a
+wrap-seam-crossing stem extracts under `wrap_x`. `_selfcheck_river_validator`
+exercises `validate_map._check_rivers` on synthetic index arrays: a clean
+rivers.png passes, and a river pixel on sea, a river dead-ending on land, and an
+out-of-set index each fail.
 
 ## Regression rule
 
