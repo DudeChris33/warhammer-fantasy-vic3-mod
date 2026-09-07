@@ -68,7 +68,8 @@ intentional source/LUT/registration change, regenerate them with `python
 tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png` — either
 flood-filled from the user's traced coastline in `sources/land_sea_mask.png`, or,
 with `--from-fill`, read directly when that source is already a finished
-black/white land fill rather than a coastline trace), `python
+black/white land fill rather than a coastline trace; `--from-fill` also emits the
+companion `tools/derived/lake_mask.png`, board #3742 — see below), `python
 tools/generate_heightmap.py` (which now *consumes* that mask — the old
 height-ramp mask derivation was deleted 2026-08-22), `python
 tools/generate_rivers.py`, `python tools/generate_state_labels.py`, `python
@@ -98,17 +99,52 @@ regenerate rather than hand-edit any of the emitted files.
 `map_data/province_terrains.txt` (board #2968) is the map-config counterpart,
 emitted by `python tools/generate_province_terrains.py` from
 `provinces_index.json`'s `cells` — one `x<HEX>="terrain"` line per province,
-sorted by id, land → `"plains"` and sea → `"ocean"` (both defined in
-`common/terrain/01_terrain.txt`), a uniform placeholder baseline standing in for
-a future sourcing-driven terrain pass. `validate_map.py --province-bitmap`'s
-check 8 (`validate_province_terrains`) verifies it, when present, is a bijection
-with the index colours and that every terrain id is defined in `common/terrain`;
-its **absence is a clean skip, not an error** — same convention as
-`_check_adjacencies`. The generated file is **deferred**: it is the same
-colour-keyed fragility class as `99_seas.txt`/the land `state_regions/*.txt` and
-is not committed until the province cut settles (#3663/#3664/#3705), at which
-point it joins the "re-run after a `generate_provinces.py` regen" set alongside
-`generate_sea_regions.py` and `generate_land_regions.py`.
+sorted by id, land → `"plains"`, sea → `"ocean"` and (board #3742) lake →
+`"lakes"` (all three defined in `common/terrain/01_terrain.txt`; the lake mapping
+is only exercised when the index carries `kind:"lake"` cells), a uniform
+placeholder baseline standing in for a future sourcing-driven terrain pass.
+`validate_map.py --province-bitmap`'s check 8 (`validate_province_terrains`)
+verifies it, when present, is a bijection with the index colours and that every
+terrain id is defined in `common/terrain`; its **absence is a clean skip, not an
+error** — same convention as `_check_adjacencies`. The generated file is
+**deferred**: it is the same colour-keyed fragility class as `99_seas.txt`/the
+land `state_regions/*.txt` and is not committed until the province cut settles
+(#3663/#3664/#3705), at which point it joins the "re-run after a
+`generate_provinces.py` regen" set alongside `generate_sea_regions.py` and
+`generate_land_regions.py`.
+**Inland lakes (board #3742)**: a third province class — `lake`, water not
+connected to the world ocean — is threaded through the same pipeline as an
+*optional* companion layer, `tools/derived/lake_mask.png`, emitted by
+`generate_coastline_mask.py --from-fill` (see above). Its pure core is
+`tools/worldgen/lakes.py` (`classify`/`label`/`assemble` — the lake mirror of
+`worldgen/sea_zones.py`: of the water, the largest wrap-aware connected component
+is the world ocean and every other component is an inland lake, one province per
+lake, no subdivision). When present, `generate_sea_zones.py` passes it to
+`sea_zones.extract`'s new `exclude=` param so a lake is never labelled a sea
+zone; `generate_provinces.py` tiles land/ocean/lake three-way and appends
+`kind:"lake"` cells (`impassable:true`, informational) with new index header keys
+`lake_provinces`/`lake_id_start`, ids continuing the one shared id space after
+the sea band; and `generate_sea_regions.py` block-replaces `map_data/default.map`'s
+`lakes = { }` block with the lake province colours (empty when there are none) —
+**lakes are stateless**, declared only there, never in a `99_seas` state, a water
+strategic region, or loc. `validate_map.py --province-bitmap` becomes three-way
+when a lake mask and/or lake cells are present (lake band check, no province
+straddles land/ocean/lake, the sea layer tiles the *navigable* water only,
+lake-labelled pixels == the lake mask exactly); the full `validate_map.py` run
+gains `_check_lakes_declared` closing the loop between the index's lake colours
+and `default.map`'s `lakes` block. `python tools/run_fixture.py --check` gained
+`_selfcheck_lakes` (classify/label/assemble; `sea_zones.extract`'s exclude=
+before/after; the three-way validator; the stateless checks; `_replace_lakes`
+idempotence) and `_selfcheck_province_terrains` now also covers the `lake ->
+"lakes"` mapping. **Every lake code path is dormant and byte-identical to the
+prior two-class (land/ocean) behaviour when no `lake_mask.png` exists** — this is
+Phase A tooling only, like rivers #3703: the real `lake_mask.png` and the
+bitmaps it feeds are regenerated only on the user's fill and gated on their
+visual verdict, not here. A `generate_provinces.py` regen invalidates the lake
+dependents too, so `lake_mask.png`'s presence joins the "re-run
+`generate_sea_zones.py`, `generate_sea_regions.py`, `generate_land_regions.py`
+and `generate_province_terrains.py` after a `generate_provinces.py` regen" set
+above.
 **Canon rivers (board #3703)**: `map_data/rivers.png` is **source-driven**, not
 heightmap-derived. The canon rivers are hand-traced as a pure-cyan (`0,255,255`)
 line network on the canvas (`sources/terraqueous_globe_reprojected - rivers.png`,
