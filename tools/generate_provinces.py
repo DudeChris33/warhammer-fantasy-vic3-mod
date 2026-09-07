@@ -443,6 +443,13 @@ def main(argv: list[str] | None = None) -> int:
     # default.map's `lakes` block, never in a state region (validate_map's
     # _check_lakes_stateless / _check_bitmap_state_crosscheck encode that). Marked
     # impassable (inland, non-navigable; harmless as no state ever lists them).
+    # The world ocean is the navigable water — exactly the sea provinces, which
+    # tile it (asserted above) — so its area is the sum of the sea province areas
+    # and equals lakes.classify's own ocean_area. Persist each lake's fraction of
+    # it (board #3742 Phase B) so the sealed-strait guard is legible in the index
+    # itself and re-checkable offline by validate_map._warn_lakes_oversized rather
+    # than living only in generate_coastline_mask.py stdout.
+    ocean_area = int(areas[n_land + 1:n_land + n_sea + 1].sum())
     lake_id_start = n_land + n_sea + 1
     for k in range(1, n_lake + 1):
         lab = n_land + n_sea + k
@@ -454,6 +461,7 @@ def main(argv: list[str] | None = None) -> int:
             "hex": raster.color_to_hex(color),
             "id": lake_id_start + (k - 1),  # == lab, continues after the sea band
             "area": int(areas[lab]),
+            "ocean_area_fraction": round(int(areas[lab]) / ocean_area, 6) if ocean_area else 0.0,
             "coastal": bool(lake_coastal[k]) if k < len(lake_coastal) else False,
             "impassable": True,  # inland non-navigable water (stateless; informational)
             "placeholder": False,  # schema symmetry with land/sea entries

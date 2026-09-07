@@ -132,11 +132,28 @@ when a lake mask and/or lake cells are present (lake band check, no province
 straddles land/ocean/lake, the sea layer tiles the *navigable* water only,
 lake-labelled pixels == the lake mask exactly); the full `validate_map.py` run
 gains `_check_lakes_declared` closing the loop between the index's lake colours
-and `default.map`'s `lakes` block. `python tools/run_fixture.py --check` gained
+and `default.map`'s `lakes` block. **Phase B hardening (board #3742 follow-up):**
+`generate_provinces.py` persists each lake cell's `ocean_area_fraction` (its area
+over the world ocean's — the sum of the sea province areas, which tile the
+navigable water), and `validate_map.py --province-bitmap` re-surfaces the two
+content-integrity guards that previously lived only in
+`generate_coastline_mask.py` stdout, as **non-blocking `WARNING`s** printed to
+stderr that never gate the exit code (a legit large/small lake may exist; the
+render is the final gate): `_warn_lakes_oversized` (a lake over
+`lakes.OCEAN_WARN_FRACTION` of the ocean — a navigable sea the fill may have
+sealed off) and `_warn_lakes_degenerate` (a lake below `lakes.LAKE_REPORT_MIN`, a
+*reporting* floor mirroring `generate_coastline_mask._REPORT_MIN` — likely fill
+speckle; `lakes.label` gives every water component a province with no floor, and
+the remedy is drop-or-redraw, never merge, since a lone speck has no lake
+neighbour to merge into). These flow through a caller-owned `warnings=` list
+distinct from the returned error list; `lakes.classify` logs the same two guards
+at generation time. `python tools/run_fixture.py --check` gained
 `_selfcheck_lakes` (classify/label/assemble; `sea_zones.extract`'s exclude=
 before/after; the three-way validator; the stateless checks; `_replace_lakes`
-idempotence) and `_selfcheck_province_terrains` now also covers the `lake ->
-"lakes"` mapping. **Every lake code path is dormant and byte-identical to the
+idempotence; **and, Phase B, `classify`'s oversized/junk-lake log reporting, the
+two `_warn_lakes_*` functions in isolation, and the end-to-end proof that
+`validate_provinces` populates `warnings` without adding to `errors`**) and
+`_selfcheck_province_terrains` now also covers the `lake -> "lakes"` mapping. **Every lake code path is dormant and byte-identical to the
 prior two-class (land/ocean) behaviour when no `lake_mask.png` exists** — this is
 Phase A tooling only, like rivers #3703: the real `lake_mask.png` and the
 bitmaps it feeds are regenerated only on the user's fill and gated on their

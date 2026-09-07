@@ -1461,6 +1461,48 @@ def _selfcheck_lakes() -> None:
     assert (lab[~lake] == 0).all(), "no non-lake pixel may carry a lake label"
     assert np.array_equal(lab, lk.label(lake, wrap_x=False)), "label must be deterministic"
 
+    # --- Phase B (board #3742): classify reporting via the log hook ---
+    # A lake over OCEAN_WARN_FRACTION of the world ocean logs a sealed-strait
+    # WARNING; any sub-report_min lake logs a junk-speck note.
+    rland = np.ones((40, 40), dtype=bool)
+    rland[:, :20] = False            # world ocean, 800 px
+    rland[5:11, 30:36] = False       # a 6x6 = 36 px lake: 4.5% > 3% guard, < 2000 floor
+    lines: list[str] = []
+    lk.classify(rland, wrap_x=False, log=lines.append)
+    assert any("WARNING" in ln and "sealed off" in ln for ln in lines), \
+        f"classify must warn on an over-{lk.OCEAN_WARN_FRACTION:.0%} lake, got {lines}"
+    assert any("report floor" in ln for ln in lines), \
+        f"classify must note a sub-floor lake, got {lines}"
+    # A tiny lake in a big ocean is under the fraction guard (no WARNING) but still
+    # under the report floor (still noted).
+    rland2 = np.ones((40, 40), dtype=bool)
+    rland2[:, :20] = False           # world ocean, 800 px
+    rland2[5:7, 30:32] = False       # 2x2 = 4 px: 0.5% < guard, < 2000 floor
+    lines2: list[str] = []
+    lk.classify(rland2, wrap_x=False, log=lines2.append)
+    assert not any("WARNING" in ln for ln in lines2), \
+        f"a 0.5% lake must not trigger the sealed-strait WARNING, got {lines2}"
+    assert any("report floor" in ln for ln in lines2), \
+        f"a sub-floor lake must still be noted, got {lines2}"
+
+    # --- Phase B: the two non-blocking index-side warning functions, in isolation ---
+    sea_cell = {"kind": "sea", "area": 10000, "hex": "x0000FF"}
+    big_lake = {"kind": "lake", "area": 400, "hex": "xAAAAAA"}   # 4% of ocean > 3% guard
+    small_lake = {"kind": "lake", "area": 50, "hex": "xBBBBBB"}  # 0.5% < guard; < 2000 floor
+    assert vm._warn_lakes_oversized([sea_cell, big_lake], lk.OCEAN_WARN_FRACTION), \
+        "a lake over the ocean-fraction guard must warn"
+    assert vm._warn_lakes_oversized([sea_cell, small_lake], lk.OCEAN_WARN_FRACTION) == [], \
+        "a lake under the guard must not warn"
+    assert vm._warn_lakes_oversized([sea_cell], lk.OCEAN_WARN_FRACTION) == [], \
+        "no lake cells -> no oversized warning (dormant)"
+    big_ok = {"kind": "lake", "area": 5000, "hex": "xCCCCCC"}    # >= 2000 report floor
+    assert vm._warn_lakes_degenerate([sea_cell, small_lake], lk.LAKE_REPORT_MIN), \
+        "a lake below the report floor must warn"
+    assert vm._warn_lakes_degenerate([sea_cell, big_ok], lk.LAKE_REPORT_MIN) == [], \
+        "a lake at/above the report floor must not warn"
+    assert vm._warn_lakes_degenerate([sea_cell], lk.LAKE_REPORT_MIN) == [], \
+        "no lake cells -> no degenerate warning (dormant)"
+
     # --- sea_zones.extract before/after (the defect, then the fix) ---
     drawn = np.full((12, 24, 3), 180, dtype=np.uint8)  # no purple dividers
     zones_before = sz.extract(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
@@ -1542,6 +1584,21 @@ def _selfcheck_lakes() -> None:
             tdp / "provinces.png", tdp / "mask.png", tdp / "index.json",
             tdp / "sea_zones.png", wrap_x=False, lake_mask_path=tdp / "lake_mask.png")
         assert clean == [], f"a clean lake-bearing map must pass, got {clean}"
+
+        # Phase B (board #3742): the advisory warnings surface via the accumulator
+        # but never gate — errors stay empty. Here the two synthetic lakes are each
+        # ~5.6% of the tiny 72 px ocean (over the guard) and 4 px (under the report
+        # floor), so both advisories fire while the gate still passes.
+        warns: list[str] = []
+        clean_w = vm.validate_provinces(
+            tdp / "provinces.png", tdp / "mask.png", tdp / "index.json",
+            tdp / "sea_zones.png", wrap_x=False, lake_mask_path=tdp / "lake_mask.png",
+            warnings=warns)
+        assert clean_w == [], f"warnings must not become errors, got {clean_w}"
+        assert any("sealed off" in w for w in warns), \
+            f"an over-guard lake must raise a non-blocking sealed-strait warning, got {warns}"
+        assert any("report floor" in w for w in warns), \
+            f"a sub-floor lake must raise a non-blocking junk-lake warning, got {warns}"
 
         # Negative: a lake pixel painted the ocean colour (a lake labelled sea).
         bad = rgb.copy()
@@ -2134,7 +2191,8 @@ def run_check() -> int:
           "(archipelago kept whole via keep_whole) self-check passed.")
     _selfcheck_lakes()
     print("lakes: classify/label/assemble + sea_zones exclude + three-way validate + "
-          "stateless checks + default.map lakes block self-check passed.")
+          "stateless checks + default.map lakes block + non-blocking oversized/junk-lake "
+          "warnings self-check passed.")
     _selfcheck_seeded_cut()
     print("land_provinces: hub-anchor seeded cut (own-province seeds, boundary kept, "
           "unseeded byte-identical, protected pieces, hard errors) self-check passed.")

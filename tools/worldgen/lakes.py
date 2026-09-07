@@ -38,12 +38,28 @@ from worldgen import cells
 #: stateless and offline-uncatchable (``validate_map._check_lakes_stateless``
 #: accepts a stateless lake of any size), so :func:`classify` logs a loud WARNING
 #: — not a hard error, since a legitimately large lake may exist and the user's
-#: render is the final gate.
+#: render is the final gate. The same guard is re-surfaced off the committed index
+#: by ``validate_map._warn_lakes_oversized`` (board #3742 Phase B), so it can no
+#: longer be missed in generator stdout alone.
 OCEAN_WARN_FRACTION = 0.03
+
+#: A lake below this many px is *probably* fill speckle / anti-alias dust rather
+#: than a real inland lake. Unlike sea zones (``sea_zones.extract``'s merge_floor)
+#: or the land degeneracy sweep, :func:`label` gives **every** non-ocean water
+#: component its own province with no floor — an enclosed junk speck has no lake
+#: neighbour to merge into, so the remedy is *drop or redraw the fill*, never
+#: merge. This is a **reporting** floor, the exact analogue of
+#: ``generate_coastline_mask._REPORT_MIN`` (which reports, never masks): a lake
+#: below it is a loud note here at generation time and a non-blocking WARNING off
+#: the committed index in ``validate_map._warn_lakes_degenerate`` (board #3742
+#: Phase B). It is never a hard error — the ≥4 px degeneracy floor and the user's
+#: render remain the actual gates.
+LAKE_REPORT_MIN = 2000
 
 
 def classify(land: np.ndarray, wrap_x: bool = True,
-             warn_fraction: float = OCEAN_WARN_FRACTION, log=None) -> np.ndarray:
+             warn_fraction: float = OCEAN_WARN_FRACTION,
+             report_min: int = LAKE_REPORT_MIN, log=None) -> np.ndarray:
     """Boolean lake mask: True where a water pixel is an enclosed inland lake.
 
     ``land`` is the boolean land mask. Of the water (``~land``), the largest
@@ -66,9 +82,10 @@ def classify(land: np.ndarray, wrap_x: bool = True,
     lake_mask = water & (bodies != ocean_id)
 
     if log:
-        n_lake = sum(1 for i in range(1, len(areas)) if i != ocean_id and areas[i] > 0)
+        lake_areas = [int(areas[i]) for i in range(1, len(areas))
+                      if i != ocean_id and areas[i] > 0]
         log(f"  lakes: world ocean = body {ocean_id} ({ocean_area:,} px), "
-            f"{n_lake} enclosed lake body(ies), {int(lake_mask.sum()):,} lake px")
+            f"{len(lake_areas)} enclosed lake body(ies), {int(lake_mask.sum()):,} lake px")
         for i in range(1, len(areas)):
             if i == ocean_id or areas[i] == 0:
                 continue
@@ -77,6 +94,17 @@ def classify(land: np.ndarray, wrap_x: bool = True,
                     f"{warn_fraction:.1%} of the world ocean ({ocean_area:,} px) — a "
                     f"navigable sea may have been sealed off from the ocean by the fill; "
                     f"verify on the rendered map")
+        # Junk-speck report (board #3742 Phase B): label() gives every lake body a
+        # province with no floor, so a noisy fill can mint dozens of micro-lakes.
+        # Surface them loudly here (drop-or-redraw, never merge — a lone speck has
+        # no lake neighbour to merge into); the same floor is re-checked off the
+        # committed index by validate_map._warn_lakes_degenerate.
+        if report_min > 0:
+            tiny = sorted(a for a in lake_areas if a < report_min)
+            if tiny:
+                log(f"  note: {len(tiny)} lake body(ies) below the {report_min:,} px report "
+                    f"floor (smallest {tiny[0]:,} px) — check these aren't fill speckle "
+                    f"rather than real lakes")
     return lake_mask
 
 

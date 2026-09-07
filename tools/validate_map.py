@@ -776,6 +776,68 @@ def _check_lakes_stateless(states: list[ParsedState], lake_colors: set[Color]) -
     return errors
 
 
+def _warn_lakes_oversized(cells: list[dict], warn_fraction: float) -> list[str]:
+    """Board #3742 Phase B — the sealed-strait guard, re-surfaced off the committed
+    index as a **non-blocking WARNING** (the caller keeps these out of the error
+    list; see :func:`validate_provinces`' ``warnings`` accumulator).
+
+    ``lakes.classify`` warns at generation time when an inland lake exceeds
+    ``OCEAN_WARN_FRACTION`` of the world ocean — a navigable sea a hand-drawn fill
+    may have sealed off — but that warning lives only in
+    ``generate_coastline_mask.py`` stdout and is trivially missed. This recomputes
+    the same ratio independently from the index (so a stale/wrong persisted
+    ``ocean_area_fraction`` cannot hide it): the world ocean is the navigable water,
+    which the sea provinces tile exactly, so its area is the sum of the sea province
+    areas — the very quantity ``classify`` measured. Stays a warning, never an
+    error: a legitimately large lake may exist and the render is the final gate.
+    Empty when there are no lake cells (dormant — byte-identical to a no-lake map).
+    """
+    lake_cells = [c for c in cells if c.get("kind") == "lake"]
+    if not lake_cells or warn_fraction <= 0:
+        return []
+    ocean_area = sum(int(c["area"]) for c in cells if c.get("kind") == "sea")
+    if ocean_area <= 0:
+        return []
+    warnings: list[str] = []
+    for c in lake_cells:
+        area = int(c["area"])
+        frac = area / ocean_area
+        if frac > warn_fraction:
+            warnings.append(
+                f"lake province {c['hex']} is {area:,} px, {frac:.1%} of the world ocean "
+                f"({ocean_area:,} px) — over the {warn_fraction:.1%} guard; a navigable sea "
+                f"may have been sealed off from the ocean by the fill. Verify on the "
+                f"rendered map.")
+    return warnings
+
+
+def _warn_lakes_degenerate(cells: list[dict], report_min: int) -> list[str]:
+    """Board #3742 Phase B — the junk-lake report, off the committed index, as a
+    **non-blocking WARNING** (kept out of the error list by the caller).
+
+    ``lakes.label`` gives every non-ocean water component its own province with no
+    size floor — unlike sea zones or the land degeneracy sweep — so a noisy fill
+    (anti-alias speckle, dust) can mint dozens of junk micro-lakes that clear the
+    hard ≥ ``min_cell_area`` floor and so pass ``validate_provinces``' land-only
+    check 7 silently. This surfaces every lake below ``report_min`` (mirroring
+    ``generate_coastline_mask._REPORT_MIN`` — a reporting floor, not a masking one).
+    The remedy is drop-or-redraw the fill, never merge: an enclosed speck has no
+    lake neighbour to merge into. Warning, not error, and empty when there are no
+    lake cells (dormant)."""
+    if report_min <= 0:
+        return []
+    tiny = sorted((int(c["area"]), c["hex"]) for c in cells
+                  if c.get("kind") == "lake" and int(c["area"]) < report_min)
+    if not tiny:
+        return []
+    smallest_area, smallest_hex = tiny[0]
+    return [
+        f"{len(tiny)} lake province(s) are below the {report_min:,} px report floor "
+        f"(smallest {smallest_hex} at {smallest_area:,} px) — check these aren't fill "
+        f"speckle/dust rather than real lakes (lakes are never merged, only kept or "
+        f"redrawn). Verify on the rendered map."]
+
+
 def _check_loc_coverage(states: list[ParsedState], loc_dir: Path) -> list[str]:
     errors = []
     loc_keys = _parse_loc_keys(loc_dir)
@@ -975,7 +1037,8 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
                        hub_anchors_index_path: Path | None = None,
                        province_terrains_path: Path | None = None,
                        terrain_defs_path: Path | None = None,
-                       lake_mask_path: Path | None = None) -> list[str]:
+                       lake_mask_path: Path | None = None,
+                       warnings: list[str] | None = None) -> list[str]:
     """Check the first-pass province bitmap tiles the mask exactly and agrees with
     its index and the committed sea-zone layer.
 
@@ -986,6 +1049,15 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
     province straddles two classes, the sea layer tiles the *navigable* water only,
     and the lake-labelled pixels equal the lake mask exactly. Absent lake mask
     **and** no lake cells → the two-class behaviour, byte-identical to before.
+
+    ``warnings`` (#3742 Phase B, optional): a caller-owned accumulator for
+    **non-blocking** lake advisories that must not gate the exit code — the
+    sealed-strait guard (:func:`_warn_lakes_oversized`) and the junk-lake report
+    (:func:`_warn_lakes_degenerate`). Kept separate from the returned error list on
+    purpose: a legitimately large or small lake may exist and the render is the
+    final gate, so these inform without failing. Pass ``None`` (every caller but the
+    ``--province-bitmap`` CLI and its self-check) and they are not even computed —
+    behaviour is byte-identical to before the parameter existed.
 
     ``hub_anchors_index_path`` (#3665, optional): the seeded hub provinces are
     deliberately kept small and are exempted from the avoidably-degenerate check 7
@@ -1239,6 +1311,16 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
         errors.extend(validate_province_terrains(
             index["cells"], province_terrains_path,
             terrain_defs_path or (REPO_ROOT / "common" / "terrain" / "01_terrain.txt")))
+
+    # Non-blocking lake advisories (#3742 Phase B). Collected into the caller's
+    # `warnings` list, never `errors`, so they surface without gating the exit
+    # code. Both no-op when there are no lake cells, so a lake-free map is
+    # byte-identical to before this existed.
+    if warnings is not None:
+        from worldgen.lakes import LAKE_REPORT_MIN, OCEAN_WARN_FRACTION
+
+        warnings += _warn_lakes_oversized(index["cells"], OCEAN_WARN_FRACTION)
+        warnings += _warn_lakes_degenerate(index["cells"], LAKE_REPORT_MIN)
     return errors
 
 
@@ -1562,6 +1644,7 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.province_bitmap:
         derived = TOOLS_DIR / "derived"
+        warnings: list[str] = []
         errors = validate_provinces(
             provinces_path=args.provinces or REPO_ROOT / "map_data" / "provinces.png",
             mask_path=args.mask_path or derived / "land_sea_mask.png",
@@ -1573,14 +1656,23 @@ def main(argv: list[str] | None = None) -> int:
             province_terrains_path=REPO_ROOT / "map_data" / "province_terrains.txt",
             terrain_defs_path=REPO_ROOT / "common" / "terrain" / "01_terrain.txt",
             lake_mask_path=args.lake_mask_path or derived / "lake_mask.png",
+            warnings=warnings,
         )
+        # Warnings are advisory (#3742 Phase B) — printed whether the gate passes or
+        # fails, but they never gate the exit code (a legit large/small lake may
+        # exist; the render is the final gate).
+        for w in warnings:
+            print(f"  ! WARNING: {w}", file=sys.stderr)
         if errors:
             print(f"validate_map --province-bitmap: {len(errors)} error(s):", file=sys.stderr)
             for e in errors:
                 print(f"  - {e}", file=sys.stderr)
             return 1
-        print("validate_map --province-bitmap: the province bitmap tiles the mask and agrees "
-              "with its index + the sea layer.")
+        msg = ("validate_map --province-bitmap: the province bitmap tiles the mask and agrees "
+               "with its index + the sea layer.")
+        if warnings:
+            msg += f" ({len(warnings)} non-blocking lake warning(s) above)"
+        print(msg)
         return 0
 
     if args.sea:
