@@ -33,7 +33,10 @@ Writes (all deterministic — pure functions of the two committed indices):
   (2026-08-31 exception). Colours from ``provinces.png``, ids/keys from the
   canon index.
 * ``map_data/default.map`` — in-place block-replace of only the ``sea_starts``
-  body with the 201 sea colours; every other key is left byte-for-byte untouched.
+  body with the 201 sea colours, and (board #3742) the ``lakes`` body with any
+  ``kind == "lake"`` province colours from the index (empty when there are no
+  lakes); every other key is left byte-for-byte untouched. Lakes are **stateless**
+  — declared here alone, never in a 99_seas state, water strategic region or loc.
 * ``common/strategic_regions/water_strategic_regions.txt`` — one ``states``-only
   region per sea *state* by default (2026-09-03: 1 state = 1 region unless a
   future explicit exception groups several; filename overrides vanilla's
@@ -247,8 +250,47 @@ def _replace_sea_starts(default_map_text: str, colors: dict[int, raster.Color]) 
     return default_map_text[:start] + new_block + default_map_text[brace_close + 1:]
 
 
+def _replace_block(default_map_text: str, keyword: str, toks: str) -> str:
+    """Replace only ``<keyword> = { ... }``'s body; leave every other key intact.
+
+    Shared by the ``sea_starts`` and ``lakes`` (board #3742) block-replaces.
+    Idempotent: the token set/order is a pure function of the colours, and an
+    empty ``toks`` collapses to ``<keyword> = {\\n}`` — the shape vanilla ships an
+    empty block in."""
+    open_kw = f"{keyword} = {{"
+    start = default_map_text.index(open_kw)
+    brace_open = default_map_text.index("{", start)
+    depth = 0
+    brace_close = -1
+    for i in range(brace_open, len(default_map_text)):
+        ch = default_map_text[i]
+        if ch == "{":
+            depth += 1
+        elif ch == "}":
+            depth -= 1
+            if depth == 0:
+                brace_close = i
+                break
+    if brace_close < 0:
+        raise SystemExit(f"default.map: unbalanced braces in {keyword} block")
+    body = f"\n{INDENT}{toks}\n" if toks else "\n"
+    new_block = f"{keyword} = {{{body}}}"
+    return default_map_text[:start] + new_block + default_map_text[brace_close + 1:]
+
+
+def _replace_lakes(default_map_text: str, colors: dict[int, raster.Color]) -> str:
+    """Replace the ``lakes = { ... }`` body with the lake province colours (board
+    #3742). Empty when there are no lakes — the vanilla empty-block shape."""
+    toks = " ".join(sorted(raster.color_to_hex(c) for c in colors.values()))
+    return _replace_block(default_map_text, "lakes", toks)
+
+
 def _parse_sea_starts(default_map_text: str) -> set[str]:
-    open_kw = "sea_starts = {"
+    return _parse_color_field(default_map_text, "sea_starts")
+
+
+def _parse_color_field(default_map_text: str, keyword: str) -> set[str]:
+    open_kw = f"{keyword} = {{"
     start = default_map_text.index(open_kw)
     brace_open = default_map_text.index("{", start)
     depth = 0
@@ -261,7 +303,7 @@ def _parse_sea_starts(default_map_text: str) -> set[str]:
             if depth == 0:
                 body = default_map_text[brace_open + 1:i]
                 return set(body.split())
-    raise SystemExit("default.map: unbalanced braces in sea_starts block")
+    raise SystemExit(f"default.map: unbalanced braces in {keyword} block")
 
 
 def _loc_keys(path: Path) -> set[str]:
@@ -298,6 +340,15 @@ def main(argv: list[str] | None = None) -> int:
     # Real province colours, joined by label arithmetic (asserted complete).
     colors = _join_colors(cells, prov_index)
 
+    # Lake province colours (board #3742), straight from the province index. Lakes
+    # are stateless: they appear ONLY in default.map's `lakes` block, never in a
+    # 99_seas state, a water strategic region, or the loc. Empty when there are no
+    # lakes (the Phase-A default), which normalizes the block to its empty shape.
+    lake_colors: dict[int, raster.Color] = {
+        int(c["label"]): tuple(int(v) for v in c["color"])
+        for c in prov_index["cells"] if c.get("kind") == "lake"
+    }
+
     # --- 1. sea loc (canon, unchanged) -----------------------------------
     _write_bytes(LOC_PATH, _render_loc(cells), bom=True)
     print(f"wrote {LOC_PATH.relative_to(MOD_ROOT)}  ({len(cells)} zones)")
@@ -308,11 +359,13 @@ def main(argv: list[str] | None = None) -> int:
     print(f"wrote {SEAS_TXT_PATH.relative_to(MOD_ROOT)}  "
           f"({n_states} states, {len(cells)} provinces)")
 
-    # --- 3. default.map sea_starts (in-place block replace) --------------
+    # --- 3. default.map sea_starts + lakes (in-place block replaces) -----
     dm_text = DEFAULT_MAP_PATH.read_text(encoding="utf-8")
     dm_new = _replace_sea_starts(dm_text, colors)
+    dm_new = _replace_lakes(dm_new, lake_colors)  # board #3742 — empty when no lakes
     _write_bytes(DEFAULT_MAP_PATH, dm_new, bom=False)
-    print(f"wrote {DEFAULT_MAP_PATH.relative_to(MOD_ROOT)}  (sea_starts: {len(colors)} colours)")
+    print(f"wrote {DEFAULT_MAP_PATH.relative_to(MOD_ROOT)}  "
+          f"(sea_starts: {len(colors)} colours, lakes: {len(lake_colors)} colours)")
 
     # --- 4. water strategic regions --------------------------------------
     _write_bytes(STRATEGIC_REGIONS_PATH, _render_water_strategic_regions(cells), bom=True)
@@ -349,12 +402,30 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"invariant: {len(missing_loc)} sea states have no loc key: "
                          f"{sorted(missing_loc)[:5]}")
 
-    # Idempotence: re-running the block-replace on our own output is a no-op.
-    if _replace_sea_starts(dm_new, colors) != dm_new:
-        raise SystemExit("invariant: default.map sea_starts replace is not idempotent")
+    # Lakes (board #3742): the default.map `lakes` block matches the index lake
+    # colours exactly, no lake colour is also a sea colour, and no lake colour is
+    # claimed by any 99_seas state (lakes are stateless).
+    lakes_block = _parse_color_field(dm_new, "lakes")
+    lake_hexes = {raster.color_to_hex(c) for c in lake_colors.values()}
+    if lakes_block != lake_hexes:
+        raise SystemExit(
+            f"invariant: default.map lakes block {sorted(lakes_block)[:5]} != index lake "
+            f"colours {sorted(lake_hexes)[:5]}")
+    both = lake_hexes & starts_colors
+    if both:
+        raise SystemExit(f"invariant: {len(both)} colour(s) are in both sea_starts and lakes: "
+                         f"{sorted(both)[:5]}")
+    if lake_hexes & seas_colors:
+        raise SystemExit(f"invariant: {len(lake_hexes & seas_colors)} lake colour(s) are "
+                         f"claimed by a 99_seas state — lakes must be stateless")
+
+    # Idempotence: re-running the block-replaces on our own output is a no-op.
+    if _replace_lakes(_replace_sea_starts(dm_new, colors), lake_colors) != dm_new:
+        raise SystemExit("invariant: default.map sea_starts/lakes replace is not idempotent")
 
     print(f"ok: {len(cells)} zones joined; {len(seas_colors)} colours in "
-          f"99_seas == sea_starts; {n_regions} water regions; loc complete")
+          f"99_seas == sea_starts; {len(lake_hexes)} lake colours; "
+          f"{n_regions} water regions; loc complete")
     return 0
 
 

@@ -47,6 +47,7 @@ TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
 CONFIG_DIR = TOOLS_DIR / "config"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
+LAKE_MASK_PATH = DERIVED_DIR / "lake_mask.png"
 LABELS_PATH = DERIVED_DIR / "sea_zones.png"
 INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
 SEA_ZONES_CONFIG = CONFIG_DIR / "sea_zones.json"
@@ -100,9 +101,21 @@ def main(argv: list[str] | None = None) -> int:
 
     config = schema.load_sea_zones(SEA_ZONES_CONFIG, canvas=(CANVAS_W, CANVAS_H))
 
+    # Inland-lake companion layer (board #3742): if present, hold enclosed lakes
+    # out of the navigable water so a lake never becomes a sea zone. Absent (the
+    # Phase-A default) -> exclude=None -> byte-identical to the two-class run.
+    lake_mask = None
+    if LAKE_MASK_PATH.is_file():
+        lake_mask = raster.read_mask_png(LAKE_MASK_PATH)
+        if lake_mask.shape != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{LAKE_MASK_PATH}: expected {CANVAS_W}x{CANVAS_H}, got "
+                             f"{lake_mask.shape[1]}x{lake_mask.shape[0]}")
+        log(f"lake mask {int(lake_mask.sum()):,} px held out of the navigable water", t0)
+
     drawn = sources.load_source_image(SEA_ZONES_SOURCE)  # manifest-guarded RGB
     log("extracting hand-drawn sea zones ...", t0)
-    zones = sea_zones.extract(land, drawn, LINE_DILATE, merge_floor, WRAP_X, log=log)
+    zones = sea_zones.extract(land, drawn, LINE_DILATE, merge_floor, WRAP_X, log=log,
+                              exclude=lake_mask)
     n = int(zones.max())
 
     coastal = cells.coastal_labels(zones, ~land, WRAP_X)  # inverted mask -> sea zones touching land

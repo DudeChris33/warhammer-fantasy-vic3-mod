@@ -46,13 +46,20 @@ from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from worldgen import raster, sources  # noqa: E402
+from config import map_config  # noqa: E402
+from worldgen import lakes, raster, sources  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DEFAULT_SOURCE = "land_sea_mask.png"
 DEFAULT_OUT = TOOLS_DIR / "derived" / "land_sea_mask.png"
+#: The companion inland-lake layer (board #3742), written alongside the mask in
+#: --from-fill mode only. A boolean sibling of land_sea_mask.png (True where a
+#: water pixel is an enclosed lake), the exact analogue of the committed
+#: sea_zones.png. Downstream tools that don't find it fall back to the old
+#: two-class (land/ocean) behaviour, byte-identical to before it existed.
+DEFAULT_LAKE_OUT = TOOLS_DIR / "derived" / "lake_mask.png"
 
 #: Ignore land specks smaller than this many px when reporting (not when masking).
 _REPORT_MIN = 2000
@@ -145,6 +152,9 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--from-fill", action="store_true",
                    help="the source is a finished black/white land fill (white=land), "
                         "not a magenta coastline trace — use it directly, no flood-fill")
+    p.add_argument("--lake-out", type=Path, default=DEFAULT_LAKE_OUT,
+                   help="companion lake-mask path written in --from-fill mode "
+                        "(default: tools/derived/lake_mask.png)")
     args = p.parse_args(argv)
 
     if args.direct:
@@ -155,6 +165,17 @@ def main(argv: list[str] | None = None) -> int:
     args.out.parent.mkdir(parents=True, exist_ok=True)
     raster.write_mask_png(args.out, land)
     print(f"wrote {args.out}")
+
+    # Companion inland-lake layer (board #3742). Only emitted from a finished
+    # fill: enclosed black bodies that don't touch the world ocean are lakes. The
+    # parity land_mask() path is legacy (the live source is a fill per project
+    # memory) and emits no companion. An all-False mask (no lakes) is written and
+    # is downstream-equivalent to the file being absent.
+    if args.from_fill:
+        lake = lakes.classify(land, map_config.WRAP_X, log=print)
+        args.lake_out.parent.mkdir(parents=True, exist_ok=True)
+        raster.write_mask_png(args.lake_out, lake)
+        print(f"wrote {args.lake_out}  ({int(lake.sum()):,} lake px)")
     return 0
 
 

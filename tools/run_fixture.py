@@ -1413,6 +1413,188 @@ def _selfcheck_merge_fused() -> None:
     assert not iaw.any(),         "a seam-wrapping province is contiguous under wrap, never flagged archipelago"
 
 
+def _selfcheck_lakes() -> None:
+    """Inland-lake water class (board #3742), in isolation (no golden needed).
+
+    Pins the whole lake path: ``lakes.classify`` finds the world ocean (largest
+    water body) and marks every other water component a lake, wrap-aware, keeping
+    land untouched and staying deterministic; ``lakes.label`` gives one label per
+    lake component; ``sea_zones.extract`` before/after grounds the defect in the
+    real current behaviour (with ``exclude=None`` an enclosed body IS its own
+    labelled sea zone; with ``exclude=lake`` those pixels stay unlabelled and the
+    tiling assertion counts land+lake); ``lakes.assemble`` bands the three classes
+    and rejects overlap; ``validate_map.validate_provinces`` three-way passes on a
+    clean lake-bearing map and fails on the negatives; the stateless-lake checks
+    fail on a claimed lake; and ``generate_sea_regions._replace_lakes`` fills and
+    is idempotent.
+    """
+    from worldgen import lakes as lk
+    from worldgen import sea_zones as sz
+    import validate_map as vm
+    import generate_sea_regions as gsr
+
+    # --- lakes.classify: an ocean strip + two enclosed bodies ---
+    land = np.ones((12, 24), dtype=bool)
+    land[:, :6] = False              # open ocean (largest water component)
+    land[3:5, 10:12] = False         # enclosed body A (a lake)
+    land[8:10, 18:20] = False        # enclosed body B (a lake)
+    lake = lk.classify(land, wrap_x=False)
+    assert not lake[0, 0], "the world ocean must not be a lake"
+    assert lake[3, 10] and lake[8, 18], "both enclosed bodies must be lakes"
+    assert not lake[land].any(), "no land pixel may be a lake"
+    assert int(lake.sum()) == 8, f"two 2x2 lakes = 8 px, got {int(lake.sum())}"
+    assert np.array_equal(lake, lk.classify(land, wrap_x=False)), "classify must be deterministic"
+
+    # A body split across the x=0/x=W-1 seam is ONE lake under wrap_x.
+    wland = np.ones((8, 12), dtype=bool)
+    wland[0, :] = False              # ocean row (largest water body)
+    wland[3:5, 0] = False            # left half of a seam-wrapped enclosed body
+    wland[3:5, 11] = False           # right half
+    wlake = lk.classify(wland, wrap_x=True)
+    wlabel = lk.label(wlake, wrap_x=True)
+    assert int(wlabel.max()) == 1, f"a seam-wrapped body must be one lake, got {int(wlabel.max())}"
+
+    # --- lakes.label: distinct components -> distinct labels ---
+    lab = lk.label(lake, wrap_x=False)
+    assert int(lab.max()) == 2, f"two lake bodies = 2 labels, got {int(lab.max())}"
+    assert lab[3, 10] != lab[8, 18], "the two lakes must carry different labels"
+    assert (lab[~lake] == 0).all(), "no non-lake pixel may carry a lake label"
+    assert np.array_equal(lab, lk.label(lake, wrap_x=False)), "label must be deterministic"
+
+    # --- sea_zones.extract before/after (the defect, then the fix) ---
+    drawn = np.full((12, 24, 3), 180, dtype=np.uint8)  # no purple dividers
+    zones_before = sz.extract(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
+    assert int(zones_before[3, 10]) > 0, \
+        "without exclude, an enclosed body is its OWN labelled sea zone (the defect)"
+    zones_after = sz.extract(land, drawn, dilate=1, merge_floor=1, wrap_x=False, exclude=lake)
+    assert int(zones_after[3, 10]) == 0 and int(zones_after[8, 18]) == 0, \
+        "with exclude, lake pixels stay unlabelled (never a sea zone)"
+    assert (zones_after[~land & ~lake] > 0).all(), "the navigable ocean must be fully labelled"
+    assert int((zones_after == 0).sum()) == int(land.sum()) + int(lake.sum()), \
+        "unlabelled == land + lake (the three-way tiling)"
+    assert np.array_equal(
+        zones_after, sz.extract(land, drawn, dilate=1, merge_floor=1, wrap_x=False, exclude=lake)), \
+        "extract must be deterministic"
+
+    # --- lakes.assemble: bands, totality, disjointness ---
+    land_lab = np.where(land, 1, 0).astype(np.int32)   # one land province
+    n_land = 1
+    sea_lab = zones_after
+    n_sea = int(sea_lab.max())
+    lake_lab = lab
+    combined = lk.assemble(land_lab, sea_lab, lake_lab, n_land, n_sea)
+    assert (combined[land] == 1).all(), "land keeps 1..N"
+    assert (combined[~land & ~lake] > n_land).all() and (combined[~land & ~lake] <= n_land + n_sea).all(), \
+        "ocean lands in the sea band"
+    assert (combined[lake] > n_land + n_sea).all(), "lakes land in the band above the sea band"
+    assert int((combined == 0).sum()) == 0, "assemble must leave no unlabelled pixel"
+    # Overlapping layers are rejected.
+    try:
+        lk.assemble(land_lab, np.where(land, 1, 0).astype(np.int32), lake_lab, n_land, n_sea)
+    except cells.CellError:
+        pass
+    else:  # pragma: no cover
+        raise AssertionError("assemble must reject overlapping land/sea labels")
+
+    # --- validate_map.validate_provinces three-way, clean + negatives ---
+    with tempfile.TemporaryDirectory(prefix="wh_lakes_") as td:
+        tdp = Path(td)
+        A, Bc, C = (200, 40, 40), (40, 40, 200), (40, 200, 200)  # land / ocean / lake
+        rgb = np.zeros((12, 24, 3), dtype=np.uint8)
+        rgb[land] = A
+        rgb[~land & ~lake] = Bc
+        rgb[lake] = C
+        write_rgb_png(tdp / "provinces.png", rgb)
+        raster.write_mask_png(tdp / "mask.png", land)
+        raster.write_mask_png(tdp / "lake_mask.png", lake)
+        cells.write_labels(tdp / "sea_zones.png", sea_lab)
+
+        areas = np.bincount(combined.ravel())
+        index = {
+            "canvas": [24, 12], "land_provinces": 1, "sea_provinces": n_sea, "lake_provinces": 2,
+            "land_id_start": 1, "sea_id_start": 2, "lake_id_start": 2 + n_sea,
+            "cells": (
+                [{"label": 1, "kind": "land", "color": list(A), "hex": raster.color_to_hex(A),
+                  "id": 1, "area": int(areas[1]), "coastal": True, "impassable": False,
+                  "placeholder": False, "archipelago": False}]
+                + [{"label": 1 + s, "kind": "sea", "color": list(Bc), "hex": raster.color_to_hex(Bc),
+                    "id": 1 + s, "area": int(areas[1 + s]), "coastal": True, "impassable": False,
+                    "placeholder": False, "archipelago": False} for s in range(1, n_sea + 1)]
+                + [{"label": 1 + n_sea + k, "kind": "lake", "color": list(C),
+                    "hex": raster.color_to_hex(C), "id": 1 + n_sea + k,
+                    "area": int(areas[1 + n_sea + k]), "coastal": True, "impassable": True,
+                    "placeholder": False, "archipelago": False} for k in range(1, 3)]
+            ),
+        }
+        # Two lake bodies share one colour C, which would trip the "duplicate colour"
+        # check — give each its own colour so the clean case is genuinely clean.
+        C2 = (60, 210, 210)
+        rgb[lake_lab == 2] = C2
+        write_rgb_png(tdp / "provinces.png", rgb)
+        index["cells"][-1]["color"] = list(C2)
+        index["cells"][-1]["hex"] = raster.color_to_hex(C2)
+
+        def _write_index(obj):
+            (tdp / "index.json").write_text(json.dumps(obj) + "\n", encoding="utf-8")
+
+        _write_index(index)
+        clean = vm.validate_provinces(
+            tdp / "provinces.png", tdp / "mask.png", tdp / "index.json",
+            tdp / "sea_zones.png", wrap_x=False, lake_mask_path=tdp / "lake_mask.png")
+        assert clean == [], f"a clean lake-bearing map must pass, got {clean}"
+
+        # Negative: a lake pixel painted the ocean colour (a lake labelled sea).
+        bad = rgb.copy()
+        bad[3, 10] = Bc
+        write_rgb_png(tdp / "bad.png", bad)
+        errs = vm.validate_provinces(
+            tdp / "bad.png", tdp / "mask.png", tdp / "index.json",
+            tdp / "sea_zones.png", wrap_x=False, lake_mask_path=tdp / "lake_mask.png")
+        assert errs, "a lake pixel labelled sea must fail"
+
+        # Negative: a lake pixel painted the land colour (out of the lake band).
+        bad2 = rgb.copy()
+        bad2[3, 10] = A
+        write_rgb_png(tdp / "bad2.png", bad2)
+        errs2 = vm.validate_provinces(
+            tdp / "bad2.png", tdp / "mask.png", tdp / "index.json",
+            tdp / "sea_zones.png", wrap_x=False, lake_mask_path=tdp / "lake_mask.png")
+        assert any("band" in e or "span" in e for e in errs2), \
+            f"a lake pixel carrying a land-band label must fail, got {errs2}"
+
+        # Negative: the sea layer tiles ALL water (lakes included) instead of only
+        # the navigable ocean.
+        sea_all = np.where(~land, 1, 0).astype(np.int32)
+        cells.write_labels(tdp / "sea_all.png", sea_all)
+        errs3 = vm.validate_provinces(
+            tdp / "provinces.png", tdp / "mask.png", tdp / "index.json",
+            tdp / "sea_all.png", wrap_x=False, lake_mask_path=tdp / "lake_mask.png")
+        assert any("navigable water" in e for e in errs3), \
+            f"a sea layer tiling all water (not just ocean) must fail, got {errs3}"
+
+    # --- stateless-lake checks (repo-form validate()) ---
+    lake_col = {C, C2}
+    claimant = vm.ParsedState("STATE_X", "01_x.txt")
+    claimant.provinces = [A, C]      # wrongly claims a lake colour
+    assert vm._check_lakes_stateless([claimant], lake_col), \
+        "a state claiming a lake colour must fail _check_lakes_stateless"
+    assert vm._check_lakes_declared({C, C2}, {C}), \
+        "a lake in the index but not the default.map lakes block must fail"
+    assert vm._check_lakes_declared({C}, {C, C2}), \
+        "a lakes-block colour absent from the index must fail"
+    assert vm._check_lakes_declared({C, C2}, {C, C2}) == [], \
+        "matching lake colours must pass"
+
+    # --- generate_sea_regions._replace_lakes: fill + idempotent ---
+    dm = 'sea_starts = {\n\tx010101\n}\nlakes = {\n\n}\n'
+    lake_colors = {3: (10, 20, 30), 4: (40, 50, 60)}
+    filled = gsr._replace_lakes(dm, lake_colors)
+    assert "x0A141E" in filled and "x28323C" in filled, f"lakes block must carry the colours: {filled}"
+    assert gsr._replace_lakes(filled, lake_colors) == filled, "_replace_lakes must be idempotent"
+    empty = gsr._replace_lakes(dm, {})
+    assert "lakes = {\n}" in empty, f"an empty lakes block must normalize to the empty shape: {empty}"
+
+
 def _selfcheck_seeded_cut() -> None:
     """Hub-anchor seeded province cut (#3665), in isolation (no golden).
 
@@ -1607,15 +1789,18 @@ def _selfcheck_province_terrains() -> None:
     import generate_province_terrains as gpt
     import validate_map as vm
 
-    # Deliberately id-out-of-order in the list, to prove the sort by id.
+    # Deliberately id-out-of-order in the list, to prove the sort by id; a lake
+    # cell (board #3742) maps to "lakes".
     cells = [
         {"hex": "xDDEEFF", "kind": "sea", "id": 3},
         {"hex": "xAABBCC", "kind": "land", "id": 1},
         {"hex": "x112233", "kind": "land", "id": 2},
+        {"hex": "x445566", "kind": "lake", "id": 4},
     ]
     text = gpt.render_terrains(cells)
     body = [ln for ln in text.splitlines() if not ln.startswith("#")]
-    assert body == ['xAABBCC="plains"', 'x112233="plains"', 'xDDEEFF="ocean"'], body
+    assert body == ['xAABBCC="plains"', 'x112233="plains"', 'xDDEEFF="ocean"',
+                    'x445566="lakes"'], body
     assert text.endswith("\n") and "\r" not in text, "LF newlines, trailing newline"
     assert text == gpt.render_terrains(cells), "two runs must be byte-identical"
 
@@ -1626,11 +1811,13 @@ def _selfcheck_province_terrains() -> None:
     else:  # pragma: no cover
         raise AssertionError("an empty cell list must be refused, not written")
 
-    # A terrain-defs file defining exactly the two ids the generator emits.
+    # A terrain-defs file defining exactly the three ids the generator emits.
     with tempfile.TemporaryDirectory() as td:
         defs = Path(td) / "01_terrain.txt"
-        defs.write_text("plains = {\n\tweight = 1\n}\nocean = {\n\tweight = 1\n}\n")
-        assert vm._terrain_ids(defs) == {"plains", "ocean"}, "only column-0 keys are terrain ids"
+        defs.write_text("plains = {\n\tweight = 1\n}\nocean = {\n\tweight = 1\n}\n"
+                        "lakes = {\n\tweight = 1\n}\n")
+        assert vm._terrain_ids(defs) == {"plains", "ocean", "lakes"}, \
+            "only column-0 keys are terrain ids"
 
         terrains = Path(td) / "province_terrains.txt"
         terrains.write_text(text)
@@ -1642,7 +1829,8 @@ def _selfcheck_province_terrains() -> None:
         assert vm.validate_province_terrains(cells, Path(td) / "miss.txt", defs)
         (Path(td) / "extra.txt").write_text(text + 'x445566="plains"\n')
         assert vm.validate_province_terrains(cells, Path(td) / "extra.txt", defs)
-        (Path(td) / "badid.txt").write_text('xAABBCC="steppe"\nx112233="plains"\nxDDEEFF="ocean"\n')
+        (Path(td) / "badid.txt").write_text(
+            'xAABBCC="steppe"\nx112233="plains"\nxDDEEFF="ocean"\nx445566="lakes"\n')
         assert any("not defined" in e
                    for e in vm.validate_province_terrains(cells, Path(td) / "badid.txt", defs))
 
@@ -1944,6 +2132,9 @@ def run_check() -> int:
     _selfcheck_merge_fused()
     print("land_provinces: merge-fused disconnected region cut per piece "
           "(archipelago kept whole via keep_whole) self-check passed.")
+    _selfcheck_lakes()
+    print("lakes: classify/label/assemble + sea_zones exclude + three-way validate + "
+          "stateless checks + default.map lakes block self-check passed.")
     _selfcheck_seeded_cut()
     print("land_provinces: hub-anchor seeded cut (own-province seeds, boundary kept, "
           "unseeded byte-identical, protected pieces, hard errors) self-check passed.")

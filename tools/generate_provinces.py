@@ -61,12 +61,16 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import cells, land_provinces, raster, schema, sources  # noqa: E402
+from worldgen import cells, lakes, land_provinces, raster, schema, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
+#: Optional inland-lake companion layer (board #3742), written by
+#: generate_coastline_mask.py --from-fill. Present -> a third province class (lake)
+#: is threaded through; absent -> byte-identical two-class (land/ocean) behaviour.
+LAKE_MASK_PATH = DERIVED_DIR / "lake_mask.png"
 SEA_LABELS_PATH = DERIVED_DIR / "sea_zones.png"
 SEA_ZONES_INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
@@ -169,6 +173,20 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"{MASK_PATH}: expected {CANVAS_W}x{CANVAS_H}, got "
                          f"{land.shape[1]}x{land.shape[0]}")
     log(f"land mask {land.shape} land {100 * land.mean():.2f}%", t0)
+
+    # Optional inland-lake companion layer (board #3742). Present -> lake pixels
+    # become their own province class, held out of the sea band; absent -> the
+    # cut is byte-identical to the two-class (land/ocean) behaviour.
+    lake_mask = None
+    if LAKE_MASK_PATH.is_file():
+        lake_mask = raster.read_mask_png(LAKE_MASK_PATH)
+        if lake_mask.shape != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{LAKE_MASK_PATH}: expected {CANVAS_W}x{CANVAS_H}, got "
+                             f"{lake_mask.shape[1]}x{lake_mask.shape[0]}")
+        if int((lake_mask & land).sum()):
+            raise SystemExit(f"{LAKE_MASK_PATH.name}: {int((lake_mask & land).sum()):,} lake "
+                             f"pixel(s) fall on land — the lake companion must be water only")
+        log(f"lake mask {int(lake_mask.sum()):,} px", t0)
 
     drawn = sources.load_source_image(STATE_REGIONS_SOURCE)  # manifest-guarded RGB
     if drawn.shape[:2] != (CANVAS_H, CANVAS_W):
@@ -286,25 +304,36 @@ def main(argv: list[str] | None = None) -> int:
             f"{n_sea} labels 1..{n_sea} — regenerate sea zones first"
         )
 
+    # Lake province labels (board #3742), 1..K, one per connected lake body.
+    if lake_mask is not None:
+        lake_lab = lakes.label(lake_mask, WRAP_X)
+        n_lake = int(lake_lab.max())
+        log(f"{n_lake} lake provinces", t0)
+    else:
+        lake_lab = np.zeros_like(land_lab)
+        n_lake = 0
+
     # Cross-consistency: the committed sea layer must tile exactly this mask's
-    # water, and the land cut exactly its land. A stale sea/mask mismatch is a
-    # hard failure — regenerate sea_zones.png — not a silently wrong bitmap.
-    if not np.array_equal(sea_lab > 0, ~land):
+    # navigable water (all water, minus any lakes), and the land cut exactly its
+    # land. A stale sea/mask mismatch is a hard failure — regenerate sea_zones.png
+    # — not a silently wrong bitmap.
+    navigable = (~land & ~lake_mask) if lake_mask is not None else ~land
+    if not np.array_equal(sea_lab > 0, navigable):
         raise SystemExit(
-            f"{SEA_LABELS_PATH.name} does not tile this mask's water: "
-            f"{int((sea_lab > 0).sum()):,} sea px vs {int((~land).sum()):,} water px "
-            f"— regenerate tools/generate_sea_zones.py against the committed mask")
+            f"{SEA_LABELS_PATH.name} does not tile this mask's navigable water: "
+            f"{int((sea_lab > 0).sum()):,} sea px vs {int(navigable.sum()):,} navigable px "
+            f"— regenerate tools/generate_sea_zones.py against the committed mask "
+            f"(and lake companion)")
     if not np.array_equal(land_lab > 0, land):
         raise SystemExit("internal error: land provinces do not tile the land mask")
+    if lake_mask is not None and not np.array_equal(lake_lab > 0, lake_mask):
+        raise SystemExit("internal error: lake provinces do not tile the lake mask")
 
-    # Combine into one label layer: land 1..N, sea N+1..N+M.
-    labels = land_lab.astype(np.int64)
-    labels[~land] = sea_lab[~land].astype(np.int64) + n_land
-    if int((labels == 0).sum()):
-        raise SystemExit(f"{int((labels == 0).sum()):,} pixels carry no province label")
+    # Combine into one label layer: land 1..N, sea N+1..N+M, lake N+M+1..N+M+K.
+    labels = lakes.assemble(land_lab, sea_lab, lake_lab, n_land, n_sea)
 
     # Deterministic unique colour per province, allocated in sorted label order.
-    total = n_land + n_sea
+    total = n_land + n_sea + n_lake
     alloc = raster.ColorAllocator(map_config.SEED)
     palette = np.zeros((total + 1, 3), dtype=np.uint8)  # index 0 is the (0,0,0) sentinel
     for lab in range(1, total + 1):
@@ -345,7 +374,15 @@ def main(argv: list[str] | None = None) -> int:
     # if it touches water, a sea province if it touches land.
     areas = np.bincount(labels.ravel(), minlength=total + 1)
     land_coastal = cells.coastal_labels(land_lab, land, WRAP_X)
-    sea_coastal = cells.coastal_labels(sea_lab, ~land, WRAP_X)
+    # A sea province is coastal if it touches land. With lakes present, hold lake
+    # interior out of the "sea" region so a sea zone isn't spuriously flagged
+    # coastal by a lake pixel (lakes are land-locked, so this never actually
+    # fires, but it keeps the flag honest). Byte-identical when no lake mask.
+    navigable_water = (~land & ~lake_mask) if lake_mask is not None else ~land
+    sea_coastal = cells.coastal_labels(sea_lab, navigable_water, WRAP_X)
+    # A lake touches land by definition; computed for schema symmetry (informational).
+    lake_coastal = (cells.coastal_labels(lake_lab, lake_mask, WRAP_X)
+                    if lake_mask is not None else np.zeros(1, dtype=bool))
 
     # Provinces share ONE continuous id space, exactly as vanilla's definition.csv
     # does — a province id is a unique sequential handle, and the bitmap colour is
@@ -401,19 +438,43 @@ def main(argv: list[str] | None = None) -> int:
             "placeholder": False,  # schema symmetry with land entries
             "archipelago": False,  # schema symmetry with land entries
         })
+    # Lake provinces (board #3742), labels N+M+1..N+M+K, ids continuing the one
+    # shared id space after the sea band. Stateless inland water: declared only in
+    # default.map's `lakes` block, never in a state region (validate_map's
+    # _check_lakes_stateless / _check_bitmap_state_crosscheck encode that). Marked
+    # impassable (inland, non-navigable; harmless as no state ever lists them).
+    lake_id_start = n_land + n_sea + 1
+    for k in range(1, n_lake + 1):
+        lab = n_land + n_sea + k
+        color = tuple(int(v) for v in palette[lab])
+        entries.append({
+            "label": lab,
+            "kind": "lake",
+            "color": color,
+            "hex": raster.color_to_hex(color),
+            "id": lake_id_start + (k - 1),  # == lab, continues after the sea band
+            "area": int(areas[lab]),
+            "coastal": bool(lake_coastal[k]) if k < len(lake_coastal) else False,
+            "impassable": True,  # inland non-navigable water (stateless; informational)
+            "placeholder": False,  # schema symmetry with land/sea entries
+            "archipelago": False,  # schema symmetry with land/sea entries
+        })
 
     index = {
         "canvas": [CANVAS_W, CANVAS_H],
         "source": STATE_REGIONS_SOURCE,
         "sea_source": SEA_LABELS_PATH.name,
+        "lake_source": LAKE_MASK_PATH.name if lake_mask is not None else None,
         "land_provinces": n_land,
         "sea_provinces": n_sea,
+        "lake_provinces": n_lake,
         "impassable_land_provinces": 0,  # nothing is impassable — every landmass boots
         "impassable_sea_provinces": sum(sea_impassable.values()),  # from sea_zones.json config
         "placeholder_land_provinces": n_placeholder,  # out-of-scope land kept whole
         "archipelago_land_provinces": n_archipelago,  # islands merged by an override circle
         "land_id_start": land_id_start,
         "sea_id_start": sea_id_start,
+        "lake_id_start": lake_id_start,
         "cells": entries,
     }
     INDEX_PATH.write_text(json.dumps(index, indent=1) + "\n", encoding="utf-8")
@@ -475,7 +536,7 @@ def main(argv: list[str] | None = None) -> int:
     log(f"done: {n_land} land provinces ({n_placeholder} out-of-scope passable placeholders, "
         f"{n_archipelago} island-override archipelagos) "
         f"(area min {int(land_areas.min()):,} / median {int(np.median(land_areas)):,} / "
-        f"max {int(land_areas.max()):,} px), {n_sea} sea provinces", t0)
+        f"max {int(land_areas.max()):,} px), {n_sea} sea provinces, {n_lake} lake provinces", t0)
     return 0
 
 

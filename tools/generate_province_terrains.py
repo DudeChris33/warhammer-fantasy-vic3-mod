@@ -22,14 +22,15 @@ Assignment (design decision, board #2968):
   land still gets ``plains``; terrain is orthogonal to passable/impassable, which
   lives in ``state_regions``.
 * **sea province -> ``"ocean"``** — also defined in the mod's terrain file.
-  ``default.map`` currently declares ``lakes = {}`` (empty), so every water
-  province is an ocean; if inland lakes are later added there, this generator
-  special-cases those ids to ``"lakes"`` then, not now.
+* **lake province -> ``"lakes"``** (board #3742) — inland water, defined in the
+  mod's terrain file. Only present when the index carries ``kind == "lake"`` cells
+  (a lake companion layer was generated); absent, the output is byte-identical to
+  the two-class land/ocean baseline.
 
 Colour authority: ``tools/derived/provinces_index.json`` -> ``cells``. Each cell
 carries ``hex`` (e.g. ``xD35EE9`` — the exact ``province_terrains.txt`` key
 format: ``x`` prefix, uppercase, ``R<<16 | G<<8 | B``) and ``kind``
-(``land``/``sea``). This is the same index that coloured ``provinces.png``
+(``land``/``sea``/``lake``). This is the same index that coloured ``provinces.png``
 (board #2773), so the terrains and the bitmap agree by construction. Kind is read
 from ``cell["kind"]`` (not an id-threshold guess), so this stays correct if the
 land/sea id bands ever move.
@@ -66,10 +67,11 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 TERRAINS_PATH = MOD_ROOT / "map_data" / "province_terrains.txt"
 
-#: Terrain id per province kind. Both ids are defined in the mod's own
+#: Terrain id per province kind. All three ids are defined in the mod's own
 #: ``common/terrain/01_terrain.txt`` (``common/terrain`` is in ``replace_paths``,
-#: so only mod-defined ids are valid).
-TERRAIN_BY_KIND = {"land": "plains", "sea": "ocean"}
+#: so only mod-defined ids are valid). ``lake -> "lakes"`` is board #3742's inland
+#: water class; absent lakes leave this mapping unused (byte-identical output).
+TERRAIN_BY_KIND = {"land": "plains", "sea": "ocean", "lake": "lakes"}
 
 #: Header comment. Deliberately NOT vanilla's "do not modify unless you know what
 #: you are doing" wording — it says what actually generates this file here.
@@ -119,8 +121,9 @@ def main(argv: list[str] | None = None) -> int:
 
     n_land = sum(1 for c in cells if c["kind"] == "land")
     n_sea = sum(1 for c in cells if c["kind"] == "sea")
+    n_lake = sum(1 for c in cells if c["kind"] == "lake")
     print(f"wrote {TERRAINS_PATH.relative_to(MOD_ROOT)}  "
-          f"({len(cells)} provinces: {n_land} plains, {n_sea} ocean)")
+          f"({len(cells)} provinces: {n_land} plains, {n_sea} ocean, {n_lake} lakes)")
     return 0
 
 

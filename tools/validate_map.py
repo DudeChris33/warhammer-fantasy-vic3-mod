@@ -287,12 +287,17 @@ def validate(
     # one of these. Optional: the fixture's golden bitmap has no index file
     # and never needed the concept, so an absent path just means no exceptions.
     archipelago_colors: set[Color] = set()
+    index_lake_colors: set[Color] | None = None
     if provinces_index_path is not None and provinces_index_path.is_file():
         import json
 
         prov_index = json.loads(provinces_index_path.read_text(encoding="utf-8"))
         archipelago_colors = {
             tuple(c["color"]) for c in prov_index["cells"] if c.get("archipelago")
+        }
+        index_lake_colors = {
+            tuple(int(v) for v in c["color"])
+            for c in prov_index["cells"] if c.get("kind") == "lake"
         }
     # Hub-anchor exemptions + checks (#3665). Anchor-flagged province colours are
     # deliberately kept small (a hub seeded near a region edge), so they are
@@ -311,6 +316,8 @@ def validate(
             bitmap, min_province_area, archipelago_colors | anchor_colors)
         errors += _check_bitmap_state_crosscheck(bitmap, states, sea_colors, lake_colors)
         errors += _check_lakes_stateless(states, lake_colors)
+        if index_lake_colors is not None:
+            errors += _check_lakes_declared(index_lake_colors, lake_colors)
         if hub_index is not None:
             errors += _check_hub_anchors(
                 bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
@@ -737,6 +744,25 @@ def _check_bitmap_state_crosscheck(
     return errors
 
 
+def _check_lakes_declared(index_lake_colors: set[Color], lake_colors: set[Color]) -> list[str]:
+    """Every ``kind=="lake"`` province colour in the index appears in default.map's
+    ``lakes`` block, and vice-versa (board #3742).
+
+    Closes the loop the ``--sea`` subset does for sea colours: a lake the generator
+    cut but forgot to declare would silently ship as an undeclared water province,
+    and a stray ``lakes`` colour claims a province that no longer exists."""
+    from worldgen.raster import color_to_hex
+
+    errors = []
+    for color in sorted(index_lake_colors - lake_colors):
+        errors.append(f"lake colour {color_to_hex(color)} in provinces_index.json is not "
+                      f"declared in default.map's lakes block")
+    for color in sorted(lake_colors - index_lake_colors):
+        errors.append(f"lake colour {color_to_hex(color)} in default.map's lakes block is "
+                      f"not a lake province in provinces_index.json")
+    return errors
+
+
 def _check_lakes_stateless(states: list[ParsedState], lake_colors: set[Color]) -> list[str]:
     from worldgen.raster import color_to_hex
 
@@ -948,9 +974,18 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
                        min_cell_area: int = 4,
                        hub_anchors_index_path: Path | None = None,
                        province_terrains_path: Path | None = None,
-                       terrain_defs_path: Path | None = None) -> list[str]:
+                       terrain_defs_path: Path | None = None,
+                       lake_mask_path: Path | None = None) -> list[str]:
     """Check the first-pass province bitmap tiles the mask exactly and agrees with
     its index and the committed sea-zone layer.
+
+    ``lake_mask_path`` (#3742, optional): the inland-lake companion layer. When it
+    (and/or a ``lake_provinces`` count in the index) is present, the bitmap is
+    checked three-way — land / ocean (``~land & ~lake``) / lake — instead of the
+    binary land/ocean tiling: lake labels occupy the band after the sea band, no
+    province straddles two classes, the sea layer tiles the *navigable* water only,
+    and the lake-labelled pixels equal the lake mask exactly. Absent lake mask
+    **and** no lake cells → the two-class behaviour, byte-identical to before.
 
     ``hub_anchors_index_path`` (#3665, optional): the seeded hub provinces are
     deliberately kept small and are exempted from the avoidably-degenerate check 7
@@ -986,6 +1021,27 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
     n_land = int(index["land_provinces"])
     n_sea = int(index["sea_provinces"])
 
+    # Lake companion layer (#3742). Three-way tiling is active when the index
+    # declares lake provinces and/or the companion mask exists; absent both, the
+    # check is byte-identical to the two-class (land/ocean) path.
+    n_lake = int(index.get("lake_provinces", 0))
+    lake_mask = None
+    if lake_mask_path is not None and lake_mask_path.is_file():
+        lake_mask = _read_mask(lake_mask_path)
+        if lake_mask.shape != land.shape:
+            return [f"lake mask {lake_mask.shape} does not match the mask {land.shape}"]
+    lakes_active = n_lake > 0 or lake_mask is not None
+    if lakes_active and lake_mask is None:
+        errors.append(f"index declares {n_lake} lake province(s) but no lake mask is present "
+                      f"at {lake_mask_path}")
+        lakes_active = False  # cannot verify three-way; the mismatch is already reported
+    if lakes_active and int((lake_mask & land).sum()):
+        errors.append(f"{int((lake_mask & land).sum()):,} lake-mask pixel(s) fall on land")
+    # The three pixel classes. Ocean is the *navigable* water (all water minus
+    # lakes); with no lakes it is just the water.
+    lake_region = lake_mask if lakes_active else np.zeros(land.shape, dtype=bool)
+    ocean_region = (~land & ~lake_region)
+
     # Pack each pixel's colour into one 24-bit key; map keys to index labels.
     key = ((rgb[..., 0].astype(np.int64) << 16)
            | (rgb[..., 1].astype(np.int64) << 8)
@@ -1015,25 +1071,40 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
             f"(first few hex: {[f'{k:06X}' for k in unknown[:5]]})")
     labels = np.where(lut[inv].reshape(key.shape) < 0, 0, lut[inv].reshape(key.shape)).astype(np.int32)
 
-    # 2. No province straddles the coast (the mask stays authoritative).
+    # 2. No province straddles a class boundary (the mask stays authoritative). A
+    #    province must be wholly land, wholly ocean, or wholly lake.
     land_ids = set(np.unique(labels[land]).tolist()) - {0}
-    sea_ids = set(np.unique(labels[~land]).tolist()) - {0}
-    both = sorted(land_ids & sea_ids)
-    if both:
-        errors.append(
-            f"{len(both)} province(s) span land and sea (first few: {both[:5]}) — "
-            f"a province must be wholly one or the other")
+    ocean_ids = set(np.unique(labels[ocean_region]).tolist()) - {0}
+    lake_ids = set(np.unique(labels[lake_region]).tolist()) - {0} if lakes_active else set()
+    for a, b, na, nb in ((land_ids, ocean_ids, "land", "ocean"),
+                         (land_ids, lake_ids, "land", "lake"),
+                         (ocean_ids, lake_ids, "ocean", "lake")):
+        both = sorted(a & b)
+        if both:
+            errors.append(
+                f"{len(both)} province(s) span {na} and {nb} (first few: {both[:5]}) — "
+                f"a province must be wholly one class")
+    # `sea_ids` (all water: ocean + lake) is what the connectivity/degeneracy
+    # checks below key on for "not land".
+    sea_ids = ocean_ids | lake_ids
 
-    # 3. Land labels 1..n_land, sea labels n_land+1..n_land+n_sea.
+    # 3. Land labels 1..n_land, sea labels n_land+1..n_land+n_sea, lake labels
+    #    n_land+n_sea+1..n_land+n_sea+n_lake.
     for i in sorted(land_ids):
         if not (1 <= i <= n_land):
             errors.append(f"land pixel carries label {i}, outside the land band 1..{n_land}")
             break
-    for i in sorted(sea_ids):
+    for i in sorted(ocean_ids):
         if not (n_land < i <= n_land + n_sea):
             errors.append(
-                f"water pixel carries label {i}, outside the sea band "
+                f"ocean pixel carries label {i}, outside the sea band "
                 f"{n_land + 1}..{n_land + n_sea}")
+            break
+    for i in sorted(lake_ids):
+        if not (n_land + n_sea < i <= n_land + n_sea + n_lake):
+            errors.append(
+                f"lake pixel carries label {i}, outside the lake band "
+                f"{n_land + n_sea + 1}..{n_land + n_sea + n_lake}")
             break
 
     # 4. Index kinds/ids/areas agree with the raster.
@@ -1043,21 +1114,29 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
         errors.append(f"label {missing} is in the bitmap but not the index")
     for extra in sorted(listed - present)[:5]:
         errors.append(f"label {extra} is in the index but not the bitmap")
-    for kind, declared in (("land", n_land), ("sea", n_sea)):
+    for kind, declared in (("land", n_land), ("sea", n_sea), ("lake", n_lake)):
         actual = sum(1 for c in index["cells"] if c["kind"] == kind)
         if actual != declared:
             errors.append(f"index declares {declared} {kind} provinces but lists {actual}")
-    areas = np.bincount(labels.ravel(), minlength=n_land + n_sea + 1)
+    total = n_land + n_sea + n_lake
+    areas = np.bincount(labels.ravel(), minlength=total + 1)
     for c in index["cells"]:
         lab = int(c["label"])
-        if lab <= n_land + n_sea and int(areas[lab]) != int(c["area"]):
+        if lab <= total and int(areas[lab]) != int(c["area"]):
             errors.append(f"label {lab}: index says {c['area']} px, raster has {int(areas[lab])}")
             break
-    # Id bands: land id = land_id_start + (label-1); sea id = sea_id_start + (sea_index-1).
+    # Id bands: land id = land_id_start + (label-1); sea id = sea_id_start +
+    # (sea_index-1); lake id = lake_id_start + (lake_index-1).
     lid, sid = int(index["land_id_start"]), int(index["sea_id_start"])
+    lkid = int(index.get("lake_id_start", n_land + n_sea + 1))
     for c in index["cells"]:
         lab = int(c["label"])
-        want = lid + (lab - 1) if c["kind"] == "land" else sid + (lab - n_land - 1)
+        if c["kind"] == "land":
+            want = lid + (lab - 1)
+        elif c["kind"] == "sea":
+            want = sid + (lab - n_land - 1)
+        else:  # lake
+            want = lkid + (lab - n_land - n_sea - 1)
         if int(c["id"]) != want:
             errors.append(f"label {lab}: index id {c['id']} != expected {want} for a {c['kind']} province")
             break
@@ -1094,14 +1173,26 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
             f"{len(stale_flags)} province(s) are flagged archipelago but are actually "
             f"contiguous (first few: {stale_flags[:5]})")
 
-    # 6. The sea province count matches the committed sea-zone layer.
+    # 6. The sea province count matches the committed sea-zone layer, and the sea
+    #    layer tiles the *navigable* water (all water minus lakes) exactly.
     sea_lab = cells.read_labels(sea_labels_path)
     committed_sea = int(sea_lab.max())
     if committed_sea != n_sea:
         errors.append(
             f"index has {n_sea} sea provinces but {sea_labels_path.name} has {committed_sea}")
-    if sea_lab.shape == land.shape and not bool((( sea_lab > 0) == ~land).all()):
-        errors.append(f"{sea_labels_path.name} does not tile this mask's water exactly")
+    if sea_lab.shape == land.shape and not bool(((sea_lab > 0) == ocean_region).all()):
+        errors.append(f"{sea_labels_path.name} does not tile this mask's navigable water exactly")
+
+    # 6b. Lake-labelled bitmap pixels equal the lake mask exactly (#3742). The
+    #     lake labels are the band above the sea band; every one of their pixels
+    #     must be a lake-mask pixel and vice-versa.
+    if lakes_active:
+        lake_pixels = (labels > n_land + n_sea) & (labels <= n_land + n_sea + n_lake)
+        if not bool((lake_pixels == lake_region).all()):
+            mism = int((lake_pixels != lake_region).sum())
+            errors.append(
+                f"{mism:,} pixel(s) disagree between the lake-labelled bitmap region and "
+                f"the lake mask — lake provinces do not tile the lake mask exactly")
 
     # 7. No avoidably-degenerate LAND province: below the floor AND with a
     #    same-kind neighbour it could have merged into (a lone small island is
@@ -1415,6 +1506,8 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--labels-path", type=Path, help="path to state_labels.png")
     p.add_argument("--sea-labels-path", type=Path, help="path to sea_zones.png")
     p.add_argument("--mask-path", type=Path, help="path to land_sea_mask.png")
+    p.add_argument("--lake-mask-path", type=Path,
+                   help="path to the inland-lake companion mask (default derived/lake_mask.png)")
     p.add_argument("--index-path", type=Path, help="path to state_labels_index.json")
     p.add_argument("--provinces", type=Path, help="path to provinces.png")
     p.add_argument("--state-regions", type=Path, help="path to state_regions/ directory")
@@ -1479,6 +1572,7 @@ def main(argv: list[str] | None = None) -> int:
             hub_anchors_index_path=derived / "hub_anchors_index.json",
             province_terrains_path=REPO_ROOT / "map_data" / "province_terrains.txt",
             terrain_defs_path=REPO_ROOT / "common" / "terrain" / "01_terrain.txt",
+            lake_mask_path=args.lake_mask_path or derived / "lake_mask.png",
         )
         if errors:
             print(f"validate_map --province-bitmap: {len(errors)} error(s):", file=sys.stderr)

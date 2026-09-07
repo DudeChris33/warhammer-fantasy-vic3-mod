@@ -47,13 +47,21 @@ def purple_lines(rgb: np.ndarray) -> np.ndarray:
 
 
 def extract(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
-            merge_floor: int = 1200, wrap_x: bool = True, log=None) -> np.ndarray:
+            merge_floor: int = 1200, wrap_x: bool = True, log=None,
+            exclude: np.ndarray | None = None) -> np.ndarray:
     """Sea-zone labels (0 on land, ``1..n`` per zone) from the drawn network.
 
     ``land`` is the boolean land mask; ``drawn`` is the RGB sea-zone source.
     See the module docstring for the method.
+
+    ``exclude`` (board #3742) is an optional boolean mask of water pixels that are
+    NOT navigable sea — the inland-lake companion layer. Those pixels are held out
+    of the labelled water exactly like land, so an enclosed lake never becomes a
+    sea zone. ``exclude=None`` is byte-identical to the two-class behaviour.
     """
     water = ~land
+    if exclude is not None:
+        water = water & ~exclude
     line = purple_lines(drawn)
     if dilate:
         line = ndimage.binary_dilation(line, iterations=dilate)
@@ -101,10 +109,12 @@ def extract(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     border_floor[-1, :] = 2000
     zones = cells.merge_small(zones, merge_floor, wrap_x, floor_map=border_floor)
     zones = cells.renumber(zones)
-    if int((zones == 0).sum()) != int(land.sum()):
+    n_excluded = int(exclude.sum()) if exclude is not None else 0
+    if int((zones == 0).sum()) != int(land.sum()) + n_excluded:
         raise cells.CellError(
-            "sea-zone layer does not tile the water exactly: "
-            f"{int((zones == 0).sum()):,} unlabelled px vs {int(land.sum()):,} land px"
+            "sea-zone layer does not tile the navigable water exactly: "
+            f"{int((zones == 0).sum()):,} unlabelled px vs "
+            f"{int(land.sum()):,} land + {n_excluded:,} lake px"
         )
     if log:
         log(f"  {int(zones.max())} sea zones")
