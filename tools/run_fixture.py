@@ -988,6 +988,144 @@ def _selfcheck_rivers() -> None:
         raise AssertionError("rivers must reject a sea mouth that never reaches water")
 
 
+def _selfcheck_river_extraction() -> None:
+    """Drawn river extraction (worldgen.river_network), in isolation (no golden).
+
+    Pins what generate_rivers.py relies on (board #3703): a cyan Y-junction yields
+    one green source per headwater with a red MERGE at the confluence (not a
+    per-segment source explosion); streams run source-first and name by anchor; a
+    stranded inland line, a closed loop and a divergent delta fork are each hard
+    errors; a short spur is pruned rather than becoming a fake headwater; a
+    seam-crossing stem extracts under wrap_x; and two runs are byte-identical.
+    """
+    from skimage.draw import line as _line
+    from worldgen import river_network as rn
+    from worldgen import rivers as rl
+
+    def cyan(H, W, segs):
+        img = np.full((H, W, 3), 180, dtype=np.uint8)
+        for (y0, x0, y1, x1) in segs:
+            rr, cc = _line(y0, x0, y1, x1)
+            img[rr, cc] = (0, 255, 255)
+        return img
+
+    H, W = 48, 64
+    land = np.ones((H, W), bool)
+    land[:, 58:] = False  # sea strip on the right
+
+    # Y junction: two headwaters merge into one trunk that reaches the sea.
+    net = rn.cyan_network(cyan(H, W, [(12, 8, 24, 28), (36, 8, 24, 28), (24, 28, 24, 57)]),
+                          dilate=1)
+    res = rn.extract_streams(net, land, wrap_x=False)
+    assert len(res.streams) == 2, f"Y network -> 2 streams (trunk + tributary), got {len(res.streams)}"
+    assert sorted(s.mouth for s in res.streams) == ["confluence", "sea"], \
+        [s.mouth for s in res.streams]
+    for s in res.streams:  # source-first: points[0] is the inland spring
+        assert land[s.points[0][1], s.points[0][0]], "source must be on land"
+    # One green source per HEADWATER (== 2), and one red MERGE — vanilla's model,
+    # not a source per segment.
+    pal = rl.RiverPalette({"land": rl.LAND, "sea": rl.SEA, "source": rl.SOURCE},
+                          (3, 4, 6, 8), [(0, 0, 0)] * 256)
+    idx = rl.rasterize(res.streams, land, pal, wrap_x=False)
+    assert int((idx == rl.SOURCE).sum()) == 2, "one green source per headwater"
+    assert int((idx == rl.MERGE).sum()) == 1, "one red merge at the confluence"
+    # The trunk (Strahler order 2) renders wider than a headwater.
+    sea_stream = next(s for s in res.streams if s.mouth == "sea")
+    assert sea_stream.width >= 4, f"trunk should widen downstream, got {sea_stream.width}"
+
+    # Naming by anchor: an anchor on the trunk names that stream.
+    named = rn.extract_streams(net, land, wrap_x=False,
+                               names=[schema.CanonRiverName("Reik", (45, 24), None, None, "")])
+    assert "Reik" in {s.name for s in named.streams}, "anchor must name a stream"
+
+    # Determinism: two runs byte-identical.
+    res2 = rn.extract_streams(net, land, wrap_x=False)
+    sig = lambda r: [(s.name, tuple(s.points), s.mouth, s.width) for s in r.streams]
+    assert sig(res) == sig(res2), "two runs must be byte-identical"
+
+    # Stranded inland line (no water-adjacent end) -> hard error.
+    _assert_river_error(lambda: rn.extract_streams(
+        rn.cyan_network(cyan(H, W, [(24, 8, 24, 30)]), dilate=1),
+        np.ones((H, W), bool), wrap_x=False), "reaches no water")
+
+    # Closed loop -> hard error.
+    loop = cyan(H, W, [(10, 10, 10, 30), (10, 30, 30, 30), (30, 30, 30, 10), (30, 10, 10, 10)])
+    _assert_river_error(lambda: rn.extract_streams(
+        rn.cyan_network(loop, dilate=1), land, wrap_x=False), "loop")
+
+    # Divergent delta fork (one source, two mouths) -> hard error with guidance.
+    fork = cyan(H, W, [(24, 8, 24, 28), (24, 28, 10, 57), (24, 28, 38, 57)])
+    _assert_river_error(lambda: rn.extract_streams(
+        rn.cyan_network(fork, dilate=1), land, wrap_x=False), "distributary")
+
+    # A short spur off a line is pruned, not turned into a fake headwater.
+    spur = cyan(H, W, [(24, 8, 24, 57), (24, 30, 20, 30)])
+    res_spur = rn.extract_streams(rn.cyan_network(spur, dilate=1), land, wrap_x=False)
+    assert len(res_spur.streams) == 1 and res_spur.streams[0].mouth == "sea", \
+        f"spur must be pruned -> 1 sea stream, got {len(res_spur.streams)}"
+
+    # A seam-crossing stem extracts under wrap_x (wrap-aware skeleton + graph).
+    Hw, Ww = 24, 40
+    landw = np.ones((Hw, Ww), bool)
+    landw[8:13, 10:15] = False  # a sea block for the mouth
+    netw = rn.cyan_network(cyan(Hw, Ww, [(10, 25, 10, 39), (10, 0, 10, 9)]), dilate=1)
+    resw = rn.extract_streams(netw, landw, wrap_x=True)
+    assert len(resw.streams) == 1 and resw.streams[0].mouth == "sea", "wrap stem -> 1 sea stream"
+    xs = {x for s in resw.streams for (x, _y) in s.points}
+    assert min(xs) == 0 and max(xs) == Ww - 1, "the stem must span the x=0/x=w-1 seam"
+
+
+def _assert_river_error(fn, needle: str) -> None:
+    from worldgen import river_network as rn
+    try:
+        fn()
+    except rn.RiverNetworkError as e:
+        assert needle in str(e), f"expected '{needle}' in error, got: {e}"
+        return
+    raise AssertionError(f"expected a RiverNetworkError mentioning '{needle}'")  # pragma: no cover
+
+
+def _selfcheck_river_validator() -> None:
+    """The #3703 validate_map._check_rivers check, on synthetic index arrays — a
+    passing rivers.png and three failing cases, so the check can actually fail."""
+    import validate_map as vm
+
+    H, W = 10, 12
+    land = np.ones((H, W), bool)
+    land[:, 9:] = False  # sea strip on the right
+    LAND, SEA = 255, 254
+
+    def base():
+        a = np.full((H, W), LAND, dtype=np.uint8)
+        a[~land] = SEA
+        return a
+
+    # A clean river: inland green source, blue body, mouth adjacent to the sea.
+    ok = base()
+    ok[5, 2] = 0            # source (inland)
+    ok[5, 3:9] = 4          # body to x=8, adjacent to sea at x=9
+    assert vm._check_rivers(ok, land, wrap_x=False) == [], "a clean rivers.png must pass"
+
+    # A river pixel on the sea.
+    bad_sea = ok.copy()
+    bad_sea[5, 10] = 4
+    assert vm._check_rivers(bad_sea, land, wrap_x=False), "a river pixel on sea must fail"
+
+    # A river dead-ending on land (mouth not touching water).
+    inland = base()
+    inland[5, 2] = 0
+    inland[5, 3:6] = 4      # ends at x=5, nowhere near the sea
+    assert any("dead-ends" in e for e in vm._check_rivers(inland, land, wrap_x=False)), \
+        "a river that dead-ends on land must fail"
+
+    # An index outside the vanilla semantic set.
+    bad_idx = ok.copy()
+    bad_idx[5, 5] = 99
+    assert any("outside the vanilla semantic set" in e
+               for e in vm._check_rivers(bad_idx, land, wrap_x=False)), \
+        "an out-of-set index must fail"
+
+
 def _selfcheck_sea_zones() -> None:
     """Drawn sea-zone extraction (worldgen.sea_zones), in isolation (no golden).
 
@@ -1787,6 +1925,12 @@ def run_check() -> int:
     print("segment: enclosed-water keep (ocean + seeded lakes) self-check passed.")
     _selfcheck_rivers()
     print("rivers: rasterize + topology-validation self-check passed.")
+    _selfcheck_river_extraction()
+    print("river_network: drawn-cyan extraction (Strahler stems, one source/headwater, "
+          "stranded/loop/fork rejected, spur pruned, wrap stem) self-check passed.")
+    _selfcheck_river_validator()
+    print("validate_map: rivers check (on-land, sea-mouth-touches-water, in-set indices, "
+          "negative cases) self-check passed.")
     _selfcheck_marker()
     print("marker: border-markup extraction (rivers in, roads ignored) self-check passed.")
     _selfcheck_sea_zones()

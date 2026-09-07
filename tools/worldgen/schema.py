@@ -286,6 +286,146 @@ def load_river_streams(path: Path, canvas: tuple[int, int] | None = None) -> lis
 
 
 # ---------------------------------------------------------------------------
+# Canon river names (the anchor-keyed naming input generate_rivers.py reads, #3703)
+# ---------------------------------------------------------------------------
+#
+# The river geometry is *traced* (a pure-cyan line network on the canvas), not
+# authored as polylines, so names cannot ride on the stream objects the way
+# ``RiverStream`` above carries them. Instead a small hand-authored file pins each
+# canon river NAME to an ``anchor`` pixel on its drawn line — the same
+# canvas-anchor idiom as ``land_region_merges.json`` / the hub worksheet — and the
+# generator resolves each anchor to exactly one extracted stream. Naming is
+# **opt-in**: the engine has no river names, so a stream needs a name only if a
+# downstream item (#3677 economics, #3687 traits) references that specific river
+# through ``rivers_index.json``. ``width`` / ``mouth`` are optional per-river
+# overrides (``mouth`` must agree with the traced topology or it is rejected).
+
+@dataclass(frozen=True)
+class CanonRiverName:
+    """One canon river: a display name pinned to an ``anchor`` pixel on its line.
+
+    ``anchor`` is a single canvas ``[x, y]`` pixel (bounds-checked exactly like
+    :class:`LandRegionMerge.anchor_a`). ``width`` optionally overrides the
+    Strahler-derived render width (one of :data:`RIVER_WIDTH_RAMP`); ``mouth``
+    optionally pins the mouth kind (one of :data:`RIVER_MOUTHS`) and must match
+    the traced topology.
+    """
+
+    name: str
+    anchor: tuple[int, int]
+    width: int | None
+    mouth: str | None
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "CanonRiverName":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        ctx = f"{ctx}({name})"
+        (anchor,) = _as_seed_list([_require(d, "anchor", ctx)], f"{ctx}.anchor", canvas)
+        width = d.get("width")
+        if width is not None:
+            width = _as_int(width, f"{ctx}.width")
+            if width not in RIVER_WIDTH_RAMP:
+                raise SchemaError(f"{ctx}.width: expected one of {RIVER_WIDTH_RAMP}, got {width}")
+        mouth = d.get("mouth")
+        if mouth is not None:
+            mouth = _as_str(mouth, f"{ctx}.mouth")
+            if mouth not in RIVER_MOUTHS:
+                raise SchemaError(f"{ctx}.mouth: expected one of {RIVER_MOUTHS}, got '{mouth}'")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(name=name, anchor=anchor, width=width, mouth=mouth, note=note)
+
+
+def load_canon_river_names(path: Path, canvas: tuple[int, int] | None = None
+                           ) -> list[CanonRiverName]:
+    """Load + validate the committed canon-river names file (authored order kept).
+
+    Bounds-checks every anchor against ``canvas`` when known, rejects a duplicate
+    river name and a duplicate anchor pixel (two names on one pixel is a silent
+    authoring bug, the rule the sea-zone / hub loaders use). Region-aware checks
+    (an anchor resolving to exactly one stream) need the extracted network and are
+    enforced by ``river_network.extract_streams``, not here.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    rivers_raw = _require(data, "rivers", ctx)
+    if not isinstance(rivers_raw, list) or not rivers_raw:
+        raise SchemaError(f"{ctx}.rivers: expected a non-empty list")
+    rivers = [CanonRiverName.from_dict(r, f"{ctx}.rivers[{i}]", canvas)
+              for i, r in enumerate(rivers_raw)]
+    names = [r.name for r in rivers]
+    dupes = {n for n in names if names.count(n) > 1}
+    if dupes:
+        raise SchemaError(f"{ctx}: duplicate river names {sorted(dupes)}")
+    seen: dict[tuple[int, int], str] = {}
+    for r in rivers:
+        if r.anchor in seen:
+            raise SchemaError(
+                f"{ctx}: anchor pixel {list(r.anchor)} is claimed by both "
+                f"'{seen[r.anchor]}' and '{r.name}' — anchors must be unique"
+            )
+        seen[r.anchor] = r.name
+    return rivers
+
+
+# ---------------------------------------------------------------------------
+# River source layers (the optional multi-layer trace declaration, #3703)
+# ---------------------------------------------------------------------------
+#
+# By default the river generator reads a single canvas-native cyan trace
+# (``sources/terraqueous_globe_reprojected - rivers.png``, 1:1 with the canvas,
+# no registration). ``river_sources.json`` optionally declares several layers to
+# union — each either ``canvas`` (already canvas-space, read as-is) or
+# ``registered`` (cyan traced on an unwarped registered crop's own frame, warped
+# onto the canvas through that crop's committed registration). The file is only
+# needed when there is more than one trace, or a trace in a source frame.
+
+@dataclass(frozen=True)
+class RiverSourceLayer:
+    """One river trace layer: a source ``file`` and how it lands on the canvas.
+
+    ``mode`` is ``canvas`` (1:1, no warp) or ``registered`` (warped through
+    ``registration``, the stem of a committed ``tools/registration/<name>.json``).
+    """
+
+    file: str
+    mode: str
+    registration: str | None
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str) -> "RiverSourceLayer":
+        file = _as_str(_require(d, "file", ctx), f"{ctx}.file")
+        if not file:
+            raise SchemaError(f"{ctx}.file: must be a non-empty string")
+        ctx = f"{ctx}({file})"
+        mode = _as_str(_require(d, "mode", ctx), f"{ctx}.mode")
+        if mode not in ("canvas", "registered"):
+            raise SchemaError(f"{ctx}.mode: expected 'canvas' or 'registered', got '{mode}'")
+        registration = d.get("registration")
+        if mode == "registered":
+            registration = _as_str(_require(d, "registration", ctx), f"{ctx}.registration")
+            if not registration:
+                raise SchemaError(f"{ctx}.registration: a registered layer needs a registration name")
+        elif registration is not None:
+            registration = _as_str(registration, f"{ctx}.registration")
+        return cls(file=file, mode=mode, registration=registration)
+
+
+def load_river_sources(path: Path) -> list[RiverSourceLayer]:
+    """Load + validate the committed river-source-layer declaration (order kept —
+    it is the union order; layers are OR-ed so order is cosmetic but preserved)."""
+    ctx = path.name
+    data = _load_json(path)
+    layers_raw = _require(data, "layers", ctx)
+    if not isinstance(layers_raw, list) or not layers_raw:
+        raise SchemaError(f"{ctx}.layers: expected a non-empty list")
+    return [RiverSourceLayer.from_dict(la, f"{ctx}.layers[{i}]") for i, la in enumerate(layers_raw)]
+
+
+# ---------------------------------------------------------------------------
 # Inland lakes (the enclosed-water keep-list the land/sea mask generator reads)
 # ---------------------------------------------------------------------------
 #

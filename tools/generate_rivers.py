@@ -1,37 +1,45 @@
 #!/usr/bin/env python3
-"""S2 generator: the drainage network -> map_data/rivers.png.
+"""S2 generator: the user-traced canon river network -> map_data/rivers.png.
 
-Rivers are derived from the terrain, exactly as the relief is::
+Rivers are **source-driven**, not derived from the terrain (board #3703). The old
+heightmap-drainage network (``hydro.py``) drew dense, terrain-following channels
+that were wrong for a fictional world — the Reik did not exist and big channels
+ran through the Nehekharan desert. Instead the canon rivers are traced by hand as
+a pure-cyan ``(0, 255, 255)`` line network and turned into the game's river layer
+by the tools::
 
-    map_data/heightmap.png  +  tools/derived/land_sea_mask.png
-        -> fill depressions -> D8 flow direction -> flow accumulation   (hydro.py)
-        -> channels (accum >= threshold), thinned to ~1 px
-        -> flow-width ramp + green sources + red confluences
+    sources/terraqueous_globe_reprojected - rivers.png   (canvas-native cyan)
+    [+ any registered-crop cyan layers, warped onto the canvas]
+        -> extract cyan -> skeletonize -> graph -> orient by mask-adjacency
+        -> maximal Horton/Strahler stems (one green source per headwater,
+           tributaries -> red MERGE)                        (river_network.py)
+        -> width from stream order on the vanilla ramp (3 -> 4 -> 6 -> 8)
+        -> worldgen.rivers.rasterize (source/merge painting + strict validation)
         -> map_data/rivers.png  (indexed, vanilla palette)
 
-**Why derived rather than drawn.** Hand-placed polylines gave sparse, straight
-lines that had no relationship to the valleys underneath them. A drainage network
-computed from the committed heightmap meanders through the real terrain, joins
-into dendritic basins, and reaches the coastline *by construction* — the mouths
-cannot disagree with the shoreline, because the same land mask produced both. It
-is also far denser, which is what a world map should look like.
+Naming is opt-in: the engine has no river names, so a stream is named only if a
+downstream item (#3677 economics, #3687 traits) references that specific river.
+Each canon name in ``tools/config/canon_river_names.json`` pins a NAME to an
+anchor pixel on its drawn line; the generator resolves each anchor to exactly one
+extracted stream and writes ``tools/derived/rivers_index.json`` (name -> mouth
+kind, length, width, and the state keys the river traverses) for those items to
+consume instead of re-deriving.
 
-**Canon naming** stays a later concern: the S6 pass identifies which of these
-channels are the Reik, the Talabec, and so on, using the user's annotated Empire
-map (`sources/TheEmpireRivers - drawn on.jpg`) as the guide for *which* channel
-is which. Naming does not move any water — the geometry here is already correct
-by construction, so identification is a labelling step, not a re-trace.
+The output is a pure function of the committed source(s), the names file, the
+land/sea mask and the heightmap (elevation tie-break only) — deterministic, no
+drainage-derived channel anywhere, and land with no traced river carries none.
 
 Usage::
 
     python tools/generate_rivers.py             # write map_data/rivers.png
     python tools/generate_rivers.py --preview    # + a downscaled overlay
-    python tools/generate_rivers.py --threshold N  # tune network density
+    python tools/generate_rivers.py --dry-run    # extract + validate, write nothing
 """
 
 from __future__ import annotations
 
 import argparse
+import json
 import sys
 import time
 from pathlib import Path
@@ -44,34 +52,30 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 Image.MAX_IMAGE_PIXELS = None
 
 from config import map_config  # noqa: E402
-from worldgen import hydro, raster, rivers as riverlib  # noqa: E402
+from worldgen import raster, reproject, river_network, rivers as riverlib, schema  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
 MAP_DATA_DIR = REPO_ROOT / "map_data"
+SOURCES_DIR = REPO_ROOT / "sources"
+REGISTRATION_DIR = TOOLS_DIR / "registration"
 PALETTE_JSON = TOOLS_DIR / "lut" / "rivers_palette.json"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 HEIGHTMAP_PATH = MAP_DATA_DIR / "heightmap.png"
 
+#: The default canvas-native trace (1:1 with the canvas, no registration).
+DEFAULT_SOURCE = SOURCES_DIR / "terraqueous_globe_reprojected - rivers.png"
+#: Optional multi-layer declaration; absent -> read DEFAULT_SOURCE only.
+RIVER_SOURCES_JSON = TOOLS_DIR / "config" / "river_sources.json"
+#: The anchor-keyed canon names; absent -> every stream keeps an auto id.
+CANON_NAMES_JSON = TOOLS_DIR / "config" / "canon_river_names.json"
+
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
-#: The heightmap is 2x the canvas; hydrology runs on a block-mean downsample of
-#: it at this factor *relative to the canvas*, then the network is scaled up.
-#: Working coarse is deliberate, not just cheaper: flow routing on a
-#: 16k x 7k grid produces hair-fine capillaries that vanish at map zoom, whereas
-#: routing on a smoothed grid yields the trunk rivers a player actually sees.
-HYDRO_DOWNSCALE = 4
-
-#: Minimum upstream cell count for a cell to count as a channel, at working
-#: resolution. Tuned on the real world: ~120 gives major rivers plus their main
-#: tributaries without the network turning into a solid mat of capillaries.
-DEFAULT_THRESHOLD = 120
-
-#: Accumulation breakpoints (as a fraction of the max) for the vanilla width ramp.
-#: Wider indices are for higher flow, so a trunk river renders broader than a
-#: headwater stream, mirroring how vanilla draws its own rivers.
-WIDTH_BREAKS = (0.0006, 0.004, 0.02)
+#: Rows warped at a time in registered mode, so a full-canvas float grid never
+#: materialises (the memory pattern project_regions.place_painting uses).
+_ROW_BLOCK = 256
 
 
 def log(msg: str, t0: float | None = None) -> None:
@@ -79,145 +83,205 @@ def log(msg: str, t0: float | None = None) -> None:
     print(f"{msg}{stamp}", flush=True)
 
 
-def load_working_grids(step: int, t0: float):
-    """Elevation (metres) + land mask at 1/``step`` of the canvas."""
-    land = raster.read_mask_png(MASK_PATH)
-    if land.shape != (CANVAS_H, CANVAS_W):
-        raise SystemExit(f"mask is {land.shape}, expected {(CANVAS_H, CANVAS_W)}")
+def _load_canvas_layer(path: Path, dilate: int) -> np.ndarray:
+    """Cyan network of a canvas-native trace (1:1 with the canvas)."""
+    rgb = raster.read_rgb_png(path)
+    if rgb.shape[:2] != (CANVAS_H, CANVAS_W):
+        raise SystemExit(
+            f"{path} is {rgb.shape[1]}x{rgb.shape[0]}, expected the canvas "
+            f"{CANVAS_W}x{CANVAS_H} (a canvas-native trace must be 1:1)")
+    return river_network.cyan_network(rgb, dilate=dilate)
+
+
+def _load_registered_layer(path: Path, reg_name: str, regs: dict, dilate: int) -> np.ndarray:
+    """Cyan network of a trace in a registered crop's own frame, warped onto the
+    canvas through that crop's committed registration.
+
+    The higher-risk mode (red-team obj 4): a 1-px line resampled through a warp can
+    fray, so the cyan is dilated *before* warping and sampled nearest; any residual
+    tear surfaces downstream as the loud stranded-line / non-tree error in
+    ``river_network.extract_streams`` (there is no fill step to silently heal it).
+    Exercised in Phase B on a real registered trace; Phase A's offline fixtures
+    cover only the canvas-native path.
+    """
+    reg = next((r for r in regs.values() if r.source == reg_name or _stem(r.source) == reg_name),
+               None)
+    if reg is None:
+        raise SystemExit(
+            f"river source layer '{path.name}': registration '{reg_name}' not found in "
+            f"{REGISTRATION_DIR} (expected a committed <name>.json)")
+    rgb = raster.read_rgb_png(path)
+    src = river_network.cyan_network(rgb, dilate=dilate).astype(np.float32)
+    sh, sw = src.shape
+    fit = reproject.fit_placement(reg, regs)
+    out = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
+    gx_row = (np.arange(CANVAS_W, dtype=np.float64) + 0.5)[None, :]
+    for y0 in range(0, CANVAS_H, _ROW_BLOCK):
+        y1 = min(y0 + _ROW_BLOCK, CANVAS_H)
+        gy = (np.arange(y0, y1, dtype=np.float64) + 0.5)[:, None]
+        gxb = np.broadcast_to(gx_row, (y1 - y0, CANVAS_W))
+        gyb = np.broadcast_to(gy, (y1 - y0, CANVAS_W))
+        sx, sy = fit.to_source_px(gxb, gyb)
+        inb = (sx >= 0) & (sx <= sw - 1) & (sy >= 0) & (sy <= sh - 1)
+        inb &= reproject.crop_mask(reg, sx, sy)
+        sampled = reproject.resample(src, sx, sy, order=0)
+        out[y0:y1][(sampled > 0.5) & inb] = True
+    return out
+
+
+def _stem(name: str) -> str:
+    return Path(name).stem
+
+
+def load_network(dilate: int, t0: float) -> np.ndarray:
+    """The unioned cyan river network on the canvas, from the declared layers
+    (or the single default canvas-native trace)."""
+    if RIVER_SOURCES_JSON.is_file():
+        layers = schema.load_river_sources(RIVER_SOURCES_JSON)
+        regs = None
+        network = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
+        for layer in layers:
+            path = SOURCES_DIR / layer.file
+            if not path.is_file():
+                raise SystemExit(f"river source layer file not found: {path}")
+            if layer.mode == "canvas":
+                network |= _load_canvas_layer(path, dilate)
+            else:  # registered
+                if regs is None:
+                    regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
+                network |= _load_registered_layer(path, layer.registration, regs, dilate)
+            log(f"  layer {layer.file} ({layer.mode}): union now {int(network.sum()):,} px", t0)
+        return network
+    if not DEFAULT_SOURCE.is_file():
+        raise SystemExit(
+            f"no river source: {DEFAULT_SOURCE} not found and no {RIVER_SOURCES_JSON.name}. "
+            f"Trace the canon rivers in pure cyan (0,255,255) on the canvas first.")
+    net = _load_canvas_layer(DEFAULT_SOURCE, dilate)
+    log(f"  canvas-native {DEFAULT_SOURCE.name}: {int(net.sum()):,} cyan px", t0)
+    return net
+
+
+def _elevation_canvas() -> np.ndarray | None:
+    """Canvas-sized elevation for the flow tie-break (heightmap is 2x the canvas;
+    a stride-2 sample is precise enough for a tie-break). ``None`` if absent."""
+    if not HEIGHTMAP_PATH.is_file():
+        return None
     with Image.open(HEIGHTMAP_PATH) as im:
         h16 = np.asarray(im, dtype=np.uint16)
-    log(f"  heightmap {h16.shape[1]}x{h16.shape[0]}, mask {CANVAS_W}x{CANVAS_H}", t0)
-
-    metres = (h16.astype(np.float32) - map_config.HEIGHT_SEA_LEVEL) / map_config.HEIGHT_UNITS_PER_METRE
-    # Heightmap is 2x canvas, so the block factor from heightmap to working grid.
-    f = step * 2
-    hh, ww = h16.shape[0] // f, h16.shape[1] // f
-    elev = metres[:hh * f, :ww * f].reshape(hh, f, ww, f).mean(axis=(1, 3))
-
-    # Land at working resolution comes from the *mask* (the authority on the
-    # coastline), not from thresholding elevation — so channels can never drain
-    # into a cell the province map will call land.
-    lf = step
-    land_w = land[:hh * lf, :ww * lf].reshape(hh, lf, ww, lf).mean(axis=(1, 3)) > 0.5
-    return elev, land_w, land
+    return h16[::2, ::2][:CANVAS_H, :CANVAS_W].astype(np.float32)
 
 
-def upscale_nearest(mask: np.ndarray, step: int, out_shape: tuple[int, int]) -> np.ndarray:
-    big = np.repeat(np.repeat(mask, step, axis=0), step, axis=1)
-    out = np.zeros(out_shape, dtype=mask.dtype)
-    h = min(out_shape[0], big.shape[0])
-    w = min(out_shape[1], big.shape[1])
-    out[:h, :w] = big[:h, :w]
+def _join_state_keys(streams, t0: float) -> dict[str, list[str]]:
+    """For each named stream, the sorted state keys its pixels fall in.
+
+    The join #3677/#3687/#2968 would otherwise re-derive: river pixel ->
+    provinces.png colour -> the owning state in map_data/state_regions/*.txt.
+    Needs the real emitted province bitmap + states, so it is a Phase-B join;
+    returns ``{}`` (with a note) when those inputs do not exist yet.
+    """
+    provinces_png = MAP_DATA_DIR / "provinces.png"
+    state_dir = MAP_DATA_DIR / "state_regions"
+    if not provinces_png.is_file() or not state_dir.is_dir():
+        log("  (state_keys join skipped — provinces.png / state_regions not present yet)", t0)
+        return {}
+    import validate_map  # local: only needed for the Phase-B join
+
+    color_to_state: dict[tuple[int, int, int], str] = {}
+    for path in sorted(state_dir.glob("*.txt")):
+        for st in validate_map.parse_state_file(path):
+            for c in st.provinces:
+                color_to_state[c] = st.key
+    prov = raster.read_rgb_png(provinces_png)
+    out: dict[str, list[str]] = {}
+    for st in streams:
+        keys: set[str] = set()
+        for (x, y) in st.points:
+            c = tuple(int(v) for v in prov[y, x])
+            k = color_to_state.get(c)
+            if k:
+                keys.add(k)
+        out[st.name] = sorted(keys)
     return out
+
+
+def _write_index(result: river_network.ExtractResult, state_keys: dict[str, list[str]],
+                 path: Path) -> None:
+    """Write tools/derived/rivers_index.json (regenerate-never-hand-edit)."""
+    rivers = []
+    for name in sorted(result.index):
+        entry = dict(result.index[name])
+        entry["name"] = name
+        entry["state_keys"] = state_keys.get(name, [])
+        rivers.append(entry)
+    payload = {
+        "_comment": "Generated by tools/generate_rivers.py (board #3703). "
+                    "Regenerate, never hand-edit. name -> mouth kind, length, width, "
+                    "and the state keys the river traverses; consumed by #3677/#3687/#2968.",
+        "count": len(rivers),
+        "rivers": rivers,
+    }
+    path.write_text(json.dumps(payload, indent=2, sort_keys=False) + "\n", encoding="utf-8")
 
 
 def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--preview", action="store_true", help="also write a downscaled overlay")
-    p.add_argument("--threshold", type=int, default=DEFAULT_THRESHOLD,
-                   help=f"channel accumulation threshold (default {DEFAULT_THRESHOLD})")
-    p.add_argument("--step", type=int, default=HYDRO_DOWNSCALE,
-                   help=f"hydrology downscale vs the canvas (default {HYDRO_DOWNSCALE})")
+    p.add_argument("--dry-run", action="store_true",
+                   help="extract + validate + report, but write no bitmap or index")
+    p.add_argument("--dilate", type=int, default=2,
+                   help="cyan-line dilation to bridge anti-aliasing (default 2)")
     args = p.parse_args(argv)
 
     t0 = time.time()
-    for path in (MASK_PATH, HEIGHTMAP_PATH):
-        if not path.is_file():
-            raise SystemExit(f"{path} not found — run tools/generate_heightmap.py first")
+    if not MASK_PATH.is_file():
+        raise SystemExit(f"{MASK_PATH} not found — run tools/generate_coastline_mask.py first")
 
-    log("loading terrain...")
-    elev, land_w, land = load_working_grids(args.step, t0)
-    log(f"  working grid {elev.shape[1]}x{elev.shape[0]}  land {100 * land_w.mean():.1f}%", t0)
+    log("loading land mask + river source(s)...")
+    land = raster.read_mask_png(MASK_PATH)
+    if land.shape != (CANVAS_H, CANVAS_W):
+        raise SystemExit(f"mask is {land.shape}, expected {(CANVAS_H, CANVAS_W)}")
+    network = load_network(args.dilate, t0)
+    elevation = _elevation_canvas()
 
-    log("routing drainage (fill -> D8 -> accumulation)...")
-    net = hydro.build_network(elev, land_w, args.threshold, wrap_x=map_config.WRAP_X)
-    accum, channel = net["accum"], net["channel"]
-    log(f"  max accumulation {int(accum.max())}; channel cells {int(channel.sum())} "
-        f"({100 * channel.sum() / max(1, land_w.sum()):.2f}% of land)", t0)
+    names: list[schema.CanonRiverName] = []
+    if CANON_NAMES_JSON.is_file():
+        names = schema.load_canon_river_names(CANON_NAMES_JSON, canvas=(CANVAS_W, CANVAS_H))
+        log(f"  {len(names)} canon river name(s) loaded", t0)
 
-    channel = hydro.thin_to_single_pixel(channel, accum, wrap_x=map_config.WRAP_X)
-    log(f"  thinned to {int(channel.sum())} cells", t0)
+    log("extracting streams (skeleton -> graph -> orient -> Strahler stems)...")
+    result = river_network.extract_streams(
+        network, land, elevation=elevation, names=names, wrap_x=map_config.WRAP_X)
+    n_src = sum(1 for s in result.streams if s.mouth == "sea")
+    log(f"  {len(result.streams)} streams ({n_src} reach the sea); "
+        f"{len(result.unnamed)} long unnamed", t0)
+    for u in result.unnamed:
+        log(f"    unnamed long stream {u['name']} ({u['length_px']} px) — consider naming it")
 
-    # --- to canvas resolution -------------------------------------------
-    ch_canvas = upscale_nearest(channel, args.step, (CANVAS_H, CANVAS_W))
-    ac_canvas = upscale_nearest(accum, args.step, (CANVAS_H, CANVAS_W))
-    # A river must sit on land: the mask is the authority, and upscaling a coarse
-    # cell can otherwise spill a channel one pixel past the true shoreline.
-    ch_canvas &= land
-    # Re-thin at canvas scale: the nearest upscale turns each cell into a step x
-    # step block, which is emphatically not one pixel wide.
-    ch_canvas = _skeletonize_channels(ch_canvas)
-    ch_canvas &= land
-    log(f"  canvas channels {int(ch_canvas.sum())} px", t0)
-
-    # --- paint the indexed bitmap ---------------------------------------
+    log("rasterizing + validating...")
     palette = riverlib.load_palette(PALETTE_JSON)
-    idx = np.where(land, np.uint8(riverlib.LAND), np.uint8(riverlib.SEA))
-    ramp = palette.width_ramp
-    amax = float(ac_canvas.max()) or 1.0
-    frac = ac_canvas.astype(np.float32) / amax
-    for i, lo in enumerate(WIDTH_BREAKS):
-        idx[ch_canvas & (frac >= lo)] = ramp[min(i + 1, len(ramp) - 1)]
-    idx[ch_canvas & (frac < WIDTH_BREAKS[0])] = ramp[0]
-
-    # Sources: the green pixel marking where each watercourse begins. Headwaters
-    # are identified on the *working* grid from the flow directions (exact), then
-    # each is placed on the nearest surviving canvas channel pixel — the thinning
-    # above may have moved a cell by a pixel or two, and a source that misses the
-    # network would be a watercourse the engine cannot follow.
-    heads = hydro.headwaters(channel, net["direction"], wrap_x=map_config.WRAP_X)
-    sources = _place_sources(heads, ch_canvas, args.step)
-    idx[sources] = riverlib.SOURCE
-    log(f"  {int(heads.sum())} headwaters -> {int(sources.sum())} source pixels placed", t0)
-
+    idx = riverlib.rasterize(result.streams, land, palette, wrap_x=map_config.WRAP_X)
     n_blocks, run = riverlib.measure_2x2_blocks(idx, map_config.WRAP_X)
-    log(f"  2x2 blocks {n_blocks} (longest run {run}); vanilla ships 21/5")
+    drawn = int((~np.isin(idx, [riverlib.LAND, riverlib.SEA])).sum())
+    log(f"  {drawn} river px; 2x2 blocks {n_blocks} (longest run {run}); vanilla ships 21/5", t0)
+
+    if args.dry_run:
+        log("dry run — nothing written.", t0)
+        return 0
 
     MAP_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     out = MAP_DATA_DIR / "rivers.png"
     riverlib.write_rivers_png(out, idx, palette)
-    drawn = int((~np.isin(idx, [riverlib.LAND, riverlib.SEA])).sum())
-    log(f"wrote {out}: {drawn} river px ({out.stat().st_size / 1024:.0f} KB)", t0)
+    log(f"wrote {out} ({out.stat().st_size / 1024:.0f} KB)", t0)
+
+    state_keys = _join_state_keys(result.streams, t0)
+    _write_index(result, state_keys, DERIVED_DIR / "rivers_index.json")
+    log(f"wrote {DERIVED_DIR / 'rivers_index.json'} ({len(result.index)} rivers)", t0)
 
     if args.preview:
         _write_preview(idx, palette, DERIVED_DIR / "preview_rivers.png")
     return 0
-
-
-def _skeletonize_channels(mask: np.ndarray) -> np.ndarray:
-    """Thin an upscaled channel mask back to ~1 px, preserving connectivity."""
-    from skimage.morphology import skeletonize
-    return skeletonize(mask)
-
-
-def _place_sources(heads: np.ndarray, ch_canvas: np.ndarray, step: int) -> np.ndarray:
-    """Put one source pixel on the canvas network for each working-grid headwater.
-
-    A headwater cell maps to a ``step`` x ``step`` canvas block, but thinning may
-    have left no channel pixel inside that exact block, so the search widens by a
-    ring before giving up. Deterministic: blocks are visited in sorted order and
-    the first channel pixel in raster order wins.
-    """
-    out = np.zeros_like(ch_canvas)
-    h, w = ch_canvas.shape
-    ys, xs = np.nonzero(heads)
-    for cy, cx in sorted(zip(ys.tolist(), xs.tolist())):
-        placed = False
-        for pad in (0, step, 2 * step):
-            y0 = max(0, cy * step - pad)
-            y1 = min(h, (cy + 1) * step + pad)
-            x0 = max(0, cx * step - pad)
-            x1 = min(w, (cx + 1) * step + pad)
-            sub = ch_canvas[y0:y1, x0:x1]
-            if sub.any():
-                sy, sx = np.argwhere(sub)[0]
-                out[y0 + sy, x0 + sx] = True
-                placed = True
-                break
-        if not placed:
-            continue
-    return out
 
 
 def _write_preview(idx: np.ndarray, palette: riverlib.RiverPalette, path: Path,

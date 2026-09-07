@@ -239,6 +239,11 @@ def validate(
     wrap_x: bool = True,
     provinces_index_path: Path | None = None,
     hub_anchors_index_path: Path | None = None,
+    rivers_path: Path | None = None,
+    rivers_mask_path: Path | None = None,
+    canon_river_names_path: Path | None = None,
+    canon_rivers_csv_path: Path | None = None,
+    rivers_index_path: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -309,6 +314,28 @@ def validate(
         if hub_index is not None:
             errors += _check_hub_anchors(
                 bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
+        # Rivers (#3703): gated on the source-driven pipeline being live — the
+        # names file's presence is that signal (the same file-exists idiom the
+        # canon_rivers.csv cross-check uses). Absent -> the committed gate stays
+        # green on today's heightmap-derived bitmap, which was never held to the
+        # strict caps. The check's own correctness is proven by a synthetic
+        # self-check in run_fixture.py, not against that bitmap.
+        if (canon_river_names_path is not None and canon_river_names_path.is_file()
+                and rivers_path is not None and rivers_path.is_file()
+                and rivers_mask_path is not None and rivers_mask_path.is_file()):
+            from worldgen.raster import read_indexed_png
+
+            ridx, _ = read_indexed_png(rivers_path)
+            rmask = _read_mask(rivers_mask_path)
+            csv_rows = (_parse_canon_rivers_csv(canon_rivers_csv_path)
+                        if canon_rivers_csv_path is not None and canon_rivers_csv_path.is_file()
+                        else None)
+            rindex = None
+            if rivers_index_path is not None and rivers_index_path.is_file():
+                import json
+
+                rindex = json.loads(rivers_index_path.read_text(encoding="utf-8"))
+            errors += _check_rivers(ridx, rmask, wrap_x, csv_rows, rindex)
     errors += _check_loc_coverage(states, loc_dir)
     return errors
 
@@ -432,6 +459,139 @@ def _check_hub_anchors(bitmap: "ProvinceBitmap", states: list[ParsedState],
                         f"but the state has {n_prov} provinces for {n_hubs} distinct anchor hub(s) "
                         f"— give them separate provinces")
     return errors
+
+
+#: The vanilla rivers.png semantic index set (tools/lut/rivers_palette.json):
+#: source 0, merge 1, split 2, the blue width ramp 3-11, sea 254, land 255. The
+#: source-driven generator emits only a subset (0/1/3/4/6/8/254/255); an index
+#: outside this whole set means a re-save remapped a semantic value.
+_RIVER_INDICES = frozenset({0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 254, 255})
+_RIVER_LAND = 255
+_RIVER_SEA = 254
+_RIVER_SOURCE = 0
+_RIVER_MERGE = 1
+
+_R_D8 = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1))
+
+
+def _neighbors8(y: int, x: int, h: int, w: int, wrap_x: bool):
+    for dy, dx in _R_D8:
+        ny = y + dy
+        if ny < 0 or ny >= h:
+            continue
+        nx = x + dx
+        if nx < 0 or nx >= w:
+            if not wrap_x:
+                continue
+            nx %= w
+        yield (ny, nx)
+
+
+def _check_rivers(idx: np.ndarray, land_mask: np.ndarray, wrap_x: bool,
+                  canon_rivers_csv: list[tuple[str, str]] | None = None,
+                  rivers_index: dict | None = None) -> list[str]:
+    """Validate a committed ``rivers.png`` index array against the vanilla model.
+
+    Mirrors the invariants ``worldgen.rivers._validate`` enforces before writing,
+    re-checked here on the committed bitmap (defense in depth — the offline gate in
+    testing.md). Returns a list of error strings (empty == clean):
+
+    * every index is in the vanilla semantic set;
+    * no river pixel sits on sea (land mask is the authority);
+    * every green source (0) is inland (no water in its 8-neighbourhood);
+    * every red merge (1) touches another river pixel;
+    * every ramp-body river endpoint (a body pixel with a single river neighbour)
+      is a sea mouth — 8-adjacent to open water — so no river dead-ends on land;
+    * the 2×2-block caps ``worldgen.rivers`` calibrated on vanilla; and
+    * when ``canon_rivers.csv`` (#3677) exists, every ``(river, state_key)`` row
+      names a river whose ``rivers_index.json`` state coverage includes that state
+      (a **warning**, not a hard error).
+    """
+    from worldgen.rivers import MAX_2X2_BLOCKS, MAX_2X2_RUN, measure_2x2_blocks
+
+    errors: list[str] = []
+    if idx.shape != land_mask.shape:
+        return [f"rivers.png {idx.shape} and land mask {land_mask.shape} differ in size"]
+    h, w = idx.shape
+
+    bad = sorted(int(v) for v in np.unique(idx) if int(v) not in _RIVER_INDICES)
+    if bad:
+        errors.append(f"rivers.png uses indices outside the vanilla semantic set: {bad}")
+
+    river = ~np.isin(idx, [_RIVER_LAND, _RIVER_SEA])
+    water = ~land_mask
+    off_land = river & water
+    if off_land.any():
+        n = int(off_land.sum())
+        ys, xs = np.nonzero(off_land)
+        errors.append(f"{n} river pixel(s) lie on sea, first at "
+                      f"({int(xs[0])}, {int(ys[0])})")
+
+    # Source (0) inland, merge (1) touches another river.
+    for (yy, xx) in zip(*np.nonzero(idx == _RIVER_SOURCE)):
+        if any(water[ny, nx] for ny, nx in _neighbors8(int(yy), int(xx), h, w, wrap_x)):
+            errors.append(f"river source ({int(xx)}, {int(yy)}) is on the coast; "
+                          f"sources must be inland")
+            break
+    for (yy, xx) in zip(*np.nonzero(idx == _RIVER_MERGE)):
+        if not any(river[ny, nx] for ny, nx in _neighbors8(int(yy), int(xx), h, w, wrap_x)
+                   if (ny, nx) != (int(yy), int(xx))):
+            errors.append(f"river merge marker ({int(xx)}, {int(yy)}) touches no other stream")
+            break
+
+    # A ramp-body endpoint (one river neighbour) that is not a sea mouth is a
+    # river dead-ending on land.
+    body = np.isin(idx, [3, 4, 5, 6, 7, 8, 9, 10, 11])
+    for (yy, xx) in zip(*np.nonzero(body)):
+        y, x = int(yy), int(xx)
+        nb = [(ny, nx) for ny, nx in _neighbors8(y, x, h, w, wrap_x)]
+        rn = sum(1 for ny, nx in nb if river[ny, nx])
+        if rn == 1 and not any(water[ny, nx] for ny, nx in nb):
+            errors.append(f"river body pixel ({x}, {y}) dead-ends on land "
+                          f"(a sea mouth must touch open water)")
+            break
+
+    n_blocks, run = measure_2x2_blocks(idx, wrap_x)
+    if n_blocks > MAX_2X2_BLOCKS:
+        errors.append(f"{n_blocks} 2x2 river blocks exceed the tolerance of "
+                      f"{MAX_2X2_BLOCKS} (vanilla ships 21)")
+    if run > MAX_2X2_RUN:
+        errors.append(f"a run of {run} connected 2x2 river blocks exceeds the limit "
+                      f"of {MAX_2X2_RUN} — streams may run parallel instead of merging")
+
+    if canon_rivers_csv is not None and rivers_index is not None:
+        cover: dict[str, set[str]] = {}
+        for r in rivers_index.get("rivers", []):
+            cover[r["name"]] = set(r.get("state_keys", []))
+        for river_name, state_key in canon_rivers_csv:
+            if river_name not in cover:
+                errors.append(f"WARNING canon_rivers.csv: river '{river_name}' is not in "
+                              f"rivers_index.json")
+            elif state_key not in cover[river_name]:
+                errors.append(f"WARNING canon_rivers.csv: '{river_name}' does not reach "
+                              f"state '{state_key}' in rivers_index.json")
+    return errors
+
+
+def _parse_canon_rivers_csv(path: Path) -> list[tuple[str, str]]:
+    """``(river, state_key)`` rows from #3677's canon_rivers.csv (header skipped)."""
+    import csv
+
+    rows: list[tuple[str, str]] = []
+    with open(path, newline="", encoding="utf-8-sig") as fh:
+        reader = csv.reader(fh)
+        header = next(reader, None)
+        want = {"river": 0, "state_key": 1}
+        if header:
+            lower = [c.strip().lower() for c in header]
+            for key in ("river", "state_key"):
+                if key in lower:
+                    want[key] = lower.index(key)
+        for row in reader:
+            if len(row) <= max(want.values()):
+                continue
+            rows.append((row[want["river"]].strip(), row[want["state_key"]].strip()))
+    return rows
 
 
 def _check_required_hubs(land_states: list[ParsedState]) -> list[str]:
@@ -1361,6 +1521,12 @@ def main(argv: list[str] | None = None) -> int:
         (args.index_path or TOOLS_DIR / "derived" / "provinces_index.json"),
         hub_anchors_index_path=None if args.fixture else
         (TOOLS_DIR / "derived" / "hub_anchors_index.json"),
+        rivers_path=None if args.fixture else REPO_ROOT / "map_data" / "rivers.png",
+        rivers_mask_path=None if args.fixture else TOOLS_DIR / "derived" / "land_sea_mask.png",
+        canon_river_names_path=None if args.fixture else
+        TOOLS_DIR / "config" / "canon_river_names.json",
+        canon_rivers_csv_path=None if args.fixture else TOOLS_DIR / "config" / "canon_rivers.csv",
+        rivers_index_path=None if args.fixture else TOOLS_DIR / "derived" / "rivers_index.json",
     )
     if errors:
         print(f"validate_map: {len(errors)} error(s):", file=sys.stderr)
