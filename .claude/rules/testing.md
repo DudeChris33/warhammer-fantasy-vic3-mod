@@ -163,34 +163,53 @@ dependents too, so `lake_mask.png`'s presence joins the "re-run
 and `generate_province_terrains.py` after a `generate_provinces.py` regen" set
 above.
 **Canon rivers (board #3703)**: `map_data/rivers.png` is **source-driven**, not
-heightmap-derived. The canon rivers are hand-traced as a pure-cyan (`0,255,255`)
-line network on the canvas (`sources/terraqueous_globe_reprojected - rivers.png`,
-1:1, no registration — or several layers declared in the optional hand-authored
-`tools/config/river_sources.json`). A source change follows the usual authoring
-cascade: edit/redraw the trace → `python tools/worldgen/sources.py
---update-manifest` (an explicit user action) → `python tools/generate_rivers.py`
-(→ `map_data/rivers.png` + the committed `tools/derived/rivers_index.json`) →
-`python tools/validate_map.py` (full) → `python tools/render_rivers_preview.py`
-→ **send the render, get the user's visual verdict** → commit. `generate_rivers.py`
-is decoupled from the province cut (it reads the committed `land_sea_mask.png` +
-the cyan trace + the heightmap for flow tie-breaks), so a `generate_provinces.py`
-regen does **not** invalidate `rivers.png` — but a *province* regen does move the
-state colours the `rivers_index.json` `state_keys` join reads, so re-run
-`generate_rivers.py` after one if you need the index's `state_keys` current. The
-full `validate_map.py` run gains a `_check_rivers` (indices ⊆ the vanilla
-semantic set, every river pixel on land, sea mouths touch water, source/merge
-well-formed, the 2×2-block caps, and the `canon_rivers.csv` (river, state)
-coverage cross-check when that file exists) **gated on
-`tools/config/canon_river_names.json` existing** — absent (Phase A) the check is
-skipped so today's bogus heightmap-drainage bitmap does not redden the committed
-gate. `python tools/run_fixture.py --check` exercises the extraction
-(`worldgen/river_network.py`) and the validator in isolation on synthetic drawn
-networks (Strahler stems with one source per headwater; stranded line, closed
-loop and divergent delta fork each rejected; a short spur pruned; a wrap-seam
-stem; byte-identical reruns) and `validate_map._check_rivers` (on-land,
-sea-mouth-touches-water, in-set indices, negative cases). Phase A ships the
-tooling green on those fixtures with **no `rivers.png` regenerated or committed**;
-regenerating the real bitmap is the user-gated Phase-B step above.
+heightmap-derived (committed real 2026-09-07). The canon rivers are hand-traced
+as a pure-cyan (`0,255,255`) line network on the canvas
+(`sources/terraqueous_globe_reprojected - rivers.png`, 1:1, no registration — or
+several layers in the optional `tools/config/river_sources.json`).
+`worldgen/river_network.py` skeletonizes the cyan (wrap-aware), builds a
+topological-adjacency graph, and orients each connected network into a **flow
+DAG** by a strict rank (BFS-distance-to-outlet → elevation → pixel; a total order,
+so it is guaranteed acyclic). That makes **divergence first-class** — vanilla's
+model, not the earlier tree-only one:
+- **Lakes** (board #3742): ocean and lake are distinguished
+  (`worldgen.lakes.classify` on the committed `land_sea_mask.png`, or the
+  committed `lake_mask.png` when present). A lake-fed river sources at the lake; a
+  lake→sea or lake→lake river is not a fork.
+- **Endorheic** rivers dry up inland at a sink (the Marshes of Madness) — an
+  `endorheic` mouth, no marker, no water-adjacency required.
+- **Splits** (deltas + river-islands): a distributary branches off the trunk and
+  is painted with vanilla's yellow **split marker (index 2)**, the mirror of the
+  red merge. `schema.RiverStream` carries a `head` (`source`|`split`).
+- **Manual flow overrides** `tools/config/river_overrides.json` (hand-authored,
+  regenerate-through, the anchor idiom): a network the tool can't auto-orient —
+  most often a channel whose *both* ends reach the sea, so it has no headwater —
+  is pinned by anchor to a compass `flow` direction (mouth = the furthest endpoint
+  that way); its coastal source is waived (`RiverStream.coastal_source`). Each
+  un-orientable river needs its own entry — a per-case manual decision, reported
+  by the generator (`no-source`), never guessed.
+
+A source change follows the usual cascade: edit/redraw the trace → `python
+tools/worldgen/sources.py --update-manifest` → `python tools/generate_rivers.py`
+(→ `map_data/rivers.png` + committed `tools/derived/rivers_index.json`) → offline
+gate → `python tools/render_rivers_preview.py` → **send the render, get the user's
+visual verdict, then the in-game `error.log` check** → commit. `generate_rivers.py`
+reads the committed `land_sea_mask.png` + the cyan trace + the heightmap (flow
+tie-break / endorheic-sink pick), so a `generate_provinces.py` regen does **not**
+invalidate `rivers.png` — but a *province* regen moves the state colours the
+`rivers_index.json` `state_keys` join reads, so re-run `generate_rivers.py` after
+one if you need the index current. The full `validate_map.py` run's `_check_rivers`
+(indices ⊆ the vanilla set incl. the split 2; river pixels on land; sources clear
+of the ocean but lake-fed allowed via an `ocean` param; merge + split markers
+touch a stream; the 2×2 caps; endorheic mouths legal — no dead-end rule; the
+`canon_rivers.csv` (river, state) cross-check) stays **gated on
+`tools/config/canon_river_names.json` existing** (naming is opt-in; absent, the
+generator's own `worldgen.rivers._validate` owns correctness at emit time).
+`python tools/run_fixture.py --check` exercises `worldgen/river_network.py` and
+the validator on synthetic networks (Strahler stems; endorheic sink; lake-fed
+source; a **delta** and a **river-island** that paint splits; a manual override on
+a sea-to-sea channel; a sourceless closed ring rejected; spur pruned; wrap-seam
+stem; byte-identical reruns).
 **Lore hubs (board #3665)**: `tools/config/hub_worksheet.json` is a hand-authored,
 regenerate-through input (like the naming worksheet) — one settlement per row,
 pinned to a canvas anchor. A change to it forces the **full**
@@ -315,16 +334,21 @@ sorted by integer id (not index order), two runs are byte-identical, an empty
 cell list is refused rather than writing a truncated file, and the emitted file
 round-trips cleanly through the validator, whose bijection and valid-id checks
 each fail on a missing line, an extra line, and an undefined terrain id.
-`_selfcheck_river_extraction` (board #3703) exercises `worldgen/river_network.py`
-on synthetic cyan networks: a Y-junction stitches maximal Strahler stems with one
-green source per headwater and a red MERGE at the confluence (source count ==
-headwater count, not per-segment), streams run source-first, an anchor names
-exactly one stream, the trunk widens downstream, and two runs are byte-identical;
-a stranded inland line, a closed loop and a divergent delta fork are each hard
-errors; a short spur is pruned rather than becoming a fake headwater; and a
-wrap-seam-crossing stem extracts under `wrap_x`. `_selfcheck_river_validator`
-exercises `validate_map._check_rivers` on synthetic index arrays: a clean
-rivers.png passes, and a river pixel on sea, a river dead-ending on land, and an
+`_selfcheck_river_extraction` (board #3703) exercises `worldgen/river_network.py`'s
+flow-DAG model on synthetic cyan networks: a Y-junction stitches Strahler stems
+with one green source per headwater and a red MERGE at the confluence (source
+count == headwater count), streams run source-first, an anchor names exactly one
+stream, the trunk widens downstream; an inland-terminating river is a valid
+**endorheic** sink; a **lake→sea** river is one sea stream with a lake-fed source
+(not a fork); a **delta** (one trunk, two sea mouths) and a **river-island** (split
+then rejoin) are valid and paint yellow split markers; a sea-to-sea channel is a
+`no-source` error unless a **manual flow override** orients it (mouth = furthest in
+the compass direction, coastal source waived); only a sourceless closed ring is a
+hard error; a short spur is pruned; a wrap-seam stem extracts under `wrap_x`; and
+two runs are byte-identical. `_selfcheck_river_validator` exercises
+`validate_map._check_rivers` on synthetic index arrays (with an `ocean` mask): a
+clean rivers.png and an endorheic-inland and a lake-fed one all pass, while a
+river pixel on sea, a source on the ocean coast, a lone split marker, and an
 out-of-set index each fail.
 
 ## Regression rule
