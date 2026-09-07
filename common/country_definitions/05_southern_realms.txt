@@ -249,24 +249,24 @@ AQL = {
 	# capital: Aquilena — TODO once land state-regions exist
 }
 
-################ MUN — Muntichmund; the double-eagle realm near High Spear ################
+################ DUN — Dunkelmund; the double-eagle realm near High Spear ################
 
-MUN = {
+DUN = {
 	color = { 176 116 64 }
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Muntichmund — TODO once land state-regions exist
+	# capital: Dunkelmund — TODO once land state-regions exist
 }
 
-################ ESS — Essethaven; the chevron-banner realm on the River Stecnek ################
+################ ESS — Esselhafen; the chevron-banner realm on the River Stecnek ################
 
 ESS = {
 	color = { 140 96 74 }
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Essethaven — TODO once land state-regions exist
+	# capital: Esselhafen — TODO once land state-regions exist
 }
 
 ################ RAA — Raachwald; the serpent-and-diamond realm by Reavers Keep ################

@@ -136,6 +136,7 @@ CXC
 DGF
 DOL
 DRZ
+DUN
 EKR
 ELK
 ELL
@@ -212,7 +213,6 @@ MOO
 MOR
 MOU
 MTK
-MUN
 MZN
 NAG
 NEH
@@ -562,8 +562,8 @@ under the existing `USR`/`TIL` unifiers.
 | GDO | `05_southern_realms` | Gordorno | start | `border_princer` | Gordorno | fleur-de-lis realm by the Citadel of Gazul |
 | MON | `05_southern_realms` | Monteaux | start | `border_princer` | Monteaux | towered realm on the Black Gulf coast |
 | AQL | `05_southern_realms` | Aquilena | start | `border_princer` | Aquilena | serpent realm on the River Orco |
-| MUN | `05_southern_realms` | Muntichmund | start | `border_princer` | Muntichmund | double-eagle realm near High Spear |
-| ESS | `05_southern_realms` | Essethaven | start | `border_princer` | Essethaven | chevron-banner realm on the River Stecnek |
+| DUN | `05_southern_realms` | Dunkelmund | start | `border_princer` | Dunkelmund | double-eagle realm near High Spear |
+| ESS | `05_southern_realms` | Esselhafen | start | `border_princer` | Esselhafen | chevron-banner realm on the River Stecnek |
 | RAA | `05_southern_realms` | Raachwald | start | `border_princer` | Raachwald | serpent-and-diamond realm by Reavers Keep |
 | UVE | `05_southern_realms` | Uvetovsk | start | `gospodar`, `ungol` | Uvetovsk | Kislevite-founded bear realm, Old Silk Road; cross-file culture ref |
 | HKN | `05_southern_realms` | Harkon | start | `sylvanian_vampire` | Harkon | `unrecognized`; undead chalice realm, Forest of Gloom; cross-file culture ref |
