@@ -991,12 +991,15 @@ def _selfcheck_rivers() -> None:
 def _selfcheck_river_extraction() -> None:
     """Drawn river extraction (worldgen.river_network), in isolation (no golden).
 
-    Pins what generate_rivers.py relies on (board #3703): a cyan Y-junction yields
-    one green source per headwater with a red MERGE at the confluence (not a
-    per-segment source explosion); streams run source-first and name by anchor; a
-    stranded inland line, a closed loop and a divergent delta fork are each hard
-    errors; a short spur is pruned rather than becoming a fake headwater; a
-    seam-crossing stem extracts under wrap_x; and two runs are byte-identical.
+    Pins what generate_rivers.py relies on (board #3703 + the #3742 lake model): a
+    cyan Y-junction yields one green source per headwater with a red MERGE at the
+    confluence (not a per-segment source explosion); streams run source-first and
+    name by anchor; an inland-terminating river is a valid ENDORHEIC sink; a
+    lake→sea river is one sea stream with a lake-fed source (not a fork); a DELTA
+    (one trunk, two sea mouths) and a RIVER-ISLAND (split then rejoin) are valid
+    and paint yellow split markers; only a sourceless closed ring is an error; a
+    short spur is pruned; a seam-crossing stem extracts under wrap_x; and two runs
+    are byte-identical.
     """
     from skimage.draw import line as _line
     from worldgen import river_network as rn
@@ -1043,20 +1046,78 @@ def _selfcheck_river_extraction() -> None:
     sig = lambda r: [(s.name, tuple(s.points), s.mouth, s.width) for s in r.streams]
     assert sig(res) == sig(res2), "two runs must be byte-identical"
 
-    # Stranded inland line (no water-adjacent end) -> hard error.
-    _assert_river_error(lambda: rn.extract_streams(
-        rn.cyan_network(cyan(H, W, [(24, 8, 24, 30)]), dilate=1),
-        np.ones((H, W), bool), wrap_x=False), "reaches no water")
+    # An inland line reaching NO water is a valid ENDORHEIC river now (board
+    # #3742: the Marshes of Madness are a drainage sink), not an error: it dries
+    # up inland, one source and one endorheic mouth, no MERGE marker.
+    endo = rn.extract_streams(rn.cyan_network(cyan(H, W, [(24, 8, 24, 30)]), dilate=1),
+                              np.ones((H, W), bool), wrap_x=False)
+    assert len(endo.streams) == 1 and endo.streams[0].mouth == "endorheic", \
+        f"a fully-inland river must be one endorheic stream, got {[s.mouth for s in endo.streams]}"
+    idx_e = rl.rasterize(endo.streams, np.ones((H, W), bool), pal, wrap_x=False)
+    assert int((idx_e == rl.MERGE).sum()) == 0, "an endorheic river carries no merge marker"
 
-    # Closed loop -> hard error.
+    # A lake→sea river is NOT a fork: the lake end is a source (lake-fed), the
+    # ocean end is the mouth. Two independent water bodies distinguished by ocean
+    # vs lake (board #3742).
+    landL = np.ones((H, W), bool)
+    landL[:, 58:] = False               # ocean strip on the right
+    lakeL = np.zeros((H, W), bool)
+    lakeL[20:25, 8:13] = True           # an enclosed lake block on the left
+    landL[lakeL] = False                # a lake is water in the land/sea mask
+    netL = rn.cyan_network(cyan(H, W, [(22, 13, 22, 57)]), dilate=1)
+    resL = rn.extract_streams(netL, landL, lake=lakeL, wrap_x=False)
+    assert len(resL.streams) == 1 and resL.streams[0].mouth == "sea", \
+        f"lake→sea must be one sea stream (not a fork), got {[s.mouth for s in resL.streams]}"
+    (ssx, ssy) = resL.streams[0].points[0]
+    assert any(lakeL[ny, nx] for ny, nx in rn._neighbors8(ssy, ssx, H, W, False)), \
+        "the source of a lake-fed river sits on the lake shore"
+    oceanL = (~landL) & (~lakeL)
+    rl.rasterize(resL.streams, landL, pal, wrap_x=False, ocean=oceanL)  # lake-fed source is legal
+
+    # A closed ring with no source/mouth (a "moat") is still a hard error.
     loop = cyan(H, W, [(10, 10, 10, 30), (10, 30, 30, 30), (30, 30, 30, 10), (30, 10, 10, 10)])
     _assert_river_error(lambda: rn.extract_streams(
         rn.cyan_network(loop, dilate=1), land, wrap_x=False), "loop")
 
-    # Divergent delta fork (one source, two mouths) -> hard error with guidance.
-    fork = cyan(H, W, [(24, 8, 24, 28), (24, 28, 10, 57), (24, 28, 38, 57)])
-    _assert_river_error(lambda: rn.extract_streams(
-        rn.cyan_network(fork, dilate=1), land, wrap_x=False), "distributary")
+    # A DELTA — one trunk splitting into two distributaries that each reach the
+    # sea — is valid (board #3703 split support): two sea mouths, a yellow split
+    # marker, one green source (the trunk's headwater).
+    delta = cyan(H, W, [(24, 8, 24, 28), (24, 28, 10, 57), (24, 28, 38, 57)])
+    res_d = rn.extract_streams(rn.cyan_network(delta, dilate=1), land, wrap_x=False)
+    assert sorted(s.mouth for s in res_d.streams).count("sea") == 2, \
+        f"a delta reaches the sea twice, got {[s.mouth for s in res_d.streams]}"
+    assert any(s.head == "split" for s in res_d.streams), "a delta has a split-head distributary"
+    idx_d = rl.rasterize(res_d.streams, land, pal, wrap_x=False)
+    assert int((idx_d == rl.SPLIT).sum()) >= 1, "a delta paints a yellow split marker (index 2)"
+    assert int((idx_d == rl.SOURCE).sum()) == 1, "a delta has one green source"
+
+    # A RIVER-ISLAND — the channel splits and rejoins around an island, then
+    # reaches the sea — is valid too: a split (yellow) and a rejoin (red merge).
+    island = cyan(H, W, [(24, 8, 24, 20),
+                         (24, 20, 16, 30), (16, 30, 24, 40),      # north arm
+                         (24, 20, 32, 30), (32, 30, 24, 40),      # south arm
+                         (24, 40, 24, 57)])
+    res_i = rn.extract_streams(rn.cyan_network(island, dilate=1), land, wrap_x=False)
+    idx_i = rl.rasterize(res_i.streams, land, pal, wrap_x=False)
+    assert int((idx_i == rl.SPLIT).sum()) >= 1, "the island's split paints a yellow marker"
+    assert int((idx_i == rl.MERGE).sum()) >= 1, "the island's rejoin paints a red merge"
+    assert int((idx_i == rl.SOURCE).sum()) == 1, "one green source (the headwater)"
+
+    # A sea-to-sea channel has no auto-derivable source -> error; a manual flow
+    # override orients it (mouth = furthest in the flow direction; the opposite,
+    # coastal, end is the source, and its inland-source rule is waived).
+    land2 = np.ones((H, W), bool)
+    land2[:, :3] = False    # ocean on the left
+    land2[:, 58:] = False   # ocean on the right
+    net_ss = rn.cyan_network(cyan(H, W, [(24, 3, 24, 57)]), dilate=1)
+    _assert_river_error(lambda: rn.extract_streams(net_ss, land2, wrap_x=False), "no inland source")
+    res_ov = rn.extract_streams(net_ss, land2, overrides=[schema.RiverOverride((30, 24), "W", "")],
+                                wrap_x=False)
+    assert len(res_ov.streams) == 1 and res_ov.streams[0].mouth == "sea", "override -> one sea stream"
+    assert res_ov.streams[0].points[0][0] > 40, \
+        f"flow W means the source is the eastern end, got {res_ov.streams[0].points[0]}"
+    assert res_ov.streams[0].coastal_source, "the override source is flagged coastal"
+    rl.rasterize(res_ov.streams, land2, pal, wrap_x=False, ocean=~land2)  # coastal source waived, no raise
 
     # A short spur off a line is pruned, not turned into a fake headwater.
     spur = cyan(H, W, [(24, 8, 24, 57), (24, 30, 20, 30)])
@@ -1086,13 +1147,18 @@ def _assert_river_error(fn, needle: str) -> None:
 
 
 def _selfcheck_river_validator() -> None:
-    """The #3703 validate_map._check_rivers check, on synthetic index arrays — a
-    passing rivers.png and three failing cases, so the check can actually fail."""
+    """The validate_map._check_rivers check, on synthetic index arrays — a passing
+    rivers.png plus failing cases, so the check can actually fail (board #3703 +
+    the #3742 lake / endorheic / split extensions)."""
     import validate_map as vm
 
-    H, W = 10, 12
+    H, W = 10, 14
     land = np.ones((H, W), bool)
-    land[:, 9:] = False  # sea strip on the right
+    land[:, 9:] = False        # ocean strip on the right (x >= 9)
+    lake = np.zeros((H, W), bool)
+    lake[7:9, 2:4] = True      # a small inland lake
+    land[lake] = False         # a lake is water in the land/sea mask
+    ocean = (~land) & (~lake)
     LAND, SEA = 255, 254
 
     def base():
@@ -1102,27 +1168,48 @@ def _selfcheck_river_validator() -> None:
 
     # A clean river: inland green source, blue body, mouth adjacent to the sea.
     ok = base()
-    ok[5, 2] = 0            # source (inland)
-    ok[5, 3:9] = 4          # body to x=8, adjacent to sea at x=9
-    assert vm._check_rivers(ok, land, wrap_x=False) == [], "a clean rivers.png must pass"
+    ok[2, 2] = 0            # source (inland)
+    ok[2, 3:9] = 4          # body to x=8, adjacent to ocean at x=9
+    assert vm._check_rivers(ok, land, wrap_x=False, ocean=ocean) == [], \
+        f"a clean rivers.png must pass, got {vm._check_rivers(ok, land, wrap_x=False, ocean=ocean)}"
 
-    # A river pixel on the sea.
+    # A lake-fed source (green pixel on the lake shore, not the ocean) passes.
+    lakefed = base()
+    lakefed[7, 4] = 0          # x=4 is beside the lake (x=3), far from the ocean
+    lakefed[7, 5:9] = 4        # flows out to the ocean
+    assert vm._check_rivers(lakefed, land, wrap_x=False, ocean=ocean) == [], \
+        f"a lake-fed source must pass, got {vm._check_rivers(lakefed, land, wrap_x=False, ocean=ocean)}"
+
+    # An ENDORHEIC river ending inland (no water at the mouth) is now legal.
+    endo = base()
+    endo[5, 3] = 0
+    endo[5, 4:7] = 4        # ends at x=6, nowhere near water — a dry sink
+    assert vm._check_rivers(endo, land, wrap_x=False, ocean=ocean) == [], \
+        f"an endorheic river ending inland must pass, got {vm._check_rivers(endo, land, wrap_x=False, ocean=ocean)}"
+
+    # A river pixel on the sea fails.
     bad_sea = ok.copy()
-    bad_sea[5, 10] = 4
-    assert vm._check_rivers(bad_sea, land, wrap_x=False), "a river pixel on sea must fail"
+    bad_sea[2, 10] = 4
+    assert vm._check_rivers(bad_sea, land, wrap_x=False, ocean=ocean), "a river pixel on sea must fail"
 
-    # A river dead-ending on land (mouth not touching water).
-    inland = base()
-    inland[5, 2] = 0
-    inland[5, 3:6] = 4      # ends at x=5, nowhere near the sea
-    assert any("dead-ends" in e for e in vm._check_rivers(inland, land, wrap_x=False)), \
-        "a river that dead-ends on land must fail"
+    # A green source ON the ocean coast fails; a lake-fed one passes.
+    on_coast = base()
+    on_coast[4, 8] = 0      # x=8 is adjacent to ocean x=9
+    on_coast[4, 3:8] = 4
+    assert any("sea coast" in e for e in vm._check_rivers(on_coast, land, wrap_x=False, ocean=ocean)), \
+        "a source on the ocean coast must fail"
 
-    # An index outside the vanilla semantic set.
+    # A yellow split marker (2) touching no other river fails.
+    lone_split = base()
+    lone_split[8, 6] = 2
+    assert any("split" in e for e in vm._check_rivers(lone_split, land, wrap_x=False, ocean=ocean)), \
+        "a split marker touching no stream must fail"
+
+    # An index outside the vanilla semantic set fails.
     bad_idx = ok.copy()
-    bad_idx[5, 5] = 99
+    bad_idx[2, 5] = 99
     assert any("outside the vanilla semantic set" in e
-               for e in vm._check_rivers(bad_idx, land, wrap_x=False)), \
+               for e in vm._check_rivers(bad_idx, land, wrap_x=False, ocean=ocean)), \
         "an out-of-set index must fail"
 
 
@@ -2171,8 +2258,9 @@ def run_check() -> int:
     _selfcheck_rivers()
     print("rivers: rasterize + topology-validation self-check passed.")
     _selfcheck_river_extraction()
-    print("river_network: drawn-cyan extraction (Strahler stems, one source/headwater, "
-          "stranded/loop/fork rejected, spur pruned, wrap stem) self-check passed.")
+    print("river_network: drawn-cyan extraction (Strahler stems, endorheic sink, "
+          "lake-fed source, delta + river-island splits, sourceless-ring rejected, "
+          "spur pruned, wrap stem) self-check passed.")
     _selfcheck_river_validator()
     print("validate_map: rivers check (on-land, sea-mouth-touches-water, in-set indices, "
           "negative cases) self-check passed.")

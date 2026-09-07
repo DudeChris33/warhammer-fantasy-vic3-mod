@@ -52,7 +52,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 Image.MAX_IMAGE_PIXELS = None
 
 from config import map_config  # noqa: E402
-from worldgen import raster, reproject, river_network, rivers as riverlib, schema  # noqa: E402
+from worldgen import lakes, raster, reproject, river_network, rivers as riverlib, schema, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
@@ -64,12 +64,16 @@ PALETTE_JSON = TOOLS_DIR / "lut" / "rivers_palette.json"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 HEIGHTMAP_PATH = MAP_DATA_DIR / "heightmap.png"
 
-#: The default canvas-native trace (1:1 with the canvas, no registration).
-DEFAULT_SOURCE = SOURCES_DIR / "terraqueous_globe_reprojected - rivers.png"
+#: The default canvas-native trace (1:1 with the canvas, no registration),
+#: resolved through sources.resolve_source_path so it is found whether it sits at
+#: the sources/ root or in the gitignored gimp_exports/ export dir.
+DEFAULT_SOURCE_NAME = "terraqueous_globe_reprojected - rivers.png"
 #: Optional multi-layer declaration; absent -> read DEFAULT_SOURCE only.
 RIVER_SOURCES_JSON = TOOLS_DIR / "config" / "river_sources.json"
 #: The anchor-keyed canon names; absent -> every stream keeps an auto id.
 CANON_NAMES_JSON = TOOLS_DIR / "config" / "canon_river_names.json"
+#: Manual flow-direction overrides for rivers the auto-orient can't resolve.
+RIVER_OVERRIDES_JSON = TOOLS_DIR / "config" / "river_overrides.json"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
@@ -141,7 +145,7 @@ def load_network(dilate: int, t0: float) -> np.ndarray:
         regs = None
         network = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
         for layer in layers:
-            path = SOURCES_DIR / layer.file
+            path = sources.resolve_source_path(layer.file)
             if not path.is_file():
                 raise SystemExit(f"river source layer file not found: {path}")
             if layer.mode == "canvas":
@@ -152,13 +156,33 @@ def load_network(dilate: int, t0: float) -> np.ndarray:
                 network |= _load_registered_layer(path, layer.registration, regs, dilate)
             log(f"  layer {layer.file} ({layer.mode}): union now {int(network.sum()):,} px", t0)
         return network
-    if not DEFAULT_SOURCE.is_file():
+    default_source = sources.resolve_source_path(DEFAULT_SOURCE_NAME)
+    if not default_source.is_file():
         raise SystemExit(
-            f"no river source: {DEFAULT_SOURCE} not found and no {RIVER_SOURCES_JSON.name}. "
-            f"Trace the canon rivers in pure cyan (0,255,255) on the canvas first.")
-    net = _load_canvas_layer(DEFAULT_SOURCE, dilate)
-    log(f"  canvas-native {DEFAULT_SOURCE.name}: {int(net.sum()):,} cyan px", t0)
+            f"no river source: {DEFAULT_SOURCE_NAME} not found (looked at sources/ and its "
+            f"subfolders) and no {RIVER_SOURCES_JSON.name}. Trace the canon rivers in pure "
+            f"cyan (0,255,255) on the canvas first.")
+    net = _load_canvas_layer(default_source, dilate)
+    log(f"  canvas-native {default_source.name}: {int(net.sum()):,} cyan px", t0)
     return net
+
+
+LAKE_MASK_PATH = DERIVED_DIR / "lake_mask.png"
+
+
+def _lake_mask(land: np.ndarray, t0: float) -> np.ndarray:
+    """The inland-lake mask (board #3742): the committed ``lake_mask.png`` when it
+    exists, else classified on the fly from the committed land/sea mask by the same
+    topology rule (``worldgen.lakes.classify`` — largest water body is the ocean,
+    every other is a lake), so the river tool distinguishes ocean from lake with or
+    without the committed layer, and agrees with it when present."""
+    if LAKE_MASK_PATH.is_file():
+        lake = raster.read_mask_png(LAKE_MASK_PATH)
+        log(f"  lake mask (committed): {int(lake.sum()):,} lake px", t0)
+        return lake
+    lake = lakes.classify(land, wrap_x=map_config.WRAP_X)
+    log(f"  lake mask (classified from land_sea_mask): {int(lake.sum()):,} lake px", t0)
+    return lake
 
 
 def _elevation_canvas() -> np.ndarray | None:
@@ -243,24 +267,32 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"mask is {land.shape}, expected {(CANVAS_H, CANVAS_W)}")
     network = load_network(args.dilate, t0)
     elevation = _elevation_canvas()
+    lake = _lake_mask(land, t0)
+    ocean = (~land) & (~lake)
 
     names: list[schema.CanonRiverName] = []
     if CANON_NAMES_JSON.is_file():
         names = schema.load_canon_river_names(CANON_NAMES_JSON, canvas=(CANVAS_W, CANVAS_H))
         log(f"  {len(names)} canon river name(s) loaded", t0)
+    overrides: list[schema.RiverOverride] = []
+    if RIVER_OVERRIDES_JSON.is_file():
+        overrides = schema.load_river_overrides(RIVER_OVERRIDES_JSON, canvas=(CANVAS_W, CANVAS_H))
+        log(f"  {len(overrides)} manual flow override(s) loaded", t0)
 
     log("extracting streams (skeleton -> graph -> orient -> Strahler stems)...")
     result = river_network.extract_streams(
-        network, land, elevation=elevation, names=names, wrap_x=map_config.WRAP_X)
-    n_src = sum(1 for s in result.streams if s.mouth == "sea")
-    log(f"  {len(result.streams)} streams ({n_src} reach the sea); "
+        network, land, elevation=elevation, names=names, lake=lake,
+        overrides=overrides, wrap_x=map_config.WRAP_X)
+    n_sea = sum(1 for s in result.streams if s.mouth == "sea")
+    n_endo = sum(1 for s in result.streams if s.mouth == "endorheic")
+    log(f"  {len(result.streams)} streams ({n_sea} reach water, {n_endo} endorheic); "
         f"{len(result.unnamed)} long unnamed", t0)
     for u in result.unnamed:
         log(f"    unnamed long stream {u['name']} ({u['length_px']} px) — consider naming it")
 
     log("rasterizing + validating...")
     palette = riverlib.load_palette(PALETTE_JSON)
-    idx = riverlib.rasterize(result.streams, land, palette, wrap_x=map_config.WRAP_X)
+    idx = riverlib.rasterize(result.streams, land, palette, wrap_x=map_config.WRAP_X, ocean=ocean)
     n_blocks, run = riverlib.measure_2x2_blocks(idx, map_config.WRAP_X)
     drawn = int((~np.isin(idx, [riverlib.LAND, riverlib.SEA])).sum())
     log(f"  {drawn} river px; 2x2 blocks {n_blocks} (longest run {run}); vanilla ships 21/5", t0)

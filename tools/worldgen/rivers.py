@@ -37,6 +37,7 @@ LAND = 255
 SEA = 254
 SOURCE = 0
 MERGE = 1
+SPLIT = 2
 
 
 class RiverError(RuntimeError):
@@ -119,13 +120,20 @@ def _ramp_index(frac: float, ramp: tuple[int, ...], width: int) -> int:
 # ---------------------------------------------------------------------------
 
 def rasterize(streams: list[schema.RiverStream], land: np.ndarray, palette: RiverPalette,
-              wrap_x: bool = True) -> np.ndarray:
+              wrap_x: bool = True, ocean: np.ndarray | None = None) -> np.ndarray:
     """Return the ``rivers.png`` index array for ``streams`` over the land mask.
+
+    ``ocean`` (board #3742) is the navigable-sea mask; where it is given, a river
+    *source* may sit on a lake shore (a lake-fed outflow) but never on the ocean,
+    and it is the ocean — not every water pixel — a source must stay clear of.
+    Absent, it defaults to ``~land`` (all water is ocean, the pre-lake behaviour).
 
     Validates every rule and raises :class:`RiverError` on the first violation, so
     a malformed river never reaches disk.
     """
     h, w = land.shape
+    if ocean is None:
+        ocean = ~land
     idx = np.where(land, np.uint8(LAND), np.uint8(SEA))
     paths: dict[str, list[tuple[int, int]]] = {}
 
@@ -137,7 +145,8 @@ def rasterize(streams: list[schema.RiverStream], land: np.ndarray, palette: Rive
             # makes into a concave shoreline — the discarded pixels were the bit of
             # the line already in the sea — and leaves a mouth guaranteed adjacent
             # to open water. (A confluence stream keeps its whole path; sea on it
-            # would be a real authoring error, caught in _validate.)
+            # would be a real authoring error, caught in _validate.) An endorheic
+            # stream keeps its whole path — it ends inland by design, nothing to trim.
             path = _truncate_at_sea(path, land)
         if len(path) < 2:
             raise RiverError(f"{st.name}: degenerate path ({len(path)} px after coast trim)")
@@ -159,12 +168,14 @@ def rasterize(streams: list[schema.RiverStream], land: np.ndarray, palette: Rive
     for st in streams:
         path = paths[st.name]
         (sx, sy) = path[0]
-        idx[sy, sx] = SOURCE
+        # Head marker: a headwater spring is green (0); a distributary splitting
+        # off a larger river is yellow (2) — the mirror of the red merge marker.
+        idx[sy, sx] = SPLIT if st.head == "split" else SOURCE
         if st.mouth == "confluence":
             mx, my = path[-1]
             idx[my, mx] = MERGE
 
-    _validate(streams, paths, idx, land, wrap_x)
+    _validate(streams, paths, idx, land, wrap_x, ocean)
     return idx
 
 
@@ -225,14 +236,18 @@ def _neighbors8(x: int, y: int, w: int, h: int, wrap_x: bool):
                 yield nx, ny
 
 
-def _validate(streams, paths, idx, land, wrap_x) -> None:
+def _validate(streams, paths, idx, land, wrap_x, ocean=None) -> None:
     h, w = land.shape
+    if ocean is None:
+        ocean = ~land
     river_pixels = {px for p in paths.values() for px in p}
 
-    # Exactly one green source per stream, and it sits inland.
+    # One green source per headwater stream (a split distributary is yellow, not
+    # green), and each sits inland.
+    n_source_heads = sum(1 for st in streams if getattr(st, "head", "source") == "source")
     n_sources = int((idx == SOURCE).sum())
-    if n_sources != len(streams):
-        raise RiverError(f"expected {len(streams)} source pixels, painted {n_sources}")
+    if n_sources != n_source_heads:
+        raise RiverError(f"expected {n_source_heads} green source pixels, painted {n_sources}")
 
     for st in streams:
         path = paths[st.name]
@@ -252,15 +267,29 @@ def _validate(streams, paths, idx, land, wrap_x) -> None:
         for (x, y) in path:
             if not land[y, x]:
                 raise RiverError(f"{st.name}: river pixel ({x}, {y}) lies on sea, not land")
-        # Source is inland: no sea in its 8-neighbourhood.
+        # Head check. A source (spring) is clear of the ocean — no navigable sea
+        # in its 8-neighbourhood; a lake shore is allowed (a lake-fed outflow,
+        # board #3742), so this checks ``ocean``, not all water. A split
+        # distributary instead branches off the trunk, so its first pixel must
+        # touch another stream — the mirror of the confluence check below.
         sx, sy = path[0]
-        if any(not land[ny, nx] for nx, ny in _neighbors8(sx, sy, w, h, wrap_x)):
-            raise RiverError(f"{st.name}: source ({sx}, {sy}) is on the coast; sources must be inland")
+        if getattr(st, "head", "source") == "split":
+            others = river_pixels - set(path)
+            if not any((nx, ny) in others for nx, ny in _neighbors8(sx, sy, w, h, wrap_x)):
+                raise RiverError(f"{st.name}: split head ({sx}, {sy}) touches no other stream")
+        elif getattr(st, "coastal_source", False):
+            pass  # a manual flow override put this source on the coast on purpose
+        elif any(ocean[ny, nx] for nx, ny in _neighbors8(sx, sy, w, h, wrap_x)):
+            raise RiverError(f"{st.name}: source ({sx}, {sy}) is on the sea coast; sources must be inland or lake-fed")
         # Mouth reaches its target.
         mx, my = path[-1]
         if st.mouth == "sea":
             if not any(not land[ny, nx] for nx, ny in _neighbors8(mx, my, w, h, wrap_x)):
                 raise RiverError(f"{st.name}: sea mouth ({mx}, {my}) does not touch open water")
+        elif st.mouth == "endorheic":
+            # A river that dries up inland: it just ends, no water and no marker
+            # required. (Board #3742: the Marshes of Madness are a drainage sink.)
+            pass
         else:  # confluence
             others = river_pixels - set(path)
             if not any((nx, ny) in others for nx, ny in _neighbors8(mx, my, w, h, wrap_x)):

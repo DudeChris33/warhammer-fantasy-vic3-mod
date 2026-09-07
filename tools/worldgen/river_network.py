@@ -19,13 +19,17 @@ The pipeline, all deterministic (sorted iteration, fixed neighbour order, no RNG
    (skeletonization twigs off a main line) are pruned so they do not become fake
    headwaters, and the graph is asserted to be a **forest** — a cycle has no
    valid source→mouth orientation and is a hard error, not a silent corruption.
-4. **Orient** flow: a *mouth* is a deg-1 endpoint 8-adjacent to water (per the
-   committed land/sea mask); each connected tree is rooted at its single mouth
-   and every edge oriented downstream toward it. A tree with **no** mouth is a
-   stranded inland line (hard error); a tree with **two or more** mouths would
-   need a divergent junction (a drawn delta fork) and is rejected with guidance
-   to draw each distributary as its own line (the settled option-2 convention —
-   there is deliberately no index-2 split support).
+4. **Orient** flow around the three water classes (board #3742). Each connected
+   tree has exactly one *outlet* (mouth); every other leaf is a *source* (a spring
+   or a lake-fed outflow). The outlet is chosen by priority: the **ocean** (the
+   navigable sea) if any endpoint reaches it, else a **lake** the river drains
+   into (the lowest lake-adjacent endpoint), else — an **endorheic** river — the
+   lowest inland endpoint, where it dries into a marsh or sink (the Marshes of
+   Madness). The tree is rooted at that outlet and every edge oriented downstream
+   toward it. So a lake→sea river (one ocean outlet, one lake source) and a
+   lake→lake or inland-terminating river are all valid — only a genuine sea delta,
+   **two separate ocean outlets** on one connected shape, is rejected (draw each
+   distributary as its own line; there is deliberately no index-2 split support).
 5. **Stitch maximal Horton/Strahler stems**: one green source per real headwater;
    at each junction the highest-order inflow continues the same stream (ties →
    longer upstream length → lower elevation → pixel order) and the other inflows
@@ -63,9 +67,17 @@ _CYAN_MAX_R = 80          # red channel stays low
 _CYAN_MIN_G = 180         # green + blue both high
 _CYAN_MIN_B = 180
 
+#: How far a manual river_overrides anchor may sit from the nearest river node.
+_OVERRIDE_ANCHOR_TOL = 60.0
+
 # 8-neighbour offsets in a fixed (dy, dx) order, so every tie-break is
 # deterministic and independent of dict/set iteration order.
 _D8 = ((-1, -1), (-1, 0), (-1, 1), (0, -1), (0, 1), (1, -1), (1, 0), (1, 1))
+
+# Compass flow directions as (dx, dy) in image space (+x = east, +y = south), for
+# manual river_overrides: the mouth is the endpoint furthest in this direction.
+_FLOW_VEC = {"N": (0, -1), "S": (0, 1), "E": (1, 0), "W": (-1, 0),
+             "NE": (1, -1), "NW": (-1, -1), "SE": (1, 1), "SW": (-1, 1)}
 
 
 class RiverNetworkError(RuntimeError):
@@ -89,6 +101,10 @@ class ExtractResult:
     #: {"name", "length_px"} — surfaced so a major river cannot silently go
     #: unnamed. Not an error (naming is opt-in).
     unnamed: list[dict] = field(default_factory=list)
+    #: Blocking trace problems, when built with ``strict=False`` (else these are
+    #: raised). Each is {"kind", "x", "y", "detail"} — a canvas coordinate a
+    #: diagnostic render can mark and a message the user can act on.
+    issues: list[dict] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -305,20 +321,84 @@ def _elevation_at(elevation, px):
     return float(elevation[px[0], px[1]])
 
 
+def _snap_mouths(pixels: set[tuple[int, int]], land: np.ndarray, wrap_x: bool,
+                 snap: float) -> tuple[set[tuple[int, int]], int]:
+    """Extend a river endpoint that falls just short of the coastline so it
+    actually reaches the mask's water.
+
+    The river trace and the committed land/sea mask are two independent hand-drawn
+    layers, so a river drawn to the coast typically ends a pixel or two short of
+    where the mask puts the water — which would fail the strict "a mouth must be
+    8-adjacent to water" rule for no real reason. For each deg-1 endpoint that sits
+    within ``snap`` px of water but is not yet touching it, draw the short straight
+    line (on land) to the nearest coast-land pixel and add it, so the mouth
+    genuinely reaches water. Endpoints farther than ``snap`` from water are left
+    alone — those are genuinely inland and stay a loud stranded-line error.
+    Deterministic (endpoints processed in sorted order). Returns the (possibly
+    grown) pixel set and the number of endpoints snapped.
+    """
+    if snap <= 0:
+        return pixels, 0
+    from skimage.draw import line as _line
+
+    h, w = land.shape
+    water = ~land
+    S = set(pixels)
+    deg = _degree_map(S, h, w, wrap_x)
+    R = int(np.ceil(snap))
+    snapped = 0
+    for (y, x) in sorted(p for p, d in deg.items() if d == 1):
+        if any(water[ny, nx] for ny, nx in _neighbors8(y, x, h, w, wrap_x)):
+            continue  # already a mouth
+        best = None
+        best_d = snap + 1e-9
+        for dy in range(-R, R + 1):
+            ny = y + dy
+            if ny < 0 or ny >= h:
+                continue
+            for dx in range(-R, R + 1):
+                nx = _wrapx(x + dx, w, wrap_x)
+                if nx is None or not land[ny, nx]:
+                    continue
+                if not any(water[my, mx] for my, mx in _neighbors8(ny, nx, h, w, wrap_x)):
+                    continue  # not a coast-land pixel
+                d = (dy * dy + dx * dx) ** 0.5
+                if d < best_d:
+                    best_d, best = d, (dy, dx)
+        if best is None:
+            continue
+        dy, dx = best
+        # Draw in the unwrapped frame (x may go out of range), then fold x back.
+        rr, cc = _line(y, x, y + dy, x + dx)
+        for ly, lx in zip(rr.tolist(), cc.tolist()):
+            fx = _wrapx(lx, w, wrap_x)
+            if fx is None or not (0 <= ly < h) or not land[ly, fx]:
+                continue
+            S.add((ly, fx))
+        snapped += 1
+    return S, snapped
+
+
 def extract_streams(network: np.ndarray, land: np.ndarray,
                     elevation: np.ndarray | None = None,
                     names: "list[schema.CanonRiverName]" = (),
-                    *, wrap_x: bool = True, spur_len: int = 8,
+                    *, lake: np.ndarray | None = None,
+                    overrides: "list[schema.RiverOverride]" = (),
+                    wrap_x: bool = True, spur_len: int = 8,
                     anchor_tol: float = 8.0, name_threshold: int = 40,
+                    mouth_snap: float = 4.0, strict: bool = True,
                     ) -> ExtractResult:
     """Turn a drawn cyan river ``network`` (bool, canvas-sized) into ordered
     source→mouth :class:`schema.RiverStream` s. See the module docstring.
 
-    ``land`` is the committed land/sea mask (True = land). ``elevation`` is the
-    committed heightmap (any monotone-with-height array) used only to break an
-    otherwise-exact continuation tie; ``None`` falls back to pixel order.
-    ``names`` are the anchor-keyed canon names; each must resolve to exactly one
-    stream. ``name_threshold`` sizes the advisory unnamed-stream report only.
+    ``land`` is the committed land/sea mask (True = land). ``lake`` is the inland
+    lake mask (True where a water pixel is an enclosed lake, board #3742); absent,
+    every water pixel is ocean. ``elevation`` is the committed heightmap (any
+    monotone-with-height array), used to break a continuation tie and to pick the
+    endorheic sink (lowest endpoint) when a river has no ocean outlet; ``None``
+    falls back to pixel order. ``names`` are the anchor-keyed canon names; each
+    must resolve to exactly one stream. ``name_threshold`` sizes the advisory
+    unnamed-stream report only.
     """
     if network.shape != land.shape:
         raise RiverNetworkError(
@@ -340,9 +420,23 @@ def extract_streams(network: np.ndarray, land: np.ndarray,
         raise RiverNetworkError("no cyan river pixels on land after skeletonization")
 
     pixels = _prune_spurs(pixels, h, w, wrap_x, spur_len)
+    # Extend near-miss endpoints to the mask coastline (trace vs mask are two
+    # independent hand layers; a river drawn to the coast often ends a pixel or
+    # two short of the mask's water). Endpoints farther than mouth_snap stay a
+    # loud stranded-line error below.
+    pixels, _n_snapped = _snap_mouths(pixels, land, wrap_x, mouth_snap)
     deg = _degree_map(pixels, h, w, wrap_x)
     nodes = {px for px, d in deg.items() if d == 1 or d >= 3}
     edges = _trace_edges(pixels, deg, nodes, h, w, wrap_x)
+
+    # Blocking issues are collected and raised together at the end (strict), so a
+    # real trace surfaces its whole list of coordinates to fix in one pass rather
+    # than one error per run; with strict=False they are returned for a diagnostic
+    # render instead. Each is {"kind", "x", "y", "detail"}.
+    issues: list[dict] = []
+
+    def _issue(kind: str, x: int, y: int, detail: str) -> None:
+        issues.append({"kind": kind, "x": int(x), "y": int(y), "detail": detail})
 
     # A skeleton pixel touched by no edge is either a pure loop (no endpoints /
     # junctions to anchor an edge) or an isolated speck. Loops have no valid
@@ -353,15 +447,21 @@ def extract_streams(network: np.ndarray, land: np.ndarray,
         for comp in _components(orphan, h, w, wrap_x):
             if len(comp) >= 2:
                 loop = sorted(comp)[0]
-                raise RiverNetworkError(
-                    f"river network contains a closed loop near {(loop[1], loop[0])} "
-                    f"(x, y) — a loop has no source→mouth flow; redraw it as an open line"
-                )
+                _issue("loop", loop[1], loop[0],
+                       "closed loop — a loop has no source→mouth flow; redraw it "
+                       "as an open line")
 
+    # Three water classes (board #3742): the ocean (navigable sea) is a river's
+    # true outlet; a lake can be a river's *source* (a lake-fed outflow) or an
+    # endorheic *sink* (a river draining into it); genuinely inland land is where
+    # an endorheic river dries up (the Marshes of Madness). ``lake`` is the lake
+    # mask; absent, every water pixel is ocean and the old behaviour holds.
     water = ~land
+    lake_m = lake if lake is not None else np.zeros(land.shape, dtype=bool)
+    ocean = water & ~lake_m
 
-    def _is_mouth(px: tuple[int, int]) -> bool:
-        return any(water[ny, nx] for ny, nx in _neighbors8(*px, h, w, wrap_x))
+    def _adj(px: tuple[int, int], mask: np.ndarray) -> bool:
+        return any(mask[ny, nx] for ny, nx in _neighbors8(*px, h, w, wrap_x))
 
     # Build the node adjacency (undirected), grouped by connected component via
     # union-find over the edges.
@@ -388,140 +488,178 @@ def extract_streams(network: np.ndarray, land: np.ndarray,
     for n in nodes:
         comp_nodes.setdefault(_find(n), []).append(n)
 
-    streams: list[tuple[list[tuple[int, int]], str, int]] = []  # (pixels(y,x), mouth, order)
+    # Resolve manual flow overrides (river_overrides.json) to their component by
+    # the anchor's nearest *skeleton pixel* (the rivers are dense, so nearest node
+    # can land on a neighbour's endpoint) — that pixel's edge names the component.
+    override_by_comp: dict[tuple[int, int], "schema.RiverOverride"] = {}
+    if overrides:
+        from worldgen.raster import point_distance as _pdist
+        pix_comp: dict[tuple[int, int], tuple[int, int]] = {}
+        for e in edges:
+            r = _find(e.a)
+            for px in e.chain:
+                pix_comp[px] = r
+        pix_list = sorted(pix_comp)
+        for ov in overrides:
+            ax, ay = ov.anchor
+            best_px, best_d = None, float("inf")
+            for px in pix_list:
+                d = _pdist((ax, ay), (px[1], px[0]), w, wrap_x)
+                if d < best_d:
+                    best_d, best_px = d, px
+            if best_px is None or best_d > _OVERRIDE_ANCHOR_TOL:
+                raise RiverNetworkError(
+                    f"river override anchor {list(ov.anchor)} (flow {ov.flow}) is not on any "
+                    f"drawn river — nearest river pixel {best_d:.0f}px away")
+            override_by_comp[pix_comp[best_px]] = ov
+
+    streams: list[tuple[list[tuple[int, int]], str, str, int, bool]] = []  # (pixels, head, mouth, order, coastal_source)
+    dropped_short = 0  # sub-2px degenerate channels (1px islands) quietly dropped
 
     for root_key in sorted(comp_nodes):
         cnodes = comp_nodes[root_key]
         cnode_set = set(cnodes)
         cedges = [e for e in edges if e.a in cnode_set]
-        # Forest invariant per component: a tree has exactly nodes-1 edges.
-        if len(cedges) != len(cnodes) - 1:
-            sample = sorted(cnode_set)[0]
-            raise RiverNetworkError(
-                f"river component near {(sample[1], sample[0])} (x, y) is not a tree "
-                f"({len(cnodes)} nodes, {len(cedges)} edges) — it contains a cycle; "
-                f"redraw it without a closed loop"
-            )
         endpoints = sorted(n for n in cnodes if deg[n] == 1)
-        mouths = [n for n in endpoints if _is_mouth(n)]
-        if not mouths:
-            sample = endpoints[0] if endpoints else sorted(cnode_set)[0]
-            raise RiverNetworkError(
-                f"river near {(sample[1], sample[0])} (x, y) reaches no water — every "
-                f"river must end at the sea; extend it to the coast or remove it"
-            )
-        if len(mouths) >= 2:
-            m0, m1 = sorted(mouths)[:2]
-            raise RiverNetworkError(
-                f"river forks to two mouths, at {(m0[1], m0[0])} and {(m1[1], m1[0])} "
-                f"(x, y) — draw each distributary as its own separate line to the sea "
-                f"(the delta convention); index-2 splits are unsupported"
-            )
-        mouth = mouths[0]
+        ov = override_by_comp.get(root_key)
+        comp_override = ov is not None
 
-        # Root the tree at the mouth: BFS gives each node its downstream parent.
-        parent_of: dict[tuple[int, int], tuple[int, int] | None] = {mouth: None}
-        parent_edge: dict[tuple[int, int], _Edge | None] = {mouth: None}
-        children: dict[tuple[int, int], list[tuple[int, int]]] = {n: [] for n in cnodes}
-        order_bfs = [mouth]
-        seen_bfs = {mouth}
-        qi = 0
-        while qi < len(order_bfs):
-            cur = order_bfs[qi]
-            qi += 1
-            for (nb, e) in sorted(adj[cur], key=lambda t: t[0]):
-                if nb in seen_bfs:
-                    continue
-                seen_bfs.add(nb)
-                parent_of[nb] = cur
-                parent_edge[nb] = e
-                children[cur].append(nb)
-                order_bfs.append(nb)
-
-        # Strahler order + subtree pixel length, post-order (reverse BFS).
-        strahler: dict[tuple[int, int], int] = {}
-        sub_len: dict[tuple[int, int], int] = {}
-        for cur in reversed(order_bfs):
-            kids = children[cur]
-            if not kids:  # a source leaf
-                strahler[cur] = 1
-                sub_len[cur] = 0
+        if comp_override:
+            # Manual flow override: the mouth is the endpoint furthest in the
+            # named compass direction; the opposite end is the source (coastal or
+            # not — the rasterizer's inland-source rule is waived for it).
+            vx, vy = _FLOW_VEC[ov.flow]
+            mouth = max(endpoints, key=lambda n: (vx * n[1] + vy * n[0], n))
+            outlets = {mouth}
+        # Where does this network drain? Ocean-adjacent leaves are outlets — a
+        # delta may reach the sea at several. With no ocean outlet the river is
+        # endorheic: the single lowest endpoint drains it (a lake it flows into,
+        # else an inland marsh/desert sink). Board #3742/#3703.
+        elif (ocean_leaves := [n for n in endpoints if _adj(n, ocean)]):
+            # A river needs a headwater: at least one leaf that is NOT an ocean
+            # mouth (an inland spring or a lake-fed outflow). A shape whose every
+            # end reaches the sea is a sourceless channel between two coastal
+            # points, not a river — report it.
+            if not any(n not in set(ocean_leaves) for n in endpoints):
+                o = sorted(ocean_leaves)[0]
+                _issue("no-source", o[1], o[0],
+                       "both ends reach the sea with no inland source — a river "
+                       "needs a headwater; connect it to its inland course, or "
+                       "remove this coastal channel")
                 continue
-            kid_orders = sorted((strahler[k] for k in kids), reverse=True)
-            top = kid_orders[0]
-            strahler[cur] = top + 1 if len(kid_orders) > 1 and kid_orders[1] == top else top
-            sub_len[cur] = sum(sub_len[k] + parent_edge[k].inner_len - 1 for k in kids)
+            outlets = set(ocean_leaves)
+        else:
+            pool = [n for n in endpoints if _adj(n, lake_m)] or endpoints
+            if not pool:
+                continue  # a degenerate component with no endpoint; nothing to draw
+            outlets = {min(pool, key=lambda n: (_elevation_at(elevation, n), n))}
 
-        # Main child at each junction: highest order, then longest subtree, then
-        # lowest elevation at the child pixel, then pixel order.
-        main_child: dict[tuple[int, int], tuple[int, int]] = {}
-        for cur in cnodes:
-            kids = children[cur]
-            if len(kids) >= 1:
-                main_child[cur] = min(
-                    kids,
-                    key=lambda k: (-strahler[k], -sub_len[k],
-                                   _elevation_at(elevation, k), k),
-                )
+        # Orient the network into a flow DAG. BFS distance-to-outlet is the primary
+        # potential; a strict node rank (dist, elevation, pixel) then orients every
+        # edge from higher rank to lower — a total order, so the result cannot
+        # contain a directed cycle. Divergence (a split node: 1 in, >=2 out) and
+        # reconvergence (a merge: >=2 in, 1 out) both fall out of this, so a delta
+        # and a river-island around which the channel splits and rejoins are both
+        # valid, not errors.
+        dist: dict[tuple[int, int], int] = {o: 0 for o in outlets}
+        bfsq = sorted(outlets)
+        qi = 0
+        while qi < len(bfsq):
+            cur = bfsq[qi]
+            qi += 1
+            for (nb, _e) in adj[cur]:
+                if nb not in dist:
+                    dist[nb] = dist[cur] + 1
+                    bfsq.append(nb)
 
-        sources = sorted(n for n in endpoints if n != mouth)
-        if not sources:
-            # A lone mouth with no inland source (a 2-node path both-ends-water is
-            # already caught as >=2 mouths; this is the degenerate 1-edge case).
-            raise RiverNetworkError(
-                f"river at {(mouth[1], mouth[0])} (x, y) has no inland source")
+        def _rank(n, _d=dist):
+            return (_d.get(n, 1 << 30), _elevation_at(elevation, n), n)
 
-        for src in sources:
-            stem: list[tuple[int, int]] = [src]
-            cur = src
-            mouth_kind = "sea"
+        out_e: dict[tuple[int, int], list[tuple[tuple[int, int], _Edge]]] = {n: [] for n in cnodes}
+        in_e: dict[tuple[int, int], list[tuple[tuple[int, int], _Edge]]] = {n: [] for n in cnodes}
+        for e in cedges:
+            u, v = (e.a, e.b) if _rank(e.a) > _rank(e.b) else (e.b, e.a)
+            out_e[u].append((v, e))
+            in_e[v].append((u, e))
+
+        # Strahler order + upstream pixel length, processed sources-first (high rank).
+        node_order: dict[tuple[int, int], int] = {}
+        up_len: dict[tuple[int, int], int] = {}
+        for n in sorted(cnodes, key=_rank, reverse=True):
+            ins = in_e[n]
+            if not ins:
+                node_order[n], up_len[n] = 1, 0
+            else:
+                ords = sorted((node_order[u] for (u, _e) in ins), reverse=True)
+                node_order[n] = ords[0] + 1 if len(ords) > 1 and ords[1] == ords[0] else ords[0]
+                up_len[n] = sum(up_len[u] + e.inner_len - 1 for (u, e) in ins)
+
+        # The main branch continues the trunk: at a merge, the biggest tributary;
+        # at a split, the longest distributary. The others start/end as markers.
+        main_in: dict[tuple[int, int], _Edge] = {}
+        main_out: dict[tuple[int, int], _Edge] = {}
+        for n in cnodes:
+            if in_e[n]:
+                main_in[n] = min(in_e[n], key=lambda t: (-node_order[t[0]], -up_len[t[0]],
+                                                         _elevation_at(elevation, t[0]), t[0]))[1]
+            if out_e[n]:
+                main_out[n] = max(out_e[n], key=lambda t: (t[1].inner_len, t[0]))[1]
+
+        def _mouth_kind(n):
+            return "sea" if _adj(n, water) else "endorheic"
+
+        def _walk(start, first_v, first_edge, head):
+            # A source stem keeps the source node pixel (green at pts[0]); a split
+            # distributary drops the split node (it lives on the trunk) and starts
+            # at the pixel after it (yellow at pts[0]).
+            chain = first_edge.from_node(start)
+            pts = list(chain) if head == "source" else list(chain[1:])
+            term, arrived, cur = first_v, first_edge, first_v
             while True:
-                par = parent_of[cur]
-                e = parent_edge[cur]
-                chain = e.from_node(cur)  # cur .. par
-                if par == mouth:
-                    stem.extend(chain[1:])          # include the mouth pixel
-                    mouth_kind = "sea"
-                    break
-                if main_child.get(par) == cur:
-                    stem.extend(chain[1:])          # through the junction (own it)
-                    cur = par
+                if main_in.get(cur) is arrived:          # we are the trunk into cur
+                    if not out_e[cur]:                   # cur is the outlet
+                        return pts, head, _mouth_kind(cur), node_order[cur]
+                    e2 = main_out[cur]                   # continue along the trunk
+                    w = e2.b if e2.a == cur else e2.a
+                    pts.extend(e2.from_node(cur)[1:])
+                    term, arrived, cur = w, e2, w
                     continue
-                # A tributary: stop before the junction (it belongs to the main
-                # stem); the last pixel is 8-adjacent to it and marked MERGE.
-                stem.extend(chain[1:-1])
-                mouth_kind = "confluence"
-                break
-            if len(stem) < 2:
-                bad = stem[0] if stem else src
-                raise RiverNetworkError(
-                    f"river branch at {(bad[1], bad[0])} (x, y) is too short — a source "
-                    f"sits directly on a confluence; lengthen the drawn line"
-                )
-            # Width from the stem's most-downstream Strahler order (the trunk's
-            # order for a sea stem, the last junction it owns for a tributary),
-            # so the trunk renders wider than a headwater — vanilla's model.
-            order = _stem_terminal_order(
-                strahler, children, main_child, src, parent_of, mouth)
-            streams.append((stem, mouth_kind, order))
+                # a tributary into a merge (or into the outlet node): end before cur
+                if pts and pts[-1] == cur:
+                    pts = pts[:-1]
+                return pts, head, "confluence", node_order[term]
 
-    return _finalize(streams, names, h, w, wrap_x, anchor_tol, name_threshold)
+        for n in sorted(cnodes):
+            outs = sorted(out_e[n], key=lambda t: t[0])
+            if not outs:
+                continue
+            mo = main_out.get(n)
+            src_node = not in_e[n]
+            for (v, e) in outs:
+                if e is mo and not src_node:
+                    continue                              # trunk continuation of an upstream stem
+                head = "source" if (src_node and e is mo) else "split"
+                pts, hd, mk, order = _walk(n, v, e, head)
+                if len(pts) < 2:
+                    # A sub-2px channel is a 1px-island / adjacent split-and-rejoin
+                    # — cartographically nothing. Drop it (the trunk still carries
+                    # the flow through) rather than erroring on a degenerate pixel.
+                    dropped_short += 1
+                    continue
+                # In an override component the forced source may sit on the coast;
+                # waive the rasterizer's inland-source rule for its source heads.
+                streams.append((pts, hd, mk, order, comp_override and hd == "source"))
 
+    if issues and strict:
+        head = (f"{len(issues)} river network problem(s) — fix the trace and re-run "
+                f"(coords are canvas x, y):")
+        raise RiverNetworkError(
+            head + "".join(f"\n  - {i['kind']} at (x={i['x']}, y={i['y']}): {i['detail']}"
+                           for i in issues))
 
-def _stem_terminal_order(strahler, children, main_child, src, parent_of, mouth) -> int:
-    """The Strahler order at a tributary stem's downstream-most node (the last
-    junction it owns before it merges), used to pick the stem's width."""
-    cur = src
-    order = strahler[src]
-    while True:
-        par = parent_of[cur]
-        if par == mouth:
-            return strahler[cur]
-        if main_child.get(par) == cur:
-            order = strahler[cur]
-            cur = par
-            continue
-        return order
+    result = _finalize(streams, names, h, w, wrap_x, anchor_tol, name_threshold)
+    return ExtractResult(streams=result.streams, index=result.index,
+                         unnamed=result.unnamed, issues=issues)
 
 
 def _finalize(streams, names, h, w, wrap_x, anchor_tol, name_threshold) -> ExtractResult:
@@ -529,19 +667,21 @@ def _finalize(streams, names, h, w, wrap_x, anchor_tol, name_threshold) -> Extra
 
     ramp = schema.RIVER_WIDTH_RAMP
 
-    # Deterministic auto-order: by source pixel (stem[0]).
+    # Deterministic auto-order: by first pixel (stem[0]).
     streams = sorted(streams, key=lambda s: s[0][0])
     auto = []
-    for i, (stem, mouth_kind, order) in enumerate(streams):
+    for i, (stem, head, mouth_kind, order, coastal_source) in enumerate(streams):
         width = ramp[min(max(order, 1) - 1, len(ramp) - 1)]
         pts_xy = [(x, y) for (y, x) in stem]
         auto.append({
             "auto_name": f"river_{i:04d}",
             "points": pts_xy,
             "stem_yx": stem,
+            "head": head,
             "mouth": mouth_kind,
             "width": width,
             "length_px": len(stem),
+            "coastal_source": coastal_source,
         })
 
     # Resolve each anchor to exactly one stream by nearest river pixel.
@@ -587,8 +727,10 @@ def _finalize(streams, names, h, w, wrap_x, anchor_tol, name_threshold) -> Extra
     for i, s in enumerate(auto):
         name = name_by_stream.get(i, s["auto_name"])
         out_streams.append(schema.RiverStream(
-            name=name, points=s["points"], mouth=s["mouth"], width=s["width"]))
-        index[name] = {"mouth": s["mouth"], "length_px": s["length_px"], "width": s["width"]}
+            name=name, points=s["points"], mouth=s["mouth"], width=s["width"], head=s["head"],
+            coastal_source=s["coastal_source"]))
+        index[name] = {"head": s["head"], "mouth": s["mouth"],
+                       "length_px": s["length_px"], "width": s["width"]}
         if i not in name_by_stream and s["length_px"] >= name_threshold:
             unnamed.append({"name": name, "length_px": s["length_px"]})
 

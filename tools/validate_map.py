@@ -495,24 +495,30 @@ def _neighbors8(y: int, x: int, h: int, w: int, wrap_x: bool):
 
 
 def _check_rivers(idx: np.ndarray, land_mask: np.ndarray, wrap_x: bool,
+                  ocean: np.ndarray | None = None,
                   canon_rivers_csv: list[tuple[str, str]] | None = None,
                   rivers_index: dict | None = None) -> list[str]:
     """Validate a committed ``rivers.png`` index array against the vanilla model.
 
     Mirrors the invariants ``worldgen.rivers._validate`` enforces before writing,
     re-checked here on the committed bitmap (defense in depth — the offline gate in
-    testing.md). Returns a list of error strings (empty == clean):
+    testing.md). ``ocean`` (board #3742) is the navigable-sea mask; a source may
+    sit on a lake shore but never on the ocean. Absent, it defaults to ``~land`` (all
+    water is ocean). Returns a list of error strings (empty == clean):
 
-    * every index is in the vanilla semantic set;
+    * every index is in the vanilla semantic set (incl. the yellow split marker 2);
     * no river pixel sits on sea (land mask is the authority);
-    * every green source (0) is inland (no water in its 8-neighbourhood);
-    * every red merge (1) touches another river pixel;
-    * every ramp-body river endpoint (a body pixel with a single river neighbour)
-      is a sea mouth — 8-adjacent to open water — so no river dead-ends on land;
+    * every green source (0) is clear of the ocean (inland or lake-fed);
+    * every red merge (1) and yellow split (2) touches another river pixel;
     * the 2×2-block caps ``worldgen.rivers`` calibrated on vanilla; and
     * when ``canon_rivers.csv`` (#3677) exists, every ``(river, state_key)`` row
       names a river whose ``rivers_index.json`` state coverage includes that state
       (a **warning**, not a hard error).
+
+    An endorheic river (board #3703/#3742) legitimately ends inland with no water
+    and no marker, so there is no "a mouth must touch water" check here — the
+    generator's own ``_validate`` owns the source→mouth topology; this pass only
+    re-checks the pixel-level invariants that survive on the bare bitmap.
     """
     from worldgen.rivers import MAX_2X2_BLOCKS, MAX_2X2_RUN, measure_2x2_blocks
 
@@ -520,6 +526,8 @@ def _check_rivers(idx: np.ndarray, land_mask: np.ndarray, wrap_x: bool,
     if idx.shape != land_mask.shape:
         return [f"rivers.png {idx.shape} and land mask {land_mask.shape} differ in size"]
     h, w = idx.shape
+    if ocean is None:
+        ocean = ~land_mask
 
     bad = sorted(int(v) for v in np.unique(idx) if int(v) not in _RIVER_INDICES)
     if bad:
@@ -534,29 +542,19 @@ def _check_rivers(idx: np.ndarray, land_mask: np.ndarray, wrap_x: bool,
         errors.append(f"{n} river pixel(s) lie on sea, first at "
                       f"({int(xs[0])}, {int(ys[0])})")
 
-    # Source (0) inland, merge (1) touches another river.
+    # Source (0) clear of the ocean (a lake shore is allowed — a lake-fed spring).
     for (yy, xx) in zip(*np.nonzero(idx == _RIVER_SOURCE)):
-        if any(water[ny, nx] for ny, nx in _neighbors8(int(yy), int(xx), h, w, wrap_x)):
-            errors.append(f"river source ({int(xx)}, {int(yy)}) is on the coast; "
-                          f"sources must be inland")
+        if any(ocean[ny, nx] for ny, nx in _neighbors8(int(yy), int(xx), h, w, wrap_x)):
+            errors.append(f"river source ({int(xx)}, {int(yy)}) is on the sea coast; "
+                          f"sources must be inland or lake-fed")
             break
-    for (yy, xx) in zip(*np.nonzero(idx == _RIVER_MERGE)):
-        if not any(river[ny, nx] for ny, nx in _neighbors8(int(yy), int(xx), h, w, wrap_x)
-                   if (ny, nx) != (int(yy), int(xx))):
-            errors.append(f"river merge marker ({int(xx)}, {int(yy)}) touches no other stream")
-            break
-
-    # A ramp-body endpoint (one river neighbour) that is not a sea mouth is a
-    # river dead-ending on land.
-    body = np.isin(idx, [3, 4, 5, 6, 7, 8, 9, 10, 11])
-    for (yy, xx) in zip(*np.nonzero(body)):
-        y, x = int(yy), int(xx)
-        nb = [(ny, nx) for ny, nx in _neighbors8(y, x, h, w, wrap_x)]
-        rn = sum(1 for ny, nx in nb if river[ny, nx])
-        if rn == 1 and not any(water[ny, nx] for ny, nx in nb):
-            errors.append(f"river body pixel ({x}, {y}) dead-ends on land "
-                          f"(a sea mouth must touch open water)")
-            break
+    # Merge (1, red) and split (2, yellow) markers each touch another river pixel.
+    for marker, label in ((_RIVER_MERGE, "merge"), (2, "split")):
+        for (yy, xx) in zip(*np.nonzero(idx == marker)):
+            if not any(river[ny, nx] for ny, nx in _neighbors8(int(yy), int(xx), h, w, wrap_x)
+                       if (ny, nx) != (int(yy), int(xx))):
+                errors.append(f"river {label} marker ({int(xx)}, {int(yy)}) touches no other stream")
+                break
 
     n_blocks, run = measure_2x2_blocks(idx, wrap_x)
     if n_blocks > MAX_2X2_BLOCKS:

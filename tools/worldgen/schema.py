@@ -224,24 +224,40 @@ def load_rivers(path: Path) -> list[River]:
 #: up to it from the narrowest so a river visibly grows toward its mouth, exactly
 #: as vanilla's rivers do (source 3 -> 4 -> 6 -> 8).
 RIVER_WIDTH_RAMP = (3, 4, 6, 8)
-RIVER_MOUTHS = ("sea", "confluence")
+#: ``sea`` = reaches open water (ocean, or a lake shore — the last pixel touches
+#: water); ``confluence`` = joins another stream (marked red); ``endorheic`` =
+#: dries up inland with no outlet (a marsh/desert sink, board #3742/#3703) — the
+#: river simply ends, no mouth marker and no water-adjacency requirement.
+RIVER_MOUTHS = ("sea", "confluence", "endorheic")
+#: A stream's upstream end: ``source`` = a headwater spring (green pixel, index 0);
+#: ``split`` = a distributary branching off a larger river at a divergence (yellow
+#: pixel, index 2, board #3703) — the mirror of a ``confluence`` mouth. Its first
+#: pixel sits beside the trunk it leaves, and it is not a spring, so it carries no
+#: inland-source requirement.
+RIVER_HEADS = ("source", "split")
 
 
 @dataclass(frozen=True)
 class RiverStream:
-    """One river or tributary: an ordered polyline from source to mouth.
+    """One river or tributary: an ordered polyline from its head to its mouth.
 
-    ``points`` run **source-first**: ``points[0]`` becomes the green spring pixel,
-    ``points[-1]`` the mouth. ``mouth`` is ``"sea"`` (the last pixel must reach
-    open water) or ``"confluence"`` (it must land on another stream, and is marked
-    red so the engine reads the flows as joined). ``width`` is the downstream
-    width index, one of :data:`RIVER_WIDTH_RAMP`.
+    ``points`` run **upstream-first**: ``points[0]`` is the head pixel, ``points[-1]``
+    the mouth. ``head`` is ``"source"`` (a green spring) or ``"split"`` (a yellow
+    distributary branching off another river). ``mouth`` is ``"sea"`` (the last
+    pixel must reach open water), ``"confluence"`` (it lands red on another stream,
+    joined) or ``"endorheic"`` (it dries up inland, no marker). ``width`` is the
+    downstream width index, one of :data:`RIVER_WIDTH_RAMP`.
     """
 
     name: str
     points: list[Point]
     mouth: str
     width: int
+    head: str = "source"
+    #: When True the rasterizer waives the "a source must be inland" rule for this
+    #: stream — set only by a manual ``river_overrides.json`` flow override, where
+    #: the user has deliberately made a coastal endpoint the source (board #3703).
+    coastal_source: bool = False
 
     @classmethod
     def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "RiverStream":
@@ -251,6 +267,9 @@ class RiverStream:
         mouth = _as_str(_require(d, "mouth", ctx), f"{ctx}.mouth")
         if mouth not in RIVER_MOUTHS:
             raise SchemaError(f"{ctx}.mouth: expected one of {RIVER_MOUTHS}, got '{mouth}'")
+        head = _as_str(d.get("head", "source"), f"{ctx}.head")
+        if head not in RIVER_HEADS:
+            raise SchemaError(f"{ctx}.head: expected one of {RIVER_HEADS}, got '{head}'")
         width = _as_int(_require(d, "width", ctx), f"{ctx}.width")
         if width not in RIVER_WIDTH_RAMP:
             raise SchemaError(f"{ctx}.width: expected one of {RIVER_WIDTH_RAMP}, got {width}")
@@ -267,7 +286,7 @@ class RiverStream:
                     raise SchemaError(
                         f"{ctx}.points[{i}]: ({px}, {py}) is outside the canvas {cw}x{ch}"
                     )
-        return cls(name=name, points=points, mouth=mouth, width=width)
+        return cls(name=name, points=points, mouth=mouth, width=width, head=head)
 
 
 def load_river_streams(path: Path, canvas: tuple[int, int] | None = None) -> list[RiverStream]:
@@ -423,6 +442,62 @@ def load_river_sources(path: Path) -> list[RiverSourceLayer]:
     if not isinstance(layers_raw, list) or not layers_raw:
         raise SchemaError(f"{ctx}.layers: expected a non-empty list")
     return [RiverSourceLayer.from_dict(la, f"{ctx}.layers[{i}]") for i, la in enumerate(layers_raw)]
+
+
+# ---------------------------------------------------------------------------
+# River flow-direction overrides (the manual escape hatch, #3703)
+# ---------------------------------------------------------------------------
+#
+# The generator orients each drawn river network into a flow DAG automatically
+# (rank = distance-to-sea, then elevation, then pixel). A few networks can't be
+# oriented from the drawing alone — most often a channel whose *both* ends reach
+# the sea, so it has no inland headwater to flow down from. Rather than guess,
+# the generator reports it, and the user pins its flow here: a compass direction
+# the river drains toward. The endpoint furthest that way becomes the mouth, the
+# opposite end the source (coastal or not), and the sourceless-channel check is
+# waived for it. A hand-authored, regenerate-through input (the
+# ``land_region_merges.json`` anchor idiom) — never inferred from the drawing.
+
+#: The eight compass directions an override may name.
+RIVER_FLOW_DIRS = ("N", "S", "E", "W", "NE", "NW", "SE", "SW")
+
+
+@dataclass(frozen=True)
+class RiverOverride:
+    """A manual flow direction for one river, identified by an ``anchor`` pixel on
+    its drawn line. ``flow`` is one of :data:`RIVER_FLOW_DIRS`; the river's mouth
+    is set to the endpoint furthest that way."""
+
+    anchor: tuple[int, int]
+    flow: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "RiverOverride":
+        (anchor,) = _as_seed_list([_require(d, "anchor", ctx)], f"{ctx}.anchor", canvas)
+        flow = _as_str(_require(d, "flow", ctx), f"{ctx}.flow").upper()
+        if flow not in RIVER_FLOW_DIRS:
+            raise SchemaError(f"{ctx}.flow: expected one of {RIVER_FLOW_DIRS}, got '{flow}'")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(anchor=anchor, flow=flow, note=note)
+
+
+def load_river_overrides(path: Path, canvas: tuple[int, int] | None = None) -> list[RiverOverride]:
+    """Load + validate the committed river flow-direction overrides (authored order
+    kept), rejecting a duplicate anchor pixel (the sea-zone/hub uniqueness rule)."""
+    ctx = path.name
+    data = _load_json(path)
+    ovr_raw = _require(data, "overrides", ctx)
+    if not isinstance(ovr_raw, list) or not ovr_raw:
+        raise SchemaError(f"{ctx}.overrides: expected a non-empty list")
+    overrides = [RiverOverride.from_dict(o, f"{ctx}.overrides[{i}]", canvas)
+                 for i, o in enumerate(ovr_raw)]
+    seen: set[tuple[int, int]] = set()
+    for o in overrides:
+        if o.anchor in seen:
+            raise SchemaError(f"{ctx}: anchor {list(o.anchor)} appears in more than one override")
+        seen.add(o.anchor)
+    return overrides
 
 
 # ---------------------------------------------------------------------------
