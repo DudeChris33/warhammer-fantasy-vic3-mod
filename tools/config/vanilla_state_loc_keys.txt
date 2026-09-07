@@ -2,11 +2,12 @@
 # localization/english/map/states_l_english.yml (680 keys, board #2931 —
 # found via a real duplicate-loc-key error.log entry: STATE_AQUITAINE, an
 # Old-World region name that happens to coincide with a real-world vanilla
-# state). Vic3 loads every loc key from every mod/vanilla file into one
-# namespace, so a WH state key colliding with a vanilla one is a hard
-# duplicate-key error, not a cosmetic clash. generate_land_regions.py checks
-# derived STATE keys against this list the same way it already does against
-# 99_seas.txt's keys. Plain identifiers only, no vanilla text/content;
+# state). generate_land_regions.py's canon loc lives in
+# localization/replace/english/map/states_l_english.yml specifically so a
+# collision like this OVERRIDES vanilla's matching key rather than erroring
+# (user decision 2026-09-06) — this list is informational only now, used to
+# log which derived STATE keys are deliberately overriding a vanilla one, not
+# to avoid the collision. Plain identifiers only, no vanilla text/content;
 # re-extract by hand from a vanilla install if it ever needs refreshing
 # (vanilla state names change rarely across game versions).
 STATE_ABRUZZO

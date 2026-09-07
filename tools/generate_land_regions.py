@@ -30,11 +30,16 @@ colour authority ``tools/derived/provinces_index.json`` and the sea canon
   lands in one catch-all ``region_out_of_scope_placeholders`` block in
   ``out_of_scope_strategic_regions.txt`` (states-only, no capital/map_color —
   the minimal shape vanilla's own water regions already prove loads fine).
-* ``localization/english/map/wh_land_states_l_english.yml`` — the canon name
+* ``localization/replace/english/map/states_l_english.yml`` — the canon name
   from ``tools/config/land_regions_worksheet.csv`` (or the out-of-scope
   placeholder's continent name) per state; ``AUTOGEN_MARKER`` only survives for
   a state with neither — a real content gap to fix in the worksheet, not to
-  invent here.
+  invent here. Deliberately in ``localization/replace/`` and named after
+  vanilla's own file (not ``wh_land_states_l_english.yml`` under
+  ``localization/english/``) — an Old-World name can coincide with a
+  real-world vanilla state name (found via ``STATE_AQUITAINE``), and the
+  mod's own name should override vanilla's outright rather than dodge the
+  collision with a numeric fallback key (user decision 2026-09-06).
 
 Run ``tools/render_land_regions_preview.py`` afterwards for the numbered
 review render + CSV worksheet — the persisted naming input this script reads
@@ -104,7 +109,15 @@ OUT_OF_SCOPE_CONTINENTS_PATH = TOOLS_DIR / "config" / "out_of_scope_continents.j
 
 STATE_REGIONS_DIR = MOD_ROOT / "map_data" / "state_regions"
 STRATEGIC_REGIONS_DIR = MOD_ROOT / "common" / "strategic_regions"
-LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_land_states_l_english.yml"
+#: Lives under localization/replace/english/ (not localization/english/) and
+#: is named after vanilla's own file, matching that file's filename exactly —
+#: user decision 2026-09-06: an Old-World region name can coincide with a
+#: real-world vanilla state name (found via STATE_AQUITAINE), and the mod's
+#: own name should simply override vanilla's in that case, not dodge it with
+#: a numeric fallback. A replace-folder file overrides matching keys and adds
+#: new ones without the duplicate-key error two same-named vanilla-namespace
+#: files would raise.
+LOC_PATH = MOD_ROOT / "localization" / "replace" / "english" / "map" / "states_l_english.yml"
 HUB_LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_hub_names_l_english.yml"
 BUILDINGS_DIR = MOD_ROOT / "common" / "buildings"
 
@@ -493,15 +506,10 @@ def main(argv: list[str] | None = None) -> int:
     if dupe_names:
         log(f"WARNING: {len(dupe_names)} worksheet name(s) used more than once: {sorted(dupe_names)}", t0)
 
-    # --- key-collision guard against the sea file + vanilla's own loc keys --
+    # --- key-collision guard against the sea file ---------------------------
     sea_keys: set[str] = set()
     if SEAS_TXT_PATH.is_file():
         sea_keys = set(re.findall(r"(STATE_\w+)\s*=\s*\{", SEAS_TXT_PATH.read_text(encoding="utf-8-sig")))
-    vanilla_keys = {
-        line.strip() for line in VANILLA_STATE_LOC_KEYS_PATH.read_text(encoding="utf-8").splitlines()
-        if line.strip() and not line.startswith("#")
-    }
-    reserved_keys = sea_keys | vanilla_keys
 
     # Named-region STATE keys derive from the worksheet name itself (user
     # decision 2026-09-05), not the numeric STATE_LAND_NNN placeholder — an
@@ -510,22 +518,36 @@ def main(argv: list[str] | None = None) -> int:
     derived_keys = land_naming.derive_state_keys(worksheet)
 
     # A land name can legitimately coincide with an already-emitted sea zone's
-    # name (e.g. a coastal region named after the bay it borders), or with a
-    # real-world vanilla state name an Old-World region happens to echo (found
-    # 2026-09-05 via an in-game duplicate-loc-key error: STATE_AQUITAINE also
-    # names a vanilla French state) — the plan's own edge case says to surface
-    # this, not silently invent a workaround. Falling back to the numeric key
-    # for just the colliding region (rather than hard-erroring the whole build
-    # over one shared name) is the least-surprising resolution: the sea/vanilla
-    # side keeps its name, this land region keeps a stable numeric id, and the
-    # clash is still logged loudly.
-    colliding = {sn: key for sn, key in derived_keys.items() if key in reserved_keys}
+    # name (e.g. a coastal region named after the bay it borders) — the plan's
+    # own edge case says to surface this, not silently invent a workaround.
+    # Falling back to the numeric key for just the colliding region (rather
+    # than hard-erroring the whole build over one shared name) is the
+    # least-surprising resolution: the sea side keeps its name, this land
+    # region keeps a stable numeric id, and the clash is still logged loudly.
+    # (A collision with a *vanilla* state key is NOT handled this way — see
+    # below: this mod's loc now lives in localization/replace/english/ and is
+    # meant to override vanilla's matching key outright, user decision
+    # 2026-09-06, found via STATE_AQUITAINE.)
+    colliding = {sn: key for sn, key in derived_keys.items() if key in sea_keys}
     if colliding:
         for sn in colliding:
             del derived_keys[sn]
-        log(f"WARNING: {len(colliding)} land name(s) collide with an existing sea-zone or vanilla "
-            f"state key — kept numeric STATE_LAND_NNN for these instead: "
+        log(f"WARNING: {len(colliding)} land name(s) collide with an existing sea-zone key — "
+            f"kept numeric STATE_LAND_NNN for these instead: "
             f"{sorted((sn, colliding[sn]) for sn in colliding)}", t0)
+
+    # Informational only: a derived key that happens to match a vanilla state
+    # key is a deliberate override now (the loc file lives in
+    # localization/replace/english/), not something to dodge — just log which
+    # ones so it's visible, never blocking.
+    vanilla_keys = {
+        line.strip() for line in VANILLA_STATE_LOC_KEYS_PATH.read_text(encoding="utf-8").splitlines()
+        if line.strip() and not line.startswith("#")
+    }
+    vanilla_overrides = sorted(key for key in derived_keys.values() if key in vanilla_keys)
+    if vanilla_overrides:
+        log(f"{len(vanilla_overrides)} land name(s) override a vanilla state loc key by design "
+            f"(localization/replace/english/): {vanilla_overrides}", t0)
 
     continents = schema.load_out_of_scope_continents(OUT_OF_SCOPE_CONTINENTS_PATH,
                                                        canvas=(CANVAS_W, CANVAS_H))
@@ -736,9 +758,6 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("invariant: land state keys are not unique")
     if keys_emitted & sea_keys:
         raise SystemExit(f"invariant: key collision with 99_seas.txt: {keys_emitted & sea_keys}")
-    if keys_emitted & vanilla_keys:
-        raise SystemExit(f"invariant: key collision with a vanilla state loc key: "
-                         f"{keys_emitted & vanilla_keys}")
     all_region_keys = {k for keys in keys_by_realm.values() for k in keys} | set(oos_keys)
     if all_region_keys != keys_emitted:
         raise SystemExit("invariant: every emitted land state must belong to exactly one strategic region")

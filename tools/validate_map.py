@@ -244,6 +244,7 @@ def validate(
     canon_river_names_path: Path | None = None,
     canon_rivers_csv_path: Path | None = None,
     rivers_index_path: Path | None = None,
+    extra_loc_dirs: tuple[Path, ...] = (),
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -343,7 +344,7 @@ def validate(
 
                 rindex = json.loads(rivers_index_path.read_text(encoding="utf-8"))
             errors += _check_rivers(ridx, rmask, wrap_x, csv_rows, rindex)
-    errors += _check_loc_coverage(states, loc_dir)
+    errors += _check_loc_coverage(states, loc_dir, extra_loc_dirs)
     return errors
 
 
@@ -836,12 +837,23 @@ def _warn_lakes_degenerate(cells: list[dict], report_min: int) -> list[str]:
         f"redrawn). Verify on the rendered map."]
 
 
-def _check_loc_coverage(states: list[ParsedState], loc_dir: Path) -> list[str]:
+def _check_loc_coverage(states: list[ParsedState], loc_dir: Path,
+                        extra_loc_dirs: tuple[Path, ...] = ()) -> list[str]:
+    """A state's key must be defined somewhere across ``loc_dir`` plus any
+    ``extra_loc_dirs`` — a key can live in ``localization/replace/english/``
+    instead of ``localization/english/`` when it deliberately overrides a
+    vanilla key (board #2931 — an Old-World region name can coincide with a
+    real-world vanilla state name; the mod's own loc then lives in the
+    replace/ folder so it overrides vanilla's matching key rather than
+    duplicate-key-erroring against it)."""
     errors = []
     loc_keys = _parse_loc_keys(loc_dir)
+    for extra in extra_loc_dirs:
+        loc_keys |= _parse_loc_keys(extra)
+    all_dirs = ", ".join(str(d) for d in (loc_dir, *extra_loc_dirs))
     for st in sorted(states, key=lambda s: s.key):
         if st.key not in loc_keys:
-            errors.append(f"{st.key}: no localization entry under {loc_dir}")
+            errors.append(f"{st.key}: no localization entry under {all_dirs}")
     return errors
 
 
@@ -1728,6 +1740,8 @@ def main(argv: list[str] | None = None) -> int:
         TOOLS_DIR / "config" / "canon_river_names.json",
         canon_rivers_csv_path=None if args.fixture else TOOLS_DIR / "config" / "canon_rivers.csv",
         rivers_index_path=None if args.fixture else TOOLS_DIR / "derived" / "rivers_index.json",
+        extra_loc_dirs=() if args.fixture else
+        (REPO_ROOT / "localization" / "replace" / "english" / "map",),
     )
     if errors:
         print(f"validate_map: {len(errors)} error(s):", file=sys.stderr)

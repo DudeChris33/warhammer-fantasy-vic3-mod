@@ -91,7 +91,10 @@ keys and `adjacencies.csv`'s strait rows stay hand-authored). The old staged
 `tools/derived/seas_99_seas.txt` / `seas_sea_starts.txt` are removed.
 `map_data/state_regions/NN_<stem>.txt` (all 20),
 `common/strategic_regions/{old_world,southlands,out_of_scope}_strategic_regions.txt`
-and `localization/english/map/wh_land_states_l_english.yml` are emitted the same
+and `localization/replace/english/map/states_l_english.yml` (in `replace/`, named
+after vanilla's own file — an Old-World name can coincide with a real-world
+vanilla state name, found via `STATE_AQUITAINE`, and the mod's own name
+overrides vanilla's outright rather than dodging the collision) are emitted the same
 way by `python tools/generate_land_regions.py` (boards #2930/#2931) — it joins
 `land_regions_index.json` (369 regions: 267 drawn + 102 out-of-scope placeholders)
 with `provinces_index.json` and `sea_zones_index.json` (naval-exit resolution by
