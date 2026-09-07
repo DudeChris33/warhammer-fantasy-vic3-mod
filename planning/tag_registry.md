@@ -547,9 +547,9 @@ Lissa Road below Aegis Castle (gold-sun-on-purple arms). It was the only shielde
 map showed that wasn't already tagged — the map's other Tilean shields all matched existing tags
 (the green Trantine-Hills shield is Trantio's own arms, `TRA`, not a separate realm). Its purple
 color is deliberately off the Tilean ochre/terracotta/sea-green family, matching its own heraldry
-(as `SRT` is off-palette). Two Myrmidia-blazoned kite shields on the Black Peninsula (near Tor Anrok
-and Monte Castello) were left untagged — they read as Myrmidian cult/martial holdings, not Tilean
-city-states, and carry no legible settlement name.
+(as `SRT` is off-palette). Two kite shields on the Black Peninsula (near Tor Anrok
+and Monte Castello) were left untagged — High Elf colonies (Chris, 2026-09-06), deferred to the
+future Ulthuan / elven-colonies pass (region 17), not Tilean city-states.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
