@@ -42,9 +42,15 @@ colours are `provinces_index.json`-label-keyed (`land_provinces + zone_label`), 
 a `generate_provinces.py` run that changes the land province count shifts every
 sea colour even though nothing about the sea zones themselves changed — this bit
 board #2930 (the committed `99_seas.txt` had gone stale after a source update
-regenerated `provinces.png`, 714→708 regions). Re-run **both**
+regenerated `provinces.png`, 714→708 regions). Board #3705 fixed this ripple going
+forward — `generate_provinces.py` now honours the committed `provinces.png` +
+index and keeps a geometry-unchanged province's colour+id stable even when the
+land count changes elsewhere (see below) — but re-running **both**
 `generate_sea_regions.py` and `generate_land_regions.py` after any
-`generate_provinces.py` regen, not just the one whose upstream index moved.
+`generate_provinces.py` regen stays the rule: a genuinely new/removed province
+still moves colours locally, and `--reassign` (or the very first generation) still
+re-allocates every colour fresh in label order, not just the one whose upstream
+index moved.
 `tools/generate_province_terrains.py` (board #2968) is the same colour-keyed
 fragility class and belongs in that same re-run set once its output ships — see
 below; today its generated `map_data/province_terrains.txt` is not committed
@@ -122,9 +128,11 @@ is the world ocean and every other component is an inland lake, one province per
 lake, no subdivision). When present, `generate_sea_zones.py` passes it to
 `sea_zones.extract`'s new `exclude=` param so a lake is never labelled a sea
 zone; `generate_provinces.py` tiles land/ocean/lake three-way and appends
-`kind:"lake"` cells (`impassable:true`, informational) with new index header keys
-`lake_provinces`/`lake_id_start`, ids continuing the one shared id space after
-the sea band; and `generate_sea_regions.py` block-replaces `map_data/default.map`'s
+`kind:"lake"` cells (`impassable:true`, informational) with a new index header key
+`lake_provinces`, ids continuing the one shared id space after the sea band —
+originally via a retired `lake_id_start` band, now (board #3705) via the single
+monotonic `id_high_water`; and `generate_sea_regions.py` block-replaces
+`map_data/default.map`'s
 `lakes = { }` block with the lake province colours (empty when there are none) —
 **lakes are stateless**, declared only there, never in a `99_seas` state, a water
 strategic region, or loc. `validate_map.py --province-bitmap` becomes three-way
@@ -350,6 +358,23 @@ two runs are byte-identical. `_selfcheck_river_validator` exercises
 clean rivers.png and an endorheic-inland and a lake-fed one all pass, while a
 river pixel on sea, a source on the ocean coast, a lone split marker, and an
 out-of-set index each fail.
+`_selfcheck_stable_ids` (board #3705) exercises `worldgen/province_ids.assign` on
+a small synthetic committed map spanning land, sea and lake: a **no-op** regen
+(identical geometry) keeps every province's committed colour+id and is
+**byte-identical** across two runs (this is the invariant that matters most in
+practice — regenerating from unchanged sources must never reshuffle
+`provinces.png`); removing a province retires its colour+id without disturbing
+any survivor; splitting a region lets the dominant-overlap piece keep the
+committed colour+id while the genuinely-new piece gets a fresh id at or past the
+committed `id_high_water` and a colour reserved off every committed colour; a
+land-count change leaves sea and lake colours untouched (the ripple this board
+item fixes); `--reassign` (or no committed bitmap) reproduces the pre-#3705
+fresh label-order allocation (`id == label`); and the assignment is order-invariant
+(feeding the committed cells in a shuffled order changes nothing). A companion
+round-trip through `validate_map.validate_provinces` proves the new structural id
+invariants — positive, globally unique, a colour↔id bijection, and bounded by
+`id_high_water` — pass on a clean map and fire on a duplicate id, a non-positive
+id, and an id past the high-water.
 
 ## Regression rule
 
