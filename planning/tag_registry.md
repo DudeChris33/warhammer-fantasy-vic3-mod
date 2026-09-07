@@ -19,7 +19,7 @@ Filed by epic #3414 (child #3415).
 - [x] 02 Empire (18)
 - [x] 03 Bretonnia (17)
 - [x] 04 Karaz Ankor (18)
-- [x] 05 Southern Realms (15)
+- [x] 05 Southern Realms (26)
 - [x] 06 Badlands (11)
 - [x] 07 Nehekhara (11)
 - [x] 10 Dark Lands (6)
@@ -35,7 +35,7 @@ Filed by epic #3414 (child #3415).
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (19)
 
-**Total: 200 tags** (16 formables, 184 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 211 tags** (16 formables, 195 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -90,6 +90,7 @@ AES
 AGF
 AHK
 ANT
+AQL
 AQU
 ARB
 ART
@@ -140,13 +141,16 @@ ELK
 ELL
 EMP
 ERE
+ESS
 EST
 EYB
 FSM
 FUC
 FUH
 FYR
+GAS
 GBS
+GDO
 GGT
 GHR
 GIS
@@ -160,6 +164,7 @@ HEX
 HGF
 HGK
 HHZ
+HKN
 HOC
 HUA
 HUN
@@ -202,10 +207,12 @@ MID
 MIR
 MKY
 MNF
+MON
 MOO
 MOR
 MOU
 MTK
+MUN
 MZN
 NAG
 NEH
@@ -215,16 +222,19 @@ NGY
 NLD
 NUM
 ORG
+ORT
 OSM
 OST
 OYX
 PAH
 PAR
 PAV
+PON
 PRA
 QTZ
 QUA
 QUE
+RAA
 RAS
 RDV
 RED
@@ -267,6 +277,7 @@ ULT
 UNG
 URS
 USR
+UVE
 UZK
 VAR
 VEM
@@ -498,7 +509,7 @@ matching EMP/BRE, now that the old mixed-type OR-pair workaround is no longer ne
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
-### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer) — 15 tags; TIL/EST/USR formables
+### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer, gospodar, ungol, sylvanian_vampire) — 26 tags; TIL/EST/USR formables
 
 8 Tilean city-states + 3 Estalian kingdoms + one Border Princes tag. Tilea/Estalia held at their
 well-known city-states (approved as-is by Chris — the deep Tilean/Estalian/Border-Prince supply lever
@@ -515,6 +526,19 @@ formable above TIL/EST, `empire` tier, `recognized`, carrying all four regional 
 unification. Same pass: BIL and MAG raised to `grand_principality`, CNT set to `principality`
 (previously all three were `kingdom`, level with EST's own formable); BPR changed from
 `decentralized`/`principality` to `recognized`/`kingdom`.
+
+**Border Princes belt deepened — 11 named realms added** (2026-09-06, Chris) from
+`sources/originals/old_world_z10.png`, which Chris approved as the name source for this
+expansion — the registry's original single `BPR` tag deliberately left the Border-Prince
+supply lever untaken, and this takes it. Each individually-shielded realm on that map is a
+startable principality. Cultures are matched to heraldry, not forced uniform: eight ordinary
+Border Princes carry `border_princer` (`recognized`/`principality` — a step below BPR's
+belt-wide `kingdom`); `UVE` Uvetovsk carries the Kislevite `gospodar`/`ungol` (white-bear
+heraldry, the canonical Kislevite-founded border state); `HKN` Harkon and `PON` Pontenne carry
+`sylvanian_vampire` (`unrecognized`, parallel to `VSY` — blood-chalice heraldry). The three
+outlier cultures are cross-file references (to `kislevite_humans.txt` and `vampire.txt`), the
+same geography-not-culture filing `MOR`/`SKZ` use. No new formable — these are start fragments
+under the existing `USR`/`TIL` unifiers.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -533,6 +557,17 @@ unification. Same pass: BIL and MAG raised to `grand_principality`, CNT set to `
 | MAG | `05_southern_realms` | Magritta | start | `estalian` | Magritta |  |
 | CNT | `05_southern_realms` | Cantonia | start | `estalian` | Cantonia | minor Estalian kingdom |
 | BPR | `05_southern_realms` | Border Princes | start | `border_princer` | — | loose principalities; decentralization → a later law/government-type variant |
+| ORT | `05_southern_realms` | Ortegeta | start | `border_princer` | Ortegeta | castled realm above Ghoulstone Keep (z10 map) |
+| GAS | `05_southern_realms` | Gastonne | start | `border_princer` | Gastonne | griffon-banner realm on the Tara Dante |
+| GDO | `05_southern_realms` | Gordorno | start | `border_princer` | Gordorno | fleur-de-lis realm by the Citadel of Gazul |
+| MON | `05_southern_realms` | Monteaux | start | `border_princer` | Monteaux | towered realm on the Black Gulf coast |
+| AQL | `05_southern_realms` | Aquilena | start | `border_princer` | Aquilena | serpent realm on the River Orco |
+| MUN | `05_southern_realms` | Muntichmund | start | `border_princer` | Muntichmund | double-eagle realm near High Spear |
+| ESS | `05_southern_realms` | Essethaven | start | `border_princer` | Essethaven | chevron-banner realm on the River Stecnek |
+| RAA | `05_southern_realms` | Raachwald | start | `border_princer` | Raachwald | serpent-and-diamond realm by Reavers Keep |
+| UVE | `05_southern_realms` | Uvetovsk | start | `gospodar`, `ungol` | Uvetovsk | Kislevite-founded bear realm, Old Silk Road; cross-file culture ref |
+| HKN | `05_southern_realms` | Harkon | start | `sylvanian_vampire` | Harkon | `unrecognized`; undead chalice realm, Forest of Gloom; cross-file culture ref |
+| PON | `05_southern_realms` | Pontenne | start | `sylvanian_vampire` | Pontenne | `unrecognized`; undead chalice realm by the Chateau de Morsuil; cross-file culture ref |
 
 ### 06 BADLANDS (orc, goblin) — 11 tags; no formable
 

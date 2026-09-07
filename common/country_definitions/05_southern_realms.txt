@@ -179,3 +179,138 @@ BPR = {
 	cultures = { border_princer }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
 }
+
+################################################################################
+# BORDER PRINCES BELT — 11 named realms read off sources/originals/old_world_z10.png
+################################################################################
+# Added 2026-09-06 (Chris): the registry's single representative BPR tag is joined by the
+# individually-shielded Border Prince realms legible on the z10 map (a coat of arms on the
+# map = a ruling prince = a startable realm). Chris approved that map as the name source for
+# this expansion and chose all 11 legible shields, with cultures matched to their heraldry
+# rather than forced uniform:
+#   - 8 ordinary Border Princes carry border_princer, recognized/principality — small feudal
+#     realms with courts and arms, a step below BPR's belt-wide kingdom tier.
+#   - UVE Uvetovsk carries the Kislevite gospodar/ungol: its white-bear heraldry marks the
+#     canonical Kislevite-founded border state. Cross-file culture reference to
+#     common/cultures/kislevite_humans.txt — the same geography-not-culture filing MOR/SKZ use.
+#   - HKN Harkon and PON Pontenne carry sylvanian_vampire (gold-chalice/blood heraldry; undead
+#     border realms), unrecognized like VSY. Cross-file reference to common/cultures/vampire.txt.
+# Colors: the 8 border_princer realms spread across an earthy dun/brick/moss family (seeded from
+# border_princer's dun 132 116 96) so eleven crowded shields read apart at a glance; UVE takes a
+# Kislevite steel-blue, HKN/PON the vampire dark-red/violet band.
+
+################ ORT — Ortegeta; the castled realm above Ghoulstone Keep ################
+
+ORT = {
+	color = { 156 92 72 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Ortegeta — TODO once land state-regions exist
+}
+
+################ GAS — Gastonne; the griffon-banner realm on the Tara Dante ################
+
+GAS = {
+	color = { 158 128 78 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Gastonne — TODO once land state-regions exist
+}
+
+################ GDO — Gordorno; the fleur-de-lis realm by the Citadel of Gazul ################
+
+GDO = {
+	color = { 168 112 92 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Gordorno — TODO once land state-regions exist
+}
+
+################ MON — Monteaux; the towered realm on the Black Gulf coast ################
+
+MON = {
+	color = { 150 84 68 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Monteaux — TODO once land state-regions exist
+}
+
+################ AQL — Aquilena; the serpent realm on the River Orco ################
+
+AQL = {
+	color = { 108 116 120 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Aquilena — TODO once land state-regions exist
+}
+
+################ MUN — Muntichmund; the double-eagle realm near High Spear ################
+
+MUN = {
+	color = { 176 116 64 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Muntichmund — TODO once land state-regions exist
+}
+
+################ ESS — Essethaven; the chevron-banner realm on the River Stecnek ################
+
+ESS = {
+	color = { 140 96 74 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Essethaven — TODO once land state-regions exist
+}
+
+################ RAA — Raachwald; the serpent-and-diamond realm by Reavers Keep ################
+
+RAA = {
+	color = { 110 116 78 }
+	country_type = recognized
+	tier = principality
+	cultures = { border_princer }
+	# capital: Raachwald — TODO once land state-regions exist
+}
+
+################ UVE — Uvetovsk; the Kislevite-founded bear realm on the Old Silk Road ################
+# gospodar/ungol, not border_princer — the white-bear heraldry marks the canonical Kislevite
+# founding stock. Cross-file culture reference to common/cultures/kislevite_humans.txt.
+
+UVE = {
+	color = { 96 120 150 }
+	country_type = recognized
+	tier = principality
+	cultures = { gospodar ungol }
+	# capital: Uvetovsk — TODO once land state-regions exist
+}
+
+################ HKN — Harkon; the chalice realm in the Forest of Gloom ################
+# sylvanian_vampire, unrecognized (parallel to VSY) — undead border realm, blood-chalice
+# heraldry. Cross-file culture reference to common/cultures/vampire.txt.
+
+HKN = {
+	color = { 104 42 46 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { sylvanian_vampire }
+	# capital: Harkon — TODO once land state-regions exist
+}
+
+################ PON — Pontenne; the chalice realm by the Chateau de Morsuil ################
+# sylvanian_vampire, unrecognized (parallel to VSY) — undead border realm, blood-chalice
+# heraldry. Cross-file culture reference to common/cultures/vampire.txt.
+
+PON = {
+	color = { 72 64 104 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { sylvanian_vampire }
+	# capital: Pontenne — TODO once land state-regions exist
+}
