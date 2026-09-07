@@ -1040,6 +1040,14 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
     """Check the first-pass province bitmap tiles the mask exactly and agrees with
     its index and the committed sea-zone layer.
 
+    Province **ids** are stable, gap-tolerant handles (board #3705), not
+    raster-order ordinals: ``generate_provinces.py`` carries a geometry-unchanged
+    province's committed colour+id across a regen. So this checks the id structure
+    — positive, globally unique, a bijection with the colour key, and (when the
+    header carries it) bounded by the monotonic ``id_high_water`` — rather than the
+    retired per-kind ``id == *_id_start + (label-1)`` formula. The internal
+    ``label`` bands stay contiguous (check 3) and are unaffected.
+
     ``lake_mask_path`` (#3742, optional): the inland-lake companion layer. When it
     (and/or a ``lake_provinces`` count in the index) is present, the bitmap is
     checked three-way — land / ocean (``~land & ~lake``) / lake — instead of the
@@ -1195,32 +1203,41 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
         if lab <= total and int(areas[lab]) != int(c["area"]):
             errors.append(f"label {lab}: index says {c['area']} px, raster has {int(areas[lab])}")
             break
-    # Id bands: land id = land_id_start + (label-1); sea id = sea_id_start +
-    # (sea_index-1); lake id = lake_id_start + (lake_index-1).
-    lid, sid = int(index["land_id_start"]), int(index["sea_id_start"])
-    lkid = int(index.get("lake_id_start", n_land + n_sea + 1))
-    for c in index["cells"]:
-        lab = int(c["label"])
-        if c["kind"] == "land":
-            want = lid + (lab - 1)
-        elif c["kind"] == "sea":
-            want = sid + (lab - n_land - 1)
-        else:  # lake
-            want = lkid + (lab - n_land - n_sea - 1)
-        if int(c["id"]) != want:
-            errors.append(f"label {lab}: index id {c['id']} != expected {want} for a {c['kind']} province")
-            break
-    # Per-kind formula compliance is not enough — the land and sea bands must not
-    # overlap. A province id is a globally-unique handle (vanilla definition.csv
-    # shares one id space across land and sea), so a collision between a land and a
-    # sea province is invalid content that would propagate downstream.
+    # Province ids: a stable, gap-tolerant handle (board #3705), no longer a
+    # raster-order ordinal — so the old per-kind `id == *_id_start + (label-1)`
+    # formula is gone (it was the exact thing that made ids reshuffle on any
+    # add/remove/reshape). What must still hold is structural: every id is a
+    # positive integer; ids are globally unique (one id space across land+sea+lake,
+    # as vanilla's definition.csv is); the (colour, id) pairing is a bijection over
+    # the cells (colour is the real key, id follows it 1:1); and, when the header
+    # carries the monotonic high-water, no id runs past it.
     ids = [int(c["id"]) for c in index["cells"]]
+    nonpos = sorted({i for i in ids if i <= 0})
+    if nonpos:
+        errors.append(f"{len(nonpos)} province id(s) are not positive (first few: {nonpos[:5]})")
     if len(set(ids)) != len(ids):
         from collections import Counter
         dup = [i for i, n in Counter(ids).items() if n > 1]
         errors.append(
-            f"{len(dup)} province id(s) are shared by more than one province — the "
-            f"land and sea id bands overlap (first few: {sorted(dup)[:5]})")
+            f"{len(dup)} province id(s) are shared by more than one province "
+            f"(first few: {sorted(dup)[:5]})")
+    # colour ↔ id bijection: colour uniqueness is checked above (dup_colors); here
+    # confirm the two keys are in lockstep — as many distinct ids as distinct
+    # colours as cells, so neither key is many-to-one against the other.
+    n_cells = len(index["cells"])
+    n_colors = len({(int(c["color"][0]), int(c["color"][1]), int(c["color"][2]))
+                    for c in index["cells"]})
+    if not (len(set(ids)) == n_colors == n_cells):
+        errors.append(
+            f"colour↔id is not a bijection over the index: {n_cells} cells, "
+            f"{n_colors} distinct colours, {len(set(ids))} distinct ids")
+    if "id_high_water" in index:
+        hw = int(index["id_high_water"])
+        over = sorted({i for i in ids if i >= hw})
+        if over:
+            errors.append(
+                f"{len(over)} province id(s) are >= id_high_water {hw} — the high-water "
+                f"must be the next UNUSED id (first few: {over[:5]})")
 
     # 5. Every province is one connected region, UNLESS it's a deliberate
     # island-override archipelago (several islands merged under one label by

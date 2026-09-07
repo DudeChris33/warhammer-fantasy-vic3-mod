@@ -61,7 +61,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import cells, lakes, land_provinces, raster, schema, sources  # noqa: E402
+from worldgen import cells, lakes, land_provinces, province_ids, raster, schema, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
@@ -155,6 +155,10 @@ def main(argv: list[str] | None = None) -> int:
                     help=f"swallow region-stage offcuts below this many px (default {MERGE_FLOOR})")
     ap.add_argument("--min-area", type=int, default=MIN_PROVINCE_AREA,
                     help=f"swallow province pieces below this many px (default {MIN_PROVINCE_AREA})")
+    ap.add_argument("--reassign", action="store_true",
+                    help="ignore the committed provinces.png and re-allocate every colour/id "
+                         "fresh in label order (board #3705 escape hatch — WILL reshuffle "
+                         "colours on purpose; use only after a wholesale source overhaul)")
     args = ap.parse_args(argv)
     t0 = time.time()
 
@@ -332,12 +336,49 @@ def main(argv: list[str] | None = None) -> int:
     # Combine into one label layer: land 1..N, sea N+1..N+M, lake N+M+1..N+M+K.
     labels = lakes.assemble(land_lab, sea_lab, lake_lab, n_land, n_sea)
 
-    # Deterministic unique colour per province, allocated in sorted label order.
+    # Stable colour + id per province (board #3705). A province's identity IS its
+    # provinces.png hex colour, so a regen that touches only a few provinces must
+    # NOT reshuffle the colour/id of every province after it in raster order. The
+    # committed provinces.png + index ARE the persisted authority: each new label is
+    # overlap-matched (same-kind, land+sea+lake) to the committed province it most
+    # overlaps — a geometry-unchanged province overlaps its committed twin 100% and
+    # keeps its colour+id; genuinely-new geometry gets a fresh colour (reserving ALL
+    # committed colours) + a fresh id from a monotonic high-water; a removed province
+    # is gap-tolerantly retired. --reassign (or no committed bitmap: the first
+    # generation and every fixture) re-allocates fresh in label order, id == label,
+    # byte-identical to the pre-#3705 generator. Read the committed bitmap FULLY
+    # before writing the new one — PROVINCES_PATH is both input and output.
     total = n_land + n_sea + n_lake
-    alloc = raster.ColorAllocator(map_config.SEED)
-    palette = np.zeros((total + 1, 3), dtype=np.uint8)  # index 0 is the (0,0,0) sentinel
-    for lab in range(1, total + 1):
-        palette[lab] = alloc.allocate()
+    kind_of_label = [""] * (total + 1)
+    for lab in range(1, n_land + 1):
+        kind_of_label[lab] = "land"
+    for lab in range(n_land + 1, n_land + n_sea + 1):
+        kind_of_label[lab] = "sea"
+    for lab in range(n_land + n_sea + 1, total + 1):
+        kind_of_label[lab] = "lake"
+
+    committed_rgb = None
+    committed_cells = None
+    committed_high_water = None
+    if not args.reassign and PROVINCES_PATH.is_file() and INDEX_PATH.is_file():
+        committed_rgb = raster.read_rgb_png(PROVINCES_PATH)
+        if committed_rgb.shape[:2] != (CANVAS_H, CANVAS_W):
+            raise SystemExit(
+                f"{PROVINCES_PATH.name}: committed bitmap is {committed_rgb.shape[1]}x"
+                f"{committed_rgb.shape[0]}, expected {CANVAS_W}x{CANVAS_H} — regenerate the "
+                f"mask/sea layer first, or pass --reassign to re-allocate colours fresh")
+        committed_index = json.loads(INDEX_PATH.read_text(encoding="utf-8"))
+        committed_cells = committed_index["cells"]
+        committed_high_water = committed_index.get("id_high_water")
+        log(f"honouring committed {PROVINCES_PATH.name} ({len(committed_cells)} provinces) "
+            f"for stable colours/ids", t0)
+    else:
+        log("no committed bitmap honoured — allocating colours/ids fresh in label order "
+            f"({'--reassign' if args.reassign else 'no committed provinces.png/index'})", t0)
+
+    palette, ids, id_high_water = province_ids.assign(
+        labels, kind_of_label, committed_rgb, committed_cells, map_config.SEED,
+        reassign=args.reassign, committed_high_water=committed_high_water)
     rgb = palette[labels]
 
     # Persist the anchor -> seeded-province index (#3665): the single authority the
@@ -385,13 +426,13 @@ def main(argv: list[str] | None = None) -> int:
                     if lake_mask is not None else np.zeros(1, dtype=bool))
 
     # Provinces share ONE continuous id space, exactly as vanilla's definition.csv
-    # does — a province id is a unique sequential handle, and the bitmap colour is
-    # the real key. The state-region id bands (map_config.LAND_ID_START /
-    # SEA_ID_START, the vanilla 3000+ sea-STATE band) are NOT reused here: at
-    # province scale the ~5,800 land ids would run straight through the 3000 sea
-    # band and collide. So id == label: land 1..N, sea N+1..N+M, globally unique.
-    land_id_start = map_config.LAND_ID_START  # 1
-    sea_id_start = n_land + 1
+    # does — a province id is a unique gap-tolerant handle, and the bitmap colour is
+    # the real key. Both `color` and `id` per cell come from province_ids.assign
+    # (board #3705): a geometry-unchanged province keeps its committed colour+id, so
+    # neither is a raster-order ordinal any more (the old `id == label` per-kind
+    # bands are retired — the `sea_id_start = n_land + 1` band was the direct cause
+    # of every sea id shifting whenever the land count changed). The single monotonic
+    # `id_high_water` (persisted in the header below) is the next unused id.
     entries = []
     n_placeholder = 0
     n_archipelago = 0
@@ -416,7 +457,7 @@ def main(argv: list[str] | None = None) -> int:
             "kind": "land",
             "color": color,
             "hex": raster.color_to_hex(color),
-            "id": land_id_start + (lab - 1),  # == lab
+            "id": int(ids[lab]),  # stable committed id, or fresh from the high-water
             "area": int(areas[lab]),
             "coastal": bool(land_coastal[lab]) if lab < len(land_coastal) else False,
             "impassable": False,  # every land province is passable now
@@ -431,7 +472,7 @@ def main(argv: list[str] | None = None) -> int:
             "kind": "sea",
             "color": color,
             "hex": raster.color_to_hex(color),
-            "id": sea_id_start + (s - 1),  # == lab, continues after the land band
+            "id": int(ids[lab]),  # stable committed id, or fresh from the high-water
             "area": int(areas[lab]),
             "coastal": bool(sea_coastal[s]) if s < len(sea_coastal) else False,
             "impassable": sea_impassable[s],  # from sea_zones_index.json (config-driven)
@@ -450,7 +491,6 @@ def main(argv: list[str] | None = None) -> int:
     # itself and re-checkable offline by validate_map._warn_lakes_oversized rather
     # than living only in generate_coastline_mask.py stdout.
     ocean_area = int(areas[n_land + 1:n_land + n_sea + 1].sum())
-    lake_id_start = n_land + n_sea + 1
     for k in range(1, n_lake + 1):
         lab = n_land + n_sea + k
         color = tuple(int(v) for v in palette[lab])
@@ -459,7 +499,7 @@ def main(argv: list[str] | None = None) -> int:
             "kind": "lake",
             "color": color,
             "hex": raster.color_to_hex(color),
-            "id": lake_id_start + (k - 1),  # == lab, continues after the sea band
+            "id": int(ids[lab]),  # stable committed id, or fresh from the high-water
             "area": int(areas[lab]),
             "ocean_area_fraction": round(int(areas[lab]) / ocean_area, 6) if ocean_area else 0.0,
             "coastal": bool(lake_coastal[k]) if k < len(lake_coastal) else False,
@@ -480,9 +520,12 @@ def main(argv: list[str] | None = None) -> int:
         "impassable_sea_provinces": sum(sea_impassable.values()),  # from sea_zones.json config
         "placeholder_land_provinces": n_placeholder,  # out-of-scope land kept whole
         "archipelago_land_provinces": n_archipelago,  # islands merged by an override circle
-        "land_id_start": land_id_start,
-        "sea_id_start": sea_id_start,
-        "lake_id_start": lake_id_start,
+        # Board #3705: the per-kind id bands (land_id_start/sea_id_start/lake_id_start)
+        # are retired — id is a stable, gap-tolerant handle carried across regens by
+        # province_ids.assign, not a raster-order ordinal. id_high_water is the next
+        # unused id (seeds fresh-id allocation on the next regen so a retired id is
+        # never resurrected).
+        "id_high_water": int(id_high_water),
         "cells": entries,
     }
     INDEX_PATH.write_text(json.dumps(index, indent=1) + "\n", encoding="utf-8")

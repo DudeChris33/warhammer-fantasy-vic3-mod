@@ -1641,7 +1641,7 @@ def _selfcheck_lakes() -> None:
         areas = np.bincount(combined.ravel())
         index = {
             "canvas": [24, 12], "land_provinces": 1, "sea_provinces": n_sea, "lake_provinces": 2,
-            "land_id_start": 1, "sea_id_start": 2, "lake_id_start": 2 + n_sea,
+            "id_high_water": 4 + n_sea,  # #3705: max id (n_sea+3) + 1
             "cells": (
                 [{"label": 1, "kind": "land", "color": list(A), "hex": raster.color_to_hex(A),
                   "id": 1, "area": int(areas[1]), "coastal": True, "impassable": False,
@@ -1979,6 +1979,211 @@ def _selfcheck_province_terrains() -> None:
                    for e in vm.validate_province_terrains(cells, Path(td) / "badid.txt", defs))
 
 
+def _selfcheck_stable_ids() -> None:
+    """Stable province colour+id assignment across regens (board #3705), isolated.
+
+    The committed cross-regen regression the offline gate cannot otherwise see
+    (it only ever runs ONE regen). Pins ``province_ids.assign`` — the mechanism
+    that binds a province's colour+id to a stable identity carried by the committed
+    map instead of to flood-fill / cut order — on a small synthetic committed map
+    exercising land, sea AND lake:
+
+    (a) a no-op regen keeps every colour+id and is byte-identical;
+    (b) removing one province keeps every survivor's colour+id and retires the
+        removed colour (never reused this run);
+    (c) splitting a region lets the dominant-overlap piece keep the committed
+        colour+id while a genuinely-new piece gets a fresh id >= the high-water and
+        a colour reserved off ALL committed colours;
+    (d) a land-count change leaves the sea and lake colours identical (the ripple
+        the old single land->sea->lake allocator caused, now fixed);
+    (e) reassign / no-committed reproduces the pre-#3705 fresh label-order
+        allocation (colour by label ordinal, id == label);
+    (f) the assignment is byte-identical when the committed cells are fed in a
+        shuffled order and across two runs (no dict/set iteration leaks into a
+        colour choice);
+
+    plus a round-trip through ``validate_map.validate_provinces`` proving the new
+    structural id invariants pass on a clean map and fire on a duplicate id, a
+    non-positive id, and an id past the high-water.
+    """
+    from worldgen import province_ids
+    import validate_map as vm
+
+    SEED = map_config.SEED
+
+    # --- The committed map: 3 land + 1 sea + 1 lake, deliberately non-contiguous
+    #     ids (10/20/30/40/50) so a kept id is proven honoured verbatim, not
+    #     recomputed as an ordinal. Layout (4 rows x 8 cols):
+    #       1 1 1 2 2 2 4 4     1,2,3 land   4 sea   5 lake
+    #       1 1 1 2 2 2 4 4
+    #       3 3 3 3 5 5 4 4
+    #       3 3 3 3 5 5 4 4
+    L_c = np.array([
+        [1, 1, 1, 2, 2, 2, 4, 4],
+        [1, 1, 1, 2, 2, 2, 4, 4],
+        [3, 3, 3, 3, 5, 5, 4, 4],
+        [3, 3, 3, 3, 5, 5, 4, 4],
+    ], dtype=np.int32)
+    KIND = {1: "land", 2: "land", 3: "land", 4: "sea", 5: "lake"}
+    COLOR = {1: (200, 0, 0), 2: (0, 200, 0), 3: (0, 0, 200), 4: (10, 10, 60), 5: (0, 120, 120)}
+    CID = {1: 10, 2: 20, 3: 30, 4: 40, 5: 50}
+    HIGH = 51
+
+    def _committed(lab_arr, kind, color, cid):
+        rgb = np.zeros((*lab_arr.shape, 3), dtype=np.uint8)
+        cells_ = []
+        for L in sorted(set(lab_arr.ravel().tolist()) - {0}):
+            rgb[lab_arr == L] = color[L]
+            cells_.append({"label": int(L), "kind": kind[L], "color": list(color[L]),
+                           "id": cid[L]})
+        return rgb, cells_
+
+    def _kind_list(kind_by_label, total):
+        out = [""] * (total + 1)
+        for lab, k in kind_by_label.items():
+            out[lab] = k
+        return out
+
+    committed_rgb, committed_cells = _committed(L_c, KIND, COLOR, CID)
+    kind_c = _kind_list(KIND, 5)
+
+    # (a) No-op regen: identical geometry -> every colour+id kept, byte-identical.
+    pal, ids, hw = province_ids.assign(L_c, kind_c, committed_rgb, committed_cells, SEED,
+                                       committed_high_water=HIGH)
+    for L in range(1, 6):
+        assert tuple(int(v) for v in pal[L]) == COLOR[L], f"(a) label {L} colour moved"
+        assert int(ids[L]) == CID[L], f"(a) label {L} id moved"
+    assert hw == HIGH, f"(a) no-op high-water must stay {HIGH}, got {hw}"
+    pal2, ids2, hw2 = province_ids.assign(L_c, kind_c, committed_rgb, committed_cells, SEED,
+                                          committed_high_water=HIGH)
+    assert np.array_equal(pal, pal2) and np.array_equal(ids, ids2) and hw == hw2, \
+        "(a) two runs must be byte-identical"
+
+    # (b) Remove one province: old label 2 dropped (its pixels absorbed into a grown
+    #     new land province), old 3/4/5 byte-identical. New contiguous labels 1..4.
+    #       1 1 1 1 1 1 3 3     new1 = old1 U old2 (grown)   new3 = old4 sea
+    #       1 1 1 1 1 1 3 3     new2 = old3 (unchanged)      new4 = old5 lake
+    #       2 2 2 2 4 4 3 3
+    #       2 2 2 2 4 4 3 3
+    L_b = np.array([
+        [1, 1, 1, 1, 1, 1, 3, 3],
+        [1, 1, 1, 1, 1, 1, 3, 3],
+        [2, 2, 2, 2, 4, 4, 3, 3],
+        [2, 2, 2, 2, 4, 4, 3, 3],
+    ], dtype=np.int32)
+    kind_b = _kind_list({1: "land", 2: "land", 3: "sea", 4: "lake"}, 4)
+    palb, idsb, hwb = province_ids.assign(L_b, kind_b, committed_rgb, committed_cells, SEED,
+                                          committed_high_water=HIGH)
+    assigned = {(tuple(int(v) for v in palb[L]), int(idsb[L])) for L in range(1, 5)}
+    # The three geometry-unchanged provinces keep colour+id exactly.
+    assert (COLOR[3], CID[3]) in assigned, "(b) unchanged land old3 must keep colour+id"
+    assert (COLOR[4], CID[4]) in assigned, "(b) unchanged sea old4 must keep colour+id"
+    assert (COLOR[5], CID[5]) in assigned, "(b) unchanged lake old5 must keep colour+id"
+    # The removed province's colour+id are retired and reused by nobody this run.
+    assert not any(c == COLOR[2] for c, _ in assigned), "(b) removed colour must be retired"
+    assert not any(i == CID[2] for _, i in assigned), "(b) removed id must be retired"
+    assert hwb == HIGH, f"(b) all-matched high-water must stay {HIGH}, got {hwb}"
+    # (d) The land count dropped 3 -> 2, but the sea and lake colours are identical
+    #     to committed (the ripple the old land->sea->lake allocator caused).
+    sea_lab_b = next(L for L in range(1, 5) if kind_b[L] == "sea")
+    lake_lab_b = next(L for L in range(1, 5) if kind_b[L] == "lake")
+    assert tuple(int(v) for v in palb[sea_lab_b]) == COLOR[4], "(d) sea colour must not ripple"
+    assert tuple(int(v) for v in palb[lake_lab_b]) == COLOR[5], "(d) lake colour must not ripple"
+
+    # (c) Split old land province 1 into a dominant piece (4 px) + a small new piece
+    #     (2 px); everything else unchanged. New contiguous labels 1..6.
+    #       1 1 4 2 2 2 5 5     new1 = old1 dominant (4px)   new4 = old1 remainder (2px, NEW)
+    #       1 1 4 2 2 2 5 5     new2 = old2   new3 = old3    new5 = old4 sea   new6 = old5 lake
+    #       3 3 3 3 6 6 5 5
+    #       3 3 3 3 6 6 5 5
+    L_s = np.array([
+        [1, 1, 4, 2, 2, 2, 5, 5],
+        [1, 1, 4, 2, 2, 2, 5, 5],
+        [3, 3, 3, 3, 6, 6, 5, 5],
+        [3, 3, 3, 3, 6, 6, 5, 5],
+    ], dtype=np.int32)
+    kind_s = _kind_list({1: "land", 2: "land", 3: "land", 4: "land", 5: "sea", 6: "lake"}, 6)
+    pals, idss, hws = province_ids.assign(L_s, kind_s, committed_rgb, committed_cells, SEED,
+                                          committed_high_water=HIGH)
+    # new1 is the dominant (4px > 2px) piece of old1 -> keeps committed1 colour+id.
+    assert tuple(int(v) for v in pals[1]) == COLOR[1] and int(idss[1]) == CID[1], \
+        "(c) dominant split piece must keep the committed colour+id"
+    # new4 is the small new piece -> fresh id >= high-water, colour off ALL committed.
+    assert int(idss[4]) >= HIGH, f"(c) new piece id {int(idss[4])} must be >= high-water {HIGH}"
+    assert int(idss[4]) == HIGH, f"(c) first fresh id must be the high-water {HIGH}, got {int(idss[4])}"
+    fresh_col = tuple(int(v) for v in pals[4])
+    assert fresh_col not in set(COLOR.values()), \
+        "(c) a fresh colour must be reserved off every committed colour (retained or retired)"
+    assert hws == HIGH + 1, f"(c) high-water must advance past the one fresh id, got {hws}"
+
+    # (e) reassign / no committed -> pre-#3705 fresh label-order allocation.
+    pe, ie, he = province_ids.assign(L_c, kind_c, None, None, SEED)
+    pr, ir, hr = province_ids.assign(L_c, kind_c, committed_rgb, committed_cells, SEED,
+                                     reassign=True)
+    assert np.array_equal(pe, pr) and np.array_equal(ie, ir) and he == hr, \
+        "(e) reassign must equal the no-committed fresh allocation"
+    alloc = ColorAllocator(SEED)
+    for L in range(1, 6):
+        assert tuple(int(v) for v in pe[L]) == alloc.allocate(), f"(e) label {L} not fresh label-order"
+        assert int(ie[L]) == L, f"(e) fresh id must equal the label ({L})"
+    assert he == 6, f"(e) fresh high-water must be total+1 (6), got {he}"
+
+    # (f) Byte-identical under a shuffled committed-cell order and across two runs.
+    shuffled = list(reversed(committed_cells))
+    pf1, if1, hf1 = province_ids.assign(L_b, kind_b, committed_rgb, shuffled, SEED,
+                                        committed_high_water=HIGH)
+    pf2, if2, hf2 = province_ids.assign(L_b, kind_b, committed_rgb, committed_cells, SEED,
+                                        committed_high_water=HIGH)
+    assert np.array_equal(pf1, pf2) and np.array_equal(if1, if2) and hf1 == hf2, \
+        "(f) committed-cell order must not affect the assignment"
+    pf3, if3, hf3 = province_ids.assign(L_b, kind_b, committed_rgb, shuffled, SEED,
+                                        committed_high_water=HIGH)
+    assert np.array_equal(pf1, pf3) and np.array_equal(if1, if3) and hf1 == hf3, \
+        "(f) two runs must be byte-identical"
+
+    # --- validate_map.validate_provinces: the new id invariants pass clean + fire ---
+    with tempfile.TemporaryDirectory(prefix="wh_stableids_") as td:
+        tdp = Path(td)
+        land = np.zeros((4, 4), dtype=bool)
+        land[:, :2] = True                        # land = cols 0-1, sea = cols 2-3
+        LC, SC = (200, 0, 0), (0, 0, 200)
+        rgb = np.zeros((4, 4, 3), dtype=np.uint8)
+        rgb[land] = LC
+        rgb[~land] = SC
+        write_rgb_png(tdp / "provinces.png", rgb)
+        raster.write_mask_png(tdp / "mask.png", land)
+        sea_lab = np.where(~land, 1, 0).astype(np.int32)
+        cells.write_labels(tdp / "sea_zones.png", sea_lab)
+
+        clean = {
+            "canvas": [4, 4], "land_provinces": 1, "sea_provinces": 1, "lake_provinces": 0,
+            "id_high_water": 21,
+            "cells": [
+                {"label": 1, "kind": "land", "color": list(LC), "hex": raster.color_to_hex(LC),
+                 "id": 10, "area": 8, "coastal": True, "impassable": False,
+                 "placeholder": False, "archipelago": False},
+                {"label": 2, "kind": "sea", "color": list(SC), "hex": raster.color_to_hex(SC),
+                 "id": 20, "area": 8, "coastal": True, "impassable": False,
+                 "placeholder": False, "archipelago": False},
+            ],
+        }
+
+        def _run(obj):
+            (tdp / "index.json").write_text(json.dumps(obj) + "\n", encoding="utf-8")
+            return vm.validate_provinces(tdp / "provinces.png", tdp / "mask.png",
+                                         tdp / "index.json", tdp / "sea_zones.png", wrap_x=False)
+
+        assert _run(clean) == [], "clean stable-id map must pass the validator"
+
+        import copy
+        dup = copy.deepcopy(clean); dup["cells"][1]["id"] = 10
+        assert any("shared by more than one" in e for e in _run(dup)), "a duplicate id must fail"
+        nonpos = copy.deepcopy(clean); nonpos["cells"][0]["id"] = 0
+        assert any("not positive" in e for e in _run(nonpos)), "a non-positive id must fail"
+        over = copy.deepcopy(clean); over["id_high_water"] = 15
+        assert any("id_high_water" in e for e in _run(over)), "an id past the high-water must fail"
+
+
 def _selfcheck_sea_naming() -> None:
     """Canon sea naming (worldgen.sea_naming), in isolation (no golden).
 
@@ -2293,6 +2498,10 @@ def run_check() -> int:
     _selfcheck_province_terrains()
     print("province_terrains: generator (plains/ocean, id-sorted, deterministic) + validator "
           "(bijection, valid ids, negative cases) self-check passed.")
+    _selfcheck_stable_ids()
+    print("province_ids: stable colour+id across regens (no-op kept, remove retires, split "
+          "keeps dominant + fresh piece, no sea/lake ripple, reassign fresh, order-invariant) "
+          "self-check passed.")
     _selfcheck_sea_naming()
     print("sea_naming: canon plurality assignment + ordinal + override + zero-zone warning "
           "self-check passed.")
