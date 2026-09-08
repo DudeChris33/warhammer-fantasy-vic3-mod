@@ -49,6 +49,13 @@ FIXTURE_EXPECTED = TOOLS_DIR / "fixtures" / "expected"
 # Land states must declare all four; coastal states additionally a port.
 REQUIRED_LAND_HUBS = ("city", "farm", "mine", "wood")
 
+# The impassable-terrain paint colour (board #3789). Measured on the real export
+# (sources/gimp_exports/terraqueous_globe_reprojected - impassable_terrain.png,
+# 2026-09-08): 641,982 pixels are exactly (255,127,0), zero anti-aliased fringe,
+# fully opaque — a clean flat-fill layer, the same idiom as the magenta state
+# network and cyan rivers. A future paint-colour change is a one-line edit here.
+IMPASSABLE_RGB = (255, 127, 0)
+
 _STATE_HEADER = re.compile(r"(STATE_\w+)\s*=\s*\{")
 _COLOR_TOKEN = re.compile(r"x[0-9A-Fa-f]{6}")
 _LOC_KEY = re.compile(r"^\s*([A-Za-z0-9_.]+):\d*\s+\"")
@@ -244,6 +251,9 @@ def validate(
     canon_river_names_path: Path | None = None,
     canon_rivers_csv_path: Path | None = None,
     rivers_index_path: Path | None = None,
+    canon_cities_path: Path | None = None,
+    canon_cities_mask_path: Path | None = None,
+    impassable_path: Path | None = None,
     extra_loc_dirs: tuple[Path, ...] = (),
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
@@ -344,6 +354,28 @@ def validate(
 
                 rindex = json.loads(rivers_index_path.read_text(encoding="utf-8"))
             errors += _check_rivers(ridx, rmask, wrap_x, csv_rows, rindex)
+
+    # Canon barrier cities (#3789): gated on the catalogue existing (clean skip
+    # when absent, the _check_adjacencies idiom). Runs off the committed
+    # land_sea_mask.png alone — independent of the province bitmap (which is still
+    # churning, #3663/#3664/#3705) — so a stale/absent provinces.png never blocks
+    # or corrupts the on-land check. The on-land half always runs (mask committed);
+    # the impassable-collision half degrades to a skip when the gitignored gimp
+    # export is absent (CI / other devices), so the committed gate never breaks.
+    if (canon_cities_path is not None and canon_cities_path.is_file()
+            and canon_cities_mask_path is not None and canon_cities_mask_path.is_file()):
+        from worldgen import schema
+
+        land_mask = _read_mask(canon_cities_mask_path)
+        h, w = land_mask.shape[:2]
+        cities = schema.load_canon_cities(canon_cities_path, canvas=(w, h))
+        impassable_rgb = None
+        if impassable_path is not None and impassable_path.is_file():
+            from worldgen.raster import read_rgb_png
+
+            impassable_rgb = read_rgb_png(impassable_path)
+        errors += _check_canon_cities(cities, land_mask, impassable_rgb)
+
     errors += _check_loc_coverage(states, loc_dir, extra_loc_dirs)
     return errors
 
@@ -1493,6 +1525,48 @@ def _check_adjacencies(path: Path) -> list[str]:
     return errors
 
 
+def _check_canon_cities(cities, land_mask: np.ndarray,
+                        impassable_rgb: np.ndarray | None) -> list[str]:
+    """Barrier-city safety check (board #3789, parent #3788).
+
+    ``cities`` is a list of :class:`worldgen.schema.CanonCity`. For each city:
+
+    (i) **on-land** — its anchor must be land in the committed ``land_sea_mask.png``
+        (``land_mask[y, x]`` truthy; the mask reads ``True == land``). A city on
+        water is a mis-typed anchor and is a hard error, run on every device (the
+        mask is committed).
+    (ii) **impassable collision** — when ``impassable_rgb`` is provided (the local
+        gitignored gimp export is present), a city whose anchor pixel reads
+        :data:`IMPASSABLE_RGB` is reported: the impassable draft has sealed a
+        catalogued hold out of the playable map. Absent the export (CI / other
+        devices) this half is skipped by the caller (``impassable_rgb is None``).
+
+    The collision half is a best-effort *report*, never the safety authority — the
+    transparent overlay Chris paints *around* is the primary guard, and a single
+    anchor pixel sits deep inside a flat fill, not on a soft edge. Anchor bounds are
+    already guaranteed in-canvas by the schema's canvas check, but every index is
+    guarded defensively here so a stale mask/array size can never raise.
+    """
+    errors: list[str] = []
+    h, w = land_mask.shape[:2]
+    for c in cities:
+        x, y = int(c.anchor[0]), int(c.anchor[1])
+        if not (0 <= x < w and 0 <= y < h):
+            errors.append(f"canon city '{c.name}' anchor ({x},{y}) is outside the "
+                          f"{w}x{h} land mask")
+            continue
+        if not bool(land_mask[y, x]):
+            errors.append(f"canon city '{c.name}' anchor ({x},{y}) is on water "
+                          f"(not land in land_sea_mask.png)")
+        if impassable_rgb is not None:
+            ih, iw = impassable_rgb.shape[:2]
+            if 0 <= x < iw and 0 <= y < ih and tuple(
+                    int(v) for v in impassable_rgb[y, x][:3]) == IMPASSABLE_RGB:
+                errors.append(f"canon city '{c.name}' ({x},{y}) terrain={c.terrain} "
+                              f"is painted impassable")
+    return errors
+
+
 def validate_sea(
     seas_txt_path: Path,
     default_map_path: Path,
@@ -1740,6 +1814,11 @@ def main(argv: list[str] | None = None) -> int:
         TOOLS_DIR / "config" / "canon_river_names.json",
         canon_rivers_csv_path=None if args.fixture else TOOLS_DIR / "config" / "canon_rivers.csv",
         rivers_index_path=None if args.fixture else TOOLS_DIR / "derived" / "rivers_index.json",
+        canon_cities_path=None if args.fixture else TOOLS_DIR / "config" / "canon_cities.json",
+        canon_cities_mask_path=None if args.fixture else TOOLS_DIR / "derived" / "land_sea_mask.png",
+        impassable_path=None if args.fixture else
+        REPO_ROOT / "sources" / "gimp_exports"
+        / "terraqueous_globe_reprojected - impassable_terrain.png",
         extra_loc_dirs=() if args.fixture else
         (REPO_ROOT / "localization" / "replace" / "english" / "map",),
     )

@@ -788,6 +788,96 @@ def load_hub_worksheet(path: Path, canvas: tuple[int, int] | None = None) -> lis
 
 
 # ---------------------------------------------------------------------------
+# Canon cities (the barrier-city catalogue the impassable-safety tooling reads,
+# board #3789, parent #3788)
+# ---------------------------------------------------------------------------
+#
+# A hand-authored, regenerate-through JSON input (sibling of ``hub_worksheet.json``
+# / ``inland_lakes.json``) — one row per canon settlement that sits *inside or
+# against* a barrier terrain (a mountain range, a marsh, ...) and would be silently
+# sealed out of the playable map if the hand-drawn impassable-terrain layer were
+# painted over it. Each row pins a city to a canvas ``anchor`` pixel; the anchor
+# geometry IS the row's identity — no ``STATE_`` key is stored (the Hilbert STATE
+# number churns on any region change, the same reasoning as :class:`HubRow`).
+# ``render_canon_cities_preview.py`` draws these as labelled dots + a transparent
+# GIMP overlay to paint against, and ``validate_map._check_canon_cities`` warns if
+# an anchor lands on water or under the impassable fill.
+
+#: The barrier features a canon city can sit in/against — the parent #3788's named
+#: set. A closed enum so a typo'd terrain fails loudly at load, exactly as
+#: :data:`_HUB_TYPES` gates ``hub``. Extending it is a deliberate one-line edit.
+_CITY_TERRAINS = frozenset({"mountain", "marsh", "forest", "cliff_coast"})
+
+
+@dataclass(frozen=True)
+class CanonCity:
+    """One catalogued at-risk settlement: a city pinned to a canvas ``anchor`` pixel.
+
+    ``name`` is the display text. ``anchor`` is a single canvas ``[x, y]`` pixel,
+    bounds-checked exactly like :class:`HubRow.anchor`. ``realm`` is a free-text
+    grouping label (logs only, never parsed into a key). ``terrain`` is one of
+    :data:`_CITY_TERRAINS` — the barrier the city sits in/against. ``source`` is a
+    canon citation (reference map + note). ``note`` is optional.
+    """
+
+    name: str
+    anchor: tuple[int, int]
+    realm: str
+    terrain: str
+    source: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "CanonCity":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        ctx = f"{ctx}({name})"
+        (anchor,) = _as_seed_list([_require(d, "anchor", ctx)], f"{ctx}.anchor", canvas)
+        realm = _as_str(_require(d, "realm", ctx), f"{ctx}.realm")
+        if not realm:
+            raise SchemaError(f"{ctx}.realm: must be a non-empty string")
+        terrain = _as_str(_require(d, "terrain", ctx), f"{ctx}.terrain")
+        if terrain not in _CITY_TERRAINS:
+            raise SchemaError(
+                f"{ctx}.terrain: must be one of {sorted(_CITY_TERRAINS)}, got '{terrain}'")
+        source = _as_str(_require(d, "source", ctx), f"{ctx}.source")
+        if not source:
+            raise SchemaError(f"{ctx}.source: must be a non-empty string (canon citation)")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(name=name, anchor=anchor, realm=realm, terrain=terrain,
+                   source=source, note=note)
+
+
+def load_canon_cities(path: Path, canvas: tuple[int, int] | None = None) -> list[CanonCity]:
+    """Load + validate the committed canon-city catalogue (authored order preserved).
+
+    Top-level ``{"cities": [...]}``. Bounds-checks every anchor against ``canvas``
+    when known, and rejects a **duplicate exact anchor pixel** across rows (two
+    cities on one pixel is a silent authoring bug, the same rule
+    :func:`load_hub_worksheet` uses for its anchors). An empty or malformed file is
+    refused, not silently truncated.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    cities_raw = _require(data, "cities", ctx)
+    if not isinstance(cities_raw, list) or not cities_raw:
+        raise SchemaError(f"{ctx}.cities: expected a non-empty list")
+    rows = [CanonCity.from_dict(c, f"{ctx}.cities[{i}]", canvas)
+            for i, c in enumerate(cities_raw)]
+
+    seen: dict[tuple[int, int], str] = {}
+    for r in rows:
+        if r.anchor in seen:
+            raise SchemaError(
+                f"{ctx}: anchor pixel {list(r.anchor)} is claimed by both "
+                f"'{seen[r.anchor]}' and '{r.name}' — anchors must be unique"
+            )
+        seen[r.anchor] = r.name
+    return rows
+
+
+# ---------------------------------------------------------------------------
 # Canon sea groups (the sea-zone naming config generate_sea_zones.py reads)
 # ---------------------------------------------------------------------------
 #

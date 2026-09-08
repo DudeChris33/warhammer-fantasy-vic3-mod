@@ -345,6 +345,24 @@ sorted by integer id (not index order), two runs are byte-identical, an empty
 cell list is refused rather than writing a truncated file, and the emitted file
 round-trips cleanly through the validator, whose bijection and valid-id checks
 each fail on a missing line, an extra line, and an undefined terrain id.
+`_selfcheck_canon_cities` (board #3789) exercises the barrier-city tooling in
+isolation: `schema.load_canon_cities` preserves authored order and refuses an
+empty/bad-terrain/duplicate-anchor/out-of-canvas file; the pure, source-free
+`render_canon_cities_preview.build_overlay_layer` builds a deterministic
+(byte-identical across runs) canvas-sized RGBA layer with a transparent ground and
+opaque markers (and `CANVAS_W/CANVAS_H == (8192, 3616)` is asserted directly rather
+than allocating the 474 MB layer); and `validate_map._check_canon_cities` passes a
+clean on-land city, flags an on-water anchor, flags a city painted the impassable
+colour `(255,127,0)`, and runs the on-land half alone when the export array is
+`None`. The check itself is **gated on `tools/config/canon_cities.json` existing**
+(a clean skip when absent, the `_check_adjacencies` idiom): given the catalogue,
+the **on-land** half always runs off the committed `land_sea_mask.png`, while the
+**impassable-collision** half degrades to a skip when the gitignored local export
+(`sources/gimp_exports/terraqueous_globe_reprojected - impassable_terrain.png`) is
+absent, so a device without that working file never reddens the committed gate.
+`tools/render_canon_cities_preview.py` (the dev render) and its two
+`tools/derived/` artifacts are outside the gate — gitignored, source-dependent,
+regenerated only on the user's machine for a visual verdict.
 `_selfcheck_river_extraction` (board #3703) exercises `worldgen/river_network.py`'s
 flow-DAG model on synthetic cyan networks: a Y-junction stitches Strahler stems
 with one green source per headwater and a red MERGE at the confluence (source

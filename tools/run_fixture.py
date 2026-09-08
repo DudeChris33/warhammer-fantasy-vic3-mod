@@ -1979,6 +1979,113 @@ def _selfcheck_province_terrains() -> None:
                    for e in vm.validate_province_terrains(cells, Path(td) / "badid.txt", defs))
 
 
+def _selfcheck_canon_cities() -> None:
+    """Barrier-city tooling (board #3789), in isolation — schema, the pure overlay
+    builder, and the validator's on-land + impassable-collision check.
+
+    Pins what render_canon_cities_preview.build_overlay_layer and
+    validate_map._check_canon_cities rely on: the schema loads authored order and
+    refuses empty/bad-terrain/dup-anchor/out-of-canvas files; the transparent
+    overlay is a deterministic, source-free, exactly-canvas-sized layer; and the
+    validator passes a clean on-land city, flags an on-water anchor, flags a city
+    painted impassable, and runs the on-land half alone when the export is absent.
+    """
+    import validate_map as vm
+    import render_canon_cities_preview as rcc
+
+    # --- schema: clean load + the four refusals -------------------------------
+    def _cities_json(rows):
+        return json.dumps({"cities": rows})
+
+    def _refuses(fn, msg):
+        try:
+            fn()
+        except schema.SchemaError:
+            return
+        raise AssertionError(msg)
+
+    with tempfile.TemporaryDirectory() as td:
+        tdp = Path(td)
+        rows = [
+            {"name": "Karak A", "anchor": [5, 5], "realm": "Karaz Ankor",
+             "terrain": "mountain", "source": "canon"},
+            {"name": "Karak B", "anchor": [8, 3], "realm": "Karaz Ankor",
+             "terrain": "marsh", "source": "canon", "note": "n"},
+        ]
+        good = tdp / "canon_cities.json"
+        good.write_text(_cities_json(rows))
+        cities = schema.load_canon_cities(good, canvas=(10, 10))
+        assert [c.name for c in cities] == ["Karak A", "Karak B"], "authored order preserved"
+        assert cities[0].terrain == "mountain" and cities[1].terrain == "marsh"
+
+        empty = tdp / "empty.json"
+        empty.write_text(json.dumps({"cities": []}))
+        _refuses(lambda: schema.load_canon_cities(empty, canvas=(10, 10)),
+                 "an empty cities list must be refused")
+
+        badterr = tdp / "badterr.json"
+        badterr.write_text(_cities_json([{**rows[0], "terrain": "swamp"}]))
+        _refuses(lambda: schema.load_canon_cities(badterr, canvas=(10, 10)),
+                 "a bad terrain must be refused")
+
+        dup = tdp / "dup.json"
+        dup.write_text(_cities_json([rows[0], {**rows[1], "anchor": [5, 5]}]))
+        _refuses(lambda: schema.load_canon_cities(dup, canvas=(10, 10)),
+                 "a duplicate exact anchor must be refused")
+
+        oob = tdp / "oob.json"
+        oob.write_text(_cities_json([{**rows[0], "anchor": [50, 5]}]))
+        _refuses(lambda: schema.load_canon_cities(oob, canvas=(10, 10)),
+                 "an out-of-canvas anchor must be refused")
+
+    # --- overlay: deterministic, source-free, transparent ground, canvas size --
+    ov_cities = [
+        schema.CanonCity(name="A", anchor=(5, 5), realm="r", terrain="mountain",
+                         source="s", note=""),
+        schema.CanonCity(name="B", anchor=(30, 20), realm="r", terrain="marsh",
+                         source="s", note=""),
+    ]
+    o1 = np.asarray(rcc.build_overlay_layer(ov_cities, (40, 30)))
+    o2 = np.asarray(rcc.build_overlay_layer(ov_cities, (40, 30)))
+    assert o1.shape == (30, 40, 4), f"overlay must be canvas-sized RGBA, got {o1.shape}"
+    assert np.array_equal(o1, o2), "two overlay builds must be byte-identical"
+    # (29, 0) is the bottom-left corner, clear of both dots (radius 9 at (5,5) and
+    # (30,20)) and their right-extending labels — proof the ground is transparent.
+    assert tuple(o1[29, 0]) == (0, 0, 0, 0), "the overlay ground must be transparent where no marker"
+    assert o1[..., 3].max() == 255, "each marker must be opaque somewhere"
+    # The honest, cheap proof of "exactly 8192x3616" without a 474 MB allocation.
+    assert (rcc.CANVAS_W, rcc.CANVAS_H) == (8192, 3616), \
+        f"canvas must be 8192x3616, got {(rcc.CANVAS_W, rcc.CANVAS_H)}"
+
+    # --- validator: on-land + impassable-collision, pass + two failures --------
+    land = np.ones((10, 10), dtype=bool)
+    land[:, 9] = False                       # a water column at x=9
+    impass = np.zeros((10, 10, 3), dtype=np.uint8)
+    impass[7, 3] = vm.IMPASSABLE_RGB         # one painted-impassable pixel
+
+    def _city(name, xy, terrain="mountain"):
+        return schema.CanonCity(name=name, anchor=xy, realm="r", terrain=terrain,
+                                source="s", note="")
+
+    clean = [_city("Clear", (2, 2))]
+    assert vm._check_canon_cities(clean, land, impass) == [], \
+        "a clean on-land, non-impassable city must pass"
+
+    onwater = vm._check_canon_cities([_city("Wet", (9, 4))], land, impass)
+    assert any("on water" in e for e in onwater), f"an on-water anchor must fail, got {onwater}"
+
+    painted = vm._check_canon_cities([_city("Sealed", (3, 7))], land, impass)
+    assert any("painted impassable" in e for e in painted), \
+        f"a city on an impassable pixel must fail, got {painted}"
+
+    # impassable=None -> on-land half alone: the same sealed pixel now passes,
+    # while the on-water anchor still fails.
+    assert vm._check_canon_cities([_city("Sealed", (3, 7))], land, None) == [], \
+        "with no export, the impassable half must be skipped"
+    assert vm._check_canon_cities([_city("Wet", (9, 4))], land, None), \
+        "the on-land half must still run when the export is absent"
+
+
 def _selfcheck_stable_ids() -> None:
     """Stable province colour+id assignment across regens (board #3705), isolated.
 
@@ -2498,6 +2605,10 @@ def run_check() -> int:
     _selfcheck_province_terrains()
     print("province_terrains: generator (plains/ocean, id-sorted, deterministic) + validator "
           "(bijection, valid ids, negative cases) self-check passed.")
+    _selfcheck_canon_cities()
+    print("canon_cities: schema (order + refuse empty/bad-terrain/dup-anchor/oob) + pure "
+          "transparent overlay (deterministic, canvas-sized) + validator (on-land, "
+          "impassable-collision, export-absent skip) self-check passed.")
     _selfcheck_stable_ids()
     print("province_ids: stable colour+id across regens (no-op kept, remove retires, split "
           "keeps dominant + fresh piece, no sea/lake ripple, reassign fresh, order-invariant) "

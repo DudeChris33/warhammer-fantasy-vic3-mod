@@ -1,0 +1,45 @@
+{
+  "_comment": "Hand-authored barrier-city catalogue (board #3789, parent #3788). A regenerate-through input, sibling of hub_worksheet.json / inland_lakes.json — edited deliberately, never inferred from a bitmap. One row per canon settlement that sits in/against a barrier terrain and would be silently sealed out of the playable map if the hand-drawn impassable-terrain layer were painted over it. `name` is the display text; `anchor` is a canvas [x,y] pixel (identity is the anchor geometry, never a STATE_ key — the Hilbert STATE number churns); `realm` is a grouping/log label; `terrain` is one of mountain|marsh|forest|cliff_coast (schema._CITY_TERRAINS); `source` is the canon citation; `note` is optional. render_canon_cities_preview.py draws these as a labelled overlay + a transparent GIMP layer to paint around; validate_map._check_canon_cities warns if an anchor lands on water or under the impassable fill. Seed slice: a World's-Edge / Karaz Ankor proving cluster (board #3789 wave-1) — first-pass by-eye anchors on land beside the current impassable draft, PROVISIONAL pending Chris's visual verdict on the render.",
+  "cities": [
+    {
+      "name": "Karak Kadrin",
+      "anchor": [4230, 330],
+      "realm": "Karaz Ankor",
+      "terrain": "mountain",
+      "source": "World's Edge Mountains, Peak Pass (WFRP/TWW canon) — first-pass anchor, awaiting render verdict",
+      "note": "Slayer Keep, the northernmost great hold guarding Peak Pass."
+    },
+    {
+      "name": "Zhufbar",
+      "anchor": [4572, 620],
+      "realm": "Karaz Ankor",
+      "terrain": "mountain",
+      "source": "World's Edge Mountains, above Black Water (WFRP/TWW canon) — first-pass anchor, awaiting render verdict",
+      "note": "The engineers' hold on the falls above Black Water."
+    },
+    {
+      "name": "Karaz-a-Karak",
+      "anchor": [4381, 900],
+      "realm": "Karaz Ankor",
+      "terrain": "mountain",
+      "source": "World's Edge Mountains, Everpeak (WFRP/TWW canon) — first-pass anchor, awaiting render verdict",
+      "note": "Everpeak, the Dwarf High King's capital and greatest of the holds."
+    },
+    {
+      "name": "Karak Varn",
+      "anchor": [4300, 1150],
+      "realm": "Karaz Ankor",
+      "terrain": "mountain",
+      "source": "World's Edge Mountains, Black Water (WFRP/TWW canon) — first-pass anchor, awaiting render verdict",
+      "note": "The drowned hold on the shore of Black Water, riddled with skaven and beasts."
+    },
+    {
+      "name": "Karak Eight Peaks",
+      "anchor": [4318, 1430],
+      "realm": "Karaz Ankor",
+      "terrain": "mountain",
+      "source": "World's Edge Mountains, Silver Road (WFRP/TWW canon) — first-pass anchor, awaiting render verdict",
+      "note": "Vala-Azrilungol, the contested Queen of the Silver Depths."
+    }
+  ]
+}
