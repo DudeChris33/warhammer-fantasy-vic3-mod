@@ -30,11 +30,20 @@ QA render is evidence for a human, not pipeline input.
 Everything is deterministic for a fixed stack: the warp is the committed
 record's thin-plate field, sampling is bilinear, and no RNG or wall-clock enters.
 
+``--native --state-borders`` additionally samples the hand-drawn canvas-space
+state-region magenta network (``sources/terraqueous_globe_reprojected -
+state_regions.png``) onto the tile through the same inverse warp — the reverse
+of ``tools/project_regions.py``'s parchment->canvas drape, letting the drawn
+borders be judged against the mod parchment's own printed lines. A QA/reference
+projection only; state geometry is authored canvas-natively and this feeds
+nothing downstream.
+
 Usage::
 
     python tools/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_empire
     python tools/render_anchor_dot_example.py --combined
     python tools/render_anchor_dot_example.py --all   # the five tiles + combined
+    python tools/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_empire --native --state-borders
 """
 
 from __future__ import annotations
@@ -51,7 +60,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import derive_crop, raster, reproject, schema  # noqa: E402
+from worldgen import derive_crop, land_provinces, raster, reproject, schema  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
@@ -60,12 +69,16 @@ REGISTRATION_DIR = TOOLS_DIR / "registration"
 SOURCES_DIR = TOOLS_DIR.parent / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
+#: The hand-drawn state-region magenta network — canvas-scale, same source
+#: tools/worldgen/land_provinces.py consumes for the real province cut.
+STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
 #: The accepted render style (measured off the committed Badlands example).
 BACKDROP_RGB = (60, 64, 72)
 COAST_RGB = (0, 255, 255)
+BORDER_RGB = (255, 0, 255)
 RING_RGB = (255, 0, 0)
 RING_R_OUT = 8.5
 RING_R_IN = 5.5
@@ -220,17 +233,27 @@ def draw_rings(canvas_rgb: np.ndarray, box: tuple[int, int, int, int], seed: dic
         _draw_ring(canvas_rgb, float(lm["canvas"][0]) - box[0], float(lm["canvas"][1]) - box[1])
 
 
-def render_native(stem: str, out_file: str) -> Path:
+def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Path:
     """Render one tile at its own native source resolution instead of its
     (typically much smaller) canvas footprint.
 
-    The only thing actually projected onto the tile is the coastline overlay,
-    so it is cheaper and sharper to sample the *mask* into source-pixel space
-    through the inverse warp than to resample the *source* down into canvas
-    space the way :func:`render` does. Landmark rings use the seed's own
-    ``source`` positions directly — exact, no warp needed. Only meaningful for
-    a single tile: a multi-tile ``--combined`` composite has no one shared
-    "native" resolution across siblings.
+    The only things projected onto the tile are canvas-space overlays (the
+    coastline mask, and optionally the hand-drawn state-border network), so it
+    is cheaper and sharper to sample *those* into source-pixel space through the
+    inverse warp than to resample the *source* down into canvas space the way
+    :func:`render` does. Landmark rings use the seed's own ``source`` positions
+    directly — exact, no warp needed. Only meaningful for a single tile: a
+    multi-tile ``--combined`` composite has no one shared "native" resolution
+    across siblings.
+
+    ``overlay_borders`` samples the live ``state_regions.png`` magenta network
+    (:func:`worldgen.land_provinces.magenta_lines` — the same extraction the
+    real province cut uses) through the same inverse warp as the coastline, and
+    paints it onto the tile in magenta. This is a QA/reference projection only
+    (the reverse of :mod:`tools.project_regions`'s parchment->canvas drape) —
+    state geometry is authored canvas-natively (see
+    ``tools/worldgen/land_provinces.py``'s module docstring); nothing here feeds
+    the pipeline.
     """
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     land = raster.read_mask_png(MASK_PATH)
@@ -249,7 +272,18 @@ def render_native(stem: str, out_file: str) -> Path:
     log(f"inverse warp  rms {inv.rms_px:.2f}px  max {inv.max_px:.2f}px (source px)")
 
     land_f = land.astype(np.float64)
+    border_f = None
+    if overlay_borders:
+        borders_rgb, _ = _read_source_rgba(STATE_REGIONS_SOURCE)
+        if borders_rgb.shape[:2] != (canvas_h, canvas_w):
+            raise SystemExit(f"{STATE_REGIONS_SOURCE} is {borders_rgb.shape[1]}x{borders_rgb.shape[0]}, "
+                             f"expected {canvas_w}x{canvas_h} (the canvas frame)")
+        borders = land_provinces.magenta_lines(borders_rgb)
+        log(f"state borders {int(borders.sum()):,} canvas px")
+        border_f = borders.astype(np.float64)
+
     land_at_source = np.zeros((sh, sw), dtype=bool)
+    border_at_source = np.zeros((sh, sw), dtype=bool) if border_f is not None else None
     gx = (np.arange(sw, dtype=np.float64) + 0.5)[None, :]
     for yb in range(0, sh, ROW_BLOCK):
         ye = min(yb + ROW_BLOCK, sh)
@@ -259,9 +293,14 @@ def render_native(stem: str, out_file: str) -> Path:
         inside = (cx >= 0) & (cx <= canvas_w - 1) & (cy >= 0) & (cy <= canvas_h - 1)
         v = reproject.resample(land_f, cx, cy, order=0)
         land_at_source[yb:ye, :] = inside & (v > 0.5)
+        if border_f is not None:
+            bv = reproject.resample(border_f, cx, cy, order=0)
+            border_at_source[yb:ye, :] = inside & (bv > 0.5)
 
     canvas_rgb = rgb.copy()
     overlay_coast(canvas_rgb, (0, 0, sw, sh), land_at_source)
+    if border_at_source is not None:
+        canvas_rgb[border_at_source] = BORDER_RGB
     for lm in seed["landmarks"]:
         _draw_ring(canvas_rgb, float(lm["source"][0]), float(lm["source"][1]))
 
@@ -322,6 +361,11 @@ def main(argv: list[str] | None = None) -> int:
                    help="render a single --seed at its own native source resolution "
                         "(mask sampled onto it via the inverse warp) instead of its "
                         "canvas footprint; not valid with --combined/--all")
+    p.add_argument("--state-borders", action="store_true",
+                   help="with --native, also sample the hand-drawn canvas-space "
+                        "state-border magenta network onto the tile (the reverse "
+                        "of project_regions.py's parchment->canvas drape) — a QA "
+                        "projection only, not pipeline input")
     args = p.parse_args(argv)
 
     if not MASK_PATH.is_file():
@@ -334,9 +378,11 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("nothing to render — pass --seed <stem>, --combined, or --all")
     if args.native and (args.combined or args.all or len(stems) != 1):
         raise SystemExit("--native needs exactly one --seed and no --combined/--all")
+    if args.state_borders and not args.native:
+        raise SystemExit("--state-borders needs --native")
 
     if args.native:
-        render_native(stems[0], out_name(stems[0]))
+        render_native(stems[0], out_name(stems[0]), overlay_borders=args.state_borders)
         return 0
 
     for stem in stems:
