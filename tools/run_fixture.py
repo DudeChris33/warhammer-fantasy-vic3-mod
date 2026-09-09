@@ -2067,23 +2067,26 @@ def _selfcheck_canon_cities() -> None:
         return schema.CanonCity(name=name, anchor=xy, realm="r", terrain=terrain,
                                 source="s", note="")
 
-    clean = [_city("Clear", (2, 2))]
-    assert vm._check_canon_cities(clean, land, impass) == [], \
-        "a clean on-land, non-impassable city must pass"
+    err, warn = vm._check_canon_cities([_city("Clear", (2, 2))], land, impass)
+    assert err == [] and warn == [], \
+        f"a clean on-land, non-impassable city must produce no error/warning, got {err}/{warn}"
 
-    onwater = vm._check_canon_cities([_city("Wet", (9, 4))], land, impass)
-    assert any("on water" in e for e in onwater), f"an on-water anchor must fail, got {onwater}"
+    err, warn = vm._check_canon_cities([_city("Wet", (9, 4))], land, impass)
+    assert any("on water" in e for e in err), f"an on-water anchor must be a hard error, got {err}"
 
-    painted = vm._check_canon_cities([_city("Sealed", (3, 7))], land, impass)
-    assert any("painted impassable" in e for e in painted), \
-        f"a city on an impassable pixel must fail, got {painted}"
+    # A hold painted impassable is a NON-BLOCKING WARNING, never an error (a hold in
+    # the mountains is expected — the warning cues carving a passable pocket).
+    err, warn = vm._check_canon_cities([_city("Sealed", (3, 7))], land, impass)
+    assert err == [], f"a painted-impassable hold on land must not be an error, got {err}"
+    assert any("painted impassable" in w for w in warn), \
+        f"a city on an impassable pixel must warn, got {warn}"
 
-    # impassable=None -> on-land half alone: the same sealed pixel now passes,
-    # while the on-water anchor still fails.
-    assert vm._check_canon_cities([_city("Sealed", (3, 7))], land, None) == [], \
-        "with no export, the impassable half must be skipped"
-    assert vm._check_canon_cities([_city("Wet", (9, 4))], land, None), \
-        "the on-land half must still run when the export is absent"
+    # impassable=None -> collision half skipped: the same sealed pixel now warns
+    # nothing, while the on-water anchor still hard-errors.
+    err, warn = vm._check_canon_cities([_city("Sealed", (3, 7))], land, None)
+    assert err == [] and warn == [], f"with no export, the collision half must be skipped, got {err}/{warn}"
+    err, warn = vm._check_canon_cities([_city("Wet", (9, 4))], land, None)
+    assert err, "the on-land half must still run (hard error) when the export is absent"
 
 
 def _selfcheck_stable_ids() -> None:
@@ -2607,8 +2610,8 @@ def run_check() -> int:
           "(bijection, valid ids, negative cases) self-check passed.")
     _selfcheck_canon_cities()
     print("canon_cities: schema (order + refuse empty/bad-terrain/dup-anchor/oob) + pure "
-          "transparent overlay (deterministic, canvas-sized) + validator (on-land, "
-          "impassable-collision, export-absent skip) self-check passed.")
+          "transparent overlay (deterministic, canvas-sized) + validator (on-land hard error, "
+          "impassable-collision non-blocking warning, export-absent skip) self-check passed.")
     _selfcheck_stable_ids()
     print("province_ids: stable colour+id across regens (no-op kept, remove retires, split "
           "keeps dominant + fresh piece, no sea/lake ripple, reassign fresh, order-invariant) "

@@ -255,6 +255,7 @@ def validate(
     canon_cities_mask_path: Path | None = None,
     impassable_path: Path | None = None,
     extra_loc_dirs: tuple[Path, ...] = (),
+    warnings: list[str] | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -374,7 +375,10 @@ def validate(
             from worldgen.raster import read_rgb_png
 
             impassable_rgb = read_rgb_png(impassable_path)
-        errors += _check_canon_cities(cities, land_mask, impassable_rgb)
+        cc_errors, cc_warnings = _check_canon_cities(cities, land_mask, impassable_rgb)
+        errors += cc_errors
+        if warnings is not None:
+            warnings.extend(cc_warnings)
 
     errors += _check_loc_coverage(states, loc_dir, extra_loc_dirs)
     return errors
@@ -1526,28 +1530,34 @@ def _check_adjacencies(path: Path) -> list[str]:
 
 
 def _check_canon_cities(cities, land_mask: np.ndarray,
-                        impassable_rgb: np.ndarray | None) -> list[str]:
+                        impassable_rgb: np.ndarray | None) -> tuple[list[str], list[str]]:
     """Barrier-city safety check (board #3789, parent #3788).
 
-    ``cities`` is a list of :class:`worldgen.schema.CanonCity`. For each city:
+    Returns ``(errors, warnings)``. ``cities`` is a list of
+    :class:`worldgen.schema.CanonCity`. For each city:
 
-    (i) **on-land** — its anchor must be land in the committed ``land_sea_mask.png``
-        (``land_mask[y, x]`` truthy; the mask reads ``True == land``). A city on
-        water is a mis-typed anchor and is a hard error, run on every device (the
-        mask is committed).
-    (ii) **impassable collision** — when ``impassable_rgb`` is provided (the local
-        gitignored gimp export is present), a city whose anchor pixel reads
-        :data:`IMPASSABLE_RGB` is reported: the impassable draft has sealed a
-        catalogued hold out of the playable map. Absent the export (CI / other
-        devices) this half is skipped by the caller (``impassable_rgb is None``).
+    (i) **on-land — a hard ERROR.** Its anchor must be land in the committed
+        ``land_sea_mask.png`` (``land_mask[y, x]`` truthy; the mask reads
+        ``True == land``). A city on water is a mis-typed anchor and fails the gate
+        on every device (the mask is committed).
+    (ii) **impassable collision — a non-blocking WARNING.** When ``impassable_rgb``
+        is provided (the local gitignored gimp export is present), a city whose
+        anchor pixel reads :data:`IMPASSABLE_RGB` is *reported* but never fails the
+        gate: a catalogued hold sitting in the mountains is EXPECTED — that is the
+        whole point of the catalogue — and the warning is the signal for the user
+        to carve a passable pocket around it (the transparent overlay is the tool
+        for that). Blocking here would redden the gate the moment a hold is placed
+        correctly in the range. Same non-blocking `warnings=` convention as the
+        lake content-integrity guards (#3742 Phase B); the render stays the final
+        verdict. Absent the export (CI / other devices) this half is skipped by the
+        caller (``impassable_rgb is None``).
 
-    The collision half is a best-effort *report*, never the safety authority — the
-    transparent overlay Chris paints *around* is the primary guard, and a single
-    anchor pixel sits deep inside a flat fill, not on a soft edge. Anchor bounds are
-    already guaranteed in-canvas by the schema's canvas check, but every index is
-    guarded defensively here so a stale mask/array size can never raise.
+    Anchor bounds are already guaranteed in-canvas by the schema's canvas check, but
+    every index is guarded defensively here so a stale mask/array size can never
+    raise.
     """
     errors: list[str] = []
+    warnings: list[str] = []
     h, w = land_mask.shape[:2]
     for c in cities:
         x, y = int(c.anchor[0]), int(c.anchor[1])
@@ -1562,9 +1572,10 @@ def _check_canon_cities(cities, land_mask: np.ndarray,
             ih, iw = impassable_rgb.shape[:2]
             if 0 <= x < iw and 0 <= y < ih and tuple(
                     int(v) for v in impassable_rgb[y, x][:3]) == IMPASSABLE_RGB:
-                errors.append(f"canon city '{c.name}' ({x},{y}) terrain={c.terrain} "
-                              f"is painted impassable")
-    return errors
+                warnings.append(f"canon city '{c.name}' ({x},{y}) terrain={c.terrain} "
+                                f"is painted impassable — carve a passable pocket "
+                                f"around it or it will be sealed out of the map")
+    return errors, warnings
 
 
 def validate_sea(
@@ -1797,6 +1808,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     paths = _resolve_paths(args)
+    warnings: list[str] = []
     errors = validate(
         provinces_path=paths["provinces"],
         state_regions_dir=paths["state_regions"],
@@ -1821,13 +1833,24 @@ def main(argv: list[str] | None = None) -> int:
         / "terraqueous_globe_reprojected - impassable_terrain.png",
         extra_loc_dirs=() if args.fixture else
         (REPO_ROOT / "localization" / "replace" / "english" / "map",),
+        warnings=warnings,
     )
+    # Warnings are advisory (canon-city impassable collisions, #3789) — printed
+    # whether the gate passes or fails, but never gating the exit code: a hold in
+    # the mountains is expected, and the warning is the cue to carve a passable
+    # pocket around it (see _check_canon_cities). Same convention as the province
+    # bitmap's lake warnings.
+    for w in warnings:
+        print(f"  ! WARNING: {w}", file=sys.stderr)
     if errors:
         print(f"validate_map: {len(errors)} error(s):", file=sys.stderr)
         for e in errors:
             print(f"  - {e}", file=sys.stderr)
         return 1
-    print("validate_map: all checks passed.")
+    msg = "validate_map: all checks passed."
+    if warnings:
+        msg += f" ({len(warnings)} non-blocking canon-city warning(s) above)"
+    print(msg)
     return 0
 
 

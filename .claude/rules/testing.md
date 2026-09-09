@@ -351,13 +351,19 @@ empty/bad-terrain/duplicate-anchor/out-of-canvas file; the pure, source-free
 `render_canon_cities_preview.build_overlay_layer` builds a deterministic
 (byte-identical across runs) canvas-sized RGBA layer with a transparent ground and
 opaque markers (and `CANVAS_W/CANVAS_H == (8192, 3616)` is asserted directly rather
-than allocating the 474 MB layer); and `validate_map._check_canon_cities` passes a
-clean on-land city, flags an on-water anchor, flags a city painted the impassable
-colour `(255,127,0)`, and runs the on-land half alone when the export array is
-`None`. The check itself is **gated on `tools/config/canon_cities.json` existing**
-(a clean skip when absent, the `_check_adjacencies` idiom): given the catalogue,
-the **on-land** half always runs off the committed `land_sea_mask.png`, while the
-**impassable-collision** half degrades to a skip when the gitignored local export
+than allocating the 474 MB layer); and `validate_map._check_canon_cities` (returning
+`(errors, warnings)`) passes a clean on-land city with no error/warning, raises a
+hard **error** for an on-water anchor, raises a non-blocking **warning** (never an
+error) for a city painted the impassable colour `(255,127,0)`, and runs the on-land
+half alone when the export array is `None`. The check itself is **gated on
+`tools/config/canon_cities.json` existing** (a clean skip when absent, the
+`_check_adjacencies` idiom): given the catalogue, the **on-land** half always runs
+off the committed `land_sea_mask.png` (an anchor on water is a hard error), while
+the **impassable-collision** half is a **non-blocking warning** — a hold in the
+range is expected, and the warning cues carving a passable pocket around it (flowing
+through the full `validate_map.py` run's `warnings=` channel, printed but never
+gating the exit code, the same convention as the lake guards) — and degrades to a
+skip when the gitignored local export
 (`sources/gimp_exports/terraqueous_globe_reprojected - impassable_terrain.png`) is
 absent, so a device without that working file never reddens the committed gate.
 `tools/render_canon_cities_preview.py` (the dev render) and its two
