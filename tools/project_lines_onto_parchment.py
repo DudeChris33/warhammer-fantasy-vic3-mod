@@ -27,14 +27,26 @@ sampled hit keeps its own colour on the target, so multiple traced networks
 (coastline, rivers, state borders, ...) come through as distinct, still
 colour-coded lines rather than being flattened to one mark.
 
-**Overlap, simplified.** The five crops overlap by ~15% of their master
-footprint (see ``project_regions.py``'s ``FIVE_CROPS`` comment). The forward
-direction resolves that with a canvas-space Voronoi ownership partition
-(:func:`project_regions.canvas_owner`); this reverse direction does not need
-that rigor for a QA overlay and instead paints crops in a fixed order (later
-overwrites earlier in the overlap band) — a border line a pixel or two off
-between two independently-fitted crops in that ~15% band is an accepted
-simplification here, not a defect to chase.
+**Overlap.** The five crops overlap by ~15% of their master footprint (see
+``project_regions.py``'s ``FIVE_CROPS`` comment). Unlike the forward direction
+— where a canvas pixel's *source* coordinate has to be warped before its
+coverage can be tested, hence :func:`project_regions.canvas_owner`'s
+canvas-space partition — a **master** pixel's crop coverage needs no warp at
+all: each crop's own alpha mask sits at a plain integer offset in the master
+frame, so ownership is decided directly there. :func:`master_owner` gives each
+overlapping master pixel to whichever crop's coverage mask runs deepest at
+that point (the same Euclidean-distance-transform Voronoi idiom as
+``canvas_owner``, just simpler since it needs no warp), and the paint loop
+only writes a pixel when its owning crop says so. This matters: painting
+"later crop overwrites earlier" pixel-by-pixel is *not* equivalent to true
+ownership — a later crop only overwrites where *it itself* finds a line hit,
+so anywhere its own (slightly different) warp of the same canvas line misses
+the earlier crop's placement, the earlier crop's stroke survives untouched,
+and the overlap band shows both crops' independent reconstructions of the
+same line side by side (a real double-line bug, not a rendering choice).
+:func:`master_owner` fixes this by deciding, in advance, exactly one crop per
+pixel — a pixel outside that crop's verdict is left as the target's own
+content, never an orphaned stroke from a different crop.
 
 Nothing here writes into ``sources/`` — the output is a copy of ``--target``
 with the projected lines painted on, written under ``tools/derived/``. A
@@ -56,6 +68,7 @@ from pathlib import Path
 
 import numpy as np
 from PIL import Image
+from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
@@ -204,6 +217,40 @@ def classify_lines(canvas_rgba: np.ndarray, colors: list[tuple[str, tuple[int, i
     return idx
 
 
+def master_owner(crop_rgba: dict[str, np.ndarray], offsets: dict[str, tuple[int, int]],
+                 mh: int, mw: int) -> np.ndarray:
+    """Partition the *master* frame among the crops — ``owner[my, mx]`` = crop index.
+
+    No warp needed (contrast :func:`project_regions.canvas_owner`, which
+    partitions the canvas and so must warp each crop's coverage to test it):
+    a crop's own alpha mask already sits at a plain integer offset in the
+    master frame, so its coverage there is just that mask placed by
+    :data:`offsets`. Ownership goes to whichever crop's coverage mask runs
+    deepest (Euclidean distance transform) at an overlapping pixel — an
+    equidistant, single-valued partition, so every master pixel the crops
+    reach at all has exactly one owner.
+    """
+    owner = np.full((mh, mw), -1, dtype=np.int32)
+    best = np.full((mh, mw), -1.0, dtype=np.float32)
+    for idx, name in enumerate(FIVE_CROPS):
+        dx, dy = offsets[name]
+        alpha = crop_rgba[name][..., 3]
+        ch, cw = alpha.shape
+        y0, y1 = max(0, dy), min(mh, dy + ch)
+        x0, x1 = max(0, dx), min(mw, dx + cw)
+        if y1 <= y0 or x1 <= x0:
+            continue
+        mask = np.zeros((mh, mw), dtype=bool)
+        mask[y0:y1, x0:x1] = alpha[y0 - dy:y1 - dy, x0 - dx:x1 - dx] > ALPHA_VALID
+        if not mask.any():
+            continue
+        dist = ndimage.distance_transform_edt(mask).astype(np.float32)
+        better = mask & (dist > best)
+        owner[better] = idx
+        best[better] = dist[better]
+    return owner
+
+
 def project(canvas_source: str, target_source: str, out_name: str,
            colors: list[tuple[str, tuple[int, int, int]]], tol: float) -> Path:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
@@ -233,12 +280,15 @@ def project(canvas_source: str, target_source: str, out_name: str,
     master_gray = master_rgb.astype(np.float32).mean(axis=2)
     offsets = crop_offsets(master_gray, crop_rgba)
 
+    owner = master_owner(crop_rgba, offsets, mh, mw)
+    log(f"master owner  {int((owner >= 0).sum()):,} master px assigned a single owning crop")
+
     out_rgb = target_rgba[..., :3].copy()
     out_alpha = target_rgba[..., 3].copy()
     color_rgb = np.array([c for _n, c in colors], dtype=np.uint8)
 
     total_painted = 0
-    for name in FIVE_CROPS:
+    for crop_idx, name in enumerate(FIVE_CROPS):
         reg = regs[name]
         dx, dy = offsets[name]
         crop_alpha = crop_rgba[name][..., 3].astype(np.float32)
@@ -266,12 +316,13 @@ def project(canvas_source: str, target_source: str, out_name: str,
             idxf = reproject.resample(color_idx_f, cx, cy, order=0)
             idx = np.rint(idxf).astype(np.int64)
             ca = crop_alpha[yb:ye, lx0:lx1]
-            valid = inside & (idx >= 0) & (ca > ALPHA_VALID)
+            my0, my1 = yb + dy, ye + dy
+            mx0, mx1 = lx0 + dx, lx1 + dx
+            owns = owner[my0:my1, mx0:mx1] == crop_idx
+            valid = inside & (idx >= 0) & (ca > ALPHA_VALID) & owns
             if not valid.any():
                 continue
             block = color_rgb[idx.clip(0, len(colors) - 1)]
-            my0, my1 = yb + dy, ye + dy
-            mx0, mx1 = lx0 + dx, lx1 + dx
             view = out_rgb[my0:my1, mx0:mx1]
             view[valid] = block[valid]
             painted_here += int(valid.sum())
@@ -279,7 +330,7 @@ def project(canvas_source: str, target_source: str, out_name: str,
         total_painted += painted_here
 
     log(f"total painted {total_painted:,} master px across {len(FIVE_CROPS)} crops "
-        f"(later crops win on overlap)")
+        f"(exactly one owning crop decides each overlapping pixel)")
 
     out_rgba = np.dstack([out_rgb, out_alpha])
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
