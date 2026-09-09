@@ -47,7 +47,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import lakes, raster, sources  # noqa: E402
+from worldgen import cells, lakes, raster, sources  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -63,6 +63,53 @@ DEFAULT_LAKE_OUT = TOOLS_DIR / "derived" / "lake_mask.png"
 
 #: Ignore land specks smaller than this many px when reporting (not when masking).
 _REPORT_MIN = 2000
+
+#: Drop isolated land components strictly smaller than this many px, reclassifying
+#: them as water (board #3705 follow-up). Pinned to validate_map's degenerate-
+#: province floor (its default ``--min-province-area 4``): a land component below it
+#: cannot legally become a province, so it is an artifact, not land. See
+#: :func:`drop_land_specks`.
+SPECK_MAX_PX = 4
+
+
+def drop_land_specks(land: np.ndarray, min_px: int, wrap_x: bool = True,
+                     log=print) -> tuple[np.ndarray, int, int]:
+    """Reclassify tiny isolated land components (< ``min_px`` px) as water.
+
+    A finished black/white fill exported to PNG can mint 1–3 px "islands" from
+    anti-aliased near-white pixels stranded in the black sea — a stray export
+    artifact, not real land (confirmed for the xD3DC0A "Western Ocean Mass" speck:
+    absent from the GIMP layers, present only after the PNG export). Left in the
+    mask each becomes its own micro land province below the degenerate-province
+    floor (:mod:`validate_map`'s default 4 px) and — being a disconnected islet
+    with no land neighbour — can never be merged away by
+    :func:`worldgen.cells.merge_small`'s share-a-border merge downstream, so it
+    ships as a 1-px state forever.
+
+    The drop MUST happen here, at the sole owner of ``land_sea_mask.png`` and
+    upstream of both the sea-zone and province cuts: the same speck removed only in
+    :mod:`generate_provinces` would break its ``sea_zones.png`` tiles ``~land``
+    invariant (the pixel would be navigable water the committed sea layer never
+    labelled). Cleaning the mask keeps every downstream layer consistent by
+    construction.
+
+    Wrap-aware. ``min_px <= 1`` is a no-op (nothing is smaller than one pixel).
+    Returns ``(cleaned_land, n_components_dropped, n_pixels_dropped)``.
+    """
+    if min_px <= 1 or not land.any():
+        return land, 0, 0
+    comp = cells.components(land.astype(np.int32), wrap_x)
+    land_comp = np.where(land, comp, 0)          # keep only land-component labels
+    sizes = np.bincount(land_comp.ravel())
+    small = np.nonzero((sizes > 0) & (sizes < min_px))[0]
+    small = small[small != 0]                    # 0 is water, never a "speck"
+    if small.size == 0:
+        return land, 0, 0
+    drop = np.isin(land_comp, small)
+    n_px = int(drop.sum())
+    log(f"dropped {int(small.size)} land speck(s) < {min_px} px "
+        f"({n_px} px total) -> water")
+    return land & ~drop, int(small.size), n_px
 
 
 def coast_line(rgb: np.ndarray) -> np.ndarray:
@@ -155,6 +202,10 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--lake-out", type=Path, default=DEFAULT_LAKE_OUT,
                    help="companion lake-mask path written in --from-fill mode "
                         "(default: tools/derived/lake_mask.png)")
+    p.add_argument("--speck-max", type=int, default=SPECK_MAX_PX,
+                   help="drop isolated land components smaller than this many px as "
+                        f"water — anti-aliased export artifacts (default {SPECK_MAX_PX}, "
+                        "the degenerate-province floor; 0/1 disables)")
     args = p.parse_args(argv)
 
     if args.direct:
@@ -162,6 +213,11 @@ def main(argv: list[str] | None = None) -> int:
     else:
         rgb = sources.load_source_image(args.source)
     land = filled_mask(rgb) if args.from_fill else land_mask(rgb)
+    # Reclassify tiny anti-aliased land specks as water before anything downstream
+    # reads the mask, so a stray 1-px "island" never becomes a permanent micro
+    # state (board #3705 follow-up). Runs before lakes.classify below so the lake
+    # companion is computed from the cleaned land.
+    land, _n_specks, _n_px = drop_land_specks(land, args.speck_max, map_config.WRAP_X)
     args.out.parent.mkdir(parents=True, exist_ok=True)
     raster.write_mask_png(args.out, land)
     print(f"wrote {args.out}")

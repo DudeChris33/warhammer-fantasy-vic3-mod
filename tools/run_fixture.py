@@ -1739,6 +1739,58 @@ def _selfcheck_lakes() -> None:
     assert "lakes = {\n}" in empty, f"an empty lakes block must normalize to the empty shape: {empty}"
 
 
+def _selfcheck_drop_land_specks() -> None:
+    """Anti-aliasing land-speck drop (generate_coastline_mask.drop_land_specks).
+
+    Board #3705 follow-up — the durable fix for the xD3DC0A "Western Ocean Mass"
+    1-px state: a finished fill exported to PNG can strand tiny near-white "islands"
+    in the sea, and left in the mask each ships as a permanent micro state (a
+    disconnected islet has no land neighbour to be merged away downstream). The drop
+    lives at the mask, the sole owner of land_sea_mask.png, upstream of the
+    sea/province cuts. Pins: sub-floor land components are reclassified as water
+    while a real island and every water pixel are untouched; the floor is exclusive
+    (a component exactly at min_px survives); min_px<=1 is a no-op; a seam-straddling
+    speck counts as one component under wrap_x; and two runs are byte-identical.
+    """
+    import generate_coastline_mask as gcm
+
+    quiet = lambda *_a, **_k: None
+    H, W = 12, 20
+    land = np.zeros((H, W), dtype=bool)
+    land[3:8, 3:8] = True        # 25-px real island — must survive
+    land[1, 15] = True           # 1-px speck
+    land[10, 2:4] = True         # 2-px speck
+    water0 = int((~land).sum())
+
+    cleaned, n_comp, n_px = gcm.drop_land_specks(land, gcm.SPECK_MAX_PX, wrap_x=False, log=quiet)
+    assert (n_comp, n_px) == (2, 3), f"expected 2 specks / 3 px dropped, got {n_comp}/{n_px}"
+    assert cleaned[3:8, 3:8].all(), "the real island must survive"
+    assert not cleaned[1, 15] and not cleaned[10, 2] and not cleaned[10, 3], "specks must be water"
+    assert int((~cleaned).sum()) == water0 + 3, "only the 3 speck px may flip to water"
+    again, n2, p2 = gcm.drop_land_specks(land, gcm.SPECK_MAX_PX, wrap_x=False, log=quiet)
+    assert np.array_equal(cleaned, again) and (n2, p2) == (2, 3), "two runs must be byte-identical"
+
+    # The floor is exclusive: a component of exactly min_px px is kept.
+    at_floor = np.zeros((H, W), dtype=bool)
+    at_floor[5, 5:9] = True       # exactly 4 px
+    kept, nf, pf = gcm.drop_land_specks(at_floor, 4, wrap_x=False, log=quiet)
+    assert (nf, pf) == (0, 0) and np.array_equal(kept, at_floor), "a component == min_px must survive"
+
+    # min_px <= 1 is a no-op (nothing is smaller than one pixel).
+    noop, n0, p0 = gcm.drop_land_specks(land, 1, wrap_x=False, log=quiet)
+    assert (n0, p0) == (0, 0) and np.array_equal(noop, land), "min_px<=1 must be a no-op"
+
+    # Wrap-aware: a 2-px speck straddling the x-seam is ONE component, dropped whole.
+    seam = np.zeros((H, W), dtype=bool)
+    seam[6, 0] = True
+    seam[6, W - 1] = True
+    wrapped, nw, pw = gcm.drop_land_specks(seam, gcm.SPECK_MAX_PX, wrap_x=True, log=quiet)
+    assert (nw, pw) == (1, 2), f"seam speck must be one 2-px component under wrap, got {nw}/{pw}"
+    assert not wrapped.any(), "the seam speck must be fully reclassified as water"
+    _flat, nf2, pf2 = gcm.drop_land_specks(seam, gcm.SPECK_MAX_PX, wrap_x=False, log=quiet)
+    assert (nf2, pf2) == (2, 2), "without wrap the seam speck is two 1-px components"
+
+
 def _selfcheck_seeded_cut() -> None:
     """Hub-anchor seeded province cut (#3665), in isolation (no golden).
 
@@ -2592,6 +2644,9 @@ def run_check() -> int:
     _selfcheck_merge_fused()
     print("land_provinces: merge-fused disconnected region cut per piece "
           "(archipelago kept whole via keep_whole) self-check passed.")
+    _selfcheck_drop_land_specks()
+    print("coastline_mask: land-speck drop (sub-floor components -> water, real island "
+          "kept, exclusive floor, wrap-aware, no-op guard) self-check passed.")
     _selfcheck_lakes()
     print("lakes: classify/label/assemble + sea_zones exclude + three-way validate + "
           "stateless checks + default.map lakes block + non-blocking oversized/junk-lake "

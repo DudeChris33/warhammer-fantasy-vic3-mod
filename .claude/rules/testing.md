@@ -75,7 +75,11 @@ tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png` — eit
 flood-filled from the user's traced coastline in `sources/land_sea_mask.png`, or,
 with `--from-fill`, read directly when that source is already a finished
 black/white land fill rather than a coastline trace; `--from-fill` also emits the
-companion `tools/derived/lake_mask.png`, board #3742 — see below), `python
+companion `tools/derived/lake_mask.png`, board #3742 — see below. Either mode
+drops isolated sub-4px land components to water first
+(`drop_land_specks`, board #3705 follow-up) — anti-aliased export specks that
+would otherwise ship as a permanent 1px micro state; `--speck-max` overrides the
+floor, 0/1 disables), `python
 tools/generate_heightmap.py` (which now *consumes* that mask — the old
 height-ramp mask derivation was deleted 2026-08-22), `python
 tools/generate_rivers.py`, `python tools/generate_state_labels.py`, `python
@@ -306,6 +310,13 @@ landmass dense with interior magenta is classed drawn and one bare of it a
 placeholder, subdividing a drawn region never crosses the magenta boundary
 while a placeholder region stays one province, every land pixel ends up
 labelled and no water pixel does, and two runs are byte-identical.
+`_selfcheck_drop_land_specks` (board #3705 follow-up) exercises
+`generate_coastline_mask.drop_land_specks` — the durable fix for the anti-aliased
+`xD3DC0A` "Western Ocean Mass" 1px state: sub-floor land components are
+reclassified as water while a real island and every water pixel are untouched, the
+floor is exclusive (a component of exactly `min_px` px survives), `min_px<=1` is a
+no-op, a seam-straddling speck counts as one component under `wrap_x`, and two runs
+are byte-identical.
 It also self-checks the optional tiny-island override merge
 (`land_provinces.island_override_zones` / `merge_island_overrides`, the fix for
 a disconnected islet that can never qualify for `cells.merge_small`'s
