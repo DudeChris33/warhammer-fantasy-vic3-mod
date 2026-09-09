@@ -198,22 +198,77 @@ def overlay_coast(canvas_rgb: np.ndarray, box: tuple[int, int, int, int], land: 
     canvas_rgb[edge] = COAST_RGB
 
 
-def draw_rings(canvas_rgb: np.ndarray, box: tuple[int, int, int, int], seed: dict) -> None:
-    """The seed's landmark dots as red rings at their canvas positions."""
+def _draw_ring(canvas_rgb: np.ndarray, cx: float, cy: float) -> None:
+    """One red ring centered at ``(cx, cy)`` in ``canvas_rgb``'s own pixel frame."""
     h, w = canvas_rgb.shape[:2]
     r_out_i = int(np.ceil(RING_R_OUT))
+    xa, xb = int(np.floor(cx - r_out_i)), int(np.ceil(cx + r_out_i)) + 1
+    ya, yb = int(np.floor(cy - r_out_i)), int(np.ceil(cy + r_out_i)) + 1
+    xa, ya = max(0, xa), max(0, ya)
+    xb, yb = min(w, xb), min(h, yb)
+    if xb <= xa or yb <= ya:
+        return
+    yy, xx = np.mgrid[ya:yb, xa:xb]
+    d2 = (xx + 0.5 - cx) ** 2 + (yy + 0.5 - cy) ** 2
+    ring = (d2 <= RING_R_OUT ** 2) & (d2 >= RING_R_IN ** 2)
+    canvas_rgb[ya:yb, xa:xb][ring] = RING_RGB
+
+
+def draw_rings(canvas_rgb: np.ndarray, box: tuple[int, int, int, int], seed: dict) -> None:
+    """The seed's landmark dots as red rings at their canvas positions."""
     for lm in seed["landmarks"]:
-        cx, cy = float(lm["canvas"][0]) - box[0], float(lm["canvas"][1]) - box[1]
-        xa, xb = int(np.floor(cx - r_out_i)), int(np.ceil(cx + r_out_i)) + 1
-        ya, yb = int(np.floor(cy - r_out_i)), int(np.ceil(cy + r_out_i)) + 1
-        xa, ya = max(0, xa), max(0, ya)
-        xb, yb = min(w, xb), min(h, yb)
-        if xb <= xa or yb <= ya:
-            continue
-        yy, xx = np.mgrid[ya:yb, xa:xb]
-        d2 = (xx + 0.5 - cx) ** 2 + (yy + 0.5 - cy) ** 2
-        ring = (d2 <= RING_R_OUT ** 2) & (d2 >= RING_R_IN ** 2)
-        canvas_rgb[ya:yb, xa:xb][ring] = RING_RGB
+        _draw_ring(canvas_rgb, float(lm["canvas"][0]) - box[0], float(lm["canvas"][1]) - box[1])
+
+
+def render_native(stem: str, out_file: str) -> Path:
+    """Render one tile at its own native source resolution instead of its
+    (typically much smaller) canvas footprint.
+
+    The only thing actually projected onto the tile is the coastline overlay,
+    so it is cheaper and sharper to sample the *mask* into source-pixel space
+    through the inverse warp than to resample the *source* down into canvas
+    space the way :func:`render` does. Landmark rings use the seed's own
+    ``source`` positions directly — exact, no warp needed. Only meaningful for
+    a single tile: a multi-tile ``--combined`` composite has no one shared
+    "native" resolution across siblings.
+    """
+    regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
+    land = raster.read_mask_png(MASK_PATH)
+    canvas_h, canvas_w = land.shape
+
+    seed = load_seed(stem)
+    reg = regs.get(seed["source"])
+    if reg is None:
+        raise SystemExit(f"{seed['source']}: no committed registration record")
+
+    rgb, _alpha = load_source_rgba(reg.source)
+    sh, sw = rgb.shape[:2]
+    log(f"native size   {sw}x{sh} (source) vs {out_name(stem)!r}'s canvas footprint")
+
+    inv = reproject.fit_warp_inverse(reg)
+    log(f"inverse warp  rms {inv.rms_px:.2f}px  max {inv.max_px:.2f}px (source px)")
+
+    land_f = land.astype(np.float64)
+    land_at_source = np.zeros((sh, sw), dtype=bool)
+    gx = (np.arange(sw, dtype=np.float64) + 0.5)[None, :]
+    for yb in range(0, sh, ROW_BLOCK):
+        ye = min(yb + ROW_BLOCK, sh)
+        gy = (np.arange(yb, ye, dtype=np.float64) + 0.5)[:, None]
+        cx, cy = inv.to_canvas_px(np.broadcast_to(gx, (ye - yb, sw)),
+                                  np.broadcast_to(gy, (ye - yb, sw)))
+        inside = (cx >= 0) & (cx <= canvas_w - 1) & (cy >= 0) & (cy <= canvas_h - 1)
+        v = reproject.resample(land_f, cx, cy, order=0)
+        land_at_source[yb:ye, :] = inside & (v > 0.5)
+
+    canvas_rgb = rgb.copy()
+    overlay_coast(canvas_rgb, (0, 0, sw, sh), land_at_source)
+    for lm in seed["landmarks"]:
+        _draw_ring(canvas_rgb, float(lm["source"][0]), float(lm["source"][1]))
+
+    out = DERIVED_DIR / out_file
+    Image.fromarray(canvas_rgb, mode="RGB").save(out)
+    log(f"wrote {out}")
+    return out
 
 
 def render(stems: list[str], out_file: str, box_pad: int = 0) -> Path:
@@ -263,6 +318,10 @@ def main(argv: list[str] | None = None) -> int:
                    help=f"composite the five parchment tiles -> {COMBINED_OUT}")
     p.add_argument("--all", action="store_true",
                    help="the five per-region renders plus the combined one")
+    p.add_argument("--native", action="store_true",
+                   help="render a single --seed at its own native source resolution "
+                        "(mask sampled onto it via the inverse warp) instead of its "
+                        "canvas footprint; not valid with --combined/--all")
     args = p.parse_args(argv)
 
     if not MASK_PATH.is_file():
@@ -273,6 +332,12 @@ def main(argv: list[str] | None = None) -> int:
         stems = list(FIVE_PARCHMENT)
     if not stems and not args.combined:
         raise SystemExit("nothing to render — pass --seed <stem>, --combined, or --all")
+    if args.native and (args.combined or args.all or len(stems) != 1):
+        raise SystemExit("--native needs exactly one --seed and no --combined/--all")
+
+    if args.native:
+        render_native(stems[0], out_name(stems[0]))
+        return 0
 
     for stem in stems:
         render([stem], out_name(stem))

@@ -261,6 +261,46 @@ class WarpFit:
         return out[:, 0].reshape(shape), out[:, 1].reshape(shape)
 
 
+@dataclass(frozen=True)
+class InverseWarpFit:
+    """Thin-plate-spline source -> canvas coordinate field — the reverse
+    direction of :class:`WarpFit`, through the same control points.
+
+    Lets a caller walk a source image at its own native resolution and sample
+    canvas-space data (e.g. the coastline mask) onto it, instead of resampling
+    the source down into its (typically much smaller) canvas footprint.
+    """
+
+    rbf: RBFInterpolator
+    rms_px: float
+    max_px: float
+
+    def to_canvas_px(self, source_x, source_y):
+        pts = np.column_stack([np.ravel(source_x), np.ravel(source_y)])
+        out = self.rbf(pts)
+        shape = np.shape(source_x)
+        return out[:, 0].reshape(shape), out[:, 1].reshape(shape)
+
+
+def fit_warp_inverse(reg: schema.SourceRegistration) -> InverseWarpFit:
+    """Fit the source -> canvas warp through the record's control points.
+
+    Same control points and kernel as :func:`fit_warp`, with source/canvas
+    swapped, so this is exact at every control point and follows the same
+    affine-trend-outside-the-hull behaviour.
+    """
+    if reg.projection != "control_point_warp":
+        raise RegistrationError(f"{reg.source}: fit_warp_inverse needs a control_point_warp record")
+    src = np.array([cp.source for cp in reg.control_points], dtype=np.float64)
+    dst = np.array([cp.canvas for cp in reg.control_points], dtype=np.float64)
+    if len(src) < 3:
+        raise RegistrationError(f"{reg.source}: a warp needs at least 3 control points")
+    rbf = RBFInterpolator(src, dst, kernel="thin_plate_spline", degree=1)
+    back = rbf(src)
+    r = (back - dst).ravel()
+    return InverseWarpFit(rbf, float(np.sqrt((r ** 2).mean())), float(np.abs(r).max()))
+
+
 def fit_warp(reg: schema.SourceRegistration) -> WarpFit:
     """Fit a smooth canvas -> source warp through the control points.
 
