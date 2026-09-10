@@ -1,0 +1,921 @@
+{
+  "source": "tww3_old_world_mod_parchment_full.png",
+  "dots_source": "tww3_old_world_mod_parchment - dots_7.png",
+  "master_shape": [
+    4096,
+    4096
+  ],
+  "objective": "landmarks",
+  "footprint_pad": 32,
+  "_comment": "PROVISIONAL. UNIFIED whole-master registration of the TWW3 Old World mod parchment (tww3_old_world_mod_parchment.png, 4096x4096), superseding the five separate per-region crop registrations (tww3_old_world_mod_parchment_{bretonnia,empire,kislev_norsca,dark_lands,badlands_nehekhara}) for whole-map work. Rather than a new crop, the user re-marked the SAME paired anchor dots the five per-region crops already carry directly on the uncropped master image, plus bridge dots not found in any per-region seed. DETECTION: a compact (4-16px, roughly square/plus-shaped) group of pixels in a colour that does not appear ANYWHERE in either original, undotted document (sources/originals/tww3_old_world_mod_parchment.png and sources/originals/terraqueous_globe_reprojected.png). Kept components need chroma (max-min channel) >=120 everywhere, OR >=40 outside the one known noisy rectangle (master px x:[3600,4100] y:[2250,3100], the Old Dwarf Road/Scalded Delta linework crossing where re-save/anti-alias noise concentrates) -- the pale-dot fix from the Parravon pass. Colour-paired between the two dots sheets (exact match, greedy nearest-predicted-position for a colour used 2+ times, a whole-set least-squares affine through the unambiguous single matches as the predictor). 2026-09-10: the dots_source sheets moved from sources/dots/ to sources/dots_4/ (the user's own reorganization into numbered dots_N/ batch folders -- unrelated to the '- dots_N' filename suffix, which is a per-region iteration counter, not a folder name); tools/worldgen/sources.py's SOURCE_SUBDIRS search list was extended to include dots_3/ and dots_4/ so dots_source (still a bare filename here) keeps resolving. The same move also carried an intentional revert: the 5 Dark Lands dots added in the immediately-prior pass (which had pushed this seed to 85 landmarks) are gone again, confirmed deliberate by the user rather than an accidental stale copy, and 'dark_lands_purple' (dropped in that same prior pass) is back. 81 landmarks total (66 matched to the five per-region seeds' own landmarks by exact canvas position, 15 new/bridge dots named 'c_<hex>', a repeated hex suffixed _2). objective=landmarks means NO silhouette fit (the drift-prone stage, and the whole-map silhouette fit is already known broken by the source's inconsistent inter-region scale -- see the landmark-accuracy-wall note), just thin-plate interpolation through the 81 dots. master_shape is the master's own (h,w)=(4096,4096); the source will be the dot-free master. This record only PLACES the whole parchment; no geometry is extracted yet.",
+  "_comment_lattice": "16x16 over the full 4096x4096 master (~256 master px horizontal/vertical spacing). 81 landmarks blanket every one of the five regions plus the inter-region seams, so a lattice this dense (vs. 6x6 for badlands_nehekhara alone) is warranted and, per the landmarks-objective rule (fit_registration.py), bounded to the landmark hull + pad rather than the full frame (4+ landmarks makes the thin-plate kernel term nonzero, which blows up past the dots' hull).",
+  "lattice": {
+    "nx": 16,
+    "ny": 16,
+    "inset": 0.02
+  },
+  "_comment_landmarks": "source px = dot centroid in the MASTER's own 4096x4096 frame (x,y); canvas px = the SAME dot's centroid read straight off terraqueous_globe_reprojected.png (= canvas space, no globe-fit indirection). See _comment above for the detection/pairing method (colour-not-in-either-original test, chroma>=120 floor OR chroma>=40 outside the one known noisy rectangle, greedy nearest-predicted-position pairing for a repeated colour). These 81 ARE the fit (not a held-out check) for objective=landmarks.",
+  "landmarks": [
+    {
+      "name": "badlands_nehekhara_blue",
+      "source": [
+        2806.5,
+        3344.5
+      ],
+      "canvas": [
+        4699.5,
+        1580.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_chartreuse",
+      "source": [
+        1324.5,
+        2568.5
+      ],
+      "canvas": [
+        3995.5,
+        1307.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_cyan",
+      "source": [
+        2987.5,
+        4022.5
+      ],
+      "canvas": [
+        4758.5,
+        1808.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_green",
+      "source": [
+        1295.5,
+        3600.5
+      ],
+      "canvas": [
+        4001.5,
+        1675.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_lavender",
+      "source": [
+        3031.5,
+        3796.5
+      ],
+      "canvas": [
+        4775.5,
+        1741.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_lime",
+      "source": [
+        1625.5,
+        3666.5
+      ],
+      "canvas": [
+        4105.5,
+        1697.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_maroon",
+      "source": [
+        1926.5,
+        2212.5
+      ],
+      "canvas": [
+        4260.5,
+        1177.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_mint",
+      "source": [
+        1530.5,
+        2284.5
+      ],
+      "canvas": [
+        4090.5,
+        1202.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_navy",
+      "source": [
+        1581.5,
+        2509.5
+      ],
+      "canvas": [
+        4115.5,
+        1286.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_olive",
+      "source": [
+        1093.5,
+        2668.5
+      ],
+      "canvas": [
+        3889.5,
+        1341.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_orange",
+      "source": [
+        1228.5,
+        2864.5
+      ],
+      "canvas": [
+        3982.5,
+        1413.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_pink",
+      "source": [
+        1842.5,
+        3487.5
+      ],
+      "canvas": [
+        4163.5,
+        1633.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_purple",
+      "source": [
+        2201.5,
+        1791.5
+      ],
+      "canvas": [
+        4393.5,
+        1016.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_red",
+      "source": [
+        2243.5,
+        3027.5
+      ],
+      "canvas": [
+        4513.5,
+        1478.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_rose",
+      "source": [
+        768.5,
+        3225.5
+      ],
+      "canvas": [
+        3833.5,
+        1538.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_sky",
+      "source": [
+        1923.5,
+        3706.5
+      ],
+      "canvas": [
+        4201.5,
+        1706.5
+      ]
+    },
+    {
+      "name": "badlands_nehekhara_teal",
+      "source": [
+        298.5,
+        2980.5
+      ],
+      "canvas": [
+        3686.5,
+        1449.5
+      ]
+    },
+    {
+      "name": "bretonnia_blue",
+      "source": [
+        925.5,
+        1807.5
+      ],
+      "canvas": [
+        3818.5,
+        1019.5
+      ]
+    },
+    {
+      "name": "bretonnia_cyan",
+      "source": [
+        220.5,
+        2186.5
+      ],
+      "canvas": [
+        3509.5,
+        1167.5
+      ]
+    },
+    {
+      "name": "bretonnia_green",
+      "source": [
+        1359.5,
+        2533.5
+      ],
+      "canvas": [
+        4015.5,
+        1297.5
+      ]
+    },
+    {
+      "name": "bretonnia_magenta",
+      "source": [
+        871.5,
+        1151.5
+      ],
+      "canvas": [
+        3795.5,
+        737.5
+      ]
+    },
+    {
+      "name": "bretonnia_pale_cyan",
+      "source": [
+        1372.5,
+        1591.5
+      ],
+      "canvas": [
+        4012.5,
+        925.5
+      ]
+    },
+    {
+      "name": "bretonnia_periwinkle",
+      "source": [
+        398.5,
+        1715.5
+      ],
+      "canvas": [
+        3586.5,
+        975.5
+      ]
+    },
+    {
+      "name": "bretonnia_pink",
+      "source": [
+        973.5,
+        2656.5
+      ],
+      "canvas": [
+        3827.5,
+        1331.5
+      ]
+    },
+    {
+      "name": "bretonnia_red",
+      "source": [
+        1217.5,
+        1087.5
+      ],
+      "canvas": [
+        3951.5,
+        713.5
+      ]
+    },
+    {
+      "name": "bretonnia_rose",
+      "source": [
+        787.5,
+        2460.5
+      ],
+      "canvas": [
+        3775.5,
+        1282.5
+      ]
+    },
+    {
+      "name": "bretonnia_violet",
+      "source": [
+        305.5,
+        1989.5
+      ],
+      "canvas": [
+        3529.5,
+        1076.5
+      ]
+    },
+    {
+      "name": "bretonnia_yellow",
+      "source": [
+        921.5,
+        1521.5
+      ],
+      "canvas": [
+        3817.5,
+        893.5
+      ]
+    },
+    {
+      "name": "c_003fff",
+      "source": [
+        2492.5,
+        2053.5
+      ],
+      "canvas": [
+        4528.5,
+        1130.5
+      ]
+    },
+    {
+      "name": "c_007fff",
+      "source": [
+        2258.5,
+        2535.5
+      ],
+      "canvas": [
+        4483.5,
+        1297.5
+      ]
+    },
+    {
+      "name": "c_00bf3f",
+      "source": [
+        968.5,
+        982.5
+      ],
+      "canvas": [
+        3842.5,
+        655.5
+      ]
+    },
+    {
+      "name": "c_00bf7f",
+      "source": [
+        1305.5,
+        1332.5
+      ],
+      "canvas": [
+        3987.5,
+        790.5
+      ]
+    },
+    {
+      "name": "c_00bf7f_2",
+      "source": [
+        4015.5,
+        1450.5
+      ],
+      "canvas": [
+        5127.5,
+        872.5
+      ]
+    },
+    {
+      "name": "c_7f003f",
+      "source": [
+        1974.5,
+        2903.5
+      ],
+      "canvas": [
+        4352.5,
+        1433.5
+      ]
+    },
+    {
+      "name": "c_7f007f",
+      "source": [
+        2243.5,
+        1708.5
+      ],
+      "canvas": [
+        4409.5,
+        981.5
+      ]
+    },
+    {
+      "name": "c_7fff00",
+      "source": [
+        2636.5,
+        884.5
+      ],
+      "canvas": [
+        4577.5,
+        608.5
+      ]
+    },
+    {
+      "name": "c_7fffff",
+      "source": [
+        2129.5,
+        1744.5
+      ],
+      "canvas": [
+        4361.5,
+        997.5
+      ]
+    },
+    {
+      "name": "c_bf00ff",
+      "source": [
+        2432.5,
+        1435.5
+      ],
+      "canvas": [
+        4491.5,
+        851.5
+      ]
+    },
+    {
+      "name": "c_ff00ff",
+      "source": [
+        654.5,
+        1208.5
+      ],
+      "canvas": [
+        3703.5,
+        764.5
+      ]
+    },
+    {
+      "name": "c_ff00ff_2",
+      "source": [
+        2472.5,
+        2937.5
+      ],
+      "canvas": [
+        4583.5,
+        1423.5
+      ]
+    },
+    {
+      "name": "c_ff7f00",
+      "source": [
+        193.5,
+        29.5
+      ],
+      "canvas": [
+        3482.5,
+        166.5
+      ]
+    },
+    {
+      "name": "c_ffff00",
+      "source": [
+        1661.5,
+        3028.5
+      ],
+      "canvas": [
+        4150.5,
+        1474.5
+      ]
+    },
+    {
+      "name": "c_ffff00_2",
+      "source": [
+        2017.5,
+        3475.5
+      ],
+      "canvas": [
+        4411.5,
+        1617.5
+      ]
+    },
+    {
+      "name": "dark_lands_chartreuse",
+      "source": [
+        3373.5,
+        1051.5
+      ],
+      "canvas": [
+        4897.5,
+        693.5
+      ]
+    },
+    {
+      "name": "dark_lands_cyan",
+      "source": [
+        3557.5,
+        3010.5
+      ],
+      "canvas": [
+        4946.5,
+        1469.5
+      ]
+    },
+    {
+      "name": "dark_lands_gold",
+      "source": [
+        3933.5,
+        2457.5
+      ],
+      "canvas": [
+        5094.5,
+        1276.5
+      ]
+    },
+    {
+      "name": "dark_lands_green",
+      "source": [
+        2979.5,
+        967.5
+      ],
+      "canvas": [
+        4735.5,
+        657.5
+      ]
+    },
+    {
+      "name": "dark_lands_hot_pink",
+      "source": [
+        3768.5,
+        2618.5
+      ],
+      "canvas": [
+        5023.5,
+        1336.5
+      ]
+    },
+    {
+      "name": "dark_lands_lime",
+      "source": [
+        2910.5,
+        2656.5
+      ],
+      "canvas": [
+        4782.5,
+        1287.5
+      ]
+    },
+    {
+      "name": "dark_lands_magenta",
+      "source": [
+        2524.5,
+        3134.5
+      ],
+      "canvas": [
+        4601.5,
+        1518.5
+      ]
+    },
+    {
+      "name": "dark_lands_navy",
+      "source": [
+        2691.5,
+        2701.5
+      ],
+      "canvas": [
+        4674.5,
+        1354.5
+      ]
+    },
+    {
+      "name": "dark_lands_orange",
+      "source": [
+        3134.5,
+        839.5
+      ],
+      "canvas": [
+        4797.5,
+        592.5
+      ]
+    },
+    {
+      "name": "dark_lands_orchid",
+      "source": [
+        3452.5,
+        2352.5
+      ],
+      "canvas": [
+        4872.5,
+        1153.5
+      ]
+    },
+    {
+      "name": "dark_lands_pale_turquoise",
+      "source": [
+        2850.5,
+        2329.5
+      ],
+      "canvas": [
+        4699.5,
+        1218.5
+      ]
+    },
+    {
+      "name": "dark_lands_periwinkle",
+      "source": [
+        2185.5,
+        2906.5
+      ],
+      "canvas": [
+        4492.5,
+        1437.5
+      ]
+    },
+    {
+      "name": "dark_lands_purple",
+      "source": [
+        3214.5,
+        2269.5
+      ],
+      "canvas": [
+        4787.5,
+        1146.5
+      ]
+    },
+    {
+      "name": "dark_lands_red",
+      "source": [
+        3483.5,
+        1322.5
+      ],
+      "canvas": [
+        4930.5,
+        813.5
+      ]
+    },
+    {
+      "name": "dark_lands_rose",
+      "source": [
+        4062.5,
+        2145.5
+      ],
+      "canvas": [
+        5150.5,
+        1154.5
+      ]
+    },
+    {
+      "name": "dark_lands_salmon",
+      "source": [
+        3996.5,
+        2927.5
+      ],
+      "canvas": [
+        5109.5,
+        1439.5
+      ]
+    },
+    {
+      "name": "dark_lands_spring_green",
+      "source": [
+        2835.5,
+        3125.5
+      ],
+      "canvas": [
+        4704.5,
+        1506.5
+      ]
+    },
+    {
+      "name": "dark_lands_teal",
+      "source": [
+        3166.5,
+        2653.5
+      ],
+      "canvas": [
+        4891.5,
+        1377.5
+      ]
+    },
+    {
+      "name": "dark_lands_violet",
+      "source": [
+        3854.5,
+        1891.5
+      ],
+      "canvas": [
+        5065.5,
+        1053.5
+      ]
+    },
+    {
+      "name": "dark_lands_yellow",
+      "source": [
+        3627.5,
+        2730.5
+      ],
+      "canvas": [
+        4981.5,
+        1371.5
+      ]
+    },
+    {
+      "name": "empire_green",
+      "source": [
+        1690.5,
+        1618.5
+      ],
+      "canvas": [
+        4160.5,
+        941.5
+      ]
+    },
+    {
+      "name": "empire_olive",
+      "source": [
+        1670.5,
+        1331.5
+      ],
+      "canvas": [
+        4158.5,
+        817.5
+      ]
+    },
+    {
+      "name": "empire_orange",
+      "source": [
+        2021.5,
+        1263.5
+      ],
+      "canvas": [
+        4302.5,
+        793.5
+      ]
+    },
+    {
+      "name": "empire_purple",
+      "source": [
+        1869.5,
+        917.5
+      ],
+      "canvas": [
+        4246.5,
+        631.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_azure",
+      "source": [
+        1793.5,
+        629.5
+      ],
+      "canvas": [
+        4212.5,
+        480.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_blue",
+      "source": [
+        572.5,
+        709.5
+      ],
+      "canvas": [
+        3830.5,
+        526.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_cornflower",
+      "source": [
+        2148.5,
+        1000.5
+      ],
+      "canvas": [
+        4361.5,
+        667.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_cyan",
+      "source": [
+        1815.5,
+        45.5
+      ],
+      "canvas": [
+        4291.5,
+        187.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_green",
+      "source": [
+        2085.5,
+        565.5
+      ],
+      "canvas": [
+        4338.5,
+        453.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_indigo",
+      "source": [
+        2237.5,
+        1163.5
+      ],
+      "canvas": [
+        4400.5,
+        745.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_lime",
+      "source": [
+        2350.5,
+        849.5
+      ],
+      "canvas": [
+        4456.5,
+        596.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_orange",
+      "source": [
+        2286.7,
+        239.7
+      ],
+      "canvas": [
+        4512.5,
+        300.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_periwinkle",
+      "source": [
+        2437.5,
+        523.5
+      ],
+      "canvas": [
+        4477.5,
+        429.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_red",
+      "source": [
+        2877.5,
+        703.5
+      ],
+      "canvas": [
+        4681.5,
+        517.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_rose",
+      "source": [
+        1024.5,
+        791.5
+      ],
+      "canvas": [
+        3964.5,
+        564.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_spring_green",
+      "source": [
+        1215.5,
+        193.5
+      ],
+      "canvas": [
+        4000.5,
+        269.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_violet",
+      "source": [
+        1570.5,
+        648.5
+      ],
+      "canvas": [
+        4130.5,
+        502.5
+      ]
+    },
+    {
+      "name": "kislev_norsca_yellow",
+      "source": [
+        2196.5,
+        1314.5
+      ],
+      "canvas": [
+        4382.5,
+        803.5
+      ]
+    }
+  ],
+  "record": {
+    "role": "old_world_boundary_network_full",
+    "precedence": 35,
+    "layer_precedence": {
+      "boundaries": 5,
+      "coastline": 5,
+      "relief": 5
+    },
+    "notes": "PROVISIONAL. Whole, uncropped TWW3 Old World mod parchment master (tww3_old_world_mod_parchment.png, 'The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_full (objective=landmarks; 81 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 16x16 lattice bounded to the landmark hull). Unlike the five per-region crops (each a dense network confined to its own arc), this is the SAME parchment placed as ONE piece, for consumers that need a single consistent master-frame warp instead of stitching five overlapping crops (e.g. tools/project_regions_unified.py). Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, unused while the five per-region records remain the active ones for project_regions.py / project_lines_onto_parchment.py. PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit."
+  }
+}
