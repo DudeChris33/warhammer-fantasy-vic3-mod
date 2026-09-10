@@ -51,10 +51,13 @@ REGISTRATION_DIR = TOOLS_DIR / "registration"
 #: ``sources/`` is organized into subfolders by role (raw references in
 #: ``originals/``, GIMP editable masters in ``gimp/``, GIMP-exported PNGs in
 #: ``gimp_exports/``, the paired-anchor-dot workflow's crops/examples in
-#: ``dots/``) — a file may live directly under ``sources/`` or in one of
-#: these. ``WIP/`` holds local scratch not tracked in the manifest, so it is
-#: deliberately excluded from both search and refresh.
-SOURCE_SUBDIRS = ("originals", "gimp", "gimp_exports", "dots")
+#: ``dots/`` — plus numbered ``dots_N/`` folders the user has since split
+#: later dot-marking batches into, e.g. ``dots_3/``, ``dots_4/``; unrelated to
+#: the "- dots_N" filename suffix, which is a per-region iteration counter,
+#: not a folder name) — a file may live directly under ``sources/`` or in one
+#: of these. ``WIP/`` holds local scratch not tracked in the manifest, so it
+#: is deliberately excluded from both search and refresh.
+SOURCE_SUBDIRS = ("originals", "gimp", "gimp_exports", "dots", "dots_3", "dots_4")
 
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"
