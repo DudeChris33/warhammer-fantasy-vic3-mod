@@ -8,8 +8,9 @@ Dark-Lands/Badlands render style: the clean source tile thin-plate-warped onto
 the canvas through its **committed** registration record (no re-fit — the point
 is to prove the committed placement still reproduces what the user accepted),
 composited over a neutral backdrop, with the committed
-``tools/derived/land_sea_mask.png`` coastline overlaid in cyan and the seed's
-landmark dots as red rings, cropped to the record's footprint.
+``tools/derived/land_sea_mask.png`` coastline overlaid in cyan, the committed
+``map_data/rivers.png`` river network overlaid in blue, and the seed's landmark
+dots as red rings, cropped to the record's footprint.
 
 Writes ``tools/derived/<region>_anchor_dot_warp_example.png``, where
 ``<region>`` is the seed stem with the shared ``tww3_old_world_mod_parchment_``
@@ -60,7 +61,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import derive_crop, land_provinces, raster, reproject, schema  # noqa: E402
+from worldgen import derive_crop, land_provinces, raster, reproject, rivers, schema  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
@@ -69,6 +70,9 @@ REGISTRATION_DIR = TOOLS_DIR / "registration"
 SOURCES_DIR = TOOLS_DIR.parent / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
+#: The committed, canvas-frame river network (board #3703) — same frame as the
+#: coastline mask, so it overlays with no warp of its own in render().
+RIVERS_PATH = TOOLS_DIR.parent / "map_data" / "rivers.png"
 #: The hand-drawn state-region magenta network — canvas-scale, same source
 #: tools/worldgen/land_provinces.py consumes for the real province cut.
 STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
@@ -78,6 +82,7 @@ CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 #: The accepted render style (measured off the committed Badlands example).
 BACKDROP_RGB = (60, 64, 72)
 COAST_RGB = (0, 255, 255)
+RIVER_RGB = (0, 0, 255)
 BORDER_RGB = (255, 0, 255)
 RING_RGB = (255, 0, 0)
 RING_R_OUT = 8.5
@@ -211,6 +216,24 @@ def overlay_coast(canvas_rgb: np.ndarray, box: tuple[int, int, int, int], land: 
     canvas_rgb[edge] = COAST_RGB
 
 
+def load_river_mask() -> np.ndarray:
+    """The committed river network (``map_data/rivers.png``) as a canvas-shaped
+    boolean mask — every pixel whose index is neither land (255) nor sea (254)
+    per :mod:`worldgen.rivers`' semantic palette (source/merge/split/width
+    indices all count as river)."""
+    idx, _palette = raster.read_indexed_png(RIVERS_PATH)
+    return ~np.isin(idx, [rivers.LAND, rivers.SEA])
+
+
+def overlay_rivers(canvas_rgb: np.ndarray, box: tuple[int, int, int, int], river: np.ndarray) -> None:
+    """Blue river network from the committed bitmap, drawn over the coastline."""
+    x0, y0, x1, y1 = box
+    sub = river[y0:y1, x0:x1]
+    if not sub.any():
+        return
+    canvas_rgb[sub] = RIVER_RGB
+
+
 def _draw_ring(canvas_rgb: np.ndarray, cx: float, cy: float) -> None:
     """One red ring centered at ``(cx, cy)`` in ``canvas_rgb``'s own pixel frame."""
     h, w = canvas_rgb.shape[:2]
@@ -282,7 +305,15 @@ def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Pa
         log(f"state borders {int(borders.sum()):,} canvas px")
         border_f = borders.astype(np.float64)
 
+    river = load_river_mask()
+    if river.shape != (canvas_h, canvas_w):
+        raise SystemExit(f"{RIVERS_PATH} is {river.shape[1]}x{river.shape[0]}, "
+                         f"expected {canvas_w}x{canvas_h} (the canvas frame)")
+    river_f = river.astype(np.float64)
+    log(f"rivers        {int(river.sum()):,} canvas px")
+
     land_at_source = np.zeros((sh, sw), dtype=bool)
+    river_at_source = np.zeros((sh, sw), dtype=bool)
     border_at_source = np.zeros((sh, sw), dtype=bool) if border_f is not None else None
     gx = (np.arange(sw, dtype=np.float64) + 0.5)[None, :]
     for yb in range(0, sh, ROW_BLOCK):
@@ -293,12 +324,15 @@ def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Pa
         inside = (cx >= 0) & (cx <= canvas_w - 1) & (cy >= 0) & (cy <= canvas_h - 1)
         v = reproject.resample(land_f, cx, cy, order=0)
         land_at_source[yb:ye, :] = inside & (v > 0.5)
+        rv = reproject.resample(river_f, cx, cy, order=0)
+        river_at_source[yb:ye, :] = inside & (rv > 0.5)
         if border_f is not None:
             bv = reproject.resample(border_f, cx, cy, order=0)
             border_at_source[yb:ye, :] = inside & (bv > 0.5)
 
     canvas_rgb = rgb.copy()
     overlay_coast(canvas_rgb, (0, 0, sw, sh), land_at_source)
+    canvas_rgb[river_at_source] = RIVER_RGB
     if border_at_source is not None:
         canvas_rgb[border_at_source] = BORDER_RGB
     for lm in seed["landmarks"]:
@@ -313,6 +347,11 @@ def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Pa
 def render(stems: list[str], out_file: str, box_pad: int = 0) -> Path:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     land = raster.read_mask_png(MASK_PATH)
+    river = load_river_mask()
+    if river.shape != land.shape:
+        raise SystemExit(f"{RIVERS_PATH} is {river.shape[1]}x{river.shape[0]}, "
+                         f"expected {land.shape[1]}x{land.shape[0]} (the canvas frame, "
+                         f"same as {MASK_PATH.name})")
 
     seeds = [load_seed(s) for s in stems]
     tile_regs = []
@@ -339,6 +378,7 @@ def render(stems: list[str], out_file: str, box_pad: int = 0) -> Path:
     log(f"tile coverage {100.0 * canvas_valid.mean():.1f}% of the render box")
 
     overlay_coast(canvas_rgb, box, land)
+    overlay_rivers(canvas_rgb, box, river)
     for seed in seeds:
         draw_rings(canvas_rgb, box, seed)
 
@@ -370,6 +410,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if not MASK_PATH.is_file():
         raise SystemExit(f"{MASK_PATH} not found — run tools/generate_heightmap.py first")
+    if not RIVERS_PATH.is_file():
+        raise SystemExit(f"{RIVERS_PATH} not found — run tools/generate_rivers.py first")
 
     stems = list(args.seed)
     if args.all:
