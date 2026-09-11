@@ -18,10 +18,14 @@ colour authority ``tools/derived/provinces_index.json`` and the sea canon
   named from its nearest continent in ``tools/config/out_of_scope_continents.json``.
   ``NNN`` is **not** the raw ``land_regions_index.json`` region label (flood-fill
   discovery order, geographically scattered) — see
-  ``worldgen.land_state_numbering.compute_state_numbers``, which Hilbert-orders
-  region centroids so neighbouring regions get numerically close ids (Chris,
-  2026-09-05). ``render_land_regions_preview.py`` imports the same function,
-  so its on-image numbers and CSV ids always match what actually ships here.
+  ``worldgen.land_state_numbering.assign_state_numbers`` (board #4188), which
+  keys each region's identity on its stable province-id set and matches it
+  against the committed ``tools/derived/land_state_ids.json`` so an unchanged
+  region keeps its number across regens (falling back to a fresh Hilbert-order
+  numbering, Chris 2026-09-05, only for a genuinely new region or the very
+  first generation). ``render_land_regions_preview.py`` imports the same
+  function fed identical raw centroids, so its on-image numbers and CSV ids
+  always match what actually ships here.
 * ``common/strategic_regions/<continent>_strategic_regions.txt`` — one
   ``region_<realm>`` block per in-scope realm, grouped by continent (mirroring
   vanilla's own ``europe_strategic_regions.txt``-style split; user decision
@@ -98,6 +102,12 @@ SEA_ZONES_INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
 #: (#3665). Present only when a hub worksheet exists; read here to pick each listed
 #: settlement's province as its state's hub and emit the HUB_NAME loc.
 HUB_ANCHORS_INDEX_PATH = DERIVED_DIR / "hub_anchors_index.json"
+#: Committed STATE-number identity authority (board #4188, mirrors #3705's
+#: provinces_index.json): state_number -> stable province-id set + a monotonic
+#: state_number_high_water. Written here, read read-only by
+#: render_land_regions_preview.py. Absent on the very first generation —
+#: land_state_numbering.assign_state_numbers falls back to a fresh bootstrap.
+LAND_STATE_IDS_PATH = DERIVED_DIR / "land_state_ids.json"
 PROVINCES_PNG_PATH = MOD_ROOT / "map_data" / "provinces.png"
 SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
 
@@ -366,8 +376,13 @@ def _render_hub_loc(entries: list[tuple[str, str]]) -> str:
 # ---------------------------------------------------------------------------
 
 def main(argv: list[str] | None = None) -> int:
-    argparse.ArgumentParser(description=__doc__,
-                            formatter_class=argparse.RawDescriptionHelpFormatter).parse_args(argv)
+    parser = argparse.ArgumentParser(description=__doc__,
+                                     formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser.add_argument("--reassign", action="store_true",
+                        help="Ignore the committed land_state_ids.json and renumber every STATE "
+                             "fresh in Hilbert order (board #4188's escape hatch — pair with a "
+                             "province-bitmap --reassign so every identity resets together).")
+    args = parser.parse_args(argv)
     t0 = time.time()
 
     for path in (LAND_REGIONS_INDEX_PATH, PROVINCES_INDEX_PATH, SEA_ZONES_INDEX_PATH, PROVINCES_PNG_PATH):
@@ -396,14 +411,21 @@ def main(argv: list[str] | None = None) -> int:
 
     # --- province info + region membership --------------------------------
     province_info: dict[int, dict] = {}
+    label_to_stable_id: dict[int, int] = {}
+    stable_id_area: dict[int, int] = {}
     for c in prov_index["cells"]:
         if c["kind"] != "land":
             continue
-        province_info[int(c["label"])] = {
+        label = int(c["label"])
+        stable_id = int(c["id"])
+        area = int(c["area"])
+        province_info[label] = {
             "color": tuple(int(v) for v in c["color"]),
-            "area": int(c["area"]),
+            "area": area,
             "coastal": bool(c["coastal"]),
         }
+        label_to_stable_id[label] = stable_id
+        stable_id_area[stable_id] = area
 
     region_of = np.zeros(n_land + 1, dtype=np.int64)
     for cell in land_regions["cells"]:
@@ -411,6 +433,16 @@ def main(argv: list[str] | None = None) -> int:
             region_of[p] = int(cell["region"])
     if not (region_of[1:] > 0).all():
         raise SystemExit("land_regions_index.json does not cover every land province")
+
+    # Each region's identity for stable STATE-number matching (board #4188):
+    # the set of its provinces' STABLE ids (worldgen.province_ids.assign's
+    # `id`), not the transient cut-order `label` — labels are only guaranteed
+    # stable within a single run.
+    region_province_ids: dict[int, set[int]] = {}
+    for cell in land_regions["cells"]:
+        region_province_ids[int(cell["region"])] = {
+            label_to_stable_id[p] for p in cell["provinces"]
+        }
 
     # --- province bitmap -> label array, then province + region centroids -
     rgb = raster.read_rgb_png(PROVINCES_PNG_PATH)
@@ -432,13 +464,26 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit("a land region has no pixels in provinces.png")
     log("province + region centroids computed", t0)
 
-    # --- geographic renumbering: raw region label -> STATE id/key ordinal --
+    # --- stable STATE numbering across regens (board #4188) ----------------
     # land_regions_index.json's "region" field is flood-fill discovery order,
-    # not geographic order (Chris, 2026-09-05: neighbouring regions were
-    # getting wildly different numbers) — Hilbert-order the centroids instead,
-    # shared with render_land_regions_preview.py so the two never drift apart.
-    state_number = land_state_numbering.compute_state_numbers(region_cx, region_cy, n_regions)
-    log("region ids Hilbert-ordered into STATE numbers", t0)
+    # not geographic order, so a raw Hilbert-order-every-run renumbering
+    # (Chris, 2026-09-05) made neighbouring regions numerically close — but
+    # renumbered EVERY region on EVERY run, rewriting almost every
+    # state_regions/*.txt file (and silently reattaching worksheet-carried
+    # canon names to the wrong region) even when only one region actually
+    # changed. assign_state_numbers keys each region's identity on its stable
+    # province-id set and matches it against the committed
+    # land_state_ids.json: an unchanged region keeps its number, a genuinely
+    # new region gets a fresh one, a removed region's number is retired for
+    # good. Shared with render_land_regions_preview.py (fed identical raw,
+    # unsnapped centroids) so the two never drift apart.
+    committed_state_ids = None
+    if LAND_STATE_IDS_PATH.is_file() and not args.reassign:
+        committed_state_ids = json.loads(LAND_STATE_IDS_PATH.read_text(encoding="utf-8"))
+    state_number, new_state_ids_index = land_state_numbering.assign_state_numbers(
+        region_cx, region_cy, n_regions, region_province_ids, stable_id_area,
+        committed_state_ids, reassign=args.reassign, log=lambda m: log(f"WARNING: {m}", t0))
+    log("region ids stably matched into STATE numbers", t0)
 
     # --- realm assignment from the strategic-regions painting (board #2931) -
     for path in (WORKSHEET_PATH, STRATEGIC_COLORS_PATH, STRATEGIC_PNG_PATH, OUT_OF_SCOPE_CONTINENTS_PATH):
@@ -761,6 +806,13 @@ def main(argv: list[str] | None = None) -> int:
     all_region_keys = {k for keys in keys_by_realm.values() for k in keys} | set(oos_keys)
     if all_region_keys != keys_emitted:
         raise SystemExit("invariant: every emitted land state must belong to exactly one strategic region")
+
+    # --- write the STATE-number identity index (board #4188) ---------------
+    new_state_ids_index = {"canvas": [CANVAS_W, CANVAS_H], **new_state_ids_index}
+    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    LAND_STATE_IDS_PATH.write_text(json.dumps(new_state_ids_index, indent=1) + "\n", encoding="utf-8")
+    log(f"wrote {LAND_STATE_IDS_PATH.relative_to(MOD_ROOT)}  "
+        f"(high-water {new_state_ids_index['state_number_high_water']})", t0)
 
     log(f"done: {n_blocks} land states, {len(naval_exit_choice)} coastal naval exits, "
         f"{len(keys_by_realm)} realm region(s) + out-of-scope catch-all, {len(loc_keys)} loc entries", t0)

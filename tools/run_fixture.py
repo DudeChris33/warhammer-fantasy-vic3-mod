@@ -2468,6 +2468,175 @@ def _selfcheck_sea_naming() -> None:
     assert mrg[1].key == "STATE_WHIRLPOOL_01" and mrg[2].key == "STATE_WHIRLPOOL_01", mrg
 
 
+def _selfcheck_land_state_numbers() -> None:
+    """Stable land STATE-number assignment across regens (board #4188), isolated.
+
+    Mirrors ``_selfcheck_stable_ids``'s coverage but at the land-REGION level:
+    ``worldgen.land_state_numbering.assign_state_numbers`` keys a region's
+    identity on its set of stable province ids (already stable per #3705,
+    ``_selfcheck_stable_ids`` above) rather than a pixel colour, area-weighted
+    overlap-matches it against a committed ``land_state_ids.json``-shaped
+    record, and issues/retires numbers exactly like ``province_ids.assign``
+    issues/retires colours+ids.
+
+    Committed baseline (mirrors the workspec's real Marches-of-Couronne/
+    Couronne example): three committed states —
+    A (number 10, provinces {1,2,3,4}), B (20, {5,6}), C (30, {7,8}) — with
+    areas 1-4 = 10 each, 5-6 = 15 each (a bigger polity), 7-8 = 5 each (a
+    smaller one), high-water 31.
+
+    (a) a no-op regen (identical province-id sets) keeps every number and is
+        byte-identical across two runs;
+    (b) removing a region (its committed provinces vanish from every current
+        region) retires its number — it never resurfaces this run;
+    (c) splitting A into a dominant piece (3 of its 4 provinces, by area) plus
+        a small new piece (A's 4th province + a genuinely new stable id, e.g.
+        from a province regen) keeps the dominant piece on number 10 and
+        gives the small piece a fresh number == the high-water, which then
+        advances by exactly one;
+    (d) merging B and C into one current region keeps the larger-overlap
+        (B, by area) number and retires the smaller (C);
+    (e) ``reassign=True`` (or no committed index at all) reproduces the pure
+        ``compute_state_numbers`` Hilbert-rank bootstrap, high-water ==
+        n_regions + 1;
+    (f) the assignment is byte-identical whether the committed states list is
+        fed in its original or reversed order, and across two runs — no
+        dict/set iteration leaks into a number choice;
+    (g) a non-empty committed index that matches **zero** current regions
+        (the un-paired-province-``--reassign`` signature) falls back to the
+        bootstrap branch instead of retiring every state, and calls the
+        ``log`` callback with a loud warning.
+    """
+    from worldgen import land_state_numbering as lsn
+
+    AREA = {1: 10, 2: 10, 3: 10, 4: 10, 5: 15, 6: 15, 7: 5, 8: 5, 99: 5}
+    COMMITTED = {
+        "state_number_high_water": 31,
+        "states": [
+            {"state_number": 10, "province_ids": [1, 2, 3, 4]},
+            {"state_number": 20, "province_ids": [5, 6]},
+            {"state_number": 30, "province_ids": [7, 8]},
+        ],
+    }
+
+    def _centroids(n: int) -> tuple[np.ndarray, np.ndarray]:
+        # Spread out, distinct, arbitrary — only their RELATIVE Hilbert order
+        # matters, and every scenario below has at most one unmatched region
+        # per committed state so the exact fresh-number order is never
+        # ambiguous.
+        cx = np.array([0.0] + [200.0 * i for i in range(1, n + 1)])
+        cy = np.array([0.0] + [100.0 * i for i in range(1, n + 1)])
+        return cx, cy
+
+    # (a) No-op: every current region equals a committed state's province set.
+    cx, cy = _centroids(3)
+    regions_a = {1: {1, 2, 3, 4}, 2: {5, 6}, 3: {7, 8}}
+    nums_a, idx_a = lsn.assign_state_numbers(cx, cy, 3, regions_a, AREA, COMMITTED)
+    assert int(nums_a[1]) == 10 and int(nums_a[2]) == 20 and int(nums_a[3]) == 30, \
+        f"(a) no-op must keep every committed number, got {nums_a[1:]}"
+    assert idx_a["state_number_high_water"] == 31, "(a) no-op high-water must stay 31"
+    nums_a2, idx_a2 = lsn.assign_state_numbers(cx, cy, 3, regions_a, AREA, COMMITTED)
+    assert np.array_equal(nums_a, nums_a2) and idx_a == idx_a2, "(a) two runs must be byte-identical"
+
+    # (b) Remove region B (provinces 5,6 vanish from every current region) —
+    #     its number (20) must not appear anywhere in the output.
+    cx2, cy2 = _centroids(2)
+    regions_b = {1: {1, 2, 3, 4}, 2: {7, 8}}
+    nums_b, idx_b = lsn.assign_state_numbers(cx2, cy2, 2, regions_b, AREA, COMMITTED)
+    assert int(nums_b[1]) == 10 and int(nums_b[2]) == 30, f"(b) survivors must keep their numbers, got {nums_b[1:]}"
+    assert 20 not in {s["state_number"] for s in idx_b["states"]}, "(b) removed number must be retired"
+    assert idx_b["state_number_high_water"] == 31, "(b) all-matched high-water must stay 31"
+
+    # (c) Split A: region1 = dominant 3/4 provinces (area 30), region2 = A's
+    #     4th province + a genuinely new stable id 99 (area 15) — region1
+    #     wins A's number by overlap, region2 is unmatched -> fresh number.
+    cx4, cy4 = _centroids(4)
+    regions_c = {1: {1, 2, 3}, 2: {4, 99}, 3: {5, 6}, 4: {7, 8}}
+    nums_c, idx_c = lsn.assign_state_numbers(cx4, cy4, 4, regions_c, AREA, COMMITTED)
+    assert int(nums_c[1]) == 10, f"(c) dominant split piece must keep the committed number, got {nums_c[1]}"
+    assert int(nums_c[2]) == 31, f"(c) new split piece must get the high-water number, got {nums_c[2]}"
+    assert int(nums_c[3]) == 20 and int(nums_c[4]) == 30, "(c) untouched regions must keep their numbers"
+    assert idx_c["state_number_high_water"] == 32, f"(c) high-water must advance by one, got {idx_c['state_number_high_water']}"
+
+    # (d) Merge B+C into one region: B contributes more area (30 vs 10) so the
+    #     merged region keeps B's number (20); C's (30) retires.
+    cx1, cy1 = _centroids(1)
+    regions_d = {1: {5, 6, 7, 8}}
+    nums_d, idx_d = lsn.assign_state_numbers(cx1, cy1, 1, regions_d, AREA, COMMITTED)
+    assert int(nums_d[1]) == 20, f"(d) merged region must keep the larger-overlap number, got {nums_d[1]}"
+    assert 30 not in {s["state_number"] for s in idx_d["states"]}, "(d) smaller-overlap number must retire"
+
+    # (e) reassign / no committed index -> pure compute_state_numbers bootstrap.
+    bootstrap_expected = lsn.compute_state_numbers(cx, cy, 3)
+    nums_none, idx_none = lsn.assign_state_numbers(cx, cy, 3, regions_a, AREA, None)
+    nums_reassign, idx_reassign = lsn.assign_state_numbers(cx, cy, 3, regions_a, AREA, COMMITTED, reassign=True)
+    assert np.array_equal(nums_none, bootstrap_expected), "(e) no-index must equal pure Hilbert bootstrap"
+    assert np.array_equal(nums_reassign, bootstrap_expected), "(e) reassign must equal pure Hilbert bootstrap"
+    assert idx_none == idx_reassign, "(e) no-index and reassign must produce the identical fresh index"
+    assert idx_none["state_number_high_water"] == 4, "(e) bootstrap high-water must be n_regions + 1"
+
+    # (f) Byte-identical under a shuffled committed-states order and across
+    #     two runs — no dict/set iteration leaks into a number choice.
+    shuffled = {"state_number_high_water": COMMITTED["state_number_high_water"],
+               "states": list(reversed(COMMITTED["states"]))}
+    nums_f1, idx_f1 = lsn.assign_state_numbers(cx, cy, 3, regions_a, AREA, shuffled)
+    nums_f2, idx_f2 = lsn.assign_state_numbers(cx, cy, 3, regions_a, AREA, COMMITTED)
+    assert np.array_equal(nums_f1, nums_f2) and idx_f1 == idx_f2, "(f) committed-state order must not affect the result"
+    nums_f3, idx_f3 = lsn.assign_state_numbers(cx, cy, 3, regions_a, AREA, shuffled)
+    assert np.array_equal(nums_f1, nums_f3) and idx_f1 == idx_f3, "(f) two runs must be byte-identical"
+
+    # (g) Zero-match safety net: current regions use province ids disjoint from
+    #     every committed state (the un-paired province `--reassign` signature)
+    #     -> falls back to the pure bootstrap instead of retiring every state,
+    #     and warns via the log callback.
+    regions_g = {1: {101, 102, 103, 104}, 2: {105, 106}, 3: {107, 108}}
+    area_g = {101: 10, 102: 10, 103: 10, 104: 10, 105: 15, 106: 15, 107: 5, 108: 5}
+    warnings: list[str] = []
+    nums_g, idx_g = lsn.assign_state_numbers(cx, cy, 3, regions_g, area_g, COMMITTED, log=warnings.append)
+    assert np.array_equal(nums_g, bootstrap_expected), "(g) zero-match must fall back to the pure Hilbert bootstrap"
+    assert idx_g["state_number_high_water"] == 4, "(g) zero-match fallback high-water must be n_regions + 1, not the committed one"
+    assert warnings and "ZERO regions" in warnings[0], "(g) a zero-match collapse must warn loudly"
+
+    # --- seed_land_state_ids: pure block parser on a tiny synthetic file ----
+    import seed_land_state_ids as seed
+
+    sample = (
+        'STATE_TEST_A = {\n'
+        '    id = 5\n'
+        '    subsistence_building = "building_subsistence_farm"\n'
+        '    provinces = { xAAAAAA xBBBBBB }\n'
+        '    city = xAAAAAA\n'
+        '    arable_land = 10\n'
+        '    capped_resources = {\n'
+        '        building_logging_camp = 10\n'
+        '    }\n'
+        '    naval_exit_id = 3005\n'
+        '}\n'
+        'STATE_TEST_B = {\n'
+        '    id = 6\n'
+        '    provinces = { xCCCCCC }\n'
+        '}\n'
+    )
+    parsed = seed._parse_state_file(sample)
+    assert parsed == [(5, ["xAAAAAA", "xBBBBBB"]), (6, ["xCCCCCC"])], (
+        f"seed parser must extract each STATE's id + province hexes, ignoring "
+        f"arable_land/naval_exit_id and the nested capped_resources block, got {parsed}"
+    )
+
+    fake_prov_index = {"cells": [
+        {"kind": "land", "hex": "xAAAAAA", "id": 101},
+        {"kind": "land", "hex": "xBBBBBB", "id": 102},
+        {"kind": "land", "hex": "xCCCCCC", "id": 103},
+        {"kind": "sea", "hex": "xDDDDDD", "id": 900},  # a sea cell must be ignored
+    ]}
+    built = seed._build_index_from_texts(fake_prov_index, {"05_test.txt": sample})
+    assert built["state_number_high_water"] == 7, f"seed high-water must be max(state number) + 1, got {built}"
+    assert built["states"] == [
+        {"state_number": 5, "province_ids": [101, 102]},
+        {"state_number": 6, "province_ids": [103]},
+    ], f"seed index must map each state's province hexes to their stable ids, sorted, got {built}"
+
+
 def _selfcheck_composite() -> None:
     """Precedence resolution + tie rejection for worldgen.composite."""
     shape = (4, 4)
@@ -2674,6 +2843,11 @@ def run_check() -> int:
     _selfcheck_sea_naming()
     print("sea_naming: canon plurality assignment + ordinal + override + zero-zone warning "
           "self-check passed.")
+    _selfcheck_land_state_numbers()
+    print("land_state_numbering: stable STATE-number assignment across regens (no-op kept, "
+          "remove retires, split keeps dominant + fresh piece, merge keeps larger overlap, "
+          "reassign/no-index bootstrap, order-invariant, zero-match safety net) + "
+          "seed_land_state_ids parser self-check passed.")
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
 

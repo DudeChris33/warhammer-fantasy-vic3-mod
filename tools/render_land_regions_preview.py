@@ -53,20 +53,22 @@ the five crops). ``name`` is the one column meant for a human to actually fill
 in — blank on a fresh run, and carried forward (never wiped) across re-runs so
 naming progress survives a later regeneration. ``region_id`` (2026-09-05: Chris
 noticed neighbouring regions had wildly different numbers and asked for this)
-is Hilbert-ordered by region centroid via
-``worldgen.land_state_numbering.compute_state_numbers`` — the same function
-``generate_land_regions.py`` uses for the actual ``STATE_LAND_NNN`` ids it
-ships, so a number here always means the same region there.
+comes from ``worldgen.land_state_numbering.assign_state_numbers`` (board
+#4188) — the same function ``generate_land_regions.py`` uses for the actual
+``STATE_LAND_NNN`` ids it ships (fed identical raw centroids and the same
+committed ``land_state_ids.json``, read-only here), so a number here always
+means the same region there, and — since #4188 — usually the *same number*
+across regens too, not just the same region.
 
-Ids are **not** a stable identity across regenerations, though — a region
-split or merge (the tiny-island fix already did this once; the border
-corrections Chris is drawing against ``old_world_state_regions.png`` will do
-it again) changes the region count, which reshuffles every Hilbert rank. So a
-name is never carried forward by matching the old ``region_id`` — it is
-relocated by ``anchor_x``/``anchor_y`` (every row's own centroid pixel,
-written every run), by looking up which region owns that physical spot on the
-CURRENT map. A name whose anchor pixel is no longer land drops with a loud
-stderr warning rather than silently reattaching to the wrong region.
+A region split or merge (the tiny-island fix already did this once; the
+border corrections Chris is drawing against ``old_world_state_regions.png``
+will do it again) can still retire or newly-issue a number even under stable
+assignment. So a name is never carried forward by matching the old
+``region_id`` — it is relocated by ``anchor_x``/``anchor_y`` (every row's own
+centroid pixel, written every run), by looking up which region owns that
+physical spot on the CURRENT map. A name whose anchor pixel is no longer land
+drops with a loud stderr warning rather than silently reattaching to the
+wrong region.
 
 Local-only output: embeds source pixels, so it lands under ``tools/derived/``,
 which ``tools/.gitignore`` excludes from the repo — never shipped content,
@@ -103,6 +105,10 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
+#: The committed STATE-number identity authority (board #4188) —
+#: generate_land_regions.py writes it; this render only ever reads it, so the
+#: on-image numbers/CSV ids always match what actually ships.
+LAND_STATE_IDS_PATH = DERIVED_DIR / "land_state_ids.json"
 
 OUT_PATH = DERIVED_DIR / "land_regions_preview.png"
 OUT_HALF_PATH = DERIVED_DIR / "land_regions_preview_half.png"
@@ -316,6 +322,16 @@ def main(argv: list[str] | None = None) -> int:
     n_land = int(prov_index["land_provinces"])
     n_regions = int(land_regions["regions"])
 
+    # Each region's stable-id identity + per-id area, for assign_state_numbers
+    # (board #4188) — the same construction generate_land_regions.py uses.
+    label_to_stable_id = {int(c["label"]): int(c["id"]) for c in prov_index["cells"] if c["kind"] == "land"}
+    stable_id_area = {int(c["id"]): int(c["area"]) for c in prov_index["cells"] if c["kind"] == "land"}
+    region_province_ids: dict[int, set[int]] = {}
+    for cell in land_regions["cells"]:
+        region_province_ids[int(cell["region"])] = {label_to_stable_id[p] for p in cell["provinces"]}
+    committed_state_ids = (json.loads(LAND_STATE_IDS_PATH.read_text(encoding="utf-8"))
+                           if LAND_STATE_IDS_PATH.is_file() else None)
+
     rgb = raster.read_rgb_png(PROVINCES_PATH)
     if rgb.shape[:2] != (CANVAS_H, CANVAS_W):
         raise SystemExit(f"{PROVINCES_PATH}: expected {CANVAS_W}x{CANVAS_H}, got "
@@ -326,12 +342,18 @@ def main(argv: list[str] | None = None) -> int:
     backdrop, placed = _parchment_drape(t0)
     on_parchment = _region_on_parchment(lab, placed, n_regions)
 
-    cx, cy = _region_centroids(lab, n_regions, CANVAS_W)
-    cx, cy = _snap_centroids_onto_region(lab, cx, cy, n_regions)
-    # Same Hilbert-ordered renumbering generate_land_regions.py uses for the
-    # emitted STATE_LAND_NNN ids, imported from the one shared place — so the
-    # number drawn here and written to the CSV always matches what shipped.
-    state_number = land_state_numbering.compute_state_numbers(cx, cy, n_regions)
+    raw_cx, raw_cy = _region_centroids(lab, n_regions, CANVAS_W)
+    # Same stable STATE-number assignment generate_land_regions.py uses (board
+    # #4188), fed the same RAW (unsnapped) centroids it uses — feeding a
+    # different centroid layer here would silently desync the Hilbert-ordered
+    # bootstrap/fresh-number paths from what the generator actually ships.
+    # Read-only: this render never writes land_state_ids.json.
+    state_number, _new_index = land_state_numbering.assign_state_numbers(
+        raw_cx, raw_cy, n_regions, region_province_ids, stable_id_area, committed_state_ids)
+    # Snapped centroids are for on-image label placement / the CSV anchor only
+    # (a circular-mean centroid can land off its own region) — never fed to
+    # numbering, which must match the generator's raw centroids exactly.
+    cx, cy = _snap_centroids_onto_region(lab, raw_cx, raw_cy, n_regions)
 
     palette = _spread_palette(n_regions)
     tint = palette[lab]

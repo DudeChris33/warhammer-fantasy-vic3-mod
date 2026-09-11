@@ -108,7 +108,23 @@ vote against `sources/terraqueous_globe_reprojected - strategic_regions.png`,
 classified by `tools/config/strategic_region_colors.json`) and canon name (from
 the persisted, hand-edited `tools/config/land_regions_worksheet.csv`, or its
 out-of-scope continent's name from `tools/config/out_of_scope_continents.json`);
-regenerate rather than hand-edit any of the emitted files.
+regenerate rather than hand-edit any of the emitted files. It also (board #4188)
+writes `tools/derived/land_state_ids.json` — the STATE-number identity
+authority (state_number → stable province-id set + a monotonic
+`state_number_high_water`), read read-only by `render_land_regions_preview.py`
+— a committed, regenerate-only index like `provinces_index.json`, never
+hand-edited. `tools/worldgen/land_state_numbering.assign_state_numbers`
+overlap-matches the current region cut against it so an unchanged region keeps
+its STATE number across regens instead of every region being renumbered fresh
+by Hilbert rank each run (the land-region mirror of #3705's stable province
+ids); it was seeded once from the already-shipped numbers with the one-time
+`python tools/seed_land_state_ids.py` (parses the committed
+`state_regions/*.txt` off a git ref — `HEAD` by default — never the working
+tree, so it can seed the clean baseline even mid-regen). `generate_land_regions.py`'s own `--reassign` flag forces a fresh Hilbert
+renumber and always pairs with a `generate_provinces.py --reassign` — running
+one without the other trips `assign_state_numbers`' zero-match safety net
+(loud warning, falls back to the bootstrap renumber rather than silently
+retiring every state).
 `map_data/province_terrains.txt` (board #2968) is the map-config counterpart,
 emitted by `python tools/generate_province_terrains.py` from
 `provinces_index.json`'s `cells` — one `x<HEX>="terrain"` line per province,
@@ -413,6 +429,24 @@ round-trip through `validate_map.validate_provinces` proves the new structural i
 invariants — positive, globally unique, a colour↔id bijection, and bounded by
 `id_high_water` — pass on a clean map and fire on a duplicate id, a non-positive
 id, and an id past the high-water.
+
+`_selfcheck_land_state_numbers` (board #4188) is the land-region mirror of the
+above, exercising `worldgen/land_state_numbering.assign_state_numbers` on a
+small synthetic committed `land_state_ids.json`-shaped record: a **no-op**
+regen (identical province-id sets) keeps every STATE number and is
+byte-identical across two runs; removing a region retires its number without
+disturbing any survivor; splitting a region lets the dominant-overlap piece
+(by province area) keep the committed number while the new piece gets a fresh
+one at the committed `state_number_high_water`; merging two committed regions
+into one keeps the larger-overlap number and retires the smaller; `reassign`
+(or no committed index) reproduces the pure `compute_state_numbers` Hilbert
+bootstrap; the assignment is order-invariant (a shuffled committed-states list
+changes nothing); and a non-empty committed index matching **zero** current
+regions (the un-paired province-`--reassign` signature) falls back to the
+bootstrap instead of retiring every state, warning loudly via its `log`
+callback. A companion check exercises `seed_land_state_ids`'s pure block
+parser + hex→stable-id mapping on a tiny synthetic state file (correctly
+skipping `arable_land`/`naval_exit_id` and a nested `capped_resources` block).
 
 ## Regression rule
 
