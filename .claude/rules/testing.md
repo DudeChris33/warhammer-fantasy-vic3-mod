@@ -86,6 +86,25 @@ tools/generate_rivers.py`, `python tools/generate_state_labels.py`, `python
 tools/generate_sea_zones.py` and `python tools/generate_provinces.py`, and re-run
 the checks above before committing. The mask moves first; every downstream layer
 is regenerated from it.
+**Sea-zone STATE id + key stability (board #4191).** `generate_sea_zones.py`
+overlap-matches the current `sea_zones.png` against the committed one via
+`worldgen/sea_state_ids.py` (the sea mirror of #3705's `province_ids.assign` and
+#4188's `land_state_numbering.assign_state_numbers`; identity is zone-layer pixel
+overlap, since it runs *before* `generate_provinces.py` and has no stable
+province id yet), so a geometry-unchanged zone keeps its committed `id` (3000+
+band) and — when its `display_name` is unchanged — its `STATE_<NAME>_NN` `key`
+verbatim; a new zone gets a fresh id above a monotonic `sea_id_high_water` + a
+fresh per-slug ordinal off `ordinal_high_water`; a removed zone's id/key retire
+permanently. The two high-waters are new regenerate-only top-level keys in
+`sea_zones_index.json` — **no new committed file, no seed script** (unlike #4188's
+`land_state_ids.json`; the sea index already carries per-zone `id`+`key`, and the
+high-water self-bootstraps from the dense committed ids on the first fixed run).
+`generate_sea_zones.py --reassign` (pair it with a province/land `--reassign`) is
+the byte-identical pre-#4191 label-order escape hatch; a zero-overlap collapse
+falls back to it with a loud warning. `generate_sea_regions.py` /
+`generate_land_regions.py` are unchanged (they read only `cells[].id`/`key`). Like
+#3705/#4188 this ships **tools-only** — no committed sea regen (that stays the
+user-gated visual step below).
 The sea engine files `map_data/state_regions/99_seas.txt`,
 `common/strategic_regions/water_strategic_regions.txt`, and `map_data/default.map`'s
 `sea_starts` block are emitted by `python tools/generate_sea_regions.py` (board
@@ -447,6 +466,26 @@ bootstrap instead of retiring every state, warning loudly via its `log`
 callback. A companion check exercises `seed_land_state_ids`'s pure block
 parser + hex→stable-id mapping on a tiny synthetic state file (correctly
 skipping `arable_land`/`naval_exit_id` and a nested `capped_resources` block).
+
+`_selfcheck_sea_state_ids` (board #4191) is the sea-zone mirror, exercising
+`worldgen/sea_state_ids.assign` on a small all-water synthetic zone layer (the
+`_selfcheck_sea_naming` fixture shape) with **pixel-overlap** identity: a
+**no-op** regen keeps every id+key and is byte-identical across two runs
+(high-waters unchanged); removing a zone retires its id+key without disturbing a
+survivor, and the high-water does not regress; a retired id is **never reused**
+(a later new zone lands strictly above the high-water, not in the freed slot); a
+new zone gets a fresh id at the high-water + a fresh non-colliding ordinal while
+unrelated zones stay put; a **renamed** matched zone re-derives its key but keeps
+its id, others byte-stable; **merged** zones keep a stable id and their shared
+config key across an unrelated removal; `reassign` / no committed baseline is the
+pre-#4191 label-order bootstrap (`id = SEA_ID_START + label - 1`, keys verbatim);
+the assignment is order-invariant (a shuffled committed cell list changes
+nothing) and deterministic across two runs; a **zero-overlap** collapse falls
+back to the bootstrap with a loud `log` warning; **2+ new zones sharing a
+brand-new slug** in one regen are all numbered (`_01`/`_02`, not bare + `_01`),
+byte-identical to a reassign of the same geometry; and a **digit-suffixed**
+display name ("Far Passage 3") recovers its slug via `_slugify`, not a
+trailing-digit strip that would corrupt another slug's high-water.
 
 ## Regression rule
 
