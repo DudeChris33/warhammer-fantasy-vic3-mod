@@ -290,10 +290,6 @@ region_gulf_of_naggarond = {
 	states = { STATE_GULF_OF_NAGGAROND }
 }
 
-region_gulf_of_pearls = {
-	states = { STATE_GULF_OF_PEARLS }
-}
-
 region_ind_southern_coast_placeholder = {
 	states = { STATE_IND_SOUTHERN_COAST_PLACEHOLDER }
 }

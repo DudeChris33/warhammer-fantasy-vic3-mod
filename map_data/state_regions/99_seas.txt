@@ -373,9 +373,9 @@ STATE_ABASKO_COAST = {
 	provinces = { xEA0027 }
 }
 
-STATE_GULF_OF_PEARLS = {
-	id = 3074
-	provinces = { x8837A0 }
+STATE_TILEAN_SEA = {
+	id = 3079
+	provinces = { x9F4CFD }
 }
 
 STATE_BAY_OF_QUIETUDE = {
@@ -396,11 +396,6 @@ STATE_SEA_OF_WRATH_03 = {
 STATE_SUNKEN_LANDS = {
 	id = 3078
 	provinces = { x011584 }
-}
-
-STATE_TILEAN_SEA = {
-	id = 3079
-	provinces = { x9F4CFD }
 }
 
 STATE_SEA_OF_RAGE_03 = {

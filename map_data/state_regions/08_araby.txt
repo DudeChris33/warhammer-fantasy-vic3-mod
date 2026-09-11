@@ -1,7 +1,7 @@
 ﻿STATE_HORN_OF_ARABY = {
     id = 112
     subsistence_building = "building_subsistence_farm"
-    provinces = { x149E7D x254B58 x2BB3DA x510D6F x766704 x8D7C61 xB2D5F6 xEF44E8 }
+    provinces = { x149E7D x254B58 x510D6F x766704 x8D7C61 xB2D5F6 xEF44E8 }
     city = x510D6F
     farm = x254B58
     mine = x8D7C61
