@@ -41,7 +41,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import cells, raster, schema, sea_naming, sea_zones, sources  # noqa: E402
+from worldgen import cells, raster, schema, sea_naming, sea_state_ids, sea_zones, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
@@ -81,6 +81,10 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--merge-floor", type=int, default=MERGE_FLOOR,
                     help=f"drop zone fragments below this many px (default {MERGE_FLOOR} = keep all "
                          f"regions the drawn lines make; raise it to swallow coastline offcuts)")
+    ap.add_argument("--reassign", action="store_true",
+                    help="re-allocate every sea-zone STATE id + key fresh in label order "
+                         "(pre-#4191 behaviour) instead of honouring the committed sea_zones.png/"
+                         "index — the deliberate escape hatch, pair it with a province --reassign")
     args = ap.parse_args(argv)
     merge_floor = args.merge_floor
     t0 = time.time()
@@ -134,6 +138,20 @@ def main(argv: list[str] | None = None) -> int:
     naming, impassable, merged = sea_naming.apply_naming_overrides(naming, zones, config)
     naming = sea_naming.rekey_by_display_name(naming, zones, merged)
 
+    # Stable STATE id + key across regens (board #4191): honour the committed
+    # sea_zones.png/index so a zone whose geometry is unchanged keeps its id, key
+    # and per-canon-sea ordinal even when other zones were added/removed. Read the
+    # committed baseline BEFORE overwriting the label PNG below (guard each input
+    # independently — a missing one selects the bootstrap == pre-#4191 behaviour).
+    committed_labels = cells.read_labels(LABELS_PATH) if LABELS_PATH.is_file() else None
+    committed_index = json.loads(INDEX_PATH.read_text(encoding="utf-8")) if INDEX_PATH.is_file() else None
+    id_of, key_of, sea_id_high_water, ordinal_high_water = sea_state_ids.assign(
+        zones, naming, merged, committed_labels, committed_index,
+        map_config.SEA_ID_START, reassign=args.reassign, log=log)
+    bootstrapped = args.reassign or committed_labels is None or committed_index is None
+    log(f"stable sea ids: high-water {sea_id_high_water}, {len(ordinal_high_water)} named slugs, "
+        f"{'fresh label order (reassign/bootstrap)' if bootstrapped else 'matched vs committed sea_zones.png'}", t0)
+
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     cells.write_labels(LABELS_PATH, zones)
     log(f"wrote {LABELS_PATH.relative_to(TOOLS_DIR.parent)}  ({n} sea zones)", t0)
@@ -142,15 +160,17 @@ def main(argv: list[str] | None = None) -> int:
         "canvas": [CANVAS_W, CANVAS_H],
         "sea_zones": n,
         "id_start": map_config.SEA_ID_START,
+        "sea_id_high_water": sea_id_high_water,
+        "ordinal_high_water": {slug: ordinal_high_water[slug] for slug in sorted(ordinal_high_water)},
         "source": SEA_ZONES_SOURCE,
         "config": SEA_ZONES_CONFIG.name,
         "cells": [
             {
                 "label": i,
-                "key": naming[i].key,
+                "key": key_of[i],
                 "sea_group": naming[i].sea_group,
                 "display_name": naming[i].display_name,
-                "id": map_config.SEA_ID_START + (i - 1),
+                "id": id_of[i],
                 "area": int(areas[i]),
                 "coastal": bool(coastal[i]),
                 "impassable": i in impassable,

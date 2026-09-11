@@ -2468,6 +2468,186 @@ def _selfcheck_sea_naming() -> None:
     assert mrg[1].key == "STATE_WHIRLPOOL_01" and mrg[2].key == "STATE_WHIRLPOOL_01", mrg
 
 
+def _selfcheck_sea_state_ids() -> None:
+    """Stable sea-zone STATE id + key assignment across regens (board #4191), isolated.
+
+    The sea mirror of ``_selfcheck_stable_ids`` / ``_selfcheck_land_state_numbers``:
+    ``worldgen.sea_state_ids.assign`` keys each zone's identity on **pixel overlap
+    of the current ``sea_zones.png`` against the committed one** (not a province id
+    — generate_sea_zones runs before generate_provinces), keeps a matched zone's
+    committed id + key verbatim (when its display name is unchanged), issues a
+    fresh id above a monotonic ``sea_id_high_water`` + a fresh per-slug ordinal for
+    a genuinely new zone, and retires a removed zone's id/key/ordinal for good.
+
+    All-water 8x40 canvas, side-by-side zones (the ``_selfcheck_sea_naming``
+    fixture shape). Scenarios (a)-(k) mirror the workspec's testing plan:
+    (a) no-op keeps every id+key, byte-identical across two runs, high-waters
+    unchanged; (b) remove retires a zone's id+key, high-water does not regress;
+    (c) a retired id is never reused; (d) a new zone gets a fresh id at the
+    high-water + a fresh non-colliding ordinal, unrelated zones stable; (e) a
+    renamed matched zone re-derives its key while keeping its id, others stable;
+    (f) merged zones keep a stable id and their shared config key across an
+    unrelated removal; (g) reassign / no committed baseline is the pre-#4191
+    label-order bootstrap; (h) shuffled committed order + two runs are
+    byte-identical; (i) zero-overlap falls back to bootstrap + a loud warning;
+    (j) 2+ new zones sharing a brand-new slug are all numbered (not bare + _01),
+    byte-identical to a reassign of the same geometry; (k) a digit-suffixed
+    display name recovers its slug via _slugify, not a trailing-digit strip.
+    """
+    from worldgen import sea_state_ids as ssi
+    from worldgen.sea_naming import SeaZoneName as SZ
+
+    H, W = 8, 40
+
+    def _layout(spec: dict[int, tuple[int, int]]) -> np.ndarray:
+        z = np.zeros((H, W), dtype=np.int32)
+        for lab, (a, b) in spec.items():
+            z[:, a:b] = lab
+        return z
+
+    def _index(id_of, key_of, naming, hw, ohw, labels):
+        return {
+            "cells": [{"label": l, "id": id_of[l], "key": key_of[l],
+                       "display_name": naming[l].display_name} for l in labels],
+            "sea_id_high_water": hw,
+            "ordinal_high_water": ohw,
+        }
+
+    # Committed baseline: four full-width zones, distinct display names.
+    zc = _layout({1: (0, 10), 2: (10, 20), 3: (20, 30), 4: (30, 40)})
+    nc = {1: SZ("STATE_ALPHA", "G", "Alpha"), 2: SZ("STATE_BETA", "G", "Beta"),
+          3: SZ("STATE_GAMMA", "G", "Gamma"), 4: SZ("STATE_DELTA", "G", "Delta")}
+    idc, keyc, hwc, ohwc = ssi.assign(zc, nc, set(), None, None, 3000)
+    assert idc == {1: 3000, 2: 3001, 3: 3002, 4: 3003}, f"bootstrap ids {idc}"
+    ci = _index(idc, keyc, nc, hwc, ohwc, range(1, 5))
+
+    # (a) no-op: identical geometry keeps every id + key; high-waters unchanged;
+    #     two runs byte-identical.
+    ida, keya, hwa, ohwa = ssi.assign(zc, nc, set(), zc, ci, 3000)
+    assert ida == idc and keya == keyc, f"(a) no-op must keep ids+keys, got {ida} {keya}"
+    assert hwa == hwc and ohwa == ohwc, f"(a) no-op high-waters must be unchanged, got {hwa} {ohwa}"
+    ida2, keya2, hwa2, ohwa2 = ssi.assign(zc, nc, set(), zc, ci, 3000)
+    assert (ida, keya, hwa, ohwa) == (ida2, keya2, hwa2, ohwa2), "(a) two runs must be byte-identical"
+
+    # (b) remove zone 4 (Delta): current has 3 zones overlapping committed 1,2,3.
+    zb = _layout({1: (0, 10), 2: (10, 20), 3: (20, 40)})
+    nb = {1: nc[1], 2: nc[2], 3: nc[3]}
+    idb, keyb, hwb, ohwb = ssi.assign(zb, nb, set(), zc, ci, 3000)
+    assert idb == {1: 3000, 2: 3001, 3: 3002}, f"(b) survivors keep ids, got {idb}"
+    assert 3003 not in idb.values(), "(b) removed id must retire"
+    assert "STATE_DELTA" not in keyb.values(), "(b) removed key must retire"
+    assert hwb == hwc, f"(b) high-water must not regress, got {hwb} (was {hwc})"
+
+    # (c) retired id not reused: committed WITHOUT delta (it retired), then a
+    #     genuinely new zone appears -> its id is the high-water (3004), never the
+    #     freed 3003.
+    ci_retired = _index(idb, keyb, nb, hwc, ohwb, range(1, 4))
+    zc2 = _layout({1: (0, 10), 2: (10, 20), 3: (20, 30), 4: (30, 40)})
+    nc2 = {1: nc[1], 2: nc[2], 3: nc[3], 4: SZ("STATE_EPSILON", "G", "Epsilon")}
+    idcc, keycc, hwcc, _ = ssi.assign(zc2, nc2, set(), zb, ci_retired, 3000)
+    assert idcc[4] == 3004, f"(c) new zone id must be the high-water 3004, not the freed 3003, got {idcc[4]}"
+    assert 3003 not in idcc.values(), "(c) the retired 3003 must never be reused"
+    assert hwcc == 3005, f"(c) high-water advances by one, got {hwcc}"
+
+    # (d) new zone: fresh id at the high-water (+1) + a fresh ordinal in its slug;
+    #     the three unchanged zones keep their ids/keys/ordinals.
+    zd = _layout({1: (0, 10), 2: (10, 20), 3: (20, 30), 4: (30, 35), 5: (35, 40)})
+    nd = {1: nc[1], 2: nc[2], 3: nc[3], 4: nc[4], 5: SZ("x", "G", "Newsea")}
+    idd, keyd, hwd, _ = ssi.assign(zd, nd, set(), zc, ci, 3000)
+    assert {idd[i] for i in (1, 2, 3, 4)} == {3000, 3001, 3002, 3003}, f"(d) old zones keep ids, got {idd}"
+    assert idd[5] == 3004 and hwd == 3005, f"(d) new zone at high-water, got id {idd[5]} hw {hwd}"
+    assert keyd[5] == "STATE_NEWSEA", f"(d) a lone new-slug zone gets a bare key, got {keyd[5]}"
+    assert keyd[1] == "STATE_ALPHA" and keyd[4] == "STATE_DELTA", "(d) unrelated keys stable"
+
+    # (e) rename matched zone 2: keeps its committed id, re-derives its key; every
+    #     other zone byte-stable.
+    ne = {1: nc[1], 2: SZ("ignored", "G", "Renamed"), 3: nc[3], 4: nc[4]}
+    ide, keye, _, _ = ssi.assign(zc, ne, set(), zc, ci, 3000)
+    assert ide == idc, f"(e) rename must keep all ids (geometry unchanged), got {ide}"
+    assert keye[2] == "STATE_RENAMED", f"(e) renamed zone re-derives its key, got {keye[2]}"
+    assert keye[1] == "STATE_ALPHA" and keye[3] == "STATE_GAMMA" and keye[4] == "STATE_DELTA", \
+        "(e) every other key byte-stable"
+
+    # (f) merge: committed zones 3,4 are a merge sharing STATE_MAELSTROM_01. A regen
+    #     removes the unrelated zone 1; the two merged zones keep their committed
+    #     ids (so the group's min(id) — the land naval_exit — stays put) and their
+    #     shared config key.
+    ncm = {1: nc[1], 2: nc[2],
+           3: SZ("STATE_MAELSTROM_01", "MAELSTROM", "The Maelstrom"),
+           4: SZ("STATE_MAELSTROM_01", "MAELSTROM", "The Maelstrom")}
+    idcm, keycm, hwcm, ohwcm = ssi.assign(zc, ncm, {3, 4}, None, None, 3000)
+    assert keycm[3] == "STATE_MAELSTROM_01" and keycm[4] == "STATE_MAELSTROM_01", keycm
+    cim = _index(idcm, keycm, ncm, hwcm, ohwcm, range(1, 5))
+    # current: zone 1 removed; the two merged bodies + Beta survive (same pixels).
+    zf = _layout({1: (10, 20), 2: (20, 30), 3: (30, 40)})
+    nf = {1: nc[2],
+          2: SZ("STATE_MAELSTROM_01", "MAELSTROM", "The Maelstrom"),
+          3: SZ("STATE_MAELSTROM_01", "MAELSTROM", "The Maelstrom")}
+    idf, keyf, _, _ = ssi.assign(zf, nf, {2, 3}, zc, cim, 3000)
+    assert idf[2] == 3002 and idf[3] == 3003, f"(f) merged zones keep their committed ids, got {idf}"
+    assert keyf[2] == "STATE_MAELSTROM_01" and keyf[3] == "STATE_MAELSTROM_01", \
+        f"(f) merged zones keep their shared config key, got {keyf}"
+    assert idf[1] == 3001, f"(f) surviving Beta keeps its id, got {idf[1]}"
+
+    # (g) reassign / no committed baseline -> pre-#4191 label-order bootstrap:
+    #     id = 3000 + label - 1, key = the naming key verbatim.
+    idg, keyg, hwg, _ = ssi.assign(zc, nc, set(), zc, ci, 3000, reassign=True)
+    assert idg == {l: 3000 + l - 1 for l in range(1, 5)}, f"(g) reassign ids must be label-order, got {idg}"
+    assert keyg == {l: nc[l].key for l in range(1, 5)}, f"(g) reassign keys must be verbatim, got {keyg}"
+    assert hwg == 3004, f"(g) reassign high-water == SEA_ID_START + n, got {hwg}"
+    idg2, keyg2, _, _ = ssi.assign(zc, nc, set(), None, None, 3000)
+    assert idg == idg2 and keyg == keyg2, "(g) reassign == no-committed-baseline bootstrap"
+
+    # (h) order-invariance + determinism: a shuffled committed cell list and two
+    #     runs produce byte-identical output.
+    ci_shuf = _index(idc, keyc, nc, hwc, ohwc, [4, 2, 1, 3])
+    idh, keyh, hwh, ohwh = ssi.assign(zc, nc, set(), zc, ci_shuf, 3000)
+    assert (idh, keyh, hwh, ohwh) == (ida, keya, hwa, ohwa), "(h) committed order must not affect the result"
+    idh2, keyh2, hwh2, ohwh2 = ssi.assign(zc, nc, set(), zc, ci_shuf, 3000)
+    assert (idh, keyh, hwh, ohwh) == (idh2, keyh2, hwh2, ohwh2), "(h) two runs must be byte-identical"
+
+    # (i) zero-overlap safety net: committed zones sit in disjoint rows from the
+    #     current ones (no pixel overlap) -> bootstrap fallback + a loud warning.
+    z_bottom = np.zeros((H, W), dtype=np.int32)
+    z_bottom[4:8, 0:20] = 1
+    z_bottom[4:8, 20:40] = 2
+    c_top = np.zeros((H, W), dtype=np.int32)
+    c_top[0:4, 0:20] = 1
+    c_top[0:4, 20:40] = 2
+    n_bottom = {1: SZ("STATE_A", "G", "A"), 2: SZ("STATE_B", "G", "B")}
+    ci_top = _index({1: 3000, 2: 3001}, {1: "STATE_A", 2: "STATE_B"}, n_bottom, 3002, {"A": 2, "B": 2}, [1, 2])
+    msgs: list[str] = []
+    idi, keyi, hwi, _ = ssi.assign(z_bottom, n_bottom, set(), c_top, ci_top, 3000, log=msgs.append)
+    assert idi == {1: 3000, 2: 3001}, f"(i) zero-overlap must bootstrap to label order, got {idi}"
+    assert msgs and "ZERO zones" in msgs[0], "(i) a zero-overlap collapse must warn loudly"
+
+    # (j) fresh multi-zone slug: two brand-new zones sharing a new display name in
+    #     one regen -> both numbered (_01/_02), NOT bare + _01; byte-identical to a
+    #     reassign of the same geometry for those labels.
+    zc3 = _layout({1: (0, 20), 2: (20, 40)})
+    nc3 = {1: SZ("STATE_A", "G", "A"), 2: SZ("STATE_B", "G", "B")}
+    idc3, keyc3, hwc3, ohwc3 = ssi.assign(zc3, nc3, set(), None, None, 3000)
+    ci3 = _index(idc3, keyc3, nc3, hwc3, ohwc3, range(1, 3))
+    zj = _layout({1: (0, 20), 2: (20, 30), 3: (30, 35), 4: (35, 40)})
+    nj = {1: SZ("STATE_A", "G", "A"), 2: SZ("STATE_B", "G", "B"),
+          3: SZ("STATE_TWIN_01", "G", "Twin"), 4: SZ("STATE_TWIN_02", "G", "Twin")}
+    idj, keyj, _, _ = ssi.assign(zj, nj, set(), zc3, ci3, 3000)
+    assert keyj[3] == "STATE_TWIN_01" and keyj[4] == "STATE_TWIN_02", \
+        f"(j) two new same-slug zones must both be numbered, got {keyj}"
+    idj_re, keyj_re, _, _ = ssi.assign(zj, nj, set(), zc3, ci3, 3000, reassign=True)
+    assert keyj_re[3] == keyj[3] and keyj_re[4] == keyj[4], "(j) matched fresh keys must equal a reassign of the same geometry"
+
+    # (k) digit-suffixed display name: "Far Passage 3" -> slug FAR_PASSAGE_3 (key
+    #     STATE_FAR_PASSAGE_3 is BARE, ordinal 1) recovered via _slugify, not a
+    #     trailing-digit strip that would corrupt slug FAR_PASSAGE's high-water.
+    ohw_k = ssi._seed_ordinal_high_water(
+        [{"key": "STATE_FAR_PASSAGE_3", "display_name": "Far Passage 3"}])
+    assert ohw_k == {"FAR_PASSAGE_3": 2}, f"(k) digit-suffixed slug must be FAR_PASSAGE_3 ordinal 1, got {ohw_k}"
+    ohw_k2 = ssi._seed_ordinal_high_water(
+        [{"key": "STATE_FAR_PASSAGE_02", "display_name": "Far Passage"}])
+    assert ohw_k2 == {"FAR_PASSAGE": 3}, f"(k) a genuine FAR_PASSAGE _02 stays its own slug, got {ohw_k2}"
+
+
 def _selfcheck_land_state_numbers() -> None:
     """Stable land STATE-number assignment across regens (board #4188), isolated.
 
@@ -2842,6 +3022,12 @@ def run_check() -> int:
           "self-check passed.")
     _selfcheck_sea_naming()
     print("sea_naming: canon plurality assignment + ordinal + override + zero-zone warning "
+          "self-check passed.")
+    _selfcheck_sea_state_ids()
+    print("sea_state_ids: stable sea-zone STATE id+key across regens (no-op kept, remove "
+          "retires, retired id never reused, new zone at high-water, rename re-derives key, "
+          "merge keeps id+shared key, reassign/no-baseline bootstrap, order-invariant, "
+          "zero-overlap safety net, fresh multi-zone slug numbered, digit-suffix slug) "
           "self-check passed.")
     _selfcheck_land_state_numbers()
     print("land_state_numbering: stable STATE-number assignment across regens (no-op kept, "
