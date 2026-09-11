@@ -293,7 +293,7 @@ def project(canvas_source: str, target_source: str, out_name: str,
         dx, dy = offsets[name]
         crop_alpha = crop_rgba[name][..., 3].astype(np.float32)
         ch, cw = crop_rgba[name].shape[:2]
-        inv = reproject.fit_warp_inverse(reg)
+        inv = reproject.fit_placement_inverse(reg)
         region = name.replace("tww3_old_world_mod_parchment_", "").replace(".png", "")
         log(f"  {region:<20} inverse warp rms {inv.rms_px:.2f}px max {inv.max_px:.2f}px (source px)")
 

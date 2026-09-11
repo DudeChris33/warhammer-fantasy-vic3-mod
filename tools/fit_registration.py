@@ -245,6 +245,31 @@ def fit_source(stem: str, log=print) -> dict:
 
     info: dict = {"landmarks": int(len(lm_src))}
 
+    if objective == "piecewise_affine":
+        # The landmark dots ARE the triangulation vertices — no lattice, no
+        # silhouette, no RBF. A piecewise-affine warp (reproject.fit_piecewise)
+        # is continuous across every shared triangle edge, so region-to-region
+        # seams cannot tear, and locally affine, so an abrupt inter-region scale
+        # change is absorbed by the straddling triangles instead of being smeared
+        # across the whole map the way one global thin-plate spline (the
+        # `landmarks` objective) is. Right for a scale-collage source like the
+        # TWW3 Old World mod parchment. Coverage is the convex hull of the dots;
+        # edge coverage is a dot-placement question, not a warp fallback. Emitting
+        # a lattice here would be wrong: lattice samples are interpolated, not real
+        # correspondences, and adding them as extra vertices would distort the
+        # piecewise map — so only the dots are emitted, and the fit is exact at
+        # every one of them by construction.
+        from scipy.spatial import Delaunay
+        tri = Delaunay(lm_canvas)
+        names = [lm["name"] for lm in seed["landmarks"]]
+        info["method"] = "piecewise-affine over the Delaunay triangulation of the landmark dots"
+        info["triangles"] = int(tri.simplices.shape[0])
+        log(f"triangulated {len(lm_src)} dots into {tri.simplices.shape[0]} triangles "
+            f"(master {master_shape[1]}x{master_shape[0]})")
+        return _emit(seed, lm_src, lm_canvas, info, log,
+                     notes=lambda i: names[i] if i < len(names) else f"pt {i}",
+                     projection="piecewise_affine_warp")
+
     if objective == "landmarks":
         # No measurable silhouette: interpolate the landmarks and stop. Exact at
         # every landmark.
@@ -422,10 +447,10 @@ def fit_source(stem: str, log=print) -> dict:
 
 
 def _emit(seed: dict, src_pts: np.ndarray, canvas_pts: np.ndarray, info: dict, log,
-          notes=lambda i: f"lattice {i}") -> dict:
+          notes=lambda i: f"lattice {i}", projection: str = "control_point_warp") -> dict:
     rec = dict(seed["record"])
     rec["source"] = seed["source"]
-    rec["projection"] = "control_point_warp"
+    rec["projection"] = projection
     # The footprint is *measured* from where the fit actually put the source,
     # not declared up front — a hand-written box would go stale the moment the
     # control points moved, and a stale footprint silently truncates the layer.

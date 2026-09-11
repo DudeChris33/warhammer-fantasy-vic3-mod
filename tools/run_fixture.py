@@ -2817,6 +2817,89 @@ def _selfcheck_land_state_numbers() -> None:
     ], f"seed index must map each state's province hexes to their stable ids, sorted, got {built}"
 
 
+def _selfcheck_piecewise_affine() -> None:
+    """The piecewise-affine warp projection (board: scale-collage registration).
+
+    A unit square with a displaced centre dot triangulates into four fan
+    triangles. The checks are the properties that make this projection the right
+    answer for a source whose regions are drawn at different scales:
+
+    * **Exact at every control point**, both directions (the fit IS the dots).
+    * **Locally affine, not globally smooth** — the centre maps where its dot
+      says, which a single affine/TPS through the corners cannot reproduce. This
+      is the "no inter-region skew" property.
+    * **Continuous across every triangle edge (no tearing)** — a dense grid over
+      the interior has no jump larger than the local Jacobian allows; a tear
+      would show a large adjacent-pixel discontinuity.
+    * **No data past the convex hull** — outside points read as the far-outside
+      sentinel so consumers drop them.
+    * **Deterministic** across two builds, and the **schema** accepts the new
+      projection while still rejecting fewer than three points.
+    """
+    canvas = np.array([[0, 0], [100, 0], [100, 100], [0, 100], [50, 50]], dtype=np.float64)
+    source = np.array([[0, 0], [100, 0], [100, 100], [0, 100], [70, 30]], dtype=np.float64)
+    rec = {
+        "source": "piecewise_selfcheck.png", "role": "test",
+        "projection": "piecewise_affine_warp", "footprint": [0, 0, 100, 100],
+        "precedence": 1,
+        "control_points": [
+            {"source": source[i].tolist(), "canvas": canvas[i].tolist(), "note": str(i)}
+            for i in range(len(canvas))
+        ],
+    }
+    reg = schema.SourceRegistration.from_dict(rec, "piecewise_selfcheck")
+    fit = reproject.fit_placement(reg)
+    inv = reproject.fit_placement_inverse(reg)
+
+    # Exact at every control point, both directions.
+    sx, sy = fit.to_source_px(canvas[:, 0], canvas[:, 1])
+    assert np.allclose(np.column_stack([sx, sy]), source, atol=1e-6), \
+        "piecewise forward not exact at the control points"
+    cx, cy = inv.to_canvas_px(source[:, 0], source[:, 1])
+    assert np.allclose(np.column_stack([cx, cy]), canvas, atol=1e-6), \
+        "piecewise inverse not exact at the control points"
+
+    # Locally affine: the centre lands on its dot (70,30). A least-squares affine
+    # through the four corners is the identity, which would put it at (50,50) —
+    # so piecewise is demonstrably NOT a single global affine.
+    csx, csy = fit.to_source_px(np.array([50.0]), np.array([50.0]))
+    assert abs(csx[0] - 70) < 1e-6 and abs(csy[0] - 30) < 1e-6, "centre not honoured"
+    assert np.hypot(csx[0] - 50, csy[0] - 50) > 20, "piecewise collapsed to the global affine"
+
+    # Continuous across the interior edges: a fine interior grid is finite
+    # everywhere (inside the hull) and has no tear — adjacent samples differ by
+    # less than the local scale allows. The max source scale here is ~1.4, the
+    # grid step ~0.49 px, so a genuine mapping stays well under 2 px; a torn edge
+    # would jump tens of px.
+    g = np.linspace(1.0, 99.0, 201)
+    gx, gy = np.meshgrid(g, g)
+    fx, fy = fit.to_source_px(gx, gy)
+    assert np.isfinite(fx).all() and (fx > -1e8).all(), "interior sampled the outside-hull sentinel"
+    jump = np.maximum(
+        np.abs(np.diff(fx, axis=1)).max() + np.abs(np.diff(fy, axis=1)).max(),
+        np.abs(np.diff(fx, axis=0)).max() + np.abs(np.diff(fy, axis=0)).max())
+    assert jump < 2.0, f"piecewise field tears across an edge (max adjacent jump {jump:.2f} px)"
+
+    # No data past the convex hull -> the far-outside sentinel, which every
+    # consumer's in-frame check drops.
+    ox, oy = fit.to_source_px(np.array([-25.0, 150.0]), np.array([-25.0, 150.0]))
+    assert (ox < -1e8).all(), "outside-hull query did not return the sentinel"
+
+    # Deterministic across two independent builds.
+    fit2 = reproject.fit_placement(reg)
+    fx2, fy2 = fit2.to_source_px(gx, gy)
+    assert np.array_equal(fx, fx2) and np.array_equal(fy, fy2), "piecewise fit is not deterministic"
+
+    # Schema: accepts the projection, still rejects fewer than three points.
+    raised = False
+    try:
+        schema.SourceRegistration.from_dict({**rec, "control_points": rec["control_points"][:2]},
+                                            "piecewise_selfcheck_short")
+    except schema.SchemaError:
+        raised = True
+    assert raised, "schema accepted a piecewise_affine_warp with fewer than 3 control points"
+
+
 def _selfcheck_composite() -> None:
     """Precedence resolution + tie rejection for worldgen.composite."""
     shape = (4, 4)
@@ -2963,6 +3046,9 @@ def run_check() -> int:
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")
+    _selfcheck_piecewise_affine()
+    print("reproject: piecewise-affine warp (exact dots, local scale, no-tear continuity, "
+          "outside-hull sentinel, determinism, schema) self-check passed.")
     _selfcheck_composite()
     print("composite: precedence + tie-rejection self-check passed.")
     _selfcheck_cells()

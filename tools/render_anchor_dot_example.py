@@ -291,7 +291,7 @@ def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Pa
     sh, sw = rgb.shape[:2]
     log(f"native size   {sw}x{sh} (source) vs {out_name(stem)!r}'s canvas footprint")
 
-    inv = reproject.fit_warp_inverse(reg)
+    inv = reproject.fit_placement_inverse(reg)
     log(f"inverse warp  rms {inv.rms_px:.2f}px  max {inv.max_px:.2f}px (source px)")
 
     land_f = land.astype(np.float64)

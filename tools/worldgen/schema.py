@@ -1379,21 +1379,38 @@ def _cross_check(states: list[State]) -> None:
 # inside the source image, footprint inside the canvas, source in the manifest).
 
 #: The projections the ingestion stage knows how to apply.
-#:  * ``natural_earth_2``    — the Terraqueous oval; NE II forward polynomial.
-#:  * ``equirectangular``    — already-rectangular sources (the satellite frame).
-#:  * ``control_point_warp`` — regional maps warped by a control-point field.
-#:  * ``frame_alias``        — a crop/rescale of another registered source; it
-#:                             borrows that source's control points rather than
-#:                             duplicating them (see :class:`FrameAlias`).
-PROJECTION_KINDS = ("natural_earth_2", "equirectangular", "control_point_warp", "frame_alias")
+#:  * ``natural_earth_2``      — the Terraqueous oval; NE II forward polynomial.
+#:  * ``equirectangular``      — already-rectangular sources (the satellite frame).
+#:  * ``control_point_warp``   — regional maps warped by a smooth (thin-plate)
+#:                               control-point field.
+#:  * ``piecewise_affine_warp``— control points warped by a piecewise-affine field
+#:                               over their Delaunay triangulation: continuous
+#:                               across every triangle edge (shared vertices, so
+#:                               seams cannot tear) but locally affine, so an
+#:                               abrupt inter-region scale change is absorbed by
+#:                               the straddling triangles instead of smeared across
+#:                               the whole map the way one global thin-plate spline
+#:                               does. Coverage is the convex hull of the points;
+#:                               outside it there is no data (see
+#:                               ``reproject.PiecewiseAffineFit``). Right for a
+#:                               scale-collage source (the TWW3 Old World mod
+#:                               parchment, whose regions are drawn at different
+#:                               scales).
+#:  * ``frame_alias``          — a crop/rescale of another registered source; it
+#:                               borrows that source's control points rather than
+#:                               duplicating them (see :class:`FrameAlias`).
+PROJECTION_KINDS = ("natural_earth_2", "equirectangular", "control_point_warp",
+                    "piecewise_affine_warp", "frame_alias")
 
 #: Minimum control points per projection. A control-point warp needs at least an
-#: affine's worth (3); the parametric projections need 2 to fit scale/placement;
-#: an alias needs none, because its placement comes entirely from its parent.
+#: affine's worth (3); a piecewise-affine warp needs at least one triangle (3);
+#: the parametric projections need 2 to fit scale/placement; an alias needs none,
+#: because its placement comes entirely from its parent.
 _MIN_CONTROL_POINTS = {
     "natural_earth_2": 2,
     "equirectangular": 2,
     "control_point_warp": 3,
+    "piecewise_affine_warp": 3,
     "frame_alias": 0,
 }
 

@@ -40,6 +40,7 @@ from dataclasses import dataclass
 import numpy as np
 from scipy import ndimage
 from scipy.interpolate import RBFInterpolator
+from scipy.spatial import Delaunay
 
 from config import canvas_frame
 from worldgen import schema
@@ -301,6 +302,105 @@ def fit_warp_inverse(reg: schema.SourceRegistration) -> InverseWarpFit:
     return InverseWarpFit(rbf, float(np.sqrt((r ** 2).mean())), float(np.abs(r).max()))
 
 
+# ---------------------------------------------------------------------------
+# Piecewise-affine warp (Delaunay triangulation of the control points)
+# ---------------------------------------------------------------------------
+
+#: Coordinate returned for a query point outside the triangulation's convex hull.
+#: A piecewise-affine field has no data past the hull (unlike a degree-1 thin-plate
+#: spline, which degrades into its affine trend), so those pixels must read as
+#: "outside the source frame" and be dropped. A large negative value survives both
+#: the comparison masks (``sx >= 0``) and the ``clip``/``astype`` paths every
+#: consumer already applies to keep a source inside its own frame.
+_OUTSIDE_HULL = -1.0e9
+
+
+def _bary_interp(tri: Delaunay, dst_pts: np.ndarray, qx, qy):
+    """Piecewise-affine interpolation of ``dst_pts`` over triangulation ``tri``.
+
+    ``tri`` is the Delaunay triangulation of the *from* points; ``dst_pts`` are the
+    matching *to* points (same row order as the points ``tri`` was built on). For
+    each query ``(qx, qy)`` the containing triangle's barycentric coordinates
+    weight its three ``dst_pts`` vertices — exact at every vertex, continuous
+    across every shared edge, and :data:`_OUTSIDE_HULL` past the convex hull.
+    """
+    shape = np.shape(qx)
+    q = np.column_stack([np.ravel(qx).astype(np.float64), np.ravel(qy).astype(np.float64)])
+    simp = tri.find_simplex(q)
+    out = np.full((q.shape[0], 2), _OUTSIDE_HULL, dtype=np.float64)
+    inside = simp >= 0
+    if inside.any():
+        T = tri.transform[simp[inside]]
+        d = q[inside] - T[:, 2]
+        b01 = np.einsum("mij,mj->mi", T[:, :2], d)
+        bary = np.column_stack([b01, 1.0 - b01.sum(axis=1)])
+        verts = tri.simplices[simp[inside]]
+        out[inside] = np.einsum("mi,mij->mj", bary, dst_pts[verts])
+    return out[:, 0].reshape(shape), out[:, 1].reshape(shape)
+
+
+@dataclass(frozen=True)
+class PiecewiseAffineFit:
+    """Piecewise-affine canvas -> source coordinate field.
+
+    Duck-type-compatible with :class:`WarpFit` (same ``to_source_px`` and
+    ``rms_px``/``max_px``), so every consumer that builds its field through
+    :func:`fit_placement`/:func:`fit_warp` works unchanged. The fit is exact at
+    every control point, hence ``rms_px == max_px == 0``.
+    """
+
+    tri: Delaunay
+    src: np.ndarray  # source px, one row per triangulation vertex
+    rms_px: float = 0.0
+    max_px: float = 0.0
+
+    def to_source_px(self, canvas_x, canvas_y):
+        return _bary_interp(self.tri, self.src, canvas_x, canvas_y)
+
+
+@dataclass(frozen=True)
+class InversePiecewiseAffineFit:
+    """Piecewise-affine source -> canvas field — the reverse of
+    :class:`PiecewiseAffineFit`, triangulated on the *source* points.
+
+    Its triangulation is independent of the forward one (Delaunay on the source
+    points, not the canvas points), exactly as :class:`InverseWarpFit` fits its own
+    reverse RBF rather than inverting the forward one; the two directions agree at
+    every control point and are each internally continuous.
+    """
+
+    tri: Delaunay
+    canvas: np.ndarray  # canvas px, one row per triangulation vertex
+    rms_px: float = 0.0
+    max_px: float = 0.0
+
+    def to_canvas_px(self, source_x, source_y):
+        return _bary_interp(self.tri, self.canvas, source_x, source_y)
+
+
+def fit_piecewise(reg: schema.SourceRegistration) -> PiecewiseAffineFit:
+    """Fit the canvas -> source piecewise-affine field through the control points."""
+    if reg.projection != "piecewise_affine_warp":
+        raise RegistrationError(f"{reg.source}: fit_piecewise needs a piecewise_affine_warp record")
+    src = np.array([cp.source for cp in reg.control_points], dtype=np.float64)
+    dst = np.array([cp.canvas for cp in reg.control_points], dtype=np.float64)
+    if len(src) < 3:
+        raise RegistrationError(f"{reg.source}: a warp needs at least 3 control points")
+    return PiecewiseAffineFit(Delaunay(dst), src)
+
+
+def fit_piecewise_inverse(reg: schema.SourceRegistration) -> InversePiecewiseAffineFit:
+    """Fit the source -> canvas piecewise-affine field (reverse direction)."""
+    if reg.projection != "piecewise_affine_warp":
+        raise RegistrationError(
+            f"{reg.source}: fit_piecewise_inverse needs a piecewise_affine_warp record")
+    src = np.array([cp.source for cp in reg.control_points], dtype=np.float64)
+    dst = np.array([cp.canvas for cp in reg.control_points], dtype=np.float64)
+    if len(src) < 3:
+        raise RegistrationError(f"{reg.source}: a warp needs at least 3 control points")
+    return InversePiecewiseAffineFit(Delaunay(src), dst)
+
+
 def fit_warp(reg: schema.SourceRegistration) -> WarpFit:
     """Fit a smooth canvas -> source warp through the control points.
 
@@ -380,7 +480,25 @@ def fit_placement(reg: schema.SourceRegistration,
         return fit_alias(reg, regs_by_source or {})
     if reg.projection == "control_point_warp":
         return fit_warp(reg)
+    if reg.projection == "piecewise_affine_warp":
+        return fit_piecewise(reg)
     return fit_parametric(reg)
+
+
+def fit_placement_inverse(reg: schema.SourceRegistration):
+    """The source -> canvas field (``to_canvas_px``) for a warp record.
+
+    The inverse mirror of :func:`fit_placement`: dispatches a ``control_point_warp``
+    to :class:`InverseWarpFit` and a ``piecewise_affine_warp`` to
+    :class:`InversePiecewiseAffineFit`. Only the warp kinds have a source->canvas
+    inverse; a parametric or alias record raises.
+    """
+    if reg.projection == "control_point_warp":
+        return fit_warp_inverse(reg)
+    if reg.projection == "piecewise_affine_warp":
+        return fit_piecewise_inverse(reg)
+    raise RegistrationError(
+        f"{reg.source}: no source->canvas inverse for projection '{reg.projection}'")
 
 
 # ---------------------------------------------------------------------------
