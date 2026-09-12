@@ -315,7 +315,24 @@ def fit_warp_inverse(reg: schema.SourceRegistration) -> InverseWarpFit:
 _OUTSIDE_HULL = -1.0e9
 
 
-def _bary_interp(tri: Delaunay, dst_pts: np.ndarray, qx, qy):
+def _affine_eval(tri: Delaunay, dst_pts: np.ndarray, simp: np.ndarray, q: np.ndarray) -> np.ndarray:
+    """Evaluate triangle ``simp[i]``'s own affine map at query point ``q[i]``.
+
+    The barycentric formula is valid (as an *extrapolation* of that triangle's
+    local affine map) for a query point outside the triangle too — nothing here
+    clamps the barycentric weights to ``[0, 1]``. Callers decide whether a given
+    ``simp``/``q`` pairing is a real "inside" hit or a deliberate extrapolation
+    (see :func:`_bary_interp`'s ``buffer_px``).
+    """
+    T = tri.transform[simp]
+    d = q - T[:, 2]
+    b01 = np.einsum("mij,mj->mi", T[:, :2], d)
+    bary = np.column_stack([b01, 1.0 - b01.sum(axis=1)])
+    verts = tri.simplices[simp]
+    return np.einsum("mi,mij->mj", bary, dst_pts[verts])
+
+
+def _bary_interp(tri: Delaunay, dst_pts: np.ndarray, qx, qy, buffer_px: float = 0.0):
     """Piecewise-affine interpolation of ``dst_pts`` over triangulation ``tri``.
 
     ``tri`` is the Delaunay triangulation of the *from* points; ``dst_pts`` are the
@@ -323,6 +340,17 @@ def _bary_interp(tri: Delaunay, dst_pts: np.ndarray, qx, qy):
     each query ``(qx, qy)`` the containing triangle's barycentric coordinates
     weight its three ``dst_pts`` vertices — exact at every vertex, continuous
     across every shared edge, and :data:`_OUTSIDE_HULL` past the convex hull.
+
+    ``buffer_px > 0`` softens only the *outer* edge of that cutoff: a query point
+    outside every triangle, but within ``buffer_px`` of the nearest **hull**
+    vertex (never an interior one — interior points are already covered by real
+    triangles), is placed by extrapolating that vertex's own incident triangle's
+    affine map past its true bounds (see :func:`_affine_eval`). This is a QA/
+    render-time convenience, not a real correspondence: accuracy past the hull is
+    unverified and degrades with distance from it, so ``buffer_px`` defaults to 0
+    (the strict, no-extrapolation behaviour) and every committed registration
+    record relies on that default — see the piecewise_affine_warp design note in
+    schema.py ("edge coverage is a dot-placement question, not a warp fallback").
     """
     shape = np.shape(qx)
     q = np.column_stack([np.ravel(qx).astype(np.float64), np.ravel(qy).astype(np.float64)])
@@ -330,12 +358,21 @@ def _bary_interp(tri: Delaunay, dst_pts: np.ndarray, qx, qy):
     out = np.full((q.shape[0], 2), _OUTSIDE_HULL, dtype=np.float64)
     inside = simp >= 0
     if inside.any():
-        T = tri.transform[simp[inside]]
-        d = q[inside] - T[:, 2]
-        b01 = np.einsum("mij,mj->mi", T[:, :2], d)
-        bary = np.column_stack([b01, 1.0 - b01.sum(axis=1)])
-        verts = tri.simplices[simp[inside]]
-        out[inside] = np.einsum("mi,mij->mj", bary, dst_pts[verts])
+        out[inside] = _affine_eval(tri, dst_pts, simp[inside], q[inside])
+    if buffer_px > 0 and (~inside).any():
+        from scipy.spatial import cKDTree
+
+        hull_verts = np.unique(tri.convex_hull.ravel())
+        incident = tri.vertex_to_simplex[hull_verts]
+        have_tri = incident >= 0
+        hull_verts, incident = hull_verts[have_tri], incident[have_tri]
+        if hull_verts.size:
+            outside_idx = np.nonzero(~inside)[0]
+            dist, nearest = cKDTree(tri.points[hull_verts]).query(q[outside_idx])
+            within = dist <= buffer_px
+            if within.any():
+                sel = outside_idx[within]
+                out[sel] = _affine_eval(tri, dst_pts, incident[nearest[within]], q[sel])
     return out[:, 0].reshape(shape), out[:, 1].reshape(shape)
 
 
@@ -353,9 +390,10 @@ class PiecewiseAffineFit:
     src: np.ndarray  # source px, one row per triangulation vertex
     rms_px: float = 0.0
     max_px: float = 0.0
+    buffer_px: float = 0.0  # outer-hull-only extrapolation margin; see _bary_interp
 
     def to_source_px(self, canvas_x, canvas_y):
-        return _bary_interp(self.tri, self.src, canvas_x, canvas_y)
+        return _bary_interp(self.tri, self.src, canvas_x, canvas_y, self.buffer_px)
 
 
 @dataclass(frozen=True)
@@ -373,24 +411,35 @@ class InversePiecewiseAffineFit:
     canvas: np.ndarray  # canvas px, one row per triangulation vertex
     rms_px: float = 0.0
     max_px: float = 0.0
+    buffer_px: float = 0.0  # outer-hull-only extrapolation margin; see _bary_interp
 
     def to_canvas_px(self, source_x, source_y):
-        return _bary_interp(self.tri, self.canvas, source_x, source_y)
+        return _bary_interp(self.tri, self.canvas, source_x, source_y, self.buffer_px)
 
 
-def fit_piecewise(reg: schema.SourceRegistration) -> PiecewiseAffineFit:
-    """Fit the canvas -> source piecewise-affine field through the control points."""
+def fit_piecewise(reg: schema.SourceRegistration, buffer_px: float = 0.0) -> PiecewiseAffineFit:
+    """Fit the canvas -> source piecewise-affine field through the control points.
+
+    ``buffer_px`` (default 0, the strict committed behaviour) softens only the
+    outer hull edge — see :func:`_bary_interp`. It is a render-time convenience
+    for QA consumers (``project_regions_unified.py --hull-buffer-px``), never
+    stored in a registration record.
+    """
     if reg.projection != "piecewise_affine_warp":
         raise RegistrationError(f"{reg.source}: fit_piecewise needs a piecewise_affine_warp record")
     src = np.array([cp.source for cp in reg.control_points], dtype=np.float64)
     dst = np.array([cp.canvas for cp in reg.control_points], dtype=np.float64)
     if len(src) < 3:
         raise RegistrationError(f"{reg.source}: a warp needs at least 3 control points")
-    return PiecewiseAffineFit(Delaunay(dst), src)
+    return PiecewiseAffineFit(Delaunay(dst), src, buffer_px=buffer_px)
 
 
-def fit_piecewise_inverse(reg: schema.SourceRegistration) -> InversePiecewiseAffineFit:
-    """Fit the source -> canvas piecewise-affine field (reverse direction)."""
+def fit_piecewise_inverse(reg: schema.SourceRegistration,
+                          buffer_px: float = 0.0) -> InversePiecewiseAffineFit:
+    """Fit the source -> canvas piecewise-affine field (reverse direction).
+
+    ``buffer_px`` — see :func:`fit_piecewise`.
+    """
     if reg.projection != "piecewise_affine_warp":
         raise RegistrationError(
             f"{reg.source}: fit_piecewise_inverse needs a piecewise_affine_warp record")
@@ -398,7 +447,7 @@ def fit_piecewise_inverse(reg: schema.SourceRegistration) -> InversePiecewiseAff
     dst = np.array([cp.canvas for cp in reg.control_points], dtype=np.float64)
     if len(src) < 3:
         raise RegistrationError(f"{reg.source}: a warp needs at least 3 control points")
-    return InversePiecewiseAffineFit(Delaunay(src), dst)
+    return InversePiecewiseAffineFit(Delaunay(src), dst, buffer_px=buffer_px)
 
 
 def fit_warp(reg: schema.SourceRegistration) -> WarpFit:
@@ -470,18 +519,21 @@ def fit_alias(reg: schema.SourceRegistration,
 
 
 def fit_placement(reg: schema.SourceRegistration,
-                  regs_by_source: dict[str, schema.SourceRegistration] | None = None):
+                  regs_by_source: dict[str, schema.SourceRegistration] | None = None,
+                  buffer_px: float = 0.0):
     """The canvas -> source field for any record kind.
 
     Returns a :class:`WarpFit`/:class:`AliasFit` (``to_source_px``) for the warp
     kinds, or a :class:`ParametricFit` (``to_source``) for the analytic ones.
+    ``buffer_px`` only affects a ``piecewise_affine_warp`` record — see
+    :func:`fit_piecewise`; every other kind ignores it.
     """
     if reg.is_alias:
         return fit_alias(reg, regs_by_source or {})
     if reg.projection == "control_point_warp":
         return fit_warp(reg)
     if reg.projection == "piecewise_affine_warp":
-        return fit_piecewise(reg)
+        return fit_piecewise(reg, buffer_px=buffer_px)
     return fit_parametric(reg)
 
 

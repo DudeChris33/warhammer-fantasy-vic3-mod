@@ -31,11 +31,23 @@ from the finished drape — every pixel further than ``--magenta-tol`` (Euclidea
 default 12) from pure magenta reverts to the globe — the same post-warp
 extraction ``project_regions.py`` uses (see :func:`extract_borders`).
 
+**Hull buffer.** ``--hull-buffer-px`` softens only the *outer* edge of the
+piecewise-affine warp's strict hull cutoff (see ``reproject._bary_interp``): a
+query point past every triangle, but within the given distance of the nearest
+hull vertex, is placed by extrapolating that vertex's own triangle rather than
+dropped. It is a QA-render convenience for judging content just past today's
+dot coverage — not a real correspondence, and never stored in the registration
+record itself; the principled fix for a systematic gap is still more dots
+(``tools/fit_registration.py --seed tww3_old_world_mod_parchment_full``).
+Defaults to 50px (``HULL_BUFFER_PX_DEFAULT`` — user-accepted by eye 2026-09-12,
+100px read as too much); pass 0 for the strict, no-extrapolation behaviour.
+
 Usage::
 
     python tools/project_regions_unified.py
     python tools/project_regions_unified.py --crop --pad 128
     python tools/project_regions_unified.py --borders-only
+    python tools/project_regions_unified.py --hull-buffer-px 100 --crop
 """
 
 from __future__ import annotations
@@ -80,6 +92,10 @@ ROW_BLOCK = 64
 CROP_PAD = 64
 #: Default Euclidean RGB tolerance for --borders-only's magenta match.
 MAGENTA_TOL_DEFAULT = 12.0
+#: Default --hull-buffer-px — accepted by eye (2026-09-12) against the then-current
+#: dot coverage; 100px read as too much, 50px looked right. Revisit if the dot
+#: coverage changes enough to change that judgment.
+HULL_BUFFER_PX_DEFAULT = 50.0
 
 OUT_PREFIX_DEFAULT = "old_world_state_regions_on_globe_unified"
 
@@ -104,11 +120,17 @@ def load_rgba(name: str) -> np.ndarray:
         return np.asarray(im.convert("RGBA"), dtype=np.uint8).copy()
 
 
-def footprint_box(reg: schema.SourceRegistration) -> tuple[int, int, int, int]:
-    """The registration's canvas footprint, clamped to the frame (canvas px)."""
+def footprint_box(reg: schema.SourceRegistration, pad: float = 0.0) -> tuple[int, int, int, int]:
+    """The registration's canvas footprint, clamped to the frame (canvas px).
+
+    ``pad`` grows the box by that many px on every side before clamping — needed
+    when ``--hull-buffer-px`` extrapolates past the registration's own footprint,
+    or the eval box itself would clip the extrapolated margin before the warp
+    ever gets a chance to place it.
+    """
     x0, y0, x1, y1 = reg.footprint
-    return (max(0, int(np.floor(x0))), max(0, int(np.floor(y0))),
-            min(CANVAS_W, int(np.ceil(x1))), min(CANVAS_H, int(np.ceil(y1))))
+    return (max(0, int(np.floor(x0 - pad))), max(0, int(np.floor(y0 - pad))),
+            min(CANVAS_W, int(np.ceil(x1 + pad))), min(CANVAS_H, int(np.ceil(y1 + pad))))
 
 
 def place_painting(fit, box: tuple[int, int, int, int], paint_rgba: np.ndarray,
@@ -209,7 +231,8 @@ def placement_box(placed: np.ndarray, pad: int) -> tuple[int, int, int, int]:
 def build(pad: int, out_prefix: str,
           paint_source: str = PAINT_SOURCE, overlay_coasts: bool = True,
           full_frame: bool = True, globe_source: str = GLOBE_SOURCE,
-          borders_only: bool = False, magenta_tol: float = MAGENTA_TOL_DEFAULT) -> Path:
+          borders_only: bool = False, magenta_tol: float = MAGENTA_TOL_DEFAULT,
+          hull_buffer_px: float = HULL_BUFFER_PX_DEFAULT) -> Path:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     if FULL_SOURCE not in regs:
         raise SystemExit(f"{FULL_SOURCE}: no committed registration record — "
@@ -231,10 +254,14 @@ def build(pad: int, out_prefix: str,
     log(f"painting {paint_rgba.shape[1]}x{paint_rgba.shape[0]}  "
         f"alpha-covered {painted_frac:.1f}%")
 
-    fit = reproject.fit_placement(reg, regs)
-    eval_box = footprint_box(reg)
+    fit = reproject.fit_placement(reg, regs, buffer_px=hull_buffer_px)
+    eval_box = footprint_box(reg, pad=hull_buffer_px)
     log(f"registration  {FULL_SOURCE} ({reg.projection})")
-    log(f"eval box      canvas {list(eval_box)} (the registration's own footprint — "
+    if hull_buffer_px > 0:
+        log(f"hull buffer   {hull_buffer_px:.0f}px past the outer hull edge only "
+            f"(extrapolated, not a real correspondence — see reproject._bary_interp)")
+    log(f"eval box      canvas {list(eval_box)} (the registration's own footprint"
+        f"{f' + {hull_buffer_px:.0f}px buffer' if hull_buffer_px > 0 else ''} — "
         f"the warp is never evaluated outside it)")
 
     canvas_rgb, placed = place_painting(fit, eval_box, paint_rgba, globe_rgb)
@@ -287,6 +314,13 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--magenta-tol", type=float, default=MAGENTA_TOL_DEFAULT,
                    help=f"--borders-only's Euclidean RGB match tolerance to pure magenta "
                         f"(default {MAGENTA_TOL_DEFAULT})")
+    p.add_argument("--hull-buffer-px", type=float, default=HULL_BUFFER_PX_DEFAULT,
+                   help="extrapolate this many canvas px past the OUTER hull edge only "
+                        "(nearest hull vertex's own triangle, unclamped) instead of the "
+                        "strict hull cutoff; a QA render convenience, not a real "
+                        f"correspondence — accuracy is unverified past the hull and "
+                        f"degrades with distance from it (default {HULL_BUFFER_PX_DEFAULT:.0f}, "
+                        f"pass 0 for the strict, no-extrapolation behaviour)")
     args = p.parse_args(argv)
 
     out_prefix = args.out_prefix
@@ -295,7 +329,8 @@ def main(argv: list[str] | None = None) -> int:
     build(args.pad, out_prefix,
           paint_source=args.paint, overlay_coasts=not args.no_coast,
           full_frame=not args.crop, globe_source=args.globe,
-          borders_only=args.borders_only, magenta_tol=args.magenta_tol)
+          borders_only=args.borders_only, magenta_tol=args.magenta_tol,
+          hull_buffer_px=args.hull_buffer_px)
     return 0
 
 
