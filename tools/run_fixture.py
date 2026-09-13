@@ -2279,6 +2279,50 @@ def _selfcheck_tww3_names() -> None:
     assert tnl.DROP_ROW == rcl.DROP_ROW and tnl.LOOKUP_SCALE == rcl.MASTER_TO_LOOKUP_SCALE, \
         "tww3_name_lookup and render_cr_lookup_overlay must share the row-drop and scale"
 
+    # --- the printed-label crop render (board #4414) ---------------------------
+    # It centres its crops through the SAME registration and master->campaign-map
+    # scale, so a divergence would silently show a reviewer different ground than
+    # the suggestion being checked. Unlike the lookup bitmap the text layer has no
+    # duplicate padding row, so it must carry no row-drop constant at all.
+    import render_tww3_text_crops as rtc
+    assert rtc.TEXT_SCALE == tnl.LOOKUP_SCALE, \
+        "text-crop tool must share the master->campaign-map scale"
+    assert rtc.TEXT_SIZE == tnl.LOOKUP_SIZE, \
+        "text layer and lookup share the 8192 campaign-map frame"
+    assert not hasattr(rtc, "DROP_ROW"), \
+        "cr_oldworld_map_text.png is 8192x8192 — no padding row to drop"
+
+    # The drift test itself, on synthetic hexes: a matching pair is clean, a
+    # mismatch flags, case never invents a phantom drift, and a row with no
+    # recorded colour cannot drift (there is nothing to disagree with).
+    assert rtc.is_anchor_drift("112233", "445566"), \
+        "a sampled colour differing from the row's own must flag ANCHOR DRIFT"
+    assert not rtc.is_anchor_drift("112233", "112233"), \
+        "an unchanged colour must not flag drift"
+    assert not rtc.is_anchor_drift("112233", "112233".lower()), \
+        "the hex comparison must be case-insensitive"
+    assert not rtc.is_anchor_drift("112233", ""), \
+        "a row carrying no colour cannot drift"
+
+    # The report-shape detector: each real shape recognised, and the anchorless
+    # --regions vote report refused by name rather than silently cropping nothing.
+    assert rtc.detect_report_kind(
+        ["region_id", "worksheet_name", "kind", "anchor_x", "anchor_y", "status",
+         "tww3_key", "tww3_slug", "hex", "margin_lookup_px", "agrees", "source"]
+    ) == rtc.KIND_ANCHORS
+    assert rtc.detect_report_kind(
+        ["tww3_key", "tww3_slug", "hex", "area_lookup_px", "anchor_x", "anchor_y",
+         "land_region_id", "status", "source"]
+    ) == rtc.KIND_HUBS
+    try:
+        rtc.detect_report_kind(["region_id", "worksheet_name", "area_px",
+                                "candidate_1", "fraction_1", "margin", "source"])
+    except SystemExit as exc:
+        assert "--regions" in str(exc), f"the vote report must be named: {exc}"
+    else:
+        raise AssertionError("a --regions vote report carries no anchors and must "
+                             "be refused explicitly")
+
 
 def _selfcheck_stable_ids() -> None:
     """Stable province colour+id assignment across regens (board #3705), isolated.
@@ -3245,7 +3289,9 @@ def run_check() -> int:
     print("tww3_names: region-table parser (metadata/blank rows skipped, order + row count, "
           "case-normalised colours, refuse dup-colour/malformed/blank/truncated/bad-header, "
           "black excluded from the index and returned by the water bank) + exact-hex "
-          "sampling + citation format + row-drop agreement with #4364 self-check passed.")
+          "sampling + citation format + row-drop agreement with #4364 + the #4414 "
+          "text-crop scale/frame agreement, drift test and report-shape detector "
+          "self-check passed.")
     _selfcheck_stable_ids()
     print("province_ids: stable colour+id across regens (no-op kept, remove retires, split "
           "keeps dominant + fresh piece, no sea/lake ripple, reassign fresh, order-invariant) "
