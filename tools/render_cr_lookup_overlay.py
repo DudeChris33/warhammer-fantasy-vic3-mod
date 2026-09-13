@@ -46,6 +46,22 @@ lookup-px (0.5 master-px) ambiguity, converted to actual canvas px through this
 registration's own measured master->canvas scale. It is sub-pixel at canvas
 resolution; see :func:`row_tie_canvas_px`.
 
+Scope filter (Chris, 2026-09-12)
+--------------------------------
+**Land not drawn in ``sources/originals/tww3_old_world_mod_parchment_cropped.png``
+is out of scope.** That file is the same 4096² master frame carrying the same
+art, with everything this mod does not cover erased to alpha 0 — an irregular
+*interior* shape, so its bounding box proves nothing and the **alpha channel** is
+the only real extent. Every canvas pixel this render would place is additionally
+tested against that alpha, through the same ``canvas -> master`` transform, and a
+pixel landing on an erased master pixel is dropped to void. This is a second,
+distinct exclusion from the hull footprint: the footprint bound says "the
+registration could not place this point at all", the scope mask says "it placed
+fine, on ground this mod does not cover". Both counts are reported separately in
+the fit report. Shares :data:`SCOPE_SOURCE` and the ``alpha > 0`` threshold with
+``tools/tww3_name_lookup.py`` (#4363) — the two tools warp through the identical
+registration and master->lookup scale and must agree about the same pixel.
+
 Colour handling (both disclosed in the fit report and the legend)
 -----------------------------------------------------------------
 * **Black (``000000``) is void**, not a region: the campaign map's sea and
@@ -109,6 +125,12 @@ COAST_SOURCE = "terraqueous_globe_reprojected - coasts.png"
 
 #: The registration record this projects through (see the PROVISIONAL note above).
 FULL_SOURCE = "tww3_old_world_mod_parchment_full.png"
+#: The scope authority (Chris, 2026-09-12): the same master frame and the same art
+#: as ``FULL_SOURCE``'s own source, with every area this mod does not cover erased
+#: to alpha 0. Its **alpha channel** is the extent — the opaque region is an
+#: irregular interior shape whose bounding box is the whole image. Identical
+#: constant and threshold to ``tools/tww3_name_lookup.py`` (#4363).
+SCOPE_SOURCE = "tww3_old_world_mod_parchment_cropped.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 #: The master frame's own size, in master px. The registration's control points
@@ -223,6 +245,31 @@ def load_lookup() -> np.ndarray:
     return arr
 
 
+def load_scope_mask() -> np.ndarray:
+    """``(4096, 4096)`` bool: True where this mod's scope covers the master frame.
+
+    Read from :data:`SCOPE_SOURCE`'s **alpha channel** (``alpha > 0``, matching
+    ``tools/tww3_name_lookup.py``). Required, not optional: without it the render
+    would keep painting the out-of-scope land Chris ruled out. A palette+
+    transparency PNG is converted via ``RGBA`` rather than read raw, so the
+    transparency reaches the alpha band however Pillow stored it.
+    """
+    path = sources_mod.resolve_source_path(SCOPE_SOURCE, SOURCES_DIR)
+    if not path.is_file():
+        raise SystemExit(
+            f"sources/{SCOPE_SOURCE} is missing — it is the scope authority "
+            f"(Chris, 2026-09-12: land not drawn there is out of scope) and this "
+            f"render must not paint regions without it")
+    with Image.open(path) as im:
+        if im.size != (MASTER_SIZE, MASTER_SIZE):
+            raise SystemExit(
+                f"{SCOPE_SOURCE} is {im.size[0]}x{im.size[1]}, expected "
+                f"{MASTER_SIZE}x{MASTER_SIZE} — the scope mask must share the master "
+                f"frame this registration places")
+        alpha = np.asarray(im.convert("RGBA"), dtype=np.uint8)[..., 3]
+    return alpha > 0
+
+
 def load_region_keys() -> dict[str, str]:
     """``hex -> region key`` from the TSV, excluding every black-colour row.
 
@@ -294,13 +341,20 @@ def row_tie_canvas_px(reg: schema.SourceRegistration) -> float:
     return (1.0 / MASTER_TO_LOOKUP_SCALE) * master_to_canvas_scale(reg)
 
 
-def place_lookup(fit, box: tuple[int, int, int, int],
-                 lookup: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    """Warp the lookup into canvas space. Returns ``(canvas_label_rgb, placed)``.
+def place_lookup(fit, box: tuple[int, int, int, int], lookup: np.ndarray,
+                 scope: np.ndarray) -> tuple[np.ndarray, np.ndarray, dict]:
+    """Warp the lookup into canvas space. Returns ``(label_rgb, placed, excluded)``.
 
-    ``placed`` is True where the warp landed inside the master frame AND the
-    sampled lookup colour is not void-black — so sea/off-map never counts as
-    placed content.
+    ``placed`` is True where the warp landed inside the master frame AND inside
+    this mod's scope (:data:`SCOPE_SOURCE`'s alpha, Chris 2026-09-12) AND the
+    sampled lookup colour is not void-black — so neither sea/off-map nor
+    out-of-scope land ever counts as placed content.
+
+    ``excluded`` reports the **scope** exclusion specifically (distinct from the
+    hull-footprint bound, which simply never enters this loop): ``px`` is how many
+    canvas pixels would have been painted but were dropped, and ``colours`` is the
+    set of packed region colours that appeared in them — some of which may also
+    survive elsewhere, so it is an upper bound on regions removed outright.
 
     **Nearest sampling, by direct integer indexing.** Unlike
     ``project_regions_unified.place_painting`` (which calls
@@ -314,6 +368,8 @@ def place_lookup(fit, box: tuple[int, int, int, int],
     """
     label = np.zeros((CANVAS_H, CANVAS_W, 3), dtype=np.uint8)
     placed = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
+    oos_px = 0
+    oos_colours: set[int] = set()
 
     bx0, by0, bx1, by1 = box
     gx = (np.arange(bx0, bx1, dtype=np.float64) + 0.5)[None, :]
@@ -334,13 +390,27 @@ def place_lookup(fit, box: tuple[int, int, int, int],
 
         non_void = (block[..., 0] != VOID_RGB[0]) | (block[..., 1] != VOID_RGB[1]) \
             | (block[..., 2] != VOID_RGB[2])
-        valid = in_master & non_void
+        paintable = in_master & non_void
+
+        # Scope gate (Chris, 2026-09-12): the master pixel this canvas point maps
+        # to must be drawn in SCOPE_SOURCE. Indices are clipped only so the gather
+        # is legal off-frame; in_master already excludes those points.
+        mxi = np.clip(np.rint(np.where(in_master, mx, 0.0)), 0, MASTER_SIZE - 1).astype(np.int32)
+        myi = np.clip(np.rint(np.where(in_master, my, 0.0)), 0, MASTER_SIZE - 1).astype(np.int32)
+        in_scope = scope[myi, mxi]
+
+        dropped = paintable & ~in_scope
+        if dropped.any():
+            oos_px += int(dropped.sum())
+            oos_colours.update(np.unique(pack(block[dropped])).tolist())
+
+        valid = paintable & in_scope
         if not valid.any():
             continue
         label[yb:ye, bx0:bx1][valid] = block[valid]
         placed[yb:ye, bx0:bx1] |= valid
 
-    return label, placed
+    return label, placed, {"px": oos_px, "colours": oos_colours}
 
 
 def pack(label: np.ndarray) -> np.ndarray:
@@ -690,7 +760,7 @@ def verify_lookup_coregistration(samples: int = 20000) -> int:
 # ---------------------------------------------------------------------------
 
 def fit_report(label: np.ndarray, placed: np.ndarray, keys: dict[str, str],
-               reg: schema.SourceRegistration) -> dict:
+               reg: schema.SourceRegistration, excluded: dict, scope: np.ndarray) -> dict:
     """Print, and return for the sidecar, what actually landed on the canvas."""
     packed = pack(label)[placed]
     colours, counts = np.unique(packed, return_counts=True)
@@ -698,6 +768,11 @@ def fit_report(label: np.ndarray, placed: np.ndarray, keys: dict[str, str],
     keyed = sum(1 for hx in hexes if hx in keys)
     unkeyed = [hx for hx in hexes if hx not in keys]
     unkeyed_px = int(counts[[hx not in keys for hx in hexes]].sum()) if unkeyed else 0
+
+    surviving = set(colours.tolist())
+    oos_colours = excluded["colours"]
+    oos_only = sorted(oos_colours - surviving)
+    oos_keyed = sum(1 for c in oos_only if unpack_hex(c) in keys)
 
     pct = np.percentile(counts, [1, 5, 50, 95]) if counts.size else np.zeros(4)
     n_landmarks = len(reg.control_points)
@@ -715,6 +790,13 @@ def fit_report(label: np.ndarray, placed: np.ndarray, keys: dict[str, str],
         f"({100.0 * placed.mean():.3f}% of the {CANVAS_W}x{CANVAS_H} frame)")
     log(f"  regions >=1px     {colours.size:,} of the bitmap's own non-black regions "
         f"({keyed:,} carry a TSV key)")
+    log(f"  scope excluded    {excluded['px']:,} canvas px dropped for landing outside "
+        f"{SCOPE_SOURCE}'s opaque extent ({100.0 * scope.mean():.1f}% of the master "
+        f"frame is in scope) — Chris, 2026-09-12. {len(oos_colours):,} region colour(s) "
+        f"appeared in the dropped pixels; {len(oos_only):,} of those are now gone from "
+        f"the render entirely ({oos_keyed:,} of them carry a TSV key), the rest survive "
+        f"where they also cover in-scope ground. Distinct from the hull-footprint bound, "
+        f"which excludes points the registration cannot place at all")
     log(f"  region area px    p1 {pct[0]:.0f}  p5 {pct[1]:.0f}  p50 {pct[2]:.0f}  "
         f"p95 {pct[3]:.0f}")
     log(f"  small regions     <25px {int((counts < 25).sum()):,}   "
@@ -746,6 +828,13 @@ def fit_report(label: np.ndarray, placed: np.ndarray, keys: dict[str, str],
         "placed_px": int(placed.sum()),
         "regions_placed": int(colours.size),
         "regions_placed_keyed": int(keyed),
+        "scope_source": SCOPE_SOURCE,
+        "scope_master_fraction": float(scope.mean()),
+        "scope_excluded_px": int(excluded["px"]),
+        "scope_excluded_colours_touched": len(oos_colours),
+        "scope_excluded_colours_removed": len(oos_only),
+        "scope_excluded_colours_removed_keyed": int(oos_keyed),
+        "scope_excluded_colours_removed_hex": [unpack_hex(c) for c in oos_only],
         "region_area_percentiles": {"p1": float(pct[0]), "p5": float(pct[1]),
                                     "p50": float(pct[2]), "p95": float(pct[3])},
         "regions_under_25px": int((counts < 25).sum()),
@@ -778,6 +867,10 @@ def build(mode: str, coast: bool, hull_buffer_px: float) -> Path:
                          f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
 
     keys = load_region_keys()
+    scope = load_scope_mask()
+    log(f"scope mask        {SCOPE_SOURCE} alpha: {100.0 * scope.mean():.1f}% of the "
+        f"master frame is in scope; anything outside it is dropped to void "
+        f"(Chris, 2026-09-12)")
     lookup = load_lookup()
     log(f"lookup            {LOOKUP_BMP.name} {LOOKUP_SIZE}x{LOOKUP_SIZE} "
         f"(row {DROP_ROW} dropped from {LOOKUP_SIZE + 1})")
@@ -787,15 +880,15 @@ def build(mode: str, coast: bool, hull_buffer_px: float) -> Path:
     log(f"eval box          canvas {list(box)}"
         + (f" (footprint + {hull_buffer_px:.0f}px outer-hull buffer)" if hull_buffer_px > 0
            else " (strict footprint)"))
-    label, placed = place_lookup(fit, box, lookup)
+    label, placed, excluded = place_lookup(fit, box, lookup, scope)
     del lookup
     if not placed.any():
-        raise SystemExit("nothing placed — check the registration / lookup")
+        raise SystemExit("nothing placed — check the registration / lookup / scope mask")
 
     unkeyed_target = int(UNKEYED_HEX, 16)
     unkeyed_mask = placed & (pack(label) == unkeyed_target)
 
-    report = fit_report(label, placed, keys, reg)
+    report = fit_report(label, placed, keys, reg, excluded, scope)
 
     if mode == "borders":
         canvas, n_edge = extract_borders(label, placed, globe)
@@ -804,7 +897,9 @@ def build(mode: str, coast: bool, hull_buffer_px: float) -> Path:
         legend = [(BORDER_RGB, "cr_oldworld_lookup region boundaries"),
                   (None, f"{report['regions_placed']} regions placed / "
                          f"{report['tsv_keys']} TSV keys"),
-                  (None, "void (black) = campaign-map sea / off-map, not drawn")]
+                  (None, "void (black) = campaign-map sea / off-map, not drawn"),
+                  (None, f"cropped to {SCOPE_SOURCE} extent: "
+                         f"{report['scope_excluded_px']:,} px out of scope, dropped")]
         if coast:
             legend.insert(1, (COAST_RGB, "this mod's coastline (reference)"))
     else:
@@ -814,7 +909,9 @@ def build(mode: str, coast: bool, hull_buffer_px: float) -> Path:
                   (UNKEYED_RGB, f"unkeyed: colour {UNKEYED_HEX} has no TSV row"),
                   (None, "void (black) = campaign-map sea / off-map, not drawn"),
                   (None, f"{report['regions_placed']} regions placed / "
-                         f"{report['tsv_keys']} TSV keys")]
+                         f"{report['tsv_keys']} TSV keys"),
+                  (None, f"cropped to {SCOPE_SOURCE} extent: "
+                         f"{report['scope_excluded_px']:,} px out of scope, dropped")]
         if coast:
             legend.append((COAST_RGB, "this mod's coastline (reference)"))
     del label
@@ -839,7 +936,9 @@ def build(mode: str, coast: bool, hull_buffer_px: float) -> Path:
     report["mode"] = mode
     report["note"] = ("dev-only QA render, board #4364. Built on the PROVISIONAL "
                       "tww3_old_world_mod_parchment_full registration; if that "
-                      "placement moves, this render moves with it.")
+                      "placement moves, this render moves with it. Cropped to "
+                      f"{SCOPE_SOURCE}'s opaque extent (Chris, 2026-09-12: land not "
+                      "drawn there is out of scope).")
     side = DERIVED_DIR / f"{prefix}.json"
     with open(side, "w", encoding="utf-8") as fh:
         json.dump(report, fh, indent=2, sort_keys=True)
