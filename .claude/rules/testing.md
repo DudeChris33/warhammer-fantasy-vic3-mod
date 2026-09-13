@@ -415,6 +415,27 @@ absent, so a device without that working file never reddens the committed gate.
 `tools/render_canon_cities_preview.py` (the dev render) and its two
 `tools/derived/` artifacts are outside the gate — gitignored, source-dependent,
 regenerated only on the user's machine for a visual verdict.
+**TWW3 canon-name lookup (board #4363)**: `tools/tww3_name_lookup.py` is a
+dev-only CLI in that same class — outside the gate, writing only the gitignored
+`tools/derived/tww3_name_suggestions.csv` / `tww3_hub_suggestions.csv`, and
+**clean-skipping** (exit 0 with a note, the `_check_canon_cities` idiom) when the
+gitignored third-party `sources/cr_oldworld_campaign/` is absent, which is every
+device but the user's. It point-samples a canvas pixel to a TWW3 region key
+through the same `tww3_old_world_mod_parchment_full` registration and 2x
+master→lookup scale that `tools/render_cr_lookup_overlay.py` (#4364) warps
+through — both must agree on the 8193-row drop and the scale, which
+`run_fixture.py --check` asserts directly. It never writes `tools/config/`:
+accepted names are a human's call, and the registration is still PROVISIONAL.
+Its pure half is `tools/worldgen/tww3_names.py` (TSV parse only, no I/O beyond
+it), and `python tools/run_fixture.py --check` gained `_selfcheck_tww3_names`,
+which exercises all of it on a **synthetic** table + array with no dependency on
+the real gitignored source: the `#regions_tables` metadata row and blank rows
+skipped, authored order and exact row count kept, colours case-normalised,
+duplicate non-black colour / malformed / blank / truncated / bad-header all
+refused while repeated *black* rows are allowed (the real file has 138), black
+excluded from `colour_index` and returned by `water_name_bank`, exact-hex
+sampling in/out of the water quadrant, the `source` citation format, and the
+row-drop/scale agreement with #4364.
 `_selfcheck_river_extraction` (board #3703) exercises `worldgen/river_network.py`'s
 flow-DAG model on synthetic cyan networks: a Y-junction stitches Strahler stems
 with one green source per headwater and a red MERGE at the confluence (source
