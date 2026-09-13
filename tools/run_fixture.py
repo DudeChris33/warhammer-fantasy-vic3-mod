@@ -2141,6 +2141,145 @@ def _selfcheck_canon_cities() -> None:
     assert err, "the on-land half must still run (hard error) when the export is absent"
 
 
+def _selfcheck_tww3_names() -> None:
+    """TWW3 canon-name lookup (board #4363), in isolation — the TSV parser and
+    the exact-hex point sample, on a synthetic table + array.
+
+    Deliberately **independent of the real source**: the region table and the
+    lookup bitmap live under the gitignored, third-party
+    ``sources/cr_oldworld_campaign/``, which is absent on every device but
+    Chris's, so a self-check that needed them would simply never run. The
+    synthetic table reproduces the real file's exact shape — the header, the
+    ``#regions_tables`` metadata row, black water rows, a blank row — and the
+    sampling is checked against a tiny hand-built array.
+    """
+    import tww3_name_lookup as tnl
+    from worldgen import tww3_names as tn
+
+    header = "\t".join(tn.EXPECTED_HEADER)
+
+    def _tsv(rows: list[tuple[str, str]], *, header_line: str = header,
+             extra: list[str] | None = None) -> str:
+        lines = [header_line, "#regions_tables;0;db/regions_tables/cr_oldworld_campaign\t\t\t\t\t"]
+        for key, colour in rows:
+            lines.append(f"{key}\t\temp\tfalse\t\t{colour}")
+        lines.extend(extra or [])
+        return "\n".join(lines) + "\n"
+
+    def _refuses(fn, msg):
+        try:
+            fn()
+        except tn.TWW3NamesError:
+            return
+        raise AssertionError(msg)
+
+    # A table just over the truncation floor: the first three are the ones the
+    # assertions below name, the filler keeps the row count legal.
+    base = [("cr_oldworld_region_altdorf", "112233"),
+            ("cr_oldworld_region_karak_kadrin", "445566"),
+            ("cr_oldworld_region_sea_of_claws", tn.WATER_HEX)]
+    filler = [(f"cr_oldworld_region_filler_{i:04d}", f"{0x200000 + i:06X}")
+              for i in range(tn.MIN_DATA_ROWS)]
+    rows = base + filler
+
+    with tempfile.TemporaryDirectory() as td:
+        tdp = Path(td)
+
+        good = tdp / "good.tsv"
+        # A blank row between the data rows must be skipped, not counted or refused.
+        good.write_text(_tsv(rows, extra=[""]), encoding="utf-8")
+        regions = tn.load_tww3_regions(good)
+        assert len(regions) == len(rows), \
+            f"metadata + blank rows must be skipped and every data row kept, got {len(regions)}"
+        assert regions[0].key == "cr_oldworld_region_altdorf", "file order must be preserved"
+        assert regions[0].slug == "altdorf", f"the key prefix must be stripped, got {regions[0].slug!r}"
+        assert regions[0].hex == "112233"
+        assert regions[2].is_water and not regions[0].is_water, \
+            "only the 000000 row is water"
+
+        index = tn.colour_index(regions)
+        assert len(index) == len(rows) - 1, "the colour index must exclude every black row"
+        assert tn.WATER_HEX not in index, "black must never be an index key"
+        assert index["445566"].slug == "karak_kadrin"
+        bank = tn.water_name_bank(regions)
+        assert [r.slug for r in bank] == ["sea_of_claws"], \
+            f"the water bank must be exactly the black rows, got {[r.slug for r in bank]}"
+
+        # A lowercase colour must normalise to the same uppercase index key, or a
+        # sample would miss a region purely on the export's letter case.
+        lower = tdp / "lower.tsv"
+        lower.write_text(_tsv([("cr_oldworld_region_a", "aabbcc")] + filler), encoding="utf-8")
+        assert "AABBCC" in tn.colour_index(tn.load_tww3_regions(lower)), \
+            "colours must be normalised to uppercase"
+
+        dup = tdp / "dup.tsv"
+        dup.write_text(_tsv(rows + [("cr_oldworld_region_other", "112233")]), encoding="utf-8")
+        _refuses(lambda: tn.load_tww3_regions(dup),
+                 "two keys claiming one non-black colour must be refused")
+
+        # Two black rows are NOT a duplicate — black is void, and the real file
+        # carries 138 of them.
+        dupblack = tdp / "dupblack.tsv"
+        dupblack.write_text(_tsv(rows + [("cr_oldworld_region_bitter_sea", tn.WATER_HEX)]),
+                            encoding="utf-8")
+        assert len(tn.load_tww3_regions(dupblack)) == len(rows) + 1, \
+            "repeated black colours must be allowed (138 of them in the real file)"
+
+        bad = tdp / "bad.tsv"
+        bad.write_text(_tsv([("cr_oldworld_region_a", "ZZTOP1")] + filler), encoding="utf-8")
+        _refuses(lambda: tn.load_tww3_regions(bad), "a malformed colour must be refused")
+
+        blank = tdp / "blank.tsv"
+        blank.write_text(_tsv([("cr_oldworld_region_a", "")] + filler), encoding="utf-8")
+        _refuses(lambda: tn.load_tww3_regions(blank), "a blank colour must be refused")
+
+        short = tdp / "short.tsv"
+        short.write_text(_tsv(base), encoding="utf-8")
+        _refuses(lambda: tn.load_tww3_regions(short),
+                 "a truncated export (< MIN_DATA_ROWS) must be refused")
+
+        badhead = tdp / "badhead.tsv"
+        badhead.write_text(_tsv(rows, header_line="key\tcolour"), encoding="utf-8")
+        _refuses(lambda: tn.load_tww3_regions(badhead),
+                 "a header shape mismatch must be refused — the colour column is "
+                 "identified by name")
+
+        # Byte-identical across two loads.
+        a = tn.load_tww3_regions(good)
+        b = tn.load_tww3_regions(good)
+        assert a == b, "two loads of one file must be identical"
+
+    # --- exact-hex sampling, on a hand-built array ----------------------------
+    # 4x4: left half colour 112233, top-right 445566, bottom-right black.
+    arr = np.zeros((4, 4, 3), dtype=np.uint8)
+    arr[:, :2] = (0x11, 0x22, 0x33)
+    arr[:2, 2:] = (0x44, 0x55, 0x66)
+
+    class _Stub:
+        hex_at_lookup = tnl.Lookup.hex_at_lookup
+
+    stub = _Stub()
+    stub.arr = arr
+    assert _Stub.hex_at_lookup(stub, 0, 0) == "112233"
+    assert _Stub.hex_at_lookup(stub, 3, 0) == "445566"
+    assert _Stub.hex_at_lookup(stub, 3, 3) == tn.WATER_HEX, \
+        "the black quadrant must read as the water hex"
+    assert index["112233"].slug == "altdorf" and tn.WATER_HEX not in index, \
+        "a sampled hex resolves through the non-water colour index"
+
+    # The citation format every accepted suggestion carries.
+    cite = tnl.source_citation(tn.TWW3Region(key="cr_oldworld_region_altdorf",
+                                             slug="altdorf", hex="112233", is_water=False))
+    assert cite == ("canon: cr_oldworld_campaign/altdorf "
+                    "(TWW3 Old World mod region table)"), f"citation format changed: {cite}"
+
+    # The two scripts sampling the same bitmap MUST agree on which duplicate row
+    # to drop, or they would disagree about the same pixel.
+    import render_cr_lookup_overlay as rcl
+    assert tnl.DROP_ROW == rcl.DROP_ROW and tnl.LOOKUP_SCALE == rcl.MASTER_TO_LOOKUP_SCALE, \
+        "tww3_name_lookup and render_cr_lookup_overlay must share the row-drop and scale"
+
+
 def _selfcheck_stable_ids() -> None:
     """Stable province colour+id assignment across regens (board #3705), isolated.
 
@@ -3102,6 +3241,11 @@ def run_check() -> int:
     print("canon_cities: schema (order + refuse empty/bad-terrain/dup-anchor/oob) + pure "
           "transparent overlay (deterministic, canvas-sized) + validator (on-land hard error, "
           "impassable-collision non-blocking warning, export-absent skip) self-check passed.")
+    _selfcheck_tww3_names()
+    print("tww3_names: region-table parser (metadata/blank rows skipped, order + row count, "
+          "case-normalised colours, refuse dup-colour/malformed/blank/truncated/bad-header, "
+          "black excluded from the index and returned by the water bank) + exact-hex "
+          "sampling + citation format + row-drop agreement with #4364 self-check passed.")
     _selfcheck_stable_ids()
     print("province_ids: stable colour+id across regens (no-op kept, remove retires, split "
           "keeps dominant + fresh piece, no sea/lake ripple, reassign fresh, order-invariant) "
