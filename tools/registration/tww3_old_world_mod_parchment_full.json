@@ -6,14 +6,14 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL. Whole, uncropped TWW3 Old World mod parchment master (tww3_old_world_mod_parchment.png, 'The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_full (objective=landmarks; 81 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 16x16 lattice bounded to the landmark hull). Unlike the five per-region crops (each a dense network confined to its own arc), this is the SAME parchment placed as ONE piece, for consumers that need a single consistent master-frame warp instead of stitching five overlapping crops (e.g. tools/project_regions_unified.py). Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, unused while the five per-region records remain the active ones for project_regions.py / project_lines_onto_parchment.py. PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 81, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 149}",
+  "notes": "PROVISIONAL. Whole, uncropped TWW3 Old World mod parchment master (tww3_old_world_mod_parchment.png, 'The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_full (objective=landmarks; 81 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 16x16 lattice bounded to the landmark hull). Unlike the five per-region crops (each a dense network confined to its own arc), this is the SAME parchment placed as ONE piece, for consumers that need a single consistent master-frame warp instead of stitching five overlapping crops (e.g. tools/project_regions_unified.py). Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, unused while the five per-region records remain the active ones for project_regions.py / project_lines_onto_parchment.py. PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 89, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 163}",
   "source": "tww3_old_world_mod_parchment_full.png",
   "projection": "piecewise_affine_warp",
   "footprint": [
     3450.5,
     134.5,
     5182.5,
-    1840.5
+    1852.5
   ],
   "control_points": [
     {
@@ -906,6 +906,94 @@
         803.5
       ],
       "note": "kislev_norsca_yellow"
+    },
+    {
+      "source": [
+        4047.5,
+        3058.5
+      ],
+      "canvas": [
+        5132.5,
+        1510.5
+      ],
+      "note": "c_ffff00_3"
+    },
+    {
+      "source": [
+        3962.5,
+        3255.5
+      ],
+      "canvas": [
+        5112.5,
+        1591.5
+      ],
+      "note": "c_7fffff_2"
+    },
+    {
+      "source": [
+        1459.5,
+        3716.5
+      ],
+      "canvas": [
+        4056.5,
+        1716.5
+      ],
+      "note": "c_7f003f_2"
+    },
+    {
+      "source": [
+        3211.5,
+        3898.5
+      ],
+      "canvas": [
+        4831.5,
+        1770.5
+      ],
+      "note": "c_ffff00_4"
+    },
+    {
+      "source": [
+        3352.5,
+        4029.5
+      ],
+      "canvas": [
+        4887.5,
+        1820.5
+      ],
+      "note": "c_00bf7f_3"
+    },
+    {
+      "source": [
+        2624.0,
+        272.0
+      ],
+      "canvas": [
+        4635.0,
+        284.0
+      ],
+      "note": "c_ff64ff"
+    },
+    {
+      "source": [
+        2827.0,
+        434.0
+      ],
+      "canvas": [
+        4677.0,
+        420.0
+      ],
+      "note": "c_7f06fe"
+    },
+    {
+      "source": [
+        455.0,
+        3162.0
+      ],
+      "canvas": [
+        3739.0,
+        1519.0
+      ],
+      "note": "c_ff64ff_2"
     }
   ]
 }
