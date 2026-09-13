@@ -36,6 +36,15 @@ centred through it and inherits that — which is the other thing this render is
 good for: a systematic offset between the crosshair and the label it should be
 sitting on is visible evidence about the placement itself.
 
+Worksheet seed
+--------------
+Each crop also shows the name ``tools/config/land_regions_worksheet.csv`` (the
+persisted, hand-edited land-naming input) already carries for whatever region
+currently owns that pixel — relocated forward through the same anchor-pixel
+technique ``render_land_regions_preview.py`` uses, so it can never disagree
+with what that render would show. It is a **starting point for triage**, not a
+verdict: the worksheet predates this cross-check entirely.
+
 Anchor drift
 ------------
 A crop is only meaningful if the point still resolves to the region the CSV row
@@ -79,6 +88,12 @@ TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
 OUT_DIR = DERIVED_DIR / "tww3_text_crops"
+
+#: The persisted, hand-edited land-naming input (267 named regions as of #4363's
+#: own build) — a starting point for triage, not a source of truth: a name here
+#: may itself be provisional, or may not be the region the crop's point resolves
+#: to at all once #4363's suggestions are reviewed. See :func:`load_worksheet_seed`.
+CONFIG_WORKSHEET = TOOLS_DIR / "config" / "land_regions_worksheet.csv"
 
 #: The printed-label layer, a sibling of the lookup bitmap in the same gitignored
 #: third-party dump. Its absence is the expected state on every device but Chris's.
@@ -157,6 +172,64 @@ def load_text_layer() -> np.ndarray:
                 f"scale constant this render shares with tww3_name_lookup.py would "
                 f"be wrong for it.")
         return np.asarray(im.convert("RGBA"), dtype=np.uint8)
+
+
+# ---------------------------------------------------------------------------
+# Worksheet seed (best-effort — never blocks a crop)
+# ---------------------------------------------------------------------------
+
+def load_worksheet_seed() -> tuple[np.ndarray | None, dict[int, str]]:
+    """Canvas-pixel region label raster + the old worksheet's name for each label.
+
+    ``tools/config/land_regions_worksheet.csv`` is the persisted, hand-edited
+    naming input. Its rows carry ``anchor_x``/``anchor_y`` — the region's own
+    centroid pixel at the time a human named it — and identity is that pixel, not
+    the row's ``region_id`` (which is a Hilbert-ordered STATE number that
+    reshuffles across a regen). ``render_land_regions_preview.py`` already
+    established the fix for that: relocate a name forward by resampling the
+    CURRENT region-label raster at the row's own stored anchor. This reuses the
+    exact same technique so a crop's name seed can never disagree with what that
+    render would show for the same pixel.
+
+    A name found this way is a **starting point**, not a verdict — it predates
+    #4363's TWW3 cross-check entirely, and the region under a given pixel may
+    have moved or split since the worksheet row was last touched. That is
+    exactly what the crop is for a human to judge.
+
+    Returns ``(None, {})`` — never raises — when the worksheet or the supporting
+    derived province/region indices are not on disk. Seeding is a convenience;
+    its absence must never block a crop the way the label layer's absence does.
+    """
+    if not CONFIG_WORKSHEET.is_file():
+        return None, {}
+    try:
+        lab, _areas = tnl.load_region_labels()
+    except SystemExit as exc:
+        log(f"worksheet seed    skipped ({exc})")
+        return None, {}
+
+    names: dict[int, str] = {}
+    with CONFIG_WORKSHEET.open("r", newline="", encoding="utf-8") as fh:
+        for row in csv.DictReader(fh):
+            name = (row.get("name") or "").strip()
+            ax_raw, ay_raw = row.get("anchor_x"), row.get("anchor_y")
+            if not (name and ax_raw and ay_raw):
+                continue
+            ax, ay = int(float(ax_raw)), int(float(ay_raw))
+            if not (0 <= ax < tnl.CANVAS_W and 0 <= ay < tnl.CANVAS_H):
+                continue
+            label = int(lab[ay, ax])
+            if label > 0:
+                names[label] = name
+    return lab, names
+
+
+def seed_name_at(lab: np.ndarray | None, names: dict[int, str], x: int, y: int) -> str:
+    """The worksheet's name for whichever region currently owns canvas ``(x, y)``."""
+    if lab is None or not (0 <= x < tnl.CANVAS_W and 0 <= y < tnl.CANVAS_H):
+        return ""
+    label = int(lab[y, x])
+    return names.get(label, "") if label > 0 else ""
 
 
 # ---------------------------------------------------------------------------
@@ -415,6 +488,7 @@ _HTML_HEAD = """<!doctype html>
  code {{ background: #2a2a2a; padding: 1px 4px; }}
  .drift {{ color: #ffab40; font-weight: bold; }}
  .skip {{ color: #9a9a9a; }}
+ .seed {{ color: #8ec9ff; }}
 </style>
 <h1>TWW3 printed-label crops</h1>
 <p class="note">{intro}</p>
@@ -429,7 +503,10 @@ def write_index(entries: list[dict], skipped: list[dict], meta: dict) -> Path:
         "Each crop is cr_oldworld_map_text.png at the suggestion's own canvas "
         "point, through the PROVISIONAL tww3_old_world_mod_parchment_full "
         "registration; the magenta crosshair is that point and the cyan outline "
-        "is the sampled region's boundary. Dev-only, gitignored: accepting a "
+        "is the sampled region's boundary. Where shown, 'worksheet seed' is the "
+        "name tools/config/land_regions_worksheet.csv already carries for "
+        "whatever region currently owns that pixel — a starting point predating "
+        "this cross-check, not a verdict. Dev-only, gitignored: accepting a "
         "name into tools/config/ is a separate human step.")
     parts = [_HTML_HEAD.format(intro=intro)]
     if entries:
@@ -442,7 +519,9 @@ def write_index(entries: list[dict], skipped: list[dict], meta: dict) -> Path:
                 f'<tr><td><img src="{html.escape(e["file"])}" '
                 f'alt="{html.escape(e["label"])}"></td><td>'
                 f'<div><b>{html.escape(e["guess"])}</b></div>\n'
-                f'<div>{html.escape(e["label"])} &middot; status '
+                + (f'<div class="seed">worksheet seed: {html.escape(e["seed"])}</div>\n'
+                   if e["seed"] else "")
+                + f'<div>{html.escape(e["label"])} &middot; status '
                 f'{html.escape(e["status"])}'
                 + (f' &middot; margin {html.escape(e["margin"])} px' if e["margin"] else "")
                 + f'</div>\n<div>canvas ({e["x"]}, {e["y"]}) &rarr; text px '
@@ -470,7 +549,9 @@ def write_index(entries: list[dict], skipped: list[dict], meta: dict) -> Path:
 # ---------------------------------------------------------------------------
 
 def render(lookup: tnl.Lookup, text_rgba: np.ndarray, rows: list[Row], *,
-           half: int, bg: tuple[int, int, int], outline: bool) -> tuple[list[dict], list[dict]]:
+           half: int, bg: tuple[int, int, int], outline: bool,
+           seed_lab: np.ndarray | None = None,
+           seed_names: dict[int, str] | None = None) -> tuple[list[dict], list[dict]]:
     entries: list[dict] = []
     skipped: list[dict] = []
     used: set[str] = set()
@@ -493,6 +574,7 @@ def render(lookup: tnl.Lookup, text_rgba: np.ndarray, rows: list[Row], *,
 
         sampled = lookup.hex_at_lookup(tx, ty)
         drift = is_anchor_drift(sampled, row.hexcode)
+        seed = seed_name_at(seed_lab, seed_names or {}, row.x, row.y)
 
         box = crop_box(tx, ty, half)
         img = flatten(text_rgba, box, bg)
@@ -505,6 +587,7 @@ def render(lookup: tnl.Lookup, text_rgba: np.ndarray, rows: list[Row], *,
                            if p)
         caption = (f"{row.label}  guess: {row.slug or '(none)'}"
                    + (f"  ({detail})" if detail else "")
+                   + (f"  worksheet: {seed}" if seed else "")
                    + ("  ANCHOR DRIFT" if drift else ""))
         img = add_caption(img, caption, drift)
 
@@ -513,7 +596,7 @@ def render(lookup: tnl.Lookup, text_rgba: np.ndarray, rows: list[Row], *,
         entries.append({
             "file": path.name, "label": row.label, "guess": row.slug or "(none)",
             "status": row.status, "margin": row.margin, "source": row.source,
-            "x": row.x, "y": row.y, "tx": tx, "ty": ty,
+            "x": row.x, "y": row.y, "tx": tx, "ty": ty, "seed": seed,
             "drift": drift, "sampled_hex": sampled, "row_hex": row.hexcode,
         })
     return entries, skipped
@@ -582,6 +665,10 @@ def main(argv: list[str] | None = None) -> int:
 
     lookup = tnl.Lookup()
     text_rgba = load_text_layer()
+    seed_lab, seed_names = load_worksheet_seed()
+    if seed_names:
+        log(f"worksheet seed    {len(seed_names)} name(s) from {tnl.rel(CONFIG_WORKSHEET)} "
+            f"(a starting point predating the #4363 cross-check, not a verdict)")
     log(f"label layer       {MAP_TEXT_PNG.name} {TEXT_SIZE}x{TEXT_SIZE} RGBA "
         f"(master x{TEXT_SCALE:g}, shared with {tnl.LOOKUP_BMP.name})")
     log(f"registration      {tnl.FULL_SOURCE} ({lookup.reg.projection}, "
@@ -602,7 +689,8 @@ def main(argv: list[str] | None = None) -> int:
                     source=tnl.source_citation(s.region) if s.region else "", area=0)]
 
     entries, skipped = render(lookup, text_rgba, rows, half=args.half, bg=bg,
-                              outline=not args.outline_off)
+                              outline=not args.outline_off,
+                              seed_lab=seed_lab, seed_names=seed_names)
     drift = sum(1 for e in entries if e["drift"])
     index = write_index(entries, skipped, {
         "report": report_name, "kind": kind, "drift": drift,
