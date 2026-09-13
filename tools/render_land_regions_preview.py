@@ -51,7 +51,11 @@ parchment art (a name can be read off the render) or the plain-globe fallback
 (no real Warhammer map covers it — placeholders and any drawn region outside
 the five crops). ``name`` is the one column meant for a human to actually fill
 in — blank on a fresh run, and carried forward (never wiped) across re-runs so
-naming progress survives a later regeneration. ``region_id`` (2026-09-05: Chris
+naming progress survives a later regeneration. ``source`` (board #4363) is its
+citation: where that name came from, the same convention
+``tools/config/hub_worksheet.json``'s own ``source`` field uses. It is carried
+forward by the *same* anchor relocation as ``name``, never separately — a
+citation parted from the name it cites would be worse than none. ``region_id`` (2026-09-05: Chris
 noticed neighbouring regions had wildly different numbers and asked for this)
 comes from ``worldgen.land_state_numbering.assign_state_numbers`` (board
 #4188) — the same function ``generate_land_regions.py`` uses for the actual
@@ -423,13 +427,21 @@ def main(argv: list[str] | None = None) -> int:
     # this branch fires at most once per pre-existing name.
     label_of_state_id = {int(state_number[r]): r for r in range(1, n_regions + 1)}
 
+    # `source` (board #4363) is the citation column: where an accepted name came
+    # from (e.g. "canon: cr_oldworld_campaign/<slug> (TWW3 Old World mod region
+    # table)"). It rides along with `name` through exactly the same anchor-based
+    # relocation — a citation that got separated from the name it cites would be
+    # worse than no citation at all — and is written back as a trailing column so
+    # a row that has never been cited simply carries an empty cell.
     name_by_new_label: dict[int, str] = {}
+    source_by_new_label: dict[int, str] = {}
     orphaned: list[tuple[str, int, int]] = []
     conflicts: list[int] = []
     if CSV_PATH.is_file():
         with CSV_PATH.open("r", newline="", encoding="utf-8") as fh:
             for row in csv.DictReader(fh):
                 name = (row.get("name") or "").strip()
+                source = (row.get("source") or "").strip()
                 if not name:
                     continue
                 ax_raw, ay_raw = row.get("anchor_x"), row.get("anchor_y")
@@ -455,9 +467,11 @@ def main(argv: list[str] | None = None) -> int:
                         continue
                     if not _is_directive_name(name) and _is_directive_name(name_by_new_label[new_label]):
                         name_by_new_label[new_label] = name
+                        source_by_new_label[new_label] = source
                         continue
                     continue  # both/neither are directives: first writer wins
                 name_by_new_label.setdefault(new_label, name)
+                source_by_new_label.setdefault(new_label, source)
     if orphaned:
         print(f"WARNING: {len(orphaned)} name(s) could not be relocated (their anchor point is no "
               f"longer land) and were dropped: {[n for n, _, _ in orphaned]}", file=sys.stderr)
@@ -482,14 +496,17 @@ def main(argv: list[str] | None = None) -> int:
             "on_parchment": flag,
             "anchor_x": int(round(float(cx[region_id]))),
             "anchor_y": int(round(float(cy[region_id]))),
+            "source": source_by_new_label.get(region_id, ""),
         })
     rows.sort(key=lambda r: r["region_id"])
     with CSV_PATH.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
+    n_cited = sum(1 for r in rows if r["source"])
     print(f"wrote {CSV_PATH}  ({len(rows)} rows, sorted by id, "
-          f"{n_on_parchment} on real parchment art, {n_carried} name(s) carried forward)")
+          f"{n_on_parchment} on real parchment art, {n_carried} name(s) carried forward, "
+          f"{n_cited} with a source citation)")
 
     log(f"done: {n_regions} regions rendered", t0)
     return 0
