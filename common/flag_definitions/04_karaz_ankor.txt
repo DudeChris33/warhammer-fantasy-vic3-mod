@@ -1,0 +1,155 @@
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at
+# priority = 0 — so "no flag definition is applicable for a country" (vanilla's
+# own tag-as-COA_KEY fallback condition, see that file's vanilla header comment
+# at .../game/common/flag_definitions/00_flag_definitions.txt:1-14) never fires
+# for any tag. Without a higher-priority tag-named list here, every bespoke COA
+# in common/coat_of_arms/coat_of_arms/04_karaz_ankor.txt (board #3624) would
+# parse but sit unused behind default_flag. Each list below is a single
+# unconditional block at priority = 100 — above #3552's priority = 0 DEFAULT,
+# below vanilla's own conditional range of 100-2000 for future per-tag variants.
+# `always = yes` confirmed valid at docs/triggers.log.
+
+KAZ = {
+	flag_definition = {
+		coa = KAZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KAK = {
+	flag_definition = {
+		coa = KAK
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ZHU = {
+	flag_definition = {
+		coa = ZHU
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KAD = {
+	flag_definition = {
+		coa = KAD
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BVR = {
+	flag_definition = {
+		coa = BVR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+AZL = {
+	flag_definition = {
+		coa = AZL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KEP = {
+	flag_definition = {
+		coa = KEP
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KAG = {
+	flag_definition = {
+		coa = KAG
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KNO = {
+	flag_definition = {
+		coa = KNO
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KHI = {
+	flag_definition = {
+		coa = KHI
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KRD = {
+	flag_definition = {
+		coa = KRD
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KUN = {
+	flag_definition = {
+		coa = KUN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KVN = {
+	flag_definition = {
+		coa = KVN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+GUN = {
+	flag_definition = {
+		coa = GUN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+VLG = {
+	flag_definition = {
+		coa = VLG
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SLV = {
+	flag_definition = {
+		coa = SLV
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+EKR = {
+	flag_definition = {
+		coa = EKR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+DRZ = {
+	flag_definition = {
+		coa = DRZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}

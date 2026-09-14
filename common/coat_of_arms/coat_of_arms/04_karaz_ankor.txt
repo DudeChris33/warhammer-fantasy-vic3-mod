@@ -1,0 +1,355 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per board #3624 — the 18 Karaz Ankor
+# Dwarf hold tags (KAZ the formable, plus 17 karaks). Composed from vanilla
+# gfx/coat_of_arms/ art (patterns + colored_emblems, neither blanked by
+# replace_paths) plus two emblems reused from the permissioned Realms of Exether
+# sibling mod (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds and
+# ce_roe_mountain.dds, reuse grant 2026-09-07) and this mod's named_colors
+# palette (common/named_colors/00_coa_colors.txt). Every substitution/asset
+# source is disclosed in the comment above its block, following the
+# 02_empire.txt precedent. Requires common/flag_definitions/04_karaz_ankor.txt
+# (this mod's DEFAULT flag_definitions block is unconditional at priority = 0
+# and would otherwise mask every one of these) to actually render in-game.
+
+# KAZ — Karaz Ankor, the formable. Paramount device: Grungni's crossed hammers
+# beneath the High King's crown, bordered — the grandest coat of arms in the
+# set, deliberately outranking every karak below it. This tag is a formable
+# with no starting territory but still needs a flag_definitions block.
+KAZ = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_border_of_3_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 1.0 } }
+	}
+	colored_emblem = {
+		texture = "ce_mining_hammers.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.56 } scale = { 0.66 0.66 } }
+	}
+	colored_emblem = {
+		texture = "ce_crown_simple.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "yellow_dark"
+		instance = { position = { 0.5 0.2 } scale = { 0.34 0.34 } }
+	}
+}
+
+# KAK — Karaz-a-Karak, Everpeak. A single great hammer; lighter red field (not
+# red_dark) and no border/crown deliberately separate it from KAZ above.
+# Flagging this KAK/KAZ field pairing for the visual gate.
+KAK = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "red"
+
+	colored_emblem = {
+		texture = "ce_hammer_ddr.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# ZHU — Zhufbar, hold of the endless water-wheels above the falls. No
+# water-wheel art exists in vanilla — disclosed substitution: a spoked wheel
+# over waves.
+ZHU = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "red"
+
+	colored_emblem = {
+		texture = "ce_ship_wheel.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.45 } scale = { 0.62 0.62 } }
+	}
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "blue_light"
+		color2 = "white"
+		instance = { position = { 0.5 0.88 } scale = { 1.0 0.3 } }
+	}
+}
+
+# KAD — Karak Kadrin, the Slayer Keep. Grimnir's crossed axes for the Slayer
+# Oath, grey steel, orange haft/wrap echoing the Slayers' dyed crests.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds),
+# reuse grant 2026-09-07. Black/red_dark split field deliberately differs from
+# KAZ and KUN's red_dark/red_dark field to avoid a 3-way tincture collision.
+KAD = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "black"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_roe_axes.dds"
+		color1 = "grey"
+		color2 = "orange"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# BVR — Barak Varr, the sea-hold: the sea-gate fortress over the gulf, the
+# Dawi's only true port.
+BVR = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "red"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_castle_hamburg.dds"
+		color1 = "golden"
+		color2 = "yellow_dark"
+		color3 = "golden"
+		instance = { position = { 0.5 0.34 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.82 } scale = { 1.0 0.34 } }
+	}
+}
+
+# AZL — Karak Azul, the Iron Peak. No anvil art exists in vanilla or Realms of
+# Exether — disclosed substitution: an inverted steel chevron reading as an
+# anvil-face, with the smith's hammer above. Shares ce_hammer_ddr with KAK,
+# differentiated by field, tincture, and the chevron.
+AZL = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_chevron.dds"
+		color1 = "grey"
+		color2 = "grey"
+		instance = { position = { 0.5 0.72 } scale = { 0.8 0.44 } rotation = 180 }
+	}
+	colored_emblem = {
+		texture = "ce_hammer_ddr.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.4 } scale = { 0.5 0.5 } }
+	}
+}
+
+# KEP — Karak Eight Peaks. No mountain art fit the "eight" count as well as
+# this; the eight-pointed star is the strongest canon-to-art match — kept over
+# the newly-available ce_roe_mountain.dds deliberately.
+KEP = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_star_08.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.78 0.78 } }
+	}
+}
+
+# KAG — Karak Angazbar, "Irongate". The iron gate, in iron rather than gold —
+# an outlying watch-hold.
+KAG = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "grey"
+		color2 = "black"
+		color3 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# KNO — Karak Norn, secretive. No firm canon blazon; generic Dawi hammers
+# walled in by a silver border — the hold that keeps itself shut.
+KNO = {
+	pattern = "pattern_solid.tga"
+	color1 = "grey"
+	color2 = "grey"
+
+	colored_emblem = {
+		texture = "ce_border_of_3_thin.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 1.0 1.0 } }
+	}
+	colored_emblem = {
+		texture = "ce_mining_hammers.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
+	}
+}
+
+# KHI — Karak Hirn, "Horn Hold", the Vaults. Horn is canon-firm identity but no
+# horn art exists in vanilla or Realms of Exether — disclosed substitution: a
+# key for the Vaults, on a per-bend field so it never reads as KNO recoloured.
+KHI = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "grey"
+	color2 = "black_light"
+
+	colored_emblem = {
+		texture = "ce_key_bremen.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.58 0.58 } }
+	}
+}
+
+# KRD — Kraka Drak, Norse dwarf hold. Drak is Khazalid for dragon — a heraldic
+# dragon in ice-silver on cold blue. No vanilla rune emblem is used anywhere in
+# this file (a deliberate call, not attributed to any precedent) — vanilla's
+# three rune emblems draw on Armanen-rune tradition with real-world
+# political-appropriation baggage; flagged as a design call worth revisiting.
+KRD = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_dragon_wales.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# KUN — Karak Ungor, ruined. Dead-iron hammers, not gold — the ruined-hold
+# convention used across this file.
+KUN = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_mining_hammers.dds"
+		color1 = "grey"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# KVN — Karak Varn, ruined/flooded. Flooding and gromril are canon-firm; a
+# lozenge stands in as an ore/gem charge over the drowned half of the field.
+KVN = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "black_light"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_rhombus.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.36 } scale = { 0.4 0.4 } }
+	}
+}
+
+# GUN — Mount Gunbad, ruined. Brightstone (luminous blue-purple ore) is
+# canon-firm and the hold's whole identity; same lozenge charge as KVN, with an
+# unmistakable field difference.
+GUN = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_rhombus.dds"
+		color1 = "blue_light"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.52 0.52 } }
+	}
+}
+
+# VLG — Karak Vlag, ruined. emblem: Realms of Exether
+# (gfx/coat_of_arms/colored_emblems/ce_roe_mountain.dds), reuse grant
+# 2026-09-07 — a bleak, near-full-field mountain silhouette in dead steel on
+# black, no gold, no hammer — the hold that no longer answers.
+VLG = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_roe_mountain.dds"
+		color1 = "grey"
+		color2 = "black_light"
+		instance = { position = { 0.5 0.5 } scale = { 0.9 0.9 } }
+	}
+}
+
+# SLV — Mount Silverspear, ruined. Name-derived, unambiguous. Disclosed reuse:
+# the same ce_spearhead.dds texture as HOC in 02_empire.txt, under a different
+# tincture/field here.
+SLV = {
+	pattern = "pattern_solid.tga"
+	color1 = "tan"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_spearhead.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.62 0.62 } }
+	}
+}
+
+# EKR — Ekrund, ruined. A mining hold on the gulf, in ruin — dead-iron hammers
+# over a grey sea; reads as BVR's dark mirror.
+EKR = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "black_light"
+	color2 = "teal"
+
+	colored_emblem = {
+		texture = "ce_mining_hammers.dds"
+		color1 = "grey"
+		color2 = "grey"
+		instance = { position = { 0.5 0.34 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "pearl"
+		color2 = "grey"
+		instance = { position = { 0.5 0.84 } scale = { 1.0 0.32 } }
+	}
+}
+
+# DRZ — Karak Drazh, ruined, the Black Crag. emblem: Realms of Exether
+# (gfx/coat_of_arms/colored_emblems/ce_roe_mountain.dds), reuse grant
+# 2026-09-07 — the Black Crag itself, with the Dawi claim still laid on it in
+# gold hammers; grand_principality, the strongest reclaim claimant, so the one
+# ruin in this file keeping its gold. Confirmed NOT Chaos Dwarf.
+DRZ = {
+	pattern = "pattern_solid.tga"
+	color1 = "black_light"
+	color2 = "black_light"
+
+	colored_emblem = {
+		texture = "ce_roe_mountain.dds"
+		color1 = "grey"
+		color2 = "black_light"
+		instance = { position = { 0.5 0.5 } scale = { 0.9 0.9 } }
+	}
+	colored_emblem = {
+		texture = "ce_mining_hammers.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.56 } scale = { 0.38 0.38 } }
+	}
+}
