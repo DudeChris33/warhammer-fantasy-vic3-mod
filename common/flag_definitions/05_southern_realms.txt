@@ -1,0 +1,228 @@
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at
+# priority = 0 — so "no flag definition is applicable for a country" (vanilla's
+# own tag-as-COA_KEY fallback condition) never fires for any tag. Without a
+# higher-priority tag-named list here, every bespoke COA in
+# common/coat_of_arms/coat_of_arms/05_southern_realms.txt (#3627, epic #3621)
+# would parse but sit unused behind default_flag. Each list below is a single
+# unconditional block at priority = 100 — above #3552's priority = 0 DEFAULT,
+# below vanilla's own conditional range of 100-2000 for future per-tag variants.
+# `always = yes` confirmed valid at docs/triggers.log. Shape matches #3622's
+# common/flag_definitions/02_empire.txt exactly. 27 tags, same order as
+# common/country_definitions/05_southern_realms.txt.
+
+USR = {
+	flag_definition = {
+		coa = USR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TIL = {
+	flag_definition = {
+		coa = TIL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MIR = {
+	flag_definition = {
+		coa = MIR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LUC = {
+	flag_definition = {
+		coa = LUC
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+REM = {
+	flag_definition = {
+		coa = REM
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TOB = {
+	flag_definition = {
+		coa = TOB
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TRA = {
+	flag_definition = {
+		coa = TRA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+PAV = {
+	flag_definition = {
+		coa = PAV
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+VER = {
+	flag_definition = {
+		coa = VER
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+DON = {
+	flag_definition = {
+		coa = DON
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SRT = {
+	flag_definition = {
+		coa = SRT
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+EST = {
+	flag_definition = {
+		coa = EST
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BIL = {
+	flag_definition = {
+		coa = BIL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MAG = {
+	flag_definition = {
+		coa = MAG
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+CNT = {
+	flag_definition = {
+		coa = CNT
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BPR = {
+	flag_definition = {
+		coa = BPR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ORT = {
+	flag_definition = {
+		coa = ORT
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+GAS = {
+	flag_definition = {
+		coa = GAS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+GDO = {
+	flag_definition = {
+		coa = GDO
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MON = {
+	flag_definition = {
+		coa = MON
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+AQL = {
+	flag_definition = {
+		coa = AQL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+DUN = {
+	flag_definition = {
+		coa = DUN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ESS = {
+	flag_definition = {
+		coa = ESS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+RAA = {
+	flag_definition = {
+		coa = RAA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+UVE = {
+	flag_definition = {
+		coa = UVE
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+HKN = {
+	flag_definition = {
+		coa = HKN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+PON = {
+	flag_definition = {
+		coa = PON
+		priority = 100
+		trigger = { always = yes }
+	}
+}

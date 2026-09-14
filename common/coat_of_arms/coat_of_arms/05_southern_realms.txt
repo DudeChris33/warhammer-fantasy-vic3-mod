@@ -1,0 +1,545 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per epic #3621 child #3627 — the 27
+# Southern Realms country tags (common/country_definitions/05_southern_realms.txt,
+# same order; the roster grew from the originally-filed 15 to 27 after that file's
+# 2026-09-06 expansion — DON plus the 11 named Border Princes belt realms — see
+# this item's own premise-check note). Composed from vanilla gfx/coat_of_arms/ art
+# (patterns + colored_emblems, neither blanked by replace_paths), this mod's
+# named_colors palette (common/named_colors/00_coa_colors.txt +
+# 01_wh_coa_colors.txt), and six Realms of Exether emblems (reuse grant
+# 2026-09-07; provenance noted per-block below) plus three more RoE emblems
+# already vendored into this repo by earlier siblings and reused here as-is
+# (ce_roe_mountain.dds from #3624, ce_bear_smo.dds and ce_cup.dds from #3625/
+# #3623 respectively — no new vendoring for those three). Loremaster-consulted
+# during scoping. Design language: warm ochre/terracotta/sea-green Tilean civic
+# heraldry, crimson/gold Iberian-Reconquista Estalian heraldry (castle, Santiago
+# cross, pilgrim scallop kept deliberately per the epic's "loreful fit comes
+# first" directive — a strong, canon/name-derived Mediterranean-Iberian charge is
+# not swapped out for reading real-world-adjacent), and an earthy dun/brick/moss
+# Border Princes belt following each realm's own filed heraldic hint. Each block
+# records its provenance bucket per #3621's "record every substitution"
+# acceptance criterion, matching 02_empire.txt/03_brettonia.txt/01_kislev.txt's
+# discipline. Requires common/flag_definitions/05_southern_realms.txt (this mod's
+# DEFAULT flag_definitions block is unconditional at priority = 0 and would
+# otherwise mask every one of these) to actually render in-game.
+
+# USR — United Southern Realms; the region-wide formable uniting Tilea, Estalia,
+# Sartosa and the Border Princes (cultures = { tilean sartosan estalian
+# border_princer }). Disclosed invention: no canon USR blazon exists — a radiant
+# golden sun (the same emblem family as DON's own sun-blazon heraldry below, and
+# #3622 Empire's SOL) stands for a single dawn breaking over all four peoples.
+# ce_sun_radiant confirmed 3 colour slots (#3622's SOL).
+USR = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_sun_radiant.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "saffron"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# TIL — Tilea; the city-states unite. Formable only (carries sartosan too — a
+# united Tilea takes Sartosa in with it). Loreful, canon-adjacent fit kept
+# deliberately: a winged lion reads directly as the Renaissance mercantile-
+# maritime-republic idiom Tilea is built on — the same idiom Venice's own Lion
+# of St Mark comes from — not avoided for the resemblance, per the epic's
+# 2026-09-14 directive. ce_ahom_winged_lion, already used twice in #3622
+# (Empire's REI, VSY); distinct brown/red-dark-on-golden treatment here reads as
+# its own device.
+TIL = {
+	pattern = "pattern_solid.tga"
+	color1 = "golden"
+	color2 = "golden"
+
+	colored_emblem = {
+		texture = "ce_ahom_winged_lion.dds"
+		color1 = "brown"
+		color2 = "brown"
+		color3 = "red_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# MIR — Miragliano, the marsh-city of the Prince of Miragliano. Disclosed
+# substitution: no heron/crane/marsh-bird art exists anywhere in the vanilla or
+# Realms of Exether sets (checked both) — ce_swan (already used once, #3623
+# Bretonnia's AQU) stands in as the nearest wetland-bird charge, recoloured
+# distinctly (grey/black vs AQU's white/gold) so the two don't read as a
+# recolour of each other.
+MIR = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown_light"
+	color2 = "brown_light"
+
+	colored_emblem = {
+		texture = "ce_swan.dds"
+		color1 = "grey"
+		color2 = "grey"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# LUC — Luccini, the southern city-state of the Prince's arena. Disclosed
+# invention: crossed blades for the gladiatorial-arena identity. Vanilla ships
+# no generic sword/gladius emblem (only the real-world-specific tulwar/shahada
+# pair, rejected as not generic); Realms of Exether's ce_roe_swords.dds fills
+# the gap — confirmed 2 colour slots (RoE's own
+# common/coat_of_arms/coat_of_arms/00_noricum.txt:273). Vendored to
+# gfx/coat_of_arms/colored_emblems/ce_roe_swords.dds.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_swords.dds), reuse grant 2026-09-07
+LUC = {
+	pattern = "pattern_solid.tga"
+	color1 = "tan"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_roe_swords.dds"
+		color1 = "red_dark"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# REM — Remas, the greatest of the Tilean city-states. Soft: a ducal crown for
+# the wealthiest and most powerful city-state, distinct colouring from #3623
+# Bretonnia's COU (also ce_crown_ducal). Confirmed 3 colour slots (vanilla
+# usage, common/coat_of_arms/coat_of_arms/02_countries.txt:3037; also COU).
+REM = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_crown_ducal.dds"
+		color1 = "golden"
+		color2 = "pearl"
+		color3 = "red_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.55 0.55 } }
+	}
+}
+
+# TOB — Tobaro, the cliff-port over the Tilean Sea; a sea power (per the tag's
+# own filed comment — sea-green rather than ochre). An anchor for the naval
+# identity. Vanilla ships no anchor emblem; Realms of Exether's ce_anchor.dds
+# fills the gap — confirmed 1 colour slot (RoE's own
+# common/coat_of_arms/coat_of_arms/02_central_zalaron.txt:405, three separate
+# usages, all single-slot). Vendored to
+# gfx/coat_of_arms/colored_emblems/ce_anchor.dds.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_anchor.dds), reuse grant 2026-09-07
+TOB = {
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+	color2 = "teal"
+
+	colored_emblem = {
+		texture = "ce_anchor.dds"
+		color1 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.85 } }
+	}
+}
+
+# TRA — Trantio, the marble city of the hills. ce_roe_mountain.dds — already
+# vendored to this repo's gfx/coat_of_arms/colored_emblems/ (epic #3621's
+# 2026-09-14 sweep, resolving the mountain gap for #3624 Karaz Ankor) — reused
+# here as-is for the literal "hills" identity; no new vendoring needed. 2
+# colour slots, full-scale usage (RoE's own 04_west_zalaron.txt).
+TRA = {
+	pattern = "pattern_solid.tga"
+	color1 = "yellow_dark"
+	color2 = "yellow_dark"
+
+	colored_emblem = {
+		texture = "ce_roe_mountain.dds"
+		color1 = "pearl"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 1 1 } }
+	}
+}
+
+# PAV — Pavona, the inland city-state. Soft: a wheat sheaf for an inland,
+# agrarian city-state (vs. the coastal/maritime Tilean tags around it) — same
+# emblem as #3622 Empire's MOO, recoloured; the two never risk being mistaken
+# for one another (different region, different field colour).
+PAV = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown_light"
+	color2 = "brown_light"
+
+	colored_emblem = {
+		texture = "ce_wheat_garb.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# VER — Verezzo, the city of scholars and merchant-clerks (per the tag's own
+# filed comment). Name-derived/high-confidence: an open book directly matches
+# a city of scholars and clerks. Vanilla ships no book emblem; Realms of
+# Exether's ce_roe_book.dds fills the gap — confirmed 3 colour slots (RoE's own
+# common/coat_of_arms/coat_of_arms/01_settlers_coast.txt:258). Vendored to
+# gfx/coat_of_arms/colored_emblems/ce_roe_book.dds.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_book.dds), reuse grant 2026-09-07
+VER = {
+	pattern = "pattern_solid.tga"
+	color1 = "tan"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_roe_book.dds"
+		color1 = "white"
+		color2 = "brown"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# DON — Donalba, the sun-blazon frontier city on the Lissa Road. Canon-firm per
+# the tag's own filed comment (read off sources/originals/old_world_z10.png):
+# gold sun on purple. ce_sun.dds confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:4985). Deliberately
+# different sun art from USR's ce_sun_radiant above and #3622 Empire's SOL/
+# #3625 Kislev's BOL so no two mod tags share a sun texture.
+DON = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# SRT — Sartosa, the pirate haven. unrecognized; black and blood-red,
+# deliberately off the Tilean palette (per the tag's own filed comment — "the
+# pirates' city, nobody's city-state"). A kraken-and-pirate device is the
+# strongest possible thematic fit — checked and confirmed present in the
+# Realms of Exether set (ce_roe_kraken_pirate.dds, confirmed 2 colour slots,
+# RoE's own common/coat_of_arms/coat_of_arms/07_aritzakarri.txt:158). Vendored
+# to gfx/coat_of_arms/colored_emblems/ce_roe_kraken_pirate.dds.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_kraken_pirate.dds), reuse grant 2026-09-07
+SRT = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_roe_kraken_pirate.dds"
+		color1 = "red_dark"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# EST — Estalia; the kingdoms unite. Formable only. Canon-firm Iberian idiom: a
+# golden castle, the direct Castile-derived charge for a united Estalian
+# crown — kept deliberately per the epic's loreful-fit directive rather than
+# swapped for a generic device. ce_castle confirmed 2 colour slots (#3623
+# Bretonnia's MNF, #3625 Kislev's PRA).
+EST = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "red"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "golden"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# BIL — Bilbali, the northern Estalian kingdom. Canon-firm Iberian idiom: the
+# Cross of Santiago, a direct Reconquista-era charge — kept deliberately per
+# the loreful-fit directive. ce_cross_santiago confirmed 2 colour slots
+# (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:11434).
+BIL = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown_light"
+	color2 = "brown_light"
+
+	colored_emblem = {
+		texture = "ce_cross_santiago.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# MAG — Magritta, the southern port kingdom (and EST's own intended capital,
+# per that tag's filed comment). Soft: a heraldic galley for the great
+# southern port, same device family as #3623 Bretonnia's BOR, recoloured.
+# ce_galley confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:16979).
+MAG = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_galley.dds"
+		color1 = "golden"
+		color2 = "white"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# CNT — Cantonia, a minor Estalian kingdom. Canon-firm Iberian idiom: the
+# pilgrim's scallop shell (Compostela) — kept deliberately per the loreful-fit
+# directive. ce_conch_shell confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:22816).
+CNT = {
+	pattern = "pattern_solid.tga"
+	color1 = "saffron"
+	color2 = "saffron"
+
+	colored_emblem = {
+		texture = "ce_conch_shell.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# BPR — the Border Princes; the belt-wide representative tag, one recognized
+# kingdom-tier polity standing for a whole belt of tiny, short-lived
+# principalities (per the tag's own filed comment). Soft: a plain castle for
+# the belt's generic castellan-adventurer identity — deliberately
+# unremarkable, a "petty realm's petty keep," since the 11 individually-
+# shielded realms below carry the strong blazons instead. ce_castle confirmed
+# 2 colour slots (as EST above).
+BPR = {
+	pattern = "pattern_solid.tga"
+	color1 = "tan"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "grey"
+		color2 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.65 0.65 } }
+	}
+}
+
+# ORT — Ortegeta, the castled realm above Ghoulstone Keep. Canon-firm per the
+# tag's own filed comment (a coat of arms on sources/originals/old_world_z10.png
+# = a ruling prince = a startable realm). A castle for the keep. ce_castle
+# confirmed 2 colour slots; distinct colouring from BPR/MON below.
+ORT = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown_light"
+	color2 = "brown_light"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "pearl"
+		color2 = "brown"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# GAS — Gastonne, the griffon-banner realm on the Tara Dante. Canon-firm per
+# the tag's own filed comment. The griffon gap (per the epic's Art palette
+# table) is resolved via Realms of Exether — ce_griffon.dds. No usage example
+# exists anywhere in RoE's own shipped script (checked project-wide; a genuine
+# gap in their own catalogue too, the same "zero real usages" situation #3622's
+# AVE documented for ce_bull_head), so its true colour-slot count is
+# unverified; both slots specified defensively at the same tone per that
+# precedent. Vendored to gfx/coat_of_arms/colored_emblems/ce_griffon.dds.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_griffon.dds), reuse grant 2026-09-07
+GAS = {
+	pattern = "pattern_solid.tga"
+	color1 = "tan"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_griffon.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# GDO — Gordorno, the fleur-de-lis realm by the Citadel of Gazul. Canon-firm
+# per the tag's own filed comment. Same emblem family as #3623 Bretonnia's
+# BRE/COU/MOU, recoloured white/pearl (distinct from all three) so it reads as
+# its own device sharing a charge. ce_fleur_de_lis confirmed 2 colour slots.
+GDO = {
+	pattern = "pattern_solid.tga"
+	color1 = "tan"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_fleur_de_lis.dds"
+		color1 = "white"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# MON — Monteaux, the towered realm on the Black Gulf coast. Canon-firm per
+# the tag's own filed comment. Field deliberately reads the coast's own name
+# (a black field, off this file's earthy dun/brick/moss family — the same
+# off-palette idiom the file's own header comment applies to SRT) rather than
+# the nearest-RGB named colour, since "Black Gulf" is the stronger canon read.
+# ce_castle in pale stone, confirmed 2 colour slots.
+MON = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "pearl"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# AQL — Aquilena, the serpent realm on the River Orco. Canon-firm per the
+# tag's own filed comment. ce_cobra_coiled.dds — a genuine vanilla emblem (not
+# RoE; gfx/ isn't blanked so it loads as-is), confirmed 2 colour slots
+# (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:9542).
+AQL = {
+	pattern = "pattern_solid.tga"
+	color1 = "grey"
+	color2 = "grey"
+
+	colored_emblem = {
+		texture = "ce_cobra_coiled.dds"
+		color1 = "green_dark"
+		color2 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# DUN — Dunkelmund, the double-eagle realm near High Spear. Canon-firm per the
+# tag's own filed comment. Same emblem family as #3625 Kislev's KIS/KSV/ERE,
+# recoloured black/golden (distinct from all three Kislevite treatments).
+# ce_eagle_doubleheaded_base confirmed 3 colour slots (#3625's own file).
+DUN = {
+	pattern = "pattern_solid.tga"
+	color1 = "orange"
+	color2 = "orange"
+
+	colored_emblem = {
+		texture = "ce_eagle_doubleheaded_base.dds"
+		color1 = "black"
+		color2 = "black"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# ESS — Esselhafen, the chevron-banner realm on the River Stecnek. Canon-firm
+# per the tag's own filed comment. No plain chevron field pattern exists in
+# either vanilla or the Realms of Exether pattern set (both checked); RoE's
+# ce_bicolor_chevron.dds — a chevron colored_emblem rather than a field
+# pattern — fills the gap directly. Confirmed 3 colour slots (RoE's own
+# common/coat_of_arms/coat_of_arms/04_west_zalaron.txt:728-732; one of its two
+# usages there specifies only 2, so color3 is set equal to color1 here as the
+# same defensive convention #3622's AVE established for a partially-verified
+# slot count). Vendored to gfx/coat_of_arms/colored_emblems/ce_bicolor_chevron.dds.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_bicolor_chevron.dds), reuse grant 2026-09-07
+ESS = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown_light"
+	color2 = "brown_light"
+
+	colored_emblem = {
+		texture = "ce_bicolor_chevron.dds"
+		color1 = "white"
+		color2 = "red_dark"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.85 0.85 } }
+	}
+}
+
+# RAA — Raachwald, the serpent-and-diamond realm by Reavers Keep. Canon-firm
+# per the tag's own filed comment — both charges named directly: a lozengy
+# (diamond) field pattern with a coiled serpent charged over it.
+# pattern_lozengy_bend confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/01_subs.txt:626); ce_cobra_coiled reused
+# from AQL above with a distinct recolour (brown/grey vs AQL's green/black) so
+# the two serpents don't read as one recoloured device.
+RAA = {
+	pattern = "pattern_lozengy_bend.dds"
+	color1 = "green_dark"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_cobra_coiled.dds"
+		color1 = "brown"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
+	}
+}
+
+# UVE — Uvetovsk, the Kislevite-founded bear realm on the Old Silk Road.
+# Canon-firm per the tag's own filed comment: "the white-bear heraldry marks
+# the canonical Kislevite-founded stock" (cultures = { gospodar ungol },
+# cross-file reference to common/cultures/kislevite_humans.txt). ce_bear_smo.dds
+# — already vendored to this repo's gfx/coat_of_arms/colored_emblems/ for
+# #3625 Kislev's VOL — reused here as-is; recoloured white/pearl for UVE's own
+# "white-bear" blazon, distinct from VOL's brown/black. 2 colour slots (as
+# VOL's own file confirms).
+UVE = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_steel"
+	color2 = "blue_steel"
+
+	colored_emblem = {
+		texture = "ce_bear_smo.dds"
+		color1 = "white"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# HKN — Harkon, the chalice realm in the Forest of Gloom. sylvanian_vampire,
+# unrecognized (cross-file reference to common/cultures/vampire.txt). Canon-
+# firm per the tag's own filed comment ("blood-chalice heraldry; undead border
+# realm"). ce_cup.dds — already vendored to this repo's
+# gfx/coat_of_arms/colored_emblems/ for #3623 Bretonnia's BAS — reused here
+# as-is; 1 colour slot (as BAS's own file confirms). Chalice recoloured sickly
+# Morrslieb-green, the same vampire-corruption tincture #3622 Empire's SYL/VSY
+# established, rather than BAS's honest gold — the same charge gone wrong.
+HKN = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_cup.dds"
+		color1 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# PON — Pontenne, the chalice realm by the Chateau de Morsuil. sylvanian_
+# vampire, unrecognized (as HKN above). Canon-firm per the tag's own filed
+# comment. Same ce_cup.dds device as HKN (both are named "chalice realm" in
+# their own filed comments) but coloured blood-red rather than HKN's
+# Morrslieb-green, on a distinct purple field, so the two vampire border
+# realms read as kin sharing a charge, not duplicates.
+PON = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_cup.dds"
+		color1 = "red_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
