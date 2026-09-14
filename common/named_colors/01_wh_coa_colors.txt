@@ -3,4 +3,10 @@
 # tinctures the vanilla coa_colors palette (00_coa_colors.txt) doesn't cover.
 colors = {
 	morrslieb_green = hsv360 { 80 45 55 }
+
+	# Kislev heraldry (#3625, epic #3621): the Ice Court's glacial pale-blue and the
+	# Ungol steppe's ochre-khaki — neither is well served by the vanilla port's
+	# blue_light/tan/beige.
+	ice_blue = hsv360 { 200 35 88 }
+	steppe_ochre = hsv360 { 42 50 62 }
 }
