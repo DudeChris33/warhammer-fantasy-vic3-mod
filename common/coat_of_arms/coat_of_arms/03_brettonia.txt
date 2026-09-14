@@ -185,23 +185,23 @@ QUE = {
 }
 
 # CAR — Carcassonne, the southern march duchy bordering the greenskin-held Massif
-# Orcal (MOR). Invented device, real-world charge explicitly rejected: scoping's
-# first candidate, ce_cross_occitan.dds, is the real-world Cross of Toulouse / the
-# Albigensian Crusade and was rejected outright as real-world-specific (Chris,
-# 2026-09-14). In its place: ce_shield_heater.dds, a generic small-shield-on-field
-# charge, confirmed 2 colour slots (02_countries.txt:4214-4217), not already spent
-# anywhere else in this file or in 02_empire.txt's 14-charge list — a plain
-# defensive device for a border march that holds the line against MOR.
+# Orcal (MOR). Name-derived: ce_cross_occitan.dds (the Cross of Toulouse/Occitan
+# cross) is real-world-adjacent, sharing the real Carcassonne's own heraldic
+# device — Chris ruled (2026-09-14) that a loreful, name-derived fit outweighs
+# real-world adjacency here, superseding an earlier build-time swap to a generic
+# shield charge. Confirmed 3 colour slots (color1/2/3 all present in vanilla
+# usage, common/coat_of_arms/coat_of_arms/02_countries.txt).
 CAR = {
 	pattern = "pattern_solid.tga"
-	color1 = "red_dark"
-	color2 = "red_dark"
+	color1 = "red"
+	color2 = "red"
 
 	colored_emblem = {
-		texture = "ce_shield_heater.dds"
-		color1 = "white"
+		texture = "ce_cross_occitan.dds"
+		color1 = "golden"
 		color2 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
 	}
 }
 
@@ -296,9 +296,9 @@ MOU = {
 # it is named by location, not tribe). Invented tribal device: a crude labrys
 # (double-headed axe/choppa) on a slashed green-black field. Deliberately NOT
 # ce_labrys_petain or ce_labrys_ppf — both are real-world Vichy France / Parti
-# Populaire Français variants of the labrys and are rejected on the same
-# real-world-specific grounds as CAR's cross above; plain ce_labrys.dds carries no
-# such association.
+# Populaire Français political variants of the labrys, rejected as 20th-century
+# political regalia rather than generic heraldry (distinct from CAR's medieval
+# heraldic cross, which is kept); plain ce_labrys.dds carries no such association.
 MOR = {
 	pattern = "pattern_per_bend.dds"
 	color1 = "green_dark"
