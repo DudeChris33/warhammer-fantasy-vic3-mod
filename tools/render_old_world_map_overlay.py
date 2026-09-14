@@ -99,16 +99,38 @@ Colour handling
 ----------------
 The stretched export is an 8-flat-colour debug render, not painted art, sampled
 here as **raw RGB** (no label/TSV lookup — this file carries no region keys to
-resolve). One colour is treated specially: ``(46,46,46)`` is the export's own
-rounded-corner camera-vignette artifact (confirmed by histogram: 25.4% of the
-image, in four rounded corners) — a HUD bezel, not geography — and is rendered
-as void (the globe shows through), the same convention the sibling script
-applies to its own void colour.
+resolve). By default, one colour is treated specially: ``(46,46,46)`` is
+rendered as void (the globe shows through) so the default full drape reads as
+a clean land/sea/border/terrain map. **Correction to this board item's own
+earlier scoping note:** ``(46,46,46)`` was described there as purely a
+"rounded-corner camera-vignette artifact." A pixel-spatial check this session
+(masking the colour and looking at where it falls) shows that is only part of
+the picture — a small circular frame/compass-rose decoration does sit in each
+corner, but the colour's bulk (25.4% of the image) is an organic, branching
+network spread across the *whole* frame, matching mountain ranges far more
+than a UI bezel would: this is almost certainly the export's **impassable
+terrain** layer, not decoration. :data:`COLOR_LIBRARY` names it ``"grey"``
+(alias ``"impassable"``) accordingly, and :option:`--colors` lets it be
+selected deliberately (see below) instead of always being dropped.
+
+Colour selection (``--colors``)
+--------------------------------
+:option:`--colors` restricts the drape to an explicit, comma-separated list of
+named colours from :data:`COLOR_LIBRARY` (case-insensitive; ``purple`` is an
+alias for the magenta dot markers, ``grey``/``impassable`` for the terrain
+layer above). Every pixel whose colour is **not** in the selected set is
+treated as void (globe shows through) — this is a selection, not a recolour:
+each kept pixel is drawn in its own real source colour. Omit the option for
+the original full drape (every colour except ``grey``, unchanged from this
+render's first version). Output paths are suffixed with the selected names
+(sorted) so different selections never overwrite each other.
 
 Usage::
 
     python tools/render_old_world_map_overlay.py
     python tools/render_old_world_map_overlay.py --coast
+    python tools/render_old_world_map_overlay.py --colors purple
+    python tools/render_old_world_map_overlay.py --colors purple,grey --coast
     python tools/render_old_world_map_overlay.py --verify-correspondence
 """
 
@@ -173,17 +195,68 @@ ROW_BLOCK = 64
 #: user-accepted default. Not a real correspondence — a QA convenience.
 HULL_BUFFER_PX_DEFAULT = 50.0
 
-#: The export's own rounded-corner camera-vignette artifact — void, not geography
-#: (confirmed by histogram: 25.4% of the image, four rounded corners).
+#: The export's terrain/impassable layer, plus a small corner frame decoration
+#: sharing the same flat colour — see the module docstring's correction. Dropped
+#: to void by DEFAULT (the original full-drape behaviour); selectable by name
+#: (``"grey"``/``"impassable"``) via --colors.
 VOID_RGB = (46, 46, 46)
-VOID_TOLERANCE = 10  # small AA slack around the flat vignette colour
+VOID_TOLERANCE = 10  # small AA slack around the flat colour
 #: The flat land colour, used only by --verify-correspondence's silhouette extraction.
 LAND_RGB = (16, 248, 0)
 LAND_TOLERANCE = 60
+#: Per-pixel colour-distance slack used when matching a --colors selection —
+#: this export is flat/exact (see the histogram in the module docstring), so
+#: this only needs to absorb incidental PNG re-save noise, not real AA.
+COLOR_MATCH_TOLERANCE = 10
+
+#: Every flat colour this export actually uses (confirmed by direct pixel
+#: histogram, board #4425 scoping — exactly 8, no others). Selectable by name
+#: via --colors; aliases point at the same RGB as their primary name.
+COLOR_LIBRARY: dict[str, tuple[int, int, int]] = {
+    "land": (16, 248, 0),
+    "sea": (53, 67, 255),
+    "grey": VOID_RGB,          # terrain/impassable layer + corner frame decoration
+    "impassable": VOID_RGB,    # alias for "grey" — see module docstring
+    "border": (252, 170, 0),   # region-border lines
+    "mountain": (139, 69, 19), # mountain-range shading
+    "purple": (255, 0, 255),   # settlement/point-of-interest dot markers
+    "magenta": (255, 0, 255),  # alias for "purple"
+    "yellow": (240, 240, 40),
+    "cyan": (16, 231, 234),
+}
 
 COAST_RGB = (0, 255, 255)
 
 OUT_PREFIX = "old_world_map_overlay"
+
+
+def resolve_colors(spec: str | None) -> list[tuple[str, tuple[int, int, int]]] | None:
+    """Parse ``--colors`` into ``[(name, rgb), ...]``, or None for "no selection".
+
+    Deduplicates by RGB (an alias and its primary name given together would
+    otherwise double-count in the fit report) while keeping first-seen order,
+    and hard-errors on an unknown name rather than silently ignoring it.
+    """
+    if not spec:
+        return None
+    seen_rgb: set[tuple[int, int, int]] = set()
+    out: list[tuple[str, tuple[int, int, int]]] = []
+    for raw in spec.split(","):
+        name = raw.strip().lower()
+        if not name:
+            continue
+        if name not in COLOR_LIBRARY:
+            raise SystemExit(
+                f"--colors: unknown colour name {raw!r}. Known names: "
+                f"{', '.join(sorted(COLOR_LIBRARY))}")
+        rgb = COLOR_LIBRARY[name]
+        if rgb in seen_rgb:
+            continue
+        seen_rgb.add(rgb)
+        out.append((name, rgb))
+    if not out:
+        raise SystemExit("--colors: no colour names given")
+    return out
 
 
 def log(msg: str) -> None:
@@ -279,12 +352,23 @@ def master_to_canvas_scale(reg: schema.SourceRegistration) -> float:
 
 
 def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
-                    scope: np.ndarray) -> tuple[np.ndarray, np.ndarray, dict]:
+                    scope: np.ndarray,
+                    colors: list[tuple[str, tuple[int, int, int]]] | None = None
+                    ) -> tuple[np.ndarray, np.ndarray, dict]:
     """Warp the stretched export into canvas space. Returns ``(rgb, placed, excluded)``.
 
     ``placed`` is True where the warp landed inside the master frame AND inside
-    this mod's scope (:data:`SCOPE_SOURCE`'s alpha) AND the sampled colour is
-    not the export's own void/vignette colour.
+    this mod's scope (:data:`SCOPE_SOURCE`'s alpha) AND the sampled colour
+    survives the colour gate.
+
+    The colour gate is one of two things:
+
+    * ``colors is None`` (default, unchanged from this render's first
+      version) — every colour is paintable *except* :data:`VOID_RGB`.
+    * ``colors`` given (``--colors``) — only pixels matching one of the named
+      colours are paintable; everything else is void, regardless of whether it
+      would otherwise have been drawn. This is a selection, not a recolour:
+      a kept pixel is still drawn in its own real sampled colour.
 
     Nearest sampling, direct integer indexing — same rationale as
     ``render_cr_lookup_overlay.place_lookup``: this is a small (2048²) flat-
@@ -310,9 +394,16 @@ def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
         sy = np.clip(np.rint(my * MASTER_TO_STRETCHED_SCALE), 0, STRETCHED_SIZE - 1).astype(np.int32)
         block = stretched[sy, sx]
 
-        d = np.abs(block.astype(np.int16) - np.array(VOID_RGB, dtype=np.int16)).sum(axis=2)
-        non_void = d > VOID_TOLERANCE
-        paintable = in_master & non_void
+        block16 = block.astype(np.int16)
+        if colors is None:
+            d = np.abs(block16 - np.array(VOID_RGB, dtype=np.int16)).sum(axis=2)
+            gate = d > VOID_TOLERANCE
+        else:
+            gate = np.zeros(block.shape[:2], dtype=bool)
+            for _, rgb in colors:
+                d = np.abs(block16 - np.array(rgb, dtype=np.int16)).sum(axis=2)
+                gate |= d <= COLOR_MATCH_TOLERANCE
+        paintable = in_master & gate
 
         mxi = np.clip(np.rint(np.where(in_master, mx, 0.0)), 0, MASTER_SIZE - 1).astype(np.int32)
         myi = np.clip(np.rint(np.where(in_master, my, 0.0)), 0, MASTER_SIZE - 1).astype(np.int32)
@@ -500,7 +591,8 @@ def verify_correspondence() -> int:
 # ---------------------------------------------------------------------------
 
 def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dict,
-              scope: np.ndarray) -> dict:
+              scope: np.ndarray,
+              colors: list[tuple[str, tuple[int, int, int]]] | None) -> dict:
     n_landmarks = len(reg.control_points)
     scale = master_to_canvas_scale(reg)
     log("")
@@ -520,8 +612,14 @@ def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dic
         f"frame is in scope) — Chris, 2026-09-12")
     log(f"  master->canvas    {scale:.4f} canvas px per master px "
         f"(footprint width {reg.footprint[2] - reg.footprint[0]:.1f} / {MASTER_SIZE})")
-    log(f"  void colour       {VOID_RGB} (the export's own rounded-corner camera "
-        f"vignette, ~25% of the source image) rendered as void — globe shows through")
+    if colors is None:
+        log(f"  colour gate       full drape: every colour except void {VOID_RGB} "
+            f"(terrain/impassable layer + corner frame decoration, ~25% of the source "
+            f"image — see module docstring)")
+    else:
+        names = ", ".join(f"{n} {rgb}" for n, rgb in colors)
+        log(f"  colour gate       --colors selection: only {names} placed; everything "
+            f"else void")
     return {
         "registration": FULL_SOURCE,
         "registration_projection": reg.projection,
@@ -534,10 +632,12 @@ def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dic
         "scope_excluded_px": int(excluded["px"]),
         "master_to_canvas_scale": scale,
         "void_rgb": list(VOID_RGB),
+        "colors_selected": ([n for n, _ in colors] if colors is not None else None),
     }
 
 
-def build(coast: bool, hull_buffer_px: float) -> Path:
+def build(coast: bool, hull_buffer_px: float,
+         colors: list[tuple[str, tuple[int, int, int]]] | None = None) -> Path:
     require_dataset()
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     if FULL_SOURCE not in regs:
@@ -562,30 +662,41 @@ def build(coast: bool, hull_buffer_px: float) -> Path:
     log(f"eval box          canvas {list(box)}"
         + (f" (footprint + {hull_buffer_px:.0f}px outer-hull buffer)" if hull_buffer_px > 0
            else " (strict footprint)"))
-    rgb, placed, excluded = place_stretched(fit, box, stretched, scope)
+    rgb, placed, excluded = place_stretched(fit, box, stretched, scope, colors=colors)
     if not placed.any():
-        raise SystemExit("nothing placed — check the registration / stretched export / scope mask")
+        raise SystemExit("nothing placed — check the registration / stretched export / "
+                         "scope mask / --colors selection")
 
-    report = fit_report(placed, reg, excluded, scope)
+    report = fit_report(placed, reg, excluded, scope, colors)
 
     canvas = compose(rgb, placed, globe)
     del rgb
-    legend = [(None, "TWW3 old_world_map (stretched) draped via "
-                     "tww3_old_world_mod_parchment_full (PROVISIONAL)"),
-              (None, "void = camera-vignette corners + campaign-map sea, not drawn"),
-              (None, f"cropped to {SCOPE_SOURCE} extent: "
-                     f"{report['scope_excluded_px']:,} px out of scope, dropped")]
+    if colors is None:
+        legend = [(None, "TWW3 old_world_map (stretched) draped via "
+                         "tww3_old_world_mod_parchment_full (PROVISIONAL)"),
+                  (None, "void = terrain/impassable layer + corner frame decoration, "
+                         "not drawn")]
+    else:
+        names = ", ".join(n for n, _ in colors)
+        legend = [(None, f"TWW3 old_world_map (stretched), colours {{{names}}} only, "
+                         f"via tww3_old_world_mod_parchment_full (PROVISIONAL)"),
+                  *[(rgb, name) for name, rgb in colors],
+                  (None, "everything else void, not drawn")]
+    legend.append((None, f"cropped to {SCOPE_SOURCE} extent: "
+                         f"{report['scope_excluded_px']:,} px out of scope, dropped"))
     if coast:
         legend.append((COAST_RGB, "this mod's coastline (reference)"))
         report["coast_px"] = overlay_coast(canvas)
 
     draw_legend(canvas, legend)
 
+    prefix = OUT_PREFIX if colors is None else f"{OUT_PREFIX}_" + "_".join(
+        sorted(n for n, _ in colors))
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = DERIVED_DIR / f"{OUT_PREFIX}.png"
+    out_path = DERIVED_DIR / f"{prefix}.png"
     Image.fromarray(canvas, mode="RGB").save(out_path)
     log(f"wrote {out_path.relative_to(REPO_ROOT)}")
-    write_crops(canvas, box, OUT_PREFIX)
+    write_crops(canvas, box, prefix)
 
     report["provenance"] = {
         "stretched_png": {"name": STRETCHED_PNG.name, "sha256": sha256_of(STRETCHED_PNG)},
@@ -595,7 +706,7 @@ def build(coast: bool, hull_buffer_px: float) -> Path:
                       "placement moves, this render moves with it. Cropped to "
                       f"{SCOPE_SOURCE}'s opaque extent (Chris, 2026-09-12: land not "
                       "drawn there is out of scope).")
-    side = DERIVED_DIR / f"{OUT_PREFIX}.json"
+    side = DERIVED_DIR / f"{prefix}.json"
     with open(side, "w", encoding="utf-8") as fh:
         json.dump(report, fh, indent=2, sort_keys=True)
         fh.write("\n")
@@ -615,12 +726,18 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--verify-correspondence", action="store_true",
                    help="re-run the FFT phase-correlation check behind "
                         "MASTER_TO_STRETCHED_SCALE, then exit")
+    p.add_argument("--colors", type=str, default=None,
+                   help="comma-separated colour names to restrict the drape to (e.g. "
+                        "'purple' or 'purple,grey'); everything else renders as void. "
+                        f"Known names: {', '.join(sorted(COLOR_LIBRARY))}. Omit for the "
+                        "full drape (every colour except grey/impassable)")
     args = p.parse_args(argv)
 
     if args.verify_correspondence:
         return verify_correspondence()
 
-    build(coast=args.coast, hull_buffer_px=args.hull_buffer_px)
+    colors = resolve_colors(args.colors)
+    build(coast=args.coast, hull_buffer_px=args.hull_buffer_px, colors=colors)
     return 0
 
 
