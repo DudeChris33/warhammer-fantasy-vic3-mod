@@ -1,0 +1,152 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per board #3626 — the nine Norsca High
+# Tribe tags (SAR, AES, BAE, BJO, SKA, GRA, VAR, HAS, KVE). Composed from vanilla
+# gfx/coat_of_arms/ art (patterns + colored_emblems, neither blanked by
+# replace_paths) plus four emblems from the permissioned Realms of Exether sibling
+# mod (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds, already vendored by
+# #3624, and ce_wolf.dds/ce_bear_smo.dds/ce_dalship.dds, newly vendored here,
+# reuse grant 2026-09-07) and this mod's named_colors palette
+# (common/named_colors/00_coa_colors.txt). Every substitution/asset source is
+# disclosed in the comment above its block, following the 02_empire.txt
+# precedent. Requires common/flag_definitions/00_norsca.txt (this mod's DEFAULT
+# flag_definitions block is unconditional at priority = 0 and would otherwise
+# mask every one of these) to actually render in-game.
+
+# SAR — Sarls. Longship — the registry's own "Wolf of the Sea" epithet is a
+# kenning for the ship itself, not the animal (literal wolf goes to VAR).
+SAR = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_steel"
+	color2 = "blue_steel"
+
+	colored_emblem = {
+		texture = "ce_dalship.dds"
+		color1 = "pearl"
+		color2 = "brown"
+		color3 = "blue_steel"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# AES — Aeslings. Serpent — Slaanesh-leaning tribe (repo-shipped map colour),
+# sinuous form read without explicit Chaos iconography.
+AES = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_dragon_tatar.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# BAE — Baersonlings. Tiwaz rune (oath, honour) — this repo's "reavers still
+# on speaking terms with humanity"; the bear goes to BJO instead (Bjørn = bear).
+BAE = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+	color2 = "pearl"
+
+	colored_emblem = {
+		texture = "ce_rune_tiwaz.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# BJO — Bjornlings. Bear (Bjørn = bear, Old Norse) — wins over BAE on
+# etymology; maritime/trader canon role carried by the teal field.
+BJO = {
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+	color2 = "blue_steel"
+
+	colored_emblem = {
+		texture = "ce_bear_smo.dds"
+		color1 = "brown"
+		color2 = "pearl"
+		color3 = "blue_steel"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# SKA — Skaelings. Crossed axes — Khorne-leaning tribe (repo-shipped map
+# colour); vanilla has no axe art at all, this is the item's axe substitution.
+SKA = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_roe_axes.dds"
+		color1 = "grey"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# GRA — Graelings. Eight-pointed star — Tzeentch-leaning tribe (repo-shipped
+# map colour); blue/gold is Tzeentch's canon palette.
+GRA = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "blue"
+
+	colored_emblem = {
+		texture = "ce_star_08.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# VAR — Varg. Wolf (Vargr = wolf, Old Norse) — the clearest name-derived
+# device in the set; vanilla has no wolf art, this is the wolf substitution.
+VAR = {
+	pattern = "pattern_solid.tga"
+	color1 = "grey"
+	color2 = "grey"
+
+	colored_emblem = {
+		texture = "ce_wolf.dds"
+		color1 = "grey"
+		color2 = "black"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# HAS — Hastlings. Hagalaz rune (hail, killing winter) — no totem canon
+# exists for this tribe; device disclosed as invented.
+HAS = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+	color2 = "teal"
+
+	colored_emblem = {
+		texture = "ce_rune_hagal.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# KVE — Kvelligs. Algiz rune (warding) — no totem canon exists for this
+# tribe; paired with HAS as a deliberate rune-pair rather than two unrelated
+# guesses. Device disclosed as invented.
+KVE = {
+	pattern = "pattern_solid.tga"
+	color1 = "todo_purple"
+	color2 = "todo_purple"
+
+	colored_emblem = {
+		texture = "ce_rune_algiz.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
