@@ -1,0 +1,148 @@
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at
+# priority = 0 — so "no flag definition is applicable for a country" (vanilla's
+# own tag-as-COA_KEY fallback condition, see that file's vanilla header comment
+# at .../game/common/flag_definitions/00_flag_definitions.txt:1-14) never fires
+# for any tag. Without a higher-priority tag-named list here, every bespoke COA
+# in common/coat_of_arms/coat_of_arms/03_brettonia.txt (#3623, epic #3621) would
+# parse but sit unused behind default_flag. Each list below is a single
+# unconditional block at priority = 100 — above #3552's priority = 0 DEFAULT,
+# below vanilla's own conditional range of 100-2000 for future per-tag variants —
+# matching 02_empire.txt's (#3622) same shape exactly. `always = yes` confirmed
+# valid at docs/triggers.log.
+
+BRE = {
+	flag_definition = {
+		coa = BRE
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+COU = {
+	flag_definition = {
+		coa = COU
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LYO = {
+	flag_definition = {
+		coa = LYO
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ART = {
+	flag_definition = {
+		coa = ART
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+GIS = {
+	flag_definition = {
+		coa = GIS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MNF = {
+	flag_definition = {
+		coa = MNF
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BAS = {
+	flag_definition = {
+		coa = BAS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+AQU = {
+	flag_definition = {
+		coa = AQU
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+QUE = {
+	flag_definition = {
+		coa = QUE
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+CAR = {
+	flag_definition = {
+		coa = CAR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BRI = {
+	flag_definition = {
+		coa = BRI
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BOR = {
+	flag_definition = {
+		coa = BOR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LAN = {
+	flag_definition = {
+		coa = LAN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+PAR = {
+	flag_definition = {
+		coa = PAR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MOU = {
+	flag_definition = {
+		coa = MOU
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MOR = {
+	flag_definition = {
+		coa = MOR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SKZ = {
+	flag_definition = {
+		coa = SKZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}

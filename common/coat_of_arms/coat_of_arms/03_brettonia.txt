@@ -1,0 +1,333 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per epic #3621 child #3623 — the 17
+# Bretonnia country tags (common/country_definitions/03_brettonia.txt, same order).
+# Composed mostly from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems,
+# neither blanked by replace_paths) and this mod's named_colors palette
+# (common/named_colors/00_coa_colors.txt + 01_wh_coa_colors.txt), plus one vendored
+# emblem: BAS's ce_cup.dds is NOT vanilla — it is sourced from the sibling
+# Realms of Exether mod's gfx/coat_of_arms/colored_emblems/ce_cup.dds (Chris
+# approved vendoring it 2026-09-14, so Bastonne — Gilles le Breton's birth-duchy,
+# cradle of the Grail cult — gets an actual chalice rather than a substitute) and
+# committed here at gfx/coat_of_arms/colored_emblems/ce_cup.dds. Each block below
+# records its provenance bucket per #3621's "record every substitution" acceptance
+# criterion, matching 02_empire.txt's (#3622) discipline. Requires
+# common/flag_definitions/03_brettonia.txt (this mod's DEFAULT flag_definitions
+# block is unconditional at priority = 0 and would otherwise mask every one of
+# these — see that file's header) to actually render in-game.
+
+# BRE — canon-firm: the royal arms of Bretonnia, a golden fleur-de-lis on azure. No
+# substitution.
+BRE = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_fleur_de_lis.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# The sixteen dukedoms below are recognized principalities (per
+# common/country_definitions/03_brettonia.txt) — including Mousillon, cursed but
+# still nominally a duchy, and the two Greenskin holdouts MOR/SKZ.
+
+# COU — Couronne, the royal dukedom of the north. Soft/disclosed invention: the
+# kingdom's own fleur-de-lis multiplied three times and ensigned with a ducal
+# coronet — "the crown duchy wears the kingdom's arms again" — deliberately NOT
+# the Leoncoeur lion that 02_empire.txt's MID header notes was considered and
+# rejected there for Ulric; kept distinct here for the same reason.
+COU = {
+	pattern = "pattern_solid.tga"
+	color1 = "medium_blue"
+	color2 = "medium_blue"
+
+	colored_emblem = {
+		texture = "ce_fleur_de_lis.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.35 0.42 } scale = { 0.3 0.3 } }
+		instance = { position = { 0.65 0.42 } scale = { 0.3 0.3 } }
+		instance = { position = { 0.5 0.68 } scale = { 0.3 0.3 } }
+	}
+	colored_emblem = {
+		texture = "ce_crown_ducal.dds"
+		color1 = "golden"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.17 } scale = { 0.28 0.28 } }
+	}
+}
+
+# LYO — Lyonesse, the storm-beaten northern coast facing Norscan raids. Unverified
+# blazon: a wave device on a split blue field reads as the exposed northern coast;
+# no specific canon charge confirmed.
+LYO = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "blue_light"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# ART — Artois, the forested north. Unverified blazon, but canon-firm forest
+# identity (the Forest of Arden dominates the duchy) — a single tree stands for it.
+ART = {
+	pattern = "pattern_solid.tga"
+	color1 = "yellow_dark"
+	color2 = "yellow_dark"
+
+	colored_emblem = {
+		texture = "ce_tree_new_england.dds"
+		color1 = "green_dark"
+		color2 = "green_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# GIS — Gisoreaux, the northern march. Unverified/disclosed invention: a golden
+# cross fleury on purple for a pious northern march duchy — the fleur terminals
+# keep it read as Bretonnian rather than Sigmarite/Imperial. ce_cross_fleury has no
+# vanilla usage with explicit colours (only appears inside a random weighted
+# template list, confirmed by grep); its 2-colour-slot layout is confirmed instead
+# from the structurally identical ce_cross_patty (common/coat_of_arms/coat_of_arms
+# /02_countries.txt:6842, same cross family, explicit color1/color2 only) — 2
+# slots, not the 3 flagged as a defensive fallback in scoping.
+GIS = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_cross_fleury.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# MNF — Montfort, the fortress duchy guarding the Axe Bite Pass into the Grey
+# Mountains. Soft: a castle for the mountain gate. ce_castle is confirmed 2-slot
+# only (color1/color2 — every vanilla usage checked, including the dynamic
+# color1=color3/color2=color5 aliasing in 02_countries.txt:4679, carries no
+# color3), so this deviates from scoping's 3-colour sketch down to 2.
+MNF = {
+	pattern = "pattern_solid.tga"
+	color1 = "grey"
+	color2 = "grey"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "golden"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# BAS — Bastonne, birthplace of Gilles le Breton, cradle of the Grail cult. Real
+# emblem, vendored, not substituted: ce_cup.dds is NOT a vanilla texture — it comes
+# from the sibling Realms of Exether mod (see the file header) and is committed
+# here at gfx/coat_of_arms/colored_emblems/ce_cup.dds. Confirmed 1 colour slot
+# (RoE's own common/coat_of_arms/coat_of_arms/01_settlers_coast.txt:1187-1191 uses
+# only color1, no color2/color3), so this deviates from scoping's 2-or-3-slot
+# guess down to 1 — a golden chalice, the actual Grail, on azure.
+BAS = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_cup.dds"
+		color1 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# AQU — Aquitaine, the western coast, land of waters. Unverified/disclosed
+# invention: a swan toward the Lady of the Lake, teal for the coastal duchy.
+AQU = {
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+	color2 = "teal"
+
+	colored_emblem = {
+		texture = "ce_swan.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# QUE — Quenelles, the forest dukedom bordering Athel Loren. Soft — the single
+# vanilla unicorn emblem, chosen for the duchy famous for its unicorn-mounted
+# knights-errant and elven-forest border. This is the most uncertain call in this
+# file (vs. PAR below) — flagged here for a future loremaster review pass.
+QUE = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	color2 = "green"
+
+	colored_emblem = {
+		texture = "ce_unicorn.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# CAR — Carcassonne, the southern march duchy bordering the greenskin-held Massif
+# Orcal (MOR). Invented device, real-world charge explicitly rejected: scoping's
+# first candidate, ce_cross_occitan.dds, is the real-world Cross of Toulouse / the
+# Albigensian Crusade and was rejected outright as real-world-specific (Chris,
+# 2026-09-14). In its place: ce_shield_heater.dds, a generic small-shield-on-field
+# charge, confirmed 2 colour slots (02_countries.txt:4214-4217), not already spent
+# anywhere else in this file or in 02_empire.txt's 14-charge list — a plain
+# defensive device for a border march that holds the line against MOR.
+CAR = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_shield_heater.dds"
+		color1 = "white"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
+	}
+}
+
+# BRI — Brionne, the river dukedom of hard men. Unverified/disclosed invention: a
+# closed great helm for the duchy's martial reputation.
+BRI = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_crest_helmet.dds"
+		color1 = "pearl"
+		color2 = "grey"
+		color3 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# BOR — Bordeleaux, the great southern port. Soft: a heraldic galley (lymphad) on a
+# wine-dark field for the naval duchy.
+BOR = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_lymphad.dds"
+		color1 = "golden"
+		color2 = "white"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# LAN — L'Anguille, the northern sea-gate. Name-derived, high confidence: canting
+# arms — L'Anguille literally means "the eel" — so a fish charge reads directly
+# off the duchy's own name.
+LAN = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_steel"
+	color2 = "blue_steel"
+
+	colored_emblem = {
+		texture = "ce_fish_oudh.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "saffron"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# PAR — Parravon, the eyrie above the Grismerie, home of the Pegasus Knights.
+# Disclosed substitution: no pegasus emblem exists in vanilla or the vendored
+# Realms of Exether set (checked both), so a mountain raptor (falcon) stands in for
+# the winged mount on a pearl-grey mountain field.
+PAR = {
+	pattern = "pattern_solid.tga"
+	color1 = "pearl"
+	color2 = "pearl"
+
+	colored_emblem = {
+		texture = "ce_falcon.dds"
+		color1 = "azure"
+		color2 = "azure"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# MOU — Mousillon, the cursed dukedom. Corruption carried by tincture alone, not by
+# a new charge: BRE's own royal fleur-de-lis, unchanged in shape, recoloured
+# sickly Morrslieb-green on black — the kingdom's own arms blighted. A skull was
+# considered and deliberately NOT substituted in, to keep the "same arms, gone
+# wrong" reading clean (the same device-reuse idiom as 02_empire.txt's VEM, which
+# reuses EMP's own eagle recoloured rather than inventing a new charge).
+MOU = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_fleur_de_lis.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# MOR — Massif Orcal, the Greenskin holdout above the Forest of Chalons (see that
+# tag's own header comment in common/country_definitions/03_brettonia.txt for why
+# it is named by location, not tribe). Invented tribal device: a crude labrys
+# (double-headed axe/choppa) on a slashed green-black field. Deliberately NOT
+# ce_labrys_petain or ce_labrys_ppf — both are real-world Vichy France / Parti
+# Populaire Français variants of the labrys and are rejected on the same
+# real-world-specific grounds as CAR's cross above; plain ce_labrys.dds carries no
+# such association.
+MOR = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "green_dark"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_labrys.dds"
+		color1 = "grey"
+		color2 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# SKZ — Skullsmasherz, Ugrok Craktoof's warband holding the Grey Mountains on
+# Bretonnia's southern flank. Invented tribal device: crossed choppas (crossed
+# scimitars) on a hide-brown field. te_buffalo_painted_skull.dds was considered and
+# rejected — it is a textured emblem with no colour slots at all, and its imagery
+# is a real-world Plains-Indian motif, not a generic tribal one. Style should
+# coordinate with the Badlands/Greenskin child board item (#3628) when that ships,
+# so the two orc warbands read as one visual family.
+SKZ = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_crossed_scimitars.dds"
+		color1 = "grey"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
