@@ -160,7 +160,7 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
 #: The third-party reference dataset. Gitignored and absent on most devices —
-#: see :func:`require_dataset` for the clean skip.
+#: see :func:`require_source` for the clean skip.
 DATASET_DIR = SOURCES_DIR / "cr_oldworld_campaign"
 #: The square, isotropically-scaled companion file this script actually uses —
 #: NOT the raw ``old_world_map.png`` (see module docstring for why).
@@ -267,17 +267,43 @@ def log(msg: str) -> None:
 # Dataset presence / loading
 # ---------------------------------------------------------------------------
 
-def require_dataset() -> None:
-    """Clean-skip when the third-party reference dataset is not on this device.
+def resolve_stretched_source(arg: str | None) -> Path:
+    """``--source`` -> an absolute path, defaulting to the dataset's own file.
+
+    A relative ``arg`` is resolved against the repo root, so
+    ``--source "sources/gimp_exports/old_world_map - stretched.png"`` (a
+    gitignored local working copy, e.g. hand-edited in GIMP) works exactly as
+    typed. An absolute path is used as-is.
+    """
+    if not arg:
+        return STRETCHED_PNG
+    p = Path(arg)
+    return p if p.is_absolute() else (REPO_ROOT / p)
+
+
+def source_tag(path: Path) -> str:
+    """Output-filename suffix distinguishing a non-default ``--source``.
+
+    Empty for the dataset's own file (unchanged filenames from this render's
+    first version); otherwise the source's parent folder name, so
+    ``sources/gimp_exports/...`` and the dataset's own copy never collide on
+    disk.
+    """
+    if path == STRETCHED_PNG:
+        return ""
+    return "_" + "".join(c if c.isalnum() else "_" for c in path.parent.name.lower()).strip("_")
+
+
+def require_source(path: Path) -> None:
+    """Clean-skip when ``path`` is not present on this device.
 
     The ``validate_map._check_canon_cities`` idiom, reused throughout this
     dataset's other consumers: a gitignored local working file's absence is
     the expected state on most devices, not an error.
     """
-    if DATASET_DIR.is_dir() and STRETCHED_PNG.is_file():
+    if path.is_file():
         return
-    log(f"{DATASET_DIR.relative_to(REPO_ROOT)}: reference dataset not present on "
-        f"this device — dev-only render, skipping")
+    log(f"{path}: not present on this device — dev-only render, skipping")
     sys.exit(0)
 
 
@@ -289,20 +315,33 @@ def load_source_rgb(name: str) -> np.ndarray:
         return np.asarray(im.convert("RGB"), dtype=np.uint8).copy()
 
 
-def load_stretched() -> np.ndarray:
-    """The debug export as ``(2048, 2048, 3)`` uint8 RGB.
+def load_stretched(path: Path) -> tuple[np.ndarray, np.ndarray]:
+    """``path`` as ``(rgb (2048,2048,3) uint8, visible (2048,2048) bool)``.
+
+    ``visible`` is True everywhere for a plain RGB source (the dataset's own
+    file). A source carrying an alpha channel (e.g. a GIMP export with erased
+    regions) is False wherever alpha is 0 — that is genuinely transparent, not
+    a paintable colour, and must not be treated as void-by-colour-match
+    (which would wrongly compare it against :data:`VOID_RGB`/``--colors``
+    instead of dropping it outright). Partial alpha (this format's exports
+    also carry 128) is treated as visible — its RGB is real paint, not a
+    background blend, since GIMP does not premultiply on export.
 
     Hard-errors on an unexpected size — a differently-sized export is a
     different dataset and :data:`MASTER_TO_STRETCHED_SCALE` would not apply.
     """
-    with Image.open(STRETCHED_PNG) as im:
+    with Image.open(path) as im:
         if im.size != (STRETCHED_SIZE, STRETCHED_SIZE):
             raise SystemExit(
-                f"{STRETCHED_PNG.name} is {im.size[0]}x{im.size[1]}, expected "
+                f"{path.name} is {im.size[0]}x{im.size[1]}, expected "
                 f"{STRETCHED_SIZE}x{STRETCHED_SIZE} — a different size is a different "
                 f"export and the scale/void constants documented in this script would "
                 f"not apply")
-        return np.asarray(im.convert("RGB"), dtype=np.uint8).copy()
+        has_alpha = "A" in im.getbands()
+        arr = np.asarray(im.convert("RGBA" if has_alpha else "RGB"), dtype=np.uint8)
+    if has_alpha:
+        return arr[..., :3].copy(), (arr[..., 3] > 0)
+    return arr.copy(), np.ones(arr.shape[:2], dtype=bool)
 
 
 def load_scope_mask() -> np.ndarray:
@@ -352,14 +391,15 @@ def master_to_canvas_scale(reg: schema.SourceRegistration) -> float:
 
 
 def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
-                    scope: np.ndarray,
+                    visible: np.ndarray, scope: np.ndarray,
                     colors: list[tuple[str, tuple[int, int, int]]] | None = None
                     ) -> tuple[np.ndarray, np.ndarray, dict]:
     """Warp the stretched export into canvas space. Returns ``(rgb, placed, excluded)``.
 
-    ``placed`` is True where the warp landed inside the master frame AND inside
-    this mod's scope (:data:`SCOPE_SOURCE`'s alpha) AND the sampled colour
-    survives the colour gate.
+    ``placed`` is True where the warp landed inside the master frame AND
+    ``visible`` (genuinely opaque in the source — see :func:`load_stretched`)
+    AND inside this mod's scope (:data:`SCOPE_SOURCE`'s alpha) AND the sampled
+    colour survives the colour gate.
 
     The colour gate is one of two things:
 
@@ -393,6 +433,7 @@ def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
         sx = np.clip(np.rint(mx * MASTER_TO_STRETCHED_SCALE), 0, STRETCHED_SIZE - 1).astype(np.int32)
         sy = np.clip(np.rint(my * MASTER_TO_STRETCHED_SCALE), 0, STRETCHED_SIZE - 1).astype(np.int32)
         block = stretched[sy, sx]
+        vis = visible[sy, sx]
 
         block16 = block.astype(np.int16)
         if colors is None:
@@ -403,7 +444,7 @@ def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
             for _, rgb in colors:
                 d = np.abs(block16 - np.array(rgb, dtype=np.int16)).sum(axis=2)
                 gate |= d <= COLOR_MATCH_TOLERANCE
-        paintable = in_master & gate
+        paintable = in_master & vis & gate
 
         mxi = np.clip(np.rint(np.where(in_master, mx, 0.0)), 0, MASTER_SIZE - 1).astype(np.int32)
         myi = np.clip(np.rint(np.where(in_master, my, 0.0)), 0, MASTER_SIZE - 1).astype(np.int32)
@@ -517,11 +558,11 @@ def verify_correspondence() -> int:
     on demand, the same role ``render_cr_lookup_overlay.verify_correspondence``
     plays for its own scale constant.
     """
-    require_dataset()
+    require_source(STRETCHED_PNG)
     from scipy import ndimage
     from skimage.registration import phase_cross_correlation
 
-    stretched = load_stretched()
+    stretched, _visible = load_stretched(STRETCHED_PNG)
     land_s = _land_mask_stretched(stretched)
     log(f"stretched land px: {int(land_s.sum()):,} ({100.0 * land_s.mean():.2f}%)")
 
@@ -637,8 +678,10 @@ def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dic
 
 
 def build(coast: bool, hull_buffer_px: float,
-         colors: list[tuple[str, tuple[int, int, int]]] | None = None) -> Path:
-    require_dataset()
+         colors: list[tuple[str, tuple[int, int, int]]] | None = None,
+         source_path: Path | None = None) -> Path:
+    source_path = source_path or STRETCHED_PNG
+    require_source(source_path)
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     if FULL_SOURCE not in regs:
         raise SystemExit(f"{FULL_SOURCE}: no committed registration record — run "
@@ -650,8 +693,13 @@ def build(coast: bool, hull_buffer_px: float,
         raise SystemExit(f"{GLOBE_SOURCE} is {globe.shape[1]}x{globe.shape[0]}, "
                          f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
 
-    stretched = load_stretched()
-    log(f"stretched export  {STRETCHED_PNG.name} {STRETCHED_SIZE}x{STRETCHED_SIZE}")
+    stretched, visible = load_stretched(source_path)
+    try:
+        rel = source_path.relative_to(REPO_ROOT)
+    except ValueError:
+        rel = source_path
+    log(f"stretched export  {rel} {STRETCHED_SIZE}x{STRETCHED_SIZE}"
+        + (f" ({100.0 * (~visible).mean():.1f}% transparent, dropped)" if not visible.all() else ""))
     scope = load_scope_mask()
     log(f"scope mask        {SCOPE_SOURCE} alpha: {100.0 * scope.mean():.1f}% of the "
         f"master frame is in scope; anything outside it is dropped to void "
@@ -662,7 +710,7 @@ def build(coast: bool, hull_buffer_px: float,
     log(f"eval box          canvas {list(box)}"
         + (f" (footprint + {hull_buffer_px:.0f}px outer-hull buffer)" if hull_buffer_px > 0
            else " (strict footprint)"))
-    rgb, placed, excluded = place_stretched(fit, box, stretched, scope, colors=colors)
+    rgb, placed, excluded = place_stretched(fit, box, stretched, visible, scope, colors=colors)
     if not placed.any():
         raise SystemExit("nothing placed — check the registration / stretched export / "
                          "scope mask / --colors selection")
@@ -690,8 +738,9 @@ def build(coast: bool, hull_buffer_px: float,
 
     draw_legend(canvas, legend)
 
-    prefix = OUT_PREFIX if colors is None else f"{OUT_PREFIX}_" + "_".join(
-        sorted(n for n, _ in colors))
+    prefix = OUT_PREFIX + source_tag(source_path)
+    if colors is not None:
+        prefix += "_" + "_".join(sorted(n for n, _ in colors))
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     out_path = DERIVED_DIR / f"{prefix}.png"
     Image.fromarray(canvas, mode="RGB").save(out_path)
@@ -699,7 +748,8 @@ def build(coast: bool, hull_buffer_px: float,
     write_crops(canvas, box, prefix)
 
     report["provenance"] = {
-        "stretched_png": {"name": STRETCHED_PNG.name, "sha256": sha256_of(STRETCHED_PNG)},
+        "stretched_png": {"name": source_path.name, "path": str(rel),
+                          "sha256": sha256_of(source_path)},
     }
     report["note"] = ("dev-only QA render, board #4425. Built on the PROVISIONAL "
                       "tww3_old_world_mod_parchment_full registration; if that "
@@ -731,13 +781,24 @@ def main(argv: list[str] | None = None) -> int:
                         "'purple' or 'purple,grey'); everything else renders as void. "
                         f"Known names: {', '.join(sorted(COLOR_LIBRARY))}. Omit for the "
                         "full drape (every colour except grey/impassable)")
+    p.add_argument("--source", type=str, default=None,
+                   help="path (repo-root-relative, or absolute) to a different 2048x2048 "
+                        "export to drape instead of the dataset's own file — e.g. a local, "
+                        "gitignored GIMP-edited copy under sources/gimp_exports/. Must share "
+                        "the same frame/scale as the dataset file (same corners, same "
+                        "content, just recoloured/edited); a genuinely different export "
+                        "would need its own correspondence check. Output filenames are "
+                        "suffixed with the source's parent folder name so this never "
+                        "overwrites the default render")
     args = p.parse_args(argv)
 
     if args.verify_correspondence:
         return verify_correspondence()
 
     colors = resolve_colors(args.colors)
-    build(coast=args.coast, hull_buffer_px=args.hull_buffer_px, colors=colors)
+    source_path = resolve_stretched_source(args.source)
+    build(coast=args.coast, hull_buffer_px=args.hull_buffer_px, colors=colors,
+         source_path=source_path)
     return 0
 
 
