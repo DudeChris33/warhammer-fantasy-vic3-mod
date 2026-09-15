@@ -1,0 +1,276 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per epic #3621 child #3628 — the 11
+# Badlands/Greenskin country tags (common/country_definitions/06_badlands.txt,
+# same order). Composed from vanilla gfx/coat_of_arms/ art (patterns +
+# colored_emblems, neither blanked by replace_paths), this mod's named_colors
+# palette (common/named_colors/00_coa_colors.txt + 01_wh_coa_colors.txt — five new
+# entries appended for this file: orc_green, goblin_moss, bone, gore_red,
+# dirty_iron), and one vendored Realms of Exether emblem (ce_gallic_boar.dds,
+# ICL's secondary charge). Design language: a deliberate house style distinct from
+# every "civilised" tag file shipped so far — one oversized/off-centre charge (two
+# max), a closed two-colour-max palette, no quartering/crown/laurel framing, and a
+# ban on real-world-extremist and real-world-ethnographic-sacred devices (see
+# .claude/rules/scripting.md's greenskin house style section for the full
+# 10-rule list this file was built against). Each block below records its canon
+# confidence + substitution reasoning per #3621's "record every substitution"
+# acceptance criterion, matching 02_empire.txt/03_brettonia.txt/05_southern_
+# realms.txt's discipline. Requires common/flag_definitions/06_badlands.txt (this
+# mod's DEFAULT flag_definitions block is unconditional at priority = 0 and would
+# otherwise mask every one of these) to actually render in-game.
+
+# RED — Red Eye. Grimgor Ironhide's 'Ardboyz. Name-derived, high confidence: a
+# staring eye built from three concentric ce_circle layers (bone iris ring, gore-
+# red mid ring, black pupil) rather than a single flat disc — reads as an eye at a
+# glance without needing an eye-shaped emblem (none exists in vanilla or the
+# vendored RoE set; both checked). ce_circle confirmed 2 colour slots (vanilla
+# usage, common/coat_of_arms/coat_of_arms/02_countries.txt:298).
+RED = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.52 0.47 } scale = { 0.72 0.72 } }
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "gore_red"
+		color2 = "gore_red"
+		instance = { position = { 0.52 0.47 } scale = { 0.42 0.42 } }
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { position = { 0.52 0.47 } scale = { 0.16 0.16 } }
+	}
+}
+
+# CRM — Crooked Moon. Skarsnik's Night Goblins, squatting in Karak Eight Peaks.
+# Name-derived, high confidence: a rotated crescent for the "crooked moon" —
+# Morrslieb, the Chaos moon this mod already ties to sickly-green heraldry
+# (02_empire.txt's SYL/VSY). ce_crescent_rotated confirmed 2 colour slots
+# (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:3804).
+CRM = {
+	pattern = "pattern_solid.tga"
+	color1 = "goblin_moss"
+	color2 = "goblin_moss"
+
+	colored_emblem = {
+		texture = "ce_crescent_rotated.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.85 0.85 } rotation = 200 }
+	}
+}
+
+# BKA — Broken Axe. Grom the Paunch's goblins of the Misty Mountain. Name-derived,
+# high confidence: a canting labrys (double-headed axe), skewed to read
+# "broken"/off-true rather than a clean heraldic axe. ce_labrys.dds is reused from
+# MOR (common/coat_of_arms/coat_of_arms/03_brettonia.txt) — kept on a distinct
+# dirty_iron tincture (vs. MOR's grey/black) so the two greenskin axe-tags don't
+# read as one recoloured device. Confirmed 2 colour slots (as MOR's own file, and
+# vanilla usage 02_countries.txt:9333).
+BKA = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "goblin_moss"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_labrys.dds"
+		color1 = "dirty_iron"
+		color2 = "dirty_iron"
+		instance = { position = { 0.5 0.5 } scale = { 0.55 0.6 } rotation = 25 }
+	}
+}
+
+# RFG — Red Fangs. Gorfang Rotgut; holds Black Crag, the ex-dwarf Karak Drazh.
+# Name-derived, high confidence: a downward fang pair built from two mirrored
+# ce_crescent_rotated instances (negative-x scale flips the second horizontally)
+# rather than a single crescent, so it reads as teeth/fangs, not a moon (kept
+# visually distinct from CRM above). ce_crescent_rotated confirmed 2 colour slots
+# (as CRM above).
+RFG = {
+	pattern = "pattern_border_of_2.dds"
+	color1 = "black"
+	color2 = "gore_red"
+
+	colored_emblem = {
+		texture = "ce_crescent_rotated.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.4 0.55 } scale = { -0.42 0.55 } }
+		instance = { position = { 0.6 0.55 } scale = { 0.42 0.55 } }
+	}
+}
+
+# ICL — Ironclaw. Gorbad Ironclaw; holds the Iron Rock in the northern Badlands.
+# Deliberate one-tag exception to the one-charge house style: Gorbad's canon
+# identity fits two ways at once — the claw pun (primary charge) and the literal
+# boar icon associated with him in canon (secondary charge) — so both ride
+# together rather than picking one. Primary: ce_eagle_claws (a generic talon
+# charge, no eagle-as-full-beast reading at this crop), confirmed 2 colour slots
+# (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries_2.txt:182);
+# specified defensively as the same dirty_iron tone on both slots since the
+# vanilla usage colours it yellow/blue rather than a metal tone. Secondary:
+# ce_gallic_boar.dds — NOT vanilla, vendored from the sibling Realms of Exether
+# mod's gfx/coat_of_arms/colored_emblems/ce_gallic_boar.dds and committed here at
+# the same path (reuse grant 2026-09-07, per the established provenance
+# convention). Confirmed 2 colour slots (RoE's own
+# common/coat_of_arms/coat_of_arms/04_west_zalaron.txt:80-84), placed as a small
+# off-centre corner charge at RoE's own usage position (0.8, 0.75) and scale
+# (0.18, 0.20) — matching that file's own usage convention exactly.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_gallic_boar.dds), reuse grant 2026-09-07
+ICL = {
+	pattern = "pattern_large_bend.dds"
+	color1 = "orc_green"
+	color2 = "gore_red"
+
+	colored_emblem = {
+		texture = "ce_eagle_claws.dds"
+		color1 = "dirty_iron"
+		color2 = "dirty_iron"
+		instance = { position = { 0.46 0.54 } scale = { 0.75 0.75 } }
+	}
+	colored_emblem = {
+		texture = "ce_gallic_boar.dds"
+		color1 = "dirty_iron"
+		color2 = "bone"
+		instance = { position = { 0.8 0.75 } scale = { 0.18 0.20 } }
+	}
+}
+
+# BSB — Bloody Sunz. Grumlok and Gazbag's Badlands orc tribe. Name-derived, high
+# confidence: a sun charge for "Sunz" — ce_sun.dds is reused from 02_empire.txt's
+# DON and 01_kislev.txt's BOL, kept distinct here on gore_red (the "bloody" half
+# of the name) rather than either sibling's gold/purple treatment. Confirmed 2
+# colour slots (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt
+# :4985; also 05_southern_realms.txt's DON).
+BSB = {
+	pattern = "pattern_solid.tga"
+	color1 = "orc_green"
+	color2 = "orc_green"
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "gore_red"
+		color2 = "gore_red"
+		instance = { position = { 0.48 0.52 } scale = { 0.9 0.9 } }
+	}
+}
+
+# BNR — Bonerattlaz. Azhag the Slaughterer; the northern World's Edge. Name-
+# derived, high confidence: a bone/skull-adjacent beast-skull charge for
+# "Bonerattlaz." te_buffalo_painted_skull.dds exists in vanilla but is declined —
+# it is a textured emblem with zero colour slots and its imagery is a real-world
+# Plains-Indian sacred motif, not a generic tribal one (the same rejection
+# 03_brettonia.txt's SKZ made, and the house-style ban recorded in
+# .claude/rules/scripting.md). ce_aurochs_head.dds stands in instead — a generic
+# horned beast-skull silhouette, confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:15148-15153).
+BNR = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_aurochs_head.dds"
+		color1 = "bone"
+		color2 = "bone"
+		color3 = "black_light"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# BTO — Broken Tooth. Crusher Zogoth; the Iron Rock before Gorbad took it. Name-
+# derived, high confidence: a "chipped tooth" built from two overlaid
+# ce_triangle instances — a large bone triangle with a smaller black_light
+# triangle offset over one edge, reading as a broken/chipped point rather than a
+# clean heraldic pile. pattern_border_triangles was considered and rejected
+# (zero vanilla usages — confirmed by grep — unlike every other pattern in this
+# file); pattern_per_bend used instead, already confirmed 2 slots elsewhere in
+# this mod (02_empire.txt's REI/WIS). ce_triangle confirmed 2 colour slots
+# (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:11452-11455).
+BTO = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "black_light"
+	color2 = "bone"
+
+	colored_emblem = {
+		texture = "ce_triangle.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.44 } scale = { 0.5 0.5 } rotation = 12 }
+	}
+	colored_emblem = {
+		texture = "ce_triangle.dds"
+		color1 = "black_light"
+		color2 = "black_light"
+		instance = { position = { 0.56 0.5 } scale = { 0.25 0.25 } rotation = 12 }
+	}
+}
+
+# BRN — Broken Nose. A goblin tribe of the Vaults. No canon device — disclosed
+# invention: a skewed ce_delta (wedge) doubles as a mountain-pass/broken-snout
+# read, and the skew is the shared "Broken" cue this file gives all three
+# "Broken" tribes (BKA/BTO/BRN — see this mod's greenskin house-style rule 10).
+# pattern_verical_bicolor_offset.dds is the real, oddly-spelled vanilla filename
+# (confirmed present verbatim in the vanilla install — not "fixed" here).
+# ce_delta confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:2321-2324).
+BRN = {
+	pattern = "pattern_verical_bicolor_offset.dds"
+	color1 = "goblin_moss"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_delta.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } rotation = 18 }
+	}
+}
+
+# BLV — Black Venom. Forest Goblins south of Black Fire Pass. Name-derived,
+# disclosed substitution: no spider art exists anywhere in vanilla or the
+# vendored Realms of Exether set (checked both) — ce_cobra_coiled.dds (a serpent,
+# the nearest venomous-creature charge available) stands in, reused from
+# 05_southern_realms.txt's AQL/RAA. Kept on morrslieb_green — confirmed
+# distinctly NOT close to AQL's green_dark (a different named-colour entry
+# entirely). Confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:9542; also AQL/RAA).
+BLV = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_cobra_coiled.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.54 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# RDV — Redvenom. Snagla Grobspit's Forest Goblins. Deliberate same-clade choice
+# with BLV above (Black Venom / Redvenom): the same ce_cobra_coiled.dds charge,
+# horizontally mirrored (negative-x scale) and recoloured gore_red instead of
+# BLV's morrslieb_green, on a goblin_moss field instead of BLV's black — the 4th
+# mod-wide reuse of this texture (after 05_southern_realms.txt's AQL/RAA and this
+# file's own BLV), each disclosed and distinctly recoloured per the mod's
+# emblem-reuse convention.
+RDV = {
+	pattern = "pattern_solid.tga"
+	color1 = "goblin_moss"
+	color2 = "goblin_moss"
+
+	colored_emblem = {
+		texture = "ce_cobra_coiled.dds"
+		color1 = "gore_red"
+		color2 = "gore_red"
+		instance = { position = { 0.5 0.5 } scale = { -0.8 0.8 } }
+	}
+}

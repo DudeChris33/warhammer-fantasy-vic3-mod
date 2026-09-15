@@ -1,0 +1,99 @@
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at
+# priority = 0 — so "no flag definition is applicable for a country" (vanilla's
+# own tag-as-COA_KEY fallback condition) never fires for any tag. Without a
+# higher-priority tag-named list here, every bespoke COA in
+# common/coat_of_arms/coat_of_arms/06_badlands.txt (#3628, epic #3621) would
+# parse but sit unused behind default_flag. Each list below is a single
+# unconditional block at priority = 100 — above #3552's priority = 0 DEFAULT,
+# below vanilla's own conditional range of 100-2000 for future per-tag variants.
+# `always = yes` confirmed valid at docs/triggers.log. Matches
+# 02_empire.txt/03_brettonia.txt/05_southern_realms.txt's shape exactly.
+
+RED = {
+	flag_definition = {
+		coa = RED
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+CRM = {
+	flag_definition = {
+		coa = CRM
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BKA = {
+	flag_definition = {
+		coa = BKA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+RFG = {
+	flag_definition = {
+		coa = RFG
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ICL = {
+	flag_definition = {
+		coa = ICL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BSB = {
+	flag_definition = {
+		coa = BSB
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BNR = {
+	flag_definition = {
+		coa = BNR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BTO = {
+	flag_definition = {
+		coa = BTO
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BRN = {
+	flag_definition = {
+		coa = BRN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BLV = {
+	flag_definition = {
+		coa = BLV
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+RDV = {
+	flag_definition = {
+		coa = RDV
+		priority = 100
+		trigger = { always = yes }
+	}
+}

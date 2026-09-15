@@ -15,4 +15,13 @@ colors = {
 	# bone tone reserved for future use, distinct from pearl/white.
 	lapis_blue = hsv360 { 220 75 65 }
 	bone_white = hsv360 { 38 15 88 }
+
+	# Badlands/Greenskin heraldry (#3628, epic #3621): a closed palette for the
+	# greenskin house style, distinct from the culture colors in
+	# common/cultures/greenskin.txt and from every other region's own COA palette.
+	orc_green    = hsv360 { 91 57 42 }
+	goblin_moss  = hsv360 { 112 40 24 }
+	bone         = hsv360 { 47 16 91 }
+	gore_red     = hsv360 { 3 87 41 }
+	dirty_iron   = hsv360 { 40 17 42 }
 }
