@@ -308,7 +308,7 @@ def load_river_streams(path: Path, canvas: tuple[int, int] | None = None) -> lis
 # Canon river names (the anchor-keyed naming input generate_rivers.py reads, #3703)
 # ---------------------------------------------------------------------------
 #
-# The river geometry is *traced* (a pure-cyan line network on the canvas), not
+# The river geometry is *traced* (a pure-blue line network on the canvas), not
 # authored as polylines, so names cannot ride on the stream objects the way
 # ``RiverStream`` above carries them. Instead a small hand-authored file pins each
 # canon river NAME to an ``anchor`` pixel on its drawn line — the same
@@ -394,11 +394,11 @@ def load_canon_river_names(path: Path, canvas: tuple[int, int] | None = None
 # River source layers (the optional multi-layer trace declaration, #3703)
 # ---------------------------------------------------------------------------
 #
-# By default the river generator reads a single canvas-native cyan trace
+# By default the river generator reads a single canvas-native blue trace
 # (``sources/terraqueous_globe_reprojected - rivers.png``, 1:1 with the canvas,
 # no registration). ``river_sources.json`` optionally declares several layers to
 # union — each either ``canvas`` (already canvas-space, read as-is) or
-# ``registered`` (cyan traced on an unwarped registered crop's own frame, warped
+# ``registered`` (blue traced on an unwarped registered crop's own frame, warped
 # onto the canvas through that crop's committed registration). The file is only
 # needed when there is more than one trace, or a trace in a source frame.
 

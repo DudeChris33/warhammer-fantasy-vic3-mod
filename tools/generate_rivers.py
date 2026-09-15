@@ -5,12 +5,13 @@ Rivers are **source-driven**, not derived from the terrain (board #3703). The ol
 heightmap-drainage network (``hydro.py``) drew dense, terrain-following channels
 that were wrong for a fictional world — the Reik did not exist and big channels
 ran through the Nehekharan desert. Instead the canon rivers are traced by hand as
-a pure-cyan ``(0, 255, 255)`` line network and turned into the game's river layer
+a pure-blue ``(0, 0, 255)`` line network (cyan is reserved for the coastline
+trace, board #3703 follow-up 2026-09-15) and turned into the game's river layer
 by the tools::
 
-    sources/terraqueous_globe_reprojected - rivers.png   (canvas-native cyan)
-    [+ any registered-crop cyan layers, warped onto the canvas]
-        -> extract cyan -> skeletonize -> graph -> orient by mask-adjacency
+    sources/terraqueous_globe_reprojected - rivers.png   (canvas-native blue)
+    [+ any registered-crop blue layers, warped onto the canvas]
+        -> extract blue -> skeletonize -> graph -> orient by mask-adjacency
         -> maximal Horton/Strahler stems (one green source per headwater,
            tributaries -> red MERGE)                        (river_network.py)
         -> width from stream order on the vanilla ramp (3 -> 4 -> 6 -> 8)
@@ -88,21 +89,21 @@ def log(msg: str, t0: float | None = None) -> None:
 
 
 def _load_canvas_layer(path: Path, dilate: int) -> np.ndarray:
-    """Cyan network of a canvas-native trace (1:1 with the canvas)."""
+    """Blue network of a canvas-native trace (1:1 with the canvas)."""
     rgb = raster.read_rgb_png(path)
     if rgb.shape[:2] != (CANVAS_H, CANVAS_W):
         raise SystemExit(
             f"{path} is {rgb.shape[1]}x{rgb.shape[0]}, expected the canvas "
             f"{CANVAS_W}x{CANVAS_H} (a canvas-native trace must be 1:1)")
-    return river_network.cyan_network(rgb, dilate=dilate)
+    return river_network.blue_network(rgb, dilate=dilate)
 
 
 def _load_registered_layer(path: Path, reg_name: str, regs: dict, dilate: int) -> np.ndarray:
-    """Cyan network of a trace in a registered crop's own frame, warped onto the
+    """Blue network of a trace in a registered crop's own frame, warped onto the
     canvas through that crop's committed registration.
 
     The higher-risk mode (red-team obj 4): a 1-px line resampled through a warp can
-    fray, so the cyan is dilated *before* warping and sampled nearest; any residual
+    fray, so the blue is dilated *before* warping and sampled nearest; any residual
     tear surfaces downstream as the loud stranded-line / non-tree error in
     ``river_network.extract_streams`` (there is no fill step to silently heal it).
     Exercised in Phase B on a real registered trace; Phase A's offline fixtures
@@ -115,7 +116,7 @@ def _load_registered_layer(path: Path, reg_name: str, regs: dict, dilate: int) -
             f"river source layer '{path.name}': registration '{reg_name}' not found in "
             f"{REGISTRATION_DIR} (expected a committed <name>.json)")
     rgb = raster.read_rgb_png(path)
-    src = river_network.cyan_network(rgb, dilate=dilate).astype(np.float32)
+    src = river_network.blue_network(rgb, dilate=dilate).astype(np.float32)
     sh, sw = src.shape
     fit = reproject.fit_placement(reg, regs)
     out = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
@@ -138,7 +139,7 @@ def _stem(name: str) -> str:
 
 
 def load_network(dilate: int, t0: float) -> np.ndarray:
-    """The unioned cyan river network on the canvas, from the declared layers
+    """The unioned blue river network on the canvas, from the declared layers
     (or the single default canvas-native trace)."""
     if RIVER_SOURCES_JSON.is_file():
         layers = schema.load_river_sources(RIVER_SOURCES_JSON)
@@ -161,9 +162,9 @@ def load_network(dilate: int, t0: float) -> np.ndarray:
         raise SystemExit(
             f"no river source: {DEFAULT_SOURCE_NAME} not found (looked at sources/ and its "
             f"subfolders) and no {RIVER_SOURCES_JSON.name}. Trace the canon rivers in pure "
-            f"cyan (0,255,255) on the canvas first.")
+            f"blue (0,0,255) on the canvas first.")
     net = _load_canvas_layer(default_source, dilate)
-    log(f"  canvas-native {default_source.name}: {int(net.sum()):,} cyan px", t0)
+    log(f"  canvas-native {default_source.name}: {int(net.sum()):,} blue px", t0)
     return net
 
 
@@ -254,7 +255,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--dry-run", action="store_true",
                    help="extract + validate + report, but write no bitmap or index")
     p.add_argument("--dilate", type=int, default=2,
-                   help="cyan-line dilation to bridge anti-aliasing (default 2)")
+                   help="blue-line dilation to bridge anti-aliasing (default 2)")
     args = p.parse_args(argv)
 
     t0 = time.time()

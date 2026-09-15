@@ -412,14 +412,17 @@ def main(argv: list[str] | None = None) -> int:
         f"({total} provinces, {CANVAS_W}x{CANVAS_H} RGB)", t0)
 
     # Per-province index. Coastal is computed per kind: a land province is coastal
-    # if it touches water, a sea province if it touches land.
+    # if it touches NAVIGABLE water, a sea province if it touches land. With lakes
+    # present, a lake is held out of "water" on both sides of this test — it is
+    # land-locked and stateless (no naval_exit_id, no port), so a land province
+    # bordering only a lake must not read as coastal (board #3742 follow-up: this
+    # used to fold lake-adjacency into land_coastal, which silently produced a
+    # region flagged coastal with no bordering sea state for generate_land_regions
+    # to resolve a naval exit against). Byte-identical when no lake mask.
     areas = np.bincount(labels.ravel(), minlength=total + 1)
-    land_coastal = cells.coastal_labels(land_lab, land, WRAP_X)
-    # A sea province is coastal if it touches land. With lakes present, hold lake
-    # interior out of the "sea" region so a sea zone isn't spuriously flagged
-    # coastal by a lake pixel (lakes are land-locked, so this never actually
-    # fires, but it keeps the flag honest). Byte-identical when no lake mask.
     navigable_water = (~land & ~lake_mask) if lake_mask is not None else ~land
+    land_side = (land | lake_mask) if lake_mask is not None else land
+    land_coastal = cells.coastal_labels(land_lab, land_side, WRAP_X)
     sea_coastal = cells.coastal_labels(sea_lab, navigable_water, WRAP_X)
     # A lake touches land by definition; computed for schema symmetry (informational).
     lake_coastal = (cells.coastal_labels(lake_lab, lake_mask, WRAP_X)

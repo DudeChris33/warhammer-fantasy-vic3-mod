@@ -992,7 +992,7 @@ def _selfcheck_river_extraction() -> None:
     """Drawn river extraction (worldgen.river_network), in isolation (no golden).
 
     Pins what generate_rivers.py relies on (board #3703 + the #3742 lake model): a
-    cyan Y-junction yields one green source per headwater with a red MERGE at the
+    blue Y-junction yields one green source per headwater with a red MERGE at the
     confluence (not a per-segment source explosion); streams run source-first and
     name by anchor; an inland-terminating river is a valid ENDORHEIC sink; a
     lake→sea river is one sea stream with a lake-fed source (not a fork); a DELTA
@@ -1005,11 +1005,11 @@ def _selfcheck_river_extraction() -> None:
     from worldgen import river_network as rn
     from worldgen import rivers as rl
 
-    def cyan(H, W, segs):
+    def blue(H, W, segs):
         img = np.full((H, W, 3), 180, dtype=np.uint8)
         for (y0, x0, y1, x1) in segs:
             rr, cc = _line(y0, x0, y1, x1)
-            img[rr, cc] = (0, 255, 255)
+            img[rr, cc] = (0, 0, 255)
         return img
 
     H, W = 48, 64
@@ -1017,7 +1017,7 @@ def _selfcheck_river_extraction() -> None:
     land[:, 58:] = False  # sea strip on the right
 
     # Y junction: two headwaters merge into one trunk that reaches the sea.
-    net = rn.cyan_network(cyan(H, W, [(12, 8, 24, 28), (36, 8, 24, 28), (24, 28, 24, 57)]),
+    net = rn.blue_network(blue(H, W, [(12, 8, 24, 28), (36, 8, 24, 28), (24, 28, 24, 57)]),
                           dilate=1)
     res = rn.extract_streams(net, land, wrap_x=False)
     assert len(res.streams) == 2, f"Y network -> 2 streams (trunk + tributary), got {len(res.streams)}"
@@ -1049,7 +1049,7 @@ def _selfcheck_river_extraction() -> None:
     # An inland line reaching NO water is a valid ENDORHEIC river now (board
     # #3742: the Marshes of Madness are a drainage sink), not an error: it dries
     # up inland, one source and one endorheic mouth, no MERGE marker.
-    endo = rn.extract_streams(rn.cyan_network(cyan(H, W, [(24, 8, 24, 30)]), dilate=1),
+    endo = rn.extract_streams(rn.blue_network(blue(H, W, [(24, 8, 24, 30)]), dilate=1),
                               np.ones((H, W), bool), wrap_x=False)
     assert len(endo.streams) == 1 and endo.streams[0].mouth == "endorheic", \
         f"a fully-inland river must be one endorheic stream, got {[s.mouth for s in endo.streams]}"
@@ -1064,7 +1064,7 @@ def _selfcheck_river_extraction() -> None:
     lakeL = np.zeros((H, W), bool)
     lakeL[20:25, 8:13] = True           # an enclosed lake block on the left
     landL[lakeL] = False                # a lake is water in the land/sea mask
-    netL = rn.cyan_network(cyan(H, W, [(22, 13, 22, 57)]), dilate=1)
+    netL = rn.blue_network(blue(H, W, [(22, 13, 22, 57)]), dilate=1)
     resL = rn.extract_streams(netL, landL, lake=lakeL, wrap_x=False)
     assert len(resL.streams) == 1 and resL.streams[0].mouth == "sea", \
         f"lake→sea must be one sea stream (not a fork), got {[s.mouth for s in resL.streams]}"
@@ -1075,15 +1075,15 @@ def _selfcheck_river_extraction() -> None:
     rl.rasterize(resL.streams, landL, pal, wrap_x=False, ocean=oceanL)  # lake-fed source is legal
 
     # A closed ring with no source/mouth (a "moat") is still a hard error.
-    loop = cyan(H, W, [(10, 10, 10, 30), (10, 30, 30, 30), (30, 30, 30, 10), (30, 10, 10, 10)])
+    loop = blue(H, W, [(10, 10, 10, 30), (10, 30, 30, 30), (30, 30, 30, 10), (30, 10, 10, 10)])
     _assert_river_error(lambda: rn.extract_streams(
-        rn.cyan_network(loop, dilate=1), land, wrap_x=False), "loop")
+        rn.blue_network(loop, dilate=1), land, wrap_x=False), "loop")
 
     # A DELTA — one trunk splitting into two distributaries that each reach the
     # sea — is valid (board #3703 split support): two sea mouths, a yellow split
     # marker, one green source (the trunk's headwater).
-    delta = cyan(H, W, [(24, 8, 24, 28), (24, 28, 10, 57), (24, 28, 38, 57)])
-    res_d = rn.extract_streams(rn.cyan_network(delta, dilate=1), land, wrap_x=False)
+    delta = blue(H, W, [(24, 8, 24, 28), (24, 28, 10, 57), (24, 28, 38, 57)])
+    res_d = rn.extract_streams(rn.blue_network(delta, dilate=1), land, wrap_x=False)
     assert sorted(s.mouth for s in res_d.streams).count("sea") == 2, \
         f"a delta reaches the sea twice, got {[s.mouth for s in res_d.streams]}"
     assert any(s.head == "split" for s in res_d.streams), "a delta has a split-head distributary"
@@ -1093,11 +1093,11 @@ def _selfcheck_river_extraction() -> None:
 
     # A RIVER-ISLAND — the channel splits and rejoins around an island, then
     # reaches the sea — is valid too: a split (yellow) and a rejoin (red merge).
-    island = cyan(H, W, [(24, 8, 24, 20),
+    island = blue(H, W, [(24, 8, 24, 20),
                          (24, 20, 16, 30), (16, 30, 24, 40),      # north arm
                          (24, 20, 32, 30), (32, 30, 24, 40),      # south arm
                          (24, 40, 24, 57)])
-    res_i = rn.extract_streams(rn.cyan_network(island, dilate=1), land, wrap_x=False)
+    res_i = rn.extract_streams(rn.blue_network(island, dilate=1), land, wrap_x=False)
     idx_i = rl.rasterize(res_i.streams, land, pal, wrap_x=False)
     assert int((idx_i == rl.SPLIT).sum()) >= 1, "the island's split paints a yellow marker"
     assert int((idx_i == rl.MERGE).sum()) >= 1, "the island's rejoin paints a red merge"
@@ -1109,7 +1109,7 @@ def _selfcheck_river_extraction() -> None:
     land2 = np.ones((H, W), bool)
     land2[:, :3] = False    # ocean on the left
     land2[:, 58:] = False   # ocean on the right
-    net_ss = rn.cyan_network(cyan(H, W, [(24, 3, 24, 57)]), dilate=1)
+    net_ss = rn.blue_network(blue(H, W, [(24, 3, 24, 57)]), dilate=1)
     _assert_river_error(lambda: rn.extract_streams(net_ss, land2, wrap_x=False), "no inland source")
     res_ov = rn.extract_streams(net_ss, land2, overrides=[schema.RiverOverride((30, 24), "W", "")],
                                 wrap_x=False)
@@ -1120,8 +1120,8 @@ def _selfcheck_river_extraction() -> None:
     rl.rasterize(res_ov.streams, land2, pal, wrap_x=False, ocean=~land2)  # coastal source waived, no raise
 
     # A short spur off a line is pruned, not turned into a fake headwater.
-    spur = cyan(H, W, [(24, 8, 24, 57), (24, 30, 20, 30)])
-    res_spur = rn.extract_streams(rn.cyan_network(spur, dilate=1), land, wrap_x=False)
+    spur = blue(H, W, [(24, 8, 24, 57), (24, 30, 20, 30)])
+    res_spur = rn.extract_streams(rn.blue_network(spur, dilate=1), land, wrap_x=False)
     assert len(res_spur.streams) == 1 and res_spur.streams[0].mouth == "sea", \
         f"spur must be pruned -> 1 sea stream, got {len(res_spur.streams)}"
 
@@ -1129,7 +1129,7 @@ def _selfcheck_river_extraction() -> None:
     Hw, Ww = 24, 40
     landw = np.ones((Hw, Ww), bool)
     landw[8:13, 10:15] = False  # a sea block for the mouth
-    netw = rn.cyan_network(cyan(Hw, Ww, [(10, 25, 10, 39), (10, 0, 10, 9)]), dilate=1)
+    netw = rn.blue_network(blue(Hw, Ww, [(10, 25, 10, 39), (10, 0, 10, 9)]), dilate=1)
     resw = rn.extract_streams(netw, landw, wrap_x=True)
     assert len(resw.streams) == 1 and resw.streams[0].mouth == "sea", "wrap stem -> 1 sea stream"
     xs = {x for s in resw.streams for (x, _y) in s.points}
@@ -3243,7 +3243,7 @@ def run_check() -> int:
     _selfcheck_rivers()
     print("rivers: rasterize + topology-validation self-check passed.")
     _selfcheck_river_extraction()
-    print("river_network: drawn-cyan extraction (Strahler stems, endorheic sink, "
+    print("river_network: drawn-blue extraction (Strahler stems, endorheic sink, "
           "lake-fed source, delta + river-island splits, sourceless-ring rejected, "
           "spur pruned, wrap stem) self-check passed.")
     _selfcheck_river_validator()

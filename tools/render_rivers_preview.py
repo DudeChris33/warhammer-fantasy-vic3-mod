@@ -50,7 +50,7 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--scale", type=int, default=4, help="downscale factor (default 4)")
-    p.add_argument("--dilate", type=int, default=2, help="cyan-line dilation (default 2)")
+    p.add_argument("--dilate", type=int, default=2, help="blue-line dilation (default 2)")
     args = p.parse_args(argv)
     t0 = time.time()
 

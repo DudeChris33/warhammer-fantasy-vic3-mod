@@ -289,7 +289,8 @@ def _naval_exit_choices(labels: np.ndarray, n_land: int, region_of: np.ndarray,
     and every sea pixel (x wraps, y does not — matching
     ``validate_map.ProvinceBitmap.coastal_colors``)."""
     land_mask = (labels >= 1) & (labels <= n_land)
-    sea_mask = labels > n_land
+    n_sea = len(sea_state_of_zone) - 1  # sea_state_of_zone is sized n_sea + 1 (index 0 unused)
+    sea_mask = (labels > n_land) & (labels <= n_land + n_sea)  # excludes lake labels above it
 
     region_full = np.zeros(labels.shape, dtype=np.int64)
     region_full[land_mask] = region_of[labels[land_mask]]

@@ -1,18 +1,19 @@
-"""River network from the user's hand-traced cyan river lines (board #3703).
+"""River network from the user's hand-traced blue river lines (board #3703).
 
 The rivers on the map used to be *derived* from the heightmap's drainage
 (``hydro.py``) — dense, terrain-following, but wrong for a fictional world: big
 channels ran through the Nehekharan desert and the Reik did not exist. This
 module replaces that with a **source-driven** network: the user draws the canon
-rivers by hand as a pure-cyan ``(0, 255, 255)`` line network on the canvas (the
+rivers by hand as a pure-blue ``(0, 0, 255)`` line network on the canvas (the
 same idiom as the coastline / sea-zone / state-region traces
-``sea_zones.py`` and ``land_provinces.py`` consume), and the tools turn that
-drawing into the ordered source→mouth streams the vanilla ``rivers.png`` model
-needs.
+``sea_zones.py`` and ``land_provinces.py`` consume — cyan is reserved for the
+coastline trace, so rivers use blue instead, board #3703 follow-up 2026-09-15),
+and the tools turn that drawing into the ordered source→mouth streams the
+vanilla ``rivers.png`` model needs.
 
 The pipeline, all deterministic (sorted iteration, fixed neighbour order, no RNG):
 
-1. **Extract + union** the cyan line(s), dilated to bridge anti-aliasing gaps.
+1. **Extract + union** the blue line(s), dilated to bridge anti-aliasing gaps.
 2. **Skeletonize** to a 1-px centreline and clip to land (no river on water).
 3. **Graph** the skeleton — pixels by 8-neighbour degree into endpoints (deg 1),
    junctions (deg >= 3) and the deg-2 chains (edges) between them. Short spurs
@@ -59,13 +60,14 @@ from scipy import ndimage
 
 from worldgen import schema
 
-#: Pure cyan (0, 255, 255) — the traced river-line colour. Distinct from magenta
-#: (coast/borders 255,0,255), purple (sea zones 127,0,255) and every vanilla
-#: river-palette blue, and absent from the globe terrain and state-region fills,
-#: so extraction tolerates either backdrop. Matched tolerant of anti-aliasing.
-_CYAN_MAX_R = 80          # red channel stays low
-_CYAN_MIN_G = 180         # green + blue both high
-_CYAN_MIN_B = 180
+#: Pure blue (0, 0, 255) — the traced river-line colour. Distinct from magenta
+#: (coast/borders 255,0,255), purple (sea zones 127,0,255) and cyan (reserved
+#: for the coastline trace), and absent from the globe terrain and
+#: state-region fills, so extraction tolerates either backdrop. Matched
+#: tolerant of anti-aliasing.
+_BLUE_MAX_R = 80          # red channel stays low
+_BLUE_MAX_G = 80          # green channel stays low
+_BLUE_MIN_B = 180         # blue channel alone is high
 
 #: How far a manual river_overrides anchor may sit from the nearest river node.
 _OVERRIDE_ANCHOR_TOL = 60.0
@@ -111,18 +113,18 @@ class ExtractResult:
 # Colour extraction
 # ---------------------------------------------------------------------------
 
-def cyan_lines(rgb: np.ndarray) -> np.ndarray:
-    """Boolean mask of the hand-drawn cyan river line, tolerant of anti-aliasing."""
+def blue_lines(rgb: np.ndarray) -> np.ndarray:
+    """Boolean mask of the hand-drawn blue river line, tolerant of anti-aliasing."""
     r = rgb[..., 0].astype(int)
     g = rgb[..., 1].astype(int)
     b = rgb[..., 2].astype(int)
-    return (r <= _CYAN_MAX_R) & (g >= _CYAN_MIN_G) & (b >= _CYAN_MIN_B)
+    return (r <= _BLUE_MAX_R) & (g <= _BLUE_MAX_G) & (b >= _BLUE_MIN_B)
 
 
-def cyan_network(rgb: np.ndarray, dilate: int = 2) -> np.ndarray:
-    """The cyan line, dilated to bridge anti-aliased gaps (mirrors
+def blue_network(rgb: np.ndarray, dilate: int = 2) -> np.ndarray:
+    """The blue line, dilated to bridge anti-aliased gaps (mirrors
     ``sea_zones.extract``'s dilation of the drawn boundary)."""
-    line = cyan_lines(rgb)
+    line = blue_lines(rgb)
     if dilate:
         line = ndimage.binary_dilation(line, iterations=dilate)
     return line
@@ -388,7 +390,7 @@ def extract_streams(network: np.ndarray, land: np.ndarray,
                     anchor_tol: float = 8.0, name_threshold: int = 40,
                     mouth_snap: float = 4.0, strict: bool = True,
                     ) -> ExtractResult:
-    """Turn a drawn cyan river ``network`` (bool, canvas-sized) into ordered
+    """Turn a drawn blue river ``network`` (bool, canvas-sized) into ordered
     source→mouth :class:`schema.RiverStream` s. See the module docstring.
 
     ``land`` is the committed land/sea mask (True = land). ``lake`` is the inland
@@ -417,7 +419,7 @@ def extract_streams(network: np.ndarray, land: np.ndarray,
         skel = _skeletonize(network) & land
     pixels: set[tuple[int, int]] = {(int(y), int(x)) for y, x in zip(*np.nonzero(skel))}
     if not pixels:
-        raise RiverNetworkError("no cyan river pixels on land after skeletonization")
+        raise RiverNetworkError("no blue river pixels on land after skeletonization")
 
     pixels = _prune_spurs(pixels, h, w, wrap_x, spur_len)
     # Extend near-miss endpoints to the mask coastline (trace vs mask are two
