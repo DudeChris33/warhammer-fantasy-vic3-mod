@@ -43,6 +43,8 @@ from __future__ import annotations
 
 import numpy as np
 from scipy import ndimage
+from skimage.feature import peak_local_max
+from skimage.segmentation import watershed
 
 from worldgen import cells
 
@@ -146,7 +148,17 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
 _ISLAND_MARK = {"r": 200, "g": 80, "b": 80}
 
 
-def island_override_zones(rgb: np.ndarray, wrap_x: bool = True) -> np.ndarray:
+#: Minimum separation (px) between two ring-interior "centres" (distance-
+#: transform local maxima) for them to seed distinct zones. Below this, peaks
+#: collapse into one seed — the anti-aliasing/plateau noise near a single
+#: ring's own centre must not fragment it. Comfortably under the ~150-250px
+#: gap seen between real hand-drawn ring pairs, comfortably over the few px
+#: of plateau a filled circle's exact centre can carry.
+_ISLAND_SEED_MIN_SEP = 30
+
+
+def island_override_zones(rgb: np.ndarray, wrap_x: bool = True,
+                          min_seed_separation: int = _ISLAND_SEED_MIN_SEP) -> np.ndarray:
     """Zone id per user-drawn island-override circle (0 = nothing drawn there).
 
     The source (``sources/terraqueous_globe_reprojected - tiny_islands_merger.png``,
@@ -158,22 +170,39 @@ def island_override_zones(rgb: np.ndarray, wrap_x: bool = True) -> np.ndarray:
     state-region forever. The ring never touches the islands it encloses, so its
     interior is filled (``scipy.ndimage.binary_fill_holes``) before labelling —
     the zone a ring marks is everything *inside* it, not the drawn line itself.
-    Distinct rings become distinct connected components/zone ids once filled;
-    two rings that touch or overlap simply become one zone, which is harmless —
-    everything either one encloses still ends up merged together.
+
+    Two rings whose interiors **touch or overlap no longer collapse into one
+    zone**: plain connected-component labelling of the
+    filled mask can't tell "one blob" from "two circles that happen to touch",
+    so instead each ring's own centre is recovered as a local maximum of the
+    filled mask's distance-to-boundary transform (the standard technique for
+    splitting touching blobs in image segmentation), and a flat
+    :func:`skimage.segmentation.watershed` grown from those peaks assigns every
+    filled pixel to its nearest ring centre. A ring drawn clear of every other
+    has exactly one peak and comes out as one zone, byte-identical to the old
+    plain-components result for that case.
     """
     r, g, b = rgb[..., 0].astype(int), rgb[..., 1].astype(int), rgb[..., 2].astype(int)
     ring = (r > _ISLAND_MARK["r"]) & (g < _ISLAND_MARK["g"]) & (b < _ISLAND_MARK["b"])
     if not ring.any():
         return np.zeros(rgb.shape[:2], dtype=np.int32)
-    if wrap_x:
-        pad = rgb.shape[1]
-        padded = np.concatenate([ring[:, -pad:], ring, ring[:, :pad]], axis=1)
-        filled = ndimage.binary_fill_holes(padded)[:, pad:-pad]
-    else:
-        filled = ndimage.binary_fill_holes(ring)
-    comp = cells.components(filled.astype(np.int32), wrap_x)
-    return cells.renumber(np.where(filled, comp, 0))
+    pad = rgb.shape[1] if wrap_x else 0
+    padded_ring = np.concatenate([ring[:, -pad:], ring, ring[:, :pad]], axis=1) if pad else ring
+    filled = ndimage.binary_fill_holes(padded_ring)
+
+    distance = ndimage.distance_transform_edt(filled)
+    peaks = peak_local_max(distance, min_distance=min_seed_separation,
+                           labels=filled.astype(np.int32))
+    markers = np.zeros(filled.shape, dtype=np.int32)
+    if peaks.size:
+        markers[tuple(peaks.T)] = np.arange(1, len(peaks) + 1)
+        labels = watershed(-distance, markers=markers, mask=filled)
+    else:  # a sliver too thin for any peak to clear min_seed_separation
+        labels = cells.components(filled.astype(np.int32), wrap_x=False)
+        labels = np.where(filled, labels, 0)
+    if pad:
+        labels = labels[:, pad:-pad]
+    return cells.renumber(labels.astype(np.int32))
 
 
 def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndarray,

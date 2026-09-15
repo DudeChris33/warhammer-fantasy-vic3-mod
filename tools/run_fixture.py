@@ -27,6 +27,7 @@ import argparse
 import filecmp
 import hashlib
 import json
+import math
 import random
 import shutil
 import sys
@@ -1347,6 +1348,34 @@ def _selfcheck_island_overrides() -> None:
     assert int(zones.max()) == 1, f"one drawn ring must be one zone, got {zones.max()}"
     assert zones[1, 30] == 1 and zones[1, 34] == 1, \
         "both islets must fall inside the ring's filled interior"
+
+    # Two rings whose filled interiors touch/overlap must NOT collapse into one
+    # zone — each ring's own centre is recovered by the
+    # distance-transform/watershed split, byte-identical to plain components for
+    # a lone ring, but distinct zones when two rings' interiors share pixels.
+    def _draw_circle(img, cy, cx, r, color=(255, 0, 0)):
+        for t in range(1440):
+            ang = t * math.pi / 720
+            y = int(round(cy + r * math.sin(ang)))
+            x = int(round(cx + r * math.cos(ang)))
+            if 0 <= y < img.shape[0] and 0 <= x < img.shape[1]:
+                img[y, x] = color
+
+    touching = np.full((60, 200, 3), 255, dtype=np.uint8)
+    _draw_circle(touching, 30, 50, 20)
+    _draw_circle(touching, 30, 88, 20)  # centres 38px apart, radius 20 -> overlapping
+    tz = lp.island_override_zones(touching, wrap_x=False, min_seed_separation=10)
+    assert int(tz.max()) == 2, f"two touching/overlapping rings must split into 2 zones, got {tz.max()}"
+    assert tz[30, 50] != 0 and tz[30, 88] != 0 and tz[30, 50] != tz[30, 88], \
+        "each ring's own centre must land in its own, distinct zone"
+    tz2 = lp.island_override_zones(touching, wrap_x=False, min_seed_separation=10)
+    assert np.array_equal(tz, tz2), "two runs must be byte-identical"
+
+    # A lone ring, far from anything, still comes out as exactly one zone.
+    lone = np.full((60, 200, 3), 255, dtype=np.uint8)
+    _draw_circle(lone, 30, 50, 20)
+    lz = lp.island_override_zones(lone, wrap_x=False, min_seed_separation=10)
+    assert int(lz.max()) == 1, f"a lone ring must stay one zone, got {lz.max()}"
 
     reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
     assert int(reg.max()) == 3, f"main landmass + 2 islets = 3, got {reg.max()}"
