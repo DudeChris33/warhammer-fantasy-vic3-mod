@@ -62,7 +62,10 @@ _TERRAIN_DOT = {
     "forest": (40, 130, 60),
     "cliff_coast": (60, 110, 200),
 }
-_DEFAULT_DOT = (255, 0, 255)
+#: Chris, 2026-09-15: was (255, 0, 255) — collided with the magenta state-border
+#: network drawn on the same canvas (mark_state_borders.py / project_regions.py's
+#: MAGENTA_RGB), since overlay (b) below is painted alongside it in GIMP.
+_DEFAULT_DOT = (127, 127, 255)
 
 DOT_RADIUS = 9
 
