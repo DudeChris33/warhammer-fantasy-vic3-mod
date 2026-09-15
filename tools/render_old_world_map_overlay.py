@@ -226,6 +226,9 @@ COLOR_LIBRARY: dict[str, tuple[int, int, int]] = {
 }
 
 COAST_RGB = (0, 255, 255)
+#: --no-globe's flat backdrop, standing in for the reprojected globe (itself
+#: parchment-styled) so only the placed content shows.
+BACKGROUND_RGB = (255, 255, 255)
 
 OUT_PREFIX = "old_world_map_overlay"
 
@@ -693,7 +696,8 @@ def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dic
 
 def build(coast: bool, hull_buffer_px: float,
          colors: list[tuple[str, tuple[int, int, int]]] | None = None,
-         source_path: Path | None = None, show_grey: bool = False) -> Path:
+         source_path: Path | None = None, show_grey: bool = False,
+         no_globe: bool = False) -> Path:
     source_path = source_path or STRETCHED_PNG
     require_source(source_path)
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
@@ -702,10 +706,15 @@ def build(coast: bool, hull_buffer_px: float,
                          f"tools/fit_registration.py --seed tww3_old_world_mod_parchment_full")
     reg = regs[FULL_SOURCE]
 
-    globe = load_source_rgb(GLOBE_SOURCE)
-    if globe.shape[:2] != (CANVAS_H, CANVAS_W):
-        raise SystemExit(f"{GLOBE_SOURCE} is {globe.shape[1]}x{globe.shape[0]}, "
-                         f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
+    if no_globe:
+        backdrop = np.full((CANVAS_H, CANVAS_W, 3), BACKGROUND_RGB, dtype=np.uint8)
+        log(f"backdrop          flat {BACKGROUND_RGB} (--no-globe: the reprojected globe "
+            f"is not loaded, so only the placed content shows)")
+    else:
+        backdrop = load_source_rgb(GLOBE_SOURCE)
+        if backdrop.shape[:2] != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{GLOBE_SOURCE} is {backdrop.shape[1]}x{backdrop.shape[0]}, "
+                             f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
 
     stretched, visible = load_stretched(source_path)
     try:
@@ -731,8 +740,9 @@ def build(coast: bool, hull_buffer_px: float,
                          "scope mask / --colors selection")
 
     report = fit_report(placed, reg, excluded, scope, colors, show_grey=show_grey)
+    report["no_globe"] = bool(no_globe)
 
-    canvas = compose(rgb, placed, globe)
+    canvas = compose(rgb, placed, backdrop)
     del rgb
     if colors is None and not show_grey:
         legend = [(None, "TWW3 old_world_map (stretched) draped via "
@@ -750,6 +760,9 @@ def build(coast: bool, hull_buffer_px: float,
                   (None, "everything else void, not drawn")]
     legend.append((None, f"cropped to {SCOPE_SOURCE} extent: "
                          f"{report['scope_excluded_px']:,} px out of scope, dropped"))
+    if no_globe:
+        legend.append((None, f"--no-globe: flat {BACKGROUND_RGB} backdrop, not the "
+                             f"reprojected globe"))
     if coast:
         legend.append((COAST_RGB, "this mod's coastline (reference)"))
         report["coast_px"] = overlay_coast(canvas)
@@ -761,6 +774,8 @@ def build(coast: bool, hull_buffer_px: float,
         prefix += "_" + "_".join(sorted(n for n, _ in colors))
     elif show_grey:
         prefix += "_show_grey"
+    if no_globe:
+        prefix += "_no_globe"
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     out_path = DERIVED_DIR / f"{prefix}.png"
     Image.fromarray(canvas, mode="RGB").save(out_path)
@@ -814,6 +829,10 @@ def main(argv: list[str] | None = None) -> int:
                    help="include the grey/impassable-terrain colour in the full drape "
                         "instead of treating it as void (ignored when --colors is given — "
                         "list 'grey' explicitly there instead)")
+    p.add_argument("--no-globe", action="store_true",
+                   help="drape onto a flat background instead of the reprojected globe, "
+                        "so only the placed content shows (the globe backdrop is itself "
+                        "parchment-styled art, which can be confused with the drape)")
     args = p.parse_args(argv)
 
     if args.verify_correspondence:
@@ -822,7 +841,7 @@ def main(argv: list[str] | None = None) -> int:
     colors = resolve_colors(args.colors)
     source_path = resolve_stretched_source(args.source)
     build(coast=args.coast, hull_buffer_px=args.hull_buffer_px, colors=colors,
-         source_path=source_path, show_grey=args.show_grey)
+         source_path=source_path, show_grey=args.show_grey, no_globe=args.no_globe)
     return 0
 
 
