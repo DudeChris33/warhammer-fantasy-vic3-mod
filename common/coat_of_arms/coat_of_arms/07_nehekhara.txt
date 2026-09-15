@@ -1,0 +1,209 @@
+# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per board item #3629 — the 11
+# Nehekhara country tags (common/country_definitions/07_nehekhara.txt, same order).
+# Composed entirely from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems,
+# neither blanked by replace_paths) plus one Realms of Exether emblem (disclosed
+# below), and this mod's named_colors palette (common/named_colors/00_coa_colors.txt
+# + 01_wh_coa_colors.txt). Requires common/flag_definitions/07_nehekhara.txt to
+# actually render in-game (see that file's header, and 02_empire.txt's for why).
+#
+# Two disclosed substitutions (no literal match exists in vanilla or the RoE set):
+#   - KHM: the tomb-city's pyramid is stood in for by ce_triangle.dds (a plain
+#     triangle charge), paired with ce_cobra_coiled.dds for the royal uraeus.
+#   - MAH: the City of the Dead's skull motif is stood in for by a voided
+#     (black-on-black) ce_sun.dds — a dead, lightless sun rather than a skull charge.
+# One vendored asset: ZND uses ce_roe_crocodile.dds from the sibling Realms of
+# Exether mod (reuse grant 2026-09-07) — see the provenance comment on its block.
+
+################ NEH — Nehekhara; Settra reunites the Land of the Dead ################
+# Bright sand/gold field for the reunified empire; the sun-face is Settra's own
+# authority over the Land of the Dead, not any one city's.
+NEH = {
+	pattern = "pattern_solid.tga"
+	color1 = "golden"
+	color2 = "golden"
+
+	colored_emblem = {
+		texture = "ce_sun_face.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "yellow_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+################ KHM — Khemri ################
+# Settra's own city. Two-charge composition: the pyramid (stood in for by
+# ce_triangle.dds — no pyramid emblem exists in vanilla or the RoE set, disclosed
+# above) sits low and dark behind Settra's own royal uraeus (ce_cobra_coiled.dds)
+# raised gold-on-black in front.
+KHM = {
+	pattern = "pattern_solid.tga"
+	color1 = "golden"
+	color2 = "golden"
+
+	colored_emblem = {
+		texture = "ce_triangle.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { position = { 0.5 0.56 } scale = { 0.75 0.75 } }
+	}
+	colored_emblem = {
+		texture = "ce_cobra_coiled.dds"
+		color1 = "golden"
+		color2 = "black"
+		instance = { position = { 0.5 0.32 } scale = { 0.45 0.45 } }
+	}
+}
+
+################ ZND — Zandri ################
+# The port at the mouth of the Mortis; a per-bend teal/white split for the river
+# meeting the sea.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_crocodile.dds), reuse grant 2026-09-07
+ZND = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "teal"
+	color2 = "white"
+
+	colored_emblem = {
+		texture = "ce_roe_crocodile.dds"
+		color1 = "white"
+		color2 = "orange"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+################ NUM — Numas ################
+# The city of the horse-lords of the upper Mortis; a dune-sand field for the
+# steppe, the horse itself kept tan against it.
+NUM = {
+	pattern = "pattern_solid.tga"
+	color1 = "saffron"
+	color2 = "saffron"
+
+	colored_emblem = {
+		texture = "ce_horse.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "tan"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+################ LAH — Lahmia; the cradle of vampires ################
+# Neferata's city. No named color in this mod's palette matches LAH's own
+# country_definitions carmine-violet (108 34 78) closely enough to be worth a new
+# entry for one tag; "purple" is the closest existing tincture. A rotated crescent,
+# black-on-blood-red, for the vampiric bloodline.
+LAH = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_crescent_rotated.dds"
+		color1 = "black"
+		color2 = "red_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+################ LYB — Lybaras ################
+# Queen Khalida's city of astronomers and scholars; azure field, a lapis star for
+# the study of the heavens.
+LYB = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_star_08.dds"
+		color1 = "lapis_blue"
+		color2 = "lapis_blue"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+################ RAS — Rasetra ################
+# The jungle-march city, the Tomb Kings' southern spear; green and tan split for
+# jungle against desert, a palm tree for the march itself.
+RAS = {
+	pattern = "pattern_vertical_split_01.tga"
+	color1 = "green_dark"
+	color2 = "tan"
+
+	colored_emblem = {
+		texture = "ce_palm_tree.dds"
+		color1 = "brown"
+		color2 = "green"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+################ MAH — Mahrak ################
+# The City of the Dead, necropolis of the gods; a black field, and a voided
+# (black-on-black) sun in place of a skull — no skull charge exists in vanilla or
+# the RoE set (disclosed above) — read as a dead, lightless sun over the necropolis.
+MAH = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+################ QUA — Quatar ################
+# The White Palace, City of the Springs of the Dead; a white/pearl field, waves
+# for the springs.
+QUA = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "pearl"
+
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+################ BHA — Bhagar ################
+# The oasis city of the Dune-Sea; a saffron field for the dunes, a lotus for the
+# oasis waters.
+BHA = {
+	pattern = "pattern_solid.tga"
+	color1 = "saffron"
+	color2 = "saffron"
+
+	colored_emblem = {
+		texture = "ce_lotus_base.dds"
+		color1 = "azure"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+################ KAS — Ka-Sabar ################
+# The City of Bronze; a dark bronze/copper field (brown, distinct from KAS's
+# golden neighbors so the hammers actually read against it), crossed mining
+# hammers for the forges in golden — same emblem/coloring convention as the
+# Karaz Ankor smith-holds in 04_karaz_ankor.txt.
+KAS = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_mining_hammers.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}

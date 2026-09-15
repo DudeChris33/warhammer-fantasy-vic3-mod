@@ -9,4 +9,10 @@ colors = {
 	# blue_light/tan/beige.
 	ice_blue = hsv360 { 200 35 88 }
 	steppe_ochre = hsv360 { 42 50 62 }
+
+	# Nehekhara heraldry (board #3629): a saturated ultramarine for Lybaras's
+	# star-charge, distinct from the vanilla port's azure/blue; and a warm desert
+	# bone tone reserved for future use, distinct from pearl/white.
+	lapis_blue = hsv360 { 220 75 65 }
+	bone_white = hsv360 { 38 15 88 }
 }

@@ -1,0 +1,99 @@
+# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at
+# priority = 0 — so "no flag definition is applicable for a country" (vanilla's
+# own tag-as-COA_KEY fallback condition, see that file's vanilla header comment
+# at .../game/common/flag_definitions/00_flag_definitions.txt:1-14) never fires
+# for any tag. Without a higher-priority tag-named list here, every bespoke COA
+# in common/coat_of_arms/coat_of_arms/07_nehekhara.txt (board #3629) would parse
+# but sit unused behind default_flag. Each list below is a single unconditional
+# block at priority = 100 — above #3552's priority = 0 DEFAULT, below vanilla's
+# own conditional range of 100-2000 for future per-tag variants. `always = yes`
+# confirmed valid at docs/triggers.log.
+
+NEH = {
+	flag_definition = {
+		coa = NEH
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KHM = {
+	flag_definition = {
+		coa = KHM
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ZND = {
+	flag_definition = {
+		coa = ZND
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+NUM = {
+	flag_definition = {
+		coa = NUM
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LAH = {
+	flag_definition = {
+		coa = LAH
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LYB = {
+	flag_definition = {
+		coa = LYB
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+RAS = {
+	flag_definition = {
+		coa = RAS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MAH = {
+	flag_definition = {
+		coa = MAH
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+QUA = {
+	flag_definition = {
+		coa = QUA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BHA = {
+	flag_definition = {
+		coa = BHA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KAS = {
+	flag_definition = {
+		coa = KAS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
