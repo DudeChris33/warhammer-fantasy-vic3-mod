@@ -8,19 +8,19 @@ would help rather than the build silently coarsening.
 ## Density
 
 - Target: **659 land states** (vanilla's own count) at a mean
-  of **17,141 canvas px** each, plus **103 sea zones**.
-- Achieved: **1034 land cells** (mean 10,924 px, median 9,582 px, min 1, max 43,498) and **112 sea zones**.
-- Cells traced from a source before filling: **4,974**.
+  of **17,200 canvas px** each, plus **103 sea zones**.
+- Achieved: **1193 land cells** (mean 9,501 px, median 7,483 px, min 1, max 43,195) and **112 sea zones**.
+- Cells traced from a source before filling: **4,790**.
 
 ## Lettering bridge (the parchment master)
 
-- Traced cells before bridging detected labels into the barrier: **829**.
-- After: **949** (+14.5%) — this is the measurement that says whether the glyph detector earned its dependency.
-- Largest traced cell after bridging: **197,821 px** (source pixels, before warping onto the canvas or clipping to the mask). A faint or broken ruled line, not a text problem — recoverable by `split_large`, reported here rather than hidden.
+- Traced cells before bridging detected labels into the barrier: **826**.
+- After: **944** (+14.3%) — this is the measurement that says whether the glyph detector earned its dependency.
+- Largest traced cell after bridging: **215,871 px** (source pixels, before warping onto the canvas or clipping to the mask). A faint or broken ruled line, not a text problem — recoverable by `split_large`, reported here rather than hidden.
 
-- Within the parchment master's own footprint, **73.7%** of land carries a traced cell (the rest falls through to the mask-wide seeded fallback below, same as everywhere else).
+- Within the parchment master's own footprint, **73.3%** of land carries a traced cell (the rest falls through to the mask-wide seeded fallback below, same as everywhere else).
 
-- **Drawn versus tessellated**: **67.4%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
+- **Drawn versus tessellated**: **66.8%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
 
 ## Old World density (this request's gate)
 
@@ -28,12 +28,9 @@ Land cells whose majority area lands inside each Old World crop's warped
 `alpha>0` footprint, against the user's per-macro `min_states` (`tools/regions/named_regions.json`). The crop footprints are the macros
 here because the twin grouping is blocked (below).
 
-- **the_empire**: 29 cells (min 30) ⚠ SHORT
-- **bretonnia+estalia+tilea**: 49 cells (min 24) ✅
-- **kislev+norsca**: 31 cells (min 30) ✅
-- **darklands**: 50 cells (min 30) ✅
-
-⚠ Below minimum: the_empire. Either the crop's boundary lines are under-tracing (tune its ink params) or the source genuinely draws fewer regions there than required — named honestly here rather than merged up to hit a number.
+- **bretonnia+estalia+tilea**: 62 cells (min 24) ✅
+- **kislev+norsca**: 36 cells (min 30) ✅
+- **darklands**: 44 cells (min 30) ✅
 
 ## Source coverage
 
@@ -43,15 +40,14 @@ the area it wins:
 ```
   precedence  95  tww3_colored.png                                 covers  70.0% of canvas
   precedence 100  tww3_ie_parchment.jpg                            covers  71.3% of canvas
-  precedence 110  imperial_provinces.png                           covers   0.7% of canvas
-  precedence 111  tww3_old_world_mod_parchment_bretonnia.png       covers   1.2% of canvas
-  precedence 112  tww3_old_world_mod_parchment_kislev_norsca.png   covers   1.7% of canvas
+  precedence   5  tww3_old_world_mod_parchment_bretonnia.png       covers   1.2% of canvas
+  precedence   6  tww3_old_world_mod_parchment_kislev_norsca.png   covers   1.3% of canvas
   precedence 113  tww3_old_world_mod_parchment_dark_lands.png      covers   2.1% of canvas
 ```
 
 ## The gap
 
-**3.9% of land has no boundary source at all** and is partitioned by
+**4.1% of land has no boundary source at all** and is partitioned by
 seeded fallback cells at the target density. This is expected, not a defect:
 the Immortal Empires frame stops around Cathay, so the Kingdoms of Ind,
 Khuresh, Nippon, the far Eastern Steppes and the polar Chaos Wastes have no
@@ -74,7 +70,7 @@ Named candidates for closing it, in order of expected value:
 ## Macro grouping
 
 - **⚠ SKIPPED — macro grouping did not run.**
-  the only macro source (total_war_states_per_strat_region.jpg, role 'named_macro_regions') is a frame_alias of tww3_ie_parchment.jpg (scale 1.808), not a frame-aligned twin. macro.annotation_mask differences the twin against the clean master pixel-for-pixel and needs matching dims, so a rescaled alias cannot feed it. Warping the alias into the master frame is a separate request.
+  the only macro source (tww3_states_per_strat_region.jpg, role 'named_macro_regions') is a frame_alias of tww3_ie_parchment.jpg (scale 1.808), not a frame-aligned twin. macro.annotation_mask differences the twin against the clean master pixel-for-pixel and needs matching dims, so a rescaled alias cannot feed it. Warping the alias into the master frame is a separate request.
   Every land cell reports macro 0 (unassigned) below; the Old World per-crop
   counts above stand in for the macros this round.
 

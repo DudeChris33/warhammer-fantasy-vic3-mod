@@ -1,20 +1,4 @@
-﻿STATE_LAND_013 = {
-    id = 13
-    subsistence_building = "building_subsistence_farm"
-    provinces = { xD35EE9 }
-    city = xD35EE9
-    farm = xD35EE9
-    mine = xD35EE9
-    wood = xD35EE9
-    port = xD35EE9
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
-    naval_exit_id = 3000
-}
-STATE_LAND_014 = {
+﻿STATE_LAND_014 = {
     id = 14
     subsistence_building = "building_subsistence_farm"
     provinces = { x7A6787 }

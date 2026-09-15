@@ -1,5 +1,5 @@
 ﻿region_araby = {
-	capital_province = x510D6F
+	capital_province = xEF44E8
 	map_color = { 211 94 233 }
 	states = { STATE_HORN_OF_ARABY STATE_THIEVES_COAST STATE_PILLAGERS_DESERT STATE_RAIDERS_DUNES }
 }

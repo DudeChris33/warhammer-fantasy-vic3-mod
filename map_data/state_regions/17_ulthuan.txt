@@ -62,22 +62,6 @@ STATE_LAND_004 = {
     }
     naval_exit_id = 3027
 }
-STATE_LAND_005 = {
-    id = 5
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x6A0E4E }
-    city = x6A0E4E
-    farm = x6A0E4E
-    mine = x6A0E4E
-    wood = x6A0E4E
-    port = x6A0E4E
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
-    naval_exit_id = 3027
-}
 STATE_LAND_006 = {
     id = 6
     subsistence_building = "building_subsistence_farm"

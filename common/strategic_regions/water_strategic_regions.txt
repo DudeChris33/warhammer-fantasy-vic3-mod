@@ -206,18 +206,6 @@ region_frozen_sea_01 = {
 	states = { STATE_FROZEN_SEA_01 }
 }
 
-region_frozen_sea_02 = {
-	states = { STATE_FROZEN_SEA_02 }
-}
-
-region_frozen_sea_03 = {
-	states = { STATE_FROZEN_SEA_03 }
-}
-
-region_frozen_sea_04 = {
-	states = { STATE_FROZEN_SEA_04 }
-}
-
 region_gloomwrack_strait = {
 	states = { STATE_GLOOMWRACK_STRAIT }
 }
@@ -534,10 +522,6 @@ region_sea_of_claws_01 = {
 	states = { STATE_SEA_OF_CLAWS_01 }
 }
 
-region_sea_of_claws_02 = {
-	states = { STATE_SEA_OF_CLAWS_02 }
-}
-
 region_sea_of_dreams = {
 	states = { STATE_SEA_OF_DREAMS }
 }
@@ -574,20 +558,8 @@ region_sea_of_malice_01 = {
 	states = { STATE_SEA_OF_MALICE_01 }
 }
 
-region_sea_of_malice_02 = {
-	states = { STATE_SEA_OF_MALICE_02 }
-}
-
 region_sea_of_malice_03 = {
 	states = { STATE_SEA_OF_MALICE_03 }
-}
-
-region_sea_of_malice_04 = {
-	states = { STATE_SEA_OF_MALICE_04 }
-}
-
-region_sea_of_malice_05 = {
-	states = { STATE_SEA_OF_MALICE_05 }
 }
 
 region_sea_of_mist = {
@@ -606,6 +578,10 @@ region_sea_of_rage_03 = {
 	states = { STATE_SEA_OF_RAGE_03 }
 }
 
+region_sea_of_rage_04 = {
+	states = { STATE_SEA_OF_RAGE_04 }
+}
+
 region_sea_of_serpents_01 = {
 	states = { STATE_SEA_OF_SERPENTS_01 }
 }
@@ -622,24 +598,12 @@ region_sea_of_squalls_02 = {
 	states = { STATE_SEA_OF_SQUALLS_02 }
 }
 
-region_sea_of_squalls_03 = {
-	states = { STATE_SEA_OF_SQUALLS_03 }
-}
-
 region_sea_of_squalls_04 = {
 	states = { STATE_SEA_OF_SQUALLS_04 }
 }
 
 region_sea_of_squalls_05 = {
 	states = { STATE_SEA_OF_SQUALLS_05 }
-}
-
-region_sea_of_squalls_06 = {
-	states = { STATE_SEA_OF_SQUALLS_06 }
-}
-
-region_sea_of_weird_waves_01 = {
-	states = { STATE_SEA_OF_WEIRD_WAVES_01 }
 }
 
 region_sea_of_weird_waves_02 = {
@@ -844,10 +808,6 @@ region_western_bitter_sea = {
 
 region_western_gates_of_calith = {
 	states = { STATE_WESTERN_GATES_OF_CALITH }
-}
-
-region_western_sea_of_oblivion = {
-	states = { STATE_WESTERN_SEA_OF_OBLIVION }
 }
 
 region_western_sea_of_weird_waves = {
