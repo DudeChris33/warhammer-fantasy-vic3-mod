@@ -1,22 +1,24 @@
 #!/usr/bin/env python3
 """Land/sea mask from the hand-traced coastline — the coastline authority.
 
-The user traced the world's entire coastline as a magenta (255,0,255) line
-directly on the canvas-space reprojected globe and exported it as the black-plus-
-magenta ``sources/land_sea_mask.png`` (8192×3616 = the mod canvas; the same
-magenta network also carried in ``terraqueous_globe_reprojected - coasts.png``).
-Because it is drawn in canvas space it needs no registration, and because it is a
-deliberate hand-trace it supersedes the height-ramp extraction that
-``generate_heightmap.py`` used to derive the coast (user decision, 2026-08-14: "the
-traced coastline wins"; the ramp derivation was deleted 2026-08-22). This tool is
-the sole owner of ``land_sea_mask.png``; ``generate_heightmap.py`` consumes the
-mask rather than re-deriving the shoreline.
+The user traced the world's entire coastline as a cyan (0,255,255) line directly
+on the canvas-space reprojected globe and exported it as the black-plus-cyan
+``sources/land_sea_mask.png`` (8192×3616 = the mod canvas; the same cyan network
+also carried in ``terraqueous_globe_reprojected - coasts.png``). Cyan is reserved
+for the coastline trace (rivers moved to blue instead, board #3703 follow-up
+2026-09-15) — before that the trace was drawn magenta. Because it is drawn in
+canvas space it needs no registration, and because it is a deliberate hand-trace
+it supersedes the height-ramp extraction that ``generate_heightmap.py`` used to
+derive the coast (user decision, 2026-08-14: "the traced coastline wins"; the
+ramp derivation was deleted 2026-08-22). This tool is the sole owner of
+``land_sea_mask.png``; ``generate_heightmap.py`` consumes the mask rather than
+re-deriving the shoreline.
 
 Land vs sea is decided by **coastline topology**, not by globe colour (the globe's
 sea is a desaturated grey that no hue test separates from land — the very problem
 the trace exists to avoid):
 
-1. The magenta line is the coast; it is the barrier.
+1. The cyan line is the coast; it is the barrier.
 2. Fill the gaps in the (anti-aliased) line, then flood-label the regions between
    lines. Assign every line pixel to its nearest region so the shoreline is crisp
    (1 px) rather than the width of the drawn stroke.
@@ -113,9 +115,9 @@ def drop_land_specks(land: np.ndarray, min_px: int, wrap_x: bool = True,
 
 
 def coast_line(rgb: np.ndarray) -> np.ndarray:
-    """The drawn coastline: pure magenta, dilated to bridge anti-aliased gaps."""
+    """The drawn coastline: pure cyan, dilated to bridge anti-aliased gaps."""
     r, g, b = rgb[..., 0].astype(int), rgb[..., 1].astype(int), rgb[..., 2].astype(int)
-    line = (r > 210) & (g < 70) & (b > 210)
+    line = (r < 70) & (g > 210) & (b > 210)
     return ndimage.binary_dilation(line, iterations=2)
 
 
@@ -198,7 +200,7 @@ def main(argv: list[str] | None = None) -> int:
                         "(for a candidate run before the source is manifested)")
     p.add_argument("--from-fill", action="store_true",
                    help="the source is a finished black/white land fill (white=land), "
-                        "not a magenta coastline trace — use it directly, no flood-fill")
+                        "not a cyan coastline trace — use it directly, no flood-fill")
     p.add_argument("--lake-out", type=Path, default=DEFAULT_LAKE_OUT,
                    help="companion lake-mask path written in --from-fill mode "
                         "(default: tools/derived/lake_mask.png)")
