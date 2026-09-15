@@ -392,8 +392,8 @@ def master_to_canvas_scale(reg: schema.SourceRegistration) -> float:
 
 def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
                     visible: np.ndarray, scope: np.ndarray,
-                    colors: list[tuple[str, tuple[int, int, int]]] | None = None
-                    ) -> tuple[np.ndarray, np.ndarray, dict]:
+                    colors: list[tuple[str, tuple[int, int, int]]] | None = None,
+                    show_grey: bool = False) -> tuple[np.ndarray, np.ndarray, dict]:
     """Warp the stretched export into canvas space. Returns ``(rgb, placed, excluded)``.
 
     ``placed`` is True where the warp landed inside the master frame AND
@@ -401,14 +401,20 @@ def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
     AND inside this mod's scope (:data:`SCOPE_SOURCE`'s alpha) AND the sampled
     colour survives the colour gate.
 
-    The colour gate is one of two things:
+    The colour gate is one of three things:
 
-    * ``colors is None`` (default, unchanged from this render's first
-      version) — every colour is paintable *except* :data:`VOID_RGB`.
+    * ``colors is None`` and ``show_grey`` False (default, unchanged from
+      this render's first version) — every colour is paintable *except*
+      :data:`VOID_RGB`.
+    * ``colors is None`` and ``show_grey`` True (``--show-grey``) — every
+      colour is paintable, full stop; nothing is dropped by colour (only by
+      ``visible``/scope/master-frame bounds).
     * ``colors`` given (``--colors``) — only pixels matching one of the named
       colours are paintable; everything else is void, regardless of whether it
       would otherwise have been drawn. This is a selection, not a recolour:
       a kept pixel is still drawn in its own real sampled colour.
+      (``--show-grey`` is ignored when ``--colors`` is given — list ``grey``
+      explicitly instead.)
 
     Nearest sampling, direct integer indexing — same rationale as
     ``render_cr_lookup_overlay.place_lookup``: this is a small (2048²) flat-
@@ -437,8 +443,11 @@ def place_stretched(fit, box: tuple[int, int, int, int], stretched: np.ndarray,
 
         block16 = block.astype(np.int16)
         if colors is None:
-            d = np.abs(block16 - np.array(VOID_RGB, dtype=np.int16)).sum(axis=2)
-            gate = d > VOID_TOLERANCE
+            if show_grey:
+                gate = np.ones(block.shape[:2], dtype=bool)
+            else:
+                d = np.abs(block16 - np.array(VOID_RGB, dtype=np.int16)).sum(axis=2)
+                gate = d > VOID_TOLERANCE
         else:
             gate = np.zeros(block.shape[:2], dtype=bool)
             for _, rgb in colors:
@@ -633,7 +642,8 @@ def verify_correspondence() -> int:
 
 def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dict,
               scope: np.ndarray,
-              colors: list[tuple[str, tuple[int, int, int]]] | None) -> dict:
+              colors: list[tuple[str, tuple[int, int, int]]] | None,
+              show_grey: bool = False) -> dict:
     n_landmarks = len(reg.control_points)
     scale = master_to_canvas_scale(reg)
     log("")
@@ -653,10 +663,13 @@ def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dic
         f"frame is in scope) — Chris, 2026-09-12")
     log(f"  master->canvas    {scale:.4f} canvas px per master px "
         f"(footprint width {reg.footprint[2] - reg.footprint[0]:.1f} / {MASTER_SIZE})")
-    if colors is None:
+    if colors is None and not show_grey:
         log(f"  colour gate       full drape: every colour except void {VOID_RGB} "
             f"(terrain/impassable layer + corner frame decoration, ~25% of the source "
             f"image — see module docstring)")
+    elif colors is None:
+        log(f"  colour gate       full drape including grey/impassable {VOID_RGB} "
+            f"(--show-grey): nothing dropped by colour")
     else:
         names = ", ".join(f"{n} {rgb}" for n, rgb in colors)
         log(f"  colour gate       --colors selection: only {names} placed; everything "
@@ -674,12 +687,13 @@ def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dic
         "master_to_canvas_scale": scale,
         "void_rgb": list(VOID_RGB),
         "colors_selected": ([n for n, _ in colors] if colors is not None else None),
+        "show_grey": bool(show_grey),
     }
 
 
 def build(coast: bool, hull_buffer_px: float,
          colors: list[tuple[str, tuple[int, int, int]]] | None = None,
-         source_path: Path | None = None) -> Path:
+         source_path: Path | None = None, show_grey: bool = False) -> Path:
     source_path = source_path or STRETCHED_PNG
     require_source(source_path)
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
@@ -710,20 +724,24 @@ def build(coast: bool, hull_buffer_px: float,
     log(f"eval box          canvas {list(box)}"
         + (f" (footprint + {hull_buffer_px:.0f}px outer-hull buffer)" if hull_buffer_px > 0
            else " (strict footprint)"))
-    rgb, placed, excluded = place_stretched(fit, box, stretched, visible, scope, colors=colors)
+    rgb, placed, excluded = place_stretched(fit, box, stretched, visible, scope, colors=colors,
+                                            show_grey=show_grey)
     if not placed.any():
         raise SystemExit("nothing placed — check the registration / stretched export / "
                          "scope mask / --colors selection")
 
-    report = fit_report(placed, reg, excluded, scope, colors)
+    report = fit_report(placed, reg, excluded, scope, colors, show_grey=show_grey)
 
     canvas = compose(rgb, placed, globe)
     del rgb
-    if colors is None:
+    if colors is None and not show_grey:
         legend = [(None, "TWW3 old_world_map (stretched) draped via "
                          "tww3_old_world_mod_parchment_full (PROVISIONAL)"),
                   (None, "void = terrain/impassable layer + corner frame decoration, "
                          "not drawn")]
+    elif colors is None:
+        legend = [(None, "TWW3 old_world_map (stretched), incl. grey/impassable, draped "
+                         "via tww3_old_world_mod_parchment_full (PROVISIONAL)")]
     else:
         names = ", ".join(n for n, _ in colors)
         legend = [(None, f"TWW3 old_world_map (stretched), colours {{{names}}} only, "
@@ -741,6 +759,8 @@ def build(coast: bool, hull_buffer_px: float,
     prefix = OUT_PREFIX + source_tag(source_path)
     if colors is not None:
         prefix += "_" + "_".join(sorted(n for n, _ in colors))
+    elif show_grey:
+        prefix += "_show_grey"
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     out_path = DERIVED_DIR / f"{prefix}.png"
     Image.fromarray(canvas, mode="RGB").save(out_path)
@@ -790,6 +810,10 @@ def main(argv: list[str] | None = None) -> int:
                         "would need its own correspondence check. Output filenames are "
                         "suffixed with the source's parent folder name so this never "
                         "overwrites the default render")
+    p.add_argument("--show-grey", action="store_true",
+                   help="include the grey/impassable-terrain colour in the full drape "
+                        "instead of treating it as void (ignored when --colors is given — "
+                        "list 'grey' explicitly there instead)")
     args = p.parse_args(argv)
 
     if args.verify_correspondence:
@@ -798,7 +822,7 @@ def main(argv: list[str] | None = None) -> int:
     colors = resolve_colors(args.colors)
     source_path = resolve_stretched_source(args.source)
     build(coast=args.coast, hull_buffer_px=args.hull_buffer_px, colors=colors,
-         source_path=source_path)
+         source_path=source_path, show_grey=args.show_grey)
     return 0
 
 
