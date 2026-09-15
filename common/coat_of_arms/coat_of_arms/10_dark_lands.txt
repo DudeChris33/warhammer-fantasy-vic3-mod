@@ -1,0 +1,128 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per board item #3630, epic #3621 - the 6
+# Dark Lands country tags (common/country_definitions/10_dark_lands.txt, same order).
+# Composed from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems, neither
+# blanked by replace_paths), two Realms of Exether colored_emblems (reuse grant
+# confirmed 2026-09-07, see epic #3621's Art Palette section for provenance-comment
+# convention), and this mod's named_colors palette (common/named_colors/00_coa_colors.txt
+# + 01_wh_coa_colors.txt). Requires common/flag_definitions/10_dark_lands.txt (this
+# mod's DEFAULT flag_definitions block is unconditional at priority = 0 and would
+# otherwise mask every one of these - see that file's header) to actually render
+# in-game.
+
+# ZHA - Dawi Zharr Empire, the pan-Chaos-Dwarf unification formable. Canon device
+# is the Bull of Hashut; reserved for THIS tag rather than MZN (the actual canon
+# holy city of Zharr-Naggrund) as a deliberate mechanical choice to avoid charge
+# duplication between the two formables/tags, not an oversight.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_bull.dds), reuse grant 2026-09-07
+ZHA = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_bull.dds"
+		color1 = "orange"
+		color2 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 1 1 } }
+	}
+}
+
+# MZN - Mingol Zharr-Naggrund, the ziggurat-city itself and the seat of Hashut
+# worship. No ziggurat/pyramid/tower-temple art exists in vanilla OR the Realms of
+# Exether set (confirmed by a targeted sweep during scoping) - a stepped
+# triple-border pattern plus a castle emblem stand in for the tiered ziggurat
+# architecture. Deliberately NOT the bull, which is reserved for ZHA above.
+MZN = {
+	pattern = "pattern_border_of_3.dds"
+	color1 = "orange"
+	color2 = "black_light"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "black"
+		color2 = "orange"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# GOR - Gorgoth, a lesser Chaos Dwarf hold. Reads through its own industrial/weapon
+# identity - the axe, a more distinctly Dwarf/corrupted-heritage device - rather
+# than reusing the bull or ziggurat charges reserved for the two senior tags above.
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds), reuse grant 2026-09-07
+GOR = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_roe_axes.dds"
+		color1 = "black"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 1 1 } }
+	}
+}
+
+# UZK - Uzkulak, "the Port of Zharr", a coastal Chaos Dwarf hold. The ship charge
+# is a disclosed invention representing the Chaos Dwarf slave-trade economy - no
+# canon vessel is asserted. Distinctly recolored vs. this mod's own Empire MAR tag
+# (common/coat_of_arms/coat_of_arms/02_empire.txt), which also uses
+# ce_ship_manchester.dds, so the two don't render identically.
+UZK = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "grey"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_ship_manchester.dds"
+		color1 = "black"
+		color2 = "orange"
+		color3 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.65 0.65 } }
+	}
+}
+
+# KHN - the Great Khanate, the hobgoblin unification formable. Design history: an
+# earlier draft paired a crescent with a star emblem, which loremaster review
+# flagged as reading first as the Ottoman/Turkish national flag rather than generic
+# steppe iconography - the same class of real-world-political-symbol risk this
+# mod's Empire/Ulric heraldry was already written to avoid re: the wolfsangel
+# (see 02_empire.txt's MID entry). Replaced with crescent + a tribal-horse charge,
+# neither of which is a star.
+KHN = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_crescent_large.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.35 } scale = { 0.6 0.6 } }
+	}
+	colored_emblem = {
+		texture = "ce_horse_tribal.dds"
+		color1 = "black_light"
+		color2 = "grey"
+		color3 = "golden"
+		instance = { position = { 0.5 0.62 } scale = { 0.55 0.55 } }
+	}
+}
+
+# HGK - Hobgobla-Khan, the base/starting hobgoblin kingdom. A single, humbler
+# crescent charge vs. KHN's dual-charge grand banner, on its own distinct
+# olive-green field so the two hobgoblin tags don't read as "the same flag,
+# junior version".
+HGK = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	color2 = "green"
+
+	colored_emblem = {
+		texture = "ce_crescent_large.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
