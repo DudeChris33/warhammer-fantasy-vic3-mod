@@ -109,28 +109,32 @@ the picture — a small circular frame/compass-rose decoration does sit in each
 corner, but the colour's bulk (25.4% of the image) is an organic, branching
 network spread across the *whole* frame, matching mountain ranges far more
 than a UI bezel would: this is almost certainly the export's **impassable
-terrain** layer, not decoration. :data:`COLOR_LIBRARY` names it ``"grey"``
-(alias ``"impassable"``) accordingly, and :option:`--colors` lets it be
-selected deliberately (see below) instead of always being dropped.
+terrain** layer, not decoration. Dropped to void by default (:option:`--show-grey`
+includes it instead).
 
 Colour selection (``--colors``)
 --------------------------------
 :option:`--colors` restricts the drape to an explicit, comma-separated list of
-named colours from :data:`COLOR_LIBRARY` (case-insensitive; ``purple`` is an
-alias for the magenta dot markers, ``grey``/``impassable`` for the terrain
-layer above). Every pixel whose colour is **not** in the selected set is
-treated as void (globe shows through) — this is a selection, not a recolour:
-each kept pixel is drawn in its own real source colour. Omit the option for
-the original full drape (every colour except ``grey``, unchanged from this
-render's first version). Output paths are suffixed with the selected names
-(sorted) so different selections never overwrite each other.
+named colours from :data:`COLOR_LIBRARY` (case-insensitive; ``purple``/``magenta``
+are aliases for the border-line colour). :data:`COLOR_LIBRARY` currently only
+carries the 3-colour palette of Chris's hand-recoloured
+``sources/gimp_exports/old_world_map - stretched.png`` (``purple``/``magenta``,
+``cities``, ``gimp_impassable`` — confirmed 2026-09-15; the canonical dataset's
+own 8-colour palette is no longer independently selectable by name, only via
+the default full drape / :option:`--show-grey` described above). Every pixel
+whose colour is **not** in the selected set is treated as void (globe shows
+through) — this is a selection, not a recolour: each kept pixel is drawn in
+its own real source colour. Omit the option for the original full drape
+(every colour except the void colour, unchanged from this render's first
+version). Output paths are suffixed with the selected names (sorted) so
+different selections never overwrite each other.
 
 Usage::
 
     python tools/render_old_world_map_overlay.py
     python tools/render_old_world_map_overlay.py --coast
     python tools/render_old_world_map_overlay.py --colors purple
-    python tools/render_old_world_map_overlay.py --colors purple,grey --coast
+    python tools/render_old_world_map_overlay.py --colors purple,gimp_impassable --coast
     python tools/render_old_world_map_overlay.py --verify-correspondence
 """
 
@@ -195,10 +199,9 @@ ROW_BLOCK = 64
 #: user-accepted default. Not a real correspondence — a QA convenience.
 HULL_BUFFER_PX_DEFAULT = 50.0
 
-#: The export's terrain/impassable layer, plus a small corner frame decoration
-#: sharing the same flat colour — see the module docstring's correction. Dropped
-#: to void by DEFAULT (the original full-drape behaviour); selectable by name
-#: (``"grey"``/``"impassable"``) via --colors.
+#: The canonical dataset export's terrain/impassable layer, plus a small corner
+#: frame decoration sharing the same flat colour — see the module docstring's
+#: correction. Dropped to void by DEFAULT (the original full-drape behaviour).
 VOID_RGB = (46, 46, 46)
 VOID_TOLERANCE = 10  # small AA slack around the flat colour
 #: The flat land colour, used only by --verify-correspondence's silhouette extraction.
@@ -209,26 +212,18 @@ LAND_TOLERANCE = 60
 #: this only needs to absorb incidental PNG re-save noise, not real AA.
 COLOR_MATCH_TOLERANCE = 10
 
-#: Every flat colour this export actually uses (confirmed by direct pixel
-#: histogram, board #4425 scoping — exactly 8, no others). Selectable by name
-#: via --colors; aliases point at the same RGB as their primary name.
+#: Chris's hand-recoloured sources/gimp_exports/old_world_map - stretched.png
+#: (--source override) — its own 3-colour palette, confirmed by Chris
+#: 2026-09-15. Selectable by name via --colors; aliases point at the same RGB
+#: as their primary name.
 COLOR_LIBRARY: dict[str, tuple[int, int, int]] = {
-    "land": (16, 248, 0),
-    "sea": (53, 67, 255),
-    "grey": VOID_RGB,          # terrain/impassable layer + corner frame decoration
-    "impassable": VOID_RGB,    # alias for "grey" — see module docstring
-    "border": (252, 170, 0),   # region-border lines
-    "mountain": (139, 69, 19), # mountain-range shading
-    "purple": (255, 0, 255),   # settlement/point-of-interest dot markers
+    "purple": (255, 0, 255),   # region-border lines
     "magenta": (255, 0, 255),  # alias for "purple"
-    "yellow": (240, 240, 40),
-    "cyan": (16, 231, 234),
+    "cities": (127, 127, 255),        # settlement markers
+    "gimp_impassable": (255, 127, 0), # impassable-terrain fill
 }
 
 COAST_RGB = (0, 255, 255)
-#: --no-globe's flat backdrop, standing in for the reprojected globe (itself
-#: parchment-styled) so only the placed content shows.
-BACKGROUND_RGB = (255, 255, 255)
 
 OUT_PREFIX = "old_world_map_overlay"
 
@@ -696,8 +691,7 @@ def fit_report(placed: np.ndarray, reg: schema.SourceRegistration, excluded: dic
 
 def build(coast: bool, hull_buffer_px: float,
          colors: list[tuple[str, tuple[int, int, int]]] | None = None,
-         source_path: Path | None = None, show_grey: bool = False,
-         no_globe: bool = False) -> Path:
+         source_path: Path | None = None, show_grey: bool = False) -> Path:
     source_path = source_path or STRETCHED_PNG
     require_source(source_path)
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
@@ -706,15 +700,10 @@ def build(coast: bool, hull_buffer_px: float,
                          f"tools/fit_registration.py --seed tww3_old_world_mod_parchment_full")
     reg = regs[FULL_SOURCE]
 
-    if no_globe:
-        backdrop = np.full((CANVAS_H, CANVAS_W, 3), BACKGROUND_RGB, dtype=np.uint8)
-        log(f"backdrop          flat {BACKGROUND_RGB} (--no-globe: the reprojected globe "
-            f"is not loaded, so only the placed content shows)")
-    else:
-        backdrop = load_source_rgb(GLOBE_SOURCE)
-        if backdrop.shape[:2] != (CANVAS_H, CANVAS_W):
-            raise SystemExit(f"{GLOBE_SOURCE} is {backdrop.shape[1]}x{backdrop.shape[0]}, "
-                             f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
+    backdrop = load_source_rgb(GLOBE_SOURCE)
+    if backdrop.shape[:2] != (CANVAS_H, CANVAS_W):
+        raise SystemExit(f"{GLOBE_SOURCE} is {backdrop.shape[1]}x{backdrop.shape[0]}, "
+                         f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
 
     stretched, visible = load_stretched(source_path)
     try:
@@ -740,7 +729,6 @@ def build(coast: bool, hull_buffer_px: float,
                          "scope mask / --colors selection")
 
     report = fit_report(placed, reg, excluded, scope, colors, show_grey=show_grey)
-    report["no_globe"] = bool(no_globe)
 
     canvas = compose(rgb, placed, backdrop)
     del rgb
@@ -760,9 +748,6 @@ def build(coast: bool, hull_buffer_px: float,
                   (None, "everything else void, not drawn")]
     legend.append((None, f"cropped to {SCOPE_SOURCE} extent: "
                          f"{report['scope_excluded_px']:,} px out of scope, dropped"))
-    if no_globe:
-        legend.append((None, f"--no-globe: flat {BACKGROUND_RGB} backdrop, not the "
-                             f"reprojected globe"))
     if coast:
         legend.append((COAST_RGB, "this mod's coastline (reference)"))
         report["coast_px"] = overlay_coast(canvas)
@@ -774,8 +759,6 @@ def build(coast: bool, hull_buffer_px: float,
         prefix += "_" + "_".join(sorted(n for n, _ in colors))
     elif show_grey:
         prefix += "_show_grey"
-    if no_globe:
-        prefix += "_no_globe"
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     out_path = DERIVED_DIR / f"{prefix}.png"
     Image.fromarray(canvas, mode="RGB").save(out_path)
@@ -813,9 +796,9 @@ def main(argv: list[str] | None = None) -> int:
                         "MASTER_TO_STRETCHED_SCALE, then exit")
     p.add_argument("--colors", type=str, default=None,
                    help="comma-separated colour names to restrict the drape to (e.g. "
-                        "'purple' or 'purple,grey'); everything else renders as void. "
-                        f"Known names: {', '.join(sorted(COLOR_LIBRARY))}. Omit for the "
-                        "full drape (every colour except grey/impassable)")
+                        "'purple' or 'purple,gimp_impassable'); everything else renders "
+                        f"as void. Known names: {', '.join(sorted(COLOR_LIBRARY))}. Omit "
+                        "for the full drape (every colour except the void colour)")
     p.add_argument("--source", type=str, default=None,
                    help="path (repo-root-relative, or absolute) to a different 2048x2048 "
                         "export to drape instead of the dataset's own file — e.g. a local, "
@@ -826,13 +809,9 @@ def main(argv: list[str] | None = None) -> int:
                         "suffixed with the source's parent folder name so this never "
                         "overwrites the default render")
     p.add_argument("--show-grey", action="store_true",
-                   help="include the grey/impassable-terrain colour in the full drape "
-                        "instead of treating it as void (ignored when --colors is given — "
-                        "list 'grey' explicitly there instead)")
-    p.add_argument("--no-globe", action="store_true",
-                   help="drape onto a flat background instead of the reprojected globe, "
-                        "so only the placed content shows (the globe backdrop is itself "
-                        "parchment-styled art, which can be confused with the drape)")
+                   help="include the void colour in the full drape instead of treating "
+                        "it as void (ignored when --colors is given — list the colour "
+                        "explicitly there instead)")
     args = p.parse_args(argv)
 
     if args.verify_correspondence:
@@ -841,7 +820,7 @@ def main(argv: list[str] | None = None) -> int:
     colors = resolve_colors(args.colors)
     source_path = resolve_stretched_source(args.source)
     build(coast=args.coast, hull_buffer_px=args.hull_buffer_px, colors=colors,
-         source_path=source_path, show_grey=args.show_grey, no_globe=args.no_globe)
+         source_path=source_path, show_grey=args.show_grey)
     return 0
 
 
