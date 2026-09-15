@@ -6,8 +6,8 @@ reads and (by default) overwrites a mask under the local-only, gitignored
 pixel becomes white.
 
 Usage (from the repo root, with tools/.venv active):
-    python tools/binarize_magenta_mask.py                       # overwrite sources/gimp_exports/land_sea_mask.png
-    python tools/binarize_magenta_mask.py --src A.png --out B.png
+    python tools/binarize_cyan_mask.py                       # overwrite sources/gimp_exports/land_sea_mask.png
+    python tools/binarize_cyan_mask.py --src A.png --out B.png
 """
 import argparse
 from pathlib import Path
