@@ -212,8 +212,8 @@ def main(argv: list[str] | None = None) -> int:
         if overrides_rgb.shape[:2] != (CANVAS_H, CANVAS_W):
             raise SystemExit(f"{ISLAND_OVERRIDES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
                              f"{overrides_rgb.shape[1]}x{overrides_rgb.shape[0]}")
-        island_overrides = land_provinces.island_override_zones(overrides_rgb, WRAP_X)
-        log(f"island overrides: {int(island_overrides.max())} hand-drawn circle(s)", t0)
+        island_overrides = land_provinces.island_override_zones(overrides_rgb, land, WRAP_X)
+        log(f"island overrides: {int(island_overrides.max())} hand-drawn merge-line network(s)", t0)
 
     log("flood-filling the magenta network into state regions ...", t0)
     reg = land_provinces.regions(land, drawn, LINE_DILATE, args.merge_floor, WRAP_X, log=log,

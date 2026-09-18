@@ -1317,9 +1317,12 @@ def _selfcheck_island_overrides() -> None:
     """Tiny-island override merge (worldgen.land_provinces), in isolation.
 
     Pins the properties generate_provinces.py relies on: island_override_zones
-    reads distinct painted circles as distinct zone ids and a blank source as no
+    reads a merge-line network's connected components as distinct zone ids
+    (board #4609 — a line directly connecting islands, superseding an earlier
+    enclosing-ring idiom that needed a geometric splitter for touching rings
+    and never reliably got it right for every shape) and a blank source as no
     zones at all; merge_island_overrides unions every region caught under the
-    same zone into one (a circle over a single region is a no-op); the merge
+    same zone into one (a line touching only one region is a no-op); the merge
     result still tiles the land exactly and is byte-identical across two runs;
     and subdivide's connectivity guard keeps a merged, non-contiguous archipelago
     as exactly one province even when its area earns it more than one seat.
@@ -1335,47 +1338,35 @@ def _selfcheck_island_overrides() -> None:
 
     # A blank overrides source yields no zones at all.
     blank = np.full((H, W, 3), 255, dtype=np.uint8)
-    assert not lp.island_override_zones(blank, wrap_x=False).any(), "a blank source must draw no zones"
+    assert not lp.island_override_zones(blank, land, wrap_x=False).any(), \
+        "a blank source must draw no zones"
 
-    # A drawn ring — the user's real idiom — never touches what it encloses;
-    # both islets sit in the hollow interior, not on the ring itself.
+    # A line directly connecting the two islets puts them in the same zone.
     overrides = np.full((H, W, 3), 255, dtype=np.uint8)
-    overrides[0, 28:37] = (255, 0, 0)
-    overrides[3, 28:37] = (255, 0, 0)
-    overrides[0:4, 28] = (255, 0, 0)
-    overrides[0:4, 36] = (255, 0, 0)
-    zones = lp.island_override_zones(overrides, wrap_x=False)
-    assert int(zones.max()) == 1, f"one drawn ring must be one zone, got {zones.max()}"
+    overrides[1, 30:35] = (255, 0, 0)
+    zones = lp.island_override_zones(overrides, land, wrap_x=False)
+    assert int(zones.max()) == 1, f"one connecting line must be one zone, got {zones.max()}"
     assert zones[1, 30] == 1 and zones[1, 34] == 1, \
-        "both islets must fall inside the ring's filled interior"
+        "both islets must fall on the connecting line's zone"
 
-    # Two rings whose filled interiors touch/overlap must NOT collapse into one
-    # zone — each ring's own centre is recovered by the
-    # distance-transform/watershed split, byte-identical to plain components for
-    # a lone ring, but distinct zones when two rings' interiors share pixels.
-    def _draw_circle(img, cy, cx, r, color=(255, 0, 0)):
-        for t in range(1440):
-            ang = t * math.pi / 720
-            y = int(round(cy + r * math.sin(ang)))
-            x = int(round(cx + r * math.cos(ang)))
-            if 0 <= y < img.shape[0] and 0 <= x < img.shape[1]:
-                img[y, x] = color
+    # A line drawn far from every islet and the mainland leaves them all at
+    # zone 0 — "no forced merge here" — rather than silently roping one in.
+    near_miss = np.full((H, W, 3), 255, dtype=np.uint8)
+    near_miss[15, 25:30] = (255, 0, 0)  # clear of both islets (row 1) and the mainland (cols 2-18)
+    nz = lp.island_override_zones(near_miss, land, wrap_x=False)
+    assert nz[1, 30] == 0 and nz[1, 34] == 0, \
+        "an unconnected line must not merge an islet it never touches"
 
-    touching = np.full((60, 200, 3), 255, dtype=np.uint8)
-    _draw_circle(touching, 30, 50, 20)
-    _draw_circle(touching, 30, 88, 20)  # centres 38px apart, radius 20 -> overlapping
-    tz = lp.island_override_zones(touching, wrap_x=False, min_seed_separation=10)
-    assert int(tz.max()) == 2, f"two touching/overlapping rings must split into 2 zones, got {tz.max()}"
-    assert tz[30, 50] != 0 and tz[30, 88] != 0 and tz[30, 50] != tz[30, 88], \
-        "each ring's own centre must land in its own, distinct zone"
-    tz2 = lp.island_override_zones(touching, wrap_x=False, min_seed_separation=10)
+    # Two separate line networks (not connected to each other) get distinct
+    # zone ids; determinism holds across two runs.
+    two_lines = np.full((H, W, 3), 255, dtype=np.uint8)
+    two_lines[1, 30:32] = (255, 0, 0)          # touches islet A only
+    two_lines[10, 2:5] = (255, 0, 0)           # touches the mainland only, far from islet A's line
+    tz = lp.island_override_zones(two_lines, land, wrap_x=False)
+    assert tz[1, 30] != 0 and tz[10, 2] != 0 and tz[1, 30] != tz[10, 2], \
+        "two disconnected merge-line networks must keep distinct zones"
+    tz2 = lp.island_override_zones(two_lines, land, wrap_x=False)
     assert np.array_equal(tz, tz2), "two runs must be byte-identical"
-
-    # A lone ring, far from anything, still comes out as exactly one zone.
-    lone = np.full((60, 200, 3), 255, dtype=np.uint8)
-    _draw_circle(lone, 30, 50, 20)
-    lz = lp.island_override_zones(lone, wrap_x=False, min_seed_separation=10)
-    assert int(lz.max()) == 1, f"a lone ring must stay one zone, got {lz.max()}"
 
     reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
     assert int(reg.max()) == 3, f"main landmass + 2 islets = 3, got {reg.max()}"
@@ -3286,7 +3277,7 @@ def run_check() -> int:
     print("land_provinces: drawn-region cut (barrier-respecting subdivision, placeholder whole) "
           "self-check passed.")
     _selfcheck_island_overrides()
-    print("land_provinces: tiny-island override merge (circle -> zone -> forced single "
+    print("land_provinces: tiny-island override merge (line -> zone -> forced single "
           "province) self-check passed.")
     _selfcheck_merge_fused()
     print("land_provinces: merge-fused disconnected region cut per piece "

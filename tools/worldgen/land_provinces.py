@@ -43,9 +43,6 @@ from __future__ import annotations
 
 import numpy as np
 from scipy import ndimage
-from skimage.feature import peak_local_max
-from skimage.segmentation import watershed
-
 from worldgen import cells
 
 #: The user's STATE-REGION boundary colour (magenta 255,0,255), tolerant of
@@ -100,10 +97,11 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
 
     ``island_overrides``, when given, is a canvas-shaped int array as returned by
     :func:`island_override_zones` — 0 where the user drew nothing, a distinct id
-    per hand-drawn circle otherwise. Every region caught under the same circle is
-    force-merged into one (see :func:`merge_island_overrides`) as the very last
-    step, after the normal barrier/fill/merge machinery — the tiny-island fix for
-    an archipelago that would otherwise ship as one micro state-region per islet.
+    per hand-drawn merge-line network otherwise. Every region caught under the
+    same network is force-merged into one (see :func:`merge_island_overrides`) as
+    the very last step, after the normal barrier/fill/merge machinery — the
+    tiny-island fix for an archipelago that would otherwise ship as one micro
+    state-region per islet.
     """
     mag = magenta_lines(drawn)
     if dilate:
@@ -142,75 +140,69 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     return reg
 
 
-#: The user's island-override ring colour (pure red 255,0,0), tolerant of
-#: anti-aliasing. Disjoint from the state-region magenta network (255,0,255):
-#: this colour's blue channel is pinned low, magenta's is pinned high.
+#: The user's island-override merge-line colour (pure red 255,0,0), tolerant
+#: of anti-aliasing. Disjoint from the state-region magenta network
+#: (255,0,255): this colour's blue channel is pinned low, magenta's is
+#: pinned high.
 _ISLAND_MARK = {"r": 200, "g": 80, "b": 80}
 
 
-#: Minimum separation (px) between two ring-interior "centres" (distance-
-#: transform local maxima) for them to seed distinct zones. Below this, peaks
-#: collapse into one seed — the anti-aliasing/plateau noise near a single
-#: ring's own centre must not fragment it. Comfortably under the ~150-250px
-#: gap seen between real hand-drawn ring pairs, comfortably over the few px
-#: of plateau a filled circle's exact centre can carry.
-_ISLAND_SEED_MIN_SEP = 30
+#: Dilation (px) applied to the drawn merge-line before flood-filling it
+#: together with the land, so a line ending just short of an island's
+#: coastline (a hand-drawn line rarely lands pixel-perfect on it) still
+#: connects to it. Small relative to the gap between genuinely separate
+#: island clusters, so it never bridges two clusters that were never
+#: connected by a line at all.
+_ISLAND_LINE_DILATE = 3
 
 
-def island_override_zones(rgb: np.ndarray, wrap_x: bool = True,
-                          min_seed_separation: int = _ISLAND_SEED_MIN_SEP) -> np.ndarray:
-    """Zone id per user-drawn island-override circle (0 = nothing drawn there).
+def island_override_zones(rgb: np.ndarray, land: np.ndarray, wrap_x: bool = True,
+                          dilate: int = _ISLAND_LINE_DILATE) -> np.ndarray:
+    """Zone id per merge-line network (0 = land untouched by any merge line).
 
     The source (``sources/terraqueous_globe_reprojected - tiny_islands_merger.png``,
-    optional — see :func:`merge_island_overrides`) has the user draw a closed
-    **ring** (pure red 255,0,0, tolerant of anti-aliasing) around each cluster of
-    tiny islands that should be forced into a single province: a disconnected
-    islet has no land neighbour to qualify for :func:`worldgen.cells.merge_small`'s
-    share-a-border merge, so left alone every one of them ships as its own micro
-    state-region forever. The ring never touches the islands it encloses, so its
-    interior is filled (``scipy.ndimage.binary_fill_holes``) before labelling —
-    the zone a ring marks is everything *inside* it, not the drawn line itself.
+    optional — see :func:`merge_island_overrides`) has the user draw a plain
+    **line** (pure red 255,0,0, tolerant of anti-aliasing) directly connecting
+    each cluster of tiny islands that should be forced into a single
+    province: a disconnected islet has no land neighbour to qualify for
+    :func:`worldgen.cells.merge_small`'s share-a-border merge, so left alone
+    every one of them ships as its own micro state-region forever.
 
-    Two rings whose interiors **touch or overlap no longer collapse into one
-    zone**: plain connected-component labelling of the
-    filled mask can't tell "one blob" from "two circles that happen to touch",
-    so instead each ring's own centre is recovered as a local maximum of the
-    filled mask's distance-to-boundary transform (the standard technique for
-    splitting touching blobs in image segmentation), and a flat
-    :func:`skimage.segmentation.watershed` grown from those peaks assigns every
-    filled pixel to its nearest ring centre. A ring drawn clear of every other
-    has exactly one peak and comes out as one zone, byte-identical to the old
-    plain-components result for that case.
+    This supersedes an earlier enclosing-**ring** idiom (board #4609): a ring
+    needed a geometric splitter to tell two touching or overlapping rings
+    apart, and neither a fixed-pixel-distance nor a saddle-prominence
+    splitter could do that correctly for every ring shape (an elongated
+    ring's own ridge and a genuinely separate small ring touching it can look
+    identical from pixel geometry alone). A line makes the grouping explicit
+    instead of inferred, and needs no splitter at all: flood-fill the
+    (slightly dilated) line together with the land it touches, wrap-aware:
+    every land pixel that ends up in the same connected component as a line
+    pixel shares that line's zone id, and a component with no line pixel in
+    it at all — the overwhelming majority of the map — gets zone 0, meaning
+    "no forced merge here."
     """
     r, g, b = rgb[..., 0].astype(int), rgb[..., 1].astype(int), rgb[..., 2].astype(int)
-    ring = (r > _ISLAND_MARK["r"]) & (g < _ISLAND_MARK["g"]) & (b < _ISLAND_MARK["b"])
-    if not ring.any():
+    line = (r > _ISLAND_MARK["r"]) & (g < _ISLAND_MARK["g"]) & (b < _ISLAND_MARK["b"])
+    if not line.any():
         return np.zeros(rgb.shape[:2], dtype=np.int32)
-    pad = rgb.shape[1] if wrap_x else 0
-    padded_ring = np.concatenate([ring[:, -pad:], ring, ring[:, :pad]], axis=1) if pad else ring
-    filled = ndimage.binary_fill_holes(padded_ring)
-
-    distance = ndimage.distance_transform_edt(filled)
-    peaks = peak_local_max(distance, min_distance=min_seed_separation,
-                           labels=filled.astype(np.int32))
-    markers = np.zeros(filled.shape, dtype=np.int32)
-    if peaks.size:
-        markers[tuple(peaks.T)] = np.arange(1, len(peaks) + 1)
-        labels = watershed(-distance, markers=markers, mask=filled)
-    else:  # a sliver too thin for any peak to clear min_seed_separation
-        labels = cells.components(filled.astype(np.int32), wrap_x=False)
-        labels = np.where(filled, labels, 0)
-    if pad:
-        labels = labels[:, pad:-pad]
-    return cells.renumber(labels.astype(np.int32))
+    if dilate:
+        line = ndimage.binary_dilation(line, iterations=dilate)
+    network = (line | land).astype(np.int32)
+    comp = cells.components(network, wrap_x)
+    comp = np.where(network, comp, 0)
+    touches_line = set(int(z) for z in np.unique(comp[line])) - {0}
+    if not touches_line:
+        return np.zeros(rgb.shape[:2], dtype=np.int32)
+    zones = np.where(np.isin(comp, list(touches_line)), comp, 0)
+    return cells.renumber(zones.astype(np.int32))
 
 
 def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndarray,
                            wrap_x: bool = True, log=None) -> np.ndarray:
-    """Force every region caught under the same override circle to merge into one.
+    """Force every region caught under the same override zone to merge into one.
 
     ``overrides`` is an :func:`island_override_zones` layer. For each zone, every
-    region with at least one land pixel under it is unioned together (a circle
+    region with at least one land pixel under it is unioned together (a network
     touching only one region is a no-op). :func:`subdivide` never crosses a
     magenta boundary and only ever cuts a *connected* region (see its own
     connectivity guard), so a merged, non-contiguous archipelago always ships
