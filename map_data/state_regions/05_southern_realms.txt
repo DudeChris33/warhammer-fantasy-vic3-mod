@@ -402,15 +402,15 @@ STATE_LAND_382 = {
     }
     naval_exit_id = 3073
 }
-STATE_LAND_383 = {
-    id = 383
+STATE_LAND_439 = {
+    id = 439
     subsistence_building = "building_subsistence_farm"
-    provinces = { xE5FB75 }
-    city = xE5FB75
-    farm = xE5FB75
-    mine = xE5FB75
-    wood = xE5FB75
-    port = xE5FB75
+    provinces = { x3BC317 }
+    city = x3BC317
+    farm = x3BC317
+    mine = x3BC317
+    wood = x3BC317
+    port = x3BC317
     arable_land = 10
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {

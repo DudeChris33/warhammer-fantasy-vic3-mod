@@ -236,7 +236,7 @@ STATE_LAND_028 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3045
+    naval_exit_id = 3050
 }
 STATE_LAND_029 = {
     id = 29
@@ -462,22 +462,6 @@ STATE_LAND_132 = {
     }
     naval_exit_id = 3092
 }
-STATE_LAND_133 = {
-    id = 133
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x8928E0 }
-    city = x8928E0
-    farm = x8928E0
-    mine = x8928E0
-    wood = x8928E0
-    port = x8928E0
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
-    naval_exit_id = 3045
-}
 STATE_LAND_134 = {
     id = 134
     subsistence_building = "building_subsistence_farm"
@@ -572,7 +556,7 @@ STATE_LAND_139 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3086
+    naval_exit_id = 3091
 }
 STATE_LAND_140 = {
     id = 140
@@ -653,4 +637,388 @@ STATE_LAND_362 = {
         building_logging_camp = 10
     }
     naval_exit_id = 3002
+}
+STATE_LAND_428 = {
+    id = 428
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xDF8E20 }
+    city = xDF8E20
+    farm = xDF8E20
+    mine = xDF8E20
+    wood = xDF8E20
+    port = xDF8E20
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3003
+}
+STATE_LAND_429 = {
+    id = 429
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xDD791F }
+    city = xDD791F
+    farm = xDD791F
+    mine = xDD791F
+    wood = xDD791F
+    port = xDD791F
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3014
+}
+STATE_LAND_430 = {
+    id = 430
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x125FFD }
+    city = x125FFD
+    farm = x125FFD
+    mine = x125FFD
+    wood = x125FFD
+    port = x125FFD
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3014
+}
+STATE_LAND_431 = {
+    id = 431
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x3DA9C6 }
+    city = x3DA9C6
+    farm = x3DA9C6
+    mine = x3DA9C6
+    wood = x3DA9C6
+    port = x3DA9C6
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3014
+}
+STATE_LAND_432 = {
+    id = 432
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xD3DC0A }
+    city = xD3DC0A
+    farm = xD3DC0A
+    mine = xD3DC0A
+    wood = xD3DC0A
+    port = xD3DC0A
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3014
+}
+STATE_LAND_433 = {
+    id = 433
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x81A0CC }
+    city = x81A0CC
+    farm = x81A0CC
+    mine = x81A0CC
+    wood = x81A0CC
+    port = x81A0CC
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3014
+}
+STATE_LAND_434 = {
+    id = 434
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xF43FAD }
+    city = xF43FAD
+    farm = xF43FAD
+    mine = xF43FAD
+    wood = xF43FAD
+    port = xF43FAD
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_435 = {
+    id = 435
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x27118A }
+    city = x27118A
+    farm = x27118A
+    mine = x27118A
+    wood = x27118A
+    port = x27118A
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_436 = {
+    id = 436
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xD5049E }
+    city = xD5049E
+    farm = xD5049E
+    mine = xD5049E
+    wood = xD5049E
+    port = xD5049E
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_437 = {
+    id = 437
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x79F83B }
+    city = x79F83B
+    farm = x79F83B
+    mine = x79F83B
+    wood = x79F83B
+    port = x79F83B
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3092
+}
+STATE_LAND_438 = {
+    id = 438
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x07D67B }
+    city = x07D67B
+    farm = x07D67B
+    mine = x07D67B
+    wood = x07D67B
+    port = x07D67B
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3092
+}
+STATE_LAND_440 = {
+    id = 440
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x729E79 }
+    city = x729E79
+    farm = x729E79
+    mine = x729E79
+    wood = x729E79
+    port = x729E79
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3109
+}
+STATE_LAND_441 = {
+    id = 441
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x45BCD0 }
+    city = x45BCD0
+    farm = x45BCD0
+    mine = x45BCD0
+    wood = x45BCD0
+    port = x45BCD0
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3109
+}
+STATE_LAND_442 = {
+    id = 442
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x9C9F31 }
+    city = x9C9F31
+    farm = x9C9F31
+    mine = x9C9F31
+    wood = x9C9F31
+    port = x9C9F31
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3109
+}
+STATE_LAND_444 = {
+    id = 444
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x362F87 }
+    city = x362F87
+    farm = x362F87
+    mine = x362F87
+    wood = x362F87
+    port = x362F87
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3108
+}
+STATE_LAND_445 = {
+    id = 445
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x7A268D }
+    city = x7A268D
+    farm = x7A268D
+    mine = x7A268D
+    wood = x7A268D
+    port = x7A268D
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3092
+}
+STATE_LAND_446 = {
+    id = 446
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0572AB }
+    city = x0572AB
+    farm = x0572AB
+    mine = x0572AB
+    wood = x0572AB
+    port = x0572AB
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3092
+}
+STATE_LAND_447 = {
+    id = 447
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x6D4BE3 }
+    city = x6D4BE3
+    farm = x6D4BE3
+    mine = x6D4BE3
+    wood = x6D4BE3
+    port = x6D4BE3
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_448 = {
+    id = 448
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xF539EF }
+    city = xF539EF
+    farm = xF539EF
+    mine = xF539EF
+    wood = xF539EF
+    port = xF539EF
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_449 = {
+    id = 449
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x08F13A }
+    city = x08F13A
+    farm = x08F13A
+    mine = x08F13A
+    wood = x08F13A
+    port = x08F13A
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_450 = {
+    id = 450
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xFCC203 }
+    city = xFCC203
+    farm = xFCC203
+    mine = xFCC203
+    wood = xFCC203
+    port = xFCC203
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_451 = {
+    id = 451
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x61E89C }
+    city = x61E89C
+    farm = x61E89C
+    mine = x61E89C
+    wood = x61E89C
+    port = x61E89C
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3045
+}
+STATE_LAND_452 = {
+    id = 452
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xFADB54 }
+    city = xFADB54
+    farm = xFADB54
+    mine = xFADB54
+    wood = xFADB54
+    port = xFADB54
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3086
+}
+STATE_LAND_453 = {
+    id = 453
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x7E9F5E }
+    city = x7E9F5E
+    farm = x7E9F5E
+    mine = x7E9F5E
+    wood = x7E9F5E
+    port = x7E9F5E
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3078
 }
