@@ -78,9 +78,27 @@ Local-only output: embeds source pixels, so it lands under ``tools/derived/``,
 which ``tools/.gitignore`` excludes from the repo — never shipped content,
 purely a naming aid for #2931.
 
+**Parchment-drape backend.** ``--warp triangle`` (the default,
+user decision 2026-09-17) drapes the parchment through
+``project_regions_unified.py``'s single unified Delaunay/piecewise-affine warp
+instead of ``project_regions.py``'s five stitched per-region crops
+(``--warp five-crop``, the previous default). The triangle warp's committed
+registration (``tools/registration/tww3_old_world_mod_parchment_full.json``)
+is still self-marked PROVISIONAL ("until the user accepts the diagnostic
+render") — that acceptance hasn't formally happened yet. Measured coverage is
+NOT narrower, though: both backends place parchment over the same central
+Bretonnia/Empire/Kislev+Norsca/Dark-Lands/Badlands+Nehekhara cluster (the only
+area the source parchment art actually draws — everything else is
+out-of-scope per the project's own scope decision and was always
+globe-backdrop-only either way), and the triangle warp actually places
+*slightly more* of the frame (7.69% vs. five-crop's 6.79%, compared
+2026-09-17) with no visible seam tearing at the old per-crop boundaries. Pass
+``--warp five-crop`` to fall back to the previously-accepted registrations.
+
 Usage::
 
     python tools/render_land_regions_preview.py
+    python tools/render_land_regions_preview.py --warp five-crop
 """
 from __future__ import annotations
 
@@ -90,6 +108,8 @@ import sys
 import time
 from pathlib import Path
 
+import argparse
+
 import numpy as np
 from PIL import Image, ImageDraw, ImageFont
 from scipy import ndimage
@@ -97,8 +117,9 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-import project_regions as pr  # noqa: E402 — reuses its five-crop registration + drape
-from worldgen import land_state_numbering, raster, schema  # noqa: E402
+import project_regions as pr  # noqa: E402 — the five-crop registration + drape (--warp five-crop)
+import project_regions_unified as pru  # noqa: E402 — the single triangle-warp registration (--warp triangle, default)
+from worldgen import land_state_numbering, raster, reproject, schema  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -148,7 +169,7 @@ def log(msg: str, t0: float | None = None) -> None:
     print(prefix + msg, flush=True)
 
 
-def _parchment_drape(t0: float) -> tuple[np.ndarray, np.ndarray]:
+def _parchment_drape_five_crop(t0: float) -> tuple[np.ndarray, np.ndarray]:
     """The real TWW3 parchment art draped over the globe via the five registered
     crops (canvas RGB, ``placed`` mask) — reuses ``project_regions.py``'s own
     registration/warp pipeline wholesale, passing the master parchment itself
@@ -172,8 +193,64 @@ def _parchment_drape(t0: float) -> tuple[np.ndarray, np.ndarray]:
     log("five parchment crops located in the master frame", t0)
     owner = pr.canvas_owner(regs, crop_rgba, offsets, paint_rgba)
     canvas_rgb, placed = pr.place_painting(0, regs, paint_rgba, crop_rgba, offsets, globe_rgb, owner)
-    log(f"parchment drape placed {100.0 * placed.mean():.2f}% of the frame", t0)
+    log(f"parchment drape (five-crop) placed {100.0 * placed.mean():.2f}% of the frame", t0)
     return canvas_rgb, placed
+
+
+def _parchment_drape_triangle(t0: float,
+                              hull_buffer_px: float = pru.HULL_BUFFER_PX_DEFAULT) -> tuple[np.ndarray, np.ndarray]:
+    """The real TWW3 parchment art draped over the globe via the single unified
+    piecewise-affine (Delaunay triangle) warp — reuses
+    ``project_regions_unified.py``'s registration/warp pipeline wholesale,
+    passing the master parchment itself as the thing to drape (same idiom as
+    :func:`_parchment_drape_five_crop`) so the actual printed place names show
+    through, with no five-crop ``canvas_owner`` stitching needed.
+
+    **Status caveat**: ``tools/registration/tww3_old_world_mod_parchment_full.json``
+    is still self-marked PROVISIONAL ("until the user accepts the diagnostic
+    render"). Its footprint is a central patch of the canvas
+    (Bretonnia/Empire/Kislev+Norsca/Dark-Lands/Badlands+Nehekhara), but that's
+    the same area the five-crop system covers too — measured 2026-09-17, this
+    backend places *slightly more* of the frame (7.69% vs. 6.79%) with no
+    visible seam tearing versus five-crop, so the caveat here is acceptance
+    status, not actual coverage.
+    """
+    regs = {r.source: r for r in schema.load_registrations(pru.REGISTRATION_DIR)}
+    if pru.FULL_SOURCE not in regs:
+        raise SystemExit(f"{pru.FULL_SOURCE}: no committed registration record — "
+                         f"run tools/fit_registration.py --seed tww3_old_world_mod_parchment_full")
+    reg = regs[pru.FULL_SOURCE]
+
+    # `FULL_SOURCE` ("tww3_old_world_mod_parchment_full.png") is only the
+    # registration's own bookkeeping key — no file by that literal name
+    # exists. The fit's own coordinate frame is the real 4096x4096 master
+    # (matches the seed's master_shape), so the pixels to drape come from
+    # `pr.MASTER_SOURCE` ("tww3_old_world_mod_parchment.png") — same idiom
+    # as project_regions_unified.py, whose own default --paint is a
+    # different file (the hand-painted state layer) read through this same
+    # registration key, never FULL_SOURCE's literal filename either.
+    paint_rgba = pr.load_rgba(pr.MASTER_SOURCE)  # drape the parchment itself, not a painting
+    globe_rgb = pru.load_rgb(pru.GLOBE_SOURCE)
+    if globe_rgb.shape[1] != CANVAS_W or globe_rgb.shape[0] != CANVAS_H:
+        raise SystemExit(f"{pru.GLOBE_SOURCE} is {globe_rgb.shape[1]}x{globe_rgb.shape[0]}, "
+                         f"expected {CANVAS_W}x{CANVAS_H}")
+
+    fit = reproject.fit_placement(reg, regs, buffer_px=hull_buffer_px)
+    box = pru.footprint_box(reg, pad=hull_buffer_px)
+    log(f"unified parchment registration located ({reg.projection}, footprint {list(box)})", t0)
+    canvas_rgb, placed = pru.place_painting(fit, box, paint_rgba, globe_rgb)
+    log(f"parchment drape (triangle warp) placed {100.0 * placed.mean():.2f}% of the frame", t0)
+    return canvas_rgb, placed
+
+
+#: ``render_land_regions_preview.py``'s two parchment-drape backends. "triangle"
+#: (the single Delaunay/piecewise-affine warp) is the default per user decision
+#: 2026-09-17, despite its committed registration record still being self-marked
+#: PROVISIONAL — see :func:`_parchment_drape_triangle`'s status caveat.
+_WARP_BACKENDS = {
+    "triangle": _parchment_drape_triangle,
+    "five-crop": lambda t0, **_: _parchment_drape_five_crop(t0),
+}
 
 
 def _build_region_labels(rgb: np.ndarray, prov_cells: list[dict],
@@ -315,6 +392,20 @@ def _load_font(size: int) -> ImageFont.ImageFont:
 
 
 def main(argv: list[str] | None = None) -> int:
+    p = argparse.ArgumentParser(description=__doc__,
+                                formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--warp", choices=sorted(_WARP_BACKENDS), default="triangle",
+                   help="which parchment-drape backend to use: 'triangle' (default) is the "
+                        "single unified Delaunay/piecewise-affine warp (project_regions_unified.py) "
+                        "— its registration is still self-marked provisional, though measured "
+                        "coverage matches or exceeds 'five-crop'; 'five-crop' is the five "
+                        "per-region registered crops (project_regions.py) — the previous default")
+    p.add_argument("--hull-buffer-px", type=float, default=pru.HULL_BUFFER_PX_DEFAULT,
+                   help=f"--warp triangle only: extrapolate this many canvas px past the warp's "
+                        f"outer hull edge instead of the strict hull cutoff (default "
+                        f"{pru.HULL_BUFFER_PX_DEFAULT:.0f}, pass 0 to disable; ignored by --warp five-crop)")
+    args = p.parse_args(argv)
+
     t0 = time.time()
     for path in (PROVINCES_PATH, PROVINCES_INDEX_PATH, LAND_REGIONS_INDEX_PATH):
         if not path.is_file():
@@ -343,7 +434,7 @@ def main(argv: list[str] | None = None) -> int:
     lab = _build_region_labels(rgb, prov_index["cells"], land_regions["cells"], n_land)
     log(f"{n_regions} region labels built", t0)
 
-    backdrop, placed = _parchment_drape(t0)
+    backdrop, placed = _WARP_BACKENDS[args.warp](t0, hull_buffer_px=args.hull_buffer_px)
     on_parchment = _region_on_parchment(lab, placed, n_regions)
 
     raw_cx, raw_cy = _region_centroids(lab, n_regions, CANVAS_W)
