@@ -82,18 +82,20 @@ purely a naming aid for #2931.
 user decision 2026-09-17) drapes the parchment through
 ``project_regions_unified.py``'s single unified Delaunay/piecewise-affine warp
 instead of ``project_regions.py``'s five stitched per-region crops
-(``--warp five-crop``, the previous default). The triangle warp's committed
-registration (``tools/registration/tww3_old_world_mod_parchment_full.json``)
-is still self-marked PROVISIONAL ("until the user accepts the diagnostic
-render") — that acceptance hasn't formally happened yet. Measured coverage is
-NOT narrower, though: both backends place parchment over the same central
+(``--warp five-crop``, the previous default, kept as a fallback the user may
+still switch back to). The triangle warp's committed registration
+(``tools/registration/tww3_old_world_mod_parchment_full.json``) self-marks
+PROVISIONAL in its own file, but the user has now (2026-09-18) accepted its
+diagnostic render and is shifting to it as the working default — that file's
+own PROVISIONAL note is stale wording pending its next machine re-fit, not a
+live blocker. Measured coverage is NOT narrower than five-crop, either: both
+backends place parchment over the same central
 Bretonnia/Empire/Kislev+Norsca/Dark-Lands/Badlands+Nehekhara cluster (the only
 area the source parchment art actually draws — everything else is
 out-of-scope per the project's own scope decision and was always
 globe-backdrop-only either way), and the triangle warp actually places
 *slightly more* of the frame (7.69% vs. five-crop's 6.79%, compared
-2026-09-17) with no visible seam tearing at the old per-crop boundaries. Pass
-``--warp five-crop`` to fall back to the previously-accepted registrations.
+2026-09-17) with no visible seam tearing at the old per-crop boundaries.
 
 Usage::
 
@@ -206,14 +208,15 @@ def _parchment_drape_triangle(t0: float,
     :func:`_parchment_drape_five_crop`) so the actual printed place names show
     through, with no five-crop ``canvas_owner`` stitching needed.
 
-    **Status caveat**: ``tools/registration/tww3_old_world_mod_parchment_full.json``
-    is still self-marked PROVISIONAL ("until the user accepts the diagnostic
-    render"). Its footprint is a central patch of the canvas
-    (Bretonnia/Empire/Kislev+Norsca/Dark-Lands/Badlands+Nehekhara), but that's
-    the same area the five-crop system covers too — measured 2026-09-17, this
-    backend places *slightly more* of the frame (7.69% vs. 6.79%) with no
-    visible seam tearing versus five-crop, so the caveat here is acceptance
-    status, not actual coverage.
+    **Status**: ``tools/registration/tww3_old_world_mod_parchment_full.json``
+    self-marks PROVISIONAL in its own file ("until the user accepts the
+    diagnostic render"), but the user accepted this render 2026-09-18 and is
+    shifting to this backend as the working default — that stale wording will
+    clear on the record's next machine re-fit. Its footprint is a central
+    patch of the canvas (Bretonnia/Empire/Kislev+Norsca/Dark-Lands/
+    Badlands+Nehekhara), but that's the same area the five-crop system covers
+    too — measured 2026-09-17, this backend places *slightly more* of the
+    frame (7.69% vs. 6.79%) with no visible seam tearing versus five-crop.
     """
     regs = {r.source: r for r in schema.load_registrations(pru.REGISTRATION_DIR)}
     if pru.FULL_SOURCE not in regs:
@@ -395,11 +398,11 @@ def main(argv: list[str] | None = None) -> int:
     p = argparse.ArgumentParser(description=__doc__,
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--warp", choices=sorted(_WARP_BACKENDS), default="triangle",
-                   help="which parchment-drape backend to use: 'triangle' (default) is the "
-                        "single unified Delaunay/piecewise-affine warp (project_regions_unified.py) "
-                        "— its registration is still self-marked provisional, though measured "
-                        "coverage matches or exceeds 'five-crop'; 'five-crop' is the five "
-                        "per-region registered crops (project_regions.py) — the previous default")
+                   help="which parchment-drape backend to use: 'triangle' (default, accepted "
+                        "2026-09-18) is the single unified Delaunay/piecewise-affine warp "
+                        "(project_regions_unified.py); 'five-crop' is the five per-region "
+                        "registered crops (project_regions.py) — the previous default, kept as a "
+                        "fallback")
     p.add_argument("--hull-buffer-px", type=float, default=pru.HULL_BUFFER_PX_DEFAULT,
                    help=f"--warp triangle only: extrapolate this many canvas px past the warp's "
                         f"outer hull edge instead of the strict hull cutoff (default "
