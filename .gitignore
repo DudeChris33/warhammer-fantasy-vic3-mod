@@ -1,13 +1,14 @@
 # Repo-root ignores. Tool-local ignores (.venv, __pycache__, fixture scratch)
 # live in tools/.gitignore and stay there.
 
-# Reference imagery for the source-driven map pipeline. Previously local-only
-# (third-party IP: GW cartography, a Total War screenshot mosaic, fan maps) and
-# tracked only via tools/SOURCES.md's SHA-256 manifest + tools/registration/*.json.
-# 2026-09-03: user decision — commit sources/ in full (private repo, tired of
-# manually shifting ~2.3GB between devices), large binaries via Git LFS (see
-# .gitattributes). SOURCES.md + registration/*.json remain the provenance record.
-sources/gimp_exports/
+# Reference imagery for the source-driven map pipeline (third-party IP: GW
+# cartography, a Total War screenshot mosaic, fan maps). Was committed in full
+# via Git LFS as of 2026-09-03 to sync between two devices; reverted 2026-09-15
+# once work moved to a single machine (the second can't run the game to test),
+# and purged from git history entirely in board #4608. sources/ now lives on
+# disk only, untracked. tools/SOURCES.md's SHA-256 manifest + tools/registration/*.json
+# remain the provenance record.
+sources/
 
 *.log
 *.bak
@@ -39,5 +40,3 @@ MANIFEST
 
 # maestro skills scratch copies of workspecs
 planning/.cache/
-
-sources/cr_oldworld_campaign
