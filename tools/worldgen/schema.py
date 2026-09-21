@@ -878,6 +878,96 @@ def load_canon_cities(path: Path, canvas: tuple[int, int] | None = None) -> list
 
 
 # ---------------------------------------------------------------------------
+# Arable lore zones (the hand-authored lore adjustment the heatmap generator reads)
+# ---------------------------------------------------------------------------
+#
+# Board #4921 (epic #3675): the arable-potential heatmap is driven mostly by
+# physical priors (climate, terrain, hydrology), but some fertility is lore, not
+# physics — a blessed breadbasket (Bretonnia), a cursed province (Sylvania), a
+# dead desert that was once a floodplain (Nehekhara). This is the committed,
+# hand-authored input carrying those adjustments, the ``river_overrides.json`` /
+# ``inland_lakes.json`` / ``canon_cities.json`` idiom (edited deliberately,
+# regenerated through, never inferred from a bitmap). Decision 1 of the workspec
+# forbids a hand-painted ``sources/`` layer, and the realm-vote it might otherwise
+# lean on reads a gitignored source (#4608), so ALL lore lives here so the
+# committed raster reproduces from committed inputs on any device.
+#
+# Each zone is a smooth radial bump around an anchor pixel: ``factor > 1`` lifts
+# (a ``breadbasket``), ``factor < 1`` suppresses (a ``blight``). ``kind`` and
+# ``factor`` are cross-checked so an author cannot lift a "blight" by accident.
+# Authored order is preserved (overlapping zones compose multiplicatively, so
+# order does not change the result, but a stable order keeps diffs legible).
+
+_LORE_KINDS = frozenset({"breadbasket", "blight"})
+
+
+@dataclass(frozen=True)
+class ArableLoreZone:
+    """One lore fertility adjustment: a radial bump centred on ``anchor`` (canvas
+    px), reaching 1.0 (no effect) at ``radius`` px. ``factor`` is the multiplier at
+    the anchor: >1 for a ``breadbasket``, <1 for a ``blight``. ``name`` / ``note``
+    are documentation (the note should cite the canon reason)."""
+
+    anchor: tuple[int, int]
+    radius: float
+    factor: float
+    kind: str
+    name: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "ArableLoreZone":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        ctx = f"{ctx}({name})"
+        (anchor,) = _as_seed_list([_require(d, "anchor", ctx)], f"{ctx}.anchor", canvas)
+        radius = _as_number(_require(d, "radius", ctx), f"{ctx}.radius")
+        if radius <= 0:
+            raise SchemaError(f"{ctx}.radius: must be > 0, got {radius}")
+        factor = _as_number(_require(d, "factor", ctx), f"{ctx}.factor")
+        if factor <= 0:
+            raise SchemaError(f"{ctx}.factor: must be > 0, got {factor}")
+        kind = _as_str(_require(d, "kind", ctx), f"{ctx}.kind")
+        if kind not in _LORE_KINDS:
+            raise SchemaError(f"{ctx}.kind: must be one of {sorted(_LORE_KINDS)}, got '{kind}'")
+        if kind == "breadbasket" and factor <= 1.0:
+            raise SchemaError(f"{ctx}: a 'breadbasket' must have factor > 1, got {factor}")
+        if kind == "blight" and factor >= 1.0:
+            raise SchemaError(f"{ctx}: a 'blight' must have factor < 1, got {factor}")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(anchor=anchor, radius=float(radius), factor=float(factor),
+                   kind=kind, name=name, note=note)
+
+
+def load_arable_lore(path: Path, canvas: tuple[int, int] | None = None) -> list[ArableLoreZone]:
+    """Load + validate the committed arable lore-zone list (authored order kept).
+
+    Top-level ``{"zones": [...]}``. Bounds-checks every anchor against ``canvas``
+    when known and rejects a **duplicate exact anchor pixel** (the sea-zone / hub /
+    canon-city uniqueness rule). An empty or malformed file is refused, not
+    silently treated as no-lore — the driver decides no-lore by the file's
+    *absence*, so a present-but-empty file is an authoring bug.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    zones_raw = _require(data, "zones", ctx)
+    if not isinstance(zones_raw, list) or not zones_raw:
+        raise SchemaError(f"{ctx}.zones: expected a non-empty list")
+    zones = [ArableLoreZone.from_dict(z, f"{ctx}.zones[{i}]", canvas)
+             for i, z in enumerate(zones_raw)]
+    seen: dict[tuple[int, int], str] = {}
+    for z in zones:
+        if z.anchor in seen:
+            raise SchemaError(
+                f"{ctx}: anchor pixel {list(z.anchor)} is claimed by both "
+                f"'{seen[z.anchor]}' and '{z.name}' — anchors must be unique")
+        seen[z.anchor] = z.name
+    return zones
+
+
+# ---------------------------------------------------------------------------
 # Canon sea groups (the sea-zone naming config generate_sea_zones.py reads)
 # ---------------------------------------------------------------------------
 #

@@ -2161,6 +2161,264 @@ def _selfcheck_canon_cities() -> None:
     assert err, "the on-land half must still run (hard error) when the export is absent"
 
 
+def _selfcheck_arable() -> None:
+    """Arable-potential field (board #4921), in isolation — the pure core
+    ``worldgen.arable`` and ``schema.load_arable_lore``, on a small synthetic
+    canvas with NO dependency on the real committed bitmaps (mirrors
+    ``_selfcheck_lakes`` / ``_selfcheck_river_extraction``).
+
+    Covers: water/lake/impassable = 0; climate monotonicity (temperate peak, arid
+    trough, pole taper); terrain suppression; hydrology boost (river + coast);
+    lore lift/suppress with a smooth monotone falloff and multiplicative
+    composition; percentile normalization (max<=1, real spread, an outlier does not
+    flatten the rest); the schema loader (order + every refusal); and determinism
+    (build_field array-equal + the encoded PNG byte-identical across runs).
+    """
+    from worldgen import arable, schema, raster as _raster
+    import generate_arable_heatmap as gah
+
+    p = arable.ArableParams()
+
+    # --- climate curve shape (pure function of latitude) ---------------------
+    lat = np.array([70.0, 50.0, 35.0, 23.0, 10.0, 0.0])
+    c = arable.climate_curve(lat, p)
+    assert c[1] == c.max(), "climate must peak in the temperate band (~50 deg)"
+    assert c[3] < c[2], "subtropical-arid trough: 23 deg below 35 deg"
+    assert c[0] < c[1] and c[0] < 0.2, "hard polar taper toward the pole edge"
+    assert c[5] < c[1], "falls toward the equator relative to the temperate peak"
+
+    def _flat_canvas(h, w, top_lat, bot_lat):
+        lp = np.linspace(top_lat, bot_lat, h)
+        elev = np.zeros((h, w), np.float32)
+        sea = np.zeros((h, w), bool)
+        passable = np.ones((h, w), bool)
+        river = np.zeros((h, w), bool)
+        return lp, elev, sea, passable, river
+
+    # --- water / lake / impassable -> 0 --------------------------------------
+    lp, elev, sea, passable, river = _flat_canvas(40, 30, 60.0, 40.0)
+    sea[:, 0:3] = True          # ocean column
+    lake = np.zeros((40, 30), bool); lake[20, 15] = True
+    impass = np.zeros((40, 30), bool); impass[10, 20] = True
+    passable = (~sea) & (~lake) & (~impass)
+    field, stats = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[], params=p, wrap_x=False)
+    assert (field[sea] == 0).all(), "sea reads exactly 0"
+    assert field[20, 15] == 0, "lake reads exactly 0"
+    assert field[10, 20] == 0, "impassable reads exactly 0"
+    assert (field[passable] > 0).any(), "passable land is non-zero where factors are positive"
+    assert field.max() <= 1.0 + 1e-6, "normalized field never exceeds 1"
+
+    # --- climate monotonicity on flat, river-free, fixed-coast land ----------
+    # Sea is a full left column, so d_coast is constant across rows for a fixed
+    # column: comparing rows at one column isolates C(lat).
+    lp, elev, sea, passable, river = _flat_canvas(60, 20, 74.0, 5.0)
+    sea[:, 0] = True
+    passable = ~sea
+    # Moisture off here so the column truly isolates C(lat) (moisture varies by the
+    # per-row wind belt, which would otherwise confound a single-column compare).
+    field, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[],
+        params=arable.ArableParams(moist_enable=False), wrap_x=False)
+    col = 12
+    def _row_at(target):
+        return int(np.abs(lp - target).argmin())
+    r_temp, r_arid, r_pole = _row_at(50.0), _row_at(23.0), _row_at(73.0)
+    assert field[r_temp, col] > field[r_arid, col], "temperate > subtropical-arid"
+    assert field[r_temp, col] > field[r_pole, col], "temperate > polar edge"
+
+    # --- terrain suppression: a mountain block reads below adjacent lowland ---
+    # No sea (coast term off) so the only difference is elevation/slope. Use a
+    # small smoothing sigma here so the synthetic block's plateau stays high (on
+    # the real 8192px canvas a mountain is hundreds of px wide, so the default
+    # sigma is tiny relative to it — the render confirms real spines read barren).
+    p_terr = arable.ArableParams(elev_smooth_sigma=1.0)
+    lp = np.full(20, 50.0); elev = np.zeros((20, 20), np.float32)
+    elev[:, 10:14] = 3000.0     # a highland block (metres)
+    sea = np.zeros((20, 20), bool); passable = np.ones((20, 20), bool)
+    river = np.zeros((20, 20), bool)
+    field, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[], params=p_terr, wrap_x=False)
+    assert field[10, 11] < field[10, 2], "highland block reads below same-latitude lowland"
+
+    # --- hydrology: river-adjacent + coast-adjacent read above interior ------
+    lp = np.full(12, 50.0); elev = np.zeros((12, 40), np.float32)
+    sea = np.zeros((12, 40), bool); river = np.zeros((12, 40), bool)
+    river[6, 20] = True
+    passable = np.ones((12, 40), bool)
+    rw = np.zeros((12, 40), np.float32); rw[6, 20] = 8.0
+    field, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=rw, lore_zones=[], params=p, wrap_x=False)
+    assert field[6, 21] > field[6, 34], "river-adjacent land reads above the dry interior"
+
+    lp = np.full(12, 50.0); elev = np.zeros((12, 40), np.float32)
+    sea = np.zeros((12, 40), bool); sea[:, 0] = True
+    river = np.zeros((12, 40), bool); passable = ~sea
+    field, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[], params=p, wrap_x=False)
+    assert field[6, 1] > field[6, 34], "coast-adjacent land reads above the dry interior"
+
+    # --- moisture / rain shadow (prevailing-wind advection) ------------------
+    # Belt direction: |lat| in [30,60) sources moisture from the WEST, else east.
+    assert list(arable._zonal_upwind_from_west(np.array([70.0, 45.0, 20.0]))) \
+        == [False, True, False], "westerlies source from the west; trades/polar from the east"
+
+    # Continentality: on flat land in the westerlies with a western ocean and the
+    # coast boost OFF, a near-coast column reads above the deep interior purely from
+    # the moisture fetch decay.
+    # Smoothing off in these sub-tests: it is a cosmetic de-streak pass over the
+    # scan output; the physics under test lives in the per-row scan itself.
+    p_moist = arable.ArableParams(coast_amp=0.0, moist_lambda=30.0, moist_smooth_sigma=0.0)
+    lp = np.full(8, 45.0); elev = np.zeros((8, 120), np.float32)
+    sea = np.zeros((8, 120), bool); sea[:, 0] = True
+    river = np.zeros((8, 120), bool); passable = ~sea
+    field, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[], params=p_moist, wrap_x=False)
+    assert field[4, 5] > field[4, 110], "continentality: near-coast reads above the deep interior"
+
+    # Rain shadow: a tall N-S ridge between the western ocean and the lee drives the
+    # lee far below the windward flank at the same latitude and (flat) elevation.
+    # A gentle fetch decay keeps the near-coast windward point wet, so the collapse
+    # in the lee is the orographic loss of crossing the ridge, not extra distance
+    # (~15px of gentle decay alone would leave the lee ~0.9x the windward).
+    # gamma=1 so the compared ratio is the physical moisture drop, not the tone curve.
+    p_rs = arable.ArableParams(coast_amp=0.0, moist_lambda=200.0, elev_smooth_sigma=1.0,
+                               gamma=1.0, moist_smooth_sigma=0.0)
+    elev = np.zeros((8, 120), np.float32); elev[:, 20:24] = 4000.0
+    field, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[], params=p_rs, wrap_x=False)
+    assert field[4, 30] < 0.3 * field[4, 15], "rain shadow: the lee of a ridge reads far below its windward flank"
+
+    # Direction isolates cleanly on the factor itself: land with ocean only to the
+    # EAST is watered under trades (source east) but dry under westerlies (source
+    # west, no western ocean).
+    seaE = np.zeros((8, 60), bool); seaE[:, -1] = True
+    flat = np.zeros((8, 60), np.float32)
+    mf_trades = arable._moisture_factor(seaE, flat, np.full(8, 20.0), p_moist, wrap_x=False)
+    mf_west = arable._moisture_factor(seaE, flat, np.full(8, 45.0), p_moist, wrap_x=False)
+    assert mf_trades[4, 58] > mf_west[4, 58], "trades water an eastern coast the westerlies leave dry"
+
+    # Disable identity: moist_enable=False is an all-ones factor and changes the field.
+    mf_off = arable._moisture_factor(seaE, flat, np.full(8, 45.0),
+                                     arable.ArableParams(moist_enable=False), wrap_x=False)
+    assert np.array_equal(mf_off, np.ones_like(mf_off)), "moist_enable=False is the identity factor"
+    lp2 = np.full(8, 45.0); elev2 = np.zeros((8, 120), np.float32)
+    sea2 = np.zeros((8, 120), bool); sea2[:, 0] = True; pass2 = ~sea2
+    riv2 = np.zeros((8, 120), bool)
+    f_on, _ = arable.build_field(lat_per_row=lp2, elev_m=elev2, sea=sea2, passable=pass2,
+                                 river=riv2, river_width=None, lore_zones=[],
+                                 params=arable.ArableParams(coast_amp=0.0), wrap_x=False)
+    f_off, _ = arable.build_field(lat_per_row=lp2, elev_m=elev2, sea=sea2, passable=pass2,
+                                  river=riv2, river_width=None, lore_zones=[],
+                                  params=arable.ArableParams(coast_amp=0.0, moist_enable=False),
+                                  wrap_x=False)
+    assert not np.array_equal(f_on, f_off), "the moisture factor changes the composed field"
+
+    # De-streak: the per-row scan trails downwind streaks where elevation differs
+    # row to row; the smoothing pass reduces that row-to-row variance downwind.
+    seaW = np.zeros((20, 60), bool); seaW[:, 0] = True
+    elev_streak = np.zeros((20, 60), np.float32)
+    elev_streak[::2, 10:14] = 800.0     # a broken ridge present on even rows only
+    latw = np.full(20, 45.0)
+    mf_raw = arable._moisture_factor(seaW, elev_streak, latw,
+                                     arable.ArableParams(moist_smooth_sigma=0.0), wrap_x=False)
+    mf_sm = arable._moisture_factor(seaW, elev_streak, latw,
+                                    arable.ArableParams(moist_smooth_sigma=6.0), wrap_x=False)
+    assert float(mf_sm[:, 30].std()) < float(mf_raw[:, 30].std()), \
+        "smoothing reduces the downwind per-row streak variance"
+
+    # --- lore: lift/suppress, smooth monotone falloff, multiplicative -------
+    Z = schema.ArableLoreZone
+    bread = Z(anchor=(20, 6), radius=10.0, factor=1.8, kind="breadbasket",
+              name="B", note="")
+    blight = Z(anchor=(20, 6), radius=10.0, factor=0.4, kind="blight", name="Y", note="")
+    L1 = arable._lore_factor([bread], (12, 40), wrap_x=False)
+    assert abs(L1[6, 20] - 1.8) < 1e-4, "breadbasket multiplier at the anchor == factor"
+    assert abs(L1[6, 31] - 1.0) < 1e-4, "lore returns to 1.0 at/after the radius"
+    # monotone falloff between anchor and radius
+    d = [L1[6, 20 + k] for k in range(0, 11)]
+    assert all(d[i] >= d[i + 1] - 1e-6 for i in range(len(d) - 1)), "smooth monotone falloff"
+    Lb = arable._lore_factor([blight], (12, 40), wrap_x=False)
+    assert Lb[6, 20] < 1.0, "blight suppresses at the anchor"
+    Lboth = arable._lore_factor([bread, blight], (12, 40), wrap_x=False)
+    assert abs(Lboth[6, 20] - 1.8 * 0.4) < 1e-4, "overlapping zones compose multiplicatively"
+
+    # --- normalization: real spread + an outlier does not flatten the rest ---
+    lp = np.linspace(60.0, 40.0, 40); elev = np.zeros((40, 40), np.float32)
+    sea = np.zeros((40, 40), bool); river = np.zeros((40, 40), bool)
+    passable = np.ones((40, 40), bool)
+    base, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[], params=p, wrap_x=False)
+    assert base.max() > base[base > 0].min(), "field spans a real range, not all-equal"
+    # A single-pixel extreme zone (well under the P99.5 tail) must be clipped
+    # without dragging the normalization denominator up and flattening the rest.
+    outlier = Z(anchor=(20, 20), radius=1.0, factor=50.0, kind="breadbasket", name="O", note="")
+    withz, _ = arable.build_field(
+        lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+        river=river, river_width=None, lore_zones=[outlier], params=p, wrap_x=False)
+    assert withz.max() <= 1.0 + 1e-6, "an extreme outlier is clipped, not overflowing"
+    assert abs(float(np.median(withz)) - float(np.median(base))) < 0.15, \
+        "percentile normalization keeps the bulk spread despite one extreme zone"
+
+    # --- schema loader: order kept + every refusal ---------------------------
+    with tempfile.TemporaryDirectory() as td:
+        def _write(obj):
+            pth = Path(td) / "lore.json"
+            pth.write_text(json.dumps(obj), encoding="utf-8")
+            return pth
+        good = {"zones": [
+            {"anchor": [5, 5], "radius": 4, "factor": 1.5, "kind": "breadbasket", "name": "A"},
+            {"anchor": [8, 8], "radius": 4, "factor": 0.5, "kind": "blight", "name": "B"},
+        ]}
+        zs = schema.load_arable_lore(_write(good), canvas=(20, 20))
+        assert [z.name for z in zs] == ["A", "B"], "authored order preserved"
+        for bad, why in [
+            ({"zones": []}, "empty list"),
+            ({"zones": [{"anchor": [99, 1], "radius": 4, "factor": 1.5,
+                         "kind": "breadbasket", "name": "X"}]}, "out-of-canvas anchor"),
+            ({"zones": [{"anchor": [1, 1], "radius": 0, "factor": 1.5,
+                         "kind": "breadbasket", "name": "X"}]}, "non-positive radius"),
+            ({"zones": [{"anchor": [1, 1], "radius": 4, "factor": 0.8,
+                         "kind": "breadbasket", "name": "X"}]}, "breadbasket factor<=1"),
+            ({"zones": [{"anchor": [1, 1], "radius": 4, "factor": 1.2,
+                         "kind": "blight", "name": "X"}]}, "blight factor>=1"),
+            ({"zones": [{"anchor": [2, 2], "radius": 4, "factor": 1.5, "kind": "breadbasket", "name": "X"},
+                        {"anchor": [2, 2], "radius": 4, "factor": 1.5, "kind": "breadbasket", "name": "Y"}]},
+             "duplicate anchor"),
+        ]:
+            try:
+                schema.load_arable_lore(_write(bad), canvas=(20, 20))
+            except schema.SchemaError:
+                pass
+            else:  # pragma: no cover
+                raise AssertionError(f"load_arable_lore must reject: {why}")
+
+    # --- determinism: array-equal core + byte-identical encoded PNG ----------
+    lp = np.linspace(60.0, 40.0, 24); elev = np.zeros((24, 24), np.float32)
+    sea = np.zeros((24, 24), bool); sea[:, 0] = True
+    river = np.zeros((24, 24), bool); river[12, 12] = True
+    passable = ~sea
+    rw = np.zeros((24, 24), np.float32); rw[12, 12] = 6.0
+    kw = dict(lat_per_row=lp, elev_m=elev, sea=sea, passable=passable,
+              river=river, river_width=rw, lore_zones=[bread], params=p, wrap_x=True)
+    f1, _ = arable.build_field(**kw)
+    f2, _ = arable.build_field(**kw)
+    assert np.array_equal(f1, f2), "two build_field runs must be array-identical"
+    with tempfile.TemporaryDirectory() as td:
+        a = Path(td) / "a.png"; b = Path(td) / "b.png"
+        _raster.write_gray16_png(a, gah.encode16(f1))
+        _raster.write_gray16_png(b, gah.encode16(f2))
+        assert a.read_bytes() == b.read_bytes(), "the encoded 16-bit PNG must be byte-identical"
+
+
 def _selfcheck_tww3_names() -> None:
     """TWW3 canon-name lookup (board #4363), in isolation — the TSV parser and
     the exact-hex point sample, on a synthetic table + array.
@@ -3305,6 +3563,12 @@ def run_check() -> int:
     print("canon_cities: schema (order + refuse empty/bad-terrain/dup-anchor/oob) + pure "
           "transparent overlay (deterministic, canvas-sized) + validator (on-land hard error, "
           "impassable-collision non-blocking warning, export-absent skip) self-check passed.")
+    _selfcheck_arable()
+    print("arable: field core (water/lake/impassable=0, climate peak/arid-trough/pole-taper, "
+          "terrain suppression, river+coast boost, lore lift/suppress + smooth falloff + "
+          "multiplicative compose, percentile-norm spread + outlier-clip) + schema (order + "
+          "refuse empty/oob/bad-radius/kind-factor-mismatch/dup) + determinism (array-equal "
+          "core, byte-identical PNG) self-check passed.")
     _selfcheck_tww3_names()
     print("tww3_names: region-table parser (metadata/blank rows skipped, order + row count, "
           "case-normalised colours, refuse dup-colour/malformed/blank/truncated/bad-header, "

@@ -508,6 +508,36 @@ byte-identical to a reassign of the same geometry; and a **digit-suffixed**
 display name ("Far Passage 3") recovers its slug via `_slugify`, not a
 trailing-digit strip that would corrupt another slug's high-water.
 
+`_selfcheck_arable` (board #4921) exercises `worldgen/arable.build_field` +
+`schema.load_arable_lore` on a small synthetic canvas (no dependency on the real
+committed bitmaps): water/lake/(passed)impassable pixels read exactly 0 while
+positive-factor land reads `> 0`; climate peaks in the temperate band and falls
+toward both the pole edge and the equator (incl. the subtropical arid trough); a
+synthetic mountain block reads strictly lower than same-latitude lowland; a
+pixel by a river/coast reads strictly higher than an identical dry interior one;
+the wind/rain-shadow moisture factor advects from the upwind ocean (belt
+direction, continentality decay, orographic drop climbing into the wind,
+trades-vs-westerlies source side, disable-identity, de-streak variance
+reduction); a `breadbasket` lore zone lifts and a `blight` zone suppresses, both
+with a smooth monotone-in-radius falloff to 1.0 at the radius and overlapping
+zones composing multiplicatively; percentile normalization spans a real 0..1
+range without one extreme outlier flattening the rest; `load_arable_lore` keeps
+authored order and refuses an empty list / out-of-canvas anchor / non-positive
+radius / kind↔factor mismatch / duplicate anchor; and two `build_field` runs are
+array-equal while two full generator runs produce byte-identical PNGs.
+`tools/generate_arable_heatmap.py`, `worldgen/arable.py`,
+`tools/config/arable_lore.json`, `tools/render_arable_preview.py` and the
+committed `tools/derived/arable_heatmap.png` (+ `arable_heatmap_index.json`
+sidecar) are an **offline upstream artifact, not a game-loaded map file** —
+nothing under `common/`/`events/`/`map_data/`/`localization/` changes, so there
+is no in-game `error.log` gate for this item and `validate_map.py` is unaffected;
+"MP determinism" here is byte-identical reproducibility (the driver's `--check`
+regen-diff proves it against the committed raster), not engine MP-sync. The
+preview render is dev-only and gitignored; the rendered heatmap is the human
+acceptance gate (sent to Chris), not a test. Add the raster + sidecar to the
+regenerate-never-hand-edit set and re-run `generate_arable_heatmap.py` after any
+`generate_provinces.py`/heightmap/rivers regen whose inputs it reads.
+
 ## Regression rule
 
 When fixing a bug confirmed via `logs/error.log` or in-game behavior, first reproduce it (capture the exact error line or observed behavior) before changing script, so the fix can be verified against the same reproduction step afterward.
