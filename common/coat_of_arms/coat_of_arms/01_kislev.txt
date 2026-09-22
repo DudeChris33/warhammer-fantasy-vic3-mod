@@ -1,4 +1,4 @@
-# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
 # this file does NOT load. Bespoke content per epic #3621 child #3625 — the 10
 # Kislev country tags (common/country_definitions/01_kislev.txt, same order).
 # Composed from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems, neither
@@ -12,14 +12,29 @@
 # own shipped `cultures` field. Requires common/flag_definitions/01_kislev.txt
 # (this mod's DEFAULT flag_definitions block is unconditional at priority = 0 and
 # would otherwise mask every one of these — see that file's header) to actually
-# render in-game.
+# render in-game. TWW3/canon-alignment pass (2026-09-22): KIS's bear recoloured
+# to the Gospodars' actual heraldic convention for Ursun (brown, golden
+# accents) — see that block below. Individual-city heraldry beyond the eagle/
+# bear/sun/tribal-horse devices already used here is not documented in any
+# source this session could access (the dedicated WFRP sourcebook, "Realm of
+# the Ice Queen", is not readable through this session's tools) — the
+# per-tag disclosed inventions for ERE/PRA/TRO/BOL/DOL/ROP stand unchanged.
+# Also fixed in this pass: this file (and common/flag_definitions/01_kislev.txt)
+# were missing the required UTF-8 BOM despite the #3625 build claiming a clean
+# offline read-back — the same lexer.cpp failure mode that bit #3622 Empire.
 
 # KIS — canon-firm: the united Tzardom's paramount device. Gold double-headed eagle
 # (Gospodar/imperial) charged with a bear (Ungol/Ursun) — the tag's own
 # cultures = { gospodar ungol } rendered as heraldry. No substitution: this eagle
 # texture is distinct from the Empire's ce_eagle_double_headed.dds (#3622's EMP) so
 # Kislev does not read as a recoloured Empire; pb_bear.dds is already an
-# appropriately flat, heraldic bear silhouette.
+# appropriately flat, heraldic bear silhouette. Bear recoloured brown/golden
+# (TWW3-alignment pass, 2026-09-22): Ursun is canonically depicted by the
+# Gospodars as a great brown cave bear, "sometimes wearing a golden crown and
+# often with golden teeth or golden claws" — the earlier white/pearl bear read
+# as Ursun's own wild-god form (also attested in lore) rather than the
+# Gospodars' own heraldic convention; brown/golden is the more correct
+# heraldic reading for the Tzardom's paramount device specifically.
 KIS = {
 	pattern = "pattern_solid.tga"
 	color1 = "azure"
@@ -34,8 +49,8 @@ KIS = {
 	}
 	colored_emblem = {
 		texture = "pb_bear.dds"
-		color1 = "white"
-		color2 = "pearl"
+		color1 = "brown"
+		color2 = "golden"
 		instance = { position = { 0.5 0.52 } scale = { 0.3 0.3 } }
 	}
 }

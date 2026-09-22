@@ -1,4 +1,4 @@
-# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
 # (00_flag_definitions.txt) ships one unconditionally-applicable block at
 # priority = 0 — so "no flag definition is applicable for a country" (vanilla's
 # own tag-as-COA_KEY fallback condition, see that file's vanilla header comment
