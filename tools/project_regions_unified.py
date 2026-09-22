@@ -94,7 +94,9 @@ FULL_SOURCE = "tww3_old_world_mod_parchment_full.png"
 PAINT_SOURCE = "old_world_state_regions.png"
 #: The reprojected globe that IS the canvas frame — the backdrop the painting drapes over.
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
-#: The plain globe with a magenta coastline drawn on it — a reference line, not the backdrop.
+#: The destination coastline: a transparent overlay in the canvas frame whose
+#: only opaque pixels are the hand-drawn cyan coast line. Overlaid on the drape
+#: by default (opacity-detected — see overlay_coast; --no-coast skips it).
 COAST_SOURCE = "terraqueous_globe_reprojected - coasts.png"
 
 MAGENTA_RGB = (255, 0, 255)
@@ -241,10 +243,14 @@ def extract_borders(canvas_rgb: np.ndarray, globe_rgb: np.ndarray, placed: np.nd
     return np.clip(out, 0, 255).astype(np.uint8)
 
 
-def overlay_coast(canvas_rgb: np.ndarray, coasts_rgb: np.ndarray) -> int:
-    """Draw the coasts PNG's magenta line onto ``canvas_rgb`` in cyan (in place)."""
-    r, g, b = MAGENTA_RGB
-    line = ((coasts_rgb[..., 0] == r) & (coasts_rgb[..., 1] == g) & (coasts_rgb[..., 2] == b))
+def overlay_coast(canvas_rgb: np.ndarray, coasts_rgba: np.ndarray) -> int:
+    """Draw the coasts PNG's line onto ``canvas_rgb`` in cyan (in place).
+
+    The coast source is a transparent overlay whose only opaque pixels ARE the
+    hand-drawn coastline (already cyan). Detect the line by opacity, not by an
+    RGB match — the earlier magenta match found nothing, since the line is cyan.
+    """
+    line = coasts_rgba[..., 3] > 127
     canvas_rgb[line] = COAST_RGB
     return int(line.sum())
 
@@ -273,13 +279,13 @@ def build(pad: int, out_prefix: str,
 
     paint_rgba = load_rgba(paint_source)
     globe_rgb = load_rgb(globe_source)
-    coasts_rgb = load_rgb(COAST_SOURCE) if overlay_coasts else None
+    coasts_rgba = load_rgba(COAST_SOURCE) if overlay_coasts else None
 
     if globe_rgb.shape[1] != CANVAS_W or globe_rgb.shape[0] != CANVAS_H:
         raise SystemExit(f"{globe_source} is {globe_rgb.shape[1]}x{globe_rgb.shape[0]}, "
                          f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
-    if coasts_rgb is not None and coasts_rgb.shape[:2] != globe_rgb.shape[:2]:
-        raise SystemExit(f"{COAST_SOURCE} is {coasts_rgb.shape[1]}x{coasts_rgb.shape[0]}, "
+    if coasts_rgba is not None and coasts_rgba.shape[:2] != globe_rgb.shape[:2]:
+        raise SystemExit(f"{COAST_SOURCE} is {coasts_rgba.shape[1]}x{coasts_rgba.shape[0]}, "
                          f"expected {CANVAS_W}x{CANVAS_H} to match the globe")
 
     painted_frac = 100.0 * (paint_rgba[..., 3] > 0).mean()
@@ -310,7 +316,7 @@ def build(pad: int, out_prefix: str,
         kept = int((canvas_rgb != globe_rgb).any(axis=2).sum())
         log(f"borders-only  kept {kept:,} px within {magenta_tol} of magenta "
             f"(of {int(placed.sum()):,} placed)")
-    n_coast = overlay_coast(canvas_rgb, coasts_rgb) if coasts_rgb is not None else 0
+    n_coast = overlay_coast(canvas_rgb, coasts_rgba) if coasts_rgba is not None else 0
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     crop = canvas_rgb[y0:y1, x0:x1].copy()
