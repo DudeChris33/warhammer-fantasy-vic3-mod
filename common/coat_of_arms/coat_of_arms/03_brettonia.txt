@@ -10,7 +10,10 @@
 # cradle of the Grail cult — gets an actual chalice rather than a substitute) and
 # committed here at gfx/coat_of_arms/colored_emblems/ce_cup.dds. Each block below
 # records its provenance bucket per #3621's "record every substitution" acceptance
-# criterion, matching 02_empire.txt's (#3622) discipline. Requires
+# criterion, matching 02_empire.txt's (#3622) discipline. TWW3-alignment pass
+# (2026-09-21): LYO/COU/BOR upgraded from invented placeholders to confirmed
+# canon charges (the Lyonesse/Couronne founders' lion; Bordeleaux's Manann
+# trident) once the actual lore was checked — see those blocks below. Requires
 # common/flag_definitions/03_brettonia.txt (this mod's DEFAULT flag_definitions
 # block is unconditional at priority = 0 and would otherwise mask every one of
 # these — see that file's header) to actually render in-game.
@@ -34,11 +37,13 @@ BRE = {
 # common/country_definitions/03_brettonia.txt) — including Mousillon, cursed but
 # still nominally a duchy, and the two Greenskin holdouts MOR/SKZ.
 
-# COU — Couronne, the royal dukedom of the north. Soft/disclosed invention: the
-# kingdom's own fleur-de-lis multiplied three times and ensigned with a ducal
-# coronet — "the crown duchy wears the kingdom's arms again" — deliberately NOT
-# the Leoncoeur lion that 02_empire.txt's MID header notes was considered and
-# rejected there for Ulric; kept distinct here for the same reason.
+# COU — Couronne, the royal dukedom of the north. The kingdom's own fleur-de-lis
+# multiplied three times and ensigned with a ducal coronet — "the crown duchy
+# wears the kingdom's arms again". Corrected (TWW3-alignment pass): canon
+# confirms Couronne shares LYO's lion device (the founding-brothers legend) —
+# a small ce_lion_rampant.dds canton is added at the base as the second,
+# duchy-specific charge, so COU reads as "royal arms + the founders' lion"
+# rather than the kingdom's arms alone.
 COU = {
 	pattern = "pattern_solid.tga"
 	color1 = "medium_blue"
@@ -48,31 +53,40 @@ COU = {
 		texture = "ce_fleur_de_lis.dds"
 		color1 = "golden"
 		color2 = "golden"
-		instance = { position = { 0.35 0.42 } scale = { 0.3 0.3 } }
-		instance = { position = { 0.65 0.42 } scale = { 0.3 0.3 } }
-		instance = { position = { 0.5 0.68 } scale = { 0.3 0.3 } }
+		instance = { position = { 0.35 0.38 } scale = { 0.28 0.28 } }
+		instance = { position = { 0.65 0.38 } scale = { 0.28 0.28 } }
 	}
 	colored_emblem = {
 		texture = "ce_crown_ducal.dds"
 		color1 = "golden"
 		color2 = "white"
 		color3 = "white"
-		instance = { position = { 0.5 0.17 } scale = { 0.28 0.28 } }
+		instance = { position = { 0.5 0.15 } scale = { 0.24 0.24 } }
+	}
+	colored_emblem = {
+		texture = "ce_lion_rampant.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "white"
+		instance = { position = { 0.5 0.72 } scale = { 0.34 0.34 } }
 	}
 }
 
-# LYO — Lyonesse, the storm-beaten northern coast facing Norscan raids. Unverified
-# blazon: a wave device on a split blue field reads as the exposed northern coast;
-# no specific canon charge confirmed.
+# LYO — Lyonesse. Corrected (TWW3-alignment pass): canon confirms Lyonesse and
+# Couronne share a lion device from the founding-brothers legend (two brothers
+# slew a great lion together as children) — the earlier invented wave device is
+# replaced with ce_lion_rampant.dds (freed up by 02_empire.txt's MID swapping to
+# a real wolf), a golden lion on the duchy's own northern-coast blue.
 LYO = {
 	pattern = "pattern_horizontal_split_01.tga"
 	color1 = "blue_light"
 	color2 = "azure"
 
 	colored_emblem = {
-		texture = "ce_waves.dds"
-		color1 = "white"
-		color2 = "white"
+		texture = "ce_lion_rampant.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "white"
 		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
 	}
 }
@@ -221,19 +235,23 @@ BRI = {
 	}
 }
 
-# BOR — Bordeleaux, the great southern port. Soft: a heraldic galley (lymphad) on a
-# wine-dark field for the naval duchy.
+# BOR — Bordeleaux. Corrected (TWW3-alignment pass): the founding Duke Marcus
+# fought alongside Manann's avatar, and Manann's trident — not a ship — is
+# Bordeleaux knights' actual heraldic device (canon variants include crossed
+# white tridents on quartered blue/black, and fleur-tipped tridents on red).
+# The earlier invented lymphad is replaced with vanilla's own ce_trident.dds
+# (2 slots confirmed 02_countries.txt:2073), white on the duchy's wine-dark
+# field.
 BOR = {
 	pattern = "pattern_solid.tga"
 	color1 = "purple"
 	color2 = "purple"
 
 	colored_emblem = {
-		texture = "ce_lymphad.dds"
-		color1 = "golden"
-		color2 = "white"
-		color3 = "black"
-		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+		texture = "ce_trident.dds"
+		color1 = "white"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
 	}
 }
 
