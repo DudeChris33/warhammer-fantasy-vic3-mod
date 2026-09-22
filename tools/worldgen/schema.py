@@ -1582,6 +1582,11 @@ class SourceRegistration:
     precedence: int
     layer_precedence: dict[str, int] = field(default_factory=dict)
     frame_alias: FrameAlias | None = None
+    #: ``(h, w)`` of the frame the control points' source px live in — lets a
+    #: consumer drape a painting of that frame at ANY resolution (it scales its
+    #: own grid to this). ``None`` on older records, where painting==master frame
+    #: is assumed. Written by ``fit_registration`` from the seed's ``master_shape``.
+    master_shape: tuple[int, int] | None = None
 
     @property
     def is_alias(self) -> bool:
@@ -1678,8 +1683,21 @@ class SourceRegistration:
                         f"{ctx}.control_points[{i}].source ({sx}, {sy}) lies outside crop {crop}"
                     )
 
+        ms_raw = d.get("master_shape")
+        if ms_raw is None:
+            master_shape = None
+        else:
+            if not isinstance(ms_raw, (list, tuple)) or len(ms_raw) != 2:
+                raise SchemaError(
+                    f"{ctx}.master_shape: expected [h, w], got {ms_raw!r}")
+            mh = _as_int(ms_raw[0], f"{ctx}.master_shape[0]")
+            mw = _as_int(ms_raw[1], f"{ctx}.master_shape[1]")
+            if mh <= 0 or mw <= 0:
+                raise SchemaError(f"{ctx}.master_shape: must be positive, got {ms_raw!r}")
+            master_shape = (mh, mw)
+
         return cls(source, role, projection, control_points, crop, footprint,
-                   precedence, layer_precedence, frame_alias)
+                   precedence, layer_precedence, frame_alias, master_shape)
 
 
 def load_registration_file(path: Path) -> SourceRegistration:

@@ -3503,6 +3503,84 @@ def _selfcheck_marker() -> None:
     assert mf > 0 and rf > 0, "marker and river fractions must be positive"
 
 
+def _selfcheck_reseed_dots() -> None:
+    """The paired-anchor-dot reseed core, in isolation (no golden needed).
+
+    Pins ``worldgen.reseed_dots``: detection (chromatic component absent from the
+    original, sub-4px speck and near-gray diff ignored; the noisy-rect chroma
+    rule — a pale dot survives OUTSIDE a rect at ``relaxed_chroma`` while a
+    same-chroma mark INSIDE is dropped), ``select_new`` (a dot on an existing
+    landmark is skipped, a far one is new), ``pair_by_colour`` (colour pairing,
+    a beyond-tolerance mismatch rejected as unpaired), ``name_pairs``
+    (``c_<hex>`` + ``_N`` disambiguation) and determinism.
+    """
+    from worldgen import reseed_dots as R
+
+    H, W = 40, 60
+    base = np.full((H, W, 3), (185, 150, 110), dtype=np.uint8)  # parchment
+    orig = base.copy()
+    dots = base.copy()
+
+    def stamp(img, cx, cy, colour, r=1):
+        img[cy - r:cy + r + 1, cx - r:cx + r + 1] = colour
+
+    # A saturated red dot (chroma 255), a sub-4px speck (single px), a near-gray
+    # difference (chroma 5 — ink, not a dot), and a pale blue dot (chroma 60).
+    stamp(dots, 10, 10, (255, 0, 0))            # 3x3 = 9 px, kept
+    dots[30, 50] = (0, 200, 0)                  # 1 px speck, dropped (< MIN_DOT_PX)
+    stamp(dots, 45, 8, (150, 150, 155))         # near-gray, chroma 5, dropped
+    stamp(dots, 20, 30, (120, 140, 180))        # pale, chroma 60
+
+    got = R.detect_dots(orig, dots, chroma_floor=120)
+    cols = sorted(d.color for d in got)
+    assert cols == [(255, 0, 0)], f"chroma_floor=120 should keep only the red dot, got {cols}"
+
+    # Noisy-rect rule: the pale dot survives OUTSIDE the rect at relaxed=40, but a
+    # same-pale mark INSIDE the rect (which demands >=120) is dropped.
+    stamp(dots, 52, 32, (120, 140, 180))        # pale, inside the rect below
+    rects = ((48, 28, 60, 40),)                 # x0,y0,x1,y1 around (52,32)
+    got2 = R.detect_dots(orig, dots, chroma_floor=120, relaxed_chroma=40,
+                         noisy_rects=rects)
+    centres = sorted((round(d.cx), round(d.cy)) for d in got2)
+    assert (20, 30) in centres, "pale dot outside the noisy rect must survive"
+    assert (52, 32) not in centres, "pale mark inside the noisy rect must be dropped"
+    assert (10, 10) in centres, "the red dot must still be kept under the noisy rule"
+
+    # select_new: one dot sits on an existing landmark, the other is new.
+    dots3 = base.copy()
+    stamp(dots3, 10, 10, (255, 0, 0))           # matches the landmark below
+    stamp(dots3, 40, 20, (0, 0, 255))           # new
+    found = R.detect_dots(orig, dots3, chroma_floor=120)
+    landmarks = [{"name": "c_ff0000", "source": [10.5, 10.5], "canvas": [0, 0]}]
+    new, matched = R.select_new(found, landmarks, "source", tol_px=3.0)
+    assert matched == 1 and len(new) == 1 and new[0].color == (0, 0, 255), \
+        f"select_new should skip the on-landmark dot, got matched={matched} new={new}"
+
+    # pair_by_colour: a colour match pairs; a mismatch beyond tolerance is unpaired.
+    red_m = R.Dot(10.0, 10.0, (255, 0, 0), 9)
+    red_c = R.Dot(99.0, 99.0, (250, 4, 3), 9)
+    blue_m = R.Dot(40.0, 20.0, (0, 0, 255), 9)
+    green_c = R.Dot(80.0, 80.0, (0, 200, 0), 9)   # no master match
+    pairs, up_m, up_c = R.pair_by_colour([red_m, blue_m], [red_c, green_c],
+                                         max_colour_dist=40.0)
+    assert len(pairs) == 1 and pairs[0].master is red_m and pairs[0].canvas is red_c
+    assert up_m == [blue_m] and up_c == [green_c], \
+        f"blue master + green canvas must be unpaired, got {up_m} {up_c}"
+
+    # name_pairs: c_<hex> + _N disambiguation against existing + within-batch.
+    p1 = R.Pair(R.Dot(1, 1, (191, 0, 255), 9), R.Dot(2, 2, (190, 0, 254), 9), 1.0)
+    p2 = R.Pair(R.Dot(3, 3, (191, 0, 255), 9), R.Dot(4, 4, (192, 0, 255), 9), 1.0)
+    named = R.name_pairs([p1, p2], {"c_bf00ff"})
+    assert [lm["name"] for lm in named] == ["c_bf00ff_2", "c_bf00ff_3"], \
+        f"name_pairs disambiguation wrong: {[lm['name'] for lm in named]}"
+
+    # Determinism: identical inputs -> identical detection.
+    again = R.detect_dots(orig, dots, chroma_floor=120, relaxed_chroma=40,
+                          noisy_rects=rects)
+    assert [(d.cx, d.cy, d.color, d.size) for d in got2] == \
+           [(d.cx, d.cy, d.color, d.size) for d in again], "detect_dots not deterministic"
+
+
 def run_check() -> int:
     _selfcheck_wrap()
     _selfcheck_frame()
@@ -3529,6 +3607,10 @@ def run_check() -> int:
           "negative cases) self-check passed.")
     _selfcheck_marker()
     print("marker: border-markup extraction (rivers in, roads ignored) self-check passed.")
+    _selfcheck_reseed_dots()
+    print("reseed_dots: paired-anchor-dot fold (chroma detect + noisy-rect rule, select_new "
+          "skips known, colour pairing + mismatch rejected, c_<hex> naming, determinism) "
+          "self-check passed.")
     _selfcheck_sea_zones()
     print("sea_zones: drawn-line extraction (in-water splits, land marks ignored) self-check passed.")
     _selfcheck_land_provinces()

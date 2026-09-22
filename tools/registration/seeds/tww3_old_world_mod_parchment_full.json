@@ -1,6 +1,23 @@
 {
   "source": "tww3_old_world_mod_parchment_full.png",
   "dots_source": "tww3_old_world_mod_parchment - dots_7.png",
+  "_comment_dots_reseed": "Detection/pairing tuning for tools/reseed_registration_dots.py (folds new hand-marked dot pairs into landmarks[]). master_original/canvas sheets are otherwise derived by convention from dots_source; noisy_rects + relaxed_chroma reproduce the seed's documented chroma rule (>=chroma_floor everywhere, OR >=relaxed_chroma OUTSIDE the noisy rectangle where re-save/anti-alias noise concentrates \u2014 the Old Dwarf Road/Scalded Delta linework crossing).",
+  "dots_reseed": {
+    "master_original": "tww3_old_world_mod_parchment.png",
+    "canvas_original": "terraqueous_globe_reprojected.png",
+    "chroma_floor": 120,
+    "relaxed_chroma": 40,
+    "noisy_rects": [
+      [
+        3600,
+        2250,
+        4100,
+        3100
+      ]
+    ],
+    "match_tol_px": 3.0,
+    "max_colour_dist": 40.0
+  },
   "master_shape": [
     4096,
     4096
@@ -1170,6 +1187,39 @@
       "canvas": [
         4859.0,
         1316.0
+      ]
+    },
+    {
+      "name": "c_3f007f",
+      "source": [
+        1111.0,
+        1381.0
+      ],
+      "canvas": [
+        3901.0,
+        838.8
+      ]
+    },
+    {
+      "name": "c_ff0000",
+      "source": [
+        992.0,
+        1468.0
+      ],
+      "canvas": [
+        3848.0,
+        877.0
+      ]
+    },
+    {
+      "name": "c_be0cfd",
+      "source": [
+        1303.0,
+        1567.0
+      ],
+      "canvas": [
+        3972.0,
+        907.0
       ]
     }
   ],

@@ -42,10 +42,19 @@ record itself; the principled fix for a systematic gap is still more dots
 Defaults to 50px (``HULL_BUFFER_PX_DEFAULT`` — user-accepted by eye 2026-09-12,
 100px read as too much); pass 0 for the strict, no-extrapolation behaviour.
 
+The painting draped (``PAINT_SOURCE``) is ``old_world_state_regions.png`` — the
+magenta boundary network, authored in the parchment master's frame but exported
+at 2048² (half the 4096² master). The warp coords are scaled onto that grid via
+the record's ``master_shape`` (written by ``fit_registration``), so no ``--paint``
+override and no re-export to 4096² is needed: after
+``tools/reseed_registration_dots.py --seed tww3_old_world_mod_parchment_full --fit``
+folds new dots and re-derives the warp, ``project_regions_unified.py --crop`` IS
+the projection.
+
 Usage::
 
-    python tools/project_regions_unified.py
-    python tools/project_regions_unified.py --crop --pad 128
+    python tools/project_regions_unified.py --crop          # the projection (defaults are current)
+    python tools/project_regions_unified.py                 # full uncropped canvas
     python tools/project_regions_unified.py --borders-only
     python tools/project_regions_unified.py --hull-buffer-px 100 --crop
 """
@@ -74,7 +83,14 @@ CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
 #: The full-master registration this script projects through.
 FULL_SOURCE = "tww3_old_world_mod_parchment_full.png"
-#: The finer per-state painting to drape (the master frame, 4096²).
+#: The state-region painting to drape: the magenta boundary network, exported at
+#: 2048² — HALF the registration's 4096² master frame. It is a borders-only
+#: source (transparent except the lines, so its alpha coverage reads low — that
+#: is complete, not sparse), authored in the SAME parchment frame the warp fits.
+#: ``place_painting`` scales the master-frame warp coords onto this grid via the
+#: record's ``master_shape``, so the half-res export drapes at full extent rather
+#: than cropped to a quadrant. Update this filename here (not with ``--paint``)
+#: whenever the current export changes, so a plain run is always the projection.
 PAINT_SOURCE = "old_world_state_regions.png"
 #: The reprojected globe that IS the canvas frame — the backdrop the painting drapes over.
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
@@ -134,7 +150,9 @@ def footprint_box(reg: schema.SourceRegistration, pad: float = 0.0) -> tuple[int
 
 
 def place_painting(fit, box: tuple[int, int, int, int], paint_rgba: np.ndarray,
-                   globe_rgb: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+                   globe_rgb: np.ndarray,
+                   master_shape: tuple[int, int] | None = None
+                   ) -> tuple[np.ndarray, np.ndarray]:
     """Drape the painting onto a copy of the globe through the single full-master
     warp, sampled nearest (hard per-state fills stay flat, the 1px magenta
     border network is not aliased away). Returns ``(canvas_rgb, placed)``.
@@ -144,11 +162,24 @@ def place_painting(fit, box: tuple[int, int, int, int], paint_rgba: np.ndarray,
     placement, not a canvas-spanning one, so walking the full 8192x3616 frame
     would burn >90% of the work on RBF evaluations that can never land inside
     the painting anyway.
+
+    ``fit.to_source_px`` returns px in the registration's MASTER frame. When the
+    painting is authored at a different resolution of that same frame (e.g. a
+    2048² export of a 4096² master), ``master_shape`` (``(h, w)``, from the
+    record) scales the master-frame coords onto the painting's own grid before
+    sampling — so a half-res or double-res painting drapes identically, not
+    cropped to a quadrant at the wrong scale. ``None`` keeps the old
+    painting==master assumption.
     """
     canvas_rgb = globe_rgb.copy()
     placed = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
 
     ph, pw = paint_rgba.shape[:2]
+    if master_shape is not None:
+        mh, mw = master_shape
+        sx, sy = pw / float(mw), ph / float(mh)
+    else:
+        sx = sy = 1.0
     paint_planes = [paint_rgba[..., c].astype(np.float32) for c in range(3)]
     paint_alpha = paint_rgba[..., 3].astype(np.float32)
 
@@ -160,9 +191,10 @@ def place_painting(fit, box: tuple[int, int, int, int], paint_rgba: np.ndarray,
         gxb = np.broadcast_to(gx, (ye - yb, bx1 - bx0))
         gyb = np.broadcast_to(gy, (ye - yb, bx1 - bx0))
         mx, my = fit.to_source_px(gxb, gyb)
+        px, py = mx * sx, my * sy  # master-frame -> painting-frame px
 
-        in_master = (mx >= 0) & (mx <= pw - 1) & (my >= 0) & (my <= ph - 1)
-        pa = reproject.resample(paint_alpha, mx, my, order=0)
+        in_master = (px >= 0) & (px <= pw - 1) & (py >= 0) & (py <= ph - 1)
+        pa = reproject.resample(paint_alpha, px, py, order=0)
         valid = in_master & (pa > ALPHA_VALID)
         if not valid.any():
             continue
@@ -170,7 +202,7 @@ def place_painting(fit, box: tuple[int, int, int, int], paint_rgba: np.ndarray,
         block = np.empty((ye - yb, bx1 - bx0, 3), dtype=np.uint8)
         for c in range(3):
             block[..., c] = np.clip(
-                reproject.resample(paint_planes[c], mx, my, order=0), 0, 255
+                reproject.resample(paint_planes[c], px, py, order=0), 0, 255
             ).astype(np.uint8)
         view_rgb = canvas_rgb[yb:ye, bx0:bx1]
         view_placed = placed[yb:ye, bx0:bx1]
@@ -264,7 +296,8 @@ def build(pad: int, out_prefix: str,
         f"{f' + {hull_buffer_px:.0f}px buffer' if hull_buffer_px > 0 else ''} — "
         f"the warp is never evaluated outside it)")
 
-    canvas_rgb, placed = place_painting(fit, eval_box, paint_rgba, globe_rgb)
+    canvas_rgb, placed = place_painting(fit, eval_box, paint_rgba, globe_rgb,
+                                        master_shape=reg.master_shape)
     box = (0, 0, CANVAS_W, CANVAS_H) if full_frame else placement_box(placed, pad)
     x0, y0, x1, y1 = box
     log(f"placed        {100.0 * placed.mean():.3f}% of the frame "
@@ -296,7 +329,8 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--out-prefix", default=OUT_PREFIX_DEFAULT,
                    help=f"output filename prefix under tools/derived/ (default {OUT_PREFIX_DEFAULT})")
     p.add_argument("--paint", default=PAINT_SOURCE,
-                   help=f"the master-frame painting (4096², RGBA) to drape (default {PAINT_SOURCE})")
+                   help=f"the painting (RGBA, any resolution of the master frame — "
+                        f"scaled via the record's master_shape) to drape (default {PAINT_SOURCE})")
     p.add_argument("--no-coast", action="store_true",
                    help="skip the cyan coastline reference overlay (drape the painting alone)")
     p.add_argument("--crop", action="store_true",

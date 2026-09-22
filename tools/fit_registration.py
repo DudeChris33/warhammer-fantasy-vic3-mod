@@ -451,6 +451,10 @@ def _emit(seed: dict, src_pts: np.ndarray, canvas_pts: np.ndarray, info: dict, l
     rec = dict(seed["record"])
     rec["source"] = seed["source"]
     rec["projection"] = projection
+    # The frame the control points' source px live in (h, w), so a consumer can
+    # drape a painting authored at ANY resolution of this same frame: it scales
+    # its own pixel grid to master_shape rather than assuming painting==master.
+    rec["master_shape"] = [int(seed["master_shape"][0]), int(seed["master_shape"][1])]
     # The footprint is *measured* from where the fit actually put the source,
     # not declared up front — a hand-written box would go stale the moment the
     # control points moved, and a stale footprint silently truncates the layer.
