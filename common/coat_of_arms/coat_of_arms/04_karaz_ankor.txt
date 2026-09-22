@@ -10,15 +10,28 @@
 # 02_empire.txt precedent. Requires common/flag_definitions/04_karaz_ankor.txt
 # (this mod's DEFAULT flag_definitions block is unconditional at priority = 0
 # and would otherwise mask every one of these) to actually render in-game.
+# TWW3/canon-alignment pass (2026-09-22): field colours for KAZ/KAK, ZHU, KAD,
+# BVR, AZL, KNO, KHI and KEP corrected against the published hold-colour record
+# (Warhammer Armies: Dwarfs / White Dwarf studio schemes, catalogued at
+# cragfistsbrewery.weebly.com/dwarf-hold-colours.html — the only holds GW ever
+# gave an official uniform/heraldic colour to are exactly these plus Karak
+# Izor, Eight Peaks' pre-conquest name) — the earlier field colours for those
+# eight tags were invented guesses. Every other hold in this file (the seven
+# "ruined holds" and KRD, KAG) has no published colour on record, so their
+# existing invented fields are unchanged. Charges are unchanged except where
+# noted per-block.
 
-# KAZ — Karaz Ankor, the formable. Paramount device: Grungni's crossed hammers
-# beneath the High King's crown, bordered — the grandest coat of arms in the
-# set, deliberately outranking every karak below it. This tag is a formable
-# with no starting territory but still needs a flag_definitions block.
+# KAZ — Karaz Ankor, the formable. Field corrected to blue (Karaz-a-Karak's
+# own confirmed hold colour, "Blue & Yellow" per the published record — see
+# file header); the earlier invented red_dark was a guess. Paramount device:
+# Grungni's crossed hammers beneath the High King's crown, bordered gold — the
+# grandest coat of arms in the set, deliberately outranking every karak below
+# it. This tag is a formable with no starting territory but still needs a
+# flag_definitions block.
 KAZ = {
 	pattern = "pattern_solid.tga"
-	color1 = "red_dark"
-	color2 = "red_dark"
+	color1 = "blue"
+	color2 = "blue"
 
 	colored_emblem = {
 		texture = "ce_border_of_3_thin.dds"
@@ -41,52 +54,62 @@ KAZ = {
 	}
 }
 
-# KAK — Karaz-a-Karak, Everpeak. A single great hammer; lighter red field (not
-# red_dark) and no border/crown deliberately separate it from KAZ above.
-# Flagging this KAK/KAZ field pairing for the visual gate.
+# KAK — Karaz-a-Karak, Everpeak. Confirmed hold colour "Blue & Yellow" (the
+# earlier invented red field is corrected) — a single great hammer in yellow
+# gold on the true blue field. No border/crown deliberately separates it from
+# KAZ above, which still keeps the blue/yellow pairing but adds the crown and
+# gold border — flagging this KAK/KAZ near-shared field for the visual gate,
+# same as before, now on the corrected canon colour rather than an invented
+# one.
 KAK = {
 	pattern = "pattern_solid.tga"
-	color1 = "red"
-	color2 = "red"
+	color1 = "blue"
+	color2 = "blue"
 
 	colored_emblem = {
 		texture = "ce_hammer_ddr.dds"
-		color1 = "golden"
-		color2 = "golden"
+		color1 = "yellow"
+		color2 = "yellow"
 		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
 	}
 }
 
-# ZHU — Zhufbar, hold of the endless water-wheels above the falls. No
-# water-wheel art exists in vanilla — disclosed substitution: a spoked wheel
-# over waves.
+# ZHU — Zhufbar, hold of the endless water-wheels above the falls. Field
+# corrected to blue/dark red (confirmed hold colour, the "Grudgebearer"/more
+# recent Black Library scheme — see file header; an older source gives blue &
+# white instead, but that would collide with BVR's confirmed light-blue/white
+# below, so the dark-red variant is kept). No water-wheel art exists in
+# vanilla — disclosed substitution: a spoked wheel over waves, unchanged.
 ZHU = {
 	pattern = "pattern_solid.tga"
-	color1 = "red"
-	color2 = "red"
+	color1 = "blue"
+	color2 = "blue"
 
 	colored_emblem = {
 		texture = "ce_ship_wheel.dds"
-		color1 = "golden"
-		color2 = "golden"
+		color1 = "red_dark"
+		color2 = "red_dark"
 		instance = { position = { 0.5 0.45 } scale = { 0.62 0.62 } }
 	}
 	colored_emblem = {
 		texture = "ce_waves.dds"
-		color1 = "blue_light"
-		color2 = "white"
+		color1 = "white"
+		color2 = "red_dark"
 		instance = { position = { 0.5 0.88 } scale = { 1.0 0.3 } }
 	}
 }
 
-# KAD — Karak Kadrin, the Slayer Keep. Grimnir's crossed axes for the Slayer
-# Oath, grey steel, orange haft/wrap echoing the Slayers' dyed crests.
+# KAD — Karak Kadrin, the Slayer Keep. Field corrected to green/red (the
+# confirmed hold colour — see file header; the earlier invented black/red_dark
+# split, chosen only to dodge a KAZ/KUN tincture collision, is no longer
+# needed since KAZ has since moved to blue). Grimnir's crossed axes for the
+# Slayer Oath, unchanged: grey steel, orange haft/wrap echoing the Slayers'
+# dyed crests.
 # emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds),
-# reuse grant 2026-09-07. Black/red_dark split field deliberately differs from
-# KAZ and KUN's red_dark/red_dark field to avoid a 3-way tincture collision.
+# reuse grant 2026-09-07.
 KAD = {
 	pattern = "pattern_horizontal_split_01.tga"
-	color1 = "black"
+	color1 = "green_dark"
 	color2 = "red_dark"
 
 	colored_emblem = {
@@ -98,35 +121,43 @@ KAD = {
 }
 
 # BVR — Barak Varr, the sea-hold: the sea-gate fortress over the gulf, the
-# Dawi's only true port.
+# Dawi's only true port. Field corrected to light blue/white (the confirmed
+# hold colour — see file header; the earlier invented red/azure split is
+# dropped). Lore also records a specific gate device — a huge dwarf face
+# wearing a helmet crested with an ocean wyrm, a sea serpent curling from its
+# mouth — but no serpent/wyrm emblem distinct from the dragons already used
+# for KRD below exists in this mod's asset set, so the castle+waves device
+# (the sea-gate fortress itself) is kept rather than reusing KRD's dragon.
 BVR = {
 	pattern = "pattern_horizontal_split_01.tga"
-	color1 = "red"
-	color2 = "azure"
+	color1 = "blue_light"
+	color2 = "white"
 
 	colored_emblem = {
 		texture = "ce_castle_hamburg.dds"
-		color1 = "golden"
-		color2 = "yellow_dark"
-		color3 = "golden"
+		color1 = "pearl"
+		color2 = "blue_light"
+		color3 = "pearl"
 		instance = { position = { 0.5 0.34 } scale = { 0.5 0.5 } }
 	}
 	colored_emblem = {
 		texture = "ce_waves.dds"
-		color1 = "white"
+		color1 = "blue_light"
 		color2 = "pearl"
 		instance = { position = { 0.5 0.82 } scale = { 1.0 0.34 } }
 	}
 }
 
-# AZL — Karak Azul, the Iron Peak. No anvil art exists in vanilla or Realms of
-# Exether — disclosed substitution: an inverted steel chevron reading as an
-# anvil-face, with the smith's hammer above. Shares ce_hammer_ddr with KAK,
-# differentiated by field, tincture, and the chevron.
+# AZL — Karak Azul, the Iron Peak. Field corrected to green (the confirmed
+# hold colour — see file header; the earlier invented brown is dropped). No
+# anvil art exists in vanilla or Realms of Exether — disclosed substitution:
+# an inverted steel chevron reading as an anvil-face, with the smith's hammer
+# above, unchanged. ce_hammer_ddr is shared with KAK; the two no longer risk
+# reading alike since KAK is now blue/yellow against AZL's green.
 AZL = {
 	pattern = "pattern_solid.tga"
-	color1 = "brown"
-	color2 = "brown"
+	color1 = "green_dark"
+	color2 = "green_dark"
 
 	colored_emblem = {
 		texture = "ce_chevron.dds"
@@ -142,12 +173,15 @@ AZL = {
 	}
 }
 
-# KEP — Karak Eight Peaks. No mountain art fit the "eight" count as well as
-# this; the eight-pointed star is the strongest canon-to-art match — kept over
-# the newly-available ce_roe_mountain.dds deliberately.
+# KEP — Karak Eight Peaks. Field corrected to green/brown, split (the
+# confirmed hold colour under its pre-conquest dwarf name Karak Izor — see
+# file header; the earlier invented solid brown is dropped). No mountain art
+# fits the "eight" count as well as this; the eight-pointed star is the
+# strongest canon-to-art match — kept over the available ce_roe_mountain.dds
+# deliberately.
 KEP = {
-	pattern = "pattern_solid.tga"
-	color1 = "brown"
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "green_dark"
 	color2 = "brown"
 
 	colored_emblem = {
@@ -174,12 +208,17 @@ KAG = {
 	}
 }
 
-# KNO — Karak Norn, secretive. No firm canon blazon; generic Dawi hammers
-# walled in by a silver border — the hold that keeps itself shut.
+# KNO — Karak Norn, secretive. Field corrected to blue/red (the confirmed
+# hold colour — see file header). This lands close to ZHU's own blue/dark-red
+# above — a real collision inherited from GW's own published scheme, not an
+# authoring mistake — mitigated here by using the lighter "red" (not "red_
+# dark") and swapping ZHU's solid field for a per-bend split so the two don't
+# render as recolours of one another. Charge unchanged: generic Dawi hammers
+# walled in by a silver border, the hold that keeps itself shut.
 KNO = {
-	pattern = "pattern_solid.tga"
-	color1 = "grey"
-	color2 = "grey"
+	pattern = "pattern_per_bend.dds"
+	color1 = "blue"
+	color2 = "red"
 
 	colored_emblem = {
 		texture = "ce_border_of_3_thin.dds"
@@ -195,13 +234,17 @@ KNO = {
 	}
 }
 
-# KHI — Karak Hirn, "Horn Hold", the Vaults. Horn is canon-firm identity but no
-# horn art exists in vanilla or Realms of Exether — disclosed substitution: a
-# key for the Vaults, on a per-bend field so it never reads as KNO recoloured.
+# KHI — Karak Hirn, "Horn Hold", the Vaults. Field corrected to green (the
+# confirmed hold colour — see file header; the earlier invented grey/
+# black_light is dropped). Distinguished from AZL's own green (green_dark)
+# by using the lighter "green" plus a solid field rather than AZL's chevron
+# composition. Horn is canon-firm identity but no horn art exists in vanilla
+# or Realms of Exether — disclosed substitution: a key for the Vaults,
+# unchanged.
 KHI = {
-	pattern = "pattern_per_bend.dds"
-	color1 = "grey"
-	color2 = "black_light"
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	color2 = "green"
 
 	colored_emblem = {
 		texture = "ce_key_bremen.dds"
