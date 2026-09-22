@@ -7,6 +7,11 @@
 # + 01_wh_coa_colors.txt). Requires common/flag_definitions/07_nehekhara.txt to
 # actually render in-game (see that file's header, and 02_empire.txt's for why).
 #
+# TWW3/canon-alignment pass (2026-09-22): LYB corrected from an abstract star
+# to a serpent (Queen Khalida's actual TWW-canon patron is Asaph, the Asp
+# Goddess), and MAH's block comment corrected to "City of Priests" to match
+# a loremaster finding from scoping that was never applied to the file itself.
+#
 # Two disclosed substitutions (no literal match exists in vanilla or the RoE set):
 #   - KHM: the tomb-city's pyramid is stood in for by ce_triangle.dds (a plain
 #     triangle charge), paired with ce_cobra_coiled.dds for the royal uraeus.
@@ -110,18 +115,25 @@ LAH = {
 }
 
 ################ LYB — Lybaras ################
-# Queen Khalida's city of astronomers and scholars; azure field, a lapis star for
-# the study of the heavens.
+# Corrected (TWW3/canon-alignment pass, 2026-09-22): Lybaras's older identity
+# as Tahoth's city of scholars is real (and the star was a reasonable device
+# for it), but the city's actual TWW-canon and playable-faction identity is
+# Queen Khalida's — resurrected by, and patron of, Asaph the Asp Goddess of
+# Vengeance and Serpents; Lybaras was also the first city to build the
+# Tomb Scorpions. A serpent is the far stronger, more recognisable charge for
+# this specific city than an abstract star. Reuses ce_cobra_coiled.dds (also
+# used on KHM above for Settra's uraeus) with a distinct lapis/white recolour,
+# matching this mod's established disclosed-reuse convention.
 LYB = {
 	pattern = "pattern_solid.tga"
 	color1 = "azure"
 	color2 = "azure"
 
 	colored_emblem = {
-		texture = "ce_star_08.dds"
+		texture = "ce_cobra_coiled.dds"
 		color1 = "lapis_blue"
-		color2 = "lapis_blue"
-		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
 	}
 }
 
@@ -142,9 +154,15 @@ RAS = {
 }
 
 ################ MAH — Mahrak ################
-# The City of the Dead, necropolis of the gods; a black field, and a voided
-# (black-on-black) sun in place of a skull — no skull charge exists in vanilla or
-# the RoE set (disclosed above) — read as a dead, lightless sun over the necropolis.
+# The City of Priests — corrected here to match the loremaster's own review
+# finding (board #3629 comment 34069/34081): the earlier "necropolis of the
+# gods" epithet in this block's comment was never actually updated to the
+# approved correction, though the item's design table was. Mahrak is the seat
+# of the Nehekharan priesthood (site of Phar's civil-war purge after the
+# curse) — a black field, and a voided (black-on-black) sun in place of a
+# skull — no skull charge exists in vanilla or the RoE set (disclosed above)
+# — still reads as death/erasure, now correctly keyed to the city's actual
+# identity.
 MAH = {
 	pattern = "pattern_solid.tga"
 	color1 = "black"
