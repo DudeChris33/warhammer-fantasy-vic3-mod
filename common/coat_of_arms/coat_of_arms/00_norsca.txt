@@ -10,7 +10,14 @@
 # disclosed in the comment above its block, following the 02_empire.txt
 # precedent. Requires common/flag_definitions/00_norsca.txt (this mod's DEFAULT
 # flag_definitions block is unconditional at priority = 0 and would otherwise
-# mask every one of these) to actually render in-game.
+# mask every one of these) to actually render in-game. TWW3/canon-alignment
+# pass (2026-09-22): VAR corrected from a name-pun wolf to the tribe's actual
+# horse-nomad identity, and KVE corrected from an invented rune to a real
+# tusks/antlers trophy device matching its canon monster-hunter identity —
+# see those blocks below. ce_wolf.dds is no longer used in this file (freed
+# for 02_empire.txt's MID, Ulric's own device); the other seven tags,
+# already grounded in confirmed lore or the mod's own established map-colour
+# Chaos-god leanings, are unchanged.
 
 # SAR — Sarls. Longship — the registry's own "Wolf of the Sea" epithet is a
 # kenning for the ship itself, not the animal (literal wolf goes to VAR).
@@ -104,19 +111,25 @@ GRA = {
 	}
 }
 
-# VAR — Varg. Wolf (Vargr = wolf, Old Norse) — the clearest name-derived
-# device in the set; vanilla has no wolf art, this is the wolf substitution.
+# VAR — Varg. Corrected (TWW3/canon-alignment pass, 2026-09-22): the Varg
+# tribe's actual identity is horsemen and nomads — they hold the only good
+# horse-breeding land in Norsca (the plains of Fimbul) and are the most
+# nomadic of the Norscan tribes. "Vargr" (wolf, Old Norse) is a real
+# name-derived pun but describes no actual behaviour of this specific tribe,
+# unlike e.g. Bjornlings' bear (BJO below); the wolf is reassigned to
+# 02_empire.txt's MID (Ulric's own device) instead. ce_horse_tribal.dds — the
+# same texture as #3625 Kislev's UNG, recoloured distinctly — reads as the
+# tribe's actual horse-nomad identity.
 VAR = {
 	pattern = "pattern_solid.tga"
 	color1 = "grey"
 	color2 = "grey"
 
 	colored_emblem = {
-		texture = "ce_wolf.dds"
-		color1 = "grey"
-		color2 = "black"
-		color3 = "pearl"
-		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+		texture = "ce_horse_tribal.dds"
+		color1 = "black"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.65 0.65 } }
 	}
 }
 
@@ -135,16 +148,22 @@ HAS = {
 	}
 }
 
-# KVE — Kvelligs. Algiz rune (warding) — no totem canon exists for this
-# tribe; paired with HAS as a deliberate rune-pair rather than two unrelated
-# guesses. Device disclosed as invented.
+# KVE — Kvelligs. Corrected (TWW3/canon-alignment pass, 2026-09-22): the
+# Kvelligs are canonically a Chaos Wastes monster-hunting tribe — they wander
+# in large hunting parties pursuing the region's monstrous beasts (mammoths
+# among them) and trade the ivory, fur and bone; mammoth tusks specifically
+# are "presented in tribute to awestruck ambassadors". The earlier invented
+# Algiz rune is replaced with ce_kanty_antlers.dds (freed up by 02_empire.txt's
+# TAL moving to a crowned eagle) — a paired-tusks/antlers trophy charge that
+# reads directly off the tribe's actual identity, confirmed 2 colour slots
+# (02_empire.txt's own prior TAL usage).
 KVE = {
 	pattern = "pattern_solid.tga"
 	color1 = "todo_purple"
 	color2 = "todo_purple"
 
 	colored_emblem = {
-		texture = "ce_rune_algiz.dds"
+		texture = "ce_kanty_antlers.dds"
 		color1 = "pearl"
 		color2 = "pearl"
 		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
