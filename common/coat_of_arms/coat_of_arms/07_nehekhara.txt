@@ -1,4 +1,4 @@
-# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
 # this file does NOT load. Bespoke content per board item #3629 — the 11
 # Nehekhara country tags (common/country_definitions/07_nehekhara.txt, same order).
 # Composed entirely from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems,
