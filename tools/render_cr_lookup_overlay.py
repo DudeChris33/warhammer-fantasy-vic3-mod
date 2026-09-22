@@ -438,7 +438,7 @@ def extract_borders(label: np.ndarray, placed: np.ndarray,
     """Post-warp boundary extraction: a placed pixel whose right/down neighbour
     carries a different region colour is a border pixel.
 
-    Post-warp for the same reason ``project_regions_unified.extract_borders``
+    Post-warp for the same reason ``project_regions_unified.extract_colors``
     is: the boundary we want is the boundary of what actually landed on the
     canvas, and a single neighbour comparison over the finished label image is
     cheaper and simpler than warping a pre-extracted edge layer. A placed pixel

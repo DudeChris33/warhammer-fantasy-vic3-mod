@@ -3581,6 +3581,55 @@ def _selfcheck_reseed_dots() -> None:
            [(d.cx, d.cy, d.color, d.size) for d in again], "detect_dots not deterministic"
 
 
+def _selfcheck_extract_colors() -> None:
+    """The unified projection's --colors filter, in isolation (no golden needed).
+
+    Pins ``project_regions_unified.extract_colors`` + ``parse_colors``: keeping
+    ``magenta`` shows only the magenta layer (orange + terrain revert to the
+    globe); keeping ``magenta,orange`` shows both and reverts terrain; a painted
+    pixel outside ``placed`` is never kept; and the spec parser accepts names +
+    #rrggbb while refusing an unknown or empty spec. Determinism checked too.
+    """
+    import project_regions_unified as P
+
+    MAG, ORA = (255, 0, 255), (255, 127, 0)
+    H, W = 10, 12
+    globe = np.full((H, W, 3), (50, 60, 70), dtype=np.uint8)
+    canvas = globe.copy()
+    canvas[1:3, 1:3] = MAG           # magenta layer, placed
+    canvas[1:3, 5:7] = ORA           # orange layer, placed
+    canvas[5:7, 1:3] = (200, 150, 100)  # terrain, placed
+    canvas[8, 8] = MAG               # magenta but NOT placed
+    placed = np.zeros((H, W), dtype=bool)
+    placed[1:3, 1:3] = True
+    placed[1:3, 5:7] = True
+    placed[5:7, 1:3] = True
+
+    only_mag = P.extract_colors(canvas, globe, placed, [MAG], 12.0)
+    assert tuple(only_mag[1, 1]) == MAG, "magenta layer must be kept"
+    assert tuple(only_mag[1, 5]) == (50, 60, 70), "orange must revert (magenta-only)"
+    assert tuple(only_mag[5, 1]) == (50, 60, 70), "terrain must revert"
+    assert tuple(only_mag[8, 8]) == (50, 60, 70), "unplaced pixel must never be kept"
+
+    both = P.extract_colors(canvas, globe, placed, [MAG, ORA], 12.0)
+    assert tuple(both[1, 1]) == MAG and tuple(both[1, 5]) == ORA, "both layers kept"
+    assert tuple(both[5, 1]) == (50, 60, 70), "terrain still reverts with two colours"
+
+    again = P.extract_colors(canvas, globe, placed, [MAG, ORA], 12.0)
+    assert np.array_equal(both, again), "extract_colors not deterministic"
+
+    assert P.parse_colors("magenta,orange") == [MAG, ORA]
+    assert P.parse_colors("#ff00ff") == [MAG]
+    assert P.parse_colors(" MAGENTA , orange ") == [MAG, ORA], "case/space tolerant"
+    for bad in ("bogus", "", ",", "#ff00"):
+        try:
+            P.parse_colors(bad)
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError(f"parse_colors({bad!r}) should have raised SystemExit")
+
+
 def run_check() -> int:
     _selfcheck_wrap()
     _selfcheck_frame()
@@ -3611,6 +3660,9 @@ def run_check() -> int:
     print("reseed_dots: paired-anchor-dot fold (chroma detect + noisy-rect rule, select_new "
           "skips known, colour pairing + mismatch rejected, c_<hex> naming, determinism) "
           "self-check passed.")
+    _selfcheck_extract_colors()
+    print("project_regions_unified: --colors filter (keep named layers, revert rest to globe, "
+          "unplaced never kept, spec parser names/#hex/refusals, determinism) self-check passed.")
     _selfcheck_sea_zones()
     print("sea_zones: drawn-line extraction (in-water splits, land marks ignored) self-check passed.")
     _selfcheck_land_provinces()

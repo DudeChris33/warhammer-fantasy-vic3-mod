@@ -26,10 +26,13 @@ Sources are read directly from ``sources/`` (not through the SHA-256 manifest
 guard) — the accepted QA-render convention (see ``render_anchor_dot_example.py``):
 a QA render is evidence for a human, not pipeline input.
 
-**Borders-only.** ``--borders-only`` extracts just the magenta boundary network
-from the finished drape — every pixel further than ``--magenta-tol`` (Euclidean,
-default 12) from pure magenta reverts to the globe — the same post-warp
-extraction ``project_regions.py`` uses (see :func:`extract_borders`).
+**Colour filter.** ``--colors`` keeps only the named painted layers from the
+finished drape — every pixel further than ``--color-tol`` (Euclidean, default 12)
+from every listed colour reverts to the globe. Names come from ``NAMED_COLORS``
+(``magenta`` = the state-border network, ``orange`` = the impassable-terrain
+fill, ``cyan``) or a ``#rrggbb`` literal, comma-separated: e.g.
+``--colors magenta,orange`` shows the borders and the impassable fill with the
+globe's terrain everywhere else (see :func:`extract_colors`).
 
 **Hull buffer.** ``--hull-buffer-px`` softens only the *outer* edge of the
 piecewise-affine warp's strict hull cutoff (see ``reproject._bary_interp``): a
@@ -55,13 +58,14 @@ Usage::
 
     python tools/project_regions_unified.py --crop          # the projection (defaults are current)
     python tools/project_regions_unified.py                 # full uncropped canvas
-    python tools/project_regions_unified.py --borders-only
+    python tools/project_regions_unified.py --colors magenta,orange --crop
     python tools/project_regions_unified.py --hull-buffer-px 100 --crop
 """
 
 from __future__ import annotations
 
 import argparse
+import re
 import sys
 from pathlib import Path
 
@@ -102,14 +106,23 @@ COAST_SOURCE = "terraqueous_globe_reprojected - coasts.png"
 MAGENTA_RGB = (255, 0, 255)
 COAST_RGB = (0, 255, 255)
 
+#: Painted layers a ``--colors`` filter can keep, by name (case-insensitive).
+#: magenta = the state-border network, orange = the impassable-terrain fill —
+#: the two overlays these paintings carry. A ``#rrggbb`` literal is also accepted.
+NAMED_COLORS = {
+    "magenta": (255, 0, 255),
+    "orange": (255, 127, 0),
+    "cyan": (0, 255, 255),
+}
+
 #: Warped-alpha threshold for "this pixel shows content" (matches project_regions.py).
 ALPHA_VALID = 127.5
 #: Row block for warp evaluation — bounds the RBF's pairwise-distance temporaries.
 ROW_BLOCK = 64
 #: Framing pad (canvas px) around the placed states' bounding box.
 CROP_PAD = 64
-#: Default Euclidean RGB tolerance for --borders-only's magenta match.
-MAGENTA_TOL_DEFAULT = 12.0
+#: Default Euclidean RGB tolerance for the --colors match.
+COLOR_TOL_DEFAULT = 12.0
 #: Default --hull-buffer-px — accepted by eye (2026-09-12) against the then-current
 #: dot coverage; 100px read as too much, 50px looked right. Revisit if the dot
 #: coverage changes enough to change that judgment.
@@ -120,6 +133,32 @@ OUT_PREFIX_DEFAULT = "old_world_state_regions_on_globe_unified"
 
 def log(msg: str) -> None:
     print(msg, flush=True)
+
+
+def parse_colors(spec: str) -> list[tuple[int, int, int]]:
+    """Parse a ``--colors`` spec (``"magenta,orange"`` / ``"#ff00ff,orange"``) to RGB.
+
+    Each comma-separated token is a name in :data:`NAMED_COLORS` or a ``#rrggbb``
+    (``rrggbb``) literal. Unknown tokens and an empty list are hard errors — a
+    silent drop would render the wrong thing without saying so.
+    """
+    out: list[tuple[int, int, int]] = []
+    for tok in spec.split(","):
+        t = tok.strip().lower()
+        if not t:
+            continue
+        if t in NAMED_COLORS:
+            out.append(NAMED_COLORS[t])
+        elif re.fullmatch(r"#?[0-9a-f]{6}", t):
+            h = t.lstrip("#")
+            out.append((int(h[0:2], 16), int(h[2:4], 16), int(h[4:6], 16)))
+        else:
+            raise SystemExit(
+                f"--colors: unknown colour {tok!r}; use one of "
+                f"{', '.join(NAMED_COLORS)} or a #rrggbb literal")
+    if not out:
+        raise SystemExit("--colors: no colours given")
+    return out
 
 
 def load_rgb(name: str) -> np.ndarray:
@@ -214,32 +253,36 @@ def place_painting(fit, box: tuple[int, int, int, int], paint_rgba: np.ndarray,
     return canvas_rgb, placed
 
 
-def extract_borders(canvas_rgb: np.ndarray, globe_rgb: np.ndarray, placed: np.ndarray,
-                    tol: float) -> np.ndarray:
-    """Reduce a finished full-painting composite to just its magenta boundary network.
+def extract_colors(canvas_rgb: np.ndarray, globe_rgb: np.ndarray, placed: np.ndarray,
+                   colors: list[tuple[int, int, int]], tol: float) -> np.ndarray:
+    """Keep only the painted pixels near one of ``colors``; revert the rest to the globe.
 
-    Runs *after* :func:`place_painting` has draped the whole opaque painting
-    (fills and borders both) — never before. ``project_regions.py``'s own
-    ``extract_borders`` warns that filtering the painting down to a magenta-only
-    alpha *before* warping starves its ``canvas_owner`` partition of a broad
-    coverage signal, producing a doubled "tram track" line at crop-overlap
-    seams. This registration has no overlap to seam — one warp, one placement —
-    but post-warp extraction is still the simpler, cheaper op (a single
-    Euclidean-distance threshold over the already-resampled composite, not a
-    second warp of a magenta-only source), so the same order is kept here.
+    Generalises the former magenta-only "borders" extraction to any set of
+    painted layers — e.g. ``magenta`` (the state-border network) plus ``orange``
+    (the impassable-terrain fill). Runs *after* :func:`place_painting` has draped
+    the whole opaque painting (fills and lines both): for each listed colour a
+    smooth ``1 - distance/tol`` falloff is computed over the already-resampled
+    composite, and every pixel is blended from the globe toward the NEAREST
+    listed colour by that falloff. A pixel outside every colour's ``tol`` keeps
+    the globe, so only the chosen layers show and the globe's own terrain shows
+    through everywhere else.
 
-    ``placed`` restricts the test to pixels :func:`place_painting` actually
-    drew, and the alpha is a smooth ``1 - distance/tol`` falloff — the
-    composite was already resampled nearest, so this only decides how much of
-    that already-placed colour to keep, not where to resample from again.
+    ``placed`` restricts the test to pixels :func:`place_painting` actually drew;
+    the extraction only decides how much of that already-placed colour to keep,
+    not where to resample from again.
     """
-    r, g, b = MAGENTA_RGB
-    delta = canvas_rgb.astype(np.float32) - np.array([r, g, b], dtype=np.float32)
-    dist = np.sqrt((delta ** 2).sum(axis=2))
-    alpha = np.clip(1.0 - dist / tol, 0.0, 1.0) * placed
-    bg = globe_rgb.astype(np.float32)
-    mg = np.array(MAGENTA_RGB, dtype=np.float32)
-    out = bg * (1.0 - alpha[..., None]) + mg * alpha[..., None]
+    gb = globe_rgb.astype(np.float32)
+    canvas = canvas_rgb.astype(np.float32)
+    out = gb.copy()
+    best = np.zeros(placed.shape, dtype=np.float32)
+    for col in colors:
+        c = np.array(col, dtype=np.float32)
+        dist = np.sqrt(((canvas - c) ** 2).sum(axis=2))
+        alpha = np.clip(1.0 - dist / tol, 0.0, 1.0) * placed
+        take = alpha > best
+        a = alpha[take][:, None]
+        out[take] = gb[take] * (1.0 - a) + c * a
+        best[take] = alpha[take]
     return np.clip(out, 0, 255).astype(np.uint8)
 
 
@@ -269,7 +312,8 @@ def placement_box(placed: np.ndarray, pad: int) -> tuple[int, int, int, int]:
 def build(pad: int, out_prefix: str,
           paint_source: str = PAINT_SOURCE, overlay_coasts: bool = True,
           full_frame: bool = True, globe_source: str = GLOBE_SOURCE,
-          borders_only: bool = False, magenta_tol: float = MAGENTA_TOL_DEFAULT,
+          colors: list[tuple[int, int, int]] | None = None,
+          color_tol: float = COLOR_TOL_DEFAULT,
           hull_buffer_px: float = HULL_BUFFER_PX_DEFAULT) -> Path:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     if FULL_SOURCE not in regs:
@@ -311,10 +355,11 @@ def build(pad: int, out_prefix: str,
     label = "full frame" if full_frame else "crop box"
     log(f"{label:<13} canvas [{x0}, {y0}, {x1}, {y1}]  ({x1 - x0}x{y1 - y0})")
 
-    if borders_only:
-        canvas_rgb = extract_borders(canvas_rgb, globe_rgb, placed, magenta_tol)
+    if colors:
+        canvas_rgb = extract_colors(canvas_rgb, globe_rgb, placed, colors, color_tol)
         kept = int((canvas_rgb != globe_rgb).any(axis=2).sum())
-        log(f"borders-only  kept {kept:,} px within {magenta_tol} of magenta "
+        swatches = ", ".join(str(tuple(c)) for c in colors)
+        log(f"colors        kept {kept:,} px within {color_tol} of [{swatches}] "
             f"(of {int(placed.sum()):,} placed)")
     n_coast = overlay_coast(canvas_rgb, coasts_rgba) if coasts_rgba is not None else 0
 
@@ -345,15 +390,16 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--globe", default=GLOBE_SOURCE,
                    help=f"the backdrop to drape the painting over (default {GLOBE_SOURCE}); "
                         f"must share the canvas frame ({CANVAS_W}x{CANVAS_H})")
-    p.add_argument("--borders-only", action="store_true",
-                   help="extract just the magenta boundary network from the finished drape "
-                        "(pixels within --magenta-tol of pure magenta), so only the border "
-                        "lines show and the globe's own terrain shows through everywhere "
-                        "else — the painting itself is still draped in full (fills and all) "
-                        "first; see extract_borders")
-    p.add_argument("--magenta-tol", type=float, default=MAGENTA_TOL_DEFAULT,
-                   help=f"--borders-only's Euclidean RGB match tolerance to pure magenta "
-                        f"(default {MAGENTA_TOL_DEFAULT})")
+    p.add_argument("--colors", default=None,
+                   help="keep only these painted layers from the finished drape (comma-"
+                        "separated), reverting everything else to the globe's own terrain — "
+                        f"the painting is still draped in full first. Names: "
+                        f"{', '.join(NAMED_COLORS)}, or a #rrggbb literal. "
+                        "e.g. --colors magenta,orange keeps the state borders + the "
+                        "impassable fill; see extract_colors")
+    p.add_argument("--color-tol", type=float, default=COLOR_TOL_DEFAULT,
+                   help=f"--colors' Euclidean RGB match tolerance to each named colour "
+                        f"(default {COLOR_TOL_DEFAULT})")
     p.add_argument("--hull-buffer-px", type=float, default=HULL_BUFFER_PX_DEFAULT,
                    help="extrapolate this many canvas px past the OUTER hull edge only "
                         "(nearest hull vertex's own triangle, unclamped) instead of the "
@@ -363,13 +409,15 @@ def main(argv: list[str] | None = None) -> int:
                         f"pass 0 for the strict, no-extrapolation behaviour)")
     args = p.parse_args(argv)
 
+    colors = parse_colors(args.colors) if args.colors else None
     out_prefix = args.out_prefix
-    if args.borders_only and out_prefix == OUT_PREFIX_DEFAULT:
-        out_prefix = f"{out_prefix}_borders_only"
+    if colors and out_prefix == OUT_PREFIX_DEFAULT:
+        tag = re.sub(r"[^0-9a-z]+", "_", args.colors.strip().lower()).strip("_")
+        out_prefix = f"{out_prefix}_{tag}"
     build(args.pad, out_prefix,
           paint_source=args.paint, overlay_coasts=not args.no_coast,
           full_frame=not args.crop, globe_source=args.globe,
-          borders_only=args.borders_only, magenta_tol=args.magenta_tol,
+          colors=colors, color_tol=args.color_tol,
           hull_buffer_px=args.hull_buffer_px)
     return 0
 
