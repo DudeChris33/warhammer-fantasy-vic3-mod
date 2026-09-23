@@ -3862,53 +3862,82 @@ def _selfcheck_reseed_dots() -> None:
            [(d.cx, d.cy, d.color, d.size) for d in again], "detect_dots not deterministic"
 
 
-def _selfcheck_extract_colors() -> None:
-    """The unified projection's --colors filter, in isolation (no golden needed).
+def _selfcheck_parse_layers() -> None:
+    """The unified projection's ``--colors`` -> ora-layer resolution, in isolation
+    (no golden needed, no dependency on the real gitignored .ora).
 
-    Pins ``project_regions_unified.extract_colors`` + ``parse_colors``: keeping
-    ``magenta`` shows only the magenta layer (orange + terrain revert to the
-    globe); keeping ``magenta,orange`` shows both and reverts terrain; a painted
-    pixel outside ``placed`` is never kept; and the spec parser accepts names +
-    #rrggbb while refusing an unknown or empty spec. Determinism checked too.
+    Pins ``project_regions_unified.parse_layers``: a name resolves to its
+    ``NAMED_LAYERS`` entry, a matching ``#rrggbb`` literal resolves to the same
+    layer, a repeated layer (by name or by its equivalent hex) is deduped
+    keeping first-seen order, and an unknown name / a hex matching no layer's
+    flat-fill colour / an empty spec all raise ``SystemExit``.
     """
     import project_regions_unified as P
 
-    MAG, ORA = (255, 0, 255), (255, 127, 0)
-    H, W = 10, 12
-    globe = np.full((H, W, 3), (50, 60, 70), dtype=np.uint8)
-    canvas = globe.copy()
-    canvas[1:3, 1:3] = MAG           # magenta layer, placed
-    canvas[1:3, 5:7] = ORA           # orange layer, placed
-    canvas[5:7, 1:3] = (200, 150, 100)  # terrain, placed
-    canvas[8, 8] = MAG               # magenta but NOT placed
-    placed = np.zeros((H, W), dtype=bool)
-    placed[1:3, 1:3] = True
-    placed[1:3, 5:7] = True
-    placed[5:7, 1:3] = True
+    assert P.parse_layers("magenta,orange") == [
+        ("magenta", "state_regions", (255, 0, 255)),
+        ("orange", "impassable", (255, 127, 0)),
+    ]
+    assert P.parse_layers("#ff00ff") == [("magenta", "state_regions", (255, 0, 255))]
+    assert P.parse_layers(" MAGENTA , orange ") == [
+        ("magenta", "state_regions", (255, 0, 255)),
+        ("orange", "impassable", (255, 127, 0)),
+    ], "case/space tolerant"
+    assert P.parse_layers("magenta,#ff00ff,magenta") == [
+        ("magenta", "state_regions", (255, 0, 255))
+    ], "a repeated layer (by name or equivalent hex) is deduped, first-seen order kept"
 
-    only_mag = P.extract_colors(canvas, globe, placed, [MAG], 12.0)
-    assert tuple(only_mag[1, 1]) == MAG, "magenta layer must be kept"
-    assert tuple(only_mag[1, 5]) == (50, 60, 70), "orange must revert (magenta-only)"
-    assert tuple(only_mag[5, 1]) == (50, 60, 70), "terrain must revert"
-    assert tuple(only_mag[8, 8]) == (50, 60, 70), "unplaced pixel must never be kept"
-
-    both = P.extract_colors(canvas, globe, placed, [MAG, ORA], 12.0)
-    assert tuple(both[1, 1]) == MAG and tuple(both[1, 5]) == ORA, "both layers kept"
-    assert tuple(both[5, 1]) == (50, 60, 70), "terrain still reverts with two colours"
-
-    again = P.extract_colors(canvas, globe, placed, [MAG, ORA], 12.0)
-    assert np.array_equal(both, again), "extract_colors not deterministic"
-
-    assert P.parse_colors("magenta,orange") == [MAG, ORA]
-    assert P.parse_colors("#ff00ff") == [MAG]
-    assert P.parse_colors(" MAGENTA , orange ") == [MAG, ORA], "case/space tolerant"
-    for bad in ("bogus", "", ",", "#ff00"):
+    for bad in ("bogus", "", ",", "#ff00", "#00ffff"):
         try:
-            P.parse_colors(bad)
+            P.parse_layers(bad)
         except SystemExit:
             pass
         else:
-            raise AssertionError(f"parse_colors({bad!r}) should have raised SystemExit")
+            raise AssertionError(f"parse_layers({bad!r}) should have raised SystemExit")
+
+
+def _selfcheck_composite_layers_over() -> None:
+    """``project_regions_unified.composite_layers_over``, in isolation.
+
+    A single layer passes through unchanged; a fully-opaque top layer replaces
+    the bottom everywhere; a partially-transparent top layer's opaque pixels
+    win and its transparent pixels leave the bottom showing, alpha itself
+    accumulating (over, not replace); an empty list raises; and two runs are
+    byte-identical.
+    """
+    import project_regions_unified as P
+
+    H, W = 4, 4
+    bottom = np.zeros((H, W, 4), dtype=np.uint8)
+    bottom[..., :3] = (10, 20, 30)
+    bottom[..., 3] = 255
+
+    solo = P.composite_layers_over([bottom])
+    assert np.array_equal(solo, bottom), "a single layer must pass through unchanged"
+
+    opaque_top = np.zeros((H, W, 4), dtype=np.uint8)
+    opaque_top[..., :3] = (200, 0, 0)
+    opaque_top[..., 3] = 255
+    over_opaque = P.composite_layers_over([bottom, opaque_top])
+    assert np.array_equal(over_opaque, opaque_top), \
+        "a fully-opaque top layer must replace the bottom everywhere"
+
+    partial_top = np.zeros((H, W, 4), dtype=np.uint8)
+    partial_top[1:3, 1:3] = (0, 200, 0, 255)  # opaque patch, rest transparent
+    over_partial = P.composite_layers_over([bottom, partial_top])
+    assert tuple(over_partial[1, 1]) == (0, 200, 0, 255), "opaque top pixel must win"
+    assert tuple(over_partial[0, 0]) == tuple(bottom[0, 0]), \
+        "transparent top pixel must leave the bottom showing"
+
+    again = P.composite_layers_over([bottom, partial_top])
+    assert np.array_equal(over_partial, again), "composite_layers_over not deterministic"
+
+    try:
+        P.composite_layers_over([])
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("composite_layers_over([]) should have raised ValueError")
 
 
 def run_check() -> int:
@@ -3941,9 +3970,12 @@ def run_check() -> int:
     print("reseed_dots: paired-anchor-dot fold (chroma detect + noisy-rect rule, select_new "
           "skips known, colour pairing + mismatch rejected, c_<hex> naming, determinism) "
           "self-check passed.")
-    _selfcheck_extract_colors()
-    print("project_regions_unified: --colors filter (keep named layers, revert rest to globe, "
-          "unplaced never kept, spec parser names/#hex/refusals, determinism) self-check passed.")
+    _selfcheck_parse_layers()
+    print("project_regions_unified: --colors -> ora-layer resolution (names/#hex, dedup, "
+          "refusals) self-check passed.")
+    _selfcheck_composite_layers_over()
+    print("project_regions_unified: layer compositing (single pass-through, opaque replace, "
+          "partial over, determinism, empty refused) self-check passed.")
     _selfcheck_sea_zones()
     print("sea_zones: drawn-line extraction (in-water splits, land marks ignored) self-check passed.")
     _selfcheck_land_provinces()
