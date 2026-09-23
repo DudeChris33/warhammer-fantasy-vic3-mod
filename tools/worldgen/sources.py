@@ -4,11 +4,14 @@
 ``sources/`` is gitignored (third-party IP + ~40 MB of binaries). Committed in
 its place:
 
-  * ``tools/SOURCES.md``          — this manifest: filename, dims, bytes, SHA-256,
-                                     origin, role, and whether the source has a
-                                     registration record.
-  * ``tools/registration/*.json`` — how each *registered* source maps onto the
-                                     canvas (validated by ``schema.py``).
+  * ``tools/SOURCES.md``                — this manifest: filename, dims, bytes,
+                                           SHA-256, origin, role, and whether the
+                                           source has a registration record.
+  * ``tools/registration/*.json``       — how each *registered* source maps onto
+                                           the canvas (validated by ``schema.py``).
+  * ``tools/config/source_layers.json`` — the ref table mapping each hand-painted
+                                           canvas input to a ``<file>.ora#<layer>``
+                                           or bare flat-filename reference.
 
 This module is the loader the ingestion stage (S2/S3) reads sources through. It
 verifies a source's SHA-256 against the committed manifest **before** the bytes
@@ -20,6 +23,11 @@ The machine-readable manifest is the Markdown table between the
 ``<!-- MANIFEST:BEGIN -->`` / ``<!-- MANIFEST:END -->`` markers in
 ``tools/SOURCES.md``; prose outside the markers is preserved across updates.
 
+An .ora (OpenRaster) file is a zip: ``mimetype``, ``data/NNN.png`` per layer,
+``mergedimage.png``, a thumbnail, and ``stack.xml`` listing each layer's
+``name``/``src``/``x``/``y``. Layers are read by their ``stack.xml`` name — the
+extracted PNG filenames are just numbered, but the names survive the export.
+
 Usage::
 
     python tools/worldgen/sources.py --verify           # default — the offline S1 gate
@@ -30,8 +38,11 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import io
 import json
 import sys
+import xml.etree.ElementTree as ET
+import zipfile
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -47,17 +58,17 @@ REPO_ROOT = TOOLS_DIR.parent
 SOURCES_DIR = REPO_ROOT / "sources"
 MANIFEST_PATH = TOOLS_DIR / "SOURCES.md"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
+SOURCE_LAYERS_PATH = TOOLS_DIR / "config" / "source_layers.json"
 
-#: ``sources/`` is organized into subfolders by role (raw references in
-#: ``originals/``, GIMP editable masters in ``gimp/``, GIMP-exported PNGs in
-#: ``gimp_exports/``, the paired-anchor-dot workflow's crops/examples in
-#: ``dots/`` — plus numbered ``dots_N/`` folders the user has since split
-#: later dot-marking batches into, e.g. ``dots_3/``, ``dots_4/``; unrelated to
-#: the "- dots_N" filename suffix, which is a per-region iteration counter,
-#: not a folder name) — a file may live directly under ``sources/`` or in one
-#: of these. ``WIP/`` holds local scratch not tracked in the manifest, so it
-#: is deliberately excluded from both search and refresh.
-SOURCE_SUBDIRS = ("originals", "gimp", "gimp_exports", "dots", "dots_3", "dots_4")
+#: The folders under ``sources/`` that tools search, alongside the root itself:
+#: raw references (``originals/``), the current canvas-scale GIMP masters and
+#: their per-.xcf .ora exports (``oldworld-first/``), and the two paired-anchor-
+#: dot batches still in active use (``dots-triangles/``, ``dots-mega/``).
+#: ``archive/`` (retired sources, including the five-crop dot-marking sheets —
+#: board #5403), ``WIP/`` (local scratch, not manifest-tracked) and
+#: ``cr_oldworld_campaign/`` (its own dataset loader) are deliberately excluded
+#: from both search and refresh.
+SOURCE_SUBDIRS = ("originals", "oldworld-first", "dots-triangles", "dots-mega")
 
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"
@@ -71,6 +82,11 @@ _NA_DIMS = "n/a"
 
 class ManifestError(RuntimeError):
     """A source failed to verify against the committed manifest."""
+
+
+class OraError(ManifestError):
+    """An .ora (OpenRaster) file or a requested layer inside it is malformed,
+    missing, ambiguous, or empty."""
 
 
 @dataclass(frozen=True)
@@ -100,24 +116,46 @@ def sha256_of(path: Path) -> str:
     return h.hexdigest()
 
 
+def split_ref(ref: str) -> tuple[str, str | None]:
+    """Split a source reference on the **last** ``#``, but only when the part
+    before it ends in ``.ora`` (case-insensitive) — otherwise ``ref`` is a bare
+    filename (which may itself legally contain a literal ``#``) and this
+    returns ``(ref, None)`` unchanged."""
+    if "#" in ref:
+        file_part, _, layer_part = ref.rpartition("#")
+        if file_part.lower().endswith(".ora"):
+            return file_part, layer_part
+    return ref, None
+
+
 def resolve_source_path(name: str, sources_dir: Path = SOURCES_DIR) -> Path:
-    """Find a manifest filename under ``sources_dir``, checking the root first
+    """Find a manifest filename (or a ``<file>.ora#<layer>`` reference — only
+    the file part is resolved) under ``sources_dir``, checking the root first
     and then each of :data:`SOURCE_SUBDIRS`. Returns ``sources_dir / name``
     (whether or not it exists) when no match is found, so callers get the same
     "expected here" path in their missing-file errors as before subfolders
     existed."""
-    direct = sources_dir / name
+    file, _ = split_ref(name)
+    direct = sources_dir / file
     if direct.is_file():
         return direct
     for sub in SOURCE_SUBDIRS:
-        candidate = sources_dir / sub / name
+        candidate = sources_dir / sub / file
         if candidate.is_file():
             return candidate
     return direct
 
 
 def image_dims(path: Path) -> str:
-    """``"WxH"`` for an image Pillow can open, else :data:`_NA_DIMS`."""
+    """``"WxH"`` for an image Pillow can open, else :data:`_NA_DIMS`. For an
+    ``.ora``, reads ``stack.xml``'s own ``w``/``h`` instead (Pillow can't open
+    the zip directly as an image)."""
+    if path.suffix.lower() == ".ora":
+        try:
+            w, h, _ = _parse_ora_stack(path)
+            return f"{w}x{h}"
+        except Exception:
+            return _NA_DIMS
     try:
         from PIL import Image
 
@@ -125,6 +163,185 @@ def image_dims(path: Path) -> str:
             return f"{im.size[0]}x{im.size[1]}"
     except Exception:
         return _NA_DIMS
+
+
+# ---------------------------------------------------------------------------
+# .ora (OpenRaster) layer reader
+# ---------------------------------------------------------------------------
+
+def _parse_ora_stack(path: Path) -> tuple[int, int, list[ET.Element]]:
+    """Return ``(w, h, layer_elements)`` for ``path``'s ``stack.xml``, in
+    document order. Raises :class:`OraError` on anything malformed: a missing
+    or wrong ``mimetype``, an unparsable ``stack.xml``, a non-``<image>``
+    root, missing/invalid ``w``/``h``, not exactly one child ``<stack>``, or a
+    nested ``<stack>`` (layer groups are unsupported)."""
+    with zipfile.ZipFile(path) as zf:
+        try:
+            mimetype = zf.read("mimetype")
+        except KeyError as exc:
+            raise OraError(f"{path}: missing 'mimetype' entry — not a valid .ora") from exc
+        if mimetype != b"image/openraster":
+            raise OraError(f"{path}: mimetype is {mimetype!r}, expected b'image/openraster'")
+        try:
+            xml_bytes = zf.read("stack.xml")
+        except KeyError as exc:
+            raise OraError(f"{path}: missing 'stack.xml' entry — not a valid .ora") from exc
+
+    try:
+        root = ET.fromstring(xml_bytes)
+    except ET.ParseError as exc:
+        raise OraError(f"{path}: malformed stack.xml ({exc})") from exc
+
+    if root.tag != "image":
+        raise OraError(f"{path}: stack.xml root is <{root.tag}>, expected <image>")
+    try:
+        w = int(root.attrib["w"])
+        h = int(root.attrib["h"])
+    except (KeyError, ValueError) as exc:
+        raise OraError(f"{path}: stack.xml <image> has a missing or invalid w/h") from exc
+    if w <= 0 or h <= 0:
+        raise OraError(f"{path}: stack.xml <image> w/h must be positive, got {w}x{h}")
+
+    stacks = [c for c in root if c.tag == "stack"]
+    if len(stacks) != 1:
+        raise OraError(
+            f"{path}: stack.xml <image> must have exactly one child <stack>, found {len(stacks)}"
+        )
+
+    layers: list[ET.Element] = []
+    for child in stacks[0]:
+        if child.tag == "stack":
+            raise OraError(f"{path}: nested <stack> (layer groups) are unsupported")
+        if child.tag == "layer":
+            layers.append(child)
+
+    return w, h, layers
+
+
+def ora_layer_names(path: Path) -> list[str]:
+    """The layer names in ``path``'s ``stack.xml``, in document order."""
+    _, _, layers = _parse_ora_stack(path)
+    names: list[str] = []
+    for layer in layers:
+        name = layer.attrib.get("name")
+        if name is None:
+            raise OraError(f"{path}: a <layer> is missing 'name'")
+        names.append(name)
+    return names
+
+
+def read_ora_layer(path: Path, name: str, *, allow_empty: bool = False):
+    """Return the layer named ``name`` in the .ora at ``path`` as an
+    ``(H, W, 4)`` uint8 RGBA array at the image's full ``w``x``h`` canvas,
+    composited at the layer's ``x``/``y`` offset (clipped at the canvas
+    edges — handles negative offsets and overhanging layers) with RGB zeroed
+    wherever alpha is 0. Hidden and edit-locked layers are readable;
+    ``opacity``/``visibility``/``composite-op``/``edit-locked`` are ignored —
+    this returns the raw painted pixels.
+
+    Reads the zip directly; never extracts it.
+
+    Raises :class:`OraError` on a missing/malformed archive, a requested name
+    matching zero or more than one layer (zero lists the available names), a
+    layer missing ``name``/``src`` or a ``src`` absent from the archive, or an
+    all-transparent layer (unless ``allow_empty=True``)."""
+    import numpy as np
+    from PIL import Image
+
+    w, h, layers = _parse_ora_stack(path)
+
+    names: list[str] = []
+    matches: list[ET.Element] = []
+    for layer in layers:
+        layer_name = layer.attrib.get("name")
+        if layer_name is None:
+            raise OraError(f"{path}: a <layer> is missing 'name'")
+        names.append(layer_name)
+        if layer_name == name:
+            matches.append(layer)
+
+    if not matches:
+        raise OraError(f"{path}: no layer named '{name}' — available: {', '.join(names)}")
+    if len(matches) > 1:
+        raise OraError(
+            f"{path}: layer name '{name}' matches {len(matches)} layers, expected exactly one"
+        )
+
+    layer = matches[0]
+    src = layer.attrib.get("src")
+    if not src:
+        raise OraError(f"{path}: layer '{name}' is missing 'src'")
+    try:
+        x = int(layer.attrib.get("x", 0))
+        y = int(layer.attrib.get("y", 0))
+    except ValueError as exc:
+        raise OraError(f"{path}: layer '{name}' has a non-integer x/y") from exc
+
+    with zipfile.ZipFile(path) as zf:
+        if src not in zf.namelist():
+            raise OraError(f"{path}: layer '{name}' src '{src}' not found in the archive")
+        with Image.open(io.BytesIO(zf.read(src))) as im:
+            layer_img = np.asarray(im.convert("RGBA"), dtype=np.uint8)
+
+    canvas = np.zeros((h, w, 4), dtype=np.uint8)
+    lh, lw = layer_img.shape[:2]
+    dst_x0, dst_y0 = max(x, 0), max(y, 0)
+    dst_x1, dst_y1 = min(x + lw, w), min(y + lh, h)
+    if dst_x1 > dst_x0 and dst_y1 > dst_y0:
+        src_x0, src_y0 = dst_x0 - x, dst_y0 - y
+        src_x1, src_y1 = src_x0 + (dst_x1 - dst_x0), src_y0 + (dst_y1 - dst_y0)
+        canvas[dst_y0:dst_y1, dst_x0:dst_x1] = layer_img[src_y0:src_y1, src_x0:src_x1]
+
+    canvas[canvas[..., 3] == 0, :3] = 0
+
+    if not allow_empty and not bool((canvas[..., 3] > 0).any()):
+        raise OraError(f"layer '{name}' in {path} is empty — re-export")
+
+    return canvas
+
+
+# ---------------------------------------------------------------------------
+# tools/config/source_layers.json — the one ref table every consumer reads
+# ---------------------------------------------------------------------------
+
+def load_source_layers(path: Path = SOURCE_LAYERS_PATH) -> dict[str, str]:
+    """Parse the hand-authored ref table: a JSON object of non-empty string
+    values, each a ``<file>.ora#<layer>`` reference (must carry ``#layer``) or
+    a bare flat filename (must carry no ``#`` at all). Raises
+    :class:`ManifestError` on anything else."""
+    try:
+        data = json.loads(path.read_text(encoding="utf-8"))
+    except json.JSONDecodeError as exc:
+        raise ManifestError(f"{path.name}: invalid JSON ({exc})") from exc
+    if not isinstance(data, dict):
+        raise ManifestError(f"{path.name}: must be a JSON object of key -> ref strings")
+
+    table: dict[str, str] = {}
+    for key, ref in data.items():
+        if not isinstance(ref, str) or not ref.strip():
+            raise ManifestError(f"{path.name}: '{key}' must be a non-empty string")
+        file, layer = split_ref(ref)
+        is_ora = file.lower().endswith(".ora")
+        if is_ora and layer is None:
+            raise ManifestError(
+                f"{path.name}: '{key}' ({ref!r}) is an .ora reference with no '#layer'"
+            )
+        if not is_ora and "#" in ref:
+            raise ManifestError(
+                f"{path.name}: '{key}' ({ref!r}) is not an .ora file but carries a '#'"
+            )
+        table[key] = ref
+    return table
+
+
+def source_ref(key: str, path: Path = SOURCE_LAYERS_PATH) -> str:
+    """The configured source reference for ``key`` in ``source_layers.json``."""
+    table = load_source_layers(path)
+    if key not in table:
+        raise ManifestError(
+            f"'{key}' is not a key in {path.name} — known keys: {', '.join(sorted(table))}"
+        )
+    return table[key]
 
 
 # ---------------------------------------------------------------------------
@@ -188,6 +405,7 @@ def verify(
     sources_dir: Path = SOURCES_DIR,
     manifest_path: Path = MANIFEST_PATH,
     registration_dir: Path = REGISTRATION_DIR,
+    source_layers_path: Path = SOURCE_LAYERS_PATH,
 ) -> list[str]:
     """Return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -293,6 +511,44 @@ def verify(
             if not (0 <= cxx <= w_canvas and 0 <= cyy <= h_canvas):
                 errors.append(f"{reg.source}: control_points[{i}].canvas ({cxx}, {cyy}) outside the canvas {w_canvas}x{h_canvas}")
 
+    # 4. Configured source refs (tools/config/source_layers.json): every entry's
+    #    container file resolves, has a manifest row, and — for an .ora — names
+    #    a layer that exists exactly once in stack.xml. Emptiness is not checked
+    #    here; the consumer decides whether an empty layer is acceptable.
+    try:
+        table = load_source_layers(source_layers_path)
+    except FileNotFoundError:
+        # No ref table at this path — nothing configured to check (used by the
+        # ingest/boundary fixture harnesses, which pass a deliberately absent
+        # path since their synthetic sources_dir has no bearing on the real
+        # committed tools/config/source_layers.json).
+        table = {}
+    except ManifestError as exc:
+        errors.append(str(exc))
+        table = {}
+    for key, ref in table.items():
+        file, layer = split_ref(ref)
+        path = resolve_source_path(file, sources_dir)
+        if not path.is_file():
+            errors.append(f"{key}: {file} not found under sources/ or its searched subfolders")
+            continue
+        if file not in by_file:
+            errors.append(f"{key}: {file} has no row in {manifest_path.name}")
+            continue
+        if layer is not None:
+            try:
+                names = ora_layer_names(path)
+            except OraError as exc:
+                errors.append(f"{key}: {exc}")
+                continue
+            count = names.count(layer)
+            if count == 0:
+                errors.append(f"{key}: layer '{layer}' not found in {file} — available: {', '.join(names)}")
+            elif count > 1:
+                errors.append(
+                    f"{key}: layer '{layer}' matches {count} layers in {file}, expected exactly one"
+                )
+
     return errors
 
 
@@ -300,40 +556,58 @@ def verify(
 # Verified image loader — the entry point the ingestion stage reads through
 # ---------------------------------------------------------------------------
 
+def _verified_path(ref: str, sources_dir: Path, manifest_path: Path) -> Path:
+    """Resolve the container file of ``ref`` (a bare filename or a
+    ``<file>.ora#<layer>`` reference) against ``manifest_path``, confirming
+    its SHA-256. Raises :class:`ManifestError` on a missing row/file or a
+    hash mismatch — never returns a path to unverified bytes."""
+    file, _ = split_ref(ref)
+    rows = {r.file: r for r in parse_manifest(manifest_path.read_text(encoding="utf-8"))}
+    if file not in rows:
+        raise ManifestError(f"'{file}' is not in {manifest_path.name}")
+    path = resolve_source_path(file, sources_dir)
+    if not path.is_file():
+        raise ManifestError(f"sources/{file} is missing locally")
+    actual = sha256_of(path)
+    if actual != rows[file].sha256:
+        raise ManifestError(
+            f"{file}: SHA-256 mismatch (manifest {rows[file].sha256[:12]}… "
+            f"local {actual[:12]}…) — refusing to read an unverified source"
+        )
+    return path
+
+
 def load_source_image(
-    filename: str,
+    ref: str,
     sources_dir: Path = SOURCES_DIR,
     manifest_path: Path = MANIFEST_PATH,
 ):
     """Return the source as an ``(H, W, 3)`` uint8 RGB array, **after** confirming
-    its SHA-256 matches the committed manifest. Raises :class:`ManifestError` on a
-    missing/altered file — never returns unverified bytes."""
+    its container file's SHA-256 matches the committed manifest. ``ref`` is
+    either a bare manifest filename or a ``<file>.ora#<layer>`` reference, in
+    which case the named layer is composited and its RGB channels returned.
+    Raises :class:`ManifestError` on a missing/altered file, or
+    :class:`OraError` on a malformed/missing/ambiguous/empty layer — never
+    returns unverified bytes."""
     import numpy as np
     from PIL import Image
 
-    rows = {r.file: r for r in parse_manifest(manifest_path.read_text(encoding="utf-8"))}
-    if filename not in rows:
-        raise ManifestError(f"'{filename}' is not in {manifest_path.name}")
-    path = resolve_source_path(filename, sources_dir)
-    if not path.is_file():
-        raise ManifestError(f"sources/{filename} is missing locally")
-    actual = sha256_of(path)
-    if actual != rows[filename].sha256:
-        raise ManifestError(
-            f"{filename}: SHA-256 mismatch (manifest {rows[filename].sha256[:12]}… "
-            f"local {actual[:12]}…) — refusing to read an unverified source"
-        )
+    path = _verified_path(ref, sources_dir, manifest_path)
+    _, layer = split_ref(ref)
+    if layer is not None:
+        return read_ora_layer(path, layer)[..., :3]
+    if path.suffix.lower() == ".ora":
+        raise OraError(f"{ref}: an .ora reference needs a '#layer' suffix")
     with Image.open(path) as im:
         return np.asarray(im.convert("RGB"), dtype=np.uint8)
 
 
 def load_source_image_rgba(
-    filename: str,
+    ref: str,
     sources_dir: Path = SOURCES_DIR,
     manifest_path: Path = MANIFEST_PATH,
 ):
-    """Return ``(rgb, alpha)`` for a source, after the same SHA-256 guard as
-    :func:`load_source_image`.
+    """Like :func:`load_source_image`, but returns ``(rgb, alpha)``.
 
     ``rgb`` is an ``(H, W, 3)`` uint8 array exactly as :func:`load_source_image`
     would return. ``alpha`` is an ``(H, W)`` uint8 array **only** when the source
@@ -348,18 +622,16 @@ def load_source_image_rgba(
     import numpy as np
     from PIL import Image
 
-    rows = {r.file: r for r in parse_manifest(manifest_path.read_text(encoding="utf-8"))}
-    if filename not in rows:
-        raise ManifestError(f"'{filename}' is not in {manifest_path.name}")
-    path = resolve_source_path(filename, sources_dir)
-    if not path.is_file():
-        raise ManifestError(f"sources/{filename} is missing locally")
-    actual = sha256_of(path)
-    if actual != rows[filename].sha256:
-        raise ManifestError(
-            f"{filename}: SHA-256 mismatch (manifest {rows[filename].sha256[:12]}… "
-            f"local {actual[:12]}…) — refusing to read an unverified source"
-        )
+    path = _verified_path(ref, sources_dir, manifest_path)
+    _, layer = split_ref(ref)
+    if layer is not None:
+        rgba = read_ora_layer(path, layer)
+        rgb, alpha = rgba[..., :3], rgba[..., 3]
+        if int(alpha.min()) < 255:
+            return rgb, alpha
+        return rgb, None
+    if path.suffix.lower() == ".ora":
+        raise OraError(f"{ref}: an .ora reference needs a '#layer' suffix")
     with Image.open(path) as im:
         rgb = np.asarray(im.convert("RGB"), dtype=np.uint8)
         if im.mode in ("RGBA", "LA", "PA") or "transparency" in im.info:
@@ -367,6 +639,36 @@ def load_source_image_rgba(
             if int(alpha.min()) < 255:
                 return rgb, alpha
         return rgb, None
+
+
+def read_source_rgba(
+    ref: str,
+    sources_dir: Path = SOURCES_DIR,
+    *,
+    allow_empty: bool = False,
+):
+    """Unverified loader for the dev renders and other reads that don't need
+    (or can't afford) the manifest SHA-256 guard. Resolves ``ref`` (a bare
+    flat filename or a ``<file>.ora#<layer>`` reference) under
+    ``sources_dir``, returning ``None`` when the container file is absent and
+    otherwise an ``(H, W, 4)`` uint8 RGBA array with RGB zeroed under alpha 0
+    — for a layer ref and a flat file alike, since the tools detect exact
+    paint colours and a fully-transparent pixel's stored RGB is meaningless."""
+    import numpy as np
+    from PIL import Image
+
+    file, layer = split_ref(ref)
+    path = resolve_source_path(file, sources_dir)
+    if not path.is_file():
+        return None
+    if layer is not None:
+        return read_ora_layer(path, layer, allow_empty=allow_empty)
+    if path.suffix.lower() == ".ora":
+        raise OraError(f"{ref}: an .ora reference needs a '#layer' suffix")
+    with Image.open(path) as im:
+        arr = np.array(im.convert("RGBA"), dtype=np.uint8)
+    arr[arr[..., 3] == 0, :3] = 0
+    return arr
 
 
 def _derived_seed(source: str) -> dict | None:

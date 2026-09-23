@@ -1,0 +1,9 @@
+{
+  "coast_trace": "terraqueous_globe_reprojected - full.ora#coasts",
+  "coastline_fill": "land_sea_mask.png",
+  "rivers": "terraqueous_globe_reprojected - full.ora#rivers",
+  "sea_zones": "terraqueous_globe_reprojected - full.ora#sea_zones",
+  "state_borders": "terraqueous_globe_reprojected - full.ora#borders",
+  "impassable": "terraqueous_globe_reprojected - full.ora#impassable",
+  "island_overrides": "terraqueous_globe_reprojected - tiny_islands_merger.png"
+}
