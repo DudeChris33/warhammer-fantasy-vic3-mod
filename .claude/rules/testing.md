@@ -279,7 +279,7 @@ render, outside the gate above: a numbered review PNG + a `tools/derived/`
 worksheet sidecar that round-trips names already committed in
 `tools/config/land_regions_worksheet.csv` forward (never overwrites them),
 draping the real TWW3 parchment art under the tinted regions via
-`tools/project_regions.py`'s existing five-crop registration wherever it covers
+`tools/project_regions_unified.py`'s single triangle-warp registration wherever it covers
 the canvas (an `on_parchment` CSV column flags which regions that is), so the
 person doing the canon-naming pass reads real printed names off the render
 directly. Two earlier automated-guess attempts were tried and dropped
