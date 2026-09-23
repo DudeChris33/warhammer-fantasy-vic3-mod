@@ -8,7 +8,7 @@ province image the game reads:
 
     tools/derived/land_sea_mask.png                          (the water authority)
     tools/derived/sea_zones.png                              (committed sea provinces)
-    sources/terraqueous_globe_reprojected - state_regions.png (drawn magenta lines)
+    terraqueous_globe_reprojected - full.ora#borders          (drawn magenta lines)
         -> worldgen.land_provinces.regions / .subdivide  (magenta -> regions -> provinces)
         -> map_data/provinces.png            8192x3616 RGB, one colour per province
         -> tools/derived/provinces_index.json per-province key / id / area / coastal
@@ -21,7 +21,7 @@ interior magenta stays a single placeholder province. Land provinces take labels
 ``1..N``, sea provinces ``N+1..N+M``; a seeded ``ColorAllocator`` gives each a
 unique RGB colour.
 
-Optionally also reads ``sources/terraqueous_globe_reprojected - tiny_islands_merger.png``
+Optionally also reads ``oldworld-first/terraqueous_globe_reprojected - tiny_islands_merger.png``
 (the tiny-island fix): the user paints filled circles around clusters of tiny
 islands that should ship as one province each — a disconnected islet has no land
 neighbour to qualify for the region stage's share-a-border merge, so left alone
@@ -77,7 +77,7 @@ PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
 
-STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
+STATE_REGIONS_SOURCE = sources.source_ref("state_borders")
 #: Optional — the user draws filled circles on a blank canvas of this name to
 #: mark clusters of tiny islands that should ship as one province each (the
 #: tiny-island problem: a disconnected islet has no land neighbour to qualify
@@ -85,7 +85,7 @@ STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
 #: them becomes its own micro state-region). Not required: if the file doesn't
 #: exist yet, generation proceeds with no overrides, exactly as before this
 #: existed.
-ISLAND_OVERRIDES_SOURCE = "terraqueous_globe_reprojected - tiny_islands_merger.png"
+ISLAND_OVERRIDES_SOURCE = sources.source_ref("island_overrides")
 #: Optional — judgement-call region merges authored as pixel anchor pairs
 #: rather than drawn. See land_provinces.apply_land_region_merges / the module
 #: docstring. Absent entirely, generation proceeds with no overrides.
@@ -197,23 +197,12 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"{STATE_REGIONS_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
                          f"{drawn.shape[1]}x{drawn.shape[0]}")
 
-    island_overrides = None
-    overrides_path = sources.resolve_source_path(ISLAND_OVERRIDES_SOURCE)
-    if overrides_path.is_file():
-        manifest_rows = {r.file for r in sources.parse_manifest(
-            sources.MANIFEST_PATH.read_text(encoding="utf-8"))}
-        if ISLAND_OVERRIDES_SOURCE not in manifest_rows:
-            raise SystemExit(
-                f"{overrides_path} exists locally but is not registered in "
-                f"{sources.MANIFEST_PATH.name} — run "
-                "`python tools/worldgen/sources.py --update-manifest` after drawing it"
-            )
-        overrides_rgb = sources.load_source_image(ISLAND_OVERRIDES_SOURCE)
-        if overrides_rgb.shape[:2] != (CANVAS_H, CANVAS_W):
-            raise SystemExit(f"{ISLAND_OVERRIDES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
-                             f"{overrides_rgb.shape[1]}x{overrides_rgb.shape[0]}")
-        island_overrides = land_provinces.island_override_zones(overrides_rgb, land, WRAP_X)
-        log(f"island overrides: {int(island_overrides.max())} hand-drawn merge-line network(s)", t0)
+    overrides_rgb = sources.load_source_image(ISLAND_OVERRIDES_SOURCE)
+    if overrides_rgb.shape[:2] != (CANVAS_H, CANVAS_W):
+        raise SystemExit(f"{ISLAND_OVERRIDES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
+                         f"{overrides_rgb.shape[1]}x{overrides_rgb.shape[0]}")
+    island_overrides = land_provinces.island_override_zones(overrides_rgb, land, WRAP_X)
+    log(f"island overrides: {int(island_overrides.max())} hand-drawn merge-line network(s)", t0)
 
     log("flood-filling the magenta network into state regions ...", t0)
     reg = land_provinces.regions(land, drawn, LINE_DILATE, args.merge_floor, WRAP_X, log=log,

@@ -395,8 +395,9 @@ def load_canon_river_names(path: Path, canvas: tuple[int, int] | None = None
 # ---------------------------------------------------------------------------
 #
 # By default the river generator reads a single canvas-native blue trace
-# (``sources/terraqueous_globe_reprojected - rivers.png``, 1:1 with the canvas,
-# no registration). ``river_sources.json`` optionally declares several layers to
+# (``terraqueous_globe_reprojected - full.ora#rivers``, via
+# ``tools/config/source_layers.json``'s ``rivers`` key, 1:1 with the canvas, no
+# registration). ``river_sources.json`` optionally declares several layers to
 # union — each either ``canvas`` (already canvas-space, read as-is) or
 # ``registered`` (blue traced on an unwarped registered crop's own frame, warped
 # onto the canvas through that crop's committed registration). The file is only

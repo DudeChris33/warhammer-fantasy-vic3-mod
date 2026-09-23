@@ -7,7 +7,7 @@ bootable-map milestone will turn into ``provinces.png`` sea provinces +
 ``state_regions/99_seas.txt`` + ``default.map`` ``sea_starts``:
 
     tools/derived/land_sea_mask.png                  (the water authority)
-    sources/terraqueous_globe_reprojected - sea_zones.png   (the drawn purple lines)
+    terraqueous_globe_reprojected - full.ora#sea_zones   (the drawn purple lines)
         -> worldgen.sea_zones.extract  (flood-fill water between the lines)
         -> tools/derived/sea_zones.png        16-bit labels, 0 = land, 1..n = zones
         -> tools/derived/sea_zones_index.json per-zone key / id / area / coastal
@@ -52,7 +52,7 @@ LABELS_PATH = DERIVED_DIR / "sea_zones.png"
 INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
 SEA_ZONES_CONFIG = CONFIG_DIR / "sea_zones.json"
 
-SEA_ZONES_SOURCE = "terraqueous_globe_reprojected - sea_zones.png"
+SEA_ZONES_SOURCE = sources.source_ref("sea_zones")
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
 

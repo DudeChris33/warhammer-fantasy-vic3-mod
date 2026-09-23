@@ -1,18 +1,20 @@
 #!/usr/bin/env python3
 """Land/sea mask from the hand-traced coastline — the coastline authority.
 
-The user traced the world's entire coastline as a cyan (0,255,255) line directly
-on the canvas-space reprojected globe and exported it as the black-plus-cyan
-``sources/land_sea_mask.png`` (8192×3616 = the mod canvas; the same cyan network
-also carried in ``terraqueous_globe_reprojected - coasts.png``). Cyan is reserved
-for the coastline trace (rivers moved to blue instead, board #3703 follow-up
-2026-09-15) — before that the trace was drawn magenta. Because it is drawn in
-canvas space it needs no registration, and because it is a deliberate hand-trace
-it supersedes the height-ramp extraction that ``generate_heightmap.py`` used to
-derive the coast (user decision, 2026-08-14: "the traced coastline wins"; the
-ramp derivation was deleted 2026-08-22). This tool is the sole owner of
-``land_sea_mask.png``; ``generate_heightmap.py`` consumes the mask rather than
-re-deriving the shoreline.
+The input is the finished black/white land fill ``oldworld-first/land_sea_mask.png``
+(8192×3616 = the mod canvas, binarized first via ``binarize_cyan_mask.py`` — see
+``--from-fill`` below). The same coastline is also carried as a cyan (0,255,255)
+trace-only layer in ``terraqueous_globe_reprojected - full.ora#coasts``, but that
+layer has no land fill of its own and cannot replace the flat PNG here (board
+#5399: trace-parity between the two differs by ~145k px, while the flat PNG's
+fill reproduces the committed mask exactly). Cyan is reserved for the coastline
+trace (rivers moved to blue instead, board #3703 follow-up 2026-09-15) — before
+that the trace was drawn magenta. Because it is drawn in canvas space it needs no
+registration, and because it is a deliberate hand-trace it supersedes the
+height-ramp extraction that ``generate_heightmap.py`` used to derive the coast
+(user decision, 2026-08-14: "the traced coastline wins"; the ramp derivation was
+deleted 2026-08-22). This tool is the sole owner of ``land_sea_mask.png``;
+``generate_heightmap.py`` consumes the mask rather than re-deriving the shoreline.
 
 Land vs sea is decided by **coastline topology**, not by globe colour (the globe's
 sea is a desaturated grey that no hue test separates from land — the very problem
@@ -54,7 +56,7 @@ from worldgen import cells, lakes, raster, sources  # noqa: E402
 Image.MAX_IMAGE_PIXELS = None
 
 TOOLS_DIR = Path(__file__).resolve().parent
-DEFAULT_SOURCE = "land_sea_mask.png"
+DEFAULT_SOURCE = sources.source_ref("coastline_fill")
 DEFAULT_OUT = TOOLS_DIR / "derived" / "land_sea_mask.png"
 #: The companion inland-lake layer (board #3742), written alongside the mask in
 #: --from-fill mode only. A boolean sibling of land_sea_mask.png (True where a
@@ -211,7 +213,10 @@ def main(argv: list[str] | None = None) -> int:
     args = p.parse_args(argv)
 
     if args.direct:
-        rgb = np.asarray(Image.open(Path("sources") / args.source).convert("RGB"))
+        rgba = sources.read_source_rgba(args.source, allow_empty=True)
+        if rgba is None:
+            raise SystemExit(f"--direct: '{args.source}' not found under sources/ or its searched subfolders")
+        rgb = rgba[..., :3]
     else:
         rgb = sources.load_source_image(args.source)
     land = filled_mask(rgb) if args.from_fill else land_mask(rgb)

@@ -5,18 +5,27 @@ reads and (by default) overwrites a mask under the local-only, gitignored
 ``sources/`` folder. Any cyan (0, 255, 255) pixel becomes black; every other
 pixel becomes white.
 
+The documented coastline workflow is: export ``land_sea_mask.png`` (now under
+``sources/oldworld-first/``) -> this script -> ``sources.py --update-manifest``
+-> ``generate_coastline_mask.py --from-fill``.
+
 Usage (from the repo root, with tools/.venv active):
-    python tools/binarize_cyan_mask.py                       # overwrite sources/gimp_exports/land_sea_mask.png
+    python tools/binarize_cyan_mask.py                       # overwrite the resolved land_sea_mask.png
     python tools/binarize_cyan_mask.py --src A.png --out B.png
 """
 import argparse
+import sys
 from pathlib import Path
 
 import numpy as np
 from PIL import Image
 
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from worldgen import sources  # noqa: E402
+
 ROOT = Path(__file__).resolve().parents[1]
-DEFAULT_SRC = ROOT / "sources" / "gimp_exports" / "land_sea_mask.png"
+DEFAULT_SRC = sources.resolve_source_path("land_sea_mask.png")
 
 CYAN = (0, 255, 255)
 BLACK = (0, 0, 0)

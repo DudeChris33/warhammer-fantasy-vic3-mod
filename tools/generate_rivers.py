@@ -9,7 +9,7 @@ a pure-blue ``(0, 0, 255)`` line network (cyan is reserved for the coastline
 trace, board #3703 follow-up 2026-09-15) and turned into the game's river layer
 by the tools::
 
-    sources/terraqueous_globe_reprojected - rivers.png   (canvas-native blue)
+    terraqueous_globe_reprojected - full.ora#rivers   (canvas-native blue)
     [+ any registered-crop blue layers, warped onto the canvas]
         -> extract blue -> skeletonize -> graph -> orient by mask-adjacency
         -> maximal Horton/Strahler stems (one green source per headwater,
@@ -66,9 +66,9 @@ MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 HEIGHTMAP_PATH = MAP_DATA_DIR / "heightmap.png"
 
 #: The default canvas-native trace (1:1 with the canvas, no registration),
-#: resolved through sources.resolve_source_path so it is found whether it sits at
-#: the sources/ root or in the gitignored gimp_exports/ export dir.
-DEFAULT_SOURCE_NAME = "terraqueous_globe_reprojected - rivers.png"
+#: read unverified via sources.read_source_rgba so it is found whether it sits
+#: at the sources/ root or in one of the searched subfolders.
+DEFAULT_SOURCE_NAME = sources.source_ref("rivers")
 #: Optional multi-layer declaration; absent -> read DEFAULT_SOURCE only.
 RIVER_SOURCES_JSON = TOOLS_DIR / "config" / "river_sources.json"
 #: The anchor-keyed canon names; absent -> every stream keeps an auto id.
@@ -88,17 +88,16 @@ def log(msg: str, t0: float | None = None) -> None:
     print(f"{msg}{stamp}", flush=True)
 
 
-def _load_canvas_layer(path: Path, dilate: int) -> np.ndarray:
+def _load_canvas_layer(rgb: np.ndarray, dilate: int, *, label: str = "canvas-native river trace") -> np.ndarray:
     """Blue network of a canvas-native trace (1:1 with the canvas)."""
-    rgb = raster.read_rgb_png(path)
     if rgb.shape[:2] != (CANVAS_H, CANVAS_W):
         raise SystemExit(
-            f"{path} is {rgb.shape[1]}x{rgb.shape[0]}, expected the canvas "
+            f"{label} is {rgb.shape[1]}x{rgb.shape[0]}, expected the canvas "
             f"{CANVAS_W}x{CANVAS_H} (a canvas-native trace must be 1:1)")
     return river_network.blue_network(rgb, dilate=dilate)
 
 
-def _load_registered_layer(path: Path, reg_name: str, regs: dict, dilate: int) -> np.ndarray:
+def _load_registered_layer(rgb: np.ndarray, reg_name: str, regs: dict, dilate: int, *, label: str) -> np.ndarray:
     """Blue network of a trace in a registered crop's own frame, warped onto the
     canvas through that crop's committed registration.
 
@@ -113,9 +112,8 @@ def _load_registered_layer(path: Path, reg_name: str, regs: dict, dilate: int) -
                None)
     if reg is None:
         raise SystemExit(
-            f"river source layer '{path.name}': registration '{reg_name}' not found in "
+            f"river source layer '{label}': registration '{reg_name}' not found in "
             f"{REGISTRATION_DIR} (expected a committed <name>.json)")
-    rgb = raster.read_rgb_png(path)
     src = river_network.blue_network(rgb, dilate=dilate).astype(np.float32)
     sh, sw = src.shape
     fit = reproject.fit_placement(reg, regs)
@@ -146,25 +144,26 @@ def load_network(dilate: int, t0: float) -> np.ndarray:
         regs = None
         network = np.zeros((CANVAS_H, CANVAS_W), dtype=bool)
         for layer in layers:
-            path = sources.resolve_source_path(layer.file)
-            if not path.is_file():
-                raise SystemExit(f"river source layer file not found: {path}")
+            rgba = sources.read_source_rgba(layer.file)
+            if rgba is None:
+                raise SystemExit(f"river source layer file not found: {layer.file}")
+            rgb = rgba[..., :3]
             if layer.mode == "canvas":
-                network |= _load_canvas_layer(path, dilate)
+                network |= _load_canvas_layer(rgb, dilate, label=layer.file)
             else:  # registered
                 if regs is None:
                     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
-                network |= _load_registered_layer(path, layer.registration, regs, dilate)
+                network |= _load_registered_layer(rgb, layer.registration, regs, dilate, label=layer.file)
             log(f"  layer {layer.file} ({layer.mode}): union now {int(network.sum()):,} px", t0)
         return network
-    default_source = sources.resolve_source_path(DEFAULT_SOURCE_NAME)
-    if not default_source.is_file():
+    rgba = sources.read_source_rgba(DEFAULT_SOURCE_NAME)
+    if rgba is None:
         raise SystemExit(
             f"no river source: {DEFAULT_SOURCE_NAME} not found (looked at sources/ and its "
             f"subfolders) and no {RIVER_SOURCES_JSON.name}. Trace the canon rivers in pure "
             f"blue (0,0,255) on the canvas first.")
-    net = _load_canvas_layer(default_source, dilate)
-    log(f"  canvas-native {default_source.name}: {int(net.sum()):,} blue px", t0)
+    net = _load_canvas_layer(rgba[..., :3], dilate, label=DEFAULT_SOURCE_NAME)
+    log(f"  canvas-native {DEFAULT_SOURCE_NAME}: {int(net.sum()):,} blue px", t0)
     return net
 
 
