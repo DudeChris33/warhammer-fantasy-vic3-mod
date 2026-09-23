@@ -36,6 +36,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
+from worldgen import sources  # noqa: E402
 from worldgen.raster import (  # noqa: E402
     Color,
     connected_components,
@@ -51,9 +52,11 @@ REQUIRED_LAND_HUBS = ("city", "farm", "mine", "wood")
 
 # The impassable-terrain paint colour (board #3789). Measured on the real export
 # (sources/gimp_exports/terraqueous_globe_reprojected - impassable_terrain.png,
-# 2026-09-08): 641,982 pixels are exactly (255,127,0), zero anti-aliased fringe,
-# fully opaque — a clean flat-fill layer, the same idiom as the magenta state
-# network and cyan rivers. A future paint-colour change is a one-line edit here.
+# 2026-09-08, before board #5399 moved the layer into
+# terraqueous_globe_reprojected - full.ora#impassable): 641,982 pixels are
+# exactly (255,127,0), zero anti-aliased fringe, fully opaque — a clean
+# flat-fill layer, the same idiom as the magenta state network and blue rivers.
+# A future paint-colour change is a one-line edit here.
 IMPASSABLE_RGB = (255, 127, 0)
 
 _STATE_HEADER = re.compile(r"(STATE_\w+)\s*=\s*\{")
@@ -253,7 +256,7 @@ def validate(
     rivers_index_path: Path | None = None,
     canon_cities_path: Path | None = None,
     canon_cities_mask_path: Path | None = None,
-    impassable_path: Path | None = None,
+    impassable_ref: str | None = None,
     extra_loc_dirs: tuple[Path, ...] = (),
     warnings: list[str] | None = None,
 ) -> list[str]:
@@ -361,8 +364,9 @@ def validate(
     # land_sea_mask.png alone — independent of the province bitmap (which is still
     # churning, #3663/#3664/#3705) — so a stale/absent provinces.png never blocks
     # or corrupts the on-land check. The on-land half always runs (mask committed);
-    # the impassable-collision half degrades to a skip when the gitignored gimp
-    # export is absent (CI / other devices), so the committed gate never breaks.
+    # the impassable-collision half degrades to a skip when the gitignored .ora
+    # (or its impassable layer) is absent or empty (CI / other devices, or before
+    # Chris's re-export), so the committed gate never breaks.
     if (canon_cities_path is not None and canon_cities_path.is_file()
             and canon_cities_mask_path is not None and canon_cities_mask_path.is_file()):
         from worldgen import schema
@@ -371,10 +375,23 @@ def validate(
         h, w = land_mask.shape[:2]
         cities = schema.load_canon_cities(canon_cities_path, canvas=(w, h))
         impassable_rgb = None
-        if impassable_path is not None and impassable_path.is_file():
-            from worldgen.raster import read_rgb_png
-
-            impassable_rgb = read_rgb_png(impassable_path)
+        if impassable_ref is not None:
+            try:
+                impassable_rgba = sources.read_source_rgba(impassable_ref, allow_empty=True)
+            except sources.OraError as exc:
+                impassable_rgba = None
+                if warnings is not None:
+                    warnings.append(
+                        f"impassable layer '{impassable_ref}' missing/empty — "
+                        f"collision check skipped ({exc})"
+                    )
+            if impassable_rgba is not None:
+                if bool((impassable_rgba[..., 3] > 0).any()):
+                    impassable_rgb = impassable_rgba[..., :3]
+                elif warnings is not None:
+                    warnings.append(
+                        f"impassable layer '{impassable_ref}' missing/empty — collision check skipped"
+                    )
         cc_errors, cc_warnings = _check_canon_cities(cities, land_mask, impassable_rgb)
         errors += cc_errors
         if warnings is not None:
@@ -1828,9 +1845,7 @@ def main(argv: list[str] | None = None) -> int:
         rivers_index_path=None if args.fixture else TOOLS_DIR / "derived" / "rivers_index.json",
         canon_cities_path=None if args.fixture else TOOLS_DIR / "config" / "canon_cities.json",
         canon_cities_mask_path=None if args.fixture else TOOLS_DIR / "derived" / "land_sea_mask.png",
-        impassable_path=None if args.fixture else
-        REPO_ROOT / "sources" / "gimp_exports"
-        / "terraqueous_globe_reprojected - impassable_terrain.png",
+        impassable_ref=None if args.fixture else sources.source_ref("impassable"),
         extra_loc_dirs=() if args.fixture else
         (REPO_ROOT / "localization" / "replace" / "english" / "map",),
         warnings=warnings,
