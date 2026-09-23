@@ -31,14 +31,18 @@ out of ``PAINT_ORA`` and composite before draping — it is the ONLY way this
 script decides what to draw, there is no "everything" default. Each
 comma-separated token is a name in ``NAMED_LAYERS`` (``magenta`` -> the
 ``state_regions`` layer, the state-border network; ``orange`` -> the
-``impassable`` layer, the impassable-terrain fill) or a ``#rrggbb`` literal
-matching one of those layers' own flat-fill colour exactly, e.g.
-``--colors magenta,orange`` composites the state borders + the impassable fill
-(see :func:`parse_layers`, :func:`load_paint_layers`). Every layer in
-``PAINT_ORA`` is a hard-edged, binary-alpha flat fill in exactly one colour
-(confirmed by inspection), so selecting layers upstream is exact — no
-post-drape colour-distance filtering is needed the way a single flat painting
-would have required.
+``impassable`` layer, the impassable-terrain fill; ``light-blue`` -> the
+``cities`` layer, city point markers) or a ``#rrggbb`` literal matching one of
+those layers' own flat-fill colour exactly, e.g. ``--colors magenta,orange``
+composites the state borders + the impassable fill (see :func:`parse_layers`,
+:func:`load_paint_layers`). When more than one is selected they always stack
+in :data:`LAYER_Z_ORDER` (orange at the bottom, magenta over it, light-blue on
+top) regardless of the order given on the command line — a city marker must
+never be hidden under a border or fill. Every layer in ``PAINT_ORA`` is a
+hard-edged, binary-alpha flat fill in exactly one colour (confirmed by
+inspection), so selecting layers upstream is exact — no post-drape
+colour-distance filtering is needed the way a single flat painting would have
+required.
 
 **Hull buffer.** ``--hull-buffer-px`` softens only the *outer* edge of the
 piecewise-affine warp's strict hull cutoff (see ``reproject._bary_interp``): a
@@ -67,6 +71,7 @@ Usage::
 
     python tools/project_regions_unified.py --colors magenta,orange --crop
     python tools/project_regions_unified.py --colors magenta                 # full uncropped canvas
+    python tools/project_regions_unified.py --colors orange,magenta,light-blue --crop  # stacks light-blue on top regardless of arg order
     python tools/project_regions_unified.py --colors magenta,orange --hull-buffer-px 100 --crop
 """
 
@@ -124,11 +129,18 @@ COAST_RGB = (0, 255, 255)
 NAMED_LAYERS: dict[str, tuple[str, tuple[int, int, int]]] = {
     "magenta": ("state_regions", (255, 0, 255)),
     "orange": ("impassable", (255, 127, 0)),
+    "light-blue": ("cities", (127, 127, 255)),
 }
 #: Reverse of NAMED_LAYERS, for resolving a ``#rrggbb`` literal to a layer.
 _RGB_TO_LAYER: dict[tuple[int, int, int], tuple[str, str]] = {
     rgb: (name, layer) for name, (layer, rgb) in NAMED_LAYERS.items()
 }
+#: Fixed compositing order (bottom -> top) for whichever layers a --colors
+#: spec selects, regardless of the order the tokens were given in: orange
+#: (impassable) sits at the bottom, magenta (state_regions) over it, and
+#: light-blue (cities) on top of both — cities are point markers that should
+#: never be hidden by an underlying fill or border line. See :func:`parse_layers`.
+LAYER_Z_ORDER: tuple[str, ...] = ("impassable", "state_regions", "cities")
 
 #: Warped-alpha threshold for "this pixel shows content" (matches project_regions.py).
 ALPHA_VALID = 127.5
@@ -156,10 +168,13 @@ def parse_layers(spec: str) -> list[tuple[str, str, tuple[int, int, int]]]:
     ``#rrggbb`` literal matching one of those layers' own flat-fill colour
     exactly. Unknown tokens, a hex literal matching no layer, and an empty
     list are hard errors — a silent drop would render the wrong (or no) layer
-    without saying so. Order is preserved and a repeated layer is deduped.
+    without saying so. A repeated layer (by name or by an equivalent hex) is
+    deduped. The RETURNED order is always :data:`LAYER_Z_ORDER` (bottom to
+    top), regardless of the order the tokens were given in — the compositing
+    order must be fixed, not input-dependent, or the same spec in a different
+    token order would silently draw a different picture.
     """
-    out: list[tuple[str, str, tuple[int, int, int]]] = []
-    seen: set[str] = set()
+    picked: dict[str, tuple[str, tuple[int, int, int]]] = {}
     for tok in spec.split(","):
         t = tok.strip().lower()
         if not t:
@@ -180,12 +195,11 @@ def parse_layers(spec: str) -> list[tuple[str, str, tuple[int, int, int]]]:
             raise SystemExit(
                 f"--colors: unknown colour {tok!r}; use one of "
                 f"{', '.join(NAMED_LAYERS)} or a #rrggbb literal")
-        if layer not in seen:
-            seen.add(layer)
-            out.append((name, layer, rgb))
-    if not out:
+        picked.setdefault(layer, (name, rgb))
+    if not picked:
         raise SystemExit("--colors: no colours given")
-    return out
+    return [(picked[layer][0], layer, picked[layer][1])
+            for layer in LAYER_Z_ORDER if layer in picked]
 
 
 def composite_layers_over(layers: list[np.ndarray]) -> np.ndarray:
@@ -412,7 +426,9 @@ def main(argv: list[str] | None = None) -> int:
                         "(comma-separated) — the only thing that decides what gets drawn. "
                         f"Names: {', '.join(NAMED_LAYERS)}, or a #rrggbb literal matching one "
                         "of those layers' own flat-fill colour. e.g. --colors magenta,orange "
-                        "pulls the state-border network + the impassable fill; see parse_layers")
+                        "pulls the state-border network + the impassable fill. Multiple "
+                        f"layers always stack in LAYER_Z_ORDER {LAYER_Z_ORDER} (bottom to "
+                        "top) regardless of the order given here; see parse_layers")
     p.add_argument("--hull-buffer-px", type=float, default=HULL_BUFFER_PX_DEFAULT,
                    help="extrapolate this many canvas px past the OUTER hull edge only "
                         "(nearest hull vertex's own triangle, unclamped) instead of the "

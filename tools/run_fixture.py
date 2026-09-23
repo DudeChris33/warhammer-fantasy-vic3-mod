@@ -3867,25 +3867,32 @@ def _selfcheck_parse_layers() -> None:
     (no golden needed, no dependency on the real gitignored .ora).
 
     Pins ``project_regions_unified.parse_layers``: a name resolves to its
-    ``NAMED_LAYERS`` entry, a matching ``#rrggbb`` literal resolves to the same
-    layer, a repeated layer (by name or by its equivalent hex) is deduped
-    keeping first-seen order, and an unknown name / a hex matching no layer's
-    flat-fill colour / an empty spec all raise ``SystemExit``.
+    ``NAMED_LAYERS`` entry (incl. ``light-blue`` -> ``cities``), a matching
+    ``#rrggbb`` literal resolves to the same layer, a repeated layer (by name
+    or by its equivalent hex) is deduped, the RETURNED order always follows
+    ``LAYER_Z_ORDER`` (impassable bottom, state_regions middle, cities on top)
+    regardless of the order tokens were given in, and an unknown name / a hex
+    matching no layer's flat-fill colour / an empty spec all raise
+    ``SystemExit``.
     """
     import project_regions_unified as P
 
-    assert P.parse_layers("magenta,orange") == [
-        ("magenta", "state_regions", (255, 0, 255)),
-        ("orange", "impassable", (255, 127, 0)),
-    ]
-    assert P.parse_layers("#ff00ff") == [("magenta", "state_regions", (255, 0, 255))]
-    assert P.parse_layers(" MAGENTA , orange ") == [
-        ("magenta", "state_regions", (255, 0, 255)),
-        ("orange", "impassable", (255, 127, 0)),
-    ], "case/space tolerant"
-    assert P.parse_layers("magenta,#ff00ff,magenta") == [
-        ("magenta", "state_regions", (255, 0, 255))
-    ], "a repeated layer (by name or equivalent hex) is deduped, first-seen order kept"
+    MAGENTA = ("magenta", "state_regions", (255, 0, 255))
+    ORANGE = ("orange", "impassable", (255, 127, 0))
+    LIGHT_BLUE = ("light-blue", "cities", (127, 127, 255))
+
+    # z-order (impassable, state_regions, cities) wins over input order.
+    assert P.parse_layers("magenta,orange") == [ORANGE, MAGENTA]
+    assert P.parse_layers("orange,magenta") == [ORANGE, MAGENTA]
+    assert P.parse_layers("light-blue,magenta,orange") == [ORANGE, MAGENTA, LIGHT_BLUE]
+    assert P.parse_layers("orange,magenta,light-blue") == [ORANGE, MAGENTA, LIGHT_BLUE], \
+        "compositing order must not depend on the order --colors tokens were given in"
+
+    assert P.parse_layers("#ff00ff") == [MAGENTA]
+    assert P.parse_layers("#7f7fff") == [LIGHT_BLUE]
+    assert P.parse_layers(" MAGENTA , orange ") == [ORANGE, MAGENTA], "case/space tolerant"
+    assert P.parse_layers("magenta,#ff00ff,magenta") == [MAGENTA], \
+        "a repeated layer (by name or equivalent hex) is deduped"
 
     for bad in ("bogus", "", ",", "#ff00", "#00ffff"):
         try:
