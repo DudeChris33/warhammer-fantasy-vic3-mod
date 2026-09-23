@@ -72,7 +72,9 @@ action, never a side effect of a generator run.
 region→province grouping) are generated, not hand-authored: after an
 intentional source/LUT/registration change, regenerate them with `python
 tools/generate_coastline_mask.py` (the sole owner of `land_sea_mask.png` — either
-flood-filled from the user's traced coastline in `sources/land_sea_mask.png`, or,
+flood-filled from the user's traced coastline in `oldworld-first/land_sea_mask.png`
+(binarized first via `binarize_cyan_mask.py`; the sibling `full.ora#coasts` layer
+is only the cyan trace and cannot replace it — board #5399), or,
 with `--from-fill`, read directly when that source is already a finished
 black/white land fill rather than a coastline trace; `--from-fill` also emits the
 companion `tools/derived/lake_mask.png`, board #3742 — see below. Either mode
@@ -214,10 +216,11 @@ and `generate_province_terrains.py` after a `generate_provinces.py` regen" set
 above.
 **Canon rivers (board #3703)**: `map_data/rivers.png` is **source-driven**, not
 heightmap-derived (committed real 2026-09-07). The canon rivers are hand-traced
-as a pure-cyan (`0,255,255`) line network on the canvas
-(`sources/terraqueous_globe_reprojected - rivers.png`, 1:1, no registration — or
-several layers in the optional `tools/config/river_sources.json`).
-`worldgen/river_network.py` skeletonizes the cyan (wrap-aware), builds a
+as a pure-blue (`0,0,255`) line network on the canvas
+(`terraqueous_globe_reprojected - full.ora#rivers`, via `tools/config/source_layers.json`'s
+`rivers` key — board #5399, cyan is reserved for the coastline trace — 1:1, no
+registration — or several layers in the optional `tools/config/river_sources.json`).
+`worldgen/river_network.py` skeletonizes the blue (wrap-aware), builds a
 topological-adjacency graph, and orients each connected network into a **flow
 DAG** by a strict rank (BFS-distance-to-outlet → elevation → pixel; a total order,
 so it is guaranteed acyclic). That makes **divergence first-class** — vanilla's
@@ -409,9 +412,10 @@ the **impassable-collision** half is a **non-blocking warning** — a hold in th
 range is expected, and the warning cues carving a passable pocket around it (flowing
 through the full `validate_map.py` run's `warnings=` channel, printed but never
 gating the exit code, the same convention as the lake guards) — and degrades to a
-skip when the gitignored local export
-(`sources/gimp_exports/terraqueous_globe_reprojected - impassable_terrain.png`) is
-absent, so a device without that working file never reddens the committed gate.
+skip when the gitignored `terraqueous_globe_reprojected - full.ora#impassable`
+layer (via `tools/config/source_layers.json`'s `impassable` key — board #5399)
+is absent or empty, so a device without that working file — or before Chris's
+re-export of a currently-empty layer — never reddens the committed gate.
 `tools/render_canon_cities_preview.py` (the dev render) and its two
 `tools/derived/` artifacts are outside the gate — gitignored, source-dependent,
 regenerated only on the user's machine for a visual verdict.
@@ -507,6 +511,24 @@ brand-new slug** in one regen are all numbered (`_01`/`_02`, not bare + `_01`),
 byte-identical to a reassign of the same geometry; and a **digit-suffixed**
 display name ("Far Passage 3") recovers its slug via `_slugify`, not a
 trailing-digit strip that would corrupt another slug's high-water.
+
+`_selfcheck_ora_reader` (board #5399) exercises `worldgen/sources.py`'s .ora
+(OpenRaster) layer reader on synthetic archives built in a temp dir — no
+dependency on the real gitignored `sources/`: named-layer composite with
+offset/clipping (a hidden layer, one overhanging the canvas edge) and RGB
+zeroed under alpha 0; a missing name's error lists the available names; a
+duplicated *requested* name raises while an unrelated duplicate does not; an
+empty layer raises unless `allow_empty=True`; a wrong mimetype, malformed
+`stack.xml`, nested `<stack>` (layer group) and a missing `src` each raise;
+`split_ref` on bare/`.ora#layer`/`x#y.png`/bare-`.ora` inputs; `image_dims` on
+an `.ora`; `load_source_image` passes the manifest SHA-256 guard and fails
+after tampering; `load_source_layers` refuses a non-object, an empty value, an
+`.ora` value with no `#layer`, and a `#` in a non-.ora value; `verify()`'s
+source_layers.json step yields exactly one error each for a missing file, a
+missing manifest row, and a missing/duplicated layer name, none for a clean
+table, and a clean skip for an absent table path (the ingest/boundary fixture
+harness idiom); `read_source_rgba` zeroes a flat file's RGB under alpha 0 too;
+and two reads are byte-identical.
 
 `_selfcheck_arable` (board #4921) exercises `worldgen/arable.build_field` +
 `schema.load_arable_lore` on a small synthetic canvas (no dependency on the real

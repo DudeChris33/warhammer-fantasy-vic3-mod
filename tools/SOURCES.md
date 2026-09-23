@@ -5,9 +5,12 @@ folder at the repo root. It mixes Games Workshop cartography, a Total War
 screenshot mosaic, and fan maps (third-party IP), plus tens of MB of binaries
 (decision #2 in
 [world-map-source-driven.md](../planning/requests/world-map-source-driven.md)).
-**As of 2026-09-03, `sources/` is committed to the repo in full via Git LFS**
-(user decision — private repo, not worth manually shifting ~2.3GB between
-devices; previously it was gitignored and tracked only by this manifest).
+**As of board #4608 (2026-09-17), `sources/` is gitignored and local-only** —
+this manifest is its sole provenance record. (A 2026-09-03 decision briefly
+committed it in full via Git LFS to sync between two devices; that reason
+stopped applying once work went single-device on 2026-09-15, and #4608 purged
+`sources/` back out of git history entirely.) A fresh clone gets zero files
+under `sources/` — they are copied onto a new machine by hand.
 
 This file remains the committed **manifest** that documents those files: every
 source's filename, dimensions, byte size, SHA-256, origin, pipeline role, and
@@ -56,17 +59,34 @@ wrong relative sizes.
 
 ## Layout: `sources/` is organized into subfolders by role
 
-Files live directly under `sources/`, or in one of three subfolders:
-`originals/` (the raw reference imagery), `gimp/` (editable masters — GIMP
-`.xcf`, since the user switched off MS Paint), and `dots/` (crops and example
-renders from the paired-anchor-dot registration workflow). A fourth folder,
-`WIP/`, holds local scratch that is deliberately **not** manifest-tracked.
-`tools/worldgen/sources.py`'s `resolve_source_path()` searches all of these by
-bare filename, so the **File** column below stays a bare filename regardless of
-which subfolder a source actually sits in — the manifest audits identity
-(dims/bytes/SHA/origin/role), not physical location. `--update-manifest`
-discovers files the same way (root + the three tracked subfolders) and refuses
-if a name collides across more than one of them.
+Files live directly under `sources/`, or in one of four searched subfolders:
+`originals/` (raw reference imagery), `oldworld-first/` (the current
+canvas-scale GIMP masters and their exports — see the .ora convention below),
+`dots-triangles/` and `dots-mega/` (the paired-anchor-dot registration
+workflow's active crops). `archive/` (retired sources — including the five
+per-region dot-marking sheets retired by board #5403), `WIP/` (local scratch)
+and `cr_oldworld_campaign/` (its own dataset loader) are deliberately **not**
+searched. `tools/worldgen/sources.py`'s `resolve_source_path()` searches the
+root plus those four by bare filename, so the **File** column below stays a
+bare filename regardless of which subfolder a source actually sits in — the
+manifest audits identity (dims/bytes/SHA/origin/role), not physical location.
+`--update-manifest` discovers files the same way and refuses if a name
+collides across more than one searched location.
+
+**Board #5399 (2026-09-23): each multi-layer GIMP `.xcf` master gets a sibling
+OpenRaster `.ora` export saved next to it**, and individual concerns (the
+coastline trace, rivers, sea zones, state borders, impassable terrain) are
+pulled out of it by **layer name** (`stack.xml`, not a colour registry —
+Chris renames layers, so this manifest and `tools/config/source_layers.json`
+are the sources of truth, not a hardcoded palette). A tool reads a layer via a
+`<file>.ora#<layer>` reference; `tools/config/source_layers.json` is the one
+committed table mapping each hand-painted input to its reference, so a rename
+is a one-line edit there rather than a code change. Two kinds of source stay
+flat PNGs instead: the paired-anchor-dot sheets (their layers only make sense
+together) and single-layer masks — the land/sea fill `land_sea_mask.png`
+(binarized first via `binarize_cyan_mask.py`; the `.ora` `coasts` layer is only
+the cyan trace, with no land fill of its own) and the tiny-islands merger
+circles.
 
 ## Verifying / refreshing
 
@@ -86,13 +106,21 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | Major_Trade_Routes_of_the_Old_World_Map.png | 1947x1404 | 690,310 | 12026b1e21ad7b9467ff1e3d597e98492739af19e2d8cf97407ddf5d28f7b919 | Games Workshop — "Major Trade Routes of the Old World" | Manifest only, unregistered — S6 reference | no |
 | bretonnia_black_white_colored.png | 4210x4700 | 14,643,218 | 05d03cf362e17d8c805ead02915b66334be75f01d52346936f2ac611675a3610 | Internet find; the user colored the ocean blue | Primarily Bretonnia village placement; secondarily other Bretonnia features | no |
 | colored_globe.jpg | 1680x1214 | 429,642 | 91e12fbb2938d2ec61ed78abd1d42ad10615a3d427068acd5830a9598bf214c0 | Fan cartography — David "Fahran" Mills "Warhammer World Map" (war-rvr.net, 2006), a whole-world relief/satellite render with a blue ocean. Added by the user 2026-08-13 | Whole-world COASTLINE silhouette (`blue_sea` kind: ocean is blue-dominant but brightness-varying). Balanced land/sea (0.366 vs mask 0.369) so it registers globally, unlike the land-heavy regional tiles. A DIFFERENT source from the terraqueous globe (different projection — a freehand rectangular/cylindrical relief render, ~1.38:1, closest to a latitude-cropped equirectangular but NOT an analytic projection, so it stays a `control_point_warp`, not an analytic inverse; identified 2026-08-15), registered against the mask for coastline agreement; mask stays the sole authority | yes |
+| land_sea_mask.png | 8192x3616 | 358,875 | 3cb00f5a7c242f0f430268d083ce6bb5e3c805737f9eb04a459ecac69d19b62a | PNG export of `land_sea_mask.xcf`, now under `oldworld-first/` | The real land/sea mask in use — binarized first via `binarize_cyan_mask.py`; the `coastline_fill` `source_layers.json` ref (board #5399) | no |
+| land_sea_mask.xcf | n/a | 903,760 | 76b1123663eda8bc7080fc215c71641ddd49829a49638e3036d17e3dfb8014fb | GIMP editable master | Editable master of `land_sea_mask.png`; not read directly by any tool | no |
+| mega_detailed_old_world - dots.jpg | n/a | 385,900,884 | 99b89752c24766a968cd4023a6450aa75bb34a3b01ac6ee6bcda3a698b7c7906 | Dot-marked derivative of `mega_detailed_old_world.jpg` (see that row), paired-anchor-dot workflow | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | mega_detailed_old_world.jpg | n/a | 385,900,884 | 99b89752c24766a968cd4023a6450aa75bb34a3b01ac6ee6bcda3a698b7c7906 | Internet find | Primarily Old World town and forest placement; secondarily other Old World features | no |
 | named_globe.png | 4096x2048 | 15,109,233 | 0f89110c2a4cc471f53319a05aba439a4a1e69119d06278b5374b0214ff22eff | Fan cartography — a labelled whole-world Warhammer map, blue-ocean relief with region names (Naggaroth, Ulthuan, the Old World, Southlands, Grand Cathay, …). Exact author unconfirmed. Added by the user 2026-08-12 | **Projection: equirectangular (plate carrée)** — identified 2026-08-15. Exactly 2:1 at 4096×2048 (power-of-two globe-texture dims), filled corner-to-corner with ocean/ice (an oval projection would leave the corners empty), meridians vertical. **Registered 2026-08-15** (`tools/registration/named_globe.json`) as a `control_point_warp`. A pure analytic-equirectangular placement was tried first and rejected (the artist drew landmasses at different proportions than the mask), so the geographic box was MEASURED by silhouette IoU against `land_sea_mask.png`: named_globe covers only ~320° of longitude and is latitude-cropped at ~40°S (affine cx≈2048 sx≈12.79 cy≈1348 sy≈17.50, 0.638 affine IoU), so it has NO coverage of the canvas far-eastern seam or its southern band. That affine seeds an 11×7 lattice `register.refine` pulled onto the mask to **0.788 IoU** (no folds, anisotropy≤3). Contributes NO coastline (mask stays sole authority) — a whole-world coastline reference like `colored_globe`, at a third projection. MACHINE-FITTED; re-derive, do not hand-edit. PROVISIONAL until the user accepts the render | yes |
 | ocean_currents - Copy.png | 10233x3616 | 3,679,568 | 0a3ee852264a8cd8fbb9c537400012aa0c0018f3b1ee25e097c9e7dc7a2a6912 | Copy of `ocean_currents.png` | Assists with x-axis (seam) wrapping when working with the ocean-currents layer | no |
 | ocean_currents.png | 8192x3616 | 959,633 | 57076d7be6a0f1aa1deaad25831cb24c6d99e7733b84310e18de70c43e174c9f | Generated (Claude) | Partially informs sea zone placement | no |
+| old_world_map - full.ora | 2048x2048 | 14,008,971 | 2d21a01a029809165778a5499b1258e2ea6bd071330cba4595273e2b53d56a75 | GIMP OpenRaster export of `old_world_map - full.xcf` | Layers `cities`/`state_regions`/`impassable`/`parchment_cropped` (measured during #5399 scoping); not read by any tool — out of scope for board #5399 | no |
+| old_world_map - full.xcf | n/a | 16,399,839 | b837765c08d2e811f9abbfbde46dbf4f8479a6d1bbdee9512f9c848ab1dbea81 | GIMP editable master | Editable master of `old_world_map - full.ora` | no |
+| old_world_map - stretched.xcf | n/a | 16,453,660 | 8fe1a631ce7d59306514f7733a092a1e2f8c1f56fe57ee91362d34da2fc2d662 | GIMP editable master | Editable master of the `old_world_map - stretched.png` working copy `render_old_world_map_overlay.py --source` can drape | no |
+| old_world_map.xcf | n/a | 33,101,805 | 60f1e3e88d6660fa7989e2c0f726584b6093ba599d79735ec76efd029530f421 | GIMP editable master | Editable master, predecessor of `old_world_map - full.xcf`/`- stretched.xcf` — inferred from filename, Chris to confirm/correct | no |
 | old_world_regions.png | 4096x4096 | 5,375,145 | 3b944a5578286ae0dd1817857979b337903b250b9d56dd9f9424bdb406240709 | PNG export of `old_world_regions.xcf` | Maps which region each state belongs to | no |
 | old_world_terrain.jpg | 3016x2080 | 1,140,330 | 80ae22f4aa384049cd42e70ade67db4f57853e6e91c9fbed30458dd9a69c1f91 | Games Workshop — Warhammer: The Old World world map | Old World / Badlands / Dark Lands / Araby / Land of the Dead boundaries. **NOT USABLE FOR GEOMETRY** (measured S3a) — misregistered off the coast, and not a chloropleth (see below) | yes |
 | old_world_z10 - grayscale.png | 6658x9824 | 70,851,835 | c2b19d3cd0ce5c0551f9c628f17160ea9dc1cf03eec23320549758be1f43a095 | Grayscale copy of `old_world_z10.png` | Same role as `old_world_z10.png`, in grayscale | no |
+| old_world_z10 - grayscale_dots.png | 6658x9824 | 70,851,835 | c2b19d3cd0ce5c0551f9c628f17160ea9dc1cf03eec23320549758be1f43a095 | Dot-marked derivative of `old_world_z10 - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | old_world_z10.png | 6658x9824 | 120,598,002 | 856dfa35a633a3e7dead1972a37660791fc2b8fcbb18a59f3a535b2d3109428a | Games Workshop — official "Warhammer: The Old World" interactive map (start-warhammer.com), zoom-10 base tile layer, stitched by us (TMS tiles, transparent border cropped) | Highest-resolution whole-continent Old World reference in the folder. Base tile ART ONLY — the site's interactive city/army/region markers are separate overlays and are NOT baked in. Naming + extent + coastline/relief cross-reference (S6). Unregistered | no |
 | satellite_globe.jpg | 637x358 | 43,099 | 8b90bae2e491a366a8c5deb3f1e8d9307dac6b8658d0fd7d62bb9c6de242d95b | Fan whole-world satellite/biome render (Steam Workshop) | **Projection: equirectangular** (rectangular whole-world texture, pillarboxed to 16:9 — black bars at x=[0..86] and x>548, content x=[87..548]; the map itself is corner-to-corner with vertical meridians). DE-REGISTERED in S2 — de-registered for cloud cover + the narrow 462-px usable width, not for its projection (see below) | no |
 | start_warhammer_old_world_northern_anchor_dot_warp_example.xcf | n/a | 87,883,816 | a3b77a7fb7733f2feca32700f05b82e757eb1ba82695f0d880d290ea0d5fc9a5 | TBD | TBD | no |
@@ -101,10 +129,16 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | state_regions_on_parchment.png | 4096x4096 | 20,655,646 | 37123186f85b4e0bd963af068d050e668e37b110bba911754808a4c0b1a5e2db | Archive of the state border line drawing generator | Flattened export of the state-border-drawing pass over the parchment | no |
 | state_regions_on_parchment.xcf | n/a | 43,446,175 | c7ae77cd95d04671abc69af3e31a68653608824f4fb4d8433ba7de9cc13a70f6 | Archive of the state border line drawing generator | Editable master of the state_regions_on_parchment.png export above | no |
 | terraqueous_globe.jpg | 4000x3256 | 2,292,545 | c4021e28d8d58bc3f91733df72ee9b7b398f922bb565b0478d3743446d8c15f3 | Fan cartography — "Terraqueous Globe", Kartografia Niepraktyczna 2022 | Whole-world heightmap (NE-II colour-to-height ramp) + coastline. **The single geometric authority** (S3a decision #1) — every other source projects onto it | yes |
+| terraqueous_globe_reprojected - adjacencies.xcf | n/a | 92,064,451 | c3847f549558dcde48bbb46181a2f5d1dd3f379519f572aff4493faefaa5412c | GIMP editable master | Working file for marking strait/canal adjacencies onto the reprojected globe — inferred from filename, Chris to confirm/correct | no |
 | terraqueous_globe_reprojected - dots_7.png | 8192x3616 | 33,040,057 | 2e8609c09b53499ba1719d05d8dd8bd4153df41c134cf8672a6cc38f080d1363 | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Region 7 dot-picking reference for the paired-anchor-dot workflow, same role as dots_1-6 | no |
 | terraqueous_globe_reprojected - dots_7.xcf | n/a | 164,258,762 | 41ea7bd3869fd69172f506e0e47457530b6aa4d2fff8929ee3379e4b72728484 | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Editable master of the dots_7.png export above | no |
+| terraqueous_globe_reprojected - full.ora | 8192x3616 | 86,462,971 | 29875c43e31b9ff1e5b52b0aa68a2db4481f78ec72894b2db22898981865d5b8 | GIMP OpenRaster export of `terraqueous_globe_reprojected - full.xcf` | The canvas master (board #5399): layers `coasts`/`rivers`/`cities`/`borders`/`impassable`/`sea_zones`/`canvas`, read by name via `tools/config/source_layers.json` | no |
+| terraqueous_globe_reprojected - full.xcf | n/a | 118,322,847 | 39be7f49bb39fb949467a488530fd6652fc29f71713d0d0f9c154b340978eec8 | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
 | terraqueous_globe_reprojected - grayscale.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Grayscale copy of `terraqueous_globe_reprojected.png` | Same role as `terraqueous_globe_reprojected.png`, in grayscale | no |
+| terraqueous_globe_reprojected - grayscale_dots.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Dot-marked derivative of `terraqueous_globe_reprojected - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | terraqueous_globe_reprojected - strategic_regions.png | 5310x2044 | 216,621 | dd8ac943d7bc22d5d882e376c8014b9f83a15f5e46d57037e0f442222dc33295 | User-painted (MS Paint) realm/strategic-region fill over the same crop as `terraqueous_globe_reprojected - state_regions.png`; a top-left crop of the main 8192x3616 canvas at zero offset/zero scale (confirmed 2026-09-05: its magenta border network is pixel-identical to that image's, IoU 0.9999 against the already-registered full canvas — no separate registration record needed) | Realm-assignment input for board #2931's land canon naming — classified by exact RGB against `tools/config/strategic_region_colors.json` (colours are arbitrary MS Paint swatch picks, confirmed by the user, unrelated to `old_world_region_colors.json`) | no |
+| terraqueous_globe_reprojected - tiny_islands_merger.png | 8192x3616 | 33,502,595 | 9928b8392d8c1b8c9faa44428c0b38283ec407c4a635f7d7a207b8f19dd8e99a | PNG export of `terraqueous_globe_reprojected - tiny_islands_merger.xcf`, now under `oldworld-first/` | User-painted filled circles around clusters of tiny islands that `generate_provinces.py` merges into a single province each — the `island_overrides` `source_layers.json` ref (board #5399; formerly board #2930's direct `land_provinces.island_override_zones` input) | no |
+| terraqueous_globe_reprojected - tiny_islands_merger.xcf | n/a | 88,986,144 | 6f594d43295d912e4165e419611ea7fe001c2db08b417e2bd5dbc437f677b2e8 | GIMP editable master | Editable master of `terraqueous_globe_reprojected - tiny_islands_merger.png` | no |
 | terraqueous_globe_reprojected.png | 8192x3616 | 30,471,432 | 604fc9f92848fc25590f0a7d69b54a46dea79bd1acbc578f250304d36b06888c | Derived from `terraqueous_globe.jpg` (user, August 2026) | `terraqueous_globe.jpg` reprojected from its native Natural Earth II to Miller cylindrical — the mod canvas's own projection (see `config/canvas_frame.py`). Canvas-sized (8192x3616 = WIDTH x HEIGHT). Not yet consumed by any script; `generate_heightmap.py` currently reprojects `terraqueous_globe.jpg` itself via its NE-II fit rather than reading a pre-reprojected copy | no |
 | terraqueous_globe_with_NS_lines.jpg | 4000x3256 | 4,397,707 | 179ea7271e2adc0d509bce5358d40c3a60a36c251309dac4377a5acef0ca1c9c | Derived from `terraqueous_globe.jpg` (user) | `terraqueous_globe.jpg` with a north-south graticule drawn on, used as a registration/projection-check reference; contributes no geometry (globe stays the coastline authority) | no |
 | the_empire_1.jpg | 5426x5091 | 22,888,291 | d12726947a3afaee43bbc174dbe95cba1288e7bf4dbf542e0a6a86065642bb29 | Internet find | Very detailed map of the Empire — villages, terrain, rivers, names, etc. | no |
@@ -114,6 +148,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | tww3_colored.png | 4726x3010 | 1,467,069 | d3962b9e28a49765c6c6f236b89b67924d06019835bcc857a51b41e5602b3817 | Fan cartography - flat-filled Total War: Warhammer world map with incorrect region boundaries | Demoted from primary to **complement** boundary source (world-map-parchment-areas-onto-globe.md, 2026-07-28): boundary precedence 95, below the parchment master's 100, so it now wins only outside the master's coverage. Flat blue ocean still gives an EXACT land/sea silhouette (no threshold is fitted), and black region lines over flat terrain fills yield 681 clean closed cells across the whole Known World, against our 659 land-state target — the 748-vs-681 clean-cell discrepancy flagged in the S3a-2 review remains explicitly unresolved. See below | yes |
 | tww3_ie_parchment.jpg | 3703x2880 | 3,225,567 | f6e4f53ea80673bb9b792f11b1ac1de387bb8e07757f8a384aa40fd8aea757c1 | Creative Assembly - Total War: Warhammer 3 Immortal Empires parchment campaign map (English) | **PRIMARY BOUNDARY + NAME SOURCE (world-map-parchment-areas-onto-globe.md, 2026-07-28)** - registered by `tools/fit_registration.py --seed wh3_dlc_ie_parchment_map_english` (silhouette objective via the climate map sibling, 10x8 lattice, 12 held-out landmarks). Fit: `refined_iou` 0.6193, `folded_fraction` 0%, `anisotropy_p99` 3.00, `landmark_check_px` mean 426.9 / max 872.1 - reported against the family's only other comparable record (`total_war_map_colored.json`: mean 312.2 / max 844.6, refined_iou 0.6617) as somewhat weaker but consistent (0% folding, same anisotropy), explained by the parchment's silhouette coming via a rescaled sibling rather than an exact flat-fill silhouette. The family's `ie_macro_twin.json` control points (baked standalone when the master was previously absent from `sources/`) reproduce EXACTLY (0.0 px mean/max) against this fit, confirming full reproducibility with the existing placement. Its interior line network is traced with lettering bridged (not erased) into the barrier, and its printed names are the S3a-2 review panel's missing name-to-geometry binding. Also the differencing counterpart for macro grouping (unchanged role). | yes |
 | tww3_old_world_mod_grayscale.png | 4096x4096 | 16,207,148 | a02fed5a10833e32988fe2b83f894e529fa1894370e13929c9a1533989c762e4 | Grayscale copy of `tww3_old_world_mod_parchment.png` | Same role as `tww3_old_world_mod_parchment.png`, in grayscale | no |
+| tww3_old_world_mod_grayscale_dots.png | 4096x4096 | 16,207,148 | a02fed5a10833e32988fe2b83f894e529fa1894370e13929c9a1533989c762e4 | Dot-marked derivative of `tww3_old_world_mod_grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | tww3_old_world_mod_parchment - dots_7.png | 4096x4096 | 22,920,922 | 4c754f9673ea9f5d2a8b0cd7a91e089f9c653ae17d68f7f92f0fe2105abf42fe | Derived from `tww3_old_world_mod_parchment.png`, dot-marked by the user | Region 7 parchment-tile dot-picking reference, same role as dots_1-6 | no |
 | tww3_old_world_mod_parchment - dots_7.xcf | n/a | 90,419,511 | 88557a967d1bb06a49a7ff134ec1066dd49cfbfc5619f0642859abe6dd60257f | Derived from `tww3_old_world_mod_parchment.png`, dot-marked by the user | Editable master of the dots_7.png export above | no |
 | tww3_old_world_mod_parchment.png | 4096x4096 | 8,332,865 | 93f5c7b4791d7a02b60eeb4ba96bf5abc66ad4d650978d1990b022840de903a3 | Fan cartography — "The Old World, all faction starting positions v3.0" | **Denser Old World boundary network** — a line chloropleth, markedly denser than IE over the same arc. Higher precedence inside a masked footprint; the four corner vignettes + the Galleon's Graveyard spiral are excluded (they take cartographic liberties — user-flagged) | no |
@@ -122,13 +157,15 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | white_dwarf_world_map.png | 4524x3093 | 1,960,224 | c5a4c6708600fedbfe404c59a7c8d6ab5745eea6e4d35a28180ef13932b37be7 | Games Workshop — official Warhammer world map (boxed / White Dwarf fold-out poster; the sheet prints "© Games Workshop Ltd 2000–2004" and "Product code 60440199034"). Fold seams visible | **Projection: oval pseudocylindrical, flattened-pole (Winkel Tripel / Robinson / Natural Earth family — NOT pointed-pole Mollweide/Aitoff)** — identified 2026-08-15. The world's printed neat-line is a smooth arc bowing down to clipped corners, ~360° of longitude wrapping (HUNG at both far edges); the broad clipped top is a pole line, not a point. Same oval family the terraqueous NE-II globe reproduces. Manifest/naming/extent reference only; unregistered — a fit would try the `natural_earth_2` kind, falling back to a `control_point_warp` if its oval isn't exactly NE-II | no |
 <!-- MANIFEST:END -->
 
-## Local organisation: descriptive filenames; consumed sources stay flat
+## Local organisation: descriptive filenames
 
-Every source `load_source_image` actually reads — anything with a manifest row
-above — must sit directly in `sources/`: `tools/worldgen/sources.py` looks up
-`sources/<basename>` and does **not** search subfolders recursively, so a
-consumed file dropped in a subfolder is invisible to `--verify`,
-`--update-manifest`, and `load_source_image`.
+Every source `load_source_image`/`load_source_image_rgba` actually reads —
+anything with a manifest row above — is found by `resolve_source_path()`
+across `sources/` and the four searched subfolders (see Layout above); a
+`<file>.ora#<layer>` reference resolves its container file the same way, then
+reads the named layer directly from the zip. A file dropped in an unsearched
+folder (`archive/`, `WIP/`, `cr_oldworld_campaign/`) is invisible to
+`--verify`, `--update-manifest`, and every loader.
 
 Grouping related sources is done with a filename prefix that names the family
 the source belongs to (e.g. `tww3_*` for the Total War: Warhammer 3 / Immortal
@@ -187,6 +224,38 @@ permanently unregenerable without them, so they were `git rm`'d along with the
 still-registered seed (today, `tww3_old_world_mod_parchment_full`), deriving
 its clean source on demand from its own `dots_source` sheet via
 `worldgen.derive_crop.derive_clean_source`.
+
+## The .ora-per-.xcf convention (board #5399, 2026-09-23)
+
+Chris switched from exporting one flattened PNG per concern into a
+now-retired `sources/gimp_exports/` folder to exporting the whole GIMP
+document once, as OpenRaster (`.xcf` → matching `.ora`, same folder, same
+stem), and letting tools pull each concern out by layer name. The canvas
+master is `oldworld-first/terraqueous_globe_reprojected - full.ora`, whose
+layers are `coasts` (cyan trace only, no land fill), `rivers` (blue), `cities`,
+`borders`, `impassable`, `sea_zones` and `canvas` (the globe backdrop).
+`tools/config/source_layers.json` is the committed table mapping each
+concern to its `<file>.ora#<layer>` reference; `sources.verify()` checks every
+entry resolves to a real file, a manifest row, and a layer name that exists
+exactly once. `tools/worldgen/sources.py`'s `read_ora_layer()` reads the zip
+directly (never extracts it) and composites the named layer onto the full
+canvas at its own offset, with RGB zeroed under alpha 0 so a tool's exact-paint-
+colour detection never sees whatever the encoder stored under a transparent
+pixel — `read_source_rgba()` (the new unverified dev-render loader) applies the
+same zeroing to a flat PNG for the same reason.
+
+As of this board item, `full.ora`'s `borders` and `impassable` layers are
+**empty** (a bad export Chris is redoing): `generate_provinces.py` hard-errors
+on the empty required `state_borders` ref, and `validate_map.py`'s impassable
+collision check degrades to a non-blocking skip until the re-export lands.
+
+Two kinds of source were deliberately kept as flat PNGs rather than folded
+into an `.ora` layer: the paired-anchor-dot sheets (their several layers only
+make sense read together) and the two single-layer masks —
+`land_sea_mask.png` (the land/sea fill; binarize it first with
+`binarize_cyan_mask.py`, since the `.ora` `coasts` layer is only the cyan
+trace and — measured during scoping — differs from the fill by ~145k px) and
+`terraqueous_globe_reprojected - tiny_islands_merger.png`.
 
 ## Renamed: `the-old-world-all-faction-starting-position-map-v3-0-updated-v0-ml2lq3qfofad1{, - Copy}.png`
 

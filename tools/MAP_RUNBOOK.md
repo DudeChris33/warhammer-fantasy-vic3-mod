@@ -71,14 +71,24 @@ committed.
 python tools/worldgen/sources.py --verify   # sources match the manifest
 python tools/generate_coastline_mask.py      # -> tools/derived/land_sea_mask.png (from the traced coastline)
 python tools/generate_heightmap.py           # -> map_data/heightmap.png (consumes the mask above)
-python tools/generate_rivers.py              # -> map_data/rivers.png (from the user's cyan river trace; board #3703)
+python tools/generate_rivers.py              # -> map_data/rivers.png (from the user's blue river trace; board #3703)
 python tools/run_fixture.py --check          # determinism + goldens + validators
 ```
 
+> **Exporting a source (board #5399).** A multi-layer GIMP `.xcf` master gets a
+> sibling OpenRaster export: GIMP *File → Export As…* → same folder, same stem,
+> `.ora`. Tools then read a concern (coastline trace, rivers, sea zones, state
+> borders, impassable terrain) out of it by `stack.xml` layer name, via the ref
+> in `tools/config/source_layers.json`. The land/sea fill is the one exception —
+> export `land_sea_mask.png` as a flat PNG, run it through `binarize_cyan_mask.py`,
+> then `sources.py --update-manifest` to pin the new hash.
+
 > **Rivers are source-driven (board #3703), not heightmap drainage.**
-> `generate_rivers.py` reads the hand-traced pure-cyan (`0,255,255`) river network
-> (`sources/terraqueous_globe_reprojected - rivers.png`, canvas-native — or the
-> layers in `tools/config/river_sources.json`) and the optional anchor-keyed names
+> `generate_rivers.py` reads the hand-traced pure-blue (`0,0,255`) river network
+> (`terraqueous_globe_reprojected - full.ora#rivers`, via `tools/config/source_layers.json`'s
+> `rivers` key — board #5399, cyan is reserved for the coastline trace —
+> canvas-native, or the layers in `tools/config/river_sources.json`) and the
+> optional anchor-keyed names
 > in `tools/config/canon_river_names.json`, not the terrain. Regenerating the real
 > `map_data/rivers.png` is a **user-gated visual step**: render it with `python
 > tools/render_rivers_preview.py`, send the PNG, and only commit the bitmap after
