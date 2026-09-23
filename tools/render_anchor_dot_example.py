@@ -26,8 +26,8 @@ Everything is deterministic for a fixed stack: the warp is the committed
 record's thin-plate field, sampling is bilinear, and no RNG or wall-clock enters.
 
 ``--native --state-borders`` additionally samples the hand-drawn canvas-space
-state-region magenta network (``sources/terraqueous_globe_reprojected -
-state_regions.png``) onto the tile through the same inverse warp — the reverse
+state-region magenta network (``terraqueous_globe_reprojected -
+full.ora#borders``) onto the tile through the same inverse warp — the reverse
 of the parchment->canvas drape, letting the drawn
 borders be judged against the mod parchment's own printed lines. A QA/reference
 projection only; state geometry is authored canvas-natively and this feeds
@@ -67,7 +67,7 @@ MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 RIVERS_PATH = TOOLS_DIR.parent / "map_data" / "rivers.png"
 #: The hand-drawn state-region magenta network — canvas-scale, same source
 #: tools/worldgen/land_provinces.py consumes for the real province cut.
-STATE_REGIONS_SOURCE = "terraqueous_globe_reprojected - state_regions.png"
+STATE_REGIONS_SOURCE = sources_mod.source_ref("state_borders")
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
@@ -121,17 +121,12 @@ def load_source_rgba(name: str) -> tuple[np.ndarray, np.ndarray | None]:
 
 
 def _read_source_rgba(name: str) -> tuple[np.ndarray, np.ndarray | None]:
-    """``(rgb, alpha)`` read directly from ``sources/`` (see module docstring)."""
-    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
-    if not path.is_file():
+    """``(rgb, alpha)`` read directly from ``sources/`` (see module docstring),
+    or a named ``.ora`` layer for a ``<file>.ora#<layer>`` reference."""
+    arr = sources_mod.read_source_rgba(name, SOURCES_DIR, allow_empty=True)
+    if arr is None:
         raise SystemExit(f"sources/{name} is missing — restore it first (tools/inpaint_dot_markers.py)")
-    with Image.open(path) as im:
-        if im.mode == "RGBA":
-            arr = np.asarray(im, dtype=np.uint8)
-            return arr[..., :3].copy(), arr[..., 3].copy()
-        if im.mode == "RGB":
-            return np.asarray(im, dtype=np.uint8).copy(), None
-        raise SystemExit(f"sources/{name}: unsupported image mode '{im.mode}'")
+    return arr[..., :3].copy(), arr[..., 3].copy()
 
 
 def footprint_box(reg: schema.SourceRegistration) -> tuple[int, int, int, int]:

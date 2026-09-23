@@ -101,7 +101,7 @@ GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 #: The destination coastline: a transparent overlay in the canvas frame whose
 #: only opaque pixels are the hand-drawn cyan coast line. Overlaid on the drape
 #: by default (opacity-detected — see overlay_coast; --no-coast skips it).
-COAST_SOURCE = "terraqueous_globe_reprojected - coasts.png"
+COAST_SOURCE = sources_mod.source_ref("coast_trace")
 
 MAGENTA_RGB = (255, 0, 255)
 COAST_RGB = (0, 255, 255)
@@ -162,19 +162,17 @@ def parse_colors(spec: str) -> list[tuple[int, int, int]]:
 
 
 def load_rgb(name: str) -> np.ndarray:
-    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
-    if not path.is_file():
+    arr = sources_mod.read_source_rgba(name, SOURCES_DIR, allow_empty=True)
+    if arr is None:
         raise SystemExit(f"sources/{name} is missing")
-    with Image.open(path) as im:
-        return np.asarray(im.convert("RGB"), dtype=np.uint8).copy()
+    return arr[..., :3].copy()
 
 
 def load_rgba(name: str) -> np.ndarray:
-    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
-    if not path.is_file():
+    arr = sources_mod.read_source_rgba(name, SOURCES_DIR, allow_empty=True)
+    if arr is None:
         raise SystemExit(f"sources/{name} is missing")
-    with Image.open(path) as im:
-        return np.asarray(im.convert("RGBA"), dtype=np.uint8).copy()
+    return arr
 
 
 def footprint_box(reg: schema.SourceRegistration, pad: float = 0.0) -> tuple[int, int, int, int]:

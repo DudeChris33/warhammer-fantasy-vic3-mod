@@ -53,7 +53,7 @@ NUMBERED_OUT_PATH = DERIVED_DIR / "seas_numbered_review.png"
 NUMBERED_OUT_HALF_PATH = DERIVED_DIR / "seas_numbered_review_half.png"
 NUMBERED_TABLE_PATH = DERIVED_DIR / "seas_numbered_index.txt"
 
-SEA_ZONES_SOURCE = "terraqueous_globe_reprojected - sea_zones.png"
+SEA_ZONES_SOURCE = sources.source_ref("sea_zones")
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X

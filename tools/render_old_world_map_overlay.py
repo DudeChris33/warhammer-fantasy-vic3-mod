@@ -118,8 +118,9 @@ Colour selection (``--colors``)
 named colours from :data:`COLOR_LIBRARY` (case-insensitive; ``purple``/``magenta``
 are aliases for the border-line colour). :data:`COLOR_LIBRARY` currently only
 carries the 3-colour palette of Chris's hand-recoloured
-``sources/gimp_exports/old_world_map - stretched.png`` (``purple``/``magenta``,
-``cities``, ``gimp_impassable`` — confirmed 2026-09-15; the canonical dataset's
+``old_world_map - stretched.png`` (a gitignored local working copy given via
+``--source``; ``purple``/``magenta``, ``cities``, ``gimp_impassable`` —
+confirmed 2026-09-15; the canonical dataset's
 own 8-colour palette is no longer independently selectable by name, only via
 the default full drape / :option:`--show-grey` described above). Every pixel
 whose colour is **not** in the selected set is treated as void (globe shows
@@ -174,7 +175,7 @@ LOOKUP_BMP = DATASET_DIR / "cr_oldworld_lookup" / "cr_oldworld_lookup.bmp"
 #: The reprojected globe that IS the canvas frame — the backdrop this drapes over.
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 #: The plain globe with a magenta coastline drawn on it — a reference line, not the backdrop.
-COAST_SOURCE = "terraqueous_globe_reprojected - coasts.png"
+COAST_SOURCE = sources_mod.source_ref("coast_trace")
 
 #: The registration record this projects through (see the PROVISIONAL note above).
 FULL_SOURCE = "tww3_old_world_mod_parchment_full.png"
@@ -212,10 +213,10 @@ LAND_TOLERANCE = 60
 #: this only needs to absorb incidental PNG re-save noise, not real AA.
 COLOR_MATCH_TOLERANCE = 10
 
-#: Chris's hand-recoloured sources/gimp_exports/old_world_map - stretched.png
-#: (--source override) — its own 3-colour palette, confirmed by Chris
-#: 2026-09-15. Selectable by name via --colors; aliases point at the same RGB
-#: as their primary name.
+#: Chris's hand-recoloured old_world_map - stretched.png (a gitignored local
+#: working copy given via --source) — its own 3-colour palette, confirmed by
+#: Chris 2026-09-15. Selectable by name via --colors; aliases point at the
+#: same RGB as their primary name.
 COLOR_LIBRARY: dict[str, tuple[int, int, int]] = {
     "purple": (255, 0, 255),   # region-border lines
     "magenta": (255, 0, 255),  # alias for "purple"
@@ -269,9 +270,10 @@ def resolve_stretched_source(arg: str | None) -> Path:
     """``--source`` -> an absolute path, defaulting to the dataset's own file.
 
     A relative ``arg`` is resolved against the repo root, so
-    ``--source "sources/gimp_exports/old_world_map - stretched.png"`` (a
+    ``--source "sources/oldworld-first/old_world_map - stretched.png"`` (a
     gitignored local working copy, e.g. hand-edited in GIMP) works exactly as
-    typed. An absolute path is used as-is.
+    typed — ``--source`` takes any PNG path, not one drawn from a fixed
+    folder. An absolute path is used as-is.
     """
     if not arg:
         return STRETCHED_PNG
@@ -283,9 +285,8 @@ def source_tag(path: Path) -> str:
     """Output-filename suffix distinguishing a non-default ``--source``.
 
     Empty for the dataset's own file (unchanged filenames from this render's
-    first version); otherwise the source's parent folder name, so
-    ``sources/gimp_exports/...`` and the dataset's own copy never collide on
-    disk.
+    first version); otherwise the source's parent folder name, so a
+    ``--source`` override and the dataset's own copy never collide on disk.
     """
     if path == STRETCHED_PNG:
         return ""
@@ -306,11 +307,10 @@ def require_source(path: Path) -> None:
 
 
 def load_source_rgb(name: str) -> np.ndarray:
-    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
-    if not path.is_file():
+    arr = sources_mod.read_source_rgba(name, SOURCES_DIR, allow_empty=True)
+    if arr is None:
         raise SystemExit(f"sources/{name} is missing")
-    with Image.open(path) as im:
-        return np.asarray(im.convert("RGB"), dtype=np.uint8).copy()
+    return arr[..., :3].copy()
 
 
 def load_stretched(path: Path) -> tuple[np.ndarray, np.ndarray]:
@@ -480,15 +480,14 @@ def overlay_coast(canvas_rgb: np.ndarray) -> int:
     """Draw the coasts reference PNG's drawn line onto ``canvas_rgb`` in cyan.
 
     Identical to render_cr_lookup_overlay.overlay_coast (any non-black pixel is
-    the line; the gitignored export's absence is a skip, not an error).
+    the line; the gitignored source's absence is a skip, not an error).
     """
-    path = sources_mod.resolve_source_path(COAST_SOURCE, SOURCES_DIR)
-    if not path.is_file():
+    rgba = sources_mod.read_source_rgba(COAST_SOURCE, SOURCES_DIR, allow_empty=True)
+    if rgba is None:
         log(f"  coast: sources/{COAST_SOURCE} not present on this device — "
             f"reference line skipped")
         return 0
-    with Image.open(path) as im:
-        coasts = np.asarray(im.convert("RGB"), dtype=np.uint8)
+    coasts = rgba[..., :3]
     if coasts.shape[:2] != (CANVAS_H, CANVAS_W):
         raise SystemExit(f"{COAST_SOURCE} is {coasts.shape[1]}x{coasts.shape[0]}, "
                          f"expected {CANVAS_W}x{CANVAS_H}")
@@ -802,7 +801,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--source", type=str, default=None,
                    help="path (repo-root-relative, or absolute) to a different 2048x2048 "
                         "export to drape instead of the dataset's own file — e.g. a local, "
-                        "gitignored GIMP-edited copy under sources/gimp_exports/. Must share "
+                        "gitignored GIMP-edited copy anywhere under sources/. Must share "
                         "the same frame/scale as the dataset file (same corners, same "
                         "content, just recoloured/edited); a genuinely different export "
                         "would need its own correspondence check. Output filenames are "

@@ -121,7 +121,7 @@ PARCHMENT_SOURCE = "tww3_old_world_mod_parchment.png"
 #: The reprojected globe that IS the canvas frame — the backdrop this drapes over.
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 #: The plain globe with a magenta coastline drawn on it — a reference line, not the backdrop.
-COAST_SOURCE = "terraqueous_globe_reprojected - coasts.png"
+COAST_SOURCE = sources_mod.source_ref("coast_trace")
 
 #: The registration record this projects through (see the PROVISIONAL note above).
 FULL_SOURCE = "tww3_old_world_mod_parchment_full.png"
@@ -214,11 +214,10 @@ def require_dataset() -> None:
 
 
 def load_source_rgb(name: str) -> np.ndarray:
-    path = sources_mod.resolve_source_path(name, SOURCES_DIR)
-    if not path.is_file():
+    arr = sources_mod.read_source_rgba(name, SOURCES_DIR, allow_empty=True)
+    if arr is None:
         raise SystemExit(f"sources/{name} is missing")
-    with Image.open(path) as im:
-        return np.asarray(im.convert("RGB"), dtype=np.uint8).copy()
+    return arr[..., :3].copy()
 
 
 def load_lookup() -> np.ndarray:
@@ -469,17 +468,15 @@ def overlay_coast(canvas_rgb: np.ndarray) -> int:
     hardcoded colour here fails open, drawing no reference line at all while
     reporting success).
 
-    The export lives under the gitignored ``sources/gimp_exports/``, so its
-    absence is the expected state on most devices: that is a skip with a note,
-    not an error.
+    The source is a gitignored local file, so its absence is the expected state
+    on most devices: that is a skip with a note, not an error.
     """
-    path = sources_mod.resolve_source_path(COAST_SOURCE, SOURCES_DIR)
-    if not path.is_file():
+    rgba = sources_mod.read_source_rgba(COAST_SOURCE, SOURCES_DIR, allow_empty=True)
+    if rgba is None:
         log(f"  coast: sources/{COAST_SOURCE} not present on this device — "
             f"reference line skipped")
         return 0
-    with Image.open(path) as im:
-        coasts = np.asarray(im.convert("RGB"), dtype=np.uint8)
+    coasts = rgba[..., :3]
     if coasts.shape[:2] != (CANVAS_H, CANVAS_W):
         raise SystemExit(f"{COAST_SOURCE} is {coasts.shape[1]}x{coasts.shape[0]}, "
                          f"expected {CANVAS_W}x{CANVAS_H}")
