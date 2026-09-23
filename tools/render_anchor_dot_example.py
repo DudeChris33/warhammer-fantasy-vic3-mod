@@ -14,13 +14,7 @@ dots as red rings, cropped to the record's footprint.
 
 Writes ``tools/derived/<region>_anchor_dot_warp_example.png``, where
 ``<region>`` is the seed stem with the shared ``tww3_old_world_mod_parchment_``
-prefix dropped (``badlands_nehekhara_anchor_dot_warp_example.png``, …).
-
-``--combined`` composites the five Old World parchment tiles on one canvas — the
-nine-zone coverage proof — as
-``tools/derived/old_world_anchor_dot_warp_combined.png``. The z10 relief crop
-(``start_warhammer_old_world_northern``) stays out of it: it overlaps the
-parchment tiles and its downstream consumption is undecided.
+prefix dropped (``full_anchor_dot_warp_example.png``, …).
 
 Sources are read directly from ``sources/`` (not through the SHA-256 manifest
 guard): this render runs mid-workflow, after an inpaint/restore and *before* the
@@ -34,17 +28,15 @@ record's thin-plate field, sampling is bilinear, and no RNG or wall-clock enters
 ``--native --state-borders`` additionally samples the hand-drawn canvas-space
 state-region magenta network (``sources/terraqueous_globe_reprojected -
 state_regions.png``) onto the tile through the same inverse warp — the reverse
-of ``tools/project_regions.py``'s parchment->canvas drape, letting the drawn
+of the parchment->canvas drape, letting the drawn
 borders be judged against the mod parchment's own printed lines. A QA/reference
 projection only; state geometry is authored canvas-natively and this feeds
 nothing downstream.
 
 Usage::
 
-    python tools/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_empire
-    python tools/render_anchor_dot_example.py --combined
-    python tools/render_anchor_dot_example.py --all   # the five tiles + combined
-    python tools/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_empire --native --state-borders
+    python tools/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_full
+    python tools/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_full --native --state-borders
 """
 
 from __future__ import annotations
@@ -94,20 +86,6 @@ ALPHA_VALID = 127.5
 ROW_BLOCK = 64
 
 PARCHMENT_PREFIX = "tww3_old_world_mod_parchment_"
-
-#: The five Old World parchment tiles, in the fixed compositing order used by
-#: ``--combined`` (later tiles win where warped alpha overlaps along shared
-#: borders; the crops' alpha masks are cut to be disjoint, so overlap is a
-#: border-pixel affair, not a design decision).
-FIVE_PARCHMENT = (
-    "tww3_old_world_mod_parchment_bretonnia",
-    "tww3_old_world_mod_parchment_empire",
-    "tww3_old_world_mod_parchment_kislev_norsca",
-    "tww3_old_world_mod_parchment_dark_lands",
-    "tww3_old_world_mod_parchment_badlands_nehekhara",
-)
-COMBINED_PAD = 64
-COMBINED_OUT = "old_world_anchor_dot_warp_combined.png"
 
 
 def log(msg: str) -> None:
@@ -265,15 +243,13 @@ def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Pa
     is cheaper and sharper to sample *those* into source-pixel space through the
     inverse warp than to resample the *source* down into canvas space the way
     :func:`render` does. Landmark rings use the seed's own ``source`` positions
-    directly — exact, no warp needed. Only meaningful for a single tile: a
-    multi-tile ``--combined`` composite has no one shared "native" resolution
-    across siblings.
+    directly — exact, no warp needed.
 
     ``overlay_borders`` samples the live ``state_regions.png`` magenta network
     (:func:`worldgen.land_provinces.magenta_lines` — the same extraction the
     real province cut uses) through the same inverse warp as the coastline, and
     paints it onto the tile in magenta. This is a QA/reference projection only
-    (the reverse of :mod:`tools.project_regions`'s parchment->canvas drape) —
+    (the reverse of the parchment->canvas drape) —
     state geometry is authored canvas-natively (see
     ``tools/worldgen/land_provinces.py``'s module docstring); nothing here feeds
     the pipeline.
@@ -393,18 +369,14 @@ def main(argv: list[str] | None = None) -> int:
                                 formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--seed", action="append", default=[],
                    help="seed stem under tools/registration/seeds/ (repeatable)")
-    p.add_argument("--combined", action="store_true",
-                   help=f"composite the five parchment tiles -> {COMBINED_OUT}")
-    p.add_argument("--all", action="store_true",
-                   help="the five per-region renders plus the combined one")
     p.add_argument("--native", action="store_true",
                    help="render a single --seed at its own native source resolution "
                         "(mask sampled onto it via the inverse warp) instead of its "
-                        "canvas footprint; not valid with --combined/--all")
+                        "canvas footprint")
     p.add_argument("--state-borders", action="store_true",
                    help="with --native, also sample the hand-drawn canvas-space "
                         "state-border magenta network onto the tile (the reverse "
-                        "of project_regions.py's parchment->canvas drape) — a QA "
+                        "of the parchment->canvas drape) — a QA "
                         "projection only, not pipeline input")
     args = p.parse_args(argv)
 
@@ -414,12 +386,10 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(f"{RIVERS_PATH} not found — run tools/generate_rivers.py first")
 
     stems = list(args.seed)
-    if args.all:
-        stems = list(FIVE_PARCHMENT)
-    if not stems and not args.combined:
-        raise SystemExit("nothing to render — pass --seed <stem>, --combined, or --all")
-    if args.native and (args.combined or args.all or len(stems) != 1):
-        raise SystemExit("--native needs exactly one --seed and no --combined/--all")
+    if not stems:
+        raise SystemExit("nothing to render — pass --seed <stem>")
+    if args.native and len(stems) != 1:
+        raise SystemExit("--native needs exactly one --seed")
     if args.state_borders and not args.native:
         raise SystemExit("--state-borders needs --native")
 
@@ -429,8 +399,6 @@ def main(argv: list[str] | None = None) -> int:
 
     for stem in stems:
         render([stem], out_name(stem))
-    if args.combined or args.all:
-        render(list(FIVE_PARCHMENT), COMBINED_OUT, box_pad=COMBINED_PAD)
     return 0
 
 

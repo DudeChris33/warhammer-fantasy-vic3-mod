@@ -141,36 +141,27 @@ BOUNDARY_LAYER = "boundaries"
 #: ``ink``/``ink_bridged`` for a textured parchment needing a local-contrast
 #: threshold (``ink_bridged`` also bridges lettering into the barrier).
 #:
-#: The three remaining ``tww3_old_world_mod_parchment_*`` crops are the denser
-#: Old World boundary network, one per-region tile placed by the paired-anchor-dot
-#: workflow. Each carries an intentional binary alpha mask (transparent = regions
-#: cut away), honoured as its contributing footprint (see ``extract_source_cells``
-#: and ``warp_cells``'s ``src_valid``). Their committed records carry a LIVE
-#: boundaries precedence only for dark_lands (113 — above IE's 100 and
-#: ``tww3_colored``'s 95, so its lines win inside its own footprint); bretonnia
-#: (5) and kislev_norsca (6, bumped 2026-09-04 from the 5 both provisionally
-#: shared — a genuine tie, rejected outright by ``stack_layers`` regardless of
-#: whether the two footprints overlap) still carry provisional placement
-#: values, so those two currently contribute BELOW IE wherever both cover.
-#: NOTE 2026-08-20: all five
-#: per-region crops (these three plus the empire and badlands_nehekhara tiles,
-#: not yet wired in here) exist in sources/ again, re-derived from the user's
-#: surviving marked dot crops by tools/inpaint_dot_markers.py. Wiring empire +
-#: badlands_nehekhara into BOUNDARY_SOURCES / OLD_WORLD_CROP_MIN_STATES and
-#: promoting the four inert precedences (5 -> live values) are deliberately
-#: deferred to board item #2207 — promotion means seed edits + record
-#: re-derives, and the legacy-fit records (bretonnia, kislev_norsca) would
-#: shrink to their dot hull + pad on a re-derive (fit_registration.py's
-#: hull-bounded lattice), so recovering their periphery needs edge dots from
-#: the user first.
+#: Board #5403 (2026-09-23) retired the five per-region ``tww3_old_world_mod_
+#: parchment_*`` crop registrations + their seeds outright — the dots sheets
+#: they derived from (dots_1..6) moved to ``sources/archive/`` and are no
+#: longer searched, and the unified triangle warp
+#: (``tww3_old_world_mod_parchment_full``) had already superseded them as the
+#: live parchment-drape backend. This is a **disclosed capability loss**: the
+#: three per-region crops this dict used to wire in as LIVE boundary-line
+#: sources for bretonnia/kislev_norsca/dark_lands are gone, with no
+#: replacement — ``state_labels.png``'s boundary-line coverage for those three
+#: macros now comes from IE (``tww3_ie_parchment.jpg``) / ``tww3_colored.png``
+#: only. This is safe to do without a replacement: ``generate_provinces.py``'s
+#: own docstring says it is decoupled from this file's pipeline — the live
+#: province generator reads the hand-drawn magenta ``state_regions.png``
+#: directly, never ``state_labels.png`` — and nothing in the offline gate
+#: (``sources.py --verify``, ``validate_map.py``, ``run_fixture.py --check``)
+#: calls this script; only a manual re-run of it is affected, and the
+#: already-committed ``state_labels.png``/``state_labels_index.json`` are
+#: untouched either way.
 BOUNDARY_SOURCES = {
     "tww3_colored.png": "flat_colour",
     "tww3_ie_parchment.jpg": "ink_bridged",
-    # The three macros are still ink-traced pending their own border markup;
-    # they carry roads until then, but reach usable density.
-    "tww3_old_world_mod_parchment_bretonnia.png": {"kind": "ink_bridged"},
-    "tww3_old_world_mod_parchment_kislev_norsca.png": {"kind": "ink_bridged"},
-    "tww3_old_world_mod_parchment_dark_lands.png": {"kind": "ink_bridged"},
 }
 
 #: The Old World macro footprints, measured directly from each crop's warped
@@ -180,12 +171,9 @@ BOUNDARY_SOURCES = {
 #: (see :func:`assign_macros`), the crop footprints ARE the Old World macros for
 #: counting: this measures density where the request is judged, without the twin.
 #: imperial_provinces.png (the_empire) removed 2026-08-17 — its source file is
-#: gone; no replacement wired in yet (see BOUNDARY_SOURCES note above).
-OLD_WORLD_CROP_MIN_STATES = {
-    "tww3_old_world_mod_parchment_bretonnia.png": ("bretonnia+estalia+tilea", 24),
-    "tww3_old_world_mod_parchment_kislev_norsca.png": ("kislev+norsca", 30),
-    "tww3_old_world_mod_parchment_dark_lands.png": ("darklands", 30),
-}
+#: gone. The three remaining entries were removed by board #5403 for the same
+#: reason as the ``BOUNDARY_SOURCES`` note above — empty pending a replacement.
+OLD_WORLD_CROP_MIN_STATES: dict[str, tuple[str, int]] = {}
 
 #: Off-map background and legend panels, in each source's own pixels.
 BOUNDARY_EXCLUDE = {

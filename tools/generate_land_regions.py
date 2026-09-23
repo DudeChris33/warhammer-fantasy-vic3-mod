@@ -50,7 +50,7 @@ review render + CSV worksheet — the persisted naming input this script reads
 (``tools/config/land_regions_worksheet.csv``, hand-edited like
 ``tools/config/inland_lakes.json``, never re-derived from scratch). It drapes
 the real TWW3 parchment art under the numbered regions (reusing
-``project_regions.py``'s five-crop registration) rather than guessing a name
+``project_regions_unified.py``'s triangle-warp registration) rather than guessing a name
 algorithmically: an earlier cut of this pipeline guessed the nearest
 real-world vanilla Vic3 state by longitude/latitude (rejected — coincidental
 Earth-geography proximity means nothing on a fictional world), and OCR of the

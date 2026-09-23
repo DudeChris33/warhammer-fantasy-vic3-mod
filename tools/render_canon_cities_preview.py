@@ -6,11 +6,12 @@ Reads the committed ``tools/config/canon_cities.json`` (via
 (gitignored — a dev-only authoring aid, never shipped content):
 
   (a) ``canon_cities_preview.png`` — a human review PNG: a labelled dot per city
-      over the reprojected globe, draping the real TWW3 parchment art wherever the
-      five ``project_regions`` registration crops cover the canvas (reusing
-      ``render_land_regions_preview._parchment_drape`` wholesale, exactly as
-      ``render_hubs_preview`` does), plain globe elsewhere — plus a half-size and a
-      tight crop around the catalogued cities, so a proving-slice of a few holds
+      over the reprojected globe, draping the real TWW3 parchment art wherever
+      ``project_regions_unified``'s single triangle-warp registration covers the
+      canvas (reusing
+      ``render_land_regions_preview._parchment_drape_triangle`` wholesale, exactly
+      as ``render_hubs_preview`` does), plain globe elsewhere — plus a half-size and
+      a tight crop around the catalogued cities, so a proving-slice of a few holds
       isn't lost on the 8192-wide frame.
 
   (b) ``canon_cities_overlay.png`` — a **transparent 8192x3616 RGBA layer** (dots +
@@ -118,11 +119,11 @@ def main(argv: list[str] | None = None) -> int:
     log(f"wrote {OUT_OVERLAY_PATH}  ({CANVAS_W}x{CANVAS_H}, transparent GIMP layer)", t0)
 
     # --- artifact (a): the parchment-draped review PNG ---------------------
-    # _parchment_drape returns a full backdrop already: the globe with the
-    # parchment draped on top where the five crops reach, plain globe elsewhere
-    # (place_painting starts from a copy of the globe). So the backdrop IS the
-    # base — no second globe composite needed.
-    backdrop, _placed = rlr._parchment_drape(t0)
+    # _parchment_drape_triangle returns a full backdrop already: the globe with
+    # the parchment draped on top where the triangle warp reaches, plain globe
+    # elsewhere (place_painting starts from a copy of the globe). So the
+    # backdrop IS the base — no second globe composite needed.
+    backdrop, _placed = rlr._parchment_drape_triangle(t0)
     review = Image.fromarray(backdrop).convert("RGBA")
     review.alpha_composite(overlay)
     review = review.convert("RGB")

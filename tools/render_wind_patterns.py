@@ -45,7 +45,7 @@ Two stages compose the field:
 
 The backdrop, the land/sea mask and the heightmap are read directly (the globe and
 mask outside the SHA-256 manifest guard — the accepted QA-render convention, see
-``project_regions.py``; the heightmap is a committed ``map_data/`` artifact). A QA
+``render_anchor_dot_example.py``; the heightmap is a committed ``map_data/`` artifact). A QA
 render is evidence for a human, not pipeline input, and the offline gate
 (``sources.py --verify``) still owns integrity for anything that ships.
 Deterministic: the arrow grid is a fixed lattice, the belt directions are a pure

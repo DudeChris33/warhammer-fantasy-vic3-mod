@@ -7,11 +7,12 @@ committed ``map_data/provinces.png`` + ``tools/derived/provinces_index.json`` an
 the derived ``tools/derived/hub_anchors_index.json`` (written by
 ``generate_provinces.py`` when a hub worksheet exists).
 
-Source-dependent (the parchment drape reuses ``project_regions.py``'s five-crop
-registration, like ``render_land_regions_preview.py``) and writes into
-``tools/derived/`` (gitignored) — a dev-only artifact, run on the user's authoring
-machine. Outputs the whole world plus a tight crop around the listed hubs, since a
-proving-slice of a few states is otherwise lost on the 8192-wide canvas.
+Source-dependent (the parchment drape reuses ``project_regions_unified.py``'s
+single triangle-warp registration, like ``render_land_regions_preview.py``) and
+writes into ``tools/derived/`` (gitignored) — a dev-only artifact, run on the
+user's authoring machine. Outputs the whole world plus a tight crop around the
+listed hubs, since a proving-slice of a few states is otherwise lost on the
+8192-wide canvas.
 """
 from __future__ import annotations
 
@@ -83,7 +84,7 @@ def main(argv: list[str] | None = None) -> int:
     prov_lab = _province_labels(rgb, prov_index["cells"])
     edges = rlr._edges(prov_lab, WRAP_X)
 
-    backdrop, placed = rlr._parchment_drape(t0)
+    backdrop, placed = rlr._parchment_drape_triangle(t0)
     out = np.where(placed[..., None], backdrop, rgb).astype(np.uint8)
     out[edges] = (40, 20, 10)  # dark province edges
 
