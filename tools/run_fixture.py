@@ -3358,6 +3358,23 @@ def _selfcheck_ora_reader() -> None:
         expected_overhang[0:5, 8:10] = overhang[0:5, 0:2]
         assert np.array_equal(got_overhang, expected_overhang), "overhang layer composite mismatch (right-edge clip)"
 
+        # --- stray partial-opacity paint (e.g. an accidental 98% brush stroke)
+        #     must be snapped to exactly 0/255, not shipped as-is -----------------
+        stray = np.zeros((h, w, 4), dtype=np.uint8)
+        stray[:, :] = (10, 20, 30, 255)
+        stray[0, 0] = (1, 2, 3, 250)   # ~98% opacity -> must snap to 255, RGB kept
+        stray[0, 1] = (1, 2, 3, 5)     # ~2% opacity -> must snap to 0, RGB zeroed
+        stray[0, 2] = (1, 2, 3, 128)   # exact midpoint -> rounds up to 255
+        stray[0, 3] = (1, 2, 3, 127)   # just under midpoint -> rounds down to 0
+        stray_path = tmp / "stray.ora"
+        _write_test_ora(stray_path, w, h, [{"name": "stray", "x": 0, "y": 0, "rgba": stray}])
+        got_stray = src_mod.read_ora_layer(stray_path, "stray")
+        assert got_stray[0, 0, 3] == 255 and tuple(got_stray[0, 0, :3]) == (1, 2, 3), got_stray[0, 0]
+        assert got_stray[0, 1, 3] == 0 and tuple(got_stray[0, 1, :3]) == (0, 0, 0), got_stray[0, 1]
+        assert got_stray[0, 2, 3] == 255, "alpha 128 (the midpoint) must round up to 255"
+        assert got_stray[0, 3, 3] == 0, "alpha 127 (just under the midpoint) must round down to 0"
+        assert set(np.unique(got_stray[..., 3]).tolist()) <= {0, 255}, "alpha must only ever be 0 or 255"
+
         # --- missing name lists the available names -------------------------
         try:
             src_mod.read_ora_layer(ora_path, "nope")

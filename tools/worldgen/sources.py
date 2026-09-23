@@ -169,6 +169,16 @@ def image_dims(path: Path) -> str:
 # .ora (OpenRaster) layer reader
 # ---------------------------------------------------------------------------
 
+def _snap_alpha_to_binary(alpha) -> None:
+    """Snap an alpha array **in place** to exactly 0 or 255 per pixel,
+    rounding to whichever is closer (the midpoint 127/128 rounds up, matching
+    a plain round-half-up). A source mask is meant to be hard-edged paint; a
+    stray partial-opacity brush stroke (e.g. a 98% stroke, alpha ~250) would
+    otherwise ship as a genuine partial-transparency value no downstream tool
+    expects, and no coordinate is recorded anywhere else to spot it by eye."""
+    alpha[alpha < 128] = 0
+    alpha[alpha >= 128] = 255
+
 def _parse_ora_stack(path: Path) -> tuple[int, int, list[ET.Element]]:
     """Return ``(w, h, layer_elements)`` for ``path``'s ``stack.xml``, in
     document order. Raises :class:`OraError` on anything malformed: a missing
@@ -234,8 +244,9 @@ def read_ora_layer(path: Path, name: str, *, allow_empty: bool = False):
     """Return the layer named ``name`` in the .ora at ``path`` as an
     ``(H, W, 4)`` uint8 RGBA array at the image's full ``w``x``h`` canvas,
     composited at the layer's ``x``/``y`` offset (clipped at the canvas
-    edges — handles negative offsets and overhanging layers) with RGB zeroed
-    wherever alpha is 0. Hidden and edit-locked layers are readable;
+    edges — handles negative offsets and overhanging layers), with alpha
+    snapped to exactly 0 or 255 (see :func:`_snap_alpha_to_binary`) and RGB
+    zeroed wherever alpha is 0. Hidden and edit-locked layers are readable;
     ``opacity``/``visibility``/``composite-op``/``edit-locked`` are ignored —
     this returns the raw painted pixels.
 
@@ -292,6 +303,7 @@ def read_ora_layer(path: Path, name: str, *, allow_empty: bool = False):
         src_x1, src_y1 = src_x0 + (dst_x1 - dst_x0), src_y0 + (dst_y1 - dst_y0)
         canvas[dst_y0:dst_y1, dst_x0:dst_x1] = layer_img[src_y0:src_y1, src_x0:src_x1]
 
+    _snap_alpha_to_binary(canvas[..., 3])
     canvas[canvas[..., 3] == 0, :3] = 0
 
     if not allow_empty and not bool((canvas[..., 3] > 0).any()):
@@ -610,8 +622,11 @@ def load_source_image_rgba(
     """Like :func:`load_source_image`, but returns ``(rgb, alpha)``.
 
     ``rgb`` is an ``(H, W, 3)`` uint8 array exactly as :func:`load_source_image`
-    would return. ``alpha`` is an ``(H, W)`` uint8 array **only** when the source
-    carries a genuine transparency mask (some pixel below 255); it is ``None`` for
+    would return. ``alpha``, when returned, is snapped to exactly 0 or 255 per
+    pixel first (see :func:`_snap_alpha_to_binary` — a stray partial-opacity
+    brush stroke must not ship as a genuine partial-transparency value), and is
+    an ``(H, W)`` uint8 array **only** when the source carries a genuine
+    transparency mask after snapping (some pixel below 255); it is ``None`` for
     a fully-opaque source or one with no alpha channel at all. This is the single
     authority for a crop's real footprint: the paired-anchor-dot region crops carry
     an intentional binary alpha mask (transparent = excluded regions), and
@@ -635,7 +650,8 @@ def load_source_image_rgba(
     with Image.open(path) as im:
         rgb = np.asarray(im.convert("RGB"), dtype=np.uint8)
         if im.mode in ("RGBA", "LA", "PA") or "transparency" in im.info:
-            alpha = np.asarray(im.convert("RGBA"), dtype=np.uint8)[..., 3]
+            alpha = np.asarray(im.convert("RGBA"), dtype=np.uint8)[..., 3].copy()
+            _snap_alpha_to_binary(alpha)
             if int(alpha.min()) < 255:
                 return rgb, alpha
         return rgb, None
@@ -651,9 +667,10 @@ def read_source_rgba(
     (or can't afford) the manifest SHA-256 guard. Resolves ``ref`` (a bare
     flat filename or a ``<file>.ora#<layer>`` reference) under
     ``sources_dir``, returning ``None`` when the container file is absent and
-    otherwise an ``(H, W, 4)`` uint8 RGBA array with RGB zeroed under alpha 0
-    — for a layer ref and a flat file alike, since the tools detect exact
-    paint colours and a fully-transparent pixel's stored RGB is meaningless."""
+    otherwise an ``(H, W, 4)`` uint8 RGBA array with alpha snapped to exactly 0
+    or 255 (see :func:`_snap_alpha_to_binary`) and RGB zeroed under alpha 0 —
+    for a layer ref and a flat file alike, since the tools detect exact paint
+    colours and a fully-transparent pixel's stored RGB is meaningless."""
     import numpy as np
     from PIL import Image
 
@@ -667,6 +684,7 @@ def read_source_rgba(
         raise OraError(f"{ref}: an .ora reference needs a '#layer' suffix")
     with Image.open(path) as im:
         arr = np.array(im.convert("RGBA"), dtype=np.uint8)
+    _snap_alpha_to_binary(arr[..., 3])
     arr[arr[..., 3] == 0, :3] = 0
     return arr
 
