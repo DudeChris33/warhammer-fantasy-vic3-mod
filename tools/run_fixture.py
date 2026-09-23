@@ -32,6 +32,7 @@ import random
 import shutil
 import sys
 import tempfile
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -582,7 +583,8 @@ def _update_fixture_manifest(manifest: Path, root: Path) -> None:
 def check_ingest() -> int:
     """Determinism + golden + manifest-verify for the ingestion fixture."""
     errors = sources.verify(sources_dir=INGEST_DIR, manifest_path=INGEST_MANIFEST,
-                            registration_dir=INGEST_REG_DIR)
+                            registration_dir=INGEST_REG_DIR,
+                            source_layers_path=INGEST_DIR / "_no_source_layers.json")
     if errors:
         print("INGEST manifest verification failed:", file=sys.stderr)
         for e in errors:
@@ -805,7 +807,8 @@ def _edge_proximity(a: np.ndarray, b: np.ndarray, tol: int = 2) -> float:
 def check_boundary() -> int:
     """Determinism + golden + manifest-verify for the boundary fixture."""
     errors = sources.verify(sources_dir=BOUNDARY_DIR, manifest_path=BOUNDARY_MANIFEST,
-                            registration_dir=BOUNDARY_REG_DIR)
+                            registration_dir=BOUNDARY_REG_DIR,
+                            source_layers_path=BOUNDARY_DIR / "_no_source_layers.json")
     if errors:
         print("BOUNDARY manifest verification failed:", file=sys.stderr)
         for e in errors:
@@ -3278,6 +3281,284 @@ def _selfcheck_land_state_numbers() -> None:
     ], f"seed index must map each state's province hexes to their stable ids, sorted, got {built}"
 
 
+def _write_test_ora(path: Path, w: int, h: int, layers: list[dict]) -> None:
+    """Write a synthetic .ora to ``path`` for :func:`_selfcheck_ora_reader`.
+
+    ``layers`` is a list of ``{name, rgba (HxWx4 uint8), x=0, y=0,
+    visibility="visible"}`` dicts, written in order. ``mimetype`` is written
+    first and uncompressed (stored), matching real GIMP exports."""
+    import io as _io
+
+    from PIL import Image as _Image
+
+    with zipfile.ZipFile(path, "w") as zf:
+        mi = zipfile.ZipInfo("mimetype")
+        zf.writestr(mi, b"image/openraster", compress_type=zipfile.ZIP_STORED)
+        layer_xml: list[str] = []
+        for i, layer in enumerate(layers):
+            src = f"data/{i:03d}.png"
+            buf = _io.BytesIO()
+            _Image.fromarray(layer["rgba"], "RGBA").save(buf, format="PNG")
+            zf.writestr(src, buf.getvalue())
+            vis = layer.get("visibility", "visible")
+            layer_xml.append(
+                f'<layer src="{src}" name="{layer["name"]}" x="{layer.get("x", 0)}" '
+                f'y="{layer.get("y", 0)}" opacity="1.0" visibility="{vis}" '
+                f'composite-op="svg:src-over" />'
+            )
+        stack_xml = f'<image w="{w}" h="{h}"><stack>' + "".join(layer_xml) + "</stack></image>"
+        zf.writestr("stack.xml", stack_xml)
+
+
+def _selfcheck_ora_reader() -> None:
+    """The .ora (OpenRaster) layer reader (board #5399), on synthetic archives
+    built in a temp dir — no dependency on the real gitignored ``sources/``."""
+    from worldgen import sources as src_mod
+
+    with tempfile.TemporaryDirectory(prefix="wh_ora_") as tmp_s:
+        tmp = Path(tmp_s)
+        w, h = 10, 8
+
+        base = np.zeros((h, w, 4), dtype=np.uint8)
+        base[:, :] = (10, 20, 30, 255)
+        base[0, 0] = (99, 88, 77, 0)  # transparent px, nonzero stored RGB -> must read back as 0
+
+        hidden = np.full((4, 4, 4), (200, 0, 0, 255), dtype=np.uint8)
+        overhang = np.full((5, 5, 4), (0, 200, 0, 255), dtype=np.uint8)
+        dup_a = np.zeros((1, 1, 4), dtype=np.uint8)
+        dup_b = np.full((1, 1, 4), 1, dtype=np.uint8)
+        empty_layer = np.zeros((3, 3, 4), dtype=np.uint8)
+
+        ora_path = tmp / "test.ora"
+        _write_test_ora(ora_path, w, h, [
+            {"name": "base", "x": 0, "y": 0, "rgba": base},
+            {"name": "hidden", "x": 3, "y": -2, "rgba": hidden, "visibility": "hidden"},
+            {"name": "overhang", "x": w - 2, "y": 0, "rgba": overhang},
+            {"name": "dup", "x": 0, "y": 0, "rgba": dup_a},
+            {"name": "dup", "x": 0, "y": 0, "rgba": dup_b},
+            {"name": "empty_layer", "x": 0, "y": 0, "rgba": empty_layer},
+        ])
+
+        # --- read by name: composite equals a hand-built expected array -----
+        got_base = src_mod.read_ora_layer(ora_path, "base")
+        expected_base = base.copy()
+        expected_base[0, 0, :3] = 0  # RGB zeroed under alpha 0
+        assert np.array_equal(got_base, expected_base), "base layer composite mismatch"
+
+        got_hidden = src_mod.read_ora_layer(ora_path, "hidden")
+        expected_hidden = np.zeros((h, w, 4), dtype=np.uint8)
+        # x=3,y=-2, 4x4 source: canvas rows 0..1 <- src rows 2..3; canvas cols 3..6 <- src cols 0..3
+        expected_hidden[0:2, 3:7] = hidden[2:4, 0:4]
+        assert np.array_equal(got_hidden, expected_hidden), "hidden layer composite mismatch (offset/clip)"
+        assert got_hidden[..., 3].any(), "hidden layer must be readable despite visibility=hidden"
+
+        got_overhang = src_mod.read_ora_layer(ora_path, "overhang")
+        expected_overhang = np.zeros((h, w, 4), dtype=np.uint8)
+        # x=w-2=8,y=0, 5x5 source clipped to canvas cols 8..9 (src cols 0..1), all 5 rows fit
+        expected_overhang[0:5, 8:10] = overhang[0:5, 0:2]
+        assert np.array_equal(got_overhang, expected_overhang), "overhang layer composite mismatch (right-edge clip)"
+
+        # --- missing name lists the available names -------------------------
+        try:
+            src_mod.read_ora_layer(ora_path, "nope")
+            raise AssertionError("a missing layer name must raise OraError")
+        except src_mod.OraError as exc:
+            msg = str(exc)
+            for name in ("base", "hidden", "overhang", "dup", "empty_layer"):
+                assert name in msg, f"missing-name error must list available names, got: {msg}"
+
+        # --- duplicated requested name raises; an unrelated duplicate does not --
+        try:
+            src_mod.read_ora_layer(ora_path, "dup")
+            raise AssertionError("a name matching 2 layers must raise OraError")
+        except src_mod.OraError:
+            pass
+        src_mod.read_ora_layer(ora_path, "base")  # unrelated duplicate ("dup") must not block this
+
+        # --- empty layer: raises unless allow_empty=True ---------------------
+        try:
+            src_mod.read_ora_layer(ora_path, "empty_layer")
+            raise AssertionError("an all-transparent layer must raise OraError by default")
+        except src_mod.OraError:
+            pass
+        got_empty = src_mod.read_ora_layer(ora_path, "empty_layer", allow_empty=True)
+        assert got_empty.shape == (h, w, 4) and int(got_empty[..., 3].max()) == 0
+
+        # --- ora_layer_names ---------------------------------------------------
+        names = src_mod.ora_layer_names(ora_path)
+        assert names == ["base", "hidden", "overhang", "dup", "dup", "empty_layer"], names
+
+        # --- malformed archives: wrong mimetype, malformed XML, nested <stack>,
+        #     missing src --------------------------------------------------------
+        bad_mime = tmp / "bad_mime.ora"
+        with zipfile.ZipFile(bad_mime, "w") as zf:
+            zf.writestr("mimetype", b"image/png")
+            zf.writestr("stack.xml", f'<image w="{w}" h="{h}"><stack></stack></image>')
+        try:
+            src_mod.read_ora_layer(bad_mime, "base")
+            raise AssertionError("a wrong mimetype must raise OraError")
+        except src_mod.OraError:
+            pass
+
+        bad_xml = tmp / "bad_xml.ora"
+        with zipfile.ZipFile(bad_xml, "w") as zf:
+            zf.writestr("mimetype", b"image/openraster")
+            zf.writestr("stack.xml", f'<image w="{w}" h="{h}"><stack>')  # unterminated
+        try:
+            src_mod.ora_layer_names(bad_xml)
+            raise AssertionError("malformed stack.xml must raise OraError")
+        except src_mod.OraError:
+            pass
+
+        nested = tmp / "nested.ora"
+        with zipfile.ZipFile(nested, "w") as zf:
+            zf.writestr("mimetype", b"image/openraster")
+            zf.writestr(
+                "stack.xml",
+                f'<image w="{w}" h="{h}"><stack><stack>'
+                f'<layer src="data/000.png" name="x" /></stack></stack></image>',
+            )
+        try:
+            src_mod.ora_layer_names(nested)
+            raise AssertionError("a nested <stack> (layer group) must raise OraError")
+        except src_mod.OraError:
+            pass
+
+        no_src = tmp / "no_src.ora"
+        with zipfile.ZipFile(no_src, "w") as zf:
+            zf.writestr("mimetype", b"image/openraster")
+            zf.writestr(
+                "stack.xml",
+                f'<image w="{w}" h="{h}"><stack>'
+                f'<layer src="data/999.png" name="ghost" /></stack></image>',
+            )
+        try:
+            src_mod.read_ora_layer(no_src, "ghost")
+            raise AssertionError("a layer src absent from the archive must raise OraError")
+        except src_mod.OraError:
+            pass
+
+        # --- split_ref ---------------------------------------------------------
+        assert src_mod.split_ref("plain.png") == ("plain.png", None)
+        assert src_mod.split_ref("x.ora#layer") == ("x.ora", "layer")
+        assert src_mod.split_ref("x#y.png") == ("x#y.png", None)
+        assert src_mod.split_ref("x.ora") == ("x.ora", None)
+        assert src_mod.split_ref("X.ORA#Layer") == ("X.ORA", "Layer")
+
+        # --- image_dims on an .ora ----------------------------------------------
+        assert src_mod.image_dims(ora_path) == f"{w}x{h}"
+
+        # --- load_source_image with the manifest SHA-256 guard -----------------
+        sources_dir = tmp / "sources"
+        sources_dir.mkdir()
+        guarded_ora = sources_dir / "s.ora"
+        _write_test_ora(guarded_ora, w, h, [{"name": "a", "x": 0, "y": 0, "rgba": base}])
+        sha = src_mod.sha256_of(guarded_ora)
+        manifest_path = tmp / "SOURCES.md"
+        manifest_path.write_text(
+            "# test manifest\n\n"
+            f"{src_mod.MANIFEST_BEGIN}\n"
+            + src_mod.render_table([
+                src_mod.ManifestRow("s.ora", f"{w}x{h}", str(guarded_ora.stat().st_size),
+                                     sha, "test", "test", "no"),
+            ])
+            + f"\n{src_mod.MANIFEST_END}\n",
+            encoding="utf-8",
+        )
+        loaded_rgb = src_mod.load_source_image("s.ora#a", sources_dir=sources_dir, manifest_path=manifest_path)
+        assert np.array_equal(loaded_rgb, expected_base[..., :3])
+        with open(guarded_ora, "ab") as fh:
+            fh.write(b"\x00")  # tamper
+        try:
+            src_mod.load_source_image("s.ora#a", sources_dir=sources_dir, manifest_path=manifest_path)
+            raise AssertionError("a tampered .ora must fail the SHA-256 guard")
+        except src_mod.ManifestError:
+            pass
+
+        # --- load_source_layers refusals ----------------------------------------
+        def _refused(text: str) -> bool:
+            p = tmp / "sl.json"
+            p.write_text(text, encoding="utf-8")
+            try:
+                src_mod.load_source_layers(p)
+                return False
+            except src_mod.ManifestError:
+                return True
+
+        assert _refused("[]"), "a non-object source_layers.json must be refused"
+        assert _refused('{"k": ""}'), "an empty ref value must be refused"
+        assert _refused('{"k": "x.ora"}'), "an .ora ref with no #layer must be refused"
+        assert _refused('{"k": "plain.png#layer"}'), "a '#' in a non-.ora ref must be refused"
+        ok_path = tmp / "sl_ok.json"
+        ok_path.write_text('{"k": "s.ora#a"}', encoding="utf-8")
+        assert src_mod.load_source_layers(ok_path) == {"k": "s.ora#a"}
+
+        # --- verify()'s source_layers.json step ---------------------------------
+        v4_sources = tmp / "v4_sources"
+        v4_sources.mkdir()
+        v4_ora = v4_sources / "a.ora"
+        _write_test_ora(v4_ora, w, h, [
+            {"name": "x", "x": 0, "y": 0, "rgba": base},
+            {"name": "dup2", "x": 0, "y": 0, "rgba": dup_a},
+            {"name": "dup2", "x": 0, "y": 0, "rgba": dup_b},
+        ])
+        from PIL import Image as _Image2
+
+        _Image2.fromarray(base, "RGBA").save(v4_sources / "flat.png")
+        (v4_sources / "missing.png").write_bytes((v4_sources / "flat.png").read_bytes())
+
+        v4_manifest = tmp / "v4_SOURCES.md"
+        v4_manifest.write_text(
+            f"{src_mod.MANIFEST_BEGIN}\n"
+            + src_mod.render_table([
+                src_mod.ManifestRow("a.ora", f"{w}x{h}", str(v4_ora.stat().st_size),
+                                     src_mod.sha256_of(v4_ora), "test", "test", "no"),
+                src_mod.ManifestRow("flat.png", src_mod.image_dims(v4_sources / "flat.png"),
+                                     str((v4_sources / "flat.png").stat().st_size),
+                                     src_mod.sha256_of(v4_sources / "flat.png"), "test", "test", "no"),
+            ])
+            + f"\n{src_mod.MANIFEST_END}\n",
+            encoding="utf-8",
+        )
+        v4_reg_dir = tmp / "v4_registration"
+        v4_reg_dir.mkdir()
+
+        def _v4(table: dict) -> list[str]:
+            sl_path = tmp / "v4_source_layers.json"
+            sl_path.write_text(json.dumps(table), encoding="utf-8")
+            return src_mod.verify(
+                sources_dir=v4_sources, manifest_path=v4_manifest,
+                registration_dir=v4_reg_dir, source_layers_path=sl_path,
+            )
+
+        assert _v4({"ok": "a.ora#x"}) == [], "a clean, resolvable ref must yield no error"
+        errs = _v4({"missing_file": "notfound.ora#y"})
+        assert len(errs) == 1 and "missing_file" in errs[0], errs
+        errs = _v4({"no_manifest_row": "missing.png"})
+        assert len(errs) == 1 and "no_manifest_row" in errs[0], errs
+        errs = _v4({"missing_layer": "a.ora#nope"})
+        assert len(errs) == 1 and "missing_layer" in errs[0], errs
+        errs = _v4({"dup_layer": "a.ora#dup2"})
+        assert len(errs) == 1 and "dup_layer" in errs[0], errs
+        # A missing source_layers.json path (the ingest/boundary fixture harness
+        # idiom) is a clean skip, not an error.
+        no_table_errs = src_mod.verify(
+            sources_dir=v4_sources, manifest_path=v4_manifest, registration_dir=v4_reg_dir,
+            source_layers_path=tmp / "does-not-exist-source-layers.json",
+        )
+        assert no_table_errs == [], no_table_errs
+
+        # --- read_source_rgba: flat file, alpha-0 RGB zeroing, determinism ------
+        flat_rgba = src_mod.read_source_rgba("flat.png", sources_dir=v4_sources)
+        assert flat_rgba is not None
+        assert np.array_equal(flat_rgba, expected_base), "flat-file read must zero RGB under alpha 0 too"
+        assert src_mod.read_source_rgba("does-not-exist.png", sources_dir=v4_sources) is None
+
+        again = src_mod.read_ora_layer(ora_path, "base")
+        assert np.array_equal(got_base, again) and got_base.tobytes() == again.tobytes(), \
+            "two reads of the same layer must be byte-identical"
+
+
 def _selfcheck_piecewise_affine() -> None:
     """The piecewise-affine warp projection (board: scale-collage registration).
 
@@ -3728,6 +4009,11 @@ def run_check() -> int:
           "remove retires, split keeps dominant + fresh piece, merge keeps larger overlap, "
           "reassign/no-index bootstrap, order-invariant, zero-match safety net) + "
           "seed_land_state_ids parser self-check passed.")
+    _selfcheck_ora_reader()
+    print("sources: .ora layer reader (name lookup, offset/clip composite, hidden layers, "
+          "missing/duplicate-name and empty-layer refusals, malformed-archive errors, "
+          "split_ref, image_dims, manifest SHA-256 guard, source_layers.json refusals + "
+          "verify() step 4, flat-file alpha-0 zeroing, determinism) self-check passed.")
     world = schema.load_world(WORLD_DIR)
     width, height = FIXTURE_CANVAS
 
