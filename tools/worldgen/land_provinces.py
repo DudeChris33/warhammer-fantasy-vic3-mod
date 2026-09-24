@@ -427,7 +427,8 @@ def _is_connected(mask: np.ndarray, wrap_x: bool) -> bool:
 
 
 def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
-                    anchors: list[tuple[int, int]] | None = None) -> np.ndarray:
+                    anchors: list[tuple[int, int]] | None = None,
+                    geodesic: bool = False) -> np.ndarray:
     """Cut one region ``mask`` into pieces, returning a canvas-shaped int array
     with contiguous labels ``1..m`` (``m <= k``) on the region and 0 elsewhere.
 
@@ -452,6 +453,11 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
     fill+split, the anchor-bearing pieces are passed to ``merge_small`` as
     ``protected`` so a deliberately-small hub province is never swallowed. The mask
     is untouched. ``anchors=None`` is byte-identical to the original cut.
+
+    ``geodesic=True`` (#3704, painted regions only) assigns each pixel to the seat
+    nearest *through the mask* (flat-image watershed, a BFS partition) instead of
+    the straight-line nearest, so a winding passable tract is cut along its length
+    rather than sliced across the paint. Default keeps the byte-identical path.
     """
     m = mask
     shift = 0
@@ -482,7 +488,12 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
     seed_img = np.zeros(local.shape, dtype=np.int32)
     seed_img[tuple(seeds.T)] = np.arange(1, len(seeds) + 1, dtype=np.int32)
     # Nearest labelled seed for every region pixel — one EDT over the box.
-    filled = cells.fill_nearest(seed_img, local, wrap_x=False)
+    if geodesic:
+        from skimage.segmentation import watershed
+        filled = watershed(np.zeros(local.shape, dtype=np.uint8), markers=seed_img,
+                           mask=local, connectivity=1).astype(np.int32)
+    else:
+        filled = cells.fill_nearest(seed_img, local, wrap_x=False)
     # Local cleanup, all within this region: split any Voronoi piece the region's
     # concavity tore, then swallow sub-floor slivers into a same-region neighbour.
     filled = np.where(local, filled, 0)
@@ -874,7 +885,7 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             for cid in range(1, pc + 1):
                 pm = pcomp == cid
                 sub = _subdivide_cell(pm, int(pk[cid - 1]), min_area, wrap_x,
-                                      anchors=piece_seeds_i.get(cid))
+                                      anchors=piece_seeds_i.get(cid), geodesic=True)
                 q = int(sub.max())
                 ids = np.zeros(q + 1, dtype=np.int32)
                 start = 1

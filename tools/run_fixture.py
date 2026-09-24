@@ -2181,6 +2181,9 @@ def _selfcheck_impassable_land() -> None:
     labt, _, _, _, impt = cut(tun, target=6, keep_passable=[(17, 20)])
     corr = np.unique(labt[4:36, 16:19])
     assert len(corr) >= 2 and not impt[corr].any(),         f"a long thin passable corridor must be cut into several provinces, got {len(corr)}"
+    tcomp = C.components(labt, wrap_x=False)
+    pairs_t = np.unique(np.stack([labt[labt > 0], tcomp[labt > 0]], axis=1), axis=0)
+    assert len(pairs_t) == len(np.unique(labt[labt > 0])), "geodesic cut: no province is torn"
 
     # --- generation-time errors
     on_placeholder = np.zeros((H, W), dtype=bool)
