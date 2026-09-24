@@ -2178,7 +2178,7 @@ def _selfcheck_impassable_land() -> None:
     tun = np.zeros((H, W), dtype=bool)
     tun[3:37, 10:24] = True
     tun[4:36, 16:19] = False             # 3px x 32px corridor, walled in
-    labt, _, _, _, impt = cut(tun, target=6, keep_passable=[(17, 20)])
+    labt, _, _, _, impt = cut(tun, target=60, keep_passable=[(17, 20)])
     corr = np.unique(labt[4:36, 16:19])
     assert len(corr) >= 2 and not impt[corr].any(),         f"a long thin passable corridor must be cut into several provinces, got {len(corr)}"
     tcomp = C.components(labt, wrap_x=False)

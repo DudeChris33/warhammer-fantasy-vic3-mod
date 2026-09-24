@@ -560,28 +560,6 @@ def clean_paint(imp: np.ndarray, land: np.ndarray, wrap_x: bool = True,
     return imp | fill
 
 
-#: A long thin passable corridor (a "tunnel" inside paint) is cut roughly this many
-#: skeleton-px per province, so it is not left as one giant province.
-CORRIDOR_PX_PER_PROVINCE = 12
-
-
-def _corridor_seats(pm: np.ndarray, min_area: int, wrap_x: bool) -> int:
-    """Seat floor for one passable piece by skeleton length: ``len // 12``, capped
-    so every cell keeps at least ~2x ``min_area`` px (``area // (2*min_area)``).
-    Pieces spanning the x seam skip the crop (cost only; still correct)."""
-    from skimage.morphology import skeletonize
-
-    ys, xs = np.nonzero(pm)
-    a = int(len(xs))
-    cap = a // (2 * max(1, min_area))
-    if cap < 2:
-        return 1
-    y0, y1 = int(ys.min()), int(ys.max()) + 1
-    x0, x1 = int(xs.min()), int(xs.max()) + 1
-    sk = int(skeletonize(pm[y0:y1, x0:x1]).sum())
-    return max(1, min(cap, sk // CORRIDOR_PX_PER_PROVINCE))
-
-
 def city_pockets(anchors, shape: tuple[int, int], radius: int = CITY_POCKET_R,
                  wrap_x: bool = True) -> np.ndarray:
     """Union of discs of ``radius`` px around each ``(x, y)`` anchor (x wraps when
@@ -787,6 +765,7 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             if a > seats[idx]:
                 seats[idx] = a
     seat_by_id = dict(zip(drawn_ids, seats.tolist()))
+    a_nom = max(1.0, float(drawn_areas.sum()) / max(1, target))  # nominal province area
     if log:
         log(f"  {len(drawn_ids)} drawn regions, {n - len(drawn_ids)} placeholder; "
             f"target {target} -> {int(seats.sum())} seats "
@@ -856,22 +835,13 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 imp_m, cells.components(imp_m.astype(np.int32), wrap_x), 0))
             pc, ic = int(pcomp.max()), int(icomp.max())
             p_areas = np.bincount(pcomp.ravel(), minlength=pc + 1)[1:].astype(np.float64)
-            # Seats go to passable pieces in proportion to AREA (each >= 1): the
-            # whole budget k is spent on passable land, so a big open tract is cut
-            # into Voronoi provinces as usual even when small trapped pockets exist
-            # (a "one seat each, remainder to the rest" scheme let pockets eat it).
-            pk = np.ones(pc, dtype=int)
-            if p_areas.sum() > 0:
-                quota = p_areas / p_areas.sum() * k
-                base = np.floor(quota).astype(int)
-                rem = k - int(base.sum())
-                order = np.argsort(-(quota - base), kind="stable")
-                base[order[:rem]] += 1
-                pk = np.maximum(1, base)
-            for cid in range(1, pc + 1):
-                floor_k = _corridor_seats(pcomp == cid, min_area, wrap_x)
-                if floor_k > pk[cid - 1]:
-                    pk[cid - 1] = floor_k
+            # Seat density on passable land inside painted regions matches open land:
+            # each piece gets round(area / nominal province area), where the nominal
+            # area is the one every unpainted region is cut to (drawn area / target).
+            # No per-region budget and no shape heuristics - a wide tunnel and a narrow
+            # one of the same area get the same number of provinces, and neither is
+            # over- or under-cut relative to the open land beside it.
+            pk = np.maximum(1, np.rint(p_areas / a_nom).astype(int))
             piece_seeds_i: dict[int, list[tuple[int, int]]] = {}
             for ax, ay in anchors_c:
                 cid = int(pcomp[ay, ax])
