@@ -446,6 +446,7 @@ def main(argv: list[str] | None = None) -> int:
             "color": tuple(int(v) for v in c["color"]),
             "area": area,
             "coastal": bool(c["coastal"]),
+            "impassable": bool(c.get("impassable", False)),  # #3704, never OR'd with placeholder
         }
         label_to_stable_id[label] = stable_id
         stable_id_area[stable_id] = area
@@ -652,6 +653,7 @@ def main(argv: list[str] | None = None) -> int:
     canon_names: dict[str, str] = {}
     loc_keys: list[str] = []
     n_stacked = 0
+    n_sealed_stacked = 0  # pick_hubs -> stack_hubs downgrades caused by impassable provinces (#3704)
 
     # Anchor-driven hubs (#3665): the persisted anchor -> seeded-province index is
     # the single authority — no re-resolving an anchor from the bitmap. Map each
@@ -709,12 +711,15 @@ def main(argv: list[str] | None = None) -> int:
                 centroid=(float(prov_cx[p]), float(prov_cy[p])),
                 area=province_info[p]["area"],
                 coastal=province_info[p]["coastal"],
-                impassable=False,
+                impassable=province_info[p]["impassable"],
             )
             for p in members
         ]
         coastal = any(info.coastal for info in infos)
         needed = 5 if coastal else 4
+        passable_infos = [info for info in infos if not info.impassable]
+        if infos and not passable_infos:
+            raise SystemExit(f"{key}: every province is impassable — a state needs passable land")
 
         state = schema.State(
             key=key,
@@ -731,11 +736,13 @@ def main(argv: list[str] | None = None) -> int:
         # unlisted slots fall through to the geometric auto-pick.
         anchor_hubs = hub_by_region.get(region_id, {})
         preassigned = {hub: col for hub, (col, _nm) in anchor_hubs.items()} or None
-        if len(infos) >= needed:
+        if len(passable_infos) >= needed:
             hubs = pick_hubs(state, infos, CANVAS_W, WRAP_X, preassigned=preassigned)
         else:
-            hubs = stack_hubs(infos, coastal, preassigned=preassigned)
+            hubs = stack_hubs(passable_infos, coastal, preassigned=preassigned)
             n_stacked += 1
+            if len(infos) >= needed:
+                n_sealed_stacked += 1  # impassable paint, not size, forced the stacking
         # HUB_NAME loc for every listed hub, keyed on the state's EMITTED key (never
         # a stored key — the emitted key is what actually ships).
         for hub, (_col, hubname) in anchor_hubs.items():
@@ -758,7 +765,8 @@ def main(argv: list[str] | None = None) -> int:
 
         province_colors = [info.color for info in infos]
         blocks_by_file[file_stem].append(
-            render_land_state(state, state_num, province_colors, hubs, [], naval_exit_id))
+            render_land_state(state, state_num, province_colors, hubs,
+                              [info.color for info in infos if info.impassable], naval_exit_id))
         loc_keys.append(key)
 
         if realm is not None:
@@ -769,7 +777,8 @@ def main(argv: list[str] | None = None) -> int:
             oos_keys.append(key)
 
     n_blocks = sum(len(v) for v in blocks_by_file.values())
-    log(f"{n_blocks} land states emitted ({n_stacked} hub-stacked placeholder/small regions)", t0)
+    log(f"{n_blocks} land states emitted ({n_stacked} hub-stacked placeholder/small regions"
+        f"{f', {n_sealed_stacked} of them downgraded by impassable provinces' if n_sealed_stacked else ''})", t0)
 
     # --- write the state files (one per existing NN_<stem>.txt stub) --------
     for stem, filename in STATE_FILE_STEMS.items():

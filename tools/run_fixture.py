@@ -2002,6 +2002,196 @@ def _selfcheck_seeded_cut() -> None:
     assert not iaw.any(), "seam-wrapping provinces are contiguous under wrap, never archipelago"
 
 
+def _selfcheck_impassable_land() -> None:
+    """Impassable land provinces (board #3704), source-independent, on a synthetic
+    canvas: the ``subdivide_ex`` passable/impassable cut, canon-city pockets, and
+    the ``validate_map._check_impassable_land`` connectivity / city-reachability
+    validator. Also the stable-id diff (paint in one region moves nothing in an
+    unaffected one)."""
+    from pathlib import Path
+
+    import validate_map as vm
+    from worldgen import cells as C
+    from worldgen import land_provinces as lp
+    from worldgen import province_ids
+
+    H, W = 40, 90
+    land = np.zeros((H, W), dtype=bool)
+    land[3:37, 3:37] = True             # region A (drawn)
+    land[3:37, 40:70] = True            # region B (drawn, never painted)
+    land[3:20, 75:88] = True            # region C (placeholder: not drawn)
+    reg = np.zeros((H, W), dtype=np.int32)
+    reg[3:37, 3:37] = 1
+    reg[3:37, 40:70] = 2
+    reg[3:20, 75:88] = 3
+    drawn = land & (reg != 3)
+    kw = dict(wrap_x=False, min_area=20)
+
+    def cut(imp, target=8, **extra):
+        return lp.subdivide_ex(reg, land, drawn, target, impassable=imp, **kw, **extra)
+
+    def canon(arr, mask):
+        out = np.zeros(arr.shape, dtype=np.int64)
+        lut: dict[int, int] = {}
+        for idx in np.flatnonzero(mask.ravel()):
+            v = int(arr.ravel()[idx])
+            lut.setdefault(v, len(lut) + 1)
+            out.ravel()[idx] = lut[v]
+        return out
+
+    base = cut(None)
+    # --- dormancy: None and an all-False mask are byte-identical to the 4-tuple cut
+    assert np.array_equal(base[0], cut(np.zeros((H, W), dtype=bool))[0]), "empty paint must be a no-op"
+    old4 = lp.subdivide(reg, land, drawn, 8, impassable=None, **kw)
+    assert np.array_equal(old4[0], base[0]) and len(old4) == 4, "subdivide() wrapper must stay 4-tuple"
+    assert not base[4].any(), "no paint => no impassable province"
+
+    # --- a tract: band across A's full height (cols 14:20), no gap
+    wall = np.zeros((H, W), dtype=bool)
+    wall[3:37, 14:20] = True
+    lab, is_ph, reg_of, is_arch, is_imp = cut(wall)
+    assert int(is_imp.sum()) == 1, f"one contiguous tract => one impassable province, got {int(is_imp.sum())}"
+    tract = int(lab[10, 16])
+    assert is_imp[tract] and (lab[wall] == tract).all(), "the tract is exactly the painted pixels"
+    assert not is_imp[lab[10, 5]] and not is_imp[lab[10, 30]], "open land stays passable"
+    for L in range(1, int(lab.max()) + 1):
+        m = lab == L
+        assert not (wall[m].any() and (~wall[m]).any()), f"province {L} straddles the paint boundary"
+    assert not is_ph[tract], "painted-impassable is not a placeholder"
+    assert is_ph[lab[5, 78]] and not is_imp[lab[5, 78]], "placeholder != impassable"
+    # Unaffected region B is a byte-identical partition to the unpainted cut.
+    b = reg == 2
+    assert np.array_equal(canon(lab, b), canon(base[0], b)), "unaffected region must be unchanged"
+    # Determinism.
+    assert np.array_equal(lab, cut(wall)[0]), "two painted runs must be byte-identical"
+
+    # --- stable ids: colour+id of every province in the unpainted region survive
+    KIND = ["", *["land"] * int(lab.max())]
+    KIND0 = ["", *["land"] * int(base[0].max())]
+    pal0, ids0, hw0 = province_ids.assign(base[0], KIND0, None, None, map_config.SEED, reassign=True)
+    rgb0 = pal0[base[0]]
+    cells0 = [{"label": L, "kind": "land", "color": [int(v) for v in pal0[L]], "id": int(ids0[L])}
+              for L in range(1, int(base[0].max()) + 1)]
+    pal1, ids1, _ = province_ids.assign(lab, KIND, rgb0, cells0, map_config.SEED,
+                                        committed_high_water=hw0)
+    for L in np.unique(lab[b]).tolist():
+        old = int(base[0][b & (lab == L)][0])
+        assert tuple(pal1[L]) == tuple(pal0[old]) and int(ids1[L]) == int(ids0[old]), \
+            "an unaffected province must keep its colour+id"
+
+    # --- validator: bitmap + states from a cut
+    def bitmap_and_state(lab_arr, is_imp_arr, tag):
+        pal = np.zeros((int(lab_arr.max()) + 1, 3), dtype=np.uint8)
+        for L in range(1, len(pal)):
+            pal[L] = (20 + 7 * L, 90 + 3 * L, 40 + 5 * L)
+        rgb = pal[lab_arr]
+        with tempfile.TemporaryDirectory() as td:
+            png = Path(td) / "p.png"
+            write_rgb_png(png, rgb)
+            bmp = vm.ProvinceBitmap(png, wrap_x=False)
+        labs = [L for L in np.unique(lab_arr[reg == 1]).tolist() if L > 0]
+        st = vm.ParsedState("STATE_A", "t.txt")
+        st.provinces = [tuple(int(v) for v in pal[L]) for L in labs]
+        st.impassable = [tuple(int(v) for v in pal[L]) for L in labs if is_imp_arr[L]]
+        cells_ = [{"kind": "land", "color": [int(v) for v in pal[L]], "impassable": bool(is_imp_arr[L])}
+                  for L in range(1, len(pal))]
+        return bmp, st, cells_, pal
+
+    bmp, st, cells_, pal = bitmap_and_state(lab, is_imp, "wall")
+    errs = vm._check_impassable_land(bmp, [st], cells_, None, set())
+    assert any("disconnected components" in e for e in errs), f"a fully-across tract must fail, got {errs}"
+    # ...unless a tunnel row reconnects the two sides.
+    west = tuple(int(v) for v in pal[lab[10, 5]])
+    east = tuple(int(v) for v in pal[lab[10, 30]])
+    assert not vm._check_impassable_land(bmp, [st], cells_, None, {frozenset((west, east))}), \
+        "an adjacencies.csv tunnel row must satisfy connectivity"
+
+    # --- a gap keeps passable land connected
+    gap = wall.copy()
+    gap[30:37, 14:20] = False
+    labg, _, _, _, impg = cut(gap)
+    bmpg, stg, cellsg, _ = bitmap_and_state(labg, impg, "gap")
+    assert vm._check_impassable_land(bmpg, [stg], cellsg, None, set()) == [], \
+        "a gap in the paint must keep the state connected"
+
+    # --- city pockets
+    cx, cy = 16, 10
+    pk = lp.city_pockets([(cx, cy)], (H, W), radius=6, wrap_x=False)
+    assert pk[cy, cx] and not pk[cy, cx + 8], "pocket is a bounded disc"
+    assert np.array_equal(pk, lp.city_pockets([(cx, cy)], (H, W), radius=6, wrap_x=False)), "deterministic"
+    # (i) pocket touching open land: city province passable + reachable
+    wall_p = wall & ~pk
+    labp, _, _, _, impp = cut(wall_p)
+    bmpp, stp, cellsp, palp = bitmap_and_state(labp, impp, "pocket-path")
+    cprov = int(labp[cy, cx])
+    assert not impp[cprov], "the city's province is passable"
+    ci = {"cities": [{"name": "Testhold", "province_hex": "x%02X%02X%02X" % tuple(palp[cprov]),
+                      "impassable": False}]}
+    assert vm._check_impassable_land(bmpp, [stp], cellsp, ci, {frozenset((west, east))}) == [], \
+        "a city pocket connected to open land passes"
+    # (ii) pocket floating inside solid paint: enclosed -> blocking error naming the city
+    cy2 = 20
+    pk2 = lp.city_pockets([(16, cy2)], (H, W), radius=1, wrap_x=False)
+    wall_e = wall & ~pk2
+    labe, _, _, _, impe = cut(wall_e)
+    bmpe, ste, cellse, pale = bitmap_and_state(labe, impe, "pocket-enclosed")
+    eprov = int(labe[cy2, 16])
+    assert not impe[eprov], "an enclosed pocket is still its own passable province"
+    ce = {"cities": [{"name": "Sealedhold", "province_hex": "x%02X%02X%02X" % tuple(pale[eprov]),
+                      "impassable": False}]}
+    errs = vm._check_impassable_land(bmpe, [ste], cellse, ce, {frozenset((west, east))})
+    assert any("Sealedhold" in e and "enclosed" in e for e in errs), f"enclosed city must fail, got {errs}"
+
+    # --- validator: placeholder states never fire; agreement/stray checks fire
+    labs_ph = [L for L in np.unique(lab[reg == 3]).tolist() if L > 0]
+    stph = vm.ParsedState("STATE_PH", "t.txt")
+    stph.provinces = [tuple(int(v) for v in pal[L]) for L in labs_ph]
+    assert vm._check_impassable_land(bmp, [stph], [c for c in cells_ if False], None, set()) == [], \
+        "no impassable anywhere => clean skip"
+    bad = vm.ParsedState("STATE_A", "t.txt")
+    bad.provinces = list(st.provinces)
+    bad.impassable = []
+    assert any("disagrees" in e for e in vm._check_impassable_land(bmp, [bad], cells_, None, set())), \
+        "state/index disagreement must fail"
+
+    # --- generation-time errors
+    on_placeholder = np.zeros((H, W), dtype=bool)
+    on_placeholder[5:15, 78:85] = True
+    try:
+        cut(on_placeholder)
+        raise AssertionError("paint on a placeholder region must raise")
+    except C.CellError:
+        pass
+    try:
+        cut(wall, keep_whole={1})
+        raise AssertionError("paint on a keep_whole region must raise")
+    except C.CellError:
+        pass
+    try:
+        cut(land & (reg == 1))
+        raise AssertionError("a wholly impassable region must raise")
+    except C.CellError:
+        pass
+    try:
+        cut(wall, region_seeds={1: [(16, 10)]})
+        raise AssertionError("a hub anchor on impassable paint must raise")
+    except C.CellError:
+        pass
+    # Paint over water is ignored.
+    water_paint = np.zeros((H, W), dtype=bool)
+    water_paint[38:40, 3:30] = True
+    assert np.array_equal(cut(water_paint)[0], base[0]), "paint over water changes nothing"
+
+    # --- impassable_mask: exact colour + alpha
+    rgba = np.zeros((H, W, 4), dtype=np.uint8)
+    rgba[5:10, 5:10] = (255, 127, 0, 255)
+    rgba[12:14, 5:10] = (255, 126, 0, 255)      # wrong colour
+    rgba[16:18, 5:10] = (255, 127, 0, 0)        # transparent
+    m = lp.impassable_mask(rgba, land)
+    assert int(m.sum()) == 25, f"only the exact opaque colour counts, got {int(m.sum())}"
+    print("impassable land: cut/pockets/validator/stable-ids checks passed.")
+
+
 def _selfcheck_hub_validator() -> None:
     """The #3665 validate_map hub-anchor check, on a synthetic bitmap + states —
     a passing case and three failing cases, so the check can actually fail."""
@@ -4096,6 +4286,7 @@ def run_check() -> int:
           "stateless checks + default.map lakes block + non-blocking oversized/junk-lake "
           "warnings self-check passed.")
     _selfcheck_seeded_cut()
+    _selfcheck_impassable_land()
     print("land_provinces: hub-anchor seeded cut (own-province seeds, boundary kept, "
           "unseeded byte-identical, protected pieces, hard errors) self-check passed.")
     _selfcheck_hub_validator()

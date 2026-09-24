@@ -57,7 +57,7 @@ REQUIRED_LAND_HUBS = ("city", "farm", "mine", "wood")
 # exactly (255,127,0), zero anti-aliased fringe, fully opaque — a clean
 # flat-fill layer, the same idiom as the magenta state network and blue rivers.
 # A future paint-colour change is a one-line edit here.
-IMPASSABLE_RGB = (255, 127, 0)
+from worldgen.land_provinces import IMPASSABLE_RGB  # noqa: E402  (single home, #3704)
 
 _STATE_HEADER = re.compile(r"(STATE_\w+)\s*=\s*\{")
 _COLOR_TOKEN = re.compile(r"x[0-9A-Fa-f]{6}")
@@ -214,6 +214,29 @@ class ProvinceBitmap:
     def colors(self) -> set[Color]:
         return set(self.pixels)
 
+    def adjacent_pairs(self) -> set[tuple[Color, Color]]:
+        """Every unordered pair of distinct province colours sharing a pixel edge
+        (4-neighbourhood; x wraps when ``wrap_x``, y never). Computed once."""
+        cached = getattr(self, "_adj", None)
+        if cached is not None:
+            return cached
+        code = self._code
+        parts = [(code[:, :-1], code[:, 1:]), (code[:-1, :], code[1:, :])]
+        if self.wrap_x:
+            parts.append((code[:, -1:], code[:, :1]))
+        pairs: set[int] = set()
+        for a, b in parts:
+            diff = a != b
+            lo = np.minimum(a[diff], b[diff]).astype(np.uint64)
+            hi = np.maximum(a[diff], b[diff]).astype(np.uint64)
+            pairs.update(np.unique((lo << np.uint64(24)) | hi).tolist())
+
+        def col(c: int) -> Color:
+            return ((c >> 16) & 0xFF, (c >> 8) & 0xFF, c & 0xFF)
+
+        self._adj = {(col(p >> 24), col(p & 0xFFFFFF)) for p in pairs}
+        return self._adj
+
     def coastal_colors(self, sea_colors: set[Color]) -> set[Color]:
         """Colours with at least one pixel adjacent to a sea pixel (wrap-aware x)."""
         sea_codes = np.array(
@@ -257,6 +280,8 @@ def validate(
     canon_cities_path: Path | None = None,
     canon_cities_mask_path: Path | None = None,
     impassable_ref: str | None = None,
+    canon_city_provinces_index_path: Path | None = None,
+    adjacencies_path: Path | None = None,
     extra_loc_dirs: tuple[Path, ...] = (),
     warnings: list[str] | None = None,
 ) -> list[str]:
@@ -338,6 +363,17 @@ def validate(
         if index_cells is not None:
             errors += _check_world_market_location(
                 REPO_ROOT / "common" / "defines", index_cells, sea_colors)
+        if index_cells is not None:
+            city_index = None
+            if (canon_city_provinces_index_path is not None
+                    and canon_city_provinces_index_path.is_file()):
+                import json
+
+                city_index = json.loads(
+                    canon_city_provinces_index_path.read_text(encoding="utf-8"))
+            errors += _check_impassable_land(
+                bitmap, land_states, index_cells, city_index,
+                _parse_adjacency_edges(adjacencies_path))
         if hub_index is not None:
             errors += _check_hub_anchors(
                 bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
@@ -439,6 +475,125 @@ def _check_hub_membership(states: list[ParsedState]) -> list[str]:
                     f"{st.key} ({st.filename}): {hub_name} {color_to_hex(color)} "
                     f"is on an impassable province"
                 )
+    return errors
+
+
+def _parse_adjacency_edges(path: Path | None) -> set[frozenset]:
+    """Province-colour pairs joined by ``adjacencies.csv`` rows (tunnels/straits).
+    A row's From/To are ``x<HEX>`` province colours; anything else is ignored."""
+    edges: set[frozenset] = set()
+    if path is None or not path.is_file():
+        return edges
+    for line in path.read_text(encoding="utf-8-sig").splitlines()[1:]:
+        cols = line.split(";")
+        if len(cols) < 2:
+            continue
+        a, b = (_COLOR_TOKEN.fullmatch(c.strip()) for c in cols[:2])
+        if a and b:
+            ca = tuple(int(a.group()[i:i + 2], 16) for i in (1, 3, 5))
+            cb = tuple(int(b.group()[i:i + 2], 16) for i in (1, 3, 5))
+            edges.add(frozenset((ca, cb)))
+    return edges
+
+
+def _check_impassable_land(bitmap: "ProvinceBitmap", land_states: list[ParsedState],
+                           index_cells: list[dict], city_index: dict | None,
+                           adj_edges: set[frozenset]) -> list[str]:
+    """Land-side impassable checks (#3704), mirroring the sea side. Clean skip when
+    no land province is impassable. For every land state:
+
+    * its ``impassable`` colours are a subset of its own provinces;
+    * they agree with ``provinces_index.json`` (both directions);
+    * it is not wholly impassable;
+    * its PASSABLE provinces form one connected component over pixel adjacency
+      (wrap-aware) plus ``adjacencies.csv`` special-connection rows;
+    * every canon city (``canon_city_provinces_index.json``) sits in a passable
+      province in that state's main component - an enclosed city is a blocking
+      error naming the city.
+
+    Out-of-scope placeholder states are passable (``placeholder`` is a separate flag)
+    and never trip any of this.
+    """
+    from worldgen.raster import color_to_hex
+
+    idx_imp = {tuple(int(v) for v in c["color"]) for c in index_cells
+               if c.get("kind") == "land" and c.get("impassable")}
+    if not idx_imp and not any(st.impassable for st in land_states):
+        return []
+    errors: list[str] = []
+    adj = bitmap.adjacent_pairs()
+    nbrs: dict[Color, set[Color]] = {}
+    for a, b in adj:
+        nbrs.setdefault(a, set()).add(b)
+        nbrs.setdefault(b, set()).add(a)
+    for e in adj_edges:
+        a, b = tuple(e)
+        nbrs.setdefault(a, set()).add(b)
+        nbrs.setdefault(b, set()).add(a)
+
+    claimed_imp: set[Color] = set()
+    main_component: set[Color] = set()  # passable colours in their state's main component
+    state_of: dict[Color, ParsedState] = {}
+    for st in land_states:
+        own = set(st.provinces)
+        imp = set(st.impassable)
+        claimed_imp |= imp
+        for col in own:
+            state_of[col] = st
+        if not imp <= own:
+            errors.append(f"{st.key} ({st.filename}): impassable "
+                          f"{sorted(color_to_hex(c) for c in imp - own)} not among its provinces")
+        want = {c for c in own if c in idx_imp}
+        if imp != want:
+            errors.append(
+                f"{st.key} ({st.filename}): impassable list disagrees with "
+                f"provinces_index.json ({sorted(color_to_hex(c) for c in imp ^ want)})")
+        passable = own - imp
+        if own and not passable:
+            errors.append(f"{st.key} ({st.filename}): every province is impassable")
+            continue
+        if not imp:
+            main_component |= passable
+            continue
+        seen: set[Color] = set()
+        comps: list[set[Color]] = []
+        for start in sorted(passable):
+            if start in seen:
+                continue
+            comp, stack = set(), [start]
+            while stack:
+                c = stack.pop()
+                if c in comp:
+                    continue
+                comp.add(c)
+                stack.extend(n for n in nbrs.get(c, ()) if n in passable and n not in comp)
+            seen |= comp
+            comps.append(comp)
+        comps.sort(key=lambda cs: (-sum(bitmap.area.get(c, 0) for c in cs), min(cs)))
+        if len(comps) > 1:
+            errors.append(
+                f"{st.key} ({st.filename}): passable land is split into {len(comps)} "
+                f"disconnected components - leave a gap in the paint or add an "
+                f"adjacencies.csv tunnel row")
+        main_component |= comps[0]
+    stray = idx_imp - claimed_imp
+    if stray:
+        errors.append(f"provinces_index.json marks {len(stray)} land province(s) impassable "
+                      f"that no state declares (first {color_to_hex(sorted(stray)[0])})")
+
+    for c in (city_index or {}).get("cities", []):
+        hexc = c.get("province_hex")
+        name = c["name"]
+        if not hexc:
+            errors.append(f"canon city '{name}': anchor resolves to no land province")
+            continue
+        col = tuple(int(hexc[i:i + 2], 16) for i in (1, 3, 5))
+        if c.get("impassable") or col in idx_imp:
+            errors.append(f"canon city '{name}' sits in an impassable province - "
+                          f"paint a pocket clear or move the anchor")
+        elif col in state_of and col not in main_component:
+            errors.append(f"canon city '{name}' is enclosed by impassable paint with no "
+                          f"path or tunnel - carve a path or add a tunnel row for {name}")
     return errors
 
 
@@ -1885,6 +2040,9 @@ def main(argv: list[str] | None = None) -> int:
         canon_cities_path=None if args.fixture else TOOLS_DIR / "config" / "canon_cities.json",
         canon_cities_mask_path=None if args.fixture else TOOLS_DIR / "derived" / "land_sea_mask.png",
         impassable_ref=None if args.fixture else sources.source_ref("impassable"),
+        canon_city_provinces_index_path=None if args.fixture else
+        TOOLS_DIR / "derived" / "canon_city_provinces_index.json",
+        adjacencies_path=None if args.fixture else REPO_ROOT / "map_data" / "adjacencies.csv",
         extra_loc_dirs=() if args.fixture else
         (REPO_ROOT / "localization" / "replace" / "english" / "map",),
         warnings=warnings,

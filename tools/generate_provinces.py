@@ -100,6 +100,14 @@ HUB_WORKSHEET_CONFIG = TOOLS_DIR / "config" / "hub_worksheet.json"
 #: re-resolve an anchor independently and disagree. Only written when the worksheet
 #: exists.
 HUB_ANCHORS_INDEX_PATH = DERIVED_DIR / "hub_anchors_index.json"
+#: Impassable-terrain layer (board #3704): the flat (255,127,0) paint of
+#: full.ora#impassable. Empty/absent -> dormant, byte-identical to a no-paint run.
+IMPASSABLE_SOURCE = sources.source_ref("impassable")
+#: Canon-city catalogue (board #3789) and the anchor -> province authority written
+#: from it (#3704), the hub_anchors_index.json idiom: the validator reads it to prove
+#: every catalogued city sits in a passable, reachable province.
+CANON_CITIES_CONFIG = TOOLS_DIR / "config" / "canon_cities.json"
+CANON_CITY_PROVINCES_INDEX_PATH = DERIVED_DIR / "canon_city_provinces_index.json"
 #: Two hub anchors of the SAME state closer than this (Euclidean px) are a hard
 #: error at generate time — defence-in-depth so a seeded piece can't collapse below
 #: min_area (the anchor pieces are also `protected` in merge_small, the real
@@ -273,10 +281,37 @@ def main(argv: list[str] | None = None) -> int:
                             f"into one province; separate them")
         log(f"hub worksheet: {len(rows)} settlement(s) -> {len(region_seeds)} seeded region(s)", t0)
 
+    # Impassable paint (#3704). Empty/absent layer -> None -> every path dormant.
+    impassable = None
+    canon_cities = []
+    imp_rgba = sources.read_source_rgba(IMPASSABLE_SOURCE, allow_empty=True)
+    if imp_rgba is not None:
+        if imp_rgba.shape[:2] != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{IMPASSABLE_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
+                             f"{imp_rgba.shape[1]}x{imp_rgba.shape[0]}")
+        impassable = land_provinces.impassable_mask(imp_rgba, land)
+        if impassable.any():
+            if CANON_CITIES_CONFIG.is_file():
+                canon_cities = schema.load_canon_cities(CANON_CITIES_CONFIG,
+                                                        canvas=(CANVAS_W, CANVAS_H))
+                pockets = land_provinces.city_pockets(
+                    [c.anchor for c in canon_cities], impassable.shape,
+                    land_provinces.CITY_POCKET_R, WRAP_X)
+                impassable &= ~pockets
+            log(f"impassable paint: {int(impassable.sum()):,} px after "
+                f"{len(canon_cities)} canon-city pocket(s)", t0)
+        else:
+            impassable = None
+    del imp_rgba
+
     log("subdividing the drawn regions into provinces ...", t0)
-    land_lab, is_placeholder, reg_of, is_archipelago = land_provinces.subdivide(
-        reg, land, dmask, args.target, WRAP_X, args.min_area, log=log, keep_whole=keep_whole,
-        region_seeds=region_seeds or None, island_zones=island_overrides)
+    try:
+        land_lab, is_placeholder, reg_of, is_archipelago, is_impassable =             land_provinces.subdivide_ex(
+                reg, land, dmask, args.target, WRAP_X, args.min_area, log=log,
+                keep_whole=keep_whole, region_seeds=region_seeds or None,
+                island_zones=island_overrides, impassable=impassable)
+    except cells.CellError as e:
+        raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())
 
     sea_lab = cells.read_labels(SEA_LABELS_PATH)
@@ -395,6 +430,27 @@ def main(argv: list[str] | None = None) -> int:
         HUB_ANCHORS_INDEX_PATH.write_text(json.dumps(hub_index, indent=1) + "\n", encoding="utf-8")
         log(f"wrote {HUB_ANCHORS_INDEX_PATH.relative_to(REPO_ROOT)}  ({len(hub_rows)} hub(s))", t0)
 
+    # Canon-city anchor -> province (#3704). Only written when paint exists; the
+    # validator proves each city's province is passable and reachable.
+    if impassable is not None and canon_cities:
+        city_index = {"canvas": [CANVAS_W, CANVAS_H], "source": CANON_CITIES_CONFIG.name,
+                      "pocket_radius": land_provinces.CITY_POCKET_R, "cities": []}
+        for c in canon_cities:
+            ax, ay = c.anchor
+            plab = int(land_lab[ay, ax])
+            pcol = tuple(int(v) for v in palette[plab]) if plab > 0 else None
+            city_index["cities"].append({
+                "name": c.name,
+                "anchor": [int(ax), int(ay)],
+                "province_label": plab,
+                "province_hex": raster.color_to_hex(pcol) if pcol else None,
+                "impassable": bool(plab > 0 and is_impassable[plab]),
+            })
+        CANON_CITY_PROVINCES_INDEX_PATH.write_text(
+            json.dumps(city_index, indent=1) + "\n", encoding="utf-8")
+        log(f"wrote {CANON_CITY_PROVINCES_INDEX_PATH.relative_to(REPO_ROOT)}  "
+            f"({len(canon_cities)} city/cities)", t0)
+
     PROVINCES_PATH.parent.mkdir(parents=True, exist_ok=True)
     raster.write_rgb_png(PROVINCES_PATH, rgb)
     log(f"wrote {PROVINCES_PATH.relative_to(REPO_ROOT)}  "
@@ -428,6 +484,7 @@ def main(argv: list[str] | None = None) -> int:
     entries = []
     n_placeholder = 0
     n_archipelago = 0
+    n_impassable = 0
     for lab in range(1, n_land + 1):
         color = tuple(int(v) for v in palette[lab])
         # Out-of-scope far continents are kept whole but emitted PASSABLE: Vic3
@@ -444,6 +501,8 @@ def main(argv: list[str] | None = None) -> int:
         # validate_map.py reads this flag to tell it apart from a torn province.
         archipelago = bool(is_archipelago[lab]) if lab < len(is_archipelago) else False
         n_archipelago += archipelago
+        impass = bool(is_impassable[lab]) if lab < len(is_impassable) else False
+        n_impassable += impass
         entries.append({
             "label": lab,
             "kind": "land",
@@ -452,7 +511,7 @@ def main(argv: list[str] | None = None) -> int:
             "id": int(ids[lab]),  # stable committed id, or fresh from the high-water
             "area": int(areas[lab]),
             "coastal": bool(land_coastal[lab]) if lab < len(land_coastal) else False,
-            "impassable": False,  # every land province is passable now
+            "impassable": impass,  # cut from the impassable-terrain paint (#3704)
             "placeholder": placeholder,  # out-of-scope land kept whole, undetailed
             "archipelago": archipelago,  # several islands merged under one label
         })
@@ -508,7 +567,7 @@ def main(argv: list[str] | None = None) -> int:
         "land_provinces": n_land,
         "sea_provinces": n_sea,
         "lake_provinces": n_lake,
-        "impassable_land_provinces": 0,  # nothing is impassable — every landmass boots
+        "impassable_land_provinces": n_impassable,  # from the impassable layer (#3704)
         "impassable_sea_provinces": sum(sea_impassable.values()),  # from sea_zones.json config
         "placeholder_land_provinces": n_placeholder,  # out-of-scope land kept whole
         "archipelago_land_provinces": n_archipelago,  # islands merged by an override circle

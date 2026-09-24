@@ -502,12 +502,59 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
     return out
 
 
-def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
-              wrap_x: bool = True, min_area: int = 400, log=None,
-              keep_whole: set[int] | None = None,
-              region_seeds: dict[int, list[tuple[int, int]]] | None = None,
-              island_zones: np.ndarray | None = None
-              ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+#: The flat fill colour of the hand-painted impassable layer (`full.ora#impassable`,
+#: measured zero fringe). Single home; validate_map imports it.
+IMPASSABLE_RGB = (255, 127, 0)
+
+#: Radius (px) of the passable pocket kept around each canon city (#3704). pi*R^2
+#: (~1018 px) comfortably exceeds the default ``min_area`` (400) so a pocket is never
+#: a sub-floor offcut.
+CITY_POCKET_R = 18
+
+
+def impassable_mask(rgba: np.ndarray, land: np.ndarray) -> np.ndarray:
+    """Boolean impassable mask from the layer's RGBA: alpha > 0 and RGB exactly
+    :data:`IMPASSABLE_RGB`, intersected with ``land`` (paint over water is ignored)."""
+    rgb = rgba[..., :3]
+    hit = (rgba[..., 3] > 0) & np.all(rgb == np.array(IMPASSABLE_RGB, dtype=rgb.dtype), axis=-1)
+    return hit & land
+
+
+def city_pockets(anchors, shape: tuple[int, int], radius: int = CITY_POCKET_R,
+                 wrap_x: bool = True) -> np.ndarray:
+    """Union of discs of ``radius`` px around each ``(x, y)`` anchor (x wraps when
+    ``wrap_x``). Subtracted from the impassable mask so a catalogued city sits in a
+    passable province. Deterministic, pure."""
+    h, w = shape
+    out = np.zeros(shape, dtype=bool)
+    r2 = radius * radius
+    for ax, ay in anchors:
+        y0, y1 = max(0, ay - radius), min(h, ay + radius + 1)
+        ys = np.arange(y0, y1)[:, None]
+        xs = np.arange(ax - radius, ax + radius + 1)[None, :]
+        disc = ((ys - ay) ** 2 + (xs - ax) ** 2) <= r2
+        xi = xs[0] % w if wrap_x else xs[0]
+        for j, x in enumerate(np.atleast_1d(xi)):
+            if not wrap_x and not (0 <= x < w):
+                continue
+            out[y0:y1, int(x)] |= disc[:, j]
+    return out
+
+
+def subdivide(*args, **kwargs) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """:func:`subdivide_ex` without the impassable table — the original 4-tuple
+    ``(labels, is_placeholder, reg_of, is_archipelago)``. With no ``impassable``
+    kwarg it is byte-identical to the pre-#3704 cut."""
+    return subdivide_ex(*args, **kwargs)[:4]
+
+
+def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
+                 wrap_x: bool = True, min_area: int = 400, log=None,
+                 keep_whole: set[int] | None = None,
+                 region_seeds: dict[int, list[tuple[int, int]]] | None = None,
+                 island_zones: np.ndarray | None = None,
+                 impassable: np.ndarray | None = None
+                 ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
     ``reg`` is the state-region layer from :func:`regions` (``1..R``, 0 on water);
@@ -542,7 +589,21 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     archipelago or a non-drawn region is a hard error. ``region_seeds=None`` keeps
     every region byte-identical to today.
 
-    Returns ``(labels, is_placeholder, reg_of, is_archipelago)``:
+    ``impassable`` (#3704) is the boolean impassable-terrain mask (already
+    intersected with land, city pockets already subtracted). A drawn region that
+    carries impassable pixels bypasses the single-seat shortcut and is split into
+    wrap-aware connected **passable** pieces (which share the region's seat budget
+    by area, each >= 1, cut by ``_subdivide_cell``) and connected **impassable**
+    pieces (exactly one province each, on top of the budget - so ``target`` is a
+    floor for painted regions). No province straddles the boundary. Impassable
+    pieces smaller than ``min_area`` px are folded back to passable (paint
+    dust). Paint on a ``keep_whole`` archipelago or a placeholder region, a
+    region that is wholly impassable, or a hub anchor that lands on impassable
+    paint is a hard :class:`cells.CellError`. ``None`` / no paint => byte-identical
+    to before.
+
+    Returns ``(labels, is_placeholder, reg_of, is_archipelago, is_impassable)``
+    (:func:`subdivide` drops the last):
 
     * ``labels`` — the province label layer (``1..N``, 0 on water).
     * ``is_placeholder`` — a boolean table indexed by label, ``True`` for an
@@ -555,6 +616,8 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
       persisted as ``land_regions_index.json`` (the land mirror of
       ``sea_zones_index.json``). Province labels/colours are untouched by this
       return, so ``provinces.png`` stays byte-identical.
+    * ``is_impassable`` — a boolean table indexed by label, ``True`` for a
+      province cut from impassable paint. Independent of ``is_placeholder``.
     * ``is_archipelago`` — a boolean table indexed by label, ``True`` for a
       province that is genuinely non-contiguous — several disconnected islands
       sharing one label, the deliberate outcome of an island-override merge
@@ -595,6 +658,35 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
                     f"hub anchor(s) {pts} target region {rid}, which is not a drawn "
                     f"in-scope state (placeholder or empty)")
 
+    # Impassable paint (#3704): per-region masks, validated up front.
+    imp_regions: set[int] = set()
+    imp = None
+    if impassable is not None and impassable.any():
+        imp = impassable & land
+        # Sub-floor impassable dust is not a province: fold it back to passable.
+        if min_area > 1:
+            icomp0 = cells.components(imp.astype(np.int32), wrap_x)
+            isz = np.bincount(icomp0.ravel(), minlength=int(icomp0.max()) + 1)
+            dust = isz < min_area
+            dust[0] = False
+            imp = imp & ~dust[icomp0]
+        drawn_set2 = set(drawn_ids)
+        for rid in np.unique(reg[imp]).tolist():
+            if rid <= 0:
+                continue
+            if rid in keep:
+                raise cells.CellError(
+                    f"impassable paint on region {rid}, a keep_whole island-override "
+                    f"archipelago - it cannot be split into passable/impassable provinces")
+            if rid not in drawn_set2:
+                raise cells.CellError(
+                    f"impassable paint on region {rid}, an out-of-scope placeholder - "
+                    f"placeholders stay one passable province")
+            if not ((reg == rid) & ~imp).any():
+                raise cells.CellError(
+                    f"region {rid} is wholly impassable - a state needs passable land")
+            imp_regions.add(int(rid))
+
     # Largest-remainder seat allocation across the drawn regions: one each, then
     # the remaining seats by area share, so the totals add up exactly.
     seats = np.ones(len(drawn_ids), dtype=int)
@@ -629,6 +721,56 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
         k = seat_by_id[i]
         m = reg == i
         anchors = seeds_by_region.get(i)
+        if i in imp_regions:
+            imp_m = m & imp
+            pas_m = m & ~imp
+            for ax, ay in (anchors or ()):
+                if imp_m[ay, ax]:
+                    raise cells.CellError(
+                        f"hub anchor ({ax}, {ay}) in region {i} lies on impassable paint")
+            pcomp = cells.renumber(np.where(
+                pas_m, cells.components(pas_m.astype(np.int32), wrap_x), 0))
+            icomp = cells.renumber(np.where(
+                imp_m, cells.components(imp_m.astype(np.int32), wrap_x), 0))
+            pc, ic = int(pcomp.max()), int(icomp.max())
+            p_areas = np.bincount(pcomp.ravel(), minlength=pc + 1)[1:].astype(np.float64)
+            pk = np.ones(pc, dtype=int)
+            spare = max(0, k - pc)
+            if spare and p_areas.sum() > 0:
+                quota = p_areas / p_areas.sum() * spare
+                base = np.floor(quota).astype(int)
+                rem = spare - int(base.sum())
+                order = np.argsort(-(quota - base), kind="stable")
+                base[order[:rem]] += 1
+                pk += base
+            piece_seeds_i: dict[int, list[tuple[int, int]]] = {}
+            for ax, ay in (anchors or ()):
+                cid = int(pcomp[ay, ax])
+                if cid > 0:
+                    piece_seeds_i.setdefault(cid, []).append((ax, ay))
+            for cid, pts in piece_seeds_i.items():
+                if len(pts) > pk[cid - 1]:
+                    pk[cid - 1] = len(pts)
+            first_i = True
+            for cid in range(1, pc + 1):
+                pm = pcomp == cid
+                sub = _subdivide_cell(pm, int(pk[cid - 1]), min_area, wrap_x,
+                                      anchors=piece_seeds_i.get(cid))
+                q = int(sub.max())
+                ids = np.zeros(q + 1, dtype=np.int32)
+                start = 1
+                if first_i:
+                    ids[1] = i  # region label used exactly once, region-wide
+                    start = 2
+                    first_i = False
+                for j in range(start, q + 1):
+                    ids[j] = nxt
+                    nxt += 1
+                out[pm] = ids[sub[pm]]
+            for cid in range(1, ic + 1):
+                out[icomp == cid] = nxt
+                nxt += 1
+            continue
         if _is_connected(m, wrap_x):
             # Contiguous drawn region: the ordinary single-cell cut.
             if k <= 1:
@@ -764,4 +906,10 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
         log(f"  {int(out.max())} land provinces "
             f"({int(is_placeholder[1:].sum())} out-of-scope placeholders, "
             f"{int(is_archipelago.sum())} archipelagos)")
-    return out, is_placeholder, reg_of, is_archipelago
+    # Every impassable province is wholly inside the (dust-filtered) paint and every
+    # passable one wholly outside it, so the flag is read straight off the pixels.
+    is_impassable = np.zeros(int(out.max()) + 1, dtype=bool)
+    if imp is not None:
+        is_impassable[out[imp]] = True
+    is_impassable[0] = False
+    return out, is_placeholder, reg_of, is_archipelago, is_impassable
