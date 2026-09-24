@@ -2174,6 +2174,14 @@ def _selfcheck_impassable_land() -> None:
     open_provs = np.unique(labm[12:37, 3:37])
     assert len(open_provs) >= 3,         f"trapped pockets must not eat the big tract's seats, got {len(open_provs)} provinces"
 
+    # --- a long thin enclosed passable corridor is not left as one province
+    tun = np.zeros((H, W), dtype=bool)
+    tun[3:37, 10:24] = True
+    tun[4:36, 16:19] = False             # 3px x 32px corridor, walled in
+    labt, _, _, _, impt = cut(tun, target=6, keep_passable=[(17, 20)])
+    corr = np.unique(labt[4:36, 16:19])
+    assert len(corr) >= 2 and not impt[corr].any(),         f"a long thin passable corridor must be cut into several provinces, got {len(corr)}"
+
     # --- generation-time errors
     on_placeholder = np.zeros((H, W), dtype=bool)
     on_placeholder[5:15, 78:85] = True
