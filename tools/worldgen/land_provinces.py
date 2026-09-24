@@ -553,7 +553,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                  keep_whole: set[int] | None = None,
                  region_seeds: dict[int, list[tuple[int, int]]] | None = None,
                  island_zones: np.ndarray | None = None,
-                 impassable: np.ndarray | None = None
+                 impassable: np.ndarray | None = None,
+                 drop_placeholder_paint: bool = False
                  ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -600,7 +601,9 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     dust). Paint on a ``keep_whole`` archipelago or a placeholder region, a
     region that is wholly impassable, or a hub anchor that lands on impassable
     paint is a hard :class:`cells.CellError`. ``None`` / no paint => byte-identical
-    to before.
+    to before. ``drop_placeholder_paint=True`` (the generator's opt-in
+    ``--drop-placeholder-paint``) downgrades the placeholder case to a logged drop
+    of that paint instead of an error; every other case stays a hard error.
 
     Returns ``(labels, is_placeholder, reg_of, is_archipelago, is_impassable)``
     (:func:`subdivide` drops the last):
@@ -671,21 +674,34 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             dust[0] = False
             imp = imp & ~dust[icomp0]
         drawn_set2 = set(drawn_ids)
+        problems: list[str] = []
         for rid in np.unique(reg[imp]).tolist():
             if rid <= 0:
                 continue
+            ys, xs = np.nonzero(imp & (reg == rid))
+            where = f"{len(xs):,} px around ({int(xs.mean())}, {int(ys.mean())})"
             if rid in keep:
-                raise cells.CellError(
-                    f"impassable paint on region {rid}, a keep_whole island-override "
-                    f"archipelago - it cannot be split into passable/impassable provinces")
-            if rid not in drawn_set2:
-                raise cells.CellError(
-                    f"impassable paint on region {rid}, an out-of-scope placeholder - "
-                    f"placeholders stay one passable province")
-            if not ((reg == rid) & ~imp).any():
-                raise cells.CellError(
-                    f"region {rid} is wholly impassable - a state needs passable land")
-            imp_regions.add(int(rid))
+                problems.append(
+                    f"region {rid} ({where}) is a keep_whole island-override archipelago - "
+                    f"it cannot be split into passable/impassable provinces")
+            elif rid not in drawn_set2 and drop_placeholder_paint:
+                imp = imp & ~(reg == rid)  # explicit opt-in: placeholder land stays passable
+                if log:
+                    log(f"  WARNING: dropped impassable paint on out-of-scope placeholder "
+                        f"region {rid} ({where})")
+            elif rid not in drawn_set2:
+                problems.append(
+                    f"region {rid} ({where}) is an out-of-scope placeholder - placeholders "
+                    f"stay one passable province")
+            elif not ((reg == rid) & ~imp).any():
+                problems.append(f"region {rid} ({where}) is wholly impassable - a state "
+                                f"needs passable land")
+            else:
+                imp_regions.add(int(rid))
+        if problems:
+            raise cells.CellError(
+                f"impassable paint on {len(problems)} region(s) that cannot take it:\n  "
+                + "\n  ".join(problems))
 
     # Largest-remainder seat allocation across the drawn regions: one each, then
     # the remaining seats by area share, so the totals add up exactly.
