@@ -1523,6 +1523,52 @@ def _selfcheck_merge_fused() -> None:
     assert not iaw.any(),         "a seam-wrapping province is contiguous under wrap, never flagged archipelago"
 
 
+def _selfcheck_island_zone_groups() -> None:
+    """A state chained across several island lines ships one province per line.
+
+    A ``keep_whole`` region normally stays one province, but a state-level merge
+    can chain several island-override lines' regions into one label. With the
+    ``island_zones`` layer, ``subdivide`` gives each line-group its own province;
+    a single group (or no layer) stays whole, byte-identical to before.
+    """
+    from worldgen import land_provinces as lp
+
+    H, W = 12, 40
+    land = np.zeros((H, W), dtype=bool)
+    land[3:8, 2:6] = True      # islet A   (line 1)
+    land[3:8, 10:14] = True    # islet B   (line 1, same line as A)
+    land[3:8, 20:24] = True    # islet C   (line 2)
+    land[3:8, 30:34] = True    # islet D   (no line: came in via a state merge)
+    reg = np.where(land, 1, 0).astype(np.int32)   # one chained state region
+    zones = np.zeros((H, W), dtype=np.int32)
+    zones[5, 2:14] = 1
+    zones[5, 20:24] = 2
+    drawn = land.copy()
+
+    def run(z, kw={1}):
+        return lp.subdivide(reg, land, drawn, target=8, wrap_x=False, min_area=1,
+                            keep_whole=set(kw), island_zones=z)
+
+    prov, _, reg_of, ia = run(zones)
+    a, b, c, d = (int(prov[5, x]) for x in (3, 11, 21, 31))
+    assert a == b, "islets on the same island line must share one province"
+    assert len({a, c, d}) == 3, f"each line-group and the unlined islet is its own province: {a, c, d}"
+    assert int(prov.max()) == 3, f"exactly one province per group, got {prov.max()}"
+    assert set(int(reg_of[p]) for p in (a, c, d)) == {1}, "all groups stay in the one state region"
+    assert ia[a] and not ia[c], "only the two-islet group is non-contiguous"
+
+    whole, _, _, _ = run(None)
+    assert int(whole.max()) == 1, "no island_zones layer keeps the region whole (old behaviour)"
+
+    one = np.zeros_like(zones)
+    one[5, 2:34] = 1               # a single line touching every islet
+    single, _, _, _ = run(one)
+    assert int(single.max()) == 1, "a single group stays whole"
+
+    prov2, _, _, _ = run(zones)
+    assert np.array_equal(prov, prov2), "two runs must be byte-identical"
+
+
 def _selfcheck_lakes() -> None:
     """Inland-lake water class (board #3742), in isolation (no golden needed).
 
@@ -4009,6 +4055,8 @@ def run_check() -> int:
     print("land_provinces: tiny-island override merge (line -> zone -> forced single "
           "province) self-check passed.")
     _selfcheck_merge_fused()
+    _selfcheck_island_zone_groups()
+    print("land_provinces: state chained across island lines (one province per line-group, single group/no layer stays whole, deterministic) self-check passed.")
     print("land_provinces: merge-fused disconnected region cut per piece "
           "(archipelago kept whole via keep_whole) self-check passed.")
     _selfcheck_drop_land_specks()

@@ -505,7 +505,8 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
 def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
               wrap_x: bool = True, min_area: int = 400, log=None,
               keep_whole: set[int] | None = None,
-              region_seeds: dict[int, list[tuple[int, int]]] | None = None
+              region_seeds: dict[int, list[tuple[int, int]]] | None = None,
+              island_zones: np.ndarray | None = None
               ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -526,6 +527,11 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
     ``keep_whole`` stays whole as one province. Connectivity alone cannot tell the
     two apart, which is why the set is threaded in. ``keep_whole is None`` ⟹ empty
     set (every disconnected drawn region is cut — the merge-fused case).
+
+    ``island_zones`` is the :func:`island_override_zones` layer. With it, a
+    ``keep_whole`` region that a state-level merge chained across several island
+    lines ships as one province per line-group instead of one for the whole
+    state; ``None`` (or a single group) keeps it whole, byte-identical to before.
 
     ``region_seeds`` (#3665) is ``{region_label: [(x, y), ...]}`` of hub anchors,
     each an already-resolved in-region pixel. A region carrying anchors is cut so a
@@ -643,8 +649,42 @@ def subdivide(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: int,
         # --- disconnected region ---
         if i in keep:
             # An island-override merge (merge_island_overrides) fused several
-            # disconnected islets into one label on purpose — the user asked for
-            # exactly one province here, so it stays whole regardless of seats.
+            # disconnected islets into one label on purpose — one province per
+            # island line. A state-level merge can chain several lines' regions
+            # into one label; then each line's group is its own province, so the
+            # state still has one province per line. One group ⟹ stays whole.
+            if island_zones is None:
+                continue
+            comp = cells.components(m.astype(np.int32), wrap_x)
+            comp = cells.renumber(np.where(m, comp, 0))
+            c = int(comp.max())
+            parent = list(range(c + 1))
+
+            def find(a: int) -> int:
+                while parent[a] != a:
+                    parent[a] = parent[parent[a]]
+                    a = parent[a]
+                return a
+
+            zone_owner: dict[int, int] = {}
+            for cid, z in np.unique(
+                    np.stack([comp[m], island_zones[m]], axis=1), axis=0).tolist():
+                if z <= 0:
+                    continue
+                if z in zone_owner:
+                    ra, rb = find(zone_owner[z]), find(cid)
+                    if ra != rb:
+                        parent[max(ra, rb)] = min(ra, rb)
+                else:
+                    zone_owner[z] = cid
+            groups = sorted({find(cid) for cid in range(1, c + 1)})
+            if len(groups) <= 1:
+                continue
+            ids = {g: (i if k == 0 else nxt + k - 1) for k, g in enumerate(groups)}
+            nxt += len(groups) - 1
+            root = np.array([0] + [ids[find(cid)] for cid in range(1, c + 1)],
+                            dtype=np.int32)
+            out[m] = root[comp[m]]
             continue
         # A merge-fused drawn region (apply_land_region_merges unioned two
         # non-touching labels): its halves are separate landmasses, so cut each

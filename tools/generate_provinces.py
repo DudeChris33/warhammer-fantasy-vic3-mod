@@ -234,8 +234,8 @@ def main(argv: list[str] | None = None) -> int:
         overlap = keep_whole & (touched - {0})
         if overlap:
             log(f"WARNING: land-region merge anchors resolve into island-override "
-                f"label(s) {sorted(overlap)} — those states will stay whole; move the "
-                f"anchor or split the config", t0)
+                f"label(s) {sorted(overlap)} — each island line in that state becomes one "
+                f"province (a single-line state stays one province)", t0)
 
     # Hub worksheet (#3665): resolve each settlement anchor to a state region and
     # seed a distinct province there. Guarded like land_region_merges.json — absent,
@@ -276,7 +276,7 @@ def main(argv: list[str] | None = None) -> int:
     log("subdividing the drawn regions into provinces ...", t0)
     land_lab, is_placeholder, reg_of, is_archipelago = land_provinces.subdivide(
         reg, land, dmask, args.target, WRAP_X, args.min_area, log=log, keep_whole=keep_whole,
-        region_seeds=region_seeds or None)
+        region_seeds=region_seeds or None, island_zones=island_overrides)
     n_land = int(land_lab.max())
 
     sea_lab = cells.read_labels(SEA_LABELS_PATH)
