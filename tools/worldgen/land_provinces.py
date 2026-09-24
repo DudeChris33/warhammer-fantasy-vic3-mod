@@ -738,12 +738,18 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
         m = reg == i
         anchors = seeds_by_region.get(i)
         if i in imp_regions:
-            imp_m = m & imp
-            pas_m = m & ~imp
-            for ax, ay in (anchors or ()):
+            # Work on the region's row band only (full width, so the x seam still
+            # wraps): a full-canvas pass per painted region is prohibitively slow.
+            rows = np.flatnonzero(m.any(axis=1))
+            y0, y1 = int(rows[0]), int(rows[-1]) + 1
+            m_c = m[y0:y1]
+            imp_m = m_c & imp[y0:y1]
+            pas_m = m_c & ~imp[y0:y1]
+            anchors_c = [(ax, ay - y0) for ax, ay in (anchors or ())]
+            for ax, ay in anchors_c:
                 if imp_m[ay, ax]:
                     raise cells.CellError(
-                        f"hub anchor ({ax}, {ay}) in region {i} lies on impassable paint")
+                        f"hub anchor ({ax}, {ay + y0}) in region {i} lies on impassable paint")
             pcomp = cells.renumber(np.where(
                 pas_m, cells.components(pas_m.astype(np.int32), wrap_x), 0))
             icomp = cells.renumber(np.where(
@@ -760,13 +766,14 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 base[order[:rem]] += 1
                 pk += base
             piece_seeds_i: dict[int, list[tuple[int, int]]] = {}
-            for ax, ay in (anchors or ()):
+            for ax, ay in anchors_c:
                 cid = int(pcomp[ay, ax])
                 if cid > 0:
                     piece_seeds_i.setdefault(cid, []).append((ax, ay))
             for cid, pts in piece_seeds_i.items():
                 if len(pts) > pk[cid - 1]:
                     pk[cid - 1] = len(pts)
+            out_c = out[y0:y1]  # view
             first_i = True
             for cid in range(1, pc + 1):
                 pm = pcomp == cid
@@ -782,9 +789,9 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 for j in range(start, q + 1):
                     ids[j] = nxt
                     nxt += 1
-                out[pm] = ids[sub[pm]]
+                out_c[pm] = ids[sub[pm]]
             for cid in range(1, ic + 1):
-                out[icomp == cid] = nxt
+                out_c[icomp == cid] = nxt
                 nxt += 1
             continue
         if _is_connected(m, wrap_x):
