@@ -413,6 +413,7 @@ Vanilla data keyed to the old real-world map crashes/errors the loader once the 
 
 - `common/defines/00_wh_defines.txt` — `WORLD_MARKET_LOCATION` (vanilla `x9137A4`, old North Atlantic, a province colour the mod lacks; caused `world_market.cpp:246` and the load crash). Set to a passable non-lake sea province (`xCC2EA6`). `common/defines` is not in `replace_paths`, so it merges per key. **Hand-authored, guarded by `validate_map._check_world_market_location`; re-check after any `generate_provinces.py --reassign`.**
 - `gfx/map/spline_network/game_road_data.txt` — blanked; rows are keyed to vanilla state-region ids (`route_graphics.cpp` errors).
+- `gfx/map/spline_network/spline_network.splnet` — zero-byte override (ladder step 2, untested guess): after the road_data blank, the 2026-09-24 in-game load showed world_market/fortification errors gone but 2764 `route_graphics.cpp` strip errors and a crash inside route processing; the strips (vanilla state-id-keyed anchors like `201004`) live in this binary, which the road_data blank alone does not remove.
 - `gfx/map/map_object_data/fortification_locators.txt` — blanked; instances sit at old-map pixels (`fortification_graphics.cpp` errors).
 
 If a new stale-reference error appears, override one more file per iteration (candidates: `generated_map_object_locators_*`, `papermap_*`, `spline_network.splnet`) and list it here.
