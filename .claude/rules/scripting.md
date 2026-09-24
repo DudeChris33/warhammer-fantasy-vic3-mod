@@ -407,6 +407,16 @@ channel** is the extent — the opaque area is an irregular interior shape whose
 bounding box is the whole image, so the image bounds prove nothing. A canon name
 resolved for a point outside it is discarded, not offered.
 
+## Vanilla map-keyed data overridden (board #5520)
+
+Vanilla data keyed to the old real-world map crashes/errors the loader once the map is redrawn. Three overrides exist:
+
+- `common/defines/00_wh_defines.txt` — `WORLD_MARKET_LOCATION` (vanilla `x9137A4`, old North Atlantic, a province colour the mod lacks; caused `world_market.cpp:246` and the load crash). Set to a passable non-lake sea province (`xCC2EA6`). `common/defines` is not in `replace_paths`, so it merges per key. **Hand-authored, guarded by `validate_map._check_world_market_location`; re-check after any `generate_provinces.py --reassign`.**
+- `gfx/map/spline_network/game_road_data.txt` — blanked; rows are keyed to vanilla state-region ids (`route_graphics.cpp` errors).
+- `gfx/map/map_object_data/fortification_locators.txt` — blanked; instances sit at old-map pixels (`fortification_graphics.cpp` errors).
+
+If a new stale-reference error appears, override one more file per iteration (candidates: `generated_map_object_locators_*`, `papermap_*`, `spline_network.splnet`) and list it here.
+
 ## Forbidden
 
 - No non-deterministic effects (see [core.md](core.md) Determinism).

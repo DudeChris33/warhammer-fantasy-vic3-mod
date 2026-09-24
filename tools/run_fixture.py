@@ -1569,6 +1569,34 @@ def _selfcheck_island_zone_groups() -> None:
     assert np.array_equal(prov, prov2), "two runs must be byte-identical"
 
 
+def _selfcheck_world_market_location() -> None:
+    """validate_map._check_world_market_location (board #5520)."""
+    import validate_map as vm
+
+    def cell(rgb, kind="sea", imp=False):
+        return {"color": list(rgb), "kind": kind, "impassable": imp}
+
+    sea, land, lake, imp = (1, 2, 3), (4, 5, 6), (7, 8, 9), (10, 11, 12)
+    cells = [cell(sea), cell(land, "land"), cell(lake, "lake", True), cell(imp, "sea", True)]
+    starts = {sea, imp}
+    with tempfile.TemporaryDirectory() as td:
+        d = Path(td)
+
+        def run(rgb):
+            (d / "a.txt").write_text(
+                'NEconomy = {\n\tWORLD_MARKET_LOCATION = "x%02X%02X%02X"\n}\n' % rgb,
+                encoding="utf-8")
+            return vm._check_world_market_location(d, cells, starts)
+
+        assert run(sea) == [], "a passable sea province in sea_starts must pass"
+        assert run(land), "a land colour must fail"
+        assert run(lake), "a lake colour must fail"
+        assert run(imp), "an impassable sea must fail"
+        assert run((99, 99, 99)), "an unknown colour must fail"
+        (d / "a.txt").unlink()
+        assert vm._check_world_market_location(d, cells, starts) == [],             "no define present is a clean skip"
+
+
 def _selfcheck_lakes() -> None:
     """Inland-lake water class (board #3742), in isolation (no golden needed).
 
@@ -4063,6 +4091,7 @@ def run_check() -> int:
     print("coastline_mask: land-speck drop (sub-floor components -> water, real island "
           "kept, exclusive floor, wrap-aware, no-op guard) self-check passed.")
     _selfcheck_lakes()
+    _selfcheck_world_market_location()
     print("lakes: classify/label/assemble + sea_zones exclude + three-way validate + "
           "stateless checks + default.map lakes block + non-blocking oversized/junk-lake "
           "warnings self-check passed.")

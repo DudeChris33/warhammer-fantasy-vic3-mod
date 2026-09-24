@@ -1,0 +1,10 @@
+﻿# Blanked: vanilla positions are keyed to the old map (board #5520). Real Warhammer holds are a later content pass.
+game_object_locator={
+	name="fortification"
+	clamp_to_water_level=yes
+	render_under_water=no
+	generated_content=no
+	layer="fortifications"
+	instances={
+	}
+}

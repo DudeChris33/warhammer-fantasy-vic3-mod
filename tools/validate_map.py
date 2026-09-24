@@ -303,6 +303,7 @@ def validate(
     # and never needed the concept, so an absent path just means no exceptions.
     archipelago_colors: set[Color] = set()
     index_lake_colors: set[Color] | None = None
+    index_cells: list[dict] | None = None
     if provinces_index_path is not None and provinces_index_path.is_file():
         import json
 
@@ -310,6 +311,7 @@ def validate(
         archipelago_colors = {
             tuple(c["color"]) for c in prov_index["cells"] if c.get("archipelago")
         }
+        index_cells = prov_index["cells"]
         index_lake_colors = {
             tuple(int(v) for v in c["color"])
             for c in prov_index["cells"] if c.get("kind") == "lake"
@@ -333,6 +335,9 @@ def validate(
         errors += _check_lakes_stateless(states, lake_colors)
         if index_lake_colors is not None:
             errors += _check_lakes_declared(index_lake_colors, lake_colors)
+        if index_cells is not None:
+            errors += _check_world_market_location(
+                REPO_ROOT / "common" / "defines", index_cells, sea_colors)
         if hub_index is not None:
             errors += _check_hub_anchors(
                 bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
@@ -812,6 +817,40 @@ def _check_lakes_declared(index_lake_colors: set[Color], lake_colors: set[Color]
     for color in sorted(lake_colors - index_lake_colors):
         errors.append(f"lake colour {color_to_hex(color)} in default.map's lakes block is "
                       f"not a lake province in provinces_index.json")
+    return errors
+
+
+def _check_world_market_location(defines_dir: Path, cells: list[dict],
+                                 sea_colors: set[Color]) -> list[str]:
+    """``WORLD_MARKET_LOCATION`` (hand-authored in common/defines) must name a
+    passable, non-lake sea province present in the index and in ``sea_starts``
+    (board #5520). Vanilla's value is an old-map colour; a dangling one is a load
+    error/crash. Clean skip when no defines file sets it."""
+    import re
+
+    from worldgen.raster import color_to_hex
+
+    value = None
+    if defines_dir.is_dir():
+        for f in sorted(defines_dir.glob("*.txt")):
+            m = re.search(r'^\s*WORLD_MARKET_LOCATION\s*=\s*"x([0-9A-Fa-f]{6})"',
+                          f.read_text(encoding="utf-8-sig"), re.M)
+            if m:
+                value = m.group(1).upper()
+    if value is None:
+        return []
+    color = tuple(int(value[i:i + 2], 16) for i in (0, 2, 4))
+    hexname = f"x{value}"
+    cell = next((c for c in cells if tuple(int(v) for v in c["color"]) == color), None)
+    if cell is None:
+        return [f"WORLD_MARKET_LOCATION {hexname} is not a province in provinces_index.json"]
+    errors = []
+    if cell.get("kind") != "sea":
+        errors.append(f"WORLD_MARKET_LOCATION {hexname} is a {cell.get('kind')} province, not sea")
+    if cell.get("impassable"):
+        errors.append(f"WORLD_MARKET_LOCATION {hexname} is impassable")
+    if color not in sea_colors:
+        errors.append(f"WORLD_MARKET_LOCATION {hexname} is not in default.map sea_starts")
     return errors
 
 
