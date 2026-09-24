@@ -782,6 +782,16 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             anchors_c = [(ax, ay - y0) for ax, ay in (anchors or ())]
             keep_c = [(ax, ay - y0) for ax, ay in (keep_passable or ())
                       if y0 <= ay < y1] + anchors_c
+            # A state-region border can slice a paint tract into a sliver inside this
+            # region: paint pieces below min_area *within the region* revert to
+            # passable (the global dust rule only sees whole-canvas components).
+            ic0 = cells.components((m_c & imp[y0:y1]).astype(np.int32), wrap_x)
+            isz0 = np.bincount(ic0.ravel(), minlength=int(ic0.max()) + 1)
+            idust = isz0 < min_area
+            idust[0] = False
+            idust_px = idust[ic0] & m_c & imp[y0:y1]
+            if idust_px.any():
+                imp[y0:y1][idust_px] = False
             pas0 = m_c & ~imp[y0:y1]
             pc0 = cells.components(pas0.astype(np.int32), wrap_x)
             sz0 = np.bincount(pc0.ravel(), minlength=int(pc0.max()) + 1)
