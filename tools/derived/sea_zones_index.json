@@ -151,7 +151,7 @@
   "WISSENLAND_ESTUARY": 2,
   "WITCH_SEA": 2
  },
- "source": "terraqueous_globe_reprojected - sea_zones.png",
+ "source": "terraqueous_globe_reprojected - full.ora#sea_zones",
  "config": "sea_zones.json",
  "cells": [
   {
