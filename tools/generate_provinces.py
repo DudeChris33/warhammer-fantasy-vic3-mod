@@ -294,6 +294,7 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit(f"{IMPASSABLE_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
                              f"{imp_rgba.shape[1]}x{imp_rgba.shape[0]}")
         impassable = land_provinces.impassable_mask(imp_rgba, land)
+        impassable = land_provinces.clean_paint(impassable, land, WRAP_X)
         if impassable.any():
             if CANON_CITIES_CONFIG.is_file():
                 canon_cities = schema.load_canon_cities(CANON_CITIES_CONFIG,

@@ -2193,6 +2193,21 @@ def _selfcheck_impassable_land() -> None:
     water_paint[38:40, 3:30] = True
     assert np.array_equal(cut(water_paint)[0], base[0]), "paint over water changes nothing"
 
+    # --- paint hygiene: <=4px blobs erased, <=4px enclosed gaps filled
+    dirty = np.zeros((H, W), dtype=bool)
+    dirty[5:15, 5:15] = True
+    dirty[9, 9] = False                  # 1px enclosed gap
+    dirty[22:24, 22:24] = True           # 4px blob
+    dirty[30:32, 30:33] = True           # 6px blob survives
+    cl = lp.clean_paint(dirty, land, wrap_x=False)
+    assert cl[9, 9], "a 1px enclosed gap is filled"
+    assert not cl[22:24, 22:24].any(), "a 4px blob is erased"
+    assert cl[30:32, 30:33].all(), "a 6px blob survives"
+    open_gap = dirty.copy()
+    open_gap[5, 5:7] = False             # a notch touching the outside, not enclosed
+    assert not lp.clean_paint(open_gap, land, wrap_x=False)[5, 5], "an open notch is not filled"
+    assert np.array_equal(cl, lp.clean_paint(dirty, land, wrap_x=False)), "deterministic"
+
     # --- impassable_mask: exact colour + alpha
     rgba = np.zeros((H, W, 4), dtype=np.uint8)
     rgba[5:10, 5:10] = (255, 127, 0, 255)

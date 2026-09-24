@@ -520,6 +520,35 @@ def impassable_mask(rgba: np.ndarray, land: np.ndarray) -> np.ndarray:
     return hit & land
 
 
+#: Paint hygiene threshold (Chris, 2026-09-24): impassable blobs and fully-enclosed
+#: passable gaps of at most this many px are noise.
+PAINT_NOISE_PX = 4
+
+
+def clean_paint(imp: np.ndarray, land: np.ndarray, wrap_x: bool = True,
+                max_px: int = PAINT_NOISE_PX) -> np.ndarray:
+    """Erase impassable blobs of <= ``max_px`` px, then fill completely enclosed
+    passable gaps of <= ``max_px`` px (a non-paint component that touches no water and
+    no larger passable land, i.e. wholly surrounded by paint). Wrap-aware, pure."""
+    imp = imp.copy()
+    comp = cells.components(imp.astype(np.int32), wrap_x)
+    sz = np.bincount(comp.ravel(), minlength=int(comp.max()) + 1)
+    small = sz <= max_px
+    small[0] = False
+    imp &= ~small[comp]
+    free = ~imp
+    fcomp = cells.components(free.astype(np.int32), wrap_x)
+    fsz = np.bincount(fcomp.ravel(), minlength=int(fcomp.max()) + 1)
+    hole = fsz <= max_px
+    hole[0] = False
+    fill = hole[fcomp] & land
+    # a gap containing any water pixel is not "enclosed" by paint alone
+    bad = np.unique(fcomp[hole[fcomp] & ~land])
+    if bad.size:
+        fill &= ~np.isin(fcomp, bad)
+    return imp | fill
+
+
 def city_pockets(anchors, shape: tuple[int, int], radius: int = CITY_POCKET_R,
                  wrap_x: bool = True) -> np.ndarray:
     """Union of discs of ``radius`` px around each ``(x, y)`` anchor (x wraps when
