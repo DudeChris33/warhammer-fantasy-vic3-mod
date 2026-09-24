@@ -803,6 +803,14 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             if tiny.any() and not tiny[pc0[pas0]].all():
                 fold = tiny[pc0] & pas0
                 imp[y0:y1][fold] = True
+            elif tiny.any():
+                # Every passable piece is sub-floor: the region is essentially all
+                # paint. A state needs real passable land, so the paint on this
+                # region is disregarded (logged; the source keeps it).
+                imp[y0:y1][m_c] = False
+                if log:
+                    log(f"  WARNING: region {i} is almost entirely impassable paint - "
+                        f"paint disregarded there ({int(m_c.sum()):,} px)")
             imp_m = m_c & imp[y0:y1]
             pas_m = m_c & ~imp[y0:y1]
             for ax, ay in anchors_c:

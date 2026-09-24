@@ -555,27 +555,46 @@ def _check_impassable_land(bitmap: "ProvinceBitmap", land_states: list[ParsedSta
         if not imp:
             main_component |= passable
             continue
-        seen: set[Color] = set()
-        comps: list[set[Color]] = []
-        for start in sorted(passable):
-            if start in seen:
-                continue
-            comp, stack = set(), [start]
-            while stack:
-                c = stack.pop()
-                if c in comp:
+        def _components(nodes: set[Color]) -> list[set[Color]]:
+            seen: set[Color] = set()
+            out: list[set[Color]] = []
+            for start in sorted(nodes):
+                if start in seen:
                     continue
-                comp.add(c)
-                stack.extend(n for n in nbrs.get(c, ()) if n in passable and n not in comp)
-            seen |= comp
-            comps.append(comp)
-        comps.sort(key=lambda cs: (-sum(bitmap.area.get(c, 0) for c in cs), min(cs)))
-        if len(comps) > 1:
-            errors.append(
-                f"{st.key} ({st.filename}): passable land is split into {len(comps)} "
-                f"disconnected components - leave a gap in the paint or add an "
-                f"adjacencies.csv tunnel row")
-        main_component |= comps[0]
+                comp, stack = set(), [start]
+                while stack:
+                    c = stack.pop()
+                    if c in comp:
+                        continue
+                    comp.add(c)
+                    stack.extend(n for n in nbrs.get(c, ()) if n in nodes and n not in comp)
+                seen |= comp
+                out.append(comp)
+            return out
+
+        # Only paint may disconnect: land that was already apart before the paint
+        # (islands, an archipelago, a merge-fused region's separate landmasses) is
+        # not this check's business. So take the components of ALL the state's
+        # provinces, and require the passable ones inside each to stay connected.
+        for full in _components(own):
+            sub = _components(full & passable)
+            if not sub:
+                continue
+            sub.sort(key=lambda cs: (-sum(bitmap.area.get(c, 0) for c in cs), min(cs)))
+            if len(sub) > 1:
+                def _at(cs: set[Color]) -> str:
+                    px = bitmap.pixels[min(cs)]
+                    return f"({px[0][0]}, {px[0][1]})"
+                errors.append(
+                    f"{st.key} ({st.filename}): passable land is split into {len(sub)} "
+                    f"disconnected components (cut-off pieces near "
+                    f"{', '.join(_at(c) for c in sub[1:4])}"
+                    f"{', ...' if len(sub) > 4 else ''}) - leave a gap in the paint or "
+                    f"add an adjacencies.csv tunnel row")
+            main_component |= sub[0]
+            # pieces of a full component that were only ever passable-adjacent to it
+            # are covered above; a passable province outside every ``sub[0]`` is
+            # what the city check reads as "sealed".
     stray = idx_imp - claimed_imp
     if stray:
         errors.append(f"provinces_index.json marks {len(stray)} land province(s) impassable "
