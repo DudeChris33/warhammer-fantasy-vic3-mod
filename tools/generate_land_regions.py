@@ -653,6 +653,8 @@ def main(argv: list[str] | None = None) -> int:
     canon_names: dict[str, str] = {}
     loc_keys: list[str] = []
     n_stacked = 0
+    sealed_coast_keys: list[str] = []
+    n_sealed_coast = 0  # coastal states left port-less because their coast is impassable (#3704)
     n_sealed_stacked = 0  # pick_hubs -> stack_hubs downgrades caused by impassable provinces (#3704)
 
     # Anchor-driven hubs (#3665): the persisted anchor -> seeded-province index is
@@ -715,7 +717,13 @@ def main(argv: list[str] | None = None) -> int:
             )
             for p in members
         ]
-        coastal = any(info.coastal for info in infos)
+        # A port needs a PASSABLE coastal province: a state whose only coast is
+        # impassable paint has no usable port, so it is emitted non-coastal (no
+        # port / naval_exit) rather than failing the hub pick (#3704).
+        coastal = any(info.coastal and not info.impassable for info in infos)
+        if not coastal and any(info.coastal for info in infos):
+            n_sealed_coast += 1
+            sealed_coast_keys.append(key)
         needed = 5 if coastal else 4
         passable_infos = [info for info in infos if not info.impassable]
         if infos and not passable_infos:
@@ -779,6 +787,10 @@ def main(argv: list[str] | None = None) -> int:
     n_blocks = sum(len(v) for v in blocks_by_file.values())
     log(f"{n_blocks} land states emitted ({n_stacked} hub-stacked placeholder/small regions"
         f"{f', {n_sealed_stacked} of them downgraded by impassable provinces' if n_sealed_stacked else ''})", t0)
+    if n_sealed_coast:
+        log(f"{n_sealed_coast} coastal state(s) emitted without a port: every coastal province "
+            f"is impassable ({', '.join(sealed_coast_keys)}) - paint a passable coastal "
+            f"pocket for a port", t0)
 
     # --- write the state files (one per existing NN_<stem>.txt stub) --------
     for stem, filename in STATE_FILE_STEMS.items():
