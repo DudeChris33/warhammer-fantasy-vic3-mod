@@ -881,7 +881,11 @@ def _check_coastal_naval_exit(
     coastal_colors = bitmap.coastal_colors(sea_colors)
     sea_ids = {s.id for s in sea_states if s.id is not None}
     for st in land_states:
-        has_coastal_pixels = any(c in coastal_colors for c in st.provinces)
+        # An impassable province can't host a port, so a state whose only coast is
+        # impassable is treated as not coastal (the emitter leaves it port-less, #3704).
+        impassable = set(st.impassable)
+        has_coastal_pixels = any(c in coastal_colors and c not in impassable
+                                 for c in st.provinces)
         if has_coastal_pixels:
             if not st.port_declared:
                 errors.append(f"{st.key} ({st.filename}): coastal state (has coastal provinces) has no port")

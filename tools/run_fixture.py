@@ -2236,6 +2236,21 @@ def _selfcheck_impassable_land() -> None:
     rgba[16:18, 5:10] = (255, 127, 0, 0)        # transparent
     m = lp.impassable_mask(rgba, land)
     assert int(m.sum()) == 25, f"only the exact opaque colour counts, got {int(m.sum())}"
+    # --- a state whose only coastal province is impassable is not coastal
+    A, B, SEA = (10, 20, 30), (40, 50, 60), (0, 0, 200)
+
+    class _CoastBitmap:                  # only B touches the sea
+        def coastal_colors(self, sea_colors):
+            return {B}
+
+    cbmp = _CoastBitmap()
+    cst = vm.ParsedState("STATE_COAST", "t.txt")
+    cst.provinces = [A, B]
+    sea_st = vm.ParsedState("STATE_SEA", "s.txt")
+    assert vm._check_coastal_naval_exit([cst], [sea_st], cbmp, {SEA}),         "a passably-coastal state without a port must fail"
+    cst.impassable = [B]
+    _e = vm._check_coastal_naval_exit([cst], [sea_st], cbmp, {SEA})
+    assert _e == [], f"a state whose only coast is impassable is not coastal, got {_e}"
     print("impassable land: cut/pockets/validator/stable-ids checks passed.")
 
 
