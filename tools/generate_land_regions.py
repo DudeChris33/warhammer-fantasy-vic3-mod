@@ -349,7 +349,24 @@ def _render_strategic_region_block(name: str, state_keys: list[str],
     return "\n".join(lines)
 
 
-def _render_loc(keys: list[str], canon_names: dict[str, str]) -> str:
+_LOC_LINE = re.compile(r'^ ([A-Za-z0-9_]+):0 ".*$')
+
+
+def _read_existing_loc(path: Path) -> dict[str, str]:
+    """``key -> raw line`` for every entry already in the shipped loc file, so a
+    regen never drops a name whose state no longer exists."""
+    if not path.is_file():
+        return {}
+    out: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        m = _LOC_LINE.match(line)
+        if m:
+            out[m.group(1)] = line
+    return out
+
+
+def _render_loc(keys: list[str], canon_names: dict[str, str],
+                existing: dict[str, str] | None = None) -> str:
     lines = ["l_english:"]
     for key in keys:
         name = canon_names.get(key)
@@ -358,6 +375,11 @@ def _render_loc(keys: list[str], canon_names: dict[str, str]) -> str:
             lines.append(f' {key}:0 "{escaped}"')
         else:
             lines.append(f' {key}:0 "{_pretty_name(key)}" {map_config.AUTOGEN_MARKER}')
+    emitted = set(keys)
+    retained = sorted(k for k in (existing or {}) if k not in emitted)
+    if retained:
+        lines.append("# Retained: no longer emitted by the current region cut; kept so no name is lost.")
+        lines.extend(existing[k] for k in retained)
     return "\n".join(lines) + "\n"
 
 
@@ -759,7 +781,7 @@ def main(argv: list[str] | None = None) -> int:
         log(f"wrote {path.relative_to(MOD_ROOT)}  ({len(blocks)} states)", t0)
 
     # --- write the loc -------------------------------------------------------
-    _write_bytes(LOC_PATH, _render_loc(loc_keys, canon_names), bom=True)
+    _write_bytes(LOC_PATH, _render_loc(loc_keys, canon_names, _read_existing_loc(LOC_PATH)), bom=True)
     log(f"wrote {LOC_PATH.relative_to(MOD_ROOT)}  ({len(loc_keys)} entries)", t0)
 
     # --- write the hub-name loc (#3665) -------------------------------------
