@@ -805,15 +805,18 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 imp_m, cells.components(imp_m.astype(np.int32), wrap_x), 0))
             pc, ic = int(pcomp.max()), int(icomp.max())
             p_areas = np.bincount(pcomp.ravel(), minlength=pc + 1)[1:].astype(np.float64)
+            # Seats go to passable pieces in proportion to AREA (each >= 1): the
+            # whole budget k is spent on passable land, so a big open tract is cut
+            # into Voronoi provinces as usual even when small trapped pockets exist
+            # (a "one seat each, remainder to the rest" scheme let pockets eat it).
             pk = np.ones(pc, dtype=int)
-            spare = max(0, k - pc)
-            if spare and p_areas.sum() > 0:
-                quota = p_areas / p_areas.sum() * spare
+            if p_areas.sum() > 0:
+                quota = p_areas / p_areas.sum() * k
                 base = np.floor(quota).astype(int)
-                rem = spare - int(base.sum())
+                rem = k - int(base.sum())
                 order = np.argsort(-(quota - base), kind="stable")
                 base[order[:rem]] += 1
-                pk += base
+                pk = np.maximum(1, base)
             piece_seeds_i: dict[int, list[tuple[int, int]]] = {}
             for ax, ay in anchors_c:
                 cid = int(pcomp[ay, ax])

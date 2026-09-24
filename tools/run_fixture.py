@@ -2164,6 +2164,16 @@ def _selfcheck_impassable_land() -> None:
     labk, _, _, _, impk = cut(holed_p, keep_passable=[(16, 20)])
     assert not impk[labk[20, 16]], "a keep_passable point (city pocket) is never folded"
 
+    # --- a painted region's big open tract is still Voronoi-cut when kept pockets exist
+    many = np.zeros((H, W), dtype=bool)
+    many[3:8, 3:37] = True               # a thin painted band across the top of A
+    pockets = [(6 + 6 * j, 5) for j in range(5)]
+    for px_, py_ in pockets:
+        many[py_, px_] = False           # 1px pockets, kept via keep_passable
+    labm, _, _, _, impm = cut(many, target=10, keep_passable=pockets)
+    open_provs = np.unique(labm[12:37, 3:37])
+    assert len(open_provs) >= 3,         f"trapped pockets must not eat the big tract's seats, got {len(open_provs)} provinces"
+
     # --- generation-time errors
     on_placeholder = np.zeros((H, W), dtype=bool)
     on_placeholder[5:15, 78:85] = True
