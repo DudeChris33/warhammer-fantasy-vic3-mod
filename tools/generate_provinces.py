@@ -167,10 +167,10 @@ def main(argv: list[str] | None = None) -> int:
                     help="ignore the committed provinces.png and re-allocate every colour/id "
                          "fresh in label order (board #3705 escape hatch — WILL reshuffle "
                          "colours on purpose; use only after a wholesale source overhaul)")
-    ap.add_argument("--drop-placeholder-paint", action="store_true",
+    ap.add_argument("--strict-placeholder-paint", action="store_true",
                     help="(board #3704) impassable paint on an out-of-scope placeholder region "
-                         "is normally a hard error; with this flag it is dropped (logged) and "
-                         "the placeholder stays one passable province")
+                         "is disregarded by default (logged; the source keeps it for when that "
+                         "land is in scope); with this flag it is a hard error instead")
     args = ap.parse_args(argv)
     t0 = time.time()
 
@@ -314,7 +314,8 @@ def main(argv: list[str] | None = None) -> int:
                 reg, land, dmask, args.target, WRAP_X, args.min_area, log=log,
                 keep_whole=keep_whole, region_seeds=region_seeds or None,
                 island_zones=island_overrides, impassable=impassable,
-                drop_placeholder_paint=args.drop_placeholder_paint)
+                strict_placeholder_paint=args.strict_placeholder_paint,
+                keep_passable=[c.anchor for c in canon_cities] or None)
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())

@@ -554,7 +554,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                  region_seeds: dict[int, list[tuple[int, int]]] | None = None,
                  island_zones: np.ndarray | None = None,
                  impassable: np.ndarray | None = None,
-                 drop_placeholder_paint: bool = False
+                 strict_placeholder_paint: bool = False,
+                 keep_passable: list[tuple[int, int]] | None = None
                  ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -601,9 +602,11 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     dust). Paint on a ``keep_whole`` archipelago or a placeholder region, a
     region that is wholly impassable, or a hub anchor that lands on impassable
     paint is a hard :class:`cells.CellError`. ``None`` / no paint => byte-identical
-    to before. ``drop_placeholder_paint=True`` (the generator's opt-in
-    ``--drop-placeholder-paint``) downgrades the placeholder case to a logged drop
-    of that paint instead of an error; every other case stays a hard error.
+    to before. Paint on an out-of-scope placeholder region is **disregarded**
+    (logged, source untouched - the paint is kept in the .ora for when that land
+    comes into scope; Chris, 2026-09-24); ``strict_placeholder_paint=True`` (the
+    generator's ``--strict-placeholder-paint``) makes it a hard error instead. Every
+    other unsupported case stays a hard error.
 
     Returns ``(labels, is_placeholder, reg_of, is_archipelago, is_impassable)``
     (:func:`subdivide` drops the last):
@@ -684,10 +687,10 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 problems.append(
                     f"region {rid} ({where}) is a keep_whole island-override archipelago - "
                     f"it cannot be split into passable/impassable provinces")
-            elif rid not in drawn_set2 and drop_placeholder_paint:
+            elif rid not in drawn_set2 and not strict_placeholder_paint:
                 imp = imp & ~(reg == rid)  # explicit opt-in: placeholder land stays passable
                 if log:
-                    log(f"  WARNING: dropped impassable paint on out-of-scope placeholder "
+                    log(f"  WARNING: disregarded impassable paint on out-of-scope placeholder "
                         f"region {rid} ({where})")
             elif rid not in drawn_set2:
                 problems.append(
@@ -743,9 +746,26 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             rows = np.flatnonzero(m.any(axis=1))
             y0, y1 = int(rows[0]), int(rows[-1]) + 1
             m_c = m[y0:y1]
+            # Passable specks below min_area trapped by the paint are not provinces
+            # (the mirror of the impassable-dust rule): fold them into the paint,
+            # except a component holding a hub anchor or a ``keep_passable`` point
+            # (a canon-city pocket). Never folds the region's last passable land.
+            anchors_c = [(ax, ay - y0) for ax, ay in (anchors or ())]
+            keep_c = [(ax, ay - y0) for ax, ay in (keep_passable or ())
+                      if y0 <= ay < y1] + anchors_c
+            pas0 = m_c & ~imp[y0:y1]
+            pc0 = cells.components(pas0.astype(np.int32), wrap_x)
+            sz0 = np.bincount(pc0.ravel(), minlength=int(pc0.max()) + 1)
+            tiny = sz0 < min_area
+            tiny[0] = False
+            for ax, ay in keep_c:
+                if pc0[ay, ax] > 0:
+                    tiny[pc0[ay, ax]] = False
+            if tiny.any() and not tiny[pc0[pas0]].all():
+                fold = tiny[pc0] & pas0
+                imp[y0:y1][fold] = True
             imp_m = m_c & imp[y0:y1]
             pas_m = m_c & ~imp[y0:y1]
-            anchors_c = [(ax, ay - y0) for ax, ay in (anchors or ())]
             for ax, ay in anchors_c:
                 if imp_m[ay, ax]:
                     raise cells.CellError(

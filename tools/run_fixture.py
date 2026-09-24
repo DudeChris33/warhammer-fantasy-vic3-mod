@@ -2133,7 +2133,7 @@ def _selfcheck_impassable_land() -> None:
     cy2 = 20
     pk2 = lp.city_pockets([(16, cy2)], (H, W), radius=1, wrap_x=False)
     wall_e = wall & ~pk2
-    labe, _, _, _, impe = cut(wall_e)
+    labe, _, _, _, impe = cut(wall_e, keep_passable=[(16, cy2)])
     bmpe, ste, cellse, pale = bitmap_and_state(labe, impe, "pocket-enclosed")
     eprov = int(labe[cy2, 16])
     assert not impe[eprov], "an enclosed pocket is still its own passable province"
@@ -2154,12 +2154,23 @@ def _selfcheck_impassable_land() -> None:
     assert any("disagrees" in e for e in vm._check_impassable_land(bmp, [bad], cells_, None, set())), \
         "state/index disagreement must fail"
 
+    # --- trapped passable specks below min_area fold into the paint; a kept point survives
+    holed = wall.copy()
+    speck = np.zeros((H, W), dtype=bool)
+    speck[19:22, 15:18] = True                       # 9 px < min_area 20, inside the tract
+    holed_p = holed & ~speck
+    labh, _, _, _, imph = cut(holed_p)
+    assert imph[labh[20, 16]], "a trapped sub-floor passable speck folds into the paint"
+    labk, _, _, _, impk = cut(holed_p, keep_passable=[(16, 20)])
+    assert not impk[labk[20, 16]], "a keep_passable point (city pocket) is never folded"
+
     # --- generation-time errors
     on_placeholder = np.zeros((H, W), dtype=bool)
     on_placeholder[5:15, 78:85] = True
+    assert np.array_equal(cut(on_placeholder)[0], base[0]) and not cut(on_placeholder)[4].any(),         "paint on a placeholder region is disregarded by default"
     try:
-        cut(on_placeholder)
-        raise AssertionError("paint on a placeholder region must raise")
+        cut(on_placeholder, strict_placeholder_paint=True)
+        raise AssertionError("strict mode: paint on a placeholder region must raise")
     except C.CellError:
         pass
     try:
