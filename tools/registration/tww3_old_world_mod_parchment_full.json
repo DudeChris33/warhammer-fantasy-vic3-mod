@@ -6,7 +6,7 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL. Whole, uncropped TWW3 Old World mod parchment master (tww3_old_world_mod_parchment.png, 'The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_full (objective=landmarks; 81 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 16x16 lattice bounded to the landmark hull). Unlike the five per-region crops (each a dense network confined to its own arc), this is the SAME parchment placed as ONE piece, for consumers that need a single consistent master-frame warp instead of stitching five overlapping crops (e.g. tools/project_regions_unified.py). Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, unused while the five per-region records remain the active ones for project_regions.py / project_lines_onto_parchment.py. PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 108, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 201}",
+  "notes": "PROVISIONAL. Whole, uncropped TWW3 Old World mod parchment master (tww3_old_world_mod_parchment.png, 'The Old World, all faction starting positions v3.0'), registered against tools/derived/land_sea_mask.png by tools/fit_registration.py --seed tww3_old_world_mod_parchment_full (objective=landmarks; 81 user-drawn paired anchor dots read direct off terraqueous_globe_reprojected.png; 16x16 lattice bounded to the landmark hull). Unlike the five per-region crops (each a dense network confined to its own arc), this is the SAME parchment placed as ONE piece, for consumers that need a single consistent master-frame warp instead of stitching five overlapping crops (e.g. tools/project_regions_unified.py). Contributes NO coastline (the mask remains the sole authority, user decision #1) and no geometry yet: this request only PLACES it. precedence/layer_precedence are provisional placement values, unused while the five per-region records remain the active ones for project_regions.py / project_lines_onto_parchment.py. PROVISIONAL until the user accepts the diagnostic render. MACHINE-FITTED; re-derive from the seed, do not hand-edit. FIT: {\"landmarks\": 122, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 231}",
   "source": "tww3_old_world_mod_parchment_full.png",
   "projection": "piecewise_affine_warp",
   "master_shape": [
@@ -272,17 +272,6 @@
         975.5
       ],
       "note": "bretonnia_periwinkle"
-    },
-    {
-      "source": [
-        973.5,
-        2656.5
-      ],
-      "canvas": [
-        3827.5,
-        1331.5
-      ],
-      "note": "bretonnia_pink"
     },
     {
       "source": [
@@ -679,17 +668,6 @@
         1506.5
       ],
       "note": "dark_lands_spring_green"
-    },
-    {
-      "source": [
-        3166.5,
-        2653.5
-      ],
-      "canvas": [
-        4891.5,
-        1377.5
-      ],
-      "note": "dark_lands_teal"
     },
     {
       "source": [
@@ -1170,8 +1148,8 @@
         2657.0
       ],
       "canvas": [
-        4859.0,
-        1316.0
+        4857.5,
+        1315.5
       ],
       "note": "c_7f007f_2"
     },
@@ -1207,6 +1185,182 @@
         907.0
       ],
       "note": "c_be0cfd"
+    },
+    {
+      "source": [
+        2602.0,
+        122.0
+      ],
+      "canvas": [
+        4626.0,
+        191.0
+      ],
+      "note": "c_ff7f00_13"
+    },
+    {
+      "source": [
+        284.0,
+        3017.0
+      ],
+      "canvas": [
+        3936.0,
+        1594.0
+      ],
+      "note": "c_ff7f00_14"
+    },
+    {
+      "source": [
+        331.0,
+        3052.0
+      ],
+      "canvas": [
+        3701.0,
+        1481.0
+      ],
+      "note": "c_ff00ff_5"
+    },
+    {
+      "source": [
+        1099.0,
+        3368.0
+      ],
+      "canvas": [
+        3687.0,
+        1470.0
+      ],
+      "note": "c_ff7f00_15"
+    },
+    {
+      "source": [
+        1176.0,
+        3482.0
+      ],
+      "canvas": [
+        3965.0,
+        1629.0
+      ],
+      "note": "c_ff00ff_6"
+    },
+    {
+      "source": [
+        3242.0,
+        2379.0
+      ],
+      "canvas": [
+        4811.0,
+        1180.0
+      ],
+      "note": "c_ff7f00_16"
+    },
+    {
+      "source": [
+        3732.0,
+        1526.0
+      ],
+      "canvas": [
+        5014.0,
+        901.0
+      ],
+      "note": "c_fd05fd"
+    },
+    {
+      "source": [
+        3167.0,
+        2654.0
+      ],
+      "canvas": [
+        4892.0,
+        1378.0
+      ],
+      "note": "c_007f7f"
+    },
+    {
+      "source": [
+        3168.0,
+        3116.0
+      ],
+      "canvas": [
+        4850.0,
+        1475.0
+      ],
+      "note": "c_ff7f00_17"
+    },
+    {
+      "source": [
+        1179.0,
+        3091.0
+      ],
+      "canvas": [
+        3963.0,
+        1496.0
+      ],
+      "note": "c_ff00ff_7"
+    },
+    {
+      "source": [
+        109.0,
+        3072.0
+      ],
+      "canvas": [
+        3637.0,
+        1489.0
+      ],
+      "note": "c_ff00ff_8"
+    },
+    {
+      "source": [
+        1079.2,
+        311.2
+      ],
+      "canvas": [
+        3934.0,
+        336.0
+      ],
+      "note": "c_ff00ff_9"
+    },
+    {
+      "source": [
+        691.0,
+        551.0
+      ],
+      "canvas": [
+        3874.0,
+        449.0
+      ],
+      "note": "c_ff7f00_18"
+    },
+    {
+      "source": [
+        1420.0,
+        1411.0
+      ],
+      "canvas": [
+        4042.0,
+        854.0
+      ],
+      "note": "c_ff00ff_10"
+    },
+    {
+      "source": [
+        1649.0,
+        1506.0
+      ],
+      "canvas": [
+        4146.0,
+        899.0
+      ],
+      "note": "c_ff00ff_11"
+    },
+    {
+      "source": [
+        1643.0,
+        1646.0
+      ],
+      "canvas": [
+        4137.0,
+        954.0
+      ],
+      "note": "c_ff00ff_12"
     }
   ]
 }
