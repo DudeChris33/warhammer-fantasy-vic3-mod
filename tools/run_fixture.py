@@ -2039,6 +2039,13 @@ def _selfcheck_impassable_land() -> None:
             out.ravel()[idx] = lut[v]
         return out
 
+    def _disc(anchors, shape, radius, wrap_x=False):
+        yy, xx = np.mgrid[:shape[0], :shape[1]]
+        m_ = np.zeros(shape, dtype=bool)
+        for ax_, ay_ in anchors:
+            m_ |= (yy - ay_) ** 2 + (xx - ax_) ** 2 <= radius * radius
+        return m_
+
     base = cut(None)
     # --- dormancy: None and an all-False mask are byte-identical to the 4-tuple cut
     assert np.array_equal(base[0], cut(np.zeros((H, W), dtype=bool))[0]), "empty paint must be a no-op"
@@ -2116,9 +2123,9 @@ def _selfcheck_impassable_land() -> None:
 
     # --- city pockets
     cx, cy = 16, 10
-    pk = lp.city_pockets([(cx, cy)], (H, W), radius=6, wrap_x=False)
+    pk = _disc([(cx, cy)], (H, W), radius=6, wrap_x=False)
     assert pk[cy, cx] and not pk[cy, cx + 8], "pocket is a bounded disc"
-    assert np.array_equal(pk, lp.city_pockets([(cx, cy)], (H, W), radius=6, wrap_x=False)), "deterministic"
+    assert np.array_equal(pk, _disc([(cx, cy)], (H, W), radius=6, wrap_x=False)), "deterministic"
     # (i) pocket touching open land: city province passable + reachable
     wall_p = wall & ~pk
     labp, _, _, _, impp = cut(wall_p)
@@ -2131,7 +2138,7 @@ def _selfcheck_impassable_land() -> None:
         "a city pocket connected to open land passes"
     # (ii) pocket floating inside solid paint: enclosed -> blocking error naming the city
     cy2 = 20
-    pk2 = lp.city_pockets([(16, cy2)], (H, W), radius=1, wrap_x=False)
+    pk2 = _disc([(16, cy2)], (H, W), radius=1, wrap_x=False)
     wall_e = wall & ~pk2
     labe, _, _, _, impe = cut(wall_e, keep_passable=[(16, cy2)])
     bmpe, ste, cellse, pale = bitmap_and_state(labe, impe, "pocket-enclosed")

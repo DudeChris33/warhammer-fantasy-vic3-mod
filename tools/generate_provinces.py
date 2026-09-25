@@ -296,15 +296,12 @@ def main(argv: list[str] | None = None) -> int:
         impassable = land_provinces.impassable_mask(imp_rgba, land)
         impassable = land_provinces.clean_paint(impassable, land, WRAP_X)
         if impassable.any():
+            # No automatic pockets: the paint is taken as drawn (Chris, 2026-09-24).
+            # A canon city under paint is a validator error, fixed by opening the paint.
             if CANON_CITIES_CONFIG.is_file():
                 canon_cities = schema.load_canon_cities(CANON_CITIES_CONFIG,
                                                         canvas=(CANVAS_W, CANVAS_H))
-                pockets = land_provinces.city_pockets(
-                    [c.anchor for c in canon_cities], impassable.shape,
-                    land_provinces.CITY_POCKET_R, WRAP_X)
-                impassable &= ~pockets
-            log(f"impassable paint: {int(impassable.sum()):,} px after "
-                f"{len(canon_cities)} canon-city pocket(s)", t0)
+            log(f"impassable paint: {int(impassable.sum()):,} px", t0)
         else:
             impassable = None
     del imp_rgba
@@ -441,7 +438,7 @@ def main(argv: list[str] | None = None) -> int:
     # validator proves each city's province is passable and reachable.
     if impassable is not None and canon_cities:
         city_index = {"canvas": [CANVAS_W, CANVAS_H], "source": CANON_CITIES_CONFIG.name,
-                      "pocket_radius": land_provinces.CITY_POCKET_R, "cities": []}
+                      "cities": []}
         for c in canon_cities:
             ax, ay = c.anchor
             plab = int(land_lab[ay, ax])

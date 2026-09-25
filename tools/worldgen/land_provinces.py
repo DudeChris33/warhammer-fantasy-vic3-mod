@@ -517,12 +517,6 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
 #: measured zero fringe). Single home; validate_map imports it.
 IMPASSABLE_RGB = (255, 127, 0)
 
-#: Radius (px) of the passable pocket kept around each canon city (#3704). pi*R^2
-#: (~1018 px) comfortably exceeds the default ``min_area`` (400) so a pocket is never
-#: a sub-floor offcut.
-CITY_POCKET_R = 18
-
-
 def impassable_mask(rgba: np.ndarray, land: np.ndarray) -> np.ndarray:
     """Boolean impassable mask from the layer's RGBA: alpha > 0 and RGB exactly
     :data:`IMPASSABLE_RGB`, intersected with ``land`` (paint over water is ignored)."""
@@ -558,27 +552,6 @@ def clean_paint(imp: np.ndarray, land: np.ndarray, wrap_x: bool = True,
     if bad.size:
         fill &= ~np.isin(fcomp, bad)
     return imp | fill
-
-
-def city_pockets(anchors, shape: tuple[int, int], radius: int = CITY_POCKET_R,
-                 wrap_x: bool = True) -> np.ndarray:
-    """Union of discs of ``radius`` px around each ``(x, y)`` anchor (x wraps when
-    ``wrap_x``). Subtracted from the impassable mask so a catalogued city sits in a
-    passable province. Deterministic, pure."""
-    h, w = shape
-    out = np.zeros(shape, dtype=bool)
-    r2 = radius * radius
-    for ax, ay in anchors:
-        y0, y1 = max(0, ay - radius), min(h, ay + radius + 1)
-        ys = np.arange(y0, y1)[:, None]
-        xs = np.arange(ax - radius, ax + radius + 1)[None, :]
-        disc = ((ys - ay) ** 2 + (xs - ax) ** 2) <= r2
-        xi = xs[0] % w if wrap_x else xs[0]
-        for j, x in enumerate(np.atleast_1d(xi)):
-            if not wrap_x and not (0 <= x < w):
-                continue
-            out[y0:y1, int(x)] |= disc[:, j]
-    return out
 
 
 def subdivide(*args, **kwargs) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
@@ -632,7 +605,7 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     every region byte-identical to today.
 
     ``impassable`` (#3704) is the boolean impassable-terrain mask (already
-    intersected with land, city pockets already subtracted). A drawn region that
+    intersected with land). A drawn region that
     carries impassable pixels bypasses the single-seat shortcut and is split into
     wrap-aware connected **passable** pieces (which share the region's seat budget
     by area, each >= 1, cut by ``_subdivide_cell``) and connected **impassable**
@@ -790,7 +763,7 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             # Passable specks below min_area trapped by the paint are not provinces
             # (the mirror of the impassable-dust rule): fold them into the paint,
             # except a component holding a hub anchor or a ``keep_passable`` point
-            # (a canon-city pocket). Never folds the region's last passable land.
+            # (a canon city's province). Never folds the region's last passable land.
             anchors_c = [(ax, ay - y0) for ax, ay in (anchors or ())]
             keep_c = [(ax, ay - y0) for ax, ay in (keep_passable or ())
                       if y0 <= ay < y1] + anchors_c

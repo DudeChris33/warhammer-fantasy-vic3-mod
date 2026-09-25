@@ -2,7 +2,7 @@
 """Dev-only review render for the impassable land provinces (board #3704).
 
 Tints every impassable province orange over passable land, draws the province
-edges, and rings each canon-city pocket (green = passable province in its state's
+edges, and dots each canon city (green = passable province in its state's
 main component, red = sealed/impassable). Reads the committed
 ``map_data/provinces.png`` + ``tools/derived/provinces_index.json`` and, when it
 exists, ``tools/derived/canon_city_provinces_index.json``. Writes into
@@ -93,9 +93,8 @@ def main() -> int:
             x, y = c["anchor"]
             ok = (not c.get("impassable")) and c.get("province_hex")
             col = (30, 170, 60) if ok else (220, 30, 30)
-            rr = land_provinces.CITY_POCKET_R
-            draw.ellipse([x - rr, y - rr, x + rr, y + rr], outline=col, width=4)
-            draw.text((x + rr + 4, y - 10), c["name"], fill=(0, 0, 0))
+            draw.ellipse([x - 4, y - 4, x + 4, y + 4], fill=col)
+            draw.text((x + 8, y - 10), c["name"], fill=(0, 0, 0))
             pts.append((x, y))
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
