@@ -103,10 +103,10 @@ HUB_ANCHORS_INDEX_PATH = DERIVED_DIR / "hub_anchors_index.json"
 #: Impassable-terrain layer (board #3704): the flat (255,127,0) paint of
 #: full.ora#impassable. Empty/absent -> dormant, byte-identical to a no-paint run.
 IMPASSABLE_SOURCE = sources.source_ref("impassable")
-#: Canon-city catalogue (board #3789) and the anchor -> province authority written
-#: from it (#3704), the hub_anchors_index.json idiom: the validator reads it to prove
-#: every catalogued city sits in a passable, reachable province.
-CANON_CITIES_CONFIG = TOOLS_DIR / "config" / "canon_cities.json"
+#: The hand-painted `cities` layer (one dot per city, Chris 2026-09-24) and the
+#: dot -> province authority written from it (#3704), the hub_anchors_index.json idiom:
+#: the validator reads it to prove every city sits in a passable, reachable province.
+CITIES_SOURCE = sources.source_ref("cities")
 CANON_CITY_PROVINCES_INDEX_PATH = DERIVED_DIR / "canon_city_provinces_index.json"
 #: Two hub anchors of the SAME state closer than this (Euclidean px) are a hard
 #: error at generate time — defence-in-depth so a seeded piece can't collapse below
@@ -298,9 +298,12 @@ def main(argv: list[str] | None = None) -> int:
         if impassable.any():
             # No automatic pockets: the paint is taken as drawn (Chris, 2026-09-24).
             # A canon city under paint is a validator error, fixed by opening the paint.
-            if CANON_CITIES_CONFIG.is_file():
-                canon_cities = schema.load_canon_cities(CANON_CITIES_CONFIG,
-                                                        canvas=(CANVAS_W, CANVAS_H))
+            cities_rgba = sources.read_source_rgba(CITIES_SOURCE, allow_empty=True)
+            if cities_rgba is not None:
+                if cities_rgba.shape[:2] != (CANVAS_H, CANVAS_W):
+                    raise SystemExit(f"{CITIES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}")
+                canon_cities = land_provinces.city_dots(cities_rgba, land)
+                del cities_rgba
             log(f"impassable paint: {int(impassable.sum()):,} px", t0)
         else:
             impassable = None
@@ -313,7 +316,7 @@ def main(argv: list[str] | None = None) -> int:
                 keep_whole=keep_whole, region_seeds=region_seeds or None,
                 island_zones=island_overrides, impassable=impassable,
                 strict_placeholder_paint=args.strict_placeholder_paint,
-                keep_passable=[c.anchor for c in canon_cities] or None)
+                keep_passable=canon_cities or None)
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())
@@ -437,14 +440,13 @@ def main(argv: list[str] | None = None) -> int:
     # Canon-city anchor -> province (#3704). Only written when paint exists; the
     # validator proves each city's province is passable and reachable.
     if impassable is not None and canon_cities:
-        city_index = {"canvas": [CANVAS_W, CANVAS_H], "source": CANON_CITIES_CONFIG.name,
+        city_index = {"canvas": [CANVAS_W, CANVAS_H], "source": CITIES_SOURCE,
                       "cities": []}
-        for c in canon_cities:
-            ax, ay = c.anchor
+        for ax, ay in canon_cities:
             plab = int(land_lab[ay, ax])
             pcol = tuple(int(v) for v in palette[plab]) if plab > 0 else None
             city_index["cities"].append({
-                "name": c.name,
+                "name": f"city ({ax}, {ay})",
                 "anchor": [int(ax), int(ay)],
                 "province_label": plab,
                 "province_hex": raster.color_to_hex(pcol) if pcol else None,
@@ -453,7 +455,7 @@ def main(argv: list[str] | None = None) -> int:
         CANON_CITY_PROVINCES_INDEX_PATH.write_text(
             json.dumps(city_index, indent=1) + "\n", encoding="utf-8")
         log(f"wrote {CANON_CITY_PROVINCES_INDEX_PATH.relative_to(REPO_ROOT)}  "
-            f"({len(canon_cities)} city/cities)", t0)
+            f"({len(canon_cities)} city dot(s))", t0)
 
     PROVINCES_PATH.parent.mkdir(parents=True, exist_ok=True)
     raster.write_rgb_png(PROVINCES_PATH, rgb)

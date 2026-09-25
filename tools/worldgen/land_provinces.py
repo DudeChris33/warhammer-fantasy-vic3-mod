@@ -517,6 +517,29 @@ def _subdivide_cell(mask: np.ndarray, k: int, min_area: int, wrap_x: bool,
 #: measured zero fringe). Single home; validate_map imports it.
 IMPASSABLE_RGB = (255, 127, 0)
 
+def city_dots(rgba: np.ndarray, land: np.ndarray) -> list[tuple[int, int]]:
+    """Anchor pixel ``(x, y)`` of every dot on the hand-painted ``cities`` layer
+    (`full.ora#cities`): one per 4-connected opaque blob, at its centroid (snapped to
+    the nearest blob pixel if the centroid is not on the blob), dropped when the
+    anchor is not on land. Sorted by (y, x) so the order is deterministic."""
+    m = rgba[..., 3] > 0
+    if not m.any():
+        return []
+    lab, n = ndimage.label(m)
+    out: list[tuple[int, int]] = []
+    for i, sl in enumerate(ndimage.find_objects(lab), start=1):
+        ys, xs = np.nonzero(lab[sl] == i)
+        ys = ys + sl[0].start
+        xs = xs + sl[1].start
+        cy, cx = int(round(ys.mean())), int(round(xs.mean()))
+        if lab[cy, cx] != i:
+            k = int(np.argmin((ys - cy) ** 2 + (xs - cx) ** 2))
+            cy, cx = int(ys[k]), int(xs[k])
+        if land[cy, cx]:
+            out.append((cx, cy))
+    return sorted(out, key=lambda p: (p[1], p[0]))
+
+
 def impassable_mask(rgba: np.ndarray, land: np.ndarray) -> np.ndarray:
     """Boolean impassable mask from the layer's RGBA: alpha > 0 and RGB exactly
     :data:`IMPASSABLE_RGB`, intersected with ``land`` (paint over water is ignored)."""

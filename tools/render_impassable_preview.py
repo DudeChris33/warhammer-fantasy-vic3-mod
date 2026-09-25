@@ -93,8 +93,9 @@ def main() -> int:
             x, y = c["anchor"]
             ok = (not c.get("impassable")) and c.get("province_hex")
             col = (30, 170, 60) if ok else (220, 30, 30)
-            draw.ellipse([x - 4, y - 4, x + 4, y + 4], fill=col)
-            draw.text((x + 8, y - 10), c["name"], fill=(0, 0, 0))
+            draw.ellipse([x - 3, y - 3, x + 3, y + 3], fill=col)
+            if not ok:
+                draw.text((x + 8, y - 10), c["name"], fill=(0, 0, 0))
             pts.append((x, y))
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)

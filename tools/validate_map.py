@@ -2062,7 +2062,7 @@ def main(argv: list[str] | None = None) -> int:
         rivers_index_path=None if args.fixture else TOOLS_DIR / "derived" / "rivers_index.json",
         canon_cities_path=None if args.fixture else TOOLS_DIR / "config" / "canon_cities.json",
         canon_cities_mask_path=None if args.fixture else TOOLS_DIR / "derived" / "land_sea_mask.png",
-        impassable_ref=None if args.fixture else sources.source_ref("impassable"),
+        impassable_ref=None,  # the #3789 canon_cities.json collision warning is retired (#3704: the cities layer is the authority)
         canon_city_provinces_index_path=None if args.fixture else
         TOOLS_DIR / "derived" / "canon_city_provinces_index.json",
         adjacencies_path=None if args.fixture else REPO_ROOT / "map_data" / "adjacencies.csv",

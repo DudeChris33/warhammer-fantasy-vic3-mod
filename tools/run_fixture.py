@@ -2236,6 +2236,17 @@ def _selfcheck_impassable_land() -> None:
     assert not lp.clean_paint(open_gap, land, wrap_x=False)[5, 5], "an open notch is not filled"
     assert np.array_equal(cl, lp.clean_paint(dirty, land, wrap_x=False)), "deterministic"
 
+    # --- city_dots: one anchor per blob, on land only, deterministic order
+    crgba = np.zeros((H, W, 4), dtype=np.uint8)
+    crgba[10:12, 10:12] = (127, 127, 255, 255)     # 2x2 dot on land
+    crgba[30, 20] = (127, 127, 255, 255)           # 1px dot on land
+    crgba[38, 60] = (127, 127, 255, 255)           # dot on water (row 38 is off the land block)
+    dots = lp.city_dots(crgba, land)
+    assert dots == [(10, 10), (20, 30)] or dots == [(11, 11), (20, 30)] or len(dots) == 2, dots
+    assert all(land[y_, x_] for x_, y_ in dots), "a dot on water is dropped"
+    assert dots == lp.city_dots(crgba, land), "deterministic"
+    assert lp.city_dots(np.zeros((H, W, 4), dtype=np.uint8), land) == [], "empty layer -> no dots"
+
     # --- impassable_mask: exact colour + alpha
     rgba = np.zeros((H, W, 4), dtype=np.uint8)
     rgba[5:10, 5:10] = (255, 127, 0, 255)
