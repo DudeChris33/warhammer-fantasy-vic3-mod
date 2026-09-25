@@ -86,3 +86,7 @@ derived/*
 !derived/arable_heatmap.png
 !derived/arable_heatmap_index.json
 
+# The city-dot -> province record (board #3704), emitted by generate_provinces.py when
+# impassable paint exists; validate_map._check_impassable_land reads it to prove every
+# city is passable and reachable. Regenerate, never hand-edit.
+!derived/canon_city_provinces_index.json

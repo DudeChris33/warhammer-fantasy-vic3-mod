@@ -5,7 +5,7 @@
 }
 
 region_southern_worlds_edge_mountains = {
-	capital_province = xE034C0
+	capital_province = xF74A1D
 	map_color = { 1 137 163 }
 	states = { STATE_RED_CLOUD_MOUNTAINS STATE_SOUTHERN_WORLDS_EDGE STATE_MOUNTAINS_OF_DAWN STATE_LAND_374 STATE_LAND_513 STATE_CURSED_WAY STATE_LAND_603 STATE_LAND_604 STATE_LAND_605 STATE_LAND_606 }
 }
