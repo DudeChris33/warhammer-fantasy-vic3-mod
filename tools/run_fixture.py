@@ -2306,6 +2306,164 @@ def _selfcheck_hub_validator() -> None:
     assert any("stale index" in e for e in stale), f"a stale index colour must fail, got {stale}"
 
 
+def _selfcheck_adjacencies() -> None:
+    """Board #5563: yellow line -> crossing extraction, worksheet matching, CSV
+    emission (bottom-origin y, sorted, byte-identical) and the semantic validator."""
+    import json
+    import validate_map as vm
+    from pathlib import Path
+    from worldgen import adjacencies as adj
+    from worldgen import schema
+
+    H, W = 40, 60
+    cols = [(10, 0, 0), (20, 0, 0), (30, 0, 0), (40, 0, 0), (50, 0, 0), (60, 0, 0)]
+    A, B, C, D, E, F = cols
+    rgb = np.zeros((H, W, 3), dtype=np.uint8)
+    for i, c in enumerate(cols):
+        rgb[:, i * 10:(i + 1) * 10] = c
+    code = ((rgb[..., 0].astype(np.uint32) << 16) | (rgb[..., 1].astype(np.uint32) << 8)
+            | rgb[..., 2].astype(np.uint32))
+    kinds = {c: "land" for c in cols}
+    mask = np.zeros((H, W), dtype=bool)
+    mask[5, 5:26] = True                      # straight A -> C
+    mask[20:31, 5] = True                     # bent A -> C
+    mask[30, 5:26] = True
+    mask[35, 32:49] = True                    # T junction (bad-shape)
+    mask[30:36, 40] = True
+    mask[20, 46:55] = True                    # loop (bad-shape)
+    mask[28, 46:55] = True
+    mask[20:29, 46] = True
+    mask[20:29, 54] = True
+    mask[3, 15:26] = True                     # B -> C: touching provinces
+    mask[1, 5:31] = True                      # A -> border tip (ambiguous)
+    mask[5, 52:58] = True                     # F -> F (same province)
+    mask[37, 55] = True                       # dot
+    touching = {frozenset((cols[i], cols[i + 1])) for i in range(5)}
+    lines = adj.extract_lines(mask, wrap_x=False)
+    assert len(lines) == 8, f"expected 8 components, got {len(lines)}"
+    assert lines == adj.extract_lines(mask, wrap_x=False), "extraction must be deterministic"
+    crossings, skipped = adj.classify_lines(lines, code, kinds, touching, wrap_x=False)
+    reasons = " | ".join(s.reason for s in skipped)
+    assert len(crossings) == 2, f"straight + bent lines resolve, got {len(crossings)}: {reasons}"
+    assert reasons.count("bad-shape") == 3, reasons     # T, loop, dot
+    assert "touching" in reasons and "ambiguous" in reasons and "same-province" in reasons, reasons
+    for c in crossings:
+        assert c.from_color == A and c.to_color == C, "From must be the lower colour code"
+
+    class _Pin:
+        a, b, a_color, b_color = (5, 1), (30, 1), None, D
+
+    pinned, _ = adj.classify_lines(lines, code, kinds, touching, pins=[_Pin], wrap_x=False)
+    assert len(pinned) == 3, "a pinned ambiguous endpoint must resolve"
+
+    def _row(a, b, t, comment=""):
+        return schema.AdjacencyRow(a=a, b=b, type=t, comment=comment)
+
+    straight = min(crossings, key=lambda c: c.start[1] if c.start[0] == 5 else 99)
+    bent = max(crossings, key=lambda c: c.start[1])
+    rows = [_row((straight.start[0] + 2, straight.start[1]), straight.stop, "sea", "Straight"),
+            _row(bent.stop, (bent.start[0], bent.start[1] - 1), "special")]
+    pairs, untyped, errs = adj.match_worksheet(crossings, rows, W)
+    assert not errs and len(pairs) == 2 and not untyped, (errs, pairs)
+    _, untyped1, errs1 = adj.match_worksheet(crossings, rows[:1], W)
+    assert not errs1 and len(untyped1) == 1, "a line with no row is reported untyped"
+    _, _, stale = adj.match_worksheet(crossings, rows + [_row((1, 1), (2, 2), "sea")], W)
+    assert any("matches no drawn line" in e for e in stale), "a stale row is a hard error"
+    _, _, dbl = adj.match_worksheet(
+        crossings, rows + [_row(straight.start, straight.stop, "sea")], W)
+    assert any("claimed by 2" in e for e in dbl), "two rows on one line is a hard error"
+
+    text = adj.emit_csv(pairs, H)
+    assert text == adj.emit_csv(list(reversed(pairs)), H) == adj.emit_csv(pairs, H)
+    out = text.split("\n")
+    assert out[0] == adj.ADJACENCIES_HEADER and len(out) == 3 and not text.endswith("\n")
+    f = out[1].split(";")
+    assert f[:4] == ["x0A0000", "x1E0000", "sea", "-1"] and f[8] == "" and f[9] == "Straight"
+    assert (int(f[5]), int(f[7])) == (H - 1 - straight.start[1], H - 1 - straight.stop[1])
+    assert out[2].split(";")[9] == "None", "blank comment mirrors vanilla's None"
+
+    # wrap-seam line: one component, endpoints in-bounds, resolves across the seam
+    W2 = 30
+    rgb2 = np.zeros((H, W2, 3), dtype=np.uint8)
+    seg = [(0, 4), (4, 11), (11, 20), (20, 26), (26, 30)]
+    pc = [(1, 0, 0), (2, 0, 0), (3, 0, 0), (4, 0, 0), (5, 0, 0)]
+    for (x0, x1), c in zip(seg, pc):
+        rgb2[:, x0:x1] = c
+    code2 = ((rgb2[..., 0].astype(np.uint32) << 16) | (rgb2[..., 1].astype(np.uint32) << 8)
+             | rgb2[..., 2].astype(np.uint32))
+    m2 = np.zeros((H, W2), dtype=bool)
+    m2[5, 22:30] = True
+    m2[5, 0:3] = True
+    ln2 = adj.extract_lines(m2, wrap_x=True)
+    assert len(ln2) == 1 and ln2[0].a is not None, "a seam-crossing line is one component"
+    cr2, sk2 = adj.classify_lines(ln2, code2, {c: "land" for c in pc}, None, wrap_x=True)
+    assert len(cr2) == 1 and {cr2[0].from_color, cr2[0].to_color} == {pc[0], pc[3]}, (cr2, sk2)
+    assert all(0 <= p[0] < W2 for p in (cr2[0].start, cr2[0].stop))
+
+    with tempfile.TemporaryDirectory() as td:
+        ws = Path(td) / "w.json"
+        assert schema.load_adjacency_worksheet(ws, (W, H)) == [], "absent worksheet is dormant"
+
+        def _load(rows_):
+            ws.write_text(json.dumps({"adjacencies": rows_}), encoding="utf-8")
+            return schema.load_adjacency_worksheet(ws, (W, H))
+
+        assert _load([]) == []
+        ok = {"a": [1, 2], "b": [30, 4], "type": "sea"}
+        assert len(_load([ok, {**ok, "a": [3, 3], "type": "canal_x", "a_color": "xAA0000"}])) == 2
+        for bad in ({**ok, "type": ""}, {**ok, "type": "tunnel"}, {**ok, "b": [999, 4]},
+                    {**ok, "comment": "a;b"}, {**ok, "a_color": "red"}):
+            try:
+                _load([bad])
+            except schema.SchemaError:
+                pass
+            else:
+                raise AssertionError(f"worksheet must refuse {bad}")
+        try:
+            _load([ok, {**ok, "a": [30, 4], "b": [1, 2]}])
+        except schema.SchemaError:
+            pass
+        else:
+            raise AssertionError("a duplicate endpoint pair must be refused")
+
+        # validator: horizontal bands make y matter (pixel row = H-1-y)
+        P, Q, R, S = (1, 0, 0), (2, 0, 0), (3, 0, 0), (4, 0, 0)
+        brgb = np.zeros((H, W, 3), dtype=np.uint8)
+        for i, c in enumerate((P, Q, R, S)):
+            brgb[i * 10:(i + 1) * 10, :] = c
+        png = Path(td) / "b.png"
+        write_rgb_png(png, brgb)
+        bitmap = vm.ProvinceBitmap(png, wrap_x=False)
+        cells = [{"color": list(c), "kind": "land"} for c in (P, Q, R, S)]
+        cells.append({"color": [9, 9, 9], "kind": "lake"})
+        sd = Path(td) / "straits"
+        sd.mkdir()
+        (sd / "s.txt").write_text("canal_ok = { a = b }\n", encoding="utf-8")
+        csv = Path(td) / "adjacencies.csv"
+
+        def _errs(row):
+            csv.write_text(adj.ADJACENCIES_HEADER + "\n" + row, encoding="utf-8")
+            return vm._check_adjacency_rows(csv, bitmap, cells, sd)
+
+        good = "x010000;x030000;sea;-1;5;34;20;14;;None"   # pixel rows 5 (P) and 25 (R)
+        assert _errs(good) == [], _errs(good)
+        csv.write_text(adj.ADJACENCIES_HEADER, encoding="utf-8")
+        assert vm._check_adjacency_rows(csv, bitmap, cells, sd) == [], "header-only skips"
+        assert any("within 3 px" in e for e in _errs("x010000;x030000;sea;-1;5;5;20;25;;None")), \
+            "top-origin y (not flipped) must fail"
+        assert _errs("x010000;x030000;canal_ok;-1;5;34;20;14;;None") == []
+        assert any("Type" in e for e in _errs("x010000;x030000;canal_bad;-1;5;34;20;14;;None"))
+        assert any("already touch" in e for e in _errs("x010000;x020000;sea;-1;5;34;5;24;;None"))
+        assert any("not a province" in e
+                   for e in _errs("x010000;xABCDEF;sea;-1;5;34;20;14;;None"))
+        assert any("same province" in e for e in _errs("x010000;x010000;sea;-1;5;34;20;34;;None"))
+        assert any("lake" in e for e in _errs("x010000;x090909;sea;-1;5;34;20;14;;None"))
+        assert any("Through" in e for e in _errs("x010000;x030000;sea;0;5;34;20;14;;None"))
+        assert any("rule_name" in e for e in _errs("x010000;x030000;sea;-1;5;34;20;14;r;None"))
+        csv.write_text(adj.ADJACENCIES_HEADER + "\nx010000;x030000;sea", encoding="utf-8")
+        assert vm._check_adjacencies(csv), "a bad column count must fail the parse check"
+
+
 def _selfcheck_stack_hubs() -> None:
     """Hub-stacking fallback (worldgen.statefile.stack_hubs), in isolation.
 
@@ -4372,6 +4530,11 @@ def run_check() -> int:
     _selfcheck_hub_validator()
     print("validate_map: hub-anchor check (own-state hub, port coastal, HUB_NAME loc, "
           "stale-index detection) self-check passed.")
+    _selfcheck_adjacencies()
+    print("adjacencies: line extraction (straight/bent/seam ok; T/loop/dot/touching/ambiguous/"
+          "same-province skipped, pins), worksheet matching (tolerance, one-to-one, stale), "
+          "bottom-origin sorted byte-identical CSV, schema + validator negative cases "
+          "self-check passed.")
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")

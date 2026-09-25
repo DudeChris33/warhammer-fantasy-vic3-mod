@@ -32,6 +32,7 @@ the SHA-256 manifest) live in ``worldgen/sources.py``, mirroring how
 from __future__ import annotations
 
 import json
+import re
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -785,6 +786,79 @@ def load_hub_worksheet(path: Path, canvas: tuple[int, int] | None = None) -> lis
                 f"'{seen[r.anchor]}' and '{r.name}' — anchors must be unique"
             )
         seen[r.anchor] = r.name
+    return rows
+
+
+# ---------------------------------------------------------------------------
+# Adjacency worksheet (board #5563)
+# ---------------------------------------------------------------------------
+#
+# Hand-authored, regenerate-through input (the hub_worksheet idiom): one row per
+# drawn yellow line Chris has typed. A row's identity is its two canvas endpoint
+# coordinates (matched to the drawn line within a small tolerance), never the
+# review list's number, which changes whenever a line is added.
+
+_ADJ_TYPE_RE = re.compile(r"sea|special|canal_[a-z0-9_]+")
+_COLOR_PIN_RE = re.compile(r"x[0-9A-Fa-f]{6}")
+
+
+@dataclass(frozen=True)
+class AdjacencyRow:
+    """One typed crossing. ``a``/``b`` are canvas ``[x, y]`` endpoints (either
+    order); ``a_color``/``b_color`` optionally pin an endpoint's province colour
+    when the drawn tip sits on a border and cannot be resolved automatically."""
+
+    a: tuple[int, int]
+    b: tuple[int, int]
+    type: str
+    comment: str
+    a_color: tuple[int, int, int] | None = None
+    b_color: tuple[int, int, int] | None = None
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
+                  ) -> "AdjacencyRow":
+        (a,) = _as_seed_list([_require(d, "a", ctx)], f"{ctx}.a", canvas)
+        (b,) = _as_seed_list([_require(d, "b", ctx)], f"{ctx}.b", canvas)
+        typ = _as_str(_require(d, "type", ctx), f"{ctx}.type")
+        if not _ADJ_TYPE_RE.fullmatch(typ):
+            raise SchemaError(f"{ctx}.type: must be 'sea', 'special' or 'canal_<id>', got {typ!r}")
+        comment = _as_str(d.get("comment", ""), f"{ctx}.comment")
+        if any(ch in comment for ch in (";", "\n", "\r")):
+            raise SchemaError(f"{ctx}.comment: must not contain ';' or a line break")
+        pins = []
+        for key in ("a_color", "b_color"):
+            raw = d.get(key)
+            if raw is None:
+                pins.append(None)
+                continue
+            tok = _as_str(raw, f"{ctx}.{key}")
+            if not _COLOR_PIN_RE.fullmatch(tok):
+                raise SchemaError(f"{ctx}.{key}: expected 'xRRGGBB', got {tok!r}")
+            pins.append(tuple(int(tok[i:i + 2], 16) for i in (1, 3, 5)))
+        return cls(a=a, b=b, type=typ, comment=comment, a_color=pins[0], b_color=pins[1])
+
+
+def load_adjacency_worksheet(path: Path, canvas: tuple[int, int] | None = None
+                             ) -> list[AdjacencyRow]:
+    """Load the adjacency worksheet (authored order preserved). An absent file or an
+    empty ``adjacencies`` list is legal (dormant). Refuses a duplicate endpoint pair
+    (either order), an out-of-canvas endpoint and a bad type."""
+    if not path.is_file():
+        return []
+    ctx = path.name
+    data = _load_json(path)
+    raw = _require(data, "adjacencies", ctx)
+    if not isinstance(raw, list):
+        raise SchemaError(f"{ctx}.adjacencies: expected a list")
+    rows = [AdjacencyRow.from_dict(r, f"{ctx}.adjacencies[{i}]", canvas)
+            for i, r in enumerate(raw)]
+    seen: set[frozenset] = set()
+    for r in rows:
+        key = frozenset((r.a, r.b))
+        if key in seen:
+            raise SchemaError(f"{ctx}: endpoint pair {list(r.a)}-{list(r.b)} appears twice")
+        seen.add(key)
     return rows
 
 

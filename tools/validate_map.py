@@ -374,6 +374,10 @@ def validate(
             errors += _check_impassable_land(
                 bitmap, land_states, index_cells, city_index,
                 _parse_adjacency_edges(adjacencies_path))
+            if adjacencies_path is not None:
+                errors += _check_adjacency_rows(
+                    adjacencies_path, bitmap, index_cells,
+                    REPO_ROOT / "common" / "strait_definitions")
         if hub_index is not None:
             errors += _check_hub_anchors(
                 bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
@@ -1760,6 +1764,96 @@ def _check_adjacencies(path: Path) -> list[str]:
             errors.append(f"adjacencies.csv line {i} has {len(fields)} fields, expected {ncols}")
         elif fields[0].strip() == "":
             errors.append(f"adjacencies.csv line {i} has an empty From province id")
+    return errors
+
+
+def _near_color(code: np.ndarray, x: int, y: int, color: Color, radius: int,
+                wrap_x: bool) -> bool:
+    """True when ``color`` occurs within ``radius`` px of ``(x, y)`` (x wraps)."""
+    h, w = code.shape
+    target = (color[0] << 16) | (color[1] << 8) | color[2]
+    ys = np.arange(max(0, y - radius), min(h, y + radius + 1))
+    xs = np.arange(x - radius, x + radius + 1)
+    xs = xs % w if wrap_x else xs[(xs >= 0) & (xs < w)]
+    if ys.size == 0 or xs.size == 0:
+        return False
+    return bool((code[np.ix_(ys, xs)] == target).any())
+
+
+def _check_adjacency_rows(path: Path, bitmap: "ProvinceBitmap", index_cells: list[dict],
+                          strait_dir: Path) -> list[str]:
+    """Semantic check of ``adjacencies.csv`` data rows (board #5563). Clean skip when
+    the file is absent or header-only. Every From/To is a province colour in the
+    index; From != To; the two provinces do not already touch; ``Type`` is ``sea``,
+    ``special`` or a ``canal_*`` defined in ``common/strait_definitions``; ``Through``
+    is -1 and ``adjacency_rule_name`` empty; and the (bottom-origin) start/stop
+    pixel ``(x, H-1-y)`` lies within 3 px of a From / To pixel - tolerant, because
+    vanilla's own endpoints are only loosely placed (the H-1 vs H flip is +-1 px)."""
+    from worldgen.raster import color_to_hex
+
+    if not path.is_file():
+        return []
+    lines = path.read_text(encoding="utf-8-sig").split("\n")[1:]
+    rows = [(i, ln.rstrip("\r")) for i, ln in enumerate(lines, start=2)
+            if ln.strip() and not ln.startswith("#")]
+    if not rows:
+        return []
+    errors: list[str] = []
+    index_colors = {tuple(int(v) for v in c["color"]) for c in index_cells}
+    kinds = {tuple(int(v) for v in c["color"]): c.get("kind") for c in index_cells}
+    straits: set[str] = set()
+    if strait_dir.is_dir():
+        for f in sorted(strait_dir.glob("*.txt")):
+            straits |= set(re.findall(r"(?m)^([A-Za-z0-9_]+)\s*=\s*\{",
+                                      f.read_text(encoding="utf-8-sig")))
+    touching = bitmap.adjacent_pairs()
+    touching_set = {frozenset(p) for p in touching}
+    code = bitmap._code
+    h = bitmap.height
+    for i, line in rows:
+        f = line.split(";")
+        if len(f) != 10:
+            continue  # column count is _check_adjacencies' job
+        tag = f"adjacencies.csv line {i}"
+        cols = []
+        for name, tok in (("From", f[0]), ("To", f[1])):
+            m = _COLOR_TOKEN.fullmatch(tok.strip())
+            if not m:
+                errors.append(f"{tag}: {name} {tok!r} is not an x<HEX> province colour")
+                cols.append(None)
+                continue
+            c = hex_to_color(tok.strip())
+            cols.append(c)
+            if c not in index_colors:
+                errors.append(f"{tag}: {name} {tok} is not a province in provinces_index.json")
+            elif kinds.get(c) == "lake":
+                errors.append(f"{tag}: {name} {tok} is a lake (lakes are stateless)")
+        ca, cb = cols
+        if ca is not None and ca == cb:
+            errors.append(f"{tag}: From and To are the same province ({f[0]})")
+        elif ca is not None and cb is not None and frozenset((ca, cb)) in touching_set:
+            errors.append(f"{tag}: {f[0]} and {f[1]} already touch - no adjacency row needed")
+        typ = f[2]
+        if typ not in ("sea", "special") and typ not in straits:
+            errors.append(f"{tag}: Type {typ!r} is not sea/special or a canal_* defined in "
+                          f"common/strait_definitions")
+        if f[3] != "-1":
+            errors.append(f"{tag}: Through must be -1, got {f[3]!r}")
+        if f[8] != "":
+            errors.append(f"{tag}: adjacency_rule_name must be empty, got {f[8]!r}")
+        try:
+            sx, sy, ex, ey = (int(v) for v in f[4:8])
+        except ValueError:
+            errors.append(f"{tag}: start/stop coordinates must be integers")
+            continue
+        for label, (px, py), col in (("start", (sx, sy), ca), ("stop", (ex, ey), cb)):
+            if col is None or col not in index_colors:
+                continue
+            if not (0 <= px < bitmap.width and 0 <= py < h):
+                errors.append(f"{tag}: {label} ({px},{py}) is outside the {bitmap.width}x{h} map")
+            elif not _near_color(code, px, h - 1 - py, col, 3, bitmap.wrap_x):
+                errors.append(f"{tag}: {label} ({px},{py}) is not within 3 px of "
+                              f"{color_to_hex(col)} (y is bottom-origin: pixel row = H-1-y)")
     return errors
 
 

@@ -6,5 +6,6 @@
   "state_borders": "terraqueous_globe_reprojected - full.ora#borders",
   "impassable": "terraqueous_globe_reprojected - full.ora#impassable",
   "island_overrides": "terraqueous_globe_reprojected - tiny_islands_merger.png",
-  "cities": "terraqueous_globe_reprojected - full.ora#cities"
+  "cities": "terraqueous_globe_reprojected - full.ora#cities",
+  "adjacencies": "terraqueous_globe_reprojected - adjacencies.png"
 }
