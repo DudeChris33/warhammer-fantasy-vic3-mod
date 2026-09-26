@@ -501,7 +501,7 @@
         4018,
         1293
       ],
-      "type": "canal_altdork_l",
+      "type": "canal_altdorf_l",
       "comment": "Altdorf"
     },
     {
@@ -609,7 +609,7 @@
         4946,
         1442
       ],
-      "type": "canal_erengrad",
+      "type": "sea",
       "comment": "Erengrad"
     },
     {
@@ -681,8 +681,8 @@
         4611,
         1534
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_",
+      "comment": "Falls of Doom"
     },
     {
       "a": [
@@ -693,8 +693,8 @@
         4898,
         701
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Under Novalone Pass"
     },
     {
       "a": [
@@ -705,8 +705,8 @@
         3936,
         1087
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Norsca"
     },
     {
       "a": [
@@ -717,8 +717,8 @@
         4064,
         296
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Praag"
     },
     {
       "a": [
@@ -729,8 +729,8 @@
         4438,
         618
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "River Grismerie"
     },
     {
       "a": [
@@ -741,8 +741,8 @@
         4013,
         939
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Norsca"
     },
     {
       "a": [
@@ -753,8 +753,8 @@
         4239,
         236
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Oak of Prophecy"
     },
     {
       "a": [
@@ -765,8 +765,8 @@
         4051,
         1031
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Under Blackfyre Pass"
     },
     {
       "a": [
@@ -777,8 +777,8 @@
         4321,
         1030
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_altdorf_r",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -789,8 +789,8 @@
         4097,
         837
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_limnala",
+      "comment": "River Limnala"
     },
     {
       "a": [
@@ -801,8 +801,8 @@
         4084,
         1197
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_echoes_t",
+      "comment": "River of Echoes"
     },
     {
       "a": [
@@ -813,8 +813,8 @@
         4155,
         1085
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_dragon_isles",
+      "comment": "Dragon Isles"
     },
     {
       "a": [
@@ -825,8 +825,8 @@
         5113,
         1435
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Drakefjord Bay"
     },
     {
       "a": [
@@ -837,8 +837,8 @@
         4552,
         444
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_isles_of_doom",
+      "comment": "Isles of Doom"
     },
     {
       "a": [
@@ -849,8 +849,8 @@
         3691,
         2578
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_middle_talabec",
+      "comment": "Middle Talabec"
     },
     {
       "a": [
@@ -861,8 +861,8 @@
         4215,
         806
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_altdorf_b",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -873,8 +873,8 @@
         4103,
         862
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -885,8 +885,8 @@
         3946,
         1030
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_erengrad",
+      "comment": "Erengrad"
     },
     {
       "a": [
@@ -897,8 +897,8 @@
         4256,
         662
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Queek"
     },
     {
       "a": [
@@ -909,8 +909,8 @@
         3995,
         1234
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Sour Crags"
     },
     {
       "a": [
@@ -921,8 +921,8 @@
         4451,
         1428
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_pina",
+      "comment": "Pina Woods"
     },
     {
       "a": [
