@@ -142,12 +142,48 @@ def review() -> int:
         font = ImageFont.load_default(size=28)
     except TypeError:
         font = ImageFont.load_default()
-    for i, c in enumerate(crossings, 1):
+    # Draw every line first, then place the numbers so no two labels (nor a label and
+    # any line endpoint) overlap: try 8 directions at growing distances around the
+    # line's midpoint and take the first free box; a leader line joins a far label.
+    for c in crossings:
         col = (0, 140, 0) if id(c) in typed else (220, 0, 0)
         d.line([c.start, c.stop], fill=col, width=5)
         for pt in (c.start, c.stop):
             d.ellipse([pt[0] - 6, pt[1] - 6, pt[0] + 6, pt[1] + 6], fill=col)
-        d.text((c.start[0] + 8, c.start[1] - 30), str(i), fill=(0, 0, 0), font=font,
+    pad = 4
+    taken: list[tuple[int, int, int, int]] = [
+        (pt[0] - 10, pt[1] - 10, pt[0] + 10, pt[1] + 10)
+        for c in crossings for pt in (c.start, c.stop)]
+
+    def _hits(box, others):
+        return any(box[0] < o[2] and o[0] < box[2] and box[1] < o[3] and o[1] < box[3]
+                   for o in others)
+
+    dirs = [(1, -1), (1, 1), (-1, -1), (-1, 1), (0, -1), (0, 1), (1, 0), (-1, 0)]
+    for i, c in enumerate(crossings, 1):
+        col = (0, 140, 0) if id(c) in typed else (220, 0, 0)
+        text = str(i)
+        l, t, r, b = d.textbbox((0, 0), text, font=font, stroke_width=3)
+        tw, th = r - l, b - t
+        mx, my = (c.start[0] + c.stop[0]) // 2, (c.start[1] + c.stop[1]) // 2
+        placed = None
+        for dist in range(14, 400, 10):
+            for dx, dy in dirs:
+                cx, cy = mx + dx * dist, my + dy * dist
+                box = (cx - tw // 2 - pad, cy - th // 2 - pad, cx + tw // 2 + pad, cy + th // 2 + pad)
+                if not _hits(box, taken):
+                    placed = (cx, cy, box)
+                    break
+            if placed:
+                break
+        if placed is None:  # pathological crowding: fall back to a fixed offset
+            cx, cy = mx + 14, my - 14
+            placed = (cx, cy, (cx - tw // 2, cy - th // 2, cx + tw // 2, cy + th // 2))
+        cx, cy, box = placed
+        taken.append(box)
+        if max(abs(cx - mx), abs(cy - my)) > 30:
+            d.line([(mx, my), (cx, cy)], fill=col, width=2)
+        d.text((cx - tw // 2 - l, cy - th // 2 - t), text, fill=(0, 0, 0), font=font,
                stroke_width=3, stroke_fill=(255, 255, 255))
     for s in skipped:
         d.ellipse([s.centroid[0] - 14, s.centroid[1] - 14, s.centroid[0] + 14, s.centroid[1] + 14],
