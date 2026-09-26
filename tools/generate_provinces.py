@@ -323,7 +323,7 @@ def main(argv: list[str] | None = None) -> int:
                 island_zones=island_overrides, impassable=impassable,
                 strict_placeholder_paint=args.strict_placeholder_paint,
                 keep_passable=canon_cities or None,
-                city_blobs=city_blobs or None)
+                city_blobs=city_blobs or None, city_line=mag)
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())

@@ -2077,6 +2077,26 @@ def _selfcheck_city_blobs() -> None:
     else:
         raise AssertionError("blob across a state border must be a CellError")
 
+    # Sliver case: same split, but no drawn line under the blob (the region fill's
+    # dilated band did the splitting) -> accepted, blob moved whole into its
+    # majority region, reg patched, every province still one region.
+    bl = rgba((17, 23, 34, 43))
+    noline = np.zeros((H, W), dtype=bool)
+    lab2, _, reg_of2, _, _ = lp.subdivide_ex(reg2, land2, land2, 8, city_blobs=bridge,
+                                             city_line=noline, **kw)
+    assert np.unique(lab2[bl[..., 3] > 0][land2[bl[..., 3] > 0]]).size == 1, "sliver blob split"
+    for L in range(1, int(lab2.max()) + 1):
+        assert len(np.unique(reg_of2[L:L + 1])) == 1
+    # A drawn line under the blob keeps it a hard error.
+    line = noline.copy()
+    line[20, 36:41] = True
+    try:
+        lp.subdivide_ex(reg2, land2, land2, 8, city_blobs=bridge, city_line=line, **kw)
+    except C.CellError:
+        pass
+    else:
+        raise AssertionError("blob over a drawn line must stay a CellError")
+
 
 def _selfcheck_impassable_land() -> None:
     """Impassable land provinces (board #3704), source-independent, on a synthetic

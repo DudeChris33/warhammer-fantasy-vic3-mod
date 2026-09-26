@@ -561,7 +561,8 @@ def city_blobs(rgba: np.ndarray, land: np.ndarray) -> list[np.ndarray]:
 def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
                      imp: np.ndarray | None, keep_whole_labels: set[int],
                      anchors: list[tuple[int, int]] | None, wrap_x: bool = True,
-                     log=None) -> np.ndarray:
+                     log=None, line: np.ndarray | None = None
+                     ) -> tuple[np.ndarray, np.ndarray]:
     """Post-cut pass (#5679): put each city blob's land pixels under one province.
 
     Runs on pre-renumber labels and only rewrites blob pixels (of the receiver's
@@ -570,10 +571,18 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
     by more than :data:`PAINT_NOISE_PX` px is a hard :class:`cells.CellError`; a
     graze of at most that many px is clipped (its minority pixels left alone).
     Receiver = the single anchor-bearing province under the blob, else the majority
-    label (tie -> lowest); two anchor-bearing provinces is an error."""
+    label (tie -> lowest); two anchor-bearing provinces is an error.
+
+    ``line`` is the *drawn* (undilated) magenta mask. The region fill dilates the
+    line and hands the dilated band to the nearest region, so a blob touching a line
+    (or sitting in a sliver between two) can be split across regions with no drawn
+    line under it. Such a region-only split (same paint class, no ``line`` pixel
+    under the blob) is not a crossing: the blob is moved whole into its majority
+    region and ``reg`` patched to match. Returns ``(labels, reg)``."""
     if not blobs:
-        return out
+        return out, reg
     out = out.copy()
+    reg = reg.copy()
     anchor_labels = {int(out[ay, ax]) for ax, ay in (anchors or ())}
     problems: list[str] = []
     for blob in blobs:
@@ -589,22 +598,36 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
         if imp is not None:
             keys = keys + imp[ys, xs].astype(np.int64)
         kv, kc = np.unique(keys, return_counts=True)
+        pool = labs  # labels the receiver may be chosen from
         if kv.size > 1:
             major = kv[int(np.argmax(kc))]
             minor = int(kc.sum() - kc.max())
-            if minor > PAINT_NOISE_PX:
+            sliver = (line is not None and not bool(line[ys, xs].any())
+                      and len({int(k) % 2 for k in kv}) == 1)
+            if sliver:
+                if log:
+                    log(f"  {where}: split across regions by the dilated line band "
+                        f"only ({minor} px); moved into its majority region")
+                pool = labs[keys == major]
+                reg[ys, xs] = int(major) // 2
+            elif minor > PAINT_NOISE_PX:
+                detail = ", ".join(
+                    "region %d %s: %d px" % (int(k) // 2, "impassable" if int(k) % 2 else "passable", int(n))
+                    for k, n in zip(kv, kc))
                 problems.append(
                     f"{where} straddles a state-region border or paint edge "
-                    f"({minor} px outside its main region/paint class of {int(kc.max())} px); "
-                    f"move the blob or the border")
+                    f"({minor} px outside its main region/paint class of {int(kc.max())} px; "
+                    f"{detail}); move the blob or the border")
                 continue
-            if log:
-                log(f"  WARNING: {where} grazes a border/paint edge by {minor} px; clipped")
-            keep = keys == major
-            ys, xs, labs = ys[keep], xs[keep], labs[keep]
-            uniq = np.unique(labs)
-            if uniq.size == 1:
-                continue
+            else:
+                if log:
+                    log(f"  WARNING: {where} grazes a border/paint edge by {minor} px; clipped")
+                keep = keys == major
+                ys, xs, labs = ys[keep], xs[keep], labs[keep]
+                pool = labs
+                uniq = np.unique(labs)
+                if uniq.size == 1:
+                    continue
         held = [int(u) for u in uniq if int(u) in anchor_labels]
         if len(held) > 1:
             problems.append(
@@ -614,7 +637,7 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
         if held:
             recv = held[0]
         else:
-            cnt = np.bincount(labs.astype(np.int64))
+            cnt = np.bincount(pool.astype(np.int64))
             recv = int(np.argmax(cnt))  # first max == lowest label on a tie
         out[ys, xs] = recv
         # Donor repair: keep each donor label one piece (its largest component).
@@ -634,12 +657,13 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
                 grown[:, -1] |= rm[:, 0]
             for c in np.unique(comp[dm]):
                 c = int(c)
-                if c and c != biggest and (comp == c)[grown].any():
+                if (c and c != biggest and (comp == c)[grown].any()
+                        and reg[comp == c][0] == reg[ys[0], xs[0]]):
                     out[comp == c] = recv
     if problems:
         raise cells.CellError(f"{len(problems)} city blob(s) cannot be kept whole:\n  "
                               + "\n  ".join(problems))
-    return out
+    return out, reg
 
 
 def impassable_mask(rgba: np.ndarray, land: np.ndarray) -> np.ndarray:
@@ -694,7 +718,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                  impassable: np.ndarray | None = None,
                  strict_placeholder_paint: bool = False,
                  keep_passable: list[tuple[int, int]] | None = None,
-                 city_blobs: list[np.ndarray] | None = None
+                 city_blobs: list[np.ndarray] | None = None,
+                 city_line: np.ndarray | None = None
                  ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -1083,8 +1108,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
         anchor_pts = []
         for pts in seeds_by_region.values():
             anchor_pts.extend(pts)
-        out = unify_city_blobs(out, city_blobs, reg, imp, set(int(k) for k in keep),
-                               anchor_pts, wrap_x, log=log)
+        out, reg = unify_city_blobs(out, city_blobs, reg, imp, set(int(k) for k in keep),
+                                    anchor_pts, wrap_x, log=log, line=city_line)
     out = cells.renumber(out)
     if int((out == 0).sum()) != int((~land).sum()):
         raise cells.CellError(
