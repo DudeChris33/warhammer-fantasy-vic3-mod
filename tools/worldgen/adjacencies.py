@@ -346,6 +346,18 @@ def match_worksheet(crossings: list[Crossing], rows, width: int | None = None,
     return pairs, untyped, errors
 
 
+def type_kind_errors(pairs, kinds: dict) -> list[str]:
+    """``sea`` rows must join land to land, ``canal_*`` rows sea to sea."""
+    errors = []
+    for c, row in pairs:
+        want = "land" if row.type == "sea" else "sea"
+        got = (kinds.get(c.from_color), kinds.get(c.to_color))
+        if got != (want, want):
+            errors.append(f"worksheet row {list(row.a)}->{list(row.b)}: type {row.type!r} joins "
+                          f"{want} to {want}, but this line joins {got[0]} to {got[1]}")
+    return errors
+
+
 def emit_csv(pairs, height: int) -> str:
     """``adjacencies.csv`` text: header + rows sorted by (From, To, start_x,
     start_y), engine ``y`` = ``height - 1 - y``, ``Through`` -1, empty rule name,

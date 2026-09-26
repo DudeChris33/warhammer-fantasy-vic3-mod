@@ -798,7 +798,7 @@ def load_hub_worksheet(path: Path, canvas: tuple[int, int] | None = None) -> lis
 # coordinates (matched to the drawn line within a small tolerance), never the
 # review list's number, which changes whenever a line is added.
 
-_ADJ_TYPE_RE = re.compile(r"sea|special|canal_[a-z0-9_]+")
+_ADJ_TYPE_RE = re.compile(r"sea|canal_[a-z0-9_]+")
 _COLOR_PIN_RE = re.compile(r"x[0-9A-Fa-f]{6}")
 
 
@@ -822,7 +822,7 @@ class AdjacencyRow:
         (b,) = _as_seed_list([_require(d, "b", ctx)], f"{ctx}.b", canvas)
         typ = _as_str(_require(d, "type", ctx), f"{ctx}.type")
         if not _ADJ_TYPE_RE.fullmatch(typ):
-            raise SchemaError(f"{ctx}.type: must be 'sea', 'special' or 'canal_<id>', got {typ!r}")
+            raise SchemaError(f"{ctx}.type: must be 'sea' or 'canal_<id>', got {typ!r}")
         comment = _as_str(d.get("comment", ""), f"{ctx}.comment")
         if any(ch in comment for ch in (";", "\n", "\r")):
             raise SchemaError(f"{ctx}.comment: must not contain ';' or a line break")

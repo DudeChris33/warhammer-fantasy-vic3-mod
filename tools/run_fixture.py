@@ -2362,7 +2362,7 @@ def _selfcheck_adjacencies() -> None:
     straight = min(crossings, key=lambda c: c.start[1] if c.start[0] == 5 else 99)
     bent = max(crossings, key=lambda c: c.start[1])
     rows = [_row((straight.start[0] + 2, straight.start[1]), straight.stop, "sea", "Straight"),
-            _row(bent.stop, (bent.start[0], bent.start[1] - 1), "special")]
+            _row(bent.stop, (bent.start[0], bent.start[1] - 1), "sea")]
     pairs, untyped, errs = adj.match_worksheet(crossings, rows, W)
     assert not errs and len(pairs) == 2 and not untyped, (errs, pairs)
     _, untyped1, errs1 = adj.match_worksheet(crossings, rows[:1], W)
@@ -2373,6 +2373,9 @@ def _selfcheck_adjacencies() -> None:
         crossings, rows + [_row(straight.start, straight.stop, "sea")], W)
     assert any("claimed by 2" in e for e in dbl), "two rows on one line is a hard error"
 
+    tk = {A: "land", C: "land"}
+    assert adj.type_kind_errors(pairs, tk) == [], "sea rows join land to land"
+    assert len(adj.type_kind_errors([(pairs[0][0], _row((1, 1), (2, 2), "canal_x"))], tk)) == 1
     text = adj.emit_csv(pairs, H)
     assert text == adj.emit_csv(list(reversed(pairs)), H) == adj.emit_csv(pairs, H)
     out = text.split("\n")
@@ -2434,7 +2437,8 @@ def _selfcheck_adjacencies() -> None:
         png = Path(td) / "b.png"
         write_rgb_png(png, brgb)
         bitmap = vm.ProvinceBitmap(png, wrap_x=False)
-        cells = [{"color": list(c), "kind": "land"} for c in (P, Q, R, S)]
+        cells = [{"color": list(c), "kind": k}
+                 for c, k in ((P, "land"), (Q, "sea"), (R, "land"), (S, "sea"))]
         cells.append({"color": [9, 9, 9], "kind": "lake"})
         sd = Path(td) / "straits"
         sd.mkdir()
@@ -2451,7 +2455,11 @@ def _selfcheck_adjacencies() -> None:
         assert vm._check_adjacency_rows(csv, bitmap, cells, sd) == [], "header-only skips"
         assert any("within 3 px" in e for e in _errs("x010000;x030000;sea;-1;5;5;20;25;;None")), \
             "top-origin y (not flipped) must fail"
-        assert _errs("x010000;x030000;canal_ok;-1;5;34;20;14;;None") == []
+        assert _errs("x020000;x040000;canal_ok;-1;5;24;20;4;;None") == [], "canal joins sea to sea"
+        assert any("joins land to land" in e for e in _errs("x020000;x040000;sea;-1;5;24;20;4;;None")), \
+            "a sea row joining sea to sea must fail"
+        assert any("joins sea to sea" in e for e in _errs("x010000;x030000;canal_ok;-1;5;34;20;14;;None")), \
+            "a canal row joining land to land must fail"
         assert any("Type" in e for e in _errs("x010000;x030000;canal_bad;-1;5;34;20;14;;None"))
         assert any("already touch" in e for e in _errs("x010000;x020000;sea;-1;5;34;5;24;;None"))
         assert any("not a province" in e

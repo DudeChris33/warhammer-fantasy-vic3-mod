@@ -1784,8 +1784,9 @@ def _check_adjacency_rows(path: Path, bitmap: "ProvinceBitmap", index_cells: lis
                           strait_dir: Path) -> list[str]:
     """Semantic check of ``adjacencies.csv`` data rows (board #5563). Clean skip when
     the file is absent or header-only. Every From/To is a province colour in the
-    index; From != To; the two provinces do not already touch; ``Type`` is ``sea``,
-    ``special`` or a ``canal_*`` defined in ``common/strait_definitions``; ``Through``
+    index; From != To; the two provinces do not already touch; ``Type`` is ``sea``
+    (joins land to land) or a ``canal_*`` defined in ``common/strait_definitions``
+    (joins sea to sea); ``Through``
     is -1 and ``adjacency_rule_name`` empty; and the (bottom-origin) start/stop
     pixel ``(x, H-1-y)`` lies within 3 px of a From / To pixel - tolerant, because
     vanilla's own endpoints are only loosely placed (the H-1 vs H flip is +-1 px)."""
@@ -1834,9 +1835,13 @@ def _check_adjacency_rows(path: Path, bitmap: "ProvinceBitmap", index_cells: lis
         elif ca is not None and cb is not None and frozenset((ca, cb)) in touching_set:
             errors.append(f"{tag}: {f[0]} and {f[1]} already touch - no adjacency row needed")
         typ = f[2]
-        if typ not in ("sea", "special") and typ not in straits:
-            errors.append(f"{tag}: Type {typ!r} is not sea/special or a canal_* defined in "
+        if typ != "sea" and typ not in straits:
+            errors.append(f"{tag}: Type {typ!r} is not sea or a canal_* defined in "
                           f"common/strait_definitions")
+        want = "land" if typ == "sea" else "sea" if typ.startswith("canal_") else None
+        if want and ca is not None and cb is not None and (kinds.get(ca), kinds.get(cb)) != (want, want):
+            errors.append(f"{tag}: Type {typ!r} joins {want} to {want}, but {f[0]} is "
+                          f"{kinds.get(ca)} and {f[1]} is {kinds.get(cb)}")
         if f[3] != "-1":
             errors.append(f"{tag}: Through must be -1, got {f[3]!r}")
         if f[8] != "":

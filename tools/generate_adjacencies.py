@@ -101,7 +101,7 @@ def derive(*, need_worksheet: bool):
     crossings, skipped = adj.classify_lines(
         lines, code, kinds, _touching(code, map_config.WRAP_X), pins=rows,
         wrap_x=map_config.WRAP_X)
-    return crossings, skipped, lines, rows, rgb
+    return crossings, skipped, lines, rows, rgb, kinds
 
 
 def _stub(c: adj.Crossing) -> dict:
@@ -111,7 +111,7 @@ def _stub(c: adj.Crossing) -> dict:
 def review() -> int:
     from PIL import Image, ImageDraw, ImageFont
 
-    crossings, skipped, lines, rows, rgb = derive(need_worksheet=False)
+    crossings, skipped, lines, rows, rgb, _ = derive(need_worksheet=False)
     h, w = rgb.shape[:2]
     names = _state_names()
     pairs, untyped, errors = adj.match_worksheet(crossings, rows, w)
@@ -166,9 +166,10 @@ def review() -> int:
 
 
 def build_csv() -> tuple[str, list[str], list]:
-    crossings, skipped, _, rows, rgb = derive(need_worksheet=True)
+    crossings, skipped, _, rows, rgb, kinds = derive(need_worksheet=True)
     h, w = rgb.shape[:2]
     pairs, untyped, errors = adj.match_worksheet(crossings, rows, w)
+    errors += adj.type_kind_errors(pairs, kinds)
     return adj.emit_csv(pairs, h), errors, untyped
 
 
