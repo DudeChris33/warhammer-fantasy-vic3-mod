@@ -58,6 +58,7 @@ Modes::
     python tools/tww3_name_lookup.py --regions               # per-region footprint vote
     python tools/tww3_name_lookup.py --propose-hubs          # reverse: TSV key -> canvas
     python tools/tww3_name_lookup.py --at 4091 898           # one point
+    python tools/tww3_name_lookup.py --city-dots --state-file 02_empire   # dots -> names (#3666)
 """
 
 from __future__ import annotations
@@ -752,6 +753,120 @@ def run_propose_hubs(lookup: Lookup) -> int:
 
 
 # ---------------------------------------------------------------------------
+# Mode: --city-dots (forward: each painted city dot -> state + TWW3 name, #3666)
+# ---------------------------------------------------------------------------
+
+STATE_REGIONS_DIR = REPO_ROOT / "map_data" / "state_regions"
+STATES_LOC = REPO_ROOT / "localization" / "replace" / "english" / "map" / "states_l_english.yml"
+LAND_SEA_MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
+ARABLE_PATH = DERIVED_DIR / "arable_heatmap.png"
+HEIGHTMAP_PATH = REPO_ROOT / "map_data" / "heightmap.png"
+
+
+def city_dots_csv_path(stem: str) -> Path:
+    return DERIVED_DIR / f"tww3_city_dots_{stem}.csv"
+
+
+def run_city_dots(lookup: Lookup, state_file: Path | None) -> int:
+    """Forward-sample every painted city dot (``full.ora#cities``, the same
+    :func:`land_provinces.city_dots` anchors ``generate_provinces.py`` seeds) and
+    report, per dot: owning state (off the committed ``state_regions/*.txt``),
+    province hex, coastal flag, arable (16-bit heatmap) and height, plus the TWW3
+    region it samples to. The hub-drafting name bank for the realm children of
+    #3663 (board #3666).
+
+    **Read-only**: writes only the gitignored
+    ``tools/derived/tww3_city_dots_<stem>.csv``; never ``tools/config/``. A
+    ``dedupe`` flag marks dots that sample the same TWW3 region (one canon name,
+    several dots — a human picks which dot carries it). ``--state-file`` limits the
+    report to the states of one state-regions file.
+    """
+    import re
+
+    import validate_map as vm
+    from worldgen import land_provinces, raster, sources as sources_mod
+
+    cities_ref = sources_mod.source_ref("cities")
+    rgba = sources_mod.read_source_rgba(cities_ref, allow_empty=True)
+    if rgba is None:
+        log(f"{cities_ref}: cities layer not present on this device — skipping")
+        return 0
+    land = raster.read_mask_png(LAND_SEA_MASK_PATH)
+    dots = land_provinces.city_dots(rgba, land)
+    del rgba
+    log(f"city dots         {len(dots)} on land ({cities_ref})")
+
+    prov = raster.read_rgb_png(PROVINCES_PATH)
+    prov_index = json.loads(PROVINCES_INDEX_PATH.read_text(encoding="utf-8"))
+    cell_of = {tuple(int(v) for v in c["color"]): c for c in prov_index["cells"]}
+    arable = raster.read_gray16_png(ARABLE_PATH) if ARABLE_PATH.is_file() else None
+    with Image.open(HEIGHTMAP_PATH) as im:
+        height = np.asarray(im)
+    if height.ndim == 3:
+        height = height[..., 0]
+
+    files = sorted(STATE_REGIONS_DIR.glob("*.txt"))
+    if state_file is not None:
+        want = state_file.stem if state_file.suffix else str(state_file)
+        files = [f for f in files if f.stem == Path(want).stem]
+        if not files:
+            raise SystemExit(f"--state-file {state_file}: no such file in {rel(STATE_REGIONS_DIR)}")
+    state_of: dict[tuple[int, int, int], tuple[str, str]] = {}
+    for f in files:
+        for st in vm.parse_state_file(f):
+            for col in st.provinces:
+                state_of[tuple(col)] = (st.key, f.stem)
+    names: dict[str, str] = {}
+    if STATES_LOC.is_file():
+        for m in re.finditer(r'^\s*(STATE_\w+):\d*\s+"([^"]*)"',
+                             STATES_LOC.read_text(encoding="utf-8-sig"), re.M):
+            names[m.group(1)] = m.group(2)
+
+    out: list[dict] = []
+    for x, y in dots:
+        col = tuple(int(v) for v in prov[y, x])
+        owner = state_of.get(col)
+        if owner is None:
+            continue  # not in the filtered file(s), or not a land state
+        key, stem = owner
+        cell = cell_of.get(col, {})
+        s = lookup.name_at(x, y)
+        out.append({
+            "state_key": key,
+            "state_name": names.get(key, ""),
+            "state_file": stem,
+            "anchor_x": x,
+            "anchor_y": y,
+            "province_hex": raster.color_to_hex(col),
+            "coastal": "yes" if cell.get("coastal") else "no",
+            "impassable": "yes" if cell.get("impassable") else "no",
+            "arable": int(arable[y, x]) if arable is not None else "",
+            "height": int(height[y, x]),
+            "status": s.status,
+            "tww3_slug": s.region.slug if s.region else "",
+            "margin_lookup_px": "" if s.margin_px != s.margin_px else f"{s.margin_px:.0f}",
+            "dedupe": "",
+            "source": source_citation(s.region) if s.region else "",
+        })
+    by_slug: dict[str, int] = {}
+    for r in out:
+        if r["tww3_slug"]:
+            by_slug[r["tww3_slug"]] = by_slug.get(r["tww3_slug"], 0) + 1
+    for r in out:
+        if r["tww3_slug"] and by_slug[r["tww3_slug"]] > 1:
+            r["dedupe"] = f"shared-by-{by_slug[r['tww3_slug']]}"
+    out.sort(key=lambda r: (r["state_file"], r["state_key"], r["anchor_y"], r["anchor_x"]))
+    n_states = len({r["state_key"] for r in out})
+    log(f"  dots reported     {len(out)} in {n_states} state(s); "
+        f"{sum(1 for r in out if r['status'] == 'ok')} resolve to a TWW3 region, "
+        f"{sum(1 for r in out if r['dedupe'])} share a region with another dot")
+    log("  NOTE: suggestions only — nothing is written to tools/config/.")
+    stem = files[0].stem if state_file is not None and len(files) == 1 else "all"
+    write_csv(city_dots_csv_path(stem), out)
+    return 0
+
+
+# ---------------------------------------------------------------------------
 # Output
 # ---------------------------------------------------------------------------
 
@@ -786,6 +901,13 @@ def main(argv: list[str] | None = None) -> int:
                            "+ the land region it falls in")
     mode.add_argument("--at", nargs=2, type=int, metavar=("X", "Y"),
                       help="resolve one canvas pixel and print the result")
+    mode.add_argument("--city-dots", action="store_true",
+                      help="forward-sample every painted city dot -> state, province, "
+                           "coastal/arable/height + TWW3 name (board #3666); writes "
+                           "tools/derived/tww3_city_dots_<stem>.csv")
+    p.add_argument("--state-file", type=Path, default=None,
+                   help="--city-dots: only dots in this map_data/state_regions file "
+                        "(path or stem, e.g. 02_empire)")
     p.add_argument("--worksheet", type=Path, default=DEFAULT_WORKSHEET,
                    help=f"land-region worksheet to sample (default the CURRENT derived "
                         f"cut, {DEFAULT_WORKSHEET.name} in tools/derived/, not the "
@@ -823,6 +945,8 @@ def main(argv: list[str] | None = None) -> int:
         return run_regions(lookup, args.worksheet, step=args.step)
     if args.propose_hubs:
         return run_propose_hubs(lookup)
+    if args.city_dots:
+        return run_city_dots(lookup, args.state_file)
     return run_anchors(lookup, args.worksheet)
 
 

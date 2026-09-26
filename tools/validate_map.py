@@ -687,8 +687,12 @@ def _check_hub_anchors(bitmap: "ProvinceBitmap", states: list[ParsedState],
       state" in one check;
     * a ``port`` anchor's province is coastal;
     * the ``HUB_NAME_<state_key>_<hub>`` loc key exists;
-    * two anchors of one state share a province only when the state has fewer
-      provinces than its distinct anchor hubs (the legitimate stacking case).
+    * two **non-stack** anchors of one state share a province only when the state
+      has fewer PASSABLE provinces than its distinct non-stack anchor hubs (the
+      legitimate small-state case; impassable provinces can never host a hub);
+    * a ``stack_on`` entry (board #3666) resolves to exactly its host's colour —
+      the host being the non-stack entry with the same anchor whose ``hub`` is the
+      stack's ``stack_on`` — and a stacked ``port`` needs a coastal host.
     """
     from worldgen.raster import color_to_hex
 
@@ -703,6 +707,31 @@ def _check_hub_anchors(bitmap: "ProvinceBitmap", states: list[ParsedState],
             owner[col] = st
     coastal = bitmap.coastal_colors(sea_colors)
     per_state: dict[str, list[tuple[str, Color, ParsedState]]] = {}
+
+    hosts: dict[tuple[tuple[int, int], str], Color] = {}
+    for h in hub_index["hubs"]:
+        if not h.get("stack_on"):
+            key = (tuple(int(v) for v in h.get("anchor", h["resolved"])), h["hub"])
+            hosts[key] = tuple(int(v) for v in h["province_color"])
+    for h in hub_index["hubs"]:
+        son = h.get("stack_on")
+        if not son:
+            continue
+        key = (tuple(int(v) for v in h.get("anchor", h["resolved"])), son)
+        host_col = hosts.get(key)
+        idx_col = tuple(int(v) for v in h["province_color"])
+        if host_col is None:
+            errors.append(
+                f"hub '{h['name']}': stack_on '{son}' has no seeded host at anchor "
+                f"{list(key[0])}")
+        elif host_col != idx_col:
+            errors.append(
+                f"hub '{h['name']}': stacked on '{son}' but its province "
+                f"{color_to_hex(idx_col)} != host province {color_to_hex(host_col)}")
+        elif h["hub"] == "port" and host_col not in coastal:
+            errors.append(
+                f"hub '{h['name']}': a stacked port needs a coastal host, "
+                f"{color_to_hex(host_col)} is not coastal")
 
     for h in hub_index["hubs"]:
         name = h["name"]
@@ -739,7 +768,8 @@ def _check_hub_anchors(bitmap: "ProvinceBitmap", states: list[ParsedState],
         lk = f"HUB_NAME_{st.key}_{hub}"
         if lk not in loc_keys:
             errors.append(f"hub '{name}' ({st.key}): missing loc key {lk}")
-        per_state.setdefault(st.key, []).append((hub, actual, st))
+        if not h.get("stack_on"):
+            per_state.setdefault(st.key, []).append((hub, actual, st))
 
     for skey, items in per_state.items():
         by_prov: dict[Color, list[str]] = {}
@@ -748,13 +778,14 @@ def _check_hub_anchors(bitmap: "ProvinceBitmap", states: list[ParsedState],
         for col, hubs_here in by_prov.items():
             if len(hubs_here) > 1:
                 st = items[0][2]
-                n_prov = len(set(st.provinces))
+                n_prov = len(set(st.provinces) - set(st.impassable))
                 n_hubs = len({hub for hub, _c, _s in items})
                 if n_prov >= n_hubs:
                     errors.append(
                         f"{skey}: hubs {sorted(hubs_here)} share province {color_to_hex(col)}, "
-                        f"but the state has {n_prov} provinces for {n_hubs} distinct anchor hub(s) "
-                        f"— give them separate provinces")
+                        f"but the state has {n_prov} passable provinces for {n_hubs} distinct "
+                        f"non-stack anchor hub(s) — give them separate provinces or mark one "
+                        f"stack_on")
     return errors
 
 

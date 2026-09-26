@@ -154,6 +154,83 @@ def log(msg: str, t0: float | None = None) -> None:
     print(prefix + msg, flush=True)
 
 
+def plan_hub_seeds(rows: list, reg: np.ndarray, keep_whole: set[int],
+                   min_sep: int = MIN_ANCHOR_SEP
+                   ) -> tuple[dict[int, list[tuple[int, int]]], list]:
+    """Resolve hub-worksheet rows (#3665) into the cut's ``region_seeds`` + the
+    ``(row, region, (rx, ry))`` list the persisted index is built from.
+
+    Stack rows (``stack_on``, board #3666) are resolved and returned like any
+    other row — they are named and indexed — but seed nothing and are skipped by
+    the :data:`MIN_ANCHOR_SEP` check: their anchor is exactly their host's pixel,
+    so they would always collide with it. With no stack rows this is exactly the
+    pre-#3666 behaviour. Raises ``ValueError`` (the caller prefixes the file name).
+    """
+    rad = land_provinces._MERGE_ANCHOR_SEARCH_RADIUS
+    region_seeds: dict[int, list[tuple[int, int]]] = {}
+    hub_rows: list = []
+    for r in rows:
+        rid, (rx, ry) = land_provinces.resolve_anchor(reg, r.anchor[0], r.anchor[1], rad)
+        if rid <= 0:
+            raise ValueError(
+                f"hub '{r.name}' ({r.state}/{r.hub}) anchor {list(r.anchor)} missed land "
+                f"— no region within {rad}px")
+        if rid in keep_whole:
+            raise ValueError(
+                f"hub '{r.name}' anchor {list(r.anchor)} resolves into island-override "
+                f"archipelago region {rid} — it can never host a distinct hub province; "
+                f"move the anchor")
+        if not r.stack_on:
+            region_seeds.setdefault(rid, []).append((rx, ry))
+        hub_rows.append((r, rid, (rx, ry)))
+    # Same-region anchors must clear min_sep (a drawn region is 1:1 with an emitted
+    # state today, so this is "same state"; anchors in different regions may be
+    # arbitrarily close).
+    for rid, pts in region_seeds.items():
+        for a in range(len(pts)):
+            for b in range(a + 1, len(pts)):
+                (x1, y1), (x2, y2) = pts[a], pts[b]
+                d2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
+                if d2 < min_sep ** 2:
+                    raise ValueError(
+                        f"two hub anchors of region {rid} are {d2 ** 0.5:.1f}px apart "
+                        f"(< {min_sep}) at {list(pts[a])} / {list(pts[b])} — they may "
+                        f"collapse into one province; separate them (or stack_on)")
+    return region_seeds, hub_rows
+
+
+def hub_index_entries(hub_rows: list, land_lab: np.ndarray, reg_of: np.ndarray,
+                      palette: np.ndarray) -> list[dict]:
+    """``hub_anchors_index.json`` rows, one per worksheet row.
+
+    ``region`` is the **post-cut** owner of the anchor's province,
+    ``reg_of[province_label]`` (board #3666): the city-blob pass (#5679) can move a
+    province into a neighbouring region after the anchor was resolved, and the hub
+    pick (``generate_land_regions.py``) must key on the region that actually owns
+    the province. ``stack_on`` is written only for stack rows.
+    """
+    out: list[dict] = []
+    for r, _rid, (rx, ry) in hub_rows:
+        plab = int(land_lab[ry, rx])
+        pcol = tuple(int(v) for v in palette[plab])
+        entry = {
+            "state": r.state,
+            "hub": r.hub,
+            "name": r.name,
+            "source": r.source,
+            "anchor": [int(r.anchor[0]), int(r.anchor[1])],
+            "resolved": [int(rx), int(ry)],
+            "region": int(reg_of[plab]),
+            "province_label": plab,
+            "province_color": list(pcol),
+            "province_hex": raster.color_to_hex(pcol),
+        }
+        if r.stack_on:
+            entry["stack_on"] = r.stack_on
+        out.append(entry)
+    return out
+
+
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -256,34 +333,13 @@ def main(argv: list[str] | None = None) -> int:
     region_seeds: dict[int, list[tuple[int, int]]] = {}
     if HUB_WORKSHEET_CONFIG.is_file():
         rows = schema.load_hub_worksheet(HUB_WORKSHEET_CONFIG, canvas=(CANVAS_W, CANVAS_H))
-        rad = land_provinces._MERGE_ANCHOR_SEARCH_RADIUS
-        for r in rows:
-            rid, (rx, ry) = land_provinces.resolve_anchor(reg, r.anchor[0], r.anchor[1], rad)
-            if rid <= 0:
-                raise SystemExit(
-                    f"{HUB_WORKSHEET_CONFIG.name}: hub '{r.name}' ({r.state}/{r.hub}) anchor "
-                    f"{list(r.anchor)} missed land — no region within {rad}px")
-            if rid in keep_whole:
-                raise SystemExit(
-                    f"{HUB_WORKSHEET_CONFIG.name}: hub '{r.name}' anchor {list(r.anchor)} "
-                    f"resolves into island-override archipelago region {rid} — it can never "
-                    f"host a distinct hub province; move the anchor")
-            region_seeds.setdefault(rid, []).append((rx, ry))
-            hub_rows.append((r, rid, (rx, ry)))
-        # Same-region anchors must clear MIN_ANCHOR_SEP (a drawn region is 1:1 with
-        # an emitted state today, so this is "same state"; anchors in different
-        # regions may be arbitrarily close).
-        for rid, pts in region_seeds.items():
-            for a in range(len(pts)):
-                for b in range(a + 1, len(pts)):
-                    (x1, y1), (x2, y2) = pts[a], pts[b]
-                    d2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
-                    if d2 < MIN_ANCHOR_SEP ** 2:
-                        raise SystemExit(
-                            f"{HUB_WORKSHEET_CONFIG.name}: two hub anchors of region {rid} are "
-                            f"{d2 ** 0.5:.1f}px apart (< {MIN_ANCHOR_SEP}) — they may collapse "
-                            f"into one province; separate them")
-        log(f"hub worksheet: {len(rows)} settlement(s) -> {len(region_seeds)} seeded region(s)", t0)
+        try:
+            region_seeds, hub_rows = plan_hub_seeds(rows, reg, keep_whole)
+        except ValueError as e:
+            raise SystemExit(f"{HUB_WORKSHEET_CONFIG.name}: {e}")
+        n_stack = sum(1 for r, _rid, _p in hub_rows if r.stack_on)
+        log(f"hub worksheet: {len(rows)} settlement(s) ({n_stack} stacked) -> "
+            f"{len(region_seeds)} seeded region(s)", t0)
 
     # Impassable paint (#3704). Empty/absent layer -> None -> every path dormant.
     impassable = None
@@ -428,22 +484,8 @@ def main(argv: list[str] | None = None) -> int:
     # when the worksheet exists; everything above reads none of it, so provinces.png
     # / provinces_index.json stay byte-identical to a no-worksheet run.
     if hub_rows:
-        hub_index = {"canvas": [CANVAS_W, CANVAS_H], "source": HUB_WORKSHEET_CONFIG.name, "hubs": []}
-        for r, rid, (rx, ry) in hub_rows:
-            plab = int(land_lab[ry, rx])
-            pcol = tuple(int(v) for v in palette[plab])
-            hub_index["hubs"].append({
-                "state": r.state,
-                "hub": r.hub,
-                "name": r.name,
-                "source": r.source,
-                "anchor": [int(r.anchor[0]), int(r.anchor[1])],
-                "resolved": [int(rx), int(ry)],
-                "region": int(rid),
-                "province_label": plab,
-                "province_color": list(pcol),
-                "province_hex": raster.color_to_hex(pcol),
-            })
+        hub_index = {"canvas": [CANVAS_W, CANVAS_H], "source": HUB_WORKSHEET_CONFIG.name,
+                     "hubs": hub_index_entries(hub_rows, land_lab, reg_of, palette)}
         HUB_ANCHORS_INDEX_PATH.write_text(json.dumps(hub_index, indent=1) + "\n", encoding="utf-8")
         log(f"wrote {HUB_ANCHORS_INDEX_PATH.relative_to(REPO_ROOT)}  ({len(hub_rows)} hub(s))", t0)
 

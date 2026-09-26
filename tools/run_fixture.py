@@ -2448,6 +2448,139 @@ def _selfcheck_hub_validator() -> None:
     stale = vm._check_hub_anchors(bitmap, states, sea_colors, loc_keys, _idx((99, 99, 99)))
     assert any("stale index" in e for e in stale), f"a stale index colour must fail, got {stale}"
 
+    # #3666: the one-non-stack-hub-per-province rule counts PASSABLE provinces only.
+    keys2 = loc_keys | {"HUB_NAME_STATE_TEST_city", "HUB_NAME_STATE_TEST_farm"}
+
+    def _two(stack=False):
+        farm = {"name": "Farmstead", "hub": "farm", "resolved": [2, 5], "anchor": [2, 5],
+                "province_color": list(A), "province_label": 1}
+        if stack:
+            farm["stack_on"] = "city"
+        return {"hubs": [{"name": "Town", "hub": "city", "resolved": [2, 5], "anchor": [2, 5],
+                          "province_color": list(A), "province_label": 1}, farm]}
+
+    shared = vm._check_hub_anchors(bitmap, states, sea_colors, keys2, _two())
+    assert any("share province" in e for e in shared), \
+        f"two non-stack hubs on one province of a 2-passable-province state must fail, got {shared}"
+    st.impassable = [B]
+    ok_small = vm._check_hub_anchors(bitmap, states, sea_colors, keys2, _two())
+    assert not any("share province" in e for e in ok_small), \
+        f"with only 1 passable province, sharing is legitimate, got {ok_small}"
+    st.impassable = []
+    stacked = vm._check_hub_anchors(bitmap, states, sea_colors, keys2, _two(stack=True))
+    assert stacked == [], f"a stack_on row sharing its host's province must pass, got {stacked}"
+
+
+def _selfcheck_hub_stack() -> None:
+    """Board #3666 unified stacking contract: ``stack_on`` rows bind to their host
+    by exact anchor equality, seed nothing, are indexed with the host's colour and
+    the POST-cut region, and the validator enforces host colour + coastal port."""
+    import generate_provinces as gp
+    import validate_map as vm
+    from pathlib import Path
+    from worldgen import schema
+
+    def row(hub, name, anchor, stack_on="", state="S"):
+        return schema.HubRow(state=state, hub=hub, name=name, anchor=anchor,
+                             source="invented", note="", stack_on=stack_on)
+
+    def raises(rows, frag):
+        try:
+            schema.check_hub_stacking(rows)
+        except schema.SchemaError as e:
+            assert frag in str(e), f"expected '{frag}' in: {e}"
+            return str(e)
+        raise AssertionError(f"expected a SchemaError containing '{frag}'")
+
+    # --- worksheet binding rules
+    pair = [row("city", "Host", (5, 5)), row("port", "Quay", (5, 5), stack_on="city")]
+    schema.check_hub_stacking(pair)                                   # shared-anchor pair ok
+    raises([row("city", "A", (5, 5)), row("farm", "B", (5, 5))], "non-stack rows")
+    raises([row("city", "A", (5, 5)), row("port", "Stray", (6, 6), stack_on="city")], "stray stack row")
+    raises([row("city", "A", (5, 5)), row("farm", "F", (5, 5), stack_on="city"),
+            row("mine", "M", (5, 5), stack_on="farm")], "itself a stack row")
+    raises([row("city", "A", (5, 5)), row("farm", "F", (5, 5), stack_on="farm")], "stack_on == hub")
+    raises([row("city", "A", (5, 5)), row("farm", "F", (5, 5), stack_on="mine")], "the seeded row")
+    # all problems listed at once
+    many = raises([row("city", "A", (5, 5)), row("farm", "B", (5, 5)),
+                   row("port", "Stray", (9, 9), stack_on="city")], "non-stack rows")
+    assert "stray stack row" in many, f"every problem must be listed together: {many}"
+    try:
+        schema.HubRow.from_dict({"state": "S", "hub": "farm", "name": "x", "anchor": [1, 1],
+                                 "source": "invented", "stack_on": "harbour"}, "t")
+        raise AssertionError("an unknown stack_on hub type must be refused")
+    except schema.SchemaError:
+        pass
+
+    # --- plan_hub_seeds: stack rows seed nothing and skip MIN_ANCHOR_SEP
+    reg = np.zeros((40, 40), dtype=np.int32)
+    reg[:, :20] = 1
+    reg[:, 20:] = 2
+    seeds_pair, rows_pair = gp.plan_hub_seeds(pair, reg, set())
+    assert seeds_pair == {1: [(5, 5)]}, f"only the host seeds, got {seeds_pair}"
+    assert len(rows_pair) == 2, "the stack row is still resolved + indexed"
+    base = [row("city", "Host", (5, 5)), row("farm", "Far", (5, 30)), row("city", "East", (30, 5))]
+    seeds_base, _ = gp.plan_hub_seeds(base, reg, set())
+    seeds_more, _ = gp.plan_hub_seeds(base + [row("mine", "Pit", (5, 30), stack_on="farm")], reg, set())
+    assert seeds_base == seeds_more, "adding a stack row must not change the seeds (the cut)"
+    try:
+        gp.plan_hub_seeds([row("city", "A", (5, 5)), row("farm", "B", (5, 10))], reg, set())
+        raise AssertionError("two seeded same-region anchors < MIN_ANCHOR_SEP must raise")
+    except ValueError:
+        pass
+
+    # --- hub_index_entries: host colour, post-cut region, stack_on only on stack rows
+    land_lab = np.zeros((40, 40), dtype=np.int32)
+    land_lab[:, :10] = 1
+    land_lab[:, 10:] = 2
+    reg_of = np.array([0, 7, 2], dtype=np.int32)       # province 1 moved to region 7 post-cut
+    palette = np.array([[0, 0, 0], [10, 20, 30], [40, 50, 60]], dtype=np.uint8)
+    ents = gp.hub_index_entries(rows_pair, land_lab, reg_of, palette)
+    assert ents[0]["province_color"] == ents[1]["province_color"] == [10, 20, 30]
+    assert ents[0]["region"] == ents[1]["region"] == 7, "region is reg_of[plab], post-cut"
+    assert "stack_on" not in ents[0] and ents[1]["stack_on"] == "city"
+    _, rows_nostack = gp.plan_hub_seeds(base, reg, set())
+    nostack = gp.hub_index_entries(rows_nostack, land_lab, reg_of, palette)
+    assert all("stack_on" not in e for e in nostack), "no-stack rows keep the pre-#3666 shape"
+    assert json.dumps(nostack) == json.dumps(gp.hub_index_entries(rows_nostack, land_lab, reg_of, palette)), \
+        "byte-identical across runs"
+
+    # --- validator: host colour + coastal port host
+    A, B, SEA = (10, 20, 30), (40, 50, 60), (0, 0, 200)
+    rgb = np.zeros((10, 10, 3), dtype=np.uint8)
+    rgb[0:4, :] = A          # non-coastal (coastal_colors wraps x, never y)
+    rgb[4:7, :] = B          # coastal
+    rgb[7:10, :] = SEA
+    with tempfile.TemporaryDirectory() as td:
+        png = Path(td) / "p.png"
+        write_rgb_png(png, rgb)
+        bitmap = vm.ProvinceBitmap(png, wrap_x=False)
+    st = vm.ParsedState("STATE_T", "02_empire.txt")
+    st.provinces = [A, B]
+    loc = {f"HUB_NAME_STATE_T_{h}" for h in ("city", "port", "farm", "mine", "wood")}
+
+    def idx(host_col, host_px, stack_col=None, stack_hub="port"):
+        stack_col = host_col if stack_col is None else stack_col
+        return {"hubs": [
+            {"name": "Host", "hub": "city", "anchor": list(host_px), "resolved": list(host_px),
+             "province_color": list(host_col), "province_label": 1},
+            {"name": "Stacked", "hub": stack_hub, "anchor": list(host_px), "resolved": list(host_px),
+             "province_color": list(stack_col), "province_label": 1, "stack_on": "city"}]}
+
+    st.hubs = {"city": B, "port": B, "farm": A, "mine": A, "wood": A}
+    good = vm._check_hub_anchors(bitmap, [st], {SEA}, loc, idx(B, (5, 5)))
+    assert good == [], f"a port stacked on a coastal host must pass, got {good}"
+    st.hubs = {"city": A, "port": A, "farm": B, "mine": B, "wood": B}
+    inland = vm._check_hub_anchors(bitmap, [st], {SEA}, loc, idx(A, (5, 2)))
+    assert any("coastal host" in e for e in inland), f"a port stacked on an inland host must fail, got {inland}"
+    st.hubs = {"city": B, "port": B, "farm": A, "mine": A, "wood": A}
+    wrong = vm._check_hub_anchors(bitmap, [st], {SEA}, loc, idx(B, (5, 5), stack_col=A))
+    assert any("!= host province" in e for e in wrong), f"stack colour != host colour must fail, got {wrong}"
+    orphan = {"hubs": [idx(B, (5, 5))["hubs"][1]]}
+    assert any("no seeded host" in e for e in vm._check_hub_anchors(bitmap, [st], {SEA}, loc, orphan)), \
+        "a stack entry with no host in the index must fail"
+    print("hub stacking (#3666): worksheet binding, seeds, index, validator checks passed.")
+
 
 def _selfcheck_adjacencies() -> None:
     """Board #5563: yellow line -> crossing extraction, worksheet matching, CSV
@@ -4683,7 +4816,8 @@ def run_check() -> int:
           "unseeded byte-identical, protected pieces, hard errors) self-check passed.")
     _selfcheck_hub_validator()
     print("validate_map: hub-anchor check (own-state hub, port coastal, HUB_NAME loc, "
-          "stale-index detection) self-check passed.")
+          "stale-index detection, passable-only sharing rule) self-check passed.")
+    _selfcheck_hub_stack()
     _selfcheck_adjacencies()
     print("adjacencies: line extraction (straight/bent/seam ok; T/loop/dot/touching/ambiguous/"
           "same-province skipped, pins), worksheet matching (tolerance, one-to-one, stale), "

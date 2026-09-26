@@ -732,6 +732,14 @@ class HubRow:
     :data:`_HUB_TYPES`. ``name`` is the display text. ``source`` is a canon
     citation or the literal ``invented``. ``anchor`` is a single canvas ``[x, y]``
     pixel, bounds-checked exactly like :class:`LandRegionMerge.anchor_a`.
+
+    ``stack_on`` (board #3666, the unified stacking contract) is empty for a
+    normal, *seeded* row. A non-empty ``stack_on`` names the host hub type of a
+    seeded row that sits on **exactly the same anchor pixel**: the stacked hub gets
+    no province of its own, it shares the host's (vanilla stacks hubs on one
+    province in small states, ``STATE_MALTA``), but it is still named. The binding
+    between the two rows is anchor-pixel equality, checked by
+    :func:`load_hub_worksheet`.
     """
 
     state: str
@@ -740,6 +748,7 @@ class HubRow:
     anchor: tuple[int, int]
     source: str
     note: str
+    stack_on: str = ""
 
     @classmethod
     def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "HubRow":
@@ -758,7 +767,13 @@ class HubRow:
         if not source:
             raise SchemaError(f"{ctx}.source: must be a non-empty string (canon citation or 'invented')")
         note = _as_str(d.get("note", ""), f"{ctx}.note")
-        return cls(state=state, hub=hub, name=name, anchor=anchor, source=source, note=note)
+        stack_on = _as_str(d.get("stack_on", ""), f"{ctx}.stack_on")
+        if stack_on and stack_on not in _HUB_TYPES:
+            raise SchemaError(
+                f"{ctx}.stack_on: must be one of {list(_HUB_TYPES)} (the host row's hub), "
+                f"got '{stack_on}'")
+        return cls(state=state, hub=hub, name=name, anchor=anchor, source=source, note=note,
+                   stack_on=stack_on)
 
 
 def load_hub_worksheet(path: Path, canvas: tuple[int, int] | None = None) -> list[HubRow]:
@@ -770,6 +785,20 @@ def load_hub_worksheet(path: Path, canvas: tuple[int, int] | None = None) -> lis
     :func:`load_sea_zones` uses for its seed pixels). Region-aware checks (an anchor
     resolving to no region, two anchors of the same state too close together) need
     the canvas region layer and are enforced by ``generate_provinces.py``, not here.
+
+    Stacking (board #3666): the duplicate-anchor rule is relaxed for exactly one
+    shape — one seeded (non-stack) row plus any number of ``stack_on`` rows whose
+    ``stack_on`` equals that seeded row's ``hub``, all on the same pixel. Every
+    violation is collected and raised together (one :class:`SchemaError` listing
+    them all), so an author fixes a batch in one pass:
+
+    * two non-stack rows on one pixel;
+    * a stack row whose anchor matches no seeded row (a stray stack row);
+    * a stack row pointing at another stack row (a chain) — ``stack_on`` names a
+      hub that exists on that pixel only as a stack row;
+    * a stack row whose ``stack_on`` names a hub not on that pixel at all, or
+      its own ``hub`` (``stack_on == hub``);
+    * two rows of one hub type on one pixel.
     """
     ctx = path.name
     data = _load_json(path)
@@ -777,16 +806,51 @@ def load_hub_worksheet(path: Path, canvas: tuple[int, int] | None = None) -> lis
     if not isinstance(hubs_raw, list) or not hubs_raw:
         raise SchemaError(f"{ctx}.hubs: expected a non-empty list")
     rows = [HubRow.from_dict(h, f"{ctx}.hubs[{i}]", canvas) for i, h in enumerate(hubs_raw)]
-
-    seen: dict[tuple[int, int], str] = {}
-    for r in rows:
-        if r.anchor in seen:
-            raise SchemaError(
-                f"{ctx}: anchor pixel {list(r.anchor)} is claimed by both "
-                f"'{seen[r.anchor]}' and '{r.name}' — anchors must be unique"
-            )
-        seen[r.anchor] = r.name
+    check_hub_stacking(rows, ctx)
     return rows
+
+
+def check_hub_stacking(rows: list[HubRow], ctx: str = "hub_worksheet") -> None:
+    """The anchor-uniqueness + ``stack_on`` binding rules of
+    :func:`load_hub_worksheet`, on already-parsed rows (so a fixture can exercise
+    them without a file). Raises one :class:`SchemaError` listing every problem."""
+    by_px: dict[tuple[int, int], list[HubRow]] = {}
+    for r in rows:
+        by_px.setdefault(r.anchor, []).append(r)
+    problems: list[str] = []
+    for px, group in by_px.items():
+        seeded = [r for r in group if not r.stack_on]
+        stacked = [r for r in group if r.stack_on]
+        if len(seeded) > 1:
+            problems.append(
+                f"anchor pixel {list(px)} is claimed by non-stack rows "
+                f"{[r.name for r in seeded]} — anchors must be unique (mark all but one "
+                f"as stack_on the host)")
+        hub_counts: dict[str, int] = {}
+        for r in group:
+            hub_counts[r.hub] = hub_counts.get(r.hub, 0) + 1
+        for hub, n in sorted(hub_counts.items()):
+            if n > 1:
+                problems.append(f"anchor pixel {list(px)} carries {n} '{hub}' rows")
+        seeded_hubs = {r.hub for r in seeded}
+        stacked_hubs = {r.hub for r in stacked}
+        for r in stacked:
+            if r.stack_on == r.hub:
+                problems.append(f"stack row '{r.name}' ({r.state}/{r.hub}): stack_on == hub")
+            elif not seeded:
+                problems.append(
+                    f"stray stack row '{r.name}' ({r.state}/{r.hub}): anchor {list(px)} "
+                    f"matches no seeded row — a stack row's anchor must be exactly its host's")
+            elif r.stack_on in stacked_hubs and r.stack_on not in seeded_hubs:
+                problems.append(
+                    f"stack row '{r.name}' ({r.state}/{r.hub}) stacks on '{r.stack_on}', "
+                    f"which is itself a stack row — no chains, point at the seeded host")
+            elif r.stack_on not in seeded_hubs:
+                problems.append(
+                    f"stack row '{r.name}' ({r.state}/{r.hub}): stack_on '{r.stack_on}' but "
+                    f"the seeded row at {list(px)} is '{seeded[0].hub}'")
+    if problems:
+        raise SchemaError(f"{ctx}: " + "; ".join(problems))
 
 
 # ---------------------------------------------------------------------------
