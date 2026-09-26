@@ -2105,6 +2105,46 @@ def _selfcheck_city_blobs() -> None:
         raise AssertionError("blob over a drawn line must stay a CellError")
 
 
+def _selfcheck_city_seeds() -> None:
+    """Every city dot seeds its own province (board #5679), incl. a tunnel of
+    passable land inside impassable paint."""
+    from worldgen import land_provinces as lp
+
+    H, W = 40, 90
+    land = np.zeros((H, W), dtype=bool)
+    land[3:37, 3:37] = True
+    land[3:37, 40:70] = True
+    reg = np.zeros((H, W), dtype=np.int32)
+    reg[3:37, 3:37] = 1
+    reg[3:37, 40:70] = 2
+    kw = dict(wrap_x=False, min_area=20)
+    paint = np.zeros((H, W), dtype=bool)
+    paint[3:37, 3:30] = True
+    paint[18:22, 8:28] = False                 # the tunnel (80 px)
+    tunnel = np.zeros((H, W), dtype=bool)
+    tunnel[18:22, 8:28] = True
+    cities = [(10, 20), (18, 20), (26, 20)]
+
+    base = lp.subdivide_ex(reg, land, land, 8, impassable=paint, **kw)[0]
+    assert np.unique(base[tunnel]).size == 1, "fixture: tunnel is one province unseeded"
+    lab = lp.subdivide_ex(reg, land, land, 8, impassable=paint, city_seeds=cities,
+                          city_seed_sep=5, **kw)[0]
+    assert len({int(lab[y, x]) for x, y in cities}) == 3, "each city gets its own province"
+    assert np.array_equal(lab, lp.subdivide_ex(reg, land, land, 8, impassable=paint,
+                                               city_seeds=cities, city_seed_sep=5, **kw)[0])
+    # Open land: two cities in one unpainted region split it into distinct provinces.
+    op = [(45, 10), (60, 30)]
+    lab2 = lp.subdivide_ex(reg, land, land, 2, city_seeds=op, city_seed_sep=5, **kw)[0]
+    assert lab2[10, 45] != lab2[30, 60]
+    # Seeds closer than the separation collapse (skipped, no error).
+    lab3 = lp.subdivide_ex(reg, land, land, 2, city_seeds=[(45, 10), (47, 10)],
+                           city_seed_sep=16, **kw)[0]
+    assert lab3[10, 45] == lab3[10, 47]
+    # None / empty is byte-identical.
+    assert np.array_equal(lp.subdivide_ex(reg, land, land, 8, **kw)[0],
+                          lp.subdivide_ex(reg, land, land, 8, city_seeds=[], **kw)[0])
+
+
 def _selfcheck_impassable_land() -> None:
     """Impassable land provinces (board #3704), source-independent, on a synthetic
     canvas: the ``subdivide_ex`` passable/impassable cut, canon-city pockets, and
@@ -4638,6 +4678,7 @@ def run_check() -> int:
     _selfcheck_seeded_cut()
     _selfcheck_impassable_land()
     _selfcheck_city_blobs()
+    _selfcheck_city_seeds()
     print("land_provinces: hub-anchor seeded cut (own-province seeds, boundary kept, "
           "unseeded byte-identical, protected pieces, hard errors) self-check passed.")
     _selfcheck_hub_validator()

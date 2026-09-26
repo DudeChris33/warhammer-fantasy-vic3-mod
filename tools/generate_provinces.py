@@ -305,12 +305,14 @@ def main(argv: list[str] | None = None) -> int:
     # No automatic pockets: the paint is taken as drawn (Chris, 2026-09-24).
     # A canon city under paint is a validator error, fixed by opening the paint.
     city_blobs = []
+    city_dots = []
     cities_rgba = sources.read_source_rgba(CITIES_SOURCE, allow_empty=True)
     if cities_rgba is not None:
         if cities_rgba.shape[:2] != (CANVAS_H, CANVAS_W):
             raise SystemExit(f"{CITIES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}")
+        city_dots = land_provinces.city_dots(cities_rgba, land)
         if impassable is not None:
-            canon_cities = land_provinces.city_dots(cities_rgba, land)
+            canon_cities = city_dots
         city_blobs = land_provinces.city_blobs(cities_rgba, land)
         del cities_rgba
         log(f"city blobs: {len(city_blobs)}", t0)
@@ -323,7 +325,8 @@ def main(argv: list[str] | None = None) -> int:
                 island_zones=island_overrides, impassable=impassable,
                 strict_placeholder_paint=args.strict_placeholder_paint,
                 keep_passable=canon_cities or None,
-                city_blobs=city_blobs or None, city_line=mag)
+                city_blobs=city_blobs or None, city_line=mag,
+                city_seeds=city_dots or None, city_seed_sep=MIN_ANCHOR_SEP)
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())

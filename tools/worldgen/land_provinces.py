@@ -719,7 +719,9 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                  strict_placeholder_paint: bool = False,
                  keep_passable: list[tuple[int, int]] | None = None,
                  city_blobs: list[np.ndarray] | None = None,
-                 city_line: np.ndarray | None = None
+                 city_line: np.ndarray | None = None,
+                 city_seeds: list[tuple[int, int]] | None = None,
+                 city_seed_sep: int = 16
                  ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -870,6 +872,35 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 f"impassable paint on {len(problems)} region(s) that cannot take it:\n  "
                 + "\n  ".join(problems))
 
+    # City seeds (#5679): every city dot is a fixed seed so each blob forms its own
+    # province. Hub anchors keep priority; a dot is skipped (and logged) when it is
+    # on a keep_whole archipelago / non-drawn region / impassable paint, or within
+    # ``city_seed_sep`` px of an already-accepted seed in its region (two seeds that
+    # close would collapse into one province anyway).
+    if city_seeds:
+        drawn_now = set(drawn_ids)
+        merged = {k: list(v) for k, v in seeds_by_region.items()}
+        skipped: dict[str, list[tuple[int, int]]] = {}
+        for cx_, cy_ in city_seeds:
+            rid = int(reg[cy_, cx_])
+            if rid <= 0 or rid in keep or rid not in drawn_now:
+                skipped.setdefault("archipelago/placeholder region", []).append((cx_, cy_))
+                continue
+            if imp is not None and imp[cy_, cx_]:
+                skipped.setdefault("on impassable paint", []).append((cx_, cy_))
+                continue
+            near = merged.setdefault(rid, [])
+            if any((cx_ - ax) ** 2 + (cy_ - ay) ** 2 < city_seed_sep ** 2 for ax, ay in near):
+                skipped.setdefault(f"within {city_seed_sep}px of another seed", []).append((cx_, cy_))
+                continue
+            near.append((cx_, cy_))
+        seeds_by_region = merged
+        if log:
+            n_used = sum(len(v) for v in merged.values()) - sum(len(v) for v in (region_seeds or {}).values())
+            log(f"  city seeds: {n_used} of {len(city_seeds)} cities seeded")
+            for why, pts in skipped.items():
+                log(f"  WARNING: {len(pts)} city seed(s) skipped ({why}): "
+                    + ", ".join(f"({x},{y})" for x, y in pts[:12]) + (" ..." if len(pts) > 12 else ""))
     # Largest-remainder seat allocation across the drawn regions: one each, then
     # the remaining seats by area share, so the totals add up exactly.
     seats = np.ones(len(drawn_ids), dtype=int)
