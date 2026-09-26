@@ -575,6 +575,7 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
         return out
     out = out.copy()
     anchor_labels = {int(out[ay, ax]) for ax, ay in (anchors or ())}
+    problems: list[str] = []
     for blob in blobs:
         ys, xs = blob[:, 0], blob[:, 1]
         cy, cx = int(round(ys.mean())), int(round(xs.mean()))
@@ -592,10 +593,11 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
             major = kv[int(np.argmax(kc))]
             minor = int(kc.sum() - kc.max())
             if minor > PAINT_NOISE_PX:
-                raise cells.CellError(
+                problems.append(
                     f"{where} straddles a state-region border or paint edge "
                     f"({minor} px outside its main region/paint class of {int(kc.max())} px); "
                     f"move the blob or the border")
+                continue
             if log:
                 log(f"  WARNING: {where} grazes a border/paint edge by {minor} px; clipped")
             keep = keys == major
@@ -605,9 +607,10 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
                 continue
         held = [int(u) for u in uniq if int(u) in anchor_labels]
         if len(held) > 1:
-            raise cells.CellError(
+            problems.append(
                 f"{where} covers hub anchors of {len(held)} different provinces; "
                 f"move the blob or the hubs")
+            continue
         if held:
             recv = held[0]
         else:
@@ -633,6 +636,9 @@ def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
                 c = int(c)
                 if c and c != biggest and (comp == c)[grown].any():
                     out[comp == c] = recv
+    if problems:
+        raise cells.CellError(f"{len(problems)} city blob(s) cannot be kept whole:\n  "
+                              + "\n  ".join(problems))
     return out
 
 
@@ -1072,7 +1078,9 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     if city_blobs:
         # City blobs (#5679): one province per painted blob. Region labels used as
         # province labels for keep_whole archipelagos are protected as-is.
-        anchor_pts = list(keep_passable or ())
+        # Only hub anchors are decisive: a city dot's own province is not special,
+        # and neighbouring provinces that each carry a dot are the common case.
+        anchor_pts = []
         for pts in seeds_by_region.values():
             anchor_pts.extend(pts)
         out = unify_city_blobs(out, city_blobs, reg, imp, set(int(k) for k in keep),
