@@ -8,7 +8,7 @@ description: >-
   over MCP. It never asks a person to write the words.
 user-invocable: true
 argument-hint: <version to cut (omit to use the next one the release process will mint)>
-maestro-skill-version: 4
+maestro-skill-version: 5
 ---
 
 # Release Note — write what shipped, for the people who use it
@@ -66,7 +66,9 @@ the file IS the mechanism.
    that span (their trails carry the deviations and decisions that never made
    it into a commit subject). Read the commits and diffs properly:
    **never write a note from commit subjects alone**. (There is no repo
-   changelog; it was retired 2026-07-31.)
+   changelog; it was retired 2026-07-31.) The *why* behind a change often
+   lives only in the workspace's knowledge: `search_knowledge(<the release's
+   themes>, project=<the project>, kind="decision")` before you draft.
 2. **Pick the version — it must match what `publish.sh` will mint.** The
    script bumps the part it is TOLD to, defaulting to the patch, so the note
    for a plain "next publish" is `current + 0.0.1`; read current from
@@ -110,7 +112,10 @@ release history, drafted by you and filed with `create_release(...)`.
 4. **Read the changes.** `git log <last commit_ref>..HEAD`, then read the
    diffs:
    **never write a note from commit subjects alone** — a subject line says a
-   file changed, not what a user will notice.
+   file changed, not what a user will notice. Read the decisions recorded in
+   the span too — `search_knowledge(<the release's themes>, project=<the
+   project>, kind="decision")` — the reason a change was made rarely reaches
+   a commit subject.
 5. **Draft it.** A **TLDR**: one paragraph on what this release is about. Then
    **Key changes**: a bullet list of the handful of things people want to
    know. See `## Voice`.
@@ -231,6 +236,12 @@ Both modes, one voice.
 
 ## Rules
 
+- A release-level decision worth remembering — a deprecation, a compatibility
+  floor, a behaviour the note promises — is recorded once as knowledge:
+  `upsert_workspace_doc(workspace, kind, slug, title, content)` with kind
+  `decision` / `convention` / `fact`, the reply's `similar` read first (a near
+  match means update that slug, not add a twin). Not recorded: the note
+  itself, commit lists, anything already in the repo's own docs.
 - Say which mode you are in, and why, before reading anything else.
 - One note per released version. Never rewrite a shipped or published note's
   history — a correction goes in the next note.

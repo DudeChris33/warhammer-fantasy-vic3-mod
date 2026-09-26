@@ -7,7 +7,7 @@ description: >-
   leaves a born-done history item on the board at close-out.
 user-invocable: true
 argument-hint: <small feature/bug/tweak description(s)>
-maestro-skill-version: 12
+maestro-skill-version: 15
 ---
 
 # Maestro Vibe — One Session, No Board Ceremony
@@ -16,7 +16,7 @@ Same build discipline as `/maestro-build` — conventions, tests, commits,
 honest reporting — with no board ceremony: no workspec, no `## Approach`
 push, no
 stage flips, and no generated planning snapshot. The board hears about it once, at
-close-out (step 9).
+close-out (step 10).
 
 For work that is small, single-session and low-risk: a one-file fix, a small
 bug, a typo, a config tweak, a tiny endpoint addition — where a workspec would
@@ -36,7 +36,7 @@ have to invoke this three times.
 - **Verify per change, at its own tier.** Where two changes cover the same
   module, one run of that module after both is enough. Anything needing `full`
   was never vibe-sized.
-- **One history item per separable change** at close-out (step 9); changes that
+- **One history item per separable change** at close-out (step 10); changes that
   are genuinely one sweep get one item naming them all.
 - **Report once**, one short block per change.
 
@@ -64,14 +64,16 @@ escalate.
      the change is verified more convincingly some other way. Say what.
    - **`targeted`** — the default: name the modules that cover the change and
      run only those, after. **No baseline.**
-   - **`full`** — unbounded blast radius (migration, shared helper, contract).
-     Take a green baseline first; needing `full` is proof this was never
-     vibe-sized, so offer `/maestro-task` instead.
+   - **`full`** — unbounded blast radius (migration, shared helper or
+     contract, dependency bump). Run the default suite once, after — never
+     before; needing `full` is proof this was never vibe-sized, so offer
+     `/maestro-task` instead.
 
-   Below `full` there is no up-front baseline. If a test goes red, attribute it
-   then: read the failure, and if that doesn't settle it, `git stash -u`,
-   re-run that one test, unstash. A failure that predates you is reported, not
-   silently fixed.
+   No tier takes an up-front baseline. If a test goes red, judge it the way
+   `maestro-build`'s "Judging a Red Run" does: the project's recorded
+   integration-branch run (`test_status`), the workspace's `known-flaky-tests`
+   fact, then that one test re-run alone (`git stash -u` on a tree holding only
+   your work). A failure that predates you is reported, not silently fixed.
 4. For a bug: write a regression test that reproduces it and confirm it FAILS
    before the fix. Every tier, including `none`.
 5. Implement, matching existing patterns. Tests with the change, not after.
@@ -82,8 +84,16 @@ escalate.
    If the ask arrived as a board comment, the closing comment answers it with
    `comment_on_item(..., addresses=[<that note id>])` — the ack that clears
    the item's unaddressed flag (maestro-build's comment round-trip rule).
-9. **File the history item** — one board item on the repo's maestro board
-   (`.claude/maestro.json`), born done:
+9. **Record what the change taught.** A decision with a rejected alternative,
+   a rule the code now assumes, or a discovered truth:
+   `upsert_workspace_doc(workspace, kind, slug, title, content)` with kind
+   `decision` / `convention` / `fact`, one entry per fact, a stable slug, a
+   body a stranger can act on. Read the reply's `similar` first — a near
+   match means update that slug, not add a twin. Not recorded: transcripts,
+   file dumps, tool logs, anything already in the repo's own docs.
+10. **File the history item** — one board item on the repo's maestro board
+   (the session-stated board when the first message names one, else
+   `.claude/maestro.json`), born done:
    - Title `Vibe: <what shipped>`, stage = the board's done value, owner = the
      user, plus `project` from that same config when it carries one.
    - `contract={"tier": <step 3's tier>, "run": [<what you actually ran>],
@@ -101,7 +111,7 @@ escalate.
      the history) or the session escalated to `/maestro-task`.
    - Maestro unreachable: say so in the report and move on — this never blocks
      a close-out.
-10. Report back briefly: what changed (commits, one line each), how it was
+11. Report back briefly: what changed (commits, one line each), how it was
     verified — the tier, what ran, and at `none` the plain statement that no
     tests ran and what stood in for them — and anything left open. Keep the
     report as small as the change.
@@ -111,7 +121,7 @@ escalate.
 - **During the build the board is not part of this flow.** No tracking items,
   no stage flips, no progress comments — the conversation is the work record
   until close-out.
-- The **only** item a vibe creates is step 9's. Work that deserves a live board
+- The **only** item a vibe creates is step 10's. Work that deserves a live board
   item deserves `/maestro-task` — hand off.
 - If the change closes an **existing** board item (you notice one, or the user
   names one), do that item's close-out instead: comment the commits, flip its
@@ -134,3 +144,4 @@ escalate.
 - Creating live tracking items, workspecs, or `planning/` files — the born-done
   history item at close-out is the single exception, filed once, at the end,
   only for completed vibes.
+- Writing a transcript or a file dump as a knowledge entry.

@@ -81,6 +81,8 @@ Most `common/*` and top-level content folders still contain only `.gitkeep`. Aut
   - `/maestro-scope <item-ids>` — scope item(s) in-repo, append a `## Plan`, push back (stage=planned)
   - `/maestro-build <item-ids>` — claim, execute the plan with full build discipline, land at review/done
   - `/maestro-auto <item-ids>` — scope + build in one mostly-autonomous run, one approval gate
+  - `/maestro-run <plan-id>` — execute a Plan whose roster a human already approved on the board, in waves with fresh sub-agents
+  - `/maestro-review` — review a change and update the docs from it: a commit-bound verdict for a teammate's ask, or the closing pass of your own build
   - `/maestro-vibe <description>` — vibe-code a small change with build discipline, no board ceremony
   - `/maestro-release-note` — draft the next release note from the actual diffs
   - `/sites-verify <url>` — actually look at a deployed maestro site (real pixels)

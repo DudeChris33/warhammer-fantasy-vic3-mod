@@ -6,7 +6,7 @@ description: >-
   push them back (stage=planned) via the maestro MCP.
 user-invocable: true
 argument-hint: <item-ids, e.g. "431" or "431 432" (omit to pick from the board)>
-maestro-skill-version: 24
+maestro-skill-version: 34
 ---
 
 # Maestro Scope — Design the Approach on the Item
@@ -36,8 +36,10 @@ file.
   - **Cross-check the plans before pushing anything** — two plans changing the
     same function or contract in incompatible directions, two migrating the same
     table, the same helper added twice, one item another makes obsolete. Amend
-    the affected plans, say what changed, and **escalate a tier a sibling plan
-    invalidates** (a shared helper or a shared file bounds nothing per-item).
+    the affected plans, say what changed, and **escalate to `full` a tier a
+    sibling plan invalidates** (a helper or contract one plan creates and
+    another consumes bounds nothing per item; two plans editing one file keep
+    their tiers, and the closing union runs both plans' modules).
   - **Present once** for the set: the step-7 TL;DR per item, plus the cross-item
     findings and a build order where a dependency forces one.
   - **Push each item** per step 8, and report which landed and which did not.
@@ -50,7 +52,8 @@ do them in separate sessions.
 
 ## Board Resolution
 
-Same as `maestro-task`: read Maestro's `.claude/maestro.json` repo config; on any
+Same as `maestro-task`: a session-stated workspace in the first message comes
+first, else read Maestro's `.claude/maestro.json` repo config; on any
 miss, resolve via `whoami()` / `list_workspaces()` / `list_boards()`, ask, offer
 to write the file. Unreachable or unauthenticated → stop with an explicit
 notice; offer the repo's local scoping skill if one exists. Never fall back
@@ -153,8 +156,11 @@ names, and say you fell back.
 
 - The item's `board` is a **sibling board in the same workspace** — normal under
   a deliberate split, but confirm it is the board you meant; ids interleave
-  across boards. A different `workspace` is almost always a wrong id — another
-  repo's board.
+  across boards. A `workspace` different from the resolved one — the
+  session-stated workspace when the first message names one, else
+  `.claude/maestro.json` — is almost always a wrong id, another repo's board;
+  an item on the stated workspace and board is exactly where it belongs,
+  never "a different workspace".
 - It already has a `## Approach` (or a legacy `## Plan`) — it is scoped, and
   re-scoping overwrites it.
 - Its stage is `building`, `review` or `done`, or `values.owner` is someone else
@@ -204,15 +210,42 @@ item, ask for the right id — never go hunting for the item they probably meant
    rules:` line names, inlined under `rules.applied` — apply them; that is the
    full text, not a summary. **Say any `rules.missing` slug out loud**: the
    workspec told you to apply a rule that resolves to nothing, and that is the
-   user's to fix, not yours to skip silently. Call
-   `get_workspace_context(workspace)` only for what the packet does not carry —
-   a workspec naming no rules at all, or the workspace's `challenge` doc for
-   step 6.
+   user's to fix, not yours to skip silently. `knowledge.retrieved` is the
+   workspace's memory nearest this item — apply it beside `rules.applied`;
+   `knowledge.reason` says why it is empty. `skills` names the workspace
+   skills this item needs: `skills.pinned` is the full text of each skill the
+   workspec's `Apply skills:` line names — apply it like a rule, and say any
+   `skills.missing` slug out loud; `skills.retrieved` is up to three more
+   nearest the workspec, each with the `why` its own first paragraph gives —
+   read each one that fits with
+   `list_workspace_docs(workspace, kind="skill", slug=<slug>)`.
+   `skills.reason` says why that list is empty. Call
+   `get_workspace_context(workspace)` only for a workspec naming no rules at
+   all. Read the workspace's `challenge` doc for step 6 with
+   `list_workspace_docs(workspace, kind="skill", slug="challenge")`.
 4. **Deep exploration.** Read every file the workspec references; check existing
    patterns and helpers in the target app; fetch framework docs when framework
    features are involved. Depth must match a local scoping session — the board
    changes storage, not rigor.
-5. **Design.** Append a `## Approach` section to the scratch file:
+
+   **Choose the simplest correct approach.**
+   - Search the existing implementation, nearby features, and framework helpers
+     first. Name what the approach will reuse or extend.
+   - Scope only what is needed to satisfy the stated outcome. Exclude
+     speculative future requirements and unrelated cleanup.
+   - Prefer a direct change using established patterns. Introduce an
+     abstraction, dependency, configuration option, or new layer only when a
+     concrete requirement needs it; explain why the existing approach is
+     insufficient.
+   - Keep the approach proportional to the work. A small change should have a
+     short plan. Include edge cases, tests, and documentation that matter to the
+     actual behavior.
+   - Simplicity must preserve correctness, permissions, and required error
+     handling.
+
+5. **Design.** Append a `## Approach` section to the scratch file. Write the
+   heading line as `## Approach` — it's the form every reader expects first;
+   the save guard refuses an item in Planned with no plan it can find.
    - Objective (exact outcome)
    - Ordered implementation steps with file paths
    - Design decisions (why this approach over alternatives)
@@ -220,6 +253,12 @@ item, ask for the right id — never go hunting for the item they probably meant
    - Testing plan (what to add/update)
    - Documentation plan
    - A `### Verification` subsection (see below) — required.
+   - An ``Apply skills: `<slug>` `` line under `## Spec`, beside any
+     `Apply rules:` line, for each workspace skill the build must read that
+     `skills.retrieved` did not name or that is too decisive to leave to
+     relevance — a built-in skill is never retrieved, so pin it when the build
+     needs it. Name only slugs that land under `skills.pinned`; drop a seeded
+     pin that does not fit.
 
    It must be complete enough to execute without re-exploring. Resolve open
    decisions; don't leave both options.
@@ -257,7 +296,12 @@ item, ask for the right id — never go hunting for the item they probably meant
    untested assumptions, argue the strongest opposing case, never invent a flaw
    to perform thoroughness). Its brief: **refute the plan** — the untested
    assumption most likely to be wrong, the strongest failure scenario, the
-   weakest design decision. Verify the objections yourself (measure, read,
+   weakest design decision. **Challenge unnecessary complexity as well as
+   correctness:** what can be removed, what existing code was overlooked, and
+   could a smaller change satisfy the same outcome? A hypothetical future need
+   is not sufficient reason to expand scope.
+
+   Verify the objections yourself (measure, read,
    re-derive; the challenger may not run code), then give each a disposition in
    a `### Challenge` subsection of the plan — **a table, one row per
    objection**, not a narrative:
@@ -317,6 +361,12 @@ item, ask for the right id — never go hunting for the item they probably meant
    `comment_on_item(item, <3-5 line plan summary>, addresses="all")` — the
    summary is the reply that ADDRESSES the trail's unaddressed comments
    (step 2 read them as scope input; this records them answered).
+   Record scoping's durable findings as knowledge too —
+   `upsert_workspace_doc(workspace, kind, slug, title, content)` with kind
+   `decision` / `convention` / `fact`, slug-addressed, the reply's `similar`
+   checked before each write (a near match means update that slug, not add a
+   twin); a premise that turned out false is a `fact`. Not recorded:
+   transcripts, file dumps, anything already in the repo's own docs.
    **The push's `values` also carry the milestone stamp** — see "Milestone
    stamp" below — **and, on a horizon-purpose board, the horizon stamp**
    (see "Horizon stamp"); resolve both before this call so stamps and stage
@@ -327,6 +377,14 @@ item, ask for the right id — never go hunting for the item they probably meant
    pointing strictly earlier. That is what the Plan panel renders and what a
    child's work packet warns from; approval stays a separate human decision
    (`approve_board_item_plan` or the portal), never this push.
+   **Every edge counts.** A task with depends edges is handed out as soon as
+   those tasks are merged, whatever its wave; one with none waits for every
+   task of the earlier waves. Give each task an edge to every task whose code
+   it uses or whose files it touches, and create the tasks with no Owner — the
+   Team's Maestro hands them out. A wave that touches authentication,
+   permissions or money gets the line `Security review: wave <N>` in the
+   Plan's description, which asks for the reviewer's whole-wave security
+   review before that wave closes.
 9. Hand off: "run `/maestro-build <item-id>` to build it" — name the item title
    alongside the id; that line is often read back in a later session. Several
    items scoped in this session hand off as one line carrying every id
@@ -390,11 +448,12 @@ blast radius better than the build session ever will — and without a call from
 you it defaults to the expensive option.
 
 **Every tier below describes what the *build* will do — scoping itself runs no
-tests.** The suite serializes on one port and one test database, so a baseline
-taken here collides with any build in flight, and parallel scoping sub-agents
-collide with each other. It would also be stale by the time the build merges
-`origin/main`. Reproducing a bug you are scoping is the one exception: run that
-one test, not a suite, and never while a build is running.
+tests.** A run in the checkout you scope from contends with any build or
+scoping session sharing that checkout; the question it would answer — what is
+already red — is answered by the project's last recorded integration-branch run
+(`test_status`). Reproducing a bug you are scoping is the one exception: run
+that one test, not a suite, and never while a build is running in the same
+checkout.
 
 Append a `### Verification` subsection naming exactly one tier:
 
@@ -405,13 +464,15 @@ Append a `### Verification` subsection naming exactly one tier:
   line must say what stands in for the tests.
 - **`targeted`** — the default, where most items land. The behavior change is
   contained inside test modules you can **name**. No baseline run; the build
-  runs the named modules after the change. Name them explicitly — "the relevant
-  tests" is not a plan, it is the build session guessing with your authority.
-- **`full`** — the blast radius cannot be bounded by reading. Migrations or
-  schema changes, a shared helper or contract with callers across modules, a
-  dependency or framework bump, settings and auth surfaces many modules read, or
-  a bug whose cause is still unknown. The build takes a green baseline before
-  its first edit and runs the default suite after — you take neither. A `full`
+  runs the named modules after the change. A bug whose cause is still unknown
+  is targeted too: its regression test plus the modules around it; the wave's
+  run is the net. Name them explicitly — "the relevant tests" is not a plan, it
+  is the build session guessing with your authority.
+- **`full`** — only three triggers, and the `Why:` line names which: a
+  migration or schema change; a shared helper, setting or contract with callers
+  across modules; a dependency or framework bump. The build runs the repo's
+  default suite **once, after the change** — never before; inside a Plan wave
+  that run is the wave's one run after its merges — you take neither. A `full`
   verification tier does not imply the runner's `--full` slow/extended option.
 
 Format:
@@ -441,16 +502,99 @@ downgrade cannot happen quietly.
   actually reads a fourth — don't invent one.
 
 Pick the **lowest** tier that would actually catch this change breaking. Doubt
-between two tiers resolves upward, and the bound goes in the `Why:` line — a
-tier with no stated bound is a guess wearing a label. A bug's regression test
-runs at every tier, on its own, before and after the fix; that is targeted by
-nature and costs seconds.
+between two tiers does **not** resolve upward: name the modules you can bound,
+and say in the `Why:` line what they cover and what they leave to the wave's
+one full run. A tier with no stated bound is a guess wearing a label. A bug's
+regression test runs at every tier, on its own, before and after the fix; that
+is targeted by nature and costs seconds.
 
 ## Push Failures
 
 Retry once. If it still fails, keep the scratch file and tell the user exactly
 which item to sync manually (`planning/.cache/<item-id>.md` →
 `update_board_item(<id>, description=...)`). Never lose the plan.
+
+## When an Agent Teammate Runs This
+
+**A teammate session is one where `whoami()`'s `session.persona_agent` is
+non-null.** Every other session is interactive and the skill above applies
+unchanged — including a brokered owner session in a desktop composer, whose
+`authority` reads `agent_session` but whose `session.persona_agent` is null.
+
+As a teammate you have nobody in the room. The work above does not change —
+the exploration, the design, the challenge, the verification tier, the push
+are the same. What changes is every gate that waits for a person: each one
+maps to a team step or stops with its reason. **None is skipped silently.**
+
+| The gate above | As a teammate |
+|---|---|
+| Board Resolution — ask which workspace, offer to write `.claude/maestro.json` | The ask carried the item; resolve everything else from `get_work_packet(item)`. Never pick a board, never write a repository config file. Maestro unreachable: say so in your reply and stop — there is no local fallback for an item you cannot read. |
+| The wrong-id gate — show the card, get a yes | Nobody is there to say yes, so **check** instead of confirm: the packet's title and stage must match what the ask described. A mismatch is refused **by name** ("you asked for #431 'Add preview_site'; #431 is 'Rotate the signing key'") and the turn ends. Never scope the item you think was meant. `parked` and `rejected` still refuse outright. |
+| Step 1 — list candidates and ask which to scope | Does not apply. An ask with no item id is refused, not answered with a board pick; say you need an item id and stop. |
+| More ids than one ask should carry | One ask, one item. Scope the first, name the others in your reply, and let the asker send them separately. |
+| Checkout conflict — show the holder, ask whether to wait | Do not wait and do not take it. Comment who holds it, for what, and until when; end the turn. The asker decides. |
+| Step 6 — spawn a fresh sub-agent to refute the draft | **The same: spawn one fresh-context, read-only sub-agent of your own engine** with the same refute brief, in this turn — no waiting on a teammate. It is the one sub-agent this skill allows (see "One hand-off path" below): copy every objection it returns into the `### Challenge` table word for word, so the table is the record. **Whoever wrote the Approach never challenges it**, so an engine with no sub-agents asks `ask_agent(<the Team's builder>)` instead (never the reviewer who will later review the code). Verify every objection yourself before dispositioning it — the `### Challenge` table is still required, and an undispositioned objection still means not ready: never set Planned before it is settled. |
+| Step 7 — present the TL;DR and iterate until confirmed | Post the same TL;DR with `comment_on_item`, then end the turn. Do not wait for a reply in the same turn, and never read silence as a yes. |
+| The milestone question inside step 7 | Inherit from the parent when it has one (the order above is otherwise unchanged). With no parent signal, stamp nothing, and say in the TL;DR comment that the milestone is unset and who should pick it. Never ask, never guess a bucket. |
+| The horizon question inside step 7 | Stamp `next` as above. Real urgency is reported in the comment, never asked. |
+| Decisions to confirm | Resolve them, and record the option and the reason under Design decisions. A decision only the person can make — a product choice, a trade-off with their money or their users in it — is one `ask_person` and the turn ends there. |
+| "Ask before re-scoping an owned item" | Comment that it is owned (by name) or already `building`, and end the turn. |
+| Push Failures — tell the user which item to sync by hand | Retry once, then say the failure in your reply with the plan text, so it is recoverable. You have no scratch file to point at. |
+
+**A Lead with workers** (`whoami()`'s `session.persona_agent.workers` is above
+zero). Steps 3–5 — exploration, design and the draft — go to one worker per
+item with `delegate`: the item id, the workspec as pulled, the base revision,
+and "return the complete description". The checkout stays yours and the
+waiting rule below applies unchanged: comment that a worker is drafting, check
+it in, end the turn. On the answer, re-acquire, read the draft and any file it
+names against the code — the Approach is yours — then run step 6 and every
+push yourself. Step 6 is the row above, unchanged, and never goes to a worker:
+`delegate` picks the least-busy worker, which is usually the one that just
+drafted.
+
+**Running as a worker** (`whoami()`'s `session.persona_agent.parent` is
+non-null). Steps 3–5 only, read-only: no checkout, no `update_board_item`, no
+comment, no ask, no challenge — every gate in the table is your Lead's. Pull
+with `get_work_packet(item)`, apply its rules, and draft the complete
+description (human block + `## Spec` + `## Approach` with its
+`### Verification`). Write it to `planning/.cache/workers/<request id>.md` in
+the folder you started in and answer with the premise check, the plan in a few
+lines, files touched, tier, open decisions and that path.
+
+**Push the draft before you challenge.** Steps 5 → 6 → 8 become 5 → **push**
+→ 6 → push again. The item is your working copy: a teammate's turn can end
+between the draft and the challenge (the challenge is an ask, and an ask can
+take a day), and an Approach that exists only in this session's head does not
+survive that. Push the draft `## Approach` with `update_board_item` before the
+challenge ask, then push the amended plan and the `### Challenge` table after
+it. Write no `planning/.cache` file: other agents share the folder you started
+in — except a worker's one result file, `planning/.cache/workers/<request id>.md`,
+a name no one else writes.
+
+**One hand-off path, one exception.** Every hand-off but the step 6 challenge
+is one Maestro teammate, asked with `ask_agent` — or, for a Lead's own
+workers, `delegate` — and recorded: the ask and its answer are kept as
+requests, a worker's in its private room. The challenge is the exception
+because its whole output lands on the item as the `### Challenge` table,
+objections word for word, and because a red-team that waits a day for a
+teammate is the step that gets skipped. `ask_agent` may refuse for want of a
+live acknowledged request (an owner console turn); then say on the item what
+is ready and who should do it, and never claim a hand-off you did not make.
+
+**The waiting rule — how a turn ends without stranding the item.** Before you
+end a turn on an ask:
+
+1. **Comment who you are waiting on and what for**, on the item, naming the
+   teammate or the person and the question.
+2. **`check_in_board_item_checkout`.** A lease runs an hour and an ask can
+   take a day, so holding it is how an item ends up locked by a session that
+   is no longer thinking about it.
+3. **End the turn** — no further post, no final text.
+
+On resume: **re-acquire the checkout and re-read `get_work_packet(item)`
+before anything else.** The packet is the only state this turn shares with the
+last one, and the item may have moved while you waited. The same on every
+rework round, however short.
 
 ## Rules
 
@@ -473,3 +617,6 @@ which item to sync manually (`planning/.cache/<item-id>.md` →
   optimistic one spends it on nothing at all.
 - Keep repo dumps out of the workspec — reference file paths.
 - If the item is already `building` or has an owner, ask before re-scoping.
+- Running as an agent teammate: never hand the challenge to a worker, and
+  never end a turn on an ask without saying who it waits for and checking the
+  checkout in.

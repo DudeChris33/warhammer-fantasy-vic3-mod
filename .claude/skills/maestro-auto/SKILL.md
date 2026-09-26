@@ -10,7 +10,7 @@ description: >-
   and only for decisions that change the shape of the work.
 user-invocable: true
 argument-hint: <item-ids, e.g. "431" or "431 432 438" (omit to pick from the board)>
-maestro-skill-version: 22
+maestro-skill-version: 26
 ---
 
 # Maestro Auto — Scope + Build, One Gate
@@ -65,7 +65,8 @@ gate as it goes.
 
 ## Board Resolution
 
-Same as `maestro-task`: read Maestro's `.claude/maestro.json` repo config; on any miss, resolve via
+Same as `maestro-task`: a session-stated workspace in the first message comes
+first, else read Maestro's `.claude/maestro.json` repo config; on any miss, resolve via
 `whoami()` / `list_workspaces()` / `list_boards()`, ask, offer to write the
 file. Maestro unreachable or unauthenticated → stop with an explicit notice;
 never fall back silently. Call `get_board(board, items=False)` once and keep the
@@ -167,8 +168,8 @@ before replaying queued board writes.
 6. **Admit the batch** — run the wrong-id gate below and get a yes, before any
    agent spawns. Not the phase-4 gate: this asks "are these the right items?",
    that asks "is this the right plan?".
-7. **No baseline yet** — the tier that decides whether the run needs one arrives
-   with the plans (phase 1), and scoping is read-only. See "Verification".
+7. **No baseline, at any tier** — a red closing run is judged against what is
+   already recorded (see "Verification").
 
 ## Naming an Item
 
@@ -229,8 +230,11 @@ classified it into (scope-then-build / build-only); and one line of what it is
 
 - An item's `board` is a **sibling board in the same workspace** — normal under a
   deliberate split; confirm it is the board you meant, since ids interleave
-  across boards. A different `workspace` is almost always a wrong id — another
-  repo's board.
+  across boards. A `workspace` different from the resolved one — the
+  session-stated workspace when the first message names one, else
+  `.claude/maestro.json` — is almost always a wrong id, another repo's board;
+  an item on the stated workspace and board is exactly where it belongs,
+  never "a different workspace".
 - A `planned` item's plan is weeks old (`spec_updated.age`) — possibly stale,
   and the batch will build it without re-scoping. Same for any
   `resumed_from_parked` warning, which says so outright.
@@ -274,9 +278,16 @@ Also require, returned separately:
   behavior changes for existing callers.
 - **Premise check** — anything in the workspec that turned out false, already
   shipped, or impossible as written.
+- **Durable findings** — decisions with a rejected alternative, conventions
+  the code assumes, facts measured or discovered — as `{kind, slug, title,
+  content}` rows. You write them at the phase-4 push (see phase 5 step 4 for
+  the rule); a sub-agent holds no knowledge tool.
 
-Give each agent the workspec, the workspace rule docs, and read access to the
-repo. Forbid edits: phase 1 writes nothing but its own answer.
+Give each agent the workspec, the workspace rule docs, the packet's
+`knowledge.retrieved` entries (the workspace's memory nearest this item —
+applied beside the rules, and the agent says when one changes the approach;
+`knowledge.reason` says why the set is empty), and read access to the repo.
+Forbid edits: phase 1 writes nothing but its own answer.
 
 **Milestone stamp is INHERIT-ONLY in this run.** An unattended run stamps
 what the parent already carries — the parent's milestone column value goes
@@ -333,11 +344,13 @@ plans for:
 - **Obsolete items** — an item another plan (or already-shipped work) makes
   unnecessary. Propose dropping it rather than building it.
 - **Tiers the batch invalidates.** Each agent judged its item's blast radius
-  alone. Two plans editing the same file, or a helper one item creates and
-  another consumes, is a bound that held per-item and does not hold for the batch
-  — **escalate both items' tiers** and say so. This is the one verification
-  judgement only the orchestrator can make, and it rewrites both items'
-  contracts, not only the prose — phase 4 pushes the raised tier as data too.
+  alone. A helper or contract one item creates and another consumes is a bound
+  that held per item and does not hold for the batch — **escalate both items to
+  `full`** and say so. Two plans editing one file keep their tiers; the closing
+  union runs both items' modules against the combined tree. This is the one
+  verification judgement only the orchestrator can make, and it rewrites both
+  items' contracts, not only the prose — phase 4 pushes the raised tier as data
+  too.
 
 Amend the affected plans and record what changed and why. The build order you
 produce here is the order phase 5 runs in.
@@ -368,8 +381,8 @@ decision point, so complete and short:
   assigns the unstamped ones.
 - **Build order** — the sequence, and any dependency that forced it.
 - **How the batch gets verified** — the batch tier, what the closing run will be,
-  whether a baseline is coming, and any tier phase 3 escalated with why. The user
-  can relax a tier here; it is the only moment to.
+  and any tier phase 3 escalated with why. The user can relax a tier here; it is
+  the only moment to.
 - **What scoping changed** — only findings that change the shape of the work: a
   false workspec premise, a bug found on the way, an item now obsolete.
 - **Cross-item issues** — collisions, shared helpers, migration ordering.
@@ -405,11 +418,7 @@ Cap concurrency at what the repo's isolation actually supports — checkout slot
 are usually a bounded machine-wide resource, and leaked ones count against it.
 Past ~3 at once, the merge is where you spend what you saved.
 
-**First, if the batch tier is `full`**, take the green baseline now: once, for the
-whole run, before the first claim. Below `full` there is no baseline (see
-"Verification").
-
-Then, for each item — concurrently within a parallel group, otherwise in order:
+For each item — concurrently within a parallel group, otherwise in order:
 
 1. **Claim it** yourself: `update_board_item(item, values={"stage":
    "building", "owner": [<the user's id from whoami()>]})`.
@@ -417,19 +426,23 @@ Then, for each item — concurrently within a parallel group, otherwise in order
    session. `planning/` is ignored; never commit generated workspec snapshots.
    The board item and its activity trail are the durable record.
 3. **Spawn one build sub-agent** (Opus, high effort) with the approved plan, the
-   repo's conventions, and its batch context (build order, what earlier items in
+   repo's conventions, the packet's `knowledge.retrieved` entries (read beside
+   the rules), and its batch context (build order, what earlier items in
    this run landed, any shared helper another item introduced). Brief: the
    `maestro-build` workflow for one item — read before editing, one logical unit
    at a time with tests written alongside the change, commit per the repo's git
    conventions, update docs and changelog. Returns commits (hash + one line), the
-   tests it wrote, deviations from the plan, anything left open. **It does not
+   tests it wrote, deviations from the plan, anything left open, and its
+   durable findings as `{kind, slug, title, content}` rows. **It does not
    touch the board and does not run the default suite** (see below). In a parallel
    group, give each agent its own worktree and branch, set up the way the repo's
    rules say — a bare `git worktree add` skips steps (dependency install,
    gitignored config) that make tests work there.
 4. **Post the commit trail yourself**: `comment_on_item(item, ...)` with the
    commits and any deviation from the plan. Leave the item at `building` — built,
-   not verified.
+   not verified. **Then record what the item taught** — the agent's durable
+   findings and the deviations you accepted with a reason that binds the next
+   build: `upsert_workspace_doc(workspace, kind, slug, title, content)` with kind `decision` / `convention` / `fact`, one entry per fact, a stable slug, and a body a stranger can act on. Read the reply's `similar` before the next write — a near match means update that slug, not add a twin. Not recorded: transcripts, file dumps, tool logs, anything already in the repo's own docs.
 5. **Check the tree before moving on**: working tree clean, commits present,
    nothing staged from the next item. A build agent's report is a claim; the
    suite settles it, once, at the end.
@@ -442,22 +455,21 @@ closing run is for, and it cannot run until the branches are in.
 
 ## Verification — One Closing Run, Sized to the Batch
 
-The batch runs tests **twice at most**, often once — sized by the tiers phase 1
-returned and phase 3 amended. The closing run happens in the **primary tree,
-after every branch has merged**: a green suite inside one worktree says that
-item works alone, which is not the claim being made. Runs never overlap in a
-repo that serializes tests; where worktrees isolate, a build agent may still run
-a focused target in its own tree without colliding.
+The batch runs **one** closing test run — sized by the tiers phase 1 returned
+and phase 3 amended. The closing run happens in the **primary tree, after every
+branch has merged**: a green suite inside one worktree says that item works
+alone, which is not the claim being made. On the integration branch that run is
+the branch's recorded run; anywhere else use the runner's opt-out from reporting
+(testit: `--no-maestro`). Runs never overlap in a repo that serializes tests;
+where worktrees isolate, a build agent may still run a focused target in its own
+tree without colliding.
 
 **The batch's tier is the highest tier any item in it carries.**
 
-- **Any item at `full`** → the repo's green baseline **before phase 5** (not in
-  pre-flight — the tier isn't known until scoping is done), then the default
-  suite once after the last item lands. The tier never implies the runner's
-  `--full` slow/extended option. Red baseline → stop and tell the user; never
-  build a batch on red.
-- **Otherwise (`targeted` / `none` only)** → **no baseline at all.** The closing
-  run is the union of every item's named modules, once, after the last item
+- **Any item at `full`** → the repo's default suite once, after the last item
+  lands — never a baseline. The tier never implies the runner's `--full`
+  slow/extended option.
+- **Otherwise (`targeted` / `none` only)** → the closing run is the union of every item's named modules, once, after the last item
   lands. The union is sound because each item's bound covers the files it
   touched, and the case where it wouldn't — a shared helper, a cross-item
   collision — is what phase 3 escalates to `full`.
@@ -474,12 +486,16 @@ Then:
 - **Green** → flip every built item in one pass: `review` if it went to a PR,
   `done` if it went straight to the main branch. First moment any item may be
   called done.
-- **Red** → attribute each failure to the item owning the touched files (the
-  per-item commits make this unambiguous), fix in place, re-run. One sweep per
-  fix round, never per item. Fixed items flip normally; an item you cannot get
-  green stays at `building` with a blocker comment naming the failing tests. With
-  no baseline, attribute the way `maestro-build` does — read the failure, and
-  stash-and-rerun that one test if reading doesn't settle it.
+- **Red** → judge it under `maestro-build`'s "Judging a Red Run" (the recorded
+  integration-branch run, the workspace's `known-flaky-tests` fact, then a
+  single-file rerun). If only already-red or known-flaky isolated failures
+  remain and the changes' required checks pass, items may go to **review**,
+  never done under this exception. Report each failing test and what it
+  matched; do not call the suite green or fully passing. For new failures,
+  attribute each to the item owning the touched files (the per-item commits make
+  this unambiguous), fix in place, re-run. One sweep per fix round, never per
+  item. Fixed items flip normally; an item you cannot get green stays at
+  `building` with a blocker comment naming the failing tests.
 - Report the real numbers, and **which tier produced them** (see "Final Report"
   for what a run must never omit).
 
@@ -492,9 +508,11 @@ Nothing is `done` mid-run: until the sweep runs, the truth is "built".
   items.
 - **Halt items that depended on the failure**, and say which, rather than building
   on a missing foundation.
-- **Halt the whole run** on: a red baseline, a failure that invalidates a later
-  item's approved plan, or a needed change that goes beyond what the user
-  approved at the gate.
+- **Halt the whole run** only when a verification blocker or invalidated plan
+  affects every remaining item, or the next step requires a scope/product
+  decision beyond the user's authorization. Isolated already-red or known-flaky
+  failures follow `maestro-build`'s "Judging a Red Run" and do not halt the
+  batch.
 - A build agent that fails outright (crash, unusable result) is retried once
   before the item is blocked — its item is the only one affected.
 - Mid-run maestro outage: never block a build on it. Finish locally, retry each
@@ -541,10 +559,13 @@ Item").
 - **What deviated** — per item, what was done differently than the approved plan
   and why. Never let a deviation surface only in a diff.
 - **Verification** — the batch tier, what the closing run actually was, its
-  result (against the baseline if one was taken), how many fix rounds it took,
+  result (and what each failure matched: the recorded integration-branch run,
+  the known-flaky list, or nothing), how many fix rounds it took,
   and any tier escalation phase 3 or a build forced. Failures, skips and anything
   that could not run go here, never omitted.
 - **Not done** — blocked, halted, or dropped items, with what each needs.
+- **What the workspace learned** — the knowledge entries this run wrote, by
+  slug; "none" is a fine answer when nothing durable surfaced.
 - **Queued board updates** — any push that never landed, as replayable calls.
 
 Roughly 20 lines. Detail lives in the commits and each item's activity trail —
@@ -564,8 +585,7 @@ point at them.
 - Flipping any item to `review`/`done` before the batch's closing run
 - Trading the closing run away for speed, or reporting a batch as verified at a
   tier below the one approved at the gate
-- Building a `full`-tier batch without a baseline, or taking a baseline for a
-  batch that has no `full` item in it
+- Taking a baseline — any suite run before the builds — at any tier
 - Calling the plan-approval or re-scope decision tools without an explicit
   human instruction from this session — the unattended run never approves
 - Skipping the challenge phase, the coherence pass, or the gate to "save time"

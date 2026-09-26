@@ -6,7 +6,7 @@ description: >-
   workspec, stage=inbox) is the work record, not a local file.
 user-invocable: true
 argument-hint: <feature/bug description — one, or several separable pieces of work>
-maestro-skill-version: 17
+maestro-skill-version: 21
 ---
 
 # Maestro Task — File Work onto the Board
@@ -40,7 +40,26 @@ back — not one item that quietly staples them together.
 
 ## Board Resolution (all maestro-* skills)
 
-1. Read Maestro's repository config at `.claude/maestro.json` in the repo root:
+**A session-stated workspace comes first.** When the conversation's first
+message says which Maestro workspace — and, for an attached item, which board —
+this session is anchored to — My Maestro sends one:
+`This session is anchored to Maestro workspace "My Maestro" (id 35), board "Backlog" (id 116) — use that for board resolution; it overrides .claude/maestro.json in this session.`
+— that line IS the board config for this session. It overrides
+`.claude/maestro.json`, whose board may belong to another workspace this repo
+also files into. Use the stated
+board; with a workspace alone, keep the file's board only if `get_board` shows it
+in that workspace, else `list_boards(<stated workspace id>)` and ask. The numbers
+in that line are the workspace and board ids — never item ids, never part of the
+task text — with one exception: a **continued** session sends a shorter form of
+the same line, which stops after the workspace and may end `, task #NNN` with a
+note that the replayed task read may be stale. THAT number is an item id: re-read
+it with `get_work_packet(NNN)` before acting on it. The short form carries the
+same authority as the long one.
+In every report and trail note, say which you used and why:
+`board "Backlog" (My Maestro workspace, id 116) — from the session's anchor`.
+
+1. Absent a session-stated workspace, read Maestro's repository config at
+   `.claude/maestro.json` in the repo root:
    `{"workspace": "<name or id>", "board": <board id>, "project": <project id>}`.
    `project` is **optional**, for when several repos share one board: it is the
    Project column value stamped on every item these skills file from this repo.
@@ -95,7 +114,16 @@ back — not one item that quietly staples them together.
 
 1. Call `get_workspace_context(workspace)` — apply any `rule` docs to your work.
    Reference docs by slug in the workspec ("Apply rules: ...") instead of
-   pasting their content.
+   pasting their content. When the work plainly needs a workspace skill (a
+   `skill` doc — a page change and the web developer skill), you may seed an
+   ``Apply skills: `<slug>` `` line beside it; scoping confirms or drops the pin.
+   Then read what the workspace already knows about
+   this area: `search_knowledge(<2-3 content words>, project=<workspace or
+   project id>)` for prior decisions and facts, and `get_knowledge_map(<the
+   workspace>)` when you need the lie of the land. Cite what applies in the
+   workspec's Investigation ("Prior knowledge: `<slug>` — …") so scoping starts
+   from it instead of rediscovering it; an entry that says the ask is already
+   settled or already shipped changes the filing, not the wording.
 2. Parse the task description from the arguments (or ask what they want). If it
    carries several separable pieces of work, name the split now — see "One Item
    or Many"; everything below then runs once per piece.
@@ -156,7 +184,11 @@ back — not one item that quietly staples them together.
    is fine), listing `list_milestones` when the user needs the options.
    Never block filing on it, and never create a milestone here — creation is
    scoping's call (`maestro-scope`'s stamp rule) or the human's.
-8. Name the new item as a **markdown link**, never a bare id — see "Naming an
+8. **Record what exploring taught.** A premise that is false, a measured limit,
+   a convention the code assumes — anything a stranger filing the next item
+   here would want to know: `upsert_workspace_doc(workspace, kind, slug, title, content)` with kind `decision` / `convention` / `fact`, one entry per fact, a stable slug, and a body a stranger can act on. Read the reply's `similar` before the next write — a near match means update that slug, not add a twin. Not recorded: the workspec
+   itself, transcripts, file dumps, anything already in the repo's own docs.
+9. Name the new item as a **markdown link**, never a bare id — see "Naming an
    Item" below — and hand off: "run `/maestro-scope <item-id>` to scope it."
    Several items: the table from "One Item or Many", then one hand-off line
    carrying every id — `/maestro-scope 431 432 438`, or `/maestro-auto 431 432

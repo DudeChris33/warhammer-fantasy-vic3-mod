@@ -2,16 +2,16 @@
 name: maestro-run
 description: >-
   Present a Plan's current roster with the context needed to run it, scope any
-  unscoped tasks up front and pause at a scope checkpoint â€” does the Plan still
-  hold? â€” record an explicit human roster approval, then execute its waves with
+  unscoped tasks up front and pause at a scope checkpoint — does the Plan still
+  hold? — record an explicit human roster approval, then execute its waves with
   fresh sub-agents and independently re-run their verification claims. Keep
   decisions on the Plan's trail and close with a full-roster reconciliation.
 user-invocable: true
 argument-hint: <one Plan item id, e.g. "2900">
-maestro-skill-version: 5
+maestro-skill-version: 10
 ---
 
-# Maestro Run â€” Execute an Approved Plan
+# Maestro Run — Execute an Approved Plan
 
 A Plan is a board item whose sub-items are its roster and whose waves are the
 order they ship in. **Calling `/maestro-run` asks to review and run that Plan;
@@ -20,8 +20,8 @@ ask for one explicit confirmation. If approval is needed, record their answer
 on the board before dispatching work. A missing approval is a reason to ask
 "Approve and run this roster?", not to end with "it is not approved". An
 unscoped roster is not a dead end either: the run scopes those tasks itself and
-pauses at the scope checkpoint below â€” what scoping learned, whether the Plan
-still holds â€” before asking for the roster approval.
+pauses at the scope checkpoint below — what scoping learned, whether the Plan
+still holds — before asking for the roster approval.
 
 The human decides; the orchestrator records that decision. A standing board
 approval remains valid for its roster version, but the current run still gets
@@ -40,9 +40,29 @@ You are the orchestrator, not the builder:
 - **You verify by re-executing.** A sub-agent's test result is a claim, not
   evidence. Re-running it is the whole point of the orchestrator existing.
 
+### Two kinds of helpers
+
+A run may have two very different helpers in flight, and they are not
+interchangeable:
+
+- **Fresh sub-agents** — this skill's own, spawned with the Agent tool. They
+  read, edit, test and commit in this checkout (or a worktree of it), and they
+  have no Maestro identity at all: they never write to the board, never hold a
+  lease, and never see a checkout token.
+- **Named teammates** — named agents (a Lead, a Software Engineer, a QA
+  Engineer) a person or a Lead asks with `ask_agent`. They work in their
+  OWN worktrees on `agent/<item id>-<role>` branches, push those branches, and
+  write to the board under their own role's ceiling and their owner's
+  supervision. A teammate reports to the Lead that asked it; the Lead reports
+  to you. Their procedure is the workspace skill "How this team ships work" —
+  read it if you need to know what they were told.
+
+Either way the claim is a claim: **you** re-execute it before it counts
+(`## Review Is Re-Execution`).
+
 ## When to Use It
 
-**One Plan item id**, whatever its roster size â€” `/maestro-run 2900`.
+**One Plan item id**, whatever its roster size — `/maestro-run 2900`.
 
 - **`/maestro-auto`** for flat filed items that have no Plan: it scopes them,
   builds them, and creates its own in-session approval gate along the way.
@@ -51,7 +71,7 @@ You are the orchestrator, not the builder:
 - **`/maestro-vibe`** for work too small to track.
 
 A childless Plan (`progress.total == 0`) is the plan-of-one: legal, approvable,
-and run as a single task â€” the Plan item itself.
+and run as a single task — the Plan item itself.
 
 Given several ids, ask which one is the Plan; this skill takes exactly one.
 Given a roster task's id instead of the Plan's, name the parent and offer to run
@@ -59,28 +79,29 @@ that.
 
 ## Board Resolution
 
-Same as `maestro-task`: read Maestro's `.claude/maestro.json` repo config; on any
+Same as `maestro-task`: a session-stated workspace in the first message comes
+first, else read Maestro's `.claude/maestro.json` repo config; on any
 miss, resolve via `whoami()` / `list_workspaces()` / `list_boards()`, ask, offer
-to write the file. Maestro unreachable or unauthenticated â†’ stop with an explicit
+to write the file. Maestro unreachable or unauthenticated → stop with an explicit
 notice; never fall back silently. This run cannot read a roster approval it
 cannot reach, and one that assumes an approval it never saw is exactly the
 failure the gate exists to prevent. Call `get_board(board, items=False)` once and
 keep the column schema; match stage options **by value**.
 
-Also from `maestro-task` â€” **step 5: name boards and items when you report them,
+Also from `maestro-task` — **step 5: name boards and items when you report them,
 never bare ids.** `board "Backlog" (Maestro workspace, id 8)`, `#586 "An agent
 cannot see what it deployed"`, with the item URL (format below); that lookup is
 far cheaper for you than for the user.
 
 **Step 7: pass `client=` (the client you are running in) and `model=` (your model
 id) on every `update_board_item`, `comment_on_item` and checkout call.** The
-server cannot observe either â€” a write that omits them lands in the trail under
+server cannot observe either — a write that omits them lands in the trail under
 the default label, "via Claude", whoever wrote it.
 
 ## Naming an Item
 
-Name the Plan and every roster task to the user â€” the gate card, checkpoints,
-the final report â€” as a markdown link, never a bare id:
+Name the Plan and every roster task to the user — the gate card, checkpoints,
+the final report — as a markdown link, never a bare id:
 
 ```
 [#<id> <title> (<stage>)](<url>)
@@ -89,9 +110,9 @@ the final report â€” as a markdown link, never a bare id:
 `url` comes from the tool result: `get_work_packet` and `get_board_item` return
 one; `get_board` returns an `item_url_template` with `{id}` to substitute. Never
 hand-assemble a host. In a repo with a GitHub remote the client auto-linkifies a
-bare `#123` to that repo's issue 123 â€” a live link to the wrong system.
+bare `#123` to that repo's issue 123 — a live link to the wrong system.
 
-## Pre-Flight â€” the approval gate
+## Pre-Flight — the approval gate
 
 1. **Read the Plan.** `get_work_packet(<plan id>)`. Its `plan` key carries the
    whole steering picture: `approval` (who approved which roster version, when),
@@ -99,53 +120,54 @@ bare `#123` to that repo's issue 123 â€” a live link to the wrong system.
    (`shipped` / `total` / `parked` / `rejected`), `roster_drift` and `mismatch`.
 2. **Read every roster task.** One `get_work_packet` per task, before the gate.
    The Plan payload is enough to sequence a run and not enough to execute one: a
-   task row carries `{id, title, stage, checkout, blocked_by}` and nothing else â€”
+   task row carries `{id, title, stage, checkout, blocked_by}` and nothing else —
    no verification tier, no run commands, no rules, no unaddressed comments.
    Those live only on the task's own packet, and every one of them changes what
-   you do with that task.
+   you do with that task. A packet also carries `knowledge.retrieved` — the
+   workspace entries nearest that task's workspec, beside `rules.applied` —
+   and `knowledge.reason` when the set is empty; both go into the task's brief.
 3. **Choose the confirmation, without treating missing approval as a dead end.**
-   - **`plan` is null** â€” the id is a sub-item (or a read you have no member
+   - **`plan` is null** — the id is a sub-item (or a read you have no member
      access to). Name its parent and offer to run that instead; do not approve
      or run the wrong item.
-   - **`status == "unapproved"`** â€” continue to the contextual roster card in
+   - **`status == "unapproved"`** — continue to the contextual roster card in
      step 8 and ask **"Approve and run this roster?"** Wait for the answer.
-   - **`status == "roster_changed"`** â€” include the added, removed, reordered
+   - **`status == "roster_changed"`** — include the added, removed, reordered
      and dead tasks in that card, then ask **"Approve the updated roster and
      run it?"** Do not run or record re-approval before the human answers.
-   - **`status == "approved"`** â€” name the standing approval and ask
+   - **`status == "approved"`** — name the standing approval and ask
      **"Run this roster?"** Do not request a second roster approval.
 
    In every branch: when the roster still holds unscoped tasks, step 8's card
    asks for consent to **scope** first, and the branch's roster question above
-   moves to the scope checkpoint â€” asked only after the human has seen what
+   moves to the scope checkpoint — asked only after the human has seen what
    scoping learned.
 4. **Children with `waves == []` are their own branch.**
    A Plan can be approved with no waves record: the snapshot stores `waves: []`,
    every child lands in `unscheduled`, and "run the waves" would ship nothing
-   while reporting success. Ask the human which they want â€” run `unscheduled` as
+   while reporting success. Ask the human which they want — run `unscheduled` as
    one implicit wave (sequenced by shared files, per the Run Loop), or stop so
    waves can be written. Never pick silently.
 5. **Say these out loud, without stopping:**
-   - `roster_drift.dead` ids at `approved` status â€” the approval snapshot names
+   - `roster_drift.dead` ids at `approved` status — the approval snapshot names
      children since archived or re-parented. Run the live roster; report the dead
      ids rather than dropping them silently.
-   - `mismatch` entries (`done_with_open_children` / `open_with_children_done`) â€”
+   - `mismatch` entries (`done_with_open_children` / `open_with_children_done`) —
      the Plan and its children already disagree before you start.
-   - `unscheduled` tasks â€” active children in no wave. **They are not part of
+   - `unscheduled` tasks — active children in no wave. **They are not part of
      this run** unless step 4's decision just made them one, and they are listed
      again at reconciliation.
-   - `plan.progress` â€” record it verbatim as the run's **opening scoreboard**.
+   - `plan.progress` — record it verbatim as the run's **opening scoreboard**.
      Every number in the closing report is measured against it.
 6. **Address the steering first.** Work the PLAN's `unaddressed_comments` before
    anything else: `comment_on_item(<plan>, <the answer>, addresses=[<note ids>])`
    (or `addresses="all"`). This is not politeness. A `directive` left standing on
    the Plan makes the server's own parent rollup refuse, and that refusal
-   surfaces as an error on the **last task's** stage write â€” the run fails at its
+   surfaces as an error on the **last task's** stage write — the run fails at its
    final step, not at close-out. Per-task unaddressed directives are addressed
    before that task dispatches.
-7. **Decide the baseline now.** From the per-task packets, note whether any
-   task's `contract.tier` is `full`. That is the only thing that triggers a
-   run-level baseline, and the Run Loop takes it before the first edit.
+7. **No baseline.** Nothing runs before the first edit, at any tier; each wave
+   ends with one default-suite run after its merges (see "The Run Loop").
 8. **Present the context, then get one yes.** Start with the Plan's outcome in
    plain language and what this run will actually do. One block per wave, in
    the Plan's order; each task gets its linked title, intended outcome, stage,
@@ -157,7 +179,7 @@ bare `#123` to that repo's issue 123 â€” a live link to the wrong system.
 
    Say what the yes authorizes. Fully scoped roster: executing it under the
    stated constraints. Unscoped tasks present: this first yes authorizes only
-   read-only scoping and the board push of the approaches â€” the roster approval
+   read-only scoping and the board push of the approaches — the roster approval
    itself waits for the scope checkpoint. Neither yes waives directives,
    approves an unknown solution, takes over another checkout, adds tasks, or
    authorizes deployment, live configuration changes or money movement unless
@@ -166,29 +188,29 @@ bare `#123` to that repo's issue 123 â€” a live link to the wrong system.
 
    Example card (fill in the real packet facts, never placeholders):
 
-       Plan [#2900 "Sites + domains â€” release hardening"](â€¦) Â· board "Backlog"
-       Â· workspace "Maestro" Â· progress 0 shipped / 3 total
+       Plan [#2900 "Sites + domains — release hardening"](…) · board "Backlog"
+       · workspace "Maestro" · progress 0 shipped / 3 total
        Outcome: visitors get a usable error page and domain claims are safe.
        Approval covers these three tasks; no production deployment.
 
        Wave 1
-         [#2941 "Provision the unknown-site page"](â€¦) Â· planned Â· targeted
+         [#2941 "Provision the unknown-site page"](…) · planned · targeted
            Render a recoverable missing-site page; checkout none; no blockers.
-         [#2942 "Rate-limit the claim endpoint"](â€¦) Â· inbox Â· not scoped yet
+         [#2942 "Rate-limit the claim endpoint"](…) · inbox · not scoped yet
            Bound claim attempts; choose the limit during scoping;
            checkout none; no blockers.
        Wave 2
-         [#2944 "Delegated ACME for BYO domains"](â€¦) Â· planned Â· full
+         [#2944 "Delegated ACME for BYO domains"](…) · planned · full
            Automate certificate validation; checkout none;
            blocked_by: the two named Wave 1 tasks.
        Unscheduled (not in this run): none
 
-       #2942 is not scoped yet â€” scope it read-only now and return with the
+       #2942 is not scoped yet — scope it read-only now and return with the
        scope digest for roster approval?
 
    On a fully scoped roster the card closes with the step-3 roster question
-   instead â€” "Approve and run this roster â€” 3 tasks, 2 waves, one closing
-   suite?" â€” and that one answer both confirms the intended item and, when
+   instead — "Approve and run this roster — 3 tasks, 2 waves, one closing
+   suite?" — and that one answer both confirms the intended item and, when
    asked, authorizes recording approval. Do not ask a second generic
    confirmation. A decline, ambiguous reply or no reply records no approval
    and dispatches no work. Ask in the interactive chat; use the async handoff
@@ -210,10 +232,10 @@ bare `#123` to that repo's issue 123 â€” a live link to the wrong system.
    An unattended run cannot supply a human yes. A roster change after approval
    pauses execution and returns to this same contextual confirmation.
 
-## The Scope Checkpoint â€” scope first, then approve
+## The Scope Checkpoint — scope first, then approve
 
 A roster with unscoped tasks is scoped up front, before the roster approval is
-recorded â€” never inline mid-wave, where what scoping learns can no longer
+recorded — never inline mid-wave, where what scoping learns can no longer
 change what was approved.
 
 1. **Scope every unscoped task.** One read-only scoping agent per task, brief
@@ -224,37 +246,40 @@ change what was approved.
    description; write it with `update_board_item(item, description=<the whole
    document>, values={"stage": "planned"}, contract=<the agent's
    tier/run/evidence>, client=..., model=...)`. The description replaces the
-   entire workspec â€” push the agent's full document, never a fragment.
-3. **Cross-check the set** â€” the sibling coherence pass `maestro-scope` runs:
+   entire workspec — push the agent's full document, never a fragment. Then
+   write the durable findings it returned (the rule is under Reconciliation)
+   — a premise that turned out false is a `fact` the next scoper needs now,
+   not at close-out.
+3. **Cross-check the set** — the sibling coherence pass `maestro-scope` runs:
    contradictory approaches, duplicated work, two tasks inventing the same
    helper, migration numbering collisions, seams that belong on the trail
    (record them per "Record cross-plan seams"). Fix by re-briefing a scoping
    agent, never by quietly editing its plan into shape.
 4. **Present the scope digest and ask the deferred roster question.** Lead
    with the verdict the human is here for: **does the Plan still hold?** Then
-   one block per task â€” linked title, the approach in a sentence or two, its
+   one block per task — linked title, the approach in a sentence or two, its
    verification tier, files touched, and the premise check's findings. Name
    plainly anything scoping found false, already shipped, or bigger than
    filed, each with a recommendation: run as scoped, re-shape, or park. Then
-   ask Pre-Flight step 3's deferred question â€” "Approve and run this roster?",
-   or "Run this roster?" under a standing approval â€” and continue at
+   ask Pre-Flight step 3's deferred question — "Approve and run this roster?",
+   or "Run this roster?" under a standing approval — and continue at
    Pre-Flight step 9. A broken premise stops short of building: propose the reshape and wait;
    the human edits the roster on the board and the run re-enters Pre-Flight
    against the new roster version.
 
-Scoping spends reading and board writes only â€” exactly what the gate's first
+Scoping spends reading and board writes only — exactly what the gate's first
 yes authorized. No build agent starts before the digest's question is answered.
 
 ## Checkout lifecycle
 
-The orchestrator â€” not any sub-agent â€” owns every checkout token.
+The orchestrator — not any sub-agent — owns every checkout token.
 
 Take one lease on the **PLAN item** for the whole run:
 `acquire_board_item_checkout(<plan>, purpose="build", idempotency_key=<fresh
-high-entropy key>, expected_minutes=â€¦)`. `purpose` accepts only `"scope"` or
+high-entropy key>, expected_minutes=…)`. `purpose` accepts only `"scope"` or
 `"build"`; there is no `"run"`, and `build` is the honest one for a session that
 is shipping code. Then take a per-task lease before that task's scope or build,
-and check it in on its terminal path â€” the stage write, the blocker comment, a
+and check it in on its terminal path — the stage write, the blocker comment, a
 cancellation, a dropped task. Use a fresh high-entropy idempotency key per
 acquisition generation.
 
@@ -285,12 +310,12 @@ The Plan lease is how mission control watches this run. `renew_board_item_checko
 carries the report and writes no trail note, so one round trip both heartbeats
 and reports:
 
-- **`activity`** is the live sentence â€” "wave 2 of 3 â€” building #2941",
+- **`activity`** is the live sentence — "wave 2 of 3 — building #2941",
   "re-running the closing suite", "blocked: waiting on a human answer".
 - **`criteria` + `criteria_count`** tick the PLAN workspec's
   `### Acceptance Criteria` ordinals as tasks land. Send them **only when the
   Plan's workspec actually has that checkbox list**. The list is a filing
-  convention, not a server guarantee, and `criteria_count` must be at least 1 â€”
+  convention, not a server guarantee, and `criteria_count` must be at least 1 —
   on a Plan without one, send `activity` alone.
 
 **A rejected report rejects the renewal with it.** Criteria ticked against a Plan
@@ -301,7 +326,7 @@ bare immediately, then fix the payload.
 After a reacquire the report starts empty, so the first check-in of the new
 generation re-posts the full current state rather than a delta.
 
-Check in at wave boundaries, at each dispatch and return, and on every blocker â€”
+Check in at wave boundaries, at each dispatch and return, and on every blocker —
 still never more than 40 minutes apart. Task-level progress needs no extra
 writes: mission control reads each task's stage straight out of the Plan payload.
 
@@ -318,8 +343,8 @@ as green and are not:
 - **`blocked_by` empty is not "prerequisites delivered".** Parked and rejected
   both count as finished, so a parked wave-1 task unblocks wave 2 while its
   foundation is missing. That is a human checkpoint, not a green light.
-- **`review` is not finished.** A prerequisite that landed at `review` â€” the PR
-  path â€” blocks its dependents server-side and keeps blocking them until somebody
+- **`review` is not finished.** A prerequisite that landed at `review` — the PR
+  path — blocks its dependents server-side and keeps blocking them until somebody
   merges it. When a wave stalls on a `review`-stage prerequisite, surface it as a
   named checkpoint (merge it, accept it, or re-sequence) rather than waiting for
   a state that will not arrive on its own.
@@ -330,26 +355,30 @@ other.
 
 **Within a wave, sequence by shared files.** Two tasks whose plans touch the same
 file, or migrate the same app, run in order. The rest parallelize only where the
-repo's own rules say a checkout is isolated â€” its own test database, port and
+repo's own rules say a checkout is isolated — its own test database, port and
 cache namespace. Verify that against the repo's rules; do not infer it from the
 existence of worktrees.
 
 **Route each task from its own packet:**
 
 - `inbox` with no `## Approach` (nor the legacy `## Plan` heading, which is read
-  forever) â†’ should not exist at dispatch: the scope checkpoint precedes the
-  roster approval. One that does â€” a failed push, a checkpoint miss â€” pauses
+  forever) → should not exist at dispatch: the scope checkpoint precedes the
+  roster approval. One that does — a failed push, a checkpoint miss — pauses
   its wave and goes back through the checkpoint; never scope-and-build inline
   mid-wave.
-- `planned` with an approach â†’ build.
-- parked or rejected â†’ skip and report; parking is a deliberate "not now" and its
+- `planned` with an approach → build.
+- parked or rejected → skip and report; parking is a deliberate "not now" and its
   plan is presumed stale.
-- already `done` or `review` â†’ count as shipped, do not re-run.
+- already `done` or `review` → count as shipped, do not re-run.
 
-**Baseline before the first edit.** If any task's `contract.tier` is `full` â€”
-known since Pre-Flight â€” take the repo's green baseline once, for the whole run,
-before the first build agent starts. A red baseline stops the run; never build a
-roster on red. Below `full` there is no baseline at all.
+**One suite per wave.** When a wave's last task has landed in the primary tree,
+run the repo's default suite there once — the wave's run. It replaces any
+baseline and any per-task full run: a `full` task's suite is its wave's run. A
+wave whose tasks are all `none` runs none. Judge a red run under
+`maestro-build`'s "Judging a Red Run", attribute each new failure to the wave's
+task that owns the touched files, fix, and rerun once per fix round. The next
+wave dispatches only on a wave run that is green or whose every failure is
+attributed.
 
 **Record cross-plan seams before the builds that consume them.** Where two roster
 tasks share a contract, helper, file or migration, post the seam on each task's
@@ -361,31 +390,40 @@ not on the trail is a seam the second agent never sees.
 
 Every brief carries, without exception:
 
-- **The item id and its work packet** â€” the workspec, its rules, its contract.
+- **The item id and its work packet** — the workspec, its rules, its contract.
 - **The binding trail note ids** it must honor, quoted by id: seams recorded
   above, human directives, deviations already accepted in this run. "Honor the
   trail" is not a brief; the ids are.
-- **The as-built shapes of roster siblings already landed in this run** â€” actual
+- **The as-built shapes of roster siblings already landed in this run** — actual
   names and signatures as built, not as planned. The plan is what was intended;
   the agent has to compile against what exists.
-- **The repo's Maestro workflow** â€” its own rules files, git conventions, test
+- **The repo's Maestro workflow** — its own rules files, git conventions, test
   commands and doc tracks.
 - **That task's verification contract**, tier and named runs included.
+- **The packet's `knowledge.retrieved` entries** — the workspace's memory
+  nearest this task, applied beside the rules; the agent says when one
+  changes the approach.
 
 **Scoping agents are read-only.** They return the complete updated description
 (human block, `## Spec`, the `## Approach` they just wrote) plus, separately: the
 files they intend to touch, the verification contract in `{"tier", "run",
 "evidence"}` shape, schema and migration impact, contract changes for existing
-callers, and a premise check naming anything in the workspec that turned out
-false or already shipped.
+callers, a premise check naming anything in the workspec that turned out
+false or already shipped, and their durable findings as `{kind, slug, title,
+content}` rows — decisions with a rejected alternative, conventions the code
+assumes, facts measured or discovered — which you write at the scope
+checkpoint, because no agent holds a knowledge tool.
 
 **Build agents** edit and commit per the repo's git conventions, run **no** suite
-â€” they write tests as part of the change and verification is yours â€” never `git
+— they write tests as part of the change and verification is yours — never `git
 push`, and never write to the board. The one exception is a bug's regression
 test, which the agent runs alone before the fix and after, because a regression
-test nobody saw fail proves nothing.
+test nobody saw fail proves nothing. They return durable findings the same way
+scoping agents do; you write them at reconciliation.
 
-No agent ever receives a checkout token, and no agent ever calls a board tool.
+No **sub-agent** ever receives a checkout token or calls a board tool; a
+named teammate's board writes are its own role's, under its owner's
+supervision.
 
 ## Review Is Re-Execution
 
@@ -393,16 +431,21 @@ No agent ever receives a checkout token, and no agent ever calls a board tool.
 vacuous pass ships, and it is the single failure this skill exists to prevent.
 The gate is tier-aware:
 
-- **`targeted`** â†’ re-run that task's `contract.run` commands yourself, in the
-  primary tree.
-- **`full`** â†’ the `run` entries are riders; run them if named, but the real
-  proof is the run-level closing suite below.
-- **`none`** â†’ the contract names what stands in for tests: a rendered page, a
+- **`targeted`** → re-run that task's `contract.run` commands yourself, in the
+  primary tree. When a **named teammate** did the work, its claim lives on a
+  branch you do not have: `git fetch origin <branch>` first — the branch name
+  it reported, `agent/<item id>-<role>` — and run the contract on a worktree of
+  THAT branch (`git worktree add`, never a switch in the primary tree, which
+  may hold another build's uncommitted work). A claim on a branch nobody
+  fetched was never re-executed.
+- **`full`** → the `run` entries are riders; run them if named, but the real
+  proof is its wave's suite.
+- **`none`** → the contract names what stands in for tests: a rendered page, a
   command's output, a config taking effect. Verify **that named thing**. Zero
   tests collected is the expected shape here, not a failure.
 
-**Everywhere: compare exact numbers.** Run, passed, failed, skipped â€” against the
-baseline or the previous run, never "green" against "green".
+**Everywhere: compare exact numbers.** Run, passed, failed, skipped — against the
+previous run of the same target, never "green" against "green".
 
 Treat as a FAIL, at any tier that claims tests:
 
@@ -416,18 +459,16 @@ Treat as a FAIL, at any tier that claims tests:
 and touch the claimed files, the working tree is clean, nothing is staged from
 another task, and the item's stage and trail say what actually happened.
 
-**Deviations are accepted explicitly on the trail** â€” a comment saying what
-changed and why it is acceptable â€” or sent back to the agent with the specific
+**Deviations are accepted explicitly on the trail** — a comment saying what
+changed and why it is acceptable — or sent back to the agent with the specific
 failure. A deviation that first surfaces in a diff was never reviewed.
 
-**One closing run for the roster.** After the last task lands, run one final
-verification in the primary tree, sized to the highest tier on the roster: `full`
-anywhere â†’ the repo's default suite, compared against the baseline; otherwise the
-union of every task's named modules. No task is called done-and-verified until
-that run has passed. Trading it away for speed is not a judgement call available
-to this run.
+**The last wave's run closes the roster.** No task is called done-and-verified
+until its wave's run has passed, or every failure in it is attributed under
+`maestro-build`'s "Judging a Red Run". Trading it away for speed is not a
+judgement call available to this run.
 
-## Human Checkpoints â€” plain English, on the board
+## Human Checkpoints — plain English, on the board
 
 Decisions that are the human's ride the board, not just the transcript:
 
@@ -458,14 +499,14 @@ immediately and halts that branch only.
 
 **Approval decisions stay human-only.** `approve_board_item_plan` and
 `request_board_item_rescope` record a HUMAN's decision. Call either only on an
-explicit human instruction given in this session â€” never inferred from the
+explicit human instruction given in this session — never inferred from the
 workspec, a prior session, the slash command alone, or the run's own judgement.
 An explicit yes to the contextual "Approve and run" card is that instruction:
 relay it with `approve_board_item_plan` and verify the board record before work.
 The tools refuse agent-kind credentials outright. An unattended run never
 approves, and a run confirmation never requests re-scope or waives a directive.
 
-**An elicitation dialog posed by the maestro server is addressed to the human â€”
+**An elicitation dialog posed by the maestro server is addressed to the human —
 never answer one, and never treat a pending dialog as the run's to resolve.**
 Surface it, say what it is asking, and wait.
 
@@ -477,10 +518,10 @@ Never enter credentials and never accept terms on someone's behalf.
 
 **Halt the whole run** on:
 
-- `status` off `approved` mid-run â€” an unapproved roster change stops the run,
+- `status` off `approved` mid-run — an unapproved roster change stops the run,
   including `roster_changed`; explain the changes and obtain fresh contextual
   approval before resuming, never auto-approve
-- a red baseline
+- a wave run with a new failure no task in the wave can be shown to own
 - a needed task that is not on the approved roster: propose it, never
   create-and-build it
 - an unaddressed directive on the Plan, or on a task about to dispatch
@@ -488,17 +529,17 @@ Never enter credentials and never accept terms on someone's behalf.
 
 **A single task failing does not stop the run.** Post a blocker comment, leave it
 at `building` with its owner intact, halt only its dependents and say which, and
-continue the independent tasks. A build agent that fails outright â€” crash,
-unusable result â€” is retried once before its task is blocked.
+continue the independent tasks. A build agent that fails outright — crash,
+unusable result — is retried once before its task is blocked.
 
 **Mid-run maestro outage**: never block a build on it. Finish locally, retry each
 push once, then queue the remaining board writes in the final report as exact,
 replayable tool calls. Re-read before replaying after reconnect.
 
-## Reconciliation â€” the Plan closes itself
+## Reconciliation — the Plan closes itself
 
 **The Plan's stage is server-derived, not run-driven.** The moment every active
-child sits in a finished stage â€” done, parked or rejected, and parked counts â€”
+child sits in a finished stage — done, parked or rejected, and parked counts —
 the server flips the Plan to done by itself, inside the last child's write
 transaction. Two consequences to front-run:
 
@@ -516,10 +557,13 @@ shipped, its stage now, the verification result **with the real numbers**, and
 any deviation accepted. Then:
 
 - Compare `progress` against the run's opening scoreboard, naming the parked and
-  `review` gap explicitly â€” `progress.shipped` counts `done` only.
+  `review` gap explicitly — `progress.shipped` counts `done` only.
 - Name every task that is not `done` and what it needs.
 - Post that full-roster report as a `comment_on_item` on the **Plan item's
-  trail** â€” that is the durable record, not this transcript.
+  trail** — that is the durable record, not this transcript.
+- Record what the run learned — every durable finding the agents returned and
+  every decision you took on the trail that will bind a later build (a seam,
+  an accepted deviation with its reason): `upsert_workspace_doc(workspace, kind, slug, title, content)` with kind `decision` / `convention` / `fact`, one entry per fact, a stable slug, and a body a stranger can act on. Read the reply's `similar` before the next write — a near match means update that slug, not add a twin. Not recorded: transcripts, file dumps, tool logs, anything already in the repo's own docs. Name the slugs in the report.
 - Check in the Plan checkout.
 - Give the user the same thing TL;DR-first, roughly 20 lines, every item a
   markdown link.
@@ -529,13 +573,13 @@ because work remains, the report says why the Plan stays open.
 
 ## Forbidden
 
-- Starting on an unapproved or drifted roster â€” `unapproved` and
+- Starting on an unapproved or drifted roster — `unapproved` and
   `roster_changed` need contextual human approval recorded before dispatch
 - Ending an interactive pre-flight at "not approved" instead of presenting
   the roster, its scope and blockers, and asking whether to approve and run
 - Treating `/maestro-run` itself, silence or an ambiguous answer as approval
 - Recording roster approval, or dispatching a build agent, while a roster task
-  is still unscoped â€” the scope checkpoint comes first
+  is still unscoped — the scope checkpoint comes first
 - Running an approved-but-unwaved roster without the human choosing that
 - Approving a plan or requesting a re-scope without an explicit human instruction
   given in this session
@@ -548,6 +592,7 @@ because work remains, the report says why the Plan stays open.
 - Creating roster tasks mid-run
 - Writing the Plan's stage by hand
 - Concurrent builds where the repo does not isolate checkouts
-- Trading the re-execution gate or the closing run away for speed
+- Trading the re-execution gate or a wave's run away for speed, or taking a
+  baseline
 - Ending the run with any task's stage stale, or without the full-roster report
   on the Plan's trail
