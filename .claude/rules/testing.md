@@ -282,7 +282,18 @@ gate. `python tools/validate_map.py` (full) runs `_check_hub_anchors` on the rea
 map when that index exists; `python tools/render_hubs_preview.py` is the dev-only
 review render (source-dependent, gitignored `tools/derived/` output). Absent (no
 worksheet), every one of these paths is dormant and the map is byte-identical to a
-no-hub run.
+no-hub run. **Stacking (board #3666):** a `stack_on` row shares its host's exact
+anchor pixel, seeds nothing and is exempt from `MIN_ANCHOR_SEP`; the index's
+`region` is the post-cut `reg_of[province]`. `python tools/run_fixture.py --check`
+gained `_selfcheck_hub_stack` (shared-anchor pair ok; stray, chained,
+`stack_on == hub`, and two-non-stack-on-a-pixel rows refused, all listed at once;
+stack rows add no seed; index carries the host colour + post-cut region;
+validator fails a stack colour != host, a stacked port on an inland host, and an
+orphan stack entry) and `_selfcheck_hub_validator` gained the passable-only
+sharing rule. `tools/tww3_name_lookup.py --city-dots [--state-file <stem>]` is a
+dev-only, read-only drafting aid outside the gate (gitignored
+`tools/derived/tww3_city_dots_<stem>.csv`; clean-skips without
+`sources/cr_oldworld_campaign/`).
 `tools/render_land_regions_preview.py` is the matching **dev-only** review
 render, outside the gate above: a numbered review PNG + a `tools/derived/`
 worksheet sidecar that round-trips names already committed in
