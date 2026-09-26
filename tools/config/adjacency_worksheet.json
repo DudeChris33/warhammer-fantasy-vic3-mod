@@ -33,8 +33,8 @@
         3067,
         3043
       ],
-      "type": "canal_isles_of_dawn",
-      "comment": "Isles of Dawn"
+      "type": "canal_isles_of_dusk",
+      "comment": "Isles of Dusk"
     },
     {
       "a": [
@@ -297,7 +297,7 @@
         3668,
         965
       ],
-      "type": "canal_nuln_r",
+      "type": "canal_nuln_b",
       "comment": "Nuln"
     },
     {
@@ -381,8 +381,8 @@
         4160,
         1085
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_lower_reik_b",
+      "comment": "Lower River Reik"
     },
     {
       "a": [
@@ -393,8 +393,8 @@
         4143,
         959
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_lower_reik_t",
+      "comment": "Lower River Reik"
     },
     {
       "a": [
@@ -405,8 +405,8 @@
         4142,
         944
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_ash_t",
+      "comment": "Ash River"
     },
     {
       "a": [
@@ -417,8 +417,8 @@
         4108,
         1693
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_lynsk",
+      "comment": "Lynsk River"
     },
     {
       "a": [
@@ -429,8 +429,8 @@
         4401,
         670
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Forest of Sighs"
     },
     {
       "a": [
@@ -441,8 +441,8 @@
         4051,
         1027
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "South Estalian Island"
     },
     {
       "a": [
@@ -453,8 +453,8 @@
         3694,
         1194
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Zorn Uzkul"
     },
     {
       "a": [
@@ -465,8 +465,8 @@
         4779,
         597
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Zorn Uzkul"
     },
     {
       "a": [
@@ -477,8 +477,8 @@
         4760,
         587
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "River Stir"
     },
     {
       "a": [
@@ -489,8 +489,8 @@
         4251,
         890
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_mymidens",
+      "comment": "Myrmidens"
     },
     {
       "a": [
@@ -501,8 +501,8 @@
         4018,
         1293
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_altdork_l",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -513,8 +513,8 @@
         4091,
         858
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Kislev River"
     },
     {
       "a": [
@@ -525,8 +525,8 @@
         4296,
         456
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "River Grismerie"
     },
     {
       "a": [
@@ -537,8 +537,8 @@
         3964,
         889
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Sjotraken"
     },
     {
       "a": [
@@ -549,8 +549,8 @@
         4456,
         447
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_blades",
+      "comment": "Sea of Blades"
     },
     {
       "a": [
@@ -561,8 +561,8 @@
         4238,
         488
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -573,8 +573,8 @@
         3796,
         1200
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_east_estalian_isles",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -585,8 +585,8 @@
         3798,
         1253
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_nuln_r",
+      "comment": "Nuln"
     },
     {
       "a": [
@@ -597,8 +597,8 @@
         4143,
         947
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_lower_ruin",
+      "comment": "Lower River Ruin"
     },
     {
       "a": [
@@ -609,8 +609,8 @@
         4946,
         1442
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_erengrad",
+      "comment": "Erengrad"
     },
     {
       "a": [
@@ -621,8 +621,8 @@
         4308,
         673
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_brionne",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -633,8 +633,8 @@
         3814,
         1022
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Zharr Naggrund"
     },
     {
       "a": [
@@ -645,8 +645,8 @@
         4932,
         812
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "River Aver"
     },
     {
       "a": [
@@ -657,8 +657,8 @@
         4196,
         946
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_grismerie",
+      "comment": "River Grismerie"
     },
     {
       "a": [
@@ -669,8 +669,8 @@
         3903,
         846
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Bitter Sea"
     },
     {
       "a": [
