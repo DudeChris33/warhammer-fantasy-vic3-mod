@@ -25,7 +25,9 @@ Point = tuple[int, int]
 #: The exact paint colour of the source layer (no tolerance).
 YELLOW_RGB = (255, 255, 0)
 #: A window around an endpoint must have one province holding at least this share.
-DOMINANT_FRACTION = 0.7
+DOMINANT_FRACTION = 0.65
+#: Endpoint window radius (1 = 3x3): provinces can be narrow, a wider window straddles them.
+ENDPOINT_RADIUS = 1
 #: Skeleton pixels allowed off the endpoint-to-endpoint path (spur tolerance).
 SPUR_PX = 4
 #: Worksheet-to-line endpoint match tolerance (px, Chebyshev).
@@ -207,7 +209,7 @@ def extract_lines(mask: np.ndarray, wrap_x: bool = True) -> list[Line]:
 # Endpoint -> province
 # ---------------------------------------------------------------------------
 
-def resolve_endpoint(code_map: np.ndarray, p: Point, radius: int = 2, wrap_x: bool = True
+def resolve_endpoint(code_map: np.ndarray, p: Point, radius: int = ENDPOINT_RADIUS, wrap_x: bool = True
                      ) -> tuple[Color | None, list[Color]]:
     """The dominant province colour in a ``radius`` window around ``p``.
 

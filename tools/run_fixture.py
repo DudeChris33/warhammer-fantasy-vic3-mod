@@ -2321,6 +2321,7 @@ def _selfcheck_adjacencies() -> None:
     rgb = np.zeros((H, W, 3), dtype=np.uint8)
     for i, c in enumerate(cols):
         rgb[:, i * 10:(i + 1) * 10] = c
+    rgb[0:2, 30:32] = E  # a 3-province corner at (30, 1): an ambiguous tip
     code = ((rgb[..., 0].astype(np.uint32) << 16) | (rgb[..., 1].astype(np.uint32) << 8)
             | rgb[..., 2].astype(np.uint32))
     kinds = {c: "land" for c in cols}
