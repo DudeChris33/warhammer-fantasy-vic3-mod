@@ -12,10 +12,14 @@ single triangle-warp registration, like ``render_land_regions_preview.py``) and
 writes into ``tools/derived/`` (gitignored) — a dev-only artifact, run on the
 user's authoring machine. Outputs the whole world plus a tight crop around the
 listed hubs, since a proving-slice of a few states is otherwise lost on the
-8192-wide canvas.
+8192-wide canvas. ``--bbox X0 Y0 X1 Y1`` pins that crop to one realm instead
+(e.g. ``--bbox 3850 150 4750 850`` for Kislev + Norsca, board #3668) and
+``--font-size N`` shrinks the labels (and dots) for a dense realm; both default to
+the original behaviour.
 """
 from __future__ import annotations
 
+import argparse
 import json
 import sys
 import time
@@ -70,7 +74,34 @@ def _province_labels(rgb: np.ndarray, prov_cells: list[dict]) -> np.ndarray:
     return lut[inv].reshape(code.shape)
 
 
+def crop_box(hubs: list[dict], bbox: list[int] | None, pad: int = 240
+             ) -> tuple[int, int, int, int] | None:
+    """The crop rectangle: ``bbox`` clamped to the canvas, else the listed hubs'
+    extent + ``pad``; ``None`` when there is nothing to crop to."""
+    if bbox is not None:
+        x0, y0, x1, y1 = bbox
+        x0, x1 = max(0, min(x0, x1)), min(CANVAS_W, max(x0, x1))
+        y0, y1 = max(0, min(y0, y1)), min(CANVAS_H, max(y0, y1))
+        if x1 <= x0 or y1 <= y0:
+            raise SystemExit(f"--bbox {bbox} does not overlap the {CANVAS_W}x{CANVAS_H} canvas")
+        return x0, y0, x1, y1
+    xs = [int(h["resolved"][0]) for h in hubs]
+    ys = [int(h["resolved"][1]) for h in hubs]
+    if not xs:
+        return None
+    return (max(0, min(xs) - pad), max(0, min(ys) - pad),
+            min(CANVAS_W, max(xs) + pad), min(CANVAS_H, max(ys) + pad))
+
+
 def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
+    ap.add_argument("--bbox", type=int, nargs=4, metavar=("X0", "Y0", "X1", "Y1"),
+                    help="crop the _crop output to this canvas rectangle (default: the hubs' extent + 240 px)")
+    ap.add_argument("--font-size", type=int, default=30,
+                    help="label font size in canvas px (default 30); the dot radius scales with it")
+    args = ap.parse_args(argv)
+    if args.font_size < 4:
+        raise SystemExit("--font-size must be >= 4")
     t0 = time.time()
     for p in (PROVINCES_PNG, PROVINCES_INDEX, HUB_ANCHORS_INDEX):
         if not p.is_file():
@@ -90,14 +121,16 @@ def main(argv: list[str] | None = None) -> int:
 
     img = Image.fromarray(out)
     draw = ImageDraw.Draw(img)
-    font = rlr._load_font(30)
-    r = 9
+    font = rlr._load_font(args.font_size)
+    r = max(3, round(args.font_size * 0.3))  # 9 at the default 30
+    stroke = max(1, round(args.font_size / 10))  # 3 at the default 30
     for h in hub_index["hubs"]:
         rx, ry = int(h["resolved"][0]), int(h["resolved"][1])
         col = _HUB_DOT.get(h["hub"], (255, 0, 255))
-        draw.ellipse([rx - r, ry - r, rx + r, ry + r], fill=col, outline=(0, 0, 0), width=2)
-        draw.text((rx + r + 4, ry - 16), f"{h['name']} ({h['hub']})", fill=(0, 0, 0),
-                  font=font, stroke_width=3, stroke_fill=(255, 255, 255))
+        draw.ellipse([rx - r, ry - r, rx + r, ry + r], fill=col, outline=(0, 0, 0),
+                     width=2 if r >= 6 else 1)
+        draw.text((rx + r + 4, ry - round(args.font_size * 16 / 30)), f"{h['name']} ({h['hub']})",
+                  fill=(0, 0, 0), font=font, stroke_width=stroke, stroke_fill=(255, 255, 255))
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     img.save(OUT_PATH)
@@ -105,12 +138,9 @@ def main(argv: list[str] | None = None) -> int:
     img.resize((CANVAS_W // 2, CANVAS_H // 2)).save(OUT_HALF_PATH)
     log(f"wrote {OUT_HALF_PATH}  ({CANVAS_W // 2}x{CANVAS_H // 2})", t0)
 
-    xs = [int(h["resolved"][0]) for h in hub_index["hubs"]]
-    ys = [int(h["resolved"][1]) for h in hub_index["hubs"]]
-    if xs:
-        pad = 240
-        x0, x1 = max(0, min(xs) - pad), min(CANVAS_W, max(xs) + pad)
-        y0, y1 = max(0, min(ys) - pad), min(CANVAS_H, max(ys) + pad)
+    box = crop_box(hub_index["hubs"], args.bbox)
+    if box is not None:
+        x0, y0, x1, y1 = box
         img.crop((x0, y0, x1, y1)).save(OUT_CROP_PATH)
         log(f"wrote {OUT_CROP_PATH}  ({x1 - x0}x{y1 - y0})", t0)
     return 0
