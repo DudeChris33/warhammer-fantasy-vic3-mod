@@ -511,6 +511,10 @@ def _parse_adjacency_edges(path: Path | None) -> set[frozenset]:
     return edges
 
 
+#: Mirrors land_provinces.PAINT_NOISE_PX (Chris, 2026-09-26: 4 px grazing tolerance).
+_CITY_GRAZE_PX = 4
+
+
 def _check_city_blobs(code: np.ndarray, cities_rgba: np.ndarray,
                       water_colors: set | None = None) -> list[str]:
     """Every 4-connected blob of the ``cities`` layer must have all its *land*
@@ -532,6 +536,13 @@ def _check_city_blobs(code: np.ndarray, cities_rgba: np.ndarray,
         cols = np.unique(code[sl][sel])
         if wcodes.size:
             cols = cols[~np.isin(cols, wcodes)]
+        if cols.size > 1:
+            # Same graze tolerance as the cut (land_provinces.PAINT_NOISE_PX): a
+            # province holding only a few blob px across a frozen border is clipped.
+            vals, cnts = np.unique(code[sl][sel], return_counts=True)
+            keep = cnts > _CITY_GRAZE_PX
+            if keep.any():
+                cols = np.array([v for v, k in zip(vals, keep) if k and v in cols], dtype=cols.dtype)
         if cols.size > 1:
             ys, xs = np.nonzero(sel)
             cy, cx = int(ys.mean()) + sl[0].start, int(xs.mean()) + sl[1].start

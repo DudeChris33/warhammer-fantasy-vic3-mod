@@ -2062,6 +2062,13 @@ def _selfcheck_city_blobs() -> None:
     assert vm._check_city_blobs(code_of(base), cities), "validator must flag a split blob"
     assert not vm._check_city_blobs(code_of(lab), cities), "validator must pass a whole blob"
     assert not vm._check_city_blobs(code_of(base), rgba()), "empty layer must skip"
+    # Graze tolerance: a blob with <= 4 px in a second province passes; 5 px fails.
+    gc = np.full((H, W), 1000, dtype=np.uint32)
+    gb = rgba((10, 12, 10, 15))                      # 10 px blob
+    gc[10, 10:14] = 2000                             # 4 px elsewhere
+    assert not vm._check_city_blobs(gc, gb), "4 px graze must be tolerated"
+    gc[10, 14] = 2000                                # 5 px
+    assert vm._check_city_blobs(gc, gb), "5 px must fail"
 
     # Blob across the region border (A|B gap is water; bridge them with land).
     land2 = land.copy()
