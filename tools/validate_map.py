@@ -280,6 +280,7 @@ def validate(
     canon_cities_path: Path | None = None,
     canon_cities_mask_path: Path | None = None,
     impassable_ref: str | None = None,
+    cities_ref: str | None = None,
     canon_city_provinces_index_path: Path | None = None,
     adjacencies_path: Path | None = None,
     extra_loc_dirs: tuple[Path, ...] = (),
@@ -378,6 +379,16 @@ def validate(
                 errors += _check_adjacency_rows(
                     adjacencies_path, bitmap, index_cells,
                     REPO_ROOT / "common" / "strait_definitions")
+        if cities_ref is not None:
+            # City blobs (#5679): clean skip when the layer is absent/empty.
+            try:
+                cities_rgba = sources.read_source_rgba(cities_ref, allow_empty=True)
+            except (sources.OraError, OSError):
+                cities_rgba = None
+            if cities_rgba is not None and cities_rgba.shape[:2] == bitmap._code.shape:
+                errors += _check_city_blobs(bitmap._code, cities_rgba,
+                                            set(sea_colors) | set(lake_colors))
+            del cities_rgba
         if hub_index is not None:
             errors += _check_hub_anchors(
                 bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
@@ -498,6 +509,37 @@ def _parse_adjacency_edges(path: Path | None) -> set[frozenset]:
             cb = tuple(int(b.group()[i:i + 2], 16) for i in (1, 3, 5))
             edges.add(frozenset((ca, cb)))
     return edges
+
+
+def _check_city_blobs(code: np.ndarray, cities_rgba: np.ndarray,
+                      water_colors: set | None = None) -> list[str]:
+    """Every 4-connected blob of the ``cities`` layer must have all its *land*
+    pixels in one province colour (#5679). ``code`` is the packed-RGB province
+    bitmap; ``water_colors`` (sea + lake RGB tuples) are dropped so a blob
+    overhanging the coast is judged on its land only. Clean skip on an empty
+    layer."""
+    from scipy import ndimage
+
+    m = cities_rgba[..., 3] > 0
+    if not m.any():
+        return []
+    wcodes = np.array(sorted((r << 16) | (g << 8) | b for r, g, b in (water_colors or ())),
+                      dtype=code.dtype)
+    lab, _ = ndimage.label(m)
+    errors: list[str] = []
+    for i, sl in enumerate(ndimage.find_objects(lab), start=1):
+        sel = lab[sl] == i
+        cols = np.unique(code[sl][sel])
+        if wcodes.size:
+            cols = cols[~np.isin(cols, wcodes)]
+        if cols.size > 1:
+            ys, xs = np.nonzero(sel)
+            cy, cx = int(ys.mean()) + sl[0].start, int(xs.mean()) + sl[1].start
+            errors.append(
+                f"city blob at ({cx}, {cy}) spans {cols.size} provinces "
+                f"({', '.join('%06X' % int(c) for c in cols[:4])}"
+                f"{'...' if cols.size > 4 else ''})")
+    return errors
 
 
 def _check_impassable_land(bitmap: "ProvinceBitmap", land_states: list[ParsedState],
@@ -2161,6 +2203,7 @@ def main(argv: list[str] | None = None) -> int:
         rivers_index_path=None if args.fixture else TOOLS_DIR / "derived" / "rivers_index.json",
         canon_cities_path=None if args.fixture else TOOLS_DIR / "config" / "canon_cities.json",
         canon_cities_mask_path=None if args.fixture else TOOLS_DIR / "derived" / "land_sea_mask.png",
+        cities_ref=None if args.fixture else sources.source_ref("cities"),
         impassable_ref=None,  # the #3789 canon_cities.json collision warning is retired (#3704: the cities layer is the authority)
         canon_city_provinces_index_path=None if args.fixture else
         TOOLS_DIR / "derived" / "canon_city_provinces_index.json",

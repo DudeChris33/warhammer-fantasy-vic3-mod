@@ -540,6 +540,102 @@ def city_dots(rgba: np.ndarray, land: np.ndarray) -> list[tuple[int, int]]:
     return sorted(out, key=lambda p: (p[1], p[0]))
 
 
+def city_blobs(rgba: np.ndarray, land: np.ndarray) -> list[np.ndarray]:
+    """Land pixels of every 4-connected opaque blob on the ``cities`` layer, as
+    ``(N, 2)`` ``[y, x]`` arrays, sorted by each blob's top-left pixel (y, x) so
+    the order is deterministic. A blob with no land pixel is dropped."""
+    m = rgba[..., 3] > 0
+    if not m.any():
+        return []
+    lab, _ = ndimage.label(m)
+    out: list[np.ndarray] = []
+    for i, sl in enumerate(ndimage.find_objects(lab), start=1):
+        ys, xs = np.nonzero((lab[sl] == i) & land[sl])
+        if ys.size == 0:
+            continue
+        out.append(np.stack([ys + sl[0].start, xs + sl[1].start], axis=1))
+    return sorted(out, key=lambda p: (int(p[:, 0].min()),
+                                      int(p[p[:, 0] == p[:, 0].min(), 1].min())))
+
+
+def unify_city_blobs(out: np.ndarray, blobs: list[np.ndarray], reg: np.ndarray,
+                     imp: np.ndarray | None, keep_whole_labels: set[int],
+                     anchors: list[tuple[int, int]] | None, wrap_x: bool = True,
+                     log=None) -> np.ndarray:
+    """Post-cut pass (#5679): put each city blob's land pixels under one province.
+
+    Runs on pre-renumber labels and only rewrites blob pixels (of the receiver's
+    own region and paint class), then hands any donor fragment the rewrite orphaned
+    back to the receiver. A blob straddling a state-region border or the paint edge
+    by more than :data:`PAINT_NOISE_PX` px is a hard :class:`cells.CellError`; a
+    graze of at most that many px is clipped (its minority pixels left alone).
+    Receiver = the single anchor-bearing province under the blob, else the majority
+    label (tie -> lowest); two anchor-bearing provinces is an error."""
+    if not blobs:
+        return out
+    out = out.copy()
+    anchor_labels = {int(out[ay, ax]) for ax, ay in (anchors or ())}
+    for blob in blobs:
+        ys, xs = blob[:, 0], blob[:, 1]
+        cy, cx = int(round(ys.mean())), int(round(xs.mean()))
+        labs = out[ys, xs]
+        uniq = np.unique(labs)
+        if uniq.size == 1 or any(int(u) in keep_whole_labels for u in uniq):
+            continue
+        where = f"city blob at ({cx}, {cy})"
+        # Region and paint class must agree beyond a graze.
+        keys = reg[ys, xs].astype(np.int64) * 2
+        if imp is not None:
+            keys = keys + imp[ys, xs].astype(np.int64)
+        kv, kc = np.unique(keys, return_counts=True)
+        if kv.size > 1:
+            major = kv[int(np.argmax(kc))]
+            minor = int(kc.sum() - kc.max())
+            if minor > PAINT_NOISE_PX:
+                raise cells.CellError(
+                    f"{where} straddles a state-region border or paint edge "
+                    f"({minor} px outside its main region/paint class of {int(kc.max())} px); "
+                    f"move the blob or the border")
+            if log:
+                log(f"  WARNING: {where} grazes a border/paint edge by {minor} px; clipped")
+            keep = keys == major
+            ys, xs, labs = ys[keep], xs[keep], labs[keep]
+            uniq = np.unique(labs)
+            if uniq.size == 1:
+                continue
+        held = [int(u) for u in uniq if int(u) in anchor_labels]
+        if len(held) > 1:
+            raise cells.CellError(
+                f"{where} covers hub anchors of {len(held)} different provinces; "
+                f"move the blob or the hubs")
+        if held:
+            recv = held[0]
+        else:
+            cnt = np.bincount(labs.astype(np.int64))
+            recv = int(np.argmax(cnt))  # first max == lowest label on a tie
+        out[ys, xs] = recv
+        # Donor repair: keep each donor label one piece (its largest component).
+        for d in (int(u) for u in uniq if int(u) != recv):
+            dm = out == d
+            if not dm.any():
+                continue
+            comp = cells.components(dm.astype(np.int32), wrap_x)
+            comp[~dm] = 0
+            sz = np.bincount(comp.ravel())
+            sz[0] = 0
+            biggest = int(np.argmax(sz))
+            rm = out == recv
+            grown = ndimage.binary_dilation(rm)
+            if wrap_x:
+                grown[:, 0] |= rm[:, -1]
+                grown[:, -1] |= rm[:, 0]
+            for c in np.unique(comp[dm]):
+                c = int(c)
+                if c and c != biggest and (comp == c)[grown].any():
+                    out[comp == c] = recv
+    return out
+
+
 def impassable_mask(rgba: np.ndarray, land: np.ndarray) -> np.ndarray:
     """Boolean impassable mask from the layer's RGBA: alpha > 0 and RGB exactly
     :data:`IMPASSABLE_RGB`, intersected with ``land`` (paint over water is ignored)."""
@@ -591,7 +687,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                  island_zones: np.ndarray | None = None,
                  impassable: np.ndarray | None = None,
                  strict_placeholder_paint: bool = False,
-                 keep_passable: list[tuple[int, int]] | None = None
+                 keep_passable: list[tuple[int, int]] | None = None,
+                 city_blobs: list[np.ndarray] | None = None
                  ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -972,6 +1069,14 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 nxt += 1
             out[pm] = ids[sub[pm]]
 
+    if city_blobs:
+        # City blobs (#5679): one province per painted blob. Region labels used as
+        # province labels for keep_whole archipelagos are protected as-is.
+        anchor_pts = list(keep_passable or ())
+        for pts in seeds_by_region.values():
+            anchor_pts.extend(pts)
+        out = unify_city_blobs(out, city_blobs, reg, imp, set(int(k) for k in keep),
+                               anchor_pts, wrap_x, log=log)
     out = cells.renumber(out)
     if int((out == 0).sum()) != int((~land).sum()):
         raise cells.CellError(

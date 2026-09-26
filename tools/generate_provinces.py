@@ -296,18 +296,24 @@ def main(argv: list[str] | None = None) -> int:
         impassable = land_provinces.impassable_mask(imp_rgba, land)
         impassable = land_provinces.clean_paint(impassable, land, WRAP_X)
         if impassable.any():
-            # No automatic pockets: the paint is taken as drawn (Chris, 2026-09-24).
-            # A canon city under paint is a validator error, fixed by opening the paint.
-            cities_rgba = sources.read_source_rgba(CITIES_SOURCE, allow_empty=True)
-            if cities_rgba is not None:
-                if cities_rgba.shape[:2] != (CANVAS_H, CANVAS_W):
-                    raise SystemExit(f"{CITIES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}")
-                canon_cities = land_provinces.city_dots(cities_rgba, land)
-                del cities_rgba
             log(f"impassable paint: {int(impassable.sum()):,} px", t0)
         else:
             impassable = None
     del imp_rgba
+    # The cities layer is read unconditionally (#5679): dots feed keep_passable
+    # (under paint, as before); blobs are kept whole inside one province.
+    # No automatic pockets: the paint is taken as drawn (Chris, 2026-09-24).
+    # A canon city under paint is a validator error, fixed by opening the paint.
+    city_blobs = []
+    cities_rgba = sources.read_source_rgba(CITIES_SOURCE, allow_empty=True)
+    if cities_rgba is not None:
+        if cities_rgba.shape[:2] != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{CITIES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}")
+        if impassable is not None:
+            canon_cities = land_provinces.city_dots(cities_rgba, land)
+        city_blobs = land_provinces.city_blobs(cities_rgba, land)
+        del cities_rgba
+        log(f"city blobs: {len(city_blobs)}", t0)
 
     log("subdividing the drawn regions into provinces ...", t0)
     try:
@@ -316,7 +322,8 @@ def main(argv: list[str] | None = None) -> int:
                 keep_whole=keep_whole, region_seeds=region_seeds or None,
                 island_zones=island_overrides, impassable=impassable,
                 strict_placeholder_paint=args.strict_placeholder_paint,
-                keep_passable=canon_cities or None)
+                keep_passable=canon_cities or None,
+                city_blobs=city_blobs or None)
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())

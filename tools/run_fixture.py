@@ -2002,6 +2002,82 @@ def _selfcheck_seeded_cut() -> None:
     assert not iaw.any(), "seam-wrapping provinces are contiguous under wrap, never archipelago"
 
 
+def _selfcheck_city_blobs() -> None:
+    """City blobs kept whole in one province (board #5679), synthetic canvas."""
+    import validate_map as vm
+    from worldgen import cells as C
+    from worldgen import land_provinces as lp
+
+    H, W = 40, 90
+    land = np.zeros((H, W), dtype=bool)
+    land[3:37, 3:37] = True
+    land[3:37, 40:70] = True
+    reg = np.zeros((H, W), dtype=np.int32)
+    reg[3:37, 3:37] = 1
+    reg[3:37, 40:70] = 2
+    drawn = land.copy()
+    kw = dict(wrap_x=False, min_area=20)
+
+    def rgba(*boxes):
+        a = np.zeros((H, W, 4), dtype=np.uint8)
+        for y0, y1, x0, x1 in boxes:
+            a[y0:y1, x0:x1] = (0, 255, 255, 255)
+        return a
+
+    base = lp.subdivide_ex(reg, land, drawn, 8, **kw)[0]
+    # empty / None blobs: byte-identical
+    assert np.array_equal(base, lp.subdivide_ex(reg, land, drawn, 8, city_blobs=[], **kw)[0])
+    assert lp.city_blobs(rgba(), land) == []
+
+    # Find a seam inside region A and put a blob across it.
+    seam = None
+    for y in range(6, 34):
+        for x in range(6, 34):
+            if base[y, x] != base[y, x + 1] and reg[y, x] == 1:
+                seam = (y, x)
+                break
+        if seam:
+            break
+    assert seam, "fixture cut has no interior seam in region A"
+    sy, sx = seam
+    cities = rgba((sy - 1, sy + 2, sx - 1, sx + 3))
+    blobs = lp.city_blobs(cities, land)
+    assert len(blobs) == 1
+    assert np.unique(base[cities[..., 3] > 0]).size > 1, "blob must straddle a seam before the fix"
+    lab = lp.subdivide_ex(reg, land, drawn, 8, city_blobs=blobs, **kw)[0]
+    assert np.unique(lab[cities[..., 3] > 0]).size == 1, "blob must land in one province"
+    assert np.array_equal(lab, lp.subdivide_ex(reg, land, drawn, 8, city_blobs=blobs, **kw)[0]), \
+        "determinism"
+    # Region B is untouched.
+    assert np.array_equal(lab[:, 40:70] > 0, base[:, 40:70] > 0)
+    b = reg == 2
+    assert np.array_equal(lab[b] == lab[b][0], base[b] == base[b][0]), "unaffected region changed"
+    # Every province stays one connected piece.
+    for L in range(1, int(lab.max()) + 1):
+        comp = C.components((lab == L).astype(np.int32), False)
+        assert len(np.unique(comp[lab == L])) == 1, f"province {L} torn"
+    # Validator round-trip: the split one fails, the fixed one passes, empty skips.
+    def code_of(l):
+        return (l.astype(np.uint32) + 1000)
+    assert vm._check_city_blobs(code_of(base), cities), "validator must flag a split blob"
+    assert not vm._check_city_blobs(code_of(lab), cities), "validator must pass a whole blob"
+    assert not vm._check_city_blobs(code_of(base), rgba()), "empty layer must skip"
+
+    # Blob across the region border (A|B gap is water; bridge them with land).
+    land2 = land.copy()
+    land2[18:22, 37:40] = True
+    reg2 = reg.copy()
+    reg2[18:22, 37:38] = 1
+    reg2[18:22, 38:40] = 2
+    bridge = lp.city_blobs(rgba((17, 23, 34, 43)), land2)
+    try:
+        lp.subdivide_ex(reg2, land2, land2, 8, city_blobs=bridge, **kw)
+    except C.CellError as e:
+        assert "city blob at" in str(e), e
+    else:
+        raise AssertionError("blob across a state border must be a CellError")
+
+
 def _selfcheck_impassable_land() -> None:
     """Impassable land provinces (board #3704), source-independent, on a synthetic
     canvas: the ``subdivide_ex`` passable/impassable cut, canon-city pockets, and
@@ -4534,6 +4610,7 @@ def run_check() -> int:
           "warnings self-check passed.")
     _selfcheck_seeded_cut()
     _selfcheck_impassable_land()
+    _selfcheck_city_blobs()
     print("land_provinces: hub-anchor seeded cut (own-province seeds, boundary kept, "
           "unseeded byte-identical, protected pieces, hard errors) self-check passed.")
     _selfcheck_hub_validator()
