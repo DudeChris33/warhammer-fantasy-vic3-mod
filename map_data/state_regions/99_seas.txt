@@ -125,9 +125,9 @@ STATE_FAR_IRON_COAST_PLACEHOLDER = {
 	provinces = { xA161FE }
 }
 
-STATE_RIVER_LYNSK = {
-	id = 3025
-	provinces = { x3F9977 }
+STATE_UPPER_RIVER_LYNSK = {
+	id = 3217
+	provinces = { x3B53CB }
 }
 
 STATE_MAELSTROM = {
@@ -139,6 +139,11 @@ STATE_MAELSTROM = {
 STATE_COAST_OF_LYONESSE = {
 	id = 3028
 	provinces = { x1A3FE2 }
+}
+
+STATE_LOWER_RIVER_LYNSK = {
+	id = 3025
+	provinces = { x3F9977 }
 }
 
 STATE_EASTERN_ALBION_CHANNEL = {

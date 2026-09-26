@@ -378,6 +378,10 @@ region_lower_river_grismerie = {
 	states = { STATE_LOWER_RIVER_GRISMERIE }
 }
 
+region_lower_river_lynsk = {
+	states = { STATE_LOWER_RIVER_LYNSK }
+}
+
 region_lower_river_ruin = {
 	states = { STATE_LOWER_RIVER_RUIN }
 }
@@ -492,10 +496,6 @@ region_river_brienne = {
 
 region_river_limnalla = {
 	states = { STATE_RIVER_LIMNALLA }
-}
-
-region_river_lynsk = {
-	states = { STATE_RIVER_LYNSK }
 }
 
 region_river_of_echoes = {
@@ -780,6 +780,10 @@ region_upper_reik_river = {
 
 region_upper_river_grismerie = {
 	states = { STATE_UPPER_RIVER_GRISMERIE }
+}
+
+region_upper_river_lynsk = {
+	states = { STATE_UPPER_RIVER_LYNSK }
 }
 
 region_upper_river_ruin = {
