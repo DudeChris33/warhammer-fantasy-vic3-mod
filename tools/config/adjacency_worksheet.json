@@ -2,18 +2,6 @@
   "adjacencies": [
     {
       "a": [
-        3996,
-        797
-      ],
-      "b": [
-        3985,
-        794
-      ],
-      "type": "canal_marienburg",
-      "comment": "Marienburg"
-    },
-    {
-      "a": [
         5081,
         1285
       ],
@@ -23,30 +11,6 @@
       ],
       "type": "sea",
       "comment": "Lower River Ruin"
-    },
-    {
-      "a": [
-        3094,
-        3032
-      ],
-      "b": [
-        3067,
-        3043
-      ],
-      "type": "canal_isles_of_dusk",
-      "comment": "Isles of Dusk"
-    },
-    {
-      "a": [
-        4231,
-        473
-      ],
-      "b": [
-        4238,
-        488
-      ],
-      "type": "canal_blades",
-      "comment": "Sea of Blades"
     },
     {
       "a": [
@@ -110,15 +74,27 @@
     },
     {
       "a": [
-        3907,
-        833
+        3762,
+        2549
       ],
       "b": [
-        3903,
-        846
+        3704,
+        2583
       ],
-      "type": "canal_grismerie",
-      "comment": "River Grismerie"
+      "type": "",
+      "comment": ""
+    },
+    {
+      "a": [
+        4322,
+        783
+      ],
+      "b": [
+        4331,
+        781
+      ],
+      "type": "canal_upper_talabec",
+      "comment": "Upper Talabec River"
     },
     {
       "a": [
@@ -134,15 +110,27 @@
     },
     {
       "a": [
-        3773,
-        1230
+        4547,
+        421
       ],
       "b": [
-        3766,
-        1243
+        4529,
+        427
       ],
-      "type": "canal_west_estalian_isles",
-      "comment": "West Estalian Isles"
+      "type": "canal_drakefjord_bay",
+      "comment": "Drakefjord Bay"
+    },
+    {
+      "a": [
+        4553,
+        434
+      ],
+      "b": [
+        4539,
+        442
+      ],
+      "type": "sea",
+      "comment": "Drakefjord Bay"
     },
     {
       "a": [
@@ -158,18 +146,6 @@
     },
     {
       "a": [
-        3913,
-        1548
-      ],
-      "b": [
-        3904,
-        1555
-      ],
-      "type": "canal_great_mortis_delta",
-      "comment": "Great Mortis Delta"
-    },
-    {
-      "a": [
         4020,
         934
       ],
@@ -179,18 +155,6 @@
       ],
       "type": "sea",
       "comment": "River Grismerie"
-    },
-    {
-      "a": [
-        3857,
-        1335
-      ],
-      "b": [
-        3869,
-        1322
-      ],
-      "type": "canal_sartosa",
-      "comment": "Sartosa"
     },
     {
       "a": [
@@ -206,6 +170,18 @@
     },
     {
       "a": [
+        3917,
+        1560
+      ],
+      "b": [
+        3904,
+        1543
+      ],
+      "type": "canal_great_mortis_delta",
+      "comment": "Great Mortis Delta"
+    },
+    {
+      "a": [
         4181,
         1084
       ],
@@ -215,6 +191,18 @@
       ],
       "type": "sea",
       "comment": "Under Fort Soll"
+    },
+    {
+      "a": [
+        4220,
+        813
+      ],
+      "b": [
+        4212,
+        811
+      ],
+      "type": "canal_middle_talabec",
+      "comment": "Middle Talabec River"
     },
     {
       "a": [
@@ -230,6 +218,18 @@
     },
     {
       "a": [
+        3777,
+        1239
+      ],
+      "b": [
+        3759,
+        1234
+      ],
+      "type": "canal_west_estalian_isles",
+      "comment": "West Estalian Isles"
+    },
+    {
+      "a": [
         4281,
         879
       ],
@@ -242,15 +242,15 @@
     },
     {
       "a": [
-        4534,
-        420
+        4949,
+        1457
       ],
       "b": [
-        4536,
-        435
+        4954,
+        1442
       ],
-      "type": "canal_drakefjord_bay",
-      "comment": "Drakefjord Bay"
+      "type": "canal_lower_ruin",
+      "comment": "Lower River Ruin"
     },
     {
       "a": [
@@ -266,39 +266,27 @@
     },
     {
       "a": [
-        4154,
-        893
+        4150,
+        894
       ],
       "b": [
-        4151,
-        906
+        4148,
+        902
       ],
       "type": "canal_nuln_r",
       "comment": "Nuln"
     },
     {
       "a": [
-        4142,
-        908
+        4145,
+        904
       ],
       "b": [
-        4135,
-        897
+        4136,
+        898
       ],
       "type": "canal_nuln_l",
       "comment": "Nuln"
-    },
-    {
-      "a": [
-        4385,
-        677
-      ],
-      "b": [
-        4385,
-        665
-      ],
-      "type": "canal_lynsk",
-      "comment": "River Lynsk"
     },
     {
       "a": [
@@ -326,27 +314,15 @@
     },
     {
       "a": [
-        4151,
-        885
+        4149,
+        892
       ],
       "b": [
         4137,
         893
       ],
-      "type": "canal_nuln_t",
-      "comment": "Nuln"
-    },
-    {
-      "a": [
-        4327,
-        787
-      ],
-      "b": [
-        4324,
-        777
-      ],
-      "type": "canal_upper_talabec",
-      "comment": "Upper Talabec River"
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -359,6 +335,30 @@
       ],
       "type": "sea",
       "comment": "Norscan Island"
+    },
+    {
+      "a": [
+        4382,
+        672
+      ],
+      "b": [
+        4389,
+        670
+      ],
+      "type": "canal_lynsk",
+      "comment": "River Lynsk"
+    },
+    {
+      "a": [
+        4255,
+        653
+      ],
+      "b": [
+        4266,
+        658
+      ],
+      "type": "canal_erengrad",
+      "comment": "Erengrad"
     },
     {
       "a": [
@@ -386,6 +386,18 @@
     },
     {
       "a": [
+        3852,
+        1321
+      ],
+      "b": [
+        3870,
+        1337
+      ],
+      "type": "canal_sartosa",
+      "comment": "Sartosa"
+    },
+    {
+      "a": [
         4089,
         1121
       ],
@@ -395,6 +407,18 @@
       ],
       "type": "canal_echoes_l",
       "comment": "River of Echoes"
+    },
+    {
+      "a": [
+        4090,
+        1206
+      ],
+      "b": [
+        4094,
+        1189
+      ],
+      "type": "canal_limnala",
+      "comment": "River Limnala"
     },
     {
       "a": [
@@ -410,6 +434,18 @@
     },
     {
       "a": [
+        4227,
+        484
+      ],
+      "b": [
+        4240,
+        478
+      ],
+      "type": "canal_blades",
+      "comment": "Sea of Blades"
+    },
+    {
+      "a": [
         3706,
         1184
       ],
@@ -422,39 +458,27 @@
     },
     {
       "a": [
-        4131,
-        948
+        3098,
+        3065
       ],
       "b": [
-        4142,
-        944
+        3068,
+        3015
       ],
-      "type": "canal_aver_t",
-      "comment": "River Aver"
+      "type": "canal_isles_of_dusk",
+      "comment": "Isles of Dusk"
     },
     {
       "a": [
-        4130,
-        957
+        4098,
+        1696
       ],
       "b": [
-        4143,
-        959
+        4107,
+        1696
       ],
-      "type": "canal_aver_b",
-      "comment": "River Aver"
-    },
-    {
-      "a": [
-        4092,
-        1692
-      ],
-      "b": [
-        4108,
-        1693
-      ],
-      "type": "canal_ash_t",
-      "comment": "Ash River"
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -518,27 +542,39 @@
     },
     {
       "a": [
-        3989,
-        1311
+        3812,
+        901
       ],
       "b": [
-        4018,
-        1293
+        3818,
+        892
       ],
-      "type": "canal_mymidens",
-      "comment": "Myrmidens"
+      "type": "canal_bordeaux",
+      "comment": "Bordeaux"
     },
     {
       "a": [
-        4090,
+        3910,
         844
       ],
       "b": [
-        4091,
-        858
+        3901,
+        840
       ],
-      "type": "canal_altdorf_l",
-      "comment": "Altdorf"
+      "type": "canal_grismerie",
+      "comment": "River Grismerie"
+    },
+    {
+      "a": [
+        4092,
+        846
+      ],
+      "b": [
+        4102,
+        851
+      ],
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -578,18 +614,6 @@
     },
     {
       "a": [
-        3938,
-        1136
-      ],
-      "b": [
-        3938,
-        1147
-      ],
-      "type": "canal_miragliano",
-      "comment": "Miragliano"
-    },
-    {
-      "a": [
         4456,
         435
       ],
@@ -602,27 +626,27 @@
     },
     {
       "a": [
-        4145,
-        956
+        4622,
+        1544
       ],
       "b": [
-        4143,
-        947
+        4616,
+        1526
       ],
-      "type": "canal_aver_r",
-      "comment": "River Aver"
+      "type": "sea",
+      "comment": "Bitter Sea"
     },
     {
       "a": [
         3821,
-        897
+        1023
       ],
       "b": [
-        3813,
-        892
+        3816,
+        1016
       ],
-      "type": "canal_bordeaux",
-      "comment": "Bordeaux"
+      "type": "canal_brionne",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -638,30 +662,6 @@
     },
     {
       "a": [
-        3814,
-        1241
-      ],
-      "b": [
-        3798,
-        1253
-      ],
-      "type": "canal_east_estalian_isles",
-      "comment": "East Estalian Isles"
-    },
-    {
-      "a": [
-        4960,
-        1451
-      ],
-      "b": [
-        4946,
-        1442
-      ],
-      "type": "canal_lower_ruin",
-      "comment": "Lower River Ruin"
-    },
-    {
-      "a": [
         4310,
         662
       ],
@@ -671,18 +671,6 @@
       ],
       "type": "sea",
       "comment": "Erengrad"
-    },
-    {
-      "a": [
-        3825,
-        1016
-      ],
-      "b": [
-        3814,
-        1022
-      ],
-      "type": "canal_brionne",
-      "comment": "River Brionne"
     },
     {
       "a": [
@@ -698,6 +686,18 @@
     },
     {
       "a": [
+        3618,
+        2575
+      ],
+      "b": [
+        3700,
+        2591
+      ],
+      "type": "",
+      "comment": ""
+    },
+    {
+      "a": [
         4153,
         826
       ],
@@ -710,15 +710,15 @@
     },
     {
       "a": [
-        4625,
-        1530
+        3991,
+        792
       ],
       "b": [
-        4611,
-        1534
+        3985,
+        801
       ],
-      "type": "sea",
-      "comment": "Bitter Sea"
+      "type": "canal_marienburg",
+      "comment": "Marienburg"
     },
     {
       "a": [
@@ -746,18 +746,6 @@
     },
     {
       "a": [
-        4092,
-        865
-      ],
-      "b": [
-        4103,
-        862
-      ],
-      "type": "canal_altdorf_b",
-      "comment": "Altdorf"
-    },
-    {
-      "a": [
         4432,
         602
       ],
@@ -770,15 +758,27 @@
     },
     {
       "a": [
-        3976,
-        701
+        3941,
+        1141
       ],
       "b": [
-        3948,
-        712
+        3930,
+        1141
       ],
-      "type": "canal_manaanspoort",
-      "comment": "Manaanspoort"
+      "type": "canal_miragliano",
+      "comment": "Miragliano"
+    },
+    {
+      "a": [
+        3801,
+        1242
+      ],
+      "b": [
+        3817,
+        1257
+      ],
+      "type": "canal_east_estalian_isles",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -806,30 +806,6 @@
     },
     {
       "a": [
-        4106,
-        850
-      ],
-      "b": [
-        4097,
-        837
-      ],
-      "type": "canal_altdorf_r",
-      "comment": "Altdorf"
-    },
-    {
-      "a": [
-        4098,
-        1199
-      ],
-      "b": [
-        4084,
-        1197
-      ],
-      "type": "canal_limnala",
-      "comment": "River Limnala"
-    },
-    {
-      "a": [
         4012,
         1107
       ],
@@ -842,39 +818,15 @@
     },
     {
       "a": [
-        4543,
-        433
+        4007,
+        1310
       ],
       "b": [
-        4552,
-        444
+        3999,
+        1297
       ],
-      "type": "sea",
-      "comment": "Drakefjord Bay"
-    },
-    {
-      "a": [
-        3713,
-        2595
-      ],
-      "b": [
-        3691,
-        2578
-      ],
-      "type": "canal_isles_of_doom",
-      "comment": "Isles of Doom"
-    },
-    {
-      "a": [
-        4216,
-        818
-      ],
-      "b": [
-        4215,
-        806
-      ],
-      "type": "canal_middle_talabec",
-      "comment": "Middle Talabec River"
+      "type": "canal_mymidens",
+      "comment": "Myrmidens"
     },
     {
       "a": [
@@ -890,15 +842,15 @@
     },
     {
       "a": [
-        4262,
-        647
+        3966,
+        718
       ],
       "b": [
-        4256,
-        662
+        3957,
+        695
       ],
-      "type": "canal_erengrad",
-      "comment": "Erengrad"
+      "type": "canal_manaanspoort",
+      "comment": "Manaanspoort"
     },
     {
       "a": [
@@ -947,6 +899,116 @@
       ],
       "type": "canal_pina",
       "comment": "Pina Woods"
+    }
+  ],
+  "stale": [
+    {
+      "a": [
+        4151,
+        885
+      ],
+      "b": [
+        4137,
+        893
+      ],
+      "type": "canal_nuln_t",
+      "comment": "Nuln"
+    },
+    {
+      "a": [
+        4131,
+        948
+      ],
+      "b": [
+        4142,
+        944
+      ],
+      "type": "canal_aver_t",
+      "comment": "River Aver"
+    },
+    {
+      "a": [
+        4130,
+        957
+      ],
+      "b": [
+        4143,
+        959
+      ],
+      "type": "canal_aver_b",
+      "comment": "River Aver"
+    },
+    {
+      "a": [
+        4092,
+        1692
+      ],
+      "b": [
+        4108,
+        1693
+      ],
+      "type": "canal_ash_t",
+      "comment": "Ash River"
+    },
+    {
+      "a": [
+        4090,
+        844
+      ],
+      "b": [
+        4091,
+        858
+      ],
+      "type": "canal_altdorf_l",
+      "comment": "Altdorf"
+    },
+    {
+      "a": [
+        4145,
+        956
+      ],
+      "b": [
+        4143,
+        947
+      ],
+      "type": "canal_aver_r",
+      "comment": "River Aver"
+    },
+    {
+      "a": [
+        4092,
+        865
+      ],
+      "b": [
+        4103,
+        862
+      ],
+      "type": "canal_altdorf_b",
+      "comment": "Altdorf"
+    },
+    {
+      "a": [
+        4106,
+        850
+      ],
+      "b": [
+        4097,
+        837
+      ],
+      "type": "canal_altdorf_r",
+      "comment": "Altdorf"
+    },
+    {
+      "a": [
+        3713,
+        2595
+      ],
+      "b": [
+        3691,
+        2578
+      ],
+      "type": "canal_isles_of_doom",
+      "comment": "Isles of Doom"
     }
   ]
 }
