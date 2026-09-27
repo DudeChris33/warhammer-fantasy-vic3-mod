@@ -58,16 +58,21 @@ WRAP_X = map_config.WRAP_X
 
 #: Dilate the drawn line this many px to bridge anti-aliased gaps; drop zone
 #: fragments below the floor. Both are stable knobs, committed here so the layer
-#: is reproducible from source alone. The floor exists only to swallow the thin
-#: offcuts the extraction leaves where the drawn line runs just off the mask
-#: coast (and sub-pixel dilation dust) — every offcut is coastline-hugging, not a
-#: hand-drawn open-water zone. 50 sits well below the smallest real hand-drawn
-#: zone seen so far (354px, a river-mouth pocket) and comfortably above the
-#: largest pure line-intersection artifact (16px) — confirmed 2026-08-31 against
-#: the user's naming pass, which flagged every sub-floor fragment as "not real".
-#: Set ``--merge-floor 1`` to keep every region between the drawn lines verbatim.
+#: is reproducible from source alone. The floor exists to swallow two kinds of
+#: non-zone: thin coastline-hugging offcuts where the drawn line runs just off
+#: the mask coast, and dilate/nearest-fill dust at line intersections (measured
+#: up to 16px, confirmed 2026-09-27 by setting the floor to 1: 97 of 307
+#: resulting zones came in at <=16px, clearly artifacts, not hand-drawn zones).
+#: Lowered 50 -> 30 the same day so a real small hand-drawn zone (the 34px
+#: river-junction pocket at the Great Mortis/Ash River confluence in Nehekhara)
+#: survives while intersection dust still gets swallowed — a 20px floor still let
+#: through a 20px open-water artifact at a line self-intersection kink (~5060,1672,
+#: non-coastal, no nearby coastline), so the floor sits just below the smallest
+#: confirmed real zone rather than at the largest confirmed artifact. Set
+#: ``--merge-floor 1`` to keep every region between the drawn lines verbatim
+#: (useful for auditing what the floor is dropping).
 LINE_DILATE = 2
-MERGE_FLOOR = 50
+MERGE_FLOOR = 30
 
 
 def log(msg: str, t0: float | None = None) -> None:
