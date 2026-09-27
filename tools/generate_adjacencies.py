@@ -104,9 +104,89 @@ def derive(*, need_worksheet: bool, load_rows: bool = True):
     return crossings, skipped, lines, rows, rgb, kinds
 
 
-def review() -> int:
+def _render_numbered(rgb, items, skipped=()):
+    """Numbered render over dim province edges. ``items`` is a list of
+    ``(start, stop, text, typed)``; every line is drawn first, then each label is
+    placed clear of every other label and every endpoint (leader line if far)."""
     from PIL import Image, ImageDraw, ImageFont
 
+    code = _code_map(rgb)
+    edge = np.zeros(code.shape, dtype=bool)
+    edge[:, :-1] |= code[:, :-1] != code[:, 1:]
+    edge[:-1, :] |= code[:-1, :] != code[1:, :]
+    img_arr = np.full(rgb.shape, 235, dtype=np.uint8)
+    img_arr[edge] = (150, 150, 150)
+    img = Image.fromarray(img_arr)
+    d = ImageDraw.Draw(img)
+    try:
+        font = ImageFont.load_default(size=28)
+    except TypeError:
+        font = ImageFont.load_default()
+    for start, stop, _text, typed in items:
+        col = (0, 140, 0) if typed else (220, 0, 0)
+        d.line([start, stop], fill=col, width=5)
+        for pt in (start, stop):
+            d.ellipse([pt[0] - 6, pt[1] - 6, pt[0] + 6, pt[1] + 6], fill=col)
+    pad = 4
+    taken = [(pt[0] - 10, pt[1] - 10, pt[0] + 10, pt[1] + 10)
+             for start, stop, _t, _ty in items for pt in (start, stop)]
+
+    def _hits(box, others):
+        return any(box[0] < o[2] and o[0] < box[2] and box[1] < o[3] and o[1] < box[3]
+                   for o in others)
+
+    dirs = [(1, -1), (1, 1), (-1, -1), (-1, 1), (0, -1), (0, 1), (1, 0), (-1, 0)]
+    for start, stop, text, typed in items:
+        col = (0, 140, 0) if typed else (220, 0, 0)
+        l, t, r, b = d.textbbox((0, 0), text, font=font, stroke_width=3)
+        tw, th = r - l, b - t
+        mx, my = (start[0] + stop[0]) // 2, (start[1] + stop[1]) // 2
+        placed = None
+        for dist in range(14, 400, 10):
+            for dx, dy in dirs:
+                cx, cy = mx + dx * dist, my + dy * dist
+                box = (cx - tw // 2 - pad, cy - th // 2 - pad, cx + tw // 2 + pad, cy + th // 2 + pad)
+                if not _hits(box, taken):
+                    placed = (cx, cy, box)
+                    break
+            if placed:
+                break
+        if placed is None:  # pathological crowding: fall back to a fixed offset
+            cx, cy = mx + 14, my - 14
+            placed = (cx, cy, (cx - tw // 2, cy - th // 2, cx + tw // 2, cy + th // 2))
+        cx, cy, box = placed
+        taken.append(box)
+        if max(abs(cx - mx), abs(cy - my)) > 30:
+            d.line([(mx, my), (cx, cy)], fill=col, width=2)
+        d.text((cx - tw // 2 - l, cy - th // 2 - t), text, fill=(0, 0, 0), font=font,
+               stroke_width=3, stroke_fill=(255, 255, 255))
+    for s in skipped:
+        d.ellipse([s.centroid[0] - 14, s.centroid[1] - 14, s.centroid[0] + 14, s.centroid[1] + 14],
+                  outline=(255, 120, 0), width=4)
+    return img
+
+
+def as_filled(path: Path, out: Path) -> int:
+    """Render a worksheet file exactly as written: rows in FILE order at their stored
+    coordinates, numbered by row, with each row's note. No matching to today's lines,
+    so it shows the numbering the worksheet was filled against."""
+    rgb = raster.read_rgb_png(PROVINCES_PNG)
+    raw = json.loads(path.read_text(encoding="utf-8")).get("adjacencies", [])
+    items = []
+    for i, r in enumerate(raw, 1):
+        note = r.get("comment", "")
+        items.append((tuple(r["a"]), tuple(r["b"]), f"{i} {note}" if note else str(i),
+                      bool(r.get("type"))))
+    img = _render_numbered(rgb, items)
+    if out.exists():
+        out.unlink()
+    out.parent.mkdir(parents=True, exist_ok=True)
+    img.save(out)
+    print(f"wrote {out.relative_to(MOD_ROOT)} ({len(items)} rows, file order)")
+    return 0
+
+
+def review() -> int:
     from types import SimpleNamespace
 
     # Read the worksheet leniently (raw JSON, like --sync) so an invalid or blank row
@@ -137,66 +217,11 @@ def review() -> int:
                          names.get(c.from_color, ""), names.get(c.to_color, ""),
                          *c.start, *c.stop, row.type if row else "", row.comment if row else ""])
 
-    # Numbered render over dim province edges.
-    code = _code_map(rgb)
-    edge = np.zeros(code.shape, dtype=bool)
-    edge[:, :-1] |= code[:, :-1] != code[:, 1:]
-    edge[:-1, :] |= code[:-1, :] != code[1:, :]
-    img_arr = np.full(rgb.shape, 235, dtype=np.uint8)
-    img_arr[edge] = (150, 150, 150)
-    img = Image.fromarray(img_arr)
-    d = ImageDraw.Draw(img)
-    try:
-        font = ImageFont.load_default(size=28)
-    except TypeError:
-        font = ImageFont.load_default()
-    # Draw every line first, then place the numbers so no two labels (nor a label and
-    # any line endpoint) overlap: try 8 directions at growing distances around the
-    # line's midpoint and take the first free box; a leader line joins a far label.
-    for c in crossings:
-        col = (0, 140, 0) if id(c) in typed else (220, 0, 0)
-        d.line([c.start, c.stop], fill=col, width=5)
-        for pt in (c.start, c.stop):
-            d.ellipse([pt[0] - 6, pt[1] - 6, pt[0] + 6, pt[1] + 6], fill=col)
-    pad = 4
-    taken: list[tuple[int, int, int, int]] = [
-        (pt[0] - 10, pt[1] - 10, pt[0] + 10, pt[1] + 10)
-        for c in crossings for pt in (c.start, c.stop)]
-
-    def _hits(box, others):
-        return any(box[0] < o[2] and o[0] < box[2] and box[1] < o[3] and o[1] < box[3]
-                   for o in others)
-
-    dirs = [(1, -1), (1, 1), (-1, -1), (-1, 1), (0, -1), (0, 1), (1, 0), (-1, 0)]
-    for i, c in enumerate(crossings, 1):
-        col = (0, 140, 0) if id(c) in typed else (220, 0, 0)
-        note = pairs[i - 1][1].comment
-        text = f"{i} {note}" if note else str(i)
-        l, t, r, b = d.textbbox((0, 0), text, font=font, stroke_width=3)
-        tw, th = r - l, b - t
-        mx, my = (c.start[0] + c.stop[0]) // 2, (c.start[1] + c.stop[1]) // 2
-        placed = None
-        for dist in range(14, 400, 10):
-            for dx, dy in dirs:
-                cx, cy = mx + dx * dist, my + dy * dist
-                box = (cx - tw // 2 - pad, cy - th // 2 - pad, cx + tw // 2 + pad, cy + th // 2 + pad)
-                if not _hits(box, taken):
-                    placed = (cx, cy, box)
-                    break
-            if placed:
-                break
-        if placed is None:  # pathological crowding: fall back to a fixed offset
-            cx, cy = mx + 14, my - 14
-            placed = (cx, cy, (cx - tw // 2, cy - th // 2, cx + tw // 2, cy + th // 2))
-        cx, cy, box = placed
-        taken.append(box)
-        if max(abs(cx - mx), abs(cy - my)) > 30:
-            d.line([(mx, my), (cx, cy)], fill=col, width=2)
-        d.text((cx - tw // 2 - l, cy - th // 2 - t), text, fill=(0, 0, 0), font=font,
-               stroke_width=3, stroke_fill=(255, 255, 255))
-    for s in skipped:
-        d.ellipse([s.centroid[0] - 14, s.centroid[1] - 14, s.centroid[0] + 14, s.centroid[1] + 14],
-                  outline=(255, 120, 0), width=4)
+    img = _render_numbered(rgb, [(c.start, c.stop,
+                                  f"{i} {pairs[i - 1][1].comment}" if pairs[i - 1][1].comment else str(i),
+                                  id(c) in typed) for i, c in enumerate(crossings, 1)], skipped)
+    if PREVIEW_PATH.exists():
+        PREVIEW_PATH.unlink()  # a viewer holding the old file otherwise breaks the save
     img.save(PREVIEW_PATH)
 
     print(f"{len(lines)} drawn line(s): {len(crossings)} resolved, {len(skipped)} skipped, "
@@ -291,11 +316,15 @@ def main(argv: list[str] | None = None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--review", action="store_true", help="table + stubs + numbered render (default)")
+    g.add_argument("--as-filled", metavar="WORKSHEET",
+                   help="render a worksheet file in FILE order at its stored coordinates")
     g.add_argument("--sync", action="store_true",
                    help="carry the worksheet over to the current lines (keeps typed rows, adds blanks)")
     g.add_argument("--write", action="store_true", help="write map_data/adjacencies.csv")
     g.add_argument("--check", action="store_true", help="assert the committed CSV is current")
     a = ap.parse_args(argv)
+    if a.as_filled:
+        return as_filled(Path(a.as_filled), DERIVED_DIR / "adjacencies_as_filled.png")
     if a.sync:
         return sync()
     if a.write or a.check:
