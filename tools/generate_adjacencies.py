@@ -104,59 +104,105 @@ def derive(*, need_worksheet: bool, load_rows: bool = True):
     return crossings, skipped, lines, rows, rgb, kinds
 
 
-def _render_numbered(rgb, items, skipped=()):
+def _seg_cross(p1, p2, p3, p4) -> bool:
+    """True when segments p1-p2 and p3-p4 properly cross."""
+    def orient(a, b, c):
+        v = (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+        return (v > 0) - (v < 0)
+    return (orient(p1, p2, p3) != orient(p1, p2, p4)
+            and orient(p3, p4, p1) != orient(p3, p4, p2))
+
+
+def _seg_hits_box(p, q, box) -> bool:
+    """True when segment p-q passes through ``box`` (sampled every 3 px)."""
+    n = max(2, int(max(abs(q[0] - p[0]), abs(q[1] - p[1])) // 3))
+    for k in range(n + 1):
+        x = p[0] + (q[0] - p[0]) * k / n
+        y = p[1] + (q[1] - p[1]) * k / n
+        if box[0] <= x <= box[2] and box[1] <= y <= box[3]:
+            return True
+    return False
+
+
+def _render_numbered(rgb, items, skipped=(), base=None, scale=1):
     """Numbered render over dim province edges. ``items`` is a list of
     ``(start, stop, text, typed)``; every line is drawn first, then each label is
-    placed clear of every other label and every endpoint (leader line if far)."""
+    placed clear of every other label and endpoint, of every other line, and so
+    that its leader line (drawn when the label is far) crosses no other leader and
+    no other line. ``base`` is an optional ready-made backdrop image with ``items``
+    already in its coordinates (the zoom render); ``scale`` thickens the drawing."""
     from PIL import Image, ImageDraw, ImageFont
 
-    code = _code_map(rgb)
-    edge = np.zeros(code.shape, dtype=bool)
-    edge[:, :-1] |= code[:, :-1] != code[:, 1:]
-    edge[:-1, :] |= code[:-1, :] != code[1:, :]
-    img_arr = np.full(rgb.shape, 235, dtype=np.uint8)
-    img_arr[edge] = (150, 150, 150)
-    img = Image.fromarray(img_arr)
+    if base is None:
+        code = _code_map(rgb)
+        edge = np.zeros(code.shape, dtype=bool)
+        edge[:, :-1] |= code[:, :-1] != code[:, 1:]
+        edge[:-1, :] |= code[:-1, :] != code[1:, :]
+        img_arr = np.full(rgb.shape, 235, dtype=np.uint8)
+        img_arr[edge] = (150, 150, 150)
+        img = Image.fromarray(img_arr)
+    else:
+        img = base
     d = ImageDraw.Draw(img)
+    fsize = 28 if scale == 1 else 30
     try:
-        font = ImageFont.load_default(size=28)
+        font = ImageFont.load_default(size=fsize)
     except TypeError:
         font = ImageFont.load_default()
+    lw, dr = (5, 6) if scale == 1 else (max(5, scale), max(6, scale + 1))
     for start, stop, _text, typed in items:
         col = (0, 140, 0) if typed else (220, 0, 0)
-        d.line([start, stop], fill=col, width=5)
+        d.line([start, stop], fill=col, width=lw)
         for pt in (start, stop):
-            d.ellipse([pt[0] - 6, pt[1] - 6, pt[0] + 6, pt[1] + 6], fill=col)
+            d.ellipse([pt[0] - dr, pt[1] - dr, pt[0] + dr, pt[1] + dr], fill=col)
     pad = 4
     taken = [(pt[0] - 10, pt[1] - 10, pt[0] + 10, pt[1] + 10)
              for start, stop, _t, _ty in items for pt in (start, stop)]
+    leaders: list[tuple] = []
 
     def _hits(box, others):
         return any(box[0] < o[2] and o[0] < box[2] and box[1] < o[3] and o[1] < box[3]
                    for o in others)
 
-    dirs = [(1, -1), (1, 1), (-1, -1), (-1, 1), (0, -1), (0, 1), (1, 0), (-1, 0)]
-    for start, stop, text, typed in items:
+    dirs = [(1, -1), (1, 1), (-1, -1), (-1, 1), (0, -1), (0, 1), (1, 0), (-1, 0),
+            (2, -1), (2, 1), (-2, -1), (-2, 1), (1, -2), (1, 2), (-1, -2), (-1, 2)]
+    maxd = 400 if scale == 1 else 1400
+    for n, (start, stop, text, typed) in enumerate(items):
         col = (0, 140, 0) if typed else (220, 0, 0)
         l, t, r, b = d.textbbox((0, 0), text, font=font, stroke_width=3)
         tw, th = r - l, b - t
         mx, my = (start[0] + stop[0]) // 2, (start[1] + stop[1]) // 2
+        others = [(o[0], o[1]) for k, o in enumerate(items) if k != n]
         placed = None
-        for dist in range(14, 400, 10):
+        for dist in range(14, maxd, 10):
             for dx, dy in dirs:
-                cx, cy = mx + dx * dist, my + dy * dist
+                norm = max(abs(dx), abs(dy))
+                cx, cy = mx + dx * dist // norm, my + dy * dist // norm
                 box = (cx - tw // 2 - pad, cy - th // 2 - pad, cx + tw // 2 + pad, cy + th // 2 + pad)
-                if not _hits(box, taken):
-                    placed = (cx, cy, box)
-                    break
+                if _hits(box, taken):
+                    continue
+                if any(_seg_hits_box(it[0], it[1], box) for it in items):
+                    continue  # a label never sits on any line, its own included
+                far = max(abs(cx - mx), abs(cy - my)) > 30
+                if far:
+                    ld = ((mx, my), (cx, cy))
+                    if any(_seg_cross(ld[0], ld[1], o[0], o[1])
+                           for o in ((it[0], it[1]) for k, it in enumerate(items) if k != n)):
+                        continue
+                    if any(_seg_cross(ld[0], ld[1], q[0], q[1]) for q in leaders):
+                        continue
+                placed = (cx, cy, box, far)
+                break
             if placed:
                 break
         if placed is None:  # pathological crowding: fall back to a fixed offset
             cx, cy = mx + 14, my - 14
-            placed = (cx, cy, (cx - tw // 2, cy - th // 2, cx + tw // 2, cy + th // 2))
-        cx, cy, box = placed
+            placed = (cx, cy, (cx - tw // 2, cy - th // 2, cx + tw // 2, cy + th // 2),
+                      False)
+        cx, cy, box, far = placed
         taken.append(box)
-        if max(abs(cx - mx), abs(cy - my)) > 30:
+        if far:
+            leaders.append(((mx, my), (cx, cy)))
             d.line([(mx, my), (cx, cy)], fill=col, width=2)
         d.text((cx - tw // 2 - l, cy - th // 2 - t), text, fill=(0, 0, 0), font=font,
                stroke_width=3, stroke_fill=(255, 255, 255))
@@ -164,6 +210,48 @@ def _render_numbered(rgb, items, skipped=()):
         d.ellipse([s.centroid[0] - 14, s.centroid[1] - 14, s.centroid[0] + 14, s.centroid[1] + 14],
                   outline=(255, 120, 0), width=4)
     return img
+
+
+def zoom(rows_wanted: list[int], out: Path, half: int = 45, scale: int = 10) -> int:
+    """Render one cluster of numbered lines zoomed in: the province edges around the
+    given table row numbers, magnified, with labels/leaders placed so none overlap."""
+    from types import SimpleNamespace
+    from PIL import Image
+
+    crossings, skipped, lines, _, rgb, _ = derive(need_worksheet=False, load_rows=False)
+    h, w = rgb.shape[:2]
+    raw = (json.loads(WORKSHEET.read_text(encoding="utf-8")).get("adjacencies", [])
+           if WORKSHEET.is_file() else [])
+    synced, _s, errs, _st = adj.sync_worksheet(crossings, raw, w)
+    if errs:
+        synced = [{"type": "", "comment": ""}] * len(crossings)
+    sel = [(n, crossings[n - 1], synced[n - 1]) for n in rows_wanted]
+    xs = [p[0] for _, c, _ in sel for p in (c.start, c.stop)]
+    ys = [p[1] for _, c, _ in sel for p in (c.start, c.stop)]
+    x0, x1 = max(0, min(xs) - half), min(w, max(xs) + half)
+    y0, y1 = max(0, min(ys) - half), min(h, max(ys) + half)
+    code = _code_map(rgb)[y0:y1, x0:x1]
+    edge = np.zeros(code.shape, dtype=bool)
+    edge[:, :-1] |= code[:, :-1] != code[:, 1:]
+    edge[:-1, :] |= code[:-1, :] != code[1:, :]
+    tile = np.full(code.shape + (3,), 235, dtype=np.uint8)
+    tile[edge] = (110, 110, 110)
+    base = Image.fromarray(tile).resize(((x1 - x0) * scale, (y1 - y0) * scale), Image.NEAREST)
+
+    def tf(pt):
+        return ((pt[0] - x0) * scale + scale // 2, (pt[1] - y0) * scale + scale // 2)
+
+    items = []
+    for n, c, r in sel:
+        note = r.get("comment", "")
+        items.append((tf(c.start), tf(c.stop), f"{n} {note}" if note else str(n),
+                      bool(r.get("type"))))
+    img = _render_numbered(rgb, items, base=base, scale=scale)
+    if out.exists():
+        out.unlink()
+    img.save(out)
+    print(f"wrote {out.relative_to(MOD_ROOT)} (rows {rows_wanted}, {img.size[0]}x{img.size[1]})")
+    return 0
 
 
 def as_filled(path: Path, out: Path) -> int:
@@ -316,6 +404,7 @@ def main(argv: list[str] | None = None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--review", action="store_true", help="table + stubs + numbered render (default)")
+    g.add_argument("--zoom", metavar="ROWS", help="comma-separated table numbers to render zoomed in")
     g.add_argument("--as-filled", metavar="WORKSHEET",
                    help="render a worksheet file in FILE order at its stored coordinates")
     g.add_argument("--sync", action="store_true",
@@ -323,6 +412,9 @@ def main(argv: list[str] | None = None) -> int:
     g.add_argument("--write", action="store_true", help="write map_data/adjacencies.csv")
     g.add_argument("--check", action="store_true", help="assert the committed CSV is current")
     a = ap.parse_args(argv)
+    if a.zoom:
+        rows_ = [int(v) for v in a.zoom.split(",")]
+        return zoom(rows_, DERIVED_DIR / f"adjacencies_zoom_{'_'.join(map(str, rows_))}.png")
     if a.as_filled:
         return as_filled(Path(a.as_filled), DERIVED_DIR / "adjacencies_as_filled.png")
     if a.sync:
