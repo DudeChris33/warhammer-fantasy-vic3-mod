@@ -107,11 +107,25 @@ def derive(*, need_worksheet: bool, load_rows: bool = True):
 def review() -> int:
     from PIL import Image, ImageDraw, ImageFont
 
-    crossings, skipped, lines, rows, rgb, _ = derive(need_worksheet=False)
+    from types import SimpleNamespace
+
+    # Read the worksheet leniently (raw JSON, like --sync) so an invalid or blank row
+    # never blocks the review; invalid types are reported below.
+    crossings, skipped, lines, _, rgb, _ = derive(need_worksheet=False, load_rows=False)
     h, w = rgb.shape[:2]
     names = _state_names()
-    pairs, untyped, errors = adj.match_worksheet(crossings, rows, w)
+    raw = (json.loads(WORKSHEET.read_text(encoding="utf-8")).get("adjacencies", [])
+           if WORKSHEET.is_file() else [])
+    synced, _stale, errors, _stats = adj.sync_worksheet(crossings, raw, w)
+    if errors:
+        synced = [{"type": "", "comment": ""}] * len(crossings)
+    pairs = [(c, SimpleNamespace(type=r.get("type", ""), comment=r.get("comment", "")))
+             for c, r in zip(crossings, synced)]
+    untyped = [c for c, r in pairs if not r.type]
     typed = {id(c) for c, r in pairs if r.type}
+    for c, r in pairs:
+        if r.type and not schema._ADJ_TYPE_RE.fullmatch(r.type):
+            print(f"  INVALID type {r.type!r} ({r.comment!r}) near {list(c.start)}")
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     with open(TABLE_PATH, "w", newline="", encoding="utf-8") as fh:
         wr = csv.writer(fh)

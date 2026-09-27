@@ -38,6 +38,30 @@
     },
     {
       "a": [
+        4231,
+        473
+      ],
+      "b": [
+        4238,
+        488
+      ],
+      "type": "sea",
+      "comment": "East Estalian Isles"
+    },
+    {
+      "a": [
+        4983,
+        1395
+      ],
+      "b": [
+        4973,
+        1396
+      ],
+      "type": "canal_nuln_l",
+      "comment": "Nuln"
+    },
+    {
+      "a": [
         4367,
         476
       ],
@@ -86,6 +110,18 @@
     },
     {
       "a": [
+        3907,
+        833
+      ],
+      "b": [
+        3903,
+        846
+      ],
+      "type": "sea",
+      "comment": "Bitter Sea"
+    },
+    {
+      "a": [
         4163,
         1090
       ],
@@ -122,18 +158,6 @@
     },
     {
       "a": [
-        3976,
-        701
-      ],
-      "b": [
-        3948,
-        712
-      ],
-      "type": "canal_manaanspoort",
-      "comment": "Manaanspoort"
-    },
-    {
-      "a": [
         3913,
         1548
       ],
@@ -146,6 +170,18 @@
     },
     {
       "a": [
+        4020,
+        934
+      ],
+      "b": [
+        4013,
+        939
+      ],
+      "type": "sea",
+      "comment": "North Norsca"
+    },
+    {
+      "a": [
         3857,
         1335
       ],
@@ -155,6 +191,18 @@
       ],
       "type": "canal_sartosa",
       "comment": "Sartosa"
+    },
+    {
+      "a": [
+        3829,
+        1033
+      ],
+      "b": [
+        3829,
+        1022
+      ],
+      "type": "sea",
+      "comment": "Lower River Ruin"
     },
     {
       "a": [
@@ -194,18 +242,6 @@
     },
     {
       "a": [
-        3938,
-        1136
-      ],
-      "b": [
-        3938,
-        1147
-      ],
-      "type": "sea",
-      "comment": "Mordheim"
-    },
-    {
-      "a": [
         4281,
         879
       ],
@@ -242,26 +278,14 @@
     },
     {
       "a": [
-        3829,
-        1033
+        4154,
+        893
       ],
       "b": [
-        3829,
-        1022
+        4151,
+        906
       ],
-      "type": "sea",
-      "comment": "Lower River Ruin"
-    },
-    {
-      "a": [
-        4983,
-        1395
-      ],
-      "b": [
-        4973,
-        1396
-      ],
-      "type": "canal_nuln_l",
+      "type": "canal_nuln_t",
       "comment": "Nuln"
     },
     {
@@ -278,15 +302,15 @@
     },
     {
       "a": [
-        3821,
-        897
+        4385,
+        677
       ],
       "b": [
-        3813,
-        892
+        4385,
+        665
       ],
-      "type": "sea",
-      "comment": "North Estalian Island"
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -302,15 +326,15 @@
     },
     {
       "a": [
-        4154,
-        893
+        4011,
+        1185
       ],
       "b": [
-        4151,
-        906
+        3995,
+        1234
       ],
-      "type": "canal_nuln_t",
-      "comment": "Nuln"
+      "type": "sea",
+      "comment": "Sour Crags"
     },
     {
       "a": [
@@ -386,15 +410,15 @@
     },
     {
       "a": [
-        4130,
-        957
+        3706,
+        1184
       ],
       "b": [
-        4143,
-        959
+        3694,
+        1194
       ],
-      "type": "canal_lower_reik_t",
-      "comment": "Lower River Reik"
+      "type": "sea",
+      "comment": "Zorn Uzkul"
     },
     {
       "a": [
@@ -410,6 +434,18 @@
     },
     {
       "a": [
+        4130,
+        957
+      ],
+      "b": [
+        4143,
+        959
+      ],
+      "type": "canal_lower_reik_t",
+      "comment": "Lower River Reik"
+    },
+    {
+      "a": [
         4092,
         1692
       ],
@@ -419,18 +455,6 @@
       ],
       "type": "canal_lynsk",
       "comment": "Lynsk River"
-    },
-    {
-      "a": [
-        4389,
-        664
-      ],
-      "b": [
-        4401,
-        670
-      ],
-      "type": "sea",
-      "comment": "Forest of Sighs"
     },
     {
       "a": [
@@ -446,15 +470,15 @@
     },
     {
       "a": [
-        3706,
-        1184
+        4255,
+        221
       ],
       "b": [
-        3694,
-        1194
+        4239,
+        236
       ],
       "type": "sea",
-      "comment": "Zorn Uzkul"
+      "comment": "Oak of Prophecy"
     },
     {
       "a": [
@@ -518,6 +542,18 @@
     },
     {
       "a": [
+        3982,
+        1088
+      ],
+      "b": [
+        3936,
+        1087
+      ],
+      "type": "sea",
+      "comment": "North Norsca"
+    },
+    {
+      "a": [
         4297,
         471
       ],
@@ -542,6 +578,18 @@
     },
     {
       "a": [
+        3938,
+        1136
+      ],
+      "b": [
+        3938,
+        1147
+      ],
+      "type": "sea",
+      "comment": "Mordheim"
+    },
+    {
+      "a": [
         4456,
         435
       ],
@@ -554,15 +602,27 @@
     },
     {
       "a": [
-        4231,
-        473
+        4145,
+        956
       ],
       "b": [
-        4238,
-        488
+        4143,
+        947
+      ],
+      "type": "canal_lower_ruin",
+      "comment": "Lower River Ruin"
+    },
+    {
+      "a": [
+        3821,
+        897
+      ],
+      "b": [
+        3813,
+        892
       ],
       "type": "sea",
-      "comment": "East Estalian Isles"
+      "comment": "North Estalian Island"
     },
     {
       "a": [
@@ -590,15 +650,15 @@
     },
     {
       "a": [
-        4145,
-        956
+        4196,
+        957
       ],
       "b": [
-        4143,
-        947
+        4196,
+        946
       ],
-      "type": "canal_lower_ruin",
-      "comment": "Lower River Ruin"
+      "type": "canal_grismerie",
+      "comment": "River Grismerie"
     },
     {
       "a": [
@@ -650,27 +710,15 @@
     },
     {
       "a": [
-        4196,
-        957
+        4153,
+        826
       ],
       "b": [
-        4196,
-        946
+        4138,
+        822
       ],
-      "type": "canal_grismerie",
-      "comment": "River Grismerie"
-    },
-    {
-      "a": [
-        3907,
-        833
-      ],
-      "b": [
-        3903,
-        846
-      ],
-      "type": "sea",
-      "comment": "Bitter Sea"
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -698,18 +746,6 @@
     },
     {
       "a": [
-        3982,
-        1088
-      ],
-      "b": [
-        3936,
-        1087
-      ],
-      "type": "sea",
-      "comment": "North Norsca"
-    },
-    {
-      "a": [
         4082,
         291
       ],
@@ -719,6 +755,18 @@
       ],
       "type": "sea",
       "comment": "Praag"
+    },
+    {
+      "a": [
+        4092,
+        865
+      ],
+      "b": [
+        4103,
+        862
+      ],
+      "type": "sea",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -734,27 +782,15 @@
     },
     {
       "a": [
-        4020,
-        934
+        3976,
+        701
       ],
       "b": [
-        4013,
-        939
+        3948,
+        712
       ],
-      "type": "sea",
-      "comment": "North Norsca"
-    },
-    {
-      "a": [
-        4255,
-        221
-      ],
-      "b": [
-        4239,
-        236
-      ],
-      "type": "sea",
-      "comment": "Oak of Prophecy"
+      "type": "canal_manaanspoort",
+      "comment": "Manaanspoort"
     },
     {
       "a": [
@@ -818,18 +854,6 @@
     },
     {
       "a": [
-        5129,
-        1457
-      ],
-      "b": [
-        5113,
-        1435
-      ],
-      "type": "sea",
-      "comment": "Drakefjord Bay"
-    },
-    {
-      "a": [
         4543,
         433
       ],
@@ -866,18 +890,6 @@
     },
     {
       "a": [
-        4092,
-        865
-      ],
-      "b": [
-        4103,
-        862
-      ],
-      "type": "sea",
-      "comment": "River Brionne"
-    },
-    {
-      "a": [
         3941,
         1039
       ],
@@ -902,15 +914,15 @@
     },
     {
       "a": [
-        4011,
-        1185
+        5129,
+        1457
       ],
       "b": [
-        3995,
-        1234
+        5113,
+        1435
       ],
       "type": "sea",
-      "comment": "Sour Crags"
+      "comment": "Drakefjord Bay"
     },
     {
       "a": [
@@ -926,6 +938,18 @@
     },
     {
       "a": [
+        4153,
+        992
+      ],
+      "b": [
+        4143,
+        988
+      ],
+      "type": "",
+      "comment": ""
+    },
+    {
+      "a": [
         4048,
         1034
       ],
@@ -935,6 +959,20 @@
       ],
       "type": "",
       "comment": ""
+    }
+  ],
+  "stale": [
+    {
+      "a": [
+        4389,
+        664
+      ],
+      "b": [
+        4401,
+        670
+      ],
+      "type": "sea",
+      "comment": "Forest of Sighs"
     }
   ]
 }
