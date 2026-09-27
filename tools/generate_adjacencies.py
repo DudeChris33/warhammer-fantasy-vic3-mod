@@ -170,7 +170,8 @@ def review() -> int:
     dirs = [(1, -1), (1, 1), (-1, -1), (-1, 1), (0, -1), (0, 1), (1, 0), (-1, 0)]
     for i, c in enumerate(crossings, 1):
         col = (0, 140, 0) if id(c) in typed else (220, 0, 0)
-        text = str(i)
+        note = pairs[i - 1][1].comment
+        text = f"{i} {note}" if note else str(i)
         l, t, r, b = d.textbbox((0, 0), text, font=font, stroke_width=3)
         tw, th = r - l, b - t
         mx, my = (c.start[0] + c.stop[0]) // 2, (c.start[1] + c.stop[1]) // 2
