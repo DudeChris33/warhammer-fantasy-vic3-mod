@@ -45,8 +45,8 @@
         4238,
         488
       ],
-      "type": "sea",
-      "comment": "East Estalian Isles"
+      "type": "canal_blades",
+      "comment": "Sea of Blades"
     },
     {
       "a": [
@@ -57,8 +57,8 @@
         4973,
         1396
       ],
-      "type": "canal_nuln_l",
-      "comment": "Nuln"
+      "type": "sea",
+      "comment": "Lower River Ruin"
     },
     {
       "a": [
@@ -117,8 +117,8 @@
         3903,
         846
       ],
-      "type": "sea",
-      "comment": "Bitter Sea"
+      "type": "canal_grismerie",
+      "comment": "River Grismerie"
     },
     {
       "a": [
@@ -178,7 +178,7 @@
         939
       ],
       "type": "sea",
-      "comment": "North Norsca"
+      "comment": "River Grismerie"
     },
     {
       "a": [
@@ -202,7 +202,7 @@
         1022
       ],
       "type": "sea",
-      "comment": "Lower River Ruin"
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -213,8 +213,8 @@
         4224,
         954
       ],
-      "type": "sea",
-      "comment": "Under Fort Soll"
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -226,7 +226,7 @@
         1108
       ],
       "type": "sea",
-      "comment": "Kislev City"
+      "comment": "Under Fort Soll"
     },
     {
       "a": [
@@ -237,8 +237,8 @@
         4421,
         749
       ],
-      "type": "canal_miragliano",
-      "comment": "Miragliano"
+      "type": "sea",
+      "comment": "Kislev City"
     },
     {
       "a": [
@@ -249,8 +249,8 @@
         4286,
         887
       ],
-      "type": "canal_drakefjord_bay",
-      "comment": "Drakefjord Bay"
+      "type": "sea",
+      "comment": "Mordheim"
     },
     {
       "a": [
@@ -261,8 +261,8 @@
         4536,
         435
       ],
-      "type": "sea",
-      "comment": "Sour Sea"
+      "type": "canal_drakefjord_bay",
+      "comment": "Drakefjord Bay"
     },
     {
       "a": [
@@ -274,7 +274,7 @@
         1507
       ],
       "type": "sea",
-      "comment": "River Brionne"
+      "comment": "Sour Sea"
     },
     {
       "a": [
@@ -285,7 +285,7 @@
         4151,
         906
       ],
-      "type": "canal_nuln_t",
+      "type": "canal_nuln_r",
       "comment": "Nuln"
     },
     {
@@ -297,8 +297,8 @@
         4135,
         897
       ],
-      "type": "canal_bordeaux",
-      "comment": "Bordeaux"
+      "type": "canal_nuln_l",
+      "comment": "Nuln"
     },
     {
       "a": [
@@ -309,8 +309,8 @@
         4385,
         665
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_lynsk",
+      "comment": "River Lynsk"
     },
     {
       "a": [
@@ -321,8 +321,8 @@
         3668,
         965
       ],
-      "type": "canal_nuln_b",
-      "comment": "Nuln"
+      "type": "sea",
+      "comment": "North Estalian Island"
     },
     {
       "a": [
@@ -334,7 +334,7 @@
         1234
       ],
       "type": "sea",
-      "comment": "Sour Crags"
+      "comment": "Queek"
     },
     {
       "a": [
@@ -345,8 +345,8 @@
         4137,
         893
       ],
-      "type": "canal_upper_talabec",
-      "comment": "Upper Talabec River"
+      "type": "canal_nuln_t",
+      "comment": "Nuln"
     },
     {
       "a": [
@@ -357,8 +357,8 @@
         4324,
         777
       ],
-      "type": "sea",
-      "comment": "Norscan Island"
+      "type": "canal_upper_talabec",
+      "comment": "Upper Talabec River"
     },
     {
       "a": [
@@ -370,7 +370,7 @@
         469
       ],
       "type": "sea",
-      "comment": "South Estalian Island"
+      "comment": "Norscan Island"
     },
     {
       "a": [
@@ -381,8 +381,8 @@
         3498,
         1153
       ],
-      "type": "canal_echoes_l",
-      "comment": "River of Echoes"
+      "type": "sea",
+      "comment": "South Estalian Island"
     },
     {
       "a": [
@@ -393,7 +393,7 @@
         4010,
         1110
       ],
-      "type": "canal_echoes_r",
+      "type": "canal_echoes_l",
       "comment": "River of Echoes"
     },
     {
@@ -405,8 +405,8 @@
         4160,
         1085
       ],
-      "type": "canal_lower_reik_b",
-      "comment": "Lower River Reik"
+      "type": "canal_echoes_r",
+      "comment": "River of Echoes"
     },
     {
       "a": [
@@ -418,7 +418,7 @@
         1194
       ],
       "type": "sea",
-      "comment": "Zorn Uzkul"
+      "comment": "South Estalian Island"
     },
     {
       "a": [
@@ -429,8 +429,8 @@
         4142,
         944
       ],
-      "type": "canal_ash_t",
-      "comment": "Ash River"
+      "type": "canal_pfieldorf_t",
+      "comment": "Pfieldorf"
     },
     {
       "a": [
@@ -441,8 +441,8 @@
         4143,
         959
       ],
-      "type": "canal_lower_reik_t",
-      "comment": "Lower River Reik"
+      "type": "canal_pfieldorf_b",
+      "comment": "Pfieldorf"
     },
     {
       "a": [
@@ -453,8 +453,8 @@
         4108,
         1693
       ],
-      "type": "canal_lynsk",
-      "comment": "Lynsk River"
+      "type": "canal_ash_t",
+      "comment": "Ash River"
     },
     {
       "a": [
@@ -466,7 +466,7 @@
         1027
       ],
       "type": "sea",
-      "comment": "South Estalian Island"
+      "comment": "Forest of Sighs"
     },
     {
       "a": [
@@ -478,7 +478,7 @@
         236
       ],
       "type": "sea",
-      "comment": "Oak of Prophecy"
+      "comment": "North Norsca"
     },
     {
       "a": [
@@ -490,7 +490,7 @@
         597
       ],
       "type": "sea",
-      "comment": "Zorn Uzkul"
+      "comment": "Uzkulak"
     },
     {
       "a": [
@@ -502,7 +502,7 @@
         587
       ],
       "type": "sea",
-      "comment": "River Stir"
+      "comment": "Uzkulak"
     },
     {
       "a": [
@@ -513,8 +513,8 @@
         4251,
         890
       ],
-      "type": "canal_mymidens",
-      "comment": "Myrmidens"
+      "type": "sea",
+      "comment": "River Stir"
     },
     {
       "a": [
@@ -525,8 +525,8 @@
         4018,
         1293
       ],
-      "type": "canal_altdorf_l",
-      "comment": "Altdorf"
+      "type": "canal_mymidens",
+      "comment": "Myrmidens"
     },
     {
       "a": [
@@ -537,8 +537,8 @@
         4091,
         858
       ],
-      "type": "sea",
-      "comment": "North Kislev River"
+      "type": "canal_altdorf_l",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -550,7 +550,7 @@
         1087
       ],
       "type": "sea",
-      "comment": "North Norsca"
+      "comment": "Under Novalone Pass"
     },
     {
       "a": [
@@ -562,7 +562,7 @@
         456
       ],
       "type": "sea",
-      "comment": "River Grismerie"
+      "comment": "North Kislev River"
     },
     {
       "a": [
@@ -574,7 +574,7 @@
         889
       ],
       "type": "sea",
-      "comment": "Sjotraken"
+      "comment": "River Grismerie"
     },
     {
       "a": [
@@ -585,8 +585,8 @@
         3938,
         1147
       ],
-      "type": "sea",
-      "comment": "Mordheim"
+      "type": "canal_miragliano",
+      "comment": "Miragliano"
     },
     {
       "a": [
@@ -597,8 +597,8 @@
         4456,
         447
       ],
-      "type": "canal_blades",
-      "comment": "Sea of Blades"
+      "type": "sea",
+      "comment": "Sjotraken"
     },
     {
       "a": [
@@ -609,8 +609,8 @@
         4143,
         947
       ],
-      "type": "canal_lower_ruin",
-      "comment": "Lower River Ruin"
+      "type": "canal_pfieldorf_r",
+      "comment": "Pfieldorf"
     },
     {
       "a": [
@@ -621,8 +621,8 @@
         3813,
         892
       ],
-      "type": "sea",
-      "comment": "North Estalian Island"
+      "type": "canal_bordeaux",
+      "comment": "Bordeaux"
     },
     {
       "a": [
@@ -633,7 +633,7 @@
         3796,
         1200
       ],
-      "type": "canal_east_estalian_isles",
+      "type": "sea",
       "comment": "East Estalian Isles"
     },
     {
@@ -645,8 +645,8 @@
         3798,
         1253
       ],
-      "type": "canal_nuln_r",
-      "comment": "Nuln"
+      "type": "canal_east_estalian_isles",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -657,8 +657,8 @@
         4196,
         946
       ],
-      "type": "canal_grismerie",
-      "comment": "River Grismerie"
+      "type": "sea",
+      "comment": "River Aver"
     },
     {
       "a": [
@@ -669,8 +669,8 @@
         4946,
         1442
       ],
-      "type": "sea",
-      "comment": "Erengrad"
+      "type": "canal_lower_ruin",
+      "comment": "Lower River Ruin"
     },
     {
       "a": [
@@ -681,8 +681,8 @@
         4308,
         673
       ],
-      "type": "canal_brionne",
-      "comment": "River Brionne"
+      "type": "sea",
+      "comment": "Erengrad"
     },
     {
       "a": [
@@ -693,8 +693,8 @@
         3814,
         1022
       ],
-      "type": "sea",
-      "comment": "Zharr Naggrund"
+      "type": "canal_brionne",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -706,7 +706,7 @@
         812
       ],
       "type": "sea",
-      "comment": "River Aver"
+      "comment": "Zharr Naggrund"
     },
     {
       "a": [
@@ -717,8 +717,8 @@
         4138,
         822
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Lower Talabec River"
     },
     {
       "a": [
@@ -729,8 +729,8 @@
         4611,
         1534
       ],
-      "type": "",
-      "comment": "Falls of Doom"
+      "type": "sea",
+      "comment": "Bitter Sea"
     },
     {
       "a": [
@@ -741,8 +741,8 @@
         4898,
         701
       ],
-      "type": "sea",
-      "comment": "Under Novalone Pass"
+      "type": "canal_uzkulak",
+      "comment": "Uzkulak Canal"
     },
     {
       "a": [
@@ -754,7 +754,7 @@
         296
       ],
       "type": "sea",
-      "comment": "Praag"
+      "comment": "North Norsca"
     },
     {
       "a": [
@@ -765,8 +765,8 @@
         4103,
         862
       ],
-      "type": "sea",
-      "comment": "River Brionne"
+      "type": "canal_altdorf_b",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -778,7 +778,7 @@
         618
       ],
       "type": "sea",
-      "comment": "River Grismerie"
+      "comment": "Praag"
     },
     {
       "a": [
@@ -802,7 +802,7 @@
         1031
       ],
       "type": "sea",
-      "comment": "Under Blackfyre Pass"
+      "comment": "Oak of Prophecy"
     },
     {
       "a": [
@@ -813,8 +813,8 @@
         4321,
         1030
       ],
-      "type": "canal_altdorf_r",
-      "comment": "Altdorf"
+      "type": "sea",
+      "comment": "Under Blackfyre Pass"
     },
     {
       "a": [
@@ -825,8 +825,8 @@
         4097,
         837
       ],
-      "type": "canal_limnala",
-      "comment": "River Limnala"
+      "type": "canal_altdorf_r",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -837,8 +837,8 @@
         4084,
         1197
       ],
-      "type": "canal_echoes_t",
-      "comment": "River of Echoes"
+      "type": "canal_limnala",
+      "comment": "River Limnala"
     },
     {
       "a": [
@@ -849,8 +849,8 @@
         4155,
         1085
       ],
-      "type": "canal_dragon_isles",
-      "comment": "Dragon Isles"
+      "type": "canal_echoes_t",
+      "comment": "River of Echoes"
     },
     {
       "a": [
@@ -861,8 +861,8 @@
         4552,
         444
       ],
-      "type": "canal_isles_of_doom",
-      "comment": "Isles of Doom"
+      "type": "sea",
+      "comment": "Drakefjord Bay"
     },
     {
       "a": [
@@ -873,8 +873,8 @@
         3691,
         2578
       ],
-      "type": "canal_middle_talabec",
-      "comment": "Middle Talabec"
+      "type": "canal_isles_of_doom",
+      "comment": "Isles of Doom"
     },
     {
       "a": [
@@ -885,8 +885,8 @@
         4215,
         806
       ],
-      "type": "canal_altdorf_b",
-      "comment": "Altdorf"
+      "type": "canal_middle_talabec",
+      "comment": "Middle Talabec River"
     },
     {
       "a": [
@@ -897,8 +897,8 @@
         3946,
         1030
       ],
-      "type": "canal_erengrad",
-      "comment": "Erengrad"
+      "type": "sea",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -909,8 +909,8 @@
         4256,
         662
       ],
-      "type": "sea",
-      "comment": "Queek"
+      "type": "canal_erengrad",
+      "comment": "Erengrad"
     },
     {
       "a": [
@@ -921,8 +921,8 @@
         5113,
         1435
       ],
-      "type": "sea",
-      "comment": "Drakefjord Bay"
+      "type": "canal_dragon_isles",
+      "comment": "Dragon Isles"
     },
     {
       "a": [
@@ -933,8 +933,8 @@
         4451,
         1428
       ],
-      "type": "canal_pina",
-      "comment": "Pina Woods"
+      "type": "sea",
+      "comment": "Sour Crags"
     },
     {
       "a": [
@@ -957,22 +957,8 @@
         3559,
         1109
       ],
-      "type": "",
-      "comment": ""
-    }
-  ],
-  "stale": [
-    {
-      "a": [
-        4389,
-        664
-      ],
-      "b": [
-        4401,
-        670
-      ],
-      "type": "sea",
-      "comment": "Forest of Sighs"
+      "type": "canal_pina",
+      "comment": "Pina Woods"
     }
   ]
 }
