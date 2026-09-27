@@ -11,7 +11,8 @@ coordinates), and ``--write`` emits the engine CSV from that.
 
 Modes::
 
-    python tools/generate_adjacencies.py            # --review (default): table + stubs + render
+    python tools/generate_adjacencies.py            # --review (default): numbered table + render
+    python tools/generate_adjacencies.py --sync     # carry the worksheet over to the current lines
     python tools/generate_adjacencies.py --write    # write map_data/adjacencies.csv from the worksheet
     python tools/generate_adjacencies.py --check    # re-derive in memory, assert == committed CSV
 
@@ -46,7 +47,6 @@ STATE_DIR = MOD_ROOT / "map_data" / "state_regions"
 WORKSHEET = TOOLS_DIR / "config" / "adjacency_worksheet.json"
 CSV_PATH = MOD_ROOT / "map_data" / "adjacencies.csv"
 TABLE_PATH = DERIVED_DIR / "adjacencies_table.csv"
-STUBS_PATH = DERIVED_DIR / "adjacencies_worksheet_stubs.json"
 PREVIEW_PATH = DERIVED_DIR / "adjacencies_preview.png"
 
 
@@ -80,7 +80,7 @@ def _state_names() -> dict[adj.Color, str]:
     return out
 
 
-def derive(*, need_worksheet: bool):
+def derive(*, need_worksheet: bool, load_rows: bool = True):
     """Shared pipeline: (crossings, skipped, lines, rows, code_map) or a SystemExit."""
     for p in (PROVINCES_PNG, PROVINCES_INDEX):
         if not p.is_file():
@@ -96,16 +96,12 @@ def derive(*, need_worksheet: bool):
     index = json.loads(PROVINCES_INDEX.read_text(encoding="utf-8"))
     kinds = {tuple(int(v) for v in c["color"]): c.get("kind", "land") for c in index["cells"]}
     code = _code_map(rgb)
-    rows = schema.load_adjacency_worksheet(WORKSHEET, (w, h))
+    rows = schema.load_adjacency_worksheet(WORKSHEET, (w, h)) if load_rows else []
     lines = adj.extract_lines(mask, map_config.WRAP_X)
     crossings, skipped = adj.classify_lines(
         lines, code, kinds, _touching(code, map_config.WRAP_X), pins=rows,
         wrap_x=map_config.WRAP_X)
     return crossings, skipped, lines, rows, rgb, kinds
-
-
-def _stub(c: adj.Crossing) -> dict:
-    return {"a": list(c.start), "b": list(c.stop), "type": "", "comment": ""}
 
 
 def review() -> int:
@@ -115,7 +111,7 @@ def review() -> int:
     h, w = rgb.shape[:2]
     names = _state_names()
     pairs, untyped, errors = adj.match_worksheet(crossings, rows, w)
-    typed = {id(c) for c, _ in pairs}
+    typed = {id(c) for c, r in pairs if r.type}
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     with open(TABLE_PATH, "w", newline="", encoding="utf-8") as fh:
         wr = csv.writer(fh)
@@ -126,8 +122,6 @@ def review() -> int:
             wr.writerow([i, adj.color_token(c.from_color), adj.color_token(c.to_color),
                          names.get(c.from_color, ""), names.get(c.to_color, ""),
                          *c.start, *c.stop, row.type if row else "", row.comment if row else ""])
-    STUBS_PATH.write_text(json.dumps({"adjacencies": [_stub(c) for c in crossings]}, indent=2)
-                          + "\n", encoding="utf-8")
 
     # Numbered render over dim province edges.
     code = _code_map(rgb)
@@ -196,8 +190,48 @@ def review() -> int:
         print(f"  SKIP near {list(s.centroid)}: {s.reason}")
     for e in errors:
         print(f"  WORKSHEET: {e}")
-    print(f"wrote {TABLE_PATH.relative_to(MOD_ROOT)}, {STUBS_PATH.relative_to(MOD_ROOT)}, "
-          f"{PREVIEW_PATH.relative_to(MOD_ROOT)}")
+    print(f"wrote {TABLE_PATH.relative_to(MOD_ROOT)}, {PREVIEW_PATH.relative_to(MOD_ROOT)}")
+    print("run --sync to carry the worksheet over to these lines (adds blank rows for new ones)")
+    return 0
+
+
+def sync() -> int:
+    """Rewrite the worksheet in place so it matches the lines as drawn now, keeping
+    every typed row (endpoints refreshed), appending blank stubs for new lines and
+    parking unmatched rows under ``stale`` instead of deleting them."""
+    crossings, skipped, _, _, rgb, _ = derive(need_worksheet=False, load_rows=False)
+    h, w = rgb.shape[:2]
+    data = json.loads(WORKSHEET.read_text(encoding="utf-8")) if WORKSHEET.is_file() else {}
+    raw = data.get("adjacencies", [])
+    rows, stale, errors, stats = adj.sync_worksheet(crossings, raw, w)
+    if errors:
+        print("refusing to sync - ambiguous matches (worksheet left untouched):")
+        for e in errors:
+            print("  " + e)
+        return 1
+    bad = [i for i, r in enumerate(rows)
+           if r.get("type") and not schema._ADJ_TYPE_RE.fullmatch(r["type"])]
+    out = {"adjacencies": rows}
+    parked = list(data.get("stale", [])) + stale
+    if parked:
+        out["stale"] = parked
+    text = json.dumps(out, indent=2) + "\n"
+    if not WORKSHEET.is_file() or WORKSHEET.read_text(encoding="utf-8") != text:
+        WORKSHEET.write_text(text, encoding="utf-8")
+    print(f"synced {WORKSHEET.relative_to(MOD_ROOT)}: {stats['kept']} kept "
+          f"({stats['moved']} endpoints refreshed), {stats['new']} new blank row(s), "
+          f"{stats['stale']} unmatched row(s) parked under 'stale'")
+    for r in stale:
+        print(f"  parked: {r.get('a')}->{r.get('b')} type={r.get('type')!r} "
+              f"comment={r.get('comment')!r}")
+    untyped = [i + 1 for i, r in enumerate(rows) if not r.get("type")]
+    if untyped:
+        print(f"  untyped rows (numbers as in the review table): {untyped}")
+    for i in bad:
+        print(f"  INVALID type on row {i + 1}: {rows[i]['type']!r} "
+              f"(comment {rows[i].get('comment')!r})")
+    for s in skipped:
+        print(f"  SKIP near {list(s.centroid)}: {s.reason}")
     return 0
 
 
@@ -242,9 +276,13 @@ def main(argv: list[str] | None = None) -> int:
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     g = ap.add_mutually_exclusive_group()
     g.add_argument("--review", action="store_true", help="table + stubs + numbered render (default)")
+    g.add_argument("--sync", action="store_true",
+                   help="carry the worksheet over to the current lines (keeps typed rows, adds blanks)")
     g.add_argument("--write", action="store_true", help="write map_data/adjacencies.csv")
     g.add_argument("--check", action="store_true", help="assert the committed CSV is current")
     a = ap.parse_args(argv)
+    if a.sync:
+        return sync()
     if a.write or a.check:
         return write(check=a.check)
     return review()

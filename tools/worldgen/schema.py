@@ -885,8 +885,8 @@ class AdjacencyRow:
         (a,) = _as_seed_list([_require(d, "a", ctx)], f"{ctx}.a", canvas)
         (b,) = _as_seed_list([_require(d, "b", ctx)], f"{ctx}.b", canvas)
         typ = _as_str(_require(d, "type", ctx), f"{ctx}.type")
-        if not _ADJ_TYPE_RE.fullmatch(typ):
-            raise SchemaError(f"{ctx}.type: must be 'sea' or 'canal_<id>', got {typ!r}")
+        if typ != "" and not _ADJ_TYPE_RE.fullmatch(typ):  # "" = a stub not typed yet
+            raise SchemaError(f"{ctx}.type: must be 'sea' or 'canal_<id>' (or blank for an untyped stub), got {typ!r}")
         comment = _as_str(d.get("comment", ""), f"{ctx}.comment")
         if any(ch in comment for ch in (";", "\n", "\r")):
             raise SchemaError(f"{ctx}.comment: must not contain ';' or a line break")

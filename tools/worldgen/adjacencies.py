@@ -348,10 +348,75 @@ def match_worksheet(crossings: list[Crossing], rows, width: int | None = None,
     return pairs, untyped, errors
 
 
+class _Probe:
+    """Duck-typed worksheet row for matching raw JSON rows against crossings."""
+
+    def __init__(self, raw: dict) -> None:
+        self.a = (int(raw["a"][0]), int(raw["a"][1]))
+        self.b = (int(raw["b"][0]), int(raw["b"][1]))
+
+
+def sync_worksheet(crossings: list[Crossing], raw_rows: list[dict], width: int | None = None,
+                   tol: int = MATCH_TOL):
+    """Carry the hand-authored worksheet over to the current drawn lines.
+
+    ``raw_rows`` are the worksheet's JSON dicts, other fields untouched. Each row is
+    matched to the crossing whose two endpoints are both within ``tol`` px (either
+    order); a matched row keeps its type/comment/pins and has its endpoints refreshed
+    to the line as drawn now (keeping the row's own a/b orientation). A crossing no
+    row claims becomes a blank stub in line order. A row matching no line is NOT
+    deleted: it is returned in ``stale`` so the caller can park it. Ambiguity (a row
+    on two lines, a line under two rows) is an error and nothing is rewritten.
+
+    Returns ``(rows, stale, errors, stats)``; ``rows`` is ordered like the numbered
+    review table (From, To, start_x, start_y).
+    """
+    probes = [_Probe(r) for r in raw_rows]
+    row_hits: list[list[int]] = [[] for _ in raw_rows]
+    cross_hits: list[list[int]] = [[] for _ in crossings]
+    for i, p in enumerate(probes):
+        for j, c in enumerate(crossings):
+            if _match_ends(p.a, p.b, c.start, c.stop, tol, width):
+                row_hits[i].append(j)
+                cross_hits[j].append(i)
+    errors = []
+    for i, h in enumerate(row_hits):
+        if len(h) > 1:
+            errors.append(f"worksheet row {list(probes[i].a)}->{list(probes[i].b)} "
+                          f"matches {len(h)} drawn lines")
+    for j, h in enumerate(cross_hits):
+        if len(h) > 1:
+            errors.append(f"drawn line {list(crossings[j].start)}->{list(crossings[j].stop)} "
+                          f"is claimed by {len(h)} worksheet rows")
+    if errors:
+        return [], [], errors, {}
+    out: list[dict] = []
+    moved = 0
+    for j, c in enumerate(crossings):
+        if cross_hits[j]:
+            i = cross_hits[j][0]
+            raw = dict(raw_rows[i])
+            m = _match_ends(probes[i].a, probes[i].b, c.start, c.stop, tol, width)
+            a, b = (c.start, c.stop) if m == 1 else (c.stop, c.start)
+            if (probes[i].a, probes[i].b) != (a, b):
+                moved += 1
+            raw["a"], raw["b"] = [a[0], a[1]], [b[0], b[1]]
+            out.append(raw)
+        else:
+            out.append({"a": [c.start[0], c.start[1]], "b": [c.stop[0], c.stop[1]],
+                        "type": "", "comment": ""})
+    stale = [raw_rows[i] for i, h in enumerate(row_hits) if not h]
+    stats = {"kept": sum(1 for h in cross_hits if h), "moved": moved,
+             "new": sum(1 for h in cross_hits if not h), "stale": len(stale)}
+    return out, stale, [], stats
+
+
 def type_kind_errors(pairs, kinds: dict) -> list[str]:
     """``sea`` rows must join land to land, ``canal_*`` rows sea to sea."""
     errors = []
     for c, row in pairs:
+        if not row.type:
+            continue  # untyped stub
         want = "land" if row.type == "sea" else "sea"
         got = (kinds.get(c.from_color), kinds.get(c.to_color))
         if got != (want, want):
@@ -364,6 +429,7 @@ def emit_csv(pairs, height: int) -> str:
     """``adjacencies.csv`` text: header + rows sorted by (From, To, start_x,
     start_y), engine ``y`` = ``height - 1 - y``, ``Through`` -1, empty rule name,
     LF joins, no trailing newline (a trailing newline is a malformed last row)."""
+    pairs = [cr for cr in pairs if cr[1].type]  # an untyped stub is not emitted
     ordered = sorted(pairs, key=lambda cr: (color_code(cr[0].from_color),
                                             color_code(cr[0].to_color),
                                             cr[0].start[0], cr[0].start[1]))

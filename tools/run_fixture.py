@@ -2653,6 +2653,26 @@ def _selfcheck_adjacencies() -> None:
     tk = {A: "land", C: "land"}
     assert adj.type_kind_errors(pairs, tk) == [], "sea rows join land to land"
     assert len(adj.type_kind_errors([(pairs[0][0], _row((1, 1), (2, 2), "canal_x"))], tk)) == 1
+    # sync: typed rows survive a redraw; new lines get blank rows; unmatched rows are parked
+    C0 = adj.Crossing(A, C, (5, 5), (25, 5), 21, (15, 5))
+    C1 = adj.Crossing(A, C, (5, 20), (25, 30), 30, (15, 25))
+    C2 = adj.Crossing(A, C, (40, 3), (52, 9), 14, (46, 6))
+    raw = [{"a": [27, 5], "b": [6, 6], "type": "sea", "comment": "Shifted", "a_color": "xAA0000"},
+           {"a": [5, 21], "b": [25, 30], "type": "canal_x", "comment": "Kept"},
+           {"a": [1, 1], "b": [2, 2], "type": "sea", "comment": "Gone"}]
+    srows, sstale, serrs, sstats = adj.sync_worksheet([C0, C1, C2], raw, W)
+    assert not serrs and sstats == {"kept": 2, "moved": 2, "new": 1, "stale": 1}, (serrs, sstats)
+    assert [r["type"] for r in srows] == ["sea", "canal_x", ""], "types follow their lines"
+    assert srows[0]["comment"] == "Shifted" and srows[0]["a_color"] == "xAA0000", "extra fields kept"
+    assert srows[0]["a"] == [25, 5] and srows[0]["b"] == [5, 5], "row orientation kept, endpoints refreshed"
+    assert srows[2]["a"] == [40, 3] and srows[2]["comment"] == ""
+    assert sstale == [raw[2]], "an unmatched row is parked, not deleted"
+    again, stale2, _, st2 = adj.sync_worksheet([C0, C1, C2], srows, W)
+    assert again == srows and not stale2 and st2["moved"] == 0, "sync is idempotent"
+    _, _, amb, _ = adj.sync_worksheet([C0, C1, C2], raw + [dict(raw[1])], W)
+    assert any("claimed by 2" in e for e in amb), "ambiguity leaves everything untouched"
+    blank_pairs = [(C0, schema.AdjacencyRow(a=C0.start, b=C0.stop, type="", comment=""))]
+    assert adj.emit_csv(blank_pairs, H) == adj.ADJACENCIES_HEADER, "an untyped stub is not emitted"
     text = adj.emit_csv(pairs, H)
     assert text == adj.emit_csv(list(reversed(pairs)), H) == adj.emit_csv(pairs, H)
     out = text.split("\n")
@@ -2691,7 +2711,8 @@ def _selfcheck_adjacencies() -> None:
         assert _load([]) == []
         ok = {"a": [1, 2], "b": [30, 4], "type": "sea"}
         assert len(_load([ok, {**ok, "a": [3, 3], "type": "canal_x", "a_color": "xAA0000"}])) == 2
-        for bad in ({**ok, "type": ""}, {**ok, "type": "tunnel"}, {**ok, "b": [999, 4]},
+        assert _load([{**ok, "type": ""}])[0].type == "", "a blank type is an untyped stub, not an error"
+        for bad in ({**ok, "type": "canal_"}, {**ok, "type": "tunnel"}, {**ok, "b": [999, 4]},
                     {**ok, "comment": "a;b"}, {**ok, "a_color": "red"}):
             try:
                 _load([bad])
