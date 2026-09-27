@@ -206,18 +206,6 @@
     },
     {
       "a": [
-        4213,
-        961
-      ],
-      "b": [
-        4224,
-        954
-      ],
-      "type": "",
-      "comment": ""
-    },
-    {
-      "a": [
         4181,
         1084
       ],
@@ -386,6 +374,18 @@
     },
     {
       "a": [
+        4227,
+        958
+      ],
+      "b": [
+        4227,
+        970
+      ],
+      "type": "sea",
+      "comment": "River Aver"
+    },
+    {
+      "a": [
         4089,
         1121
       ],
@@ -429,8 +429,8 @@
         4142,
         944
       ],
-      "type": "canal_pfieldorf_t",
-      "comment": "Pfieldorf"
+      "type": "canal_aver_t",
+      "comment": "River Aver"
     },
     {
       "a": [
@@ -441,8 +441,8 @@
         4143,
         959
       ],
-      "type": "canal_pfieldorf_b",
-      "comment": "Pfieldorf"
+      "type": "canal_aver_b",
+      "comment": "River Aver"
     },
     {
       "a": [
@@ -609,8 +609,8 @@
         4143,
         947
       ],
-      "type": "canal_pfieldorf_r",
-      "comment": "Pfieldorf"
+      "type": "canal_aver_r",
+      "comment": "River Aver"
     },
     {
       "a": [
@@ -647,18 +647,6 @@
       ],
       "type": "canal_east_estalian_isles",
       "comment": "East Estalian Isles"
-    },
-    {
-      "a": [
-        4196,
-        957
-      ],
-      "b": [
-        4196,
-        946
-      ],
-      "type": "sea",
-      "comment": "River Aver"
     },
     {
       "a": [
@@ -945,8 +933,8 @@
         4143,
         988
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Pfieldorf"
     },
     {
       "a": [
