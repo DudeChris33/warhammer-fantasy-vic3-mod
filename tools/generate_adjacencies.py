@@ -48,6 +48,18 @@ WORKSHEET = TOOLS_DIR / "config" / "adjacency_worksheet.json"
 CSV_PATH = MOD_ROOT / "map_data" / "adjacencies.csv"
 TABLE_PATH = DERIVED_DIR / "adjacencies_table.csv"
 PREVIEW_PATH = DERIVED_DIR / "adjacencies_preview.png"
+STRAITS_PATH = MOD_ROOT / "common" / "strait_definitions" / "canals.txt"
+CANAL_LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_canals_l_english.yml"
+BOM = b"\xef\xbb\xbf"
+INDENT = "\t"
+
+
+def _write_bytes(path: Path, text: str, bom: bool = False) -> None:
+    data = text.encode("utf-8")
+    if bom:
+        data = BOM + data
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_bytes(data)
 
 
 def _code_map(rgb: np.ndarray) -> np.ndarray:
@@ -371,6 +383,59 @@ def build_csv() -> tuple[str, list[str], list]:
     return adj.emit_csv(pairs, h), errors, untyped
 
 
+def build_straits() -> tuple[str, str, list[str]]:
+    """Derive ``common/strait_definitions/canals.txt`` + the canal loc file text
+    from the same worksheet-matched crossings :func:`build_csv` uses (board
+    #5744). Returns ``(straits_text, loc_text, notes)`` — ``notes`` lists a
+    ``canal_*`` row with no resolvable land pair (reported, never an error here;
+    the existing ``_check_adjacency_rows`` validator is what turns that into a
+    real, blocking failure once the full offline gate runs)."""
+    crossings, _, _, rows, rgb, _ = derive(need_worksheet=True)
+    w = rgb.shape[1]
+    pairs, _, errors = adj.match_worksheet(crossings, rows, w)
+    if errors:
+        return "", "", []
+    blocks: dict[str, tuple] = {}
+    notes: list[str] = []
+    for c, row in pairs:
+        if not row.type.startswith("canal_"):
+            continue
+        land = c.land_pair
+        if land is None and row.land_a_color is not None and row.land_b_color is not None:
+            land = tuple(sorted((row.land_a_color, row.land_b_color), key=adj.color_code))
+        if land is None:
+            notes.append(f"{row.type}: no land endpoints yet (draw it as a '+'/'X' junction, "
+                         "or pin land_a_color/land_b_color in the worksheet)")
+            continue
+        blocks[row.type] = (c.from_color, c.to_color, land, row.strait_type, row.comment)
+
+    def render_block(canal_id: str) -> str:
+        sea_a, sea_b, (land_a, land_b), strait_type, _comment = blocks[canal_id]
+        return "\n".join([
+            f"{canal_id} = {{",
+            f"{INDENT}type = {strait_type}",
+            "",
+            f"{INDENT}total_block_requires_full_control = no",
+            f"{INDENT}military_block_requires_full_control = no",
+            "",
+            f"{INDENT}first_land_endpoint = {adj.color_token(land_a)}",
+            f"{INDENT}second_land_endpoint = {adj.color_token(land_b)}",
+            "",
+            f"{INDENT}first_sea_endpoint = {adj.color_token(sea_a)}",
+            f"{INDENT}second_sea_endpoint = {adj.color_token(sea_b)}",
+            "}",
+        ])
+
+    straits_text = ("\n\n".join(render_block(cid) for cid in sorted(blocks)) + "\n"
+                    if blocks else "")
+    loc_lines = ["l_english:"]
+    for canal_id in sorted(blocks):
+        name = blocks[canal_id][4].replace('"', "'")
+        loc_lines.append(f' {canal_id}:0 "{name}"')
+    loc_text = "\n".join(loc_lines) + "\n" if blocks else ""
+    return straits_text, loc_text, notes
+
+
 def write(check: bool) -> int:
     if not schema.load_adjacency_worksheet(WORKSHEET):
         raise SystemExit(f"{WORKSHEET.name} has no rows - fill it from the --review stubs first")
@@ -380,22 +445,46 @@ def write(check: bool) -> int:
         for e in errors:
             print("  " + e)
         return 1
+    straits_text, loc_text, notes = build_straits()
     data = text.encode("utf-8")  # LF, no BOM, no trailing newline
+    straits_data = BOM + straits_text.encode("utf-8")
+    loc_data = BOM + loc_text.encode("utf-8")
     if check:
         cur = CSV_PATH.read_bytes() if CSV_PATH.is_file() else b""
+        cur_straits = STRAITS_PATH.read_bytes() if STRAITS_PATH.is_file() else b""
+        cur_loc = CANAL_LOC_PATH.read_bytes() if CANAL_LOC_PATH.is_file() else b""
+        stale = []
         if cur != data:
-            print("adjacencies.csv is stale - re-run generate_adjacencies.py --write")
+            stale.append(str(CSV_PATH.relative_to(MOD_ROOT)))
+        if cur_straits != straits_data:
+            stale.append(str(STRAITS_PATH.relative_to(MOD_ROOT)))
+        if cur_loc != loc_data:
+            stale.append(str(CANAL_LOC_PATH.relative_to(MOD_ROOT)))
+        if stale:
+            print("stale - re-run generate_adjacencies.py --write: " + ", ".join(stale))
             return 1
-        print("adjacencies.csv matches the worksheet + drawn lines")
+        print("adjacencies.csv, strait_definitions and canal loc match the worksheet + drawn lines")
         return 0
     if untyped:
         print(f"note: {len(untyped)} drawn line(s) have no worksheet row and are omitted")
+    for note in notes:
+        print(f"note: {note}")
     if not CSV_PATH.is_file() or CSV_PATH.read_bytes() != data:
         CSV_PATH.write_bytes(data)
         n_rows = data.count(b"\n")
         print(f"wrote {CSV_PATH.relative_to(MOD_ROOT)} ({n_rows} row(s))")
     else:
         print("adjacencies.csv unchanged")
+    if not STRAITS_PATH.is_file() or STRAITS_PATH.read_bytes() != straits_data:
+        _write_bytes(STRAITS_PATH, straits_text, bom=True)
+        print(f"wrote {STRAITS_PATH.relative_to(MOD_ROOT)}")
+    else:
+        print(f"{STRAITS_PATH.relative_to(MOD_ROOT)} unchanged")
+    if not CANAL_LOC_PATH.is_file() or CANAL_LOC_PATH.read_bytes() != loc_data:
+        _write_bytes(CANAL_LOC_PATH, loc_text, bom=True)
+        print(f"wrote {CANAL_LOC_PATH.relative_to(MOD_ROOT)}")
+    else:
+        print(f"{CANAL_LOC_PATH.relative_to(MOD_ROOT)} unchanged")
     return 0
 
 

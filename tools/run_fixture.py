@@ -2740,7 +2740,15 @@ def _selfcheck_adjacencies() -> None:
         cells.append({"color": [9, 9, 9], "kind": "lake"})
         sd = Path(td) / "straits"
         sd.mkdir()
-        (sd / "s.txt").write_text("canal_ok = { a = b }\n", encoding="utf-8")
+        # P touches only Q; R touches both Q and S — a valid "opposite shores" canal
+        # (board #5744) needs only that each land endpoint touch a *different* one
+        # of the two sea endpoints, not that it touch *only* one.
+        (sd / "s.txt").write_text(
+            "canal_ok = {\n\ttype = artificial\n\ttotal_block_requires_full_control = no\n"
+            "\tmilitary_block_requires_full_control = no\n"
+            "\tfirst_land_endpoint = x010000\n\tsecond_land_endpoint = x030000\n"
+            "\tfirst_sea_endpoint = x020000\n\tsecond_sea_endpoint = x040000\n}\n",
+            encoding="utf-8")
         csv = Path(td) / "adjacencies.csv"
 
         def _errs(row):
@@ -2760,6 +2768,70 @@ def _selfcheck_adjacencies() -> None:
             "a canal row joining land to land must fail"
         assert any("Type" in e for e in _errs("x010000;x030000;canal_bad;-1;5;34;20;14;;None"))
         assert any("already touch" in e for e in _errs("x010000;x020000;sea;-1;5;34;5;24;;None"))
+
+        # A canal row is exempt from the touching-provinces skip (board #5744):
+        # two sea provinces that touch (Sea1/Sea2 here) would otherwise be flagged
+        # "already touch", but a canal's whole point is a controllable chokepoint
+        # even when the two seas also connect some other way.
+        L, Sea1, Sea2 = (11, 0, 0), (12, 0, 0), (13, 0, 0)
+        trgb = np.zeros((30, W, 3), dtype=np.uint8)
+        for i, c in enumerate((L, Sea1, Sea2)):
+            trgb[i * 10:(i + 1) * 10, :] = c
+        tpng = Path(td) / "t.png"
+        write_rgb_png(tpng, trgb)
+        tbitmap = vm.ProvinceBitmap(tpng, wrap_x=False)
+        tcells = [{"color": list(c), "kind": k}
+                 for c, k in ((L, "land"), (Sea1, "sea"), (Sea2, "sea"))]
+        tsd = Path(td) / "straits2"
+        tsd.mkdir()
+        (tsd / "s.txt").write_text(
+            "canal_touch = {\n\ttype = artificial\n\ttotal_block_requires_full_control = no\n"
+            "\tmilitary_block_requires_full_control = no\n"
+            "\tfirst_land_endpoint = xFF00AA\n\tsecond_land_endpoint = xFF00AB\n"
+            "\tfirst_sea_endpoint = x0C0000\n\tsecond_sea_endpoint = x0D0000\n}\n",
+            encoding="utf-8")
+        tcsv = Path(td) / "t_adj.csv"
+        tcsv.write_text(adj.ADJACENCIES_HEADER + "\nx0C0000;x0D0000;canal_touch;-1;5;24;5;14;;None",
+                        encoding="utf-8")
+        touch_errs = vm._check_adjacency_rows(tcsv, tbitmap, tcells, tsd)
+        assert not any("already touch" in e for e in touch_errs), touch_errs
+        tcsv.write_text(adj.ADJACENCIES_HEADER + "\nx0C0000;x0D0000;sea;-1;5;24;5;14;;None",
+                        encoding="utf-8")
+        assert any("already touch" in e for e in
+                   vm._check_adjacency_rows(tcsv, tbitmap, tcells, tsd)), \
+            "an ordinary 'sea' row is still caught by the touching-provinces skip"
+
+        # _check_strait_block content checks, in isolation (board #5744)
+        Pc, Qc, Rc, Sc, Lakec = (1, 0, 0), (2, 0, 0), (3, 0, 0), (4, 0, 0), (9, 9, 9)
+        idx_colors = {Pc, Qc, Rc, Sc, Lakec}
+        knd = {Pc: "land", Qc: "sea", Rc: "land", Sc: "sea", Lakec: "lake"}
+        touch = {frozenset((Pc, Qc)), frozenset((Rc, Qc)), frozenset((Rc, Sc))}
+        good_fields = {"first_sea_endpoint": "x020000", "second_sea_endpoint": "x040000",
+                      "first_land_endpoint": "x010000", "second_land_endpoint": "x030000"}
+        assert vm._check_strait_block("t", "c", good_fields, Qc, Sc, idx_colors, knd, touch) == []
+        missing = dict(good_fields)
+        del missing["first_land_endpoint"]
+        assert any("has no first_land_endpoint" in e for e in
+                   vm._check_strait_block("t", "c", missing, Qc, Sc, idx_colors, knd, touch))
+        mismatched = {**good_fields, "first_sea_endpoint": "x090909"}
+        assert any("sea endpoints don't match" in e for e in
+                   vm._check_strait_block("t", "c", mismatched, Qc, Sc, idx_colors, knd, touch))
+        not_land = {**good_fields, "first_land_endpoint": "x020000"}  # Q is sea, not land
+        assert any("not land" in e for e in
+                   vm._check_strait_block("t", "c", not_land, Qc, Sc, idx_colors, knd, touch))
+        unknown_color = {**good_fields, "first_land_endpoint": "xABCDEF"}
+        assert any("not a province" in e for e in
+                   vm._check_strait_block("t", "c", unknown_color, Qc, Sc, idx_colors, knd, touch))
+        same_land = {**good_fields, "second_land_endpoint": "x010000"}
+        assert any("must be distinct" in e for e in
+                   vm._check_strait_block("t", "c", same_land, Qc, Sc, idx_colors, knd, touch))
+        # both land endpoints only touch Q (Sc), never Rc's actual far shore -> same side
+        one_side_touch = {frozenset((Pc, Qc)), frozenset((Rc, Qc))}  # Rc no longer touches Sc
+        assert any("opposite shores" in e for e in
+                   vm._check_strait_block("t", "c", good_fields, Qc, Sc, idx_colors, knd,
+                                          one_side_touch))
+        blocks = vm._parse_strait_blocks(sd)
+        assert set(blocks) == {"canal_ok"} and blocks["canal_ok"]["type"] == "artificial"
         assert any("not a province" in e
                    for e in _errs("x010000;xABCDEF;sea;-1;5;34;20;14;;None"))
         assert any("same province" in e for e in _errs("x010000;x010000;sea;-1;5;34;20;34;;None"))
@@ -2768,6 +2840,116 @@ def _selfcheck_adjacencies() -> None:
         assert any("rule_name" in e for e in _errs("x010000;x030000;sea;-1;5;34;20;14;r;None"))
         csv.write_text(adj.ADJACENCIES_HEADER + "\nx010000;x030000;sea", encoding="utf-8")
         assert vm._check_adjacencies(csv), "a bad column count must fail the parse check"
+
+
+def _selfcheck_canal_junctions() -> None:
+    """Board #5744: a canal drawn as a 4-arm "+"/"X" junction decomposes into a
+    sea pair (an ordinary :class:`adj.Crossing`, unchanged downstream) + a land
+    pair, by resolved province kind, on a synthetic mask — no dependency on the
+    real source."""
+    from worldgen import adjacencies as adj
+
+    H = W = 30
+    Land1, Sea1, Sea2, Land2 = (10, 0, 0), (10, 1, 0), (10, 2, 0), (10, 3, 0)
+    rgb = np.zeros((H, W, 3), dtype=np.uint8)
+    rgb[:15, :15] = Land1
+    rgb[:15, 15:] = Sea1
+    rgb[15:, :15] = Sea2
+    rgb[15:, 15:] = Land2
+    code = ((rgb[..., 0].astype(np.uint32) << 16) | (rgb[..., 1].astype(np.uint32) << 8)
+            | rgb[..., 2].astype(np.uint32))
+    kinds = {Land1: "land", Sea1: "sea", Sea2: "sea", Land2: "land"}
+
+    def _x_mask(arm: int = 9) -> np.ndarray:
+        """A clean 4-arm "X" from (15,15), one arm per quadrant."""
+        m = np.zeros((H, W), dtype=bool)
+        m[15, 15] = True
+        for d in range(1, arm + 1):
+            m[15 - d, 15 - d] = m[15 - d, 15 + d] = True
+            m[15 + d, 15 - d] = m[15 + d, 15 + d] = True
+        return m
+
+    def _plateau_mask(arm: int = 9) -> np.ndarray:
+        """A 4-arm "+" whose intersection is *two* branch pixels 2px apart
+        bridged by one degree-2 pixel — the measured plateau (board #5744) that
+        :func:`adj._junction_clusters` must collapse to one logical junction via
+        its short (<=SPUR_PX) connecting chain, not report as 2 separate ones."""
+        m = np.zeros((H, W), dtype=bool)
+        m[15, 14] = m[15, 15] = m[15, 16] = True  # the 2px-apart bridge
+        for d in range(1, arm + 1):
+            m[15 - d, 14] = True   # N arm off the left branch pixel
+            m[15, 14 - d] = True   # W arm off the left branch pixel
+            m[15 + d, 16] = True   # S arm off the right branch pixel
+            m[15, 16 + d] = True   # E arm off the right branch pixel
+        return m
+
+    mask = _x_mask()
+    lines = adj.extract_lines(mask, wrap_x=False)
+    assert len(lines) == 1 and lines[0].leaves is not None, lines
+    crossings, skipped = adj.classify_lines(lines, code, kinds, touching=set(), wrap_x=False)
+    assert not skipped, skipped
+    assert len(crossings) == 1
+    c = crossings[0]
+    assert {c.from_color, c.to_color} == {Sea1, Sea2}, c
+    assert c.land_pair is not None and set(c.land_pair) == {Land1, Land2}, c
+    assert c.land_points is not None and len(c.land_points) == 2
+
+    # the plateau case: two branch pixels bridged by a short chain still resolve
+    # to one logical junction. Tips (N, W, S, E) land far from the "X" mask's
+    # quadrant split, so colour by small patches at the known tip coordinates
+    # instead of reusing the quadrant grid.
+    prgb = np.full((H, W, 3), Land1, dtype=np.uint8)
+    for (ty, tx), col in (((6, 14), Land1), ((15, 5), Sea2), ((24, 16), Land2), ((15, 25), Sea1)):
+        prgb[max(0, ty - 2):ty + 3, max(0, tx - 2):tx + 3] = col
+    pcode = ((prgb[..., 0].astype(np.uint32) << 16) | (prgb[..., 1].astype(np.uint32) << 8)
+            | prgb[..., 2].astype(np.uint32))
+    gapped = adj.extract_lines(_plateau_mask(), wrap_x=False)
+    assert len(gapped) == 1 and gapped[0].leaves is not None, \
+        "two branch pixels bridged by a short (<=SPUR_PX) chain is one logical junction"
+    gc, gs = adj.classify_lines(gapped, pcode, kinds, touching=set(), wrap_x=False)
+    assert len(gc) == 1 and not gs, (gc, gs)
+    assert {gc[0].from_color, gc[0].to_color} == {Sea1, Sea2} and set(gc[0].land_pair) == {Land1, Land2}
+
+    # a canal's sea pair is exempt from the touching-provinces skip
+    touching = {frozenset((Sea1, Sea2))}
+    ct, st = adj.classify_lines(lines, code, kinds, touching=touching, wrap_x=False)
+    assert len(ct) == 1 and not st, "junction sea pair ignores the touching skip"
+
+    # 3 leaves (two marks too close together to tell apart) -> named skip
+    m3 = _x_mask()
+    m3[15 - 9:15, 15 - 9:15] = False  # erase the NW arm entirely
+    l3 = adj.extract_lines(m3, wrap_x=False)
+    assert len(l3) == 1 and l3[0].leaves is None and "3 leaves" in l3[0].reason, l3
+
+    # all 4 leaves the same kind -> no valid sea/land split
+    all_land_kinds = {Land1: "land", Sea1: "land", Sea2: "land", Land2: "land"}
+    _, sk_all = adj.classify_lines(lines, code, all_land_kinds, touching=set(), wrap_x=False)
+    assert len(sk_all) == 1 and "no leaf pairing" in sk_all[0].reason, sk_all
+
+    # two leaves resolving to the SAME land colour are not a valid land pair
+    same_land_rgb = rgb.copy()
+    same_land_rgb[15:, 15:] = Land1  # SE quadrant now also Land1
+    same_code = ((same_land_rgb[..., 0].astype(np.uint32) << 16)
+                | (same_land_rgb[..., 1].astype(np.uint32) << 8) | same_land_rgb[..., 2])
+    _, sk_same = adj.classify_lines(lines, same_code, kinds, touching=set(), wrap_x=False)
+    assert len(sk_same) == 1 and "no leaf pairing" in sk_same[0].reason, sk_same
+
+    # a lake leaf can never join a valid pair (kind must be exactly "land"/"sea")
+    lake_kinds = dict(kinds)
+    lake_kinds[Land2] = "lake"
+    _, sk_lake = adj.classify_lines(lines, code, lake_kinds, touching=set(), wrap_x=False)
+    assert len(sk_lake) == 1 and "no leaf pairing" in sk_lake[0].reason, sk_lake
+
+    # worksheet identity survives a canal's redraw from a plain line to a "+":
+    # a stale row's a/b (the line's pre-redraw endpoints) match the new
+    # crossing's land_points, not its start/stop, and it keeps its type/comment.
+    old_a, old_b = c.land_points  # the line's pre-redraw (land-side) endpoints
+    raw = [{"a": [old_a[0], old_a[1]], "b": [old_b[0], old_b[1]],
+           "type": "canal_x", "comment": "Kept across redraw"}]
+    srows, sstale, serrs, sstats = adj.sync_worksheet(crossings, raw, W)
+    assert not serrs and not sstale and sstats["kept"] == 1, (serrs, sstale, sstats)
+    assert srows[0]["type"] == "canal_x" and srows[0]["comment"] == "Kept across redraw"
+    assert tuple(srows[0]["a"]) in (c.start, c.stop), "endpoints refreshed to the sea pair"
 
 
 def _selfcheck_stack_hubs() -> None:
@@ -4844,6 +5026,10 @@ def run_check() -> int:
           "same-province skipped, pins), worksheet matching (tolerance, one-to-one, stale), "
           "bottom-origin sorted byte-identical CSV, schema + validator negative cases "
           "self-check passed.")
+    _selfcheck_canal_junctions()
+    print("canal junctions (#5744): '+'/'X' sea+land split, plateau collapse, touching-skip "
+          "exemption, 3-leaf/no-valid-pairing/same-colour/lake skips, worksheet identity "
+          "across a redraw via land_points self-check passed.")
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")

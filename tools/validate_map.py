@@ -1864,16 +1864,86 @@ def _near_color(code: np.ndarray, x: int, y: int, color: Color, radius: int,
     return bool((code[np.ix_(ys, xs)] == target).any())
 
 
+def _parse_strait_blocks(strait_dir: Path) -> dict[str, dict[str, str]]:
+    """``{strait_id: {field: raw_value}}`` from every ``common/strait_definitions/
+    *.txt`` block (board #5744) — a small flat key=value scan, not a full script
+    parser (blocks here are never nested)."""
+    blocks: dict[str, dict[str, str]] = {}
+    if not strait_dir.is_dir():
+        return blocks
+    for f in sorted(strait_dir.glob("*.txt")):
+        text = f.read_text(encoding="utf-8-sig")
+        for m in re.finditer(r"(?m)^([A-Za-z0-9_]+)\s*=\s*\{([^{}]*)\}", text):
+            blocks[m.group(1)] = dict(re.findall(r"(\w+)\s*=\s*(\S+)", m.group(2)))
+    return blocks
+
+
+def _check_strait_block(tag: str, strait_id: str, fields: dict[str, str],
+                        sea_a: Color, sea_b: Color, index_colors: set[Color],
+                        kinds: dict[Color, "str | None"],
+                        touching_set: set[frozenset]) -> list[str]:
+    """Board #5744: a ``canal_*`` block's endpoints actually match its CSV row and
+    its two land endpoints are real, distinct land provinces on opposite shores."""
+    from worldgen.raster import color_to_hex
+
+    errs: list[str] = []
+    colors: dict[str, Color | None] = {}
+    for key in ("first_sea_endpoint", "second_sea_endpoint",
+               "first_land_endpoint", "second_land_endpoint"):
+        tok = fields.get(key)
+        if tok is None:
+            errs.append(f"{tag}: {strait_id!r} has no {key}")
+            colors[key] = None
+            continue
+        if not _COLOR_TOKEN.fullmatch(tok):
+            errs.append(f"{tag}: {strait_id!r}.{key} = {tok!r} is not an x<HEX> colour")
+            colors[key] = None
+            continue
+        colors[key] = hex_to_color(tok)
+    if any(c is None for c in colors.values()):
+        return errs
+    fse, sse, fle, sle = (colors[k] for k in
+                          ("first_sea_endpoint", "second_sea_endpoint",
+                           "first_land_endpoint", "second_land_endpoint"))
+    if frozenset((fse, sse)) != frozenset((sea_a, sea_b)):
+        errs.append(f"{tag}: {strait_id!r} sea endpoints don't match this row's From/To")
+    for label, c in (("first_land_endpoint", fle), ("second_land_endpoint", sle)):
+        if c not in index_colors:
+            errs.append(f"{tag}: {strait_id!r}.{label} {color_to_hex(c)} is not a province "
+                        "in provinces_index.json")
+        elif kinds.get(c) != "land":
+            errs.append(f"{tag}: {strait_id!r}.{label} {color_to_hex(c)} is kind="
+                        f"{kinds.get(c)!r}, not land")
+    if fle == sle:
+        errs.append(f"{tag}: {strait_id!r} land endpoints must be distinct, both are "
+                    f"{color_to_hex(fle)}")
+    if errs:
+        return errs
+    fle_touches = {s for s in (sea_a, sea_b) if frozenset((fle, s)) in touching_set}
+    sle_touches = {s for s in (sea_a, sea_b) if frozenset((sle, s)) in touching_set}
+    opposite = ((sea_a in fle_touches and sea_b in sle_touches)
+                or (sea_b in fle_touches and sea_a in sle_touches))
+    if not opposite:
+        errs.append(f"{tag}: {strait_id!r} land endpoints don't sit on opposite shores "
+                    "(each must touch a different one of the two sea endpoints)")
+    return errs
+
+
 def _check_adjacency_rows(path: Path, bitmap: "ProvinceBitmap", index_cells: list[dict],
                           strait_dir: Path) -> list[str]:
-    """Semantic check of ``adjacencies.csv`` data rows (board #5563). Clean skip when
-    the file is absent or header-only. Every From/To is a province colour in the
-    index; From != To; the two provinces do not already touch; ``Type`` is ``sea``
-    (joins land to land) or a ``canal_*`` defined in ``common/strait_definitions``
-    (joins sea to sea); ``Through``
-    is -1 and ``adjacency_rule_name`` empty; and the (bottom-origin) start/stop
-    pixel ``(x, H-1-y)`` lies within 3 px of a From / To pixel - tolerant, because
-    vanilla's own endpoints are only loosely placed (the H-1 vs H flip is +-1 px)."""
+    """Semantic check of ``adjacencies.csv`` data rows (board #5563, extended for
+    canal strait content #5744). Clean skip when the file is absent or
+    header-only. Every From/To is a province colour in the index; From != To; the
+    two provinces do not already touch — except a ``canal_*`` row's sea pair
+    (Chris's call: two sea zones sharing a border far from the strait doesn't
+    make this specific chokepoint redundant); ``Type`` is ``sea`` (joins land to
+    land) or a ``canal_*`` defined in ``common/strait_definitions`` (joins sea to
+    sea), whose block's endpoints must match this row and put its two land
+    endpoints on opposite, real land shores (:func:`_check_strait_block`);
+    ``Through`` is -1 and ``adjacency_rule_name`` empty; and the (bottom-origin)
+    start/stop pixel ``(x, H-1-y)`` lies within 3 px of a From / To pixel -
+    tolerant, because vanilla's own endpoints are only loosely placed (the H-1 vs
+    H flip is +-1 px)."""
     from worldgen.raster import color_to_hex
 
     if not path.is_file():
@@ -1886,11 +1956,7 @@ def _check_adjacency_rows(path: Path, bitmap: "ProvinceBitmap", index_cells: lis
     errors: list[str] = []
     index_colors = {tuple(int(v) for v in c["color"]) for c in index_cells}
     kinds = {tuple(int(v) for v in c["color"]): c.get("kind") for c in index_cells}
-    straits: set[str] = set()
-    if strait_dir.is_dir():
-        for f in sorted(strait_dir.glob("*.txt")):
-            straits |= set(re.findall(r"(?m)^([A-Za-z0-9_]+)\s*=\s*\{",
-                                      f.read_text(encoding="utf-8-sig")))
+    strait_blocks = _parse_strait_blocks(strait_dir)
     touching = bitmap.adjacent_pairs()
     touching_set = {frozenset(p) for p in touching}
     code = bitmap._code
@@ -1914,18 +1980,22 @@ def _check_adjacency_rows(path: Path, bitmap: "ProvinceBitmap", index_cells: lis
             elif kinds.get(c) == "lake":
                 errors.append(f"{tag}: {name} {tok} is a lake (lakes are stateless)")
         ca, cb = cols
+        typ = f[2]
         if ca is not None and ca == cb:
             errors.append(f"{tag}: From and To are the same province ({f[0]})")
-        elif ca is not None and cb is not None and frozenset((ca, cb)) in touching_set:
+        elif (ca is not None and cb is not None and not typ.startswith("canal_")
+              and frozenset((ca, cb)) in touching_set):
             errors.append(f"{tag}: {f[0]} and {f[1]} already touch - no adjacency row needed")
-        typ = f[2]
-        if typ != "sea" and typ not in straits:
+        if typ != "sea" and typ not in strait_blocks:
             errors.append(f"{tag}: Type {typ!r} is not sea or a canal_* defined in "
                           f"common/strait_definitions")
         want = "land" if typ == "sea" else "sea" if typ.startswith("canal_") else None
         if want and ca is not None and cb is not None and (kinds.get(ca), kinds.get(cb)) != (want, want):
             errors.append(f"{tag}: Type {typ!r} joins {want} to {want}, but {f[0]} is "
                           f"{kinds.get(ca)} and {f[1]} is {kinds.get(cb)}")
+        if typ in strait_blocks and ca is not None and cb is not None:
+            errors.extend(_check_strait_block(tag, typ, strait_blocks[typ], ca, cb,
+                                              index_colors, kinds, touching_set))
         if f[3] != "-1":
             errors.append(f"{tag}: Through must be -1, got {f[3]!r}")
         if f[8] != "":

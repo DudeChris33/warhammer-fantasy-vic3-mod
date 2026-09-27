@@ -863,6 +863,7 @@ def check_hub_stacking(rows: list[HubRow], ctx: str = "hub_worksheet") -> None:
 # review list's number, which changes whenever a line is added.
 
 _ADJ_TYPE_RE = re.compile(r"sea|canal_[a-z0-9_]+")
+_STRAIT_TYPE_RE = re.compile(r"natural|artificial")
 _COLOR_PIN_RE = re.compile(r"x[0-9A-Fa-f]{6}")
 
 
@@ -870,7 +871,16 @@ _COLOR_PIN_RE = re.compile(r"x[0-9A-Fa-f]{6}")
 class AdjacencyRow:
     """One typed crossing. ``a``/``b`` are canvas ``[x, y]`` endpoints (either
     order); ``a_color``/``b_color`` optionally pin an endpoint's province colour
-    when the drawn tip sits on a border and cannot be resolved automatically."""
+    when the drawn tip sits on a border and cannot be resolved automatically.
+
+    ``land_a_color``/``land_b_color`` (board #5744) are the equivalent escape
+    hatch for a ``canal_*`` row's two flanking land provinces, for a canal that
+    can't be captured by redrawing it as a "+"/"X" junction. ``strait_type``
+    (``natural`` | ``artificial``, default ``natural`` — Chris's call, most
+    crossings are geographic chokepoints, not man-made canals) is the
+    ``common/strait_definitions`` block's ``type`` for a ``canal_*`` row; an
+    artificial canal additionally needs ``common/buildings``/
+    ``common/production_methods`` entries this schema does not author."""
 
     a: tuple[int, int]
     b: tuple[int, int]
@@ -878,6 +888,9 @@ class AdjacencyRow:
     comment: str
     a_color: tuple[int, int, int] | None = None
     b_color: tuple[int, int, int] | None = None
+    land_a_color: tuple[int, int, int] | None = None
+    land_b_color: tuple[int, int, int] | None = None
+    strait_type: str = "natural"
 
     @classmethod
     def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
@@ -891,7 +904,7 @@ class AdjacencyRow:
         if any(ch in comment for ch in (";", "\n", "\r")):
             raise SchemaError(f"{ctx}.comment: must not contain ';' or a line break")
         pins = []
-        for key in ("a_color", "b_color"):
+        for key in ("a_color", "b_color", "land_a_color", "land_b_color"):
             raw = d.get(key)
             if raw is None:
                 pins.append(None)
@@ -900,7 +913,12 @@ class AdjacencyRow:
             if not _COLOR_PIN_RE.fullmatch(tok):
                 raise SchemaError(f"{ctx}.{key}: expected 'xRRGGBB', got {tok!r}")
             pins.append(tuple(int(tok[i:i + 2], 16) for i in (1, 3, 5)))
-        return cls(a=a, b=b, type=typ, comment=comment, a_color=pins[0], b_color=pins[1])
+        strait_type = _as_str(d.get("strait_type", "natural"), f"{ctx}.strait_type")
+        if not _STRAIT_TYPE_RE.fullmatch(strait_type):
+            raise SchemaError(f"{ctx}.strait_type: must be 'natural' or 'artificial', "
+                              f"got {strait_type!r}")
+        return cls(a=a, b=b, type=typ, comment=comment, a_color=pins[0], b_color=pins[1],
+                  land_a_color=pins[2], land_b_color=pins[3], strait_type=strait_type)
 
 
 def load_adjacency_worksheet(path: Path, canvas: tuple[int, int] | None = None
