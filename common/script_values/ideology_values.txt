@@ -24,7 +24,8 @@
 
 ideology_traditionalist_disfavoured_laws = {
 	# Laws that ideology_traditionalist likes the least.
-	# Maximum value = 4
+	# Maximum value = 3
+	# [#3410] dropped the law_affirmative_action branch (India-caste DLC law, never restored)
 	value = 0
 	if = {
 		limit = {
@@ -44,12 +45,6 @@ ideology_traditionalist_disfavoured_laws = {
 	if = {
 		limit = {
 			has_law_or_variant = law_type:law_right_to_associate
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_affirmative_action
 		}
 		add = 1
 	}
@@ -81,7 +76,8 @@ ideology_traditionalist_minoritarian_favoured_laws = {
 
 ideology_traditionalist_minoritarian_disfavoured_laws = {
 	# Laws that ideology_traditionalist_minoritarian likes the least.
-	# Maximum value = 4
+	# Maximum value = 3
+	# [#3410] dropped the law_affirmative_action branch (India-caste DLC law, never restored)
 	value = 0
 	if = {
 		limit = {
@@ -104,17 +100,12 @@ ideology_traditionalist_minoritarian_disfavoured_laws = {
 		}
 		add = 1
 	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_affirmative_action
-		}
-		add = 1
-	}
 }
 
 ideology_nihilist_favoured_laws = {
 	# Laws that ideology_nihilist likes the most.
-	# Maximum value = 3
+	# Maximum value = 2
+	# [#3410] dropped the law_affirmative_action branch (India-caste DLC law, never restored)
 	value = 0
 	if = {
 		limit = {
@@ -125,12 +116,6 @@ ideology_nihilist_favoured_laws = {
 	if = {
 		limit = {
 			has_law_or_variant = law_type:law_state_atheism
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_affirmative_action
 		}
 		add = 1
 	}
@@ -420,7 +405,8 @@ ideology_social_democrat_disfavoured_laws = {
 
 ideology_social_democrat_favoured_laws = {
 	# Laws that ideology_social_democrat likes the most.
-	# Maximum value = 6
+	# Maximum value = 5
+	# [#3410] dropped the law_affirmative_action branch (India-caste DLC law, never restored)
 	value = 0
 	if = {
 		limit = {
@@ -449,12 +435,6 @@ ideology_social_democrat_favoured_laws = {
 	if = {
 		limit = {
 			has_law_or_variant = law_type:law_right_to_associate
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_affirmative_action
 		}
 		add = 1
 	}
