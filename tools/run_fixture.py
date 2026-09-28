@@ -2529,6 +2529,22 @@ def _selfcheck_hub_stack() -> None:
     except ValueError:
         pass
 
+    # --- plan_hub_seeds: water-crossing min-sep waiver (board #5399 follow-up,
+    # Zorn Uzkul / Great Slave Port opposite-fjord-shores case)
+    close_pair = [row("city", "A", (5, 5)), row("farm", "B", (5, 10))]
+    land_strip = np.ones((40, 40), dtype=bool)
+    land_strip[7:9, :] = False   # a water channel between y=5 and y=10 at x=5
+    assert gp._segment_crosses_water(land_strip, 5, 5, 5, 10), "sanity: the strip must be crossed"
+    seeds_waived, _ = gp.plan_hub_seeds(close_pair, reg, set(), land=land_strip)
+    assert seeds_waived == {1: [(5, 5), (5, 10)]}, \
+        "opposite shores of water must waive the min-sep check, both anchors still seed"
+    land_no_strip = np.ones((40, 40), dtype=bool)   # same pair, no water between them
+    try:
+        gp.plan_hub_seeds(close_pair, reg, set(), land=land_no_strip)
+        raise AssertionError("close anchors with no water between them must still raise, even with land given")
+    except ValueError:
+        pass
+
     # --- hub_index_entries: host colour, post-cut region, stack_on only on stack rows
     land_lab = np.zeros((40, 40), dtype=np.int32)
     land_lab[:, :10] = 1

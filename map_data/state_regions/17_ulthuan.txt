@@ -124,7 +124,7 @@ STATE_LAND_009 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3094
+    naval_exit_id = 3070
 }
 STATE_LAND_010 = {
     id = 10

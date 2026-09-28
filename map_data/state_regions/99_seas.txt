@@ -1,4 +1,9 @@
-﻿STATE_SHARD_COAST = {
+﻿STATE_SEA_OF_RAGE_04 = {
+	id = 3000
+	provinces = { xCC2EA6 }
+}
+
+STATE_SHARD_COAST = {
 	id = 3001
 	provinces = { x6A661F }
 }
@@ -12,11 +17,6 @@ STATE_SEA_OF_CHAOS = {
 STATE_SEA_OF_CHILL = {
 	id = 3003
 	provinces = { xA6D511 }
-}
-
-STATE_SEA_OF_RAGE_04 = {
-	id = 3000
-	provinces = { xCC2EA6 }
 }
 
 STATE_FROZEN_SEA_01 = {
@@ -151,14 +151,14 @@ STATE_EASTERN_ALBION_CHANNEL = {
 	provinces = { xF4E64D }
 }
 
-STATE_SEA_OF_MALICE_03 = {
-	id = 3033
-	provinces = { x31553F }
-}
-
 STATE_UPPER_RIVER_RUIN = {
 	id = 3032
 	provinces = { x931DC6 }
+}
+
+STATE_SEA_OF_MALICE_03 = {
+	id = 3033
+	provinces = { x31553F }
 }
 
 STATE_MANAANSPOORT_SEA = {
@@ -216,6 +216,11 @@ STATE_NORTHERN_SHIFTING_ISLES = {
 	provinces = { x9BEEEB }
 }
 
+STATE_REIK_CONFLUENCE = {
+	id = 3320
+	provinces = { x0D77E0 }
+}
+
 STATE_MIDDLE_REIK_RIVER = {
 	id = 3047
 	provinces = { xD85DDD }
@@ -246,6 +251,11 @@ STATE_NORTHERN_BOILING_SEA = {
 	provinces = { xEF733A }
 }
 
+STATE_STIR_CONFLUENCE = {
+	id = 3321
+	provinces = { x9D6B21 }
+}
+
 STATE_WISSENLAND_ESTUARY = {
 	id = 3053
 	provinces = { x8DAAB3 }
@@ -274,6 +284,11 @@ STATE_COAST_OF_ESTALIA = {
 STATE_SEA_OF_RAGE_02 = {
 	id = 3059
 	provinces = { x42F789 }
+}
+
+STATE_AVER_CONFLUENCE = {
+	id = 3322
+	provinces = { xD9DA13 }
 }
 
 STATE_UPPER_REIK_RIVER = {
@@ -439,11 +454,6 @@ STATE_PIRATES_CURRENT = {
 	provinces = { x46559B }
 }
 
-STATE_BEAST_ISLE_PASS_PLACEHOLDER = {
-	id = 3094
-	provinces = { xE48D14 }
-}
-
 STATE_LIZARD_SEA_02 = {
 	id = 3095
 	provinces = { x82C48D }
@@ -457,6 +467,11 @@ STATE_CHARNEL_DEEPS = {
 STATE_SEA_OF_WRATH_05 = {
 	id = 3097
 	provinces = { xBF337F }
+}
+
+STATE_BEAST_ISLE_PASS_PLACEHOLDER = {
+	id = 3094
+	provinces = { xE48D14 }
 }
 
 STATE_ASHEN_COAST = {
@@ -520,7 +535,7 @@ STATE_SORCERERS_ISLANDS = {
 	provinces = { x29CD2B }
 }
 
-STATE_GREAT_MORTIS_RIVER = {
+STATE_GREAT_MORTIS_RIVER_02 = {
 	id = 3110
 	provinces = { xC804A4 }
 }
@@ -566,8 +581,8 @@ STATE_LIZARD_SEA_03 = {
 	provinces = { x57F7E5 }
 }
 
-STATE_UPPER_MORTIS_RIVER = {
-	id = 3116
+STATE_UPPER_MORTIS_RIVER_02 = {
+	id = 3218
 	provinces = { x7D517A }
 }
 
@@ -602,9 +617,14 @@ STATE_GREAT_OCEAN_01 = {
 	provinces = { x0D44BB }
 }
 
-STATE_ASH_RIVER = {
-	id = 3126
+STATE_ASH_RIVER_03 = {
+	id = 3219
 	provinces = { xAB7C34 }
+}
+
+STATE_MORTIS_CONFLUENCE = {
+	id = 3282
+	provinces = { x3F00AC }
 }
 
 STATE_FAR_SULPHERET_COAST = {
@@ -687,14 +707,14 @@ STATE_IND_SOUTHERN_COAST_PLACEHOLDER = {
 	provinces = { x2D2B3D }
 }
 
-STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER = {
-	id = 3145
-	provinces = { x699A2F }
-}
-
 STATE_ARABY_COAST_PLACEHOLDER = {
 	id = 3144
 	provinces = { xCB62B6 }
+}
+
+STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER = {
+	id = 3145
+	provinces = { x699A2F }
 }
 
 STATE_LUMBRIA_ARCHIPELAGO = {
@@ -909,6 +929,11 @@ STATE_OCEAN_OF_DREAD_03 = {
 STATE_JADE_SEA_08 = {
 	id = 3189
 	provinces = { x9B22FB }
+}
+
+STATE_OCEAN_OF_DREAD_06 = {
+	id = 3323
+	provinces = { x007CB9 }
 }
 
 STATE_OCEAN_OF_DREAD_04 = {

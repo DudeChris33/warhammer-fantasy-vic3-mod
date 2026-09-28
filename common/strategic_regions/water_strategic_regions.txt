@@ -10,8 +10,12 @@ region_ashen_coast = {
 	states = { STATE_ASHEN_COAST }
 }
 
-region_ash_river = {
-	states = { STATE_ASH_RIVER }
+region_ash_river_03 = {
+	states = { STATE_ASH_RIVER_03 }
+}
+
+region_aver_confluence = {
+	states = { STATE_AVER_CONFLUENCE }
 }
 
 region_aver_river = {
@@ -210,8 +214,8 @@ region_gloomwrack_strait = {
 	states = { STATE_GLOOMWRACK_STRAIT }
 }
 
-region_great_mortis_river = {
-	states = { STATE_GREAT_MORTIS_RIVER }
+region_great_mortis_river_02 = {
+	states = { STATE_GREAT_MORTIS_RIVER_02 }
 }
 
 region_great_ocean_01 = {
@@ -422,6 +426,10 @@ region_middle_river_ruin = {
 	states = { STATE_MIDDLE_RIVER_RUIN }
 }
 
+region_mortis_confluence = {
+	states = { STATE_MORTIS_CONFLUENCE }
+}
+
 region_mo_farah_chanel = {
 	states = { STATE_MO_FARAH_CHANEL }
 }
@@ -482,12 +490,20 @@ region_ocean_of_dread_05 = {
 	states = { STATE_OCEAN_OF_DREAD_05 }
 }
 
+region_ocean_of_dread_06 = {
+	states = { STATE_OCEAN_OF_DREAD_06 }
+}
+
 region_pirates_current = {
 	states = { STATE_PIRATES_CURRENT }
 }
 
 region_pirate_coast = {
 	states = { STATE_PIRATE_COAST }
+}
+
+region_reik_confluence = {
+	states = { STATE_REIK_CONFLUENCE }
 }
 
 region_river_brienne = {
@@ -718,6 +734,10 @@ region_south_ulthuan_passage_placeholder = {
 	states = { STATE_SOUTH_ULTHUAN_PASSAGE_PLACEHOLDER }
 }
 
+region_stir_confluence = {
+	states = { STATE_STIR_CONFLUENCE }
+}
+
 region_stir_river = {
 	states = { STATE_STIR_RIVER }
 }
@@ -770,8 +790,8 @@ region_upper_far_ocean_passage_03 = {
 	states = { STATE_UPPER_FAR_OCEAN_PASSAGE_03 }
 }
 
-region_upper_mortis_river = {
-	states = { STATE_UPPER_MORTIS_RIVER }
+region_upper_mortis_river_02 = {
+	states = { STATE_UPPER_MORTIS_RIVER_02 }
 }
 
 region_upper_reik_river = {

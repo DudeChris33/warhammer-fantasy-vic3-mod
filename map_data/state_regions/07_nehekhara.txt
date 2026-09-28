@@ -1,7 +1,7 @@
 ﻿STATE_KHEMRIAN_DESERT = {
     id = 121
     subsistence_building = "building_subsistence_farm"
-    provinces = { x15F563 x39A943 x47ED7B x526455 x5F02D8 x761835 x845C6D x88866F x9B71CA xA9B602 xB42CDC xBD9B9F xBEB65E xC0CB5F xCF0F97 xD7E0BC xEF5790 xFA7EB0 xFD3A51 }
+    provinces = { x15F563 x39A943 x47ED7B x526455 x5F02D8 x761835 x845C6D x88866F x9B71CA xA2DE34 xA9B602 xB42CDC xBD9B9F xBEB65E xC0CB5F xCF0F97 xD7E0BC xEF5790 xFA7EB0 xFD3A51 }
     city = x5F02D8
     farm = x526455
     mine = x9B71CA
@@ -27,7 +27,7 @@ STATE_MORTIS_TARN = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3116
+    naval_exit_id = 3218
 }
 STATE_ROAD_OF_KINGS = {
     id = 569
@@ -73,7 +73,7 @@ STATE_THE_SCARAB_CITY = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3116
+    naval_exit_id = 3218
 }
 STATE_UPPER_ASH_RIVER = {
     id = 607
@@ -89,7 +89,7 @@ STATE_UPPER_ASH_RIVER = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3126
+    naval_exit_id = 3219
 }
 STATE_LAND_608 = {
     id = 608
@@ -105,12 +105,12 @@ STATE_LAND_608 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3116
+    naval_exit_id = 3218
 }
 STATE_FALLOW_FIELDS = {
     id = 609
     subsistence_building = "building_subsistence_farm"
-    provinces = { x03AC79 x03F675 x059C2A x0B0F3D x0E6D4F x1CB187 x22249A x33C6E4 x3939F7 x420B1C x4639F1 x477E2F x4ADC41 x504F54 x55C267 x5E938C x6764B1 x699F02 x6B9386 x6CD7C4 x7035D6 x73B938 x75A8E9 x7E7A0E x83ED21 x8ACE95 x8CBE46 x923159 x958F6B x9B027E xA3D3A3 xA946B6 xACA4C8 xB217DB xB78AEE xBAE900 xBF17D5 xC05C13 xCEA04B xCEC59B xD1FE5D xD77170 xE4716A xE5B5A8 xED630C xEE86CD xF757F2 xFCCB05 }
+    provinces = { x03AC79 x03F675 x059C2A x0B0F3D x0E6D4F x1CB187 x22249A x33C6E4 x3939F7 x420B1C x4639F1 x477E2F x4ADC41 x504F54 x55C267 x5E938C x6764B1 x699F02 x6B9386 x6CD7C4 x7035D6 x73B938 x75A8E9 x7E7A0E x83ED21 x8ACE95 x8CBE46 x923159 x958F6B x9B027E xA3D3A3 xA946B6 xACA4C8 xB217DB xB78AEE xBAE900 xC05C13 xCEA04B xCEC59B xD1FE5D xD77170 xE4716A xE5B5A8 xED630C xEE86CD xF757F2 xFCCB05 }
     city = x9B027E
     farm = x8CBE46
     mine = x0B0F3D
@@ -121,12 +121,12 @@ STATE_FALLOW_FIELDS = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3126
+    naval_exit_id = 3219
 }
 STATE_LAND_620 = {
     id = 620
     subsistence_building = "building_subsistence_farm"
-    provinces = { x44201D x47752D x5CEDD7 x62C261 x797647 x82476C xBCFE01 xCCD117 xD0FB19 xD9ABC1 }
+    provinces = { x44201D x47752D x5CEDD7 x62C261 x797647 x82476C xBCFE01 xCCD117 xD0FB19 }
     city = x44201D
     farm = x5CEDD7
     mine = xD0FB19
@@ -137,5 +137,5 @@ STATE_LAND_620 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3116
+    naval_exit_id = 3218
 }

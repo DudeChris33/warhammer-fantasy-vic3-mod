@@ -556,7 +556,7 @@ STATE_LAND_139 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3091
+    naval_exit_id = 3086
 }
 STATE_LAND_140 = {
     id = 140
@@ -1021,4 +1021,20 @@ STATE_LAND_453 = {
         building_logging_camp = 10
     }
     naval_exit_id = 3078
+}
+STATE_LAND_622 = {
+    id = 622
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xAB2463 }
+    city = xAB2463
+    farm = xAB2463
+    mine = xAB2463
+    wood = xAB2463
+    port = xAB2463
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3000
 }

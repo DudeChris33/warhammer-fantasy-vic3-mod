@@ -111,7 +111,11 @@ CANON_CITY_PROVINCES_INDEX_PATH = DERIVED_DIR / "canon_city_provinces_index.json
 #: Two hub anchors of the SAME state closer than this (Euclidean px) are a hard
 #: error at generate time — defence-in-depth so a seeded piece can't collapse below
 #: min_area (the anchor pieces are also `protected` in merge_small, the real
-#: guarantee). Anchors in different states may be arbitrarily close.
+#: guarantee). Anchors in different states may be arbitrarily close. Waived when
+#: the straight line between the pair crosses water (see `_segment_crosses_water`):
+#: two hubs on opposite shores of a fjord/strait within one merge-fused state can
+#: never seed overlapping provinces regardless of raw pixel distance (Chris,
+#: 2026-09-27 — the Zorn Uzkul / Great Slave Port coastline).
 MIN_ANCHOR_SEP = 16
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
@@ -154,8 +158,21 @@ def log(msg: str, t0: float | None = None) -> None:
     print(prefix + msg, flush=True)
 
 
+def _segment_crosses_water(land: np.ndarray, x1: int, y1: int, x2: int, y2: int) -> bool:
+    """True if any point sampled along the straight line from ``(x1, y1)`` to
+    ``(x2, y2)`` (inclusive of both ends) falls on water in ``land``. Sampled at
+    roughly 1px steps, which is enough to catch a real strait/fjord crossing
+    between two anchors — a land bridge (an isthmus or a spit tip the two points
+    both sit on) samples all-land and correctly reports no crossing."""
+    n = max(2, int(round(max(abs(x2 - x1), abs(y2 - y1)))) + 1)
+    xs = np.round(np.linspace(x1, x2, n)).astype(int)
+    ys = np.round(np.linspace(y1, y2, n)).astype(int)
+    return not bool(land[ys, xs].all())
+
+
 def plan_hub_seeds(rows: list, reg: np.ndarray, keep_whole: set[int],
-                   min_sep: int = MIN_ANCHOR_SEP
+                   min_sep: int = MIN_ANCHOR_SEP,
+                   land: np.ndarray | None = None
                    ) -> tuple[dict[int, list[tuple[int, int]]], list]:
     """Resolve hub-worksheet rows (#3665) into the cut's ``region_seeds`` + the
     ``(row, region, (rx, ry))`` list the persisted index is built from.
@@ -165,6 +182,14 @@ def plan_hub_seeds(rows: list, reg: np.ndarray, keep_whole: set[int],
     the :data:`MIN_ANCHOR_SEP` check: their anchor is exactly their host's pixel,
     so they would always collide with it. With no stack rows this is exactly the
     pre-#3666 behaviour. Raises ``ValueError`` (the caller prefixes the file name).
+
+    ``land`` (optional) enables the water-crossing waiver on the min-sep check
+    (board #5399 follow-up, 2026-09-27): two same-region anchors under ``min_sep``
+    whose connecting straight line crosses water — opposite shores of a fjord or
+    strait inside one merge-fused state — are exempt, since their seeded provinces
+    can never actually compete for the same land. ``land is None`` (the
+    ``run_fixture.py`` unit-test call sites) keeps the pre-existing strict
+    Euclidean-only check.
     """
     rad = land_provinces._MERGE_ANCHOR_SEARCH_RADIUS
     region_seeds: dict[int, list[tuple[int, int]]] = {}
@@ -185,13 +210,15 @@ def plan_hub_seeds(rows: list, reg: np.ndarray, keep_whole: set[int],
         hub_rows.append((r, rid, (rx, ry)))
     # Same-region anchors must clear min_sep (a drawn region is 1:1 with an emitted
     # state today, so this is "same state"; anchors in different regions may be
-    # arbitrarily close).
+    # arbitrarily close) — unless they're on opposite shores of water, see above.
     for rid, pts in region_seeds.items():
         for a in range(len(pts)):
             for b in range(a + 1, len(pts)):
                 (x1, y1), (x2, y2) = pts[a], pts[b]
                 d2 = (x1 - x2) ** 2 + (y1 - y2) ** 2
                 if d2 < min_sep ** 2:
+                    if land is not None and _segment_crosses_water(land, x1, y1, x2, y2):
+                        continue
                     raise ValueError(
                         f"two hub anchors of region {rid} are {d2 ** 0.5:.1f}px apart "
                         f"(< {min_sep}) at {list(pts[a])} / {list(pts[b])} — they may "
@@ -334,7 +361,7 @@ def main(argv: list[str] | None = None) -> int:
     if HUB_WORKSHEET_CONFIG.is_file():
         rows = schema.load_hub_worksheet(HUB_WORKSHEET_CONFIG, canvas=(CANVAS_W, CANVAS_H))
         try:
-            region_seeds, hub_rows = plan_hub_seeds(rows, reg, keep_whole)
+            region_seeds, hub_rows = plan_hub_seeds(rows, reg, keep_whole, land=land)
         except ValueError as e:
             raise SystemExit(f"{HUB_WORKSHEET_CONFIG.name}: {e}")
         n_stack = sum(1 for r, _rid, _p in hub_rows if r.stack_on)
