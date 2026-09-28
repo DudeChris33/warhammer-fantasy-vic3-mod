@@ -36,7 +36,7 @@ ideology_traditionalist_disfavoured_laws = {
 	if = {
 		limit = {
 			OR = {
-				has_law_or_variant = law_type:law_state_atheism
+				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 				has_law_or_variant = law_type:law_total_separation
 			}
 		}
@@ -88,7 +88,7 @@ ideology_traditionalist_minoritarian_disfavoured_laws = {
 	if = {
 		limit = {
 			OR = {
-				has_law_or_variant = law_type:law_state_atheism
+				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 				has_law_or_variant = law_type:law_state_religion
 			}
 		}
@@ -104,18 +104,13 @@ ideology_traditionalist_minoritarian_disfavoured_laws = {
 
 ideology_nihilist_favoured_laws = {
 	# Laws that ideology_nihilist likes the most.
-	# Maximum value = 2
+	# Maximum value = 1
 	# [#3410] dropped the law_affirmative_action branch (India-caste DLC law, never restored)
+	# [#3410] dropped the law_state_atheism branch (law removed)
 	value = 0
 	if = {
 		limit = {
 			has_law_or_variant = law_type:law_council_republic
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_state_atheism
 		}
 		add = 1
 	}
@@ -496,7 +491,8 @@ ideology_communist_disfavoured_laws = {
 
 ideology_communist_favoured_laws = {
 	# Laws that ideology_communist likes the most.
-	# Maximum value = 6
+	# Maximum value = 5
+	# [#3410] dropped the law_state_atheism branch (law removed)
 	value = 0
 	if = {
 		limit = {
@@ -516,12 +512,6 @@ ideology_communist_favoured_laws = {
 				has_law_or_variant = law_type:law_command_economy
 				has_law_or_variant = law_type:law_cooperative_ownership
 			}
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_state_atheism
 		}
 		add = 1
 	}
@@ -1146,17 +1136,12 @@ ideology_positivist_disfavoured_laws = {
 
 ideology_positivist_favoured_laws = {
 	# Laws that ideology_positivist likes the most.
-	# Maximum value = 4
+	# Maximum value = 3
+	# [#3410] dropped the law_state_atheism branch (law removed)
 	value = 0
 	if = {
 		limit = {
 			has_law_or_variant = law_type:law_presidential_republic
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_state_atheism
 		}
 		add = 1
 	}
@@ -1188,7 +1173,7 @@ ideology_integralist_disfavoured_laws = {
 		limit = {
 			OR = {
 				has_law_or_variant = law_type:law_total_separation
-				has_law_or_variant = law_type:law_state_atheism
+				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 			}
 		}
 		add = 1
