@@ -138,10 +138,10 @@ button_refuse_law_imposition = {
 			limit = { pro_foreign_imposition_country = yes }
 			change_appeasement = { amount = -2 factor = appeasement_imposed_law_rejected }
 		}
-		trigger_event = { id = law_imposition_events.2 popup = yes }
-		scope:foreign_imposition_country = {
-			trigger_event = { id = law_imposition_events.3 }
-		}
+		# [#3410] dropped trigger_event = { id = law_imposition_events.2 popup = yes } and
+		# scope:foreign_imposition_country = { trigger_event = { id = law_imposition_events.3 } }
+		# — the law_imposition_events namespace (vanilla top-level events/) is blanked and never
+		# restored; the button is already unreachable (visible always = no, #3540).
 		scope:journal_entry = {
 			set_variable = has_been_abandoned
 		}
