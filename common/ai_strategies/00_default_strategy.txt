@@ -4420,8 +4420,8 @@ ai_strategy_default = {
 					limit = {
 						scope:strait = {
 							OR = {
-								type = strait_type:canal_panama
-								type = strait_type:canal_suez
+								always = no # [#3410] was: type = strait_type:canal_panama
+								always = no # [#3410] was: type = strait_type:canal_suez
 							}
 						}
 					}
@@ -4458,7 +4458,7 @@ ai_strategy_default = {
 				if = { # Don't close off gibraltar
 					limit = {
 						scope:strait = {
-							type = strait_type:strait_gibraltar
+							always = no # [#3410] was: type = strait_type:strait_gibraltar
 						}
 					}
 
@@ -4529,7 +4529,7 @@ ai_strategy_default = {
 				if = { # Don't extort in gibraltar
 					limit = {
 						scope:strait = {
-							type = strait_type:strait_gibraltar
+							always = no # [#3410] was: type = strait_type:strait_gibraltar
 						}
 					}
 
@@ -4539,8 +4539,8 @@ ai_strategy_default = {
 					limit = {
 						scope:strait = {
 							OR = {
-								type = strait_type:canal_panama
-								type = strait_type:canal_suez
+								always = no # [#3410] was: type = strait_type:canal_panama
+								always = no # [#3410] was: type = strait_type:canal_suez
 							}
 						}
 					}
