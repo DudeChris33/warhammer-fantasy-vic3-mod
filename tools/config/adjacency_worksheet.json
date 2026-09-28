@@ -441,8 +441,8 @@
         4107,
         1696
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_ash_t",
+      "comment": "Ash River"
     },
     {
       "a": [
@@ -681,8 +681,8 @@
         4897,
         698
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_uzkulak",
+      "comment": "Uzkulak Canal"
     },
     {
       "a": [
@@ -880,18 +880,6 @@
     },
     {
       "a": [
-        4092,
-        1692
-      ],
-      "b": [
-        4108,
-        1693
-      ],
-      "type": "canal_ash_t",
-      "comment": "Ash River"
-    },
-    {
-      "a": [
         4090,
         844
       ],
@@ -949,18 +937,6 @@
       ],
       "type": "canal_isles_of_dusk",
       "comment": "Isles of Dusk"
-    },
-    {
-      "a": [
-        4795,
-        592
-      ],
-      "b": [
-        4898,
-        701
-      ],
-      "type": "canal_uzkulak",
-      "comment": "Uzkulak Canal"
     },
     {
       "a": [
