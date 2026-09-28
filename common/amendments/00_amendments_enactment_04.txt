@@ -696,10 +696,7 @@ amendment_state_anti_clericalism = {
 		OR = {
 			has_ideology = ideology:ideology_anti_clerical
 			has_ideology = ideology:ideology_proletarian
-			law_stance = {
-				law = law_type:law_state_atheism
-				value > neutral
-			}
+			# [#3410] dropped law_stance on law_state_atheism (law removed)
 		}
 	}
 

@@ -137,7 +137,7 @@ coa_technocracy_trigger = {
 }
 
 coa_nihilist_trigger = {
-	has_law_or_variant = law_type:law_state_atheism
+	always = no # [#3410] was: has_law_or_variant = law_type:law_state_atheism (law removed; required condition, so the trigger stays false)
 	NOR = {
 		has_law_or_variant = law_type:law_theocracy
 		has_law = law_type:law_monarchy

@@ -52,28 +52,23 @@
 					value = 0.02
 				}
 			}
-			if = {
+			# [#3410] unwrapped if = { limit = { NOT = { has_law_or_variant = law_type:law_state_atheism } } }
+			# — law removed, so the guard is always true.
+			every_scope_character = {
 				limit = {
 					NOT = {
-						has_law_or_variant = law_type:law_state_atheism
-					}
-				}
-				every_scope_character = {
-					limit = {
-						NOT = {
-							religion = owner.religion
-						}
-						has_ideology = ideology:ideology_traditionalist
-					}
-					set_ideology = ideology:ideology_traditionalist_minoritarian
-				}
-				every_scope_character = {
-					limit = {
 						religion = owner.religion
-						has_ideology = ideology:ideology_traditionalist_minoritarian
 					}
-					set_ideology = ideology:ideology_traditionalist
+					has_ideology = ideology:ideology_traditionalist
 				}
+				set_ideology = ideology:ideology_traditionalist_minoritarian
+			}
+			every_scope_character = {
+				limit = {
+					religion = owner.religion
+					has_ideology = ideology:ideology_traditionalist_minoritarian
+				}
+				set_ideology = ideology:ideology_traditionalist
 			}
 		}
 
