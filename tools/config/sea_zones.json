@@ -47,6 +47,10 @@
   [993, 1328]
  ],
  "zone_names": [
+  { "seed": [4099, 851], "display_name": "Reik Confluence" },
+  { "seed": [4148, 897], "display_name": "Stir Confluence" },
+  { "seed": [4140, 953], "display_name": "Aver Confluence" },
+  { "seed": [4102, 1701], "display_name": "Mortis Confluence" },
   { "seed": [7907, 811], "display_name": "Western Sea of Oblivion" },
   { "seed": [2501, 183], "display_name": "Shard Coast" },
   { "seed": [3227, 367], "display_name": "Sea of Chaos" },
