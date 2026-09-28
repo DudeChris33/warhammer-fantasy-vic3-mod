@@ -285,8 +285,8 @@
         4137,
         893
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_nuln_t",
+      "comment": "Nuln"
     },
     {
       "a": [
@@ -537,8 +537,8 @@
         4102,
         851
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_altdorf_r",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -777,8 +777,8 @@
         4548,
         444
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Drakefjord Bay"
     },
     {
       "a": [
@@ -856,18 +856,6 @@
   "stale": [
     {
       "a": [
-        4151,
-        885
-      ],
-      "b": [
-        4137,
-        893
-      ],
-      "type": "canal_nuln_t",
-      "comment": "Nuln"
-    },
-    {
-      "a": [
         4131,
         948
       ],
@@ -936,18 +924,6 @@
         862
       ],
       "type": "canal_altdorf_b",
-      "comment": "Altdorf"
-    },
-    {
-      "a": [
-        4106,
-        850
-      ],
-      "b": [
-        4097,
-        837
-      ],
-      "type": "canal_altdorf_r",
       "comment": "Altdorf"
     },
     {
@@ -1057,18 +1033,6 @@
       ],
       "type": "",
       "comment": ""
-    },
-    {
-      "a": [
-        4553,
-        434
-      ],
-      "b": [
-        4539,
-        442
-      ],
-      "type": "sea",
-      "comment": "Drakefjord Bay"
     },
     {
       "a": [
