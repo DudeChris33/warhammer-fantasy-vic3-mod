@@ -1,0 +1,12 @@
+﻿# [#3410] Restored verbatim from vanilla common/messages/03_india_messages.txt:50.
+# common/messages/ is listed in replace_paths, so vanilla's file does not load;
+# the entry itself is generic (called from common/on_actions/00_code_on_actions.txt).
+# Its loc (notification_prisoner_out_of_jail_*) still ships in vanilla's
+# localization/english/ip2_misc_01_l_english.yml.
+
+prisoner_out_of_jail = {
+	type = country
+	texture = "gfx/interface/icons/notification_icons/character.dds"
+
+	notification_type = toast
+}
