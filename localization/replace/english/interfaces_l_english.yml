@@ -1,0 +1,4 @@
+﻿l_english:
+ # [#3410] Vanilla 1.13 references this key from common/treaty_articles/30_transfer_subject.txt
+ # but ships no English entry for it; supplied here so the tooltip does not show the raw key.
+ TRANSFER_SUBJECT_OTHER_THAN_RECIPIENT:0 "Must have a [concept_subject] that can be transferred."
