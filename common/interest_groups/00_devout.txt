@@ -52,19 +52,9 @@
 	}
 
 	on_character_ig_membership = {
-		if = {
-			limit = {
-				NOT = {
-					owner = {
-						has_law_or_variant = law_type:law_state_atheism
-					}
-				}
-			}
-			change_character_religion = scope:interest_group.owner.religion
-		}
-		else = {
-			change_character_religion = scope:interest_group.owner.country_definition.religion
-		}
+		# [#3410] unwrapped if = { limit = { NOT = { owner = { has_law_or_variant = law_type:law_state_atheism } } } }
+		# and dropped its else (country_definition.religion fallback) — law removed, guard always true.
+		change_character_religion = scope:interest_group.owner.religion
 	}
 
 
@@ -98,17 +88,7 @@
 			}
 		}
 
-		if = {
-			limit = {
-				owner = {
-					has_law_or_variant = law_type:law_state_atheism
-				}
-			}
-			multiply = {
-				desc = "STATE_ATHEISM_LAW"
-				value = 0.1
-			}
-		}
+		# [#3410] dropped the STATE_ATHEISM_LAW x0.1 branch (law removed; branch unreachable)
 
 		if = {
 			limit = {
@@ -154,7 +134,7 @@
 					has_technology_researched = corporatism
 					NOT = {
 						has_law_or_variant = law_type:law_total_separation
-						has_law_or_variant = law_type:law_state_atheism
+						# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 					}
 				}
 			}
@@ -269,17 +249,7 @@
 				value = 0.25
 			}
 		}
-		# Basically impossible with State Atheism
-		if = {
-			limit = {
-				owner = {
-					has_law_or_variant = law_type:law_state_atheism
-				}
-			}
-			multiply = {
-				value = 0
-			}
-		}
+		# [#3410] dropped the State Atheism x0 branch (law removed; branch unreachable)
 	}
 
 	agitator_weight = {

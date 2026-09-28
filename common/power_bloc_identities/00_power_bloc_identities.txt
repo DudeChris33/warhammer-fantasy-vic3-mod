@@ -721,7 +721,7 @@ identity_religious = {
 						limit = {
 							OR = {
 								has_law_or_variant = law_type:law_total_separation
-								has_law_or_variant = law_type:law_state_atheism
+								# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 							}
 						}
 						add = -0.1
@@ -734,7 +734,7 @@ identity_religious = {
 					scope:with_country ?= {
 						OR = {
 							has_law_or_variant = law_type:law_total_separation
-							has_law_or_variant = law_type:law_state_atheism
+							# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 						}
 					}
 				}
@@ -746,7 +746,7 @@ identity_religious = {
 					scope:without_country ?= {
 						OR = {
 							has_law_or_variant = law_type:law_total_separation
-							has_law_or_variant = law_type:law_state_atheism
+							# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 						}
 					}
 				}

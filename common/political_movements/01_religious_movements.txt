@@ -10,9 +10,7 @@
 	can_cause_obstinance = yes
 
 	creation_trigger = {
-		NOT = {
-			has_law_or_variant = law_type:law_state_atheism
-		}
+		always = yes # [#3410] was: NOT = { has_law_or_variant = law_type:law_state_atheism } (law removed; always true)
 	}
 	creation_weight = {
 		value = 100
@@ -425,15 +423,7 @@ movement_religious_minority = {
 	character_support_trigger = {
 		religion = scope:religion
 		OR = {
-			AND = {
-				owner ?= {
-					has_law_or_variant = law_type:law_state_atheism
-				}
-				OR = {
-					has_ideology = ideology:ideology_traditionalist
-					has_ideology = ideology:ideology_theocrat
-				}
-			}
+			# [#3410] dropped the AND branch requiring owner law_state_atheism (law removed; branch unreachable)
 			has_ideology = ideology:ideology_traditionalist_minoritarian
 		}
 	}
@@ -452,15 +442,7 @@ movement_religious_minority = {
 		if = {
 			limit = {
 				OR = {
-					AND = {
-						owner ?= {
-							has_law_or_variant = law_type:law_state_atheism
-						}
-						OR = {
-							has_ideology = ideology:ideology_traditionalist
-							has_ideology = ideology:ideology_theocrat
-						}
-					}
+					# [#3410] dropped the AND branch requiring owner law_state_atheism (law removed; branch unreachable)
 					has_ideology = ideology:ideology_traditionalist_minoritarian
 				}
 			}

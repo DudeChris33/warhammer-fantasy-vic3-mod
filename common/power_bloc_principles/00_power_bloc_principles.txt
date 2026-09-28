@@ -1420,11 +1420,8 @@ principle_sacred_civics_1 = {
 		if = {
 			limit = {
 				power_bloc ?= { NOT = { has_identity = identity:identity_religious } }
-				# State Atheist Ideology bloc wants the power to enforce atheism
-				NAND = {
-					has_law_or_variant = law_type:law_state_atheism
-					power_bloc ?= { has_identity = identity:identity_ideological_union }
-				}
+				# [#3410] dropped NAND = { has_law_or_variant = law_type:law_state_atheism power_bloc ?= { has_identity =
+				# identity:identity_ideological_union } } — law removed, so the NAND is always true.
 			}
 			multiply = 0.25
 		}

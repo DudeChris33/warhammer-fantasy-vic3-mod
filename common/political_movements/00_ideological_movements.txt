@@ -5593,14 +5593,7 @@ movement_positivist = {
 				value = 40
 			}
 		}
-		if = {
-			limit = {
-				has_law_or_variant = law_type:law_state_atheism
-			}
-			add = {
-				value = 50
-			}
-		}
+		# [#3410] dropped the +50 law_state_atheism branch (law removed; branch unreachable)
 		if = {
 			limit = {
 				owner ?= { # If a movement of this type exists in a neighbouring country, make it more likely to spawn here as well
