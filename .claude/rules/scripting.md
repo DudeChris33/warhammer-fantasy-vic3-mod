@@ -40,16 +40,16 @@ authored any content for it yet — git doesn't track empty directories, so give
 - The first established convention is the culture foundation (#3405): zero-padded `NN_<topic>.txt` filenames within a database folder, ordered by loading/reading precedence (e.g. `common/discrimination_trait_groups/00_heritage_groups.txt`, `01_language_groups.txt`, `02_religious_heritage_groups.txt`; `common/religions/00_religions.txt`). When a folder has no such convention yet, pick a clear, descriptive snake_case filename (with or without a numeric prefix, e.g. `buildings_empire.txt`) and stay consistent with whatever is chosen going forward. `common/country_definitions/` and `common/country_formation/` follow that `NN_<region>.txt` shape, one file per Old World region — see their own schema section below.
 - `common/cultures/` instead groups by RACE/CULTURE-GROUP, not by region: a plain descriptive snake_case filename per group (`norscan_humans.txt`, `imperial_humans.txt`, `dwarven.txt`, `greenskin.txt`, `vampire.txt`, `chaos_dwarf.txt`, `nehekharan_araby.txt`, etc.), with every culture belonging to that race/group defined inside it regardless of which region's states its population actually lives in (Chris, 2026-09-03; supersedes this folder's original `NN_<region>.txt` layout from board item #3405). A culture id is global and referenced by other files (e.g. `common/country_definitions/`) purely by id, so this reshuffle never touches those ids — only which file defines them.
 
-## `common/cultures/` entry schema (epic #3404, #3406-#3409)
+## `common/cultures/` entry schema
 
-Nothing in `docs/*.log` documents the `common/cultures` database — this schema was confirmed against a vanilla reference install/repo via real in-game `error.log` testing, not guessed. Every culture entry needs:
+Nothing in `docs/*.log` documents the `common/cultures` database — this schema was confirmed against a vanilla reference install/repo via real in-game `error.log` testing, not guessed. (Established by the Old World cultures work.) Every culture entry needs:
 
 - `color = rgb{ R G B }` (0-255 integers; `hsv{ h s v }` is the other valid form) — cosmetic only.
 - `religion = <id>` — a religion id from `common/religions/`.
 - `heritage = <id>` and `language = <id>` — **separate top-level fields**, each a single discrimination-trait id from `common/discrimination_traits/`. They are NOT wrapped in a `traits = { }` block — that shape was tried and is rejected outright by the parser.
 - `traditions = { }` — required; an empty block is currently valid and is what this mod uses.
 - `obsessions = { }` — goods ids; empty until this mod authors `common/goods/`.
-- Name lists (`male_common_first_names`, `female_common_first_names`, `noble_last_names`, `common_last_names`), `graphics` and `ethnicities` using vanilla portrait/graphics ids (custom art is out of scope for epic #3404).
+- Name lists (`male_common_first_names`, `female_common_first_names`, `noble_last_names`, `common_last_names`), `graphics` and `ethnicities` using vanilla portrait/graphics ids (custom art is out of scope for now).
 
 Every culture additionally requires, elsewhere:
 
@@ -58,7 +58,7 @@ Every culture additionally requires, elsewhere:
 
 These three modifier-type files and three static-modifier files are append-only — every later culture-authoring item adds its own entries to the existing files rather than creating new ones per culture.
 
-## `common/religions/` standard-of-living + icon requirements (board #3541)
+## `common/religions/` standard-of-living + icon requirements
 
 Religions carry the same standard-of-living obligation as cultures, and it is a **hard engine
 error** if missed (`religion.cpp:92 Missing religion sol static modifier`). Every religion id in
@@ -83,13 +83,12 @@ The full vanilla set is: `animist`, `atheist`, `catholic`, `confucianism`, `copt
 `sunni`, `theravada` (all `.dds`). Note `confucianism`, not `confucian`, and there is no
 `oriental_orthodox` — use `coptic`. These vanilla icons are placeholders pending custom art.
 
-## `common/coat_of_arms/` + `common/flag_definitions/` schema (epic #3621)
+## `common/coat_of_arms/` + `common/flag_definitions/` schema
 
 Neither database is documented in `docs/*.log`; the vanilla install is the sole
 authority for both — confirm every `texture`/`pattern`/`color` reference and
 colour-slot count against real vanilla usage before writing a block, the same
-discipline established by #3552/#3621/#3622 and every sibling COA file shipped
-since. Both folders are listed in `.metadata/metadata.json`'s `replace_paths`, so
+discipline every shipped COA file follows. Both folders are listed in `.metadata/metadata.json`'s `replace_paths`, so
 vanilla's own files for them do not load at all — a tag with no entry in this
 mod's own files gets no coat of arms and no flag.
 
@@ -116,7 +115,7 @@ mod's own files gets no coat of arms and no flag.
   (2 or 3) is emblem-specific and must be confirmed from a real vanilla (or
   vendored) usage — never guessed; where only a partial usage is found, the
   unconfirmed slot is set defensively to the same tone as slot 1 (the
-  convention #3622's `AVE` established). A `colored_emblem` block may repeat
+  convention `AVE` established). A `colored_emblem` block may repeat
   (layering charges) and a single `colored_emblem` may carry multiple `instance =`
   blocks (repeating the same charge at different placements/scales — negative
   `x` in `scale` mirrors the charge horizontally). Every block needs a comment
@@ -133,7 +132,7 @@ mod's own files gets no coat of arms and no flag.
 Both files are required together — a COA with no matching `flag_definition`
 entry parses cleanly but never renders in-game.
 
-## Greenskin house style (Badlands/Orcs & Goblins, board #3628, epic #3621)
+## Greenskin house style (Badlands/Orcs & Goblins)
 
 Established for `common/coat_of_arms/coat_of_arms/06_badlands.txt` and binding on
 every later greenskin-tag COA file (Dark Lands hobgoblins etc.) so the whole
@@ -171,7 +170,7 @@ tag files:
 7. Provenance convention for any Realms of Exether asset: copy the `.dds` into
    this mod's own `gfx/coat_of_arms/colored_emblems/` (plain git, no LFS),
    comment above the using block:
-   `# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/<file>.dds), reuse grant 2026-09-07`
+   `# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/<file>.dds), reuse grant`
 8. Emblem-reuse disclosure convention: when reusing a texture another shipped
    sibling used, add a one-line comment naming the sibling tag/file and the
    distinguishing recolour.
@@ -181,7 +180,7 @@ tag files:
 10. Shared family cue for the three "Broken" tribes (BKA/BTO/BRN): each carries
     a deliberately skewed or chipped charge.
 
-## `common/country_definitions/` + `common/country_formation/` entry schema (epic #3414, #3416)
+## `common/country_definitions/` + `common/country_formation/` entry schema
 
 Neither database is documented in `docs/*.log`; these shapes were confirmed against the vanilla
 install during scoping. Neither folder is listed in `.metadata/metadata.json`'s `replace_paths`, so
@@ -190,9 +189,9 @@ vanilla's own tags still load and this mod's files only *add* to them.
 Files follow the same `NN_<region>.txt` shape as `common/cultures/` — one file per Old World region,
 named for the region it covers (`02_empire.txt`), with formables split into a sibling
 `common/country_formation/NN_<region>_formables.txt`. The tag roster itself is frozen in
-`planning/tag_registry.md` (epic #3414); check a code there before authoring it.
+`planning/tag_registry.md`; check a code there before authoring it.
 
-**A tag's file is chosen by geography, not by its culture (Chris, 2026-09-03).** A tag lives in the
+**A tag's file is chosen by geography, not by its culture.** A tag lives in the
 `NN_<region>.txt` for the region it's physically located in, even when its culture is defined in a
 different (and, since `common/cultures/` now groups by race rather than region, differently-named)
 `common/cultures/` file — that's a legal cross-file reference, since culture ids are global. Example:
@@ -200,9 +199,7 @@ different (and, since `common/cultures/` now groups by race rather than region, 
 Grey Mountains on Bretonnia's southern flank) are both defined in `03_brettonia.txt` and use
 `orc`/`goblin` culture ids from `common/cultures/greenskin.txt`, because both sit geographically
 inside/against Bretonnia even though their population isn't bretonnian. A tag near a region border
-needs a real judgment call on which side it reads as — `SKZ` was first drafted in `06_badlands.txt`
-on the assumption a border mountain range defaults to the neighboring region's own tag file, then
-moved once Chris confirmed it reads as Bretonnian geography instead (2026-09-03).
+needs a real judgment call on which side it reads as.
 
 A country definition entry:
 
@@ -219,11 +216,10 @@ TAG = {
   Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see the Naming section above; no longer a matching-region file).
-- **`capital` is deliberately omitted** on every tag this mod ships (established by board item
-  #3416). No land `map_data/state_regions/` exist yet — only the sea zones emitted by
-  `tools/generate_sea_regions.py` — so any `capital = STATE_*` would dangle. Record the intended
-  capital as a `# capital: <Name> — TODO once land state-regions exist` comment and add the real
-  field once land states are authored.
+- **`capital` is deliberately omitted** on every tag this mod ships until it has a real
+  `STATE_*` to point at (land state-regions are now emitted — see `.claude/rules/testing.md` —
+  but not every tag has had its capital assignment revisited). Record the intended
+  capital as a `# capital: <Name> — TODO` comment where it's still missing.
 
 A formation entry stays in the **minor/culture-based shape**:
 
@@ -249,14 +245,14 @@ both are currently blanked via `replace_paths` and hold no entries, so a referen
 Loc lives in `localization/english/countries_<region>_l_english.yml`, one file per script file, with
 two keys per tag: the bare tag (display name) and `<TAG>_ADJ` (adjective).
 
-## Compatibility stubs and partial ports (#3447, widened #3537)
+## Compatibility stubs and partial ports
 
 Applies to `common/scripted_triggers/`, `common/scripted_effects/` and `common/on_actions/` alike.
 
 Two kinds of caller keep calling script this mod declined to restore. Either the calling file
 belongs to a folder that is *not* in `replace_paths` (e.g. `common/battle_conditions/`, and the
 `gfx/` building/train/ship graphics data), so vanilla's own copy still loads and still calls it; or
-the calling file was itself restored into this mod by epic #3292 and its body kept a call that the
+the calling file was itself restored into this mod by the vanilla-cleanup epic and its body kept a call that the
 restoration pass did not bring across (`is_princely_state`, called from this mod's own
 `common/ai_strategies/` files). Both fail the same way and take the same remedy; note which one a
 new stub belongs to, since the second is self-inflicted.
@@ -278,7 +274,7 @@ which:
   trigger that is vanilla's `NOR`-over-everything catch-all (e.g.
   `gfx_has_no_culture_trains_trigger`) stubs to `yes`, not `no`.
 
-### Port-vs-stub decision rule (load-error taxonomy, confirmed #3537)
+### Port-vs-stub decision rule (load-error taxonomy)
 
 What forces a drop is whether the reference is a *hard load error* or merely inert:
 
@@ -290,7 +286,7 @@ What forces a drop is whether the reference is a *hard load error* or merely ine
 
 So a body that only *adds* a missing journal entry can be ported and trimmed at leisure, while one
 that *checks* a missing modifier or journal entry cannot be ported at all until the object exists.
-Prefer restoring the missing object where it is generic (board #3539 restored the nine regency
+Prefer restoring the missing object where it is generic (e.g. the nine regency
 modifiers, which turned `remove_regency_modifier` from a planned stub into a clean port).
 
 Every stub must record, in a comment above it, **whether it is a true no-op or silently prunes
@@ -299,19 +295,19 @@ triggers are genuine no-ops: a false result just falls through to the default vi
 `is_in_guerilla_war` in `01_legacy_compat_triggers.txt` is the counter-example and the model for
 the disclosure: stubbing it false permanently disables the ~6 vanilla battle-condition variants
 gated on it evaluating `= yes`, which is the right call today but is a disclosed content gap with a
-follow-up owed. `is_princely_state` (#3537) is the same shape on the effects/AI side: four
+follow-up owed. `is_princely_state` is the same shape on the effects/AI side: four
 `common/ai_strategies/` branches prune when it returns no.
 
 Compatibility triggers live either in `01_legacy_compat_triggers.txt` (cross-cutting one-offs) or in
 a file named after the vanilla file they stand in for (`00_gfx_buildings_graphics_triggers.txt`).
 Restored scripted effects follow the second shape only — one file per vanilla file, under vanilla's
 own filename (`00_victoria_ip4_scripted_effects.txt`, `00_victoria_ip3_scripted_effects.txt`,
-`00_victoria_ep2_scripted_effects.txt`, #3537), carrying just the entries that file's live call
+`00_victoria_ep2_scripted_effects.txt`), carrying just the entries that file's live call
 sites still need. Restored on_actions go into the existing `common/on_actions/00_code_on_actions.txt`
 beside their vanilla neighbours, keeping vanilla's `# Root = …` / `# scope:… =` header comments.
 Before adding any of them, grep `common/` for the id — a duplicate definition is a game-log error.
 
-## `gfx/` real-world-reference keep-list + neutralization (board #3662)
+## `gfx/` real-world-reference keep-list + neutralization
 
 The 15 authored `gfx/` override files — `gfx/portraits/portrait_modifiers/01_{accessories,beards,
 clothes,hairstyles,headgear}.txt` and `gfx/map/city_data/city_types/*` (10) — reuse vanilla
@@ -337,20 +333,20 @@ generic-vs-specific, **not the trigger family** — the same family sits on both
 | `rel:<id>` / `religion` / `country_has_state_religion` | `common/religions/00_religions.txt` | `cult_of_*`/`old_faith`/…; catholic/hindu/shinto/… dangle |
 | `has_variable` / `has_global_variable` | (runtime flags) | real-world event flags set only by blanked `events/*` → permanently unset → always neutralize; **never load-errors, so the static classifier is the only authority that catches these** |
 | `is_in_geographic_region` | `common/geographic_regions/` (empty) | always dangles |
-| `has_role = character_role_emperor_of_japan` | `common/character_roles/` (not blanked → resolves) | **force-neutralized** — resolves but real-world (#3410 Entry 2) |
+| `has_role = character_role_emperor_of_japan` | `common/character_roles/` (not blanked → resolves) | **force-neutralized** — resolves but real-world |
 | `has_law` / `has_technology_researched` / `has_ideology` / `has_trait` / `has_role_of_type`, all `graphical_culture`/`graphics`/`dna_modifiers` scaffolding, and every real-world-*named*-but-defined `*_clothes`/`*_buildings` scripted_trigger | resolve → **KEEP** | name is not the test: `spanish_clothes_pop_trigger`/`french_buildings_trigger` resolve and stay |
 
 `city_types/*` carry no live real-world refs — the 3–4 landmark buildings (`building_eiffel_tower`,
-`building_suez_canal`, `building_panama_canal`, `building_victoria_terminus`) were removed live by
-#3538 and survive only in each file's header comment; the remaining `building_*` are generic
+`building_suez_canal`, `building_panama_canal`, `building_victoria_terminus`) were removed and
+survive only in each file's header comment; the remaining `building_*` are generic
 buildings that resolve. Read-through only, no edits.
 
-### Neutralize, don't delete (Chris, this session)
+### Neutralize, don't delete
 
 The mod will **repurpose most of these entries** for WH content later, so **preserve all scaffolding**
 (the variant, its `dna_modifiers`/art template, and every `modifier`/`OR`/`AND`/`NOT` wrapper) and
 neutralize only the dangling **leaf condition** by replacing it with `always = no`, tagged
-`# [#3662] was: <original>`. This is **behaviour-neutral**: a comparison to a non-existent id is
+`# was: <original>`. This is **behaviour-neutral**: a comparison to a non-existent id is
 always false, and so is `always = no`, so every boolean wrapper keeps its truth value
 (`NOT { always = no }` stays always-true, an `OR`-branch stays dead, a required gate stays
 never-firing) — and it also fixes the load-errors that strong `cu:`/`c:` links throw. A
@@ -369,7 +365,7 @@ mandatory in-game `error.log` gate ([testing.md](testing.md)). error.log alone u
 the first parse/lookup failure per file surfaces, and `has_variable` never errors), so it is the
 no-regression authority, not the completeness authority.
 
-## Name citations: the `source` convention (board #4363)
+## Name citations: the `source` convention
 
 Every hand-authored name this mod ships for a place carries a **citation** saying
 where it came from, so a later reader can tell canon from invention without
@@ -378,10 +374,10 @@ re-litigating it. Two files carry it today, in the same format:
 - `tools/config/hub_worksheet.json` — each `HubRow` has a required `source` string
   (`schema.HubRow`): either a canon citation or the literal `invented`. A blank
   `source` is a schema error, not a default.
-- `tools/config/land_regions_worksheet.csv` — a trailing `source` column (added by
-  #4363), empty on every row that has not been cited yet. Unlike the hub file this
+- `tools/config/land_regions_worksheet.csv` — a trailing `source` column,
+  empty on every row that has not been cited yet. Unlike the hub file this
   is **not** enforced: the column is additive and a blank cell is legal, because
-  the 267 names already in that file predate the convention. `name` and `source`
+  many names in that file predate the convention. `name` and `source`
   are carried across a regen together, by the same anchor relocation
   (`tools/render_land_regions_preview.py`) — never separately, since a citation
   parted from the name it cites is worse than no citation.
@@ -401,20 +397,20 @@ province-scale, so a resolved name is frequently a *town inside* the region rath
 than the region's own name. Neither is a problem a script can adjudicate.
 
 **Land not drawn in `sources/originals/tww3_old_world_mod_parchment_cropped.png` is
-out of scope for naming** (Chris, 2026-09-12). That file is the 4096² parchment
+out of scope for naming.** That file is the 4096² parchment
 master with everything this mod does not cover erased to alpha 0, and its **alpha
 channel** is the extent — the opaque area is an irregular interior shape whose
 bounding box is the whole image, so the image bounds prove nothing. A canon name
 resolved for a point outside it is discarded, not offered.
 
-## Vanilla map-keyed data overridden (board #5520)
+## Vanilla map-keyed data overridden
 
-Vanilla data keyed to the old real-world map crashes/errors the loader once the map is redrawn. Three overrides exist:
+Vanilla data keyed to the old real-world map crashes/errors the loader once the map is redrawn. Overrides in place:
 
-- `common/defines/00_wh_defines.txt` — `WORLD_MARKET_LOCATION` (vanilla `x9137A4`, old North Atlantic, a province colour the mod lacks; caused `world_market.cpp:246` and the load crash). Set to a passable non-lake sea province (`xCC2EA6`). `common/defines` is not in `replace_paths`, so it merges per key. **Hand-authored, guarded by `validate_map._check_world_market_location`; re-check after any `generate_provinces.py --reassign`.**
+- `common/defines/00_wh_defines.txt` — `WORLD_MARKET_LOCATION` (vanilla `x9137A4`, old North Atlantic, a province colour the mod lacks; caused `world_market.cpp:246` and a load crash). Set to a passable non-lake sea province (`xCC2EA6`). `common/defines` is not in `replace_paths`, so it merges per key. **Hand-authored, guarded by `validate_map._check_world_market_location`; re-check after any `generate_provinces.py --reassign`.**
 - `gfx/map/spline_network/game_road_data.txt` — blanked; rows are keyed to vanilla state-region ids (`route_graphics.cpp` errors).
-- `gfx/map/spline_network/spline_network.splnet` — zero-byte override, **experimental**. Tried 2026-09-24 twice: with it, 852 `travel_connection_definition.cpp` "no connection node" errors and no strip errors; without it, ~2600 strip/anchor errors. Both crashed at the end of script load, but the first attempt predated the packed-heightmap restore, so the combination is being retested; the crash cause is not yet pinned (last run: `Abnormal Program Termination`, not an access violation).
-- `gfx/map/map_object_data/generated_map_object_locators_{city,farm,mine,port,wood}.txt` — engine-generated for the redrawn map (copied from `Documents/.../Victoria 3/generated/` after the 2026-09-24 load reported "map object locator ... is incomplete"); override vanilla's same-named files. Regenerate the same way after any hub/province change.
+- `gfx/map/spline_network/spline_network.splnet` — zero-byte override, **experimental and unresolved**: with it, `travel_connection_definition.cpp` "no connection node" errors and no strip errors; without it, strip/anchor errors instead. Both crash at the end of script load; the root cause isn't pinned yet.
+- `gfx/map/map_object_data/generated_map_object_locators_{city,farm,mine,port,wood}.txt` — engine-generated for the redrawn map (copy from `Documents/.../Victoria 3/generated/` after a load reports "map object locator ... is incomplete"); overrides vanilla's same-named files. Regenerate the same way after any hub/province change.
 - `gfx/map/map_object_data/fortification_locators.txt` — blanked; instances sit at old-map pixels (`fortification_graphics.cpp` errors).
 
 If a new stale-reference error appears, override one more file per iteration (candidates: `generated_map_object_locators_*`, `papermap_*`, `spline_network.splnet`) and list it here.
