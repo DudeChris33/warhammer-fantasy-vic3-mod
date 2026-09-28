@@ -1,0 +1,456 @@
+﻿canal_altdorf_l = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x61C81F
+	second_land_endpoint = xBA70B2
+
+	first_sea_endpoint = x0D77E0
+	second_sea_endpoint = x84D98E
+}
+
+canal_altdorf_r = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x61C81F
+	second_land_endpoint = xA99A58
+
+	first_sea_endpoint = x0D77E0
+	second_sea_endpoint = x231107
+}
+
+canal_altdorf_t = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xA99A58
+	second_land_endpoint = xBA70B2
+
+	first_sea_endpoint = x0D77E0
+	second_sea_endpoint = xD85DDD
+}
+
+canal_ash_t = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x58C3D5
+	second_land_endpoint = xBE4712
+
+	first_sea_endpoint = x3F00AC
+	second_sea_endpoint = x7D517A
+}
+
+canal_aver_l = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x7398BB
+	second_land_endpoint = xEBCB2C
+
+	first_sea_endpoint = x068897
+	second_sea_endpoint = xD9DA13
+}
+
+canal_aver_r = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x519D38
+	second_land_endpoint = x7398BB
+
+	first_sea_endpoint = x8DAAB3
+	second_sea_endpoint = xD9DA13
+}
+
+canal_aver_t = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x519D38
+	second_land_endpoint = xEBCB2C
+
+	first_sea_endpoint = xD9DA13
+	second_sea_endpoint = xE12F02
+}
+
+canal_bitter_sea = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x533518
+	second_land_endpoint = xBA3D8D
+
+	first_sea_endpoint = x748055
+	second_sea_endpoint = xB0EF47
+}
+
+canal_blades = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x06DC39
+	second_land_endpoint = x6FAFB3
+
+	first_sea_endpoint = x4DDDAF
+	second_sea_endpoint = xAFA636
+}
+
+canal_bordeaux = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x74EFA1
+	second_land_endpoint = xF9C095
+
+	first_sea_endpoint = x5F7FF9
+	second_sea_endpoint = x769556
+}
+
+canal_brionne = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x7E3012
+	second_land_endpoint = xADA3DD
+
+	first_sea_endpoint = x769556
+	second_sea_endpoint = xF8445F
+}
+
+canal_dragon_isles = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xD086FA
+	second_land_endpoint = xEBF4AB
+
+	first_sea_endpoint = x381163
+	second_sea_endpoint = x82C48D
+}
+
+canal_drakefjord_bay = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x2B3B8C
+	second_land_endpoint = xB16366
+
+	first_sea_endpoint = x116EBD
+	second_sea_endpoint = x450C8A
+}
+
+canal_east_estalian_isles = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x778696
+	second_land_endpoint = xCEE618
+
+	first_sea_endpoint = x9F4CFD
+	second_sea_endpoint = xEA0027
+}
+
+canal_echoes_l = {
+	type = artificial
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x5DE819
+	second_land_endpoint = x877E58
+
+	first_sea_endpoint = x4BC8AE
+	second_sea_endpoint = xAD9135
+}
+
+canal_echoes_r = {
+	type = artificial
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x664EC5
+	second_land_endpoint = x877E58
+
+	first_sea_endpoint = x4BC8AE
+	second_sea_endpoint = xE12F02
+}
+
+canal_echoes_t = {
+	type = artificial
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x5DE819
+	second_land_endpoint = x664EC5
+
+	first_sea_endpoint = xAD9135
+	second_sea_endpoint = xE12F02
+}
+
+canal_erengrad = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xC0D032
+	second_land_endpoint = xD0DA9C
+
+	first_sea_endpoint = x3F9977
+	second_sea_endpoint = xAFA636
+}
+
+canal_grismerie = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x0A96EF
+	second_land_endpoint = x83C3A2
+
+	first_sea_endpoint = x5F7FF9
+	second_sea_endpoint = xFDB772
+}
+
+canal_kraka_ravnsnake = {
+	type = artificial
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x07A829
+	second_land_endpoint = xE7A12A
+
+	first_sea_endpoint = x116EBD
+	second_sea_endpoint = x4DDDAF
+}
+
+canal_limnala = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xAAF13E
+	second_land_endpoint = xECE118
+
+	first_sea_endpoint = x4BC8AE
+	second_sea_endpoint = xB6625A
+}
+
+canal_lower_ruin = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x7A9EDB
+	second_land_endpoint = xA55DAE
+
+	first_sea_endpoint = x2F403E
+	second_sea_endpoint = x381163
+}
+
+canal_lynsk = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x36CD25
+	second_land_endpoint = x58C8A8
+
+	first_sea_endpoint = x3B53CB
+	second_sea_endpoint = x3F9977
+}
+
+canal_manaanspoort = {
+	type = natural
+
+	total_block_requires_full_control = yes
+	military_block_requires_full_control = yes
+	tolls_require_full_control = yes
+
+	first_land_endpoint = x182FB4
+	second_land_endpoint = xEC971C
+
+	first_sea_endpoint = xC6BB93
+	second_sea_endpoint = xCF8CB8
+}
+
+canal_marienburg = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x021499
+	second_land_endpoint = x2BE6FF
+
+	first_sea_endpoint = x84D98E
+	second_sea_endpoint = xCF8CB8
+}
+
+canal_middle_talabec = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xB6957F
+	second_land_endpoint = xDED005
+
+	first_sea_endpoint = x231107
+	second_sea_endpoint = x486A9C
+}
+
+canal_miragliano = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x673B32
+	second_land_endpoint = xB3F588
+
+	first_sea_endpoint = x9F4CFD
+	second_sea_endpoint = xAD9135
+}
+
+canal_myrmidens = {
+	type = natural
+
+	total_block_requires_full_control = yes
+	military_block_requires_full_control = yes
+	tolls_require_full_control = yes
+
+	first_land_endpoint = x9A4936
+	second_land_endpoint = xBC0892
+
+	first_sea_endpoint = xB6625A
+	second_sea_endpoint = xDBBBEF
+}
+
+canal_nuln_l = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x369A00
+	second_land_endpoint = xFE3966
+
+	first_sea_endpoint = x8DAAB3
+	second_sea_endpoint = x9D6B21
+}
+
+canal_nuln_r = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x369A00
+	second_land_endpoint = x377898
+
+	first_sea_endpoint = x513BC1
+	second_sea_endpoint = x9D6B21
+}
+
+canal_nuln_t = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x377898
+	second_land_endpoint = xFE3966
+
+	first_sea_endpoint = x9D6B21
+	second_sea_endpoint = xD85DDD
+}
+
+canal_sartosa = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x1B2C4F
+	second_land_endpoint = xE0D25E
+
+	first_sea_endpoint = x46559B
+	second_sea_endpoint = x9F4CFD
+}
+
+canal_upper_talabec = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x3A5989
+	second_land_endpoint = xE9B62B
+
+	first_sea_endpoint = x0BFBAA
+	second_sea_endpoint = x486A9C
+}
+
+canal_uzkulak = {
+	type = artificial
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x280BCC
+	second_land_endpoint = xB150BE
+
+	first_sea_endpoint = x8A4CA1
+	second_sea_endpoint = x931DC6
+}
+
+canal_west_estalian_isles = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x111FEE
+	second_land_endpoint = xCEE618
+
+	first_sea_endpoint = x266F19
+	second_sea_endpoint = xEA0027
+}

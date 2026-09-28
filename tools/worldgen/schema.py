@@ -880,7 +880,14 @@ class AdjacencyRow:
     crossings are geographic chokepoints, not man-made canals) is the
     ``common/strait_definitions`` block's ``type`` for a ``canal_*`` row; an
     artificial canal additionally needs ``common/buildings``/
-    ``common/production_methods`` entries this schema does not author."""
+    ``common/production_methods`` entries this schema does not author.
+
+    ``total_block_requires_full_control``/``military_block_requires_full_control``
+    (default ``False``, matching vanilla's usual open-strait case) and
+    ``tolls_require_full_control`` (default ``None`` = the line is omitted
+    entirely, since most canals don't charge tolls) are the block's control
+    flags for a ``canal_*`` row — set on a case-by-case basis (e.g. a
+    chokepoint strait one power can blockade or toll)."""
 
     a: tuple[int, int]
     b: tuple[int, int]
@@ -891,6 +898,9 @@ class AdjacencyRow:
     land_a_color: tuple[int, int, int] | None = None
     land_b_color: tuple[int, int, int] | None = None
     strait_type: str = "natural"
+    total_block_requires_full_control: bool = False
+    military_block_requires_full_control: bool = False
+    tolls_require_full_control: bool | None = None
 
     @classmethod
     def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
@@ -917,8 +927,21 @@ class AdjacencyRow:
         if not _STRAIT_TYPE_RE.fullmatch(strait_type):
             raise SchemaError(f"{ctx}.strait_type: must be 'natural' or 'artificial', "
                               f"got {strait_type!r}")
+        bool_flags = {}
+        for key in ("total_block_requires_full_control", "military_block_requires_full_control"):
+            raw = d.get(key, False)
+            if not isinstance(raw, bool):
+                raise SchemaError(f"{ctx}.{key}: expected true/false, got {raw!r}")
+            bool_flags[key] = raw
+        tolls_raw = d.get("tolls_require_full_control")
+        if tolls_raw is not None and not isinstance(tolls_raw, bool):
+            raise SchemaError(f"{ctx}.tolls_require_full_control: expected true/false, "
+                              f"got {tolls_raw!r}")
         return cls(a=a, b=b, type=typ, comment=comment, a_color=pins[0], b_color=pins[1],
-                  land_a_color=pins[2], land_b_color=pins[3], strait_type=strait_type)
+                  land_a_color=pins[2], land_b_color=pins[3], strait_type=strait_type,
+                  total_block_requires_full_control=bool_flags["total_block_requires_full_control"],
+                  military_block_requires_full_control=bool_flags["military_block_requires_full_control"],
+                  tolls_require_full_control=tolls_raw)
 
 
 def load_adjacency_worksheet(path: Path, canvas: tuple[int, int] | None = None

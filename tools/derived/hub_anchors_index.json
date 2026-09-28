@@ -12336,28 +12336,6 @@
    "province_hex": "xC8A715"
   },
   {
-   "state": "Land 553 (near Brennun's Encampment)",
-   "hub": "port",
-   "name": "Khrakkvik",
-   "source": "invented",
-   "anchor": [
-    4334,
-    453
-   ],
-   "resolved": [
-    4333,
-    452
-   ],
-   "region": 37,
-   "province_label": 746,
-   "province_color": [
-    93,
-    223,
-    23
-   ],
-   "province_hex": "x5DDF17"
-  },
-  {
    "state": "Land 554 (near Thorshafn)",
    "hub": "city",
    "name": "Trollkingsholm",

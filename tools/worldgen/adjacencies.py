@@ -239,17 +239,28 @@ def _line_from_pixels(xs: np.ndarray, ys: np.ndarray, width: int, wrap_x: bool) 
         shift = width // 2  # component crosses the seam: rotate it away from the edge
         xs = (xs + shift) % width
     x0, x1, y0, y1 = int(xs.min()), int(xs.max()), int(ys.min()), int(ys.max())
-    crop = np.zeros((y1 - y0 + 3, x1 - x0 + 3), dtype=bool)
-    crop[ys - y0 + 1, xs - x0 + 1] = True
-    sk = skeletonize(crop)
-    ky, kx = np.nonzero(sk)
 
     def to_canvas(px: int, py: int) -> Point:
         return ((px + x0 - 1 - shift) % width, py + y0 - 1)
 
-    pts = {(int(x), int(y)) for x, y in zip(kx, ky)}
     cx = int(round(float(np.mean((xs - shift) % width))))
     cy = int(round(float(ys.mean())))
+
+    # Try the raw (pre-skeletonize) pixels for a clean "+"/"X" junction first:
+    # a short (down to 1px) arm is a deliberate leaf on a small canal mark (no
+    # arm-length cap - see _try_junction), but skimage's thinning below can
+    # erode it as noise before the diameter-path logic ever sees it (measured:
+    # a 1px stub on an otherwise clean 4-leaf cross vanishes from the skeleton).
+    raw_pts = {(int(x - x0 + 1), int(y - y0 + 1)) for x, y in zip(xs, ys)}
+    raw_junction = _try_junction(raw_pts, n_px, (cx, cy), to_canvas)
+    if raw_junction.leaves is not None:
+        return raw_junction
+
+    crop = np.zeros((y1 - y0 + 3, x1 - x0 + 3), dtype=bool)
+    crop[ys - y0 + 1, xs - x0 + 1] = True
+    sk = skeletonize(crop)
+    ky, kx = np.nonzero(sk)
+    pts = {(int(x), int(y)) for x, y in zip(kx, ky)}
     if len(pts) < 2:
         return Line(n_px, (cx, cy), None, None, "bad-shape: too short (dot)")
     seed = min(pts)
@@ -268,6 +279,17 @@ def _line_from_pixels(xs: np.ndarray, ys: np.ndarray, width: int, wrap_x: bool) 
     off = len(pts) - len(path)
     if off > SPUR_PX:
         return _try_junction(pts, n_px, (cx, cy), to_canvas)
+    # A compact "+"/"X" mark can have a BFS-diameter path that threads through
+    # most of its pixels via diagonal moves, leaving <= SPUR_PX unaccounted for -
+    # within the spur-noise tolerance even though the raw shape is a genuine
+    # 4-leaf junction (measured: a 13px X with 5-6px arms leaves off=3). Always
+    # check the junction reading too, and prefer it over the diameter-path
+    # reading whenever it cleanly resolves to one junction cluster + 4 leaves -
+    # a real spur (an extra 3rd leaf off an otherwise 2-endpoint line) still
+    # fails that check and falls through to the plain line below.
+    junction = _try_junction(pts, n_px, (cx, cy), to_canvas)
+    if junction.leaves is not None:
+        return junction
     a, b = to_canvas(*ends[0]), to_canvas(*ends[1])
     if a == b:
         return Line(n_px, (cx, cy), None, None, "bad-shape: endpoints coincide")

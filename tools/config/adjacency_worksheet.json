@@ -14,6 +14,18 @@
     },
     {
       "a": [
+        4145,
+        950
+      ],
+      "b": [
+        4137,
+        952
+      ],
+      "type": "canal_aver_l",
+      "comment": "River Aver"
+    },
+    {
+      "a": [
         4983,
         1395
       ],
@@ -66,8 +78,8 @@
         1157
       ],
       "b": [
-        3822,
-        1153
+        3819,
+        1150
       ],
       "type": "sea",
       "comment": "Estalian Isles"
@@ -86,6 +98,18 @@
     },
     {
       "a": [
+        4610,
+        479
+      ],
+      "b": [
+        4595,
+        469
+      ],
+      "type": "sea",
+      "comment": "Norscan Island"
+    },
+    {
+      "a": [
         4163,
         1090
       ],
@@ -95,6 +119,42 @@
       ],
       "type": "sea",
       "comment": "Fort Soll"
+    },
+    {
+      "a": [
+        4099,
+        846
+      ],
+      "b": [
+        4096,
+        851
+      ],
+      "type": "canal_altdorf_r",
+      "comment": "Altdorf"
+    },
+    {
+      "a": [
+        4092,
+        851
+      ],
+      "b": [
+        4086,
+        850
+      ],
+      "type": "canal_altdorf_l",
+      "comment": "Altdorf"
+    },
+    {
+      "a": [
+        4095,
+        853
+      ],
+      "b": [
+        4096,
+        858
+      ],
+      "type": "canal_altdorf_t",
+      "comment": "Altdorf"
     },
     {
       "a": [
@@ -118,7 +178,20 @@
         477
       ],
       "type": "canal_kraka_ravnsnake",
-      "comment": "Kraka Ravnsnake"
+      "comment": "Kraka Ravnsnake",
+      "strait_type": "artificial"
+    },
+    {
+      "a": [
+        4659,
+        647
+      ],
+      "b": [
+        4628,
+        644
+      ],
+      "type": "sea",
+      "comment": "Northern World's Edge"
     },
     {
       "a": [
@@ -170,18 +243,6 @@
     },
     {
       "a": [
-        4419,
-        757
-      ],
-      "b": [
-        4421,
-        749
-      ],
-      "type": "sea",
-      "comment": "Kislev City"
-    },
-    {
-      "a": [
         3777,
         1239
       ],
@@ -218,6 +279,18 @@
     },
     {
       "a": [
+        4082,
+        291
+      ],
+      "b": [
+        4064,
+        296
+      ],
+      "type": "sea",
+      "comment": "North Norsca"
+    },
+    {
+      "a": [
         4590,
         1496
       ],
@@ -227,30 +300,6 @@
       ],
       "type": "sea",
       "comment": "Sour Sea"
-    },
-    {
-      "a": [
-        4150,
-        894
-      ],
-      "b": [
-        4148,
-        902
-      ],
-      "type": "canal_nuln_r",
-      "comment": "Nuln"
-    },
-    {
-      "a": [
-        4145,
-        904
-      ],
-      "b": [
-        4136,
-        898
-      ],
-      "type": "canal_nuln_l",
-      "comment": "Nuln"
     },
     {
       "a": [
@@ -278,18 +327,6 @@
     },
     {
       "a": [
-        4149,
-        892
-      ],
-      "b": [
-        4137,
-        893
-      ],
-      "type": "canal_nuln_t",
-      "comment": "Nuln"
-    },
-    {
-      "a": [
         5127,
         1439
       ],
@@ -302,18 +339,6 @@
     },
     {
       "a": [
-        4610,
-        479
-      ],
-      "b": [
-        4595,
-        469
-      ],
-      "type": "sea",
-      "comment": "Norscan Island"
-    },
-    {
-      "a": [
         4382,
         672
       ],
@@ -323,6 +348,18 @@
       ],
       "type": "canal_lynsk",
       "comment": "River Lynsk"
+    },
+    {
+      "a": [
+        4100,
+        1693
+      ],
+      "b": [
+        4103,
+        1700
+      ],
+      "type": "canal_ash_t",
+      "comment": "Ash River"
     },
     {
       "a": [
@@ -342,8 +379,8 @@
         1164
       ],
       "b": [
-        3498,
-        1153
+        3497,
+        1152
       ],
       "type": "sea",
       "comment": "South Estalian Island"
@@ -374,6 +411,18 @@
     },
     {
       "a": [
+        4310,
+        662
+      ],
+      "b": [
+        4308,
+        673
+      ],
+      "type": "sea",
+      "comment": "Erengrad"
+    },
+    {
+      "a": [
         4089,
         1121
       ],
@@ -382,7 +431,10 @@
         1110
       ],
       "type": "canal_echoes_l",
-      "comment": "River of Echoes"
+      "comment": "River of Echoes",
+      "strait_type": "artificial",
+      "land_a_color": "x5DE819",
+      "land_b_color": "x877E58"
     },
     {
       "a": [
@@ -406,7 +458,10 @@
         1085
       ],
       "type": "canal_echoes_r",
-      "comment": "River of Echoes"
+      "comment": "River of Echoes",
+      "strait_type": "artificial",
+      "land_a_color": "x877E58",
+      "land_b_color": "x664EC5"
     },
     {
       "a": [
@@ -422,27 +477,15 @@
     },
     {
       "a": [
-        3706,
-        1184
+        4151,
+        898
       ],
       "b": [
-        3694,
-        1194
+        4146,
+        898
       ],
-      "type": "sea",
-      "comment": "South Estalian Island"
-    },
-    {
-      "a": [
-        4098,
-        1696
-      ],
-      "b": [
-        4107,
-        1696
-      ],
-      "type": "canal_ash_t",
-      "comment": "Ash River"
+      "type": "canal_nuln_r",
+      "comment": "Nuln"
     },
     {
       "a": [
@@ -458,15 +501,39 @@
     },
     {
       "a": [
-        4255,
-        221
+        3707,
+        1184
       ],
       "b": [
-        4239,
-        236
+        3694,
+        1194
       ],
       "type": "sea",
-      "comment": "North Norsca"
+      "comment": "South Estalian Island"
+    },
+    {
+      "a": [
+        4446,
+        479
+      ],
+      "b": [
+        4487,
+        532
+      ],
+      "type": "sea",
+      "comment": "Hell Pit"
+    },
+    {
+      "a": [
+        4448,
+        477
+      ],
+      "b": [
+        4531,
+        524
+      ],
+      "type": "sea",
+      "comment": "Hell Pit"
     },
     {
       "a": [
@@ -506,6 +573,18 @@
     },
     {
       "a": [
+        4419,
+        757
+      ],
+      "b": [
+        4421,
+        749
+      ],
+      "type": "sea",
+      "comment": "Kislev City"
+    },
+    {
+      "a": [
         3812,
         901
       ],
@@ -530,15 +609,15 @@
     },
     {
       "a": [
-        4092,
-        846
+        3691,
+        759
       ],
       "b": [
-        4102,
-        851
+        3703,
+        764
       ],
-      "type": "canal_altdorf_r",
-      "comment": "Altdorf"
+      "type": "sea",
+      "comment": "Lyonesse"
     },
     {
       "a": [
@@ -597,7 +676,7 @@
         4616,
         1526
       ],
-      "type": "sea",
+      "type": "canal_bitter_sea",
       "comment": "Bitter Sea"
     },
     {
@@ -623,18 +702,6 @@
       ],
       "type": "sea",
       "comment": "East Estalian Isles"
-    },
-    {
-      "a": [
-        4310,
-        662
-      ],
-      "b": [
-        4308,
-        673
-      ],
-      "type": "sea",
-      "comment": "Erengrad"
     },
     {
       "a": [
@@ -682,19 +749,34 @@
         698
       ],
       "type": "canal_uzkulak",
-      "comment": "Uzkulak Canal"
+      "comment": "Uzkulak Canal",
+      "strait_type": "artificial",
+      "land_a_color": "x280BCC",
+      "land_b_color": "xB150BE"
     },
     {
       "a": [
-        4082,
-        291
+        4139,
+        902
       ],
       "b": [
-        4064,
-        296
+        4143,
+        899
       ],
-      "type": "sea",
-      "comment": "North Norsca"
+      "type": "canal_nuln_l",
+      "comment": "Nuln"
+    },
+    {
+      "a": [
+        4136,
+        944
+      ],
+      "b": [
+        4136,
+        950
+      ],
+      "type": "canal_aver_r",
+      "comment": "Aver Estuary"
     },
     {
       "a": [
@@ -707,6 +789,18 @@
       ],
       "type": "sea",
       "comment": "Praag"
+    },
+    {
+      "a": [
+        4142,
+        890
+      ],
+      "b": [
+        4144,
+        895
+      ],
+      "type": "canal_nuln_t",
+      "comment": "Nuln"
     },
     {
       "a": [
@@ -734,6 +828,18 @@
     },
     {
       "a": [
+        4379,
+        1058
+      ],
+      "b": [
+        4055,
+        1029
+      ],
+      "type": "sea",
+      "comment": "Forest of Gloom"
+    },
+    {
+      "a": [
         3837,
         834
       ],
@@ -746,12 +852,24 @@
     },
     {
       "a": [
+        4490,
+        533
+      ],
+      "b": [
+        4528,
+        527
+      ],
+      "type": "sea",
+      "comment": "Hell Pit"
+    },
+    {
+      "a": [
         4276,
         1050
       ],
       "b": [
-        4321,
-        1030
+        4322,
+        1029
       ],
       "type": "sea",
       "comment": "Under Blackfyre Pass"
@@ -766,7 +884,10 @@
         1085
       ],
       "type": "canal_echoes_t",
-      "comment": "River of Echoes"
+      "comment": "River of Echoes",
+      "strait_type": "artificial",
+      "land_a_color": "x5DE819",
+      "land_b_color": "x664EC5"
     },
     {
       "a": [
@@ -789,8 +910,11 @@
         3999,
         1297
       ],
-      "type": "canal_mymidens",
-      "comment": "Myrmidens"
+      "type": "canal_myrmidens",
+      "comment": "Myrmidens",
+      "total_block_requires_full_control": true,
+      "military_block_requires_full_control": true,
+      "tolls_require_full_control": true
     },
     {
       "a": [
@@ -814,7 +938,22 @@
         695
       ],
       "type": "canal_manaanspoort",
-      "comment": "Manaanspoort"
+      "comment": "Manaanspoort",
+      "total_block_requires_full_control": true,
+      "military_block_requires_full_control": true,
+      "tolls_require_full_control": true
+    },
+    {
+      "a": [
+        4255,
+        221
+      ],
+      "b": [
+        4239,
+        236
+      ],
+      "type": "sea",
+      "comment": "North Norsca"
     },
     {
       "a": [
@@ -827,6 +966,18 @@
       ],
       "type": "sea",
       "comment": "Sour Crags"
+    },
+    {
+      "a": [
+        4136,
+        954
+      ],
+      "b": [
+        4139,
+        961
+      ],
+      "type": "canal_aver_t",
+      "comment": "River Aver"
     },
     {
       "a": [
@@ -849,7 +1000,7 @@
         3559,
         1109
       ],
-      "type": "canal_pina",
+      "type": "sea",
       "comment": "Pina Woods"
     }
   ],

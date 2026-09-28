@@ -407,16 +407,24 @@ def build_straits() -> tuple[str, str, list[str]]:
             notes.append(f"{row.type}: no land endpoints yet (draw it as a '+'/'X' junction, "
                          "or pin land_a_color/land_b_color in the worksheet)")
             continue
-        blocks[row.type] = (c.from_color, c.to_color, land, row.strait_type, row.comment)
+        blocks[row.type] = (c.from_color, c.to_color, land, row.strait_type, row.comment,
+                            row.total_block_requires_full_control,
+                            row.military_block_requires_full_control,
+                            row.tolls_require_full_control)
 
     def render_block(canal_id: str) -> str:
-        sea_a, sea_b, (land_a, land_b), strait_type, _comment = blocks[canal_id]
-        return "\n".join([
+        (sea_a, sea_b, (land_a, land_b), strait_type, _comment,
+         total_block, military_block, tolls) = blocks[canal_id]
+        lines = [
             f"{canal_id} = {{",
             f"{INDENT}type = {strait_type}",
             "",
-            f"{INDENT}total_block_requires_full_control = no",
-            f"{INDENT}military_block_requires_full_control = no",
+            f"{INDENT}total_block_requires_full_control = {'yes' if total_block else 'no'}",
+            f"{INDENT}military_block_requires_full_control = {'yes' if military_block else 'no'}",
+        ]
+        if tolls is not None:
+            lines.append(f"{INDENT}tolls_require_full_control = {'yes' if tolls else 'no'}")
+        lines.extend([
             "",
             f"{INDENT}first_land_endpoint = {adj.color_token(land_a)}",
             f"{INDENT}second_land_endpoint = {adj.color_token(land_b)}",
@@ -425,6 +433,7 @@ def build_straits() -> tuple[str, str, list[str]]:
             f"{INDENT}second_sea_endpoint = {adj.color_token(sea_b)}",
             "}",
         ])
+        return "\n".join(lines)
 
     straits_text = ("\n\n".join(render_block(cid) for cid in sorted(blocks)) + "\n"
                     if blocks else "")
