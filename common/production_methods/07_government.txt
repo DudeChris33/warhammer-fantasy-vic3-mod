@@ -159,7 +159,7 @@ pm_religious_bureaucrats = {
 
 	disallowing_laws = {
 		law_total_separation
-		law_state_atheism
+		# [#3410] dropped law_state_atheism (law removed)
 	}
 
 	building_modifiers = {
@@ -279,7 +279,7 @@ pm_religious_academia = {
 
 	disallowing_laws = {
 		law_total_separation
-		law_state_atheism
+		# [#3410] dropped law_state_atheism (law removed)
 	}
 
 	building_modifiers = {

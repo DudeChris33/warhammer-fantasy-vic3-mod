@@ -543,29 +543,14 @@ pm_manor_house_principle_divine_economics_2 = {
 	}
 }
 
-pm_manor_house_bureaucrat_ownership = {
-	texture = "gfx/interface/icons/production_method_icons/ownership_bureacrats.dds"
-
-	unlocking_laws = {
-		law_state_atheism
-	}
-
-	building_modifiers = {
-		level_scaled = {
-			building_employment_bureaucrats_add = 100
-		}
-		unscaled = {
-			building_bureaucrats_shares_add = 1
-		}
-	}
-}
+# [#3410] pm_manor_house_bureaucrat_ownership removed: its sole unlock was law_state_atheism (law
+# removed), and an empty unlocking_laws would have made this atheism-only PM available to every
+# country instead. Also dropped from pmg_additional_ownership_building_manor_house.
 
 pm_manor_house_clergy_ownership = {
 	texture = "gfx/interface/icons/production_method_icons/ownership_clergy.dds"
 
-	disallowing_laws = {
-		law_state_atheism
-	}
+	# [#3410] dropped disallowing_laws = { law_state_atheism } (law removed; sole entry)
 
 	building_modifiers = {
 		level_scaled = {

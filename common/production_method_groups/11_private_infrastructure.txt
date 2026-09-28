@@ -62,7 +62,7 @@ pmg_additional_ownership_building_manor_house = {
 
 	production_methods = {
 		pm_manor_house_clergy_ownership
-		pm_manor_house_bureaucrat_ownership
+		# [#3410] dropped pm_manor_house_bureaucrat_ownership (removed with law_state_atheism)
 	}
 }
 
