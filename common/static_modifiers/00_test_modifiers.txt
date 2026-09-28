@@ -1,0 +1,20 @@
+﻿# Restored verbatim from vanilla common/static_modifiers/00_test_modifiers.txt
+# Board item #3410 (parent epic #3292): common/static_modifiers/ is listed in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are
+# not loaded at all. These generic modifiers were dropped when this mod's copy of
+# the folder was authored, leaving live has_modifier / add_modifier references
+# dangling. Bodies are unchanged from vanilla.
+# Only the two entries still referenced (common/scripted_guis/debug_sguis.txt) are
+# restored; vanilla's sibling debug_influence is not referenced and stays out.
+
+# vanilla: common/static_modifiers/00_test_modifiers.txt:55
+debug_movement_activism_up = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	political_movement_radicalism_add = 0.1
+}
+
+# vanilla: common/static_modifiers/00_test_modifiers.txt:60
+debug_movement_activism_down = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	political_movement_radicalism_add = -0.1
+}

@@ -22,3 +22,49 @@ skyscraper_site = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
 	building_construction_sector_throughput_add = 0.1
 }
+
+# Board item #3410: further generic modifiers restored verbatim from vanilla
+# common/static_modifiers/content_1_modifiers.txt, same rationale as above. Bodies unchanged.
+
+# vanilla: common/static_modifiers/content_1_modifiers.txt:963
+industrial_strike_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	building_group_bg_manufacturing_throughput_add = -0.25
+}
+
+# vanilla: common/static_modifiers/content_1_modifiers.txt:968
+mining_strike_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	building_group_bg_mining_throughput_add = -0.25
+}
+
+# vanilla: common/static_modifiers/content_1_modifiers.txt:973
+railway_strike_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
+	building_railway_throughput_add = -0.25
+}
+
+# vanilla: common/static_modifiers/content_1_modifiers.txt:988
+strike_suppression = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_fist_negative.dds
+	state_radicals_from_political_movements_mult = -0.25
+	state_mortality_turmoil_mult = 0.05
+}
+
+# vanilla: common/static_modifiers/content_1_modifiers.txt:999
+mining_scabs_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_group_bg_mining_throughput_add = 0.1
+}
+
+# vanilla: common/static_modifiers/content_1_modifiers.txt:1004
+industrial_scabs_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_group_bg_manufacturing_throughput_add = 0.1
+}
+
+# vanilla: common/static_modifiers/content_1_modifiers.txt:1009
+railway_scabs_modifier = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+	building_railway_throughput_add = 0.1
+}

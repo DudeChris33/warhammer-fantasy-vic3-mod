@@ -1,0 +1,12 @@
+﻿# Restored verbatim from vanilla common/static_modifiers/00_ip3_04_modifiers.txt
+# Board item #3410 (parent epic #3292): common/static_modifiers/ is listed in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are
+# not loaded at all. These generic modifiers were dropped when this mod's copy of
+# the folder was authored, leaving live has_modifier / add_modifier references
+# dangling. Bodies are unchanged from vanilla.
+
+# vanilla: common/static_modifiers/00_ip3_04_modifiers.txt:62
+ negotiation_pushing_for_law = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_law_enactment_success_add = 0.05
+}

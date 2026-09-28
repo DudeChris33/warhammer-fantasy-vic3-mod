@@ -87,3 +87,19 @@ modifier_government_recently_couped = {
 	country_opposition_ig_approval_add = -3
 	country_block_government_reform_bool = yes
 }
+
+# Board item #3410: further generic modifiers restored verbatim from vanilla
+# common/static_modifiers/00_ip4_04_modifiers.txt, same rationale as above. Bodies unchanged.
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:480
+modifier_changed_administrative_language = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_bureaucracy_mult = -0.2
+	country_institution_size_change_speed_mult = -0.25
+}
+
+# vanilla: common/static_modifiers/00_ip4_04_modifiers.txt:486
+modifier_changed_administrative_language_state = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_assimilation_mult = 0.75
+}

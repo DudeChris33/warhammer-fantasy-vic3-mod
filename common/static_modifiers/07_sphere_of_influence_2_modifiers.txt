@@ -1,0 +1,12 @@
+﻿# Restored verbatim from vanilla common/static_modifiers/07_sphere_of_influence_2_modifiers.txt
+# Board item #3410 (parent epic #3292): common/static_modifiers/ is listed in
+# .metadata/metadata.json's replace_paths, so vanilla's files for this folder are
+# not loaded at all. These generic modifiers were dropped when this mod's copy of
+# the folder was authored, leaving live has_modifier / add_modifier references
+# dangling. Bodies are unchanged from vanilla.
+
+# vanilla: common/static_modifiers/07_sphere_of_influence_2_modifiers.txt:125
+modifier_has_annexed_another_subject = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_liberty_desire_add = 0.2
+}
