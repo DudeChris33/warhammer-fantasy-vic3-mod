@@ -268,7 +268,7 @@ ideology_oligarchic = {
 		law_state_religion = disapprove
 		law_freedom_of_conscience = neutral
 		law_total_separation = approve
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 }
 
@@ -405,7 +405,7 @@ ideology_moralist = {
 		law_state_religion = strongly_approve
 		law_freedom_of_conscience = neutral
 		law_total_separation = strongly_disapprove
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 }
 
@@ -549,7 +549,7 @@ ideology_anti_clerical = {
 	icon = "gfx/interface/icons/ideology_icons/anti_clerical.dds"
 
 	lawgroup_church_and_state = {
-		law_state_atheism = neutral
+		# [#3410] dropped law_state_atheism = neutral (law removed)
 		law_total_separation = strongly_approve
 		law_freedom_of_conscience = approve
 		law_state_religion = disapprove

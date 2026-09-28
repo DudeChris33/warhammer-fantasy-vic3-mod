@@ -139,7 +139,7 @@ ideology_traditionalist = { # Average Progressiveness - -70
 		law_state_religion = approve
 		law_freedom_of_conscience = disapprove
 		law_total_separation = strongly_disapprove
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 
 	lawgroup_labour_associations = {
@@ -299,7 +299,7 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = approve
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 
 	lawgroup_labour_associations = {
@@ -466,7 +466,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = neutral
-		law_state_atheism = strongly_approve
+		# [#3410] dropped law_state_atheism = strongly_approve (law removed)
 	}
 
 
@@ -488,7 +488,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 					has_law_or_variant = law_type:law_parliamentary_republic
 					has_law_or_variant = law_type:law_council_republic
 				}
-				has_law_or_variant = law_type:law_state_atheism
+				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 			}
 		}
 
@@ -3267,7 +3267,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = neutral
-		law_state_atheism = approve
+		# [#3410] dropped law_state_atheism = approve (law removed)
 	}
 
 	lawgroup_land_reform = {
@@ -3301,7 +3301,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 			has_role_of_type = agitator
 			owner = {
 				has_law_or_variant = law_type:law_collectivized_agriculture
-				has_law_or_variant = law_type:law_state_atheism
+				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 				has_law_or_variant = law_type:law_council_republic
 				has_law_or_variant = law_type:law_worker_protections
 			}
@@ -5370,7 +5370,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		law_state_religion = approve
 		law_freedom_of_conscience = disapprove
 		law_total_separation = strongly_disapprove
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 
 	lawgroup_governance_principles = {
@@ -7027,7 +7027,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = approve
-		law_state_atheism = strongly_approve
+		# [#3410] dropped law_state_atheism = strongly_approve (law removed)
 	}
 
 	lawgroup_distribution_of_power = {
@@ -7064,7 +7064,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 			owner = {
 				has_law_or_variant = law_type:law_appointed_bureaucrats
 				has_law_or_variant = law_type:law_technocracy
-				has_law_or_variant = law_type:law_state_atheism
+				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 				has_law_or_variant = law_type:law_presidential_republic
 			}
 		}
@@ -7590,7 +7590,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		law_state_religion = strongly_approve
 		law_freedom_of_conscience = disapprove
 		law_total_separation = strongly_disapprove
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 
 	lawgroup_citizenship = {
@@ -8451,7 +8451,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 				ig_approval > 0
 				owner = {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
-					NOT = { has_law_or_variant = law_type:law_state_atheism }
+					# [#3410] dropped NOT = { has_law_or_variant = law_type:law_state_atheism } (law removed)
 				}
 			}
 			add = 25
@@ -8574,7 +8574,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 				interest_group.ig_approval > 0
 				owner = {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
-					NOT = { has_law_or_variant = law_type:law_state_atheism }
+					# [#3410] dropped NOT = { has_law_or_variant = law_type:law_state_atheism } (law removed)
 				}
 			}
 			add = 25

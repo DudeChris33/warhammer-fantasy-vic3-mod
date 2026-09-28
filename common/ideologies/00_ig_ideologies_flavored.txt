@@ -418,7 +418,7 @@ ideology_conservative_praetorian = {
 		law_state_religion = approve
 		law_freedom_of_conscience = neutral
 		law_total_separation = disapprove
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 }
 

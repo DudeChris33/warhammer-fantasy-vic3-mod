@@ -279,7 +279,7 @@ ideology_communist_movement = {
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = neutral
-		law_state_atheism = approve
+		# [#3410] dropped law_state_atheism = approve (law removed)
 	}
 
 	lawgroup_land_reform = {
@@ -654,7 +654,7 @@ ideology_nihilist_movement = {
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = neutral
-		law_state_atheism = strongly_approve
+		# [#3410] dropped law_state_atheism = strongly_approve (law removed)
 	}
 
 }
@@ -676,7 +676,7 @@ ideology_positivist_movement = {
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = approve
-		law_state_atheism = strongly_approve
+		# [#3410] dropped law_state_atheism = strongly_approve (law removed)
 	}
 
 	lawgroup_distribution_of_power = {
@@ -877,7 +877,7 @@ ideology_traditionalist_movement = {
 		law_state_religion = approve
 		law_freedom_of_conscience = disapprove
 		law_total_separation = strongly_disapprove
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 
 	lawgroup_health_system = {
@@ -910,7 +910,7 @@ ideology_traditionalist_minoritarian_movement = {
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = approve
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 
 	lawgroup_health_system = {
@@ -1197,7 +1197,7 @@ ideology_integralist_movement = {
 		law_state_religion = strongly_approve
 		law_freedom_of_conscience = disapprove
 		law_total_separation = strongly_disapprove
-		law_state_atheism = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
 	}
 
 	lawgroup_citizenship = {
