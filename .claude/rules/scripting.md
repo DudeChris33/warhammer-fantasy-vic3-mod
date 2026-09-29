@@ -235,6 +235,6 @@ no-regression authority, not the completeness authority.
 
 ## Forbidden
 
-- No non-deterministic effects (see [core.md](core.md) Determinism).
+- No non-deterministic effects (see [core.md](core.md) Guardrails, *Determinism*).
 - No effect/trigger/modifier/event target not confirmed in `docs/*.log`.
 - No hardcoded display text — route all user-facing strings through localization keys.

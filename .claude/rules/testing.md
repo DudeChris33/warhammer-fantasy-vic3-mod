@@ -100,7 +100,7 @@ generate_arable_heatmap.py
 
 ### Hand-authored inputs (edit deliberately, regenerate through — never inferred from generator output)
 
-`tools/registration/seeds/`, `tools/config/land_region_merges.json`, `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `tools/config/inland_lakes.json` is orphaned: only comments still mention it.
+`tools/registration/seeds/`, `tools/config/land_region_merges.json`, `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `tools/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
 
 ### Dev-only review renders (gitignored `tools/derived/` output, outside the gate)
 
