@@ -1,0 +1,17 @@
+{
+ "note": "Enclosed (non-ocean-connected) water bodies to KEEP as water when generate_heightmap.py fills false inland water to land. Everything enclosed and NOT listed here (drawn rivers classified in ocean-blue, flooded marshes) fills to land; the open ocean is kept automatically as the single largest water component. Seeds are guaranteed-interior water pixels in provinces.png canvas space (x, y), measured from mapgen/derived/land_sea_mask.png (user-curated 2026-08-12 from mapgen/derived/dbg_lake_catalog.png). `kind` is `lake` (vanilla impassable-lake behaviour downstream in S3b) or `sea` (ocean-connected navigable sea zone, modelled like Ulthuan's Inner Sea in S3b); the binary mask keeps all of them identically as water, `kind` only records the S3b distinction. Hand-authored geographic data, like a registration seed: edit deliberately and regenerate, never hand-edit the generated bitmaps. See planning/done/world-map-regenerate-land-sea-mask.md.",
+ "bodies": [
+  { "name": "naggaroth_central", "seed": [1353, 641], "kind": "lake", "note": "Naggaroth (catalog #3, ~4844 px)" },
+  { "name": "naggaroth_new_world", "seed": [1590, 987], "kind": "lake", "note": "Naggaroth, New World (catalog #4, ~4562 px)" },
+  { "name": "naggaroth_blackspine", "seed": [1425, 825], "kind": "lake", "note": "Naggaroth, Blackspine (catalog #6, ~3012 px)" },
+  { "name": "naggaroth_land_of_chill", "seed": [1290, 354], "kind": "lake", "note": "Naggaroth, Land of Chill (catalog #10, ~2120 px)" },
+  { "name": "naggaroth_west", "seed": [1122, 659], "kind": "lake", "note": "Naggaroth, west (catalog #11, ~2065 px)" },
+  { "name": "worlds_edge", "seed": [4392, 996], "kind": "lake", "note": "Old World / World's Edge (catalog #12, ~1956 px)" },
+  { "name": "lustria_sw", "seed": [1813, 2346], "kind": "lake", "note": "Lustria, south-west (catalog #14, ~1714 px)" },
+  { "name": "lustria_nw", "seed": [1872, 2055], "kind": "lake", "note": "Lustria, north-west lake, north of the Spine of Sotek (user 2026-08-12, ~2343 px)" },
+  { "name": "black_gulf", "seed": [4092, 1213], "kind": "sea", "note": "Black Gulf inlet east of Tilea — ocean-connected/navigable on the drawn map but pinched off in the classified mask; keep as a sea-type body (user 2026-08-12, ~1036 px)" },
+  { "name": "mountains_of_mourn", "seed": [5154, 869], "kind": "lake", "note": "Mountains of Mourn (catalog #18, ~1245 px)" },
+  { "name": "naggaroth_north", "seed": [1236, 407], "kind": "lake", "note": "Naggaroth, north (catalog #19, ~1205 px)" },
+  { "name": "dark_lands_sea", "seed": [4523, 1462], "kind": "sea", "note": "Dark Lands ocean-connected sea zone (catalog #5, ~4187 px) — navigable, model like Ulthuan's Inner Sea in S3b, NOT a lake" }
+ ]
+}

@@ -46,23 +46,23 @@ those under "Not my lane".
 
 ## The pipeline you are reviewing
 
-Offline Python under `tools/`, not loaded by the game. Local-only `sources/`
-imagery (gitignored, third-party) → registration (`tools/registration/*.json`,
-machine-fitted from seeds) → ingestion and reprojection (`tools/worldgen/`) →
-generators (`tools/generate_heightmap.py`, `generate_rivers.py`,
+Offline Python under `mapgen/`, not loaded by the game. Local-only `sources/`
+imagery (gitignored, third-party) → registration (`mapgen/registration/*.json`,
+machine-fitted from seeds) → ingestion and reprojection (`mapgen/worldgen/`) →
+generators (`mapgen/generate_heightmap.py`, `generate_rivers.py`,
 `generate_state_labels.py`) → committed bitmaps (`map_data/heightmap.png`,
-`map_data/rivers.png`, `tools/derived/land_sea_mask.png`,
-`tools/derived/state_labels.png`) and QA renders (`tools/derived/qa_*.png`, `preview_*.png`; produced on demand by `tools/qa_overlay.py` and the `render_*_preview.py` scripts, so they are absent until rendered — render them first).
+`map_data/rivers.png`, `mapgen/derived/land_sea_mask.png`,
+`mapgen/derived/state_labels.png`) and QA renders (`mapgen/derived/qa_*.png`, `preview_*.png`; produced on demand by `mapgen/qa_overlay.py` and the `render_*_preview.py` scripts, so they are absent until rendered — render them first).
 
 The canvas is 8192 px wide; the frame is **Miller cylindrical**, defined in
-`tools/config/canvas_frame.py` (`LAT_TOP ≈ 74.905N`, `LAT_BOTTOM ≈ 57.408S`,
+`mapgen/config/canvas_frame.py` (`LAT_TOP ≈ 74.905N`, `LAT_BOTTOM ≈ 57.408S`,
 measured from vanilla's own bitmap and pinned to the user's drawn northern
-limit). The coastline is the hand-traced black/white land fill (`sources/oldworld-first/land_sea_mask.png`), turned into `tools/derived/land_sea_mask.png` by `generate_coastline_mask.py --from-fill`; `sources/terraqueous_globe.jpg` is the geometric reference the frame is measured against.
+limit). The coastline is the hand-traced black/white land fill (`sources/oldworld-first/land_sea_mask.png`), turned into `mapgen/derived/land_sea_mask.png` by `generate_coastline_mask.py --from-fill`; `sources/terraqueous_globe.jpg` is the geometric reference the frame is measured against.
 
 Measure with the committed venv, using the repo's own idiom:
 
 ```bash
-tools/.venv/Scripts/python.exe -c "import numpy as np; from PIL import Image; Image.MAX_IMAGE_PIXELS=None; m=np.array(Image.open('tools/derived/land_sea_mask.png').convert('L'))>127; print([round(100*m[y].mean(),1) for y in (0,40,110,200,320)])"
+mapgen/.venv/Scripts/python.exe -c "import numpy as np; from PIL import Image; Image.MAX_IMAGE_PIXELS=None; m=np.array(Image.open('mapgen/derived/land_sea_mask.png').convert('L'))>127; print([round(100*m[y].mean(),1) for y in (0,40,110,200,320)])"
 ```
 
 Read-only measurement is expected of you. **Never run a generator** — that
@@ -83,7 +83,7 @@ than eyeballing.
 
 **Size distribution.** The most damning defect this project has hit: Bretonnia —
 larger than France — rendered as 3 states. Compare achieved counts per named
-region against the committed quotas in `tools/regions/named_regions.json`
+region against the committed quotas in `mapgen/regions/named_regions.json`
 (bretonnia ≥ 15, the_empire ≥ 30, grand_cathay ≥ 40, naggaroth ≥ 40, 600–700 land
 states total). Then check the *variance*: a region that meets its quota with one
 enormous cell and fourteen crumbs has not really met it.

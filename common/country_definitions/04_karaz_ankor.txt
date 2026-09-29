@@ -12,7 +12,7 @@
 #   cultures     — culture ids from common/cultures/dwarven.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
 # intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_karaz_ankor_l_english.yml.
 # The KAZ formation rule lives in common/country_formation/04_karaz_ankor_formables.txt.

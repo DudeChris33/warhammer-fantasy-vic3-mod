@@ -92,7 +92,7 @@ against the vanilla install (at 1.13.9; re-verify against the version in `.metad
   an earlier planning draft mis-transcribed this as "47 across 7 files" (that 47 is
   actually `region_southern_europe`'s own state count, not the region count).
 - `heightmap.png` and `rivers.png` have specific encodings — see
-  `tools/config/map_config.py` and `tools/lut/rivers_palette.json`, both measured
+  `mapgen/config/map_config.py` and `mapgen/lut/rivers_palette.json`, both measured
   from vanilla 1.13.8.
 
 Check for: duplicate province claims, provinces claimed by no state, missing
@@ -102,7 +102,7 @@ matching adjacencies, and any state region referenced by history but not defined
 **Determinism (multiplayer sync).** No non-seeded randomness — only the game's own
 `random`/`random_list`, seeded from game state. Nothing reading wall-clock, OS or
 filesystem state. No debug/console-only effects in shipped content. Note that the
-offline `tools/` pipeline is *not* game-read, so it cannot desync anything — but
+offline `mapgen/` pipeline is *not* game-read, so it cannot desync anything — but
 it must still be byte-reproducible, which is a different property. Do not conflate
 the two, and say which you mean.
 
@@ -118,13 +118,13 @@ and was measured on the older version, say so.
 
 If a change touches game-read files and no `error.log` check has been done, that
 is a finding — the work is not verified, whatever else passed. Conversely, if a
-milestone touches only `tools/` and `tools/derived/`, there is nothing for
+milestone touches only `mapgen/` and `mapgen/derived/`, there is nothing for
 `error.log` to say; do not demand a game load that cannot mean anything.
 
 **Forbidden.** No hardcoded personal/local absolute paths in script, loc, `.gui` or
 `.gfx`. No orphaned sprite references. No hand-edited generated bitmaps
-(`map_data/heightmap.png`, `map_data/rivers.png`, `tools/derived/land_sea_mask.png`,
-`tools/derived/state_labels.png`) or hand-edited `tools/registration/*.json` —
+(`map_data/heightmap.png`, `map_data/rivers.png`, `mapgen/derived/land_sea_mask.png`,
+`mapgen/derived/state_labels.png`) or hand-edited `mapgen/registration/*.json` —
 those are regenerated from source, and a hand-edit is a finding even if the result
 looks right.
 

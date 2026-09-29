@@ -40,7 +40,7 @@ those under "Not my lane".
 ## Design checklist
 
 **Granularity.** The committed target is 600–700 land states against vanilla's
-scale, with per-region minimums in `tools/regions/named_regions.json` (naggaroth
+scale, with per-region minimums in `mapgen/regions/named_regions.json` (naggaroth
 ≥ 40, grand_cathay ≥ 40, lustria ≥ 40, southlands ≥ 40, the_empire ≥ 30,
 bretonnia ≥ 15, athel_loren ≥ 5 …). Ask the questions the numbers do not:
 
@@ -79,7 +79,7 @@ history in the plan of record. Then ask:
 
 - Is this milestone on the critical path to something playable, or is it polish on
   infrastructure?
-- Is the toolchain being engineered past what the game needs? (`tools/` has
+- Is the toolchain being engineered past what the game needs? (`mapgen/` has
   fixtures, manifests, registration fitting, coverage reports — good practice, but
   a total conversion dies of unfinished content, not of insufficient tooling.)
 - Is the remaining work sized such that a small team finishes it?

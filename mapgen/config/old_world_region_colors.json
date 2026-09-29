@@ -1,0 +1,47 @@
+{
+  "_comment": [
+    "Legend for the flat fill colours painted on sources/old_world_regions.png —",
+    "what each colour block represents. Authored so the source painting can be",
+    "edited (e.g. removing stray splotches) without losing track of which colour is",
+    "which state group.",
+    "",
+    "This MIRRORS the authoritative map in mapgen/generate_state_labels.py",
+    "(OLD_WORLD_MACROS) — that Python tuple is the single source of truth the",
+    "pipeline classifies against by EXACT RGB equality (worldgen.scope.classify_fills),",
+    "so a fill must match one of these RGBs to the byte or it is treated as bare",
+    "parchment / out of scope. Keep this file in step with OLD_WORLD_MACROS; it is a",
+    "human reference, not read by any generator.",
+    "",
+    "'border' is the magenta province/state subdivision network, not a fill: it",
+    "isolates the drawn cells inside each macro and is classified separately",
+    "(generate_state_labels.MARKER_RGB)."
+  ],
+  "source_of_truth": "mapgen/generate_state_labels.py :: OLD_WORLD_MACROS",
+  "source_image": "sources/old_world_regions.png",
+  "fills": [
+    { "macro_id": 1, "name": "norsca", "hex": "#880015", "rgb": [136, 0, 21],
+      "represents": "Norsca — the northern, Chaos-touched peninsula. A separate macro from Kislev." },
+    { "macro_id": 2, "name": "kislev", "hex": "#A349A4", "rgb": [163, 73, 164],
+      "represents": "Kislev — the northern realm of men. A separate macro from Norsca." },
+    { "macro_id": 3, "name": "the_empire", "hex": "#ED1C24", "rgb": [237, 28, 36],
+      "represents": "The Empire." },
+    { "macro_id": 4, "name": "bretonnia", "hex": "#00A2E8", "rgb": [0, 162, 232],
+      "represents": "Bretonnia." },
+    { "macro_id": 5, "name": "athel_loren", "hex": "#22B14C", "rgb": [34, 177, 76],
+      "represents": "Athel Loren — the wood-elf forest realm. Its own macro." },
+    { "macro_id": 6, "name": "southern_realms", "hex": "#FFF200", "rgb": [255, 242, 0],
+      "represents": "The Southern Realms — spans Estalia + Tilea + the Border Princes." },
+    { "macro_id": 7, "name": "badlands", "hex": "#B5E61D", "rgb": [181, 230, 29],
+      "represents": "The Badlands proper only (the dwarf holds / World's Edge Mountains are the indigo fill)." },
+    { "macro_id": 8, "name": "dwarf_holds", "hex": "#3F48CC", "rgb": [63, 72, 204],
+      "represents": "The Dwarf Holds / World's Edge Mountains (Karaz Ankor)." },
+    { "macro_id": 9, "name": "dark_lands", "hex": "#B97A57", "rgb": [185, 122, 87],
+      "represents": "The Dark Lands." },
+    { "macro_id": 10, "name": "nehekhara", "hex": "#FF7F27", "rgb": [255, 127, 39],
+      "represents": "Nehekhara — the Land of the Dead." }
+  ],
+  "border": {
+    "name": "province_border_network", "hex": "#FF00FF", "rgb": [255, 0, 255],
+    "represents": "Magenta province/state subdivision border network — NOT a fill. Drawn inside the macro blocks to divide them into individual provinces/states; pure magenta is absent from the parchment art so it isolates cleanly."
+  }
+}

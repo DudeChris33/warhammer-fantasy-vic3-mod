@@ -1,0 +1,7 @@
+{
+  "_comment": "Hand-authored patches for mapgen/mark_state_borders.py (see its OVERRIDES docstring). Coordinates are full-resolution pixels of sources/claude_old_world_state_regions.png. 'paint' polylines are borders the artist drew too faint/broken for the classifier to follow (each verified by eye against the pristine source); 'erase' boxes suppress false automatic markings.",
+  "paint": [
+    [[2986, 2339], [3004, 2338], [3020, 2343], [3033, 2343], [3046, 2342], [3055, 2347], [3067, 2352]]
+  ],
+  "erase": []
+}

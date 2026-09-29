@@ -18,7 +18,7 @@ You have no MCP: in your summary, list which `.claude/rules/*.md` files you edit
    - New/changed culture, religion, trait or country convention → `.claude/rules/peoples.md`; coat-of-arms/flag convention → `heraldry.md`
    - New/changed localization convention → `.claude/rules/localization.md`
    - New/changed `gui/`/`interface/`/`gfx/` convention → `.claude/rules/interface.md`
-   - New/changed `map_data/`, `tools/` or `sources/` convention → `.claude/rules/testing.md`
+   - New/changed `map_data/`, `mapgen/` or `sources/` convention → `.claude/rules/testing.md`
    - A guardrail (costly or irreversible if breached) → `.claude/rules/core.md`, which is always loaded
    - Note: `docs/*.log` are game-generated — never edit them here.
 

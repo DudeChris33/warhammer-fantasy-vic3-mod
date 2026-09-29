@@ -16,7 +16,7 @@
 # has its Tomb King), NEH is the empire that reunites them, and LAH is a lone city_state.
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
 # intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_nehekhara_l_english.yml.
 # The NEH formation rule lives in common/country_formation/07_nehekhara_formables.txt.

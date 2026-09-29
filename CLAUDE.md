@@ -2,7 +2,7 @@
 
 A total-conversion mod for Victoria 3 that reskins the base game into the Warhammer Fantasy setting, using Clausewitz script (`.txt`), the PDX GUI format (`.gui`) and localization YAML (`.yml`). The supported game version is `supported_game_version` in `.metadata/metadata.json`. The mod is multiplayer-synchronized (`multiplayer_synchronized` in the same file), so scripted content must stay deterministic across clients.
 
-**Scope.** Only the Old World land regions are drawn out; all oceans are modelled globally; land outside the drawn Old World is emitted as placeholder regions (seeded from `tools/config/out_of_scope_continents.json`; `placeholder_regions` in `tools/derived/land_regions_index.json` counts them), not as playable content.
+**Scope.** Only the Old World land regions are drawn out; all oceans are modelled globally; land outside the drawn Old World is emitted as placeholder regions (seeded from `mapgen/config/out_of_scope_continents.json`; `placeholder_regions` in `mapgen/derived/land_regions_index.json` counts them), not as playable content.
 
 ## How guidance is organised
 
@@ -30,8 +30,8 @@ Auto-loading and the routing table below are a starting point, not a limit: read
 | `gfx/` | Art assets and script-like gfx overrides — see [interface.md](.claude/rules/interface.md) |
 | `localization/english/`, `localization/replace/english/` | New loc, and loc that overrides vanilla text |
 | `map_data/` | Map and state regions — generated; see [testing.md](.claude/rules/testing.md) |
-| `tools/` | Offline map generator + validator toolchain (Python) — see [testing.md](.claude/rules/testing.md) and `tools/MAP_RUNBOOK.md` |
-| `sources/` | Git-ignored, local-only reference imagery (provenance in `tools/SOURCES.md`) |
+| `mapgen/` | Offline map generator + validator toolchain (Python); named `mapgen`, not `tools`, because vanilla reserves a `tools` folder — see [testing.md](.claude/rules/testing.md) and `mapgen/MAP_RUNBOOK.md` |
+| `sources/` | Git-ignored, local-only reference imagery (provenance in `mapgen/SOURCES.md`) |
 | `docs/` | Read-only game-generated script reference (`docs/*.log`) |
 | `planning/` | Review-panel targets, `tag_registry.md`, and the maestro skills' gitignored `.cache/` scratch. Not the tracker — the maestro board is. |
 | `.metadata/metadata.json` | Mod descriptor |

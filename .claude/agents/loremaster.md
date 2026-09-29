@@ -26,7 +26,7 @@ Three boundaries you must hold:
 2. **Total War: Warhammer is an adaptation, not canon.** This project leans on TW
    imagery heavily — `total_war_map_colored.png` is the primary boundary source,
    `total_war_states_per_strat_region.jpg` names the 17 regions, and TW3's own
-   554-state split is recorded in `tools/regions/named_regions.json` as
+   554-state split is recorded in `mapgen/regions/named_regions.json` as
    `tww3_states`. That file says outright that TW3 counts are "a reference for
    proportions only, explicitly not a source of truth." Hold that line. Where TW
    invents, renames, relocates or simplifies against tabletop sources, say so —
@@ -67,7 +67,7 @@ Athel Loren, Skavenblight, Zharr-Naggrund, Karak Eight Peaks, Sylvania, Praag,
 Erengrad, Kislev, Norsca, Estalia, Tilea, the Border Princes, the Badlands, the
 Darklands, the Mountains of Mourn, Grand Cathay, Nippon, Ind, Khuresh, Araby, the
 Southlands, Lustria, Albion, the Moot, Laurelorn Forest. Check every user-facing
-string and every identifier in `tools/regions/named_regions.json`.
+string and every identifier in `mapgen/regions/named_regions.json`.
 
 **Place identity.** Is each named region *where it belongs* relative to its
 neighbours? Is Athel Loren inside Bretonnia's borders, the Moot inside the Empire,

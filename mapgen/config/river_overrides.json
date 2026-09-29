@@ -1,0 +1,7 @@
+{
+  "_comment": "Manual flow-direction overrides for rivers mapgen/generate_rivers.py cannot orient from the drawing alone (board #3703). Each entry pins one river, identified by an `anchor` pixel on its drawn line (the land_region_merges.json anchor idiom), to `flow` toward one of the 8 compass directions (N/S/E/W/NE/NW/SE/SW). The endpoint furthest that way becomes the mouth, the opposite end the source; the sourceless-channel check and the rasterizer's inland-source rule are waived for that river. Hand-authored, regenerated through, never inferred from the drawing. Each future un-orientable river gets its own entry (a per-case manual decision).",
+  "overrides": [
+    {"anchor": [3899, 1561], "flow": "NW", "note": "Khemri/Nehekhara coastal channel: both drawn ends reach the sea, so it has no auto-derivable source; Chris pins it to drain NW into the sea (2026-09-07)."},
+    {"anchor": [3935, 1528], "flow": "NW", "note": "Second Nehekhara-area coastal channel, distinct from the (3899,1561) one: both drawn ends reach the sea; Chris pins it to drain NW into the sea (2026-09-27)."}
+  ]
+}

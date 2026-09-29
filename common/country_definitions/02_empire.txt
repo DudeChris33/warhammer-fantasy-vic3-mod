@@ -9,7 +9,7 @@
 #   cultures     — culture ids from common/cultures/imperial_humans.txt
 #
 # capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by tools/generate_sea_regions.py), so any capital = STATE_* would dangle. The
+# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
 # intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_empire_l_english.yml.
 # The EMP and VEM formation rules live in common/country_formation/02_empire_formables.txt.

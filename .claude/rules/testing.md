@@ -1,7 +1,7 @@
 ---
 paths:
   - "map_data/**/*"
-  - "tools/**/*"
+  - "mapgen/**/*"
   - "sources/**/*"
   - "common/strategic_regions/**/*"
   - "common/strait_definitions/**/*"
@@ -12,23 +12,23 @@ paths:
 
 # Map pipeline, sources and offline gate
 
-**Read when:** you are touching `map_data/`, `tools/`, `sources/`, strategic regions, straits, `gfx/map/`, or the generated map loc. The in-game `error.log` gate that this file used to open with now lives in [core.md](core.md). **Covers:** canvas and scope, sources, the tooling loop, the offline gate, the regeneration pipeline and its invariants, generated-file ownership, hand-authored inputs, name citations and map-keyed vanilla overrides. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
+**Read when:** you are touching `map_data/`, `mapgen/`, `sources/`, strategic regions, straits, `gfx/map/`, or the generated map loc. The in-game `error.log` gate that this file used to open with now lives in [core.md](core.md). **Covers:** canvas and scope, sources, the tooling loop, the offline gate, the regeneration pipeline and its invariants, generated-file ownership, hand-authored inputs, name citations and map-keyed vanilla overrides. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
 
 **Related guides:**
 - [localization.md](localization.md) — generated state, hub, sea and canal name files; the `STATE_AQUITAINE` collision rule
 - [scripting.md](scripting.md) — defines, strategic regions and the general script rules
 - [interface.md](interface.md) — generated map-object locators under `gfx/map/`
 - [peoples.md](peoples.md) — tag capitals point at generated `STATE_*` ids
-- [../../tools/MAP_RUNBOOK.md](../../tools/MAP_RUNBOOK.md) — desktop-client (map editor) steps
+- [../../mapgen/MAP_RUNBOOK.md](../../mapgen/MAP_RUNBOOK.md) — desktop-client (map editor) steps
 
-Per-script mechanics live in each `tools/generate_*.py` module docstring — read the docstring, not this file, for what a stage reads and writes. This guide keeps what a docstring can't: ordering, ownership, invariants, gotchas and stop points.
+Per-script mechanics live in each `mapgen/generate_*.py` module docstring — read the docstring, not this file, for what a stage reads and writes. This guide keeps what a docstring can't: ordering, ownership, invariants, gotchas and stop points.
 
 ## Canvas, scope and sources
 
-- The canvas is **8192×3616**, a Miller projection pinned to a line the user drew; the frame constants live in `tools/config/canvas_frame.py` and `map_config.py`. Vanilla's own frame is the reference for formats and sizes.
-- **Scope**: the drawn Old World land regions, all oceans (global), and placeholder regions for the out-of-scope land, seeded by `tools/config/out_of_scope_continents.json` (`land_regions_index.json` records `drawn_regions` vs `placeholder_regions`).
-- `sources/` is **git-ignored and local-only** (third-party IP). Provenance is the SHA-256 manifest `tools/SOURCES.md` plus `tools/registration/*.json`; `python tools/worldgen/sources.py --verify` checks it. A hand-painted GIMP master's OpenRaster `.ora` export is read **by layer name** through the committed `tools/config/source_layers.json`. Choosing, adding or marking up imagery is Chris's; `--update-manifest` follows an intentional source change and is never a side effect of a generator run.
-- Registration records (`tools/registration/*.json`) are machine-fitted, not hand-written: edit a seed in `tools/registration/seeds/` and re-derive with `python tools/fit_registration.py --seed <stem>`.
+- The canvas is **8192×3616**, a Miller projection pinned to a line the user drew; the frame constants live in `mapgen/config/canvas_frame.py` and `map_config.py`. Vanilla's own frame is the reference for formats and sizes.
+- **Scope**: the drawn Old World land regions, all oceans (global), and placeholder regions for the out-of-scope land, seeded by `mapgen/config/out_of_scope_continents.json` (`land_regions_index.json` records `drawn_regions` vs `placeholder_regions`).
+- `sources/` is **git-ignored and local-only** (third-party IP). Provenance is the SHA-256 manifest `mapgen/SOURCES.md` plus `mapgen/registration/*.json`; `python mapgen/worldgen/sources.py --verify` checks it. A hand-painted GIMP master's OpenRaster `.ora` export is read **by layer name** through the committed `mapgen/config/source_layers.json`. Choosing, adding or marking up imagery is Chris's; `--update-manifest` follows an intentional source change and is never a side effect of a generator run.
+- Registration records (`mapgen/registration/*.json`) are machine-fitted, not hand-written: edit a seed in `mapgen/registration/seeds/` and re-derive with `python mapgen/fit_registration.py --seed <stem>`.
 - Better source beats more tuning: if an extraction is capped by its source, say so and ask for imagery rather than tuning thresholds.
 
 ## The tooling loop
@@ -37,14 +37,14 @@ Run this autonomously to convergence: edit a generator, LUT, seed or hand-author
 
 ## Offline gate (pre-commit lint)
 
-One-time setup: a local `tools/.venv` (git-ignored), deps pinned in `tools/requirements.txt`. Before committing anything under `map_data/`, `common/strategic_regions/`, the map localization, or the source-registration data, run:
+One-time setup: a local `mapgen/.venv` (git-ignored), deps pinned in `mapgen/requirements.txt`. Before committing anything under `map_data/`, `common/strategic_regions/`, the map localization, or the source-registration data, run:
 
 ```
-python tools/worldgen/sources.py --verify        # source manifest SHA-256 + registration cross-checks
-python tools/validate_map.py --province-bitmap    # bitmap tiles the mask, agrees with its index and the sea layer
-python tools/validate_map.py --sea                # sea engine files (colours, sea_starts, grouping, loc)
-python tools/run_fixture.py --check               # regression-checks the toolchain against synthetic fixtures
-python tools/validate_map.py                      # full crosscheck (needs both sea + land state files)
+python mapgen/worldgen/sources.py --verify        # source manifest SHA-256 + registration cross-checks
+python mapgen/validate_map.py --province-bitmap    # bitmap tiles the mask, agrees with its index and the sea layer
+python mapgen/validate_map.py --sea                # sea engine files (colours, sea_starts, grouping, loc)
+python mapgen/run_fixture.py --check               # regression-checks the toolchain against synthetic fixtures
+python mapgen/validate_map.py                      # full crosscheck (needs both sea + land state files)
 ```
 
 All must pass before the in-game `error.log` check; they catch the offline-detectable error class first and do not replace the game load. `validate_map.py --labels` lints the state-label layer instead of the province map. `validate_map.py --province-bitmap` prints non-blocking `WARNING`s (a separate channel that never fails the gate): a lake over `lakes.OCEAN_WARN_FRACTION` of the world ocean (possibly a sealed-off sea) and one below `lakes.LAKE_REPORT_MIN` (likely fill speckle — drop or redraw, never merge). `run_fixture.py --check` covers every generator module against committed fixtures, independent of `sources/`.
@@ -61,68 +61,68 @@ generate_province_terrains.py → generate_adjacencies.py --write →
 generate_arable_heatmap.py
 ```
 
-- The coastline source is a black/white land **fill**, so always pass `--from-fill` (the parity-trace default is legacy, `generate_coastline_mask.py`). `--from-fill` also emits `tools/derived/lake_mask.png`; either mode first drops isolated sub-4px land components (`drop_land_specks`, `--speck-max`).
+- The coastline source is a black/white land **fill**, so always pass `--from-fill` (the parity-trace default is legacy, `generate_coastline_mask.py`). `--from-fill` also emits `mapgen/derived/lake_mask.png`; either mode first drops isolated sub-4px land components (`drop_land_specks`, `--speck-max`).
 - **A `generate_provinces.py` regen invalidates every downstream, colour-keyed emitter** (sea regions, land regions, province terrains, adjacencies, arable heatmap) even when few provinces moved — always re-run the full chain from `generate_provinces.py` onward, then the offline gate, before committing.
 - **Identity is stable across regens.** Province colour = province id in Vic3, so ids must not churn. `province_ids.assign`, `land_state_numbering.assign_state_numbers` and `sea_state_ids.assign` overlap-match against the previously committed output; only genuinely new or removed geometry is reassigned, off a monotonic high-water mark that never reuses a retired id (`id_high_water` in `provinces_index.json`, `state_number_high_water` in `land_state_ids.json`, `sea_id_high_water`/`ordinal_high_water` in `sea_zones_index.json`).
 - `--reassign` (on `generate_provinces.py`, `generate_land_regions.py` and `generate_sea_zones.py`) is the escape hatch that re-allocates ids fresh in label order. Pair a province `--reassign` with the land and sea ones, or overlap-matching has nothing to match against and falls back with a loud warning.
-- **State borders are frozen; province cuts may move.** State borders are the user-drawn `full.ora#borders` layer on the canvas (consumed directly by `land_provinces.py`). Redraw provinces through the generator (e.g. to place hubs), never state borders. Merged regions (`tools/config/land_region_merges.json`) ship as one province per connected piece.
+- **State borders are frozen; province cuts may move.** State borders are the user-drawn `full.ora#borders` layer on the canvas (consumed directly by `land_provinces.py`). Redraw provinces through the generator (e.g. to place hubs), never state borders. Merged regions (`mapgen/config/land_region_merges.json`) ship as one province per connected piece.
 - `generate_sea_zones.py` runs *before* `generate_provinces.py`, so zone identity across regens is zone-layer pixel overlap. The purple-network zones are authoritative; ocean-current auto-generation is reference-only (its "centre on the current limb" rule is worth keeping).
-- `generate_land_regions.py` writes all 20 land files `map_data/state_regions/NN_<stem>.txt`, the per-continent `common/strategic_regions/*_strategic_regions.txt`, `localization/replace/english/map/states_l_english.yml` and `localization/replace/english/map/wh_hub_names_l_english.yml`, plus `tools/derived/land_state_ids.json` (STATE-number authority, seeded once by `tools/seed_land_state_ids.py` off a committed git ref). `generate_sea_regions.py` writes `99_seas.txt`, block-replaces `default.map`'s `sea_starts` and `lakes`, the water strategic regions and `wh_seas_l_english.yml`, and creates a header-only `adjacencies.csv` if absent (never clobbers a populated one).
+- `generate_land_regions.py` writes all 20 land files `map_data/state_regions/NN_<stem>.txt`, the per-continent `common/strategic_regions/*_strategic_regions.txt`, `localization/replace/english/map/states_l_english.yml` and `localization/replace/english/map/wh_hub_names_l_english.yml`, plus `mapgen/derived/land_state_ids.json` (STATE-number authority, seeded once by `mapgen/seed_land_state_ids.py` off a committed git ref). `generate_sea_regions.py` writes `99_seas.txt`, block-replaces `default.map`'s `sea_starts` and `lakes`, the water strategic regions and `wh_seas_l_english.yml`, and creates a header-only `adjacencies.csv` if absent (never clobbers a populated one).
 - `generate_province_terrains.py` writes `map_data/province_terrains.txt` (land `plains`, sea `ocean`, lake `lakes`); `validate_map.py --province-bitmap` checks it when present.
-- `generate_arable_heatmap.py` is an offline upstream artifact (`tools/derived/arable_heatmap*.{png,json}`), not game-loaded; its rendered preview is the acceptance gate. Known limitation: the field is built world-wide and the out-of-scope far-eastern heightmap carries baked-in label text as elevation; the Old World heightmap is clean.
+- `generate_arable_heatmap.py` is an offline upstream artifact (`mapgen/derived/arable_heatmap*.{png,json}`), not game-loaded; its rendered preview is the acceptance gate. Known limitation: the field is built world-wide and the out-of-scope far-eastern heightmap carries baked-in label text as elevation; the Old World heightmap is clean.
 
 ### Generated files and their owners
 
 | Owner | Files |
 |---|---|
-| `generate_coastline_mask.py` | `tools/derived/land_sea_mask.png`, `lake_mask.png` |
-| `generate_heightmap.py` | `map_data/heightmap.png` (the packed `heightmap.heightmap`, `packed_heightmap.png`, `indirection_heightmap.png`, `nodes.dat` come from the in-game map editor — `tools/MAP_RUNBOOK.md`) |
-| `generate_rivers.py` | `map_data/rivers.png`, `tools/derived/rivers_index.json` |
-| `generate_state_labels.py` | `tools/derived/state_labels.png`, `state_labels_index.json`, `COVERAGE.md` |
-| `generate_sea_zones.py` | `tools/derived/sea_zones.png`, `sea_zones_index.json` |
-| `generate_provinces.py` | `map_data/provinces.png`, `tools/derived/provinces_index.json`, `land_regions_index.json`, `hub_anchors_index.json`, `canon_city_provinces_index.json` |
+| `generate_coastline_mask.py` | `mapgen/derived/land_sea_mask.png`, `lake_mask.png` |
+| `generate_heightmap.py` | `map_data/heightmap.png` (the packed `heightmap.heightmap`, `packed_heightmap.png`, `indirection_heightmap.png`, `nodes.dat` come from the in-game map editor — `mapgen/MAP_RUNBOOK.md`) |
+| `generate_rivers.py` | `map_data/rivers.png`, `mapgen/derived/rivers_index.json` |
+| `generate_state_labels.py` | `mapgen/derived/state_labels.png`, `state_labels_index.json`, `COVERAGE.md` |
+| `generate_sea_zones.py` | `mapgen/derived/sea_zones.png`, `sea_zones_index.json` |
+| `generate_provinces.py` | `map_data/provinces.png`, `mapgen/derived/provinces_index.json`, `land_regions_index.json`, `hub_anchors_index.json`, `canon_city_provinces_index.json` |
 | `generate_sea_regions.py` | `map_data/state_regions/99_seas.txt`, `default.map` `sea_starts`/`lakes`, `common/strategic_regions/water_strategic_regions.txt`, `localization/english/map/wh_seas_l_english.yml` |
-| `generate_land_regions.py` | `map_data/state_regions/00–19_*.txt`, the other `*_strategic_regions.txt`, `states_l_english.yml`, `wh_hub_names_l_english.yml`, `tools/derived/land_state_ids.json` |
+| `generate_land_regions.py` | `map_data/state_regions/00–19_*.txt`, the other `*_strategic_regions.txt`, `states_l_english.yml`, `wh_hub_names_l_english.yml`, `mapgen/derived/land_state_ids.json` |
 | `generate_province_terrains.py` | `map_data/province_terrains.txt` |
 | `generate_adjacencies.py --write` | `map_data/adjacencies.csv`, `common/strait_definitions/canals.txt`, `localization/english/map/wh_canals_l_english.yml` |
-| `generate_arable_heatmap.py` | `tools/derived/arable_heatmap.png`, `arable_heatmap_index.json` |
-| `fit_registration.py` | `tools/registration/*.json` |
+| `generate_arable_heatmap.py` | `mapgen/derived/arable_heatmap.png`, `arable_heatmap_index.json` |
+| `fit_registration.py` | `mapgen/registration/*.json` |
 | engine (copy from `Documents/.../Victoria 3/generated/` after a load reports an incomplete locator) | `gfx/map/map_object_data/generated_map_object_locators_*` |
 
 ### Rivers, lakes, impassable land, cities, hubs
 
-- **Rivers** are source-driven: canon rivers are hand-traced as a pure-blue network (`full.ora#rivers`); `worldgen/river_network.py` orients each network into a flow DAG. A network the tool can't auto-orient is reported `no-source` and needs a manual entry in `tools/config/river_overrides.json`. Naming is opt-in via the optional `tools/config/canon_river_names.json` (and `river_sources.json`; `canon_rivers.csv` adds (river, state) coverage) — read only if present. A province regen does not invalidate `rivers.png`, but re-run `generate_rivers.py` after one if `rivers_index.json`'s `state_keys` must be current.
+- **Rivers** are source-driven: canon rivers are hand-traced as a pure-blue network (`full.ora#rivers`); `worldgen/river_network.py` orients each network into a flow DAG. A network the tool can't auto-orient is reported `no-source` and needs a manual entry in `mapgen/config/river_overrides.json`. Naming is opt-in via the optional `mapgen/config/canon_river_names.json` (and `river_sources.json`; `canon_rivers.csv` adds (river, state) coverage) — read only if present. A province regen does not invalidate `rivers.png`, but re-run `generate_rivers.py` after one if `rivers_index.json`'s `state_keys` must be current.
 - **Lakes** are a third province class (`kind:"lake"`, impassable, stateless): declared only in `default.map`'s `lakes` block, never a `99_seas` state, water strategic region or loc.
 - **Impassable land**: a flat-colour layer cut into one impassable province per connected paint tract. No pocket is cut around a canon city — the paint is taken as drawn, so a sealed-in city needs the paint reworked by hand (`render_canon_cities_preview.py` emits a transparent overlay for that). `validate_map._check_impassable_land` proves connectivity and canon-city reachability.
 - **City blobs and seeding**: a painted city blob stays in one province (a blob straddling a state border or paint edge by more than 4px is a hard error; up to 4px is a graze); every city dot also seeds its own province (`city_dots`, skipped and logged when it lands on a keep-whole archipelago, placeholder region, impassable paint, or within `MIN_ANCHOR_SEP` of another seed; hub anchors win).
-- **Lore hubs**: `tools/config/hub_worksheet.json` pins each named settlement to a canvas anchor; `generate_provinces.py` seeds a distinct province there (hard error on an anchor in water, in a keep-whole archipelago, or too close to another). A `stack_on: <host hub>` row shares its host's pixel. Any worksheet change forces the full `generate_provinces.py` → `generate_sea_regions.py` + `generate_land_regions.py` → re-validate cascade, since a seeded anchor reshuffles every province colour.
-- **Adjacencies**: Chris draws non-touching crossings as flat yellow lines (`terraqueous_globe_reprojected - adjacencies.png`); each is typed by hand in `tools/config/adjacency_worksheet.json` (identity = endpoint coordinates, 4px tolerance; `type` `sea` or `canal_*`). `--review` (default) writes gitignored previews; `--sync` re-anchors the worksheet after a redraw and never deletes (unmatched rows park under `stale`); `--write` emits; `--check` asserts current. An `artificial` canal additionally needs `common/buildings`/`common/production_methods` entries this schema does not author.
+- **Lore hubs**: `mapgen/config/hub_worksheet.json` pins each named settlement to a canvas anchor; `generate_provinces.py` seeds a distinct province there (hard error on an anchor in water, in a keep-whole archipelago, or too close to another). A `stack_on: <host hub>` row shares its host's pixel. Any worksheet change forces the full `generate_provinces.py` → `generate_sea_regions.py` + `generate_land_regions.py` → re-validate cascade, since a seeded anchor reshuffles every province colour.
+- **Adjacencies**: Chris draws non-touching crossings as flat yellow lines (`terraqueous_globe_reprojected - adjacencies.png`); each is typed by hand in `mapgen/config/adjacency_worksheet.json` (identity = endpoint coordinates, 4px tolerance; `type` `sea` or `canal_*`). `--review` (default) writes gitignored previews; `--sync` re-anchors the worksheet after a redraw and never deletes (unmatched rows park under `stale`); `--write` emits; `--check` asserts current. An `artificial` canal additionally needs `common/buildings`/`common/production_methods` entries this schema does not author.
 
 ### Hand-authored inputs (edit deliberately, regenerate through — never inferred from generator output)
 
-`tools/registration/seeds/`, `tools/config/land_region_merges.json`, `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `tools/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
+`mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
 
-### Dev-only review renders (gitignored `tools/derived/` output, outside the gate)
+### Dev-only review renders (gitignored `mapgen/derived/` output, outside the gate)
 
-`tools/render_*_preview.py`, `render_cr_lookup_overlay.py` and `qa_overlay.py` (produces the `qa_*.png` overlays on demand; absent until rendered). `render_land_regions_preview.py` round-trips names already committed in the worksheet forward and never overwrites them. `tools/tww3_name_lookup.py` is read-only, clean-skips when `sources/cr_oldworld_campaign/` is absent, and never writes `tools/config/`.
+`mapgen/render_*_preview.py`, `render_cr_lookup_overlay.py` and `qa_overlay.py` (produces the `qa_*.png` overlays on demand; absent until rendered). `render_land_regions_preview.py` round-trips names already committed in the worksheet forward and never overwrites them. `mapgen/tww3_name_lookup.py` is read-only, clean-skips when `sources/cr_oldworld_campaign/` is absent, and never writes `mapgen/config/`.
 
 ## Name citations: the `source` convention
 
 Every hand-authored place name carries a **citation**, so canon can be told from invention without re-litigating it:
 
-- `tools/config/hub_worksheet.json` — each `HubRow` has a required `source` (a canon citation or the literal `invented`); blank is a schema error. Canon names come first; coin one only where canon is silent, and flag it `invented`.
-- `tools/config/land_regions_worksheet.csv` — a trailing `source` column, additive (blank is legal for names that predate the convention). `name` and `source` are carried across a regen together by the same anchor relocation (`render_land_regions_preview.py`), never separately.
+- `mapgen/config/hub_worksheet.json` — each `HubRow` has a required `source` (a canon citation or the literal `invented`); blank is a schema error. Canon names come first; coin one only where canon is silent, and flag it `invented`.
+- `mapgen/config/land_regions_worksheet.csv` — a trailing `source` column, additive (blank is legal for names that predate the convention). `name` and `source` are carried across a regen together by the same anchor relocation (`render_land_regions_preview.py`), never separately.
 
-A name from the TWW3 Old World mod region table is cited `canon: cr_oldworld_campaign/<slug> (TWW3 Old World mod region table)` (`SOURCE_TEMPLATE` in `tools/tww3_name_lookup.py`). That table is ChaosRobie's third-party Old World mod, used with his explicit permission — not Creative Assembly/Sega content. The lookup **never writes either file**: it emits suggestions into gitignored `tools/derived/` for a human to accept, because the registration it samples through is provisional and the table is settlement-scale while our regions are province-scale (a hit is often a town *inside* the region). Land not drawn in `sources/originals/tww3_old_world_mod_parchment_cropped.png` is out of scope for naming; its **alpha channel** is the extent (the bounding box is the whole image and proves nothing), and a name resolved outside it is discarded.
+A name from the TWW3 Old World mod region table is cited `canon: cr_oldworld_campaign/<slug> (TWW3 Old World mod region table)` (`SOURCE_TEMPLATE` in `mapgen/tww3_name_lookup.py`). That table is ChaosRobie's third-party Old World mod, used with his explicit permission — not Creative Assembly/Sega content. The lookup **never writes either file**: it emits suggestions into gitignored `mapgen/derived/` for a human to accept, because the registration it samples through is provisional and the table is settlement-scale while our regions are province-scale (a hit is often a town *inside* the region). Land not drawn in `sources/originals/tww3_old_world_mod_parchment_cropped.png` is out of scope for naming; its **alpha channel** is the extent (the bounding box is the whole image and proves nothing), and a name resolved outside it is discarded.
 
-Canon-city anchors (`tools/config/canon_cities.json`) are read off Chris's cyan dots on `sources/terraqueous_globe_reprojected - canon_cities.png` (canvas frame; detect `g>170 & b>170 & r<130`, cluster centroids). On the Games Workshop map "Cragmere" is Karak Varn.
+Canon-city anchors (`mapgen/config/canon_cities.json`) are read off Chris's cyan dots on `sources/terraqueous_globe_reprojected - canon_cities.png` (canvas frame; detect `g>170 & b>170 & r<130`, cluster centroids). On the Games Workshop map "Cragmere" is Karak Varn.
 
 ## Standing decisions and lessons
 
 - **The picture is the gate.** Every offline check was green while the map was visually unusable; render, send, and wait for Chris's verdict ([core.md](core.md)).
-- **Canvas.** Miller cylindrical, `Y0 = 2142.0` pinned to a line Chris drew (band +74.9°N/−57.4°S), 8192×3616; no installed mod deviates from vanilla's dimensions. Chris communicates geometry by drawing on a copy of a source image: recover markup by differencing against the clean source, and never register or list a markup file in `tools/SOURCES.md`.
+- **Canvas.** Miller cylindrical, `Y0 = 2142.0` pinned to a line Chris drew (band +74.9°N/−57.4°S), 8192×3616; no installed mod deviates from vanilla's dimensions. Chris communicates geometry by drawing on a copy of a source image: recover markup by differencing against the clean source, and never register or list a markup file in `mapgen/SOURCES.md`.
 - **Usable sources** are flat uniform fills (not hatching or brush strokes), PNG not JPEG, and the same pixel dimensions as an already-registered frame; warn before Chris spends effort on a map. Registration: whole-map fits inflate (silhouette IoU rewards land overlap, and by-eye landmarks are the bottleneck) — use Chris's paired anchor dots on the reprojected globe (thin-plate through exact-RGB dot centroids; the crop's binary alpha mask must be kept, and dimensions re-read every pass because he re-exports).
-- **Acceptance is by named region**: Bretonnia ≥15, Empire ≥30, Cathay ≥40 and so on, 600–700 land states in all (`tools/regions/named_regions.json`). Bind a name to geometry by anchor point snapped to land, never by contour id. Hierarchy: province < state < state_region < strategic/geographic region; aim for ~7 provinces per state_region in the drawn Old World.
+- **Acceptance is by named region**: Bretonnia ≥15, Empire ≥30, Cathay ≥40 and so on, 600–700 land states in all (`mapgen/regions/named_regions.json`). Bind a name to geometry by anchor point snapped to land, never by contour id. Hierarchy: province < state < state_region < strategic/geographic region; aim for ~7 provinces per state_region in the drawn Old World.
 - **Per-state hand-authored tables** key on the canon state key `STATE_<NAME>` plus the naming anchor (`anchor_x`/`anchor_y`), never the Hilbert STATE number or a province colour — both reshuffle on regen.
 - **LFS.** Seven `map_data/` paths are Git-LFS (see `.gitattributes`); a clone needs git-lfs (else 133-byte pointer files) and `core.longpaths` on Windows. Before rewriting history, back up with `git bundle create … --all`, not just a branch.
 - **Symptom.** A coastline regen reporting "0 land regions" or 100% ocean means `--from-fill` was not passed.

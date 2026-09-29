@@ -32,7 +32,7 @@ From `$ARGUMENTS`. Accept any of:
 
 - **A planning file** (`planning/**/*.md`) — review the plan or issue itself: is it
   correct, complete, and worth building?
-- **An artifact** (`tools/derived/qa_*.png`, `map_data/*.png`, …) — review the
+- **An artifact** (`mapgen/derived/qa_*.png`, `map_data/*.png`, …) — review the
   output.
 - **A commit, range, or `working`** — review the diff. Default to
   `git diff HEAD~1` for a single commit, `git diff` for `working`.

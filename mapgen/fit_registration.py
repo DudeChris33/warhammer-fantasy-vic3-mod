@@ -1,0 +1,497 @@
+#!/usr/bin/env python3
+"""Author a registration record by fitting a source's silhouette to our own mask.
+
+This is an **authoring tool**, not part of the offline gate — like
+``sources.py --update-manifest``, it is run deliberately when a source's
+placement needs (re)deriving, and it rewrites a committed
+``mapgen/registration/<source>.json``. The gate reads the committed record; it
+never runs this.
+
+What it does, per the S3a plan:
+
+1. Extract the source's land silhouette (or a registered sibling's — the climate
+   map is the only Immortal Empires sibling with a measurable land signal, so it
+   is the objective for the whole family).
+2. **Coarse**: sweep an axis-aligned affine and keep the best two-sided IoU
+   against ``mapgen/derived/land_sea_mask.png``. This only places the frame.
+3. **Fine**: lay a lattice of control points over the source, seed their canvas
+   positions through the affine, and refine each one by local coordinate descent
+   on the same IoU. Immortal Empires is a playable map, not a globe, so this
+   thin-plate stage is where the actual registration happens.
+4. Write the record, with the fit's own numbers (IoU at each stage, how far the
+   lattice moved) recorded in its ``notes`` so the committed placement carries
+   the evidence for itself.
+
+Everything it reads is committed except the source images, and every search is a
+declared, finite sweep, so a re-run reproduces the same record.
+
+Some sources have no measurable silhouette (the Old World mod map's open ocean is
+the same parchment as its land, so a threshold finds the coastal shadow band
+rather than the coast). Those declare ``"objective": "landmarks"`` in their seed
+file and are fitted by thin-plate interpolation through hand-identified landmarks
+alone — a weaker guarantee, recorded as such in the record's notes.
+
+Usage::
+
+    python mapgen/fit_registration.py --seed wh3_dlc_ie_parchment_map_english
+    python mapgen/fit_registration.py --seed <stem> --dry-run    # fit, report, write nothing
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+import time
+from pathlib import Path
+
+import numpy as np
+from scipy.interpolate import RBFInterpolator
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from config import map_config  # noqa: E402
+from worldgen import parchment, raster, register, reproject, schema, segment, sources  # noqa: E402
+
+TOOLS_DIR = Path(__file__).resolve().parent
+SEED_DIR = TOOLS_DIR / "registration" / "seeds"
+REGISTRATION_DIR = TOOLS_DIR / "registration"
+MASK_PATH = TOOLS_DIR / "derived" / "land_sea_mask.png"
+
+CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
+
+#: The globe every other source is anchored to. Landmark seeds are given as
+#: pixels on *this* image and converted through its committed NE-II fit, so no
+#: source's control points are ever eyeballed against the canvas directly — they
+#: inherit the 0.363 px envelope fit (user decision #1: one geometric authority).
+ANCHOR_SOURCE = "terraqueous_globe.jpg"
+
+
+def _sweep(spec) -> np.ndarray:
+    """``[start, stop, step]`` -> the inclusive candidate array it declares."""
+    start, stop, step = (float(v) for v in spec)
+    n = int(round((stop - start) / step)) + 1
+    return start + step * np.arange(n)
+
+
+def load_seed(stem: str) -> dict:
+    path = SEED_DIR / f"{stem}.json"
+    if not path.is_file():
+        raise SystemExit(f"no seed file at {path}")
+    with open(path, "r", encoding="utf-8") as fh:
+        return json.load(fh)
+
+
+def silhouette(spec: dict) -> tuple[np.ndarray, tuple[float, float]]:
+    """The land mask used as the fitting objective, plus its scale to the master frame.
+
+    Two kinds of source, two ways of getting there:
+
+    ``flat_colour``
+        The map's ocean is a single flat fill, so land is exactly the union of
+        the regions its own drawn lines enclose. No threshold is fitted and
+        nothing is guessed.
+
+    ``painted`` (default)
+        A textured parchment, where land has to be separated from paper by
+        chromaticity distance. Approximate by nature — kept because it is the
+        only thing that works on the Immortal Empires family.
+    """
+    rgb = sources.load_source_image(spec["from"])
+    scale = tuple(float(v) for v in spec.get("to_master_scale", (1.0, 1.0)))
+    if spec.get("kind") == "flat_sea":
+        # Land = everything that is not the map's own flat ocean colour, cleaned.
+        # Unlike ``flat_colour`` (which labels the complement of ocean+drawn-lines
+        # into region cells), this keeps the land solid — right for a map whose land
+        # is dense monochrome line-art, where cell-labelling would fragment it and
+        # drop it under ``min_area``. ``exclude`` boxes are forced to sea, for a
+        # logo or cartouche floating over open ocean.
+        sea = parchment.flat_sea_mask(
+            rgb, tolerance=int(spec.get("sea_tolerance", 60)),
+            sea_rgb=tuple(int(v) for v in spec.get("sea_rgb", parchment.FLAT_SEA_RGB)))
+        land = ~sea
+        keep = int(spec.get("min_component", 5000))
+        land = segment.drop_small_components(land, keep, wrap_x=False)
+        land = ~segment.drop_small_components(~land, keep, wrap_x=False)
+        for x0, y0, x1, y1 in (tuple(b) for b in spec.get("exclude", [])):
+            land[int(y0):int(y1), int(x0):int(x1)] = False
+        return land, scale
+    if spec.get("kind") == "blue_sea":
+        # Ocean is blue-DOMINANT but brightness-varying (a relief/satellite world
+        # map), so hue not distance separates it; a dark frame/letterbox is dropped
+        # as land=False. Like flat_sea, keeps the land solid.
+        sea = parchment.blue_sea_mask(rgb, r_margin=int(spec.get("r_margin", 18)),
+                                      g_margin=int(spec.get("g_margin", 6)))
+        dark = rgb.max(axis=2) < int(spec.get("frame_dark", 40))
+        land = ~sea & ~dark
+        keep = int(spec.get("min_component", 4000))
+        land = segment.drop_small_components(land, keep, wrap_x=False)
+        land = ~segment.drop_small_components(~land, keep, wrap_x=False)
+        for x0, y0, x1, y1 in (tuple(b) for b in spec.get("exclude", [])):
+            land[int(y0):int(y1), int(x0):int(x1)] = False
+        return land, scale
+    if spec.get("kind") == "flat_colour":
+        _, land = parchment.flat_map_cells(
+            rgb,
+            min_area=int(spec.get("min_component", 300)),
+            max_area_fraction=float(spec.get("max_area_fraction", 0.012)),
+            exclude=[tuple(b) for b in spec.get("exclude", [])])
+        return land, scale
+    m = parchment.painted_mask(rgb, exclude=[tuple(b) for b in spec.get("exclude", [])])
+    keep = int(spec.get("min_component", 400))
+    m = segment.drop_small_components(m, keep, wrap_x=False)
+    m = ~segment.drop_small_components(~m, keep, wrap_x=False)
+    return m, scale
+
+
+def anchor_landmarks(seed: dict) -> tuple[np.ndarray, np.ndarray]:
+    """``(source_px, canvas_px)`` for the seed's hand-identified landmarks.
+
+    A landmark's canvas position is established one of two ways — never typed as a
+    raw canvas pixel picked by eye against the mask:
+
+    * ``"anchor"`` — a pixel on the Terraqueous globe (``terraqueous_globe.jpg``),
+      pushed through the committed NE-II fit. Keeps the landmark inside the globe's
+      0.363 px envelope (user decision #1: one geometric authority).
+    * ``"canvas"`` — a pixel read straight off ``terraqueous_globe_reprojected.png``,
+      which *is* the canvas/mask frame (8192x3616; the mask was traced from it), so
+      the feature's canvas position is its pixel with no fit in between. This is the
+      paired-anchor-dot workflow: the user marks matched colour dots on a region
+      crop and on the reprojected globe, and the recovered dot centroids come in
+      here already in canvas space.
+
+    The globe fit is built lazily, only if some landmark needs it, so a seed whose
+    landmarks are all ``canvas``-anchored does not require the globe registration
+    to be present.
+    """
+    fit = None
+    src, canvas = [], []
+    for lm in seed["landmarks"]:
+        src.append(lm["source"])
+        if "canvas" in lm:
+            canvas.append([float(lm["canvas"][0]), float(lm["canvas"][1])])
+            continue
+        if fit is None:
+            regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
+            fit = reproject.fit_parametric(regs[ANCHOR_SOURCE])
+        cx, cy = fit.to_canvas(lm["anchor"][0], lm["anchor"][1], CANVAS_W, CANVAS_H)
+        canvas.append([float(cx), float(cy)])
+    return np.array(src, dtype=np.float64), np.array(canvas, dtype=np.float64)
+
+
+def build_alias(seed: dict, log=print) -> dict:
+    """Write a ``frame_alias`` record, measuring its footprint through the parent.
+
+    An alias carries no control points, so the only thing left to establish is
+    *where on the canvas it lands* — and that is measured by actually running the
+    composed warp over the canvas and taking the bounding box of the pixels that
+    hit inside its crop. Declaring the footprint by hand would go stale the next
+    time the parent is re-fitted, which is exactly the silent breakage the alias
+    mechanism exists to avoid.
+    """
+    rec = dict(seed["record"])
+    rec["source"] = seed["source"]
+    rec["projection"] = "frame_alias"
+    rec["frame_alias"] = seed["frame_alias"]
+    rec["control_points"] = []
+    rec["footprint"] = [0, 0, CANVAS_W, CANVAS_H]
+
+    regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
+    probe = schema.SourceRegistration.from_dict(rec, f"{seed['source']} (probe)")
+    regs[probe.source] = probe
+    fit = reproject.fit_alias(probe, regs)
+
+    step = int(seed.get("footprint_step", 8))
+    h, w = CANVAS_H // step, CANVAS_W // step
+    gx, gy = np.meshgrid((np.arange(w) + 0.5) * step, (np.arange(h) + 0.5) * step)
+    sx, sy = fit.to_source_px(gx, gy)
+    x0, y0, x1, y1 = probe.crop if probe.crop is not None else (0, 0, 1e9, 1e9)
+    inside = (sx >= x0) & (sx <= x1) & (sy >= y0) & (sy <= y1)
+    if not inside.any():
+        raise SystemExit(f"{seed['source']}: alias lands entirely outside its crop")
+    ys, xs = np.nonzero(inside)
+    pad = float(seed.get("footprint_pad", 0))
+    rec["footprint"] = [
+        max(0.0, float(xs.min()) * step - pad), max(0.0, float(ys.min()) * step - pad),
+        min(float(CANVAS_W), float(xs.max() + 1) * step + pad),
+        min(float(CANVAS_H), float(ys.max() + 1) * step + pad),
+    ]
+    log(f"alias of      {seed['frame_alias']['of']}")
+    log(f"footprint     {[round(v) for v in rec['footprint']]} "
+        f"({100 * inside.mean():.1f}% of canvas)")
+    return rec
+
+
+def fit_source(stem: str, log=print) -> dict:
+    seed = load_seed(stem)
+    objective = seed.get("objective", "silhouette")
+    log(f"source        {seed['source']}")
+    log(f"objective     {objective}")
+    if objective == "frame_alias":
+        return build_alias(seed, log)
+
+    land = raster.read_mask_png(MASK_PATH)
+    master_shape = tuple(seed["master_shape"])  # (h, w) of the frame control points live in
+
+    lm_src, lm_canvas = anchor_landmarks(seed)
+    n_direct = sum(1 for lm in seed["landmarks"] if "canvas" in lm)
+    if n_direct == 0:
+        how = f"canvas positions derived through {ANCHOR_SOURCE}"
+    elif n_direct == len(seed["landmarks"]):
+        how = "canvas positions read direct off the reprojected globe"
+    else:
+        how = f"{n_direct} direct + {len(seed['landmarks']) - n_direct} through {ANCHOR_SOURCE}"
+    log(f"landmarks     {len(lm_src)} ({how})")
+
+    info: dict = {"landmarks": int(len(lm_src))}
+
+    if objective == "piecewise_affine":
+        # The landmark dots ARE the triangulation vertices — no lattice, no
+        # silhouette, no RBF. A piecewise-affine warp (reproject.fit_piecewise)
+        # is continuous across every shared triangle edge, so region-to-region
+        # seams cannot tear, and locally affine, so an abrupt inter-region scale
+        # change is absorbed by the straddling triangles instead of being smeared
+        # across the whole map the way one global thin-plate spline (the
+        # `landmarks` objective) is. Right for a scale-collage source like the
+        # TWW3 Old World mod parchment. Coverage is the convex hull of the dots;
+        # edge coverage is a dot-placement question, not a warp fallback. Emitting
+        # a lattice here would be wrong: lattice samples are interpolated, not real
+        # correspondences, and adding them as extra vertices would distort the
+        # piecewise map — so only the dots are emitted, and the fit is exact at
+        # every one of them by construction.
+        from scipy.spatial import Delaunay
+        tri = Delaunay(lm_canvas)
+        names = [lm["name"] for lm in seed["landmarks"]]
+        info["method"] = "piecewise-affine over the Delaunay triangulation of the landmark dots"
+        info["triangles"] = int(tri.simplices.shape[0])
+        log(f"triangulated {len(lm_src)} dots into {tri.simplices.shape[0]} triangles "
+            f"(master {master_shape[1]}x{master_shape[0]})")
+        return _emit(seed, lm_src, lm_canvas, info, log,
+                     notes=lambda i: names[i] if i < len(names) else f"pt {i}",
+                     projection="piecewise_affine_warp")
+
+    if objective == "landmarks":
+        # No measurable silhouette: interpolate the landmarks and stop. Exact at
+        # every landmark.
+        #
+        # thin_plate_spline's kernel (r^2 log r) grows without bound away from its
+        # support points, so how far the lattice may safely reach past the dots
+        # depends on whether the fit has a kernel term at all:
+        #
+        # * With <= 3 non-collinear landmarks the degree-1 solve has ZERO kernel
+        #   weight — the fit is exactly its affine trend, which extrapolates
+        #   safely and uniformly. The lattice can (and should) span the whole
+        #   master frame, so an affine placement from 3 well-spread dots covers
+        #   the entire region with no streaking. This is the clean way to place a
+        #   tile: 3 dots, pure affine.
+        # * With 4+ landmarks the kernel term is nonzero and blows up outside the
+        #   dots' hull. A lattice point tens-to-hundreds of px past the nearest
+        #   dot then gets an unstable canvas position, and because every consumer
+        #   (qa_overlay, generate_state_labels) re-fits its own RBF through the
+        #   emitted control points, that one bad point smears into comb-streaks
+        #   across nearby valid content (observed on the 9-dot Empire tile,
+        #   2026-08-16: all four edges). So the lattice is bounded to hull + pad,
+        #   trading periphery coverage for a stable warp; recovering that edge
+        #   coverage is a sourcing question (dots nearer the edge), not tooling.
+        rbf = RBFInterpolator(lm_src, lm_canvas, kernel="thin_plate_spline", degree=1)
+        if len(lm_src) <= 3:
+            lat_pts = register.lattice(master_shape, seed["lattice"]["nx"],
+                                       seed["lattice"]["ny"],
+                                       float(seed["lattice"].get("inset", 0.02)))
+            log(f"affine placement from {len(lm_src)} landmarks (full-frame lattice, "
+                f"master {master_shape[1]}x{master_shape[0]})")
+            info["method"] = f"affine placement from {len(lm_src)} landmarks (full-frame lattice)"
+        else:
+            pad = float(seed["lattice"].get("hull_pad", 64))
+            x0 = max(0.0, float(lm_src[:, 0].min()) - pad)
+            y0 = max(0.0, float(lm_src[:, 1].min()) - pad)
+            x1 = min(float(master_shape[1]), float(lm_src[:, 0].max()) + pad)
+            y1 = min(float(master_shape[0]), float(lm_src[:, 1].max()) + pad)
+            log(f"lattice hull  x[{x0:.0f},{x1:.0f}] y[{y0:.0f},{y1:.0f}]  (pad {pad:.0f}px, "
+                f"master {master_shape[1]}x{master_shape[0]})")
+            lat_pts = register.lattice_box((x0, y0, x1, y1), seed["lattice"]["nx"],
+                                           seed["lattice"]["ny"])
+            info["method"] = "thin-plate interpolation of landmarks, lattice bounded to hull+pad"
+            info["lattice_hull_box"] = [round(x0, 1), round(y0, 1), round(x1, 1), round(y1, 1)]
+        lat_canvas = register.clamp_canvas(rbf(lat_pts), CANVAS_W, CANVAS_H)
+        # Emit the landmarks themselves alongside the lattice samples: a consumer
+        # re-fits its own thin-plate through whatever control points are committed
+        # (project_regions.py, generate_state_labels.py), and a lattice grid is
+        # sparse relative to a locally dense landmark cluster — bare lattice
+        # samples let that re-fit drift tens of px off a landmark it sits between
+        # (measured 72px at this crop's tightest cluster, dark_lands item #3476).
+        # Including the landmarks restores the "exact at every landmark" this
+        # objective already promises, at every consumer, not just this fit.
+        src_pts = np.concatenate([lm_src, lat_pts])
+        canvas_pts = np.concatenate([lm_canvas, lat_canvas])
+        names = [lm["name"] for lm in seed["landmarks"]]
+        return _emit(seed, src_pts, canvas_pts,
+                     info, log, notes=lambda i: names[i] if i < len(names) else f"lattice {i - len(names)}")
+
+    if objective == "landmark_refine":
+        # Landmark thin-plate placement used as the SEED for a LOCAL silhouette
+        # refine. For a partial-coverage, mostly-land regional tile the global
+        # silhouette IoU is a bad objective (it inflates the land block off the
+        # coastline — measured on old_world_black_white_colored: coarse pinned to
+        # the scale ceiling, landmark residual ballooning 253->828 px). So the
+        # landmarks fix the frame and the refine is given only small per-point
+        # radii: it snaps the coasts where there is sea contrast without being able
+        # to rescale the whole map.
+        sil, to_master = silhouette(seed["silhouette"])
+        log(f"silhouette    {seed['silhouette']['from']} {sil.shape} land {sil.mean():.3f}")
+        src_pts = register.lattice(master_shape, seed["lattice"]["nx"], seed["lattice"]["ny"],
+                                   float(seed["lattice"].get("inset", 0.02)))
+        rbf = RBFInterpolator(lm_src, lm_canvas, kernel="thin_plate_spline", degree=1)
+        seed_canvas = register.clamp_canvas(rbf(src_pts), CANVAS_W, CANVAS_H)
+        canvas_pts, iou = seed_canvas, 0.0
+        t0 = time.time()
+        for i, stage in enumerate(seed["refine"]["stages"]):
+            log(f"  stage {i + 1}: step {stage['step']} radii {stage['radii']}")
+            canvas_pts, iou = register.refine(
+                src_pts, canvas_pts, sil, land, src_scale=to_master,
+                step=int(stage["step"]), radii=tuple(float(v) for v in stage["radii"]),
+                passes=int(stage.get("passes", 1)), log=log,
+                bounds=(float(CANVAS_W), float(CANVAS_H)))
+        log(f"refined IoU   {iou:.4f}  ({time.time() - t0:.0f}s)")
+        info["method"] = "landmark thin-plate placement + local silhouette refine (small radii)"
+        info["refined_iou"] = round(float(iou), 4)
+        final = register.warp_mask(src_pts, canvas_pts, sil, land.shape, to_master, step=8)
+        info["folded_fraction"] = round(final.folded, 5)
+        info["anisotropy_p99"] = round(final.anisotropy, 2)
+        log(f"warp quality  {100 * final.folded:.3f}% folded, anisotropy p99 {final.anisotropy:.2f}")
+        info["lattice"] = f"{seed['lattice']['nx']}x{seed['lattice']['ny']}"
+        info["move"] = register.residual_report(src_pts, canvas_pts, np.asarray(seed_canvas))
+        rbf2 = RBFInterpolator(src_pts, canvas_pts, kernel="thin_plate_spline", degree=1)
+        d = np.hypot(*(rbf2(lm_src) - lm_canvas).T)
+        info["landmark_check_px"] = {"mean": round(float(d.mean()), 1), "max": round(float(d.max()), 1)}
+        log(f"landmark drift mean {d.mean():.0f} px, max {d.max():.0f} px (from seed after refine)")
+        return _emit(seed, src_pts, canvas_pts, info, log)
+
+    sil, to_master = silhouette(seed["silhouette"])
+    log(f"silhouette    {seed['silhouette']['from']} {sil.shape} land {sil.mean():.3f}")
+
+    # --- coarse: place the frame -----------------------------------------
+    c = seed["coarse"]
+    ss, cs = int(c["src_step"]), int(c["canvas_step"])
+    t0 = time.time()
+    best = register.coarse_affine(
+        sil[::ss, ::ss], land[::cs, ::cs],
+        _sweep(c["scale_x"]), _sweep(c["scale_y"]), _sweep(c["offset_x"]), _sweep(c["offset_y"]),
+    )
+    log(f"coarse affine IoU {best.iou:.4f}  scale {best.scale} offset {best.offset}  "
+        f"({time.time() - t0:.0f}s)")
+    info["coarse_iou"] = round(best.iou, 4)
+
+    # Reduced-grid affine -> full-resolution silhouette-px -> canvas-px.
+    scale = (best.scale[0] * cs / ss, best.scale[1] * cs / ss)
+    offset = (best.offset[0] * cs, best.offset[1] * cs)
+
+    # --- fine: lattice, seeded through the affine, refined by IoU --------
+    #
+    # The lattice is laid out on the canvas side, over the intersection of the
+    # canvas with where the affine says the source lands. The source-side
+    # coordinates then follow by inverting the affine, so every control point is
+    # inside the canvas from the start and no clamping is needed to keep it there.
+    lat = seed["lattice"]
+    sh, sw = sil.shape
+    box = (max(0.0, offset[0]), max(0.0, offset[1]),
+           min(float(CANVAS_W), sw * scale[0] + offset[0]),
+           min(float(CANVAS_H), sh * scale[1] + offset[1]))
+    inset = float(lat.get("inset", 0.02))
+    dx, dy = (box[2] - box[0]) * inset, (box[3] - box[1]) * inset
+    box = (box[0] + dx, box[1] + dy, box[2] - dx, box[3] - dy)
+    log(f"lattice box   {tuple(round(v) for v in box)}")
+    seed_canvas = register.lattice_box(box, int(lat["nx"]), int(lat["ny"]))
+    sil_pts = np.column_stack([(seed_canvas[:, 0] - offset[0]) / scale[0],
+                               (seed_canvas[:, 1] - offset[1]) / scale[1]])
+    src_pts = sil_pts * np.array(to_master)
+
+    # Stages coarse-to-fine: a big correction does not need a fine scoring grid,
+    # and a fine correction cannot be seen on a coarse one. Scoring cost goes as
+    # 1/step^2, so doing the long-range passes cheaply is most of the saving.
+    canvas_pts, iou = seed_canvas, 0.0
+    t0 = time.time()
+    for i, stage in enumerate(seed["refine"]["stages"]):
+        log(f"  stage {i + 1}: step {stage['step']} radii {stage['radii']}")
+        canvas_pts, iou = register.refine(
+            src_pts, canvas_pts, sil, land, src_scale=to_master,
+            step=int(stage["step"]), radii=tuple(float(v) for v in stage["radii"]),
+            passes=int(stage.get("passes", 1)), log=log,
+            bounds=(float(CANVAS_W), float(CANVAS_H)))
+    log(f"refined IoU   {iou:.4f}  ({time.time() - t0:.0f}s)")
+
+    info["method"] = "coarse affine + thin-plate lattice refined on two-sided silhouette IoU"
+    info["refined_iou"] = round(float(iou), 4)
+    # Recheck the finished warp at full canvas resolution: refinement rejects
+    # folds on a reduced grid, so a fold narrower than that grid could survive.
+    final = register.warp_mask(src_pts, canvas_pts, sil, land.shape, to_master, step=8)
+    info["folded_fraction"] = round(final.folded, 5)
+    info["anisotropy_p99"] = round(final.anisotropy, 2)
+    log(f"warp quality  {100 * final.folded:.3f}% folded, anisotropy p99 "
+        f"{final.anisotropy:.2f} (checked at 8 px, refined at "
+        f"{seed['refine']['stages'][-1]['step']} px)")
+    info["lattice"] = f"{lat['nx']}x{lat['ny']}"
+    seed_canvas = np.asarray(seed_canvas)
+    info["move"] = register.residual_report(src_pts, canvas_pts, seed_canvas)
+
+    # How well do the hand-identified landmarks survive the fit? They took no
+    # part in the refinement, so this is an independent check rather than a
+    # restatement of the objective.
+    rbf = RBFInterpolator(src_pts, canvas_pts, kernel="thin_plate_spline", degree=1)
+    lm_pred = rbf(lm_src)
+    d = np.hypot(*(lm_pred - lm_canvas).T)
+    info["landmark_check_px"] = {"mean": round(float(d.mean()), 1),
+                                 "max": round(float(d.max()), 1)}
+    log(f"landmark check mean {d.mean():.0f} px, max {d.max():.0f} px (not used in the fit)")
+    return _emit(seed, src_pts, canvas_pts, info, log)
+
+
+def _emit(seed: dict, src_pts: np.ndarray, canvas_pts: np.ndarray, info: dict, log,
+          notes=lambda i: f"lattice {i}", projection: str = "control_point_warp") -> dict:
+    rec = dict(seed["record"])
+    rec["source"] = seed["source"]
+    rec["projection"] = projection
+    # The frame the control points' source px live in (h, w), so a consumer can
+    # drape a painting authored at ANY resolution of this same frame: it scales
+    # its own pixel grid to master_shape rather than assuming painting==master.
+    rec["master_shape"] = [int(seed["master_shape"][0]), int(seed["master_shape"][1])]
+    # The footprint is *measured* from where the fit actually put the source,
+    # not declared up front — a hand-written box would go stale the moment the
+    # control points moved, and a stale footprint silently truncates the layer.
+    pad = float(seed.get("footprint_pad", 64))
+    rec["footprint"] = [
+        max(0.0, float(canvas_pts[:, 0].min()) - pad),
+        max(0.0, float(canvas_pts[:, 1].min()) - pad),
+        min(float(CANVAS_W), float(canvas_pts[:, 0].max()) + pad),
+        min(float(CANVAS_H), float(canvas_pts[:, 1].max()) + pad),
+    ]
+    rec["notes"] = rec.get("notes", "").rstrip() + " FIT: " + json.dumps(info, sort_keys=True)
+    rec["control_points"] = register.to_records(src_pts, canvas_pts, notes)
+    log(f"control points {len(rec['control_points'])}")
+    return rec
+
+
+def main(argv: list[str] | None = None) -> int:
+    p = argparse.ArgumentParser(description=__doc__,
+                                formatter_class=argparse.RawDescriptionHelpFormatter)
+    p.add_argument("--seed", required=True, help="seed stem under mapgen/registration/seeds/")
+    p.add_argument("--dry-run", action="store_true", help="fit and report, write nothing")
+    args = p.parse_args(argv)
+
+    if not MASK_PATH.is_file():
+        raise SystemExit(f"{MASK_PATH} not found — run mapgen/generate_heightmap.py first")
+
+    rec = fit_source(args.seed)
+    out = REGISTRATION_DIR / f"{load_seed(args.seed).get('record_stem', args.seed)}.json"
+    if args.dry_run:
+        print(f"(dry run — would write {out})")
+        return 0
+    out.write_text(json.dumps(rec, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
+    print(f"wrote {out}")
+    # Fail loudly here rather than at the next gate run.
+    schema.load_registration_file(out)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

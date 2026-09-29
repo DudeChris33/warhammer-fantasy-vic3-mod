@@ -46,24 +46,24 @@ whether terrain makes for good play (game-designer). Put those under "Not my lan
 
 ## The pipeline you are reviewing
 
-Offline Python under `tools/`, not loaded by the game. Local-only `sources/`
-imagery (gitignored) → LUT classification (`tools/lut/*.json`,
-`tools/worldgen/lut.py`) → ingestion and reprojection (`tools/worldgen/ingest.py`,
+Offline Python under `mapgen/`, not loaded by the game. Local-only `sources/`
+imagery (gitignored) → LUT classification (`mapgen/lut/*.json`,
+`mapgen/worldgen/lut.py`) → ingestion and reprojection (`mapgen/worldgen/ingest.py`,
 `reproject.py`, `segment.py`) → generators → committed bitmaps.
 
 Key artifacts and facts:
 
 - `map_data/heightmap.png` — generated elevation. Encoding parameters live in
-  `tools/config/map_config.py`.
-- `tools/derived/land_sea_mask.png` — the land/sea authority downstream.
+  `mapgen/config/map_config.py`.
+- `mapgen/derived/land_sea_mask.png` — the land/sea authority downstream.
 - `map_data/rivers.png` — generated river network; palette semantics measured from
-  vanilla in `tools/lut/rivers_palette.json` and `tools/worldgen/schema.py`.
-- `tools/config/canvas_frame.py` — the frame, **Miller cylindrical**:
+  vanilla in `mapgen/lut/rivers_palette.json` and `mapgen/worldgen/schema.py`.
+- `mapgen/config/canvas_frame.py` — the frame, **Miller cylindrical**:
   `LAT_TOP ≈ 74.905N`, `LAT_BOTTOM ≈ 57.408S`, measured from vanilla and pinned to
   the user's drawn northern limit. The canvas top edge sits on that line; the
   band is asymmetric because the whole forced latitude cut is spent in the south.
-- `sources/terraqueous_globe.jpg` — the geometric reference the canvas frame is measured against. The coastline itself is the hand-traced black/white land fill, turned into `tools/derived/land_sea_mask.png` by `generate_coastline_mask.py --from-fill`.
-- `tools/generate_heightmap.py` — `CANVAS_MIN_BLOB = 256` (the sole area
+- `sources/terraqueous_globe.jpg` — the geometric reference the canvas frame is measured against. The coastline itself is the hand-traced black/white land fill, turned into `mapgen/derived/land_sea_mask.png` by `generate_coastline_mask.py --from-fill`.
+- `mapgen/generate_heightmap.py` — `CANVAS_MIN_BLOB = 256` (the sole area
   despeckle, in *canvas* px), `SOURCE_MAJORITY = 3` (source-side denoise only).
   Area control is canvas-side on purpose: under Miller the source-to-canvas
   stretch runs ~4x in area between the equator and the top edge, so a source-px
@@ -72,7 +72,7 @@ Key artifacts and facts:
 Measure with the committed venv, using the repo's own idiom:
 
 ```bash
-tools/.venv/Scripts/python.exe -c "import numpy as np; from PIL import Image; Image.MAX_IMAGE_PIXELS=None; h=np.array(Image.open('map_data/heightmap.png')); print(h.shape, h.dtype, int(np.median(h[:220])), int(h.min()), int(h.max()))"
+mapgen/.venv/Scripts/python.exe -c "import numpy as np; from PIL import Image; Image.MAX_IMAGE_PIXELS=None; h=np.array(Image.open('map_data/heightmap.png')); print(h.shape, h.dtype, int(np.median(h[:220])), int(h.min()), int(h.max()))"
 ```
 
 Read-only measurement is expected of you. **Never run a generator** — that
@@ -117,7 +117,7 @@ strait is a geographic claim; check it is deliberate. Terrain type per province
 should follow the heightmap and latitude, not be assigned independently of them.
 
 **Scale.** Landmass proportions relative to each other, and against the region
-quotas in `tools/regions/named_regions.json` — if Bretonnia is France-sized it
+quotas in `mapgen/regions/named_regions.json` — if Bretonnia is France-sized it
 should be recognisably France-sized against its neighbours.
 
 ## Output contract

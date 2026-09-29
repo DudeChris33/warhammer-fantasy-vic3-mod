@@ -1,0 +1,56 @@
+{
+  "source": "tww3_colored.png",
+  "master_shape": [3010, 4726],
+  "objective": "silhouette",
+  "footprint_pad": 96,
+
+  "_comment_silhouette": "This map's ocean is a single FLAT FILL (16,6,175), so land is exact rather than thresholded - the union of the regions its own drawn black lines enclose, minus the handful of oversized 'cells' that are the off-map background and the legend panel. Every other source here forced a judgement about where water started: a chromaticity distance on the Immortal Empires parchment, and on the Old World fan map a luminance cut that even after being calibrated against hand-drawn sea markings reached only 81% balanced accuracy. A registration can be no better than the silhouette it is scored against, which is why this source displaced the IE family as primary.",
+  "silhouette": {
+    "from": "tww3_colored.png",
+    "kind": "flat_colour",
+    "to_master_scale": [1.0, 1.0],
+    "min_component": 300,
+    "max_area_fraction": 0.012,
+    "exclude": [[0, 2450, 330, 3010]]
+  },
+
+  "_comment_coarse": "Bounds bracket a wide reconnaissance sweep (scale_x 0.30-0.95, scale_y 0.25-0.85 step 0.025, offsets -30..110 / -50..90 step 6, 359k candidates, 266 s) which peaked INTERIOR at scale (0.450, 0.325) offset (36, -14) with two-sided IoU 0.5249 - already above the IE family's affine 0.5017, and measured against an exact silhouette rather than a thresholded one. Reduced pixels: silhouette downsampled by src_step, canvas by canvas_step.",
+  "coarse": {
+    "src_step": 8,
+    "canvas_step": 24,
+    "scale_x": [0.375, 0.525, 0.0125],
+    "scale_y": [0.26, 0.39, 0.0125],
+    "offset_x": [18, 54, 3],
+    "offset_y": [-32, 4, 3]
+  },
+
+  "lattice": {"nx": 10, "ny": 8, "inset": 0.02},
+  "refine": {
+    "stages": [
+      {"step": 32, "radii": [192, 96, 48], "passes": 1},
+      {"step": 16, "radii": [24, 12], "passes": 1}
+    ]
+  },
+
+  "_comment_landmarks": "Independent check only - these take no part in the silhouette fit. Source side on this map, anchor side on the Terraqueous globe, whose pixels become canvas pixels through the committed NE-II fit so no canvas coordinate is eyeballed. They are read off a thumbnail and are worth roughly +-150 canvas px, so treat a few hundred px of landmark residual as a measure of the reads, not of the fit.",
+  "landmarks": [
+    {"name": "ulthuan_ring",   "source": [1323, 1233], "anchor": [1443, 686]},
+    {"name": "naggaroth",      "source": [616, 863],   "anchor": [1086, 449]},
+    {"name": "lustria",        "source": [986, 2343],  "anchor": [1186, 1234]},
+    {"name": "norsca",         "source": [2466, 411],  "anchor": [2000, 323]},
+    {"name": "empire",         "source": [2630, 863],  "anchor": [2000, 440]},
+    {"name": "araby",          "source": [2137, 1767], "anchor": [1714, 837]},
+    {"name": "southlands",     "source": [2548, 2178], "anchor": [2000, 1163]},
+    {"name": "darklands",      "source": [3288, 1027], "anchor": [2286, 543]},
+    {"name": "grand_cathay",   "source": [4069, 1027], "anchor": [3029, 586]},
+    {"name": "kingdoms_of_ind","source": [4520, 1972], "anchor": [2814, 986]}
+  ],
+
+  "record": {
+    "role": "primary_boundary_network",
+    "precedence": 95,
+    "layer_precedence": {"boundaries": 95, "coastline": 5, "relief": 5, "macro": 0},
+    "crop": [10, 10, 4716, 3000],
+    "notes": "Flat-filled fan map of the Total War Warhammer world with region boundaries drawn as black lines - the PRIMARY boundary source from S3a onward. Three properties put it ahead of everything else tried: its ocean is a flat fill so the land silhouette is exact rather than thresholded; its region lines sit on flat terrain fills, so labelling the complement gives 681 clean closed cells with no local-contrast ink test, no lettering to inpaint and no coastal shadow band to mistake for a border; and 681 cells against our 659 land-state target means the source's own regions become our states almost one-for-one, instead of a thousand noisy cells being merged down. Contributes interior boundaries only - never coastline (coastline precedence 5). The committed land_sea_mask.png remains the sole coastline authority. MACHINE-FITTED by mapgen/fit_registration.py from mapgen/registration/seeds/total_war_map_colored.json; re-derive rather than hand-edit."
+  }
+}
