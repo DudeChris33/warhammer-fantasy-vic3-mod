@@ -1,4 +1,16 @@
+---
+paths:
+  - "localization/**/*"
+---
+
 # Localization Rules (`localization/`)
+
+**Read when:** you are adding or changing any `.yml` under `localization/`, or authoring script that needs user-facing keys. **Covers:** loc format, file naming, new vs replace, the shared names file and vanilla-collision overrides. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
+
+**Related guides:**
+- [peoples.md](peoples.md) — culture, religion and country display-name keys
+- [testing.md](testing.md) — generated map loc (state, hub, sea, canal names) is owned by the map pipeline
+- [scripting.md](scripting.md) — `custom_localization.log` and general script rules
 
 ## Organization
 
@@ -18,3 +30,7 @@
 
 - No hardcoded personal/local file paths in loc text.
 - No editing vanilla loc files directly — use `localization/replace/english/` instead.
+
+## Vanilla loc reference
+
+Vanilla key names live in `game/localization/english/` in the vanilla install — check it to know what `localization/replace/english/` must override (install path and read-only rule: [core.md](core.md)).

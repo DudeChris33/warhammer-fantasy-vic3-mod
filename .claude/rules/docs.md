@@ -1,4 +1,18 @@
+---
+paths:
+  - "CLAUDE.md"
+  - "memory.md"
+  - ".claude/**/*"
+  - "planning/**/*"
+---
+
 # Docs Rules
+
+**Read when:** you are editing `CLAUDE.md`, `.claude/rules/`, agents, skills, `memory.md` or `planning/`. **Covers:** what is authored vs generated, what gets updated when, and the Maestro mirror sync. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
+
+**Related guides:**
+- [core.md](core.md) — always-loaded guardrails and trust order
+- [scripting.md](scripting.md) — where script conventions are recorded
 
 ## What's authored vs. generated
 
