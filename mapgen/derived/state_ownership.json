@@ -29,7 +29,7 @@
     4009,
     991
    ],
-   "owner": "unowned",
+   "owner": "ANM",
    "scope": "drawn"
   },
   "STATE_APUCCINI_MOUNTAINS": {
@@ -65,7 +65,7 @@
     4049,
     993
    ],
-   "owner": "unowned",
+   "owner": "ARG",
    "scope": "drawn"
   },
   "STATE_ARTOIS": {
@@ -101,7 +101,7 @@
     4334,
     983
    ],
-   "owner": "AVE",
+   "owner": "VSY",
    "scope": "drawn"
   },
   "STATE_AXE_BITE_PASS": {
@@ -110,7 +110,7 @@
     4016,
     904
    ],
-   "owner": "REI",
+   "owner": "KZF",
    "scope": "drawn"
   },
   "STATE_BADLANDS_COAST": {
@@ -155,7 +155,7 @@
     4415,
     458
    ],
-   "owner": "KRD",
+   "owner": "KRV",
    "scope": "drawn"
   },
   "STATE_BLACK_FIRE_PASS": {
@@ -164,7 +164,7 @@
     4302,
     1043
    ],
-   "owner": "KAG",
+   "owner": "AVE",
    "scope": "drawn"
   },
   "STATE_BLACK_MOUNDS": {
@@ -227,7 +227,7 @@
     3843,
     1121
    ],
-   "owner": "unowned",
+   "owner": "XSG",
    "scope": "drawn"
   },
   "STATE_BLIGHTWATER": {
@@ -326,7 +326,7 @@
     4734,
     961
    ],
-   "owner": "MZN",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_CEFIRO_HILLS": {
@@ -542,7 +542,7 @@
     4037,
     813
    ],
-   "owner": "REI",
+   "owner": "CRB",
    "scope": "drawn"
   },
   "STATE_EAGLE_S_PEAK": {
@@ -551,7 +551,7 @@
     4268,
     287
    ],
-   "owner": "KRD",
+   "owner": "KOR",
    "scope": "drawn"
   },
   "STATE_EASTERN_BADLANDS": {
@@ -767,7 +767,7 @@
     3944,
     424
    ],
-   "owner": "BJO",
+   "owner": "SOT",
    "scope": "drawn"
   },
   "STATE_FOUNDRY_DISTRICT": {
@@ -794,7 +794,7 @@
     4528,
     469
    ],
-   "owner": "URS",
+   "owner": "GMD",
    "scope": "drawn"
   },
   "STATE_GATE_DISTRICT": {
@@ -857,7 +857,7 @@
     4645,
     517
    ],
-   "owner": "unowned",
+   "owner": "GMD",
    "scope": "drawn"
   },
   "STATE_GRAVE_OF_CUILEUX": {
@@ -902,7 +902,7 @@
     4325,
     804
    ],
-   "owner": "OSM",
+   "owner": "GRW",
    "scope": "drawn"
   },
   "STATE_HEART_OF_ZHARRDUK": {
@@ -920,7 +920,7 @@
     4484,
     498
    ],
-   "owner": "unowned",
+   "owner": "XSF",
    "scope": "drawn"
   },
   "STATE_HELSPIRE_COAST": {
@@ -938,7 +938,7 @@
     3991,
     415
    ],
-   "owner": "SOR",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_HIGH_PASS": {
@@ -1397,7 +1397,7 @@
     4066,
     1043
    ],
-   "owner": "unowned",
+   "owner": "YEE",
    "scope": "drawn"
   },
   "STATE_LAND_102": {
@@ -2045,7 +2045,7 @@
     4555,
     526
    ],
-   "owner": "unowned",
+   "owner": "VOL",
    "scope": "drawn"
   },
   "STATE_LAND_347": {
@@ -2054,7 +2054,7 @@
     4483,
     514
    ],
-   "owner": "unowned",
+   "owner": "XSE",
    "scope": "drawn"
   },
   "STATE_LAND_362": {
@@ -2117,7 +2117,7 @@
     4057,
     697
    ],
-   "owner": "NLD",
+   "owner": "LAU",
    "scope": "drawn"
   },
   "STATE_LAND_371": {
@@ -2126,7 +2126,7 @@
     4070,
     967
    ],
-   "owner": "unowned",
+   "owner": "WYD",
    "scope": "drawn"
   },
   "STATE_LAND_372": {
@@ -2153,7 +2153,7 @@
     4297,
     872
    ],
-   "owner": "OSM",
+   "owner": "XSA",
    "scope": "drawn"
   },
   "STATE_LAND_377": {
@@ -2162,7 +2162,7 @@
     4499,
     529
    ],
-   "owner": "unowned",
+   "owner": "XSD",
    "scope": "drawn"
   },
   "STATE_LAND_380": {
@@ -2171,7 +2171,7 @@
     4384,
     525
    ],
-   "owner": "TRO",
+   "owner": "DOL",
    "scope": "drawn"
   },
   "STATE_LAND_382": {
@@ -3017,7 +3017,7 @@
     4046,
     771
    ],
-   "owner": "MID",
+   "owner": "BLV",
    "scope": "drawn"
   },
   "STATE_LAND_485": {
@@ -3026,7 +3026,7 @@
     4041,
     801
    ],
-   "owner": "REI",
+   "owner": "XSB",
    "scope": "drawn"
   },
   "STATE_LAND_487": {
@@ -3044,7 +3044,7 @@
     4052,
     968
    ],
-   "owner": "unowned",
+   "owner": "ARG",
    "scope": "drawn"
   },
   "STATE_LAND_491": {
@@ -3053,7 +3053,7 @@
     4024,
     963
    ],
-   "owner": "unowned",
+   "owner": "ANM",
    "scope": "drawn"
   },
   "STATE_LAND_492": {
@@ -3071,7 +3071,7 @@
     3835,
     834
    ],
-   "owner": "GIS",
+   "owner": "OKP",
    "scope": "drawn"
   },
   "STATE_LAND_496": {
@@ -3125,7 +3125,7 @@
     4021,
     1052
    ],
-   "owner": "unowned",
+   "owner": "TRG",
    "scope": "drawn"
   },
   "STATE_LAND_503": {
@@ -3134,7 +3134,7 @@
     4085,
     1067
    ],
-   "owner": "unowned",
+   "owner": "TLS",
    "scope": "drawn"
   },
   "STATE_LAND_505": {
@@ -3143,7 +3143,7 @@
     4038,
     1067
    ],
-   "owner": "unowned",
+   "owner": "TLS",
    "scope": "drawn"
   },
   "STATE_LAND_506": {
@@ -3692,7 +3692,7 @@
     3553,
     1111
    ],
-   "owner": "unowned",
+   "owner": "MGL",
    "scope": "drawn"
   },
   "STATE_MONTE_CASTELLO": {
@@ -3746,7 +3746,7 @@
     4365,
     351
    ],
-   "owner": "KVE",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_MOUNT_AZGORH": {
@@ -3998,7 +3998,7 @@
     3887,
     782
    ],
-   "owner": "COU",
+   "owner": "SKZ",
    "scope": "drawn"
   },
   "STATE_PARRAVON": {
@@ -4151,7 +4151,7 @@
     4056,
     724
    ],
-   "owner": "MID",
+   "owner": "NLD",
    "scope": "drawn"
   },
   "STATE_SHATTERED_TEETH": {
@@ -4205,7 +4205,7 @@
     4194,
     1031
    ],
-   "owner": "SOL",
+   "owner": "WIS",
    "scope": "drawn"
   },
   "STATE_SOUR_CRAGS": {
@@ -4358,7 +4358,7 @@
     4060,
     1068
    ],
-   "owner": "unowned",
+   "owner": "TLS",
    "scope": "drawn"
   },
   "STATE_THE_BLIGHT": {
@@ -4457,7 +4457,7 @@
     4031,
     1022
    ],
-   "owner": "unowned",
+   "owner": "TRG",
    "scope": "drawn"
   },
   "STATE_TRANTINE_HILLS": {
@@ -4691,7 +4691,7 @@
     4314,
     911
    ],
-   "owner": "SYL",
+   "owner": "VSY",
    "scope": "drawn"
   },
   "STATE_WEST_TALABECLAND": {
@@ -4700,7 +4700,7 @@
     4144,
     862
    ],
-   "owner": "TAL",
+   "owner": "XSC",
    "scope": "drawn"
   },
   "STATE_WHEATLANDS": {
@@ -4763,7 +4763,7 @@
     4081,
     1010
    ],
-   "owner": "unowned",
+   "owner": "WYD",
    "scope": "drawn"
   },
   "STATE_YI_EDRI_ETERNOS": {
@@ -4772,7 +4772,7 @@
     4050,
     1033
    ],
-   "owner": "unowned",
+   "owner": "YEE",
    "scope": "drawn"
   },
   "STATE_ZORN_DUM": {

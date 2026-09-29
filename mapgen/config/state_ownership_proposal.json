@@ -13,9 +13,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_ANMYR": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "ANM",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_APUCCINI_MOUNTAINS": {
    "owner": "unowned",
@@ -33,9 +33,9 @@
    "note": "Aquitaine hub"
   },
   "STATE_ARGWYLON": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "ARG",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_ARTOIS": {
    "owner": "ART",
@@ -53,13 +53,14 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_AULD_RYDING": {
-   "owner": "AVE",
-   "confidence": "inferred"
+   "owner": "VSY",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_AXE_BITE_PASS": {
-   "owner": "REI",
-   "confidence": "inferred",
-   "note": "Helmgart / Axe Bite Pass"
+   "owner": "KZF",
+   "confidence": "directed",
+   "note": "review: Karak Ziflin"
   },
   "STATE_BADLANDS_COAST": {
    "owner": "unowned",
@@ -81,14 +82,14 @@
    "confidence": "inferred"
   },
   "STATE_BLACK_BLOOD_PASS": {
-   "owner": "KRD",
-   "confidence": "canon",
-   "note": "Kraka Ravnvake hub"
+   "owner": "KRV",
+   "confidence": "directed",
+   "note": "review: Kraka Ravnsvake"
   },
   "STATE_BLACK_FIRE_PASS": {
-   "owner": "KAG",
-   "confidence": "inferred",
-   "note": "capital collision: the Karak Angazhar hub is in BLACK_MOUNTAINS (KHI); registry capital \"Karak Angazbar\" has no hub"
+   "owner": "AVE",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_BLACK_MOUNDS": {
    "owner": "KVN",
@@ -121,9 +122,9 @@
    "note": "district of Zharr-Naggrund"
   },
   "STATE_BLIGHTED_MARSHES": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Skavenblight: Skaven have no tag in the frozen registry"
+   "owner": "XSG",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_BLIGHTWATER": {
    "owner": "BSB",
@@ -175,8 +176,9 @@
    "note": "Salignac-la-Rouge"
   },
   "STATE_CAUSEWAY_OF_ZHARR": {
-   "owner": "MZN",
-   "confidence": "inferred"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_CEFIRO_HILLS": {
    "owner": "CNT",
@@ -290,14 +292,14 @@
    "note": "Broken Leg Gully goblins; no roster tag"
   },
   "STATE_DRAKWALD_FOREST": {
-   "owner": "REI",
-   "confidence": "inferred",
-   "note": "Carroburg hub; province of the city is disputed in sources"
+   "owner": "CRB",
+   "confidence": "directed",
+   "note": "review: new Carroburg tag"
   },
   "STATE_EAGLE_S_PEAK": {
-   "owner": "KRD",
-   "confidence": "canon",
-   "note": "Kraka Ornsmotek hub"
+   "owner": "KOR",
+   "confidence": "directed",
+   "note": "review: own dwarf tag (Kraka Ornsmotek hub)"
   },
   "STATE_EASTERN_BADLANDS": {
    "owner": "BSB",
@@ -403,8 +405,9 @@
    "note": "registry note: Forest of Gloom; capital Harkon has no hub"
   },
   "STATE_FOREST_OF_SIGHS": {
-   "owner": "BJO",
-   "confidence": "inferred"
+   "owner": "SOT",
+   "confidence": "directed",
+   "note": "review: Sisters of Twilight"
   },
   "STATE_FOUNDRY_DISTRICT": {
    "owner": "MZN",
@@ -416,9 +419,9 @@
    "confidence": "inferred"
   },
   "STATE_FROZEN_COAST": {
-   "owner": "URS",
-   "confidence": "canon",
-   "note": "Ursfjord / Hall of Urslo hubs"
+   "owner": "GMD",
+   "confidence": "directed",
+   "note": "review: Goromadny tag"
   },
   "STATE_GATE_DISTRICT": {
    "owner": "MZN",
@@ -451,9 +454,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_GOROMADNY_COAST": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Keep of Asavar Kul; Kul host has no drawn state (12_eastern_steppes is out of scope)"
+   "owner": "GMD",
+   "confidence": "directed",
+   "note": "review: Goromadny tag"
   },
   "STATE_GRAVE_OF_CUILEUX": {
    "owner": "QUE",
@@ -475,8 +478,9 @@
    "note": "Ironskinz Hold hub"
   },
   "STATE_GRYPHON_WOOD": {
-   "owner": "OSM",
-   "confidence": "inferred"
+   "owner": "GRW",
+   "confidence": "directed",
+   "note": "review: wood elf tag"
   },
   "STATE_HEART_OF_ZHARRDUK": {
    "owner": "MZN",
@@ -484,9 +488,9 @@
    "note": "Zharr-Naggrund hub"
   },
   "STATE_HELL_PIT": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Skaven Hell Pit; no roster tag"
+   "owner": "XSF",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_HELSPIRE_COAST": {
    "owner": "SOR",
@@ -494,8 +498,9 @@
    "note": "Sortsvinaer port hub"
   },
   "STATE_HELSPIRE_MOUNTAINS": {
-   "owner": "SOR",
-   "confidence": "inferred"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_HIGH_PASS": {
    "owner": "VLG",
@@ -569,9 +574,9 @@
    "note": "Carcassonne hub"
   },
   "STATE_LAND_096": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "YEE",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_102": {
    "owner": "REM",
@@ -660,23 +665,24 @@
    "note": "capital collision: Volksgrad farm hub is in EASTERN_OBLAST (PRA)"
   },
   "STATE_LAND_346": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Goromadny Hold; no roster tag"
+   "owner": "VOL",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_LAND_347": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Fleshwarren: Skaven, no roster tag"
+   "owner": "XSE",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_370": {
-   "owner": "NLD",
-   "confidence": "inferred"
+   "owner": "LAU",
+   "confidence": "directed",
+   "note": "review: Laurelorn Forest wood elves"
   },
   "STATE_LAND_371": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "WYD",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_372": {
    "owner": "PON",
@@ -689,17 +695,19 @@
    "note": "Khazid Dawnbar ruin; no roster tag"
   },
   "STATE_LAND_376": {
-   "owner": "OSM",
-   "confidence": "inferred"
+   "owner": "XSA",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_377": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Skaven Hell Pit; no roster tag"
+   "owner": "XSD",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_380": {
-   "owner": "TRO",
-   "confidence": "inferred"
+   "owner": "DOL",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_LAND_382": {
    "owner": "unowned",
@@ -726,12 +734,14 @@
    "note": "Castle Sangasse"
   },
   "STATE_LAND_484": {
-   "owner": "MID",
-   "confidence": "inferred"
+   "owner": "BLV",
+   "confidence": "directed",
+   "note": "review: greenskin tag; Black Venom chosen from the \"The Black Pit\" hub name (change if you want another)"
   },
   "STATE_LAND_485": {
-   "owner": "REI",
-   "confidence": "inferred"
+   "owner": "XSB",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_487": {
    "owner": "REI",
@@ -739,14 +749,14 @@
    "note": "Helmgart hub"
   },
   "STATE_LAND_489": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "ARG",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_491": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "ANM",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_492": {
    "owner": "MOU",
@@ -754,9 +764,9 @@
    "note": "Mousillon hub"
   },
   "STATE_LAND_493": {
-   "owner": "GIS",
-   "confidence": "inferred",
-   "note": "Oak of Prophecy"
+   "owner": "OKP",
+   "confidence": "directed",
+   "note": "review: wood elf tag (Oak of Prophecy hub)"
   },
   "STATE_LAND_496": {
    "owner": "CNT",
@@ -780,19 +790,19 @@
    "note": "Chateau Lovarre"
   },
   "STATE_LAND_502": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "TRG",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_503": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "TLS",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_505": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "TLS",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_506": {
    "owner": "unowned",
@@ -1082,9 +1092,9 @@
    "note": "Pavona hub"
   },
   "STATE_MIRAMAR_HILLS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
+   "owner": "MGL",
+   "confidence": "directed",
+   "note": "review: new wood elf tag"
   },
   "STATE_MONTE_CASTELLO": {
    "owner": "DON",
@@ -1112,9 +1122,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_MOUNTAINS_OF_HEL": {
-   "owner": "KVE",
-   "confidence": "inferred",
-   "note": "Forbidden Citadel"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_MOUNT_AZGORH": {
    "owner": "GOR",
@@ -1247,8 +1257,9 @@
    "note": "greenskin wilderness; no clear roster owner"
   },
   "STATE_PALE_SISTERS": {
-   "owner": "COU",
-   "confidence": "inferred"
+   "owner": "SKZ",
+   "confidence": "directed",
+   "note": "review: Skullsmasherz"
   },
   "STATE_PARRAVON": {
    "owner": "PAR",
@@ -1326,8 +1337,9 @@
    "note": "Sartosa hub"
   },
   "STATE_SCHADENSUMPF": {
-   "owner": "MID",
-   "confidence": "inferred"
+   "owner": "NLD",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_SHATTERED_TEETH": {
    "owner": "BRN",
@@ -1352,9 +1364,9 @@
    "confidence": "inferred"
   },
   "STATE_SOLLAND": {
-   "owner": "SOL",
-   "confidence": "inferred",
-   "note": "era: Solland was destroyed and absorbed long before 2512; registry has SOL as a claimant. Capital Sudenburg has no hub"
+   "owner": "WIS",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_SOUR_CRAGS": {
    "owner": "BKA",
@@ -1430,9 +1442,9 @@
    "confidence": "inferred"
   },
   "STATE_TALSYN": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "TLS",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_THE_BLIGHT": {
    "owner": "BTO",
@@ -1483,9 +1495,9 @@
    "note": "capital collision: Karak Drazh is Black Crag, held by RFG in 2512; registry capital has no hub of its own"
   },
   "STATE_TORGOVANN": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "TRG",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_TRANTINE_HILLS": {
    "owner": "TRA",
@@ -1599,13 +1611,14 @@
    "confidence": "inferred"
   },
   "STATE_WEST_SYLVANIA": {
-   "owner": "SYL",
-   "confidence": "inferred",
-   "note": "low confidence: canon puts all of Sylvania under the von Carsteins; SYL (living population) needs a state, so it gets the Templehof march. Capital Drakenhof is VSY's"
+   "owner": "VSY",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_WEST_TALABECLAND": {
-   "owner": "TAL",
-   "confidence": "inferred"
+   "owner": "XSC",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_WHEATLANDS": {
    "owner": "UZK",
@@ -1637,14 +1650,14 @@
    "note": "Bloody Tusks Hold farm hub"
   },
   "STATE_WYDRIOTH": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "WYD",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_YI_EDRI_ETERNOS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Athel Loren (Wood Elves): no Wood Elf tag in the frozen registry"
+   "owner": "YEE",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_ZORN_DUM": {
    "owner": "UZK",

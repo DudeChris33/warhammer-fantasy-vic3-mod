@@ -1950,6 +1950,243 @@
    ],
    "proposed": true,
    "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "SOT": {
+   "name": "Sisters of Twilight (wood elves)",
+   "color": [
+    168,
+    228,
+    132
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "GRW": {
+   "name": "Gryphon Wood (wood elves)",
+   "color": [
+    138,
+    228,
+    60
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "LAU": {
+   "name": "Laurelorn Forest (wood elves)",
+   "color": [
+    60,
+    228,
+    60
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "OKP": {
+   "name": "Oak of Prophecy (wood elves)",
+   "color": [
+    126,
+    228,
+    108
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "MGL": {
+   "name": "Miramar Hills (wood elves)",
+   "color": [
+    186,
+    216,
+    150
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "WYD": {
+   "name": "Wydrioth (Athel Loren)",
+   "color": [
+    156,
+    228,
+    192
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "ARG": {
+   "name": "Argwylon (Athel Loren)",
+   "color": [
+    126,
+    228,
+    150
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "TLS": {
+   "name": "Talsyn (Athel Loren)",
+   "color": [
+    168,
+    228,
+    96
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "ANM": {
+   "name": "Anmyr (Athel Loren)",
+   "color": [
+    126,
+    186,
+    96
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "TRG": {
+   "name": "Torgovann (Athel Loren)",
+   "color": [
+    72,
+    228,
+    96
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "YEE": {
+   "name": "Yn Edri Eternos (Athel Loren)",
+   "color": [
+    126,
+    162,
+    108
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "KOR": {
+   "name": "Kraka Ornsmotek",
+   "color": [
+    156,
+    72,
+    48
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "KRV": {
+   "name": "Kraka Ravnsvake",
+   "color": [
+    132,
+    72,
+    42
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "KZF": {
+   "name": "Karak Ziflin",
+   "color": [
+    78,
+    54,
+    36
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "GMD": {
+   "name": "Goromadny",
+   "color": [
+    78,
+    78,
+    144
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "CRB": {
+   "name": "Carroburg",
+   "color": [
+    252,
+    162,
+    192
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "XSA": {
+   "name": "Skaven placeholder A (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    150,
+    150,
+    24
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSB": {
+   "name": "Skaven placeholder B (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    42,
+    102,
+    18
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSC": {
+   "name": "Skaven placeholder C (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    126,
+    120,
+    24
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSD": {
+   "name": "Skaven placeholder D (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    24,
+    66,
+    12
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSE": {
+   "name": "Skaven placeholder E (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    138,
+    150,
+    54
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSF": {
+   "name": "Skaven placeholder F (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    96,
+    90,
+    24
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSG": {
+   "name": "Skaven placeholder G (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    60,
+    72,
+    12
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
   }
  }
 }
