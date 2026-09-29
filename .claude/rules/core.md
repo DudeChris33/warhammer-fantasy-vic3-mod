@@ -23,7 +23,7 @@ Its layout mirrors this mod's (`common/`, `events/`, `gui/`, `interface/`, `gfx/
 
 A private, read-only GitHub mirror of vanilla's `common/`, `events/`, `localization/` and `map_data/` exists for machines where the Steam install isn't reachable; ask the user for its URL when needed. It is not part of this repo and nothing from it is committed here. Copy what's needed into this mod folder and modify the copy.
 
-External references (the Vic3 modding wiki, dev diaries) are fine for background, but `docs/*.log` wins on exact syntax and old dev diaries may be outdated.
+External references are fine for background — the Vic3 modding wiki (`https://vic3.paradoxwikis.com/Modding`) and Paradox dev diaries (design intent behind a mechanic). `docs/*.log` or the live vanilla install wins on exact syntax and current behaviour; older dev diaries predate patches, so flag one that may be outdated.
 
 ## Guardrails
 

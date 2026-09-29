@@ -156,6 +156,19 @@ sites still need. Restored on_actions go into the existing `common/on_actions/00
 beside their vanilla neighbours, keeping vanilla's `# Root = …` / `# scope:… =` header comments.
 Before adding any of them, grep `common/` for the id — a duplicate definition is a game-log error.
 
+## Vanilla cleanup rules (per folder)
+
+Vanilla files in folders **not** in `replace_paths` still load and reference objects the blanked folders no longer define — that is the `Invalid database object` class in `error.log`. Regenerate `error.log` (load the mod) before scoping cleanup; an old one is stale once `replace_paths` has grown.
+
+- **Producer folder** (in `replace_paths`): restore setting-neutral generic vanilla definitions, stripped of inner missing references. If a change touches most of a folder's files, add the folder to `replace_paths` and ship only the cleaned files rather than `REPLACE:` per definition.
+- **Real-world top-level definitions** (`unify_germany`, `meiji_restoration` — named for a real place, person or event): delete wholesale, whatever their inner contents.
+- **Keep** references to generic game structure the mod redefines under the *same* vanilla names (interest groups, ideologies, laws, pop types, goods, buildings, techs, generic AI strategies and traits): they dangle only until their folder is built, and that cascade is accepted — do not strip them.
+- **Strip** references to genuinely gone content — `cu:`, `rel:`, `c:XXX` tags, `je_`, `geographic_region_`, `sr:`, `heritage_`/`language_`, historical `has_template`. Replace a self-contained condition with an inert `always = no`/`always = yes` (keeps the brace structure).
+- The keep/remove test is the resolve-or-dangle criterion in the doctrine below. Real-world specifics are our-world proper nouns (France, the Eiffel Tower, the Holy Roman Empire, the Springtime of Peoples, `character_role_emperor_of_japan`, `geographic_region_europe`); generic members (`has_role_of_type = general`, coups, regencies, government types) stay. The same family can sit on both sides: `gov_dual_monarchy` (Austria-Hungary) went while generic government types stay.
+- For entries this mod will **repurpose** (reused `gfx/` and script), the neutralize doctrine below overrides the older "delete the gated block" step: neutralize the leaf, keep the scaffolding.
+- **Portraits/clothing exception (Chris, 2026-08-27):** Warhammer humans look like real humans, so genes, ethnicities and clothing are not redone. `common/genes`, `dna_data`, `ethnicities` and `culture_graphics` are deliberately *not* in `replace_paths` (vanilla's load). `scripted_triggers` is blanked, but `common/scripted_triggers/00_clothes_triggers.txt` ships ~165 inert `NAME = { always = no }` stubs so the `*_clothes*` triggers used by `portrait_modifiers` stay defined without real-world culture/tag refs; humans fall through to default clothing. Never overwrite that file with vanilla's.
+- Progress lives on the board (epic #3292 and its children), not here.
+
 ## `gfx/` real-world-reference keep-list + neutralization
 
 The authored `gfx/` override files — `gfx/portraits/portrait_modifiers/01_{accessories,beards,
@@ -205,8 +218,9 @@ always false, and so is `always = no`, so every boolean wrapper keeps its truth 
 (`NOT { always = no }` stays always-true, an `OR`-branch stays dead, a required gate stays
 never-firing) — and it also fixes the load-errors that strong `cu:`/`c:` links throw. A
 `c:<TAG> ?= { … }` scope-switch block collapses to a single `always = no` (naming the tag in a
-comment). **Do not delete whole variants/modifiers/branches** — that was the earlier approach and was
-reverted. Repurposing later is a one-line swap of `always = no` for the real WH trigger.
+comment). **Do not delete whole variants/modifiers/branches** — that was the earlier approach and Chris
+reversed it mid-build (#3662, 2026-09-06). Tag each site `# [#3662] was: <original>` (or the current item)
+so the original can be restored. Repurposing later is a one-line swap of `always = no` for the real WH trigger.
 
 ### Verification (no offline validator exists for gfx script)
 
