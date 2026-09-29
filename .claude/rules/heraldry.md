@@ -64,6 +64,10 @@ mod's own files gets no coat of arms and no flag.
 Both files are required together — a COA with no matching `flag_definition`
 entry parses cleanly but never renders in-game.
 
+## Colour palette
+
+`common/named_colors` is listed in `replace_paths`. `00_coa_colors.txt` is the port of vanilla's palette; `01_wh_coa_colors.txt` holds the mod-native tinctures (`colors = { name = hsv360 { h s v } }`, e.g. `morrslieb_green`, `ice_blue`, `orc_green`). Append a new tincture to `01_wh_coa_colors.txt` only when a region's heraldry needs a colour the ported palette doesn't cover, with a comment naming the item and region that needed it. Every `color1`/`color2`/`color3` name in a COA block must exist in one of the two files.
+
 ## Greenskin house style (Badlands/Orcs & Goblins)
 
 Established for `common/coat_of_arms/coat_of_arms/06_badlands.txt` and binding on
