@@ -33,7 +33,7 @@ Nothing in `docs/*.log` documents the `common/cultures` database — this schema
 - `religion = <id>` — a religion id from `common/religions/`.
 - `heritage = <id>` and `language = <id>` — **separate top-level fields**, each a single discrimination-trait id from `common/discrimination_traits/`. They are NOT wrapped in a `traits = { }` block — that shape was tried and is rejected outright by the parser.
 - `traditions = { }` — required; an empty block is currently valid and is what this mod uses.
-- `obsessions = { }` — goods ids; empty until this mod authors `common/goods/`.
+- `obsessions = { }` — goods ids; empty until this mod defines its own goods (`common/goods/` is not in `replace_paths`, so vanilla's goods still load).
 - Name lists (`male_common_first_names`, `female_common_first_names`, `noble_last_names`, `common_last_names`), `graphics` and `ethnicities` using vanilla portrait/graphics ids (custom art is out of scope for now).
 
 Every culture additionally requires, elsewhere:
@@ -71,8 +71,8 @@ The full vanilla set is: `animist`, `atheist`, `catholic`, `confucianism`, `copt
 ## `common/country_definitions/` + `common/country_formation/` entry schema
 
 Neither database is documented in `docs/*.log`; these shapes were confirmed against the vanilla
-install during scoping. Neither folder is listed in `.metadata/metadata.json`'s `replace_paths`, so
-vanilla's own tags still load and this mod's files only *add* to them.
+install during scoping. **Both folders are listed in `.metadata/metadata.json`'s `replace_paths`**, so
+vanilla's own tags do not load — a tag exists only if this mod's files define it.
 
 Files follow the same `NN_<region>.txt` shape as `common/cultures/` — one file per Old World region,
 named for the region it covers (`02_empire.txt`), with formables split into a sibling
@@ -105,7 +105,7 @@ TAG = {
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see the Naming section above; no longer a matching-region file).
 - **`capital` is deliberately omitted** on every tag this mod ships until it has a real
-  `STATE_*` to point at (land state-regions are now emitted — see `.claude/rules/testing.md` —
+  `STATE_*` to point at (land state-regions are emitted — see [testing.md](testing.md) —
   but not every tag has had its capital assignment revisited). Record the intended
   capital as a `# capital: <Name> — TODO` comment where it's still missing.
 
@@ -125,8 +125,9 @@ TAG = {
 ```
 
 Do **not** add `unification_play`, `leadership_play`, `geographic_region` or any other
-major-formation key until `common/diplomatic_plays` and `common/geographic_regions` are authored —
-both are currently blanked via `replace_paths` and hold no entries, so a reference would dangle.
+major-formation key until the matching plays and regions are authored. `common/diplomatic_plays` now
+holds 31 generic plays but none for unification or leadership, and `common/geographic_regions` is still
+empty, so such a reference would dangle.
 `is_country_type` and `country_has_primary_culture` are both confirmed country-scope triggers in
 `docs/triggers.log`.
 

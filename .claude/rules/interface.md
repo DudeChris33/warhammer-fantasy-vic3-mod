@@ -18,7 +18,7 @@ paths:
 
 - `gui/` — custom widget definitions (`.gui`) that extend or override base-game UI.
 - `interface/` — `.gfx` files declaring sprite/icon references used by `gui/` and script (e.g. building/technology icons).
-- `gfx/` — the actual art assets, split by type: `flags/`, `interface/icons/`, `loadingscreens/`, `map/`, `models/`, `particles/`, `portraits/`.
+- `gfx/` — the actual art assets, split by type: `coat_of_arms/`, `flags/`, `interface/icons/`, `loadingscreens/`, `map/`, `models/`, `particles/`, `portraits/`.
 
 ## Patterns
 
@@ -34,4 +34,4 @@ paths:
 
 `gfx/` is **not** blankable via `replace_paths` (only `common/`, `events/` and `map_data/` are eligible), so vanilla's gfx always merges underneath and this mod's files only override specific vanilla filenames. Never delete an override: that re-exposes vanilla's real-world references and reverts prior fixes. The doctrine itself (criterion, per-family authority table, `always = no # was:`) lives in [scripting.md](scripting.md).
 
-Authored files: `gfx/portraits/portrait_modifiers/01_{accessories,beards,clothes,hairstyles,headgear}.txt` and `gfx/map/city_data/city_types/*` (10). `city_types/*` carry no live real-world refs — the 3–4 landmark buildings (`building_eiffel_tower`, `building_suez_canal`, `building_panama_canal`, `building_victoria_terminus`) were removed and survive only in each file's header comment; read-through only, no edits.
+Authored files: `gfx/portraits/portrait_modifiers/01_{accessories,beards,clothes,hairstyles,headgear}.txt` (5), `gfx/portraits/portrait_animations/animations.txt`, `gfx/map/front_entities/*` (3) and `gfx/map/city_data/city_types/*` (10). The map-keyed ones under `gfx/map/` (spline network, locators, fortifications) are covered in [testing.md](testing.md). `city_types/*` carry no live real-world refs — the 3–4 landmark buildings (`building_eiffel_tower`, `building_suez_canal`, `building_panama_canal`, `building_victoria_terminus`) were removed and survive only in each file's header comment; read-through only, no edits.

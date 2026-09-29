@@ -2,7 +2,7 @@
 
 A total-conversion mod for Victoria 3 that reskins the base game into the Warhammer Fantasy setting, using Clausewitz script (`.txt`), the PDX GUI format (`.gui`) and localization YAML (`.yml`). The supported game version is `supported_game_version` in `.metadata/metadata.json`. The mod is multiplayer-synchronized (`multiplayer_synchronized` in the same file), so scripted content must stay deterministic across clients.
 
-**Scope.** Only the Old World land regions are drawn out; all oceans are modelled globally; land outside the Old World is a placeholder state per continent, seeded from `tools/config/out_of_scope_continents.json` (each placeholder is one state with impassable provinces).
+**Scope.** Only the Old World land regions are drawn out; all oceans are modelled globally; land outside the drawn Old World is emitted as placeholder regions (seeded from `tools/config/out_of_scope_continents.json`; `placeholder_regions` in `tools/derived/land_regions_index.json` counts them), not as playable content.
 
 ## How guidance is organised
 
