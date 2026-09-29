@@ -128,7 +128,8 @@ STRATEGIC_REGIONS_DIR = MOD_ROOT / "common" / "strategic_regions"
 #: new ones without the duplicate-key error two same-named vanilla-namespace
 #: files would raise.
 LOC_PATH = MOD_ROOT / "localization" / "replace" / "english" / "map" / "states_l_english.yml"
-HUB_LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_hub_names_l_english.yml"
+# replace/ so STATE_AQUITAINE (also a vanilla state) overrides vanilla's HUB_NAME_STATE_AQUITAINE_* instead of erroring as a duplicate key
+HUB_LOC_PATH = MOD_ROOT / "localization" / "replace" / "english" / "map" / "wh_hub_names_l_english.yml"
 BUILDINGS_DIR = MOD_ROOT / "common" / "buildings"
 
 BOM = b"\xef\xbb\xbf"
