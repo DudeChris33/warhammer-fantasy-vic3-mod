@@ -8,7 +8,7 @@ A total-conversion mod for Victoria 3 that reskins the base game into the Warham
 
 Two files are always loaded: this one and [core.md](.claude/rules/core.md) (trust order, vanilla-install rules, **all guardrails**, the build/test gate). Everything else is a **guide** in `.claude/rules/` with a `paths:` frontmatter, loaded when a session reads a matching file with the Read tool.
 
-Auto-loading and the routing table below are a starting point, not a limit: read any other guide whenever you think it would help, and read a neighbour when your work touches its area (a culture needs the localization guide; a map change needs localization for generated names). If you reach files through Bash (`cat`, `sed`) or start with a Write without a Read, a guide may not have loaded — open it yourself.
+Auto-loading and the routing table below are a starting point, not a limit: read any other guide whenever you think it would help, and read a neighbour when your work touches its area (a culture needs the localization guide; a map change needs localization for generated names). Observed 2026-09-29 (#5850 canary probes): a Read of a matching file loads its guides in the main session and in sub-agents; Bash `cat`/`head` and a Write with no prior Read load nothing — if you reach files that way, open the guide yourself.
 
 | Working on | Read |
 |---|---|
