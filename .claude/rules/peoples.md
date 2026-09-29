@@ -23,7 +23,7 @@ paths:
 
 ## Naming
 
-- `common/cultures/` instead groups by RACE/CULTURE-GROUP, not by region: a plain descriptive snake_case filename per group (`norscan_humans.txt`, `imperial_humans.txt`, `dwarven.txt`, `greenskin.txt`, `vampire.txt`, `chaos_dwarf.txt`, `nehekharan_araby.txt`, etc.), with every culture belonging to that race/group defined inside it regardless of which region's states its population actually lives in (Chris, 2026-09-03; supersedes this folder's original `NN_<region>.txt` layout from board item #3405). A culture id is global and referenced by other files (e.g. `common/country_definitions/`) purely by id, so this reshuffle never touches those ids — only which file defines them.
+- `common/cultures/` groups by RACE/CULTURE-GROUP, not by region (the culture foundation itself uses zero-padded `NN_<topic>.txt` files — see [scripting.md](scripting.md), *Naming*): a plain descriptive snake_case filename per group (`norscan_humans.txt`, `imperial_humans.txt`, `dwarven.txt`, `greenskin.txt`, `vampire.txt`, `chaos_dwarf.txt`, `nehekharan_araby.txt`, etc.), with every culture belonging to that race/group defined inside it regardless of which region's states its population actually lives in (Chris, 2026-09-03; supersedes this folder's original `NN_<region>.txt` layout from board item #3405). A culture id is global and referenced by other files (e.g. `common/country_definitions/`) purely by id, so this reshuffle never touches those ids — only which file defines them.
 
 ## `common/cultures/` entry schema
 
@@ -74,7 +74,7 @@ Neither database is documented in `docs/*.log`; these shapes were confirmed agai
 install during scoping. **Both folders are listed in `.metadata/metadata.json`'s `replace_paths`**, so
 vanilla's own tags do not load — a tag exists only if this mod's files define it.
 
-Files follow the same `NN_<region>.txt` shape as `common/cultures/` — one file per Old World region,
+Files follow an `NN_<region>.txt` shape, one file per Old World region (unlike `common/cultures/`, which groups by race),
 named for the region it covers (`02_empire.txt`), with formables split into a sibling
 `common/country_formation/NN_<region>_formables.txt`. The tag roster itself is frozen in
 `planning/tag_registry.md`; check a code there before authoring it.
@@ -103,7 +103,7 @@ TAG = {
 - `color` uses the **brace** form `{ R G B }` (0-255 integers), not `common/cultures/`' `rgb{ }`.
   Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
-- `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see the Naming section above; no longer a matching-region file).
+- `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
 - **`capital` is deliberately omitted** on every tag this mod ships until it has a real
   `STATE_*` to point at (land state-regions are emitted — see [testing.md](testing.md) —
   but not every tag has had its capital assignment revisited). Record the intended
