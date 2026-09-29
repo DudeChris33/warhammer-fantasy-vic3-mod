@@ -124,7 +124,8 @@
 			"events/soi_events",
 			"events/tech_events",
 			"map_data",
-			"map_data/state_regions"
+			"map_data/state_regions",
+			"tools/scripted_tests"
 		]
 	}
 }
