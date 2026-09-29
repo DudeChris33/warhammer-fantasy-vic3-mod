@@ -5,6 +5,8 @@ tools: Bash, Read, Grep, Glob
 model: sonnet
 ---
 
+**Start from** `.claude/rules/core.md` and `.claude/rules/scripting.md`; read any other guide that helps (e.g. `interface.md` for `gfx/` changes).
+
 Review recent Warhammer Fantasy Overhaul changes for multiplayer-sync and content-integrity concerns (this is a static Clausewitz-script game mod with no runtime execution or network surface, so "security" here means protecting the mod's `multiplayer_synchronized: true` guarantee and distribution integrity).
 
 ## Steps

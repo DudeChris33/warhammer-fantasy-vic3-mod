@@ -5,7 +5,9 @@ tools: Bash, Read, Edit, Grep, Glob
 model: sonnet
 ---
 
-Update Warhammer Fantasy Overhaul documentation to reflect recent script/content changes.
+Update Warhammer Fantasy Overhaul documentation to reflect recent script/content changes. **Start from** `.claude/rules/docs.md` (mirror sync rules); read any other guide that helps.
+
+You have no MCP: in your summary, list which `.claude/rules/*.md` files you edited so the caller can re-run `upsert_workspace_doc` for their `rules-<name>` slugs.
 
 ## Steps
 
@@ -13,8 +15,11 @@ Update Warhammer Fantasy Overhaul documentation to reflect recent script/content
 
 2. Determine which docs need updating based on what changed:
    - New/changed pattern in `common/` or `events/` worth capturing for future work → `.claude/rules/scripting.md`
+   - New/changed culture, religion, trait or country convention → `.claude/rules/peoples.md`; coat-of-arms/flag convention → `heraldry.md`
    - New/changed localization convention → `.claude/rules/localization.md`
    - New/changed `gui/`/`interface/`/`gfx/` convention → `.claude/rules/interface.md`
+   - New/changed `map_data/`, `tools/` or `sources/` convention → `.claude/rules/testing.md`
+   - A guardrail (costly or irreversible if breached) → `.claude/rules/core.md`, which is always loaded
    - Note: `docs/*.log` are game-generated — never edit them here.
 
 3. Read existing docs before editing — match the existing style and format.
@@ -25,10 +30,10 @@ Update Warhammer Fantasy Overhaul documentation to reflect recent script/content
 
 ## Doc map (quick lookup)
 
-- `CLAUDE.md` — project map
-- `.claude/rules/core.md`, `scripting.md`, `localization.md`, `interface.md`, `testing.md`, `docs.md` — per-domain conventions
+- `CLAUDE.md` — project map, guide routing table
+- `.claude/rules/core.md` — always-loaded guardrails; `scripting.md`, `peoples.md`, `heraldry.md`, `localization.md`, `interface.md`, `testing.md` (the map guide), `docs.md` — path-scoped per-domain guides
 - `docs/*.log` — read-only, game-generated script reference
-- Work tracking lives on the **maestro board** (via the maestro MCP), updated by the `/maestro-*` skills — not this agent, and not `planning/` (which now holds only review-panel targets, backlog/rejected notes, and gitignored `.cache/` scratch)
+- Work tracking lives on the **maestro board** (via the maestro MCP), updated by the `/maestro-*` skills — not this agent, and not `planning/` (which now holds only review-panel targets, `tag_registry.md`, and gitignored `.cache/` scratch)
 
 ## Rules
 

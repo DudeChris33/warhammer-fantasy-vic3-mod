@@ -37,8 +37,9 @@ From `$ARGUMENTS`. Accept any of:
 - **A commit, range, or `working`** — review the diff. Default to
   `git diff HEAD~1` for a single commit, `git diff` for `working`.
 - **A free-text question** — a design fork the user wants five opinions on.
-- **Empty** — list the open files in `planning/issues/` and `planning/requests/`
-  plus `git status`, and ask which. Do not guess.
+- **A maestro board item id** — read its workspec (`## Approach`, legacy `## Plan`) through the maestro MCP and review that.
+- **Empty** — list the files in `planning/requests/` and the in-flight board items
+  (`workspace_queue`, stages planned/building/review) plus `git status`, and ask which. Do not guess.
 
 An `--only <roles>` suffix (comma-separated, e.g. `--only lore,cartography`) runs a
 subset. Map loose names onto the agents; if a name is ambiguous, ask.
@@ -56,6 +57,9 @@ to every panelist:
 
 ## Files to read
 <exact paths — the target, the plan section governing it, related issues>
+
+## Guides to start from
+<the `.claude/rules/` guides the target touches (routing table in `CLAUDE.md`), plus the lane defaults: loremaster → `testing.md` (Name citations) + `peoples.md`; cartographer, geographer → `testing.md`; vic3-modding-expert → `scripting.md`, `localization.md`, `testing.md`; game-designer → `testing.md`, `peoples.md`. Every panelist may read any other guide that helps.>
 
 ## Artifacts to open
 <exact paths to every render/bitmap that must be looked at, or "none exist yet — say so">
@@ -88,7 +92,7 @@ sending the panel to look at nothing.
 ### 3. Spawn the panel
 
 Spawn all selected agents **in a single message** so they run concurrently. Give
-each the same scope brief plus one line naming its lane.
+each the same scope brief plus one line naming its lane and the guides that lane starts from.
 
 Wait for every panelist to report. **Never synthesize partial results**, and never
 write or predict a panelist's findings yourself — if the user asks before the
