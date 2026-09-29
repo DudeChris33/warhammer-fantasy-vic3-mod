@@ -484,9 +484,12 @@ def normalize_assignment(assignment: dict, layout: Layout) -> dict:
 # ---------------------------------------------------------------------------
 
 def review_render(painted: np.ndarray, layout: Layout, prov_owners: list[str], legend: Legend,
-                  scale: float = 0.5, crop: tuple[int, int, int, int] | None = None):
+                  scale: float = 0.5, crop: tuple[int, int, int, int] | None = None,
+                  numbers: bool = False):
     """Annotated review picture: the painted map at ``scale`` (nearest), tag codes
     at each drawn state's centroid, and a legend panel of the owners in use.
+    With ``numbers`` each label gains a second line: the state's numeric ``id``
+    (the ``id =`` in ``map_data/state_regions/``, also in ``state_ownership.json``).
 
     ``crop`` is ``(x0, y0, x1, y1)`` in canvas pixels (default: the bounding box
     of the drawn land plus a margin). Returns a PIL image."""
@@ -535,6 +538,9 @@ def review_render(painted: np.ndarray, layout: Layout, prov_owners: list[str], l
         ink = (0, 0, 0) if (0.299 * r + 0.587 * g + 0.114 * bl) > 140 else (255, 255, 255)
         tw = draw.textlength(code, font=font)
         draw.text((px - tw / 2, py - 6), code, fill=ink, font=font)
+        if numbers:
+            num = str(layout.states[si].id)
+            draw.text((px - draw.textlength(num, font=font) / 2, py + 5), num, fill=ink, font=font)
 
     entries = sorted(used.items())
     col_w, row_h = 210, 16
