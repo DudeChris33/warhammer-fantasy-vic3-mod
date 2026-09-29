@@ -12,7 +12,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
 
 | Working on | Read |
 |---|---|
-| map, tools, sources, strategic regions, straits, map loc | [testing.md](.claude/rules/testing.md) (+ [localization.md](.claude/rules/localization.md)) |
+| map, mapgen, sources, strategic regions, straits, map loc | [testing.md](.claude/rules/testing.md) (+ [localization.md](.claude/rules/localization.md)) |
 | cultures, religions, traits, countries, formables, tag registry | [peoples.md](.claude/rules/peoples.md) + [localization.md](.claude/rules/localization.md) (+ [heraldry.md](.claude/rules/heraldry.md) for new tags) |
 | coats of arms, flags, colour palette | [heraldry.md](.claude/rules/heraldry.md) (+ [peoples.md](.claude/rules/peoples.md)) |
 | other `common/`, `events/`, vanilla restoration, neutralizing real-world refs anywhere | [scripting.md](.claude/rules/scripting.md) |
