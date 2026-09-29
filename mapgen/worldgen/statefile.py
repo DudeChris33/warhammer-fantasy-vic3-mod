@@ -115,11 +115,19 @@ def pick_hubs(
 
     if state.coastal and "port" not in hubs:
         coastal_candidates = [p for p in pool if p.coastal]
-        if not coastal_candidates:
-            raise HubError(f"{state.key}: coastal state has no coastal province for a port")
-        port = max(coastal_candidates, key=lambda p: (p.area, tuple(-c for c in p.color)))
-        hubs["port"] = port.color
-        pool.remove(port)
+        if coastal_candidates:
+            port = max(coastal_candidates, key=lambda p: (p.area, tuple(-c for c in p.color)))
+            hubs["port"] = port.color
+            pool.remove(port)
+        else:
+            # Every passable coastal province is already held by a listed
+            # settlement: stack the port onto the largest of them rather than
+            # failing (legal, as in stack_hubs; the listed hub keeps its slot).
+            held_coastal = [p for p in candidates if p.coastal]
+            if not held_coastal:
+                raise HubError(f"{state.key}: coastal state has no coastal province for a port")
+            port = max(held_coastal, key=lambda p: (p.area, tuple(-c for c in p.color)))
+            hubs["port"] = port.color
 
     if "city" not in hubs:
         state_centroid = _state_centroid(pool, width, wrap_x)
