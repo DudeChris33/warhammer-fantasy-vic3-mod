@@ -7,7 +7,7 @@
 - Move completed items to Archive.
 
 ## Current Focus
-- Map pipeline: full regen landed (`54ef8dd`, 2026-09-27) plus adjacencies/straits (`82b3a06`); #5744 (canal straits) and #5525 (rebuild the map editor pack — likely load-crash cause) are the live map items.
+- Load crash solved (2026-09-28, #5525): the game crashed because the starting gamestate had zero countries (empty `common/history/*`), not because of the map or pack. Next: author real `common/history/countries` + `states` (then pops/buildings). The editor repack is committed (`209d199`); #5744 (canal straits) is the other live map item.
 - Docs restructure #5850: slim core (`CLAUDE.md` + `core.md`) plus path-scoped guides in `.claude/rules/`; see its board item for the audit report.
 - Content epics in flight: bespoke coats of arms (#3621 children), lore hubs (#3663 children), impassable land (#3704).
 
@@ -23,6 +23,9 @@
 ## Open Questions
 - Do path-scoped guides load for sub-agents and Bash reads? (#5850 canary probes answer this.)
 - Renaming `testing.md` → `map.md` and `interface.md` → `gfx.md` once the open items citing the old names close.
+- Vanilla Earth paint (`detail_index`, `colormap`, `land_mask`, `flatmap`, vegetation) still under our map; generate our own via `mapgen`? Unfiled.
+- What is `!Out.Contains( 616u )` (non-fatal, still logged after script load)?
 
 ## Archive
+- Map editor pack rebuilt and committed; load crash root-caused (empty gamestate), pack hypothesis falsified (#5525, 2026-09-28).
 - Rules split into core + eight guides, drift audit against code, agents/skills repointed (#5850, 2026-09-29).

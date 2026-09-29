@@ -302,4 +302,32 @@ Commit `packed_heightmap.png`, `indirection_heightmap.png`,
    Fix the **source** (a generator, the registration data, or a state/terrain
    emitter), never the `error.log` or a game-owned file.
 
+**Result (2026-09-28, board #5525): boot gate PASSED after a different fix.** The pack was
+never the cause of the load crash. The crash was an empty starting gamestate (no countries),
+which also made the editor itself uncatchable; see `.claude/rules/testing.md`, "Load crash
+root cause". Facts learned running this section:
+
+- **The editor needs a loadable gamestate.** It builds the same starting gamestate as a new
+  game, so with zero countries in `common/history/` it crashes about 50 seconds after script
+  load, before any click. Ship at least one country that owns a state before trying §1.
+- **What a Pack + Save writes into the mod** (not just the four pack files): re-encoded
+  `heightmap.png` and `provinces.png` (verified pixel-identical to the generator output),
+  rewritten `state_regions/99_seas.txt`, the five `generated_map_object_locators_*.txt` and
+  `fortification_locators.txt`, a 36-byte `spline_network.splnet`, and about 320 untracked
+  `gfx/map/map_object_data/*.bin` files. Commit only the four pack files. Restore the tracked
+  rewrites with `git restore --source=HEAD --worktree -- <paths>`; delete the untracked
+  `.bin` files with `git clean -f -- 'gfx/map/map_object_data/*.bin'`. A pixel comparison
+  (`numpy`/`PIL`, LFS-smudged HEAD copy) is the way to prove a re-encode lost nothing.
+- **`heightmap.heightmap` is the editor's output, `should_wrap_x=no`, and stays unedited.** The
+  hand-edited `wrap=yes` from `1d66fdd` was not what made the game crash; `default.map`'s
+  `wrap_x = yes` is what matters for wrapping.
+- **The base install was not damaged.** *Verify integrity* re-acquired about 20 files but every
+  `game/map_data/` hash was unchanged; the July file dates come from a Steam patch. Judge by
+  hash, never by timestamp, and note that `git status` in the mod cannot see base-game edits.
+- **The pack looks stale or wrong in the editor for a separate reason.** The materials, colour
+  map, land mask, flat map and vegetation placement still come from vanilla's Earth layers
+  under `gfx/map/` (`terrain/detail_index.tga`, `detail_intensity.tga`, `textures/colormap.dds`,
+  `flatmap*.dds`, `land_mask.dds`, `dynamic_masks/exclusion_mask.dds`,
+  `map_object_data/generated/*`), which the mod does not override. A repack cannot fix those.
+
 <!-- ## S5 — object locators + spline regeneration -->
