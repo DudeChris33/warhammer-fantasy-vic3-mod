@@ -1,0 +1,181 @@
+{
+  "region": "17_ulthuan",
+  "baseline": {
+    "tech_tier": 3,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_national_militia",
+      "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_professional_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_peasant_proprietorship",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_charitable_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slavery_banned",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_devout"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "wine"
+    ],
+    "institutions": {
+      "institution_schools": 1,
+      "institution_health_system": 1
+    },
+    "expected_government_type": "gov_kingdom",
+    "suggested_ig_names": {
+      "ig_landowners": "Princes and Noble Houses",
+      "ig_devout": "Priesthoods of the Elven Gods"
+    },
+    "source": "canon: WFB 8e High Elves army book (Phoenix King and princes of the Ten Kingdoms; citizen-militia levy of every able elf; Sea Guard; Isha healers; closed to outsiders)",
+    "why": "Each kingdom is a hereditary realm of princely houses whose every able adult serves in the militia, backed by a great navy, healers and temple-schools, closed to outsiders, with elven craftsmanship at tier 3"
+  },
+  "tags": {
+    "AVL": {
+      "confidence": "high",
+      "laws": {
+        "lawgroup_governance_principles": "law_theocracy"
+      },
+      "ruling_igs": [
+        "ig_devout",
+        "ig_landowners"
+      ],
+      "expected_government_type": "gov_theocratic_oligarchy",
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: WFB 8e High Elves (Avelorn: the Everqueen rules as Isha's priestess-queen)",
+          "why": "A priestess-monarch heads a sacred forest realm."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB 8e High Elves (Avelorn's sisterhood of Isha)",
+          "why": "The priesthood first."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at kingdom tier."
+        }
+      }
+    },
+    "CAL": {
+      "confidence": "high",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e High Elves (Caledor: Dragon Princes and dragon-riding nobility)",
+          "why": "A warrior aristocracy leads the realm."
+        }
+      }
+    },
+    "CHR": {
+      "confidence": "high",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e High Elves (Chrace: White Lions guard the Phoenix Kings; hunters and warriors)",
+          "why": "A warrior realm."
+        }
+      }
+    },
+    "COT": {
+      "confidence": "low",
+      "note": "Eastern coastal realm; baseline unchanged (source thin)."
+    },
+    "ELL": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_rural_folk"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e High Elves (Ellyrion: horse-country of the Reaver Knights)",
+          "why": "Horse-lords and pasture herders."
+        }
+      }
+    },
+    "LOT": {
+      "confidence": "high",
+      "laws": {
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_migration": "law_migration_controls"
+      },
+      "ruling_igs": [
+        "ig_petty_bourgeoisie",
+        "ig_landowners"
+      ],
+      "justify": {
+        "laws.lawgroup_trade_policy": {
+          "source": "canon: WFB 8e High Elves (Lothern is Ulthuan's gateway port; Sea Lords trade with the world)",
+          "why": "The one open port of a closed island."
+        },
+        "laws.lawgroup_migration": {
+          "source": "canon: WFB 8e High Elves (foreign merchants are admitted at Lothern)",
+          "why": "Controlled, not closed, borders at the gateway."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB 8e High Elves (the Sea Lords of Lothern)",
+          "why": "Merchant Sea Lords share power with the princes."
+        }
+      }
+    },
+    "NGY": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e High Elves (Nagarythe's Shadow Warriors)",
+          "why": "A ruined, war-hardened realm led by its warriors."
+        }
+      }
+    },
+    "SAP": {
+      "confidence": "high",
+      "ruling_igs": [
+        "ig_intelligentsia",
+        "ig_landowners"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e High Elves (Saphery, land of mages: the White Tower and the Loremasters)",
+          "why": "The mage-colleges are the ruling scholars."
+        }
+      }
+    },
+    "TIR": {
+      "confidence": "medium",
+      "note": "Drowned charioteer realm; baseline unchanged."
+    },
+    "YVR": {
+      "confidence": "medium",
+      "note": "Frontier realm on the Sea of Chaos; baseline unchanged."
+    }
+  }
+}
