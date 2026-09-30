@@ -1,0 +1,157 @@
+{
+  "region": "09_southlands",
+  "baseline": {
+    "tech_tier": 7,
+    "laws": {
+      "lawgroup_army_model": "law_warrior_caste",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_consumption_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_no_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_no_womens_rights",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_no_migration_controls",
+      "lawgroup_slavery": "law_slave_trade",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_armed_forces",
+      "ig_devout"
+    ],
+    "tax_level": "low",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {},
+    "expected_government_type": "gov_principality",
+    "suggested_ig_names": {
+      "ig_armed_forces": "Boyz and Warbosses",
+      "ig_devout": "Shamans of Gork and Mork"
+    },
+    "source": "canon: WFB 8e Orcs & Goblins (Savage Orcs of the Southlands jungles: tribes led by Big Bosses and Shamans, fetish-and-war-paint cultists); TW:WH Wurrzag",
+    "why": "Savage Orc tribes are the same warband package as other greenskins at tier 7 (no technology), led by a Big Boss and a shaman",
+    "extra_techs": []
+  },
+  "profiles": {
+    "temple_city": {
+      "tech_tier": 5,
+      "laws": {
+        "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+        "lawgroup_governance_principles": "law_theocracy",
+        "lawgroup_education_system": "law_religious_schools",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_slavery": "law_slavery_banned"
+      },
+      "ruling_igs": [
+        "ig_devout",
+        "ig_armed_forces"
+      ],
+      "taxed_goods": [],
+      "expected_government_type": "gov_theocratic_dictatorship",
+      "suggested_ig_names": {
+        "ig_devout": "Slann Mage-Priests and Skink Priests",
+        "ig_armed_forces": "Saurus Legions"
+      },
+      "source": "canon: WFB 8e Lizardmen army book (Slann Mage-Priests rule temple-cities through Skink priests, Saurus spawn as the warrior host, isolated by the Old Ones' design)",
+      "why": "Lizardmen temple-cities are ruled absolutely by a Slann theocracy with a Saurus warrior caste"
+    }
+  },
+  "tags": {
+    "BCB": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions.",
+      "expected_government_type": "gov_absolute_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    },
+    "BHZ": {
+      "confidence": "medium",
+      "note": "Wurrzag da Great Green Prophet's tribe: shaman-led, but no institutional change.",
+      "expected_government_type": "gov_absolute_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    },
+    "HHZ": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions.",
+      "expected_government_type": "gov_absolute_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    },
+    "SNK": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions.",
+      "expected_government_type": "gov_absolute_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    },
+    "TPK": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions.",
+      "expected_government_type": "gov_absolute_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    },
+    "WSK": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions.",
+      "expected_government_type": "gov_absolute_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    },
+    "WWG": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions.",
+      "expected_government_type": "gov_absolute_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    },
+    "ZLA": {
+      "profile": "temple_city",
+      "confidence": "medium",
+      "note": "Zlatlan: Southlands temple-city."
+    }
+  }
+}
