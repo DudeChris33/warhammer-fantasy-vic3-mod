@@ -1,0 +1,162 @@
+{
+  "region": "19_lustria",
+  "baseline": {
+    "tech_tier": 5,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_warrior_caste",
+      "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_theocracy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_consumption_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_no_womens_rights",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slavery_banned",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_devout",
+      "ig_armed_forces"
+    ],
+    "tax_level": "low",
+    "taxed_goods": [],
+    "institutions": {},
+    "expected_government_type": "gov_theocratic_dictatorship",
+    "suggested_ig_names": {
+      "ig_devout": "Slann Mage-Priests and Skink Priests",
+      "ig_armed_forces": "Saurus Legions"
+    },
+    "source": "canon: WFB 8e Lizardmen army book (Slann Mage-Priests rule temple-cities through Skink priests, Saurus spawn as the warrior host, isolated by the Old Ones' design)",
+    "why": "Lizardmen temple-cities are ruled absolutely by a Slann theocracy with a Saurus warrior caste, isolated, without markets or schooling beyond temple lore"
+  },
+  "profiles": {
+    "ruined_temple_city": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_education_system": "law_no_schools"
+      },
+      "source": "canon: WFB 8e Lizardmen / TW:WH3 (Xahutec, Oyxl, Tlanxla, Spektazuma, Tlax and Chupayotl are ruined, sunk or destroyed; Quetza is defiled by Clan Pestilens; Huatl is being refounded; Konquata is not yet founded at the 2512 start)",
+      "why": "A ruined or unfounded city has lost the temple-schools and a tier of organisation"
+    },
+    "norse_colony": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slave_trade"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "expected_government_type": "gov_principality",
+      "suggested_ig_names": {
+        "ig_armed_forces": "Hird Warbands",
+        "ig_landowners": "Jarls and Hersirs"
+      },
+      "source": "canon: White Dwarf 309 \"The Norse of Lustria\" (Skeggi founded 888 IC by Losteriksson of the Bjornlings); Norsca tribal package",
+      "why": "A Norse colony keeps its homeland's jarl-and-warband institutions"
+    }
+  },
+  "tags": {
+    "AXL": {
+      "confidence": "medium",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    },
+    "CHQ": {
+      "confidence": "medium",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    },
+    "CHU": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Ruined, defiled or refounding city per the registry notes."
+    },
+    "HEX": {
+      "confidence": "high",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    },
+    "HUA": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Ruined, defiled or refounding city per the registry notes."
+    },
+    "ITZ": {
+      "confidence": "high",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    },
+    "KON": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Registry says Konquata was founded in 2520 IC, after the 2512 start: keep the entry for the later generator but consider dropping the tag from the 2512 bookmark."
+    },
+    "OYX": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Ruined, defiled or refounding city per the registry notes."
+    },
+    "PAH": {
+      "confidence": "medium",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    },
+    "QTZ": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Defiled by Clan Pestilens; no Skaven-controlled ruling package is modelled."
+    },
+    "SKG": {
+      "profile": "norse_colony",
+      "confidence": "medium"
+    },
+    "SPZ": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Ruined, defiled or refounding city per the registry notes."
+    },
+    "TLA": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Ruined, defiled or refounding city per the registry notes."
+    },
+    "TLN": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Ruined, defiled or refounding city per the registry notes."
+    },
+    "TLX": {
+      "confidence": "medium",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    },
+    "XAH": {
+      "profile": "ruined_temple_city",
+      "confidence": "low",
+      "note": "Ruined, defiled or refounding city per the registry notes."
+    },
+    "XHO": {
+      "confidence": "medium",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    },
+    "XLA": {
+      "confidence": "medium",
+      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+    }
+  }
+}
