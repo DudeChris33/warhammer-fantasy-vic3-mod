@@ -1,0 +1,170 @@
+{
+  "region": "00_norsca",
+  "baseline": {
+    "tech_tier": 6,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_warrior_caste",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_consumption_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_no_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slave_trade",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_armed_forces",
+      "ig_landowners"
+    ],
+    "tax_level": "low",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {},
+    "expected_government_type": "gov_principality",
+    "suggested_ig_names": {
+      "ig_armed_forces": "Hird Warbands",
+      "ig_landowners": "Jarls and Hersirs",
+      "ig_devout": "Skalds and Shamans"
+    },
+    "source": "canon: WFB 8e Warriors of Chaos (Norse tribes); WH: The Old World (2023+) Rulebook, Norsca; inferred where the books are silent",
+    "why": "Norse tribes are jarl-led raiding confederacies: warrior caste, thing-moot assembly, consumption taxes, slave-taking, no schools or police; standing_army/urbanization is the floor of a tribal but organised host"
+  },
+  "tags": {
+    "AES": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "why": "Slaanesh devotion puts the champion-priests beside the warbands in the ruling bloc."
+        }
+      }
+    },
+    "BAE": {
+      "confidence": "low",
+      "note": "Baseline unchanged: reavers with no distinct canon institutions."
+    },
+    "BJO": {
+      "confidence": "medium",
+      "extra_techs": [
+        "tech_bureaucracy",
+        "international_trade"
+      ],
+      "laws": {
+        "lawgroup_trade_policy": "law_mercantilism"
+      },
+      "justify": {
+        "extra_techs": {
+          "source": "canon: WFB Norsca tribe notes (Bjornlings trade and fish); tag_registry.md",
+          "why": "Traders need international_trade (and its tech_bureaucracy prerequisite) to unlock mercantilism."
+        },
+        "laws.lawgroup_trade_policy": {
+          "source": "canon: WFB Norsca tribe notes (Bjornlings trade and fish); tag_registry.md",
+          "why": "The one Norse tribe known for dealing with the south trades rather than isolates."
+        }
+      }
+    },
+    "GRA": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "why": "Tzeentch devotion puts the champion-priests beside the warbands in the ruling bloc."
+        }
+      }
+    },
+    "HAS": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "why": "Chaos Wastes border devotion puts the champion-priests beside the warbands in the ruling bloc."
+        }
+      }
+    },
+    "KVE": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "why": "Chaos Wastes border devotion puts the champion-priests beside the warbands in the ruling bloc."
+        }
+      }
+    },
+    "SAR": {
+      "confidence": "low",
+      "note": "Baseline unchanged: Sarls have no canon detail beyond the coastal-raider identity."
+    },
+    "SKA": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "why": "Khorne devotion puts the champion-priests beside the warbands in the ruling bloc."
+        }
+      }
+    },
+    "SNA": {
+      "confidence": "low",
+      "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
+    },
+    "SOR": {
+      "confidence": "low",
+      "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
+    },
+    "URS": {
+      "confidence": "low",
+      "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
+    },
+    "VAR": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "why": "Chaos-touched northern devotion puts the champion-priests beside the warbands in the ruling bloc."
+        }
+      }
+    }
+  }
+}
