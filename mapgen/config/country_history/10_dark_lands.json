@@ -1,0 +1,123 @@
+{
+  "region": "10_dark_lands",
+  "baseline": {
+    "tech_tier": 2,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_professional_army",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_theocracy",
+      "lawgroup_internal_security": "law_national_guard",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_interventionism",
+      "lawgroup_trade_policy": "law_protectionism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_dedicated_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_censorship",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slave_trade",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_devout",
+      "ig_industrialists",
+      "ig_armed_forces"
+    ],
+    "tax_level": "high",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {
+      "institution_police": 1
+    },
+    "expected_government_type": "gov_theocratic_oligarchy",
+    "suggested_ig_names": {
+      "ig_devout": "Sorcerer-Prophets of Hashut",
+      "ig_industrialists": "Daemonsmiths and Overseers",
+      "ig_armed_forces": "Infernal Guard"
+    },
+    "source": "canon: WFB Chaos Dwarfs (Forge World lists; Storm of Chaos era): rule by Sorcerer-Prophets of Hashut, slave-driven hell-forges, Overseer castes, Infernal Guard; TW:WH3 Chaos Dwarfs",
+    "why": "A theocracy of the Priests of Hashut over a caste of Overseers and Daemonsmiths: state-run industry, slave economy, censorship and police-terror, forge-armed standing regiments (tier 2)"
+  },
+  "profiles": {
+    "hobgoblin_khanate": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_migration": "law_no_migration_controls"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "tax_level": "low",
+      "institutions": {},
+      "expected_government_type": "gov_absolute_principality",
+      "suggested_ig_names": {
+        "ig_armed_forces": "Wolf-Rider Warbands",
+        "ig_landowners": "Khan's Kin"
+      },
+      "source": "canon: WFB / TW:WH3 Hobgoblin Khans (Wolf Riders, tributaries of the Chaos Dwarfs; Hobgoblin steppe raiders under a Khan)",
+      "why": "Steppe raiders under an absolute Khan, standing warband, slave-taking, no schooling"
+    }
+  },
+  "tags": {
+    "GOR": {
+      "confidence": "medium",
+      "note": "Chaos Dwarf city; baseline (tier 2) unchanged."
+    },
+    "HGK": {
+      "profile": "hobgoblin_khanate",
+      "confidence": "medium",
+      "expected_government_type": "gov_absolute_kingdom",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at kingdom tier."
+        }
+      }
+    },
+    "MZN": {
+      "confidence": "high",
+      "tech_tier": 1,
+      "laws": {
+        "lawgroup_internal_security": "law_secret_police"
+      },
+      "justify": {
+        "tech_tier": {
+          "source": "canon: WFB Chaos Dwarfs / TW:WH3 Chaos Dwarfs (Zharr-Naggrund: Iron Daemons, Hellcannons, Dreadquake mortars, hell-forge industry)",
+          "why": "The only industrialised power in the tree's sense: hell-forges, steam engines and cannon works, so it takes the cutting-edge tier."
+        },
+        "laws.lawgroup_internal_security": {
+          "source": "canon: WFB Chaos Dwarfs (spies of the Sorcerer-Prophets and Overseers)",
+          "why": "Central archives unlock a secret police."
+        }
+      }
+    },
+    "UZK": {
+      "confidence": "medium",
+      "note": "Chaos Dwarf city; baseline (tier 2) unchanged."
+    }
+  }
+}
