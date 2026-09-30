@@ -360,6 +360,20 @@ def merge_small(labels: np.ndarray, min_area: int, wrap_x: bool = True,
             if not cand:
                 continue
             remap[i] = min(cand, key=lambda t: (-t[1], t[0]))[0]
+        # Three or more mutually-adjacent sub-floor cells can each pick the next
+        # (a -> b -> c -> a): the blocking rule above only stops 2-cycles, and a
+        # cycle just rotates labels every round without ever merging. Fold each
+        # cycle into its lowest label so the group becomes one cell.
+        for start in np.nonzero(remap != np.arange(len(areas)))[0]:
+            walk, cur = [], int(start)
+            while remap[cur] != cur and cur not in walk:
+                walk.append(cur)
+                cur = int(remap[cur])
+            if cur in walk:
+                cyc = walk[walk.index(cur):]
+                root = min(cyc)
+                for c in cyc:
+                    remap[c] = root
         # Collapse chains so a -> b -> c lands on c in one pass.
         for _ in range(8):
             nxt = remap[remap]
