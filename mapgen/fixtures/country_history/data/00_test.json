@@ -1,0 +1,83 @@
+{
+  "region": "00_test",
+  "baseline": {
+    "tech_tier": 2,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_taxation": "law_consumption_tax",
+      "lawgroup_land_reform": "law_tenants"
+    },
+    "ruling_igs": [
+      "ig_a",
+      "ig_b"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "grain"
+    ],
+    "institutions": {
+      "institution_schools": 1
+    },
+    "expected_government_type": "gov_absolute_kingdom",
+    "source": "fixture",
+    "why": "synthetic baseline"
+  },
+  "profiles": {
+    "republic": {
+      "laws": {
+        "lawgroup_governance_principles": "law_republic",
+        "lawgroup_distribution_of_power": "law_landed_voting"
+      },
+      "ruling_igs": [
+        "ig_a"
+      ],
+      "next_election": "2514.1.1",
+      "expected_government_type": "gov_armed_republic",
+      "source": "fixture",
+      "why": "a landed-franchise republic bundle"
+    }
+  },
+  "tags": {
+    "FXA": {
+      "confidence": "high"
+    },
+    "FXB": {
+      "profile": "republic",
+      "confidence": "medium",
+      "tax_level": "high",
+      "justify": {
+        "tax_level": {
+          "source": "fixture",
+          "why": "tag-level override on top of a profile"
+        }
+      }
+    },
+    "FXC": {
+      "confidence": "low",
+      "tech_tier": 3,
+      "extra_techs": [
+        "democracy",
+        "currency_standards"
+      ],
+      "laws": {
+        "lawgroup_taxation": "law_per_capita_tax"
+      },
+      "justify": {
+        "tech_tier": {
+          "source": "fixture",
+          "why": "lower tier"
+        },
+        "extra_techs": {
+          "source": "fixture",
+          "why": "extras chain: currency_standards needs democracy"
+        },
+        "laws.lawgroup_taxation": {
+          "source": "fixture",
+          "why": "needs currency_standards"
+        }
+      }
+    }
+  }
+}

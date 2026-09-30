@@ -16,6 +16,7 @@ Usage::
 
     python mapgen/run_fixture.py --check     # regenerate to temp, diff golden, run twice, validate
     python mapgen/run_fixture.py --update     # (re)write the golden outputs in expected/
+    python mapgen/run_fixture.py --update-country-history   # rewrite only the country-history golden
 
 ``--check`` is the offline gate for P1. It fails (exit 1) on any determinism
 drift, golden mismatch, or validator error.
@@ -4970,7 +4971,75 @@ def _selfcheck_composite_layers_over() -> None:
         raise AssertionError("composite_layers_over([]) should have raised ValueError")
 
 
+COUNTRY_HISTORY_DIR = TOOLS_DIR / "fixtures" / "country_history"
+COUNTRY_HISTORY_EXPECTED = COUNTRY_HISTORY_DIR / "expected" / "report.txt"
+
+#: Every error class the country-history linter must still report on the broken fixture
+#: files; ``--update`` cannot silently drop one by regenerating the golden report.
+COUNTRY_HISTORY_NEEDLES = (
+    "duplicate key", "baseline missing", "unknown tech_tier", "ruling_igs must be", "missing law group",
+    "not in the tag registry", "is a formable", "registry places it in", "start tag has no entry",
+    "more than one law for", "unknown law group", "unknown law ", "unknown tech ", "unknown interest group",
+    "unknown tax_level", "unknown good", "unknown institution", "is locked: needs tech",
+    "is locked: needs law", "extra tech currency_standards needs", "is disallowed alongside",
+    "possible trigger", "next_election", "laws hold elections", "needs justify.", "has no matching override",
+    "repeats the baseline", "unknown field", "unknown profile", "confidence must be",
+)
+
+
+def _country_history_run(files=None):
+    import validate_country_history as vch
+
+    return vch.run(COUNTRY_HISTORY_DIR / "game", COUNTRY_HISTORY_DIR / "data",
+                   COUNTRY_HISTORY_DIR / "registry.md", files)
+
+
+def _write_country_history_golden() -> None:
+    COUNTRY_HISTORY_EXPECTED.parent.mkdir(parents=True, exist_ok=True)
+    COUNTRY_HISTORY_EXPECTED.write_text(_country_history_run()[1], encoding="utf-8", newline="\n")
+    print(f"wrote country-history golden report to {COUNTRY_HISTORY_EXPECTED}")
+
+
+def check_country_history() -> int:
+    """The starting-country data linter: golden report, determinism, every error class fires."""
+    code, report = _country_history_run()
+    code2, report2 = _country_history_run()
+    if (code, report) != (code2, report2):
+        print("country_history: validator output differs between two runs (non-deterministic).", file=sys.stderr)
+        return 1
+    if code != 1:
+        print("country_history: the broken fixture region files were accepted.", file=sys.stderr)
+        return 1
+    missing = [n for n in COUNTRY_HISTORY_NEEDLES if n not in report]
+    if missing:
+        print(f"country_history: error class(es) no longer reported: {missing}", file=sys.stderr)
+        return 1
+    if "not fully evaluable" not in report:
+        print("country_history: the unresolved-government warning disappeared.", file=sys.stderr)
+        return 1
+    good_code, good_report = _country_history_run(["00_test.json"])
+    if good_code != 0 or "OK 00_test.json: 3 tag(s)" not in good_report:
+        print("country_history: the valid fixture region file was rejected:\n" + good_report, file=sys.stderr)
+        return 1
+    expected = COUNTRY_HISTORY_EXPECTED.read_text(encoding="utf-8")
+    if report != expected:
+        import difflib
+
+        print("country_history: report differs from the golden copy:", file=sys.stderr)
+        sys.stderr.writelines(difflib.unified_diff(expected.splitlines(True), report.splitlines(True),
+                                                   "expected/report.txt", "regenerated"))
+        return 1
+    print("country_history: laws/techs/government-trigger linter (unknown ids, group cardinality, locked and "
+          "disallowed laws, formable/registry rules, justification bookkeeping, profiles, determinism) "
+          "matches the golden report.")
+    return 0
+
+
 def run_check() -> int:
+    # Stdlib-only and independent of the map goldens, so it runs (and can fail) first.
+    rc = check_country_history()
+    if rc != 0:
+        return rc
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")
@@ -5173,6 +5242,8 @@ def run_update() -> int:
         shutil.rmtree(BOUNDARY_EXPECTED)
     build_boundary(BOUNDARY_EXPECTED)
     print(f"wrote boundary golden outputs to {BOUNDARY_EXPECTED}")
+
+    _write_country_history_golden()
     return 0
 
 
@@ -5183,7 +5254,12 @@ def main(argv: list[str] | None = None) -> int:
     group.add_argument("--update", action="store_true", help="(re)write the golden outputs")
     group.add_argument("--update-fixture-manifest", action="store_true",
                        help="refresh the ingestion fixture's SHA-256 manifest (after make_source.py)")
+    group.add_argument("--update-country-history", action="store_true",
+                       help="rewrite only the country-history linter's golden report")
     args = parser.parse_args(argv)
+    if args.update_country_history:
+        _write_country_history_golden()
+        return 0
     if args.update_fixture_manifest:
         _update_fixture_manifest(INGEST_MANIFEST, INGEST_DIR)
         _update_fixture_manifest(BOUNDARY_MANIFEST, BOUNDARY_DIR)
