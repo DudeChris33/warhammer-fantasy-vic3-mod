@@ -1,0 +1,156 @@
+{
+  "region": "08_araby",
+  "baseline": {
+    "tech_tier": 4,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_professional_army",
+      "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_subjecthood",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_mercantilism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_local_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_migration_controls",
+      "lawgroup_slavery": "law_slave_trade",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_petty_bourgeoisie"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "coffee"
+    ],
+    "institutions": {},
+    "expected_government_type": "gov_absolute_principality",
+    "suggested_ig_names": {
+      "ig_landowners": "Emirs and Viziers",
+      "ig_petty_bourgeoisie": "Caravan and Spice Merchants"
+    },
+    "source": "canon: WFB Araby background (sultans, viziers, caravan and corsair trade); TW:WH3 Araby background; inferred where silent",
+    "why": "Absolute sultans govern through appointed viziers with paid guards, tax land and caravans, trade under mercantile rules, keep slaves and run temple schools; tier 4 reflects Arabyan learning without gunpowder industry"
+  },
+  "profiles": {
+    "crusader_holding": {
+      "tech_tier": 5,
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_slavery": "law_slavery_banned"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_armed_forces"
+      ],
+      "tax_level": "low",
+      "expected_government_type": "gov_principality",
+      "suggested_ig_names": {
+        "ig_landowners": "Crusader Knights",
+        "ig_armed_forces": "Order Chapter"
+      },
+      "source": "canon: WFB 8e Bretonnia (Great Crusade against Araby; knights carve out fiefs); tag_registry.md 08 notes",
+      "why": "A crusader holding is a Bretonnian knightly fief transplanted overseas: warrior caste, hereditary offices, no local peasantry to tie to the land"
+    }
+  },
+  "tags": {
+    "AHK": {
+      "confidence": "medium",
+      "note": "Al-Haikk, the Golden City: capital of the Arabyan Sultan.",
+      "expected_government_type": "gov_absolute_grand_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "ANT": {
+      "profile": "crusader_holding",
+      "confidence": "medium",
+      "note": "Antoch the Crusader City: a Bretonnian kingdom-in-exile; razed by Lizardmen per registry."
+    },
+    "BEL": {
+      "confidence": "low",
+      "tech_tier": 5,
+      "justify": {
+        "tech_tier": {
+          "source": "canon: tag_registry.md (Bel-Aliad, the ruined City of Dust)",
+          "why": "A ruined city has lost a tier of learning."
+        }
+      }
+    },
+    "COP": {
+      "confidence": "low",
+      "note": "Spice-port; baseline unchanged."
+    },
+    "ELK": {
+      "confidence": "low",
+      "note": "Desert city; baseline unchanged."
+    },
+    "FYR": {
+      "confidence": "low",
+      "note": "Arabyan island city; baseline unchanged."
+    },
+    "LSK": {
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_navy_model": "law_professional_navy"
+      },
+      "ruling_igs": [
+        "ig_petty_bourgeoisie",
+        "ig_armed_forces"
+      ],
+      "justify": {
+        "laws.lawgroup_navy_model": {
+          "source": "canon: WFB Araby background (Lashiek, City of Corsairs)",
+          "why": "A corsair fleet in permanent commission."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB Araby background (Lashiek corsair captains)",
+          "why": "Captains and merchants rule the corsair port."
+        }
+      }
+    },
+    "MTK": {
+      "confidence": "low",
+      "note": "Desert city; baseline unchanged."
+    },
+    "ORG": {
+      "profile": "crusader_holding",
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_governance_principles": "law_theocracy"
+      },
+      "expected_government_type": "gov_theocratic_oligarchy",
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: WFB Bretonnia (Knights of Origo: a holy military order under a Grand Master)",
+          "why": "A crusading order rules as a religious body."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at principality tier."
+        }
+      }
+    }
+  }
+}
