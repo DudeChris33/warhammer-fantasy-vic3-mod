@@ -8,8 +8,8 @@ would help rather than the build silently coarsening.
 ## Density
 
 - Target: **659 land states** (vanilla's own count) at a mean
-  of **16,941 canvas px** each, plus **103 sea zones**.
-- Achieved: **1152 land cells** (mean 9,691 px, median 8,038 px, min 1, max 43,102) and **113 sea zones**.
+  of **16,953 canvas px** each, plus **103 sea zones**.
+- Achieved: **1114 land cells** (mean 10,029 px, median 8,492 px, min 6, max 43,102) and **113 sea zones**.
 - Cells traced from a source before filling: **2,565**.
 
 ## Lettering bridge (the parchment master)
@@ -42,7 +42,7 @@ the area it wins:
 
 ## The gap
 
-**3.9% of land has no boundary source at all** and is partitioned by
+**4.0% of land has no boundary source at all** and is partitioned by
 seeded fallback cells at the target density. This is expected, not a defect:
 the Immortal Empires frame stops around Cathay, so the Kingdoms of Ind,
 Khuresh, Nippon, the far Eastern Steppes and the polar Chaos Wastes have no

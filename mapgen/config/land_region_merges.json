@@ -15,6 +15,12 @@
     {"anchor_a": [4540, 435], "anchor_b": [4546, 443], "note": "re-anchored 2026-09-23 (#12)"},
     {"anchor_a": [4450, 437], "anchor_b": [4455, 443], "note": "re-anchored 2026-09-23 (#13)"},
     {"anchor_a": [3999, 1223], "anchor_b": [4006, 1197], "note": "re-anchored 2026-09-23 (#14)"},
-    {"anchor_a": [3870, 560], "anchor_b": [3880, 542], "note": "2026-09-29 (#15): Eldagrimm spur (state 44's SW peninsula tip), cut off only by the dilated coast paint, back into state 44"}
+    {"anchor_a": [3870, 560], "anchor_b": [3880, 542], "note": "2026-09-29 (#15): Eldagrimm spur (state 44's SW peninsula tip), cut off only by the dilated coast paint, back into state 44"},
+    {"anchor_a": [3965, 891], "anchor_b": [3929, 849], "note": "618 into 54 (Montfort), 2026-09-29"},
+    {"anchor_a": [4795, 538], "anchor_b": [4769, 595], "note": "284 into 596, 2026-09-29"},
+    {"anchor_a": [4945, 806], "anchor_b": [4904, 828], "note": "615 into 278 (Heart of Zharrduk), 2026-09-29"},
+    {"anchor_a": [5170, 1671], "anchor_b": [5147, 1599], "note": "183 into 182, 2026-09-29"},
+    {"anchor_a": [5122, 1663], "anchor_b": [5147, 1599], "note": "470 into 182, 2026-09-29"},
+    {"anchor_a": [3812, 1151], "anchor_b": [3794, 1195], "note": "602 into 600 (Isles of the Siren), 2026-09-29"}
   ]
 }

@@ -81,8 +81,8 @@
         4366,
         436
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Kislev River"
     },
     {
       "a": [
@@ -263,7 +263,9 @@
       ],
       "type": "canal_kraka_ravnsnake",
       "comment": "Kraka Ravnsnake",
-      "strait_type": "artificial"
+      "strait_type": "artificial",
+      "land_a_color": "x07A829",
+      "land_b_color": "xCB3937"
     },
     {
       "a": [
@@ -420,30 +422,6 @@
       ],
       "type": "sea",
       "comment": "Mordheim"
-    },
-    {
-      "a": [
-        5151,
-        1688
-      ],
-      "b": [
-        5143,
-        1669
-      ],
-      "type": "sea",
-      "comment": "Dragon Isles"
-    },
-    {
-      "a": [
-        5166,
-        1663
-      ],
-      "b": [
-        5157,
-        1647
-      ],
-      "type": "sea",
-      "comment": "Dragon Isles"
     },
     {
       "a": [
@@ -718,8 +696,8 @@
         4672,
         508
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_bay_of_uzkulak",
+      "comment": "Bay of Uzkulak"
     },
     {
       "a": [
@@ -1171,7 +1149,7 @@
       "type": "canal_uzkulak",
       "comment": "Uzkulak Canal",
       "strait_type": "artificial",
-      "land_a_color": "x280BCC",
+      "land_a_color": "x89D453",
       "land_b_color": "xB150BE"
     },
     {
@@ -1410,18 +1388,6 @@
       ],
       "type": "canal_aver_t",
       "comment": "River Aver"
-    },
-    {
-      "a": [
-        5138,
-        1663
-      ],
-      "b": [
-        5150,
-        1648
-      ],
-      "type": "sea",
-      "comment": "Dragon Isles"
     },
     {
       "a": [
@@ -1943,6 +1909,42 @@
       ],
       "type": "sea",
       "comment": "North Kislev River"
+    },
+    {
+      "a": [
+        5151,
+        1688
+      ],
+      "b": [
+        5143,
+        1669
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
+    },
+    {
+      "a": [
+        5166,
+        1663
+      ],
+      "b": [
+        5157,
+        1647
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
+    },
+    {
+      "a": [
+        5138,
+        1663
+      ],
+      "b": [
+        5150,
+        1648
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
     }
   ]
 }
