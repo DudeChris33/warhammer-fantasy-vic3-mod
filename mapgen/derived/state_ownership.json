@@ -1004,15 +1004,6 @@
    "owner": "AZL",
    "scope": "drawn"
   },
-  "STATE_ISLES_OF_THE_SIREN": {
-   "id": 600,
-   "naming_anchor": [
-    3793,
-    1200
-   ],
-   "owner": "TOB",
-   "scope": "drawn"
-  },
   "STATE_IVORY_ROAD": {
    "id": 271,
    "naming_anchor": [
@@ -1891,15 +1882,6 @@
    "naming_anchor": [
     5147,
     1599
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_183": {
-   "id": 183,
-   "naming_anchor": [
-    5171,
-    1671
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2948,15 +2930,6 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_470": {
-   "id": 470,
-   "naming_anchor": [
-    5122,
-    1663
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_471": {
    "id": 471,
    "naming_anchor": [
@@ -2991,15 +2964,6 @@
     544
    ],
    "owner": "BAE",
-   "scope": "drawn"
-  },
-  "STATE_LAND_481": {
-   "id": 481,
-   "naming_anchor": [
-    4089,
-    673
-   ],
-   "owner": "NLD",
    "scope": "drawn"
   },
   "STATE_LAND_482": {
@@ -3380,15 +3344,6 @@
    "owner": "unowned",
    "scope": "drawn"
   },
-  "STATE_LAND_596": {
-   "id": 596,
-   "naming_anchor": [
-    4767,
-    593
-   ],
-   "owner": "UZK",
-   "scope": "drawn"
-  },
   "STATE_LAND_602": {
    "id": 602,
    "naming_anchor": [
@@ -3488,50 +3443,23 @@
    "owner": "unowned",
    "scope": "drawn"
   },
-  "STATE_LAND_615": {
-   "id": 615,
-   "naming_anchor": [
-    4945,
-    806
-   ],
-   "owner": "MZN",
-   "scope": "drawn"
-  },
-  "STATE_LAND_616": {
-   "id": 616,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_618": {
-   "id": 618,
-   "naming_anchor": null,
-   "owner": "MNF",
-   "scope": "drawn"
-  },
-  "STATE_LAND_619": {
-   "id": 619,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_620": {
    "id": 620,
    "naming_anchor": null,
    "owner": "unowned",
    "scope": "drawn"
   },
-  "STATE_LAND_621": {
-   "id": 621,
+  "STATE_LAND_623": {
+   "id": 623,
    "naming_anchor": null,
    "owner": "unowned",
    "scope": "drawn"
   },
-  "STATE_LAND_622": {
-   "id": 622,
+  "STATE_LAND_624": {
+   "id": 624,
    "naming_anchor": null,
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LOST_KHYPNIA": {
    "id": 221,
@@ -4656,15 +4584,6 @@
     756
    ],
    "owner": "MID",
-   "scope": "drawn"
-  },
-  "STATE_WEST_NORDLAND": {
-   "id": 480,
-   "naming_anchor": [
-    4065,
-    660
-   ],
-   "owner": "NLD",
    "scope": "drawn"
   },
   "STATE_WEST_OSTERMARK": {

@@ -532,11 +532,6 @@
    "confidence": "canon",
    "note": "Karak Azul hub"
   },
-  "STATE_ISLES_OF_THE_SIREN": {
-   "owner": "TOB",
-   "confidence": "inferred",
-   "note": "Vedenza"
-  },
   "STATE_IVORY_ROAD": {
    "owner": "HGK",
    "confidence": "inferred"
@@ -723,10 +718,6 @@
    "owner": "BAE",
    "confidence": "inferred",
    "note": "Strovengaard"
-  },
-  "STATE_LAND_481": {
-   "owner": "NLD",
-   "confidence": "inferred"
   },
   "STATE_LAND_482": {
    "owner": "BAS",
@@ -924,10 +915,6 @@
    "confidence": "inferred",
    "note": "Gristlehold ruin; no roster tag"
   },
-  "STATE_LAND_596": {
-   "owner": "UZK",
-   "confidence": "inferred"
-  },
   "STATE_LAND_602": {
    "owner": "TOB",
    "confidence": "canon",
@@ -983,35 +970,20 @@
    "confidence": "inferred",
    "note": "wilderness; no roster tag"
   },
-  "STATE_LAND_615": {
-   "owner": "MZN",
-   "confidence": "inferred",
-   "note": "district of Zharr-Naggrund"
-  },
-  "STATE_LAND_616": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "single-province island (Skerstad); no roster tag"
-  },
-  "STATE_LAND_618": {
-   "owner": "MNF",
-   "confidence": "canon",
-   "note": "Montfort hub"
-  },
-  "STATE_LAND_619": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Nefer Isle; no roster tag"
-  },
   "STATE_LAND_620": {
    "owner": "unowned",
    "confidence": "inferred",
    "note": "Pyramid of Tutankhanut; no roster tag"
   },
-  "STATE_LAND_621": {
+  "STATE_LAND_623": {
    "owner": "unowned",
    "confidence": "inferred",
-   "note": "Khazid Zhuf ruin; no roster tag"
+   "note": "split out of BADLANDS_COAST on main; greenskin wilderness"
+  },
+  "STATE_LAND_624": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "split out of BADLANDS_COAST on main; greenskin wilderness"
   },
   "STATE_LOST_KHYPNIA": {
    "owner": "UVE",
@@ -1596,10 +1568,6 @@
   },
   "STATE_WEST_MIDDENLAND": {
    "owner": "MID",
-   "confidence": "inferred"
-  },
-  "STATE_WEST_NORDLAND": {
-   "owner": "NLD",
    "confidence": "inferred"
   },
   "STATE_WEST_OSTERMARK": {
