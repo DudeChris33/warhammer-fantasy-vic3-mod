@@ -30,17 +30,26 @@ x20FC06;xC804A4;canal_great_mortis_delta;-1;3902;2073;3916;2056;;Great Mortis De
 x22E788;xD5FEE0;sea;-1;4181;2531;4151;2507;;Under Fort Soll
 x231107;x486A9C;canal_middle_talabec;-1;4212;2804;4220;2802;;Middle Talabec River
 x266F19;xEA0027;canal_west_estalian_isles;-1;3759;2381;3777;2376;;West Estalian Isles
+x27118A;x2EE86D;sea;-1;2807;2624;2787;2609;;Ulthuan Northern Isles
+x27118A;x962407;sea;-1;2799;2662;2780;2650;;Ulthuan Northern Isles
+x27118A;xF43FAD;sea;-1;2832;2666;2848;2666;;Ulthuan Northern Isles
 x27EB4F;x888B42;sea;-1;4281;2736;4286;2728;;Mordheim
 x2B163C;xC94DB5;canal_isle_of_dawn;-1;4331;559;4345;570;;Isle of Dawn
+x2EE86D;x962407;sea;-1;2762;2624;2772;2641;;Ulthuan Northern Isles
 x2F403E;x381163;canal_lower_ruin;-1;4954;2173;4949;2158;;Lower River Ruin
 x32C3A0;x8BBB02;sea;-1;4064;3319;4082;3324;;North Norsca
 x333BEE;xDF9722;sea;-1;4590;2119;4581;2108;;Sour Sea
 x362F87;x7A268D;sea;-1;2981;2041;2987;2054;;Yvresse
 x36DAFA;xF2797B;sea;-1;3674;2640;3668;2650;;North Estalian Island
+x36EDA2;x45BCD0;sea;-1;3245;1981;3259;1976;;Sorcerers Islands
+x36EDA2;x729E79;sea;-1;3246;2005;3265;2004;;Sorcerers Islands
+x36EDA2;x9C9F31;sea;-1;3242;1978;3234;1961;;Sorcerers Islands
 x36FB77;xF9CE6A;sea;-1;4011;2430;3995;2381;;Queek
 x381163;x82C48D;canal_dragon_isles;-1;5112;2165;5127;2176;;Dragon Isles
 x3B53CB;x3F9977;canal_lynsk;-1;4389;2945;4382;2943;;River Lynsk
 x3F00AC;x7D517A;canal_ash_t;-1;4103;1917;4100;1922;;Ash River
+x3F00AC;xAB7C34;canal_ash_river_r;-1;4104;1915;4112;1913;;Ash River
+x3F00AC;xC804A4;canal_ash_river_l;-1;4102;1915;4090;1912;;Ash River
 x3F9977;xAFA636;canal_erengrad;-1;4266;2957;4255;2962;;Erengrad
 x417251;xA33AD8;sea;-1;3508;2451;3497;2463;;South Estalian Island
 x420FEF;x5E4990;sea;-1;4227;2657;4227;2645;;River Aver
@@ -48,6 +57,8 @@ x435900;x46B712;sea;-1;5238;1328;5260;1329;;Stars Archipelago
 x435900;xCFB208;sea;-1;5231;1333;5227;1356;;Stars Archipelago
 x435900;xE4EE8B;sea;-1;5239;1320;5247;1295;;Stars Archipelago
 x450C8A;x8A4CA1;canal_bay_of_uzkulak;-1;4664;3120;4672;3107;;Bay of Uzkulak
+x45BCD0;x729E79;sea;-1;3267;1976;3273;1995;;Sorcerers Islands
+x45BCD0;x9C9F31;sea;-1;3259;1968;3238;1958;;Sorcerers Islands
 x46559B;x9F4CFD;canal_sartosa;-1;3870;2278;3852;2294;;Sartosa
 x46B712;xCFB208;sea;-1;5268;1329;5261;1353;;Stars Archipelago
 x46B712;xE4EE8B;sea;-1;5272;1323;5259;1294;;Stars Archipelago

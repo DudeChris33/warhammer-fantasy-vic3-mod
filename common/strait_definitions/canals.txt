@@ -37,6 +37,32 @@ canal_altdorf_t = {
 	second_sea_endpoint = xD85DDD
 }
 
+canal_ash_river_l = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x4AA4ED
+	second_land_endpoint = x58C3D5
+
+	first_sea_endpoint = x3F00AC
+	second_sea_endpoint = xC804A4
+}
+
+canal_ash_river_r = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x4AA4ED
+	second_land_endpoint = xBE4712
+
+	first_sea_endpoint = x3F00AC
+	second_sea_endpoint = xAB7C34
+}
+
 canal_ash_t = {
 	type = natural
 
