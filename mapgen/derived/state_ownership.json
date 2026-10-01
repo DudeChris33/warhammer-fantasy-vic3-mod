@@ -146,7 +146,7 @@
     4703,
     594
    ],
-   "owner": "UZK",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_BLACK_BLOOD_PASS": {
@@ -326,7 +326,7 @@
     4734,
     961
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_CEFIRO_HILLS": {
@@ -461,7 +461,7 @@
     4821,
     1276
    ],
-   "owner": "GOR",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_DESOLATION_OF_NAGASH": {
@@ -524,7 +524,7 @@
     4407,
     1352
    ],
-   "owner": "CRM",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_DRAKEN_RIDGE": {
@@ -578,7 +578,7 @@
     3904,
     1085
    ],
-   "owner": "SKZ",
+   "owner": "VMP",
    "scope": "drawn"
   },
   "STATE_EASTERN_OBLAST": {
@@ -839,7 +839,7 @@
     3874,
     488
    ],
-   "owner": "BAE",
+   "owner": "BJO",
    "scope": "drawn"
   },
   "STATE_GNOBLAR_HILLS": {
@@ -992,7 +992,7 @@
     4633,
     694
    ],
-   "owner": "KUN",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_IRON_PEAKS": {
@@ -1010,7 +1010,7 @@
     4908,
     1099
    ],
-   "owner": "HGK",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_KARAK_EIGHT_PEAKS": {
@@ -1388,7 +1388,7 @@
     4066,
     1043
    ],
-   "owner": "YEE",
+   "owner": "TLS",
    "scope": "drawn"
   },
   "STATE_LAND_102": {
@@ -1919,7 +1919,7 @@
     4714,
     1043
    ],
-   "owner": "GOR",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_LAND_245": {
@@ -1928,7 +1928,7 @@
     4800,
     1097
    ],
-   "owner": "GOR",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_LAND_259": {
@@ -3215,7 +3215,7 @@
     4265,
     600
    ],
-   "owner": "ERE",
+   "owner": "UNG",
    "scope": "drawn"
   },
   "STATE_LAND_547": {
@@ -3656,7 +3656,7 @@
     4336,
     1622
    ],
-   "owner": "MAH",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_MOUNTAINS_OF_DAWN": {
@@ -3836,7 +3836,7 @@
     4942,
     1025
    ],
-   "owner": "HGK",
+   "owner": "MZN",
    "scope": "drawn"
   },
   "STATE_NORTH_NORSE_COAST": {
@@ -4124,7 +4124,7 @@
     4713,
     693
    ],
-   "owner": "UZK",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_SOLLAND": {
@@ -4205,7 +4205,7 @@
     4908,
     1151
    ],
-   "owner": "HGK",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_SOUTH_MIDDENLAND": {
@@ -4664,7 +4664,7 @@
     4694,
     1118
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_WORLDS_EDGE_FOOTHILLS": {
@@ -4691,7 +4691,7 @@
     4050,
     1033
    ],
-   "owner": "YEE",
+   "owner": "TLS",
    "scope": "drawn"
   },
   "STATE_ZORN_DUM": {

@@ -2051,16 +2051,6 @@
    "proposed": true,
    "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
   },
-  "YEE": {
-   "name": "Yn Edri Eternos (Athel Loren)",
-   "color": [
-    126,
-    162,
-    108
-   ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
-  },
   "KOR": {
    "name": "Kraka Ornsmotek",
    "color": [
@@ -2227,6 +2217,26 @@
     126,
     60,
     54
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "VMP": {
+   "name": "Vampire faction (new)",
+   "color": [
+    60,
+    6,
+    42
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+  },
+  "DLO": {
+   "name": "Dark Land Orks",
+   "color": [
+    114,
+    150,
+    90
    ],
    "proposed": true,
    "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"

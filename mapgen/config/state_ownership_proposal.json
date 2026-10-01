@@ -78,8 +78,9 @@
    "note": "Sarl Encampment hub; registry capital \"Sortsvinar coast\" is not a settlement"
   },
   "STATE_BELYEROVOTA": {
-   "owner": "UZK",
-   "confidence": "inferred"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_BLACK_BLOOD_PASS": {
    "owner": "KRV",
@@ -176,9 +177,9 @@
    "note": "Salignac-la-Rouge"
   },
   "STATE_CAUSEWAY_OF_ZHARR": {
-   "owner": "unowned",
+   "owner": "DLO",
    "confidence": "directed",
-   "note": "review"
+   "note": "review: dark land orks"
   },
   "STATE_CEFIRO_HILLS": {
    "owner": "CNT",
@@ -249,8 +250,9 @@
    "note": "Red Eye Mountain = Karak Ungor hub; registry capital \"Red Eye\" has no hub of that name"
   },
   "STATE_DESOLATION_OF_AZGORH": {
-   "owner": "GOR",
-   "confidence": "inferred"
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
   },
   "STATE_DESOLATION_OF_NAGASH": {
    "owner": "unowned",
@@ -283,8 +285,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_DRAGON_CRAG": {
-   "owner": "CRM",
-   "confidence": "inferred"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_DRAKEN_RIDGE": {
    "owner": "unowned",
@@ -311,9 +314,9 @@
    "note": "Esselhafen hub"
   },
   "STATE_EASTERN_IRRANAS": {
-   "owner": "SKZ",
-   "confidence": "inferred",
-   "note": "Ugrok Craktoof; registry gives only \"Grey Mtns, Bretonnia's southern flank\""
+   "owner": "VMP",
+   "confidence": "directed",
+   "note": "review: new vampire faction"
   },
   "STATE_EASTERN_OBLAST": {
    "owner": "PRA",
@@ -444,9 +447,9 @@
    "note": "Gisoreux hub; registry spells it Gisoreaux"
   },
   "STATE_GLOOMWRACK_COAST": {
-   "owner": "BAE",
-   "confidence": "inferred",
-   "note": "southern coast, nearest the Empire"
+   "owner": "BJO",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_GNOBLAR_HILLS": {
    "owner": "unowned",
@@ -523,9 +526,9 @@
    "note": "Raachwald hub"
   },
   "STATE_IRONCRAFT_MOUNTAINS": {
-   "owner": "KUN",
-   "confidence": "inferred",
-   "note": "capital collision: Karak Ungor is Red Eye Mountain, held by RED in 2512"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_IRON_PEAKS": {
    "owner": "AZL",
@@ -533,8 +536,9 @@
    "note": "Karak Azul hub"
   },
   "STATE_IVORY_ROAD": {
-   "owner": "HGK",
-   "confidence": "inferred"
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
   },
   "STATE_KARAK_EIGHT_PEAKS": {
    "owner": "CRM",
@@ -569,9 +573,9 @@
    "note": "Carcassonne hub"
   },
   "STATE_LAND_096": {
-   "owner": "YEE",
+   "owner": "TLS",
    "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+   "note": "review round 3"
   },
   "STATE_LAND_102": {
    "owner": "REM",
@@ -603,13 +607,14 @@
    "note": "Mount Silverspear hub; ruin"
   },
   "STATE_LAND_244": {
-   "owner": "GOR",
-   "confidence": "inferred"
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
   },
   "STATE_LAND_245": {
-   "owner": "GOR",
-   "confidence": "inferred",
-   "note": "Gorgothdrinaz"
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
   },
   "STATE_LAND_259": {
    "owner": "unowned",
@@ -847,8 +852,9 @@
    "confidence": "inferred"
   },
   "STATE_LAND_546": {
-   "owner": "ERE",
-   "confidence": "inferred"
+   "owner": "UNG",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_LAND_547": {
    "owner": "BOL",
@@ -1085,9 +1091,9 @@
    "note": "Eicheschatten hub"
   },
   "STATE_MORTIS_TARN": {
-   "owner": "MAH",
-   "confidence": "inferred",
-   "note": "low confidence: registry capital Mahrak has no hub"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_MOUNTAINS_OF_DAWN": {
    "owner": "unowned",
@@ -1183,9 +1189,9 @@
    "confidence": "inferred"
   },
   "STATE_NORTH_HOWLING_WASTES": {
-   "owner": "HGK",
-   "confidence": "inferred",
-   "note": "registry gives no location; eastern Dark Lands"
+   "owner": "MZN",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_NORTH_NORSE_COAST": {
    "owner": "SOR",
@@ -1334,8 +1340,9 @@
    "confidence": "inferred"
   },
   "STATE_SKULL_STEPPES": {
-   "owner": "UZK",
-   "confidence": "inferred"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 3"
   },
   "STATE_SOLLAND": {
    "owner": "WIS",
@@ -1376,8 +1383,9 @@
    "note": "Karak Norn hub"
   },
   "STATE_SOUTH_HOWLING_WASTES": {
-   "owner": "HGK",
-   "confidence": "inferred"
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
   },
   "STATE_SOUTH_MIDDENLAND": {
    "owner": "MID",
@@ -1610,9 +1618,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_WOLF_LANDS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
   },
   "STATE_WORLDS_EDGE_FOOTHILLS": {
    "owner": "BSB",
@@ -1625,9 +1633,9 @@
    "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_YI_EDRI_ETERNOS": {
-   "owner": "YEE",
+   "owner": "TLS",
    "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+   "note": "review round 3"
   },
   "STATE_ZORN_DUM": {
    "owner": "UZK",
