@@ -80,6 +80,7 @@ class Legend:
     reserved: dict[str, Color]
     tags: dict[str, Color]
     proposed: frozenset[str] = frozenset()
+    names: dict[str, str] | None = None   # tag -> country/polity name (legend 'name')
 
     def color_owner(self) -> dict[int, str]:
         """Packed colour -> owner token (a tag, ``unowned`` or ``placeholder``).
@@ -116,12 +117,15 @@ def parse_legend(doc: dict, source: str = "legend") -> Legend:
     reserved = {k: _color(reserved_doc[k], f"{source}: reserved.{k}") for k in RESERVED}
     tags: dict[str, Color] = {}
     proposed: set[str] = set()
+    names: dict[str, str] = {}
     for tag, entry in tags_doc.items():
         if not _TAG_RE.match(tag):
             raise OwnershipError(f"{source}: {tag!r} is not a 3-letter uppercase tag")
         if not isinstance(entry, dict) or "color" not in entry:
             raise OwnershipError(f"{source}: tag {tag} needs an object with a 'color'")
         tags[tag] = _color(entry["color"], f"{source}: tag {tag}")
+        if isinstance(entry.get("name"), str):
+            names[tag] = entry["name"]
         if entry.get("proposed") is True:
             proposed.add(tag)
     seen: dict[Color, str] = {}
@@ -129,7 +133,7 @@ def parse_legend(doc: dict, source: str = "legend") -> Legend:
         if c in seen:
             raise OwnershipError(f"{source}: colour {list(c)} is used by both {seen[c]} and {name}")
         seen[c] = name
-    return Legend(reserved, tags, frozenset(proposed))
+    return Legend(reserved, tags, frozenset(proposed), names)
 
 
 def load_legend(path: Path) -> Legend:
@@ -496,11 +500,13 @@ def normalize_assignment(assignment: dict, layout: Layout) -> dict:
 
 def review_render(painted: np.ndarray, layout: Layout, prov_owners: list[str], legend: Legend,
                   scale: float = 0.5, crop: tuple[int, int, int, int] | None = None,
-                  numbers: bool = False, names: dict[str, str] | None = None, name_chars: int = 10):
+                  numbers: bool = False, labels: str = "country", state_names: dict[str, str] | None = None,
+                  name_chars: int = 10):
     """Annotated review picture: the painted map at ``scale`` (nearest), tag codes
     at each drawn state's centroid, and a legend panel of the owners in use.
-    With ``names`` (state key -> localized name) the label is the first ``name_chars``
-    characters of the state's name instead of the owner's tag code.
+    ``labels`` picks the label: ``country`` (default) = first ``name_chars`` characters
+    of the owning country's name from the legend, ``tag`` = the tag code, ``state`` =
+    the state's localized name (``state_names``: state key -> name).
     With ``numbers`` each label gains a second line: the state's numeric ``id``
     (the ``id =`` in ``map_data/state_regions/``, also in ``state_ownership.json``).
 
@@ -546,8 +552,10 @@ def review_render(painted: np.ndarray, layout: Layout, prov_owners: list[str], l
         j = int(np.argmin(d))
         px, py = int(xx[a:b][j] * scale), int(yy[a:b][j] * scale)
         code = {UNOWNED: "--"}.get(owner, owner)
-        if names is not None:
-            code = names.get(layout.states[si].key, layout.states[si].key)[:name_chars]
+        if labels == "country":
+            code = "Unowned" if owner == UNOWNED else (legend.names or {}).get(owner, owner)[:name_chars]
+        elif labels == "state":
+            code = (state_names or {}).get(layout.states[si].key, layout.states[si].key)[:name_chars]
         used[owner] = used.get(owner, 0) + 1
         r, g, bl = legend.owner_color(owner)
         ink = (0, 0, 0) if (0.299 * r + 0.587 * g + 0.114 * bl) > 140 else (255, 255, 255)

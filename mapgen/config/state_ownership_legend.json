@@ -2112,7 +2112,7 @@
    "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
   },
   "XSA": {
-   "name": "Skaven placeholder A (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven A (greenskin placeholder until Skaven tags exist)",
    "color": [
     150,
     150,
@@ -2123,7 +2123,7 @@
    "placeholder_for": "Skaven"
   },
   "XSB": {
-   "name": "Skaven placeholder B (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven B (greenskin placeholder until Skaven tags exist)",
    "color": [
     42,
     102,
@@ -2134,7 +2134,7 @@
    "placeholder_for": "Skaven"
   },
   "XSC": {
-   "name": "Skaven placeholder C (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven C (greenskin placeholder until Skaven tags exist)",
    "color": [
     126,
     120,
@@ -2145,7 +2145,7 @@
    "placeholder_for": "Skaven"
   },
   "XSD": {
-   "name": "Skaven placeholder D (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven D (greenskin placeholder until Skaven tags exist)",
    "color": [
     24,
     66,
@@ -2156,7 +2156,7 @@
    "placeholder_for": "Skaven"
   },
   "XSG": {
-   "name": "Skaven placeholder G (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven G (greenskin placeholder until Skaven tags exist)",
    "color": [
     60,
     72,
@@ -2167,7 +2167,7 @@
    "placeholder_for": "Skaven"
   },
   "XSH": {
-   "name": "Skaven placeholder H (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven H (greenskin placeholder until Skaven tags exist)",
    "color": [
     138,
     150,
@@ -2178,7 +2178,7 @@
    "placeholder_for": "Skaven"
   },
   "XSI": {
-   "name": "Skaven placeholder I (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven I (greenskin placeholder until Skaven tags exist)",
    "color": [
     96,
     90,
@@ -2189,7 +2189,7 @@
    "placeholder_for": "Skaven"
   },
   "XSJ": {
-   "name": "Skaven placeholder J (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven J (greenskin placeholder until Skaven tags exist)",
    "color": [
     102,
     126,
@@ -2200,7 +2200,7 @@
    "placeholder_for": "Skaven"
   },
   "XSK": {
-   "name": "Skaven placeholder K (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven K (greenskin placeholder until Skaven tags exist)",
    "color": [
     78,
     132,
@@ -2211,7 +2211,7 @@
    "placeholder_for": "Skaven"
   },
   "XSL": {
-   "name": "Skaven placeholder L (greenskin stand-in until Skaven tags exist)",
+   "name": "Skaven L (greenskin placeholder until Skaven tags exist)",
    "color": [
     48,
     150,
