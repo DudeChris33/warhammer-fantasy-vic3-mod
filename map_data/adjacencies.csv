@@ -1,48 +1,81 @@
 From;To;Type;Through;start_x;start_y;stop_x;stop_y;adjacency_rule_name;Comment
 x0399D1;xDA72DE;sea;-1;5081;2330;5092;2327;;Lower River Ruin
+x0572AB;x07D67B;sea;-1;3050;2143;3060;2165;;Yvresse
+x0572AB;x7A268D;sea;-1;3001;2072;2991;2062;;Yvresse
 x068897;xD9DA13;canal_aver_l;-1;4145;2665;4137;2663;;River Aver
+x06ADE7;xA4E560;sea;-1;3097;579;3069;563;;Isles of Dusk
 x0738DD;x72E875;sea;-1;4973;2219;4983;2220;;Lower River Ruin
+x07A829;x66DE8E;sea;-1;4381;3162;4366;3179;;North Kislev River
 x07A829;x7A95D9;sea;-1;4367;3139;4364;3128;;North Kislev River
 x08254A;x604BE9;sea;-1;3837;2456;3844;2463;;Estalian Isles
 x08254A;x778696;sea;-1;3836;2417;3825;2408;;Estalian Isles
 x08254A;x9ECFDC;sea;-1;3832;2458;3819;2465;;Estalian Isles
+x08F13A;x20A435;sea;-1;2960;2521;2971;2521;;Clothique
+x08F13A;xFCC203;sea;-1;2937;2539;2926;2544;;Clothique
 x0BFBAA;x486A9C;canal_upper_talabec;-1;4331;2834;4322;2832;;Upper Talabec River
+x0C20FA;xAA5873;sea;-1;5147;1258;5140;1241;;Stars Archipelago
 x0C4F4C;xC878C3;sea;-1;4610;3136;4595;3146;;Norscan Island
-x0CECEA;x664EC5;sea;-1;4163;2525;4157;2544;;Fort Soll
+x0CECEA;x664EC5;sea;-1;4165;2532;4159;2545;;Fort Soll
 x0D77E0;x231107;canal_altdorf_r;-1;4096;2764;4099;2769;;Altdorf
 x0D77E0;x84D98E;canal_altdorf_l;-1;4092;2764;4086;2765;;Altdorf
 x0D77E0;xD85DDD;canal_altdorf_t;-1;4095;2762;4096;2757;;Altdorf
 x116EBD;x450C8A;canal_drakefjord_bay;-1;4529;3188;4547;3194;;Drakefjord Bay
 x116EBD;x4DDDAF;canal_kraka_ravnsnake;-1;4422;3154;4387;3138;;Kraka Ravnsnake
 x16E6A3;xCC3379;sea;-1;4659;2968;4628;2971;;Northern World's Edge
+x170720;x7A268D;sea;-1;2968;2089;2979;2079;;Yvresse
+x170720;xA2533E;sea;-1;2947;2086;2934;2097;;Yvresse
 x195848;x9EFE2E;sea;-1;4013;2676;4020;2681;;River Grismerie
 x1C678B;x337CE8;sea;-1;3829;2593;3829;2582;;River Brionne
+x20FC06;xC804A4;canal_great_mortis_delta;-1;3902;2073;3916;2056;;Great Mortis Delta
 x22E788;xD5FEE0;sea;-1;4181;2531;4151;2507;;Under Fort Soll
 x231107;x486A9C;canal_middle_talabec;-1;4212;2804;4220;2802;;Middle Talabec River
 x266F19;xEA0027;canal_west_estalian_isles;-1;3759;2381;3777;2376;;West Estalian Isles
+x27118A;x2EE86D;sea;-1;2807;2624;2787;2609;;Ulthuan Northern Isles
+x27118A;x962407;sea;-1;2799;2662;2780;2650;;Ulthuan Northern Isles
+x27118A;xF43FAD;sea;-1;2832;2666;2848;2666;;Ulthuan Northern Isles
 x27EB4F;x888B42;sea;-1;4281;2736;4286;2728;;Mordheim
+x2B163C;xC94DB5;canal_isle_of_dawn;-1;4331;559;4345;570;;Isle of Dawn
+x2EE86D;x962407;sea;-1;2762;2624;2772;2641;;Ulthuan Northern Isles
 x2F403E;x381163;canal_lower_ruin;-1;4954;2173;4949;2158;;Lower River Ruin
 x32C3A0;x8BBB02;sea;-1;4064;3319;4082;3324;;North Norsca
 x333BEE;xDF9722;sea;-1;4590;2119;4581;2108;;Sour Sea
+x362F87;x7A268D;sea;-1;2981;2041;2987;2054;;Yvresse
 x36DAFA;xF2797B;sea;-1;3674;2640;3668;2650;;North Estalian Island
+x36EDA2;x45BCD0;sea;-1;3245;1981;3259;1976;;Sorcerers Islands
+x36EDA2;x729E79;sea;-1;3246;2005;3265;2004;;Sorcerers Islands
+x36EDA2;x9C9F31;sea;-1;3242;1978;3234;1961;;Sorcerers Islands
 x36FB77;xF9CE6A;sea;-1;4011;2430;3995;2381;;Queek
 x381163;x82C48D;canal_dragon_isles;-1;5112;2165;5127;2176;;Dragon Isles
 x3B53CB;x3F9977;canal_lynsk;-1;4389;2945;4382;2943;;River Lynsk
-x3F00AC;x7D517A;canal_ash_t;-1;4103;1915;4100;1922;;Ash River
+x3F00AC;x7D517A;canal_ash_t;-1;4103;1917;4100;1922;;Ash River
+x3F00AC;xAB7C34;canal_ash_river_r;-1;4104;1915;4112;1913;;Ash River
+x3F00AC;xC804A4;canal_ash_river_l;-1;4102;1915;4090;1912;;Ash River
 x3F9977;xAFA636;canal_erengrad;-1;4266;2957;4255;2962;;Erengrad
 x417251;xA33AD8;sea;-1;3508;2451;3497;2463;;South Estalian Island
 x420FEF;x5E4990;sea;-1;4227;2657;4227;2645;;River Aver
+x435900;x46B712;sea;-1;5238;1328;5260;1329;;Stars Archipelago
+x435900;xCFB208;sea;-1;5231;1333;5227;1356;;Stars Archipelago
+x435900;xE4EE8B;sea;-1;5239;1320;5247;1295;;Stars Archipelago
+x450C8A;x8A4CA1;canal_bay_of_uzkulak;-1;4664;3120;4672;3107;;Bay of Uzkulak
+x45BCD0;x729E79;sea;-1;3267;1976;3273;1995;;Sorcerers Islands
+x45BCD0;x9C9F31;sea;-1;3259;1968;3238;1958;;Sorcerers Islands
 x46559B;x9F4CFD;canal_sartosa;-1;3870;2278;3852;2294;;Sartosa
+x46B712;xCFB208;sea;-1;5268;1329;5261;1353;;Stars Archipelago
+x46B712;xE4EE8B;sea;-1;5272;1323;5259;1294;;Stars Archipelago
 x4B0191;xF70021;sea;-1;4308;2942;4310;2953;;Erengrad
 x4BC8AE;xAD9135;canal_echoes_l;-1;4089;2494;4010;2505;;River of Echoes
 x4BC8AE;xB6625A;canal_limnala;-1;4094;2426;4090;2409;;River Limnala
-x4BC8AE;xE12F02;canal_echoes_r;-1;4093;2497;4160;2530;;River of Echoes
+x4BC8AE;xE12F02;canal_echoes_r;-1;4093;2497;4161;2531;;River of Echoes
 x4DDDAF;xAFA636;canal_blades;-1;4240;3137;4227;3131;;Sea of Blades
+x4E02FF;xA2533E;sea;-1;2670;2004;2660;2018;;Caledor
+x506FD1;xE06312;canal_isles_of_dusk;-1;3025;570;3025;550;;Isles of Dusk
+x50E3F0;xA80278;sea;-1;4446;3136;4487;3083;;Hell Pit
+x50E3F0;xD1296B;sea;-1;4448;3138;4531;3091;;Hell Pit
 x513BC1;x9D6B21;canal_nuln_r;-1;4151;2717;4146;2717;;Nuln
+x558B13;x79F83B;sea;-1;3072;2306;3066;2295;;Clothique
+x558B13;xD5049E;sea;-1;3092;2334;3098;2347;;Clothique
 x59E367;xFB4AA0;sea;-1;3938;3187;4051;2588;;Forest of Sighs
 x5AFE26;x77D092;sea;-1;3707;2431;3694;2421;;South Estalian Island
-x5B2C78;xA80278;sea;-1;4446;3136;4487;3083;;Hell Pit
-x5B2C78;xD1296B;sea;-1;4448;3138;4531;3091;;Hell Pit
 x5BA999;x89D453;sea;-1;4777;3029;4779;3018;;Uzkulak
 x5BA999;xEB9CDA;sea;-1;4769;3031;4760;3028;;Uzkulak
 x5E985F;x77459C;sea;-1;4247;2714;4251;2725;;River Stir
@@ -51,9 +84,9 @@ x5F7FF9;x769556;canal_bordeaux;-1;3818;2723;3812;2714;;Bordeaux
 x5F7FF9;xFDB772;canal_grismerie;-1;3901;2775;3910;2771;;River Grismerie
 x63035B;x6A1C23;sea;-1;3691;2856;3703;2851;;Lyonesse
 x668AEC;xD755C6;sea;-1;3982;2527;3936;2528;;Under Novalone Pass
-x66B03C;xC8A715;sea;-1;4297;3144;4296;3159;;North Kislev River
 x66D9BB;x9DD59A;sea;-1;3956;2721;3964;2726;;River Grismerie
 x6A3CA0;xA6AB92;sea;-1;4456;3180;4456;3168;;Sjotraken
+x6D4BE3;xD5049E;sea;-1;3065;2430;3080;2420;;Clothique
 x748055;xB0EF47;canal_bitter_sea;-1;4616;2089;4622;2071;;Bitter Sea
 x769556;xF8445F;canal_brionne;-1;3816;2599;3821;2592;;River Brionne
 x778696;x80326B;sea;-1;3802;2402;3796;2415;;East Estalian Isles
@@ -71,9 +104,10 @@ xA406C8;xFB4AA0;sea;-1;4379;2557;4055;2586;;Forest of Gloom
 xA70836;xFB4AA0;sea;-1;3837;2781;4051;2584;;Oak of Prophecy
 xA80278;xD1296B;sea;-1;4490;3082;4528;3088;;Hell Pit
 xA979DB;xC614F3;sea;-1;4276;2565;4322;2586;;Under Blackfyre Pass
-xAD9135;xE12F02;canal_echoes_t;-1;4012;2508;4155;2530;;River of Echoes
+xAD9135;xE12F02;canal_echoes_t;-1;4012;2508;4161;2535;;River of Echoes
 xB16366;xF3F0DE;sea;-1;4541;3182;4548;3171;;Drakefjord Bay
 xB6625A;xDBBBEF;canal_myrmidens;-1;3999;2318;4007;2305;;Myrmidens
+xB8F94F;xFB4AA0;sea;-1;4048;2915;4053;2588;;Laurelorn Forest
 xBD3126;xD3C962;sea;-1;3941;2576;3946;2585;;River Brionne
 xC6BB93;xCF8CB8;canal_manaanspoort;-1;3957;2920;3966;2897;;Manaanspoort
 xC829F4;xD3101A;sea;-1;4239;3379;4255;3394;;North Norsca

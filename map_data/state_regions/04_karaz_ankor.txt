@@ -836,7 +836,7 @@ STATE_LAND_527 = {
 STATE_CURSED_WAY = {
     id = 573
     subsistence_building = "building_subsistence_farm"
-    provinces = { x045319 x235FD6 x2E1C7D x48B96B x5FCEC8 x85285D xBA3D8D xE6866B xFE0641 }
+    provinces = { x045319 x235FD6 x2E1C7D x40C20B x48B96B x5FCEC8 x85285D xA28A92 xBA3D8D xFE0641 }
     impassable = { x2E1C7D }
     city = x5FCEC8
     farm = xBA3D8D
@@ -928,34 +928,4 @@ STATE_LAND_606 = {
         building_logging_camp = 10
     }
     naval_exit_id = 3105
-}
-STATE_LAND_619 = {
-    id = 619
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x40C20B xA28A92 }
-    city = xA28A92
-    farm = xA28A92
-    mine = xA28A92
-    wood = xA28A92
-    port = xA28A92
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
-    naval_exit_id = 3105
-}
-STATE_LAND_621 = {
-    id = 621
-    subsistence_building = "building_subsistence_farm"
-    provinces = { xBE393D xFAA82F }
-    city = xBE393D
-    farm = xBE393D
-    mine = xBE393D
-    wood = xBE393D
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
 }

@@ -62,7 +62,7 @@ STATE_CITY_OF_KINGS = {
 STATE_THE_SCARAB_CITY = {
     id = 571
     subsistence_building = "building_subsistence_farm"
-    provinces = { x009863 x147E00 x17ADC0 x1EC688 x26536F x3D0755 x40B909 x455B59 x541CB2 x5D6FCB x70CA72 x881BF6 xAD758B xB5E539 xD5251B xD80F0E xDAEFFF xDB3ECE xE40FF3 xF2542B }
+    provinces = { x009863 x147E00 x17ADC0 x1EC688 x26536F x3D0755 x40B909 x455B59 x541CB2 x5D6FCB x70CA72 x881BF6 xAD758B xB5E539 xBE393D xD5251B xD80F0E xDAEFFF xDB3ECE xE40FF3 xF2542B xFAA82F }
     city = x1EC688
     farm = x147E00
     mine = xB5E539
@@ -138,4 +138,36 @@ STATE_LAND_620 = {
         building_logging_camp = 10
     }
     naval_exit_id = 3218
+}
+STATE_LAND_623 = {
+    id = 623
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x09C62C x1879B0 x19C2C1 x313995 x3CB886 xA6FA61 xB6B129 xF3201B }
+    city = x313995
+    farm = x09C62C
+    mine = x3CB886
+    wood = xF3201B
+    port = xA6FA61
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3110
+}
+STATE_LAND_624 = {
+    id = 624
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0BE000 x92A0A5 x9BA01C xA7FDA5 xE46C97 xF4692C }
+    city = xF4692C
+    farm = xA7FDA5
+    mine = x0BE000
+    wood = xE46C97
+    port = x9BA01C
+    arable_land = 10
+    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 10
+    }
+    naval_exit_id = 3110
 }

@@ -721,7 +721,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                  city_blobs: list[np.ndarray] | None = None,
                  city_line: np.ndarray | None = None,
                  city_seeds: list[tuple[int, int]] | None = None,
-                 city_seed_sep: int = 16
+                 city_seed_sep: int = 16,
+                 city_seed_cap: bool = False
                  ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -872,11 +873,26 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 f"impassable paint on {len(problems)} region(s) that cannot take it:\n  "
                 + "\n  ".join(problems))
 
+    # Largest-remainder seat allocation across the drawn regions: one each, then
+    # the remaining seats by area share, so the totals add up exactly.
+    seats = np.ones(len(drawn_ids), dtype=int)
+    spare = max(0, target - len(drawn_ids))
+    if spare and drawn_areas.sum() > 0:
+        quota = drawn_areas / drawn_areas.sum() * spare
+        base = np.floor(quota).astype(int)
+        rem = spare - int(base.sum())
+        order = np.argsort(-(quota - base), kind="stable")
+        base[order[:rem]] += 1
+        seats += base
+    budget_by_id = dict(zip(drawn_ids, seats.tolist()))  # area-share seats, pre hub bump
     # City seeds (#5679): every city dot is a fixed seed so each blob forms its own
     # province. Hub anchors keep priority; a dot is skipped (and logged) when it is
     # on a keep_whole archipelago / non-drawn region / impassable paint, or within
     # ``city_seed_sep`` px of an already-accepted seed in its region (two seeds that
-    # close would collapse into one province anyway).
+    # close would collapse into one province anyway). With ``city_seed_cap`` the dots
+    # are only recommendations (Chris, 2026-09-29): a region takes dots only until its
+    # seeds (hub anchors first) fill its area-share seat budget, so a city-dense state
+    # is not shattered into a province per dot; the rest are skipped and logged.
     if city_seeds:
         drawn_now = set(drawn_ids)
         merged = {k: list(v) for k, v in seeds_by_region.items()}
@@ -890,6 +906,9 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 skipped.setdefault("on impassable paint", []).append((cx_, cy_))
                 continue
             near = merged.setdefault(rid, [])
+            if city_seed_cap and len(near) >= budget_by_id.get(rid, 1):
+                skipped.setdefault("region's province budget already filled", []).append((cx_, cy_))
+                continue
             if any((cx_ - ax) ** 2 + (cy_ - ay) ** 2 < city_seed_sep ** 2 for ax, ay in near):
                 skipped.setdefault(f"within {city_seed_sep}px of another seed", []).append((cx_, cy_))
                 continue
@@ -901,17 +920,6 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             for why, pts in skipped.items():
                 log(f"  WARNING: {len(pts)} city seed(s) skipped ({why}): "
                     + ", ".join(f"({x},{y})" for x, y in pts[:12]) + (" ..." if len(pts) > 12 else ""))
-    # Largest-remainder seat allocation across the drawn regions: one each, then
-    # the remaining seats by area share, so the totals add up exactly.
-    seats = np.ones(len(drawn_ids), dtype=int)
-    spare = max(0, target - len(drawn_ids))
-    if spare and drawn_areas.sum() > 0:
-        quota = drawn_areas / drawn_areas.sum() * spare
-        base = np.floor(quota).astype(int)
-        rem = spare - int(base.sum())
-        order = np.argsort(-(quota - base), kind="stable")
-        base[order[:rem]] += 1
-        seats += base
     # A seeded region needs at least as many seats as it has distinct anchors, so
     # every hub can get its own province (soft-target drift is fine, per #3664).
     if seeds_by_region:

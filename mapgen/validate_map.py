@@ -390,8 +390,11 @@ def validate(
                                             set(sea_colors) | set(lake_colors))
             del cities_rgba
         if hub_index is not None:
+            hub_loc_keys = _parse_loc_keys(loc_dir)
+            for extra in extra_loc_dirs:
+                hub_loc_keys |= _parse_loc_keys(extra)
             errors += _check_hub_anchors(
-                bitmap, states, sea_colors, _parse_loc_keys(loc_dir), hub_index)
+                bitmap, states, sea_colors, hub_loc_keys, hub_index)
         # Rivers (#3703): gated on the source-driven pipeline being live — the
         # names file's presence is that signal (the same file-exists idiom the
         # canon_rivers.csv cross-check uses). Absent -> the committed gate stays

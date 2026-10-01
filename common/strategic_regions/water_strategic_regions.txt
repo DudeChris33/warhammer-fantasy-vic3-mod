@@ -130,8 +130,8 @@ region_devourer_nippon_channel_placeholder = {
 	states = { STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER }
 }
 
-region_dragon_isles_bypass = {
-	states = { STATE_DRAGON_ISLES_BYPASS }
+region_dragon_isles_bypass_02 = {
+	states = { STATE_DRAGON_ISLES_BYPASS_02 }
 }
 
 region_drakefjord_bay = {
@@ -202,8 +202,8 @@ region_far_sulpheret_coast = {
 	states = { STATE_FAR_SULPHERET_COAST }
 }
 
-region_forbidding_coast = {
-	states = { STATE_FORBIDDING_COAST }
+region_forbidding_coast_02 = {
+	states = { STATE_FORBIDDING_COAST_02 }
 }
 
 region_frozen_sea_01 = {
@@ -258,8 +258,8 @@ region_great_ocean_10 = {
 	states = { STATE_GREAT_OCEAN_10 }
 }
 
-region_guano_rocks_bypass = {
-	states = { STATE_GUANO_ROCKS_BYPASS }
+region_guano_rocks_bypass_02 = {
+	states = { STATE_GUANO_ROCKS_BYPASS_02 }
 }
 
 region_gulf_of_bidouze = {
@@ -348,10 +348,6 @@ region_jade_sea_10 = {
 
 region_jade_sea_11 = {
 	states = { STATE_JADE_SEA_11 }
-}
-
-region_karond_kar_bypass = {
-	states = { STATE_KAROND_KAR_BYPASS }
 }
 
 region_kraken_sea = {
@@ -490,10 +486,6 @@ region_ocean_of_dread_05 = {
 	states = { STATE_OCEAN_OF_DREAD_05 }
 }
 
-region_ocean_of_dread_06 = {
-	states = { STATE_OCEAN_OF_DREAD_06 }
-}
-
 region_pirates_current = {
 	states = { STATE_PIRATES_CURRENT }
 }
@@ -546,10 +538,6 @@ region_sea_of_dusk = {
 	states = { STATE_SEA_OF_DUSK }
 }
 
-region_sea_of_fear_01 = {
-	states = { STATE_SEA_OF_FEAR_01 }
-}
-
 region_sea_of_fear_02 = {
 	states = { STATE_SEA_OF_FEAR_02 }
 }
@@ -568,6 +556,10 @@ region_sea_of_fear_05 = {
 
 region_sea_of_feuds = {
 	states = { STATE_SEA_OF_FEUDS }
+}
+
+region_sea_of_feuds_03 = {
+	states = { STATE_SEA_OF_FEUDS_03 }
 }
 
 region_sea_of_malice_01 = {
@@ -676,10 +668,6 @@ region_sour_sea = {
 
 region_southern_boiling_sea = {
 	states = { STATE_SOUTHERN_BOILING_SEA }
-}
-
-region_southern_far_ocean = {
-	states = { STATE_SOUTHERN_FAR_OCEAN }
 }
 
 region_southern_great_ocean = {

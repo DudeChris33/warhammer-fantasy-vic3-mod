@@ -124,7 +124,7 @@ STATE_LAND_021 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3014
+    naval_exit_id = 3013
 }
 STATE_LAND_022 = {
     id = 22
@@ -220,7 +220,7 @@ STATE_LAND_027 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3014
+    naval_exit_id = 3013
 }
 STATE_LAND_028 = {
     id = 28
@@ -668,7 +668,7 @@ STATE_LAND_429 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3014
+    naval_exit_id = 3013
 }
 STATE_LAND_430 = {
     id = 430
@@ -684,7 +684,7 @@ STATE_LAND_430 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3014
+    naval_exit_id = 3013
 }
 STATE_LAND_431 = {
     id = 431
@@ -716,7 +716,7 @@ STATE_LAND_432 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3014
+    naval_exit_id = 3013
 }
 STATE_LAND_433 = {
     id = 433
@@ -732,7 +732,7 @@ STATE_LAND_433 = {
     capped_resources = {
         building_logging_camp = 10
     }
-    naval_exit_id = 3014
+    naval_exit_id = 3013
 }
 STATE_LAND_434 = {
     id = 434
@@ -1021,20 +1021,4 @@ STATE_LAND_453 = {
         building_logging_camp = 10
     }
     naval_exit_id = 3078
-}
-STATE_LAND_622 = {
-    id = 622
-    subsistence_building = "building_subsistence_farm"
-    provinces = { xAB2463 }
-    city = xAB2463
-    farm = xAB2463
-    mine = xAB2463
-    wood = xAB2463
-    port = xAB2463
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
-    naval_exit_id = 3000
 }

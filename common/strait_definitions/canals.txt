@@ -37,6 +37,32 @@ canal_altdorf_t = {
 	second_sea_endpoint = xD85DDD
 }
 
+canal_ash_river_l = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x4AA4ED
+	second_land_endpoint = x58C3D5
+
+	first_sea_endpoint = x3F00AC
+	second_sea_endpoint = xC804A4
+}
+
+canal_ash_river_r = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x4AA4ED
+	second_land_endpoint = xBE4712
+
+	first_sea_endpoint = x3F00AC
+	second_sea_endpoint = xAB7C34
+}
+
 canal_ash_t = {
 	type = natural
 
@@ -87,6 +113,19 @@ canal_aver_t = {
 
 	first_sea_endpoint = xD9DA13
 	second_sea_endpoint = xE12F02
+}
+
+canal_bay_of_uzkulak = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xC51AB1
+	second_land_endpoint = xE6F5B7
+
+	first_sea_endpoint = x450C8A
+	second_sea_endpoint = x8A4CA1
 }
 
 canal_bitter_sea = {
@@ -232,6 +271,19 @@ canal_erengrad = {
 	second_sea_endpoint = xAFA636
 }
 
+canal_great_mortis_delta = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x1879B0
+	second_land_endpoint = x4AA4ED
+
+	first_sea_endpoint = x20FC06
+	second_sea_endpoint = xC804A4
+}
+
 canal_grismerie = {
 	type = natural
 
@@ -245,6 +297,32 @@ canal_grismerie = {
 	second_sea_endpoint = xFDB772
 }
 
+canal_isle_of_dawn = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x431CD9
+	second_land_endpoint = x4AA4ED
+
+	first_sea_endpoint = x2B163C
+	second_sea_endpoint = xC94DB5
+}
+
+canal_isles_of_dusk = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xA4E560
+	second_land_endpoint = xC51AB1
+
+	first_sea_endpoint = x506FD1
+	second_sea_endpoint = xE06312
+}
+
 canal_kraka_ravnsnake = {
 	type = artificial
 
@@ -252,7 +330,7 @@ canal_kraka_ravnsnake = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x07A829
-	second_land_endpoint = xE7A12A
+	second_land_endpoint = xCB3937
 
 	first_sea_endpoint = x116EBD
 	second_sea_endpoint = x4DDDAF
@@ -318,7 +396,7 @@ canal_marienburg = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x021499
-	second_land_endpoint = x2BE6FF
+	second_land_endpoint = x4CC7C3
 
 	first_sea_endpoint = x84D98E
 	second_sea_endpoint = xCF8CB8
@@ -435,7 +513,7 @@ canal_uzkulak = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x280BCC
+	first_land_endpoint = x89D453
 	second_land_endpoint = xB150BE
 
 	first_sea_endpoint = x8A4CA1

@@ -170,9 +170,30 @@ def _segment_crosses_water(land: np.ndarray, x1: int, y1: int, x2: int, y2: int)
     return not bool(land[ys, xs].all())
 
 
+def region_names_from_worksheet(reg: np.ndarray, path: Path) -> dict[int, set[str]]:
+    """``{region_label: {state names}}`` from the committed naming worksheet, each named
+    row's anchor resolved through the *post-merge* ``reg``. A merge-fused region carries
+    every constituent name; absent file or blank names -> ``{}``."""
+    import csv
+    out: dict[int, set[str]] = {}
+    if not path.is_file():
+        return out
+    rad = land_provinces._MERGE_ANCHOR_SEARCH_RADIUS
+    with path.open(encoding="utf-8", newline="") as fh:
+        for row in csv.DictReader(fh):
+            if not row.get("name") or row.get("kind") != "drawn":
+                continue
+            rid, _ = land_provinces.resolve_anchor(reg, int(row["anchor_x"]), int(row["anchor_y"]), rad)
+            if rid > 0:
+                out.setdefault(rid, set()).add(row["name"])
+    return out
+
+
 def plan_hub_seeds(rows: list, reg: np.ndarray, keep_whole: set[int],
                    min_sep: int = MIN_ANCHOR_SEP,
-                   land: np.ndarray | None = None
+                   land: np.ndarray | None = None,
+                   region_names: dict[int, set[str]] | None = None,
+                   dropped: list | None = None
                    ) -> tuple[dict[int, list[tuple[int, int]]], list]:
     """Resolve hub-worksheet rows (#3665) into the cut's ``region_seeds`` + the
     ``(row, region, (rx, ry))`` list the persisted index is built from.
@@ -190,10 +211,19 @@ def plan_hub_seeds(rows: list, reg: np.ndarray, keep_whole: set[int],
     can never actually compete for the same land. ``land is None`` (the
     ``run_fixture.py`` unit-test call sites) keeps the pre-existing strict
     Euclidean-only check.
+
+    A state holds one hub of each kind, and the anchors are resolved against the
+    *post-merge* regions, so two rows of the same kind can land in one region (a border
+    or merge put a neighbour's port inside this state). The extras are dropped, not
+    an error (Chris, 2026-09-29): the row whose ``state`` is one of the region's own
+    names (``region_names``) wins, else authored order; each dropped row — and any
+    ``stack_on`` rows riding its pixel — is appended to ``dropped`` and logged by the
+    caller. ``region_names=None`` keeps first-in-order (the fixture call sites).
     """
     rad = land_provinces._MERGE_ANCHOR_SEARCH_RADIUS
     region_seeds: dict[int, list[tuple[int, int]]] = {}
     hub_rows: list = []
+    resolved: list = []
     for r in rows:
         rid, (rx, ry) = land_provinces.resolve_anchor(reg, r.anchor[0], r.anchor[1], rad)
         if rid <= 0:
@@ -205,6 +235,30 @@ def plan_hub_seeds(rows: list, reg: np.ndarray, keep_whole: set[int],
                 f"hub '{r.name}' anchor {list(r.anchor)} resolves into island-override "
                 f"archipelago region {rid} — it can never host a distinct hub province; "
                 f"move the anchor")
+        resolved.append((r, rid, (rx, ry)))
+    winner: dict[tuple[int, str], int] = {}
+    for i, (r, rid, _p) in enumerate(resolved):
+        if r.stack_on:
+            continue
+        k = (rid, r.hub)
+        native = r.state in (region_names or {}).get(rid, ())
+        if k not in winner:
+            winner[k] = i
+        elif native and resolved[winner[k]][0].state not in (region_names or {}).get(rid, ()):
+            winner[k] = i
+    lost_px: set = set()
+    for i, (r, rid, p) in enumerate(resolved):
+        if not r.stack_on and winner[(rid, r.hub)] != i:
+            lost_px.add((r.anchor, r.hub))
+            if dropped is not None:
+                dropped.append((r, rid))
+    for r, rid, (rx, ry) in resolved:
+        if r.stack_on and (r.anchor, r.stack_on) in lost_px:
+            if dropped is not None:
+                dropped.append((r, rid))
+            continue
+        if not r.stack_on and (r.anchor, r.hub) in lost_px:
+            continue
         if not r.stack_on:
             region_seeds.setdefault(rid, []).append((rx, ry))
         hub_rows.append((r, rid, (rx, ry)))
@@ -361,9 +415,16 @@ def main(argv: list[str] | None = None) -> int:
     if HUB_WORKSHEET_CONFIG.is_file():
         rows = schema.load_hub_worksheet(HUB_WORKSHEET_CONFIG, canvas=(CANVAS_W, CANVAS_H))
         try:
-            region_seeds, hub_rows = plan_hub_seeds(rows, reg, keep_whole, land=land)
+            dropped: list = []
+            names = region_names_from_worksheet(
+                reg, TOOLS_DIR / "config" / "land_regions_worksheet.csv")
+            region_seeds, hub_rows = plan_hub_seeds(rows, reg, keep_whole, land=land,
+                                                    region_names=names, dropped=dropped)
         except ValueError as e:
             raise SystemExit(f"{HUB_WORKSHEET_CONFIG.name}: {e}")
+        for dr, drid in dropped:
+            log(f"hub '{dr.name}' ({dr.state}/{dr.stack_on or dr.hub}) dropped: region {drid} "
+                f"already has a {dr.stack_on or dr.hub} hub", t0)
         n_stack = sum(1 for r, _rid, _p in hub_rows if r.stack_on)
         log(f"hub worksheet: {len(rows)} settlement(s) ({n_stack} stacked) -> "
             f"{len(region_seeds)} seeded region(s)", t0)
@@ -409,7 +470,8 @@ def main(argv: list[str] | None = None) -> int:
                 strict_placeholder_paint=args.strict_placeholder_paint,
                 keep_passable=canon_cities or None,
                 city_blobs=city_blobs or None, city_line=mag,
-                city_seeds=city_dots or None, city_seed_sep=MIN_ANCHOR_SEP)
+                city_seeds=city_dots or None, city_seed_sep=MIN_ANCHOR_SEP,
+                city_seed_cap=True)
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())

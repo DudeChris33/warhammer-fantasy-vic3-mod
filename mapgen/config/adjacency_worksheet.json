@@ -14,6 +14,30 @@
     },
     {
       "a": [
+        3050,
+        1472
+      ],
+      "b": [
+        3060,
+        1450
+      ],
+      "type": "sea",
+      "comment": "Yvresse"
+    },
+    {
+      "a": [
+        3001,
+        1543
+      ],
+      "b": [
+        2991,
+        1553
+      ],
+      "type": "sea",
+      "comment": "Yvresse"
+    },
+    {
+      "a": [
         4145,
         950
       ],
@@ -26,6 +50,18 @@
     },
     {
       "a": [
+        3097,
+        3036
+      ],
+      "b": [
+        3069,
+        3052
+      ],
+      "type": "sea",
+      "comment": "Isles of Dusk"
+    },
+    {
+      "a": [
         4983,
         1395
       ],
@@ -35,6 +71,18 @@
       ],
       "type": "sea",
       "comment": "Lower River Ruin"
+    },
+    {
+      "a": [
+        4381,
+        453
+      ],
+      "b": [
+        4366,
+        436
+      ],
+      "type": "sea",
+      "comment": "North Kislev River"
     },
     {
       "a": [
@@ -86,6 +134,30 @@
     },
     {
       "a": [
+        2960,
+        1094
+      ],
+      "b": [
+        2971,
+        1094
+      ],
+      "type": "sea",
+      "comment": "Clothique"
+    },
+    {
+      "a": [
+        2937,
+        1076
+      ],
+      "b": [
+        2926,
+        1071
+      ],
+      "type": "sea",
+      "comment": "Clothique"
+    },
+    {
+      "a": [
         4322,
         783
       ],
@@ -95,6 +167,18 @@
       ],
       "type": "canal_upper_talabec",
       "comment": "Upper Talabec River"
+    },
+    {
+      "a": [
+        5147,
+        2357
+      ],
+      "b": [
+        5140,
+        2374
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -110,12 +194,12 @@
     },
     {
       "a": [
-        4163,
-        1090
+        4165,
+        1083
       ],
       "b": [
-        4157,
-        1071
+        4159,
+        1070
       ],
       "type": "sea",
       "comment": "Fort Soll"
@@ -179,7 +263,9 @@
       ],
       "type": "canal_kraka_ravnsnake",
       "comment": "Kraka Ravnsnake",
-      "strait_type": "artificial"
+      "strait_type": "artificial",
+      "land_a_color": "x07A829",
+      "land_b_color": "xCB3937"
     },
     {
       "a": [
@@ -192,6 +278,30 @@
       ],
       "type": "sea",
       "comment": "Northern World's Edge"
+    },
+    {
+      "a": [
+        2968,
+        1526
+      ],
+      "b": [
+        2979,
+        1536
+      ],
+      "type": "sea",
+      "comment": "Yvresse"
+    },
+    {
+      "a": [
+        2947,
+        1529
+      ],
+      "b": [
+        2934,
+        1518
+      ],
+      "type": "sea",
+      "comment": "Yvresse"
     },
     {
       "a": [
@@ -216,6 +326,18 @@
       ],
       "type": "sea",
       "comment": "River Brionne"
+    },
+    {
+      "a": [
+        3902,
+        1542
+      ],
+      "b": [
+        3916,
+        1559
+      ],
+      "type": "canal_great_mortis_delta",
+      "comment": "Great Mortis Delta"
     },
     {
       "a": [
@@ -255,6 +377,42 @@
     },
     {
       "a": [
+        2807,
+        991
+      ],
+      "b": [
+        2787,
+        1006
+      ],
+      "type": "sea",
+      "comment": "Ulthuan Northern Isles"
+    },
+    {
+      "a": [
+        2799,
+        953
+      ],
+      "b": [
+        2780,
+        965
+      ],
+      "type": "sea",
+      "comment": "Ulthuan Northern Isles"
+    },
+    {
+      "a": [
+        2832,
+        949
+      ],
+      "b": [
+        2848,
+        949
+      ],
+      "type": "sea",
+      "comment": "Ulthuan Northern Isles"
+    },
+    {
+      "a": [
         4281,
         879
       ],
@@ -264,6 +422,30 @@
       ],
       "type": "sea",
       "comment": "Mordheim"
+    },
+    {
+      "a": [
+        4331,
+        3056
+      ],
+      "b": [
+        4345,
+        3045
+      ],
+      "type": "canal_isle_of_dawn",
+      "comment": "Isle of Dawn"
+    },
+    {
+      "a": [
+        2762,
+        991
+      ],
+      "b": [
+        2772,
+        974
+      ],
+      "type": "sea",
+      "comment": "Ulthuan Northern Isles"
     },
     {
       "a": [
@@ -303,6 +485,18 @@
     },
     {
       "a": [
+        2981,
+        1574
+      ],
+      "b": [
+        2987,
+        1561
+      ],
+      "type": "sea",
+      "comment": "Yvresse"
+    },
+    {
+      "a": [
         3674,
         975
       ],
@@ -312,6 +506,42 @@
       ],
       "type": "sea",
       "comment": "North Estalian Island"
+    },
+    {
+      "a": [
+        3245,
+        1634
+      ],
+      "b": [
+        3259,
+        1639
+      ],
+      "type": "sea",
+      "comment": "Sorcerers Islands"
+    },
+    {
+      "a": [
+        3246,
+        1610
+      ],
+      "b": [
+        3265,
+        1611
+      ],
+      "type": "sea",
+      "comment": "Sorcerers Islands"
+    },
+    {
+      "a": [
+        3242,
+        1637
+      ],
+      "b": [
+        3234,
+        1654
+      ],
+      "type": "sea",
+      "comment": "Sorcerers Islands"
     },
     {
       "a": [
@@ -356,9 +586,33 @@
       ],
       "b": [
         4103,
-        1700
+        1698
       ],
       "type": "canal_ash_t",
+      "comment": "Ash River"
+    },
+    {
+      "a": [
+        4104,
+        1700
+      ],
+      "b": [
+        4112,
+        1702
+      ],
+      "type": "canal_ash_river_r",
+      "comment": "Ash River"
+    },
+    {
+      "a": [
+        4102,
+        1700
+      ],
+      "b": [
+        4090,
+        1703
+      ],
+      "type": "canal_ash_river_l",
       "comment": "Ash River"
     },
     {
@@ -399,6 +653,78 @@
     },
     {
       "a": [
+        5238,
+        2287
+      ],
+      "b": [
+        5260,
+        2286
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5231,
+        2282
+      ],
+      "b": [
+        5227,
+        2259
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5239,
+        2295
+      ],
+      "b": [
+        5247,
+        2320
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        4664,
+        495
+      ],
+      "b": [
+        4672,
+        508
+      ],
+      "type": "canal_bay_of_uzkulak",
+      "comment": "Bay of Uzkulak"
+    },
+    {
+      "a": [
+        3267,
+        1639
+      ],
+      "b": [
+        3273,
+        1620
+      ],
+      "type": "sea",
+      "comment": "Sorcerers Islands"
+    },
+    {
+      "a": [
+        3259,
+        1647
+      ],
+      "b": [
+        3238,
+        1657
+      ],
+      "type": "sea",
+      "comment": "Sorcerers Islands"
+    },
+    {
+      "a": [
         3852,
         1321
       ],
@@ -408,6 +734,30 @@
       ],
       "type": "canal_sartosa",
       "comment": "Sartosa"
+    },
+    {
+      "a": [
+        5268,
+        2286
+      ],
+      "b": [
+        5261,
+        2262
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5272,
+        2292
+      ],
+      "b": [
+        5259,
+        2321
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -454,8 +804,8 @@
         1118
       ],
       "b": [
-        4160,
-        1085
+        4161,
+        1084
       ],
       "type": "canal_echoes_r",
       "comment": "River of Echoes",
@@ -477,39 +827,27 @@
     },
     {
       "a": [
-        4151,
-        898
+        2670,
+        1611
       ],
       "b": [
-        4146,
-        898
+        2660,
+        1597
       ],
-      "type": "canal_nuln_r",
-      "comment": "Nuln"
+      "type": "sea",
+      "comment": "Caledor"
     },
     {
       "a": [
-        3938,
-        428
+        3025,
+        3045
       ],
       "b": [
-        4051,
-        1027
+        3025,
+        3065
       ],
-      "type": "sea",
-      "comment": "Forest of Sighs"
-    },
-    {
-      "a": [
-        3707,
-        1184
-      ],
-      "b": [
-        3694,
-        1194
-      ],
-      "type": "sea",
-      "comment": "South Estalian Island"
+      "type": "canal_isles_of_dusk",
+      "comment": "Isles of Dusk"
     },
     {
       "a": [
@@ -534,6 +872,66 @@
       ],
       "type": "sea",
       "comment": "Hell Pit"
+    },
+    {
+      "a": [
+        4151,
+        898
+      ],
+      "b": [
+        4146,
+        898
+      ],
+      "type": "canal_nuln_r",
+      "comment": "Nuln"
+    },
+    {
+      "a": [
+        3072,
+        1309
+      ],
+      "b": [
+        3066,
+        1320
+      ],
+      "type": "sea",
+      "comment": "Clothique"
+    },
+    {
+      "a": [
+        3092,
+        1281
+      ],
+      "b": [
+        3098,
+        1268
+      ],
+      "type": "sea",
+      "comment": "Clothique"
+    },
+    {
+      "a": [
+        3938,
+        428
+      ],
+      "b": [
+        4051,
+        1027
+      ],
+      "type": "sea",
+      "comment": "Forest of Sighs"
+    },
+    {
+      "a": [
+        3707,
+        1184
+      ],
+      "b": [
+        3694,
+        1194
+      ],
+      "type": "sea",
+      "comment": "South Estalian Island"
     },
     {
       "a": [
@@ -633,18 +1031,6 @@
     },
     {
       "a": [
-        4297,
-        471
-      ],
-      "b": [
-        4296,
-        456
-      ],
-      "type": "sea",
-      "comment": "North Kislev River"
-    },
-    {
-      "a": [
         3956,
         894
       ],
@@ -666,6 +1052,18 @@
       ],
       "type": "sea",
       "comment": "Sjotraken"
+    },
+    {
+      "a": [
+        3065,
+        1185
+      ],
+      "b": [
+        3080,
+        1195
+      ],
+      "type": "sea",
+      "comment": "Clothique"
     },
     {
       "a": [
@@ -751,7 +1149,7 @@
       "type": "canal_uzkulak",
       "comment": "Uzkulak Canal",
       "strait_type": "artificial",
-      "land_a_color": "x280BCC",
+      "land_a_color": "x89D453",
       "land_b_color": "xB150BE"
     },
     {
@@ -880,8 +1278,8 @@
         1107
       ],
       "b": [
-        4155,
-        1085
+        4161,
+        1080
       ],
       "type": "canal_echoes_t",
       "comment": "River of Echoes",
@@ -915,6 +1313,18 @@
       "total_block_requires_full_control": true,
       "military_block_requires_full_control": true,
       "tolls_require_full_control": true
+    },
+    {
+      "a": [
+        4048,
+        700
+      ],
+      "b": [
+        4053,
+        1027
+      ],
+      "type": "sea",
+      "comment": "Laurelorn Forest"
     },
     {
       "a": [
@@ -1460,6 +1870,81 @@
       ],
       "type": "",
       "comment": ""
+    },
+    {
+      "a": [
+        4163,
+        1090
+      ],
+      "b": [
+        4157,
+        1071
+      ],
+      "type": "sea",
+      "comment": "Fort Soll"
+    },
+    {
+      "a": [
+        4012,
+        1107
+      ],
+      "b": [
+        4155,
+        1085
+      ],
+      "type": "canal_echoes_t",
+      "comment": "River of Echoes",
+      "strait_type": "artificial",
+      "land_a_color": "x5DE819",
+      "land_b_color": "x664EC5"
+    },
+    {
+      "a": [
+        4297,
+        471
+      ],
+      "b": [
+        4296,
+        456
+      ],
+      "type": "sea",
+      "comment": "North Kislev River"
+    },
+    {
+      "a": [
+        5151,
+        1688
+      ],
+      "b": [
+        5143,
+        1669
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
+    },
+    {
+      "a": [
+        5166,
+        1663
+      ],
+      "b": [
+        5157,
+        1647
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
+    },
+    {
+      "a": [
+        5138,
+        1663
+      ],
+      "b": [
+        5150,
+        1648
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
     }
   ]
 }
