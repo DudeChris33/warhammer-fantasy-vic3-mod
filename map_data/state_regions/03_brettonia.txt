@@ -83,9 +83,9 @@ STATE_BASTONNE = {
 STATE_MONTFORT = {
     id = 54
     subsistence_building = "building_subsistence_farm"
-    provinces = { x65A352 x9B971A xE26A3E }
-    city = x9B971A
-    farm = x9B971A
+    provinces = { x65A352 x9B971A x9DD59A xE26A3E }
+    city = x9DD59A
+    farm = x9DD59A
     mine = x9B971A
     wood = xE26A3E
     port = xE26A3E
@@ -556,20 +556,4 @@ STATE_LAND_582 = {
         building_logging_camp = 10
     }
     naval_exit_id = 3065
-}
-STATE_LAND_618 = {
-    id = 618
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x9DD59A }
-    city = x9DD59A
-    farm = x9DD59A
-    mine = x9DD59A
-    wood = x9DD59A
-    port = x9DD59A
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
-    naval_exit_id = 3044
 }

@@ -1909,6 +1909,13 @@ def _selfcheck_seeded_cut() -> None:
     prot = C.merge_small(lab, 5, wrap_x=False, protected={1})
     assert int(len(np.unique(prot))) == 2 and prot[0, 0] != prot[5, 5],         "a protected sub-floor cell must survive"
 
+    # Three mutually-adjacent sub-floor cells that each pick the next (a -> b -> c -> a)
+    # used to rotate labels forever and never merge, stranding a thin coastal spur as
+    # several tiny states; a cycle must fold into one cell.
+    cyc = np.array([[3, 2, 3, 3, 3, 2], [3, 3, 1, 2, 2, 3], [2, 3, 2, 3, 1, 2],
+                    [1, 3, 2, 2, 3, 1], [2, 3, 3, 3, 3, 2]], dtype=np.int32)
+    assert int(len(np.unique(C.merge_small(cyc, 100, wrap_x=False)))) == 1,         "a merge_small choice cycle must fold into a single cell"
+
     # --- cells._farthest_seeds(fixed=) primitive ---
     pix = np.column_stack(np.nonzero(np.ones((6, 6), dtype=bool)))
     base = C._farthest_seeds(pix, 3)

@@ -35,7 +35,6 @@ STATE_LAND_080 = {
     id = 80
     subsistence_building = "building_subsistence_farm"
     provinces = { x05035F x2A5CF4 x417251 x5DFAC1 x75101E x8C257B x9A69B3 xA33AD8 xC8946D xE58C29 xEDEE02 }
-    impassable = { x417251 }
     city = xEDEE02
     farm = x5DFAC1
     mine = x2A5CF4
@@ -546,28 +545,12 @@ STATE_LAND_586 = {
     }
     naval_exit_id = 3072
 }
-STATE_ISLES_OF_THE_SIREN = {
-    id = 600
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x10F66F x80326B }
-    city = x80326B
-    farm = x80326B
-    mine = x80326B
-    wood = x80326B
-    port = x80326B
-    arable_land = 10
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_logging_camp = 10
-    }
-    naval_exit_id = 3073
-}
 STATE_LAND_602 = {
     id = 602
     subsistence_building = "building_subsistence_farm"
-    provinces = { x2D01BE x9ECFDC }
-    city = x9ECFDC
-    farm = x9ECFDC
+    provinces = { x10F66F x2D01BE x80326B x9ECFDC }
+    city = x80326B
+    farm = x80326B
     mine = x9ECFDC
     wood = x9ECFDC
     port = x9ECFDC

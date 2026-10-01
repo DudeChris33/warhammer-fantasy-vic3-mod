@@ -1,9 +1,4 @@
-﻿STATE_SEA_OF_RAGE_04 = {
-	id = 3000
-	provinces = { xCC2EA6 }
-}
-
-STATE_SHARD_COAST = {
+﻿STATE_SHARD_COAST = {
 	id = 3001
 	provinces = { x6A661F }
 }
@@ -17,6 +12,11 @@ STATE_SEA_OF_CHAOS = {
 STATE_SEA_OF_CHILL = {
 	id = 3003
 	provinces = { xA6D511 }
+}
+
+STATE_SEA_OF_RAGE_04 = {
+	id = 3000
+	provinces = { xCC2EA6 }
 }
 
 STATE_FROZEN_SEA_01 = {
@@ -54,6 +54,11 @@ STATE_THE_UNDERWAY = {
 	provinces = { xFA5960 }
 }
 
+STATE_FORBIDDING_COAST_02 = {
+	id = 3013
+	provinces = { xD4FFCB }
+}
+
 STATE_GULF_OF_NAGGAROND = {
 	id = 3011
 	provinces = { x9890D9 }
@@ -65,12 +70,7 @@ STATE_NORTHERN_FAR_OCEAN_01 = {
 	impassable = { x36C852 }
 }
 
-STATE_KAROND_KAR_BYPASS = {
-	id = 3013
-	provinces = { xD4FFCB }
-}
-
-STATE_FORBIDDING_COAST = {
+STATE_SEA_OF_FEUDS_03 = {
 	id = 3014
 	provinces = { x733744 }
 }
@@ -540,14 +540,14 @@ STATE_GREAT_MORTIS_RIVER_02 = {
 	provinces = { xC804A4 }
 }
 
-STATE_SEA_OF_FEAR_01 = {
-	id = 3111
-	provinces = { x663C1D }
-}
-
 STATE_FAR_OCEAN_04 = {
 	id = 3112
 	provinces = { x047396 }
+}
+
+STATE_DRAGON_ISLES_BYPASS_02 = {
+	id = 3111
+	provinces = { x663C1D }
 }
 
 STATE_JADE_SEA_01 = {
@@ -600,11 +600,6 @@ STATE_JADE_SEA_03 = {
 STATE_SOUTH_ULTHUAN_PASSAGE_PLACEHOLDER = {
 	id = 3122
 	provinces = { x329E50 }
-}
-
-STATE_DRAGON_ISLES_BYPASS = {
-	id = 3123
-	provinces = { xD0D5C9 }
 }
 
 STATE_SEA_OF_WRATH_06 = {
@@ -839,7 +834,7 @@ STATE_OCEAN_OF_DREAD_01 = {
 	impassable = { x7B3C79 }
 }
 
-STATE_SOUTHERN_FAR_OCEAN = {
+STATE_GUANO_ROCKS_BYPASS_02 = {
 	id = 3172
 	provinces = { x1973F2 }
 	impassable = { x1973F2 }
@@ -931,11 +926,6 @@ STATE_JADE_SEA_08 = {
 	provinces = { x9B22FB }
 }
 
-STATE_OCEAN_OF_DREAD_06 = {
-	id = 3323
-	provinces = { x007CB9 }
-}
-
 STATE_OCEAN_OF_DREAD_04 = {
 	id = 3190
 	provinces = { x395A74 }
@@ -999,11 +989,6 @@ STATE_JADE_SEA_10 = {
 STATE_GREAT_OCEAN_09 = {
 	id = 3202
 	provinces = { xA3F420 }
-}
-
-STATE_GUANO_ROCKS_BYPASS = {
-	id = 3203
-	provinces = { x422B99 }
 }
 
 STATE_GREAT_OCEAN_10 = {

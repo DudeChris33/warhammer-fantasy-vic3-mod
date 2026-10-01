@@ -401,7 +401,8 @@ def build_straits() -> tuple[str, str, list[str]]:
         if not row.type.startswith("canal_"):
             continue
         land = c.land_pair
-        if land is None and row.land_a_color is not None and row.land_b_color is not None:
+        if row.land_a_color is not None and row.land_b_color is not None:
+            # A worksheet pin overrides the drawn junction's derived pair.
             land = tuple(sorted((row.land_a_color, row.land_b_color), key=adj.color_code))
         if land is None:
             notes.append(f"{row.type}: no land endpoints yet (draw it as a '+'/'X' junction, "
