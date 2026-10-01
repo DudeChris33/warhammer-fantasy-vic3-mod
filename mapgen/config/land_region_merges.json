@@ -21,6 +21,8 @@
     {"anchor_a": [4945, 806], "anchor_b": [4904, 828], "note": "615 into 278 (Heart of Zharrduk), 2026-09-29"},
     {"anchor_a": [5170, 1671], "anchor_b": [5147, 1599], "note": "183 into 182, 2026-09-29"},
     {"anchor_a": [5122, 1663], "anchor_b": [5147, 1599], "note": "470 into 182, 2026-09-29"},
-    {"anchor_a": [3812, 1151], "anchor_b": [3794, 1195], "note": "602 into 600 (Isles of the Siren), 2026-09-29"}
+    {"anchor_a": [3812, 1151], "anchor_b": [3794, 1195], "note": "602 into 600 (Isles of the Siren), 2026-09-29"},
+    {"anchor_a": [4656, 1585], "anchor_b": [4598, 1559], "note": "619 into 573 (Cursed Way); stopgap until the source of 619 is found, 2026-10-01"},
+    {"anchor_a": [4292, 1608], "anchor_b": [4190, 1613], "note": "621 into 571 (The Scarab City); stopgap until the source of 621 is found, 2026-10-01"}
   ]
 }

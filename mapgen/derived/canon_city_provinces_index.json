@@ -11,7 +11,7 @@
     4274,
     202
    ],
-   "province_label": 531,
+   "province_label": 529,
    "province_hex": "x53CDE3",
    "impassable": false
   },
@@ -21,7 +21,7 @@
     4328,
     234
    ],
-   "province_label": 542,
+   "province_label": 540,
    "province_hex": "xEA2577",
    "impassable": false
   },
@@ -41,7 +41,7 @@
     4345,
     258
    ],
-   "province_label": 545,
+   "province_label": 543,
    "province_hex": "xC4CBE2",
    "impassable": false
   },
@@ -51,7 +51,7 @@
     4142,
     265
    ],
-   "province_label": 568,
+   "province_label": 566,
    "province_hex": "xFBC7C1",
    "impassable": false
   },
@@ -61,7 +61,7 @@
     4180,
     271
    ],
-   "province_label": 569,
+   "province_label": 567,
    "province_hex": "xB11497",
    "impassable": false
   },
@@ -71,7 +71,7 @@
     4318,
     274
    ],
-   "province_label": 549,
+   "province_label": 547,
    "province_hex": "xADB685",
    "impassable": false
   },
@@ -81,7 +81,7 @@
     4245,
     278
    ],
-   "province_label": 580,
+   "province_label": 578,
    "province_hex": "x1FD845",
    "impassable": false
   },
@@ -91,7 +91,7 @@
     4094,
     281
    ],
-   "province_label": 574,
+   "province_label": 572,
    "province_hex": "x212156",
    "impassable": false
   },
@@ -101,7 +101,7 @@
     4270,
     292
    ],
-   "province_label": 581,
+   "province_label": 579,
    "province_hex": "xBE0FBE",
    "impassable": false
   },
@@ -111,7 +111,7 @@
     4294,
     297
    ],
-   "province_label": 582,
+   "province_label": 580,
    "province_hex": "x6AE340",
    "impassable": false
   },
@@ -121,7 +121,7 @@
     4357,
     297
    ],
-   "province_label": 593,
+   "province_label": 591,
    "province_hex": "x2D508D",
    "impassable": false
   },
@@ -131,7 +131,7 @@
     4143,
     305
    ],
-   "province_label": 621,
+   "province_label": 619,
    "province_hex": "xA41970",
    "impassable": false
   },
@@ -141,7 +141,7 @@
     4414,
     307
    ],
-   "province_label": 596,
+   "province_label": 594,
    "province_hex": "xA0BB5E",
    "impassable": false
   },
@@ -151,7 +151,7 @@
     4522,
     308
    ],
-   "province_label": 636,
+   "province_label": 634,
    "province_hex": "xBD43CE",
    "impassable": false
   },
@@ -161,7 +161,7 @@
     4181,
     312
    ],
-   "province_label": 623,
+   "province_label": 621,
    "province_hex": "xCE1A28",
    "impassable": false
   },
@@ -171,7 +171,7 @@
     4101,
     316
    ],
-   "province_label": 646,
+   "province_label": 644,
    "province_hex": "x7EBFDB",
    "impassable": false
   },
@@ -181,7 +181,7 @@
     3915,
     317
    ],
-   "province_label": 660,
+   "province_label": 658,
    "province_hex": "x0A5AC8",
    "impassable": false
   },
@@ -191,7 +191,7 @@
     4049,
     317
    ],
-   "province_label": 615,
+   "province_label": 613,
    "province_hex": "x199942",
    "impassable": false
   },
@@ -201,7 +201,7 @@
     4453,
     324
    ],
-   "province_label": 637,
+   "province_label": 635,
    "province_hex": "x4D370F",
    "impassable": false
   },
@@ -211,7 +211,7 @@
     4346,
     335
    ],
-   "province_label": 671,
+   "province_label": 669,
    "province_hex": "x490D0D",
    "impassable": false
   },
@@ -221,7 +221,7 @@
     3891,
     336
    ],
-   "province_label": 663,
+   "province_label": 661,
    "province_hex": "x8AEF12",
    "impassable": false
   },
@@ -231,7 +231,7 @@
     4224,
     336
    ],
-   "province_label": 625,
+   "province_label": 623,
    "province_hex": "x60EE5A",
    "impassable": false
   },
@@ -241,7 +241,7 @@
     4159,
     338
    ],
-   "province_label": 627,
+   "province_label": 625,
    "province_hex": "x906225",
    "impassable": false
   },
@@ -251,7 +251,7 @@
     4411,
     340
    ],
-   "province_label": 672,
+   "province_label": 670,
    "province_hex": "x7737C7",
    "impassable": false
   },
@@ -261,7 +261,7 @@
     4508,
     340
    ],
-   "province_label": 641,
+   "province_label": 639,
    "province_hex": "x89A601",
    "impassable": false
   },
@@ -271,7 +271,7 @@
     4116,
     346
    ],
-   "province_label": 647,
+   "province_label": 645,
    "province_hex": "x0A891A",
    "impassable": false
   },
@@ -301,7 +301,7 @@
     4064,
     360
    ],
-   "province_label": 651,
+   "province_label": 649,
    "province_hex": "xE52F85",
    "impassable": false
   },
@@ -311,7 +311,7 @@
     4247,
     360
    ],
-   "province_label": 708,
+   "province_label": 706,
    "province_hex": "x88DA11",
    "impassable": false
   },
@@ -321,7 +321,7 @@
     3952,
     361
    ],
-   "province_label": 669,
+   "province_label": 667,
    "province_hex": "xE5FB75",
    "impassable": false
   },
@@ -331,7 +331,7 @@
     3983,
     364
    ],
-   "province_label": 705,
+   "province_label": 703,
    "province_hex": "xE3C124",
    "impassable": false
   },
@@ -361,7 +361,7 @@
     4363,
     368
    ],
-   "province_label": 676,
+   "province_label": 674,
    "province_hex": "xFC44E2",
    "impassable": false
   },
@@ -371,7 +371,7 @@
     4539,
     368
    ],
-   "province_label": 684,
+   "province_label": 682,
    "province_hex": "x072B08",
    "impassable": false
   },
@@ -391,7 +391,7 @@
     4022,
     374
    ],
-   "province_label": 706,
+   "province_label": 704,
    "province_hex": "xD7B73D",
    "impassable": false
   },
@@ -401,7 +401,7 @@
     4423,
     374
    ],
-   "province_label": 721,
+   "province_label": 719,
    "province_hex": "x6F60E4",
    "impassable": false
   },
@@ -421,7 +421,7 @@
     4068,
     392
    ],
-   "province_label": 652,
+   "province_label": 650,
    "province_hex": "x205566",
    "impassable": false
   },
@@ -441,7 +441,7 @@
     4274,
     394
    ],
-   "province_label": 714,
+   "province_label": 712,
    "province_hex": "x46F80C",
    "impassable": false
   },
@@ -451,7 +451,7 @@
     4481,
     394
    ],
-   "province_label": 743,
+   "province_label": 741,
    "province_hex": "xC2E533",
    "impassable": false
   },
@@ -461,7 +461,7 @@
     4545,
     395
    ],
-   "province_label": 687,
+   "province_label": 685,
    "province_hex": "xE1D173",
    "impassable": false
   },
@@ -471,7 +471,7 @@
     3950,
     396
    ],
-   "province_label": 754,
+   "province_label": 752,
    "province_hex": "xA34D80",
    "impassable": false
   },
@@ -481,7 +481,7 @@
     4002,
     402
    ],
-   "province_label": 778,
+   "province_label": 776,
    "province_hex": "x68279F",
    "impassable": false
   },
@@ -491,7 +491,7 @@
     3978,
     404
    ],
-   "province_label": 779,
+   "province_label": 777,
    "province_hex": "x0498E6",
    "impassable": false
   },
@@ -501,7 +501,7 @@
     4223,
     405
    ],
-   "province_label": 716,
+   "province_label": 714,
    "province_hex": "x1DC344",
    "impassable": false
   },
@@ -511,7 +511,7 @@
     4373,
     405
    ],
-   "province_label": 735,
+   "province_label": 733,
    "province_hex": "x16B851",
    "impassable": false
   },
@@ -521,7 +521,7 @@
     4417,
     405
    ],
-   "province_label": 722,
+   "province_label": 720,
    "province_hex": "xABCFD6",
    "impassable": false
   },
@@ -531,7 +531,7 @@
     4453,
     407
    ],
-   "province_label": 744,
+   "province_label": 742,
    "province_hex": "xF15EBC",
    "impassable": false
   },
@@ -541,7 +541,7 @@
     4510,
     413
    ],
-   "province_label": 690,
+   "province_label": 688,
    "province_hex": "xBC77DE",
    "impassable": false
   },
@@ -561,7 +561,7 @@
     3907,
     419
    ],
-   "province_label": 755,
+   "province_label": 753,
    "province_hex": "x4184F9",
    "impassable": false
   },
@@ -581,7 +581,7 @@
     4008,
     426
    ],
-   "province_label": 781,
+   "province_label": 779,
    "province_hex": "x1D7475",
    "impassable": false
   },
@@ -601,7 +601,7 @@
     3967,
     430
    ],
-   "province_label": 782,
+   "province_label": 780,
    "province_hex": "xBBABEE",
    "impassable": false
   },
@@ -621,7 +621,7 @@
     4297,
     432
    ],
-   "province_label": 738,
+   "province_label": 736,
    "province_hex": "xC8A715",
    "impassable": false
   },
@@ -631,7 +631,7 @@
     3918,
     433
    ],
-   "province_label": 756,
+   "province_label": 754,
    "province_hex": "x7F3CFC",
    "impassable": false
   },
@@ -641,7 +641,7 @@
     4363,
     434
    ],
-   "province_label": 739,
+   "province_label": 737,
    "province_hex": "x66DE8E",
    "impassable": false
   },
@@ -651,7 +651,7 @@
     4454,
     436
    ],
-   "province_label": 746,
+   "province_label": 744,
    "province_hex": "x6A3CA0",
    "impassable": false
   },
@@ -661,7 +661,7 @@
     4044,
     437
    ],
-   "province_label": 795,
+   "province_label": 793,
    "province_hex": "x950948",
    "impassable": false
   },
@@ -671,7 +671,7 @@
     4413,
     441
    ],
-   "province_label": 814,
+   "province_label": 812,
    "province_hex": "xB423DA",
    "impassable": false
   },
@@ -681,7 +681,7 @@
     4181,
     442
    ],
-   "province_label": 766,
+   "province_label": 764,
    "province_hex": "x7456D6",
    "impassable": false
   },
@@ -701,7 +701,7 @@
     4509,
     446
    ],
-   "province_label": 833,
+   "province_label": 831,
    "province_hex": "xB781EC",
    "impassable": false
   },
@@ -711,7 +711,7 @@
     4076,
     450
    ],
-   "province_label": 796,
+   "province_label": 794,
    "province_hex": "x568555",
    "impassable": false
   },
@@ -721,7 +721,7 @@
     4547,
     455
    ],
-   "province_label": 835,
+   "province_label": 833,
    "province_hex": "xF3F0DE",
    "impassable": false
   },
@@ -731,7 +731,7 @@
     3923,
     456
    ],
-   "province_label": 825,
+   "province_label": 823,
    "province_hex": "xD40A5C",
    "impassable": false
   },
@@ -741,7 +741,7 @@
     4338,
     458
    ],
-   "province_label": 875,
+   "province_label": 873,
    "province_hex": "xE397A5",
    "impassable": false
   },
@@ -751,7 +751,7 @@
     3894,
     460
    ],
-   "province_label": 850,
+   "province_label": 848,
    "province_hex": "xF9E112",
    "impassable": false
   },
@@ -771,7 +771,7 @@
     4034,
     461
    ],
-   "province_label": 798,
+   "province_label": 796,
    "province_hex": "xD1783A",
    "impassable": false
   },
@@ -781,7 +781,7 @@
     4219,
     463
    ],
-   "province_label": 804,
+   "province_label": 802,
    "province_hex": "x57CE66",
    "impassable": false
   },
@@ -791,7 +791,7 @@
     4387,
     463
    ],
-   "province_label": 816,
+   "province_label": 814,
    "province_hex": "x07A829",
    "impassable": false
   },
@@ -801,7 +801,7 @@
     3946,
     464
    ],
-   "province_label": 826,
+   "province_label": 824,
    "province_hex": "x577F97",
    "impassable": false
   },
@@ -811,7 +811,7 @@
     3995,
     464
    ],
-   "province_label": 842,
+   "province_label": 840,
    "province_hex": "xC05311",
    "impassable": false
   },
@@ -821,7 +821,7 @@
     4252,
     467
    ],
-   "province_label": 806,
+   "province_label": 804,
    "province_hex": "x6EE3C3",
    "impassable": false
   },
@@ -841,7 +841,7 @@
     4017,
     476
    ],
-   "province_label": 843,
+   "province_label": 841,
    "province_hex": "x504652",
    "impassable": false
   },
@@ -851,7 +851,7 @@
     4177,
     476
    ],
-   "province_label": 773,
+   "province_label": 771,
    "province_hex": "xD0AC4A",
    "impassable": false
   },
@@ -861,7 +861,7 @@
     4067,
     479
    ],
-   "province_label": 799,
+   "province_label": 797,
    "province_hex": "x783209",
    "impassable": false
   },
@@ -881,7 +881,7 @@
     4449,
     480
    ],
-   "province_label": 819,
+   "province_label": 817,
    "province_hex": "x50E3F0",
    "impassable": false
   },
@@ -891,7 +891,7 @@
     4558,
     483
    ],
-   "province_label": 840,
+   "province_label": 838,
    "province_hex": "x6265BD",
    "impassable": false
   },
@@ -901,7 +901,7 @@
     4115,
     484
    ],
-   "province_label": 866,
+   "province_label": 864,
    "province_hex": "x78FDF9",
    "impassable": false
   },
@@ -911,7 +911,7 @@
     4596,
     486
    ],
-   "province_label": 887,
+   "province_label": 885,
    "province_hex": "x0C4F4C",
    "impassable": false
   },
@@ -931,7 +931,7 @@
     4309,
     488
    ],
-   "province_label": 879,
+   "province_label": 877,
    "province_hex": "x200697",
    "impassable": false
   },
@@ -941,7 +941,7 @@
     3907,
     490
    ],
-   "province_label": 856,
+   "province_label": 854,
    "province_hex": "x278EAB",
    "impassable": false
   },
@@ -951,7 +951,7 @@
     4500,
     497
    ],
-   "province_label": 952,
+   "province_label": 950,
    "province_hex": "xAC3A4F",
    "impassable": false
   },
@@ -961,7 +961,7 @@
     3979,
     498
    ],
-   "province_label": 844,
+   "province_label": 842,
    "province_hex": "x10794E",
    "impassable": false
   },
@@ -981,7 +981,7 @@
     3924,
     501
    ],
-   "province_label": 828,
+   "province_label": 826,
    "province_hex": "x023516",
    "impassable": false
   },
@@ -991,7 +991,7 @@
     4489,
     501
    ],
-   "province_label": 915,
+   "province_label": 913,
    "province_hex": "xC4FA34",
    "impassable": false
   },
@@ -1001,7 +1001,7 @@
     3948,
     502
    ],
-   "province_label": 829,
+   "province_label": 827,
    "province_hex": "xDCDB81",
    "impassable": false
   },
@@ -1011,7 +1011,7 @@
     4387,
     502
    ],
-   "province_label": 927,
+   "province_label": 925,
    "province_hex": "xB72075",
    "impassable": false
   },
@@ -1031,7 +1031,7 @@
     4260,
     507
    ],
-   "province_label": 907,
+   "province_label": 905,
    "province_hex": "x68A4C0",
    "impassable": false
   },
@@ -1041,7 +1041,7 @@
     4428,
     507
    ],
-   "province_label": 955,
+   "province_label": 953,
    "province_hex": "x915C67",
    "impassable": false
   },
@@ -1051,7 +1051,7 @@
     4473,
     507
    ],
-   "province_label": 915,
+   "province_label": 913,
    "province_hex": "xC4FA34",
    "impassable": false
   },
@@ -1061,7 +1061,7 @@
     4131,
     509
    ],
-   "province_label": 870,
+   "province_label": 868,
    "province_hex": "xC3B123",
    "impassable": false
   },
@@ -1081,7 +1081,7 @@
     4635,
     509
    ],
-   "province_label": 889,
+   "province_label": 887,
    "province_hex": "x852D30",
    "impassable": false
   },
@@ -1091,7 +1091,7 @@
     4489,
     516
    ],
-   "province_label": 953,
+   "province_label": 951,
    "province_hex": "x909077",
    "impassable": false
   },
@@ -1101,7 +1101,7 @@
     4209,
     520
    ],
-   "province_label": 943,
+   "province_label": 941,
    "province_hex": "x96CF7A",
    "impassable": false
   },
@@ -1111,7 +1111,7 @@
     4341,
     520
    ],
-   "province_label": 883,
+   "province_label": 881,
    "province_hex": "xEC68CA",
    "impassable": false
   },
@@ -1121,7 +1121,7 @@
     4657,
     521
    ],
-   "province_label": 893,
+   "province_label": 891,
    "province_hex": "x5FD39B",
    "impassable": false
   },
@@ -1131,7 +1131,7 @@
     4405,
     523
    ],
-   "province_label": 932,
+   "province_label": 930,
    "province_hex": "x5557EE",
    "impassable": false
   },
@@ -1141,7 +1141,7 @@
     4290,
     527
    ],
-   "province_label": 912,
+   "province_label": 910,
    "province_hex": "x3506F3",
    "impassable": false
   },
@@ -1151,7 +1151,7 @@
     4485,
     529
    ],
-   "province_label": 1001,
+   "province_label": 999,
    "province_hex": "xA80278",
    "impassable": false
   },
@@ -1161,7 +1161,7 @@
     4530,
     529
    ],
-   "province_label": 977,
+   "province_label": 975,
    "province_hex": "xD1296B",
    "impassable": false
   },
@@ -1171,7 +1171,7 @@
     4558,
     529
    ],
-   "province_label": 976,
+   "province_label": 974,
    "province_hex": "x096E5B",
    "impassable": false
   },
@@ -1191,7 +1191,7 @@
     3978,
     536
    ],
-   "province_label": 984,
+   "province_label": 982,
    "province_hex": "xE03993",
    "impassable": false
   },
@@ -1201,7 +1201,7 @@
     4260,
     536
    ],
-   "province_label": 947,
+   "province_label": 945,
    "province_hex": "x5A6088",
    "impassable": false
   },
@@ -1221,7 +1221,7 @@
     4094,
     537
    ],
-   "province_label": 873,
+   "province_label": 871,
    "province_hex": "xA728B3",
    "impassable": false
   },
@@ -1231,7 +1231,7 @@
     4449,
     540
    ],
-   "province_label": 960,
+   "province_label": 958,
    "province_hex": "x46A93D",
    "impassable": false
   },
@@ -1241,7 +1241,7 @@
     4053,
     542
    ],
-   "province_label": 1000,
+   "province_label": 998,
    "province_hex": "xCC8248",
    "impassable": false
   },
@@ -1261,7 +1261,7 @@
     4706,
     542
    ],
-   "province_label": 897,
+   "province_label": 895,
    "province_hex": "xD8B17F",
    "impassable": false
   },
@@ -1271,7 +1271,7 @@
     3895,
     543
    ],
-   "province_label": 1006,
+   "province_label": 1004,
    "province_hex": "xA65CC3",
    "impassable": false
   },
@@ -1281,7 +1281,7 @@
     3942,
     543
    ],
-   "province_label": 1007,
+   "province_label": 1005,
    "province_hex": "xCBB658",
    "impassable": false
   },
@@ -1291,7 +1291,7 @@
     4031,
     545
    ],
-   "province_label": 999,
+   "province_label": 997,
    "province_hex": "x591777",
    "impassable": false
   },
@@ -1301,7 +1301,7 @@
     4371,
     546
    ],
-   "province_label": 936,
+   "province_label": 934,
    "province_hex": "xDE2492",
    "impassable": false
   },
@@ -1311,7 +1311,7 @@
     4318,
     548
    ],
-   "province_label": 1014,
+   "province_label": 1012,
    "province_hex": "xBA348B",
    "impassable": false
   },
@@ -1321,7 +1321,7 @@
     4006,
     552
    ],
-   "province_label": 986,
+   "province_label": 984,
    "province_hex": "x702CD4",
    "impassable": false
   },
@@ -1331,7 +1331,7 @@
     4490,
     552
    ],
-   "province_label": 963,
+   "province_label": 961,
    "province_hex": "x9A2D8C",
    "impassable": false
   },
@@ -1341,7 +1341,7 @@
     4294,
     556
    ],
-   "province_label": 1017,
+   "province_label": 1015,
    "province_hex": "x7B901B",
    "impassable": false
   },
@@ -1351,7 +1351,7 @@
     3963,
     562
    ],
-   "province_label": 988,
+   "province_label": 986,
    "province_hex": "x794CC8",
    "impassable": false
   },
@@ -1361,7 +1361,7 @@
     3986,
     562
    ],
-   "province_label": 987,
+   "province_label": 985,
    "province_hex": "xAC9BC6",
    "impassable": false
   },
@@ -1371,7 +1371,7 @@
     4536,
     562
    ],
-   "province_label": 1076,
+   "province_label": 1074,
    "province_hex": "x6B0890",
    "impassable": false
   },
@@ -1381,7 +1381,7 @@
     4333,
     564
    ],
-   "province_label": 1054,
+   "province_label": 1052,
    "province_hex": "xB28BFA",
    "impassable": false
   },
@@ -1391,7 +1391,7 @@
     4759,
     565
    ],
-   "province_label": 919,
+   "province_label": 917,
    "province_hex": "x0DB8DA",
    "impassable": false
   },
@@ -1401,7 +1401,7 @@
     4253,
     573
    ],
-   "province_label": 1107,
+   "province_label": 1105,
    "province_hex": "xDD58A2",
    "impassable": false
   },
@@ -1411,7 +1411,7 @@
     4372,
     577
    ],
-   "province_label": 1055,
+   "province_label": 1053,
    "province_hex": "xA447C2",
    "impassable": false
   },
@@ -1421,7 +1421,7 @@
     4453,
     581
    ],
-   "province_label": 972,
+   "province_label": 970,
    "province_hex": "x74D3F7",
    "impassable": false
   },
@@ -1441,7 +1441,7 @@
     4418,
     582
    ],
-   "province_label": 1100,
+   "province_label": 1098,
    "province_hex": "xA8CE68",
    "impassable": false
   },
@@ -1451,7 +1451,7 @@
     4779,
     582
    ],
-   "province_label": 918,
+   "province_label": 916,
    "province_hex": "x5BA999",
    "impassable": false
   },
@@ -1461,7 +1461,7 @@
     4594,
     587
    ],
-   "province_label": 1125,
+   "province_label": 1123,
    "province_hex": "x18FBA4",
    "impassable": false
   },
@@ -1471,7 +1471,7 @@
     4699,
     587
    ],
-   "province_label": 1118,
+   "province_label": 1116,
    "province_hex": "x401698",
    "impassable": false
   },
@@ -1481,7 +1481,7 @@
     4845,
     588
    ],
-   "province_label": 1035,
+   "province_label": 1033,
    "province_hex": "xF5B710",
    "impassable": false
   },
@@ -1491,7 +1491,7 @@
     4654,
     589
    ],
-   "province_label": 1027,
+   "province_label": 1025,
    "province_hex": "x3C11E6",
    "impassable": false
   },
@@ -1501,7 +1501,7 @@
     4493,
     599
    ],
-   "province_label": 1138,
+   "province_label": 1136,
    "province_hex": "x45DD4D",
    "impassable": false
   },
@@ -1511,7 +1511,7 @@
     4292,
     602
    ],
-   "province_label": 1023,
+   "province_label": 1021,
    "province_hex": "x30DCF1",
    "impassable": false
   },
@@ -1521,7 +1521,7 @@
     4550,
     602
    ],
-   "province_label": 1084,
+   "province_label": 1082,
    "province_hex": "x824C3F",
    "impassable": false
   },
@@ -1531,7 +1531,7 @@
     4459,
     603
    ],
-   "province_label": 1140,
+   "province_label": 1138,
    "province_hex": "x4AEEE9",
    "impassable": false
   },
@@ -1541,7 +1541,7 @@
     4346,
     607
    ],
-   "province_label": 1065,
+   "province_label": 1063,
    "province_hex": "x343B03",
    "impassable": false
   },
@@ -1551,7 +1551,7 @@
     4639,
     609
    ],
-   "province_label": 1029,
+   "province_label": 1027,
    "province_hex": "x7880D8",
    "impassable": false
   },
@@ -1561,7 +1561,7 @@
     4687,
     611
    ],
-   "province_label": 1120,
+   "province_label": 1118,
    "province_hex": "x71F306",
    "impassable": false
   },
@@ -1571,7 +1571,7 @@
     4394,
     614
    ],
-   "province_label": 1066,
+   "province_label": 1064,
    "province_hex": "x70A9F5",
    "impassable": false
   },
@@ -1581,7 +1581,7 @@
     4900,
     621
    ],
-   "province_label": 1042,
+   "province_label": 1040,
    "province_hex": "xC305B0",
    "impassable": false
   },
@@ -1591,7 +1591,7 @@
     4251,
     622
    ],
-   "province_label": 1113,
+   "province_label": 1111,
    "province_hex": "xE629C7",
    "impassable": false
   },
@@ -1601,7 +1601,7 @@
     4307,
     623
    ],
-   "province_label": 1169,
+   "province_label": 1167,
    "province_hex": "x8696BE",
    "impassable": false
   },
@@ -1611,7 +1611,7 @@
     4778,
     624
    ],
-   "province_label": 1157,
+   "province_label": 1155,
    "province_hex": "xE8BBE9",
    "impassable": false
   },
@@ -1621,7 +1621,7 @@
     4412,
     628
    ],
-   "province_label": 1104,
+   "province_label": 1102,
    "province_hex": "xD2727C",
    "impassable": false
   },
@@ -1631,7 +1631,7 @@
     4862,
     628
    ],
-   "province_label": 1041,
+   "province_label": 1039,
    "province_hex": "x9CBFAE",
    "impassable": false
   },
@@ -1641,7 +1641,7 @@
     4574,
     630
    ],
-   "province_label": 1129,
+   "province_label": 1127,
    "province_hex": "xE9188D",
    "impassable": false
   },
@@ -1651,7 +1651,7 @@
     4516,
     632
    ],
-   "province_label": 1090,
+   "province_label": 1088,
    "province_hex": "x03FB48",
    "impassable": false
   },
@@ -1661,7 +1661,7 @@
     4736,
     634
    ],
-   "province_label": 1161,
+   "province_label": 1159,
    "province_hex": "x0E157E",
    "impassable": false
   },
@@ -1691,7 +1691,7 @@
     4478,
     645
    ],
-   "province_label": 1149,
+   "province_label": 1147,
    "province_hex": "x7CD92C",
    "impassable": false
   },
@@ -1701,7 +1701,7 @@
     4662,
     647
    ],
-   "province_label": 1190,
+   "province_label": 1188,
    "province_hex": "x16E6A3",
    "impassable": false
   },
@@ -1711,7 +1711,7 @@
     4117,
     650
    ],
-   "province_label": 1206,
+   "province_label": 1204,
    "province_hex": "xE6A6E8",
    "impassable": false
   },
@@ -1721,7 +1721,7 @@
     4369,
     650
    ],
-   "province_label": 1179,
+   "province_label": 1177,
    "province_hex": "xC8D567",
    "impassable": false
   },
@@ -1741,7 +1741,7 @@
     4417,
     653
    ],
-   "province_label": 1152,
+   "province_label": 1150,
    "province_hex": "x776619",
    "impassable": false
   },
@@ -1751,7 +1751,7 @@
     4557,
     654
    ],
-   "province_label": 1131,
+   "province_label": 1129,
    "province_hex": "x839550",
    "impassable": false
   },
@@ -1771,7 +1771,7 @@
     4190,
     657
    ],
-   "province_label": 1211,
+   "province_label": 1209,
    "province_hex": "x5F84CC",
    "impassable": false
   },
@@ -1781,7 +1781,7 @@
     4065,
     664
    ],
-   "province_label": 1199,
+   "province_label": 1197,
    "province_hex": "xA166D1",
    "impassable": false
   },
@@ -1791,7 +1791,7 @@
     4728,
     664
    ],
-   "province_label": 1283,
+   "province_label": 1281,
    "province_hex": "x5289A5",
    "impassable": false
   },
@@ -1801,7 +1801,7 @@
     4333,
     665
    ],
-   "province_label": 1186,
+   "province_label": 1184,
    "province_hex": "xBA912F",
    "impassable": false
   },
@@ -1811,7 +1811,7 @@
     4298,
     666
    ],
-   "province_label": 1185,
+   "province_label": 1183,
    "province_hex": "x7E223D",
    "impassable": false
   },
@@ -1821,7 +1821,7 @@
     4263,
     668
    ],
-   "province_label": 1300,
+   "province_label": 1298,
    "province_hex": "xD0DA9C",
    "impassable": false
   },
@@ -1831,7 +1831,7 @@
     4454,
     668
    ],
-   "province_label": 1311,
+   "province_label": 1309,
    "province_hex": "x10A7A0",
    "impassable": false
   },
@@ -1841,7 +1841,7 @@
     4089,
     677
    ],
-   "province_label": 1202,
+   "province_label": 1200,
    "province_hex": "xE71F36",
    "impassable": false
   },
@@ -1851,7 +1851,7 @@
     4888,
     681
    ],
-   "province_label": 1228,
+   "province_label": 1226,
    "province_hex": "x381636",
    "impassable": false
   },
@@ -1861,7 +1861,7 @@
     4404,
     684
    ],
-   "province_label": 1337,
+   "province_label": 1335,
    "province_hex": "xBDEF41",
    "impassable": false
   },
@@ -1871,7 +1871,7 @@
     4200,
     685
    ],
-   "province_label": 1388,
+   "province_label": 1386,
    "province_hex": "xAB8107",
    "impassable": false
   },
@@ -1881,7 +1881,7 @@
     4779,
     686
    ],
-   "province_label": 1255,
+   "province_label": 1253,
    "province_hex": "x0F5E8F",
    "impassable": false
   },
@@ -1891,7 +1891,7 @@
     4300,
     687
    ],
-   "province_label": 1368,
+   "province_label": 1366,
    "province_hex": "x4B0191",
    "impassable": false
   },
@@ -1901,7 +1901,7 @@
     4640,
     687
    ],
-   "province_label": 1359,
+   "province_label": 1357,
    "province_hex": "x0D6A0B",
    "impassable": false
   },
@@ -1911,7 +1911,7 @@
     4141,
     688
    ],
-   "province_label": 1217,
+   "province_label": 1215,
    "province_hex": "x80373E",
    "impassable": false
   },
@@ -1921,7 +1921,7 @@
     4499,
     691
    ],
-   "province_label": 1353,
+   "province_label": 1351,
    "province_hex": "x026368",
    "impassable": false
   },
@@ -1931,7 +1931,7 @@
     4612,
     693
    ],
-   "province_label": 1361,
+   "province_label": 1359,
    "province_hex": "x89F4D0",
    "impassable": false
   },
@@ -1941,7 +1941,7 @@
     4734,
     693
    ],
-   "province_label": 1289,
+   "province_label": 1287,
    "province_hex": "x2AABC3",
    "impassable": false
   },
@@ -1951,7 +1951,7 @@
     4817,
     694
    ],
-   "province_label": 1256,
+   "province_label": 1254,
    "province_hex": "x712716",
    "impassable": false
   },
@@ -1961,7 +1961,7 @@
     4073,
     696
    ],
-   "province_label": 1409,
+   "province_label": 1407,
    "province_hex": "xAA37F6",
    "impassable": false
   },
@@ -1971,7 +1971,7 @@
     4120,
     697
    ],
-   "province_label": 1221,
+   "province_label": 1219,
    "province_hex": "x8DAF86",
    "impassable": false
   },
@@ -1981,7 +1981,7 @@
     4531,
     697
    ],
-   "province_label": 1397,
+   "province_label": 1395,
    "province_hex": "x73C70D",
    "impassable": false
   },
@@ -1991,7 +1991,7 @@
     3809,
     700
    ],
-   "province_label": 1318,
+   "province_label": 1316,
    "province_hex": "x0CDA42",
    "impassable": false
   },
@@ -2001,7 +2001,7 @@
     4420,
     700
    ],
-   "province_label": 1354,
+   "province_label": 1352,
    "province_hex": "xA09AE1",
    "impassable": false
   },
@@ -2011,7 +2011,7 @@
     4847,
     700
    ],
-   "province_label": 1232,
+   "province_label": 1230,
    "province_hex": "x4F2B93",
    "impassable": false
   },
@@ -2021,7 +2021,7 @@
     4275,
     701
    ],
-   "province_label": 1305,
+   "province_label": 1303,
    "province_hex": "x9D3CCF",
    "impassable": false
   },
@@ -2031,7 +2031,7 @@
     4239,
     702
    ],
-   "province_label": 1392,
+   "province_label": 1390,
    "province_hex": "xC29664",
    "impassable": false
   },
@@ -2041,7 +2041,7 @@
     4704,
     704
    ],
-   "province_label": 1291,
+   "province_label": 1289,
    "province_hex": "x5B5ACA",
    "impassable": false
   },
@@ -2051,7 +2051,7 @@
     4009,
     706
    ],
-   "province_label": 1272,
+   "province_label": 1270,
    "province_hex": "xC0DE07",
    "impassable": false
   },
@@ -2061,7 +2061,7 @@
     3928,
     708
    ],
-   "province_label": 1412,
+   "province_label": 1410,
    "province_hex": "xABA184",
    "impassable": false
   },
@@ -2071,7 +2071,7 @@
     3841,
     710
    ],
-   "province_label": 1321,
+   "province_label": 1319,
    "province_hex": "xA96C06",
    "impassable": false
   },
@@ -2081,7 +2081,7 @@
     4627,
     710
    ],
-   "province_label": 1362,
+   "province_label": 1360,
    "province_hex": "x8151FD",
    "impassable": false
   },
@@ -2091,7 +2091,7 @@
     3979,
     712
    ],
-   "province_label": 1273,
+   "province_label": 1271,
    "province_hex": "x182FB4",
    "impassable": false
   },
@@ -2111,7 +2111,7 @@
     4214,
     716
    ],
-   "province_label": 1433,
+   "province_label": 1431,
    "province_hex": "xC1CA74",
    "impassable": false
   },
@@ -2121,7 +2121,7 @@
     4460,
     716
    ],
-   "province_label": 1448,
+   "province_label": 1446,
    "province_hex": "x2C6420",
    "impassable": false
   },
@@ -2131,7 +2131,7 @@
     4085,
     717
    ],
-   "province_label": 1439,
+   "province_label": 1437,
    "province_hex": "x939FBA",
    "impassable": false
   },
@@ -2141,7 +2141,7 @@
     4318,
     717
    ],
-   "province_label": 1377,
+   "province_label": 1375,
    "province_hex": "x93C037",
    "impassable": false
   },
@@ -2161,7 +2161,7 @@
     4356,
     718
    ],
-   "province_label": 1378,
+   "province_label": 1376,
    "province_hex": "xDAF4D2",
    "impassable": false
   },
@@ -2181,7 +2181,7 @@
     4384,
     720
    ],
-   "province_label": 1451,
+   "province_label": 1449,
    "province_hex": "xEC19FB",
    "impassable": false
   },
@@ -2191,7 +2191,7 @@
     4120,
     722
    ],
-   "province_label": 1483,
+   "province_label": 1481,
    "province_hex": "xD6CAD0",
    "impassable": false
   },
@@ -2201,7 +2201,7 @@
     4896,
     723
    ],
-   "province_label": 1237,
+   "province_label": 1235,
    "province_hex": "x40E75B",
    "impassable": false
   },
@@ -2211,7 +2211,7 @@
     3817,
     725
    ],
-   "province_label": 1466,
+   "province_label": 1464,
    "province_hex": "x94E8CB",
    "impassable": false
   },
@@ -2221,7 +2221,7 @@
     4047,
     725
    ],
-   "province_label": 1441,
+   "province_label": 1439,
    "province_hex": "x21CCC9",
    "impassable": false
   },
@@ -2251,7 +2251,7 @@
     3714,
     734
    ],
-   "province_label": 1497,
+   "province_label": 1495,
    "province_hex": "xDA28E2",
    "impassable": false
   },
@@ -2261,7 +2261,7 @@
     3785,
     734
    ],
-   "province_label": 1470,
+   "province_label": 1468,
    "province_hex": "xFB45CD",
    "impassable": false
   },
@@ -2271,7 +2271,7 @@
     4234,
     738
    ],
-   "province_label": 1434,
+   "province_label": 1432,
    "province_hex": "xFA2FE1",
    "impassable": false
   },
@@ -2281,7 +2281,7 @@
     4456,
     739
    ],
-   "province_label": 1454,
+   "province_label": 1452,
    "province_hex": "x96FDCC",
    "impassable": false
   },
@@ -2291,7 +2291,7 @@
     3889,
     740
    ],
-   "province_label": 1329,
+   "province_label": 1327,
    "province_hex": "x395F47",
    "impassable": false
   },
@@ -2301,7 +2301,7 @@
     3948,
     741
    ],
-   "province_label": 1417,
+   "province_label": 1415,
    "province_hex": "xC65EEF",
    "impassable": false
   },
@@ -2311,7 +2311,7 @@
     4526,
     741
    ],
-   "province_label": 1404,
+   "province_label": 1402,
    "province_hex": "x9912CD",
    "impassable": false
   },
@@ -2321,7 +2321,7 @@
     4093,
     742
    ],
-   "province_label": 1561,
+   "province_label": 1559,
    "province_hex": "xD4A7FA",
    "impassable": false
   },
@@ -2331,7 +2331,7 @@
     3841,
     743
    ],
-   "province_label": 1332,
+   "province_label": 1330,
    "province_hex": "xC1C5A1",
    "impassable": false
   },
@@ -2341,7 +2341,7 @@
     4157,
     744
    ],
-   "province_label": 1488,
+   "province_label": 1486,
    "province_hex": "x543D2F",
    "impassable": false
   },
@@ -2361,7 +2361,7 @@
     4423,
     747
    ],
-   "province_label": 1457,
+   "province_label": 1455,
    "province_hex": "x5F2355",
    "impassable": false
   },
@@ -2371,7 +2371,7 @@
     4608,
     747
    ],
-   "province_label": 1532,
+   "province_label": 1530,
    "province_hex": "x9F0301",
    "impassable": false
   },
@@ -2381,7 +2381,7 @@
     4251,
     749
    ],
-   "province_label": 1548,
+   "province_label": 1546,
    "province_hex": "x346955",
    "impassable": false
   },
@@ -2391,7 +2391,7 @@
     4352,
     749
    ],
-   "province_label": 1384,
+   "province_label": 1382,
    "province_hex": "xCCB09A",
    "impassable": false
   },
@@ -2401,7 +2401,7 @@
     4044,
     751
    ],
-   "province_label": 1563,
+   "province_label": 1561,
    "province_hex": "x680722",
    "impassable": false
   },
@@ -2411,7 +2411,7 @@
     4645,
     754
    ],
-   "province_label": 1533,
+   "province_label": 1531,
    "province_hex": "x98675A",
    "impassable": false
   },
@@ -2421,7 +2421,7 @@
     3920,
     756
    ],
-   "province_label": 1419,
+   "province_label": 1417,
    "province_hex": "x401B6B",
    "impassable": false
   },
@@ -2441,7 +2441,7 @@
     4019,
     756
    ],
-   "province_label": 1280,
+   "province_label": 1278,
    "province_hex": "x465A6E",
    "impassable": false
   },
@@ -2451,7 +2451,7 @@
     3997,
     758
    ],
-   "province_label": 1281,
+   "province_label": 1279,
    "province_hex": "xE491E7",
    "impassable": false
   },
@@ -2461,7 +2461,7 @@
     4218,
     758
    ],
-   "province_label": 1571,
+   "province_label": 1569,
    "province_hex": "x8B4BB6",
    "impassable": false
   },
@@ -2471,7 +2471,7 @@
     4385,
     758
    ],
-   "province_label": 1582,
+   "province_label": 1580,
    "province_hex": "x57ADE9",
    "impassable": false
   },
@@ -2491,7 +2491,7 @@
     3740,
     759
    ],
-   "province_label": 1501,
+   "province_label": 1499,
    "province_hex": "xF13E3F",
    "impassable": false
   },
@@ -2501,7 +2501,7 @@
     3770,
     760
    ],
-   "province_label": 1474,
+   "province_label": 1472,
    "province_hex": "x86A493",
    "impassable": false
   },
@@ -2521,7 +2521,7 @@
     4562,
     762
    ],
-   "province_label": 1425,
+   "province_label": 1423,
    "province_hex": "x49D8FD",
    "impassable": false
   },
@@ -2531,7 +2531,7 @@
     4083,
     765
    ],
-   "province_label": 1565,
+   "province_label": 1563,
    "province_hex": "xC9CFA9",
    "impassable": false
   },
@@ -2541,7 +2541,7 @@
     4480,
     765
    ],
-   "province_label": 1465,
+   "province_label": 1463,
    "province_hex": "x353545",
    "impassable": false
   },
@@ -2551,7 +2551,7 @@
     4759,
     767
    ],
-   "province_label": 1524,
+   "province_label": 1522,
    "province_hex": "x764B5A",
    "impassable": false
   },
@@ -2571,7 +2571,7 @@
     4896,
     768
    ],
-   "province_label": 1663,
+   "province_label": 1661,
    "province_hex": "x5598E8",
    "impassable": false
   },
@@ -2581,7 +2581,7 @@
     3817,
     770
    ],
-   "province_label": 1477,
+   "province_label": 1475,
    "province_hex": "x24DC0C",
    "impassable": false
   },
@@ -2601,7 +2601,7 @@
     4180,
     773
    ],
-   "province_label": 1493,
+   "province_label": 1491,
    "province_hex": "xD9CC3E",
    "impassable": false
   },
@@ -2611,7 +2611,7 @@
     4874,
     774
    ],
-   "province_label": 1664,
+   "province_label": 1662,
    "province_hex": "xDCBB04",
    "impassable": false
   },
@@ -2621,7 +2621,7 @@
     3988,
     777
    ],
-   "province_label": 1596,
+   "province_label": 1594,
    "province_hex": "x82C960",
    "impassable": false
   },
@@ -2631,7 +2631,7 @@
     4642,
     778
    ],
-   "province_label": 1535,
+   "province_label": 1533,
    "province_hex": "xA7D426",
    "impassable": false
   },
@@ -2651,7 +2651,7 @@
     4031,
     779
    ],
-   "province_label": 1683,
+   "province_label": 1681,
    "province_hex": "xB81F8A",
    "impassable": false
   },
@@ -2661,7 +2661,7 @@
     4226,
     780
    ],
-   "province_label": 1577,
+   "province_label": 1575,
    "province_hex": "x65F221",
    "impassable": false
   },
@@ -2671,7 +2671,7 @@
     4346,
     780
    ],
-   "province_label": 1586,
+   "province_label": 1584,
    "province_hex": "xD08BCD",
    "impassable": false
   },
@@ -2681,7 +2681,7 @@
     4415,
     780
    ],
-   "province_label": 1620,
+   "province_label": 1618,
    "province_hex": "x4969B1",
    "impassable": false
   },
@@ -2691,7 +2691,7 @@
     3974,
     782
    ],
-   "province_label": 1590,
+   "province_label": 1588,
    "province_hex": "xEAFF3C",
    "impassable": false
   },
@@ -2701,7 +2701,7 @@
     4716,
     783
    ],
-   "province_label": 1649,
+   "province_label": 1647,
    "province_hex": "x391078",
    "impassable": false
   },
@@ -2711,7 +2711,7 @@
     3953,
     785
    ],
-   "province_label": 1592,
+   "province_label": 1590,
    "province_hex": "xAE904A",
    "impassable": false
   },
@@ -2721,7 +2721,7 @@
     4200,
     787
    ],
-   "province_label": 1495,
+   "province_label": 1493,
    "province_hex": "xDF9BF5",
    "impassable": false
   },
@@ -2731,7 +2731,7 @@
     4281,
     787
    ],
-   "province_label": 1558,
+   "province_label": 1556,
    "province_hex": "x87EDA4",
    "impassable": false
   },
@@ -2741,7 +2741,7 @@
     4242,
     789
    ],
-   "province_label": 1579,
+   "province_label": 1577,
    "province_hex": "x40988C",
    "impassable": false
   },
@@ -2751,7 +2751,7 @@
     4446,
     789
    ],
-   "province_label": 1624,
+   "province_label": 1622,
    "province_hex": "xAB3238",
    "impassable": false
   },
@@ -2771,7 +2771,7 @@
     4060,
     790
    ],
-   "province_label": 1685,
+   "province_label": 1683,
    "province_hex": "x4E10D4",
    "impassable": false
   },
@@ -2781,7 +2781,7 @@
     4892,
     790
    ],
-   "province_label": 1667,
+   "province_label": 1665,
    "province_hex": "x303F53",
    "impassable": false
   },
@@ -2791,7 +2791,7 @@
     3999,
     791
    ],
-   "province_label": 1597,
+   "province_label": 1595,
    "province_hex": "xFC8EDE",
    "impassable": false
   },
@@ -2801,7 +2801,7 @@
     4489,
     792
    ],
-   "province_label": 1626,
+   "province_label": 1624,
    "province_hex": "x37581B",
    "impassable": false
   },
@@ -2811,7 +2811,7 @@
     3758,
     793
    ],
-   "province_label": 1640,
+   "province_label": 1637,
    "province_hex": "x813180",
    "impassable": false
   },
@@ -2821,7 +2821,7 @@
     3984,
     793
    ],
-   "province_label": 1593,
+   "province_label": 1591,
    "province_hex": "x4CC7C3",
    "impassable": false
   },
@@ -2831,7 +2831,7 @@
     4101,
     795
    ],
-   "province_label": 1608,
+   "province_label": 1606,
    "province_hex": "xE8EA3B",
    "impassable": false
   },
@@ -2841,7 +2841,7 @@
     4604,
     795
    ],
-   "province_label": 1536,
+   "province_label": 1534,
    "province_hex": "x2DFC00",
    "impassable": false
   },
@@ -2851,7 +2851,7 @@
     3809,
     796
    ],
-   "province_label": 1710,
+   "province_label": 1708,
    "province_hex": "xB54C6E",
    "impassable": false
   },
@@ -2861,7 +2861,7 @@
     3906,
     796
    ],
-   "province_label": 1598,
+   "province_label": 1596,
    "province_hex": "x5B0BFB",
    "impassable": false
   },
@@ -2871,7 +2871,7 @@
     4522,
     796
    ],
-   "province_label": 1427,
+   "province_label": 1425,
    "province_hex": "x18ACD5",
    "impassable": false
   },
@@ -2901,7 +2901,7 @@
     4431,
     800
    ],
-   "province_label": 1629,
+   "province_label": 1627,
    "province_hex": "x523AD6",
    "impassable": false
   },
@@ -2921,7 +2921,7 @@
     4377,
     802
    ],
-   "province_label": 1757,
+   "province_label": 1755,
    "province_hex": "x9F6D7A",
    "impassable": false
   },
@@ -2931,7 +2931,7 @@
     4872,
     804
    ],
-   "province_label": 1704,
+   "province_label": 1702,
    "province_hex": "x81AEA1",
    "impassable": false
   },
@@ -2941,7 +2941,7 @@
     4215,
     806
    ],
-   "province_label": 1581,
+   "province_label": 1579,
    "province_hex": "xDED005",
    "impassable": false
   },
@@ -2951,7 +2951,7 @@
     4563,
     806
    ],
-   "province_label": 1428,
+   "province_label": 1426,
    "province_hex": "x217DFA",
    "impassable": false
   },
@@ -2961,7 +2961,7 @@
     3796,
     808
    ],
-   "province_label": 1713,
+   "province_label": 1711,
    "province_hex": "x5383E7",
    "impassable": false
   },
@@ -2971,7 +2971,7 @@
     3834,
     811
    ],
-   "province_label": 1714,
+   "province_label": 1712,
    "province_hex": "x78DD7C",
    "impassable": false
   },
@@ -2981,7 +2981,7 @@
     4725,
     811
    ],
-   "province_label": 1656,
+   "province_label": 1654,
    "province_hex": "xEE5D4E",
    "impassable": false
   },
@@ -2991,7 +2991,7 @@
     4920,
     811
    ],
-   "province_label": 1733,
+   "province_label": 1731,
    "province_hex": "x82F7B2",
    "impassable": false
   },
@@ -3001,7 +3001,7 @@
     4348,
     812
    ],
-   "province_label": 1759,
+   "province_label": 1757,
    "province_hex": "x2C1551",
    "impassable": false
   },
@@ -3011,7 +3011,7 @@
     4087,
     814
    ],
-   "province_label": 1612,
+   "province_label": 1610,
    "province_hex": "x0E43D0",
    "impassable": false
   },
@@ -3021,7 +3021,7 @@
     4688,
     815
    ],
-   "province_label": 1657,
+   "province_label": 1655,
    "province_hex": "x41E19D",
    "impassable": false
   },
@@ -3031,7 +3031,7 @@
     4173,
     816
    ],
-   "province_label": 1754,
+   "province_label": 1752,
    "province_hex": "x25592D",
    "impassable": false
   },
@@ -3041,7 +3041,7 @@
     3961,
     817
    ],
-   "province_label": 1595,
+   "province_label": 1593,
    "province_hex": "x8936B5",
    "impassable": false
   },
@@ -3051,7 +3051,7 @@
     4114,
     817
    ],
-   "province_label": 1752,
+   "province_label": 1750,
    "province_hex": "xC4C70F",
    "impassable": false
   },
@@ -3061,7 +3061,7 @@
     4307,
     818
    ],
-   "province_label": 1731,
+   "province_label": 1729,
    "province_hex": "x14FFF4",
    "impassable": false
   },
@@ -3071,7 +3071,7 @@
     4774,
     818
    ],
-   "province_label": 1721,
+   "province_label": 1719,
    "province_hex": "xAA6648",
    "impassable": false
   },
@@ -3081,7 +3081,7 @@
     3718,
     819
    ],
-   "province_label": 1645,
+   "province_label": 1643,
    "province_hex": "xBDA072",
    "impassable": false
   },
@@ -3091,7 +3091,7 @@
     4841,
     819
    ],
-   "province_label": 1706,
+   "province_label": 1704,
    "province_hex": "x98C3FE",
    "impassable": false
   },
@@ -3111,7 +3111,7 @@
     4240,
     820
    ],
-   "province_label": 1777,
+   "province_label": 1775,
    "province_hex": "xDBEF14",
    "impassable": false
   },
@@ -3121,7 +3121,7 @@
     4637,
     820
    ],
-   "province_label": 1803,
+   "province_label": 1801,
    "province_hex": "x7D849F",
    "impassable": false
   },
@@ -3131,7 +3131,7 @@
     4890,
     820
    ],
-   "province_label": 1736,
+   "province_label": 1734,
    "province_hex": "x5D9E1D",
    "impassable": false
   },
@@ -3141,7 +3141,7 @@
     4007,
     821
    ],
-   "province_label": 1692,
+   "province_label": 1690,
    "province_hex": "xA19523",
    "impassable": false
   },
@@ -3151,7 +3151,7 @@
     4446,
     822
    ],
-   "province_label": 1792,
+   "province_label": 1790,
    "province_hex": "xE16227",
    "impassable": false
   },
@@ -3161,7 +3161,7 @@
     4139,
     823
    ],
-   "province_label": 1755,
+   "province_label": 1753,
    "province_hex": "x8721B4",
    "impassable": false
   },
@@ -3171,7 +3171,7 @@
     3908,
     824
    ],
-   "province_label": 1677,
+   "province_label": 1675,
    "province_hex": "x83C3A2",
    "impassable": false
   },
@@ -3191,7 +3191,7 @@
     4797,
     825
    ],
-   "province_label": 1722,
+   "province_label": 1720,
    "province_hex": "xE6D53A",
    "impassable": false
   },
@@ -3201,7 +3201,7 @@
     4393,
     827
    ],
-   "province_label": 1794,
+   "province_label": 1792,
    "province_hex": "xF87784",
    "impassable": false
   },
@@ -3211,7 +3211,7 @@
     4416,
     828
    ],
-   "province_label": 1795,
+   "province_label": 1793,
    "province_hex": "x1DD119",
    "impassable": false
   },
@@ -3231,7 +3231,7 @@
     4015,
     832
    ],
-   "province_label": 1697,
+   "province_label": 1695,
    "province_hex": "x1A7307",
    "impassable": false
   },
@@ -3241,7 +3241,7 @@
     3794,
     834
    ],
-   "province_label": 1834,
+   "province_label": 1832,
    "province_hex": "x8F26E9",
    "impassable": false
   },
@@ -3271,7 +3271,7 @@
     4902,
     836
    ],
-   "province_label": 1740,
+   "province_label": 1738,
    "province_hex": "x384488",
    "impassable": false
   },
@@ -3281,7 +3281,7 @@
     4351,
     837
    ],
-   "province_label": 1764,
+   "province_label": 1762,
    "province_hex": "x80B45F",
    "impassable": false
   },
@@ -3301,7 +3301,7 @@
     4929,
     838
    ],
-   "province_label": 1741,
+   "province_label": 1739,
    "province_hex": "xD67C01",
    "impassable": false
   },
@@ -3311,7 +3311,7 @@
     3886,
     840
    ],
-   "province_label": 1679,
+   "province_label": 1677,
    "province_hex": "xA91D37",
    "impassable": false
   },
@@ -3321,7 +3321,7 @@
     4048,
     843
    ],
-   "province_label": 1699,
+   "province_label": 1697,
    "province_hex": "xD87E5A",
    "impassable": false
   },
@@ -3331,7 +3331,7 @@
     4089,
     846
    ],
-   "province_label": 1616,
+   "province_label": 1614,
    "province_hex": "x61C81F",
    "impassable": false
   },
@@ -3341,7 +3341,7 @@
     4860,
     846
    ],
-   "province_label": 1903,
+   "province_label": 1901,
    "province_hex": "x1AF028",
    "impassable": false
   },
@@ -3351,7 +3351,7 @@
     3742,
     848
    ],
-   "province_label": 1836,
+   "province_label": 1834,
    "province_hex": "x52B7F7",
    "impassable": false
   },
@@ -3361,7 +3361,7 @@
     3956,
     848
    ],
-   "province_label": 1799,
+   "province_label": 1797,
    "province_hex": "x727027",
    "impassable": false
   },
@@ -3371,7 +3371,7 @@
     3909,
     849
    ],
-   "province_label": 1943,
+   "province_label": 1941,
    "province_hex": "x0A96EF",
    "impassable": false
   },
@@ -3381,7 +3381,7 @@
     3990,
     851
    ],
-   "province_label": 1821,
+   "province_label": 1819,
    "province_hex": "x3CEBAB",
    "impassable": false
   },
@@ -3391,7 +3391,7 @@
     4534,
     851
    ],
-   "province_label": 1845,
+   "province_label": 1843,
    "province_hex": "x4DB430",
    "impassable": false
   },
@@ -3401,7 +3401,7 @@
     4784,
     851
    ],
-   "province_label": 1926,
+   "province_label": 1924,
    "province_hex": "x766704",
    "impassable": false
   },
@@ -3411,7 +3411,7 @@
     3862,
     852
    ],
-   "province_label": 1680,
+   "province_label": 1678,
    "province_hex": "xFCA186",
    "impassable": false
   },
@@ -3421,7 +3421,7 @@
     4121,
     852
    ],
-   "province_label": 1856,
+   "province_label": 1854,
    "province_hex": "x8CE396",
    "impassable": false
   },
@@ -3431,7 +3431,7 @@
     4100,
     853
    ],
-   "province_label": 1857,
+   "province_label": 1855,
    "province_hex": "xA99A58",
    "impassable": false
   },
@@ -3441,7 +3441,7 @@
     4296,
     854
    ],
-   "province_label": 1862,
+   "province_label": 1860,
    "province_hex": "xD46700",
    "impassable": false
   },
@@ -3451,7 +3451,7 @@
     4703,
     854
    ],
-   "province_label": 1812,
+   "province_label": 1810,
    "province_hex": "x60FC2F",
    "impassable": false
   },
@@ -3461,7 +3461,7 @@
     4974,
     854
    ],
-   "province_label": 1881,
+   "province_label": 1879,
    "province_hex": "x4E8DF5",
    "impassable": false
   },
@@ -3481,7 +3481,7 @@
     4237,
     855
    ],
-   "province_label": 1915,
+   "province_label": 1913,
    "province_hex": "x60303F",
    "impassable": false
   },
@@ -3491,7 +3491,7 @@
     4591,
     855
    ],
-   "province_label": 1844,
+   "province_label": 1842,
    "province_hex": "x11453E",
    "impassable": false
   },
@@ -3501,7 +3501,7 @@
     4188,
     857
    ],
-   "province_label": 1885,
+   "province_label": 1883,
    "province_hex": "x094DDE",
    "impassable": false
   },
@@ -3511,7 +3511,7 @@
     4085,
     858
    ],
-   "province_label": 1949,
+   "province_label": 1947,
    "province_hex": "xBA70B2",
    "impassable": false
   },
@@ -3521,7 +3521,7 @@
     4941,
     859
    ],
-   "province_label": 1880,
+   "province_label": 1878,
    "province_hex": "x8AFCE7",
    "impassable": false
   },
@@ -3531,7 +3531,7 @@
     4837,
     860
    ],
-   "province_label": 1909,
+   "province_label": 1907,
    "province_hex": "x93CE0C",
    "impassable": false
   },
@@ -3541,7 +3541,7 @@
     4891,
     860
    ],
-   "province_label": 1958,
+   "province_label": 1956,
    "province_hex": "xB1226C",
    "impassable": false
   },
@@ -3551,7 +3551,7 @@
     3840,
     861
    ],
-   "province_label": 1939,
+   "province_label": 1937,
    "province_hex": "x1F1A2A",
    "impassable": false
   },
@@ -3561,7 +3561,7 @@
     4657,
     861
    ],
-   "province_label": 1814,
+   "province_label": 1812,
    "province_hex": "xE81E4B",
    "impassable": false
   },
@@ -3571,7 +3571,7 @@
     3810,
     862
    ],
-   "province_label": 1938,
+   "province_label": 1936,
    "province_hex": "x4473BF",
    "impassable": false
   },
@@ -3581,7 +3581,7 @@
     4754,
     863
    ],
-   "province_label": 1930,
+   "province_label": 1928,
    "province_hex": "xC556D8",
    "impassable": false
   },
@@ -3591,7 +3591,7 @@
     3760,
     864
    ],
-   "province_label": 1840,
+   "province_label": 1838,
    "province_hex": "xA63C46",
    "impassable": false
   },
@@ -3601,7 +3601,7 @@
     4396,
     864
    ],
-   "province_label": 1771,
+   "province_label": 1769,
    "province_hex": "x26A23E",
    "impassable": false
   },
@@ -3611,7 +3611,7 @@
     4039,
     866
    ],
-   "province_label": 1950,
+   "province_label": 1948,
    "province_hex": "x795A9D",
    "impassable": false
   },
@@ -3621,7 +3621,7 @@
     4331,
     866
    ],
-   "province_label": 1867,
+   "province_label": 1865,
    "province_hex": "x0291BA",
    "impassable": false
   },
@@ -3631,7 +3631,7 @@
     4371,
     866
    ],
-   "province_label": 1868,
+   "province_label": 1866,
    "province_hex": "x89B3D6",
    "impassable": false
   },
@@ -3641,7 +3641,7 @@
     4913,
     868
    ],
-   "province_label": 1960,
+   "province_label": 1958,
    "province_hex": "xA35B55",
    "impassable": false
   },
@@ -3651,7 +3651,7 @@
     3967,
     869
    ],
-   "province_label": 1800,
+   "province_label": 1798,
    "province_hex": "x8BB62F",
    "impassable": false
   },
@@ -3661,7 +3661,7 @@
     4175,
     874
    ],
-   "province_label": 1887,
+   "province_label": 1885,
    "province_hex": "xBE9AB4",
    "impassable": false
   },
@@ -3681,7 +3681,7 @@
     3921,
     876
    ],
-   "province_label": 1946,
+   "province_label": 1944,
    "province_hex": "x9A8A30",
    "impassable": false
   },
@@ -3701,7 +3701,7 @@
     4293,
     877
    ],
-   "province_label": 1965,
+   "province_label": 1963,
    "province_hex": "x27EB4F",
    "impassable": false
   },
@@ -3711,7 +3711,7 @@
     4875,
     877
    ],
-   "province_label": 1961,
+   "province_label": 1959,
    "province_hex": "x66EC63",
    "impassable": false
   },
@@ -3721,7 +3721,7 @@
     4206,
     878
    ],
-   "province_label": 1888,
+   "province_label": 1886,
    "province_hex": "x99411F",
    "impassable": false
   },
@@ -3731,7 +3731,7 @@
     4042,
     880
    ],
-   "province_label": 1828,
+   "province_label": 1826,
    "province_hex": "x410305",
    "impassable": false
   },
@@ -3741,7 +3741,7 @@
     4066,
     880
    ],
-   "province_label": 1955,
+   "province_label": 1953,
    "province_hex": "x27AA55",
    "impassable": false
   },
@@ -3751,7 +3751,7 @@
     4777,
     880
    ],
-   "province_label": 1934,
+   "province_label": 1932,
    "province_hex": "x33EC34",
    "impassable": false
   },
@@ -3761,7 +3761,7 @@
     4427,
     882
    ],
-   "province_label": 1895,
+   "province_label": 1893,
    "province_hex": "xE1DF48",
    "impassable": false
   },
@@ -3771,7 +3771,7 @@
     4813,
     882
    ],
-   "province_label": 1935,
+   "province_label": 1933,
    "province_hex": "x18DB27",
    "impassable": false
   },
@@ -3781,7 +3781,7 @@
     3856,
     883
    ],
-   "province_label": 1968,
+   "province_label": 1966,
    "province_hex": "x21AC4C",
    "impassable": false
   },
@@ -3791,7 +3791,7 @@
     4946,
     884
    ],
-   "province_label": 1990,
+   "province_label": 1988,
    "province_hex": "xB4FD9F",
    "impassable": false
   },
@@ -3801,7 +3801,7 @@
     3888,
     886
    ],
-   "province_label": 1969,
+   "province_label": 1967,
    "province_hex": "x5E1B3E",
    "impassable": false
   },
@@ -3811,7 +3811,7 @@
     4578,
     886
    ],
-   "province_label": 1981,
+   "province_label": 1979,
    "province_hex": "xC9C1D4",
    "impassable": false
   },
@@ -3821,7 +3821,7 @@
     4514,
     887
    ],
-   "province_label": 1847,
+   "province_label": 1845,
    "province_hex": "xA42745",
    "impassable": false
   },
@@ -3831,7 +3831,7 @@
     4150,
     888
    ],
-   "province_label": 1891,
+   "province_label": 1889,
    "province_hex": "x377898",
    "impassable": false
   },
@@ -3841,7 +3841,7 @@
     4245,
     889
    ],
-   "province_label": 1923,
+   "province_label": 1921,
    "province_hex": "x77459C",
    "impassable": false
   },
@@ -3861,7 +3861,7 @@
     4362,
     891
    ],
-   "province_label": 1874,
+   "province_label": 1872,
    "province_hex": "x19A717",
    "impassable": false
   },
@@ -3881,7 +3881,7 @@
     3812,
     893
    ],
-   "province_label": 1942,
+   "province_label": 1940,
    "province_hex": "xF9C095",
    "impassable": false
   },
@@ -3891,7 +3891,7 @@
     3964,
     894
    ],
-   "province_label": 1878,
+   "province_label": 1876,
    "province_hex": "x9DD59A",
    "impassable": false
   },
@@ -3901,7 +3901,7 @@
     4321,
     894
    ],
-   "province_label": 2168,
+   "province_label": 2166,
    "province_hex": "xAC19D2",
    "impassable": false
   },
@@ -3911,7 +3911,7 @@
     4898,
     895
    ],
-   "province_label": 2137,
+   "province_label": 2135,
    "province_hex": "x97A93F",
    "impassable": false
   },
@@ -3931,7 +3931,7 @@
     4395,
     900
    ],
-   "province_label": 2190,
+   "province_label": 2188,
    "province_hex": "x59B515",
    "impassable": false
   },
@@ -3941,7 +3941,7 @@
     4251,
     901
    ],
-   "province_label": 2203,
+   "province_label": 2201,
    "province_hex": "x5E985F",
    "impassable": false
   },
@@ -3951,7 +3951,7 @@
     4985,
     901
    ],
-   "province_label": 1994,
+   "province_label": 1992,
    "province_hex": "x16C626",
    "impassable": false
   },
@@ -3961,7 +3961,7 @@
     4181,
     902
    ],
-   "province_label": 2202,
+   "province_label": 2200,
    "province_hex": "xF7EC8E",
    "impassable": false
   },
@@ -3971,7 +3971,7 @@
     4297,
     902
    ],
-   "province_label": 2169,
+   "province_label": 2167,
    "province_hex": "xF0A0A1",
    "impassable": false
   },
@@ -3981,7 +3981,7 @@
     3816,
     906
    ],
-   "province_label": 2124,
+   "province_label": 2122,
    "province_hex": "x74EFA1",
    "impassable": false
   },
@@ -3991,7 +3991,7 @@
     4947,
     906
    ],
-   "province_label": 1996,
+   "province_label": 1994,
    "province_hex": "x6A4A75",
    "impassable": false
   },
@@ -4001,7 +4001,7 @@
     4042,
     907
    ],
-   "province_label": 2165,
+   "province_label": 2163,
    "province_hex": "x7E7EE1",
    "impassable": false
   },
@@ -4011,7 +4011,7 @@
     4838,
     908
    ],
-   "province_label": 2140,
+   "province_label": 2138,
    "province_hex": "x429FB8",
    "impassable": false
   },
@@ -4031,7 +4031,7 @@
     4870,
     909
    ],
-   "province_label": 2141,
+   "province_label": 2139,
    "province_hex": "x896507",
    "impassable": false
   },
@@ -4041,7 +4041,7 @@
     3955,
     912
    ],
-   "province_label": 2148,
+   "province_label": 2146,
    "province_hex": "xDCE956",
    "impassable": false
   },
@@ -4051,7 +4051,7 @@
     3928,
     913
    ],
-   "province_label": 2178,
+   "province_label": 2176,
    "province_hex": "x3F6FF8",
    "impassable": false
   },
@@ -4071,7 +4071,7 @@
     4348,
     916
    ],
-   "province_label": 2173,
+   "province_label": 2171,
    "province_hex": "x8ED81A",
    "impassable": false
   },
@@ -4081,7 +4081,7 @@
     4407,
     916
    ],
-   "province_label": 2192,
+   "province_label": 2190,
    "province_hex": "xEA821B",
    "impassable": false
   },
@@ -4091,7 +4091,7 @@
     4075,
     917
    ],
-   "province_label": 2118,
+   "province_label": 2116,
    "province_hex": "x86D2E5",
    "impassable": false
   },
@@ -4101,7 +4101,7 @@
     4326,
     917
    ],
-   "province_label": 2172,
+   "province_label": 2170,
    "province_hex": "x2D0F93",
    "impassable": false
   },
@@ -4111,7 +4111,7 @@
     4583,
     917
    ],
-   "province_label": 2196,
+   "province_label": 2194,
    "province_hex": "x56932A",
    "impassable": false
   },
@@ -4121,7 +4121,7 @@
     4372,
     919
    ],
-   "province_label": 2191,
+   "province_label": 2189,
    "province_hex": "x561609",
    "impassable": false
   },
@@ -4131,7 +4131,7 @@
     3877,
     921
    ],
-   "province_label": 1976,
+   "province_label": 1974,
    "province_hex": "x4FD706",
    "impassable": false
   },
@@ -4141,7 +4141,7 @@
     4002,
     923
    ],
-   "province_label": 2210,
+   "province_label": 2208,
    "province_hex": "x785286",
    "impassable": false
   },
@@ -4151,7 +4151,7 @@
     4298,
     923
    ],
-   "province_label": 2174,
+   "province_label": 2172,
    "province_hex": "x4424F0",
    "impassable": false
   },
@@ -4161,7 +4161,7 @@
     4884,
     923
    ],
-   "province_label": 2144,
+   "province_label": 2142,
    "province_hex": "xD41831",
    "impassable": false
   },
@@ -4171,7 +4171,7 @@
     4169,
     924
    ],
-   "province_label": 2225,
+   "province_label": 2223,
    "province_hex": "x11D034",
    "impassable": false
   },
@@ -4181,7 +4181,7 @@
     3837,
     925
    ],
-   "province_label": 2130,
+   "province_label": 2128,
    "province_hex": "x8A30F7",
    "impassable": false
   },
@@ -4191,7 +4191,7 @@
     4145,
     928
    ],
-   "province_label": 2224,
+   "province_label": 2222,
    "province_hex": "x7398BB",
    "impassable": false
   },
@@ -4211,7 +4211,7 @@
     4429,
     930
    ],
-   "province_label": 1897,
+   "province_label": 1895,
    "province_hex": "xF8F4A5",
    "impassable": false
   },
@@ -4221,7 +4221,7 @@
     4534,
     930
    ],
-   "province_label": 2197,
+   "province_label": 2195,
    "province_hex": "xA1C375",
    "impassable": false
   },
@@ -4231,7 +4231,7 @@
     4254,
     931
    ],
-   "province_label": 2215,
+   "province_label": 2213,
    "province_hex": "x8CC319",
    "impassable": false
   },
@@ -4251,7 +4251,7 @@
     4219,
     933
    ],
-   "province_label": 2217,
+   "province_label": 2215,
    "province_hex": "x13E535",
    "impassable": false
   },
@@ -4261,7 +4261,7 @@
     3959,
     935
    ],
-   "province_label": 2183,
+   "province_label": 2181,
    "province_hex": "x61F671",
    "impassable": false
   },
@@ -4271,7 +4271,7 @@
     4105,
     935
    ],
-   "province_label": 2120,
+   "province_label": 2118,
    "province_hex": "x13556C",
    "impassable": false
   },
@@ -4291,7 +4291,7 @@
     4378,
     939
    ],
-   "province_label": 2390,
+   "province_label": 2388,
    "province_hex": "x20146C",
    "impassable": false
   },
@@ -4301,7 +4301,7 @@
     4317,
     941
    ],
-   "province_label": 2388,
+   "province_label": 2386,
    "province_hex": "x1ECB5B",
    "impassable": false
   },
@@ -4311,7 +4311,7 @@
     4348,
     941
    ],
-   "province_label": 2387,
+   "province_label": 2385,
    "province_hex": "x456E01",
    "impassable": false
   },
@@ -4321,7 +4321,7 @@
     3808,
     942
    ],
-   "province_label": 2132,
+   "province_label": 2130,
    "province_hex": "x64D762",
    "impassable": false
   },
@@ -4331,7 +4331,7 @@
     3872,
     942
    ],
-   "province_label": 2416,
+   "province_label": 2414,
    "province_hex": "xDEAF88",
    "impassable": false
   },
@@ -4341,7 +4341,7 @@
     4051,
     944
    ],
-   "province_label": 2212,
+   "province_label": 2210,
    "province_hex": "x28E591",
    "impassable": false
   },
@@ -4361,7 +4361,7 @@
     5007,
     947
    ],
-   "province_label": 2372,
+   "province_label": 2370,
    "province_hex": "x480023",
    "impassable": false
   },
@@ -4381,7 +4381,7 @@
     4738,
     949
    ],
-   "province_label": 2040,
+   "province_label": 2038,
    "province_hex": "xD581BF",
    "impassable": false
   },
@@ -4401,7 +4401,7 @@
     4101,
     952
    ],
-   "province_label": 2395,
+   "province_label": 2393,
    "province_hex": "xFE18E9",
    "impassable": false
   },
@@ -4411,7 +4411,7 @@
     4858,
     952
    ],
-   "province_label": 2400,
+   "province_label": 2398,
    "province_hex": "xEA619E",
    "impassable": false
   },
@@ -4441,7 +4441,7 @@
     3989,
     955
    ],
-   "province_label": 2153,
+   "province_label": 2151,
    "province_hex": "xF3FEB3",
    "impassable": false
   },
@@ -4451,7 +4451,7 @@
     4142,
     956
    ],
-   "province_label": 2465,
+   "province_label": 2463,
    "province_hex": "xEBCB2C",
    "impassable": false
   },
@@ -4461,7 +4461,7 @@
     4194,
     956
    ],
-   "province_label": 2467,
+   "province_label": 2465,
    "province_hex": "x83A325",
    "impassable": false
   },
@@ -4471,7 +4471,7 @@
     4618,
     956
    ],
-   "province_label": 2235,
+   "province_label": 2233,
    "province_hex": "x261748",
    "impassable": false
   },
@@ -4481,7 +4481,7 @@
     4227,
     958
    ],
-   "province_label": 2223,
+   "province_label": 2221,
    "province_hex": "x420FEF",
    "impassable": false
   },
@@ -4491,7 +4491,7 @@
     3834,
     959
    ],
-   "province_label": 2417,
+   "province_label": 2415,
    "province_hex": "xB955F3",
    "impassable": false
   },
@@ -4501,7 +4501,7 @@
     4021,
     961
    ],
-   "province_label": 2450,
+   "province_label": 2448,
    "province_hex": "x103854",
    "impassable": false
   },
@@ -4511,7 +4511,7 @@
     4116,
     963
    ],
-   "province_label": 2411,
+   "province_label": 2409,
    "province_hex": "xBBA71B",
    "impassable": false
   },
@@ -4541,7 +4541,7 @@
     4298,
     968
    ],
-   "province_label": 2462,
+   "province_label": 2460,
    "province_hex": "x91E75D",
    "impassable": false
   },
@@ -4551,7 +4551,7 @@
     4408,
     968
    ],
-   "province_label": 2452,
+   "province_label": 2450,
    "province_hex": "x7CF9A9",
    "impassable": false
   },
@@ -4561,7 +4561,7 @@
     4343,
     971
    ],
-   "province_label": 2483,
+   "province_label": 2481,
    "province_hex": "x61A7A2",
    "impassable": false
   },
@@ -4571,7 +4571,7 @@
     3805,
     972
    ],
-   "province_label": 2421,
+   "province_label": 2419,
    "province_hex": "x5306C6",
    "impassable": false
   },
@@ -4581,7 +4581,7 @@
     3927,
     973
    ],
-   "province_label": 2428,
+   "province_label": 2426,
    "province_hex": "x2CC0C4",
    "impassable": false
   },
@@ -4591,7 +4591,7 @@
     4137,
     975
    ],
-   "province_label": 2412,
+   "province_label": 2410,
    "province_hex": "x2C43A3",
    "impassable": false
   },
@@ -4601,7 +4601,7 @@
     4370,
     976
    ],
-   "province_label": 2453,
+   "province_label": 2451,
    "province_hex": "xD93C75",
    "impassable": false
   },
@@ -4621,7 +4621,7 @@
     4092,
     978
    ],
-   "province_label": 2396,
+   "province_label": 2394,
    "province_hex": "x76F6CD",
    "impassable": false
   },
@@ -4631,7 +4631,7 @@
     3856,
     979
    ],
-   "province_label": 2424,
+   "province_label": 2422,
    "province_hex": "x6EA2C9",
    "impassable": false
   },
@@ -4641,7 +4641,7 @@
     4579,
     979
    ],
-   "province_label": 2244,
+   "province_label": 2242,
    "province_hex": "x7EFC02",
    "impassable": false
   },
@@ -4651,7 +4651,7 @@
     4059,
     980
    ],
-   "province_label": 2475,
+   "province_label": 2473,
    "province_hex": "xEADEBF",
    "impassable": false
   },
@@ -4671,7 +4671,7 @@
     4331,
     986
    ],
-   "province_label": 2485,
+   "province_label": 2483,
    "province_hex": "x9E1694",
    "impassable": false
   },
@@ -4681,7 +4681,7 @@
     4010,
     987
    ],
-   "province_label": 2478,
+   "province_label": 2476,
    "province_hex": "x64A910",
    "impassable": false
   },
@@ -4691,7 +4691,7 @@
     4144,
     988
    ],
-   "province_label": 2414,
+   "province_label": 2412,
    "province_hex": "xF8160D",
    "impassable": false
   },
@@ -4701,7 +4701,7 @@
     4294,
     988
    ],
-   "province_label": 2525,
+   "province_label": 2523,
    "province_hex": "x8FD25C",
    "impassable": false
   },
@@ -4711,7 +4711,7 @@
     4500,
     988
    ],
-   "province_label": 2445,
+   "province_label": 2443,
    "province_hex": "xFB37F8",
    "impassable": false
   },
@@ -4721,7 +4721,7 @@
     5026,
     988
    ],
-   "province_label": 2377,
+   "province_label": 2375,
    "province_hex": "xFD4CF9",
    "impassable": false
   },
@@ -4731,7 +4731,7 @@
     4122,
     990
    ],
-   "province_label": 2413,
+   "province_label": 2411,
    "province_hex": "x312BC0",
    "impassable": false
   },
@@ -4751,7 +4751,7 @@
     3722,
     995
    ],
-   "province_label": 2494,
+   "province_label": 2492,
    "province_hex": "x118165",
    "impassable": false
   },
@@ -4761,7 +4761,7 @@
     3984,
     996
    ],
-   "province_label": 2159,
+   "province_label": 2157,
    "province_hex": "x6CDC97",
    "impassable": false
   },
@@ -4771,7 +4771,7 @@
     4306,
     998
    ],
-   "province_label": 2488,
+   "province_label": 2486,
    "province_hex": "xA6E7B9",
    "impassable": false
   },
@@ -4781,7 +4781,7 @@
     4236,
     999
    ],
-   "province_label": 2510,
+   "province_label": 2508,
    "province_hex": "x20CDB4",
    "impassable": false
   },
@@ -4791,7 +4791,7 @@
     4547,
     999
    ],
-   "province_label": 2246,
+   "province_label": 2244,
    "province_hex": "x70B7CA",
    "impassable": false
   },
@@ -4801,7 +4801,7 @@
     4188,
     1000
    ],
-   "province_label": 2511,
+   "province_label": 2509,
    "province_hex": "xF19AE3",
    "impassable": false
   },
@@ -4811,7 +4811,7 @@
     3846,
     1001
    ],
-   "province_label": 2535,
+   "province_label": 2533,
    "province_hex": "xAB52B5",
    "impassable": false
   },
@@ -4821,7 +4821,7 @@
     4598,
     1002
    ],
-   "province_label": 2251,
+   "province_label": 2249,
    "province_hex": "xAD26BC",
    "impassable": false
   },
@@ -4841,7 +4841,7 @@
     3606,
     1004
    ],
-   "province_label": 2515,
+   "province_label": 2513,
    "province_hex": "x84EC36",
    "impassable": false
   },
@@ -4851,7 +4851,7 @@
     3634,
     1005
    ],
-   "province_label": 2497,
+   "province_label": 2495,
    "province_hex": "x3FAC1F",
    "impassable": false
   },
@@ -4861,7 +4861,7 @@
     4843,
     1005
    ],
-   "province_label": 2405,
+   "province_label": 2403,
    "province_hex": "xEDBFB0",
    "impassable": false
   },
@@ -4881,7 +4881,7 @@
     4930,
     1008
    ],
-   "province_label": 2300,
+   "province_label": 2298,
    "province_hex": "x4143FF",
    "impassable": false
   },
@@ -4901,7 +4901,7 @@
     3819,
     1010
    ],
-   "province_label": 2538,
+   "province_label": 2536,
    "province_hex": "x7E3012",
    "impassable": false
   },
@@ -4911,7 +4911,7 @@
     4083,
     1011
    ],
-   "province_label": 2544,
+   "province_label": 2542,
    "province_hex": "x500558",
    "impassable": false
   },
@@ -4931,7 +4931,7 @@
     4416,
     1012
    ],
-   "province_label": 2455,
+   "province_label": 2453,
    "province_hex": "xB3E2E0",
    "impassable": false
   },
@@ -4941,7 +4941,7 @@
     4464,
     1013
    ],
-   "province_label": 2446,
+   "province_label": 2444,
    "province_hex": "x7415DC",
    "impassable": false
   },
@@ -4951,7 +4951,7 @@
     4174,
     1018
    ],
-   "province_label": 2551,
+   "province_label": 2549,
    "province_hex": "x466843",
    "impassable": false
   },
@@ -4961,7 +4961,7 @@
     3866,
     1019
    ],
-   "province_label": 2541,
+   "province_label": 2539,
    "province_hex": "xBA9F04",
    "impassable": false
   },
@@ -4971,7 +4971,7 @@
     4211,
     1019
    ],
-   "province_label": 2552,
+   "province_label": 2550,
    "province_hex": "xE49FBC",
    "impassable": false
   },
@@ -4981,7 +4981,7 @@
     3937,
     1021
    ],
-   "province_label": 2441,
+   "province_label": 2439,
    "province_hex": "xF922F7",
    "impassable": false
   },
@@ -4991,7 +4991,7 @@
     4266,
     1021
    ],
-   "province_label": 2531,
+   "province_label": 2529,
    "province_hex": "x5C348F",
    "impassable": false
   },
@@ -5001,7 +5001,7 @@
     3900,
     1022
    ],
-   "province_label": 2440,
+   "province_label": 2438,
    "province_hex": "x975A70",
    "impassable": false
   },
@@ -5011,7 +5011,7 @@
     4031,
     1022
    ],
-   "province_label": 2582,
+   "province_label": 2580,
    "province_hex": "xB67502",
    "impassable": false
   },
@@ -5021,7 +5021,7 @@
     3791,
     1024
    ],
-   "province_label": 2600,
+   "province_label": 2598,
    "province_hex": "x884A48",
    "impassable": false
   },
@@ -5031,7 +5031,7 @@
     4114,
     1024
    ],
-   "province_label": 2564,
+   "province_label": 2562,
    "province_hex": "xD813E1",
    "impassable": false
   },
@@ -5041,7 +5041,7 @@
     3755,
     1025
    ],
-   "province_label": 2599,
+   "province_label": 2597,
    "province_hex": "x0F6C64",
    "impassable": false
   },
@@ -5051,7 +5051,7 @@
     5049,
     1025
    ],
-   "province_label": 2382,
+   "province_label": 2380,
    "province_hex": "xB299CF",
    "impassable": false
   },
@@ -5061,7 +5061,7 @@
     3571,
     1026
    ],
-   "province_label": 2518,
+   "province_label": 2516,
    "province_hex": "x5F92A1",
    "impassable": false
   },
@@ -5081,7 +5081,7 @@
     3698,
     1029
    ],
-   "province_label": 2610,
+   "province_label": 2608,
    "province_hex": "x7C1B11",
    "impassable": false
   },
@@ -5091,7 +5091,7 @@
     4321,
     1029
    ],
-   "province_label": 2577,
+   "province_label": 2575,
    "province_hex": "xC614F3",
    "impassable": false
   },
@@ -5101,7 +5101,7 @@
     4370,
     1029
    ],
-   "province_label": 2575,
+   "province_label": 2573,
    "province_hex": "xAA09A4",
    "impassable": false
   },
@@ -5121,7 +5121,7 @@
     3663,
     1034
    ],
-   "province_label": 2609,
+   "province_label": 2607,
    "province_hex": "xF4F8F5",
    "impassable": false
   },
@@ -5141,7 +5141,7 @@
     4416,
     1037
    ],
-   "province_label": 2622,
+   "province_label": 2620,
    "province_hex": "x0D5763",
    "impassable": false
   },
@@ -5151,7 +5151,7 @@
     3996,
     1039
    ],
-   "province_label": 2164,
+   "province_label": 2162,
    "province_hex": "x83F1F4",
    "impassable": false
   },
@@ -5161,7 +5161,7 @@
     4538,
     1044
    ],
-   "province_label": 2621,
+   "province_label": 2619,
    "province_hex": "x9D4AA4",
    "impassable": false
   },
@@ -5171,7 +5171,7 @@
     4701,
     1044
    ],
-   "province_label": 2590,
+   "province_label": 2588,
    "province_hex": "x77C2BD",
    "impassable": false
   },
@@ -5181,7 +5181,7 @@
     3931,
     1045
    ],
-   "province_label": 2747,
+   "province_label": 2745,
    "province_hex": "xBD3126",
    "impassable": false
   },
@@ -5191,7 +5191,7 @@
     4308,
     1045
    ],
-   "province_label": 2656,
+   "province_label": 2654,
    "province_hex": "xD0E871",
    "impassable": false
   },
@@ -5201,7 +5201,7 @@
     4163,
     1046
    ],
-   "province_label": 2559,
+   "province_label": 2557,
    "province_hex": "xAEABF4",
    "impassable": false
   },
@@ -5211,7 +5211,7 @@
     3628,
     1047
    ],
-   "province_label": 2743,
+   "province_label": 2741,
    "province_hex": "x76A7FE",
    "impassable": false
   },
@@ -5221,7 +5221,7 @@
     3730,
     1049
    ],
-   "province_label": 2613,
+   "province_label": 2611,
    "province_hex": "xB88A03",
    "impassable": false
   },
@@ -5231,7 +5231,7 @@
     4066,
     1049
    ],
-   "province_label": 2619,
+   "province_label": 2617,
    "province_hex": "x04863E",
    "impassable": false
   },
@@ -5241,7 +5241,7 @@
     4016,
     1051
    ],
-   "province_label": 2778,
+   "province_label": 2776,
    "province_hex": "x2F52E6",
    "impassable": false
   },
@@ -5261,7 +5261,7 @@
     4154,
     1051
    ],
-   "province_label": 2572,
+   "province_label": 2570,
    "province_hex": "xC8174C",
    "impassable": false
   },
@@ -5281,7 +5281,7 @@
     4593,
     1053
    ],
-   "province_label": 2759,
+   "province_label": 2757,
    "province_hex": "xE665EE",
    "impassable": false
   },
@@ -5301,7 +5301,7 @@
     3798,
     1054
    ],
-   "province_label": 2604,
+   "province_label": 2602,
    "province_hex": "x01282C",
    "impassable": false
   },
@@ -5311,7 +5311,7 @@
     4197,
     1055
    ],
-   "province_label": 2561,
+   "province_label": 2559,
    "province_hex": "xD65B84",
    "impassable": false
   },
@@ -5321,7 +5321,7 @@
     3960,
     1057
    ],
-   "province_label": 2771,
+   "province_label": 2769,
    "province_hex": "x899359",
    "impassable": false
   },
@@ -5331,7 +5331,7 @@
     4379,
     1058
    ],
-   "province_label": 2764,
+   "province_label": 2762,
    "province_hex": "xA406C8",
    "impassable": false
   },
@@ -5341,7 +5341,7 @@
     3851,
     1059
    ],
-   "province_label": 2662,
+   "province_label": 2660,
    "province_hex": "xAC5ACC",
    "impassable": false
   },
@@ -5351,7 +5351,7 @@
     4480,
     1059
    ],
-   "province_label": 2624,
+   "province_label": 2622,
    "province_hex": "x162888",
    "impassable": false
   },
@@ -5371,7 +5371,7 @@
     3824,
     1062
    ],
-   "province_label": 2663,
+   "province_label": 2661,
    "province_hex": "x0E2353",
    "impassable": false
   },
@@ -5401,7 +5401,7 @@
     3600,
     1063
    ],
-   "province_label": 2803,
+   "province_label": 2801,
    "province_hex": "x46E564",
    "impassable": false
   },
@@ -5411,7 +5411,7 @@
     4250,
     1063
    ],
-   "province_label": 2754,
+   "province_label": 2752,
    "province_hex": "xE44318",
    "impassable": false
   },
@@ -5431,7 +5431,7 @@
     3631,
     1064
    ],
-   "province_label": 2779,
+   "province_label": 2777,
    "province_hex": "xD01C81",
    "impassable": false
   },
@@ -5441,7 +5441,7 @@
     3882,
     1064
    ],
-   "province_label": 2751,
+   "province_label": 2749,
    "province_hex": "x10B575",
    "impassable": false
   },
@@ -5461,7 +5461,7 @@
     4008,
     1066
    ],
-   "province_label": 2773,
+   "province_label": 2771,
    "province_hex": "x09F951",
    "impassable": false
   },
@@ -5481,7 +5481,7 @@
     3682,
     1067
    ],
-   "province_label": 2780,
+   "province_label": 2778,
    "province_hex": "x31E508",
    "impassable": false
   },
@@ -5501,7 +5501,7 @@
     4209,
     1069
    ],
-   "province_label": 2755,
+   "province_label": 2753,
    "province_hex": "x842046",
    "impassable": false
   },
@@ -5511,7 +5511,7 @@
     4161,
     1070
    ],
-   "province_label": 2573,
+   "province_label": 2571,
    "province_hex": "x664EC5",
    "impassable": false
   },
@@ -5531,7 +5531,7 @@
     4325,
     1071
    ],
-   "province_label": 2785,
+   "province_label": 2783,
    "province_hex": "xB035FF",
    "impassable": false
   },
@@ -5541,7 +5541,7 @@
     4131,
     1072
    ],
-   "province_label": 2842,
+   "province_label": 2840,
    "province_hex": "x5D20FC",
    "impassable": false
   },
@@ -5551,7 +5551,7 @@
     3752,
     1073
    ],
-   "province_label": 2868,
+   "province_label": 2866,
    "province_hex": "x743659",
    "impassable": false
   },
@@ -5561,7 +5561,7 @@
     4624,
     1073
    ],
-   "province_label": 2635,
+   "province_label": 2633,
    "province_hex": "x849D67",
    "impassable": false
   },
@@ -5571,7 +5571,7 @@
     5060,
     1073
    ],
-   "province_label": 2814,
+   "province_label": 2812,
    "province_hex": "x26FEE2",
    "impassable": false
   },
@@ -5581,7 +5581,7 @@
     3981,
     1075
    ],
-   "province_label": 2775,
+   "province_label": 2773,
    "province_hex": "xCDF4D8",
    "impassable": false
   },
@@ -5591,7 +5591,7 @@
     4288,
     1079
    ],
-   "province_label": 2878,
+   "province_label": 2876,
    "province_hex": "x9CFBD5",
    "impassable": false
   },
@@ -5601,7 +5601,7 @@
     4104,
     1080
    ],
-   "province_label": 2843,
+   "province_label": 2841,
    "province_hex": "xFB5875",
    "impassable": false
   },
@@ -5621,7 +5621,7 @@
     3909,
     1083
    ],
-   "province_label": 2894,
+   "province_label": 2892,
    "province_hex": "xB4035D",
    "impassable": false
   },
@@ -5631,7 +5631,7 @@
     4181,
     1084
    ],
-   "province_label": 2756,
+   "province_label": 2754,
    "province_hex": "x22E788",
    "impassable": false
   },
@@ -5641,7 +5641,7 @@
     3813,
     1085
    ],
-   "province_label": 2904,
+   "province_label": 2902,
    "province_hex": "xA5BF25",
    "impassable": false
   },
@@ -5651,7 +5651,7 @@
     3936,
     1086
    ],
-   "province_label": 2895,
+   "province_label": 2893,
    "province_hex": "xD755C6",
    "impassable": false
   },
@@ -5661,7 +5661,7 @@
     4391,
     1086
    ],
-   "province_label": 2787,
+   "province_label": 2785,
    "province_hex": "xC74B5C",
    "impassable": false
   },
@@ -5681,7 +5681,7 @@
     3996,
     1087
    ],
-   "province_label": 2972,
+   "province_label": 2970,
    "province_hex": "x8A8D9B",
    "impassable": false
   },
@@ -5691,7 +5691,7 @@
     4227,
     1087
    ],
-   "province_label": 2907,
+   "province_label": 2905,
    "province_hex": "xC4F561",
    "impassable": false
   },
@@ -5711,7 +5711,7 @@
     4358,
     1088
    ],
-   "province_label": 2790,
+   "province_label": 2788,
    "province_hex": "x2913E3",
    "impassable": false
   },
@@ -5721,7 +5721,7 @@
     3623,
     1089
    ],
-   "province_label": 2977,
+   "province_label": 2975,
    "province_hex": "x1937CB",
    "impassable": false
   },
@@ -5731,7 +5731,7 @@
     4080,
     1089
    ],
-   "province_label": 2844,
+   "province_label": 2842,
    "province_hex": "x39FCE5",
    "impassable": false
   },
@@ -5741,7 +5741,7 @@
     4903,
     1089
    ],
-   "province_label": 2859,
+   "province_label": 2857,
    "province_hex": "xE3D3CC",
    "impassable": false
   },
@@ -5761,7 +5761,7 @@
     4452,
     1090
    ],
-   "province_label": 2628,
+   "province_label": 2626,
    "province_hex": "xD26DA9",
    "impassable": false
   },
@@ -5781,7 +5781,7 @@
     4040,
     1092
    ],
-   "province_label": 2973,
+   "province_label": 2971,
    "province_hex": "x3FDA71",
    "impassable": false
   },
@@ -5791,7 +5791,7 @@
     3724,
     1093
    ],
-   "province_label": 2870,
+   "province_label": 2868,
    "province_hex": "x7D1553",
    "impassable": false
   },
@@ -5801,7 +5801,7 @@
     3797,
     1094
    ],
-   "province_label": 2873,
+   "province_label": 2871,
    "province_hex": "x57BBBE",
    "impassable": false
   },
@@ -5821,7 +5821,7 @@
     3590,
     1097
    ],
-   "province_label": 2811,
+   "province_label": 2809,
    "province_hex": "x85F920",
    "impassable": false
   },
@@ -5831,7 +5831,7 @@
     4501,
     1098
    ],
-   "province_label": 2897,
+   "province_label": 2895,
    "province_hex": "xF95149",
    "impassable": false
   },
@@ -5851,7 +5851,7 @@
     4808,
     1100
    ],
-   "province_label": 2837,
+   "province_label": 2835,
    "province_hex": "x2BA605",
    "impassable": false
   },
@@ -5861,7 +5861,7 @@
     4005,
     1102
    ],
-   "province_label": 2972,
+   "province_label": 2970,
    "province_hex": "x8A8D9B",
    "impassable": false
   },
@@ -5871,7 +5871,7 @@
     3816,
     1103
    ],
-   "province_label": 3048,
+   "province_label": 3046,
    "province_hex": "x241DF1",
    "impassable": false
   },
@@ -5881,7 +5881,7 @@
     4172,
     1107
    ],
-   "province_label": 2914,
+   "province_label": 2912,
    "province_hex": "x41EF72",
    "impassable": false
   },
@@ -5891,7 +5891,7 @@
     4151,
     1108
    ],
-   "province_label": 2847,
+   "province_label": 2845,
    "province_hex": "xD5FEE0",
    "impassable": false
   },
@@ -5901,7 +5901,7 @@
     4558,
     1108
    ],
-   "province_label": 2643,
+   "province_label": 2641,
    "province_hex": "x51CB8A",
    "impassable": false
   },
@@ -5911,7 +5911,7 @@
     5095,
     1108
    ],
-   "province_label": 2822,
+   "province_label": 2820,
    "province_hex": "xDC4BB8",
    "impassable": false
   },
@@ -5931,7 +5931,7 @@
     5048,
     1109
    ],
-   "province_label": 2823,
+   "province_label": 2821,
    "province_hex": "x3E143F",
    "impassable": false
   },
@@ -5941,7 +5941,7 @@
     3697,
     1110
    ],
-   "province_label": 3007,
+   "province_label": 3005,
    "province_hex": "xD97D6F",
    "impassable": false
   },
@@ -5961,7 +5961,7 @@
     4022,
     1110
    ],
-   "province_label": 2974,
+   "province_label": 2972,
    "province_hex": "x5DE819",
    "impassable": false
   },
@@ -5971,7 +5971,7 @@
     3652,
     1112
    ],
-   "province_label": 3006,
+   "province_label": 3004,
    "province_hex": "x08DE92",
    "impassable": false
   },
@@ -5981,7 +5981,7 @@
     4289,
     1112
    ],
-   "province_label": 2882,
+   "province_label": 2880,
    "province_hex": "x77A240",
    "impassable": false
   },
@@ -5991,7 +5991,7 @@
     4096,
     1113
    ],
-   "province_label": 2845,
+   "province_label": 2843,
    "province_hex": "x877E58",
    "impassable": false
   },
@@ -6001,7 +6001,7 @@
     3957,
     1115
    ],
-   "province_label": 3038,
+   "province_label": 3036,
    "province_hex": "x23DCF7",
    "impassable": false
   },
@@ -6011,7 +6011,7 @@
     4118,
     1115
    ],
-   "province_label": 2846,
+   "province_label": 2844,
    "province_hex": "x37C767",
    "impassable": false
   },
@@ -6021,7 +6021,7 @@
     4469,
     1119
    ],
-   "province_label": 2898,
+   "province_label": 2896,
    "province_hex": "x722F2D",
    "impassable": false
   },
@@ -6031,7 +6031,7 @@
     4214,
     1120
    ],
-   "province_label": 3020,
+   "province_label": 3018,
    "province_hex": "xBC1667",
    "impassable": false
   },
@@ -6041,7 +6041,7 @@
     3935,
     1121
    ],
-   "province_label": 3037,
+   "province_label": 3035,
    "province_hex": "x7A3462",
    "impassable": false
   },
@@ -6051,7 +6051,7 @@
     4678,
     1121
    ],
-   "province_label": 2706,
+   "province_label": 2704,
    "province_hex": "xF14C14",
    "impassable": false
   },
@@ -6061,7 +6061,7 @@
     4172,
     1124
    ],
-   "province_label": 3066,
+   "province_label": 3064,
    "province_hex": "x1C95DD",
    "impassable": false
   },
@@ -6071,7 +6071,7 @@
     3738,
     1125
    ],
-   "province_label": 3079,
+   "province_label": 3077,
    "province_hex": "xE7AEFF",
    "impassable": false
   },
@@ -6081,7 +6081,7 @@
     3779,
     1125
    ],
-   "province_label": 3078,
+   "province_label": 3076,
    "province_hex": "x2F8138",
    "impassable": false
   },
@@ -6101,7 +6101,7 @@
     3675,
     1129
    ],
-   "province_label": 3009,
+   "province_label": 3007,
    "province_hex": "x81BC76",
    "impassable": false
   },
@@ -6111,7 +6111,7 @@
     3575,
     1130
    ],
-   "province_label": 2986,
+   "province_label": 2984,
    "province_hex": "xCE84A1",
    "impassable": false
   },
@@ -6121,7 +6121,7 @@
     3906,
     1130
    ],
-   "province_label": 3041,
+   "province_label": 3039,
    "province_hex": "x54DACD",
    "impassable": false
   },
@@ -6131,7 +6131,7 @@
     4133,
     1130
    ],
-   "province_label": 3106,
+   "province_label": 3104,
    "province_hex": "x33AB3A",
    "impassable": false
   },
@@ -6161,7 +6161,7 @@
     4597,
     1131
    ],
-   "province_label": 2648,
+   "province_label": 2646,
    "province_hex": "x1E2DBD",
    "impassable": false
   },
@@ -6181,7 +6181,7 @@
     4205,
     1137
    ],
-   "province_label": 3023,
+   "province_label": 3021,
    "province_hex": "x34F44B",
    "impassable": false
   },
@@ -6191,7 +6191,7 @@
     4270,
     1137
    ],
-   "province_label": 2890,
+   "province_label": 2888,
    "province_hex": "x8EB79D",
    "impassable": false
   },
@@ -6201,7 +6201,7 @@
     4523,
     1137
    ],
-   "province_label": 2900,
+   "province_label": 2898,
    "province_hex": "x4CD598",
    "impassable": false
   },
@@ -6211,7 +6211,7 @@
     4041,
     1139
    ],
-   "province_label": 3133,
+   "province_label": 3131,
    "province_hex": "xD9E7E8",
    "impassable": false
   },
@@ -6221,7 +6221,7 @@
     5028,
     1140
    ],
-   "province_label": 3119,
+   "province_label": 3117,
    "province_hex": "xB13041",
    "impassable": false
   },
@@ -6231,7 +6231,7 @@
     3613,
     1141
    ],
-   "province_label": 2988,
+   "province_label": 2986,
    "province_hex": "x0AF393",
    "impassable": false
   },
@@ -6241,7 +6241,7 @@
     3641,
     1142
    ],
-   "province_label": 2989,
+   "province_label": 2987,
    "province_hex": "xC04069",
    "impassable": false
   },
@@ -6251,7 +6251,7 @@
     3509,
     1143
    ],
-   "province_label": 2999,
+   "province_label": 2997,
    "province_hex": "xEDEE02",
    "impassable": false
   },
@@ -6281,7 +6281,7 @@
     3934,
     1145
    ],
-   "province_label": 3150,
+   "province_label": 3148,
    "province_hex": "xB3F588",
    "impassable": false
   },
@@ -6301,7 +6301,7 @@
     4912,
     1146
    ],
-   "province_label": 2940,
+   "province_label": 2938,
    "province_hex": "xE9C400",
    "impassable": false
   },
@@ -6311,7 +6311,7 @@
     3544,
     1147
    ],
-   "province_label": 2998,
+   "province_label": 2996,
    "province_hex": "x05035F",
    "impassable": false
   },
@@ -6321,7 +6321,7 @@
     3688,
     1147
    ],
-   "province_label": 3013,
+   "province_label": 3011,
    "province_hex": "xD540C5",
    "impassable": false
   },
@@ -6331,7 +6331,7 @@
     3742,
     1147
    ],
-   "province_label": 3084,
+   "province_label": 3082,
    "province_hex": "x5631B3",
    "impassable": false
   },
@@ -6341,7 +6341,7 @@
     3764,
     1151
    ],
-   "province_label": 3085,
+   "province_label": 3083,
    "province_hex": "xB7FA3A",
    "impassable": false
   },
@@ -6351,7 +6351,7 @@
     4112,
     1152
    ],
-   "province_label": 3110,
+   "province_label": 3108,
    "province_hex": "xE8F810",
    "impassable": false
   },
@@ -6361,7 +6361,7 @@
     4380,
     1152
    ],
-   "province_label": 3098,
+   "province_label": 3096,
    "province_hex": "xF0647A",
    "impassable": false
   },
@@ -6371,7 +6371,7 @@
     4162,
     1153
    ],
-   "province_label": 3070,
+   "province_label": 3068,
    "province_hex": "x88789A",
    "impassable": false
   },
@@ -6381,7 +6381,7 @@
     4303,
     1156
    ],
-   "province_label": 3100,
+   "province_label": 3098,
    "province_hex": "x9D78F6",
    "impassable": false
   },
@@ -6391,7 +6391,7 @@
     5147,
     1157
    ],
-   "province_label": 3164,
+   "province_label": 3162,
    "province_hex": "x0B70B4",
    "impassable": false
   },
@@ -6411,7 +6411,7 @@
     5031,
     1158
    ],
-   "province_label": 3123,
+   "province_label": 3121,
    "province_hex": "xA2EC09",
    "impassable": false
   },
@@ -6421,7 +6421,7 @@
     4034,
     1163
    ],
-   "province_label": 3134,
+   "province_label": 3132,
    "province_hex": "xCBA3B0",
    "impassable": false
   },
@@ -6431,7 +6431,7 @@
     4568,
     1164
    ],
-   "province_label": 2654,
+   "province_label": 2652,
    "province_hex": "x5A9CAF",
    "impassable": false
   },
@@ -6441,7 +6441,7 @@
     3509,
     1165
    ],
-   "province_label": 3002,
+   "province_label": 3000,
    "province_hex": "x417251",
    "impassable": false
   },
@@ -6451,7 +6451,7 @@
     3988,
     1165
    ],
-   "province_label": 3154,
+   "province_label": 3152,
    "province_hex": "x1441D9",
    "impassable": false
   },
@@ -6461,7 +6461,7 @@
     4838,
     1166
    ],
-   "province_label": 3196,
+   "province_label": 3194,
    "province_hex": "x14A350",
    "impassable": false
   },
@@ -6471,7 +6471,7 @@
     5112,
     1166
    ],
-   "province_label": 3166,
+   "province_label": 3164,
    "province_hex": "x844E98",
    "impassable": false
   },
@@ -6481,7 +6481,7 @@
     3783,
     1168
    ],
-   "province_label": 3141,
+   "province_label": 3139,
    "province_hex": "xD689D6",
    "impassable": false
   },
@@ -6491,7 +6491,7 @@
     3960,
     1169
    ],
-   "province_label": 3155,
+   "province_label": 3153,
    "province_hex": "x50B0CB",
    "impassable": false
   },
@@ -6501,7 +6501,7 @@
     3906,
     1171
    ],
-   "province_label": 3156,
+   "province_label": 3154,
    "province_hex": "xA4351A",
    "impassable": false
   },
@@ -6511,7 +6511,7 @@
     4427,
     1171
    ],
-   "province_label": 3059,
+   "province_label": 3057,
    "province_hex": "x689218",
    "impassable": false
   },
@@ -6521,7 +6521,7 @@
     4479,
     1172
    ],
-   "province_label": 3060,
+   "province_label": 3058,
    "province_hex": "xD89ED7",
    "impassable": false
   },
@@ -6531,7 +6531,7 @@
     4259,
     1173
    ],
-   "province_label": 3207,
+   "province_label": 3205,
    "province_hex": "xB06451",
    "impassable": false
   },
@@ -6541,7 +6541,7 @@
     4209,
     1174
    ],
-   "province_label": 3029,
+   "province_label": 3027,
    "province_hex": "x9A570B",
    "impassable": false
   },
@@ -6551,7 +6551,7 @@
     4807,
     1174
    ],
-   "province_label": 3198,
+   "province_label": 3196,
    "province_hex": "x3AE47F",
    "impassable": false
   },
@@ -6561,7 +6561,7 @@
     5052,
     1174
    ],
-   "province_label": 3127,
+   "province_label": 3125,
    "province_hex": "xBA0166",
    "impassable": false
   },
@@ -6571,7 +6571,7 @@
     4057,
     1178
    ],
-   "province_label": 3176,
+   "province_label": 3174,
    "province_hex": "xA64A1B",
    "impassable": false
   },
@@ -6581,7 +6581,7 @@
     4774,
     1178
    ],
-   "province_label": 3197,
+   "province_label": 3195,
    "province_hex": "x4B3DB8",
    "impassable": false
   },
@@ -6591,7 +6591,7 @@
     4610,
     1179
    ],
-   "province_label": 3260,
+   "province_label": 3258,
    "province_hex": "xF8D428",
    "impassable": false
   },
@@ -6601,7 +6601,7 @@
     4307,
     1181
    ],
-   "province_label": 3241,
+   "province_label": 3239,
    "province_hex": "xB5D764",
    "impassable": false
   },
@@ -6611,7 +6611,7 @@
     4380,
     1181
    ],
-   "province_label": 3243,
+   "province_label": 3241,
    "province_hex": "x6E9021",
    "impassable": false
   },
@@ -6631,7 +6631,7 @@
     4011,
     1185
    ],
-   "province_label": 3135,
+   "province_label": 3133,
    "province_hex": "x36FB77",
    "impassable": false
   },
@@ -6641,7 +6641,7 @@
     3972,
     1187
    ],
-   "province_label": 3159,
+   "province_label": 3157,
    "province_hex": "x05FDA1",
    "impassable": false
   },
@@ -6651,7 +6651,7 @@
     4533,
     1189
    ],
-   "province_label": 3262,
+   "province_label": 3260,
    "province_hex": "xA00B18",
    "impassable": false
   },
@@ -6661,7 +6661,7 @@
     4645,
     1189
    ],
-   "province_label": 3223,
+   "province_label": 3221,
    "province_hex": "x9A9805",
    "impassable": false
   },
@@ -6671,7 +6671,7 @@
     4239,
     1191
    ],
-   "province_label": 3211,
+   "province_label": 3209,
    "province_hex": "x65B127",
    "impassable": false
   },
@@ -6681,7 +6681,7 @@
     3692,
     1193
    ],
-   "province_label": 3315,
+   "province_label": 3313,
    "province_hex": "x77D092",
    "impassable": false
   },
@@ -6691,7 +6691,7 @@
     3748,
     1193
    ],
-   "province_label": 3311,
+   "province_label": 3309,
    "province_hex": "x38BCD6",
    "impassable": false
   },
@@ -6711,7 +6711,7 @@
     4290,
     1194
    ],
-   "province_label": 3209,
+   "province_label": 3207,
    "province_hex": "xECD343",
    "impassable": false
   },
@@ -6721,7 +6721,7 @@
     3912,
     1196
    ],
-   "province_label": 3327,
+   "province_label": 3325,
    "province_hex": "x641947",
    "impassable": false
   },
@@ -6731,7 +6731,7 @@
     3926,
     1197
    ],
-   "province_label": 3328,
+   "province_label": 3326,
    "province_hex": "x5D4179",
    "impassable": false
   },
@@ -6741,7 +6741,7 @@
     4131,
     1197
    ],
-   "province_label": 3277,
+   "province_label": 3275,
    "province_hex": "xD04AD3",
    "impassable": false
   },
@@ -6751,7 +6751,7 @@
     5130,
     1197
    ],
-   "province_label": 3171,
+   "province_label": 3169,
    "province_hex": "x5EF503",
    "impassable": false
   },
@@ -6761,7 +6761,7 @@
     4096,
     1202
    ],
-   "province_label": 3278,
+   "province_label": 3276,
    "province_hex": "xAAF13E",
    "impassable": false
   },
@@ -6781,7 +6781,7 @@
     4516,
     1203
    ],
-   "province_label": 3324,
+   "province_label": 3322,
    "province_hex": "xB2DAC9",
    "impassable": false
   },
@@ -6791,7 +6791,7 @@
     4891,
     1203
    ],
-   "province_label": 3288,
+   "province_label": 3286,
    "province_hex": "x158AEA",
    "impassable": false
   },
@@ -6801,7 +6801,7 @@
     4385,
     1204
    ],
-   "province_label": 3248,
+   "province_label": 3246,
    "province_hex": "xFB177B",
    "impassable": false
   },
@@ -6811,7 +6811,7 @@
     4616,
     1205
    ],
-   "province_label": 3265,
+   "province_label": 3263,
    "province_hex": "x639C26",
    "impassable": false
   },
@@ -6821,7 +6821,7 @@
     3792,
     1206
    ],
-   "province_label": 3146,
+   "province_label": 3144,
    "province_hex": "x80326B",
    "impassable": false
   },
@@ -6831,7 +6831,7 @@
     4038,
     1207
    ],
-   "province_label": 3182,
+   "province_label": 3180,
    "province_hex": "x1F27FF",
    "impassable": false
   },
@@ -6841,7 +6841,7 @@
     5072,
     1207
    ],
-   "province_label": 3444,
+   "province_label": 3442,
    "province_hex": "xCC20D1",
    "impassable": false
   },
@@ -6851,7 +6851,7 @@
     3955,
     1208
    ],
-   "province_label": 3484,
+   "province_label": 3482,
    "province_hex": "xC5E1CE",
    "impassable": false
   },
@@ -6861,7 +6861,7 @@
     4711,
     1211
    ],
-   "province_label": 3317,
+   "province_label": 3315,
    "province_hex": "x6FCB5D",
    "impassable": false
   },
@@ -6871,7 +6871,7 @@
     4172,
     1214
    ],
-   "province_label": 3490,
+   "province_label": 3488,
    "province_hex": "xA8EA12",
    "impassable": false
   },
@@ -6881,7 +6881,7 @@
     4357,
     1215
    ],
-   "province_label": 3219,
+   "province_label": 3217,
    "province_hex": "xF5A468",
    "impassable": false
   },
@@ -6891,7 +6891,7 @@
     3772,
     1217
    ],
-   "province_label": 3314,
+   "province_label": 3312,
    "province_hex": "x111FEE",
    "impassable": false
   },
@@ -6911,7 +6911,7 @@
     4559,
     1219
    ],
-   "province_label": 3268,
+   "province_label": 3266,
    "province_hex": "x0AA4C4",
    "impassable": false
   },
@@ -6921,7 +6921,7 @@
     5014,
     1221
    ],
-   "province_label": 3461,
+   "province_label": 3459,
    "province_hex": "xF0AE76",
    "impassable": false
   },
@@ -6931,7 +6931,7 @@
     5114,
     1223
    ],
-   "province_label": 3449,
+   "province_label": 3447,
    "province_hex": "x816DA7",
    "impassable": false
   },
@@ -6941,7 +6941,7 @@
     4292,
     1224
    ],
-   "province_label": 3513,
+   "province_label": 3511,
    "province_hex": "xC93FE0",
    "impassable": false
   },
@@ -6951,7 +6951,7 @@
     4086,
     1226
    ],
-   "province_label": 3280,
+   "province_label": 3278,
    "province_hex": "x8597A9",
    "impassable": false
   },
@@ -6961,7 +6961,7 @@
     4429,
     1229
    ],
-   "province_label": 3529,
+   "province_label": 3527,
    "province_hex": "xC0AFB5",
    "impassable": false
   },
@@ -6971,7 +6971,7 @@
     3956,
     1230
    ],
-   "province_label": 3487,
+   "province_label": 3485,
    "province_hex": "xDCF72B",
    "impassable": false
   },
@@ -6981,7 +6981,7 @@
     4237,
     1231
    ],
-   "province_label": 3515,
+   "province_label": 3513,
    "province_hex": "xEE9975",
    "impassable": false
   },
@@ -6991,7 +6991,7 @@
     3925,
     1233
    ],
-   "province_label": 3332,
+   "province_label": 3330,
    "province_hex": "x19661D",
    "impassable": false
   },
@@ -7001,7 +7001,7 @@
     3995,
     1234
    ],
-   "province_label": 3136,
+   "province_label": 3134,
    "province_hex": "xF9CE6A",
    "impassable": false
   },
@@ -7011,7 +7011,7 @@
     4654,
     1236
    ],
-   "province_label": 3233,
+   "province_label": 3231,
    "province_hex": "x49368C",
    "impassable": false
   },
@@ -7021,7 +7021,7 @@
     4395,
     1237
    ],
-   "province_label": 3254,
+   "province_label": 3252,
    "province_hex": "x80860D",
    "impassable": false
   },
@@ -7031,7 +7031,7 @@
     4481,
     1238
    ],
-   "province_label": 3527,
+   "province_label": 3525,
    "province_hex": "xDAE22A",
    "impassable": false
   },
@@ -7051,7 +7051,7 @@
     4981,
     1238
    ],
-   "province_label": 3466,
+   "province_label": 3464,
    "province_hex": "xA26EE8",
    "impassable": false
   },
@@ -7061,7 +7061,7 @@
     4926,
     1240
    ],
-   "province_label": 3294,
+   "province_label": 3292,
    "province_hex": "x0746B2",
    "impassable": false
   },
@@ -7071,7 +7071,7 @@
     4274,
     1241
    ],
-   "province_label": 3518,
+   "province_label": 3516,
    "province_hex": "x421DC4",
    "impassable": false
   },
@@ -7081,7 +7081,7 @@
     4375,
     1241
    ],
-   "province_label": 3530,
+   "province_label": 3528,
    "province_hex": "x9E7338",
    "impassable": false
   },
@@ -7091,7 +7091,7 @@
     4038,
     1243
    ],
-   "province_label": 3188,
+   "province_label": 3186,
    "province_hex": "x406567",
    "impassable": false
   },
@@ -7101,7 +7101,7 @@
     4910,
     1245
    ],
-   "province_label": 3296,
+   "province_label": 3294,
    "province_hex": "xBFDEF2",
    "impassable": false
   },
@@ -7111,7 +7111,7 @@
     5122,
     1246
    ],
-   "province_label": 3453,
+   "province_label": 3451,
    "province_hex": "x5C1412",
    "impassable": false
   },
@@ -7121,7 +7121,7 @@
     4175,
     1248
    ],
-   "province_label": 3496,
+   "province_label": 3494,
    "province_hex": "xA9595E",
    "impassable": false
   },
@@ -7131,7 +7131,7 @@
     3790,
     1249
    ],
-   "province_label": 3273,
+   "province_label": 3271,
    "province_hex": "xCEE618",
    "impassable": false
   },
@@ -7141,7 +7141,7 @@
     4214,
     1249
    ],
-   "province_label": 3519,
+   "province_label": 3517,
    "province_hex": "xE0553D",
    "impassable": false
   },
@@ -7151,7 +7151,7 @@
     3780,
     1251
    ],
-   "province_label": 3273,
+   "province_label": 3271,
    "province_hex": "xCEE618",
    "impassable": false
   },
@@ -7161,7 +7161,7 @@
     3962,
     1251
    ],
-   "province_label": 3581,
+   "province_label": 3579,
    "province_hex": "x5FEF45",
    "impassable": false
   },
@@ -7171,7 +7171,7 @@
     4851,
     1252
    ],
-   "province_label": 3362,
+   "province_label": 3360,
    "province_hex": "xC8B017",
    "impassable": false
   },
@@ -7181,7 +7181,7 @@
     4582,
     1254
    ],
-   "province_label": 3573,
+   "province_label": 3571,
    "province_hex": "x2C5178",
    "impassable": false
   },
@@ -7191,7 +7191,7 @@
     5059,
     1255
    ],
-   "province_label": 3550,
+   "province_label": 3548,
    "province_hex": "x4E4CFB",
    "impassable": false
   },
@@ -7201,7 +7201,7 @@
     3938,
     1257
    ],
-   "province_label": 3580,
+   "province_label": 3578,
    "province_hex": "xC1B7CC",
    "impassable": false
   },
@@ -7211,7 +7211,7 @@
     4512,
     1259
    ],
-   "province_label": 3538,
+   "province_label": 3536,
    "province_hex": "x58F6FA",
    "impassable": false
   },
@@ -7221,7 +7221,7 @@
     3895,
     1261
    ],
-   "province_label": 3582,
+   "province_label": 3580,
    "province_hex": "x519865",
    "impassable": false
   },
@@ -7231,7 +7231,7 @@
     4116,
     1263
    ],
-   "province_label": 3500,
+   "province_label": 3498,
    "province_hex": "x223742",
    "impassable": false
   },
@@ -7241,7 +7241,7 @@
     5037,
     1263
    ],
-   "province_label": 3552,
+   "province_label": 3550,
    "province_hex": "xD7C512",
    "impassable": false
   },
@@ -7251,7 +7251,7 @@
     4638,
     1266
    ],
-   "province_label": 3610,
+   "province_label": 3608,
    "province_hex": "x0531B1",
    "impassable": false
   },
@@ -7261,7 +7261,7 @@
     4317,
     1268
    ],
-   "province_label": 3592,
+   "province_label": 3590,
    "province_hex": "xF8B3AB",
    "impassable": false
   },
@@ -7271,7 +7271,7 @@
     4271,
     1271
    ],
-   "province_label": 3633,
+   "province_label": 3631,
    "province_hex": "xA376FF",
    "impassable": false
   },
@@ -7291,7 +7291,7 @@
     3769,
     1276
    ],
-   "province_label": 3273,
+   "province_label": 3271,
    "province_hex": "xCEE618",
    "impassable": false
   },
@@ -7301,7 +7301,7 @@
     4035,
     1278
    ],
-   "province_label": 3285,
+   "province_label": 3283,
    "province_hex": "xFE758D",
    "impassable": false
   },
@@ -7311,7 +7311,7 @@
     3964,
     1279
    ],
-   "province_label": 3669,
+   "province_label": 3667,
    "province_hex": "x0630C6",
    "impassable": false
   },
@@ -7331,7 +7331,7 @@
     4556,
     1281
    ],
-   "province_label": 3574,
+   "province_label": 3572,
    "province_hex": "x68C06A",
    "impassable": false
   },
@@ -7351,7 +7351,7 @@
     4951,
     1283
    ],
-   "province_label": 3302,
+   "province_label": 3300,
    "province_hex": "x9739F3",
    "impassable": false
   },
@@ -7361,7 +7361,7 @@
     4201,
     1284
    ],
-   "province_label": 3655,
+   "province_label": 3653,
    "province_hex": "xF9FCBC",
    "impassable": false
   },
@@ -7371,7 +7371,7 @@
     4498,
     1284
    ],
-   "province_label": 3647,
+   "province_label": 3645,
    "province_hex": "x7ECDB0",
    "impassable": false
   },
@@ -7381,7 +7381,7 @@
     4377,
     1285
    ],
-   "province_label": 3597,
+   "province_label": 3595,
    "province_hex": "x634D57",
    "impassable": false
   },
@@ -7391,7 +7391,7 @@
     5080,
     1285
    ],
-   "province_label": 3558,
+   "province_label": 3556,
    "province_hex": "x0399D1",
    "impassable": false
   },
@@ -7401,7 +7401,7 @@
     3864,
     1286
    ],
-   "province_label": 3692,
+   "province_label": 3690,
    "province_hex": "xEF1696",
    "impassable": false
   },
@@ -7411,7 +7411,7 @@
     3991,
     1287
    ],
-   "province_label": 3195,
+   "province_label": 3193,
    "province_hex": "x46C4E7",
    "impassable": false
   },
@@ -7431,7 +7431,7 @@
     4439,
     1292
    ],
-   "province_label": 3649,
+   "province_label": 3647,
    "province_hex": "x16852C",
    "impassable": false
   },
@@ -7441,7 +7441,7 @@
     4976,
     1293
    ],
-   "province_label": 3478,
+   "province_label": 3476,
    "province_hex": "x35EE8D",
    "impassable": false
   },
@@ -7451,7 +7451,7 @@
     4015,
     1296
    ],
-   "province_label": 3286,
+   "province_label": 3284,
    "province_hex": "xBC0892",
    "impassable": false
   },
@@ -7461,7 +7461,7 @@
     4610,
     1296
    ],
-   "province_label": 3616,
+   "province_label": 3614,
    "province_hex": "xF489A9",
    "impassable": false
   },
@@ -7471,7 +7471,7 @@
     3927,
     1297
    ],
-   "province_label": 3725,
+   "province_label": 3723,
    "province_hex": "x2B8588",
    "impassable": false
   },
@@ -7481,7 +7481,7 @@
     4146,
     1297
    ],
-   "province_label": 3707,
+   "province_label": 3705,
    "province_hex": "x961F34",
    "impassable": false
   },
@@ -7501,7 +7501,7 @@
     4281,
     1303
    ],
-   "province_label": 3639,
+   "province_label": 3637,
    "province_hex": "x66AB69",
    "impassable": false
   },
@@ -7521,7 +7521,7 @@
     4335,
     1304
    ],
-   "province_label": 3603,
+   "province_label": 3601,
    "province_hex": "x3DF3C2",
    "impassable": false
   },
@@ -7531,7 +7531,7 @@
     4542,
     1304
    ],
-   "province_label": 3729,
+   "province_label": 3727,
    "province_hex": "x579B41",
    "impassable": false
   },
@@ -7541,7 +7541,7 @@
     4655,
     1304
    ],
-   "province_label": 3618,
+   "province_label": 3616,
    "province_hex": "x30F89B",
    "impassable": false
   },
@@ -7561,7 +7561,7 @@
     5018,
     1306
    ],
-   "province_label": 3565,
+   "province_label": 3563,
    "province_hex": "xF55599",
    "impassable": false
   },
@@ -7571,7 +7571,7 @@
     4438,
     1308
    ],
-   "province_label": 3747,
+   "province_label": 3745,
    "province_hex": "x20633B",
    "impassable": false
   },
@@ -7581,7 +7581,7 @@
     3991,
     1309
    ],
-   "province_label": 3674,
+   "province_label": 3672,
    "province_hex": "x9A4936",
    "impassable": false
   },
@@ -7601,7 +7601,7 @@
     4492,
     1312
    ],
-   "province_label": 3703,
+   "province_label": 3701,
    "province_hex": "xD251FF",
    "impassable": false
   },
@@ -7611,7 +7611,7 @@
     3909,
     1314
    ],
-   "province_label": 3696,
+   "province_label": 3694,
    "province_hex": "x1D4150",
    "impassable": false
   },
@@ -7621,7 +7621,7 @@
     5082,
     1315
    ],
-   "province_label": 3681,
+   "province_label": 3679,
    "province_hex": "xB51949",
    "impassable": false
   },
@@ -7631,7 +7631,7 @@
     4140,
     1317
    ],
-   "province_label": 3714,
+   "province_label": 3712,
    "province_hex": "xC449EE",
    "impassable": false
   },
@@ -7641,7 +7641,7 @@
     4520,
     1317
    ],
-   "province_label": 3730,
+   "province_label": 3728,
    "province_hex": "x4FA3E1",
    "impassable": false
   },
@@ -7651,7 +7651,7 @@
     4193,
     1318
    ],
-   "province_label": 3662,
+   "province_label": 3660,
    "province_hex": "xEBB884",
    "impassable": false
   },
@@ -7661,7 +7661,7 @@
     3880,
     1319
    ],
-   "province_label": 3697,
+   "province_label": 3695,
    "province_hex": "xE0D25E",
    "impassable": false
   },
@@ -7671,7 +7671,7 @@
     4260,
     1321
    ],
-   "province_label": 3645,
+   "province_label": 3643,
    "province_hex": "xF69EAA",
    "impassable": false
   },
@@ -7681,7 +7681,7 @@
     4781,
     1321
    ],
-   "province_label": 3737,
+   "province_label": 3735,
    "province_hex": "xA7C17E",
    "impassable": false
   },
@@ -7701,7 +7701,7 @@
     4842,
     1322
    ],
-   "province_label": 3736,
+   "province_label": 3734,
    "province_hex": "x29BF56",
    "impassable": false
   },
@@ -7711,7 +7711,7 @@
     4090,
     1324
    ],
-   "province_label": 3716,
+   "province_label": 3714,
    "province_hex": "x261275",
    "impassable": false
   },
@@ -7721,7 +7721,7 @@
     4560,
     1325
    ],
-   "province_label": 3731,
+   "province_label": 3729,
    "province_hex": "xE9675C",
    "impassable": false
   },
@@ -7731,7 +7731,7 @@
     4684,
     1327
    ],
-   "province_label": 3628,
+   "province_label": 3626,
    "province_hex": "x9B9247",
    "impassable": false
   },
@@ -7771,7 +7771,7 @@
     4353,
     1334
    ],
-   "province_label": 3760,
+   "province_label": 3758,
    "province_hex": "x8FE504",
    "impassable": false
   },
@@ -7781,7 +7781,7 @@
     4473,
     1334
    ],
-   "province_label": 3765,
+   "province_label": 3763,
    "province_hex": "xA5AC7D",
    "impassable": false
   },
@@ -7791,7 +7791,7 @@
     4224,
     1337
    ],
-   "province_label": 3666,
+   "province_label": 3664,
    "province_hex": "x282776",
    "impassable": false
   },
@@ -7801,7 +7801,7 @@
     5109,
     1339
    ],
-   "province_label": 3686,
+   "province_label": 3684,
    "province_hex": "xF1883B",
    "impassable": false
   },
@@ -7811,7 +7811,7 @@
     3901,
     1340
    ],
-   "province_label": 3701,
+   "province_label": 3699,
    "province_hex": "xF7E7BB",
    "impassable": false
   },
@@ -7821,7 +7821,7 @@
     3839,
     1341
    ],
-   "province_label": 3751,
+   "province_label": 3749,
    "province_hex": "xC66CC4",
    "impassable": false
   },
@@ -7831,7 +7831,7 @@
     4720,
     1344
    ],
-   "province_label": 3738,
+   "province_label": 3736,
    "province_hex": "x0F303D",
    "impassable": false
   },
@@ -7841,7 +7841,7 @@
     4272,
     1347
    ],
-   "province_label": 3783,
+   "province_label": 3781,
    "province_hex": "xA3977C",
    "impassable": false
   },
@@ -7861,7 +7861,7 @@
     5045,
     1347
    ],
-   "province_label": 3896,
+   "province_label": 3894,
    "province_hex": "x4A30CE",
    "impassable": false
   },
@@ -7871,7 +7871,7 @@
     4174,
     1349
    ],
-   "province_label": 3914,
+   "province_label": 3912,
    "province_hex": "xAFC6B3",
    "impassable": false
   },
@@ -7881,7 +7881,7 @@
     4534,
     1351
    ],
-   "province_label": 3754,
+   "province_label": 3752,
    "province_hex": "x474208",
    "impassable": false
   },
@@ -7891,7 +7891,7 @@
     4409,
     1354
    ],
-   "province_label": 3767,
+   "province_label": 3765,
    "province_hex": "x180162",
    "impassable": false
   },
@@ -7901,7 +7901,7 @@
     4239,
     1355
    ],
-   "province_label": 3785,
+   "province_label": 3783,
    "province_hex": "xC8F111",
    "impassable": false
   },
@@ -7911,7 +7911,7 @@
     4045,
     1356
    ],
-   "province_label": 3804,
+   "province_label": 3802,
    "province_hex": "x9E2469",
    "impassable": false
   },
@@ -7921,7 +7921,7 @@
     4960,
     1357
    ],
-   "province_label": 3891,
+   "province_label": 3889,
    "province_hex": "x90DF46",
    "impassable": false
   },
@@ -7931,7 +7931,7 @@
     4113,
     1359
    ],
-   "province_label": 3919,
+   "province_label": 3917,
    "province_hex": "xDDF16D",
    "impassable": false
   },
@@ -7941,7 +7941,7 @@
     4342,
     1360
    ],
-   "province_label": 3768,
+   "province_label": 3766,
    "province_hex": "x359FBE",
    "impassable": false
   },
@@ -7951,7 +7951,7 @@
     4885,
     1361
    ],
-   "province_label": 3740,
+   "province_label": 3738,
    "province_hex": "x32907B",
    "impassable": false
   },
@@ -7961,7 +7961,7 @@
     4634,
     1363
    ],
-   "province_label": 3936,
+   "province_label": 3934,
    "province_hex": "x6F2DBF",
    "impassable": false
   },
@@ -7971,7 +7971,7 @@
     4588,
     1373
    ],
-   "province_label": 3753,
+   "province_label": 3751,
    "province_hex": "x6E4152",
    "impassable": false
   },
@@ -7991,7 +7991,7 @@
     5017,
     1374
    ],
-   "province_label": 3902,
+   "province_label": 3900,
    "province_hex": "x169301",
    "impassable": false
   },
@@ -8001,7 +8001,7 @@
     5044,
     1376
    ],
-   "province_label": 3904,
+   "province_label": 3902,
    "province_hex": "xA57056",
    "impassable": false
   },
@@ -8011,7 +8011,7 @@
     4990,
     1377
    ],
-   "province_label": 3905,
+   "province_label": 3903,
    "province_hex": "x367983",
    "impassable": false
   },
@@ -8021,7 +8021,7 @@
     4201,
     1381
    ],
-   "province_label": 3796,
+   "province_label": 3794,
    "province_hex": "xA53D31",
    "impassable": false
   },
@@ -8031,7 +8031,7 @@
     4058,
     1382
    ],
-   "province_label": 3808,
+   "province_label": 3806,
    "province_hex": "xECC56E",
    "impassable": false
   },
@@ -8041,7 +8041,7 @@
     4293,
     1383
    ],
-   "province_label": 3798,
+   "province_label": 3796,
    "province_hex": "x870F0C",
    "impassable": false
   },
@@ -8051,7 +8051,7 @@
     4607,
     1385
    ],
-   "province_label": 3941,
+   "province_label": 3939,
    "province_hex": "xAB9CB1",
    "impassable": false
   },
@@ -8081,7 +8081,7 @@
     4130,
     1389
    ],
-   "province_label": 3928,
+   "province_label": 3926,
    "province_hex": "xF506CA",
    "impassable": false
   },
@@ -8091,7 +8091,7 @@
     5074,
     1390
    ],
-   "province_label": 3984,
+   "province_label": 3982,
    "province_hex": "xA7CF53",
    "impassable": false
   },
@@ -8101,7 +8101,7 @@
     4251,
     1391
    ],
-   "province_label": 3981,
+   "province_label": 3979,
    "province_hex": "x1CF281",
    "impassable": false
   },
@@ -8111,7 +8111,7 @@
     4668,
     1391
    ],
-   "province_label": 3939,
+   "province_label": 3937,
    "province_hex": "x8F5068",
    "impassable": false
   },
@@ -8121,7 +8121,7 @@
     4028,
     1392
    ],
-   "province_label": 3809,
+   "province_label": 3807,
    "province_hex": "xB539C6",
    "impassable": false
   },
@@ -8131,7 +8131,7 @@
     4591,
     1397
    ],
-   "province_label": 3755,
+   "province_label": 3753,
    "province_hex": "x26459A",
    "impassable": false
   },
@@ -8141,7 +8141,7 @@
     4078,
     1402
    ],
-   "province_label": 3997,
+   "province_label": 3995,
    "province_hex": "x5CBF85",
    "impassable": false
   },
@@ -8151,7 +8151,7 @@
     4346,
     1403
    ],
-   "province_label": 4016,
+   "province_label": 4014,
    "province_hex": "x1ADD80",
    "impassable": false
   },
@@ -8161,7 +8161,7 @@
     4496,
     1404
    ],
-   "province_label": 3954,
+   "province_label": 3952,
    "province_hex": "x972C1E",
    "impassable": false
   },
@@ -8171,7 +8171,7 @@
     4555,
     1404
    ],
-   "province_label": 3955,
+   "province_label": 3953,
    "province_hex": "x922857",
    "impassable": false
   },
@@ -8181,7 +8181,7 @@
     4298,
     1406
    ],
-   "province_label": 4013,
+   "province_label": 4011,
    "province_hex": "x403715",
    "impassable": false
   },
@@ -8191,7 +8191,7 @@
     4626,
     1408
    ],
-   "province_label": 3943,
+   "province_label": 3941,
    "province_hex": "xBC85B3",
    "impassable": false
   },
@@ -8201,7 +8201,7 @@
     4760,
     1408
    ],
-   "province_label": 3854,
+   "province_label": 3852,
    "province_hex": "x7F86F8",
    "impassable": false
   },
@@ -8211,7 +8211,7 @@
     5046,
     1408
    ],
-   "province_label": 4029,
+   "province_label": 4027,
    "province_hex": "x36F6A4",
    "impassable": false
   },
@@ -8221,7 +8221,7 @@
     4996,
     1410
    ],
-   "province_label": 4069,
+   "province_label": 4067,
    "province_hex": "xD9D540",
    "impassable": false
   },
@@ -8231,7 +8231,7 @@
     4224,
     1412
    ],
-   "province_label": 4038,
+   "province_label": 4036,
    "province_hex": "x3407DE",
    "impassable": false
   },
@@ -8241,7 +8241,7 @@
     4526,
     1412
    ],
-   "province_label": 3956,
+   "province_label": 3954,
    "province_hex": "x8F1441",
    "impassable": false
   },
@@ -8251,7 +8251,7 @@
     5086,
     1415
    ],
-   "province_label": 3987,
+   "province_label": 3985,
    "province_hex": "xB712A0",
    "impassable": false
   },
@@ -8271,7 +8271,7 @@
     4127,
     1426
    ],
-   "province_label": 4097,
+   "province_label": 4095,
    "province_hex": "x1E3B92",
    "impassable": false
   },
@@ -8291,7 +8291,7 @@
     5024,
     1427
    ],
-   "province_label": 4072,
+   "province_label": 4070,
    "province_hex": "x178D43",
    "impassable": false
   },
@@ -8301,7 +8301,7 @@
     4450,
     1428
    ],
-   "province_label": 3966,
+   "province_label": 3964,
    "province_hex": "xDD257D",
    "impassable": false
   },
@@ -8311,7 +8311,7 @@
     4321,
     1429
    ],
-   "province_label": 4023,
+   "province_label": 4021,
    "province_hex": "xE73FB3",
    "impassable": false
   },
@@ -8321,7 +8321,7 @@
     4079,
     1430
    ],
-   "province_label": 4003,
+   "province_label": 4001,
    "province_hex": "x3765F0",
    "impassable": false
   },
@@ -8331,7 +8331,7 @@
     4946,
     1432
    ],
-   "province_label": 4088,
+   "province_label": 4086,
    "province_hex": "xA55DAE",
    "impassable": false
   },
@@ -8341,7 +8341,7 @@
     4049,
     1433
    ],
-   "province_label": 4005,
+   "province_label": 4003,
    "province_hex": "x8AEA3F",
    "impassable": false
   },
@@ -8351,7 +8351,7 @@
     5065,
     1433
    ],
-   "province_label": 3989,
+   "province_label": 3987,
    "province_hex": "x324F81",
    "impassable": false
   },
@@ -8361,7 +8361,7 @@
     4864,
     1434
    ],
-   "province_label": 4116,
+   "province_label": 4114,
    "province_hex": "x18C87F",
    "impassable": false
   },
@@ -8371,7 +8371,7 @@
     4986,
     1437
    ],
-   "province_label": 4074,
+   "province_label": 4072,
    "province_hex": "xF01EAD",
    "impassable": false
   },
@@ -8381,7 +8381,7 @@
     4563,
     1443
    ],
-   "province_label": 4092,
+   "province_label": 4090,
    "province_hex": "x1C3939",
    "impassable": false
   },
@@ -8391,7 +8391,7 @@
     4255,
     1444
    ],
-   "province_label": 4053,
+   "province_label": 4051,
    "province_hex": "xC3FB1F",
    "impassable": false
   },
@@ -8401,7 +8401,7 @@
     4948,
     1445
    ],
-   "province_label": 4088,
+   "province_label": 4086,
    "province_hex": "xA55DAE",
    "impassable": false
   },
@@ -8411,7 +8411,7 @@
     4397,
     1449
    ],
-   "province_label": 3969,
+   "province_label": 3967,
    "province_hex": "x100A02",
    "impassable": false
   },
@@ -8421,7 +8421,7 @@
     4182,
     1450
    ],
-   "province_label": 4055,
+   "province_label": 4053,
    "province_hex": "xDB107C",
    "impassable": false
   },
@@ -8431,7 +8431,7 @@
     4600,
     1451
    ],
-   "province_label": 4093,
+   "province_label": 4091,
    "province_hex": "x4A63F3",
    "impassable": false
   },
@@ -8441,7 +8441,7 @@
     4683,
     1453
    ],
-   "province_label": 4145,
+   "province_label": 4143,
    "province_hex": "x338F90",
    "impassable": false
   },
@@ -8471,7 +8471,7 @@
     4315,
     1460
    ],
-   "province_label": 4170,
+   "province_label": 4168,
    "province_hex": "x24F7B6",
    "impassable": false
   },
@@ -8481,7 +8481,7 @@
     4119,
     1461
    ],
-   "province_label": 4104,
+   "province_label": 4102,
    "province_hex": "x0FF75A",
    "impassable": false
   },
@@ -8491,7 +8491,7 @@
     4001,
     1465
    ],
-   "province_label": 4152,
+   "province_label": 4150,
    "province_hex": "x5E0896",
    "impassable": false
   },
@@ -8501,7 +8501,7 @@
     4966,
     1465
    ],
-   "province_label": 4083,
+   "province_label": 4081,
    "province_hex": "x2A789E",
    "impassable": false
   },
@@ -8511,7 +8511,7 @@
     5125,
     1465
    ],
-   "province_label": 4125,
+   "province_label": 4123,
    "province_hex": "xEBF4AB",
    "impassable": false
   },
@@ -8521,7 +8521,7 @@
     4440,
     1466
    ],
-   "province_label": 3971,
+   "province_label": 3969,
    "province_hex": "xE46395",
    "impassable": false
   },
@@ -8531,7 +8531,7 @@
     4816,
     1466
    ],
-   "province_label": 4195,
+   "province_label": 4193,
    "province_hex": "xB10FC4",
    "impassable": false
   },
@@ -8551,7 +8551,7 @@
     4712,
     1471
    ],
-   "province_label": 4147,
+   "province_label": 4145,
    "province_hex": "x6830A1",
    "impassable": false
   },
@@ -8561,7 +8561,7 @@
     3973,
     1474
    ],
-   "province_label": 4153,
+   "province_label": 4151,
    "province_hex": "xD6E67A",
    "impassable": false
   },
@@ -8571,7 +8571,7 @@
     4055,
     1475
    ],
-   "province_label": 4221,
+   "province_label": 4219,
    "province_hex": "x6D95DF",
    "impassable": false
   },
@@ -8581,7 +8581,7 @@
     4660,
     1476
    ],
-   "province_label": 4136,
+   "province_label": 4134,
    "province_hex": "x2DDB83",
    "impassable": false
   },
@@ -8591,7 +8591,7 @@
     4778,
     1479
    ],
-   "province_label": 4197,
+   "province_label": 4195,
    "province_hex": "xD2CA4D",
    "impassable": false
   },
@@ -8601,7 +8601,7 @@
     5014,
     1483
    ],
-   "province_label": 4086,
+   "province_label": 4084,
    "province_hex": "x6A45A2",
    "impassable": false
   },
@@ -8621,7 +8621,7 @@
     4837,
     1484
    ],
-   "province_label": 4199,
+   "province_label": 4197,
    "province_hex": "xE7BCD4",
    "impassable": false
   },
@@ -8631,7 +8631,7 @@
     4280,
     1485
    ],
-   "province_label": 4179,
+   "province_label": 4177,
    "province_hex": "xF159E9",
    "impassable": false
   },
@@ -8651,7 +8651,7 @@
     4390,
     1488
    ],
-   "province_label": 4183,
+   "province_label": 4181,
    "province_hex": "xB4EAF7",
    "impassable": false
   },
@@ -8661,7 +8661,7 @@
     4188,
     1489
    ],
-   "province_label": 4243,
+   "province_label": 4241,
    "province_hex": "x4EF86E",
    "impassable": false
   },
@@ -8671,7 +8671,7 @@
     4734,
     1490
    ],
-   "province_label": 4204,
+   "province_label": 4202,
    "province_hex": "x286870",
    "impassable": false
   },
@@ -8681,7 +8681,7 @@
     4018,
     1493
    ],
-   "province_label": 4158,
+   "province_label": 4156,
    "province_hex": "x2A6AC9",
    "impassable": false
   },
@@ -8691,7 +8691,7 @@
     4628,
     1493
    ],
-   "province_label": 4135,
+   "province_label": 4133,
    "province_hex": "x533518",
    "impassable": false
   },
@@ -8701,7 +8701,7 @@
     4114,
     1497
    ],
-   "province_label": 4110,
+   "province_label": 4108,
    "province_hex": "x1F9278",
    "impassable": false
   },
@@ -8711,7 +8711,7 @@
     4677,
     1498
    ],
-   "province_label": 4138,
+   "province_label": 4136,
    "province_hex": "xFB78F2",
    "impassable": false
   },
@@ -8721,7 +8721,7 @@
     4062,
     1501
    ],
-   "province_label": 4225,
+   "province_label": 4223,
    "province_hex": "xE9DFAA",
    "impassable": false
   },
@@ -8731,7 +8731,7 @@
     4525,
     1505
    ],
-   "province_label": 4265,
+   "province_label": 4263,
    "province_hex": "xB0C5C8",
    "impassable": false
   },
@@ -8741,7 +8741,7 @@
     4574,
     1505
    ],
-   "province_label": 4264,
+   "province_label": 4262,
    "province_hex": "xDF9722",
    "impassable": false
   },
@@ -8751,7 +8751,7 @@
     4400,
     1506
    ],
-   "province_label": 4285,
+   "province_label": 4283,
    "province_hex": "xAA1779",
    "impassable": false
   },
@@ -8761,7 +8761,7 @@
     5132,
     1509
    ],
-   "province_label": 4132,
+   "province_label": 4130,
    "province_hex": "x7674D9",
    "impassable": false
   },
@@ -8771,7 +8771,7 @@
     3963,
     1514
    ],
-   "province_label": 4320,
+   "province_label": 4318,
    "province_hex": "xA5DACF",
    "impassable": false
   },
@@ -8791,7 +8791,7 @@
     4090,
     1517
    ],
-   "province_label": 4228,
+   "province_label": 4226,
    "province_hex": "x7A9106",
    "impassable": false
   },
@@ -8801,7 +8801,7 @@
     4239,
     1521
    ],
-   "province_label": 4291,
+   "province_label": 4289,
    "province_hex": "x55B492",
    "impassable": false
   },
@@ -8811,7 +8811,7 @@
     4418,
     1522
    ],
-   "province_label": 4332,
+   "province_label": 4330,
    "province_hex": "xF74A1D",
    "impassable": false
   },
@@ -8821,7 +8821,7 @@
     4032,
     1523
    ],
-   "province_label": 4231,
+   "province_label": 4229,
    "province_hex": "xC48615",
    "impassable": false
   },
@@ -8831,7 +8831,7 @@
     4132,
     1525
    ],
-   "province_label": 4254,
+   "province_label": 4252,
    "province_hex": "xF6010C",
    "impassable": false
   },
@@ -8841,7 +8841,7 @@
     4185,
     1529
    ],
-   "province_label": 4256,
+   "province_label": 4254,
    "province_hex": "xB9921A",
    "impassable": false
   },
@@ -8851,7 +8851,7 @@
     4001,
     1530
    ],
-   "province_label": 4321,
+   "province_label": 4319,
    "province_hex": "x979697",
    "impassable": false
   },
@@ -8871,7 +8871,7 @@
     4515,
     1536
    ],
-   "province_label": 4268,
+   "province_label": 4266,
    "province_hex": "x575145",
    "impassable": false
   },
@@ -8881,7 +8881,7 @@
     4457,
     1543
    ],
-   "province_label": 4333,
+   "province_label": 4331,
    "province_hex": "xF2A2FA",
    "impassable": false
   },
@@ -8891,7 +8891,7 @@
     4386,
     1545
    ],
-   "province_label": 4334,
+   "province_label": 4332,
    "province_hex": "x129751",
    "impassable": false
   },
@@ -8901,7 +8901,7 @@
     4256,
     1546
    ],
-   "province_label": 4302,
+   "province_label": 4300,
    "province_hex": "xD1F088",
    "impassable": false
   },
@@ -8911,7 +8911,7 @@
     4082,
     1547
    ],
-   "province_label": 4350,
+   "province_label": 4349,
    "province_hex": "xBC243C",
    "impassable": false
   },
@@ -8921,7 +8921,7 @@
     4020,
     1549
    ],
-   "province_label": 4367,
+   "province_label": 4366,
    "province_hex": "x26BDE8",
    "impassable": false
   },
@@ -8931,7 +8931,7 @@
     3979,
     1550
    ],
-   "province_label": 4327,
+   "province_label": 4325,
    "province_hex": "x723D02",
    "impassable": false
   },
@@ -8941,7 +8941,7 @@
     4609,
     1553
    ],
-   "province_label": 4341,
+   "province_label": 4339,
    "province_hex": "x48B96B",
    "impassable": false
   },
@@ -8961,7 +8961,7 @@
     4494,
     1563
    ],
-   "province_label": 4270,
+   "province_label": 4268,
    "province_hex": "xF588BE",
    "impassable": false
   },
@@ -8991,7 +8991,7 @@
     4416,
     1570
    ],
-   "province_label": 4335,
+   "province_label": 4333,
    "province_hex": "x99AB98",
    "impassable": false
   },
@@ -9011,7 +9011,7 @@
     4634,
     1573
    ],
-   "province_label": 4344,
+   "province_label": 4342,
    "province_hex": "x5FCEC8",
    "impassable": false
   },
@@ -9021,7 +9021,7 @@
     3988,
     1574
    ],
-   "province_label": 4371,
+   "province_label": 4370,
    "province_hex": "x3DD345",
    "impassable": false
   },
@@ -9031,7 +9031,7 @@
     4034,
     1574
    ],
-   "province_label": 4355,
+   "province_label": 4354,
    "province_hex": "xADE004",
    "impassable": false
   },
@@ -9041,7 +9041,7 @@
     4179,
     1578
    ],
-   "province_label": 4385,
+   "province_label": 4384,
    "province_hex": "x386032",
    "impassable": false
   },
@@ -9051,7 +9051,7 @@
     4068,
     1580
    ],
-   "province_label": 4358,
+   "province_label": 4357,
    "province_hex": "x0FA88B",
    "impassable": false
   },
@@ -9061,7 +9061,7 @@
     4099,
     1581
    ],
-   "province_label": 4386,
+   "province_label": 4385,
    "province_hex": "xBF824E",
    "impassable": false
   },
@@ -9071,7 +9071,7 @@
     4129,
     1581
    ],
-   "province_label": 4387,
+   "province_label": 4386,
    "province_hex": "x327DD3",
    "impassable": false
   },
@@ -9091,7 +9091,7 @@
     4696,
     1586
    ],
-   "province_label": 440,
+   "province_label": 439,
    "province_hex": "x7679AC",
    "impassable": false
   },
@@ -9101,7 +9101,7 @@
     4463,
     1599
    ],
-   "province_label": 4426,
+   "province_label": 4424,
    "province_hex": "x2BC682",
    "impassable": false
   },
@@ -9111,7 +9111,7 @@
     4701,
     1603
    ],
-   "province_label": 4401,
+   "province_label": 4399,
    "province_hex": "xC27114",
    "impassable": false
   },
@@ -9121,7 +9121,7 @@
     4650,
     1605
    ],
-   "province_label": 449,
+   "province_label": 448,
    "province_hex": "x2797AD",
    "impassable": false
   },
@@ -9131,7 +9131,7 @@
     4682,
     1607
    ],
-   "province_label": 4400,
+   "province_label": 4398,
    "province_hex": "x60A88D",
    "impassable": false
   },
@@ -9171,7 +9171,7 @@
     4416,
     1615
    ],
-   "province_label": 4427,
+   "province_label": 4425,
    "province_hex": "xD5CBBB",
    "impassable": false
   },
@@ -9181,7 +9181,7 @@
     3982,
     1620
    ],
-   "province_label": 452,
+   "province_label": 450,
    "province_hex": "xA7FDA5",
    "impassable": false
   },
@@ -9231,7 +9231,7 @@
     4056,
     1625
    ],
-   "province_label": 4415,
+   "province_label": 4413,
    "province_hex": "x5F02D8",
    "impassable": false
   },
@@ -9241,7 +9241,7 @@
     4232,
     1629
    ],
-   "province_label": 4438,
+   "province_label": 4436,
    "province_hex": "x0EDC9B",
    "impassable": false
   },
@@ -9321,7 +9321,7 @@
     4696,
     1652
    ],
-   "province_label": 458,
+   "province_label": 456,
    "province_hex": "x5EB8DC",
    "impassable": false
   },
@@ -9361,7 +9361,7 @@
     4188,
     1671
    ],
-   "province_label": 4541,
+   "province_label": 4540,
    "province_hex": "x8CBE46",
    "impassable": false
   },
@@ -9371,7 +9371,7 @@
     4092,
     1677
    ],
-   "province_label": 4574,
+   "province_label": 4573,
    "province_hex": "x1C54E3",
    "impassable": false
   },
@@ -9381,7 +9381,7 @@
     4625,
     1679
    ],
-   "province_label": 4584,
+   "province_label": 4583,
    "province_hex": "xCC8B4A",
    "impassable": false
   },
@@ -9391,7 +9391,7 @@
     4035,
     1683
    ],
-   "province_label": 4577,
+   "province_label": 4576,
    "province_hex": "xF6FB4E",
    "impassable": false
   },
@@ -9411,7 +9411,7 @@
     4124,
     1684
    ],
-   "province_label": 462,
+   "province_label": 460,
    "province_hex": "x65185C",
    "impassable": false
   },
@@ -9421,7 +9421,7 @@
     4061,
     1690
    ],
-   "province_label": 4578,
+   "province_label": 4577,
    "province_hex": "x99BE40",
    "impassable": false
   },
@@ -9431,7 +9431,7 @@
     4741,
     1692
    ],
-   "province_label": 4596,
+   "province_label": 4595,
    "province_hex": "x98ED7D",
    "impassable": false
   },
@@ -9451,7 +9451,7 @@
     4690,
     1694
    ],
-   "province_label": 4564,
+   "province_label": 4563,
    "province_hex": "x9E6090",
    "impassable": false
   },
@@ -9461,7 +9461,7 @@
     4265,
     1699
    ],
-   "province_label": 4612,
+   "province_label": 4611,
    "province_hex": "x1A9C86",
    "impassable": false
   },
@@ -9471,7 +9471,7 @@
     4634,
     1702
    ],
-   "province_label": 4588,
+   "province_label": 4587,
    "province_hex": "xA731B5",
    "impassable": false
   },
@@ -9491,7 +9491,7 @@
     4042,
     1705
    ],
-   "province_label": 4581,
+   "province_label": 4580,
    "province_hex": "xD1A1B9",
    "impassable": false
   },
@@ -9511,7 +9511,7 @@
     4196,
     1713
    ],
-   "province_label": 4618,
+   "province_label": 4617,
    "province_hex": "xCFE95C",
    "impassable": false
   },
@@ -9531,7 +9531,7 @@
     4721,
     1714
    ],
-   "province_label": 4602,
+   "province_label": 4601,
    "province_hex": "x11CB61",
    "impassable": false
   },
@@ -9551,7 +9551,7 @@
     4247,
     1718
    ],
-   "province_label": 4619,
+   "province_label": 4618,
    "province_hex": "xEE7DCB",
    "impassable": false
   },
@@ -9561,7 +9561,7 @@
     4688,
     1727
    ],
-   "province_label": 4567,
+   "province_label": 4566,
    "province_hex": "x3C9809",
    "impassable": false
   },
@@ -9601,7 +9601,7 @@
     4773,
     1742
    ],
-   "province_label": 4609,
+   "province_label": 4608,
    "province_hex": "x038729",
    "impassable": false
   },
