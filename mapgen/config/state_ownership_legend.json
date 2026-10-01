@@ -2155,28 +2155,6 @@
    "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
    "placeholder_for": "Skaven"
   },
-  "XSE": {
-   "name": "Skaven placeholder E (greenskin stand-in until Skaven tags exist)",
-   "color": [
-    138,
-    150,
-    54
-   ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
-   "placeholder_for": "Skaven"
-  },
-  "XSF": {
-   "name": "Skaven placeholder F (greenskin stand-in until Skaven tags exist)",
-   "color": [
-    96,
-    90,
-    24
-   ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
-   "placeholder_for": "Skaven"
-  },
   "XSG": {
    "name": "Skaven placeholder G (greenskin stand-in until Skaven tags exist)",
    "color": [
@@ -2187,6 +2165,71 @@
    "proposed": true,
    "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
    "placeholder_for": "Skaven"
+  },
+  "XSH": {
+   "name": "Skaven placeholder H (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    138,
+    150,
+    54
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSI": {
+   "name": "Skaven placeholder I (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    96,
+    90,
+    24
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSJ": {
+   "name": "Skaven placeholder J (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    102,
+    126,
+    24
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSK": {
+   "name": "Skaven placeholder K (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    78,
+    132,
+    42
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "XSL": {
+   "name": "Skaven placeholder L (greenskin stand-in until Skaven tags exist)",
+   "color": [
+    48,
+    150,
+    24
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "placeholder_for": "Skaven"
+  },
+  "KIZ": {
+   "name": "Karak Izor",
+   "color": [
+    126,
+    60,
+    54
+   ],
+   "proposed": true,
+   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
   }
  }
 }

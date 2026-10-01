@@ -18,9 +18,9 @@
    "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_APUCCINI_MOUNTAINS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Karak Grom ruin; no roster tag"
+   "owner": "BRN",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_AQUILENA": {
    "owner": "AQL",
@@ -210,9 +210,9 @@
    "note": "Couronne hub"
   },
   "STATE_CRIPPLE_PEAK": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Nagashizzar (Nagash); no roster tag"
+   "owner": "XSL",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_CROOKED_CORRIDOR": {
    "owner": "unowned",
@@ -235,9 +235,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_DARK_MAIDEN_PASS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Maidenhold; no roster tag"
+   "owner": "XSK",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_DEATH_S_SIDE": {
    "owner": "UZK",
@@ -429,9 +429,9 @@
    "note": "district of Zharr-Naggrund"
   },
   "STATE_GIANTHOME_MOUNTAINS": {
-   "owner": "KRD",
-   "confidence": "canon",
-   "note": "Kraka Dorden hub"
+   "owner": "KVE",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_GIANT_STOMPING_GROUNDS": {
    "owner": "unowned",
@@ -488,7 +488,7 @@
    "note": "Zharr-Naggrund hub"
   },
   "STATE_HELL_PIT": {
-   "owner": "XSF",
+   "owner": "XSD",
    "confidence": "directed",
    "note": "review: greenskin placeholder for a future Skaven tag"
   },
@@ -498,9 +498,9 @@
    "note": "Sortsvinaer port hub"
   },
   "STATE_HELSPIRE_MOUNTAINS": {
-   "owner": "unowned",
+   "owner": "GRA",
    "confidence": "directed",
-   "note": "review"
+   "note": "review round 2"
   },
   "STATE_HIGH_PASS": {
    "owner": "VLG",
@@ -665,7 +665,7 @@
    "note": "review"
   },
   "STATE_LAND_347": {
-   "owner": "XSE",
+   "owner": "XSD",
    "confidence": "directed",
    "note": "review: greenskin placeholder for a future Skaven tag"
   },
@@ -680,9 +680,9 @@
    "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_372": {
-   "owner": "PON",
-   "confidence": "inferred",
-   "note": "low confidence: registry capital Pontenne / Chateau de Morsuil has no hub; nearest undead-flavoured hub (Bilious Basilica)"
+   "owner": "XSG",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_LAND_374": {
    "owner": "unowned",
@@ -705,9 +705,9 @@
    "note": "review"
   },
   "STATE_LAND_382": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "islet; no roster tag"
+   "owner": "TOB",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_LAND_476": {
    "owner": "BJO",
@@ -796,9 +796,9 @@
    "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_LAND_506": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Fester Spike; no roster tag"
+   "owner": "XSJ",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_509": {
    "owner": "LUC",
@@ -820,9 +820,9 @@
    "confidence": "inferred"
   },
   "STATE_LAND_526": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Khazid Hrund ruin; no roster tag"
+   "owner": "XSH",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_527": {
    "owner": "KEP",
@@ -859,8 +859,9 @@
    "confidence": "inferred"
   },
   "STATE_LAND_550": {
-   "owner": "URS",
-   "confidence": "inferred"
+   "owner": "XSD",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_551": {
    "owner": "KVE",
@@ -901,9 +902,9 @@
    "note": "Kreutzhofen / Meissen hubs"
   },
   "STATE_LAND_582": {
-   "owner": "CAR",
-   "confidence": "inferred",
-   "note": "Breganalle"
+   "owner": "BRI",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_LAND_586": {
    "owner": "GAS",
@@ -911,9 +912,9 @@
    "note": "Gastonne hub; Monteaux port hub is here too"
   },
   "STATE_LAND_587": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Gristlehold ruin; no roster tag"
+   "owner": "XSI",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_LAND_602": {
    "owner": "TOB",
@@ -1094,9 +1095,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_MOUNTAINS_OF_HEL": {
-   "owner": "unowned",
+   "owner": "AES",
    "confidence": "directed",
-   "note": "review"
+   "note": "review round 2"
   },
   "STATE_MOUNT_AZGORH": {
    "owner": "GOR",
@@ -1168,9 +1169,9 @@
    "note": "greenskin wilderness; no clear roster owner"
   },
   "STATE_NORTH_CAPE": {
-   "owner": "AES",
-   "confidence": "canon",
-   "note": "Aesling's Conclave hub"
+   "owner": "VAR",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_NORTH_DARK_LANDS": {
    "owner": "unowned",
@@ -1187,8 +1188,9 @@
    "note": "registry gives no location; eastern Dark Lands"
   },
   "STATE_NORTH_NORSE_COAST": {
-   "owner": "BJO",
-   "confidence": "inferred"
+   "owner": "SOR",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_NORTH_OSTLAND": {
    "owner": "OST",
@@ -1205,9 +1207,9 @@
    "note": "Miragliano hub"
   },
   "STATE_NOVALONE_PASS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "ruined holds (Kazad Frukund); no roster tag"
+   "owner": "BRN",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_OIS_GAP": {
    "owner": "GIS",
@@ -1314,9 +1316,9 @@
    "note": "review"
   },
   "STATE_SHATTERED_TEETH": {
-   "owner": "BRN",
-   "confidence": "inferred",
-   "note": "Goblin tribe of the Vaults; Karak Izor hub"
+   "owner": "KIZ",
+   "confidence": "directed",
+   "note": "review: Karak Izor"
   },
   "STATE_SHINING_MOUNTAINS": {
    "owner": "GUN",
@@ -1354,9 +1356,9 @@
    "confidence": "inferred"
   },
   "STATE_SOUTHERN_WORLDS_EDGE": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
+   "owner": "MAH",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_SOUTH_BADLAND_HILLS": {
    "owner": "unowned",
@@ -1593,9 +1595,9 @@
    "confidence": "inferred"
   },
   "STATE_WINTERTEETH_PASS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Fort Soll; no roster tag holds it"
+   "owner": "WIS",
+   "confidence": "directed",
+   "note": "review round 2"
   },
   "STATE_WISSENLAND": {
    "owner": "WIS",

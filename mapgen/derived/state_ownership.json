@@ -38,7 +38,7 @@
     4018,
     1175
    ],
-   "owner": "unowned",
+   "owner": "BRN",
    "scope": "drawn"
   },
   "STATE_AQUILENA": {
@@ -389,7 +389,7 @@
     4581,
     1453
    ],
-   "owner": "unowned",
+   "owner": "XSL",
    "scope": "drawn"
   },
   "STATE_CROOKED_CORRIDOR": {
@@ -434,7 +434,7 @@
     4004,
     1212
    ],
-   "owner": "unowned",
+   "owner": "XSK",
    "scope": "drawn"
   },
   "STATE_DEATH_S_SIDE": {
@@ -812,7 +812,7 @@
     4428,
     380
    ],
-   "owner": "KRD",
+   "owner": "KVE",
    "scope": "drawn"
   },
   "STATE_GIANT_STOMPING_GROUNDS": {
@@ -920,7 +920,7 @@
     4484,
     498
    ],
-   "owner": "XSF",
+   "owner": "XSD",
    "scope": "drawn"
   },
   "STATE_HELSPIRE_COAST": {
@@ -938,7 +938,7 @@
     3991,
     415
    ],
-   "owner": "unowned",
+   "owner": "GRA",
    "scope": "drawn"
   },
   "STATE_HIGH_PASS": {
@@ -2036,7 +2036,7 @@
     4483,
     514
    ],
-   "owner": "XSE",
+   "owner": "XSD",
    "scope": "drawn"
   },
   "STATE_LAND_362": {
@@ -2117,7 +2117,7 @@
     3826,
     1086
    ],
-   "owner": "PON",
+   "owner": "XSG",
    "scope": "drawn"
   },
   "STATE_LAND_374": {
@@ -2162,7 +2162,7 @@
     3804,
     1230
    ],
-   "owner": "unowned",
+   "owner": "TOB",
    "scope": "drawn"
   },
   "STATE_LAND_384": {
@@ -3116,7 +3116,7 @@
     4071,
     1139
    ],
-   "owner": "unowned",
+   "owner": "XSJ",
    "scope": "drawn"
   },
   "STATE_LAND_509": {
@@ -3161,7 +3161,7 @@
     4144,
     1086
    ],
-   "owner": "unowned",
+   "owner": "XSH",
    "scope": "drawn"
   },
   "STATE_LAND_527": {
@@ -3242,7 +3242,7 @@
     4495,
     481
    ],
-   "owner": "URS",
+   "owner": "XSD",
    "scope": "drawn"
   },
   "STATE_LAND_551": {
@@ -3323,7 +3323,7 @@
     3840,
     1051
    ],
-   "owner": "CAR",
+   "owner": "BRI",
    "scope": "drawn"
   },
   "STATE_LAND_586": {
@@ -3341,7 +3341,7 @@
     4127,
     1049
    ],
-   "owner": "unowned",
+   "owner": "XSI",
    "scope": "drawn"
   },
   "STATE_LAND_602": {
@@ -3674,7 +3674,7 @@
     4365,
     351
    ],
-   "owner": "unowned",
+   "owner": "AES",
    "scope": "drawn"
   },
   "STATE_MOUNT_AZGORH": {
@@ -3809,7 +3809,7 @@
     4323,
     259
    ],
-   "owner": "AES",
+   "owner": "VAR",
    "scope": "drawn"
   },
   "STATE_NORTH_DARK_LANDS": {
@@ -3845,7 +3845,7 @@
     3888,
     374
    ],
-   "owner": "BJO",
+   "owner": "SOR",
    "scope": "drawn"
   },
   "STATE_NORTH_OSTLAND": {
@@ -3881,7 +3881,7 @@
     4026,
     1101
    ],
-   "owner": "unowned",
+   "owner": "BRN",
    "scope": "drawn"
   },
   "STATE_OIS_GAP": {
@@ -4088,7 +4088,7 @@
     4112,
     1094
    ],
-   "owner": "BRN",
+   "owner": "KIZ",
    "scope": "drawn"
   },
   "STATE_SHINING_MOUNTAINS": {
@@ -4169,7 +4169,7 @@
     4448,
     1665
    ],
-   "owner": "unowned",
+   "owner": "MAH",
    "scope": "drawn"
   },
   "STATE_SOUTH_BADLAND_HILLS": {
@@ -4637,7 +4637,7 @@
     4165,
     1090
    ],
-   "owner": "unowned",
+   "owner": "WIS",
    "scope": "drawn"
   },
   "STATE_WISSENLAND": {

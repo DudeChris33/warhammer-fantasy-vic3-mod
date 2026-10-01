@@ -61,6 +61,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--border-width", type=int, choices=(1, 2), default=2)
     ap.add_argument("--review", action="store_true", help="also write the annotated half-size review render")
     ap.add_argument("--numbers", action="store_true", help="review render: also print each state's numeric id under its tag code")
+    ap.add_argument("--labels", choices=("name", "tag"), default="name", help="review render label: first 10 chars of the localized state name (default) or the owner tag code")
     ap.add_argument("--scale", type=float, default=0.5, help="review render scale (default 0.5; 1.0 for legible numbers)")
     ap.add_argument("--review-out", type=Path, default=REVIEW_PATH)
     ap.add_argument("--roundtrip", action="store_true", help="render, read back in memory, compare; write nothing")
@@ -89,7 +90,8 @@ def main(argv: list[str] | None = None) -> int:
         raster.write_rgb_png(args.out, img)
         print(f"render_state_ownership: wrote {args.out}")
         if args.review:
-            so.review_render(img, layout, owners, legend, scale=args.scale, numbers=args.numbers).save(args.review_out)
+            so.review_render(img, layout, owners, legend, scale=args.scale, numbers=args.numbers,
+                names=None if args.labels == "tag" else so.load_state_names(MOD_ROOT)).save(args.review_out)
             print(f"render_state_ownership: wrote {args.review_out}")
     except so.OwnershipError as exc:
         print(f"render_state_ownership: ERROR: {exc}", file=sys.stderr)

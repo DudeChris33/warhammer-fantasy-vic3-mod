@@ -269,6 +269,17 @@ def placeholder_state_keys(states: list[State], placeholder_provinces: set[str])
     return out
 
 
+def load_state_names(mod_root: Path) -> dict[str, str]:
+    """``STATE_*`` key -> English display name, from the generated map loc."""
+    path = Path(mod_root) / "localization" / "replace" / "english" / "map" / "states_l_english.yml"
+    out: dict[str, str] = {}
+    for line in path.read_text(encoding="utf-8-sig").splitlines():
+        m = re.match(r'\s*(STATE_\w+):\d*\s+"(.*?)"', line)
+        if m:
+            out[m.group(1)] = m.group(2)
+    return out
+
+
 def load_inputs(mod_root: Path):
     """Read the committed map data: ``(layout, placeholder_states, ids_anchor)``.
 
@@ -485,9 +496,11 @@ def normalize_assignment(assignment: dict, layout: Layout) -> dict:
 
 def review_render(painted: np.ndarray, layout: Layout, prov_owners: list[str], legend: Legend,
                   scale: float = 0.5, crop: tuple[int, int, int, int] | None = None,
-                  numbers: bool = False):
+                  numbers: bool = False, names: dict[str, str] | None = None, name_chars: int = 10):
     """Annotated review picture: the painted map at ``scale`` (nearest), tag codes
     at each drawn state's centroid, and a legend panel of the owners in use.
+    With ``names`` (state key -> localized name) the label is the first ``name_chars``
+    characters of the state's name instead of the owner's tag code.
     With ``numbers`` each label gains a second line: the state's numeric ``id``
     (the ``id =`` in ``map_data/state_regions/``, also in ``state_ownership.json``).
 
@@ -533,6 +546,8 @@ def review_render(painted: np.ndarray, layout: Layout, prov_owners: list[str], l
         j = int(np.argmin(d))
         px, py = int(xx[a:b][j] * scale), int(yy[a:b][j] * scale)
         code = {UNOWNED: "--"}.get(owner, owner)
+        if names is not None:
+            code = names.get(layout.states[si].key, layout.states[si].key)[:name_chars]
         used[owner] = used.get(owner, 0) + 1
         r, g, bl = legend.owner_color(owner)
         ink = (0, 0, 0) if (0.299 * r + 0.587 * g + 0.114 * bl) > 140 else (255, 255, 255)
