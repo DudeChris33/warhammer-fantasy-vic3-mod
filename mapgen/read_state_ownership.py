@@ -63,7 +63,7 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--out", type=Path, default=OUT_PATH)
     ap.add_argument("--review", action="store_true", help="also write the annotated half-size review render")
     ap.add_argument("--numbers", action="store_true", help="review render: also print each state's numeric id under its tag code")
-    ap.add_argument("--labels", choices=("country", "tag", "state"), default="country", help="review render label: first 10 chars of the owning country's name (default), the owner tag code, or the state's localized name")
+    ap.add_argument("--labels", choices=("country", "tag", "state"), default="country", help="review render label: first 12 chars of the owning country's name (default), the owner tag code, or the state's localized name")
     ap.add_argument("--scale", type=float, default=0.5, help="review render scale (default 0.5; 1.0 for legible numbers)")
     ap.add_argument("--review-out", type=Path, default=REVIEW_PATH)
     ap.add_argument("--check", action="store_true", help="assert the output on disk is current; write nothing")

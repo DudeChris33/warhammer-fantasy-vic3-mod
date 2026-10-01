@@ -501,10 +501,10 @@ def normalize_assignment(assignment: dict, layout: Layout) -> dict:
 def review_render(painted: np.ndarray, layout: Layout, prov_owners: list[str], legend: Legend,
                   scale: float = 0.5, crop: tuple[int, int, int, int] | None = None,
                   numbers: bool = False, labels: str = "country", state_names: dict[str, str] | None = None,
-                  name_chars: int = 10):
+                  name_chars: int = 12):
     """Annotated review picture: the painted map at ``scale`` (nearest), tag codes
     at each drawn state's centroid, and a legend panel of the owners in use.
-    ``labels`` picks the label: ``country`` (default) = first ``name_chars`` characters
+    ``labels`` picks the label: ``country`` (default) = first ``name_chars`` (12) characters
     of the owning country's name from the legend, ``tag`` = the tag code, ``state`` =
     the state's localized name (``state_names``: state key -> name).
     With ``numbers`` each label gains a second line: the state's numeric ``id``
