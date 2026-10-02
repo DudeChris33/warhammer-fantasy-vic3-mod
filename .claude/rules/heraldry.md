@@ -115,3 +115,16 @@ tag files:
    horned beast-skull (BNR), toothed border concept (BTO).
 10. Shared family cue for the three "Broken" tribes (BKA/BTO/BRN): each carries
     a deliberately skewed or chipped charge.
+
+## Placeholder-tag heraldry
+
+A placeholder tag — a deliberately generic stand-in such as the `XS*` Skaven
+clans (see [peoples.md](peoples.md)) — wears the house style of the culture it
+actually carries, not of the people it stands in for: the `XS*` tags carry
+`goblin`, so they follow the greenskin house style above. Give each placeholder
+**one** distinct charge (no two placeholders share a texture) and **no
+iconography of the people it stands in for** (no rat device on an `XS*` tag): a
+Skaven charge on goblin pops would assert an identity the tag does not have.
+The block comment says it is a placeholder and that the device is a disclosed
+invention. When the real people get a culture and their own tags, those tags
+get their own heraldry; the placeholder's arms are not migrated.

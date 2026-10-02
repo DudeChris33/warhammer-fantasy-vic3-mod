@@ -103,7 +103,23 @@ TAG = {
 - `color` uses the **brace** form `{ R G B }` (0-255 integers), not `common/cultures/`' `rgb{ }`.
   Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
+  **Exception — tags defined for the painted start map:** a tag first painted in
+  `mapgen/config/state_ownership.png` copies its colour exactly from
+  `mapgen/config/state_ownership_legend.json`, because the PNG is keyed on that RGB and the legend
+  wins (#6373). Say so in the file's comment above those blocks, and drop the legend entry's
+  `proposed` flag (setting its final `name` and `note`) in the same change.
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
+- **Placeholder tags (`XS*`).** A state owner the setting needs but no culture can yet represent gets
+  a deliberately generic stand-in rather than an invented nation. The `XS*` codes are the Skaven ones:
+  "Skaven Clan <letter> (placeholder)", adjective "Skaven", `goblin` culture,
+  `unrecognized`/`principality`, filed by the geography of their states, heraldry per
+  [heraldry.md](heraldry.md)'s placeholder rule. Each block's comment states the limits. The codes
+  are frozen like any shipped tag, so real clans get **new** codes and supersede these tags; a
+  placeholder is never renamed into a real polity. Record each one in `planning/tag_registry.md`.
+- **Disclosed stand-in cultures.** When no authored culture fits a tag, use the most honest existing
+  one and say in the block comment and the registry row what it does not describe (e.g. `BRK`
+  `norscan` for a Chaos garrison, `VMP` `sylvanian_vampire` for Kemmler's non-vampire host). Do not
+  author a new culture to fill the gap inside a tag item.
 - **`capital` is deliberately omitted** on every tag this mod ships until it has a real
   `STATE_*` to point at (land state-regions are emitted — see [testing.md](testing.md) —
   but not every tag has had its capital assignment revisited). Record the intended

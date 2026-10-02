@@ -14,15 +14,15 @@ Filed by epic #3414 (child #3415).
 
 ### Regions approved (Phase B walk)
 
-- [x] 00 Norsca (12)
+- [x] 00 Norsca (13)
 - [x] 01 Kislev (10)
-- [x] 02 Empire (18)
+- [x] 02 Empire (22)
 - [x] 03 Bretonnia (17)
-- [x] 04 Karaz Ankor (18)
-- [x] 05 Southern Realms (27)
+- [x] 04 Karaz Ankor (28)
+- [x] 05 Southern Realms (28)
 - [x] 06 Badlands (11)
 - [x] 07 Nehekhara (11)
-- [x] 10 Dark Lands (6)
+- [x] 10 Dark Lands (7)
 - [x] 08 Araby (10)
 - [x] 09 Southlands (8)
 - [x] 11 Ogre Kingdoms (12)
@@ -35,7 +35,7 @@ Filed by epic #3414 (child #3415).
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (19)
 
-**Total: 212 tags** (16 formables, 196 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 229 tags** (16 formables, 213 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -69,6 +69,15 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   deepened minor realm with no bespoke culture takes its region's dominant existing culture id (never
   invent, never `PLACEHOLDER` for Old World). **Distant rows** (08, 09, 11–19) carry the literal token
   `PLACEHOLDER` until a future epic authors those cultures.
+- **`XS*` = Skaven placeholder tags** (board #6373, 2026-10-01). `XSA`–`XSD` and `XSG`–`XSL` (no
+  `XSE`/`XSF`) are deliberately generic stand-ins for unnamed Skaven clans that own states on the
+  painted start map — not real nations. Display names "Skaven Clan A–J (placeholder)" in code order,
+  adjective "Skaven", `goblin` culture, greenskin house-style heraldry with no rat iconography. Their
+  limits (greenskin pops, culture and arms) are deliberate until a Skaven culture exists. The codes are
+  frozen once shipped like any other: real clans get **new** codes and supersede these tags, which are
+  never renamed into a clan.
+- **#6373 additions take the painted legend colour.** Tags defined for the start-ownership map take
+  their colour exactly from `mapgen/config/state_ownership_legend.json`, not from their culture.
 
 ## How to use
 
@@ -130,10 +139,12 @@ CNT
 COP
 COT
 COU
+CRB
 CRM
 CTH
 CXC
 DGF
+DLO
 DOL
 DON
 DRZ
@@ -183,16 +194,20 @@ KHI
 KHM
 KHN
 KIS
+KIZ
 KKR
 KNO
 KON
+KOR
 KRD
+KRV
 KSV
 KUL
 KUN
 KUR
 KVE
 KVN
+KZF
 LAH
 LAN
 LOT
@@ -284,6 +299,7 @@ VAR
 VEM
 VER
 VLG
+VMP
 VOL
 VSY
 WEI
@@ -293,6 +309,16 @@ WWG
 XAH
 XHO
 XLA
+XSA
+XSB
+XSC
+XSD
+XSG
+XSH
+XSI
+XSJ
+XSK
+XSL
 YVR
 ZHA
 ZHU
@@ -309,7 +335,7 @@ epic, not tag-uniqueness concerns.)
 
 ## Roster
 
-### 00 NORSCA (norscan) — 12 tags; no formable
+### 00 NORSCA (norscan, goblin) — 13 tags; no formable
 
 7 core High Tribes are solid canon; Hastlings + Kvelligs are medium-confidence High Tribes. Seed's
 Skjaelings/Sortsvinar were originally dropped as unverified (Chris's call, approved 2026-08-30), but
@@ -326,11 +352,16 @@ Hastlings/Kvelligs, still `unrecognized` (Chris, 2026-09-04).
 Rulebook (pg. 82-83/224) names Snaegr, Sortsvinaer and Ursfjordings as the Norse's three known
 "lesser tribes" — smaller gatherings bound by familial/martial/religious ties rather than the
 seven great High Tribes. This directly re-supports Sortsvinaer, previously dropped as unverified.
-Ursfjordings' hold of Ursfjord (Goromandy Mountains) is also home to Beorg Bearstruck's "Bearmen of
+Ursfjordings' hold of Ursfjord (Goromadny Mountains) is also home to Beorg Bearstruck's "Bearmen of
 Urslo" mercenary warband — a sub-group of the tribe, not a separate tag. Other lore-audited
 candidates (Fjaergard, Tribe of the Crow, Tribe of the Mighty Serpent — all solidly sourced) were
 not added this pass; Iron Wolves was rejected as now culturally Kurgan, not Norscan (Eastern
 Steppes material instead), and Skeggi was added to 19 Lustria instead of here (see that region).
+
+**#6373 (2026-10-01):** SNA, SOR and URS now have country definitions. The ownership-review tag `GMD`
+("Goromadny") duplicated URS for the same coast and was merged into it — URS took GMD's painted colour;
+`GMD` never became a code. `XSD` (Hell Pit) is a Skaven placeholder (see *Conventions*), filed here by
+the geography of its states. Spelling corrected to the map's "Goromadny" (was "Goromandy").
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -345,7 +376,8 @@ Steppes material instead), and Skeggi was added to 19 Lustria instead of here (s
 | KVE | `00_norsca` | Kvelligs | start | `norscan` | — | High Tribe near the Chaos Wastes |
 | SNA | `00_norsca` | Snaegr | start | `norscan` | — | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook) |
 | SOR | `00_norsca` | Sortsvinaer | start | `norscan` | — | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook); re-supports the seed name dropped in the original draft |
-| URS | `00_norsca` | Ursfjordings | start | `norscan` | Ursfjord | `principality`/`unrecognized`; lesser tribe, Goromandy Mtns; home hold of Beorg Bearstruck's Bearmen of Urslo warband |
+| URS | `00_norsca` | Ursfjordings | start | `norscan` | Ursfjord | `principality`/`unrecognized`; lesser tribe, Goromadny Mtns; home hold of Beorg Bearstruck's Bearmen of Urslo warband; absorbed review tag GMD (#6373) |
+| XSD | `00_norsca` | Skaven Clan D (placeholder) | start | `goblin` | — | Skaven placeholder (Hell Pit); `principality`/`unrecognized`; see *Conventions* (#6373) |
 
 ### 01 KISLEV (gospodar, ungol) — 10 tags; KIS formable
 
@@ -366,7 +398,7 @@ oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (App
 | DOL | `01_kislev` | Dolgan | start | `ungol` | — | old eastern horse-tribe |
 | ROP | `01_kislev` | Roppsmenn | start | `ungol` | — | old northern tribe |
 
-### 02 EMPIRE (per province culture) — 18 tags; EMP + VEM formable
+### 02 EMPIRE (per province culture) — 22 tags; EMP + VEM formable
 
 10 Electoral provinces + Solland + The Moot + Sylvania + Marienburg (the seceded Wasteland). Sylvania
 split into a human tag (`SYL`) and a Vampire tag (`VSY`, von Carstein) per Chris. Marienburg (`MAR`)
@@ -391,10 +423,13 @@ and `unrecognized` (not a recognized Electorate).
 **`BRK` Brass Keep** — registry-only for now (manual audit, 2026-09-03), like the Eastern Steppes
 Chaos tags: a Nurgle-held fortress in the Middle Mountains (Hochland/Middenland/Ostland border),
 captured in the Great War against Chaos (2302 IC per *Warhammer: The Old World*/Lexicanum) and
-never retaken; the Empire contains rather than besieges it via "the Picket." `PLACEHOLDER` culture
-— no Chaos-marauder/cultist culture is authored anywhere in `common/cultures/` yet, so no
-`common/country_definitions` entry exists until that's resolved (possibly a culture shared with
-the Eastern Steppes marauders, a later decision).
+never retaken; the Empire contains rather than besieges it via "the Picket." Defined by #6373
+(2026-10-01, Chris) with **`norscan` as a disclosed stand-in culture** for its Chaos-worshipping
+garrison — no Chaos-marauder/cultist culture is authored anywhere in `common/cultures/` yet (possibly
+a culture shared with the Eastern Steppes marauders, a later decision); `unrecognized`/`principality`.
+
+**#6373 additions (2026-10-01):** `CRB` Carroburg, the Middenland free city on the Reik
+(`recognized`/`city_state`), and the Skaven placeholders `XSA`, `XSB`, `XSC` (see *Conventions*).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -415,7 +450,11 @@ the Eastern Steppes marauders, a later decision).
 | VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start |
 | VEM | `02_empire` | The Von Carstein Empire | formable | `sylvanian_vampire` | Altdorf | VSY conquers the whole Empire; name TODO |
 | MAR | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
-| BRK | `02_empire` | Brass Keep | start | `PLACEHOLDER` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket" |
+| BRK | `02_empire` | Brass Keep | start | `norscan` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket"; `norscan` is a disclosed stand-in culture (#6373) |
+| CRB | `02_empire` | Carroburg | start | `middenlander` | Carroburg | `recognized`/`city_state`; Middenland free city on the Reik (#6373) |
+| XSA | `02_empire` | Skaven Clan A (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
+| XSB | `02_empire` | Skaven Clan B (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
+| XSC | `02_empire` | Skaven Clan C (placeholder) | start | `goblin` | — | Skaven placeholder (West Talabecland); see *Conventions* (#6373) |
 
 ### 03 BRETTONIA (bretonnian, mousillon) — 17 tags; BRE formable
 
@@ -461,7 +500,7 @@ to `common/cultures/greenskin.txt`.
 | MOR | `03_brettonia` | Massif Orcal | start | `orc`, `goblin` | Massif Orcal | remnant Greenskin holdout, Bretonnian heartland; named by location, no tribe attested — TODO revisit |
 | SKZ | `03_brettonia` | Skullsmasherz | start | `orc` | — | Ugrok Craktoof; Grey Mtns, Bretonnia's southern flank |
 
-### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_ancestral) — 18 tags; KAZ formable
+### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_ancestral, sylvanian_vampire, goblin) — 28 tags; KAZ formable
 
 10 active holds + Karak Angazbar (seed "Karak Azgaraz" corrected) + 7 ruined/fallen holds (all
 sourced). **Ruined holds keep a dwarf tag even though they are occupied at game start** — they are
@@ -489,6 +528,16 @@ region is now `country_type = recognized` (previously only KAZ and KAK were; eve
 `unrecognized`). KAZ's formation gate simplified back to a bare `is_country_type = recognized`,
 matching EMP/BRE, now that the old mixed-type OR-pair workaround is no longer needed.
 
+**#6373 additions (2026-10-01)** — tags painted on the start-ownership map. Four holds, all
+`recognized`/`principality`: `KIZ` Karak Izor (the Copper Mountain), `KZF` Karak Ziflin (above Axe Bite
+Pass), and the Norse dwarf holds `KOR` Kraka Ornsmotek and `KRV` Kraka Ravnsvake (filed here on the
+`KRD` precedent although their states sit in Norsca's state file). **`VMP` is Heinrich Kemmler the
+Lichemaster** (Chris, 2026-10-01) — a human necromancer turned lich, not a vampire; "Kemmler's Host" is
+a disclosed name choice (canon names no realm for him), and `sylvanian_vampire` is a disclosed stand-in
+culture (the only one with undead heritage and the `cult_of_nagash` religion; it does not describe a
+non-vampire, non-Sylvanian following). `unrecognized`/`principality`, filed here by the geography of
+Eastern Irranas. Plus the Skaven placeholders `XSH`–`XSL` (see *Conventions*).
+
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | KAZ | `04_karaz_ankor` | Karaz Ankor | formable | `dawi`, `dawi_grey`, `dawi_norse`, `dawi_ancestral` | Karaz-a-Karak | the Everlasting Realm reunited (all dwarf cultures) |
@@ -507,10 +556,20 @@ matching EMP/BRE, now that the old mixed-type OR-pair workaround is no longer ne
 | EKR | `04_karaz_ankor` | Ekrund | start | `dawi_ancestral` | Ekrund | ruined, Black Gulf mines (Orc occupier separate) |
 | GUN | `04_karaz_ankor` | Mount Gunbad | start | `dawi` | Mount Gunbad | ruined, brightstone mines (Night Goblin occupier separate) |
 | DRZ | `04_karaz_ankor` | Karak Drazh | start | `dawi_ancestral` | Karak Drazh | ruined -469 IC (Orc occupier "Black Crag" is a separate 06 tag) |
+| KIZ | `04_karaz_ankor` | Karak Izor | start | `dawi` | Karak Izor | the Copper Mountain (#6373) |
+| KZF | `04_karaz_ankor` | Karak Ziflin | start | `dawi_grey` | Karak Ziflin | Grey Mountains, above Axe Bite Pass (#6373) |
+| KOR | `04_karaz_ankor` | Kraka Ornsmotek | start | `dawi_norse` | Kraka Ornsmotek | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
+| KRV | `04_karaz_ankor` | Kraka Ravnsvake | start | `dawi_norse` | Kraka Ravnsvake | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
+| VMP | `04_karaz_ankor` | Kemmler's Host | start | `sylvanian_vampire` | — | Heinrich Kemmler the Lichemaster (human lich); `unrecognized`; name and culture are disclosed stand-ins (#6373) |
+| XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
+| XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
+| XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
+| XSK | `04_karaz_ankor` | Skaven Clan I (placeholder) | start | `goblin` | — | Skaven placeholder (Dark Maiden Pass); see *Conventions* (#6373) |
+| XSL | `04_karaz_ankor` | Skaven Clan J (placeholder) | start | `goblin` | — | Skaven placeholder (Cripple Peak); see *Conventions* (#6373) |
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
-### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer, gospodar, ungol, sylvanian_vampire) — 27 tags; TIL/EST/USR formables
+### 05 SOUTHERN REALMS (tilean, estalian, sartosan, border_princer, gospodar, ungol, sylvanian_vampire, goblin) — 28 tags; TIL/EST/USR formables
 
 8 Tilean city-states + 3 Estalian kingdoms + one Border Princes tag. Tilea/Estalia held at their
 well-known city-states (approved as-is by Chris — the deep Tilean/Estalian/Border-Prince supply lever
@@ -580,6 +639,7 @@ future Ulthuan / elven-colonies pass (region 17), not Tilean city-states.
 | UVE | `05_southern_realms` | Uvetovsk | start | `gospodar`, `ungol` | Uvetovsk | Kislevite-founded bear realm, Old Silk Road; cross-file culture ref |
 | HKN | `05_southern_realms` | Harkon | start | `sylvanian_vampire` | Harkon | `unrecognized`; undead chalice realm, Forest of Gloom; cross-file culture ref |
 | PON | `05_southern_realms` | Pontenne | start | `sylvanian_vampire` | Pontenne | `unrecognized`; undead chalice realm by the Chateau de Morsuil; cross-file culture ref |
+| XSG | `05_southern_realms` | Skaven Clan E (placeholder) | start | `goblin` | — | Skaven placeholder (Blighted Marshes); see *Conventions* (#6373) |
 
 ### 06 BADLANDS (orc, goblin) — 11 tags; no formable
 
@@ -651,12 +711,13 @@ no tag** — reserved for a future Skaven clan (no Skaven region yet). (Approved
 | BHA | `07_nehekhara` | Bhagar | start | `nehekharan` | Bhagar | the Dune-Sea oasis |
 | KAS | `07_nehekhara` | Ka-Sabar | start | `nehekharan` | Ka-Sabar | City of Bronze |
 
-### 10 DARK LANDS (dawi_zharr, hobgoblin) — 6 tags; ZHA + KHN formables
+### 10 DARK LANDS (dawi_zharr, hobgoblin, orc) — 7 tags; ZHA + KHN formables
 
 The Chaos Dwarfs (Dawi Zharr) and their hobgoblin vassals. Canon-thin beyond Zharr-Naggrund; held at 6
 (Chris approved as-is). Two formables — Chaos Dwarfs and hobgoblins are distinct peoples with separate
-unifiers. "Dark Land Orcs" (a TW:W Greenskins faction) could be added here later if a greenskin Dark
-Lands tag is wanted. (Approved 2026-08-30. Closes the Old World tranche.)
+unifiers. (Approved 2026-08-30. Closes the Old World tranche.) **`DLO` Dark Land Orcs** (a TW:W
+Greenskins faction, reserved here at approval) was added by #6373 (2026-10-01) once the painted
+start map gave it states: `orc` culture, `unrecognized`/`principality`.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -666,6 +727,7 @@ Lands tag is wanted. (Approved 2026-08-30. Closes the Old World tranche.)
 | UZK | `10_dark_lands` | Uzkulak | start | `dawi_zharr` | Uzkulak | Port of Zharr |
 | KHN | `10_dark_lands` | Great Khanate | formable | `hobgoblin` | — | Hobgobla-Khan unites the hobgoblins |
 | HGK | `10_dark_lands` | Hobgobla-Khan | start | `hobgoblin` | — | the great hobgoblin realm |
+| DLO | `10_dark_lands` | Dark Land Orcs | start | `orc` | — | greenskin tribes of the Dark Lands; TW:W faction (#6373) |
 
 ### 08 ARABY (PLACEHOLDER + bretonnian crusaders) — 10 tags; ARB formable
 
