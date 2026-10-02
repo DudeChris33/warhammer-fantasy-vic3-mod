@@ -54,12 +54,6 @@ POPS = {
 			create_pop = { culture = border_princer size = 125000 }
 		}
 	}
-	s:STATE_LAND_524 = {
-		region_state:BSB = {
-			create_pop = { culture = orc size = 18964 }
-			create_pop = { culture = goblin size = 10211 }
-		}
-	}
 	s:STATE_MARG_BEH_MARD = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
@@ -100,6 +94,12 @@ POPS = {
 	s:STATE_OLD_STRYGOS = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_SHARPTHORN_FOREST = {
+		region_state:BSB = {
+			create_pop = { culture = orc size = 18964 }
+			create_pop = { culture = goblin size = 10211 }
 		}
 	}
 	s:STATE_SOUTH_BADLAND_HILLS = {

@@ -10,29 +10,14 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
+	s:STATE_GREAT_MORTIS_DELTA = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 	s:STATE_KHEMRIAN_DESERT = {
 		region_state:BHA = {
 			create_pop = { culture = nehekharan size = 250000 }
-		}
-	}
-	s:STATE_LAND_608 = {
-		region_state:KAS = {
-			create_pop = { culture = nehekharan size = 40000 }
-		}
-	}
-	s:STATE_LAND_620 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_623 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_624 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
 		}
 	}
 	s:STATE_MORTIS_TARN = {
@@ -40,9 +25,24 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
+	s:STATE_PYRAMID_OF_TUTANKHANUT = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 	s:STATE_ROAD_OF_KINGS = {
 		region_state:RAS = {
 			create_pop = { culture = nehekharan size = 125000 }
+		}
+	}
+	s:STATE_SPHINX_OF_PHAA = {
+		region_state:KAS = {
+			create_pop = { culture = nehekharan size = 40000 }
+		}
+	}
+	s:STATE_SWAMP_OF_TERROR = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
 		}
 	}
 	s:STATE_THE_SCARAB_CITY = {
