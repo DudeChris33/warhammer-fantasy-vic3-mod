@@ -253,3 +253,32 @@ XSD = {
 		instance = { position = { 0.55 0.46 } scale = { 0.82 0.82 } rotation = 15 }
 	}
 }
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): coat of arms for the wood-elf realm newly defined at the
+# end of common/country_definitions/00_norsca.txt. Wood-elf house style
+# (.claude/rules/heraldry.md); texture, pattern and colour-slot count confirmed against a real
+# vanilla usage, cited below. Matching flag_definitions block is in
+# common/flag_definitions/00_norsca.txt.
+################################################################################
+
+# SOT — Sisters of Twilight. Name-derived, disclosed invention: two crescents back to back, one
+# for each twin sister (Naestra and Arahan) and for the twilight they are named for, pearl over a
+# dusk field (purple over the forest's green_dark). A twilight sky is this house style's one
+# palette exception. Built from two ce_crescent instances, the left one mirrored (negative x
+# scale). Adjusted from the scoping suggestion (ce_falcon, which went to MGL). ce_crescent is used
+# nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/01_subs.txt:1786, sub_EGY).
+SOT = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "purple"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_crescent.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.36 0.5 } scale = { -0.5 0.5 } }
+		instance = { position = { 0.64 0.5 } scale = { 0.5 0.5 } }
+	}
+}

@@ -17,3 +17,15 @@
  MOU_ADJ:0 "Mousillon"
  SKZ:0 "Skullsmasherz"
  SKZ_ADJ:0 "Skullsmasherz"
+
+ # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms.
+ ANM:0 "Anmyr"
+ ANM_ADJ:0 "Anmyr"
+ TLS:0 "Talsyn"
+ TLS_ADJ:0 "Talsyn"
+ TRG:0 "Torgovann"
+ TRG_ADJ:0 "Torgovann"
+ WYD:0 "Wydrioth"
+ WYD_ADJ:0 "Wydrioth"
+ OKP:0 "Oak of Prophecy"
+ OKP_ADJ:0 "Oak of Prophecy"

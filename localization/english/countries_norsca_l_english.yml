@@ -25,3 +25,7 @@
  URS_ADJ:0 "Ursfjording"
  XSD:0 "Skaven Clan D (placeholder)"
  XSD_ADJ:0 "Skaven"
+
+ # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms.
+ SOT:0 "Sisters of Twilight"
+ SOT_ADJ:0 "Twilight"

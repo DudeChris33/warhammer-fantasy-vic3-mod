@@ -43,3 +43,7 @@
  XSB_ADJ:0 "Skaven"
  XSC:0 "Skaven Clan C (placeholder)"
  XSC_ADJ:0 "Skaven"
+
+ # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms.
+ LAU:0 "Laurelorn"
+ LAU_ADJ:0 "Laurelorn"

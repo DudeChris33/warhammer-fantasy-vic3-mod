@@ -17,3 +17,7 @@
  PAR_ADJ:0 "Parravonian"
  MOR:0 "Massif Orcal"
  MOR_ADJ:0 "Massif Orcal"
+
+ # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms. ARG collides with vanilla countries_l_english.yml.
+ ARG:0 "Argwylon"
+ ARG_ADJ:0 "Argwylon"

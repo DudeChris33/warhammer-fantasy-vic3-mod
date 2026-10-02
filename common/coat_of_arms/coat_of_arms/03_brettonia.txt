@@ -349,3 +349,125 @@ SKZ = {
 		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
 	}
 }
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): coats of arms for the wood-elf realms newly defined at
+# the end of common/country_definitions/03_brettonia.txt (same order). Wood-elf house style
+# (.claude/rules/heraldry.md): an autumn/forest palette and one nature or hunt charge each, with no
+# crowns, crosses or fleurs. Every texture, pattern and colour-slot count below is confirmed against
+# a real vanilla (or this mod's own) usage, cited per block. Matching flag_definitions blocks are in
+# common/flag_definitions/03_brettonia.txt.
+################################################################################
+
+# ANM — Anmyr. Disclosed invention: no device is recorded for the realm, so a sprig of autumn
+# leaves stands for Athel Loren's turning woods, russet-orange on a dark-green/brown bend. The
+# texture is vanilla's three-leaf maple sprig (from Canadian provincial arms), used here as a
+# generic leaf sprig — not the single national leaf ce_maple_leaf_canada. ce_maple_leafs is used
+# nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/01_subs.txt:430, sub_CAN_coa).
+ANM = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "green_dark"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_maple_leafs.dds"
+		color1 = "orange"
+		color2 = "red_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# ARG — Argwylon. Soft: the realm of the treeman Durthu (Total War: Warhammer), so a great tree,
+# amber on dark green. Disclosed reuse: ce_tree_new_england.dds is ART's charge (this file,
+# green_dark on yellow_dark); ARG counterchanges it, a saffron tree on a green_dark field.
+# Confirmed 2 colour slots (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:16235,
+# NEN; also ART).
+ARG = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_tree_new_england.dds"
+		color1 = "saffron"
+		color2 = "saffron"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# TLS — Talsyn. Soft: the realm of Orion, the antlered King in the Woods and avatar of Kurnous the
+# hunter god, so a golden stag rampant over a forest floor (dark green over brown).
+# ce_deer_supporter is used nowhere else in this mod; confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/01_subs.txt:1028, sub_WUR_coa).
+TLS = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "green_dark"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_deer_supporter.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "red_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# TRG — Torgovann. Disclosed invention: no device is recorded for the realm, so a running elven
+# steed for the Asrai's Wild Riders and glade riders, pearl on russet. Disclosed reuse: ce_horse.dds
+# is 01_kislev.txt's DOL (white on an ochre/brown bend) and 07_nehekhara.txt's NUM (white on
+# saffron); TRG is a pearl horse on a red_dark field. Confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:9213, GER_hannover; also DOL, NUM).
+TRG = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_horse.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# WYD — Wydrioth. Disclosed invention: no device is recorded for the realm, so an arrowhead for
+# the Asrai's glade guard archers, saffron on brown. Disclosed reuse: ce_spearhead.dds (drawn as an
+# arrowhead here) is 04_karaz_ankor.txt's SLV (pearl on tan) and XSJ (bone on a gore-red/black
+# bend, tilted); WYD is a saffron point upright on a brown field. Confirmed 2 colour slots (vanilla
+# usage, common/coat_of_arms/coat_of_arms/02_countries.txt:13646, LAH; also SLV, XSJ). The point
+# fills only a small part of its texture, so it is scaled 2.2; scales above 1 are used by vanilla
+# (02_countries_2.txt:257, scale 3.4).
+WYD = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_spearhead.dds"
+		color1 = "saffron"
+		color2 = "saffron"
+		instance = { position = { 0.5 0.5 } scale = { 2.2 2.2 } }
+	}
+}
+
+# OKP — Oak of Prophecy. Name-derived, soft: the realm's sacred oak — brown trunk, dark-green
+# crown and golden acorns on a pearl field. Adjusted from the scoping suggestion (which gave OKP
+# the pine and ARG this tree) because this broad-crowned fruiting tree reads as an oak and the
+# pine does not. ce_coa_saf_tree is used nowhere else in this mod; confirmed 3 colour slots
+# (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:20359, SAF_coa).
+OKP = {
+	pattern = "pattern_solid.tga"
+	color1 = "pearl"
+	color2 = "pearl"
+
+	colored_emblem = {
+		texture = "ce_coa_saf_tree.dds"
+		color1 = "brown"
+		color2 = "green_dark"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}

@@ -5,3 +5,8 @@
  # Board item #6373 phase A (2026-10-01): newly defined owner tags. BRK collides with vanilla countries_l_english.yml.
  BRK:0 "Brass Keep"
  BRK_ADJ:0 "Brass Keep"
+
+ # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms. GRW collides with vanilla countries_l_english.yml.
+ # GRW's name is provisional (Chris will redo it).
+ GRW:0 "Gryphon Wood"
+ GRW_ADJ:0 "Gryphon Wood"

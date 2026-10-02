@@ -574,3 +574,33 @@ XSG = {
 		instance = { position = { 0.5 0.55 } scale = { 0.9 0.9 } rotation = 350 }
 	}
 }
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): coat of arms for the wood-elf realm newly defined at the
+# end of common/country_definitions/05_southern_realms.txt. Wood-elf house style
+# (.claude/rules/heraldry.md); texture, pattern and colour-slot count confirmed against a real
+# vanilla (or this mod's own) usage, cited below. Matching flag_definitions block is in
+# common/flag_definitions/05_southern_realms.txt.
+################################################################################
+
+# MGL — Miramar Glade (provisional name; Chris will redo it). Disclosed invention: no device is
+# recorded, so a hunting falcon for the Asrai's hunt, brown on bone-white. Disclosed reuse:
+# ce_falcon.dds is 01_kislev.txt's ROP (black on green_dark), 03_brettonia.txt's PAR (azure on
+# pearl) and 04_karaz_ankor.txt's KRV (black on grey); MGL is a brown bird with golden beak and
+# talons on a bone_white field. Adjusted from the scoping suggestion (a crescent moon here, the
+# falcon for SOT): the crescents went to SOT, where twin crescents fit the twin Sisters.
+# Confirmed 3 colour slots (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:2562,
+# BIK; also ROP, PAR, KRV).
+MGL = {
+	pattern = "pattern_solid.tga"
+	color1 = "bone_white"
+	color2 = "bone_white"
+
+	colored_emblem = {
+		texture = "ce_falcon.dds"
+		color1 = "brown"
+		color2 = "golden"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}

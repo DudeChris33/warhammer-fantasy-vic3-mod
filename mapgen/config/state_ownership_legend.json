@@ -1364,8 +1364,7 @@
     24,
     12
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
   },
   "GLG": {
    "name": "Golgfag's Maneaters",
@@ -1384,8 +1383,7 @@
     42,
     36
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
   },
   "BGZ": {
    "name": "Blood Guzzlers",
@@ -1404,8 +1402,7 @@
     48,
     30
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
   },
   "RSK": {
    "name": "Rock Skulls",
@@ -1444,8 +1441,7 @@
     54,
     24
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
   },
   "FSM": {
    "name": "Feastmaster",
@@ -1948,104 +1944,94 @@
    "note": "proposed: no country definition yet (19_lustria family)"
   },
   "SOT": {
-   "name": "Sisters of Twilight (wood elves)",
+   "name": "Sisters of Twilight",
    "color": [
     168,
     228,
     132
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373). Wood-elf realm (wood_elf culture). Filed by the geography of the Forest of Sighs."
   },
   "GRW": {
-   "name": "Gryphon Wood (wood elves)",
+   "name": "Gryphon Wood",
    "color": [
     138,
     228,
     60
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/02_empire.txt (#6373). Wood-elf realm (wood_elf culture). Name provisional (Chris will revisit)."
   },
   "LAU": {
-   "name": "Laurelorn Forest (wood elves)",
+   "name": "Laurelorn",
    "color": [
     60,
     228,
     60
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/02_empire.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "OKP": {
-   "name": "Oak of Prophecy (wood elves)",
+   "name": "Oak of Prophecy",
    "color": [
     126,
     228,
     108
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "MGL": {
-   "name": "Miramar Hills (wood elves)",
+   "name": "Miramar Glade",
    "color": [
     186,
     216,
     150
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/05_southern_realms.txt (#6373). Wood-elf realm (wood_elf culture). Name provisional (Chris will revisit)."
   },
   "WYD": {
-   "name": "Wydrioth (Athel Loren)",
+   "name": "Wydrioth",
    "color": [
     156,
     228,
     192
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "ARG": {
-   "name": "Argwylon (Athel Loren)",
+   "name": "Argwylon",
    "color": [
     126,
     228,
     150
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "TLS": {
-   "name": "Talsyn (Athel Loren)",
+   "name": "Talsyn",
    "color": [
     168,
     228,
     96
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "ANM": {
-   "name": "Anmyr (Athel Loren)",
+   "name": "Anmyr",
    "color": [
     126,
     186,
     96
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "TRG": {
-   "name": "Torgovann (Athel Loren)",
+   "name": "Torgovann",
    "color": [
     72,
     228,
     96
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "KOR": {
    "name": "Kraka Ornsmotek",

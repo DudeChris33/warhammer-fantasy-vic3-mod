@@ -449,3 +449,51 @@ XSC = {
 		instance = { position = { 0.54 0.5 } scale = { 0.85 0.85 } rotation = 330 }
 	}
 }
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): coats of arms for the wood-elf realms newly defined at
+# the end of common/country_definitions/02_empire.txt (same order). Wood-elf house style
+# (.claude/rules/heraldry.md): autumn/forest palette, one nature or hunt charge, no crowns, crosses
+# or fleurs. Every texture, pattern and colour-slot count below is confirmed against a real vanilla
+# (or this mod's own) usage, cited per block. Matching flag_definitions blocks are in
+# common/flag_definitions/02_empire.txt.
+################################################################################
+
+# GRW — Gryphon Wood (provisional name; Chris will redo it). Name-derived, soft: the gryphon of
+# the wood it holds, dark green on saffron. Disclosed reuse: ce_griffon.dds is REI's (this file,
+# golden on a white/red bend), OSM's (golden on purple) and 05_southern_realms.txt's GAS (golden
+# on tan); GRW recolours it a green_dark beast on a saffron field. Confirmed 3 colour slots (REI
+# and OSM's usages, this file).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_griffon.dds), reuse grant 2026-09-07
+GRW = {
+	pattern = "pattern_solid.tga"
+	color1 = "saffron"
+	color2 = "saffron"
+
+	colored_emblem = {
+		texture = "ce_griffon.dds"
+		color1 = "green_dark"
+		color2 = "brown"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# LAU — Laurelorn. Soft: the unicorns of the elven forests, dark green on dark gold; the unicorn's
+# collar-and-chain detail (slot 2) is set to the body's tone so it reads as a free beast. Disclosed
+# reuse: ce_unicorn.dds is 03_brettonia.txt's QUE (white on green); LAU is a green_dark unicorn on
+# a yellow_dark field. Confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:16514, NEW_coa; also QUE).
+LAU = {
+	pattern = "pattern_solid.tga"
+	color1 = "yellow_dark"
+	color2 = "yellow_dark"
+
+	colored_emblem = {
+		texture = "ce_unicorn.dds"
+		color1 = "green_dark"
+		color2 = "green_dark"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}

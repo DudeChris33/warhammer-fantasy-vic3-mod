@@ -189,3 +189,23 @@ XSC = {
 		trigger = { always = yes }
 	}
 }
+
+# Board item #6373 phase B (2026-10-01): one unconditional priority = 100 block per newly
+# defined tag, same shape as the blocks above, so its bespoke COA in
+# common/coat_of_arms/coat_of_arms/02_empire.txt is not masked by the priority = 0 DEFAULT block.
+
+GRW = {
+	flag_definition = {
+		coa = GRW
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LAU = {
+	flag_definition = {
+		coa = LAU
+		priority = 100
+		trigger = { always = yes }
+	}
+}

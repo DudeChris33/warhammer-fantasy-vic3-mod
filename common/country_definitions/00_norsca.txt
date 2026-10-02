@@ -166,3 +166,24 @@ XSD = {
 	cultures = { goblin }
 	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
 }
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): a wood-elf realm painted in
+# mapgen/config/state_ownership.png that had no definition yet. COLOUR NOTE: as for the phase-A
+# blocks above, the colour is copied EXACTLY from mapgen/config/state_ownership_legend.json.
+# Wood-elf realms have no region file of their own; each is filed by the geography of its states.
+################################################################################
+
+################ SOT — Sisters of Twilight; the twin sisters' wood-elf realm ################
+# Canon-firm name: the twin sisters Naestra and Arahan. Filed here by geography: STATE_FOREST_OF_SIGHS
+# sits in map_data/state_regions/00_norsca.txt (strategic region region_norsca). wood_elf is a
+# cross-file culture ref to common/cultures/wood_elf.txt (#6379). unrecognized/principality, like
+# every wood-elf realm.
+
+SOT = {
+	color = { 168 228 132 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: Forest of Sighs — TODO once a capital STATE_* is assigned
+}

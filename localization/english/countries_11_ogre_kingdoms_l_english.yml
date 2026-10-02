@@ -1,7 +1,8 @@
 ﻿l_english:
  # Country display names and adjectives for the 11 Ogre Kingdoms tag roster (planning/tag_registry.md).
- # Loc-only registry parity: common/country_definitions/ for this region is deferred until
- # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
+ # One name key (the tag) + one adjective key (<TAG>_ADJ) per tag. IRN, MAW, EYB and THG are
+ # defined in common/country_definitions/11_ogre_kingdoms.txt (#6373, ogre culture from #6379);
+ # the other eight tribes stay loc-only until they are given states.
  # Board item #3420 (epic #3414).
  GGT:0 "Goldtooth"
  GGT_ADJ:0 "Goldtooth"

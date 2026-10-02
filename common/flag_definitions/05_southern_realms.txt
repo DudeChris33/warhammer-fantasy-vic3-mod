@@ -238,3 +238,15 @@ XSG = {
 		trigger = { always = yes }
 	}
 }
+
+# Board item #6373 phase B (2026-10-01): one unconditional priority = 100 block per newly
+# defined tag, same shape as the blocks above, so its bespoke COA in
+# common/coat_of_arms/coat_of_arms/05_southern_realms.txt is not masked by the priority = 0 DEFAULT block.
+
+MGL = {
+	flag_definition = {
+		coa = MGL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
