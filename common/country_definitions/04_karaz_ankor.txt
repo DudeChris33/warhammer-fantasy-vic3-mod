@@ -276,7 +276,7 @@ VMP = {
 	# capital: — none recorded; TODO once land state-regions exist
 }
 
-################ XSH — Skaven Clan F (placeholder); STATE_LAND_526 ################
+################ XSH — Skaven Clan F (placeholder); STATE_WINTERTEETH_FOOTHILLS ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
@@ -293,7 +293,7 @@ XSH = {
 	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
 }
 
-################ XSI — Skaven Clan G (placeholder); STATE_LAND_587 ################
+################ XSI — Skaven Clan G (placeholder); STATE_GRISTLE_VALLEY ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
@@ -310,7 +310,7 @@ XSI = {
 	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
 }
 
-################ XSJ — Skaven Clan H (placeholder); STATE_LAND_506 ################
+################ XSJ — Skaven Clan H (placeholder); STATE_FESTER_SPIKE ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen

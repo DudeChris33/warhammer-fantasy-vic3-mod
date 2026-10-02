@@ -185,78 +185,6 @@ BUILDINGS = {
 			}
 		}
 	}
-	s:STATE_LAND_608 = {
-		region_state:KAS = {
-			create_building = {
-				building = "building_government_administration"
-				add_ownership = {
-					country = {
-						country = "c:KAS"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
-			}
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:KAS"
-						levels = 4
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_construction_sector"
-				add_ownership = {
-					country = {
-						country = "c:KAS"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_wooden_buildings" }
-			}
-			create_building = {
-				building = "building_port"
-				add_ownership = {
-					country = {
-						country = "c:KAS"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_anchorage" }
-			}
-			create_building = {
-				building = "building_trade_center"
-				add_ownership = {
-					country = {
-						country = "c:KAS"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:KAS"
-						levels = 1
-						region = "STATE_LAND_608"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-		}
-	}
 	s:STATE_ROAD_OF_KINGS = {
 		region_state:RAS = {
 			create_building = {
@@ -341,6 +269,78 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_SPHINX_OF_PHAA = {
+		region_state:KAS = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:KAS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:KAS"
+						levels = 4
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_construction_sector"
+				add_ownership = {
+					country = {
+						country = "c:KAS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:KAS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
+			}
+			create_building = {
+				building = "building_trade_center"
+				add_ownership = {
+					country = {
+						country = "c:KAS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:KAS"
+						levels = 1
+						region = "STATE_SPHINX_OF_PHAA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
 			}
 		}
 	}

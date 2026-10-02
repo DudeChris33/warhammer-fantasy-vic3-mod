@@ -4,4 +4,8 @@ POPULATION = {
 		effect_starting_pop_wealth_high = yes
 		effect_starting_pop_literacy_high = yes
 	}
+	c:UNO ?= {
+		effect_starting_pop_wealth_low = yes
+		effect_starting_pop_literacy_baseline = yes
+	}
 }

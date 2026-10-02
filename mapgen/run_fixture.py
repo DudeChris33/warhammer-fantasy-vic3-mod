@@ -5392,7 +5392,8 @@ def run_check() -> int:
           "held-back tags, unmapped tier, CRLF compare, hand-broken history refusals) self-check passed.")
     _selfcheck_pop_history()
     print("pop_history: pops/population emission (split state, skipped owner + culture, religion override, "
-          "exact-sum rounding, dropped small pop, hard errors) self-check passed.")
+          "exact-sum rounding, dropped small pop, UNO's fixed unclaimed pop, created pair without pops, "
+          "hard errors) self-check passed.")
     _selfcheck_building_history()
     print("building_history: tech-gated building emission (railway without the tech refused, locked method "
           "never chosen, unresolved tech set -> tech-free only, resource/anchor/id/job-cap errors, "

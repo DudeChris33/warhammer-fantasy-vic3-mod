@@ -30,6 +30,296 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_AVERHEIM = {
+		region_state:AVE = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:AVE"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_construction_sector"
+				add_ownership = {
+					country = {
+						country = "c:AVE"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_trade_center"
+				add_ownership = {
+					country = {
+						country = "c:AVE"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:AVE"
+						levels = 4
+						region = "STATE_AVERHEIM"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:AVE"
+						levels = 4
+						region = "STATE_AVERHEIM"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:AVE"
+						levels = 5
+						region = "STATE_AVERHEIM"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_BECHAFEN = {
+		region_state:OSM = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:OSM"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_construction_sector"
+				add_ownership = {
+					country = {
+						country = "c:OSM"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:OSM"
+						levels = 3
+						region = "STATE_BECHAFEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:OSM"
+						levels = 3
+						region = "STATE_BECHAFEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:OSM"
+						levels = 6
+						region = "STATE_BECHAFEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_BLEEDING_STONE = {
+		region_state:LAU = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:LAU"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:LAU"
+						levels = 1
+						region = "STATE_BLEEDING_STONE"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:LAU"
+						levels = 1
+						region = "STATE_BLEEDING_STONE"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+		}
+	}
+	s:STATE_BOHSENFELS = {
+		region_state:OST = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:OST"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:OST"
+						levels = 3
+						region = "STATE_BOHSENFELS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:OST"
+						levels = 3
+						region = "STATE_BOHSENFELS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:OST"
+						levels = 5
+						region = "STATE_BOHSENFELS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_DRAKENHOF = {
+		region_state:VSY = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:VSY"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:VSY"
+						levels = 2
+						region = "STATE_DRAKENHOF"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:VSY"
+						levels = 2
+						region = "STATE_DRAKENHOF"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:VSY"
+						levels = 4
+						region = "STATE_DRAKENHOF"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
 	s:STATE_DRAKWALD_FOREST = {
 		region_state:CRB = {
 			create_building = {
@@ -417,6 +707,47 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_GLIMDWARROW = {
+		region_state:XSB = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:XSB"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:XSB"
+						levels = 1
+						region = "STATE_GLIMDWARROW"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:XSB"
+						levels = 1
+						region = "STATE_GLIMDWARROW"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
 	s:STATE_GRYPHON_WOOD = {
 		region_state:GRW = {
 			create_building = {
@@ -521,64 +852,42 @@ BUILDINGS = {
 			}
 		}
 	}
-	s:STATE_LAND_308 = {
-		region_state:OSM = {
+	s:STATE_KREUTZHOFEN = {
+		region_state:WIS = {
 			create_building = {
-				building = "building_barrack"
+				building = "building_wheat_farm"
 				add_ownership = {
-					country = {
-						country = "c:OSM"
+					building = {
+						type = "building_manor_house"
+						country = "c:WIS"
+						levels = 4
+						region = "STATE_KREUTZHOFEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:WIS"
+						levels = 4
+						region = "STATE_KREUTZHOFEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:WIS"
 						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_construction_sector"
-				add_ownership = {
-					country = {
-						country = "c:OSM"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_wooden_buildings" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:OSM"
-						levels = 3
-						region = "STATE_LAND_308"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:OSM"
-						levels = 3
-						region = "STATE_LAND_308"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:OSM"
-						levels = 6
-						region = "STATE_LAND_308"
+						region = "STATE_KREUTZHOFEN"
 					}
 				}
 				reserves = 1
@@ -586,297 +895,7 @@ BUILDINGS = {
 			}
 		}
 	}
-	s:STATE_LAND_317 = {
-		region_state:AVE = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:AVE"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_construction_sector"
-				add_ownership = {
-					country = {
-						country = "c:AVE"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_wooden_buildings" }
-			}
-			create_building = {
-				building = "building_trade_center"
-				add_ownership = {
-					country = {
-						country = "c:AVE"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:AVE"
-						levels = 4
-						region = "STATE_LAND_317"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:AVE"
-						levels = 4
-						region = "STATE_LAND_317"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:AVE"
-						levels = 5
-						region = "STATE_LAND_317"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_322 = {
-		region_state:TAL = {
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:TAL"
-						levels = 4
-						region = "STATE_LAND_322"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:TAL"
-						levels = 4
-						region = "STATE_LAND_322"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:TAL"
-						levels = 4
-						region = "STATE_LAND_322"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_331 = {
-		region_state:OST = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:OST"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:OST"
-						levels = 3
-						region = "STATE_LAND_331"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:OST"
-						levels = 3
-						region = "STATE_LAND_331"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:OST"
-						levels = 5
-						region = "STATE_LAND_331"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_334 = {
-		region_state:MID = {
-			create_building = {
-				building = "building_government_administration"
-				add_ownership = {
-					country = {
-						country = "c:MID"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
-			}
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:MID"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_construction_sector"
-				add_ownership = {
-					country = {
-						country = "c:MID"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_wooden_buildings" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:MID"
-						levels = 4
-						region = "STATE_LAND_334"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:MID"
-						levels = 4
-						region = "STATE_LAND_334"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:MID"
-						levels = 5
-						region = "STATE_LAND_334"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_370 = {
-		region_state:LAU = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:LAU"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:LAU"
-						levels = 1
-						region = "STATE_LAND_370"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:LAU"
-						levels = 1
-						region = "STATE_LAND_370"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-		}
-	}
-	s:STATE_LAND_376 = {
+	s:STATE_KRUGENHEIM = {
 		region_state:XSA = {
 			create_building = {
 				building = "building_barrack"
@@ -896,7 +915,7 @@ BUILDINGS = {
 						type = "building_manor_house"
 						country = "c:XSA"
 						levels = 1
-						region = "STATE_LAND_376"
+						region = "STATE_KRUGENHEIM"
 					}
 				}
 				reserves = 1
@@ -909,199 +928,7 @@ BUILDINGS = {
 						type = "building_manor_house"
 						country = "c:XSA"
 						levels = 1
-						region = "STATE_LAND_376"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_485 = {
-		region_state:XSB = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:XSB"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSB"
-						levels = 1
-						region = "STATE_LAND_485"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSB"
-						levels = 1
-						region = "STATE_LAND_485"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_537 = {
-		region_state:VSY = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:VSY"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:VSY"
-						levels = 2
-						region = "STATE_LAND_537"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:VSY"
-						levels = 2
-						region = "STATE_LAND_537"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:VSY"
-						levels = 4
-						region = "STATE_LAND_537"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_541 = {
-		region_state:STI = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:STI"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:STI"
-						levels = 3
-						region = "STATE_LAND_541"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:STI"
-						levels = 3
-						region = "STATE_LAND_541"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:STI"
-						levels = 6
-						region = "STATE_LAND_541"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_579 = {
-		region_state:WIS = {
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:WIS"
-						levels = 4
-						region = "STATE_LAND_579"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:WIS"
-						levels = 4
-						region = "STATE_LAND_579"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:WIS"
-						levels = 2
-						region = "STATE_LAND_579"
+						region = "STATE_KRUGENHEIM"
 					}
 				}
 				reserves = 1
@@ -1178,6 +1005,82 @@ BUILDINGS = {
 						country = "c:MAR"
 						levels = 2
 						region = "STATE_MARIENBURG"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_MIDDENHEIM = {
+		region_state:MID = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:MID"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:MID"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_construction_sector"
+				add_ownership = {
+					country = {
+						country = "c:MID"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:MID"
+						levels = 4
+						region = "STATE_MIDDENHEIM"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:MID"
+						levels = 4
+						region = "STATE_MIDDENHEIM"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:MID"
+						levels = 5
+						region = "STATE_MIDDENHEIM"
 					}
 				}
 				reserves = 1
@@ -1925,6 +1828,49 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_VOLGEN = {
+		region_state:TAL = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:TAL"
+						levels = 4
+						region = "STATE_VOLGEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:TAL"
+						levels = 4
+						region = "STATE_VOLGEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:TAL"
+						levels = 4
+						region = "STATE_VOLGEN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
 	s:STATE_VORBERGLAND = {
 		region_state:REI = {
 			create_building = {
@@ -2468,6 +2414,60 @@ BUILDINGS = {
 						country = "c:WIS"
 						levels = 5
 						region = "STATE_WISSENLAND"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_WURTBAD = {
+		region_state:STI = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:STI"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:STI"
+						levels = 3
+						region = "STATE_WURTBAD"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:STI"
+						levels = 3
+						region = "STATE_WURTBAD"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:STI"
+						levels = 6
+						region = "STATE_WURTBAD"
 					}
 				}
 				reserves = 1

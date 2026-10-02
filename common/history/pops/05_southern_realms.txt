@@ -6,6 +6,11 @@ POPS = {
 			create_pop = { culture = estalian size = 22500 }
 		}
 	}
+	s:STATE_BILIOUS_BASILICA = {
+		region_state:XSG = {
+			create_pop = { culture = goblin size = 24271 }
+		}
+	}
 	s:STATE_BLACK_PENINSULA = {
 		region_state:MON = {
 			create_pop = { culture = border_princer size = 106250 }
@@ -53,69 +58,19 @@ POPS = {
 			create_pop = { culture = estalian size = 52312 }
 		}
 	}
-	s:STATE_KHARNOS_FOREST = {
-		region_state:BPR = {
-			create_pop = { culture = border_princer size = 125000 }
-		}
-	}
-	s:STATE_LAND_080 = {
-		region_state:CNT = {
-			create_pop = { culture = estalian size = 221555 }
-		}
-	}
-	s:STATE_LAND_102 = {
-		region_state:REM = {
-			create_pop = { culture = tilean size = 450000 }
-		}
-	}
-	s:STATE_LAND_223 = {
-		region_state:ORT = {
-			create_pop = { culture = border_princer size = 125000 }
-		}
-	}
-	s:STATE_LAND_372 = {
-		region_state:XSG = {
-			create_pop = { culture = goblin size = 24271 }
-		}
-	}
-	s:STATE_LAND_382 = {
-		region_state:TOB = {
-			create_pop = { culture = tilean size = 266163 }
-		}
-	}
-	s:STATE_LAND_496 = {
-		region_state:CNT = {
-			create_pop = { culture = estalian size = 258264 }
-		}
-	}
-	s:STATE_LAND_497 = {
-		region_state:CNT = {
-			create_pop = { culture = estalian size = 84521 }
-		}
-	}
-	s:STATE_LAND_498 = {
-		region_state:BIL = {
-			create_pop = { culture = estalian size = 144311 }
-		}
-	}
-	s:STATE_LAND_499 = {
-		region_state:TOB = {
-			create_pop = { culture = tilean size = 94206 }
-		}
-	}
-	s:STATE_LAND_509 = {
-		region_state:LUC = {
-			create_pop = { culture = tilean size = 119788 }
-		}
-	}
-	s:STATE_LAND_586 = {
+	s:STATE_GASTONNE = {
 		region_state:GAS = {
 			create_pop = { culture = border_princer size = 100000 }
 		}
 	}
-	s:STATE_LAND_602 = {
+	s:STATE_GEULATA = {
 		region_state:TOB = {
-			create_pop = { culture = tilean size = 189631 }
+			create_pop = { culture = tilean size = 94206 }
+		}
+	}
+	s:STATE_KHARNOS_FOREST = {
+		region_state:BPR = {
+			create_pop = { culture = border_princer size = 125000 }
 		}
 	}
 	s:STATE_LOST_KHYPNIA = {
@@ -149,9 +104,29 @@ POPS = {
 			create_pop = { culture = tilean size = 750000 }
 		}
 	}
+	s:STATE_NUJA = {
+		region_state:CNT = {
+			create_pop = { culture = estalian size = 221555 }
+		}
+	}
+	s:STATE_ORTEGETA = {
+		region_state:ORT = {
+			create_pop = { culture = border_princer size = 125000 }
+		}
+	}
+	s:STATE_PINA_WOOD = {
+		region_state:CNT = {
+			create_pop = { culture = estalian size = 84521 }
+		}
+	}
 	s:STATE_PLAINS_OF_LUCCINI = {
 		region_state:LUC = {
 			create_pop = { culture = tilean size = 330212 }
+		}
+	}
+	s:STATE_REMAS = {
+		region_state:REM = {
+			create_pop = { culture = tilean size = 450000 }
 		}
 	}
 	s:STATE_SARTOSA = {
@@ -164,6 +139,26 @@ POPS = {
 			create_pop = { culture = estalian size = 179018 }
 		}
 	}
+	s:STATE_SOUTHERN_SIREN_ISLES = {
+		region_state:TOB = {
+			create_pop = { culture = tilean size = 266163 }
+		}
+	}
+	s:STATE_SOUTH_BILBALI = {
+		region_state:BIL = {
+			create_pop = { culture = estalian size = 144311 }
+		}
+	}
+	s:STATE_SUSSURRIO_WOOD = {
+		region_state:LUC = {
+			create_pop = { culture = tilean size = 119788 }
+		}
+	}
+	s:STATE_TOBARO = {
+		region_state:TOB = {
+			create_pop = { culture = tilean size = 189631 }
+		}
+	}
 	s:STATE_TRANTINE_HILLS = {
 		region_state:TRA = {
 			create_pop = { culture = tilean size = 400000 }
@@ -172,6 +167,11 @@ POPS = {
 	s:STATE_VEREZZI = {
 		region_state:VER = {
 			create_pop = { culture = tilean size = 350000 }
+		}
+	}
+	s:STATE_WESTERN_ESTALIAN_COAST = {
+		region_state:CNT = {
+			create_pop = { culture = estalian size = 258264 }
 		}
 	}
 	s:STATE_WESTERN_IRRANAS = {

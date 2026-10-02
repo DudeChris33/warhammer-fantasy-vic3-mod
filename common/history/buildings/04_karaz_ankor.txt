@@ -489,6 +489,47 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_FESTER_SPIKE = {
+		region_state:XSJ = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:XSJ"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:XSJ"
+						levels = 1
+						region = "STATE_FESTER_SPIKE"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:XSJ"
+						levels = 1
+						region = "STATE_FESTER_SPIKE"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
 	s:STATE_FOREST_OF_GLOOM = {
 		region_state:HKN = {
 			create_building = {
@@ -569,6 +610,34 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_GRISTLE_VALLEY = {
+		region_state:XSI = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:XSI"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:XSI"
+						levels = 1
+						region = "STATE_GRISTLE_VALLEY"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+		}
+	}
 	s:STATE_GROM_RIDGE = {
 		region_state:IRN = {
 			create_building = {
@@ -607,6 +676,53 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_HELMGART = {
+		region_state:REI = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:REI"
+						levels = 4
+						region = "STATE_HELMGART"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+		}
+	}
+	s:STATE_HOUSE_OF_EVERLASTING_LIFE = {
+		region_state:LAH = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:LAH"
+						levels = 3
+						region = "STATE_HOUSE_OF_EVERLASTING_LIFE"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:LAH"
+						levels = 2
+						region = "STATE_HOUSE_OF_EVERLASTING_LIFE"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
 			}
 		}
 	}
@@ -673,6 +789,92 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_KARAGRIL = {
+		region_state:KEP = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:KEP"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:KEP"
+						levels = 1
+						region = "STATE_KARAGRIL"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+		}
+	}
+	s:STATE_KARAG_NAR = {
+		region_state:KEP = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:KEP"
+						levels = 1
+						region = "STATE_KARAG_NAR"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+		}
+	}
+	s:STATE_KARAG_ZIFLIN = {
+		region_state:CRM = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:CRM"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:CRM"
+						levels = 1
+						region = "STATE_KARAG_ZIFLIN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:CRM"
+						levels = 1
+						region = "STATE_KARAG_ZIFLIN"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
 	s:STATE_KARAK_EIGHT_PEAKS = {
 		region_state:CRM = {
 			create_building = {
@@ -690,318 +892,7 @@ BUILDINGS = {
 			}
 		}
 	}
-	s:STATE_LAND_201 = {
-		region_state:CRM = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:CRM"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:CRM"
-						levels = 1
-						region = "STATE_LAND_201"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:CRM"
-						levels = 1
-						region = "STATE_LAND_201"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_487 = {
-		region_state:REI = {
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:REI"
-						levels = 4
-						region = "STATE_LAND_487"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-		}
-	}
-	s:STATE_LAND_506 = {
-		region_state:XSJ = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:XSJ"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSJ"
-						levels = 1
-						region = "STATE_LAND_506"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSJ"
-						levels = 1
-						region = "STATE_LAND_506"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_522 = {
-		region_state:KEP = {
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:KEP"
-						levels = 1
-						region = "STATE_LAND_522"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-		}
-	}
-	s:STATE_LAND_526 = {
-		region_state:XSH = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:XSH"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSH"
-						levels = 1
-						region = "STATE_LAND_526"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSH"
-						levels = 1
-						region = "STATE_LAND_526"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_527 = {
-		region_state:KEP = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:KEP"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:KEP"
-						levels = 1
-						region = "STATE_LAND_527"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-		}
-	}
-	s:STATE_LAND_587 = {
-		region_state:XSI = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:XSI"
-						levels = 2
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSI"
-						levels = 1
-						region = "STATE_LAND_587"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-		}
-	}
-	s:STATE_LAND_603 = {
-		region_state:ZND = {
-			create_building = {
-				building = "building_government_administration"
-				add_ownership = {
-					country = {
-						country = "c:ZND"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
-			}
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:ZND"
-						levels = 4
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_construction_sector"
-				add_ownership = {
-					country = {
-						country = "c:ZND"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_wooden_buildings" }
-			}
-			create_building = {
-				building = "building_port"
-				add_ownership = {
-					country = {
-						country = "c:ZND"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_anchorage" }
-			}
-			create_building = {
-				building = "building_trade_center"
-				add_ownership = {
-					country = {
-						country = "c:ZND"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:ZND"
-						levels = 3
-						region = "STATE_LAND_603"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:ZND"
-						levels = 2
-						region = "STATE_LAND_603"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:ZND"
-						levels = 1
-						region = "STATE_LAND_603"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
-			}
-		}
-	}
-	s:STATE_LAND_604 = {
+	s:STATE_LAHMIA = {
 		region_state:LAH = {
 			create_building = {
 				building = "building_barrack"
@@ -1043,7 +934,7 @@ BUILDINGS = {
 						type = "building_manor_house"
 						country = "c:LAH"
 						levels = 3
-						region = "STATE_LAND_604"
+						region = "STATE_LAHMIA"
 					}
 				}
 				reserves = 1
@@ -1056,139 +947,11 @@ BUILDINGS = {
 						type = "building_manor_house"
 						country = "c:LAH"
 						levels = 2
-						region = "STATE_LAND_604"
+						region = "STATE_LAHMIA"
 					}
 				}
 				reserves = 1
 				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-		}
-	}
-	s:STATE_LAND_605 = {
-		region_state:LAH = {
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:LAH"
-						levels = 3
-						region = "STATE_LAND_605"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:LAH"
-						levels = 2
-						region = "STATE_LAND_605"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-		}
-	}
-	s:STATE_LAND_606 = {
-		region_state:LYB = {
-			create_building = {
-				building = "building_government_administration"
-				add_ownership = {
-					country = {
-						country = "c:LYB"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
-			}
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:LYB"
-						levels = 4
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_construction_sector"
-				add_ownership = {
-					country = {
-						country = "c:LYB"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_wooden_buildings" }
-			}
-			create_building = {
-				building = "building_port"
-				add_ownership = {
-					country = {
-						country = "c:LYB"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_anchorage" }
-			}
-			create_building = {
-				building = "building_trade_center"
-				add_ownership = {
-					country = {
-						country = "c:LYB"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:LYB"
-						levels = 3
-						region = "STATE_LAND_606"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:LYB"
-						levels = 2
-						region = "STATE_LAND_606"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
-			}
-			create_building = {
-				building = "building_logging_camp"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:LYB"
-						levels = 1
-						region = "STATE_LAND_606"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -1529,6 +1292,104 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_SHANIDAAR = {
+		region_state:ZND = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:ZND"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:ZND"
+						levels = 4
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_construction_sector"
+				add_ownership = {
+					country = {
+						country = "c:ZND"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:ZND"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
+			}
+			create_building = {
+				building = "building_trade_center"
+				add_ownership = {
+					country = {
+						country = "c:ZND"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:ZND"
+						levels = 3
+						region = "STATE_SHANIDAAR"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:ZND"
+						levels = 2
+						region = "STATE_SHANIDAAR"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:ZND"
+						levels = 1
+						region = "STATE_SHANIDAAR"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
 	s:STATE_SHATTERED_TEETH = {
 		region_state:KIZ = {
 			create_building = {
@@ -1606,6 +1467,104 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+		}
+	}
+	s:STATE_SIX_WATCH_FORTS = {
+		region_state:LYB = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:LYB"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:LYB"
+						levels = 4
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_construction_sector"
+				add_ownership = {
+					country = {
+						country = "c:LYB"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:LYB"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
+			}
+			create_building = {
+				building = "building_trade_center"
+				add_ownership = {
+					country = {
+						country = "c:LYB"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:LYB"
+						levels = 3
+						region = "STATE_SIX_WATCH_FORTS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_livestock_ranch"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:LYB"
+						levels = 2
+						region = "STATE_SIX_WATCH_FORTS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:LYB"
+						levels = 1
+						region = "STATE_SIX_WATCH_FORTS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -1848,6 +1807,47 @@ BUILDINGS = {
 						country = "c:RFG"
 						levels = 1
 						region = "STATE_WEST_MAD_DOG_PASS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
+	s:STATE_WINTERTEETH_FOOTHILLS = {
+		region_state:XSH = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:XSH"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:XSH"
+						levels = 1
+						region = "STATE_WINTERTEETH_FOOTHILLS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:XSH"
+						levels = 1
+						region = "STATE_WINTERTEETH_FOOTHILLS"
 					}
 				}
 				reserves = 1

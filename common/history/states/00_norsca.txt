@@ -8,6 +8,14 @@ STATES = {
 
 		add_homeland = cu:norscan
 	}
+	s:STATE_BJORNLING_S_GATHERING = {
+		create_state = {
+			country = c:BJO
+			owned_provinces = { x67AA7E x7DF3EB x9FFD43 xAD67B6 xB7B03E xE9D6A8 xFC1690 }
+		}
+
+		add_homeland = cu:norscan
+	}
 	s:STATE_BLACK_BLOOD_PASS = {
 		create_state = {
 			country = c:KRV
@@ -15,6 +23,22 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi_norse
+	}
+	s:STATE_BRENNUN_S_ENCAMPMENT = {
+		create_state = {
+			country = c:HAS
+			owned_provinces = { x16B851 x1C2B64 x2A6F9C x2FE2AF x5E0D69 x66DE8E x8366FE x8C09D1 x8C3823 x9A4E09 xC8A715 xEBBD57 xEE00AA }
+		}
+
+		add_homeland = cu:norscan
+	}
+	s:STATE_CLAWMARKET = {
+		create_state = {
+			country = c:XSD
+			owned_provinces = { x04E7B5 xEA53C9 }
+		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_CLAW_COAST = {
 		create_state = {
@@ -44,6 +68,22 @@ STATES = {
 		create_state = {
 			country = c:GRA
 			owned_provinces = { x0B550A x1058D1 x199942 x30AE9F x32C3A0 x560834 x56E1F9 x61BA4A x7B61C9 x917CE4 x927726 xA04C12 xA7A5D4 xB076F9 xB7D0BB xDD2A50 xE57E54 }
+		}
+
+		add_homeland = cu:norscan
+	}
+	s:STATE_FLESHWARREN = {
+		create_state = {
+			country = c:XSD
+			owned_provinces = { x3DD818 x909077 x9FA09F xAC3A4F }
+		}
+
+		add_homeland = cu:goblin
+	}
+	s:STATE_FOREST_OF_KNIVES = {
+		create_state = {
+			country = c:SAR
+			owned_provinces = { x1F8976 x34D8A1 xBDC0EF xE31A84 }
 		}
 
 		add_homeland = cu:norscan
@@ -88,10 +128,26 @@ STATES = {
 
 		add_homeland = cu:norscan
 	}
+	s:STATE_GOROMADNY_HOLD = {
+		create_state = {
+			country = c:VOL
+			owned_provinces = { x096E5B x4F7A62 x7DA51C xA2FEB1 xD1296B }
+		}
+
+		add_homeland = cu:gospodar
+	}
 	s:STATE_HELL_PIT = {
 		create_state = {
 			country = c:XSD
 			owned_provinces = { xAAD594 xC382D1 xC4FA34 }
+		}
+
+		add_homeland = cu:goblin
+	}
+	s:STATE_HELL_PIT_DEPTHS = {
+		create_state = {
+			country = c:XSD
+			owned_provinces = { xA80278 xB6B5FC xDC0F91 }
 		}
 
 		add_homeland = cu:goblin
@@ -120,6 +176,14 @@ STATES = {
 
 		add_homeland = cu:dawi
 	}
+	s:STATE_KRAKA_DRAK = {
+		create_state = {
+			country = c:KRD
+			owned_provinces = { x051607 x3340C1 x4A561E x6A3CA0 x8F9635 xA6AB92 xC2E533 xDA495F xF15EBC }
+		}
+
+		add_homeland = cu:dawi_norse
+	}
 	s:STATE_KRAKEN_COAST = {
 		create_state = {
 			country = c:AES
@@ -128,114 +192,18 @@ STATES = {
 
 		add_homeland = cu:norscan
 	}
-	s:STATE_LAND_346 = {
-		create_state = {
-			country = c:VOL
-			owned_provinces = { x096E5B x4F7A62 x7DA51C xA2FEB1 xD1296B }
-		}
-
-		add_homeland = cu:gospodar
-	}
-	s:STATE_LAND_347 = {
-		create_state = {
-			country = c:XSD
-			owned_provinces = { x3DD818 x909077 x9FA09F xAC3A4F }
-		}
-
-		add_homeland = cu:goblin
-	}
-	s:STATE_LAND_377 = {
-		create_state = {
-			country = c:XSD
-			owned_provinces = { xA80278 xB6B5FC xDC0F91 }
-		}
-
-		add_homeland = cu:goblin
-	}
-	s:STATE_LAND_476 = {
-		create_state = {
-			country = c:BJO
-			owned_provinces = { x67AA7E x7DF3EB x9FFD43 xAD67B6 xB7B03E xE9D6A8 xFC1690 }
-		}
-
-		add_homeland = cu:norscan
-	}
-	s:STATE_LAND_478 = {
-		create_state = {
-			country = c:BAE
-			owned_provinces = { x059328 x2954DD x33BDE2 x406A3A x42021A x702CD4 x794CC8 x7E710C xAC9BC6 xD1F55B xE03993 }
-		}
-
-		add_homeland = cu:norscan
-	}
-	s:STATE_LAND_550 = {
-		create_state = {
-			country = c:XSD
-			owned_provinces = { x04E7B5 xEA53C9 }
-		}
-
-		add_homeland = cu:goblin
-	}
-	s:STATE_LAND_551 = {
-		create_state = {
-			country = c:KVE
-			owned_provinces = { x1F5B24 x27DD7A x3621B2 x41362A x4D370F x644C6C x89A601 x97EA39 xBD43CE xD4592B xE2CBB5 xEB6E88 }
-		}
-
-		add_homeland = cu:norscan
-	}
-	s:STATE_LAND_552 = {
-		create_state = {
-			country = c:KRD
-			owned_provinces = { x051607 x3340C1 x4A561E x6A3CA0 x8F9635 xA6AB92 xC2E533 xDA495F xF15EBC }
-		}
-
-		add_homeland = cu:dawi_norse
-	}
-	s:STATE_LAND_553 = {
-		create_state = {
-			country = c:HAS
-			owned_provinces = { x16B851 x1C2B64 x2A6F9C x2FE2AF x5E0D69 x66DE8E x8366FE x8C09D1 x8C3823 x9A4E09 xC8A715 xEBBD57 xEE00AA }
-		}
-
-		add_homeland = cu:norscan
-	}
-	s:STATE_LAND_554 = {
-		create_state = {
-			country = c:HAS
-			owned_provinces = { x128E4F x57CE66 x6EE3C3 x6FAFB3 x9E85E0 xA7F4A3 xAC1EA5 xB996ED xC8B4EA }
-		}
-
-		add_homeland = cu:norscan
-	}
-	s:STATE_LAND_555 = {
-		create_state = {
-			country = c:SAR
-			owned_provinces = { x1F8976 x34D8A1 xBDC0EF xE31A84 }
-		}
-
-		add_homeland = cu:norscan
-	}
-	s:STATE_LAND_556 = {
-		create_state = {
-			country = c:SKA
-			owned_provinces = { x2E999E x45AEFB x60EE5A x668FBF x6C234F x879100 x906225 x98B629 xA41970 xA77782 xC97305 xCE1A28 xD2442A xEAA298 xF79DBF }
-		}
-
-		add_homeland = cu:norscan
-	}
-	s:STATE_LAND_563 = {
-		create_state = {
-			country = c:VAR
-			owned_provinces = { x019778 x175EF1 x3DF895 x53CDE3 x5A3236 x7F8BCB x8BE954 x96A128 xBBFABD xD3101A xE15452 xF2055C xFC2465 }
-		}
-
-		add_homeland = cu:norscan
-	}
 	s:STATE_MERMEDUS_COAST = {
 		create_state = {
 			country = c:SNA
 			owned_provinces = { x1B10A5 x591777 x6AB9C1 xA3CAA1 xB56CEB xCC8248 xD85008 xDAC680 xE67896 xEF6565 xF1DBDD xF4BCCE }
+		}
+
+		add_homeland = cu:norscan
+	}
+	s:STATE_MONOLITH_OF_INGVAR = {
+		create_state = {
+			country = c:SKA
+			owned_provinces = { x2E999E x45AEFB x60EE5A x668FBF x6C234F x879100 x906225 x98B629 xA41970 xA77782 xC97305 xCE1A28 xD2442A xEAA298 xF79DBF }
 		}
 
 		add_homeland = cu:norscan
@@ -288,10 +256,26 @@ STATES = {
 
 		add_homeland = cu:norscan
 	}
+	s:STATE_STROVENGAARD = {
+		create_state = {
+			country = c:BAE
+			owned_provinces = { x059328 x2954DD x33BDE2 x406A3A x42021A x702CD4 x794CC8 x7E710C xAC9BC6 xD1F55B xE03993 }
+		}
+
+		add_homeland = cu:norscan
+	}
 	s:STATE_TALDURSFJORD = {
 		create_state = {
 			country = c:KVE
 			owned_provinces = { x072B08 x1BDC95 x1E4065 x2B3B8C x2C849D x4399FA x5AAF57 x8008EC x971E49 xBC77DE xCABC16 xE1D173 xF015AB xF8E6D0 }
+		}
+
+		add_homeland = cu:norscan
+	}
+	s:STATE_THORSHAFN = {
+		create_state = {
+			country = c:HAS
+			owned_provinces = { x128E4F x57CE66 x6EE3C3 x6FAFB3 x9E85E0 xA7F4A3 xAC1EA5 xB996ED xC8B4EA }
 		}
 
 		add_homeland = cu:norscan
@@ -324,6 +308,22 @@ STATES = {
 		create_state = {
 			country = c:BAE
 			owned_provinces = { x023516 x4CE840 x577F97 x7241D5 x895732 xBD7220 xD40A5C xDCDB81 xE04768 }
+		}
+
+		add_homeland = cu:norscan
+	}
+	s:STATE_VARG_CAMP = {
+		create_state = {
+			country = c:VAR
+			owned_provinces = { x019778 x175EF1 x3DF895 x53CDE3 x5A3236 x7F8BCB x8BE954 x96A128 xBBFABD xD3101A xE15452 xF2055C xFC2465 }
+		}
+
+		add_homeland = cu:norscan
+	}
+	s:STATE_VIDARHEIM = {
+		create_state = {
+			country = c:KVE
+			owned_provinces = { x1F5B24 x27DD7A x3621B2 x41362A x4D370F x644C6C x89A601 x97EA39 xBD43CE xD4592B xE2CBB5 xEB6E88 }
 		}
 
 		add_homeland = cu:norscan

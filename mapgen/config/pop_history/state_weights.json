@@ -9,9 +9,21 @@
     "Karaz-a-Karak"
    ]
   },
+  "STATE_AGRIL_MIGDHAL": {
+   "area_px": 3273,
+   "arable_milli": 1053090,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_ALD_GRUNGAZ": {
    "area_px": 1403,
    "arable_milli": 147814,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_AMBER_SKULL": {
+   "area_px": 2859,
+   "arable_milli": 62853,
    "cities": 1,
    "canon_cities": []
   },
@@ -69,6 +81,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_AVERHEIM": {
+   "area_px": 2767,
+   "arable_milli": 2256078,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_AXE_BITE_PASS": {
    "area_px": 1617,
    "arable_milli": 384882,
@@ -93,9 +111,27 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_BECHAFEN": {
+   "area_px": 5002,
+   "arable_milli": 1650170,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_BELYEROVOTA": {
    "area_px": 5198,
    "arable_milli": 402200,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_BILIOUS_BASILICA": {
+   "area_px": 1411,
+   "arable_milli": 106314,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_BJORNLING_S_GATHERING": {
+   "area_px": 2211,
+   "arable_milli": 446673,
    "cities": 1,
    "canon_cities": []
   },
@@ -149,6 +185,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_BLEEDING_STONE": {
+   "area_px": 1207,
+   "arable_milli": 952861,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_BLIGHTED_MARSHES": {
    "area_px": 2610,
    "arable_milli": 785697,
@@ -179,9 +221,33 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_BOHSENFELS": {
+   "area_px": 3212,
+   "arable_milli": 1439068,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_BORDELEAUX": {
    "area_px": 3396,
    "arable_milli": 3354908,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_BOULDERBELLIES_HOLD": {
+   "area_px": 4244,
+   "arable_milli": 1479316,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_BREGANALLE": {
+   "area_px": 2703,
+   "arable_milli": 960560,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_BRENNUN_S_ENCAMPMENT": {
+   "area_px": 7671,
+   "arable_milli": 622500,
    "cities": 1,
    "canon_cities": []
   },
@@ -215,6 +281,24 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_CASTLE_ALEXANDRONOV": {
+   "area_px": 2766,
+   "arable_milli": 1400278,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_CASTLE_MOUSILLON": {
+   "area_px": 1742,
+   "arable_milli": 1517037,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_CASTLE_SANGASSE": {
+   "area_px": 1441,
+   "arable_milli": 1246481,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_CAUSEWAY_OF_ZHARR": {
    "area_px": 30407,
    "arable_milli": 9142356,
@@ -239,15 +323,39 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_CHAMON_DHAREK": {
+   "area_px": 3349,
+   "arable_milli": 650146,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_CHATEAU_LOVARRE": {
+   "area_px": 229,
+   "arable_milli": 12283,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_CITY_OF_KINGS": {
    "area_px": 3470,
    "arable_milli": 122724,
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_CLAWMARKET": {
+   "area_px": 685,
+   "arable_milli": 50004,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_CLAW_COAST": {
    "area_px": 4982,
    "arable_milli": 624996,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_CLIFFS_OF_DAWN": {
+   "area_px": 10875,
+   "arable_milli": 248245,
    "cities": 1,
    "canon_cities": []
   },
@@ -290,6 +398,12 @@
   "STATE_DARK_MAIDEN_PASS": {
    "area_px": 787,
    "arable_milli": 51130,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_DEATHTOLL_HOLD": {
+   "area_px": 2871,
+   "arable_milli": 553636,
    "cities": 1,
    "canon_cities": []
   },
@@ -353,6 +467,18 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_DRAKENHOF": {
+   "area_px": 3023,
+   "arable_milli": 333092,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_DRAKENMOOR": {
+   "area_px": 3190,
+   "arable_milli": 118409,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_DRAKEN_RIDGE": {
    "area_px": 8306,
    "arable_milli": 367150,
@@ -362,6 +488,30 @@
   "STATE_DRAKWALD_FOREST": {
    "area_px": 4532,
    "arable_milli": 4352270,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_DREAD_ROCK": {
+   "area_px": 3775,
+   "arable_milli": 475402,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_DREAD_ROCK_SHOALS": {
+   "area_px": 130,
+   "arable_milli": 14146,
+   "cities": 0,
+   "canon_cities": []
+  },
+  "STATE_DREAD_ROCK_SKERRIES": {
+   "area_px": 168,
+   "arable_milli": 33616,
+   "cities": 0,
+   "canon_cities": []
+  },
+  "STATE_DUSHYKA": {
+   "area_px": 2970,
+   "arable_milli": 977433,
    "cities": 1,
    "canon_cities": []
   },
@@ -491,6 +641,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_FESTER_SPIKE": {
+   "area_px": 830,
+   "arable_milli": 98848,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_FIVE_RIVERS": {
    "area_px": 4563,
    "arable_milli": 2239807,
@@ -503,15 +659,33 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_FLESHWARREN": {
+   "area_px": 1082,
+   "arable_milli": 44205,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_FOREST_OF_GLOOM": {
    "area_px": 1873,
    "arable_milli": 348428,
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_FOREST_OF_KNIVES": {
+   "area_px": 2500,
+   "arable_milli": 80731,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_FOREST_OF_SIGHS": {
    "area_px": 858,
    "arable_milli": 53564,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_FORT_STRAGHOV": {
+   "area_px": 4326,
+   "arable_milli": 723967,
    "cities": 1,
    "canon_cities": []
   },
@@ -533,9 +707,21 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_GASTONNE": {
+   "area_px": 3344,
+   "arable_milli": 491650,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_GATE_DISTRICT": {
    "area_px": 4598,
    "arable_milli": 1528672,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_GEULATA": {
+   "area_px": 1513,
+   "arable_milli": 174037,
    "cities": 1,
    "canon_cities": []
   },
@@ -557,6 +743,24 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_GLADE_OF_ETERNAL_MIDNIGHT": {
+   "area_px": 608,
+   "arable_milli": 357188,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_GLADE_OF_ETERNAL_MOONLIGHT": {
+   "area_px": 865,
+   "arable_milli": 455312,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_GLIMDWARROW": {
+   "area_px": 606,
+   "arable_milli": 606000,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_GLOOMWRACK_COAST": {
    "area_px": 4700,
    "arable_milli": 1504785,
@@ -569,9 +773,21 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_GORGOTHDRINAZ": {
+   "area_px": 2464,
+   "arable_milli": 617805,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_GOROMADNY_COAST": {
    "area_px": 4581,
    "arable_milli": 1816120,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_GOROMADNY_HOLD": {
+   "area_px": 3767,
+   "arable_milli": 149627,
    "cities": 1,
    "canon_cities": []
   },
@@ -579,6 +795,12 @@
    "area_px": 5391,
    "arable_milli": 3564764,
    "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_GREAT_MORTIS_DELTA": {
+   "area_px": 2389,
+   "arable_milli": 81232,
+   "cities": 0,
    "canon_cities": []
   },
   "STATE_GREY_HAG_MOUNTAIN": {
@@ -590,6 +812,12 @@
   "STATE_GREY_LADY_PASS": {
    "area_px": 285,
    "arable_milli": 69510,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_GRISTLE_VALLEY": {
+   "area_px": 403,
+   "arable_milli": 21691,
    "cities": 1,
    "canon_cities": []
   },
@@ -605,6 +833,18 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_HALLS_OF_EQUOS": {
+   "area_px": 363,
+   "arable_milli": 112912,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_HAUNTED_GROVE": {
+   "area_px": 1361,
+   "arable_milli": 279945,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_HEART_OF_ZHARRDUK": {
    "area_px": 3831,
    "arable_milli": 1834890,
@@ -614,6 +854,18 @@
   "STATE_HELL_PIT": {
    "area_px": 868,
    "arable_milli": 57351,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_HELL_PIT_DEPTHS": {
+   "area_px": 778,
+   "arable_milli": 35717,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_HELMGART": {
+   "area_px": 332,
+   "arable_milli": 160017,
    "cities": 1,
    "canon_cities": []
   },
@@ -647,6 +899,12 @@
    "cities": 0,
    "canon_cities": []
   },
+  "STATE_HOUSE_OF_EVERLASTING_LIFE": {
+   "area_px": 2468,
+   "arable_milli": 81201,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_HOWLING_DISTRICT": {
    "area_px": 3874,
    "arable_milli": 1650101,
@@ -656,6 +914,12 @@
   "STATE_HOWLING_RIVER_VALLEY": {
    "area_px": 4273,
    "arable_milli": 1281820,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_IRINASGRAD": {
+   "area_px": 1861,
+   "arable_milli": 1273245,
    "cities": 1,
    "canon_cities": []
   },
@@ -679,6 +943,24 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_KARAGRIL": {
+   "area_px": 2151,
+   "arable_milli": 31062,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_KARAG_NAR": {
+   "area_px": 1272,
+   "arable_milli": 16,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_KARAG_ZIFLIN": {
+   "area_px": 2556,
+   "arable_milli": 226376,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_KARAK_EIGHT_PEAKS": {
    "area_px": 2086,
    "arable_milli": 59788,
@@ -699,15 +981,45 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_KING_S_GLADE": {
+   "area_px": 1420,
+   "arable_milli": 631898,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_KISLEV_FOOTHILLS": {
    "area_px": 4849,
    "arable_milli": 1396437,
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_KRAKA_DRAK": {
+   "area_px": 4005,
+   "arable_milli": 817922,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_KRAKEN_COAST": {
    "area_px": 5518,
    "arable_milli": 1598913,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_KREUTZHOFEN": {
+   "area_px": 2168,
+   "arable_milli": 635949,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_KRUGENHEIM": {
+   "area_px": 781,
+   "arable_milli": 326796,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_LAHMIA": {
+   "area_px": 2201,
+   "arable_milli": 111613,
    "cities": 1,
    "canon_cities": []
   },
@@ -913,30 +1225,6 @@
    "area_px": 26315,
    "arable_milli": 16226270,
    "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_080": {
-   "area_px": 3101,
-   "arable_milli": 2417504,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_093": {
-   "area_px": 2568,
-   "arable_milli": 816842,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_096": {
-   "area_px": 1420,
-   "arable_milli": 631898,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_102": {
-   "area_px": 2071,
-   "arable_milli": 1624316,
-   "cities": 1,
    "canon_cities": []
   },
   "STATE_LAND_126": {
@@ -1245,124 +1533,10 @@
    "cities": 0,
    "canon_cities": []
   },
-  "STATE_LAND_180": {
-   "area_px": 168,
-   "arable_milli": 33616,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_181": {
-   "area_px": 3775,
-   "arable_milli": 475402,
-   "cities": 1,
-   "canon_cities": []
-  },
   "STATE_LAND_182": {
    "area_px": 5400,
    "arable_milli": 223148,
    "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_201": {
-   "area_px": 2556,
-   "arable_milli": 226376,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_223": {
-   "area_px": 2443,
-   "arable_milli": 177946,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_242": {
-   "area_px": 2879,
-   "arable_milli": 376736,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_244": {
-   "area_px": 3273,
-   "arable_milli": 1053090,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_245": {
-   "area_px": 2464,
-   "arable_milli": 617805,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_259": {
-   "area_px": 2005,
-   "arable_milli": 247137,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_263": {
-   "area_px": 130,
-   "arable_milli": 14146,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_299": {
-   "area_px": 3176,
-   "arable_milli": 1024750,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_303": {
-   "area_px": 3190,
-   "arable_milli": 118409,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_308": {
-   "area_px": 5002,
-   "arable_milli": 1650170,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_317": {
-   "area_px": 2767,
-   "arable_milli": 2256078,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_322": {
-   "area_px": 1818,
-   "arable_milli": 1802660,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_331": {
-   "area_px": 3212,
-   "arable_milli": 1439068,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_334": {
-   "area_px": 4293,
-   "arable_milli": 2019087,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_345": {
-   "area_px": 5942,
-   "arable_milli": 1818847,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_346": {
-   "area_px": 3767,
-   "arable_milli": 149627,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_347": {
-   "area_px": 1082,
-   "arable_milli": 44205,
-   "cities": 1,
    "canon_cities": []
   },
   "STATE_LAND_362": {
@@ -1398,54 +1572,6 @@
   "STATE_LAND_369": {
    "area_px": 12346,
    "arable_milli": 2102542,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_370": {
-   "area_px": 1207,
-   "arable_milli": 952861,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_371": {
-   "area_px": 493,
-   "arable_milli": 99527,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_372": {
-   "area_px": 1411,
-   "arable_milli": 106314,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_374": {
-   "area_px": 10875,
-   "arable_milli": 248245,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_376": {
-   "area_px": 781,
-   "arable_milli": 326796,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_377": {
-   "area_px": 778,
-   "arable_milli": 35717,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_380": {
-   "area_px": 4326,
-   "arable_milli": 723967,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_382": {
-   "area_px": 1138,
-   "arable_milli": 683817,
    "cities": 0,
    "canon_cities": []
   },
@@ -1971,354 +2097,6 @@
    "cities": 0,
    "canon_cities": []
   },
-  "STATE_LAND_476": {
-   "area_px": 2211,
-   "arable_milli": 446673,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_478": {
-   "area_px": 3883,
-   "arable_milli": 2528236,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_482": {
-   "area_px": 1441,
-   "arable_milli": 1246481,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_484": {
-   "area_px": 737,
-   "arable_milli": 638812,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_485": {
-   "area_px": 606,
-   "arable_milli": 606000,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_487": {
-   "area_px": 332,
-   "arable_milli": 160017,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_489": {
-   "area_px": 780,
-   "arable_milli": 323860,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_491": {
-   "area_px": 865,
-   "arable_milli": 455312,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_492": {
-   "area_px": 1742,
-   "arable_milli": 1517037,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_493": {
-   "area_px": 487,
-   "arable_milli": 368876,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_496": {
-   "area_px": 3379,
-   "arable_milli": 2829853,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_497": {
-   "area_px": 1174,
-   "arable_milli": 922700,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_498": {
-   "area_px": 2691,
-   "arable_milli": 1291361,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_499": {
-   "area_px": 1513,
-   "arable_milli": 174037,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_500": {
-   "area_px": 229,
-   "arable_milli": 12283,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_502": {
-   "area_px": 608,
-   "arable_milli": 357188,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_503": {
-   "area_px": 419,
-   "arable_milli": 69959,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_505": {
-   "area_px": 363,
-   "arable_milli": 112912,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_506": {
-   "area_px": 830,
-   "arable_milli": 98848,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_509": {
-   "area_px": 1301,
-   "arable_milli": 626433,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_513": {
-   "area_px": 2859,
-   "arable_milli": 62853,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_522": {
-   "area_px": 1272,
-   "arable_milli": 16,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_524": {
-   "area_px": 1406,
-   "arable_milli": 179633,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_526": {
-   "area_px": 698,
-   "arable_milli": 33973,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_527": {
-   "area_px": 2151,
-   "arable_milli": 31062,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_536": {
-   "area_px": 1861,
-   "arable_milli": 1273245,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_537": {
-   "area_px": 3023,
-   "arable_milli": 333092,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_541": {
-   "area_px": 2179,
-   "arable_milli": 1901529,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_545": {
-   "area_px": 3349,
-   "arable_milli": 650146,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_546": {
-   "area_px": 2766,
-   "arable_milli": 1400278,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_547": {
-   "area_px": 2970,
-   "arable_milli": 977433,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_549": {
-   "area_px": 917,
-   "arable_milli": 660821,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_550": {
-   "area_px": 685,
-   "arable_milli": 50004,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_551": {
-   "area_px": 3033,
-   "arable_milli": 919013,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_552": {
-   "area_px": 4005,
-   "arable_milli": 817922,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_553": {
-   "area_px": 7671,
-   "arable_milli": 622500,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_554": {
-   "area_px": 4008,
-   "arable_milli": 685531,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_555": {
-   "area_px": 2500,
-   "arable_milli": 80731,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_556": {
-   "area_px": 7629,
-   "arable_milli": 511481,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_563": {
-   "area_px": 3131,
-   "arable_milli": 828496,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_579": {
-   "area_px": 2168,
-   "arable_milli": 635949,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_582": {
-   "area_px": 2703,
-   "arable_milli": 960560,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_586": {
-   "area_px": 3344,
-   "arable_milli": 491650,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_587": {
-   "area_px": 403,
-   "arable_milli": 21691,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_602": {
-   "area_px": 1189,
-   "arable_milli": 275618,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_603": {
-   "area_px": 4268,
-   "arable_milli": 297945,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_604": {
-   "area_px": 2201,
-   "arable_milli": 111613,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_605": {
-   "area_px": 2468,
-   "arable_milli": 81201,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_606": {
-   "area_px": 3458,
-   "arable_milli": 130311,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_608": {
-   "area_px": 749,
-   "arable_milli": 20460,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_610": {
-   "area_px": 6000,
-   "arable_milli": 1058646,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_611": {
-   "area_px": 2871,
-   "arable_milli": 553636,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_612": {
-   "area_px": 1361,
-   "arable_milli": 279945,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_613": {
-   "area_px": 3982,
-   "arable_milli": 1169891,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_614": {
-   "area_px": 4244,
-   "arable_milli": 1479316,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_620": {
-   "area_px": 2551,
-   "arable_milli": 35820,
-   "cities": 1,
-   "canon_cities": []
-  },
-  "STATE_LAND_623": {
-   "area_px": 2389,
-   "arable_milli": 81232,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_624": {
-   "area_px": 1448,
-   "arable_milli": 40767,
-   "cities": 0,
-   "canon_cities": []
-  },
   "STATE_LOST_KHYPNIA": {
    "area_px": 3619,
    "arable_milli": 1342506,
@@ -2397,6 +2175,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_MIDDENHEIM": {
+   "area_px": 4293,
+   "arable_milli": 2019087,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_MIDDENLAND_PROPER": {
    "area_px": 4267,
    "arable_milli": 2786622,
@@ -2424,6 +2208,12 @@
   "STATE_MIRAMAR_HILLS": {
    "area_px": 1144,
    "arable_milli": 801970,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_MONOLITH_OF_INGVAR": {
+   "area_px": 7629,
+   "arable_milli": 511481,
    "cities": 1,
    "canon_cities": []
   },
@@ -2475,6 +2265,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_MOUNT_SILVERSPEAR": {
+   "area_px": 2879,
+   "arable_milli": 376736,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_MOUSILLON": {
    "area_px": 3384,
    "arable_milli": 2737852,
@@ -2484,6 +2280,12 @@
   "STATE_MYRMIDIA_S_COAST": {
    "area_px": 4684,
    "arable_milli": 1500286,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_NAGGRUNDRINAZ": {
+   "area_px": 3176,
+   "arable_milli": 1024750,
    "cities": 1,
    "canon_cities": []
   },
@@ -2601,6 +2403,18 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_NUJA": {
+   "area_px": 3101,
+   "arable_milli": 2417504,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_OAK_OF_PROPHECY": {
+   "area_px": 487,
+   "arable_milli": 368876,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_OIS_GAP": {
    "area_px": 487,
    "arable_milli": 66260,
@@ -2622,6 +2436,12 @@
   "STATE_OLD_STRYGOS": {
    "area_px": 9354,
    "arable_milli": 611724,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_ORTEGETA": {
+   "area_px": 2443,
+   "arable_milli": 177946,
    "cities": 1,
    "canon_cities": []
   },
@@ -2648,6 +2468,12 @@
   "STATE_PIGBARTER_ROAD": {
    "area_px": 7100,
    "arable_milli": 1293112,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_PINA_WOOD": {
+   "area_px": 1174,
+   "arable_milli": 922700,
    "cities": 1,
    "canon_cities": []
   },
@@ -2681,6 +2507,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_PYRAMID_OF_TUTANKHANUT": {
+   "area_px": 2551,
+   "arable_milli": 35820,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_QUENELLES": {
    "area_px": 4898,
    "arable_milli": 2138816,
@@ -2702,6 +2534,12 @@
   "STATE_REIKWALD_FOREST": {
    "area_px": 3243,
    "arable_milli": 1503614,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_REMAS": {
+   "area_px": 2071,
+   "arable_milli": 1624316,
    "cities": 1,
    "canon_cities": []
   },
@@ -2735,6 +2573,24 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_SEPUKZY": {
+   "area_px": 5942,
+   "arable_milli": 1818847,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_SHANIDAAR": {
+   "area_px": 4268,
+   "arable_milli": 297945,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_SHARPTHORN_FOREST": {
+   "area_px": 1406,
+   "arable_milli": 179633,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_SHATTERED_TEETH": {
    "area_px": 3946,
    "arable_milli": 237741,
@@ -2744,6 +2600,18 @@
   "STATE_SHINING_MOUNTAINS": {
    "area_px": 6412,
    "arable_milli": 60345,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_SIX_WATCH_FORTS": {
+   "area_px": 3458,
+   "arable_milli": 130311,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_SKRAGGLEGUTS_HOLD": {
+   "area_px": 3982,
+   "arable_milli": 1169891,
    "cities": 1,
    "canon_cities": []
   },
@@ -2789,6 +2657,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_SOUTHERN_SIREN_ISLES": {
+   "area_px": 1138,
+   "arable_milli": 683817,
+   "cities": 0,
+   "canon_cities": []
+  },
   "STATE_SOUTHERN_WORLDS_EDGE": {
    "area_px": 15819,
    "arable_milli": 127807,
@@ -2798,6 +2672,12 @@
   "STATE_SOUTH_BADLAND_HILLS": {
    "area_px": 5524,
    "arable_milli": 133767,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_SOUTH_BILBALI": {
+   "area_px": 2691,
+   "arable_milli": 1291361,
    "cities": 1,
    "canon_cities": []
   },
@@ -2837,6 +2717,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_SPHINX_OF_PHAA": {
+   "area_px": 749,
+   "arable_milli": 20460,
+   "cities": 0,
+   "canon_cities": []
+  },
   "STATE_STEEL_PLAINS": {
    "area_px": 4583,
    "arable_milli": 1411517,
@@ -2846,6 +2732,12 @@
   "STATE_STINKLANDS": {
    "area_px": 4911,
    "arable_milli": 831534,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_STROVENGAARD": {
+   "area_px": 3883,
+   "arable_milli": 2528236,
    "cities": 1,
    "canon_cities": []
   },
@@ -2861,6 +2753,24 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_SUSSURRIO_WOOD": {
+   "area_px": 1301,
+   "arable_milli": 626433,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_SWAMP_EATER_HOLD": {
+   "area_px": 6000,
+   "arable_milli": 1058646,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_SWAMP_OF_TERROR": {
+   "area_px": 1448,
+   "arable_milli": 40767,
+   "cities": 0,
+   "canon_cities": []
+  },
   "STATE_TALDURSFJORD": {
    "area_px": 3848,
    "arable_milli": 1312549,
@@ -2870,6 +2780,24 @@
   "STATE_TALSYN": {
    "area_px": 539,
    "arable_milli": 166647,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_TAL_ESTH": {
+   "area_px": 493,
+   "arable_milli": 99527,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_THE_BEAR_S_TEETH": {
+   "area_px": 917,
+   "arable_milli": 660821,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_THE_BLACK_PIT": {
+   "area_px": 737,
+   "arable_milli": 638812,
    "cities": 1,
    "canon_cities": []
   },
@@ -2927,15 +2855,33 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_THORSHAFN": {
+   "area_px": 4008,
+   "arable_milli": 685531,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_THUNDER_PEAKS": {
    "area_px": 4068,
    "arable_milli": 269215,
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_TOBARO": {
+   "area_px": 1189,
+   "arable_milli": 275618,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_TORGOVANN": {
    "area_px": 1520,
    "arable_milli": 824682,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_TOWER_OF_THE_BLOODYTOOTH": {
+   "area_px": 2005,
+   "arable_milli": 247137,
    "cities": 1,
    "canon_cities": []
   },
@@ -2954,6 +2900,12 @@
   "STATE_TROLL_COUNTRY": {
    "area_px": 3472,
    "arable_milli": 553451,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_TYR_VANNA": {
+   "area_px": 419,
+   "arable_milli": 69959,
    "cities": 1,
    "canon_cities": []
   },
@@ -2993,9 +2945,27 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_VARG_CAMP": {
+   "area_px": 3131,
+   "arable_milli": 828496,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_VEREZZI": {
    "area_px": 3389,
    "arable_milli": 1507535,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_VIDARHEIM": {
+   "area_px": 3033,
+   "arable_milli": 919013,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_VOLGEN": {
+   "area_px": 1818,
+   "arable_milli": 1802660,
    "cities": 1,
    "canon_cities": []
   },
@@ -3011,9 +2981,21 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_WATERFALL_PALACE": {
+   "area_px": 780,
+   "arable_milli": 323860,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_WESTERN_BADLANDS": {
    "area_px": 4631,
    "arable_milli": 170221,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_WESTERN_ESTALIAN_COAST": {
+   "area_px": 3379,
+   "arable_milli": 2829853,
    "cities": 1,
    "canon_cities": []
   },
@@ -3032,6 +3014,12 @@
   "STATE_WEST_AVERLAND": {
    "area_px": 2562,
    "arable_milli": 2200727,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_WEST_CARCASSONNE": {
+   "area_px": 2568,
+   "arable_milli": 816842,
    "cities": 1,
    "canon_cities": []
   },
@@ -3101,6 +3089,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_WINTERTEETH_FOOTHILLS": {
+   "area_px": 698,
+   "arable_milli": 33973,
+   "cities": 0,
+   "canon_cities": []
+  },
   "STATE_WINTERTEETH_PASS": {
    "area_px": 174,
    "arable_milli": 3954,
@@ -3128,6 +3122,12 @@
   "STATE_WORLDS_EDGE_FOOTHILLS": {
    "area_px": 7787,
    "arable_milli": 387392,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_WURTBAD": {
+   "area_px": 2179,
+   "arable_milli": 1901529,
    "cities": 1,
    "canon_cities": []
   },

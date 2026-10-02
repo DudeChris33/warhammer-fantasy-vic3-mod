@@ -252,7 +252,7 @@
    "why": "The Wasteland's admiralty: needs admiralty."
   },
   {
-   "key": "STATE_LAND_102",
+   "key": "STATE_REMAS",
    "anchor": [
     3925,
     1209
@@ -263,7 +263,7 @@
    "why": "Remas' harbour: needs navigation."
   },
   {
-   "key": "STATE_LAND_102",
+   "key": "STATE_REMAS",
    "anchor": [
     3925,
     1209

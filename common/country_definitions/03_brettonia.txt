@@ -217,7 +217,7 @@ SKZ = {
 ################################################################################
 
 ################ ANM — Anmyr; a realm of Athel Loren ################
-# Canon realm name (Athel Loren). Filed here by geography: STATE_ANMYR and STATE_LAND_491 sit in
+# Canon realm name (Athel Loren). Filed here by geography: STATE_ANMYR and STATE_GLADE_OF_ETERNAL_MOONLIGHT sit in
 # map_data/state_regions/03_brettonia.txt.
 
 ANM = {
@@ -230,7 +230,7 @@ ANM = {
 
 ################ ARG — Argwylon; a realm of Athel Loren ################
 # Canon realm name (Athel Loren); soft: the Total War: Warhammer faction of the treeman Durthu.
-# Filed here by geography: STATE_ARGWYLON and STATE_LAND_489 sit in
+# Filed here by geography: STATE_ARGWYLON and STATE_WATERFALL_PALACE sit in
 # map_data/state_regions/03_brettonia.txt.
 
 ARG = {
@@ -243,7 +243,8 @@ ARG = {
 
 ################ TLS — Talsyn; a realm of Athel Loren ################
 # Canon realm name (Athel Loren); soft: the Total War: Warhammer faction of Orion, the King in the
-# Woods. Filed here by geography: STATE_TALSYN, STATE_YI_EDRI_ETERNOS and STATE_LAND_096/503/505
+# Woods. Filed here by geography: STATE_TALSYN, STATE_YI_EDRI_ETERNOS, STATE_KING_S_GLADE, STATE_TYR_VANNA and
+# STATE_HALLS_OF_EQUOS
 # sit in map_data/state_regions/03_brettonia.txt.
 
 TLS = {
@@ -255,7 +256,7 @@ TLS = {
 }
 
 ################ TRG — Torgovann; a realm of Athel Loren ################
-# Canon realm name (Athel Loren). Filed here by geography: STATE_TORGOVANN and STATE_LAND_502 sit
+# Canon realm name (Athel Loren). Filed here by geography: STATE_TORGOVANN and STATE_GLADE_OF_ETERNAL_MIDNIGHT sit
 # in map_data/state_regions/03_brettonia.txt.
 
 TRG = {
@@ -267,7 +268,7 @@ TRG = {
 }
 
 ################ WYD — Wydrioth; a realm of Athel Loren ################
-# Canon realm name (Athel Loren). Filed here by geography: STATE_WYDRIOTH and STATE_LAND_371 sit
+# Canon realm name (Athel Loren). Filed here by geography: STATE_WYDRIOTH and STATE_TAL_ESTH sit
 # in map_data/state_regions/03_brettonia.txt.
 
 WYD = {
@@ -279,7 +280,7 @@ WYD = {
 }
 
 ################ OKP — Oak of Prophecy; a wood-elf glade beyond Athel Loren's eaves ################
-# Soft: named for its sacred oak. Filed here by geography: STATE_LAND_493 sits in
+# Soft: named for its sacred oak. Filed here by geography: STATE_OAK_OF_PROPHECY sits in
 # map_data/state_regions/03_brettonia.txt.
 
 OKP = {

@@ -7,7 +7,17 @@
    "confidence": "canon",
    "note": "Karaz-a-Karak hub"
   },
+  "STATE_AGRIL_MIGDHAL": {
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
+  },
   "STATE_ALD_GRUNGAZ": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
+  "STATE_AMBER_SKULL": {
    "owner": "unowned",
    "confidence": "inferred",
    "note": "wilderness; no roster tag"
@@ -57,6 +67,11 @@
    "confidence": "directed",
    "note": "review"
   },
+  "STATE_AVERHEIM": {
+   "owner": "AVE",
+   "confidence": "canon",
+   "note": "Averheim hub"
+  },
   "STATE_AXE_BITE_PASS": {
    "owner": "KZF",
    "confidence": "directed",
@@ -77,10 +92,25 @@
    "confidence": "inferred",
    "note": "Sarl Encampment hub; registry capital \"Sortsvinar coast\" is not a settlement"
   },
+  "STATE_BECHAFEN": {
+   "owner": "OSM",
+   "confidence": "canon",
+   "note": "Bechafen hub"
+  },
   "STATE_BELYEROVOTA": {
    "owner": "unowned",
    "confidence": "directed",
    "note": "review round 3"
+  },
+  "STATE_BILIOUS_BASILICA": {
+   "owner": "XSG",
+   "confidence": "directed",
+   "note": "review round 2"
+  },
+  "STATE_BJORNLING_S_GATHERING": {
+   "owner": "BJO",
+   "confidence": "canon",
+   "note": "Bjornling's Gathering / Bjornvik hubs"
   },
   "STATE_BLACK_BLOOD_PASS": {
    "owner": "KRV",
@@ -122,6 +152,11 @@
    "confidence": "inferred",
    "note": "district of Zharr-Naggrund"
   },
+  "STATE_BLEEDING_STONE": {
+   "owner": "LAU",
+   "confidence": "directed",
+   "note": "review: Laurelorn Forest wood elves"
+  },
   "STATE_BLIGHTED_MARSHES": {
    "owner": "XSG",
    "confidence": "directed",
@@ -146,10 +181,29 @@
    "confidence": "canon",
    "note": "Iron Rock hub"
   },
+  "STATE_BOHSENFELS": {
+   "owner": "OST",
+   "confidence": "inferred"
+  },
   "STATE_BORDELEAUX": {
    "owner": "BOR",
    "confidence": "canon",
    "note": "Bordeleaux hub"
+  },
+  "STATE_BOULDERBELLIES_HOLD": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
+  "STATE_BREGANALLE": {
+   "owner": "BRI",
+   "confidence": "directed",
+   "note": "review round 2"
+  },
+  "STATE_BRENNUN_S_ENCAMPMENT": {
+   "owner": "HAS",
+   "confidence": "inferred",
+   "note": "High Tribe by the Chaos Wastes"
   },
   "STATE_BRIONNE": {
    "owner": "BRI",
@@ -176,6 +230,21 @@
    "confidence": "inferred",
    "note": "Salignac-la-Rouge"
   },
+  "STATE_CASTLE_ALEXANDRONOV": {
+   "owner": "UNG",
+   "confidence": "directed",
+   "note": "review round 3"
+  },
+  "STATE_CASTLE_MOUSILLON": {
+   "owner": "MOU",
+   "confidence": "canon",
+   "note": "Mousillon hub"
+  },
+  "STATE_CASTLE_SANGASSE": {
+   "owner": "BAS",
+   "confidence": "inferred",
+   "note": "Castle Sangasse"
+  },
   "STATE_CAUSEWAY_OF_ZHARR": {
    "owner": "DLO",
    "confidence": "directed",
@@ -196,14 +265,33 @@
    "confidence": "canon",
    "note": "Magritta hub"
   },
+  "STATE_CHAMON_DHAREK": {
+   "owner": "UNG",
+   "confidence": "inferred"
+  },
+  "STATE_CHATEAU_LOVARRE": {
+   "owner": "CAR",
+   "confidence": "inferred",
+   "note": "Chateau Lovarre"
+  },
   "STATE_CITY_OF_KINGS": {
    "owner": "KHM",
    "confidence": "canon",
    "note": "Khemri hub"
   },
+  "STATE_CLAWMARKET": {
+   "owner": "XSD",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
+  },
   "STATE_CLAW_COAST": {
    "owner": "SNA",
    "confidence": "inferred"
+  },
+  "STATE_CLIFFS_OF_DAWN": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "Khazid Dawnbar ruin; no roster tag"
   },
   "STATE_COURONNE": {
    "owner": "COU",
@@ -239,6 +327,11 @@
    "owner": "XSK",
    "confidence": "directed",
    "note": "review: greenskin placeholder for a future Skaven tag"
+  },
+  "STATE_DEATHTOLL_HOLD": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
   },
   "STATE_DEATH_S_SIDE": {
    "owner": "UZK",
@@ -289,6 +382,16 @@
    "confidence": "directed",
    "note": "review round 3"
   },
+  "STATE_DRAKENHOF": {
+   "owner": "VSY",
+   "confidence": "canon",
+   "note": "Castle Drakenhof hub"
+  },
+  "STATE_DRAKENMOOR": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
   "STATE_DRAKEN_RIDGE": {
    "owner": "unowned",
    "confidence": "inferred",
@@ -298,6 +401,25 @@
    "owner": "CRB",
    "confidence": "directed",
    "note": "review: new Carroburg tag"
+  },
+  "STATE_DREAD_ROCK": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
+  "STATE_DREAD_ROCK_SHOALS": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
+  "STATE_DREAD_ROCK_SKERRIES": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
+  "STATE_DUSHYKA": {
+   "owner": "BOL",
+   "confidence": "inferred"
   },
   "STATE_EAGLE_S_PEAK": {
    "owner": "KOR",
@@ -393,6 +515,11 @@
    "confidence": "inferred",
    "note": "district of Zharr-Naggrund"
   },
+  "STATE_FESTER_SPIKE": {
+   "owner": "XSJ",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
+  },
   "STATE_FIVE_RIVERS": {
    "owner": "MAW",
    "confidence": "inferred",
@@ -402,15 +529,29 @@
    "owner": "GRA",
    "confidence": "inferred"
   },
+  "STATE_FLESHWARREN": {
+   "owner": "XSD",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
+  },
   "STATE_FOREST_OF_GLOOM": {
    "owner": "HKN",
    "confidence": "inferred",
    "note": "registry note: Forest of Gloom; capital Harkon has no hub"
   },
+  "STATE_FOREST_OF_KNIVES": {
+   "owner": "SAR",
+   "confidence": "inferred"
+  },
   "STATE_FOREST_OF_SIGHS": {
    "owner": "SOT",
    "confidence": "directed",
    "note": "review: Sisters of Twilight"
+  },
+  "STATE_FORT_STRAGHOV": {
+   "owner": "DOL",
+   "confidence": "directed",
+   "note": "review"
   },
   "STATE_FOUNDRY_DISTRICT": {
    "owner": "MZN",
@@ -426,10 +567,19 @@
    "confidence": "directed",
    "note": "review: Goromadny tag (GMD, merged into URS Ursfjordings, #6373)"
   },
+  "STATE_GASTONNE": {
+   "owner": "GAS",
+   "confidence": "canon",
+   "note": "Gastonne hub; Monteaux port hub is here too"
+  },
   "STATE_GATE_DISTRICT": {
    "owner": "MZN",
    "confidence": "inferred",
    "note": "district of Zharr-Naggrund"
+  },
+  "STATE_GEULATA": {
+   "owner": "TOB",
+   "confidence": "inferred"
   },
   "STATE_GIANTHOME_MOUNTAINS": {
    "owner": "KVE",
@@ -446,6 +596,21 @@
    "confidence": "canon",
    "note": "Gisoreux hub; registry spells it Gisoreaux"
   },
+  "STATE_GLADE_OF_ETERNAL_MIDNIGHT": {
+   "owner": "TRG",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+  },
+  "STATE_GLADE_OF_ETERNAL_MOONLIGHT": {
+   "owner": "ANM",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+  },
+  "STATE_GLIMDWARROW": {
+   "owner": "XSB",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
+  },
   "STATE_GLOOMWRACK_COAST": {
    "owner": "BJO",
    "confidence": "directed",
@@ -456,15 +621,30 @@
    "confidence": "inferred",
    "note": "wilderness; no roster tag"
   },
+  "STATE_GORGOTHDRINAZ": {
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review: dark land orks"
+  },
   "STATE_GOROMADNY_COAST": {
    "owner": "URS",
    "confidence": "directed",
    "note": "review: Goromadny tag (GMD, merged into URS Ursfjordings, #6373)"
   },
+  "STATE_GOROMADNY_HOLD": {
+   "owner": "VOL",
+   "confidence": "directed",
+   "note": "review"
+  },
   "STATE_GRAVE_OF_CUILEUX": {
    "owner": "QUE",
    "confidence": "inferred",
    "note": "Chinon"
+  },
+  "STATE_GREAT_MORTIS_DELTA": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "split out of BADLANDS_COAST on main; greenskin wilderness"
   },
   "STATE_GREY_HAG_MOUNTAIN": {
    "owner": "GOR",
@@ -474,6 +654,11 @@
    "owner": "PAR",
    "confidence": "inferred",
    "note": "Castle Sanglac"
+  },
+  "STATE_GRISTLE_VALLEY": {
+   "owner": "XSI",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_GROM_RIDGE": {
    "owner": "IRN",
@@ -485,6 +670,16 @@
    "confidence": "directed",
    "note": "review: wood elf tag"
   },
+  "STATE_HALLS_OF_EQUOS": {
+   "owner": "TLS",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+  },
+  "STATE_HAUNTED_GROVE": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
   "STATE_HEART_OF_ZHARRDUK": {
    "owner": "MZN",
    "confidence": "canon",
@@ -494,6 +689,16 @@
    "owner": "XSD",
    "confidence": "directed",
    "note": "review: greenskin placeholder for a future Skaven tag"
+  },
+  "STATE_HELL_PIT_DEPTHS": {
+   "owner": "XSD",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
+  },
+  "STATE_HELMGART": {
+   "owner": "REI",
+   "confidence": "canon",
+   "note": "Helmgart hub"
   },
   "STATE_HELSPIRE_COAST": {
    "owner": "SOR",
@@ -515,6 +720,11 @@
    "confidence": "canon",
    "note": "Hergig hub; Talabheim port hub is here too"
   },
+  "STATE_HOUSE_OF_EVERLASTING_LIFE": {
+   "owner": "LAH",
+   "confidence": "inferred",
+   "note": "House of Everlasting Life"
+  },
   "STATE_HOWLING_DISTRICT": {
    "owner": "MZN",
    "confidence": "inferred",
@@ -524,6 +734,10 @@
    "owner": "RAA",
    "confidence": "canon",
    "note": "Raachwald hub"
+  },
+  "STATE_IRINASGRAD": {
+   "owner": "KSV",
+   "confidence": "inferred"
   },
   "STATE_IRONCRAFT_MOUNTAINS": {
    "owner": "unowned",
@@ -540,6 +754,19 @@
    "confidence": "directed",
    "note": "review: dark land orks"
   },
+  "STATE_KARAGRIL": {
+   "owner": "KEP",
+   "confidence": "inferred"
+  },
+  "STATE_KARAG_NAR": {
+   "owner": "KEP",
+   "confidence": "inferred",
+   "note": "capital collision: Karak Eight Peaks is held by Skarsnik (CRM) in 2512; KEP gets the neighbouring outposts"
+  },
+  "STATE_KARAG_ZIFLIN": {
+   "owner": "CRM",
+   "confidence": "inferred"
+  },
   "STATE_KARAK_EIGHT_PEAKS": {
    "owner": "CRM",
    "confidence": "canon",
@@ -555,442 +782,38 @@
    "confidence": "inferred",
    "note": "low confidence: registry capital Bhagar has no hub; Dune-Sea oasis"
   },
+  "STATE_KING_S_GLADE": {
+   "owner": "TLS",
+   "confidence": "directed",
+   "note": "review round 3"
+  },
   "STATE_KISLEV_FOOTHILLS": {
    "owner": "ROP",
    "confidence": "inferred"
+  },
+  "STATE_KRAKA_DRAK": {
+   "owner": "KRD",
+   "confidence": "canon",
+   "note": "Kraka Drak hub"
   },
   "STATE_KRAKEN_COAST": {
    "owner": "AES",
    "confidence": "inferred"
   },
-  "STATE_LAND_080": {
-   "owner": "CNT",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_093": {
-   "owner": "CAR",
-   "confidence": "canon",
-   "note": "Carcassonne hub"
-  },
-  "STATE_LAND_096": {
-   "owner": "TLS",
-   "confidence": "directed",
-   "note": "review round 3"
-  },
-  "STATE_LAND_102": {
-   "owner": "REM",
-   "confidence": "canon",
-   "note": "Remas hub"
-  },
-  "STATE_LAND_180": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_181": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_201": {
-   "owner": "CRM",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_223": {
-   "owner": "ORT",
-   "confidence": "canon",
-   "note": "Ortegeta hub"
-  },
-  "STATE_LAND_242": {
-   "owner": "SLV",
-   "confidence": "canon",
-   "note": "Mount Silverspear hub; ruin"
-  },
-  "STATE_LAND_244": {
-   "owner": "DLO",
-   "confidence": "directed",
-   "note": "review: dark land orks"
-  },
-  "STATE_LAND_245": {
-   "owner": "DLO",
-   "confidence": "directed",
-   "note": "review: dark land orks"
-  },
-  "STATE_LAND_259": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_263": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_299": {
-   "owner": "MZN",
-   "confidence": "inferred",
-   "note": "Naggrundrinaz"
-  },
-  "STATE_LAND_303": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_308": {
-   "owner": "OSM",
-   "confidence": "canon",
-   "note": "Bechafen hub"
-  },
-  "STATE_LAND_317": {
-   "owner": "AVE",
-   "confidence": "canon",
-   "note": "Averheim hub"
-  },
-  "STATE_LAND_322": {
-   "owner": "TAL",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_331": {
-   "owner": "OST",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_334": {
-   "owner": "MID",
-   "confidence": "canon",
-   "note": "Middenheim hub"
-  },
-  "STATE_LAND_345": {
-   "owner": "VOL",
-   "confidence": "inferred",
-   "note": "capital collision: Volksgrad farm hub is in EASTERN_OBLAST (PRA)"
-  },
-  "STATE_LAND_346": {
-   "owner": "VOL",
-   "confidence": "directed",
-   "note": "review"
-  },
-  "STATE_LAND_347": {
-   "owner": "XSD",
-   "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
-  },
-  "STATE_LAND_370": {
-   "owner": "LAU",
-   "confidence": "directed",
-   "note": "review: Laurelorn Forest wood elves"
-  },
-  "STATE_LAND_371": {
-   "owner": "WYD",
-   "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
-  },
-  "STATE_LAND_372": {
-   "owner": "XSG",
-   "confidence": "directed",
-   "note": "review round 2"
-  },
-  "STATE_LAND_374": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Khazid Dawnbar ruin; no roster tag"
-  },
-  "STATE_LAND_376": {
-   "owner": "XSA",
-   "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
-  },
-  "STATE_LAND_377": {
-   "owner": "XSD",
-   "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
-  },
-  "STATE_LAND_380": {
-   "owner": "DOL",
-   "confidence": "directed",
-   "note": "review"
-  },
-  "STATE_LAND_382": {
-   "owner": "TOB",
-   "confidence": "directed",
-   "note": "review round 2"
-  },
-  "STATE_LAND_476": {
-   "owner": "BJO",
-   "confidence": "canon",
-   "note": "Bjornling's Gathering / Bjornvik hubs"
-  },
-  "STATE_LAND_478": {
-   "owner": "BAE",
-   "confidence": "inferred",
-   "note": "Strovengaard"
-  },
-  "STATE_LAND_482": {
-   "owner": "BAS",
-   "confidence": "inferred",
-   "note": "Castle Sangasse"
-  },
-  "STATE_LAND_484": {
-   "owner": "BLV",
-   "confidence": "directed",
-   "note": "review: greenskin tag; Black Venom chosen from the \"The Black Pit\" hub name (change if you want another)"
-  },
-  "STATE_LAND_485": {
-   "owner": "XSB",
-   "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
-  },
-  "STATE_LAND_487": {
-   "owner": "REI",
-   "confidence": "canon",
-   "note": "Helmgart hub"
-  },
-  "STATE_LAND_489": {
-   "owner": "ARG",
-   "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
-  },
-  "STATE_LAND_491": {
-   "owner": "ANM",
-   "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
-  },
-  "STATE_LAND_492": {
-   "owner": "MOU",
-   "confidence": "canon",
-   "note": "Mousillon hub"
-  },
-  "STATE_LAND_493": {
-   "owner": "OKP",
-   "confidence": "directed",
-   "note": "review: wood elf tag (Oak of Prophecy hub)"
-  },
-  "STATE_LAND_496": {
-   "owner": "CNT",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_497": {
-   "owner": "CNT",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_498": {
-   "owner": "BIL",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_499": {
-   "owner": "TOB",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_500": {
-   "owner": "CAR",
-   "confidence": "inferred",
-   "note": "Chateau Lovarre"
-  },
-  "STATE_LAND_502": {
-   "owner": "TRG",
-   "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
-  },
-  "STATE_LAND_503": {
-   "owner": "TLS",
-   "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
-  },
-  "STATE_LAND_505": {
-   "owner": "TLS",
-   "confidence": "directed",
-   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
-  },
-  "STATE_LAND_506": {
-   "owner": "XSJ",
-   "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
-  },
-  "STATE_LAND_509": {
-   "owner": "LUC",
-   "confidence": "inferred",
-   "note": "Borgo Sussurro"
-  },
-  "STATE_LAND_513": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_522": {
-   "owner": "KEP",
-   "confidence": "inferred",
-   "note": "capital collision: Karak Eight Peaks is held by Skarsnik (CRM) in 2512; KEP gets the neighbouring outposts"
-  },
-  "STATE_LAND_524": {
-   "owner": "BSB",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_526": {
-   "owner": "XSH",
-   "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
-  },
-  "STATE_LAND_527": {
-   "owner": "KEP",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_536": {
-   "owner": "KSV",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_537": {
-   "owner": "VSY",
-   "confidence": "canon",
-   "note": "Castle Drakenhof hub"
-  },
-  "STATE_LAND_541": {
-   "owner": "STI",
-   "confidence": "canon",
-   "note": "Wurtbad hub"
-  },
-  "STATE_LAND_545": {
-   "owner": "UNG",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_546": {
-   "owner": "UNG",
-   "confidence": "directed",
-   "note": "review round 3"
-  },
-  "STATE_LAND_547": {
-   "owner": "BOL",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_549": {
-   "owner": "PRA",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_550": {
-   "owner": "XSD",
-   "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
-  },
-  "STATE_LAND_551": {
-   "owner": "KVE",
-   "confidence": "inferred",
-   "note": "High Tribe by the Chaos Wastes"
-  },
-  "STATE_LAND_552": {
-   "owner": "KRD",
-   "confidence": "canon",
-   "note": "Kraka Drak hub"
-  },
-  "STATE_LAND_553": {
-   "owner": "HAS",
-   "confidence": "inferred",
-   "note": "High Tribe by the Chaos Wastes"
-  },
-  "STATE_LAND_554": {
-   "owner": "HAS",
-   "confidence": "inferred",
-   "note": "Trollkingsholm"
-  },
-  "STATE_LAND_555": {
-   "owner": "SAR",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_556": {
-   "owner": "SKA",
-   "confidence": "inferred"
-  },
-  "STATE_LAND_563": {
-   "owner": "VAR",
-   "confidence": "canon",
-   "note": "Varg Camp / Vargvik hubs"
-  },
-  "STATE_LAND_579": {
+  "STATE_KREUTZHOFEN": {
    "owner": "WIS",
    "confidence": "inferred",
    "note": "Kreutzhofen / Meissen hubs"
   },
-  "STATE_LAND_582": {
-   "owner": "BRI",
-   "confidence": "directed",
-   "note": "review round 2"
-  },
-  "STATE_LAND_586": {
-   "owner": "GAS",
-   "confidence": "canon",
-   "note": "Gastonne hub; Monteaux port hub is here too"
-  },
-  "STATE_LAND_587": {
-   "owner": "XSI",
+  "STATE_KRUGENHEIM": {
+   "owner": "XSA",
    "confidence": "directed",
    "note": "review: greenskin placeholder for a future Skaven tag"
   },
-  "STATE_LAND_602": {
-   "owner": "TOB",
-   "confidence": "canon",
-   "note": "Tobaro hub"
-  },
-  "STATE_LAND_603": {
-   "owner": "ZND",
-   "confidence": "inferred",
-   "note": "low confidence: registry capital Zandri has no hub"
-  },
-  "STATE_LAND_604": {
+  "STATE_LAHMIA": {
    "owner": "LAH",
    "confidence": "canon",
    "note": "Lahmia hub; era: Lahmia is a ruin in 2512, registry treats it as a live realm"
-  },
-  "STATE_LAND_605": {
-   "owner": "LAH",
-   "confidence": "inferred",
-   "note": "House of Everlasting Life"
-  },
-  "STATE_LAND_606": {
-   "owner": "LYB",
-   "confidence": "inferred",
-   "note": "Lybaras Road / Quarries of Lybaras hubs; no city hub named Lybaras"
-  },
-  "STATE_LAND_608": {
-   "owner": "KAS",
-   "confidence": "inferred",
-   "note": "low confidence: registry capital Ka-Sabar has no hub"
-  },
-  "STATE_LAND_610": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_611": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_612": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_613": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_614": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
-  },
-  "STATE_LAND_620": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Pyramid of Tutankhanut; no roster tag"
-  },
-  "STATE_LAND_623": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "split out of BADLANDS_COAST on main; greenskin wilderness"
-  },
-  "STATE_LAND_624": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "split out of BADLANDS_COAST on main; greenskin wilderness"
   },
   "STATE_LOST_KHYPNIA": {
    "owner": "UVE",
@@ -1052,6 +875,11 @@
    "owner": "SNA",
    "confidence": "inferred"
   },
+  "STATE_MIDDENHEIM": {
+   "owner": "MID",
+   "confidence": "canon",
+   "note": "Middenheim hub"
+  },
   "STATE_MIDDENLAND_PROPER": {
    "owner": "MID",
    "confidence": "inferred"
@@ -1074,6 +902,10 @@
    "owner": "MGL",
    "confidence": "directed",
    "note": "review: new wood elf tag"
+  },
+  "STATE_MONOLITH_OF_INGVAR": {
+   "owner": "SKA",
+   "confidence": "inferred"
   },
   "STATE_MONTE_CASTELLO": {
    "owner": "DON",
@@ -1115,6 +947,11 @@
    "confidence": "canon",
    "note": "Ekrund hub; ruin, orc occupier not in roster"
   },
+  "STATE_MOUNT_SILVERSPEAR": {
+   "owner": "SLV",
+   "confidence": "canon",
+   "note": "Mount Silverspear hub; ruin"
+  },
   "STATE_MOUSILLON": {
    "owner": "MOU",
    "confidence": "inferred",
@@ -1124,6 +961,11 @@
    "owner": "GDO",
    "confidence": "inferred",
    "note": "capital collision: Gordorno mine hub is in AQUILENA (AQL)"
+  },
+  "STATE_NAGGRUNDRINAZ": {
+   "owner": "MZN",
+   "confidence": "inferred",
+   "note": "Naggrundrinaz"
   },
   "STATE_NAGLFARI_COAST": {
    "owner": "SKA",
@@ -1217,6 +1059,15 @@
    "confidence": "directed",
    "note": "review round 2"
   },
+  "STATE_NUJA": {
+   "owner": "CNT",
+   "confidence": "inferred"
+  },
+  "STATE_OAK_OF_PROPHECY": {
+   "owner": "OKP",
+   "confidence": "directed",
+   "note": "review: wood elf tag (Oak of Prophecy hub)"
+  },
   "STATE_OIS_GAP": {
    "owner": "GIS",
    "confidence": "inferred"
@@ -1235,6 +1086,11 @@
    "owner": "unowned",
    "confidence": "inferred",
    "note": "greenskin wilderness; no clear roster owner"
+  },
+  "STATE_ORTEGETA": {
+   "owner": "ORT",
+   "confidence": "canon",
+   "note": "Ortegeta hub"
   },
   "STATE_PALE_SISTERS": {
    "owner": "SKZ",
@@ -1256,6 +1112,10 @@
    "confidence": "inferred",
    "note": "wilderness; no roster tag"
   },
+  "STATE_PINA_WOOD": {
+   "owner": "CNT",
+   "confidence": "inferred"
+  },
   "STATE_PITS_DISTRICT": {
    "owner": "MZN",
    "confidence": "inferred",
@@ -1276,6 +1136,11 @@
    "confidence": "inferred",
    "note": "wilderness; no roster tag"
   },
+  "STATE_PYRAMID_OF_TUTANKHANUT": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "Pyramid of Tutankhanut; no roster tag"
+  },
   "STATE_QUENELLES": {
    "owner": "QUE",
    "confidence": "canon",
@@ -1295,6 +1160,11 @@
    "owner": "REI",
    "confidence": "canon",
    "note": "Ubersreik hub"
+  },
+  "STATE_REMAS": {
+   "owner": "REM",
+   "confidence": "canon",
+   "note": "Remas hub"
   },
   "STATE_RIVER_DISTRICT": {
    "owner": "MZN",
@@ -1321,6 +1191,20 @@
    "confidence": "directed",
    "note": "review"
   },
+  "STATE_SEPUKZY": {
+   "owner": "VOL",
+   "confidence": "inferred",
+   "note": "capital collision: Volksgrad farm hub is in EASTERN_OBLAST (PRA)"
+  },
+  "STATE_SHANIDAAR": {
+   "owner": "ZND",
+   "confidence": "inferred",
+   "note": "low confidence: registry capital Zandri has no hub"
+  },
+  "STATE_SHARPTHORN_FOREST": {
+   "owner": "BSB",
+   "confidence": "inferred"
+  },
   "STATE_SHATTERED_TEETH": {
    "owner": "KIZ",
    "confidence": "directed",
@@ -1330,6 +1214,16 @@
    "owner": "GUN",
    "confidence": "canon",
    "note": "Mount Gunbad hub; ruin, occupier not in roster"
+  },
+  "STATE_SIX_WATCH_FORTS": {
+   "owner": "LYB",
+   "confidence": "inferred",
+   "note": "Lybaras Road / Quarries of Lybaras hubs; no city hub named Lybaras"
+  },
+  "STATE_SKRAGGLEGUTS_HOLD": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
   },
   "STATE_SKULL_CLIFFS": {
    "owner": "UZK",
@@ -1362,6 +1256,11 @@
    "owner": "KSV",
    "confidence": "inferred"
   },
+  "STATE_SOUTHERN_SIREN_ISLES": {
+   "owner": "TOB",
+   "confidence": "directed",
+   "note": "review round 2"
+  },
   "STATE_SOUTHERN_WORLDS_EDGE": {
    "owner": "MAH",
    "confidence": "directed",
@@ -1371,6 +1270,10 @@
    "owner": "unowned",
    "confidence": "inferred",
    "note": "greenskin wilderness; no clear roster owner"
+  },
+  "STATE_SOUTH_BILBALI": {
+   "owner": "BIL",
+   "confidence": "inferred"
   },
   "STATE_SOUTH_DARKLANDS": {
    "owner": "unowned",
@@ -1401,6 +1304,11 @@
    "confidence": "inferred",
    "note": "Kemperbad hub"
   },
+  "STATE_SPHINX_OF_PHAA": {
+   "owner": "KAS",
+   "confidence": "inferred",
+   "note": "low confidence: registry capital Ka-Sabar has no hub"
+  },
   "STATE_STEEL_PLAINS": {
    "owner": "MZN",
    "confidence": "inferred"
@@ -1409,6 +1317,11 @@
    "owner": "unowned",
    "confidence": "inferred",
    "note": "greenskin wilderness; no clear roster owner"
+  },
+  "STATE_STROVENGAARD": {
+   "owner": "BAE",
+   "confidence": "inferred",
+   "note": "Strovengaard"
   },
   "STATE_STUREN_RIDGE": {
    "owner": "TRO",
@@ -1419,6 +1332,21 @@
    "confidence": "inferred",
    "note": "low confidence: Snagla Grobspit has no location in the registry"
   },
+  "STATE_SUSSURRIO_WOOD": {
+   "owner": "LUC",
+   "confidence": "inferred",
+   "note": "Borgo Sussurro"
+  },
+  "STATE_SWAMP_EATER_HOLD": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
+  },
+  "STATE_SWAMP_OF_TERROR": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "split out of BADLANDS_COAST on main; greenskin wilderness"
+  },
   "STATE_TALDURSFJORD": {
    "owner": "KVE",
    "confidence": "inferred"
@@ -1427,6 +1355,20 @@
    "owner": "TLS",
    "confidence": "directed",
    "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+  },
+  "STATE_TAL_ESTH": {
+   "owner": "WYD",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+  },
+  "STATE_THE_BEAR_S_TEETH": {
+   "owner": "PRA",
+   "confidence": "inferred"
+  },
+  "STATE_THE_BLACK_PIT": {
+   "owner": "BLV",
+   "confidence": "directed",
+   "note": "review: greenskin tag; Black Venom chosen from the \"The Black Pit\" hub name (change if you want another)"
   },
   "STATE_THE_BLIGHT": {
    "owner": "BTO",
@@ -1471,15 +1413,30 @@
    "confidence": "canon",
    "note": "Westerland; seceded 2429 IC"
   },
+  "STATE_THORSHAFN": {
+   "owner": "HAS",
+   "confidence": "inferred",
+   "note": "Trollkingsholm"
+  },
   "STATE_THUNDER_PEAKS": {
    "owner": "DRZ",
    "confidence": "inferred",
    "note": "capital collision: Karak Drazh is Black Crag, held by RFG in 2512; registry capital has no hub of its own"
   },
+  "STATE_TOBARO": {
+   "owner": "TOB",
+   "confidence": "canon",
+   "note": "Tobaro hub"
+  },
   "STATE_TORGOVANN": {
    "owner": "TRG",
    "confidence": "directed",
    "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+  },
+  "STATE_TOWER_OF_THE_BLOODYTOOTH": {
+   "owner": "unowned",
+   "confidence": "inferred",
+   "note": "wilderness; no roster tag"
   },
   "STATE_TRANTINE_HILLS": {
    "owner": "TRA",
@@ -1494,6 +1451,11 @@
    "owner": "TRO",
    "confidence": "canon",
    "note": "Todtheim hub"
+  },
+  "STATE_TYR_VANNA": {
+   "owner": "TLS",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_ULFWRENAR_COAST": {
    "owner": "SAR",
@@ -1523,10 +1485,24 @@
    "confidence": "canon",
    "note": "Barak Varr hub; Dunkelmund farm hub is here too"
   },
+  "STATE_VARG_CAMP": {
+   "owner": "VAR",
+   "confidence": "canon",
+   "note": "Varg Camp / Vargvik hubs"
+  },
   "STATE_VEREZZI": {
    "owner": "VER",
    "confidence": "canon",
    "note": "Verezzo hub"
+  },
+  "STATE_VIDARHEIM": {
+   "owner": "KVE",
+   "confidence": "inferred",
+   "note": "High Tribe by the Chaos Wastes"
+  },
+  "STATE_VOLGEN": {
+   "owner": "TAL",
+   "confidence": "inferred"
   },
   "STATE_VORBERGLAND": {
    "owner": "REI",
@@ -1537,10 +1513,19 @@
    "owner": "NLD",
    "confidence": "inferred"
   },
+  "STATE_WATERFALL_PALACE": {
+   "owner": "ARG",
+   "confidence": "directed",
+   "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
+  },
   "STATE_WESTERN_BADLANDS": {
    "owner": "unowned",
    "confidence": "inferred",
    "note": "greenskin wilderness; no clear roster owner"
+  },
+  "STATE_WESTERN_ESTALIAN_COAST": {
+   "owner": "CNT",
+   "confidence": "inferred"
   },
   "STATE_WESTERN_IRRANAS": {
    "owner": "MAG",
@@ -1553,6 +1538,11 @@
   "STATE_WEST_AVERLAND": {
    "owner": "AVE",
    "confidence": "inferred"
+  },
+  "STATE_WEST_CARCASSONNE": {
+   "owner": "CAR",
+   "confidence": "canon",
+   "note": "Carcassonne hub"
   },
   "STATE_WEST_DARK_LANDS": {
    "owner": "unowned",
@@ -1602,6 +1592,11 @@
    "owner": "UZK",
    "confidence": "inferred"
   },
+  "STATE_WINTERTEETH_FOOTHILLS": {
+   "owner": "XSH",
+   "confidence": "directed",
+   "note": "review: greenskin placeholder for a future Skaven tag"
+  },
   "STATE_WINTERTEETH_PASS": {
    "owner": "WIS",
    "confidence": "directed",
@@ -1626,6 +1621,11 @@
    "owner": "BSB",
    "confidence": "inferred",
    "note": "Bloody Tusks Hold farm hub"
+  },
+  "STATE_WURTBAD": {
+   "owner": "STI",
+   "confidence": "canon",
+   "note": "Wurtbad hub"
   },
   "STATE_WYDRIOTH": {
    "owner": "WYD",

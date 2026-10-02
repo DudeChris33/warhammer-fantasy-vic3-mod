@@ -28,7 +28,7 @@
    "why": "Forest, few farms."
   },
   {
-   "key": "STATE_LAND_334",
+   "key": "STATE_MIDDENHEIM",
    "anchor": [
     4153,
     746
@@ -298,7 +298,7 @@
    "why": "Highlands, thin."
   },
   {
-   "key": "STATE_LAND_602",
+   "key": "STATE_TOBARO",
    "anchor": [
     3813,
     1152
@@ -318,7 +318,7 @@
    "why": "Port above area share."
   },
   {
-   "key": "STATE_LAND_537",
+   "key": "STATE_DRAKENHOF",
    "anchor": [
     4353,
     944
@@ -338,7 +338,7 @@
    "why": "Blighted farmland."
   },
   {
-   "key": "STATE_LAND_317",
+   "key": "STATE_AVERHEIM",
    "anchor": [
     4210,
     969

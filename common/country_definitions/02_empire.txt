@@ -231,7 +231,7 @@ CRB = {
 	# capital: Carroburg — TODO once land state-regions exist
 }
 
-################ XSA — Skaven Clan A (placeholder); STATE_LAND_376 ################
+################ XSA — Skaven Clan A (placeholder); STATE_KRUGENHEIM ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
@@ -248,7 +248,7 @@ XSA = {
 	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
 }
 
-################ XSB — Skaven Clan B (placeholder); STATE_LAND_485 ################
+################ XSB — Skaven Clan B (placeholder); STATE_GLIMDWARROW ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
@@ -306,7 +306,7 @@ GRW = {
 
 ################ LAU — Laurelorn; the elven enclave of the Laurelorn Forest ################
 # Canon-firm place: the elf-held forest north of the Wasteland. Filed here by geography:
-# STATE_LAND_370 sits in map_data/state_regions/02_empire.txt.
+# STATE_BLEEDING_STONE sits in map_data/state_regions/02_empire.txt.
 
 LAU = {
 	color = { 60 228 60 }

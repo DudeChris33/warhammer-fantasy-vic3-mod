@@ -343,7 +343,7 @@ PON = {
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
-# Filed here by geography: STATE_BLIGHTED_MARSHES and STATE_LAND_372 sit in
+# Filed here by geography: STATE_BLIGHTED_MARSHES and STATE_BILIOUS_BASILICA sit in
 # map_data/state_regions/05_southern_realms.txt. goblin is a cross-file culture ref to
 # common/cultures/greenskin.txt.
 

@@ -6,6 +6,32 @@ POPS = {
 			create_pop = { culture = sylvanian_vampire size = 5340 }
 		}
 	}
+	s:STATE_AVERHEIM = {
+		region_state:AVE = {
+			create_pop = { culture = averlander size = 516078 }
+		}
+	}
+	s:STATE_BECHAFEN = {
+		region_state:OSM = {
+			create_pop = { culture = ostermarker size = 265346 }
+		}
+	}
+	s:STATE_BLEEDING_STONE = {
+		region_state:LAU = {
+			create_pop = { culture = wood_elf size = 50000 }
+		}
+	}
+	s:STATE_BOHSENFELS = {
+		region_state:OST = {
+			create_pop = { culture = ostlander size = 197338 }
+		}
+	}
+	s:STATE_DRAKENHOF = {
+		region_state:VSY = {
+			create_pop = { culture = sylvanian size = 190363 }
+			create_pop = { culture = sylvanian_vampire size = 21151 }
+		}
+	}
 	s:STATE_DRAKWALD_FOREST = {
 		region_state:CRB = {
 			create_pop = { culture = middenlander size = 125000 }
@@ -43,6 +69,11 @@ POPS = {
 			create_pop = { culture = talabeclander size = 180433 }
 		}
 	}
+	s:STATE_GLIMDWARROW = {
+		region_state:XSB = {
+			create_pop = { culture = goblin size = 100000 }
+		}
+	}
 	s:STATE_GRYPHON_WOOD = {
 		region_state:GRW = {
 			create_pop = { culture = wood_elf size = 40000 }
@@ -54,68 +85,14 @@ POPS = {
 			create_pop = { culture = hochlander religion = cult_of_sigmar size = 70000 }
 		}
 	}
-	s:STATE_LAND_308 = {
-		region_state:OSM = {
-			create_pop = { culture = ostermarker size = 265346 }
-		}
-	}
-	s:STATE_LAND_317 = {
-		region_state:AVE = {
-			create_pop = { culture = averlander size = 516078 }
-		}
-	}
-	s:STATE_LAND_322 = {
-		region_state:TAL = {
-			create_pop = { culture = talabeclander size = 181301 }
-		}
-	}
-	s:STATE_LAND_331 = {
-		region_state:OST = {
-			create_pop = { culture = ostlander size = 197338 }
-		}
-	}
-	s:STATE_LAND_334 = {
-		region_state:MID = {
-			create_pop = { culture = middenlander size = 656705 }
-			create_pop = { culture = middenlander religion = cult_of_sigmar size = 43299 }
-			create_pop = { culture = dawi size = 21650 }
-		}
-	}
-	s:STATE_LAND_370 = {
-		region_state:LAU = {
-			create_pop = { culture = wood_elf size = 50000 }
-		}
-	}
-	s:STATE_LAND_376 = {
-		region_state:XSA = {
-			create_pop = { culture = goblin size = 100000 }
-		}
-	}
-	s:STATE_LAND_484 = {
-		region_state:BLV = {
-			create_pop = { culture = goblin size = 23787 }
-			create_pop = { culture = orc size = 7929 }
-		}
-	}
-	s:STATE_LAND_485 = {
-		region_state:XSB = {
-			create_pop = { culture = goblin size = 100000 }
-		}
-	}
-	s:STATE_LAND_537 = {
-		region_state:VSY = {
-			create_pop = { culture = sylvanian size = 190363 }
-			create_pop = { culture = sylvanian_vampire size = 21151 }
-		}
-	}
-	s:STATE_LAND_541 = {
-		region_state:STI = {
-			create_pop = { culture = stirlander size = 308400 }
-		}
-	}
-	s:STATE_LAND_579 = {
+	s:STATE_KREUTZHOFEN = {
 		region_state:WIS = {
 			create_pop = { culture = wissenlander size = 151341 }
+		}
+	}
+	s:STATE_KRUGENHEIM = {
+		region_state:XSA = {
+			create_pop = { culture = goblin size = 100000 }
 		}
 	}
 	s:STATE_MARIENBURG = {
@@ -123,6 +100,13 @@ POPS = {
 			create_pop = { culture = marienburger size = 601565 }
 			create_pop = { culture = dawi size = 27037 }
 			create_pop = { culture = halfling size = 27037 }
+		}
+	}
+	s:STATE_MIDDENHEIM = {
+		region_state:MID = {
+			create_pop = { culture = middenlander size = 656705 }
+			create_pop = { culture = middenlander religion = cult_of_sigmar size = 43299 }
+			create_pop = { culture = dawi size = 21650 }
 		}
 	}
 	s:STATE_MIDDENLAND_PROPER = {
@@ -193,9 +177,20 @@ POPS = {
 			create_pop = { culture = talabeclander religion = cult_of_sigmar size = 65180 }
 		}
 	}
+	s:STATE_THE_BLACK_PIT = {
+		region_state:BLV = {
+			create_pop = { culture = goblin size = 23787 }
+			create_pop = { culture = orc size = 7929 }
+		}
+	}
 	s:STATE_THE_WASTELAND = {
 		region_state:MAR = {
 			create_pop = { culture = marienburger size = 624084 }
+		}
+	}
+	s:STATE_VOLGEN = {
+		region_state:TAL = {
+			create_pop = { culture = talabeclander size = 181301 }
 		}
 	}
 	s:STATE_VORBERGLAND = {
@@ -244,6 +239,11 @@ POPS = {
 			create_pop = { culture = wissenlander size = 871215 }
 			create_pop = { culture = dawi size = 56818 }
 			create_pop = { culture = halfling size = 18940 }
+		}
+	}
+	s:STATE_WURTBAD = {
+		region_state:STI = {
+			create_pop = { culture = stirlander size = 308400 }
 		}
 	}
 }
