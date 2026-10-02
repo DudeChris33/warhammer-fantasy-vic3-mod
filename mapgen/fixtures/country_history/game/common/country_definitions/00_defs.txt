@@ -1,0 +1,5 @@
+FXA = { country_type = recognized tier = kingdom cultures = { x } }
+FXB = { country_type = recognized tier = principality cultures = { x } }
+FXD = { country_type = recognized tier = kingdom cultures = { x } }
+FXE = { country_type = recognized tier = kingdom cultures = { x } }
+FXG = { country_type = recognized tier = kingdom cultures = { x } }

@@ -1,0 +1,65 @@
+{
+  "region": "12_eastern_steppes",
+  "baseline": {
+    "tech_tier": 7,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_warrior_caste",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_consumption_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_no_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slave_trade",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_armed_forces",
+      "ig_devout"
+    ],
+    "tax_level": "low",
+    "taxed_goods": [],
+    "institutions": {},
+    "expected_government_type": "gov_principality",
+    "suggested_ig_names": {
+      "ig_armed_forces": "Warhosts",
+      "ig_devout": "Shamans and Chaos Sorcerers"
+    },
+    "source": "canon: WFB 8e Warriors of Chaos (Kurgan, Hung, Kul and Tong marauder tribes of the eastern steppes: horse-raiders under warlords and Chaos shamans)",
+    "why": "Loose marauder confederations under warlords with Chaos shamans; no schooling, police or bureaucracy; tribal package at tier 7"
+  },
+  "tags": {
+    "HUN": {
+      "confidence": "low",
+      "note": "Confederation baseline unchanged; canon gives names of tribes, not institutions (a confederation law variant is a mechanics gap)."
+    },
+    "KUL": {
+      "confidence": "low",
+      "note": "Asavar Kul's host from the Great War against Chaos; baseline unchanged."
+    },
+    "KUR": {
+      "confidence": "low",
+      "note": "Confederation baseline unchanged; canon gives names of tribes, not institutions (a confederation law variant is a mechanics gap)."
+    },
+    "TON": {
+      "confidence": "low",
+      "note": "Confederation baseline unchanged; canon gives names of tribes, not institutions (a confederation law variant is a mechanics gap)."
+    }
+  }
+}

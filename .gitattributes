@@ -5,6 +5,7 @@
 mapgen/fixtures/expected/** -text
 mapgen/fixtures/ingest/expected/** -text
 mapgen/fixtures/boundary/expected/** -text
+mapgen/fixtures/country_history/expected/** -text
 mapgen/fixtures/boundary/*.png binary
 
 # The committed derived rasters are generated bitmaps, diffed byte-for-byte by

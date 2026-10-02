@@ -1,0 +1,57 @@
+note: no common/goods on disk; using the bundled goods list
+note: no common/institutions on disk; using the bundled institutions list
+warning: 00_test.json: FXC: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
+OK 00_test.json: 3 tag(s)
+warning: 01_bad.json: FXH: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
+warning: 01_bad.json: FXI: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
+warning: 01_bad.json: FXZ: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
+ERROR: 01_bad.json: FXH: is a formable (formables are out of scope)
+ERROR: 01_bad.json: FXI: registry places it in 02_bad_baseline
+ERROR: 01_bad.json: FXZ: not in the tag registry
+ERROR: 01_bad.json: FXJ: start tag has no entry
+ERROR: 01_bad.json: FXD: non-default extra_techs needs justify.extra_techs.source and .why
+ERROR: 01_bad.json: FXD: non-default institutions needs justify.institutions.source and .why
+ERROR: 01_bad.json: FXD: non-default laws.lawgroup_bogus needs justify.laws.lawgroup_bogus.source and .why
+ERROR: 01_bad.json: FXD: non-default laws.lawgroup_land_reform needs justify.laws.lawgroup_land_reform.source and .why
+ERROR: 01_bad.json: FXD: non-default laws.lawgroup_taxation needs justify.laws.lawgroup_taxation.source and .why
+ERROR: 01_bad.json: FXD: non-default ruling_igs needs justify.ruling_igs.source and .why
+ERROR: 01_bad.json: FXD: non-default tax_level needs justify.tax_level.source and .why
+ERROR: 01_bad.json: FXD: non-default taxed_goods needs justify.taxed_goods.source and .why
+ERROR: 01_bad.json: FXD: more than one law for lawgroup_taxation: law_consumption_tax, law_per_capita_tax
+ERROR: 01_bad.json: FXD: unknown law law_nonexistent (group lawgroup_land_reform)
+ERROR: 01_bad.json: FXD: unknown law group lawgroup_bogus
+ERROR: 01_bad.json: FXD: unknown tech tech_zzz in extra_techs
+ERROR: 01_bad.json: FXD: unknown interest group ig_zzz
+ERROR: 01_bad.json: FXD: unknown tax_level 'astronomical'
+ERROR: 01_bad.json: FXD: unknown good unobtainium in taxed_goods
+ERROR: 01_bad.json: FXD: unknown institution institution_zzz
+ERROR: 01_bad.json: FXE: law_per_capita_tax is locked: needs tech currency_standards (tier 2 + extra_techs + chosen laws do not provide it)
+ERROR: 01_bad.json: FXE: law_autocracy is disallowed alongside law_republic
+ERROR: 01_bad.json: FXE: laws do not satisfy gov_absolute_kingdom's possible trigger
+ERROR: 01_bad.json: FXG: unknown field bogus_field
+ERROR: 01_bad.json: FXG: unknown profile 'nope'
+ERROR: 01_bad.json: FXG: confidence must be one of high, medium, low
+ERROR: 01_bad.json: FXG: tax_level repeats the baseline; drop it
+ERROR: 01_bad.json: FXG: non-default ruling_igs needs justify.ruling_igs.source and .why
+ERROR: 01_bad.json: FXG: justify.laws.lawgroup_taxation has no matching override
+ERROR: 01_bad.json: FXK: law_landed_voting is disallowed alongside law_serfdom
+ERROR: 01_bad.json: FXK: next_election '2511.5.5' must be YYYY.M.D on or after 2512.1.1
+ERROR: 01_bad.json: FXK: laws do not satisfy gov_absolute_kingdom's possible trigger
+ERROR: 01_bad.json: FXL: extra tech currency_standards needs one of democracy
+ERROR: 01_bad.json: FXL: law_estate_rights is locked: needs law law_republic (tier 3 + extra_techs + chosen laws do not provide it)
+ERROR: 01_bad.json: FXL: law_landed_voting is locked: needs tech democracy (tier 3 + extra_techs + chosen laws do not provide it)
+ERROR: 01_bad.json: FXL: laws hold elections (voting franchise) but next_election is missing
+ERROR: 01_bad.json: FXL: laws do not satisfy gov_absolute_kingdom's possible trigger
+FAIL 01_bad.json: 37 error(s)
+ERROR: 02_bad_baseline.json: baseline missing why
+ERROR: 02_bad_baseline.json: baseline needs a non-empty source and why
+ERROR: 02_bad_baseline.json baseline: missing law group lawgroup_land_reform
+ERROR: 02_bad_baseline.json baseline: unknown tech_tier 9 (helpers: [1, 2, 3])
+ERROR: 02_bad_baseline.json baseline: ruling_igs must be 1-3 distinct groups (got [])
+ERROR: 02_bad_baseline.json: FXI: missing law group lawgroup_land_reform
+ERROR: 02_bad_baseline.json: FXI: unknown tech_tier 9 (helpers: [1, 2, 3])
+ERROR: 02_bad_baseline.json: FXI: ruling_igs must be 1-3 distinct groups (got [])
+FAIL 02_bad_baseline.json: 8 error(s)
+ERROR: 03_dupe_key.json: cannot read: duplicate key 'region'
+FAIL 03_dupe_key.json: 1 error(s)
+1/4 region file(s) valid

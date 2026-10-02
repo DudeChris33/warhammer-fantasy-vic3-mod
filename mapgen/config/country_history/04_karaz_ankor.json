@@ -1,0 +1,201 @@
+{
+  "region": "04_karaz_ankor",
+  "baseline": {
+    "tech_tier": 3,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_professional_army",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_racial_segregation",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_mercantilism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_local_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slavery_banned",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_industrialists",
+      "ig_devout"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {
+      "institution_schools": 1
+    },
+    "expected_government_type": "gov_principality",
+    "suggested_ig_names": {
+      "ig_landowners": "Clan Thanes",
+      "ig_industrialists": "Engineers' and Miners' Guilds",
+      "ig_devout": "Runesmiths and the Ancestor Cult"
+    },
+    "source": "canon: WFB 8e Dwarfs army book; WH: The Old World (2023+) Dwarfs background (King and Thanes, guilds of Engineers/Runesmiths/Miners, ancestor cult, Book of Grudges)",
+    "why": "A hold is a hereditary kingdom of clan Thanes with guild masters, standing regiments, guild-controlled trade and industry, insular borders and gunpowder-plus-steam engineering (tier 3)"
+  },
+  "profiles": {
+    "overrun_hold": {
+      "tech_tier": 4,
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "institutions": {},
+      "source": "canon: WFB 8e Dwarfs / Lexicanum (Karak Eight Peaks, Ekrund, Karak Varn, Mount Gunbad, Karak Ungor, Karak Vlag and Mount Silverspear are overrun, besieged or half-lost to greenskins, Skaven and Chaos)",
+      "why": "A besieged remnant holds the deep vaults with garrison and priests, has lost industrial capacity (one tier down) and cannot fund schools"
+    }
+  },
+  "tags": {
+    "AZL": {
+      "confidence": "low",
+      "note": "Iron Hills hold; baseline unchanged (source silent on its institutions)."
+    },
+    "BVR": {
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_navy_model": "law_professional_navy"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_industrialists",
+        "ig_petty_bourgeoisie"
+      ],
+      "justify": {
+        "laws.lawgroup_navy_model": {
+          "source": "canon: WFB 8e Dwarfs (Barak Varr: Dwarf ironclads and gunships on the Black Gulf)",
+          "why": "The only Dwarf hold with a real navy."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB 8e Dwarfs (Barak Varr is the Dwarfs' seaport and trade gate)",
+          "why": "Sea-traders share power with the Thanes and the guilds."
+        }
+      }
+    },
+    "DRZ": {
+      "confidence": "low",
+      "note": "Baseline unchanged; source thin.",
+      "expected_government_type": "gov_grand_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "EKR": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "GUN": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "KAD": {
+      "confidence": "high",
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_devout",
+        "ig_armed_forces"
+      ],
+      "justify": {
+        "laws.lawgroup_army_model": {
+          "source": "canon: WFB 8e Dwarfs (Karak Kadrin, the Slayer Keep; Slayer cult of Grimnir)",
+          "why": "The Slayer cult is the closest thing the Dwarfs have to a hereditary warrior order."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB 8e Dwarfs (Karak Kadrin, the Slayer Keep)",
+          "why": "Slayers share power with Thanes and Runesmiths instead of the guilds."
+        }
+      }
+    },
+    "KAG": {
+      "confidence": "low",
+      "note": "Baseline unchanged; source thin."
+    },
+    "KAK": {
+      "confidence": "high",
+      "tech_tier": 2,
+      "expected_government_type": "gov_grand_principality",
+      "justify": {
+        "tech_tier": {
+          "source": "canon: WFB 8e Dwarfs (seat of the High King, foremost Engineers' Guild works, gyrocopters and organ guns)",
+          "why": "The High King's hold is the Karaz Ankor's technological front; tier 2 reaches atmospheric_engine and mechanical_tools."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "KEP": {
+      "profile": "overrun_hold",
+      "confidence": "medium",
+      "expected_government_type": "gov_grand_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "KHI": {
+      "confidence": "low",
+      "note": "Grey Mountains hold; baseline unchanged."
+    },
+    "KNO": {
+      "confidence": "low",
+      "note": "Grey Mountains hold; baseline unchanged."
+    },
+    "KRD": {
+      "confidence": "low",
+      "note": "Norse Dwarf hold; baseline unchanged."
+    },
+    "KUN": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "KVN": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "SLV": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "VLG": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "ZHU": {
+      "confidence": "high",
+      "tech_tier": 2,
+      "justify": {
+        "tech_tier": {
+          "source": "canon: WFB 8e Dwarfs (Zhufbar is the seat of the Engineers' Guild)",
+          "why": "The guild's home hold sits at the industrial frontier."
+        }
+      }
+    }
+  }
+}

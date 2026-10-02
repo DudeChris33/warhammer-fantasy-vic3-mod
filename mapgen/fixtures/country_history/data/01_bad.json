@@ -1,0 +1,148 @@
+{
+  "region": "01_bad",
+  "baseline": {
+    "tech_tier": 2,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_taxation": "law_consumption_tax",
+      "lawgroup_land_reform": "law_tenants"
+    },
+    "ruling_igs": [
+      "ig_a",
+      "ig_b"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "grain"
+    ],
+    "institutions": {
+      "institution_schools": 1
+    },
+    "expected_government_type": "gov_absolute_kingdom",
+    "source": "fixture",
+    "why": "synthetic baseline"
+  },
+  "tags": {
+    "FXD": {
+      "confidence": "high",
+      "laws": {
+        "lawgroup_taxation": [
+          "law_consumption_tax",
+          "law_per_capita_tax"
+        ],
+        "lawgroup_bogus": "law_monarchy",
+        "lawgroup_land_reform": "law_nonexistent"
+      },
+      "ruling_igs": [
+        "ig_zzz"
+      ],
+      "extra_techs": [
+        "tech_zzz"
+      ],
+      "taxed_goods": [
+        "unobtainium"
+      ],
+      "institutions": {
+        "institution_zzz": 1
+      },
+      "tax_level": "astronomical"
+    },
+    "FXE": {
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_governance_principles": "law_republic",
+        "lawgroup_taxation": "law_per_capita_tax"
+      },
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "fixture",
+          "why": "disallowed pair with autocracy"
+        },
+        "laws.lawgroup_taxation": {
+          "source": "fixture",
+          "why": "locked at tier 2"
+        }
+      }
+    },
+    "FXG": {
+      "profile": "nope",
+      "bogus_field": 1,
+      "tax_level": "medium",
+      "ruling_igs": [
+        "ig_c"
+      ],
+      "justify": {
+        "tax_level": {
+          "source": "fixture",
+          "why": "repeats baseline"
+        },
+        "laws.lawgroup_taxation": {
+          "source": "fixture",
+          "why": "stale: nothing overrides taxation"
+        }
+      }
+    },
+    "FXH": {
+      "confidence": "low"
+    },
+    "FXI": {
+      "confidence": "low"
+    },
+    "FXK": {
+      "confidence": "low",
+      "laws": {
+        "lawgroup_distribution_of_power": "law_landed_voting",
+        "lawgroup_land_reform": "law_serfdom"
+      },
+      "next_election": "2511.5.5",
+      "justify": {
+        "laws.lawgroup_distribution_of_power": {
+          "source": "fixture",
+          "why": "franchise"
+        },
+        "laws.lawgroup_land_reform": {
+          "source": "fixture",
+          "why": "disallowed with landed voting"
+        },
+        "next_election": {
+          "source": "fixture",
+          "why": "before start"
+        }
+      }
+    },
+    "FXL": {
+      "confidence": "low",
+      "tech_tier": 3,
+      "extra_techs": [
+        "currency_standards"
+      ],
+      "laws": {
+        "lawgroup_distribution_of_power": "law_landed_voting",
+        "lawgroup_land_reform": "law_estate_rights"
+      },
+      "justify": {
+        "tech_tier": {
+          "source": "fixture",
+          "why": "tier 3 has no democracy"
+        },
+        "extra_techs": {
+          "source": "fixture",
+          "why": "prerequisite democracy missing"
+        },
+        "laws.lawgroup_distribution_of_power": {
+          "source": "fixture",
+          "why": "franchise, no next_election"
+        },
+        "laws.lawgroup_land_reform": {
+          "source": "fixture",
+          "why": "needs law_republic"
+        }
+      }
+    },
+    "FXZ": {
+      "confidence": "low"
+    }
+  }
+}

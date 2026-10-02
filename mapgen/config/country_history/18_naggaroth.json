@@ -1,0 +1,146 @@
+{
+  "region": "18_naggaroth",
+  "baseline": {
+    "tech_tier": 3,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_professional_army",
+      "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_professional_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_local_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slave_trade",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_armed_forces",
+      "ig_devout"
+    ],
+    "tax_level": "high",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {
+      "institution_police": 1
+    },
+    "expected_government_type": "gov_absolute_grand_principality",
+    "suggested_ig_names": {
+      "ig_landowners": "Noble Houses",
+      "ig_armed_forces": "Black Guard and Corsairs",
+      "ig_devout": "Cult of Khaine"
+    },
+    "source": "canon: WFB 8e Dark Elves army book (Malekith the Witch King rules absolutely; noble houses, corsair fleets, Cult of Khaine, slave economy raided from other lands)",
+    "why": "An absolute Witch King over noble houses and a warrior priesthood: standing Black Guard and corsair fleets, appointed retainers, a slave-raiding economy, closed borders and crushing extraction"
+  },
+  "tags": {
+    "CLK": {
+      "confidence": "high",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_industrialists"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Dark Elves (Clar Karond builds the Black Arks)",
+          "why": "Shipwrights and corsair captains."
+        }
+      }
+    },
+    "GHR": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_devout",
+        "ig_intelligentsia"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Dark Elves (Ghrond: Morathi's Convent of Sorceresses)",
+          "why": "Sorceresses and their cult rule the North Tower."
+        }
+      }
+    },
+    "HAR": {
+      "confidence": "high",
+      "laws": {
+        "lawgroup_governance_principles": "law_theocracy",
+        "lawgroup_army_model": "law_warrior_caste"
+      },
+      "ruling_igs": [
+        "ig_devout",
+        "ig_armed_forces"
+      ],
+      "expected_government_type": "gov_theocratic_dictatorship",
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: WFB 8e Dark Elves (Har Ganeth, the City of Executioners: cult of Khaine)",
+          "why": "A city run by the Khainite priesthood."
+        },
+        "laws.lawgroup_army_model": {
+          "source": "canon: WFB 8e Dark Elves (Executioners of Har Ganeth)",
+          "why": "A caste of executioner-warriors."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB 8e Dark Elves (Cult of Khaine)",
+          "why": "Priests first, then Executioners."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "HGF": {
+      "confidence": "medium",
+      "note": "The Dark Crag, second city of Naggaroth; baseline unchanged."
+    },
+    "KKR": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_petty_bourgeoisie",
+        "ig_armed_forces"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Dark Elves (Karond Kar, the Slaver's Gate)",
+          "why": "Slavers and their guards."
+        }
+      }
+    },
+    "NGD": {
+      "confidence": "high",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "expected_government_type": "gov_absolute_kingdom",
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Dark Elves (Naggarond, Malekith's Black Guard)",
+          "why": "The Witch King's seat is ruled by his guard and noble retinue."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at kingdom tier."
+        }
+      }
+    }
+  }
+}

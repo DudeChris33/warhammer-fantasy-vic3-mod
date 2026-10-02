@@ -1,0 +1,4 @@
+ig_a = { enable = { always = yes } }
+ig_b = { enable = { always = yes } }
+ig_c = { enable = { always = yes } }
+ig_d = { enable = { always = yes } }
