@@ -1,0 +1,55 @@
+﻿CHARACTERS = {
+	c:KAK ?= {
+		create_character = { # Thorgrim Grudgebearer
+			template = KAK_thorgrim_grudgebearer_template
+		}
+	}
+	c:KAD ?= {
+		create_character = { # Ungrim Ironfist
+			template = KAD_ungrim_ironfist_template
+		}
+	}
+	c:ZHU ?= {
+		create_character = { # Barundin Stoneheart
+			template = ZHU_barundin_stoneheart_template
+		}
+		create_character = { # Burlok Damminson
+			template = ZHU_burlok_damminson_template
+		}
+	}
+	c:KEP ?= {
+		create_character = { # Belegar Ironhammer
+			template = KEP_belegar_ironhammer_template
+		}
+	}
+	c:BVR ?= {
+		create_character = { # Byrrnoth Grundadrakk
+			template = BVR_byrrnoth_grundadrakk_template
+		}
+	}
+	c:KHI ?= {
+		create_character = { # Alrik Ranulfsson
+			template = KHI_alrik_ranulfsson_template
+		}
+	}
+	c:KNO ?= {
+		create_character = { # Brokk Ironpick
+			template = KNO_brokk_ironpick_template
+		}
+	}
+	c:AZL ?= {
+		create_character = { # Kazador Thunderhorn
+			template = AZL_kazador_thunderhorn_template
+		}
+	}
+	c:KIZ ?= {
+		create_character = { # Kazran
+			template = KIZ_kazran_template
+		}
+	}
+	c:VMP ?= {
+		create_character = { # Heinrich Kemmler
+			template = VMP_heinrich_kemmler_template
+		}
+	}
+}

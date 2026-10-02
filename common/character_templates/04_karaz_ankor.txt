@@ -1,0 +1,224 @@
+﻿# Historical characters of the karaz ankor tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: Warhammer Armies: Dwarfs (High King Thorgrim Grudgebearer); Lexicanum "Thorgrim Grudgebearer"
+# Confidence: high
+# Note: Canon age far above 100; birth_date shortened.
+KAK_thorgrim_grudgebearer_template = {
+	first_name = WHCHAR_KAK_thorgrim_grudgebearer_first
+	last_name = WHCHAR_KAK_thorgrim_grudgebearer_last
+	historical = yes
+	culture = cu:dawi
+	ruler = yes
+	noble = yes
+	birth_date = 2440.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_AGRILDRIN
+	traits = {
+		honorable
+		persistent
+	}
+}
+
+# Source: Warhammer Armies: Dwarfs (Ungrim Ironfist, Slayer King of Karak Kadrin)
+# Confidence: high
+# Note: Canon age far above 100; birth_date shortened.
+KAD_ungrim_ironfist_template = {
+	first_name = WHCHAR_KAD_ungrim_ironfist_first
+	last_name = WHCHAR_KAD_ungrim_ironfist_last
+	historical = yes
+	culture = cu:dawi
+	ruler = yes
+	noble = yes
+	birth_date = 2440.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_PEAK_PASS
+	traits = {
+		brave
+		wrathful
+	}
+}
+
+# Source: Warhammer Chronicles / novel Grudgebearer (King Barundin Stoneheart of Zhufbar)
+# Confidence: low
+# Note: WFRP 4th ed. Lords of Stone and Steel names Morgrim Ironforge instead; flagged for Chris.
+ZHU_barundin_stoneheart_template = {
+	first_name = WHCHAR_ZHU_barundin_stoneheart_first
+	last_name = WHCHAR_ZHU_barundin_stoneheart_last
+	historical = yes
+	culture = cu:dawi
+	ruler = yes
+	noble = yes
+	birth_date = 2450.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_BLACK_WATER
+	traits = {
+		cautious
+		honorable
+	}
+}
+
+# Source: Warhammer Armies: Dwarfs (Burlok Damminson, Engineers Guild)
+# Confidence: medium
+ZHU_burlok_damminson_template = {
+	first_name = WHCHAR_ZHU_burlok_damminson_first
+	last_name = WHCHAR_ZHU_burlok_damminson_last
+	historical = yes
+	culture = cu:dawi
+	role = politician
+	birth_date = 2455.1.1
+	interest_group = ig_industrialists
+	ideology = ideology_modernizer_leader
+	home_region = STATE_BLACK_WATER
+	traits = {
+		engineer
+		meticulous
+	}
+	on_created = {
+		set_as_interest_group_leader = yes
+	}
+}
+
+# Source: Warhammer Armies: Dwarfs (Belegar Ironhammer, True King of Karak Eight Peaks); https://warhammerfantasy.fandom.com/wiki/Belegar_Ironhammer
+# Confidence: high
+# Note: Canon age far above 100; birth_date shortened.
+KEP_belegar_ironhammer_template = {
+	first_name = WHCHAR_KEP_belegar_ironhammer_first
+	last_name = WHCHAR_KEP_belegar_ironhammer_last
+	historical = yes
+	culture = cu:dawi_ancestral
+	ruler = yes
+	role = general
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	traits = {
+		stalwart_defender
+		persistent
+	}
+}
+
+# Source: Warhammer Armies: Dwarfs (King Byrrnoth Grundadrakk of Barak Varr); https://whfb.lexicanum.com/wiki/Barak_Varr
+# Confidence: medium
+# Note: Canon age far above 100; birth_date shortened.
+BVR_byrrnoth_grundadrakk_template = {
+	first_name = WHCHAR_BVR_byrrnoth_grundadrakk_first
+	last_name = WHCHAR_BVR_byrrnoth_grundadrakk_last
+	historical = yes
+	culture = cu:dawi
+	ruler = yes
+	noble = yes
+	birth_date = 2445.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_VARENKA_HILLS
+	traits = {
+		direct
+		honorable
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Karak_Hirn (King Alrik Ranulfsson); WFRP Karak Hirn: Heart of the Hornberg
+# Confidence: medium
+# Note: Canon age far above 100; birth_date shortened.
+KHI_alrik_ranulfsson_template = {
+	first_name = WHCHAR_KHI_alrik_ranulfsson_first
+	last_name = WHCHAR_KHI_alrik_ranulfsson_last
+	historical = yes
+	culture = cu:dawi_grey
+	ruler = yes
+	noble = yes
+	birth_date = 2450.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_BLACK_MOUNTAINS
+	traits = {
+		cautious
+		honorable
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Karak_Norn (King Brokk Ironpick the Grim); WFRP4 Lords of Stone and Steel
+# Confidence: low
+# Note: Canon age far above 100; birth_date shortened.
+KNO_brokk_ironpick_template = {
+	first_name = WHCHAR_KNO_brokk_ironpick_first
+	last_name = WHCHAR_KNO_brokk_ironpick_last
+	historical = yes
+	culture = cu:dawi_grey
+	ruler = yes
+	noble = yes
+	birth_date = 2430.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_NORTH_GREY_MOUNTAINS
+	traits = {
+		cautious
+		persistent
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Karak_Azul (King Kazador Thunderhorn, Donarkhun clan)
+# Confidence: low
+# Note: Canon age far above 100; birth_date shortened.
+AZL_kazador_thunderhorn_template = {
+	first_name = WHCHAR_AZL_kazador_thunderhorn_first
+	last_name = WHCHAR_AZL_kazador_thunderhorn_last
+	historical = yes
+	culture = cu:dawi_ancestral
+	ruler = yes
+	noble = yes
+	birth_date = 2420.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_IRON_PEAKS
+	traits = {
+		persistent
+		cautious
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Karak_Izor (King Kazran)
+# Confidence: low
+# Note: Canon age far above 100; birth_date shortened. Surname unattested.
+KIZ_kazran_template = {
+	first_name = WHCHAR_KIZ_kazran_first
+	historical = yes
+	culture = cu:dawi
+	ruler = yes
+	noble = yes
+	birth_date = 2445.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_SHATTERED_TEETH
+	traits = {
+		cautious
+		direct
+	}
+}
+
+# Source: Warhammer Armies: Vampire Counts (Heinrich Kemmler, the Lichemaster); planning/tag_registry.md VMP row
+# Confidence: high
+# Note: Human lich; sylvanian_vampire culture is a disclosed stand-in (peoples.md). Canon age far above 100.
+VMP_heinrich_kemmler_template = {
+	first_name = WHCHAR_VMP_heinrich_kemmler_first
+	last_name = WHCHAR_VMP_heinrich_kemmler_last
+	historical = yes
+	culture = cu:sylvanian_vampire
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_nihilist
+	home_region = STATE_EASTERN_IRRANAS
+	traits = {
+		ruthless
+		erudite
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
