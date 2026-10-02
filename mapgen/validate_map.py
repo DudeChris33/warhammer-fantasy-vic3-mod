@@ -526,7 +526,7 @@ def _check_state_history(history_dir: Path, state_regions_dir: Path, ownership_p
 
 def _check_country_history(history_path: Path, ownership_path: Path, country_definitions_dir: Path,
                            scripted_effects_dir: Path) -> tuple[list[str], list[str]]:
-    """``common/history/countries/00_start_setup.txt`` against the owner set of
+    """``common/history/countries/<tag>.txt`` (one file per tag) against the owner set of
     ``state_ownership.json``, the defined (non-dynamic) tags and the scripted
     effects it calls -- see ``worldgen.country_history.check``. Returns
     ``(errors, warnings)``; a held-back owner tag is reported by the state-history
@@ -538,8 +538,7 @@ def _check_country_history(history_path: Path, ownership_path: Path, country_def
     if not ownership_path.is_file():
         return [f"state ownership not found at {ownership_path} -- run read_state_ownership.py"], []
     doc = json.loads(ownership_path.read_text(encoding="utf-8"))
-    text = history_path.read_bytes().decode("utf-8") if history_path.is_file() else None
-    errors, held_back = ch.check(text, doc, ch.load_country_tiers(country_definitions_dir),
+    errors, held_back = ch.check(ch.load_history_dir(history_path), doc, ch.load_country_tiers(country_definitions_dir),
                                  ch.load_effect_names(scripted_effects_dir))
     notes = [f"country history: owner tag(s) with no country definition get no block: {', '.join(held_back)}"]         if held_back else []
     return [f"country history: {e}" for e in errors], notes
@@ -2415,8 +2414,7 @@ def main(argv: list[str] | None = None) -> int:
         state_ownership_path=None if args.fixture else TOOLS_DIR / "derived" / "state_ownership.json",
         country_definitions_dir=None if args.fixture else REPO_ROOT / "common" / "country_definitions",
         cultures_dir=None if args.fixture else REPO_ROOT / "common" / "cultures",
-        country_history_path=None if args.fixture else
-        REPO_ROOT / "common" / "history" / "countries" / "00_start_setup.txt",
+        country_history_path=None if args.fixture else REPO_ROOT / "common" / "history" / "countries",
         scripted_effects_dir=None if args.fixture else REPO_ROOT / "common" / "scripted_effects",
     )
     # Warnings are advisory (canon-city impassable collisions, #3789) — printed

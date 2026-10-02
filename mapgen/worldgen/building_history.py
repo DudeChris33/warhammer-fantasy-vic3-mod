@@ -22,7 +22,7 @@ A building or production method placed in a country that has not researched its
 unlocking technology crashes the game at load. So nothing is emitted unless the owner's
 starting tech and laws allow it, and every failure goes *closed*:
 
-* A tag's techs and laws come ONLY from what ``common/history/countries/00_start_setup.txt``
+* A tag's techs and laws come ONLY from what the files in ``common/history/countries/``
   runs for it: ``add_technology_researched`` lines and nested scripted effects
   (``common/scripted_effects``), ``activate_law`` (last law of a group wins) and
   ``if``/``else`` on ``is_country_type``. Any construct it cannot evaluate, a missing tag
@@ -319,7 +319,7 @@ def resolve_tags(setup_text: str | None, defs, law_groups, ctypes) -> dict[str, 
     for tag, _ in blocks:
         seen[tag] = seen.get(tag, 0) + 1
     items = parse(setup_text)
-    root = next((v for k, _, v in items if k == "COUNTRIES" and isinstance(v, list)), [])
+    root = [e for k, _, v in items if k == "COUNTRIES" and isinstance(v, list) for e in v]
     for k, _, v in root:
         if not (k and k.startswith("c:") and isinstance(v, list)):
             continue
@@ -478,9 +478,9 @@ def load_world(root: Path) -> World:
     for p in sorted((root / "common" / "history" / "pops").glob("*.txt")):
         pops.update(parse_pops(p.read_text(encoding="utf-8-sig")))
     c = root / "common"
-    setup = c / "history" / "countries" / "00_start_setup.txt"
+    setup = sorted((c / "history" / "countries").glob("*.txt"))
     law_groups = load_law_groups(c / "laws")
-    tags = resolve_tags(setup.read_text(encoding="utf-8-sig") if setup.is_file() else None,
+    tags = resolve_tags("\n".join(f.read_text(encoding="utf-8-sig") for f in setup),
                         load_effect_defs(c / "scripted_effects"), law_groups, load_country_types(c / "country_definitions"))
     return World(files, res, anchors, owners, pops, load_buildings(c / "buildings"),
                  load_groups(c / "production_method_groups"), load_pms(c / "production_methods"), tags,
@@ -939,7 +939,7 @@ def markdown_report(cfg: Config, world: World, p: Plan) -> str:
     for u in p.units:
         by_tag.setdefault(u.tag, []).append(u)
     L += ["## Tech gate: most advanced building and production method per tag\n",
-          "Techs come only from `00_start_setup.txt`; `none` = no technology needed. Ranked by the era of the "
+          "Techs come only from the `common/history/countries/` files; `none` = no technology needed. Ranked by the era of the "
           "unlocking tech, then name. *Techs relied on* is every distinct tech any emitted building or method of the tag needs.\n",
           "| Tag | Resolved | Most advanced building | Unlocked by | Most advanced method | Unlocked by | Techs relied on |",
           "|---|---|---|---|---|---|---|"]

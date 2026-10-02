@@ -1,9 +1,10 @@
-"""Starting country setup as game script: ``common/history/countries/00_start_setup.txt``.
+"""Starting country setup as game script: one file per tag in ``common/history/countries/``.
 
 Every tag that owns a state at the start date (``mapgen/derived/state_ownership.json``)
 needs a starting setup or its laws and technology are empty. This module writes
-the smallest setup vanilla itself uses for a minimal country (e.g.
-``game/common/history/countries/dah - dahomey.txt``)::
+the smallest setup vanilla itself uses for a minimal country, in vanilla's layout of
+one file per country (e.g. ``game/common/history/countries/dah - dahomey.txt``;
+here ``dah.txt`` -- the engine reads every file name, the name part is cosmetic)::
 
     COUNTRIES = {
     	c:TAG ?= {
@@ -18,7 +19,7 @@ Both effects are the vanilla scripted effects restored in
 
 Rules
 -----
-* One block per owner tag: every ``owner`` / ``owners[].owner`` tag, plus ``UNO``
+* One file per owner tag (``file_name``), one block in it: every ``owner`` / ``owners[].owner`` tag, plus ``UNO``
   (Unclaimed Lands, #6391) whenever a state or slice is ``unowned`` or an
   out-of-scope ``placeholder`` -- the same token mapping the state history uses
   (``state_history.TOKEN_OWNER``). A tag with no non-dynamic
@@ -146,17 +147,22 @@ def plan(ownership_doc: dict, tiers: dict[str, str | None]) -> Plan:
     return Plan(blocks=blocks, held_back=held)
 
 
-def render(blocks: list[tuple[str, list[str]]]) -> str:
-    """The history file (no BOM, LF). Header comment only when ``blocks`` is empty."""
-    if not blocks:
-        return HEADER
-    lines = [HEADER.rstrip("\n"), "COUNTRIES = {"]
-    for tag, effects in blocks:
-        lines.append(f"\tc:{tag} ?= {{")
-        lines += [f"\t\t{e} = yes" for e in effects]
-        lines.append("\t}")
-    lines.append("}")
+def file_name(tag: str) -> str:
+    """``dah.txt`` for ``DAH`` -- vanilla's file-per-country layout."""
+    return f"{tag.lower()}.txt"
+
+
+def render_file(tag: str, effects: list[str]) -> str:
+    """One tag's history file (no BOM, LF)."""
+    lines = [HEADER.rstrip("\n"), "COUNTRIES = {", f"\tc:{tag} ?= {{"]
+    lines += [f"\t\t{e} = yes" for e in effects]
+    lines += ["\t}", "}"]
     return "\n".join(lines) + "\n"
+
+
+def render(blocks: list[tuple[str, list[str]]]) -> dict[str, str]:
+    """``{file name: text}`` for every planned block."""
+    return {file_name(tag): render_file(tag, effects) for tag, effects in blocks}
 
 
 # ---------------------------------------------------------------------------
@@ -179,29 +185,34 @@ def parse_history_text(text: str) -> list[tuple[str, list[str]]]:
     return out
 
 
-def check(text: str | None, ownership_doc: dict, tiers: dict[str, str | None],
+def check(texts: dict[str, str] | None, ownership_doc: dict, tiers: dict[str, str | None],
           effect_names: set[str]) -> tuple[list[str], list[str]]:
-    """Validate the emitted file. Returns ``(errors, held_back)``; ``held_back`` lists
-    JSON owners with no definition (the caller decides whether that is an error)."""
+    """Validate the emitted files (``{file name: text}``). Returns ``(errors, held_back)``;
+    ``held_back`` lists JSON owners with no definition (the caller decides whether that is
+    an error)."""
     try:
         p = plan(ownership_doc, tiers)
     except OwnershipError as exc:
         return [str(exc)], []
-    if text is None:
-        return ["history/countries/00_start_setup.txt is missing -- run generate_country_history.py"], p.held_back
+    if not texts:
+        return ["common/history/countries has no files -- run generate_country_history.py"], p.held_back
     errors: list[str] = []
-    try:
-        parsed = parse_history_text(text)
-    except OwnershipError as exc:
-        return [f"history/countries/00_start_setup.txt: {exc}"], p.held_back
     seen: dict[str, int] = {}
-    for tag, effects in parsed:
-        seen[tag] = seen.get(tag, 0) + 1
-        if tag not in tiers:
-            errors.append(f"c:{tag}: no (non-dynamic) common/country_definitions entry")
-        for e in effects:
-            if e not in effect_names:
-                errors.append(f"c:{tag}: {e} is not a scripted effect in common/scripted_effects")
+    for fname, text in sorted(texts.items()):
+        try:
+            parsed = parse_history_text(text)
+        except OwnershipError as exc:
+            errors.append(f"history/countries/{fname}: {exc}")
+            continue
+        for tag, effects in parsed:
+            seen[tag] = seen.get(tag, 0) + 1
+            if fname != file_name(tag) or len(parsed) != 1:
+                errors.append(f"c:{tag}: lives in {fname}, expected one block per file in {file_name(tag)}")
+            if tag not in tiers:
+                errors.append(f"c:{tag}: no (non-dynamic) common/country_definitions entry")
+            for e in effects:
+                if e not in effect_names:
+                    errors.append(f"c:{tag}: {e} is not a scripted effect in common/scripted_effects")
     for tag, n in sorted(seen.items()):
         if n > 1:
             errors.append(f"c:{tag}: appears {n} times in the country history")
@@ -210,6 +221,15 @@ def check(text: str | None, ownership_doc: dict, tiers: dict[str, str | None],
         errors.append(f"c:{tag}: owns a state but has no country history block -- regenerate")
     for tag in sorted(set(seen) - expected - {t for t in seen if t not in tiers}):
         errors.append(f"c:{tag}: has a country history block but owns no state -- regenerate")
-    if not errors and sh.normalize_text(text) != render(p.blocks):
-        errors.append("country history differs from what the generator emits (tier or effect changed) -- regenerate")
+    if not errors:
+        want = render(p.blocks)
+        for fname, text in sorted(texts.items()):
+            if sh.normalize_text(text) != want[fname]:
+                errors.append(f"history/countries/{fname} differs from what the generator emits (tier or effect changed) -- regenerate")
     return errors, p.held_back
+
+
+def load_history_dir(history_dir: Path) -> dict[str, str]:
+    """``{file name: text}`` for every ``*.txt`` in the country history folder."""
+    d = Path(history_dir)
+    return {p.name: p.read_bytes().decode("utf-8") for p in sorted(d.glob("*.txt"))} if d.is_dir() else {}

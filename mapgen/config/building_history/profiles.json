@@ -1,5 +1,5 @@
 {
- "_comment": "Hand-authored per-tag development profile at 2512 IC. See README.md. Techs are never read from here: the tech gate uses only common/history/countries/00_start_setup.txt.",
+ "_comment": "Hand-authored per-tag development profile at 2512 IC. See README.md. Techs are never read from here: the tech gate uses only the files in common/history/countries/.",
  "job_share_cap": 0.4,
  "archetypes": {
   "imperial_rich": {

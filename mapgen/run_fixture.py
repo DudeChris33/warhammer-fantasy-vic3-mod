@@ -5250,16 +5250,18 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
         == {"REI", "MID"}, "no unowned / placeholder token, no UNO"
     assert ch.owner_tags({"states": {"STATE_DELTA": states["STATE_DELTA"]}}) == {"UNO"}
     assert ch.owner_tags({"states": {"STATE_BETA": states["STATE_BETA"]}}) == {"UNO"}
-    text = ch.render(p.blocks)
-    assert text == ch.render(ch.plan(ownership_doc, tiers).blocks), "byte-stable"
+    texts = ch.render(p.blocks)
+    assert texts == ch.render(ch.plan(ownership_doc, tiers).blocks), "byte-stable"
+    assert sorted(texts) == ["mid.txt", "rei.txt", "uno.txt"], "one file per tag, vanilla's layout"
+    text = texts["rei.txt"]
     assert "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n" in text, \
         "vanilla shape: tabs, c: scope, ?="
-    assert ch.render([]) == ch.HEADER
-    crlf = "﻿" + text.replace("\n", "\r\n")
+    assert "c:MID" not in text, "one block per file"
+    crlf = {n: "\ufeff" + t.replace("\n", "\r\n") for n, t in texts.items()}
     errs, held = ch.check(crlf, ownership_doc, tiers, effects)
     assert errs == [] and held == [], errs
-    assert ch.parse_history_text(crlf) == p.blocks
-    assert ch.parse_country_tiers("﻿REI = {\n\ttier = kingdom\n}\nXXX = {\n}\n"
+    assert ch.parse_history_text(crlf["rei.txt"]) == [p.blocks[1]]
+    assert ch.parse_country_tiers("\ufeffREI = {\n\ttier = kingdom\n}\nXXX = {\n}\n"
                                   "D00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI": "kingdom", "XXX": None}
 
     # an undefined owner is held back (no block) and reported
@@ -5274,21 +5276,23 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
         else:
             raise AssertionError("plan() must refuse a tier with no starting-technology mapping")
 
-    def refused(text_: str | None, frag: str, tiers_: dict = tiers, effects_: set = effects) -> None:
-        e, _ = ch.check(text_, ownership_doc, tiers_, effects_)
+    def refused(texts_: dict | None, frag: str, tiers_: dict = tiers, effects_: set = effects) -> None:
+        e, _ = ch.check(texts_, ownership_doc, tiers_, effects_)
         assert any(frag in x for x in e), f"expected {frag!r} in {e}"
 
-    refused(None, "is missing")
-    rei = "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n\t\teffect_starting_politics_traditional = yes\n\t}\n"
-    assert rei in text
-    refused(text.replace(rei, ""), "owns a state but has no country history block")
-    refused(text.replace("c:MID", "c:REI"), "appears 2 times")
-    refused(text.replace("c:MID", "c:QQQ"), "no (non-dynamic) common/country_definitions")
-    refused(text.replace("tier_6_tech", "tier_9_tech"), "not a scripted effect")
-    refused(text, "not a scripted effect", effects_=effects - {ch.POLITICS_EFFECT})
-    refused(text.replace("tier_6_tech", "tier_5_tech"), "differs from what the generator emits")
-    extra = text.rstrip("\n")[:-1] + "\tc:ZZZ ?= {\n\t\teffect_starting_politics_traditional = yes\n\t}\n}\n"
-    refused(extra, "has a country history block but owns no state", {**tiers, "ZZZ": "kingdom"})
+    def swap(name: str, fn) -> dict:
+        return {**texts, name: fn(texts[name])}
+
+    refused({}, "has no files")
+    refused({n: t for n, t in texts.items() if n != "rei.txt"}, "owns a state but has no country history block")
+    refused({**texts, "mid.txt": texts["rei.txt"]}, "lives in mid.txt, expected one block per file in rei.txt")
+    refused({**texts, "00_start_setup.txt": texts["mid.txt"]}, "appears 2 times")
+    refused(swap("mid.txt", lambda t: t.replace("c:MID", "c:QQQ")), "no (non-dynamic) common/country_definitions")
+    refused(swap("mid.txt", lambda t: t.replace("tier_6_tech", "tier_9_tech")), "not a scripted effect")
+    refused(texts, "not a scripted effect", effects_=effects - {ch.POLITICS_EFFECT})
+    refused(swap("mid.txt", lambda t: t.replace("tier_6_tech", "tier_5_tech")), "differs from what the generator emits")
+    refused({**texts, "zzz.txt": ch.render_file("ZZZ", [ch.POLITICS_EFFECT])},
+            "has a country history block but owns no state", {**tiers, "ZZZ": "kingdom"})
 
 
 COUNTRY_HISTORY_DIR = TOOLS_DIR / "fixtures" / "country_history"
