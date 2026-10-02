@@ -1,0 +1,17 @@
+﻿CHARACTERS = {
+	c:IRN ?= {
+		create_character = { # Ghark Ironskin
+			template = IRN_ghark_ironskin_template
+		}
+	}
+	c:EYB ?= {
+		create_character = { # Malron Eyebiter
+			template = EYB_malron_eyebiter_template
+		}
+	}
+	c:MAW ?= {
+		create_character = { # Skrag the Slaughterer
+			template = MAW_skrag_the_slaughterer_template
+		}
+	}
+}
