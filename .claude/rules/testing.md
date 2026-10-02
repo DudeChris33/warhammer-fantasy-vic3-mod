@@ -86,6 +86,7 @@ generate_arable_heatmap.py
 | `generate_province_terrains.py` | `map_data/province_terrains.txt` |
 | `generate_adjacencies.py --write` | `map_data/adjacencies.csv`, `common/strait_definitions/canals.txt`, `localization/english/map/wh_canals_l_english.yml` |
 | `generate_arable_heatmap.py` | `mapgen/derived/arable_heatmap.png`, `arable_heatmap_index.json` |
+| `read_state_ownership.py` | `mapgen/derived/state_ownership.json` (per-`STATE_*` owner, or split owners with province ids, read from `state_ownership.png`) |
 | `fit_registration.py` | `mapgen/registration/*.json` |
 | engine (copy from `Documents/.../Victoria 3/generated/` after a load reports an incomplete locator) | `gfx/map/map_object_data/generated_map_object_locators_*` |
 
@@ -100,7 +101,7 @@ generate_arable_heatmap.py
 
 ### Hand-authored inputs (edit deliberately, regenerate through — never inferred from generator output)
 
-`mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
+`mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, `state_ownership.png` (the painted starting owner of every drawn state, flat exact-RGB fills; `render_state_ownership.py` only bootstraps it from `state_ownership_proposal.json`, never overwrites a repaint without `--force`) with its colour key `state_ownership_legend.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
 
 ### Dev-only review renders (gitignored `mapgen/derived/` output, outside the gate)
 

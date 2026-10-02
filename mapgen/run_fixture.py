@@ -4977,7 +4977,78 @@ def _selfcheck_composite_layers_over() -> None:
         raise AssertionError("composite_layers_over([]) should have raised ValueError")
 
 
+def _selfcheck_state_ownership() -> None:
+    """Starting-ownership map: render -> read round-trips on the synthetic world.
+
+    Drives ``worldgen.state_ownership`` (the core of ``render_state_ownership.py`` /
+    ``read_state_ownership.py``) over the committed golden provinces + state files:
+    whole-state fills, a split state (GAMMA straddles the x=0 seam), a placeholder
+    state (DELTA), border overlay ignored on read, unknown colour / scope mismatch /
+    unassigned-state refusals, byte-stable JSON, and the committed legend loading.
+    """
+    from worldgen import state_ownership as so
+
+    legend = so.parse_legend({
+        "reserved": {"water": [16, 40, 112], "unowned": [255, 255, 255],
+                     "placeholder": [176, 176, 176], "border": [0, 0, 0]},
+        "tags": {"REI": {"color": [178, 58, 58]}, "MID": {"color": [62, 74, 96]}},
+    })
+    states = so.load_land_states(EXPECTED_DIR / "state_regions")
+    prov = raster.read_rgb_png(EXPECTED_DIR / "provinces.png")
+    layout = so.Layout(prov, states)
+    by_key = {s.key: s for s in states}
+    placeholder = {"STATE_DELTA"}
+    gamma = by_key["STATE_GAMMA"].provinces
+    assignment = {
+        "STATE_ALPHA": "REI",
+        "STATE_BETA": "unowned",
+        "STATE_GAMMA": {tok: ("REI" if i < 2 else "MID") for i, tok in enumerate(gamma)},
+    }
+    ids = {s.key: (s.id, None) for s in states}
+
+    owners = so.province_owners(layout, assignment, placeholder, legend)
+    img = so.render(layout, owners, legend, border_width=2)
+    assert (img == np.array(legend.reserved["border"], dtype=np.uint8)).all(axis=2).any(), \
+        "the border overlay must be drawn"
+    doc = so.read(layout, img, legend, placeholder, ids)
+    assert so.assignment_of(doc) == so.normalize_assignment(assignment, layout), \
+        "render -> read must return the assignment"
+    assert doc["STATE_DELTA"]["scope"] == "placeholder" and doc["STATE_DELTA"]["owner"] == "placeholder"
+    assert [o["owner"] for o in doc["STATE_GAMMA"]["owners"]] == ["MID", "REI"], "a split lists its owners"
+    assert so.to_json(doc) == so.to_json(so.read(layout, img, legend, placeholder, ids)), "byte-stable"
+    # seam: border pixels do not vote, so 1 px or 2 px lines read back the same
+    img1 = so.render(layout, owners, legend, border_width=1)
+    assert so.assignment_of(so.read(layout, img1, legend, placeholder, ids)) == so.assignment_of(doc)
+
+    def refuses(fn, frag):
+        try:
+            fn()
+        except so.OwnershipError as exc:
+            assert frag in str(exc), f"expected {frag!r} in {exc}"
+        else:
+            raise AssertionError(f"expected an OwnershipError containing {frag!r}")
+
+    bad = img.copy()
+    ys, xs = np.nonzero(layout.prov > 0)
+    bad[ys[0], xs[0]] = (1, 2, 3)
+    refuses(lambda: so.read(layout, bad, legend, placeholder, ids), "not in the legend")
+    refuses(lambda: so.province_owners(layout, {"STATE_ALPHA": "REI"}, placeholder, legend), "no owner")
+    refuses(lambda: so.province_owners(layout, {**assignment, "STATE_DELTA": "REI"}, placeholder, legend),
+            "must not be assigned")
+    refuses(lambda: so.province_owners(layout, {**assignment, "STATE_ALPHA": "ZZZ"}, placeholder, legend),
+            "not a tag")
+    # a drawn state painted with the placeholder colour is refused on read
+    ph = img.copy()
+    ph[layout.state_index == 1 + [s.key for s in states].index("STATE_ALPHA")] = legend.reserved["placeholder"]
+    refuses(lambda: so.read(layout, ph, legend, placeholder, ids), "placeholder colour")
+    # the committed legend is valid
+    so.load_legend(TOOLS_DIR / "config" / "state_ownership_legend.json")
+
+
 def run_check() -> int:
+    _selfcheck_state_ownership()
+    print("state_ownership: render -> read round-trip (whole + split + placeholder states, seam, refusals, "
+          "byte-stable JSON, committed legend) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")
