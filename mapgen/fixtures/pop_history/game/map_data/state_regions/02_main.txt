@@ -1,0 +1,12 @@
+STATE_GAMMA = {
+    id = 3
+    provinces = { x000010 x000011 x000012 x000013 }
+}
+STATE_DELTA = {
+    id = 4
+    provinces = { x000014 }
+}
+STATE_ZETA = {
+    id = 6
+    provinces = { x000015 x000016 }
+}

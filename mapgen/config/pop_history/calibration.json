@@ -1,0 +1,875 @@
+{
+ "_comment": [
+  "Total starting population per start tag, at canon scale (canon figure, order of magnitude); the generator multiplies by scale_factor to game scale. See README.md for the scale decision.",
+  "Canon is silent on realm populations in tabletop sources, so every figure is 'inferred' from canon *rank* (largest city, richest province, ...) and kept in proportion between realms; confidence says how far to trust it.",
+  "Every tag that owns an emitted state needs an entry (the generator errors otherwise)."
+ ],
+ "scale_factor": 5,
+ "min_pop_size": 100,
+ "tags": {
+  "AES": {
+   "canon": 20000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "ANM": {
+   "canon": 18000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "AQL": {
+   "canon": 30000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "AQU": {
+   "canon": 150000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "ARG": {
+   "canon": 15000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "ART": {
+   "canon": 160000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "AVE": {
+   "canon": 200000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "AZL": {
+   "canon": 70000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "BAE": {
+   "canon": 25000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "BAS": {
+   "canon": 150000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "BHA": {
+   "canon": 50000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "BIL": {
+   "canon": 180000,
+   "source": "inferred: Estalian realms (WFB Bretonnia neighbours; TW Estalia)",
+   "why": "Magritta (six states) is the Estalian heartland; Bilbali and the Cantabrian realm are comparable to a Bretonnian duchy pair.",
+   "confidence": "low"
+  },
+  "BJO": {
+   "canon": 25000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "BKA": {
+   "canon": 35000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "BLV": {
+   "canon": 20000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "BNR": {
+   "canon": 25000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "BOL": {
+   "canon": 70000,
+   "source": "inferred: Kislev proper, sized against the Empire (WFRP Realm of the Ice Queen; Kislev is a thinly settled frontier realm)",
+   "why": "Kislev City is one of the Old World's great cities but the Oblasts are sparse; the five Gospodar-held tags together hold about a third of the Empire's people.",
+   "confidence": "low"
+  },
+  "BOR": {
+   "canon": 230000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "BPR": {
+   "canon": 25000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "BRI": {
+   "canon": 130000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "BRK": {
+   "canon": 30000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "BRN": {
+   "canon": 30000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "BSB": {
+   "canon": 60000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "BTO": {
+   "canon": 40000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "BVR": {
+   "canon": 60000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "CAR": {
+   "canon": 200000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "CNT": {
+   "canon": 170000,
+   "source": "inferred: Estalian realms (WFB Bretonnia neighbours; TW Estalia)",
+   "why": "Magritta (six states) is the Estalian heartland; Bilbali and the Cantabrian realm are comparable to a Bretonnian duchy pair.",
+   "confidence": "low"
+  },
+  "COU": {
+   "canon": 200000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "CRB": {
+   "canon": 25000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "CRM": {
+   "canon": 30000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "DLO": {
+   "canon": 120000,
+   "source": "inferred: Chaos Dwarf realm and Dark Lands (WFB Chaos Dwarfs; TW Zharr-Naggrund)",
+   "why": "The Chaos Dwarf hegemony is the setting's industrial power, worked by a large slave underclass; Zharr-Naggrund and Uzkulak are the big blocks.",
+   "confidence": "low"
+  },
+  "DOL": {
+   "canon": 30000,
+   "source": "inferred: Ungol steppe tribes and the Khypnia march (TW Kislev faction rosters)",
+   "why": "Nomad and frontier populations are small; the three-state Ungol Steppes tag is the largest.",
+   "confidence": "low"
+  },
+  "DON": {
+   "canon": 50000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "DRZ": {
+   "canon": 60000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "DUN": {
+   "canon": 25000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "EKR": {
+   "canon": 25000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "ERE": {
+   "canon": 60000,
+   "source": "inferred: Kislev proper, sized against the Empire (WFRP Realm of the Ice Queen; Kislev is a thinly settled frontier realm)",
+   "why": "Kislev City is one of the Old World's great cities but the Oblasts are sparse; the five Gospodar-held tags together hold about a third of the Empire's people.",
+   "confidence": "low"
+  },
+  "ESS": {
+   "canon": 25000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "EYB": {
+   "canon": 30000,
+   "source": "inferred: Ogre kingdoms (WFB Ogre Kingdoms)",
+   "why": "Ogre tribes are few but large-bodied; the Mountains of Mourn tribes are comparable to an Imperial hold.",
+   "confidence": "low"
+  },
+  "GAS": {
+   "canon": 20000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "GDO": {
+   "canon": 30000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "GIS": {
+   "canon": 120000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "GOR": {
+   "canon": 100000,
+   "source": "inferred: Chaos Dwarf realm and Dark Lands (WFB Chaos Dwarfs; TW Zharr-Naggrund)",
+   "why": "The Chaos Dwarf hegemony is the setting's industrial power, worked by a large slave underclass; Zharr-Naggrund and Uzkulak are the big blocks.",
+   "confidence": "low"
+  },
+  "GRA": {
+   "canon": 40000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "GRW": {
+   "canon": 8000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "GUN": {
+   "canon": 25000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "HAS": {
+   "canon": 30000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "HKN": {
+   "canon": 20000,
+   "source": "inferred: Sylvania and the vampire holdings (WFB Vampire Counts)",
+   "why": "Sylvania is a blighted province; its human peasantry is cowed rather than extinct. Hunger of Kemmler's host and the Forest of Gloom are small.",
+   "confidence": "low"
+  },
+  "HOC": {
+   "canon": 140000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "ICL": {
+   "canon": 25000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "IRN": {
+   "canon": 40000,
+   "source": "inferred: Ogre kingdoms (WFB Ogre Kingdoms)",
+   "why": "Ogre tribes are few but large-bodied; the Mountains of Mourn tribes are comparable to an Imperial hold.",
+   "confidence": "low"
+  },
+  "KAD": {
+   "canon": 90000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "KAK": {
+   "canon": 260000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "KAS": {
+   "canon": 8000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "KEP": {
+   "canon": 30000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "KHI": {
+   "canon": 70000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "KHM": {
+   "canon": 70000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "KIZ": {
+   "canon": 25000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "KNO": {
+   "canon": 50000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "KOR": {
+   "canon": 25000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "KRD": {
+   "canon": 30000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "KRV": {
+   "canon": 25000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "KSV": {
+   "canon": 240000,
+   "source": "inferred: Kislev proper, sized against the Empire (WFRP Realm of the Ice Queen; Kislev is a thinly settled frontier realm)",
+   "why": "Kislev City is one of the Old World's great cities but the Oblasts are sparse; the five Gospodar-held tags together hold about a third of the Empire's people.",
+   "confidence": "low"
+  },
+  "KVE": {
+   "canon": 35000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "KVN": {
+   "canon": 15000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "KZF": {
+   "canon": 15000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "LAH": {
+   "canon": 40000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "LAN": {
+   "canon": 110000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "LAU": {
+   "canon": 10000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "LUC": {
+   "canon": 90000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "LYB": {
+   "canon": 30000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "LYO": {
+   "canon": 150000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "MAG": {
+   "canon": 300000,
+   "source": "inferred: Estalian realms (WFB Bretonnia neighbours; TW Estalia)",
+   "why": "Magritta (six states) is the Estalian heartland; Bilbali and the Cantabrian realm are comparable to a Bretonnian duchy pair.",
+   "confidence": "low"
+  },
+  "MAH": {
+   "canon": 25000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "MAR": {
+   "canon": 260000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "MAW": {
+   "canon": 40000,
+   "source": "inferred: Ogre kingdoms (WFB Ogre Kingdoms)",
+   "why": "Ogre tribes are few but large-bodied; the Mountains of Mourn tribes are comparable to an Imperial hold.",
+   "confidence": "low"
+  },
+  "MGL": {
+   "canon": 8000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "MID": {
+   "canon": 330000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "MIR": {
+   "canon": 150000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "MNF": {
+   "canon": 40000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "MON": {
+   "canon": 25000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "MOO": {
+   "canon": 80000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "MOR": {
+   "canon": 30000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "MOU": {
+   "canon": 100000,
+   "source": "inferred: Mousillon is a blighted, depopulated duchy (WFB Bretonnia, 'the Cursed Duchy')",
+   "why": "Cursed Mousillon holds a fraction of a normal duchy's people.",
+   "confidence": "medium"
+  },
+  "MZN": {
+   "canon": 250000,
+   "source": "inferred: Chaos Dwarf realm and Dark Lands (WFB Chaos Dwarfs; TW Zharr-Naggrund)",
+   "why": "The Chaos Dwarf hegemony is the setting's industrial power, worked by a large slave underclass; Zharr-Naggrund and Uzkulak are the big blocks.",
+   "confidence": "low"
+  },
+  "NLD": {
+   "canon": 120000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "NUM": {
+   "canon": 40000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "OKP": {
+   "canon": 3000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "ORT": {
+   "canon": 25000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "OSM": {
+   "canon": 130000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "OST": {
+   "canon": 120000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "PAR": {
+   "canon": 90000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "PAV": {
+   "canon": 80000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "PRA": {
+   "canon": 110000,
+   "source": "inferred: Kislev proper, sized against the Empire (WFRP Realm of the Ice Queen; Kislev is a thinly settled frontier realm)",
+   "why": "Kislev City is one of the Old World's great cities but the Oblasts are sparse; the five Gospodar-held tags together hold about a third of the Empire's people.",
+   "confidence": "low"
+  },
+  "QUA": {
+   "canon": 30000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "QUE": {
+   "canon": 150000,
+   "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
+   "why": "Bretonnia is a densely farmed realm of roughly Empire-scale peasantry split over fourteen duchies; each duchy is sized by area and the size of its capital (Bordeleaux the great port, Couronne the capital, Montfort a small duchy).",
+   "confidence": "medium"
+  },
+  "RAA": {
+   "canon": 25000,
+   "source": "inferred: Border Princes petty realms (WFB Border Princes)",
+   "why": "Each princedom is a few walled towns and farmland; sizes are near-equal by design.",
+   "confidence": "low"
+  },
+  "RAS": {
+   "canon": 25000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  },
+  "RDV": {
+   "canon": 25000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "RED": {
+   "canon": 25000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "REI": {
+   "canon": 520000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "REM": {
+   "canon": 90000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "RFG": {
+   "canon": 50000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "ROP": {
+   "canon": 40000,
+   "source": "inferred: Ungol steppe tribes and the Khypnia march (TW Kislev faction rosters)",
+   "why": "Nomad and frontier populations are small; the three-state Ungol Steppes tag is the largest.",
+   "confidence": "low"
+  },
+  "SAR": {
+   "canon": 35000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "SKA": {
+   "canon": 25000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "SKZ": {
+   "canon": 25000,
+   "source": "inferred: greenskin tribes (WFB Orcs & Goblins; TW Greenskins)",
+   "why": "Waaagh! holdouts in the Badlands and Worlds Edge are counted like nomads: numerous per square mile of ruin but few per state; BSB and RFG own several states.",
+   "confidence": "low"
+  },
+  "SLV": {
+   "canon": 25000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "SNA": {
+   "canon": 35000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "SOR": {
+   "canon": 25000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "SOT": {
+   "canon": 10000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "SRT": {
+   "canon": 30000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "STI": {
+   "canon": 190000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "TAL": {
+   "canon": 190000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "THG": {
+   "canon": 30000,
+   "source": "inferred: Ogre kingdoms (WFB Ogre Kingdoms)",
+   "why": "Ogre tribes are few but large-bodied; the Mountains of Mourn tribes are comparable to an Imperial hold.",
+   "confidence": "low"
+  },
+  "TLS": {
+   "canon": 30000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "TOB": {
+   "canon": 110000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "TRA": {
+   "canon": 80000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "TRG": {
+   "canon": 15000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "TRO": {
+   "canon": 35000,
+   "source": "inferred: Ungol steppe tribes and the Khypnia march (TW Kislev faction rosters)",
+   "why": "Nomad and frontier populations are small; the three-state Ungol Steppes tag is the largest.",
+   "confidence": "low"
+  },
+  "UNG": {
+   "canon": 60000,
+   "source": "inferred: Ungol steppe tribes and the Khypnia march (TW Kislev faction rosters)",
+   "why": "Nomad and frontier populations are small; the three-state Ungol Steppes tag is the largest.",
+   "confidence": "low"
+  },
+  "URS": {
+   "canon": 25000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "UVE": {
+   "canon": 30000,
+   "source": "inferred: Ungol steppe tribes and the Khypnia march (TW Kislev faction rosters)",
+   "why": "Nomad and frontier populations are small; the three-state Ungol Steppes tag is the largest.",
+   "confidence": "low"
+  },
+  "UZK": {
+   "canon": 200000,
+   "source": "inferred: Chaos Dwarf realm and Dark Lands (WFB Chaos Dwarfs; TW Zharr-Naggrund)",
+   "why": "The Chaos Dwarf hegemony is the setting's industrial power, worked by a large slave underclass; Zharr-Naggrund and Uzkulak are the big blocks.",
+   "confidence": "low"
+  },
+  "VAR": {
+   "canon": 25000,
+   "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
+   "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "VER": {
+   "canon": 70000,
+   "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
+   "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
+   "confidence": "medium"
+  },
+  "VLG": {
+   "canon": 30000,
+   "source": "inferred: overrun, besieged or Norse Dwarf holds (WFB Dwarfs; Karak Varn sunk, Karak Izor and Karak Eight Peaks overrun)",
+   "why": "Holds that fell to greenskins, skaven or Chaos keep a remnant of their old population; the Norse Dwarf holds (Kraka Drak, Kraka Ravnvake, Kraka Ornsmotek) are small.",
+   "confidence": "low"
+  },
+  "VMP": {
+   "canon": 15000,
+   "source": "inferred: Sylvania and the vampire holdings (WFB Vampire Counts)",
+   "why": "Sylvania is a blighted province; its human peasantry is cowed rather than extinct. Hunger of Kemmler's host and the Forest of Gloom are small.",
+   "confidence": "low"
+  },
+  "VOL": {
+   "canon": 60000,
+   "source": "inferred: Kislev proper, sized against the Empire (WFRP Realm of the Ice Queen; Kislev is a thinly settled frontier realm)",
+   "why": "Kislev City is one of the Old World's great cities but the Oblasts are sparse; the five Gospodar-held tags together hold about a third of the Empire's people.",
+   "confidence": "low"
+  },
+  "VSY": {
+   "canon": 130000,
+   "source": "inferred: Sylvania and the vampire holdings (WFB Vampire Counts)",
+   "why": "Sylvania is a blighted province; its human peasantry is cowed rather than extinct. Hunger of Kemmler's host and the Forest of Gloom are small.",
+   "confidence": "low"
+  },
+  "WIS": {
+   "canon": 300000,
+   "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
+   "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
+   "confidence": "medium"
+  },
+  "WYD": {
+   "canon": 18000,
+   "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
+   "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
+   "confidence": "low"
+  },
+  "XSA": {
+   "canon": 20000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSB": {
+   "canon": 20000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSC": {
+   "canon": 15000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSD": {
+   "canon": 60000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSG": {
+   "canon": 30000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSH": {
+   "canon": 15000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSI": {
+   "canon": 10000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSJ": {
+   "canon": 15000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSK": {
+   "canon": 10000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "XSL": {
+   "canon": 20000,
+   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
+   "confidence": "low"
+  },
+  "ZHU": {
+   "canon": 80000,
+   "source": "inferred: living Dwarf holds (WFB Dwarfs army book; TW Karaz Ankor)",
+   "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
+   "confidence": "medium"
+  },
+  "ZND": {
+   "canon": 25000,
+   "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
+   "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
+   "confidence": "low"
+  }
+ }
+}

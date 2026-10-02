@@ -1,0 +1,17 @@
+{
+ "floor_permille": 50,
+ "city_boost": "0.05",
+ "canon_city_boost": "0.3",
+ "overrides": [
+  {
+   "key": "STATE_ZETA",
+   "anchor": [
+    60,
+    10
+   ],
+   "share": "0.1",
+   "source": "fixture",
+   "why": "a fixed share of the tag total (the rest splits by weight)"
+  }
+ ]
+}

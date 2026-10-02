@@ -1,0 +1,3 @@
+reiklander = { religion = cult_of_sigmar }
+middenlander = { religion = cult_of_ulric }
+halfling = { religion = old_faith }

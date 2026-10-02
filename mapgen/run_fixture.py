@@ -5320,6 +5320,15 @@ def check_country_history() -> int:
     return 0
 
 
+def _selfcheck_pop_history() -> None:
+    """Starting pops (#6375): golden output, determinism, exact sums, a split state, a skipped owner and
+    culture, a religion override, a dropped sub-minimum pop, and the hard-error refusals, on
+    ``mapgen/fixtures/pop_history/``."""
+    import generate_pop_history
+
+    generate_pop_history.run_fixture_check(TOOLS_DIR / "fixtures" / "pop_history")
+
+
 def run_check() -> int:
     # Stdlib-only and independent of the map goldens, so it runs (and can fail) first.
     rc = check_country_history()
@@ -5335,6 +5344,9 @@ def run_check() -> int:
     _selfcheck_country_history(ownership_doc)
     print("country_history: tier -> starting-technology blocks (held-back tag, unmapped tier, CRLF compare, "
           "hand-broken history refusals) self-check passed.")
+    _selfcheck_pop_history()
+    print("pop_history: pops/population emission (split state, skipped owner + culture, religion override, "
+          "exact-sum rounding, dropped small pop, hard errors) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")

@@ -1,0 +1,872 @@
+{
+ "_comment": [
+  "Starting wealth / literacy per start tag (effect_starting_pop_wealth_*, effect_starting_pop_literacy_*), by tech tier with named exceptions.",
+  "The generator warns when a literacy level falls outside the usual band for the tag's tier."
+ ],
+ "tags": {
+  "AES": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "ANM": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "AQL": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "AQU": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "ARG": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "ART": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "AVE": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "AZL": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Dwarf hold wealth, rune-lore"
+  },
+  "BAE": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "BAS": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "BHA": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "BIL": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "BJO": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "BKA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "BLV": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "BNR": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "BOL": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "BOR": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "BPR": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "BRI": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "BRK": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "BRN": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "BSB": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "BTO": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "BVR": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Barak Varr's shipwrights and sea trade"
+  },
+  "CAR": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "CNT": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "COU": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "CRB": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Carroburg city-state"
+  },
+  "CRM": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "DLO": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "DOL": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "DON": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tilean city-state schools"
+  },
+  "DRZ": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Dwarf hold wealth"
+  },
+  "DUN": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "EKR": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "ERE": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "ESS": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "EYB": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "GAS": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "GDO": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "GIS": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "GOR": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 2 (mapgen/config/country_history)",
+   "why": "Tier 2 engineer-hold / Nuln-class economy."
+  },
+  "GRA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "GRW": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "GUN": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "HAS": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "HKN": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "HOC": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "ICL": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "IRN": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "KAD": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Dwarf hold wealth, rune-lore"
+  },
+  "KAK": {
+   "wealth": "very_high",
+   "literacy": "high",
+   "source": "inferred: tech tier 2 (mapgen/config/country_history)",
+   "why": "Karaz-a-Karak's hoarded gold and Runesmiths"
+  },
+  "KAS": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "KEP": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "KHI": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Dwarf hold wealth"
+  },
+  "KHM": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Khemri's priest-scribes"
+  },
+  "KIZ": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "KNO": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Dwarf hold wealth"
+  },
+  "KOR": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Norse Dwarf hold"
+  },
+  "KRD": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Norse Dwarf hold"
+  },
+  "KRV": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Norse Dwarf hold"
+  },
+  "KSV": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "KVE": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "KVN": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "KZF": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Dwarf hold wealth"
+  },
+  "LAH": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "LAN": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "LAU": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "LUC": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tilean city-state schools"
+  },
+  "LYB": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "LYO": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "MAG": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "MAH": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "MAR": {
+   "wealth": "very_high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Marienburg is the richest city of the Old World"
+  },
+  "MAW": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "MGL": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "MID": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Middenheim's temples and University of Middenheim"
+  },
+  "MIR": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Miragliano's merchant princes and universities"
+  },
+  "MNF": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "MON": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "MOO": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "MOR": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "MOU": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "MZN": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 1 (mapgen/config/country_history)",
+   "why": "Zharr-Naggrund's hell-forges (slave-built wealth)"
+  },
+  "NLD": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "NUM": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Numas's priest-scribes"
+  },
+  "OKP": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "ORT": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "OSM": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "OST": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "PAR": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "PAV": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Pavona's university"
+  },
+  "PRA": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "QUA": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "QUE": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "RAA": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "RAS": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "RDV": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "RED": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "REI": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Altdorf's universities and Colleges of Magic; richest province"
+  },
+  "REM": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tilean city-state schools"
+  },
+  "RFG": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "ROP": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "SAR": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "SKA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "SKZ": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "SLV": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "SNA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "SOR": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "SOT": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "SRT": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "STI": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "TAL": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "THG": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "TLS": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "TOB": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tilean city-state schools and banks"
+  },
+  "TRA": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tilean city-state schools"
+  },
+  "TRG": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "TRO": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "UNG": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 7 (mapgen/config/country_history)",
+   "why": "Tier 7: nomads and mobs; no schooling."
+  },
+  "URS": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "UVE": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "UZK": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 2 (mapgen/config/country_history)",
+   "why": "Tier 2 engineer-hold / Nuln-class economy."
+  },
+  "VAR": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "VER": {
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history)",
+   "why": "Tilean city-state schools"
+  },
+  "VLG": {
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: tech tier 4 (mapgen/config/country_history)",
+   "why": "Tier 4: learned but pre-industrial."
+  },
+  "VMP": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "VOL": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "VSY": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "WIS": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 2 (mapgen/config/country_history)",
+   "why": "Nuln's Great University and Gunnery School"
+  },
+  "WYD": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Asrai lore is oral and kin-bound; tier 6 economy"
+  },
+  "XSA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSB": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSC": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSD": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSG": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSH": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSI": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSJ": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSK": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "XSL": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "ZHU": {
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 2 (mapgen/config/country_history)",
+   "why": "Engineers' Guild hold"
+  },
+  "ZND": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  }
+ }
+}
