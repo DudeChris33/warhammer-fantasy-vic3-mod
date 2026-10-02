@@ -288,7 +288,7 @@ STATE_BLOOD_RIVER_VALLEY = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_524 = {
+STATE_SHARPTHORN_FOREST = {
     id = 524
     subsistence_building = "building_subsistence_farm"
     provinces = { x034FD5 x05DD24 x1CF281 x271F5F x7EBB08 xE0838F xEF246B }

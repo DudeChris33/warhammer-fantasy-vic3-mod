@@ -182,7 +182,7 @@ STATE_THE_ROPSALS = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_345 = {
+STATE_SEPUKZY = {
     id = 345
     subsistence_building = "building_subsistence_farm"
     provinces = { x009D36 x03FB48 x17B293 x322602 x379915 x3D0C28 x4A074F x542185 x65C3CF x6B0890 x740807 x797B1A x824C3F x86F362 x8B1D64 xB79D96 xB8F47C xCEB2F3 xD05D7B xD149E8 xD5D08E xE414C6 xEB3B63 }
@@ -212,7 +212,7 @@ STATE_STUREN_RIDGE = {
     }
     naval_exit_id = 3017
 }
-STATE_LAND_380 = {
+STATE_FORT_STRAGHOV = {
     id = 380
     subsistence_building = "building_subsistence_farm"
     provinces = { x037E27 x061049 x1EBD86 x371BF4 x4E3151 x5557EE x570276 x5E2913 x7A95D9 x7C5C0B xAFF9D8 xB72075 xC70F35 xCDCB59 xDE2492 xE95987 }
@@ -228,7 +228,7 @@ STATE_LAND_380 = {
     }
     naval_exit_id = 3017
 }
-STATE_LAND_536 = {
+STATE_IRINASGRAD = {
     id = 536
     subsistence_building = "building_subsistence_farm"
     provinces = { x1B3EF7 x3F9E4A x57ADE9 x6EC346 x85D8A3 xA90A8F xD08BCD }
@@ -244,7 +244,7 @@ STATE_LAND_536 = {
     }
     naval_exit_id = 3036
 }
-STATE_LAND_545 = {
+STATE_CHAMON_DHAREK = {
     id = 545
     subsistence_building = "building_subsistence_farm"
     provinces = { x006EE4 x06DC39 x4FE4DB x5A6088 x624540 x7175E5 x7FBA1D x96CF7A xADE4D7 xCA6D47 xD33E6C xDB43A1 xE182A4 }
@@ -260,7 +260,7 @@ STATE_LAND_545 = {
     }
     naval_exit_id = 3016
 }
-STATE_LAND_546 = {
+STATE_CASTLE_ALEXANDRONOV = {
     id = 546
     subsistence_building = "building_subsistence_farm"
     provinces = { x2298B9 x563686 x83FFC9 x846140 xA9BAD5 xAB03E6 xC0D032 xCF146A xDD58A2 xE629C7 xE772D8 xE88D97 }
@@ -276,7 +276,7 @@ STATE_LAND_546 = {
     }
     naval_exit_id = 3016
 }
-STATE_LAND_547 = {
+STATE_DUSHYKA = {
     id = 547
     subsistence_building = "building_subsistence_farm"
     provinces = { x0CCC6D x145481 x39AE16 x67D8D0 x6E94F4 x761D08 x96038A xA8CE68 xBB5D1F xC42E44 xD2727C xFD3F24 }
@@ -308,7 +308,7 @@ STATE_EASTERN_OBLAST = {
     }
     naval_exit_id = 3217
 }
-STATE_LAND_549 = {
+STATE_THE_BEAR_S_TEETH = {
     id = 549
     subsistence_building = "building_subsistence_farm"
     provinces = { x10A7A0 x52F8F1 x898584 xAE0081 }

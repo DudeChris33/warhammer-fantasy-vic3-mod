@@ -269,7 +269,7 @@ STATE_LYONESSE = {
     }
     naval_exit_id = 3028
 }
-STATE_LAND_093 = {
+STATE_WEST_CARCASSONNE = {
     id = 93
     subsistence_building = "building_subsistence_farm"
     provinces = { x10B575 x19F5E6 x1EF9AD x4D2467 x5B689F x738613 x998219 xAEECEE xBD3126 xD44683 }
@@ -316,7 +316,7 @@ STATE_YI_EDRI_ETERNOS = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_096 = {
+STATE_KING_S_GLADE = {
     id = 96
     subsistence_building = "building_subsistence_farm"
     provinces = { x04863E x826CBC x98DFA8 xA2BDB7 xDB71F3 xF34E6D }
@@ -330,7 +330,7 @@ STATE_LAND_096 = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_371 = {
+STATE_TAL_ESTH = {
     id = 371
     subsistence_building = "building_subsistence_farm"
     provinces = { x17D310 }
@@ -360,7 +360,7 @@ STATE_LYONESSE_HILLS = {
     }
     naval_exit_id = 3028
 }
-STATE_LAND_482 = {
+STATE_CASTLE_SANGASSE = {
     id = 482
     subsistence_building = "building_subsistence_farm"
     provinces = { x0A96EF x4705E1 x8374D3 x9A8A30 xB2AC77 xBFE3C5 xD223AD }
@@ -376,7 +376,7 @@ STATE_LAND_482 = {
     }
     naval_exit_id = 3044
 }
-STATE_LAND_489 = {
+STATE_WATERFALL_PALACE = {
     id = 489
     subsistence_building = "building_subsistence_farm"
     provinces = { x2BB3DA xA91864 xEADEBF }
@@ -405,7 +405,7 @@ STATE_ARGWYLON = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_491 = {
+STATE_GLADE_OF_ETERNAL_MOONLIGHT = {
     id = 491
     subsistence_building = "building_subsistence_farm"
     provinces = { x103854 x660DCB xC523B3 }
@@ -421,7 +421,7 @@ STATE_LAND_491 = {
     }
     naval_exit_id = 3044
 }
-STATE_LAND_492 = {
+STATE_CASTLE_MOUSILLON = {
     id = 492
     subsistence_building = "building_subsistence_farm"
     provinces = { x1F1A2A x4473BF x80E2B1 xA513B2 xE1AC23 xF9C095 }
@@ -437,7 +437,7 @@ STATE_LAND_492 = {
     }
     naval_exit_id = 3043
 }
-STATE_LAND_493 = {
+STATE_OAK_OF_PROPHECY = {
     id = 493
     subsistence_building = "building_subsistence_farm"
     provinces = { x6A9944 xA70836 }
@@ -469,7 +469,7 @@ STATE_CARCASSONNE = {
     }
     naval_exit_id = 3065
 }
-STATE_LAND_502 = {
+STATE_GLADE_OF_ETERNAL_MIDNIGHT = {
     id = 502
     subsistence_building = "building_subsistence_farm"
     provinces = { x2F52E6 x911B6D }
@@ -485,7 +485,7 @@ STATE_LAND_502 = {
     }
     naval_exit_id = 3065
 }
-STATE_LAND_503 = {
+STATE_TYR_VANNA = {
     id = 503
     subsistence_building = "building_subsistence_farm"
     provinces = { x1B9B9B xB9D314 }
@@ -513,7 +513,7 @@ STATE_TALSYN = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_505 = {
+STATE_HALLS_OF_EQUOS = {
     id = 505
     subsistence_building = "building_subsistence_farm"
     provinces = { x39DC68 x689FED }
@@ -541,7 +541,7 @@ STATE_WYDRIOTH = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_582 = {
+STATE_BREGANALLE = {
     id = 582
     subsistence_building = "building_subsistence_farm"
     provinces = { x0E2353 x337CE8 x4A9245 x80C234 x95456F xAC5ACC xC4B93A xD1B461 xE8C9BE }

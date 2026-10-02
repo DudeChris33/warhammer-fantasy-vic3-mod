@@ -91,7 +91,7 @@ STATE_UPPER_ASH_RIVER = {
     }
     naval_exit_id = 3219
 }
-STATE_LAND_608 = {
+STATE_SPHINX_OF_PHAA = {
     id = 608
     subsistence_building = "building_subsistence_farm"
     provinces = { x65185C x759FE7 xBE4712 }
@@ -123,7 +123,7 @@ STATE_FALLOW_FIELDS = {
     }
     naval_exit_id = 3219
 }
-STATE_LAND_620 = {
+STATE_PYRAMID_OF_TUTANKHANUT = {
     id = 620
     subsistence_building = "building_subsistence_farm"
     provinces = { x44201D x47752D x5CEDD7 x62C261 x797647 x82476C xBCFE01 xCCD117 xD0FB19 }
@@ -139,7 +139,7 @@ STATE_LAND_620 = {
     }
     naval_exit_id = 3218
 }
-STATE_LAND_623 = {
+STATE_GREAT_MORTIS_DELTA = {
     id = 623
     subsistence_building = "building_subsistence_farm"
     provinces = { x09C62C x1879B0 x19C2C1 x313995 x3CB886 xA6FA61 xB6B129 xF3201B }
@@ -155,7 +155,7 @@ STATE_LAND_623 = {
     }
     naval_exit_id = 3110
 }
-STATE_LAND_624 = {
+STATE_SWAMP_OF_TERROR = {
     id = 624
     subsistence_building = "building_subsistence_farm"
     provinces = { x0BE000 x92A0A5 x9BA01C xA7FDA5 xE46C97 xF4692C }

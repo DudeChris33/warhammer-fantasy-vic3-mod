@@ -31,7 +31,7 @@ STATE_CEFIRO_HILLS = {
     }
     naval_exit_id = 3058
 }
-STATE_LAND_080 = {
+STATE_NUJA = {
     id = 80
     subsistence_building = "building_subsistence_farm"
     provinces = { x05035F x2A5CF4 x417251 x5DFAC1 x75101E x8C257B x9A69B3 xA33AD8 xC8946D xE58C29 xEDEE02 }
@@ -223,7 +223,7 @@ STATE_VEREZZI = {
     }
     naval_exit_id = 3079
 }
-STATE_LAND_102 = {
+STATE_REMAS = {
     id = 102
     subsistence_building = "building_subsistence_farm"
     provinces = { x19661D x3EBFB2 x426C93 x5D4179 x641947 x8972DC xA08839 }
@@ -335,7 +335,7 @@ STATE_LOST_KHYPNIA = {
     }
     naval_exit_id = 3081
 }
-STATE_LAND_223 = {
+STATE_ORTEGETA = {
     id = 223
     subsistence_building = "building_subsistence_farm"
     provinces = { x217927 x41EF72 x43F69E x674907 x7E5E64 x8CA29C x940F06 xA3B7F9 xC4F561 }
@@ -363,7 +363,7 @@ STATE_EASTERN_BORDER_PRINCES = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_372 = {
+STATE_BILIOUS_BASILICA = {
     id = 372
     subsistence_building = "building_subsistence_farm"
     provinces = { x000D6D x32467F xA5BF25 xC39E7B }
@@ -378,7 +378,7 @@ STATE_LAND_372 = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_382 = {
+STATE_SOUTHERN_SIREN_ISLES = {
     id = 382
     subsistence_building = "building_subsistence_farm"
     provinces = { x08254A x778696 xCEE618 }
@@ -424,7 +424,7 @@ STATE_MIRAMAR_HILLS = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_496 = {
+STATE_WESTERN_ESTALIAN_COAST = {
     id = 496
     subsistence_building = "building_subsistence_farm"
     provinces = { x2FD007 x46E564 x518A90 x6C3EF9 x827A91 x835456 x85F920 x8E4D24 x92D3CA xBFC348 xD38D3B xE7C1A7 }
@@ -440,7 +440,7 @@ STATE_LAND_496 = {
     }
     naval_exit_id = 3058
 }
-STATE_LAND_497 = {
+STATE_PINA_WOOD = {
     id = 497
     subsistence_building = "building_subsistence_farm"
     provinces = { x14DF77 x76A7FE x8D0413 x9C0193 xD69C7E }
@@ -454,7 +454,7 @@ STATE_LAND_497 = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_498 = {
+STATE_SOUTH_BILBALI = {
     id = 498
     subsistence_building = "building_subsistence_farm"
     provinces = { x1A528A x3167E7 x3D3A7A x4E8020 x5C70B6 x7C1B11 xB88A03 xDDE398 xF4F8F5 }
@@ -468,7 +468,7 @@ STATE_LAND_498 = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_499 = {
+STATE_GEULATA = {
     id = 499
     subsistence_building = "building_subsistence_farm"
     provinces = { x5DABF2 xA85F1C xACEA95 xD689D6 xE4CE0E }
@@ -499,7 +499,7 @@ STATE_MIDDLE_TILEA = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_509 = {
+STATE_SUSSURRIO_WOOD = {
     id = 509
     subsistence_building = "building_subsistence_farm"
     provinces = { x2B8588 x67F47A x7F09D7 x81CF1E xB5966A }
@@ -529,7 +529,7 @@ STATE_KHARNOS_FOREST = {
     }
     naval_exit_id = 3081
 }
-STATE_LAND_586 = {
+STATE_GASTONNE = {
     id = 586
     subsistence_building = "building_subsistence_farm"
     provinces = { x256702 x33AB3A x363D5C x4AC097 x50BEA0 x5904CF x872F89 xAC891E xB28727 xD474D5 xE8F810 xF73C48 xFD8DF3 }
@@ -545,7 +545,7 @@ STATE_LAND_586 = {
     }
     naval_exit_id = 3072
 }
-STATE_LAND_602 = {
+STATE_TOBARO = {
     id = 602
     subsistence_building = "building_subsistence_farm"
     provinces = { x10F66F x2D01BE x80326B x9ECFDC }

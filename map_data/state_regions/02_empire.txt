@@ -106,7 +106,7 @@ STATE_REIKWALD_FOREST = {
     }
     naval_exit_id = 3047
 }
-STATE_LAND_308 = {
+STATE_BECHAFEN = {
     id = 308
     subsistence_building = "building_subsistence_farm"
     provinces = { x06BBBC x0DE72C x184B5E x26A23E x2C1551 x42CE0A x432AAE x4BFBD3 x54BA50 x5A400B x5D9048 x80B45F x886AC5 x96AEFD x9F6D7A xADC45A xC4D9B7 }
@@ -180,7 +180,7 @@ STATE_EAST_AVERLAND = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_317 = {
+STATE_AVERHEIM = {
     id = 317
     subsistence_building = "building_subsistence_farm"
     provinces = { x185031 x21DA9E x326FFE x473433 x5E4990 x799B97 x7A7089 x83A325 xB52BF1 xE56BAC xEBCB2C }
@@ -244,7 +244,7 @@ STATE_SOUTH_TALABECLAND = {
     }
     naval_exit_id = 3051
 }
-STATE_LAND_322 = {
+STATE_VOLGEN = {
     id = 322
     subsistence_building = "building_subsistence_farm"
     provinces = { x47D1D1 x6D2B66 x8481BD x8CE396 x9284FB xA99A58 xCEF3ED xE6094A }
@@ -340,7 +340,7 @@ STATE_GRYPHON_WOOD = {
     }
     naval_exit_id = 3038
 }
-STATE_LAND_331 = {
+STATE_BOHSENFELS = {
     id = 331
     subsistence_building = "building_subsistence_farm"
     provinces = { x161AB3 x1689FF x245EEB x3B7448 x57FCB8 x6F1215 x71918F x77E33A x90B0F4 x9D3CCF xBC44B9 xD0DA9C xF63431 xFF0556 }
@@ -387,7 +387,7 @@ STATE_MIDDLE_MOUNTAINS = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_334 = {
+STATE_MIDDENHEIM = {
     id = 334
     subsistence_building = "building_subsistence_farm"
     provinces = { x1339C2 x1C0AE7 x38E226 x4B6C0A x4FA8B4 x4FB689 x543D2F x750249 x8C17A6 xB1713B xC88698 xD6CAD0 xD9CC3E xDF9BF5 xE43070 xEDE02D }
@@ -418,7 +418,7 @@ STATE_EAST_NORDLAND = {
     }
     naval_exit_id = 3016
 }
-STATE_LAND_370 = {
+STATE_BLEEDING_STONE = {
     id = 370
     subsistence_building = "building_subsistence_farm"
     provinces = { x0C007D x56B3A7 x6DC904 xAA37F6 xB8F94F }
@@ -432,7 +432,7 @@ STATE_LAND_370 = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_376 = {
+STATE_KRUGENHEIM = {
     id = 376
     subsistence_building = "building_subsistence_farm"
     provinces = { x27EB4F xA0C933 xC3DAA2 xEB7C5D }
@@ -448,7 +448,7 @@ STATE_LAND_376 = {
     }
     naval_exit_id = 3051
 }
-STATE_LAND_484 = {
+STATE_THE_BLACK_PIT = {
     id = 484
     subsistence_building = "building_subsistence_farm"
     provinces = { x063E9B x08BE15 x42AD8D }
@@ -463,7 +463,7 @@ STATE_LAND_484 = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_485 = {
+STATE_GLIMDWARROW = {
     id = 485
     subsistence_building = "building_subsistence_farm"
     provinces = { x013601 x11A1E2 }
@@ -507,7 +507,7 @@ STATE_EAST_OSTERMARK = {
         building_logging_camp = 10
     }
 }
-STATE_LAND_537 = {
+STATE_DRAKENHOF = {
     id = 537
     subsistence_building = "building_subsistence_farm"
     provinces = { x1ECB5B x20146C x26C2BB x332044 x456E01 x85B826 xB60A89 xBC528E xE86D1A xFFDF1B }
@@ -569,7 +569,7 @@ STATE_WEST_AVERLAND = {
     }
     naval_exit_id = 3060
 }
-STATE_LAND_541 = {
+STATE_WURTBAD = {
     id = 541
     subsistence_building = "building_subsistence_farm"
     provinces = { x369A00 x3729C9 x393ECA x5E985F x7F0EAA x98F250 xA133AC xF7EC8E xFCCFD8 }
@@ -646,7 +646,7 @@ STATE_HOCHLAND = {
     }
     naval_exit_id = 3038
 }
-STATE_LAND_579 = {
+STATE_KREUTZHOFEN = {
     id = 579
     subsistence_building = "building_subsistence_farm"
     provinces = { x06EA0E x12CA76 x2F93E0 x664EC5 x68B295 xA52187 xC8174C xD54E9A }
