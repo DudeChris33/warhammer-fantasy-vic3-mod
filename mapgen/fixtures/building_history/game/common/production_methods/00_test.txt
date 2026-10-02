@@ -1,0 +1,89 @@
+pm_advanced_farming = {
+	is_default = yes
+	unlocking_technologies = { intensive_agriculture }
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 1500
+		}
+	}
+}
+pm_basic_farming = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 1000
+		}
+	}
+}
+pm_logging_simple = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 500
+		}
+	}
+}
+pm_rail = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 100
+		}
+	}
+}
+pm_port = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 100
+		}
+	}
+}
+pm_trade = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 100
+		}
+	}
+}
+pm_admin_hereditary = {
+	unlocking_laws = { law_hereditary_bureaucrats }
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 100
+		}
+	}
+}
+pm_admin_simple = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 100
+		}
+	}
+}
+pm_training_basic = {
+	disallowing_laws = { law_warrior_caste }
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 0
+		}
+	}
+}
+pm_manor_private = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 50
+		}
+	}
+}
+pm_fin_private = {
+	
+	building_modifiers = {
+		level_scaled = {
+			building_employment_laborers_add = 50
+		}
+	}
+}

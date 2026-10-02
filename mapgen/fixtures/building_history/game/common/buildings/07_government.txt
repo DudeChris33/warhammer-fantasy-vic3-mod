@@ -1,0 +1,5 @@
+building_government_administration = {
+	unlocking_technologies = { tech_bureaucracy }
+	production_method_groups = { pmg_admin }
+	city_type = city
+}

@@ -1,0 +1,4 @@
+law_serfdom = { group = lawgroup_labour }
+law_chiefdom = { group = lawgroup_gov }
+law_monarchy = { group = lawgroup_gov }
+law_warrior_caste = { group = lawgroup_army }

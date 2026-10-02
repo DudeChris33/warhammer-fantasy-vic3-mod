@@ -1,0 +1,855 @@
+{
+ "_comment": "Hand-authored per-tag development profile at 2512 IC. See README.md. Techs are never read from here: the tech gate uses only common/history/countries/00_start_setup.txt.",
+ "job_share_cap": 0.4,
+ "archetypes": {
+  "imperial_rich": {
+   "admin": 1,
+   "barracks_levels": 4,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 2,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.8,
+   "logging_share": 0.5,
+   "workforce_share": 0.35,
+   "source": "canon: Warhammer Fantasy Roleplay 4e, The Empire in Flames",
+   "why": "Core electoral provinces: state troops in every town, a chancery, river ports, and the best farmland of the Old World."
+  },
+  "imperial_frontier": {
+   "admin": 1,
+   "barracks_levels": 4,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.6,
+   "logging_share": 0.6,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Sigmar's Heirs",
+   "why": "Marches and forest provinces: heavier garrisons and logging, thinner farming than the heartland."
+  },
+  "merchant_city_state": {
+   "admin": 1,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 1,
+   "port_level": 2,
+   "port_states": 2,
+   "trade_level": 2,
+   "trade_states": 1,
+   "farm_share": 0.4,
+   "logging_share": 0.2,
+   "workforce_share": 0.35,
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Marienburg / Tilea gazetteers",
+   "why": "Single-city trading republics: a big harbour and exchange, a small hinterland, hired rather than standing troops."
+  },
+  "halfling_shire": {
+   "admin": 0,
+   "barracks_levels": 1,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 1.0,
+   "logging_share": 0.3,
+   "workforce_share": 0.35,
+   "source": "canon: The Moot (Warhammer Armies: Empire)",
+   "why": "Almost wholly farmland and orchards; the Moot keeps only a militia."
+  },
+  "vampire_realm": {
+   "admin": 1,
+   "barracks_levels": 3,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.4,
+   "logging_share": 0.4,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Armies: Vampire Counts",
+   "why": "Von Carstein Sylvania: a grim, thinly farmed land with a standing zombie levy."
+  },
+  "bretonnian_duchy": {
+   "admin": 1,
+   "barracks_levels": 3,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.9,
+   "logging_share": 0.5,
+   "workforce_share": 0.35,
+   "source": "canon: Warhammer Armies: Bretonnia",
+   "why": "Peasant-worked manors under a knightly court; farming dominates, towns are small."
+  },
+  "bretonnian_port_duchy": {
+   "admin": 1,
+   "barracks_levels": 3,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 2,
+   "port_states": 2,
+   "trade_level": 2,
+   "trade_states": 1,
+   "farm_share": 0.8,
+   "logging_share": 0.3,
+   "workforce_share": 0.35,
+   "source": "canon: Warhammer Armies: Bretonnia",
+   "why": "Bordeleaux and L'Anguille are the kingdom's great harbours."
+  },
+  "bretonnian_cursed": {
+   "admin": 1,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.3,
+   "logging_share": 0.4,
+   "workforce_share": 0.25,
+   "source": "canon: Warhammer Armies: Bretonnia (Mousillon)",
+   "why": "Cursed Mousillon: blighted fields and a ruined port."
+  },
+  "wood_elf_realm": {
+   "admin": 0,
+   "barracks_levels": 1,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.2,
+   "logging_share": 0.7,
+   "workforce_share": 0.2,
+   "source": "canon: Warhammer Armies: Wood Elves",
+   "why": "Forest realms of Athel Loren: wardens, not barracks; almost no farming, woodcraft instead."
+  },
+  "greenskin_horde": {
+   "admin": 0,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.1,
+   "logging_share": 0.2,
+   "workforce_share": 0.15,
+   "source": "canon: Warhammer Armies: Orcs & Goblins",
+   "why": "Warbands live by raiding; farming is a rarity."
+  },
+  "skaven_clan": {
+   "admin": 0,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.05,
+   "logging_share": 0.1,
+   "workforce_share": 0.15,
+   "source": "inferred",
+   "why": "Placeholder clans: a garrison and next to no surface economy."
+  },
+  "dwarf_hold": {
+   "admin": 1,
+   "barracks_levels": 4,
+   "barracks_states": 1,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.1,
+   "logging_share": 0.1,
+   "workforce_share": 0.4,
+   "source": "canon: Warhammer Armies: Dwarfs",
+   "why": "Living holds: a standing warrior host, an administration and a market gate, with almost no surface farming."
+  },
+  "dwarf_hold_besieged": {
+   "admin": 0,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.1,
+   "logging_share": 0.0,
+   "workforce_share": 0.2,
+   "source": "canon: Warhammer Armies: Dwarfs",
+   "why": "Contested or beleaguered holds keep a garrison and little else."
+  },
+  "dwarf_hold_ruined": {
+   "admin": 0,
+   "barracks_levels": 0,
+   "barracks_states": 0,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.05,
+   "logging_share": 0.0,
+   "workforce_share": 0.1,
+   "source": "canon: Warhammer Armies: Dwarfs",
+   "why": "Ruined holds: no garrison or works, a trickle of farming by squatters, the rest subsistence."
+  },
+  "norse_dwarf_hold": {
+   "admin": 0,
+   "barracks_levels": 3,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.1,
+   "logging_share": 0.2,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Armies: Dwarfs (Norse Dwarfs)",
+   "why": "Norse holds: warriors and little else."
+  },
+  "kislev_oblast": {
+   "admin": 1,
+   "barracks_levels": 3,
+   "barracks_states": 1,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.6,
+   "logging_share": 0.6,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Armies: Kislev",
+   "why": "Oblasts with a Boyar court, winged-lancer musters and timber; farming is short-season."
+  },
+  "kislev_tribe": {
+   "admin": 0,
+   "barracks_levels": 1,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.2,
+   "logging_share": 0.5,
+   "workforce_share": 0.2,
+   "source": "canon: Warhammer Armies: Kislev",
+   "why": "Steppe and taiga tribes: herds and horsemen."
+  },
+  "norse_tribe": {
+   "admin": 0,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.2,
+   "logging_share": 0.5,
+   "workforce_share": 0.2,
+   "source": "canon: Warhammer Armies: Warriors of Chaos (Norsca)",
+   "why": "Raider tribes: longships and war-bands, thin farming."
+  },
+  "border_prince": {
+   "admin": 0,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.5,
+   "logging_share": 0.3,
+   "workforce_share": 0.25,
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Border Princes",
+   "why": "Petty castles and merchant stops on the old roads."
+  },
+  "estalian_kingdom": {
+   "admin": 1,
+   "barracks_levels": 4,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 2,
+   "port_states": 2,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.8,
+   "logging_share": 0.3,
+   "workforce_share": 0.35,
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Estalia",
+   "why": "Rival kingdoms with royal armies and busy Atlantic and Tilean Sea ports."
+  },
+  "nehekharan_city": {
+   "admin": 1,
+   "barracks_levels": 4,
+   "barracks_states": 1,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.5,
+   "logging_share": 0.05,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Armies: Tomb Kings",
+   "why": "Necropolis cities: the legions of the dead, a priestly bureaucracy, little commerce."
+  },
+  "chaos_dwarf": {
+   "admin": 1,
+   "barracks_levels": 6,
+   "barracks_states": 3,
+   "construction": 2,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.2,
+   "logging_share": 0.1,
+   "workforce_share": 0.4,
+   "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs)",
+   "why": "Zharr-Naggrund and its vassals: slave-driven garrison state with big construction works."
+  },
+  "ogre_tribe": {
+   "admin": 0,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.2,
+   "logging_share": 0.3,
+   "workforce_share": 0.2,
+   "source": "canon: Warhammer Armies: Ogre Kingdoms",
+   "why": "Herding and fighting tribes."
+  },
+  "warband_host": {
+   "admin": 0,
+   "barracks_levels": 3,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 0,
+   "port_states": 0,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.1,
+   "logging_share": 0.1,
+   "workforce_share": 0.15,
+   "source": "canon: Warhammer Armies: Vampire Counts / Warriors of Chaos",
+   "why": "Host and warband strongholds: soldiers first."
+  }
+ },
+ "tags": {
+  "AES": {
+   "archetype": "norse_tribe"
+  },
+  "ANM": {
+   "archetype": "wood_elf_realm"
+  },
+  "AQL": {
+   "archetype": "border_prince"
+  },
+  "AQU": {
+   "archetype": "bretonnian_duchy"
+  },
+  "ARG": {
+   "archetype": "wood_elf_realm"
+  },
+  "ART": {
+   "archetype": "bretonnian_duchy"
+  },
+  "AVE": {
+   "archetype": "imperial_rich"
+  },
+  "AZL": {
+   "archetype": "dwarf_hold"
+  },
+  "BAE": {
+   "archetype": "norse_tribe"
+  },
+  "BAS": {
+   "archetype": "bretonnian_duchy"
+  },
+  "BHA": {
+   "archetype": "nehekharan_city"
+  },
+  "BIL": {
+   "archetype": "estalian_kingdom"
+  },
+  "BJO": {
+   "archetype": "norse_tribe"
+  },
+  "BKA": {
+   "archetype": "greenskin_horde"
+  },
+  "BLV": {
+   "archetype": "greenskin_horde"
+  },
+  "BNR": {
+   "archetype": "greenskin_horde"
+  },
+  "BOL": {
+   "archetype": "kislev_oblast"
+  },
+  "BOR": {
+   "archetype": "bretonnian_port_duchy"
+  },
+  "BPR": {
+   "archetype": "border_prince"
+  },
+  "BRI": {
+   "archetype": "bretonnian_duchy"
+  },
+  "BRK": {
+   "archetype": "warband_host"
+  },
+  "BRN": {
+   "archetype": "greenskin_horde"
+  },
+  "BSB": {
+   "archetype": "greenskin_horde"
+  },
+  "BTO": {
+   "archetype": "greenskin_horde"
+  },
+  "BVR": {
+   "archetype": "dwarf_hold",
+   "set": {
+    "port_level": 2
+   },
+   "justify": {
+    "port_level": {
+     "source": "canon: Warhammer Armies: Dwarfs",
+     "why": "Barak Varr is the dwarfs' sea-hold and shipbuilding harbour (dropped today: no navigation)."
+    }
+   }
+  },
+  "CAR": {
+   "archetype": "bretonnian_duchy"
+  },
+  "CNT": {
+   "archetype": "estalian_kingdom"
+  },
+  "COU": {
+   "archetype": "bretonnian_duchy"
+  },
+  "CRB": {
+   "archetype": "merchant_city_state"
+  },
+  "CRM": {
+   "archetype": "greenskin_horde"
+  },
+  "DLO": {
+   "archetype": "greenskin_horde"
+  },
+  "DOL": {
+   "archetype": "kislev_tribe"
+  },
+  "DON": {
+   "archetype": "merchant_city_state"
+  },
+  "DRZ": {
+   "archetype": "dwarf_hold_ruined"
+  },
+  "DUN": {
+   "archetype": "border_prince"
+  },
+  "EKR": {
+   "archetype": "dwarf_hold_ruined"
+  },
+  "ERE": {
+   "archetype": "kislev_oblast",
+   "set": {
+    "trade_level": 2,
+    "port_level": 2
+   },
+   "justify": {
+    "trade_level": {
+     "source": "canon: Warhammer Armies: Kislev",
+     "why": "Erengrad is Kislev's one great harbour and river port."
+    },
+    "port_level": {
+     "source": "canon: Warhammer Armies: Kislev",
+     "why": "Erengrad is Kislev's one great harbour and river port."
+    }
+   }
+  },
+  "ESS": {
+   "archetype": "border_prince"
+  },
+  "EYB": {
+   "archetype": "greenskin_horde"
+  },
+  "GAS": {
+   "archetype": "border_prince"
+  },
+  "GDO": {
+   "archetype": "border_prince"
+  },
+  "GIS": {
+   "archetype": "bretonnian_duchy"
+  },
+  "GOR": {
+   "archetype": "chaos_dwarf"
+  },
+  "GRA": {
+   "archetype": "norse_tribe"
+  },
+  "GRW": {
+   "archetype": "wood_elf_realm"
+  },
+  "GUN": {
+   "archetype": "dwarf_hold_ruined"
+  },
+  "HAS": {
+   "archetype": "norse_tribe"
+  },
+  "HKN": {
+   "archetype": "border_prince"
+  },
+  "HOC": {
+   "archetype": "imperial_rich"
+  },
+  "ICL": {
+   "archetype": "greenskin_horde"
+  },
+  "IRN": {
+   "archetype": "greenskin_horde"
+  },
+  "KAD": {
+   "archetype": "dwarf_hold"
+  },
+  "KAK": {
+   "archetype": "dwarf_hold"
+  },
+  "KAS": {
+   "archetype": "nehekharan_city"
+  },
+  "KEP": {
+   "archetype": "dwarf_hold_besieged"
+  },
+  "KHI": {
+   "archetype": "dwarf_hold"
+  },
+  "KHM": {
+   "archetype": "nehekharan_city"
+  },
+  "KIZ": {
+   "archetype": "dwarf_hold"
+  },
+  "KNO": {
+   "archetype": "dwarf_hold"
+  },
+  "KOR": {
+   "archetype": "norse_dwarf_hold"
+  },
+  "KRD": {
+   "archetype": "norse_dwarf_hold"
+  },
+  "KRV": {
+   "archetype": "norse_dwarf_hold"
+  },
+  "KSV": {
+   "archetype": "kislev_oblast"
+  },
+  "KVE": {
+   "archetype": "norse_tribe"
+  },
+  "KVN": {
+   "archetype": "dwarf_hold_ruined"
+  },
+  "KZF": {
+   "archetype": "dwarf_hold"
+  },
+  "LAH": {
+   "archetype": "nehekharan_city"
+  },
+  "LAN": {
+   "archetype": "bretonnian_port_duchy"
+  },
+  "LAU": {
+   "archetype": "wood_elf_realm"
+  },
+  "LUC": {
+   "archetype": "merchant_city_state"
+  },
+  "LYB": {
+   "archetype": "nehekharan_city"
+  },
+  "LYO": {
+   "archetype": "bretonnian_duchy"
+  },
+  "MAG": {
+   "archetype": "estalian_kingdom"
+  },
+  "MAH": {
+   "archetype": "nehekharan_city"
+  },
+  "MAR": {
+   "archetype": "merchant_city_state",
+   "set": {
+    "trade_level": 3,
+    "port_level": 3
+   },
+   "justify": {
+    "trade_level": {
+     "source": "canon: Warhammer Fantasy Roleplay 4e, Marienburg",
+     "why": "The richest trading city of the Old World; its exchange outweighs every Tilean one."
+    },
+    "port_level": {
+     "source": "canon: Warhammer Fantasy Roleplay 4e, Marienburg",
+     "why": "The great harbour of the Wasteland (dropped today: the tag lacks navigation)."
+    }
+   }
+  },
+  "MAW": {
+   "archetype": "greenskin_horde"
+  },
+  "MGL": {
+   "archetype": "wood_elf_realm"
+  },
+  "MID": {
+   "archetype": "imperial_rich"
+  },
+  "MIR": {
+   "archetype": "merchant_city_state"
+  },
+  "MNF": {
+   "archetype": "bretonnian_duchy"
+  },
+  "MON": {
+   "archetype": "border_prince"
+  },
+  "MOO": {
+   "archetype": "halfling_shire"
+  },
+  "MOR": {
+   "archetype": "greenskin_horde"
+  },
+  "MOU": {
+   "archetype": "bretonnian_cursed"
+  },
+  "MZN": {
+   "archetype": "chaos_dwarf"
+  },
+  "NLD": {
+   "archetype": "imperial_frontier"
+  },
+  "NUM": {
+   "archetype": "nehekharan_city"
+  },
+  "OKP": {
+   "archetype": "wood_elf_realm"
+  },
+  "ORT": {
+   "archetype": "border_prince"
+  },
+  "OSM": {
+   "archetype": "imperial_frontier"
+  },
+  "OST": {
+   "archetype": "imperial_frontier"
+  },
+  "PAR": {
+   "archetype": "bretonnian_duchy"
+  },
+  "PAV": {
+   "archetype": "merchant_city_state"
+  },
+  "PRA": {
+   "archetype": "kislev_oblast"
+  },
+  "QUA": {
+   "archetype": "nehekharan_city"
+  },
+  "QUE": {
+   "archetype": "bretonnian_duchy"
+  },
+  "RAA": {
+   "archetype": "border_prince"
+  },
+  "RAS": {
+   "archetype": "nehekharan_city"
+  },
+  "RDV": {
+   "archetype": "greenskin_horde"
+  },
+  "RED": {
+   "archetype": "greenskin_horde"
+  },
+  "REI": {
+   "archetype": "imperial_rich"
+  },
+  "REM": {
+   "archetype": "merchant_city_state"
+  },
+  "RFG": {
+   "archetype": "greenskin_horde"
+  },
+  "ROP": {
+   "archetype": "kislev_tribe"
+  },
+  "SAR": {
+   "archetype": "norse_tribe"
+  },
+  "SKA": {
+   "archetype": "norse_tribe"
+  },
+  "SKZ": {
+   "archetype": "greenskin_horde"
+  },
+  "SLV": {
+   "archetype": "dwarf_hold_ruined"
+  },
+  "SNA": {
+   "archetype": "norse_tribe"
+  },
+  "SOR": {
+   "archetype": "norse_tribe"
+  },
+  "SOT": {
+   "archetype": "wood_elf_realm"
+  },
+  "SRT": {
+   "archetype": "merchant_city_state",
+   "set": {
+    "port_level": 3
+   },
+   "justify": {
+    "port_level": {
+     "source": "canon: Warhammer Fantasy Roleplay 4e, Sartosa",
+     "why": "The Pirate Isle is nothing but harbour (dropped today: no navigation)."
+    }
+   }
+  },
+  "STI": {
+   "archetype": "imperial_frontier"
+  },
+  "TAL": {
+   "archetype": "imperial_rich"
+  },
+  "THG": {
+   "archetype": "ogre_tribe",
+   "set": {
+    "farm_share": 0.1
+   },
+   "justify": {
+    "farm_share": {
+     "source": "inferred",
+     "why": "A named ogre tribe: herds, not fields."
+    }
+   }
+  },
+  "TLS": {
+   "archetype": "wood_elf_realm"
+  },
+  "TOB": {
+   "archetype": "merchant_city_state"
+  },
+  "TRA": {
+   "archetype": "merchant_city_state"
+  },
+  "TRG": {
+   "archetype": "wood_elf_realm"
+  },
+  "TRO": {
+   "archetype": "kislev_tribe"
+  },
+  "UNG": {
+   "archetype": "kislev_tribe"
+  },
+  "URS": {
+   "archetype": "norse_tribe"
+  },
+  "UVE": {
+   "archetype": "border_prince"
+  },
+  "UZK": {
+   "archetype": "chaos_dwarf"
+  },
+  "VAR": {
+   "archetype": "norse_tribe"
+  },
+  "VER": {
+   "archetype": "merchant_city_state"
+  },
+  "VLG": {
+   "archetype": "dwarf_hold_ruined"
+  },
+  "VMP": {
+   "archetype": "warband_host"
+  },
+  "VOL": {
+   "archetype": "kislev_oblast"
+  },
+  "VSY": {
+   "archetype": "vampire_realm"
+  },
+  "WIS": {
+   "archetype": "imperial_rich"
+  },
+  "WYD": {
+   "archetype": "wood_elf_realm"
+  },
+  "XSA": {
+   "archetype": "skaven_clan"
+  },
+  "XSB": {
+   "archetype": "skaven_clan"
+  },
+  "XSC": {
+   "archetype": "skaven_clan"
+  },
+  "XSD": {
+   "archetype": "skaven_clan"
+  },
+  "XSG": {
+   "archetype": "skaven_clan"
+  },
+  "XSH": {
+   "archetype": "skaven_clan"
+  },
+  "XSI": {
+   "archetype": "skaven_clan"
+  },
+  "XSJ": {
+   "archetype": "skaven_clan"
+  },
+  "XSK": {
+   "archetype": "skaven_clan"
+  },
+  "XSL": {
+   "archetype": "skaven_clan"
+  },
+  "ZHU": {
+   "archetype": "dwarf_hold"
+  },
+  "ZND": {
+   "archetype": "nehekharan_city"
+  }
+ }
+}

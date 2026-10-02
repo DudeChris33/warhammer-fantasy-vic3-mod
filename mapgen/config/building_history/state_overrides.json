@@ -1,0 +1,154 @@
+{
+ "_comment": "Per-state canon overrides. Keyed on canon state key + naming anchor. An override the owner cannot place (tech, resource, port hub, workforce share) is a hard error; impossible canon goes in blocked.json instead.",
+ "states": [
+  {
+   "key": "STATE_REIKLAND_PROPER",
+   "anchor": [
+    4067,
+    872
+   ],
+   "owner": "REI",
+   "buildings": {
+    "building_government_administration": 2,
+    "building_barrack": 4,
+    "building_trade_center": 2,
+    "building_construction_sector": 2
+   },
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Altdorf",
+   "why": "Altdorf is the Emperor's seat: the Imperial chancery, the Reiksguard and the Empire's largest market and building works."
+  },
+  {
+   "key": "STATE_WISSENLAND",
+   "anchor": [
+    4125,
+    968
+   ],
+   "owner": "WIS",
+   "buildings": {
+    "building_barrack": 5
+   },
+   "source": "canon: Warhammer Armies: Empire (Imperial Gunnery School)",
+   "why": "Nuln hosts the Imperial Gunnery School and the Engineers' school; the best-drilled garrison in the Empire (barracks stand in for it)."
+  },
+  {
+   "key": "STATE_CENTRAL_MAGRITTA",
+   "anchor": [
+    3681,
+    1120
+   ],
+   "owner": "MAG",
+   "buildings": {
+    "building_port": 3,
+    "building_shipyard": 2
+   },
+   "source": "inferred",
+   "why": "Magritta is Estalia's great Atlantic port kingdom; its yards build the Estalian fleet."
+  },
+  {
+   "key": "STATE_CANTABRIO_ROAD",
+   "anchor": [
+    3683,
+    1001
+   ],
+   "owner": "BIL",
+   "buildings": {
+    "building_shipyard": 1
+   },
+   "source": "inferred",
+   "why": "Bilbali is the northern Estalian harbour kingdom; a shipyard on its road to the coast."
+  },
+  {
+   "key": "STATE_PEAK_PASS",
+   "anchor": [
+    4450,
+    885
+   ],
+   "owner": "KAD",
+   "buildings": {
+    "building_barrack": 6
+   },
+   "source": "canon: Warhammer Armies: Dwarfs (Karak Kadrin, the Slayer Keep)",
+   "why": "The Slayer Keep is a fortress of oath-sworn warriors; the largest dwarf garrison per head."
+  },
+  {
+   "key": "STATE_CITY_OF_KINGS",
+   "anchor": [
+    4058,
+    1683
+   ],
+   "owner": "KHM",
+   "buildings": {
+    "building_barrack": 6
+   },
+   "source": "canon: Warhammer Armies: Tomb Kings (Khemri)",
+   "why": "Khemri's legions are the greatest of the Land of the Dead."
+  },
+  {
+   "key": "STATE_HEART_OF_ZHARRDUK",
+   "anchor": [
+    4904,
+    828
+   ],
+   "owner": "MZN",
+   "buildings": {
+    "building_barrack": 6,
+    "building_construction_sector": 3
+   },
+   "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs, Zharr-Naggrund)",
+   "why": "The Tower of Zharr is a garrison and a vast slave-built works."
+  },
+  {
+   "key": "STATE_AGRILDRIN",
+   "anchor": [
+    4468,
+    1062
+   ],
+   "owner": "KAK",
+   "buildings": {
+    "building_government_administration": 2,
+    "building_trade_center": 2
+   },
+   "source": "canon: Warhammer Armies: Dwarfs (Karaz-a-Karak)",
+   "why": "The High King's court and the Everpeak's market halls."
+  },
+  {
+   "key": "STATE_PLAINS_OF_LUCCINI",
+   "anchor": [
+    3896,
+    1314
+   ],
+   "owner": "LUC",
+   "buildings": {
+    "building_barrack": 4
+   },
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Luccini",
+   "why": "Luccini's Prince is a mercenary-captain; the city's arena trains the fighters of Tilea."
+  },
+  {
+   "key": "STATE_REMAS",
+   "anchor": [
+    3925,
+    1209
+   ],
+   "owner": "REM",
+   "buildings": {
+    "building_trade_center": 3
+   },
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Remas",
+   "why": "Remas is the largest and richest Tilean city-state."
+  },
+  {
+   "key": "STATE_VEREZZI",
+   "anchor": [
+    3936,
+    1259
+   ],
+   "owner": "VER",
+   "buildings": {
+    "building_trade_center": 2
+   },
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Verezzo",
+   "why": "Verezzo's merchants and clerks run the Tilean banking trade."
+  }
+ ]
+}

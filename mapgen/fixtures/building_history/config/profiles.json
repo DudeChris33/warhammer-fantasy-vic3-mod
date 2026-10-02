@@ -1,0 +1,31 @@
+{
+ "job_share_cap": 0.4,
+ "archetypes": {
+  "basic": {
+   "admin": 1,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.5,
+   "logging_share": 1.0,
+   "workforce_share": 0.35,
+   "source": "inferred",
+   "why": "fixture"
+  }
+ },
+ "tags": {
+  "AAA": {
+   "archetype": "basic"
+  },
+  "BBB": {
+   "archetype": "basic"
+  },
+  "CCC": {
+   "archetype": "basic"
+  }
+ }
+}

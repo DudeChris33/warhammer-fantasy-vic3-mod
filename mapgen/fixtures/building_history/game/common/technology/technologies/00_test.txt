@@ -1,0 +1,5 @@
+enclosure = { era = era_1 }
+tech_bureaucracy = { era = era_1 }
+intensive_agriculture = { era = era_2 }
+railways = { era = era_2 }
+navigation = { era = era_1 }

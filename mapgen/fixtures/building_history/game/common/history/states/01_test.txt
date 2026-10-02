@@ -1,0 +1,30 @@
+STATES = {
+	s:STATE_ALPHA = {
+		create_state = {
+			country = c:BBB
+			owned_provinces = { x000001 x000002 }
+		}
+	}
+	s:STATE_BETA = {
+		create_state = {
+			country = c:CCC
+			owned_provinces = { x000003 }
+		}
+	}
+	s:STATE_GAMMA = {
+		create_state = {
+			country = c:AAA
+			owned_provinces = { x000004 }
+		}
+		create_state = {
+			country = c:BBB
+			owned_provinces = { x000005 }
+		}
+	}
+	s:STATE_DELTA = {
+		create_state = {
+			country = c:AAA
+			owned_provinces = { x000006 }
+		}
+	}
+}

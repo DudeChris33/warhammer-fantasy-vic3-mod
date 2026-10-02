@@ -1,0 +1,12 @@
+AAA = {
+	country_type = recognized
+	tier = kingdom
+}
+BBB = {
+	country_type = recognized
+	tier = principality
+}
+CCC = {
+	country_type = unrecognized
+	tier = principality
+}

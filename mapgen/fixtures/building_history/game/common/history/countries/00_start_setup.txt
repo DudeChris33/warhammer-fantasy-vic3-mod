@@ -1,0 +1,11 @@
+COUNTRIES = {
+	c:AAA ?= {
+		effect_fixture_tier_5 = yes
+	}
+	c:BBB ?= {
+		effect_fixture_tier_6 = yes
+	}
+	c:CCC ?= {
+		effect_fixture_undefined = yes
+	}
+}

@@ -1,0 +1,410 @@
+{
+ "_comment": "Canon buildings NOT emitted. blocked_by_resources: the state has no such resource yet (add as an override when real state resources exist; the generator warns when the resource appears). blocked_by_tech: the owner has not researched the unlocking tech (the generator warns when it does). gaps: Warhammer concepts with no fitting building (reported, never authored).",
+ "blocked_by_resources": [
+  {
+   "key": "STATE_WISSENLAND",
+   "anchor": [
+    4125,
+    968
+   ],
+   "building": "building_iron_mine",
+   "source": "canon: Warhammer Armies: Empire (Nuln)",
+   "why": "Nuln's ore from the Black Mountains; the state has no mine resource yet."
+  },
+  {
+   "key": "STATE_AGRILDRIN",
+   "anchor": [
+    4468,
+    1062
+   ],
+   "building": "building_iron_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Karaz-a-Karak)",
+   "why": "The Everpeak's mines."
+  },
+  {
+   "key": "STATE_AGRILDRIN",
+   "anchor": [
+    4468,
+    1062
+   ],
+   "building": "building_coal_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Karaz-a-Karak)",
+   "why": "Coal for the hold's forges."
+  },
+  {
+   "key": "STATE_AGRILDRIN",
+   "anchor": [
+    4468,
+    1062
+   ],
+   "building": "building_gold_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Karaz-a-Karak)",
+   "why": "The Everpeak's gold."
+  },
+  {
+   "key": "STATE_BLACK_WATER",
+   "anchor": [
+    4413,
+    984
+   ],
+   "building": "building_iron_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Zhufbar)",
+   "why": "Zhufbar's ore."
+  },
+  {
+   "key": "STATE_IRON_PEAKS",
+   "anchor": [
+    4551,
+    1316
+   ],
+   "building": "building_iron_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Karak Azul)",
+   "why": "Karak Azul is the Iron Peaks."
+  },
+  {
+   "key": "STATE_BLACK_MOUNTAINS",
+   "anchor": [
+    4244,
+    1062
+   ],
+   "building": "building_gold_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Karak Hirn)",
+   "why": "Karak Hirn's vaults and gold."
+  },
+  {
+   "key": "STATE_HEART_OF_ZHARRDUK",
+   "anchor": [
+    4904,
+    828
+   ],
+   "building": "building_iron_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs)",
+   "why": "Ore for the Hellforges."
+  },
+  {
+   "key": "STATE_HEART_OF_ZHARRDUK",
+   "anchor": [
+    4904,
+    828
+   ],
+   "building": "building_sulfur_mine",
+   "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs)",
+   "why": "Sulphur for the fire-works."
+  },
+  {
+   "key": "STATE_BORDELEAUX",
+   "anchor": [
+    3821,
+    918
+   ],
+   "building": "building_vineyard",
+   "source": "canon: Warhammer Armies: Bretonnia",
+   "why": "Bretonnian wine."
+  },
+  {
+   "key": "STATE_AQUITAINE",
+   "anchor": [
+    3845,
+    963
+   ],
+   "building": "building_vineyard",
+   "source": "canon: Warhammer Armies: Bretonnia",
+   "why": "Bretonnian wine."
+  },
+  {
+   "key": "STATE_CENTRAL_MAGRITTA",
+   "anchor": [
+    3681,
+    1120
+   ],
+   "building": "building_vineyard",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Estalia",
+   "why": "Estalian wine and sherry."
+  },
+  {
+   "key": "STATE_MARIENBURG",
+   "anchor": [
+    3963,
+    785
+   ],
+   "building": "building_fishing_wharf",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Marienburg",
+   "why": "The Wasteland's fisheries."
+  },
+  {
+   "key": "STATE_GLOOMWRACK_COAST",
+   "anchor": [
+    3874,
+    488
+   ],
+   "building": "building_fishing_wharf",
+   "source": "canon: Warhammer Armies: Warriors of Chaos (Norsca)",
+   "why": "Norscan fishers and whalers."
+  },
+  {
+   "key": "STATE_SOUTH_OSTLAND",
+   "anchor": [
+    4282,
+    762
+   ],
+   "building": "building_rye_farm",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Ostland",
+   "why": "Northern Empire rye."
+  },
+  {
+   "key": "STATE_THE_DOBRYRION",
+   "anchor": [
+    4442,
+    735
+   ],
+   "building": "building_rye_farm",
+   "source": "canon: Warhammer Armies: Kislev",
+   "why": "Kislevite rye."
+  }
+ ],
+ "blocked_by_tech": [
+  {
+   "key": "STATE_WISSENLAND",
+   "anchor": [
+    4125,
+    968
+   ],
+   "tag": "WIS",
+   "building": "building_arms_industry",
+   "source": "canon: Warhammer Armies: Empire (Nuln)",
+   "why": "Nuln's gun foundries: needs gunsmithing (WIS has tier-5 tech)."
+  },
+  {
+   "key": "STATE_WISSENLAND",
+   "anchor": [
+    4125,
+    968
+   ],
+   "tag": "WIS",
+   "building": "building_steel_mill",
+   "source": "canon: Warhammer Armies: Empire (Nuln)",
+   "why": "Nuln's smelters: needs steelworking."
+  },
+  {
+   "key": "STATE_WISSENLAND",
+   "anchor": [
+    4125,
+    968
+   ],
+   "tag": "WIS",
+   "building": "building_university",
+   "source": "canon: Warhammer Armies: Empire (Nuln)",
+   "why": "The Nuln Engineers' school: needs academia."
+  },
+  {
+   "key": "STATE_REIKLAND_PROPER",
+   "anchor": [
+    4067,
+    872
+   ],
+   "tag": "REI",
+   "building": "building_university",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Altdorf",
+   "why": "Altdorf's University and the Colleges: needs academia."
+  },
+  {
+   "key": "STATE_REIKLAND_PROPER",
+   "anchor": [
+    4067,
+    872
+   ],
+   "tag": "REI",
+   "building": "building_naval_administration",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Altdorf",
+   "why": "The Reik fleet's admiralty: needs admiralty."
+  },
+  {
+   "key": "STATE_MARIENBURG",
+   "anchor": [
+    3963,
+    785
+   ],
+   "tag": "MAR",
+   "building": "building_port",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Marienburg",
+   "why": "Marienburg's harbour: needs navigation (MAR is a tier-6 city state)."
+  },
+  {
+   "key": "STATE_MARIENBURG",
+   "anchor": [
+    3963,
+    785
+   ],
+   "tag": "MAR",
+   "building": "building_shipyard",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Marienburg",
+   "why": "Marienburg's shipyards: needs navigation."
+  },
+  {
+   "key": "STATE_MARIENBURG",
+   "anchor": [
+    3963,
+    785
+   ],
+   "tag": "MAR",
+   "building": "building_naval_administration",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Marienburg",
+   "why": "The Wasteland's admiralty: needs admiralty."
+  },
+  {
+   "key": "STATE_REMAS",
+   "anchor": [
+    3925,
+    1209
+   ],
+   "tag": "REM",
+   "building": "building_port",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Remas",
+   "why": "Remas' harbour: needs navigation."
+  },
+  {
+   "key": "STATE_REMAS",
+   "anchor": [
+    3925,
+    1209
+   ],
+   "tag": "REM",
+   "building": "building_shipyard",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Remas",
+   "why": "Tilean shipyards: needs navigation."
+  },
+  {
+   "key": "STATE_SARTOSA",
+   "anchor": [
+    3832,
+    1331
+   ],
+   "tag": "SRT",
+   "building": "building_shipyard",
+   "source": "canon: Warhammer Fantasy Roleplay 4e, Sartosa",
+   "why": "The pirate yards: needs navigation."
+  },
+  {
+   "key": "STATE_BORDELEAUX",
+   "anchor": [
+    3821,
+    918
+   ],
+   "tag": "BOR",
+   "building": "building_port",
+   "source": "canon: Warhammer Armies: Bretonnia (Bordeleaux)",
+   "why": "Bordeleaux' harbour: needs navigation."
+  },
+  {
+   "key": "STATE_BORDELEAUX",
+   "anchor": [
+    3821,
+    918
+   ],
+   "tag": "BOR",
+   "building": "building_shipyard",
+   "source": "canon: Warhammer Armies: Bretonnia (Bordeleaux)",
+   "why": "Bordeleaux' yards: needs navigation."
+  },
+  {
+   "key": "STATE_VARENKA_HILLS",
+   "anchor": [
+    4288,
+    1192
+   ],
+   "tag": "BVR",
+   "building": "building_shipyard",
+   "source": "canon: Warhammer Armies: Dwarfs (Barak Varr)",
+   "why": "The dwarf sea-hold's drydocks: needs navigation."
+  },
+  {
+   "key": "STATE_VARENKA_HILLS",
+   "anchor": [
+    4288,
+    1192
+   ],
+   "tag": "BVR",
+   "building": "building_port",
+   "source": "canon: Warhammer Armies: Dwarfs (Barak Varr)",
+   "why": "Barak Varr's harbour: needs navigation."
+  },
+  {
+   "key": "STATE_BLACK_WATER",
+   "anchor": [
+    4413,
+    984
+   ],
+   "tag": "ZHU",
+   "building": "building_arms_industry",
+   "source": "canon: Warhammer Armies: Dwarfs (Zhufbar)",
+   "why": "The Engineers' Guild forges of Zhufbar: need gunsmithing."
+  },
+  {
+   "key": "STATE_HEART_OF_ZHARRDUK",
+   "anchor": [
+    4904,
+    828
+   ],
+   "tag": "MZN",
+   "building": "building_arms_industry",
+   "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs)",
+   "why": "The Hellforges: need gunsmithing."
+  },
+  {
+   "key": "STATE_HEART_OF_ZHARRDUK",
+   "anchor": [
+    4904,
+    828
+   ],
+   "tag": "MZN",
+   "building": "building_steel_mill",
+   "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs)",
+   "why": "Zharr-Naggrund's smelting works: need steelworking."
+  },
+  {
+   "key": "STATE_CENTRAL_MAGRITTA",
+   "anchor": [
+    3681,
+    1120
+   ],
+   "tag": "MAG",
+   "building": "building_naval_administration",
+   "source": "inferred",
+   "why": "Estalia's admiralty: needs admiralty."
+  }
+ ],
+ "gaps": [
+  {
+   "concept": "Wizard colleges and magic schools",
+   "why": "The Colleges of Magic (Altdorf), the Tower of Hoeth and the Jade College have no building; the closest are building_university (needs academia) and building_art_academy, and neither says \"wizard\"."
+  },
+  {
+   "concept": "Runesmiths and rune forges",
+   "why": "Dwarf runesmithing has no building; the Engineers' Guild is only reachable as arms/steel industry (blocked by tech today)."
+  },
+  {
+   "concept": "Temples and cults (Sigmar, Ulric, Morr, Shallya, Sigmar's Cult Hammer, Nehekharan mortuary temples, Slann temple-cities)",
+   "why": "Religion is carried by pops, laws and the clergy pm of building_urban_center; there is no temple building."
+  },
+  {
+   "concept": "Skaven under-cities and warrens",
+   "why": "No building models the Under-Empire; clan states keep only barracks."
+  },
+  {
+   "concept": "Chaos Dwarf slave pits and Hellforge foundries",
+   "why": "Only reachable as barracks / construction sector here; slavery is a law, not a building."
+  },
+  {
+   "concept": "Elven waystones, Athel Loren's heart and Ulthuan's Vortex",
+   "why": "No building; wood elf realms keep only logging and a warden barracks."
+  },
+  {
+   "concept": "Pirate coves and corsair havens (Sartosa, Naggaroth)",
+   "why": "Only harbour + shipyard, which need navigation."
+  },
+  {
+   "concept": "Tomb complexes and necropolises",
+   "why": "Nehekhara's great pyramids are building_power_bloc_statue-like monuments only through events; none are placed."
+  }
+ ]
+}

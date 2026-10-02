@@ -1,0 +1,28 @@
+building_railway = {
+	unlocking_technologies = { railways }
+	production_method_groups = { pmg_rail }
+	ownership_type = self
+}
+building_port = {
+	unlocking_technologies = { navigation }
+	production_method_groups = { pmg_port }
+	city_type = port
+	ownership_type = self
+}
+building_trade_center = {
+	production_method_groups = { pmg_trade }
+	city_type = city
+	ownership_type = self
+}
+building_manor_house = {
+	production_method_groups = { pmg_manor }
+	city_type = farm
+	buildable = no
+	ownership_type = other
+}
+building_financial_district = {
+	production_method_groups = { pmg_fin }
+	city_type = city
+	buildable = no
+	ownership_type = other
+}

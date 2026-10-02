@@ -1,0 +1,9 @@
+pmg_farm = { production_methods = { pm_advanced_farming pm_basic_farming } }
+pmg_log = { production_methods = { pm_logging_simple } }
+pmg_rail = { production_methods = { pm_rail } }
+pmg_port = { production_methods = { pm_port } }
+pmg_trade = { production_methods = { pm_trade } }
+pmg_admin = { production_methods = { pm_admin_hereditary pm_admin_simple } }
+pmg_training = { production_methods = { pm_training_basic } }
+pmg_manor = { production_methods = { pm_manor_private } }
+pmg_fin = { production_methods = { pm_fin_private } }
