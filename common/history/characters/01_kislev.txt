@@ -1,0 +1,10 @@
+﻿CHARACTERS = {
+	c:KSV ?= {
+		create_character = { # Boris Bokha
+			template = KSV_boris_bokha_template
+		}
+		create_character = { # Katarin Bokha
+			template = KSV_katarin_bokha_template
+		}
+	}
+}
