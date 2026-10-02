@@ -128,3 +128,18 @@ Skaven charge on goblin pops would assert an identity the tag does not have.
 The block comment says it is a placeholder and that the device is a disclosed
 invention. When the real people get a culture and their own tags, those tags
 get their own heraldry; the placeholder's arms are not migrated.
+
+## Wood-elf and ogre house styles
+
+Established by #6373 for the `wood_elf` and `ogre` tags; binding on later tags of either people.
+
+- **Wood elves (Asrai).** An autumn/forest palette (`green_dark`, `brown`, `red_dark`, `orange`,
+  `saffron`, `golden`, `yellow_dark`, with `pearl`/`bone_white` as light fields; `SOT`'s twilight
+  `purple` is the one recorded exception) and one nature or
+  hunt charge per realm: trees, leaves, forest beasts, the hunter's arrowhead or falcon. No crowns,
+  crosses or fleurs: the Asrai realms are not feudal kingdoms. A charge with a non-wood-elf detail
+  (the unicorn's collar and chain) sets that slot to the body's tone.
+- **Ogres.** Two tinctures per coat (one field colour, one charge colour) and a motif from the
+  tribes' own culture: the gut-plate (a plain disc), the Great Maw (a horns-up crescent), or a
+  blast for a gut-cannon tribe. Never an eye (RED's reserved device) and never a lightning bolt
+  (too close to the banned `ce_lightning_bolt_nacista`).

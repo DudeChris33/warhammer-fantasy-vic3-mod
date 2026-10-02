@@ -89,6 +89,13 @@ Grey Mountains on Bretonnia's southern flank) are both defined in `03_brettonia.
 inside/against Bretonnia even though their population isn't bretonnian. A tag near a region border
 needs a real judgment call on which side it reads as.
 
+**Exception — a people with its own registry region keeps its roster together.** When
+`planning/tag_registry.md` gives a tag a region whose file is that people's own, the registry's region
+column wins over the geography of its states: the Norse dwarf holds (`KRD`, `KOR`, `KRV`) live in
+`04_karaz_ankor.txt` and the ogre tribes in `11_ogre_kingdoms.txt` although their states sit in other
+regions' state files (#6373). Say so in the file or block comment. A people with no region file of its
+own — the wood elves — files each tag by geography as above.
+
 A country definition entry:
 
 ```
