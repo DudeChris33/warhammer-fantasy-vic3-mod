@@ -1,1 +1,66 @@
-﻿
+﻿# Old World cultures — the ogres of the Mountains of Mourn and the tribes that have pushed west
+# into the Dark Lands. Schema mirrors common/cultures/norscan_humans.txt and
+# common/cultures/greenskin.txt, the verified reference entries for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. Taken from the Eyebiter (EYB) entry
+#                of mapgen/config/state_ownership_legend.json — a legend colour of an ogre tag, chosen
+#                over the darker MAW entry because that one is near-indistinguishable from dawi_zharr
+#                and the vampire cultures on the culture map, and the ogre states sit among Chaos
+#                Dwarf states.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+# graphics/ethnicities — vanilla ships NO ogre portrait set. The values used below are deliberate
+#                STAND-INS chosen only so the culture renders at all; they are a placeholder pending
+#                custom ogre art and carry no lore claim whatsoever about what ogres look like.
+# FEMALE NAME LISTS: ogre females exist in the setting, so female_common_first_names is a real
+#                name register of its own, built in the same blunt, heavy style as the male list.
+# Ogres get their own heritage, language and religious-heritage groups: no kin race is in scope.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_ogre_l_english.yml.
+# Board item #6379 (epic #3404).
+
+################ Ogre — the Great Maw's hungry children; might is the only title ################
+# Register: Grumbarth — heavy, blunt, one- and two-syllable, broad vowels and thick clusters
+# (gr-, br-, thr-, -g, -gg, -ut). Canon-first where it fits (Greasus, Skrag, Ghark, Golgfag,
+# Bragg, Malron, Bul); the rest are invented in the same register.
+# Last names are EARNED EPITHETS (Goldtooth, Ironskin, Maneater, Eyebiter, Thunderguts...), not
+# family names. A Tyrant rules by being the biggest and the best fed, and holds the title only
+# until someone bigger takes it, so there is no noble list and no regal list (as orc).
+
+ogre = {
+	color= rgb{ 174 48 30 }
+	religion = the_great_maw
+	heritage = heritage_ogre
+	language = sphere_grumbarth
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Greasus Skrag Ghark Golgfag Bragg Malron Bul Grumlok Hrothgut Vorg
+		Thugg Glutt Ugmash Morgut Dragh Hrask Gorch Bludd Grunbag Mawrok
+		Hulgar Brunt Gutlug Drogg
+	}
+
+	female_common_first_names = {
+		Grenda Hulga Bruga Mawga Thrudda Gurla Ghasha Molka Bulda Grisla
+		Ugga Hagga Dranna Gorla Varga Glutta Krumma Borra Gutra Skulla
+	}
+
+	common_last_names = {
+		Goldtooth Ironskin Maneater Eyebiter Thunderguts Slaughterer Mallethand Gutsplitter
+		Bonechewer Rockgut Bloodguzzler Gnoblarkicker Meatfist Gristlegob Boulderback Fleshrender
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_dark_hair
+		1 = caucasian_brown_hair
+	}
+}
