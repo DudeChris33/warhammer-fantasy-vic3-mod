@@ -1,0 +1,12 @@
+STATE_ALPHA = {
+    id = 1
+    provinces = { x000001 x000002 x000003 }
+}
+STATE_BETA = {
+    id = 2
+    provinces = { x000004 }
+}
+STATE_EPSILON = {
+    id = 5
+    provinces = { x000005 }
+}

@@ -1,0 +1,351 @@
+{
+ "_comment": [
+  "How each tag's total spreads over its states. Weight = (arable heatmap mass + floor_permille/1000 x area) x (1 + city_boost x named city hubs + canon_city_boost x canon cities) x multiplier,",
+  "from state_weights.json (derived: generate_pop_history.py --refresh-weights). 'share' (fraction of the tag total) overrides weight entirely for that state. Every override carries source + why."
+ ],
+ "floor_permille": 50,
+ "city_boost": "0.05",
+ "canon_city_boost": "0.3",
+ "overrides": [
+  {
+   "key": "STATE_REIKLAND_PROPER",
+   "anchor": [
+    4067,
+    872
+   ],
+   "multiplier": "2.2",
+   "source": "canon: Altdorf is the Empire's capital and the largest city of the Old World (WFB Empire)",
+   "why": "Altdorf far above its area share."
+  },
+  {
+   "key": "STATE_REIKWALD_FOREST",
+   "anchor": [
+    4098,
+    911
+   ],
+   "multiplier": "0.4",
+   "source": "canon: the Reikwald is a deep forest (WFRP Empire)",
+   "why": "Forest, few farms."
+  },
+  {
+   "key": "STATE_LAND_334",
+   "anchor": [
+    4153,
+    746
+   ],
+   "multiplier": "2.5",
+   "source": "canon: Middenheim, the City of the White Wolf (WFB Empire)",
+   "why": "Great fortress-city on the Fauschlag."
+  },
+  {
+   "key": "STATE_WISSENLAND",
+   "anchor": [
+    4125,
+    968
+   ],
+   "multiplier": "4",
+   "source": "canon: Nuln is the Empire's second city, home of the Imperial Gunnery School and Great University (WFB Empire)",
+   "why": "Nuln far above its area share."
+  },
+  {
+   "key": "STATE_SOLLAND",
+   "anchor": [
+    4194,
+    1031
+   ],
+   "multiplier": "0.5",
+   "source": "canon: Solland was ravaged by greenskins in 2301 IC (WFB Empire)",
+   "why": "Ruined province, thinly resettled."
+  },
+  {
+   "key": "STATE_MARIENBURG",
+   "anchor": [
+    3963,
+    785
+   ],
+   "multiplier": "2.5",
+   "source": "canon: Marienburg is the greatest port of the Old World (WFB Marienburg)",
+   "why": "City state far above its area share."
+  },
+  {
+   "key": "STATE_THE_WASTELAND",
+   "anchor": [
+    4004,
+    715
+   ],
+   "multiplier": "0.8",
+   "source": "canon: the Wasteland is marshy polder (WFB Marienburg)",
+   "why": "Wet farmland, lighter than the city."
+  },
+  {
+   "key": "STATE_BLACK_FIRE_PASS",
+   "anchor": [
+    4302,
+    1043
+   ],
+   "multiplier": "0.3",
+   "source": "canon: Black Fire Pass is an orc-infested mountain pass (WFB)",
+   "why": "Nearly empty pass."
+  },
+  {
+   "key": "STATE_SCHADENSUMPF",
+   "anchor": [
+    4056,
+    724
+   ],
+   "multiplier": "0.4",
+   "source": "canon: Schadensumpf is a swamp (WFRP Nordland)",
+   "why": "Marsh, sparse."
+  },
+  {
+   "key": "STATE_EAST_NORDLAND",
+   "anchor": [
+    4138,
+    676
+   ],
+   "multiplier": "1.2",
+   "source": "canon: Salzenmund is Nordland's salt port (WFRP Empire)",
+   "why": "Port above area share."
+  },
+  {
+   "key": "STATE_COURONNE",
+   "anchor": [
+    3850,
+    718
+   ],
+   "multiplier": "1.4",
+   "source": "canon: Couronne is the Bretonnian capital (WFB Bretonnia)",
+   "why": "Capital city above area share."
+  },
+  {
+   "key": "STATE_THE_DOBRYRION",
+   "anchor": [
+    4442,
+    735
+   ],
+   "multiplier": "2.5",
+   "source": "canon: Kislev city (the Great City, WFRP Realm of the Ice Queen)",
+   "why": "Capital city above area share."
+  },
+  {
+   "key": "STATE_EASTERN_OBLAST",
+   "anchor": [
+    4472,
+    624
+   ],
+   "multiplier": "1.8",
+   "source": "canon: Praag is Kislev's second city (WFB Kislev)",
+   "why": "Praag above area share."
+  },
+  {
+   "key": "STATE_THE_TAIGA",
+   "anchor": [
+    4476,
+    686
+   ],
+   "multiplier": "0.4",
+   "source": "inferred",
+   "why": "Taiga forest, sparse."
+  },
+  {
+   "key": "STATE_HEART_OF_ZHARRDUK",
+   "anchor": [
+    4904,
+    828
+   ],
+   "multiplier": "2.5",
+   "source": "canon: Zharr-Naggrund, the great Chaos Dwarf city (WFB Chaos Dwarfs)",
+   "why": "City heart above its area share."
+  },
+  {
+   "key": "STATE_NORTH_HOWLING_WASTES",
+   "anchor": [
+    4942,
+    1025
+   ],
+   "multiplier": "0.15",
+   "source": "canon: the Howling Wastes are blasted barrens (WFB Chaos Dwarfs)",
+   "why": "Empty wasteland dominating the tag by area."
+  },
+  {
+   "key": "STATE_STEEL_PLAINS",
+   "anchor": [
+    4710,
+    803
+   ],
+   "multiplier": "0.5",
+   "source": "inferred",
+   "why": "Industrial plain outside the city blocks."
+  },
+  {
+   "key": "STATE_FOUNDRY_DISTRICT",
+   "anchor": [
+    4841,
+    852
+   ],
+   "multiplier": "2",
+   "source": "canon: Zharr-Naggrund's industrial districts (WFB Chaos Dwarfs; TW Zharr-Naggrund)",
+   "why": "Dense slave-worked factory quarter."
+  },
+  {
+   "key": "STATE_MANUFACTORY_DISTRICT",
+   "anchor": [
+    4893,
+    868
+   ],
+   "multiplier": "2",
+   "source": "canon: Zharr-Naggrund's industrial districts (WFB Chaos Dwarfs; TW Zharr-Naggrund)",
+   "why": "Dense slave-worked factory quarter."
+  },
+  {
+   "key": "STATE_PITS_DISTRICT",
+   "anchor": [
+    4783,
+    813
+   ],
+   "multiplier": "2",
+   "source": "canon: Zharr-Naggrund's industrial districts (WFB Chaos Dwarfs; TW Zharr-Naggrund)",
+   "why": "Dense slave-worked factory quarter."
+  },
+  {
+   "key": "STATE_ZORN_UZKUL",
+   "anchor": [
+    4794,
+    539
+   ],
+   "multiplier": "2",
+   "source": "canon: Uzkulak's seat is a large Chaos Dwarf city (TW Dark Lands)",
+   "why": "City above area share."
+  },
+  {
+   "key": "STATE_SKULL_CLIFFS",
+   "anchor": [
+    4778,
+    750
+   ],
+   "multiplier": "0.5",
+   "source": "inferred",
+   "why": "Cliff country, thin."
+  },
+  {
+   "key": "STATE_DEATH_S_SIDE",
+   "anchor": [
+    4855,
+    606
+   ],
+   "multiplier": "0.5",
+   "source": "inferred",
+   "why": "Barren, thin."
+  },
+  {
+   "key": "STATE_CAUSEWAY_OF_ZHARR",
+   "anchor": [
+    4734,
+    961
+   ],
+   "multiplier": "0.2",
+   "source": "canon: the Dark Lands are a poisoned waste (WFB)",
+   "why": "Waste."
+  },
+  {
+   "key": "STATE_DESOLATION_OF_AZGORH",
+   "anchor": [
+    4821,
+    1276
+   ],
+   "multiplier": "0.1",
+   "source": "canon: the Desolation of Azgorh (WFB Chaos Dwarfs)",
+   "why": "Deepest waste."
+  },
+  {
+   "key": "STATE_WOLF_LANDS",
+   "anchor": [
+    4694,
+    1118
+   ],
+   "multiplier": "0.3",
+   "source": "inferred",
+   "why": "Waste."
+  },
+  {
+   "key": "STATE_SOUTH_HOWLING_WASTES",
+   "anchor": [
+    4908,
+    1151
+   ],
+   "multiplier": "0.3",
+   "source": "canon: the Howling Wastes (WFB)",
+   "why": "Waste."
+  },
+  {
+   "key": "STATE_CENTRAL_MAGRITTA",
+   "anchor": [
+    3681,
+    1120
+   ],
+   "multiplier": "1.8",
+   "source": "canon: Magritta is the Estalian capital (WFB Estalia)",
+   "why": "Capital above area share."
+  },
+  {
+   "key": "STATE_ESTALIAN_HIGHLANDS",
+   "anchor": [
+    3668,
+    1063
+   ],
+   "multiplier": "0.5",
+   "source": "inferred",
+   "why": "Highlands, thin."
+  },
+  {
+   "key": "STATE_LAND_602",
+   "anchor": [
+    3813,
+    1152
+   ],
+   "multiplier": "1.5",
+   "source": "canon: Tobaro is a major Tilean port (WFRP Tilea)",
+   "why": "Port above area share."
+  },
+  {
+   "key": "STATE_CANTABRIO_ROAD",
+   "anchor": [
+    3683,
+    1001
+   ],
+   "multiplier": "1.5",
+   "source": "canon: Bilbali is a major Estalian port (WFB Estalia)",
+   "why": "Port above area share."
+  },
+  {
+   "key": "STATE_LAND_537",
+   "anchor": [
+    4353,
+    944
+   ],
+   "multiplier": "1.5",
+   "source": "canon: Castle Drakenhof, the Von Carstein seat (WFB Vampire Counts)",
+   "why": "Seat of Sylvanian power."
+  },
+  {
+   "key": "STATE_WEST_SYLVANIA",
+   "anchor": [
+    4314,
+    911
+   ],
+   "multiplier": "0.6",
+   "source": "canon: Sylvania is blighted (WFB Vampire Counts)",
+   "why": "Blighted farmland."
+  },
+  {
+   "key": "STATE_LAND_317",
+   "anchor": [
+    4210,
+    969
+   ],
+   "multiplier": "1.3",
+   "source": "canon: Averheim, capital of Averland (WFB Empire)",
+   "why": "Provincial capital."
+  }
+ ]
+}

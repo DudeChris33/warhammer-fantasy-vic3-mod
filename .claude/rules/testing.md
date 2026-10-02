@@ -42,6 +42,7 @@ One-time setup: a local `mapgen/.venv` (git-ignored), deps pinned in `mapgen/req
 ```
 python mapgen/read_state_ownership.py --check     # state_ownership.json is current with the painted PNG + map_data
 python mapgen/generate_state_history.py --check   # common/history/states is current with state_ownership.json
+python mapgen/generate_pop_history.py --check     # common/history/pops + population are current with mapgen/config/pop_history and resolve
 python mapgen/generate_country_history.py --check # common/history/countries is current with the owners + tiers
 python mapgen/worldgen/sources.py --verify        # source manifest SHA-256 + registration cross-checks
 python mapgen/validate_map.py --province-bitmap    # bitmap tiles the mask, agrees with its index and the sea layer
@@ -94,6 +95,7 @@ generate_arable_heatmap.py
 | `generate_arable_heatmap.py` | `mapgen/derived/arable_heatmap.png`, `arable_heatmap_index.json` |
 | `read_state_ownership.py` | `mapgen/derived/state_ownership.json` (per-`STATE_*` owner, or split owners with province ids, read from `state_ownership.png`) |
 | `generate_state_history.py` | `common/history/states/00–19_*.txt` (one per land state-region file; `create_state` per owner — the `unowned` and `placeholder` tokens map to `c:UNO`, so every land state, out-of-scope ones included, has an owner (#6391) — then one `add_homeland = cu:<culture>` per culture of the owner tags' `cultures`: derived, no override table, `UNO` gets none (#6374); header-only only where a file has no state, today 08, 11, 12, 14) |
+| `generate_pop_history.py` | `common/history/pops/00–19_*.txt` and `common/history/population/00–19_*.txt` (same names as the state-region files; `create_pop` per (state, owner) from `mapgen/config/pop_history/`, `POPULATION` wealth/literacy per tag; header-only where nothing is owned) |
 | `generate_country_history.py` | `common/history/countries/00_start_setup.txt` (one `c:TAG ?= { }` per tag that owns a state, `UNO` included whenever any state is unowned or out-of-scope: starting-technology effect from its definition `tier` plus `effect_starting_politics_traditional`; placeholder-grade, #6375) |
 | `fit_registration.py` | `mapgen/registration/*.json` |
 | engine (copy from `Documents/.../Victoria 3/generated/` after a load reports an incomplete locator) | `gfx/map/map_object_data/generated_map_object_locators_*` |
@@ -109,7 +111,7 @@ generate_arable_heatmap.py
 
 ### Hand-authored inputs (edit deliberately, regenerate through — never inferred from generator output)
 
-`mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, `state_ownership.png` (the painted starting owner of every drawn state, flat exact-RGB fills; `render_state_ownership.py` only bootstraps it from `state_ownership_proposal.json`, never overwrites a repaint without `--force`) with its colour key `state_ownership_legend.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
+`mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `mapgen/config/pop_history/` (`state_weights.json` there is derived: `generate_pop_history.py --refresh-weights`), `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, `state_ownership.png` (the painted starting owner of every drawn state, flat exact-RGB fills; `render_state_ownership.py` only bootstraps it from `state_ownership_proposal.json`, never overwrites a repaint without `--force`) with its colour key `state_ownership_legend.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
 
 `mapgen/config/country_history/NN_<stem>.json` is the same kind of input for a different consumer: the per-tag starting laws, tech tier, ruling IGs, taxes and institutions that a later task turns into `common/history/countries/`. Nothing reads it yet; `python mapgen/validate_country_history.py` is its gate (unknown ids, law-group cardinality, unlock/disallow rules, government-type trigger, source/why bookkeeping) and `run_fixture.py --check` regression-tests that linter. Schema, the tech-tier calibration and the mechanics gaps are in `mapgen/config/country_history/README.md`.
 

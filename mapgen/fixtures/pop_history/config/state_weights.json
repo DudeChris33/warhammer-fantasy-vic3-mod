@@ -1,0 +1,7 @@
+{"states":{
+ "STATE_ALPHA":{"area_px":300,"arable_milli":120000,"cities":2,"canon_cities":[]},
+ "STATE_BETA":{"area_px":100,"arable_milli":1000,"cities":0,"canon_cities":[]},
+ "STATE_EPSILON":{"area_px":100,"arable_milli":1000,"cities":0,"canon_cities":[]},
+ "STATE_GAMMA":{"area_px":400,"arable_milli":90000,"cities":1,"canon_cities":["Fixture City"]},
+ "STATE_DELTA":{"area_px":100,"arable_milli":1000,"cities":0,"canon_cities":[]},
+ "STATE_ZETA":{"area_px":200,"arable_milli":50000,"cities":1,"canon_cities":[]}}}

@@ -1,0 +1,23 @@
+STATES = {
+	s:STATE_GAMMA = {
+		create_state = {
+			country = c:MID
+			owned_provinces = { x000012 x000013 }
+		}
+		create_state = {
+			country = c:REI
+			owned_provinces = { x000010 x000011 }
+		}
+
+		add_homeland = cu:middenlander
+		add_homeland = cu:reiklander
+	}
+	s:STATE_ZETA = {
+		create_state = {
+			country = c:MID
+			owned_provinces = { x000015 x000016 }
+		}
+
+		add_homeland = cu:middenlander
+	}
+}

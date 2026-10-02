@@ -1,0 +1,7 @@
+{"canvas":[8192,3616],"states":{
+ "STATE_ALPHA":{"id":1,"naming_anchor":[10,10],"owner":"REI","scope":"drawn"},
+ "STATE_BETA":{"id":2,"naming_anchor":[20,10],"owner":"unowned","scope":"drawn"},
+ "STATE_EPSILON":{"id":5,"naming_anchor":[30,10],"owner":"XXX","scope":"drawn"},
+ "STATE_GAMMA":{"id":3,"naming_anchor":[40,10],"owners":[{"owner":"REI","provinces":["x000010","x000011"]},{"owner":"MID","provinces":["x000012","x000013"]}],"scope":"drawn"},
+ "STATE_DELTA":{"id":4,"naming_anchor":[50,10],"owner":"placeholder","scope":"placeholder"},
+ "STATE_ZETA":{"id":6,"naming_anchor":[60,10],"owner":"MID","scope":"drawn"}}}

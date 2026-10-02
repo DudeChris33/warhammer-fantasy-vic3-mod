@@ -1,0 +1,4 @@
+REI = { color = { 1 1 1 } country_type = recognized tier = principality cultures = { reiklander } }
+MID = { color = { 2 2 2 } country_type = recognized tier = principality cultures = { middenlander } }
+D00 = { dynamic_country_definition = yes color = { 3 3 3 } }
+UNO = { color = { 4 4 4 } country_type = unrecognized tier = principality cultures = { reiklander } }
