@@ -5250,17 +5250,18 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
         == {"REI", "MID"}, "no unowned / placeholder token, no UNO"
     assert ch.owner_tags({"states": {"STATE_DELTA": states["STATE_DELTA"]}}) == {"UNO"}
     assert ch.owner_tags({"states": {"STATE_BETA": states["STATE_BETA"]}}) == {"UNO"}
-    texts = ch.render(p.blocks)
-    assert texts == ch.render(ch.plan(ownership_doc, tiers).blocks), "byte-stable"
-    assert sorted(texts) == ["mid.txt", "rei.txt", "uno.txt"], "one file per tag, vanilla's layout"
-    text = texts["rei.txt"]
+    names = {"REI": "Reikland", "MID": "Middenland: the Wolf"}
+    texts = ch.render(p.blocks, names)
+    assert texts == ch.render(ch.plan(ownership_doc, tiers).blocks, names), "byte-stable"
+    assert sorted(texts) == ["mid - middenland the wolf.txt", "rei - reikland.txt", "uno.txt"], "one file per tag, vanilla's layout"
+    text = texts["rei - reikland.txt"]
     assert "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n" in text, \
         "vanilla shape: tabs, c: scope, ?="
     assert "c:MID" not in text, "one block per file"
     crlf = {n: "\ufeff" + t.replace("\n", "\r\n") for n, t in texts.items()}
-    errs, held = ch.check(crlf, ownership_doc, tiers, effects)
+    errs, held = ch.check(crlf, ownership_doc, tiers, effects, names)
     assert errs == [] and held == [], errs
-    assert ch.parse_history_text(crlf["rei.txt"]) == [p.blocks[1]]
+    assert ch.parse_history_text(crlf["rei - reikland.txt"]) == [p.blocks[1]]
     assert ch.parse_country_tiers("\ufeffREI = {\n\ttier = kingdom\n}\nXXX = {\n}\n"
                                   "D00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI": "kingdom", "XXX": None}
 
@@ -5277,20 +5278,20 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
             raise AssertionError("plan() must refuse a tier with no starting-technology mapping")
 
     def refused(texts_: dict | None, frag: str, tiers_: dict = tiers, effects_: set = effects) -> None:
-        e, _ = ch.check(texts_, ownership_doc, tiers_, effects_)
+        e, _ = ch.check(texts_, ownership_doc, tiers_, effects_, names)
         assert any(frag in x for x in e), f"expected {frag!r} in {e}"
 
     def swap(name: str, fn) -> dict:
         return {**texts, name: fn(texts[name])}
 
     refused({}, "has no files")
-    refused({n: t for n, t in texts.items() if n != "rei.txt"}, "owns a state but has no country history block")
-    refused({**texts, "mid.txt": texts["rei.txt"]}, "lives in mid.txt, expected one block per file in rei.txt")
-    refused({**texts, "00_start_setup.txt": texts["mid.txt"]}, "appears 2 times")
-    refused(swap("mid.txt", lambda t: t.replace("c:MID", "c:QQQ")), "no (non-dynamic) common/country_definitions")
-    refused(swap("mid.txt", lambda t: t.replace("tier_6_tech", "tier_9_tech")), "not a scripted effect")
+    refused({n: t for n, t in texts.items() if n != "rei - reikland.txt"}, "owns a state but has no country history block")
+    refused({**texts, "mid.txt": texts["rei - reikland.txt"]}, "lives in mid.txt, expected one block per file in rei - reikland.txt")
+    refused({**texts, "00_start_setup.txt": texts["mid - middenland the wolf.txt"]}, "appears 2 times")
+    refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("c:MID", "c:QQQ")), "no (non-dynamic) common/country_definitions")
+    refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("tier_6_tech", "tier_9_tech")), "not a scripted effect")
     refused(texts, "not a scripted effect", effects_=effects - {ch.POLITICS_EFFECT})
-    refused(swap("mid.txt", lambda t: t.replace("tier_6_tech", "tier_5_tech")), "differs from what the generator emits")
+    refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("tier_6_tech", "tier_5_tech")), "differs from what the generator emits")
     refused({**texts, "zzz.txt": ch.render_file("ZZZ", [ch.POLITICS_EFFECT])},
             "has a country history block but owns no state", {**tiers, "ZZZ": "kingdom"})
 

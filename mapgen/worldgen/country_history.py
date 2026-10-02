@@ -4,7 +4,7 @@ Every tag that owns a state at the start date (``mapgen/derived/state_ownership.
 needs a starting setup or its laws and technology are empty. This module writes
 the smallest setup vanilla itself uses for a minimal country, in vanilla's layout of
 one file per country (e.g. ``game/common/history/countries/dah - dahomey.txt``;
-here ``dah.txt`` -- the engine reads every file name, the name part is cosmetic)::
+named ``tag - country name.txt`` from the localized name; the engine reads every file name)::
 
     COUNTRIES = {
     	c:TAG ?= {
@@ -147,9 +147,26 @@ def plan(ownership_doc: dict, tiers: dict[str, str | None]) -> Plan:
     return Plan(blocks=blocks, held_back=held)
 
 
-def file_name(tag: str) -> str:
-    """``dah.txt`` for ``DAH`` -- vanilla's file-per-country layout."""
-    return f"{tag.lower()}.txt"
+_LOC_NAME = re.compile(r'^\s*([A-Z][A-Z0-9]{2}):\d*\s+"([^"]*)"', re.M)
+_BAD_FILE_CHARS = re.compile(r'[<>:"/\|?*\x00-\x1f]')
+
+
+def load_country_names(localization_dir: Path) -> dict[str, str]:
+    """``{TAG: display name}`` from the ``TAG:0 "Name"`` lines of the English ``*.yml`` under ``localization/`` (new loc and ``replace/``)."""
+    out: dict[str, str] = {}
+    for path in sorted(Path(localization_dir).rglob("*.yml")):
+        if "english" not in path.parts:
+            continue
+        for tag, name in _LOC_NAME.findall(path.read_text(encoding="utf-8-sig")):
+            out.setdefault(tag, name)
+    return out
+
+
+def file_name(tag: str, names: dict[str, str]) -> str:
+    """``dah - dahomey.txt`` for ``DAH`` -- vanilla's file-per-country layout; just
+    ``dah.txt`` when the tag has no localized name."""
+    name = _BAD_FILE_CHARS.sub("", names.get(tag, "")).strip().lower()
+    return f"{tag.lower()} - {name}.txt" if name else f"{tag.lower()}.txt"
 
 
 def render_file(tag: str, effects: list[str]) -> str:
@@ -160,9 +177,9 @@ def render_file(tag: str, effects: list[str]) -> str:
     return "\n".join(lines) + "\n"
 
 
-def render(blocks: list[tuple[str, list[str]]]) -> dict[str, str]:
+def render(blocks: list[tuple[str, list[str]]], names: dict[str, str]) -> dict[str, str]:
     """``{file name: text}`` for every planned block."""
-    return {file_name(tag): render_file(tag, effects) for tag, effects in blocks}
+    return {file_name(tag, names): render_file(tag, effects) for tag, effects in blocks}
 
 
 # ---------------------------------------------------------------------------
@@ -186,7 +203,7 @@ def parse_history_text(text: str) -> list[tuple[str, list[str]]]:
 
 
 def check(texts: dict[str, str] | None, ownership_doc: dict, tiers: dict[str, str | None],
-          effect_names: set[str]) -> tuple[list[str], list[str]]:
+          effect_names: set[str], names: dict[str, str]) -> tuple[list[str], list[str]]:
     """Validate the emitted files (``{file name: text}``). Returns ``(errors, held_back)``;
     ``held_back`` lists JSON owners with no definition (the caller decides whether that is
     an error)."""
@@ -206,8 +223,8 @@ def check(texts: dict[str, str] | None, ownership_doc: dict, tiers: dict[str, st
             continue
         for tag, effects in parsed:
             seen[tag] = seen.get(tag, 0) + 1
-            if fname != file_name(tag) or len(parsed) != 1:
-                errors.append(f"c:{tag}: lives in {fname}, expected one block per file in {file_name(tag)}")
+            if fname != file_name(tag, names) or len(parsed) != 1:
+                errors.append(f"c:{tag}: lives in {fname}, expected one block per file in {file_name(tag, names)}")
             if tag not in tiers:
                 errors.append(f"c:{tag}: no (non-dynamic) common/country_definitions entry")
             for e in effects:
@@ -222,7 +239,7 @@ def check(texts: dict[str, str] | None, ownership_doc: dict, tiers: dict[str, st
     for tag in sorted(set(seen) - expected - {t for t in seen if t not in tiers}):
         errors.append(f"c:{tag}: has a country history block but owns no state -- regenerate")
     if not errors:
-        want = render(p.blocks)
+        want = render(p.blocks, names)
         for fname, text in sorted(texts.items()):
             if sh.normalize_text(text) != want[fname]:
                 errors.append(f"history/countries/{fname} differs from what the generator emits (tier or effect changed) -- regenerate")
