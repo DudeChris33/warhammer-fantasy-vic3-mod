@@ -83,7 +83,8 @@ def main(argv: list[str] | None = None) -> int:
         print(f"read_state_ownership: ERROR: {exc}", file=sys.stderr)
         return 1
     if args.check:
-        current = args.out.read_bytes().decode("utf-8") if args.out.is_file() else None
+        # CRLF-insensitive: core.autocrlf checks the committed LF file out as CRLF.
+        current = args.out.read_bytes().decode("utf-8").replace("\r\n", "\n") if args.out.is_file() else None
         if current != text:
             print(f"read_state_ownership: {args.out} is stale -- re-run without --check", file=sys.stderr)
             return 1

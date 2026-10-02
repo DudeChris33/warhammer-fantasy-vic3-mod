@@ -4977,7 +4977,7 @@ def _selfcheck_composite_layers_over() -> None:
         raise AssertionError("composite_layers_over([]) should have raised ValueError")
 
 
-def _selfcheck_state_ownership() -> None:
+def _selfcheck_state_ownership() -> dict:
     """Starting-ownership map: render -> read round-trips on the synthetic world.
 
     Drives ``worldgen.state_ownership`` (the core of ``render_state_ownership.py`` /
@@ -5043,12 +5043,125 @@ def _selfcheck_state_ownership() -> None:
     refuses(lambda: so.read(layout, ph, legend, placeholder, ids), "placeholder colour")
     # the committed legend is valid
     so.load_legend(TOOLS_DIR / "config" / "state_ownership_legend.json")
+    return {"states": doc}
+
+
+def _selfcheck_state_history(ownership_doc: dict) -> None:
+    """Starting ownership as history script (#6372), on the golden assignment of
+    :func:`_selfcheck_state_ownership` (ALPHA=REI, BETA unowned, GAMMA split
+    REI/MID, DELTA placeholder): what is emitted, byte stability, held-back
+    undefined tags, the CRLF-insensitive freshness compare, a 3-way split, and
+    the validator refusing hand-broken history text.
+    """
+    import copy
+
+    from worldgen import state_history as sh
+    from worldgen import state_ownership as so
+
+    by_file = sh.load_states_by_file(EXPECTED_DIR / "state_regions")
+    assert "99_seas.txt" not in by_file and sorted(by_file) == ["01_driftland.txt", "02_isle.txt", "03_mainland.txt"]
+    land = {s.key: s for ss in by_file.values() for s in ss}
+    tags = {"REI", "MID"}
+
+    p = sh.plan(ownership_doc, by_file, tags)
+    creates = {k: c for e in p.files.values() for k, c in e}
+    assert [t for t, _ in creates["STATE_ALPHA"]] == ["REI"], "a whole-state owner gets one create_state"
+    assert creates["STATE_ALPHA"][0][1] == sorted(land["STATE_ALPHA"].provinces), \
+        "a whole-state owner owns every province (impassable included)"
+    assert [t for t, _ in creates["STATE_GAMMA"]] == ["MID", "REI"], "a split gets one create_state per owner"
+    assert sorted(t for _, ps in creates["STATE_GAMMA"] for t in ps) == sorted(land["STATE_GAMMA"].provinces)
+    assert "STATE_BETA" not in creates and "STATE_DELTA" not in creates, "unowned / placeholder emit nothing"
+    assert p.unowned == ["STATE_BETA"] and p.placeholder == ["STATE_DELTA"] and not p.held_back
+    assert p.files["02_isle.txt"] == [] and sh.render_file([]) == sh.HEADER, "an unowned file is header-only"
+    texts = {f: sh.render_file(e) for f, e in p.files.items()}
+    assert texts == {f: sh.render_file(e) for f, e in sh.plan(ownership_doc, by_file, tags).files.items()}, \
+        "byte-stable"
+    assert "\ts:STATE_ALPHA = {\n\t\tcreate_state = {\n\t\t\tcountry = c:REI\n" in texts["03_mainland.txt"], \
+        "vanilla shape: tabs, s:/c: scopes"
+    # freshness compare ignores a BOM and CRLF (core.autocrlf checkouts)
+    crlf = "\ufeff" + texts["03_mainland.txt"].replace("\n", "\r\n")
+    assert sh.normalize_text(crlf) == texts["03_mainland.txt"]
+    # the emitted files validate clean; the parser round-trips them
+    errs, held = sh.check(texts, ownership_doc, by_file, tags)
+    assert errs == [] and held == [], errs
+    assert sh.parse_history_text(crlf) == [(k, [(t, ps) for t, ps in c]) for k, c in p.files["03_mainland.txt"]]
+
+    # an undefined tag is held back by the generator and reported by the validator
+    hp = sh.plan(ownership_doc, by_file, {"REI"})
+    hcreates = {k: c for e in hp.files.values() for k, c in e}
+    assert [t for t, _ in hcreates["STATE_GAMMA"]] == ["REI"] and hp.held_back == [("STATE_GAMMA", "MID")]
+    htexts = {f: sh.render_file(e) for f, e in hp.files.items()}
+    errs, held = sh.check(htexts, ownership_doc, by_file, {"REI"})
+    assert errs == [] and held == [("STATE_GAMMA", "MID")], (errs, held)
+    # D-tags are runtime slots, not start-date countries; a BOM'd first entry still counts
+    assert sh.parse_country_tags(
+        "\ufeffREI = {\n\tcolor = { 1 2 3 }\n}\n# QQQ = { }\nD00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI"}
+
+    # 3-way split (defined + undefined + unowned): only the defined slice is emitted
+    alpha = sorted(land["STATE_ALPHA"].provinces)
+    split_doc = copy.deepcopy(ownership_doc)
+    split_doc["states"]["STATE_ALPHA"] = {
+        "id": land["STATE_ALPHA"].id, "naming_anchor": None, "scope": "drawn",
+        "owners": [{"owner": "REI", "provinces": alpha[:3]}, {"owner": "ZZZ", "provinces": alpha[3:5]},
+                   {"owner": "unowned", "provinces": alpha[5:]}]}
+    sp = sh.plan(split_doc, by_file, tags)
+    screates = {k: c for e in sp.files.values() for k, c in e}
+    assert screates["STATE_ALPHA"] == [("REI", alpha[:3])] and sp.held_back == [("STATE_ALPHA", "ZZZ")]
+    stexts = {f: sh.render_file(e) for f, e in sp.files.items()}
+    errs, held = sh.check(stexts, split_doc, by_file, tags)
+    assert errs == [] and held == [("STATE_ALPHA", "ZZZ")], errs
+
+    def refused(texts_: dict, frag: str, doc: dict = ownership_doc) -> None:
+        e, _ = sh.check(texts_, doc, by_file, tags)
+        assert any(frag in x for x in e), f"expected {frag!r} in {e}"
+
+    main = texts["03_mainland.txt"]
+    a0 = alpha[0]
+    g0 = sorted(land["STATE_GAMMA"].provinces)[0]
+    # province assigned twice (ALPHA's first province also listed under GAMMA)
+    refused({**texts, "01_driftland.txt": texts["01_driftland.txt"].replace(
+        f"owned_provinces = {{ {g0}", f"owned_provinces = {{ {a0} {g0}", 1)}, "not a province of the state")
+    dup = main.replace(f"owned_provinces = {{ {a0}", f"owned_provinces = {{ {a0} {a0}", 1)
+    refused({**texts, "03_mainland.txt": dup}, "assigned twice")
+    # foreign province (a sea province) in owned_provinces
+    refused({**texts, "03_mainland.txt": main.replace(a0, "xD35EE9", 1)}, "not a province of the state")
+    # unknown c:TAG
+    refused({**texts, "03_mainland.txt": main.replace("c:REI", "c:QQQ")}, "no (non-dynamic) common/country_definitions")
+    # a state in the wrong NN_ file
+    moved = sh.render_file(p.files["03_mainland.txt"])
+    refused({"01_driftland.txt": texts["01_driftland.txt"], "02_isle.txt": moved,
+             "03_mainland.txt": sh.render_file([])}, "belongs in 03_mainland.txt")
+    # create_state on the placeholder state
+    ph = sh.render_file([("STATE_DELTA", [("REI", sorted(land["STATE_DELTA"].provinces))])])
+    refused({**texts, "02_isle.txt": ph}, "placeholder state")
+    # create_state on an unowned state
+    un = sh.render_file(p.files["03_mainland.txt"] + [("STATE_BETA", [("REI", sorted(land["STATE_BETA"].provinces))])])
+    refused({**texts, "03_mainland.txt": un}, "leaves unowned")
+    # emitted owner differs from the JSON (a repaint read but not regenerated)
+    refused({**texts, "03_mainland.txt": main.replace("c:REI", "c:MID")}, "differ from state_ownership.json")
+    # missing provinces (coverage) and a missing state entirely
+    refused({**texts, "03_mainland.txt": main.replace(f"{a0} ", "", 1)}, "owned_provinces differ")
+    refused({**texts, "03_mainland.txt": sh.render_file([])}, "differ from state_ownership.json")
+    # a missing history file; a stale JSON (id mismatch)
+    refused({k: v for k, v in texts.items() if k != "02_isle.txt"}, "02_isle.txt is missing")
+    stale = copy.deepcopy(ownership_doc)
+    stale["states"]["STATE_ALPHA"]["id"] = 999
+    refused(texts, "map_data id", stale)
+    try:
+        sh.plan(stale, by_file, tags)
+    except so.OwnershipError:
+        pass
+    else:
+        raise AssertionError("plan() must refuse a JSON id that differs from map_data")
 
 
 def run_check() -> int:
-    _selfcheck_state_ownership()
+    ownership_doc = _selfcheck_state_ownership()
     print("state_ownership: render -> read round-trip (whole + split + placeholder states, seam, refusals, "
           "byte-stable JSON, committed legend) self-check passed.")
+    _selfcheck_state_history(ownership_doc)
+    print("state_history: create_state emission (whole + split + unowned + placeholder, held-back tag, "
+          "3-way split, CRLF compare, hand-broken history refusals) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")

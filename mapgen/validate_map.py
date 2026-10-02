@@ -285,6 +285,9 @@ def validate(
     adjacencies_path: Path | None = None,
     extra_loc_dirs: tuple[Path, ...] = (),
     warnings: list[str] | None = None,
+    state_history_dir: Path | None = None,
+    state_ownership_path: Path | None = None,
+    country_definitions_dir: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -457,7 +460,51 @@ def validate(
             warnings.extend(cc_warnings)
 
     errors += _check_loc_coverage(states, loc_dir, extra_loc_dirs)
+
+    # Starting ownership (#6372): None under --fixture (run_fixture self-checks it).
+    if (state_history_dir is not None and state_ownership_path is not None
+            and country_definitions_dir is not None):
+        sh_errors, sh_warnings = _check_state_history(
+            state_history_dir, state_regions_dir, state_ownership_path, country_definitions_dir)
+        errors += sh_errors
+        if warnings is not None:
+            warnings.extend(sh_warnings)
     return errors
+
+
+# A JSON owner whose tag has no country definition is held back by
+# generate_state_history.py (its state emits no create_state). #6373 defined every
+# painted owner tag, so a hold-back now fails the gate; set False only as a
+# deliberate, recorded interim while a new tag's definition is in flight.
+HELD_BACK_IS_ERROR = True
+
+
+def _check_state_history(history_dir: Path, state_regions_dir: Path, ownership_path: Path,
+                         country_definitions_dir: Path) -> tuple[list[str], list[str]]:
+    """``common/history/states/NN_*.txt`` against map_data, state_ownership.json and
+    the defined (non-dynamic) country tags -- see ``worldgen.state_history.check``.
+    Returns ``(errors, warnings)``."""
+    import json
+
+    from worldgen import state_history as sh
+
+    if not ownership_path.is_file():
+        return [f"state ownership not found at {ownership_path} -- run read_state_ownership.py"], []
+    doc = json.loads(ownership_path.read_text(encoding="utf-8"))
+    texts = {p.name: p.read_bytes().decode("utf-8") for p in sorted(history_dir.glob("*.txt"))} \
+        if history_dir.is_dir() else {}
+    errors, held_back = sh.check(texts, doc, sh.load_states_by_file(state_regions_dir),
+                                 sh.load_country_tags(country_definitions_dir))
+    errors = [f"state history: {e}" for e in errors]
+    notes: list[str] = []
+    if held_back:
+        tags = sorted({t for _, t in held_back})
+        msg = (f"state history: {len(held_back)} state(s) held back -- owner tag(s) with no "
+               f"common/country_definitions entry: {', '.join(tags)} "
+               f"(states: {', '.join(sorted(k for k, _ in held_back)[:10])}"
+               f"{', ...' if len(held_back) > 10 else ''})")
+        (errors if HELD_BACK_IS_ERROR else notes).append(msg)
+    return errors, notes
 
 
 def _check_province_uniqueness(states: list[ParsedState]) -> list[str]:
@@ -2326,6 +2373,9 @@ def main(argv: list[str] | None = None) -> int:
         extra_loc_dirs=() if args.fixture else
         (REPO_ROOT / "localization" / "replace" / "english" / "map",),
         warnings=warnings,
+        state_history_dir=None if args.fixture else REPO_ROOT / "common" / "history" / "states",
+        state_ownership_path=None if args.fixture else TOOLS_DIR / "derived" / "state_ownership.json",
+        country_definitions_dir=None if args.fixture else REPO_ROOT / "common" / "country_definitions",
     )
     # Warnings are advisory (canon-city impassable collisions, #3789) — printed
     # whether the gate passes or fails, but never gating the exit code: a hold in
