@@ -422,9 +422,9 @@
    "confidence": "inferred"
   },
   "STATE_FROZEN_COAST": {
-   "owner": "GMD",
+   "owner": "URS",
    "confidence": "directed",
-   "note": "review: Goromadny tag"
+   "note": "review: Goromadny tag (GMD, merged into URS Ursfjordings, #6373)"
   },
   "STATE_GATE_DISTRICT": {
    "owner": "MZN",
@@ -457,9 +457,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_GOROMADNY_COAST": {
-   "owner": "GMD",
+   "owner": "URS",
    "confidence": "directed",
-   "note": "review: Goromadny tag"
+   "note": "review: Goromadny tag (GMD, merged into URS Ursfjordings, #6373)"
   },
   "STATE_GRAVE_OF_CUILEUX": {
    "owner": "QUE",

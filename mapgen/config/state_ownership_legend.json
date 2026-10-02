@@ -118,12 +118,12 @@
   "URS": {
    "name": "Ursfjordings",
    "color": [
-    126,
-    132,
-    174
+    78,
+    78,
+    144
    ],
    "proposed": true,
-   "note": "proposed: no country definition yet (00_norsca family)"
+   "note": "took over the painted colour of the review-round tag GMD (Goromadny), which duplicated this registry tribe (#6373 D6); its old unpainted colour 126 132 174 is retired"
   },
   "KSV": {
    "name": "Kislev",
@@ -2077,16 +2077,6 @@
     78,
     54,
     36
-   ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
-  },
-  "GMD": {
-   "name": "Goromadny",
-   "color": [
-    78,
-    78,
-    144
    ],
    "proposed": true,
    "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
