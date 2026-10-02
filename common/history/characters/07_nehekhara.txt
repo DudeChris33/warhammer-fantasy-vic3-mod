@@ -1,0 +1,20 @@
+﻿CHARACTERS = {
+	c:KHM ?= {
+		create_character = { # Settra the Imperishable
+			template = KHM_settra_template
+		}
+		create_character = { # Khatep
+			template = KHM_khatep_template
+		}
+	}
+	c:LYB ?= {
+		create_character = { # Khalida Neferher
+			template = LYB_khalida_template
+		}
+	}
+	c:LAH ?= {
+		create_character = { # Neferata
+			template = LAH_neferata_template
+		}
+	}
+}
