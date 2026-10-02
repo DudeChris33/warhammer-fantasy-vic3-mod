@@ -5154,6 +5154,106 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
     else:
         raise AssertionError("plan() must refuse a JSON id that differs from map_data")
 
+    # homelands (#6374): derived from the owners' cultures, UNO contributes none
+    cc = {"REI": ["reiklander", "middenlander"], "MID": ["middenlander", "stirlander"], "UNO": ["wilderness"]}
+    ids = {"reiklander", "middenlander", "stirlander", "wilderness"}
+    assert sh.parse_country_cultures(
+        "﻿REI = {\n\tcultures = { reiklander middenlander }\n}\n# QQQ = { cultures = { zz } }\n"
+        "NOC = {\n\tcolor = { 1 2 3 }\n}\nD00 = {\n\tdynamic_country_definition = yes\n\tcultures = { zz }\n}\n"
+    ) == {"REI": ["reiklander", "middenlander"], "NOC": []}, "tag cultures: ordered, comments/dynamic skipped"
+    assert sh.parse_culture_ids(
+        "﻿# c\nreiklander = {\n\tcolor = rgb{ 1 2 3 }\n\ttraditions = { }\n}\nstirlander = {\n\tobsessions = { }\n}\n"
+    ) == {"reiklander", "stirlander"}, "culture ids: top-level keys only"
+    hp2 = sh.plan(ownership_doc, by_file, tags, cc)
+    assert hp2.homelands == {"STATE_ALPHA": ["reiklander", "middenlander"],
+                             "STATE_GAMMA": ["middenlander", "stirlander", "reiklander"]}, hp2.homelands
+    assert sh.plan(ownership_doc, by_file, tags).homelands == {}, "no cultures supplied, no homelands"
+    assert {f: sh.render_file(e) for f, e in hp2.files.items()} == texts, "render without homelands is unchanged"
+    htx = {f: sh.render_file(e, hp2.homelands) for f, e in hp2.files.items()}
+    assert ("\t\t}\n\n\t\tadd_homeland = cu:reiklander\n\t\tadd_homeland = cu:middenlander\n\t}\n"
+            in htx["03_mainland.txt"]), "vanilla shape: blank line, then one add_homeland per culture"
+    assert sh.parse_homelands("\ufeff" + htx["03_mainland.txt"].replace("\n", "\r\n")) == {
+        k: hp2.homelands[k] for k, _ in hp2.files["03_mainland.txt"] if k in hp2.homelands}
+    assert sh.check(htx, ownership_doc, by_file, tags, cc, ids) == ([], []), "homelands validate clean"
+    assert sh.check(texts, ownership_doc, by_file, tags) == ([], []), "no culture args: homelands not checked"
+    # UNO owns a state: create_state but no homeland
+    uno_doc = copy.deepcopy(ownership_doc)
+    uno_doc["states"]["STATE_BETA"]["owner"] = "UNO"
+    up = sh.plan(uno_doc, by_file, tags | {"UNO"}, cc)
+    assert "STATE_BETA" in {k for e in up.files.values() for k, _ in e} and "STATE_BETA" not in up.homelands
+    utx = {f: sh.render_file(e, up.homelands) for f, e in up.files.items()}
+    assert sh.check(utx, uno_doc, by_file, tags | {"UNO"}, cc, ids) == ([], [])
+
+    def refused_h(texts_: dict, frag: str, cult: dict = cc, cids: set = ids) -> None:
+        e, _ = sh.check(texts_, ownership_doc, by_file, tags, cult, cids)
+        assert any(frag in x for x in e), f"expected {frag!r} in {e}"
+
+    m2 = htx["03_mainland.txt"]
+    refused_h({**htx, "03_mainland.txt": m2.replace("cu:reiklander", "cu:nonesuch")}, "has no common/cultures definition")
+    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:reiklander\n", "")}, "differs from the")
+    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:middenlander\n", "", 1)}, "differs from the")
+    refused_h(texts, "differs from the")                       # homelands never emitted
+    refused_h(htx, "owned state gets no homeland", {**cc, "REI": []})
+    stray = sh.render_file(hp2.files["03_mainland.txt"] + [("STATE_BETA", [])], {"STATE_BETA": ["reiklander"]})
+    refused_h({**htx, "03_mainland.txt": stray}, "without a create_state")
+
+
+def _selfcheck_country_history(ownership_doc: dict) -> None:
+    """Starting country setup (#6375), on the golden assignment of
+    :func:`_selfcheck_state_ownership` (owners REI and MID): tier -> technology
+    effect, byte stability, the CRLF-insensitive compare, a held-back undefined
+    tag, an unmapped tier, and the validator refusing hand-broken text.
+    """
+    from worldgen import country_history as ch
+    from worldgen import state_ownership as so
+
+    tiers = {"REI": "grand_principality", "MID": "city_state"}
+    effects = {"effect_starting_technology_tier_5_tech", "effect_starting_technology_tier_6_tech",
+               "effect_starting_politics_traditional"}
+    p = ch.plan(ownership_doc, tiers)
+    assert p.blocks == [("MID", ["effect_starting_technology_tier_6_tech", ch.POLITICS_EFFECT]),
+                        ("REI", ["effect_starting_technology_tier_5_tech", ch.POLITICS_EFFECT])] \
+        and not p.held_back, "one block per owner, sorted, tier -> technology effect"
+    text = ch.render(p.blocks)
+    assert text == ch.render(ch.plan(ownership_doc, tiers).blocks), "byte-stable"
+    assert "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n" in text, \
+        "vanilla shape: tabs, c: scope, ?="
+    assert ch.render([]) == ch.HEADER
+    crlf = "﻿" + text.replace("\n", "\r\n")
+    errs, held = ch.check(crlf, ownership_doc, tiers, effects)
+    assert errs == [] and held == [], errs
+    assert ch.parse_history_text(crlf) == p.blocks
+    assert ch.parse_country_tiers("﻿REI = {\n\ttier = kingdom\n}\nXXX = {\n}\n"
+                                  "D00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI": "kingdom", "XXX": None}
+
+    # an undefined owner is held back (no block) and reported
+    hp = ch.plan(ownership_doc, {"REI": "kingdom"})
+    assert [t for t, _ in hp.blocks] == ["REI"] and hp.held_back == ["MID"]
+    # a defined owner whose tier has no technology mapping is an error, never a default
+    for bad in ({"REI": "kingdom", "MID": None}, {"REI": "kingdom", "MID": "duchy"}):
+        try:
+            ch.plan(ownership_doc, bad)
+        except so.OwnershipError:
+            pass
+        else:
+            raise AssertionError("plan() must refuse a tier with no starting-technology mapping")
+
+    def refused(text_: str | None, frag: str, tiers_: dict = tiers, effects_: set = effects) -> None:
+        e, _ = ch.check(text_, ownership_doc, tiers_, effects_)
+        assert any(frag in x for x in e), f"expected {frag!r} in {e}"
+
+    refused(None, "is missing")
+    rei = "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n\t\teffect_starting_politics_traditional = yes\n\t}\n"
+    assert rei in text
+    refused(text.replace(rei, ""), "owns a state but has no country history block")
+    refused(text.replace("c:MID", "c:REI"), "appears 2 times")
+    refused(text.replace("c:MID", "c:QQQ"), "no (non-dynamic) common/country_definitions")
+    refused(text.replace("tier_6_tech", "tier_9_tech"), "not a scripted effect")
+    refused(text, "not a scripted effect", effects_=effects - {ch.POLITICS_EFFECT})
+    refused(text.replace("tier_6_tech", "tier_5_tech"), "differs from what the generator emits")
+    extra = text.rstrip("\n")[:-1] + "\tc:ZZZ ?= {\n\t\teffect_starting_politics_traditional = yes\n\t}\n}\n"
+    refused(extra, "has a country history block but owns no state", {**tiers, "ZZZ": "kingdom"})
+
 
 def run_check() -> int:
     ownership_doc = _selfcheck_state_ownership()
@@ -5161,7 +5261,11 @@ def run_check() -> int:
           "byte-stable JSON, committed legend) self-check passed.")
     _selfcheck_state_history(ownership_doc)
     print("state_history: create_state emission (whole + split + unowned + placeholder, held-back tag, "
-          "3-way split, CRLF compare, hand-broken history refusals) self-check passed.")
+          "3-way split, CRLF compare, hand-broken history refusals) and add_homeland derivation "
+          "(owner cultures, UNO skip, unknown-culture refusal) self-check passed.")
+    _selfcheck_country_history(ownership_doc)
+    print("country_history: tier -> starting-technology blocks (held-back tag, unmapped tier, CRLF compare, "
+          "hand-broken history refusals) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")

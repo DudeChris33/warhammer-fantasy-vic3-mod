@@ -32,6 +32,12 @@ Rules
   **held back**: its state (or slice) emits nothing and is reported, so the
   generator never writes a dangling ``c:TAG``. ``validate_map`` decides whether a
   hold-back fails the gate (``HELD_BACK_IS_ERROR``).
+* Homelands (#6374): each emitted state gets ``add_homeland = cu:<c>`` for every culture of
+  its ``create_state`` owners' ``common/country_definitions`` ``cultures`` (owner tags in sorted
+  order, de-duplicated). ``UNO`` (the placeholder owner of unowned / out-of-scope land,
+  #6391) contributes none, and a state with no create_state carries none. No override table:
+  derived data cannot go stale on a repaint. ``check()`` fails a homeland id with no
+  ``common/cultures`` definition.
 * Ordering is stable: states by key, ``create_state`` blocks by tag, provinces
   by hex token -- a land-regions regen that reorders blocks does not churn this.
 
@@ -57,6 +63,13 @@ _CREATE = re.compile(r"\bcreate_state\s*=\s*\{")
 _COUNTRY = re.compile(r"\bcountry\s*=\s*c:(\w+)")
 _OWNED = re.compile(r"\bowned_provinces\s*=\s*\{([^}]*)\}")
 _HEX = re.compile(r"x[0-9A-Fa-f]{6}")
+_CULTURES = re.compile(r"\bcultures\s*=\s*\{([^}]*)\}")
+_HOMELAND = re.compile(r"\badd_homeland\s*=\s*cu:(\w+)")
+_TOP_KEY = re.compile(r"^(\w+)\s*=\s*\{", re.M)
+
+#: The decentralized placeholder tag that owns unowned / out-of-scope land (#6391). It
+#: carries a stand-in culture but its states get no homelands.
+UNO_TAG = "UNO"
 
 #: ``[(state_key, [(tag, [province, ...]), ...]), ...]`` -- one history file.
 Entries = list[tuple[str, list[tuple[str, list[str]]]]]
@@ -110,6 +123,50 @@ def parse_country_tags(text: str) -> set[str]:
     return tags
 
 
+def parse_country_cultures(text: str) -> dict[str, list[str]]:
+    """``{tag: [culture id, ...]}`` for every non-dynamic tag one ``country_definitions``
+    file defines (``[]`` when the entry has no ``cultures`` block). Culture ids keep
+    their listed order."""
+    text = _strip_comments(text.lstrip("﻿"))
+    out: dict[str, list[str]] = {}
+    for m in _TAG_HEADER.finditer(text):
+        open_idx = text.index("{", m.end() - 1)
+        body = text[open_idx + 1:_match_brace(text, open_idx)]
+        if _DYNAMIC.search(body):
+            continue
+        cm = _CULTURES.search(body)
+        out[m.group(1)] = cm.group(1).split() if cm else []
+    return out
+
+
+def load_country_cultures(country_definitions_dir: Path) -> dict[str, list[str]]:
+    out: dict[str, list[str]] = {}
+    for path in sorted(Path(country_definitions_dir).glob("*.txt")):
+        out.update(parse_country_cultures(path.read_text(encoding="utf-8-sig")))
+    return out
+
+
+def parse_culture_ids(text: str) -> set[str]:
+    """Top-level culture ids of one ``common/cultures`` file (entries nest braces, so
+    only keys at brace depth 0 count)."""
+    text = _strip_comments(text.lstrip("﻿"))
+    ids: set[str] = set()
+    idx = 0
+    while True:
+        m = _TOP_KEY.search(text, idx)
+        if not m:
+            return ids
+        ids.add(m.group(1))
+        idx = _match_brace(text, text.index("{", m.end() - 1)) + 1
+
+
+def load_culture_ids(cultures_dir: Path) -> set[str]:
+    ids: set[str] = set()
+    for path in sorted(Path(cultures_dir).glob("*.txt")):
+        ids |= parse_culture_ids(path.read_text(encoding="utf-8-sig"))
+    return ids
+
+
 def load_country_tags(country_definitions_dir: Path) -> set[str]:
     tags: set[str] = set()
     for path in sorted(Path(country_definitions_dir).glob("*.txt")):
@@ -127,6 +184,7 @@ class Plan:
     held_back: list[tuple[str, str]] = field(default_factory=list)   # (state key, tag)
     unowned: list[str] = field(default_factory=list)
     placeholder: list[str] = field(default_factory=list)
+    homelands: dict[str, list[str]] = field(default_factory=dict)   # state key -> culture ids
 
     @property
     def create_states(self) -> int:
@@ -179,9 +237,25 @@ def _check_doc(doc: dict, states_by_file: dict[str, list[State]]) -> dict[str, d
     return states
 
 
-def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_tags: set[str]) -> Plan:
+def derive_homelands(owner_tags, country_cultures: dict[str, list[str]]) -> list[str]:
+    """Ordered, de-duplicated cultures of ``owner_tags`` (taken in sorted order);
+    ``UNO`` contributes none."""
+    out: list[str] = []
+    for tag in sorted(set(owner_tags)):
+        if tag == UNO_TAG:
+            continue
+        for c in country_cultures.get(tag, []):
+            if c not in out:
+                out.append(c)
+    return out
+
+
+def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_tags: set[str],
+         country_cultures: dict[str, list[str]] | None = None) -> Plan:
     """What to emit, per history file. Raises :class:`OwnershipError` when the
-    JSON does not match ``map_data`` (stale read) or a split is malformed."""
+    JSON does not match ``map_data`` (stale read) or a split is malformed.
+    With ``country_cultures``, ``Plan.homelands`` carries each owned state's derived
+    homelands."""
     states = _check_doc(ownership_doc, states_by_file)
     out = Plan(files={})
     for fname in sorted(states_by_file):
@@ -205,6 +279,10 @@ def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_ta
                 out.unowned.append(st.key)
             if creates:
                 entries.append((st.key, sorted(creates)))
+                if country_cultures is not None:
+                    homes = derive_homelands((t for t, _ in creates), country_cultures)
+                    if homes:
+                        out.homelands[st.key] = homes
         out.files[fname] = entries
     return out
 
@@ -213,8 +291,10 @@ def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_ta
 # Render / parse
 # ---------------------------------------------------------------------------
 
-def render_file(entries: Entries) -> str:
-    """One history file (no BOM, LF). Header comment only when ``entries`` is empty."""
+def render_file(entries: Entries, homelands: dict[str, list[str]] | None = None) -> str:
+    """One history file (no BOM, LF). Header comment only when ``entries`` is empty.
+    ``homelands`` adds ``add_homeland`` lines after a state's ``create_state`` blocks
+    (a blank line first, as in vanilla); output is unchanged when it is empty."""
     if not entries:
         return HEADER
     lines = [HEADER.rstrip("\n"), "STATES = {"]
@@ -225,6 +305,9 @@ def render_file(entries: Entries) -> str:
                       f"\t\t\tcountry = c:{tag}",
                       f"\t\t\towned_provinces = {{ {' '.join(provs)} }}",
                       "\t\t}"]
+        if homelands and homelands.get(key):
+            lines.append("")
+            lines += [f"\t\tadd_homeland = cu:{c}" for c in homelands[key]]
         lines.append("\t}")
     lines.append("}")
     return "\n".join(lines) + "\n"
@@ -262,6 +345,24 @@ def parse_history_text(text: str) -> list[tuple[str, list[tuple[str | None, list
     return out
 
 
+def parse_homelands(text: str) -> dict[str, list[str]]:
+    """``{state key: [culture id, ...]}`` of the ``add_homeland`` lines in one history
+    file; states without any are absent. Comments are ignored."""
+    text = _strip_comments(text.lstrip("﻿"))
+    out: dict[str, list[str]] = {}
+    idx = 0
+    while True:
+        m = _HISTORY_STATE.search(text, idx)
+        if not m:
+            return out
+        open_idx = text.index("{", m.end() - 1)
+        close_idx = _match_brace(text, open_idx)
+        homes = _HOMELAND.findall(text[open_idx + 1:close_idx])
+        if homes:
+            out.setdefault(m.group(1), []).extend(homes)
+        idx = close_idx + 1
+
+
 def normalize_text(text: str) -> str:
     """For byte-compare freshness checks: drop a BOM and CRLF -> LF (git's
     ``core.autocrlf`` checks generated LF files out as CRLF)."""
@@ -273,10 +374,17 @@ def normalize_text(text: str) -> str:
 # ---------------------------------------------------------------------------
 
 def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: dict[str, list[State]],
-          defined_tags: set[str]) -> tuple[list[str], list[tuple[str, str]]]:
+          defined_tags: set[str], country_cultures: dict[str, list[str]] | None = None,
+          culture_ids: set[str] | None = None) -> tuple[list[str], list[tuple[str, str]]]:
     """Validate emitted history against ``map_data``, the JSON and the defined
     tags. Returns ``(errors, held_back)``; ``held_back`` lists JSON owners whose
-    tag is undefined (the caller decides whether that is an error)."""
+    tag is undefined (the caller decides whether that is an error).
+
+    ``culture_ids`` (the ``common/cultures`` ids) makes every emitted ``add_homeland``
+    id without a culture definition an error; ``country_cultures`` makes the emitted
+    homelands of each state equal the ones its owners imply (see
+    :func:`derive_homelands`), requires an owned state to have at least one, and
+    refuses homelands on a state without a ``create_state``."""
     errors: list[str] = []
     try:
         states = _check_doc(ownership_doc, states_by_file)
@@ -286,6 +394,7 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
     file_of = {s.key: f for f, ss in states_by_file.items() for s in ss}
 
     emitted: dict[str, list[tuple[str | None, list[str]]]] = {}
+    emitted_homes: dict[str, list[str]] = {}
     for fname in sorted(history_texts):
         if fname not in states_by_file:
             errors.append(f"history/states/{fname}: no map_data/state_regions/{fname} counterpart")
@@ -305,6 +414,9 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
                 errors.append(f"{where}: state appears more than once in history")
                 continue
             emitted[key] = creates
+        for key, homes in parse_homelands(history_texts[fname]).items():
+            if key in land:
+                emitted_homes.setdefault(key, homes)
 
     for fname in sorted(states_by_file):
         if fname not in history_texts:
@@ -317,6 +429,13 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
         creates = emitted.get(key, [])
         st = land[key]
         own = set(st.provinces)
+        homes = emitted_homes.get(key, [])
+        if culture_ids is not None:
+            for c in homes:
+                if c not in culture_ids:
+                    errors.append(f"s:{key}: add_homeland = cu:{c} has no common/cultures definition")
+        if country_cultures is not None and homes and not creates:
+            errors.append(f"s:{key}: add_homeland on a state without a create_state")
         for tag, provs in creates:
             if tag is None:
                 errors.append(f"s:{key}: create_state without 'country = c:TAG'")
@@ -347,6 +466,16 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
                 held_back.append((key, owner))
                 continue
             expected.append((owner, provs))
+        if country_cultures is not None and creates:
+            want = derive_homelands((t for t, _ in expected), country_cultures)
+            if not want and any(t != UNO_TAG for t, _ in expected):
+                errors.append(f"s:{key}: owned state gets no homeland (owner tag(s) "
+                              f"{sorted({t for t, _ in expected})} have no cultures)")
+            elif homes != want:
+                errors.append(f"s:{key}: add_homeland {homes} differs from the {want} its owner(s) "
+                              f"{sorted({t for t, _ in expected})} imply -- regenerate"
+                              if want else
+                              f"s:{key}: add_homeland {homes} on a state whose owner(s) give no homelands")
         got = sorted((t or "", sorted(p)) for t, p in creates)
         if got != sorted(expected):
             if not expected and creates:

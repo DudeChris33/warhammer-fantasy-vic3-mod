@@ -6,8 +6,9 @@ the land ``map_data/state_regions/NN_*.txt`` and the tags defined in
 ``common/country_definitions/*.txt``, and writes one history file per land
 state-region file, same name, in the vanilla
 ``STATES = { s:STATE_X = { create_state = { country = c:TAG owned_provinces = { ... } } } }``
-shape. Rules (placeholder / unowned states, splits, held-back undefined tags,
-stable ordering) are in ``worldgen/state_history.py``.
+shape, plus ``add_homeland = cu:<culture>`` lines derived from the owner tags'
+``cultures`` and checked against ``common/cultures`` (#6374). Rules (placeholder /
+unowned states, splits, held-back undefined tags, homelands, stable ordering) are in ``worldgen/state_history.py``.
 
 Runs after ``generate_land_regions.py`` and ``read_state_ownership.py``: a
 province or land-region regen stales the ownership JSON, which must be re-read
@@ -36,13 +37,22 @@ MOD_ROOT = Path(__file__).resolve().parent.parent
 OWNERSHIP_PATH = MOD_ROOT / "mapgen" / "derived" / "state_ownership.json"
 STATE_REGIONS_DIR = MOD_ROOT / "map_data" / "state_regions"
 COUNTRY_DEFS_DIR = MOD_ROOT / "common" / "country_definitions"
+CULTURES_DIR = MOD_ROOT / "common" / "cultures"
 OUT_DIR = MOD_ROOT / "common" / "history" / "states"
 BOM = b"\xef\xbb\xbf"
 
 
-def build(ownership: Path, state_regions: Path, country_defs: Path) -> sh.Plan:
+def build(ownership: Path, state_regions: Path, country_defs: Path, cultures: Path = CULTURES_DIR) -> sh.Plan:
     doc = json.loads(ownership.read_text(encoding="utf-8"))
-    return sh.plan(doc, sh.load_states_by_file(state_regions), sh.load_country_tags(country_defs))
+    country_cultures = sh.load_country_cultures(country_defs)
+    p = sh.plan(doc, sh.load_states_by_file(state_regions), sh.load_country_tags(country_defs), country_cultures)
+    # the same gate validate_map runs: a homeland id must be a defined culture
+    culture_ids = sh.load_culture_ids(cultures)
+    bad = sorted({c for homes in p.homelands.values() for c in homes if c not in culture_ids})
+    if bad:
+        raise OwnershipError(f"country_definitions name culture id(s) with no common/cultures definition: "
+                             f"{', '.join(bad)}")
+    return p
 
 
 def summary(p: sh.Plan) -> str:
@@ -50,7 +60,8 @@ def summary(p: sh.Plan) -> str:
     header_only = sum(1 for e in p.files.values() if not e)
     lines = [f"{len(p.files)} files ({header_only} header-only), {emitted} states owned, "
              f"{p.create_states} create_state blocks; {len(p.unowned)} unowned, "
-             f"{len(p.placeholder)} placeholder, {len(p.held_back)} held back"]
+             f"{len(p.placeholder)} placeholder, {len(p.held_back)} held back; "
+             f"{len(p.homelands)} states with homelands ({sum(len(h) for h in p.homelands.values())} add_homeland)"]
     by_tag: dict[str, list[str]] = {}
     for key, tag in p.held_back:
         by_tag.setdefault(tag, []).append(key)
@@ -64,15 +75,16 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--ownership", type=Path, default=OWNERSHIP_PATH)
     ap.add_argument("--state-regions", type=Path, default=STATE_REGIONS_DIR)
     ap.add_argument("--country-definitions", type=Path, default=COUNTRY_DEFS_DIR)
+    ap.add_argument("--cultures-dir", type=Path, default=CULTURES_DIR)
     ap.add_argument("--out-dir", type=Path, default=OUT_DIR)
     ap.add_argument("--check", action="store_true", help="assert the files on disk are current; write nothing")
     args = ap.parse_args(argv)
     try:
-        p = build(args.ownership, args.state_regions, args.country_definitions)
+        p = build(args.ownership, args.state_regions, args.country_definitions, args.cultures_dir)
     except OwnershipError as exc:
         print(f"generate_state_history: ERROR: {exc}", file=sys.stderr)
         return 1
-    texts = {fname: sh.render_file(entries) for fname, entries in p.files.items()}
+    texts = {fname: sh.render_file(entries, p.homelands) for fname, entries in p.files.items()}
     if args.check:
         stale = []
         for fname, text in texts.items():
