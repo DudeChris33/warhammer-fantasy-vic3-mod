@@ -156,7 +156,8 @@ URS = {
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
-# Filed here by geography: STATE_HELL_PIT and its three unnamed STATE_LAND_* neighbours sit in
+# Filed here by geography: STATE_HELL_PIT and its three neighbours STATE_FLESHWARREN, STATE_HELL_PIT_DEPTHS and
+# STATE_CLAWMARKET sit in
 # map_data/state_regions/00_norsca.txt. goblin is a cross-file culture ref to common/cultures/greenskin.txt.
 
 XSD = {

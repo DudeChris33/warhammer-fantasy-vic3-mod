@@ -30,6 +30,11 @@ POPS = {
 			create_pop = { culture = bretonnian size = 1150000 }
 		}
 	}
+	s:STATE_BREGANALLE = {
+		region_state:BRI = {
+			create_pop = { culture = bretonnian size = 184208 }
+		}
+	}
 	s:STATE_BRIONNE = {
 		region_state:BRI = {
 			create_pop = { culture = bretonnian size = 465792 }
@@ -38,6 +43,16 @@ POPS = {
 	s:STATE_CARCASSONNE = {
 		region_state:CAR = {
 			create_pop = { culture = bretonnian size = 462913 }
+		}
+	}
+	s:STATE_CASTLE_MOUSILLON = {
+		region_state:MOU = {
+			create_pop = { culture = mousillon size = 177795 }
+		}
+	}
+	s:STATE_CASTLE_SANGASSE = {
+		region_state:BAS = {
+			create_pop = { culture = bretonnian size = 271333 }
 		}
 	}
 	s:STATE_COURONNE = {
@@ -50,69 +65,29 @@ POPS = {
 			create_pop = { culture = bretonnian size = 582354 }
 		}
 	}
+	s:STATE_GLADE_OF_ETERNAL_MIDNIGHT = {
+		region_state:TRG = {
+			create_pop = { culture = wood_elf size = 22564 }
+		}
+	}
+	s:STATE_GLADE_OF_ETERNAL_MOONLIGHT = {
+		region_state:ANM = {
+			create_pop = { culture = wood_elf size = 33463 }
+		}
+	}
 	s:STATE_GRAVE_OF_CUILEUX = {
 		region_state:QUE = {
 			create_pop = { culture = bretonnian size = 462483 }
 		}
 	}
-	s:STATE_LAND_093 = {
-		region_state:CAR = {
-			create_pop = { culture = bretonnian size = 523932 }
-		}
-	}
-	s:STATE_LAND_096 = {
-		region_state:TLS = {
-			create_pop = { culture = wood_elf size = 83796 }
-		}
-	}
-	s:STATE_LAND_371 = {
-		region_state:WYD = {
-			create_pop = { culture = wood_elf size = 17108 }
-		}
-	}
-	s:STATE_LAND_482 = {
-		region_state:BAS = {
-			create_pop = { culture = bretonnian size = 271333 }
-		}
-	}
-	s:STATE_LAND_489 = {
-		region_state:ARG = {
-			create_pop = { culture = wood_elf size = 33612 }
-		}
-	}
-	s:STATE_LAND_491 = {
-		region_state:ANM = {
-			create_pop = { culture = wood_elf size = 33463 }
-		}
-	}
-	s:STATE_LAND_492 = {
-		region_state:MOU = {
-			create_pop = { culture = mousillon size = 177795 }
-		}
-	}
-	s:STATE_LAND_493 = {
-		region_state:OKP = {
-			create_pop = { culture = wood_elf size = 15000 }
-		}
-	}
-	s:STATE_LAND_502 = {
-		region_state:TRG = {
-			create_pop = { culture = wood_elf size = 22564 }
-		}
-	}
-	s:STATE_LAND_503 = {
-		region_state:TLS = {
-			create_pop = { culture = wood_elf size = 10838 }
-		}
-	}
-	s:STATE_LAND_505 = {
+	s:STATE_HALLS_OF_EQUOS = {
 		region_state:TLS = {
 			create_pop = { culture = wood_elf size = 15624 }
 		}
 	}
-	s:STATE_LAND_582 = {
-		region_state:BRI = {
-			create_pop = { culture = bretonnian size = 184208 }
+	s:STATE_KING_S_GLADE = {
+		region_state:TLS = {
+			create_pop = { culture = wood_elf size = 83796 }
 		}
 	}
 	s:STATE_LYONESSE = {
@@ -151,6 +126,11 @@ POPS = {
 			create_pop = { culture = mousillon size = 322205 }
 		}
 	}
+	s:STATE_OAK_OF_PROPHECY = {
+		region_state:OKP = {
+			create_pop = { culture = wood_elf size = 15000 }
+		}
+	}
 	s:STATE_PARRAVON = {
 		region_state:PAR = {
 			create_pop = { culture = bretonnian size = 403506 }
@@ -166,9 +146,29 @@ POPS = {
 			create_pop = { culture = wood_elf size = 23079 }
 		}
 	}
+	s:STATE_TAL_ESTH = {
+		region_state:WYD = {
+			create_pop = { culture = wood_elf size = 17108 }
+		}
+	}
 	s:STATE_TORGOVANN = {
 		region_state:TRG = {
 			create_pop = { culture = wood_elf size = 52436 }
+		}
+	}
+	s:STATE_TYR_VANNA = {
+		region_state:TLS = {
+			create_pop = { culture = wood_elf size = 10838 }
+		}
+	}
+	s:STATE_WATERFALL_PALACE = {
+		region_state:ARG = {
+			create_pop = { culture = wood_elf size = 33612 }
+		}
+	}
+	s:STATE_WEST_CARCASSONNE = {
+		region_state:CAR = {
+			create_pop = { culture = bretonnian size = 523932 }
 		}
 	}
 	s:STATE_WYDRIOTH = {

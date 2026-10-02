@@ -48,6 +48,14 @@ STATES = {
 
 		add_homeland = cu:bretonnian
 	}
+	s:STATE_BREGANALLE = {
+		create_state = {
+			country = c:BRI
+			owned_provinces = { x0E2353 x337CE8 x4A9245 x80C234 x95456F xAC5ACC xC4B93A xD1B461 xE8C9BE }
+		}
+
+		add_homeland = cu:bretonnian
+	}
 	s:STATE_BRIONNE = {
 		create_state = {
 			country = c:BRI
@@ -60,6 +68,22 @@ STATES = {
 		create_state = {
 			country = c:CAR
 			owned_provinces = { x09F951 x498A2E x727DFC x7B4F21 x874231 x899359 xC6024B xCDF4D8 xEB5BE0 }
+		}
+
+		add_homeland = cu:bretonnian
+	}
+	s:STATE_CASTLE_MOUSILLON = {
+		create_state = {
+			country = c:MOU
+			owned_provinces = { x1F1A2A x4473BF x80E2B1 xA513B2 xE1AC23 xF9C095 }
+		}
+
+		add_homeland = cu:mousillon
+	}
+	s:STATE_CASTLE_SANGASSE = {
+		create_state = {
+			country = c:BAS
+			owned_provinces = { x0A96EF x4705E1 x8374D3 x9A8A30 xB2AC77 xBFE3C5 xD223AD }
 		}
 
 		add_homeland = cu:bretonnian
@@ -80,6 +104,22 @@ STATES = {
 
 		add_homeland = cu:bretonnian
 	}
+	s:STATE_GLADE_OF_ETERNAL_MIDNIGHT = {
+		create_state = {
+			country = c:TRG
+			owned_provinces = { x2F52E6 x911B6D }
+		}
+
+		add_homeland = cu:wood_elf
+	}
+	s:STATE_GLADE_OF_ETERNAL_MOONLIGHT = {
+		create_state = {
+			country = c:ANM
+			owned_provinces = { x103854 x660DCB xC523B3 }
+		}
+
+		add_homeland = cu:wood_elf
+	}
 	s:STATE_GRAVE_OF_CUILEUX = {
 		create_state = {
 			country = c:QUE
@@ -88,87 +128,7 @@ STATES = {
 
 		add_homeland = cu:bretonnian
 	}
-	s:STATE_LAND_093 = {
-		create_state = {
-			country = c:CAR
-			owned_provinces = { x10B575 x19F5E6 x1EF9AD x4D2467 x5B689F x738613 x998219 xAEECEE xBD3126 xD44683 }
-		}
-
-		add_homeland = cu:bretonnian
-	}
-	s:STATE_LAND_096 = {
-		create_state = {
-			country = c:TLS
-			owned_provinces = { x04863E x826CBC x98DFA8 xA2BDB7 xDB71F3 xF34E6D }
-		}
-
-		add_homeland = cu:wood_elf
-	}
-	s:STATE_LAND_371 = {
-		create_state = {
-			country = c:WYD
-			owned_provinces = { x17D310 }
-		}
-
-		add_homeland = cu:wood_elf
-	}
-	s:STATE_LAND_482 = {
-		create_state = {
-			country = c:BAS
-			owned_provinces = { x0A96EF x4705E1 x8374D3 x9A8A30 xB2AC77 xBFE3C5 xD223AD }
-		}
-
-		add_homeland = cu:bretonnian
-	}
-	s:STATE_LAND_489 = {
-		create_state = {
-			country = c:ARG
-			owned_provinces = { x2BB3DA xA91864 xEADEBF }
-		}
-
-		add_homeland = cu:wood_elf
-	}
-	s:STATE_LAND_491 = {
-		create_state = {
-			country = c:ANM
-			owned_provinces = { x103854 x660DCB xC523B3 }
-		}
-
-		add_homeland = cu:wood_elf
-	}
-	s:STATE_LAND_492 = {
-		create_state = {
-			country = c:MOU
-			owned_provinces = { x1F1A2A x4473BF x80E2B1 xA513B2 xE1AC23 xF9C095 }
-		}
-
-		add_homeland = cu:mousillon
-	}
-	s:STATE_LAND_493 = {
-		create_state = {
-			country = c:OKP
-			owned_provinces = { x6A9944 xA70836 }
-		}
-
-		add_homeland = cu:wood_elf
-	}
-	s:STATE_LAND_502 = {
-		create_state = {
-			country = c:TRG
-			owned_provinces = { x2F52E6 x911B6D }
-		}
-
-		add_homeland = cu:wood_elf
-	}
-	s:STATE_LAND_503 = {
-		create_state = {
-			country = c:TLS
-			owned_provinces = { x1B9B9B xB9D314 }
-		}
-
-		add_homeland = cu:wood_elf
-	}
-	s:STATE_LAND_505 = {
+	s:STATE_HALLS_OF_EQUOS = {
 		create_state = {
 			country = c:TLS
 			owned_provinces = { x39DC68 x689FED }
@@ -176,13 +136,13 @@ STATES = {
 
 		add_homeland = cu:wood_elf
 	}
-	s:STATE_LAND_582 = {
+	s:STATE_KING_S_GLADE = {
 		create_state = {
-			country = c:BRI
-			owned_provinces = { x0E2353 x337CE8 x4A9245 x80C234 x95456F xAC5ACC xC4B93A xD1B461 xE8C9BE }
+			country = c:TLS
+			owned_provinces = { x04863E x826CBC x98DFA8 xA2BDB7 xDB71F3 xF34E6D }
 		}
 
-		add_homeland = cu:bretonnian
+		add_homeland = cu:wood_elf
 	}
 	s:STATE_LYONESSE = {
 		create_state = {
@@ -241,6 +201,14 @@ STATES = {
 
 		add_homeland = cu:mousillon
 	}
+	s:STATE_OAK_OF_PROPHECY = {
+		create_state = {
+			country = c:OKP
+			owned_provinces = { x6A9944 xA70836 }
+		}
+
+		add_homeland = cu:wood_elf
+	}
 	s:STATE_PARRAVON = {
 		create_state = {
 			country = c:PAR
@@ -265,6 +233,14 @@ STATES = {
 
 		add_homeland = cu:wood_elf
 	}
+	s:STATE_TAL_ESTH = {
+		create_state = {
+			country = c:WYD
+			owned_provinces = { x17D310 }
+		}
+
+		add_homeland = cu:wood_elf
+	}
 	s:STATE_TORGOVANN = {
 		create_state = {
 			country = c:TRG
@@ -272,6 +248,30 @@ STATES = {
 		}
 
 		add_homeland = cu:wood_elf
+	}
+	s:STATE_TYR_VANNA = {
+		create_state = {
+			country = c:TLS
+			owned_provinces = { x1B9B9B xB9D314 }
+		}
+
+		add_homeland = cu:wood_elf
+	}
+	s:STATE_WATERFALL_PALACE = {
+		create_state = {
+			country = c:ARG
+			owned_provinces = { x2BB3DA xA91864 xEADEBF }
+		}
+
+		add_homeland = cu:wood_elf
+	}
+	s:STATE_WEST_CARCASSONNE = {
+		create_state = {
+			country = c:CAR
+			owned_provinces = { x10B575 x19F5E6 x1EF9AD x4D2467 x5B689F x738613 x998219 xAEECEE xBD3126 xD44683 }
+		}
+
+		add_homeland = cu:bretonnian
 	}
 	s:STATE_WYDRIOTH = {
 		create_state = {

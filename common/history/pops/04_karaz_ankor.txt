@@ -36,6 +36,11 @@ POPS = {
 			create_pop = { culture = dawi size = 400000 }
 		}
 	}
+	s:STATE_CHATEAU_LOVARRE = {
+		region_state:CAR = {
+			create_pop = { culture = bretonnian size = 13155 }
+		}
+	}
 	s:STATE_CRIPPLE_PEAK = {
 		region_state:XSL = {
 			create_pop = { culture = goblin size = 100000 }
@@ -69,6 +74,11 @@ POPS = {
 			create_pop = { culture = goblin size = 17265 }
 		}
 	}
+	s:STATE_FESTER_SPIKE = {
+		region_state:XSJ = {
+			create_pop = { culture = goblin size = 75000 }
+		}
+	}
 	s:STATE_FOREST_OF_GLOOM = {
 		region_state:HKN = {
 			create_pop = { culture = sylvanian size = 60000 }
@@ -80,14 +90,46 @@ POPS = {
 			create_pop = { culture = bretonnian size = 46494 }
 		}
 	}
+	s:STATE_GRISTLE_VALLEY = {
+		region_state:XSI = {
+			create_pop = { culture = goblin size = 50000 }
+		}
+	}
 	s:STATE_GROM_RIDGE = {
 		region_state:IRN = {
 			create_pop = { culture = ogre size = 200000 }
 		}
 	}
+	s:STATE_HELMGART = {
+		region_state:REI = {
+			create_pop = { culture = reiklander size = 67243 }
+		}
+	}
+	s:STATE_HOUSE_OF_EVERLASTING_LIFE = {
+		region_state:LAH = {
+			create_pop = { culture = nehekharan size = 81597 }
+			create_pop = { culture = lahmian_vampire size = 14400 }
+		}
+	}
 	s:STATE_IRON_PEAKS = {
 		region_state:AZL = {
 			create_pop = { culture = dawi_ancestral size = 350000 }
+		}
+	}
+	s:STATE_KARAGRIL = {
+		region_state:KEP = {
+			create_pop = { culture = dawi_ancestral size = 102814 }
+		}
+	}
+	s:STATE_KARAG_NAR = {
+		region_state:KEP = {
+			create_pop = { culture = dawi_ancestral size = 47186 }
+		}
+	}
+	s:STATE_KARAG_ZIFLIN = {
+		region_state:CRM = {
+			create_pop = { culture = goblin size = 70504 }
+			create_pop = { culture = orc size = 23501 }
 		}
 	}
 	s:STATE_KARAK_EIGHT_PEAKS = {
@@ -96,67 +138,10 @@ POPS = {
 			create_pop = { culture = orc size = 13999 }
 		}
 	}
-	s:STATE_LAND_201 = {
-		region_state:CRM = {
-			create_pop = { culture = goblin size = 70504 }
-			create_pop = { culture = orc size = 23501 }
-		}
-	}
-	s:STATE_LAND_487 = {
-		region_state:REI = {
-			create_pop = { culture = reiklander size = 67243 }
-		}
-	}
-	s:STATE_LAND_500 = {
-		region_state:CAR = {
-			create_pop = { culture = bretonnian size = 13155 }
-		}
-	}
-	s:STATE_LAND_506 = {
-		region_state:XSJ = {
-			create_pop = { culture = goblin size = 75000 }
-		}
-	}
-	s:STATE_LAND_522 = {
-		region_state:KEP = {
-			create_pop = { culture = dawi_ancestral size = 47186 }
-		}
-	}
-	s:STATE_LAND_526 = {
-		region_state:XSH = {
-			create_pop = { culture = goblin size = 75000 }
-		}
-	}
-	s:STATE_LAND_527 = {
-		region_state:KEP = {
-			create_pop = { culture = dawi_ancestral size = 102814 }
-		}
-	}
-	s:STATE_LAND_587 = {
-		region_state:XSI = {
-			create_pop = { culture = goblin size = 50000 }
-		}
-	}
-	s:STATE_LAND_603 = {
-		region_state:ZND = {
-			create_pop = { culture = nehekharan size = 125000 }
-		}
-	}
-	s:STATE_LAND_604 = {
+	s:STATE_LAHMIA = {
 		region_state:LAH = {
 			create_pop = { culture = nehekharan size = 88403 }
 			create_pop = { culture = lahmian_vampire size = 15600 }
-		}
-	}
-	s:STATE_LAND_605 = {
-		region_state:LAH = {
-			create_pop = { culture = nehekharan size = 81597 }
-			create_pop = { culture = lahmian_vampire size = 14400 }
-		}
-	}
-	s:STATE_LAND_606 = {
-		region_state:LYB = {
-			create_pop = { culture = nehekharan size = 150000 }
 		}
 	}
 	s:STATE_NEW_LAHMIA = {
@@ -204,6 +189,11 @@ POPS = {
 			create_pop = { pop_type = soldiers culture = dawi size = 36000 }
 		}
 	}
+	s:STATE_SHANIDAAR = {
+		region_state:ZND = {
+			create_pop = { culture = nehekharan size = 125000 }
+		}
+	}
 	s:STATE_SHATTERED_TEETH = {
 		region_state:KIZ = {
 			create_pop = { culture = dawi size = 125000 }
@@ -212,6 +202,11 @@ POPS = {
 	s:STATE_SHINING_MOUNTAINS = {
 		region_state:GUN = {
 			create_pop = { culture = dawi size = 125000 }
+		}
+	}
+	s:STATE_SIX_WATCH_FORTS = {
+		region_state:LYB = {
+			create_pop = { culture = nehekharan size = 150000 }
 		}
 	}
 	s:STATE_SOUR_CRAGS = {
@@ -245,6 +240,11 @@ POPS = {
 		region_state:RFG = {
 			create_pop = { culture = orc size = 61316 }
 			create_pop = { culture = goblin size = 33016 }
+		}
+	}
+	s:STATE_WINTERTEETH_FOOTHILLS = {
+		region_state:XSH = {
+			create_pop = { culture = goblin size = 75000 }
 		}
 	}
 	s:STATE_WINTERTEETH_PASS = {

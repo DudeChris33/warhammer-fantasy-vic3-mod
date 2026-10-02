@@ -10,14 +10,14 @@ POPS = {
 			create_pop = { culture = nehekharan size = 250000 }
 		}
 	}
-	s:STATE_LAND_608 = {
-		region_state:KAS = {
-			create_pop = { culture = nehekharan size = 40000 }
-		}
-	}
 	s:STATE_ROAD_OF_KINGS = {
 		region_state:RAS = {
 			create_pop = { culture = nehekharan size = 125000 }
+		}
+	}
+	s:STATE_SPHINX_OF_PHAA = {
+		region_state:KAS = {
+			create_pop = { culture = nehekharan size = 40000 }
 		}
 	}
 	s:STATE_THE_SCARAB_CITY = {
