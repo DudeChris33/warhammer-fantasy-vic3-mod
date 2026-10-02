@@ -1,0 +1,10 @@
+﻿CHARACTERS = {
+	c:MZN ?= {
+		create_character = { # Astragoth Ironhand
+			template = MZN_astragoth_ironhand_template
+		}
+		create_character = { # Zhatan the Black
+			template = MZN_zhatan_the_black_template
+		}
+	}
+}
