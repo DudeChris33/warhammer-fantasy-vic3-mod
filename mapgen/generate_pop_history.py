@@ -110,15 +110,22 @@ def markdown_report(cfg: ph.Config, world: ph.World, p: ph.Plan) -> str:
     wealth/literacy, skips and drops."""
     L: list[str] = [f"## Scale factor\n\ngame total = canon-scale figure x {cfg.scale}; minimum pop size {cfg.min_pop}.\n"]
     tot: dict[str, int] = {}
+    uno = [u for u in p.units if u.tag == sh.UNO_TAG]
     for u in p.units:
-        tot[u.tag] = tot.get(u.tag, 0) + u.allot
+        if u.tag != sh.UNO_TAG:
+            tot[u.tag] = tot.get(u.tag, 0) + u.allot
     L += ["## Calibration (tags that own states)\n", "| Tag | Canon-scale | Game total | Confidence | Source |", "|---|---|---|---|---|"]
     for tag in sorted(tot):
         c = cfg.calib[tag]
         L.append(f"| {tag} | {c['canon']:,} | {tot[tag]:,} | {c['confidence']} | {c['source']} |")
+    if uno and cfg.unclaimed:
+        uc = cfg.unclaimed
+        L += [f"\n## Unclaimed land (c:{sh.UNO_TAG}, outside calibration)\n",
+              f"{len(uno)} states x {uc['culture']} {uc['size']:,} = {sum(u.allot for u in uno):,} people "
+              f"(`calibration.json` `unclaimed_pop`; {uc['source']}). Not counted in the tag totals above.\n"]
     L.append("\n## Ten most populous states per region\n")
     for fname, us in p.files.items():
-        top = sorted(us, key=lambda u: (-u.allot, u.key, u.tag))[:10]
+        top = sorted((u for u in us if u.tag != sh.UNO_TAG), key=lambda u: (-u.allot, u.key, u.tag))[:10]
         L.append(f"**{fname[:-4]}**\n")
         if not top:
             L.append("_no owned states_\n")
@@ -138,7 +145,7 @@ def markdown_report(cfg: ph.Config, world: ph.World, p: ph.Plan) -> str:
         for m in o["mix"]:
             L.append(f"| {o['key']} | {o['mode']} | {m['culture']} | {m.get('religion', '')} | {m.get('pop_type', '')} | {m['share']} | {m['source']} |")
     L += ["\n## Wealth / literacy\n", "| Tag | Wealth | Literacy | Why |", "|---|---|---|---|"]
-    for tag in sorted(tot):
+    for tag in sorted(set(tot) | ({sh.UNO_TAG} if uno else set())):
         e = cfg.population[tag]
         L.append(f"| {tag} | {e['wealth']} | {e['literacy']} | {e['why']} |")
     L.append("\n## Skipped and dropped\n")
@@ -202,6 +209,15 @@ def run_fixture_check(fixture: Path) -> None:
         + sum(x.size for x in odd.dropped) == odd.allot, "rounding must keep the exact sum"
     assert ph.largest_remainder(10, [Fraction(1), Fraction(1), Fraction(1)]) == [4, 3, 3]
     assert any(u.dropped for u in p.units), "the fixture must drop a sub-minimum pop"
+    # unclaimed land: one fixed goblin pop (default faith implied), outside the calibrated totals,
+    # plus a POPULATION entry; a created pair left without pops is caught by check_texts
+    uno = by[("STATE_BETA", sh.UNO_TAG)]
+    assert [(x.culture, x.size, x.religion, x.pop_type) for x in uno.pops] == \
+        [(cfg.unclaimed["culture"], cfg.unclaimed["size"], None, None)], uno.pops
+    assert sh.UNO_TAG not in cfg.totals and "region_state:UNO" in pops["01_isle.txt"]
+    assert any(t == sh.UNO_TAG for es in p.population.values() for t, _ in es)
+    stripped = {f: ph.render_pops([u for u in us if u.tag != sh.UNO_TAG]) for f, us in p.files.items()}
+    assert any("region_state:UNO is created" in e for e in ph.check_texts(stripped, population, world))
 
     def refuses(mutate, needle: str) -> None:
         tmp = Path(tempfile.mkdtemp())
@@ -228,6 +244,11 @@ def run_fixture_check(fixture: Path) -> None:
     refuses(edit("state_overrides.json", lambda d: d["states"][0].__setitem__("anchor", [1, 1])), "anchor")
     refuses(edit("calibration.json", lambda d: d["tags"].pop("MID")), "no calibration.json entry")
     refuses(edit("population.json", lambda d: d["tags"].pop("MID")), "no population.json entry")
+    refuses(edit("calibration.json", lambda d: d.pop("unclaimed_pop")), "no 'unclaimed_pop'")
+    refuses(edit("calibration.json", lambda d: d["unclaimed_pop"].__setitem__("culture", "nowhere")),
+            "unclaimed_pop: culture")
+    refuses(edit("calibration.json", lambda d: d["unclaimed_pop"].__setitem__("size", 5)), "min_pop_size")
+    refuses(edit("population.json", lambda d: d["tags"].pop("UNO")), "no population.json entry")
     # a stale emitted file is caught by check_texts
     bad = dict(pops)
     first = next(f for f, t in pops.items() if "POPS" in t)

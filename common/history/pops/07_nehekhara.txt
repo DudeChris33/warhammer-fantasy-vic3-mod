@@ -5,6 +5,11 @@ POPS = {
 			create_pop = { culture = nehekharan size = 350000 }
 		}
 	}
+	s:STATE_FALLOW_FIELDS = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 	s:STATE_KHEMRIAN_DESERT = {
 		region_state:BHA = {
 			create_pop = { culture = nehekharan size = 250000 }
@@ -13,6 +18,26 @@ POPS = {
 	s:STATE_LAND_608 = {
 		region_state:KAS = {
 			create_pop = { culture = nehekharan size = 40000 }
+		}
+	}
+	s:STATE_LAND_620 = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_LAND_623 = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_LAND_624 = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_MORTIS_TARN = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
 		}
 	}
 	s:STATE_ROAD_OF_KINGS = {

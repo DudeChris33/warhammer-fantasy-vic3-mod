@@ -2,10 +2,16 @@
  "_comment": [
   "Total starting population per start tag, at canon scale (canon figure, order of magnitude); the generator multiplies by scale_factor to game scale. See README.md for the scale decision.",
   "Canon is silent on realm populations in tabletop sources, so every figure is 'inferred' from canon *rank* (largest city, richest province, ...) and kept in proportion between realms; confidence says how far to trust it.",
-  "Every tag that owns an emitted state needs an entry (the generator errors otherwise)."
+  "Every tag that owns an emitted state needs an entry (the generator errors otherwise), except UNO: it takes no total, only unclaimed_pop."
  ],
  "scale_factor": 5,
  "min_pop_size": 100,
+ "unclaimed_pop": {
+  "culture": "goblin",
+  "size": 1000,
+  "source": "invented: placeholder (Chris, 2026-10-02, #6395); goblin is UNO's disclosed stand-in culture (common/country_definitions/98_unclaimed.txt)",
+  "why": "Every (state, c:UNO) pair gets exactly one pop of this culture and size (default faith, default pop type), so no state the game creates starts empty (the 'There are no pops' load class). Kept small and outside the calibrated tag totals: it is not a population estimate for the wilds or the out-of-scope lands."
+ },
  "tags": {
   "AES": {
    "canon": 20000,

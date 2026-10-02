@@ -38,8 +38,12 @@ Rules
   and reported (never emitted); ``slaves`` is emitted only where the owner's
   slavery law (``mapgen/config/country_history``) allows it and that data is
   present. A pop under ``min_pop_size`` is dropped and reported.
-* ``UNO`` (the owner of unowned and out-of-scope land, #6391) gets no pops and no
-  ``POPULATION`` entry: it is not a start nation.
+* ``UNO`` (the owner of unowned and out-of-scope land, #6391) is not a start nation
+  and has no calibration total. Each (state, ``UNO``) pair instead gets one fixed
+  pop, ``calibration.json`` ``unclaimed_pop`` (``culture``, ``size``; #6395), so no
+  owned state starts empty; it gets a ``POPULATION`` entry like any owner. These
+  people are reported on their own line, outside the calibrated tag totals, and a
+  culture that does not resolve or a size under ``min_pop_size`` is a hard error.
 * Output is sorted (state key, owner tag, size descending) and byte-stable.
 
 Pure and deterministic: no clock, no randomness, no filesystem beyond the paths
@@ -195,6 +199,7 @@ class Config:
     state_mixes: list[dict]
     population: dict[str, dict]            # tag -> {wealth, literacy, source, why}
     weights: dict[str, dict]               # state key -> {area_px, arable_milli, cities, canon_cities}
+    unclaimed: dict | None = None          # calibration.json unclaimed_pop: {culture, size, source, why}
 
 
 def _need(d: dict, keys: tuple[str, ...], where: str) -> None:
@@ -246,6 +251,14 @@ def load_config(config_dir: Path) -> Config:
         if e["confidence"] not in CONFIDENCES:
             raise PopHistoryError(f"calibration.json {tag}: confidence must be one of {CONFIDENCES}")
         totals[tag] = e["canon"] * scale
+    if sh.UNO_TAG in calib:
+        raise PopHistoryError(f"calibration.json: c:{sh.UNO_TAG} takes no calibration total; "
+                              "its per-state pop is 'unclaimed_pop'")
+    unclaimed = cal.get("unclaimed_pop")
+    if unclaimed is not None:
+        _need(unclaimed, ("culture", "size", "source", "why"), "calibration.json unclaimed_pop")
+        if not isinstance(unclaimed["size"], int) or isinstance(unclaimed["size"], bool) or unclaimed["size"] < min_pop:
+            raise PopHistoryError(f"calibration.json unclaimed_pop: size must be an integer >= min_pop_size ({min_pop})")
 
     dist = rd("distribution.json")
     ovr = dist.get("overrides", [])
@@ -279,7 +292,7 @@ def load_config(config_dir: Path) -> Config:
         city_boost=frac(dist.get("city_boost", "0"), "distribution.json city_boost"),
         canon_city_boost=frac(dist.get("canon_city_boost", "0"), "distribution.json canon_city_boost"),
         dist_overrides=ovr, tag_mixes=tag_mixes, state_mixes=states, population=pop,
-        weights=w.get("states", {}),
+        weights=w.get("states", {}), unclaimed=unclaimed,
     )
 
 
@@ -361,8 +374,8 @@ def _discover_units(world: World) -> tuple[list[Unit], list[tuple[str, str]], di
             if key not in land:
                 raise PopHistoryError(f"history/states/{hname}: s:{key} is not a land state in map_data")
             for tag, provs in creates:
-                if tag == sh.UNO_TAG:
-                    continue   # unclaimed / out-of-scope land: no start population
+                # UNO (unclaimed / out-of-scope land) is a unit too; plan() gives it the
+                # fixed unclaimed_pop instead of a calibrated share
                 if tag is None or (key, tag) in seen:
                     raise PopHistoryError(f"history/states/{hname} s:{key}: bad or duplicate create_state")
                 seen.add((key, tag))
@@ -424,8 +437,11 @@ def plan(cfg: Config, world: World) -> Plan:
     for n, o in enumerate(cfg.state_mixes):
         _check_anchor(o, anchors, f"state_overrides.json state {n}")
 
-    units, skipped_owners, share = _discover_units(world)
-    by_unit = {(u.key, u.tag): u for u in units}
+    all_units, skipped_owners, share = _discover_units(world)
+    # UNO units take the fixed unclaimed_pop below and are invisible to every
+    # calibrated step (distribution, overrides, mixes, tag totals)
+    units = [u for u in all_units if u.tag != sh.UNO_TAG]
+    uno_units = [u for u in all_units if u.tag == sh.UNO_TAG]
     warnings: list[str] = []
     unowned: list[str] = []
 
@@ -534,6 +550,22 @@ def plan(cfg: Config, world: World) -> Plan:
             (u.dropped if p.size < cfg.min_pop else u.pops).append(p)
         u.pops.sort(key=lambda p: (-p.size, p.culture, p.religion or "", p.pop_type or ""))
         u.dropped.sort(key=lambda p: (p.culture, p.religion or "", p.pop_type or ""))
+
+    # --- unclaimed land (UNO): one fixed pop per state, outside calibration ---
+    if uno_units:
+        uc = cfg.unclaimed
+        if uc is None:
+            raise PopHistoryError(f"c:{sh.UNO_TAG} owns {len(uno_units)} state(s) but calibration.json has no "
+                                  "'unclaimed_pop' (culture, size, source, why)")
+        if uc["culture"] not in world.cultures:
+            raise PopHistoryError(f"calibration.json unclaimed_pop: culture '{uc['culture']}' is not defined in this mod")
+        for u in uno_units:
+            u.allot = uc["size"]
+            u.pops = [Pop(uc["culture"], uc["size"])]   # the culture's default faith is implied
+        tag_units[sh.UNO_TAG] = uno_units
+    elif cfg.unclaimed is not None:
+        warnings.append(f"calibration.json: unclaimed_pop is set but c:{sh.UNO_TAG} owns no emitted state")
+    units = sorted(units + uno_units, key=lambda u: (u.key, u.tag))
 
     # --- files -----------------------------------------------------------
     files: dict[str, list[Unit]] = {f: [] for f in sorted(world.states_by_file)}
@@ -663,7 +695,8 @@ def parse_pops_text(text: str) -> list[tuple[str, list[tuple[str, list[dict]]]]]
 
 def check_texts(pops_texts: dict[str, str], population_texts: dict[str, str], world: World) -> list[str]:
     """Resolve every s:, region_state:, c:, culture, religion and pop_type of the
-    emitted files; braces balance; every pair exists in ``common/history/states``."""
+    emitted files; braces balance; every pair exists in ``common/history/states``
+    and every pair that file creates for a defined country has at least one pop."""
     errors: list[str] = []
     land = {s.key: s for ss in world.states_by_file.values() for s in ss}
     file_of = {s.key: f for f, ss in world.states_by_file.items() for s in ss}
@@ -680,6 +713,7 @@ def check_texts(pops_texts: dict[str, str], population_texts: dict[str, str], wo
             if fname not in world.states_by_file:
                 errors.append(f"history/{label}/{fname}: no map_data/state_regions/{fname} counterpart")
     seen: set[str] = set()
+    populated: set[tuple[str, str]] = set()
     for fname in sorted(pops_texts):
         try:
             parsed = parse_pops_text(pops_texts[fname])
@@ -702,6 +736,8 @@ def check_texts(pops_texts: dict[str, str], population_texts: dict[str, str], wo
                     errors.append(f"{where}: c:{tag} has no country definition")
                 if not pops:
                     errors.append(f"{where} region_state:{tag}: no create_pop")
+                else:
+                    populated.add((key, tag))
                 for f in pops:
                     bad = set(f) - {"culture", "religion", "pop_type", "size"}
                     if bad:
@@ -714,6 +750,12 @@ def check_texts(pops_texts: dict[str, str], population_texts: dict[str, str], wo
                         errors.append(f"{where}/{tag}: pop_type {f['pop_type']} does not resolve")
                     if not f.get("size", "").isdigit() or int(f["size"]) < 1:
                         errors.append(f"{where}/{tag}: size {f.get('size')} is not a positive integer")
+    # the reverse direction: every region_state the game creates starts with people
+    # (an empty one, UNO's included, is the "There are no pops" load class, #6395)
+    for key, tag in sorted(created - populated):
+        if tag is not None and tag in world.countries:
+            errors.append(f"history/pops/{file_of.get(key, '?')} s:{key}: region_state:{tag} is created by "
+                          "common/history/states but has no create_pop")
     for fname in sorted(population_texts):
         t = sh._strip_comments(population_texts[fname])
         for tag, body in re.findall(r"\bc:(\w+)\s*\?=\s*\{([^}]*)\}", t):
@@ -731,12 +773,17 @@ def check_texts(pops_texts: dict[str, str], population_texts: dict[str, str], wo
 # ---------------------------------------------------------------------------
 
 def summary(p: Plan, cfg: Config) -> str:
-    pops = sum(len(u.pops) for u in p.units)
-    size = sum(x.size for u in p.units for x in u.pops)
+    cal = [u for u in p.units if u.tag != sh.UNO_TAG]
+    uno = [u for u in p.units if u.tag == sh.UNO_TAG]
+    pops = sum(len(u.pops) for u in cal)
+    size = sum(x.size for u in cal for x in u.pops)
     skipped = [(u, s, r) for u in p.units for s, r in u.skipped]
     dropped = [(u, d) for u in p.units for d in u.dropped]
-    lines = [f"{len(p.units)} (state, owner) pairs, {pops} create_pop, {size:,} people emitted of "
-             f"{sum(u.allot for u in p.units):,} allotted ({len(set(u.tag for u in p.units))} tags)",
+    lines = [f"{len(cal)} (state, owner) pairs, {pops} create_pop, {size:,} people emitted of "
+             f"{sum(u.allot for u in cal):,} allotted ({len(set(u.tag for u in cal))} tags)",
+             f"unclaimed land c:{sh.UNO_TAG} (outside calibration): {len(uno)} (state, owner) pairs, "
+             f"{sum(len(u.pops) for u in uno)} create_pop, {sum(x.size for u in uno for x in u.pops):,} people"
+             + (f" ({cfg.unclaimed['culture']} x {cfg.unclaimed['size']:,})" if uno and cfg.unclaimed else ""),
              f"skipped owners (no country definition): {len(p.skipped_owners)}"]
     lines += [f"  {k} -> c:{t}" for k, t in p.skipped_owners]
     lines.append(f"skipped pops (unresolved culture/religion/pop type): {len(skipped)}, "
@@ -759,6 +806,10 @@ def invariants(p: Plan, cfg: Config) -> list[str]:
         got = sum(x.size for x in u.pops) + sum(x.size for x, _ in u.skipped) + sum(x.size for x in u.dropped)
         if got != u.allot:
             errs.append(f"{u.key}/{u.tag}: emitted+skipped+dropped {got} != allotment {u.allot}")
+        if u.tag == sh.UNO_TAG:
+            if cfg.unclaimed is None or u.allot != cfg.unclaimed["size"] or len(u.pops) != 1:
+                errs.append(f"{u.key}/{u.tag}: unclaimed land must carry exactly one unclaimed_pop")
+            continue
         per_tag[u.tag] = per_tag.get(u.tag, 0) + u.allot
     for tag, n in sorted(per_tag.items()):
         if n != cfg.totals[tag]:
