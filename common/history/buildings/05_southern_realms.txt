@@ -3,18 +3,6 @@ BUILDINGS = {
 	s:STATE_AQUILENA = {
 		region_state:AQL = {
 			create_building = {
-				building = "building_manor_house"
-				level = 7
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -28,11 +16,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:AQL"
 						levels = 1
-						region = "STATE_AQUILENA"
 					}
 				}
 				reserves = 1
@@ -82,18 +68,6 @@ BUILDINGS = {
 	s:STATE_BLACK_PENINSULA = {
 		region_state:MON = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -107,11 +81,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:MON"
 						levels = 1
-						region = "STATE_BLACK_PENINSULA"
 					}
 				}
 				reserves = 1
@@ -161,12 +133,6 @@ BUILDINGS = {
 	s:STATE_BLIGHTED_MARSHES = {
 		region_state:XSG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -207,18 +173,6 @@ BUILDINGS = {
 	}
 	s:STATE_CANTABRIO_ROAD = {
 		region_state:BIL = {
-			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 4
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
 			create_building = {
 				building = "building_shipyard"
 				add_ownership = {
@@ -268,11 +222,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_port"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:BIL"
 						levels = 2
-						region = "STATE_CANTABRIO_ROAD"
 					}
 				}
 				reserves = 1
@@ -281,11 +233,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:BIL"
 						levels = 1
-						region = "STATE_CANTABRIO_ROAD"
 					}
 				}
 				reserves = 1
@@ -335,18 +285,6 @@ BUILDINGS = {
 	s:STATE_CEFIRO_HILLS = {
 		region_state:CNT = {
 			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -371,11 +309,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:CNT"
 						levels = 1
-						region = "STATE_CEFIRO_HILLS"
 					}
 				}
 				reserves = 1
@@ -425,25 +361,11 @@ BUILDINGS = {
 	s:STATE_CENTRAL_MAGRITTA = {
 		region_state:MAG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_port"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:MAG"
 						levels = 3
-						region = "STATE_CENTRAL_MAGRITTA"
 					}
 				}
 				reserves = 1
@@ -498,11 +420,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:MAG"
 						levels = 1
-						region = "STATE_CENTRAL_MAGRITTA"
 					}
 				}
 				reserves = 1
@@ -552,18 +472,6 @@ BUILDINGS = {
 	s:STATE_EASTERN_BORDER_PRINCES = {
 		region_state:ESS = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -577,11 +485,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:ESS"
 						levels = 1
-						region = "STATE_EASTERN_BORDER_PRINCES"
 					}
 				}
 				reserves = 1
@@ -631,18 +537,6 @@ BUILDINGS = {
 	s:STATE_EAST_BILBALI = {
 		region_state:BIL = {
 			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -656,11 +550,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_port"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:BIL"
 						levels = 2
-						region = "STATE_EAST_BILBALI"
 					}
 				}
 				reserves = 1
@@ -710,12 +602,6 @@ BUILDINGS = {
 	s:STATE_EAST_MAGRITTA = {
 		region_state:MAG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -759,12 +645,6 @@ BUILDINGS = {
 	s:STATE_ESTALIAN_HIGHLANDS = {
 		region_state:MAG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -782,18 +662,6 @@ BUILDINGS = {
 	s:STATE_KHARNOS_FOREST = {
 		region_state:BPR = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -807,11 +675,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_port"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:BPR"
 						levels = 1
-						region = "STATE_KHARNOS_FOREST"
 					}
 				}
 				reserves = 1
@@ -820,11 +686,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:BPR"
 						levels = 1
-						region = "STATE_KHARNOS_FOREST"
 					}
 				}
 				reserves = 1
@@ -874,12 +738,6 @@ BUILDINGS = {
 	s:STATE_LAND_080 = {
 		region_state:CNT = {
 			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -923,25 +781,11 @@ BUILDINGS = {
 	s:STATE_LAND_102 = {
 		region_state:REM = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:REM"
 						levels = 3
-						region = "STATE_LAND_102"
 					}
 				}
 				reserves = 1
@@ -1013,18 +857,6 @@ BUILDINGS = {
 	s:STATE_LAND_223 = {
 		region_state:ORT = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1038,11 +870,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:ORT"
 						levels = 1
-						region = "STATE_LAND_223"
 					}
 				}
 				reserves = 1
@@ -1092,18 +922,6 @@ BUILDINGS = {
 	s:STATE_LAND_382 = {
 		region_state:TOB = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1128,11 +946,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:TOB"
 						levels = 2
-						region = "STATE_LAND_382"
 					}
 				}
 				reserves = 1
@@ -1181,12 +997,6 @@ BUILDINGS = {
 	}
 	s:STATE_LAND_496 = {
 		region_state:CNT = {
-			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -1242,12 +1052,6 @@ BUILDINGS = {
 	s:STATE_LAND_497 = {
 		region_state:CNT = {
 			create_building = {
-				building = "building_manor_house"
-				level = 5
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -1277,12 +1081,6 @@ BUILDINGS = {
 	}
 	s:STATE_LAND_498 = {
 		region_state:BIL = {
-			create_building = {
-				building = "building_manor_house"
-				level = 10
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -1327,12 +1125,6 @@ BUILDINGS = {
 	s:STATE_LAND_499 = {
 		region_state:TOB = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -1375,12 +1167,6 @@ BUILDINGS = {
 	}
 	s:STATE_LAND_509 = {
 		region_state:LUC = {
-			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -1425,18 +1211,6 @@ BUILDINGS = {
 	s:STATE_LAND_586 = {
 		region_state:GAS = {
 			create_building = {
-				building = "building_manor_house"
-				level = 4
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1450,11 +1224,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:GAS"
 						levels = 1
-						region = "STATE_LAND_586"
 					}
 				}
 				reserves = 1
@@ -1490,12 +1262,6 @@ BUILDINGS = {
 	}
 	s:STATE_LAND_602 = {
 		region_state:TOB = {
-			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -1540,18 +1306,6 @@ BUILDINGS = {
 	s:STATE_LOST_KHYPNIA = {
 		region_state:UVE = {
 			create_building = {
-				building = "building_manor_house"
-				level = 7
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1565,11 +1319,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:UVE"
 						levels = 1
-						region = "STATE_LOST_KHYPNIA"
 					}
 				}
 				reserves = 1
@@ -1619,12 +1371,6 @@ BUILDINGS = {
 	s:STATE_MIDDLE_BILBALI = {
 		region_state:BIL = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -1641,18 +1387,6 @@ BUILDINGS = {
 	}
 	s:STATE_MIDDLE_TILEA = {
 		region_state:PAV = {
-			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -1678,11 +1412,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:PAV"
 						levels = 2
-						region = "STATE_MIDDLE_TILEA"
 					}
 				}
 				reserves = 1
@@ -1732,12 +1464,6 @@ BUILDINGS = {
 	s:STATE_MIRAMAR_HILLS = {
 		region_state:MGL = {
 			create_building = {
-				building = "building_manor_house"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1766,18 +1492,6 @@ BUILDINGS = {
 	s:STATE_MONTE_CASTELLO = {
 		region_state:DON = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1802,11 +1516,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:DON"
 						levels = 2
-						region = "STATE_MONTE_CASTELLO"
 					}
 				}
 				reserves = 1
@@ -1856,18 +1568,6 @@ BUILDINGS = {
 	s:STATE_NORTH_TILEA = {
 		region_state:MIR = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1892,11 +1592,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:MIR"
 						levels = 2
-						region = "STATE_NORTH_TILEA"
 					}
 				}
 				reserves = 1
@@ -1946,18 +1644,6 @@ BUILDINGS = {
 	s:STATE_PLAINS_OF_LUCCINI = {
 		region_state:LUC = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1982,11 +1668,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:LUC"
 						levels = 2
-						region = "STATE_PLAINS_OF_LUCCINI"
 					}
 				}
 				reserves = 1
@@ -2036,18 +1720,6 @@ BUILDINGS = {
 	s:STATE_SARTOSA = {
 		region_state:SRT = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -2072,11 +1744,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:SRT"
 						levels = 2
-						region = "STATE_SARTOSA"
 					}
 				}
 				reserves = 1
@@ -2126,12 +1796,6 @@ BUILDINGS = {
 	s:STATE_SOUTHEAST_MAGRITTA = {
 		region_state:MAG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -2175,18 +1839,6 @@ BUILDINGS = {
 	s:STATE_TRANTINE_HILLS = {
 		region_state:TRA = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -2211,11 +1863,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:TRA"
 						levels = 2
-						region = "STATE_TRANTINE_HILLS"
 					}
 				}
 				reserves = 1
@@ -2265,25 +1915,11 @@ BUILDINGS = {
 	s:STATE_VEREZZI = {
 		region_state:VER = {
 			create_building = {
-				building = "building_manor_house"
-				level = 6
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:VER"
 						levels = 2
-						region = "STATE_VEREZZI"
 					}
 				}
 				reserves = 1
@@ -2355,12 +1991,6 @@ BUILDINGS = {
 	s:STATE_WESTERN_IRRANAS = {
 		region_state:MAG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 7
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -2391,18 +2021,6 @@ BUILDINGS = {
 	s:STATE_WEST_MAGRITTA = {
 		region_state:MAG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 11
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -2416,11 +2034,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_port"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:MAG"
 						levels = 2
-						region = "STATE_WEST_MAGRITTA"
 					}
 				}
 				reserves = 1
