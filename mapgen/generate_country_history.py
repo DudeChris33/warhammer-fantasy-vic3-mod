@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+"""Write starting country setup into ``common/history/countries/00_start_setup.txt``.
+
+Reads ``mapgen/derived/state_ownership.json`` (``read_state_ownership.py``) for the
+tags that own a state at the start date, and ``common/country_definitions/*.txt``
+for each tag's ``tier``, and writes one ``c:TAG ?= { ... }`` block per owner:
+vanilla's starting-technology effect for that tier plus
+``effect_starting_politics_traditional``. Rules are in
+``worldgen/country_history.py``.
+
+Runs after ``read_state_ownership.py`` (the same input as
+``generate_state_history.py``): a repaint changes the owner set, so re-run both.
+Output is UTF-8 with a BOM and LF endings, like the sibling generated files. A
+generated file: never hand-edit it.
+
+Usage::
+
+    python mapgen/generate_country_history.py           # write the file
+    python mapgen/generate_country_history.py --check   # exit 1 if it is stale (BOM/CRLF-insensitive)
+"""
+from __future__ import annotations
+
+import argparse
+import json
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from worldgen import country_history as ch  # noqa: E402
+from worldgen import state_history as sh  # noqa: E402
+from worldgen.state_ownership import OwnershipError  # noqa: E402
+
+MOD_ROOT = Path(__file__).resolve().parent.parent
+OWNERSHIP_PATH = MOD_ROOT / "mapgen" / "derived" / "state_ownership.json"
+COUNTRY_DEFS_DIR = MOD_ROOT / "common" / "country_definitions"
+OUT_PATH = MOD_ROOT / "common" / "history" / "countries" / "00_start_setup.txt"
+BOM = b"\xef\xbb\xbf"
+
+
+def summary(p: ch.Plan) -> str:
+    lines = [f"{len(p.blocks)} country blocks, {len(p.held_back)} held back"]
+    if p.held_back:
+        lines.append(f"  held back (owner tag undefined): {', '.join(p.held_back)}")
+    return "\n".join(lines)
+
+
+def main(argv: list[str] | None = None) -> int:
+    ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--ownership", type=Path, default=OWNERSHIP_PATH)
+    ap.add_argument("--country-definitions", type=Path, default=COUNTRY_DEFS_DIR)
+    ap.add_argument("--out", type=Path, default=OUT_PATH)
+    ap.add_argument("--check", action="store_true", help="assert the file on disk is current; write nothing")
+    args = ap.parse_args(argv)
+    try:
+        doc = json.loads(args.ownership.read_text(encoding="utf-8"))
+        p = ch.plan(doc, ch.load_country_tiers(args.country_definitions))
+    except OwnershipError as exc:
+        print(f"generate_country_history: ERROR: {exc}", file=sys.stderr)
+        return 1
+    text = ch.render(p.blocks)
+    if args.check:
+        current = sh.normalize_text(args.out.read_bytes().decode("utf-8")) if args.out.is_file() else None
+        if current != text:
+            print(f"generate_country_history: stale: {args.out.name} -- re-run without --check", file=sys.stderr)
+            return 1
+        print(f"generate_country_history: output is current. {summary(p)}")
+        return 0
+    args.out.parent.mkdir(parents=True, exist_ok=True)
+    args.out.write_bytes(BOM + text.encode("utf-8"))
+    print(f"generate_country_history: wrote {args.out}: {summary(p)}")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

@@ -107,6 +107,7 @@ TAG = {
 }
 ```
 
+- `tier` also sets a start-owner's starting technology: `generate_country_history.py` maps `empire`/`hegemony`/`kingdom`/`grand_principality` to `effect_starting_technology_tier_5_tech` and `principality`/`city_state` to tier 6 (`TECH_TIER` in `mapgen/worldgen/country_history.py`), so a new tier value needs a row there ([testing.md](testing.md)).
 - `color` uses the **brace** form `{ R G B }` (0-255 integers), not `common/cultures/`' `rgb{ }`.
   Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
