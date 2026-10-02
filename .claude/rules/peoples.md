@@ -120,7 +120,7 @@ TAG = {
   must have a non-dynamic entry here (the D00-D99 `dynamic_country_definition` slots don't count), or
   `generate_state_history.py` holds its states back and `validate_map.py` fails ([testing.md](testing.md)).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
-- A tag's `cultures` also drive the generated state homelands: every state it owns at start gets one `add_homeland = cu:<culture>` per entry ([testing.md](testing.md), #6374), so list only the peoples that should be homeland in its states. A multi-culture tag that owns a state (today ERE, UVE, MOR) gives that state all of them.
+- A tag's `cultures` also drive the generated state homelands (every tag but `UNO`, below): every state it owns at start gets one `add_homeland = cu:<culture>` per entry ([testing.md](testing.md), #6374), so list only the peoples that should be homeland in its states. A multi-culture tag that owns a state (today ERE, UVE, MOR) gives that state all of them.
 - **Placeholder tags (`XS*`).** A state owner the setting needs but no culture can yet represent gets
   a deliberately generic stand-in rather than an invented nation. The `XS*` codes are the Skaven ones:
   "Skaven Clan <letter> (placeholder)", adjective "Skaven", `goblin` culture,
@@ -128,6 +128,11 @@ TAG = {
   [heraldry.md](heraldry.md)'s placeholder rule. Each block's comment states the limits. The codes
   are frozen like any shipped tag, so real clans get **new** codes and supersede these tags; a
   placeholder is never renamed into a real polity. Record each one in `planning/tag_registry.md`.
+- **`UNO` (Unclaimed Lands)** is the one placeholder that is not painted: the `decentralized`
+  owner of every `unowned` and out-of-scope `placeholder` state, mapped from those tokens by
+  `generate_state_history.py` (#6391). `common/country_definitions/98_unclaimed.txt`,
+  `principality`, `goblin` as a disclosed stand-in culture, no capital, no homelands in its
+  states, no legend entry. Never paint it and never rename it into a real polity.
 - **Disclosed stand-in cultures.** When no authored culture fits a tag, use the most honest existing
   one and say in the block comment and the registry row what it does not describe (e.g. `BRK`
   `norscan` for a Chaos garrison, `VMP` `sylvanian_vampire` for Kemmler's non-vampire host). Do not

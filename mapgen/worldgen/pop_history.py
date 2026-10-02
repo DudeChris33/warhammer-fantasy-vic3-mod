@@ -38,6 +38,8 @@ Rules
   and reported (never emitted); ``slaves`` is emitted only where the owner's
   slavery law (``mapgen/config/country_history``) allows it and that data is
   present. A pop under ``min_pop_size`` is dropped and reported.
+* ``UNO`` (the owner of unowned and out-of-scope land, #6391) gets no pops and no
+  ``POPULATION`` entry: it is not a start nation.
 * Output is sorted (state key, owner tag, size descending) and byte-stable.
 
 Pure and deterministic: no clock, no randomness, no filesystem beyond the paths
@@ -359,6 +361,8 @@ def _discover_units(world: World) -> tuple[list[Unit], list[tuple[str, str]], di
             if key not in land:
                 raise PopHistoryError(f"history/states/{hname}: s:{key} is not a land state in map_data")
             for tag, provs in creates:
+                if tag == sh.UNO_TAG:
+                    continue   # unclaimed / out-of-scope land: no start population
                 if tag is None or (key, tag) in seen:
                     raise PopHistoryError(f"history/states/{hname} s:{key}: bad or duplicate create_state")
                 seen.add((key, tag))

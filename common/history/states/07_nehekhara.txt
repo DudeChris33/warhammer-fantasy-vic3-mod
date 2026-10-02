@@ -8,6 +8,12 @@ STATES = {
 
 		add_homeland = cu:nehekharan
 	}
+	s:STATE_FALLOW_FIELDS = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x03AC79 x03F675 x059C2A x0B0F3D x0E6D4F x1CB187 x22249A x33C6E4 x3939F7 x420B1C x4639F1 x477E2F x4ADC41 x504F54 x55C267 x5E938C x6764B1 x699F02 x6B9386 x6CD7C4 x7035D6 x73B938 x75A8E9 x7E7A0E x83ED21 x8ACE95 x8CBE46 x923159 x958F6B x9B027E xA3D3A3 xA946B6 xACA4C8 xB217DB xB78AEE xBAE900 xC05C13 xCEA04B xCEC59B xD1FE5D xD77170 xE4716A xE5B5A8 xED630C xEE86CD xF757F2 xFCCB05 }
+		}
+	}
 	s:STATE_KHEMRIAN_DESERT = {
 		create_state = {
 			country = c:BHA
@@ -23,6 +29,30 @@ STATES = {
 		}
 
 		add_homeland = cu:nehekharan
+	}
+	s:STATE_LAND_620 = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x44201D x47752D x5CEDD7 x62C261 x797647 x82476C xBCFE01 xCCD117 xD0FB19 }
+		}
+	}
+	s:STATE_LAND_623 = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x09C62C x1879B0 x19C2C1 x313995 x3CB886 xA6FA61 xB6B129 xF3201B }
+		}
+	}
+	s:STATE_LAND_624 = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x0BE000 x92A0A5 x9BA01C xA7FDA5 xE46C97 xF4692C }
+		}
+	}
+	s:STATE_MORTIS_TARN = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x0EDC9B x1D20D3 x25F1F8 x2BC682 x2D0AC0 x315A12 x343630 x34B824 x486F6F x4B4B8D x5CFBAC x5D3CA6 x6979B2 x7EE95A x8D2D92 x8ED347 xA442EF xABCB03 xAFCB86 xC42971 xCB4239 xCE9749 xD2CF20 xD5CBBB }
+		}
 	}
 	s:STATE_ROAD_OF_KINGS = {
 		create_state = {

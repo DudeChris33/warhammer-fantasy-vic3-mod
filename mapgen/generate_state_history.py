@@ -7,8 +7,10 @@ the land ``map_data/state_regions/NN_*.txt`` and the tags defined in
 state-region file, same name, in the vanilla
 ``STATES = { s:STATE_X = { create_state = { country = c:TAG owned_provinces = { ... } } } }``
 shape, plus ``add_homeland = cu:<culture>`` lines derived from the owner tags'
-``cultures`` and checked against ``common/cultures`` (#6374). Rules (placeholder /
-unowned states, splits, held-back undefined tags, homelands, stable ordering) are in ``worldgen/state_history.py``.
+``cultures`` and checked against ``common/cultures`` (#6374). Unowned and
+out-of-scope placeholder land goes to ``c:UNO`` (Unclaimed Lands, #6391). Rules
+(the UNO token mapping, splits, held-back undefined tags, homelands, stable
+ordering) are in ``worldgen/state_history.py``.
 
 Runs after ``generate_land_regions.py`` and ``read_state_ownership.py``: a
 province or land-region regen stales the ownership JSON, which must be re-read
@@ -59,8 +61,8 @@ def summary(p: sh.Plan) -> str:
     emitted = sum(len(e) for e in p.files.values())
     header_only = sum(1 for e in p.files.values() if not e)
     lines = [f"{len(p.files)} files ({header_only} header-only), {emitted} states owned, "
-             f"{p.create_states} create_state blocks; {len(p.unowned)} unowned, "
-             f"{len(p.placeholder)} placeholder, {len(p.held_back)} held back; "
+             f"{p.create_states} create_state blocks; {len(p.unowned)} unowned + "
+             f"{len(p.placeholder)} placeholder -> c:{sh.UNO_TAG}, {len(p.held_back)} held back; "
              f"{len(p.homelands)} states with homelands ({sum(len(h) for h in p.homelands.values())} add_homeland)"]
     by_tag: dict[str, list[str]] = {}
     for key, tag in p.held_back:

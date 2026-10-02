@@ -22,22 +22,28 @@ Rules
 -----
 * One history file per land ``map_data/state_regions/NN_<stem>.txt``, same file
   name (``99_seas.txt`` is skipped). Every one is rewritten, so all are
-  generator-owned; a file with no owned state carries the header comment only.
-* ``placeholder`` (out-of-scope) and ``unowned`` states emit nothing.
+  generator-owned; a file with no state in it carries the header comment only.
+* The ``unowned`` and ``placeholder`` owner tokens are not tags: :data:`TOKEN_OWNER`
+  maps both to ``UNO`` (Unclaimed Lands, the decentralized placeholder owner,
+  #6391). An out-of-scope (``placeholder``-scope) state emits one ``c:UNO``
+  ``create_state`` with every province; an ``unowned`` drawn state or slice becomes
+  a ``c:UNO`` slice. A drawn state painted ``placeholder`` is an error.
 * A whole-state owner gets every province of the state (vanilla includes
   impassable provinces in ``owned_provinces``).
 * A split (``owners: [{owner, provinces}]``) emits one ``create_state`` per
-  defined-tag slice; ``unowned`` slices emit nothing (partial ownership).
+  defined-tag slice (slices that map to the same tag are merged).
 * An owner tag with no non-dynamic ``common/country_definitions`` entry is
   **held back**: its state (or slice) emits nothing and is reported, so the
-  generator never writes a dangling ``c:TAG``. ``validate_map`` decides whether a
-  hold-back fails the gate (``HELD_BACK_IS_ERROR``).
+  generator never writes a dangling ``c:TAG`` -- ``UNO`` included. ``validate_map``
+  decides whether a hold-back fails the gate (``HELD_BACK_IS_ERROR``).
+* Generator and validator take the expected owners from one helper,
+  :func:`owner_slices`, so a missing or wrong ``c:UNO`` block fails ``check()`` the
+  same way any other owner mismatch does.
 * Homelands (#6374): each emitted state gets ``add_homeland = cu:<c>`` for every culture of
   its ``create_state`` owners' ``common/country_definitions`` ``cultures`` (owner tags in sorted
-  order, de-duplicated). ``UNO`` (the placeholder owner of unowned / out-of-scope land,
-  #6391) contributes none, and a state with no create_state carries none. No override table:
-  derived data cannot go stale on a repaint. ``check()`` fails a homeland id with no
-  ``common/cultures`` definition.
+  order, de-duplicated). ``UNO`` contributes none, and a state with no create_state carries
+  none. No override table: derived data cannot go stale on a repaint. ``check()`` fails a
+  homeland id with no ``common/cultures`` definition.
 * Ordering is stable: states by key, ``create_state`` blocks by tag, provinces
   by hex token -- a land-regions regen that reorders blocks does not churn this.
 
@@ -70,6 +76,9 @@ _TOP_KEY = re.compile(r"^(\w+)\s*=\s*\{", re.M)
 #: The decentralized placeholder tag that owns unowned / out-of-scope land (#6391). It
 #: carries a stand-in culture but its states get no homelands.
 UNO_TAG = "UNO"
+
+#: ``state_ownership.json`` owner tokens that are not tags -> the tag that owns that land.
+TOKEN_OWNER: dict[str, str] = {UNOWNED: UNO_TAG, PLACEHOLDER: UNO_TAG}
 
 #: ``[(state_key, [(tag, [province, ...]), ...]), ...]`` -- one history file.
 Entries = list[tuple[str, list[tuple[str, list[str]]]]]
@@ -250,12 +259,35 @@ def derive_homelands(owner_tags, country_cultures: dict[str, list[str]]) -> list
     return out
 
 
+def owner_slices(key: str, rec: dict, state: State,
+                 defined_tags: set[str]) -> tuple[list[tuple[str, list[str]]], list[str]]:
+    """``([(tag, sorted provinces)], [held-back tag])`` that one state's JSON record
+    implies -- the single source of the expected ``create_state`` blocks for both
+    :func:`plan` and :func:`check`. Owner tokens map through :data:`TOKEN_OWNER`
+    (a placeholder-scope state is wholly ``UNO``), slices of the same tag merge, and
+    a tag with no definition is held back. Raises :class:`OwnershipError` for a
+    malformed split or a drawn state owned by ``placeholder``."""
+    if rec.get("scope") == "placeholder":
+        slices = [(PLACEHOLDER, sorted(state.provinces))]
+    else:
+        slices = _slices(key, rec, state)
+        if any(owner == PLACEHOLDER for owner, _ in slices):
+            raise OwnershipError(f"{key}: drawn state owned by 'placeholder'")
+    merged: dict[str, list[str]] = {}
+    for owner, provs in slices:
+        merged.setdefault(TOKEN_OWNER.get(owner, owner), []).extend(provs)
+    creates = [(tag, sorted(provs)) for tag, provs in sorted(merged.items()) if tag in defined_tags]
+    held = [tag for tag in sorted(merged) if tag not in defined_tags]
+    return creates, held
+
+
 def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_tags: set[str],
          country_cultures: dict[str, list[str]] | None = None) -> Plan:
     """What to emit, per history file. Raises :class:`OwnershipError` when the
     JSON does not match ``map_data`` (stale read) or a split is malformed.
     With ``country_cultures``, ``Plan.homelands`` carries each owned state's derived
-    homelands."""
+    homelands. ``Plan.unowned`` / ``Plan.placeholder`` list the whole states that
+    went to ``UNO`` through each token."""
     states = _check_doc(ownership_doc, states_by_file)
     out = Plan(files={})
     for fname in sorted(states_by_file):
@@ -264,21 +296,12 @@ def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_ta
             rec = states[st.key]
             if rec.get("scope") == "placeholder":
                 out.placeholder.append(st.key)
-                continue
-            creates: list[tuple[str, list[str]]] = []
-            for owner, provs in _slices(st.key, rec, st):
-                if owner == PLACEHOLDER:
-                    raise OwnershipError(f"{st.key}: drawn state owned by 'placeholder'")
-                if owner == UNOWNED:
-                    continue
-                if owner not in defined_tags:
-                    out.held_back.append((st.key, owner))
-                    continue
-                creates.append((owner, provs))
-            if "owner" in rec and rec["owner"] == UNOWNED:
+            elif rec.get("owner") == UNOWNED:
                 out.unowned.append(st.key)
+            creates, held = owner_slices(st.key, rec, st, defined_tags)
+            out.held_back += [(st.key, tag) for tag in held]
             if creates:
-                entries.append((st.key, sorted(creates)))
+                entries.append((st.key, creates))
                 if country_cultures is not None:
                     homes = derive_homelands((t for t, _ in creates), country_cultures)
                     if homes:
@@ -378,7 +401,10 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
           culture_ids: set[str] | None = None) -> tuple[list[str], list[tuple[str, str]]]:
     """Validate emitted history against ``map_data``, the JSON and the defined
     tags. Returns ``(errors, held_back)``; ``held_back`` lists JSON owners whose
-    tag is undefined (the caller decides whether that is an error).
+    tag is undefined (the caller decides whether that is an error). The expected
+    blocks come from :func:`owner_slices`, as in :func:`plan`, so an unowned or
+    out-of-scope state without its ``c:UNO`` block (or with another owner) fails as
+    an owner mismatch.
 
     ``culture_ids`` (the ``common/cultures`` ids) makes every emitted ``add_homeland``
     id without a culture definition an error; ``country_cultures`` makes the emitted
@@ -449,23 +475,12 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
                     errors.append(f"s:{key}: province {t} assigned twice ({claimed[t]} and c:{tag})")
                 else:
                     claimed[t] = f"c:{tag}"
-        if rec.get("scope") == "placeholder":
-            if creates:
-                errors.append(f"s:{key}: create_state on an out-of-scope placeholder state")
-            continue
         try:
-            slices = _slices(key, rec, st)
+            expected, held = owner_slices(key, rec, st, defined_tags)
         except OwnershipError as exc:
             errors.append(str(exc))
             continue
-        expected = []
-        for owner, provs in slices:
-            if owner == UNOWNED:
-                continue
-            if owner not in defined_tags:
-                held_back.append((key, owner))
-                continue
-            expected.append((owner, provs))
+        held_back += [(key, tag) for tag in held]
         if country_cultures is not None and creates:
             want = derive_homelands((t for t, _ in expected), country_cultures)
             if not want and any(t != UNO_TAG for t, _ in expected):
@@ -479,9 +494,7 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
         got = sorted((t or "", sorted(p)) for t, p in creates)
         if got != sorted(expected):
             if not expected and creates:
-                errors.append(f"s:{key}: create_state on a state the ownership map leaves unowned"
-                              if rec.get("owner") == UNOWNED else
-                              f"s:{key}: emitted owner(s) {sorted({t for t, _ in got})} but the ownership map "
+                errors.append(f"s:{key}: emitted owner(s) {sorted({t for t, _ in got})} but the ownership map "
                               "gives no defined owner")
             elif {t for t, _ in got} != {t for t, _ in expected}:
                 errors.append(f"s:{key}: emitted owner(s) {sorted({t for t, _ in got})} differ from "

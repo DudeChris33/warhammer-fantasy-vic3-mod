@@ -56,6 +56,24 @@ STATES = {
 
 		add_homeland = cu:dawi
 	}
+	s:STATE_BLISTERING_PEAKS = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x26459A x474208 x5E5765 x6E4152 x83B0FA x85C5FB xAB1F90 xD73549 }
+		}
+	}
+	s:STATE_BLIZZARD_PEAKS = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x0787AC x1DECC3 x440473 x4CD598 x722F2D xD3F7B4 xF95149 }
+		}
+	}
+	s:STATE_BROKEN_TEETH = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x02FC33 x04F0B7 x11406B x1A1190 x2DDB83 x333BEE x533518 xAF77E4 xB84909 xD9C76B xFB78F2 }
+		}
+	}
 	s:STATE_CRIPPLE_PEAK = {
 		create_state = {
 			country = c:XSL
@@ -63,6 +81,24 @@ STATES = {
 		}
 
 		add_homeland = cu:goblin
+	}
+	s:STATE_CROOKED_CORRIDOR = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x0BA3D9 x3555C2 x727027 x8BB62F }
+		}
+	}
+	s:STATE_CROOKED_MOUNTS = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x15B93C x7781C3 x83B5CD x8E9720 x8FE504 }
+		}
+	}
+	s:STATE_CURSED_WAY = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x045319 x235FD6 x2E1C7D x40C20B x48B96B x5FCEC8 x85285D xA28A92 xBA3D8D xFE0641 }
+		}
 	}
 	s:STATE_DARK_MAIDEN_PASS = {
 		create_state = {
@@ -79,6 +115,24 @@ STATES = {
 		}
 
 		add_homeland = cu:orc
+	}
+	s:STATE_DESOLATION_OF_NAGASH = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x1F0782 x22C238 x4CB51B x501800 x52A54F x7BB99A x8F1441 x922857 x972C1E xC0F9B1 xCB8333 xE65346 }
+		}
+	}
+	s:STATE_DRAGON_CRAG = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x0201F1 x121F03 x180162 x1E8A61 x359FBE x3B12D1 x63CA78 x6698C1 x693D8B x7ADFD5 x89240D xA5AC7D xAE7DA2 xB3F0B5 xB6D679 xBCC1DA xD5B011 xF2A7CD }
+		}
+	}
+	s:STATE_DRAKEN_RIDGE = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x0EC0F1 x11453E x341A86 x4DB430 x5EE72E x71C4B4 xA42745 xB26B7D xD108EE xEBEBA9 xFD1EA7 }
+		}
 	}
 	s:STATE_EASTERN_IRRANAS = {
 		create_state = {
@@ -128,6 +182,12 @@ STATES = {
 
 		add_homeland = cu:ogre
 	}
+	s:STATE_IRONCRAFT_MOUNTAINS = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x0D6A0B x42306C x44E30B x4B70DD x5945C9 x8151FD x89F4D0 xA3F8F3 xB23D2B xC95288 xE067E5 }
+		}
+	}
 	s:STATE_IRON_PEAKS = {
 		create_state = {
 			country = c:AZL
@@ -152,6 +212,12 @@ STATES = {
 
 		add_homeland = cu:goblin
 	}
+	s:STATE_LAND_374 = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x860222 x89CF80 x94B5A6 }
+		}
+	}
 	s:STATE_LAND_487 = {
 		create_state = {
 			country = c:REI
@@ -175,6 +241,12 @@ STATES = {
 		}
 
 		add_homeland = cu:goblin
+	}
+	s:STATE_LAND_513 = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x08FA3C x129C24 x200F99 x2E53D1 x45692E x6AC2C3 x81D820 xA731B5 xCC8B4A xE3A0A7 xE9390A }
+		}
 	}
 	s:STATE_LAND_522 = {
 		create_state = {
@@ -240,6 +312,12 @@ STATES = {
 
 		add_homeland = cu:nehekharan
 	}
+	s:STATE_MOUNTAINS_OF_DAWN = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x00E732 x0C4A79 x1A2438 x37E311 x462749 x4EFD41 x575145 x6D7562 x70F3F1 x79D2EB xA7EFD0 xB0C5C8 xD61F5D xDF9722 xE9D1D5 xF588BE xFFF1C3 }
+		}
+	}
 	s:STATE_NEW_LAHMIA = {
 		create_state = {
 			country = c:UZK
@@ -303,6 +381,12 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi
+	}
+	s:STATE_RED_CLOUD_MOUNTAINS = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x129751 x392C22 x41FD47 x99AB98 x9E52BB xC91F63 xD7639B xE45EC2 xF2A2FA xF74A1D }
+		}
 	}
 	s:STATE_SHATTERED_TEETH = {
 		create_state = {

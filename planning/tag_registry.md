@@ -35,8 +35,8 @@ Filed by epic #3414 (child #3415).
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (19)
 
-**Total: 239 tags** (16 formables, 223 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
-Nippon deferred with 0). Content is **honest, well-attested Warhammer
+**Total: 240 tags** (16 formables, 224 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+Nippon deferred with 0), plus the `98_unclaimed` placeholder owner `UNO` (#6391). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
 
@@ -86,6 +86,13 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   carry provisional names that Chris will redo; the codes stay frozen.
 - **Ogre rows carry `ogre`.** The `ogre` culture now exists (#6379), so every 11 Ogre Kingdoms row
   takes it in place of `PLACEHOLDER`. The other distant regions keep `PLACEHOLDER`.
+- **`UNO` = Unclaimed Lands, the decentralized placeholder owner** (board #6391, Chris 2026-10-02).
+  It owns every state the start map gives no nation — the drawn Old World's `unowned` wilderness and
+  every out-of-scope `placeholder` state — and is **generator-mapped, never painted** (no legend entry;
+  `generate_state_history.py` maps those owner tokens to `c:UNO`). `decentralized`/`principality`,
+  `goblin` as a disclosed one-culture stand-in (it does not describe the elves, lizardmen, Nippon or
+  other peoples of the land it holds), no capital, and **no homelands** in its states (#6374). Filed in
+  its own `98_unclaimed` files. Frozen like any shipped code: it is never renamed into a real polity.
 
 ## How to use
 
@@ -308,6 +315,7 @@ TRG
 TRO
 ULT
 UNG
+UNO
 URS
 USR
 UVE
@@ -962,3 +970,13 @@ matches the tier/type given to Norsca's own new lesser-tribe tags the same pass 
 | TLN | `19_lustria` | Tlanxla | start | `PLACEHOLDER` | Tlanxla | City of the Sky (destroyed in the Catastrophe) |
 | SPZ | `19_lustria` | Spektazuma | start | `PLACEHOLDER` | Spektazuma | City of Lenses (ruined) |
 | TLA | `19_lustria` | Tlax | start | `PLACEHOLDER` | Tlax | City of Ghosts (ruined) |
+
+### 98 UNCLAIMED (goblin stand-in) — 1 tag; no formable
+
+Not a region and not a nation: the placeholder owner of land nobody holds at the start date (see
+*Conventions*, board #6391, Chris 2026-10-02). Generator-mapped from the `unowned` and `placeholder`
+owner tokens of `mapgen/derived/state_ownership.json`, never painted.
+
+| TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
+|-----|-------------|--------|------|-----------------|---------------------|-------|
+| UNO | `98_unclaimed` | Unclaimed Lands (placeholder) | start | `goblin` | — | `decentralized`/`principality`; owns every unowned and out-of-scope state; `goblin` is a disclosed stand-in that does not describe the peoples of the land; no capital, no homelands; never renamed into a real polity (#6391) |

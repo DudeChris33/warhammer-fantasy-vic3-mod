@@ -8,4 +8,10 @@ STATES = {
 		add_homeland = cu:reiklander
 		add_homeland = cu:halfling
 	}
+	s:STATE_BETA = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x000004 }
+		}
+	}
 }

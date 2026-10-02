@@ -127,7 +127,9 @@ iconography of the people it stands in for** (no rat device on an `XS*` tag): a
 Skaven charge on goblin pops would assert an identity the tag does not have.
 The block comment says it is a placeholder and that the device is a disclosed
 invention. When the real people get a culture and their own tags, those tags
-get their own heraldry; the placeholder's arms are not migrated.
+get their own heraldry; the placeholder's arms are not migrated. `UNO`
+(Unclaimed Lands, `98_unclaimed.txt`) follows the same rule: goblin stand-in, so
+greenskin house style, with an open hand (`ce_hand`) as its one charge.
 
 ## Wood-elf and ogre house styles
 
