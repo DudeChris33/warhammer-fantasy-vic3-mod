@@ -1,0 +1,6 @@
+building_wheat_farm = {
+	unlocking_technologies = { enclosure }
+	production_method_groups = { pmg_farm }
+	city_type = farm
+	ownership_type = self
+}

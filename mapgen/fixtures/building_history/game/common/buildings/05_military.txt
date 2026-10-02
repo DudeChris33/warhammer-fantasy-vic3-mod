@@ -1,0 +1,4 @@
+building_barrack = {
+	production_method_groups = { pmg_training }
+	city_type = city
+}

@@ -570,12 +570,18 @@ class Plan:
 
 
 def _ownership_mode(b: Building, laws: frozenset[str], resolved: bool) -> str | None:
-    """The private owner building for ``b`` (or None = country-owned), from the tag's starting laws."""
+    """The private owner building for ``b`` (or None = country-owned), from the tag's starting laws.
+    Matches vanilla ``common/history/buildings``: resource buildings (farms, ranches, plantations, mines,
+    logging) are owned by a manor house, industry (incl. shipyards) by a financial district; ports, trade
+    centres, government, military and construction are country-owned. Vanilla never creates the owner
+    buildings itself -- the game makes them from ``add_ownership``."""
     if b.ownership_type != "self" or not resolved:
         return None
     if b.file in RESOURCE_FILES:
         return None if "law_collectivized_agriculture" in laws else AGRI_OWNER
-    return None if "law_command_economy" in laws else PRIVATE_OWNER
+    if b.file == "01_industry.txt":
+        return None if "law_command_economy" in laws else PRIVATE_OWNER
+    return None
 
 
 def _split(total: int, n: int) -> list[int]:
@@ -774,13 +780,12 @@ def _plan_tag(tag, units, ts, prof, cfg, world) -> None:
             for bid, cap in r.capped:
                 if bid == "building_logging_camp":
                     auto(u, bid, int(prof["logging_share"] * cap + 0.5), "profile logging")
-    # ownership buildings (country-owned stubs holding the private shares)
+    # the game creates the owner buildings (manor house / financial district) from add_ownership; their
+    # employment still counts against the job share, so add it here without emitting them
     for u in units:
         for ob, lv in sorted(u.owner_levels.items()):
-            b = world.buildings[ob]
-            pms, _ = choose_pms(b, world.groups, world.pms, ts)
+            pms, _ = choose_pms(world.buildings[ob], world.groups, world.pms, ts)
             assert pms is not None
-            u.placed.insert(0, Placed(ob, lv, pms, None, "ownership building"))
             u.jobs += lv * sum(world.pms[m].jobs for m in pms)
         if u.pop and u.jobs > JOB_SHARE_CAP * u.pop:
             raise BuildingHistoryError(f"{u.key} / c:{u.tag}: {u.jobs} jobs exceed {JOB_SHARE_CAP:.0%} of {u.pop} pops")
@@ -806,9 +811,7 @@ def render_file(units: list[Unit]) -> str:
         for p in u.placed:
             L.append("\t\t\tcreate_building = {")
             L.append(f'\t\t\t\tbuilding = "{p.building}"')
-            if p.why == "ownership building":
-                L.append(f"\t\t\t\tlevel = {p.levels}")
-            elif p.private:
+            if p.private:
                 L.append("\t\t\t\tadd_ownership = {")
                 L.append("\t\t\t\t\tbuilding = {")
                 L.append(f'\t\t\t\t\t\ttype = "{p.private}"')

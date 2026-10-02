@@ -1,14 +1,3 @@
-building_wheat_farm = {
-	unlocking_technologies = { enclosure }
-	production_method_groups = { pmg_farm }
-	city_type = farm
-	ownership_type = self
-}
-building_logging_camp = {
-	production_method_groups = { pmg_log }
-	city_type = wood
-	ownership_type = self
-}
 building_railway = {
 	unlocking_technologies = { railways }
 	production_method_groups = { pmg_rail }
@@ -24,15 +13,6 @@ building_trade_center = {
 	production_method_groups = { pmg_trade }
 	city_type = city
 	ownership_type = self
-}
-building_government_administration = {
-	unlocking_technologies = { tech_bureaucracy }
-	production_method_groups = { pmg_admin }
-	city_type = city
-}
-building_barrack = {
-	production_method_groups = { pmg_training }
-	city_type = city
 }
 building_manor_house = {
 	production_method_groups = { pmg_manor }
