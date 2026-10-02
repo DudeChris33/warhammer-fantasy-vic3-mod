@@ -1,0 +1,165 @@
+﻿DIPLOMACY = {
+	# Lore-grounded starting relations on the vanilla -100..100 scale. Relations are symmetric; each pair is listed once.
+	# Sources: tabletop Warhammer Fantasy Battle canon (army books) and Total War: Warhammer where marked; written from
+	# recall of that canon, not re-verified on the web. Tags with no attested ties are deliberately absent.
+	c:ANM ?= {
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:ARG value = 50 }
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:TLS value = 50 }
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:TRG value = 50 }
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:WYD value = 50 }
+	}
+	c:ARG ?= {
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:TLS value = 50 }
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:TRG value = 50 }
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:WYD value = 50 }
+	}
+	c:COU ?= {
+		# The Crown against accursed Mousillon (WFB Bretonnia army book)
+		set_relations = { country = c:MOU value = -50 }
+		# Bretonnia against the Massif Orcal greenskins (WFB Bretonnia army book)
+		set_relations = { country = c:MOR value = -50 }
+		# Bretonnian knights and Athel Loren: mutual distrust at the forest eaves (WFB Wood Elf/Bretonnia lore; mild - contested)
+		set_relations = { country = c:ANM value = -20 }
+		# Bretonnian knights and Athel Loren: mutual distrust at the forest eaves (WFB Wood Elf/Bretonnia lore; mild - contested)
+		set_relations = { country = c:ARG value = -20 }
+		# Bretonnian knights and Athel Loren: mutual distrust at the forest eaves (WFB Wood Elf/Bretonnia lore; mild - contested)
+		set_relations = { country = c:TLS value = -20 }
+		# Bretonnian knights and Athel Loren: mutual distrust at the forest eaves (WFB Wood Elf/Bretonnia lore; mild - contested)
+		set_relations = { country = c:TRG value = -20 }
+		# Bretonnian knights and Athel Loren: mutual distrust at the forest eaves (WFB Wood Elf/Bretonnia lore; mild - contested)
+		set_relations = { country = c:WYD value = -20 }
+	}
+	c:DRZ ?= {
+		# Red Fangs hold the Black Crag, ex-Karak Drazh (registry note)
+		set_relations = { country = c:RFG value = -60 }
+	}
+	c:KAK ?= {
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:ZHU value = 30 }
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:KAD value = 30 }
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:AZL value = 30 }
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:BVR value = 30 }
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:KNO value = 30 }
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:KHI value = 30 }
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:KIZ value = 30 }
+		# Holds of the Karaz Ankor swear to the High King (WFB Dwarf army book)
+		set_relations = { country = c:KZF value = 30 }
+		# Norse dwarf holds, kin to the Karaz Ankor but isolated (WFB Dwarf lore; weaker tie)
+		set_relations = { country = c:KRD value = 20 }
+		# Norse dwarf holds, kin to the Karaz Ankor but isolated (WFB Dwarf lore; weaker tie)
+		set_relations = { country = c:KOR value = 20 }
+		# Norse dwarf holds, kin to the Karaz Ankor but isolated (WFB Dwarf lore; weaker tie)
+		set_relations = { country = c:KRV value = 20 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:BKA value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:BLV value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:BNR value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:BRN value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:BSB value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:BTO value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:CRM value = -60 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:DLO value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:ICL value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:MOR value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:RDV value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:RED value = -60 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:RFG value = -50 }
+		# Dwarf-greenskin war, the oldest feud in the Old World (WFB Dwarf and Orc & Goblin army books)
+		set_relations = { country = c:SKZ value = -50 }
+		# Dwarfs against their fallen Chaos Dwarf kin (WFB Chaos Dwarf lore)
+		set_relations = { country = c:MZN value = -60 }
+		# Dwarfs against their fallen Chaos Dwarf kin (WFB Chaos Dwarf lore)
+		set_relations = { country = c:GOR value = -60 }
+		# Dwarfs against their fallen Chaos Dwarf kin (WFB Chaos Dwarf lore)
+		set_relations = { country = c:UZK value = -60 }
+		# Elf-Dwarf grudge, War of the Beard; Asrai involvement thin (WFB Dwarf grudge lore - contested)
+		set_relations = { country = c:ANM value = -30 }
+		# Elf-Dwarf grudge, War of the Beard; Asrai involvement thin (WFB Dwarf grudge lore - contested)
+		set_relations = { country = c:ARG value = -30 }
+		# Elf-Dwarf grudge, War of the Beard; Asrai involvement thin (WFB Dwarf grudge lore - contested)
+		set_relations = { country = c:TLS value = -30 }
+		# Elf-Dwarf grudge, War of the Beard; Asrai involvement thin (WFB Dwarf grudge lore - contested)
+		set_relations = { country = c:TRG value = -30 }
+		# Elf-Dwarf grudge, War of the Beard; Asrai involvement thin (WFB Dwarf grudge lore - contested)
+		set_relations = { country = c:WYD value = -30 }
+	}
+	c:KEP ?= {
+		# Skarsnik's Night Goblins against Dwarf reclaimers of Karak Eight Peaks (WFB Skarsnik lore)
+		set_relations = { country = c:CRM value = -60 }
+	}
+	c:KHM ?= {
+		# Nehekhara's cities against vampire Lahmia (WFB Tomb Kings lore)
+		set_relations = { country = c:LAH value = -50 }
+	}
+	c:KSV ?= {
+		# Kislev's northern frontier against the tribes of the Chaos Wastes (WFB Kislev lore)
+		set_relations = { country = c:HAS value = -50 }
+		# Kislev's northern frontier against the tribes of the Chaos Wastes (WFB Kislev lore)
+		set_relations = { country = c:KVE value = -50 }
+		# Kislev's northern frontier against the tribes of the Chaos Wastes (WFB Kislev lore)
+		set_relations = { country = c:VAR value = -50 }
+	}
+	c:MID ?= {
+		# Middenheim vs Talabheim, Ulric vs Taal: the Empire's oldest provincial feud (WFB Empire army book)
+		set_relations = { country = c:TAL value = -30 }
+	}
+	c:NLD ?= {
+		# Norse sea-raiders against the Nordland coast (WFB Warriors of Chaos / Norsca)
+		set_relations = { country = c:SAR value = -40 }
+	}
+	c:PRA ?= {
+		# Praag, gateway city against the northern hordes (WFB Kislev lore)
+		set_relations = { country = c:HAS value = -50 }
+	}
+	c:REI ?= {
+		# Oath of Sigmar and Kurgan Ironbeard - Empire/Dwarf friendship (WFB Empire and Dwarf army books)
+		set_relations = { country = c:KAK value = 60 }
+		# Empire and Kislev, ancient allies (WFB Empire army book; Magnus the Pious at Praag)
+		set_relations = { country = c:KSV value = 50 }
+		# Brass Keep lost to Chaos 2302 IC and contained by the Picket (registry note; WFB Empire)
+		set_relations = { country = c:BRK value = -60 }
+	}
+	c:TLS ?= {
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:TRG value = 50 }
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:WYD value = 50 }
+	}
+	c:TRG ?= {
+		# Realms of Athel Loren share the Wild Hunt and Ariel's rule (Total War: Warhammer wood elf factions)
+		set_relations = { country = c:WYD value = 50 }
+	}
+	c:VSY ?= {
+		# Sylvania's neighbours in the von Carstein wars (WFB Vampire Counts army book)
+		set_relations = { country = c:STI value = -50 }
+		# Sylvania's neighbours in the von Carstein wars (WFB Vampire Counts army book)
+		set_relations = { country = c:OSM value = -50 }
+		# Von Carstein wars against the Emperors (WFB Vampire Counts army book)
+		set_relations = { country = c:REI value = -60 }
+	}
+}
