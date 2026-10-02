@@ -1,3 +1,7 @@
 ﻿l_english:
  MAR:0 "Marienburg"
  MAR_ADJ:0 "Marienburger"
+
+ # Board item #6373 phase A (2026-10-01): newly defined owner tags. BRK collides with vanilla countries_l_english.yml.
+ BRK:0 "Brass Keep"
+ BRK_ADJ:0 "Brass Keep"

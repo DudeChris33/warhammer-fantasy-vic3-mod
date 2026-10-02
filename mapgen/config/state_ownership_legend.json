@@ -102,8 +102,7 @@
     84,
     90
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (00_norsca family)"
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373)."
   },
   "SOR": {
    "name": "Sortsvinaer",
@@ -112,8 +111,7 @@
     90,
     126
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (00_norsca family)"
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373)."
   },
   "URS": {
    "name": "Ursfjordings",
@@ -122,8 +120,7 @@
     78,
     144
    ],
-   "proposed": true,
-   "note": "took over the painted colour of the review-round tag GMD (Goromadny), which duplicated this registry tribe (#6373 D6); its old unpainted colour 126 132 174 is retired"
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373). Took over the painted colour of review tag GMD (Goromadny), merged into this registry tribe (D6); the old unpainted URS colour 126 132 174 is retired."
   },
   "KSV": {
    "name": "Kislev",
@@ -348,8 +345,7 @@
     84,
     42
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (02_empire family)"
+   "note": "defined in common/country_definitions/02_empire.txt (#6373). Culture norscan is a disclosed stand-in for its Chaos garrison."
   },
   "COU": {
    "name": "Couronne",
@@ -2058,8 +2054,7 @@
     72,
     48
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
   },
   "KRV": {
    "name": "Kraka Ravnsvake",
@@ -2068,8 +2063,7 @@
     72,
     42
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
   },
   "KZF": {
    "name": "Karak Ziflin",
@@ -2078,8 +2072,7 @@
     54,
     36
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
   },
   "CRB": {
    "name": "Carroburg",
@@ -2088,117 +2081,106 @@
     162,
     192
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/02_empire.txt (#6373)."
   },
   "XSA": {
-   "name": "Skaven A (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan A (placeholder)",
    "color": [
     150,
     150,
     24
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSB": {
-   "name": "Skaven B (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan B (placeholder)",
    "color": [
     42,
     102,
     18
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSC": {
-   "name": "Skaven C (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan C (placeholder)",
    "color": [
     126,
     120,
     24
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSD": {
-   "name": "Skaven D (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan D (placeholder)",
    "color": [
     24,
     66,
     12
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSG": {
-   "name": "Skaven G (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan E (placeholder)",
    "color": [
     60,
     72,
     12
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/05_southern_realms.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSH": {
-   "name": "Skaven H (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan F (placeholder)",
    "color": [
     138,
     150,
     54
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSI": {
-   "name": "Skaven I (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan G (placeholder)",
    "color": [
     96,
     90,
     24
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSJ": {
-   "name": "Skaven J (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan H (placeholder)",
    "color": [
     102,
     126,
     24
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSK": {
-   "name": "Skaven K (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan I (placeholder)",
    "color": [
     78,
     132,
     42
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSL": {
-   "name": "Skaven L (greenskin placeholder until Skaven tags exist)",
+   "name": "Skaven Clan J (placeholder)",
    "color": [
     48,
     150,
     24
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "KIZ": {
@@ -2208,28 +2190,25 @@
     60,
     54
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
   },
   "VMP": {
-   "name": "Vampire faction (new)",
+   "name": "Kemmler's Host",
    "color": [
     60,
     6,
     42
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373). Heinrich Kemmler the Lichemaster (human lich, not a vampire); culture sylvanian_vampire is a disclosed stand-in."
   },
   "DLO": {
-   "name": "Dark Land Orks",
+   "name": "Dark Land Orcs",
    "color": [
     114,
     150,
     90
    ],
-   "proposed": true,
-   "note": "new tag requested in review; not in planning/tag_registry.md (registry is frozen; append it there if kept)"
+   "note": "defined in common/country_definitions/10_dark_lands.txt (#6373)."
   }
  }
 }

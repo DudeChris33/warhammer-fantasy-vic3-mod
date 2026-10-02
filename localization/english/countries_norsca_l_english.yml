@@ -17,3 +17,11 @@
  HAS_ADJ:0 "Hastling"
  KVE:0 "Kvelligs"
  KVE_ADJ:0 "Kvellig"
+
+ # Board item #6373 phase A (2026-10-01): newly defined owner tags.
+ SOR:0 "Sortsvinaer"
+ SOR_ADJ:0 "Sortsvinaer"
+ URS:0 "Ursfjordings"
+ URS_ADJ:0 "Ursfjording"
+ XSD:0 "Skaven Clan D (placeholder)"
+ XSD_ADJ:0 "Skaven"

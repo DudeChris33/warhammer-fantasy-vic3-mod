@@ -33,3 +33,13 @@
  VSY_ADJ:0 "Sylvanian"
  VEM:0 "The Von Carstein Empire"
  VEM_ADJ:0 "Imperial"
+
+ # Board item #6373 phase A (2026-10-01): newly defined owner tags.
+ CRB:0 "Carroburg"
+ CRB_ADJ:0 "Carroburger"
+ XSA:0 "Skaven Clan A (placeholder)"
+ XSA_ADJ:0 "Skaven"
+ XSB:0 "Skaven Clan B (placeholder)"
+ XSB_ADJ:0 "Skaven"
+ XSC:0 "Skaven Clan C (placeholder)"
+ XSC_ADJ:0 "Skaven"

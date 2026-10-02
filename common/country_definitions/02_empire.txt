@@ -196,3 +196,88 @@ MAR = {
 	cultures = { marienburger }
 	# capital: Marienburg — TODO once land state-regions exist
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): owner tags painted in
+# mapgen/config/state_ownership.png that had no definition yet. COLOUR NOTE: unlike the
+# entries above, every block below copies its colour EXACTLY from
+# mapgen/config/state_ownership_legend.json — the painted ownership map is keyed on that RGB,
+# so the legend wins over this file's reuse-the-culture-colour convention.
+################################################################################
+
+################ BRK — Brass Keep; the Nurgle-held fortress in the Middle Mountains ################
+# Captured in the Great War against Chaos and never retaken; the Empire contains it ("the Picket").
+# CULTURE IS A DISCLOSED STAND-IN: norscan (cross-file ref to common/cultures/norscan_humans.txt)
+# represents its Chaos-worshipping garrison because no Chaos-marauder/cultist culture exists yet
+# (Chris, 2026-10-01). Revisit when an Eastern Steppes marauder culture is authored.
+# unrecognized: no Imperial or foreign power recognises a Chaos-held keep.
+
+BRK = {
+	color = { 84 84 42 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	# capital: Brass Keep — TODO once land state-regions exist
+}
+
+################ CRB — Carroburg; the Middenland free city on the Reik ################
+# A city-state within Middenland's sphere, famed for the Carroburg Greatswords' stand in its siege.
+
+CRB = {
+	color = { 252 162 192 }
+	country_type = recognized
+	tier = city_state
+	cultures = { middenlander }
+	# capital: Carroburg — TODO once land state-regions exist
+}
+
+################ XSA — Skaven Clan A (placeholder); STATE_LAND_376 ################
+# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
+# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
+# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
+# is superseded, not renamed.
+# Filed here by geography: its state sits in map_data/state_regions/02_empire.txt. goblin is a
+# cross-file culture ref to common/cultures/greenskin.txt.
+
+XSA = {
+	color = { 150 150 24 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+}
+
+################ XSB — Skaven Clan B (placeholder); STATE_LAND_485 ################
+# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
+# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
+# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
+# is superseded, not renamed.
+# Filed here by geography: its state sits in map_data/state_regions/02_empire.txt. goblin is a
+# cross-file culture ref to common/cultures/greenskin.txt.
+
+XSB = {
+	color = { 42 102 18 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+}
+
+################ XSC — Skaven Clan C (placeholder); West Talabecland ################
+# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
+# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
+# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
+# is superseded, not renamed.
+# Filed here by geography: STATE_WEST_TALABECLAND sits in map_data/state_regions/02_empire.txt.
+# goblin is a cross-file culture ref to common/cultures/greenskin.txt.
+
+XSC = {
+	color = { 126 120 24 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+}

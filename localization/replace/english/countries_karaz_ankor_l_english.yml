@@ -9,3 +9,7 @@
  KUN_ADJ:0 "Ungori"
  SLV:0 "Mount Silverspear"
  SLV_ADJ:0 "Silverspear"
+
+ # Board item #6373 phase A (2026-10-01): newly defined owner tags. KOR collides with vanilla countries_l_english.yml.
+ KOR:0 "Kraka Ornsmotek"
+ KOR_ADJ:0 "Ornsmotek"
