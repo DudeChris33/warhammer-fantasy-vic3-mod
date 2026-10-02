@@ -1,0 +1,72 @@
+﻿CHARACTERS = {
+	c:REI ?= {
+		create_character = { # Karl-Franz Holswig-Schliestein
+			template = REI_karl_franz_template
+		}
+		create_character = { # Volkmar the Grim
+			template = REI_volkmar_the_grim_template
+		}
+		create_character = { # Balthasar Gelt
+			template = REI_balthasar_gelt_template
+		}
+		create_character = { # Kurt Helborg
+			template = REI_kurt_helborg_template
+		}
+		create_character = { # Ludwig Schwarzhelm
+			template = REI_ludwig_schwarzhelm_template
+		}
+	}
+	c:MID ?= {
+		create_character = { # Boris Todbringer
+			template = MID_boris_todbringer_template
+		}
+		create_character = { # Emil Valgeir
+			template = MID_emil_valgeir_template
+		}
+	}
+	c:NLD ?= {
+		create_character = { # Theoderic Gausser
+			template = NLD_theoderic_gausser_template
+		}
+	}
+	c:HOC ?= {
+		create_character = { # Aldebrand Ludenhof
+			template = HOC_aldebrand_ludenhof_template
+		}
+	}
+	c:OST ?= {
+		create_character = { # Valmir von Raukov
+			template = OST_valmir_von_raukov_template
+		}
+	}
+	c:OSM ?= {
+		create_character = { # Wolfram Hertwig
+			template = OSM_wolfram_hertwig_template
+		}
+	}
+	c:TAL ?= {
+		create_character = { # Helmut Feuerbach
+			template = TAL_helmut_feuerbach_template
+		}
+	}
+	c:STI ?= {
+		create_character = { # Alberich Haupt-Anderssen
+			template = STI_alberich_haupt_anderssen_template
+		}
+	}
+	c:AVE ?= {
+		create_character = { # Marius Leitdorf
+			template = AVE_marius_leitdorf_template
+		}
+	}
+	c:WIS ?= {
+		create_character = { # Emmanuelle von Liebwitz
+			template = WIS_emmanuelle_von_liebwitz_template
+		}
+	}
+	c:VSY ?= {
+		create_character = { # Mannfred von Carstein
+			template = VSY_mannfred_template
+		}
+	}
+}
