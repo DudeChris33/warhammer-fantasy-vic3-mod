@@ -191,7 +191,7 @@ generic-vs-specific, **not the trigger family** — the same family sits on both
 
 | Family (live token) | Resolves against | This mod |
 |---|---|---|
-| `cu:<id>` / `culture[= /?=]` / `has_culture` / `country_has_primary_culture` | `common/cultures/*.txt` | 34 WH cultures; every real-world id dangles |
+| `cu:<id>` / `culture[= /?=]` / `has_culture` / `country_has_primary_culture` | `common/cultures/*.txt` | 36 WH cultures; every real-world id dangles |
 | `c:<TAG>` / `exists`/`home_country`/`owner`/`was_formed_from`/`is_unification_candidate`/`c:TAG ?= {…}` | `common/country_definitions/*.txt` (**not** `planning/tag_registry.md`, which lists unauthored placeholders) | WH tags; `MOR`/`PRA` coincidentally resolve (Massif Orcal/Praag) but are **force-neutralized** — Chris's call, they'd otherwise drive real-world Moroccan/Prussian art for those polities |
 | `rel:<id>` / `religion` / `country_has_state_religion` | `common/religions/00_religions.txt` | `cult_of_*`/`old_faith`/…; catholic/hindu/shinto/… dangle |
 | `has_variable` / `has_global_variable` | (runtime flags) | real-world event flags set only by blanked `events/*` → permanently unset → always neutralize; **never load-errors, so the static classifier is the only authority that catches these** |
