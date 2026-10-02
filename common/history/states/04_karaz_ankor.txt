@@ -5,281 +5,375 @@ STATES = {
 			country = c:KAK
 			owned_provinces = { x0D5763 x162888 x388582 x48411D x49C655 x60DBB2 x69ACD7 x77F10F x7988EF x9D4AA4 xD26DA9 xF0CEF3 }
 		}
+
+		add_homeland = cu:dawi
 	}
 	s:STATE_APUCCINI_MOUNTAINS = {
 		create_state = {
 			country = c:BRN
 			owned_provinces = { x1656DA x36FB77 x5B96F1 x781F61 xB9E5BC xCBA3B0 xD9E7E8 xF9CE6A }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_AXE_BITE_PASS = {
 		create_state = {
 			country = c:KZF
 			owned_provinces = { x7E7EE1 xAE33A6 xBA5E0A }
 		}
+
+		add_homeland = cu:dawi_grey
 	}
 	s:STATE_BLACK_FIRE_PASS = {
 		create_state = {
 			country = c:AVE
 			owned_provinces = { x6F1FEA xBEDBAE xD0E871 }
 		}
+
+		add_homeland = cu:averlander
 	}
 	s:STATE_BLACK_MOUNDS = {
 		create_state = {
 			country = c:KVN
 			owned_provinces = { x069B3F x6D9AB2 x968E80 xAA09A4 xC614F3 xF85707 }
 		}
+
+		add_homeland = cu:dawi
 	}
 	s:STATE_BLACK_MOUNTAINS = {
 		create_state = {
 			country = c:KHI
 			owned_provinces = { x22E788 x55F58C x842046 x92647E xA979DB xE44318 }
 		}
+
+		add_homeland = cu:dawi_grey
 	}
 	s:STATE_BLACK_WATER = {
 		create_state = {
 			country = c:ZHU
 			owned_provinces = { x605E91 x7773EE x7CF9A9 xAF5C3A xB3E2E0 xBF052D xC22718 xD93C75 }
 		}
+
+		add_homeland = cu:dawi
 	}
 	s:STATE_CRIPPLE_PEAK = {
 		create_state = {
 			country = c:XSL
 			owned_provinces = { x1C2691 x1C3939 x4A63F3 xB1DBB4 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_DARK_MAIDEN_PASS = {
 		create_state = {
 			country = c:XSK
 			owned_provinces = { x0E7FF7 xACB770 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_DELVED_HEIGHTS = {
 		create_state = {
 			country = c:RED
 			owned_provinces = { x18ACD5 x217DFA x47265E x49D8FD x4C4AA2 x635FFF x6C3124 x88B994 x918AB9 xB0282A }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_EASTERN_IRRANAS = {
 		create_state = {
 			country = c:VMP
 			owned_provinces = { x391E4D xB4035D xD755C6 xF5D78D }
 		}
+
+		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_EAST_DEATH_PASS = {
 		create_state = {
 			country = c:RFG
 			owned_provinces = { x2C5178 x3A95B0 x68C06A x754C45 x7704A2 xA3692A xD8CD29 }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_EAST_MAD_DOG_PASS = {
 		create_state = {
 			country = c:RFG
 			owned_provinces = { x099CAD x0AA4C4 x2FFE59 x35431A x3E4291 x639C26 x88F5BB x970BA1 xA00B18 xA4F335 xA5010A xA5B150 xC21470 xCE35D2 xE53887 xF8D428 }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_FOREST_OF_GLOOM = {
 		create_state = {
 			country = c:HKN
 			owned_provinces = { x05CF4F x1CE4AC x423E41 x6797D6 x742884 x7EAD33 xA406C8 xE075BA }
 		}
+
+		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_GREY_LADY_PASS = {
 		create_state = {
 			country = c:PAR
 			owned_provinces = { xC71D0A }
 		}
+
+		add_homeland = cu:bretonnian
 	}
 	s:STATE_GROM_RIDGE = {
 		create_state = {
 			country = c:IRN
 			owned_provinces = { x1AA159 x56932A x655483 x879ED5 xA1C375 xC40DC7 xCFEE2F }
 		}
+
+		add_homeland = cu:ogre
 	}
 	s:STATE_IRON_PEAKS = {
 		create_state = {
 			country = c:AZL
 			owned_provinces = { x2D9A89 x4FA3E1 x579B41 x5A7C32 x6EB09E xE19E4E xE9675C }
 		}
+
+		add_homeland = cu:dawi_ancestral
 	}
 	s:STATE_KARAK_EIGHT_PEAKS = {
 		create_state = {
 			country = c:CRM
 			owned_provinces = { x20633B x784DB3 xCBD202 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_LAND_201 = {
 		create_state = {
 			country = c:CRM
 			owned_provinces = { x16852C x52F41E x8691EB xABEB80 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_LAND_487 = {
 		create_state = {
 			country = c:REI
 			owned_provinces = { xB5C98F }
 		}
+
+		add_homeland = cu:reiklander
 	}
 	s:STATE_LAND_500 = {
 		create_state = {
 			country = c:CAR
 			owned_provinces = { xDD17A8 }
 		}
+
+		add_homeland = cu:bretonnian
 	}
 	s:STATE_LAND_506 = {
 		create_state = {
 			country = c:XSJ
 			owned_provinces = { x70A522 xFC1F92 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_LAND_522 = {
 		create_state = {
 			country = c:KEP
 			owned_provinces = { xBE59BA xD251FF xF12B97 xFF6FCF }
 		}
+
+		add_homeland = cu:dawi_ancestral
 	}
 	s:STATE_LAND_526 = {
 		create_state = {
 			country = c:XSH
 			owned_provinces = { xD23182 xE946DF }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_LAND_527 = {
 		create_state = {
 			country = c:KEP
 			owned_provinces = { x3BDEC1 x4A22F9 x7ECDB0 x965259 }
 		}
+
+		add_homeland = cu:dawi_ancestral
 	}
 	s:STATE_LAND_587 = {
 		create_state = {
 			country = c:XSI
 			owned_provinces = { x8338AC xF78B17 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_LAND_603 = {
 		create_state = {
 			country = c:ZND
 			owned_provinces = { x038729 x11CB61 x28E0BE x3724F6 x4E3A53 x5C7E8B x654FB0 x7393E8 x8AA945 x98ED7D xA1BEA2 xB002DA xC71837 xD55C6F xEC71CC xED428F xFAB604 }
 		}
+
+		add_homeland = cu:nehekharan
 	}
 	s:STATE_LAND_604 = {
 		create_state = {
 			country = c:LAH
 			owned_provinces = { x24399B x3B4EF8 x60A88D x7679AC x77BDEA x9D177F xC27114 xD98671 xFEE006 }
 		}
+
+		add_homeland = cu:lahmian_vampire
 	}
 	s:STATE_LAND_605 = {
 		create_state = {
 			country = c:LAH
 			owned_provinces = { x023E18 x2797AD x3EAD0A x64069F x7B1BFC xA07591 xC5CF26 xDCE483 }
 		}
+
+		add_homeland = cu:lahmian_vampire
 	}
 	s:STATE_LAND_606 = {
 		create_state = {
 			country = c:LYB
 			owned_provinces = { x002917 x173E74 x2582AC x3C9809 x5EB8DC x61F19E x6F4067 x7906FB x874B33 x9E6090 xC3BA25 xE913BA xFB86C7 }
 		}
+
+		add_homeland = cu:nehekharan
 	}
 	s:STATE_NEW_LAHMIA = {
 		create_state = {
 			country = c:UZK
 			owned_provinces = { x1116EC x20B20A x2DFC00 x460B9F x558640 x6C9B9D x98675A x9F0301 xA7D426 xA830CA xCD2DBB xDB9270 }
 		}
+
+		add_homeland = cu:dawi_zharr
 	}
 	s:STATE_NORTHERN_WORLD_S_EDGE = {
 		create_state = {
 			country = c:BNR
 			owned_provinces = { x16E6A3 x8FC487 xCC3379 xDA77B1 xF18D0E }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_NORTH_GREY_MOUNTAINS = {
 		create_state = {
 			country = c:KNO
 			owned_provinces = { x0E644D x3A87DB x76F6CD xD8BF54 xFE18E9 }
 		}
+
+		add_homeland = cu:dawi_grey
 	}
 	s:STATE_NOVALONE_PASS = {
 		create_state = {
 			country = c:BRN
 			owned_provinces = { x1A80DC x3FDA71 x5DE819 x668AEC x8A8D9B xF64206 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_OIS_GAP = {
 		create_state = {
 			country = c:GIS
 			owned_provinces = { xA85147 xCF34E7 }
 		}
+
+		add_homeland = cu:bretonnian
 	}
 	s:STATE_OLD_DWARF_ROAD = {
 		create_state = {
 			country = c:BLV
 			owned_provinces = { x03BA4E x1ACFAB x2913E3 x31A40E x4E6D78 x573E9D x6582D5 x6E1300 x7C9832 xA1F1C7 xB035FF xC597D2 xC74B5C xCFDB87 xDE60B9 xECA4F1 xED0668 xF57616 }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_PALE_SISTERS = {
 		create_state = {
 			country = c:SKZ
 			owned_provinces = { x2CE141 x5B0BFB xCB18BA xD4D64C xE22E17 }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_PEAK_PASS = {
 		create_state = {
 			country = c:KAD
 			owned_provinces = { x12D84B x143404 x1D0529 x356397 x494934 x5ABD2C xE1DF48 xF8F4A5 }
 		}
+
+		add_homeland = cu:dawi
 	}
 	s:STATE_SHATTERED_TEETH = {
 		create_state = {
 			country = c:KIZ
 			owned_provinces = { x2C30FB x37C767 x39FCE5 x4B0F66 x59539E x5D20FC x7068FB x877E58 x9E93B5 x9FEF6E xD5FEE0 xFB5875 }
 		}
+
+		add_homeland = cu:dawi
 	}
 	s:STATE_SHINING_MOUNTAINS = {
 		create_state = {
 			country = c:GUN
 			owned_provinces = { x2962B2 x4EBC47 x7415DC x996F71 xB63408 xFB37F8 }
 		}
+
+		add_homeland = cu:dawi
 	}
 	s:STATE_SOUR_CRAGS = {
 		create_state = {
 			country = c:BKA
 			owned_provinces = { x100A02 x397AF1 x462C1C x47BF29 x5ED486 x71D289 x88E7E6 xB8288C xD39B10 xD45458 xDCA85C xDD257D xE46395 xEAB06D }
 		}
+
+		add_homeland = cu:goblin
 	}
 	s:STATE_SOUTHERN_WORLDS_EDGE = {
 		create_state = {
 			country = c:MAH
 			owned_provinces = { x00F9DA x364B31 x4CF142 x5BD318 x5E8A8A x6117D9 x65BEFC x72BA23 x896034 x8B1891 x8F4293 x943D58 x9747C8 x9DB51D x9F3153 xCBB185 xEB28BB xF605DF xFA0A91 }
 		}
+
+		add_homeland = cu:nehekharan
 	}
 	s:STATE_SOUTH_GREY_MOUNTAINS = {
 		create_state = {
 			country = c:KNO
 			owned_provinces = { x2BF4D4 x8DBD5B xB316F0 xCD1FE6 xD813E1 }
 		}
+
+		add_homeland = cu:dawi_grey
 	}
 	s:STATE_THUNDER_PEAKS = {
 		create_state = {
 			country = c:DRZ
 			owned_provinces = { x095BB3 x9DF617 xB2DAC9 xFFBE9E }
 		}
+
+		add_homeland = cu:dawi_ancestral
 	}
 	s:STATE_WEST_DEATH_PASS = {
 		create_state = {
 			country = c:RFG
 			owned_provinces = { x003BBF x21C7F6 x259554 x2E6679 x398D99 x457BD6 x53C00E x58F6FA x6D6C60 x7919A3 x81EAC8 x9B5620 x9E7338 xC0AFB5 xC3CCCD xDAE22A xE10583 }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_WEST_MAD_DOG_PASS = {
 		create_state = {
 			country = c:RFG
 			owned_provinces = { x0D85B5 x689218 x8DEBAD x9EC207 xC1897A xD8345E xD89ED7 xDC5E60 xF9DC3F xFEA8B2 }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_WINTERTEETH_PASS = {
 		create_state = {
 			country = c:WIS
 			owned_provinces = { x0CECEA }
 		}
+
+		add_homeland = cu:wissenlander
 	}
 }
