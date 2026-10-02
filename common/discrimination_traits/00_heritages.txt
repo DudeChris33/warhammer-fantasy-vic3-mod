@@ -30,3 +30,9 @@ heritage_nehekharan = { type = heritage  trait_group = heritage_group_nehekharan
 # Undead — Sylvanian vampires and the damned of Mousillon.
 heritage_vampire = { type = heritage  trait_group = heritage_group_undead }
 heritage_mousillon = { type = heritage  trait_group = heritage_group_undead }
+
+# Elves — the Asrai (wood elves) of Athel Loren and the Old World forests. Board item #6379.
+heritage_asrai = { type = heritage  trait_group = heritage_group_elf }
+
+# Ogres. Board item #6379.
+heritage_ogre = { type = heritage  trait_group = heritage_group_ogre }

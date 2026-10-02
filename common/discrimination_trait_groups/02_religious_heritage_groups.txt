@@ -8,3 +8,7 @@ heritage_group_chaos = { type = heritage }
 heritage_group_greenskin_gods = { type = heritage }
 heritage_group_mortuary_cult = { type = heritage }
 heritage_group_undeath = { type = heritage }
+
+# Elven gods (the Asrai's Isha and Kurnous) and the Great Maw (ogres). Board item #6379.
+heritage_group_elven_gods = { type = heritage }
+heritage_group_great_maw = { type = heritage }

@@ -286,3 +286,21 @@ state_lahmian_vampire_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #6379, wood elves and ogres ----
+
+state_wood_elf_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_ogre_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
