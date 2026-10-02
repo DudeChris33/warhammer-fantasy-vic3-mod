@@ -202,3 +202,90 @@ SKZ = {
 	cultures = { orc }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
 }
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): wood-elf realms painted in
+# mapgen/config/state_ownership.png that had no definition yet. COLOUR NOTE: unlike the
+# entries above, every block below copies its colour EXACTLY from
+# mapgen/config/state_ownership_legend.json — the painted ownership map is keyed on that RGB,
+# so the legend wins over this file's reuse-the-culture-colour convention.
+# Wood-elf realms have no region file of their own; each is filed by the geography of its states.
+# Athel Loren's states sit in map_data/state_regions/03_brettonia.txt, so its six realms live here.
+# wood_elf is a cross-file culture ref to common/cultures/wood_elf.txt (#6379). Every realm is
+# unrecognized/principality, like this file's other non-Bretonnian holdouts (MOR, SKZ): the Asrai
+# keep no diplomatic standing with the human kingdoms.
+################################################################################
+
+################ ANM — Anmyr; a realm of Athel Loren ################
+# Canon realm name (Athel Loren). Filed here by geography: STATE_ANMYR and STATE_LAND_491 sit in
+# map_data/state_regions/03_brettonia.txt.
+
+ANM = {
+	color = { 126 186 96 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: Anmyr — TODO once a capital STATE_* is assigned
+}
+
+################ ARG — Argwylon; a realm of Athel Loren ################
+# Canon realm name (Athel Loren); soft: the Total War: Warhammer faction of the treeman Durthu.
+# Filed here by geography: STATE_ARGWYLON and STATE_LAND_489 sit in
+# map_data/state_regions/03_brettonia.txt.
+
+ARG = {
+	color = { 126 228 150 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: Argwylon — TODO once a capital STATE_* is assigned
+}
+
+################ TLS — Talsyn; a realm of Athel Loren ################
+# Canon realm name (Athel Loren); soft: the Total War: Warhammer faction of Orion, the King in the
+# Woods. Filed here by geography: STATE_TALSYN, STATE_YI_EDRI_ETERNOS and STATE_LAND_096/503/505
+# sit in map_data/state_regions/03_brettonia.txt.
+
+TLS = {
+	color = { 168 228 96 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: Talsyn — TODO once a capital STATE_* is assigned
+}
+
+################ TRG — Torgovann; a realm of Athel Loren ################
+# Canon realm name (Athel Loren). Filed here by geography: STATE_TORGOVANN and STATE_LAND_502 sit
+# in map_data/state_regions/03_brettonia.txt.
+
+TRG = {
+	color = { 72 228 96 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: Torgovann — TODO once a capital STATE_* is assigned
+}
+
+################ WYD — Wydrioth; a realm of Athel Loren ################
+# Canon realm name (Athel Loren). Filed here by geography: STATE_WYDRIOTH and STATE_LAND_371 sit
+# in map_data/state_regions/03_brettonia.txt.
+
+WYD = {
+	color = { 156 228 192 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: Wydrioth — TODO once a capital STATE_* is assigned
+}
+
+################ OKP — Oak of Prophecy; a wood-elf glade beyond Athel Loren's eaves ################
+# Soft: named for its sacred oak. Filed here by geography: STATE_LAND_493 sits in
+# map_data/state_regions/03_brettonia.txt.
+
+OKP = {
+	color = { 126 228 108 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: — none recorded; TODO once a capital STATE_* is assigned
+}

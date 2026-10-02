@@ -396,3 +396,215 @@ DRZ = {
 		instance = { position = { 0.5 0.56 } scale = { 0.38 0.38 } }
 	}
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): coats of arms for the owner tags newly defined at the
+# end of common/country_definitions/04_karaz_ankor.txt (same order). Every texture, pattern and colour-slot
+# count below is confirmed against a real vanilla (or this mod's own) usage, cited per block.
+# Matching flag_definitions blocks are in common/flag_definitions/04_karaz_ankor.txt.
+################################################################################
+
+# KIZ — Karak Izor, the Copper Mountain. Name-derived, soft: a mountain in copper (orange). Field
+# green_dark/brown on the bend: the published hold colour this file's header records for Karak
+# Izor (green & brown) — the same pair KEP's split field took; KIZ uses a bend, not KEP's
+# horizontal split, so the two read apart. Disclosed reuse: ce_roe_mountain.dds is also VLG and
+# DRZ (this file, grey on black) and 05_southern_realms.txt's TRA. Confirmed 2 colour slots (VLG,
+# DRZ, TRA usages).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_mountain.dds), reuse grant 2026-09-07
+KIZ = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "green_dark"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_roe_mountain.dds"
+		color1 = "orange"
+		color2 = "black_light"
+		instance = { position = { 0.5 0.52 } scale = { 0.8 0.8 } }
+	}
+}
+
+# KZF — Karak Ziflin, above Axe Bite Pass. Disclosed invention, name-derived from its pass: crossed
+# axes. Disclosed reuse: ce_roe_axes.dds is also KAD (this file, grey/orange on green/red),
+# 00_norsca.txt's SKA (grey/pearl on red_dark) and 10_dark_lands.txt's GOR (black/grey on brown);
+# KZF takes grey/pearl on a cold blue_steel field, the grey-dwarf tone. Confirmed 2 colour slots
+# (KAD, SKA, GOR usages).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds), reuse grant 2026-09-07
+KZF = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_steel"
+	color2 = "blue_steel"
+
+	colored_emblem = {
+		texture = "ce_roe_axes.dds"
+		color1 = "grey"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# KOR — Kraka Ornsmotek. Name-derived, soft: "Orn" reads as Old Norse orn (eagle), so an eagle's
+# head — a head, not a full-beast eagle. ce_eagle_head is used nowhere else in this mod;
+# confirmed 3 colour slots (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries_2.txt:230,
+# SCN_republic).
+KOR = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	color2 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_eagle_head.dds"
+		color1 = "pearl"
+		color2 = "red_dark"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# KRV — Kraka Ravnsvake. Name-derived, soft: "Ravn" is Norse for raven. Disclosed substitution: no
+# raven art exists in vanilla or the vendored Realms of Exether set, so the falcon stands in,
+# blackened. Disclosed reuse: ce_falcon.dds is also 01_kislev.txt's ROP (black on green_dark) and
+# 03_brettonia.txt's PAR (azure on pearl); KRV is a black bird on a grey field. Confirmed 3 colour
+# slots (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:2562, BIK; ROP, PAR).
+KRV = {
+	pattern = "pattern_solid.tga"
+	color1 = "grey"
+	color2 = "grey"
+
+	colored_emblem = {
+		texture = "ce_falcon.dds"
+		color1 = "black"
+		color2 = "black_light"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# VMP — Kemmler's Host (Heinrich Kemmler, the Lichemaster). Disclosed invention: no banner of
+# Kemmler's is recorded, so a pale death-mask face with green-lit eyes stands in for the lich and
+# the Morrslieb-green light of necromancy, on a black/purple field (purple for the Wind of Death).
+# Disclosed substitution: ce_moon_face is a vanilla moon-with-face charge, read here as a mask.
+# Used nowhere else in this mod; confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:16278, NEP_subject).
+VMP = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "black"
+	color2 = "purple"
+
+	colored_emblem = {
+		texture = "ce_moon_face.dds"
+		color1 = "bone_white"
+		color2 = "morrslieb_green"
+		color3 = "black_light"
+		instance = { position = { 0.5 0.5 } scale = { 0.62 0.62 } }
+	}
+}
+
+# XSH — Skaven Clan F (placeholder). A field gun, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# Disclosed reuse: ce_cannon.dds is 02_empire.txt's WIS (grey/black/orange on white/grey); here
+# dirty_iron with a green barrel on black, oversized and tilted. Confirmed 3 colour slots (vanilla
+# usage, common/coat_of_arms/coat_of_arms/02_countries.txt:6730, DES; also WIS).
+XSH = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_cannon.dds"
+		color1 = "dirty_iron"
+		color2 = "morrslieb_green"
+		color3 = "dirty_iron"
+		instance = { position = { 0.5 0.55 } scale = { 0.85 0.85 } rotation = 345 }
+	}
+}
+
+# XSI — Skaven Clan G (placeholder). A trident, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# Disclosed reuse: ce_trident.dds is 03_brettonia.txt's BOR (white/pearl on purple); here black on
+# saffron, tilted. Confirmed 2 colour slots (BOR's usage).
+XSI = {
+	pattern = "pattern_solid.tga"
+	color1 = "saffron"
+	color2 = "saffron"
+
+	colored_emblem = {
+		texture = "ce_trident.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { position = { 0.47 0.52 } scale = { 0.85 0.85 } rotation = 20 }
+	}
+}
+
+# XSJ — Skaven Clan H (placeholder). A spearhead, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# Disclosed reuse: ce_spearhead.dds is SLV's charge (this file, pearl on tan); here bone on a
+# gore-red/black bend, much larger and tilted. Confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:13646, LAH; also SLV).
+XSJ = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "gore_red"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_spearhead.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.54 0.48 } scale = { 1.0 1.0 } rotation = 30 }
+	}
+}
+
+# XSK — Skaven Clan I (placeholder). Crossed curved blades, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# ce_crossed_scimitars_horizontal is used nowhere else in this mod (03_brettonia.txt's SKZ uses the
+# separate upright ce_crossed_scimitars texture); confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:230, ACE_absolute_monarchy).
+XSK = {
+	pattern = "pattern_solid.tga"
+	color1 = "orc_green"
+	color2 = "orc_green"
+
+	colored_emblem = {
+		texture = "ce_crossed_scimitars_horizontal.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { position = { 0.47 0.53 } scale = { 0.85 0.85 } rotation = 10 }
+	}
+}
+
+# XSL — Skaven Clan J (placeholder). A seven-pointed star, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# ce_star_07 is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/01_subs.txt:1732, sub_CHE_stars).
+XSL = {
+	pattern = "pattern_verical_bicolor_offset.dds"
+	color1 = "black_light"
+	color2 = "grey"
+
+	colored_emblem = {
+		texture = "ce_star_07.dds"
+		color1 = "gore_red"
+		color2 = "gore_red"
+		instance = { position = { 0.55 0.5 } scale = { 0.85 0.85 } rotation = 20 }
+	}
+}

@@ -339,3 +339,161 @@ MAR = {
 		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
 	}
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): coats of arms for the owner tags newly defined at the
+# end of common/country_definitions/02_empire.txt (same order). Every texture, pattern and colour-slot
+# count below is confirmed against a real vanilla (or this mod's own) usage, cited per block.
+# Matching flag_definitions blocks are in common/flag_definitions/02_empire.txt.
+################################################################################
+
+# BRK — Brass Keep. Canon-firm for the holder, disclosed invention for the keep: no heraldry of
+# the keep itself is recorded, so it bears the mark of the god whose followers hold it — Nurgle's
+# three circles, built from three ce_circle instances in a triangle — in brass (yellow_dark, the
+# keep's own name) on a plague-green field. ce_circle is RED's charge in 06_badlands.txt (three
+# concentric rings there, an eye); here three separate small rings in a triad, a different shape.
+# Confirmed 2 colour slots (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:298;
+# also RED).
+BRK = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "yellow_dark"
+		color2 = "yellow_dark"
+		instance = { position = { 0.5 0.36 } scale = { 0.3 0.3 } }
+		instance = { position = { 0.37 0.6 } scale = { 0.3 0.3 } }
+		instance = { position = { 0.63 0.6 } scale = { 0.3 0.3 } }
+	}
+}
+
+# CRB — Carroburg. Soft: the city is famed for the Carroburg Greatswords, whose red uniforms recall
+# the blood of its great siege — so crossed blades in white on red. Disclosed reuse:
+# ce_roe_swords.dds is 05_southern_realms.txt's LUC (dark-red/grey on tan); recoloured white on a
+# red field here. Confirmed 2 colour slots (LUC's usage).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_swords.dds), reuse grant 2026-09-07
+CRB = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "red"
+
+	colored_emblem = {
+		texture = "ce_roe_swords.dds"
+		color1 = "white"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# XSA — Skaven Clan A (placeholder). A chain-net, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# ce_chains is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:16033, NAV).
+XSA = {
+	pattern = "pattern_solid.tga"
+	color1 = "black_light"
+	color2 = "black_light"
+
+	colored_emblem = {
+		texture = "ce_chains.dds"
+		color1 = "dirty_iron"
+		color2 = "gore_red"
+		instance = { position = { 0.53 0.52 } scale = { 0.8 0.8 } rotation = 12 }
+	}
+}
+
+# XSB — Skaven Clan B (placeholder). A torch with a sickly green flame, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# ce_torch is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/01_subs.txt:2405, sub_SIL_coa).
+XSB = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "goblin_moss"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_torch.dds"
+		color1 = "dirty_iron"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.46 0.5 } scale = { 0.85 0.85 } rotation = 20 }
+	}
+}
+
+# XSC — Skaven Clan C (placeholder). A punch-dagger, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# ce_katar is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:1750, AWA_absolute_monarchy).
+XSC = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_katar.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.54 0.5 } scale = { 0.85 0.85 } rotation = 330 }
+	}
+}
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): coats of arms for the wood-elf realms newly defined at
+# the end of common/country_definitions/02_empire.txt (same order). Wood-elf house style
+# (.claude/rules/heraldry.md): autumn/forest palette, one nature or hunt charge, no crowns, crosses
+# or fleurs. Every texture, pattern and colour-slot count below is confirmed against a real vanilla
+# (or this mod's own) usage, cited per block. Matching flag_definitions blocks are in
+# common/flag_definitions/02_empire.txt.
+################################################################################
+
+# GRW — Gryphon Wood (provisional name; Chris will redo it). Name-derived, soft: the gryphon of
+# the wood it holds, dark green on saffron. Disclosed reuse: ce_griffon.dds is REI's (this file,
+# golden on a white/red bend), OSM's (golden on purple) and 05_southern_realms.txt's GAS (golden
+# on tan); GRW recolours it a green_dark beast on a saffron field. Confirmed 3 colour slots (REI
+# and OSM's usages, this file).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_griffon.dds), reuse grant 2026-09-07
+GRW = {
+	pattern = "pattern_solid.tga"
+	color1 = "saffron"
+	color2 = "saffron"
+
+	colored_emblem = {
+		texture = "ce_griffon.dds"
+		color1 = "green_dark"
+		color2 = "brown"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# LAU — Laurelorn. Soft: the unicorns of the elven forests, dark green on dark gold; the unicorn's
+# collar-and-chain detail (slot 2) is set to the body's tone so it reads as a free beast. Disclosed
+# reuse: ce_unicorn.dds is 03_brettonia.txt's QUE (white on green); LAU is a green_dark unicorn on
+# a yellow_dark field. Confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:16514, NEW_coa; also QUE).
+LAU = {
+	pattern = "pattern_solid.tga"
+	color1 = "yellow_dark"
+	color2 = "yellow_dark"
+
+	colored_emblem = {
+		texture = "ce_unicorn.dds"
+		color1 = "green_dark"
+		color2 = "green_dark"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}

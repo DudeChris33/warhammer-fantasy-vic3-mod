@@ -1,0 +1,17 @@
+STATES = {
+	s:STATE_ALPHA = {
+		create_state = {
+			country = c:REI
+			owned_provinces = { x000001 x000002 x000003 }
+		}
+
+		add_homeland = cu:reiklander
+		add_homeland = cu:halfling
+	}
+	s:STATE_BETA = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x000004 }
+		}
+	}
+}

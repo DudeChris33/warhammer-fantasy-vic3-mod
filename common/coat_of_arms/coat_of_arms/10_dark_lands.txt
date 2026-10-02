@@ -126,3 +126,28 @@ HGK = {
 		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
 	}
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): coats of arms for the owner tags newly defined at the
+# end of common/country_definitions/10_dark_lands.txt (same order). Every texture, pattern and colour-slot
+# count below is confirmed against a real vanilla (or this mod's own) usage, cited per block.
+# Matching flag_definitions blocks are in common/flag_definitions/10_dark_lands.txt.
+################################################################################
+
+# DLO — Dark Land Orcs. Disclosed invention, greenskin house style (.claude/rules/heraldry.md):
+# one oversized, skewed choppa — a crude curved blade — on a black/orc-green bend. Avoids every
+# reserved greenskin device (eye, crooked moon, fang-pair, beast-skull, toothed border).
+# ce_scimitar is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:12787, KAL_theocracy).
+DLO = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "black"
+	color2 = "orc_green"
+
+	colored_emblem = {
+		texture = "ce_scimitar.dds"
+		color1 = "dirty_iron"
+		color2 = "dirty_iron"
+		instance = { position = { 0.54 0.48 } scale = { 0.9 0.9 } rotation = 340 }
+	}
+}

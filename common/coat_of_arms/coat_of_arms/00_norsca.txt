@@ -169,3 +169,116 @@ KVE = {
 		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
 	}
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): coats of arms for the owner tags newly defined at the
+# end of common/country_definitions/00_norsca.txt (same order). Every texture, pattern and colour-slot
+# count below is confirmed against a real vanilla (or this mod's own) usage, cited per block.
+# Matching flag_definitions blocks are in common/flag_definitions/00_norsca.txt.
+################################################################################
+
+# SNA — Snaegr. Disclosed invention, name-derived: no device is recorded for this lesser tribe;
+# "Snaegr" reads as Old Norse snaer (snow), so a twelve-pointed star stands in for a snow-crystal
+# (no snowflake art exists in vanilla or the vendored Realms of Exether set). ce_star_12 is used
+# nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:13464, KUT).
+SNA = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "white"
+
+	colored_emblem = {
+		texture = "ce_star_12.dds"
+		color1 = "lapis_blue"
+		color2 = "lapis_blue"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# SOR — Sortsvinaer. Name-derived, soft: "Sortsvinaer" reads as Norse for the black swine, so a
+# black boar. Disclosed reuse: ce_gallic_boar.dds is ICL's secondary charge in
+# 06_badlands.txt (dirty_iron/bone, a small corner mark there); here it is the full black charge
+# on a pearl-over-dark-red field. Confirmed 2 colour slots (06_badlands.txt ICL; Realms of
+# Exether's own 04_west_zalaron.txt:80-84).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_gallic_boar.dds), reuse grant 2026-09-07
+SOR = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "pearl"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_gallic_boar.dds"
+		color1 = "black"
+		color2 = "black_light"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# URS — Ursfjordings. Name-derived, canon-firm: the bear of Ursfjord and of Beorg Bearstruck's
+# Bearmen of Urslo. Disclosed reuse: ce_bear_smo.dds is also BJO's bear (this file, brown on teal),
+# 01_kislev.txt's VOL (brown on ice_blue) and 05_southern_realms.txt's UVE (white on
+# blue_steel); URS is distinguished by a pearl bear on a dark-red/black bend field. Confirmed 2
+# colour slots (VOL and UVE's usages; BJO also sets a third).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_bear_smo.dds), reuse grant 2026-09-07
+URS = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "red_dark"
+	color2 = "black_light"
+
+	colored_emblem = {
+		texture = "ce_bear_smo.dds"
+		color1 = "pearl"
+		color2 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# XSD — Skaven Clan D (placeholder). A four-pointed star, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# ce_star_04 is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:16832, NTU).
+XSD = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "green_dark"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_star_04.dds"
+		color1 = "yellow_dark"
+		color2 = "yellow_dark"
+		instance = { position = { 0.55 0.46 } scale = { 0.82 0.82 } rotation = 15 }
+	}
+}
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): coat of arms for the wood-elf realm newly defined at the
+# end of common/country_definitions/00_norsca.txt. Wood-elf house style
+# (.claude/rules/heraldry.md); texture, pattern and colour-slot count confirmed against a real
+# vanilla usage, cited below. Matching flag_definitions block is in
+# common/flag_definitions/00_norsca.txt.
+################################################################################
+
+# SOT — Sisters of Twilight. Name-derived, disclosed invention: two crescents back to back, one
+# for each twin sister (Naestra and Arahan) and for the twilight they are named for, pearl over a
+# dusk field (purple over the forest's green_dark). A twilight sky is this house style's one
+# palette exception. Built from two ce_crescent instances, the left one mirrored (negative x
+# scale). Adjusted from the scoping suggestion (ce_falcon, which went to MGL). ce_crescent is used
+# nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/01_subs.txt:1786, sub_EGY).
+SOT = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "purple"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_crescent.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.36 0.5 } scale = { -0.5 0.5 } }
+		instance = { position = { 0.64 0.5 } scale = { 0.5 0.5 } }
+	}
+}

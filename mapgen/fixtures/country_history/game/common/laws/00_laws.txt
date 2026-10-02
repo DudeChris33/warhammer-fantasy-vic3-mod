@@ -1,0 +1,26 @@
+# Synthetic laws that exercise every validator rule.
+law_monarchy = { group = lawgroup_governance_principles }
+law_republic = {
+	group = lawgroup_governance_principles
+	unlocking_technologies = { democracy }
+}
+law_autocracy = {
+	group = lawgroup_distribution_of_power
+	disallowing_laws = { law_republic }
+}
+law_landed_voting = {
+	group = lawgroup_distribution_of_power
+	unlocking_technologies = { democracy }
+	disallowing_laws = { law_serfdom }
+}
+law_consumption_tax = { group = lawgroup_taxation }
+law_per_capita_tax = {
+	group = lawgroup_taxation
+	unlocking_technologies = { currency_standards }
+}
+law_serfdom = { group = lawgroup_land_reform }
+law_tenants = { group = lawgroup_land_reform }
+law_estate_rights = {
+	group = lawgroup_land_reform
+	unlocking_laws = { law_republic }
+}

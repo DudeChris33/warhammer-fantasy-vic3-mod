@@ -1,0 +1,6 @@
+﻿l_english:
+ # Country display name and adjective for UNO (planning/tag_registry.md, 98 UNCLAIMED), the
+ # placeholder owner of unowned and out-of-scope land, defined in
+ # common/country_definitions/98_unclaimed.txt (#6391).
+ UNO:0 "Unclaimed Lands"
+ UNO_ADJ:0 "Unclaimed"

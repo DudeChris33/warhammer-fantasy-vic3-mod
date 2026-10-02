@@ -77,3 +77,24 @@ HGK = {
 	cultures = { hobgoblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): owner tags painted in
+# mapgen/config/state_ownership.png that had no definition yet. COLOUR NOTE: unlike the
+# entries above, every block below copies its colour EXACTLY from
+# mapgen/config/state_ownership_legend.json — the painted ownership map is keyed on that RGB,
+# so the legend wins over this file's reuse-the-culture-colour convention.
+################################################################################
+
+################ DLO — Dark Land Orcs; the orc tribes of the Dark Lands ################
+# Canon-soft (a Total War: Warhammer Greenskins faction the registry already reserved for this
+# region). orc is a cross-file culture ref to common/cultures/greenskin.txt; unrecognized like
+# every greenskin tag.
+
+DLO = {
+	color = { 114 150 90 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { orc }
+	# capital: — none recorded; TODO once land state-regions exist
+}

@@ -1,3 +1,7 @@
 ﻿l_english:
  SAR:0 "Sarls"
  SAR_ADJ:0 "Sarl"
+
+ # Board item #6373 phase A (2026-10-01): newly defined owner tags. SNA collides with vanilla countries_l_english.yml.
+ SNA:0 "Snaegr"
+ SNA_ADJ:0 "Snaegr"

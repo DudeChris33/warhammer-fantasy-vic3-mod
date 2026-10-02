@@ -11,3 +11,7 @@
  UZK_ADJ:0 "Uzkulaki"
  HGK:0 "Hobgobla-Khan"
  HGK_ADJ:0 "Hobgobla-Khani"
+
+ # Board item #6373 phase A (2026-10-01): newly defined owner tags.
+ DLO:0 "Dark Land Orcs"
+ DLO_ADJ:0 "Dark Land Orc"

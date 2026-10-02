@@ -9,3 +9,8 @@ heritage_group_dawi_zharr = { type = heritage }
 heritage_group_greenskin = { type = heritage }
 heritage_group_nehekharan = { type = heritage }
 heritage_group_undead = { type = heritage }
+
+# Elves (named for the race so Asur/Druchii may join later) and ogres (no kin race in scope).
+# Board item #6379.
+heritage_group_elf = { type = heritage }
+heritage_group_ogre = { type = heritage }

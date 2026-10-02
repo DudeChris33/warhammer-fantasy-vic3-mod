@@ -16,6 +16,7 @@ Usage::
 
     python mapgen/run_fixture.py --check     # regenerate to temp, diff golden, run twice, validate
     python mapgen/run_fixture.py --update     # (re)write the golden outputs in expected/
+    python mapgen/run_fixture.py --update-country-history   # rewrite only the country-history golden
 
 ``--check`` is the offline gate for P1. It fails (exit 1) on any determinism
 drift, golden mismatch, or validator error.
@@ -4977,7 +4978,411 @@ def _selfcheck_composite_layers_over() -> None:
         raise AssertionError("composite_layers_over([]) should have raised ValueError")
 
 
+def _selfcheck_state_ownership() -> dict:
+    """Starting-ownership map: render -> read round-trips on the synthetic world.
+
+    Drives ``worldgen.state_ownership`` (the core of ``render_state_ownership.py`` /
+    ``read_state_ownership.py``) over the committed golden provinces + state files:
+    whole-state fills, a split state (GAMMA straddles the x=0 seam), a placeholder
+    state (DELTA), border overlay ignored on read, unknown colour / scope mismatch /
+    unassigned-state refusals, byte-stable JSON, and the committed legend loading.
+    """
+    from worldgen import state_ownership as so
+
+    legend = so.parse_legend({
+        "reserved": {"water": [16, 40, 112], "unowned": [255, 255, 255],
+                     "placeholder": [176, 176, 176], "border": [0, 0, 0]},
+        "tags": {"REI": {"color": [178, 58, 58]}, "MID": {"color": [62, 74, 96]}},
+    })
+    states = so.load_land_states(EXPECTED_DIR / "state_regions")
+    prov = raster.read_rgb_png(EXPECTED_DIR / "provinces.png")
+    layout = so.Layout(prov, states)
+    by_key = {s.key: s for s in states}
+    placeholder = {"STATE_DELTA"}
+    gamma = by_key["STATE_GAMMA"].provinces
+    assignment = {
+        "STATE_ALPHA": "REI",
+        "STATE_BETA": "unowned",
+        "STATE_GAMMA": {tok: ("REI" if i < 2 else "MID") for i, tok in enumerate(gamma)},
+    }
+    ids = {s.key: (s.id, None) for s in states}
+
+    owners = so.province_owners(layout, assignment, placeholder, legend)
+    img = so.render(layout, owners, legend, border_width=2)
+    assert (img == np.array(legend.reserved["border"], dtype=np.uint8)).all(axis=2).any(), \
+        "the border overlay must be drawn"
+    doc = so.read(layout, img, legend, placeholder, ids)
+    assert so.assignment_of(doc) == so.normalize_assignment(assignment, layout), \
+        "render -> read must return the assignment"
+    assert doc["STATE_DELTA"]["scope"] == "placeholder" and doc["STATE_DELTA"]["owner"] == "placeholder"
+    assert [o["owner"] for o in doc["STATE_GAMMA"]["owners"]] == ["MID", "REI"], "a split lists its owners"
+    assert so.to_json(doc) == so.to_json(so.read(layout, img, legend, placeholder, ids)), "byte-stable"
+    # seam: border pixels do not vote, so 1 px or 2 px lines read back the same
+    img1 = so.render(layout, owners, legend, border_width=1)
+    assert so.assignment_of(so.read(layout, img1, legend, placeholder, ids)) == so.assignment_of(doc)
+
+    def refuses(fn, frag):
+        try:
+            fn()
+        except so.OwnershipError as exc:
+            assert frag in str(exc), f"expected {frag!r} in {exc}"
+        else:
+            raise AssertionError(f"expected an OwnershipError containing {frag!r}")
+
+    bad = img.copy()
+    ys, xs = np.nonzero(layout.prov > 0)
+    bad[ys[0], xs[0]] = (1, 2, 3)
+    refuses(lambda: so.read(layout, bad, legend, placeholder, ids), "not in the legend")
+    refuses(lambda: so.province_owners(layout, {"STATE_ALPHA": "REI"}, placeholder, legend), "no owner")
+    refuses(lambda: so.province_owners(layout, {**assignment, "STATE_DELTA": "REI"}, placeholder, legend),
+            "must not be assigned")
+    refuses(lambda: so.province_owners(layout, {**assignment, "STATE_ALPHA": "ZZZ"}, placeholder, legend),
+            "not a tag")
+    # a drawn state painted with the placeholder colour is refused on read
+    ph = img.copy()
+    ph[layout.state_index == 1 + [s.key for s in states].index("STATE_ALPHA")] = legend.reserved["placeholder"]
+    refuses(lambda: so.read(layout, ph, legend, placeholder, ids), "placeholder colour")
+    # the committed legend is valid
+    so.load_legend(TOOLS_DIR / "config" / "state_ownership_legend.json")
+    return {"states": doc}
+
+
+def _selfcheck_state_history(ownership_doc: dict) -> None:
+    """Starting ownership as history script (#6372), on the golden assignment of
+    :func:`_selfcheck_state_ownership` (ALPHA=REI, BETA unowned, GAMMA split
+    REI/MID, DELTA placeholder): what is emitted (unowned and placeholder land
+    go to c:UNO, #6391), byte stability, held-back undefined tags (UNO
+    included), the CRLF-insensitive freshness compare, a 3-way split whose
+    unowned slice goes to UNO, and the validator refusing hand-broken history text.
+    """
+    import copy
+
+    from worldgen import state_history as sh
+    from worldgen import state_ownership as so
+
+    by_file = sh.load_states_by_file(EXPECTED_DIR / "state_regions")
+    assert "99_seas.txt" not in by_file and sorted(by_file) == ["01_driftland.txt", "02_isle.txt", "03_mainland.txt"]
+    land = {s.key: s for ss in by_file.values() for s in ss}
+    tags = {"REI", "MID", "UNO"}
+
+    p = sh.plan(ownership_doc, by_file, tags)
+    creates = {k: c for e in p.files.values() for k, c in e}
+    assert [t for t, _ in creates["STATE_ALPHA"]] == ["REI"], "a whole-state owner gets one create_state"
+    assert creates["STATE_ALPHA"][0][1] == sorted(land["STATE_ALPHA"].provinces), \
+        "a whole-state owner owns every province (impassable included)"
+    assert [t for t, _ in creates["STATE_GAMMA"]] == ["MID", "REI"], "a split gets one create_state per owner"
+    assert sorted(t for _, ps in creates["STATE_GAMMA"] for t in ps) == sorted(land["STATE_GAMMA"].provinces)
+    assert creates["STATE_BETA"] == [("UNO", sorted(land["STATE_BETA"].provinces))], \
+        "an unowned state goes wholly to c:UNO"
+    assert creates["STATE_DELTA"] == [("UNO", sorted(land["STATE_DELTA"].provinces))], \
+        "an out-of-scope placeholder state goes wholly to c:UNO"
+    assert p.unowned == ["STATE_BETA"] and p.placeholder == ["STATE_DELTA"] and not p.held_back
+    assert all(p.files.values()) and sh.render_file([]) == sh.HEADER, \
+        "every golden file now carries a state; an empty file is header-only"
+    texts = {f: sh.render_file(e) for f, e in p.files.items()}
+    assert texts == {f: sh.render_file(e) for f, e in sh.plan(ownership_doc, by_file, tags).files.items()}, \
+        "byte-stable"
+    assert "\ts:STATE_ALPHA = {\n\t\tcreate_state = {\n\t\t\tcountry = c:REI\n" in texts["03_mainland.txt"], \
+        "vanilla shape: tabs, s:/c: scopes"
+    # freshness compare ignores a BOM and CRLF (core.autocrlf checkouts)
+    crlf = "\ufeff" + texts["03_mainland.txt"].replace("\n", "\r\n")
+    assert sh.normalize_text(crlf) == texts["03_mainland.txt"]
+    # the emitted files validate clean; the parser round-trips them
+    errs, held = sh.check(texts, ownership_doc, by_file, tags)
+    assert errs == [] and held == [], errs
+    assert sh.parse_history_text(crlf) == [(k, [(t, ps) for t, ps in c]) for k, c in p.files["03_mainland.txt"]]
+
+    # an undefined tag is held back by the generator and reported by the validator
+    hp = sh.plan(ownership_doc, by_file, {"REI", "UNO"})
+    hcreates = {k: c for e in hp.files.values() for k, c in e}
+    assert [t for t, _ in hcreates["STATE_GAMMA"]] == ["REI"] and hp.held_back == [("STATE_GAMMA", "MID")]
+    htexts = {f: sh.render_file(e) for f, e in hp.files.items()}
+    errs, held = sh.check(htexts, ownership_doc, by_file, {"REI", "UNO"})
+    assert errs == [] and held == [("STATE_GAMMA", "MID")], (errs, held)
+    # without a UNO definition the unowned / placeholder states are held back like any undefined owner
+    np_ = sh.plan(ownership_doc, by_file, {"REI", "MID"})
+    ncreates = {k: c for e in np_.files.values() for k, c in e}
+    assert "STATE_BETA" not in ncreates and "STATE_DELTA" not in ncreates and np_.files["02_isle.txt"] == []
+    assert sorted(np_.held_back) == [("STATE_BETA", "UNO"), ("STATE_DELTA", "UNO")], np_.held_back
+    errs, held = sh.check({f: sh.render_file(e) for f, e in np_.files.items()}, ownership_doc, by_file, {"REI", "MID"})
+    assert errs == [] and sorted(held) == [("STATE_BETA", "UNO"), ("STATE_DELTA", "UNO")], (errs, held)
+    # D-tags are runtime slots, not start-date countries; a BOM'd first entry still counts
+    assert sh.parse_country_tags(
+        "\ufeffREI = {\n\tcolor = { 1 2 3 }\n}\n# QQQ = { }\nD00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI"}
+
+    # 3-way split (defined + undefined + unowned): the defined slice is emitted, the
+    # unowned slice becomes a c:UNO slice, the undefined one is held back
+    alpha = sorted(land["STATE_ALPHA"].provinces)
+    split_doc = copy.deepcopy(ownership_doc)
+    split_doc["states"]["STATE_ALPHA"] = {
+        "id": land["STATE_ALPHA"].id, "naming_anchor": None, "scope": "drawn",
+        "owners": [{"owner": "REI", "provinces": alpha[:3]}, {"owner": "ZZZ", "provinces": alpha[3:5]},
+                   {"owner": "unowned", "provinces": alpha[5:]}]}
+    sp = sh.plan(split_doc, by_file, tags)
+    screates = {k: c for e in sp.files.values() for k, c in e}
+    assert screates["STATE_ALPHA"] == [("REI", alpha[:3]), ("UNO", alpha[5:])], screates["STATE_ALPHA"]
+    assert sp.held_back == [("STATE_ALPHA", "ZZZ")] and sp.unowned == ["STATE_BETA"], "a slice is not an unowned state"
+    stexts = {f: sh.render_file(e) for f, e in sp.files.items()}
+    errs, held = sh.check(stexts, split_doc, by_file, tags)
+    assert errs == [] and held == [("STATE_ALPHA", "ZZZ")], errs
+
+    def refused(texts_: dict, frag: str, doc: dict = ownership_doc) -> None:
+        e, _ = sh.check(texts_, doc, by_file, tags)
+        assert any(frag in x for x in e), f"expected {frag!r} in {e}"
+
+    main = texts["03_mainland.txt"]
+    a0 = alpha[0]
+    g0 = sorted(land["STATE_GAMMA"].provinces)[0]
+    # province assigned twice (ALPHA's first province also listed under GAMMA)
+    refused({**texts, "01_driftland.txt": texts["01_driftland.txt"].replace(
+        f"owned_provinces = {{ {g0}", f"owned_provinces = {{ {a0} {g0}", 1)}, "not a province of the state")
+    dup = main.replace(f"owned_provinces = {{ {a0}", f"owned_provinces = {{ {a0} {a0}", 1)
+    refused({**texts, "03_mainland.txt": dup}, "assigned twice")
+    # foreign province (a sea province) in owned_provinces
+    refused({**texts, "03_mainland.txt": main.replace(a0, "xD35EE9", 1)}, "not a province of the state")
+    # unknown c:TAG
+    refused({**texts, "03_mainland.txt": main.replace("c:REI", "c:QQQ")}, "no (non-dynamic) common/country_definitions")
+    # a state in the wrong NN_ file
+    moved = sh.render_file(p.files["03_mainland.txt"])
+    refused({"01_driftland.txt": texts["01_driftland.txt"], "02_isle.txt": moved,
+             "03_mainland.txt": sh.render_file([])}, "belongs in 03_mainland.txt")
+    # another owner on the placeholder state, or its c:UNO block dropped
+    refused({**texts, "02_isle.txt": texts["02_isle.txt"].replace("c:UNO", "c:REI")}, "differ from state_ownership.json")
+    refused({**texts, "02_isle.txt": sh.render_file([])}, "differ from state_ownership.json")
+    # another owner on the unowned state, or its c:UNO block dropped
+    un = sh.render_file([(k, c) if k != "STATE_BETA" else (k, [("REI", c[0][1])]) for k, c in p.files["03_mainland.txt"]])
+    refused({**texts, "03_mainland.txt": un}, "differ from state_ownership.json")
+    no_uno = sh.render_file([(k, c) for k, c in p.files["03_mainland.txt"] if k != "STATE_BETA"])
+    refused({**texts, "03_mainland.txt": no_uno}, "differ from state_ownership.json")
+    # a drawn state painted with the placeholder token is refused by plan() and check()
+    ph_doc = copy.deepcopy(ownership_doc)
+    ph_doc["states"]["STATE_ALPHA"]["owner"] = "placeholder"
+    refused(texts, "drawn state owned by 'placeholder'", ph_doc)
+    try:
+        sh.plan(ph_doc, by_file, tags)
+    except so.OwnershipError:
+        pass
+    else:
+        raise AssertionError("plan() must refuse a drawn state owned by 'placeholder'")
+    # emitted owner differs from the JSON (a repaint read but not regenerated)
+    refused({**texts, "03_mainland.txt": main.replace("c:REI", "c:MID")}, "differ from state_ownership.json")
+    # missing provinces (coverage) and a missing state entirely
+    refused({**texts, "03_mainland.txt": main.replace(f"{a0} ", "", 1)}, "owned_provinces differ")
+    refused({**texts, "03_mainland.txt": sh.render_file([])}, "differ from state_ownership.json")
+    # a missing history file; a stale JSON (id mismatch)
+    refused({k: v for k, v in texts.items() if k != "02_isle.txt"}, "02_isle.txt is missing")
+    stale = copy.deepcopy(ownership_doc)
+    stale["states"]["STATE_ALPHA"]["id"] = 999
+    refused(texts, "map_data id", stale)
+    try:
+        sh.plan(stale, by_file, tags)
+    except so.OwnershipError:
+        pass
+    else:
+        raise AssertionError("plan() must refuse a JSON id that differs from map_data")
+
+    # homelands (#6374): derived from the owners' cultures, UNO contributes none
+    cc = {"REI": ["reiklander", "middenlander"], "MID": ["middenlander", "stirlander"], "UNO": ["wilderness"]}
+    ids = {"reiklander", "middenlander", "stirlander", "wilderness"}
+    assert sh.parse_country_cultures(
+        "﻿REI = {\n\tcultures = { reiklander middenlander }\n}\n# QQQ = { cultures = { zz } }\n"
+        "NOC = {\n\tcolor = { 1 2 3 }\n}\nD00 = {\n\tdynamic_country_definition = yes\n\tcultures = { zz }\n}\n"
+    ) == {"REI": ["reiklander", "middenlander"], "NOC": []}, "tag cultures: ordered, comments/dynamic skipped"
+    assert sh.parse_culture_ids(
+        "﻿# c\nreiklander = {\n\tcolor = rgb{ 1 2 3 }\n\ttraditions = { }\n}\nstirlander = {\n\tobsessions = { }\n}\n"
+    ) == {"reiklander", "stirlander"}, "culture ids: top-level keys only"
+    hp2 = sh.plan(ownership_doc, by_file, tags, cc)
+    assert hp2.homelands == {"STATE_ALPHA": ["reiklander", "middenlander"],
+                             "STATE_GAMMA": ["middenlander", "stirlander", "reiklander"]}, hp2.homelands
+    assert sh.plan(ownership_doc, by_file, tags).homelands == {}, "no cultures supplied, no homelands"
+    assert {f: sh.render_file(e) for f, e in hp2.files.items()} == texts, "render without homelands is unchanged"
+    htx = {f: sh.render_file(e, hp2.homelands) for f, e in hp2.files.items()}
+    assert ("\t\t}\n\n\t\tadd_homeland = cu:reiklander\n\t\tadd_homeland = cu:middenlander\n\t}\n"
+            in htx["03_mainland.txt"]), "vanilla shape: blank line, then one add_homeland per culture"
+    assert sh.parse_homelands("\ufeff" + htx["03_mainland.txt"].replace("\n", "\r\n")) == {
+        k: hp2.homelands[k] for k, _ in hp2.files["03_mainland.txt"] if k in hp2.homelands}
+    assert sh.check(htx, ownership_doc, by_file, tags, cc, ids) == ([], []), "homelands validate clean"
+    assert sh.check(texts, ownership_doc, by_file, tags) == ([], []), "no culture args: homelands not checked"
+    # UNO's states (BETA unowned, DELTA placeholder) get a create_state but no homeland
+    hcreates2 = {k for e in hp2.files.values() for k, _ in e}
+    assert {"STATE_BETA", "STATE_DELTA"} <= hcreates2 and not {"STATE_BETA", "STATE_DELTA"} & set(hp2.homelands)
+
+    def refused_h(texts_: dict, frag: str, cult: dict = cc, cids: set = ids) -> None:
+        e, _ = sh.check(texts_, ownership_doc, by_file, tags, cult, cids)
+        assert any(frag in x for x in e), f"expected {frag!r} in {e}"
+
+    m2 = htx["03_mainland.txt"]
+    refused_h({**htx, "03_mainland.txt": m2.replace("cu:reiklander", "cu:nonesuch")}, "has no common/cultures definition")
+    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:reiklander\n", "")}, "differs from the")
+    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:middenlander\n", "", 1)}, "differs from the")
+    refused_h(texts, "differs from the")                       # homelands never emitted
+    refused_h(htx, "owned state gets no homeland", {**cc, "REI": []})
+    # a homeland on UNO's state is refused (UNO gives none, though it has a culture)
+    uno_home = sh.render_file(hp2.files["03_mainland.txt"], {**hp2.homelands, "STATE_BETA": ["wilderness"]})
+    refused_h({**htx, "03_mainland.txt": uno_home}, "whose owner(s) give no homelands")
+    stray = sh.render_file([e for e in hp2.files["03_mainland.txt"] if e[0] != "STATE_BETA"] + [("STATE_BETA", [])],
+                           {**hp2.homelands, "STATE_BETA": ["reiklander"]})
+    refused_h({**htx, "03_mainland.txt": stray}, "without a create_state")
+
+
+def _selfcheck_country_history(ownership_doc: dict) -> None:
+    """Starting country setup (#6375), on the golden assignment of
+    :func:`_selfcheck_state_ownership` (owners REI and MID, plus UNO for the
+    unowned / placeholder states, #6391): tier -> technology effect, byte
+    stability, the CRLF-insensitive compare, held-back undefined tags, an
+    unmapped tier, and the validator refusing hand-broken text.
+    """
+    from worldgen import country_history as ch
+    from worldgen import state_ownership as so
+
+    tiers = {"REI": "grand_principality", "MID": "city_state", "UNO": "principality"}
+    effects = {"effect_starting_technology_tier_5_tech", "effect_starting_technology_tier_6_tech",
+               "effect_starting_politics_traditional"}
+    p = ch.plan(ownership_doc, tiers)
+    assert p.blocks == [("MID", ["effect_starting_technology_tier_6_tech", ch.POLITICS_EFFECT]),
+                        ("REI", ["effect_starting_technology_tier_5_tech", ch.POLITICS_EFFECT]),
+                        ("UNO", ["effect_starting_technology_tier_6_tech", ch.POLITICS_EFFECT])] \
+        and not p.held_back, "one block per owner (UNO included), sorted, tier -> technology effect"
+    # UNO is an owner only while some state or slice is unowned / placeholder
+    states = ownership_doc["states"]
+    assert ch.owner_tags(ownership_doc) == {"REI", "MID", "UNO"}
+    assert ch.owner_tags({"states": {k: v for k, v in states.items() if k not in ("STATE_BETA", "STATE_DELTA")}}) \
+        == {"REI", "MID"}, "no unowned / placeholder token, no UNO"
+    assert ch.owner_tags({"states": {"STATE_DELTA": states["STATE_DELTA"]}}) == {"UNO"}
+    assert ch.owner_tags({"states": {"STATE_BETA": states["STATE_BETA"]}}) == {"UNO"}
+    text = ch.render(p.blocks)
+    assert text == ch.render(ch.plan(ownership_doc, tiers).blocks), "byte-stable"
+    assert "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n" in text, \
+        "vanilla shape: tabs, c: scope, ?="
+    assert ch.render([]) == ch.HEADER
+    crlf = "﻿" + text.replace("\n", "\r\n")
+    errs, held = ch.check(crlf, ownership_doc, tiers, effects)
+    assert errs == [] and held == [], errs
+    assert ch.parse_history_text(crlf) == p.blocks
+    assert ch.parse_country_tiers("﻿REI = {\n\ttier = kingdom\n}\nXXX = {\n}\n"
+                                  "D00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI": "kingdom", "XXX": None}
+
+    # an undefined owner is held back (no block) and reported
+    hp = ch.plan(ownership_doc, {"REI": "kingdom"})
+    assert [t for t, _ in hp.blocks] == ["REI"] and hp.held_back == ["MID", "UNO"], hp.held_back
+    # a defined owner whose tier has no technology mapping is an error, never a default
+    for bad in ({"REI": "kingdom", "MID": None}, {"REI": "kingdom", "MID": "duchy"}):
+        try:
+            ch.plan(ownership_doc, bad)
+        except so.OwnershipError:
+            pass
+        else:
+            raise AssertionError("plan() must refuse a tier with no starting-technology mapping")
+
+    def refused(text_: str | None, frag: str, tiers_: dict = tiers, effects_: set = effects) -> None:
+        e, _ = ch.check(text_, ownership_doc, tiers_, effects_)
+        assert any(frag in x for x in e), f"expected {frag!r} in {e}"
+
+    refused(None, "is missing")
+    rei = "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n\t\teffect_starting_politics_traditional = yes\n\t}\n"
+    assert rei in text
+    refused(text.replace(rei, ""), "owns a state but has no country history block")
+    refused(text.replace("c:MID", "c:REI"), "appears 2 times")
+    refused(text.replace("c:MID", "c:QQQ"), "no (non-dynamic) common/country_definitions")
+    refused(text.replace("tier_6_tech", "tier_9_tech"), "not a scripted effect")
+    refused(text, "not a scripted effect", effects_=effects - {ch.POLITICS_EFFECT})
+    refused(text.replace("tier_6_tech", "tier_5_tech"), "differs from what the generator emits")
+    extra = text.rstrip("\n")[:-1] + "\tc:ZZZ ?= {\n\t\teffect_starting_politics_traditional = yes\n\t}\n}\n"
+    refused(extra, "has a country history block but owns no state", {**tiers, "ZZZ": "kingdom"})
+
+
+COUNTRY_HISTORY_DIR = TOOLS_DIR / "fixtures" / "country_history"
+COUNTRY_HISTORY_EXPECTED = COUNTRY_HISTORY_DIR / "expected" / "report.txt"
+
+#: Every error class the country-history linter must still report on the broken fixture
+#: files; ``--update`` cannot silently drop one by regenerating the golden report.
+COUNTRY_HISTORY_NEEDLES = (
+    "duplicate key", "baseline missing", "unknown tech_tier", "ruling_igs must be", "missing law group",
+    "not in the tag registry", "is a formable", "registry places it in", "start tag has no entry",
+    "more than one law for", "unknown law group", "unknown law ", "unknown tech ", "unknown interest group",
+    "unknown tax_level", "unknown good", "unknown institution", "is locked: needs tech",
+    "is locked: needs law", "extra tech currency_standards needs", "is disallowed alongside",
+    "possible trigger", "next_election", "laws hold elections", "needs justify.", "has no matching override",
+    "repeats the baseline", "unknown field", "unknown profile", "confidence must be",
+)
+
+
+def _country_history_run(files=None):
+    import validate_country_history as vch
+
+    return vch.run(COUNTRY_HISTORY_DIR / "game", COUNTRY_HISTORY_DIR / "data",
+                   COUNTRY_HISTORY_DIR / "registry.md", files)
+
+
+def _write_country_history_golden() -> None:
+    COUNTRY_HISTORY_EXPECTED.parent.mkdir(parents=True, exist_ok=True)
+    COUNTRY_HISTORY_EXPECTED.write_text(_country_history_run()[1], encoding="utf-8", newline="\n")
+    print(f"wrote country-history golden report to {COUNTRY_HISTORY_EXPECTED}")
+
+
+def check_country_history() -> int:
+    """The starting-country data linter: golden report, determinism, every error class fires."""
+    code, report = _country_history_run()
+    code2, report2 = _country_history_run()
+    if (code, report) != (code2, report2):
+        print("country_history: validator output differs between two runs (non-deterministic).", file=sys.stderr)
+        return 1
+    if code != 1:
+        print("country_history: the broken fixture region files were accepted.", file=sys.stderr)
+        return 1
+    missing = [n for n in COUNTRY_HISTORY_NEEDLES if n not in report]
+    if missing:
+        print(f"country_history: error class(es) no longer reported: {missing}", file=sys.stderr)
+        return 1
+    if "not fully evaluable" not in report:
+        print("country_history: the unresolved-government warning disappeared.", file=sys.stderr)
+        return 1
+    good_code, good_report = _country_history_run(["00_test.json"])
+    if good_code != 0 or "OK 00_test.json: 3 tag(s)" not in good_report:
+        print("country_history: the valid fixture region file was rejected:\n" + good_report, file=sys.stderr)
+        return 1
+    expected = COUNTRY_HISTORY_EXPECTED.read_text(encoding="utf-8")
+    if report != expected:
+        import difflib
+
+        print("country_history: report differs from the golden copy:", file=sys.stderr)
+        sys.stderr.writelines(difflib.unified_diff(expected.splitlines(True), report.splitlines(True),
+                                                   "expected/report.txt", "regenerated"))
+        return 1
+    print("country_history: laws/techs/government-trigger linter (unknown ids, group cardinality, locked and "
+          "disallowed laws, formable/registry rules, justification bookkeeping, profiles, determinism) "
+          "matches the golden report.")
+    return 0
+
+
+def _selfcheck_pop_history() -> None:
+    """Starting pops (#6375): golden output, determinism, exact sums, a split state, a skipped owner and
+    culture, a religion override, a dropped sub-minimum pop, and the hard-error refusals, on
+    ``mapgen/fixtures/pop_history/``."""
+    import generate_pop_history
+
+    generate_pop_history.run_fixture_check(TOOLS_DIR / "fixtures" / "pop_history")
+
+
 def run_check() -> int:
+    # Stdlib-only and independent of the map goldens, so it runs (and can fail) first.
+    rc = check_country_history()
+    if rc != 0:
+        return rc
+    ownership_doc = _selfcheck_state_ownership()
+    print("state_ownership: render -> read round-trip (whole + split + placeholder states, seam, refusals, "
+          "byte-stable JSON, committed legend) self-check passed.")
+    _selfcheck_state_history(ownership_doc)
+    print("state_history: create_state emission (whole + split, unowned + placeholder -> c:UNO, held-back "
+          "tag incl. UNO, 3-way split with a UNO slice, CRLF compare, hand-broken history refusals incl. a "
+          "dropped or replaced c:UNO) and add_homeland derivation (owner cultures, UNO skip, unknown-culture "
+          "refusal) self-check passed.")
+    _selfcheck_country_history(ownership_doc)
+    print("country_history: tier -> starting-technology blocks (UNO from the unowned/placeholder tokens, "
+          "held-back tags, unmapped tier, CRLF compare, hand-broken history refusals) self-check passed.")
+    _selfcheck_pop_history()
+    print("pop_history: pops/population emission (split state, skipped owner + culture, religion override, "
+          "exact-sum rounding, dropped small pop, hard errors) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")
@@ -5180,6 +5585,8 @@ def run_update() -> int:
         shutil.rmtree(BOUNDARY_EXPECTED)
     build_boundary(BOUNDARY_EXPECTED)
     print(f"wrote boundary golden outputs to {BOUNDARY_EXPECTED}")
+
+    _write_country_history_golden()
     return 0
 
 
@@ -5190,7 +5597,12 @@ def main(argv: list[str] | None = None) -> int:
     group.add_argument("--update", action="store_true", help="(re)write the golden outputs")
     group.add_argument("--update-fixture-manifest", action="store_true",
                        help="refresh the ingestion fixture's SHA-256 manifest (after make_source.py)")
+    group.add_argument("--update-country-history", action="store_true",
+                       help="rewrite only the country-history linter's golden report")
     args = parser.parse_args(argv)
+    if args.update_country_history:
+        _write_country_history_golden()
+        return 0
     if args.update_fixture_manifest:
         _update_fixture_manifest(INGEST_MANIFEST, INGEST_DIR)
         _update_fixture_manifest(BOUNDARY_MANIFEST, BOUNDARY_DIR)

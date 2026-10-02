@@ -1,0 +1,2200 @@
+{
+ "_comment": "Colour language of state_ownership.png. reserved = water (sea+lakes), unowned land, out-of-scope placeholder land, thin state-border line. tags = every start tag of planning/tag_registry.md (formables own nothing at start and are omitted). color = the tag's colour in common/country_definitions/ where one exists; 'nudged_from' marks a colour moved (CIELAB dE76 < 6 to another entry, or < 10 to a neighbouring owner); 'proposed': true marks a tag with no country definition yet (colour picked from a region hue family, dE >= 6 from every other entry). Every colour is unique. Hand-authored input: edit deliberately, then re-read the PNG.",
+ "reserved": {
+  "water": [
+   16,
+   40,
+   112
+  ],
+  "unowned": [
+   255,
+   255,
+   255
+  ],
+  "placeholder": [
+   176,
+   176,
+   176
+  ],
+  "border": [
+   0,
+   0,
+   0
+  ]
+ },
+ "tags": {
+  "SAR": {
+   "name": "Sarls",
+   "color": [
+    96,
+    124,
+    148
+   ]
+  },
+  "AES": {
+   "name": "Aeslings",
+   "color": [
+    128,
+    108,
+    140
+   ]
+  },
+  "BAE": {
+   "name": "Baersonlings",
+   "color": [
+    108,
+    122,
+    118
+   ]
+  },
+  "BJO": {
+   "name": "Bjornlings",
+   "color": [
+    86,
+    138,
+    146
+   ]
+  },
+  "SKA": {
+   "name": "Skaelings",
+   "color": [
+    140,
+    94,
+    90
+   ]
+  },
+  "GRA": {
+   "name": "Graelings",
+   "color": [
+    92,
+    106,
+    158
+   ]
+  },
+  "VAR": {
+   "name": "Varg",
+   "color": [
+    118,
+    118,
+    128
+   ]
+  },
+  "HAS": {
+   "name": "Hastlings",
+   "color": [
+    74,
+    110,
+    104
+   ]
+  },
+  "KVE": {
+   "name": "Kvelligs",
+   "color": [
+    100,
+    92,
+    112
+   ]
+  },
+  "SNA": {
+   "name": "Snaegr",
+   "color": [
+    54,
+    84,
+    90
+   ],
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373)."
+  },
+  "SOR": {
+   "name": "Sortsvinaer",
+   "color": [
+    78,
+    90,
+    126
+   ],
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373)."
+  },
+  "URS": {
+   "name": "Ursfjordings",
+   "color": [
+    78,
+    78,
+    144
+   ],
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373). Took over the painted colour of review tag GMD (Goromadny), merged into this registry tribe (D6); the old unpainted URS colour 126 132 174 is retired."
+  },
+  "KSV": {
+   "name": "Kislev",
+   "color": [
+    122,
+    146,
+    178
+   ]
+  },
+  "ERE": {
+   "name": "Erengrad",
+   "color": [
+    84,
+    152,
+    160
+   ]
+  },
+  "PRA": {
+   "name": "Praag",
+   "color": [
+    148,
+    86,
+    96
+   ]
+  },
+  "UNG": {
+   "name": "Ungol Horse-Tribes",
+   "color": [
+    148,
+    138,
+    106
+   ]
+  },
+  "TRO": {
+   "name": "Troll Country",
+   "color": [
+    132,
+    148,
+    156
+   ]
+  },
+  "BOL": {
+   "name": "Bolgasgrad",
+   "color": [
+    110,
+    122,
+    150
+   ],
+   "nudged_from": [
+    108,
+    124,
+    150
+   ],
+   "note": "nudged: definition colour was within dE 4.3 of SAR"
+  },
+  "VOL": {
+   "name": "Volksgrad",
+   "color": [
+    139,
+    161,
+    190
+   ],
+   "nudged_from": [
+    138,
+    160,
+    190
+   ],
+   "note": "nudged: definition colour was within dE 5.6 of KSV"
+  },
+  "DOL": {
+   "name": "Dolgan",
+   "color": [
+    166,
+    150,
+    112
+   ]
+  },
+  "ROP": {
+   "name": "Roppsmenn",
+   "color": [
+    124,
+    132,
+    110
+   ]
+  },
+  "REI": {
+   "name": "Reikland",
+   "color": [
+    178,
+    58,
+    58
+   ]
+  },
+  "MID": {
+   "name": "Middenland",
+   "color": [
+    62,
+    74,
+    96
+   ]
+  },
+  "NLD": {
+   "name": "Nordland",
+   "color": [
+    44,
+    92,
+    116
+   ]
+  },
+  "HOC": {
+   "name": "Hochland",
+   "color": [
+    74,
+    112,
+    62
+   ]
+  },
+  "OST": {
+   "name": "Ostland",
+   "color": [
+    85,
+    88,
+    103
+   ],
+   "nudged_from": [
+    86,
+    88,
+    104
+   ],
+   "note": "nudged: definition colour was within dE 5.4 of KVE"
+  },
+  "OSM": {
+   "name": "Ostermark",
+   "color": [
+    122,
+    102,
+    72
+   ]
+  },
+  "TAL": {
+   "name": "Talabecland",
+   "color": [
+    90,
+    116,
+    70
+   ],
+   "nudged_from": [
+    88,
+    118,
+    68
+   ],
+   "note": "nudged: definition colour was within dE 4.4 of HOC"
+  },
+  "STI": {
+   "name": "Stirland",
+   "color": [
+    132,
+    62,
+    92
+   ]
+  },
+  "AVE": {
+   "name": "Averland",
+   "color": [
+    214,
+    182,
+    58
+   ]
+  },
+  "WIS": {
+   "name": "Wissenland",
+   "color": [
+    112,
+    112,
+    134
+   ]
+  },
+  "SOL": {
+   "name": "Solland",
+   "color": [
+    168,
+    138,
+    52
+   ]
+  },
+  "MOO": {
+   "name": "The Moot",
+   "color": [
+    150,
+    172,
+    92
+   ]
+  },
+  "SYL": {
+   "name": "Sylvania (human)",
+   "color": [
+    62,
+    52,
+    72
+   ]
+  },
+  "VSY": {
+   "name": "Sylvania (Vampire)",
+   "color": [
+    94,
+    32,
+    44
+   ]
+  },
+  "MAR": {
+   "name": "Marienburg (the Wasteland)",
+   "color": [
+    46,
+    130,
+    122
+   ]
+  },
+  "BRK": {
+   "name": "Brass Keep",
+   "color": [
+    84,
+    84,
+    42
+   ],
+   "note": "defined in common/country_definitions/02_empire.txt (#6373). Culture norscan is a disclosed stand-in for its Chaos garrison."
+  },
+  "COU": {
+   "name": "Couronne",
+   "color": [
+    66,
+    104,
+    168
+   ]
+  },
+  "LYO": {
+   "name": "Lyonesse",
+   "color": [
+    96,
+    140,
+    196
+   ]
+  },
+  "ART": {
+   "name": "Artois",
+   "color": [
+    164,
+    138,
+    64
+   ],
+   "nudged_from": [
+    168,
+    140,
+    60
+   ],
+   "note": "nudged: definition colour was within dE 3.1 of SOL"
+  },
+  "GIS": {
+   "name": "Gisoreaux",
+   "color": [
+    122,
+    92,
+    150
+   ]
+  },
+  "MNF": {
+   "name": "Montfort",
+   "color": [
+    88,
+    112,
+    128
+   ]
+  },
+  "BAS": {
+   "name": "Bastonne",
+   "color": [
+    196,
+    168,
+    72
+   ]
+  },
+  "AQU": {
+   "name": "Aquitaine",
+   "color": [
+    42,
+    122,
+    138
+   ]
+  },
+  "QUE": {
+   "name": "Quenelles",
+   "color": [
+    76,
+    132,
+    90
+   ]
+  },
+  "CAR": {
+   "name": "Carcassonne",
+   "color": [
+    176,
+    96,
+    52
+   ]
+  },
+  "BRI": {
+   "name": "Brionne",
+   "color": [
+    148,
+    62,
+    74
+   ]
+  },
+  "BOR": {
+   "name": "Bordeleaux",
+   "color": [
+    122,
+    48,
+    96
+   ]
+  },
+  "LAN": {
+   "name": "L'Anguille",
+   "color": [
+    59,
+    148,
+    164
+   ],
+   "nudged_from": [
+    60,
+    148,
+    164
+   ],
+   "note": "nudged: definition colour was within dE 5.9 of ERE"
+  },
+  "PAR": {
+   "name": "Parravon",
+   "color": [
+    158,
+    158,
+    178
+   ]
+  },
+  "MOU": {
+   "name": "Mousillon",
+   "color": [
+    46,
+    58,
+    46
+   ]
+  },
+  "MOR": {
+   "name": "Massif Orcal",
+   "color": [
+    92,
+    118,
+    56
+   ]
+  },
+  "SKZ": {
+   "name": "Skullsmasherz",
+   "color": [
+    73,
+    112,
+    51
+   ],
+   "nudged_from": [
+    72,
+    110,
+    54
+   ],
+   "note": "nudged: definition colour was within dE 3.5 of HOC"
+  },
+  "KAK": {
+   "name": "Karaz-a-Karak",
+   "color": [
+    156,
+    44,
+    40
+   ]
+  },
+  "ZHU": {
+   "name": "Zhufbar",
+   "color": [
+    184,
+    78,
+    44
+   ]
+  },
+  "KAD": {
+   "name": "Karak Kadrin",
+   "color": [
+    200,
+    112,
+    56
+   ]
+  },
+  "AZL": {
+   "name": "Karak Azul",
+   "color": [
+    128,
+    86,
+    52
+   ]
+  },
+  "KEP": {
+   "name": "Karak Eight Peaks",
+   "color": [
+    152,
+    108,
+    62
+   ]
+  },
+  "BVR": {
+   "name": "Barak Varr",
+   "color": [
+    136,
+    48,
+    68
+   ],
+   "nudged_from": [
+    140,
+    52,
+    66
+   ],
+   "note": "nudged: definition colour was within dE 3.6 of BRI"
+  },
+  "KNO": {
+   "name": "Karak Norn",
+   "color": [
+    115,
+    129,
+    141
+   ],
+   "nudged_from": [
+    118,
+    126,
+    138
+   ],
+   "note": "nudged: definition colour was within dE 4.1 of VAR"
+  },
+  "KHI": {
+   "name": "Karak Hirn",
+   "color": [
+    88,
+    100,
+    111
+   ],
+   "nudged_from": [
+    96,
+    104,
+    118
+   ],
+   "note": "nudged again: adjacent to WIS on the map, needed dE>=10"
+  },
+  "KRD": {
+   "name": "Kraka Drak",
+   "color": [
+    96,
+    140,
+    168
+   ]
+  },
+  "KAG": {
+   "name": "Karak Angazbar",
+   "color": [
+    100,
+    68,
+    42
+   ]
+  },
+  "KUN": {
+   "name": "Karak Ungor",
+   "color": [
+    122,
+    78,
+    74
+   ]
+  },
+  "KVN": {
+   "name": "Karak Varn",
+   "color": [
+    104,
+    72,
+    76
+   ]
+  },
+  "EKR": {
+   "name": "Ekrund",
+   "color": [
+    117,
+    99,
+    79
+   ],
+   "nudged_from": [
+    118,
+    100,
+    80
+   ],
+   "note": "nudged: definition colour was within dE 6.0 of OSM"
+  },
+  "GUN": {
+   "name": "Mount Gunbad",
+   "color": [
+    131,
+    95,
+    83
+   ],
+   "nudged_from": [
+    134,
+    92,
+    84
+   ],
+   "note": "nudged: definition colour was within dE 3.0 of SKA"
+  },
+  "DRZ": {
+   "name": "Karak Drazh",
+   "color": [
+    92,
+    78,
+    64
+   ]
+  },
+  "VLG": {
+   "name": "Karak Vlag",
+   "color": [
+    96,
+    64,
+    60
+   ],
+   "nudged_from": [
+    96,
+    66,
+    68
+   ],
+   "note": "nudged: definition colour was within dE 3.1 of KVN | nudged again: adjacent to UZK on the map, needed dE>=10"
+  },
+  "SLV": {
+   "name": "Mount Silverspear",
+   "color": [
+    146,
+    108,
+    102
+   ],
+   "nudged_from": [
+    146,
+    106,
+    100
+   ],
+   "note": "nudged: definition colour was within dE 5.1 of SKA"
+  },
+  "MIR": {
+   "name": "Miragliano",
+   "color": [
+    176,
+    132,
+    68
+   ]
+  },
+  "LUC": {
+   "name": "Luccini",
+   "color": [
+    198,
+    158,
+    96
+   ]
+  },
+  "REM": {
+   "name": "Remas",
+   "color": [
+    160,
+    104,
+    64
+   ],
+   "nudged_from": [
+    158,
+    106,
+    62
+   ],
+   "note": "nudged: definition colour was within dE 3.8 of KEP"
+  },
+  "TOB": {
+   "name": "Tobaro",
+   "color": [
+    96,
+    138,
+    128
+   ]
+  },
+  "TRA": {
+   "name": "Trantio",
+   "color": [
+    186,
+    142,
+    96
+   ]
+  },
+  "PAV": {
+   "name": "Pavona",
+   "color": [
+    142,
+    118,
+    74
+   ]
+  },
+  "VER": {
+   "name": "Verezzo",
+   "color": [
+    168,
+    152,
+    96
+   ]
+  },
+  "DON": {
+   "name": "Donalba",
+   "color": [
+    120,
+    82,
+    128
+   ]
+  },
+  "SRT": {
+   "name": "Sartosa",
+   "color": [
+    42,
+    20,
+    24
+   ]
+  },
+  "BIL": {
+   "name": "Bilbali",
+   "color": [
+    190,
+    96,
+    74
+   ]
+  },
+  "MAG": {
+   "name": "Magritta",
+   "color": [
+    169,
+    64,
+    55
+   ],
+   "nudged_from": [
+    172,
+    62,
+    56
+   ],
+   "note": "nudged: definition colour was within dE 4.0 of REI"
+  },
+  "CNT": {
+   "name": "Cantonia",
+   "color": [
+    206,
+    148,
+    74
+   ]
+  },
+  "BPR": {
+   "name": "Border Princes",
+   "color": [
+    132,
+    116,
+    96
+   ]
+  },
+  "ORT": {
+   "name": "Ortegeta",
+   "color": [
+    156,
+    92,
+    72
+   ]
+  },
+  "GAS": {
+   "name": "Gastonne",
+   "color": [
+    158,
+    128,
+    78
+   ]
+  },
+  "GDO": {
+   "name": "Gordorno",
+   "color": [
+    168,
+    112,
+    92
+   ]
+  },
+  "MON": {
+   "name": "Monteaux",
+   "color": [
+    151,
+    81,
+    70
+   ],
+   "nudged_from": [
+    150,
+    84,
+    68
+   ],
+   "note": "nudged: definition colour was within dE 3.5 of ORT"
+  },
+  "AQL": {
+   "name": "Aquilena",
+   "color": [
+    103,
+    112,
+    116
+   ],
+   "nudged_from": [
+    108,
+    116,
+    120
+   ],
+   "note": "nudged: definition colour was within dE 5.1 of VAR"
+  },
+  "DUN": {
+   "name": "Dunkelmund",
+   "color": [
+    176,
+    116,
+    64
+   ]
+  },
+  "ESS": {
+   "name": "Esselhafen",
+   "color": [
+    140,
+    96,
+    74
+   ]
+  },
+  "RAA": {
+   "name": "Raachwald",
+   "color": [
+    110,
+    116,
+    78
+   ]
+  },
+  "UVE": {
+   "name": "Uvetovsk",
+   "color": [
+    93,
+    118,
+    153
+   ],
+   "nudged_from": [
+    96,
+    120,
+    150
+   ],
+   "note": "nudged: definition colour was within dE 4.2 of SAR"
+  },
+  "HKN": {
+   "name": "Harkon",
+   "color": [
+    105,
+    43,
+    47
+   ],
+   "nudged_from": [
+    104,
+    42,
+    46
+   ],
+   "note": "nudged: definition colour was within dE 5.9 of VSY"
+  },
+  "PON": {
+   "name": "Pontenne",
+   "color": [
+    72,
+    64,
+    104
+   ]
+  },
+  "RED": {
+   "name": "Red Eye",
+   "color": [
+    96,
+    124,
+    50
+   ]
+  },
+  "CRM": {
+   "name": "Crooked Moon",
+   "color": [
+    42,
+    62,
+    38
+   ]
+  },
+  "BKA": {
+   "name": "Broken Axe",
+   "color": [
+    46,
+    82,
+    50
+   ],
+   "nudged_from": [
+    54,
+    74,
+    42
+   ],
+   "note": "nudged again: adjacent to CRM on the map, needed dE>=10"
+  },
+  "RFG": {
+   "name": "Red Fangs",
+   "color": [
+    78,
+    100,
+    40
+   ]
+  },
+  "ICL": {
+   "name": "Ironclaw",
+   "color": [
+    113,
+    129,
+    57
+   ],
+   "nudged_from": [
+    110,
+    132,
+    58
+   ],
+   "note": "nudged: definition colour was within dE 4.4 of RED"
+  },
+  "BSB": {
+   "name": "Bloody Sunz",
+   "color": [
+    64,
+    96,
+    43
+   ],
+   "nudged_from": [
+    66,
+    96,
+    42
+   ],
+   "note": "nudged: definition colour was within dE 5.1 of RFG"
+  },
+  "BNR": {
+   "name": "Bonerattlaz",
+   "color": [
+    90,
+    107,
+    55
+   ],
+   "nudged_from": [
+    88,
+    108,
+    52
+   ],
+   "note": "nudged: definition colour was within dE 4.3 of RFG"
+  },
+  "BTO": {
+   "name": "Broken Tooth",
+   "color": [
+    103,
+    114,
+    42
+   ],
+   "nudged_from": [
+    102,
+    116,
+    44
+   ],
+   "note": "nudged: definition colour was within dE 5.1 of ICL"
+  },
+  "BRN": {
+   "name": "Broken Nose",
+   "color": [
+    38,
+    51,
+    32
+   ],
+   "nudged_from": [
+    36,
+    54,
+    34
+   ],
+   "note": "nudged: definition colour was within dE 4.2 of CRM"
+  },
+  "BLV": {
+   "name": "Black Venom",
+   "color": [
+    51,
+    64,
+    27
+   ],
+   "nudged_from": [
+    48,
+    66,
+    30
+   ],
+   "note": "nudged: definition colour was within dE 4.5 of BKA"
+  },
+  "RDV": {
+   "name": "Redvenom",
+   "color": [
+    57,
+    83,
+    43
+   ],
+   "nudged_from": [
+    60,
+    80,
+    46
+   ],
+   "note": "nudged: definition colour was within dE 2.7 of BKA"
+  },
+  "KHM": {
+   "name": "Khemri",
+   "color": [
+    204,
+    178,
+    96
+   ]
+  },
+  "ZND": {
+   "name": "Zandri",
+   "color": [
+    108,
+    150,
+    148
+   ]
+  },
+  "NUM": {
+   "name": "Numas",
+   "color": [
+    190,
+    160,
+    84
+   ]
+  },
+  "LAH": {
+   "name": "Lahmia",
+   "color": [
+    108,
+    34,
+    78
+   ]
+  },
+  "LYB": {
+   "name": "Lybaras",
+   "color": [
+    118,
+    158,
+    140
+   ]
+  },
+  "RAS": {
+   "name": "Rasetra",
+   "color": [
+    167,
+    135,
+    73
+   ],
+   "nudged_from": [
+    166,
+    134,
+    72
+   ],
+   "note": "nudged: definition colour was within dE 6.0 of MIR"
+  },
+  "MAH": {
+   "name": "Mahrak",
+   "color": [
+    180,
+    154,
+    106
+   ],
+   "nudged_from": [
+    178,
+    156,
+    104
+   ],
+   "note": "nudged: definition colour was within dE 3.8 of VER"
+  },
+  "QUA": {
+   "name": "Quatar",
+   "color": [
+    196,
+    186,
+    150
+   ]
+  },
+  "BHA": {
+   "name": "Bhagar",
+   "color": [
+    213,
+    166,
+    91
+   ],
+   "nudged_from": [
+    210,
+    168,
+    92
+   ],
+   "note": "nudged again: adjacent to KHM on the map, needed dE>=10"
+  },
+  "KAS": {
+   "name": "Ka-Sabar",
+   "color": [
+    152,
+    111,
+    53
+   ],
+   "nudged_from": [
+    150,
+    108,
+    56
+   ],
+   "note": "nudged: definition colour was within dE 3.1 of KEP"
+  },
+  "MZN": {
+   "name": "Mingol Zharr-Naggrund",
+   "color": [
+    72,
+    60,
+    58
+   ]
+  },
+  "GOR": {
+   "name": "Gorgoth",
+   "color": [
+    108,
+    62,
+    44
+   ]
+  },
+  "UZK": {
+   "name": "Uzkulak",
+   "color": [
+    86,
+    82,
+    74
+   ],
+   "nudged_from": [
+    90,
+    78,
+    72
+   ],
+   "note": "nudged: definition colour was within dE 5.1 of DRZ | nudged again: adjacent to MZN on the map, needed dE>=10"
+  },
+  "HGK": {
+   "name": "Hobgobla-Khan",
+   "color": [
+    118,
+    128,
+    74
+   ]
+  },
+  "AHK": {
+   "name": "Al-Haikk",
+   "color": [
+    246,
+    186,
+    150
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "COP": {
+   "name": "Copher",
+   "color": [
+    246,
+    228,
+    156
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "LSK": {
+   "name": "Lashiek",
+   "color": [
+    246,
+    150,
+    66
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "MTK": {
+   "name": "Martek",
+   "color": [
+    246,
+    156,
+    108
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "BEL": {
+   "name": "Bel-Aliad",
+   "color": [
+    246,
+    222,
+    114
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "ELK": {
+   "name": "El-Kalabad",
+   "color": [
+    246,
+    180,
+    78
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "FYR": {
+   "name": "Fyrus",
+   "color": [
+    246,
+    216,
+    66
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "ORG": {
+   "name": "Knights of Origo",
+   "color": [
+    240,
+    198,
+    138
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "ANT": {
+   "name": "Antoch",
+   "color": [
+    204,
+    156,
+    132
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (08_araby family)"
+  },
+  "ZLA": {
+   "name": "Zlatlan",
+   "color": [
+    48,
+    186,
+    48
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "TPK": {
+   "name": "Top-knotz",
+   "color": [
+    78,
+    186,
+    108
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "BHZ": {
+   "name": "Bloody Handz",
+   "color": [
+    138,
+    186,
+    48
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "BCB": {
+   "name": "Boneclubs",
+   "color": [
+    42,
+    132,
+    36
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "SNK": {
+   "name": "Snakeskinz",
+   "color": [
+    114,
+    186,
+    138
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "HHZ": {
+   "name": "Headhuntaz",
+   "color": [
+    108,
+    150,
+    42
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "WWG": {
+   "name": "Waaagh-Waaagh",
+   "color": [
+    90,
+    174,
+    60
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "WSK": {
+   "name": "White Skullz",
+   "color": [
+    84,
+    150,
+    78
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (09_southlands family)"
+  },
+  "GGT": {
+   "name": "Goldtooth",
+   "color": [
+    126,
+    54,
+    24
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "IRN": {
+   "name": "Ironskin",
+   "color": [
+    78,
+    24,
+    12
+   ],
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
+  },
+  "GLG": {
+   "name": "Golgfag's Maneaters",
+   "color": [
+    132,
+    78,
+    24
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "MAW": {
+   "name": "Disciples of the Maw",
+   "color": [
+    78,
+    42,
+    36
+   ],
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
+  },
+  "BGZ": {
+   "name": "Blood Guzzlers",
+   "color": [
+    102,
+    60,
+    18
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "EYB": {
+   "name": "Eyebiter",
+   "color": [
+    174,
+    48,
+    30
+   ],
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
+  },
+  "RSK": {
+   "name": "Rock Skulls",
+   "color": [
+    78,
+    42,
+    18
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "CXC": {
+   "name": "Crossed Clubs",
+   "color": [
+    168,
+    132,
+    108
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "AGF": {
+   "name": "Angry Fist",
+   "color": [
+    108,
+    36,
+    24
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "THG": {
+   "name": "Thunderguts",
+   "color": [
+    150,
+    54,
+    24
+   ],
+   "note": "defined in common/country_definitions/11_ogre_kingdoms.txt (#6373). Ogre tribe (ogre culture); filed by registry region, not state geography."
+  },
+  "FSM": {
+   "name": "Feastmaster",
+   "color": [
+    162,
+    96,
+    30
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "SOM": {
+   "name": "Sons of the Mountain",
+   "color": [
+    150,
+    72,
+    24
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (11_ogre_kingdoms family)"
+  },
+  "KUR": {
+   "name": "Kurgan",
+   "color": [
+    150,
+    24,
+    54
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (12_eastern_steppes family)"
+  },
+  "HUN": {
+   "name": "Hung",
+   "color": [
+    114,
+    18,
+    36
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (12_eastern_steppes family)"
+  },
+  "KUL": {
+   "name": "Kul",
+   "color": [
+    72,
+    36,
+    48
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (12_eastern_steppes family)"
+  },
+  "TON": {
+   "name": "Tong",
+   "color": [
+    138,
+    48,
+    48
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (12_eastern_steppes family)"
+  },
+  "WEI": {
+   "name": "Imperial Provinces (Wei-jin)",
+   "color": [
+    252,
+    0,
+    0
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "NGA": {
+   "name": "Northern Provinces (Nan-Gau)",
+   "color": [
+    252,
+    24,
+    78
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "SHY": {
+   "name": "Western Provinces (Shang-Yang)",
+   "color": [
+    252,
+    96,
+    132
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "SHW": {
+   "name": "Central Provinces (Shang Wu)",
+   "color": [
+    234,
+    90,
+    18
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "FUC": {
+   "name": "Eastern Provinces (Fu-Chow)",
+   "color": [
+    252,
+    102,
+    90
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "FUH": {
+   "name": "Southern Provinces (Fu-Hung)",
+   "color": [
+    210,
+    0,
+    24
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "GBS": {
+   "name": "The Great Bastion",
+   "color": [
+    210,
+    36,
+    78
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "MKY": {
+   "name": "Mountains of Heaven",
+   "color": [
+    198,
+    78,
+    108
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "SKT": {
+   "name": "The Sky-Titans",
+   "color": [
+    252,
+    126,
+    78
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "DGF": {
+   "name": "The Grand Dragon Fleet",
+   "color": [
+    186,
+    60,
+    0
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (13_cathay family)"
+  },
+  "LOT": {
+   "name": "Eataine (Lothern)",
+   "color": [
+    126,
+    138,
+    252
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "CAL": {
+   "name": "Caledor",
+   "color": [
+    126,
+    240,
+    252
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "SAP": {
+   "name": "Saphery",
+   "color": [
+    180,
+    186,
+    252
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "NGY": {
+   "name": "Nagarythe",
+   "color": [
+    132,
+    210,
+    252
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "TIR": {
+   "name": "Tiranoc",
+   "color": [
+    210,
+    216,
+    246
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "CHR": {
+   "name": "Chrace",
+   "color": [
+    162,
+    210,
+    216
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "AVL": {
+   "name": "Avelorn",
+   "color": [
+    126,
+    162,
+    252
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "YVR": {
+   "name": "Yvresse",
+   "color": [
+    108,
+    120,
+    204
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "ELL": {
+   "name": "Ellyrion",
+   "color": [
+    126,
+    186,
+    252
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "COT": {
+   "name": "Cothique",
+   "color": [
+    114,
+    180,
+    204
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family)"
+  },
+  "NGD": {
+   "name": "Naggarond",
+   "color": [
+    114,
+    24,
+    138
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (18_naggaroth family)"
+  },
+  "HAR": {
+   "name": "Har Ganeth",
+   "color": [
+    30,
+    12,
+    54
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (18_naggaroth family)"
+  },
+  "GHR": {
+   "name": "Ghrond",
+   "color": [
+    78,
+    18,
+    90
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (18_naggaroth family)"
+  },
+  "CLK": {
+   "name": "Clar Karond",
+   "color": [
+    138,
+    24,
+    114
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (18_naggaroth family)"
+  },
+  "KKR": {
+   "name": "Karond Kar",
+   "color": [
+    54,
+    24,
+    138
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (18_naggaroth family)"
+  },
+  "HGF": {
+   "name": "Hag Graef",
+   "color": [
+    90,
+    60,
+    138
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (18_naggaroth family)"
+  },
+  "SKG": {
+   "name": "Skeggi",
+   "color": [
+    0,
+    216,
+    192
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "ITZ": {
+   "name": "Itza",
+   "color": [
+    0,
+    216,
+    114
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "HEX": {
+   "name": "Hexoatl",
+   "color": [
+    0,
+    192,
+    198
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "XLA": {
+   "name": "Xlanhuapec",
+   "color": [
+    0,
+    156,
+    126
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "TLX": {
+   "name": "Tlaxtlan",
+   "color": [
+    0,
+    216,
+    156
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "CHQ": {
+   "name": "Chaqua",
+   "color": [
+    0,
+    156,
+    204
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "PAH": {
+   "name": "Pahuax",
+   "color": [
+    0,
+    90,
+    66
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "XAH": {
+   "name": "Xahutec",
+   "color": [
+    0,
+    114,
+    54
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "QTZ": {
+   "name": "Quetza",
+   "color": [
+    90,
+    180,
+    162
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "HUA": {
+   "name": "Huatl",
+   "color": [
+    0,
+    168,
+    72
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "OYX": {
+   "name": "Oyxl",
+   "color": [
+    0,
+    180,
+    210
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "XHO": {
+   "name": "Xhotl",
+   "color": [
+    0,
+    150,
+    90
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "AXL": {
+   "name": "Axlotl",
+   "color": [
+    102,
+    216,
+    168
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "CHU": {
+   "name": "Chupayotl",
+   "color": [
+    0,
+    180,
+    132
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "KON": {
+   "name": "Konquata",
+   "color": [
+    102,
+    216,
+    204
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "TLN": {
+   "name": "Tlanxla",
+   "color": [
+    0,
+    96,
+    96
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "SPZ": {
+   "name": "Spektazuma",
+   "color": [
+    0,
+    120,
+    90
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "TLA": {
+   "name": "Tlax",
+   "color": [
+    0,
+    156,
+    156
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (19_lustria family)"
+  },
+  "SOT": {
+   "name": "Sisters of Twilight",
+   "color": [
+    168,
+    228,
+    132
+   ],
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373). Wood-elf realm (wood_elf culture). Filed by the geography of the Forest of Sighs."
+  },
+  "GRW": {
+   "name": "Gryphon Wood",
+   "color": [
+    138,
+    228,
+    60
+   ],
+   "note": "defined in common/country_definitions/02_empire.txt (#6373). Wood-elf realm (wood_elf culture). Name provisional (Chris will revisit)."
+  },
+  "LAU": {
+   "name": "Laurelorn",
+   "color": [
+    60,
+    228,
+    60
+   ],
+   "note": "defined in common/country_definitions/02_empire.txt (#6373). Wood-elf realm (wood_elf culture)."
+  },
+  "OKP": {
+   "name": "Oak of Prophecy",
+   "color": [
+    126,
+    228,
+    108
+   ],
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
+  },
+  "MGL": {
+   "name": "Miramar Glade",
+   "color": [
+    186,
+    216,
+    150
+   ],
+   "note": "defined in common/country_definitions/05_southern_realms.txt (#6373). Wood-elf realm (wood_elf culture). Name provisional (Chris will revisit)."
+  },
+  "WYD": {
+   "name": "Wydrioth",
+   "color": [
+    156,
+    228,
+    192
+   ],
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
+  },
+  "ARG": {
+   "name": "Argwylon",
+   "color": [
+    126,
+    228,
+    150
+   ],
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
+  },
+  "TLS": {
+   "name": "Talsyn",
+   "color": [
+    168,
+    228,
+    96
+   ],
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
+  },
+  "ANM": {
+   "name": "Anmyr",
+   "color": [
+    126,
+    186,
+    96
+   ],
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
+  },
+  "TRG": {
+   "name": "Torgovann",
+   "color": [
+    72,
+    228,
+    96
+   ],
+   "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
+  },
+  "KOR": {
+   "name": "Kraka Ornsmotek",
+   "color": [
+    156,
+    72,
+    48
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
+  },
+  "KRV": {
+   "name": "Kraka Ravnsvake",
+   "color": [
+    132,
+    72,
+    42
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
+  },
+  "KZF": {
+   "name": "Karak Ziflin",
+   "color": [
+    78,
+    54,
+    36
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
+  },
+  "CRB": {
+   "name": "Carroburg",
+   "color": [
+    252,
+    162,
+    192
+   ],
+   "note": "defined in common/country_definitions/02_empire.txt (#6373)."
+  },
+  "XSA": {
+   "name": "Skaven Clan A (placeholder)",
+   "color": [
+    150,
+    150,
+    24
+   ],
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSB": {
+   "name": "Skaven Clan B (placeholder)",
+   "color": [
+    42,
+    102,
+    18
+   ],
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSC": {
+   "name": "Skaven Clan C (placeholder)",
+   "color": [
+    126,
+    120,
+    24
+   ],
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSD": {
+   "name": "Skaven Clan D (placeholder)",
+   "color": [
+    24,
+    66,
+    12
+   ],
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSG": {
+   "name": "Skaven Clan E (placeholder)",
+   "color": [
+    60,
+    72,
+    12
+   ],
+   "note": "defined in common/country_definitions/05_southern_realms.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSH": {
+   "name": "Skaven Clan F (placeholder)",
+   "color": [
+    138,
+    150,
+    54
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSI": {
+   "name": "Skaven Clan G (placeholder)",
+   "color": [
+    96,
+    90,
+    24
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSJ": {
+   "name": "Skaven Clan H (placeholder)",
+   "color": [
+    102,
+    126,
+    24
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSK": {
+   "name": "Skaven Clan I (placeholder)",
+   "color": [
+    78,
+    132,
+    42
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "XSL": {
+   "name": "Skaven Clan J (placeholder)",
+   "color": [
+    48,
+    150,
+    24
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "placeholder_for": "Skaven"
+  },
+  "KIZ": {
+   "name": "Karak Izor",
+   "color": [
+    126,
+    60,
+    54
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373)."
+  },
+  "VMP": {
+   "name": "Kemmler's Host",
+   "color": [
+    60,
+    6,
+    42
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373). Heinrich Kemmler the Lichemaster (human lich, not a vampire); culture sylvanian_vampire is a disclosed stand-in."
+  },
+  "DLO": {
+   "name": "Dark Land Orcs",
+   "color": [
+    114,
+    150,
+    90
+   ],
+   "note": "defined in common/country_definitions/10_dark_lands.txt (#6373)."
+  }
+ }
+}

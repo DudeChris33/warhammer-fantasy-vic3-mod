@@ -8,3 +8,8 @@ sphere_group_kislevarin = { type = language }
 sphere_group_norscan = { type = language }
 sphere_group_nehekharan = { type = language }
 sphere_group_greenskin = { type = language }
+
+# Eltharin (elven tongues; Fan-Eltharin now, others may join later) and Grumbarth (ogres).
+# Board item #6379.
+sphere_group_eltharin = { type = language }
+sphere_group_grumbarth = { type = language }

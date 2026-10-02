@@ -1,0 +1,739 @@
+{
+ "_comment": [
+  "Per-state culture/religion mix, keyed on canon state key + naming anchor (never the Hilbert STATE number).",
+  "Default mix: the state's homelands (common/history/states add_homeland), the owner's primary cultures counting double.",
+  "'tags': a tag-wide default mix (shares sum to exactly 100). 'states': mode 'add' = minorities (shares sum < 100) are carved out of the default; mode 'replace' = the full mix (sum exactly 100).",
+  "religion only where it differs from the culture's default; pop_type only where deliberate ('slaves' only where the owner's slavery law allows it)."
+ ],
+ "tags": {
+  "BNR": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "BSB": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "BTO": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "ICL": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "RED": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "RFG": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "SKZ": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "MOR": {
+   "mix": [
+    {
+     "culture": "orc",
+     "share": 65,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orcs the core of the tribe."
+    },
+    {
+     "culture": "goblin",
+     "share": 35,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Night goblin hangers-on."
+    }
+   ]
+  },
+  "BKA": {
+   "mix": [
+    {
+     "culture": "goblin",
+     "share": 75,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Goblin tribe."
+    },
+    {
+     "culture": "orc",
+     "share": 25,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orc bosses and boyz."
+    }
+   ]
+  },
+  "BLV": {
+   "mix": [
+    {
+     "culture": "goblin",
+     "share": 75,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Goblin tribe."
+    },
+    {
+     "culture": "orc",
+     "share": 25,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orc bosses and boyz."
+    }
+   ]
+  },
+  "BRN": {
+   "mix": [
+    {
+     "culture": "goblin",
+     "share": 75,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Goblin tribe."
+    },
+    {
+     "culture": "orc",
+     "share": 25,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orc bosses and boyz."
+    }
+   ]
+  },
+  "CRM": {
+   "mix": [
+    {
+     "culture": "goblin",
+     "share": 75,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Goblin tribe."
+    },
+    {
+     "culture": "orc",
+     "share": 25,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orc bosses and boyz."
+    }
+   ]
+  },
+  "RDV": {
+   "mix": [
+    {
+     "culture": "goblin",
+     "share": 75,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Goblin tribe."
+    },
+    {
+     "culture": "orc",
+     "share": 25,
+     "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
+     "why": "Orc bosses and boyz."
+    }
+   ]
+  },
+  "VSY": {
+   "mix": [
+    {
+     "culture": "sylvanian",
+     "share": 90,
+     "source": "canon: Sylvania's population is mostly cowed human peasantry under vampire rule (WFB Vampire Counts)",
+     "why": "Living Sylvanian peasants."
+    },
+    {
+     "culture": "sylvanian_vampire",
+     "share": 10,
+     "source": "canon: Sylvania's population is mostly cowed human peasantry under vampire rule (WFB Vampire Counts)",
+     "why": "Vampires, thralls and the risen dead."
+    }
+   ]
+  },
+  "HKN": {
+   "mix": [
+    {
+     "culture": "sylvanian",
+     "share": 60,
+     "source": "inferred",
+     "why": "Forest of Gloom living folk."
+    },
+    {
+     "culture": "sylvanian_vampire",
+     "share": 40,
+     "source": "inferred",
+     "why": "Von Carstein-line undead."
+    }
+   ]
+  },
+  "LAH": {
+   "mix": [
+    {
+     "culture": "nehekharan",
+     "share": 85,
+     "source": "inferred: Lahmia's living Nehekharans",
+     "why": "Living folk of the Lahmian lands."
+    },
+    {
+     "culture": "lahmian_vampire",
+     "share": 15,
+     "source": "canon: Lahmian vampires rule from the Lahmia ruins (WFB Vampire Counts)",
+     "why": "Lahmian court and thralls."
+    }
+   ]
+  }
+ },
+ "states": [
+  {
+   "key": "STATE_REIKLAND_PROPER",
+   "anchor": [
+    4067,
+    872
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "dawi",
+     "share": 4,
+     "source": "canon: dwarfs and halflings are common minorities in Imperial cities (WFRP Empire)",
+     "why": "Altdorf's Dwarf quarter."
+    },
+    {
+     "culture": "halfling",
+     "share": 3,
+     "source": "canon: dwarfs and halflings are common minorities in Imperial cities (WFRP Empire)",
+     "why": "Halfling cooks and merchants."
+    },
+    {
+     "culture": "middenlander",
+     "share": 5,
+     "religion": "cult_of_ulric",
+     "source": "canon: Altdorf draws from every province (WFRP Death on the Reik)",
+     "why": "Ulrican Middenlanders in the capital."
+    }
+   ]
+  },
+  {
+   "key": "STATE_WISSENLAND",
+   "anchor": [
+    4125,
+    968
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "dawi",
+     "share": 6,
+     "source": "canon: Nuln's Gunnery School and Engineers' Guild employ many Dwarfs (WFB Empire)",
+     "why": "Nuln's Dwarf engineers."
+    },
+    {
+     "culture": "halfling",
+     "share": 2,
+     "source": "canon: dwarfs and halflings are common minorities in Imperial cities (WFRP Empire)",
+     "why": "Halfling traders."
+    }
+   ]
+  },
+  {
+   "key": "STATE_MARIENBURG",
+   "anchor": [
+    3963,
+    785
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "halfling",
+     "share": 4,
+     "source": "canon: Marienburg is the most cosmopolitan city of the Old World (WFB Marienburg)",
+     "why": "Halfling community."
+    },
+    {
+     "culture": "dawi",
+     "share": 4,
+     "source": "canon: as above",
+     "why": "Dwarf Rijkers' Guild merchants."
+    },
+    {
+     "culture": "high_elf",
+     "share": 3,
+     "source": "canon: Marienburg's Elf Quarter (Elfsgate), Ulthuan traders (WFB Marienburg)",
+     "why": "Elven traders; no high-elf culture exists yet, so the pop is skipped and reported."
+    }
+   ]
+  },
+  {
+   "key": "STATE_MOOTLAND",
+   "anchor": [
+    4292,
+    965
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "reiklander",
+     "share": 8,
+     "source": "canon: Imperial settlers and Sigmarite priests live in the Moot (WFRP Realm of the Halflings)",
+     "why": "Human villagers beside the halfling majority."
+    }
+   ]
+  },
+  {
+   "key": "STATE_MIDDENLAND_PROPER",
+   "anchor": [
+    4113,
+    795
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "middenlander",
+     "share": 14,
+     "religion": "cult_of_sigmar",
+     "source": "canon: Sigmarite converts live in Ulric's heartland (WFRP Middenland)",
+     "why": "Sigmarite Middenlanders vs Ulrican majority."
+    }
+   ]
+  },
+  {
+   "key": "STATE_LAND_334",
+   "anchor": [
+    4153,
+    746
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "middenlander",
+     "share": 6,
+     "religion": "cult_of_sigmar",
+     "source": "canon: Middenheim is the Ulric cult's seat but hosts a Sigmarite quarter (WFRP Middenheim: City of Chaos)",
+     "why": "Sigmarite Middenlanders."
+    },
+    {
+     "culture": "dawi",
+     "share": 3,
+     "source": "canon: dwarfs and halflings are common minorities in Imperial cities (WFRP Empire)",
+     "why": "Middenheim's Dwarf quarter."
+    }
+   ]
+  },
+  {
+   "key": "STATE_SOUTH_MIDDENLAND",
+   "anchor": [
+    4155,
+    808
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "middenlander",
+     "share": 12,
+     "religion": "cult_of_sigmar",
+     "source": "canon: as Middenland Proper",
+     "why": "Sigmarite Middenlanders on the Reik border."
+    }
+   ]
+  },
+  {
+   "key": "STATE_SOUTH_TALABECLAND",
+   "anchor": [
+    4186,
+    873
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "talabeclander",
+     "share": 20,
+     "religion": "cult_of_sigmar",
+     "source": "canon: Sigmar's cult is strong in Imperial river towns (WFRP Empire)",
+     "why": "Sigmarite Talabeclanders around Kemperbad."
+    }
+   ]
+  },
+  {
+   "key": "STATE_SOUTH_OSTLAND",
+   "anchor": [
+    4282,
+    762
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "ostlander",
+     "share": 12,
+     "religion": "cult_of_sigmar",
+     "source": "canon: Wolfenburg and the Sigmarite south (WFRP Empire)",
+     "why": "Sigmarite Ostlanders."
+    }
+   ]
+  },
+  {
+   "key": "STATE_EAST_NORDLAND",
+   "anchor": [
+    4138,
+    676
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "nordlander",
+     "share": 10,
+     "religion": "cult_of_sigmar",
+     "source": "canon: Salzenmund's salt trade draws Sigmarites (WFRP Empire)",
+     "why": "Sigmarite Nordlanders."
+    }
+   ]
+  },
+  {
+   "key": "STATE_HOCHLAND",
+   "anchor": [
+    4221,
+    771
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "hochlander",
+     "share": 10,
+     "religion": "cult_of_sigmar",
+     "source": "canon: Sigmar's cult in Hergig (WFRP Empire)",
+     "why": "Sigmarite Hochlanders."
+    }
+   ]
+  },
+  {
+   "key": "STATE_THE_DOBRYRION",
+   "anchor": [
+    4442,
+    735
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "ungol",
+     "share": 10,
+     "source": "canon: Kislev city hosts steppe folk (WFRP Realm of the Ice Queen)",
+     "why": "Ungol traders."
+    },
+    {
+     "culture": "reiklander",
+     "share": 3,
+     "source": "canon: Imperial merchants trade at Kislev (WFRP)",
+     "why": "Imperial merchants."
+    },
+    {
+     "culture": "dawi",
+     "share": 2,
+     "source": "canon: dwarfs and halflings are common minorities in Imperial cities (WFRP Empire)",
+     "why": "Dwarf traders."
+    }
+   ]
+  },
+  {
+   "key": "STATE_ERENGRAD",
+   "anchor": [
+    4332,
+    647
+   ],
+   "mode": "replace",
+   "mix": [
+    {
+     "culture": "gospodar",
+     "share": 80,
+     "source": "canon: Erengrad is a Kislevite port (WFRP Realm of the Ice Queen)",
+     "why": "Gospodar majority."
+    },
+    {
+     "culture": "ungol",
+     "share": 20,
+     "source": "inferred",
+     "why": "Steppe folk at the port."
+    }
+   ]
+  },
+  {
+   "key": "STATE_PEAK_PASS",
+   "anchor": [
+    4450,
+    885
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "dawi",
+     "share": 8,
+     "pop_type": "soldiers",
+     "source": "canon: Karak Kadrin is the Slayer Keep (WFB Dwarfs)",
+     "why": "Slayer shrine garrison."
+    }
+   ]
+  },
+  {
+   "key": "STATE_AQUILENA",
+   "anchor": [
+    4045,
+    1217
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "estalian",
+     "share": 15,
+     "source": "canon: the Border Princes were settled by Imperial, Tilean and Estalian migrants (WFB Border Princes)",
+     "why": "Migrant settlers."
+    }
+   ]
+  },
+  {
+   "key": "STATE_BLACK_PENINSULA",
+   "anchor": [
+    4100,
+    1220
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "tilean",
+     "share": 15,
+     "source": "canon: the Border Princes were settled by Imperial, Tilean and Estalian migrants (WFB Border Princes)",
+     "why": "Migrant settlers."
+    }
+   ]
+  },
+  {
+   "key": "STATE_MYRMIDIA_S_COAST",
+   "anchor": [
+    4166,
+    1245
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "tilean",
+     "share": 25,
+     "source": "canon: the Border Princes were settled by Imperial, Tilean and Estalian migrants (WFB Border Princes)",
+     "why": "Migrant settlers."
+    }
+   ]
+  },
+  {
+   "key": "STATE_EASTERN_BORDER_PRINCES",
+   "anchor": [
+    4286,
+    1112
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "reiklander",
+     "share": 15,
+     "source": "canon: the Border Princes were settled by Imperial, Tilean and Estalian migrants (WFB Border Princes)",
+     "why": "Migrant settlers."
+    }
+   ]
+  },
+  {
+   "key": "STATE_FOUNDRY_DISTRICT",
+   "anchor": [
+    4841,
+    852
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "hobgoblin",
+     "share": 25,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Hobgoblin slave labour."
+    },
+    {
+     "culture": "orc",
+     "share": 10,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Orc slaves."
+    }
+   ]
+  },
+  {
+   "key": "STATE_MANUFACTORY_DISTRICT",
+   "anchor": [
+    4893,
+    868
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "hobgoblin",
+     "share": 25,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Hobgoblin slave labour."
+    },
+    {
+     "culture": "orc",
+     "share": 10,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Orc slaves."
+    }
+   ]
+  },
+  {
+   "key": "STATE_PITS_DISTRICT",
+   "anchor": [
+    4783,
+    813
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "hobgoblin",
+     "share": 25,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Hobgoblin slave labour."
+    },
+    {
+     "culture": "orc",
+     "share": 10,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Orc slaves."
+    }
+   ]
+  },
+  {
+   "key": "STATE_BLASTED_DISTRICT",
+   "anchor": [
+    4778,
+    871
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "hobgoblin",
+     "share": 25,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Hobgoblin slave labour."
+    },
+    {
+     "culture": "orc",
+     "share": 10,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Orc slaves."
+    }
+   ]
+  },
+  {
+   "key": "STATE_ZORN_UZKUL",
+   "anchor": [
+    4794,
+    539
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "hobgoblin",
+     "share": 30,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Hobgoblin slaves."
+    },
+    {
+     "culture": "norscan",
+     "share": 5,
+     "pop_type": "slaves",
+     "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
+     "why": "Norse captives."
+    }
+   ]
+  }
+ ]
+}

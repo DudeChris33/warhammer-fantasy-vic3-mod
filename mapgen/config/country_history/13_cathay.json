@@ -1,0 +1,182 @@
+{
+  "region": "13_cathay",
+  "baseline": {
+    "tech_tier": 3,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_professional_army",
+      "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_subjecthood",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_mercantilism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_local_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slavery_banned",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_intelligentsia"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "tea"
+    ],
+    "institutions": {
+      "institution_schools": 1
+    },
+    "expected_government_type": "gov_absolute_principality",
+    "suggested_ig_names": {
+      "ig_landowners": "Dragon-Regents and Provincial Nobility",
+      "ig_intelligentsia": "Celestial Mandarins"
+    },
+    "source": "canon: TW:WH3 Grand Cathay / WH: The Old World (2023+) Cathay background (Dragon Emperor and Moon Empress; mandarin bureaucracy; the Great Bastion closes the borders; Ivory Road trade); inferred for mundane law groups",
+    "why": "An absolute Celestial monarchy administered by appointed mandarins with standing armies, gunpowder and rocket engineering (tier 3), guild trade, closed borders and ancestor-cult schooling"
+  },
+  "tags": {
+    "DGF": {
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_navy_model": "law_professional_navy"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_petty_bourgeoisie"
+      ],
+      "justify": {
+        "laws.lawgroup_navy_model": {
+          "source": "canon: tag_registry.md (Grand Dragon Fleet is Cathay's imperial navy)",
+          "why": "An imperial navy is a standing fleet."
+        },
+        "ruling_igs": {
+          "source": "canon: tag_registry.md (the Jade Fleet)",
+          "why": "Admirals and shipping guilds run the fleet."
+        }
+      }
+    },
+    "FUC": {
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_navy_model": "law_professional_navy"
+      },
+      "ruling_igs": [
+        "ig_petty_bourgeoisie",
+        "ig_landowners"
+      ],
+      "justify": {
+        "laws.lawgroup_navy_model": {
+          "source": "canon: tag_registry.md (Fu-Chow, Cathay's greatest port; Sea-Dragon)",
+          "why": "The great port keeps a standing fleet."
+        },
+        "ruling_igs": {
+          "source": "canon: tag_registry.md (Fu-Chow, Cathay's greatest port)",
+          "why": "Port merchants lead the ruling bloc."
+        }
+      }
+    },
+    "FUH": {
+      "confidence": "medium",
+      "note": "Fire-Dragon's province; baseline unchanged."
+    },
+    "GBS": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: TW:WH3 Grand Cathay (the Great Bastion garrisons and its Dragon, Snake and Turtle Gates)",
+          "why": "A fortress line ruled by its garrison commanders."
+        }
+      }
+    },
+    "MKY": {
+      "confidence": "low",
+      "tech_tier": 4,
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_rural_folk"
+      ],
+      "justify": {
+        "tech_tier": {
+          "source": "inferred",
+          "why": "A mountain-holding usurper without Cathay's workshops."
+        },
+        "ruling_igs": {
+          "source": "inferred",
+          "why": "A warlord's band among hill folk."
+        }
+      }
+    },
+    "NGA": {
+      "confidence": "medium",
+      "note": "Storm-Dragon's province; baseline unchanged."
+    },
+    "SHW": {
+      "confidence": "medium",
+      "note": "Administrator of the Realm; baseline (mandarin-led) unchanged."
+    },
+    "SHY": {
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_petty_bourgeoisie"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: tag_registry.md (Shang-Yang commands the Ivory Road trade)",
+          "why": "Caravan merchants share power with the Iron-Dragon's nobility."
+        }
+      }
+    },
+    "SKT": {
+      "confidence": "low",
+      "tech_tier": 5,
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "justify": {
+        "tech_tier": {
+          "source": "canon: tag_registry.md (the Sky-Titans gifted gunpowder to Cathay)",
+          "why": "Ancient giants keep old lore and the powder secret, but no industry."
+        },
+        "ruling_igs": {
+          "source": "inferred",
+          "why": "Giant war-lords and their sage-priests."
+        }
+      }
+    },
+    "WEI": {
+      "confidence": "medium",
+      "tech_tier": 2,
+      "expected_government_type": "gov_absolute_grand_principality",
+      "justify": {
+        "tech_tier": {
+          "source": "canon: TW:WH3 Grand Cathay (Sky-Lanterns, Grand Cannons and Fire Rain rocket batteries fielded from the Celestial City)",
+          "why": "The Imperial court is the technological front of Cathay."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    }
+  }
+}

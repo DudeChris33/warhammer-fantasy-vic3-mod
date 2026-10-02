@@ -1,0 +1,63 @@
+{
+ "tags": {},
+ "states": [
+  {
+   "key": "STATE_ALPHA",
+   "anchor": [
+    10,
+    10
+   ],
+   "mode": "replace",
+   "mix": [
+    {
+     "culture": "reiklander",
+     "share": "33.3",
+     "source": "fixture",
+     "why": "thirds, so the sizes round"
+    },
+    {
+     "culture": "halfling",
+     "share": "33.3",
+     "source": "fixture",
+     "why": "thirds"
+    },
+    {
+     "culture": "high_elf",
+     "share": "33.4",
+     "source": "fixture",
+     "why": "no such culture in the mod: skipped and reported"
+    }
+   ]
+  },
+  {
+   "key": "STATE_ZETA",
+   "anchor": [
+    60,
+    10
+   ],
+   "mode": "add",
+   "mix": [
+    {
+     "culture": "middenlander",
+     "share": 30,
+     "religion": "cult_of_sigmar",
+     "source": "fixture",
+     "why": "religion override (differs from the culture default)"
+    },
+    {
+     "culture": "middenlander",
+     "share": 5,
+     "religion": "cult_of_ulric",
+     "source": "fixture",
+     "why": "equals the culture default, so no religion is emitted"
+    },
+    {
+     "culture": "reiklander",
+     "share": 0.5,
+     "source": "fixture",
+     "why": "too small: dropped under min_pop_size"
+    }
+   ]
+  }
+ ]
+}

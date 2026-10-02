@@ -13,3 +13,8 @@
  MON_ADJ:0 "Montese"
  PON:0 "Pontenne"
  PON_ADJ:0 "Pontennian"
+
+ # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms. MGL collides with vanilla countries_l_english.yml.
+ # MGL's name is provisional (Chris will redo it).
+ MGL:0 "Miramar Glade"
+ MGL_ADJ:0 "Miramar"

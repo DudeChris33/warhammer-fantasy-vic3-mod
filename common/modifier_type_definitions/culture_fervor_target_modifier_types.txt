@@ -286,3 +286,21 @@ country_fervor_target_lahmian_vampire_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #6379, wood elves and ogres ----
+
+country_fervor_target_wood_elf_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_ogre_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

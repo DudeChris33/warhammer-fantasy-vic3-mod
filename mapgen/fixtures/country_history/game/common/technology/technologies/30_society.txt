@@ -1,0 +1,10 @@
+plain_tech = { era = era_1 }
+democracy = { era = era_1 }
+currency_standards = {
+	era = era_1
+	unlocking_technologies = { democracy }
+}
+tech_late = {
+	era = era_2
+	unlocking_technologies = { currency_standards }
+}

@@ -1,0 +1,43 @@
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at
+# priority = 0 — so "no flag definition is applicable for a country" (vanilla's
+# own tag-as-COA_KEY fallback condition, see that file's vanilla header comment
+# at .../game/common/flag_definitions/00_flag_definitions.txt:1-14) never fires
+# for any tag. Without a higher-priority tag-named list here, every bespoke COA
+# in common/coat_of_arms/coat_of_arms/11_ogre_kingdoms.txt (board #6373 phase B)
+# would parse but sit unused behind default_flag. Each list below is a single
+# unconditional block at priority = 100 — above the priority = 0 DEFAULT,
+# below vanilla's own conditional range of 100-2000 for future per-tag variants.
+# `always = yes` confirmed valid at docs/triggers.log.
+
+IRN = {
+	flag_definition = {
+		coa = IRN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+MAW = {
+	flag_definition = {
+		coa = MAW
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+EYB = {
+	flag_definition = {
+		coa = EYB
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+THG = {
+	flag_definition = {
+		coa = THG
+		priority = 100
+		trigger = { always = yes }
+	}
+}

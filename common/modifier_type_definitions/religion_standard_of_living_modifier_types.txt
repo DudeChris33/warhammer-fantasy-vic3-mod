@@ -158,3 +158,23 @@ state_cult_of_nagash_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Elven gods (Asrai), board item #6379 ----
+
+state_isha_and_kurnous_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- The Great Maw (ogres), board item #6379 ----
+
+state_the_great_maw_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

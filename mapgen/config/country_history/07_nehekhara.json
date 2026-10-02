@@ -1,0 +1,137 @@
+{
+  "region": "07_nehekhara",
+  "baseline": {
+    "tech_tier": 5,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_professional_army",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_no_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_debt_slavery",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_devout",
+      "ig_armed_forces"
+    ],
+    "tax_level": "low",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {},
+    "expected_government_type": "gov_absolute_kingdom",
+    "suggested_ig_names": {
+      "ig_devout": "Mortuary Cult (Liche Priests)",
+      "ig_armed_forces": "Legions of the Dead"
+    },
+    "source": "canon: WFB 8e Tomb Kings (Priest-King dynasties, Mortuary Cult, eternal legions of the dead, caste-bound living population)",
+    "why": "An undead Tomb King rules absolutely through the Mortuary Cult with tireless standing legions; a closed, caste-bound society with no schools or police beyond the guard of the dead"
+  },
+  "profiles": {
+    "vampire_lord": {
+      "laws": {
+        "lawgroup_army_model": "law_peasant_levies",
+        "lawgroup_land_reform": "law_serfdom",
+        "lawgroup_labour_associations": "law_guild_system"
+      },
+      "expected_government_type": "gov_absolute_principality",
+      "source": "canon: WFB 8e Vampire Counts / Lahmian bloodline (Neferata's court of vampire nobility)",
+      "why": "A vampire queen rules a court of blood-kin over cowed subjects: same package as other vampire realms"
+    }
+  },
+  "tags": {
+    "BHA": {
+      "confidence": "medium",
+      "note": "Tomb-kingdom baseline unchanged; source lists the dynasty but no institutional distinction."
+    },
+    "KAS": {
+      "confidence": "medium",
+      "note": "Tomb-kingdom baseline unchanged; source lists the dynasty but no institutional distinction."
+    },
+    "KHM": {
+      "confidence": "high",
+      "note": "Khemri: Settra the Imperishable's Land of the Dead."
+    },
+    "LAH": {
+      "profile": "vampire_lord",
+      "confidence": "medium",
+      "note": "Lahmia under Neferata; confidence medium because the tag models an undead city-state.",
+      "expected_government_type": "gov_absolute_county",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at city_state tier."
+        }
+      }
+    },
+    "LYB": {
+      "confidence": "high",
+      "note": "Lybaras: Tomb King dynasty at the western coast."
+    },
+    "MAH": {
+      "confidence": "medium",
+      "note": "Tomb-kingdom baseline unchanged; source lists the dynasty but no institutional distinction."
+    },
+    "NUM": {
+      "confidence": "medium",
+      "note": "Tomb-kingdom baseline unchanged; source lists the dynasty but no institutional distinction."
+    },
+    "QUA": {
+      "confidence": "medium",
+      "note": "Tomb-kingdom baseline unchanged; source lists the dynasty but no institutional distinction."
+    },
+    "RAS": {
+      "confidence": "medium",
+      "note": "Tomb-kingdom baseline unchanged; source lists the dynasty but no institutional distinction."
+    },
+    "ZND": {
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_army_model": "law_peasant_levies",
+        "lawgroup_slavery": "law_slavery_banned"
+      },
+      "ruling_igs": [
+        "ig_petty_bourgeoisie",
+        "ig_devout"
+      ],
+      "justify": {
+        "laws.lawgroup_trade_policy": {
+          "source": "canon: WFB Tomb Kings (Zandri is the living trading port of Nehekhara)",
+          "why": "A merchant port trades openly with the outside world."
+        },
+        "laws.lawgroup_army_model": {
+          "source": "inferred",
+          "why": "A living merchant city relies on its citizen levies, not legions of the dead."
+        },
+        "laws.lawgroup_slavery": {
+          "source": "inferred",
+          "why": "A living merchant city; the pyramid-era bondage of the Tomb Kings does not apply."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB Tomb Kings (Zandri is the living trading port of Nehekhara)",
+          "why": "Merchants share power with the temple."
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,124 @@
+{
+  "region": "11_ogre_kingdoms",
+  "baseline": {
+    "tech_tier": 6,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_warrior_caste",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_consumption_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_no_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_no_womens_rights",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_no_migration_controls",
+      "lawgroup_slavery": "law_debt_slavery",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_armed_forces",
+      "ig_devout"
+    ],
+    "tax_level": "low",
+    "taxed_goods": [
+      "meat"
+    ],
+    "institutions": {},
+    "expected_government_type": "gov_absolute_principality",
+    "suggested_ig_names": {
+      "ig_armed_forces": "Bulls and Ironguts",
+      "ig_devout": "Butchers of the Great Maw"
+    },
+    "source": "canon: WFB 8e Ogre Kingdoms army book (Tyrants rule tribes, Butchers serve the Great Maw, Gnoblars serve as servants, Bulls and Ironguts as the warrior host, Maneater mercenaries); TW:WH Ogre Kingdoms",
+    "why": "Each tribe is ruled absolutely by its Tyrant with a warrior host and Butcher-priests, feeds on meat, keeps Gnoblar servants in bondage and roams freely; ogre gunpowder (Leadbelchers, Ironblasters) sits above the tribal floor at tier 6"
+  },
+  "tags": {
+    "AGF": {
+      "confidence": "medium",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions.",
+      "tech_tier": 5,
+      "justify": {
+        "tech_tier": {
+          "source": "canon: tag_registry.md (Angry Fist: the most advanced tribe, assailed Karak Azorn)",
+          "why": "The one tribe organised enough to besiege a Dwarf hold."
+        }
+      }
+    },
+    "BGZ": {
+      "confidence": "low",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
+    },
+    "CXC": {
+      "confidence": "medium",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions.",
+      "ruling_igs": [
+        "ig_armed_forces"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: tag_registry.md (Crossed Clubs are roaming braggart Maneaters)",
+          "why": "A roaming Maneater band has no priesthood of its own."
+        }
+      }
+    },
+    "EYB": {
+      "confidence": "low",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
+    },
+    "FSM": {
+      "confidence": "low",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
+    },
+    "GGT": {
+      "confidence": "medium",
+      "note": "Greasus Goldtooth, Overtyrant of the Ogre Kingdoms; baseline unchanged."
+    },
+    "GLG": {
+      "confidence": "high",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions.",
+      "ruling_igs": [
+        "ig_armed_forces"
+      ],
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: WFB 8e Ogre Kingdoms (Golgfag Maneater's mercenary company)",
+          "why": "A mercenary company is ruled by its captain and his host alone."
+        }
+      }
+    },
+    "IRN": {
+      "confidence": "low",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
+    },
+    "MAW": {
+      "confidence": "medium",
+      "note": "Skrag the Slaughterer's Butcher-led tribe; baseline unchanged."
+    },
+    "RSK": {
+      "confidence": "low",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
+    },
+    "SOM": {
+      "confidence": "low",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
+    },
+    "THG": {
+      "confidence": "low",
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
+    }
+  }
+}

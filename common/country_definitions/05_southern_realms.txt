@@ -328,3 +328,50 @@ PON = {
 	cultures = { sylvanian_vampire }
 	# capital: Pontenne — TODO once land state-regions exist
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): owner tags painted in
+# mapgen/config/state_ownership.png that had no definition yet. COLOUR NOTE: unlike the
+# entries above, every block below copies its colour EXACTLY from
+# mapgen/config/state_ownership_legend.json — the painted ownership map is keyed on that RGB,
+# so the legend wins over this file's reuse-the-culture-colour convention.
+################################################################################
+
+################ XSG — Skaven Clan E (placeholder); Blighted Marshes ################
+# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
+# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
+# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
+# is superseded, not renamed.
+# Filed here by geography: STATE_BLIGHTED_MARSHES and STATE_LAND_372 sit in
+# map_data/state_regions/05_southern_realms.txt. goblin is a cross-file culture ref to
+# common/cultures/greenskin.txt.
+
+XSG = {
+	color = { 60 72 12 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { goblin }
+	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+}
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): a wood-elf realm painted in
+# mapgen/config/state_ownership.png that had no definition yet. COLOUR NOTE: as for the phase-A
+# block above, the colour is copied EXACTLY from mapgen/config/state_ownership_legend.json.
+# Wood-elf realms have no region file of their own; each is filed by the geography of its states.
+################################################################################
+
+################ MGL — Miramar Glade; a wood-elf glade in the Miramar Hills ################
+# PROVISIONAL NAME: "Miramar Glade" is a stand-in taken from the hills it holds; Chris will redo
+# this tag's name later. Filed here by geography: STATE_MIRAMAR_HILLS sits in
+# map_data/state_regions/05_southern_realms.txt. wood_elf is a cross-file culture ref to
+# common/cultures/wood_elf.txt (#6379). unrecognized/principality, like every wood-elf realm.
+
+MGL = {
+	color = { 186 216 150 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { wood_elf }
+	# capital: — none recorded; TODO once a capital STATE_* is assigned
+}

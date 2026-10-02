@@ -1,0 +1,27 @@
+{
+  "region": "02_bad_baseline",
+  "baseline": {
+    "tech_tier": 9,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_taxation": "law_consumption_tax"
+    },
+    "ruling_igs": [],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "grain"
+    ],
+    "institutions": {
+      "institution_schools": 1
+    },
+    "expected_government_type": "gov_absolute_kingdom",
+    "source": "fixture"
+  },
+  "tags": {
+    "FXI": {
+      "confidence": "low"
+    }
+  }
+}

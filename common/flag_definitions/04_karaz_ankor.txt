@@ -153,3 +153,87 @@ DRZ = {
 		trigger = { always = yes }
 	}
 }
+
+# Board item #6373 phase A (2026-10-01): one unconditional priority = 100 block per newly
+# defined tag, same shape as the blocks above, so its bespoke COA in
+# common/coat_of_arms/coat_of_arms/04_karaz_ankor.txt is not masked by the priority = 0 DEFAULT block.
+
+KIZ = {
+	flag_definition = {
+		coa = KIZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KZF = {
+	flag_definition = {
+		coa = KZF
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KOR = {
+	flag_definition = {
+		coa = KOR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+KRV = {
+	flag_definition = {
+		coa = KRV
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+VMP = {
+	flag_definition = {
+		coa = VMP
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XSH = {
+	flag_definition = {
+		coa = XSH
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XSI = {
+	flag_definition = {
+		coa = XSI
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XSJ = {
+	flag_definition = {
+		coa = XSJ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XSK = {
+	flag_definition = {
+		coa = XSK
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XSL = {
+	flag_definition = {
+		coa = XSL
+		priority = 100
+		trigger = { always = yes }
+	}
+}

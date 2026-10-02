@@ -1,0 +1,79 @@
+﻿# Old World cultures — the Asrai, the wood elves of Athel Loren and the Old World's other
+# enchanted forests (Laurelorn, the Gryphon Wood, the Oak of Prophecy, the Miramar Hills). Schema
+# mirrors common/cultures/norscan_humans.txt and common/cultures/brettonian_humans.txt, the verified
+# reference entries for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. Taken from the Talsyn (TLS) entry of
+#                mapgen/config/state_ownership_legend.json, the largest wood-elf owner, so tag and
+#                culture read as one thing.
+#   religion   — a religion id from common/religions/00_religions.txt.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+#   noble_last_names / male_regal_first_names / female_regal_first_names are OPTIONAL (confirmed
+#                against vanilla, where many cultures omit them) and are used here because the Asrai
+#                have a real aristocracy: the kindreds' Glade Lords and the King and Queen in the Woods.
+# graphics/ethnicities — vanilla ships no elf portrait set. The values used below are deliberate
+#                STAND-INS chosen only so the culture renders at all, pending custom art (out of scope).
+# Multi-word names use vanilla's underscore convention (of_Athel_Loren), displayed via the loc key.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_wood_elf_l_english.yml.
+# Filed in its own file rather than high_elf.txt: the Asrai are their own people, and Asur/Druchii
+# cultures may later join heritage_group_elf from their own files.
+# Board item #6379 (epic #3404).
+
+################ Wood elf (Asrai) — the forest kindreds; Isha and Kurnous ################
+# Register: Fan-Eltharin, the Asrai dialect of the elven tongue — soft, liquid, vowel-led, with
+# -th, -wy, -eth, -ith and -el endings. Canon-first where it fits (Orion, Ariel, Araloth, Naieth,
+# Naestra, Arahan, Skaw, Daith); the rest are invented in the same register.
+# Noble last names follow the of_<Realm> convention (nehekharan precedent), naming the realms of
+# Athel Loren and the other forests the Asrai hold; common last names are forest epithets, since the
+# Asrai carry no trade-family surnames.
+
+wood_elf = {
+	color= rgb{ 168 228 96 }
+	religion = isha_and_kurnous
+	heritage = heritage_asrai
+	language = sphere_fan_eltharin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Orion Araloth Skaw Daith Caelith Elrion Tharandel Aeneth Lirandil Fandrel
+		Sylvaren Corwyth Aethrin Morweth Ithrandel Cerwyn Faeldor Aranwy Glyndar Haldreth
+	}
+
+	female_common_first_names = {
+		Ariel Naieth Naestra Arahan Aelwen Sylvaine Ithrelle Morwyn Caerith Elowen
+		Thaliel Gwenaeth Faelith Aranwen Ynara Siolwen Eilith Nimweth Ashanel Rhianwy
+	}
+
+	noble_last_names = {
+		of_Talsyn of_Argwylon of_Wydrioth of_Torgovann of_Anmyr of_Atylwyth of_Cythral
+		of_Coeth_Mara of_Laurelorn of_Athel_Loren
+	}
+
+	common_last_names = {
+		Leafwalker Thornheart Glademinder Oakshadow Briarsong Ashbough Fernhollow Wildrider
+		Moonbough Deepglade Fawnstep Barkward Silverleaf Willowshade Hawkspear Dawnbough
+	}
+
+	male_regal_first_names = {
+		Orion Araloth Tharandel Lirandil Caelith
+	}
+
+	female_regal_first_names = {
+		Ariel Naieth Naestra Arahan Aelwen
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_blond
+		1 = caucasian_brown_hair
+	}
+}

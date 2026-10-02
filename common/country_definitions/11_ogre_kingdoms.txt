@@ -1,0 +1,69 @@
+﻿# Country tags — the Ogre Kingdoms. Board item #6373 phase B (2026-10-01); roster frozen in
+# planning/tag_registry.md, region "11 OGRE KINGDOMS".
+#
+# Entry schema (see .claude/rules/peoples.md):
+#   color        — { R G B } with 0-255 integers.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/ogre.txt (#6379; cross-file reference)
+#
+# Only the four tribes that own states on the painted start map are defined here (IRN MAW EYB THG).
+# The registry's other eight ogre tribes (GGT GLG BGZ RSK CXC AGF FSM SOM) have loc only, in
+# localization/english/countries_11_ogre_kingdoms_l_english.yml, until they are given states.
+#
+# FILING NOTE: these tags deliberately follow the registry's region column (11_ogre_kingdoms), not
+# the geography of their states: IRN's state (STATE_GROM_RIDGE) sits in
+# map_data/state_regions/04_karaz_ankor.txt and MAW's, EYB's and THG's (STATE_FIVE_RIVERS,
+# STATE_THE_SENTINELS, STATE_NEW_STRYGOS) in 10_dark_lands.txt. This is the same exception KRD and the
+# Norse dwarf holds take in 04_karaz_ankor.txt: the tribes are one people with one region file.
+#
+# COLOUR NOTE: every block below copies its colour EXACTLY from
+# mapgen/config/state_ownership_legend.json — the painted ownership map is keyed on that RGB, so the
+# legend wins over the usual reuse-the-culture-colour convention.
+#
+# Every tribe is unrecognized/principality: semi-nomadic tribes under a Tyrant, with no diplomatic
+# standing among the "civilised" realms.
+#
+# capital: DELIBERATELY OMITTED on every entry (see .claude/rules/peoples.md). Ogres keep no named
+# capital in canon — the Great Maw is the spiritual centre — so none is recorded.
+# Country display names/adjectives live in localization/english/countries_11_ogre_kingdoms_l_english.yml.
+
+################ IRN — Ironskin; Ghark Ironskin's tribe ################
+
+IRN = {
+	color = { 78 24 12 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ogre }
+	# capital: — none (semi-nomadic tribe); TODO once a capital STATE_* is assigned
+}
+
+################ MAW — Disciples of the Maw; Skrag the Slaughterer's following ################
+
+MAW = {
+	color = { 78 42 36 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ogre }
+	# capital: — none (semi-nomadic tribe); TODO once a capital STATE_* is assigned
+}
+
+################ EYB — Eyebiter; Malron Eyebiter's tribe ################
+
+EYB = {
+	color = { 174 48 30 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ogre }
+	# capital: — none (semi-nomadic tribe); TODO once a capital STATE_* is assigned
+}
+
+################ THG — Thunderguts; a named ogre tribe ################
+
+THG = {
+	color = { 150 54 24 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { ogre }
+	# capital: — none (semi-nomadic tribe); TODO once a capital STATE_* is assigned
+}

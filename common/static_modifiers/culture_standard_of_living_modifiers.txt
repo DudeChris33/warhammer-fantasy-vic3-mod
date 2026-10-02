@@ -358,3 +358,25 @@ lahmian_vampire_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_lahmian_vampire_standard_of_living_add = 1
 }
+
+# ---- Board item #6379, wood elves and ogres ----
+
+wood_elf_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_wood_elf_standard_of_living_add = 1
+}
+
+wood_elf_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_wood_elf_standard_of_living_add = 1
+}
+
+ogre_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ogre_standard_of_living_add = 1
+}
+
+ogre_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ogre_standard_of_living_add = 1
+}

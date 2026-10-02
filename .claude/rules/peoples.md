@@ -89,6 +89,13 @@ Grey Mountains on Bretonnia's southern flank) are both defined in `03_brettonia.
 inside/against Bretonnia even though their population isn't bretonnian. A tag near a region border
 needs a real judgment call on which side it reads as.
 
+**Exception — a people with its own registry region keeps its roster together.** When
+`planning/tag_registry.md` gives a tag a region whose file is that people's own, the registry's region
+column wins over the geography of its states: the Norse dwarf holds (`KRD`, `KOR`, `KRV`) live in
+`04_karaz_ankor.txt` and the ogre tribes in `11_ogre_kingdoms.txt` although their states sit in other
+regions' state files (#6373). Say so in the file or block comment. A people with no region file of its
+own — the wood elves — files each tag by geography as above.
+
 A country definition entry:
 
 ```
@@ -100,10 +107,36 @@ TAG = {
 }
 ```
 
+- `tier` also sets a start-owner's starting technology: `generate_country_history.py` maps `empire`/`hegemony`/`kingdom`/`grand_principality` to `effect_starting_technology_tier_5_tech` and `principality`/`city_state` to tier 6 (`TECH_TIER` in `mapgen/worldgen/country_history.py`), so a new tier value needs a row there ([testing.md](testing.md)).
 - `color` uses the **brace** form `{ R G B }` (0-255 integers), not `common/cultures/`' `rgb{ }`.
   Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
+  **Exception — tags defined for the painted start map:** a tag first painted in
+  `mapgen/config/state_ownership.png` copies its colour exactly from
+  `mapgen/config/state_ownership_legend.json`, because the PNG is keyed on that RGB and the legend
+  wins (#6373). Say so in the file's comment above those blocks, and drop the legend entry's
+  `proposed` flag (setting its final `name` and `note`) in the same change.
+- **A painted start owner needs a definition.** Every owner tag in `mapgen/derived/state_ownership.json`
+  must have a non-dynamic entry here (the D00-D99 `dynamic_country_definition` slots don't count), or
+  `generate_state_history.py` holds its states back and `validate_map.py` fails ([testing.md](testing.md)).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
+- A tag's `cultures` also drive the generated state homelands (every tag but `UNO`, below): every state it owns at start gets one `add_homeland = cu:<culture>` per entry ([testing.md](testing.md), #6374), so list only the peoples that should be homeland in its states. A multi-culture tag that owns a state (today ERE, UVE, MOR) gives that state all of them.
+- **Placeholder tags (`XS*`).** A state owner the setting needs but no culture can yet represent gets
+  a deliberately generic stand-in rather than an invented nation. The `XS*` codes are the Skaven ones:
+  "Skaven Clan <letter> (placeholder)", adjective "Skaven", `goblin` culture,
+  `unrecognized`/`principality`, filed by the geography of their states, heraldry per
+  [heraldry.md](heraldry.md)'s placeholder rule. Each block's comment states the limits. The codes
+  are frozen like any shipped tag, so real clans get **new** codes and supersede these tags; a
+  placeholder is never renamed into a real polity. Record each one in `planning/tag_registry.md`.
+- **`UNO` (Unclaimed Lands)** is the one placeholder that is not painted: the `decentralized`
+  owner of every `unowned` and out-of-scope `placeholder` state, mapped from those tokens by
+  `generate_state_history.py` (#6391). `common/country_definitions/98_unclaimed.txt`,
+  `principality`, `goblin` as a disclosed stand-in culture, no capital, no homelands in its
+  states, no legend entry. Never paint it and never rename it into a real polity.
+- **Disclosed stand-in cultures.** When no authored culture fits a tag, use the most honest existing
+  one and say in the block comment and the registry row what it does not describe (e.g. `BRK`
+  `norscan` for a Chaos garrison, `VMP` `sylvanian_vampire` for Kemmler's non-vampire host). Do not
+  author a new culture to fill the gap inside a tag item.
 - **`capital` is deliberately omitted** on every tag this mod ships until it has a real
   `STATE_*` to point at (land state-regions are emitted — see [testing.md](testing.md) —
   but not every tag has had its capital assignment revisited). Record the intended

@@ -543,3 +543,64 @@ PON = {
 		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
 	}
 }
+
+################################################################################
+# Board item #6373 phase A (2026-10-01): coats of arms for the owner tags newly defined at the
+# end of common/country_definitions/05_southern_realms.txt (same order). Every texture, pattern and colour-slot
+# count below is confirmed against a real vanilla (or this mod's own) usage, cited per block.
+# Matching flag_definitions blocks are in common/flag_definitions/05_southern_realms.txt.
+################################################################################
+
+# XSG — Skaven Clan E (placeholder). A crocodile for the Blighted Marshes, skewed.
+# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
+# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
+# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
+# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# so the placeholders read apart; disclosed invention, no canon device exists.
+# ce_crocodile (vanilla) is used nowhere else in this mod — 07_nehekhara.txt's ZND uses the
+# separate vendored ce_roe_crocodile texture. A swamp beast, not one of the house style's banned
+# "civilised" full beasts (lion/eagle). Confirmed 3 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:3407, BST).
+XSG = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "goblin_moss"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_crocodile.dds"
+		color1 = "bone"
+		color2 = "gore_red"
+		color3 = "bone"
+		instance = { position = { 0.5 0.55 } scale = { 0.9 0.9 } rotation = 350 }
+	}
+}
+
+################################################################################
+# Board item #6373 phase B (2026-10-01): coat of arms for the wood-elf realm newly defined at the
+# end of common/country_definitions/05_southern_realms.txt. Wood-elf house style
+# (.claude/rules/heraldry.md); texture, pattern and colour-slot count confirmed against a real
+# vanilla (or this mod's own) usage, cited below. Matching flag_definitions block is in
+# common/flag_definitions/05_southern_realms.txt.
+################################################################################
+
+# MGL — Miramar Glade (provisional name; Chris will redo it). Disclosed invention: no device is
+# recorded, so a hunting falcon for the Asrai's hunt, brown on bone-white. Disclosed reuse:
+# ce_falcon.dds is 01_kislev.txt's ROP (black on green_dark), 03_brettonia.txt's PAR (azure on
+# pearl) and 04_karaz_ankor.txt's KRV (black on grey); MGL is a brown bird with golden beak and
+# talons on a bone_white field. Adjusted from the scoping suggestion (a crescent moon here, the
+# falcon for SOT): the crescents went to SOT, where twin crescents fit the twin Sisters.
+# Confirmed 3 colour slots (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:2562,
+# BIK; also ROP, PAR, KRV).
+MGL = {
+	pattern = "pattern_solid.tga"
+	color1 = "bone_white"
+	color2 = "bone_white"
+
+	colored_emblem = {
+		texture = "ce_falcon.dds"
+		color1 = "brown"
+		color2 = "golden"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}

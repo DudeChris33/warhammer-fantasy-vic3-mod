@@ -15,3 +15,7 @@
  sphere_norscan:0 "Norscan"
  sphere_nehekharan:0 "Nehekharan"
  sphere_greenskin:0 "Greenskin"
+ sphere_group_eltharin:0 "Eltharin Tongues"
+ sphere_group_grumbarth:0 "Grumbarth"
+ sphere_fan_eltharin:0 "Fan-Eltharin"
+ sphere_grumbarth:0 "Grumbarth"

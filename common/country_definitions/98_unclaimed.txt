@@ -1,0 +1,36 @@
+﻿# Country tag — Unclaimed Lands (UNO), the placeholder owner of every state the start map gives
+# no nation. Board item #6391 (2026-10-02); recorded in planning/tag_registry.md, roster section
+# "98 UNCLAIMED (goblin stand-in)".
+#
+# Entry schema (see .claude/rules/peoples.md):
+#   color        — { R G B } with 0-255 integers.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/greenskin.txt (cross-file reference)
+#
+# PLACEHOLDER (Chris, 2026-10-02): UNO is not a nation. It is the decentralized owner the engine
+# needs for land nobody holds at the start date: the drawn Old World's "unowned" wilderness states
+# and every out-of-scope placeholder state (state_ownership.json owner tokens "unowned" and
+# "placeholder"). It is never painted on mapgen/config/state_ownership.png and has no legend
+# entry; mapgen/generate_state_history.py maps those tokens to c:UNO. Its states get no
+# add_homeland (#6374). The code is frozen once shipped; real polities that later take this land
+# get their own codes, and UNO is never renamed into one.
+#
+# STAND-IN CULTURE, disclosed: goblin is the one-culture stand-in for "whoever lives in the
+# wilds". It does not describe the elves, lizardmen, Nippon or other peoples of the out-of-scope
+# states this tag holds, nor the Old World wilderness's real inhabitants; it is there because a
+# country needs a culture and no neutral one exists.
+#
+# COLOUR NOTE: a muddy grey-brown chosen to differ from every legend RGB
+# (mapgen/config/state_ownership_legend.json), the reserved unowned white and placeholder grey.
+#
+# capital: DELIBERATELY NONE — a placeholder owner has no seat. If the engine turns out to require
+# one for a decentralized tag, add a fallback capital = STATE_* then, and say so here.
+# Display name/adjective live in localization/english/countries_98_unclaimed_l_english.yml.
+
+UNO = {
+	color = { 120 112 96 }
+	country_type = decentralized
+	tier = principality
+	cultures = { goblin }
+}

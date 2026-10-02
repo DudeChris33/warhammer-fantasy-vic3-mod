@@ -1,0 +1,94 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per board item #6373 phase B (2026-10-01) — the 4
+# Ogre Kingdoms tags defined in common/country_definitions/11_ogre_kingdoms.txt (same order).
+# Composed from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems, neither blanked by
+# replace_paths) and this mod's named_colors palette (common/named_colors/00_coa_colors.txt +
+# 01_wh_coa_colors.txt). Ogre house style (.claude/rules/heraldry.md): two tinctures, one
+# gut-plate or maw (or, for THG, blast) motif per tribe. Every texture, pattern and colour-slot
+# count below is confirmed against a real vanilla (or this mod's own) usage, cited per block.
+# Requires common/flag_definitions/11_ogre_kingdoms.txt (this mod's DEFAULT flag_definitions
+# block is unconditional at priority = 0 and would otherwise mask every one of these — see that
+# file's header) to actually render in-game.
+
+# IRN — Ironskin, Ghark Ironskin's tribe. Disclosed invention, name-derived: a plain iron
+# gut-plate (the ogres' belly armour) in iron grey on dark red. Disclosed reuse: ce_circle.dds is
+# 06_badlands.txt's RED (three concentric rings forming the reserved eye device) and
+# 02_empire.txt's BRK (three small brass rings in a triad); IRN is a single solid grey disc set low,
+# at the belly, which reads as neither. Confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:297, ACE_dictatorship; also RED, BRK).
+IRN = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "grey"
+		color2 = "grey"
+		instance = { position = { 0.5 0.56 } scale = { 0.62 0.62 } }
+	}
+}
+
+# MAW — Disciples of the Maw, Skrag the Slaughterer's following. Disclosed invention: the Great
+# Maw itself as a horns-up crescent, a gaping jaw in bone on black. Adjusted from the scoping
+# suggestion (ce_crescent_large, already the moon of STI, SYL, VSY, KHN and HGK) to the unused
+# ce_crescent_pale, whose upturned horns read as a mouth rather than a moon; it is a different
+# texture from the reserved crooked moon (CRM's ce_crescent_rotated). ce_crescent_pale is used
+# nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:3366, BRU_theocracy).
+MAW = {
+	pattern = "pattern_solid.tga"
+	color1 = "black_light"
+	color2 = "black_light"
+
+	colored_emblem = {
+		texture = "ce_crescent_pale.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.85 0.85 } }
+	}
+}
+
+# EYB — Eyebiter, Malron Eyebiter's tribe. Disclosed invention: a grey gut-plate bearing a red maw
+# — the house style's two motifs together — on a red field, in two tinctures (the maw is cut in
+# the field colour). Deliberately no eye, which is RED's reserved device. Disclosed reuse: the
+# gut-plate is IRN's ce_circle (this file; also RED, BRK) and the maw is MAW's ce_crescent_pale
+# (this file), told apart from both by combining them. Confirmed 2 colour slots each (ce_circle:
+# vanilla 02_countries.txt:297, ACE_dictatorship; ce_crescent_pale: vanilla
+# 02_countries.txt:3366, BRU_theocracy).
+EYB = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "red"
+
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "grey"
+		color2 = "grey"
+		instance = { position = { 0.5 0.5 } scale = { 0.85 0.85 } }
+	}
+	colored_emblem = {
+		texture = "ce_crescent_pale.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.5 0.5 } scale = { 0.42 0.42 } }
+	}
+}
+
+# THG — Thunderguts. Disclosed invention, name-derived: a sixteen-rayed burst for the thunder of
+# the gut (the ogres' gut-cannon blast), saffron on brown. Deliberately not a lightning bolt
+# (ce_lightning_bolt_nacista is on the heraldry ban list, and the plain bolt sits too close to
+# it). ce_star_16_bright is used nowhere else in this mod; its only vanilla usage sets 1 colour
+# slot, so 1 is set here (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:15782,
+# MYS_theocracy).
+THG = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown"
+	color2 = "brown"
+
+	colored_emblem = {
+		texture = "ce_star_16_bright.dds"
+		color1 = "saffron"
+		instance = { position = { 0.5 0.5 } scale = { 0.85 0.85 } }
+	}
+}

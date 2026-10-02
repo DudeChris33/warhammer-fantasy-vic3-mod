@@ -1,0 +1,593 @@
+{
+  "region": "02_empire",
+  "baseline": {
+    "tech_tier": 3,
+    "extra_techs": [],
+    "laws": {
+      "lawgroup_army_model": "law_national_militia",
+      "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_subjecthood",
+      "lawgroup_distribution_of_power": "law_landed_voting",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_mercantilism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_local_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_charitable_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_migration_controls",
+      "lawgroup_slavery": "law_slavery_banned",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_devout"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {
+      "institution_schools": 1,
+      "institution_health_system": 1
+    },
+    "next_election": "2514.1.1",
+    "expected_government_type": "gov_constitutional_principality",
+    "suggested_ig_names": {
+      "ig_landowners": "Elector Counts and Nobility",
+      "ig_devout": "Cult of Sigmar"
+    },
+    "source": "canon: WFB 8e Empire army book; WH: The Old World (2023+) Empire background (Emperor elected by the Electors; Sigmar the state cult; Imperial State Troops)",
+    "why": "An electoral aristocracy (landed voting) under a hereditary Elector Count, Sigmarite state cult, provincial militias (state troops), Shallyan hospices, and gunpowder-plus-guild tech at tier 3"
+  },
+  "profiles": {
+    "chaos_warband": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_labour_associations": "law_combination_acts"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "institutions": {},
+      "expected_government_type": "gov_principality",
+      "suggested_ig_names": {
+        "ig_devout": "Cult of Nurgle"
+      },
+      "next_election": null,
+      "source": "canon: WFB 8e Warriors of Chaos; WH: The Old World (Brass Keep held by Nurgle warbands since 2302 IC)",
+      "why": "A fortress held by a Chaos warband is a tribal raiding host, not an Imperial province"
+    },
+    "skaven_placeholder": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "expected_government_type": "gov_absolute_principality",
+      "suggested_ig_names": {
+        "ig_armed_forces": "Clanrats and Warlords",
+        "ig_devout": "Grey Seers"
+      },
+      "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
+      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source",
+      "next_election": null
+    },
+    "wood_elf_realm": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism"
+      },
+      "ruling_igs": [
+        "ig_rural_folk",
+        "ig_devout"
+      ],
+      "tax_level": "very_low",
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_rural_folk": "Glade Kin",
+        "ig_devout": "Spellsingers and Waystalkers"
+      },
+      "next_election": null,
+      "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
+      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)",
+      "expected_government_type": "gov_principality"
+    }
+  },
+  "tags": {
+    "AVE": {
+      "confidence": "medium"
+    },
+    "BRK": {
+      "profile": "chaos_warband",
+      "confidence": "low",
+      "note": "No country definition yet (PLACEHOLDER culture); entry kept for the later generator."
+    },
+    "CRB": {
+      "confidence": "low",
+      "note": "Baseline unchanged: Middenland free city on the Reik.",
+      "expected_government_type": "gov_constitutional_county",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at city-state tier."
+        }
+      }
+    },
+    "GRW": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf enclave; no country definition yet."
+    },
+    "HOC": {
+      "confidence": "medium"
+    },
+    "LAU": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf enclave; no country definition yet."
+    },
+    "MAR": {
+      "confidence": "high",
+      "extra_techs": [
+        "banking",
+        "stock_exchange"
+      ],
+      "laws": {
+        "lawgroup_governance_principles": "law_parliamentary_republic",
+        "lawgroup_distribution_of_power": "law_wealth_voting",
+        "lawgroup_church_and_state": "law_freedom_of_conscience",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_bureaucracy": "law_elected_bureaucrats",
+        "lawgroup_navy_model": "law_professional_navy",
+        "lawgroup_economic_system": "law_laissez_faire",
+        "lawgroup_trade_policy": "law_free_trade",
+        "lawgroup_taxation": "law_per_capita_based_taxation",
+        "lawgroup_land_reform": "law_peasant_proprietorship",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_colonization": "law_frontier_colonization"
+      },
+      "ruling_igs": [
+        "ig_petty_bourgeoisie",
+        "ig_industrialists"
+      ],
+      "institutions": {
+        "institution_schools": 1,
+        "institution_health_system": 1,
+        "institution_colonial_affairs": 1
+      },
+      "expected_government_type": "gov_parliamentary_democracy",
+      "justify": {
+        "extra_techs": {
+          "source": "inferred",
+          "why": "Banking and stock_exchange unlock protectionism/free-trade era finance for the richest port on the coast; not in tier 3."
+        },
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: WFRP Marienburg (the seceded Wasteland is run by merchant councils, no hereditary monarch)",
+          "why": "A council republic of merchant houses."
+        },
+        "laws.lawgroup_distribution_of_power": {
+          "source": "canon: WFRP Marienburg (rule by the wealthy merchant houses and guilds)",
+          "why": "Wealth voting is the closest to merchant oligarchy."
+        },
+        "laws.lawgroup_church_and_state": {
+          "source": "canon: WFRP Marienburg (cosmopolitan port tolerating many cults: Manann, Sigmar, Ranald, Shallya)",
+          "why": "No state cult."
+        },
+        "laws.lawgroup_citizenship": {
+          "source": "inferred",
+          "why": "Guild-franchise city; no subjecthood."
+        },
+        "laws.lawgroup_army_model": {
+          "source": "canon: WFRP Marienburg (Marienburg pays professional mercenary and guard regiments)",
+          "why": "Paid professional troops."
+        },
+        "laws.lawgroup_bureaucracy": {
+          "source": "canon: WFRP Marienburg (offices elected by the merchant councils)",
+          "why": "Elected administrators."
+        },
+        "laws.lawgroup_navy_model": {
+          "source": "canon: WFRP Marienburg (Marienburg is the Empire's greatest naval and merchant port)",
+          "why": "A standing war fleet as well as merchantmen."
+        },
+        "laws.lawgroup_economic_system": {
+          "source": "canon: WFRP Marienburg (trade-first free port)",
+          "why": "Laissez-faire in a city of merchants."
+        },
+        "laws.lawgroup_trade_policy": {
+          "source": "canon: WFRP Marienburg (free port)",
+          "why": "Free trade."
+        },
+        "laws.lawgroup_taxation": {
+          "source": "inferred",
+          "why": "Per-capita tax on a monetised city economy."
+        },
+        "laws.lawgroup_land_reform": {
+          "source": "inferred",
+          "why": "Free farmers of the polders."
+        },
+        "laws.lawgroup_migration": {
+          "source": "canon: WFRP Marienburg (cosmopolitan; Halflings, Elves, Dwarfs and all races present)",
+          "why": "Open borders."
+        },
+        "laws.lawgroup_labour_associations": {
+          "source": "inferred",
+          "why": "Laissez-faire disallows the guild system."
+        },
+        "laws.lawgroup_colonization": {
+          "source": "canon: WFRP Marienburg (trading posts and overseas ventures)",
+          "why": "Merchant venture colonisation."
+        },
+        "ruling_igs": {
+          "source": "canon: WFRP Marienburg (merchant houses and shipping magnates)",
+          "why": "Merchants and shipping magnates."
+        },
+        "institutions": {
+          "source": "inferred",
+          "why": "Marienburg invests in colonial affairs beside schools and health."
+        },
+        "expected_government_type": {
+          "source": "inferred",
+          "why": "Republic with a franchise."
+        }
+      }
+    },
+    "MID": {
+      "confidence": "high",
+      "note": "Middenheim/Ulric: state cult really is Ulric, but religion is not modelled in history data.",
+      "expected_government_type": "gov_constitutional_grand_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "MOO": {
+      "confidence": "medium",
+      "tech_tier": 4,
+      "laws": {
+        "lawgroup_governance_principles": "law_presidential_republic",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_church_and_state": "law_freedom_of_conscience",
+        "lawgroup_army_model": "law_peasant_levies",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_policing": "law_no_police"
+      },
+      "ruling_igs": [
+        "ig_rural_folk",
+        "ig_petty_bourgeoisie"
+      ],
+      "expected_government_type": "gov_presidential_democracy",
+      "justify": {
+        "tech_tier": {
+          "source": "canon: WFB Empire (Halflings of the Moot: farms, inns, no industry)",
+          "why": "A pastoral realm with Imperial trade goods but no industry of its own."
+        },
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: WFB Empire (the Moot is led by an Elder chosen from village elders; sends a vote to the Imperial election)",
+          "why": "An elected Elder rather than a hereditary monarch."
+        },
+        "laws.lawgroup_citizenship": {
+          "source": "inferred",
+          "why": "A single-people (halfling) polity."
+        },
+        "laws.lawgroup_church_and_state": {
+          "source": "canon: WFB Empire (Halflings honour Rhya and Esmeralda, ancestors, no dominant cult)",
+          "why": "No single state cult."
+        },
+        "laws.lawgroup_army_model": {
+          "source": "canon: WFB Empire (Moot Militia and Halfling Hot Pot as levies)",
+          "why": "Farmers with slings under village elders."
+        },
+        "laws.lawgroup_education_system": {
+          "source": "inferred",
+          "why": "No formal schooling."
+        },
+        "laws.lawgroup_health_system": {
+          "source": "inferred",
+          "why": "No organised health system."
+        },
+        "laws.lawgroup_policing": {
+          "source": "inferred",
+          "why": "Village elders keep order."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB Empire (halfling yeomen, cooks and innkeepers)",
+          "why": "Farmers and small tradesmen dominate."
+        },
+        "expected_government_type": {
+          "source": "inferred",
+          "why": "Republic with a franchise."
+        }
+      }
+    },
+    "NLD": {
+      "confidence": "medium",
+      "laws": {
+        "lawgroup_church_and_state": "law_freedom_of_conscience"
+      },
+      "justify": {
+        "laws.lawgroup_church_and_state": {
+          "source": "canon: WFB Empire (Nordland: Manann and Ulric worshipped alongside Sigmar; port culture)",
+          "why": "Sea-god Manann and Ulric sit beside Sigmar in the province, so no single state cult."
+        }
+      }
+    },
+    "OSM": {
+      "confidence": "medium"
+    },
+    "OST": {
+      "confidence": "medium"
+    },
+    "REI": {
+      "confidence": "high",
+      "note": "Home of Altdorf, the Imperial capital; the Emperor is its Elector Count.",
+      "expected_government_type": "gov_constitutional_grand_principality",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "SOL": {
+      "confidence": "low",
+      "tech_tier": 4,
+      "laws": {
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_health_system": "law_no_health_system"
+      },
+      "justify": {
+        "tech_tier": {
+          "source": "inferred",
+          "why": "Solland was ravaged by Orcs (1707 IC) and only partly rebuilt; one tier below its neighbours."
+        },
+        "laws.lawgroup_army_model": {
+          "source": "inferred",
+          "why": "Tier 4 has no mandatory_service; a paid standing force replaces the provincial militia."
+        },
+        "laws.lawgroup_health_system": {
+          "source": "inferred",
+          "why": "Tier 4 has no medical_degrees for Shallyan hospices."
+        }
+      }
+    },
+    "STI": {
+      "confidence": "medium"
+    },
+    "SYL": {
+      "confidence": "low",
+      "tech_tier": 4,
+      "laws": {
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_health_system": "law_no_health_system"
+      },
+      "expected_government_type": "gov_grand_principality",
+      "next_election": null,
+      "justify": {
+        "tech_tier": {
+          "source": "inferred",
+          "why": "Cut off and terrorised by the von Carsteins next door."
+        },
+        "laws.lawgroup_distribution_of_power": {
+          "source": "canon: WFB 8e Vampire Counts (Sylvania stripped of its Elector vote; human remnants ruled by fear)",
+          "why": "No functioning Landtag."
+        },
+        "laws.lawgroup_army_model": {
+          "source": "inferred",
+          "why": "Tier 4 has no mandatory_service."
+        },
+        "laws.lawgroup_health_system": {
+          "source": "inferred",
+          "why": "Tier 4 has no medical_degrees."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        },
+        "next_election": {
+          "source": "derived",
+          "why": "Elections exist only where a voting-franchise law is active."
+        }
+      }
+    },
+    "TAL": {
+      "confidence": "medium",
+      "note": "Talabheim, the Eye of the Empire, fortified city in a crater."
+    },
+    "VSY": {
+      "confidence": "high",
+      "tech_tier": 5,
+      "laws": {
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_army_model": "law_peasant_levies",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_land_reform": "law_serfdom",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_slavery": "law_debt_slavery",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "institutions": {},
+      "next_election": null,
+      "expected_government_type": "gov_absolute_kingdom",
+      "justify": {
+        "tech_tier": {
+          "source": "canon: WFB 8e Vampire Counts (undead armies of ancient arms; Sylvania is agrarian, mist-bound)",
+          "why": "Wight and zombie levies use old arms; Sylvania has none of Nuln's industry."
+        },
+        "laws.lawgroup_distribution_of_power": {
+          "source": "canon: WFB 8e Vampire Counts (the Count of Sylvania rules absolutely)",
+          "why": "A vampire lord answers to no assembly."
+        },
+        "laws.lawgroup_army_model": {
+          "source": "canon: WFB 8e Vampire Counts (raised dead and press-ganged levies)",
+          "why": "Levies raised by necromancy."
+        },
+        "laws.lawgroup_citizenship": {
+          "source": "inferred",
+          "why": "The living are subjects of the blood-line."
+        },
+        "laws.lawgroup_land_reform": {
+          "source": "canon: WFB 8e Vampire Counts (peasants are cattle bound to the land)",
+          "why": "Serfdom is the mildest fit for feudal terror."
+        },
+        "laws.lawgroup_education_system": {
+          "source": "inferred",
+          "why": "No public schooling."
+        },
+        "laws.lawgroup_health_system": {
+          "source": "inferred",
+          "why": "No health system."
+        },
+        "laws.lawgroup_policing": {
+          "source": "inferred",
+          "why": "The dead are the police."
+        },
+        "laws.lawgroup_slavery": {
+          "source": "canon: WFB 8e Vampire Counts (the living serve as blood-stock)",
+          "why": "Debt slavery is the closest law to bondage of the living."
+        },
+        "laws.lawgroup_migration": {
+          "source": "canon: WFB Vampire Counts (Sylvania is closed off by cursed borders)",
+          "why": "Closed borders."
+        },
+        "laws.lawgroup_trade_policy": {
+          "source": "inferred",
+          "why": "Isolationist realm."
+        },
+        "laws.lawgroup_bureaucracy": {
+          "source": "inferred",
+          "why": "Hereditary retainers."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB 8e Vampire Counts (vampire lords and their necromantic cult)",
+          "why": "Undead soldiery and the cult are the ruling blocs."
+        },
+        "tax_level": {
+          "source": "inferred",
+          "why": "A poor agrarian land."
+        },
+        "institutions": {
+          "source": "inferred",
+          "why": "No public schools or health."
+        },
+        "next_election": {
+          "source": "inferred",
+          "why": "No elections."
+        },
+        "expected_government_type": {
+          "source": "inferred",
+          "why": "Absolute rule at kingdom tier."
+        }
+      }
+    },
+    "WIS": {
+      "confidence": "high",
+      "tech_tier": 2,
+      "laws": {
+        "lawgroup_economic_system": "law_interventionism"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_armed_forces",
+        "ig_industrialists"
+      ],
+      "expected_government_type": "gov_constitutional_grand_principality",
+      "justify": {
+        "tech_tier": {
+          "source": "canon: WFB 8e Empire (Imperial Gunnery School and steam-tank works at Nuln)",
+          "why": "Nuln is the Empire's engineering heartland; tier 2 reaches atmospheric_engine and mechanical_tools."
+        },
+        "laws.lawgroup_economic_system": {
+          "source": "canon: WFB 8e Empire (Nuln foundries and the gunnery school are state-directed)",
+          "why": "Directed industry rather than pure guild tradition (interventionism needs manufacturies)."
+        },
+        "ruling_igs": {
+          "source": "canon: WFB 8e Empire (Nuln gunnery school, Imperial cannon foundries)",
+          "why": "Gunnery officers and foundry masters share the ruling bloc."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at grand_principality tier."
+        }
+      }
+    },
+    "XSA": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder; no country definition yet."
+    },
+    "XSB": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder; no country definition yet."
+    },
+    "XSC": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder; no country definition yet."
+    }
+  }
+}

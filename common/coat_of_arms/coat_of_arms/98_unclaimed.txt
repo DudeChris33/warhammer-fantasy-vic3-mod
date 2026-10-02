@@ -1,0 +1,27 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of
+# this file does NOT load. Bespoke content per board item #6391 (2026-10-02) — the one tag
+# defined in common/country_definitions/98_unclaimed.txt (UNO, Unclaimed Lands).
+# Composed from vanilla gfx/coat_of_arms/ art (patterns + colored_emblems, neither blanked by
+# replace_paths) and this mod's named_colors palette (common/named_colors/00_coa_colors.txt +
+# 01_wh_coa_colors.txt). Requires common/flag_definitions/98_unclaimed.txt (this mod's DEFAULT
+# flag_definitions block is unconditional at priority = 0 and would otherwise mask it) to render.
+
+# UNO — Unclaimed Lands (placeholder). An open hand, skewed: land there for the taking.
+# PLACEHOLDER heraldry (#6391): UNO carries the goblin stand-in culture, so per
+# .claude/rules/heraldry.md's placeholder rule it wears the greenskin house style — one oversized,
+# off-centre charge on a two-colour field from the closed greenskin palette — and no iconography of
+# any people whose land it holds. Disclosed invention; no canon device exists.
+# ce_hand is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
+# common/coat_of_arms/coat_of_arms/02_countries.txt:595).
+UNO = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "dirty_iron"
+	color2 = "goblin_moss"
+
+	colored_emblem = {
+		texture = "ce_hand.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.56 0.46 } scale = { 0.75 0.75 } rotation = -14 }
+	}
+}

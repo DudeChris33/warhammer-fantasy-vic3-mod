@@ -16,3 +16,8 @@ sphere_kislevarin = { type = language  trait_group = sphere_group_kislevarin }
 sphere_norscan = { type = language  trait_group = sphere_group_norscan }
 sphere_nehekharan = { type = language  trait_group = sphere_group_nehekharan }
 sphere_greenskin = { type = language  trait_group = sphere_group_greenskin }
+
+# Fan-Eltharin, the Asrai dialect of the elven tongue (mirrors khazalid/khazalid_zharr), and
+# Grumbarth, the ogre tongue. Board item #6379.
+sphere_fan_eltharin = { type = language  trait_group = sphere_group_eltharin }
+sphere_grumbarth = { type = language  trait_group = sphere_group_grumbarth }
