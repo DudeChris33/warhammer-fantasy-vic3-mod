@@ -3,12 +3,6 @@ BUILDINGS = {
 	s:STATE_BLASTED_DISTRICT = {
 		region_state:MZN = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -52,12 +46,6 @@ BUILDINGS = {
 	s:STATE_CAUSEWAY_OF_ZHARR = {
 		region_state:DLO = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -99,12 +87,6 @@ BUILDINGS = {
 	s:STATE_DEATH_S_SIDE = {
 		region_state:UZK = {
 			create_building = {
-				building = "building_manor_house"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -135,12 +117,6 @@ BUILDINGS = {
 	s:STATE_DESOLATION_OF_AZGORH = {
 		region_state:DLO = {
 			create_building = {
-				building = "building_manor_house"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -157,12 +133,6 @@ BUILDINGS = {
 	}
 	s:STATE_FALLS_DISTRICT = {
 		region_state:MZN = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -207,12 +177,6 @@ BUILDINGS = {
 	s:STATE_FIVE_RIVERS = {
 		region_state:MAW = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -253,12 +217,6 @@ BUILDINGS = {
 	}
 	s:STATE_FOUNDRY_DISTRICT = {
 		region_state:MZN = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -314,12 +272,6 @@ BUILDINGS = {
 	s:STATE_GATE_DISTRICT = {
 		region_state:MZN = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -362,12 +314,6 @@ BUILDINGS = {
 	}
 	s:STATE_GREY_HAG_MOUNTAIN = {
 		region_state:GOR = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -423,18 +369,6 @@ BUILDINGS = {
 	s:STATE_HEART_OF_ZHARRDUK = {
 		region_state:MZN = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -470,11 +404,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_port"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:MZN"
 						levels = 1
-						region = "STATE_HEART_OF_ZHARRDUK"
 					}
 				}
 				reserves = 1
@@ -483,11 +415,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:MZN"
 						levels = 1
-						region = "STATE_HEART_OF_ZHARRDUK"
 					}
 				}
 				reserves = 1
@@ -537,12 +467,6 @@ BUILDINGS = {
 	s:STATE_HOWLING_DISTRICT = {
 		region_state:MZN = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -586,12 +510,6 @@ BUILDINGS = {
 	s:STATE_IVORY_ROAD = {
 		region_state:DLO = {
 			create_building = {
-				building = "building_manor_house"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -609,12 +527,6 @@ BUILDINGS = {
 	s:STATE_LAND_242 = {
 		region_state:SLV = {
 			create_building = {
-				building = "building_manor_house"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -631,12 +543,6 @@ BUILDINGS = {
 	}
 	s:STATE_LAND_244 = {
 		region_state:DLO = {
-			create_building = {
-				building = "building_manor_house"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -668,12 +574,6 @@ BUILDINGS = {
 	s:STATE_LAND_245 = {
 		region_state:DLO = {
 			create_building = {
-				building = "building_manor_house"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -690,12 +590,6 @@ BUILDINGS = {
 	}
 	s:STATE_LAND_299 = {
 		region_state:MZN = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -740,12 +634,6 @@ BUILDINGS = {
 	s:STATE_MANUFACTORY_DISTRICT = {
 		region_state:MZN = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -788,12 +676,6 @@ BUILDINGS = {
 	}
 	s:STATE_MARKET_DISTRICT = {
 		region_state:MZN = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -838,18 +720,6 @@ BUILDINGS = {
 	s:STATE_MOUNT_AZGORH = {
 		region_state:GOR = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -874,11 +744,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:GOR"
 						levels = 1
-						region = "STATE_MOUNT_AZGORH"
 					}
 				}
 				reserves = 1
@@ -928,12 +796,6 @@ BUILDINGS = {
 	s:STATE_NEW_STRYGOS = {
 		region_state:THG = {
 			create_building = {
-				building = "building_manor_house"
-				level = 4
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -974,12 +836,6 @@ BUILDINGS = {
 	}
 	s:STATE_NORTH_HOWLING_WASTES = {
 		region_state:MZN = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -1023,12 +879,6 @@ BUILDINGS = {
 	}
 	s:STATE_PITS_DISTRICT = {
 		region_state:MZN = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -1084,12 +934,6 @@ BUILDINGS = {
 	s:STATE_RIVER_DISTRICT = {
 		region_state:MZN = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -1132,12 +976,6 @@ BUILDINGS = {
 	}
 	s:STATE_SKULL_CLIFFS = {
 		region_state:UZK = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -1193,12 +1031,6 @@ BUILDINGS = {
 	s:STATE_SKULL_ROAD = {
 		region_state:UZK = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -1242,12 +1074,6 @@ BUILDINGS = {
 	s:STATE_SOUTH_HOWLING_WASTES = {
 		region_state:DLO = {
 			create_building = {
-				building = "building_manor_house"
-				level = 2
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -1277,12 +1103,6 @@ BUILDINGS = {
 	}
 	s:STATE_STEEL_PLAINS = {
 		region_state:MZN = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -1327,12 +1147,6 @@ BUILDINGS = {
 	s:STATE_THE_SENTINELS = {
 		region_state:EYB = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1373,12 +1187,6 @@ BUILDINGS = {
 	}
 	s:STATE_WHEATLANDS = {
 		region_state:UZK = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -1423,12 +1231,6 @@ BUILDINGS = {
 	s:STATE_WOLF_LANDS = {
 		region_state:DLO = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
@@ -1458,12 +1260,6 @@ BUILDINGS = {
 	}
 	s:STATE_ZORN_DUM = {
 		region_state:UZK = {
-			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -1519,18 +1315,6 @@ BUILDINGS = {
 	s:STATE_ZORN_UZKUL = {
 		region_state:UZK = {
 			create_building = {
-				building = "building_manor_house"
-				level = 3
-				reserves = 1
-				activate_production_methods = { "pm_manor_house_privately_owned" "pm_manor_house_clergy_ownership" }
-			}
-			create_building = {
-				building = "building_financial_district"
-				level = 1
-				reserves = 1
-				activate_production_methods = { "pm_financial_district_privately_owned" }
-			}
-			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1555,11 +1339,9 @@ BUILDINGS = {
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
-					building = {
-						type = "building_financial_district"
+					country = {
 						country = "c:UZK"
 						levels = 1
-						region = "STATE_ZORN_UZKUL"
 					}
 				}
 				reserves = 1
