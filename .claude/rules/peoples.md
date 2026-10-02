@@ -115,6 +115,9 @@ TAG = {
   `mapgen/config/state_ownership_legend.json`, because the PNG is keyed on that RGB and the legend
   wins (#6373). Say so in the file's comment above those blocks, and drop the legend entry's
   `proposed` flag (setting its final `name` and `note`) in the same change.
+- **A painted start owner needs a definition.** Every owner tag in `mapgen/derived/state_ownership.json`
+  must have a non-dynamic entry here (the D00-D99 `dynamic_country_definition` slots don't count), or
+  `generate_state_history.py` holds its states back and `validate_map.py` fails ([testing.md](testing.md)).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
 - **Placeholder tags (`XS*`).** A state owner the setting needs but no culture can yet represent gets
   a deliberately generic stand-in rather than an invented nation. The `XS*` codes are the Skaven ones:

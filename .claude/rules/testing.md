@@ -40,6 +40,8 @@ Run this autonomously to convergence: edit a generator, LUT, seed or hand-author
 One-time setup: a local `mapgen/.venv` (git-ignored), deps pinned in `mapgen/requirements.txt`. Before committing anything under `map_data/`, `common/strategic_regions/`, the map localization, or the source-registration data, run:
 
 ```
+python mapgen/read_state_ownership.py --check     # state_ownership.json is current with the painted PNG + map_data
+python mapgen/generate_state_history.py --check   # common/history/states is current with state_ownership.json
 python mapgen/worldgen/sources.py --verify        # source manifest SHA-256 + registration cross-checks
 python mapgen/validate_map.py --province-bitmap    # bitmap tiles the mask, agrees with its index and the sea layer
 python mapgen/validate_map.py --sea                # sea engine files (colours, sea_starts, grouping, loc)
@@ -47,7 +49,7 @@ python mapgen/run_fixture.py --check               # regression-checks the toolc
 python mapgen/validate_map.py                      # full crosscheck (needs both sea + land state files)
 ```
 
-All must pass before the in-game `error.log` check; they catch the offline-detectable error class first and do not replace the game load. `validate_map.py --labels` lints the state-label layer instead of the province map. `validate_map.py --province-bitmap` prints non-blocking `WARNING`s (a separate channel that never fails the gate): a lake over `lakes.OCEAN_WARN_FRACTION` of the world ocean (possibly a sealed-off sea) and one below `lakes.LAKE_REPORT_MIN` (likely fill speckle — drop or redraw, never merge). `run_fixture.py --check` covers every generator module against committed fixtures, independent of `sources/`.
+All must pass before the in-game `error.log` check; they catch the offline-detectable error class first and do not replace the game load. `validate_map.py --labels` lints the state-label layer instead of the province map. `validate_map.py --province-bitmap` prints non-blocking `WARNING`s (a separate channel that never fails the gate): a lake over `lakes.OCEAN_WARN_FRACTION` of the world ocean (possibly a sealed-off sea) and one below `lakes.LAKE_REPORT_MIN` (likely fill speckle — drop or redraw, never merge). `run_fixture.py --check` covers every generator module against committed fixtures, independent of `sources/`. Full `validate_map.py` also checks `common/history/states` against `map_data`, `state_ownership.json` and the defined (non-dynamic) country tags; an owner tag with no definition is held back by the generator and fails the gate (`HELD_BACK_IS_ERROR`). A `--check` that byte-compares a generated text file normalizes a BOM and `\r\n` first: `core.autocrlf` checks the committed LF files out as CRLF.
 
 ## Regeneration pipeline
 
@@ -57,9 +59,12 @@ The mask moves first; every downstream layer regenerates from it, in this order:
 generate_coastline_mask.py --from-fill → generate_heightmap.py → generate_rivers.py →
 generate_state_labels.py → generate_sea_zones.py → generate_provinces.py →
 generate_sea_regions.py + generate_land_regions.py →
+read_state_ownership.py → generate_state_history.py →
 generate_province_terrains.py → generate_adjacencies.py --write →
 generate_arable_heatmap.py
 ```
+
+- **A `generate_provinces.py` or `generate_land_regions.py` regen stales the starting ownership.** `state_ownership.json` and `common/history/states` are colour- and state-keyed, so re-run `read_state_ownership.py` then `generate_state_history.py`; the read may hard-error (a province with no votable pixel, a new state) and need a repaint, which is Chris's.
 
 - The coastline source is a black/white land **fill**, so always pass `--from-fill` (the parity-trace default is legacy, `generate_coastline_mask.py`). `--from-fill` also emits `mapgen/derived/lake_mask.png`; either mode first drops isolated sub-4px land components (`drop_land_specks`, `--speck-max`).
 - **A `generate_provinces.py` regen invalidates every downstream, colour-keyed emitter** (sea regions, land regions, province terrains, adjacencies, arable heatmap) even when few provinces moved — always re-run the full chain from `generate_provinces.py` onward, then the offline gate, before committing.
@@ -87,6 +92,7 @@ generate_arable_heatmap.py
 | `generate_adjacencies.py --write` | `map_data/adjacencies.csv`, `common/strait_definitions/canals.txt`, `localization/english/map/wh_canals_l_english.yml` |
 | `generate_arable_heatmap.py` | `mapgen/derived/arable_heatmap.png`, `arable_heatmap_index.json` |
 | `read_state_ownership.py` | `mapgen/derived/state_ownership.json` (per-`STATE_*` owner, or split owners with province ids, read from `state_ownership.png`) |
+| `generate_state_history.py` | `common/history/states/00–19_*.txt` (one per land state-region file; `create_state` per owner, header-only where nothing is owned) |
 | `fit_registration.py` | `mapgen/registration/*.json` |
 | engine (copy from `Documents/.../Victoria 3/generated/` after a load reports an incomplete locator) | `gfx/map/map_object_data/generated_map_object_locators_*` |
 
@@ -145,7 +151,7 @@ If a new stale-reference error appears, override one more file per iteration (ca
 The recurring `EXCEPTION_ACCESS_VIOLATION` at RVA `0x107D720` of `victoria3.exe` 1.13.11 (null read in `UpdateCountryScorePositions`, `logic/country_rank_manager.cpp`, reached from `InitializeGamestateFromBookmark`) is **not a map or gfx problem. It fires when the starting gamestate contains zero countries.** `map_data` is `replace_paths`-blanked and every `common/history/*` file is a stub, so no country exists and no state has an owner. The map editor builds the same gamestate, so it crashed identically.
 
 - Evidence: the mod-off editor launch loads; the mod on with vanilla `map_data` (provinces, states, pack, nodes) and with vanilla `splnet` still crashed at the same RVA; adding **one** `common/history/countries` entry (`c:SAR ?= { }`) and **one** `common/history/states` `create_state` for `STATE_BAY_OF_BLADES` made the editor load with the same map, `splnet` and pack. Nothing else changed.
-- Fix direction: ship real `common/history/countries` + `common/history/states` (start owners, then pops/buildings); the SAR/BAY_OF_BLADES pair was only a discriminator. Expect follow-on errors until then (`country_law_manager` laws, "There are no pops" assertion).
+- Fix direction: ship real `common/history/countries` + `common/history/states` (start owners, then pops/buildings; the state start owners are now generated by `generate_state_history.py`, #6372); the SAR/BAY_OF_BLADES pair was only a discriminator. Expect follow-on errors until then (`country_law_manager` laws, "There are no pops" assertion).
 - The map pack (`packed_heightmap.png`, `indirection_heightmap.png`, `nodes.dat`, descriptor) and the base install were **not** the cause; #5525's pack hypothesis is falsified, and the base install's July timestamps were not editor damage (Verify integrity left every hash unchanged). `!Out.Contains( 616u )` still logs after script load but is non-fatal.
 - The pack is committed (`209d199`): `packed_heightmap.png`, `indirection_heightmap.png`, `nodes.dat` and the editor's own `heightmap.heightmap` (`should_wrap_x=no`, never hand-edited). A Pack + Save also rewrites `heightmap.png`, `provinces.png`, `99_seas.txt`, the locators, `splnet` and ~320 `.bin` files: restore or delete those, commit only the four pack files (`MAP_RUNBOOK.md`, S4 result).
 - Still vanilla Earth data: the mod overrides none of `gfx/map/terrain/detail_index.tga`, `detail_intensity.tga`, `textures/colormap.dds`, `flatmap*.dds`, `land_mask.dds`, `dynamic_masks/exclusion_mask.dds` or `map_object_data/generated/*`. They load because the canvas matches vanilla's size, and they are why the map editor shows Earth's materials and coastlines under our land. Generating our own is a separate `mapgen` job.
