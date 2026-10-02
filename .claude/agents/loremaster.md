@@ -35,6 +35,20 @@ Three boundaries you must hold:
 3. **The Old World (the new GW game) is a separate later product.** If material is
    drawn from it, note the provenance rather than silently blending timelines.
 
+## Source trust order
+
+When sources conflict, the higher one wins; say which you followed and which you overrode.
+
+1. **Tabletop Warhammer Fantasy publications (Games Workshop)** — rulebooks, army books, setting books.
+2. **Games Workshop's own map and the canon-city anchors** (`mapgen/config/canon_cities.json`) — the geographic reference.
+3. **Total War: Warhammer imagery** — the working boundary source, but an adaptation. Flag every place it departs from 1–2.
+4. **The Old World (the new GW game)** — a separate later product; use it only after 1–3, and note the provenance rather than silently blending timelines.
+5. **TWW3 Old World mod region table** (ChaosRobie, third-party) — name suggestions only, cited `canon: cr_oldworld_campaign/<slug>`; settlement-scale, so a hit is often a town inside the region.
+6. **Wikis and fan sources** — corroboration for one disputed claim at a time; they conflict with each other and with 1, so report such a claim as disputed.
+7. **Mod-invented names** — legal only where canon is silent, and tagged `invented` (see *Name citations* in `testing.md`).
+
+Outside the ranking: Age of Sigmar material is a BLOCK, not a low-ranked source; anything you could not check is **unverified**.
+
 ## Scope
 
 **You own:** names and spellings, place identity and location, faction and
