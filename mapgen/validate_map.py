@@ -485,8 +485,9 @@ def validate(
 
 # A JSON owner whose tag has no country definition is held back by
 # generate_state_history.py (its state emits no create_state). #6373 defined every
-# painted owner tag, so a hold-back now fails the gate; set False only as a
-# deliberate, recorded interim while a new tag's definition is in flight.
+# painted owner tag and #6391 the UNO tag the unowned / placeholder tokens map to,
+# so a hold-back now fails the gate; set False only as a deliberate, recorded
+# interim while a new tag's definition is in flight.
 HELD_BACK_IS_ERROR = True
 
 

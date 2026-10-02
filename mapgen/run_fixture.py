@@ -5050,9 +5050,10 @@ def _selfcheck_state_ownership() -> dict:
 def _selfcheck_state_history(ownership_doc: dict) -> None:
     """Starting ownership as history script (#6372), on the golden assignment of
     :func:`_selfcheck_state_ownership` (ALPHA=REI, BETA unowned, GAMMA split
-    REI/MID, DELTA placeholder): what is emitted, byte stability, held-back
-    undefined tags, the CRLF-insensitive freshness compare, a 3-way split, and
-    the validator refusing hand-broken history text.
+    REI/MID, DELTA placeholder): what is emitted (unowned and placeholder land
+    go to c:UNO, #6391), byte stability, held-back undefined tags (UNO
+    included), the CRLF-insensitive freshness compare, a 3-way split whose
+    unowned slice goes to UNO, and the validator refusing hand-broken history text.
     """
     import copy
 
@@ -5062,7 +5063,7 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
     by_file = sh.load_states_by_file(EXPECTED_DIR / "state_regions")
     assert "99_seas.txt" not in by_file and sorted(by_file) == ["01_driftland.txt", "02_isle.txt", "03_mainland.txt"]
     land = {s.key: s for ss in by_file.values() for s in ss}
-    tags = {"REI", "MID"}
+    tags = {"REI", "MID", "UNO"}
 
     p = sh.plan(ownership_doc, by_file, tags)
     creates = {k: c for e in p.files.values() for k, c in e}
@@ -5071,9 +5072,13 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
         "a whole-state owner owns every province (impassable included)"
     assert [t for t, _ in creates["STATE_GAMMA"]] == ["MID", "REI"], "a split gets one create_state per owner"
     assert sorted(t for _, ps in creates["STATE_GAMMA"] for t in ps) == sorted(land["STATE_GAMMA"].provinces)
-    assert "STATE_BETA" not in creates and "STATE_DELTA" not in creates, "unowned / placeholder emit nothing"
+    assert creates["STATE_BETA"] == [("UNO", sorted(land["STATE_BETA"].provinces))], \
+        "an unowned state goes wholly to c:UNO"
+    assert creates["STATE_DELTA"] == [("UNO", sorted(land["STATE_DELTA"].provinces))], \
+        "an out-of-scope placeholder state goes wholly to c:UNO"
     assert p.unowned == ["STATE_BETA"] and p.placeholder == ["STATE_DELTA"] and not p.held_back
-    assert p.files["02_isle.txt"] == [] and sh.render_file([]) == sh.HEADER, "an unowned file is header-only"
+    assert all(p.files.values()) and sh.render_file([]) == sh.HEADER, \
+        "every golden file now carries a state; an empty file is header-only"
     texts = {f: sh.render_file(e) for f, e in p.files.items()}
     assert texts == {f: sh.render_file(e) for f, e in sh.plan(ownership_doc, by_file, tags).files.items()}, \
         "byte-stable"
@@ -5088,17 +5093,25 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
     assert sh.parse_history_text(crlf) == [(k, [(t, ps) for t, ps in c]) for k, c in p.files["03_mainland.txt"]]
 
     # an undefined tag is held back by the generator and reported by the validator
-    hp = sh.plan(ownership_doc, by_file, {"REI"})
+    hp = sh.plan(ownership_doc, by_file, {"REI", "UNO"})
     hcreates = {k: c for e in hp.files.values() for k, c in e}
     assert [t for t, _ in hcreates["STATE_GAMMA"]] == ["REI"] and hp.held_back == [("STATE_GAMMA", "MID")]
     htexts = {f: sh.render_file(e) for f, e in hp.files.items()}
-    errs, held = sh.check(htexts, ownership_doc, by_file, {"REI"})
+    errs, held = sh.check(htexts, ownership_doc, by_file, {"REI", "UNO"})
     assert errs == [] and held == [("STATE_GAMMA", "MID")], (errs, held)
+    # without a UNO definition the unowned / placeholder states are held back like any undefined owner
+    np_ = sh.plan(ownership_doc, by_file, {"REI", "MID"})
+    ncreates = {k: c for e in np_.files.values() for k, c in e}
+    assert "STATE_BETA" not in ncreates and "STATE_DELTA" not in ncreates and np_.files["02_isle.txt"] == []
+    assert sorted(np_.held_back) == [("STATE_BETA", "UNO"), ("STATE_DELTA", "UNO")], np_.held_back
+    errs, held = sh.check({f: sh.render_file(e) for f, e in np_.files.items()}, ownership_doc, by_file, {"REI", "MID"})
+    assert errs == [] and sorted(held) == [("STATE_BETA", "UNO"), ("STATE_DELTA", "UNO")], (errs, held)
     # D-tags are runtime slots, not start-date countries; a BOM'd first entry still counts
     assert sh.parse_country_tags(
         "\ufeffREI = {\n\tcolor = { 1 2 3 }\n}\n# QQQ = { }\nD00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI"}
 
-    # 3-way split (defined + undefined + unowned): only the defined slice is emitted
+    # 3-way split (defined + undefined + unowned): the defined slice is emitted, the
+    # unowned slice becomes a c:UNO slice, the undefined one is held back
     alpha = sorted(land["STATE_ALPHA"].provinces)
     split_doc = copy.deepcopy(ownership_doc)
     split_doc["states"]["STATE_ALPHA"] = {
@@ -5107,7 +5120,8 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
                    {"owner": "unowned", "provinces": alpha[5:]}]}
     sp = sh.plan(split_doc, by_file, tags)
     screates = {k: c for e in sp.files.values() for k, c in e}
-    assert screates["STATE_ALPHA"] == [("REI", alpha[:3])] and sp.held_back == [("STATE_ALPHA", "ZZZ")]
+    assert screates["STATE_ALPHA"] == [("REI", alpha[:3]), ("UNO", alpha[5:])], screates["STATE_ALPHA"]
+    assert sp.held_back == [("STATE_ALPHA", "ZZZ")] and sp.unowned == ["STATE_BETA"], "a slice is not an unowned state"
     stexts = {f: sh.render_file(e) for f, e in sp.files.items()}
     errs, held = sh.check(stexts, split_doc, by_file, tags)
     assert errs == [] and held == [("STATE_ALPHA", "ZZZ")], errs
@@ -5132,12 +5146,24 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
     moved = sh.render_file(p.files["03_mainland.txt"])
     refused({"01_driftland.txt": texts["01_driftland.txt"], "02_isle.txt": moved,
              "03_mainland.txt": sh.render_file([])}, "belongs in 03_mainland.txt")
-    # create_state on the placeholder state
-    ph = sh.render_file([("STATE_DELTA", [("REI", sorted(land["STATE_DELTA"].provinces))])])
-    refused({**texts, "02_isle.txt": ph}, "placeholder state")
-    # create_state on an unowned state
-    un = sh.render_file(p.files["03_mainland.txt"] + [("STATE_BETA", [("REI", sorted(land["STATE_BETA"].provinces))])])
-    refused({**texts, "03_mainland.txt": un}, "leaves unowned")
+    # another owner on the placeholder state, or its c:UNO block dropped
+    refused({**texts, "02_isle.txt": texts["02_isle.txt"].replace("c:UNO", "c:REI")}, "differ from state_ownership.json")
+    refused({**texts, "02_isle.txt": sh.render_file([])}, "differ from state_ownership.json")
+    # another owner on the unowned state, or its c:UNO block dropped
+    un = sh.render_file([(k, c) if k != "STATE_BETA" else (k, [("REI", c[0][1])]) for k, c in p.files["03_mainland.txt"]])
+    refused({**texts, "03_mainland.txt": un}, "differ from state_ownership.json")
+    no_uno = sh.render_file([(k, c) for k, c in p.files["03_mainland.txt"] if k != "STATE_BETA"])
+    refused({**texts, "03_mainland.txt": no_uno}, "differ from state_ownership.json")
+    # a drawn state painted with the placeholder token is refused by plan() and check()
+    ph_doc = copy.deepcopy(ownership_doc)
+    ph_doc["states"]["STATE_ALPHA"]["owner"] = "placeholder"
+    refused(texts, "drawn state owned by 'placeholder'", ph_doc)
+    try:
+        sh.plan(ph_doc, by_file, tags)
+    except so.OwnershipError:
+        pass
+    else:
+        raise AssertionError("plan() must refuse a drawn state owned by 'placeholder'")
     # emitted owner differs from the JSON (a repaint read but not regenerated)
     refused({**texts, "03_mainland.txt": main.replace("c:REI", "c:MID")}, "differ from state_ownership.json")
     # missing provinces (coverage) and a missing state entirely
@@ -5177,13 +5203,9 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
         k: hp2.homelands[k] for k, _ in hp2.files["03_mainland.txt"] if k in hp2.homelands}
     assert sh.check(htx, ownership_doc, by_file, tags, cc, ids) == ([], []), "homelands validate clean"
     assert sh.check(texts, ownership_doc, by_file, tags) == ([], []), "no culture args: homelands not checked"
-    # UNO owns a state: create_state but no homeland
-    uno_doc = copy.deepcopy(ownership_doc)
-    uno_doc["states"]["STATE_BETA"]["owner"] = "UNO"
-    up = sh.plan(uno_doc, by_file, tags | {"UNO"}, cc)
-    assert "STATE_BETA" in {k for e in up.files.values() for k, _ in e} and "STATE_BETA" not in up.homelands
-    utx = {f: sh.render_file(e, up.homelands) for f, e in up.files.items()}
-    assert sh.check(utx, uno_doc, by_file, tags | {"UNO"}, cc, ids) == ([], [])
+    # UNO's states (BETA unowned, DELTA placeholder) get a create_state but no homeland
+    hcreates2 = {k for e in hp2.files.values() for k, _ in e}
+    assert {"STATE_BETA", "STATE_DELTA"} <= hcreates2 and not {"STATE_BETA", "STATE_DELTA"} & set(hp2.homelands)
 
     def refused_h(texts_: dict, frag: str, cult: dict = cc, cids: set = ids) -> None:
         e, _ = sh.check(texts_, ownership_doc, by_file, tags, cult, cids)
@@ -5195,26 +5217,39 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
     refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:middenlander\n", "", 1)}, "differs from the")
     refused_h(texts, "differs from the")                       # homelands never emitted
     refused_h(htx, "owned state gets no homeland", {**cc, "REI": []})
-    stray = sh.render_file(hp2.files["03_mainland.txt"] + [("STATE_BETA", [])], {"STATE_BETA": ["reiklander"]})
+    # a homeland on UNO's state is refused (UNO gives none, though it has a culture)
+    uno_home = sh.render_file(hp2.files["03_mainland.txt"], {**hp2.homelands, "STATE_BETA": ["wilderness"]})
+    refused_h({**htx, "03_mainland.txt": uno_home}, "whose owner(s) give no homelands")
+    stray = sh.render_file([e for e in hp2.files["03_mainland.txt"] if e[0] != "STATE_BETA"] + [("STATE_BETA", [])],
+                           {**hp2.homelands, "STATE_BETA": ["reiklander"]})
     refused_h({**htx, "03_mainland.txt": stray}, "without a create_state")
 
 
 def _selfcheck_country_history(ownership_doc: dict) -> None:
     """Starting country setup (#6375), on the golden assignment of
-    :func:`_selfcheck_state_ownership` (owners REI and MID): tier -> technology
-    effect, byte stability, the CRLF-insensitive compare, a held-back undefined
-    tag, an unmapped tier, and the validator refusing hand-broken text.
+    :func:`_selfcheck_state_ownership` (owners REI and MID, plus UNO for the
+    unowned / placeholder states, #6391): tier -> technology effect, byte
+    stability, the CRLF-insensitive compare, held-back undefined tags, an
+    unmapped tier, and the validator refusing hand-broken text.
     """
     from worldgen import country_history as ch
     from worldgen import state_ownership as so
 
-    tiers = {"REI": "grand_principality", "MID": "city_state"}
+    tiers = {"REI": "grand_principality", "MID": "city_state", "UNO": "principality"}
     effects = {"effect_starting_technology_tier_5_tech", "effect_starting_technology_tier_6_tech",
                "effect_starting_politics_traditional"}
     p = ch.plan(ownership_doc, tiers)
     assert p.blocks == [("MID", ["effect_starting_technology_tier_6_tech", ch.POLITICS_EFFECT]),
-                        ("REI", ["effect_starting_technology_tier_5_tech", ch.POLITICS_EFFECT])] \
-        and not p.held_back, "one block per owner, sorted, tier -> technology effect"
+                        ("REI", ["effect_starting_technology_tier_5_tech", ch.POLITICS_EFFECT]),
+                        ("UNO", ["effect_starting_technology_tier_6_tech", ch.POLITICS_EFFECT])] \
+        and not p.held_back, "one block per owner (UNO included), sorted, tier -> technology effect"
+    # UNO is an owner only while some state or slice is unowned / placeholder
+    states = ownership_doc["states"]
+    assert ch.owner_tags(ownership_doc) == {"REI", "MID", "UNO"}
+    assert ch.owner_tags({"states": {k: v for k, v in states.items() if k not in ("STATE_BETA", "STATE_DELTA")}}) \
+        == {"REI", "MID"}, "no unowned / placeholder token, no UNO"
+    assert ch.owner_tags({"states": {"STATE_DELTA": states["STATE_DELTA"]}}) == {"UNO"}
+    assert ch.owner_tags({"states": {"STATE_BETA": states["STATE_BETA"]}}) == {"UNO"}
     text = ch.render(p.blocks)
     assert text == ch.render(ch.plan(ownership_doc, tiers).blocks), "byte-stable"
     assert "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n" in text, \
@@ -5229,7 +5264,7 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
 
     # an undefined owner is held back (no block) and reported
     hp = ch.plan(ownership_doc, {"REI": "kingdom"})
-    assert [t for t, _ in hp.blocks] == ["REI"] and hp.held_back == ["MID"]
+    assert [t for t, _ in hp.blocks] == ["REI"] and hp.held_back == ["MID", "UNO"], hp.held_back
     # a defined owner whose tier has no technology mapping is an error, never a default
     for bad in ({"REI": "kingdom", "MID": None}, {"REI": "kingdom", "MID": "duchy"}):
         try:
@@ -5329,12 +5364,13 @@ def run_check() -> int:
     print("state_ownership: render -> read round-trip (whole + split + placeholder states, seam, refusals, "
           "byte-stable JSON, committed legend) self-check passed.")
     _selfcheck_state_history(ownership_doc)
-    print("state_history: create_state emission (whole + split + unowned + placeholder, held-back tag, "
-          "3-way split, CRLF compare, hand-broken history refusals) and add_homeland derivation "
-          "(owner cultures, UNO skip, unknown-culture refusal) self-check passed.")
+    print("state_history: create_state emission (whole + split, unowned + placeholder -> c:UNO, held-back "
+          "tag incl. UNO, 3-way split with a UNO slice, CRLF compare, hand-broken history refusals incl. a "
+          "dropped or replaced c:UNO) and add_homeland derivation (owner cultures, UNO skip, unknown-culture "
+          "refusal) self-check passed.")
     _selfcheck_country_history(ownership_doc)
-    print("country_history: tier -> starting-technology blocks (held-back tag, unmapped tier, CRLF compare, "
-          "hand-broken history refusals) self-check passed.")
+    print("country_history: tier -> starting-technology blocks (UNO from the unowned/placeholder tokens, "
+          "held-back tags, unmapped tier, CRLF compare, hand-broken history refusals) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")
