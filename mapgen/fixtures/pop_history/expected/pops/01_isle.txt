@@ -6,4 +6,9 @@ POPS = {
 			create_pop = { culture = reiklander size = 22201 }
 		}
 	}
+	s:STATE_BETA = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 }

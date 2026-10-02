@@ -5382,7 +5382,8 @@ def run_check() -> int:
           "held-back tags, unmapped tier, CRLF compare, hand-broken history refusals) self-check passed.")
     _selfcheck_pop_history()
     print("pop_history: pops/population emission (split state, skipped owner + culture, religion override, "
-          "exact-sum rounding, dropped small pop, hard errors) self-check passed.")
+          "exact-sum rounding, dropped small pop, UNO's fixed unclaimed pop, created pair without pops, "
+          "hard errors) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")

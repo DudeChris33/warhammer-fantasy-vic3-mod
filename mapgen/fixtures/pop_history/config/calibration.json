@@ -1,3 +1,5 @@
-{"scale_factor":5,"min_pop_size":100,"tags":{
+{"scale_factor":5,"min_pop_size":100,
+ "unclaimed_pop":{"culture":"goblin","size":1000,"source":"fixture","why":"fixture: UNO's fixed per-state pop"},
+ "tags":{
  "REI":{"canon":20001,"source":"inferred","why":"fixture: not divisible by 3 or 5, so every split rounds","confidence":"low"},
  "MID":{"canon":3001,"source":"inferred","why":"fixture","confidence":"low"}}}

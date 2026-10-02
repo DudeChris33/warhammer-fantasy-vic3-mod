@@ -730,6 +730,12 @@
    "source": "inferred: tech tier 7 (mapgen/config/country_history)",
    "why": "Tier 7: nomads and mobs; no schooling."
   },
+  "UNO": {
+   "wealth": "low",
+   "literacy": "baseline",
+   "source": "inferred: UNO is the decentralized placeholder owner of unowned and out-of-scope land (#6391); it has no country_history tier",
+   "why": "Its only pops are calibration.json's small unclaimed_pop goblin bands (#6395): the lowest wealth and literacy levels the starting-pop effects offer."
+  },
   "URS": {
    "wealth": "low",
    "literacy": "very_low",
