@@ -74,12 +74,44 @@
       },
       "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
       "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved"
+    },
+    "wood_elf_realm": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism"
+      },
+      "ruling_igs": [
+        "ig_rural_folk",
+        "ig_devout"
+      ],
+      "tax_level": "very_low",
+      "suggested_ig_names": {
+        "ig_rural_folk": "Glade Kin",
+        "ig_devout": "Spellsingers and Waystalkers"
+      },
+      "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
+      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)"
     }
   },
   "tags": {
+    "ANM": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+    },
     "AQU": {
       "confidence": "low",
       "note": "Baseline unchanged: ducal realm with no distinct canon institutions."
+    },
+    "ARG": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf realm of Athel Loren; no country definition yet."
     },
     "ART": {
       "confidence": "low",
@@ -178,6 +210,11 @@
         }
       }
     },
+    "OKP": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+    },
     "PAR": {
       "confidence": "low",
       "note": "Baseline unchanged: ducal realm with no distinct canon institutions."
@@ -190,6 +227,21 @@
       "profile": "greenskin_holdout",
       "confidence": "medium",
       "note": "Orc tribe on the Grey Mountains flank of Bretonnia."
+    },
+    "TLS": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+    },
+    "TRG": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+    },
+    "WYD": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf realm of Athel Loren; no country definition yet."
     }
   }
 }

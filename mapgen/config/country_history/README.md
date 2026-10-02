@@ -3,7 +3,7 @@
 Hand-authored input for a later generator that writes `common/history/countries/`. **Nothing here is game-read**: the files describe what each start tag looks like in **2512 IC** in this mod's Victoria 3 mechanics. `python mapgen/validate_country_history.py` is the gate; `python mapgen/run_fixture.py --check` regression-tests the validator against `mapgen/fixtures/country_history/`.
 
 - One file per region, `NN_<stem>.json`, the same `NN_<stem>` as `common/country_definitions/` and the region files in `planning/tag_registry.md` (17 files: 00–13, 17–19; regions 14–16 are deferred with no tags).
-- One entry per **start** tag of that region in the registry (196 in all). Formables are out of scope and rejected. Tags with no `common/country_definitions/` entry yet (most of 08–13 and 17–19) still get entries; the generator skips them until their definitions exist.
+- One entry per **start** tag of that region in the registry (223 in all). Formables are out of scope and rejected. Tags with no `common/country_definitions/` entry yet (most of 08–13 and 17–19) still get entries; the generator skips them until their definitions exist.
 - Every non-default choice carries a `source` and a one-line `why`. Sources are `canon: …` (tabletop first), `TW:…` where tabletop is silent, `derived` (follows mechanically from other fields) or `inferred`. Anything the mod cannot express is listed under *Mechanics gaps*, never authored around.
 
 ## Tech-tier calibration

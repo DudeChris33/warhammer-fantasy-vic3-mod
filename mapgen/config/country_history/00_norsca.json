@@ -149,6 +149,11 @@
       "confidence": "low",
       "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
     },
+    "SOT": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Naestra and Arahan's wood-elf realm; no country definition yet."
+    },
     "URS": {
       "confidence": "low",
       "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
@@ -165,6 +170,48 @@
           "why": "Chaos-touched northern devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
+    },
+    "XSD": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder (Hell Pit); no country definition yet."
+    }
+  },
+  "profiles": {
+    "skaven_placeholder": {
+      "laws": {
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_rights_of_women": "law_no_womens_rights"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "expected_government_type": "gov_absolute_principality",
+      "suggested_ig_names": {
+        "ig_armed_forces": "Clanrats and Warlords",
+        "ig_devout": "Grey Seers"
+      },
+      "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
+      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
+    },
+    "wood_elf_realm": {
+      "laws": {
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_slavery": "law_slavery_banned"
+      },
+      "ruling_igs": [
+        "ig_rural_folk",
+        "ig_devout"
+      ],
+      "tax_level": "very_low",
+      "suggested_ig_names": {
+        "ig_rural_folk": "Glade Kin",
+        "ig_devout": "Spellsingers and Waystalkers"
+      },
+      "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
+      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)"
     }
   }
 }

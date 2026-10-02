@@ -80,6 +80,66 @@
       "next_election": null,
       "source": "canon: WFB 8e Warriors of Chaos; WH: The Old World (Brass Keep held by Nurgle warbands since 2302 IC)",
       "why": "A fortress held by a Chaos warband is a tribal raiding host, not an Imperial province"
+    },
+    "skaven_placeholder": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "expected_government_type": "gov_absolute_principality",
+      "suggested_ig_names": {
+        "ig_armed_forces": "Clanrats and Warlords",
+        "ig_devout": "Grey Seers"
+      },
+      "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
+      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source",
+      "next_election": null
+    },
+    "wood_elf_realm": {
+      "tech_tier": 6,
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism"
+      },
+      "ruling_igs": [
+        "ig_rural_folk",
+        "ig_devout"
+      ],
+      "tax_level": "very_low",
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_rural_folk": "Glade Kin",
+        "ig_devout": "Spellsingers and Waystalkers"
+      },
+      "next_election": null,
+      "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
+      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)",
+      "expected_government_type": "gov_principality"
     }
   },
   "tags": {
@@ -91,8 +151,29 @@
       "confidence": "low",
       "note": "No country definition yet (PLACEHOLDER culture); entry kept for the later generator."
     },
+    "CRB": {
+      "confidence": "low",
+      "note": "Baseline unchanged: Middenland free city on the Reik.",
+      "expected_government_type": "gov_constitutional_county",
+      "justify": {
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws at city-state tier."
+        }
+      }
+    },
+    "GRW": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf enclave; no country definition yet."
+    },
     "HOC": {
       "confidence": "medium"
+    },
+    "LAU": {
+      "profile": "wood_elf_realm",
+      "confidence": "low",
+      "note": "Wood-elf enclave; no country definition yet."
     },
     "MAR": {
       "confidence": "high",
@@ -492,6 +573,21 @@
           "why": "Follows from the tag's laws at grand_principality tier."
         }
       }
+    },
+    "XSA": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder; no country definition yet."
+    },
+    "XSB": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder; no country definition yet."
+    },
+    "XSC": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder; no country definition yet."
     }
   }
 }
