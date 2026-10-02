@@ -1,0 +1,41 @@
+﻿# Historical characters of the kislev tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: Warhammer Fantasy Wiki "Katarin" (Tzar Boris Bokha, father; Katarin crowned 2517 IC); Lexicanum "Kislev"
+# Confidence: medium
+KSV_boris_bokha_template = {
+	first_name = WHCHAR_KSV_boris_bokha_first
+	last_name = WHCHAR_KSV_boris_bokha_last
+	historical = yes
+	culture = cu:gospodar
+	ruler = yes
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	home_region = STATE_SOUTHERN_OBLAST
+	traits = {
+		charismatic
+		brave
+	}
+}
+
+# Source: https://warhammerfantasy.fandom.com/wiki/Katarin (ascends 2517 IC, so heir in 2512)
+# Confidence: medium
+KSV_katarin_bokha_template = {
+	first_name = WHCHAR_KSV_katarin_bokha_first
+	last_name = WHCHAR_KSV_katarin_bokha_last
+	historical = yes
+	culture = cu:gospodar
+	heir = yes
+	noble = yes
+	female = yes
+	birth_date = 2490.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_royalist
+	home_region = STATE_SOUTHERN_OBLAST
+	traits = {
+		imposing
+		charismatic
+	}
+}

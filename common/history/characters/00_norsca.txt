@@ -1,0 +1,20 @@
+﻿CHARACTERS = {
+	c:SKA ?= {
+		create_character = { # Wulfrik the Wanderer
+			template = SKA_wulfrik_template
+		}
+	}
+	c:URS ?= {
+		create_character = { # Beorg Bearstruck
+			template = URS_beorg_bearstruck_template
+		}
+	}
+	c:SOT ?= {
+		create_character = { # Naestra
+			template = SOT_naestra_template
+		}
+		create_character = { # Arahan
+			template = SOT_arahan_template
+		}
+	}
+}

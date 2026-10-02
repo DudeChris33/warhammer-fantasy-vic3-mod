@@ -1,0 +1,60 @@
+﻿CHARACTERS = {
+	c:COU ?= {
+		create_character = { # Louen Leoncoeur
+			template = COU_louen_leoncoeur_template
+		}
+		create_character = { # Morgiana le Fay
+			template = COU_morgiana_le_fay_template
+		}
+	}
+	c:QUE ?= {
+		create_character = { # Tancred II d'Quenelles
+			template = QUE_tancred_ii_template
+		}
+	}
+	c:BOR ?= {
+		create_character = { # Alberic de Bordeleaux
+			template = BOR_alberic_template
+		}
+	}
+	c:BRI ?= {
+		create_character = { # Theoderic de Brionne
+			template = BRI_theoderic_template
+		}
+	}
+	c:CAR ?= {
+		create_character = { # Huebald de Carcassonne
+			template = CAR_huebald_template
+		}
+	}
+	c:LYO ?= {
+		create_character = { # Adalhard de Lyonesse
+			template = LYO_adalhard_template
+		}
+	}
+	c:BAS ?= {
+		create_character = { # Bohemond de Bastonne
+			template = BAS_bohemond_template
+		}
+	}
+	c:AQU ?= {
+		create_character = { # Armand d'Aquitaine
+			template = AQU_armand_d_aquitaine_template
+		}
+	}
+	c:SKZ ?= {
+		create_character = { # Ugrok Craktoof
+			template = SKZ_ugrok_craktoof_template
+		}
+	}
+	c:TLS ?= {
+		create_character = { # Orion
+			template = TLS_orion_template
+		}
+	}
+	c:ARG ?= {
+		create_character = { # Durthu
+			template = ARG_durthu_template
+		}
+	}
+}

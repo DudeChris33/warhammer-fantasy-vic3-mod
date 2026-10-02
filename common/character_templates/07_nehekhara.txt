@@ -1,0 +1,93 @@
+﻿# Historical characters of the nehekhara tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: Warhammer Armies: Tomb Kings (Settra the Imperishable); https://whfb.lexicanum.com/wiki/Settra
+# Confidence: high
+# Note: Undead since c. -2500 IC; immortal with a prime-of-life birth_date.
+KHM_settra_template = {
+	first_name = WHCHAR_KHM_settra_first
+	last_name = WHCHAR_KHM_settra_last
+	historical = yes
+	culture = cu:nehekharan
+	ruler = yes
+	noble = yes
+	birth_date = 2465.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	home_region = STATE_CITY_OF_KINGS
+	traits = {
+		arrogant
+		imposing
+		ruthless
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Tomb Kings (Grand Hierophant Khatep)
+# Confidence: medium
+# Note: Undead; immortal with a prime-of-life birth_date.
+KHM_khatep_template = {
+	first_name = WHCHAR_KHM_khatep_first
+	historical = yes
+	culture = cu:nehekharan
+	role = politician
+	birth_date = 2468.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_CITY_OF_KINGS
+	traits = {
+		pious
+		erudite
+	}
+	on_created = {
+		set_as_interest_group_leader = yes
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Tomb Kings (Queen Khalida of Lybaras); planning/tag_registry.md LYB row
+# Confidence: medium
+# Note: Undead; immortal with a prime-of-life birth_date.
+LYB_khalida_template = {
+	first_name = WHCHAR_LYB_khalida_first
+	last_name = WHCHAR_LYB_khalida_last
+	historical = yes
+	culture = cu:nehekharan
+	ruler = yes
+	noble = yes
+	female = yes
+	birth_date = 2475.1.1
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	traits = {
+		honorable
+		tactful
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Vampire Counts (Neferata, Queen of Mysteries); https://whfb.lexicanum.com/wiki/List_of_Vampires
+# Confidence: high
+# Note: First vampire, c. -1500 IC; immortal with a prime-of-life birth_date.
+LAH_neferata_template = {
+	first_name = WHCHAR_LAH_neferata_first
+	historical = yes
+	culture = cu:lahmian_vampire
+	ruler = yes
+	noble = yes
+	female = yes
+	birth_date = 2478.1.1
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	traits = {
+		charismatic
+		ruthless
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}

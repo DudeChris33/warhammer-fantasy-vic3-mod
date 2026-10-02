@@ -1,0 +1,239 @@
+﻿# Historical characters of the brettonia tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: Warhammer Armies: Bretonnia (King Louen Leoncoeur); https://warhammerfantasy.fandom.com/wiki/Louen_Leoncoeur
+# Confidence: high
+COU_louen_leoncoeur_template = {
+	first_name = WHCHAR_COU_louen_leoncoeur_first
+	last_name = WHCHAR_COU_louen_leoncoeur_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	role = general
+	noble = yes
+	birth_date = 2465.1.1
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	home_region = STATE_COURONNE
+	traits = {
+		brave
+		honorable
+		traditionalist_commander
+	}
+}
+
+# Source: Warhammer Armies: Bretonnia (Fay Enchantress Morgiana le Fay)
+# Confidence: medium
+COU_morgiana_le_fay_template = {
+	first_name = WHCHAR_COU_morgiana_le_fay_first
+	last_name = WHCHAR_COU_morgiana_le_fay_last
+	historical = yes
+	culture = cu:bretonnian
+	role = politician
+	noble = yes
+	female = yes
+	birth_date = 2480.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_COURONNE
+	traits = {
+		pious
+		erudite
+	}
+	on_created = {
+		set_as_interest_group_leader = yes
+	}
+}
+
+# Source: Warhammer Armies: Bretonnia; https://warhammerfantasy.fandom.com/wiki/Gioffre%27s_Lance (Tancred II, Duke of Quenelles)
+# Confidence: high
+QUE_tancred_ii_template = {
+	first_name = WHCHAR_QUE_tancred_ii_first
+	last_name = WHCHAR_QUE_tancred_ii_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_GRAVE_OF_CUILEUX
+	traits = {
+		brave
+		honorable
+	}
+}
+
+# Source: Warhammer Armies: Bretonnia; https://warhammerfantasy.fandom.com/wiki/Alberic_de_Bordeleaux
+# Confidence: high
+BOR_alberic_template = {
+	first_name = WHCHAR_BOR_alberic_first
+	last_name = WHCHAR_BOR_alberic_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	noble = yes
+	birth_date = 2460.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_BORDELEAUX
+	traits = {
+		honorable
+		imposing
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Brionne (Duke Theodoric of Brionne)
+# Confidence: medium
+BRI_theoderic_template = {
+	first_name = WHCHAR_BRI_theoderic_first
+	last_name = WHCHAR_BRI_theoderic_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_BRIONNE
+	traits = {
+		honorable
+		cautious
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Carcassone (Duke Huebald)
+# Confidence: medium
+CAR_huebald_template = {
+	first_name = WHCHAR_CAR_huebald_first
+	last_name = WHCHAR_CAR_huebald_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	noble = yes
+	birth_date = 2470.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_CARCASSONNE
+	traits = {
+		direct
+		brave
+	}
+}
+
+# Source: https://warhammerfantasy.fandom.com/wiki/Lyonesse (Duke Adalhard)
+# Confidence: medium
+LYO_adalhard_template = {
+	first_name = WHCHAR_LYO_adalhard_first
+	last_name = WHCHAR_LYO_adalhard_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	noble = yes
+	birth_date = 2460.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_LYONESSE
+	traits = {
+		honorable
+		cautious
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Bastonne (Duke Bohemond Beastslayer)
+# Confidence: medium
+BAS_bohemond_template = {
+	first_name = WHCHAR_BAS_bohemond_first
+	last_name = WHCHAR_BAS_bohemond_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_BASTONNE
+	traits = {
+		brave
+		imposing
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Aquitaine (Armand d'Aquitaine, Standard Bearer of Bretonnia)
+# Confidence: medium
+AQU_armand_d_aquitaine_template = {
+	first_name = WHCHAR_AQU_armand_d_aquitaine_first
+	last_name = WHCHAR_AQU_armand_d_aquitaine_last
+	historical = yes
+	culture = cu:bretonnian
+	ruler = yes
+	noble = yes
+	birth_date = 2450.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_AQUITAINE
+	traits = {
+		honorable
+		brave
+	}
+}
+
+# Source: planning/tag_registry.md SKZ row (Skullsmasherz, Ugrok Craktoof); Warhammer Armies: Orcs & Goblins
+# Confidence: medium
+SKZ_ugrok_craktoof_template = {
+	first_name = WHCHAR_SKZ_ugrok_craktoof_first
+	last_name = WHCHAR_SKZ_ugrok_craktoof_last
+	historical = yes
+	culture = cu:orc
+	ruler = yes
+	birth_date = 2475.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_PALE_SISTERS
+	traits = {
+		brave
+		wrathful
+	}
+}
+
+# Source: Warhammer Armies: Wood Elves (Orion, King in the Woods); Total War: Warhammer realm assignment per tag_registry.md TLS row
+# Confidence: high
+# Note: Canon age in the centuries; immortal with a prime-of-life birth_date.
+TLS_orion_template = {
+	first_name = WHCHAR_TLS_orion_first
+	historical = yes
+	culture = cu:wood_elf
+	ruler = yes
+	birth_date = 2470.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	home_region = STATE_TALSYN
+	traits = {
+		brave
+		wrathful
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Wood Elves (Durthu, Eldest of the Treemen); tag_registry.md ARG row
+# Confidence: medium
+# Note: A Treeman, not an elf; wood_elf culture is the nearest stand-in. Canon age in the thousands.
+ARG_durthu_template = {
+	first_name = WHCHAR_ARG_durthu_first
+	historical = yes
+	culture = cu:wood_elf
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_rural_folk
+	ideology = ideology_traditionalist
+	home_region = STATE_ARGWYLON
+	traits = {
+		persistent
+		wrathful
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}

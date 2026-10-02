@@ -1,0 +1,322 @@
+﻿# Historical characters of the empire tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: https://whfb.lexicanum.com/wiki/Karl-Franz (crowned 2502 IC)
+# Confidence: high
+# Note: Elector Count of Reikland and Emperor; the Emperor is carried by REI, not the EMP formable. No canon heir in tabletop.
+REI_karl_franz_template = {
+	first_name = WHCHAR_REI_karl_franz_first
+	last_name = WHCHAR_REI_karl_franz_last
+	historical = yes
+	culture = cu:reiklander
+	ruler = yes
+	noble = yes
+	birth_date = 2470.1.1
+	interest_group = ig_landowners
+	ideology = ideology_reformer
+	home_region = STATE_REIKLAND_PROPER
+	traits = {
+		charismatic
+		honorable
+		innovative
+	}
+}
+
+# Source: Warhammer Armies: Empire (Grand Theogonist Volkmar the Grim); Lexicanum "Volkmar"
+# Confidence: high
+REI_volkmar_the_grim_template = {
+	first_name = WHCHAR_REI_volkmar_the_grim_first
+	last_name = WHCHAR_REI_volkmar_the_grim_last
+	historical = yes
+	culture = cu:reiklander
+	role = politician
+	birth_date = 2440.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_REIKLAND_PROPER
+	traits = {
+		pious
+		imposing
+	}
+	on_created = {
+		set_as_interest_group_leader = yes
+	}
+}
+
+# Source: Warhammer Armies: Empire (Supreme Patriarch Balthasar Gelt); Lexicanum "Balthasar Gelt"
+# Confidence: high
+# Note: Canon age (centuries, via alchemical life-extension) not representable; birth_date shortened.
+REI_balthasar_gelt_template = {
+	first_name = WHCHAR_REI_balthasar_gelt_first
+	last_name = WHCHAR_REI_balthasar_gelt_last
+	historical = yes
+	culture = cu:reiklander
+	role = politician
+	birth_date = 2410.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	home_region = STATE_REIKLAND_PROPER
+	traits = {
+		erudite
+		ambitious
+	}
+	on_created = {
+		set_as_interest_group_leader = yes
+	}
+}
+
+# Source: Warhammer Armies: Empire (Reiksmarshal Kurt Helborg); Lexicanum "Kurt Helborg"
+# Confidence: high
+REI_kurt_helborg_template = {
+	first_name = WHCHAR_REI_kurt_helborg_first
+	last_name = WHCHAR_REI_kurt_helborg_last
+	historical = yes
+	culture = cu:reiklander
+	role = general
+	noble = yes
+	birth_date = 2465.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_REIKLAND_PROPER
+	traits = {
+		brave
+		honorable
+		basic_offensive_planner
+	}
+}
+
+# Source: Warhammer Armies: Empire (Emperor's Champion Ludwig Schwarzhelm); Lexicanum "Ludwig Schwarzhelm"
+# Confidence: high
+REI_ludwig_schwarzhelm_template = {
+	first_name = WHCHAR_REI_ludwig_schwarzhelm_first
+	last_name = WHCHAR_REI_ludwig_schwarzhelm_last
+	historical = yes
+	culture = cu:reiklander
+	role = general
+	birth_date = 2467.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	home_region = STATE_REIKLAND_PROPER
+	traits = {
+		honorable
+		imposing
+		stalwart_defender
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Elector_Count_of_Middenland
+# Confidence: high
+MID_boris_todbringer_template = {
+	first_name = WHCHAR_MID_boris_todbringer_first
+	last_name = WHCHAR_MID_boris_todbringer_last
+	historical = yes
+	culture = cu:middenlander
+	ruler = yes
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	home_region = STATE_MIDDENLAND_PROPER
+	traits = {
+		brave
+		direct
+	}
+}
+
+# Source: Warhammer Armies: Empire / Storm of Chaos (Ar-Ulric of Middenheim)
+# Confidence: low
+MID_emil_valgeir_template = {
+	first_name = WHCHAR_MID_emil_valgeir_first
+	last_name = WHCHAR_MID_emil_valgeir_last
+	historical = yes
+	culture = cu:middenlander
+	role = politician
+	birth_date = 2440.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_MIDDENLAND_PROPER
+	traits = {
+		pious
+		imposing
+	}
+	on_created = {
+		set_as_interest_group_leader = yes
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Elector_Count_of_Nordland
+# Confidence: medium
+NLD_theoderic_gausser_template = {
+	first_name = WHCHAR_NLD_theoderic_gausser_first
+	last_name = WHCHAR_NLD_theoderic_gausser_last
+	historical = yes
+	culture = cu:nordlander
+	ruler = yes
+	noble = yes
+	birth_date = 2440.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_EAST_NORDLAND
+	traits = {
+		direct
+		arrogant
+	}
+}
+
+# Source: https://warhammerfantasy.fandom.com/wiki/Aldebrand_Ludenhof
+# Confidence: high
+HOC_aldebrand_ludenhof_template = {
+	first_name = WHCHAR_HOC_aldebrand_ludenhof_first
+	last_name = WHCHAR_HOC_aldebrand_ludenhof_last
+	historical = yes
+	culture = cu:hochlander
+	ruler = yes
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_HOCHLAND
+	traits = {
+		direct
+		persistent
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Elector_Count_of_Ostland (ruler from 2502 IC)
+# Confidence: high
+OST_valmir_von_raukov_template = {
+	first_name = WHCHAR_OST_valmir_von_raukov_first
+	last_name = WHCHAR_OST_valmir_von_raukov_last
+	historical = yes
+	culture = cu:ostlander
+	ruler = yes
+	noble = yes
+	birth_date = 2465.1.1
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	home_region = STATE_NORTH_OSTLAND
+	traits = {
+		ambitious
+		brave
+	}
+}
+
+# Source: Warhammer Fantasy Roleplay 4th ed., Enemy in Shadows Companion (Elector Count of Ostermark, 2512)
+# Confidence: low
+OSM_wolfram_hertwig_template = {
+	first_name = WHCHAR_OSM_wolfram_hertwig_first
+	last_name = WHCHAR_OSM_wolfram_hertwig_last
+	historical = yes
+	culture = cu:ostermarker
+	ruler = yes
+	noble = yes
+	birth_date = 2450.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_EAST_OSTERMARK
+	traits = {
+		cautious
+		persistent
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Helmut_Feuerbach
+# Confidence: medium
+# Note: Lexicanum has him go missing late in the 2512 Bretonnia campaign; shown here as the ruler at game start.
+TAL_helmut_feuerbach_template = {
+	first_name = WHCHAR_TAL_helmut_feuerbach_first
+	last_name = WHCHAR_TAL_helmut_feuerbach_last
+	historical = yes
+	culture = cu:talabeclander
+	ruler = yes
+	noble = yes
+	birth_date = 2460.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_EAST_TALABECLAND
+	traits = {
+		wrathful
+		direct
+	}
+}
+
+# Source: https://whfb.lexicanum.com/wiki/Alberich_Haupt-Anderssen
+# Confidence: high
+STI_alberich_haupt_anderssen_template = {
+	first_name = WHCHAR_STI_alberich_haupt_anderssen_first
+	last_name = WHCHAR_STI_alberich_haupt_anderssen_last
+	historical = yes
+	culture = cu:stirlander
+	ruler = yes
+	noble = yes
+	birth_date = 2460.1.1
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	home_region = STATE_EAST_STIRLAND
+	traits = {
+		arrogant
+		cautious
+	}
+}
+
+# Source: Warhammer Armies: Empire (Elector Count Marius Leitdorf); Lexicanum "Marius Leitdorf"
+# Confidence: high
+AVE_marius_leitdorf_template = {
+	first_name = WHCHAR_AVE_marius_leitdorf_first
+	last_name = WHCHAR_AVE_marius_leitdorf_last
+	historical = yes
+	culture = cu:averlander
+	ruler = yes
+	noble = yes
+	birth_date = 2450.1.1
+	interest_group = ig_landowners
+	ideology = ideology_royalist
+	home_region = STATE_BLACK_FIRE_PASS
+	traits = {
+		reckless
+		charismatic
+	}
+}
+
+# Source: Lexicanum "Elector Countess of Wissenland" / Warhammer Fantasy Roleplay (Emmanuelle von Liebwitz, Countess of Nuln)
+# Confidence: low
+WIS_emmanuelle_von_liebwitz_template = {
+	first_name = WHCHAR_WIS_emmanuelle_von_liebwitz_first
+	last_name = WHCHAR_WIS_emmanuelle_von_liebwitz_last
+	historical = yes
+	culture = cu:wissenlander
+	ruler = yes
+	noble = yes
+	female = yes
+	birth_date = 2475.1.1
+	interest_group = ig_industrialists
+	ideology = ideology_market_liberal
+	home_region = STATE_SOLLAND
+	traits = {
+		ambitious
+		innovative
+	}
+}
+
+# Source: Warhammer Armies: Vampire Counts (Mannfred von Carstein); https://whfb.lexicanum.com/wiki/Mannfred
+# Confidence: high
+# Note: Canon age in the centuries; immortal with a prime-of-life birth_date.
+VSY_mannfred_template = {
+	first_name = WHCHAR_VSY_mannfred_first
+	last_name = WHCHAR_VSY_mannfred_last
+	historical = yes
+	culture = cu:sylvanian_vampire
+	ruler = yes
+	noble = yes
+	birth_date = 2472.1.1
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	home_region = STATE_AULD_RYDING
+	traits = {
+		ruthless
+		ambitious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}

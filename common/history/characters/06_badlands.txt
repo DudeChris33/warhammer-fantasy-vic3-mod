@@ -1,0 +1,45 @@
+﻿CHARACTERS = {
+	c:RED ?= {
+		create_character = { # Grimgor Ironhide
+			template = RED_grimgor_ironhide_template
+		}
+	}
+	c:CRM ?= {
+		create_character = { # Skarsnik
+			template = CRM_skarsnik_template
+		}
+	}
+	c:BKA ?= {
+		create_character = { # Grom the Paunch
+			template = BKA_grom_the_paunch_template
+		}
+	}
+	c:ICL ?= {
+		create_character = { # Gorbad Ironclaw
+			template = ICL_gorbad_ironclaw_template
+		}
+	}
+	c:RFG ?= {
+		create_character = { # Gorfang Rotgut
+			template = RFG_gorfang_rotgut_template
+		}
+	}
+	c:BNR ?= {
+		create_character = { # Azhag the Slaughterer
+			template = BNR_azhag_template
+		}
+	}
+	c:RDV ?= {
+		create_character = { # Snagla Grobspit
+			template = RDV_snagla_grobspit_template
+		}
+	}
+	c:BSB ?= {
+		create_character = { # Grumlok
+			template = BSB_grumlok_template
+		}
+		create_character = { # Gazbag
+			template = BSB_gazbag_template
+		}
+	}
+}

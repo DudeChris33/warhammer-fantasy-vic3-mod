@@ -1,0 +1,84 @@
+﻿# Historical characters of the norsca tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: Warhammer Armies: Warriors of Chaos (8th ed.), "Wulfrik the Wanderer"; Lexicanum
+# Confidence: low
+# Note: Skaeling champion; registry gives SKA no named ruler, so his rulership of the tribe is an assignment, not canon.
+SKA_wulfrik_template = {
+	first_name = WHCHAR_SKA_wulfrik_first
+	last_name = WHCHAR_SKA_wulfrik_last
+	historical = yes
+	culture = cu:norscan
+	ruler = yes
+	birth_date = 2455.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_NAGLFARI_COAST
+	traits = {
+		brave
+		reckless
+	}
+}
+
+# Source: Warhammer Armies: Warriors of Chaos / Marauders; planning/tag_registry.md URS row (Bearmen of Urslo)
+# Confidence: medium
+URS_beorg_bearstruck_template = {
+	first_name = WHCHAR_URS_beorg_bearstruck_first
+	last_name = WHCHAR_URS_beorg_bearstruck_last
+	historical = yes
+	culture = cu:norscan
+	ruler = yes
+	birth_date = 2460.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_FROZEN_COAST
+	traits = {
+		brave
+		wrathful
+	}
+}
+
+# Source: Warhammer Armies: Wood Elves (Sisters of Twilight); Lexicanum "Sisters of Twilight"
+# Confidence: medium
+# Note: Canon age far above what age handling can show; given a prime-of-life birth_date and set_character_immortal.
+SOT_naestra_template = {
+	first_name = WHCHAR_SOT_naestra_first
+	historical = yes
+	culture = cu:wood_elf
+	ruler = yes
+	female = yes
+	birth_date = 2475.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_traditionalist
+	home_region = STATE_FOREST_OF_SIGHS
+	traits = {
+		erudite
+		cautious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Wood Elves (Sisters of Twilight); Lexicanum "Sisters of Twilight"
+# Confidence: medium
+# Note: Twin of Naestra; same age caveat.
+SOT_arahan_template = {
+	first_name = WHCHAR_SOT_arahan_first
+	historical = yes
+	culture = cu:wood_elf
+	role = politician
+	female = yes
+	birth_date = 2475.1.1
+	interest_group = ig_rural_folk
+	ideology = ideology_traditionalist
+	home_region = STATE_FOREST_OF_SIGHS
+	traits = {
+		erudite
+		tactful
+	}
+	on_created = {
+		set_as_interest_group_leader = yes
+		set_character_immortal = yes
+	}
+}

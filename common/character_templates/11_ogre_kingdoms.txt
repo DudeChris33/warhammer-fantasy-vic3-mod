@@ -1,0 +1,56 @@
+﻿# Historical characters of the ogre kingdoms tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: Total War: Warhammer III (Ghark Ironskin, Ironskin tribe); tag_registry.md IRN row
+# Confidence: medium | Total War name (folded in per planning/tag_registry.md)
+IRN_ghark_ironskin_template = {
+	first_name = WHCHAR_IRN_ghark_ironskin_first
+	last_name = WHCHAR_IRN_ghark_ironskin_last
+	historical = yes
+	culture = cu:ogre
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_industrialists
+	ideology = ideology_authoritarian
+	home_region = STATE_GROM_RIDGE
+	traits = {
+		imposing
+		engineer
+	}
+}
+
+# Source: Total War: Warhammer III (Grandfather Malron Eyebiter); tag_registry.md EYB row
+# Confidence: medium | Total War name (folded in per planning/tag_registry.md)
+EYB_malron_eyebiter_template = {
+	first_name = WHCHAR_EYB_malron_eyebiter_first
+	last_name = WHCHAR_EYB_malron_eyebiter_last
+	historical = yes
+	culture = cu:ogre
+	ruler = yes
+	birth_date = 2420.1.1
+	interest_group = ig_rural_folk
+	ideology = ideology_traditionalist
+	home_region = STATE_THE_SENTINELS
+	traits = {
+		imposing
+		hedonist
+	}
+}
+
+# Source: Total War: Warhammer III (Skrag the Slaughterer, Prophet of the Great Maw); tag_registry.md MAW row
+# Confidence: medium | Total War name (folded in per planning/tag_registry.md)
+MAW_skrag_the_slaughterer_template = {
+	first_name = WHCHAR_MAW_skrag_the_slaughterer_first
+	last_name = WHCHAR_MAW_skrag_the_slaughterer_last
+	historical = yes
+	culture = cu:ogre
+	ruler = yes
+	birth_date = 2450.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_FIVE_RIVERS
+	traits = {
+		imposing
+		ruthless
+	}
+}

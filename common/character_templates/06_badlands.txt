@@ -1,0 +1,168 @@
+﻿# Historical characters of the badlands tags, start date 2512 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2512 IC; long-lived and undead characters are shortened (see roster).
+
+# Source: Warhammer Armies: Orcs & Goblins (Grimgor Ironhide); https://whfb.lexicanum.com/wiki/Grimgor_Ironhide
+# Confidence: high
+RED_grimgor_ironhide_template = {
+	first_name = WHCHAR_RED_grimgor_ironhide_first
+	last_name = WHCHAR_RED_grimgor_ironhide_last
+	historical = yes
+	culture = cu:orc
+	ruler = yes
+	role = general
+	birth_date = 2475.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_DELVED_HEIGHTS
+	traits = {
+		brave
+		imposing
+		pillager
+	}
+}
+
+# Source: Warhammer Armies: Orcs & Goblins (Skarsnik, Warlord of the Eight Peaks)
+# Confidence: high
+CRM_skarsnik_template = {
+	first_name = WHCHAR_CRM_skarsnik_first
+	historical = yes
+	culture = cu:goblin
+	ruler = yes
+	role = general
+	birth_date = 2460.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	home_region = STATE_KARAK_EIGHT_PEAKS
+	traits = {
+		cautious
+		ambitious
+		mountain_commander
+	}
+}
+
+# Source: Warhammer Armies: Orcs & Goblins (Grom the Paunch of Misty Mountain)
+# Confidence: high
+BKA_grom_the_paunch_template = {
+	first_name = WHCHAR_BKA_grom_the_paunch_first
+	last_name = WHCHAR_BKA_grom_the_paunch_last
+	historical = yes
+	culture = cu:goblin
+	ruler = yes
+	birth_date = 2470.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_SOUR_CRAGS
+	traits = {
+		brave
+		hedonist
+	}
+}
+
+# Source: Warhammer Armies: Orcs & Goblins (Gorbad Ironclaw)
+# Confidence: high
+ICL_gorbad_ironclaw_template = {
+	first_name = WHCHAR_ICL_gorbad_ironclaw_first
+	last_name = WHCHAR_ICL_gorbad_ironclaw_last
+	historical = yes
+	culture = cu:orc
+	ruler = yes
+	role = general
+	birth_date = 2465.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_BLOOD_RIVER_VALLEY
+	traits = {
+		brave
+		ambitious
+		plains_commander
+	}
+}
+
+# Source: planning/tag_registry.md RFG row (Red Fangs, Gorfang Rotgut); Warhammer Armies: Orcs & Goblins
+# Confidence: medium
+RFG_gorfang_rotgut_template = {
+	first_name = WHCHAR_RFG_gorfang_rotgut_first
+	last_name = WHCHAR_RFG_gorfang_rotgut_last
+	historical = yes
+	culture = cu:orc
+	ruler = yes
+	birth_date = 2470.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_EAST_DEATH_PASS
+	traits = {
+		wrathful
+		brave
+	}
+}
+
+# Source: Warhammer Armies: Orcs & Goblins (Azhag the Slaughterer)
+# Confidence: high
+BNR_azhag_template = {
+	first_name = WHCHAR_BNR_azhag_first
+	last_name = WHCHAR_BNR_azhag_last
+	historical = yes
+	culture = cu:orc
+	ruler = yes
+	birth_date = 2470.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	home_region = STATE_NORTHERN_WORLD_S_EDGE
+	traits = {
+		ruthless
+		ambitious
+	}
+}
+
+# Source: planning/tag_registry.md RDV row (Redvenom, Snagla Grobspit); Warhammer Armies: Orcs & Goblins
+# Confidence: medium
+RDV_snagla_grobspit_template = {
+	first_name = WHCHAR_RDV_snagla_grobspit_first
+	last_name = WHCHAR_RDV_snagla_grobspit_last
+	historical = yes
+	culture = cu:goblin
+	ruler = yes
+	role = general
+	birth_date = 2470.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_MARSHES_OF_MADNESS
+	traits = {
+		cautious
+		forest_commander
+	}
+}
+
+# Source: planning/tag_registry.md BSB row (Bloody Sunz, Grumlok & Gazbag); Total War: Warhammer
+# Confidence: low | Total War name (folded in per planning/tag_registry.md)
+BSB_grumlok_template = {
+	first_name = WHCHAR_BSB_grumlok_first
+	historical = yes
+	culture = cu:orc
+	ruler = yes
+	birth_date = 2475.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_BLIGHTWATER
+	traits = {
+		brave
+		reckless
+	}
+}
+
+# Source: planning/tag_registry.md BSB row (Bloody Sunz, Grumlok & Gazbag); Total War: Warhammer
+# Confidence: low | Total War name (folded in per planning/tag_registry.md)
+BSB_gazbag_template = {
+	first_name = WHCHAR_BSB_gazbag_first
+	historical = yes
+	culture = cu:orc
+	role = general
+	birth_date = 2480.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_BLIGHTWATER
+	traits = {
+		reckless
+		basic_offensive_planner
+	}
+}
