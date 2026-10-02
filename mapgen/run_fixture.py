@@ -5364,6 +5364,16 @@ def _selfcheck_pop_history() -> None:
     generate_pop_history.run_fixture_check(TOOLS_DIR / "fixtures" / "pop_history")
 
 
+def _selfcheck_building_history() -> None:
+    """Starting buildings: golden output, determinism, the tech gate (a railway for a tag without
+    ``railways`` is a hard error, a tech-locked method is never chosen, an unresolvable tech set gets
+    tech-free buildings only), the other hard errors and the independent verifier catching hand-broken
+    output, on ``mapgen/fixtures/building_history/``."""
+    import generate_building_history
+
+    generate_building_history.run_fixture_check(TOOLS_DIR / "fixtures" / "building_history")
+
+
 def run_check() -> int:
     # Stdlib-only and independent of the map goldens, so it runs (and can fail) first.
     rc = check_country_history()
@@ -5383,6 +5393,10 @@ def run_check() -> int:
     _selfcheck_pop_history()
     print("pop_history: pops/population emission (split state, skipped owner + culture, religion override, "
           "exact-sum rounding, dropped small pop, hard errors) self-check passed.")
+    _selfcheck_building_history()
+    print("building_history: tech-gated building emission (railway without the tech refused, locked method "
+          "never chosen, unresolved tech set -> tech-free only, resource/anchor/id/job-cap errors, "
+          "independent verifier on hand-broken output and changed country history) self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")

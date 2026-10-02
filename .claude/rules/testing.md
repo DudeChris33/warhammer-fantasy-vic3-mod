@@ -44,6 +44,8 @@ python mapgen/read_state_ownership.py --check     # state_ownership.json is curr
 python mapgen/generate_state_history.py --check   # common/history/states is current with state_ownership.json
 python mapgen/generate_pop_history.py --check     # common/history/pops + population are current with mapgen/config/pop_history and resolve
 python mapgen/generate_country_history.py --check # common/history/countries is current with the owners + tiers
+python mapgen/generate_building_history.py --check # common/history/buildings is current, resolves, and passes the tech gate (runs the verifier)
+python mapgen/validate_building_history.py         # independent tech-gate verifier on the emitted buildings + current country history
 python mapgen/worldgen/sources.py --verify        # source manifest SHA-256 + registration cross-checks
 python mapgen/validate_map.py --province-bitmap    # bitmap tiles the mask, agrees with its index and the sea layer
 python mapgen/validate_map.py --sea                # sea engine files (colours, sea_starts, grouping, loc)
@@ -62,10 +64,11 @@ generate_coastline_mask.py --from-fill → generate_heightmap.py → generate_ri
 generate_state_labels.py → generate_sea_zones.py → generate_provinces.py →
 generate_sea_regions.py + generate_land_regions.py →
 read_state_ownership.py → generate_state_history.py → generate_country_history.py →
-generate_province_terrains.py → generate_adjacencies.py --write →
+generate_building_history.py → generate_province_terrains.py → generate_adjacencies.py --write →
 generate_arable_heatmap.py
 ```
 
+- **`generate_building_history.py` follows `generate_country_history.py`: any change to country history (tiers, techs, laws) requires re-running it.** **Tech-gate crash rule: a building or production method in a country that has not researched its unlocking tech crashes the game at load, so nothing is emitted unless `00_start_setup.txt` grants it (fail closed; `validate_building_history.py` re-checks independently).**
 - **A `generate_provinces.py` or `generate_land_regions.py` regen stales the starting ownership.** `state_ownership.json` and `common/history/states` are colour- and state-keyed, so re-run `read_state_ownership.py` then `generate_state_history.py`; the read may hard-error (a province with no votable pixel, a new state) and need a repaint, which is Chris's.
 
 - The coastline source is a black/white land **fill**, so always pass `--from-fill` (the parity-trace default is legacy, `generate_coastline_mask.py`). `--from-fill` also emits `mapgen/derived/lake_mask.png`; either mode first drops isolated sub-4px land components (`drop_land_specks`, `--speck-max`).
@@ -97,6 +100,7 @@ generate_arable_heatmap.py
 | `generate_state_history.py` | `common/history/states/00–19_*.txt` (one per land state-region file; `create_state` per owner — the `unowned` and `placeholder` tokens map to `c:UNO`, so every land state, out-of-scope ones included, has an owner (#6391) — then one `add_homeland = cu:<culture>` per culture of the owner tags' `cultures`: derived, no override table, `UNO` gets none (#6374); header-only only where a file has no state, today 08, 11, 12, 14) |
 | `generate_pop_history.py` | `common/history/pops/00–19_*.txt` and `common/history/population/00–19_*.txt` (same names as the state-region files; `create_pop` per (state, owner) from `mapgen/config/pop_history/`, `POPULATION` wealth/literacy per tag; header-only where nothing is owned) |
 | `generate_country_history.py` | `common/history/countries/00_start_setup.txt` (one `c:TAG ?= { }` per tag that owns a state, `UNO` included whenever any state is unowned or out-of-scope: starting-technology effect from its definition `tier` plus `effect_starting_politics_traditional`; placeholder-grade, #6375) |
+| `generate_building_history.py` | `common/history/buildings/00–19_*.txt` (same names as the state-region files; `create_building` per (state, owner) from `mapgen/config/building_history/`, gated on the owner's starting techs and laws, resource and job limits; header-only where nothing is built). `validate_building_history.py` is its separate verifier, not an emitter |
 | `fit_registration.py` | `mapgen/registration/*.json` |
 | engine (copy from `Documents/.../Victoria 3/generated/` after a load reports an incomplete locator) | `gfx/map/map_object_data/generated_map_object_locators_*` |
 
@@ -112,6 +116,8 @@ generate_arable_heatmap.py
 ### Hand-authored inputs (edit deliberately, regenerate through — never inferred from generator output)
 
 `mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `mapgen/config/pop_history/` (`state_weights.json` there is derived: `generate_pop_history.py --refresh-weights`), `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, `state_ownership.png` (the painted starting owner of every drawn state, flat exact-RGB fills; `render_state_ownership.py` only bootstraps it from `state_ownership_proposal.json`, never overwrites a repaint without `--force`) with its colour key `state_ownership_legend.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
+
+`mapgen/config/building_history/` (`profiles.json`, `state_overrides.json`, `blocked.json`; README there) is hand-authored input for `generate_building_history.py`: per-tag development archetypes, canon per-state overrides keyed on state key + naming anchor, and the lists of canon blocked by resources, tech or missing building types.
 
 `mapgen/config/country_history/NN_<stem>.json` is the same kind of input for a different consumer: the per-tag starting laws, tech tier, ruling IGs, taxes and institutions that a later task turns into `common/history/countries/`. Nothing reads it yet; `python mapgen/validate_country_history.py` is its gate (unknown ids, law-group cardinality, unlock/disallow rules, government-type trigger, source/why bookkeeping) and `run_fixture.py --check` regression-tests that linter. Schema, the tech-tier calibration and the mechanics gaps are in `mapgen/config/country_history/README.md`.
 

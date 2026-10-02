@@ -1,0 +1,49 @@
+{
+ "states": {
+  "STATE_ALPHA": {
+   "naming_anchor": [
+    10,
+    10
+   ],
+   "owner": "BBB",
+   "scope": "drawn"
+  },
+  "STATE_BETA": {
+   "naming_anchor": [
+    20,
+    20
+   ],
+   "owner": "CCC",
+   "scope": "drawn"
+  },
+  "STATE_GAMMA": {
+   "naming_anchor": [
+    25,
+    25
+   ],
+   "owners": [
+    {
+     "owner": "AAA",
+     "provinces": [
+      "x000004"
+     ]
+    },
+    {
+     "owner": "BBB",
+     "provinces": [
+      "x000005"
+     ]
+    }
+   ],
+   "scope": "drawn"
+  },
+  "STATE_DELTA": {
+   "naming_anchor": [
+    30,
+    30
+   ],
+   "owner": "AAA",
+   "scope": "drawn"
+  }
+ }
+}

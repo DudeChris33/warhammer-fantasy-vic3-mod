@@ -1,0 +1,25 @@
+POPS = {
+	s:STATE_ALPHA = {
+		region_state:BBB = {
+			create_pop = { culture = test size = 100000 }
+		}
+	}
+	s:STATE_BETA = {
+		region_state:CCC = {
+			create_pop = { culture = test size = 80000 }
+		}
+	}
+	s:STATE_GAMMA = {
+		region_state:AAA = {
+			create_pop = { culture = test size = 60000 }
+		}
+		region_state:BBB = {
+			create_pop = { culture = test size = 90000 }
+		}
+	}
+	s:STATE_DELTA = {
+		region_state:AAA = {
+			create_pop = { culture = test size = 200000 }
+		}
+	}
+}

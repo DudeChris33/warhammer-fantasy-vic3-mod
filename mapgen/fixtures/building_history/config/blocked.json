@@ -1,0 +1,33 @@
+{
+ "blocked_by_resources": [
+  {
+   "key": "STATE_BETA",
+   "anchor": [
+    20,
+    20
+   ],
+   "building": "building_wheat_farm",
+   "source": "inferred",
+   "why": "fixture"
+  }
+ ],
+ "blocked_by_tech": [
+  {
+   "key": "STATE_ALPHA",
+   "anchor": [
+    10,
+    10
+   ],
+   "tag": "BBB",
+   "building": "building_railway",
+   "source": "inferred",
+   "why": "fixture"
+  }
+ ],
+ "gaps": [
+  {
+   "concept": "Fixture gap",
+   "why": "fixture"
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "states": [
+  {
+   "key": "STATE_DELTA",
+   "anchor": [
+    30,
+    30
+   ],
+   "owner": "AAA",
+   "buildings": {
+    "building_barrack": 1
+   },
+   "source": "inferred",
+   "why": "fixture override"
+  }
+ ]
+}
