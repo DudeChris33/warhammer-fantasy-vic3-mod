@@ -1,8 +1,15 @@
-﻿# Overrides vanilla game/common/defines/00_defines.txt (NEconomy).
+﻿# Overrides vanilla game/common/defines/00_defines.txt (NEconomy, NGame).
 # WORLD_MARKET_LOCATION: vanilla is "x9137A4" (old North Atlantic), a colour the redrawn
 # provinces.png lacks -> world_market.cpp:246 error and load crash (board #5520).
 # xCC2EA6 = largest passable non-lake sea province. Hand-authored; validate_map.py checks it.
 # Re-check after any generate_provinces.py --reassign.
 NEconomy = {
 	WORLD_MARKET_LOCATION = "xCC2EA6"
+}
+
+# START_DATE: vanilla is 1836.1.1; the setting starts in 2512 IC. END_DATE keeps vanilla's
+# 100-year span (vanilla 1936.1.1 would precede the start date).
+NGame = {
+	START_DATE = "2512.1.1"
+	END_DATE = "2612.1.1"
 }
