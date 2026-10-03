@@ -1,0 +1,36 @@
+﻿TREATIES = {
+	# Only the two best-attested pacts. Plain defensive_pact articles, so nothing depends on DLC-gated article types.
+	# Sigmar and Kurgan Ironbeard's oath of friendship (WFB Empire and Dwarf army books)
+	create_treaty = {
+		name = treaty_name_wh_oath_of_karaz_a_karak
+		first_country = c:REI
+		second_country = c:KAK
+
+		is_draft = no
+		entered_into_force_on = 1836.1.1
+		binding_period = { years = 20 }
+
+		articles_to_create = {
+			{ # Defensive Pact
+				article = defensive_pact
+			}
+		}
+	}
+
+	# Empire-Kislev alliance (WFB Empire army book)
+	create_treaty = {
+		name = treaty_name_wh_empire_kislev_alliance
+		first_country = c:REI
+		second_country = c:KSV
+
+		is_draft = no
+		entered_into_force_on = 1836.1.1
+		binding_period = { years = 20 }
+
+		articles_to_create = {
+			{ # Defensive Pact
+				article = defensive_pact
+			}
+		}
+	}
+}

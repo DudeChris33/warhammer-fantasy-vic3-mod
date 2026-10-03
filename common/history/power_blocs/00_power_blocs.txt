@@ -1,0 +1,57 @@
+﻿POWER_BLOCS = {
+	# Bloc names are mod loc keys (localization/english/power_blocs_l_english.yml). founding_date is the start date for all
+	# blocs; the lore dates are far earlier than Vic3's calendar. No DLC-gated extra principle is added (vanilla adds one).
+
+	# The Empire of Sigmar: the Elector Counts and the Emperor (WFB Empire army book). Electors are REI's subjects and join
+	# automatically.
+	c:REI ?= {
+		create_power_bloc = {
+			name = WH_BLOC_EMPIRE_OF_SIGMAR
+			map_color = { 196 148 54 }
+
+			founding_date = 1836.1.1
+			identity = identity_sovereign_empire
+			principle = principle_vassalization_1
+
+			# subjects are automatically part of the bloc
+		}
+	}
+
+	# Karaz Ankor, the Everlasting Realm: holds sworn to the High King at Karaz-a-Karak (WFB Dwarf army book). Members, not
+	# subjects. Ruined holds, Karak Eight Peaks and the Norse holds are left out (Dwarf army book: fallen/contested/isolated).
+	c:KAK ?= {
+		create_power_bloc = {
+			name = WH_BLOC_KARAZ_ANKOR
+			map_color = { 148 112 72 }
+
+			founding_date = 1836.1.1
+			identity = identity_cultural
+			principle = principle_shared_canon_1
+
+			member = c:ZHU
+			member = c:KAD
+			member = c:AZL
+			member = c:BVR
+			member = c:KNO
+			member = c:KHI
+			member = c:KIZ
+			member = c:KZF
+		}
+	}
+
+	# Dominion of Hashut: the Chaos Dwarf cities of the Dark Lands (WFB Chaos Dwarf army book). Hobgoblin and orc client
+	# hosts are not included.
+	c:MZN ?= {
+		create_power_bloc = {
+			name = WH_BLOC_DOMINION_OF_HASHUT
+			map_color = { 118 44 32 }
+
+			founding_date = 1836.1.1
+			identity = identity_religious
+			principle = principle_sacred_civics_1
+
+			member = c:GOR
+			member = c:UZK
+		}
+	}
+}

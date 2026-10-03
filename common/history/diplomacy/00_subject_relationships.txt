@@ -1,0 +1,122 @@
+﻿DIPLOMACY = {
+	# Only overlordships canon states clearly. Karaz Ankor holds and Chaos Dwarf cities are bloc members, not subjects
+	# (power_blocs/00_power_blocs.txt). Mousillon is excluded from the Crown's vassals: cursed and outside royal control.
+	c:REI ?= {
+		# Elector Count under the Emperor (WFB Empire army book); Emperor = Elector of Reikland - contested
+		create_diplomatic_pact = {
+			country = c:MID
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:NLD
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:HOC
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:OST
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:OSM
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:TAL
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:STI
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:AVE
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:WIS
+			type = vassal
+		}
+		# The Moot lives under the Emperor's protection (WFB Halfling lore) - contested
+		create_diplomatic_pact = {
+			country = c:MOO
+			type = protectorate
+		}
+	}
+	c:COU ?= {
+		# Ducal vassal of the King of Bretonnia (WFB Bretonnia army book)
+		create_diplomatic_pact = {
+			country = c:LYO
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:ART
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:GIS
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:MNF
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:BAS
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:AQU
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:QUE
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:CAR
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:BRI
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:BOR
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:LAN
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:PAR
+			type = vassal
+		}
+	}
+	c:KSV ?= {
+		# Oblast of the Tzar/Tzarina of Kislev (WFB Kislev lore) - contested
+		create_diplomatic_pact = {
+			country = c:ERE
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:PRA
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:BOL
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:VOL
+			type = vassal
+		}
+		create_diplomatic_pact = {
+			country = c:TRO
+			type = vassal
+		}
+	}
+}
