@@ -175,6 +175,13 @@ def resolve_realm(arg: str, stem_of: dict[str, str]) -> str:
     raise SystemExit(f"no state file matches --realm {arg!r}; realms with states: {stems}")
 
 
+def legend_height(field: Field, used_codes: dict[str, str], unit: int) -> int:
+    """Height of the box ``draw_legend`` draws (so the caller can keep it inside the image)."""
+    swatch = unit * 3
+    return (unit * 3 + len(SUBSISTENCE_HUES) * (swatch + unit // 3) + unit * 4
+            + (len(used_codes) // 4 + 1) * unit * 2)
+
+
 def draw_legend(draw: ImageDraw.ImageDraw, field: Field, used_codes: dict[str, str],
                 origin: tuple[int, int], unit: int) -> None:
     font = _load_font(max(10, unit))
@@ -184,13 +191,15 @@ def draw_legend(draw: ImageDraw.ImageDraw, field: Field, used_codes: dict[str, s
     hues = list(SUBSISTENCE_HUES.values())
     codes = sorted(used_codes.items(), key=lambda kv: kv[1])
     width = unit * 4 + swatch * (len(field.labels) + 1) + unit * 14
-    height = unit * 3 + len(hues) * (swatch + unit // 3) + unit * 4 + (len(codes) // 4 + 1) * unit * 2
+    height = legend_height(field, used_codes, unit)
     draw.rectangle((x0, y0, x0 + width, y0 + height), fill=(18, 22, 28), outline=(220, 220, 220))
     draw.text((x0 + unit, y0 + unit // 2),
               f"{field.title}: hue = subsistence building, lightness = bin", fill=(255, 255, 255), font=font)
     y = y0 + unit * 2
     for j, lab in enumerate(field.labels):
-        draw.text((x0 + unit * 9 + j * swatch, y), lab, fill=(220, 220, 220), font=small)
+        # centre each bin label over its swatch so adjacent labels ("120-179", "180+") never touch
+        lw = draw.textlength(lab, font=small)
+        draw.text((x0 + unit * 9 + j * swatch + (swatch - lw) / 2, y), lab, fill=(220, 220, 220), font=small)
     y += unit * 2
     n = len(field.labels)
     for name, hue in hues:
@@ -336,7 +345,8 @@ def main(argv: list[str] | None = None) -> int:
     log(f"labelled {n_labelled} states", t0)
 
     unit = max(14, pil.height // 90)
-    draw_legend(draw, field, used_codes, (unit, pil.height - unit * 22), unit)
+    draw_legend(draw, field, used_codes,
+                (unit, pil.height - legend_height(field, used_codes, unit) - unit), unit)
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
     if realm_stem is None:
