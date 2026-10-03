@@ -45,6 +45,13 @@ colour authority ``mapgen/derived/provinces_index.json`` and the sea canon
   mod's own name should override vanilla's outright rather than dodge the
   collision with a numeric fallback key (user decision 2026-09-06).
 
+Each drawn state's ``subsistence_building`` / ``arable_land`` / ``arable_resources`` come from
+``mapgen/config/land_economics_worksheet.csv`` (hand-authored; rows keyed on the canon state key
+with a verified naming anchor; an empty cell, a missing row and every placeholder take
+``worldgen.land_economics.DEFAULT_ECONOMICS``; rules in ``land_economics.check_economics``,
+errors collected and reported once, board #3678). ``--rekey-economics`` repairs stale key cells.
+A worksheet edit also forces ``generate_building_history.py`` (it reads the emitted fields).
+
 Run ``mapgen/render_land_regions_preview.py`` afterwards for the numbered
 review render + CSV worksheet — the persisted naming input this script reads
 (``mapgen/config/land_regions_worksheet.csv``, hand-edited like
@@ -82,7 +89,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import land_naming, land_state_numbering, raster, schema  # noqa: E402
+from worldgen import land_economics, land_naming, land_state_numbering, raster, schema  # noqa: E402
 from worldgen.statefile import (  # noqa: E402
     ProvinceInfo,
     pick_hubs,
@@ -131,6 +138,10 @@ LOC_PATH = MOD_ROOT / "localization" / "replace" / "english" / "map" / "states_l
 # replace/ so STATE_AQUITAINE (also a vanilla state) overrides vanilla's HUB_NAME_STATE_AQUITAINE_* instead of erroring as a duplicate key
 HUB_LOC_PATH = MOD_ROOT / "localization" / "replace" / "english" / "map" / "wh_hub_names_l_english.yml"
 BUILDINGS_DIR = MOD_ROOT / "common" / "buildings"
+BUILDING_GROUPS_DIR = MOD_ROOT / "common" / "building_groups"
+#: Hand-authored per-state economics (#3678), keyed on the canon state key + naming anchor;
+#: read here, rules in worldgen.land_economics. Empty cell = per-column default.
+ECONOMICS_WORKSHEET_PATH = TOOLS_DIR / "config" / "land_economics_worksheet.csv"
 
 BOM = b"\xef\xbb\xbf"
 INDENT = "\t"
@@ -165,14 +176,6 @@ OUT_OF_SCOPE_FILE_STEM = {
     "far_south_east": "khuresh",         # nearest known landmass; canon identity TBD (config's own note)
 }
 
-#: Placeholder economics (schema.Economics — "values only need to parse"),
-#: verified at generation time to reference only building ids that actually
-#: exist under common/buildings/ (challenge #2 in the plan).
-SUBSISTENCE_BUILDING = "building_subsistence_farm"
-ARABLE_LAND = 10
-ARABLE_RESOURCES = ["building_wheat_farm", "building_livestock_ranch"]
-CAPPED_RESOURCES = {"building_logging_camp": 10}
-
 
 def log(msg: str, t0: float | None = None) -> None:
     prefix = f"[{time.time() - t0:6.1f}s] " if t0 is not None else ""
@@ -189,24 +192,6 @@ def _write_bytes(path: Path, text: str, bom: bool = False) -> None:
 
 def _pretty_name(key: str) -> str:
     return " ".join(part.capitalize() for part in key[len("STATE_"):].split("_"))
-
-
-# ---------------------------------------------------------------------------
-# Building-id verification (challenge #2 — never trust an unverified reference)
-# ---------------------------------------------------------------------------
-
-def _verify_building_ids(buildings_dir: Path, ids: set[str]) -> None:
-    pattern = re.compile(r"^(building_\w+)\s*=\s*\{", re.MULTILINE)
-    found: set[str] = set()
-    for path in sorted(buildings_dir.glob("*.txt")):
-        text = path.read_text(encoding="utf-8-sig", errors="replace")
-        found.update(pattern.findall(text))
-    missing = sorted(ids - found)
-    if missing:
-        raise SystemExit(
-            f"placeholder economics references undefined building id(s) "
-            f"(not found under {buildings_dir}): {missing}"
-        )
 
 
 # ---------------------------------------------------------------------------
@@ -406,6 +391,11 @@ def main(argv: list[str] | None = None) -> int:
                         help="Ignore the committed land_state_ids.json and renumber every STATE "
                              "fresh in Hilbert order (board #4188's escape hatch — pair with a "
                              "province-bitmap --reassign so every identity resets together).")
+    parser.add_argument("--rekey-economics", action="store_true",
+                        help="Authoring action (#3678): rewrite the state_key cell of every "
+                             "land_economics_worksheet.csv row whose key is stale but whose anchor "
+                             "equals exactly one drawn state's naming anchor, print old -> new, and "
+                             "exit without emitting. Never touches anchors or any other cell.")
     args = parser.parse_args(argv)
     t0 = time.time()
 
@@ -429,9 +419,13 @@ def main(argv: list[str] | None = None) -> int:
         f"{land_regions['placeholder_regions']} placeholder), {n_land} land provinces, "
         f"{n_sea} sea zones", t0)
 
-    all_ids = {SUBSISTENCE_BUILDING, *ARABLE_RESOURCES, *CAPPED_RESOURCES}
-    _verify_building_ids(BUILDINGS_DIR, all_ids)
-    log(f"verified {len(all_ids)} placeholder building id(s) exist under {BUILDINGS_DIR.name}/", t0)
+    catalog = land_economics.load_building_catalog(BUILDINGS_DIR, BUILDING_GROUPS_DIR)
+    default_econ = land_economics.default_economics()
+    default_errs, _ = land_economics.check_economics("<defaults>", default_econ, True, catalog)
+    if default_errs:
+        raise SystemExit("default economics are invalid:\n  " + "\n  ".join(default_errs))
+    log(f"verified the default economics' building ids exist under {BUILDINGS_DIR.name}/ "
+        f"({len(catalog.groups)} buildings in the catalog)", t0)
 
     # --- province info + region membership --------------------------------
     province_info: dict[int, dict] = {}
@@ -637,13 +631,42 @@ def main(argv: list[str] | None = None) -> int:
     naval_exit_choice = _naval_exit_choices(labels, n_land, region_of, sea_state_of_zone)
     log(f"naval_exit adjacency resolved for {len(naval_exit_choice)} coastal region(s)", t0)
 
-    # --- placeholder economics (verified building ids, shared by every state)
-    econ = schema.Economics(
-        subsistence_building=SUBSISTENCE_BUILDING,
-        arable_land=ARABLE_LAND,
-        arable_resources=list(ARABLE_RESOURCES),
-        capped_resources=dict(CAPPED_RESOURCES),
-    )
+    # --- per-state economics worksheet (#3678) -------------------------------
+    # Rows are keyed on the canon state key and verified against the state's
+    # naming-worksheet anchor (worldgen.land_economics); a drawn state without a
+    # row, or with empty cells, takes the default per column; placeholders always do.
+    if not ECONOMICS_WORKSHEET_PATH.is_file():
+        raise SystemExit(f"{ECONOMICS_WORKSHEET_PATH} not found")
+    try:
+        econ_sheet = land_economics.load_economics_worksheet(ECONOMICS_WORKSHEET_PATH)
+    except schema.SchemaError as exc:
+        raise SystemExit(str(exc))
+    naming_anchors = land_economics.load_naming_anchors(WORKSHEET_PATH)
+    econ_identity: dict[str, land_economics.StateIdentity] = {}
+    for cell in land_regions["cells"]:
+        rid = int(cell["region"])
+        sn = int(state_number[rid])
+        econ_identity[derived_keys.get(sn, f"STATE_LAND_{sn:03d}")] = land_economics.StateIdentity(
+            anchor=naming_anchors[sn][0] if sn in naming_anchors else None,
+            placeholder=rid not in drawn_region_ids)
+    sheet_errors, rekeys = land_economics.check_worksheet_identity(
+        econ_sheet.rows, econ_identity, sea_keys)
+    if args.rekey_economics:
+        if rekeys:
+            text = ECONOMICS_WORKSHEET_PATH.read_bytes().decode("utf-8")
+            ECONOMICS_WORKSHEET_PATH.write_bytes(
+                land_economics.rekey_worksheet_text(text, rekeys).encode("utf-8"))
+        for row, new_key in rekeys:
+            log(f"rekeyed row {row.line}: {row.state_key} -> {new_key}", t0)
+        fixed = {f"row {r.line} {r.state_key}:" for r, _ in rekeys}
+        for e in sheet_errors:
+            if not any(e.startswith(f) for f in fixed):
+                log(f"NOT auto-fixable, edit by hand: {e}", t0)
+        log(f"{len(rekeys)} row(s) rekeyed in {ECONOMICS_WORKSHEET_PATH.name}; nothing emitted", t0)
+        return 0
+    econ_errors: list[str] = list(sheet_errors)
+    econ_warnings: list[str] = []
+    n_econ_sheet = n_econ_default = n_econ_placeholder = 0
 
     # --- per-region emission -------------------------------------------------
     blocks_by_file: dict[str, list[str]] = {stem: [] for stem in STATE_FILE_STEMS}
@@ -730,6 +753,18 @@ def main(argv: list[str] | None = None) -> int:
         if infos and not passable_infos:
             raise SystemExit(f"{key}: every province is impassable — a state needs passable land")
 
+        row = econ_sheet.rows.get(key) if is_drawn else None
+        econ = land_economics.resolve_economics(row, default_econ)
+        errs, warns = land_economics.check_economics(key, econ, coastal, catalog)
+        econ_errors.extend(errs)
+        econ_warnings.extend(warns)
+        if not is_drawn:
+            n_econ_placeholder += 1
+        elif row is not None and row.has_values():
+            n_econ_sheet += 1
+        else:
+            n_econ_default += 1
+
         state = schema.State(
             key=key,
             kind="land",
@@ -792,6 +827,14 @@ def main(argv: list[str] | None = None) -> int:
         log(f"{n_sealed_coast} coastal state(s) emitted without a port: every coastal province "
             f"is impassable ({', '.join(sealed_coast_keys)}) - paint a passable coastal "
             f"pocket for a port", t0)
+
+    for w in econ_warnings:
+        log(f"WARNING: {w}", t0)
+    log(f"economics: {n_econ_sheet} state(s) carry worksheet economics, {n_econ_default} on defaults, "
+        f"{n_econ_placeholder} placeholder(s) untouched", t0)
+    if econ_errors:
+        raise SystemExit(f"{len(econ_errors)} land economics error(s) in "
+                         f"{ECONOMICS_WORKSHEET_PATH.name}:\n  " + "\n  ".join(econ_errors))
 
     # --- write the state files (one per existing NN_<stem>.txt stub) --------
     for stem, filename in STATE_FILE_STEMS.items():

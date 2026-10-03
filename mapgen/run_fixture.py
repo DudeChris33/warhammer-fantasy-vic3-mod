@@ -3008,6 +3008,207 @@ def _selfcheck_stack_hubs() -> None:
     assert "port" not in landlocked, "a landlocked state must not get a port hub"
 
 
+def _selfcheck_economics() -> None:
+    """Per-state land economics (worldgen.land_economics, board #3678), in isolation.
+
+    Pins the worksheet loader (full / partial / all-empty rows, permuted header, every
+    rejection), the per-column fallback, check_economics against a synthetic building
+    catalog, the byte-identical emission guarantee (an empty or default-reproducing row
+    emits exactly today's text; a full row differs only in the three farmland lines),
+    the identity check (stale key, dead anchor, placeholder, sea key) and the key rewrite,
+    plus determinism. The validator-side rules are `_selfcheck_economics_validator`.
+    """
+    import csv
+
+    from worldgen import land_economics as le
+    from worldgen.statefile import render_land_state
+
+    header = ["arable_note", "arable_resources", "subsistence_building", "arable_land",
+              "anchor_y", "anchor_x", "state_key", "arable_source"]  # permuted
+
+    def write(path: Path, rows: list[dict], cols: list[str] = header) -> None:
+        with open(path, "w", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=cols, restval="", extrasaction="ignore",
+                               lineterminator="\n")
+            w.writeheader()
+            w.writerows(rows)
+
+    full = {"state_key": "STATE_FULL", "anchor_x": "10", "anchor_y": "20", "arable_land": "40",
+            "subsistence_building": "building_subsistence_orchard",
+            "arable_resources": "building_rye_farm building_vineyard", "arable_note": "n", "arable_source": "s"}
+    partial = {"state_key": "STATE_PARTIAL", "anchor_x": "11", "anchor_y": "21", "arable_land": "25"}
+    empty = {"state_key": "STATE_EMPTY", "anchor_x": "12", "anchor_y": "22"}
+
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td)
+
+        # (a) loader round-trip
+        p = tmp / "ok.csv"
+        write(p, [full, partial, empty])
+        sheet = le.load_economics_worksheet(p)
+        assert list(sheet.rows) == ["STATE_FULL", "STATE_PARTIAL", "STATE_EMPTY"], list(sheet.rows)
+        f, pa, em = (sheet.rows[k] for k in ("STATE_FULL", "STATE_PARTIAL", "STATE_EMPTY"))
+        assert f.anchor == (10, 20) and f.arable_land == 40, f
+        assert f.subsistence_building == "building_subsistence_orchard", f
+        assert f.arable_resources == ["building_rye_farm", "building_vineyard"], f
+        assert f.arable_note == "n" and f.arable_source == "s" and f.has_values()
+        assert pa.arable_land == 25 and pa.subsistence_building is None and pa.arable_resources is None
+        assert not em.has_values() and em.arable_land is None
+        # optional columns absent, BOM, CRLF, blank lines and cell whitespace tolerated
+        bom = tmp / "bom.csv"
+        bom.write_bytes("﻿state_key,anchor_x,anchor_y,arable_land\r\n\r\n STATE_B , 1 , 2 , 7 \r\n".encode("utf-8"))
+        assert le.load_economics_worksheet(bom).rows["STATE_B"].arable_land == 7
+
+        # (b) per-column fallback
+        d = le.default_economics()
+        assert le.resolve_economics(None, d) == d and le.resolve_economics(em, d) == d
+        rp = le.resolve_economics(pa, d)
+        assert rp.arable_land == 25 and rp.subsistence_building == d.subsistence_building
+        assert rp.arable_resources == d.arable_resources and rp.capped_resources == d.capped_resources
+        assert rp.arable_resources is not d.arable_resources, "resolve must copy the default's list"
+        assert le.default_economics() == le.DEFAULT_ECONOMICS and le.default_economics() is not le.DEFAULT_ECONOMICS
+
+        # (c) rejections
+        base = {"state_key": "STATE_X", "anchor_x": "1", "anchor_y": "2"}
+
+        def rejects(rows: list[dict], cols: list[str], what: str) -> None:
+            bad = tmp / "bad.csv"
+            write(bad, rows, cols)
+            try:
+                le.load_economics_worksheet(bad)
+            except schema.SchemaError as exc:
+                assert "bad.csv" in str(exc), exc
+                return
+            raise AssertionError(f"loader accepted {what}")
+
+        cols = ["state_key", "anchor_x", "anchor_y", "arable_land", "arable_resources"]
+        rejects([base], cols + ["arable_lnad"], "an unknown column")
+        rejects([base, base], cols, "a duplicate key")
+        rejects([{**base, "arable_land": "-1"}], cols, "arable_land -1")
+        rejects([{**base, "arable_land": "ten"}], cols, "arable_land ten")
+        rejects([{**base, "arable_land": "40.0"}], cols, "arable_land 40.0")
+        rejects([{**base, "state_key": "state_x"}], cols, "a lowercase key")
+        rejects([{**base, "state_key": "MOOTLAND"}], cols, "an unprefixed key")
+        rejects([base], ["anchor_x", "anchor_y", "arable_land"], "a missing state_key column")
+        rejects([base], ["state_key", "anchor_x", "arable_land"], "a missing anchor column")
+        rejects([{**base, "anchor_x": "x"}], cols, "a non-integer anchor")
+        rejects([{**base, "arable_resources": "building_rye_farm,building_vineyard"}], cols,
+                "comma-joined ids")
+
+        # (d) check_economics against a synthetic catalog
+        cat = le.BuildingCatalog(
+            groups={"building_wheat_farm": "bg_staple_crops", "building_rye_farm": "bg_staple_crops",
+                    "building_livestock_ranch": "bg_ranching", "building_logging_camp": "bg_logging",
+                    "building_subsistence_farm": "bg_subsistence_agriculture",
+                    "building_subsistence_orchard": "bg_subsistence_agriculture",
+                    "building_subsistence_fishing_village": "bg_subsistence_ranching"},
+            rural=frozenset({"building_wheat_farm", "building_rye_farm", "building_livestock_ranch",
+                             "building_subsistence_farm", "building_subsistence_orchard",
+                             "building_subsistence_fishing_village"}),
+            subsistence=frozenset({"building_subsistence_farm", "building_subsistence_orchard",
+                                   "building_subsistence_fishing_village"}))
+
+        def econ(**kw) -> schema.Economics:
+            e = le.default_economics()
+            return schema.Economics(kw.get("sub", e.subsistence_building), kw.get("land", e.arable_land),
+                                    kw.get("res", e.arable_resources), kw.get("cap", e.capped_resources))
+
+        errs, warns = le.check_economics("K", le.default_economics(), True, cat)
+        assert errs == [] and warns == [], (errs, warns)
+        for what, e in (
+            ("unknown subsistence", econ(sub="building_subsistence_nope")),
+            ("non-subsistence building as subsistence", econ(sub="building_wheat_farm")),
+            ("unknown arable id", econ(res=["building_wheat_farm", "building_nope"])),
+            ("unknown capped key", econ(cap={"building_nope": 1})),
+            ("logging camp as arable (not rural)", econ(res=["building_logging_camp"])),
+            ("duplicate arable id", econ(res=["building_wheat_farm", "building_wheat_farm"])),
+            ("subsistence id in arable", econ(res=["building_wheat_farm", "building_subsistence_farm"])),
+            ("empty arable_resources", econ(res=[])),
+            ("negative arable_land", econ(land=-1)),
+        ):
+            errs, _ = le.check_economics("K", e, True, cat)
+            assert errs and all(m.startswith("K:") for m in errs), (what, errs)
+        fv = econ(sub=le.FISHING_VILLAGE)
+        assert le.check_economics("K", fv, False, cat)[0], "fishing village on a landlocked state must error"
+        assert le.check_economics("K", fv, True, cat) == ([], []), "fishing village on a coastal state is clean"
+        errs, warns = le.check_economics("K", econ(land=5), True, cat)
+        assert errs == [] and len(warns) == 1 and "MASS_MIGRATION_TARGET_MIN_ARABLE_LAND" in warns[0], warns
+        assert le.check_economics("K", econ(land=0), True, cat)[1], "arable_land 0 warns, not errors"
+        assert le.check_economics("K", econ(land=10), True, cat)[1] == []
+        # catalog-free: id existence skipped, structural rules kept
+        assert le.check_economics("K", econ(res=["building_nope"]), True, None) == ([], [])
+        assert le.check_economics("K", econ(sub="building_nope"), True, None)[0]
+
+        # (e) byte-identical emission: default == all-empty row; the full row differs in three lines only
+        def emit(e: schema.Economics) -> str:
+            st = schema.State(
+                key="STATE_SYNTH", kind="land", macro="x",
+                geometry=schema.StateGeometry(kind="seeds", polygon=None, holes=[], seeds=[(0.0, 0.0)]),
+                coastal=True, naval_exit=None, economics=e, impassable=None)
+            hubs = {h: (1, 2, 3) for h in ("city", "farm", "mine", "wood", "port")}
+            return render_land_state(st, 400, [(1, 2, 3), (4, 5, 6)], hubs, [], 7)
+
+        text_default = emit(d)
+        assert emit(le.resolve_economics(em, d)) == text_default == emit(le.resolve_economics(None, d))
+        text_full = emit(le.resolve_economics(f, d))
+        diff = [(a, b) for a, b in zip(text_default.splitlines(), text_full.splitlines()) if a != b]
+        assert len(diff) == 3 and len(text_default.splitlines()) == len(text_full.splitlines()), diff
+        assert {a.split("=")[0].strip() for a, _ in diff} == {
+            "subsistence_building", "arable_land", "arable_resources"}, diff
+
+        # identity check + key rewrite (the generator and validator share this)
+        ident = {"STATE_NEW": le.StateIdentity((10, 20), False), "STATE_OTHER": le.StateIdentity((30, 40), False),
+                 "STATE_LAND_001": le.StateIdentity((50, 60), True)}
+
+        def row(key: str, x: int, y: int, line: int = 2) -> le.EconomicsRow:
+            return le.EconomicsRow(key, (x, y), None, None, None, "", "", line)
+
+        errs, rk = le.check_worksheet_identity({"STATE_NEW": row("STATE_NEW", 10, 20)}, ident)
+        assert errs == [] and rk == []
+        errs, rk = le.check_worksheet_identity({"STATE_OLD": row("STATE_OLD", 10, 20, 5)}, ident)
+        assert len(errs) == 1 and "STATE_NEW" in errs[0] and "--rekey-economics" in errs[0], errs
+        assert [(r.state_key, n) for r, n in rk] == [("STATE_OLD", "STATE_NEW")]
+        errs, rk = le.check_worksheet_identity({"STATE_NEW": row("STATE_NEW", 30, 40)}, ident)
+        assert len(errs) == 1 and "different states" in errs[0] and rk == [], errs
+        errs, rk = le.check_worksheet_identity({"STATE_NEW": row("STATE_NEW", 1, 1)}, ident)
+        assert len(errs) == 1 and "re-anchor" in errs[0] and rk == [], errs
+        errs, rk = le.check_worksheet_identity({"STATE_GONE": row("STATE_GONE", 1, 1)}, ident)
+        assert len(errs) == 1 and "row dead" in errs[0] and rk == [], errs
+        errs, rk = le.check_worksheet_identity({"STATE_LAND_001": row("STATE_LAND_001", 50, 60)}, ident)
+        assert len(errs) == 1 and "placeholder" in errs[0], errs
+        errs, rk = le.check_worksheet_identity({"STATE_SEA": row("STATE_SEA", 1, 1)}, ident, {"STATE_SEA"})
+        assert len(errs) == 1 and "sea state" in errs[0], errs
+        errs, rk = le.check_worksheet_identity(
+            {"STATE_OLD": row("STATE_OLD", 10, 20), "STATE_OLDER": row("STATE_OLDER", 10, 20)}, ident)
+        assert len(errs) == 2 and len(rk) == 1, "two stale rows must not claim the same state"
+        csv_text = "state_key,anchor_x,anchor_y\r\nSTATE_OLD,10,20\r\nSTATE_OLD_2,10,20\r\n"
+        out = le.rekey_worksheet_text(csv_text, [(row("STATE_OLD", 10, 20), "STATE_NEW")])
+        assert out == "state_key,anchor_x,anchor_y\r\nSTATE_NEW,10,20\r\nSTATE_OLD_2,10,20\r\n", repr(out)
+
+        # (g) determinism
+        assert le.load_economics_worksheet(p) == sheet
+        assert le.check_economics("K", econ(land=5, res=["building_nope", "building_nope"]), False, cat) == \
+            le.check_economics("K", econ(land=5, res=["building_nope", "building_nope"]), False, cat)
+
+    # the catalog loader on a synthetic mod: group chain, rural/subsistence flags, comments ignored
+    with tempfile.TemporaryDirectory() as td:
+        tmp = Path(td)
+        (tmp / "b").mkdir()
+        (tmp / "g").mkdir()
+        (tmp / "g" / "g.txt").write_text(
+            "bg_agriculture = {\n\tland_usage = rural\n}\n"
+            "bg_staple = {\n\tparent_group = bg_agriculture\n}\n"
+            "bg_sub = {\n\tparent_group = bg_agriculture\n\tis_subsistence = yes\n}\n"
+            "bg_mining = {\n\t# land_usage = rural\n}\n", encoding="utf-8")
+        (tmp / "b" / "b.txt").write_text(
+            "﻿# header { not a block\nbuilding_a = {\n\tbuilding_group = bg_staple\n"
+            "\tpmgs = { x y }\n}\nbuilding_b = {\n\tbuilding_group = bg_sub\n}\n"
+            "building_c = {\n\tbuilding_group = bg_mining\n}\n", encoding="utf-8")
+        c = le.load_building_catalog(tmp / "b", tmp / "g")
+        assert set(c.groups) == {"building_a", "building_b", "building_c"}, c.groups
+        assert c.rural == {"building_a", "building_b"} and c.subsistence == {"building_b"}, c
+
+
 def _selfcheck_province_terrains() -> None:
     """province_terrains.txt generator + validator (board #2968), in isolation.
 
@@ -5481,6 +5682,12 @@ def run_check() -> int:
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")
+    _selfcheck_economics()
+    print("land_economics: worksheet loader (full/partial/empty rows, permuted header, BOM/CRLF, "
+          "refuse unknown column/dup/negative/non-integer/lowercase key/missing identity/comma ids) "
+          "+ per-column fallback + check_economics (catalog ids, rural, fishing-village-needs-port, "
+          "<10 warning) + byte-identical emission + identity/rekey + catalog loader + determinism "
+          "self-check passed.")
     _selfcheck_province_terrains()
     print("province_terrains: generator (plains/ocean, id-sorted, deterministic) + validator "
           "(bijection, valid ids, negative cases) self-check passed.")

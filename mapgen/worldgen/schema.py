@@ -1442,8 +1442,12 @@ def load_sea_zones(path: Path, canvas: tuple[int, int] | None = None) -> SeaZone
 
 @dataclass(frozen=True)
 class Economics:
-    """Placeholder economics. Values only need to parse; the real economy pass
-    is a later request. Validated as present-and-parse-valid, not balanced."""
+    """Per-state economics. ``subsistence_building``, ``arable_land`` and
+    ``arable_resources`` come per state from the hand-authored worksheet through
+    ``worldgen.land_economics`` (#3678), falling back per column to its defaults;
+    ``capped_resources`` remains the placeholder constant pending #3688, which adds
+    ``resources``/``traits`` fields here. Validated as present-and-parse-valid,
+    not balanced."""
 
     subsistence_building: str
     arable_land: int
