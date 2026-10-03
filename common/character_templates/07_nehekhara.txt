@@ -61,6 +61,7 @@ LYB_khalida_template = {
 	birth_date = 2475.1.1
 	interest_group = ig_landowners
 	ideology = ideology_royalist
+	home_region = STATE_SIX_WATCH_FORTS
 	traits = {
 		honorable
 		tactful
@@ -83,6 +84,7 @@ LAH_neferata_template = {
 	birth_date = 2478.1.1
 	interest_group = ig_landowners
 	ideology = ideology_authoritarian
+	home_region = STATE_HOUSE_OF_EVERLASTING_LIFE
 	traits = {
 		charismatic
 		ruthless

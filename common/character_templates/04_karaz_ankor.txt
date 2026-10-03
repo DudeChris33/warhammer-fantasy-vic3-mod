@@ -96,6 +96,7 @@ KEP_belegar_ironhammer_template = {
 	birth_date = 2455.1.1
 	interest_group = ig_armed_forces
 	ideology = ideology_traditionalist
+	home_region = STATE_KARAGRIL
 	traits = {
 		stalwart_defender
 		persistent

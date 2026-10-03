@@ -32,7 +32,7 @@ CRM_skarsnik_template = {
 	birth_date = 2460.1.1
 	interest_group = ig_armed_forces
 	ideology = ideology_authoritarian
-	home_region = STATE_KARAK_EIGHT_PEAKS
+	home_region = STATE_KARAG_ZIFLIN
 	traits = {
 		cautious
 		ambitious

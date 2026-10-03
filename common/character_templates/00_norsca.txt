@@ -13,7 +13,7 @@ SKA_wulfrik_template = {
 	birth_date = 2455.1.1
 	interest_group = ig_armed_forces
 	ideology = ideology_jingoist_leader
-	home_region = STATE_NAGLFARI_COAST
+	home_region = STATE_MONOLITH_OF_INGVAR
 	traits = {
 		brave
 		reckless

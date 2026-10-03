@@ -116,7 +116,7 @@ MID_boris_todbringer_template = {
 	birth_date = 2455.1.1
 	interest_group = ig_landowners
 	ideology = ideology_royalist
-	home_region = STATE_MIDDENLAND_PROPER
+	home_region = STATE_MIDDENHEIM
 	traits = {
 		brave
 		direct
@@ -134,7 +134,7 @@ MID_emil_valgeir_template = {
 	birth_date = 2440.1.1
 	interest_group = ig_devout
 	ideology = ideology_theocrat
-	home_region = STATE_MIDDENLAND_PROPER
+	home_region = STATE_MIDDENHEIM
 	traits = {
 		pious
 		imposing
@@ -194,7 +194,7 @@ OST_valmir_von_raukov_template = {
 	birth_date = 2465.1.1
 	interest_group = ig_landowners
 	ideology = ideology_authoritarian
-	home_region = STATE_NORTH_OSTLAND
+	home_region = STATE_BOHSENFELS
 	traits = {
 		ambitious
 		brave
@@ -213,7 +213,7 @@ OSM_wolfram_hertwig_template = {
 	birth_date = 2450.1.1
 	interest_group = ig_landowners
 	ideology = ideology_traditionalist
-	home_region = STATE_EAST_OSTERMARK
+	home_region = STATE_BECHAFEN
 	traits = {
 		cautious
 		persistent
@@ -271,7 +271,7 @@ AVE_marius_leitdorf_template = {
 	birth_date = 2450.1.1
 	interest_group = ig_landowners
 	ideology = ideology_royalist
-	home_region = STATE_BLACK_FIRE_PASS
+	home_region = STATE_AVERHEIM
 	traits = {
 		reckless
 		charismatic
@@ -291,7 +291,7 @@ WIS_emmanuelle_von_liebwitz_template = {
 	birth_date = 2475.1.1
 	interest_group = ig_industrialists
 	ideology = ideology_market_liberal
-	home_region = STATE_SOLLAND
+	home_region = STATE_KREUTZHOFEN
 	traits = {
 		ambitious
 		innovative

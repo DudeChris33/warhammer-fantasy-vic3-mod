@@ -95,7 +95,7 @@ BRI_theoderic_template = {
 	birth_date = 2455.1.1
 	interest_group = ig_landowners
 	ideology = ideology_traditionalist
-	home_region = STATE_BRIONNE
+	home_region = STATE_BREGANALLE
 	traits = {
 		honorable
 		cautious
@@ -207,7 +207,7 @@ TLS_orion_template = {
 	birth_date = 2470.1.1
 	interest_group = ig_armed_forces
 	ideology = ideology_traditionalist
-	home_region = STATE_TALSYN
+	home_region = STATE_HALLS_OF_EQUOS
 	traits = {
 		brave
 		wrathful

@@ -194,7 +194,6 @@ The mod's trait and ideology lists are vanilla's industrial-era set. Substitutio
 - **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Mannfred, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
 - **Heirs.** Only Katarin Bokha is an heir; tabletop names no heir for any other ruler.
 - **Admirals.** None authored: no named canon admiral is attached to any existing tag.
-- **Tags without a drawn state:** Lahmia (`STATE_LAHMIA`) and Karak Eight Peaks (`STATE_KARAGRIL`, `STATE_KARAG_NAR`) own states that are missing from `map_data/state_regions/`, so Neferata and Belegar have no `home_region` and fall back to the default.
 - **Canon skipped (no matching tag or not alive at 2512):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2512), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2512 holder unclear), Ariel and Alarielle (no matching tag), Teclis and Tyrion (Ulthuan has no tags yet).
 - **Conflict flagged:** Zhufbar's king is Barundin Stoneheart in the novel *Grudgebearer* and Morgrim Ironforge in WFRP 4th ed.; Barundin was used. Talabecland's Helmut Feuerbach is shown at game start though canon has him go missing late in 2512.
 
@@ -202,7 +201,7 @@ The mod's trait and ideology lists are vanilla's industrial-era set. Substitutio
 
 - Politicians are marked IG leaders with `set_as_interest_group_leader = yes` in `on_created`. That only works if the named interest group exists in the country at start; check any that do not.
 - Vanilla keeps one `country_<tag>.txt` per country; this task asked for region files named like the country definitions, so that layout is used.
-- `common/history/states/*` names {89} state keys that are absent from `map_data/state_regions/` (for example `STATE_MIDDENHEIM`, `STATE_AVERHEIM`). Characters' `home_region` skips those and takes the first owned state that exists. That mismatch is in generated files and was not touched.
+- State keys: the 89 renamed states now exist in `map_data/state_regions/` (main `0c544e9`), so every character carries a valid `home_region`.
 - First and last names are loc keys (`WHCHAR_<TAG>_<slug>_first/_last`), so no entry touches `cultures_names_l_english.yml` or collides with vanilla names.
 - `last_name` is omitted for characters with no attested surname (Skarsnik, Orion, Khatep and similar); the `default` template's `last_name = culture` may fill one in. Check in game.
 
