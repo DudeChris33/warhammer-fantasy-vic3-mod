@@ -115,7 +115,7 @@ generate_arable_heatmap.py
 
 ### Hand-authored inputs (edit deliberately, regenerate through — never inferred from generator output)
 
-`mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `mapgen/config/pop_history/` (`state_weights.json` there is derived: `generate_pop_history.py --refresh-weights`), `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, `state_ownership.png` (the painted starting owner of every drawn state, flat exact-RGB fills; `render_state_ownership.py` only bootstraps it from `state_ownership_proposal.json`, never overwrites a repaint without `--force`) with its colour key `state_ownership_legend.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
+`mapgen/registration/seeds/`, `mapgen/config/land_region_merges.json`, `mapgen/config/pop_history/` (`state_weights.json` there is derived: `generate_pop_history.py --refresh-weights`), `strategic_region_colors.json`, `land_regions_worksheet.csv`, `hub_worksheet.json`, `river_overrides.json`, `canon_cities.json`, `adjacency_worksheet.json`, `arable_lore.json`, `vanilla_state_climate_classes.csv` (the class of every vanilla land state; only `measure_vanilla_arable.py` reads it), `out_of_scope_continents.json`, `state_border_overrides.json`, `sea_zones.json`, `state_ownership.png` (the painted starting owner of every drawn state, flat exact-RGB fills; `render_state_ownership.py` only bootstraps it from `state_ownership_proposal.json`, never overwrites a repaint without `--force`) with its colour key `state_ownership_legend.json`, and the optional `canon_river_names.json` / `river_sources.json` / `canon_rivers.csv`. `mapgen/config/inland_lakes.json` is orphaned: no generator reads it (only comments and an unused `schema.load_inland_lakes` mention it).
 
 `mapgen/config/building_history/` (`profiles.json`, `state_overrides.json`, `blocked.json`; README there) is hand-authored input for `generate_building_history.py`: per-tag development archetypes, canon per-state overrides keyed on state key + naming anchor, and the lists of canon blocked by resources, tech or missing building types.
 
@@ -124,6 +124,8 @@ generate_arable_heatmap.py
 ### Dev-only review renders (gitignored `mapgen/derived/` output, outside the gate)
 
 `mapgen/render_*_preview.py`, `render_cr_lookup_overlay.py` and `qa_overlay.py` (produces the `qa_*.png` overlays on demand; absent until rendered). `render_land_regions_preview.py` round-trips names already committed in the worksheet forward and never overwrites them. `mapgen/tww3_name_lookup.py` is read-only, clean-skips when `sources/cr_oldworld_campaign/` is absent, and never writes `mapgen/config/`.
+
+`mapgen/measure_vanilla_arable.py` is read-only against the vanilla install, writes only gitignored `mapgen/derived/vanilla_arable_*` and `vanilla_state_climate_proposal.csv`, and its `--check` reproduces the generated block in `planning/economics/arable_land_engine_research.md`; `--selftest` needs no install. Outside the gate.
 
 ## Name citations: the `source` convention
 
