@@ -33,7 +33,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
 | `mapgen/` | Offline map generator + validator toolchain (Python); named `mapgen`, not `tools`, because vanilla reserves a `tools` folder — see [testing.md](.claude/rules/testing.md) and `mapgen/MAP_RUNBOOK.md` |
 | `sources/` | Git-ignored, local-only reference imagery (provenance in `mapgen/SOURCES.md`) |
 | `docs/` | Read-only game-generated script reference (`docs/*.log`) |
-| `planning/` | Review-panel targets, `tag_registry.md`, and the maestro skills' gitignored `.cache/` scratch. Not the tracker — the maestro board is. |
+| `planning/` | Review-panel targets, `tag_registry.md`, `planning/economics/` (economics design notes) and the maestro skills' gitignored `.cache/` scratch. Not the tracker — the maestro board is. |
 | `.metadata/metadata.json` | Mod descriptor |
 
 ## How to work here
