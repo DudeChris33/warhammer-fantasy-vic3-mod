@@ -2,42 +2,47 @@
 	# Only overlordships canon states clearly. Karaz Ankor holds and Chaos Dwarf cities are bloc members, not subjects
 	# (power_blocs/00_power_blocs.txt). Mousillon is excluded from the Crown's vassals: cursed and outside royal control.
 	c:REI ?= {
-		# Elector Count under the Emperor (WFB Empire army book); Emperor = Elector of Reikland - contested
+		# Elector Counts under the Emperor (WFB Empire army book); Emperor = Elector of Reikland - contested.
+		# Protectorates, not vassals: the Electors rule their provinces in their own right. Carroburg is a free city, not an Elector, but sits under Imperial protection.
 		create_diplomatic_pact = {
 			country = c:MID
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:NLD
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:HOC
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:OST
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:OSM
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:TAL
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:STI
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:AVE
-			type = vassal
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:WIS
-			type = vassal
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:CRB
+			type = protectorate
 		}
 		# The Moot lives under the Emperor's protection (WFB Halfling lore) - contested
 		create_diplomatic_pact = {

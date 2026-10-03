@@ -478,7 +478,7 @@ Phase B added two wood-elf realms filed here by the geography of their states: `
 | SOL | `02_empire` | Solland | start | `sollander` | Sudenburg | destroyed province claimant |
 | MOO | `02_empire` | The Moot | start | `halfling` | Eicheschatten | halfling homeland |
 | SYL | `02_empire` | Sylvania (human) | start | `sylvanian` | Drakenhof | the living population of Sylvania |
-| VSY | `02_empire` | Sylvania (Vampire) | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start |
+| VSY | `02_empire` | House von Carstein | start | `sylvanian_vampire` | Drakenhof | von Carstein undead start |
 | VEM | `02_empire` | The Von Carstein Empire | formable | `sylvanian_vampire` | Altdorf | VSY conquers the whole Empire; name TODO |
 | MAR | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
 | BRK | `02_empire` | Brass Keep | start | `norscan` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket"; `norscan` is a disclosed stand-in culture (#6373) |
