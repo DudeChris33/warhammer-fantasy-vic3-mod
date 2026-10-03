@@ -640,7 +640,7 @@ STATE_PEAK_PASS = {
         building_logging_camp = 10
     }
 }
-STATE_SHINING_MOUNTAINS = {
+STATE_MOUNT_GUNBAD = {
     id = 310
     subsistence_building = "building_subsistence_farm"
     provinces = { x2962B2 x4EBC47 x7415DC x996F71 xB63408 xFB37F8 }

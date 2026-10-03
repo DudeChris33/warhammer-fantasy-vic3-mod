@@ -274,3 +274,20 @@ RDV = {
 		instance = { position = { 0.5 0.5 } scale = { -0.8 0.8 } }
 	}
 }
+
+# STR — Strigoi Remnants. Disclosed invention: no Strigoi banner is recorded, so the winged beast
+# stands for the bat-shaped Strigoi. Disclosed reuse: ce_ahom_winged_lion.dds is 02_empire.txt's VSY
+# (red_dark on black); here bone on a green_dark field. Confirmed 2 colour slots (as VSY).
+# Not greenskin house style: this is an undead tag filed in the Badlands by geography.
+STR = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_ahom_winged_lion.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}

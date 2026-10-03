@@ -418,6 +418,12 @@
    "source": "inferred: tech tier 6 (mapgen/config/country_history)",
    "why": "Asrai lore is oral and kin-bound; tier 6 economy"
   },
+  "LHX": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
   "LUC": {
    "wealth": "medium",
    "literacy": "high",
@@ -681,6 +687,12 @@
    "literacy": "middling",
    "source": "inferred: tech tier 3 (mapgen/config/country_history)",
    "why": "Tier 3 gunpowder-and-guild economy: middling wealth and literacy."
+  },
+  "STR": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
   },
   "TAL": {
    "wealth": "medium",

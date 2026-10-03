@@ -587,12 +587,6 @@
    "cities": 1,
    "canon_cities": []
   },
-  "STATE_EAST_OSTERMARK": {
-   "area_px": 3163,
-   "arable_milli": 1176684,
-   "cities": 1,
-   "canon_cities": []
-  },
   "STATE_EAST_STIRLAND": {
    "area_px": 3296,
    "arable_milli": 2269274,
@@ -2265,6 +2259,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_MOUNT_GUNBAD": {
+   "area_px": 6412,
+   "arable_milli": 60345,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_MOUNT_SILVERSPEAR": {
    "area_px": 2879,
    "arable_milli": 376736,
@@ -2597,12 +2597,6 @@
    "cities": 1,
    "canon_cities": []
   },
-  "STATE_SHINING_MOUNTAINS": {
-   "area_px": 6412,
-   "arable_milli": 60345,
-   "cities": 1,
-   "canon_cities": []
-  },
   "STATE_SIX_WATCH_FORTS": {
    "area_px": 3458,
    "arable_milli": 130311,
@@ -2849,6 +2843,12 @@
    "cities": 1,
    "canon_cities": []
   },
+  "STATE_THE_VELDT": {
+   "area_px": 3163,
+   "arable_milli": 1176684,
+   "cities": 1,
+   "canon_cities": []
+  },
   "STATE_THE_WASTELAND": {
    "area_px": 4518,
    "arable_milli": 4438112,
@@ -2975,12 +2975,6 @@
    "cities": 1,
    "canon_cities": []
   },
-  "STATE_WARD_OF_STORM": {
-   "area_px": 4127,
-   "arable_milli": 3633074,
-   "cities": 1,
-   "canon_cities": []
-  },
   "STATE_WATERFALL_PALACE": {
    "area_px": 780,
    "arable_milli": 323860,
@@ -3056,6 +3050,12 @@
   "STATE_WEST_MIDDENLAND": {
    "area_px": 2701,
    "arable_milli": 1857549,
+   "cities": 1,
+   "canon_cities": []
+  },
+  "STATE_WEST_NORDLAND": {
+   "area_px": 4127,
+   "arable_milli": 3633074,
    "cities": 1,
    "canon_cities": []
   },

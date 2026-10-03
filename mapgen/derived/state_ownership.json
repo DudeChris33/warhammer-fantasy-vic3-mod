@@ -362,7 +362,7 @@
     3840,
     1051
    ],
-   "owner": "BRI",
+   "owner": "CAR",
    "scope": "drawn"
   },
   "STATE_BRENNUN_S_ENCAMPMENT": {
@@ -560,7 +560,7 @@
     3952,
     844
    ],
-   "owner": "unowned",
+   "owner": "KZF",
    "scope": "drawn"
   },
   "STATE_CROOKED_MOUNTS": {
@@ -878,15 +878,6 @@
    "owner": "NLD",
    "scope": "drawn"
   },
-  "STATE_EAST_OSTERMARK": {
-   "id": 535,
-   "naming_anchor": [
-    4424,
-    822
-   ],
-   "owner": "OSM",
-   "scope": "drawn"
-  },
   "STATE_EAST_STIRLAND": {
    "id": 315,
    "naming_anchor": [
@@ -1001,7 +992,7 @@
     4362,
     1063
    ],
-   "owner": "HKN",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_FOREST_OF_KNIVES": {
@@ -1091,7 +1082,7 @@
     4428,
     380
    ],
-   "owner": "KVE",
+   "owner": "KRD",
    "scope": "drawn"
   },
   "STATE_GIANT_STOMPING_GROUNDS": {
@@ -1235,7 +1226,7 @@
     4526,
     933
    ],
-   "owner": "IRN",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_GRYPHON_WOOD": {
@@ -3389,6 +3380,15 @@
    "owner": "EKR",
    "scope": "drawn"
   },
+  "STATE_MOUNT_GUNBAD": {
+   "id": 310,
+   "naming_anchor": [
+    4477,
+    990
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_MOUNT_SILVERSPEAR": {
    "id": 242,
    "naming_anchor": [
@@ -3449,7 +3449,7 @@
     4630,
     774
    ],
-   "owner": "UZK",
+   "owner": "LHX",
    "scope": "drawn"
   },
   "STATE_NEW_STRYGOS": {
@@ -3629,7 +3629,7 @@
     4360,
     1092
    ],
-   "owner": "BLV",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_OLD_SILK_ROAD": {
@@ -3647,7 +3647,7 @@
     4213,
     1439
    ],
-   "owner": "unowned",
+   "owner": "STR",
    "scope": "drawn"
   },
   "STATE_ORTEGETA": {
@@ -3728,7 +3728,7 @@
     4922,
     1247
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_PLAINS_OF_LUCCINI": {
@@ -3845,7 +3845,7 @@
     4056,
     724
    ],
-   "owner": "NLD",
+   "owner": "MID",
    "scope": "drawn"
   },
   "STATE_SEPUKZY": {
@@ -3882,15 +3882,6 @@
     1094
    ],
    "owner": "KIZ",
-   "scope": "drawn"
-  },
-  "STATE_SHINING_MOUNTAINS": {
-   "id": 310,
-   "naming_anchor": [
-    4477,
-    990
-   ],
-   "owner": "GUN",
    "scope": "drawn"
   },
   "STATE_SIX_WATCH_FORTS": {
@@ -4262,6 +4253,15 @@
    "owner": "PRA",
    "scope": "drawn"
   },
+  "STATE_THE_VELDT": {
+   "id": 535,
+   "naming_anchor": [
+    4424,
+    822
+   ],
+   "owner": "OSM",
+   "scope": "drawn"
+  },
   "STATE_THE_WASTELAND": {
    "id": 48,
    "naming_anchor": [
@@ -4451,15 +4451,6 @@
    "owner": "REI",
    "scope": "drawn"
   },
-  "STATE_WARD_OF_STORM": {
-   "id": 45,
-   "naming_anchor": [
-    4037,
-    654
-   ],
-   "owner": "NLD",
-   "scope": "drawn"
-  },
   "STATE_WATERFALL_PALACE": {
    "id": 489,
    "naming_anchor": [
@@ -4575,6 +4566,15 @@
     756
    ],
    "owner": "MID",
+   "scope": "drawn"
+  },
+  "STATE_WEST_NORDLAND": {
+   "id": 45,
+   "naming_anchor": [
+    4037,
+    654
+   ],
+   "owner": "NLD",
    "scope": "drawn"
   },
   "STATE_WEST_OSTERMARK": {

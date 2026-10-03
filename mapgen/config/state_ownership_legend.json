@@ -2195,6 +2195,22 @@
     90
    ],
    "note": "defined in common/country_definitions/10_dark_lands.txt (#6373)."
+  },
+  "LHX": {
+   "name": "Lahmian Exiles",
+   "color": [
+    150,
+    52,
+    104
+   ]
+  },
+  "STR": {
+   "name": "Strigoi Remnants",
+   "color": [
+    72,
+    90,
+    70
+   ]
   }
  }
 }

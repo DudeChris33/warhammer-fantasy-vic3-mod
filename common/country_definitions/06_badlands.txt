@@ -147,3 +147,19 @@ RDV = {
 	cultures = { goblin }
 	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
 }
+
+################ STR — Strigoi Remnants; STATE_OLD_STRYGOS ################
+# What is left of the Strigoi, the ghoul-kin vampire bloodline of Strygos. A new start tag (Chris,
+# 2026-10-03). CULTURE IS A DISCLOSED STAND-IN: sylvanian_vampire (cross-file ref to
+# common/cultures/vampire.txt), the only authored vampire culture that is not Lahmian or Nehekharan;
+# its name lists and Reikspiel tongue do not describe the Strigoi. Revisit if a Strigoi culture is
+# authored. unrecognized like VSY. Filed here by geography: STATE_OLD_STRYGOS sits in
+# map_data/state_regions/06_badlands.txt.
+
+STR = {
+	color = { 72 90 70 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { sylvanian_vampire }
+	# capital: Old Strygos — TODO once land state-regions exist
+}

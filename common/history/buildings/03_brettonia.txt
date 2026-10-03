@@ -374,24 +374,46 @@ BUILDINGS = {
 		}
 	}
 	s:STATE_BREGANALLE = {
-		region_state:BRI = {
+		region_state:CAR = {
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
-						country = "c:BRI"
-						levels = 1
+						country = "c:CAR"
+						levels = 2
 					}
 				}
 				reserves = 1
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
+				building = "building_construction_sector"
+				add_ownership = {
+					country = {
+						country = "c:CAR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_trade_center"
+				add_ownership = {
+					country = {
+						country = "c:CAR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
+			}
+			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
-						country = "c:BRI"
+						country = "c:CAR"
 						levels = 5
 						region = "STATE_BREGANALLE"
 					}
@@ -404,7 +426,7 @@ BUILDINGS = {
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
-						country = "c:BRI"
+						country = "c:CAR"
 						levels = 4
 						region = "STATE_BREGANALLE"
 					}
@@ -417,8 +439,8 @@ BUILDINGS = {
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
-						country = "c:BRI"
-						levels = 3
+						country = "c:CAR"
+						levels = 5
 						region = "STATE_BREGANALLE"
 					}
 				}
@@ -505,17 +527,6 @@ BUILDINGS = {
 	}
 	s:STATE_CARCASSONNE = {
 		region_state:CAR = {
-			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:CAR"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
 			create_building = {
 				building = "building_wheat_farm"
 				add_ownership = {
@@ -1594,33 +1605,11 @@ BUILDINGS = {
 				add_ownership = {
 					country = {
 						country = "c:CAR"
-						levels = 2
+						levels = 1
 					}
 				}
 				reserves = 1
 				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_construction_sector"
-				add_ownership = {
-					country = {
-						country = "c:CAR"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_wooden_buildings" }
-			}
-			create_building = {
-				building = "building_trade_center"
-				add_ownership = {
-					country = {
-						country = "c:CAR"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_trade_center" "pm_trade_center_trade_quantity_normal" }
 			}
 			create_building = {
 				building = "building_wheat_farm"

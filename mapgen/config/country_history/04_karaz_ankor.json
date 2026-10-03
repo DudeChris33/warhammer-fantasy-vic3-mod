@@ -250,6 +250,11 @@
       "confidence": "low",
       "note": "Dwarf hold; baseline unchanged."
     },
+    "LHX": {
+      "profile": "undead_host",
+      "confidence": "low",
+      "note": "Lahmian exiles in New Lahmia; vampire holding, source silent on institutions."
+    },
     "SLV": {
       "profile": "overrun_hold",
       "confidence": "medium"

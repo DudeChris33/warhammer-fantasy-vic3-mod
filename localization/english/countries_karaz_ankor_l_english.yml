@@ -39,6 +39,8 @@
  # VMP is Heinrich Kemmler the Lichemaster; the name is a disclosed choice (see 04_karaz_ankor.txt).
  VMP:0 "Kemmler's Host"
  VMP_ADJ:0 "Kemmlerite"
+ LHX:0 "Lahmian Exiles"
+ LHX_ADJ:0 "Lahmian"
  XSH:0 "Skaven Clan F (placeholder)"
  XSH_ADJ:0 "Skaven"
  XSI:0 "Skaven Clan G (placeholder)"

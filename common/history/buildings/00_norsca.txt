@@ -400,6 +400,36 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_GIANTHOME_MOUNTAINS = {
+		region_state:KRD = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:KRD"
+						levels = 1
+						region = "STATE_GIANTHOME_MOUNTAINS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:KRD"
+						levels = 1
+						region = "STATE_GIANTHOME_MOUNTAINS"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+			}
+		}
+	}
 	s:STATE_GLOOMWRACK_COAST = {
 		region_state:BJO = {
 			create_building = {
@@ -1062,7 +1092,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:KVE"
-						levels = 1
+						levels = 2
 						region = "STATE_TALDURSFJORD"
 					}
 				}

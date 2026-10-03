@@ -92,8 +92,8 @@ POPS = {
 		}
 	}
 	s:STATE_OLD_STRYGOS = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
+		region_state:STR = {
+			create_pop = { culture = sylvanian_vampire size = 30000 }
 		}
 	}
 	s:STATE_SHARPTHORN_FOREST = {

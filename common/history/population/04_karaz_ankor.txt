@@ -16,10 +16,6 @@ POPULATION = {
 		effect_starting_pop_wealth_medium = yes
 		effect_starting_pop_literacy_middling = yes
 	}
-	c:GUN ?= {
-		effect_starting_pop_wealth_medium = yes
-		effect_starting_pop_literacy_middling = yes
-	}
 	c:KAD ?= {
 		effect_starting_pop_wealth_high = yes
 		effect_starting_pop_literacy_high = yes
@@ -63,6 +59,10 @@ POPULATION = {
 	c:KZF ?= {
 		effect_starting_pop_wealth_high = yes
 		effect_starting_pop_literacy_high = yes
+	}
+	c:LHX ?= {
+		effect_starting_pop_wealth_low = yes
+		effect_starting_pop_literacy_low = yes
 	}
 	c:SLV ?= {
 		effect_starting_pop_wealth_medium = yes

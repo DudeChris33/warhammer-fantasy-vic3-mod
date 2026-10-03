@@ -66,8 +66,8 @@ POPS = {
 		}
 	}
 	s:STATE_GIANTHOME_MOUNTAINS = {
-		region_state:KVE = {
-			create_pop = { culture = norscan size = 24619 }
+		region_state:KRD = {
+			create_pop = { culture = dawi_norse size = 43927 }
 		}
 	}
 	s:STATE_GLOOMWRACK_COAST = {
@@ -112,7 +112,7 @@ POPS = {
 	}
 	s:STATE_KRAKA_DRAK = {
 		region_state:KRD = {
-			create_pop = { culture = dawi_norse size = 150000 }
+			create_pop = { culture = dawi_norse size = 106073 }
 		}
 	}
 	s:STATE_KRAKEN_COAST = {
@@ -167,7 +167,7 @@ POPS = {
 	}
 	s:STATE_TALDURSFJORD = {
 		region_state:KVE = {
-			create_pop = { culture = norscan size = 87869 }
+			create_pop = { culture = norscan size = 102254 }
 		}
 	}
 	s:STATE_THORSHAFN = {
@@ -202,7 +202,7 @@ POPS = {
 	}
 	s:STATE_VIDARHEIM = {
 		region_state:KVE = {
-			create_pop = { culture = norscan size = 62512 }
+			create_pop = { culture = norscan size = 72746 }
 		}
 	}
 	s:STATE_WEST_HELSPIRE_MOUNTAINS = {

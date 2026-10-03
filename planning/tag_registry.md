@@ -606,6 +606,7 @@ Eastern Irranas. Plus the Skaven placeholders `XSH`–`XSL` (see *Conventions*).
 | KOR | `04_karaz_ankor` | Kraka Ornsmotek | start | `dawi_norse` | Kraka Ornsmotek | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
 | KRV | `04_karaz_ankor` | Kraka Ravnsvake | start | `dawi_norse` | Kraka Ravnsvake | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
 | VMP | `04_karaz_ankor` | Kemmler's Host | start | `sylvanian_vampire` | — | Heinrich Kemmler the Lichemaster (human lich); `unrecognized`; name and culture are disclosed stand-ins (#6373) |
+| LHX | `04_karaz_ankor` | Lahmian Exiles | start | `lahmian_vampire` | New Lahmia | Lahmian vampire exiles in STATE_NEW_LAHMIA; `unrecognized`; new tag distinct from `LAH` (Chris, 2026-10-03) |
 | XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
 | XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
 | XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
@@ -731,6 +732,7 @@ instead).
 | BRN | `06_badlands` | Broken Nose | start | `goblin` | — | Goblin tribe of the Vaults |
 | BLV | `06_badlands` | Black Venom | start | `goblin` | — | Forest Goblin tribe, S. of Black Fire Pass |
 | RDV | `06_badlands` | Redvenom | start | `goblin` | — | Snagla Grobspit's Forest Goblins |
+| STR | `06_badlands` | Strigoi Remnants | start | `sylvanian_vampire` | Old Strygos | Strigoi remnant in STATE_OLD_STRYGOS; `unrecognized`; culture is a disclosed stand-in, no Strigoi culture authored (Chris, 2026-10-03) |
 
 **Density reserve (not yet allocated — add later if Chris wants a denser Badlands).** Confirmed TW:W
 Greenskins faction names, race/location wiki-unstated (would be representative orc/goblin tribes):

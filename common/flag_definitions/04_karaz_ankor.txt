@@ -198,6 +198,14 @@ VMP = {
 	}
 }
 
+LHX = {
+	flag_definition = {
+		coa = LHX
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
 XSH = {
 	flag_definition = {
 		coa = XSH

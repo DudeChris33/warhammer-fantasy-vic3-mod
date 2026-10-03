@@ -18,7 +18,7 @@ POPS = {
 	}
 	s:STATE_AXE_BITE_PASS = {
 		region_state:KZF = {
-			create_pop = { culture = dawi_grey size = 75000 }
+			create_pop = { culture = dawi_grey size = 28135 }
 		}
 	}
 	s:STATE_BLACK_FIRE_PASS = {
@@ -58,7 +58,7 @@ POPS = {
 	}
 	s:STATE_CHATEAU_LOVARRE = {
 		region_state:CAR = {
-			create_pop = { culture = bretonnian size = 13155 }
+			create_pop = { culture = bretonnian size = 8184 }
 		}
 	}
 	s:STATE_CLIFFS_OF_DAWN = {
@@ -72,8 +72,8 @@ POPS = {
 		}
 	}
 	s:STATE_CROOKED_CORRIDOR = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
+		region_state:KZF = {
+			create_pop = { culture = dawi_grey size = 46865 }
 		}
 	}
 	s:STATE_CROOKED_MOUNTS = {
@@ -135,9 +135,8 @@ POPS = {
 		}
 	}
 	s:STATE_FOREST_OF_GLOOM = {
-		region_state:HKN = {
-			create_pop = { culture = sylvanian size = 60000 }
-			create_pop = { culture = sylvanian_vampire size = 40000 }
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
 		}
 	}
 	s:STATE_GREY_LADY_PASS = {
@@ -151,8 +150,8 @@ POPS = {
 		}
 	}
 	s:STATE_GROM_RIDGE = {
-		region_state:IRN = {
-			create_pop = { culture = ogre size = 200000 }
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
 		}
 	}
 	s:STATE_HELMGART = {
@@ -209,9 +208,14 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
+	s:STATE_MOUNT_GUNBAD = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 	s:STATE_NEW_LAHMIA = {
-		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 117858 }
+		region_state:LHX = {
+			create_pop = { culture = lahmian_vampire size = 40000 }
 		}
 	}
 	s:STATE_NORTHERN_WORLD_S_EDGE = {
@@ -237,9 +241,8 @@ POPS = {
 		}
 	}
 	s:STATE_OLD_DWARF_ROAD = {
-		region_state:BLV = {
-			create_pop = { culture = goblin size = 51213 }
-			create_pop = { culture = orc size = 17071 }
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
 		}
 	}
 	s:STATE_PALE_SISTERS = {
@@ -266,11 +269,6 @@ POPS = {
 	}
 	s:STATE_SHATTERED_TEETH = {
 		region_state:KIZ = {
-			create_pop = { culture = dawi size = 125000 }
-		}
-	}
-	s:STATE_SHINING_MOUNTAINS = {
-		region_state:GUN = {
 			create_pop = { culture = dawi size = 125000 }
 		}
 	}

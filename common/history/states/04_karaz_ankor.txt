@@ -104,9 +104,11 @@ STATES = {
 	}
 	s:STATE_CROOKED_CORRIDOR = {
 		create_state = {
-			country = c:UNO
+			country = c:KZF
 			owned_provinces = { x0BA3D9 x3555C2 x727027 x8BB62F }
 		}
+
+		add_homeland = cu:dawi_grey
 	}
 	s:STATE_CROOKED_MOUNTS = {
 		create_state = {
@@ -188,11 +190,9 @@ STATES = {
 	}
 	s:STATE_FOREST_OF_GLOOM = {
 		create_state = {
-			country = c:HKN
+			country = c:UNO
 			owned_provinces = { x05CF4F x1CE4AC x423E41 x6797D6 x742884 x7EAD33 xA406C8 xE075BA }
 		}
-
-		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_GREY_LADY_PASS = {
 		create_state = {
@@ -212,11 +212,9 @@ STATES = {
 	}
 	s:STATE_GROM_RIDGE = {
 		create_state = {
-			country = c:IRN
+			country = c:UNO
 			owned_provinces = { x1AA159 x56932A x655483 x879ED5 xA1C375 xC40DC7 xCFEE2F }
 		}
-
-		add_homeland = cu:ogre
 	}
 	s:STATE_HELMGART = {
 		create_state = {
@@ -294,13 +292,19 @@ STATES = {
 			owned_provinces = { x00E732 x0C4A79 x1A2438 x37E311 x462749 x4EFD41 x575145 x6D7562 x70F3F1 x79D2EB xA7EFD0 xB0C5C8 xD61F5D xDF9722 xE9D1D5 xF588BE xFFF1C3 }
 		}
 	}
+	s:STATE_MOUNT_GUNBAD = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x2962B2 x4EBC47 x7415DC x996F71 xB63408 xFB37F8 }
+		}
+	}
 	s:STATE_NEW_LAHMIA = {
 		create_state = {
-			country = c:UZK
+			country = c:LHX
 			owned_provinces = { x1116EC x20B20A x2DFC00 x460B9F x558640 x6C9B9D x98675A x9F0301 xA7D426 xA830CA xCD2DBB xDB9270 }
 		}
 
-		add_homeland = cu:dawi_zharr
+		add_homeland = cu:lahmian_vampire
 	}
 	s:STATE_NORTHERN_WORLD_S_EDGE = {
 		create_state = {
@@ -336,11 +340,9 @@ STATES = {
 	}
 	s:STATE_OLD_DWARF_ROAD = {
 		create_state = {
-			country = c:BLV
+			country = c:UNO
 			owned_provinces = { x03BA4E x1ACFAB x2913E3 x31A40E x4E6D78 x573E9D x6582D5 x6E1300 x7C9832 xA1F1C7 xB035FF xC597D2 xC74B5C xCFDB87 xDE60B9 xECA4F1 xED0668 xF57616 }
 		}
-
-		add_homeland = cu:goblin
 	}
 	s:STATE_PALE_SISTERS = {
 		create_state = {
@@ -376,14 +378,6 @@ STATES = {
 		create_state = {
 			country = c:KIZ
 			owned_provinces = { x2C30FB x37C767 x39FCE5 x4B0F66 x59539E x5D20FC x7068FB x877E58 x9E93B5 x9FEF6E xD5FEE0 xFB5875 }
-		}
-
-		add_homeland = cu:dawi
-	}
-	s:STATE_SHINING_MOUNTAINS = {
-		create_state = {
-			country = c:GUN
-			owned_provinces = { x2962B2 x4EBC47 x7415DC x996F71 xB63408 xFB37F8 }
 		}
 
 		add_homeland = cu:dawi

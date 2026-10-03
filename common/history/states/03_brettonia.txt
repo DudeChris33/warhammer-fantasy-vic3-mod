@@ -50,7 +50,7 @@ STATES = {
 	}
 	s:STATE_BREGANALLE = {
 		create_state = {
-			country = c:BRI
+			country = c:CAR
 			owned_provinces = { x0E2353 x337CE8 x4A9245 x80C234 x95456F xAC5ACC xC4B93A xD1B461 xE8C9BE }
 		}
 

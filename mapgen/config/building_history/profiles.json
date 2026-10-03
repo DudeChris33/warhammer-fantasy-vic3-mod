@@ -594,6 +594,9 @@
   "LAU": {
    "archetype": "wood_elf_realm"
   },
+  "LHX": {
+   "archetype": "vampire_realm"
+  },
   "LUC": {
    "archetype": "merchant_city_state"
   },
@@ -748,6 +751,9 @@
   },
   "STI": {
    "archetype": "imperial_frontier"
+  },
+  "STR": {
+   "archetype": "vampire_realm"
   },
   "TAL": {
    "archetype": "imperial_rich"

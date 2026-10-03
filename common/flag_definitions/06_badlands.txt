@@ -97,3 +97,11 @@ RDV = {
 		trigger = { always = yes }
 	}
 }
+
+STR = {
+	flag_definition = {
+		coa = STR
+		priority = 100
+		trigger = { always = yes }
+	}
+}

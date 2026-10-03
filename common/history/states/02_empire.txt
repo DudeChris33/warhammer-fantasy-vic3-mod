@@ -72,14 +72,6 @@ STATES = {
 
 		add_homeland = cu:nordlander
 	}
-	s:STATE_EAST_OSTERMARK = {
-		create_state = {
-			country = c:OSM
-			owned_provinces = { x0705B8 x1DD119 x675BAF x688443 x68CE3F x7F99A0 xCA4CCA xD31DEF xE16227 xE4AD91 xF87784 }
-		}
-
-		add_homeland = cu:ostermarker
-	}
 	s:STATE_EAST_STIRLAND = {
 		create_state = {
 			country = c:STI
@@ -218,11 +210,11 @@ STATES = {
 	}
 	s:STATE_SCHADENSUMPF = {
 		create_state = {
-			country = c:NLD
+			country = c:MID
 			owned_provinces = { x0C7D9E x21CCC9 x31D733 x44B4B9 x609F8B x939FBA xAAB517 xC00442 xF56841 }
 		}
 
-		add_homeland = cu:nordlander
+		add_homeland = cu:middenlander
 	}
 	s:STATE_SOLLAND = {
 		create_state = {
@@ -264,6 +256,14 @@ STATES = {
 
 		add_homeland = cu:goblin
 	}
+	s:STATE_THE_VELDT = {
+		create_state = {
+			country = c:OSM
+			owned_provinces = { x0705B8 x1DD119 x675BAF x688443 x68CE3F x7F99A0 xCA4CCA xD31DEF xE16227 xE4AD91 xF87784 }
+		}
+
+		add_homeland = cu:ostermarker
+	}
 	s:STATE_THE_WASTELAND = {
 		create_state = {
 			country = c:MAR
@@ -288,14 +288,6 @@ STATES = {
 
 		add_homeland = cu:reiklander
 	}
-	s:STATE_WARD_OF_STORM = {
-		create_state = {
-			country = c:NLD
-			owned_provinces = { x032F58 x1A44B5 x2888ED x48D9E8 x48E7BD x64F7DF x7C0D3C x876BB0 x932299 xA166D1 xC6C066 xDDD5C3 xE71F36 }
-		}
-
-		add_homeland = cu:nordlander
-	}
 	s:STATE_WEST_AVERLAND = {
 		create_state = {
 			country = c:AVE
@@ -311,6 +303,14 @@ STATES = {
 		}
 
 		add_homeland = cu:middenlander
+	}
+	s:STATE_WEST_NORDLAND = {
+		create_state = {
+			country = c:NLD
+			owned_provinces = { x032F58 x1A44B5 x2888ED x48D9E8 x48E7BD x64F7DF x7C0D3C x876BB0 x932299 xA166D1 xC6C066 xDDD5C3 xE71F36 }
+		}
+
+		add_homeland = cu:nordlander
 	}
 	s:STATE_WEST_OSTERMARK = {
 		create_state = {

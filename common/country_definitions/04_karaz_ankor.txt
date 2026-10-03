@@ -276,6 +276,22 @@ VMP = {
 	# capital: — none recorded; TODO once land state-regions exist
 }
 
+################ LHX — Lahmian Exiles; STATE_NEW_LAHMIA ################
+# Vampires of the Lahmian bloodline cast out of Lahmia, holding on in the Black Mountains. A new
+# start tag (Chris, 2026-10-03), distinct from LAH (the city itself); the registry freezes both.
+# Culture lahmian_vampire (cross-file ref to common/cultures/vampire.txt). unrecognized like VSY/VMP.
+# Colour is the painted-ownership legend colour (state_ownership_legend.json), not the culture colour,
+# which LAH already uses. Filed here by geography: STATE_NEW_LAHMIA sits in
+# map_data/state_regions/04_karaz_ankor.txt.
+
+LHX = {
+	color = { 150 52 104 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lahmian_vampire }
+	# capital: New Lahmia — TODO once land state-regions exist
+}
+
 ################ XSH — Skaven Clan F (placeholder); STATE_WINTERTEETH_FOOTHILLS ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and

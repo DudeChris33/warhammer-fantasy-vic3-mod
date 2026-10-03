@@ -196,9 +196,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_BREGANALLE": {
-   "owner": "BRI",
+   "owner": "CAR",
    "confidence": "directed",
-   "note": "review round 2"
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_BRENNUN_S_ENCAMPMENT": {
    "owner": "HAS",
@@ -304,9 +304,9 @@
    "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_CROOKED_CORRIDOR": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "Karak Ziflin ruin; no roster tag"
+   "owner": "KZF",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_CROOKED_MOUNTS": {
    "owner": "unowned",
@@ -476,7 +476,7 @@
    "confidence": "canon",
    "note": "Salzenmund hub"
   },
-  "STATE_EAST_OSTERMARK": {
+  "STATE_THE_VELDT": {
    "owner": "OSM",
    "confidence": "inferred"
   },
@@ -535,9 +535,9 @@
    "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_FOREST_OF_GLOOM": {
-   "owner": "HKN",
-   "confidence": "inferred",
-   "note": "registry note: Forest of Gloom; capital Harkon has no hub"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_FOREST_OF_KNIVES": {
    "owner": "SAR",
@@ -582,9 +582,9 @@
    "confidence": "inferred"
   },
   "STATE_GIANTHOME_MOUNTAINS": {
-   "owner": "KVE",
+   "owner": "KRD",
    "confidence": "directed",
-   "note": "review round 2"
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_GIANT_STOMPING_GROUNDS": {
    "owner": "unowned",
@@ -661,9 +661,9 @@
    "note": "review: greenskin placeholder for a future Skaven tag"
   },
   "STATE_GROM_RIDGE": {
-   "owner": "IRN",
-   "confidence": "canon",
-   "note": "Ironskinz Hold hub"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_GRYPHON_WOOD": {
    "owner": "GRW",
@@ -977,9 +977,9 @@
    "note": "Khorne-leaning tribe"
   },
   "STATE_NEW_LAHMIA": {
-   "owner": "UZK",
-   "confidence": "canon",
-   "note": "Uzkul-ak-Dreng hub"
+   "owner": "LHX",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_NEW_STRYGOS": {
    "owner": "THG",
@@ -1073,9 +1073,9 @@
    "confidence": "inferred"
   },
   "STATE_OLD_DWARF_ROAD": {
-   "owner": "BLV",
-   "confidence": "inferred",
-   "note": "Forest Goblins south of Black Fire Pass"
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_OLD_SILK_ROAD": {
    "owner": "unowned",
@@ -1083,9 +1083,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_OLD_STRYGOS": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "greenskin wilderness; no clear roster owner"
+   "owner": "STR",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_ORTEGETA": {
    "owner": "ORT",
@@ -1122,9 +1122,9 @@
    "note": "district of Zharr-Naggrund"
   },
   "STATE_PLAINS_OF_GRIEF": {
-   "owner": "unowned",
-   "confidence": "inferred",
-   "note": "wilderness; no roster tag"
+   "owner": "DLO",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_PLAINS_OF_LUCCINI": {
    "owner": "LUC",
@@ -1187,9 +1187,9 @@
    "note": "Sartosa hub"
   },
   "STATE_SCHADENSUMPF": {
-   "owner": "NLD",
+   "owner": "MID",
    "confidence": "directed",
-   "note": "review"
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_SEPUKZY": {
    "owner": "VOL",
@@ -1210,10 +1210,10 @@
    "confidence": "directed",
    "note": "review: Karak Izor"
   },
-  "STATE_SHINING_MOUNTAINS": {
-   "owner": "GUN",
-   "confidence": "canon",
-   "note": "Mount Gunbad hub; ruin, occupier not in roster"
+  "STATE_MOUNT_GUNBAD": {
+   "owner": "unowned",
+   "confidence": "directed",
+   "note": "review round 4 (Chris 2026-10-03)"
   },
   "STATE_SIX_WATCH_FORTS": {
    "owner": "LYB",
@@ -1509,7 +1509,7 @@
    "confidence": "canon",
    "note": "Bogenhafen hub"
   },
-  "STATE_WARD_OF_STORM": {
+  "STATE_WEST_NORDLAND": {
    "owner": "NLD",
    "confidence": "inferred"
   },

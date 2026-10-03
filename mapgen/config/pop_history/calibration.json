@@ -427,6 +427,12 @@
    "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
    "confidence": "low"
   },
+  "LHX": {
+   "canon": 8000,
+   "source": "inferred: single-state vampire remnant (WFB Vampire Counts; Chris 2026-10-03)",
+   "why": "Lahmian exiles hold a single Black Mountains state; a small refugee following.",
+   "confidence": "low"
+  },
   "LUC": {
    "canon": 90000,
    "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
@@ -690,6 +696,12 @@
    "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",
    "why": "Reikland is the Empire's richest and most populous province (Altdorf, largest city of the Old World); Marienburg/the Wasteland and Wissenland (Nuln) follow; Middenland holds Middenheim; the north-eastern provinces are sparse and forested; the Moot and Carroburg are small. Figures are rank-correct, not book figures.",
    "confidence": "medium"
+  },
+  "STR": {
+   "canon": 6000,
+   "source": "inferred: single-state vampire remnant (WFB Vampire Counts; Chris 2026-10-03)",
+   "why": "The Strigoi are a scattered remnant; their few settlements are small.",
+   "confidence": "low"
   },
   "TAL": {
    "canon": 190000,

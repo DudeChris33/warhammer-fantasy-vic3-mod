@@ -122,9 +122,11 @@ STATES = {
 	}
 	s:STATE_OLD_STRYGOS = {
 		create_state = {
-			country = c:UNO
+			country = c:STR
 			owned_provinces = { x07595A x093B36 x0EAE49 x177F6E x25C3A6 x3407DE x3CD903 x45AA28 x49083A x4B1D3B x53EE60 x582637 x596173 x623298 x6B03BD x6DF756 x7076D0 x7947F5 x7E01C0 x878C2D x8C45F8 x95D065 x9EA18A xA2D961 xA772AF xB5B6E7 xBB29FA xC3FB1F xCCCC44 xD23F57 xDB107C xEE0E7F xF225D9 xF798EC }
 		}
+
+		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_SHARPTHORN_FOREST = {
 		create_state = {

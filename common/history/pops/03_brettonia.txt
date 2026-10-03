@@ -31,18 +31,18 @@ POPS = {
 		}
 	}
 	s:STATE_BREGANALLE = {
-		region_state:BRI = {
-			create_pop = { culture = bretonnian size = 184208 }
+		region_state:CAR = {
+			create_pop = { culture = bretonnian size = 377852 }
 		}
 	}
 	s:STATE_BRIONNE = {
 		region_state:BRI = {
-			create_pop = { culture = bretonnian size = 465792 }
+			create_pop = { culture = bretonnian size = 650000 }
 		}
 	}
 	s:STATE_CARCASSONNE = {
 		region_state:CAR = {
-			create_pop = { culture = bretonnian size = 462913 }
+			create_pop = { culture = bretonnian size = 288000 }
 		}
 	}
 	s:STATE_CASTLE_MOUSILLON = {
@@ -168,7 +168,7 @@ POPS = {
 	}
 	s:STATE_WEST_CARCASSONNE = {
 		region_state:CAR = {
-			create_pop = { culture = bretonnian size = 523932 }
+			create_pop = { culture = bretonnian size = 325964 }
 		}
 	}
 	s:STATE_WYDRIOTH = {

@@ -1,4 +1,4 @@
-﻿STATE_WARD_OF_STORM = {
+﻿STATE_WEST_NORDLAND = {
     id = 45
     subsistence_building = "building_subsistence_farm"
     provinces = { x032F58 x1A44B5 x2888ED x48D9E8 x48E7BD x64F7DF x7C0D3C x876BB0 x932299 xA166D1 xC6C066 xDDD5C3 xE71F36 }
@@ -493,7 +493,7 @@ STATE_REIKLAND_PROPER = {
     }
     naval_exit_id = 3040
 }
-STATE_EAST_OSTERMARK = {
+STATE_THE_VELDT = {
     id = 535
     subsistence_building = "building_subsistence_farm"
     provinces = { x0705B8 x1DD119 x675BAF x688443 x68CE3F x7F99A0 xCA4CCA xD31DEF xE16227 xE4AD91 xF87784 }

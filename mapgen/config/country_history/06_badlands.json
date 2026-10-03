@@ -167,6 +167,10 @@
           "why": "Follows from the tag's laws at principality tier."
         }
       }
+    },
+    "STR": {
+      "confidence": "low",
+      "note": "Strigoi remnant: undead holding filed in the Badlands by geography; the greenskin baseline does not describe it, source silent on its institutions."
     }
   }
 }

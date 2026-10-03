@@ -106,11 +106,11 @@ STATES = {
 	}
 	s:STATE_GIANTHOME_MOUNTAINS = {
 		create_state = {
-			country = c:KVE
+			country = c:KRD
 			owned_provinces = { x589A56 x6F60E4 x78118C xABCFD6 xC33402 xFFA2F4 }
 		}
 
-		add_homeland = cu:norscan
+		add_homeland = cu:dawi_norse
 	}
 	s:STATE_GLOOMWRACK_COAST = {
 		create_state = {

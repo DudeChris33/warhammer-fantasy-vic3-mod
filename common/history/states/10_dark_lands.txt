@@ -310,9 +310,11 @@ STATES = {
 	}
 	s:STATE_PLAINS_OF_GRIEF = {
 		create_state = {
-			country = c:UNO
+			country = c:DLO
 			owned_provinces = { x0746B2 x158AEA x1E5C0F x21A779 x2CA047 x4688C0 x69425E x715568 x71E05E x8E68CE x9739F3 x9CAD06 xA57E2B xAE4F50 xB3D038 xBF66A4 xBFDEF2 xD929CD xF03155 xF03F2A xF4D878 xF8368A xF9027A }
 		}
+
+		add_homeland = cu:orc
 	}
 	s:STATE_PLAIN_OF_BONES = {
 		create_state = {
