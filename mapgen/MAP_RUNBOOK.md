@@ -123,9 +123,16 @@ Confirm `git status` shows `map_data/heightmap.png`, `map_data/rivers.png`, and
 
 ### 2. Commit only the intended files
 
+The repo lives outside the game's mod folder, so the editor saved into the
+*deployed* copy. Bring its output back first, and review it before staging:
+
 ```
+.\deploy.ps1 -Pull
 git status -s map_data/
 ```
+
+Before every editor launch (and after any repo change) run `.\deploy.ps1`, which
+refuses to overwrite editor output you have not pulled.
 
 Commit `packed_heightmap.png`, `indirection_heightmap.png`,
 `heightmap.heightmap`, and `nodes.dat` — the set the editor derives from our
@@ -274,9 +281,16 @@ the mod's `map_data/`:
 
 ### 2. Commit only the intended files
 
+The repo lives outside the game's mod folder, so the editor saved into the
+*deployed* copy. Bring its output back first, and review it before staging:
+
 ```
+.\deploy.ps1 -Pull
 git status -s map_data/
 ```
+
+Before every editor launch (and after any repo change) run `.\deploy.ps1`, which
+refuses to overwrite editor output you have not pulled.
 
 Commit `packed_heightmap.png`, `indirection_heightmap.png`,
 `heightmap.heightmap`, and `nodes.dat`.

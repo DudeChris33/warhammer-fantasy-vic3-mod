@@ -35,6 +35,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
 | `docs/` | Read-only game-generated script reference (`docs/*.log`) |
 | `planning/` | Review-panel targets, `tag_registry.md`, `planning/economics/` (economics design notes) and the maestro skills' gitignored `.cache/` scratch. Not the tracker — the maestro board is. |
 | `.metadata/metadata.json` | Mod descriptor |
+| `deploy.ps1` | Mirrors the shipping folders into `Documents/Paradox Interactive/Victoria 3/mod/warhammer-fantasy` (the repo itself lives outside the game's mod folder — see [core.md](.claude/rules/core.md)); `-Pull` copies editor/game output back, `-Force` discards it |
 
 ## How to work here
 

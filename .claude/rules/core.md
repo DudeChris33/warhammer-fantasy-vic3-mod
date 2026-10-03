@@ -29,6 +29,7 @@ External references are fine for background — the Vic3 modding wiki (`https://
 
 Each is one line here; the detail is in the owning guide. A breach is costly or hard to reverse, so these are never moved behind a guide.
 
+- **The repo is not the mod folder.** The repo lives at `Documents/Modding/Vic3/warhammer-fantasy`; `Documents/Paradox Interactive/Victoria 3/mod/warhammer-fantasy` is a deploy target (only `.metadata`, `common`, `events`, `gfx`, `gui`, `interface`, `localization`, `map_data`, `thumbnail.png`) so `sources/`, `mapgen/`, `.git`, `planning/`, `.claude/` stay out of the Workshop upload. Edit in the repo, never in the deployed copy; `deploy.ps1` mirrors repo → mod folder and refuses to overwrite files the game or map editor wrote there until you run `deploy.ps1 -Pull`. A new shipping folder must be added to `$shipDirs` in `deploy.ps1`.
 - **Never write to the vanilla install** — read-only reference; copy and edit the copy. Note the in-game map editor itself writes into the base-game folder (`mapgen/MAP_RUNBOOK.md`), so follow its steps and `git diff` after every editor save.
 - **Never hand-edit `docs/*.log`** — the game generates them.
 - **Confirm before use**: every effect, trigger, modifier, event target, on_action and custom-loc key must be confirmed in the matching `docs/*.log`; never invent content or leave a `{{...}}` placeholder. Detail: [scripting.md](scripting.md).
@@ -44,8 +45,8 @@ Each is one line here; the detail is in the owning guide. A breach is costly or 
 There is no compiler and no automated test suite for Clausewitz script — validation is loading the mod in Victoria 3.
 
 1. If the change touches `map_data/`, `common/strategic_regions/`, map loc or source-registration data, run the offline map gate first (see [testing.md](testing.md)).
-2. Launch Victoria 3 with this mod enabled. Get into a game session if the change touches `events/` or `history/` — main-menu parsing alone won't catch every error.
-3. Check `logs/error.log` (`Documents/Paradox Interactive/Victoria 3/logs/error.log`, one level above the `mod/` folder; this mod is `.../Victoria 3/mod/warhammer-fantasy/`) after every change touching `common/`, `events/`, `gui/`, `localization/` or `map_data/`.
+2. Run `.\deploy.ps1` (repo root) to mirror the shipping folders into the game's mod folder, then launch Victoria 3 with this mod enabled. Get into a game session if the change touches `events/` or `history/` — main-menu parsing alone won't catch every error.
+3. Check `logs/error.log` (`Documents/Paradox Interactive/Victoria 3/logs/error.log`; the deployed mod is `.../Victoria 3/mod/warhammer-fantasy/`) after every change touching `common/`, `events/`, `gui/`, `localization/` or `map_data/`.
 4. Any new line referencing a file of this mod is a failure. Fix the **script**, never the log; never edit `error.log` or any game-owned file to make an error disappear.
 5. Never claim a change is "tested" without having loaded the mod in-game and checked the log.
 
