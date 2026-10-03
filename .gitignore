@@ -1,8 +1,7 @@
 # Repo-root ignores. Tool-local ignores (.venv, __pycache__, fixture scratch)
 # live in mapgen/.gitignore and stay there.
 
-# Reference imagery for the source-driven map pipeline (third-party IP: GW
-# cartography, a Total War screenshot mosaic, fan maps). Was committed in full
+# Reference imagery for the source-driven map pipeline. Was committed in full
 # via Git LFS as of 2026-09-03 to sync between two devices; reverted 2026-09-15
 # once work moved to a single machine (the second can't run the game to test),
 # and purged from git history entirely in board #4608. sources/ now lives on
@@ -40,3 +39,5 @@ MANIFEST
 
 # maestro skills scratch copies of workspecs
 planning/.cache/
+.claude/skills/maestro-**/
+.claude/skills/sites-verify/
