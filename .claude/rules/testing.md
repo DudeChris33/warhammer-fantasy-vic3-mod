@@ -127,6 +127,8 @@ generate_arable_heatmap.py
 
 `mapgen/measure_vanilla_arable.py` is read-only against the vanilla install, writes only gitignored `mapgen/derived/vanilla_arable_*` and `vanilla_state_climate_proposal.csv`, and its `--check` reproduces the generated block in `planning/economics/arable_land_engine_research.md`; `--selftest` needs no install. Outside the gate.
 
+`mapgen/tabulate_state_prior.py` (#3677, shared with #3687) is a dev-only tabulator: it reads committed inputs, joins the hand-authored `state_climate_classes.csv` and `canon_rivers.csv`, and writes gitignored `mapgen/derived/state_physical_prior.csv` and `state_prior_class_review.png`; it hard-errors on a class the physical prior disagrees with and that has no `override_ref`.
+
 ## Name citations: the `source` convention
 
 Every hand-authored place name carries a **citation**, so canon can be told from invention without re-litigating it:
