@@ -3209,6 +3209,77 @@ def _selfcheck_economics() -> None:
         assert c.rural == {"building_a", "building_b"} and c.subsistence == {"building_b"}, c
 
 
+def _selfcheck_economics_validator() -> None:
+    """``validate_map._check_state_economics`` (board #3678) on synthetic ParsedStates: the
+    emitted-file rules (fishing village needs the emitted ``port``, placeholders stay on the
+    default, a missing field) and the worksheet cross-checks (state file disagrees with a filled
+    cell, anchor not equal to ``naming_anchor``, unknown/placeholder row), warnings kept out of
+    the errors, and the block parser."""
+    import validate_map as vm
+    from worldgen import land_economics as le
+
+    def st(key: str, port: bool = False, land: int = 10, sub: str = "building_subsistence_farm",
+           res: tuple[str, ...] = ("building_wheat_farm", "building_livestock_ranch"),
+           provs: tuple = ((1, 1, 1),)) -> "vm.ParsedState":
+        s = vm.ParsedState(key, "t.txt")
+        s.provinces = list(provs)
+        s.port_declared = port
+        s.subsistence_building, s.arable_land, s.arable_resources = sub, land, list(res)
+        return s
+
+    own = {"STATE_A": {"naming_anchor": [10, 20], "scope": "drawn"},
+           "STATE_B": {"naming_anchor": [30, 40], "scope": "drawn"},
+           "STATE_LAND_001": {"naming_anchor": [50, 60], "scope": "placeholder"}}
+
+    def sheet(*rows: "le.EconomicsRow") -> "le.EconomicsWorksheet":
+        return le.EconomicsWorksheet({r.state_key: r for r in rows}, le.KNOWN_COLUMNS)
+
+    def row(key, x, y, land=None, sub=None, res=None) -> "le.EconomicsRow":
+        return le.EconomicsRow(key, (x, y), land, sub, res, "", "", 2)
+
+    def run(states, sh=None, ownership=own, ph=frozenset()):
+        warns: list[str] = []
+        errs = vm._check_state_economics(states, [], None, set(ph), sh, ownership, warns)
+        return errs, warns
+
+    errs, warns = run([st("STATE_A"), st("STATE_B")])
+    assert errs == [] and warns == [], (errs, warns)
+    errs, _ = run([st("STATE_A", sub=le.FISHING_VILLAGE, port=False)])
+    assert len(errs) == 1 and "port hub" in errs[0], errs
+    assert run([st("STATE_A", sub=le.FISHING_VILLAGE, port=True)])[0] == []
+    errs, _ = run([st("STATE_LAND_001", land=40)])
+    assert any("default economics" in e for e in errs), "a placeholder off-default must error"
+    errs, _ = run([st("STATE_X", land=40, provs=((9, 9, 9),))], ph={(9, 9, 9)}, ownership=None)
+    assert any("default economics" in e for e in errs), "placeholder by province colour"
+    errs, _ = run([st("STATE_A", res=())])
+    assert any("missing" in e for e in errs), errs
+    errs, warns = run([st("STATE_A", land=5)])
+    assert errs == [] and len(warns) == 1 and "MASS_MIGRATION_TARGET_MIN_ARABLE_LAND" in warns[0], (errs, warns)
+    # worksheet agreement
+    states = [st("STATE_A", land=40), st("STATE_B")]
+    errs, warns = run(states, sheet(row("STATE_A", 10, 20, land=40), row("STATE_B", 30, 40)))
+    assert errs == [], errs
+    assert warns == ["1 drawn state(s) still on default economics (no worksheet values)"], warns
+    errs, _ = run(states, sheet(row("STATE_A", 10, 20, land=41)))
+    assert len(errs) == 1 and "disagrees with the worksheet" in errs[0], errs
+    errs, _ = run(states, sheet(row("STATE_A", 10, 20, sub="building_subsistence_orchard")))
+    assert len(errs) == 1 and "subsistence_building" in errs[0], errs
+    errs, _ = run(states, sheet(row("STATE_A", 11, 20, land=40)))
+    assert len(errs) == 1 and "anchor" in errs[0], errs
+    errs, _ = run(states, sheet(row("STATE_GONE", 1, 1)))
+    assert len(errs) == 1 and "row dead" in errs[0], errs
+    errs, _ = run(states + [st("STATE_LAND_001")], sheet(row("STATE_LAND_001", 50, 60)))
+    assert len(errs) == 1 and "placeholder" in errs[0], errs
+    assert run(states, sheet(row("STATE_A", 10, 20, land=40)))[0] == run(states, sheet(row("STATE_A", 10, 20, land=40)))[0]
+
+    # the block parser reads what render_land_state emits
+    parsed = vm._parse_block("STATE_P", 'id = 400\n\tsubsistence_building = "building_subsistence_orchard"\n'
+                             '\tprovinces = { x010203 }\n\tarable_land = 25\n'
+                             '\tarable_resources = { "building_rye_farm" "building_vineyard" }\n', "t.txt")
+    assert (parsed.subsistence_building, parsed.arable_land, parsed.arable_resources) == (
+        "building_subsistence_orchard", 25, ["building_rye_farm", "building_vineyard"]), vars(parsed)
+
+
 def _selfcheck_province_terrains() -> None:
     """province_terrains.txt generator + validator (board #2968), in isolation.
 
@@ -5688,6 +5759,10 @@ def run_check() -> int:
           "+ per-column fallback + check_economics (catalog ids, rural, fishing-village-needs-port, "
           "<10 warning) + byte-identical emission + identity/rekey + catalog loader + determinism "
           "self-check passed.")
+    _selfcheck_economics_validator()
+    print("validate_map economics: fishing-village-needs-port, placeholder-stays-default, missing "
+          "field, <10 warning (non-blocking), worksheet disagreement/anchor/dead-row/placeholder-row "
+          "errors + block parser self-check passed.")
     _selfcheck_province_terrains()
     print("province_terrains: generator (plains/ocean, id-sorted, deterministic) + validator "
           "(bijection, valid ids, negative cases) self-check passed.")

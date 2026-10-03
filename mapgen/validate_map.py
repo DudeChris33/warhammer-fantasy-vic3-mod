@@ -36,7 +36,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import sources  # noqa: E402
+from worldgen import land_economics, sources  # noqa: E402
 from worldgen.raster import (  # noqa: E402
     Color,
     connected_components,
@@ -78,6 +78,10 @@ class ParsedState:
         self.hubs: dict[str, Color] = {}
         self.naval_exit_id: int | None = None
         self.port_declared = False
+        # Economics fields as emitted (#3678); None/[] when the block lacks them.
+        self.subsistence_building: str | None = None
+        self.arable_land: int | None = None
+        self.arable_resources: list[str] = []
 
     # Classified against the sea colours from default.map.
     def is_sea(self, sea_colors: set[Color]) -> bool:
@@ -151,6 +155,16 @@ def _parse_block(key: str, body: str, filename: str) -> ParsedState:
     nm = re.search(r"\bnaval_exit_id\s*=\s*(\d+)", body)
     if nm:
         st.naval_exit_id = int(nm.group(1))
+
+    sm = re.search(r'\bsubsistence_building\s*=\s*"?(\w+)"?', body)
+    if sm:
+        st.subsistence_building = sm.group(1)
+    am = re.search(r"\barable_land\s*=\s*(\d+)", body)
+    if am:
+        st.arable_land = int(am.group(1))
+    ar_block = _extract_block(body, "arable_resources")
+    if ar_block is not None:
+        st.arable_resources = [t.strip('"') for t in ar_block.split()]
 
     return st
 
@@ -291,6 +305,9 @@ def validate(
     cultures_dir: Path | None = None,
     country_history_path: Path | None = None,
     scripted_effects_dir: Path | None = None,
+    buildings_dir: Path | None = None,
+    building_groups_dir: Path | None = None,
+    economics_worksheet: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -336,6 +353,7 @@ def validate(
     archipelago_colors: set[Color] = set()
     index_lake_colors: set[Color] | None = None
     index_cells: list[dict] | None = None
+    placeholder_colors: set[Color] = set()
     if provinces_index_path is not None and provinces_index_path.is_file():
         import json
 
@@ -344,6 +362,9 @@ def validate(
             tuple(c["color"]) for c in prov_index["cells"] if c.get("archipelago")
         }
         index_cells = prov_index["cells"]
+        placeholder_colors = {
+            tuple(int(v) for v in c["color"]) for c in prov_index["cells"] if c.get("placeholder")
+        }
         index_lake_colors = {
             tuple(int(v) for v in c["color"])
             for c in prov_index["cells"] if c.get("kind") == "lake"
@@ -463,6 +484,26 @@ def validate(
             warnings.extend(cc_warnings)
 
     errors += _check_loc_coverage(states, loc_dir, extra_loc_dirs)
+
+    # Per-state economics (#3678): the emitted fields against the shared rules; the catalog,
+    # worksheet and ownership cross-checks run only when their inputs are given.
+    econ_catalog = (land_economics.load_building_catalog(buildings_dir, building_groups_dir)
+                    if buildings_dir is not None and building_groups_dir is not None else None)
+    econ_sheet = None
+    if economics_worksheet is not None:
+        from worldgen import schema
+
+        try:
+            econ_sheet = land_economics.load_economics_worksheet(economics_worksheet)
+        except schema.SchemaError as exc:
+            errors.append(str(exc))
+    econ_ownership = None
+    if state_ownership_path is not None and state_ownership_path.is_file():
+        import json
+
+        econ_ownership = json.loads(state_ownership_path.read_text(encoding="utf-8"))["states"]
+    errors += _check_state_economics(
+        land_states, sea_states, econ_catalog, placeholder_colors, econ_sheet, econ_ownership, warnings)
 
     # Starting ownership (#6372): None under --fixture (run_fixture self-checks it).
     if (state_history_dir is not None and state_ownership_path is not None
@@ -1281,6 +1322,82 @@ def _warn_lakes_degenerate(cells: list[dict], report_min: int) -> list[str]:
         f"(smallest {smallest_hex} at {smallest_area:,} px) — check these aren't fill "
         f"speckle/dust rather than real lakes (lakes are never merged, only kept or "
         f"redrawn). Verify on the rendered map."]
+
+
+_ECONOMICS_SHEET_NAME = "land_economics_worksheet.csv"
+
+
+def _check_state_economics(land_states: list[ParsedState], sea_states: list[ParsedState],
+                           catalog: "land_economics.BuildingCatalog | None",
+                           placeholder_colors: set[Color],
+                           worksheet: "land_economics.EconomicsWorksheet | None",
+                           state_ownership: dict | None,
+                           warnings: list[str] | None = None) -> list[str]:
+    """Per-state economics as emitted (#3678). Each land state runs
+    ``land_economics.check_economics`` (``coastal`` = the emitted ``port`` hub, which
+    ``_check_coastal_naval_exit`` ties to bitmap adjacency); a placeholder state (every province a
+    placeholder colour, or ``scope`` placeholder in ``state_ownership``) must carry the default
+    economics. With a ``worksheet``: every row names a drawn land state, its anchor equals the
+    state's ``naming_anchor`` (needs ``state_ownership``), and every non-empty cell equals the
+    emitted value (a stale state file after a worksheet edit fails here). Warnings
+    (``arable_land`` below the mass-migration floor, how many drawn states are still on defaults)
+    go to ``warnings``, never the errors."""
+    from worldgen import schema
+
+    errors: list[str] = []
+    warns: list[str] = []
+    default = land_economics.DEFAULT_ECONOMICS
+
+    def is_placeholder(st: ParsedState) -> bool:
+        if state_ownership is not None and state_ownership.get(st.key, {}).get("scope") == "placeholder":
+            return True
+        return bool(st.provinces) and all(c in placeholder_colors for c in st.provinces)
+
+    placeholder_keys = {st.key for st in land_states if is_placeholder(st)}
+    for st in sorted(land_states, key=lambda s: s.key):
+        if st.subsistence_building is None or st.arable_land is None or not st.arable_resources:
+            errors.append(f"{st.filename}: {st.key}: missing subsistence_building / arable_land / "
+                          f"arable_resources")
+            continue
+        econ = schema.Economics(st.subsistence_building, st.arable_land, list(st.arable_resources), {})
+        e, w = land_economics.check_economics(st.key, econ, st.port_declared, catalog)
+        errors += [f"{st.filename}: {m}" for m in e]
+        if st.key in placeholder_keys:
+            if (econ.subsistence_building, econ.arable_land, econ.arable_resources) != (
+                    default.subsistence_building, default.arable_land, default.arable_resources):
+                errors.append(f"{st.filename}: {st.key}: placeholder state must carry the default economics")
+        else:
+            warns += w
+    if worksheet is not None:
+        by_key = {st.key: st for st in land_states}
+        if state_ownership is not None:
+            identity = {}
+            for k in by_key:
+                anchor = state_ownership.get(k, {}).get("naming_anchor")
+                identity[k] = land_economics.StateIdentity(
+                    tuple(anchor) if anchor else None, k in placeholder_keys)
+            ident_errs, _ = land_economics.check_worksheet_identity(
+                worksheet.rows, identity, {st.key for st in sea_states})
+            errors += [f"{_ECONOMICS_SHEET_NAME}: {m}" for m in ident_errs]
+        for key, row in worksheet.rows.items():
+            st = by_key.get(key)
+            if st is None or key in placeholder_keys:
+                continue  # reported by the identity check
+            for field, cell, emitted in (
+                    ("arable_land", row.arable_land, st.arable_land),
+                    ("subsistence_building", row.subsistence_building, st.subsistence_building),
+                    ("arable_resources", row.arable_resources, st.arable_resources)):
+                if cell is not None and cell != emitted:
+                    errors.append(f"{_ECONOMICS_SHEET_NAME}: row {row.line} {key}: the state file's {field} is "
+                                  f"{emitted!r} but the worksheet says {cell!r} - state file disagrees "
+                                  f"with the worksheet, regenerate with generate_land_regions.py")
+        n_on_default = sum(1 for k in by_key if k not in placeholder_keys
+                           and not (k in worksheet.rows and worksheet.rows[k].has_values()))
+        if n_on_default:
+            warns.append(f"{n_on_default} drawn state(s) still on default economics (no worksheet values)")
+    if warnings is not None:
+        warnings.extend(warns)
+    return errors
 
 
 def _check_loc_coverage(states: list[ParsedState], loc_dir: Path,
@@ -2283,6 +2400,13 @@ def _build_parser() -> argparse.ArgumentParser:
     p.add_argument("--default-map", type=Path, help="path to default.map")
     p.add_argument("--loc-dir", type=Path, help="path to the map localization directory")
     p.add_argument("--min-province-area", type=int, default=4, help="minimum province pixel area (default 4)")
+    p.add_argument("--buildings-dir", type=Path,
+                   help="mod common/buildings/ for the economics id checks (default: the repo's; off under --fixture)")
+    p.add_argument("--building-groups-dir", type=Path,
+                   help="mod common/building_groups/ (default: the repo's; off under --fixture)")
+    p.add_argument("--economics-worksheet", type=Path,
+                   help="land_economics_worksheet.csv for the economics cross-check "
+                        "(default: the repo's; off under --fixture)")
     return p
 
 
@@ -2417,6 +2541,11 @@ def main(argv: list[str] | None = None) -> int:
         cultures_dir=None if args.fixture else REPO_ROOT / "common" / "cultures",
         country_history_path=None if args.fixture else REPO_ROOT / "common" / "history" / "countries",
         scripted_effects_dir=None if args.fixture else REPO_ROOT / "common" / "scripted_effects",
+        buildings_dir=None if args.fixture else (args.buildings_dir or REPO_ROOT / "common" / "buildings"),
+        building_groups_dir=None if args.fixture else
+        (args.building_groups_dir or REPO_ROOT / "common" / "building_groups"),
+        economics_worksheet=None if args.fixture else
+        (args.economics_worksheet or TOOLS_DIR / "config" / "land_economics_worksheet.csv"),
     )
     # Warnings are advisory (canon-city impassable collisions, #3789) — printed
     # whether the gate passes or fails, but never gating the exit code: a hold in
@@ -2432,7 +2561,7 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     msg = "validate_map: all checks passed."
     if warnings:
-        msg += f" ({len(warnings)} non-blocking canon-city warning(s) above)"
+        msg += f" ({len(warnings)} non-blocking warning(s) above)"
     print(msg)
     return 0
 
