@@ -330,4 +330,21 @@ root cause". Facts learned running this section:
   `flatmap*.dds`, `land_mask.dds`, `dynamic_masks/exclusion_mask.dds`,
   `map_object_data/generated/*`), which the mod does not override. A repack cannot fix those.
 
+## Land state economics (no desktop step)
+
+Per-state `subsistence_building` / `arable_land` / `arable_resources` live in the hand-authored
+`mapgen/config/land_economics_worksheet.csv` (#3678); there is nothing to do in the client except
+the usual load check. After editing a row:
+
+```
+python mapgen/generate_land_regions.py            # rewrites only the edited states' blocks
+python mapgen/generate_building_history.py        # reads the emitted fields; then its --check
+python mapgen/validate_map.py                     # economics check + worksheet cross-check
+python mapgen/render_land_economics_preview.py    # choropleth (--realm <stem> for one realm); look at it
+```
+
+Then load the mod and check `logs/error.log` for lines naming `map_data/`. A renamed state makes
+its row fail with the current key named: `python mapgen/generate_land_regions.py --rekey-economics`
+rewrites just those key cells (anchors are never touched).
+
 <!-- ## S5 — object locators + spline regeneration -->
