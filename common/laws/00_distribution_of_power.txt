@@ -314,7 +314,7 @@ law_landed_voting = {
 	on_activate = {
 		if = {
 			limit = {
-				game_date > 1836.1.1
+				game_date > 2512.1.1
 				country_has_voting_franchise = yes
 			}
 			initialize_electoral_confidence = yes
@@ -410,7 +410,7 @@ law_wealth_voting = {
 	on_activate = {
 		if = {
 			limit = {
-				game_date > 1836.1.1
+				game_date > 2512.1.1
 				country_has_voting_franchise = yes
 			}
 			initialize_electoral_confidence = yes
@@ -500,7 +500,7 @@ law_census_voting = {
 	on_activate = {
 		if = {
 			limit = {
-				game_date > 1836.1.1
+				game_date > 2512.1.1
 				country_has_voting_franchise = yes
 			}
 			initialize_electoral_confidence = yes
@@ -586,7 +586,7 @@ law_universal_suffrage = {
 	on_activate = {
 		if = {
 			limit = {
-				game_date > 1836.1.1
+				game_date > 2512.1.1
 				country_has_voting_franchise = yes
 			}
 			initialize_electoral_confidence = yes
@@ -787,7 +787,7 @@ law_single_party_state = {
 
 		if = {
 			limit = {
-				game_date > 1836.1.1
+				game_date > 2512.1.1
 				country_has_voting_franchise = yes
 			}
 			initialize_electoral_confidence = yes

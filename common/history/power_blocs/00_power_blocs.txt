@@ -9,7 +9,7 @@
 			name = WH_BLOC_EMPIRE_OF_SIGMAR
 			map_color = { 196 148 54 }
 
-			founding_date = 1836.1.1
+			founding_date = 2512.1.1
 			identity = identity_sovereign_empire
 			principle = principle_vassalization_1
 
@@ -24,7 +24,7 @@
 			name = WH_BLOC_KARAZ_ANKOR
 			map_color = { 148 112 72 }
 
-			founding_date = 1836.1.1
+			founding_date = 2512.1.1
 			identity = identity_cultural
 			principle = principle_shared_canon_1
 
@@ -46,7 +46,7 @@
 			name = WH_BLOC_DOMINION_OF_HASHUT
 			map_color = { 118 44 32 }
 
-			founding_date = 1836.1.1
+			founding_date = 2512.1.1
 			identity = identity_religious
 			principle = principle_sacred_civics_1
 

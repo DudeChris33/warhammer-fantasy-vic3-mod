@@ -134,7 +134,7 @@
 		# Subjects should not start the game wanting independence unless we specifically script this strategy for them
 		if = {
 			limit = {
-				game_date < 1836.1.2
+				game_date < 2512.1.2
 			}
 			multiply = 0
 		}

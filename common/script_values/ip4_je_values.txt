@@ -1,6 +1,6 @@
 ﻿years_since_game_start = {
 	value = year
-	subtract = 1836
+	subtract = 2512
 }
 
 yearly_gross_income = {

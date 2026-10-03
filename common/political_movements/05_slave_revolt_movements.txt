@@ -446,7 +446,7 @@
 
 		if = {
 			limit = {
-				game_date > 1836.1.1
+				game_date > 2512.1.1
 				owner = {
 					country_is_colonial_or_company = yes
 				}

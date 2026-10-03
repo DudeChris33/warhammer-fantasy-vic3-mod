@@ -2711,7 +2711,7 @@ ai_strategy_default = {
 				is_insurrectionary = no
 
 				# Historical enemies shouldn't start as conciliatory unless we explicitly script this in history
-				game_date >= 1836.1.2
+				game_date >= 2512.1.2
 			}
 			score = {
 				value = 100
@@ -3206,7 +3206,7 @@ ai_strategy_default = {
 
 				# Countries scripted to have a friendly pact or same power bloc shouldn't start with hostile goals
 				NAND = {
-					game_date < 1836.1.2
+					game_date < 2512.1.2
 					OR = {
 						is_in_same_power_bloc = scope:target_country
 						has_friendly_diplomatic_pact = { TARGET = scope:target_country }
@@ -3425,7 +3425,7 @@ ai_strategy_default = {
 
 				# Countries scripted to have a friendly pact or same power bloc shouldn't start with hostile goals
 				NAND = {
-					game_date < 1836.1.2
+					game_date < 2512.1.2
 					OR = {
 						is_in_same_power_bloc = scope:target_country
 						has_friendly_diplomatic_pact = { TARGET = scope:target_country }

@@ -7,7 +7,7 @@
 		second_country = c:KAK
 
 		is_draft = no
-		entered_into_force_on = 1836.1.1
+		entered_into_force_on = 2512.1.1
 		binding_period = { years = 20 }
 
 		articles_to_create = {
@@ -24,7 +24,7 @@
 		second_country = c:KSV
 
 		is_draft = no
-		entered_into_force_on = 1836.1.1
+		entered_into_force_on = 2512.1.1
 		binding_period = { years = 20 }
 
 		articles_to_create = {
