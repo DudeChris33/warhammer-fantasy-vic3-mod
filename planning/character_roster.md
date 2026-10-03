@@ -1,6 +1,6 @@
 # Character roster (start date 2512 IC)
 
-Hand-authored starting characters, one template per character in `common/character_templates/<region>.txt` and one `create_character` per template in `common/history/characters/<region>.txt`. Display names are in `localization/english/characters_l_english.yml`. **Not loaded in-game**: nothing here is tested; Chris still has to check `logs/error.log`.
+Hand-authored starting characters, one template per character in `common/character_templates/<region>.txt` and one `create_character` per template in `common/history/characters/<region>.txt`. Display names are in `localization/english/wh_characters_l_english.yml`. **Not loaded in-game**: nothing here is tested; Chris still has to check `logs/error.log`.
 
 **Coverage:** 63 characters across 51 of 144 start tags (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`). The other 93 tags have no attested canon ruler and fall back to the culture-based `default` template.
 
@@ -207,7 +207,7 @@ The mod's trait and ideology lists are vanilla's industrial-era set. Substitutio
 
 ## Check in `logs/error.log`
 
-After loading with the mod, look for new lines naming `common/character_templates/*`, `common/history/characters/*` or `characters_l_english.yml`:
+After loading with the mod, look for new lines naming `common/character_templates/*`, `common/history/characters/*` or `wh_characters_l_english.yml`:
 
 - unknown trait, ideology, interest group, role or culture key;
 - `home_region` or `create_character` errors (a first-start check that every `c:TAG ?=` resolves);
