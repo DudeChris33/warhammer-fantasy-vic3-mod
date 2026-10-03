@@ -116,6 +116,26 @@ LAT_BOTTOM = float(_miller_lat((Y0 - HEIGHT) / R_CANVAS))
 LON_AT_X0 = float(np.degrees(-X0 / R_CANVAS))
 
 
+#: Earth's equatorial circumference in km (WGS-84 equatorial radius x 2*pi).
+EARTH_CIRCUMFERENCE_KM = 40075.017
+
+
+def km2_per_px(lat_deg):
+    """True ground area, in km^2, of one canvas pixel at latitude ``lat_deg``.
+
+    Miller is neither equal-area nor conformal. At latitude phi its meridian
+    scale is ``h = sec(0.8 phi)`` (dy/dphi) and its parallel scale ``k = sec phi``,
+    so one canvas px covers ``(circumference / WIDTH)^2 * cos(phi) * cos(0.8 phi)``
+    km^2 of ground; at the equator that is (40,075.017 / 8192)^2 = 23.93 km^2.
+    Pure and closed-form (determinism). Works on scalars or arrays; the frame is
+    the same for every canvas scale because the grids are uniform multiples
+    (:func:`_scale`), so ``WIDTH`` is the 1:1 canvas.
+    """
+    phi = np.radians(np.asarray(lat_deg, dtype=np.float64))
+    km_per_px = EARTH_CIRCUMFERENCE_KM / WIDTH
+    return km_per_px * km_per_px * np.cos(phi) * np.cos(MILLER_C * 2.0 * phi)
+
+
 def _scale(width: int, height: int) -> float:
     """Uniform canvas scale factor, asserted to be uniform.
 
