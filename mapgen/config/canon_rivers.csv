@@ -1,40 +1,60 @@
-# Owner: board #3677. Consumers: #3687 (river traits), #2968 (province terrains), mapgen/tabulate_state_prior.py (canon_river), validate_map.py (river, state_key).
-# One row per (river, state). The traced map_data/rivers.png is unnamed and incomplete, so this hand-authored layer is the canon river source.
+# Owner: board #3677. Consumers: #3687 (river traits) / #2968 (province terrains) / mapgen/tabulate_state_prior.py (canon_river) / mapgen/validate_map.py (reads river and state_key by header name).
+# One row per (river + state). The traced map_data/rivers.png is unnamed and incomplete so this hand-authored layer is the canon river source.
 # validate_map.py warns (never errors) where a river is not in rivers_index.json: pin the name through canon_river_names.json (handoff to #3703/#3687).
-# Tiers: A in-repo evidence (state name), B named GW publication corroborated by A, C recalled and unverified.
+# Source grammar as in state_climate_classes.csv: lex:<Page>#<section> (zone | zone via hub X | zone via owner TAG | realm) [GW publication the page footnotes]; name (...) = the state's canon name carries the river.
+# Tier A = an extract places the river in the state by name or hub or the state is named for the river feature itself. Tier B = the state is named for the river's province and the extract only describes the river.
+# Tier C = [unverified]: nothing in the extracts; no climate class or override may rest on a C row. Lexicanum pages were read 2026-10-04 and are paraphrased - never quoted.
+# These comment lines carry no comma on purpose: validate_map.py's reader does not skip comment lines and would read a comma-bearing one as a row.
+# After editing re-run: python mapgen/tabulate_state_prior.py --classes mapgen/config/state_climate_classes.csv --rivers mapgen/config/canon_rivers.csv --markdown
 river,state_key,state_id,tier,source,note
-Ash River,STATE_UPPER_ASH_RIVER,607,A,A: state name 'Upper Ash River' (land_regions_worksheet.csv #607),
-Aver,STATE_AVERHEIM,317,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Aver land (Averland) (name carries the river),
-Aver,STATE_EAST_AVERLAND,316,C,C: [unverified: Sigmar's Heirs (WFRP 2e)] upper Aver,
-Aver,STATE_WEST_AVERLAND,540,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Aver land (Averland) (name carries the river),
-Blood River,STATE_BLOOD_RIVER_VALLEY,235,A,A: state name 'Blood River Valley' (land_regions_worksheet.csv #235),
-Brienne,STATE_BRIONNE,71,C,C: [unverified: Knights of the Grail (WFRP 2e)] river name recalled; placement guessed from the nearest named Bretonnian state,
-Five Rivers,STATE_FIVE_RIVERS,273,A,A: state name 'Five Rivers' (land_regions_worksheet.csv #273),
-Great Mortis,STATE_CITY_OF_KINGS,570,B,"B: Warhammer Armies: Tomb Kings 8e; corroborated by A: the Great Mortis state names (Great Mortis Delta, Fallow Fields)",the one great river through the desert
-Great Mortis,STATE_FALLOW_FIELDS,609,B,"B: Warhammer Armies: Tomb Kings 8e; corroborated by A: the Great Mortis state names (Great Mortis Delta, Fallow Fields)",the one great river through the desert
-Great Mortis,STATE_GREAT_MORTIS_DELTA,623,A,A: state name 'Great Mortis Delta' (land_regions_worksheet.csv #623),
-Great Mortis,STATE_ROAD_OF_KINGS,569,B,"B: Warhammer Armies: Tomb Kings 8e; corroborated by A: the Great Mortis state names (Great Mortis Delta, Fallow Fields)",the one great river through the desert
-Grismerie,STATE_COURONNE,50,C,C: [unverified: Knights of the Grail (WFRP 2e)] river name recalled; placement guessed from the nearest named Bretonnian state,
-Howling River,STATE_HOWLING_RIVER_VALLEY,234,A,A: state name 'Howling River Valley' (land_regions_worksheet.csv #234),
-Lynsk,STATE_SOUTHERN_OBLAST,307,C,C: [unverified: Realm of the Ice Queen (WFRP 2e)] Lynsk joins the Urskoy south of Kislev city,
-Morceaux,STATE_BASTONNE,53,C,C: [unverified: Knights of the Grail (WFRP 2e)] river name recalled; placement guessed from the nearest named Bretonnian state,
-Reik,STATE_MARIENBURG,589,B,"B: Sigmar's Heirs (WFRP 2e); corroborated by A: Reikland Proper, Wissenland and Marienburg are the Reik's upper, middle and mouth lands",Reik mouth at Marienburg
-Reik,STATE_REIKLAND_PROPER,486,B,"B: Sigmar's Heirs (WFRP 2e); corroborated by A: Reikland Proper, Wissenland and Marienburg are the Reik's upper, middle and mouth lands",Reik mouth at Marienburg
-Reik,STATE_REIKWALD_FOREST,63,C,C: [unverified: Sigmar's Heirs (WFRP 2e)] the lower Reik crosses the Wasteland; the Reikwald lies on its south bank,
-Reik,STATE_THE_WASTELAND,48,C,C: [unverified: Sigmar's Heirs (WFRP 2e)] the lower Reik crosses the Wasteland; the Reikwald lies on its south bank,
-Reik,STATE_WISSENLAND,580,B,"B: Sigmar's Heirs (WFRP 2e); corroborated by A: Reikland Proper, Wissenland and Marienburg are the Reik's upper, middle and mouth lands",Reik mouth at Marienburg
-Ruin,STATE_RUIN_S_END,576,C,C: [unverified: Warhammer Armies: Chaos Dwarfs] Ruin river recalled at the Dark Lands coast,
-Sannez,STATE_GISOREUX,52,C,C: [unverified: Knights of the Grail (WFRP 2e)] river name recalled; placement guessed from the nearest named Bretonnian state,
-Skull River,STATE_SKULL_CLIFFS,281,C,C: [unverified: Warhammer Armies: Chaos Dwarfs] Skull River recalled in the north Dark Lands,
-Sol,STATE_SOLLAND,319,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Sol land (Solland) (name carries the river),
-Stir,STATE_EAST_STIRLAND,315,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Stir land (Stirland) (name carries the river),
-Stir,STATE_WEST_STIRLAND,320,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Stir land (Stirland) (name carries the river),
-Stir,STATE_WEST_SYLVANIA,539,C,C: [unverified: Sigmar's Heirs (WFRP 2e)] the Stir rises in Sylvania,
-Stir,STATE_WURTBAD,541,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Stir land (Stirland) (name carries the river),
-Talabec,STATE_EAST_TALABECLAND,326,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Talabec land (Talabecland) (name carries the river),
-Talabec,STATE_NORTH_TALABECLAND,325,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Talabec land (Talabecland) (name carries the river),
-Talabec,STATE_SOUTH_TALABECLAND,321,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Talabec land (Talabecland) (name carries the river),
-Talabec,STATE_WEST_TALABECLAND,542,B,B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Talabec land (Talabecland) (name carries the river),
-Tobol,STATE_ERENGRAD,330,C,C: [unverified: Realm of the Ice Queen (WFRP 2e)] Tobol runs to the Gulf of Kislev,
-Upper Reik,STATE_WISSENLAND,580,B,"B: Sigmar's Heirs (WFRP 2e); corroborated by A: the state is the Upper Reik land (Wissenland, Nuln) (name carries the river)",
-Urskoy,STATE_THE_DOBRYRION,341,C,C: [unverified: Realm of the Ice Queen (WFRP 2e)] Urskoy runs past Kislev city,
+Ash River,STATE_UPPER_ASH_RIVER,607,A,"name (river); lex:Great_Mortis_River#Overview (zone) [Tomb Kings 6e pp. 10, 16-17; Tomb Kings 8e pp. 14-19; Liber Necris]",the Ash (once the Golden River) joins the Great Mortis
+Aver,STATE_AVERHEIM,317,B,"name (Averheim, Averland: named for the river); lex:Aver (realm) [Empire 8e pp. 22-25]",
+Aver,STATE_EAST_AVERLAND,316,B,name (Averland: named for the river); lex:Aver (realm) [Empire 8e pp. 22-25],the state is highland-flagged; which reach crosses it is not stated
+Aver,STATE_MOOTLAND,312,A,lex:The_Moot#Geography (zone) [Empire 4e p. 53; Empire 7e p. 118; Sigmar's Heirs p. 59ff],the Blue Reach and Aver Reach join at the Moot to form the Aver
+Aver,STATE_WEST_AVERLAND,540,B,name (Averland: named for the river); lex:Aver (realm) [Empire 8e pp. 22-25],
+Blight Water,STATE_BLIGHTWATER,205,A,name (river); lex:Badlands#Locations Blight Water (zone) [Orcs & Goblins 8e p. 12; Blood in the Badlands pp. 8-11],foetid river out of the Sour Sea
+Blight Water,STATE_MARSHES_OF_MADNESS,206,A,lex:Badlands#Locations Blight Water (zone) [Orcs & Goblins 8e p. 12; Blood in the Badlands pp. 8-11],the Blight Water feeds the Marshes of Madness
+Blind River,STATE_OLD_STRYGOS,208,A,lex:Strygos#History (zone via hub Mourkain) [Neferata (novel); Vampire Counts 7e],Strygos stood on the Blind River; the Badlands page puts the river in the south
+Blood River,STATE_BLOOD_RIVER_VALLEY,235,A,name (river valley),
+Brienne,STATE_BRIONNE,71,A,lex:River_Brienne (zone) [WFRP 1e p. 274]; lex:Brionne (zone) [Knights of the Grail p. 61],"city on the north bank of the mouth, marsh on the south bank"
+Five Rivers,STATE_FIVE_RIVERS,273,A,name (rivers); the name is weak in the naming worksheet,no extract names these rivers
+Great Mortis,STATE_CITY_OF_KINGS,570,A,"lex:Great_Mortis_River#Overview (zone via hub Khemri) [Tomb Kings 6e pp. 10, 16-17; Tomb Kings 8e pp. 14-19; Liber Necris]","Khemri is mid-river, below the Ash confluence"
+Great Mortis,STATE_FALLOW_FIELDS,609,C,[unverified] no extract places this river in this state,"the name suggests the once-fertile land between the Mortis and the Ash; inference, not a Lexicanum statement"
+Great Mortis,STATE_GREAT_MORTIS_DELTA,623,A,"name (delta); lex:Great_Mortis_River#lead (zone) [Tomb Kings 6e pp. 10, 16-17; Tomb Kings 8e pp. 14-19; Liber Necris]","the delta at the Great Ocean, Zandri beside it"
+Great Mortis,STATE_MORTIS_TARN,190,A,"lex:Great_Mortis_River#lead (zone) [Tomb Kings 6e pp. 10, 16-17; Tomb Kings 8e pp. 14-19; Liber Necris]",the river rises at the Mortis Tarn
+Great Mortis,STATE_ROAD_OF_KINGS,569,C,[unverified] no extract places this river in this state,kept from the 2026-10-03 file on position alone (between the delta and Khemri)
+Great Mortis,STATE_SWAMP_OF_TERROR,624,A,"lex:Great_Mortis_River#Overview (zone) [Tomb Kings 6e pp. 10, 16-17; Tomb Kings 8e pp. 14-19; Liber Necris]",the swamp formed where the river turns into delta
+Great Mortis,STATE_THE_SCARAB_CITY,571,A,"lex:Numas (zone via hub Numas) [Tomb Kings 6e p. 14; Tomb Kings 8e pp. 9, 20-25]",Numas stands on the land south of the Great Mortis and north of the Ash
+Grismerie,STATE_BORDELEAUX,72,A,lex:Bordeleaux#Geography (zone) [Knights of the Grail],"escarpment at the river mouth, facing Mousillon"
+Grismerie,STATE_MOUSILLON,73,A,lex:Bretonnia#Rivers (zone) [Knights of the Grail]; lex:Mousillon#lead (zone) [Barony of the Damned ch. I pp. 7-9],reaches the sea in the marshes of Mousillon
+Grismerie,STATE_PARRAVON,61,A,lex:Bretonnia#Rivers (zone) [Knights of the Grail],rises near Parravon
+Howling River,STATE_HOWLING_RIVER_VALLEY,234,A,name (river valley),
+Lynsk,STATE_SOUTHERN_OBLAST,307,C,[unverified] no extract places this river in this state,"the Troll Country page puts the Lynsk on Kislev's northern edge, so this southern placement is doubtful"
+Morceaux,STATE_BASTONNE,53,C,[unverified] no extract places this river in this state,no extract names the Morceaux
+Reik,STATE_MARIENBURG,589,B,"lex:The_Wasteland#Locations (zone via owner MAR) [Marienburg: Sold Down the River pp. 6-10, 16-20]",the delta of the Wasteland; no extract states the mouth at the city
+Reik,STATE_REIKLAND_PROPER,486,A,lex:Reik (zone via hub Altdorf) [WFRP 1e p. 283; WFRP Companion p. 20; Empire 8e pp. 24-26],"the Reik at Altdorf, swollen by the Talabec"
+Reik,STATE_REIKWALD_FOREST,63,C,[unverified] no extract places this river in this state,the Great Forest page names the Reikwald and the Reik together as its western bound
+Reik,STATE_THE_WASTELAND,48,A,"lex:The_Wasteland#Locations (zone) [Marienburg: Sold Down the River pp. 6-10, 16-20]",Grootscher Marsh runs up the Reik; Kleinland lies between the Reik and the Bitter Moors
+Reik,STATE_WISSENLAND,580,A,lex:Reik (zone via hub Nuln) [WFRP 1e p. 283; WFRP Companion p. 20; Empire 8e pp. 24-26],the Reik between Nuln and Altdorf
+Ruin,STATE_GNOBLAR_HILLS,257,A,lex:Dark_Lands#Features Pigbarter (zone via hub Pigbarter) [Ogre Kingdoms 6e p. 14],Pigbarter stands where the Spice Route meets the Ruin
+Ruin,STATE_HEART_OF_ZHARRDUK,278,A,lex:Dark_Lands#Features River Ruin (zone via hub Zharr-Naggrund) [Warhammer Armies: Orcs & Goblins],the Ruin runs through Zharr-Naggrund and leaves as waste
+Ruin,STATE_RUIN_S_END,576,A,name (river mouth); lex:Dark_Lands#Features River Ruin (zone) [Warhammer Armies: Orcs & Goblins],the Ruin empties through the Scalded Delta into the Sea of Dread
+Sannez,STATE_GISOREUX,52,A,lex:Gisoreux#Geography (zone) [Knights of the Grail pp. 71-73],arable land along the Sannez
+Skull River,STATE_SKULL_CLIFFS,281,C,[unverified] no extract places this river in this state,no extract names a Skull River
+Sol,STATE_SOLLAND,319,A,lex:Wissenland#Trade (zone) [Sigmar's Heirs pp. 96-97],former Solland lies east of the Sol
+Sol,STATE_WISSENLAND,580,A,lex:Wissenland#Overview (zone via hub Pfeildorf) [Sigmar's Heirs ch. VI pp. 94-95],the Sol joins the Upper Reik at Pfeildorf
+Stir,STATE_EAST_STIRLAND,315,B,name (Stirland: named for the river); lex:Stir (realm) [Uniforms & Heraldry p. 43; Empire 8e p. 25],
+Stir,STATE_EAST_SYLVANIA,538,A,lex:Stir (zone via hub Waldenhof) [Uniforms & Heraldry p. 43; Empire 8e p. 25],the Stir flows past Waldenhof
+Stir,STATE_WEST_STIRLAND,320,B,name (Stirland: named for the river); lex:Stir (realm) [Uniforms & Heraldry p. 43; Empire 8e p. 25],
+Stir,STATE_WEST_SYLVANIA,539,C,[unverified] no extract places this river in this state,the Stir page takes the river past Waldenhof into a wooded valley; the state is not named
+Stir,STATE_WURTBAD,541,B,lex:Stir (realm; state reached via owner STI and the worksheet source) [Uniforms & Heraldry p. 43; Empire 8e p. 25],
+Talabec,STATE_EAST_TALABECLAND,326,B,name (Talabecland: named for the river); lex:Talabec (realm) [WFRP Companion p. 22; Death on the Reik Companion p. 23],
+Talabec,STATE_NORTH_TALABECLAND,325,B,name (Talabecland: named for the river); lex:Talabec (realm) [WFRP Companion p. 22; Death on the Reik Companion p. 23],
+Talabec,STATE_REIKLAND_PROPER,486,A,lex:Reik (zone via hub Altdorf) [WFRP 1e p. 283; WFRP Companion p. 20; Empire 8e pp. 24-26],the Talabec joins the Reik at Altdorf
+Talabec,STATE_SOUTH_TALABECLAND,321,B,name (Talabecland: named for the river); lex:Talabec (realm) [WFRP Companion p. 22; Death on the Reik Companion p. 23],
+Talabec,STATE_WEST_TALABECLAND,542,B,name (Talabecland: named for the river); lex:Talabec (realm) [WFRP Companion p. 22; Death on the Reik Companion p. 23],
+Tobol,STATE_ERENGRAD,330,C,[unverified] no extract places this river in this state,"the extract places the Tobol Delta in the Troll Country, not at Erengrad"
+Tobol,STATE_TROLL_COUNTRY,336,A,lex:Troll_Country#lead/Locations (zone) [Sea of Claws pp. 34-37; Realm of the Ice Queen p. 60],the Tobol Delta is a salt marsh of the Troll Country
+Upper Reik,STATE_WISSENLAND,580,A,lex:Wissenland#Overview (zone via hub Pfeildorf) [Sigmar's Heirs ch. VI pp. 94-95],the Sol joins the Upper Reik at Pfeildorf
+Urskoy,STATE_THE_DOBRYRION,341,A,lex:Kislev_(city) (zone via hub Kislev) [Realm of the Ice Queen pp. 78-87],Kislev city stands on the Urskoy
+Wolfen,STATE_SOUTH_OSTLAND,332,A,lex:Talabec (zone via hub Wolfenburg) [WFRP Companion p. 22; Death on the Reik Companion p. 23],Talabec tributary through the plains of Ostland near Wolfenburg
