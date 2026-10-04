@@ -1,0 +1,26 @@
+﻿# Partial port of vanilla common/coat_of_arms/template_lists/color_lists.txt (#6574).
+# common/coat_of_arms/template_lists is blanked by replace_paths, so vanilla's lists do not
+# load. The engine looks up NPowerBlocCoa.COLOR_LIST_NAME = "power_bloc_colors" (vanilla
+# common/defines/00_graphics.txt, not overridden here) when it rolls a random power bloc
+# coat of arms; without it every bloc renders solid magenta
+# (coat_of_arms_template_lists_database.cpp:106 "Failed to find color list").
+#
+# Ported: power_bloc_colors, verbatim (every name is defined in
+# common/named_colors/00_coa_colors.txt).
+# Dropped: every other vanilla list (normal_colors, metal_colors, ...) and their
+# special_selection blocks, which key on real-world culture triggers
+# (coa_def_african_trigger, coa_def_oceanic_trigger, ...). Nothing in this mod uses them
+# yet; restoring the general random-COA lists is a separate gap.
+
+color_lists = {
+	power_bloc_colors = {
+		100 = "red"
+		100 = "blue"
+		20 = "black"
+		20 = "yellow"
+		1 = "green"
+		1 = "blue_light"
+		1 = "orange"
+		1 = "purple"
+	}
+}

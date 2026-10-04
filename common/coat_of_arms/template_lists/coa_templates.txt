@@ -1,0 +1,18 @@
+﻿# Partial port of vanilla common/coat_of_arms/template_lists/coa_templates.txt (#6574).
+# common/coat_of_arms/template_lists is blanked by replace_paths, so the engine had no
+# power_bloc template list and every power bloc rendered a solid magenta coat of arms.
+#
+# Ported: the power_bloc list's base entry (3000 = template_power_bloc_1, defined in
+# common/coat_of_arms/coat_of_arms/03_random_power_bloc.txt).
+# Dropped from power_bloc: all six special_selection blocks, which key on real-world tags
+# (c:GBR, c:AUS, c:PRU, c:RUS, c:TUR, c:POR, plus a real-world has_variable on POR) and
+# select the real-world *_power_bloc_1 templates. Bespoke per-realm bloc arms can be added
+# later as special_selection entries keyed on this mod's own tags.
+# Not ported, deliberately: vanilla's other lists (all, anarchy, chartered_company, ...)
+# and their templates — restoring random country/revolution/company arms is a separate gap.
+
+coat_of_arms_template_lists = {
+	power_bloc = {
+		3000 = template_power_bloc_1
+	}
+}

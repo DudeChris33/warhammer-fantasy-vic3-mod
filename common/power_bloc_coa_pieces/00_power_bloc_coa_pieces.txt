@@ -1,0 +1,253 @@
+﻿# Partial port of vanilla common/power_bloc_coa_pieces/00_power_bloc_coa_pieces.txt (#6574).
+# common/power_bloc_coa_pieces is blanked by replace_paths. This is the catalogue the
+# power bloc coat-of-arms customization screen offers; the order here is the order in the
+# UI. Vanilla order and vanilla `colors` values are kept for every entry that survives.
+#
+# Format (vanilla):
+# filename = {
+#     # How many colors options to show for this piece. Optional, will assume 0 if missing, where 0 means
+#     # this is a textured asset that doesn't require custom colors.
+#     colors = 3
+#
+#     # Which piece is this? Available: shield_pattern, shield_frame, center, top, side.
+#     piece = center
+# }
+#
+# Curation (heraldry.md, "Power bloc coats of arms"): the centre set is the SAME curated
+# set as power_bloc_center in common/coat_of_arms/template_lists/colored_emblem_lists.txt
+# (see the exclusion record there), plus vanilla's blank "none" centre pb_center_11. Dropped
+# wholesale: vanilla's real-world national charges (pb_crescent_star_turkey,
+# pb_eagle_doubleheaded, pb_bear, pb_iron_cross, pb_lion_passant_guardant) and its
+# Islamicate, Christian, Sikh, Jewish, Dharmic, Communist/Socialist, Fascist/Ultranationalist
+# and Pagan groups. Tops: pb_top_01 (crescent) and pb_top_03 (elephant) dropped; pb_top_06
+# is vanilla's blank "none" top. Sides pb_side_00..06 (06 is the blank "none") and frames
+# pb_frame_00..04 are kept as vanilla.
+# All textures are vanilla's own gfx/coat_of_arms/{colored,textured}_emblems/pb_*.dds,
+# reused as-is (no copies in this mod).
+
+pb_center_00.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_center_05.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_center_06.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_center_07.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_center_08.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_center_10.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_center_11.dds = {
+    colors = 1
+    piece = center
+}
+
+# Repurposed CoA
+
+# Heraldic
+pb_shield_accolade.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_ermine_spot.dds = {
+    colors = 1
+    piece = center
+}
+
+# Astral
+pb_sun.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_sunburst.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_morning_star.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_star_04.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_star_08.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_star_16.dds = {
+    colors = 1
+    piece = center
+}
+
+# Weapons / Tools
+
+pb_trident.dds = {
+    colors = 1
+    piece = center
+}
+
+# Limbs
+
+pb_hand.dds = {
+    colors = 1
+    piece = center
+}
+
+# Resources
+
+pb_wheat_garb.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_mining_hammers.dds = {
+    colors = 1
+    piece = center
+}
+
+# Symbols and Figures
+
+pb_circle.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_triangle.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_rhombus.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_pattern_flower.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_laurel_circled.dds = {
+    colors = 1
+    piece = center
+}
+
+pb_laurel.dds = {
+    colors = 1
+    piece = center
+}
+
+# End of Repurposed
+
+pb_shield_pattern_00.dds = {
+    colors = 2
+    piece = shield_pattern
+}
+
+pb_shield_pattern_01.dds = {
+    colors = 1
+    piece = shield_pattern
+}
+
+pb_shield_pattern_02.dds = {
+    colors = 2
+    piece = shield_pattern
+}
+
+pb_shield_pattern_03.dds = {
+    colors = 2
+    piece = shield_pattern
+}
+
+pb_frame_00.dds = {
+    piece = shield_frame
+}
+
+pb_frame_01.dds = {
+    piece = shield_frame
+}
+
+pb_frame_02.dds = {
+    piece = shield_frame
+}
+
+pb_frame_03.dds = {
+    piece = shield_frame
+}
+
+pb_frame_04.dds = {
+    piece = shield_frame
+}
+
+pb_side_00.dds = {
+    piece = side
+}
+
+pb_side_01.dds = {
+    piece = side
+}
+
+pb_side_02.dds = {
+    piece = side
+}
+
+pb_side_03.dds = {
+    piece = side
+}
+
+pb_side_04.dds = {
+    piece = side
+}
+
+pb_side_05.dds = {
+    piece = side
+}
+
+pb_side_06.dds = {
+    piece = side
+}
+
+pb_top_00.dds = {
+    piece = top
+}
+
+pb_top_02.dds = {
+    piece = top
+}
+
+pb_top_04.dds = {
+    piece = top
+}
+
+pb_top_05.dds = {
+    piece = top
+}
+
+pb_top_06.dds = {
+    piece = top
+}

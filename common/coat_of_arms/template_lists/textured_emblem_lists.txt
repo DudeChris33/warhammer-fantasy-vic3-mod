@@ -1,0 +1,38 @@
+﻿# Partial port of vanilla common/coat_of_arms/template_lists/textured_emblem_lists.txt (#6574).
+# common/coat_of_arms/template_lists is blanked by replace_paths; these lists feed
+# template_power_bloc_1 (common/coat_of_arms/coat_of_arms/03_random_power_bloc.txt).
+# All textures are vanilla's own gfx/coat_of_arms/textured_emblems/pb_*.dds, reused as-is
+# (no copies in this mod).
+#
+# power_bloc_top: dropped pb_top_01 (crescent: Islamic state-religion charge in vanilla's
+# own scheme) and pb_top_03 (elephant: out-of-setting fauna). pb_top_06 (vanilla's blank
+# "no top" choice) is also dropped from the random roll so every random bloc gets a crest;
+# it stays selectable in the customization catalogue (common/power_bloc_coa_pieces/).
+# power_bloc_side, power_bloc_frame: vanilla verbatim (pb_side_06 is vanilla's blank
+# "no supporters" choice and is kept at vanilla weight).
+# Not ported: coa_charge and its special_selection blocks (real-world state regions,
+# religions, monarchy/theocracy triggers) — the general random-COA lists are a separate gap.
+
+textured_emblem_texture_lists = {
+	power_bloc_top = {
+		20 = "pb_top_00.dds"
+		20 = "pb_top_02.dds"
+		20 = "pb_top_04.dds"
+		20 = "pb_top_05.dds"
+	}
+	power_bloc_side = {
+		20 = "pb_side_00.dds"
+		20 = "pb_side_01.dds"
+		20 = "pb_side_02.dds"
+		20 = "pb_side_03.dds"
+		20 = "pb_side_04.dds"
+		20 = "pb_side_05.dds"
+		20 = "pb_side_06.dds"
+	}
+	power_bloc_frame = {
+		20 = "pb_frame_00.dds"
+		20 = "pb_frame_01.dds"
+		20 = "pb_frame_02.dds"
+		20 = "pb_frame_03.dds"
+	}
+}

@@ -3,12 +3,13 @@ paths:
   - "common/coat_of_arms/**/*"
   - "common/flag_definitions/**/*"
   - "common/named_colors/**/*"
+  - "common/power_bloc_coa_pieces/**/*"
   - "gfx/coat_of_arms/**/*"
 ---
 
 # Heraldry (`coat_of_arms`, `flag_definitions`)
 
-**Read when:** you are editing a coat of arms, a flag definition, the colour palette (`common/named_colors/`), or emblem textures. **Covers:** the COA and flag-definition schema and the greenskin house style. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
+**Read when:** you are editing a coat of arms, a flag definition, the colour palette (`common/named_colors/`), or emblem textures. **Covers:** the COA and flag-definition schema, the greenskin house style and power bloc arms. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
 
 **Related guides:**
 - [peoples.md](peoples.md) — tags, region-file order, culture colours
@@ -145,3 +146,47 @@ Established by #6373 for the `wood_elf` and `ogre` tags; binding on later tags o
   tribes' own culture: the gut-plate (a plain disc), the Great Maw (a horns-up crescent), or a
   blast for a gut-cannon tribe. Never an eye (RED's reserved device) and never a lightning bolt
   (too close to the banned `ce_lightning_bolt_nacista`).
+
+## Power bloc coats of arms
+
+Established by #6574. A power bloc's arms are rolled by the engine from vanilla's random
+bloc template, which this mod ports in part across three blanked folders:
+
+- `common/coat_of_arms/template_lists/` — `coa_templates.txt` (`power_bloc = { 3000 =
+  template_power_bloc_1 }`), `color_lists.txt` (`power_bloc_colors`),
+  `colored_emblem_lists.txt` (`power_bloc_shield`, `power_bloc_center`) and
+  `textured_emblem_lists.txt` (`power_bloc_top`, `power_bloc_side`, `power_bloc_frame`).
+  Only the power-bloc lists are ported; vanilla's other random lists (`all`, `anarchy`,
+  `chartered_company`, `normal_colors`, …) are a separate gap.
+- `common/coat_of_arms/coat_of_arms/03_random_power_bloc.txt` — `template_power_bloc_1`,
+  verbatim.
+- `common/power_bloc_coa_pieces/` — the catalogue the bloc customization screen offers.
+
+The engine side lives in vanilla `common/defines/00_graphics.txt` `NPowerBlocCoa`, which this
+mod does not override: `COLOR_LIST_NAME` must name a list in `color_lists.txt` (a missing one
+renders every bloc solid magenta), and `PIECE_LAYERS_ORDER` plus the `*_SCALE`/`*_POSITION`
+values must match the template's layer order, scales and positions. Change one side, change
+both.
+
+**One curated texture set.** The random lists and the pieces catalogue carry the same
+curated set; the catalogue additionally offers `pb_frame_04` and vanilla's blank "none"
+pieces `pb_center_11`, `pb_top_06`, `pb_side_06`. All textures are vanilla's own `pb_*.dds`,
+reused in place. Curation is by exclusion from vanilla, and the rule is **global**: it
+applies to every `pb_*` twin of a `ce_*` charge, not only to greenskin tags, and it binds any
+later addition to either file. Keep only setting-neutral charges; exclude:
+
+- fascist, extremist and communist symbols (the `pb_` twins of house-style rule 5's list,
+  runes, `pb_walknut`, `pb_kolovrat`, hammer-and-sickle pieces);
+- living-culture sacred art (the `pb_` twins of rule 6's list, the triskel family);
+- real-world national and state emblems and place-named charges (`pb_eagle_*`, `pb_bear`,
+  `pb_maple_leaf*`, national suns, southern crosses, …);
+- colonial or classical figure scenes and out-of-setting fauna (`pb_center_01`/`02`/`09`,
+  `pb_top_03` elephant);
+- real-world scripts and letters (`pb_omega`, `pb_sigma`, `pb_delta`, `pb_infinity`), the
+  pentagram, and anything religious or ideological (every vanilla `special_selection` pool).
+
+A doubtful charge is dropped and recorded in the file's header comment rather than kept
+(`pb_star_05_ring` reads as a red-star roundel). No `special_selection` ships today; bespoke
+per-realm bloc arms can be added later as `special_selection` entries in the `power_bloc`
+list keyed on this mod's own tags (vanilla's `c:GBR`-style blocks are the model), each with a
+fixed template beside `template_power_bloc_1`.

@@ -1,0 +1,72 @@
+﻿# Partial port of vanilla common/coat_of_arms/template_lists/colored_emblem_lists.txt (#6574).
+# common/coat_of_arms/template_lists is blanked by replace_paths; these two lists feed
+# template_power_bloc_1 (common/coat_of_arms/coat_of_arms/03_random_power_bloc.txt).
+# All textures are vanilla's own gfx/coat_of_arms/colored_emblems/pb_*.dds, reused as-is
+# (no copies in this mod).
+#
+# power_bloc_shield: vanilla verbatim.
+# power_bloc_center: curated by exclusion from vanilla's list (heraldry.md, "Power bloc
+# coats of arms"). The pieces catalogue (common/power_bloc_coa_pieces/) carries the same
+# centre set. Dropped from vanilla's base list:
+#   - classical/colonial figure scenes and out-of-setting fauna: pb_center_01, pb_center_02,
+#     pb_center_09 (camel); pb_center_03 (crate in a starred wreath) and pb_center_04
+#     (globe and flag) were not in the review set either
+#   - real-world national/state emblems and place-named charges (pb_shield_iberian,
+#     pb_shield_hesse, pb_crown_swedish, pb_armillary_sphere, pb_eagle_*, pb_key_bremen,
+#     pb_harp_ireland, pb_maple_leaf*, pb_tree_new_england, pb_eryr_gwyn,
+#     pb_corseca_trieste, pb_coa_saf_*, national suns, pb_stars_circle_*, pb_star_gunelve,
+#     pb_star_saltire_13, pb_southern_cross_*, pb_alaska_big_dipper)
+#   - pb_star_pentagram; pb_star_05_ring (doubtful: a ringed five-point star reads as a
+#     real-world military/red-star roundel, and red is the heaviest-weighted colour)
+#   - living-culture and real-world cultural charges ("Misc Cultural" block, incl.
+#     pb_kanaga, pb_kanaka, pb_totem_kanak, pb_hand_dreaming), pb_katar,
+#     pb_crossed_kris_daggers, pb_hand_mena, pb_corn_sickle
+#   - real-world letters/scripts: pb_infinity, pb_omega, pb_sigma, pb_delta
+#   - not in the review set: pb_star_05_pinwheeled, pb_star_09, pb_frame_*, pb_laurel_knot
+# Vanilla lists pb_mining_hammers twice (Weapons/Tools and Resources, weight 40 in all);
+# it appears once here at weight 20 like every other centre.
+# Dropped wholesale: every special_selection block (state-religion, communist and fascist
+# charge pools keyed on real-world heritage/ideology triggers and rel: ids).
+# Not ported: vanilla's other colored-emblem lists (charge, chartered_companies_charges,
+# ...) — the general random-COA lists are a separate gap.
+
+colored_emblem_texture_lists = {
+	power_bloc_shield = {
+		20 = "pb_shield_pattern_00.dds"
+		20 = "pb_shield_pattern_01.dds"
+		20 = "pb_shield_pattern_02.dds"
+		20 = "pb_shield_pattern_03.dds"
+	}
+	power_bloc_center = {
+		20 = "pb_center_00.dds"	# crossed banners and blades
+		20 = "pb_center_05.dds"	# ship
+		20 = "pb_center_06.dds"	# anchor
+		20 = "pb_center_07.dds"	# open book
+		20 = "pb_center_08.dds"	# sun in splendour
+		20 = "pb_center_10.dds"	# kraken
+		# Heraldic
+		20 = "pb_shield_accolade.dds"
+		20 = "pb_ermine_spot.dds"
+		# Astral
+		20 = "pb_sun.dds"
+		20 = "pb_sunburst.dds"
+		20 = "pb_morning_star.dds"
+		20 = "pb_star_04.dds"
+		20 = "pb_star_08.dds"
+		20 = "pb_star_16.dds"
+		# Weapons / Tools
+		20 = "pb_trident.dds"
+		20 = "pb_mining_hammers.dds"
+		# Hands
+		20 = "pb_hand.dds"
+		# Resources
+		20 = "pb_wheat_garb.dds"
+		# Geometric
+		20 = "pb_circle.dds"
+		20 = "pb_triangle.dds"
+		20 = "pb_rhombus.dds"
+		20 = "pb_pattern_flower.dds"
+		20 = "pb_laurel_circled.dds"
+		20 = "pb_laurel.dds"
+	}
+}
