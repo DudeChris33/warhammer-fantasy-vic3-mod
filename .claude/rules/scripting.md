@@ -223,6 +223,8 @@ comment). **Do not delete whole variants/modifiers/branches** — that was the e
 reversed it mid-build (#3662, 2026-09-06). Tag each site `# [#3662] was: <original>` (or the current item)
 so the original can be restored. Repurposing later is a one-line swap of `always = no` for the real WH trigger.
 
+**Governance principles are renamed through loc, never deleted.** Every `common/laws/00_governance_principles.txt` law is referenced as `law_type:<id>` in 11-30 other files, so removing one is a hard load error; modern-sounding principles (presidential/parliamentary/council republic, corporate state, social monarchy) get new display names in `localization/replace/english/wh_laws_governance_l_english.yml` (#6575) and keep their ids.
+
 ### Verification (no offline validator exists for gfx script)
 
 A static live-ref classifier that enumerates **every** reference family (not a pre-listed subset —

@@ -1,0 +1,24 @@
+﻿l_english:
+ # Governance principle renames (#6575). Ids stay (law_type:<id> is referenced across the mod); only display text changes.
+ # Overrides of vanilla keys in laws_l_english.yml, government_l_english.yml, parties_l_english.yml and content_304_l_english.yml.
+ law_presidential_republic:0 "Elective Principality"
+ law_presidential_republic_desc:0 "A realm whose ruler is chosen by an assembly of electors, a council of great houses or the enfranchised citizenry rather than inheriting the seat by blood. The elected prince holds office as $RULER_TITLE_PRESIDENT$ and answers to those who raised him."
+ law_parliamentary_republic:0 "Burgher Republic"
+ law_parliamentary_republic_desc:0 "A realm governed by an assembly of the wealthy burghers and guildmasters of its cities. The head of that assembly speaks for the state and is known as $RULER_TITLE_CHANCELLOR$."
+ law_council_republic:0 "Free Commune"
+ law_council_republic_desc:0 "A realm where craftsmen, laborers and townsfolk send elected delegates to local councils. The commune extends the custom of the workshop and the guild hall to the governance of the whole land."
+ law_corporate_state:0 "Guild State"
+ law_corporate_state_desc:0 "A realm built on the cooperation of officially chartered guilds and orders. The state serves as the hall in which the estates and trades of the land negotiate with one another."
+ law_social_monarchy:0 "Estates Monarchy"
+ law_social_monarchy_desc:0 "A realm in which the crown stands as the final arbiter between the estates of the land, the nobility, the clergy and the guilds. The monarch is held to embody the nation's identity and honor."
+
+ gov_corporate_state:0 "Guild State"
+ gov_social_monarchy:0 "Estates Monarchy"
+ gov_social_monarchy_absolutist:0 "Estates Monarchy"
+ gov_council_republic:0 "Free Commune"
+ gov_council_single_party_state:0 "Free Commune"
+
+ from_vanguard_anarchy:0 "From Vanguardist Ruler with Free Commune"
+ modifier_corporate_state_trade_unions_bias:0 "Guild State: Favored Trade Guilds"
+ modifier_corporate_state_industrialists_bias:0 "Guild State: Favored Industrialists"
+ modifier_corporate_state_intelligentsia_bias:0 "Guild State: Favored Intelligentsia"
