@@ -44,6 +44,7 @@ python mapgen/read_state_ownership.py --check     # state_ownership.json is curr
 python mapgen/generate_state_history.py --check   # common/history/states is current with state_ownership.json
 python mapgen/generate_pop_history.py --check     # common/history/pops + population are current with mapgen/config/pop_history and resolve
 python mapgen/generate_country_history.py --check # common/history/countries is current with the owners + tiers
+python mapgen/generate_map_locators.py --check    # the five map-object locator files are current with state ids + hub provinces
 python mapgen/generate_building_history.py --check # common/history/buildings is current, resolves, and passes the tech gate (runs the verifier)
 python mapgen/validate_building_history.py         # independent tech-gate verifier on the emitted buildings + current country history
 python mapgen/worldgen/sources.py --verify        # source manifest SHA-256 + registration cross-checks
@@ -65,10 +66,11 @@ generate_state_labels.py → generate_sea_zones.py → generate_provinces.py →
 generate_sea_regions.py + generate_land_regions.py →
 read_state_ownership.py → generate_state_history.py → generate_country_history.py →
 generate_building_history.py → generate_province_terrains.py → generate_adjacencies.py --write →
-generate_arable_heatmap.py → generate_flatmap_textures.py
+generate_arable_heatmap.py → generate_flatmap_textures.py → generate_map_locators.py
 ```
 
 - **`generate_building_history.py` follows `generate_country_history.py`: any change to country history (tiers, techs, laws) requires re-running it.** **Tech-gate crash rule: a building or production method in a country that has not researched its unlocking tech crashes the game at load, so nothing is emitted unless the tag's `common/history/countries/` file grants it (fail closed; `validate_building_history.py` re-checks independently).**
+- **A `generate_land_regions.py` regen that changes state ids requires `generate_map_locators.py`.** Locator `id` is the state id and ids renumber on regeneration, so the old files are wrong by id, not merely stale (#6612).
 - **A `generate_provinces.py` or `generate_land_regions.py` regen stales the starting ownership.** `state_ownership.json` and `common/history/states` are colour- and state-keyed, so re-run `read_state_ownership.py` then `generate_state_history.py`; the read may hard-error (a province with no votable pixel, a new state) and need a repaint, which is Chris's.
 
 - The coastline source is a black/white land **fill**, so always pass `--from-fill` (the parity-trace default is legacy, `generate_coastline_mask.py`). `--from-fill` also emits `mapgen/derived/lake_mask.png`; either mode first drops isolated sub-4px land components (`drop_land_specks`, `--speck-max`).
@@ -103,7 +105,7 @@ generate_arable_heatmap.py → generate_flatmap_textures.py
 | `generate_building_history.py` | `common/history/buildings/00–19_*.txt` (same names as the state-region files; `create_building` per (state, owner) from `mapgen/config/building_history/`, gated on the owner's starting techs and laws, resource and job limits; header-only where nothing is built). `validate_building_history.py` is its separate verifier, not an emitter |
 | `generate_flatmap_textures.py` | `gfx/map/textures/flatmap.dds`, `gfx/map/textures/land_mask.dds`, `gfx/map/dynamic_masks/exclusion_mask.dds` (all DXT1 + 14 mips, from `land_sea_mask.png`; `--check` fails once the coastline mask moves; `--render` writes the gitignored `flatmap_preview.png`, the visual gate; `--selftest` needs no mask; the three DDS are Git-LFS) |
 | `fit_registration.py` | `mapgen/registration/*.json` |
-| engine (copy from `Documents/.../Victoria 3/generated/` after a load reports an incomplete locator) | `gfx/map/map_object_data/generated_map_object_locators_*` |
+| `generate_map_locators.py` | `gfx/map/map_object_data/generated_map_object_locators_{city,farm,mine,port,wood}.txt` (id = state id, position at the state's hub province; `--check` fails when stale, `--verify` proves every instance lies inside its own state) |
 
 ### Rivers, lakes, impassable land, cities, hubs
 
@@ -158,7 +160,7 @@ Vanilla data keyed to the old real-world map crashes/errors the loader once the 
 - `common/defines/00_wh_defines.txt` — `WORLD_MARKET_LOCATION` (vanilla `x9137A4`, old North Atlantic, a province colour the mod lacks; caused `world_market.cpp:246` and a load crash). Set to a passable non-lake sea province (`xCC2EA6`). `common/defines` is not in `replace_paths`, so it merges per key. **Hand-authored, guarded by `validate_map._check_world_market_location`; re-check after any `generate_provinces.py --reassign`.**
 - `gfx/map/spline_network/game_road_data.txt` — blanked; rows are keyed to vanilla state-region ids (`route_graphics.cpp` errors).
 - `gfx/map/spline_network/spline_network.splnet` — zero-byte override: `travel_connection_definition.cpp` "no connection node" errors (681 lines) and no strip errors; without it, strip/anchor errors instead. **Neither variant is the load crash** (see below); the travel errors are non-fatal noise until real route data exists.
-- `gfx/map/map_object_data/generated_map_object_locators_{city,farm,mine,port,wood}.txt` — engine-generated for the redrawn map (copy from `Documents/.../Victoria 3/generated/` after a load reports "map object locator ... is incomplete"); overrides vanilla's same-named files. Regenerate the same way after any hub/province change.
+- `gfx/map/map_object_data/generated_map_object_locators_{city,farm,mine,port,wood}.txt` — emitted by `generate_map_locators.py` (#6612); overrides vanilla's same-named files. Do **not** copy the engine's `generated/` output or the map editor's Pack + Save output back: with no mod file the engine falls back to vanilla's locator table by id (Earth positions for every state id vanilla also has), and with an empty file its own placement is outside the state about a third of the time and not on the hub. Re-run the emitter after any hub, province or state-id change.
 - `gfx/map/textures/flatmap.dds`, `gfx/map/textures/land_mask.dds`, `gfx/map/dynamic_masks/exclusion_mask.dds` — generated from our coastline by `generate_flatmap_textures.py` (#6613). Vanilla's paint Earth on the zoomed-out parchment, in the `land_mask` every map-mode colour overlay reads, and in the devastation mask. `exclusion_mask.dds` is stored vertically flipped (row 0 south), as vanilla's is. `flatmap_overlay.dds` stays vanilla's: its alpha channel is all zero.
 - `gfx/map/map_object_data/fortification_locators.txt` — blanked; instances sit at old-map pixels (`fortification_graphics.cpp` errors).
 
