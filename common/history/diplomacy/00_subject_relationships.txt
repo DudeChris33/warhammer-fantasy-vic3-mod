@@ -52,76 +52,79 @@
 	}
 	c:COU ?= {
 		# Ducal vassal of the King of Bretonnia (WFB Bretonnia army book)
+		# Engine type is puppet, not vassal: vanilla subject_type_vassal needs an unrecognized overlord and COU is recognized,
+		# so a vassal pact breaks on day 1 (#6576). Puppet is the recognized-overlord twin: same autonomy 1, no own plays, joins overlord wars.
 		create_diplomatic_pact = {
 			country = c:LYO
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:ART
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:GIS
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:MNF
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:BAS
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:AQU
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:QUE
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:CAR
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:BRI
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:BOR
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:LAN
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:PAR
-			type = vassal
+			type = puppet
 		}
 	}
 	c:KSV ?= {
 		# Oblast of the Tzar/Tzarina of Kislev (WFB Kislev lore) - contested
+		# Engine type is puppet, not vassal: vassal needs an unrecognized overlord and KSV is recognized (#6576); puppet is the same-autonomy recognized-overlord type.
 		create_diplomatic_pact = {
 			country = c:ERE
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:PRA
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:BOL
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:VOL
-			type = vassal
+			type = puppet
 		}
 		create_diplomatic_pact = {
 			country = c:TRO
-			type = vassal
+			type = puppet
 		}
 	}
 }

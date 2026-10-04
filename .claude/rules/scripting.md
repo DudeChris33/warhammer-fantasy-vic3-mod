@@ -85,6 +85,7 @@ authored any content for it yet — git doesn't track empty directories, so give
 - Validate every `event_target:` scope link against `docs/event_targets.log` (Input Scopes / Output Scopes columns). Match input/output scopes exactly — a target used in the wrong scope fails silently or crashes to desktop.
 - Validate every `on_action` hook against `docs/on_actions.log`, including its `Expected Scope`.
 - Custom localization functions used in loc strings must be defined per `docs/custom_localization.log` before being referenced.
+- **Starting pacts must be keepable (#6576).** Every `create_diplomatic_pact` in `common/history/diplomacy/` must satisfy that pact's maintain rules, or it breaks on day 1 and floods "Rivalry broken"/"Vassal broken" notifications (`error.log` `initializefrombookmark.cpp:1430` "cannot be maintained"). Subjects follow vanilla `common/subject_types/00_subject_types.txt`: `vassal`/`tributary` need an **unrecognized** overlord, `puppet`/`protectorate` a **recognized** one, and the overlord must outrank the subject. A `rivalry` needs two independent countries on the same recognized/unrecognized rank ladder with the other maintain rules met (`countries_are_valid_rivals`); put cross-ladder enmity in `00_relations.txt` as negative `set_relations`. After any edit there, check `error.log` shows no `1430` lines.
 
 ## Naming
 

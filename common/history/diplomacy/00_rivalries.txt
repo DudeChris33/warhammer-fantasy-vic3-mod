@@ -1,102 +1,18 @@
 ﻿DIPLOMACY = {
 	# Persistent, canon-attested enmities only. Each pair is written in both directions, as vanilla does.
-	# Von Carstein wars (WFB Vampire Counts)
-	c:REI ?= {
-		create_diplomatic_pact = {
-			country = c:VSY
-			type = rivalry
-		}
-	}
-	c:VSY ?= {
-		create_diplomatic_pact = {
-			country = c:REI
-			type = rivalry
-		}
-	}
-
-	# Brass Keep, held by Chaos since 2302 IC (registry note; WFB Empire)
-	c:REI ?= {
-		create_diplomatic_pact = {
-			country = c:BRK
-			type = rivalry
-		}
-	}
-	c:BRK ?= {
-		create_diplomatic_pact = {
-			country = c:REI
-			type = rivalry
-		}
-	}
-
-	# Norse raiding of the Nordland coast (WFB Norsca)
-	c:NLD ?= {
-		create_diplomatic_pact = {
-			country = c:SAR
-			type = rivalry
-		}
-	}
-	c:SAR ?= {
-		create_diplomatic_pact = {
-			country = c:NLD
-			type = rivalry
-		}
-	}
-
-	# Kislev against the tribes of the Chaos Wastes (WFB Kislev)
-	c:KSV ?= {
-		create_diplomatic_pact = {
-			country = c:KVE
-			type = rivalry
-		}
-	}
-	c:KVE ?= {
-		create_diplomatic_pact = {
-			country = c:KSV
-			type = rivalry
-		}
-	}
-
-	# Praag against the northern hordes (WFB Kislev)
-	c:PRA ?= {
-		create_diplomatic_pact = {
-			country = c:HAS
-			type = rivalry
-		}
-	}
-	c:HAS ?= {
-		create_diplomatic_pact = {
-			country = c:PRA
-			type = rivalry
-		}
-	}
-
-	# Bretonnia against the Massif Orcal greenskins (WFB Bretonnia)
-	c:COU ?= {
-		create_diplomatic_pact = {
-			country = c:MOR
-			type = rivalry
-		}
-	}
-	c:MOR ?= {
-		create_diplomatic_pact = {
-			country = c:COU
-			type = rivalry
-		}
-	}
-
-	# Dwarfs against Grimgor's Ardboyz (WFB Orc & Goblin)
-	c:KAK ?= {
-		create_diplomatic_pact = {
-			country = c:RED
-			type = rivalry
-		}
-	}
-	c:RED ?= {
-		create_diplomatic_pact = {
-			country = c:KAK
-			type = rivalry
-		}
-	}
+	# A starting rivalry must satisfy the pact's maintain rules or it breaks on day 1 ("Rivalry broken" flood;
+	# error.log initializefrombookmark.cpp:1430). It only holds between two independent countries on the same
+	# recognized/unrecognized rank ladder, with the other maintain rules met (countries_are_valid_rivals).
+	# Cross-ladder enmity (recognized vs unrecognized) lives in 00_relations.txt as negative set_relations (#6576).
+	# dropped: REI-VSY - recognized vs unrecognized, cannot be valid rivals; enmity carried by set_relations in 00_relations.txt (-60)
+	# dropped: REI-BRK - recognized vs unrecognized, cannot be valid rivals; enmity carried by set_relations in 00_relations.txt (-60)
+	# dropped: NLD-SAR - NLD is a REI protectorate (not independent) and recognized vs unrecognized SAR; enmity carried by set_relations in 00_relations.txt (-40)
+	# dropped: KSV-KVE - recognized vs unrecognized, cannot be valid rivals; enmity carried by set_relations in 00_relations.txt (-50)
+	# dropped: PRA-HAS - PRA is now a KSV puppet (puppets cannot start aggressive plays) and recognized vs unrecognized HAS; enmity carried by set_relations in 00_relations.txt (-50)
+	# dropped: COU-MOR - recognized vs unrecognized, cannot be valid rivals; enmity carried by set_relations in 00_relations.txt (-50)
+	# dropped: KAK-RED - recognized vs unrecognized, cannot be valid rivals; enmity carried by set_relations in 00_relations.txt (-60)
+	# dropped: KEP-CRM - recognized vs unrecognized, cannot be valid rivals; enmity carried by set_relations in 00_relations.txt (-60)
+	# dropped: KHM-LAH - cause unverified: both unrecognized, likely no overlapping interests or rank-band mismatch; enmity carried by set_relations in 00_relations.txt (-50)
 
 	# Dwarfs against the Chaos Dwarfs of Zharr-Naggrund (WFB Chaos Dwarf)
 	c:KAK ?= {
@@ -108,34 +24,6 @@
 	c:MZN ?= {
 		create_diplomatic_pact = {
 			country = c:KAK
-			type = rivalry
-		}
-	}
-
-	# Karak Eight Peaks vs Skarsnik's Night Goblins (WFB Skarsnik)
-	c:KEP ?= {
-		create_diplomatic_pact = {
-			country = c:CRM
-			type = rivalry
-		}
-	}
-	c:CRM ?= {
-		create_diplomatic_pact = {
-			country = c:KEP
-			type = rivalry
-		}
-	}
-
-	# Nehekhara against Lahmia (WFB Tomb Kings)
-	c:KHM ?= {
-		create_diplomatic_pact = {
-			country = c:LAH
-			type = rivalry
-		}
-	}
-	c:LAH ?= {
-		create_diplomatic_pact = {
-			country = c:KHM
 			type = rivalry
 		}
 	}
