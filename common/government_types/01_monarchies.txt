@@ -91,8 +91,8 @@ gov_absolute_empire = {
 			country_tier = empire
 		}
 		NOR = {
-			has_variable = orleanist_restoration_var
-			has_variable = legitimist_restoration_var
+			always = no  # [#6573] was: has_variable = orleanist_restoration_var
+			always = no  # [#6573] was: has_variable = legitimist_restoration_var
 		}
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
@@ -127,8 +127,8 @@ gov_feudal_empire = {
 			country_tier = empire
 		}
 		NOR = {
-			has_variable = orleanist_restoration_var
-			has_variable = legitimist_restoration_var
+			always = no  # [#6573] was: has_variable = orleanist_restoration_var
+			always = no  # [#6573] was: has_variable = legitimist_restoration_var
 		}
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
@@ -162,8 +162,8 @@ gov_empire = {
 			country_tier = empire
 		}
 		NOR = {
-			has_variable = orleanist_restoration_var
-			has_variable = legitimist_restoration_var
+			always = no  # [#6573] was: has_variable = orleanist_restoration_var
+			always = no  # [#6573] was: has_variable = legitimist_restoration_var
 		}
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
@@ -195,8 +195,8 @@ gov_constitutional_empire = {
 			country_tier = empire
 		}
 		NOR = {
-			has_variable = orleanist_restoration_var
-			has_variable = legitimist_restoration_var
+			always = no  # [#6573] was: has_variable = orleanist_restoration_var
+			always = no  # [#6573] was: has_variable = legitimist_restoration_var
 		}
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
@@ -502,7 +502,7 @@ gov_absolute_principality = {
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = principality
 		NOT = {
-			has_variable = king_sounds_better
+			always = no  # [#6573] was: has_variable = king_sounds_better
 		}
 		has_gov_regency = no
 	}

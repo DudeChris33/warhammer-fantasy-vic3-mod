@@ -204,7 +204,7 @@ ideology_traditionalist = { # Average Progressiveness - -70
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -215,7 +215,7 @@ ideology_traditionalist = { # Average Progressiveness - -70
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -368,7 +368,7 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -379,7 +379,7 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -857,7 +857,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -867,7 +867,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -877,7 +877,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -887,7 +887,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -899,7 +899,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -989,7 +989,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -1219,7 +1219,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -1229,7 +1229,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -1239,7 +1239,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -1249,7 +1249,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -1260,7 +1260,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -1363,7 +1363,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -1572,7 +1572,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -1582,7 +1582,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -1592,7 +1592,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -1602,7 +1602,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -1613,7 +1613,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -1671,7 +1671,7 @@ ideology_reformer = { # Average Progressiveness - 10
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -1800,7 +1800,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -1810,7 +1810,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -1820,7 +1820,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -1830,7 +1830,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -1841,7 +1841,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -1931,7 +1931,7 @@ ideology_feminist = { # Average Progressiveness - 50
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -2044,7 +2044,7 @@ ideology_abolitionist = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -2054,7 +2054,7 @@ ideology_abolitionist = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -2064,7 +2064,7 @@ ideology_abolitionist = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -2074,7 +2074,7 @@ ideology_abolitionist = { # Average Progressiveness - 75
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -2205,7 +2205,7 @@ ideology_slaver = { # Average Progressiveness - -50
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -2381,7 +2381,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -2391,7 +2391,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -2401,7 +2401,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -2411,7 +2411,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -2500,7 +2500,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -2640,7 +2640,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -2650,7 +2650,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -2764,10 +2764,10 @@ ideology_royalist = { # Average Progressiveness - 0
 					has_ideology = ideology:ideology_republican_paternalistic
 				}
 				NOT = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
-			has_variable = monarchy_stamped_out_var
+			always = no  # [#6573] was: has_variable = monarchy_stamped_out_var
 		}
 	}
 
@@ -2835,7 +2835,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -2846,7 +2846,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -2856,7 +2856,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -3066,7 +3066,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -3076,7 +3076,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -3086,7 +3086,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -3096,7 +3096,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -3107,7 +3107,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -3198,7 +3198,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -4453,7 +4453,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -4463,7 +4463,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -4652,14 +4652,14 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = 50
 		}
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = 50
 		}
@@ -5225,7 +5225,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -5235,7 +5235,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -5335,14 +5335,14 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = 50
 		}
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = 50
 		}
@@ -5455,7 +5455,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -5465,7 +5465,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -5770,7 +5770,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -5780,7 +5780,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -5790,7 +5790,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -5800,7 +5800,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -5913,7 +5913,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -6320,7 +6320,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -6330,7 +6330,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -6851,7 +6851,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -6863,7 +6863,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -6873,7 +6873,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -6883,7 +6883,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -6893,7 +6893,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -6949,7 +6949,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -7050,7 +7050,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 
 	country_trigger = {
 		has_technology_researched = empiricism
-		has_global_variable = positivism_invented
+		always = no  # [#6573] was: has_global_variable = positivism_invented
 	}
 
 	interest_group_leader_trigger = {
@@ -7153,7 +7153,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				owner = {
-					has_variable = positivist_leaders_less_je_var
+					always = no  # [#6573] was: has_variable = positivist_leaders_less_je_var
 				}
 			}
 			add = {
@@ -7164,7 +7164,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				owner = {
-					has_variable = positivist_leaders_je_var
+					always = no  # [#6573] was: has_variable = positivist_leaders_je_var
 				}
 			}
 			add = {
@@ -7174,7 +7174,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		}
 		if = {
 			limit = {
-				has_variable = positivist_leaders_increase_var
+				always = no  # [#6573] was: has_variable = positivist_leaders_increase_var
 			}
 			add = {
 				value = 75
@@ -7183,7 +7183,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		}
 		if = {
 			limit = {
-				has_variable = positivist_leaders_large_increase_var
+				always = no  # [#6573] was: has_variable = positivist_leaders_large_increase_var
 			}
 			add = {
 				value = 150
@@ -7192,7 +7192,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		}
 		if = {
 			limit = {
-				has_variable = positivist_leaders_reward_var
+				always = no  # [#6573] was: has_variable = positivist_leaders_reward_var
 			}
 			add = {
 				value = 250
@@ -7424,7 +7424,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -7823,7 +7823,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -7833,7 +7833,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 50
@@ -8162,7 +8162,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 25
@@ -8172,7 +8172,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 25
@@ -8182,7 +8182,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 25
@@ -8192,7 +8192,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 25
@@ -8284,7 +8284,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -8476,7 +8476,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		# conservative and/or reactionary leaders have a higher spawn chance if the Anti-Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = anti_dreyfusard_victory
+				always = no  # [#6573] was: has_variable = anti_dreyfusard_victory
 			}
 			add = {
 				value = 25
@@ -8486,7 +8486,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		# conservative and/or reactionary leaders have a higher spawn chance if you win the Two Spains as the conservatives.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_conservative_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_conservative_victory
 			}
 			add = {
 				value = 25
@@ -8758,7 +8758,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		if = {
 			limit = {
 				owner = {
-					has_variable = brz_enduring_empire
+					always = no  # [#6573] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -8770,7 +8770,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		# liberal and/or radical leaders have a higher spawn chance if the Dreyfusards won.
 		if = {
 			limit = {
-				has_variable = dreyfusard_victory
+				always = no  # [#6573] was: has_variable = dreyfusard_victory
 			}
 			add = {
 				value = 50
@@ -8780,7 +8780,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		# liberal and/or radical leaders have a higher spawn chance if you win the Two Spains as the liberals.
 		if = {
 			limit = {
-				has_variable = spa_two_spains_liberal_victory
+				always = no  # [#6573] was: has_variable = spa_two_spains_liberal_victory
 			}
 			add = {
 				value = 50
@@ -8790,7 +8790,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		# liberal and/or radical leaders have a higher spawn chance if you succeed in Portugal's Second Liberalism.
 		if = {
 			limit = {
-				has_variable = por_second_liberalism_victory
+				always = no  # [#6573] was: has_variable = por_second_liberalism_victory
 			}
 			add = {
 				value = 50
@@ -8800,7 +8800,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		# liberal and/or radical leaders have a higher spawn chance if the Hungarian Revolution was successful.
 		if = {
 			limit = {
-				has_variable = hungarian_revolution_increased_liberalism
+				always = no  # [#6573] was: has_variable = hungarian_revolution_increased_liberalism
 			}
 			add = {
 				value = 50
@@ -8880,7 +8880,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 					has_role_of_type = general
 					has_role_of_type = admiral
 				}
-				has_variable = spa_liberal_military_var
+				always = no  # [#6573] was: has_variable = spa_liberal_military_var
 			}
 			add = 50
 		}
@@ -9480,10 +9480,10 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		}
 		if = {
 			limit = {
-				has_variable = por_increased_regenerator_likelihood
+				always = no  # [#6573] was: has_variable = por_increased_regenerator_likelihood
 			}
 			add = {
-				value = var:por_increased_regenerator_likelihood
+				value = 0  # [#6573] was: value = var:por_increased_regenerator_likelihood
 				desc = "POR_INCREASED_REGENERATOR_CHANCE"
 			}
 		}
@@ -9517,11 +9517,11 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		if = {
 			limit = {
 				interest_group ?= {
-					has_variable = por_increased_regenerator_likelihood
+					always = no  # [#6573] was: has_variable = por_increased_regenerator_likelihood
 				}
 			}
 			add = {
-				value = interest_group.var:por_increased_regenerator_likelihood
+				value = 0  # [#6573] was: value = interest_group.var:por_increased_regenerator_likelihood
 			}
 		}
 	}

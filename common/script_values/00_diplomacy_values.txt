@@ -197,7 +197,7 @@ liberty_desire_weekly_change = { #AKA liberty_desire_weekly_progress
 			if = { #special case in Cuban independence
 				limit = {
 					root.second_country = {
-						has_variable = slaves_work_with_independence_movement
+						always = no  # [#6573] was: has_variable = slaves_work_with_independence_movement
 					}
 				}
 				multiply = -2 #turn value positive

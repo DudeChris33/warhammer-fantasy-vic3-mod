@@ -42,25 +42,25 @@ country_red_season_name = {
 	type = country
 	text = {
 		trigger = {
-			has_variable = red_winter
+			always = no  # [#6573] was: has_variable = red_winter
 		}
 		localization_key = red_winter_loc
 	}
 	text = {
 		trigger = {
-			has_variable = red_spring
+			always = no  # [#6573] was: has_variable = red_spring
 		}
 		localization_key = red_spring_loc
 	}
 	text = {
 		trigger = {
-			has_variable = red_summer
+			always = no  # [#6573] was: has_variable = red_summer
 		}
 		localization_key = red_summer_loc
 	}
 	text = {
 		trigger = {
-			has_variable = red_autumn
+			always = no  # [#6573] was: has_variable = red_autumn
 		}
 		localization_key = red_autumn_loc
 	}

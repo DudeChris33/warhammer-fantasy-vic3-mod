@@ -65,7 +65,7 @@ inherit_caciquismo_effect = {
 inherit_free_elections_effect = {
 	if = {
 		limit = {
-			has_variable = free_elections_var
+			always = no  # [#6573] was: has_variable = free_elections_var
 		}
 		scope:relevant_voting_law ?= {
 			add_amendment = {

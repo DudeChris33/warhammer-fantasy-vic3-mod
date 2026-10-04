@@ -28,7 +28,7 @@ movement_cultural_majority = {
 			has_ideology = ideology:ideology_ethno_nationalist
 		}
 		NOT = {
-			has_variable = anti_nationalist_var
+			always = no  # [#6573] was: has_variable = anti_nationalist_var
 		}
 	}
 	character_support_weight = {
@@ -498,7 +498,7 @@ movement_cultural_minority = {
 		if = {
 			limit = {
 				owner ?= {
-					has_variable = failed_tanzimat
+					always = no  # [#6573] was: has_variable = failed_tanzimat
 				}
 			}
 			multiply = {
@@ -644,7 +644,7 @@ movement_cultural_minority = {
 			has_ideology = ideology:ideology_reformer
 		}
 		NOT = {
-			has_variable = anti_nationalist_var # Please stop becoming a Polish nationalist, Rosa.
+			always = no  # [#6573] was: has_variable = anti_nationalist_var # Please stop becoming a Polish nationalist, Rosa.
 		}
 	}
 	character_support_weight = {

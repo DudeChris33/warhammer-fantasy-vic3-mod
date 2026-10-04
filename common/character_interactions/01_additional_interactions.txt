@@ -49,7 +49,7 @@ arrange_accident = {
 			custom_tooltip = {
 				text = doing_coup_for_player_tt
 				NOT = {
-					has_variable = commander_doing_coup_on_player_behalf
+					always = no  # [#6573] was: has_variable = commander_doing_coup_on_player_behalf
 				}
 			}
 		}

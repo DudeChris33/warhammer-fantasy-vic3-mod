@@ -274,15 +274,8 @@ law_presidential_republic = {
 	}
 
 	on_activate = {
-		if = {
-			limit = {
-				has_variable = fra_republic_counter
-			}
-			change_variable = {
-				name = fra_republic_counter
-				add = 1
-			}
-		}
+		# [#6573] removed: if = { limit = { has_variable = fra_republic_counter } change_variable = { name = fra_republic_counter add = 1 } }
+		# (fra_republic_counter is only set by real-world French content; restore with it)
 		transition_off_of_monarchy_effects = yes
 	}
 
@@ -392,15 +385,8 @@ law_parliamentary_republic = {
 	}
 
 	on_activate = {
-		if = {
-			limit = {
-				has_variable = fra_republic_counter
-			}
-			change_variable = {
-				name = fra_republic_counter
-				add = 1
-			}
-		}
+		# [#6573] removed: if = { limit = { has_variable = fra_republic_counter } change_variable = { name = fra_republic_counter add = 1 } }
+		# (fra_republic_counter is only set by real-world French content; restore with it)
 		transition_off_of_monarchy_effects = yes
 	}
 

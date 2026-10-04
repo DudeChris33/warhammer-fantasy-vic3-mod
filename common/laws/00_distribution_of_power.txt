@@ -797,12 +797,8 @@ law_single_party_state = {
 	on_deactivate = {
 		unset_only_legal_party = yes
 		update_party_support = yes
-		if = {
-			limit = {
-				has_variable = fatherland_front_var
-			}
-			remove_variable = fatherland_front_var
-		}
+		# [#6573] removed: if = { limit = { has_variable = fatherland_front_var } remove_variable = fatherland_front_var }
+		# (fatherland_front_var is only set by real-world content; restore with it)
 	}
 
 	ai_will_do = {

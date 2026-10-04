@@ -411,7 +411,7 @@
 			# Away from slaveowner Domination
 			if = {
 				limit = {
-					has_variable = var_slave_trade_suppression_var
+					always = no  # [#6573] was: has_variable = var_slave_trade_suppression_var
 				}
 				add = {
 					desc = "slavery_progress_from_suppression_tt"
@@ -684,7 +684,7 @@ fascism_progress_bar = {
 				any_interest_group = {
 					is_in_government = yes
 					leader ?= {
-						has_variable = var_fascism_1_char_checked # So that you don't get massive progress without being notified
+						always = no  # [#6573] was: has_variable = var_fascism_1_char_checked # So that you don't get massive progress without being notified
 						OR = {
 							has_ideology = ideology:ideology_fascist
 							has_ideology = ideology:ideology_integralist
@@ -1121,11 +1121,11 @@ red_summer_counter_revolution_progress_bar = {
 		}
 		if = {
 			limit = {
-				has_variable = var_counter_revolution_bonus
+				always = no  # [#6573] was: has_variable = var_counter_revolution_bonus
 			}
 			add = {
 				desc = "red_summer_events_and_effects_tt"
-				value = var:var_counter_revolution_bonus
+				value = 0  # [#6573] was: value = var:var_counter_revolution_bonus
 			}
 		}
 	}

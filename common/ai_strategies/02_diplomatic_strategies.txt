@@ -987,8 +987,8 @@ ai_strategy_economic_imperialism = {
 		if = {
 			limit = {
 				can_reach_target_state = yes
-				has_variable = wants_treaty_port_revenge_against
-				var:wants_treaty_port_revenge_against ?= scope:target_country
+				always = no  # [#6573] was: has_variable = wants_treaty_port_revenge_against
+				always = no  # [#6573] was: var:wants_treaty_port_revenge_against ?= scope:target_country
 			}
 			add = 100
 		}
