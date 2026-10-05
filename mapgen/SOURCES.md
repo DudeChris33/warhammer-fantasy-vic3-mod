@@ -64,8 +64,9 @@ Files live directly under `sources/`, or in one of four searched subfolders:
 canvas-scale GIMP masters and their exports — see the .ora convention below),
 `dots-triangles/` and `dots-mega/` (the paired-anchor-dot registration
 workflow's active crops). `archive/` (retired sources — including the five
-per-region dot-marking sheets retired by board #5403), `WIP/` (local scratch)
-and `cr_oldworld_campaign/` (its own dataset loader) are deliberately **not**
+per-region dot-marking sheets retired by board #5403), `WIP/` (local scratch),
+`history/` (finished reference artefacts kept for the record — see below) and
+`cr_oldworld_campaign/` (its own dataset loader) are deliberately **not**
 searched. `mapgen/worldgen/sources.py`'s `resolve_source_path()` searches the
 root plus those four by bare filename, so the **File** column below stays a
 bare filename regardless of which subfolder a source actually sits in — the
@@ -87,6 +88,74 @@ together) and single-layer masks — the land/sea fill `land_sea_mask.png`
 (binarized first via `binarize_cyan_mask.py`; the `.ora` `coasts` layer is only
 the cyan trace, with no land fill of its own) and the tiny-islands merger
 circles.
+
+## `history/`: finished reference artefacts (2026-10-05)
+
+`sources/history/` holds finished one-off artefacts kept for the record. It is
+not a searched subfolder, so nothing in it has a manifest row and no tool reads
+it; this section is its only record.
+
+**`real-world-comparisons-r.png`** (1427x628, 45,076 bytes, SHA-256
+`ddac6a07c44f0c8727b513d6b85455c22982b0c31d82965c86b4bc9f182aab71`). A blank
+political map of Earth (Robinson-style outline, country borders, no Antarctica)
+flood-filled so that each colour is the real-world stand-in for one Warhammer
+region: the countries in a colour together take up about the same share of
+Earth's land as that region takes of the mod's land, and sit in roughly the
+matching part of the world. It answers "how big is Kislev, really?" by picture.
+
+- Region areas on the Warhammer side are true spherical areas measured on the
+  mod canvas (Miller, `config/canvas_frame.py`). Old World regions come from
+  the strategic-region files; everything outside the drawn Old World comes from
+  hand-drawn red zone outlines on a copy of the reprojected globe
+  (`real-world-comparisons-f.png`, below).
+- The match is by **share of total land**, not absolute km²: the mod's world
+  has about 19% more land than Earth as vanilla draws it (158.8M vs 133.7M
+  km²), so real areas are effectively scaled up by 1.188.
+- Where no set of whole countries fitted, a country is split by a 1px line
+  (the United States, Russia, Alaska, Argentina/Chile, Sudan, Finland). Line
+  positions were placed from a fitted projection of the outline map and are
+  good to a degree or two.
+- Built iteratively by Claude and Chris on 2026-10-04/05. Claude's last pass
+  had every zone within 3% of its target share; Chris then edited by hand, and
+  the image is the record. Diffed against that pass, his edits are: Tibet
+  folded back into Cathay (so Cathay now also stands for the Mountains of
+  Heaven: +0.9% against the two combined); Algeria made whole again as the
+  Badlands (+8.1%, Araby +0.8%); the Egypt/Sudan cut redrawn so Egypt is all
+  Nehekhara and only eastern Sudan goes to Ind (Nehekhara +0.2%, Ind -1.1%);
+  and a few stray pixels filled. Every other zone is unchanged and within 3%.
+- Known mismatch: the tally used the zone outlines as they stood when the
+  fill was built. The kept `-f` file was redrawn afterwards and now groups
+  three zones differently (the steppe pocket north of the Ogre Kingdoms joins
+  the Ogre zone, 8.95M km² in all; the north-east Cathay strip joins the
+  eastern steppes). The combined area of those zones is the same, so the fill
+  is right in aggregate but its Ogre / steppes / north-east strip split
+  follows the earlier outlines.
+
+Colour key (RGB hex): Naggaroth and the Chaos Wastes above it `7e007e`,
+Ulthuan `78beff`, Lustria `1ed836`, far-south spur `3c78b4`, Norsca `8a3d2c`,
+Kislev `7dffff`, the Empire `ff0000`, Bretonnia `0000ff`, Estalia `fca800`,
+Tilea `7dff00`, Border Princes `ff7d00`, World's Edge Mountains with the
+western ranges `00007e`, Badlands `7d7d00`, Dark Lands `8f8d7a`, northern
+steppes `bf9c85`, Ogre Kingdoms with Gnoblar Country `5a3c96`, Cathay `ffff00`,
+north-east Cathay strip `c8c800`, Ind `b68ee1`, Khuresh `4a5344`, Nippon
+`ff64ff`, Araby `deb85f`, Nehekhara `965a14`, Southlands `006e3c`, Kingdom of
+Beasts `c80078`, Sun Island with the Dragon Isles `00aaaa`, Lost Isles of
+Elithis `96dc96`, Albion `ffb4b4`, northern edge fragment `505050`, Lumbria
+`ff9696`. White is sea and inland water.
+
+**`real-world-comparisons-f.png`** (8192x3616, 33,185,585 bytes, SHA-256
+`bf00a94b10b860abcfffb16adaf5516c4c8bc55e1f9a1d82c5d83b5223666dd3`). The other
+half of the pair: a canvas-sized copy of the reprojected Terraqueous Globe with
+Chris's hand-drawn red outlines marking which land belongs to which Warhammer
+region for this comparison (Naggaroth, Lustria, Ulthuan, Araby, the Southlands,
+Cathay, Ind, Khuresh, Nippon, the steppes and so on). The outlines are rough by
+intent and enclose sea as well as land; the land inside each is what was
+measured. Markup, not a source: the lines are not state or region borders and
+nothing reads them.
+
+Both are comparison aids only: they contribute no geometry, names or
+registration. Their GIMP masters (`real-world-comparisons-{f,r}.xcf`) are
+still in `WIP/`.
 
 ## Verifying / refreshing
 
@@ -135,7 +204,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | terraqueous_globe_reprojected - dots_7.xcf | n/a | 164,259,326 | 3d4af433759570c24695c6c020379cd3c138bb8f629821ead461e11f0cf2e55d | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Editable master of the dots_7.png export above | no |
 | terraqueous_globe_reprojected - full.ora | 8192x3616 | 91,250,555 | 4ed8eb125e3e9535a81b5041db8a8920dcc8fd70d3374654457618e7a50cfd4e | GIMP OpenRaster export of `terraqueous_globe_reprojected - full.xcf` | The canvas master (board #5399): layers `coasts`/`rivers`/`cities`/`borders`/`impassable`/`sea_zones`/`canvas`, read by name via `mapgen/config/source_layers.json` | no |
 | terraqueous_globe_reprojected - full.png | 8192x3616 | 33,388,369 | 08603875ec78d5114c264f98ef57fdd1f63a1e3237cfc9e21e3178a1eae2fb88 | TBD | TBD | no |
-| terraqueous_globe_reprojected - full.xcf | n/a | 108,530,467 | dc23abe8a9dc245643cf6f83535a983ed6425084050f686c00ed0fc0522a9e6d | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
+| terraqueous_globe_reprojected - full.xcf | n/a | 108,530,379 | 9616546798aec889921770ba8c74cc10461021908ecb51f901e41a5f4c569115 | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
 | terraqueous_globe_reprojected - grayscale.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Grayscale copy of `terraqueous_globe_reprojected.png` | Same role as `terraqueous_globe_reprojected.png`, in grayscale | no |
 | terraqueous_globe_reprojected - grayscale_dots.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Dot-marked derivative of `terraqueous_globe_reprojected - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | terraqueous_globe_reprojected - grayscale_dots.xcf | n/a | 87,438,501 | cf32f13c5a5cd9c9ebd727d5ae6b358e5140a22f35253c2219d3c794b0391316 | TBD | TBD | no |
@@ -170,7 +239,7 @@ anything with a manifest row above — is found by `resolve_source_path()`
 across `sources/` and the four searched subfolders (see Layout above); a
 `<file>.ora#<layer>` reference resolves its container file the same way, then
 reads the named layer directly from the zip. A file dropped in an unsearched
-folder (`archive/`, `WIP/`, `cr_oldworld_campaign/`) is invisible to
+folder (`archive/`, `WIP/`, `history/`, `cr_oldworld_campaign/`) is invisible to
 `--verify`, `--update-manifest`, and every loader.
 
 Grouping related sources is done with a filename prefix that names the family
