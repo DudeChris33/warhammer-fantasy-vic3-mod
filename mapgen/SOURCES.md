@@ -66,7 +66,7 @@ canvas-scale GIMP masters and their exports — see the .ora convention below),
 workflow's active crops). `archive/` (retired sources — including the five
 per-region dot-marking sheets retired by board #5403), `WIP/` (local scratch),
 `history/` (finished reference artefacts kept for the record — see below) and
-`cr_oldworld_campaign/` (its own dataset loader) are deliberately **not**
+`cr_oldworld_campaign/` (its own dataset loader) and `cr_immortal_empires_expanded/` (see below) are deliberately **not**
 searched. `mapgen/worldgen/sources.py`'s `resolve_source_path()` searches the
 root plus those four by bare filename, so the **File** column below stays a
 bare filename regardless of which subfolder a source actually sits in — the
@@ -88,6 +88,36 @@ together) and single-layer masks — the land/sea fill `land_sea_mask.png`
 (binarized first via `binarize_cyan_mask.py`; the `.ora` `coasts` layer is only
 the cyan trace, with no land fill of its own) and the tiny-islands merger
 circles.
+
+## `cr_immortal_empires_expanded/`: ChaosRobie's whole-world dataset (2026-10-05)
+
+`sources/cr_immortal_empires_expanded/` is the extracted pack of ChaosRobie's
+whole-world Total War: Warhammer 3 campaign-map mod, the sibling of
+`cr_oldworld_campaign/`. Like it, the folder is not searched and has no manifest
+rows: nothing reads it yet, and a file gets a row only when a loader is pointed
+at it. Use of ChaosRobie's content is permitted
+([PROVENANCE.md](PROVENANCE.md#chaosrobies-mods-permission-granted)); the
+Creative Assembly layers inside it are not covered by that permission.
+
+Pruned to the useful part on 2026-10-05 (3.0 GB to about 305 MB; the 3D assets,
+Lua, battle terrain, pathing and UI skins were deleted). What remains and why:
+
+- `campaign_maps/cr_combi_expanded_map_1/cr_combi_expanded_map.dds` (6400x4480,
+  unlabelled) and `..._map_text.dds` (same frame, labels only): the Immortal
+  Empires parchment extended past the vanilla frame. Candidate boundary source;
+  it needs registering before any tool reads it.
+- `cr_combi_expanded_lookup.tga` (3200x1941): the world region partition, 768
+  flat colours with 16-bit palette indices (PIL cannot open it). Only
+  ChaosRobie's own `cr_combi_region_*` colours decode from this folder; vanilla
+  region colours live in the installed WH3 `data.pack`.
+- `terrain/campaigns/cr_combi_expanded_map_1/`: `full_height_map.dds` (12800x7764,
+  HDR, needs a real BC6H decoder), `tile_mask`, `snow_mask`, `colour_overlay`.
+- `text/db/cr_new_combi_*.loc.tsv` and `db/`: names and the region/province
+  structure for the lands outside the Old World. Cite names as ChaosRobie's, not
+  `canon:`.
+- `campaigns/cr_combi_expanded/startpos.esf`, `map_data.esf`: unparsed (no ESF
+  reader in the repo); settlement positions and starting ownership.
+- `ui/flags/`: his faction flags, a starting point for heraldry.
 
 ## `history/`: finished reference artefacts (2026-10-05)
 
@@ -239,7 +269,7 @@ anything with a manifest row above — is found by `resolve_source_path()`
 across `sources/` and the four searched subfolders (see Layout above); a
 `<file>.ora#<layer>` reference resolves its container file the same way, then
 reads the named layer directly from the zip. A file dropped in an unsearched
-folder (`archive/`, `WIP/`, `history/`, `cr_oldworld_campaign/`) is invisible to
+folder (`archive/`, `WIP/`, `history/`, `cr_oldworld_campaign/`, `cr_immortal_empires_expanded/`) is invisible to
 `--verify`, `--update-manifest`, and every loader.
 
 Grouping related sources is done with a filename prefix that names the family

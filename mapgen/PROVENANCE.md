@@ -4,7 +4,9 @@ The world geometry is **traced/registered from published Warhammer Fantasy
 reference imagery** (the source-driven redo,
 [world-map-source-driven.md](../planning/requests/world-map-source-driven.md)),
 used as **geometric reference only**. We derive our own bitmaps; no pixels are
-lifted from Total War, GW products, or other mods, and **no reference image is
+lifted from Total War or GW products (ChaosRobie's own content is the one
+permitted exception — see [ChaosRobie's mods](#chaosrobies-mods-permission-granted)),
+and **no reference image is
 committed to this repo** — the `sources/` folder is local-only and gitignored
 (decision #2). This file is the narrative IP/provenance record; the file-level
 manifest (filename, dims, SHA-256, origin, role) lives in
@@ -13,6 +15,33 @@ in [registration/](registration/).
 
 Fan-mod naming of GW settings is standard practice; copying art or map files is
 the line we do not cross. Only our own derived pixels are committed.
+
+## ChaosRobie's mods: permission granted
+
+Chris has **explicit permission from ChaosRobie to do whatever he wants with
+ChaosRobie's content** (stated by Chris in chat, 2026-10-05; recorded here at his
+instruction). It covers both of his Total War: Warhammer 3 campaign-map mods
+held locally in `sources/`: the Old World mod (`sources/cr_oldworld_campaign/`)
+and Immortal Empires Expanded (`cr_immortal_empires_expanded`, the whole-world
+sibling).
+
+- **In scope:** what ChaosRobie authored: the region/province/settlement tables
+  and their names, the lookup (region-partition) bitmaps, his map and terrain
+  edits, the factions, and his UI art. These may be used directly, including
+  copied pixels, subject to the rules below.
+- **Not covered:** anything in his packs that is Creative Assembly/Sega content he
+  built on (vanilla parchment art, vanilla region names and colours, vanilla
+  terrain and textures). His permission cannot extend to it, so the Creative
+  Assembly rules above still apply to those layers. Where his edit and the
+  vanilla art are inseparable (e.g. the expanded parchment), treat the image as a
+  geometric reference and commit only our own derived pixels.
+- **Still required:** `sources/` stays local and gitignored, new files get a
+  `SOURCES.md` manifest row, and anything borrowed is cited
+  (`canon: cr_oldworld_campaign/<slug>` for the Old World table; use the same
+  shape for the expanded mod). Invented-by-ChaosRobie content is not Warhammer
+  canon, so cite it as his rather than as `canon:`.
+- Permission is Chris's report of a private grant, not a licence file. If it is
+  ever disputed, the fallback is the geometric-reference-only rule.
 
 ## Reference sources (consulted for geometry/relief only)
 
