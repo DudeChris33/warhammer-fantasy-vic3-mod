@@ -85,6 +85,36 @@ together) and single-layer masks — the land/sea fill `land_sea_mask.png`
 the cyan trace, with no land fill of its own) and the tiny-islands merger
 circles.
 
+## `cr_oldworld_campaign/`: ChaosRobie's Old World dataset (pruned 2026-10-06)
+
+`sources/cr_oldworld_campaign/` is the extracted pack of ChaosRobie's Old World
+Total War: Warhammer 3 campaign-map mod. It is not searched and has no manifest
+rows; the name and overlay scripts read it directly (`tww3_name_lookup.py`,
+`render_cr_lookup_overlay.py`, `render_tww3_text_crops.py`). Provenance and
+ranking: [PROVENANCE.md](PROVENANCE.md#chaosrobies-mods).
+
+Pruned on 2026-10-06 (2.8 GB to about 570 MB). Deleted: `terrain/` (3D models and
+battle terrain), `rigidmodels/`, `prefabs/`, `weather/`, `materials/`,
+`composite_scene/`, `movies/`, `warscape_asset_variation_db/`, `ui/skins/`,
+`campaign_maps/.../display/`, the `.dds`/`.tga` duplicates of the lookup and
+overlay bitmaps, `spd_data.esf`, `hlp_data.esf`, `pathfinding.ppd`, the RPFM
+reserved files, and the engine-only `db/` tables (audio, battle, CAI, units,
+videos, character art, trees, settlement display and similar). What remains:
+
+- `cr_oldworld_lookup/`: `cr_oldworld_lookup.bmp` (the region partition) and
+  `cr_oldworld_campaign.tsv` (colour to region key).
+- `text/db/`: region, province, settlement, faction and culture names, plus
+  dilemma and mission text.
+- `db/`: the region, province, region-group, settlement, faction, culture,
+  building and caravan tables (design reference).
+- `campaign_maps/cr_oldworld_map_1/`: the map and text PNGs, camera heightmap,
+  minimaps, `map_data.esf`, `trade_routes.ptd`. `startpos.esf` is under
+  `campaigns/`. The ESF files are unparsed.
+- `ui/flags/`: his faction flags (mostly Partypus's art; see
+  `oldworld_campaign_credits.txt`).
+- `script/` and `script_data/`: Lua and mission JSON, design reference only.
+- `sea/`: sea and flow masks, kept pending review.
+
 ## `cr_immortal_empires_expanded/`: ChaosRobie's whole-world dataset (2026-10-05)
 
 `sources/cr_immortal_empires_expanded/` is the extracted pack of ChaosRobie's

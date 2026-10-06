@@ -12,7 +12,7 @@ emits no map data, and no committed bitmap or state file depends on it.
 
 Why this is possible at all
 ---------------------------
-``sources/cr_oldworld_campaign/campaign_map/cr_oldworld_map.png`` (8192²) is a
+``sources/cr_oldworld_campaign/campaign_maps/cr_oldworld_map_1/cr_oldworld_map.png`` (8192²) is a
 confirmed **exact 2x rescale** of ``sources/originals/tww3_old_world_mod_parchment.png``
 (4096²) — zero crop, zero offset (established by FFT phase correlation with a
 decisive scale sweep at 2.00; ``--verify-correspondence`` re-confirms it cheaply).
@@ -114,7 +114,7 @@ REGISTRATION_DIR = TOOLS_DIR / "registration"
 DATASET_DIR = SOURCES_DIR / "cr_oldworld_campaign"
 LOOKUP_BMP = DATASET_DIR / "cr_oldworld_lookup" / "cr_oldworld_lookup.bmp"
 LOOKUP_TSV = DATASET_DIR / "cr_oldworld_lookup" / "cr_oldworld_campaign.tsv"
-CAMPAIGN_MAP_PNG = DATASET_DIR / "campaign_map" / "cr_oldworld_map.png"
+CAMPAIGN_MAP_PNG = DATASET_DIR / "campaign_maps" / "cr_oldworld_map_1" / "cr_oldworld_map.png"
 
 #: The master frame the ``_full`` registration places (4096², committed source).
 PARCHMENT_SOURCE = "tww3_old_world_mod_parchment.png"

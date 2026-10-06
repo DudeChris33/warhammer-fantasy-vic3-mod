@@ -26,6 +26,7 @@ Empires Expanded (`cr_immortal_empires_expanded`, the whole-world sibling).
   (`canon: cr_oldworld_campaign/<slug>` for the Old World table; use the same
   shape for the expanded mod). Invented-by-ChaosRobie content is not Warhammer
   canon, so cite it as his rather than as `canon:`.
+- **Pruned (2026-10-06):** the Old World folder had its 3D assets, battle terrain, engine data, duplicate bitmaps and engine-only `db/` tables deleted (2.8 GB to about 570 MB); the inventory is in [SOURCES.md](SOURCES.md).
 - **Ranking:** the expanded whole-world dataset is trusted equally with the Old
   World mod (Chris, 2026-10-05): above the stock Immortal Empires parchment for
   interior boundaries and names within its footprint, never above the Terraqueous

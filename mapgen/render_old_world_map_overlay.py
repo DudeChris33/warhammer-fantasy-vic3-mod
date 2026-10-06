@@ -169,7 +169,7 @@ REGISTRATION_DIR = TOOLS_DIR / "registration"
 DATASET_DIR = SOURCES_DIR / "cr_oldworld_campaign"
 #: The square, isotropically-scaled companion file this script actually uses —
 #: NOT the raw ``old_world_map.png`` (see module docstring for why).
-STRETCHED_PNG = DATASET_DIR / "campaign_map" / "old_world_map - stretched.png"
+STRETCHED_PNG = DATASET_DIR / "campaign_maps" / "cr_oldworld_map_1" / "old_world_map - stretched.png"
 LOOKUP_BMP = DATASET_DIR / "cr_oldworld_lookup" / "cr_oldworld_lookup.bmp"
 
 #: The reprojected globe that IS the canvas frame — the backdrop this drapes over.

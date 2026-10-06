@@ -14,7 +14,7 @@ and the cartography agree before either reaches a worksheet.
 
 Why the transform is free
 -------------------------
-``sources/cr_oldworld_campaign/campaign_map/cr_oldworld_map_text.png`` is the
+``sources/cr_oldworld_campaign/campaign_maps/cr_oldworld_map_1/cr_oldworld_map_text.png`` is the
 campaign map's text layer: RGBA, transparent everywhere but the drawn labels,
 and it shares the 8192-px campaign-map frame that
 ``mapgen/render_cr_lookup_overlay.py`` (#4364) established is the 4096-px
@@ -97,7 +97,7 @@ CONFIG_WORKSHEET = TOOLS_DIR / "config" / "land_regions_worksheet.csv"
 
 #: The printed-label layer, a sibling of the lookup bitmap in the same gitignored
 #: dump. Its absence is the expected state on every device but Chris's.
-MAP_TEXT_PNG = tnl.DATASET_DIR / "campaign_map" / "cr_oldworld_map_text.png"
+MAP_TEXT_PNG = tnl.DATASET_DIR / "campaign_maps" / "cr_oldworld_map_1" / "cr_oldworld_map_text.png"
 
 #: Master px -> text px. **Imported, never re-declared**: the text layer and the
 #: lookup bitmap live in the same campaign-map frame, so a divergence between the
