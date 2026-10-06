@@ -3,7 +3,7 @@
 
 Every pixel here is **our own**, drawn by this script, so the fixture is
 committed and the boundary path regression-runs on a clean clone with no
-``sources/`` present. The real S3a sources are third-party art and can never be.
+``sources/`` present. The real S3a sources are bulky and are kept out of git.
 
 The point is not to look like a map; it is to carry every feature the real
 ingestion has to survive, so a regression in any of them trips the golden:

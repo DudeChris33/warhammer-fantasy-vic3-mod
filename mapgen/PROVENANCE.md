@@ -3,39 +3,25 @@
 The world geometry is **traced/registered from published Warhammer Fantasy
 reference imagery** (the source-driven redo,
 [world-map-source-driven.md](../planning/requests/world-map-source-driven.md)),
-used as **geometric reference only**. We derive our own bitmaps; no pixels are
-lifted from Total War or GW products (ChaosRobie's own content is the one
-permitted exception — see [ChaosRobie's mods](#chaosrobies-mods-permission-granted)),
-and **no reference image is
-committed to this repo** — the `sources/` folder is local-only and gitignored
-(decision #2). This file is the narrative IP/provenance record; the file-level
-manifest (filename, dims, SHA-256, origin, role) lives in
+used as **geometric reference only**. We derive our own bitmaps, and **no
+reference image is committed to this repo** — the `sources/` folder is
+local-only and gitignored (decision #2). This file is the narrative provenance
+record; the file-level manifest (filename, dims, SHA-256, origin, role) lives in
 [SOURCES.md](SOURCES.md), and how each registered source maps onto the canvas is
 in [registration/](registration/).
 
-Fan-mod naming of GW settings is standard practice; copying art or map files is
-the line we do not cross. Only our own derived pixels are committed.
+## ChaosRobie's mods
 
-## ChaosRobie's mods: permission granted
+Two of ChaosRobie's Total War: Warhammer 3 campaign-map mods are held locally in
+`sources/`: the Old World mod (`sources/cr_oldworld_campaign/`) and Immortal
+Empires Expanded (`cr_immortal_empires_expanded`, the whole-world sibling).
 
-Chris has **explicit permission from ChaosRobie to do whatever he wants with
-ChaosRobie's content** (stated by Chris in chat, 2026-10-05; recorded here at his
-instruction). It covers both of his Total War: Warhammer 3 campaign-map mods
-held locally in `sources/`: the Old World mod (`sources/cr_oldworld_campaign/`)
-and Immortal Empires Expanded (`cr_immortal_empires_expanded`, the whole-world
-sibling).
-
-- **In scope:** what ChaosRobie authored: the region/province/settlement tables
-  and their names, the lookup (region-partition) bitmaps, his map and terrain
-  edits, the factions, and his UI art. These may be used directly, including
-  copied pixels, subject to the rules below.
-- **Not covered:** anything in his packs that is Creative Assembly/Sega content he
-  built on (vanilla parchment art, vanilla region names and colours, vanilla
-  terrain and textures). His permission cannot extend to it, so the Creative
-  Assembly rules above still apply to those layers. Where his edit and the
-  vanilla art are inseparable (e.g. the expanded parchment), treat the image as a
-  geometric reference and commit only our own derived pixels.
-- **Still required:** `sources/` stays local and gitignored, new files get a
+- **Usable content:** the region/province/settlement tables and their names, the
+  lookup (region-partition) bitmaps, his map and terrain edits, the factions, and
+  his UI art.
+- **Vanilla layers:** the vanilla parchment art, region names and colours,
+  terrain and textures inside his packs are treated as geometric reference only.
+- **Bookkeeping:** `sources/` stays local and gitignored, new files get a
   `SOURCES.md` manifest row, and anything borrowed is cited
   (`canon: cr_oldworld_campaign/<slug>` for the Old World table; use the same
   shape for the expanded mod). Invented-by-ChaosRobie content is not Warhammer
@@ -44,8 +30,6 @@ sibling).
   World mod (Chris, 2026-10-05): above the stock Immortal Empires parchment for
   interior boundaries and names within its footprint, never above the Terraqueous
   Globe for coastline.
-- Permission is Chris's report of a private grant, not a licence file. If it is
-  ever disputed, the fallback is the geometric-reference-only rule.
 
 ## Reference sources (consulted for geometry/relief only)
 
@@ -105,7 +89,7 @@ boundaries, and the date traced.
 |---|---|---|---|
 | Whole-world heightmap | Terraqueous Globe (NE-II reproject → LUT elevation); TW3 stitched relief composited as high-frequency detail inside its footprint. The land/sea split is the committed `land_sea_mask.png` (see below), consumed not re-derived. | S2 | 2026-07-23 |
 | Whole-world coastline (`land_sea_mask.png`) | User-traced magenta coastline on the reprojected Terraqueous globe (`sources/land_sea_mask.png`), flood-filled by `generate_coastline_mask.py` (coastline parity — no colour, no height ramp, no lake list). Supersedes the deleted height-ramp mask derivation. | S2 | 2026-08-22 |
-| Whole-world river network | **Derived, not traced** — drainage computed from the committed `heightmap.png` + `land_sea_mask.png` (depression fill -> D8 flow direction -> flow accumulation). No source imagery contributes geometry, so no third-party cartography is embedded in the result; the rivers follow our own generated terrain. Supersedes the hand-authored v1 polylines. | S2 | 2026-07-24 |
+| Whole-world river network | **Derived, not traced** — drainage computed from the committed `heightmap.png` + `land_sea_mask.png` (depression fill -> D8 flow direction -> flow accumulation). No source imagery contributes geometry, so no source cartography is embedded in the result; the rivers follow our own generated terrain. Supersedes the hand-authored v1 polylines. | S2 | 2026-07-24 |
 | Canon river *identification* (deferred to S6) | User-annotated *The Empire of Man* map (`TheEmpireRivers - drawn on.jpg`, canon courses drawn in red) — consulted as a **topology guide** for which DEM channel is the Reik/Talabec/Stir/Aver etc. Not warped, contributes no geometry. | S6 | pending |
 | Whole-world state boundaries (the committed state-label layer) | **Immortal Empires parchment map + its unlabelled feature-image sibling**, traced as line networks and warped onto the Terraqueous geometry. They contribute interior borders only: every cell is intersected with the committed `land_sea_mask.png` and watershedded to tile it, so no coastline in the result comes from them. Macro grouping from the annotated twin, recovered by differencing it against the clean master. 2.4% of land has no source and carries seeded fallback cells. | S3a | 2026-07-25 |
 | Whole-world state boundaries, geometry stage (registration + tracing only; names deferred to Stage B) | **Immortal Empires parchment master**, registered directly (silhouette via the climate-map sibling, `refined_iou` 0.6193) and promoted to the primary boundary source; its lettering is bridged into the barrier rather than erased. The unlabelled feature image is no longer traced for geometry (superseded by the master's superset coverage) but its registration stays as Stage B's text-mask cross-check. `total_war_map_colored.png` demoted to complement (wins only outside the master's footprint). | S3a (world-map-parchment-areas-onto-globe.md) | 2026-07-28 |

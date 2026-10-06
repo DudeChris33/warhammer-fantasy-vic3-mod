@@ -96,7 +96,7 @@ OUT_DIR = DERIVED_DIR / "tww3_text_crops"
 CONFIG_WORKSHEET = TOOLS_DIR / "config" / "land_regions_worksheet.csv"
 
 #: The printed-label layer, a sibling of the lookup bitmap in the same gitignored
-#: third-party dump. Its absence is the expected state on every device but Chris's.
+#: dump. Its absence is the expected state on every device but Chris's.
 MAP_TEXT_PNG = tnl.DATASET_DIR / "campaign_map" / "cr_oldworld_map_text.png"
 
 #: Master px -> text px. **Imported, never re-declared**: the text layer and the
@@ -140,7 +140,7 @@ def log(msg: str = "") -> None:
 # ---------------------------------------------------------------------------
 
 def require_text_layer() -> None:
-    """Clean-skip when the third-party label layer is not on this device.
+    """Clean-skip when the label layer is not on this device.
 
     The ``validate_map._check_canon_cities`` idiom, reached in two steps: the
     shared dataset check first (``mapgen/tww3_name_lookup.require_dataset``), then

@@ -12,8 +12,7 @@ Two artifacts, two different jobs (world-map-parchment-areas-onto-globe.md):
     pixels, push each one to its canvas position, and sample the label layer
     there — no inverse projection has to be derived. Written under
     ``mapgen/derived/``, which ``mapgen/.gitignore`` excludes by default; it
-    embeds the source image itself, so it can never be committed
-    (``mapgen/PROVENANCE.md``: only our own derived pixels are).
+    embeds the source image itself, so it is not committed.
 
 ``--tiles``
     **Committed.** Flat macro-tinted cells plus a 1-canvas-px coastline, drawn

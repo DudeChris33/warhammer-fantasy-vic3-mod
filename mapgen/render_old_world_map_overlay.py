@@ -7,7 +7,7 @@ scale shortcut — the same pattern ``mapgen/render_cr_lookup_overlay.py`` (boar
 
 **Dev-only, gitignored output.** Everything this writes lands in
 ``mapgen/derived/`` (ignored there); nothing it reads from
-``sources/cr_oldworld_campaign/`` — third-party CA/SEGA IP, itself gitignored
+``sources/cr_oldworld_campaign/`` — itself gitignored
 — ever reaches a committed file. This produces *evidence for a human*: a
 render Chris looks at, plus a printed fit report. No committed
 ``mapgen/registration/``, ``common/``, ``events/`` or ``map_data/`` file
@@ -20,7 +20,7 @@ Why this can never get its own ``mapgen/registration/`` entry
 file is missing locally, and separately hard-errors if any
 ``mapgen/registration/*.json`` record's ``"source"`` has no manifest row.
 ``sources/cr_oldworld_campaign/`` is deliberately gitignored/unmanifested
-third-party IP, absent on every device but the one that owns it — so there is
+absent on every device but the one that owns it — so there is
 no way to register this source without breaking ``--verify`` somewhere.
 Precedent already avoids the trap: ``cr_oldworld_map.png`` /
 ``cr_oldworld_lookup.bmp`` were never registered either; this script is that
@@ -164,7 +164,7 @@ SOURCES_DIR = REPO_ROOT / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
-#: The third-party reference dataset. Gitignored and absent on most devices —
+#: The reference dataset. Gitignored and absent on most devices —
 #: see :func:`require_source` for the clean skip.
 DATASET_DIR = SOURCES_DIR / "cr_oldworld_campaign"
 #: The square, isotropically-scaled companion file this script actually uses —

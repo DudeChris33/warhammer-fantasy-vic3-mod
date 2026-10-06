@@ -2,7 +2,7 @@
 
 The source-driven map pipeline reads reference imagery from a local `sources/`
 folder at the repo root. It mixes Games Workshop cartography, a Total War
-screenshot mosaic, and fan maps (third-party IP), plus tens of MB of binaries
+screenshot mosaic, and fan maps, plus tens of MB of binaries
 (decision #2 in
 [world-map-source-driven.md](../planning/requests/world-map-source-driven.md)).
 **As of board #4608 (2026-09-17), `sources/` is gitignored and local-only** —
@@ -15,14 +15,10 @@ under `sources/` — they are copied onto a new machine by hand.
 This file remains the committed **manifest** that documents those files: every
 source's filename, dimensions, byte size, SHA-256, origin, pipeline role, and
 whether it carries a [registration record](registration/). It makes the exact
-inputs behind every committed bitmap auditable without redistributing any art
-outside this repo, and it is the hash `mapgen/worldgen/sources.py` checks a
+inputs behind every committed bitmap auditable without committing any art, and it is the hash `mapgen/worldgen/sources.py` checks a
 source against before the ingestion stage is allowed to read it — so a swapped
 or edited `sources/` file can never silently change a committed,
 multiplayer-synced bitmap.
-
-Consulting these references for geometry is standard fan-mod practice; copying
-their pixels is the line we do not cross (see [PROVENANCE.md](PROVENANCE.md)).
 
 ## The Terraqueous Globe is the most trusted source, and the shape we aim for
 
@@ -95,9 +91,7 @@ circles.
 whole-world Total War: Warhammer 3 campaign-map mod, the sibling of
 `cr_oldworld_campaign/`. Like it, the folder is not searched and has no manifest
 rows: nothing reads it yet, and a file gets a row only when a loader is pointed
-at it. Use of ChaosRobie's content is permitted
-([PROVENANCE.md](PROVENANCE.md#chaosrobies-mods-permission-granted)); the
-Creative Assembly layers inside it are not covered by that permission.
+at it. See [PROVENANCE.md](PROVENANCE.md#chaosrobies-mods).
 
 **Trust ranking (Chris, 2026-10-05): this dataset ranks equal to the Old World
 mod.** Both are ChaosRobie's work and carry the same standing: higher precedence

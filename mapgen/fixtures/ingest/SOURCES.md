@@ -5,8 +5,8 @@ same parser, same SHA-256 guard — so `--check` exercises the real verification
 path rather than a stub of it.
 
 Unlike the real manifest, the file it pins **is** committed: `synthetic_world.png`
-is our own invented pixels (see `make_source.py`), so there is no third-party IP
-to keep out of the repo, and the fixture therefore runs on a clean clone.
+is a tiny invented image (see `make_source.py`), so there is no bulk of PNGs to
+keep out of the repo, and the fixture therefore runs on a clean clone.
 
 If `make_source.py` is re-run, this manifest must be refreshed:
 

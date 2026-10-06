@@ -2,7 +2,7 @@
 # this file does NOT load. Bespoke content per board #3626 — the nine Norsca High
 # Tribe tags (SAR, AES, BAE, BJO, SKA, GRA, VAR, HAS, KVE). Composed from vanilla
 # gfx/coat_of_arms/ art (patterns + colored_emblems, neither blanked by
-# replace_paths) plus four emblems from the permissioned Realms of Exether sibling
+# replace_paths) plus four emblems from the Realms of Exether sibling
 # mod (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds, already vendored by
 # #3624, and ce_wolf.dds/ce_bear_smo.dds/ce_dalship.dds, newly vendored here,
 # reuse grant 2026-09-07) and this mod's named_colors palette

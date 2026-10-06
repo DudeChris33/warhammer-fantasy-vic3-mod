@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Source manifest — SHA-256 guard + registration cross-checks for ingestion.
 
-``sources/`` is gitignored (third-party IP + ~40 MB of binaries). Committed in
+``sources/`` is gitignored (~40 MB of binaries). Committed in
 its place:
 
   * ``mapgen/SOURCES.md``                — this manifest: filename, dims, bytes,

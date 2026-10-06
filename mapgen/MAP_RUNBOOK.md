@@ -34,7 +34,7 @@ exactly what to click, which files the game writes, and which of those to commit
 > 3. **Do not commit the base-game files into this repo.** The re-saved
 >    `provinces.png` / `state_regions/` are vanilla's real-world Earth data; they
 >    are not ours, they are not what this mod ships, and committing base-game
->    content is an IP problem as well as simply wrong. Only the packed heightmap
+>    content is simply wrong. Only the packed heightmap
 >    set derived from *our* `heightmap.png` belongs here.
 >
 > **Before running the editor:** back up `game/map_data/` (or be ready to verify

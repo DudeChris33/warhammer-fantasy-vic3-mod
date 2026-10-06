@@ -47,7 +47,7 @@ those under "Not my lane".
 ## The pipeline you are reviewing
 
 Offline Python under `mapgen/`, not loaded by the game. Local-only `sources/`
-imagery (gitignored, third-party) → registration (`mapgen/registration/*.json`,
+imagery (gitignored) → registration (`mapgen/registration/*.json`,
 machine-fitted from seeds) → ingestion and reprojection (`mapgen/worldgen/`) →
 generators (`mapgen/generate_heightmap.py`, `generate_rivers.py`,
 `generate_state_labels.py`) → committed bitmaps (`map_data/heightmap.png`,

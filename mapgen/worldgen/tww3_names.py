@@ -12,7 +12,7 @@ canvas-space concern live in ``mapgen/tww3_name_lookup.py``, exactly as
 ``land_naming`` keeps its worksheet parse separate from the generator that
 places regions. That split is what lets ``run_fixture.py --check`` exercise all
 of this on a tiny synthetic table with no dependency on the real, gitignored
-third-party source.
+source.
 
 The file shape (a TWW3 table export)
 ------------------------------------

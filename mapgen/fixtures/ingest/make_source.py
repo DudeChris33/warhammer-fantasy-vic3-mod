@@ -3,7 +3,7 @@
 
 The S2 ingestion path (verify -> classify -> de-ink -> despeckle -> reproject ->
 segment) has to be regression-tested offline, and it cannot be tested against the
-real ``sources/``: those are third-party imagery, gitignored by decision, so a
+real ``sources/``: those are bulky imagery, gitignored by decision, so a
 fixture built on them would not run on a clean clone.
 
 So this paints a tiny world of our own pixels, deliberately containing every

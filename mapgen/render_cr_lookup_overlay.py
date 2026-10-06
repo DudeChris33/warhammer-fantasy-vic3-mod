@@ -5,7 +5,7 @@ draped onto this mod's canvas through the single whole-master
 
 **Dev-only, gitignored output.** Every artifact this writes lands in
 ``mapgen/derived/`` and is ignored there (``derived/*``); nothing it reads from
-``sources/cr_oldworld_campaign/`` — third-party CA/SEGA IP, itself gitignored —
+``sources/cr_oldworld_campaign/`` — itself gitignored —
 ever reaches a committed file. This script produces *evidence for a human*: a
 render Chris looks at, plus a printed fit report. It is not pipeline input, it
 emits no map data, and no committed bitmap or state file depends on it.
@@ -109,7 +109,7 @@ SOURCES_DIR = REPO_ROOT / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
-#: The third-party reference dataset. Gitignored (repo .gitignore line "sources/cr_oldworld_campaign")
+#: The reference dataset. Gitignored (repo .gitignore line "sources/cr_oldworld_campaign")
 #: and absent on most devices — see :func:`require_dataset` for the clean skip.
 DATASET_DIR = SOURCES_DIR / "cr_oldworld_campaign"
 LOOKUP_BMP = DATASET_DIR / "cr_oldworld_lookup" / "cr_oldworld_lookup.bmp"
@@ -200,7 +200,7 @@ def log(msg: str) -> None:
 # ---------------------------------------------------------------------------
 
 def require_dataset() -> None:
-    """Clean-skip when the third-party reference dataset is not on this device.
+    """Clean-skip when the reference dataset is not on this device.
 
     The ``validate_map._check_canon_cities`` idiom: a gitignored local working
     file's absence is the expected state on most devices, not an error, so this

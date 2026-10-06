@@ -3713,7 +3713,7 @@ def _selfcheck_tww3_names() -> None:
     the exact-hex point sample, on a synthetic table + array.
 
     Deliberately **independent of the real source**: the region table and the
-    lookup bitmap live under the gitignored, third-party
+    lookup bitmap live under the gitignored
     ``sources/cr_oldworld_campaign/``, which is absent on every device but
     Chris's, so a self-check that needed them would simply never run. The
     synthetic table reproduces the real file's exact shape — the header, the

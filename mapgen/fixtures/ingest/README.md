@@ -1,8 +1,7 @@
 # Fixture: synthetic ingestion source (S2)
 
 A tiny (256×128) **invented** whole-world image that drives the S2 source-driven
-front-end offline, with zero third-party IP and zero game dependency. Because the
-pixels are our own, this source **is committed** (unlike the real `sources/`), so
+front-end offline, with zero game dependency. Because it is tiny, this source **is committed** (unlike the real `sources/`), so
 the fixture runs on a clean clone.
 
 It exercises the *same* `worldgen.ingest` core the real generator uses — not a

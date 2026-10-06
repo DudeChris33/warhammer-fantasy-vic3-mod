@@ -14,7 +14,7 @@
 ## Key Decisions
 - Guardrails live only in the always-loaded `core.md`; guides load by `paths:` when a matching file is Read (Bash reads and sub-agents are checked in #5850's loading probe).
 - Land provinces are regenerated only through the generators; state borders and `sources/` stay Chris's to change.
-- Chris works on a single machine (2026-09-28); the rules mirror and Maestro knowledge are how conventions reach other agents and survive a machine change.
+- Chris works on a single machine (2026-09-28); the rules mirror and Maestro knowledge are how conventions reach other agents and survive a machine change, but both can be stale: verify against the repo before trusting them.
 
 ## In-Progress Work
 - #5850 docs restructure: commits A–D landed; memory triage, Maestro mirror re-sync and the audit report remain.

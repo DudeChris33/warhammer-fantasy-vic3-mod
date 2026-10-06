@@ -90,7 +90,7 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 CONFIG_DIR = TOOLS_DIR / "config"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
-#: Third-party reference data (CA/SEGA IP), gitignored and absent on most
+#: Reference data, gitignored and absent on most
 #: devices — see :func:`require_dataset` for the clean skip.
 DATASET_DIR = SOURCES_DIR / "cr_oldworld_campaign"
 LOOKUP_BMP = DATASET_DIR / "cr_oldworld_lookup" / "cr_oldworld_lookup.bmp"
@@ -176,7 +176,7 @@ def log(msg: str = "") -> None:
 # ---------------------------------------------------------------------------
 
 def require_dataset() -> None:
-    """Clean-skip when the third-party reference dataset is not on this device.
+    """Clean-skip when the reference dataset is not on this device.
 
     The ``validate_map._check_canon_cities`` idiom: a gitignored local working
     file's absence is the expected state on every device but Chris's, so this

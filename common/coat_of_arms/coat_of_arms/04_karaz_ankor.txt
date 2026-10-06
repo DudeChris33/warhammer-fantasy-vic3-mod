@@ -2,7 +2,7 @@
 # this file does NOT load. Bespoke content per board #3624 — the 18 Karaz Ankor
 # Dwarf hold tags (KAZ the formable, plus 17 karaks). Composed from vanilla
 # gfx/coat_of_arms/ art (patterns + colored_emblems, neither blanked by
-# replace_paths) plus two emblems reused from the permissioned Realms of Exether
+# replace_paths) plus two emblems reused from the Realms of Exether
 # sibling mod (gfx/coat_of_arms/colored_emblems/ce_roe_axes.dds and
 # ce_roe_mountain.dds, reuse grant 2026-09-07) and this mod's named_colors
 # palette (common/named_colors/00_coa_colors.txt). Every substitution/asset

@@ -5,7 +5,7 @@ same parser, same SHA-256 guard — so `--check` exercises the real verification
 path rather than a stub of it.
 
 Unlike the real manifest, the files it pins **are** committed: they are our own
-invented pixels (see `make_source.py`), so there is no third-party IP to keep out
+invented pixels (see `make_source.py`), so there is no bulk of PNGs to keep out
 of the repo and the fixture runs on a clean clone with no `sources/` present.
 
 If `make_source.py` is re-run, this manifest must be refreshed:
