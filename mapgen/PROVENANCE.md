@@ -40,6 +40,10 @@ sibling).
   (`canon: cr_oldworld_campaign/<slug>` for the Old World table; use the same
   shape for the expanded mod). Invented-by-ChaosRobie content is not Warhammer
   canon, so cite it as his rather than as `canon:`.
+- **Ranking:** the expanded whole-world dataset is trusted equally with the Old
+  World mod (Chris, 2026-10-05): above the stock Immortal Empires parchment for
+  interior boundaries and names within its footprint, never above the Terraqueous
+  Globe for coastline.
 - Permission is Chris's report of a private grant, not a licence file. If it is
   ever disputed, the fallback is the geometric-reference-only rule.
 

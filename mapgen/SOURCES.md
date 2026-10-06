@@ -99,6 +99,13 @@ at it. Use of ChaosRobie's content is permitted
 ([PROVENANCE.md](PROVENANCE.md#chaosrobies-mods-permission-granted)); the
 Creative Assembly layers inside it are not covered by that permission.
 
+**Trust ranking (Chris, 2026-10-05): this dataset ranks equal to the Old World
+mod.** Both are ChaosRobie's work and carry the same standing: higher precedence
+than the stock Immortal Empires parchment for interior boundaries and names
+inside their footprint, and the same name-citation convention. Neither ever
+outranks the Terraqueous Globe, which alone sets the coastline (see the top of
+this file).
+
 Pruned to the useful part on 2026-10-05 (3.0 GB to about 305 MB; the 3D assets,
 Lua, battle terrain, pathing and UI skins were deleted). What remains and why:
 
