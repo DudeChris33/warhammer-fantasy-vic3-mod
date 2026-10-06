@@ -169,7 +169,7 @@ REGISTRATION_DIR = TOOLS_DIR / "registration"
 DATASET_DIR = SOURCES_DIR / "cr_oldworld_campaign"
 #: The square, isotropically-scaled companion file this script actually uses —
 #: NOT the raw ``old_world_map.png`` (see module docstring for why).
-STRETCHED_PNG = DATASET_DIR / "campaign_maps" / "cr_oldworld_map_1" / "old_world_map - stretched.png"
+STRETCHED_PNG = SOURCES_DIR / "oldworld-first" / "old_world_map - stretched.png"
 LOOKUP_BMP = DATASET_DIR / "cr_oldworld_lookup" / "cr_oldworld_lookup.bmp"
 
 #: The reprojected globe that IS the canvas frame — the backdrop this drapes over.
@@ -267,7 +267,7 @@ def log(msg: str) -> None:
 # ---------------------------------------------------------------------------
 
 def resolve_stretched_source(arg: str | None) -> Path:
-    """``--source`` -> an absolute path, defaulting to the dataset's own file.
+    """``--source`` -> an absolute path, defaulting to the oldworld-first working copy.
 
     A relative ``arg`` is resolved against the repo root, so
     ``--source "sources/oldworld-first/old_world_map - stretched.png"`` (a
@@ -284,9 +284,9 @@ def resolve_stretched_source(arg: str | None) -> Path:
 def source_tag(path: Path) -> str:
     """Output-filename suffix distinguishing a non-default ``--source``.
 
-    Empty for the dataset's own file (unchanged filenames from this render's
+    Empty for the default file (unchanged filenames from this render's
     first version); otherwise the source's parent folder name, so a
-    ``--source`` override and the dataset's own copy never collide on disk.
+    ``--source`` override and the default copy never collide on disk.
     """
     if path == STRETCHED_PNG:
         return ""
