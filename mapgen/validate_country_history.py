@@ -51,7 +51,7 @@ DEFAULT_REGISTRY = REPO / "planning" / "tag_registry.md"
 TAX_LEVELS = ("very_low", "low", "medium", "high", "very_high")
 CONFIDENCE = ("high", "medium", "low")
 INSTITUTION_LEVELS = range(0, 6)
-START_YEAR = 2512
+START_YEAR = 2502
 
 # Vanilla folders are not in the mod's ``replace_paths`` for goods, institutions and trade
 # levels, so the mod does not carry them. When neither ``--vanilla`` nor the game root has

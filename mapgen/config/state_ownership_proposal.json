@@ -1,6 +1,6 @@
 {
- "_comment": "Bootstrap proposal for the starting ownership (start date 2512 IC): one entry per drawn land state. Input to mapgen/render_state_ownership.py only; the painted mapgen/config/state_ownership.png is the source of truth and supersedes this once repainted. owner = a tag from state_ownership_legend.json or 'unowned'; a divided state would use {'split': {province_hex: tag}} instead (none proposed). confidence: canon = registry row / hub name states it; inferred = placement judgement.",
- "start_year": 2512,
+ "_comment": "Bootstrap proposal for the starting ownership (start date 2502 IC): one entry per drawn land state. Input to mapgen/render_state_ownership.py only; the painted mapgen/config/state_ownership.png is the source of truth and supersedes this once repainted. owner = a tag from state_ownership_legend.json or 'unowned'; a divided state would use {'split': {province_hex: tag}} instead (none proposed). confidence: canon = registry row / hub name states it; inferred = placement judgement.",
+ "start_year": 2502,
  "states": {
   "STATE_AGRILDRIN": {
    "owner": "KAK",
@@ -761,7 +761,7 @@
   "STATE_KARAG_NAR": {
    "owner": "KEP",
    "confidence": "inferred",
-   "note": "capital collision: Karak Eight Peaks is held by Skarsnik (CRM) in 2512; KEP gets the neighbouring outposts"
+   "note": "capital collision: Karak Eight Peaks is held by Skarsnik (CRM) in 2502; KEP gets the neighbouring outposts"
   },
   "STATE_KARAG_ZIFLIN": {
    "owner": "CRM",
@@ -770,7 +770,7 @@
   "STATE_KARAK_EIGHT_PEAKS": {
    "owner": "CRM",
    "confidence": "canon",
-   "note": "Skarsnik holds Karak Eight Peaks in 2512"
+   "note": "Skarsnik holds Karak Eight Peaks in 2502"
   },
   "STATE_KHARNOS_FOREST": {
    "owner": "BPR",
@@ -813,7 +813,7 @@
   "STATE_LAHMIA": {
    "owner": "LAH",
    "confidence": "canon",
-   "note": "Lahmia hub; era: Lahmia is a ruin in 2512, registry treats it as a live realm"
+   "note": "Lahmia hub; era: Lahmia is a ruin in 2502, registry treats it as a live realm"
   },
   "STATE_LOST_KHYPNIA": {
    "owner": "UVE",
@@ -1421,7 +1421,7 @@
   "STATE_THUNDER_PEAKS": {
    "owner": "DRZ",
    "confidence": "inferred",
-   "note": "capital collision: Karak Drazh is Black Crag, held by RFG in 2512; registry capital has no hub of its own"
+   "note": "capital collision: Karak Drazh is Black Crag, held by RFG in 2502; registry capital has no hub of its own"
   },
   "STATE_TOBARO": {
    "owner": "TOB",

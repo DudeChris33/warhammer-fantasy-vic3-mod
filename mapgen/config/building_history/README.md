@@ -1,6 +1,6 @@
 # Starting buildings (`mapgen/config/building_history/`)
 
-Hand-authored input for `mapgen/generate_building_history.py`, which writes `common/history/buildings/NN_<stem>.txt` (one file per `map_data/state_regions/NN_<stem>.txt`). Nothing here is game-read. The 2512 IC start date is fixed.
+Hand-authored input for `mapgen/generate_building_history.py`, which writes `common/history/buildings/NN_<stem>.txt` (one file per `map_data/state_regions/NN_<stem>.txt`). Nothing here is game-read. The 2502 IC start date is fixed.
 
 ## The tech gate (read this first)
 

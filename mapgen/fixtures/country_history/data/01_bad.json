@@ -96,7 +96,7 @@
         "lawgroup_distribution_of_power": "law_landed_voting",
         "lawgroup_land_reform": "law_serfdom"
       },
-      "next_election": "2511.5.5",
+      "next_election": "2501.5.5",
       "justify": {
         "laws.lawgroup_distribution_of_power": {
           "source": "fixture",

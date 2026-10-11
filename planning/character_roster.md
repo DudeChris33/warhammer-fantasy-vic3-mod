@@ -1,15 +1,15 @@
-# Character roster (start date 2512 IC)
+# Character roster (start date 2502 IC)
 
 Hand-authored starting characters, one template per character in `common/character_templates/<region>.txt` and one `create_character` per template in `common/history/characters/<region>.txt`. Display names are in `localization/english/wh_characters_l_english.yml`. **Not loaded in-game**: nothing here is tested; Chris still has to check `logs/error.log`.
 
 **Coverage:** 63 characters across 51 of 144 start tags (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`). The other 93 tags have no attested canon ruler and fall back to the culture-based `default` template.
 
-**Start date:** 2512 IC, from `mapgen/config/country_history/README.md`; no separate defines entry pins it.
+**Start date:** 2502 IC, from `mapgen/config/country_history/README.md`; no separate defines entry pins it.
 
 ## Research limits (read first)
 
 - The environment's egress proxy blocked `whfb.lexicanum.com` and `warhammerfantasy.fandom.com`, so no wiki page could be opened. Names and titles come from web-search snippets plus Army Book / WFRP knowledge. The `Source:` comments name the page or book but the pages were **not read in full**.
-- Confidence: **high** = a named holder of the title in tabletop canon, matched on at least two pointers; **medium** = one pointer, or title attested but 2512 holder is edition-dependent; **low** = one search snippet only, or edition conflict, or the ruler assignment is Claude's reading (flagged in the row's note).
+- Confidence: **high** = a named holder of the title in tabletop canon, matched on at least two pointers; **medium** = one pointer, or title attested but 2502 holder is edition-dependent; **low** = one search snippet only, or edition conflict, or the ruler assignment is Claude's reading (flagged in the row's note).
 - Every birth date is **inferred** from rough canon ages and is the least certain field. None comes from a canon birth year except where noted.
 - Tag rows below show the lowest confidence of that tag's characters.
 
@@ -79,7 +79,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | KOR | no canon ruler found | — | — | — | — |
 | KRD | no canon ruler found | — | — | — | — |
 | KRV | no canon ruler found | — | — | — | — |
-| KSV | Boris Bokha | Katarin Bokha | — | Warhammer Fantasy Wiki "Katarin" (Tzar Boris Bokha, father; https://warhammerfantasy.fandom.com/wiki/Katarin (ascends 2517 IC, so heir in 2512) | medium |
+| KSV | Boris Bokha | Katarin Bokha | — | Warhammer Fantasy Wiki "Katarin" (Tzar Boris Bokha, father; https://warhammerfantasy.fandom.com/wiki/Katarin (ascends 2517 IC, so heir in 2502) | medium |
 | KVE | no canon ruler found | — | — | — | — |
 | KVN | no canon ruler found | — | — | — | — |
 | KZF | no canon ruler found | — | — | — | — |
@@ -171,7 +171,7 @@ Left to the `default` template and procedural generation. No placeholder was aut
 - **ruined/abandoned Dwarf hold** (7): DRZ EKR GUN KVN KZF SLV VLG
 - **Skaven placeholder** (10): XSA XSB XSC XSD XSG XSH XSI XSJ XSK XSL
 
-Most of these are tribes, city-states, ducal or oblast seats and ruins that tabletop canon never names a 2512 ruler for. Marienburg (Directorate of Burgomeisters), Remas (triumvirate) and the Moot (council of Elders) have collective rule with no single named head.
+Most of these are tribes, city-states, ducal or oblast seats and ruins that tabletop canon never names a 2502 ruler for. Marienburg (Directorate of Burgomeisters), Remas (triumvirate) and the Moot (council of Elders) have collective rule with no single named head.
 
 ## Total War names
 
@@ -194,7 +194,7 @@ The mod's trait and ideology lists are vanilla's industrial-era set. Substitutio
 - **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Mannfred, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
 - **Heirs.** Only Katarin Bokha is an heir; tabletop names no heir for any other ruler.
 - **Admirals.** None authored: no named canon admiral is attached to any existing tag.
-- **Canon skipped (no matching tag or not alive at 2512):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2512), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2512 holder unclear), Ariel and Alarielle (no matching tag), Teclis and Tyrion (Ulthuan has no tags yet).
+- **Canon skipped (no matching tag or not alive at 2502):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2502), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2502 holder unclear), Ariel and Alarielle (no matching tag), Teclis and Tyrion (Ulthuan has no tags yet).
 - **Conflict flagged:** Zhufbar's king is Barundin Stoneheart in the novel *Grudgebearer* and Morgrim Ironforge in WFRP 4th ed.; Barundin was used. Talabecland's Helmut Feuerbach is shown at game start though canon has him go missing late in 2512.
 
 ## Cross-cutting notes for Chris

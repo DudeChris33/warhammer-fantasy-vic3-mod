@@ -50,7 +50,7 @@
       "laws": {
         "lawgroup_education_system": "law_no_schools"
       },
-      "source": "canon: WFB 8e Lizardmen / TW:WH3 (Xahutec, Oyxl, Tlanxla, Spektazuma, Tlax and Chupayotl are ruined, sunk or destroyed; Quetza is defiled by Clan Pestilens; Huatl is being refounded; Konquata is not yet founded at the 2512 start)",
+      "source": "canon: WFB 8e Lizardmen / TW:WH3 (Xahutec, Oyxl, Tlanxla, Spektazuma, Tlax and Chupayotl are ruined, sunk or destroyed; Quetza is defiled by Clan Pestilens; Huatl is being refounded; Konquata is not yet founded at the 2502 start)",
       "why": "A ruined or unfounded city has lost the temple-schools and a tier of organisation"
     },
     "norse_colony": {
@@ -106,7 +106,7 @@
     "KON": {
       "profile": "ruined_temple_city",
       "confidence": "low",
-      "note": "Registry says Konquata was founded in 2520 IC, after the 2512 start: keep the entry for the later generator but consider dropping the tag from the 2512 bookmark."
+      "note": "Registry says Konquata was founded in 2520 IC, after the 2502 start: keep the entry for the later generator but consider dropping the tag from the 2502 bookmark."
     },
     "OYX": {
       "profile": "ruined_temple_city",

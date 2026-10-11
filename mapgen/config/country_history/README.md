@@ -1,6 +1,6 @@
 # Starting-country data (`mapgen/config/country_history/`)
 
-Hand-authored input for a later generator that writes `common/history/countries/`. **Nothing here is game-read**: the files describe what each start tag looks like in **2512 IC** in this mod's Victoria 3 mechanics. `python mapgen/validate_country_history.py` is the gate; `python mapgen/run_fixture.py --check` regression-tests the validator against `mapgen/fixtures/country_history/`.
+Hand-authored input for a later generator that writes `common/history/countries/`. **Nothing here is game-read**: the files describe what each start tag looks like in **2502 IC** in this mod's Victoria 3 mechanics. `python mapgen/validate_country_history.py` is the gate; `python mapgen/run_fixture.py --check` regression-tests the validator against `mapgen/fixtures/country_history/`.
 
 - One file per region, `NN_<stem>.json`, the same `NN_<stem>` as `common/country_definitions/` and the region files in `planning/tag_registry.md` (17 files: 00–13, 17–19; regions 14–16 are deferred with no tags).
 - One entry per **start** tag of that region in the registry (223 in all). Formables are out of scope and rejected. Tags with no `common/country_definitions/` entry yet (most of 08–13 and 17–19) still get entries; the generator skips them until their definitions exist.
@@ -10,7 +10,7 @@ Hand-authored input for a later generator that writes `common/history/countries/
 
 Recorded **before** any tag was assigned. The tiers are the mod's `effect_starting_technology_tier_N_tech` helpers (`common/scripted_effects/00_starting_inventions.txt`), read as industrial-era terms: tier 1 is Victoria 3's 1836 cutting edge (railways, steam, staff colleges), tier 7 is nothing at all.
 
-| Tier | What the helper grants | Who sits here in 2512 IC, and why |
+| Tier | What the helper grants | Who sits here in 2502 IC, and why |
 |---|---|---|
 | 1 | Every era-1 tech + railways, mechanical tools, atmospheric engine, screw frigate, general staff, central archives, central banking… (13 era-2 techs) | **Chaos Dwarfs of Zharr-Naggrund only**: hell-forge industry, Iron Daemons, Hellcannons, Dreadquake mortars — the sole real industrial revolution in the setting |
 | 2 | Every era-1 tech + mechanical tools, atmospheric engine, dialectics, egalitarianism, corporate charters | **Dwarf engineer-holds** (Karaz-a-Karak, Zhufbar: gyrocopters, organ guns, the Engineers' Guild), **Nuln** (Imperial Gunnery School, steam tanks), the other Chaos Dwarf cities, the **Imperial court of Cathay** (rocket batteries, Sky-Lanterns) |
@@ -57,7 +57,7 @@ Ranking, high to low: Chaos Dwarfs > Dwarf engineer-holds ≈ Nuln ≈ Cathay's 
 | `taxed_goods` | good ids (no `g:`) → `add_taxed_goods = g:<good>` |
 | `tariffs` | optional `[{goods, kind: import\|export, level}]` → `set_<kind>_tariff_level` |
 | `institutions` | `{institution_id: 0–5}` → `set_institution_investment_level` |
-| `next_election` | `YYYY.M.D` ≥ 2512.1.1 → `set_next_election_date`; **present iff a voting-franchise law is active** (`null` in a tag removes an inherited date) |
+| `next_election` | `YYYY.M.D` ≥ 2502.1.1 → `set_next_election_date`; **present iff a voting-franchise law is active** (`null` in a tag removes an inherited date) |
 | `expected_government_type` | a `common/government_types/` id whose `possible` the laws must satisfy; the generator does not emit it |
 | `suggested_ig_names` | `{ig: "Setting name"}` — **note only**, no loc is authored here |
 | `source`, `why` | required on the baseline and on every profile |
@@ -111,4 +111,4 @@ Warhammer concepts the mod's laws, IGs and techs cannot express (reported, not a
 10. **Slave-raiding economies** (Druchii, Chaos Dwarfs, Norse) are one law group (`slavery`); no raid-driven income model.
 11. **Technology by branch.** One tier per tag cannot express Elves (high society, low industry), Ogres (gunpowder, no bureaucracy) or Cathay (rockets, closed borders): `extra_techs` patches a few cases only.
 
-Also flagged for the tag registry: `KON` (Konquata) is "founded 2520 IC", eight years **after** the 2512 start.
+Also flagged for the tag registry: `KON` (Konquata) is "founded 2520 IC", eighteen years **after** the 2502 start.

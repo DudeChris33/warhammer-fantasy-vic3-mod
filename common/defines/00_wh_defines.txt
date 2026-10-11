@@ -7,14 +7,14 @@ NEconomy = {
 	WORLD_MARKET_LOCATION = "xCC2EA6"
 }
 
-# START_DATE: vanilla is 1836.1.1; the setting starts in 2512 IC. END_DATE keeps vanilla's
+# START_DATE: vanilla is 1836.1.1; the setting starts in 2502 IC, right after Karl Franz is elected Emperor. END_DATE keeps vanilla's
 # 100-year span (vanilla 1936.1.1 would precede the start date).
 NGame = {
-	START_DATE = "2512.1.1"
+	START_DATE = "2502.1.1"
 	END_DATE = "2612.1.1"
 }
 
 # Vanilla 1836.1.1: laws count as enacted on the start date.
 NPolitics = {
-	DEFAULT_LAW_ACTIVATION_DATE = "2512.1.1"
+	DEFAULT_LAW_ACTIVATION_DATE = "2502.1.1"
 }

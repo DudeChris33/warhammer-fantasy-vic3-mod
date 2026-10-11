@@ -35,7 +35,7 @@ ERROR: 01_bad.json: FXG: tax_level repeats the baseline; drop it
 ERROR: 01_bad.json: FXG: non-default ruling_igs needs justify.ruling_igs.source and .why
 ERROR: 01_bad.json: FXG: justify.laws.lawgroup_taxation has no matching override
 ERROR: 01_bad.json: FXK: law_landed_voting is disallowed alongside law_serfdom
-ERROR: 01_bad.json: FXK: next_election '2511.5.5' must be YYYY.M.D on or after 2512.1.1
+ERROR: 01_bad.json: FXK: next_election '2501.5.5' must be YYYY.M.D on or after 2502.1.1
 ERROR: 01_bad.json: FXK: laws do not satisfy gov_absolute_kingdom's possible trigger
 ERROR: 01_bad.json: FXL: extra tech currency_standards needs one of democracy
 ERROR: 01_bad.json: FXL: law_estate_rights is locked: needs law law_republic (tier 3 + extra_techs + chosen laws do not provide it)

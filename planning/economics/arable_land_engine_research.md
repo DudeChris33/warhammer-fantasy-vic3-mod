@@ -18,7 +18,7 @@ What farmland does in the game, measured from primary sources: how `arable_land`
 
 Out of scope: assigning any state's value (#3677), the biome model, authoring buildings, production methods or state traits, and any change to the #4921 heatmap. Nothing here is loaded by the game.
 
-Every pops-per-arable figure is vanilla's own 1836 `common/history/pops` and is labelled as such; this mod starts 2512.1.1 (`common/defines/00_wh_defines.txt:13`).
+Every pops-per-arable figure is vanilla's own 1836 `common/history/pops` and is labelled as such; this mod starts 2502.1.1 (`common/defines/00_wh_defines.txt:13`).
 
 ## 2. Engine mechanics
 
