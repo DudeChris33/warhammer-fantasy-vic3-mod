@@ -1,8 +1,8 @@
 {
   "source": "cr_combi_expanded_map_ulthuan.png",
   "dots_source": "ulthuan_parchment.png",
-  "_comment": "PROVISIONAL until Chris accepts the render. Paired-anchor-dot registration of Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480) onto the canvas. Chris marked the same dots on two sheets in sources/ulthuan/ (2026-10-11): ulthuan_parchment.png (the whole parchment frame) and ulthuan_terraqueous.png (the top-left 4096x1808 of the reprojected globe, so its pixels are canvas pixels). Both sheets also carry a cyan (0,255,255) coastline trace, which is not a dot. The dots are 12 px, in six flat colours that repeat, so reseed_registration_dots.py pairs them by colour and then by position. 'source' names no file: the clean parchment is derived on demand from dots_source (worldgen.derive_crop), which also inpaints the cyan trace. Coverage is the convex hull of the dots, Ulthuan only.",
-  "_comment_dots_reseed": "Read by mapgen/reseed_registration_dots.py. master_original is the undotted parchment PNG; it sits in the unsearched sources/dots-claude/, hence the folder in the name.",
+  "_comment": "PROVISIONAL until Chris accepts the render. Paired-anchor-dot registration of Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480) onto the canvas. Chris marked the same dots on two sheets in sources/ulthuan/ (first 2026-10-11): ulthuan_parchment.png (the whole parchment frame) and ulthuan_terraqueous.png (the top-left 4096x1808 of the reprojected globe, so its pixels are canvas pixels). The dots are 12 px, in flat colours that repeat, so reseed_registration_dots.py pairs them by colour and then by position. Not dots: the cyan (0,255,255) coastline trace on both sheets, and the magenta (255,0,255) state-border network Chris drew on the parchment sheet. The four landmarks named c_ff00ff* are still magenta on the canvas sheet but were recoloured lavender (174,102,213) on the parchment sheet when magenta became the border colour; their positions did not move. 'source' names no file: the clean parchment is derived on demand from dots_source (worldgen.derive_crop), which inpaints the dots and the cyan trace and keeps keep_colours (the magenta borders). Coverage is the convex hull of the dots, Ulthuan only.",
+  "_comment_dots_reseed": "Read by mapgen/reseed_registration_dots.py. master_original is the undotted parchment PNG; it sits in the unsearched sources/dots-claude/, hence the folder in the name. chroma_floor is 100 because the lavender dots have chroma 111.",
   "dots_reseed": {
     "master_original": "dots-claude/cr_combi_expanded_map.png",
     "canvas_dots": "ulthuan_terraqueous.png",
@@ -16,9 +16,22 @@
         0,
         255,
         255
+      ],
+      [
+        255,
+        0,
+        255
       ]
-    ]
+    ],
+    "chroma_floor": 100
   },
+  "keep_colours": [
+    [
+      255,
+      0,
+      255
+    ]
+  ],
   "master_shape": [
     4480,
     6400
@@ -222,6 +235,94 @@
       "canvas": [
         2674.0,
         1559.0
+      ]
+    },
+    {
+      "name": "c_00ff00_6",
+      "source": [
+        1157.0,
+        1350.0
+      ],
+      "canvas": [
+        2917.0,
+        902.0
+      ]
+    },
+    {
+      "name": "c_00ff00_7",
+      "source": [
+        1336.0,
+        1516.0
+      ],
+      "canvas": [
+        3058.0,
+        1081.0
+      ]
+    },
+    {
+      "name": "c_ae66d5",
+      "source": [
+        1433.0,
+        1689.0
+      ],
+      "canvas": [
+        3120.0,
+        1201.0
+      ]
+    },
+    {
+      "name": "c_00ff00_8",
+      "source": [
+        633.0,
+        1784.0
+      ],
+      "canvas": [
+        2511.0,
+        1330.0
+      ]
+    },
+    {
+      "name": "c_b6317d_3",
+      "source": [
+        1029.0,
+        1899.0
+      ],
+      "canvas": [
+        2791.0,
+        1381.0
+      ]
+    },
+    {
+      "name": "c_00ff00_9",
+      "source": [
+        1400.0,
+        2014.0
+      ],
+      "canvas": [
+        3089.0,
+        1456.0
+      ]
+    },
+    {
+      "name": "c_00ff00_10",
+      "source": [
+        774.0,
+        2179.0
+      ],
+      "canvas": [
+        2654.0,
+        1603.0
+      ]
+    },
+    {
+      "name": "c_ae66d5_2",
+      "source": [
+        1303.0,
+        2190.0
+      ],
+      "canvas": [
+        3009.0,
+        1589.0
       ]
     }
   ],

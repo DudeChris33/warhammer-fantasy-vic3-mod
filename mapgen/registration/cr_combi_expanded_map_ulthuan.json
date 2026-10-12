@@ -6,7 +6,7 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL until Chris accepts the render. Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480), placed by mapgen/fit_registration.py --seed cr_combi_expanded_map_ulthuan from Chris's paired anchor dots (sources/ulthuan/, 2026-10-11): piecewise-affine over the Delaunay triangulation of the dots, exact at every dot, covering their convex hull only. Contributes no coastline (the mask stays the sole authority) and feeds no generator yet: this record only places the parchment. precedence and layer_precedence are provisional placement values. FIT: {\"landmarks\": 18, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 27}",
+  "notes": "PROVISIONAL until Chris accepts the render. Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480), placed by mapgen/fit_registration.py --seed cr_combi_expanded_map_ulthuan from Chris's paired anchor dots (sources/ulthuan/, 2026-10-11): piecewise-affine over the Delaunay triangulation of the dots, exact at every dot, covering their convex hull only. Contributes no coastline (the mask stays the sole authority) and feeds no generator yet: this record only places the parchment. precedence and layer_precedence are provisional placement values. FIT: {\"landmarks\": 26, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 41}",
   "source": "cr_combi_expanded_map_ulthuan.png",
   "projection": "piecewise_affine_warp",
   "master_shape": [
@@ -14,10 +14,10 @@
     6400
   ],
   "footprint": [
-    2514.0,
-    1002.0,
-    3062.0,
-    1591.0
+    2479.0,
+    870.0,
+    3152.0,
+    1635.0
   ],
   "control_points": [
     {
@@ -217,6 +217,94 @@
         1559.0
       ],
       "note": "c_0000ff_2"
+    },
+    {
+      "source": [
+        1157.0,
+        1350.0
+      ],
+      "canvas": [
+        2917.0,
+        902.0
+      ],
+      "note": "c_00ff00_6"
+    },
+    {
+      "source": [
+        1336.0,
+        1516.0
+      ],
+      "canvas": [
+        3058.0,
+        1081.0
+      ],
+      "note": "c_00ff00_7"
+    },
+    {
+      "source": [
+        1433.0,
+        1689.0
+      ],
+      "canvas": [
+        3120.0,
+        1201.0
+      ],
+      "note": "c_ae66d5"
+    },
+    {
+      "source": [
+        633.0,
+        1784.0
+      ],
+      "canvas": [
+        2511.0,
+        1330.0
+      ],
+      "note": "c_00ff00_8"
+    },
+    {
+      "source": [
+        1029.0,
+        1899.0
+      ],
+      "canvas": [
+        2791.0,
+        1381.0
+      ],
+      "note": "c_b6317d_3"
+    },
+    {
+      "source": [
+        1400.0,
+        2014.0
+      ],
+      "canvas": [
+        3089.0,
+        1456.0
+      ],
+      "note": "c_00ff00_9"
+    },
+    {
+      "source": [
+        774.0,
+        2179.0
+      ],
+      "canvas": [
+        2654.0,
+        1603.0
+      ],
+      "note": "c_00ff00_10"
+    },
+    {
+      "source": [
+        1303.0,
+        2190.0
+      ],
+      "canvas": [
+        3009.0,
+        1589.0
+      ],
+      "note": "c_ae66d5_2"
     }
   ]
 }

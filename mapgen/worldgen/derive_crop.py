@@ -50,8 +50,11 @@ def load_seed(stem: str, seed_dir: Path = SEED_DIR) -> dict:
         return json.load(fh)
 
 
-def detect_markers(rgb: np.ndarray, alpha: np.ndarray | None):
+def detect_markers(rgb: np.ndarray, alpha: np.ndarray | None, keep_colours=()):
     """Marker components by exact palette match.
+
+    ``keep_colours`` lists exact RGB triples that are in the palette but are
+    not dots (a border network drawn on the same sheet); they are left alone.
 
     Returns ``(marker_px_mask, components)`` where ``components`` is a list of
     ``{color, centroid_xy, n_px}`` for every kept (>= MIN_MARKER_PX) component,
@@ -64,6 +67,8 @@ def detect_markers(rgb: np.ndarray, alpha: np.ndarray | None):
     )
     nongray = ~((r == g) & (g == b))
     cand = in_palette & nongray
+    for kr, kg, kb in keep_colours:
+        cand &= ~((r == kr) & (g == kg) & (b == kb))
     if alpha is not None:
         cand &= alpha > 0
 
@@ -232,7 +237,9 @@ def derive_clean_source(rgb: np.ndarray, alpha: np.ndarray | None, seed: dict
     sources.load_source_image_rgba or an equivalent direct read returns
     them); `seed` is the parsed registration seed. No file I/O, no RNG — a
     pure, deterministic function of its inputs, so a caller re-runs it on
-    every load instead of caching a materialized copy (board #3570)."""
+    every load instead of caching a materialized copy (board #3570). A seed's
+    optional ``keep_colours`` (exact RGB triples) names same-sheet markup that
+    must survive into the result instead of being inpainted as dots."""
     h, w = rgb.shape[:2]
     mh, mw = (int(v) for v in seed["master_shape"])
     if (h, w) != (mh, mw):
@@ -240,7 +247,8 @@ def derive_clean_source(rgb: np.ndarray, alpha: np.ndarray | None, seed: dict
             f"dots sheet is {w}x{h}, seed master_shape says {mw}x{mh} — "
             f"a re-exported crop needs a fresh fit, not an inpaint"
         )
-    marker_mask, components = detect_markers(rgb, alpha)
+    keep = tuple(tuple(int(v) for v in c) for c in seed.get("keep_colours", ()))
+    marker_mask, components = detect_markers(rgb, alpha, keep)
     add_seed_sampled_colors(rgb, alpha, seed, marker_mask, components)
     if not components:
         raise SystemExit("no marker components detected — wrong file?")
