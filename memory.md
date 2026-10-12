@@ -12,7 +12,7 @@
 - Content epics in flight: bespoke coats of arms (#3621 children), lore hubs (#3663 children), impassable land (#3704).
 
 ## Key Decisions
-- Ulthuan is in scope (Chris, 2026-10-11). Not drawn yet, so it still ships as a placeholder; its boundary source is the expanded parchment via the provisional `cr_combi_expanded_map_ulthuan` dot warp (`sources/ulthuan/`).
+- Ulthuan is in scope (Chris, 2026-10-11). Not drawn yet, so it still ships as a placeholder; its boundary source is the expanded parchment via the `cr_combi_expanded_map_ulthuan` dot warp (`sources/ulthuan/`; fit accepted 2026-10-12). Next: Chris lays the accepted border proposal (`mapgen/adjust_ring_borders.py` output) into the canvas master's `borders` layer.
 - Start date is 2502.1.1 IC, right after Karl Franz is elected (Chris, 2026-10-11; was 2512); `common/defines/00_wh_defines.txt` is the source, END_DATE 2612.1.1.
 - Guardrails live only in the always-loaded `core.md`; guides load by `paths:` when a matching file is Read (Bash reads and sub-agents are checked in #5850's loading probe).
 - Land provinces are regenerated only through the generators; state borders and `sources/` stay Chris's to change.

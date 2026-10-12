@@ -6,7 +6,7 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL until Chris accepts the render. Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480), placed by mapgen/fit_registration.py --seed cr_combi_expanded_map_ulthuan from Chris's paired anchor dots (sources/ulthuan/, 2026-10-11): piecewise-affine over the Delaunay triangulation of the dots, exact at every dot, covering their convex hull only. Contributes no coastline (the mask stays the sole authority) and feeds no generator yet: this record only places the parchment. precedence and layer_precedence are provisional placement values. FIT: {\"landmarks\": 34, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 61}",
+  "notes": "Fit accepted by Chris on 2026-10-12. Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480), placed by mapgen/fit_registration.py --seed cr_combi_expanded_map_ulthuan from Chris's paired anchor dots (sources/ulthuan/, 2026-10-11): piecewise-affine over the Delaunay triangulation of the dots, exact at every dot, covering their convex hull only. Contributes no coastline (the mask stays the sole authority) and feeds no generator yet: this record only places the parchment. No generator reads precedence or layer_precedence yet. FIT: {\"landmarks\": 34, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 61}",
   "source": "cr_combi_expanded_map_ulthuan.png",
   "projection": "piecewise_affine_warp",
   "master_shape": [
