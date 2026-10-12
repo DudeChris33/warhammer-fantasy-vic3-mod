@@ -90,7 +90,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
 from worldgen import (land_economics, land_naming, land_state_numbering, raster,  # noqa: E402
-                      real_world_economics, schema)
+                      real_world_economics, schema, scope_additions)
 from worldgen.statefile import (  # noqa: E402
     ProvinceInfo,
     pick_hubs,
@@ -124,6 +124,9 @@ VANILLA_STATE_LOC_KEYS_PATH = TOOLS_DIR / "config" / "vanilla_state_loc_keys.txt
 STRATEGIC_COLORS_PATH = TOOLS_DIR / "config" / "strategic_region_colors.json"
 STRATEGIC_PNG_PATH = MOD_ROOT / "sources" / "terraqueous_globe_reprojected - strategic_regions.png"
 OUT_OF_SCOPE_CONTINENTS_PATH = TOOLS_DIR / "config" / "out_of_scope_continents.json"
+#: In-scope land outside the painted realms, with the realm each piece takes
+#: (worldgen.scope_additions); the same file generate_provinces.py reads.
+IN_SCOPE_ADDITIONS_PATH = TOOLS_DIR / "config" / "in_scope_additions.json"
 
 STATE_REGIONS_DIR = MOD_ROOT / "map_data" / "state_regions"
 STRATEGIC_REGIONS_DIR = MOD_ROOT / "common" / "strategic_regions"
@@ -540,6 +543,42 @@ def main(argv: list[str] | None = None) -> int:
     # nearest-neighbour among already-classified regions." A drawn region is
     # never left unclassified; only genuinely out-of-scope regions are.
     drawn_region_ids = {int(c["region"]) for c in land_regions["cells"] if c["kind"] == "drawn"}
+
+    # In-scope additions name their realm outright: the painting does not cover
+    # them, and where it does (Ulthuan sits inside its crop, unpainted) a stray
+    # vote or the nearest-neighbour fallback below would file them under an
+    # Old World realm.
+    addition_realms: dict[str, scope_additions.Realm] = {}
+    if IN_SCOPE_ADDITIONS_PATH.is_file():
+        try:
+            additions = scope_additions.load(IN_SCOPE_ADDITIONS_PATH, (CANVAS_W, CANVAS_H))
+            region_of_pixel = np.zeros(labels.shape, dtype=np.int64)
+            land_px = (labels >= 1) & (labels <= n_land)
+            region_of_pixel[land_px] = region_of[labels[land_px]]
+            added = scope_additions.region_realms(region_of_pixel, additions)
+        except scope_additions.ScopeAdditionError as e:
+            raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: {e}")
+        painted = {f.realm for f in legend.fills}
+        clash = sorted(set(additions.realms) & painted)
+        if clash:
+            raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: realm(s) {clash} are already painted "
+                             f"realms in {STRATEGIC_COLORS_PATH.name}")
+        not_drawn = sorted(int(state_number[r]) for r in added if r not in drawn_region_ids)
+        if not_drawn:
+            raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: STATE number(s) {not_drawn} are taken by an "
+                             f"addition but were cut as placeholders - re-run generate_provinces.py")
+        for r, realm_name in added.items():
+            realm_def = additions.realms[realm_name]
+            if realm_def.file_stem not in STATE_FILE_STEMS:
+                raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: realm {realm_name!r} names file stem "
+                                 f"{realm_def.file_stem!r}, which has no map_data/state_regions file")
+            addition_realms[realm_name] = realm_def
+            assignments[r] = land_naming.RealmAssignment(
+                realm=realm_def.realm, file_stem=realm_def.file_stem, continent=realm_def.continent,
+                votes=0, top_fraction=0.0, margin=0.0)
+        log(f"in-scope additions: {len(added)} region(s) take a declared realm "
+            f"({sorted(addition_realms)})", t0)
+
     zero_vote_drawn = sorted(r for r in drawn_region_ids if assignments[r].realm is None)
     if zero_vote_drawn:
         classified_drawn = [r for r in drawn_region_ids if assignments[r].realm is not None]
@@ -684,6 +723,7 @@ def main(argv: list[str] | None = None) -> int:
     blocks_by_file: dict[str, list[str]] = {stem: [] for stem in STATE_FILE_STEMS}
     keys_by_realm: dict[str, list[str]] = {}
     continent_of_realm: dict[str, str] = {f.realm: f.continent for f in legend.fills}
+    continent_of_realm.update({r.realm: r.continent for r in addition_realms.values()})
     oos_keys: list[str] = []
     first_hub_by_realm: dict[str, raster.Color] = {}
     canon_names: dict[str, str] = {}

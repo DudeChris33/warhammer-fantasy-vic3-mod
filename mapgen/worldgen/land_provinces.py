@@ -273,6 +273,69 @@ def override_fused_labels(reg: np.ndarray, land: np.ndarray,
     return out
 
 
+#: The small-state prune line colour: exact pure yellow, no tolerance (the sheet
+#: is a flattened copy of the canvas master, so a tolerant test would catch art).
+PRUNE_RGB = (255, 255, 0)
+#: How far a prune line's end may sit from the land it points at.
+PRUNE_END_RADIUS = 8
+
+
+def prune_lines(rgba: np.ndarray) -> list[tuple[tuple[int, int], tuple[int, int]]]:
+    """The two ends of every prune line on the small-state prune sheet.
+
+    Chris draws one short pure-yellow line from a state too small to stand alone
+    to the neighbour it should join. Each connected yellow component is one line;
+    its ends are its two farthest-apart pixels. Returned in raster order of the
+    components, ``((ax, ay), (bx, by))`` in canvas px.
+    """
+    m = np.all(rgba[..., :3] == np.array(PRUNE_RGB, dtype=rgba.dtype), axis=-1)
+    if rgba.shape[-1] == 4:
+        m &= rgba[..., 3] > 0
+    lab, n = ndimage.label(m, structure=np.ones((3, 3), dtype=bool))
+    out = []
+    for sl, k in zip(ndimage.find_objects(lab), range(1, n + 1)):
+        ys, xs = np.nonzero(lab[sl] == k)
+        pts = np.stack([xs + sl[1].start, ys + sl[0].start], axis=1).astype(np.int64)
+        i = int(np.argmax(((pts - pts.mean(axis=0)) ** 2).sum(axis=1)))
+        j = int(np.argmax(((pts - pts[i]) ** 2).sum(axis=1)))
+        i = int(np.argmax(((pts - pts[j]) ** 2).sum(axis=1)))
+        a, b = pts[i], pts[j]
+        out.append(((int(a[0]), int(a[1])), (int(b[0]), int(b[1]))))
+    return out
+
+
+def prune_groups(n_regions: int, pairs: list[tuple[int, int]]
+                 ) -> tuple[np.ndarray, list[list[int]]]:
+    """Union the region ids each prune line joins.
+
+    Returns ``(remap, groups)``: ``remap[old_id]`` is the new region id, contiguous
+    ``1..R`` in the order of each group's lowest old id (``remap[0] == 0``), and
+    ``groups`` lists the old ids of every group of two or more. A chain of lines
+    (A-B, B-C) is one group.
+    """
+    parent = list(range(n_regions + 1))
+
+    def find(a: int) -> int:
+        while parent[a] != a:
+            parent[a] = parent[parent[a]]
+            a = parent[a]
+        return a
+
+    for a, b in pairs:
+        ra, rb = find(a), find(b)
+        if ra != rb:
+            parent[max(ra, rb)] = min(ra, rb)
+    roots = sorted({find(i) for i in range(1, n_regions + 1)})
+    new_of_root = {r: k for k, r in enumerate(roots, start=1)}
+    remap = np.zeros(n_regions + 1, dtype=np.int64)
+    members: dict[int, list[int]] = {}
+    for i in range(1, n_regions + 1):
+        r = find(i)
+        remap[i] = new_of_root[r]
+        members.setdefault(r, []).append(i)
+    return remap, [g for g in members.values() if len(g) > 1]
+
+
 #: How far :func:`apply_land_region_merges` searches outward from an anchor
 #: for a labelled (non-zero) region pixel, in case the exact stored pixel
 #: rounds onto a barrier/off-region gap.

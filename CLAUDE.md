@@ -2,7 +2,7 @@
 
 A total-conversion mod for Victoria 3 that reskins the base game into the Warhammer Fantasy setting, using Clausewitz script (`.txt`), the PDX GUI format (`.gui`) and localization YAML (`.yml`). The supported game version is `supported_game_version` in `.metadata/metadata.json`. The mod is multiplayer-synchronized (`multiplayer_synchronized` in the same file), so scripted content must stay deterministic across clients.
 
-**Scope.** The Old World and Ulthuan are in scope (Ulthuan added by Chris, 2026-10-11). Only the Old World land regions are drawn out so far: Ulthuan's states are not drawn yet, so it still ships as a placeholder region. All oceans are modelled globally; land outside the drawn Old World is emitted as placeholder regions (seeded from `mapgen/config/out_of_scope_continents.json`; `placeholder_regions` in `mapgen/derived/land_regions_index.json` counts them), not as playable content.
+**Scope.** The Old World, Ulthuan and the High Elf colonies are in scope (Ulthuan added by Chris on 2026-10-11, the colonies on 2026-10-12: islands off Lustria and the Southlands, the Gates of Calith and the Lost Isles of Elithis). All of it is drawn as states; the Ulthuan and colony states are still unnamed and unowned. The colonies and Ulthuan's islets are listed in `mapgen/config/in_scope_additions.json`, because the generator otherwise finds in-scope land by the density of state borders. All oceans are modelled globally; land outside the drawn regions is emitted as placeholder regions (seeded from `mapgen/config/out_of_scope_continents.json`; `placeholder_regions` in `mapgen/derived/land_regions_index.json` counts them), not as playable content.
 
 ## How guidance is organised
 

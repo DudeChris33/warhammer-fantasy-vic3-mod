@@ -46,7 +46,7 @@ through this script after an intentional source/mask change; never hand-edit
 Usage::
 
     python mapgen/generate_provinces.py
-    python mapgen/generate_provinces.py --target 6000 --merge-floor 1500
+    python mapgen/generate_provinces.py --target 6936 --merge-floor 1500
 """
 from __future__ import annotations
 
@@ -61,7 +61,7 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import cells, lakes, land_provinces, province_ids, raster, schema, sources  # noqa: E402
+from worldgen import cells, lakes, land_provinces, province_ids, raster, schema, scope_additions, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
@@ -90,6 +90,9 @@ ISLAND_OVERRIDES_SOURCE = sources.source_ref("island_overrides")
 #: rather than drawn. See land_provinces.apply_land_region_merges / the module
 #: docstring. Absent entirely, generation proceeds with no overrides.
 LAND_REGION_MERGES_CONFIG = TOOLS_DIR / "config" / "land_region_merges.json"
+#: In-scope land the border-density rule cannot find (islands with no interior
+#: border, caps cut off a mainland): see worldgen.scope_additions.
+IN_SCOPE_ADDITIONS_CONFIG = TOOLS_DIR / "config" / "in_scope_additions.json"
 #: Optional — the hand-authored lore-hub settlement list (board #3665). Each row
 #: pins a settlement to a canvas anchor pixel; a distinct province is seeded there
 #: and picked as that state's hub downstream. Absent entirely, generation proceeds
@@ -107,6 +110,9 @@ IMPASSABLE_SOURCE = sources.source_ref("impassable")
 #: dot -> province authority written from it (#3704), the hub_anchors_index.json idiom:
 #: the validator reads it to prove every city sits in a passable, reachable province.
 CITIES_SOURCE = sources.source_ref("cities")
+#: Chris's small-state prune sheet: a yellow line from a too-small state to the
+#: neighbour it joins. Applied after the province cut (see main).
+SMALL_STATE_PRUNE_SOURCE = sources.source_ref("small_state_prune")
 CANON_CITY_PROVINCES_INDEX_PATH = DERIVED_DIR / "canon_city_provinces_index.json"
 #: Two hub anchors of the SAME state closer than this (Euclidean px) are a hard
 #: error at generate time — defence-in-depth so a seeded piece can't collapse below
@@ -147,7 +153,14 @@ MERGE_FLOOR = 150
 #: the realised count clears the floor after the min-area sweep absorbs the finest
 #: Voronoi offcuts; at the measured 3.85M-px drawn zone this lands ~6,070 land
 #: provinces (~635 px each, close to vanilla's ~725 px/province globally).
-PROVINCE_TARGET = 6000
+#: The target is shared out by area, so it is really a density: when land comes
+#: into scope it has to rise with the drawn area, or every existing state loses
+#: provinces to pay for the new ones. Raised 6000 -> 6936 on 2026-10-12 when
+#: Ulthuan and the High Elf colonies came in (343 -> 421 drawn regions,
+#: 1,439,192 -> 1,657,506 px): 421 + (6000 - 343) * 1657506 / 1439192, which
+#: keeps the seats-per-px the Old World had. Left at 6000, 206 Old World states
+#: lost 372 provinces between them.
+PROVINCE_TARGET = 6936
 #: A province piece below this many px is swallowed into a same-region neighbour
 #: (never across a magenta boundary — the merge stays inside one region).
 MIN_PROVINCE_AREA = 120
@@ -366,6 +379,20 @@ def main(argv: list[str] | None = None) -> int:
     if drawn.shape[:2] != (CANVAS_H, CANVAS_W):
         raise SystemExit(f"{STATE_REGIONS_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
                          f"{drawn.shape[1]}x{drawn.shape[0]}")
+    # The borders layer is read by its name, so any paint on it is a border, whatever
+    # its colour: a stroke drawn in another colour (seen 2026-10-12, purple 127,0,255
+    # on the Lost Isles of Elithis) would otherwise be dropped without a word by the
+    # magenta test. A layer reference only; a flat image may carry other paint.
+    if sources.split_ref(STATE_REGIONS_SOURCE)[1] is not None:
+        painted = drawn.any(axis=-1)
+        off = painted & ~land_provinces.magenta_lines(drawn)
+        if off.any():
+            cols, counts = np.unique(drawn[off], axis=0, return_counts=True)
+            seen = ", ".join(f"{tuple(int(v) for v in c)} x{int(n):,}" for c, n in zip(cols[:4], counts[:4]))
+            drawn = drawn.copy()
+            drawn[off] = (255, 0, 255)
+            log(f"WARNING: {int(off.sum()):,} px on {STATE_REGIONS_SOURCE} are not magenta "
+                f"({seen}) - read as state borders anyway", t0)
 
     overrides_rgb = sources.load_source_image(ISLAND_OVERRIDES_SOURCE)
     if overrides_rgb.shape[:2] != (CANVAS_H, CANVAS_W):
@@ -384,6 +411,16 @@ def main(argv: list[str] | None = None) -> int:
         log(f"land region merge overrides: {len(merges)} judgement-call pair(s) applied", t0)
     mag = land_provinces.magenta_lines(drawn)
     dmask = land_provinces.drawn_mask(land, mag, WRAP_X, log=log)
+    # Guarded like land_region_merges.json: absent, the drawn zone is border density alone.
+    if IN_SCOPE_ADDITIONS_CONFIG.is_file():
+        try:
+            additions = scope_additions.load(IN_SCOPE_ADDITIONS_CONFIG, (CANVAS_W, CANVAS_H))
+            added = scope_additions.region_realms(np.where(land, reg, 0), additions)
+        except scope_additions.ScopeAdditionError as e:
+            raise SystemExit(f"{IN_SCOPE_ADDITIONS_CONFIG.name}: {e}")
+        dmask = dmask | (np.isin(reg, sorted(added)) & land)
+        log(f"in-scope additions: {len(additions.additions)} addition(s) bring "
+            f"{len(added)} region(s) into the drawn zone", t0)
 
     # Which region labels are island-override archipelagos (kept whole even when
     # disconnected). A disconnected drawn region NOT in this set is a merge-fused
@@ -475,6 +512,57 @@ def main(argv: list[str] | None = None) -> int:
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())
+
+    # Small-state prune. Applied to the finished cut, not to `reg` before it: the
+    # provinces are then exactly what they would be without the sheet, and only
+    # which state each belongs to changes. Merging before the cut would also turn a
+    # mainland state joined to an island-override archipelago into one keep-whole
+    # label, which the cut ships as a single province.
+    prune_rgba = sources.read_source_rgba(SMALL_STATE_PRUNE_SOURCE, allow_empty=True)
+    if prune_rgba is None:
+        log(f"small-state prune: {SMALL_STATE_PRUNE_SOURCE} not present locally - no merges", t0)
+    else:
+        if prune_rgba.shape[:2] != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{SMALL_STATE_PRUNE_SOURCE}: expected {CANVAS_W}x{CANVAS_H}")
+        post_reg = np.where(land_lab > 0, reg_of[land_lab], 0)   # city blobs can move a province
+        pairs, missed = [], []
+        for a, b in land_provinces.prune_lines(prune_rgba):
+            ra = land_provinces.resolve_anchor(post_reg, a[0], a[1], land_provinces.PRUNE_END_RADIUS)[0]
+            rb = land_provinces.resolve_anchor(post_reg, b[0], b[1], land_provinces.PRUNE_END_RADIUS)[0]
+            if ra <= 0 or rb <= 0:
+                missed.append((a, b))
+            elif ra != rb:
+                pairs.append((ra, rb))
+        del prune_rgba
+        if missed:
+            raise SystemExit(f"{SMALL_STATE_PRUNE_SOURCE}: {len(missed)} prune line(s) have an end more "
+                             f"than {land_provinces.PRUNE_END_RADIUS} px from land: {missed[:6]}")
+        n_reg = int(reg.max())
+        remap, groups = land_provinces.prune_groups(n_reg, pairs)
+        if groups:
+            old_areas = np.bincount(post_reg.ravel(), minlength=n_reg + 1)
+            reg_ph = np.zeros(n_reg + 1, dtype=bool)
+            reg_ph[reg_of[1:]] = is_placeholder[1:n_land + 1]
+            mixed = [g for g in groups if len({bool(reg_ph[i]) for i in g}) > 1]
+            if mixed:
+                raise SystemExit(f"{SMALL_STATE_PRUNE_SOURCE}: {len(mixed)} prune line(s) join in-scope land "
+                                 f"to out-of-scope land (old region ids {mixed[:4]})")
+            # The merged state keeps the hub rows of its largest member only: a state
+            # has one hub of each kind, and two members each brought their own set.
+            primary = {i: max(g, key=lambda j: (int(old_areas[j]), -j)) for g in groups for i in g}
+            kept_rows = []
+            for row in hub_rows:
+                owner = int(post_reg[row[2][1], row[2][0]])
+                if primary.get(owner, owner) == owner:
+                    kept_rows.append(row)
+            if len(kept_rows) != len(hub_rows):
+                log(f"small-state prune: {len(hub_rows) - len(kept_rows)} hub row(s) of absorbed "
+                    f"states dropped", t0)
+            hub_rows = kept_rows
+            reg = remap[reg]
+            reg_of = remap[reg_of]
+        log(f"small-state prune: {len(pairs)} line(s) merge {sum(len(g) for g in groups)} state(s) "
+            f"into {len(groups)}; {n_reg} -> {int(reg.max())} regions", t0)
 
     sea_lab = cells.read_labels(SEA_LABELS_PATH)
     if sea_lab.shape != (CANVAS_H, CANVAS_W):

@@ -29,6 +29,7 @@ import csv
 import json
 import sys
 from pathlib import Path
+from types import SimpleNamespace
 
 import numpy as np
 
@@ -92,7 +93,7 @@ def _state_names() -> dict[adj.Color, str]:
     return out
 
 
-def derive(*, need_worksheet: bool, load_rows: bool = True):
+def derive(*, need_worksheet: bool, load_rows: bool = True, pins=None):
     """Shared pipeline: (crossings, skipped, lines, rows, code_map) or a SystemExit."""
     for p in (PROVINCES_PNG, PROVINCES_INDEX):
         if not p.is_file():
@@ -111,7 +112,7 @@ def derive(*, need_worksheet: bool, load_rows: bool = True):
     rows = schema.load_adjacency_worksheet(WORKSHEET, (w, h)) if load_rows else []
     lines = adj.extract_lines(mask, map_config.WRAP_X)
     crossings, skipped = adj.classify_lines(
-        lines, code, kinds, _touching(code, map_config.WRAP_X), pins=rows,
+        lines, code, kinds, _touching(code, map_config.WRAP_X), pins=rows or pins or (),
         wrap_x=map_config.WRAP_X)
     return crossings, skipped, lines, rows, rgb, kinds
 
@@ -339,10 +340,17 @@ def sync() -> int:
     """Rewrite the worksheet in place so it matches the lines as drawn now, keeping
     every typed row (endpoints refreshed), appending blank stubs for new lines and
     parking unmatched rows under ``stale`` instead of deleting them."""
-    crossings, skipped, _, _, rgb, _ = derive(need_worksheet=False, load_rows=False)
-    h, w = rgb.shape[:2]
     data = json.loads(WORKSHEET.read_text(encoding="utf-8")) if WORKSHEET.is_file() else {}
     raw = data.get("adjacencies", [])
+    # A row that pins an ambiguous endpoint (a_color/b_color) must still pin it here,
+    # or its line stays unresolved and the row is parked as stale on every sync.
+    def _pin_colour(tok):
+        return None if not tok else (int(tok[1:3], 16), int(tok[3:5], 16), int(tok[5:7], 16))
+    pins = [SimpleNamespace(a=tuple(r["a"]), b=tuple(r["b"]), a_color=_pin_colour(r.get("a_color")),
+                            b_color=_pin_colour(r.get("b_color")))
+            for r in raw if r.get("a_color") or r.get("b_color")]
+    crossings, skipped, _, _, rgb, _ = derive(need_worksheet=False, load_rows=False, pins=pins)
+    h, w = rgb.shape[:2]
     rows, stale, errors, stats = adj.sync_worksheet(crossings, raw, w)
     if errors:
         print("refusing to sync - ambiguous matches (worksheet left untouched):")

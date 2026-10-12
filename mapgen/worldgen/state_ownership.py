@@ -379,6 +379,42 @@ def render(layout: Layout, owners: list[str], legend: Legend, border_width: int 
     return img
 
 
+def adopt_new_states(layout: Layout, painted: np.ndarray, legend: Legend,
+                     placeholder_states: set[str], border_width: int = 1,
+                     wrap_x: bool = True) -> tuple[np.ndarray, list[str]]:
+    """Paint as unowned every drawn state the map still shows as a placeholder.
+
+    Land that comes into scope is drawn on a map painted while it was out of
+    scope, so its states sit in the placeholder colour and the read refuses
+    them. A drawn state is adopted when none of its pixels carries an owner
+    colour other than the placeholder's: it is filled with the unowned colour
+    and its state borders are redrawn. Every other pixel is left as painted, so
+    a repaint is never disturbed. A drawn state that mixes the placeholder
+    colour with a real owner is not touched: that is a paint error for the read
+    to report. Returns ``(image, adopted state keys)``.
+    """
+    if painted.shape[:2] != (layout.height, layout.width):
+        raise OwnershipError(
+            f"painted map is {painted.shape[1]}x{painted.shape[0]}, expected {layout.width}x{layout.height}")
+    packed = _pack(painted)
+    n = len(layout.states)
+    si = layout.state_index
+    ph = packed == _pack1(legend.reserved[PLACEHOLDER])
+    other = np.isin(packed, np.array(
+        [k for k, o in legend.color_owner().items() if o != PLACEHOLDER], dtype=np.uint32))
+    n_ph = np.bincount(si[ph & (si > 0)], minlength=n + 1)
+    n_other = np.bincount(si[other & (si > 0)], minlength=n + 1)
+    adopted = [i for i, s in enumerate(layout.states)
+               if s.key not in placeholder_states and n_ph[i + 1] > 0 and n_other[i + 1] == 0]
+    if not adopted:
+        return painted, []
+    img = painted.copy()
+    mine = np.isin(si, np.array(adopted, dtype=np.int32) + 1)
+    img[mine] = legend.reserved[UNOWNED]
+    img[border_mask(si, border_width, wrap_x) & mine] = legend.reserved["border"]
+    return img, [layout.states[i].key for i in adopted]
+
+
 # ---------------------------------------------------------------------------
 # Read
 # ---------------------------------------------------------------------------

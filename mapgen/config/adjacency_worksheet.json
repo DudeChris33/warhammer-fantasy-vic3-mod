@@ -2,6 +2,18 @@
   "adjacencies": [
     {
       "a": [
+        5231,
+        2282
+      ],
+      "b": [
+        5227,
+        2259
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
         5081,
         1285
       ],
@@ -50,18 +62,6 @@
     },
     {
       "a": [
-        3097,
-        3036
-      ],
-      "b": [
-        3069,
-        3052
-      ],
-      "type": "sea",
-      "comment": "Isles of Dusk"
-    },
-    {
-      "a": [
         4983,
         1395
       ],
@@ -95,6 +95,30 @@
       ],
       "type": "sea",
       "comment": "North Kislev River"
+    },
+    {
+      "a": [
+        3106,
+        1391
+      ],
+      "b": [
+        3098,
+        1353
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3941,
+        1039
+      ],
+      "b": [
+        3946,
+        1030
+      ],
+      "type": "sea",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -146,6 +170,18 @@
     },
     {
       "a": [
+        2956,
+        1100
+      ],
+      "b": [
+        2933,
+        1118
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         2937,
         1076
       ],
@@ -158,6 +194,18 @@
     },
     {
       "a": [
+        2806,
+        1518
+      ],
+      "b": [
+        2804,
+        1534
+      ],
+      "type": "canal_straits_of_lothern",
+      "comment": "Straits of Lothern"
+    },
+    {
+      "a": [
         4322,
         783
       ],
@@ -167,18 +215,6 @@
       ],
       "type": "canal_upper_talabec",
       "comment": "Upper Talabec River"
-    },
-    {
-      "a": [
-        5147,
-        2357
-      ],
-      "b": [
-        5140,
-        2374
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -242,6 +278,30 @@
     },
     {
       "a": [
+        4446,
+        479
+      ],
+      "b": [
+        4487,
+        532
+      ],
+      "type": "sea",
+      "comment": "Hell Pit"
+    },
+    {
+      "a": [
+        4448,
+        477
+      ],
+      "b": [
+        4531,
+        524
+      ],
+      "type": "sea",
+      "comment": "Hell Pit"
+    },
+    {
+      "a": [
         4547,
         421
       ],
@@ -269,6 +329,30 @@
     },
     {
       "a": [
+        2560,
+        1412
+      ],
+      "b": [
+        2547,
+        1407
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        2550,
+        1183
+      ],
+      "b": [
+        2571,
+        1189
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         4659,
         647
       ],
@@ -287,18 +371,6 @@
       "b": [
         2979,
         1536
-      ],
-      "type": "sea",
-      "comment": "Yvresse"
-    },
-    {
-      "a": [
-        2947,
-        1529
-      ],
-      "b": [
-        2934,
-        1518
       ],
       "type": "sea",
       "comment": "Yvresse"
@@ -329,6 +401,42 @@
     },
     {
       "a": [
+        3002,
+        1139
+      ],
+      "b": [
+        2976,
+        1156
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3047,
+        1141
+      ],
+      "b": [
+        3055,
+        1171
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3050,
+        1140
+      ],
+      "b": [
+        3072,
+        1117
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         3902,
         1542
       ],
@@ -338,6 +446,18 @@
       ],
       "type": "canal_great_mortis_delta",
       "comment": "Great Mortis Delta"
+    },
+    {
+      "a": [
+        2834,
+        1458
+      ],
+      "b": [
+        2816,
+        1451
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -362,6 +482,30 @@
       ],
       "type": "canal_middle_talabec",
       "comment": "Middle Talabec River"
+    },
+    {
+      "a": [
+        2807,
+        1272
+      ],
+      "b": [
+        2802,
+        1295
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        2817,
+        1269
+      ],
+      "b": [
+        2841,
+        1287
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -425,6 +569,30 @@
     },
     {
       "a": [
+        2781,
+        1061
+      ],
+      "b": [
+        2781,
+        1030
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3003,
+        1324
+      ],
+      "b": [
+        3023,
+        1331
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         4331,
         3056
       ],
@@ -437,15 +605,15 @@
     },
     {
       "a": [
-        2762,
-        991
+        5481,
+        2228
       ],
       "b": [
-        2772,
-        974
+        5467,
+        2231
       ],
-      "type": "sea",
-      "comment": "Ulthuan Northern Isles"
+      "type": "canal_meeting_of_sun_and_stars",
+      "comment": "Meeting of Sun and Stars"
     },
     {
       "a": [
@@ -569,6 +737,30 @@
     },
     {
       "a": [
+        2661,
+        1338
+      ],
+      "b": [
+        2650,
+        1339
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        2996,
+        1254
+      ],
+      "b": [
+        3011,
+        1256
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         4382,
         672
       ],
@@ -578,6 +770,42 @@
       ],
       "type": "canal_lynsk",
       "comment": "River Lynsk"
+    },
+    {
+      "a": [
+        2290,
+        3003
+      ],
+      "b": [
+        2310,
+        2974
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
+        2287,
+        2999
+      ],
+      "b": [
+        2256,
+        3000
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
+        5292,
+        2492
+      ],
+      "b": [
+        5271,
+        2483
+      ],
+      "type": "canal_sun_island_southern_coast",
+      "comment": "Sun Island Southern Coast"
     },
     {
       "a": [
@@ -653,30 +881,6 @@
     },
     {
       "a": [
-        5238,
-        2287
-      ],
-      "b": [
-        5260,
-        2286
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
-    },
-    {
-      "a": [
-        5231,
-        2282
-      ],
-      "b": [
-        5227,
-        2259
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
-    },
-    {
-      "a": [
         5239,
         2295
       ],
@@ -686,6 +890,18 @@
       ],
       "type": "sea",
       "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5223,
+        2286
+      ],
+      "b": [
+        5188,
+        2307
+      ],
+      "type": "sea",
+      "comment": "Southlands"
     },
     {
       "a": [
@@ -734,30 +950,6 @@
       ],
       "type": "canal_sartosa",
       "comment": "Sartosa"
-    },
-    {
-      "a": [
-        5268,
-        2286
-      ],
-      "b": [
-        5261,
-        2262
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
-    },
-    {
-      "a": [
-        5272,
-        2292
-      ],
-      "b": [
-        5259,
-        2321
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -851,30 +1043,6 @@
     },
     {
       "a": [
-        4446,
-        479
-      ],
-      "b": [
-        4487,
-        532
-      ],
-      "type": "sea",
-      "comment": "Hell Pit"
-    },
-    {
-      "a": [
-        4448,
-        477
-      ],
-      "b": [
-        4531,
-        524
-      ],
-      "type": "sea",
-      "comment": "Hell Pit"
-    },
-    {
-      "a": [
         4151,
         898
       ],
@@ -887,6 +1055,18 @@
     },
     {
       "a": [
+        3037,
+        1272
+      ],
+      "b": [
+        3040,
+        1258
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         3072,
         1309
       ],
@@ -896,6 +1076,18 @@
       ],
       "type": "sea",
       "comment": "Clothique"
+    },
+    {
+      "a": [
+        3039,
+        1281
+      ],
+      "b": [
+        3030,
+        1292
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -959,18 +1151,6 @@
     },
     {
       "a": [
-        4247,
-        901
-      ],
-      "b": [
-        4251,
-        890
-      ],
-      "type": "sea",
-      "comment": "River Stir"
-    },
-    {
-      "a": [
         4419,
         757
       ],
@@ -1007,6 +1187,30 @@
     },
     {
       "a": [
+        5146,
+        2448
+      ],
+      "b": [
+        5138,
+        2409
+      ],
+      "type": "sea",
+      "comment": "Southlands"
+    },
+    {
+      "a": [
+        4255,
+        221
+      ],
+      "b": [
+        4239,
+        236
+      ],
+      "type": "sea",
+      "comment": "North Norsca"
+    },
+    {
+      "a": [
         3691,
         759
       ],
@@ -1016,6 +1220,30 @@
       ],
       "type": "sea",
       "comment": "Lyonesse"
+    },
+    {
+      "a": [
+        3048,
+        1215
+      ],
+      "b": [
+        3029,
+        1189
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3068,
+        1260
+      ],
+      "b": [
+        3086,
+        1260
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -1067,6 +1295,18 @@
     },
     {
       "a": [
+        5418,
+        2373
+      ],
+      "b": [
+        5427,
+        2396
+      ],
+      "type": "sea",
+      "comment": "Southlands"
+    },
+    {
+      "a": [
         4622,
         1544
       ],
@@ -1076,6 +1316,18 @@
       ],
       "type": "canal_bitter_sea",
       "comment": "Bitter Sea"
+    },
+    {
+      "a": [
+        6459,
+        2931
+      ],
+      "b": [
+        6493,
+        2925
+      ],
+      "type": "canal_gates_of_calith",
+      "comment": "Gates of Calith"
     },
     {
       "a": [
@@ -1091,6 +1343,18 @@
     },
     {
       "a": [
+        4247,
+        901
+      ],
+      "b": [
+        4251,
+        890
+      ],
+      "type": "sea",
+      "comment": "River Stir"
+    },
+    {
+      "a": [
         3802,
         1213
       ],
@@ -1100,6 +1364,42 @@
       ],
       "type": "sea",
       "comment": "East Estalian Isles"
+    },
+    {
+      "a": [
+        3062,
+        1323
+      ],
+      "b": [
+        3042,
+        1320
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        5147,
+        2357
+      ],
+      "b": [
+        5140,
+        2374
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        3097,
+        3036
+      ],
+      "b": [
+        3069,
+        3052
+      ],
+      "type": "sea",
+      "comment": "Isles of Dusk"
     },
     {
       "a": [
@@ -1139,6 +1439,31 @@
     },
     {
       "a": [
+        2731,
+        2421
+      ],
+      "b": [
+        2702,
+        2439
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
+        2768,
+        2434
+      ],
+      "b": [
+        2769,
+        2471
+      ],
+      "type": "sea",
+      "comment": "Lustria",
+      "b_color": "xD9ABC1"
+    },
+    {
+      "a": [
         4795,
         590
       ],
@@ -1151,6 +1476,30 @@
       "strait_type": "artificial",
       "land_a_color": "x89D453",
       "land_b_color": "xB150BE"
+    },
+    {
+      "a": [
+        2791,
+        1378
+      ],
+      "b": [
+        2827,
+        1362
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        2731,
+        1415
+      ],
+      "b": [
+        2714,
+        1428
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -1178,6 +1527,30 @@
     },
     {
       "a": [
+        2212,
+        2955
+      ],
+      "b": [
+        2217,
+        2979
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
+        2208,
+        2956
+      ],
+      "b": [
+        2186,
+        2961
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
         4432,
         602
       ],
@@ -1187,6 +1560,18 @@
       ],
       "type": "sea",
       "comment": "Praag"
+    },
+    {
+      "a": [
+        2762,
+        991
+      ],
+      "b": [
+        2772,
+        974
+      ],
+      "type": "sea",
+      "comment": "Ulthuan Northern Isles"
     },
     {
       "a": [
@@ -1274,6 +1659,18 @@
     },
     {
       "a": [
+        5159,
+        2374
+      ],
+      "b": [
+        5192,
+        2376
+      ],
+      "type": "sea",
+      "comment": "Southlands"
+    },
+    {
+      "a": [
         4012,
         1107
       ],
@@ -1289,6 +1686,18 @@
     },
     {
       "a": [
+        2894,
+        1079
+      ],
+      "b": [
+        2905,
+        1058
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         4541,
         433
       ],
@@ -1298,6 +1707,18 @@
       ],
       "type": "sea",
       "comment": "Drakefjord Bay"
+    },
+    {
+      "a": [
+        3716,
+        2598
+      ],
+      "b": [
+        3686,
+        2569
+      ],
+      "type": "sea",
+      "comment": "Isles of Doom"
     },
     {
       "a": [
@@ -1316,6 +1737,18 @@
     },
     {
       "a": [
+        2569,
+        1297
+      ],
+      "b": [
+        2583,
+        1303
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         4048,
         700
       ],
@@ -1325,18 +1758,6 @@
       ],
       "type": "sea",
       "comment": "Laurelorn Forest"
-    },
-    {
-      "a": [
-        3941,
-        1039
-      ],
-      "b": [
-        3946,
-        1030
-      ],
-      "type": "sea",
-      "comment": "River Brionne"
     },
     {
       "a": [
@@ -1355,15 +1776,15 @@
     },
     {
       "a": [
-        4255,
-        221
+        2219,
+        2989
       ],
       "b": [
-        4239,
-        236
+        2180,
+        2976
       ],
       "type": "sea",
-      "comment": "North Norsca"
+      "comment": "Lustria"
     },
     {
       "a": [
@@ -1400,6 +1821,18 @@
       ],
       "type": "sea",
       "comment": "Pfieldorf"
+    },
+    {
+      "a": [
+        2947,
+        1529
+      ],
+      "b": [
+        2934,
+        1518
+      ],
+      "type": "sea",
+      "comment": "Yvresse"
     },
     {
       "a": [
@@ -1945,6 +2378,66 @@
       ],
       "type": "sea",
       "comment": "Dragon Isles"
+    },
+    {
+      "a": [
+        5238,
+        2287
+      ],
+      "b": [
+        5260,
+        2286
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5255,
+        2509
+      ],
+      "b": [
+        5188,
+        2468
+      ],
+      "type": "sea",
+      "comment": "Southlands"
+    },
+    {
+      "a": [
+        5268,
+        2286
+      ],
+      "b": [
+        5261,
+        2262
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5272,
+        2292
+      ],
+      "b": [
+        5259,
+        2321
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5283,
+        2408
+      ],
+      "b": [
+        5262,
+        2415
+      ],
+      "type": "sea",
+      "comment": "Southlands"
     }
   ]
 }

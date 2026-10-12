@@ -22,6 +22,12 @@ Usage::
     python mapgen/render_state_ownership.py                # write mapgen/config/state_ownership.png
     python mapgen/render_state_ownership.py --review       # also mapgen/derived/state_ownership_review.png
     python mapgen/render_state_ownership.py --roundtrip    # render + read back in memory, compare, write nothing
+    python mapgen/render_state_ownership.py --adopt-new-states  # paint newly in-scope states unowned, in place
+
+``--adopt-new-states`` is the one mode that edits an existing painted map, and
+only where it cannot hold a repaint: a drawn state still wholly in the
+placeholder colour (land that came into scope after the map was painted) is
+filled with the unowned colour and gets its borders. Nothing else changes.
 """
 from __future__ import annotations
 
@@ -65,11 +71,28 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--scale", type=float, default=0.5, help="review render scale (default 0.5; 1.0 for legible numbers)")
     ap.add_argument("--review-out", type=Path, default=REVIEW_PATH)
     ap.add_argument("--roundtrip", action="store_true", help="render, read back in memory, compare; write nothing")
+    ap.add_argument("--adopt-new-states", action="store_true",
+                    help="in the existing --out, paint every drawn state still in the placeholder colour "
+                         "as unowned; touches nothing else")
     args = ap.parse_args(argv)
 
     try:
         legend = so.load_legend(args.legend)
         layout, placeholder, ids_anchor = so.load_inputs(MOD_ROOT)
+        if args.adopt_new_states:
+            if not args.out.exists():
+                print(f"render_state_ownership: {args.out} does not exist -- nothing to adopt into",
+                      file=sys.stderr)
+                return 1
+            img, adopted = so.adopt_new_states(layout, raster.read_rgb_png(args.out), legend,
+                                               placeholder, args.border_width)
+            if not adopted:
+                print("render_state_ownership: no drawn state is still in the placeholder colour.")
+                return 0
+            raster.write_rgb_png(args.out, img)
+            print(f"render_state_ownership: painted {len(adopted)} newly in-scope state(s) unowned "
+                  f"in {args.out}: {', '.join(adopted[:8])}{' ...' if len(adopted) > 8 else ''}")
+            return 0
         assignment = load_assignment(args.proposal)
         owners = so.province_owners(layout, assignment, placeholder, legend)
         img = so.render(layout, owners, legend, args.border_width)
