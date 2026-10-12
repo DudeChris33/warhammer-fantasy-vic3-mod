@@ -166,7 +166,7 @@ parchment onto the canvas over Ulthuan, each with its GIMP `.xcf` master:
   `terraqueous_globe_reprojected.png` at zero offset, so its pixels are canvas
   pixels.
 
-Both carry the same 31 dots (12 px, flat colours that repeat) and a cyan
+Both carry the same 34 dots (12 px, flat colours that repeat) and a cyan
 `(0,255,255)` coastline trace. The trace is markup, not a dot and not a
 coastline source: the mask stays the only coastline. The parchment sheet also
 carries Chris's magenta `(255,0,255)` state-border network for Ulthuan (added
@@ -217,14 +217,16 @@ parchment derived from the sheet (`worldgen.derive_crop`) inpaints the dots and
 the cyan trace but keeps that colour, so the borders ride through the warp
 onto the canvas in the render.
 
-State of the fit (2026-10-11, third pass, **provisional until Chris accepts
-the render**): 55 triangles over 31 dots, exact at every dot. Four orange
+State of the fit (2026-10-12, fourth pass, **provisional until Chris accepts
+the render**): 61 triangles over 34 dots, exact at every dot. Four orange
 `(255,127,0)` dots at the corners of a box around the island make the coverage
-a rectangle, canvas x 2511..3128, y 899..1612, holding all 8,003 parchment
-trace pixels (18 dots held 3,544; 26 held 6,981). The warped parchment coast
-lands a mean 6.8 px (p90 14.9, max 53.9) from the canvas trace. The inner
-sea's west shore is the loosest part: no dot sits on it. Nothing downstream
-reads the record yet.
+a rectangle, canvas x 2511..3128, y 899..1612, holding the whole parchment
+trace (18 dots held 3,544 of its pixels; 26 held 6,981). The fourth pass added
+dots on the inner sea's west and east shores and on the north-west coast. The
+warped parchment coast lands a mean 6.1 px (p90 12.5, max 53.9) from the
+canvas trace. What is left is the parchment drawing the land wider than the
+canvas does along the east coast and the inner sea's south-west shore.
+Nothing downstream reads the record yet.
 
 ## `history/`: finished reference artefacts (2026-10-05)
 
@@ -314,6 +316,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | climates.png | 8192x3616 | 33,383,489 | d00ccf68a0981eaedc88e1641a10e8ed7275853eec063e483c19c1a5299c4bc4 | TBD | TBD | no |
 | climates.xcf | n/a | 90,175,963 | e4cdce579ed4c28719366ccb04d108ae8a144fbea78bc4ff3b806da8a75abc4b | TBD | TBD | no |
 | colored_globe.jpg | 1680x1214 | 429,642 | 91e12fbb2938d2ec61ed78abd1d42ad10615a3d427068acd5830a9598bf214c0 | Fan cartography — David "Fahran" Mills "Warhammer World Map" (war-rvr.net, 2006), a whole-world relief/satellite render with a blue ocean. Added by the user 2026-08-13 | Whole-world COASTLINE silhouette (`blue_sea` kind: ocean is blue-dominant but brightness-varying). Balanced land/sea (0.366 vs mask 0.369) so it registers globally, unlike the land-heavy regional tiles. A DIFFERENT source from the terraqueous globe (different projection — a freehand rectangular/cylindrical relief render, ~1.38:1, closest to a latitude-cropped equirectangular but NOT an analytic projection, so it stays a `control_point_warp`, not an analytic inverse; identified 2026-08-15), registered against the mask for coastline agreement; mask stays the sole authority | yes |
+| cr_combi_expanded_map.xcf | n/a | 16,120,227 | 0aa2149f1c462bbb2016b8c28cb0210919d35ecbee106955136a06ac7860d570 | GIMP editable master, added by the user 2026-10-11 | A GIMP document of the expanded parchment kept beside the Ulthuan sheets; not read by any tool. Role inferred from the filename, Chris to confirm | no |
 | land_sea_mask.png | 8192x3616 | 260,735 | 506275815a55d16fe53d5166164fe33aa9ae0fb3a57c8d81316cf5cdb9b38827 | PNG export of `land_sea_mask.xcf`, now under `oldworld-first/` | The real land/sea mask in use — binarized first via `binarize_cyan_mask.py`; the `coastline_fill` `source_layers.json` ref (board #5399) | no |
 | land_sea_mask.xcf | n/a | 1,258,208 | 9240cd00ec723e26082811f55256671a8507be5b82ff83ca60d1ba102c6132f2 | GIMP editable master | Editable master of `land_sea_mask.png`; not read directly by any tool | no |
 | mega_detailed_old_world.jpg | n/a | 385,900,884 | 99b89752c24766a968cd4023a6450aa75bb34a3b01ac6ee6bcda3a698b7c7906 | Internet find | Primarily Old World town and forest placement; secondarily other Old World features | no |
@@ -343,7 +346,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | terraqueous_globe_reprojected - dots_7.xcf | n/a | 164,259,326 | 3d4af433759570c24695c6c020379cd3c138bb8f629821ead461e11f0cf2e55d | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Editable master of the dots_7.png export above | no |
 | terraqueous_globe_reprojected - full.ora | 8192x3616 | 91,250,555 | 4ed8eb125e3e9535a81b5041db8a8920dcc8fd70d3374654457618e7a50cfd4e | GIMP OpenRaster export of `terraqueous_globe_reprojected - full.xcf` | The canvas master (board #5399): layers `coasts`/`rivers`/`cities`/`borders`/`impassable`/`sea_zones`/`canvas`, read by name via `mapgen/config/source_layers.json` | no |
 | terraqueous_globe_reprojected - full.png | 8192x3616 | 33,388,369 | 08603875ec78d5114c264f98ef57fdd1f63a1e3237cfc9e21e3178a1eae2fb88 | TBD | TBD | no |
-| terraqueous_globe_reprojected - full.xcf | n/a | 108,532,085 | 2923af71793253323cc50dd22fa9c765a8154e4e7cfed0524d23e758bc760ce5 | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
+| terraqueous_globe_reprojected - full.xcf | n/a | 108,743,851 | 4d002c6beac3656c09a14e65e1f0f4941a2be425a7015b291af694be31bc4c2b | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
 | terraqueous_globe_reprojected - grayscale.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Grayscale copy of `terraqueous_globe_reprojected.png` | Same role as `terraqueous_globe_reprojected.png`, in grayscale | no |
 | terraqueous_globe_reprojected - grayscale_dots.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Dot-marked derivative of `terraqueous_globe_reprojected - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | terraqueous_globe_reprojected - grayscale_dots.xcf | n/a | 87,438,501 | cf32f13c5a5cd9c9ebd727d5ae6b358e5140a22f35253c2219d3c794b0391316 | TBD | TBD | no |
@@ -368,13 +371,13 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | tww3_old_world_mod_parchment.png | 4096x4096 | 8,332,865 | 93f5c7b4791d7a02b60eeb4ba96bf5abc66ad4d650978d1990b022840de903a3 | Fan cartography — "The Old World, all faction starting positions v3.0" | **Denser Old World boundary network** — a line chloropleth, markedly denser than IE over the same arc. Higher precedence inside a masked footprint; the four corner vignettes + the Galleon's Graveyard spiral are excluded (they take cartographic liberties — user-flagged) | no |
 | tww3_old_world_mod_parchment_cropped.png | 4096x4096 | 28,200,702 | 0f0e371c81d4428d719c4f995729a5077178031205b503784fff57e45b8d6af4 | Cropped by the user from `tww3_old_world_mod_parchment.png`, out-of-scope regions removed | Replaces `tww3_old_world_mod_parchment.png` as the baseline parchment reference wherever it's used, once the out-of-scope extent needs excluding | no |
 | tww3_states_per_strat_region.jpg | 2048x1593 | 1,112,706 | b8965b704a476a5e93276f217c17dc6b6135301c87564c36ebb6d181252303ca | Fan annotation of the IE parchment master - strategic regions outlined, named, and labelled with their Total War: Warhammer 3 state counts | **NAMED MACRO REGIONS** - the source that binds region names to geometry, without which none of the user's per-region requirements can be checked. 17 named regions; supersedes pizqenw9rd791.jpg for grouping. Frame alias of the twin (exact 0.553 rescale, now pointing at `tww3_ie_parchment.jpg`). Printed counts are a reference, not truth. **Re-added** after the August 2026 retirement — same bytes (SHA-256 confirmed), so registration is restored rather than re-derived | yes |
-| ulthuan_parchment.png | 6400x4480 | 56,463,555 | 312b830cce7d28cb70ee735ca1ace31cfb083adda29b655829430caa32e5fd3e | ChaosRobie's expanded Immortal Empires parchment (`cr_combi_expanded_map`, see the `cr_immortal_empires_expanded/` section), dot-marked by the user 2026-10-11 | Ulthuan paired-anchor-dot sheet, parchment side: the dots, a cyan trace of Ulthuan's coast and the magenta state-border network. `dots_source` of the `cr_combi_expanded_map_ulthuan` seed; the clean parchment is derived from it on demand | no |
-| ulthuan_parchment.xcf | n/a | 80,912,196 | 529f2fb5c1ae773569943d02896db4cd6d76e669d9d38d897cabf449b1376b11 | GIMP editable master | Editable master of `ulthuan_parchment.png`; not read by any tool | no |
-| ulthuan_terraqueous.png | 4096x1808 | 9,084,941 | 285140c21c34bb3d4423b7d75188c3562a200097ea4cfddd427e3023d9d2240c | Top-left 4096x1808 of `terraqueous_globe_reprojected.png` (canvas pixels, zero offset), dot-marked by the user 2026-10-11 | Ulthuan paired-anchor-dot sheet, canvas side: the same dots plus the cyan coast trace. `dots_reseed.canvas_dots` of the `cr_combi_expanded_map_ulthuan` seed | no |
-| ulthuan_terraqueous.xcf | n/a | 22,453,162 | d624a390670aeaf166a7e57b184aa20fce97f321c72cdeb992a6fd725e145d1b | GIMP editable master | Editable master of `ulthuan_terraqueous.png`; not read by any tool | no |
+| ulthuan_parchment.png | 6400x4480 | 56,463,651 | 7ab020f36ba96d4e4a2a858ba7dd3a2233008f5fc88debf1414d20114ab73f85 | ChaosRobie's expanded Immortal Empires parchment (`cr_combi_expanded_map`, see the `cr_immortal_empires_expanded/` section), dot-marked by the user 2026-10-11 | Ulthuan paired-anchor-dot sheet, parchment side: the dots, a cyan trace of Ulthuan's coast and the magenta state-border network. `dots_source` of the `cr_combi_expanded_map_ulthuan` seed; the clean parchment is derived from it on demand | no |
+| ulthuan_parchment.xcf | n/a | 80,912,404 | fc0b1ffa17f366ac7fbe8b1b4106f5f20e0c7166deaaf73b3fe878aa5fdc05e1 | GIMP editable master | Editable master of `ulthuan_parchment.png`; not read by any tool | no |
+| ulthuan_terraqueous.png | 4096x1808 | 9,085,020 | 3c3860b49013dde1ccaa987ef9cd9f7c0394f3b7c3d91f35130e533a91c92aea | Top-left 4096x1808 of `terraqueous_globe_reprojected.png` (canvas pixels, zero offset), dot-marked by the user 2026-10-11 | Ulthuan paired-anchor-dot sheet, canvas side: the same dots plus the cyan coast trace. `dots_reseed.canvas_dots` of the `cr_combi_expanded_map_ulthuan` seed | no |
+| ulthuan_terraqueous.xcf | n/a | 22,453,440 | 6ce416001974149b7da122cc90c9f0414ce20975b8e525332c7e1a7afa88b40d | GIMP editable master | Editable master of `ulthuan_terraqueous.png`; not read by any tool | no |
 | warhammer-world-map-8k.png | 4389x2029 | 1,787,168 | 81d3c4150a7df1dc345dfa9186b8d14d110278b4679038a5a7a8fc3f4fc68055 | TBD | TBD | no |
 | white_dwarf_world_map.png | 4524x3093 | 1,960,224 | c5a4c6708600fedbfe404c59a7c8d6ab5745eea6e4d35a28180ef13932b37be7 | Games Workshop — official Warhammer world map (boxed / White Dwarf fold-out poster; the sheet prints "© Games Workshop Ltd 2000–2004" and "Product code 60440199034"). Fold seams visible | **Projection: oval pseudocylindrical, flattened-pole (Winkel Tripel / Robinson / Natural Earth family — NOT pointed-pole Mollweide/Aitoff)** — identified 2026-08-15. The world's printed neat-line is a smooth arc bowing down to clipped corners, ~360° of longitude wrapping (HUNG at both far edges); the broad clipped top is a pole line, not a point. Same oval family the terraqueous NE-II globe reproduces. Manifest/naming/extent reference only; unregistered — a fit would try the `natural_earth_2` kind, falling back to a `control_point_warp` if its oval isn't exactly NE-II | no |
-| winds_and_currents.xcf | n/a | 89,467,948 | 774ae922cf9a120b8c80afe90eb84d73500d35f56b2d083df9a279e9910fe75f | TBD | TBD | no |
+| winds_and_currents.xcf | n/a | 89,471,432 | 76f92587b9aba25ae401ece2e4de0cfcbb8fb327a0b6d4606856716b0ff49cf9 | TBD | TBD | no |
 <!-- MANIFEST:END -->
 
 ## Local organisation: descriptive filenames
