@@ -45,11 +45,6 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_LAND_154 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
 	s:STATE_LAND_155 = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }

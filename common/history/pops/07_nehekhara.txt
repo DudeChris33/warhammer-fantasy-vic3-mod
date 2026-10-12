@@ -21,6 +21,9 @@ POPS = {
 		}
 	}
 	s:STATE_MORTIS_TARN = {
+		region_state:NUM = {
+			create_pop = { culture = nehekharan size = 9792 }
+		}
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}
@@ -47,7 +50,7 @@ POPS = {
 	}
 	s:STATE_THE_SCARAB_CITY = {
 		region_state:NUM = {
-			create_pop = { culture = nehekharan size = 200000 }
+			create_pop = { culture = nehekharan size = 190208 }
 		}
 	}
 	s:STATE_UPPER_ASH_RIVER = {

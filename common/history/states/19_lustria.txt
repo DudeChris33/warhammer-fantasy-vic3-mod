@@ -39,25 +39,19 @@ STATES = {
 	s:STATE_LAND_149 = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { xA4E560 }
+			owned_provinces = { x06ADE7 x266144 x34A57C x7F58A6 x8D60B7 x966E03 xA4E560 xBBC798 xC0FE84 xE1212D xE9F252 xF1A8B8 }
 		}
 	}
 	s:STATE_LAND_150 = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { xFDDCC2 }
+			owned_provinces = { x2ADA15 x720EB0 x9AE6D4 xC9118E xD9ABC1 xFCAF5B xFDDCC2 }
 		}
 	}
 	s:STATE_LAND_151 = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x84FEDE }
-		}
-	}
-	s:STATE_LAND_154 = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { x06ADE7 }
 		}
 	}
 	s:STATE_LAND_155 = {

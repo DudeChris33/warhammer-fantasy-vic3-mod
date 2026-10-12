@@ -148,7 +148,7 @@ canal_blades = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x06DC39
-	second_land_endpoint = x6FAFB3
+	second_land_endpoint = xC0A1E0
 
 	first_sea_endpoint = x4DDDAF
 	second_sea_endpoint = xAFA636
@@ -271,6 +271,19 @@ canal_erengrad = {
 	second_sea_endpoint = xAFA636
 }
 
+canal_gates_of_calith = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x1F68F9
+	second_land_endpoint = x56A0FF
+
+	first_sea_endpoint = x75C966
+	second_sea_endpoint = x8CDEC3
+}
+
 canal_great_mortis_delta = {
 	type = natural
 
@@ -303,8 +316,8 @@ canal_isle_of_dawn = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x431CD9
-	second_land_endpoint = x4AA4ED
+	first_land_endpoint = x4AA4ED
+	second_land_endpoint = xFEB687
 
 	first_sea_endpoint = x2B163C
 	second_sea_endpoint = xC94DB5
@@ -316,7 +329,7 @@ canal_isles_of_dusk = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = xA4E560
+	first_land_endpoint = x34A57C
 	second_land_endpoint = xC51AB1
 
 	first_sea_endpoint = x506FD1
@@ -402,13 +415,26 @@ canal_marienburg = {
 	second_sea_endpoint = xCF8CB8
 }
 
+canal_meeting_of_sun_and_stars = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x6DE981
+	second_land_endpoint = xC51AB1
+
+	first_sea_endpoint = x2D2B3D
+	second_sea_endpoint = xE27813
+}
+
 canal_middle_talabec = {
 	type = natural
 
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = xB6957F
+	first_land_endpoint = xC3DF75
 	second_land_endpoint = xDED005
 
 	first_sea_endpoint = x231107
@@ -492,6 +518,32 @@ canal_sartosa = {
 
 	first_sea_endpoint = x46559B
 	second_sea_endpoint = x9F4CFD
+}
+
+canal_straits_of_lothern = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x1066A6
+	second_land_endpoint = xE23BEC
+
+	first_sea_endpoint = x09E6A9
+	second_sea_endpoint = x8B95B2
+}
+
+canal_sun_island_southern_coast = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x6DE981
+	second_land_endpoint = xACCA18
+
+	first_sea_endpoint = x3ECD87
+	second_sea_endpoint = xAEDA46
 }
 
 canal_upper_talabec = {

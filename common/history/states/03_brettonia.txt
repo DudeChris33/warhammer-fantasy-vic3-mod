@@ -11,7 +11,7 @@ STATES = {
 	s:STATE_AQUITAINE = {
 		create_state = {
 			country = c:AQU
-			owned_provinces = { x3233D7 x5306C6 x578D6C x5912A4 x62863A x6EA2C9 x72DF73 xB955F3 xDEAF88 xF5C4E5 }
+			owned_provinces = { x5306C6 x578D6C x5912A4 x62863A x6EA2C9 x6F4067 x72DF73 xB955F3 xDEAF88 xF5C4E5 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -27,7 +27,7 @@ STATES = {
 	s:STATE_ARTOIS = {
 		create_state = {
 			country = c:ART
-			owned_provinces = { x08D0BD x1714F5 x2E2A52 x5383E7 x78DD7C x7BB098 x8EF897 xB54C6E xCC61CB xDAA603 xF1BB60 }
+			owned_provinces = { x08D0BD x1714F5 x5383E7 x78DD7C x7BB098 x8EF897 xB54C6E xCC61CB xDAA603 xE27CE6 xF1BB60 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -35,7 +35,7 @@ STATES = {
 	s:STATE_BASTONNE = {
 		create_state = {
 			country = c:BAS
-			owned_provinces = { x21AC4C x2B8A5B x38C1A9 x4FD706 x574C72 x5E1B3E x75309B xB19F8D xB6E44E xD6F922 xE53D5A xFC52B7 }
+			owned_provinces = { x21AC4C x2B8A5B x4FD706 x574C72 x5E1B3E x75309B xB19F8D xD6F922 xE53D5A xE86D1A xFC52B7 xFF8277 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -43,7 +43,7 @@ STATES = {
 	s:STATE_BORDELEAUX = {
 		create_state = {
 			country = c:BOR
-			owned_provinces = { x353072 x36ACA8 x3AA858 x4DC205 x64D762 x731B9A x74EFA1 x8A30F7 xAF8A8C xD367EB xD4E421 xD8DFD1 xEDFBD7 }
+			owned_provinces = { x0787AC x36ACA8 x3AA858 x4DC205 x64D762 x731B9A x74EFA1 x8A30F7 xA26113 xAF8A8C xD367EB xD4E421 xEDFBD7 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -83,7 +83,7 @@ STATES = {
 	s:STATE_CASTLE_SANGASSE = {
 		create_state = {
 			country = c:BAS
-			owned_provinces = { x0A96EF x4705E1 x8374D3 x9A8A30 xB2AC77 xBFE3C5 xD223AD }
+			owned_provinces = { x0A96EF x4705E1 x8374D3 x9A8A30 xA4683F xBFE3C5 xD223AD }
 		}
 
 		add_homeland = cu:bretonnian
@@ -91,7 +91,7 @@ STATES = {
 	s:STATE_COURONNE = {
 		create_state = {
 			country = c:COU
-			owned_provinces = { x0B348D x0CDA42 x1405B2 x2249EA x273FDC x308E22 x395F47 x47A37F x63AECE x75CE39 x841271 x9256A9 x9B27CE xA01DC0 xA59EA8 xA96C06 xB048A7 xC08163 xC1C5A1 xE5DAF8 xF1306A xF41F30 }
+			owned_provinces = { x0B348D x0CCC6D x0CDA42 x1405B2 x2249EA x395F47 x47A37F x63AECE x75CE39 x841271 x9256A9 x9B27CE xA01DC0 xA59EA8 xA96C06 xB048A7 xC08163 xC1C5A1 xD05D7B xE5DAF8 xF1306A xF41F30 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -99,7 +99,7 @@ STATES = {
 	s:STATE_GISOREUX = {
 		create_state = {
 			country = c:GIS
-			owned_provinces = { x02D2B4 x047869 x0AE5BE x1BFD12 x21FB1B x4754B0 x5E6A0D x6CAE45 x83C3A2 x9C915C xA91D37 xC03294 xFCA186 }
+			owned_provinces = { x02D2B4 x047869 x0AE5BE x1B8DC6 x1BFD12 x21FB1B x4754B0 x6CAE45 x83C3A2 x9C915C xA91D37 xC03294 xFCA186 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -123,7 +123,7 @@ STATES = {
 	s:STATE_GRAVE_OF_CUILEUX = {
 		create_state = {
 			country = c:QUE
-			owned_provinces = { x07672F x26EC3A x2CC0C4 x3591E9 x43D621 x5AEB7E x5BD7EB x692FB6 x7200DB x72ED48 x7CE701 x804513 x93FC5E x975A70 x9EF52C x9FEA9B xCAF83D xD3C962 xD4B5CF xE20D9A xF922F7 }
+			owned_provinces = { x07672F x0804CD x164905 x26EC3A x2CC0C4 x3591E9 x43D621 x5AEB7E x692FB6 x7200DB x72ED48 x7CE701 x804513 x93FC5E x975A70 x9EF52C x9FEA9B xCAF83D xD4B5CF xE20D9A xF922F7 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -131,7 +131,7 @@ STATES = {
 	s:STATE_HALLS_OF_EQUOS = {
 		create_state = {
 			country = c:TLS
-			owned_provinces = { x39DC68 x689FED }
+			owned_provinces = { x689FED xA94B89 }
 		}
 
 		add_homeland = cu:wood_elf
@@ -139,7 +139,7 @@ STATES = {
 	s:STATE_KING_S_GLADE = {
 		create_state = {
 			country = c:TLS
-			owned_provinces = { x04863E x826CBC x98DFA8 xA2BDB7 xDB71F3 xF34E6D }
+			owned_provinces = { x04863E x3E34BC x826CBC xA2BDB7 xDB71F3 xF34E6D }
 		}
 
 		add_homeland = cu:wood_elf
@@ -163,7 +163,7 @@ STATES = {
 	s:STATE_L_ANGUILLE = {
 		create_state = {
 			country = c:LAN
-			owned_provinces = { x0C9E1B x0DC6AF x24DC0C x374A46 x3BF169 x4A35A1 x5E3BBB x614AFE x86A493 x94E8CB x9DB9F0 xABFE28 xC31385 xF6B152 xFA018F xFB45CD xFC7334 }
+			owned_provinces = { x054459 x0C9E1B x0DC6AF x24DC0C x4A35A1 x5E3BBB x614AFE x86A493 x94E8CB x9DB9F0 xABFE28 xB1C00A xC31385 xF6B152 xFA018F xFB45CD xFC7334 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -171,7 +171,7 @@ STATES = {
 	s:STATE_MARCHES_OF_COURONNE = {
 		create_state = {
 			country = c:COU
-			owned_provinces = { x276059 x29060E x401B6B x4E5FA3 x657500 x771277 xA1E3F2 xABA184 xC65EEF xC73D87 xCAA96E xEB4E0B xEC971C }
+			owned_provinces = { x276059 x29060E x301101 x401B6B x657500 x771277 xA1E3F2 xABA184 xC65EEF xC73D87 xCAA96E xEC971C xF3A20F }
 		}
 
 		add_homeland = cu:bretonnian
@@ -179,7 +179,7 @@ STATES = {
 	s:STATE_MASSIF_ORCAL = {
 		create_state = {
 			country = c:MOR
-			owned_provinces = { x002DEA x174347 x25877F x33CBB7 x3F6FF8 x4AE114 x61F671 x66BE11 x703AA9 xAE1329 xDAD455 xF0E19B }
+			owned_provinces = { x002DEA x13B6E3 x174347 x25877F x33CBB7 x3F6FF8 x4AE114 x5E6A0D x61F671 x703AA9 xDAD455 xF0E19B }
 		}
 
 		add_homeland = cu:orc
@@ -196,7 +196,7 @@ STATES = {
 	s:STATE_MOUSILLON = {
 		create_state = {
 			country = c:MOU
-			owned_provinces = { x0804CD x0E51A5 x164905 x52B7F7 x5B891C x8F26E9 xA63C46 xBD51A3 xCB95DB xDF3A7E xDF3F51 xEEAC1D }
+			owned_provinces = { x0E51A5 x48EC90 x52B7F7 x5B891C x855B82 x8F26E9 xA63C46 xBD51A3 xCB95DB xDF3A7E xDF3F51 xEEAC1D }
 		}
 
 		add_homeland = cu:mousillon
@@ -220,7 +220,7 @@ STATES = {
 	s:STATE_QUENELLES = {
 		create_state = {
 			country = c:QUE
-			owned_provinces = { x0416F2 x0B1410 x195848 x22296D x306DA5 x478302 x51BDB5 x66D9BB x6CDC97 x83F1F4 x92362C xA94B89 xB3863C xCA9B99 xCEA51E xDCE956 xE0D731 xE5BA7B xF3FEB3 }
+			owned_provinces = { x0416F2 x195848 x22296D x306DA5 x478302 x51BDB5 x66D9BB x6CDC97 x83F1F4 x92362C xB3863C xCA9B99 xCEA51E xD3E9DF xDCE956 xE0D731 xE5BA7B xF3FEB3 xF94374 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -268,7 +268,7 @@ STATES = {
 	s:STATE_WEST_CARCASSONNE = {
 		create_state = {
 			country = c:CAR
-			owned_provinces = { x10B575 x19F5E6 x1EF9AD x4D2467 x5B689F x738613 x998219 xAEECEE xBD3126 xD44683 }
+			owned_provinces = { x10B575 x1EF9AD x4D2467 x5B689F x738613 x998219 xAEECEE xBD3126 xD44683 xD84233 }
 		}
 
 		add_homeland = cu:bretonnian
