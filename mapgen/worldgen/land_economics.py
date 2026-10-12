@@ -32,7 +32,8 @@ require the rows (an absent row is the same as an all-empty one).
   and its own resolve/check rules to this module. An unknown header is a hard
   error, never silently ignored.
 
-Placeholders (out-of-scope land) never carry a row and always emit
+Placeholders (out-of-scope land) never carry a row; they emit their real-world-equivalent
+zone share (``worldgen.real_world_economics``) or, where that input is absent,
 :data:`DEFAULT_ECONOMICS`; they are classified by scope, never by key shape.
 """
 from __future__ import annotations
@@ -170,6 +171,7 @@ def resolve_economics(row: EconomicsRow | None, default: schema.Economics) -> sc
         arable_resources=list(default.arable_resources if row.arable_resources is None
                               else row.arable_resources),
         capped_resources=dict(default.capped_resources),
+        resources=default.resources,
     )
 
 

@@ -1453,6 +1453,8 @@ class Economics:
     arable_land: int
     arable_resources: list[str]
     capped_resources: dict[str, int]
+    #: ``resource = { ... }`` blocks as ``(type, depleted_type or "", discovered, undiscovered)``
+    resources: tuple[tuple[str, str, int, int], ...] = ()
 
     @classmethod
     def from_dict(cls, d: dict, ctx: str) -> "Economics":

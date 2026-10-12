@@ -3247,10 +3247,23 @@ def _selfcheck_economics_validator() -> None:
     errs, _ = run([st("STATE_A", sub=le.FISHING_VILLAGE, port=False)])
     assert len(errs) == 1 and "port hub" in errs[0], errs
     assert run([st("STATE_A", sub=le.FISHING_VILLAGE, port=True)])[0] == []
-    errs, _ = run([st("STATE_LAND_001", land=40)])
-    assert any("default economics" in e for e in errs), "a placeholder off-default must error"
-    errs, _ = run([st("STATE_X", land=40, provs=((9, 9, 9),))], ph={(9, 9, 9)}, ownership=None)
-    assert any("default economics" in e for e in errs), "placeholder by province colour"
+    # Without the real-world-equivalents input a placeholder must carry the default economics;
+    # with it (Chris, 2026-10-12) a placeholder carries its zone's share and any valid value passes.
+    real_cfg = vm._REAL_WORLD_CONFIG
+    try:
+        vm._REAL_WORLD_CONFIG = Path("/nonexistent/real_world_equivalents.json")
+        errs, _ = run([st("STATE_LAND_001", land=40)])
+        assert any("default economics" in e for e in errs), "a placeholder off-default must error"
+        errs, _ = run([st("STATE_X", land=40, provs=((9, 9, 9),))], ph={(9, 9, 9)}, ownership=None)
+        assert any("default economics" in e for e in errs), "placeholder by province colour"
+    finally:
+        vm._REAL_WORLD_CONFIG = real_cfg
+    vm._REAL_WORLD_CONFIG = Path(__file__)  # any existing file stands in for the present input
+    try:
+        errs, _ = run([st("STATE_LAND_001", land=40)])
+        assert errs == [], errs
+    finally:
+        vm._REAL_WORLD_CONFIG = real_cfg
     errs, _ = run([st("STATE_A", res=())])
     assert any("missing" in e for e in errs), errs
     errs, warns = run([st("STATE_A", land=5)])

@@ -68,6 +68,9 @@ _LOC_KEY = re.compile(r"^\s*([A-Za-z0-9_.]+):\d*\s+\"")
 # Parsed representations
 # ---------------------------------------------------------------------------
 
+_REAL_WORLD_CONFIG = Path(__file__).resolve().parent / "config" / "real_world_equivalents.json"
+
+
 class ParsedState:
     def __init__(self, key: str, filename: str) -> None:
         self.key = key
@@ -1363,7 +1366,9 @@ def _check_state_economics(land_states: list[ParsedState], sea_states: list[Pars
         e, w = land_economics.check_economics(st.key, econ, st.port_declared, catalog)
         errors += [f"{st.filename}: {m}" for m in e]
         if st.key in placeholder_keys:
-            if (econ.subsistence_building, econ.arable_land, econ.arable_resources) != (
+            # With the real-world equivalents (Chris, 2026-10-12) placeholders carry their zone's
+            # share; the default-economics rule only holds while that input is absent.
+            if not _REAL_WORLD_CONFIG.is_file() and (econ.subsistence_building, econ.arable_land, econ.arable_resources) != (
                     default.subsistence_building, default.arable_land, default.arable_resources):
                 errors.append(f"{st.filename}: {st.key}: placeholder state must carry the default economics")
         else:

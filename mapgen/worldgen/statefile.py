@@ -248,6 +248,16 @@ def render_land_state(
     for building in sorted(econ.capped_resources):
         lines.append(f"{INDENT}{INDENT}{building} = {econ.capped_resources[building]}")
     lines.append(f"{INDENT}}}")
+    for rtype, depleted, discovered, undiscovered in econ.resources:
+        lines.append(f"{INDENT}resource = {{")
+        lines.append(f'{INDENT}{INDENT}type = "{rtype}"')
+        if depleted:
+            lines.append(f'{INDENT}{INDENT}depleted_type = "{depleted}"')
+        if discovered:
+            lines.append(f"{INDENT}{INDENT}discovered_amount = {discovered}")
+        if undiscovered:
+            lines.append(f"{INDENT}{INDENT}undiscovered_amount = {undiscovered}")
+        lines.append(f"{INDENT}}}")
     if state.coastal:
         if naval_exit_id is None:
             raise ValueError(f"{state.key}: coastal state needs a resolved naval_exit_id")

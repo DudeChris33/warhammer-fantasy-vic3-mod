@@ -89,7 +89,8 @@ import numpy as np
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import land_economics, land_naming, land_state_numbering, raster, schema  # noqa: E402
+from worldgen import (land_economics, land_naming, land_state_numbering, raster,  # noqa: E402
+                      real_world_economics, schema)
 from worldgen.statefile import (  # noqa: E402
     ProvinceInfo,
     pick_hubs,
@@ -142,6 +143,10 @@ BUILDING_GROUPS_DIR = MOD_ROOT / "common" / "building_groups"
 #: Hand-authored per-state economics (#3678), keyed on the canon state key + naming anchor;
 #: read here, rules in worldgen.land_economics. Empty cell = per-column default.
 ECONOMICS_WORKSHEET_PATH = TOOLS_DIR / "config" / "land_economics_worksheet.csv"
+#: Real-world-equivalent defaults (Chris, 2026-10-12): per-zone vanilla totals + the canvas zone
+#: raster, built offline by ``build_real_world_equivalents.py``; worldgen.real_world_economics.
+REAL_WORLD_CONFIG_PATH = TOOLS_DIR / "config" / "real_world_equivalents.json"
+REAL_WORLD_ZONES_PATH = TOOLS_DIR / "config" / "real_world_zones.png"
 
 BOM = b"\xef\xbb\xbf"
 INDENT = "\t"
@@ -664,6 +669,13 @@ def main(argv: list[str] | None = None) -> int:
                 log(f"NOT auto-fixable, edit by hand: {e}", t0)
         log(f"{len(rekeys)} row(s) rekeyed in {ECONOMICS_WORKSHEET_PATH.name}; nothing emitted", t0)
         return 0
+    rw_model = real_world_economics.load(REAL_WORLD_CONFIG_PATH, REAL_WORLD_ZONES_PATH)
+    rw_by_region: dict[int, dict] = {}
+    if rw_model is not None:
+        rw_by_region, rw_stats = real_world_economics.region_economics(
+            rw_model, labels, n_land, region_of, n_regions)
+        log(f"real-world equivalents: {rw_stats['regions']} region(s) take their zone's share; "
+            f"zones with no mod land: {rw_stats['zones_without_land'] or 'none'}", t0)
     econ_errors: list[str] = list(sheet_errors)
     econ_warnings: list[str] = []
     n_econ_sheet = n_econ_default = n_econ_placeholder = 0
@@ -754,7 +766,12 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit(f"{key}: every province is impassable — a state needs passable land")
 
         row = econ_sheet.rows.get(key) if is_drawn else None
-        econ = land_economics.resolve_economics(row, default_econ)
+        rw = rw_by_region.get(region_id)
+        state_default = default_econ if rw is None else schema.Economics(
+            subsistence_building=rw["subsistence_building"], arable_land=rw["arable_land"],
+            arable_resources=list(rw["arable_resources"]),
+            capped_resources=dict(rw["capped_resources"]), resources=rw["resources"])
+        econ = land_economics.resolve_economics(row, state_default)
         errs, warns = land_economics.check_economics(key, econ, coastal, catalog)
         econ_errors.extend(errs)
         econ_warnings.extend(warns)
