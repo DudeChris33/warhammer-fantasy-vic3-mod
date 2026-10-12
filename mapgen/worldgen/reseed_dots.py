@@ -26,6 +26,8 @@ palette — cf. the existing ``c_7f06fe`` / ``c_ff64ff`` landmarks).
 
 from __future__ import annotations
 
+import itertools
+import math
 from dataclasses import dataclass
 
 import numpy as np
@@ -48,6 +50,10 @@ DEFAULT_MATCH_TOL_PX = 3.0
 #: Two paired dots' mean colours must agree within this Euclidean distance, or
 #: the pair is rejected as a mis-pairing rather than folded blind.
 DEFAULT_MAX_COLOUR_DIST = 40.0
+#: Upper bound on the assignments :func:`resolve_repeated_colours` will try (the
+#: product of the factorials of the repeated-colour group sizes). Past it the
+#: sheet needs more distinct colours, not a longer search.
+MAX_REPEAT_COMBOS = 2_000_000
 
 
 @dataclass(frozen=True)
@@ -75,6 +81,7 @@ def detect_dots(
     chroma_floor: int = DEFAULT_CHROMA_FLOOR,
     relaxed_chroma: int | None = None,
     noisy_rects: tuple = (),
+    ignore_colours: tuple = (),
     min_px: int = MIN_DOT_PX,
     max_px: int = MAX_DOT_PX,
     max_box: int = MAX_DOT_BOX,
@@ -86,7 +93,10 @@ def detect_dots(
     survive a lower floor *outside* the listed rectangles while a higher
     ``chroma_floor`` is demanded *inside* them — the rectangles being regions of
     the master where re-save/anti-alias noise concentrates (e.g. dense linework
-    crossings). With no rectangles the floor is uniform. Both arrays are
+    crossings). With no rectangles the floor is uniform. ``ignore_colours``
+    lists exact RGB triples that are markup but never a dot (a coastline trace
+    drawn on the same sheet): they are dropped before labelling, so a dot that
+    touches the trace stays its own component. Both arrays are
     ``(H, W, 3)`` in the SAME frame; the returned centroids are pixel-centre
     (mean + 0.5) and the list is in ``ndimage.label`` order (deterministic).
     """
@@ -105,6 +115,8 @@ def detect_dots(
         keep = diff & np.where(inside, ch >= chroma_floor, ch >= relaxed_chroma)
     else:
         keep = diff & (ch >= chroma_floor)
+    for colour in ignore_colours:
+        keep &= ~np.all(dots == np.array(colour, dtype=np.int16), axis=-1)
 
     labeled, n = ndimage.label(keep, structure=np.ones((3, 3)))
     out: list[Dot] = []
@@ -205,6 +217,90 @@ def pair_by_colour(
                           colour_dist=float(best_d2 ** 0.5)))
     unpaired_canvas = [c for j, c in enumerate(canvas_new) if j not in used]
     return pairs, unpaired_master, unpaired_canvas
+
+
+def _affine_residual_projector(src: np.ndarray) -> np.ndarray:
+    """``M`` with ``y' M y`` = the squared residual of the least-squares affine
+    fit of ``y`` on the points ``src`` (``(n, 2)``)."""
+    X = np.column_stack([src, np.ones(len(src))])
+    return np.eye(len(src)) - X @ np.linalg.pinv(X)
+
+
+def resolve_repeated_colours(
+    pairs: list[Pair],
+    anchors: tuple = (),
+    *,
+    max_colour_dist: float = DEFAULT_MAX_COLOUR_DIST,
+    max_combos: int = MAX_REPEAT_COMBOS,
+) -> tuple[list[Pair], dict]:
+    """Re-pair dots that share a colour, by position.
+
+    :func:`pair_by_colour` cannot tell two dots of one colour apart, so where a
+    sheet reuses a colour its pairing inside that colour is arbitrary. Here the
+    pairs are grouped by master colour (within ``max_colour_dist`` of the
+    group's first member, in the given order) and, for every group of two or
+    more, each assignment of the group's canvas dots to its master dots is
+    tried. The assignment kept is the one whose points, together with
+    ``anchors`` (``(source_xy, canvas_xy)`` of the landmarks already in the
+    seed), lie closest to a single affine map: lowest RMS residual, first in
+    enumeration order on a tie. That is a ranking only; the warp is never
+    affine.
+
+    Returns ``(pairs, info)``; ``info`` has ``combos``, ``rms_px`` and
+    ``runner_up_rms_px`` (``None`` when nothing repeated). Raises ``ValueError``
+    when there are fewer than four points to rank on or more than
+    ``max_combos`` assignments.
+    """
+    max_d2 = max_colour_dist * max_colour_dist
+    groups: list[list[int]] = []
+    for i, p in enumerate(pairs):
+        for g in groups:
+            if _colour_dist2(pairs[g[0]].master.color, p.master.color) <= max_d2:
+                g.append(i)
+                break
+        else:
+            groups.append([i])
+    repeated = [g for g in groups if len(g) > 1]
+    info = {"combos": 1, "rms_px": None, "runner_up_rms_px": None}
+    if not repeated:
+        return list(pairs), info
+
+    combos = math.prod(math.factorial(len(g)) for g in repeated)
+    n = len(pairs) + len(anchors)
+    if n < 4:
+        raise ValueError(
+            f"{len(pairs)} dot pair(s) share colours and only {n} point(s) exist "
+            "to tell them apart by position (need 4) — use distinct colours")
+    if combos > max_combos:
+        raise ValueError(
+            f"{combos} ways to pair the repeated colours (limit {max_combos}) — "
+            "use more distinct colours")
+
+    src = np.array([p.master.xy for p in pairs] + [a[0] for a in anchors], dtype=np.float64)
+    dst = np.array([p.canvas.xy for p in pairs] + [a[1] for a in anchors], dtype=np.float64)
+    M = _affine_residual_projector(src)
+
+    best_ss, runner_ss, best_order = None, None, None
+    order = np.arange(len(pairs))
+    for perms in itertools.product(*(itertools.permutations(g) for g in repeated)):
+        for g, perm in zip(repeated, perms):
+            order[g] = perm
+        y = dst.copy()
+        y[:len(pairs)] = dst[order]
+        ss = float(np.einsum("ik,ij,jk->", y, M, y))
+        if best_ss is None or ss < best_ss:
+            best_ss, runner_ss, best_order = ss, best_ss, order.copy()
+        elif runner_ss is None or ss < runner_ss:
+            runner_ss = ss
+
+    out = [
+        Pair(master=p.master, canvas=pairs[j].canvas,
+             colour_dist=float(_colour_dist2(p.master.color, pairs[j].canvas.color) ** 0.5))
+        for p, j in zip(pairs, best_order)
+    ]
+    info.update(combos=combos, rms_px=float((best_ss / n) ** 0.5),
+                runner_up_rms_px=float((runner_ss / n) ** 0.5))
+    return out, info
 
 
 def _hexname(color: tuple[int, int, int]) -> str:

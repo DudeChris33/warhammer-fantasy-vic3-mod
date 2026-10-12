@@ -5095,7 +5095,9 @@ def _selfcheck_reseed_dots() -> None:
     rule — a pale dot survives OUTSIDE a rect at ``relaxed_chroma`` while a
     same-chroma mark INSIDE is dropped), ``select_new`` (a dot on an existing
     landmark is skipped, a far one is new), ``pair_by_colour`` (colour pairing,
-    a beyond-tolerance mismatch rejected as unpaired), ``name_pairs``
+    a beyond-tolerance mismatch rejected as unpaired), ``ignore_colours`` (a dot
+    on a trace), ``resolve_repeated_colours`` (same-colour dots paired by
+    position, too few points refused), ``name_pairs``
     (``c_<hex>`` + ``_N`` disambiguation) and determinism.
     """
     from worldgen import reseed_dots as R
@@ -5150,6 +5152,43 @@ def _selfcheck_reseed_dots() -> None:
     assert len(pairs) == 1 and pairs[0].master is red_m and pairs[0].canvas is red_c
     assert up_m == [blue_m] and up_c == [green_c], \
         f"blue master + green canvas must be unpaired, got {up_m} {up_c}"
+
+    # ignore_colours: a dot touching a same-sheet trace stays its own component.
+    traced = base.copy()
+    traced[18, 5:55] = (0, 255, 255)            # a cyan trace across the sheet
+    stamp(traced, 30, 17, (0, 255, 0))          # a green dot sitting on it
+    assert R.detect_dots(orig, traced, chroma_floor=120) == [], \
+        "a dot merged into a long trace is one oversized component, dropped"
+    on_trace = R.detect_dots(orig, traced, chroma_floor=120,
+                             ignore_colours=((0, 255, 255),))
+    assert [d.color for d in on_trace] == [(0, 255, 0)], \
+        f"ignore_colours should leave only the green dot, got {on_trace}"
+
+    # resolve_repeated_colours: three reds and two blues, canvas = a rotated,
+    # scaled, shifted copy of the master, handed over mis-paired within each colour.
+    def to_canvas(x, y):
+        return (300.0 + 1.5 * x - 0.4 * y, 80.0 + 0.4 * x + 1.5 * y)
+    spots = [((10.0, 10.0), (255, 0, 0)), ((90.0, 20.0), (255, 0, 0)),
+             ((40.0, 70.0), (255, 0, 0)), ((70.0, 80.0), (0, 0, 255)),
+             ((20.0, 45.0), (0, 0, 255))]
+    m_d = [R.Dot(x, y, c, 9) for (x, y), c in spots]
+    c_d = [R.Dot(*to_canvas(x, y), c, 9) for (x, y), c in spots]
+    wrong = [R.Pair(m_d[0], c_d[2], 0.0), R.Pair(m_d[1], c_d[0], 0.0),
+             R.Pair(m_d[2], c_d[1], 0.0), R.Pair(m_d[3], c_d[4], 0.0),
+             R.Pair(m_d[4], c_d[3], 0.0)]
+    fixed, rep = R.resolve_repeated_colours(wrong)
+    assert all(p.canvas is c_d[i] for i, p in enumerate(fixed)), \
+        "repeated colours must be re-paired by position"
+    assert rep["combos"] == 12 and rep["rms_px"] < 1e-3 < rep["runner_up_rms_px"], rep
+    same, rep1 = R.resolve_repeated_colours([wrong[0], wrong[3]])
+    assert same == [wrong[0], wrong[3]] and rep1["rms_px"] is None, \
+        "distinct colours pass through untouched"
+    try:
+        R.resolve_repeated_colours(wrong[:2])
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("two same-colour pairs alone cannot be told apart by position")
 
     # name_pairs: c_<hex> + _N disambiguation against existing + within-batch.
     p1 = R.Pair(R.Dot(1, 1, (191, 0, 255), 9), R.Dot(2, 2, (190, 0, 254), 9), 1.0)

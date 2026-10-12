@@ -62,13 +62,14 @@ SOURCE_LAYERS_PATH = TOOLS_DIR / "config" / "source_layers.json"
 
 #: The folders under ``sources/`` that tools search, alongside the root itself:
 #: raw references (``originals/``), the current canvas-scale GIMP masters and
-#: their per-.xcf .ora exports (``oldworld-first/``), and the two paired-anchor-
-#: dot batches still in active use (``dots-triangles/``, ``dots-mega/``).
+#: their per-.xcf .ora exports (``oldworld-first/``), the two paired-anchor-
+#: dot batches still in active use (``dots-triangles/``, ``dots-mega/``) and
+#: Ulthuan's paired-anchor-dot sheets (``ulthuan/``).
 #: ``archive/`` (retired sources, including the five-crop dot-marking sheets —
 #: board #5403), ``WIP/`` (local scratch, not manifest-tracked) and
 #: ``cr_oldworld_campaign/`` (its own dataset loader) are deliberately excluded
 #: from both search and refresh.
-SOURCE_SUBDIRS = ("originals", "oldworld-first", "dots-triangles", "dots-mega")
+SOURCE_SUBDIRS = ("originals", "oldworld-first", "dots-triangles", "dots-mega", "ulthuan")
 
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"

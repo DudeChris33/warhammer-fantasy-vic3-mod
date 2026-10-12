@@ -16,7 +16,13 @@ The seed's two sheets and their clean originals are derived by convention from
 and its original ``terraqueous_globe_reprojected.png`` (canvas space, where the
 ``canvas`` centroids are read — see ``fit_registration.anchor_landmarks``). An
 optional ``dots_reseed`` block in the seed overrides any of these filenames and
-carries the detection tuning (chroma floors, noisy rectangles, match tolerance).
+carries the detection tuning (chroma floors, noisy rectangles, match tolerance,
+``ignore_colours`` for a trace drawn on the same sheets). A seed whose block
+names all four files need not follow the ``- dots_N`` naming. A canvas sheet
+may be a crop of the canvas: ``canvas_offset`` (``[x, y]``, default ``[0, 0]``)
+is where its top-left pixel sits, and the canvas original is cut to match.
+Dots that share a colour are paired by position
+(``reseed_dots.resolve_repeated_colours``).
 
 Usage::
 
@@ -56,13 +62,16 @@ def _derive_names(seed: dict) -> dict:
     dots_source = seed.get("dots_source")
     if not dots_source:
         raise SystemExit("seed has no 'dots_source' — not a paired-anchor-dot seed")
-    if " - dots" not in dots_source:
-        raise SystemExit(
-            f"dots_source {dots_source!r} is not of the form '<master> - dots_N.png'")
-    master_stem, rest = dots_source.split(" - dots", 1)
-    suffix = " - dots" + rest  # e.g. ' - dots_7.png'
-
     cfg = dict(seed.get("dots_reseed", {}))
+    if " - dots" in dots_source:
+        master_stem, rest = dots_source.split(" - dots", 1)
+        suffix = " - dots" + rest  # e.g. ' - dots_7.png'
+    elif all(k in cfg for k in ("master_original", "canvas_dots", "canvas_original")):
+        master_stem = suffix = ""  # unused: every name below is overridden
+    else:
+        raise SystemExit(
+            f"dots_source {dots_source!r} is not of the form '<master> - dots_N.png' "
+            "and dots_reseed does not name master_original, canvas_dots and canvas_original")
     return {
         "master_dots": cfg.get("master_dots", dots_source),
         "master_orig": cfg.get("master_original", f"{master_stem}.png"),
@@ -71,6 +80,8 @@ def _derive_names(seed: dict) -> dict:
         "chroma_floor": int(cfg.get("chroma_floor", reseed_dots.DEFAULT_CHROMA_FLOOR)),
         "relaxed_chroma": cfg.get("relaxed_chroma"),
         "noisy_rects": tuple(tuple(r) for r in cfg.get("noisy_rects", ())),
+        "ignore_colours": tuple(tuple(int(v) for v in c) for c in cfg.get("ignore_colours", ())),
+        "canvas_offset": tuple(int(v) for v in cfg.get("canvas_offset", (0, 0))),
         "match_tol_px": float(cfg.get("match_tol_px", reseed_dots.DEFAULT_MATCH_TOL_PX)),
         "max_colour_dist": float(
             cfg.get("max_colour_dist", reseed_dots.DEFAULT_MAX_COLOUR_DIST)),
@@ -99,13 +110,26 @@ def reseed(stem: str, *, dry_run: bool = False, log=print) -> dict:
     master_dots = _load_rgb(paths["master_dots"])
     canvas_orig = _load_rgb(paths["canvas_orig"])
     canvas_dots = _load_rgb(paths["canvas_dots"])
+    ox, oy = names["canvas_offset"]
+    ch, cw = canvas_dots.shape[:2]
+    if canvas_dots.shape != canvas_orig.shape:
+        if ox < 0 or oy < 0 or oy + ch > canvas_orig.shape[0] or ox + cw > canvas_orig.shape[1]:
+            raise SystemExit(
+                f"canvas_dots {cw}x{ch} at canvas_offset ({ox}, {oy}) does not fit inside "
+                f"canvas_original {canvas_orig.shape[1]}x{canvas_orig.shape[0]}")
+        canvas_orig = canvas_orig[oy:oy + ch, ox:ox + cw]
+        log(f"canvas sheet  {cw}x{ch} crop at canvas ({ox}, {oy})")
 
     m_dots = reseed_dots.detect_dots(
         master_orig, master_dots,
         chroma_floor=names["chroma_floor"], relaxed_chroma=names["relaxed_chroma"],
-        noisy_rects=names["noisy_rects"])
-    c_dots = reseed_dots.detect_dots(
-        canvas_orig, canvas_dots, chroma_floor=names["chroma_floor"])
+        noisy_rects=names["noisy_rects"], ignore_colours=names["ignore_colours"])
+    c_dots = [
+        reseed_dots.Dot(d.cx + ox, d.cy + oy, d.color, d.size)
+        for d in reseed_dots.detect_dots(
+            canvas_orig, canvas_dots, chroma_floor=names["chroma_floor"],
+            ignore_colours=names["ignore_colours"])
+    ]
     log(f"detected      {len(m_dots)} master, {len(c_dots)} canvas dot(s)")
 
     landmarks = seed.setdefault("landmarks", [])
@@ -123,6 +147,15 @@ def reseed(stem: str, *, dry_run: bool = False, log=print) -> dict:
         log(f"  UNPAIRED master {d.xy} colour {d.color} — no colour-matched canvas dot")
     for d in up_c:
         log(f"  UNPAIRED canvas {d.xy} colour {d.color} — no colour-matched master dot")
+    try:
+        pairs, rep = reseed_dots.resolve_repeated_colours(
+            pairs, tuple((lm["source"], lm["canvas"]) for lm in landmarks if "canvas" in lm),
+            max_colour_dist=names["max_colour_dist"])
+    except ValueError as exc:
+        raise SystemExit(f"repeated dot colours: {exc}")
+    if rep["rms_px"] is not None:
+        log(f"repeated colours paired by position: best of {rep['combos']} assignments, "
+            f"affine rms {rep['rms_px']:.1f} px (runner-up {rep['runner_up_rms_px']:.1f} px)")
 
     existing_names = {lm["name"] for lm in landmarks if "name" in lm}
     new_landmarks = reseed_dots.name_pairs(pairs, existing_names)

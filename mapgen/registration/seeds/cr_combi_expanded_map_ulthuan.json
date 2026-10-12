@@ -1,0 +1,238 @@
+{
+  "source": "cr_combi_expanded_map_ulthuan.png",
+  "dots_source": "ulthuan_parchment.png",
+  "_comment": "PROVISIONAL until Chris accepts the render. Paired-anchor-dot registration of Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480) onto the canvas. Chris marked the same dots on two sheets in sources/ulthuan/ (2026-10-11): ulthuan_parchment.png (the whole parchment frame) and ulthuan_terraqueous.png (the top-left 4096x1808 of the reprojected globe, so its pixels are canvas pixels). Both sheets also carry a cyan (0,255,255) coastline trace, which is not a dot. The dots are 12 px, in six flat colours that repeat, so reseed_registration_dots.py pairs them by colour and then by position. 'source' names no file: the clean parchment is derived on demand from dots_source (worldgen.derive_crop), which also inpaints the cyan trace. Coverage is the convex hull of the dots, Ulthuan only.",
+  "_comment_dots_reseed": "Read by mapgen/reseed_registration_dots.py. master_original is the undotted parchment PNG; it sits in the unsearched sources/dots-claude/, hence the folder in the name.",
+  "dots_reseed": {
+    "master_original": "dots-claude/cr_combi_expanded_map.png",
+    "canvas_dots": "ulthuan_terraqueous.png",
+    "canvas_original": "terraqueous_globe_reprojected.png",
+    "canvas_offset": [
+      0,
+      0
+    ],
+    "ignore_colours": [
+      [
+        0,
+        255,
+        255
+      ]
+    ]
+  },
+  "master_shape": [
+    4480,
+    6400
+  ],
+  "objective": "piecewise_affine",
+  "footprint_pad": 32,
+  "landmarks": [
+    {
+      "name": "c_00ff00",
+      "source": [
+        1003.0,
+        1441.0
+      ],
+      "canvas": [
+        2761.0,
+        1034.0
+      ]
+    },
+    {
+      "name": "c_ff0000",
+      "source": [
+        1001.0,
+        1473.0
+      ],
+      "canvas": [
+        2764.0,
+        1062.0
+      ]
+    },
+    {
+      "name": "c_0000ff",
+      "source": [
+        724.0,
+        1586.0
+      ],
+      "canvas": [
+        2557.0,
+        1144.0
+      ]
+    },
+    {
+      "name": "c_ff0000_2",
+      "source": [
+        1012.0,
+        1712.0
+      ],
+      "canvas": [
+        2764.0,
+        1223.0
+      ]
+    },
+    {
+      "name": "c_00ff00_2",
+      "source": [
+        1052.0,
+        1755.0
+      ],
+      "canvas": [
+        2805.0,
+        1273.0
+      ]
+    },
+    {
+      "name": "c_ffff00",
+      "source": [
+        1050.0,
+        1783.0
+      ],
+      "canvas": [
+        2803.0,
+        1293.0
+      ]
+    },
+    {
+      "name": "c_ff00ff",
+      "source": [
+        1029.0,
+        1808.0
+      ],
+      "canvas": [
+        2786.0,
+        1310.0
+      ]
+    },
+    {
+      "name": "c_b6317d",
+      "source": [
+        1371.0,
+        1808.0
+      ],
+      "canvas": [
+        3030.0,
+        1291.0
+      ]
+    },
+    {
+      "name": "c_00ff00_3",
+      "source": [
+        1335.0,
+        1841.0
+      ],
+      "canvas": [
+        3004.0,
+        1325.0
+      ]
+    },
+    {
+      "name": "c_ff00ff_2",
+      "source": [
+        1362.0,
+        1851.0
+      ],
+      "canvas": [
+        3022.0,
+        1330.0
+      ]
+    },
+    {
+      "name": "c_ff00ff_3",
+      "source": [
+        666.0,
+        1889.0
+      ],
+      "canvas": [
+        2546.0,
+        1405.0
+      ]
+    },
+    {
+      "name": "c_ffff00_2",
+      "source": [
+        1362.0,
+        1909.0
+      ],
+      "canvas": [
+        3029.0,
+        1368.0
+      ]
+    },
+    {
+      "name": "c_ff00ff_4",
+      "source": [
+        1037.0,
+        1987.0
+      ],
+      "canvas": [
+        2812.0,
+        1451.0
+      ]
+    },
+    {
+      "name": "c_00ff00_4",
+      "source": [
+        1074.0,
+        2021.0
+      ],
+      "canvas": [
+        2833.0,
+        1461.0
+      ]
+    },
+    {
+      "name": "c_00ff00_5",
+      "source": [
+        1219.0,
+        2080.0
+      ],
+      "canvas": [
+        2937.0,
+        1519.0
+      ]
+    },
+    {
+      "name": "c_b6317d_2",
+      "source": [
+        1232.0,
+        2098.0
+      ],
+      "canvas": [
+        2947.0,
+        1528.0
+      ]
+    },
+    {
+      "name": "c_ff0000_3",
+      "source": [
+        1025.0,
+        2115.0
+      ],
+      "canvas": [
+        2802.0,
+        1544.0
+      ]
+    },
+    {
+      "name": "c_0000ff_2",
+      "source": [
+        819.0,
+        2122.0
+      ],
+      "canvas": [
+        2674.0,
+        1559.0
+      ]
+    }
+  ],
+  "record": {
+    "role": "ulthuan_boundary_network",
+    "precedence": 34,
+    "layer_precedence": {
+      "boundaries": 5,
+      "coastline": 5,
+      "relief": 5
+    },
+    "notes": "PROVISIONAL until Chris accepts the render. Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480), placed by mapgen/fit_registration.py --seed cr_combi_expanded_map_ulthuan from Chris's paired anchor dots (sources/ulthuan/, 2026-10-11): piecewise-affine over the Delaunay triangulation of the dots, exact at every dot, covering their convex hull only. Contributes no coastline (the mask stays the sole authority) and feeds no generator yet: this record only places the parchment. precedence and layer_precedence are provisional placement values."
+  }
+}
