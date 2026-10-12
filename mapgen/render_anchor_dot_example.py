@@ -33,9 +33,17 @@ borders be judged against the mod parchment's own printed lines. A QA/reference
 projection only; state geometry is authored canvas-natively and this feeds
 nothing downstream.
 
+``--borders-only`` leaves the tile out: it carries just the markup the seed
+lists in ``keep_colours`` (the state borders drawn on the dots sheet) from the
+sheet onto the canvas and draws it, with the cyan coastline, over the
+reprojected globe. It writes two files: ``<region>_borders_only.png``, cropped
+to the record's footprint, and ``<region>_borders_canvas.png``, the same lines
+alone on a transparent full-canvas image.
+
 Usage::
 
     python mapgen/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_full
+    python mapgen/render_anchor_dot_example.py --seed cr_combi_expanded_map_ulthuan --borders-only
     python mapgen/render_anchor_dot_example.py --seed tww3_old_world_mod_parchment_full --native --state-borders
 """
 
@@ -68,6 +76,8 @@ RIVERS_PATH = TOOLS_DIR.parent / "map_data" / "rivers.png"
 #: The hand-drawn state-region magenta network — canvas-scale, same source
 #: mapgen/worldgen/land_provinces.py consumes for the real province cut.
 STATE_REGIONS_SOURCE = sources_mod.source_ref("state_borders")
+#: The reprojected globe that IS the canvas frame — the --borders-only backdrop.
+GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
@@ -315,6 +325,58 @@ def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Pa
     return out
 
 
+def render_borders_only(stem: str) -> Path:
+    """The seed's ``keep_colours`` markup alone, carried onto the canvas.
+
+    Every sheet pixel in a kept colour is pushed through the source -> canvas
+    warp and lands on one canvas pixel. The sheet is finer than the canvas
+    here, so a drawn line stays connected; sampling the other way round
+    (canvas -> sheet, nearest) would skip pixels of a thin line.
+    """
+    regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
+    seed = load_seed(stem)
+    reg = regs.get(seed["source"])
+    if reg is None:
+        raise SystemExit(f"{seed['source']}: no committed registration record")
+    keep = [tuple(int(v) for v in c) for c in seed.get("keep_colours", ())]
+    if not seed.get("dots_source") or not keep:
+        raise SystemExit(f"{stem}: --borders-only needs a seed with dots_source and keep_colours")
+
+    sheet, _alpha = _read_source_rgba(seed["dots_source"])
+    inv = reproject.fit_placement_inverse(reg)
+    lines = np.zeros((CANVAS_H, CANVAS_W, 4), dtype=np.uint8)
+    for colour in keep:
+        ys, xs = np.nonzero(np.all(sheet == np.array(colour, dtype=np.uint8), axis=-1))
+        cx, cy = inv.to_canvas_px(xs + 0.5, ys + 0.5)
+        ok = np.isfinite(cx) & np.isfinite(cy)
+        ix, iy = np.floor(cx[ok]).astype(np.int64), np.floor(cy[ok]).astype(np.int64)
+        ok = (ix >= 0) & (ix < CANVAS_W) & (iy >= 0) & (iy < CANVAS_H)
+        lines[iy[ok], ix[ok]] = (*colour, 255)
+        log(f"markup        {colour}: {len(xs):,} sheet px -> "
+            f"{int(ok.sum()):,} placed, {len(xs) - int(ok.sum()):,} outside the warp")
+    drawn = lines[..., 3] > 0
+    log(f"canvas lines  {int(drawn.sum()):,} px")
+
+    region = out_name(stem)[:-len("_anchor_dot_warp_example.png")]
+    canvas_out = DERIVED_DIR / f"{region}_borders_canvas.png"
+    Image.fromarray(lines, mode="RGBA").save(canvas_out)
+    log(f"wrote {canvas_out}")
+
+    globe, _ = _read_source_rgba(GLOBE_SOURCE)
+    if globe.shape[:2] != (CANVAS_H, CANVAS_W):
+        raise SystemExit(f"{GLOBE_SOURCE} is {globe.shape[1]}x{globe.shape[0]}, "
+                         f"expected {CANVAS_W}x{CANVAS_H} (the canvas frame)")
+    box = footprint_box(reg)
+    x0, y0, x1, y1 = box
+    view = globe[y0:y1, x0:x1].copy()
+    overlay_coast(view, box, raster.read_mask_png(MASK_PATH))
+    view[drawn[y0:y1, x0:x1]] = lines[y0:y1, x0:x1, :3][drawn[y0:y1, x0:x1]]
+    out = DERIVED_DIR / f"{region}_borders_only.png"
+    Image.fromarray(view, mode="RGB").save(out)
+    log(f"wrote {out}")
+    return out
+
+
 def render(stems: list[str], out_file: str, box_pad: int = 0) -> Path:
     regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
     land = raster.read_mask_png(MASK_PATH)
@@ -373,10 +435,20 @@ def main(argv: list[str] | None = None) -> int:
                         "state-border magenta network onto the tile (the reverse "
                         "of the parchment->canvas drape) — a QA "
                         "projection only, not pipeline input")
+    p.add_argument("--borders-only", action="store_true",
+                   help="draw only the seed's keep_colours markup (the state borders "
+                        "on the dots sheet), carried onto the canvas, over the "
+                        "reprojected globe; also writes the lines alone on a "
+                        "transparent full-canvas PNG")
     args = p.parse_args(argv)
 
     if not MASK_PATH.is_file():
         raise SystemExit(f"{MASK_PATH} not found — run mapgen/generate_heightmap.py first")
+    if args.borders_only:
+        if len(args.seed) != 1 or args.native:
+            raise SystemExit("--borders-only needs exactly one --seed and no --native")
+        render_borders_only(args.seed[0])
+        return 0
     if not RIVERS_PATH.is_file():
         raise SystemExit(f"{RIVERS_PATH} not found — run mapgen/generate_rivers.py first")
 

@@ -183,7 +183,15 @@ dots and re-exports the two PNGs:
 python mapgen/worldgen/sources.py --update-manifest
 python mapgen/reseed_registration_dots.py --seed cr_combi_expanded_map_ulthuan --fit
 python mapgen/render_anchor_dot_example.py --seed cr_combi_expanded_map_ulthuan
+python mapgen/render_anchor_dot_example.py --seed cr_combi_expanded_map_ulthuan --borders-only
 ```
+
+The last one draws only the magenta borders, carried onto the canvas, over the
+reprojected globe (`mapgen/derived/cr_combi_expanded_map_ulthuan_borders_only.png`)
+and also writes them alone on a transparent full-canvas PNG
+(`..._borders_canvas.png`, 8192x3616), which can be laid over the canvas master
+as a tracing guide. Both are gitignored review output: the state borders
+themselves stay Chris's to draw on the `borders` layer.
 
 The reseed only adds dots. A dot that was moved or deleted leaves its old
 landmark in the seed: delete that landmark by hand first (or empty `landmarks`
