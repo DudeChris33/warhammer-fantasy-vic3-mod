@@ -6,7 +6,7 @@
     "coastline": 5,
     "relief": 5
   },
-  "notes": "PROVISIONAL until Chris accepts the render. Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480), placed by mapgen/fit_registration.py --seed cr_combi_expanded_map_ulthuan from Chris's paired anchor dots (sources/ulthuan/, 2026-10-11): piecewise-affine over the Delaunay triangulation of the dots, exact at every dot, covering their convex hull only. Contributes no coastline (the mask stays the sole authority) and feeds no generator yet: this record only places the parchment. precedence and layer_precedence are provisional placement values. FIT: {\"landmarks\": 26, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 41}",
+  "notes": "PROVISIONAL until Chris accepts the render. Ulthuan as drawn on ChaosRobie's expanded Immortal Empires parchment (cr_combi_expanded_map, 6400x4480), placed by mapgen/fit_registration.py --seed cr_combi_expanded_map_ulthuan from Chris's paired anchor dots (sources/ulthuan/, 2026-10-11): piecewise-affine over the Delaunay triangulation of the dots, exact at every dot, covering their convex hull only. Contributes no coastline (the mask stays the sole authority) and feeds no generator yet: this record only places the parchment. precedence and layer_precedence are provisional placement values. FIT: {\"landmarks\": 31, \"method\": \"piecewise-affine over the Delaunay triangulation of the landmark dots\", \"triangles\": 55}",
   "source": "cr_combi_expanded_map_ulthuan.png",
   "projection": "piecewise_affine_warp",
   "master_shape": [
@@ -15,9 +15,9 @@
   ],
   "footprint": [
     2479.0,
-    870.0,
-    3152.0,
-    1635.0
+    867.0,
+    3160.0,
+    1644.0
   ],
   "control_points": [
     {
@@ -305,6 +305,61 @@
         1589.0
       ],
       "note": "c_ae66d5_2"
+    },
+    {
+      "source": [
+        633.0,
+        1337.0
+      ],
+      "canvas": [
+        2511.0,
+        899.0
+      ],
+      "note": "c_ff7f00"
+    },
+    {
+      "source": [
+        1437.0,
+        1337.0
+      ],
+      "canvas": [
+        3128.0,
+        899.0
+      ],
+      "note": "c_ff7f00_2"
+    },
+    {
+      "source": [
+        1152.0,
+        1790.0
+      ],
+      "canvas": [
+        2895.0,
+        1253.0
+      ],
+      "note": "c_ae66d5_3"
+    },
+    {
+      "source": [
+        634.0,
+        2214.0
+      ],
+      "canvas": [
+        2511.0,
+        1612.0
+      ],
+      "note": "c_ff7f00_3"
+    },
+    {
+      "source": [
+        1437.0,
+        2215.0
+      ],
+      "canvas": [
+        3128.0,
+        1612.0
+      ],
+      "note": "c_ff7f00_4"
     }
   ]
 }
