@@ -9,7 +9,7 @@ the derived ``mapgen/derived/hub_anchors_index.json`` (written by
 
 Source-dependent (the parchment drape reuses ``project_regions_unified.py``'s
 single triangle-warp registration, like ``render_land_regions_preview.py``) and
-writes into ``mapgen/derived/`` (gitignored) — a dev-only artifact, run on the
+writes into ``scratchpad/`` (gitignored) — a dev-only artifact, run on the
 user's authoring machine. Outputs the whole world plus a tight crop around the
 listed hubs, since a proving-slice of a few states is otherwise lost on the
 8192-wide canvas. ``--bbox X0 Y0 X1 Y1`` pins that crop to one realm instead
@@ -37,12 +37,13 @@ from worldgen import raster  # noqa: E402
 
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 PROVINCES_PNG = REPO_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX = DERIVED_DIR / "provinces_index.json"
 HUB_ANCHORS_INDEX = DERIVED_DIR / "hub_anchors_index.json"
-OUT_PATH = DERIVED_DIR / "hubs_preview.png"
-OUT_HALF_PATH = DERIVED_DIR / "hubs_preview_half.png"
-OUT_CROP_PATH = DERIVED_DIR / "hubs_preview_crop.png"
+OUT_PATH = SCRATCH_DIR / "hubs_preview.png"
+OUT_HALF_PATH = SCRATCH_DIR / "hubs_preview_half.png"
+OUT_CROP_PATH = SCRATCH_DIR / "hubs_preview_crop.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
@@ -132,7 +133,7 @@ def main(argv: list[str] | None = None) -> int:
         draw.text((rx + r + 4, ry - round(args.font_size * 16 / 30)), f"{h['name']} ({h['hub']})",
                   fill=(0, 0, 0), font=font, stroke_width=stroke, stroke_fill=(255, 255, 255))
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     img.save(OUT_PATH)
     log(f"wrote {OUT_PATH}", t0)
     img.resize((CANVAS_W // 2, CANVAS_H // 2)).save(OUT_HALF_PATH)

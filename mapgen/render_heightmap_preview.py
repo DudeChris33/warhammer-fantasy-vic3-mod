@@ -13,7 +13,7 @@ from it. This renders the same data the way an atlas would:
 * **relief** picked out by a hillshade so ranges read as ranges
 * **coastline** stroked from the committed mask so the drawn shore is crisp
 
-It writes ``mapgen/derived/preview_heightmap_hypso.png`` (gitignored, like every
+It writes ``scratchpad/preview_heightmap_hypso.png`` (gitignored, like every
 other ``render_*.py`` output) for an accept/reject verdict; nothing is committed
 here.
 
@@ -52,6 +52,7 @@ from worldgen import raster  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_DIR = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 HEIGHTMAP_PATH = REPO_DIR / "map_data" / "heightmap.png"
 OUT_DEFAULT = "preview_heightmap_hypso.png"
@@ -135,7 +136,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--z", type=float, default=0.06, help="relief vertical exaggeration (default 0.06)")
     p.add_argument("--azimuth", type=float, default=315.0, help="hillshade light azimuth deg (default 315 = NW)")
     p.add_argument("--altitude", type=float, default=45.0, help="hillshade light altitude deg (default 45)")
-    p.add_argument("--out", default=OUT_DEFAULT, help=f"output filename under mapgen/derived/ (default {OUT_DEFAULT})")
+    p.add_argument("--out", default=OUT_DEFAULT, help=f"output filename under scratchpad/ (default {OUT_DEFAULT})")
     args = p.parse_args(argv)
 
     if not HEIGHTMAP_PATH.is_file():
@@ -181,8 +182,8 @@ def main(argv: list[str] | None = None) -> int:
     rgb[edge] = COAST_RGB
 
     out = np.clip(rgb, 0, 255).astype(np.uint8)
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = DERIVED_DIR / args.out
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = SCRATCH_DIR / args.out
     Image.fromarray(out).save(out_path)
 
     # Report the same land-height stats the generator prints, for a text cross-check.

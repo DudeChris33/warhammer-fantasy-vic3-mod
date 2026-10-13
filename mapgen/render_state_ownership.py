@@ -20,7 +20,7 @@ silently overwritten.
 Usage::
 
     python mapgen/render_state_ownership.py                # write mapgen/config/state_ownership.png
-    python mapgen/render_state_ownership.py --review       # also mapgen/derived/state_ownership_review.png
+    python mapgen/render_state_ownership.py --review       # also scratchpad/state_ownership_review.png
     python mapgen/render_state_ownership.py --roundtrip    # render + read back in memory, compare, write nothing
     python mapgen/render_state_ownership.py --adopt-new-states  # paint newly in-scope states unowned, in place
 
@@ -44,7 +44,7 @@ MOD_ROOT = Path(__file__).resolve().parent.parent
 PROPOSAL_PATH = MOD_ROOT / "mapgen" / "config" / "state_ownership_proposal.json"
 LEGEND_PATH = MOD_ROOT / "mapgen" / "config" / "state_ownership_legend.json"
 PNG_PATH = MOD_ROOT / "mapgen" / "config" / "state_ownership.png"
-REVIEW_PATH = MOD_ROOT / "mapgen" / "derived" / "state_ownership_review.png"
+REVIEW_PATH = MOD_ROOT / "scratchpad" / "state_ownership_review.png"
 
 
 def load_assignment(path: Path) -> dict:
@@ -113,6 +113,7 @@ def main(argv: list[str] | None = None) -> int:
         raster.write_rgb_png(args.out, img)
         print(f"render_state_ownership: wrote {args.out}")
         if args.review:
+            args.review_out.parent.mkdir(parents=True, exist_ok=True)
             so.review_render(img, layout, owners, legend, scale=args.scale, numbers=args.numbers,
                 labels=args.labels,
                 state_names=so.load_state_names(MOD_ROOT) if args.labels == "state" else None).save(args.review_out)

@@ -3,7 +3,7 @@
 
 Dev-only and read-only: reads committed inputs (the emitted ``map_data/state_regions``, the
 province bitmap and index, the heightmap, the traced rivers bitmap, the arable heatmap, the
-naming worksheet, the strategic regions) and writes only gitignored ``mapgen/derived/`` output.
+naming worksheet, the strategic regions) and writes only gitignored ``scratchpad/`` output.
 Outside the offline gate; no ``sources/`` pixels are read or drawn.
 
 It computes, once and identically for every drawn state, the numbers all of #3675's content
@@ -22,7 +22,7 @@ Usage::
     python mapgen/tabulate_state_prior.py --classes mapgen/config/state_climate_classes.csv \\
         --rivers mapgen/config/canon_rivers.csv --markdown --render
 
-Outputs: ``mapgen/derived/state_physical_prior.csv`` (always), ``state_prior_generated.md``
+Outputs: ``scratchpad/state_physical_prior.csv`` (always), ``state_prior_generated.md``
 (``--markdown``; also printed), ``state_prior_class_review.png`` (``--render``; needs
 ``--classes``). Deterministic: no clocks, no randomness, fixed number formatting.
 
@@ -611,11 +611,12 @@ def main(argv: list[str] | None = None) -> int:
         ap.error("--render needs --classes")
     extras: dict = {}
     rows = tabulate(REPO_ROOT, classes=args.classes, rivers=args.rivers, _extras=extras)
-    derived = REPO_ROOT / "mapgen" / "derived"
+    derived = REPO_ROOT / "scratchpad"
+    derived.mkdir(parents=True, exist_ok=True)
     write_csv(rows, derived / "state_physical_prior.csv")
     dis = [r for r in rows if r["phys_disagree"]]
     hd = [r for r in rows if r["heat_disagree"] == 1]
-    print(f"{len(rows)} drawn states -> mapgen/derived/state_physical_prior.csv")
+    print(f"{len(rows)} drawn states -> scratchpad/state_physical_prior.csv")
     if args.classes:
         print(f"phys_disagree: {len(dis)} (all carry override_ref); heat_disagree: {len(hd)}")
     if args.markdown:
@@ -624,7 +625,7 @@ def main(argv: list[str] | None = None) -> int:
         print(md)
     if args.render:
         render(rows, extras, derived / "state_prior_class_review.png")
-        print("wrote mapgen/derived/state_prior_class_review.png")
+        print("wrote scratchpad/state_prior_class_review.png")
     return 0
 
 

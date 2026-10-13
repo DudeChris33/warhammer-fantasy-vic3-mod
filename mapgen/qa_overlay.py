@@ -34,6 +34,7 @@ from worldgen import raster, reproject, schema, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
@@ -142,7 +143,7 @@ def state_label_overlay(step: int) -> int:
             if 0 <= y < img.shape[0] and 0 <= x < img.shape[1]:
                 img[max(0, y - 1):y + 2, max(0, x - 1):x + 2] = (255, 255, 255)
 
-    out = DERIVED_DIR / "qa_state_labels.png"
+    out = SCRATCH_DIR / "qa_state_labels.png"
     raster.write_rgb_png(out, img)
     land_areas = np.bincount(labels[land].ravel(), minlength=n_land + 1)[1:n_land + 1]
     print(f"{out.name}: {n_land} land cells + {int(index['sea_cells'])} sea zones, "
@@ -191,7 +192,7 @@ def main(argv: list[str] | None = None) -> int:
         if small.shape != (h, w):
             raise SystemExit(f"--step {args.step} gives a {small.shape[1]}x{small.shape[0]} "
                              f"mask slice but the frame wants {w}x{h}; use a smaller step")
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
 
     all_regs = schema.load_registrations(sources.REGISTRATION_DIR)
     by_source = {r.source: r for r in all_regs}
@@ -217,7 +218,7 @@ def main(argv: list[str] | None = None) -> int:
             edge = small ^ ndimage.binary_erosion(small, np.ones((3, 3)))
             img[edge] = (255, 0, 255)
 
-        out = DERIVED_DIR / f"qa_{Path(reg.source).stem}.png"
+        out = SCRATCH_DIR / f"qa_{Path(reg.source).stem}.png"
         raster.write_rgb_png(out, img)
         print(f"{reg.source:<28} -> {out.name}  (footprint covers "
               f"{100 * valid.mean():5.1f}% of canvas, projection={reg.projection})")

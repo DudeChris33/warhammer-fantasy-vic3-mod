@@ -9,9 +9,10 @@ __pycache__/
 # but ignore any stray local output dir just in case.
 fixtures/_out/
 
-# mapgen/derived/ holds generated artifacts. Most of it is a QA/preview render
-# (preview_*, qa_*, ...) regenerable on demand and kept out of the repo. The
-# committed deliverables are listed explicitly:
+# mapgen/derived/ holds generated artifacts. QA/preview renders (preview_*, qa_*,
+# ...) now go to the repo-root, gitignored scratchpad/; older ones still sitting
+# here are kept out of the repo by derived/* below. The committed deliverables
+# are listed explicitly:
 #   land_sea_mask.png         the coastline authority (S2); S3b cuts provinces from it
 #   state_labels.png          the state-cell partition (S3a); S3b's direct input
 #   state_labels_index.json   per-cell macro / area / coastal flag / provisional key

@@ -2,7 +2,7 @@
 """Dev-only overlay render for the barrier-city catalogue (board #3789, parent #3788).
 
 Reads the committed ``mapgen/config/canon_cities.json`` (via
-``schema.load_canon_cities``) and emits **two** artifacts into ``mapgen/derived/``
+``schema.load_canon_cities``) and emits **two** artifacts into ``scratchpad/``
 (gitignored — a dev-only authoring aid, never shipped content):
 
   (a) ``canon_cities_preview.png`` — a human review PNG: a labelled dot per city
@@ -47,12 +47,13 @@ Image.MAX_IMAGE_PIXELS = None
 
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 CANON_CITIES_PATH = TOOLS_DIR / "config" / "canon_cities.json"
 
-OUT_PREVIEW_PATH = DERIVED_DIR / "canon_cities_preview.png"
-OUT_HALF_PATH = DERIVED_DIR / "canon_cities_preview_half.png"
-OUT_CROP_PATH = DERIVED_DIR / "canon_cities_preview_crop.png"
-OUT_OVERLAY_PATH = DERIVED_DIR / "canon_cities_overlay.png"
+OUT_PREVIEW_PATH = SCRATCH_DIR / "canon_cities_preview.png"
+OUT_HALF_PATH = SCRATCH_DIR / "canon_cities_preview_half.png"
+OUT_CROP_PATH = SCRATCH_DIR / "canon_cities_preview_crop.png"
+OUT_OVERLAY_PATH = SCRATCH_DIR / "canon_cities_overlay.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
@@ -111,7 +112,7 @@ def main(argv: list[str] | None = None) -> int:
     cities = schema.load_canon_cities(CANON_CITIES_PATH, canvas=(CANVAS_W, CANVAS_H))
     log(f"{len(cities)} canon cit(y/ies) to draw", t0)
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
 
     # --- artifact (b): the transparent GIMP overlay (pure, source-free) ----
     overlay = build_overlay_layer(cities, (CANVAS_W, CANVAS_H))

@@ -3,8 +3,8 @@
 (board #4414) — the human-readable cross-check for ``mapgen/tww3_name_lookup.py``.
 
 **Dev-only, gitignored output.** Everything this writes lands under
-``mapgen/derived/tww3_text_crops/`` (covered by ``mapgen/.gitignore``'s
-``derived/*``); nothing reaches ``mapgen/config/`` or any committed file. Like
+``scratchpad/tww3_text_crops/`` (covered by the root
+``.gitignore``'s ``scratchpad/``); nothing reaches ``mapgen/config/`` or any committed file. Like
 #4363 and #4364 this produces *evidence for a human*: #4363 resolves a canvas
 point to a TWW3 region **key** through a colour lookup, and that key is a
 database slug (``cr_oldworld_region_helmgart``), not the name actually printed on
@@ -57,7 +57,7 @@ flagged **ANCHOR DRIFT** — a distinct crosshair colour, a caption tag and an
 Usage::
 
     python mapgen/render_tww3_text_crops.py                       # the anchors report
-    python mapgen/render_tww3_text_crops.py --report mapgen/derived/tww3_hub_suggestions.csv
+    python mapgen/render_tww3_text_crops.py --report scratchpad/tww3_hub_suggestions.csv
     python mapgen/render_tww3_text_crops.py --status all --limit 40
     python mapgen/render_tww3_text_crops.py --at 4091 898
 """
@@ -87,7 +87,7 @@ Image.MAX_IMAGE_PIXELS = None
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
-OUT_DIR = DERIVED_DIR / "tww3_text_crops"
+OUT_DIR = TOOLS_DIR.parent / "scratchpad" / "tww3_text_crops"
 
 #: The persisted, hand-edited land-naming input (267 named regions as of #4363's
 #: own build) — a starting point for triage, not a source of truth: a name here

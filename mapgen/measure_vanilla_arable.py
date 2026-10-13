@@ -16,9 +16,9 @@ re-checked in seconds on any machine that has the game.
 
 Modes (all read-only against the install):
 
-    python mapgen/measure_vanilla_arable.py             write mapgen/derived/vanilla_arable_states.csv
+    python mapgen/measure_vanilla_arable.py             write scratchpad/vanilla_arable_states.csv
                                                         and vanilla_arable_calibration.md (the block)
-    python mapgen/measure_vanilla_arable.py --propose   write derived/vanilla_state_climate_proposal.csv
+    python mapgen/measure_vanilla_arable.py --propose   write scratchpad/vanilla_state_climate_proposal.csv
                                                         from the mechanical rule set below
     python mapgen/measure_vanilla_arable.py --check     regenerate the block and diff it against the note
                                                         between the BEGIN/END markers; also fails on any
@@ -67,6 +67,7 @@ from measure_vanilla_frame import (  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 CLASS_CSV = TOOLS_DIR / "config" / "vanilla_state_climate_classes.csv"
 NOTE_PATH = REPO_ROOT / "planning" / "economics" / "arable_land_engine_research.md"
 LAND_INDEX = DERIVED_DIR / "land_regions_index.json"
@@ -951,7 +952,8 @@ def main(argv: list[str] | None = None) -> int:
         w.writerow(["state_key", "climate_class", "basis", "note", "file", "subsistence", "arable", "lat_deg"])
         for key, cls, basis, s in rows:
             w.writerow([key, cls, basis, "", s["file"], s["subs"], s["arable"], f"{s['lat']:.1f}"])
-        out = _write(DERIVED_DIR / "vanilla_state_climate_proposal.csv", buf.getvalue(), game)
+        SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+        out = _write(SCRATCH_DIR / "vanilla_state_climate_proposal.csv", buf.getvalue(), game)
         done = sum(1 for r in rows if r[1])
         print(f"proposed {done}/{len(rows)} ({done / len(rows) * 100:.0f} %) mechanically; wrote {out}")
         for cls in CLASS_IDS:
@@ -1002,8 +1004,10 @@ def main(argv: list[str] | None = None) -> int:
 
     if bad_area:
         print("WARNING area self-test: " + "; ".join(bad_area))
-    a = _write(DERIVED_DIR / "vanilla_arable_states.csv", build_state_csv(states), game)
-    b = _write(DERIVED_DIR / "vanilla_arable_calibration.md", block, game)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    a = _write(SCRATCH_DIR / "vanilla_arable_states.csv", build_state_csv(states), game)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    b = _write(SCRATCH_DIR / "vanilla_arable_calibration.md", block, game)
     print(f"wrote {a}\nwrote {b}")
     return 0
 

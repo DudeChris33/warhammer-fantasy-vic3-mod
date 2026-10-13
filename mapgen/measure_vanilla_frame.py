@@ -37,7 +37,7 @@ nothing else, enforced by :func:`_assert_writable` on every output path.
 Usage::
 
     python mapgen/measure_vanilla_frame.py
-    python mapgen/measure_vanilla_frame.py --json      # + mapgen/derived/vanilla_frame.json
+    python mapgen/measure_vanilla_frame.py --json      # + scratchpad/vanilla_frame.json
 """
 
 from __future__ import annotations
@@ -58,6 +58,7 @@ from worldgen import raster  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 
 #: The read-only vanilla install. Never written to — see :func:`_assert_writable`.
 VANILLA_ROOT = Path(r"C:\Program Files (x86)\Steam\steamapps\common\Victoria 3\game")
@@ -310,7 +311,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--game", type=Path, default=VANILLA_ROOT,
                    help="vanilla game folder (read-only)")
     p.add_argument("--json", action="store_true",
-                   help="also write mapgen/derived/vanilla_frame.json")
+                   help="also write scratchpad/vanilla_frame.json")
     args = p.parse_args(argv)
 
     game = Path(args.game)
@@ -415,8 +416,8 @@ def main(argv: list[str] | None = None) -> int:
           f"provenances.")
 
     if args.json:
-        DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-        out = _assert_writable(DERIVED_DIR / "vanilla_frame.json")
+        SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+        out = _assert_writable(SCRATCH_DIR / "vanilla_frame.json")
         payload = {
             "canvas": [CANVAS_W, CANVAS_H],
             "R_canvas": r_canvas,

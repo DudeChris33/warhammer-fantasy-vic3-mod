@@ -187,7 +187,7 @@ python mapgen/render_anchor_dot_example.py --seed cr_combi_expanded_map_ulthuan 
 ```
 
 The last one draws only the magenta borders, carried onto the canvas, over the
-reprojected globe (`mapgen/derived/cr_combi_expanded_map_ulthuan_borders_only.png`)
+reprojected globe (`scratchpad/cr_combi_expanded_map_ulthuan_borders_only.png`)
 and also writes them alone on a transparent full-canvas PNG
 (`..._borders_canvas.png`, 8192x3616), which can be laid over the canvas master
 as a tracing guide. Both are gitignored review output: the state borders
@@ -205,7 +205,7 @@ canvas's own land (its docstring has the rules):
 - A border across the ring keeps its drawn shape and slant between its ends.
 - Every coast end lands on the canvas coast and runs a few pixels into the water.
 
-It writes `mapgen/derived/ulthuan_borders_adjusted_canvas.png` (the lines alone,
+It writes `scratchpad/ulthuan_borders_adjusted_canvas.png` (the lines alone,
 pure magenta, 1 px, transparent full canvas) and two review renders, all
 gitignored. Chris accepted that output on 2026-10-12 as the proposal for
 Ulthuan's state borders: 28 states, the same count as his parchment drawing,
@@ -465,7 +465,7 @@ province pipeline (`generate_provinces.py` reads the hand-drawn magenta
 
 The composite QA renders that used to live at
 `mapgen/derived/<region>_anchor_dot_warp_example.png` and
-`mapgen/derived/old_world_anchor_dot_warp_combined.png` are gone too — they were
+`mapgen/derived/old_world_anchor_dot_warp_combined.png` (their old location; renders now land in `scratchpad/`) are gone too — they were
 regenerated only by the now-removed `--all`/`--combined` options and are
 permanently unregenerable without them, so they were `git rm`'d along with the
 `.gitignore` allowlist line for the combined one.

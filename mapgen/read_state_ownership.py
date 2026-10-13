@@ -40,7 +40,7 @@ MOD_ROOT = Path(__file__).resolve().parent.parent
 PNG_PATH = MOD_ROOT / "mapgen" / "config" / "state_ownership.png"
 LEGEND_PATH = MOD_ROOT / "mapgen" / "config" / "state_ownership_legend.json"
 OUT_PATH = MOD_ROOT / "mapgen" / "derived" / "state_ownership.json"
-REVIEW_PATH = MOD_ROOT / "mapgen" / "derived" / "state_ownership_review.png"
+REVIEW_PATH = MOD_ROOT / "scratchpad" / "state_ownership_review.png"
 
 
 def build(png: Path, legend_path: Path) -> str:
@@ -75,6 +75,7 @@ def main(argv: list[str] | None = None) -> int:
             legend = so.load_legend(args.legend)
             layout = so.load_inputs(MOD_ROOT)[0]
             painted = raster.read_rgb_png(args.png)
+            args.review_out.parent.mkdir(parents=True, exist_ok=True)
             so.review_render(painted, layout, so.vote(layout, painted, legend), legend, scale=args.scale, numbers=args.numbers,
                 labels=args.labels,
                 state_names=so.load_state_names(MOD_ROOT) if args.labels == "state" else None).save(args.review_out)

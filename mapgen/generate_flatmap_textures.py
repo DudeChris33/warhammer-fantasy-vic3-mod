@@ -41,7 +41,7 @@ The distance transform does not wrap in x (``should_wrap_x = no``).
 Usage::
 
     python mapgen/generate_flatmap_textures.py            # write the three files
-    python mapgen/generate_flatmap_textures.py --render   # also write mapgen/derived/flatmap_preview.png (gitignored)
+    python mapgen/generate_flatmap_textures.py --render   # also write scratchpad/flatmap_preview.png (gitignored)
     python mapgen/generate_flatmap_textures.py --check    # regenerate in memory, byte-compare with disk (stale if the mask moved)
     python mapgen/generate_flatmap_textures.py --selftest # 64x32 mask: container + mip invariants, needs no mask file
 
@@ -71,7 +71,7 @@ Image.MAX_IMAGE_PIXELS = None
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_DIR = TOOLS_DIR.parent
 MASK_PATH = TOOLS_DIR / "derived" / "land_sea_mask.png"
-PREVIEW_PATH = TOOLS_DIR / "derived" / "flatmap_preview.png"
+PREVIEW_PATH = TOOLS_DIR.parent / "scratchpad" / "flatmap_preview.png"
 OUT_LAND_MASK = REPO_DIR / "gfx" / "map" / "textures" / "land_mask.dds"
 OUT_FLATMAP = REPO_DIR / "gfx" / "map" / "textures" / "flatmap.dds"
 OUT_EXCLUSION = REPO_DIR / "gfx" / "map" / "dynamic_masks" / "exclusion_mask.dds"
@@ -282,6 +282,7 @@ def write_preview(flat: np.ndarray, land: np.ndarray) -> None:
     cs = np.asarray(Image.fromarray(coast.astype(np.uint8) * 255).resize((2048, 904), Image.BOX)) > 40
     a = np.asarray(im).copy()
     a[cs] = (200, 40, 40)
+    PREVIEW_PATH.parent.mkdir(parents=True, exist_ok=True)
     Image.fromarray(a).save(PREVIEW_PATH)
     log(f"preview: {PREVIEW_PATH}")
 

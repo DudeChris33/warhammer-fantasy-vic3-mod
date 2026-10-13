@@ -19,7 +19,7 @@ sit at the snapped circular-mean centroid: line 0 the state identity (the ``id``
 render, the key sans ``STATE_`` under ``--realm``), line 1 the arable number, line 2 the crop
 set as short codes (table in the legend).
 
-Local-only output (embeds source pixels): ``mapgen/derived/``, which ``mapgen/.gitignore``
+Local-only output (embeds source pixels): ``scratchpad/``, which the root ``.gitignore``
 excludes; never shipped content.
 
 Usage::
@@ -60,12 +60,13 @@ from worldgen import land_economics, raster, sources  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 STATE_REGIONS_DIR = REPO_ROOT / "map_data" / "state_regions"
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 WORKSHEET_PATH = TOOLS_DIR / "config" / "land_economics_worksheet.csv"
-OUT_PATH = DERIVED_DIR / "land_economics_preview.png"
-OUT_HALF_PATH = DERIVED_DIR / "land_economics_preview_half.png"
+OUT_PATH = SCRATCH_DIR / "land_economics_preview.png"
+OUT_HALF_PATH = SCRATCH_DIR / "land_economics_preview_half.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
@@ -348,7 +349,7 @@ def main(argv: list[str] | None = None) -> int:
     draw_legend(draw, field, used_codes,
                 (unit, pil.height - legend_height(field, used_codes, unit) - unit), unit)
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     if realm_stem is None:
         out, half = OUT_PATH, OUT_HALF_PATH
         raster.write_rgb_png(out, np.asarray(pil, dtype=np.uint8))
@@ -357,7 +358,7 @@ def main(argv: list[str] | None = None) -> int:
         print(f"wrote {out}")
         print(f"wrote {half}  ({CANVAS_W // 2}x{CANVAS_H // 2})")
     else:
-        out = DERIVED_DIR / f"land_economics_preview_{realm_stem}.png"
+        out = SCRATCH_DIR / f"land_economics_preview_{realm_stem}.png"
         raster.write_rgb_png(out, np.asarray(pil, dtype=np.uint8))
         print(f"wrote {out}  ({pil.width}x{pil.height})")
     n_default = sum(1 for ph, hv in zip(is_placeholder, has_values) if not ph and not hv)

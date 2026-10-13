@@ -6,7 +6,7 @@ scale shortcut — the same pattern ``mapgen/render_cr_lookup_overlay.py`` (boar
 #4364) already uses for ``cr_oldworld_lookup.bmp``.
 
 **Dev-only, gitignored output.** Everything this writes lands in
-``mapgen/derived/`` (ignored there); nothing it reads from
+``scratchpad/`` (ignored there); nothing it reads from
 ``sources/cr_oldworld_campaign/`` — itself gitignored
 — ever reaches a committed file. This produces *evidence for a human*: a
 render Chris looks at, plus a printed fit report. No committed
@@ -162,6 +162,7 @@ TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 SOURCES_DIR = REPO_ROOT / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
 #: The reference dataset. Gitignored and absent on most devices —
@@ -526,7 +527,7 @@ def write_crops(canvas_rgb: np.ndarray, box: tuple[int, int, int, int], prefix: 
     }.items():
         x0 = max(0, zx - half); x1 = min(CANVAS_W, zx + half)
         y0 = max(0, zy - half); y1 = min(CANVAS_H, zy + half)
-        path = DERIVED_DIR / f"{prefix}_zoom_{name}.png"
+        path = SCRATCH_DIR / f"{prefix}_zoom_{name}.png"
         Image.fromarray(canvas_rgb[y0:y1, x0:x1].copy(), mode="RGB").save(path)
         log(f"  zoom {name:<12} canvas [{x0}, {y0}, {x1}, {y1}] -> "
             f"{path.relative_to(REPO_ROOT)}")
@@ -758,8 +759,8 @@ def build(coast: bool, hull_buffer_px: float,
         prefix += "_" + "_".join(sorted(n for n, _ in colors))
     elif show_grey:
         prefix += "_show_grey"
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = DERIVED_DIR / f"{prefix}.png"
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = SCRATCH_DIR / f"{prefix}.png"
     Image.fromarray(canvas, mode="RGB").save(out_path)
     log(f"wrote {out_path.relative_to(REPO_ROOT)}")
     write_crops(canvas, box, prefix)
@@ -773,7 +774,7 @@ def build(coast: bool, hull_buffer_px: float,
                       "placement moves, this render moves with it. Cropped to "
                       f"{SCOPE_SOURCE}'s opaque extent (Chris, 2026-09-12: land not "
                       "drawn there is out of scope).")
-    side = DERIVED_DIR / f"{prefix}.json"
+    side = SCRATCH_DIR / f"{prefix}.json"
     with open(side, "w", encoding="utf-8") as fh:
         json.dump(report, fh, indent=2, sort_keys=True)
         fh.write("\n")

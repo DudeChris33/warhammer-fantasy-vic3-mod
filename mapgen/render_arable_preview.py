@@ -8,7 +8,7 @@ autonomy model's visual verdict). It drapes a smooth barren->dense-green croplan
 choropleth over a copy of ``sources/terraqueous_globe_reprojected.png`` (the canvas
 frame, 1:1), tinting **only passable land** and leaving water fully transparent
 (post-scope panel must-fix) so the inherited coastline reads. Writes
-``mapgen/derived/arable_on_globe.png`` for an accept/reject verdict; nothing here is
+``scratchpad/arable_on_globe.png`` for an accept/reject verdict; nothing here is
 committed (dev-only, like ``render_wind_patterns.py`` / ``render_hubs_preview.py``,
 so its output is gitignored and it is not on the offline gate).
 
@@ -52,6 +52,7 @@ TOOLS_DIR = Path(__file__).resolve().parent
 REPO_DIR = TOOLS_DIR.parent
 SOURCES_DIR = REPO_DIR / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 LAKE_MASK_PATH = DERIVED_DIR / "lake_mask.png"
 ARABLE_PATH = DERIVED_DIR / "arable_heatmap.png"
@@ -176,8 +177,8 @@ def build(use_globe: bool, opacity: float, out_file: str) -> Path:
     draw_legend(draw)
 
     out = Image.alpha_composite(Image.fromarray(globe, "RGB").convert("RGBA"), overlay).convert("RGB")
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = DERIVED_DIR / out_file
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = SCRATCH_DIR / out_file
     out.save(out_path)
     log(f"wrote {out_path.relative_to(REPO_DIR)}  (opacity {opacity}, "
         f"{'globe' if use_globe else 'flat'} backdrop, {int(passable.sum()):,} passable px tinted)")
@@ -193,7 +194,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--no-globe", action="store_true",
                    help="render on a flat dark backdrop instead of the reprojected globe")
     p.add_argument("--out", default=OUT_DEFAULT,
-                   help=f"output filename under mapgen/derived/ (default {OUT_DEFAULT})")
+                   help=f"output filename under scratchpad/ (default {OUT_DEFAULT})")
     args = p.parse_args(argv)
     build(not args.no_globe, args.opacity, args.out)
     return 0

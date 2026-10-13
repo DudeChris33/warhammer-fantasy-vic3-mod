@@ -47,7 +47,7 @@ Image.MAX_IMAGE_PIXELS = None
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SRC = ROOT / "sources" / "claude_old_world_state_regions_pristine.png"
 DEFAULT_OUT = ROOT / "sources" / "claude_old_world_state_regions.png"
-QA_DIR = ROOT / "mapgen" / "derived"
+QA_DIR = ROOT / "scratchpad"
 
 #: Hand-authored patch data, like ``mapgen/config/inland_lakes.json``: the residue the
 #: classifier cannot decide. ``paint`` holds [[x, y], ...] polylines forced magenta

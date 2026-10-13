@@ -96,8 +96,8 @@ python mapgen/run_fixture.py --check          # determinism + goldens + validato
 > `run_fixture.py --check` synthetic fixtures with no new `rivers.png` committed.
 
 Confirm `git status` shows `map_data/heightmap.png`, `map_data/rivers.png`, and
-`mapgen/derived/land_sea_mask.png` staged/modified. Everything else in
-`mapgen/derived/` is a QA render and is gitignored.
+`mapgen/derived/land_sea_mask.png` staged/modified. QA renders and previews go
+to the gitignored `scratchpad/` at the repo root, not `mapgen/derived/`.
 
 > **Nothing in `common/`, `events/`, `gui/`, or `localization/` changed in S2,**
 > and `map_data/provinces.png`, `default.map`, and `state_regions/` stay vanilla
@@ -186,10 +186,10 @@ Its gate is offline plus one human judgement:
 python mapgen/worldgen/sources.py --verify
 python mapgen/validate_map.py --labels
 python mapgen/run_fixture.py --check
-python mapgen/qa_overlay.py --labels          # writes mapgen/derived/qa_state_labels.png
+python mapgen/qa_overlay.py --labels          # writes scratchpad/qa_state_labels.png
 ```
 
-then **look at `mapgen/derived/qa_state_labels.png` and read
+then **look at `scratchpad/qa_state_labels.png` and read
 `mapgen/derived/COVERAGE.md`**. Registration quality is not knowable until the
 overlay renders, which is exactly why S3a was split out ahead of S3b: a
 control-point correction here costs one re-fit, whereas the same correction after
@@ -216,7 +216,7 @@ python mapgen/render_named_map.py --globe            # local-only globe-space re
 python mapgen/render_named_map.py --tiles            # committed per-macro tiles + index.png
 ```
 
-`--globe` writes `mapgen/derived/globe_named_review.png` — a copy of
+`--globe` writes `scratchpad/globe_named_review.png` — a copy of
 `terraqueous_globe.jpg` with the projected cell network outlined, embedding
 source pixels, so it is **never committed** (gitignored by default) and is
 the render **sent to the user** for the Stage A visual gate. `--tiles` writes

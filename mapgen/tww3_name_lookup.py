@@ -2,7 +2,7 @@
 """Point-sample a canvas location to a TWW3 canon region name (board #4363).
 
 **Dev-only, gitignored output, not wired into any generator.** This writes only
-to ``mapgen/derived/`` and never to ``mapgen/config/`` — it produces *suggestions
+to ``scratchpad/`` and never to ``mapgen/config/`` — it produces *suggestions
 for a human to review*, which is the whole design: board #4363's acceptance
 criteria make human review mandatory before any name reaches a worksheet, so
 this script deliberately has no path that edits committed naming data.
@@ -87,6 +87,7 @@ TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 SOURCES_DIR = REPO_ROOT / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 CONFIG_DIR = TOOLS_DIR / "config"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
@@ -127,15 +128,15 @@ CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 #: ``mapgen/config/`` copy. The two can disagree on the region set (they did at
 #: the time of this board item: 376 rows here vs 369 there), and the current cut
 #: is what any new naming has to attach to.
-DEFAULT_WORKSHEET = DERIVED_DIR / "land_regions_worksheet.csv"
+DEFAULT_WORKSHEET = SCRATCH_DIR / "land_regions_worksheet.csv"
 CONFIG_WORKSHEET = CONFIG_DIR / "land_regions_worksheet.csv"
 
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
 
-NAME_SUGGESTIONS_CSV = DERIVED_DIR / "tww3_name_suggestions.csv"
-HUB_SUGGESTIONS_CSV = DERIVED_DIR / "tww3_hub_suggestions.csv"
+NAME_SUGGESTIONS_CSV = SCRATCH_DIR / "tww3_name_suggestions.csv"
+HUB_SUGGESTIONS_CSV = SCRATCH_DIR / "tww3_hub_suggestions.csv"
 
 #: The citation string a reviewer copies into the worksheet's ``source`` column
 #: when they accept a suggestion. One format, generated in one place.
@@ -764,7 +765,8 @@ HEIGHTMAP_PATH = REPO_ROOT / "map_data" / "heightmap.png"
 
 
 def city_dots_csv_path(stem: str) -> Path:
-    return DERIVED_DIR / f"tww3_city_dots_{stem}.csv"
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    return SCRATCH_DIR / f"tww3_city_dots_{stem}.csv"
 
 
 def run_city_dots(lookup: Lookup, state_file: Path | None) -> int:
@@ -776,7 +778,7 @@ def run_city_dots(lookup: Lookup, state_file: Path | None) -> int:
     #3663 (board #3666).
 
     **Read-only**: writes only the gitignored
-    ``mapgen/derived/tww3_city_dots_<stem>.csv``; never ``mapgen/config/``. A
+    ``scratchpad/tww3_city_dots_<stem>.csv``; never ``mapgen/config/``. A
     ``dedupe`` flag marks dots that sample the same TWW3 region (one canon name,
     several dots — a human picks which dot carries it). ``--state-file`` limits the
     report to the states of one state-regions file.
@@ -874,7 +876,7 @@ def write_csv(path: Path, rows: list[dict]) -> None:
     if not rows:
         log(f"nothing to write to {rel(path)}")
         return
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    path.parent.mkdir(parents=True, exist_ok=True)
     with path.open("w", newline="", encoding="utf-8") as fh:
         writer = csv.DictWriter(fh, fieldnames=list(rows[0].keys()))
         writer.writeheader()
@@ -904,13 +906,13 @@ def main(argv: list[str] | None = None) -> int:
     mode.add_argument("--city-dots", action="store_true",
                       help="forward-sample every painted city dot -> state, province, "
                            "coastal/arable/height + TWW3 name (board #3666); writes "
-                           "mapgen/derived/tww3_city_dots_<stem>.csv")
+                           "scratchpad/tww3_city_dots_<stem>.csv")
     p.add_argument("--state-file", type=Path, default=None,
                    help="--city-dots: only dots in this map_data/state_regions file "
                         "(path or stem, e.g. 02_empire)")
     p.add_argument("--worksheet", type=Path, default=DEFAULT_WORKSHEET,
                    help=f"land-region worksheet to sample (default the CURRENT derived "
-                        f"cut, {DEFAULT_WORKSHEET.name} in mapgen/derived/, not the "
+                        f"cut, {DEFAULT_WORKSHEET.name} in scratchpad/, not the "
                         f"committed mapgen/config/ copy)")
     p.add_argument("--step", type=int, default=4,
                    help="--regions grid subsample stride in canvas px (default 4)")

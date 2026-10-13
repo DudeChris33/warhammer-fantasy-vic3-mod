@@ -7,13 +7,13 @@ names labelled — over the reprojected globe (the review-render convention:
 judge the traced network by eye before any `map_data/rivers.png` is committed. The
 rendered artifact is the gate; his verdict is recorded on the item's trail.
 
-Output is gitignored under `mapgen/derived/` — this is QA, not shipped content, and
+Output is gitignored under `scratchpad/` — this is QA, not shipped content, and
 it loads source imagery directly (no manifest guard), like the other review
 renders (`render_land_regions_preview.py`, `render_hubs_preview.py`).
 
 Usage::
 
-    python mapgen/render_rivers_preview.py             # -> mapgen/derived/rivers_preview.png
+    python mapgen/render_rivers_preview.py             # -> scratchpad/rivers_preview.png
     python mapgen/render_rivers_preview.py --scale 3   # bigger (default downscale 4)
 """
 
@@ -38,6 +38,7 @@ from worldgen import raster, river_network, schema, sources  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 GLOBE = sources.resolve_source_path("terraqueous_globe_reprojected.png")
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
@@ -125,8 +126,8 @@ def main(argv: list[str] | None = None) -> int:
         draw.text((ix + 6, iy - 5), _ISSUE_ABBR.get(i["kind"], i["kind"].upper()),
                   fill=(255, 0, 255))
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out = DERIVED_DIR / "rivers_preview.png"
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out = SCRATCH_DIR / "rivers_preview.png"
     img.save(str(out), format="PNG")
     print(f"wrote {out} ({ow}x{oh})  [{time.time() - t0:.1f}s]")
     if result.issues:

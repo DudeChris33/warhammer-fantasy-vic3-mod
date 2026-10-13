@@ -4,7 +4,7 @@ draped onto this mod's canvas through the single whole-master
 ``tww3_old_world_mod_parchment_full`` registration.
 
 **Dev-only, gitignored output.** Every artifact this writes lands in
-``mapgen/derived/`` and is ignored there (``derived/*``); nothing it reads from
+``scratchpad/`` and is ignored there (root ``.gitignore``); nothing it reads from
 ``sources/cr_oldworld_campaign/`` — itself gitignored —
 ever reaches a committed file. This script produces *evidence for a human*: a
 render Chris looks at, plus a printed fit report. It is not pipeline input, it
@@ -107,6 +107,7 @@ TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 SOURCES_DIR = REPO_ROOT / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
 #: The reference dataset. Gitignored (repo .gitignore line "sources/cr_oldworld_campaign")
@@ -532,7 +533,7 @@ def write_crops(canvas_rgb: np.ndarray, prefix: str) -> list[Path]:
         cx, cy = anchors[name]
         x0 = max(0, cx - ZOOM_HALF); x1 = min(CANVAS_W, cx + ZOOM_HALF)
         y0 = max(0, cy - ZOOM_HALF); y1 = min(CANVAS_H, cy + ZOOM_HALF)
-        path = DERIVED_DIR / f"{prefix}_zoom_{name.lower()}.png"
+        path = SCRATCH_DIR / f"{prefix}_zoom_{name.lower()}.png"
         Image.fromarray(canvas_rgb[y0:y1, x0:x1].copy(), mode="RGB").save(path)
         log(f"  zoom {name:<12} canvas [{x0}, {y0}, {x1}, {y1}] -> "
             f"{path.relative_to(REPO_ROOT)}")
@@ -918,9 +919,9 @@ def build(mode: str, coast: bool, hull_buffer_px: float) -> Path:
 
     draw_legend(canvas, legend)
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     prefix = f"{OUT_PREFIX}_{mode}"
-    out_path = DERIVED_DIR / f"{prefix}.png"
+    out_path = SCRATCH_DIR / f"{prefix}.png"
     Image.fromarray(canvas, mode="RGB").save(out_path)
     log(f"wrote {out_path.relative_to(REPO_ROOT)}")
     write_crops(canvas, prefix)
@@ -936,7 +937,7 @@ def build(mode: str, coast: bool, hull_buffer_px: float) -> Path:
                       "placement moves, this render moves with it. Cropped to "
                       f"{SCOPE_SOURCE}'s opaque extent (Chris, 2026-09-12: land not "
                       "drawn there is out of scope).")
-    side = DERIVED_DIR / f"{prefix}.json"
+    side = SCRATCH_DIR / f"{prefix}.json"
     with open(side, "w", encoding="utf-8") as fh:
         json.dump(report, fh, indent=2, sort_keys=True)
         fh.write("\n")

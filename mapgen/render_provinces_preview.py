@@ -13,7 +13,7 @@ feedback-review-render-on-reprojected-globe):
   tint blended over the globe, so neighbouring provinces are easy to tell apart.
 
 Local-only output: it embeds the source globe pixels, so it lands under
-``mapgen/derived/``, which ``mapgen/.gitignore`` excludes from the repo. The
+``scratchpad/``, which the root ``.gitignore`` excludes from the repo. The
 committed artifacts are ``provinces.png`` + its index from
 ``generate_provinces.py``; this is only the human-review picture (the visual
 gate — the user's, per the autonomy model).
@@ -45,13 +45,14 @@ Image.MAX_IMAGE_PIXELS = None
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 INDEX_PATH = DERIVED_DIR / "provinces_index.json"
-OUT_PATH = DERIVED_DIR / "provinces_partition_review.png"
-OUT_HALF_PATH = DERIVED_DIR / "provinces_partition_review_half.png"
-TINTED_OUT_PATH = DERIVED_DIR / "provinces_tinted_review.png"
-TINTED_OUT_HALF_PATH = DERIVED_DIR / "provinces_tinted_review_half.png"
+OUT_PATH = SCRATCH_DIR / "provinces_partition_review.png"
+OUT_HALF_PATH = SCRATCH_DIR / "provinces_partition_review_half.png"
+TINTED_OUT_PATH = SCRATCH_DIR / "provinces_tinted_review.png"
+TINTED_OUT_HALF_PATH = SCRATCH_DIR / "provinces_tinted_review_half.png"
 
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
@@ -117,7 +118,7 @@ def _spread_palette(n: int) -> np.ndarray:
 
 
 def _write(img: np.ndarray, out_path: Path, half_path: Path, note: str) -> None:
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     raster.write_rgb_png(out_path, img)
     print(f"wrote {out_path}  ({note})")
     half = Image.fromarray(img, "RGB").resize((CANVAS_W // 2, CANVAS_H // 2),

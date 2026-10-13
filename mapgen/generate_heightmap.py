@@ -55,6 +55,7 @@ from worldgen import ingest, raster, reproject, sources, schema  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MAP_DATA_DIR = REPO_ROOT / "map_data"
 LUT_PATH = TOOLS_DIR / "lut" / "terraqueous_elevation.json"
 
@@ -406,7 +407,8 @@ def main(argv: list[str] | None = None) -> int:
     _report_polar_band(land, t0)
 
     if args.preview:
-        _write_preview(land, DERIVED_DIR / "preview_land_sea.png")
+        SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+        _write_preview(land, SCRATCH_DIR / "preview_land_sea.png")
 
     log("building relief detail...")
     detail, detail_valid = relief_detail(regs, land, t0)
@@ -438,7 +440,8 @@ def main(argv: list[str] | None = None) -> int:
         f"max {int(height.max())}  (vanilla: 5936 / 16742 / 53469)")
 
     if args.preview:
-        _write_preview_gray(height, DERIVED_DIR / "preview_heightmap.png")
+        SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+        _write_preview_gray(height, SCRATCH_DIR / "preview_heightmap.png")
     log("done.", t0)
     return 0
 

@@ -60,7 +60,7 @@ SOURCES_DIR = ROOT / "sources"
 DEFAULT_SRC = sources_mod.resolve_source_path("terraqueous_globe_reprojected.png", SOURCES_DIR)
 #: Local scratch, not manifest-tracked — see ``sources/WIP/``.
 DEFAULT_OUT = SOURCES_DIR / "WIP" / "terraqueous_globe_reprojected_no_text.png"
-QA_DIR = ROOT / "mapgen" / "derived"
+QA_DIR = ROOT / "scratchpad"
 
 
 # --------------------------------------------------------------------------- helpers

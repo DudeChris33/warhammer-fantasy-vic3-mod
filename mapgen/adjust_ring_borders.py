@@ -26,7 +26,7 @@ A point's place along the ring is its angle about the centre of the inner sea,
 taken from the committed dot-warp record, so the dot warp still decides where
 along the ring everything sits.
 
-Writes, all gitignored under ``mapgen/derived/``:
+Writes, all gitignored under ``scratchpad/``:
 
 * ``ulthuan_borders_adjusted_canvas.png``: the lines alone, pure magenta, 1 px,
   on a transparent full-canvas image, to lay into the canvas master's
@@ -64,7 +64,8 @@ Image.MAX_IMAGE_PIXELS = None
 
 TOOLS_DIR = Path(__file__).resolve().parent
 ROOT = TOOLS_DIR.parent
-OUT = TOOLS_DIR / "derived"
+DERIVED = TOOLS_DIR / "derived"
+OUT = TOOLS_DIR.parent / "scratchpad"  # the three review PNGs; gitignored at the repo root
 SEED_SOURCE = "cr_combi_expanded_map_ulthuan.png"
 
 #: Canvas box the island sits in (x0, y0, x1, y1).
@@ -279,7 +280,7 @@ def classify(P, pring, nodes, edges, hp):
 
 
 def main():
-    land = np.asarray(Image.open(OUT / "land_sea_mask.png"))[Y0:Y1, X0:X1] > 0
+    land = np.asarray(Image.open(DERIVED / "land_sea_mask.png"))[Y0:Y1, X0:X1] > 0
     cring = ring_of(land)
     ys, xs = np.nonzero(cring)
     C = Depth(cring, (xs.mean(), ys.mean() + 40))
@@ -435,6 +436,7 @@ def main():
     new = np.asarray(img) > 0
     full = np.zeros((3616, 8192, 4), np.uint8)
     full[Y0:Y1, X0:X1][new] = (255, 0, 255, 255)
+    OUT.mkdir(parents=True, exist_ok=True)
     Image.fromarray(full, 'RGBA').save(OUT / "ulthuan_borders_adjusted_canvas.png")
 
     lab, n = ndi.label(cring & ~ndi.binary_dilation(new, structure=np.ones((3, 3))))

@@ -35,7 +35,7 @@ pair of adjacent zone centres, so you can check directly that the centre-to-cent
 links ride the arrows rather than cutting across them.
 
 Deterministic: linear solve + deterministic streamline seeding + BFS with
-index-ordered tie breaks — no RNG, no wall-clock. Writes a PNG to ``mapgen/derived/``.
+index-ordered tie breaks — no RNG, no wall-clock. Writes a PNG to ``scratchpad/``.
 
 Usage::
 
@@ -63,6 +63,7 @@ from worldgen import cells  # noqa: E402
 Image.MAX_IMAGE_PIXELS = None
 
 DERIVED_DIR = oc.DERIVED_DIR
+SCRATCH_DIR = oc.SCRATCH_DIR
 REPO_DIR = oc.REPO_DIR
 CANVAS_W, CANVAS_H = oc.CANVAS_W, oc.CANVAS_H
 DS = oc.SOLVE_DS
@@ -377,7 +378,7 @@ def build(spacing: float, min_dist: float, stream_sep: int, k: float, p: float,
 
     render(land, coarse, seed_ij, excluded, n, lines if show_currents else None,
            full, out_file, t0)
-    return DERIVED_DIR / out_file
+    return SCRATCH_DIR / out_file
 
 
 # --------------------------------------------------------------------------- #
@@ -483,8 +484,8 @@ def render(land, coarse, seed_ij, excluded, n, lines, full, out_file, t0) -> Non
 
     if not full:
         img = img.resize((CANVAS_W // 2, CANVAS_H // 2), Image.LANCZOS)
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out = DERIVED_DIR / out_file
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out = SCRATCH_DIR / out_file
     img.save(out)
     log(f"wrote {out.relative_to(REPO_DIR)}  ({n} currents zones)", t0)
 
@@ -507,7 +508,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--no-currents", action="store_true", help="hide the streamline overlay")
     p.add_argument("--full", action="store_true", help="render at full 8192x3616 (default half)")
     p.add_argument("--out", default="sea_zones_gyres_review.png",
-                   help="output filename under mapgen/derived/")
+                   help="output filename under scratchpad/")
     args = p.parse_args(argv)
     build(args.spacing, args.min_dist, args.stream_sep, args.k, args.p,
           args.speed_frac, not args.no_currents, args.full, args.out)

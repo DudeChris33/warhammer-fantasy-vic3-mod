@@ -94,6 +94,7 @@ from worldgen import sources as sources_mod  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 SOURCES_DIR = TOOLS_DIR.parent / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
@@ -393,9 +394,9 @@ def build(pad: int, out_prefix: str, layers: list[tuple[str, str, tuple[int, int
 
     n_coast = overlay_coast(canvas_rgb, coasts_rgba) if coasts_rgba is not None else 0
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     crop = canvas_rgb[y0:y1, x0:x1].copy()
-    out_path = DERIVED_DIR / f"{out_prefix}.png"
+    out_path = SCRATCH_DIR / f"{out_prefix}.png"
     Image.fromarray(crop, mode="RGB").save(out_path)
     log(f"wrote {out_path.relative_to(TOOLS_DIR.parent)}  (coast {n_coast:,} px)")
     return out_path
@@ -408,7 +409,7 @@ def main(argv: list[str] | None = None) -> int:
                    help=f"framing pad in canvas px around the placed states, with --crop "
                         f"(default {CROP_PAD}; ignored on the default full frame)")
     p.add_argument("--out-prefix", default=OUT_PREFIX_DEFAULT,
-                   help=f"output filename prefix under mapgen/derived/ (default {OUT_PREFIX_DEFAULT})")
+                   help=f"output filename prefix under scratchpad/ (default {OUT_PREFIX_DEFAULT})")
     p.add_argument("--source", default=PAINT_ORA,
                    help=f"the .ora (RGBA layers, any resolution of the master frame — "
                         f"scaled via the record's master_shape) to pull --colors' layers "

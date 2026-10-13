@@ -3,7 +3,7 @@
 Every pixel of the canvas belongs to exactly one region: region "cores" (polygons, painted in dict order,
 later wins, so no overlap) cover the land; every pixel outside all cores joins the nearest core, so no
 holes. Ocean wedges are therefore "nearest region", not real membership.
-Core polygons are in a 2000x883 display frame. Output goes to the gitignored mapgen/derived/.
+Core polygons are in a 2000x883 display frame. Output goes to the gitignored scratchpad/.
 """
 from pathlib import Path
 
@@ -13,8 +13,8 @@ from PIL import Image, ImageDraw, ImageFilter
 Image.MAX_IMAGE_PIXELS = None
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "sources/originals/terraqueous_globe_reprojected.png"
-OUT = ROOT / "mapgen/derived/macro_regions_proposal.png"
-OUT_SMALL = ROOT / "mapgen/derived/macro_regions_proposal_2048.png"
+OUT = ROOT / "scratchpad/macro_regions_proposal.png"
+OUT_SMALL = ROOT / "scratchpad/macro_regions_proposal_2048.png"
 
 # name -> list of polygons (a region may be several pieces, e.g. an island group)
 REGIONS = {

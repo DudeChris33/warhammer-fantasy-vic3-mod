@@ -58,6 +58,7 @@ from worldgen import lakes, raster, reproject, river_network, rivers as riverlib
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MAP_DATA_DIR = REPO_ROOT / "map_data"
 SOURCES_DIR = REPO_ROOT / "sources"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
@@ -312,7 +313,8 @@ def main(argv: list[str] | None = None) -> int:
     log(f"wrote {DERIVED_DIR / 'rivers_index.json'} ({len(result.index)} rivers)", t0)
 
     if args.preview:
-        _write_preview(idx, palette, DERIVED_DIR / "preview_rivers.png")
+        SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+        _write_preview(idx, palette, SCRATCH_DIR / "preview_rivers.png")
     return 0
 
 

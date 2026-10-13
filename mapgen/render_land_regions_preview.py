@@ -72,8 +72,8 @@ physical spot on the CURRENT map. A name whose anchor pixel is no longer land
 drops with a loud stderr warning rather than silently reattaching to the
 wrong region.
 
-Local-only output: embeds source pixels, so it lands under ``mapgen/derived/``,
-which ``mapgen/.gitignore`` excludes from the repo — never shipped content,
+Local-only output: embeds source pixels, so it lands under ``scratchpad/``,
+which the root ``.gitignore`` excludes from the repo — never shipped content,
 purely a naming aid for #2931.
 
 **Parchment-drape backend.** Drapes the parchment through
@@ -119,6 +119,7 @@ Image.MAX_IMAGE_PIXELS = None
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 
 PROVINCES_PATH = REPO_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
@@ -128,9 +129,9 @@ LAND_REGIONS_INDEX_PATH = DERIVED_DIR / "land_regions_index.json"
 #: on-image numbers/CSV ids always match what actually ships.
 LAND_STATE_IDS_PATH = DERIVED_DIR / "land_state_ids.json"
 
-OUT_PATH = DERIVED_DIR / "land_regions_preview.png"
-OUT_HALF_PATH = DERIVED_DIR / "land_regions_preview_half.png"
-CSV_PATH = DERIVED_DIR / "land_regions_worksheet.csv"
+OUT_PATH = SCRATCH_DIR / "land_regions_preview.png"
+OUT_HALF_PATH = SCRATCH_DIR / "land_regions_preview_half.png"
+CSV_PATH = SCRATCH_DIR / "land_regions_worksheet.csv"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
@@ -438,7 +439,7 @@ def main(argv: list[str] | None = None) -> int:
         f"font {LABEL_FONT_MIN}-{LABEL_FONT_MAX}px scaled by area)", t0)
 
     out_rgb = np.asarray(pil_img, dtype=np.uint8)
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     raster.write_rgb_png(OUT_PATH, out_rgb)
     print(f"wrote {OUT_PATH}")
     half = pil_img.resize((CANVAS_W // 2, CANVAS_H // 2), resample=Image.LANCZOS)

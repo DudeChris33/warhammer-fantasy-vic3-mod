@@ -12,8 +12,8 @@ Board #2593 / #2698. Two modes over the canvas-aligned reprojected globe
   each group's display name once. This PNG is the loremaster + user visual gate.
 
 Local-only output: it embeds the source globe pixels (like
-``globe_named_review.png``), so it lands under ``mapgen/derived/``, which
-``mapgen/.gitignore`` excludes from the repo. The committed artifacts are the label
+``globe_named_review.png``), so it lands under ``scratchpad/``, which
+the root ``.gitignore`` excludes from the repo. The committed artifacts are the label
 layer + index from ``generate_sea_zones.py``; this is only the human-review picture.
 
 Usage::
@@ -42,16 +42,17 @@ Image.MAX_IMAGE_PIXELS = None
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 LABELS_PATH = DERIVED_DIR / "sea_zones.png"
 INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
-OUT_PATH = DERIVED_DIR / "seas_partition_review.png"
-OUT_HALF_PATH = DERIVED_DIR / "seas_partition_review_half.png"
-NAMED_OUT_PATH = DERIVED_DIR / "seas_named_review.png"
-NAMED_OUT_HALF_PATH = DERIVED_DIR / "seas_named_review_half.png"
-NUMBERED_OUT_PATH = DERIVED_DIR / "seas_numbered_review.png"
-NUMBERED_OUT_HALF_PATH = DERIVED_DIR / "seas_numbered_review_half.png"
-NUMBERED_TABLE_PATH = DERIVED_DIR / "seas_numbered_index.txt"
+OUT_PATH = SCRATCH_DIR / "seas_partition_review.png"
+OUT_HALF_PATH = SCRATCH_DIR / "seas_partition_review_half.png"
+NAMED_OUT_PATH = SCRATCH_DIR / "seas_named_review.png"
+NAMED_OUT_HALF_PATH = SCRATCH_DIR / "seas_named_review_half.png"
+NUMBERED_OUT_PATH = SCRATCH_DIR / "seas_numbered_review.png"
+NUMBERED_OUT_HALF_PATH = SCRATCH_DIR / "seas_numbered_review_half.png"
+NUMBERED_TABLE_PATH = SCRATCH_DIR / "seas_numbered_index.txt"
 
 SEA_ZONES_SOURCE = sources.source_ref("sea_zones")
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
@@ -325,7 +326,7 @@ def _read_land() -> np.ndarray:
 
 
 def _write(img: np.ndarray, out_path: Path, half_path: Path, note: str) -> None:
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     raster.write_rgb_png(out_path, img)
     print(f"wrote {out_path}  ({note})")
     half = Image.fromarray(img, "RGB").resize((CANVAS_W // 2, CANVAS_H // 2),

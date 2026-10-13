@@ -11,7 +11,7 @@ Two artifacts, two different jobs (world-map-parchment-areas-onto-globe.md):
     (``reproject.fit_parametric(terraqueous_globe.jpg)``): walk the globe's own
     pixels, push each one to its canvas position, and sample the label layer
     there — no inverse projection has to be derived. Written under
-    ``mapgen/derived/``, which ``mapgen/.gitignore`` excludes by default; it
+    ``scratchpad/``, which the root ``.gitignore`` excludes; it
     embeds the source image itself, so it is not committed.
 
 ``--tiles``
@@ -47,6 +47,7 @@ from worldgen import cells, raster, reproject, schema, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 NAMED_DIR = DERIVED_DIR / "named"
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 LABELS_PATH = DERIVED_DIR / "state_labels.png"
@@ -165,7 +166,8 @@ def render_globe_composite() -> Path:
     img[edge] = (255, 0, 255)
 
     DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out = DERIVED_DIR / "globe_named_review.png"
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out = SCRATCH_DIR / "globe_named_review.png"
     raster.write_rgb_png(out, img)
     print(f"wrote {out} (local-only — {gw}x{gh}, {int(edge.sum()):,} outline px)")
     return out

@@ -20,7 +20,7 @@ Phase A (this file today):
 Phase B (land lettering and river continuity) is added after the denoise strength is chosen.
 
 Not touched: the original canvas, the source manifest, anything committed under `sources/`. Output
-and sheets are git-ignored (`sources/WIP/`, `mapgen/derived/`). Not part of the offline gate.
+and sheets are git-ignored (`sources/WIP/`, `scratchpad/`). Not part of the offline gate.
 Supersedes `remove_map_text.py` and `snap_land_palette.py`, which are left as they are.
 
 Usage (from the repo root):
@@ -52,7 +52,7 @@ DEFAULT_OUT = ROOT / "sources" / "WIP" / "terraqueous_globe_reprojected_clean.pn
 MASK_PATH = ROOT / "mapgen" / "derived" / "land_sea_mask.png"
 RIVERS_PATH = ROOT / "map_data" / "rivers.png"
 LUT_PATH = ROOT / "mapgen" / "lut" / "terraqueous_elevation.json"
-SHEET_DIR = ROOT / "mapgen" / "derived"
+SHEET_DIR = ROOT / "scratchpad"
 WIDTH, HEIGHT = canvas_frame.WIDTH, canvas_frame.HEIGHT
 
 NLM_H = 0.035         # non-local-means strength on 0..1 colour; --h overrides

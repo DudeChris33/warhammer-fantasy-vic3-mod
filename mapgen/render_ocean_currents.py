@@ -9,7 +9,7 @@ subpolar **gyres**, intensified against the western side of each basin (the Gulf
 Stream / Kuroshio effect) and closed by the continents — exactly the picture a
 textbook ocean-currents map shows. This renders that as evenly-spaced flowing
 streamlines over the oceans of a clean flat basemap (green land, pale-blue sea),
-and writes ``mapgen/derived/ocean_currents.png`` for an accept/reject verdict.
+and writes ``scratchpad/ocean_currents.png`` for an accept/reject verdict.
 
 How the flow is derived (a stylised model, not a full ocean GCM, but the standard
 one that yields this picture):
@@ -72,6 +72,7 @@ from worldgen import raster  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_DIR = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
@@ -390,7 +391,7 @@ def build(sep: int, gamma: float, out_file: str, debug_psi: bool) -> Path:
         img[..., 0] = np.uint8(np.clip(norm, 0, 1) * 255)      # red = positive psi
         img[..., 2] = np.uint8(np.clip(-norm, 0, 1) * 255)     # blue = negative psi
         img[~ocean] = (30, 40, 30)
-        out = DERIVED_DIR / "ocean_currents_psi.png"
+        out = SCRATCH_DIR / "ocean_currents_psi.png"
         Image.fromarray(img, "RGB").resize((CANVAS_W // 4, CANVAS_H // 4),
                                            Image.NEAREST).save(out)
         log(f"wrote {out.relative_to(REPO_DIR)} (streamfunction debug; red +psi / blue -psi)")
@@ -430,8 +431,8 @@ def build(sep: int, gamma: float, out_file: str, debug_psi: bool) -> Path:
 
     draw_graticule(draw)
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = DERIVED_DIR / out_file
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = SCRATCH_DIR / out_file
     base.save(out_path)
     log(f"drew {drawn} streamlines (sep {sep}px)")
     log(f"wrote {out_path.relative_to(REPO_DIR)}")
@@ -447,7 +448,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--debug-psi", action="store_true",
                    help="also dump the streamfunction heatmap to verify the gyres")
     p.add_argument("--out", default=OUT_DEFAULT,
-                   help=f"output filename under mapgen/derived/ (default {OUT_DEFAULT})")
+                   help=f"output filename under scratchpad/ (default {OUT_DEFAULT})")
     args = p.parse_args(argv)
     build(args.sep, args.gamma, args.out, args.debug_psi)
     return 0

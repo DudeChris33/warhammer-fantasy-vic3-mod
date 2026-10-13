@@ -6,7 +6,7 @@ edges, and dots each canon city (green = passable province in its state's
 main component, red = sealed/impassable). Reads the committed
 ``map_data/provinces.png`` + ``mapgen/derived/provinces_index.json`` and, when it
 exists, ``mapgen/derived/canon_city_provinces_index.json``. Writes into
-``mapgen/derived/`` (gitignored) — a dev-only artifact for the user's visual
+``scratchpad/`` (gitignored) — a dev-only artifact for the user's visual
 verdict, outside the offline gate. Source-free: no parchment drape.
 """
 from __future__ import annotations
@@ -27,12 +27,13 @@ from worldgen import land_provinces, raster  # noqa: E402
 
 REPO_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 PROVINCES_PNG = REPO_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX = DERIVED_DIR / "provinces_index.json"
 CITY_INDEX = DERIVED_DIR / "canon_city_provinces_index.json"
-OUT_PATH = DERIVED_DIR / "impassable_preview.png"
-OUT_HALF_PATH = DERIVED_DIR / "impassable_preview_half.png"
-OUT_CROP_PATH = DERIVED_DIR / "impassable_preview_crop.png"
+OUT_PATH = SCRATCH_DIR / "impassable_preview.png"
+OUT_HALF_PATH = SCRATCH_DIR / "impassable_preview_half.png"
+OUT_CROP_PATH = SCRATCH_DIR / "impassable_preview_crop.png"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 
@@ -98,7 +99,7 @@ def main() -> int:
                 draw.text((x + 8, y - 10), c["name"], fill=(0, 0, 0))
             pts.append((x, y))
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     img.save(OUT_PATH)
     img.resize((CANVAS_W // 2, CANVAS_H // 2)).save(OUT_HALF_PATH)
     log(f"wrote {OUT_PATH.name} + half", t0)

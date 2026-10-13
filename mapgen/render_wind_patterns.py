@@ -8,7 +8,7 @@ model**: a fixed pattern of surface wind belts set by latitude alone. This drape
 that flow field over a copy of ``sources/terraqueous_globe_reprojected.png`` (the
 canvas frame, 1:1) so the wind pattern can be judged by eye against the real
 coastline, like a textbook "global wind patterns" arrow map does for Earth. It
-writes ``mapgen/derived/wind_patterns_on_globe.png`` for an accept/reject verdict;
+writes ``scratchpad/wind_patterns_on_globe.png`` for an accept/reject verdict;
 nothing is committed here.
 
 Two stages compose the field:
@@ -82,6 +82,7 @@ TOOLS_DIR = Path(__file__).resolve().parent
 REPO_DIR = TOOLS_DIR.parent
 SOURCES_DIR = REPO_DIR / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 HEIGHTMAP_PATH = REPO_DIR / "map_data" / "heightmap.png"
 
@@ -364,8 +365,8 @@ def build(spacing: int, length: float, opacity: float, use_deflect: bool,
     out = Image.alpha_composite(Image.fromarray(globe, "RGB").convert("RGBA"), overlay)
     out = out.convert("RGB")
 
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
-    out_path = DERIVED_DIR / out_file
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out_path = SCRATCH_DIR / out_file
     out.save(out_path)
     total = sum(counts.values())
     log(f"arrows placed: {total}  "
@@ -394,7 +395,7 @@ def main(argv: list[str] | None = None) -> int:
     p.add_argument("--gain", type=float, default=DEFLECT_GAIN,
                    help=f"terrain-deflection strength (default {DEFLECT_GAIN:.0f})")
     p.add_argument("--out", default=OUT_DEFAULT,
-                   help=f"output filename under mapgen/derived/ (default {OUT_DEFAULT})")
+                   help=f"output filename under scratchpad/ (default {OUT_DEFAULT})")
     args = p.parse_args(argv)
 
     build(args.spacing, args.length, args.opacity, not args.no_deflect,

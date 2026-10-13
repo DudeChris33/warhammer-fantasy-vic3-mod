@@ -16,7 +16,7 @@ Modes::
     python mapgen/generate_adjacencies.py --write    # write map_data/adjacencies.csv from the worksheet
     python mapgen/generate_adjacencies.py --check    # re-derive in memory, assert == committed CSV
 
-``--review`` writes only gitignored ``mapgen/derived/`` files. Ambiguous lines are
+``--review`` writes only gitignored ``scratchpad/`` files. Ambiguous lines are
 reported and skipped, never guessed. The emitted CSV is province-colour keyed, so
 re-run after any ``generate_provinces.py`` regen.
 
@@ -42,13 +42,14 @@ from worldgen import raster, schema, sources  # noqa: E402
 TOOLS_DIR = Path(__file__).resolve().parent
 MOD_ROOT = TOOLS_DIR.parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 PROVINCES_PNG = MOD_ROOT / "map_data" / "provinces.png"
 PROVINCES_INDEX = DERIVED_DIR / "provinces_index.json"
 STATE_DIR = MOD_ROOT / "map_data" / "state_regions"
 WORKSHEET = TOOLS_DIR / "config" / "adjacency_worksheet.json"
 CSV_PATH = MOD_ROOT / "map_data" / "adjacencies.csv"
-TABLE_PATH = DERIVED_DIR / "adjacencies_table.csv"
-PREVIEW_PATH = DERIVED_DIR / "adjacencies_preview.png"
+TABLE_PATH = SCRATCH_DIR / "adjacencies_table.csv"
+PREVIEW_PATH = SCRATCH_DIR / "adjacencies_preview.png"
 STRAITS_PATH = MOD_ROOT / "common" / "strait_definitions" / "canals.txt"
 CANAL_LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_canals_l_english.yml"
 BOM = b"\xef\xbb\xbf"
@@ -307,7 +308,7 @@ def review() -> int:
     for c, r in pairs:
         if r.type and not schema._ADJ_TYPE_RE.fullmatch(r.type):
             print(f"  INVALID type {r.type!r} ({r.comment!r}) near {list(c.start)}")
-    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     with open(TABLE_PATH, "w", newline="", encoding="utf-8") as fh:
         wr = csv.writer(fh)
         wr.writerow(["number", "From", "To", "from_state", "to_state", "start_x", "start_y",
@@ -521,9 +522,9 @@ def main(argv: list[str] | None = None) -> int:
     a = ap.parse_args(argv)
     if a.zoom:
         rows_ = [int(v) for v in a.zoom.split(",")]
-        return zoom(rows_, DERIVED_DIR / f"adjacencies_zoom_{'_'.join(map(str, rows_))}.png")
+        return zoom(rows_, SCRATCH_DIR / f"adjacencies_zoom_{'_'.join(map(str, rows_))}.png")
     if a.as_filled:
-        return as_filled(Path(a.as_filled), DERIVED_DIR / "adjacencies_as_filled.png")
+        return as_filled(Path(a.as_filled), SCRATCH_DIR / "adjacencies_as_filled.png")
     if a.sync:
         return sync()
     if a.write or a.check:

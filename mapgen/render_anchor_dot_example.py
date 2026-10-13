@@ -12,7 +12,7 @@ composited over a neutral backdrop, with the committed
 ``map_data/rivers.png`` river network overlaid in blue, and the seed's landmark
 dots as red rings, cropped to the record's footprint.
 
-Writes ``mapgen/derived/<region>_anchor_dot_warp_example.png``, where
+Writes ``scratchpad/<region>_anchor_dot_warp_example.png``, where
 ``<region>`` is the seed stem with the shared ``tww3_old_world_mod_parchment_``
 prefix dropped (``full_anchor_dot_warp_example.png``, …).
 
@@ -69,6 +69,7 @@ SEED_DIR = TOOLS_DIR / "registration" / "seeds"
 REGISTRATION_DIR = TOOLS_DIR / "registration"
 SOURCES_DIR = TOOLS_DIR.parent / "sources"
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 #: The committed, canvas-frame river network (board #3703) — same frame as the
 #: coastline mask, so it overlays with no warp of its own in render().
@@ -319,7 +320,8 @@ def render_native(stem: str, out_file: str, overlay_borders: bool = False) -> Pa
     for lm in seed["landmarks"]:
         _draw_ring(canvas_rgb, float(lm["source"][0]), float(lm["source"][1]))
 
-    out = DERIVED_DIR / out_file
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out = SCRATCH_DIR / out_file
     Image.fromarray(canvas_rgb, mode="RGB").save(out)
     log(f"wrote {out}")
     return out
@@ -358,7 +360,8 @@ def render_borders_only(stem: str) -> Path:
     log(f"canvas lines  {int(drawn.sum()):,} px")
 
     region = out_name(stem)[:-len("_anchor_dot_warp_example.png")]
-    canvas_out = DERIVED_DIR / f"{region}_borders_canvas.png"
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    canvas_out = SCRATCH_DIR / f"{region}_borders_canvas.png"
     Image.fromarray(lines, mode="RGBA").save(canvas_out)
     log(f"wrote {canvas_out}")
 
@@ -371,7 +374,8 @@ def render_borders_only(stem: str) -> Path:
     view = globe[y0:y1, x0:x1].copy()
     overlay_coast(view, box, raster.read_mask_png(MASK_PATH))
     view[drawn[y0:y1, x0:x1]] = lines[y0:y1, x0:x1, :3][drawn[y0:y1, x0:x1]]
-    out = DERIVED_DIR / f"{region}_borders_only.png"
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out = SCRATCH_DIR / f"{region}_borders_only.png"
     Image.fromarray(view, mode="RGB").save(out)
     log(f"wrote {out}")
     return out
@@ -415,7 +419,8 @@ def render(stems: list[str], out_file: str, box_pad: int = 0) -> Path:
     for seed in seeds:
         draw_rings(canvas_rgb, box, seed)
 
-    out = DERIVED_DIR / out_file
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out = SCRATCH_DIR / out_file
     Image.fromarray(canvas_rgb, mode="RGB").save(out)
     log(f"wrote {out}")
     return out

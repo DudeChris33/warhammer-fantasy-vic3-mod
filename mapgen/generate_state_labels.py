@@ -52,6 +52,7 @@ from worldgen import cells, macro, parchment, raster, schema, sources  # noqa: E
 
 TOOLS_DIR = Path(__file__).resolve().parent
 DERIVED_DIR = TOOLS_DIR / "derived"
+SCRATCH_DIR = TOOLS_DIR.parent / "scratchpad"  # QA renders and previews; gitignored at the repo root
 MASK_PATH = DERIVED_DIR / "land_sea_mask.png"
 LABELS_PATH = DERIVED_DIR / "state_labels.png"
 INDEX_PATH = DERIVED_DIR / "state_labels_index.json"
@@ -848,7 +849,8 @@ def write_preview(labels: np.ndarray, land: np.ndarray, n_land: int, step: int =
     palette = rng.integers(60, 250, size=(int(labels.max()) + 1, 3), dtype=np.uint8)
     img = palette[small]
     img[~sland] = (img[~sland] // 3 + np.array([0, 0, 60], dtype=np.uint8))
-    out = DERIVED_DIR / "preview_state_labels.png"
+    SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
+    out = SCRATCH_DIR / "preview_state_labels.png"
     raster.write_rgb_png(out, img)
     log(f"wrote {out.relative_to(TOOLS_DIR.parent)}")
 
