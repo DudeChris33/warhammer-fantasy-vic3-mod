@@ -9,9 +9,10 @@ NEconomy = {
 
 # START_DATE: vanilla is 1836.1.1; the setting starts in 2502 IC, right after Karl Franz is elected Emperor. END_DATE keeps vanilla's
 # 100-year span (vanilla 1936.1.1 would precede the start date).
+# The Storm of Chaos and the End Times are deliberately not modelled (Chris, 2026-10-12); a possible future submod.
 NGame = {
 	START_DATE = "2502.1.1"
-	END_DATE = "2612.1.1"
+	END_DATE = "2602.1.1"
 }
 
 # Vanilla 1836.1.1: laws count as enacted on the start date.
