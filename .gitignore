@@ -41,6 +41,8 @@ sources/*/*
 !sources/oldworld-first/terraqueous_globe_reprojected - full.ora
 
 # maestro skills scratch copies of workspecs
-planning/.cache/
-.claude/skills/maestro-**/
-.claude/skills/sites-verify/
+planning/
+.claude/
+
+# Claude renders, previews, QA output (local only)
+scratchpad/
