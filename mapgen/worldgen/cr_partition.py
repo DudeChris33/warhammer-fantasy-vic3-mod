@@ -572,6 +572,94 @@ def high_ground_edges(elev_m: np.ndarray, land: np.ndarray, min_m: float,
     return hi & ~ndimage.binary_erosion(hi)
 
 
+def terrain_cost(elev_m: np.ndarray, features: np.ndarray, mask: np.ndarray,
+                 slope_w: float = 2.0, feature_w: float = 25.0) -> np.ndarray:
+    """Per-pixel travel cost for :func:`split_large_terrain`: 1 on flat ground, more on slopes
+    (gradient magnitude of the smoothed elevation, normalised by its 95th percentile inside
+    ``mask`` and clipped), and ``feature_w`` extra on a river, impassable edge or high-ground
+    edge (1 px dilated so an 8-connected walk cannot slip through)."""
+    g = ndimage.gaussian_gradient_magnitude(elev_m.astype(np.float32), 2.0)
+    ref = float(np.percentile(g[mask], 95)) if mask.any() else 0.0
+    g = np.clip(g / ref, 0.0, 1.5) if ref > 0 else np.zeros_like(g)
+    feat = ndimage.binary_dilation(features) if features.any() else features
+    return (1.0 + slope_w * g + feature_w * feat).astype(np.float32)
+
+
+def _geodesic_voronoi(cost: np.ndarray, mask: np.ndarray, seeds: np.ndarray) -> np.ndarray:
+    """Owner index (0..k-1, -1 outside ``mask``) of the cheapest 4-connected walk from any seed.
+    Deterministic: ties go to the lower seed index, then raster order."""
+    import heapq
+    h, w = mask.shape
+    inf = np.float32(np.inf)
+    dist = np.full((h, w), inf, dtype=np.float32)
+    own = np.full((h, w), -1, dtype=np.int32)
+    heap = []
+    for i, (y, x) in enumerate(seeds):
+        dist[y, x] = 0.0
+        own[y, x] = i
+        heap.append((0.0, i, int(y), int(x)))
+    heapq.heapify(heap)
+    c = cost.tolist()
+    dl = dist
+    while heap:
+        d, i, y, x = heapq.heappop(heap)
+        if d > dl[y, x]:
+            continue
+        cy = c[y][x]
+        for ny, nx in ((y - 1, x), (y + 1, x), (y, x - 1), (y, x + 1)):
+            if 0 <= ny < h and 0 <= nx < w and mask[ny, nx]:
+                nd = d + 0.5 * (cy + c[ny][nx])
+                if nd < dl[ny, nx]:
+                    dl[ny, nx] = nd
+                    own[ny, nx] = i
+                    heapq.heappush(heap, (nd, i, ny, nx))
+    return own
+
+
+def split_large_terrain(labels: np.ndarray, cost: np.ndarray, max_area: int, target_area: int,
+                        iters: int = 3) -> np.ndarray:
+    """Subdivide cells above ``max_area`` into about ``target_area`` pieces along the terrain.
+
+    ``cells.split_large`` assigns by straight-line nearest seed, which cuts geometric wedges.
+    Here each oversized cell is cut by a geodesic Voronoi over ``cost`` (see
+    :func:`terrain_cost`), so a border settles on a river, a high-ground edge or a steep slope
+    where one is near, and runs straight only across open ground. Seeds start farthest-point
+    spread and move to the member pixel nearest each piece's centroid for ``iters`` rounds,
+    which evens the areas. Pure and deterministic (no RNG).
+    """
+    lab = labels.copy()
+    nxt = int(lab.max()) + 1
+    areas = np.bincount(lab.ravel())
+    for cid in range(1, len(areas)):
+        if areas[cid] <= max_area:
+            continue
+        k = max(2, int(round(areas[cid] / target_area)))
+        m = lab == cid
+        ys, xs = np.nonzero(m)
+        y0, y1, x0, x1 = ys.min(), ys.max() + 1, xs.min(), xs.max() + 1
+        local = m[y0:y1, x0:x1]
+        cl = cost[y0:y1, x0:x1]
+        pix = np.column_stack(np.nonzero(local))
+        seeds = cells._farthest_seeds(pix, k)
+        own = _geodesic_voronoi(cl, local, seeds)
+        for _ in range(iters):
+            new = []
+            for i in range(k):
+                pts = np.column_stack(np.nonzero(own == i))
+                if len(pts) == 0:
+                    new.append(seeds[i])
+                    continue
+                cen = pts.mean(axis=0)
+                new.append(pts[np.argmin(((pts - cen) ** 2).sum(axis=1))])
+            seeds = np.array(new)
+            own = _geodesic_voronoi(cl, local, seeds)
+        ids = np.array([cid] + [nxt + i for i in range(k - 1)], dtype=np.int32)
+        nxt += k - 1
+        patch = lab[y0:y1, x0:x1]
+        patch[local] = ids[own[local]]
+    return cells.renumber(lab)
+
+
 # ---------------------------------------------------------------------------
 # Borders: lines, closing lines, snap, provenance
 # ---------------------------------------------------------------------------

@@ -3786,6 +3786,19 @@ def _selfcheck_cr_partition() -> None:
     edge = crp.high_ground_edges(elev, np.ones_like(elev, bool), 2000.0)
     assert edge[20, 50] and edge[79, 50] and not edge[50, 50] and not edge[100:110, 120:130].any()
 
+    # split_large_terrain: one 60x120 cell split in two settles on a river column 20 px off the
+    # straight-line midpoint, where cells.split_large would cut through the middle
+    cell = np.ones((60, 120), np.int32)
+    river_c = np.zeros(cell.shape, bool)
+    river_c[:, 40] = True
+    cost_t = crp.terrain_cost(np.zeros(cell.shape, np.float32), river_c, cell > 0)
+    out_t = crp.split_large_terrain(cell, cost_t, 5000, 3600)
+    assert len(np.unique(out_t)) == 2
+    edge_col = [int(np.flatnonzero(out_t[r, 1:] != out_t[r, :-1])[0]) for r in (5, 30, 55)]
+    assert all(38 <= c <= 42 for c in edge_col), f"split must settle on the river, got {edge_col}"
+    out_t2 = crp.split_large_terrain(cell, cost_t, 5000, 3600)
+    assert np.array_equal(out_t, out_t2), "terrain split must be deterministic"
+
     # a cut-closed mainland round-trips through the generator's region stage with nothing open
     land4 = np.ones((100, 140), bool)
     scope4 = np.zeros(land4.shape, bool)
@@ -6210,7 +6223,7 @@ def run_check() -> int:
           "region stage, seam crop and provenance + mainland path (8-connected cuts block a flood, "
           "cut-closed scope with island list and frame rows and its refusals, landmark affine "
           "exact and refused below 4, leave-one-out flags the inconsistent point, coast agreement, "
-          "high-ground edges, cut-closed round trip) self-check passed.")
+          "high-ground edges, terrain split on a river, cut-closed round trip) self-check passed.")
     _selfcheck_arable()
     print("arable: field core (water/lake/impassable=0, climate peak/arid-trough/pole-taper, "
           "terrain suppression, river+coast boost, lore lift/suppress + smooth falloff + "

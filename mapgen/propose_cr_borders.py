@@ -184,14 +184,19 @@ class Layers:
             feat |= imp & ~ndimage.binary_erosion(imp)
         return feat
 
+    def elevation(self, crop_box) -> np.ndarray:
+        """Metres above sea level over ``crop_box`` (wrap-aware), loaded once."""
+        if getattr(self, "_elev", None) is None:
+            from generate_arable_heatmap import _elev_m_canvas
+            self._elev = _elev_m_canvas()
+        return cr_partition.crop_box(self._elev, crop_box, wrap=True)
+
     def high_ground(self, crop_box, min_m: float) -> np.ndarray:
         """Edge of land at or above ``min_m`` metres, over ``crop_box`` (wrap-aware).
 
         Uses the arable heatmap's own elevation loader (heightmap block-averaged to the canvas).
         """
-        from generate_arable_heatmap import _elev_m_canvas
-        elev = _elev_m_canvas()
-        e = cr_partition.crop_box(elev, crop_box, wrap=True)
+        e = self.elevation(crop_box)
         land = cr_partition.crop_box(self.land, crop_box, wrap=True)
         return cr_partition.high_ground_edges(e, land, float(min_m))
 
@@ -505,7 +510,12 @@ def main(argv: list[str] | None = None) -> int:
         # Chris (2026-10-14): the state count is Vic3's, not ChaosRobie's (about 3x TWW3's).
         pre = int(labels.max())
         mx = int(cfg["max_state_px"])
-        labels = cells.split_large(labels, mx, int(cfg.get("split_target_px") or mx // 2), False)
+        tgt = int(cfg.get("split_target_px") or mx // 2)
+        if cfg.get("split_mode", "voronoi") == "terrain":
+            cost = cr_partition.terrain_cost(layers.elevation(crop_box), feat_crop, scope)
+            labels = cr_partition.split_large_terrain(labels, cost, mx, tgt)
+        else:
+            labels = cells.split_large(labels, mx, tgt, False)
         split = int(labels.max()) - pre
         log(f"  split {split} piece(s) off states over {mx:,} px", t0)
     labels, snap_report = cr_partition.snap_to_features(
