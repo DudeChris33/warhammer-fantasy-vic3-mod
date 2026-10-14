@@ -55,19 +55,20 @@ wrong relative sizes.
 
 ## Layout: `sources/` is organized into subfolders by role
 
-Files live directly under `sources/`, or in one of five searched subfolders:
+Files live directly under `sources/`, or in one of six searched subfolders:
 `originals/` (raw reference imagery), `oldworld-first/` (the current
 canvas-scale GIMP masters and their exports — see the .ora convention below),
 `dots-triangles/` and `dots-mega/` (the paired-anchor-dot registration
-workflow's active crops) and `ulthuan/` (Ulthuan's paired-anchor-dot sheets —
-see below). `archive/` (retired sources — including the five
+workflow's active crops), `ulthuan/` (Ulthuan's paired-anchor-dot sheets —
+see below) and `geology/` (physical-geography drawings; today the ocean-current
+drawing the climate stage reads, board #8202). `archive/` (retired sources — including the five
 per-region dot-marking sheets retired by board #5403), `WIP/` (local scratch),
 `dots-claude/` (an earlier whole-parchment dot experiment; it holds the clean
 PNG of the expanded parchment, `cr_combi_expanded_map.png`),
 `history/` (finished reference artefacts kept for the record — see below) and
 `cr_oldworld_campaign/` (its own dataset loader) and `cr_immortal_empires_expanded/` (see below) are deliberately **not**
 searched. `mapgen/worldgen/sources.py`'s `resolve_source_path()` searches the
-root plus those five by bare filename, so the **File** column below stays a
+root plus those six by bare filename, so the **File** column below stays a
 bare filename regardless of which subfolder a source actually sits in — the
 manifest audits identity (dims/bytes/SHA/origin/role), not physical location.
 `--update-manifest` discovers files the same way and refuses if a name
@@ -402,8 +403,8 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | ulthuan_terraqueous.xcf | n/a | 22,453,440 | 2bac967a3efbcde8bd842f0a0ab1006151f033c51bce2372df3b5b2f7237d958 | GIMP editable master | Editable master of `ulthuan_terraqueous.png`; not read by any tool | no |
 | warhammer-world-map-8k.png | 4389x2029 | 1,787,168 | 81d3c4150a7df1dc345dfa9186b8d14d110278b4679038a5a7a8fc3f4fc68055 | TBD | TBD | no |
 | white_dwarf_world_map.png | 4524x3093 | 1,960,224 | c5a4c6708600fedbfe404c59a7c8d6ab5745eea6e4d35a28180ef13932b37be7 | Games Workshop — official Warhammer world map (boxed / White Dwarf fold-out poster; the sheet prints "© Games Workshop Ltd 2000–2004" and "Product code 60440199034"). Fold seams visible | **Projection: oval pseudocylindrical, flattened-pole (Winkel Tripel / Robinson / Natural Earth family — NOT pointed-pole Mollweide/Aitoff)** — identified 2026-08-15. The world's printed neat-line is a smooth arc bowing down to clipped corners, ~360° of longitude wrapping (HUNG at both far edges); the broad clipped top is a pole line, not a point. Same oval family the terraqueous NE-II globe reproduces. Manifest/naming/extent reference only; unregistered — a fit would try the `natural_earth_2` kind, falling back to a `control_point_warp` if its oval isn't exactly NE-II | no |
-| winds_and_currents.png | 8192x3616 | 566,412 | cfaef620afcb34e4b59f2b903bd8cd211f7cc68503b6d7cd5bd40fd7d1e5b477 | TBD | TBD | no |
-| winds_and_currents.xcf | n/a | 89,497,759 | f0c74c026771db72e68b4901b0a334a9e9837f2a944b0cd99297b2176a40c04e | TBD | TBD | no |
+| winds_and_currents.png | 8192x3616 | 377,553 | a19d25fd52da4ccde9a6126d4d81f1d2d70e22fa02d7a20b16b2c7589f2ea9bf | Drawn by Chris on the canvas frame (single layer, flat colours: land green, sea blue, strokes pure red `255,0,0` warm and pure cyan `0,255,255` cold); editable master `winds_and_currents.xcf` | Warm and cold ocean-current drawing read by `generate_climate_zones.py` through `source_layers.json` key `climate_currents`. A stroke only reaches about 240 km from a coast (`cur_sig`); strokes in open ocean do nothing. The stage never edits it | no |
+| winds_and_currents.xcf | n/a | 90,129,409 | d21608dd8e2f95b3b6ced5c510355debc8dd77438bd2dceae519c85989cdb297 | GIMP editable master | Editable master of `winds_and_currents.png`; not read by any tool | no |
 <!-- MANIFEST:END -->
 
 ## Local organisation: descriptive filenames

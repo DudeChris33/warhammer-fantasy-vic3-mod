@@ -1,0 +1,20 @@
+{
+  "_comment": "DRAFT, written by Claude 2026-10-14 (board #8202) and not lore. Maps each of the fourteen climate zones of worldgen/climate.py to the set of #3676 agro-climate class ids that zone makes physically plausible. Read by tabulate_state_prior.py only to fill the non-blocking clim_expected / clim_disagree columns; it assigns no state a class. Real-world-equivalent economics (testing.md, 2026-10-12) supersedes the climate classes for starting values, so treat this as a physical prior and QA aid. highland_alpine appears where altitude can override a zone; a state with phys_highland is never flagged.",
+  "schema": 1,
+  "zones": {
+    "Af":  {"classes": ["tropical_forest"], "why": "year-round rain at low latitude is rainforest"},
+    "Am":  {"classes": ["tropical_forest", "tropical_savanna"], "why": "monsoon forest grading to savanna where the dry season lengthens"},
+    "Aw":  {"classes": ["tropical_savanna", "tropical_forest"], "why": "savanna; the wetter margin carries forest"},
+    "BWh": {"classes": ["open_desert", "desert_river"], "why": "hot desert; a canon river makes a river-valley desert"},
+    "BWk": {"classes": ["open_desert", "desert_river", "highland_alpine", "steppe"], "why": "cold desert: rain-shadow plateaus and basins, steppe on the wet edge"},
+    "BSh": {"classes": ["steppe", "tropical_savanna", "open_desert"], "why": "hot semi-arid sits between savanna and desert"},
+    "BSk": {"classes": ["steppe", "open_desert", "highland_alpine"], "why": "cold semi-arid is steppe; the dry edge reads as desert"},
+    "Cs":  {"classes": ["mediterranean"], "why": "dry-summer mild climate is the Mediterranean class"},
+    "Cfa": {"classes": ["temperate_river_plain", "temperate_forest_hill", "mediterranean"], "why": "warm humid temperate; the dry-summer margin shades to Mediterranean"},
+    "Cfb": {"classes": ["temperate_river_plain", "temperate_forest_hill"], "why": "oceanic temperate lowland and woodland"},
+    "Df":  {"classes": ["temperate_river_plain", "temperate_forest_hill", "boreal_forest", "steppe"], "why": "humid continental: the warm side is temperate, the cold side boreal, the dry interior steppe"},
+    "Dc":  {"classes": ["boreal_forest", "arctic_boreal_coast"], "why": "subarctic taiga; a cold coast reads as arctic-boreal coast"},
+    "ET":  {"classes": ["arctic_boreal_coast", "boreal_forest", "highland_alpine"], "why": "tundra: arctic coast, the forest edge, or alpine ground"},
+    "EF":  {"classes": ["arctic_boreal_coast", "highland_alpine"], "why": "ice cap: nothing farmable; the nearest classes are the arctic coast and alpine"}
+  }
+}

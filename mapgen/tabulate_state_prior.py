@@ -133,7 +133,11 @@ DESCRIPTOR_COLUMNS = (
     "heat_realm_rel", "heat_disagree", "lore_zone", "climate_class", "override_ref",
     "phys_disagree", "flags",
 )
-COLUMNS = CORE_COLUMNS + DESCRIPTOR_COLUMNS
+#: Climate-zone columns (board #8202), appended after the descriptors and filled only when
+#: ``derived/state_climate_index.json`` and ``config/climate_zone_class_map.json`` both exist.
+#: ``clim_disagree`` is non-blocking, like ``heat_disagree``: the zone layer never vetoes lore.
+CLIM_COLUMNS = ("clim_dominant", "clim_share", "clim_expected", "clim_disagree")
+COLUMNS = CORE_COLUMNS + DESCRIPTOR_COLUMNS + CLIM_COLUMNS
 
 CLASS_TINTS = {
     "arctic_boreal_coast": (150, 205, 235), "boreal_forest": (40, 110, 80),
@@ -243,6 +247,39 @@ def _state_raster(rgb: np.ndarray, states: list, passable_only: bool, impass_of:
     pos = np.searchsorted(keys, code)
     pos[pos >= len(keys)] = 0
     return np.where(keys[pos] == code, vals[pos], 0).astype(np.int32)
+
+
+def load_climate(mod_root: Path):
+    """``(per-state rows by state_key, zone -> expected class set)`` or ``None`` when either file is absent."""
+    idx_path = mod_root / "mapgen" / "derived" / "state_climate_index.json"
+    map_path = mod_root / "mapgen" / "config" / "climate_zone_class_map.json"
+    if not (idx_path.is_file() and map_path.is_file()):
+        return None
+    zones = json.loads(map_path.read_text(encoding="utf-8"))["zones"]
+    for z, row in zones.items():
+        bad = sorted(set(row["classes"]) - set(CLASS_IDS))
+        if bad:
+            raise SystemExit(f"{map_path}: zone {z} names unknown class ids {bad} (known: {list(CLASS_IDS)})")
+    table = json.loads(idx_path.read_text(encoding="utf-8"))
+    for row in table["states"]:
+        if row["dominant"] is not None and row["dominant"] not in zones:
+            raise SystemExit(f"{idx_path}: dominant zone {row['dominant']!r} of {row['state_key']} "
+                             f"is not in {map_path}")
+    return {r["state_key"]: r for r in table["states"]}, {z: set(r["classes"]) for z, r in zones.items()}
+
+
+def apply_climate(rows: list[dict], by_key: dict, expect: dict) -> None:
+    """Fill the ``clim_*`` columns of ``rows`` in place from the per-state zone table."""
+    for r in rows:
+        c = by_key.get(r["state_key"])
+        if c is None or c["dominant"] is None:
+            continue
+        dom = c["dominant"]
+        r["clim_dominant"] = dom
+        r["clim_share"] = _f(c["shares"].get(dom, 0.0), 4)
+        r["clim_expected"] = "|".join(sorted(expect[dom]))
+        if r["climate_class"]:
+            r["clim_disagree"] = int(r["climate_class"] not in expect[dom] and not r["phys_highland"])
 
 
 def _group_slices(lab_flat: np.ndarray, n: int):
@@ -415,6 +452,7 @@ def tabulate(mod_root, classes=None, rivers=None, _extras: dict | None = None) -
             "heat_realm_pct": "", "heat_realm_rel": "", "heat_disagree": "",
             "lore_zone": "", "climate_class": "", "override_ref": "", "phys_disagree": "",
             "flags": "|".join(flags),
+            "clim_dominant": "", "clim_share": "", "clim_expected": "", "clim_disagree": "",
         })
     rows.sort(key=lambda r: r["state_key"])
 
@@ -471,6 +509,9 @@ def tabulate(mod_root, classes=None, rivers=None, _extras: dict | None = None) -
             r["heat_disagree"] = int(abs(CLASS_BAND_RANK[slug] - tercile) >= 2)
         if errors:
             raise SystemExit("hard errors:\n  " + "\n  ".join(errors))
+    clim = load_climate(mod_root)
+    if clim is not None:
+        apply_climate(rows, *clim)
     if _extras is not None:
         _extras.update({"lab_all": lab_all, "states": states})
     return rows

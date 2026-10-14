@@ -69,7 +69,7 @@ SOURCE_LAYERS_PATH = TOOLS_DIR / "config" / "source_layers.json"
 #: board #5403), ``WIP/`` (local scratch, not manifest-tracked) and
 #: ``cr_oldworld_campaign/`` (its own dataset loader) are deliberately excluded
 #: from both search and refresh.
-SOURCE_SUBDIRS = ("originals", "oldworld-first", "dots-triangles", "dots-mega", "ulthuan")
+SOURCE_SUBDIRS = ("originals", "oldworld-first", "dots-triangles", "dots-mega", "ulthuan", "geology")
 
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"

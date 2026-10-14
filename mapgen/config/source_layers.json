@@ -8,5 +8,6 @@
   "island_overrides": "terraqueous_globe_reprojected - tiny_islands_merger.png",
   "small_state_prune": "terraqueous_globe_reprojected - small-state-prune.png",
   "cities": "terraqueous_globe_reprojected - full.ora#cities",
-  "adjacencies": "terraqueous_globe_reprojected - adjacencies.png"
+  "adjacencies": "terraqueous_globe_reprojected - adjacencies.png",
+  "climate_currents": "winds_and_currents.png"
 }

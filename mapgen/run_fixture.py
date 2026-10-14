@@ -3463,6 +3463,103 @@ def _selfcheck_canon_cities() -> None:
     assert err, "the on-land half must still run (hard error) when the export is absent"
 
 
+def _selfcheck_climate() -> None:
+    """Climate-zone stage (board #8202), in isolation: the pure core ``worldgen.climate`` on a small
+    synthetic canvas (no committed bitmaps, no ``sources/``), the stroke reader, the per-state share
+    helper and the mapping loader of ``tabulate_state_prior``.
+
+    Physical-direction assertions (warm current warms, rain shadow dries) are deliberately absent: they
+    are not monotone on a tiny canvas; equality with the accepted grid is proved by comparing
+    ``generate_climate_zones.py`` output against the accepted class grid, not here.
+    """
+    import tempfile as _tf
+    from PIL import Image as _Image
+    from config import canvas_frame as _cf
+    from worldgen import climate
+    import generate_climate_zones as gcz
+    import tabulate_state_prior as tsp
+
+    # --- stroke reader: red warm, cyan cold, land green and sea blue are neither --------------
+    with _tf.TemporaryDirectory() as td:
+        a = np.zeros((8, 8, 4), np.uint8)
+        a[..., :3] = (40, 160, 60)
+        a[..., 3] = 255                              # flat green land
+        a[0, 0] = (255, 0, 0, 255)                   # warm stroke
+        a[0, 1] = (0, 255, 255, 255)                 # cold stroke
+        a[1, 0] = (0, 0, 255, 255)                   # sea blue
+        pth = Path(td) / "c.png"
+        _Image.fromarray(a).save(pth)
+        red, cya = climate.read_currents(pth)
+        assert red[0, 0] == 1.0 and cya[0, 1] == 1.0, "pure red/cyan strokes must read as 1.0"
+        assert red.sum() == 1.0 and cya.sum() == 1.0, "land green and sea blue must not read as strokes"
+
+    # --- core on a synthetic canvas: range, polar land, determinism ---------------------------
+    S = 32
+    W, H = _cf.WIDTH // S, _cf.HEIGHT // S
+    land = np.zeros((H, W), bool)
+    land[40:80, 60:200] = True                       # a mid-latitude continent
+    land[0:12, 100:180] = True                       # land touching the polar edge
+    yy, xx = np.mgrid[0:H, 0:W]
+    elev = (np.exp(-(((yy - 60) / 8.0) ** 2 + ((xx - 120) / 20.0) ** 2)) * 1800.0 * land).astype(np.float32)
+    red = np.zeros((H, W), np.float32)
+    cya = np.zeros((H, W), np.float32)
+    red[60:70, 40:58] = 1.0
+    cya[75:85, 205:215] = 1.0
+    inp = dict(W=W, H=H, R=_cf.WIDTH / (2 * np.pi) / S, Y0=_cf.Y0 / S, S=S, land=land, elev=elev,
+               red=red, cya=cya)
+    k1 = climate.run(inp, {"pole_ice": 7.0})["k"]
+    k2 = climate.run(inp, {"pole_ice": 7.0})["k"]
+    assert k1.shape == (H, W) and k1.dtype == np.uint8, "class grid must be uint8 (H, W)"
+    assert np.array_equal(k1, k2), "two runs on the same inputs must be array-equal"
+    assert int(k1.max()) < len(climate.CLASSES), "class ids must index CLASSES"
+    polar = k1[0:6, 110:170]
+    assert np.isin(polar, [climate.IDX["ET"], climate.IDX["EF"]]).all(), \
+        "land at the polar edge must come out tundra or ice cap"
+    assert "cur_sig" in climate.DEFAULT and "pole_ice" in climate.DEFAULT
+
+    # --- per-state share helper: shares sum to 1, ties to the lowest id, empty -> no dominant --
+    codes = [c[0] for c in climate.CLASSES]
+    row = np.zeros(len(codes), np.int64)
+    row[3], row[8], row[12] = 5, 5, 2
+    tot, dom, shares = gcz.zone_shares(row, codes)
+    assert tot == 12 and dom == codes[3], "tie must go to the lowest class id"
+    assert abs(sum(shares.values()) - 1.0) < 1e-3 and set(shares) == {codes[3], codes[8], codes[12]}
+    assert gcz.zone_shares(np.zeros(len(codes), np.int64), codes) == (0, None, {})
+
+    # --- mapping loader + the tabulator columns -----------------------------------------------
+    def _row(key, cls, hl):
+        return {"state_key": key, "climate_class": cls, "phys_highland": hl, "clim_dominant": "",
+                "clim_share": "", "clim_expected": "", "clim_disagree": ""}
+
+    with _tf.TemporaryDirectory() as td:
+        root = Path(td)
+        (root / "mapgen" / "derived").mkdir(parents=True)
+        (root / "mapgen" / "config").mkdir(parents=True)
+        assert tsp.load_climate(root) is None, "absent inputs must skip cleanly"
+        idx = {"states": [
+            {"state_key": "STATE_A", "dominant": "Cs", "shares": {"Cs": 0.75, "BSk": 0.25}},
+            {"state_key": "STATE_B", "dominant": None, "shares": {}},
+        ]}
+        (root / "mapgen" / "derived" / "state_climate_index.json").write_text(json.dumps(idx), encoding="utf-8")
+        mp = root / "mapgen" / "config" / "climate_zone_class_map.json"
+        mp.write_text(json.dumps({"zones": {"Cs": {"classes": ["mediterranean"], "why": "x"}}}), encoding="utf-8")
+        by_key, expect = tsp.load_climate(root)
+        rows = [_row("STATE_A", "steppe", 0), _row("STATE_B", "steppe", 0),
+                _row("STATE_A", "mediterranean", 0), _row("STATE_A", "steppe", 1)]
+        tsp.apply_climate(rows, by_key, expect)
+        assert rows[0]["clim_dominant"] == "Cs" and rows[0]["clim_share"] == "0.7500"
+        assert rows[0]["clim_disagree"] == 1 and rows[2]["clim_disagree"] == 0
+        assert rows[3]["clim_disagree"] == 0, "a highland state is never flagged"
+        assert rows[1]["clim_dominant"] == "" and rows[1]["clim_disagree"] == "", "no dominant -> blank"
+        mp.write_text(json.dumps({"zones": {"Cs": {"classes": ["no_such_class"], "why": "x"}}}), encoding="utf-8")
+        try:
+            tsp.load_climate(root)
+        except SystemExit:
+            pass
+        else:
+            raise AssertionError("an unknown class id in the mapping must be refused")
+
+
 def _selfcheck_arable() -> None:
     """Arable-potential field (board #4921), in isolation — the pure core
     ``worldgen.arable`` and ``schema.load_arable_lore``, on a small synthetic
@@ -5822,6 +5919,11 @@ def run_check() -> int:
     print("canon_cities: schema (order + refuse empty/bad-terrain/dup-anchor/oob) + pure "
           "transparent overlay (deterministic, canvas-sized) + validator (on-land hard error, "
           "impassable-collision non-blocking warning, export-absent skip) self-check passed.")
+    _selfcheck_climate()
+    print("climate: stroke reader (red/cyan, land and sea fill ignored) + core on a synthetic canvas "
+          "(uint8 grid in range, polar land is tundra/ice, array-equal across runs) + per-state shares "
+          "(sum to 1, ties to lowest id, empty -> none) + class-map loader and clim_* columns "
+          "(clean skip, unknown class refused, highland never flagged) self-check passed.")
     _selfcheck_arable()
     print("arable: field core (water/lake/impassable=0, climate peak/arid-trough/pole-taper, "
           "terrain suppression, river+coast boost, lore lift/suppress + smooth falloff + "
