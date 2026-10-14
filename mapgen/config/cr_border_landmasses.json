@@ -1,0 +1,93 @@
+{
+  "ulthuan": {
+    "box": [
+      2400,
+      800,
+      3240,
+      1720
+    ],
+    "cr_box": [
+      660,
+      1330,
+      1410,
+      2230
+    ],
+    "target": null,
+    "min_state_px": 1500,
+    "max_state_px": null,
+    "snap_px": 8,
+    "snap_follow_frac": 0.6,
+    "fit": {},
+    "landmarks": [],
+    "landmarks_tried_2026_10_14": {
+      "note": "Five extremal-feature landmarks (placed_by claude) from the silhouettes opened at 10/6 px. Scored against Chris's accepted dots (dot check, median canvas px): none 19.1; all five 21.4; best single (SW arm tip) 14.5; best triple (north cape, west cape, SW arm tip) 13.7. The 12 px bar was not met, and picking a subset by that score would leak the dots into the fit, so none ship. Silhouette extremes are CR/globe differences as much as features.",
+      "rows": [
+        {
+          "name": "ring north cape",
+          "source": [
+            1032,
+            1460
+          ],
+          "canvas": [
+            2780,
+            1058
+          ],
+          "placed_by": "claude",
+          "feature": "northmost point of the Ulthuan ring (silhouette opened at 10/6 px to drop islet spurs)"
+        },
+        {
+          "name": "ring west cape",
+          "source": [
+            677,
+            1850
+          ],
+          "canvas": [
+            2546,
+            1370
+          ],
+          "placed_by": "claude",
+          "feature": "westmost point of the ring"
+        },
+        {
+          "name": "south-west arm tip",
+          "source": [
+            786,
+            2180
+          ],
+          "canvas": [
+            2664,
+            1592
+          ],
+          "placed_by": "claude",
+          "feature": "southmost tip of the western arm that closes the Inner Sea"
+        },
+        {
+          "name": "south-east arm tip",
+          "source": [
+            1064,
+            2139
+          ],
+          "canvas": [
+            2785,
+            1555
+          ],
+          "placed_by": "claude",
+          "feature": "southmost tip of the eastern arm, across the Inner Sea mouth from the western one"
+        },
+        {
+          "name": "inner sea north bay",
+          "source": [
+            1010,
+            1713
+          ],
+          "canvas": [
+            2764,
+            1220
+          ],
+          "placed_by": "claude",
+          "feature": "northmost point of the Inner Sea water"
+        }
+      ]
+    }
+  }
+}

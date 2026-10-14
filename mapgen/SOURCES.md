@@ -146,7 +146,27 @@ Lua, battle terrain, pathing and UI skins were deleted). What remains and why:
 - `cr_combi_expanded_lookup.tga` (3200x1941): the world region partition, 768
   flat colours with 16-bit palette indices (PIL cannot open it). Only
   ChaosRobie's own `cr_combi_region_*` colours decode from this folder; vanilla
-  region colours live in the installed WH3 `data.pack`.
+  region colours live in the installed WH3 `data.pack`. **Read directly by
+  `mapgen/propose_cr_borders.py` (#8210, 2026-10-14), with its SHA-256 in each
+  report and no manifest row** (the `cr_oldworld_campaign/` precedent). Decode
+  facts: an 18-byte header (colour-mapped, 16-bit indices, a 32-bit BGRA palette
+  of 768 entries whose "first entry" header field reads 18, which is the byte
+  offset and not an index shift: pixel values index the palette directly), then
+  the indices, no trailing bytes. The descriptor byte is `0x10` yet the rows are
+  stored **top-down** and are kept as stored (read bottom-up, Ulthuan lands south
+  of Naggaroth). Void is the one `000000` entry (index 27); index 12 (`eb06df`)
+  is a real region. The lookup spans the whole 6400x4480 parchment frame at a
+  per-axis scale of (2.0, 4480/1941) with zero offset: its interior region edges
+  over Ulthuan sit a median 1 parchment px from Chris's accepted magenta lines.
+  194 of the 768 colours are keyed in `db/regions_tables/!cr_map_expansion.tsv`
+  (`unnamed colour group_1`, upper-case hex) with display names
+  `regions_onscreen_<key>` in `text/db/cr_new_combi_regions.loc.tsv`; the other
+  574 stay `cr_idx_<n>` until the WH3 `data.pack` is read.
+  **Placement is automatic, with no dots from Chris** (2026-10-14): a silhouette
+  fit per landmass, scored against his accepted Ulthuan dots, with any Claude
+  landmarks kept in `mapgen/config/cr_border_landmasses.json` (`placed_by`,
+  `feature`) and never in `mapgen/registration/`. Everything it writes is a
+  proposal under `scratchpad/`, never a source.
 - `terrain/campaigns/cr_combi_expanded_map_1/`: `full_height_map.dds` (12800x7764,
   HDR, needs a real BC6H decoder), `tile_mask`, `snow_mask`, `colour_overlay`.
 - `text/db/cr_new_combi_*.loc.tsv` and `db/`: names and the region/province

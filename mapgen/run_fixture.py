@@ -3560,6 +3560,132 @@ def _selfcheck_climate() -> None:
             raise AssertionError("an unknown class id in the mapping must be refused")
 
 
+def _selfcheck_cr_partition() -> None:
+    """CR partition proposal (board #8210), in isolation: ``worldgen.cr_partition`` on synthetic
+    rasters, independent of ``sources/``. Decode (asymmetric, so a row flip fails), dot-free
+    placement (known scale and offset recovered; landmarks exact, far field the affine), the
+    fill over a differing coast, snap (crossing is snapped, a feature ending mid-band is not),
+    a scope cut sealed by closing lines and proved through the generator's own region stage, a
+    box across the seam, and determinism.
+    """
+    import struct as _st
+    from worldgen import cells as _cells, cr_partition as crp, land_provinces as _lp
+
+    # --- decode: 4x3, palette of 5 with black at 2, descriptor 0x10, header colour-map start 18 --
+    h, w = 3, 4
+    want = np.array([[0, 1, 2, 3], [4, 0, 0, 1], [2, 2, 3, 4]], dtype="<u2")
+    pal = [(10, 20, 30), (200, 0, 0), (0, 0, 0), (0, 200, 0), (0, 0, 200)]
+    blob = _st.pack("<BBBHHBHHHHBB", 0, 1, 1, 18, len(pal), 32, 0, 0, w, h, 16, 0x10)
+    blob += b"".join(bytes([b, g, r, 255]) for r, g, b in pal) + want.tobytes()
+    idx, palette = crp.decode_lookup(blob)
+    assert np.array_equal(idx, want), "rows must stay as stored (top-down), not flipped"
+    assert palette.tolist() == [list(c) for c in pal] and crp.void_index(palette) == 2
+    for bad in (blob[:-1], blob + b"\0"):
+        try:
+            crp.decode_lookup(bad)
+        except crp.PartitionError:
+            pass
+        else:
+            raise AssertionError("a lookup of the wrong length must be refused")
+    big = np.zeros((1941, 3200), np.uint16)
+    big[0, 0], big[0, 1100], big[-1, -1] = 5, 1, 7           # void is 1 here
+    lab = crp.to_parchment_frame(big, 1, (0, 0, 6400, 4480))
+    assert lab.shape == (4480, 6400) and lab[0, 0] == 6 and lab[0, 2200] == 0 and lab[-1, -1] == 8
+    assert lab[1, 1] == 6 and lab[2, 2] == 1 and lab[0, 3] == 1, "per-axis nearest upsample (2.0, 2.308)"
+
+    # --- placement: a known blob, recovered without landmarks, then with four ---------------------
+    yy, xx = np.mgrid[0:240, 0:240]
+    src = ((((xx - 120) / 70.0) ** 2 + ((yy - 110) / 45.0) ** 2) < 1) | \
+          ((((xx - 170) / 18.0) ** 2 + ((yy - 70) / 26.0) ** 2) < 1)
+    H, W = 360, 380
+    cy, cx = np.mgrid[0:H, 0:W]
+    ux, uy = (cx - 40) / 1.3, (cy - 25) / 1.1
+    canvas = np.zeros((H, W), bool)
+    ok = (ux >= 0) & (ux < 240) & (uy >= 0) & (uy < 240)
+    canvas[ok] = src[uy[ok].astype(int), ux[ok].astype(int)]
+    sp, cp_, info = crp.fit_placement(src, canvas, [])
+    probe = np.array([[120.0, 110.0], [90.0, 130.0], [170.0, 70.0]])
+    got = crp.forward_map(sp, cp_, probe)
+    truth = np.column_stack([probe[:, 0] * 1.3 + 40, probe[:, 1] * 1.1 + 25])
+    assert np.abs(got - truth).max() < 2.5, f"placement missed the known affine: {got} vs {truth}"
+    assert info["folded_fraction"] == 0.0 and info["coarse_iou"] > 0.9
+    lms = [crp.Landmark(f"l{i}", (a, b), (a * 1.3 + 40 + 6.0, b * 1.1 + 25 - 4.0))
+           for i, (a, b) in enumerate([(100.0, 110.0), (140.0, 110.0), (120.0, 90.0), (120.0, 130.0)])]
+    sp2, cp2, info2 = crp.fit_placement(src, canvas, lms, {"influence_px": 60.0})
+    at = crp.forward_map(sp2, cp2, np.array([lm.source for lm in lms]))
+    assert np.abs(at - np.array([lm.canvas for lm in lms])).max() < 0.01, "exact at every landmark"
+    far = crp.forward_map(sp2, cp2, np.array([[10.0, 230.0]]))
+    far0 = crp.forward_map(sp, cp_, np.array([[10.0, 230.0]]))
+    assert np.abs(far - far0).max() < 1.0, "far from a landmark the placement is the affine"
+    sp3, cp3, _ = crp.fit_placement(src, canvas, lms, {"influence_px": 60.0})
+    assert np.array_equal(cp2, cp3) and np.array_equal(sp2, sp3), "placement must be deterministic"
+
+    # --- fill over a differing coast: every scope pixel carries a label ---------------------------
+    scope = np.zeros((40, 60), bool)
+    scope[5:35, 5:55] = True
+    guide = np.zeros((40, 60), np.int32)
+    guide[5:35, 5:28] = 3
+    guide[5:35, 31:50] = 7                      # a gap, and CR stops short of our coast on the right
+    filled = _cells.fill_nearest(np.where(scope, guide, 0), scope, wrap_x=False, pad=0)
+    assert (filled[scope] > 0).all() and set(np.unique(filled[scope])) == {3, 7}
+
+    # --- snap: a river that crosses the band is followed; one that ends mid-band is not -----------
+    lab2 = np.zeros((40, 70), np.int32)
+    lab2[:, :30] = 1
+    lab2[:, 30:] = 2
+    sc2 = np.ones(lab2.shape, bool)
+    river = np.zeros(lab2.shape, bool)
+    river[:, 34] = True
+    out, rep = crp.snap_to_features(lab2, sc2, river, snap_px=8, follow_frac=0.6)
+    assert rep["snapped"] and np.array_equal(np.unique(out), [1, 2])
+    col = [int(np.flatnonzero(out[r] == 2)[0]) for r in range(0, 40, 5)]
+    assert all(33 <= c <= 35 for c in col), f"border should sit on the river, got {col}"
+    half = np.zeros(lab2.shape, bool)
+    half[:20, 34] = True
+    out2, rep2 = crp.snap_to_features(lab2, sc2, half, snap_px=8, follow_frac=0.3)
+    assert rep2["not_splitting"] and np.array_equal(out2, lab2), \
+        "a feature that ends mid-band must not move a border"
+
+    # --- a scope cut sealed by closing lines, proved through the generator's region stage -----------
+    land = np.ones((120, 120), bool)
+    scope3 = np.zeros(land.shape, bool)
+    scope3[30:90, 30:90] = True
+    lab3 = np.zeros(land.shape, np.int32)
+    lab3[30:90, 30:60] = 1
+    lab3[30:90, 60:90] = 2
+    lines = crp.lines_from_labels(lab3, scope3)
+    closing = crp.closing_line(scope3, land & ~scope3)
+    drawn = np.zeros(land.shape + (3,), np.uint8)
+    drawn[lines | closing] = (255, 0, 255)
+    reg = _lp.regions(land, drawn, 2, 150, False)
+    from scipy import ndimage as _ndi
+    off = _ndi.distance_transform_edt(~scope3)
+    inner = [int(v) for v in np.unique(reg[scope3]) if ((reg == v) & scope3).sum() * 2 > (reg == v).sum()]
+    assert len(inner) == 2, "the two proposed states must come out as two regions"
+    for r in inner:
+        assert not ((reg == r) & (off > 3)).any(), "a proposed state must not be open to outside land"
+    drawn_open = np.zeros(land.shape + (3,), np.uint8)
+    drawn_open[lines] = (255, 0, 255)
+    unsealed = _lp.regions(land, drawn_open, 2, 150, False)
+    leaked = [int(v) for v in np.unique(unsealed[scope3])
+              if ((unsealed == v) & (off > 3)).any()]
+    assert leaked, "without the closing line a state is open to the outside land"
+
+    # --- a box across the seam comes back contiguous -------------------------------------------------
+    a = np.arange(10 * 20).reshape(10, 20)
+    got = crp.crop_box(a, (15, 2, 25, 8), wrap=True)
+    assert np.array_equal(got, np.concatenate([a[2:8, 15:], a[2:8, :5]], axis=1))
+
+    # --- provenance: shares add up --------------------------------------------------------------------
+    fin = np.zeros((20, 20), np.int32)
+    fin[2:18, 2:18] = 1
+    smp = np.zeros_like(fin)
+    smp[2:18, 2:10] = 5
+    smp[2:18, 10:18] = 9
+    pr = crp.provenance(fin, smp)
+    assert pr[1]["area_px"] == 256 and abs(sum(pr[1]["cr_shares"].values()) - 1.0) < 1e-3
+
+
 def _selfcheck_arable() -> None:
     """Arable-potential field (board #4921), in isolation — the pure core
     ``worldgen.arable`` and ``schema.load_arable_lore``, on a small synthetic
@@ -5924,6 +6050,11 @@ def run_check() -> int:
           "(uint8 grid in range, polar land is tundra/ice, array-equal across runs) + per-state shares "
           "(sum to 1, ties to lowest id, empty -> none) + class-map loader and clim_* columns "
           "(clean skip, unknown class refused, highland never flagged) self-check passed.")
+    _selfcheck_cr_partition()
+    print("cr partition: lookup decode (top-down rows kept, wrong length refused) + dot-free placement "
+          "(known affine recovered, exact at landmarks, affine far from them, deterministic) + fill, snap "
+          "(crossing followed, mid-band end left alone), closing lines sealed through the generator's "
+          "region stage, seam crop and provenance self-check passed.")
     _selfcheck_arable()
     print("arable: field core (water/lake/impassable=0, climate peak/arid-trough/pole-taper, "
           "terrain suppression, river+coast boost, lore lift/suppress + smooth falloff + "
