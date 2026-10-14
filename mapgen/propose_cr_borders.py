@@ -532,49 +532,89 @@ def main(argv: list[str] | None = None) -> int:
         f"flagged {len(flagged)} over 2.5x the median {med:,.0f} px)", t0)
 
     # --- lines, round trip -----------------------------------------------------------------
-    open_land = in_touch & ~scope
-    lines = cr_partition.lines_from_labels(labels, scope)
-    lined_ids = {int(v) for v in np.unique(labels[lines]) if v > 0}
-    island_only = sorted(int(v) for v in np.unique(labels) if v > 0 and int(v) not in lined_ids)
-    if island_only:
-        log(f"  {len(island_only)} island-only state(s) with no line (anchors go into the realm "
-            f"points): {island_only}", t0)
-    closing = cr_partition.closing_line(scope, open_land)
-    proposal_crop = (lines | closing) & box_mask
-    proposal = np.zeros(land.shape, dtype=bool)
-    paste_crop(proposal, proposal_crop, cx0, cy0)
+    for attempt in range(4):
+        open_land = in_touch & ~scope
+        lines = cr_partition.lines_from_labels(labels, scope)
+        lined_ids = {int(v) for v in np.unique(labels[lines]) if v > 0}
+        island_only = sorted(int(v) for v in np.unique(labels) if v > 0 and int(v) not in lined_ids)
+        if island_only:
+            log(f"  {len(island_only)} island-only state(s) with no line (anchors go into the realm "
+                f"points): {island_only}", t0)
+        closing = cr_partition.closing_line(scope, open_land)
+        proposal_crop = (lines | closing) & box_mask
+        proposal = np.zeros(land.shape, dtype=bool)
+        paste_crop(proposal, proposal_crop, cx0, cy0)
 
-    composite = layers.magenta.copy()
-    if args.replace_existing:
-        erase_crop = ndimage.binary_erosion(scope, iterations=gp.LINE_DILATE + 1)
-        erase = np.zeros(land.shape, dtype=bool)
-        paste_crop(erase, erase_crop, cx0, cy0)
-        composite &= ~erase
-    composite |= proposal
-    log("round trip: the generator's region stage on existing + proposal ...", t0)
-    reg1, _ = existing_regions(layers, composite, t0)
-    reg1_crop = cr_partition.crop_box(reg1, crop_box, wrap=True)
-    gen_ids = [int(r) for r in np.unique(reg1_crop[scope]) if r > 0]
-    gen = np.zeros(crop_shape, dtype=np.int32)
-    leaks = []
-    # The generator dilates every line by LINE_DILATE and hands those pixels to the nearest
-    # region, so a state may spill a couple of px past a closing line. A leak is land beyond that.
-    off_scope = ndimage.distance_transform_edt(~scope)
-    spill = gp.LINE_DILATE + 1
-    for r in gen_ids:
-        m = reg1_crop == r
-        far = float((m & (off_scope > spill)).sum()) / float(m.sum())
-        gen[m & scope] = r
-        if far > 0.02:
-            leaks.append({"region": r, "beyond_frac": round(far, 3), "px": int(m.sum())})
-    pairs, only_prop, only_gen = match_regions(labels, gen, 0.9)
-    round_trip = {
-        "proposed": n_states, "generated": len(gen_ids), "matched_iou_0.9": len(pairs),
-        "leaks": leaks, "unmatched_proposed": only_prop, "unmatched_generated": only_gen,
-        "passed": bool(not leaks and len(pairs) == n_states == len(gen_ids)),
-    }
-    log(f"  round trip: {n_states} proposed, {len(gen_ids)} generated, {len(pairs)} matched, "
-        f"{len(leaks)} leaking -> {'PASS' if round_trip['passed'] else 'FAIL'}", t0)
+        composite = layers.magenta.copy()
+        if args.replace_existing:
+            erase_crop = ndimage.binary_erosion(scope, iterations=gp.LINE_DILATE + 1)
+            erase = np.zeros(land.shape, dtype=bool)
+            paste_crop(erase, erase_crop, cx0, cy0)
+            composite &= ~erase
+        composite |= proposal
+        log("round trip: the generator's region stage on existing + proposal ...", t0)
+        reg1, _ = existing_regions(layers, composite, t0)
+        reg1_crop = cr_partition.crop_box(reg1, crop_box, wrap=True)
+        # A region the generator hands a few cut or closing-line pixels to (the far side's own region,
+        # which owns the dilated line's outer half) is not a state: only regions that sit mostly in
+        # scope count. A proposed state swallowed by outside land is caught by the IoU match instead.
+        gen_ids = [int(r) for r in np.unique(reg1_crop[scope]) if r > 0
+                   and float(((reg1_crop == r) & scope).sum()) / float((reg1_crop == r).sum()) >= 0.5]
+        gen = np.zeros(crop_shape, dtype=np.int32)
+        leaks = []
+        # The generator dilates every line by LINE_DILATE and hands those pixels to the nearest
+        # region, so a state may spill a couple of px past a closing line. A leak is land beyond that.
+        off_scope = ndimage.distance_transform_edt(~scope)
+        spill = gp.LINE_DILATE + 1
+        for r in gen_ids:
+            m = reg1_crop == r
+            far = float((m & (off_scope > spill)).sum()) / float(m.sum())
+            gen[m & scope] = r
+            if far > 0.02:
+                leaks.append({"region": r, "beyond_frac": round(far, 3), "px": int(m.sum())})
+        pairs, only_prop, only_gen = match_regions(labels, gen, 0.9)
+        round_trip = {
+            "proposed": n_states, "generated": len(gen_ids), "matched_iou_0.9": len(pairs),
+            "leaks": leaks, "unmatched_proposed": only_prop, "unmatched_generated": only_gen,
+            "passed": bool(not leaks and len(pairs) == n_states == len(gen_ids)),
+        }
+        detail = []
+        for r in only_gen:
+            m = gen == r
+            ys, xs = np.nonzero(m)
+            detail.append({"region": r, "px": int(m.sum()),
+                           "bbox": [int(xs.min()) + cx0, int(ys.min()) + cy0,
+                                    int(xs.max()) + cx0 + 1, int(ys.max()) + cy0 + 1]})
+        round_trip["unmatched_generated_detail"] = detail
+        log(f"  round trip: {n_states} proposed, {len(gen_ids)} generated, {len(pairs)} matched, "
+            f"{len(leaks)} leaking -> {'PASS' if round_trip['passed'] else 'FAIL'}", t0)
+        # The generator dilates every line by LINE_DILATE, so a state that a river and a border
+        # pinch to a neck under that width comes back as a separate sliver region. Hand each such
+        # sliver to the state across the line it touches most, then run the round trip again.
+        slivers = [d for d in round_trip["unmatched_generated_detail"]
+                   if d["px"] < int(cfg["min_state_px"])]
+        if round_trip["passed"] or not slivers or attempt == 3:
+            break
+        moved = 0
+        for d in slivers:
+            m = gen == d["region"]
+            own = np.bincount(labels[m & (labels > 0)]).argmax() if (labels[m] > 0).any() else 0
+            ring = ndimage.binary_dilation(m, iterations=3) & scope & ~m
+            cand = labels[ring & (labels > 0) & (labels != own)]
+            if cand.size:
+                labels[m] = int(np.bincount(cand).argmax())
+                moved += 1
+        log(f"  repair {attempt + 1}: {moved} sliver region(s) handed to the neighbouring state", t0)
+        if not moved:
+            break
+        labels = cells.split_disconnected(labels, False)
+        labels = cells.merge_small(labels, int(cfg["min_state_px"]), False)
+        labels = cells.renumber(labels)
+        n_states = int(labels.max())
+
+    areas = np.bincount(labels.ravel())[1:]
+    med = float(np.median(areas)) if areas.size else 0.0
+    flagged = [int(i + 1) for i, a in enumerate(areas) if med and a > 2.5 * med]
 
     compare = None
     if args.replace_existing:

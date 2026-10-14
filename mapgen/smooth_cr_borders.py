@@ -192,7 +192,8 @@ def main(argv: list[str] | None = None) -> int:
     composite |= smooth_full
     reg1, _ = pcb.existing_regions(layers, composite, None)
     reg_c = cr_partition.crop_box(reg1, crop_box, wrap=True)
-    gen_ids = [int(r) for r in np.unique(reg_c[scope]) if r > 0]
+    gen_ids = [int(r) for r in np.unique(reg_c[scope]) if r > 0
+               and float(((reg_c == r) & scope).sum()) / float((reg_c == r).sum()) >= 0.5]
     gen = np.zeros(land_c.shape, dtype=np.int32)
     off = ndi.distance_transform_edt(~(scope | closing))
     leaks = []

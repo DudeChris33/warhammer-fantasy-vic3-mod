@@ -142,7 +142,9 @@ Lua, battle terrain, pathing and UI skins were deleted). What remains and why:
   unlabelled) and `..._map_text.dds` (same frame, labels only): the Immortal
   Empires parchment extended past the vanilla frame. Candidate boundary source.
   Registered for Ulthuan only (2026-10-11, `ulthuan/` below); the rest of the
-  frame is unregistered.
+  frame is unregistered. **The text DDS is read, alpha only, by
+  `propose_cr_borders.py --placement-review` (#8211, 2026-10-14)** to overlay CR's
+  province labels on the landmark sheet; no manifest row, nothing is written from it.
 - `cr_combi_expanded_lookup.tga` (3200x1941): the world region partition, 768
   flat colours with 16-bit palette indices (PIL cannot open it). Only
   ChaosRobie's own `cr_combi_region_*` colours decode from this folder; vanilla

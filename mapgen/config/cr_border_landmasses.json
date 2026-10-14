@@ -89,5 +89,298 @@
         }
       ]
     }
+  },
+  "naggaroth": {
+    "_comment": "Naggaroth (#8211). A mainland: scope is closed by cuts, a seed and a named island list (2026-10-14, Claude). Placement is by landmarks (fit.mode landmarks), scored leave-one-out: the CR frame's left edge crops the west coast and our canvas top crops the north, so a silhouette fit would fit the crops. The sweep affine over the shared central window (IoU 0.69, scale ~1.55 x 1.9) is the starting point; every landmark is a coast corner present on both coasts within 30 px under it.",
+    "box": [
+      600,
+      0,
+      3020,
+      1900
+    ],
+    "cr_box": [
+      0,
+      540,
+      1400,
+      1620
+    ],
+    "target": 56,
+    "min_state_px": 4000,
+    "max_state_px": null,
+    "snap_px": 16,
+    "snap_follow_frac": 0.5,
+    "features": [
+      "rivers",
+      "impassable",
+      "high_ground"
+    ],
+    "high_ground_m": 2000,
+    "fit": {
+      "mode": "landmarks",
+      "influence_px": 0,
+      "lattice": [
+        12,
+        12
+      ]
+    },
+    "seed": [
+      1500,
+      800
+    ],
+    "islands": [
+      {
+        "name": "Maelstrom islet group, north",
+        "point": [
+          877,
+          770
+        ],
+        "feature": "lore map naggaroth_1: The Maelstrom off the Iron Mountains coast (4,665 px)"
+      },
+      {
+        "name": "Maelstrom islet group, south",
+        "point": [
+          914,
+          1209
+        ],
+        "feature": "lore map naggaroth_1: The Maelstrom, southern part (4,520 px)"
+      },
+      {
+        "name": "Isle of Great Beasts",
+        "point": [
+          1142,
+          1353
+        ],
+        "feature": "lore map naggaroth_1 and naggaroth_2: Isle of Great Beasts (15,657 px)"
+      },
+      {
+        "name": "Broken Lands, north",
+        "point": [
+          1270,
+          1538
+        ],
+        "feature": "lore map naggaroth_1: The Broken Lands, the large island (10,411 px)"
+      },
+      {
+        "name": "Broken Lands, south",
+        "point": [
+          1285,
+          1638
+        ],
+        "feature": "lore map naggaroth_1: The Broken Lands, south-eastern island (6,726 px)"
+      },
+      {
+        "name": "Sea of Chill, north island",
+        "point": [
+          2403,
+          180
+        ],
+        "feature": "lore map naggaroth_1: Sea of Chill coast islands the map draws as Naggaroth (7,716 px)"
+      },
+      {
+        "name": "Sea of Chill, middle island",
+        "point": [
+          2443,
+          317
+        ],
+        "feature": "lore map naggaroth_1: Sea of Chill coast islands (15,343 px)"
+      },
+      {
+        "name": "Karond Kar island",
+        "point": [
+          2401,
+          636
+        ],
+        "feature": "lore map naggaroth_1: Karond Kar and the Sea of Chill east shore (7,276 px)"
+      }
+    ],
+    "cuts": [
+      {
+        "name": "north_west_polar",
+        "shared_with": "#8216 (the Chaos Wastes)",
+        "feature": "west edge of the Iron Mountains, east of the Ironfrost Glacier label on the globe and on lore map naggaroth_1; the glacier and the polar ice west of it are the Wastes' land",
+        "points": [
+          [
+            1150,
+            0
+          ],
+          [
+            1130,
+            200
+          ],
+          [
+            1090,
+            350
+          ],
+          [
+            1020,
+            420
+          ],
+          [
+            990,
+            450
+          ]
+        ]
+      },
+      {
+        "name": "lustria_neck",
+        "shared_with": "#8212 (Lustria)",
+        "feature": "narrowest land south of the Grey Guardians (row 1790: 84 px), north of Hexoatl on both lore maps",
+        "points": [
+          [
+            1720,
+            1792
+          ],
+          [
+            1990,
+            1792
+          ]
+        ]
+      }
+    ],
+    "landmarks": [
+      {
+        "name": "Sea of Malice north-west elbow",
+        "source": [
+          550,
+          778
+        ],
+        "canvas": [
+          1762,
+          396
+        ],
+        "feature": "corner where the north shore of the Sea of Malice turns south",
+        "placed_by": "claude"
+      },
+      {
+        "name": "Sea of Malice south-west bend",
+        "source": [
+          627,
+          971
+        ],
+        "canvas": [
+          1878,
+          752
+        ],
+        "feature": "bend of the south-west shore of the Sea of Malice",
+        "placed_by": "claude"
+      },
+      {
+        "name": "Sea of Malice south cusp",
+        "source": [
+          712,
+          967
+        ],
+        "canvas": [
+          2005,
+          754
+        ],
+        "feature": "V-shaped cusp on the south shore of the Sea of Malice",
+        "placed_by": "claude"
+      },
+      {
+        "name": "Sea of Malice north shore notch",
+        "source": [
+          651,
+          768
+        ],
+        "canvas": [
+          1919,
+          352
+        ],
+        "feature": "inlet notch on the Land of Chill coast",
+        "placed_by": "claude"
+      },
+      {
+        "name": "Land of Chill coast, east of the bay",
+        "source": [
+          803,
+          757
+        ],
+        "canvas": [
+          2134,
+          334
+        ],
+        "feature": "headland on the Land of Chill coast east of the Sea of Malice",
+        "placed_by": "claude"
+      },
+      {
+        "name": "East coast notch above the Doom Glades",
+        "source": [
+          684,
+          1257
+        ],
+        "canvas": [
+          1971,
+          1282
+        ],
+        "feature": "notch in the east coast north of the Doom Glades",
+        "placed_by": "claude"
+      },
+      {
+        "name": "Doom Glades south coast corner",
+        "source": [
+          622,
+          1318
+        ],
+        "canvas": [
+          1878,
+          1400
+        ],
+        "feature": "corner of the coast south of the Doom Glades",
+        "placed_by": "claude"
+      },
+      {
+        "name": "Bleak coast headland",
+        "source": [
+          555,
+          1346
+        ],
+        "canvas": [
+          1779,
+          1470
+        ],
+        "feature": "headland on the south-east coast",
+        "placed_by": "claude"
+      },
+      {
+        "name": "South coast bay",
+        "source": [
+          602,
+          1411
+        ],
+        "canvas": [
+          1830,
+          1592
+        ],
+        "feature": "bay on the south-east coast above the Lustria neck",
+        "placed_by": "claude"
+      },
+      {
+        "name": "South coast near the neck",
+        "source": [
+          625,
+          1500
+        ],
+        "canvas": [
+          1866,
+          1746
+        ],
+        "feature": "coast corner just north of the Lustria neck",
+        "placed_by": "claude"
+      },
+      {
+        "name": "Neck west cusp",
+        "source": [
+          550,
+          1509
+        ],
+        "canvas": [
+          1753,
+          1792
+        ],
+        "feature": "west cusp where the land narrows to the Lustria neck",
+        "placed_by": "claude"
+      }
+    ]
   }
 }
