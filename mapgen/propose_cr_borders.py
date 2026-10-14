@@ -20,6 +20,12 @@ transparent 8192x3616 canvas), ``_review.png``, ``_states.csv`` and ``.json`` (i
 placement, dot check, hull, snap, round-trip, compare); ``--placement-review`` adds
 ``_placement_review.png`` and ``_landmark_sheet.png``.
 
+A mainland (#8211) is declared with ``seed``, ``islands`` and ``cuts`` in its config row: the
+scope is the land component holding the seed plus each listed island, closed by Claude-authored
+cut lines (``cuts`` are shared borders the neighbouring landmass inherits). ``fit.mode``
+``"landmarks"`` places by Claude's landmarks, scored leave-one-out; ``features`` may add
+``"high_ground"`` (edges of land at or above ``high_ground_m``).
+
 Exit 0 on a passing round trip (or a clean skip when the dataset is absent), 1 on a failed one.
 """
 
@@ -57,6 +63,7 @@ LOOKUP_TGA = DATASET_DIR / "campaign_maps" / "cr_combi_expanded_map_1" / "cr_com
 REGIONS_TSV = DATASET_DIR / "db" / "regions_tables" / "!cr_map_expansion.tsv"
 LOC_TSV = DATASET_DIR / "text" / "db" / "cr_new_combi_regions.loc.tsv"
 GLOBE_SOURCE = "terraqueous_globe_reprojected.png"
+TEXT_DDS = DATASET_DIR / "campaign_maps" / "cr_combi_expanded_map_1" / "cr_combi_expanded_map_text.dds"
 
 CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE
 WRAP_X = map_config.WRAP_X
@@ -102,6 +109,35 @@ def load_config(path: Path, name: str) -> dict:
         for k in ("name", "source", "canvas", "feature"):
             if not lm.get(k):
                 raise ConfigError(f"{path.name}.{name}.landmarks[{i}]: needs {k!r}")
+    # Mainland keys (#8211): seed, islands and cuts come together or not at all.
+    where = f"{path.name}.{name}"
+    have = [k for k in ("seed", "islands", "cuts") if k in c]
+    if have and len(have) != 3:
+        raise ConfigError(f"{where}: seed, islands and cuts come together; have only {have}")
+    if have:
+        if len(c["seed"]) != 2:
+            raise ConfigError(f"{where}.seed must be [x, y]")
+        for i, isl in enumerate(c["islands"]):
+            if len(isl.get("point", [])) != 2 or not isl.get("name") or not isl.get("feature"):
+                raise ConfigError(f"{where}.islands[{i}]: needs point [x, y], name and feature")
+        if not c["cuts"]:
+            raise ConfigError(f"{where}.cuts: at least one cut")
+        for i, cut in enumerate(c["cuts"]):
+            if len(cut.get("points", [])) < 2 or not cut.get("name") or not cut.get("feature"):
+                raise ConfigError(f"{where}.cuts[{i}]: needs name, feature and points (>= 2)")
+            if not all(len(pt) == 2 for pt in cut["points"]):
+                raise ConfigError(f"{where}.cuts[{i}].points must be [x, y] pairs")
+    fit = c["fit"]
+    if fit.get("mode", "silhouette") not in ("silhouette", "landmarks"):
+        raise ConfigError(f"{where}.fit.mode must be 'silhouette' or 'landmarks'")
+    if fit.get("mode") == "landmarks" and len(c["landmarks"]) < 4:
+        raise ConfigError(f"{where}: fit.mode 'landmarks' needs at least 4 landmarks")
+    c.setdefault("features", ["rivers", "impassable"])
+    bad = [k for k in c["features"] if k not in ("rivers", "impassable", "high_ground")]
+    if bad:
+        raise ConfigError(f"{where}.features: unknown {bad}")
+    if "high_ground" in c["features"] and not c.get("high_ground_m"):
+        raise ConfigError(f"{where}: features lists high_ground but high_ground_m is unset")
     return c
 
 
@@ -137,15 +173,27 @@ class Layers:
             raise SystemExit(f"{ref}: expected {CANVAS_W}x{CANVAS_H}, got {arr.shape[1]}x{arr.shape[0]}")
         return arr
 
-    def features(self) -> np.ndarray:
-        """Rivers (pure blue) plus the edge of impassable tracts, both on land."""
+    def features(self, kinds=("rivers", "impassable")) -> np.ndarray:
+        """Rivers (pure blue) and/or the edge of impassable tracts, both on land."""
         from worldgen import river_network
-        feat = river_network.blue_lines(self.rivers[..., :3]) & self.land
-        if self.impassable is not None:
+        feat = np.zeros(self.land.shape, dtype=bool)
+        if "rivers" in kinds:
+            feat |= river_network.blue_lines(self.rivers[..., :3]) & self.land
+        if "impassable" in kinds and self.impassable is not None:
             imp = land_provinces.impassable_mask(self.impassable, self.land)
-            edge = imp & ~ndimage.binary_erosion(imp)
-            feat |= edge
+            feat |= imp & ~ndimage.binary_erosion(imp)
         return feat
+
+    def high_ground(self, crop_box, min_m: float) -> np.ndarray:
+        """Edge of land at or above ``min_m`` metres, over ``crop_box`` (wrap-aware).
+
+        Uses the arable heatmap's own elevation loader (heightmap block-averaged to the canvas).
+        """
+        from generate_arable_heatmap import _elev_m_canvas
+        elev = _elev_m_canvas()
+        e = cr_partition.crop_box(elev, crop_box, wrap=True)
+        land = cr_partition.crop_box(self.land, crop_box, wrap=True)
+        return cr_partition.high_ground_edges(e, land, float(min_m))
 
     def impassable_mask(self) -> np.ndarray:
         if self.impassable is None:
@@ -305,10 +353,15 @@ def main(argv: list[str] | None = None) -> int:
     rx0, ry0, rx1, ry1 = (int(v) for v in cfg["cr_box"])
     src_labels = cr_partition.to_parchment_frame(idx, void, cfg["cr_box"])
     theirs = cr_partition.box_land(src_labels > 0, minc)
+    fit_mode = fit_p.get("mode", "silhouette")
     for what, m in (("box (canvas)", ours), ("cr_box (parchment)", theirs)):
         cut = cr_partition.edge_cut(m)
         bad = {k: v for k, v in cut.items() if v > EDGE_CUT_MAX}
-        if bad:
+        if bad and fit_mode == "landmarks":
+            log(f"  {what} runs over land on "
+                f"{', '.join(f'{k} {v:.0%}' for k, v in bad.items())} (landmark placement: "
+                f"the cuts and the island list close the scope)", t0)
+        elif bad:
             raise ConfigError(
                 f"{name}: {what} is cut across land on its "
                 f"{', '.join(f'{k} edge ({v:.0%})' for k, v in bad.items())}; "
@@ -321,7 +374,18 @@ def main(argv: list[str] | None = None) -> int:
         (to_canvas_x(float(lm["canvas"][0]), bx0) - bx0, float(lm["canvas"][1]) - by0),
         lm["feature"]) for lm in cfg["landmarks"]]
     log(f"placing CR land on ours ({len(lms)} Claude landmark(s)) ...", t0)
-    src_pts, cvs_pts, info = cr_partition.fit_placement(theirs, ours, lms, fit_p, lambda m: log(m, t0))
+    src_pts, cvs_pts, info = cr_partition.fit_placement(
+        theirs, ours, lms, {k: v for k, v in fit_p.items() if k != "mode"}, lambda m: log(m, t0),
+        mode=fit_mode)
+    loo = None
+    if len(lms) >= 4:
+        loo = cr_partition.landmark_loo(lms, {k: v for k, v in fit_p.items() if k != "mode"},
+                                        src_size=(rx1 - rx0, ry1 - ry0))
+        log(f"  leave-one-out over {len(lms)} landmarks: affine median {loo['affine']['median']} px "
+            f"(max {loo['affine']['max']}), thin-plate median {loo['thin_plate']['median']} px "
+            f"(max {loo['thin_plate']['max']})", t0)
+        for row in loo["per_landmark"]:
+            log(f"      {row['name']}: affine {row['affine_px']} px, thin-plate {row['thin_plate_px']} px", t0)
     log(f"  placement IoU {info['iou']:.4f} (affine {info['coarse_iou']:.4f}), "
         f"folds {100 * info['folded_fraction']:.3f}%, anisotropy p99 {info['anisotropy_p99']}", t0)
     if info.get("warning"):
@@ -370,9 +434,33 @@ def main(argv: list[str] | None = None) -> int:
             m = reg_crop == r
             region_drawn[r] = bool(dmask_crop[m & land_crop].mean() > 0.5)
     drawn_zone = region_drawn[reg_crop] & land_crop
-    scope = land_crop & box_mask & hull
-    if not args.replace_existing:
-        scope &= ~drawn_zone
+    cut_info = None
+    if "cuts" in cfg:
+        if args.replace_existing:
+            raise SystemExit(f"{name}: --replace-existing is not supported with cuts")
+        free_land = land_crop & box_mask & ~drawn_zone
+        wrapped = [[(to_canvas_x(float(x), cx0), float(y)) for x, y in cut["points"]]
+                   for cut in cfg["cuts"]]
+        cut_px = cr_partition.rasterize_cuts(crop_shape, wrapped, (cx0, cy0))
+        frame_rows = [r for r in range(crop_shape[0]) if cy0 + r in (0, CANVAS_H - 1)]
+
+        def local(pt):
+            return (int(round(to_canvas_x(float(pt[0]), cx0) - cx0)), int(round(float(pt[1]) - cy0)))
+        try:
+            scope, cut_info = cr_partition.cut_scope(
+                free_land, cut_px, local(cfg["seed"]), [local(i["point"]) for i in cfg["islands"]],
+                box_mask, frame_rows)
+        except cr_partition.PartitionError as exc:
+            raise ConfigError(f"{name}: {exc}") from exc
+        cut_info["cut_px"] = {
+            cut["name"]: int((cr_partition.rasterize_cuts(crop_shape, [w], (cx0, cy0))
+                              & free_land).sum()) for cut, w in zip(cfg["cuts"], wrapped)}
+        cut_info["shared_with"] = {cut["name"]: cut.get("shared_with", "") for cut in cfg["cuts"]}
+        log(f"  cut scope: seed land {cut_info['seed_px']:,} px, islands {cut_info['island_px']}", t0)
+    else:
+        scope = land_crop & box_mask & hull
+        if not args.replace_existing:
+            scope &= ~drawn_zone
     if not scope.any():
         raise SystemExit(f"{name}: no undrawn land inside the box and the fitted hull "
                          f"(use --replace-existing to redraw drawn land)")
@@ -400,8 +488,17 @@ def main(argv: list[str] | None = None) -> int:
     n_cr = int(len(np.unique(cr_raw[cr_raw > 0])))
     log(f"  {n_cr} CR regions reach scope -> {int(labels.max())} pieces after prune/fill", t0)
 
-    features = layers.features()
+    kinds = tuple(k for k in cfg["features"] if k != "high_ground")
+    features = layers.features(kinds)
     feat_crop = cr_partition.crop_box(features, crop_box, wrap=True) & land_crop
+    feature_px = {k: int((cr_partition.crop_box(layers.features((k,)), crop_box, wrap=True)
+                          & land_crop & scope).sum()) for k in kinds}
+    hg_crop = None
+    if "high_ground" in cfg["features"]:
+        hg_crop = layers.high_ground(crop_box, cfg["high_ground_m"]) & land_crop
+        feat_crop |= hg_crop
+        feature_px["high_ground"] = int((hg_crop & scope).sum())
+        log(f"  high ground >= {cfg['high_ground_m']} m: {feature_px['high_ground']:,} edge px in scope", t0)
     labels, snap_report = cr_partition.snap_to_features(
         labels, scope, feat_crop, int(cfg["snap_px"]), float(cfg["snap_follow_frac"]))
     labels = cells.split_disconnected(labels, False)
@@ -437,6 +534,11 @@ def main(argv: list[str] | None = None) -> int:
     # --- lines, round trip -----------------------------------------------------------------
     open_land = in_touch & ~scope
     lines = cr_partition.lines_from_labels(labels, scope)
+    lined_ids = {int(v) for v in np.unique(labels[lines]) if v > 0}
+    island_only = sorted(int(v) for v in np.unique(labels) if v > 0 and int(v) not in lined_ids)
+    if island_only:
+        log(f"  {len(island_only)} island-only state(s) with no line (anchors go into the realm "
+            f"points): {island_only}", t0)
     closing = cr_partition.closing_line(scope, open_land)
     proposal_crop = (lines | closing) & box_mask
     proposal = np.zeros(land.shape, dtype=bool)
@@ -485,6 +587,14 @@ def main(argv: list[str] | None = None) -> int:
         log(f"  vs the existing layer: {len(ex_ids)} states there, {n_states} proposed, "
             f"{len(cpairs)} match at IoU >= 0.6", t0)
 
+    coast = None
+    if "cuts" in cfg:
+        region = (ndimage.binary_dilation(scope, iterations=40) & ~drawn_zone & hull
+                  & ~(land_crop & ~scope))
+        coast = cr_partition.coast_agreement(lab > 0, land_crop, region)
+        log(f"  coast agreement (CR coast to ours, {coast['n']} px): median {coast['median']} px, "
+            f"p90 {coast['p90']} px", t0)
+
     # --- provenance, names ---------------------------------------------------------------------
     prov = cr_partition.provenance(labels, cr_raw)
 
@@ -521,9 +631,11 @@ def main(argv: list[str] | None = None) -> int:
     header = (f"{name}: {n_states} states (CR regions {n_cr}, merged "
               f"{max(0, before_merge - n_states)}, split {split}, flagged {len(flagged)}); "
               f"placement IoU {info['iou']:.2f}"
-              + (f", dot check {dot_check['with_landmarks']['median']} px" if dot_check else ""))
+              + (f", dot check {dot_check['with_landmarks']['median']} px" if dot_check else "")
+              + (f", LOO {loo['affine']['median']}/{loo['thin_plate']['median']} px" if loo else ""))
     review = render_review(name, header, scope, labels, rows, lines, closing, feat_crop,
-                           layers, crop_box, (ox, oy), lms, (cx0, cy0), round_trip, gen, out)
+                           layers, crop_box, (ox, oy), lms, (cx0, cy0), round_trip, gen, out,
+                           hg=hg_crop, island_states=island_only)
 
     report = {
         "landmass": name, "target": target, "replace_existing": bool(args.replace_existing),
@@ -535,27 +647,35 @@ def main(argv: list[str] | None = None) -> int:
             "state_borders": sources_mod.sha256_of(
                 sources_mod.resolve_source_path(sources_mod.split_ref(gp.STATE_REGIONS_SOURCE)[0])),
             "config": sources_mod.sha256_of(args.config),
+            **({"heightmap": sources_mod.sha256_of(TOOLS_DIR.parent / "map_data" / "heightmap.png")}
+               if "high_ground" in cfg["features"] else {}),
         },
         "params": {"box": cfg["box"], "cr_box": cfg["cr_box"], "min_state_px": cfg["min_state_px"],
                    "max_state_px": cfg["max_state_px"], "snap_px": cfg["snap_px"],
-                   "snap_follow_frac": cfg["snap_follow_frac"], "fit": {**cr_partition.DEFAULT_FIT, **fit_p}},
-        "placement": info, "dot_check": dot_check,
+                   "snap_follow_frac": cfg["snap_follow_frac"], "fit": {**cr_partition.DEFAULT_FIT, **fit_p},
+                   "features": cfg["features"], "high_ground_m": cfg.get("high_ground_m")},
+        "placement": {**info, "loo": loo, "coast_agreement": coast}, "dot_check": dot_check,
+        "scope": ({**cut_info, "islands_listed": [i["name"] for i in cfg["islands"]]}
+                  if cut_info else None),
+        "features_px": feature_px,
         "hull": {"outside_blobs": blobs[:12], "scope_px": int(scope.sum())},
         "snap": {k: len(v) if isinstance(v, list) else v for k, v in snap_report.items()},
         "snap_detail": snap_report,
         "states": {"count": n_states, "cr_regions": n_cr, "flagged_oversize": flagged,
-                   "median_px": med, "islets_left_to_generator": len(islets)},
+                   "median_px": med, "islets_left_to_generator": len(islets),
+                   "lined": n_states - len(island_only), "island_only": len(island_only),
+                   "island_only_states": island_only},
         "round_trip": round_trip, "compare": compare,
-        "unproven_until_a_mainland_child": ["mainland scope", "box-edge closing lines at scale",
-                                           "borders snapping to rivers (Ulthuan has few)",
-                                           "Claude-placed landmarks (unless listed)"],
+        "unproven_until_a_mainland_child": ["Claude-placed landmarks improving on the affine "
+                                           "(see placement.loo)",
+                                           "snapping to rivers where a landmass has many"],
     }
     (out / f"{name}_borders_proposal.json").write_text(
         json.dumps(report, indent=2, sort_keys=True), encoding="utf-8")
 
     if args.placement_review:
         render_placement(name, lab, hull, land_crop, layers, crop_box, (cx0, cy0), cfg, lms,
-                         idx, void, out)
+                         idx, void, out, loo)
     log(f"wrote {canvas_png.name}, {review.name} and the table under {out}", t0)
     return 0 if round_trip["passed"] else 1
 
@@ -576,7 +696,8 @@ def _coast(land: np.ndarray) -> np.ndarray:
 
 
 def render_review(name, header, scope, labels, rows, lines, closing, features, layers, crop_box,
-                  box_origin, lms, crop_origin, round_trip, gen, out: Path) -> Path:
+                  box_origin, lms, crop_origin, round_trip, gen, out: Path,
+                  hg=None, island_states=()) -> Path:
     cx0, cy0 = crop_origin
     bg = _globe_crop(crop_box).astype(np.uint8)
     land = cr_partition.crop_box(layers.land, crop_box, wrap=True)
@@ -585,6 +706,8 @@ def render_review(name, header, scope, labels, rows, lines, closing, features, l
     img[imp] = (0.5 * img[imp] + 0.5 * np.array([120, 120, 120])).astype(np.uint8)
     img[_coast(land)] = (0, 255, 255)
     img[features & ~_coast(land)] = (40, 90, 255)
+    if hg is not None:
+        img[hg & ~_coast(land)] = (222, 184, 135)          # high-ground edge, light brown
     img[lines] = MAGENTA
     img[closing] = (255, 140, 0)
     # failing generated states, outlined in red
@@ -602,7 +725,8 @@ def render_review(name, header, scope, labels, rows, lines, closing, features, l
     d.text((4, 2), header, fill=(255, 255, 255))
     for r in rows:
         ax, ay = (r["anchor_x"] - cx0 - x0) * 2, (r["anchor_y"] - cy0 - y0) * 2
-        d.text((ax - 20, ay - 5), r["cr_names"][:26], fill=(255, 255, 255))
+        tag = ("ISLAND " if r["state"] in island_states else "") + r["cr_names"][:26]
+        d.text((ax - 20, ay - 5), tag, fill=(255, 255, 255))
     for i, lm in enumerate(lms, 1):
         lx, ly = (lm.canvas[0] + box_origin[0] - x0) * 2, (lm.canvas[1] + box_origin[1] - y0) * 2
         d.ellipse([lx - 8, ly - 8, lx + 8, ly + 8], outline=(255, 255, 0), width=2)
@@ -613,7 +737,7 @@ def render_review(name, header, scope, labels, rows, lines, closing, features, l
 
 
 def render_placement(name, lab, hull, land_crop, layers, crop_box, crop_origin, cfg, lms,
-                     idx, void, out: Path) -> None:
+                     idx, void, out: Path, loo=None) -> None:
     cx0, cy0 = crop_origin
     bg = _globe_crop(crop_box).astype(np.uint8)
     img = bg.copy()
@@ -632,6 +756,12 @@ def render_placement(name, lab, hull, land_crop, layers, crop_box, crop_origin, 
     left[src > 0] = (70, 90, 70)
     left[cr_partition.lines_from_labels(src, src > 0)] = (255, 255, 255)
     left[_coast(src > 0)] = (255, 140, 0)
+    if TEXT_DDS.is_file():
+        # CR's own province labels, already in the parchment frame (the alpha is the lettering).
+        with Image.open(TEXT_DDS) as tim:
+            txt = np.array(tim.crop((rx0, ry0, rx1, ry1)).convert("RGBA"))
+        ink = txt[..., 3] > 96
+        left[ink] = (255, 255, 120)
     bx0, by0, bx1, by1 = (int(v) for v in cfg["box"])
     right = cr_partition.crop_box(bg, (bx0 - cx0, by0 - cy0, bx1 - cx0, by1 - cy0)).copy()
     rland = cr_partition.crop_box(land_crop, (bx0 - cx0, by0 - cy0, bx1 - cx0, by1 - cy0))
@@ -659,9 +789,19 @@ def render_placement(name, lab, hull, land_crop, layers, crop_box, crop_origin, 
         rd.ellipse([lm.canvas[0] - 8, lm.canvas[1] - 8, lm.canvas[0] + 8, lm.canvas[1] + 8],
                    outline=(255, 255, 0), width=2)
         rd.text((lm.canvas[0] + 10, lm.canvas[1] - 6), str(i), fill=(255, 255, 0))
-    sheet = Image.new("RGB", (li.width + ri.width + 10, max(li.height, ri.height)), (0, 0, 0))
+    sheet = Image.new("RGB", (li.width + ri.width + 10, max(li.height, ri.height) + 18 * (len(lms) + 1)),
+                      (0, 0, 0))
     sheet.paste(li, (0, 0))
     sheet.paste(ri, (li.width + 10, 0))
+    if loo:
+        sd = ImageDraw.Draw(sheet)
+        y = max(li.height, ri.height) + 2
+        sd.text((4, y), f"leave-one-out: affine median {loo['affine']['median']} px, "
+                        f"thin-plate median {loo['thin_plate']['median']} px", fill=(255, 255, 255))
+        for i, row in enumerate(loo["per_landmark"], 1):
+            y += 18
+            sd.text((4, y), f"{i}. {row['name']}: affine {row['affine_px']} px, "
+                            f"thin-plate {row['thin_plate_px']} px", fill=(255, 255, 0))
     sheet.save(out / f"{name}_landmark_sheet.png")
 
 

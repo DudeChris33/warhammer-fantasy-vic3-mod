@@ -3566,9 +3566,12 @@ def _selfcheck_cr_partition() -> None:
     placement (known scale and offset recovered; landmarks exact, far field the affine), the
     fill over a differing coast, snap (crossing is snapped, a feature ending mid-band is not),
     a scope cut sealed by closing lines and proved through the generator's own region stage, a
-    box across the seam, and determinism.
+    box across the seam, and determinism. Board #8211 adds the mainland path: cut rasterising,
+    the cut-closed scope with an island list and frame rows, landmark placement, leave-one-out,
+    coast agreement and high-ground edges.
     """
     import struct as _st
+    from scipy import ndimage as _ndi
     from worldgen import cells as _cells, cr_partition as crp, land_provinces as _lp
 
     # --- decode: 4x3, palette of 5 with black at 2, descriptor 0x10, header colour-map start 18 --
@@ -3684,6 +3687,125 @@ def _selfcheck_cr_partition() -> None:
     smp[2:18, 10:18] = 9
     pr = crp.provenance(fin, smp)
     assert pr[1]["area_px"] == 256 and abs(sum(pr[1]["cr_shares"].values()) - 1.0) < 1e-3
+
+    # --- mainland support (board #8211) -------------------------------------------------------------
+    # rasterize_cuts: an 8-connected diagonal cut blocks a 4-connected flood across it.
+    cutp = crp.rasterize_cuts((30, 30), [[(0, 0), (29, 29)]])
+    assert cutp.sum() == 30 and all(cutp[i, i] for i in range(30))
+    flood, nf = _ndi.label(~cutp)                       # 4-connected by default
+    assert nf == 2 and flood[0, 29] != flood[29, 0], "a diagonal cut must separate the two sides"
+    seam = crp.rasterize_cuts((10, 20), [[(5, 2), (15, 2)]], origin=(10, 0), wrap_w=20)
+    assert seam.sum() == 11 and seam[2, 5:16].all(), "x left of the origin unwraps across the seam"
+
+    # cut_scope: a land strip the cut closes; the seed side and a listed island come in, an
+    # unlisted island and the far side do not.
+    free = np.zeros((40, 60), bool)
+    free[5:35, 5:35] = True                              # the seed's land
+    free[5:35, 35:55] = True                             # land beyond the cut
+    cut = np.zeros_like(free)
+    cut[5:35, 35] = True                                 # the cut column
+    free[2:4, 20:24] = True                              # an island, listed
+    free[36:38, 10:12] = True                            # an island, not listed
+    bmask = np.ones_like(free)
+    bmask[:, 58:] = False                                # box ends at col 58
+    sc, inf = crp.cut_scope(free, cut, (10, 10), [(21, 2)], bmask)
+    assert sc[10, 10] and sc[3, 21] and not sc[36, 10] and not sc[10, 45]
+    assert sc[10, 35], "a cut pixel next to scope joins scope so closing_line marks it"
+    assert inf["island_px"] == [8]
+    # land on a non-frame box edge: the cut is missing and the call raises, naming the edge
+    for kw, what in (({}, "missing cut"),):
+        try:
+            crp.cut_scope(free, np.zeros_like(cut), (10, 10), [], np.pad(np.ones((40, 54), bool),
+                                                                        ((0, 0), (0, 6)))[:, :60])
+        except crp.PartitionError as exc:
+            assert "cut is missing" in str(exc), exc
+        else:
+            raise AssertionError("a scope that runs onto the box edge must raise")
+    # ... but the same land on a frame row is the end of the map, not a cut
+    land_f = np.zeros((20, 30), bool)
+    land_f[0:12, 5:25] = True                            # touches row 0 only
+    bm_f = np.zeros_like(land_f)
+    bm_f[0:15, 3:27] = True
+    crp.cut_scope(land_f, np.zeros_like(land_f), (10, 5), [], bm_f, frame_rows=[0])
+    try:
+        crp.cut_scope(land_f, np.zeros_like(land_f), (10, 5), [], bm_f)
+    except crp.PartitionError:
+        pass
+    else:
+        raise AssertionError("without frame_rows the top row is a box edge")
+    # an island point in the seed's own land is refused
+    try:
+        crp.cut_scope(free, cut, (10, 10), [(12, 12)], bmask)
+    except crp.PartitionError as exc:
+        assert "seed" in str(exc)
+    else:
+        raise AssertionError("an island inside the seed's land must raise")
+
+    # fit_from_landmarks: exact on 5 points of a known per-axis affine; refuses 3
+    pts = [(10.0, 20.0), (200.0, 40.0), (120.0, 180.0), (30.0, 150.0), (170.0, 90.0)]
+    lm5 = [crp.Landmark(f"p{i}", (a, b), (a * 1.7 + 33.0, b * 0.9 - 12.0)) for i, (a, b) in enumerate(pts)]
+    sc_, of_ = crp.fit_from_landmarks(lm5)
+    assert abs(sc_[0] - 1.7) < 1e-9 and abs(sc_[1] - 0.9) < 1e-9
+    assert abs(of_[0] - 33.0) < 1e-9 and abs(of_[1] + 12.0) < 1e-9
+    try:
+        crp.fit_from_landmarks(lm5[:3])
+    except crp.PartitionError:
+        pass
+    else:
+        raise AssertionError("landmark placement must refuse fewer than 4 landmarks")
+    # landmark mode places the blob without the silhouette sweeps
+    sp4, cp4, info4 = crp.fit_placement(src, canvas, lms, {"influence_px": 60.0}, mode="landmarks")
+    assert info4["mode"] == "landmarks" and info4["coarse_iou"] > 0.8
+
+    # landmark_loo: 0 for points on one affine; the inconsistent one is flagged
+    loo0 = crp.landmark_loo(lm5, {"influence_px": 0.0})
+    assert loo0["affine"]["max"] < 1e-6
+    off_lm = list(lm5)
+    off_lm[2] = crp.Landmark("bad", lm5[2].source, (lm5[2].canvas[0] + 40.0, lm5[2].canvas[1] - 30.0))
+    loo1 = crp.landmark_loo(off_lm, {"influence_px": 0.0})
+    worst = max(loo1["per_landmark"], key=lambda r: r["affine_px"])
+    assert worst["name"] == "bad" and worst["affine_px"] > 10.0
+
+    # coast_agreement: 0 on identical masks, about k on a k-px shift, frame rows ignored
+    base = np.zeros((60, 80), bool)
+    base[0:40, 20:60] = True                             # touches the top row: a frame row
+    region = np.ones_like(base)
+    ca0 = crp.coast_agreement(base, base, region)
+    assert ca0["median"] == 0.0 and ca0["n"] > 0
+    shifted = np.roll(base, 5, axis=1)
+    ca5 = crp.coast_agreement(shifted, base, region)
+    assert 4.0 <= ca5["median"] <= 6.0, ca5
+    only_top = np.zeros_like(base)
+    only_top[0:3, 10:70] = True                          # coast only along the frame row + its ends
+    assert crp.coast_agreement(only_top, only_top, region)["median"] == 0.0
+
+    # high_ground_edges: outlines a plateau, ignores a sub-500 px bump
+    elev = np.zeros((120, 160), np.float32)
+    elev[20:80, 20:100] = 3000.0                         # 4,800 px plateau
+    elev[100:110, 120:130] = 3000.0                      # 100 px bump
+    edge = crp.high_ground_edges(elev, np.ones_like(elev, bool), 2000.0)
+    assert edge[20, 50] and edge[79, 50] and not edge[50, 50] and not edge[100:110, 120:130].any()
+
+    # a cut-closed mainland round-trips through the generator's region stage with nothing open
+    land4 = np.ones((100, 140), bool)
+    scope4 = np.zeros(land4.shape, bool)
+    scope4[20:80, 20:70] = True
+    cut4 = crp.rasterize_cuts(land4.shape, [[(19, 19), (19, 80)], [(70, 19), (70, 80)],
+                                            [(19, 19), (70, 19)], [(19, 80), (70, 80)]])
+    sc4, _ = crp.cut_scope(land4, cut4, (40, 40), [], np.ones_like(land4), frame_rows=[])
+    assert sc4[40, 40] and not sc4[5, 5], "cuts enclosing a seed close its scope"
+    lab4 = np.zeros(land4.shape, np.int32)
+    lab4[20:80, 20:45] = 1
+    lab4[20:80, 45:70] = 2
+    lines4 = crp.lines_from_labels(lab4, sc4) | cut4
+    drawn4 = np.zeros(land4.shape + (3,), np.uint8)
+    drawn4[lines4] = (255, 0, 255)
+    reg4 = _lp.regions(land4, drawn4, 2, 150, False)
+    inner4 = [int(v) for v in np.unique(reg4[40:60, 25:65]) if v > 0]
+    assert len(inner4) == 2
+    off4 = _ndi.distance_transform_edt(~sc4)
+    for r in inner4:
+        assert not ((reg4 == r) & (off4 > 3)).any(), "a cut-closed state must not be open"
 
 
 def _selfcheck_arable() -> None:
@@ -6085,7 +6207,10 @@ def run_check() -> int:
     print("cr partition: lookup decode (top-down rows kept, wrong length refused) + dot-free placement "
           "(known affine recovered, exact at landmarks, affine far from them, deterministic) + fill, snap "
           "(crossing followed, mid-band end left alone), closing lines sealed through the generator's "
-          "region stage, seam crop and provenance self-check passed.")
+          "region stage, seam crop and provenance + mainland path (8-connected cuts block a flood, "
+          "cut-closed scope with island list and frame rows and its refusals, landmark affine "
+          "exact and refused below 4, leave-one-out flags the inconsistent point, coast agreement, "
+          "high-ground edges, cut-closed round trip) self-check passed.")
     _selfcheck_arable()
     print("arable: field core (water/lake/impassable=0, climate peak/arid-trough/pole-taper, "
           "terrain suppression, river+coast boost, lore lift/suppress + smooth falloff + "

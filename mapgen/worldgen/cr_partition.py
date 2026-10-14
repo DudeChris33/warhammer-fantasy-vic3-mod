@@ -9,7 +9,9 @@ What lives here is only what no other module does:
 * **Place** the lookup's land on ours **without anchor dots** (Chris, 2026-10-14): a moment
   seed, a coarse affine sweep by two-sided IoU, then a thin-plate residual field from any
   landmarks Claude placed. The partition is a *guide*, not a set of borders to reproduce.
-* **Snap** borders to rivers and impassable edges, **line** the labels for the generator's
+* **Cut** a mainland's scope with Claude-authored cuts, a seed and an island list (#8211), and
+  place by landmarks scored leave-one-out when the two frames crop the land differently.
+* **Snap** borders to rivers, impassable edges and high-ground edges, **line** the labels for the generator's
   region stage, **close** the scope cut, and report per-state **provenance**.
 
 The rest of the chain (``cells.warp_cells``, ``fill_nearest``, ``prune_slivers``,
@@ -187,7 +189,7 @@ def _offsets(centre: float, half: int, step: int) -> np.ndarray:
 
 
 def fit_placement(src_land: np.ndarray, canvas_land: np.ndarray, landmarks: list[Landmark],
-                  params: dict | None = None, log=None
+                  params: dict | None = None, log=None, mode: str = "silhouette"
                   ) -> tuple[np.ndarray, np.ndarray, dict]:
     """Place CR's land on ours. ``src_land`` / ``canvas_land`` are same-rule boolean crops
     (parchment px / canvas px, each origin at its own box corner).
@@ -202,12 +204,27 @@ def fit_placement(src_land: np.ndarray, canvas_land: np.ndarray, landmarks: list
        thin-plate residual field from the landmarks. Pins (zero residual) at lattice points
        farther than ``influence_px`` from every landmark keep the placement the affine away from
        them; the placement is exact at every landmark.
+
+    ``mode="landmarks"`` (a mainland whose two frames crop it differently, so a silhouette fit
+    would fit the crops) replaces steps 1-2 with :func:`fit_from_landmarks`, a least-squares
+    per-axis scale and offset. ``coarse_iou`` is still reported, never optimised. With
+    ``influence_px`` of 0 the landmarks are not control points and the placement is the pure
+    affine.
     """
+    if mode not in ("silhouette", "landmarks"):
+        raise PartitionError(f"placement: unknown mode {mode!r}")
     p = {**DEFAULT_FIT, **(params or {})}
     log = log or (lambda *_: None)
     st = int(p["coarse_step"])
-    sh, sw = src_land.shape
-    ch, cw = canvas_land.shape
+    if mode == "landmarks":
+        scale, off = fit_from_landmarks(landmarks)
+        iou = affine_iou(src_land, canvas_land, scale, off, st)
+        log(f"    landmark affine: IoU {iou:.4f} scale ({scale[0]:.4f}, {scale[1]:.4f})")
+        info: dict = {"mode": "landmarks",
+                      "scale": [round(float(scale[0]), 5), round(float(scale[1]), 5)],
+                      "offset": [round(float(off[0]), 2), round(float(off[1]), 2)],
+                      "coarse_iou": round(float(iou), 4)}
+        return _finish_placement(src_land, canvas_land, landmarks, p, scale, off, info)
 
     # Both stages work on masks reduced by the same factor, so the scale is unchanged between
     # them and an offset in reduced px is ``offset / step``.
@@ -237,13 +254,18 @@ def fit_placement(src_land: np.ndarray, canvas_land: np.ndarray, landmarks: list
         log(f"    fine   1/{st2}: IoU {best.iou:.4f} scale ({scale[0]:.4f}, {scale[1]:.4f})")
     else:
         scale, off = best.scale, (best.offset[0] * st, best.offset[1] * st)
-    info: dict = {
+    info = {
         "seed_scale": [round(v, 4) for v in seed_scale],
         "scale": [round(float(scale[0]), 5), round(float(scale[1]), 5)],
         "offset": [round(float(off[0]), 2), round(float(off[1]), 2)],
         "coarse_iou": round(float(best.iou), 4),
     }
+    return _finish_placement(src_land, canvas_land, landmarks, p, scale, off, info)
 
+
+def _finish_placement(src_land, canvas_land, landmarks, p, scale, off, info):
+    """Step 3 of :func:`fit_placement`: the lattice through the affine plus the landmark field."""
+    sh, sw = src_land.shape
     nx, ny = (int(v) for v in p["lattice"])
     src_pts = register.lattice_box((0.0, 0.0, float(sw), float(sh)), nx, ny)
     aff = np.column_stack([src_pts[:, 0] * scale[0] + off[0], src_pts[:, 1] * scale[1] + off[1]])
@@ -257,7 +279,7 @@ def fit_placement(src_land: np.ndarray, canvas_land: np.ndarray, landmarks: list
         for lm, r in zip(landmarks, resid)]
 
     canvas_pts = aff.copy()
-    if len(landmarks):
+    if len(landmarks) and float(p["influence_px"]) > 0:
         field = _residual_field(lm_aff, resid, aff, float(p["influence_px"]))
         canvas_pts = aff + field(aff)
         # The landmarks themselves become control points: exact there by construction. A lattice
@@ -335,6 +357,219 @@ def forward_map(src_pts: np.ndarray, canvas_pts: np.ndarray, pts: np.ndarray) ->
     rbf = RBFInterpolator(np.asarray(src_pts), np.asarray(canvas_pts),
                           kernel="thin_plate_spline", degree=1)
     return rbf(np.asarray(pts, dtype=np.float64))
+
+
+# ---------------------------------------------------------------------------
+# Mainland support (board #8211): cuts, an explicit island list, landmark placement
+# ---------------------------------------------------------------------------
+
+def rasterize_cuts(shape: tuple[int, int], cuts: list[list[tuple[float, float]]],
+                   origin: tuple[int, int] = (0, 0), wrap_w: int | None = None) -> np.ndarray:
+    """Bool raster of polylines, drawn 8-connected (Bresenham).
+
+    An 8-connected curve blocks the generator's 4-connected fill. Points are canvas px; each is
+    shifted by the crop ``origin`` and, with ``wrap_w``, an x left of the origin is unwrapped
+    across the seam (as ``to_canvas_x``). Pixels off the raster are clipped.
+    """
+    h, w = shape
+    ox, oy = origin
+    out = np.zeros(shape, dtype=bool)
+    for pts in cuts:
+        if len(pts) < 2:
+            raise PartitionError("cut: a polyline needs at least 2 points")
+        xy = []
+        for x, y in pts:
+            if wrap_w is not None and x < ox:
+                x += wrap_w
+            xy.append((int(round(x - ox)), int(round(y - oy))))
+        for (x0, y0), (x1, y1) in zip(xy[:-1], xy[1:]):
+            dx, dy = abs(x1 - x0), -abs(y1 - y0)
+            sx, sy = (1 if x0 < x1 else -1), (1 if y0 < y1 else -1)
+            err = dx + dy
+            while True:
+                if 0 <= x0 < w and 0 <= y0 < h:
+                    out[y0, x0] = True
+                if x0 == x1 and y0 == y1:
+                    break
+                e2 = 2 * err
+                if e2 >= dy:
+                    err += dy
+                    x0 += sx
+                if e2 <= dx:
+                    err += dx
+                    y0 += sy
+    return out
+
+
+def _box_edge(box_mask: np.ndarray, frame_rows) -> np.ndarray:
+    edge = box_mask & ~ndimage.binary_erosion(box_mask, border_value=0)
+    for r in frame_rows:
+        if 0 <= r < edge.shape[0]:
+            edge[r] = False
+    return edge
+
+
+def cut_scope(free_land: np.ndarray, cut_px: np.ndarray, seed: tuple[int, int],
+              islands: list[tuple[int, int]], box_mask: np.ndarray,
+              frame_rows=()) -> tuple[np.ndarray, dict]:
+    """Scope of a mainland: the 4-connected component of ``free_land & ~cut_px`` holding
+    ``seed`` plus the component holding each ``islands`` point; nothing else enters.
+
+    ``seed`` and ``islands`` are crop-local ``(x, y)``. ``frame_rows`` are crop rows that lie on
+    the canvas frame: land there is the end of the map, not a cut, so they never count as a box
+    edge. Raises ``PartitionError`` when the seed's component runs onto a non-frame box edge (a
+    cut is missing), when a point is not on ``free_land``, or when an island sits in the seed's
+    component or in a component that runs onto a non-frame box edge. Cut pixels next to scope
+    join scope, so ``closing_line`` marks them.
+    """
+    free = free_land & ~cut_px
+    lab, n = ndimage.label(free)
+    edge = _box_edge(box_mask, frame_rows)
+
+    def comp_at(pt, what):
+        x, y = int(pt[0]), int(pt[1])
+        if not (0 <= y < free.shape[0] and 0 <= x < free.shape[1]) or lab[y, x] == 0:
+            raise PartitionError(f"cut_scope: {what} at {x},{y} is not on free land")
+        return int(lab[y, x])
+
+    seed_c = comp_at(seed, "seed")
+    runs_off = set(int(c) for c in np.unique(lab[edge & free]) if c > 0)
+    if seed_c in runs_off:
+        ys, xs = np.nonzero((lab == seed_c) & edge)
+        raise PartitionError(
+            f"cut_scope: the seed's land runs onto the box edge at {len(xs)} px "
+            f"(x {int(xs.min())}..{int(xs.max())}, y {int(ys.min())}..{int(ys.max())}): a cut is missing")
+    keep = {seed_c}
+    per_island = []
+    for i, pt in enumerate(islands):
+        c = comp_at(pt, f"island {i}")
+        if c == seed_c:
+            raise PartitionError(f"cut_scope: island {i} at {pt[0]},{pt[1]} is in the seed's land "
+                                 f"(it is not an island under these cuts)")
+        if c in runs_off:
+            raise PartitionError(f"cut_scope: island {i} at {pt[0]},{pt[1]} runs onto the box edge")
+        keep.add(c)
+        per_island.append(int((lab == c).sum()))
+    scope = np.isin(lab, sorted(keep))
+    near = ndimage.binary_dilation(scope, structure=ndimage.generate_binary_structure(2, 1))
+    scope = scope | (near & cut_px & free_land)
+    info = {"seed_px": int((lab == seed_c).sum()), "island_px": per_island,
+            "cut_px_in_scope": int((scope & cut_px).sum())}
+    return scope, info
+
+
+def fit_from_landmarks(landmarks: list[Landmark], min_n: int = 4
+                       ) -> tuple[tuple[float, float], tuple[float, float]]:
+    """Least-squares per-axis ``(scale, offset)`` mapping landmark sources to canvas
+    (x and y solved independently). Raises below ``min_n`` landmarks."""
+    if len(landmarks) < min_n:
+        raise PartitionError(f"placement: landmark mode needs at least {min_n} landmarks, "
+                             f"got {len(landmarks)}")
+    src = np.array([lm.source for lm in landmarks], dtype=np.float64)
+    cvs = np.array([lm.canvas for lm in landmarks], dtype=np.float64)
+    out = []
+    for a in (0, 1):
+        A = np.column_stack([src[:, a], np.ones(len(src))])
+        sol, *_ = np.linalg.lstsq(A, cvs[:, a], rcond=None)
+        out.append((float(sol[0]), float(sol[1])))
+    return (out[0][0], out[1][0]), (out[0][1], out[1][1])
+
+
+def affine_iou(src_land: np.ndarray, canvas_land: np.ndarray, scale, off, step: int = 4) -> float:
+    """Silhouette IoU of ``src_land`` under a per-axis affine against ``canvas_land``, sampled
+    on a ``step``-reduced canvas grid (inverse mapping, so no holes). Reported, never optimised."""
+    ch, cw = canvas_land.shape
+    sh, sw = src_land.shape
+    ys, xs = np.mgrid[0:ch:step, 0:cw:step]
+    sx = np.rint((xs - off[0]) / scale[0]).astype(np.int64)
+    sy = np.rint((ys - off[1]) / scale[1]).astype(np.int64)
+    inside = (sx >= 0) & (sx < sw) & (sy >= 0) & (sy < sh)
+    a = np.zeros(xs.shape, dtype=bool)
+    a[inside] = src_land[sy[inside], sx[inside]]
+    b = canvas_land[::step, ::step]
+    union = int((a | b).sum())
+    return float((a & b).sum()) / union if union else 0.0
+
+
+def landmark_loo(landmarks: list[Landmark], params: dict | None = None,
+                 src_size: tuple[int, int] | None = None) -> dict:
+    """Leave-one-out error of the placement at each landmark, in canvas px.
+
+    For every landmark, refit on the others (affine; then affine plus the thin-plate residual
+    field, as ``fit_placement``) and measure the miss at the held-out one. A landmark is evidence
+    only if the others predict it. Deterministic, in landmark order. ``src_size`` (w, h of the CR
+    crop) sizes the pinning lattice; omitted, the landmarks' own extent is used.
+    """
+    p = {**DEFAULT_FIT, **(params or {})}
+    n = len(landmarks)
+    if n < 4:
+        raise PartitionError(f"landmark_loo: needs at least 4 landmarks, got {n}")
+    src_all = np.array([lm.source for lm in landmarks], dtype=np.float64)
+    cvs_all = np.array([lm.canvas for lm in landmarks], dtype=np.float64)
+    if src_size is None:
+        lo, hi = src_all.min(axis=0), src_all.max(axis=0)
+        pad = 0.5 * (hi - lo)
+        box = (float(lo[0] - pad[0]), float(lo[1] - pad[1]), float(hi[0] + pad[0]), float(hi[1] + pad[1]))
+    else:
+        box = (0.0, 0.0, float(src_size[0]), float(src_size[1]))
+    nx, ny = (int(v) for v in p["lattice"])
+    lattice = register.lattice_box(box, nx, ny)
+    rows, aff_err, tps_err = [], [], []
+    for i in range(n):
+        rest = [lm for j, lm in enumerate(landmarks) if j != i]
+        scale, off = fit_from_landmarks(rest, min_n=3)
+        pred = np.array([src_all[i, 0] * scale[0] + off[0], src_all[i, 1] * scale[1] + off[1]])
+        e_aff = float(np.hypot(*(pred - cvs_all[i])))
+        r_src = np.array([lm.source for lm in rest], dtype=np.float64)
+        r_cvs = np.array([lm.canvas for lm in rest], dtype=np.float64)
+        r_aff = np.column_stack([r_src[:, 0] * scale[0] + off[0], r_src[:, 1] * scale[1] + off[1]])
+        lat_aff = np.column_stack([lattice[:, 0] * scale[0] + off[0], lattice[:, 1] * scale[1] + off[1]])
+        if float(p["influence_px"]) > 0:
+            field = _residual_field(r_aff, r_cvs - r_aff, lat_aff, float(p["influence_px"]))
+            e_tps = float(np.hypot(*(pred + field(pred[None, :])[0] - cvs_all[i])))
+        else:
+            e_tps = e_aff
+        aff_err.append(e_aff)
+        tps_err.append(e_tps)
+        rows.append({"name": landmarks[i].name, "affine_px": round(e_aff, 1),
+                     "thin_plate_px": round(e_tps, 1)})
+
+    def stat(v):
+        return {"median": round(float(np.median(v)), 1), "max": round(float(np.max(v)), 1)}
+    return {"affine": stat(aff_err), "thin_plate": stat(tps_err), "per_landmark": rows}
+
+
+def _coast_px(land: np.ndarray) -> np.ndarray:
+    """Land 4-adjacent to sea inside the crop. Frame rows and the crop border are never coast
+    (outside the crop counts as land), unlike a sea-padded erosion."""
+    return land & ~ndimage.binary_erosion(land, border_value=1)
+
+
+def coast_agreement(cr_land: np.ndarray, our_land: np.ndarray, region: np.ndarray) -> dict:
+    """Distance from each CR coast pixel to our nearest coast pixel, both inside ``region``."""
+    ours = _coast_px(our_land) & region
+    theirs = _coast_px(cr_land) & region
+    if not ours.any() or not theirs.any():
+        return {"median": None, "p90": None, "n": int(theirs.sum())}
+    d = ndimage.distance_transform_edt(~ours)[theirs]
+    return {"median": round(float(np.median(d)), 1), "p90": round(float(np.percentile(d, 90)), 1),
+            "n": int(d.size)}
+
+
+def high_ground_edges(elev_m: np.ndarray, land: np.ndarray, min_m: float,
+                      min_component: int = 500) -> np.ndarray:
+    """Outline of land at or above ``min_m`` (components under ``min_component`` px dropped):
+    the same edge rule the impassable tracts use. CR's ranges are provinces whose edges sit on
+    the foothills, so the edge of the high ground is the feature, not the crest."""
+    hi = land & (elev_m >= min_m)
+    lab, n = ndimage.label(hi)
+    if n == 0:
+        return np.zeros_like(hi)
+    sizes = np.bincount(lab.ravel())
+    keep = sizes >= min_component
+    keep[0] = False
+    hi = keep[lab]
+    return hi & ~ndimage.binary_erosion(hi)
 
 
 # ---------------------------------------------------------------------------

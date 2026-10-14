@@ -175,7 +175,10 @@ def main(argv: list[str] | None = None) -> int:
     new_lines, labels, new, scope, closing = smooth_lines(lines_c, land_c, box_mask, args.sigma)
     n_states = int(len([v for v in np.unique(labels) if v > 0]))
     n_new = int(len([v for v in np.unique(new) if v > 0]))
-    print(f"{name}: {n_states} lined states recovered, {n_new} after smoothing", flush=True)
+    n_island = int(rep.get("states", {}).get("island_only", 0))
+    print(f"{name}: {n_states} lined states recovered, {n_new} after smoothing"
+          f" (+ {n_island} island-only state(s) in the proposal, which carry no line and are "
+          f"not counted here; proposal total {rep.get('states', {}).get('count', '?')})", flush=True)
 
     # Round trip: the generator's own region stage on existing + smoothed proposal.
     smooth_full = np.zeros(land.shape, dtype=bool)
@@ -231,7 +234,7 @@ def main(argv: list[str] | None = None) -> int:
     sheet.paste(over, (0, panels[0].height + 10))
     sheet.save(out / f"{name}_borders_smooth_review.png")
     (out / f"{name}_borders_smooth.json").write_text(json.dumps({
-        "landmass": name, "sigma": args.sigma, "states": n_states,
+        "landmass": name, "sigma": args.sigma, "states": n_states, "island_only": n_island,
         "line_px": {"before": int(lines_c.sum()), "after": int(new_lines.sum())},
         "round_trip": {"generated": len(gen_ids), "matched_iou_0.9": len(pairs), "leaks": leaks,
                        "unmatched_smoothed": only_new, "unmatched_generated": only_gen,
