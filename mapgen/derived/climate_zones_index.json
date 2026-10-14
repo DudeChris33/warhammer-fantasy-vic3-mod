@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "board": 8202,
+  "canvas": [
+    8192,
+    3616
+  ],
+  "model_grid": [
+    2048,
+    904
+  ],
+  "sea_value": 255,
+  "classes": [
+    {
+      "id": 0,
+      "code": "Af",
+      "name": "Tropical rainforest",
+      "color": [
+        0,
+        0,
+        255
+      ],
+      "land_px": 502512,
+      "land_share": 0.04498
+    },
+    {
+      "id": 1,
+      "code": "Am",
+      "name": "Tropical monsoon",
+      "color": [
+        0,
+        120,
+        255
+      ],
+      "land_px": 142423,
+      "land_share": 0.01275
+    },
+    {
+      "id": 2,
+      "code": "Aw",
+      "name": "Savanna",
+      "color": [
+        70,
+        170,
+        250
+      ],
+      "land_px": 1218521,
+      "land_share": 0.10906
+    },
+    {
+      "id": 3,
+      "code": "BWh",
+      "name": "Hot desert",
+      "color": [
+        255,
+        0,
+        0
+      ],
+      "land_px": 856120,
+      "land_share": 0.07663
+    },
+    {
+      "id": 4,
+      "code": "BWk",
+      "name": "Cold desert",
+      "color": [
+        255,
+        150,
+        150
+      ],
+      "land_px": 468661,
+      "land_share": 0.04195
+    },
+    {
+      "id": 5,
+      "code": "BSh",
+      "name": "Hot semi-arid",
+      "color": [
+        245,
+        165,
+        0
+      ],
+      "land_px": 594782,
+      "land_share": 0.05324
+    },
+    {
+      "id": 6,
+      "code": "BSk",
+      "name": "Cold semi-arid",
+      "color": [
+        255,
+        220,
+        100
+      ],
+      "land_px": 822629,
+      "land_share": 0.07363
+    },
+    {
+      "id": 7,
+      "code": "Cs",
+      "name": "Mediterranean",
+      "color": [
+        255,
+        255,
+        0
+      ],
+      "land_px": 81580,
+      "land_share": 0.0073
+    },
+    {
+      "id": 8,
+      "code": "Cfa",
+      "name": "Humid subtropical",
+      "color": [
+        200,
+        255,
+        80
+      ],
+      "land_px": 575035,
+      "land_share": 0.05147
+    },
+    {
+      "id": 9,
+      "code": "Cfb",
+      "name": "Oceanic",
+      "color": [
+        100,
+        255,
+        80
+      ],
+      "land_px": 557681,
+      "land_share": 0.04991
+    },
+    {
+      "id": 10,
+      "code": "Df",
+      "name": "Humid continental",
+      "color": [
+        0,
+        255,
+        255
+      ],
+      "land_px": 925215,
+      "land_share": 0.08281
+    },
+    {
+      "id": 11,
+      "code": "Dc",
+      "name": "Subarctic",
+      "color": [
+        0,
+        125,
+        125
+      ],
+      "land_px": 1570256,
+      "land_share": 0.14054
+    },
+    {
+      "id": 12,
+      "code": "ET",
+      "name": "Tundra",
+      "color": [
+        178,
+        178,
+        178
+      ],
+      "land_px": 1490096,
+      "land_share": 0.13337
+    },
+    {
+      "id": 13,
+      "code": "EF",
+      "name": "Ice cap",
+      "color": [
+        102,
+        102,
+        102
+      ],
+      "land_px": 1367155,
+      "land_share": 0.12237
+    }
+  ],
+  "inputs": {
+    "land_sea_mask.png": "b48bd691e167654228e394b70be4d9eec455142e5105edb74004891e314a4ba4",
+    "heightmap.png": "a48e97c1877baf9d380344cf60c32fe07dddc0ff49e0ec34e511410c74762381",
+    "winds_and_currents.png": "a19d25fd52da4ccde9a6126d4d81f1d2d70e22fa02d7a20b16b2c7589f2ea9bf",
+    "climate_settings.json": "ac4e66705207cfe625cf14aee18085bd624e94aaa8b03f1c3191b81aa8d18796"
+  },
+  "grid_sha256": "ca53ad569cb4a8544193935bfbe468183003ae9584bafd7edcd3cbfe957b58f3"
+}

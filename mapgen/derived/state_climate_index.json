@@ -1,0 +1,4039 @@
+{
+  "schema": 1,
+  "board": 8202,
+  "layer_grid_sha256": "ca53ad569cb4a8544193935bfbe468183003ae9584bafd7edcd3cbfe957b58f3",
+  "states": [
+    {
+      "state_key": "STATE_AGRILDRIN",
+      "worksheet_name": "Agrildrin",
+      "name": "Agrildrin",
+      "land_px": 2260,
+      "dominant": "ET",
+      "shares": {
+        "BWk": 0.4093,
+        "BSk": 0.154,
+        "ET": 0.4367
+      }
+    },
+    {
+      "state_key": "STATE_AGRIL_MIGDHAL",
+      "worksheet_name": "Agril Migdhal",
+      "name": "Agril Migdhal",
+      "land_px": 3273,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ALD_GRUNGAZ",
+      "worksheet_name": "Ald Grungaz",
+      "name": "Ald Grungaz",
+      "land_px": 278,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_AMBER_SKULL",
+      "worksheet_name": "Amber Skull",
+      "name": "Amber Skull",
+      "land_px": 2896,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 0.7493,
+        "Cfa": 0.2113,
+        "Cfb": 0.0394
+      }
+    },
+    {
+      "state_key": "STATE_ANMYR",
+      "worksheet_name": "Anmyr",
+      "name": "Anmyr",
+      "land_px": 1529,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.62,
+        "Df": 0.38
+      }
+    },
+    {
+      "state_key": "STATE_APUCCINI_MOUNTAINS",
+      "worksheet_name": "Apuccini Mountains",
+      "name": "Apuccini Mountains",
+      "land_px": 999,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.5826,
+        "Df": 0.1441,
+        "Dc": 0.2733
+      }
+    },
+    {
+      "state_key": "STATE_AQUILENA",
+      "worksheet_name": "Aquilena",
+      "name": "Aquilena",
+      "land_px": 6411,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.9924,
+        "Cs": 0.0059,
+        "Df": 0.0017
+      }
+    },
+    {
+      "state_key": "STATE_AQUITAINE",
+      "worksheet_name": "Aquitaine",
+      "name": "Aquitaine",
+      "land_px": 2699,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ARGWYLON",
+      "worksheet_name": "Argwylon",
+      "name": "Argwylon",
+      "land_px": 887,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ARTOIS",
+      "worksheet_name": "Artois",
+      "name": "Artois",
+      "land_px": 3029,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ASHEN_PLAINS",
+      "worksheet_name": "Ashen Plains",
+      "name": "Ashen Plains",
+      "land_px": 4409,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.8812,
+        "Df": 0.1188
+      }
+    },
+    {
+      "state_key": "STATE_ASH_RIDGE_MOUNTAINS",
+      "worksheet_name": "Ash Ridge Mountains",
+      "name": "Ash Ridge Mountains",
+      "land_px": 2324,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.3077,
+        "BSk": 0.6923
+      }
+    },
+    {
+      "state_key": "STATE_AULD_RYDING",
+      "worksheet_name": "Auld Ryding",
+      "name": "Auld Ryding",
+      "land_px": 2247,
+      "dominant": "Dc",
+      "shares": {
+        "BSk": 0.2172,
+        "Dc": 0.7828
+      }
+    },
+    {
+      "state_key": "STATE_AVERHEIM",
+      "worksheet_name": "Averheim",
+      "name": "Averheim",
+      "land_px": 2767,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_AXE_BITE_PASS",
+      "worksheet_name": "Axe Bite Pass",
+      "name": "Axe Bite Pass",
+      "land_px": 544,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.1691,
+        "Dc": 0.8309
+      }
+    },
+    {
+      "state_key": "STATE_BADLANDS_COAST",
+      "worksheet_name": "Badlands Coast",
+      "name": "Badlands Coast",
+      "land_px": 4395,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_BASTONNE",
+      "worksheet_name": "Bastonne",
+      "name": "Bastonne",
+      "land_px": 3249,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.9631,
+        "Df": 0.0369
+      }
+    },
+    {
+      "state_key": "STATE_BAY_OF_BLADES",
+      "worksheet_name": "Bay of Blades",
+      "name": "Bay of Blades",
+      "land_px": 4204,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.4196,
+        "Dc": 0.313,
+        "ET": 0.2674
+      }
+    },
+    {
+      "state_key": "STATE_BECHAFEN",
+      "worksheet_name": "Bechafen",
+      "name": "Bechafen",
+      "land_px": 5002,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.0126,
+        "Df": 0.9874
+      }
+    },
+    {
+      "state_key": "STATE_BELYEROVOTA",
+      "worksheet_name": "Belyerovota",
+      "name": "Belyerovota",
+      "land_px": 1490,
+      "dominant": "ET",
+      "shares": {
+        "BSk": 0.0765,
+        "Dc": 0.0477,
+        "ET": 0.8758
+      }
+    },
+    {
+      "state_key": "STATE_BJORNLING_S_GATHERING",
+      "worksheet_name": "Bjornling's Gathering",
+      "name": "Bjornling's Gathering",
+      "land_px": 1685,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.2599,
+        "Dc": 0.708,
+        "ET": 0.032
+      }
+    },
+    {
+      "state_key": "STATE_BLACK_BLOOD_PASS",
+      "worksheet_name": "Black Blood Pass",
+      "name": "Black Blood Pass",
+      "land_px": 1707,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.0879,
+        "ET": 0.8594,
+        "EF": 0.0527
+      }
+    },
+    {
+      "state_key": "STATE_BLACK_FIRE_PASS",
+      "worksheet_name": "Black Fire Pass",
+      "name": "Black Fire Pass",
+      "land_px": 771,
+      "dominant": "Dc",
+      "shares": {
+        "BSk": 0.3489,
+        "Dc": 0.6511
+      }
+    },
+    {
+      "state_key": "STATE_BLACK_MOUNDS",
+      "worksheet_name": "Black Mounds",
+      "name": "Black Mounds",
+      "land_px": 952,
+      "dominant": "Df",
+      "shares": {
+        "BWk": 0.1397,
+        "BSk": 0.2122,
+        "Df": 0.479,
+        "Dc": 0.1691
+      }
+    },
+    {
+      "state_key": "STATE_BLACK_MOUNTAINS",
+      "worksheet_name": "Black Mountains",
+      "name": "Black Mountains",
+      "land_px": 788,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.0685,
+        "Dc": 0.9315
+      }
+    },
+    {
+      "state_key": "STATE_BLACK_PENINSULA",
+      "worksheet_name": "Black Peninsula",
+      "name": "Black Peninsula",
+      "land_px": 3490,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.5089,
+        "Cs": 0.4585,
+        "Df": 0.0327
+      }
+    },
+    {
+      "state_key": "STATE_BLACK_WASTES",
+      "worksheet_name": "Black Wastes",
+      "name": "Black Wastes",
+      "land_px": 10587,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.0361,
+        "BSk": 0.6366,
+        "Df": 0.0177,
+        "Dc": 0.028,
+        "ET": 0.2817
+      }
+    },
+    {
+      "state_key": "STATE_BLACK_WATER",
+      "worksheet_name": "Black Water",
+      "name": "Black Water",
+      "land_px": 1488,
+      "dominant": "Dc",
+      "shares": {
+        "BSk": 0.0168,
+        "Df": 0.1835,
+        "Dc": 0.5746,
+        "ET": 0.2251
+      }
+    },
+    {
+      "state_key": "STATE_BLASTED_DISTRICT",
+      "worksheet_name": "Blasted District",
+      "name": "Blasted District",
+      "land_px": 3552,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9893,
+        "Dc": 0.0107
+      }
+    },
+    {
+      "state_key": "STATE_BLIGHTED_MARSHES",
+      "worksheet_name": "Blighted Marshes",
+      "name": "Blighted Marshes",
+      "land_px": 2997,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.635,
+        "Cs": 0.1818,
+        "Cfa": 0.1662,
+        "Cfb": 0.017
+      }
+    },
+    {
+      "state_key": "STATE_BLIGHTWATER",
+      "worksheet_name": "Blightwater",
+      "name": "Blightwater",
+      "land_px": 10726,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.9368,
+        "BWk": 0.0398,
+        "BSk": 0.0234
+      }
+    },
+    {
+      "state_key": "STATE_BLISTERING_PEAKS",
+      "worksheet_name": "Blistering Peaks",
+      "name": "Blistering Peaks",
+      "land_px": 1039,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.1675,
+        "BSk": 0.6015,
+        "Cfb": 0.0308,
+        "Df": 0.2002
+      }
+    },
+    {
+      "state_key": "STATE_BLIZZARD_PEAKS",
+      "worksheet_name": "Blizzard Peaks",
+      "name": "Blizzard Peaks",
+      "land_px": 1207,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.4698,
+        "BSk": 0.2568,
+        "ET": 0.2734
+      }
+    },
+    {
+      "state_key": "STATE_BLOOD_RIVER_VALLEY",
+      "worksheet_name": "Blood River Valley",
+      "name": "Blood River Valley",
+      "land_px": 4432,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.0551,
+        "BSk": 0.9449
+      }
+    },
+    {
+      "state_key": "STATE_BOHSENFELS",
+      "worksheet_name": "Bohsenfels",
+      "name": "Bohsenfels",
+      "land_px": 3212,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9879,
+        "ET": 0.0121
+      }
+    },
+    {
+      "state_key": "STATE_BORDELEAUX",
+      "worksheet_name": "Bordeleaux",
+      "name": "Bordeleaux",
+      "land_px": 3396,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_BOULDERBELLIES_HOLD",
+      "worksheet_name": "Boulderbellies Hold",
+      "name": "Boulderbellies Hold",
+      "land_px": 4244,
+      "dominant": "Cfa",
+      "shares": {
+        "BSk": 0.0026,
+        "Cfa": 0.9974
+      }
+    },
+    {
+      "state_key": "STATE_BREGANALLE",
+      "worksheet_name": "Breganalle",
+      "name": "Breganalle",
+      "land_px": 2703,
+      "dominant": "Cfa",
+      "shares": {
+        "BSk": 0.2575,
+        "Cfa": 0.4366,
+        "Cfb": 0.2408,
+        "Df": 0.0651
+      }
+    },
+    {
+      "state_key": "STATE_BRENNUN_S_ENCAMPMENT",
+      "worksheet_name": "Brennun's Encampment",
+      "name": "Brennun's Encampment",
+      "land_px": 2284,
+      "dominant": "EF",
+      "shares": {
+        "BSk": 0.0355,
+        "ET": 0.4571,
+        "EF": 0.5074
+      }
+    },
+    {
+      "state_key": "STATE_BRIONNE",
+      "worksheet_name": "Brionne",
+      "name": "Brionne",
+      "land_px": 2860,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfa": 0.0857,
+        "Cfb": 0.9143
+      }
+    },
+    {
+      "state_key": "STATE_BROKEN_TEETH",
+      "worksheet_name": "Broken Teeth",
+      "name": "Broken Teeth",
+      "land_px": 1740,
+      "dominant": "BSh",
+      "shares": {
+        "BWh": 0.077,
+        "BSh": 0.5264,
+        "Cfa": 0.3966
+      }
+    },
+    {
+      "state_key": "STATE_BURY_BONE_HILLS",
+      "worksheet_name": "Bury Bone Hills",
+      "name": "Bury Bone Hills",
+      "land_px": 4190,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_CANTABRIO_ROAD",
+      "worksheet_name": "Cantabrio Road",
+      "name": "Cantabrio Road",
+      "land_px": 3324,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 0.7638,
+        "Cfb": 0.2362
+      }
+    },
+    {
+      "state_key": "STATE_CARCASSONNE",
+      "worksheet_name": "Carcassonne",
+      "name": "Carcassonne",
+      "land_px": 2410,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.4739,
+        "Cfb": 0.005,
+        "Df": 0.5212
+      }
+    },
+    {
+      "state_key": "STATE_CASTLE_ALEXANDRONOV",
+      "worksheet_name": "Castle Alexandronov",
+      "name": "Castle Alexandronov",
+      "land_px": 2766,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9606,
+        "Dc": 0.0231,
+        "ET": 0.0163
+      }
+    },
+    {
+      "state_key": "STATE_CASTLE_MOUSILLON",
+      "worksheet_name": "Castle Mousillon",
+      "name": "Castle Mousillon",
+      "land_px": 1742,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_CASTLE_SANGASSE",
+      "worksheet_name": "Castle Sangasse",
+      "name": "Castle Sangasse",
+      "land_px": 1441,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.9431,
+        "Df": 0.0569
+      }
+    },
+    {
+      "state_key": "STATE_CAUSEWAY_OF_ZHARR",
+      "worksheet_name": "Causeway of Zharr",
+      "name": "Causeway of Zharr",
+      "land_px": 28573,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.3657,
+        "Df": 0.5767,
+        "Dc": 0.0576
+      }
+    },
+    {
+      "state_key": "STATE_CEFIRO_HILLS",
+      "worksheet_name": "Cefiro Hills",
+      "name": "Cefiro Hills",
+      "land_px": 3296,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 0.8965,
+        "Cfb": 0.1035
+      }
+    },
+    {
+      "state_key": "STATE_CENTRAL_BADLANDS",
+      "worksheet_name": "Central Badlands",
+      "name": "Central Badlands",
+      "land_px": 6324,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.9084,
+        "BWk": 0.0916
+      }
+    },
+    {
+      "state_key": "STATE_CENTRAL_MAGRITTA",
+      "worksheet_name": "Central Magritta",
+      "name": "Central Magritta",
+      "land_px": 3784,
+      "dominant": "Cfa",
+      "shares": {
+        "Cs": 0.1987,
+        "Cfa": 0.4926,
+        "Cfb": 0.3087
+      }
+    },
+    {
+      "state_key": "STATE_CHAMON_DHAREK",
+      "worksheet_name": "Chamon Dharek",
+      "name": "Chamon Dharek",
+      "land_px": 3349,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.1281,
+        "Dc": 0.8152,
+        "ET": 0.0567
+      }
+    },
+    {
+      "state_key": "STATE_CHATEAU_LOVARRE",
+      "worksheet_name": "Chateau Lovarre",
+      "name": "Chateau Lovarre",
+      "land_px": 229,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_CITY_OF_KINGS",
+      "worksheet_name": "City of Kings",
+      "name": "City of Kings",
+      "land_px": 3470,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_CLAW_COAST",
+      "worksheet_name": "Claw Coast",
+      "name": "Claw Coast",
+      "land_px": 1251,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.1343,
+        "ET": 0.7442,
+        "EF": 0.1215
+      }
+    },
+    {
+      "state_key": "STATE_CLIFFS_OF_DAWN",
+      "worksheet_name": "Cliffs of Dawn",
+      "name": "Cliffs of Dawn",
+      "land_px": 278,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 0.9101,
+        "Cfa": 0.0899
+      }
+    },
+    {
+      "state_key": "STATE_COURONNE",
+      "worksheet_name": "Couronne",
+      "name": "Couronne",
+      "land_px": 5407,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.5898,
+        "Df": 0.3555,
+        "Dc": 0.0547
+      }
+    },
+    {
+      "state_key": "STATE_CRIPPLE_PEAK",
+      "worksheet_name": "Cripple Peak",
+      "name": "Cripple Peak",
+      "land_px": 438,
+      "dominant": "Cfb",
+      "shares": {
+        "BSk": 0.0479,
+        "Cfb": 0.5776,
+        "Df": 0.3744
+      }
+    },
+    {
+      "state_key": "STATE_CROOKED_CORRIDOR",
+      "worksheet_name": "Crooked Corridor",
+      "name": "Crooked Corridor",
+      "land_px": 405,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.7309,
+        "Dc": 0.2691
+      }
+    },
+    {
+      "state_key": "STATE_CROOKED_MOUNTS",
+      "worksheet_name": "Crooked Mounts",
+      "name": "Crooked Mounts",
+      "land_px": 923,
+      "dominant": "BWk",
+      "shares": {
+        "BWh": 0.0195,
+        "BWk": 0.9805
+      }
+    },
+    {
+      "state_key": "STATE_CURSED_WAY",
+      "worksheet_name": "Cursed Way (weak)",
+      "name": "Cursed Way",
+      "land_px": 2463,
+      "dominant": "Cfa",
+      "shares": {
+        "Aw": 0.2972,
+        "BSh": 0.2708,
+        "Cfa": 0.3841,
+        "Cfb": 0.0479
+      }
+    },
+    {
+      "state_key": "STATE_DAEMON_S_RUIN",
+      "worksheet_name": "Daemon's Ruin",
+      "name": "Daemon's Ruin",
+      "land_px": 5859,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.8317,
+        "Df": 0.1683
+      }
+    },
+    {
+      "state_key": "STATE_DARK_MAIDEN_PASS",
+      "worksheet_name": "Dark Maiden Pass",
+      "name": "Dark Maiden Pass",
+      "land_px": 230,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_DEATHTOLL_HOLD",
+      "worksheet_name": "Deathtoll Hold",
+      "name": "Deathtoll Hold",
+      "land_px": 2871,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_DEATH_S_SIDE",
+      "worksheet_name": "Death's Side",
+      "name": "Death's Side",
+      "land_px": 4096,
+      "dominant": "EF",
+      "shares": {
+        "Dc": 0.2617,
+        "ET": 0.2397,
+        "EF": 0.4985
+      }
+    },
+    {
+      "state_key": "STATE_DELVED_HEIGHTS",
+      "worksheet_name": "Delved Heights",
+      "name": "Delved Heights",
+      "land_px": 1648,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.1007,
+        "ET": 0.8222,
+        "EF": 0.0771
+      }
+    },
+    {
+      "state_key": "STATE_DESOLATION_OF_AZGORH",
+      "worksheet_name": "Desolation of Azgorh",
+      "name": "Desolation of Azgorh",
+      "land_px": 27626,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.3515,
+        "BSk": 0.624,
+        "Cfa": 0.0245
+      }
+    },
+    {
+      "state_key": "STATE_DESOLATION_OF_NAGASH",
+      "worksheet_name": "Desolation of Nagash",
+      "name": "Desolation of Nagash",
+      "land_px": 2464,
+      "dominant": "BSk",
+      "shares": {
+        "BWh": 0.0288,
+        "BSh": 0.0065,
+        "BSk": 0.8872,
+        "Df": 0.0369,
+        "ET": 0.0406
+      }
+    },
+    {
+      "state_key": "STATE_DIRETOWN",
+      "worksheet_name": "Diretown (weak)",
+      "name": "Diretown",
+      "land_px": 8383,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_DRAGONBACK_MOUNTAINS",
+      "worksheet_name": "Dragonback Mountains",
+      "name": "Dragonback Mountains",
+      "land_px": 4851,
+      "dominant": "BWk",
+      "shares": {
+        "BWh": 0.0709,
+        "BWk": 0.777,
+        "BSh": 0.0157,
+        "BSk": 0.1365
+      }
+    },
+    {
+      "state_key": "STATE_DRAGONS_BREATH",
+      "worksheet_name": "Dragons' Breath",
+      "name": "Dragons' Breath",
+      "land_px": 1798,
+      "dominant": "Cfa",
+      "shares": {
+        "BSk": 0.4305,
+        "Cfa": 0.5695
+      }
+    },
+    {
+      "state_key": "STATE_DRAGONS_LANDING",
+      "worksheet_name": "Dragons' Landing",
+      "name": "Dragons' Landing",
+      "land_px": 7179,
+      "dominant": "BSh",
+      "shares": {
+        "Aw": 0.0306,
+        "BWh": 0.0075,
+        "BSh": 0.5746,
+        "Cfa": 0.3872
+      }
+    },
+    {
+      "state_key": "STATE_DRAGON_BARROWS",
+      "worksheet_name": "Dragon Barrows",
+      "name": "Dragon Barrows",
+      "land_px": 4261,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.8207,
+        "Cfa": 0.1481,
+        "Cfb": 0.0291,
+        "Df": 0.0021
+      }
+    },
+    {
+      "state_key": "STATE_DRAGON_CRAG",
+      "worksheet_name": "Dragon Crag",
+      "name": "Dragon Crag",
+      "land_px": 3831,
+      "dominant": "BWk",
+      "shares": {
+        "BWh": 0.1344,
+        "BWk": 0.8585,
+        "ET": 0.007
+      }
+    },
+    {
+      "state_key": "STATE_DRAKENHOF",
+      "worksheet_name": "Drakenhof",
+      "name": "Drakenhof",
+      "land_px": 2802,
+      "dominant": "Dc",
+      "shares": {
+        "BSk": 0.1567,
+        "Df": 0.3123,
+        "Dc": 0.5214,
+        "ET": 0.0096
+      }
+    },
+    {
+      "state_key": "STATE_DRAKENMOOR",
+      "worksheet_name": "Drakenmoor",
+      "name": "Drakenmoor",
+      "land_px": 3190,
+      "dominant": "ET",
+      "shares": {
+        "BSk": 0.1194,
+        "Dc": 0.248,
+        "ET": 0.6326
+      }
+    },
+    {
+      "state_key": "STATE_DRAKEN_RIDGE",
+      "worksheet_name": "Draken Ridge",
+      "name": "Draken Ridge",
+      "land_px": 1839,
+      "dominant": "ET",
+      "shares": {
+        "BSk": 0.075,
+        "Dc": 0.2425,
+        "ET": 0.6824
+      }
+    },
+    {
+      "state_key": "STATE_DRAKWALD_FOREST",
+      "worksheet_name": "Drakwald Forest",
+      "name": "Drakwald Forest",
+      "land_px": 5138,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_DREAD_ROCK",
+      "worksheet_name": "Dread Rock",
+      "name": "Dread Rock",
+      "land_px": 3775,
+      "dominant": "Cfa",
+      "shares": {
+        "Aw": 0.2479,
+        "Cfa": 0.7521
+      }
+    },
+    {
+      "state_key": "STATE_DREAD_ROCK_SHOALS",
+      "worksheet_name": "Dread Rock Shoals",
+      "name": "Dread Rock Shoals",
+      "land_px": 130,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_DREAD_ROCK_SKERRIES",
+      "worksheet_name": "Dread Rock Skerries",
+      "name": "Dread Rock Skerries",
+      "land_px": 168,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_DUSHYKA",
+      "worksheet_name": "Dushyka",
+      "name": "Dushyka",
+      "land_px": 2970,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.234,
+        "Dc": 0.766
+      }
+    },
+    {
+      "state_key": "STATE_EAGLE_S_PEAK",
+      "worksheet_name": "Eagle's Peak",
+      "name": "Eagle's Peak",
+      "land_px": 1176,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.1233,
+        "ET": 0.7296,
+        "EF": 0.1471
+      }
+    },
+    {
+      "state_key": "STATE_EASTERN_BADLANDS",
+      "worksheet_name": "Eastern Badlands",
+      "name": "Eastern Badlands",
+      "land_px": 4968,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.8072,
+        "BWk": 0.1928
+      }
+    },
+    {
+      "state_key": "STATE_EASTERN_BORDER_PRINCES",
+      "worksheet_name": "Eastern Border Princes",
+      "name": "Eastern Border Princes",
+      "land_px": 4311,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.9137,
+        "Dc": 0.0863
+      }
+    },
+    {
+      "state_key": "STATE_EASTERN_IRRANAS",
+      "worksheet_name": "Eastern Irranas",
+      "name": "Eastern Irranas",
+      "land_px": 435,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_EASTERN_OBLAST",
+      "worksheet_name": "Eastern Oblast",
+      "name": "Eastern Oblast",
+      "land_px": 5286,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.1207,
+        "Dc": 0.8793
+      }
+    },
+    {
+      "state_key": "STATE_EAST_AVERLAND",
+      "worksheet_name": "East Averland",
+      "name": "East Averland",
+      "land_px": 2806,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.3963,
+        "Dc": 0.6037
+      }
+    },
+    {
+      "state_key": "STATE_EAST_BARRIER_IDOLS",
+      "worksheet_name": "East Barrier Idols",
+      "name": "East Barrier Idols",
+      "land_px": 6040,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_EAST_BILBALI",
+      "worksheet_name": "East Bilbali",
+      "name": "East Bilbali",
+      "land_px": 3222,
+      "dominant": "Cfa",
+      "shares": {
+        "BSk": 0.0701,
+        "Cfa": 0.7551,
+        "Cfb": 0.1747
+      }
+    },
+    {
+      "state_key": "STATE_EAST_DEATH_PASS",
+      "worksheet_name": "East Death Pass",
+      "name": "East Death Pass",
+      "land_px": 1089,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.8301,
+        "BSk": 0.0551,
+        "ET": 0.1148
+      }
+    },
+    {
+      "state_key": "STATE_EAST_MAD_DOG_PASS",
+      "worksheet_name": "East Mad Dog Pass",
+      "name": "East Mad Dog Pass",
+      "land_px": 3993,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.7471,
+        "BSk": 0.2529
+      }
+    },
+    {
+      "state_key": "STATE_EAST_MAGRITTA",
+      "worksheet_name": "East Magritta",
+      "name": "East Magritta",
+      "land_px": 4007,
+      "dominant": "Cs",
+      "shares": {
+        "BSk": 0.0601,
+        "Cs": 0.3978,
+        "Cfa": 0.1285,
+        "Cfb": 0.3723,
+        "Df": 0.0412
+      }
+    },
+    {
+      "state_key": "STATE_EAST_NORDLAND",
+      "worksheet_name": "East Nordland",
+      "name": "East Nordland",
+      "land_px": 5632,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9847,
+        "ET": 0.0153
+      }
+    },
+    {
+      "state_key": "STATE_EAST_STIRLAND",
+      "worksheet_name": "East Stirland",
+      "name": "East Stirland",
+      "land_px": 3296,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_EAST_SYLVANIA",
+      "worksheet_name": "East Sylvania",
+      "name": "East Sylvania",
+      "land_px": 1941,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.4343,
+        "Df": 0.474,
+        "Dc": 0.0917
+      }
+    },
+    {
+      "state_key": "STATE_EAST_TALABECLAND",
+      "worksheet_name": "East Talabecland",
+      "name": "East Talabecland",
+      "land_px": 3537,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ELDAGRIMM_GULF",
+      "worksheet_name": "Eldagrimm Gulf",
+      "name": "Eldagrimm Gulf",
+      "land_px": 2705,
+      "dominant": "Df",
+      "shares": {
+        "Cfb": 0.2288,
+        "Df": 0.4377,
+        "Dc": 0.2717,
+        "ET": 0.0617
+      }
+    },
+    {
+      "state_key": "STATE_ERENGRAD",
+      "worksheet_name": "Erengrad",
+      "name": "Erengrad",
+      "land_px": 5482,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ESTALIAN_HIGHLANDS",
+      "worksheet_name": "Estalian Highlands",
+      "name": "Estalian Highlands",
+      "land_px": 1262,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_FALLOW_FIELDS",
+      "worksheet_name": "Fallow Fields",
+      "name": "Fallow Fields",
+      "land_px": 12314,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.9514,
+        "BWk": 0.0461,
+        "BSk": 0.0025
+      }
+    },
+    {
+      "state_key": "STATE_FALLS_DISTRICT",
+      "worksheet_name": "Falls District",
+      "name": "Falls District",
+      "land_px": 1950,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_FIVE_RIVERS",
+      "worksheet_name": "Five Rivers (weak)",
+      "name": "Five Rivers",
+      "land_px": 4406,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_FJORD_COAST",
+      "worksheet_name": "Fjord Coast",
+      "name": "Fjord Coast",
+      "land_px": 4045,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.801,
+        "ET": 0.199
+      }
+    },
+    {
+      "state_key": "STATE_FLESHWARREN",
+      "worksheet_name": "Fleshwarren",
+      "name": "Fleshwarren",
+      "land_px": 550,
+      "dominant": "ET",
+      "shares": {
+        "ET": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_FOREST_OF_GLOOM",
+      "worksheet_name": "Forest of Gloom",
+      "name": "Forest of Gloom",
+      "land_px": 1873,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.0422,
+        "BSk": 0.9578
+      }
+    },
+    {
+      "state_key": "STATE_FOREST_OF_KNIVES",
+      "worksheet_name": "Forest of Knives",
+      "name": "Forest of Knives",
+      "land_px": 707,
+      "dominant": "EF",
+      "shares": {
+        "ET": 0.2574,
+        "EF": 0.7426
+      }
+    },
+    {
+      "state_key": "STATE_FORT_STRAGHOV",
+      "worksheet_name": "Fort Straghov",
+      "name": "Fort Straghov",
+      "land_px": 4326,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.8844,
+        "ET": 0.1156
+      }
+    },
+    {
+      "state_key": "STATE_FOUNDRY_DISTRICT",
+      "worksheet_name": "Foundry District",
+      "name": "Foundry District",
+      "land_px": 2827,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.885,
+        "Dc": 0.115
+      }
+    },
+    {
+      "state_key": "STATE_FROZEN_COAST",
+      "worksheet_name": "Frozen Coast",
+      "name": "Frozen Coast",
+      "land_px": 2622,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.8829,
+        "ET": 0.1171
+      }
+    },
+    {
+      "state_key": "STATE_GASTONNE",
+      "worksheet_name": "Gastonne",
+      "name": "Gastonne",
+      "land_px": 3344,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.0416,
+        "Cs": 0.0613,
+        "Df": 0.8373,
+        "Dc": 0.0598
+      }
+    },
+    {
+      "state_key": "STATE_GATE_DISTRICT",
+      "worksheet_name": "Gate District",
+      "name": "Gate District",
+      "land_px": 3458,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_GEULATA",
+      "worksheet_name": "Geulata",
+      "name": "Geulata",
+      "land_px": 1057,
+      "dominant": "Cfb",
+      "shares": {
+        "Cs": 0.4948,
+        "Cfb": 0.4957,
+        "Df": 0.0095
+      }
+    },
+    {
+      "state_key": "STATE_GIANTHOME_MOUNTAINS",
+      "worksheet_name": "Gianthome Mountains",
+      "name": "Gianthome Mountains",
+      "land_px": 554,
+      "dominant": "ET",
+      "shares": {
+        "ET": 0.8646,
+        "EF": 0.1354
+      }
+    },
+    {
+      "state_key": "STATE_GIANT_STOMPING_GROUNDS",
+      "worksheet_name": "Giant Stomping Grounds",
+      "name": "Giant Stomping Grounds",
+      "land_px": 4584,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.8815,
+        "BWk": 0.1065,
+        "BSh": 0.0116,
+        "BSk": 0.0004
+      }
+    },
+    {
+      "state_key": "STATE_GISOREUX",
+      "worksheet_name": "Gisoreux",
+      "name": "Gisoreux",
+      "land_px": 3095,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.8827,
+        "Df": 0.1173
+      }
+    },
+    {
+      "state_key": "STATE_GLADE_OF_ETERNAL_MIDNIGHT",
+      "worksheet_name": "Glade of Eternal Midnight",
+      "name": "Glade of Eternal Midnight",
+      "land_px": 608,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.0148,
+        "Df": 0.9852
+      }
+    },
+    {
+      "state_key": "STATE_GLADE_OF_ETERNAL_MOONLIGHT",
+      "worksheet_name": "Glade of Eternal Moonlight",
+      "name": "Glade of Eternal Moonlight",
+      "land_px": 865,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_GLOOMWRACK_COAST",
+      "worksheet_name": "Gloomwrack Coast",
+      "name": "Gloomwrack Coast",
+      "land_px": 4454,
+      "dominant": "Dc",
+      "shares": {
+        "Cfb": 0.2436,
+        "Df": 0.0921,
+        "Dc": 0.498,
+        "ET": 0.1664
+      }
+    },
+    {
+      "state_key": "STATE_GNOBLAR_HILLS",
+      "worksheet_name": "Gnoblar Hills",
+      "name": "Gnoblar Hills",
+      "land_px": 941,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.5696,
+        "Cfa": 0.4304
+      }
+    },
+    {
+      "state_key": "STATE_GORGOTHDRINAZ",
+      "worksheet_name": "Gorgothdrinaz",
+      "name": "Gorgothdrinaz",
+      "land_px": 2464,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_GOROMADNY_COAST",
+      "worksheet_name": "Goromadny Coast",
+      "name": "Goromadny Coast",
+      "land_px": 3906,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.9831,
+        "ET": 0.0169
+      }
+    },
+    {
+      "state_key": "STATE_GOROMADNY_HOLD",
+      "worksheet_name": "Goromadny Hold",
+      "name": "Goromadny Hold",
+      "land_px": 517,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.029,
+        "ET": 0.971
+      }
+    },
+    {
+      "state_key": "STATE_GRAVE_OF_CUILEUX",
+      "worksheet_name": "Grave of Cuileux",
+      "name": "Grave of Cuileux",
+      "land_px": 5391,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.9967,
+        "Df": 0.0033
+      }
+    },
+    {
+      "state_key": "STATE_GREAT_MORTIS_DELTA",
+      "worksheet_name": "Great Mortis Delta",
+      "name": "Great Mortis Delta",
+      "land_px": 2389,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_GREY_HAG_MOUNTAIN",
+      "worksheet_name": "Grey Hag Mountain",
+      "name": "Grey Hag Mountain",
+      "land_px": 1099,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.0009,
+        "BSk": 0.9991
+      }
+    },
+    {
+      "state_key": "STATE_GREY_LADY_PASS",
+      "worksheet_name": "Grey Lady Pass",
+      "name": "Grey Lady Pass",
+      "land_px": 285,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.1579,
+        "Dc": 0.8421
+      }
+    },
+    {
+      "state_key": "STATE_GROM_RIDGE",
+      "worksheet_name": "Grom Ridge",
+      "name": "Grom Ridge",
+      "land_px": 1212,
+      "dominant": "ET",
+      "shares": {
+        "ET": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_GRYPHON_WOOD",
+      "worksheet_name": "Gryphon Wood",
+      "name": "Gryphon Wood",
+      "land_px": 1294,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_HALLS_OF_EQUOS",
+      "worksheet_name": "Halls of Equos",
+      "name": "Halls of Equos",
+      "land_px": 363,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.6667,
+        "Df": 0.3333
+      }
+    },
+    {
+      "state_key": "STATE_HAUNTED_GROVE",
+      "worksheet_name": "Haunted Grove",
+      "name": "Haunted Grove",
+      "land_px": 1361,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_HEART_OF_ZHARRDUK",
+      "worksheet_name": "Heart of Zharrduk",
+      "name": "Heart of Zharrduk",
+      "land_px": 3365,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.7459,
+        "Dc": 0.2541
+      }
+    },
+    {
+      "state_key": "STATE_HELL_PIT",
+      "worksheet_name": "Hell Pit",
+      "name": "Hell Pit",
+      "land_px": 448,
+      "dominant": "ET",
+      "shares": {
+        "ET": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_HELL_PIT_DEPTHS",
+      "worksheet_name": "Hell Pit Depths",
+      "name": "Hell Pit Depths",
+      "land_px": 850,
+      "dominant": "ET",
+      "shares": {
+        "ET": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_HELMGART",
+      "worksheet_name": "Helmgart",
+      "name": "Helmgart",
+      "land_px": 332,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_HELSPIRE_COAST",
+      "worksheet_name": "Helspire Coast",
+      "name": "Helspire Coast",
+      "land_px": 2815,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.8764,
+        "ET": 0.1236
+      }
+    },
+    {
+      "state_key": "STATE_HELSPIRE_MOUNTAINS",
+      "worksheet_name": "Helspire Mountains",
+      "name": "Helspire Mountains",
+      "land_px": 1800,
+      "dominant": "ET",
+      "shares": {
+        "ET": 0.665,
+        "EF": 0.335
+      }
+    },
+    {
+      "state_key": "STATE_HIGH_PASS",
+      "worksheet_name": "High Pass",
+      "name": "High Pass",
+      "land_px": 1417,
+      "dominant": "ET",
+      "shares": {
+        "BSk": 0.0071,
+        "ET": 0.9704,
+        "EF": 0.0226
+      }
+    },
+    {
+      "state_key": "STATE_HOCHLAND",
+      "worksheet_name": "Hochland",
+      "name": "Hochland",
+      "land_px": 3415,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.742,
+        "Dc": 0.258
+      }
+    },
+    {
+      "state_key": "STATE_HOUSE_OF_EVERLASTING_LIFE",
+      "worksheet_name": "House of Everlasting Life",
+      "name": "House of Everlasting Life",
+      "land_px": 2465,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 0.8434,
+        "BSh": 0.0418,
+        "Cfa": 0.1148
+      }
+    },
+    {
+      "state_key": "STATE_HOWLING_DISTRICT",
+      "worksheet_name": "Howling District",
+      "name": "Howling District",
+      "land_px": 2919,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_HOWLING_RIVER_VALLEY",
+      "worksheet_name": "Howling River Valley",
+      "name": "Howling River Valley",
+      "land_px": 3921,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.1959,
+        "BSk": 0.8041
+      }
+    },
+    {
+      "state_key": "STATE_IRINASGRAD",
+      "worksheet_name": "Irinasgrad",
+      "name": "Irinasgrad",
+      "land_px": 1861,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_IRONCRAFT_MOUNTAINS",
+      "worksheet_name": "Ironcraft Mountains",
+      "name": "Ironcraft Mountains",
+      "land_px": 1666,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.3355,
+        "ET": 0.6645
+      }
+    },
+    {
+      "state_key": "STATE_IRON_PEAKS",
+      "worksheet_name": "Iron Peaks",
+      "name": "Iron Peaks",
+      "land_px": 897,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.6711,
+        "BSk": 0.2698,
+        "ET": 0.0591
+      }
+    },
+    {
+      "state_key": "STATE_IVORY_ROAD",
+      "worksheet_name": "Ivory Road",
+      "name": "Ivory Road",
+      "land_px": 2905,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_KARAGRIL",
+      "worksheet_name": "Karagril",
+      "name": "Karagril",
+      "land_px": 660,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.6697,
+        "ET": 0.3303
+      }
+    },
+    {
+      "state_key": "STATE_KARAG_NAR",
+      "worksheet_name": "Karag Nar",
+      "name": "Karag Nar",
+      "land_px": 357,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.0252,
+        "BSk": 0.6583,
+        "ET": 0.3165
+      }
+    },
+    {
+      "state_key": "STATE_KARAG_ZIFLIN",
+      "worksheet_name": "Karag Ziflin",
+      "name": "Karag Ziflin",
+      "land_px": 562,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_KARAK_EIGHT_PEAKS",
+      "worksheet_name": "Karak Eight Peaks",
+      "name": "Karak Eight Peaks",
+      "land_px": 513,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.8811,
+        "BSk": 0.076,
+        "ET": 0.0429
+      }
+    },
+    {
+      "state_key": "STATE_KHARNOS_FOREST",
+      "worksheet_name": "Kharnos Forest",
+      "name": "Kharnos Forest",
+      "land_px": 3159,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.1064,
+        "Cs": 0.4039,
+        "Df": 0.4897
+      }
+    },
+    {
+      "state_key": "STATE_KHEMRIAN_DESERT",
+      "worksheet_name": "Khemrian Desert",
+      "name": "Khemrian Desert",
+      "land_px": 5246,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_KING_S_GLADE",
+      "worksheet_name": "King's Glade",
+      "name": "King's Glade",
+      "land_px": 1420,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_KISLEV_FOOTHILLS",
+      "worksheet_name": "Kislev Foothills",
+      "name": "Kislev Foothills",
+      "land_px": 3097,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.9929,
+        "ET": 0.0071
+      }
+    },
+    {
+      "state_key": "STATE_KRAKA_DRAK",
+      "worksheet_name": "Kraka Drak",
+      "name": "Kraka Drak",
+      "land_px": 1570,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.5274,
+        "ET": 0.4726
+      }
+    },
+    {
+      "state_key": "STATE_KRAKEN_COAST",
+      "worksheet_name": "Kraken Coast",
+      "name": "Kraken Coast",
+      "land_px": 4606,
+      "dominant": "ET",
+      "shares": {
+        "ET": 0.9538,
+        "EF": 0.0462
+      }
+    },
+    {
+      "state_key": "STATE_KREUTZHOFEN",
+      "worksheet_name": "Kreutzhofen",
+      "name": "Kreutzhofen",
+      "land_px": 2258,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.7848,
+        "Dc": 0.2152
+      }
+    },
+    {
+      "state_key": "STATE_LAHMIA",
+      "worksheet_name": "Lahmia",
+      "name": "Lahmia",
+      "land_px": 2204,
+      "dominant": "BSh",
+      "shares": {
+        "Aw": 0.3004,
+        "BWh": 0.0041,
+        "BSh": 0.6956
+      }
+    },
+    {
+      "state_key": "STATE_LAND_625",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 1487,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9684,
+        "ET": 0.0316
+      }
+    },
+    {
+      "state_key": "STATE_LAND_626",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4148,
+      "dominant": "BSh",
+      "shares": {
+        "Aw": 0.3508,
+        "BSh": 0.427,
+        "Cfa": 0.2223
+      }
+    },
+    {
+      "state_key": "STATE_LAND_627",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4883,
+      "dominant": "Cfa",
+      "shares": {
+        "Af": 0.0309,
+        "Cfa": 0.7368,
+        "Cfb": 0.2322
+      }
+    },
+    {
+      "state_key": "STATE_LAND_628",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 3506,
+      "dominant": "Cfa",
+      "shares": {
+        "Af": 0.1326,
+        "Aw": 0.2407,
+        "Cfa": 0.6266
+      }
+    },
+    {
+      "state_key": "STATE_LAND_629",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 1630,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_LAND_630",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 1714,
+      "dominant": "Cfa",
+      "shares": {
+        "Af": 0.2806,
+        "Aw": 0.3495,
+        "Cfa": 0.3699
+      }
+    },
+    {
+      "state_key": "STATE_LAND_631",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2591,
+      "dominant": "Cfa",
+      "shares": {
+        "Af": 0.0127,
+        "Aw": 0.0166,
+        "Cfa": 0.9707
+      }
+    },
+    {
+      "state_key": "STATE_LAND_632",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4952,
+      "dominant": "Cfb",
+      "shares": {
+        "Cs": 0.003,
+        "Cfa": 0.081,
+        "Cfb": 0.916
+      }
+    },
+    {
+      "state_key": "STATE_LAND_633",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4728,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 0.655,
+        "Cfb": 0.345
+      }
+    },
+    {
+      "state_key": "STATE_LAND_634",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4675,
+      "dominant": "Cfb",
+      "shares": {
+        "Cs": 0.0851,
+        "Cfb": 0.662,
+        "Df": 0.2528
+      }
+    },
+    {
+      "state_key": "STATE_LAND_635",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 5626,
+      "dominant": "Cfb",
+      "shares": {
+        "Cs": 0.0571,
+        "Cfb": 0.4346,
+        "Df": 0.1374,
+        "Dc": 0.371
+      }
+    },
+    {
+      "state_key": "STATE_LAND_636",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 9009,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.8072,
+        "Df": 0.1928
+      }
+    },
+    {
+      "state_key": "STATE_LAND_637",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4655,
+      "dominant": "Cfb",
+      "shares": {
+        "Cs": 0.0202,
+        "Cfa": 0.2778,
+        "Cfb": 0.702
+      }
+    },
+    {
+      "state_key": "STATE_LAND_638",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 8016,
+      "dominant": "Cfa",
+      "shares": {
+        "Cs": 0.0258,
+        "Cfa": 0.6556,
+        "Cfb": 0.3186
+      }
+    },
+    {
+      "state_key": "STATE_LAND_639",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4269,
+      "dominant": "Cfa",
+      "shares": {
+        "Cs": 0.0637,
+        "Cfa": 0.6608,
+        "Cfb": 0.2755
+      }
+    },
+    {
+      "state_key": "STATE_LAND_640",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4949,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_LAND_641",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 5614,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.9597,
+        "Dc": 0.0403
+      }
+    },
+    {
+      "state_key": "STATE_LAND_642",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 8808,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfa": 0.0947,
+        "Cfb": 0.9053
+      }
+    },
+    {
+      "state_key": "STATE_LAND_643",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 3356,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_LAND_644",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 3388,
+      "dominant": "Cfa",
+      "shares": {
+        "Cs": 0.0006,
+        "Cfa": 0.6246,
+        "Cfb": 0.3749
+      }
+    },
+    {
+      "state_key": "STATE_LAND_645",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2553,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_LAND_646",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4658,
+      "dominant": "Cfb",
+      "shares": {
+        "Cs": 0.0341,
+        "Cfa": 0.0515,
+        "Cfb": 0.9143
+      }
+    },
+    {
+      "state_key": "STATE_LAND_647",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 1986,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfa": 0.3369,
+        "Cfb": 0.6631
+      }
+    },
+    {
+      "state_key": "STATE_LAND_648",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2509,
+      "dominant": "Cfb",
+      "shares": {
+        "BSh": 0.0128,
+        "BSk": 0.0303,
+        "Cs": 0.0359,
+        "Cfa": 0.2001,
+        "Cfb": 0.721
+      }
+    },
+    {
+      "state_key": "STATE_LAND_649",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4432,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 0.9492,
+        "Cfb": 0.0508
+      }
+    },
+    {
+      "state_key": "STATE_LAND_650",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2510,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 0.949,
+        "Cfa": 0.051
+      }
+    },
+    {
+      "state_key": "STATE_LAND_651",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2612,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 0.6627,
+        "BSh": 0.0502,
+        "Cfa": 0.2871
+      }
+    },
+    {
+      "state_key": "STATE_LAND_652",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2475,
+      "dominant": "Cfa",
+      "shares": {
+        "Aw": 0.1329,
+        "BWh": 0.0101,
+        "BSh": 0.3354,
+        "Cfa": 0.5216
+      }
+    },
+    {
+      "state_key": "STATE_LAND_653",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 3392,
+      "dominant": "Cfa",
+      "shares": {
+        "BWh": 0.0124,
+        "BSh": 0.4207,
+        "BSk": 0.0873,
+        "Cfa": 0.4797
+      }
+    },
+    {
+      "state_key": "STATE_LAND_654",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2140,
+      "dominant": "BSh",
+      "shares": {
+        "BSh": 0.957,
+        "BSk": 0.043
+      }
+    },
+    {
+      "state_key": "STATE_LAND_655",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 2242,
+      "dominant": "Cfa",
+      "shares": {
+        "Cs": 0.3211,
+        "Cfa": 0.6789
+      }
+    },
+    {
+      "state_key": "STATE_LAND_657",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 9614,
+      "dominant": "Cfa",
+      "shares": {
+        "Aw": 0.0346,
+        "Cfa": 0.9654
+      }
+    },
+    {
+      "state_key": "STATE_LAND_658",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 4985,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 0.8782,
+        "BSh": 0.0271,
+        "Cfa": 0.0947
+      }
+    },
+    {
+      "state_key": "STATE_LAND_659",
+      "worksheet_name": "",
+      "name": "",
+      "land_px": 9306,
+      "dominant": "Cfa",
+      "shares": {
+        "Af": 0.3325,
+        "Am": 0.001,
+        "Aw": 0.1455,
+        "Cfa": 0.5176,
+        "Cfb": 0.0034
+      }
+    },
+    {
+      "state_key": "STATE_LOST_KHYPNIA",
+      "worksheet_name": "Lost Khypnia",
+      "name": "Lost Khypnia",
+      "land_px": 3619,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.745,
+        "Cs": 0.2451,
+        "Df": 0.0099
+      }
+    },
+    {
+      "state_key": "STATE_LYONESSE",
+      "worksheet_name": "Lyonesse",
+      "name": "Lyonesse",
+      "land_px": 3186,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_LYONESSE_HILLS",
+      "worksheet_name": "Lyonesse Hills",
+      "name": "Lyonesse Hills",
+      "land_px": 2307,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.9874,
+        "Dc": 0.0126
+      }
+    },
+    {
+      "state_key": "STATE_L_ANGUILLE",
+      "worksheet_name": "L'Anguille",
+      "name": "L'Anguille",
+      "land_px": 4387,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 0.9854,
+        "Dc": 0.0146
+      }
+    },
+    {
+      "state_key": "STATE_MANUFACTORY_DISTRICT",
+      "worksheet_name": "Manufactory District",
+      "name": "Manufactory District",
+      "land_px": 2094,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_MARCHES_OF_COURONNE",
+      "worksheet_name": "Marches of Couronne",
+      "name": "Marches of Couronne",
+      "land_px": 3273,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.8127,
+        "Dc": 0.1873
+      }
+    },
+    {
+      "state_key": "STATE_MARG_BEH_MARD",
+      "worksheet_name": "Marg-Beh-Mard",
+      "name": "Marg-Beh-Mard",
+      "land_px": 2570,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_MARIENBURG",
+      "worksheet_name": "Marienburg",
+      "name": "Marienburg",
+      "land_px": 2728,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.879,
+        "Dc": 0.121
+      }
+    },
+    {
+      "state_key": "STATE_MARKET_DISTRICT",
+      "worksheet_name": "Market District",
+      "name": "Market District",
+      "land_px": 2082,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.0231,
+        "Dc": 0.9769
+      }
+    },
+    {
+      "state_key": "STATE_MARSHES_OF_MADNESS",
+      "worksheet_name": "Marshes of Madness",
+      "name": "Marshes of Madness",
+      "land_px": 7008,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_MASSIF_ORCAL",
+      "worksheet_name": "Massif Orcal",
+      "name": "Massif Orcal",
+      "land_px": 2529,
+      "dominant": "Df",
+      "shares": {
+        "Cfb": 0.0613,
+        "Df": 0.5065,
+        "Dc": 0.4322
+      }
+    },
+    {
+      "state_key": "STATE_MAZHOROD",
+      "worksheet_name": "Mazhorod",
+      "name": "Mazhorod",
+      "land_px": 2741,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.7362,
+        "Dc": 0.2638
+      }
+    },
+    {
+      "state_key": "STATE_MERMEDUS_COAST",
+      "worksheet_name": "Mermedus Coast",
+      "name": "Mermedus Coast",
+      "land_px": 3599,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.1981,
+        "Dc": 0.7302,
+        "ET": 0.0717
+      }
+    },
+    {
+      "state_key": "STATE_MIDDENHEIM",
+      "worksheet_name": "Middenheim",
+      "name": "Middenheim",
+      "land_px": 4073,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_MIDDENLAND_PROPER",
+      "worksheet_name": "Middenland Proper",
+      "name": "Middenland Proper",
+      "land_px": 4267,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_MIDDLE_MOUNTAINS",
+      "worksheet_name": "Middle Mountains",
+      "name": "Middle Mountains",
+      "land_px": 648,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9259,
+        "Dc": 0.0741
+      }
+    },
+    {
+      "state_key": "STATE_MIDDLE_TILEA",
+      "worksheet_name": "Middle Tilea",
+      "name": "Middle Tilea",
+      "land_px": 1647,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.8452,
+        "Cs": 0.1548
+      }
+    },
+    {
+      "state_key": "STATE_MONOLITH_OF_INGVAR",
+      "worksheet_name": "Monolith of Ingvar",
+      "name": "Monolith of Ingvar",
+      "land_px": 2917,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.0662,
+        "ET": 0.6826,
+        "EF": 0.2513
+      }
+    },
+    {
+      "state_key": "STATE_MONTE_CASTELLO",
+      "worksheet_name": "Monte Castello",
+      "name": "Monte Castello",
+      "land_px": 2673,
+      "dominant": "BSk",
+      "shares": {
+        "BSh": 0.4299,
+        "BSk": 0.5701
+      }
+    },
+    {
+      "state_key": "STATE_MONTFORT",
+      "worksheet_name": "Montfort",
+      "name": "Montfort",
+      "land_px": 1205,
+      "dominant": "Df",
+      "shares": {
+        "Cfb": 0.0556,
+        "Df": 0.9419,
+        "Dc": 0.0025
+      }
+    },
+    {
+      "state_key": "STATE_MOOTLAND",
+      "worksheet_name": "Mootland",
+      "name": "Mootland",
+      "land_px": 1611,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.7821,
+        "Dc": 0.2179
+      }
+    },
+    {
+      "state_key": "STATE_MORTIS_TARN",
+      "worksheet_name": "Mortis Tarn",
+      "name": "Mortis Tarn",
+      "land_px": 5553,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.8197,
+        "BWk": 0.103,
+        "BSk": 0.0773
+      }
+    },
+    {
+      "state_key": "STATE_MOUNTAINS_OF_DAWN",
+      "worksheet_name": "Mountains of Dawn",
+      "name": "Mountains of Dawn",
+      "land_px": 2523,
+      "dominant": "BSh",
+      "shares": {
+        "BWh": 0.0055,
+        "BSh": 0.3508,
+        "BSk": 0.1348,
+        "Cfa": 0.2771,
+        "Cfb": 0.1704,
+        "Dc": 0.0614
+      }
+    },
+    {
+      "state_key": "STATE_MOUNTAINS_OF_HEL",
+      "worksheet_name": "Mountains of Hel",
+      "name": "Mountains of Hel",
+      "land_px": 2057,
+      "dominant": "EF",
+      "shares": {
+        "ET": 0.4492,
+        "EF": 0.5508
+      }
+    },
+    {
+      "state_key": "STATE_MOUNT_AZGORH",
+      "worksheet_name": "Mount Azgorh",
+      "name": "Mount Azgorh",
+      "land_px": 1194,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_MOUNT_BLOODHORN",
+      "worksheet_name": "Mount Bloodhorn",
+      "name": "Mount Bloodhorn",
+      "land_px": 6027,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.7395,
+        "BWk": 0.2605
+      }
+    },
+    {
+      "state_key": "STATE_MOUNT_GUNBAD",
+      "worksheet_name": "Mount Gunbad",
+      "name": "Mount Gunbad",
+      "land_px": 1176,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.0111,
+        "ET": 0.9889
+      }
+    },
+    {
+      "state_key": "STATE_MOUNT_SILVERSPEAR",
+      "worksheet_name": "Mount Silverspear",
+      "name": "Mount Silverspear",
+      "land_px": 653,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.4564,
+        "BSk": 0.1853,
+        "Dc": 0.0505,
+        "ET": 0.3078
+      }
+    },
+    {
+      "state_key": "STATE_MOUSILLON",
+      "worksheet_name": "Mousillon",
+      "name": "Mousillon",
+      "land_px": 3384,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_MYRMIDIA_S_COAST",
+      "worksheet_name": "Myrmidia's Coast",
+      "name": "Myrmidia's Coast",
+      "land_px": 4684,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.1898,
+        "BSk": 0.719,
+        "Cs": 0.0912
+      }
+    },
+    {
+      "state_key": "STATE_NAGGRUNDRINAZ",
+      "worksheet_name": "Naggrundrinaz",
+      "name": "Naggrundrinaz",
+      "land_px": 3176,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.3634,
+        "Df": 0.6366
+      }
+    },
+    {
+      "state_key": "STATE_NAGLFARI_COAST",
+      "worksheet_name": "Naglfari Coast",
+      "name": "Naglfari Coast",
+      "land_px": 6018,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.7572,
+        "ET": 0.2009,
+        "EF": 0.0419
+      }
+    },
+    {
+      "state_key": "STATE_NAGLFARI_MOUNTAINS",
+      "worksheet_name": "Naglfari Mountains",
+      "name": "Naglfari Mountains",
+      "land_px": 2894,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.2253,
+        "ET": 0.4274,
+        "EF": 0.3473
+      }
+    },
+    {
+      "state_key": "STATE_NEW_LAHMIA",
+      "worksheet_name": "New Lahmia",
+      "name": "New Lahmia",
+      "land_px": 2403,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.7503,
+        "ET": 0.2497
+      }
+    },
+    {
+      "state_key": "STATE_NEW_STRYGOS",
+      "worksheet_name": "New Strygos",
+      "name": "New Strygos",
+      "land_px": 1696,
+      "dominant": "Cfa",
+      "shares": {
+        "Aw": 0.0124,
+        "Cfa": 0.9876
+      }
+    },
+    {
+      "state_key": "STATE_NORSVEG_PLAIN",
+      "worksheet_name": "Norsveg Plain",
+      "name": "Norsveg Plain",
+      "land_px": 3159,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.7376,
+        "ET": 0.2551,
+        "EF": 0.0073
+      }
+    },
+    {
+      "state_key": "STATE_NORTHERN_BADLANDS",
+      "worksheet_name": "Northern Badlands",
+      "name": "Northern Badlands",
+      "land_px": 6182,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.4539,
+        "BSk": 0.5461
+      }
+    },
+    {
+      "state_key": "STATE_NORTHERN_OBLAST",
+      "worksheet_name": "Northern Oblast",
+      "name": "Northern Oblast",
+      "land_px": 5769,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.6852,
+        "Dc": 0.3148
+      }
+    },
+    {
+      "state_key": "STATE_NORTHERN_WORLD_S_EDGE",
+      "worksheet_name": "Northern World's Edge",
+      "name": "Northern World's Edge",
+      "land_px": 658,
+      "dominant": "ET",
+      "shares": {
+        "BSk": 0.1413,
+        "Dc": 0.2188,
+        "ET": 0.6398
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_BADLAND_HILLS",
+      "worksheet_name": "North Badland Hills",
+      "name": "North Badland Hills",
+      "land_px": 4991,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.7007,
+        "BWk": 0.2993
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_BARRIER_IDOLS",
+      "worksheet_name": "North Barrier Idols",
+      "name": "North Barrier Idols",
+      "land_px": 3425,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_CAPE",
+      "worksheet_name": "North Cape",
+      "name": "North Cape",
+      "land_px": 3666,
+      "dominant": "ET",
+      "shares": {
+        "ET": 0.9905,
+        "EF": 0.0095
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_DARK_LANDS",
+      "worksheet_name": "North Dark Lands",
+      "name": "North Dark Lands",
+      "land_px": 4659,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.0874,
+        "Dc": 0.9126
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_GREY_MOUNTAINS",
+      "worksheet_name": "North Grey Mountains",
+      "name": "North Grey Mountains",
+      "land_px": 404,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.7327,
+        "Dc": 0.2673
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_HOWLING_WASTES",
+      "worksheet_name": "North Howling Wastes",
+      "name": "North Howling Wastes",
+      "land_px": 26752,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.4197,
+        "Df": 0.5803
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_NORSE_COAST",
+      "worksheet_name": "North Norse Coast",
+      "name": "North Norse Coast",
+      "land_px": 1133,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.1077,
+        "Dc": 0.8526,
+        "ET": 0.0397
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_OSTLAND",
+      "worksheet_name": "North Ostland",
+      "name": "North Ostland",
+      "land_px": 2636,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_TALABECLAND",
+      "worksheet_name": "North Talabecland",
+      "name": "North Talabecland",
+      "land_px": 3682,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_NORTH_TILEA",
+      "worksheet_name": "North Tilea",
+      "name": "North Tilea",
+      "land_px": 4392,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.3654,
+        "Cs": 0.1683,
+        "Cfa": 0.2061,
+        "Cfb": 0.0943,
+        "Df": 0.166
+      }
+    },
+    {
+      "state_key": "STATE_NOVALONE_PASS",
+      "worksheet_name": "Novalone Pass",
+      "name": "Novalone Pass",
+      "land_px": 858,
+      "dominant": "Dc",
+      "shares": {
+        "BSk": 0.338,
+        "Df": 0.1061,
+        "Dc": 0.5559
+      }
+    },
+    {
+      "state_key": "STATE_NUJA",
+      "worksheet_name": "Nuja",
+      "name": "Nuja",
+      "land_px": 3219,
+      "dominant": "Cfa",
+      "shares": {
+        "Cs": 0.0193,
+        "Cfa": 0.8972,
+        "Cfb": 0.0836
+      }
+    },
+    {
+      "state_key": "STATE_OAK_OF_PROPHECY",
+      "worksheet_name": "Oak of Prophecy",
+      "name": "Oak of Prophecy",
+      "land_px": 138,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_OIS_GAP",
+      "worksheet_name": "Ois Gap",
+      "name": "Ois Gap",
+      "land_px": 252,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.0675,
+        "Dc": 0.9325
+      }
+    },
+    {
+      "state_key": "STATE_OLD_DWARF_ROAD",
+      "worksheet_name": "Old Dwarf Road",
+      "name": "Old Dwarf Road",
+      "land_px": 4818,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.2991,
+        "BSk": 0.7009
+      }
+    },
+    {
+      "state_key": "STATE_OLD_SILK_ROAD",
+      "worksheet_name": "Old Silk Road (weak)",
+      "name": "Old Silk Road",
+      "land_px": 6721,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.2134,
+        "BSk": 0.7866
+      }
+    },
+    {
+      "state_key": "STATE_OLD_STRYGOS",
+      "worksheet_name": "Old Strygos",
+      "name": "Old Strygos",
+      "land_px": 10760,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ORTEGETA",
+      "worksheet_name": "Ortegeta",
+      "name": "Ortegeta",
+      "land_px": 2443,
+      "dominant": "Dc",
+      "shares": {
+        "BSk": 0.4306,
+        "Df": 0.0176,
+        "Dc": 0.5518
+      }
+    },
+    {
+      "state_key": "STATE_PALE_SISTERS",
+      "worksheet_name": "Pale Sisters",
+      "name": "Pale Sisters",
+      "land_px": 718,
+      "dominant": "Dc",
+      "shares": {
+        "Cfb": 0.0139,
+        "Df": 0.4276,
+        "Dc": 0.5585
+      }
+    },
+    {
+      "state_key": "STATE_PARRAVON",
+      "worksheet_name": "Parravon",
+      "name": "Parravon",
+      "land_px": 1028,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9815,
+        "Dc": 0.0185
+      }
+    },
+    {
+      "state_key": "STATE_PEAK_PASS",
+      "worksheet_name": "Peak Pass",
+      "name": "Peak Pass",
+      "land_px": 1324,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.7515,
+        "ET": 0.2485
+      }
+    },
+    {
+      "state_key": "STATE_PIGBARTER_ROAD",
+      "worksheet_name": "Pigbarter Road (weak)",
+      "name": "Pigbarter Road",
+      "land_px": 7100,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_PINA_WOOD",
+      "worksheet_name": "Pina Wood",
+      "name": "Pina Wood",
+      "land_px": 1174,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfa": 0.0213,
+        "Cfb": 0.9787
+      }
+    },
+    {
+      "state_key": "STATE_PITS_DISTRICT",
+      "worksheet_name": "Pits District",
+      "name": "Pits District",
+      "land_px": 2146,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.1468,
+        "Dc": 0.8532
+      }
+    },
+    {
+      "state_key": "STATE_PLAINS_OF_GRIEF",
+      "worksheet_name": "Plains of Grief",
+      "name": "Plains of Grief",
+      "land_px": 5532,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_PLAINS_OF_LUCCINI",
+      "worksheet_name": "Plains of Luccini",
+      "name": "Plains of Luccini",
+      "land_px": 3234,
+      "dominant": "BSh",
+      "shares": {
+        "BSh": 0.9598,
+        "BSk": 0.0343,
+        "Cs": 0.0059
+      }
+    },
+    {
+      "state_key": "STATE_PLAIN_OF_BONES",
+      "worksheet_name": "Plain of Bones",
+      "name": "Plain of Bones",
+      "land_px": 18797,
+      "dominant": "BSk",
+      "shares": {
+        "BSh": 0.208,
+        "BSk": 0.7685,
+        "Cfa": 0.0235
+      }
+    },
+    {
+      "state_key": "STATE_PYRAMID_OF_TUTANKHANUT",
+      "worksheet_name": "Pyramid of Tutankhanut",
+      "name": "Pyramid of Tutankhanut",
+      "land_px": 2551,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_QUENELLES",
+      "worksheet_name": "Quenelles",
+      "name": "Quenelles",
+      "land_px": 4898,
+      "dominant": "Df",
+      "shares": {
+        "Cfb": 0.4765,
+        "Df": 0.489,
+        "Dc": 0.0345
+      }
+    },
+    {
+      "state_key": "STATE_RED_CLOUD_MOUNTAINS",
+      "worksheet_name": "Red Cloud Mountains",
+      "name": "Red Cloud Mountains",
+      "land_px": 1330,
+      "dominant": "BSk",
+      "shares": {
+        "BWh": 0.1,
+        "BWk": 0.2331,
+        "BSk": 0.6338,
+        "ET": 0.0331
+      }
+    },
+    {
+      "state_key": "STATE_REIKLAND_PROPER",
+      "worksheet_name": "Reikland Proper",
+      "name": "Reikland Proper",
+      "land_px": 2779,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_REIKWALD_FOREST",
+      "worksheet_name": "Reikwald Forest",
+      "name": "Reikwald Forest",
+      "land_px": 3243,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.889,
+        "Dc": 0.111
+      }
+    },
+    {
+      "state_key": "STATE_REMAS",
+      "worksheet_name": "Remas",
+      "name": "Remas",
+      "land_px": 2071,
+      "dominant": "Cs",
+      "shares": {
+        "BSk": 0.0488,
+        "Cs": 0.9512
+      }
+    },
+    {
+      "state_key": "STATE_RIVER_DISTRICT",
+      "worksheet_name": "River District",
+      "name": "River District",
+      "land_px": 1545,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ROAD_OF_KINGS",
+      "worksheet_name": "Road of Kings",
+      "name": "Road of Kings",
+      "land_px": 1579,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_RUIN_S_END",
+      "worksheet_name": "Ruin's End",
+      "name": "Ruin's End",
+      "land_px": 1401,
+      "dominant": "Cfa",
+      "shares": {
+        "Aw": 0.035,
+        "Cfa": 0.965
+      }
+    },
+    {
+      "state_key": "STATE_SARTOSA",
+      "worksheet_name": "Sartosa",
+      "name": "Sartosa",
+      "land_px": 1062,
+      "dominant": "BSh",
+      "shares": {
+        "BSh": 0.7495,
+        "BSk": 0.2505
+      }
+    },
+    {
+      "state_key": "STATE_SCHADENSUMPF",
+      "worksheet_name": "Schadensumpf",
+      "name": "Schadensumpf",
+      "land_px": 2338,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SEPUKZY",
+      "worksheet_name": "Sepukzy",
+      "name": "Sepukzy",
+      "land_px": 5942,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.8398,
+        "ET": 0.1602
+      }
+    },
+    {
+      "state_key": "STATE_SHANIDAAR",
+      "worksheet_name": "Shanidaar",
+      "name": "Shanidaar",
+      "land_px": 4268,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SHATTERED_TEETH",
+      "worksheet_name": "Shattered Teeth",
+      "name": "Shattered Teeth",
+      "land_px": 1336,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.6205,
+        "Df": 0.0022,
+        "Dc": 0.3772
+      }
+    },
+    {
+      "state_key": "STATE_SIX_WATCH_FORTS",
+      "worksheet_name": "Six Watch Forts",
+      "name": "Six Watch Forts",
+      "land_px": 3458,
+      "dominant": "Aw",
+      "shares": {
+        "Aw": 0.9766,
+        "BSh": 0.0084,
+        "Cfb": 0.015
+      }
+    },
+    {
+      "state_key": "STATE_SKRAGGLEGUTS_HOLD",
+      "worksheet_name": "Skraggleguts Hold",
+      "name": "Skraggleguts Hold",
+      "land_px": 3982,
+      "dominant": "Cfa",
+      "shares": {
+        "BSk": 0.0043,
+        "Cfa": 0.9957
+      }
+    },
+    {
+      "state_key": "STATE_SKULL_CLIFFS",
+      "worksheet_name": "Skull Cliffs",
+      "name": "Skull Cliffs",
+      "land_px": 6877,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SKULL_ROAD",
+      "worksheet_name": "Skull Road",
+      "name": "Skull Road",
+      "land_px": 4267,
+      "dominant": "ET",
+      "shares": {
+        "BSk": 0.1858,
+        "Dc": 0.3736,
+        "ET": 0.4247,
+        "EF": 0.0159
+      }
+    },
+    {
+      "state_key": "STATE_SKULL_STEPPES",
+      "worksheet_name": "Skull Steppes",
+      "name": "Skull Steppes",
+      "land_px": 3837,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SOLLAND",
+      "worksheet_name": "Solland",
+      "name": "Solland",
+      "land_px": 4482,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9935,
+        "Dc": 0.0065
+      }
+    },
+    {
+      "state_key": "STATE_SOUR_CRAGS",
+      "worksheet_name": "Sour Crags",
+      "name": "Sour Crags",
+      "land_px": 2715,
+      "dominant": "BSk",
+      "shares": {
+        "BWh": 0.0851,
+        "BWk": 0.0847,
+        "BSh": 0.0877,
+        "BSk": 0.7414,
+        "ET": 0.0011
+      }
+    },
+    {
+      "state_key": "STATE_SOUTHEAST_MAGRITTA",
+      "worksheet_name": "Southeast Magritta",
+      "name": "Southeast Magritta",
+      "land_px": 2137,
+      "dominant": "Cs",
+      "shares": {
+        "Cs": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SOUTHERN_OBLAST",
+      "worksheet_name": "Southern Oblast",
+      "name": "Southern Oblast",
+      "land_px": 4697,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.6643,
+        "Dc": 0.3357
+      }
+    },
+    {
+      "state_key": "STATE_SOUTHERN_SIREN_ISLES",
+      "worksheet_name": "Southern Siren Isles",
+      "name": "Southern Siren Isles",
+      "land_px": 1138,
+      "dominant": "Cs",
+      "shares": {
+        "Cs": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SOUTHERN_WORLDS_EDGE",
+      "worksheet_name": "Southern Worlds Edge",
+      "name": "Southern Worlds Edge",
+      "land_px": 3123,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.4169,
+        "BWk": 0.0544,
+        "BSk": 0.3766,
+        "Cfa": 0.0282,
+        "Cfb": 0.1239
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_BADLAND_HILLS",
+      "worksheet_name": "South Badland Hills",
+      "name": "South Badland Hills",
+      "land_px": 5524,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.8251,
+        "BWk": 0.1749
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_BILBALI",
+      "worksheet_name": "South Bilbali",
+      "name": "South Bilbali",
+      "land_px": 2950,
+      "dominant": "Cfb",
+      "shares": {
+        "Cfb": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_DARKLANDS",
+      "worksheet_name": "South Darklands",
+      "name": "South Darklands",
+      "land_px": 1663,
+      "dominant": "BSh",
+      "shares": {
+        "BSh": 0.8635,
+        "BSk": 0.1365
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_GREY_MOUNTAINS",
+      "worksheet_name": "South Grey Mountains",
+      "name": "South Grey Mountains",
+      "land_px": 335,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.4239,
+        "Dc": 0.5761
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_HOWLING_WASTES",
+      "worksheet_name": "South Howling Wastes",
+      "name": "South Howling Wastes",
+      "land_px": 14735,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_MIDDENLAND",
+      "worksheet_name": "South Middenland",
+      "name": "South Middenland",
+      "land_px": 3009,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_OSTLAND",
+      "worksheet_name": "South Ostland",
+      "name": "South Ostland",
+      "land_px": 4658,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SOUTH_TALABECLAND",
+      "worksheet_name": "South Talabecland",
+      "name": "South Talabecland",
+      "land_px": 3690,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SPHINX_OF_PHAA",
+      "worksheet_name": "Sphinx of Phaa",
+      "name": "Sphinx of Phaa",
+      "land_px": 749,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_STEEL_PLAINS",
+      "worksheet_name": "Steel Plains",
+      "name": "Steel Plains",
+      "land_px": 4425,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.038,
+        "Dc": 0.962
+      }
+    },
+    {
+      "state_key": "STATE_STINKLANDS",
+      "worksheet_name": "Stinklands",
+      "name": "Stinklands",
+      "land_px": 4911,
+      "dominant": "BWk",
+      "shares": {
+        "BWh": 0.0466,
+        "BWk": 0.9534
+      }
+    },
+    {
+      "state_key": "STATE_STROVENGAARD",
+      "worksheet_name": "Strovengaard",
+      "name": "Strovengaard",
+      "land_px": 3639,
+      "dominant": "Df",
+      "shares": {
+        "Cfb": 0.0742,
+        "Df": 0.4677,
+        "Dc": 0.3229,
+        "ET": 0.1352
+      }
+    },
+    {
+      "state_key": "STATE_STUREN_RIDGE",
+      "worksheet_name": "Sturen Ridge",
+      "name": "Sturen Ridge",
+      "land_px": 3586,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SUNKEN_KHEMARCH",
+      "worksheet_name": "Sunken Khemarch",
+      "name": "Sunken Khemarch",
+      "land_px": 5590,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_SUSSURRIO_WOOD",
+      "worksheet_name": "Sussurrio Wood",
+      "name": "Sussurrio Wood",
+      "land_px": 1301,
+      "dominant": "BSk",
+      "shares": {
+        "BSh": 0.4942,
+        "BSk": 0.5058
+      }
+    },
+    {
+      "state_key": "STATE_SWAMP_EATER_HOLD",
+      "worksheet_name": "Swamp Eater Hold",
+      "name": "Swamp Eater Hold",
+      "land_px": 6000,
+      "dominant": "Cfa",
+      "shares": {
+        "Aw": 0.0128,
+        "Cfa": 0.9872
+      }
+    },
+    {
+      "state_key": "STATE_SWAMP_OF_TERROR",
+      "worksheet_name": "Swamp of Terror",
+      "name": "Swamp of Terror",
+      "land_px": 1448,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_TALDURSFJORD",
+      "worksheet_name": "Taldursfjord",
+      "name": "Taldursfjord",
+      "land_px": 3848,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.3347,
+        "ET": 0.6455,
+        "EF": 0.0198
+      }
+    },
+    {
+      "state_key": "STATE_TALSYN",
+      "worksheet_name": "Talsyn",
+      "name": "Talsyn",
+      "land_px": 539,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.6456,
+        "Df": 0.3544
+      }
+    },
+    {
+      "state_key": "STATE_TAL_ESTH",
+      "worksheet_name": "Tal Esth",
+      "name": "Tal Esth",
+      "land_px": 493,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_THE_BLIGHT",
+      "worksheet_name": "The Blight",
+      "name": "The Blight",
+      "land_px": 4316,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_THE_CAULDRON",
+      "worksheet_name": "The Cauldron",
+      "name": "The Cauldron",
+      "land_px": 6370,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_THE_DOBRYRION",
+      "worksheet_name": "The Dobryrion",
+      "name": "The Dobryrion",
+      "land_px": 5911,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.313,
+        "Dc": 0.687
+      }
+    },
+    {
+      "state_key": "STATE_THE_GOLINYI",
+      "worksheet_name": "The Golinyi",
+      "name": "The Golinyi",
+      "land_px": 5784,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.6489,
+        "ET": 0.3511
+      }
+    },
+    {
+      "state_key": "STATE_THE_ROPSALS",
+      "worksheet_name": "The Ropsals",
+      "name": "The Ropsals",
+      "land_px": 3171,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.6727,
+        "ET": 0.2747,
+        "EF": 0.0527
+      }
+    },
+    {
+      "state_key": "STATE_THE_SCARAB_CITY",
+      "worksheet_name": "The Scarab City",
+      "name": "The Scarab City",
+      "land_px": 5449,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_THE_SENTINELS",
+      "worksheet_name": "The Sentinels",
+      "name": "The Sentinels",
+      "land_px": 4048,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_THE_TAIGA",
+      "worksheet_name": "The Taiga",
+      "name": "The Taiga",
+      "land_px": 4334,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_THE_VELDT",
+      "worksheet_name": "The Veldt",
+      "name": "The Veldt",
+      "land_px": 3163,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.8242,
+        "Dc": 0.1758
+      }
+    },
+    {
+      "state_key": "STATE_THE_WASTELAND",
+      "worksheet_name": "The Wasteland",
+      "name": "The Wasteland",
+      "land_px": 4516,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9909,
+        "ET": 0.0091
+      }
+    },
+    {
+      "state_key": "STATE_THORSHAFN",
+      "worksheet_name": "Thorshafn",
+      "name": "Thorshafn",
+      "land_px": 1832,
+      "dominant": "Dc",
+      "shares": {
+        "BSk": 0.0655,
+        "Dc": 0.8079,
+        "ET": 0.1266
+      }
+    },
+    {
+      "state_key": "STATE_THUNDER_PEAKS",
+      "worksheet_name": "Thunder Peaks",
+      "name": "Thunder Peaks",
+      "land_px": 494,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.8016,
+        "BSk": 0.0992,
+        "ET": 0.0992
+      }
+    },
+    {
+      "state_key": "STATE_TOBARO",
+      "worksheet_name": "Tobaro",
+      "name": "Tobaro",
+      "land_px": 1189,
+      "dominant": "Cs",
+      "shares": {
+        "Cs": 0.7847,
+        "Cfb": 0.2153
+      }
+    },
+    {
+      "state_key": "STATE_TORGOVANN",
+      "worksheet_name": "Torgovann",
+      "name": "Torgovann",
+      "land_px": 1520,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_TOWER_OF_THE_BLOODYTOOTH",
+      "worksheet_name": "Tower of the Bloodytooth",
+      "name": "Tower of the Bloodytooth",
+      "land_px": 2005,
+      "dominant": "Cfa",
+      "shares": {
+        "BSk": 0.0504,
+        "Cfa": 0.9496
+      }
+    },
+    {
+      "state_key": "STATE_TRANTINE_HILLS",
+      "worksheet_name": "Trantine Hills",
+      "name": "Trantine Hills",
+      "land_px": 4080,
+      "dominant": "Cs",
+      "shares": {
+        "BSk": 0.3556,
+        "Cs": 0.6373,
+        "Df": 0.0071
+      }
+    },
+    {
+      "state_key": "STATE_TROLLHEIM_MOUNTAINS",
+      "worksheet_name": "Trollheim Mountains",
+      "name": "Trollheim Mountains",
+      "land_px": 3011,
+      "dominant": "EF",
+      "shares": {
+        "ET": 0.3341,
+        "EF": 0.6659
+      }
+    },
+    {
+      "state_key": "STATE_TROLL_COUNTRY",
+      "worksheet_name": "Troll Country",
+      "name": "Troll Country",
+      "land_px": 3472,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_TYR_VANNA",
+      "worksheet_name": "Tyr Vanna",
+      "name": "Tyr Vanna",
+      "land_px": 419,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.1193,
+        "Df": 0.8807
+      }
+    },
+    {
+      "state_key": "STATE_ULFWRENAR_COAST",
+      "worksheet_name": "Ulfwrenar Coast",
+      "name": "Ulfwrenar Coast",
+      "land_px": 2325,
+      "dominant": "Dc",
+      "shares": {
+        "Df": 0.0452,
+        "Dc": 0.8452,
+        "ET": 0.1097
+      }
+    },
+    {
+      "state_key": "STATE_ULFWRENAR_MOUNTAINS",
+      "worksheet_name": "Ulfwrenar Mountains",
+      "name": "Ulfwrenar Mountains",
+      "land_px": 1969,
+      "dominant": "EF",
+      "shares": {
+        "ET": 0.4276,
+        "EF": 0.5724
+      }
+    },
+    {
+      "state_key": "STATE_UNGOL_STEPPES",
+      "worksheet_name": "Ungol Steppes",
+      "name": "Ungol Steppes",
+      "land_px": 3708,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.5982,
+        "Dc": 0.4018
+      }
+    },
+    {
+      "state_key": "STATE_UPPER_ASH_RIVER",
+      "worksheet_name": "Upper Ash River (weak)",
+      "name": "Upper Ash River",
+      "land_px": 3880,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_VANNHEIM_MOUNTAINS",
+      "worksheet_name": "Vannheim Mountains",
+      "name": "Vannheim Mountains",
+      "land_px": 1858,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.2427,
+        "ET": 0.5936,
+        "EF": 0.1636
+      }
+    },
+    {
+      "state_key": "STATE_VARENKA_HILLS",
+      "worksheet_name": "Varenka Hills",
+      "name": "Varenka Hills",
+      "land_px": 4611,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.003,
+        "BSk": 0.8198,
+        "Cs": 0.1772
+      }
+    },
+    {
+      "state_key": "STATE_VARG_CAMP",
+      "worksheet_name": "Varg Camp",
+      "name": "Varg Camp",
+      "land_px": 3131,
+      "dominant": "ET",
+      "shares": {
+        "ET": 0.8521,
+        "EF": 0.1479
+      }
+    },
+    {
+      "state_key": "STATE_VEREZZI",
+      "worksheet_name": "Verezzi",
+      "name": "Verezzi",
+      "land_px": 1656,
+      "dominant": "BSk",
+      "shares": {
+        "BSh": 0.0248,
+        "BSk": 0.5616,
+        "Cs": 0.4136
+      }
+    },
+    {
+      "state_key": "STATE_VIDARHEIM",
+      "worksheet_name": "Vidarheim",
+      "name": "Vidarheim",
+      "land_px": 3033,
+      "dominant": "ET",
+      "shares": {
+        "ET": 0.9644,
+        "EF": 0.0356
+      }
+    },
+    {
+      "state_key": "STATE_VOLGEN",
+      "worksheet_name": "Volgen",
+      "name": "Volgen",
+      "land_px": 1996,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_VORBERGLAND",
+      "worksheet_name": "Vorbergland",
+      "name": "Vorbergland",
+      "land_px": 3600,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9828,
+        "Dc": 0.0172
+      }
+    },
+    {
+      "state_key": "STATE_WATERFALL_PALACE",
+      "worksheet_name": "Waterfall Palace",
+      "name": "Waterfall Palace",
+      "land_px": 581,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WESTERN_BADLANDS",
+      "worksheet_name": "Western Badlands",
+      "name": "Western Badlands",
+      "land_px": 4631,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.5385,
+        "BWk": 0.4615
+      }
+    },
+    {
+      "state_key": "STATE_WESTERN_ESTALIAN_COAST",
+      "worksheet_name": "Western Estalian Coast",
+      "name": "Western Estalian Coast",
+      "land_px": 3379,
+      "dominant": "Cfa",
+      "shares": {
+        "Cfa": 0.6357,
+        "Cfb": 0.3643
+      }
+    },
+    {
+      "state_key": "STATE_WESTERN_IRRANAS",
+      "worksheet_name": "Western Irranas",
+      "name": "Western Irranas",
+      "land_px": 2218,
+      "dominant": "BSk",
+      "shares": {
+        "BSk": 0.5753,
+        "Cfb": 0.3503,
+        "Df": 0.0744
+      }
+    },
+    {
+      "state_key": "STATE_WESTERN_OBLAST",
+      "worksheet_name": "Western Oblast",
+      "name": "Western Oblast",
+      "land_px": 5600,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WEST_AVERLAND",
+      "worksheet_name": "West Averland",
+      "name": "West Averland",
+      "land_px": 2562,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WEST_CARCASSONNE",
+      "worksheet_name": "West Carcassonne",
+      "name": "West Carcassonne",
+      "land_px": 2323,
+      "dominant": "Df",
+      "shares": {
+        "BSk": 0.0232,
+        "Cfa": 0.068,
+        "Cfb": 0.3104,
+        "Df": 0.5984
+      }
+    },
+    {
+      "state_key": "STATE_WEST_DARK_LANDS",
+      "worksheet_name": "West Dark Lands",
+      "name": "West Dark Lands",
+      "land_px": 6884,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.4617,
+        "BSk": 0.5359,
+        "Dc": 0.0022,
+        "ET": 0.0003
+      }
+    },
+    {
+      "state_key": "STATE_WEST_DEATH_PASS",
+      "worksheet_name": "West Death Pass",
+      "name": "West Death Pass",
+      "land_px": 3011,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.8701,
+        "BSk": 0.0422,
+        "ET": 0.0877
+      }
+    },
+    {
+      "state_key": "STATE_WEST_HELSPIRE_MOUNTAINS",
+      "worksheet_name": "West Helspire Mountains",
+      "name": "West Helspire Mountains",
+      "land_px": 1389,
+      "dominant": "ET",
+      "shares": {
+        "Dc": 0.0022,
+        "ET": 0.8236,
+        "EF": 0.1742
+      }
+    },
+    {
+      "state_key": "STATE_WEST_MAD_DOG_PASS",
+      "worksheet_name": "West Mad Dog Pass",
+      "name": "West Mad Dog Pass",
+      "land_px": 1795,
+      "dominant": "BWk",
+      "shares": {
+        "BWk": 0.7632,
+        "BSk": 0.2368
+      }
+    },
+    {
+      "state_key": "STATE_WEST_MAGRITTA",
+      "worksheet_name": "West Magritta",
+      "name": "West Magritta",
+      "land_px": 4251,
+      "dominant": "Cfa",
+      "shares": {
+        "Cs": 0.103,
+        "Cfa": 0.7445,
+        "Cfb": 0.1524
+      }
+    },
+    {
+      "state_key": "STATE_WEST_MIDDENLAND",
+      "worksheet_name": "West Middenland",
+      "name": "West Middenland",
+      "land_px": 2872,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WEST_NORDLAND",
+      "worksheet_name": "West Nordland",
+      "name": "West Nordland",
+      "land_px": 3849,
+      "dominant": "Df",
+      "shares": {
+        "Df": 0.9875,
+        "ET": 0.0125
+      }
+    },
+    {
+      "state_key": "STATE_WEST_OSTERMARK",
+      "worksheet_name": "West Ostermark",
+      "name": "West Ostermark",
+      "land_px": 4756,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WEST_STIRLAND",
+      "worksheet_name": "West Stirland",
+      "name": "West Stirland",
+      "land_px": 1668,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WEST_SYLVANIA",
+      "worksheet_name": "West Sylvania",
+      "name": "West Sylvania",
+      "land_px": 3040,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WHEATLANDS",
+      "worksheet_name": "Wheatlands",
+      "name": "Wheatlands",
+      "land_px": 4921,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.9994,
+        "ET": 0.0006
+      }
+    },
+    {
+      "state_key": "STATE_WINTERTEETH_PASS",
+      "worksheet_name": "Winterteeth Pass",
+      "name": "Winterteeth Pass",
+      "land_px": 174,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WISSENLAND",
+      "worksheet_name": "Wissenland",
+      "name": "Wissenland",
+      "land_px": 1542,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WOLF_EDGE",
+      "worksheet_name": "Wolf Edge",
+      "name": "Wolf Edge",
+      "land_px": 4821,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.1236,
+        "BSk": 0.8764
+      }
+    },
+    {
+      "state_key": "STATE_WOLF_LANDS",
+      "worksheet_name": "Wolf Lands",
+      "name": "Wolf Lands",
+      "land_px": 19592,
+      "dominant": "BSk",
+      "shares": {
+        "BWk": 0.06,
+        "BSk": 0.94
+      }
+    },
+    {
+      "state_key": "STATE_WORLDS_EDGE_FOOTHILLS",
+      "worksheet_name": "Worlds Edge Foothills",
+      "name": "Worlds Edge Foothills",
+      "land_px": 7787,
+      "dominant": "BWh",
+      "shares": {
+        "BWh": 0.7604,
+        "BWk": 0.2026,
+        "BSk": 0.037
+      }
+    },
+    {
+      "state_key": "STATE_WURTBAD",
+      "worksheet_name": "Wurtbad",
+      "name": "Wurtbad",
+      "land_px": 2179,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_WYDRIOTH",
+      "worksheet_name": "Wydrioth",
+      "name": "Wydrioth",
+      "land_px": 1249,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_YI_EDRI_ETERNOS",
+      "worksheet_name": "Yi Edri Eternos",
+      "name": "Yi Edri Eternos",
+      "land_px": 236,
+      "dominant": "Df",
+      "shares": {
+        "Df": 1.0
+      }
+    },
+    {
+      "state_key": "STATE_ZORN_DUM",
+      "worksheet_name": "Zorn Dum",
+      "name": "Zorn Dum",
+      "land_px": 4386,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.9932,
+        "ET": 0.0068
+      }
+    },
+    {
+      "state_key": "STATE_ZORN_UZKUL",
+      "worksheet_name": "Zorn Uzkul",
+      "name": "Zorn Uzkul",
+      "land_px": 1733,
+      "dominant": "Dc",
+      "shares": {
+        "Dc": 0.6497,
+        "ET": 0.3497,
+        "EF": 0.0006
+      }
+    }
+  ]
+}
