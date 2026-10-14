@@ -5926,6 +5926,34 @@ def _selfcheck_building_history() -> None:
     generate_building_history.run_fixture_check(TOOLS_DIR / "fixtures" / "building_history")
 
 
+def _selfcheck_smooth_cr_borders() -> None:
+    """smooth_cr_borders: a stair-stepped two-state boundary on a synthetic island is smoothed
+    deterministically, keeps its states, ends on the coast and still seals every state."""
+    import numpy as np
+    from scipy import ndimage
+
+    import smooth_cr_borders as sm
+
+    h, w = 60, 120
+    land = np.zeros((h, w), dtype=bool)
+    land[10:50, 10:110] = True
+    box = np.zeros_like(land)
+    box[5:55, 5:115] = True
+    yy, xx = np.mgrid[0:h, 0:w]
+    lab = np.where(land, np.where(xx < 60 + ((yy // 3) % 2) * 3, 1, 2), 0).astype(np.int32)
+    lines = sm.cr_partition.lines_from_labels(lab, land)
+    new, _, labels, scope, _ = sm.smooth_lines(lines, land, box, 4.0)
+    again = sm.smooth_lines(lines, land, box, 4.0)[0]
+    assert np.array_equal(new, again), "smooth_cr_borders: not deterministic"
+    assert len([v for v in np.unique(labels) if v > 0]) == 2, "smooth_cr_borders: state count changed"
+    assert not (new & ~land).any(), "smooth_cr_borders: a line left the land"
+    ys = np.nonzero(new)[0]
+    assert ys.min() <= 11 and ys.max() >= 48, "smooth_cr_borders: a border no longer reaches the coast"
+    comp, n = ndimage.label(land & ~new)
+    assert n == 2, f"smooth_cr_borders: lines no longer separate the two states ({n} pieces)"
+    assert np.nonzero(new)[1].std() < np.nonzero(lines)[1].std() or         len(np.unique(np.nonzero(new)[1])) < len(np.unique(np.nonzero(lines)[1])),         "smooth_cr_borders: the border was not smoothed"
+
+
 def run_check() -> int:
     # Stdlib-only and independent of the map goldens, so it runs (and can fail) first.
     rc = check_country_history()
@@ -5950,6 +5978,9 @@ def run_check() -> int:
     print("building_history: tech-gated building emission (railway without the tech refused, locked method "
           "never chosen, unresolved tech set -> tech-free only, resource/anchor/id/job-cap errors, "
           "independent verifier on hand-broken output and changed country history) self-check passed.")
+    _selfcheck_smooth_cr_borders()
+    print("smooth_cr_borders: deterministic label-field smoothing keeps states, coast ends and the seal "
+          "self-check passed.")
     _selfcheck_wrap()
     _selfcheck_frame()
     print("frame: Miller round-trip + uniform-grid guard self-check passed.")
