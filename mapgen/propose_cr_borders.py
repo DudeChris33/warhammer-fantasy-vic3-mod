@@ -499,6 +499,15 @@ def main(argv: list[str] | None = None) -> int:
         feat_crop |= hg_crop
         feature_px["high_ground"] = int((hg_crop & scope).sum())
         log(f"  high ground >= {cfg['high_ground_m']} m: {feature_px['high_ground']:,} edge px in scope", t0)
+    split = 0
+    if cfg["max_state_px"]:
+        # Subdivide before snapping, so the new borders can settle onto rivers and high ground.
+        # Chris (2026-10-14): the state count is Vic3's, not ChaosRobie's (about 3x TWW3's).
+        pre = int(labels.max())
+        mx = int(cfg["max_state_px"])
+        labels = cells.split_large(labels, mx, int(cfg.get("split_target_px") or mx // 2), False)
+        split = int(labels.max()) - pre
+        log(f"  split {split} piece(s) off states over {mx:,} px", t0)
     labels, snap_report = cr_partition.snap_to_features(
         labels, scope, feat_crop, int(cfg["snap_px"]), float(cfg["snap_follow_frac"]))
     labels = cells.split_disconnected(labels, False)
@@ -518,11 +527,6 @@ def main(argv: list[str] | None = None) -> int:
     log(f"  {len(islets)} sub-floor islet(s) with no land neighbour left to the generator", t0)
     if target:
         labels = cells.merge_to_target(labels, int(target), False, log=lambda m: log(m, t0))
-    split = 0
-    if cfg["max_state_px"]:
-        pre = int(labels.max())
-        labels = cells.split_large(labels, int(cfg["max_state_px"]), int(cfg["max_state_px"]) // 2, False)
-        split = int(labels.max()) - pre
     labels = cells.renumber(labels)
     areas = np.bincount(labels.ravel())[1:]
     med = float(np.median(areas)) if areas.size else 0.0

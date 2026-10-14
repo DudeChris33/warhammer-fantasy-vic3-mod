@@ -91,7 +91,7 @@
     }
   },
   "naggaroth": {
-    "_comment": "Naggaroth (#8211). A mainland: scope is closed by cuts, a seed and a named island list (2026-10-14, Claude). Placement is by landmarks (fit.mode landmarks), scored leave-one-out: the CR frame's left edge crops the west coast and our canvas top crops the north, so a silhouette fit would fit the crops. The sweep affine over the shared central window (IoU 0.69, scale ~1.55 x 1.9) is the starting point; every landmark is a coast corner present on both coasts within 30 px under it.",
+    "_comment": "Naggaroth (#8211). A mainland: scope is closed by cuts, a seed and a named island list (2026-10-14, Claude). Placement is by landmarks (fit.mode landmarks), scored leave-one-out: the CR frame's left edge crops the west coast and our canvas top crops the north, so a silhouette fit would fit the crops. The sweep affine over the shared central window (IoU 0.69, scale ~1.55 x 1.9) is the starting point; every landmark is a coast corner present on both coasts within 30 px under it. Count (Chris, 2026-10-14): states were too big and the count must not follow ChaosRobie's (Vic3 has about 3x TWW3's), so states over max_state_px are subdivided to about split_target_px (~170 states over ~1.55 Mpx).",
     "box": [
       600,
       0,
@@ -104,9 +104,9 @@
       1400,
       1620
     ],
-    "target": 56,
+    "target": null,
     "min_state_px": 4000,
-    "max_state_px": null,
+    "max_state_px": 13000,
     "snap_px": 16,
     "snap_follow_frac": 0.5,
     "features": [
@@ -381,6 +381,7 @@
         "feature": "west cusp where the land narrows to the Lustria neck",
         "placed_by": "claude"
       }
-    ]
+    ],
+    "split_target_px": 9200
   }
 }
