@@ -1,181 +1,650 @@
 ﻿effect_starting_technology_empire_tech = {
+	# Gunpowder, state armies and universities; Steam Tanks and the Imperial Gunnery School, but little industry outside Nuln and Altdorf.
+	add_era_researched = era_1
+
 	# Production
-	# add_technology_researched = <tech key from common/technology/technologies/>
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = sericulture
+	add_technology_researched = steelworking
+	add_technology_researched = atmospheric_engine
+	add_technology_researched = crystal_glass
+	add_technology_researched = intensive_agriculture
+	add_technology_researched = mechanical_tools
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
+	add_technology_researched = army_reserves
+	add_technology_researched = gunsmithing
+	add_technology_researched = artillery
+	add_technology_researched = napoleonic_warfare
+	add_technology_researched = paddle_steamer
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = banking
+	add_technology_researched = empiricism
+	add_technology_researched = international_relations
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
+	add_technology_researched = medical_degrees
+	add_technology_researched = stock_exchange
 }
 
 effect_starting_technology_brettonia_tech = {
+	# Feudal chivalry that scorns the handgun; wine, silk and a few great universities and ports.
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = sericulture
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = drydocks
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = medical_degrees
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
 }
 
 effect_starting_technology_kislev_tech = {
+	# Frontier realm of the Ice Queen: handgunners and horse archers, little industry.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
+	add_technology_researched = shaft_mining
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = gunsmithing
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
 }
 
 effect_starting_technology_southern_tech = {
+	# Tilea, Estalia and the Border Princes: Tilean gunnery, mercenary pike-and-shot, merchant banks and glassworks.
+	add_era_researched = era_1
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = sericulture
+	add_technology_researched = steelworking
+	add_technology_researched = crystal_glass
+	add_technology_researched = intensive_agriculture
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = standing_army
+	add_technology_researched = gunsmithing
+	add_technology_researched = artillery
+	add_technology_researched = drydocks
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = banking
+	add_technology_researched = international_relations
+	add_technology_researched = colonization
+	add_technology_researched = medical_degrees
+	add_technology_researched = stock_exchange
+	add_technology_researched = urban_planning
 }
 
 effect_starting_technology_cathay_tech = {
+	# Grand Cathay: ancient bureaucracy, silk and tea, gunpowder and rockets, vast granaries.
+	add_era_researched = era_1
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = sericulture
+	add_technology_researched = steelworking
+	add_technology_researched = intensive_agriculture
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
+	add_technology_researched = army_reserves
+	add_technology_researched = gunsmithing
+	add_technology_researched = artillery
+	add_technology_researched = drydocks
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = banking
+	add_technology_researched = empiricism
+	add_technology_researched = international_relations
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
+	add_technology_researched = medical_degrees
+	add_technology_researched = central_archives
 }
 
 effect_starting_technology_nippon_tech = {
+	# Samurai realm of the east: fine steel and disciplined levies, isolated bureaucracy.
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = sericulture
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = gunsmithing
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = rationalism
 }
 
 effect_starting_technology_ind_tech = {
+	# Ind: old trading civilisation with cotton, wootz steel, war elephants and matchlocks.
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = sericulture
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = standing_army
+	add_technology_researched = gunsmithing
+	add_technology_researched = artillery
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = medical_degrees
 }
 
 effect_starting_technology_khuresh_tech = {
+	# Khuresh: steppe and caravan-city realms; riders, bows and modest crafts.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = sericulture
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = gunsmithing
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
 
 	# Society
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
 }
 
 effect_starting_technology_vampire_tech = {
+	# Vampire Counts: static, scholarly necrocracies; no industry beyond the manor.
+
 	# Production
+	add_technology_researched = enclosure
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
 }
 
 effect_starting_technology_tomb_kings_tech = {
+	# Khemri: monumental stonework, embalming and priestly scribes; bronze-age armies that never modernised.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = medical_degrees
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = urban_planning
 }
 
 effect_starting_technology_dwarf_tech = {
+	# Dwarfs: the finest engineers in the world - the Underway, steam and blackpowder, Thunderers and the ironclads of Barak Varr.
+	add_era_researched = era_1
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = steelworking
+	add_technology_researched = atmospheric_engine
+	add_technology_researched = bessemer_process
+	add_technology_researched = canneries
+	add_technology_researched = crystal_glass
+	add_technology_researched = intensive_agriculture
+	add_technology_researched = mechanical_tools
+	add_technology_researched = mechanized_workshops
+	add_technology_researched = nitroglycerin
+	add_technology_researched = railways
+	add_technology_researched = watertube_boiler
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
+	add_technology_researched = army_reserves
+	add_technology_researched = gunsmithing
+	add_technology_researched = artillery
+	add_technology_researched = drydocks
+	add_technology_researched = napoleonic_warfare
+	add_technology_researched = paddle_steamer
+	add_technology_researched = field_works
+	add_technology_researched = hydraulic_cranes
+	add_technology_researched = percussion_cap
+	add_technology_researched = rifling
+	add_technology_researched = screw_frigate
+	add_technology_researched = shell_gun
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = banking
+	add_technology_researched = empiricism
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
+	add_technology_researched = central_archives
 }
 
 effect_starting_technology_dark_dwarf_tech = {
+	# Chaos Dwarfs of Zharr-Naggrund: slave-driven forge-industry, hellish artillery and blackpowder.
+	add_era_researched = era_1
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = steelworking
+	add_technology_researched = atmospheric_engine
+	add_technology_researched = bessemer_process
+	add_technology_researched = canneries
+	add_technology_researched = intensive_agriculture
+	add_technology_researched = mechanical_tools
+	add_technology_researched = mechanized_workshops
+	add_technology_researched = nitroglycerin
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
+	add_technology_researched = army_reserves
+	add_technology_researched = gunsmithing
+	add_technology_researched = artillery
+	add_technology_researched = napoleonic_warfare
+	add_technology_researched = field_works
+	add_technology_researched = logistics
+	add_technology_researched = percussion_cap
+	add_technology_researched = rifling
+	add_technology_researched = shell_gun
+	add_technology_researched = breech_loading_artillery
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = empiricism
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_high_elf_tech = {
+	# High Elves: ancient, wealthy and scholarly; supreme navy and archery, deliberately no gunpowder.
+	add_era_researched = era_1
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = sericulture
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
+	add_technology_researched = crystal_glass
+	add_technology_researched = intensive_agriculture
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
+	add_technology_researched = army_reserves
+	add_technology_researched = drydocks
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_relations
+	add_technology_researched = colonization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = empiricism
+	add_technology_researched = medical_degrees
+	add_technology_researched = urban_planning
 }
 
 effect_starting_technology_dark_elf_tech = {
+	# Dark Elves: slave economy, Black Arks and cruel professional armies; no gunpowder.
+	add_era_researched = era_1
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = steelworking
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = drydocks
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = empiricism
+	add_technology_researched = international_trade
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
+	add_technology_researched = medical_degrees
 }
 
 effect_starting_technology_wood_elf_tech = {
+	# Wood Elves: a hidden woodland people; hand craft, no towns or industry.
+
 	# Production
+	add_technology_researched = sericulture
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = military_drill
 
 	# Society
+	add_technology_researched = rationalism
 }
 
 effect_starting_technology_lizardmen_tech = {
+	# Lizardmen: Slann-built temple cities and astronomy; no metallurgy beyond gold, no gunpowder.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = empiricism
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = urban_planning
 }
 
 effect_starting_technology_goblin_tech = {
+	# Night and forest goblins: mining warrens and rabble warbands.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
+	add_technology_researched = shaft_mining
 
 	# Military
+	add_technology_researched = standing_army
 
 	# Society
 }
 
 effect_starting_technology_orc_tech = {
+	# Orc tribes: Waaagh! warbands with scavenged iron.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
 
 	# Society
 }
 
 effect_starting_technology_skaven_tech = {
+	# Under-Empire: warpstone engineering - jezzails, Ratling guns and Doomwheels - far ahead of the surface world in arms, behind in everything else.
+	add_era_researched = era_1
+
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = steelworking
+	add_technology_researched = atmospheric_engine
+	add_technology_researched = canneries
+	add_technology_researched = intensive_agriculture
+	add_technology_researched = mechanical_tools
+	add_technology_researched = mechanized_workshops
+	add_technology_researched = nitroglycerin
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
+	add_technology_researched = army_reserves
+	add_technology_researched = gunsmithing
+	add_technology_researched = artillery
+	add_technology_researched = percussion_cap
+	add_technology_researched = rifling
+	add_technology_researched = shell_gun
+	add_technology_researched = breech_loading_artillery
+	add_technology_researched = repeaters
+	add_technology_researched = handcranked_machine_gun
 
 	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = academia
+	add_technology_researched = empiricism
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_ogre_tech = {
+	# Ogre Kingdoms: mercenary Maneaters and Leadbelchers; gluttonous, unlettered.
+
 	# Production
+	add_technology_researched = enclosure
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = gunsmithing
 
 	# Society
+	add_technology_researched = urbanization
 }
 
 effect_starting_technology_chaos_tech = {
+	# Warriors of Chaos: daemon-forged arms and armour, no civil learning.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
 
 	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
 
 	# Society
 }
 
 effect_starting_technology_norsca_tech = {
+	# Norsca: raiders and longships, iron-working only.
+
 	# Production
+	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
 
 	# Society
 }
 
 effect_starting_technology_beastmen_tech = {
+	# Beastmen: no settled arts; herds of the forest.
+
 	# Production
 
 	# Military
