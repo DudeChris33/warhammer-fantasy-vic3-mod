@@ -90,14 +90,24 @@ POPS = {
 			create_pop = { culture = wood_elf size = 83795 }
 		}
 	}
+	s:STATE_LAND_660 = {
+		region_state:LYO = {
+			create_pop = { culture = bretonnian size = 8403 }
+		}
+	}
+	s:STATE_LAND_662 = {
+		region_state:MNF = {
+			create_pop = { culture = bretonnian size = 84682 }
+		}
+	}
 	s:STATE_LYONESSE = {
 		region_state:LYO = {
-			create_pop = { culture = bretonnian size = 434800 }
+			create_pop = { culture = bretonnian size = 417622 }
 		}
 	}
 	s:STATE_LYONESSE_HILLS = {
 		region_state:LYO = {
-			create_pop = { culture = bretonnian size = 315200 }
+			create_pop = { culture = bretonnian size = 323975 }
 		}
 	}
 	s:STATE_L_ANGUILLE = {
@@ -118,7 +128,7 @@ POPS = {
 	}
 	s:STATE_MONTFORT = {
 		region_state:MNF = {
-			create_pop = { culture = bretonnian size = 200000 }
+			create_pop = { culture = bretonnian size = 115318 }
 		}
 	}
 	s:STATE_MOUSILLON = {

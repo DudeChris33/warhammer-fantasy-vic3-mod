@@ -756,6 +756,34 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_LAND_662 = {
+		region_state:MNF = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:MNF"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_no_organization" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:MNF"
+						levels = 5
+						region = "STATE_LAND_662"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+		}
+	}
 	s:STATE_LYONESSE = {
 		region_state:LYO = {
 			create_building = {
@@ -797,7 +825,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:LYO"
-						levels = 30
+						levels = 28
 						region = "STATE_LYONESSE"
 					}
 				}
@@ -981,25 +1009,12 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:MNF"
-						levels = 12
+						levels = 7
 						region = "STATE_MONTFORT"
 					}
 				}
 				reserves = 1
 				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:MNF"
-						levels = 1
-						region = "STATE_MONTFORT"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
 			}
 		}
 	}

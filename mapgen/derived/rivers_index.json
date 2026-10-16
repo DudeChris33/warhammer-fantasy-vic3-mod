@@ -347,7 +347,7 @@
       "width": 3,
       "name": "river_0030",
       "state_keys": [
-        "STATE_LAND_625",
+        "STATE_LAURELORN_FOREST",
         "STATE_WEST_NORDLAND"
       ]
     },
@@ -851,8 +851,8 @@
       "width": 3,
       "name": "river_0073",
       "state_keys": [
-        "STATE_BLACK_WATER",
         "STATE_GROM_RIDGE",
+        "STATE_LAND_311",
         "STATE_MOUNT_GUNBAD"
       ]
     },
@@ -999,7 +999,7 @@
         "STATE_CANTABRIO_ROAD",
         "STATE_CEFIRO_HILLS",
         "STATE_ESTALIAN_HIGHLANDS",
-        "STATE_SOUTH_BILBALI"
+        "STATE_MIDDLE_BILBALI_01"
       ]
     },
     {
@@ -1010,7 +1010,7 @@
       "name": "river_0086",
       "state_keys": [
         "STATE_BLACK_MOUNTAINS",
-        "STATE_KREUTZHOFEN",
+        "STATE_GRISTLE_VALLEY_01",
         "STATE_SOLLAND"
       ]
     },
@@ -1069,7 +1069,7 @@
       "name": "river_0091",
       "state_keys": [
         "STATE_EAST_BILBALI",
-        "STATE_SOUTH_BILBALI",
+        "STATE_MIDDLE_BILBALI_01",
         "STATE_WESTERN_IRRANAS"
       ]
     },
@@ -1171,7 +1171,7 @@
       "name": "river_0100",
       "state_keys": [
         "STATE_BLACK_MOUNTAINS",
-        "STATE_KREUTZHOFEN"
+        "STATE_GRISTLE_VALLEY_01"
       ]
     },
     {
@@ -1204,7 +1204,7 @@
       "width": 3,
       "name": "river_0103",
       "state_keys": [
-        "STATE_BLIGHTED_MARSHES",
+        "STATE_BILIOUS_BASILICA_01",
         "STATE_BREGANALLE",
         "STATE_EAST_BILBALI",
         "STATE_WESTERN_IRRANAS"
@@ -1264,7 +1264,7 @@
       "width": 3,
       "name": "river_0108",
       "state_keys": [
-        "STATE_LAND_641"
+        "STATE_DESOLATION_OF_TETHLIS"
       ]
     },
     {
@@ -1345,7 +1345,7 @@
       "width": 3,
       "name": "river_0115",
       "state_keys": [
-        "STATE_LAND_638"
+        "STATE_AVELORN"
       ]
     },
     {
@@ -1366,8 +1366,8 @@
       "width": 3,
       "name": "river_0117",
       "state_keys": [
-        "STATE_LAND_636",
-        "STATE_LAND_638"
+        "STATE_AVELORN",
+        "STATE_LAND_636"
       ]
     },
     {
@@ -1377,9 +1377,9 @@
       "width": 3,
       "name": "river_0118",
       "state_keys": [
-        "STATE_LAND_639",
-        "STATE_LAND_643",
-        "STATE_LAND_644"
+        "STATE_CENTRAL_ELLYRION",
+        "STATE_NORTHERN_ELLYRION",
+        "STATE_UNICORN_GATE"
       ]
     },
     {
@@ -1470,11 +1470,11 @@
       "state_keys": [
         "STATE_CROOKED_MOUNTS",
         "STATE_DRAGON_CRAG",
+        "STATE_FOZZRIK_S_CRATER_01",
         "STATE_KARAG_NAR",
         "STATE_KARAK_EIGHT_PEAKS",
         "STATE_MYRMIDIA_S_COAST",
         "STATE_NORTHERN_BADLANDS",
-        "STATE_THE_BLIGHT",
         "STATE_THE_CAULDRON"
       ]
     },

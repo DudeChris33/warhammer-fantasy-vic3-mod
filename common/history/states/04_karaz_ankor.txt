@@ -17,7 +17,7 @@ STATES = {
 	s:STATE_APUCCINI_MOUNTAINS = {
 		create_state = {
 			country = c:BRN
-			owned_provinces = { x1656DA x36FB77 x5B96F1 x781F61 x90B0F4 xCBA3B0 xD9E7E8 xF9CE6A }
+			owned_provinces = { x1656DA x36FB77 x781F61 x90B0F4 xCBA3B0 xD9E7E8 }
 		}
 
 		add_homeland = cu:goblin
@@ -119,7 +119,7 @@ STATES = {
 	s:STATE_CURSED_WAY = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x045319 x235FD6 x2E1C7D x40C20B x48B96B x4ECA1C x5FCEC8 xA28A92 xBA3D8D xFE0641 }
+			owned_provinces = { x045319 x235FD6 x2E1C7D x48B96B x4928B7 x4ECA1C x5FCEC8 xBA3D8D xFE0641 }
 		}
 	}
 	s:STATE_DARK_MAIDEN_PASS = {
@@ -270,6 +270,20 @@ STATES = {
 
 		add_homeland = cu:lahmian_vampire
 	}
+	s:STATE_LAND_664 = {
+		create_state = {
+			country = c:BRN
+			owned_provinces = { x5B96F1 xF9CE6A }
+		}
+
+		add_homeland = cu:goblin
+	}
+	s:STATE_LAND_666 = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x40C20B xA28A92 }
+		}
+	}
 	s:STATE_MOUNTAINS_OF_DAWN = {
 		create_state = {
 			country = c:UNO
@@ -365,7 +379,7 @@ STATES = {
 		}
 		create_state = {
 			country = c:XSH
-			owned_provinces = { xD23182 xE946DF }
+			owned_provinces = { x1A7307 xD23182 xE946DF }
 		}
 
 		add_homeland = cu:dawi

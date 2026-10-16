@@ -43,7 +43,7 @@ STATES = {
 	s:STATE_DRAKWALD_FOREST = {
 		create_state = {
 			country = c:CRB
-			owned_provinces = { x021499 x035DAA x1A7307 x2100D9 x233184 x3175BC x3B2579 x4E10D4 x652631 x699F02 x7F1C7F x9680AB xA19523 xAFD95B xB81F8A xD2EF9D xD87E5A xDE0415 xEC484D }
+			owned_provinces = { x021499 x035DAA x2100D9 x233184 x3175BC x4E10D4 x652631 x699F02 x7F1C7F x9680AB xA19523 xAFD95B xB81F8A xD2EF9D xD87E5A xDE0415 xEC484D }
 		}
 		create_state = {
 			country = c:XSB
@@ -112,7 +112,7 @@ STATES = {
 	s:STATE_KREUTZHOFEN = {
 		create_state = {
 			country = c:WIS
-			owned_provinces = { x06EA0E x12CA76 x25D64E x2F93E0 x664EC5 x68B295 xA52187 xC8174C }
+			owned_provinces = { x06EA0E x25D64E x2F93E0 x664EC5 x68B295 xA52187 xC8174C }
 		}
 		create_state = {
 			country = c:XSI
@@ -122,7 +122,15 @@ STATES = {
 		add_homeland = cu:wissenlander
 		add_homeland = cu:goblin
 	}
-	s:STATE_LAND_625 = {
+	s:STATE_LAND_667 = {
+		create_state = {
+			country = c:WIS
+			owned_provinces = { x12CA76 }
+		}
+
+		add_homeland = cu:wissenlander
+	}
+	s:STATE_LAURELORN_FOREST = {
 		create_state = {
 			country = c:NLD
 			owned_provinces = { x032F58 x187E83 x48D9E8 x876BB0 xA166D1 xAD3964 }
@@ -133,7 +141,7 @@ STATES = {
 	s:STATE_MARIENBURG = {
 		create_state = {
 			country = c:MAR
-			owned_provinces = { x35B266 x4CC7C3 x51B8E2 x82C960 x84DE61 x8936B5 xAE904A xC1EAF1 xDE52E4 xEAFF3C xFC8EDE }
+			owned_provinces = { x35B266 x4CC7C3 x51B8E2 x82C960 x84DE61 x8936B5 xAE904A xC1EAF1 xDE52E4 xE2B90D xEAFF3C xFC8EDE }
 		}
 
 		add_homeland = cu:marienburger
@@ -265,7 +273,7 @@ STATES = {
 		}
 		create_state = {
 			country = c:XSC
-			owned_provinces = { x9000AE xBC290F }
+			owned_provinces = { x4C6B1F x9000AE xBC290F }
 		}
 
 		add_homeland = cu:talabeclander
@@ -294,7 +302,7 @@ STATES = {
 		}
 		create_state = {
 			country = c:MID
-			owned_provinces = { x1D53F8 x2B9830 x50E3F0 x680722 xA6D9E4 xC9CFA9 xD4A7FA xE0E506 xEF293E }
+			owned_provinces = { x1D53F8 x2B9830 x50E3F0 x680722 xA6D9E4 xC9CFA9 xD4A7FA xEF293E }
 		}
 
 		add_homeland = cu:goblin

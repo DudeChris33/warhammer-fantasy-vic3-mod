@@ -75,7 +75,7 @@ STATES = {
 	s:STATE_DEATHTOLL_HOLD = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x01C5CA x0424C7 x1B3A24 x305FD0 x324F81 x6EBE73 xA7CF53 xB712A0 xD086FA xDEA1B3 xF5E08F }
+			owned_provinces = { x01C5CA x0424C7 x1B3A24 x305FD0 x318391 x324F81 x36F6A4 x3A54B6 x493B5F x6EBE73 x7E4BBC x9E323E xA7CF53 xB712A0 xD086FA xDEA1B3 xF5E08F }
 		}
 	}
 	s:STATE_DEATH_S_SIDE = {
@@ -127,13 +127,7 @@ STATES = {
 	s:STATE_DREAD_ROCK = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x114E40 x14AC52 x19E33E x28639D x3C1FBB x4DBD32 x511B44 x58E925 x617950 x7674D9 x7BABC5 x8A2C24 xB2E3CB xC663C2 xEBF4AB }
-		}
-	}
-	s:STATE_DREAD_ROCK_SHOALS = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { xB53E99 }
+			owned_provinces = { x114E40 x14AC52 x19E33E x28639D x3C1FBB x4DBD32 x511B44 x58E925 x617950 x7674D9 x7BABC5 x8A2C24 xB2E3CB xB53E99 xC663C2 xEBF4AB }
 		}
 	}
 	s:STATE_DREAD_ROCK_SKERRIES = {
@@ -196,16 +190,10 @@ STATES = {
 
 		add_homeland = cu:dawi_zharr
 	}
-	s:STATE_HAUNTED_GROVE = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { x318391 x36F6A4 x3A54B6 x493B5F x7E4BBC x9E323E }
-		}
-	}
 	s:STATE_HEART_OF_ZHARRDUK = {
 		create_state = {
 			country = c:MZN
-			owned_provinces = { x0A0726 x163B30 x212F2B x308E22 x360135 x384488 x5D9E1D x68719B x82F7B2 x9A0D0F xD30B47 xD438AE xD67C01 xE4C039 }
+			owned_provinces = { x0A0726 x212F2B x308E22 x360135 x384488 x5D9E1D x82F7B2 x9A0D0F xD438AE xD67C01 xE4C039 }
 		}
 
 		add_homeland = cu:dawi_zharr
@@ -225,6 +213,22 @@ STATES = {
 		}
 
 		add_homeland = cu:orc
+	}
+	s:STATE_LAND_668 = {
+		create_state = {
+			country = c:MZN
+			owned_provinces = { x163B30 x68719B xD30B47 }
+		}
+
+		add_homeland = cu:dawi_zharr
+	}
+	s:STATE_LAND_669 = {
+		create_state = {
+			country = c:UZK
+			owned_provinces = { x0DB8DA x280BCC x4D6561 x89D453 xEB9CDA }
+		}
+
+		add_homeland = cu:dawi_zharr
 	}
 	s:STATE_MANUFACTORY_DISTRICT = {
 		create_state = {
@@ -265,14 +269,6 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi_zharr
-	}
-	s:STATE_NEW_STRYGOS = {
-		create_state = {
-			country = c:THG
-			owned_provinces = { x0A8447 x59DE94 x6C4CCE x800419 xBEBB31 xF36EEA }
-		}
-
-		add_homeland = cu:ogre
 	}
 	s:STATE_NORTH_DARK_LANDS = {
 		create_state = {
@@ -389,7 +385,7 @@ STATES = {
 	s:STATE_SWAMP_EATER_HOLD = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x178D43 x18D654 x205E68 x25058B x2A789E x43A2FC x44AFE6 x5EE25B x61747D x6A45A2 x7A9EDB x843BF0 x91B438 xB70DCD xD3BB8D xD9D540 xE2E75F xF01EAD xF0EA9D xFD19D4 }
+			owned_provinces = { x178D43 x18D654 x205E68 x25058B x2A789E x43A2FC x5EE25B x61747D x6A45A2 x7A9EDB x843BF0 x91B438 xB70DCD xD3BB8D xD9D540 xE2E75F xF01EAD xF0EA9D xFD19D4 }
 		}
 	}
 	s:STATE_THE_SENTINELS = {
@@ -402,9 +398,15 @@ STATES = {
 	}
 	s:STATE_TOWER_OF_THE_BLOODYTOOTH = {
 		create_state = {
+			country = c:THG
+			owned_provinces = { x0A8447 x59DE94 x6C4CCE x800419 xBEBB31 xF36EEA }
+		}
+		create_state = {
 			country = c:UNO
 			owned_provinces = { x0F7A39 x18C87F x553771 x98705C xBAB1AC xFA38E3 xFBC2EE }
 		}
+
+		add_homeland = cu:ogre
 	}
 	s:STATE_WEST_DARK_LANDS = {
 		create_state = {
@@ -445,7 +447,7 @@ STATES = {
 	s:STATE_ZORN_UZKUL = {
 		create_state = {
 			country = c:UZK
-			owned_provinces = { x0DB8DA x280BCC x3D2CA5 x4D6561 x5BA999 x7D76CA x81032E x89D453 xEB9CDA }
+			owned_provinces = { x3D2CA5 x5BA999 x7D76CA x81032E }
 		}
 
 		add_homeland = cu:dawi_zharr

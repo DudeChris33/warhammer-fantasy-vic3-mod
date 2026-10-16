@@ -121,7 +121,7 @@ canal_bay_of_uzkulak = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = xC51AB1
+	first_land_endpoint = xE0E506
 	second_land_endpoint = xE6F5B7
 
 	first_sea_endpoint = x450C8A
@@ -178,6 +178,32 @@ canal_brionne = {
 
 	first_sea_endpoint = x769556
 	second_sea_endpoint = xF8445F
+}
+
+canal_chill_s = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x550DF2
+	second_land_endpoint = xC51AB1
+
+	first_sea_endpoint = x733744
+	second_sea_endpoint = xA6D511
+}
+
+canal_drackla = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xC51AB1
+	second_land_endpoint = xE85F45
+
+	first_sea_endpoint = x032A85
+	second_sea_endpoint = x817B7C
 }
 
 canal_dragon_isles = {
@@ -256,6 +282,32 @@ canal_echoes_t = {
 
 	first_sea_endpoint = xAD9135
 	second_sea_endpoint = xE12F02
+}
+
+canal_elithis_n = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x233657
+	second_land_endpoint = x8C94C7
+
+	first_sea_endpoint = x9251D6
+	second_sea_endpoint = x9B22FB
+}
+
+canal_elithis_w = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x7E0F95
+	second_land_endpoint = xC0BD8A
+
+	first_sea_endpoint = x9B22FB
+	second_sea_endpoint = xEEA74A
 }
 
 canal_erengrad = {
@@ -388,18 +440,82 @@ canal_lynsk = {
 	second_sea_endpoint = x3F9977
 }
 
+canal_maelstrom_e = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x1C7A33
+	second_land_endpoint = xEAF167
+
+	first_sea_endpoint = x5D6AF8
+	second_sea_endpoint = xE48D14
+}
+
+canal_maelstrom_se = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x1C7A33
+	second_land_endpoint = x5C4737
+
+	first_sea_endpoint = x047396
+	second_sea_endpoint = x5D6AF8
+}
+
+canal_maelstrom_sw = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x6B1665
+	second_land_endpoint = x7E42BA
+
+	first_sea_endpoint = x047396
+	second_sea_endpoint = x4F26C0
+}
+
+canal_maelstrom_w = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x6216EE
+	second_land_endpoint = xEAF167
+
+	first_sea_endpoint = x6BAF30
+	second_sea_endpoint = xE48D14
+}
+
 canal_manaanspoort = {
 	type = natural
 
-	total_block_requires_full_control = yes
-	military_block_requires_full_control = yes
-	tolls_require_full_control = yes
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
 
 	first_land_endpoint = x182FB4
 	second_land_endpoint = xEC971C
 
 	first_sea_endpoint = xC6BB93
 	second_sea_endpoint = xCF8CB8
+}
+
+canal_mangrove = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x84FEDE
+	second_land_endpoint = xC51AB1
+
+	first_sea_endpoint = x30894F
+	second_sea_endpoint = x55E2E4
 }
 
 canal_marienburg = {
@@ -409,23 +525,10 @@ canal_marienburg = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x021499
-	second_land_endpoint = x4CC7C3
+	second_land_endpoint = xE2B90D
 
 	first_sea_endpoint = x84D98E
 	second_sea_endpoint = xCF8CB8
-}
-
-canal_meeting_of_sun_and_stars = {
-	type = natural
-
-	total_block_requires_full_control = no
-	military_block_requires_full_control = no
-
-	first_land_endpoint = x6DE981
-	second_land_endpoint = xC51AB1
-
-	first_sea_endpoint = x2D2B3D
-	second_sea_endpoint = xE27813
 }
 
 canal_middle_talabec = {
@@ -457,9 +560,8 @@ canal_miragliano = {
 canal_myrmidens = {
 	type = natural
 
-	total_block_requires_full_control = yes
-	military_block_requires_full_control = yes
-	tolls_require_full_control = yes
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
 
 	first_land_endpoint = x9A4936
 	second_land_endpoint = xBC0892
@@ -507,6 +609,84 @@ canal_nuln_t = {
 	second_sea_endpoint = xD85DDD
 }
 
+canal_plain_of_spiders = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x6E17D3
+	second_land_endpoint = xC51AB1
+
+	first_sea_endpoint = x0F59BC
+	second_sea_endpoint = xEF733A
+}
+
+canal_rage_s = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x0779D7
+	second_land_endpoint = xC51AB1
+
+	first_sea_endpoint = x42F789
+	second_sea_endpoint = x9108C5
+}
+
+canal_rage_se = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x0779D7
+	second_land_endpoint = xE79355
+
+	first_sea_endpoint = x3D8476
+	second_sea_endpoint = x42F789
+}
+
+canal_rage_sw = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x0779D7
+	second_land_endpoint = x9ACB2A
+
+	first_sea_endpoint = x3D8476
+	second_sea_endpoint = x9108C5
+}
+
+canal_red_desert = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xC51AB1
+	second_land_endpoint = xF9B2C0
+
+	first_sea_endpoint = x032A85
+	second_sea_endpoint = xEF733A
+}
+
+canal_rising_sun = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x9ACB2A
+	second_land_endpoint = xA1874E
+
+	first_sea_endpoint = x40E288
+	second_sea_endpoint = xA2AB0F
+}
+
 canal_sartosa = {
 	type = natural
 
@@ -533,17 +713,30 @@ canal_straits_of_lothern = {
 	second_sea_endpoint = x8B95B2
 }
 
-canal_sun_island_southern_coast = {
+canal_sun_and_stars = {
 	type = natural
 
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x6DE981
-	second_land_endpoint = xACCA18
+	second_land_endpoint = xC51AB1
 
-	first_sea_endpoint = x3ECD87
-	second_sea_endpoint = xAEDA46
+	first_sea_endpoint = x2D2B3D
+	second_sea_endpoint = xE27813
+}
+
+canal_tarantula = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x7C2DB9
+	second_land_endpoint = xC51AB1
+
+	first_sea_endpoint = x699A2F
+	second_sea_endpoint = xD9A6EE
 }
 
 canal_upper_talabec = {

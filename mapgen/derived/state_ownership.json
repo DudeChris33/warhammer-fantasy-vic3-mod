@@ -36,7 +36,16 @@
    "id": 513,
    "naming_anchor": [
     4618,
-    1696
+    1697
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_ANGERRIAL": {
+   "id": 630,
+   "naming_anchor": [
+    2849,
+    1468
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -54,7 +63,7 @@
    "id": 98,
    "naming_anchor": [
     4018,
-    1175
+    1174
    ],
    "owner": "BRN",
    "scope": "drawn"
@@ -62,8 +71,8 @@
   "STATE_AQUILENA": {
    "id": 99,
    "naming_anchor": [
-    4045,
-    1217
+    4048,
+    1208
    ],
    "owners": [
     {
@@ -107,7 +116,7 @@
   "STATE_AQUITAINE": {
    "id": 70,
    "naming_anchor": [
-    3845,
+    3846,
     963
    ],
    "owner": "AQU",
@@ -134,7 +143,7 @@
   "STATE_ASHEN_PLAINS": {
    "id": 265,
    "naming_anchor": [
-    5112,
+    5111,
     1171
    ],
    "owner": "unowned",
@@ -143,8 +152,8 @@
   "STATE_ASH_RIDGE_MOUNTAINS": {
    "id": 256,
    "naming_anchor": [
-    4789,
-    1334
+    4790,
+    1333
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -152,17 +161,26 @@
   "STATE_AULD_RYDING": {
    "id": 313,
    "naming_anchor": [
-    4334,
-    983
+    4333,
+    984
    ],
    "owner": "VSY",
+   "scope": "drawn"
+  },
+  "STATE_AVELORN": {
+   "id": 638,
+   "naming_anchor": [
+    2823,
+    1222
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_AVERHEIM": {
    "id": 317,
    "naming_anchor": [
-    4210,
-    969
+    4211,
+    970
    ],
    "owner": "AVE",
    "scope": "drawn"
@@ -179,8 +197,8 @@
   "STATE_BADLANDS_COAST": {
    "id": 207,
    "naming_anchor": [
-    3968,
-    1567
+    3973,
+    1534
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -188,8 +206,8 @@
   "STATE_BASTONNE": {
    "id": 53,
    "naming_anchor": [
-    3873,
-    897
+    3874,
+    898
    ],
    "owner": "BAS",
    "scope": "drawn"
@@ -197,7 +215,7 @@
   "STATE_BAY_OF_BLADES": {
    "id": 357,
    "naming_anchor": [
-    4152,
+    4151,
     432
    ],
    "owner": "SAR",
@@ -206,8 +224,8 @@
   "STATE_BECHAFEN": {
    "id": 308,
    "naming_anchor": [
-    4373,
-    838
+    4374,
+    837
    ],
    "owner": "OSM",
    "scope": "drawn"
@@ -224,7 +242,7 @@
   "STATE_BJORNLING_S_GATHERING": {
    "id": 476,
    "naming_anchor": [
-    3872,
+    3873,
     416
    ],
    "owner": "BJO",
@@ -269,8 +287,8 @@
   "STATE_BLACK_PENINSULA": {
    "id": 220,
    "naming_anchor": [
-    4100,
-    1220
+    4102,
+    1218
    ],
    "owner": "MON",
    "scope": "drawn"
@@ -287,7 +305,7 @@
   "STATE_BLACK_WATER": {
    "id": 311,
    "naming_anchor": [
-    4413,
+    4414,
     984
    ],
    "owner": "ZHU",
@@ -302,11 +320,20 @@
    "owner": "MZN",
    "scope": "drawn"
   },
+  "STATE_BLIGHTED_ISLE": {
+   "id": 28,
+   "naming_anchor": [
+    2774,
+    977
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_BLIGHTED_MARSHES": {
    "id": 89,
    "naming_anchor": [
-    3843,
-    1121
+    3837,
+    1108
    ],
    "owner": "XSG",
    "scope": "drawn"
@@ -341,8 +368,8 @@
   "STATE_BLOOD_RIVER_VALLEY": {
    "id": 235,
    "naming_anchor": [
-    4378,
-    1193
+    4377,
+    1194
    ],
    "owner": "ICL",
    "scope": "drawn"
@@ -351,7 +378,7 @@
    "id": 331,
    "naming_anchor": [
     4259,
-    688
+    689
    ],
    "owner": "OST",
    "scope": "drawn"
@@ -359,7 +386,7 @@
   "STATE_BORDELEAUX": {
    "id": 72,
    "naming_anchor": [
-    3821,
+    3822,
     918
    ],
    "owner": "BOR",
@@ -378,7 +405,7 @@
    "id": 582,
    "naming_anchor": [
     3840,
-    1051
+    1052
    ],
    "owner": "CAR",
    "scope": "drawn"
@@ -387,7 +414,7 @@
    "id": 553,
    "naming_anchor": [
     4329,
-    416
+    415
    ],
    "owner": "HAS",
    "scope": "drawn"
@@ -395,7 +422,7 @@
   "STATE_BRIONNE": {
    "id": 71,
    "naming_anchor": [
-    3846,
+    3847,
     1004
    ],
    "owner": "BRI",
@@ -405,7 +432,7 @@
    "id": 252,
    "naming_anchor": [
     4647,
-    1487
+    1485
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -413,7 +440,7 @@
   "STATE_BURY_BONE_HILLS": {
    "id": 264,
    "naming_anchor": [
-    5098,
+    5097,
     1222
    ],
    "owner": "unowned",
@@ -432,7 +459,7 @@
    "id": 501,
    "naming_anchor": [
     3974,
-    1063
+    1064
    ],
    "owner": "CAR",
    "scope": "drawn"
@@ -440,8 +467,8 @@
   "STATE_CASTLE_ALEXANDRONOV": {
    "id": 546,
    "naming_anchor": [
-    4265,
-    600
+    4266,
+    599
    ],
    "owner": "UNG",
    "scope": "drawn"
@@ -449,8 +476,8 @@
   "STATE_CASTLE_MOUSILLON": {
    "id": 492,
    "naming_anchor": [
-    3819,
-    867
+    3820,
+    866
    ],
    "owner": "MOU",
    "scope": "drawn"
@@ -459,7 +486,7 @@
    "id": 482,
    "naming_anchor": [
     3911,
-    868
+    869
    ],
    "owner": "BAS",
    "scope": "drawn"
@@ -476,8 +503,8 @@
   "STATE_CEFIRO_HILLS": {
    "id": 77,
    "naming_anchor": [
-    3594,
-    1016
+    3595,
+    1017
    ],
    "owner": "CNT",
    "scope": "drawn"
@@ -491,11 +518,20 @@
    "owner": "unowned",
    "scope": "drawn"
   },
+  "STATE_CENTRAL_ELLYRION": {
+   "id": 644,
+   "naming_anchor": [
+    2667,
+    1276
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_CENTRAL_MAGRITTA": {
    "id": 82,
    "naming_anchor": [
-    3681,
-    1120
+    3682,
+    1121
    ],
    "owner": "MAG",
    "scope": "drawn"
@@ -503,7 +539,7 @@
   "STATE_CHAMON_DHAREK": {
    "id": 545,
    "naming_anchor": [
-    4232,
+    4233,
     522
    ],
    "owner": "UNG",
@@ -518,11 +554,20 @@
    "owner": "CAR",
    "scope": "drawn"
   },
+  "STATE_CHRACE": {
+   "id": 635,
+   "naming_anchor": [
+    2843,
+    1103
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_CITY_OF_KINGS": {
    "id": 570,
    "naming_anchor": [
-    4058,
-    1683
+    4057,
+    1682
    ],
    "owner": "KHM",
    "scope": "drawn"
@@ -531,7 +576,7 @@
    "id": 39,
    "naming_anchor": [
     3991,
-    475
+    476
    ],
    "owner": "SNA",
    "scope": "drawn"
@@ -545,11 +590,20 @@
    "owner": "unowned",
    "scope": "drawn"
   },
+  "STATE_CLOTHIQUE": {
+   "id": 138,
+   "naming_anchor": [
+    2915,
+    1138
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_COURONNE": {
    "id": 50,
    "naming_anchor": [
-    3850,
-    718
+    3851,
+    720
    ],
    "owner": "COU",
    "scope": "drawn"
@@ -557,8 +611,8 @@
   "STATE_CRIPPLE_PEAK": {
    "id": 196,
    "naming_anchor": [
-    4581,
-    1453
+    4582,
+    1452
    ],
    "owner": "XSL",
    "scope": "drawn"
@@ -566,8 +620,8 @@
   "STATE_CROOKED_CORRIDOR": {
    "id": 55,
    "naming_anchor": [
-    3952,
-    844
+    3951,
+    843
    ],
    "owner": "KZF",
    "scope": "drawn"
@@ -584,7 +638,7 @@
   "STATE_CURSED_WAY": {
    "id": 573,
    "naming_anchor": [
-    4604,
+    4602,
     1561
    ],
    "owner": "unowned",
@@ -593,7 +647,7 @@
   "STATE_DAEMON_S_RUIN": {
    "id": 272,
    "naming_anchor": [
-    5068,
+    5067,
     1104
    ],
    "owner": "unowned",
@@ -611,8 +665,8 @@
   "STATE_DEATHTOLL_HOLD": {
    "id": 611,
    "naming_anchor": [
-    5079,
-    1418
+    5078,
+    1417
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -648,7 +702,16 @@
    "id": 199,
    "naming_anchor": [
     4519,
-    1398
+    1397
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_DESOLATION_OF_TETHLIS": {
+   "id": 641,
+   "naming_anchor": [
+    2748,
+    1099
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -656,8 +719,8 @@
   "STATE_DIRETOWN": {
    "id": 267,
    "naming_anchor": [
-    5045,
-    1278
+    5044,
+    1277
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -665,7 +728,7 @@
   "STATE_DRAGONBACK_MOUNTAINS": {
    "id": 210,
    "naming_anchor": [
-    4127,
+    4128,
     1316
    ],
    "owner": "unowned",
@@ -674,8 +737,8 @@
   "STATE_DRAGONS_BREATH": {
    "id": 258,
    "naming_anchor": [
-    4893,
-    1395
+    4895,
+    1397
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -683,8 +746,8 @@
   "STATE_DRAGONS_LANDING": {
    "id": 255,
    "naming_anchor": [
-    4782,
-    1494
+    4783,
+    1493
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -711,7 +774,7 @@
    "id": 537,
    "naming_anchor": [
     4353,
-    944
+    945
    ],
    "owner": "VSY",
    "scope": "drawn"
@@ -734,11 +797,20 @@
    "owner": "unowned",
    "scope": "drawn"
   },
+  "STATE_DRAKE_ISLES": {
+   "id": 438,
+   "naming_anchor": [
+    3015,
+    1517
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_DRAKWALD_FOREST": {
    "id": 58,
    "naming_anchor": [
     4037,
-    813
+    810
    ],
    "owners": [
     {
@@ -746,11 +818,9 @@
      "provinces": [
       "x021499",
       "x035DAA",
-      "x1A7307",
       "x2100D9",
       "x233184",
       "x3175BC",
-      "x3B2579",
       "x4E10D4",
       "x652631",
       "x699F02",
@@ -784,15 +854,6 @@
    "owner": "unowned",
    "scope": "drawn"
   },
-  "STATE_DREAD_ROCK_SHOALS": {
-   "id": 263,
-   "naming_anchor": [
-    5103,
-    1512
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_DREAD_ROCK_SKERRIES": {
    "id": 180,
    "naming_anchor": [
@@ -806,9 +867,18 @@
    "id": 547,
    "naming_anchor": [
     4416,
-    592
+    591
    ],
    "owner": "BOL",
+   "scope": "drawn"
+  },
+  "STATE_EAGLE_GATE": {
+   "id": 647,
+   "naming_anchor": [
+    2607,
+    1344
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_EAGLE_S_PEAK": {
@@ -850,8 +920,8 @@
   "STATE_EASTERN_OBLAST": {
    "id": 548,
    "naming_anchor": [
-    4472,
-    624
+    4473,
+    623
    ],
    "owner": "PRA",
    "scope": "drawn"
@@ -878,7 +948,7 @@
    "id": 88,
    "naming_anchor": [
     3776,
-    1040
+    1041
    ],
    "owner": "BIL",
    "scope": "drawn"
@@ -914,7 +984,7 @@
    "id": 335,
    "naming_anchor": [
     4138,
-    676
+    677
    ],
    "owner": "NLD",
    "scope": "drawn"
@@ -932,7 +1002,7 @@
    "id": 538,
    "naming_anchor": [
     4385,
-    914
+    915
    ],
    "owner": "VSY",
    "scope": "drawn"
@@ -949,8 +1019,8 @@
   "STATE_ELDAGRIMM_GULF": {
    "id": 44,
    "naming_anchor": [
-    3909,
-    540
+    3910,
+    538
    ],
    "owner": "BAE",
    "scope": "drawn"
@@ -959,7 +1029,7 @@
    "id": 330,
    "naming_anchor": [
     4332,
-    647
+    646
    ],
    "owner": "ERE",
    "scope": "drawn"
@@ -976,8 +1046,17 @@
   "STATE_FALLOW_FIELDS": {
    "id": 609,
    "naming_anchor": [
-    4262,
+    4263,
     1664
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_FALLOW_MARSH": {
+   "id": 648,
+   "naming_anchor": [
+    2573,
+    1357
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -986,15 +1065,24 @@
    "id": 279,
    "naming_anchor": [
     4887,
-    780
+    781
    ],
    "owner": "MZN",
+   "scope": "drawn"
+  },
+  "STATE_FINUVAL_PLAIN": {
+   "id": 637,
+   "naming_anchor": [
+    2916,
+    1257
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_FIVE_RIVERS": {
    "id": 273,
    "naming_anchor": [
-    5020,
+    5019,
     984
    ],
    "owner": "MAW",
@@ -1003,8 +1091,8 @@
   "STATE_FJORD_COAST": {
    "id": 36,
    "naming_anchor": [
-    4038,
-    302
+    4040,
+    304
    ],
    "owner": "GRA",
    "scope": "drawn"
@@ -1012,7 +1100,7 @@
   "STATE_FLESHWARREN": {
    "id": 347,
    "naming_anchor": [
-    4483,
+    4482,
     514
    ],
    "owner": "XSD",
@@ -1058,9 +1146,18 @@
    "id": 348,
    "naming_anchor": [
     4528,
-    469
+    470
    ],
    "owner": "URS",
+   "scope": "drawn"
+  },
+  "STATE_GAEAN_VALE": {
+   "id": 137,
+   "naming_anchor": [
+    2782,
+    1308
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_GASTONNE": {
@@ -1102,7 +1199,7 @@
   "STATE_GIANT_STOMPING_GROUNDS": {
    "id": 564,
    "naming_anchor": [
-    4026,
+    4027,
     1394
    ],
    "owner": "unowned",
@@ -1112,7 +1209,7 @@
    "id": 52,
    "naming_anchor": [
     3869,
-    824
+    823
    ],
    "owner": "GIS",
    "scope": "drawn"
@@ -1120,8 +1217,8 @@
   "STATE_GLADE_OF_ETERNAL_MIDNIGHT": {
    "id": 502,
    "naming_anchor": [
-    4021,
-    1052
+    4024,
+    1053
    ],
    "owner": "TRG",
    "scope": "drawn"
@@ -1138,7 +1235,7 @@
   "STATE_GLOOMWRACK_COAST": {
    "id": 42,
    "naming_anchor": [
-    3874,
+    3876,
     488
    ],
    "owner": "BJO",
@@ -1147,7 +1244,7 @@
   "STATE_GNOBLAR_HILLS": {
    "id": 257,
    "naming_anchor": [
-    4974,
+    4973,
     1363
    ],
    "owner": "unowned",
@@ -1174,7 +1271,7 @@
   "STATE_GOROMADNY_HOLD": {
    "id": 346,
    "naming_anchor": [
-    4555,
+    4556,
     526
    ],
    "owner": "VOL",
@@ -1184,7 +1281,7 @@
    "id": 68,
    "naming_anchor": [
     3915,
-    995
+    994
    ],
    "owner": "QUE",
    "scope": "drawn"
@@ -1216,6 +1313,15 @@
    "owner": "PAR",
    "scope": "drawn"
   },
+  "STATE_GRIFFON_GATE": {
+   "id": 645,
+   "naming_anchor": [
+    2630,
+    1261
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_GROM_RIDGE": {
    "id": 302,
    "naming_anchor": [
@@ -1228,7 +1334,7 @@
   "STATE_GRYPHON_WOOD": {
    "id": 328,
    "naming_anchor": [
-    4325,
+    4326,
     804
    ],
    "owner": "GRW",
@@ -1243,20 +1349,11 @@
    "owner": "TLS",
    "scope": "drawn"
   },
-  "STATE_HAUNTED_GROVE": {
-   "id": 612,
-   "naming_anchor": [
-    5045,
-    1406
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_HEART_OF_ZHARRDUK": {
    "id": 278,
    "naming_anchor": [
-    4904,
-    828
+    4914,
+    823
    ],
    "owner": "MZN",
    "scope": "drawn"
@@ -1273,8 +1370,8 @@
   "STATE_HELL_PIT_DEPTHS": {
    "id": 377,
    "naming_anchor": [
-    4499,
-    529
+    4502,
+    517
    ],
    "owner": "XSD",
    "scope": "drawn"
@@ -1292,7 +1389,7 @@
    "id": 473,
    "naming_anchor": [
     3926,
-    344
+    345
    ],
    "owner": "SOR",
    "scope": "drawn"
@@ -1327,8 +1424,8 @@
   "STATE_HORN_OF_ARABY": {
    "id": 172,
    "naming_anchor": [
-    4192,
-    2128
+    4193,
+    2127
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1345,7 +1442,7 @@
   "STATE_HOWLING_DISTRICT": {
    "id": 275,
    "naming_anchor": [
-    4966,
+    4965,
     899
    ],
    "owner": "MZN",
@@ -1354,17 +1451,26 @@
   "STATE_HOWLING_RIVER_VALLEY": {
    "id": 234,
    "naming_anchor": [
-    4345,
-    1141
+    4346,
+    1142
    ],
    "owner": "RAA",
+   "scope": "drawn"
+  },
+  "STATE_INNER_SEA_CHAIN": {
+   "id": 130,
+   "naming_anchor": [
+    2781,
+    1384
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_IRINASGRAD": {
    "id": 536,
    "naming_anchor": [
-    4379,
-    770
+    4381,
+    769
    ],
    "owner": "KSV",
    "scope": "drawn"
@@ -1385,6 +1491,24 @@
     1316
    ],
    "owner": "AZL",
+   "scope": "drawn"
+  },
+  "STATE_ISLES_OF_DUSK": {
+   "id": 149,
+   "naming_anchor": [
+    3089,
+    3036
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_ISLE_OF_DAWN": {
+   "id": 170,
+   "naming_anchor": [
+    4374,
+    3116
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_IVORY_ROAD": {
@@ -1436,7 +1560,7 @@
    "id": 575,
    "naming_anchor": [
     4184,
-    1146
+    1145
    ],
    "owner": "BPR",
    "scope": "drawn"
@@ -1471,8 +1595,8 @@
   "STATE_KRAKA_DRAK": {
    "id": 552,
    "naming_anchor": [
-    4472,
-    403
+    4473,
+    401
    ],
    "owner": "KRD",
    "scope": "drawn"
@@ -1480,8 +1604,8 @@
   "STATE_KRAKEN_COAST": {
    "id": 350,
    "naming_anchor": [
-    4387,
-    297
+    4386,
+    299
    ],
    "owner": "AES",
    "scope": "drawn"
@@ -1489,7 +1613,7 @@
   "STATE_KREUTZHOFEN": {
    "id": 579,
    "naming_anchor": [
-    4146,
+    4144,
     1041
    ],
    "owners": [
@@ -1497,7 +1621,6 @@
      "owner": "WIS",
      "provinces": [
       "x06EA0E",
-      "x12CA76",
       "x25D64E",
       "x2F93E0",
       "x664EC5",
@@ -1519,8 +1642,8 @@
   "STATE_LAHMIA": {
    "id": 604,
    "naming_anchor": [
-    4691,
-    1606
+    4690,
+    1607
    ],
    "owner": "LAH",
    "scope": "drawn"
@@ -1537,26 +1660,8 @@
   "STATE_LAND_002": {
    "id": 2,
    "naming_anchor": [
-    932,
-    475
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_003": {
-   "id": 3,
-   "naming_anchor": [
-    894,
-    640
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_004": {
-   "id": 4,
-   "naming_anchor": [
-    882,
-    712
+    933,
+    474
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1582,7 +1687,7 @@
   "STATE_LAND_008": {
    "id": 8,
    "naming_anchor": [
-    1223,
+    1224,
     1514
    ],
    "owner": "placeholder",
@@ -1591,7 +1696,7 @@
   "STATE_LAND_009": {
    "id": 9,
    "naming_anchor": [
-    1116,
+    1117,
     1334
    ],
    "owner": "placeholder",
@@ -1600,8 +1705,8 @@
   "STATE_LAND_010": {
    "id": 10,
    "naming_anchor": [
-    1146,
-    1607
+    1145,
+    1606
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1624,29 +1729,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_014": {
-   "id": 14,
-   "naming_anchor": [
-    2022,
-    228
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_015": {
    "id": 15,
    "naming_anchor": [
-    2178,
-    196
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_016": {
-   "id": 16,
-   "naming_anchor": [
-    2311,
-    106
+    2179,
+    195
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1654,8 +1741,8 @@
   "STATE_LAND_017": {
    "id": 17,
    "naming_anchor": [
-    2421,
-    3
+    2385,
+    7
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1664,16 +1751,7 @@
    "id": 18,
    "naming_anchor": [
     2407,
-    169
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_019": {
-   "id": 19,
-   "naming_anchor": [
-    2359,
-    129
+    170
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1696,29 +1774,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_022": {
-   "id": 22,
-   "naming_anchor": [
-    2219,
-    369
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_023": {
-   "id": 23,
-   "naming_anchor": [
-    2119,
-    311
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_024": {
    "id": 24,
    "naming_anchor": [
-    2382,
-    770
+    2381,
+    771
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1735,8 +1795,8 @@
   "STATE_LAND_026": {
    "id": 26,
    "naming_anchor": [
-    2310,
-    577
+    2309,
+    576
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1744,26 +1804,17 @@
   "STATE_LAND_027": {
    "id": 27,
    "naming_anchor": [
-    2478,
+    2477,
     588
    ],
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_028": {
-   "id": 28,
-   "naming_anchor": [
-    2738,
-    965
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_030": {
    "id": 30,
    "naming_anchor": [
     2915,
-    17
+    16
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1772,7 +1823,7 @@
    "id": 31,
    "naming_anchor": [
     3283,
-    57
+    56
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1790,7 +1841,7 @@
    "id": 33,
    "naming_anchor": [
     3781,
-    13
+    12
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1798,8 +1849,8 @@
   "STATE_LAND_034": {
    "id": 34,
    "naming_anchor": [
-    3987,
-    29
+    3986,
+    28
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1840,65 +1891,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_130": {
-   "id": 130,
-   "naming_anchor": [
-    2850,
-    1323
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_131": {
-   "id": 131,
-   "naming_anchor": [
-    3032,
-    1331
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_135": {
-   "id": 135,
-   "naming_anchor": [
-    3011,
-    1120
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_136": {
-   "id": 136,
-   "naming_anchor": [
-    2665,
-    1342
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_137": {
-   "id": 137,
-   "naming_anchor": [
-    2782,
-    1308
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_138": {
-   "id": 138,
-   "naming_anchor": [
-    2798,
-    1273
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_144": {
    "id": 144,
    "naming_anchor": [
     2071,
-    1177
+    1176
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1906,8 +1903,8 @@
   "STATE_LAND_145": {
    "id": 145,
    "naming_anchor": [
-    2430,
-    1948
+    2431,
+    1949
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1915,7 +1912,7 @@
   "STATE_LAND_146": {
    "id": 146,
    "naming_anchor": [
-    2329,
+    2330,
     2031
    ],
    "owner": "placeholder",
@@ -1939,15 +1936,6 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_149": {
-   "id": 149,
-   "naming_anchor": [
-    3057,
-    3057
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_150": {
    "id": 150,
    "naming_anchor": [
@@ -1961,7 +1949,7 @@
    "id": 151,
    "naming_anchor": [
     2781,
-    2404
+    2405
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1969,8 +1957,8 @@
   "STATE_LAND_152": {
    "id": 152,
    "naming_anchor": [
-    3688,
-    2570
+    3698,
+    2582
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2029,29 +2017,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_161": {
-   "id": 161,
-   "naming_anchor": [
-    7815,
-    2297
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_162": {
    "id": 162,
    "naming_anchor": [
-    7226,
-    2259
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_163": {
-   "id": 163,
-   "naming_anchor": [
-    7232,
-    2358
+    7225,
+    2258
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2068,8 +2038,8 @@
   "STATE_LAND_165": {
    "id": 165,
    "naming_anchor": [
-    6986,
-    2748
+    6991,
+    2673
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -2083,19 +2053,10 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_167": {
-   "id": 167,
-   "naming_anchor": [
-    7095,
-    2369
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_168": {
    "id": 168,
    "naming_anchor": [
-    6163,
+    6164,
     2236
    ],
    "owner": "placeholder",
@@ -2104,20 +2065,11 @@
   "STATE_LAND_169": {
    "id": 169,
    "naming_anchor": [
-    6598,
-    3359
+    6600,
+    3367
    ],
    "owner": "placeholder",
    "scope": "placeholder"
-  },
-  "STATE_LAND_170": {
-   "id": 170,
-   "naming_anchor": [
-    4374,
-    3116
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
   },
   "STATE_LAND_171": {
    "id": 171,
@@ -2155,15 +2107,6 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_176": {
-   "id": 176,
-   "naming_anchor": [
-    5160,
-    2330
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_179": {
    "id": 179,
    "naming_anchor": [
@@ -2177,7 +2120,7 @@
    "id": 182,
    "naming_anchor": [
     5147,
-    1599
+    1610
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2186,7 +2129,7 @@
    "id": 362,
    "naming_anchor": [
     4321,
-    7
+    6
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2203,7 +2146,7 @@
   "STATE_LAND_366": {
    "id": 366,
    "naming_anchor": [
-    7472,
+    7471,
     1150
    ],
    "owner": "placeholder",
@@ -2236,20 +2179,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_384": {
-   "id": 384,
-   "naming_anchor": [
-    7954,
-    2155
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_385": {
    "id": 385,
    "naming_anchor": [
     7909,
-    2254
+    2255
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2257,44 +2191,8 @@
   "STATE_LAND_386": {
    "id": 386,
    "naming_anchor": [
-    899,
-    351
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_387": {
-   "id": 387,
-   "naming_anchor": [
-    984,
-    390
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_388": {
-   "id": 388,
-   "naming_anchor": [
-    825,
-    793
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_389": {
-   "id": 389,
-   "naming_anchor": [
-    954,
-    811
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_390": {
-   "id": 390,
-   "naming_anchor": [
-    995,
-    866
+    900,
+    352
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2302,8 +2200,8 @@
   "STATE_LAND_391": {
    "id": 391,
    "naming_anchor": [
-    945,
-    925
+    946,
+    926
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2311,8 +2209,8 @@
   "STATE_LAND_392": {
    "id": 392,
    "naming_anchor": [
-    1020,
-    953
+    1019,
+    954
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2322,15 +2220,6 @@
    "naming_anchor": [
     985,
     969
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_394": {
-   "id": 394,
-   "naming_anchor": [
-    926,
-    1011
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2347,8 +2236,8 @@
   "STATE_LAND_396": {
    "id": 396,
    "naming_anchor": [
-    998,
-    1378
+    999,
+    1377
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2356,26 +2245,8 @@
   "STATE_LAND_397": {
    "id": 397,
    "naming_anchor": [
-    965,
-    1300
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_398": {
-   "id": 398,
-   "naming_anchor": [
-    893,
-    1070
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_399": {
-   "id": 399,
-   "naming_anchor": [
-    831,
-    1200
+    968,
+    1298
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2385,24 +2256,6 @@
    "naming_anchor": [
     906,
     1161
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_401": {
-   "id": 401,
-   "naming_anchor": [
-    975,
-    1235
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_402": {
-   "id": 402,
-   "naming_anchor": [
-    1023,
-    1229
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2429,7 +2282,7 @@
    "id": 405,
    "naming_anchor": [
     958,
-    1064
+    1063
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2446,8 +2299,8 @@
   "STATE_LAND_407": {
    "id": 407,
    "naming_anchor": [
-    1073,
-    1137
+    1074,
+    1138
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2455,8 +2308,8 @@
   "STATE_LAND_408": {
    "id": 408,
    "naming_anchor": [
-    1056,
-    1098
+    1055,
+    1097
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2464,8 +2317,8 @@
   "STATE_LAND_409": {
    "id": 409,
    "naming_anchor": [
-    1093,
-    1197
+    1092,
+    1198
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2483,7 +2336,7 @@
    "id": 411,
    "naming_anchor": [
     1108,
-    1420
+    1421
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2491,7 +2344,7 @@
   "STATE_LAND_412": {
    "id": 412,
    "naming_anchor": [
-    1139,
+    1138,
     1496
    ],
    "owner": "placeholder",
@@ -2500,17 +2353,8 @@
   "STATE_LAND_413": {
    "id": 413,
    "naming_anchor": [
-    1050,
-    1508
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_414": {
-   "id": 414,
-   "naming_anchor": [
-    1078,
-    1633
+    1052,
+    1507
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2518,7 +2362,7 @@
   "STATE_LAND_415": {
    "id": 415,
    "naming_anchor": [
-    1120,
+    1121,
     1553
    ],
    "owner": "placeholder",
@@ -2527,44 +2371,8 @@
   "STATE_LAND_416": {
    "id": 416,
    "naming_anchor": [
-    1200,
-    1666
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_417": {
-   "id": 417,
-   "naming_anchor": [
-    1468,
-    1733
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_418": {
-   "id": 418,
-   "naming_anchor": [
-    1305,
-    1702
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_419": {
-   "id": 419,
-   "naming_anchor": [
-    1394,
-    1708
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_420": {
-   "id": 420,
-   "naming_anchor": [
-    1640,
-    1996
+    1199,
+    1667
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2572,26 +2380,8 @@
   "STATE_LAND_421": {
    "id": 421,
    "naming_anchor": [
-    1660,
-    1924
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_422": {
-   "id": 422,
-   "naming_anchor": [
-    1696,
-    1995
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_423": {
-   "id": 423,
-   "naming_anchor": [
-    1778,
-    1851
+    1661,
+    1925
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2599,8 +2389,8 @@
   "STATE_LAND_424": {
    "id": 424,
    "naming_anchor": [
-    1098,
-    1010
+    1097,
+    1011
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2608,7 +2398,7 @@
   "STATE_LAND_425": {
    "id": 425,
    "naming_anchor": [
-    1032,
+    1033,
     1021
    ],
    "owner": "placeholder",
@@ -2618,7 +2408,7 @@
    "id": 426,
    "naming_anchor": [
     1071,
-    955
+    954
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2626,17 +2416,8 @@
   "STATE_LAND_427": {
    "id": 427,
    "naming_anchor": [
-    1073,
+    1072,
     893
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_428": {
-   "id": 428,
-   "naming_anchor": [
-    2346,
-    315
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2645,7 +2426,7 @@
    "id": 429,
    "naming_anchor": [
     2522,
-    483
+    484
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2655,69 +2436,6 @@
    "naming_anchor": [
     2434,
     469
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_431": {
-   "id": 431,
-   "naming_anchor": [
-    2423,
-    716
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_432": {
-   "id": 432,
-   "naming_anchor": [
-    2437,
-    570
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_433": {
-   "id": 433,
-   "naming_anchor": [
-    2507,
-    596
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_438": {
-   "id": 438,
-   "naming_anchor": [
-    3084,
-    1430
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_440": {
-   "id": 440,
-   "naming_anchor": [
-    3268,
-    1608
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_441": {
-   "id": 441,
-   "naming_anchor": [
-    3263,
-    1643
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_442": {
-   "id": 442,
-   "naming_anchor": [
-    3235,
-    1658
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2740,83 +2458,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_455": {
-   "id": 455,
-   "naming_anchor": [
-    2179,
-    2968
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_456": {
-   "id": 456,
-   "naming_anchor": [
-    2214,
-    2949
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_457": {
-   "id": 457,
-   "naming_anchor": [
-    2302,
-    3021
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_458": {
    "id": 458,
    "naming_anchor": [
-    2613,
+    2614,
     2076
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_459": {
-   "id": 459,
-   "naming_anchor": [
-    1685,
-    2691
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_460": {
-   "id": 460,
-   "naming_anchor": [
-    1908,
-    2762
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_461": {
-   "id": 461,
-   "naming_anchor": [
-    1913,
-    2722
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_462": {
-   "id": 462,
-   "naming_anchor": [
-    1872,
-    2738
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_463": {
-   "id": 463,
-   "naming_anchor": [
-    1954,
-    2768
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2830,38 +2476,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_465": {
-   "id": 465,
-   "naming_anchor": [
-    1663,
-    2500
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_466": {
-   "id": 466,
-   "naming_anchor": [
-    5231,
-    2289
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_468": {
    "id": 468,
    "naming_anchor": [
     5271,
     2510
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_469": {
-   "id": 469,
-   "naming_anchor": [
-    5252,
-    2333
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -2884,223 +2503,190 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_625": {
-   "id": 625,
-   "naming_anchor": null,
-   "owner": "NLD",
-   "scope": "drawn"
-  },
-  "STATE_LAND_626": {
-   "id": 626,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_627": {
-   "id": 627,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_628": {
    "id": 628,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_629": {
-   "id": 629,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_630": {
-   "id": 630,
-   "naming_anchor": null,
+   "naming_anchor": [
+    2897,
+    1510
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LAND_631": {
    "id": 631,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_632": {
-   "id": 632,
-   "naming_anchor": null,
+   "naming_anchor": [
+    2903,
+    1439
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LAND_633": {
    "id": 633,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_634": {
-   "id": 634,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_635": {
-   "id": 635,
-   "naming_anchor": null,
+   "naming_anchor": [
+    2944,
+    1354
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LAND_636": {
    "id": 636,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_637": {
-   "id": 637,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_638": {
-   "id": 638,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_639": {
-   "id": 639,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_640": {
-   "id": 640,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_641": {
-   "id": 641,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_642": {
-   "id": 642,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_643": {
-   "id": 643,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_644": {
-   "id": 644,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_645": {
-   "id": 645,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_646": {
-   "id": 646,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_647": {
-   "id": 647,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_648": {
-   "id": 648,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_649": {
-   "id": 649,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_650": {
-   "id": 650,
-   "naming_anchor": null,
+   "naming_anchor": [
+    2869,
+    1172
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LAND_651": {
    "id": 651,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_652": {
-   "id": 652,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_653": {
-   "id": 653,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_654": {
-   "id": 654,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_655": {
-   "id": 655,
-   "naming_anchor": null,
+   "naming_anchor": [
+    2702,
+    1496
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LAND_657": {
    "id": 657,
-   "naming_anchor": null,
+   "naming_anchor": [
+    6962,
+    2861
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LAND_658": {
    "id": 658,
-   "naming_anchor": null,
+   "naming_anchor": [
+    6922,
+    2756
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LAND_659": {
    "id": 659,
+   "naming_anchor": [
+    7033,
+    2780
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_LAND_660": {
+   "id": 660,
+   "naming_anchor": null,
+   "owner": "LYO",
+   "scope": "drawn"
+  },
+  "STATE_LAND_661": {
+   "id": 661,
+   "naming_anchor": null,
+   "owner": "BAE",
+   "scope": "drawn"
+  },
+  "STATE_LAND_662": {
+   "id": 662,
+   "naming_anchor": null,
+   "owner": "MNF",
+   "scope": "drawn"
+  },
+  "STATE_LAND_663": {
+   "id": 663,
+   "naming_anchor": null,
+   "owner": "BIL",
+   "scope": "drawn"
+  },
+  "STATE_LAND_664": {
+   "id": 664,
+   "naming_anchor": null,
+   "owner": "BRN",
+   "scope": "drawn"
+  },
+  "STATE_LAND_665": {
+   "id": 665,
    "naming_anchor": null,
    "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_LAND_666": {
+   "id": 666,
+   "naming_anchor": null,
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_LAND_667": {
+   "id": 667,
+   "naming_anchor": null,
+   "owner": "WIS",
+   "scope": "drawn"
+  },
+  "STATE_LAND_668": {
+   "id": 668,
+   "naming_anchor": null,
+   "owner": "MZN",
+   "scope": "drawn"
+  },
+  "STATE_LAND_669": {
+   "id": 669,
+   "naming_anchor": null,
+   "owner": "UZK",
+   "scope": "drawn"
+  },
+  "STATE_LAND_670": {
+   "id": 670,
+   "naming_anchor": null,
+   "owner": "KRD",
+   "scope": "drawn"
+  },
+  "STATE_LAND_671": {
+   "id": 671,
+   "naming_anchor": null,
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_LAURELORN_FOREST": {
+   "id": 625,
+   "naming_anchor": [
+    4063,
+    661
+   ],
+   "owner": "NLD",
    "scope": "drawn"
   },
   "STATE_LOST_KHYPNIA": {
    "id": 221,
    "naming_anchor": [
     4231,
-    1137
+    1136
    ],
    "owner": "UVE",
+   "scope": "drawn"
+  },
+  "STATE_LOTHERN_EAST": {
+   "id": 629,
+   "naming_anchor": [
+    2843,
+    1531
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_LOTHERN_WEST": {
+   "id": 650,
+   "naming_anchor": [
+    2768,
+    1536
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_LYONESSE": {
    "id": 75,
    "naming_anchor": [
-    3737,
+    3739,
     795
    ],
    "owner": "LYO",
@@ -3110,7 +2696,7 @@
    "id": 477,
    "naming_anchor": [
     3735,
-    747
+    748
    ],
    "owner": "LYO",
    "scope": "drawn"
@@ -3119,7 +2705,7 @@
    "id": 43,
    "naming_anchor": [
     3801,
-    752
+    751
    ],
    "owner": "LAN",
    "scope": "drawn"
@@ -3137,7 +2723,7 @@
    "id": 49,
    "naming_anchor": [
     3926,
-    738
+    739
    ],
    "owner": "COU",
    "scope": "drawn"
@@ -3146,7 +2732,7 @@
    "id": 567,
    "naming_anchor": [
     4004,
-    1565
+    1566
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -3154,7 +2740,7 @@
   "STATE_MARIENBURG": {
    "id": 589,
    "naming_anchor": [
-    3963,
+    3964,
     785
    ],
    "owner": "MAR",
@@ -3190,8 +2776,8 @@
   "STATE_MAZHOROD": {
    "id": 340,
    "naming_anchor": [
-    4396,
-    686
+    4397,
+    687
    ],
    "owner": "KSV",
    "scope": "drawn"
@@ -3200,7 +2786,7 @@
    "id": 479,
    "naming_anchor": [
     4048,
-    527
+    525
    ],
    "owner": "SNA",
    "scope": "drawn"
@@ -3218,9 +2804,18 @@
    "id": 543,
    "naming_anchor": [
     4113,
-    795
+    794
    ],
    "owner": "MID",
+   "scope": "drawn"
+  },
+  "STATE_MIDDLE_BILBALI_01": {
+   "id": 498,
+   "naming_anchor": [
+    3696,
+    1032
+   ],
+   "owner": "BIL",
    "scope": "drawn"
   },
   "STATE_MIDDLE_MOUNTAINS": {
@@ -3253,7 +2848,7 @@
   "STATE_MONTE_CASTELLO": {
    "id": 105,
    "naming_anchor": [
-    3963,
+    3962,
     1303
    ],
    "owner": "DON",
@@ -3262,8 +2857,8 @@
   "STATE_MONTFORT": {
    "id": 54,
    "naming_anchor": [
-    3931,
-    853
+    3941,
+    863
    ],
    "owner": "MNF",
    "scope": "drawn"
@@ -3280,8 +2875,8 @@
   "STATE_MORTIS_TARN": {
    "id": 190,
    "naming_anchor": [
-    4336,
-    1622
+    4340,
+    1621
    ],
    "owners": [
     {
@@ -3325,7 +2920,7 @@
    "id": 195,
    "naming_anchor": [
     4525,
-    1533
+    1534
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -3378,8 +2973,8 @@
   "STATE_MOUSILLON": {
    "id": 73,
    "naming_anchor": [
-    3772,
-    847
+    3773,
+    846
    ],
    "owner": "MOU",
    "scope": "drawn"
@@ -3388,7 +2983,7 @@
    "id": 219,
    "naming_anchor": [
     4166,
-    1245
+    1246
    ],
    "owner": "GDO",
    "scope": "drawn"
@@ -3406,7 +3001,7 @@
    "id": 359,
    "naming_anchor": [
     4152,
-    260
+    261
    ],
    "owner": "SKA",
    "scope": "drawn"
@@ -3415,7 +3010,7 @@
    "id": 358,
    "naming_anchor": [
     4085,
-    359
+    361
    ],
    "owner": "SKA",
    "scope": "drawn"
@@ -3429,19 +3024,10 @@
    "owner": "LHX",
    "scope": "drawn"
   },
-  "STATE_NEW_STRYGOS": {
-   "id": 260,
-   "naming_anchor": [
-    4880,
-    1468
-   ],
-   "owner": "THG",
-   "scope": "drawn"
-  },
   "STATE_NORSVEG_PLAIN": {
    "id": 474,
    "naming_anchor": [
-    4002,
+    4003,
     360
    ],
    "owner": "GRA",
@@ -3454,6 +3040,24 @@
     1233
    ],
    "owner": "DUN",
+   "scope": "drawn"
+  },
+  "STATE_NORTHERN_ELLYRION": {
+   "id": 639,
+   "naming_anchor": [
+    2729,
+    1222
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_NORTHERN_GATE_OF_CALITH": {
+   "id": 654,
+   "naming_anchor": [
+    6478,
+    2883
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_NORTHERN_OBLAST": {
@@ -3472,6 +3076,15 @@
     644
    ],
    "owner": "BNR",
+   "scope": "drawn"
+  },
+  "STATE_NORTHERN_YVRESSE": {
+   "id": 632,
+   "naming_anchor": [
+    2983,
+    1313
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_NORTH_BADLAND_HILLS": {
@@ -3531,7 +3144,7 @@
   "STATE_NORTH_NORSE_COAST": {
    "id": 35,
    "naming_anchor": [
-    3888,
+    3889,
     374
    ],
    "owner": "SOR",
@@ -3546,11 +3159,20 @@
    "owner": "OST",
    "scope": "drawn"
   },
+  "STATE_NORTH_SHIFTING_ISLES": {
+   "id": 135,
+   "naming_anchor": [
+    2984,
+    1081
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_NORTH_TALABECLAND": {
    "id": 325,
    "naming_anchor": [
     4247,
-    822
+    823
    ],
    "owner": "TAL",
    "scope": "drawn"
@@ -3559,7 +3181,7 @@
    "id": 91,
    "naming_anchor": [
     3924,
-    1121
+    1120
    ],
    "owner": "MIR",
    "scope": "drawn"
@@ -3568,7 +3190,7 @@
    "id": 97,
    "naming_anchor": [
     4026,
-    1101
+    1100
    ],
    "owner": "BRN",
    "scope": "drawn"
@@ -3576,8 +3198,8 @@
   "STATE_NUJA": {
    "id": 80,
    "naming_anchor": [
-    3521,
-    1128
+    3530,
+    1122
    ],
    "owners": [
     {
@@ -3586,21 +3208,23 @@
       "x05035F",
       "x2A5CF4",
       "x417251",
-      "x508279",
       "x5DFAC1",
       "x8C257B",
       "x9A69B3",
       "xA33AD8",
       "xC8946D",
       "xE58C29",
-      "xEDEE02"
+      "xEDEE02",
+      "xF24656"
      ]
     },
     {
      "owner": "MGL",
      "provinces": [
-      "xD6D8A5",
-      "xFC323A"
+      "x8CA29C",
+      "xA73688",
+      "xD099A2",
+      "xD6D8A5"
      ]
     }
    ],
@@ -3610,7 +3234,7 @@
    "id": 493,
    "naming_anchor": [
     3835,
-    834
+    835
    ],
    "owner": "OKP",
    "scope": "drawn"
@@ -3645,8 +3269,8 @@
   "STATE_OLD_STRYGOS": {
    "id": 208,
    "naming_anchor": [
-    4213,
-    1439
+    4217,
+    1432
    ],
    "owners": [
     {
@@ -3724,7 +3348,7 @@
   "STATE_PARRAVON": {
    "id": 61,
    "naming_anchor": [
-    4017,
+    4018,
     927
    ],
    "owner": "PAR",
@@ -3737,6 +3361,15 @@
     885
    ],
    "owner": "KAD",
+   "scope": "drawn"
+  },
+  "STATE_PHOENIX_GATE": {
+   "id": 640,
+   "naming_anchor": [
+    2745,
+    1157
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_PIGBARTER_ROAD": {
@@ -3769,8 +3402,8 @@
   "STATE_PLACEHOLDER": {
    "id": 364,
    "naming_anchor": [
-    6717,
-    1063
+    6711,
+    1061
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -3787,8 +3420,8 @@
   "STATE_PLAINS_OF_LUCCINI": {
    "id": 104,
    "naming_anchor": [
-    3896,
-    1314
+    3897,
+    1313
    ],
    "owner": "LUC",
    "scope": "drawn"
@@ -3815,7 +3448,7 @@
    "id": 67,
    "naming_anchor": [
     3977,
-    974
+    975
    ],
    "owner": "QUE",
    "scope": "drawn"
@@ -3841,8 +3474,8 @@
   "STATE_REIKWALD_FOREST": {
    "id": 63,
    "naming_anchor": [
-    4098,
-    911
+    4097,
+    912
    ],
    "owner": "REI",
    "scope": "drawn"
@@ -3850,7 +3483,7 @@
   "STATE_REMAS": {
    "id": 102,
    "naming_anchor": [
-    3925,
+    3926,
     1209
    ],
    "owner": "REM",
@@ -3859,7 +3492,7 @@
   "STATE_RIVER_DISTRICT": {
    "id": 276,
    "naming_anchor": [
-    4953,
+    4952,
     856
    ],
    "owner": "MZN",
@@ -3877,7 +3510,7 @@
   "STATE_RUIN_S_END": {
    "id": 576,
    "naming_anchor": [
-    4941,
+    4940,
     1444
    ],
    "owner": "unowned",
@@ -3887,7 +3520,7 @@
    "id": 111,
    "naming_anchor": [
     3832,
-    1331
+    1332
    ],
    "owner": "SRT",
    "scope": "drawn"
@@ -3910,10 +3543,19 @@
    "owner": "VOL",
    "scope": "drawn"
   },
+  "STATE_SHADOW_MARCH": {
+   "id": 642,
+   "naming_anchor": [
+    2636,
+    1162
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_SHANIDAAR": {
    "id": 603,
    "naming_anchor": [
-    4737,
+    4736,
     1716
    ],
    "owner": "ZND",
@@ -3922,8 +3564,8 @@
   "STATE_SHATTERED_TEETH": {
    "id": 224,
    "naming_anchor": [
-    4112,
-    1094
+    4117,
+    1092
    ],
    "owners": [
     {
@@ -3946,6 +3588,7 @@
     {
      "owner": "XSH",
      "provinces": [
+      "x1A7307",
       "xD23182",
       "xE946DF"
      ]
@@ -3957,7 +3600,7 @@
    "id": 606,
    "naming_anchor": [
     4692,
-    1698
+    1699
    ],
    "owner": "LYB",
    "scope": "drawn"
@@ -3966,7 +3609,7 @@
    "id": 613,
    "naming_anchor": [
     5029,
-    1368
+    1369
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -3984,7 +3627,7 @@
    "id": 285,
    "naming_anchor": [
     4758,
-    633
+    632
    ],
    "owner": "UZK",
    "scope": "drawn"
@@ -3992,8 +3635,17 @@
   "STATE_SKULL_STEPPES": {
    "id": 290,
    "naming_anchor": [
-    4713,
+    4712,
     693
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_SKYHAVEN_PLATEAU": {
+   "id": 634,
+   "naming_anchor": [
+    2970,
+    1213
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -4001,7 +3653,7 @@
   "STATE_SOLLAND": {
    "id": 319,
    "naming_anchor": [
-    4194,
+    4195,
     1031
    ],
    "owner": "WIS",
@@ -4011,7 +3663,7 @@
    "id": 202,
    "naming_anchor": [
     4431,
-    1433
+    1432
    ],
    "owner": "BKA",
    "scope": "drawn"
@@ -4019,16 +3671,34 @@
   "STATE_SOUTHEAST_MAGRITTA": {
    "id": 84,
    "naming_anchor": [
-    3741,
-    1190
+    3747,
+    1191
    ],
    "owner": "MAG",
+   "scope": "drawn"
+  },
+  "STATE_SOUTHERN_ELLYRION": {
+   "id": 649,
+   "naming_anchor": [
+    2633,
+    1386
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_SOUTHERN_GATE_OF_CALITH": {
+   "id": 655,
+   "naming_anchor": [
+    6505,
+    2976
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_SOUTHERN_OBLAST": {
    "id": 307,
    "naming_anchor": [
-    4447,
+    4446,
     786
    ],
    "owner": "KSV",
@@ -4037,8 +3707,8 @@
   "STATE_SOUTHERN_SIREN_ISLES": {
    "id": 382,
    "naming_anchor": [
-    3804,
-    1230
+    3802,
+    1232
    ],
    "owner": "TOB",
    "scope": "drawn"
@@ -4052,6 +3722,15 @@
    "owner": "MAH",
    "scope": "drawn"
   },
+  "STATE_SOUTHERN_YVRESSE": {
+   "id": 627,
+   "naming_anchor": [
+    2953,
+    1434
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_SOUTH_BADLAND_HILLS": {
    "id": 565,
    "naming_anchor": [
@@ -4059,15 +3738,6 @@
     1496
    ],
    "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_SOUTH_BILBALI": {
-   "id": 498,
-   "naming_anchor": [
-    3696,
-    1037
-   ],
-   "owner": "BIL",
    "scope": "drawn"
   },
   "STATE_SOUTH_DARKLANDS": {
@@ -4100,7 +3770,7 @@
   "STATE_SOUTH_MIDDENLAND": {
    "id": 323,
    "naming_anchor": [
-    4155,
+    4154,
     808
    ],
    "owner": "MID",
@@ -4110,16 +3780,25 @@
    "id": 332,
    "naming_anchor": [
     4282,
-    762
+    761
    ],
    "owner": "OST",
+   "scope": "drawn"
+  },
+  "STATE_SOUTH_SHIFTING_ISLES": {
+   "id": 131,
+   "naming_anchor": [
+    3061,
+    1279
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_SOUTH_TALABECLAND": {
    "id": 321,
    "naming_anchor": [
-    4186,
-    873
+    4187,
+    872
    ],
    "owner": "TAL",
    "scope": "drawn"
@@ -4127,10 +3806,19 @@
   "STATE_SPHINX_OF_PHAA": {
    "id": 608,
    "naming_anchor": [
-    4126,
-    1687
+    4127,
+    1686
    ],
    "owner": "KAS",
+   "scope": "drawn"
+  },
+  "STATE_STARS_ARCHIPELAGO": {
+   "id": 176,
+   "naming_anchor": [
+    5162,
+    2390
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_STEEL_PLAINS": {
@@ -4151,11 +3839,20 @@
    "owner": "unowned",
    "scope": "drawn"
   },
+  "STATE_STONESUNG_PLATEAU": {
+   "id": 652,
+   "naming_anchor": [
+    2653,
+    1484
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_STROVENGAARD": {
    "id": 478,
    "naming_anchor": [
     3980,
-    544
+    541
    ],
    "owner": "BAE",
    "scope": "drawn"
@@ -4190,7 +3887,7 @@
   "STATE_SWAMP_EATER_HOLD": {
    "id": 610,
    "naming_anchor": [
-    5001,
+    5002,
     1445
    ],
    "owner": "unowned",
@@ -4200,7 +3897,7 @@
    "id": 624,
    "naming_anchor": [
     3996,
-    1643
+    1644
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -4208,8 +3905,8 @@
   "STATE_TALDURSFJORD": {
    "id": 349,
    "naming_anchor": [
-    4526,
-    381
+    4525,
+    382
    ],
    "owner": "KVE",
    "scope": "drawn"
@@ -4217,7 +3914,7 @@
   "STATE_TALSYN": {
    "id": 504,
    "naming_anchor": [
-    4060,
+    4059,
     1068
    ],
    "owner": "TLS",
@@ -4235,7 +3932,7 @@
   "STATE_THE_BLIGHT": {
    "id": 213,
    "naming_anchor": [
-    4267,
+    4264,
     1294
    ],
    "owner": "BTO",
@@ -4254,9 +3951,18 @@
    "id": 341,
    "naming_anchor": [
     4442,
-    735
+    734
    ],
    "owner": "KSV",
+   "scope": "drawn"
+  },
+  "STATE_THE_DRAGON_SPINE": {
+   "id": 626,
+   "naming_anchor": [
+    2680,
+    1559
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_THE_GOLINYI": {
@@ -4280,8 +3986,8 @@
   "STATE_THE_SCARAB_CITY": {
    "id": 571,
    "naming_anchor": [
-    4169,
-    1617
+    4195,
+    1613
    ],
    "owner": "NUM",
    "scope": "drawn"
@@ -4298,8 +4004,8 @@
   "STATE_THE_TAIGA": {
    "id": 342,
    "naming_anchor": [
-    4476,
-    686
+    4472,
+    682
    ],
    "owner": "PRA",
    "scope": "drawn"
@@ -4307,8 +4013,8 @@
   "STATE_THE_VELDT": {
    "id": 535,
    "naming_anchor": [
-    4424,
-    822
+    4426,
+    821
    ],
    "owner": "OSM",
    "scope": "drawn"
@@ -4316,17 +4022,26 @@
   "STATE_THE_WASTELAND": {
    "id": 48,
    "naming_anchor": [
-    4004,
-    715
+    4005,
+    713
    ],
    "owner": "MAR",
+   "scope": "drawn"
+  },
+  "STATE_THE_WHEELED_MARCH": {
+   "id": 653,
+   "naming_anchor": [
+    2598,
+    1430
+   ],
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_THORSHAFN": {
    "id": 554,
    "naming_anchor": [
-    4245,
-    444
+    4246,
+    443
    ],
    "owner": "HAS",
    "scope": "drawn"
@@ -4340,11 +4055,20 @@
    "owner": "DRZ",
    "scope": "drawn"
   },
+  "STATE_TIRANOC": {
+   "id": 646,
+   "naming_anchor": [
+    2583,
+    1267
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_TOBARO": {
    "id": 602,
    "naming_anchor": [
-    3813,
-    1152
+    3804,
+    1169
    ],
    "owner": "TOB",
    "scope": "drawn"
@@ -4352,8 +4076,8 @@
   "STATE_TORGOVANN": {
    "id": 94,
    "naming_anchor": [
-    4031,
-    1022
+    4030,
+    1023
    ],
    "owner": "TRG",
    "scope": "drawn"
@@ -4364,13 +4088,37 @@
     4882,
     1435
    ],
-   "owner": "unowned",
+   "owners": [
+    {
+     "owner": "THG",
+     "provinces": [
+      "x0A8447",
+      "x59DE94",
+      "x6C4CCE",
+      "x800419",
+      "xBEBB31",
+      "xF36EEA"
+     ]
+    },
+    {
+     "owner": "unowned",
+     "provinces": [
+      "x0F7A39",
+      "x18C87F",
+      "x553771",
+      "x98705C",
+      "xBAB1AC",
+      "xFA38E3",
+      "xFBC2EE"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_TRANTINE_HILLS": {
    "id": 103,
    "naming_anchor": [
-    3957,
+    3958,
     1166
    ],
    "owner": "TRA",
@@ -4398,7 +4146,7 @@
    "id": 503,
    "naming_anchor": [
     4085,
-    1067
+    1068
    ],
    "owner": "TLS",
    "scope": "drawn"
@@ -4407,7 +4155,7 @@
    "id": 38,
    "naming_anchor": [
     4110,
-    498
+    496
    ],
    "owner": "SAR",
    "scope": "drawn"
@@ -4430,10 +4178,19 @@
    "owner": "UNG",
    "scope": "drawn"
   },
+  "STATE_UNICORN_GATE": {
+   "id": 643,
+   "naming_anchor": [
+    2673,
+    1204
+   ],
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_UPPER_ASH_RIVER": {
    "id": 607,
    "naming_anchor": [
-    4250,
+    4253,
     1707
    ],
    "owner": "QUA",
@@ -4443,7 +4200,7 @@
    "id": 40,
    "naming_anchor": [
     3929,
-    475
+    476
    ],
    "owner": "BAE",
    "scope": "drawn"
@@ -4460,8 +4217,8 @@
   "STATE_VARG_CAMP": {
    "id": 563,
    "naming_anchor": [
-    4288,
-    202
+    4289,
+    203
    ],
    "owner": "VAR",
    "scope": "drawn"
@@ -4469,7 +4226,7 @@
   "STATE_VEREZZI": {
    "id": 101,
    "naming_anchor": [
-    3936,
+    3937,
     1259
    ],
    "owner": "VER",
@@ -4479,7 +4236,7 @@
    "id": 551,
    "naming_anchor": [
     4486,
-    337
+    338
    ],
    "owner": "KVE",
    "scope": "drawn"
@@ -4487,8 +4244,8 @@
   "STATE_VOLGEN": {
    "id": 322,
    "naming_anchor": [
-    4136,
-    849
+    4139,
+    852
    ],
    "owners": [
     {
@@ -4507,6 +4264,7 @@
     {
      "owner": "XSC",
      "provinces": [
+      "x4C6B1F",
       "x9000AE",
       "xBC290F"
      ]
@@ -4518,7 +4276,7 @@
    "id": 59,
    "naming_anchor": [
     4003,
-    858
+    859
    ],
    "owner": "REI",
    "scope": "drawn"
@@ -4535,7 +4293,7 @@
   "STATE_WESTERN_BADLANDS": {
    "id": 566,
    "naming_anchor": [
-    3997,
+    3998,
     1477
    ],
    "owner": "unowned",
@@ -4544,7 +4302,7 @@
   "STATE_WESTERN_ESTALIAN_COAST": {
    "id": 496,
    "naming_anchor": [
-    3579,
+    3580,
     1077
    ],
    "owner": "CNT",
@@ -4563,7 +4321,7 @@
    "id": 329,
    "naming_anchor": [
     4330,
-    715
+    716
    ],
    "owner": "KSV",
    "scope": "drawn"
@@ -4581,7 +4339,7 @@
    "id": 93,
    "naming_anchor": [
     3904,
-    1051
+    1052
    ],
    "owner": "CAR",
    "scope": "drawn"
@@ -4607,8 +4365,8 @@
   "STATE_WEST_HELSPIRE_MOUNTAINS": {
    "id": 37,
    "naming_anchor": [
-    3924,
-    404
+    3929,
+    408
    ],
    "owners": [
     {
@@ -4639,7 +4397,7 @@
   "STATE_WEST_MAD_DOG_PASS": {
    "id": 232,
    "naming_anchor": [
-    4446,
+    4447,
     1152
    ],
    "owner": "RFG",
@@ -4649,7 +4407,7 @@
    "id": 83,
    "naming_anchor": [
     3619,
-    1120
+    1119
    ],
    "owner": "MAG",
    "scope": "drawn"
@@ -4657,8 +4415,8 @@
   "STATE_WEST_MIDDENLAND": {
    "id": 47,
    "naming_anchor": [
-    4076,
-    756
+    4070,
+    759
    ],
    "owners": [
     {
@@ -4679,7 +4437,6 @@
       "xA6D9E4",
       "xC9CFA9",
       "xD4A7FA",
-      "xE0E506",
       "xEF293E"
      ]
     }
@@ -4689,8 +4446,8 @@
   "STATE_WEST_NORDLAND": {
    "id": 45,
    "naming_anchor": [
-    4037,
-    654
+    4058,
+    686
    ],
    "owners": [
     {
@@ -4724,8 +4481,8 @@
   "STATE_WEST_OSTERMARK": {
    "id": 327,
    "naming_anchor": [
-    4341,
-    865
+    4334,
+    866
    ],
    "owners": [
     {
@@ -4765,7 +4522,7 @@
    "id": 320,
    "naming_anchor": [
     4164,
-    932
+    931
    ],
    "owner": "STI",
    "scope": "drawn"
@@ -4774,7 +4531,7 @@
    "id": 539,
    "naming_anchor": [
     4314,
-    911
+    912
    ],
    "owner": "VSY",
    "scope": "drawn"
@@ -4792,7 +4549,7 @@
    "id": 222,
    "naming_anchor": [
     4165,
-    1090
+    1092
    ],
    "owner": "WIS",
    "scope": "drawn"
@@ -4836,7 +4593,7 @@
   "STATE_WURTBAD": {
    "id": 541,
    "naming_anchor": [
-    4204,
+    4205,
     909
    ],
    "owner": "STI",
@@ -4854,8 +4611,8 @@
   "STATE_YI_EDRI_ETERNOS": {
    "id": 95,
    "naming_anchor": [
-    4050,
-    1033
+    4051,
+    1032
    ],
    "owner": "TLS",
    "scope": "drawn"
@@ -4864,7 +4621,7 @@
    "id": 280,
    "naming_anchor": [
     4872,
-    699
+    698
    ],
    "owner": "UZK",
    "scope": "drawn"
@@ -4872,8 +4629,8 @@
   "STATE_ZORN_UZKUL": {
    "id": 284,
    "naming_anchor": [
-    4794,
-    539
+    4790,
+    549
    ],
    "owner": "UZK",
    "scope": "drawn"

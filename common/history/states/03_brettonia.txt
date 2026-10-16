@@ -144,10 +144,26 @@ STATES = {
 
 		add_homeland = cu:wood_elf
 	}
+	s:STATE_LAND_660 = {
+		create_state = {
+			country = c:LYO
+			owned_provinces = { x63035B }
+		}
+
+		add_homeland = cu:bretonnian
+	}
+	s:STATE_LAND_662 = {
+		create_state = {
+			country = c:MNF
+			owned_provinces = { x9DD59A }
+		}
+
+		add_homeland = cu:bretonnian
+	}
 	s:STATE_LYONESSE = {
 		create_state = {
 			country = c:LYO
-			owned_provinces = { x08539C x44C28E x63035B x6A1C23 x78CAD4 x813180 x9846DD xBDA072 xBF3852 xE0066E xE2FA07 xFA0F64 }
+			owned_provinces = { x08539C x44C28E x6A1C23 x78CAD4 x813180 x9846DD xBDA072 xBF3852 xE0066E xE2FA07 xFA0F64 }
 		}
 
 		add_homeland = cu:bretonnian
@@ -188,7 +204,7 @@ STATES = {
 	s:STATE_MONTFORT = {
 		create_state = {
 			country = c:MNF
-			owned_provinces = { x65A352 x9B971A x9DD59A xE26A3E }
+			owned_provinces = { x65A352 x9B971A xE26A3E }
 		}
 
 		add_homeland = cu:bretonnian

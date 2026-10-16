@@ -15,7 +15,7 @@ STATES = {
 	s:STATE_LAND_166 = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x233657 }
+			owned_provinces = { x233657 xE6C765 }
 		}
 	}
 	s:STATE_LAND_168 = {
@@ -28,18 +28,6 @@ STATES = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x68766E }
-		}
-	}
-	s:STATE_LAND_654 = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { x17024D x56A0FF x64E537 x7BFA94 x8F75B8 x930FF1 xC6ADBE xDDC31B xEC0753 }
-		}
-	}
-	s:STATE_LAND_655 = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { x1F68F9 x31476A x42E9B4 x512DEC x684349 xB2F673 xCA0BD0 xFDA99D }
 		}
 	}
 	s:STATE_LAND_657 = {
@@ -57,7 +45,19 @@ STATES = {
 	s:STATE_LAND_659 = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x0AD316 x12F8C8 x179FEB x1D12FE x25E423 x302CAB x37866D x3F0E81 x625315 x646816 x69DB29 x6A869C x72AC4E x796872 x7EDB85 x80F086 x87ACAA x8BD6AC x8F34BE x9805E3 x9F8DF7 xA6F58E xA9A82D xAE9E1F xBB4A77 xBD5F78 xBEA889 xC01FEC xC2D28B xC8459E xCE6424 xD5BDE6 xE57981 xF45B57 xF7B969 }
+			owned_provinces = { x0AD316 x12F8C8 x179FEB x1D12FE x25E423 x302CAB x37866D x3F0E81 x625315 x646816 x69DB29 x6A869C x72AC4E x796872 x7EDB85 x80F086 x87ACAA x8BD6AC x8F34BE x9805E3 x9F8DF7 xA6F58E xA9A82D xAE9E1F xBB4A77 xBD5F78 xBEA889 xC01FEC xC2D28B xC8459E xCE6424 xD5BDE6 xE57981 xF45B57 }
+		}
+	}
+	s:STATE_NORTHERN_GATE_OF_CALITH = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x17024D x56A0FF x64E537 x7BFA94 x8F75B8 x930FF1 xC6ADBE xDDC31B xEC0753 }
+		}
+	}
+	s:STATE_SOUTHERN_GATE_OF_CALITH = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x1F68F9 x31476A x42E9B4 x512DEC x684349 xB2F673 xCA0BD0 xFDA99D }
 		}
 	}
 }

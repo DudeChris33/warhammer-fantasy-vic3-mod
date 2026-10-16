@@ -32,7 +32,7 @@ STATES = {
 	s:STATE_CANTABRIO_ROAD = {
 		create_state = {
 			country = c:BIL
-			owned_provinces = { x033D2D x118165 x36DAFA x3FAC1F x4DF057 x7349EC x8A5F49 x8D11E8 x98A381 x9D09AA xA174A6 xC2633F xCF42BC xEEDA6F xF2797B }
+			owned_provinces = { x033D2D x118165 x36DAFA x3FAC1F x4DF057 x6D393B x7349EC x8A5F49 x8D11E8 x98A381 x9D09AA xA174A6 xC2633F xCF42BC }
 		}
 
 		add_homeland = cu:estalian
@@ -109,6 +109,14 @@ STATES = {
 
 		add_homeland = cu:border_princer
 	}
+	s:STATE_LAND_663 = {
+		create_state = {
+			country = c:BIL
+			owned_provinces = { xF2797B }
+		}
+
+		add_homeland = cu:estalian
+	}
 	s:STATE_LOST_KHYPNIA = {
 		create_state = {
 			country = c:UVE
@@ -117,6 +125,14 @@ STATES = {
 
 		add_homeland = cu:gospodar
 		add_homeland = cu:ungol
+	}
+	s:STATE_MIDDLE_BILBALI_01 = {
+		create_state = {
+			country = c:BIL
+			owned_provinces = { x1A528A x2896C2 x3167E7 x3D3A7A x4E8020 x5C70B6 x6AC796 x7C1B11 xB20A06 xB88A03 xDDE398 xF4F8F5 }
+		}
+
+		add_homeland = cu:estalian
 	}
 	s:STATE_MIDDLE_TILEA = {
 		create_state = {
@@ -145,11 +161,11 @@ STATES = {
 	s:STATE_NUJA = {
 		create_state = {
 			country = c:CNT
-			owned_provinces = { x05035F x2A5CF4 x417251 x508279 x5DFAC1 x8C257B x9A69B3 xA33AD8 xC8946D xE58C29 xEDEE02 }
+			owned_provinces = { x05035F x2A5CF4 x417251 x5DFAC1 x8C257B x9A69B3 xA33AD8 xC8946D xE58C29 xEDEE02 xF24656 }
 		}
 		create_state = {
 			country = c:MGL
-			owned_provinces = { xD6D8A5 xFC323A }
+			owned_provinces = { x8CA29C xA73688 xD099A2 xD6D8A5 }
 		}
 
 		add_homeland = cu:estalian
@@ -210,14 +226,6 @@ STATES = {
 		}
 
 		add_homeland = cu:tilean
-	}
-	s:STATE_SOUTH_BILBALI = {
-		create_state = {
-			country = c:BIL
-			owned_provinces = { x1A528A x2896C2 x3167E7 x3D3A7A x4E8020 x5C70B6 x7C1B11 xB20A06 xB88A03 xDDE398 xF4F8F5 }
-		}
-
-		add_homeland = cu:estalian
 	}
 	s:STATE_SUSSURRIO_WOOD = {
 		create_state = {

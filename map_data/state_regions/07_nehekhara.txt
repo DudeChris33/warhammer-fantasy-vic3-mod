@@ -99,7 +99,7 @@ STATE_THE_SCARAB_CITY = {
     mine = xB5E539
     wood = xF2542B
     port = x26536F
-    arable_land = 9
+    arable_land = 10
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
         building_fishing_wharf = 1
@@ -230,6 +230,10 @@ STATE_SWAMP_OF_TERROR = {
     arable_land = 3
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 1
     }
     naval_exit_id = 3110
 }

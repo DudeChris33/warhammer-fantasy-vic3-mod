@@ -25,16 +25,6 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_LAND_654 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_655 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
 	s:STATE_LAND_657 = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
@@ -46,6 +36,16 @@ POPS = {
 		}
 	}
 	s:STATE_LAND_659 = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_NORTHERN_GATE_OF_CALITH = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_SOUTHERN_GATE_OF_CALITH = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}

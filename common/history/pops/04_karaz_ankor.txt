@@ -12,8 +12,8 @@ POPS = {
 	}
 	s:STATE_APUCCINI_MOUNTAINS = {
 		region_state:BRN = {
-			create_pop = { culture = goblin size = 69231 }
-			create_pop = { culture = orc size = 23077 }
+			create_pop = { culture = goblin size = 54721 }
+			create_pop = { culture = orc size = 18240 }
 		}
 	}
 	s:STATE_AXE_BITE_PASS = {
@@ -193,6 +193,17 @@ POPS = {
 			create_pop = { culture = lahmian_vampire size = 15621 }
 		}
 	}
+	s:STATE_LAND_664 = {
+		region_state:BRN = {
+			create_pop = { culture = goblin size = 14237 }
+			create_pop = { culture = orc size = 4745 }
+		}
+	}
+	s:STATE_LAND_666 = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 	s:STATE_MOUNTAINS_OF_DAWN = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
@@ -221,8 +232,8 @@ POPS = {
 	}
 	s:STATE_NOVALONE_PASS = {
 		region_state:BRN = {
-			create_pop = { culture = goblin size = 43269 }
-			create_pop = { culture = orc size = 14423 }
+			create_pop = { culture = goblin size = 43543 }
+			create_pop = { culture = orc size = 14514 }
 		}
 	}
 	s:STATE_OIS_GAP = {
@@ -307,7 +318,7 @@ POPS = {
 	}
 	s:STATE_WINTERTEETH_PASS = {
 		region_state:WIS = {
-			create_pop = { culture = wissenlander size = 2603 }
+			create_pop = { culture = wissenlander size = 2599 }
 		}
 	}
 }

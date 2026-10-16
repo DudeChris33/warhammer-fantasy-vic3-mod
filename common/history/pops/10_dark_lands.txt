@@ -32,9 +32,9 @@ POPS = {
 	}
 	s:STATE_BLASTED_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 74325 }
-			create_pop = { pop_type = slaves culture = hobgoblin size = 28587 }
-			create_pop = { pop_type = slaves culture = orc size = 11435 }
+			create_pop = { culture = dawi_zharr size = 78337 }
+			create_pop = { pop_type = slaves culture = hobgoblin size = 30129 }
+			create_pop = { pop_type = slaves culture = orc size = 12052 }
 		}
 	}
 	s:STATE_BOULDERBELLIES_HOLD = {
@@ -64,7 +64,7 @@ POPS = {
 	}
 	s:STATE_DEATH_S_SIDE = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 40827 }
+			create_pop = { culture = dawi_zharr size = 42039 }
 		}
 	}
 	s:STATE_DESOLATION_OF_AZGORH = {
@@ -102,11 +102,6 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_DREAD_ROCK_SHOALS = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
 	s:STATE_DREAD_ROCK_SKERRIES = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
@@ -114,7 +109,7 @@ POPS = {
 	}
 	s:STATE_FALLS_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 51862 }
+			create_pop = { culture = dawi_zharr size = 54661 }
 		}
 	}
 	s:STATE_FIVE_RIVERS = {
@@ -124,14 +119,14 @@ POPS = {
 	}
 	s:STATE_FOUNDRY_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 77674 }
-			create_pop = { pop_type = slaves culture = hobgoblin size = 29874 }
-			create_pop = { pop_type = slaves culture = orc size = 11950 }
+			create_pop = { culture = dawi_zharr size = 81865 }
+			create_pop = { pop_type = slaves culture = hobgoblin size = 31486 }
+			create_pop = { pop_type = slaves culture = orc size = 12595 }
 		}
 	}
 	s:STATE_GATE_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 92346 }
+			create_pop = { culture = dawi_zharr size = 97329 }
 		}
 	}
 	s:STATE_GNOBLAR_HILLS = {
@@ -149,19 +144,14 @@ POPS = {
 			create_pop = { culture = dawi_zharr size = 153835 }
 		}
 	}
-	s:STATE_HAUNTED_GROVE = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
 	s:STATE_HEART_OF_ZHARRDUK = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 266029 }
+			create_pop = { culture = dawi_zharr size = 171417 }
 		}
 	}
 	s:STATE_HOWLING_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 96821 }
+			create_pop = { culture = dawi_zharr size = 102046 }
 		}
 	}
 	s:STATE_IVORY_ROAD = {
@@ -169,16 +159,26 @@ POPS = {
 			create_pop = { culture = orc size = 52110 }
 		}
 	}
+	s:STATE_LAND_668 = {
+		region_state:MZN = {
+			create_pop = { culture = dawi_zharr size = 41512 }
+		}
+	}
+	s:STATE_LAND_669 = {
+		region_state:UZK = {
+			create_pop = { culture = dawi_zharr size = 26996 }
+		}
+	}
 	s:STATE_MANUFACTORY_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 60217 }
-			create_pop = { pop_type = slaves culture = hobgoblin size = 23161 }
-			create_pop = { pop_type = slaves culture = orc size = 9264 }
+			create_pop = { culture = dawi_zharr size = 63467 }
+			create_pop = { pop_type = slaves culture = hobgoblin size = 24410 }
+			create_pop = { pop_type = slaves culture = orc size = 9764 }
 		}
 	}
 	s:STATE_MARKET_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 43053 }
+			create_pop = { culture = dawi_zharr size = 45377 }
 		}
 	}
 	s:STATE_MOUNT_AZGORH = {
@@ -193,12 +193,7 @@ POPS = {
 	}
 	s:STATE_NAGGRUNDRINAZ = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 62150 }
-		}
-	}
-	s:STATE_NEW_STRYGOS = {
-		region_state:THG = {
-			create_pop = { culture = ogre size = 150000 }
+			create_pop = { culture = dawi_zharr size = 65504 }
 		}
 	}
 	s:STATE_NORTH_DARK_LANDS = {
@@ -208,7 +203,7 @@ POPS = {
 	}
 	s:STATE_NORTH_HOWLING_WASTES = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 78315 }
+			create_pop = { culture = dawi_zharr size = 82541 }
 		}
 	}
 	s:STATE_OLD_SILK_ROAD = {
@@ -223,9 +218,9 @@ POPS = {
 	}
 	s:STATE_PITS_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 95532 }
-			create_pop = { pop_type = slaves culture = hobgoblin size = 36743 }
-			create_pop = { pop_type = slaves culture = orc size = 14697 }
+			create_pop = { culture = dawi_zharr size = 100687 }
+			create_pop = { pop_type = slaves culture = hobgoblin size = 38726 }
+			create_pop = { pop_type = slaves culture = orc size = 15490 }
 		}
 	}
 	s:STATE_PLAINS_OF_GRIEF = {
@@ -240,7 +235,7 @@ POPS = {
 	}
 	s:STATE_RIVER_DISTRICT = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 42888 }
+			create_pop = { culture = dawi_zharr size = 45203 }
 		}
 	}
 	s:STATE_RUIN_S_END = {
@@ -255,12 +250,12 @@ POPS = {
 	}
 	s:STATE_SKULL_CLIFFS = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 178525 }
+			create_pop = { culture = dawi_zharr size = 183826 }
 		}
 	}
 	s:STATE_SKULL_ROAD = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 67009 }
+			create_pop = { culture = dawi_zharr size = 68999 }
 		}
 	}
 	s:STATE_SKULL_STEPPES = {
@@ -280,7 +275,7 @@ POPS = {
 	}
 	s:STATE_STEEL_PLAINS = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 43077 }
+			create_pop = { culture = dawi_zharr size = 45402 }
 		}
 	}
 	s:STATE_SWAMP_EATER_HOLD = {
@@ -294,6 +289,9 @@ POPS = {
 		}
 	}
 	s:STATE_TOWER_OF_THE_BLOODYTOOTH = {
+		region_state:THG = {
+			create_pop = { culture = ogre size = 150000 }
+		}
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}
@@ -305,7 +303,7 @@ POPS = {
 	}
 	s:STATE_WHEATLANDS = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 168356 }
+			create_pop = { culture = dawi_zharr size = 173356 }
 		}
 	}
 	s:STATE_WOLF_EDGE = {
@@ -320,14 +318,14 @@ POPS = {
 	}
 	s:STATE_ZORN_DUM = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 180898 }
+			create_pop = { culture = dawi_zharr size = 186270 }
 		}
 	}
 	s:STATE_ZORN_UZKUL = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 236850 }
-			create_pop = { pop_type = slaves culture = hobgoblin size = 109316 }
-			create_pop = { pop_type = slaves culture = norscan size = 18219 }
+			create_pop = { culture = dawi_zharr size = 207034 }
+			create_pop = { pop_type = slaves culture = hobgoblin size = 95554 }
+			create_pop = { pop_type = slaves culture = norscan size = 15926 }
 		}
 	}
 }

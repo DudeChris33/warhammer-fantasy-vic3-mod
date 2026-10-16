@@ -5,12 +5,12 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_LAND_152 = {
+	s:STATE_ISLE_OF_DAWN = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_LAND_170 = {
+	s:STATE_LAND_152 = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}
@@ -35,17 +35,7 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_LAND_176 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
 	s:STATE_LAND_182 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_466 = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}
@@ -55,7 +45,7 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_LAND_469 = {
+	s:STATE_STARS_ARCHIPELAGO = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}

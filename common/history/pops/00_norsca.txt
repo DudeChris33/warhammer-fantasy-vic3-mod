@@ -32,7 +32,7 @@ POPS = {
 	}
 	s:STATE_ELDAGRIMM_GULF = {
 		region_state:BAE = {
-			create_pop = { culture = norscan size = 43149 }
+			create_pop = { culture = norscan size = 38203 }
 		}
 	}
 	s:STATE_FJORD_COAST = {
@@ -57,7 +57,7 @@ POPS = {
 	}
 	s:STATE_GIANTHOME_MOUNTAINS = {
 		region_state:KRD = {
-			create_pop = { culture = dawi_norse size = 43927 }
+			create_pop = { culture = dawi_norse size = 44184 }
 		}
 	}
 	s:STATE_GLOOMWRACK_COAST = {
@@ -102,12 +102,27 @@ POPS = {
 	}
 	s:STATE_KRAKA_DRAK = {
 		region_state:KRD = {
-			create_pop = { culture = dawi_norse size = 106073 }
+			create_pop = { culture = dawi_norse size = 88310 }
 		}
 	}
 	s:STATE_KRAKEN_COAST = {
 		region_state:AES = {
 			create_pop = { culture = norscan size = 73605 }
+		}
+	}
+	s:STATE_LAND_661 = {
+		region_state:BAE = {
+			create_pop = { culture = norscan size = 4790 }
+		}
+	}
+	s:STATE_LAND_670 = {
+		region_state:KRD = {
+			create_pop = { culture = dawi_norse size = 17506 }
+		}
+	}
+	s:STATE_LAND_671 = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
 		}
 	}
 	s:STATE_MERMEDUS_COAST = {
@@ -152,7 +167,7 @@ POPS = {
 	}
 	s:STATE_STROVENGAARD = {
 		region_state:BAE = {
-			create_pop = { culture = norscan size = 68392 }
+			create_pop = { culture = norscan size = 68523 }
 		}
 	}
 	s:STATE_TALDURSFJORD = {
@@ -182,7 +197,7 @@ POPS = {
 	}
 	s:STATE_VANNHEIM_MOUNTAINS = {
 		region_state:BAE = {
-			create_pop = { culture = norscan size = 13459 }
+			create_pop = { culture = norscan size = 13484 }
 		}
 	}
 	s:STATE_VARG_CAMP = {

@@ -9,7 +9,7 @@ STATES = {
 	s:STATE_PLACEHOLDER = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { xC51AB1 }
+			owned_provinces = { x0189A3 x2FB45D x7A6787 xA89241 xC51AB1 xDF8E20 }
 		}
 	}
 }

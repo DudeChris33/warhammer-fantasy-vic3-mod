@@ -592,7 +592,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:WIS"
-						levels = 9
+						levels = 6
 						region = "STATE_KREUTZHOFEN"
 					}
 				}
@@ -627,7 +627,24 @@ BUILDINGS = {
 			}
 		}
 	}
-	s:STATE_LAND_625 = {
+	s:STATE_LAND_667 = {
+		region_state:WIS = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:WIS"
+						levels = 2
+						region = "STATE_LAND_667"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+			}
+		}
+	}
+	s:STATE_LAURELORN_FOREST = {
 		region_state:NLD = {
 			create_building = {
 				building = "building_wheat_farm"
@@ -636,7 +653,7 @@ BUILDINGS = {
 						type = "building_manor_house"
 						country = "c:NLD"
 						levels = 5
-						region = "STATE_LAND_625"
+						region = "STATE_LAURELORN_FOREST"
 					}
 				}
 				reserves = 1
@@ -1016,7 +1033,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:TAL"
-						levels = 17
+						levels = 18
 						region = "STATE_NORTH_TALABECLAND"
 					}
 				}
@@ -1380,7 +1397,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:TAL"
-						levels = 1
+						levels = 2
 						region = "STATE_SOUTH_TALABECLAND"
 					}
 				}
@@ -1470,7 +1487,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:TAL"
-						levels = 14
+						levels = 13
 						region = "STATE_VOLGEN"
 					}
 				}

@@ -1269,7 +1269,7 @@
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
    "id": 3114,
-   "area": 42092,
+   "area": 41727,
    "coastal": true,
    "impassable": false
   },
@@ -1339,7 +1339,7 @@
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
    "id": 3121,
-   "area": 79263,
+   "area": 79628,
    "coastal": false,
    "impassable": false
   },

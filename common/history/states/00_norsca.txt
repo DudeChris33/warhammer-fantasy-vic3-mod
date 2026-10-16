@@ -51,7 +51,7 @@ STATES = {
 	s:STATE_ELDAGRIMM_GULF = {
 		create_state = {
 			country = c:BAE
-			owned_provinces = { x0F4BE7 x44943C x69EDD1 x7DC599 x86C510 x8F4766 xA65CC3 xB9481E xCBB658 xE2AB38 }
+			owned_provinces = { x0F4BE7 x3B2579 x69EDD1 x7DC599 x86C510 x8F4766 xA65CC3 xB9481E xCBB658 xE2AB38 }
 		}
 
 		add_homeland = cu:norscan
@@ -163,7 +163,7 @@ STATES = {
 	s:STATE_KRAKA_DRAK = {
 		create_state = {
 			country = c:KRD
-			owned_provinces = { x051607 x3340C1 x4A561E x6A3CA0 xA6AB92 xC2E533 xDA495F xDD2A50 xF15EBC }
+			owned_provinces = { x3340C1 x4A561E x6A3CA0 xC2E533 xDA495F xDD2A50 xF15EBC }
 		}
 
 		add_homeland = cu:dawi_norse
@@ -175,6 +175,28 @@ STATES = {
 		}
 
 		add_homeland = cu:norscan
+	}
+	s:STATE_LAND_661 = {
+		create_state = {
+			country = c:BAE
+			owned_provinces = { x44943C }
+		}
+
+		add_homeland = cu:norscan
+	}
+	s:STATE_LAND_670 = {
+		create_state = {
+			country = c:KRD
+			owned_provinces = { x051607 xA6AB92 }
+		}
+
+		add_homeland = cu:dawi_norse
+	}
+	s:STATE_LAND_671 = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { xE0E506 }
+		}
 	}
 	s:STATE_MERMEDUS_COAST = {
 		create_state = {
