@@ -7,10 +7,18 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/imperial_humans.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
 #
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's city hub, whoever owns that state at
+#      start — a claimant or formable keeps its canon seat (vanilla does the same: POL, ITA, and a
+#      dozen tags share STATE_AMHARA);
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 # Country display names/adjectives live in localization/english/countries_empire_l_english.yml.
 # The EMP and VEM formation rules live in common/country_formation/02_empire_formables.txt.
 
@@ -27,7 +35,7 @@ EMP = {
 		reiklander middenlander nordlander hochlander ostlander ostermarker
 		talabeclander stirlander averlander wissenlander sollander sylvanian
 	}
-	# capital: Altdorf — TODO once land state-regions exist
+	capital = STATE_REIKLAND_PROPER # Altdorf
 }
 
 ################ REI — Reikland; the Imperial heartland ################
@@ -37,7 +45,7 @@ REI = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { reiklander }
-	# capital: Altdorf — TODO once land state-regions exist
+	capital = STATE_REIKLAND_PROPER # Altdorf
 }
 
 ################ MID — Middenland; the Ulrican north ################
@@ -47,7 +55,7 @@ MID = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { middenlander }
-	# capital: Middenheim — TODO once land state-regions exist
+	capital = STATE_MIDDENHEIM
 }
 
 ################ NLD — Nordland; the coast that watches Norsca ################
@@ -57,7 +65,7 @@ NLD = {
 	country_type = recognized
 	tier = principality
 	cultures = { nordlander }
-	# capital: Salzenmund — TODO once land state-regions exist
+	capital = STATE_EAST_NORDLAND # Salzenmund
 }
 
 ################ HOC — Hochland; the hunting province ################
@@ -67,7 +75,7 @@ HOC = {
 	country_type = recognized
 	tier = principality
 	cultures = { hochlander }
-	# capital: Hergig — TODO once land state-regions exist
+	capital = STATE_HOCHLAND # Hergig
 }
 
 ################ OST — Ostland; the marsh-and-forest frontier ################
@@ -77,7 +85,7 @@ OST = {
 	country_type = recognized
 	tier = principality
 	cultures = { ostlander }
-	# capital: Wolfenburg — TODO once land state-regions exist
+	capital = STATE_SOUTH_OSTLAND # Wolfenburg
 }
 
 ################ OSM — Ostermark; the eastern march ################
@@ -87,7 +95,7 @@ OSM = {
 	country_type = recognized
 	tier = principality
 	cultures = { ostermarker }
-	# capital: Bechafen — TODO once land state-regions exist
+	capital = STATE_BECHAFEN
 }
 
 ################ TAL — Talabecland; the great forest ################
@@ -97,7 +105,9 @@ TAL = {
 	country_type = recognized
 	tier = principality
 	cultures = { talabeclander }
-	# capital: Talabheim — TODO once land state-regions exist
+	# Talabheim. ASSUMPTION to re-check after the next full.ora export: Chris has fixed the
+	# Talabheim border there, and STATE_NORTH_TALABECLAND is the state Talabheim should sit in.
+	capital = STATE_NORTH_TALABECLAND
 }
 
 ################ STI — Stirland; the poor south-east ################
@@ -107,7 +117,7 @@ STI = {
 	country_type = recognized
 	tier = principality
 	cultures = { stirlander }
-	# capital: Wurtbad — TODO once land state-regions exist
+	capital = STATE_WURTBAD
 }
 
 ################ AVE — Averland; the rich, loud south ################
@@ -117,7 +127,7 @@ AVE = {
 	country_type = recognized
 	tier = principality
 	cultures = { averlander }
-	# capital: Averheim — TODO once land state-regions exist
+	capital = STATE_AVERHEIM
 }
 
 ################ WIS — Wissenland; the sober south-west ################
@@ -127,7 +137,7 @@ WIS = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { wissenlander }
-	# capital: Nuln — TODO once land state-regions exist
+	capital = STATE_WISSENLAND # Nuln
 }
 
 ################ SOL — Solland; the destroyed province's claimant ################
@@ -137,7 +147,8 @@ SOL = {
 	country_type = recognized
 	tier = principality
 	cultures = { sollander }
-	# capital: Sudenburg — TODO once land state-regions exist
+	# Sudenburg is not on the map; Solland (WIS-held at start) stands for the seat. LORE FLAG.
+	capital = STATE_SOLLAND
 }
 
 ################ MOO — The Moot; the halfling homeland ################
@@ -148,7 +159,7 @@ MOO = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { halfling }
-	# capital: Eicheschatten — TODO once land state-regions exist
+	capital = STATE_MOOTLAND # Eicheschatten
 }
 
 ################ SYL — Sylvania (human); the living population ################
@@ -158,7 +169,8 @@ SYL = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { sylvanian }
-	# capital: Drakenhof — TODO once land state-regions exist
+	# Drakenhof, held by VSY at start; the human claimant keeps the canon seat (C1). LORE FLAG.
+	capital = STATE_DRAKENHOF
 }
 
 ################ VSY — Sylvania (Vampire); the von Carstein regime ################
@@ -169,7 +181,7 @@ VSY = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { sylvanian_vampire }
-	# capital: Drakenhof — TODO once land state-regions exist
+	capital = STATE_DRAKENHOF
 }
 
 ################ VEM — the Von Carstein Empire; the von Carsteins' Empire-wide conquest ################
@@ -184,7 +196,7 @@ VEM = {
 	country_type = unrecognized
 	tier = empire
 	cultures = { sylvanian_vampire }
-	# capital: Altdorf (seized from the Empire) — TODO once land state-regions exist
+	capital = STATE_REIKLAND_PROPER # Altdorf, seized from the Empire
 }
 
 ################ MAR — Marienburg; the seceded Wasteland ################
@@ -194,7 +206,7 @@ MAR = {
 	country_type = recognized
 	tier = principality
 	cultures = { marienburger }
-	# capital: Marienburg — TODO once land state-regions exist
+	capital = STATE_MARIENBURG
 }
 
 ################################################################################
@@ -217,7 +229,7 @@ BRK = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: Brass Keep — TODO once land state-regions exist
+	capital = STATE_MIDDLE_MOUNTAINS # Brass Keep
 }
 
 ################ CRB — Carroburg; the Middenland free city on the Reik ################
@@ -228,10 +240,10 @@ CRB = {
 	country_type = recognized
 	tier = city_state
 	cultures = { middenlander }
-	# capital: Carroburg — TODO once land state-regions exist
+	capital = STATE_DRAKWALD_FOREST # Carroburg; CRB holds most of the state, XSB the rest
 }
 
-################ XSA — Skaven Clan A (placeholder); STATE_KRUGENHEIM ################
+################ XSA — Skaven Clan A (placeholder); STATE_WEST_OSTERMARK ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
@@ -245,10 +257,10 @@ XSA = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_WEST_OSTERMARK # non-canon (C2): its only holding, a slice of the state; OSM holds the rest
 }
 
-################ XSB — Skaven Clan B (placeholder); STATE_GLIMDWARROW ################
+################ XSB — Skaven Clan B (placeholder); STATE_DRAKWALD_FOREST ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
@@ -262,16 +274,16 @@ XSB = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_DRAKWALD_FOREST # non-canon (C2): its only holding, a slice of the state; CRB holds the rest
 }
 
-################ XSC — Skaven Clan C (placeholder); West Talabecland ################
+################ XSC — Skaven Clan C (placeholder); STATE_VOLGEN ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
 # clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
-# Filed here by geography: STATE_WEST_TALABECLAND sits in map_data/state_regions/02_empire.txt.
+# Filed here by geography: STATE_VOLGEN sits in map_data/state_regions/02_empire.txt.
 # goblin is a cross-file culture ref to common/cultures/greenskin.txt.
 
 XSC = {
@@ -279,7 +291,7 @@ XSC = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_VOLGEN # non-canon (C2): its only holding, a slice of the state; TAL holds the rest
 }
 
 ################################################################################
@@ -301,17 +313,17 @@ GRW = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Gryphon Wood — TODO once a capital STATE_* is assigned
+	capital = STATE_GRYPHON_WOOD
 }
 
 ################ LAU — Laurelorn; the elven enclave of the Laurelorn Forest ################
 # Canon-firm place: the elf-held forest north of the Wasteland. Filed here by geography:
-# STATE_BLEEDING_STONE sits in map_data/state_regions/02_empire.txt.
+# STATE_WEST_NORDLAND sits in map_data/state_regions/02_empire.txt.
 
 LAU = {
 	color = { 60 228 60 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Laurelorn — TODO once a capital STATE_* is assigned
+	capital = STATE_WEST_NORDLAND # Laurelorn; LAU holds the forest slice of the state, NLD the rest
 }

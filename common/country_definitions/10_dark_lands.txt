@@ -8,10 +8,17 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/chaos_dwarf.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
 #
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's hub (any hub type), whoever owns that
+#      state at start — a claimant or formable keeps its canon seat;
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 # Country display names/adjectives live in localization/english/countries_dark_lands_l_english.yml.
 # The ZHA and KHN formation rules live in common/country_formation/10_dark_lands_formables.txt.
 
@@ -23,7 +30,7 @@ ZHA = {
 	country_type = recognized
 	tier = empire
 	cultures = { dawi_zharr }
-	# capital: Zharr-Naggrund — TODO once land state-regions exist
+	capital = STATE_HEART_OF_ZHARRDUK # Zharr-Naggrund, held by MZN at start
 }
 
 ################ MZN — Mingol Zharr-Naggrund; the Tower of Zharr ################
@@ -34,7 +41,7 @@ MZN = {
 	country_type = recognized
 	tier = kingdom
 	cultures = { dawi_zharr }
-	# capital: Zharr-Naggrund — TODO once land state-regions exist
+	capital = STATE_HEART_OF_ZHARRDUK # Zharr-Naggrund
 }
 
 ################ GOR — Gorgoth; a Chaos Dwarf hold ################
@@ -44,7 +51,7 @@ GOR = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { dawi_zharr }
-	# capital: Gorgoth — TODO once land state-regions exist
+	capital = STATE_MOUNT_AZGORH # Tower of Gorgoth (not Gorgothdrinaz, a DLO-held state)
 }
 
 ################ UZK — Uzkulak; the Port of Zharr ################
@@ -54,7 +61,7 @@ UZK = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { dawi_zharr }
-	# capital: Uzkulak — TODO once land state-regions exist
+	capital = STATE_ZORN_UZKUL # Uzkulak
 }
 
 ################ KHN — the Great Khanate; Hobgobla-Khan unites the hobgoblins ################
@@ -65,7 +72,7 @@ KHN = {
 	country_type = unrecognized
 	tier = empire
 	cultures = { hobgoblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	# capital: none - formable, owns nothing at start, and canon gives the khanate no seat
 }
 
 ################ HGK — Hobgobla-Khan; the great hobgoblin realm ################
@@ -75,7 +82,7 @@ HGK = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { hobgoblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	# capital: none - owns no state at start and has no canon seat
 }
 
 ################################################################################
@@ -96,5 +103,5 @@ DLO = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: — none recorded; TODO once land state-regions exist
+	capital = STATE_CAUSEWAY_OF_ZHARR # non-canon: largest of its 8 states (112 provinces)
 }

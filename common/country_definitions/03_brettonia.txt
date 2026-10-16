@@ -6,10 +6,17 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/brettonian_humans.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
 #
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's city hub, whoever owns that state at
+#      start — a claimant or formable keeps its canon seat;
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 # Country display names/adjectives live in localization/english/countries_brettonia_l_english.yml.
 # The BRE formation rule lives in common/country_formation/03_brettonia_formables.txt.
 
@@ -22,7 +29,7 @@ BRE = {
 	country_type = recognized
 	tier = kingdom
 	cultures = { bretonnian }
-	# capital: Couronne — TODO once land state-regions exist
+	capital = STATE_COURONNE # Couronne, held by COU at start
 }
 
 # The fourteen dukedoms below are recognized principalities — including Mousillon, which is
@@ -35,7 +42,7 @@ COU = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Couronne — TODO once land state-regions exist
+	capital = STATE_COURONNE
 }
 
 ################ LYO — Lyonesse; the storm-beaten northern coast ################
@@ -45,7 +52,9 @@ LYO = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Lyonesse — TODO once land state-regions exist
+	# Lyonesse city's hub fell in the unnamed state STATE_LAND_660 (also LYO-held); the
+	# dukedom's named state stands for the seat. LORE FLAG.
+	capital = STATE_LYONESSE
 }
 
 ################ ART — Artois; the forested north ################
@@ -55,17 +64,19 @@ ART = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Artois — TODO once land state-regions exist
+	capital = STATE_ARTOIS
 }
 
 ################ GIS — Gisoreaux; the northern march ################
+# Canon spelling is Gisoreux, as the map uses (STATE_GISOREUX and its city hub). The banner above
+# and the country loc (GIS/GIS_ADJ) still read "Gisoreaux"; deliberately not renamed here.
 
 GIS = {
 	color = { 122 92 150 }
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Gisoreaux — TODO once land state-regions exist
+	capital = STATE_GISOREUX
 }
 
 ################ MNF — Montfort; the mountain gate to the Empire ################
@@ -75,7 +86,9 @@ MNF = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Montfort — TODO once land state-regions exist
+	# Montfort city's hub fell in the unnamed state STATE_LAND_662 (also MNF-held); the
+	# dukedom's named state stands for the seat. LORE FLAG.
+	capital = STATE_MONTFORT
 }
 
 ################ BAS — Bastonne; birthplace of Gilles le Breton ################
@@ -85,7 +98,7 @@ BAS = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Bastonne — TODO once land state-regions exist
+	capital = STATE_BASTONNE
 }
 
 ################ AQU — Aquitaine; the western coast ################
@@ -95,7 +108,7 @@ AQU = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Aquitaine — TODO once land state-regions exist
+	capital = STATE_AQUITAINE
 }
 
 ################ QUE — Quenelles; the forest dukedom by Athel Loren ################
@@ -105,7 +118,7 @@ QUE = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Quenelles — TODO once land state-regions exist
+	capital = STATE_QUENELLES
 }
 
 ################ CAR — Carcassonne; the southern march against the greenskins ################
@@ -115,7 +128,7 @@ CAR = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Carcassonne — TODO once land state-regions exist
+	capital = STATE_WEST_CARCASSONNE # Carcassonne
 }
 
 ################ BRI — Brionne; the river dukedom of hard men ################
@@ -125,7 +138,7 @@ BRI = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Brionne — TODO once land state-regions exist
+	capital = STATE_BRIONNE
 }
 
 ################ BOR — Bordeleaux; the great southern port ################
@@ -135,7 +148,7 @@ BOR = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Bordeleaux — TODO once land state-regions exist
+	capital = STATE_BORDELEAUX
 }
 
 ################ LAN — L'Anguille; the northern sea-gate ################
@@ -145,7 +158,7 @@ LAN = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: L'Anguille — TODO once land state-regions exist
+	capital = STATE_L_ANGUILLE
 }
 
 ################ PAR — Parravon; the eyrie above the Grismerie ################
@@ -155,7 +168,7 @@ PAR = {
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
-	# capital: Parravon — TODO once land state-regions exist
+	capital = STATE_PARRAVON
 }
 
 ################ MOU — Mousillon; the cursed dukedom ################
@@ -168,7 +181,9 @@ MOU = {
 	country_type = recognized
 	tier = principality
 	cultures = { mousillon }
-	# capital: Mousillon — TODO once land state-regions exist
+	# The city of Mousillon is the city hub of STATE_CASTLE_MOUSILLON; there is no plain
+	# STATE_MOUSILLON. LORE FLAG.
+	capital = STATE_CASTLE_MOUSILLON # Mousillon
 }
 
 ################ MOR — Massif Orcal; the Greenskin holdout above the Forest of Chalons ################
@@ -186,12 +201,12 @@ MOR = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc goblin }
-	# capital: Massif Orcal — TODO once land state-regions exist
+	capital = STATE_MASSIF_ORCAL
 }
 
 ################ SKZ — Skullsmasherz; the Grey Mountains warband on Bretonnia's southern flank ################
 # Not a dukedom — Ugrok Craktoof's orc tribe, holding the Grey Mountains against Bretonnia's
-# southern march. Moved here from 06_badlands.txt (manual audit, 2026-09-03): geographically this
+# southern march (on the map: STATE_PALE_SISTERS, its only state). Moved here from 06_badlands.txt (manual audit, 2026-09-03): geographically this
 # is Bretonnia's border range, not Badlands territory. cultures reference orc from
 # common/cultures/greenskin.txt (cross-file reference, as with MOR above).
 
@@ -200,7 +215,7 @@ SKZ = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	capital = STATE_PALE_SISTERS # non-canon (C2): its only holding, in the Grey Mountains
 }
 
 ################################################################################
@@ -225,7 +240,7 @@ ANM = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Anmyr — TODO once a capital STATE_* is assigned
+	capital = STATE_ANMYR # Halls of Anaereth
 }
 
 ################ ARG — Argwylon; a realm of Athel Loren ################
@@ -238,7 +253,7 @@ ARG = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Argwylon — TODO once a capital STATE_* is assigned
+	capital = STATE_ARGWYLON
 }
 
 ################ TLS — Talsyn; a realm of Athel Loren ################
@@ -252,7 +267,9 @@ TLS = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Talsyn — TODO once a capital STATE_* is assigned
+	# The realm's eponymous state (city hub Tal Amere). Orion's court is the King's Glade,
+	# STATE_KING_S_GLADE, also TLS-held: confirm which reads as the seat. LORE FLAG.
+	capital = STATE_TALSYN
 }
 
 ################ TRG — Torgovann; a realm of Athel Loren ################
@@ -264,7 +281,7 @@ TRG = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Torgovann — TODO once a capital STATE_* is assigned
+	capital = STATE_TORGOVANN
 }
 
 ################ WYD — Wydrioth; a realm of Athel Loren ################
@@ -276,7 +293,7 @@ WYD = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Wydrioth — TODO once a capital STATE_* is assigned
+	capital = STATE_WYDRIOTH
 }
 
 ################ OKP — Oak of Prophecy; a wood-elf glade beyond Athel Loren's eaves ################
@@ -288,5 +305,5 @@ OKP = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: — none recorded; TODO once a capital STATE_* is assigned
+	capital = STATE_OAK_OF_PROPHECY
 }

@@ -11,10 +11,18 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/southern_realms_humans.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
 #
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's hub (any hub type), whoever owns that
+#      state at start — a claimant or formable keeps its canon seat (vanilla does the same: POL, ITA,
+#      and a dozen tags share STATE_AMHARA);
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 # Country display names/adjectives live in localization/english/countries_southern_realms_l_english.yml.
 # The TIL, EST and USR formation rules live in common/country_formation/05_southern_realms_formables.txt.
 
@@ -27,7 +35,7 @@ USR = {
 	country_type = recognized
 	tier = empire
 	cultures = { tilean sartosan estalian border_princer }
-	# capital: TODO once land state-regions exist
+	# capital: none - region-wide formable invented for this mod: owns nothing at start and has no canon seat
 }
 
 ################ TIL — Tilea; the city-states unite ################
@@ -39,7 +47,7 @@ TIL = {
 	country_type = recognized
 	tier = kingdom
 	cultures = { tilean sartosan }
-	# capital: Miragliano — TODO once land state-regions exist
+	capital = STATE_NORTH_TILEA # Miragliano, held by MIR at start
 }
 
 ################ MIR — Miragliano; the marsh-city of the Prince of Miragliano ################
@@ -49,7 +57,7 @@ MIR = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Miragliano — TODO once land state-regions exist
+	capital = STATE_NORTH_TILEA # Miragliano
 }
 
 ################ LUC — Luccini; the southern city-state of the Prince's arena ################
@@ -59,7 +67,7 @@ LUC = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Luccini — TODO once land state-regions exist
+	capital = STATE_PLAINS_OF_LUCCINI # Luccini
 }
 
 ################ REM — Remas; the greatest of the Tilean city-states ################
@@ -69,7 +77,7 @@ REM = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Remas — TODO once land state-regions exist
+	capital = STATE_REMAS
 }
 
 ################ TOB — Tobaro; the cliff-port over the Tilean Sea ################
@@ -80,7 +88,7 @@ TOB = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Tobaro — TODO once land state-regions exist
+	capital = STATE_TOBARO # Tobaro (port hub)
 }
 
 ################ TRA — Trantio; the marble city of the hills ################
@@ -90,7 +98,7 @@ TRA = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Trantio — TODO once land state-regions exist
+	capital = STATE_TRANTINE_HILLS # Trantio
 }
 
 ################ PAV — Pavona; the inland city-state ################
@@ -100,7 +108,7 @@ PAV = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Pavona — TODO once land state-regions exist
+	capital = STATE_MIDDLE_TILEA # Pavona
 }
 
 ################ VER — Verezzo; the city of scholars and merchant-clerks ################
@@ -110,7 +118,7 @@ VER = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Verezzo — TODO once land state-regions exist
+	capital = STATE_VEREZZI # Verezzo
 }
 
 ################ DON — Donalba; the sun-blazon frontier city on the Lissa Road ################
@@ -124,7 +132,7 @@ DON = {
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
-	# capital: Donalba — TODO once land state-regions exist
+	capital = STATE_MONTE_CASTELLO # Donalba
 }
 
 ################ SRT — Sartosa; the pirate haven ################
@@ -136,7 +144,7 @@ SRT = {
 	country_type = unrecognized
 	tier = city_state
 	cultures = { sartosan }
-	# capital: Sartosa — TODO once land state-regions exist
+	capital = STATE_SARTOSA
 }
 
 ################ EST — Estalia; the kingdoms unite ################
@@ -147,7 +155,7 @@ EST = {
 	country_type = recognized
 	tier = kingdom
 	cultures = { estalian }
-	# capital: Magritta — TODO once land state-regions exist
+	capital = STATE_CENTRAL_MAGRITTA # Magritta, held by MAG at start
 }
 
 ################ BIL — Bilbali; the northern Estalian kingdom ################
@@ -157,7 +165,7 @@ BIL = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { estalian }
-	# capital: Bilbali — TODO once land state-regions exist
+	capital = STATE_CANTABRIO_ROAD # Bilbali
 }
 
 ################ MAG — Magritta; the southern port kingdom ################
@@ -167,7 +175,7 @@ MAG = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { estalian }
-	# capital: Magritta — TODO once land state-regions exist
+	capital = STATE_CENTRAL_MAGRITTA # Magritta
 }
 
 ################ CNT — Cantonia; a minor Estalian kingdom ################
@@ -177,7 +185,9 @@ CNT = {
 	country_type = recognized
 	tier = principality
 	cultures = { estalian }
-	# capital: Cantonia — TODO once land state-regions exist
+	# No hub on the map carries Cantonia, so no canon seat to place: C2, largest owned state
+	# (Western Estalian Coast 12 provinces; Cefiro Hills 11, Nuja slice 11, Pina Wood 5).
+	capital = STATE_WESTERN_ESTALIAN_COAST # non-canon: largest owned state (12 provinces)
 }
 
 ################ BPR — the Border Princes; the belt of petty realms ################
@@ -191,7 +201,7 @@ BPR = {
 	country_type = recognized
 	tier = kingdom
 	cultures = { border_princer }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	capital = STATE_KHARNOS_FOREST # non-canon: its only state (11 provinces)
 }
 
 ################################################################################
@@ -220,7 +230,7 @@ ORT = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Ortegeta — TODO once land state-regions exist
+	capital = STATE_ORTEGETA
 }
 
 ################ GAS — Gastonne; the griffon-banner realm on the Tara Dante ################
@@ -230,7 +240,7 @@ GAS = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Gastonne — TODO once land state-regions exist
+	capital = STATE_GASTONNE
 }
 
 ################ GDO — Gordorno; the fleur-de-lis realm by the Citadel of Gazul ################
@@ -240,7 +250,9 @@ GDO = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Gordorno — TODO once land state-regions exist
+	# Canon seat kept although AQL holds STATE_AQUILENA at start; GDO itself owns
+	# STATE_MYRMIDIA_S_COAST. LORE FLAG.
+	capital = STATE_AQUILENA # Gordorno (mine hub), held by AQL at start
 }
 
 ################ MON — Monteaux; the towered realm on the Black Gulf coast ################
@@ -250,7 +262,9 @@ MON = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Monteaux — TODO once land state-regions exist
+	# Canon seat kept although GAS holds STATE_GASTONNE at start; MON itself owns
+	# STATE_BLACK_PENINSULA. LORE FLAG.
+	capital = STATE_GASTONNE # Monteaux (port hub), held by GAS at start
 }
 
 ################ AQL — Aquilena; the serpent realm on the River Orco ################
@@ -260,7 +274,7 @@ AQL = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Aquilena — TODO once land state-regions exist
+	capital = STATE_AQUILENA # Aquilena; split state, AQL holds all five hubs (23 of 25 provinces)
 }
 
 ################ DUN — Dunkelmund; the double-eagle realm near High Spear ################
@@ -270,7 +284,9 @@ DUN = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Dunkelmund — TODO once land state-regions exist
+	# Canon seat kept although BVR holds STATE_VARENKA_HILLS at start; DUN itself owns
+	# STATE_NORTHERN_BADLANDS. LORE FLAG.
+	capital = STATE_VARENKA_HILLS # Dunkelmund (farm hub), held by BVR at start
 }
 
 ################ ESS — Esselhafen; the chevron-banner realm on the River Stecnek ################
@@ -280,7 +296,7 @@ ESS = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Esselhafen — TODO once land state-regions exist
+	capital = STATE_EASTERN_BORDER_PRINCES # Esselhafen
 }
 
 ################ RAA — Raachwald; the serpent-and-diamond realm by Reavers Keep ################
@@ -290,7 +306,7 @@ RAA = {
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
-	# capital: Raachwald — TODO once land state-regions exist
+	capital = STATE_HOWLING_RIVER_VALLEY # Raachwald
 }
 
 ################ UVE — Uvetovsk; the Kislevite-founded bear realm on the Old Silk Road ################
@@ -302,7 +318,7 @@ UVE = {
 	country_type = recognized
 	tier = principality
 	cultures = { gospodar ungol }
-	# capital: Uvetovsk — TODO once land state-regions exist
+	capital = STATE_LOST_KHYPNIA # Uvetovsk
 }
 
 ################ HKN — Harkon; the chalice realm in the Forest of Gloom ################
@@ -314,7 +330,7 @@ HKN = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { sylvanian_vampire }
-	# capital: Harkon — TODO once land state-regions exist
+	# capital: none - owns no state at start, and no hub on the map carries its canon seat Harkon
 }
 
 ################ PON — Pontenne; the chalice realm by the Chateau de Morsuil ################
@@ -326,7 +342,7 @@ PON = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { sylvanian_vampire }
-	# capital: Pontenne — TODO once land state-regions exist
+	# capital: none - owns no state at start, and no hub on the map carries its canon seat Pontenne
 }
 
 ################################################################################
@@ -343,7 +359,7 @@ PON = {
 # greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
-# Filed here by geography: STATE_BLIGHTED_MARSHES and STATE_BILIOUS_BASILICA sit in
+# Filed here by geography: STATE_BLIGHTED_MARSHES, its only state at start, sits in
 # map_data/state_regions/05_southern_realms.txt. goblin is a cross-file culture ref to
 # common/cultures/greenskin.txt.
 
@@ -352,7 +368,7 @@ XSG = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_BLIGHTED_MARSHES # non-canon: its only state (14 provinces); frozen placeholder clan, no canon seat
 }
 
 ################################################################################
@@ -364,7 +380,8 @@ XSG = {
 
 ################ MGL — Miramar Glade; a wood-elf glade in the Miramar Hills ################
 # PROVISIONAL NAME: "Miramar Glade" is a stand-in taken from the hills it holds; Chris will redo
-# this tag's name later. Filed here by geography: STATE_MIRAMAR_HILLS sits in
+# this tag's name later. Filed here by geography: its holding at start, a slice of STATE_NUJA
+# (STATE_MIRAMAR_HILLS no longer exists in the regenerated map), sits in
 # map_data/state_regions/05_southern_realms.txt. wood_elf is a cross-file culture ref to
 # common/cultures/wood_elf.txt (#6379). unrecognized/principality, like every wood-elf realm.
 
@@ -373,5 +390,5 @@ MGL = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: — none recorded; TODO once a capital STATE_* is assigned
+	capital = STATE_NUJA # non-canon: its only holding (4-province slice of 15; CNT holds the rest and every hub)
 }

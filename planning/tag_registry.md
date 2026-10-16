@@ -63,6 +63,9 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   *The Empire*; `REI` (Reikland) etc. are the start tags that form it.
 - **One row per tag**, columns: `TAG | region file | polity | kind (formable/start) | primary culture
   | placeholder capital | notes`.
+- **The placeholder-capital column is a human-readable seat note, not the authority.** The real
+  `capital = STATE_*` of every tag is in `common/country_definitions/` (convention in
+  `.claude/rules/peoples.md`); where the two differ, the definition wins.
 - **Files mirror the culture epic** (#3404), same region numbers, stems matching the shipped culture
   filenames verbatim (including `03_brettonia`).
 - **Old World rows** (00–07, 10) carry a real primary-culture id from `common/cultures/*.txt`. A
@@ -356,8 +359,9 @@ ZND
 
 Whether the engine **hard-requires exactly 3 chars** or merely tolerates longer tags. Strong evidence
 it is 3: all 827 vanilla tags are exactly 3 characters. The roster is drafted at 3 chars regardless.
-(Colors, `country_type`/`tier`, real `capital = <state>` ids are separate parked decisions on the
-epic, not tag-uniqueness concerns.)
+(Colors, `country_type`/`tier` and real `capital = <state>` ids are separate decisions on the
+epic, not tag-uniqueness concerns; capitals are now set in `common/country_definitions/` 00-07 and
+10 per `.claude/rules/peoples.md`, with 11 still pending.)
 
 ## Roster
 
@@ -393,20 +397,20 @@ state (the Forest of Sighs, in Norsca's state file); see the wood-elves conventi
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
-| SAR | `00_norsca` | Sarls | start | `norscan` | Sortsvinar coast | Wolf of the Sea |
-| AES | `00_norsca` | Aeslings | start | `norscan` | — | Slaanesh-leaning tribe |
-| BAE | `00_norsca` | Baersonlings | start | `norscan` | — | reavers, on speaking terms w/ humanity |
-| BJO | `00_norsca` | Bjornlings | start | `norscan` | — | traders/fishers/sailors |
-| SKA | `00_norsca` | Skaelings | start | `norscan` | — | Khorne-leaning |
-| GRA | `00_norsca` | Graelings | start | `norscan` | — | Tzeentch-leaning sea raiders |
-| VAR | `00_norsca` | Varg | start | `norscan` | — | northern Chaos-touched tribe |
-| HAS | `00_norsca` | Hastlings | start | `norscan` | — | High Tribe near the Chaos Wastes |
-| KVE | `00_norsca` | Kvelligs | start | `norscan` | — | High Tribe near the Chaos Wastes |
-| SNA | `00_norsca` | Snaegr | start | `norscan` | — | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook) |
-| SOR | `00_norsca` | Sortsvinaer | start | `norscan` | — | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook); re-supports the seed name dropped in the original draft |
-| URS | `00_norsca` | Ursfjordings | start | `norscan` | Ursfjord | `principality`/`unrecognized`; lesser tribe, Goromadny Mtns; home hold of Beorg Bearstruck's Bearmen of Urslo warband; absorbed review tag GMD (#6373) |
-| XSD | `00_norsca` | Skaven Clan D (placeholder) | start | `goblin` | — | Skaven placeholder (Hell Pit); `principality`/`unrecognized`; see *Conventions* (#6373) |
-| SOT | `00_norsca` | Sisters of Twilight | start | `wood_elf` | Forest of Sighs | `principality`/`unrecognized`; Naestra and Arahan's wood-elf realm; filed by state geography (#6373) |
+| SAR | `00_norsca` | Sarls | start | `norscan` | Sarl Encampment (Bay of Blades) | Wolf of the Sea |
+| AES | `00_norsca` | Aeslings | start | `norscan` | Kraken Coast (non-canon) | Slaanesh-leaning tribe |
+| BAE | `00_norsca` | Baersonlings | start | `norscan` | Strovengaard (non-canon) | reavers, on speaking terms w/ humanity |
+| BJO | `00_norsca` | Bjornlings | start | `norscan` | Bjornling's Gathering | traders/fishers/sailors |
+| SKA | `00_norsca` | Skaelings | start | `norscan` | Naglfari Coast (non-canon) | Khorne-leaning |
+| GRA | `00_norsca` | Graelings | start | `norscan` | Graeling Moot (Norsveg Plain) | Tzeentch-leaning sea raiders |
+| VAR | `00_norsca` | Varg | start | `norscan` | Varg Camp | northern Chaos-touched tribe |
+| HAS | `00_norsca` | Hastlings | start | `norscan` | Trollheim Mountains (non-canon) | High Tribe near the Chaos Wastes |
+| KVE | `00_norsca` | Kvelligs | start | `norscan` | Taldursfjord (non-canon) | High Tribe near the Chaos Wastes |
+| SNA | `00_norsca` | Snaegr | start | `norscan` | Hall of Snaegr (Ulfwrenar Mountains) | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook) |
+| SOR | `00_norsca` | Sortsvinaer | start | `norscan` | Sortsvinaer (Helspire Coast) | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook); re-supports the seed name dropped in the original draft |
+| URS | `00_norsca` | Ursfjordings | start | `norscan` | Ursfjord (Frozen Coast) | `principality`/`unrecognized`; lesser tribe, Goromadny Mtns; home hold of Beorg Bearstruck's Bearmen of Urslo warband; absorbed review tag GMD (#6373) |
+| XSD | `00_norsca` | Skaven Clan D (placeholder) | start | `goblin` | Hell Pit (Hell Pit Depths) | Skaven placeholder (Hell Pit); `principality`/`unrecognized`; see *Conventions* (#6373) |
+| SOT | `00_norsca` | Sisters of Twilight | start | `wood_elf` | Forest of Sighs (West Helspire Mountains, SOT slice) | `principality`/`unrecognized`; Naestra and Arahan's wood-elf realm; filed by state geography (#6373) |
 
 ### 01 KISLEV (gospodar, ungol) — 10 tags; KIS formable
 
@@ -416,16 +420,16 @@ oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (App
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
-| KIS | `01_kislev` | Kislev (Tzardom) | formable | `gospodar`, `ungol` | — | United Kislev — both founding peoples |
+| KIS | `01_kislev` | Kislev (Tzardom) | formable | `gospodar`, `ungol` | Kislev (The Dobryrion) | United Kislev — both founding peoples |
 | KSV | `01_kislev` | Kislev | start | `gospodar` | Kislev | the capital oblast, Tzarina's seat |
 | ERE | `01_kislev` | Erengrad | start | `gospodar`, `ungol` | Erengrad | western port city, gospodar-founded amid Ungol lands |
 | PRA | `01_kislev` | Praag | start | `gospodar` | Praag | northern frontier city |
-| UNG | `01_kislev` | Ungol Horse-Tribes | start | `ungol` | — | nomadic steppe Ungols |
-| TRO | `01_kislev` | Troll Country | start | `ungol` | — | far-NW frontier oblast |
-| BOL | `01_kislev` | Bolgasgrad | start | `gospodar` | Bolgasgrad | northern oblast town |
-| VOL | `01_kislev` | Volksgrad | start | `gospodar` | Volksgrad | oblast town |
-| DOL | `01_kislev` | Dolgan | start | `ungol` | — | old eastern horse-tribe |
-| ROP | `01_kislev` | Roppsmenn | start | `ungol` | — | old northern tribe |
+| UNG | `01_kislev` | Ungol Horse-Tribes | start | `ungol` | Ungol Steppes (non-canon) | nomadic steppe Ungols |
+| TRO | `01_kislev` | Troll Country | start | `ungol` | Troll Country | far-NW frontier oblast |
+| BOL | `01_kislev` | Bolgasgrad | start | `gospodar` | Bolgasgrad (Eastern Oblast, PRA-held) | northern oblast town |
+| VOL | `01_kislev` | Volksgrad | start | `gospodar` | Volksgrad (Eastern Oblast, PRA-held) | oblast town |
+| DOL | `01_kislev` | Dolgan | start | `ungol` | The Golinyi (non-canon) | old eastern horse-tribe |
+| ROP | `01_kislev` | Roppsmenn | start | `ungol` | Kislev Foothills (non-canon) | old northern tribe |
 
 ### 02 EMPIRE (per province culture, wood_elf) — 24 tags; EMP + VEM formable
 
@@ -537,13 +541,13 @@ no region file of their own (see *Conventions*). All carry `wood_elf` and are
 | PAR | `03_brettonia` | Parravon | start | `bretonnian` | Parravon |  |
 | MOU | `03_brettonia` | Mousillon | start | `mousillon` | Mousillon | the cursed city / undead |
 | MOR | `03_brettonia` | Massif Orcal | start | `orc`, `goblin` | Massif Orcal | remnant Greenskin holdout, Bretonnian heartland; named by location, no tribe attested — TODO revisit |
-| SKZ | `03_brettonia` | Skullsmasherz | start | `orc` | — | Ugrok Craktoof; Grey Mtns, Bretonnia's southern flank |
+| SKZ | `03_brettonia` | Skullsmasherz | start | `orc` | Pale Sisters (non-canon) | Ugrok Craktoof; Grey Mtns, Bretonnia's southern flank |
 | ANM | `03_brettonia` | Anmyr | start | `wood_elf` | Anmyr | `principality`/`unrecognized`; realm of Athel Loren (#6373) |
 | ARG | `03_brettonia` | Argwylon | start | `wood_elf` | Argwylon | `principality`/`unrecognized`; realm of Athel Loren (Durthu's, TW:W) (#6373) |
 | TLS | `03_brettonia` | Talsyn | start | `wood_elf` | Talsyn | `principality`/`unrecognized`; realm of Athel Loren (Orion's, TW:W) (#6373) |
 | TRG | `03_brettonia` | Torgovann | start | `wood_elf` | Torgovann | `principality`/`unrecognized`; realm of Athel Loren (#6373) |
 | WYD | `03_brettonia` | Wydrioth | start | `wood_elf` | Wydrioth | `principality`/`unrecognized`; realm of Athel Loren (#6373) |
-| OKP | `03_brettonia` | Oak of Prophecy | start | `wood_elf` | — | `principality`/`unrecognized`; wood-elf glade beyond Athel Loren's eaves (#6373) |
+| OKP | `03_brettonia` | Oak of Prophecy | start | `wood_elf` | Oak of Prophecy | `principality`/`unrecognized`; wood-elf glade beyond Athel Loren's eaves (#6373) |
 
 ### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_ancestral, sylvanian_vampire, goblin) — 28 tags; KAZ formable
 
@@ -600,18 +604,18 @@ Eastern Irranas. Plus the Skaven placeholders `XSH`–`XSL` (see *Conventions*).
 | KVN | `04_karaz_ankor` | Karak Varn | start | `dawi` | Karak Varn | ruined, flooded (Skaven/Night Goblin occupier separate) |
 | EKR | `04_karaz_ankor` | Ekrund | start | `dawi_ancestral` | Ekrund | ruined, Black Gulf mines (Orc occupier separate) |
 | GUN | `04_karaz_ankor` | Mount Gunbad | start | `dawi` | Mount Gunbad | ruined, brightstone mines (Night Goblin occupier separate) |
-| DRZ | `04_karaz_ankor` | Karak Drazh | start | `dawi_ancestral` | Karak Drazh | ruined -469 IC (Orc occupier "Black Crag" is a separate 06 tag) |
+| DRZ | `04_karaz_ankor` | Karak Drazh | start | `dawi_ancestral` | Karak Drazh / Black Crag (West Death Pass) | ruined -469 IC (Orc occupier "Black Crag" is a separate 06 tag) |
 | KIZ | `04_karaz_ankor` | Karak Izor | start | `dawi` | Karak Izor | the Copper Mountain (#6373) |
 | KZF | `04_karaz_ankor` | Karak Ziflin | start | `dawi_grey` | Karak Ziflin | Grey Mountains, above Axe Bite Pass (#6373) |
 | KOR | `04_karaz_ankor` | Kraka Ornsmotek | start | `dawi_norse` | Kraka Ornsmotek | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
 | KRV | `04_karaz_ankor` | Kraka Ravnsvake | start | `dawi_norse` | Kraka Ravnsvake | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
-| VMP | `04_karaz_ankor` | Kemmler's Host | start | `sylvanian_vampire` | — | Heinrich Kemmler the Lichemaster (human lich); `unrecognized`; name and culture are disclosed stand-ins (#6373) |
+| VMP | `04_karaz_ankor` | Kemmler's Host | start | `sylvanian_vampire` | Eastern Irranas (non-canon) | Heinrich Kemmler the Lichemaster (human lich); `unrecognized`; name and culture are disclosed stand-ins (#6373) |
 | LHX | `04_karaz_ankor` | Lahmian Exiles | start | `lahmian_vampire` | New Lahmia | Lahmian vampire exiles in STATE_NEW_LAHMIA; `unrecognized`; new tag distinct from `LAH` (Chris, 2026-10-03) |
-| XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
-| XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
-| XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
-| XSK | `04_karaz_ankor` | Skaven Clan I (placeholder) | start | `goblin` | — | Skaven placeholder (Dark Maiden Pass); see *Conventions* (#6373) |
-| XSL | `04_karaz_ankor` | Skaven Clan J (placeholder) | start | `goblin` | — | Skaven placeholder (Cripple Peak); see *Conventions* (#6373) |
+| XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | start | `goblin` | Shattered Teeth (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
+| XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | start | `goblin` | Kreutzhofen (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
+| XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | start | `goblin` | Aquilena (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
+| XSK | `04_karaz_ankor` | Skaven Clan I (placeholder) | start | `goblin` | Dark Maiden Pass (non-canon) | Skaven placeholder (Dark Maiden Pass); see *Conventions* (#6373) |
+| XSL | `04_karaz_ankor` | Skaven Clan J (placeholder) | start | `goblin` | Cripple Peak (non-canon) | Skaven placeholder (Cripple Peak); see *Conventions* (#6373) |
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
@@ -676,21 +680,21 @@ convention.
 | EST | `05_southern_realms` | Estalia | formable | `estalian` | Magritta | the kingdoms unite |
 | BIL | `05_southern_realms` | Bilbali | start | `estalian` | Bilbali |  |
 | MAG | `05_southern_realms` | Magritta | start | `estalian` | Magritta |  |
-| CNT | `05_southern_realms` | Cantonia | start | `estalian` | Cantonia | minor Estalian kingdom |
-| BPR | `05_southern_realms` | Border Princes | start | `border_princer` | — | loose principalities; decentralization → a later law/government-type variant |
+| CNT | `05_southern_realms` | Cantonia | start | `estalian` | Western Estalian Coast (non-canon) | minor Estalian kingdom |
+| BPR | `05_southern_realms` | Border Princes | start | `border_princer` | Kharnos Forest (non-canon) | loose principalities; decentralization → a later law/government-type variant |
 | ORT | `05_southern_realms` | Ortegeta | start | `border_princer` | Ortegeta | castled realm above Ghoulstone Keep (z10 map) |
 | GAS | `05_southern_realms` | Gastonne | start | `border_princer` | Gastonne | griffon-banner realm on the Tara Dante |
-| GDO | `05_southern_realms` | Gordorno | start | `border_princer` | Gordorno | fleur-de-lis realm by the Citadel of Gazul |
-| MON | `05_southern_realms` | Monteaux | start | `border_princer` | Monteaux | towered realm on the Black Gulf coast |
+| GDO | `05_southern_realms` | Gordorno | start | `border_princer` | Gordorno (Aquilena, AQL-held) | fleur-de-lis realm by the Citadel of Gazul |
+| MON | `05_southern_realms` | Monteaux | start | `border_princer` | Monteaux (Gastonne, GAS-held) | towered realm on the Black Gulf coast |
 | AQL | `05_southern_realms` | Aquilena | start | `border_princer` | Aquilena | serpent realm on the River Orco |
-| DUN | `05_southern_realms` | Dunkelmund | start | `border_princer` | Dunkelmund | double-eagle realm near High Spear |
+| DUN | `05_southern_realms` | Dunkelmund | start | `border_princer` | Dunkelmund (Varenka Hills, BVR-held) | double-eagle realm near High Spear |
 | ESS | `05_southern_realms` | Esselhafen | start | `border_princer` | Esselhafen | chevron-banner realm on the River Stecnek |
 | RAA | `05_southern_realms` | Raachwald | start | `border_princer` | Raachwald | serpent-and-diamond realm by Reavers Keep |
 | UVE | `05_southern_realms` | Uvetovsk | start | `gospodar`, `ungol` | Uvetovsk | Kislevite-founded bear realm, Old Silk Road; cross-file culture ref |
-| HKN | `05_southern_realms` | Harkon | start | `sylvanian_vampire` | Harkon | `unrecognized`; undead chalice realm, Forest of Gloom; cross-file culture ref |
-| PON | `05_southern_realms` | Pontenne | start | `sylvanian_vampire` | Pontenne | `unrecognized`; undead chalice realm by the Chateau de Morsuil; cross-file culture ref |
-| XSG | `05_southern_realms` | Skaven Clan E (placeholder) | start | `goblin` | — | Skaven placeholder (Blighted Marshes); see *Conventions* (#6373) |
-| MGL | `05_southern_realms` | Miramar Glade | start | `wood_elf` | — | `principality`/`unrecognized`; wood-elf glade, Miramar Hills; name provisional, Chris to redo (#6373) |
+| HKN | `05_southern_realms` | Harkon | start | `sylvanian_vampire` | — (Harkon has no hub; owns nothing) | `unrecognized`; undead chalice realm, Forest of Gloom; cross-file culture ref |
+| PON | `05_southern_realms` | Pontenne | start | `sylvanian_vampire` | — (Pontenne has no hub; owns nothing) | `unrecognized`; undead chalice realm by the Chateau de Morsuil; cross-file culture ref |
+| XSG | `05_southern_realms` | Skaven Clan E (placeholder) | start | `goblin` | Blighted Marshes (non-canon) | Skaven placeholder (Blighted Marshes); see *Conventions* (#6373) |
+| MGL | `05_southern_realms` | Miramar Glade | start | `wood_elf` | Nuja (non-canon, MGL slice) | `principality`/`unrecognized`; wood-elf glade, Miramar Hills; name provisional, Chris to redo (#6373) |
 
 ### 06 BADLANDS (orc, goblin) — 11 tags; no formable
 
@@ -722,16 +726,16 @@ instead).
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | RED | `06_badlands` | Red Eye | start | `orc` | Red Eye | Grimgor Ironhide's 'Ardboyz; ex-Karak Ungor |
-| CRM | `06_badlands` | Crooked Moon | start | `goblin` | — | Skarsnik's Night Goblins; Karak Eight Peaks |
-| BKA | `06_badlands` | Broken Axe | start | `goblin` | — | Grom the Paunch (Goblin); Misty Mountain |
+| CRM | `06_badlands` | Crooked Moon | start | `goblin` | Karak Eight Peaks | Skarsnik's Night Goblins; Karak Eight Peaks |
+| BKA | `06_badlands` | Broken Axe | start | `goblin` | Misty Mountain (Sour Crags) | Grom the Paunch (Goblin); Misty Mountain |
 | RFG | `06_badlands` | Red Fangs | start | `orc` | Black Crag | Gorfang Rotgut; holds Black Crag (ex-Karak Drazh) |
 | ICL | `06_badlands` | Ironclaw | start | `orc` | Iron Rock | Gorbad Ironclaw; holds Iron Rock (N. Badlands) |
-| BSB | `06_badlands` | Bloody Sunz | start | `orc` | — | Grumlok & Gazbag; Badlands orc tribe |
-| BNR | `06_badlands` | Bonerattlaz | start | `orc` | — | Azhag the Slaughterer; N. World's Edge |
-| BTO | `06_badlands` | Broken Tooth | start | `orc` | — | Crusher Zogoth; pre-Gorbad Iron Rock (historical) |
-| BRN | `06_badlands` | Broken Nose | start | `goblin` | — | Goblin tribe of the Vaults |
-| BLV | `06_badlands` | Black Venom | start | `goblin` | — | Forest Goblin tribe, S. of Black Fire Pass |
-| RDV | `06_badlands` | Redvenom | start | `goblin` | — | Snagla Grobspit's Forest Goblins |
+| BSB | `06_badlands` | Bloody Sunz | start | `orc` | Blightwater (non-canon) | Grumlok & Gazbag; Badlands orc tribe |
+| BNR | `06_badlands` | Bonerattlaz | start | `orc` | Northern World's Edge (non-canon) | Azhag the Slaughterer; N. World's Edge |
+| BTO | `06_badlands` | Broken Tooth | start | `orc` | The Cauldron (non-canon) | Crusher Zogoth; pre-Gorbad Iron Rock (historical) |
+| BRN | `06_badlands` | Broken Nose | start | `goblin` | Novalone Pass (non-canon) | Goblin tribe of the Vaults |
+| BLV | `06_badlands` | Black Venom | start | `goblin` | West Middenland (non-canon, BLV slice) | Forest Goblin tribe, S. of Black Fire Pass |
+| RDV | `06_badlands` | Redvenom | start | `goblin` | Marshes of Madness (non-canon) | Snagla Grobspit's Forest Goblins |
 | STR | `06_badlands` | Strigoi Remnants | start | `sylvanian_vampire` | Old Strygos | Strigoi remnant in STATE_OLD_STRYGOS; `unrecognized`; culture is a disclosed stand-in, no Strigoi culture authored (Chris, 2026-10-03) |
 
 **Density reserve (not yet allocated — add later if Chris wants a denser Badlands).** Confirmed TW:W
@@ -779,7 +783,7 @@ start map gave it states: `orc` culture, `unrecognized`/`principality`.
 | UZK | `10_dark_lands` | Uzkulak | start | `dawi_zharr` | Uzkulak | Port of Zharr |
 | KHN | `10_dark_lands` | Great Khanate | formable | `hobgoblin` | — | Hobgobla-Khan unites the hobgoblins |
 | HGK | `10_dark_lands` | Hobgobla-Khan | start | `hobgoblin` | — | the great hobgoblin realm |
-| DLO | `10_dark_lands` | Dark Land Orcs | start | `orc` | — | greenskin tribes of the Dark Lands; TW:W faction (#6373) |
+| DLO | `10_dark_lands` | Dark Land Orcs | start | `orc` | Causeway of Zharr (non-canon) | greenskin tribes of the Dark Lands; TW:W faction (#6373) |
 
 ### 08 ARABY (PLACEHOLDER + bretonnian crusaders) — 10 tags; ARB formable
 

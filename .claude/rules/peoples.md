@@ -104,6 +104,7 @@ TAG = {
 	country_type = recognized | unrecognized | colonial | company | decentralized
 	tier = city_state | principality | grand_principality | kingdom | hegemony | empire
 	cultures = { culture_id_1 culture_id_2 ... }
+	capital = STATE_<KEY>
 }
 ```
 
@@ -137,10 +138,28 @@ TAG = {
   one and say in the block comment and the registry row what it does not describe (e.g. `BRK`
   `norscan` for a Chaos garrison, `VMP` `sylvanian_vampire` for Kemmler's non-vampire host). Do not
   author a new culture to fill the gap inside a tag item.
-- **`capital` is deliberately omitted** on every tag this mod ships until it has a real
-  `STATE_*` to point at (land state-regions are emitted — see [testing.md](testing.md) —
-  but not every tag has had its capital assignment revisited). Record the intended
-  capital as a `# capital: <Name> — TODO` comment where it's still missing.
+- **`capital`** goes right after `cultures`, as in vanilla's `00_countries.txt`, and names a
+  `STATE_*` key from `map_data/state_regions/` (Chris-approved, #3658):
+  - **C1 canon seat.** A tag's capital is the state holding its canon seat's city hub (any hub
+    type), whoever owns that state at start. Claimants and formables keep their canon seat as
+    capital even when another tag holds it; vanilla does the same (`POL`, `ITA`, and 12 tags on
+    `STATE_AMHARA`). Comment the seat where the state name doesn't make it obvious.
+  - **C2 no canon seat, owns land.** Use its largest owned state by province count in
+    `mapgen/derived/state_ownership.json`, commented `non-canon`.
+  - **C3 no canon seat, owns nothing.** Omit `capital` and write `# capital: none - <reason>`.
+  - Never use a `STATE_LAND_<n>` key: it is an unnamed state's key and changes on regeneration.
+  - No offline gate checks these keys. After a state rename or regeneration
+    (`generate_land_regions`), grep `capital =` in `common/country_definitions/` against
+    `map_data/state_regions/*.txt`.
+
+  Per-file status (a file still marked pending keeps its `# capital: <Name> — TODO` comments and
+  is not yet out of compliance):
+  - `02_empire.txt` — done (#3658).
+  - `00_norsca.txt`, `01_kislev.txt`, `03_brettonia.txt` — done (#3659).
+  - `04_karaz_ankor.txt`, `10_dark_lands.txt` — done (#3660).
+  - `05_southern_realms.txt`, `06_badlands.txt`, `07_nehekhara.txt` — done (#3661).
+  - `11_ogre_kingdoms.txt` — pending. `98_unclaimed.txt` (`UNO`) has no capital by design, and
+    `99_dynamic.txt` holds the dynamic slots.
 
 A formation entry stays in the **minor/culture-based shape**:
 

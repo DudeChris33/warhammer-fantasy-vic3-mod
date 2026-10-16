@@ -6,10 +6,17 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/norscan_humans.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
 #
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's city hub, whoever owns that state at
+#      start — a claimant or formable keeps its canon seat;
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 # Country display names/adjectives live in localization/english/countries_norsca_l_english.yml.
 # No formable for this region — see common/country_formation/00_norsca_formables.txt.
 
@@ -26,7 +33,9 @@ SAR = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: Sortsvinar coast — TODO once land state-regions exist
+	# The old "Sortsvinar coast" seat note is stale: that coast (STATE_HELSPIRE_COAST, hub
+	# Sortsvinaer) is SOR's land. The Sarl Encampment hub stands for the seat. LORE FLAG.
+	capital = STATE_BAY_OF_BLADES # Sarl Encampment
 }
 
 ################ AES — Aeslings; the Slaanesh-leaning tribe ################
@@ -36,7 +45,7 @@ AES = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_KRAKEN_COAST # non-canon (C2): largest owned state, 20 provinces
 }
 
 ################ BAE — Baersonlings; reavers still on speaking terms with humanity ################
@@ -46,7 +55,7 @@ BAE = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_STROVENGAARD # non-canon (C2): largest owned state, 11 provinces
 }
 
 ################ BJO — Bjornlings; traders, fishers and sailors ################
@@ -56,7 +65,7 @@ BJO = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_BJORNLING_S_GATHERING
 }
 
 ################ SKA — Skaelings; the Khorne-leaning tribe ################
@@ -66,7 +75,7 @@ SKA = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_NAGLFARI_COAST # non-canon (C2): largest owned state, 28 provinces
 }
 
 ################ GRA — Graelings; Tzeentch-leaning sea raiders ################
@@ -76,7 +85,7 @@ GRA = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_NORSVEG_PLAIN # Graeling Moot
 }
 
 ################ VAR — Varg; the northern Chaos-touched tribe ################
@@ -86,7 +95,7 @@ VAR = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_VARG_CAMP
 }
 
 ################ HAS — Hastlings; a High Tribe near the Chaos Wastes ################
@@ -96,7 +105,7 @@ HAS = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_TROLLHEIM_MOUNTAINS # non-canon (C2): largest owned state, 14 provinces
 }
 
 ################ KVE — Kvelligs; a High Tribe near the Chaos Wastes ################
@@ -106,7 +115,7 @@ KVE = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_TALDURSFJORD # non-canon (C2): largest owned state, 14 provinces
 }
 
 ################################################################################
@@ -125,7 +134,7 @@ SNA = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_ULFWRENAR_MOUNTAINS # Hall of Snaegr
 }
 
 ################ SOR — Sortsvinaer; a lesser tribe (WH: The Old World Rulebook) ################
@@ -135,7 +144,7 @@ SOR = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_HELSPIRE_COAST # Sortsvinaer (port hub)
 }
 
 ################ URS — Ursfjordings; a lesser tribe of the Goromadny Mountains ################
@@ -147,7 +156,7 @@ URS = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { norscan }
-	# capital: Ursfjord — TODO once land state-regions exist
+	capital = STATE_FROZEN_COAST # Ursfjord (farm hub); the city hub is the Hall of Urslo
 }
 
 ################ XSD — Skaven Clan D (placeholder); Hell Pit ################
@@ -165,7 +174,9 @@ XSD = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	# The Hell Pit's city hub fell in STATE_HELL_PIT_DEPTHS, not the eponymous STATE_HELL_PIT
+	# (both XSD-held). LORE FLAG.
+	capital = STATE_HELL_PIT_DEPTHS # Hell Pit
 }
 
 ################################################################################
@@ -176,15 +187,18 @@ XSD = {
 ################################################################################
 
 ################ SOT — Sisters of Twilight; the twin sisters' wood-elf realm ################
-# Canon-firm name: the twin sisters Naestra and Arahan. Filed here by geography: STATE_FOREST_OF_SIGHS
-# sits in map_data/state_regions/00_norsca.txt (strategic region region_norsca). wood_elf is a
-# cross-file culture ref to common/cultures/wood_elf.txt (#6379). unrecognized/principality, like
-# every wood-elf realm.
+# Canon-firm name: the twin sisters Naestra and Arahan. Filed here by geography: the old
+# STATE_FOREST_OF_SIGHS no longer exists; the forest is now SOT's slice of STATE_WEST_HELSPIRE_MOUNTAINS
+# (shared with BJO), in map_data/state_regions/00_norsca.txt (strategic region region_norsca).
+# wood_elf is a cross-file culture ref to common/cultures/wood_elf.txt (#6379).
+# unrecognized/principality, like every wood-elf realm.
 
 SOT = {
 	color = { 168 228 132 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	# capital: Forest of Sighs — TODO once a capital STATE_* is assigned
+	# The Forest of Sighs, SOT's 4-province slice; the state's city hub (Helspire Camp) is in
+	# BJO's slice. LORE FLAG.
+	capital = STATE_WEST_HELSPIRE_MOUNTAINS
 }

@@ -12,6 +12,18 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/greenskin.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
+#
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's hub (any hub type), whoever owns that
+#      state at start — a claimant or formable keeps its canon seat (vanilla does the same: POL, ITA,
+#      and a dozen tags share STATE_AMHARA);
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 #
 # ALL TWELVE are unrecognized/principality (Chris, 2026-09-04 — supersedes the original decentralized
 # choice). Greenskin tribes and WAAAGH!s hold no court and sign no treaty, but unrecognized (not
@@ -21,10 +33,6 @@
 #
 # NO FORMABLE in this region — Chris dropped the Grand WAAAGH! (WAG), so there is deliberately no
 # common/country_formation/06_badlands_formables.txt and no WAG tag reserved.
-#
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_badlands_l_english.yml.
 
 ################ RED — Red Eye ################
@@ -35,7 +43,7 @@ RED = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: Red Eye — TODO once land state-regions exist
+	capital = STATE_DELVED_HEIGHTS # Red Eye Mountain (Karak Ungor)
 }
 
 ################ CRM — Crooked Moon ################
@@ -46,7 +54,7 @@ CRM = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	capital = STATE_KARAK_EIGHT_PEAKS # Karak Eight Peaks
 }
 
 ################ BKA — Broken Axe ################
@@ -57,7 +65,7 @@ BKA = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	capital = STATE_SOUR_CRAGS # Misty Mountain (mine hub); medium-confidence seat
 }
 
 ################ RFG — Red Fangs ################
@@ -68,7 +76,7 @@ RFG = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: Black Crag — TODO once land state-regions exist
+	capital = STATE_WEST_DEATH_PASS # Black Crag (Karak Drazh)
 }
 
 ################ ICL — Ironclaw ################
@@ -79,7 +87,7 @@ ICL = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: Iron Rock — TODO once land state-regions exist
+	capital = STATE_BLOOD_RIVER_VALLEY # Iron Rock
 }
 
 ################ BSB — Bloody Sunz ################
@@ -90,7 +98,9 @@ BSB = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	# No canon seat. Largest owned state: Blightwater 40 provinces (Worlds Edge Foothills 30,
+	# Eastern Badlands 19, Old Strygos slice 7).
+	capital = STATE_BLIGHTWATER # non-canon: largest owned state (40 provinces)
 }
 
 ################ BNR — Bonerattlaz ################
@@ -101,7 +111,7 @@ BNR = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	capital = STATE_NORTHERN_WORLD_S_EDGE # non-canon: its only state (5 provinces)
 }
 
 ################ BTO — Broken Tooth ################
@@ -112,7 +122,7 @@ BTO = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { orc }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	capital = STATE_THE_CAULDRON # non-canon: largest owned state (23 provinces; The Blight 15)
 }
 
 ################ BRN — Broken Nose ################
@@ -123,7 +133,9 @@ BRN = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	# No canon seat. Apuccini Mountains and Novalone Pass tie at 6 provinces (STATE_LAND_664, an
+	# unnamed state, is excluded); tie broken on arable_land, 40 to 39.
+	capital = STATE_NOVALONE_PASS # non-canon: largest owned named state (6 provinces, tie-broken)
 }
 
 ################ BLV — Black Venom ################
@@ -134,7 +146,9 @@ BLV = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	# LORE FLAG: the painted start map gives BLV only a slice of West Middenland, not land
+	# south of Black Fire Pass as the lore note above says.
+	capital = STATE_WEST_MIDDENLAND # non-canon: its only holding (3-province slice of 11; MID holds the rest and every hub)
 }
 
 ################ RDV — Redvenom ################
@@ -145,7 +159,7 @@ RDV = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none recorded in planning/tag_registry.md; TODO once land state-regions exist
+	capital = STATE_MARSHES_OF_MADNESS # non-canon: largest owned state (24 provinces; Sunken Khemarch 21)
 }
 
 ################ STR — Strigoi Remnants; STATE_OLD_STRYGOS ################
@@ -161,5 +175,5 @@ STR = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { sylvanian_vampire }
-	# capital: Old Strygos — TODO once land state-regions exist
+	capital = STATE_OLD_STRYGOS # split state; STR holds every hub (34 of 41 provinces)
 }

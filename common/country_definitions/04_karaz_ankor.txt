@@ -10,10 +10,17 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/dwarven.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
 #
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's hub (any hub type), whoever owns that
+#      state at start — a claimant, formable or ruined hold keeps its canon seat;
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 # Country display names/adjectives live in localization/english/countries_karaz_ankor_l_english.yml.
 # The KAZ formation rule lives in common/country_formation/04_karaz_ankor_formables.txt.
 #
@@ -32,7 +39,7 @@ KAZ = {
 	country_type = recognized
 	tier = hegemony
 	cultures = { dawi dawi_grey dawi_norse dawi_ancestral }
-	# capital: Karaz-a-Karak — TODO once land state-regions exist
+	capital = STATE_AGRILDRIN # Karaz-a-Karak, held by KAK at start
 }
 
 ################ KAK — Karaz-a-Karak; the High King's hold (Everpeak) ################
@@ -42,7 +49,7 @@ KAK = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { dawi }
-	# capital: Karaz-a-Karak — TODO once land state-regions exist
+	capital = STATE_AGRILDRIN # Karaz-a-Karak
 }
 
 ################ ZHU — Zhufbar; the hold of the water-wheels and forges ################
@@ -52,7 +59,7 @@ ZHU = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Zhufbar — TODO once land state-regions exist
+	capital = STATE_BLACK_WATER # Zhufbar
 }
 
 ################ KAD — Karak Kadrin; the Slayer Keep ################
@@ -62,7 +69,7 @@ KAD = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Karak Kadrin — TODO once land state-regions exist
+	capital = STATE_PEAK_PASS # Karak Kadrin
 }
 
 ################ BVR — Barak Varr; the sea-hold ################
@@ -72,7 +79,7 @@ BVR = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Barak Varr — TODO once land state-regions exist
+	capital = STATE_VARENKA_HILLS # Barak Varr
 }
 
 ################ AZL — Karak Azul; the southern hold ################
@@ -82,7 +89,7 @@ AZL = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_ancestral }
-	# capital: Karak Azul — TODO once land state-regions exist
+	capital = STATE_IRON_PEAKS # Karak Azul
 }
 
 ################ KEP — Karak Eight Peaks; contested, the great reclamation ################
@@ -92,7 +99,9 @@ KEP = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { dawi_ancestral }
-	# capital: Karak Eight Peaks — TODO once land state-regions exist
+	# Canon seat kept although CRM holds STATE_KARAK_EIGHT_PEAKS at start; KEP itself owns
+	# STATE_KARAGRIL and STATE_KARAG_NAR (Chris denied a nearest-owned-state capital). LORE FLAG.
+	capital = STATE_KARAK_EIGHT_PEAKS # Karak Eight Peaks, held by CRM at start
 }
 
 ################ KAG — Karak Angazbar; the Black Mountains "Irongate" ################
@@ -102,7 +111,9 @@ KAG = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_ancestral }
-	# capital: Karak Angazbar — TODO once land state-regions exist
+	# The hold is the state's mine hub, spelled "Karak Angazhar" on the map (TWW3); this file
+	# and the country loc keep the older "Angazbar". Shares the state with KHI, which holds it.
+	capital = STATE_BLACK_MOUNTAINS # Karak Angazhar (mine hub), held by KHI at start
 }
 
 ################ KNO — Karak Norn; the Grey Mountains ################
@@ -112,7 +123,7 @@ KNO = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_grey }
-	# capital: Karak Norn — TODO once land state-regions exist
+	capital = STATE_SOUTH_GREY_MOUNTAINS # Karak Norn
 }
 
 ################ KHI — Karak Hirn; the Vaults ################
@@ -122,7 +133,7 @@ KHI = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_grey }
-	# capital: Karak Hirn — TODO once land state-regions exist
+	capital = STATE_BLACK_MOUNTAINS # Karak Hirn
 }
 
 ################ KRD — Kraka Drak; the Norse dwarf hold, the long watch ################
@@ -132,7 +143,7 @@ KRD = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_norse }
-	# capital: Kraka Drak — TODO once land state-regions exist
+	capital = STATE_KRAKA_DRAK
 }
 
 ################ KUN — Karak Ungor; ruined (the Red Eye Mountain) ################
@@ -142,7 +153,7 @@ KUN = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Karak Ungor — TODO once land state-regions exist
+	capital = STATE_DELVED_HEIGHTS # Karak Ungor, held by RED at start
 }
 
 ################ KVN — Karak Varn; ruined and flooded ################
@@ -152,7 +163,7 @@ KVN = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Karak Varn — TODO once land state-regions exist
+	capital = STATE_BLACK_MOUNDS # Karak Varn
 }
 
 ################ GUN — Mount Gunbad; ruined, the brightstone mines ################
@@ -162,7 +173,7 @@ GUN = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Mount Gunbad — TODO once land state-regions exist
+	capital = STATE_MOUNT_GUNBAD # unowned at start
 }
 
 ################ VLG — Karak Vlag; ruined, the far north, destroyed by Chaos ################
@@ -172,7 +183,7 @@ VLG = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Karak Vlag — TODO once land state-regions exist
+	capital = STATE_HIGH_PASS # Karak Vlag
 }
 
 ################ SLV — Mount Silverspear; ruined mine of the Silver Road ################
@@ -182,7 +193,7 @@ SLV = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Mount Silverspear — TODO once land state-regions exist
+	capital = STATE_MOUNT_SILVERSPEAR
 }
 
 ################ EKR — Ekrund; ruined, the Black Gulf mines ################
@@ -192,7 +203,7 @@ EKR = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_ancestral }
-	# capital: Ekrund — TODO once land state-regions exist
+	capital = STATE_MOUNT_BLOODHORN # Ekrund
 }
 
 ################ DRZ — Karak Drazh; ruined -469 IC (the Black Crag) ################
@@ -202,7 +213,9 @@ DRZ = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { dawi_ancestral }
-	# capital: Karak Drazh — TODO once land state-regions exist
+	# Canon seat Karak Drazh, the Black Crag (the state's city hub), held by RFG at start. DRZ
+	# itself owns only STATE_THUNDER_PEAKS (hub Karak Krum); Chris denied that fallback. LORE FLAG.
+	capital = STATE_WEST_DEATH_PASS # Black Crag (Karak Drazh), held by RFG at start
 }
 
 ################################################################################
@@ -220,7 +233,7 @@ KIZ = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	# capital: Karak Izor — TODO once land state-regions exist
+	capital = STATE_SHATTERED_TEETH # Karak Izor; split state, XSH holds the rest
 }
 
 ################ KZF — Karak Ziflin; the Grey Mountains hold above Axe Bite Pass ################
@@ -230,7 +243,7 @@ KZF = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_grey }
-	# capital: Karak Ziflin — TODO once land state-regions exist
+	capital = STATE_CROOKED_CORRIDOR # Karak Ziflin
 }
 
 ################ KOR — Kraka Ornsmotek; a Norse dwarf hold ################
@@ -242,7 +255,8 @@ KOR = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_norse }
-	# capital: Kraka Ornsmotek — TODO once land state-regions exist
+	# Kraka Ornsmotek is the state's wood hub; the city hub is Kazad Dumund.
+	capital = STATE_EAGLE_S_PEAK # Kraka Ornsmotek
 }
 
 ################ KRV — Kraka Ravnsvake; a Norse dwarf hold ################
@@ -253,7 +267,8 @@ KRV = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_norse }
-	# capital: Kraka Ravnsvake — TODO once land state-regions exist
+	# The map spells the city hub "Kraka Ravnvake"; this file and the country loc keep "Ravnsvake".
+	capital = STATE_BLACK_BLOOD_PASS # Kraka Ravnvake
 }
 
 ################ VMP — Kemmler's Host; Heinrich Kemmler the Lichemaster ################
@@ -273,7 +288,7 @@ VMP = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { sylvanian_vampire }
-	# capital: — none recorded; TODO once land state-regions exist
+	capital = STATE_EASTERN_IRRANAS # non-canon: its only state (4 provinces)
 }
 
 ################ LHX — Lahmian Exiles; STATE_NEW_LAHMIA ################
@@ -289,7 +304,7 @@ LHX = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { lahmian_vampire }
-	# capital: New Lahmia — TODO once land state-regions exist
+	capital = STATE_NEW_LAHMIA
 }
 
 ################ XSH — Skaven Clan F (placeholder); STATE_WINTERTEETH_FOOTHILLS ################
@@ -306,7 +321,7 @@ XSH = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_SHATTERED_TEETH # non-canon: its only holding (3-province slice; KIZ holds the rest)
 }
 
 ################ XSI — Skaven Clan G (placeholder); STATE_GRISTLE_VALLEY ################
@@ -323,7 +338,7 @@ XSI = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_KREUTZHOFEN # non-canon: its only holding (2-province slice of 9)
 }
 
 ################ XSJ — Skaven Clan H (placeholder); STATE_FESTER_SPIKE ################
@@ -340,7 +355,7 @@ XSJ = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_AQUILENA # non-canon: its only holding (2-province slice of 25)
 }
 
 ################ XSK — Skaven Clan I (placeholder); Dark Maiden Pass ################
@@ -357,7 +372,7 @@ XSK = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_DARK_MAIDEN_PASS # non-canon: its only state (2 provinces)
 }
 
 ################ XSL — Skaven Clan J (placeholder); Cripple Peak ################
@@ -374,5 +389,5 @@ XSL = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
-	# capital: — none (placeholder clan); TODO once a capital STATE_* is assigned
+	capital = STATE_CRIPPLE_PEAK # non-canon: its only state (4 provinces)
 }

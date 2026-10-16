@@ -10,14 +10,22 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/nehekharan_araby.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
+#
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's hub (any hub type), whoever owns that
+#      state at start — a claimant or formable keeps its canon seat (vanilla does the same: POL, ITA,
+#      and a dozen tags share STATE_AMHARA);
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 #
 # Every tag here is unrecognized: the risen dead of the Great Land keep no place in the recognized
 # order of the living Old World, whatever their own antiquity. The tomb-cities are kingdoms (each
 # has its Tomb King), NEH is the empire that reunites them, and LAH is a lone city_state.
-#
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
 # Country display names/adjectives live in localization/english/countries_nehekhara_l_english.yml.
 # The NEH formation rule lives in common/country_formation/07_nehekhara_formables.txt.
 
@@ -31,7 +39,7 @@ NEH = {
 	country_type = unrecognized
 	tier = empire
 	cultures = { nehekharan }
-	# capital: Khemri — TODO once land state-regions exist
+	capital = STATE_CITY_OF_KINGS # Khemri, held by KHM at start
 }
 
 ################ KHM — Khemri ################
@@ -42,7 +50,7 @@ KHM = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Khemri — TODO once land state-regions exist
+	capital = STATE_CITY_OF_KINGS # Khemri
 }
 
 ################ ZND — Zandri ################
@@ -53,7 +61,9 @@ ZND = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Zandri — TODO once land state-regions exist
+	# LORE FLAG: the tag's only state; no hub carries Zandri (canonically the western port at
+	# the mouth of the Mortis), so the state stands in for the seat.
+	capital = STATE_SHANIDAAR # Zandri
 }
 
 ################ NUM — Numas ################
@@ -64,7 +74,7 @@ NUM = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Numas — TODO once land state-regions exist
+	capital = STATE_THE_SCARAB_CITY # Numas
 }
 
 ################ LAH — Lahmia; the cradle of vampires ################
@@ -77,7 +87,7 @@ LAH = {
 	country_type = unrecognized
 	tier = city_state
 	cultures = { lahmian_vampire }
-	# capital: Lahmia — TODO once land state-regions exist
+	capital = STATE_LAHMIA # Lahmia (not STATE_NEW_LAHMIA, which is LHX's)
 }
 
 ################ LYB — Lybaras ################
@@ -88,7 +98,9 @@ LYB = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Lybaras — TODO once land state-regions exist
+	# The tag's only state; its mine hub is the Quarries of Lybaras, but no hub carries the
+	# city itself. LORE FLAG.
+	capital = STATE_SIX_WATCH_FORTS # Lybaras
 }
 
 ################ RAS — Rasetra ################
@@ -99,7 +111,8 @@ RAS = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Rasetra — TODO once land state-regions exist
+	# LORE FLAG: the tag's only state; no hub carries Rasetra.
+	capital = STATE_ROAD_OF_KINGS # Rasetra
 }
 
 ################ MAH — Mahrak ################
@@ -110,7 +123,8 @@ MAH = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Mahrak — TODO once land state-regions exist
+	# LORE FLAG: the tag's only state; no hub carries Mahrak.
+	capital = STATE_SOUTHERN_WORLDS_EDGE # Mahrak
 }
 
 ################ QUA — Quatar ################
@@ -121,7 +135,8 @@ QUA = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Quatar — TODO once land state-regions exist
+	# LORE FLAG: the tag's only state; no hub carries Quatar.
+	capital = STATE_UPPER_ASH_RIVER # Quatar
 }
 
 ################ BHA — Bhagar ################
@@ -132,7 +147,8 @@ BHA = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Bhagar — TODO once land state-regions exist
+	# LORE FLAG: the tag's only state; no hub carries Bhagar.
+	capital = STATE_KHEMRIAN_DESERT # Bhagar
 }
 
 ################ KAS — Ka-Sabar ################
@@ -143,5 +159,6 @@ KAS = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# capital: Ka-Sabar — TODO once land state-regions exist
+	# LORE FLAG: the tag's only state; no hub carries Ka-Sabar.
+	capital = STATE_SPHINX_OF_PHAA # Ka-Sabar
 }

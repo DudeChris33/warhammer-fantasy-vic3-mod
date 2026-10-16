@@ -6,10 +6,17 @@
 #   country_type — recognized | unrecognized | colonial | company | decentralized
 #   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
 #   cultures     — culture ids from common/cultures/kislevite_humans.txt
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
 #
-# capital: DELIBERATELY OMITTED on every entry. No land map_data/state_regions/ exist yet (only the
-# sea zones emitted by mapgen/generate_sea_regions.py), so any capital = STATE_* would dangle. The
-# intended capital is recorded as a comment per tag and becomes a real field once land states exist.
+# capital convention (#3658; full rule in .claude/rules/peoples.md):
+#   C1 a tag's capital is the state holding its canon seat's city hub, whoever owns that state at
+#      start — a claimant or formable keeps its canon seat;
+#   C2 a land-owning tag with no canon seat takes its largest owned state (province count in
+#      mapgen/derived/state_ownership.json), commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital, with
+#      "# capital: none - <reason>".
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
 # Country display names/adjectives live in localization/english/countries_kislev_l_english.yml.
 # The KIS formation rule lives in common/country_formation/01_kislev_formables.txt.
 
@@ -21,7 +28,7 @@ KIS = {
 	country_type = recognized
 	tier = kingdom
 	cultures = { gospodar ungol }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_THE_DOBRYRION # Kislev city, held by KSV at start
 }
 
 ################ KSV — Kislev; the capital oblast and the Tzarina's seat ################
@@ -31,7 +38,7 @@ KSV = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { gospodar }
-	# capital: Kislev — TODO once land state-regions exist
+	capital = STATE_THE_DOBRYRION # Kislev
 }
 
 ################ ERE — Erengrad; the western port city, gospodar-founded amid Ungol lands ################
@@ -41,7 +48,7 @@ ERE = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { gospodar ungol }
-	# capital: Erengrad — TODO once land state-regions exist
+	capital = STATE_ERENGRAD
 }
 
 ################ PRA — Praag; the scarred northern frontier city ################
@@ -51,7 +58,7 @@ PRA = {
 	country_type = recognized
 	tier = grand_principality
 	cultures = { gospodar }
-	# capital: Praag — TODO once land state-regions exist
+	capital = STATE_EASTERN_OBLAST # Praag
 }
 
 ################ UNG — Ungol Horse-Tribes; the nomadic steppe Ungols ################
@@ -61,7 +68,7 @@ UNG = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { ungol }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_UNGOL_STEPPES # non-canon (C2): largest owned state, 14 provinces
 }
 
 ################ TRO — Troll Country; the far north-western frontier oblast ################
@@ -71,7 +78,9 @@ TRO = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { ungol }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	# The eponymous state; its city hub (Todtheim) is a map-placed name, not an attested seat.
+	# LORE FLAG.
+	capital = STATE_TROLL_COUNTRY
 }
 
 ################ BOL — Bolgasgrad; a northern oblast town ################
@@ -81,7 +90,9 @@ BOL = {
 	country_type = recognized
 	tier = principality
 	cultures = { gospodar }
-	# capital: Bolgasgrad — TODO once land state-regions exist
+	# Bolgasgrad is the port hub of STATE_EASTERN_OBLAST, which PRA holds; BOL itself holds
+	# STATE_DUSHYKA and STATE_NORTHERN_OBLAST. C1 keeps the canon seat. LORE FLAG.
+	capital = STATE_EASTERN_OBLAST # Bolgasgrad
 }
 
 ################ VOL — Volksgrad; an oblast town ################
@@ -91,7 +102,9 @@ VOL = {
 	country_type = recognized
 	tier = principality
 	cultures = { gospodar }
-	# capital: Volksgrad — TODO once land state-regions exist
+	# Volksgrad is the farm hub of STATE_EASTERN_OBLAST, which PRA holds; VOL itself holds
+	# STATE_GOROMADNY_HOLD and STATE_SEPUKZY. C1 keeps the canon seat. LORE FLAG.
+	capital = STATE_EASTERN_OBLAST # Volksgrad
 }
 
 ################ DOL — Dolgan; the old eastern horse-tribe ################
@@ -101,7 +114,7 @@ DOL = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { ungol }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_THE_GOLINYI # non-canon (C2): largest owned state, 22 provinces
 }
 
 ################ ROP — Roppsmenn; the old northern tribe ################
@@ -111,5 +124,5 @@ ROP = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { ungol }
-	# capital: TODO once land state-regions exist (no placeholder capital in the registry)
+	capital = STATE_KISLEV_FOOTHILLS # non-canon (C2): largest owned state, 14 provinces
 }
