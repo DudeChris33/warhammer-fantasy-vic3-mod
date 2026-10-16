@@ -1,5 +1,5 @@
 ﻿effect_starting_technology_empire_tech = {
-	# Gunpowder, state armies and universities; Steam Tanks and the Imperial Gunnery School, but little industry outside Nuln and Altdorf.
+	# Imperial baseline: handguns, cannon, state armies, universities, a shared bureaucracy. Nuln artillery, Marienburg finance, Altdorf banking and river fleets are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -10,14 +10,9 @@
 	add_technology_researched = shaft_mining
 	add_technology_researched = prospecting
 	add_technology_researched = steelworking
-	add_technology_researched = atmospheric_engine
-	add_technology_researched = crystal_glass
 	add_technology_researched = intensive_agriculture
-	add_technology_researched = mechanical_tools
 
 	# Military
-	add_technology_researched = navigation
-	add_technology_researched = admiralty
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
@@ -25,8 +20,6 @@
 	add_technology_researched = army_reserves
 	add_technology_researched = gunsmithing
 	add_technology_researched = artillery
-	add_technology_researched = napoleonic_warfare
-	add_technology_researched = paddle_steamer
 
 	# Society
 	add_technology_researched = rationalism
@@ -36,17 +29,13 @@
 	add_technology_researched = centralization
 	add_technology_researched = international_trade
 	add_technology_researched = currency_standards
-	add_technology_researched = banking
-	add_technology_researched = empiricism
 	add_technology_researched = international_relations
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
-	add_technology_researched = medical_degrees
-	add_technology_researched = stock_exchange
 }
 
 effect_starting_technology_brettonia_tech = {
-	# Feudal chivalry that scorns the handgun; wine, silk and a few great universities and ports.
+	# Brettonian baseline: feudal levies and chivalry, a wine-and-manor economy. Coastal navies and the great universities are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -54,23 +43,17 @@ effect_starting_technology_brettonia_tech = {
 	add_technology_researched = enclosure
 
 	# Military
-	add_technology_researched = navigation
-	add_technology_researched = admiralty
-	add_technology_researched = drydocks
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
 
 	# Society
-	add_technology_researched = rationalism
-	add_technology_researched = academia
-	add_technology_researched = medical_degrees
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 }
 
 effect_starting_technology_kislev_tech = {
-	# Frontier realm of the Ice Queen: handgunners and horse archers, little industry.
+	# Kislev baseline: frontier levies and handgunners. Ports and the capital's learning are per-country.
 
 	# Production
 	add_technology_researched = enclosure
@@ -82,7 +65,6 @@ effect_starting_technology_kislev_tech = {
 	add_technology_researched = gunsmithing
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
-	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = urbanization
@@ -90,7 +72,7 @@ effect_starting_technology_kislev_tech = {
 }
 
 effect_starting_technology_southern_tech = {
-	# Tilea, Estalia and the Border Princes: Tilean gunnery, mercenary pike-and-shot, merchant banks and glassworks.
+	# Southern Realms baseline: mercenary pike-and-shot, silk, plain workshops, trade-minded cities. Tilean gunnery, banking, navies, colonies are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -102,16 +84,11 @@ effect_starting_technology_southern_tech = {
 	add_technology_researched = prospecting
 	add_technology_researched = sericulture
 	add_technology_researched = steelworking
-	add_technology_researched = crystal_glass
 	add_technology_researched = intensive_agriculture
 
 	# Military
-	add_technology_researched = navigation
-	add_technology_researched = admiralty
 	add_technology_researched = standing_army
 	add_technology_researched = gunsmithing
-	add_technology_researched = artillery
-	add_technology_researched = drydocks
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
 	add_technology_researched = line_infantry
@@ -124,16 +101,12 @@ effect_starting_technology_southern_tech = {
 	add_technology_researched = centralization
 	add_technology_researched = international_trade
 	add_technology_researched = currency_standards
-	add_technology_researched = banking
 	add_technology_researched = international_relations
-	add_technology_researched = colonization
-	add_technology_researched = medical_degrees
-	add_technology_researched = stock_exchange
 	add_technology_researched = urban_planning
 }
 
 effect_starting_technology_cathay_tech = {
-	# Grand Cathay: ancient bureaucracy, silk and tea, gunpowder and rockets, vast granaries.
+	# Grand Cathay baseline: ancient bureaucracy, silk, gunpowder and rockets. Fleets and frontier fortification are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -148,8 +121,6 @@ effect_starting_technology_cathay_tech = {
 	add_technology_researched = intensive_agriculture
 
 	# Military
-	add_technology_researched = navigation
-	add_technology_researched = admiralty
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
@@ -157,7 +128,7 @@ effect_starting_technology_cathay_tech = {
 	add_technology_researched = army_reserves
 	add_technology_researched = gunsmithing
 	add_technology_researched = artillery
-	add_technology_researched = drydocks
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
@@ -279,7 +250,7 @@ effect_starting_technology_vampire_tech = {
 }
 
 effect_starting_technology_tomb_kings_tech = {
-	# Khemri: monumental stonework, embalming and priestly scribes; bronze-age armies that never modernised.
+	# Nehekhara: monumental stonework, embalming and priestly scribes; bronze-age armies that never modernised. Ports are per-country.
 
 	# Production
 	add_technology_researched = enclosure
@@ -290,7 +261,6 @@ effect_starting_technology_tomb_kings_tech = {
 	# Military
 	add_technology_researched = standing_army
 	add_technology_researched = military_drill
-	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
@@ -302,7 +272,7 @@ effect_starting_technology_tomb_kings_tech = {
 }
 
 effect_starting_technology_dwarf_tech = {
-	# Dwarfs: the finest engineers in the world - the Underway, steam and blackpowder, Thunderers and the ironclads of Barak Varr.
+	# Karaz Ankor baseline: mining, forges, blackpowder handguns and cannon, the Book of Grudges. Zhufbar engineering, the Underway and Barak Varr shipyards are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -313,20 +283,8 @@ effect_starting_technology_dwarf_tech = {
 	add_technology_researched = shaft_mining
 	add_technology_researched = prospecting
 	add_technology_researched = steelworking
-	add_technology_researched = atmospheric_engine
-	add_technology_researched = bessemer_process
-	add_technology_researched = canneries
-	add_technology_researched = crystal_glass
-	add_technology_researched = intensive_agriculture
-	add_technology_researched = mechanical_tools
-	add_technology_researched = mechanized_workshops
-	add_technology_researched = nitroglycerin
-	add_technology_researched = railways
-	add_technology_researched = watertube_boiler
 
 	# Military
-	add_technology_researched = navigation
-	add_technology_researched = admiralty
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
@@ -334,15 +292,6 @@ effect_starting_technology_dwarf_tech = {
 	add_technology_researched = army_reserves
 	add_technology_researched = gunsmithing
 	add_technology_researched = artillery
-	add_technology_researched = drydocks
-	add_technology_researched = napoleonic_warfare
-	add_technology_researched = paddle_steamer
-	add_technology_researched = field_works
-	add_technology_researched = hydraulic_cranes
-	add_technology_researched = percussion_cap
-	add_technology_researched = rifling
-	add_technology_researched = screw_frigate
-	add_technology_researched = shell_gun
 
 	# Society
 	add_technology_researched = rationalism
@@ -352,15 +301,13 @@ effect_starting_technology_dwarf_tech = {
 	add_technology_researched = centralization
 	add_technology_researched = international_trade
 	add_technology_researched = currency_standards
-	add_technology_researched = banking
-	add_technology_researched = empiricism
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
 	add_technology_researched = central_archives
 }
 
 effect_starting_technology_dark_dwarf_tech = {
-	# Chaos Dwarfs of Zharr-Naggrund: slave-driven forge-industry, hellish artillery and blackpowder.
+	# Chaos Dwarfs baseline: slave-driven forges and blackpowder. Zharr-Naggrund's industry and siege-engines are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -370,13 +317,6 @@ effect_starting_technology_dark_dwarf_tech = {
 	add_technology_researched = shaft_mining
 	add_technology_researched = prospecting
 	add_technology_researched = steelworking
-	add_technology_researched = atmospheric_engine
-	add_technology_researched = bessemer_process
-	add_technology_researched = canneries
-	add_technology_researched = intensive_agriculture
-	add_technology_researched = mechanical_tools
-	add_technology_researched = mechanized_workshops
-	add_technology_researched = nitroglycerin
 
 	# Military
 	add_technology_researched = standing_army
@@ -386,13 +326,6 @@ effect_starting_technology_dark_dwarf_tech = {
 	add_technology_researched = army_reserves
 	add_technology_researched = gunsmithing
 	add_technology_researched = artillery
-	add_technology_researched = napoleonic_warfare
-	add_technology_researched = field_works
-	add_technology_researched = logistics
-	add_technology_researched = percussion_cap
-	add_technology_researched = rifling
-	add_technology_researched = shell_gun
-	add_technology_researched = breech_loading_artillery
 
 	# Society
 	add_technology_researched = rationalism
@@ -400,13 +333,12 @@ effect_starting_technology_dark_dwarf_tech = {
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = centralization
-	add_technology_researched = empiricism
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_high_elf_tech = {
-	# High Elves: ancient, wealthy and scholarly; supreme navy and archery, deliberately no gunpowder.
+	# High Elves baseline: wealthy, scholarly, archery and spear militia, deliberately no gunpowder. Lothern's fleet and Saphery's learning are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -414,20 +346,15 @@ effect_starting_technology_high_elf_tech = {
 	add_technology_researched = distillation
 	add_technology_researched = enclosure
 	add_technology_researched = lathe
-	add_technology_researched = shaft_mining
-	add_technology_researched = steelworking
 	add_technology_researched = crystal_glass
 	add_technology_researched = intensive_agriculture
 
 	# Military
-	add_technology_researched = navigation
-	add_technology_researched = admiralty
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
 	add_technology_researched = line_infantry
 	add_technology_researched = army_reserves
-	add_technology_researched = drydocks
 
 	# Society
 	add_technology_researched = rationalism
@@ -435,17 +362,13 @@ effect_starting_technology_high_elf_tech = {
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = centralization
-	add_technology_researched = international_relations
-	add_technology_researched = colonization
 	add_technology_researched = international_trade
 	add_technology_researched = currency_standards
-	add_technology_researched = empiricism
-	add_technology_researched = medical_degrees
 	add_technology_researched = urban_planning
 }
 
 effect_starting_technology_dark_elf_tech = {
-	# Dark Elves: slave economy, Black Arks and cruel professional armies; no gunpowder.
+	# Dark Elves baseline: slave economy and cruel professional armies; no gunpowder. Black Ark ports are per-country.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -458,9 +381,6 @@ effect_starting_technology_dark_elf_tech = {
 	add_technology_researched = steelworking
 
 	# Military
-	add_technology_researched = navigation
-	add_technology_researched = admiralty
-	add_technology_researched = drydocks
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
@@ -476,7 +396,6 @@ effect_starting_technology_dark_elf_tech = {
 	add_technology_researched = international_trade
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
-	add_technology_researched = medical_degrees
 }
 
 effect_starting_technology_wood_elf_tech = {
@@ -546,7 +465,7 @@ effect_starting_technology_orc_tech = {
 }
 
 effect_starting_technology_skaven_tech = {
-	# Under-Empire: warpstone engineering - jezzails, Ratling guns and Doomwheels - far ahead of the surface world in arms, behind in everything else.
+	# Under-Empire baseline: warren-works and gun-lines. Clan Skryre's warpstone weapons and the other clan specialities are per-clan.
 
 	# Production
 	add_technology_researched = manufacturies
@@ -556,12 +475,6 @@ effect_starting_technology_skaven_tech = {
 	add_technology_researched = shaft_mining
 	add_technology_researched = prospecting
 	add_technology_researched = steelworking
-	add_technology_researched = atmospheric_engine
-	add_technology_researched = canneries
-	add_technology_researched = intensive_agriculture
-	add_technology_researched = mechanical_tools
-	add_technology_researched = mechanized_workshops
-	add_technology_researched = nitroglycerin
 
 	# Military
 	add_technology_researched = standing_army
@@ -570,18 +483,10 @@ effect_starting_technology_skaven_tech = {
 	add_technology_researched = line_infantry
 	add_technology_researched = army_reserves
 	add_technology_researched = gunsmithing
-	add_technology_researched = artillery
-	add_technology_researched = percussion_cap
-	add_technology_researched = rifling
-	add_technology_researched = shell_gun
-	add_technology_researched = breech_loading_artillery
-	add_technology_researched = repeaters
-	add_technology_researched = handcranked_machine_gun
 
 	# Society
 	add_technology_researched = rationalism
 	add_technology_researched = academia
-	add_technology_researched = empiricism
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = urban_planning
