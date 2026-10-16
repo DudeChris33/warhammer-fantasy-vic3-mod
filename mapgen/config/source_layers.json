@@ -8,6 +8,6 @@
   "province_merges": "terraqueous_globe_reprojected - full.ora#province_merges",
   "state_merges": "terraqueous_globe_reprojected - full.ora#state_merges",
   "cities": "terraqueous_globe_reprojected - full.ora#cities",
-  "adjacencies": "terraqueous_globe_reprojected - adjacencies.png",
+  "adjacencies": "terraqueous_globe_reprojected - full.ora#adjacencies",
   "climate_currents": "winds_and_currents.png"
 }

@@ -795,7 +795,16 @@
    "archetype": "border_prince"
   },
   "UZK": {
-   "archetype": "chaos_dwarf"
+   "archetype": "chaos_dwarf",
+   "set": {
+    "workforce_share": 0.35
+   },
+   "justify": {
+    "workforce_share": {
+     "source": "invented",
+     "why": "State merges folded several Uzkulak states into STATE_SKULL_CLIFFS; at the archetype's 0.4 the auto farms filled the whole job cap and the manor-house jobs added by the game then pushed it to 40.7%. 0.35 leaves headroom for owner buildings."
+    }
+   }
   },
   "VAR": {
    "archetype": "norse_tribe"

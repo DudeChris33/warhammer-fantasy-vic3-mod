@@ -44,7 +44,7 @@
   {
    "key": "STATE_BLACK_WATER",
    "anchor": [
-    4413,
+    4414,
     984
    ],
    "building": "building_iron_mine",
@@ -74,8 +74,8 @@
   {
    "key": "STATE_HEART_OF_ZHARRDUK",
    "anchor": [
-    4904,
-    828
+    4914,
+    823
    ],
    "building": "building_iron_mine",
    "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs)",
@@ -84,8 +84,8 @@
   {
    "key": "STATE_HEART_OF_ZHARRDUK",
    "anchor": [
-    4904,
-    828
+    4914,
+    823
    ],
    "building": "building_sulfur_mine",
    "source": "canon: Warhammer Armies: Dwarfs (Chaos Dwarfs)",
@@ -94,7 +94,7 @@
   {
    "key": "STATE_BORDELEAUX",
    "anchor": [
-    3821,
+    3822,
     918
    ],
    "building": "building_vineyard",
@@ -104,7 +104,7 @@
   {
    "key": "STATE_AQUITAINE",
    "anchor": [
-    3845,
+    3846,
     963
    ],
    "building": "building_vineyard",
@@ -114,8 +114,8 @@
   {
    "key": "STATE_CENTRAL_MAGRITTA",
    "anchor": [
-    3681,
-    1120
+    3682,
+    1121
    ],
    "building": "building_vineyard",
    "source": "canon: Warhammer Fantasy Roleplay 4e, Estalia",
@@ -124,7 +124,7 @@
   {
    "key": "STATE_MARIENBURG",
    "anchor": [
-    3963,
+    3964,
     785
    ],
    "building": "building_fishing_wharf",
@@ -134,7 +134,7 @@
   {
    "key": "STATE_GLOOMWRACK_COAST",
    "anchor": [
-    3874,
+    3876,
     488
    ],
    "building": "building_fishing_wharf",
@@ -145,7 +145,7 @@
    "key": "STATE_SOUTH_OSTLAND",
    "anchor": [
     4282,
-    762
+    761
    ],
    "building": "building_rye_farm",
    "source": "canon: Warhammer Fantasy Roleplay 4e, Ostland",
@@ -155,7 +155,7 @@
    "key": "STATE_THE_DOBRYRION",
    "anchor": [
     4442,
-    735
+    734
    ],
    "building": "building_rye_farm",
    "source": "canon: Warhammer Armies: Kislev",
@@ -221,7 +221,7 @@
   {
    "key": "STATE_MARIENBURG",
    "anchor": [
-    3963,
+    3964,
     785
    ],
    "tag": "MAR",
@@ -232,7 +232,7 @@
   {
    "key": "STATE_MARIENBURG",
    "anchor": [
-    3963,
+    3964,
     785
    ],
    "tag": "MAR",
@@ -243,7 +243,7 @@
   {
    "key": "STATE_MARIENBURG",
    "anchor": [
-    3963,
+    3964,
     785
    ],
    "tag": "MAR",
@@ -254,7 +254,7 @@
   {
    "key": "STATE_REMAS",
    "anchor": [
-    3925,
+    3926,
     1209
    ],
    "tag": "REM",
@@ -265,7 +265,7 @@
   {
    "key": "STATE_REMAS",
    "anchor": [
-    3925,
+    3926,
     1209
    ],
    "tag": "REM",
@@ -277,7 +277,7 @@
    "key": "STATE_SARTOSA",
    "anchor": [
     3832,
-    1331
+    1332
    ],
    "tag": "SRT",
    "building": "building_shipyard",
@@ -287,7 +287,7 @@
   {
    "key": "STATE_BORDELEAUX",
    "anchor": [
-    3821,
+    3822,
     918
    ],
    "tag": "BOR",
@@ -298,7 +298,7 @@
   {
    "key": "STATE_BORDELEAUX",
    "anchor": [
-    3821,
+    3822,
     918
    ],
    "tag": "BOR",
@@ -331,7 +331,7 @@
   {
    "key": "STATE_BLACK_WATER",
    "anchor": [
-    4413,
+    4414,
     984
    ],
    "tag": "ZHU",
@@ -342,8 +342,8 @@
   {
    "key": "STATE_HEART_OF_ZHARRDUK",
    "anchor": [
-    4904,
-    828
+    4914,
+    823
    ],
    "tag": "MZN",
    "building": "building_arms_industry",
@@ -353,8 +353,8 @@
   {
    "key": "STATE_HEART_OF_ZHARRDUK",
    "anchor": [
-    4904,
-    828
+    4914,
+    823
    ],
    "tag": "MZN",
    "building": "building_steel_mill",
@@ -364,8 +364,8 @@
   {
    "key": "STATE_CENTRAL_MAGRITTA",
    "anchor": [
-    3681,
-    1120
+    3682,
+    1121
    ],
    "tag": "MAG",
    "building": "building_naval_administration",

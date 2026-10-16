@@ -318,7 +318,7 @@
   {
    "key": "STATE_MARIENBURG",
    "anchor": [
-    3963,
+    3964,
     785
    ],
    "mode": "add",
@@ -363,7 +363,7 @@
    "key": "STATE_MIDDENLAND_PROPER",
    "anchor": [
     4113,
-    795
+    794
    ],
    "mode": "add",
    "mix": [
@@ -402,7 +402,7 @@
   {
    "key": "STATE_SOUTH_MIDDENLAND",
    "anchor": [
-    4155,
+    4154,
     808
    ],
    "mode": "add",
@@ -419,8 +419,8 @@
   {
    "key": "STATE_SOUTH_TALABECLAND",
    "anchor": [
-    4186,
-    873
+    4187,
+    872
    ],
    "mode": "add",
    "mix": [
@@ -437,7 +437,7 @@
    "key": "STATE_SOUTH_OSTLAND",
    "anchor": [
     4282,
-    762
+    761
    ],
    "mode": "add",
    "mix": [
@@ -454,7 +454,7 @@
    "key": "STATE_EAST_NORDLAND",
    "anchor": [
     4138,
-    676
+    677
    ],
    "mode": "add",
    "mix": [
@@ -488,7 +488,7 @@
    "key": "STATE_THE_DOBRYRION",
    "anchor": [
     4442,
-    735
+    734
    ],
    "mode": "add",
    "mix": [
@@ -516,7 +516,7 @@
    "key": "STATE_ERENGRAD",
    "anchor": [
     4332,
-    647
+    646
    ],
    "mode": "replace",
    "mix": [
@@ -555,8 +555,8 @@
    "key": "STATE_AQUILENA",
    "tag": "AQL",
    "anchor": [
-    4045,
-    1217
+    4048,
+    1208
    ],
    "mode": "add",
    "mix": [
@@ -571,8 +571,8 @@
   {
    "key": "STATE_BLACK_PENINSULA",
    "anchor": [
-    4100,
-    1220
+    4102,
+    1218
    ],
    "mode": "add",
    "mix": [
@@ -588,7 +588,7 @@
    "key": "STATE_MYRMIDIA_S_COAST",
    "anchor": [
     4166,
-    1245
+    1246
    ],
    "mode": "add",
    "mix": [
@@ -715,8 +715,8 @@
   {
    "key": "STATE_ZORN_UZKUL",
    "anchor": [
-    4794,
-    539
+    4790,
+    549
    ],
    "mode": "add",
    "mix": [

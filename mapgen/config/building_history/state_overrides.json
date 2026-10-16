@@ -33,8 +33,8 @@
   {
    "key": "STATE_CENTRAL_MAGRITTA",
    "anchor": [
-    3681,
-    1120
+    3682,
+    1121
    ],
    "owner": "MAG",
    "buildings": {
@@ -73,8 +73,8 @@
   {
    "key": "STATE_CITY_OF_KINGS",
    "anchor": [
-    4058,
-    1683
+    4057,
+    1682
    ],
    "owner": "KHM",
    "buildings": {
@@ -86,8 +86,8 @@
   {
    "key": "STATE_HEART_OF_ZHARRDUK",
    "anchor": [
-    4904,
-    828
+    4914,
+    823
    ],
    "owner": "MZN",
    "buildings": {
@@ -114,8 +114,8 @@
   {
    "key": "STATE_PLAINS_OF_LUCCINI",
    "anchor": [
-    3896,
-    1314
+    3897,
+    1313
    ],
    "owner": "LUC",
    "buildings": {
@@ -127,7 +127,7 @@
   {
    "key": "STATE_REMAS",
    "anchor": [
-    3925,
+    3926,
     1209
    ],
    "owner": "REM",
@@ -140,7 +140,7 @@
   {
    "key": "STATE_VEREZZI",
    "anchor": [
-    3936,
+    3937,
     1259
    ],
    "owner": "VER",

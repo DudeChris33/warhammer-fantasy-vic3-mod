@@ -2,6 +2,30 @@
   "adjacencies": [
     {
       "a": [
+        2317,
+        109
+      ],
+      "b": [
+        2355,
+        119
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        2308,
+        108
+      ],
+      "b": [
+        2282,
+        108
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
         5231,
         2282
       ],
@@ -14,6 +38,30 @@
     },
     {
       "a": [
+        919,
+        615
+      ],
+      "b": [
+        924,
+        572
+      ],
+      "type": "canal_drackla",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        1128,
+        891
+      ],
+      "b": [
+        1128,
+        916
+      ],
+      "type": "canal_red_desert",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
         5081,
         1285
       ],
@@ -23,6 +71,54 @@
       ],
       "type": "sea",
       "comment": "Lower River Ruin"
+    },
+    {
+      "a": [
+        7887,
+        2267
+      ],
+      "b": [
+        7869,
+        2298
+      ],
+      "type": "sea",
+      "comment": "Lumbria"
+    },
+    {
+      "a": [
+        7932,
+        2238
+      ],
+      "b": [
+        7946,
+        2195
+      ],
+      "type": "sea",
+      "comment": "Lumbria"
+    },
+    {
+      "a": [
+        1170,
+        1637
+      ],
+      "b": [
+        1158,
+        1657
+      ],
+      "type": "canal_maelstrom_sw",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        1300,
+        1586
+      ],
+      "b": [
+        1319,
+        1575
+      ],
+      "type": "canal_maelstrom_se",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -302,6 +398,18 @@
     },
     {
       "a": [
+        1117,
+        1109
+      ],
+      "b": [
+        1128,
+        1084
+      ],
+      "type": "canal_plain_of_spiders",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
         4547,
         421
       ],
@@ -401,24 +509,24 @@
     },
     {
       "a": [
-        3002,
-        1139
-      ],
-      "b": [
-        2976,
-        1156
-      ],
-      "type": "sea",
-      "comment": "Ulthuan"
-    },
-    {
-      "a": [
         3047,
         1141
       ],
       "b": [
         3055,
         1171
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3002,
+        1139
+      ],
+      "b": [
+        2976,
+        1156
       ],
       "type": "sea",
       "comment": "Ulthuan"
@@ -482,6 +590,18 @@
       ],
       "type": "canal_middle_talabec",
       "comment": "Middle Talabec River"
+    },
+    {
+      "a": [
+        7044,
+        2388
+      ],
+      "b": [
+        7090,
+        2373
+      ],
+      "type": "sea",
+      "comment": "Elithis"
     },
     {
       "a": [
@@ -612,7 +732,7 @@
         5467,
         2231
       ],
-      "type": "canal_meeting_of_sun_and_stars",
+      "type": "canal_sun_and_stars",
       "comment": "Meeting of Sun and Stars"
     },
     {
@@ -629,6 +749,54 @@
     },
     {
       "a": [
+        2100,
+        349
+      ],
+      "b": [
+        2129,
+        375
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        2710,
+        2415
+      ],
+      "b": [
+        2728,
+        2442
+      ],
+      "type": "canal_mangrove",
+      "comment": "Volcanic Isles"
+    },
+    {
+      "a": [
+        7229,
+        2281
+      ],
+      "b": [
+        7241,
+        2342
+      ],
+      "type": "sea",
+      "comment": "Devourer"
+    },
+    {
+      "a": [
+        7227,
+        2275
+      ],
+      "b": [
+        7225,
+        2256
+      ],
+      "type": "sea",
+      "comment": "Devourer"
+    },
+    {
+      "a": [
         4082,
         291
       ],
@@ -638,6 +806,30 @@
       ],
       "type": "sea",
       "comment": "North Norsca"
+    },
+    {
+      "a": [
+        2488,
+        604
+      ],
+      "b": [
+        2503,
+        600
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        2471,
+        571
+      ],
+      "b": [
+        2453,
+        579
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -674,6 +866,18 @@
       ],
       "type": "sea",
       "comment": "North Estalian Island"
+    },
+    {
+      "a": [
+        5125,
+        2502
+      ],
+      "b": [
+        5142,
+        2479
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -797,15 +1001,39 @@
     },
     {
       "a": [
-        5292,
-        2492
+        7426,
+        1188
       ],
       "b": [
-        5271,
-        2483
+        7424,
+        1166
       ],
-      "type": "canal_sun_island_southern_coast",
-      "comment": "Sun Island Southern Coast"
+      "type": "canal_rage_se",
+      "comment": "Nippon"
+    },
+    {
+      "a": [
+        7269,
+        1355
+      ],
+      "b": [
+        7236,
+        1356
+      ],
+      "type": "canal_rage_sw",
+      "comment": "Nippon"
+    },
+    {
+      "a": [
+        2425,
+        719
+      ],
+      "b": [
+        2443,
+        710
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -857,6 +1085,18 @@
     },
     {
       "a": [
+        7244,
+        1779
+      ],
+      "b": [
+        7282,
+        1763
+      ],
+      "type": "canal_rising_sun",
+      "comment": "Nippon"
+    },
+    {
+      "a": [
         3508,
         1164
       ],
@@ -881,6 +1121,18 @@
     },
     {
       "a": [
+        7247,
+        1230
+      ],
+      "b": [
+        7231,
+        1260
+      ],
+      "type": "canal_rage_s",
+      "comment": "Nippon"
+    },
+    {
+      "a": [
         5239,
         2295
       ],
@@ -902,6 +1154,18 @@
       ],
       "type": "sea",
       "comment": "Southlands"
+    },
+    {
+      "a": [
+        7237,
+        2345
+      ],
+      "b": [
+        7237,
+        2361
+      ],
+      "type": "sea",
+      "comment": "Devourer"
     },
     {
       "a": [
@@ -950,6 +1214,42 @@
       ],
       "type": "canal_sartosa",
       "comment": "Sartosa"
+    },
+    {
+      "a": [
+        7549,
+        1087
+      ],
+      "b": [
+        7549,
+        1058
+      ],
+      "type": "sea",
+      "comment": "Nippon"
+    },
+    {
+      "a": [
+        7535,
+        1127
+      ],
+      "b": [
+        7508,
+        1149
+      ],
+      "type": "sea",
+      "comment": "Nippon"
+    },
+    {
+      "a": [
+        3691,
+        1476
+      ],
+      "b": [
+        3692,
+        1455
+      ],
+      "type": "sea",
+      "comment": "Origo"
     },
     {
       "a": [
@@ -1031,6 +1331,30 @@
     },
     {
       "a": [
+        3022,
+        1270
+      ],
+      "b": [
+        3025,
+        1290
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3022,
+        1266
+      ],
+      "b": [
+        3039,
+        1278
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         3025,
         3045
       ],
@@ -1040,6 +1364,30 @@
       ],
       "type": "canal_isles_of_dusk",
       "comment": "Isles of Dusk"
+    },
+    {
+      "a": [
+        3017,
+        1256
+      ],
+      "b": [
+        3036,
+        1244
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        5172,
+        1508
+      ],
+      "b": [
+        5196,
+        1522
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
     },
     {
       "a": [
@@ -1055,51 +1403,51 @@
     },
     {
       "a": [
-        3037,
-        1272
+        3065,
+        1281
       ],
       "b": [
-        3040,
-        1258
+        3062,
+        1261
       ],
       "type": "sea",
       "comment": "Ulthuan"
     },
     {
       "a": [
-        3072,
-        1309
+        3070,
+        1300
       ],
       "b": [
-        3066,
+        3095,
+        1315
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        3062,
+        1323
+      ],
+      "b": [
+        3042,
         1320
       ],
       "type": "sea",
-      "comment": "Clothique"
-    },
-    {
-      "a": [
-        3039,
-        1281
-      ],
-      "b": [
-        3030,
-        1292
-      ],
-      "type": "sea",
       "comment": "Ulthuan"
     },
     {
       "a": [
-        3092,
-        1281
+        3097,
+        1286
       ],
       "b": [
-        3098,
-        1268
+        3099,
+        1266
       ],
       "type": "sea",
-      "comment": "Clothique"
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -1151,6 +1499,18 @@
     },
     {
       "a": [
+        1200,
+        1410
+      ],
+      "b": [
+        1175,
+        1410
+      ],
+      "type": "canal_maelstrom_e",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
         4419,
         757
       ],
@@ -1187,18 +1547,6 @@
     },
     {
       "a": [
-        5146,
-        2448
-      ],
-      "b": [
-        5138,
-        2409
-      ],
-      "type": "sea",
-      "comment": "Southlands"
-    },
-    {
-      "a": [
         4255,
         221
       ],
@@ -1211,6 +1559,18 @@
     },
     {
       "a": [
+        2802,
+        1035
+      ],
+      "b": [
+        2786,
+        1026
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         3691,
         759
       ],
@@ -1220,6 +1580,18 @@
       ],
       "type": "sea",
       "comment": "Lyonesse"
+    },
+    {
+      "a": [
+        2385,
+        119
+      ],
+      "b": [
+        2361,
+        119
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -1271,6 +1643,30 @@
     },
     {
       "a": [
+        2430,
+        1996
+      ],
+      "b": [
+        2460,
+        1989
+      ],
+      "type": "canal_tarantula",
+      "comment": "Tarantula Coast"
+    },
+    {
+      "a": [
+        7222,
+        2232
+      ],
+      "b": [
+        7236,
+        2248
+      ],
+      "type": "sea",
+      "comment": "Devourer"
+    },
+    {
+      "a": [
         4456,
         435
       ],
@@ -1280,6 +1676,30 @@
       ],
       "type": "sea",
       "comment": "Sjotraken"
+    },
+    {
+      "a": [
+        7571,
+        1030
+      ],
+      "b": [
+        7593,
+        1016
+      ],
+      "type": "sea",
+      "comment": "Nippon"
+    },
+    {
+      "a": [
+        1027,
+        1414
+      ],
+      "b": [
+        1064,
+        1415
+      ],
+      "type": "canal_maelstrom_w",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1295,6 +1715,18 @@
     },
     {
       "a": [
+        5289,
+        2469
+      ],
+      "b": [
+        5275,
+        2504
+      ],
+      "type": "sea",
+      "comment": "Sun Island Southern Coast"
+    },
+    {
+      "a": [
         5418,
         2373
       ],
@@ -1304,6 +1736,18 @@
       ],
       "type": "sea",
       "comment": "Southlands"
+    },
+    {
+      "a": [
+        2361,
+        421
+      ],
+      "b": [
+        2363,
+        402
+      ],
+      "type": "canal_chill_s",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -1367,15 +1811,27 @@
     },
     {
       "a": [
-        3062,
-        1323
+        3065,
+        1360
       ],
       "b": [
-        3042,
-        1320
+        3040,
+        1354
       ],
       "type": "sea",
       "comment": "Ulthuan"
+    },
+    {
+      "a": [
+        2004,
+        240
+      ],
+      "b": [
+        1969,
+        207
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -1439,28 +1895,27 @@
     },
     {
       "a": [
-        2731,
-        2421
+        2755,
+        2444
       ],
       "b": [
-        2702,
-        2439
+        2755,
+        2468
       ],
       "type": "sea",
-      "comment": "Lustria"
+      "comment": "Volcanic Isles"
     },
     {
       "a": [
-        2768,
-        2434
+        5208,
+        1569
       ],
       "b": [
-        2769,
-        2471
+        5181,
+        1589
       ],
       "type": "sea",
-      "comment": "Lustria",
-      "b_color": "xD9ABC1"
+      "comment": "Dragon Isles"
     },
     {
       "a": [
@@ -1527,6 +1982,30 @@
     },
     {
       "a": [
+        5154,
+        2466
+      ],
+      "b": [
+        5183,
+        2462
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        6988,
+        2592
+      ],
+      "b": [
+        6954,
+        2611
+      ],
+      "type": "canal_elithis_n",
+      "comment": "Elithis"
+    },
+    {
+      "a": [
         2212,
         2955
       ],
@@ -1575,6 +2054,18 @@
     },
     {
       "a": [
+        6882,
+        2783
+      ],
+      "b": [
+        6897,
+        2806
+      ],
+      "type": "canal_elithis_w",
+      "comment": "Elithis"
+    },
+    {
+      "a": [
         4142,
         890
       ],
@@ -1608,6 +2099,18 @@
       ],
       "type": "canal_east_estalian_isles",
       "comment": "East Estalian Isles"
+    },
+    {
+      "a": [
+        7857,
+        2302
+      ],
+      "b": [
+        7826,
+        2286
+      ],
+      "type": "sea",
+      "comment": "Lumbria"
     },
     {
       "a": [
@@ -1647,6 +2150,30 @@
     },
     {
       "a": [
+        2225,
+        379
+      ],
+      "b": [
+        2229,
+        404
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        3039,
+        1281
+      ],
+      "b": [
+        3030,
+        1292
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         4276,
         1050
       ],
@@ -1659,6 +2186,18 @@
     },
     {
       "a": [
+        5146,
+        2448
+      ],
+      "b": [
+        5138,
+        2409
+      ],
+      "type": "sea",
+      "comment": "Southlands"
+    },
+    {
+      "a": [
         5159,
         2374
       ],
@@ -1668,6 +2207,30 @@
       ],
       "type": "sea",
       "comment": "Southlands"
+    },
+    {
+      "a": [
+        2332,
+        591
+      ],
+      "b": [
+        2315,
+        617
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        2336,
+        588
+      ],
+      "b": [
+        2362,
+        588
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -1710,6 +2273,18 @@
     },
     {
       "a": [
+        5151,
+        1520
+      ],
+      "b": [
+        5145,
+        1551
+      ],
+      "type": "sea",
+      "comment": "Dragon Isles"
+    },
+    {
+      "a": [
         3716,
         2598
       ],
@@ -1730,10 +2305,7 @@
         1297
       ],
       "type": "canal_myrmidens",
-      "comment": "Myrmidens",
-      "total_block_requires_full_control": true,
-      "military_block_requires_full_control": true,
-      "tolls_require_full_control": true
+      "comment": "Myrmidens"
     },
     {
       "a": [
@@ -1761,6 +2333,30 @@
     },
     {
       "a": [
+        2233,
+        1914
+      ],
+      "b": [
+        2221,
+        1867
+      ],
+      "type": "sea",
+      "comment": "Golden Isle"
+    },
+    {
+      "a": [
+        2352,
+        352
+      ],
+      "b": [
+        2346,
+        330
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
         3966,
         718
       ],
@@ -1769,10 +2365,7 @@
         695
       ],
       "type": "canal_manaanspoort",
-      "comment": "Manaanspoort",
-      "total_block_requires_full_control": true,
-      "military_block_requires_full_control": true,
-      "tolls_require_full_control": true
+      "comment": "Manaanspoort"
     },
     {
       "a": [
@@ -1800,6 +2393,18 @@
     },
     {
       "a": [
+        4048,
+        1034
+      ],
+      "b": [
+        3559,
+        1109
+      ],
+      "type": "sea",
+      "comment": "Pina Woods"
+    },
+    {
+      "a": [
         4136,
         954
       ],
@@ -1824,6 +2429,18 @@
     },
     {
       "a": [
+        3037,
+        1272
+      ],
+      "b": [
+        3040,
+        1258
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         2947,
         1529
       ],
@@ -1836,15 +2453,15 @@
     },
     {
       "a": [
-        4048,
-        1034
+        7808,
+        2292
       ],
       "b": [
-        3559,
-        1109
+        7782,
+        2301
       ],
       "type": "sea",
-      "comment": "Pina Woods"
+      "comment": "Lumbria"
     }
   ],
   "stale": [
@@ -2438,6 +3055,67 @@
       ],
       "type": "sea",
       "comment": "Southlands"
+    },
+    {
+      "a": [
+        3072,
+        1309
+      ],
+      "b": [
+        3066,
+        1320
+      ],
+      "type": "sea",
+      "comment": "Clothique"
+    },
+    {
+      "a": [
+        3092,
+        1281
+      ],
+      "b": [
+        3098,
+        1268
+      ],
+      "type": "sea",
+      "comment": "Clothique"
+    },
+    {
+      "a": [
+        2768,
+        2434
+      ],
+      "b": [
+        2769,
+        2471
+      ],
+      "type": "sea",
+      "comment": "Lustria",
+      "b_color": "xD9ABC1"
+    },
+    {
+      "a": [
+        7520,
+        986
+      ],
+      "b": [
+        7489,
+        1017
+      ],
+      "type": "",
+      "comment": ""
+    },
+    {
+      "a": [
+        5292,
+        2492
+      ],
+      "b": [
+        5271,
+        2483
+      ],
+      "type": "canal_sun_island_southern_coast",
+      "comment": "Sun Island Southern Coast"
     }
   ]
 }

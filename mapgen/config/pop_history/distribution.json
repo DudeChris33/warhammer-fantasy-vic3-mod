@@ -20,8 +20,8 @@
   {
    "key": "STATE_REIKWALD_FOREST",
    "anchor": [
-    4098,
-    911
+    4097,
+    912
    ],
    "multiplier": "0.4",
    "source": "canon: the Reikwald is a deep forest (WFRP Empire)",
@@ -50,7 +50,7 @@
   {
    "key": "STATE_SOLLAND",
    "anchor": [
-    4194,
+    4195,
     1031
    ],
    "multiplier": "0.5",
@@ -60,7 +60,7 @@
   {
    "key": "STATE_MARIENBURG",
    "anchor": [
-    3963,
+    3964,
     785
    ],
    "multiplier": "2.5",
@@ -70,8 +70,8 @@
   {
    "key": "STATE_THE_WASTELAND",
    "anchor": [
-    4004,
-    715
+    4005,
+    713
    ],
    "multiplier": "0.8",
    "source": "canon: the Wasteland is marshy polder (WFB Marienburg)",
@@ -101,7 +101,7 @@
    "key": "STATE_EAST_NORDLAND",
    "anchor": [
     4138,
-    676
+    677
    ],
    "multiplier": "1.2",
    "source": "canon: Salzenmund is Nordland's salt port (WFRP Empire)",
@@ -110,8 +110,8 @@
   {
    "key": "STATE_COURONNE",
    "anchor": [
-    3850,
-    718
+    3851,
+    720
    ],
    "multiplier": "1.4",
    "source": "canon: Couronne is the Bretonnian capital (WFB Bretonnia)",
@@ -121,7 +121,7 @@
    "key": "STATE_THE_DOBRYRION",
    "anchor": [
     4442,
-    735
+    734
    ],
    "multiplier": "2.5",
    "source": "canon: Kislev city (the Great City, WFRP Realm of the Ice Queen)",
@@ -130,8 +130,8 @@
   {
    "key": "STATE_EASTERN_OBLAST",
    "anchor": [
-    4472,
-    624
+    4473,
+    623
    ],
    "multiplier": "1.8",
    "source": "canon: Praag is Kislev's second city (WFB Kislev)",
@@ -140,8 +140,8 @@
   {
    "key": "STATE_THE_TAIGA",
    "anchor": [
-    4476,
-    686
+    4472,
+    682
    ],
    "multiplier": "0.4",
    "source": "inferred",
@@ -150,8 +150,8 @@
   {
    "key": "STATE_HEART_OF_ZHARRDUK",
    "anchor": [
-    4904,
-    828
+    4914,
+    823
    ],
    "multiplier": "2.5",
    "source": "canon: Zharr-Naggrund, the great Chaos Dwarf city (WFB Chaos Dwarfs)",
@@ -210,8 +210,8 @@
   {
    "key": "STATE_ZORN_UZKUL",
    "anchor": [
-    4794,
-    539
+    4790,
+    549
    ],
    "multiplier": "2",
    "source": "canon: Uzkulak's seat is a large Chaos Dwarf city (TW Dark Lands)",
@@ -280,8 +280,8 @@
   {
    "key": "STATE_CENTRAL_MAGRITTA",
    "anchor": [
-    3681,
-    1120
+    3682,
+    1121
    ],
    "multiplier": "1.8",
    "source": "canon: Magritta is the Estalian capital (WFB Estalia)",
@@ -300,8 +300,8 @@
   {
    "key": "STATE_TOBARO",
    "anchor": [
-    3813,
-    1152
+    3804,
+    1169
    ],
    "multiplier": "1.5",
    "source": "canon: Tobaro is a major Tilean port (WFRP Tilea)",
@@ -321,7 +321,7 @@
    "key": "STATE_DRAKENHOF",
    "anchor": [
     4353,
-    944
+    945
    ],
    "multiplier": "1.5",
    "source": "canon: Castle Drakenhof, the Von Carstein seat (WFB Vampire Counts)",
@@ -331,7 +331,7 @@
    "key": "STATE_WEST_SYLVANIA",
    "anchor": [
     4314,
-    911
+    912
    ],
    "multiplier": "0.6",
    "source": "canon: Sylvania is blighted (WFB Vampire Counts)",
@@ -340,8 +340,8 @@
   {
    "key": "STATE_AVERHEIM",
    "anchor": [
-    4210,
-    969
+    4211,
+    970
    ],
    "multiplier": "1.3",
    "source": "canon: Averheim, capital of Averland (WFB Empire)",
