@@ -5,8 +5,8 @@
   "sea_zones": "terraqueous_globe_reprojected - full.ora#sea_zones",
   "state_borders": "terraqueous_globe_reprojected - full.ora#borders",
   "impassable": "terraqueous_globe_reprojected - full.ora#impassable",
-  "island_overrides": "terraqueous_globe_reprojected - tiny_islands_merger.png",
-  "small_state_prune": "terraqueous_globe_reprojected - small-state-prune.png",
+  "province_merges": "terraqueous_globe_reprojected - full.ora#province_merges",
+  "state_merges": "terraqueous_globe_reprojected - full.ora#state_merges",
   "cities": "terraqueous_globe_reprojected - full.ora#cities",
   "adjacencies": "terraqueous_globe_reprojected - adjacencies.png",
   "climate_currents": "winds_and_currents.png"

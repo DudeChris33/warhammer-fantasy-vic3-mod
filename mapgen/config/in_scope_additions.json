@@ -50,7 +50,7 @@
     { "name": "east_southlands_isles", "realm": "southlands", "box": [5076, 2216, 5298, 2536],
       "note": "The island group off the Southlands' east coast (label: STARS ARCHIPELAGO). Two red marks, one box. Realm is the nearest coast; Ind is the other candidate." },
     { "name": "gates_of_calith", "realm": "khuresh", "points": [[6469, 2899], [6485, 2964]],
-      "note": "The two caps Chris cut with border strokes either side of the strait (label: GATES OF CALITH). They are two regions, so two states, unless he merges them in land_region_merges.json." },
+      "note": "The two caps Chris cut with border strokes either side of the strait (label: GATES OF CALITH). They are two regions, so two states, unless he joins them with a state_merges line." },
     { "name": "lost_isles_of_elithis", "realm": "khuresh", "box": [6804, 2581, 7122, 2942],
       "note": "The two large islands east of Khuresh (label: LOST ISLES OF ELITHIS). Realm is the nearest named land; Nippon is the other candidate." }
   ]

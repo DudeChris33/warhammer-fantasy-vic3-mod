@@ -86,7 +86,7 @@ def magenta_lines(rgb: np.ndarray) -> np.ndarray:
 
 def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
             merge_floor: int = 1200, wrap_x: bool = True, log=None,
-            island_overrides: np.ndarray | None = None) -> np.ndarray:
+            province_merges: np.ndarray | None = None) -> np.ndarray:
     """State-region labels (0 on water, ``1..n`` per region) from the drawn network.
 
     ``land`` is the boolean land mask; ``drawn`` is the RGB state-region source.
@@ -95,10 +95,10 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     pixel the nearest region's label (crisp 1-px boundaries), **split any region
     the fill tore into disconnected pieces**, then merge sub-floor offcuts.
 
-    ``island_overrides``, when given, is a canvas-shaped int array as returned by
-    :func:`island_override_zones` — 0 where the user drew nothing, a distinct id
+    ``province_merges``, when given, is a canvas-shaped int array as returned by
+    :func:`province_merge_zones` — 0 where the user drew nothing, a distinct id
     per hand-drawn merge-line network otherwise. Every region caught under the
-    same network is force-merged into one (see :func:`merge_island_overrides`) as
+    same network is force-merged into one (see :func:`merge_province_zones`) as
     the very last step, after the normal barrier/fill/merge machinery — the
     tiny-island fix for an archipelago that would otherwise ship as one micro
     state-region per islet.
@@ -128,8 +128,8 @@ def regions(land: np.ndarray, drawn: np.ndarray, dilate: int = 2,
     reg = cells.split_disconnected(reg, wrap_x)
     reg = cells.merge_small(reg, merge_floor, wrap_x)
     reg = cells.renumber(reg)
-    if island_overrides is not None and island_overrides.any():
-        reg = merge_island_overrides(reg, land, island_overrides, wrap_x, log=log)
+    if province_merges is not None and province_merges.any():
+        reg = merge_province_zones(reg, land, province_merges, wrap_x, log=log)
     if int((reg == 0).sum()) != int((~land).sum()):
         raise cells.CellError(
             "region layer does not tile the land exactly: "
@@ -156,12 +156,12 @@ _ISLAND_MARK = {"r": 200, "g": 80, "b": 80}
 _ISLAND_LINE_DILATE = 3
 
 
-def island_override_zones(rgb: np.ndarray, land: np.ndarray, wrap_x: bool = True,
+def province_merge_zones(rgb: np.ndarray, land: np.ndarray, wrap_x: bool = True,
                           dilate: int = _ISLAND_LINE_DILATE) -> np.ndarray:
     """Zone id per merge-line network (0 = land untouched by any merge line).
 
-    The source (``sources/terraqueous_globe_reprojected - tiny_islands_merger.png``,
-    optional — see :func:`merge_island_overrides`) has the user draw a plain
+    The source (the ``province_merges`` layer of ``full.ora``,
+    optional — see :func:`merge_province_zones`) has the user draw a plain
     **line** (pure red 255,0,0, tolerant of anti-aliasing) directly connecting
     each cluster of tiny islands that should be forced into a single
     province: a disconnected islet has no land neighbour to qualify for
@@ -197,11 +197,11 @@ def island_override_zones(rgb: np.ndarray, land: np.ndarray, wrap_x: bool = True
     return cells.renumber(zones.astype(np.int32))
 
 
-def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndarray,
+def merge_province_zones(reg: np.ndarray, land: np.ndarray, overrides: np.ndarray,
                            wrap_x: bool = True, log=None) -> np.ndarray:
     """Force every region caught under the same override zone to merge into one.
 
-    ``overrides`` is an :func:`island_override_zones` layer. For each zone, every
+    ``overrides`` is an :func:`province_merge_zones` layer. For each zone, every
     region with at least one land pixel under it is unioned together (a network
     touching only one region is a no-op). :func:`subdivide` never crosses a
     magenta boundary and only ever cuts a *connected* region (see its own
@@ -244,21 +244,21 @@ def merge_island_overrides(reg: np.ndarray, land: np.ndarray, overrides: np.ndar
 
 def override_fused_labels(reg: np.ndarray, land: np.ndarray,
                           overrides: np.ndarray | None) -> set[int]:
-    """Final region labels that carry land under any island-override circle.
+    """Final region labels that carry land under any province-merge line.
 
     These are the archipelago-exempt labels :func:`subdivide` must keep whole: the
-    same ``(overrides == z) & land`` predicate :func:`merge_island_overrides` used
+    same ``(overrides == z) & land`` predicate :func:`merge_province_zones` used
     to fuse them, run once more against the **final** ``reg`` (post
-    :func:`regions` + :func:`apply_land_region_merges`), so it is robust to both
-    internal renumbers — both merge steps only *union* labels then
-    :func:`worldgen.cells.renumber` (never split, never move geometry), so
+    :func:`regions`), so it is robust to its internal renumber — the merge only
+    *unions* labels then :func:`worldgen.cells.renumber` (never splits, never moves
+    geometry), so
     ``reg[(overrides == z) & land]`` yields the final fused label for circle ``z``
     directly.
 
     A label under a circle is returned even if it happens to be connected
     (harmless — :func:`subdivide` only consults this set in its disconnected
     branch); a disconnected label **not** in this set is a merge-fused region
-    (:func:`apply_land_region_merges`), which :func:`subdivide` cuts per connected
+    (unioned non-touching labels), which :func:`subdivide` cuts per connected
     piece. ``overrides is None`` (no island-override source drawn) ⟹ empty set, so
     every disconnected drawn region is cut — correct, since the only other source
     of a disconnected label is a merge.
@@ -273,22 +273,22 @@ def override_fused_labels(reg: np.ndarray, land: np.ndarray,
     return out
 
 
-#: The small-state prune line colour: exact pure yellow, no tolerance (the sheet
-#: is a flattened copy of the canvas master, so a tolerant test would catch art).
-PRUNE_RGB = (255, 255, 0)
-#: How far a prune line's end may sit from the land it points at.
-PRUNE_END_RADIUS = 8
+#: The state_merges line colour: exact (63,191,0), no tolerance, so no other layer's
+#: paint (the adjacency yellow, the magenta borders) is read as a merge.
+STATE_MERGE_RGB = (63, 191, 0)
+#: How far a state-merge line's end may sit from the land it points at.
+STATE_MERGE_END_RADIUS = 8
 
 
-def prune_lines(rgba: np.ndarray) -> list[tuple[tuple[int, int], tuple[int, int]]]:
-    """The two ends of every prune line on the small-state prune sheet.
+def state_merge_lines(rgba: np.ndarray) -> list[tuple[tuple[int, int], tuple[int, int]]]:
+    """The two ends of every line on the ``state_merges`` layer.
 
-    Chris draws one short pure-yellow line from a state too small to stand alone
-    to the neighbour it should join. Each connected yellow component is one line;
+    Chris draws one short (63,191,0) line from a state too small to stand alone
+    to the neighbour it should join. Each connected component is one line;
     its ends are its two farthest-apart pixels. Returned in raster order of the
     components, ``((ax, ay), (bx, by))`` in canvas px.
     """
-    m = np.all(rgba[..., :3] == np.array(PRUNE_RGB, dtype=rgba.dtype), axis=-1)
+    m = np.all(rgba[..., :3] == np.array(STATE_MERGE_RGB, dtype=rgba.dtype), axis=-1)
     if rgba.shape[-1] == 4:
         m &= rgba[..., 3] > 0
     lab, n = ndimage.label(m, structure=np.ones((3, 3), dtype=bool))
@@ -304,9 +304,9 @@ def prune_lines(rgba: np.ndarray) -> list[tuple[tuple[int, int], tuple[int, int]
     return out
 
 
-def prune_groups(n_regions: int, pairs: list[tuple[int, int]]
+def state_merge_groups(n_regions: int, pairs: list[tuple[int, int]]
                  ) -> tuple[np.ndarray, list[list[int]]]:
-    """Union the region ids each prune line joins.
+    """Union the region ids each state-merge line joins.
 
     Returns ``(remap, groups)``: ``remap[old_id]`` is the new region id, contiguous
     ``1..R`` in the order of each group's lowest old id (``remap[0] == 0``), and
@@ -336,9 +336,8 @@ def prune_groups(n_regions: int, pairs: list[tuple[int, int]]
     return remap, [g for g in members.values() if len(g) > 1]
 
 
-#: How far :func:`apply_land_region_merges` searches outward from an anchor
-#: for a labelled (non-zero) region pixel, in case the exact stored pixel
-#: rounds onto a barrier/off-region gap.
+#: How far :func:`resolve_anchor` searches outward from an anchor for a labelled
+#: (non-zero) region pixel, in case the exact pixel lands on a barrier gap.
 _MERGE_ANCHOR_SEARCH_RADIUS = 6
 
 
@@ -346,14 +345,14 @@ def resolve_anchor(reg: np.ndarray, x: int, y: int, max_radius: int
                    ) -> tuple[int, tuple[int, int]]:
     """The region label at ``(x, y)`` **and the pixel it was read from**, or the
     nearest labelled pixel within ``max_radius``. Returns ``(0, (x, y))`` if none —
-    the anchor missed land entirely. The pixel-returning sibling of
-    :func:`_region_near` (#3665): the hub seeding needs the exact resolved pixel,
-    not just the label, so the same pixel can be handed to ``_subdivide_cell`` as a
-    fixed Voronoi seed and later read back for the persisted hub→province index.
+    the anchor missed land entirely. The hub seeding (#3665) needs the exact
+    resolved pixel, not just the label, so the same pixel can be handed to
+    ``_subdivide_cell`` as a fixed Voronoi seed and later read back for the
+    persisted hub→province index; the state-merge lines resolve their ends the
+    same way.
 
-    The search order (expanding square, first non-zero in raster order within each
-    ring) is identical to :func:`_region_near`, so the label returned here always
-    matches what ``apply_land_region_merges`` resolves.
+    The search order is an expanding square, first non-zero in raster order
+    within each ring.
     """
     h, w = reg.shape
     for r in range(max_radius + 1):
@@ -365,61 +364,6 @@ def resolve_anchor(reg: np.ndarray, x: int, y: int, max_radius: int
             ry, rx = int(ys[0]) + y0, int(xs[0]) + x0
             return int(reg[ry, rx]), (rx, ry)
     return 0, (x, y)
-
-
-def _region_near(reg: np.ndarray, x: int, y: int, max_radius: int) -> int:
-    """The region label at ``(x, y)``, or the nearest labelled pixel within
-    ``max_radius`` (0 if none — the anchor missed land entirely)."""
-    return resolve_anchor(reg, x, y, max_radius)[0]
-
-
-def apply_land_region_merges(reg: np.ndarray, merges: list["schema.LandRegionMerge"],
-                             log=None) -> np.ndarray:
-    """Force-union the regions owning each merge pair's two anchors, directly.
-
-    Resolves each anchor straight to a region label (:func:`_region_near`) and
-    unions the two labels in one shared union-find pass — so a chain of pairs
-    that shares an anchor (A merges into B, B merges into C) unions all three,
-    which a "paint a zone per pair" scheme (this function's first cut) gets
-    wrong whenever two pairs share the *exact* same anchor pixel: the second
-    pair's marker silently overwrites the first's zone there, breaking the
-    chain in two. Resolving to region labels up front sidesteps that
-    entirely — there is no zone array for one stamp to clobber another's.
-    """
-    n = int(reg.max())
-    parent = np.arange(n + 1)
-
-    def find(a: int) -> int:
-        while parent[a] != a:
-            parent[a] = parent[parent[a]]
-            a = parent[a]
-        return int(a)
-
-    def union(a: int, b: int) -> None:
-        ra, rb = find(a), find(b)
-        if ra != rb:
-            parent[max(ra, rb)] = min(ra, rb)
-
-    merged_any = False
-    for m in merges:
-        ax, ay = m.anchor_a
-        bx, by = m.anchor_b
-        ra = _region_near(reg, ax, ay, _MERGE_ANCHOR_SEARCH_RADIUS)
-        rb = _region_near(reg, bx, by, _MERGE_ANCHOR_SEARCH_RADIUS)
-        if ra <= 0 or rb <= 0:
-            if log:
-                log(f"  land region merge override skipped (anchor missed land): {m.note}")
-            continue
-        if find(ra) != find(rb):
-            union(ra, rb)
-            merged_any = True
-            if log:
-                log(f"  land region merge override: regions {ra},{rb} -> {find(ra)}  ({m.note})")
-
-    if not merged_any:
-        return reg
-    remap = np.array([find(i) for i in range(n + 1)], dtype=reg.dtype)
-    return cells.renumber(remap[reg])
 
 
 def drawn_mask(land: np.ndarray, mag: np.ndarray, wrap_x: bool = True,
@@ -469,7 +413,7 @@ def _is_connected(mask: np.ndarray, wrap_x: bool) -> bool:
     same seam-roll :func:`_subdivide_cell` uses, so a region straddling the
     antimeridian isn't mistaken for two pieces. :func:`subdivide` calls this
     before cutting a region into more than one seat: an island-override merge
-    (:func:`merge_island_overrides`) can hand it a region that is legitimately
+    (:func:`merge_province_zones`) can hand it a region that is legitimately
     several islands sharing one label, and farthest-point seeding across that
     disconnected mask would carve up an archipelago the user asked to stay whole.
     """
@@ -799,15 +743,15 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     ``keep_whole`` is the set of region labels that must never be cut even when
     disconnected — the island-override archipelagos, from
     :func:`override_fused_labels`. A **disconnected** drawn region that is *not* in
-    ``keep_whole`` is a merge-fused region (:func:`apply_land_region_merges` unioned
-    two non-touching labels) and is cut **per connected piece** (its seats shared
+    ``keep_whole`` is a merge-fused region (unioned two
+    non-touching labels) and is cut **per connected piece** (its seats shared
     across pieces by area, each piece ≥ 1 province, ``_subdivide_cell`` per piece,
     the region label used exactly once region-wide); a disconnected region *in*
     ``keep_whole`` stays whole as one province. Connectivity alone cannot tell the
     two apart, which is why the set is threaded in. ``keep_whole is None`` ⟹ empty
     set (every disconnected drawn region is cut — the merge-fused case).
 
-    ``island_zones`` is the :func:`island_override_zones` layer. With it, a
+    ``island_zones`` is the :func:`province_merge_zones` layer. With it, a
     ``keep_whole`` region that a state-level merge chained across several island
     lines ships as one province per line-group instead of one for the whole
     state; ``None`` (or a single group) keeps it whole, byte-identical to before.
@@ -857,7 +801,7 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     * ``is_archipelago`` — a boolean table indexed by label, ``True`` for a
       province that is genuinely non-contiguous — several disconnected islands
       sharing one label, the deliberate outcome of an island-override merge
-      (:func:`merge_island_overrides`) rather than a flood-fill bug. Vanilla
+      (:func:`merge_province_zones`) rather than a flood-fill bug. Vanilla
       ships exactly this shape (e.g. Micronesia's province colour spanning 23
       disconnected pixel blobs), so this is not itself invalid; it's the flag
       ``generate_provinces.py`` records so a validator can tell a deliberate
@@ -1116,7 +1060,7 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
 
         # --- disconnected region ---
         if i in keep:
-            # An island-override merge (merge_island_overrides) fused several
+            # An island-override merge (merge_province_zones) fused several
             # disconnected islets into one label on purpose — one province per
             # island line. A state-level merge can chain several lines' regions
             # into one label; then each line's group is its own province, so the
@@ -1154,8 +1098,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                             dtype=np.int32)
             out[m] = root[comp[m]]
             continue
-        # A merge-fused drawn region (apply_land_region_merges unioned two
-        # non-touching labels): its halves are separate landmasses, so cut each
+        # A merge-fused drawn region (two non-touching labels under one
+        # label): its halves are separate landmasses, so cut each
         # connected piece on its own. cells.components is the same wrap-aware
         # primitive _is_connected agrees with, so a seam-wrapped region is one
         # piece here too. Seats are shared across the pieces by area (each piece

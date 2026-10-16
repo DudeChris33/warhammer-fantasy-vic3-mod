@@ -349,7 +349,7 @@ def validate(
     errors += _check_required_hubs(land_states)
     errors += _check_id_bands(land_states, sea_states)
     # Deliberately non-contiguous provinces (island-override merges — see
-    # land_provinces.merge_island_overrides) carry an `archipelago` flag in
+    # land_provinces.merge_province_zones) carry an `archipelago` flag in
     # provinces_index.json; a torn province is only a real bug when it isn't
     # one of these. Optional: the fixture's golden bitmap has no index file
     # and never needed the concept, so an absent path just means no exceptions.
@@ -1821,7 +1821,7 @@ def validate_provinces(provinces_path: Path, mask_path: Path, index_path: Path,
 
     # 5. Every province is one connected region, UNLESS it's a deliberate
     # island-override archipelago (several islands merged under one label by
-    # land_provinces.merge_island_overrides) — vanilla ships exactly this shape
+    # land_provinces.merge_province_zones) — vanilla ships exactly this shape
     # (e.g. Micronesia's province colour spans 23 disconnected pixel blobs), so
     # a torn province is only an error when it isn't flagged as one.
     archipelago_labels = {int(c["label"]) for c in index["cells"] if c.get("archipelago")}

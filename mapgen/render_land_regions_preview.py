@@ -503,7 +503,7 @@ def main(argv: list[str] | None = None) -> int:
                     continue
                 if new_label in name_by_new_label and name_by_new_label[new_label] != name:
                     conflicts.append(new_label)
-                    # A merge override (mapgen/config/land_region_merges.json)
+                    # A state-merge line (the state_merges layer)
                     # routinely lands an instruction string ("MERGE INTO 57")
                     # on the same region as the real name it pointed at
                     # ("Marienburg") — prefer the real name over the

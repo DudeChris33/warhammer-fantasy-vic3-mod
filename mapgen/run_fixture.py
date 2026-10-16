@@ -1317,15 +1317,15 @@ def _selfcheck_land_provinces() -> None:
     assert np.array_equal(is_archipelago, ia2), "archipelago flags must be byte-identical too"
 
 
-def _selfcheck_island_overrides() -> None:
+def _selfcheck_province_merges() -> None:
     """Tiny-island override merge (worldgen.land_provinces), in isolation.
 
-    Pins the properties generate_provinces.py relies on: island_override_zones
+    Pins the properties generate_provinces.py relies on: province_merge_zones
     reads a merge-line network's connected components as distinct zone ids
     (board #4609 — a line directly connecting islands, superseding an earlier
     enclosing-ring idiom that needed a geometric splitter for touching rings
     and never reliably got it right for every shape) and a blank source as no
-    zones at all; merge_island_overrides unions every region caught under the
+    zones at all; merge_province_zones unions every region caught under the
     same zone into one (a line touching only one region is a no-op); the merge
     result still tiles the land exactly and is byte-identical across two runs;
     and subdivide's connectivity guard keeps a merged, non-contiguous archipelago
@@ -1342,13 +1342,13 @@ def _selfcheck_island_overrides() -> None:
 
     # A blank overrides source yields no zones at all.
     blank = np.full((H, W, 3), 255, dtype=np.uint8)
-    assert not lp.island_override_zones(blank, land, wrap_x=False).any(), \
+    assert not lp.province_merge_zones(blank, land, wrap_x=False).any(), \
         "a blank source must draw no zones"
 
     # A line directly connecting the two islets puts them in the same zone.
     overrides = np.full((H, W, 3), 255, dtype=np.uint8)
     overrides[1, 30:35] = (255, 0, 0)
-    zones = lp.island_override_zones(overrides, land, wrap_x=False)
+    zones = lp.province_merge_zones(overrides, land, wrap_x=False)
     assert int(zones.max()) == 1, f"one connecting line must be one zone, got {zones.max()}"
     assert zones[1, 30] == 1 and zones[1, 34] == 1, \
         "both islets must fall on the connecting line's zone"
@@ -1357,7 +1357,7 @@ def _selfcheck_island_overrides() -> None:
     # zone 0 — "no forced merge here" — rather than silently roping one in.
     near_miss = np.full((H, W, 3), 255, dtype=np.uint8)
     near_miss[15, 25:30] = (255, 0, 0)  # clear of both islets (row 1) and the mainland (cols 2-18)
-    nz = lp.island_override_zones(near_miss, land, wrap_x=False)
+    nz = lp.province_merge_zones(near_miss, land, wrap_x=False)
     assert nz[1, 30] == 0 and nz[1, 34] == 0, \
         "an unconnected line must not merge an islet it never touches"
 
@@ -1366,10 +1366,10 @@ def _selfcheck_island_overrides() -> None:
     two_lines = np.full((H, W, 3), 255, dtype=np.uint8)
     two_lines[1, 30:32] = (255, 0, 0)          # touches islet A only
     two_lines[10, 2:5] = (255, 0, 0)           # touches the mainland only, far from islet A's line
-    tz = lp.island_override_zones(two_lines, land, wrap_x=False)
+    tz = lp.province_merge_zones(two_lines, land, wrap_x=False)
     assert tz[1, 30] != 0 and tz[10, 2] != 0 and tz[1, 30] != tz[10, 2], \
         "two disconnected merge-line networks must keep distinct zones"
-    tz2 = lp.island_override_zones(two_lines, land, wrap_x=False)
+    tz2 = lp.province_merge_zones(two_lines, land, wrap_x=False)
     assert np.array_equal(tz, tz2), "two runs must be byte-identical"
 
     reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
@@ -1377,23 +1377,23 @@ def _selfcheck_island_overrides() -> None:
     islet_a, islet_b = int(reg[1, 30]), int(reg[1, 34])
     assert islet_a != islet_b, "the two islets must start as separate regions"
 
-    merged = lp.merge_island_overrides(reg, land, zones, wrap_x=False)
+    merged = lp.merge_province_zones(reg, land, zones, wrap_x=False)
     assert int((merged == 0).sum()) == int((~land).sum()), "the merge must still tile the land exactly"
     assert merged[1, 30] == merged[1, 34], "both islets must end up under one region id"
-    m2 = lp.merge_island_overrides(reg, land, zones, wrap_x=False)
+    m2 = lp.merge_province_zones(reg, land, zones, wrap_x=False)
     assert np.array_equal(merged, m2), "two runs must be byte-identical"
 
     # A circle drawn over a single region is a no-op.
     single = np.zeros((H, W), dtype=np.int32)
     single[1, 30] = 1
-    unchanged = lp.merge_island_overrides(reg, land, single, wrap_x=False)
+    unchanged = lp.merge_province_zones(reg, land, single, wrap_x=False)
     assert np.array_equal(unchanged, reg), "a circle over one region must change nothing"
 
-    # regions() applies the override itself when given island_overrides=.
+    # regions() applies the override itself when given province_merges=.
     reg_direct = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False,
-                            island_overrides=zones)
+                            province_merges=zones)
     assert reg_direct[1, 30] == reg_direct[1, 34], \
-        "regions() must apply island_overrides internally"
+        "regions() must apply province_merges internally"
 
     # subdivide's connectivity guard: a merged, disconnected region (two islets
     # sharing one label) must never be cut, no matter how many seats its area
@@ -1412,7 +1412,7 @@ def _selfcheck_island_overrides() -> None:
     # region (cut per piece). Assert its CONTENT, not just that it runs: the
     # merged islets' label is the only archipelago-exempt label here. This is the
     # sole exerciser of the archipelago branch on a machine without the island
-    # source (island_overrides=None ⟹ empty set in a bare local run).
+    # source (province_merges=None ⟹ empty set in a bare local run).
     keep_whole = lp.override_fused_labels(merged, land, zones)
     assert keep_whole == {merged_id}, \
         f"override_fused_labels must return exactly the archipelago label, got {keep_whole}"
@@ -1440,8 +1440,8 @@ def _selfcheck_island_overrides() -> None:
 def _selfcheck_merge_fused() -> None:
     """Merge-fused disconnected region cut per piece (#3664), in isolation.
 
-    Pins the #3664 fix: a drawn region that ``apply_land_region_merges`` fused
-    across water (two non-touching landmasses under one label) is cut **per
+    Pins the #3664 fix: a drawn region that was fused across water (two
+    non-touching landmasses under one label) is cut **per
     connected piece** — each piece gets its own provinces, no province spans the
     two pieces, none is flagged an archipelago — while the SAME region, told to
     stay whole via ``keep_whole``, ships as exactly one non-contiguous province.
@@ -1463,10 +1463,8 @@ def _selfcheck_merge_fused() -> None:
     reg = lp.regions(land, drawn, dilate=1, merge_floor=1, wrap_x=False)
     assert int(reg.max()) == 2, f"two separate blocks = 2 regions, got {reg.max()}"
 
-    # Fuse the two regions across the water (a judgement-call merge). anchors (x, y).
-    merges = [schema.LandRegionMerge(anchor_a=(5, 10), anchor_b=(17, 10), note="test")]
-    reg_m = lp.apply_land_region_merges(reg, merges)
-    assert int(reg_m.max()) == 1, f"the merge must union both blocks into one label, got {reg_m.max()}"
+    # Fuse the two regions across the water under one label.
+    reg_m = np.where(land, 1, 0).astype(reg.dtype)
     assert not lp._is_connected(reg_m == 1, wrap_x=False), \
         "the merged region must be disconnected (its halves never touch)"
 
@@ -6156,7 +6154,7 @@ def run_check() -> int:
     _selfcheck_land_provinces()
     print("land_provinces: drawn-region cut (barrier-respecting subdivision, placeholder whole) "
           "self-check passed.")
-    _selfcheck_island_overrides()
+    _selfcheck_province_merges()
     print("land_provinces: tiny-island override merge (line -> zone -> forced single "
           "province) self-check passed.")
     _selfcheck_merge_fused()

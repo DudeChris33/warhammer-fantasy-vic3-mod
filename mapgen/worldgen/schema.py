@@ -313,7 +313,7 @@ def load_river_streams(path: Path, canvas: tuple[int, int] | None = None) -> lis
 # authored as polylines, so names cannot ride on the stream objects the way
 # ``RiverStream`` above carries them. Instead a small hand-authored file pins each
 # canon river NAME to an ``anchor`` pixel on its drawn line — the same
-# canvas-anchor idiom as ``land_region_merges.json`` / the hub worksheet — and the
+# canvas-anchor idiom as the hub worksheet — and the
 # generator resolves each anchor to exactly one extracted stream. Naming is
 # **opt-in**: the engine has no river names, so a stream needs a name only if a
 # downstream item (#3677 economics, #3687 traits) references that specific river
@@ -325,7 +325,7 @@ class CanonRiverName:
     """One canon river: a display name pinned to an ``anchor`` pixel on its line.
 
     ``anchor`` is a single canvas ``[x, y]`` pixel (bounds-checked exactly like
-    :class:`LandRegionMerge.anchor_a`). ``width`` optionally overrides the
+    :class:`HubRow.anchor`). ``width`` optionally overrides the
     Strahler-derived render width (one of :data:`RIVER_WIDTH_RAMP`); ``mouth``
     optionally pins the mouth kind (one of :data:`RIVER_MOUTHS`) and must match
     the traced topology.
@@ -458,7 +458,7 @@ def load_river_sources(path: Path) -> list[RiverSourceLayer]:
 # the river drains toward. The endpoint furthest that way becomes the mouth, the
 # opposite end the source (coastal or not), and the sourceless-channel check is
 # waived for it. A hand-authored, regenerate-through input (the
-# ``land_region_merges.json`` anchor idiom) — never inferred from the drawing.
+# canvas-anchor idiom) — never inferred from the drawing.
 
 #: The eight compass directions an override may name.
 RIVER_FLOW_DIRS = ("N", "S", "E", "W", "NE", "NW", "SE", "SW")
@@ -672,46 +672,11 @@ def load_out_of_scope_continents(path: Path, canvas: tuple[int, int] | None = No
 # practice copied straight from the naming worksheet's own anchor_x/anchor_y
 # columns, since those already pin an exact interior point of each region.
 
-@dataclass(frozen=True)
-class LandRegionMerge:
-    """One judgement-call merge: the regions owning ``anchor_a`` and
-    ``anchor_b`` are force-unioned regardless of any magenta line between
-    them. Transitive chains (A merges into B, B into C) are fine — the
-    consuming union-find does not care which pair record supplies which leg."""
-
-    anchor_a: tuple[int, int]
-    anchor_b: tuple[int, int]
-    note: str
-
-    @classmethod
-    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None
-                  ) -> "LandRegionMerge":
-        (a,) = _as_seed_list([_require(d, "anchor_a", ctx)], f"{ctx}.anchor_a", canvas)
-        (b,) = _as_seed_list([_require(d, "anchor_b", ctx)], f"{ctx}.anchor_b", canvas)
-        note = _as_str(d.get("note", ""), f"{ctx}.note")
-        return cls(anchor_a=a, anchor_b=b, note=note)
-
-
-def load_land_region_merges(path: Path, canvas: tuple[int, int] | None = None
-                            ) -> list[LandRegionMerge]:
-    """Load + validate the committed land-region merge overrides (authored
-    order preserved — it has no semantic meaning here, but matches the other
-    loaders' convention of not reordering hand-authored input)."""
-    ctx = path.name
-    data = _load_json(path)
-    merges_raw = _require(data, "merges", ctx)
-    if not isinstance(merges_raw, list) or not merges_raw:
-        raise SchemaError(f"{ctx}.merges: expected a non-empty list")
-    return [LandRegionMerge.from_dict(m, f"{ctx}.merges[{i}]", canvas)
-            for i, m in enumerate(merges_raw)]
-
-
 # ---------------------------------------------------------------------------
 # Hub worksheet (the settlement list the lore-hub tooling reads, board #3665)
 # ---------------------------------------------------------------------------
 #
-# A hand-authored, regenerate-through JSON input (sibling of
-# ``land_region_merges.json``) — one row per named hub. Each row pins a
+# A hand-authored, regenerate-through JSON input — one row per named hub. Each row pins a
 # settlement to a canvas ``anchor`` pixel; ``generate_provinces.py`` resolves that
 # anchor to a state region and seeds a distinct province there, and
 # ``generate_land_regions.py`` picks that province as the state's ``hub`` and emits
@@ -731,7 +696,7 @@ class HubRow:
     ``state`` is a free-text human label (logs only). ``hub`` is one of
     :data:`_HUB_TYPES`. ``name`` is the display text. ``source`` is a canon
     citation or the literal ``invented``. ``anchor`` is a single canvas ``[x, y]``
-    pixel, bounds-checked exactly like :class:`LandRegionMerge.anchor_a`.
+    pixel, bounds-checked exactly like :class:`CanonRiverName.anchor`.
 
     ``stack_on`` (board #3666, the unified stacking contract) is empty for a
     normal, *seeded* row. A non-empty ``stack_on`` names the host hub type of a

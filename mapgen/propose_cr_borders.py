@@ -155,8 +155,8 @@ class Layers:
         self.borders = self._read(gp.STATE_REGIONS_SOURCE, required=True)
         self.rivers = self._read(sources_mod.source_ref("rivers"), required=True)
         self.impassable = self._read(gp.IMPASSABLE_SOURCE, required=False)
-        ov = self._read(gp.ISLAND_OVERRIDES_SOURCE, required=False)
-        self.island_overrides = (land_provinces.island_override_zones(ov[..., :3], self.land, WRAP_X)
+        ov = self._read(gp.PROVINCE_MERGES_SOURCE, required=False)
+        self.province_merges = (land_provinces.province_merge_zones(ov[..., :3], self.land, WRAP_X)
                                  if ov is not None else np.zeros(self.land.shape, dtype=np.int32))
         # The borders layer is read by name: any paint on it is a border, whatever its colour.
         painted = self.borders[..., 3] > 0
@@ -214,11 +214,7 @@ def existing_regions(layers: Layers, magenta: np.ndarray, t0: float):
     drawn = np.zeros(layers.land.shape + (3,), dtype=np.uint8)
     drawn[magenta] = MAGENTA
     reg = land_provinces.regions(layers.land, drawn, gp.LINE_DILATE, gp.MERGE_FLOOR, WRAP_X,
-                                 island_overrides=layers.island_overrides)
-    if gp.LAND_REGION_MERGES_CONFIG.is_file():
-        merges = schema.load_land_region_merges(gp.LAND_REGION_MERGES_CONFIG,
-                                                canvas=(CANVAS_W, CANVAS_H))
-        reg = land_provinces.apply_land_region_merges(reg, merges)
+                                 province_merges=layers.province_merges)
     mag = land_provinces.magenta_lines(drawn)
     dmask = land_provinces.drawn_mask(layers.land, mag, WRAP_X)
     if gp.IN_SCOPE_ADDITIONS_CONFIG.is_file():

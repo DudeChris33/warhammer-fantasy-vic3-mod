@@ -207,7 +207,7 @@ def state_table(layer: np.ndarray, index: dict) -> dict:
     states, _stem = tsp._load_states(REPO_ROOT, drawn_ids)
     missing = sorted(drawn_ids - {st.id for st in states})
     if missing:
-        # small-state prune folds some named rows into a neighbour; they have no state of their own
+        # state_merges folds some named rows into a neighbour; they have no state of their own
         log(f"note: {len(missing)} drawn worksheet rows have no emitted state (region_id): {missing}")
     impass_of = {st.key: set(st.impassable) for st in states}
     rgb = raster.read_rgb_png(REPO_ROOT / "map_data" / "provinces.png")
