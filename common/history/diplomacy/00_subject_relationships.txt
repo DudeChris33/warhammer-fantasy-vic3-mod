@@ -52,55 +52,55 @@
 	}
 	c:COU ?= {
 		# Ducal vassal of the King of Bretonnia (WFB Bretonnia army book)
-		# Engine type is puppet, not vassal: vanilla subject_type_vassal needs an unrecognized overlord and COU is recognized,
-		# so a vassal pact breaks on day 1 (#6576). Puppet is the recognized-overlord twin: same autonomy 1, no own plays, joins overlord wars.
+		# Engine type is protectorate, not vassal: vanilla subject_type_vassal needs an unrecognized overlord and COU is recognized,
+		# so a vassal pact breaks on day 1 (#6576). Protectorate takes a recognized overlord; autonomy 2, subjects keep their own diplomatic plays.
 		create_diplomatic_pact = {
 			country = c:LYO
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:ART
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:GIS
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:MNF
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:BAS
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:AQU
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:QUE
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:CAR
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:BRI
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:BOR
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:LAN
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:PAR
-			type = puppet
+			type = protectorate
 		}
 	}
 	c:KSV ?= {
