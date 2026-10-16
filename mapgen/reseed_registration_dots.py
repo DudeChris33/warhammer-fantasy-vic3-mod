@@ -43,6 +43,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import read_rgb_png  # noqa: E402
 from worldgen import reseed_dots, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
@@ -54,7 +55,7 @@ CANVAS_BASE = "terraqueous_globe_reprojected"
 
 
 def _load_rgb(path: Path) -> np.ndarray:
-    return np.asarray(Image.open(path).convert("RGB"))
+    return read_rgb_png(path)
 
 
 def _derive_names(seed: dict) -> dict:

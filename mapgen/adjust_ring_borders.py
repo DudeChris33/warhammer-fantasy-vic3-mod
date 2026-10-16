@@ -58,6 +58,7 @@ from skimage.morphology import skeletonize
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import read_rgb_png  # noqa: E402
 from worldgen import reproject, schema  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
@@ -229,7 +230,7 @@ def smooth_path(P, sigma):
 
 def parch_ring():
     """The island's land, the magenta borders and the cyan trace on the parchment sheet, plus the state count."""
-    a = np.asarray(Image.open(ROOT / "sources" / "ulthuan" / "ulthuan_parchment.png").convert('RGB'))[PB[1]:PB[3], PB[0]:PB[2]]
+    a = read_rgb_png(ROOT / "sources" / "ulthuan" / "ulthuan_parchment.png")[PB[1]:PB[3], PB[0]:PB[2]]
     cy = (a == np.array([0, 255, 255], np.uint8)).all(-1)
     mg = (a == np.array([255, 0, 255], np.uint8)).all(-1)
     bar = ndi.binary_dilation(cy | mg, structure=np.ones((3, 3)))
@@ -453,7 +454,7 @@ def main():
             print(f"  e{e['i']:<2} tier {e['tier']:.2f}  parchment depth {e['med']:.2f}  canvas depth now mean {t.mean():.2f} (min {t.min():.2f} max {t.max():.2f})")
 
     S = 3
-    globe = np.asarray(Image.open(ROOT / "sources" / "originals" / "terraqueous_globe_reprojected.png").convert('RGB'))[Y0:Y1, X0:X1]
+    globe = read_rgb_png(ROOT / "sources" / "originals" / "terraqueous_globe_reprojected.png")[Y0:Y1, X0:X1]
     old_path = OUT / "cr_combi_expanded_map_ulthuan_borders_canvas.png"
     renders = [('ulthuan_borders_adjusted_review.png', False)]
     if old_path.is_file():

@@ -75,6 +75,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import rgb_zero_transparent  # noqa: E402
 from config import map_config  # noqa: E402
 from worldgen import reproject, schema, tww3_names  # noqa: E402
 
@@ -271,7 +272,7 @@ class Lookup:
                     f"{LOOKUP_BMP.name} is {w}x{h}, expected {LOOKUP_SIZE}x"
                     f"{LOOKUP_SIZE + 1}. A different size is a different export and "
                     f"every scale/row constant in this script would be wrong for it.")
-            arr = np.asarray(im.convert("RGB"), dtype=np.uint8)
+            arr = rgb_zero_transparent(im)
         keep = np.arange(arr.shape[0]) != DROP_ROW
         return np.ascontiguousarray(arr[keep])
 

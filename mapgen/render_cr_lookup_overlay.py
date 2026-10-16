@@ -94,6 +94,7 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import rgb_zero_transparent  # noqa: E402
 from config import map_config  # noqa: E402
 from worldgen import reproject, schema  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
@@ -236,7 +237,7 @@ def load_lookup() -> np.ndarray:
                 f"(8192 region rows + 1 duplicate padding row). A different size is a "
                 f"different export — the master->lookup scale and the row-tie choice "
                 f"documented in this script would not apply.")
-        arr = np.asarray(im.convert("RGB"), dtype=np.uint8)
+        arr = rgb_zero_transparent(im)
     keep = np.arange(arr.shape[0]) != DROP_ROW
     arr = arr[keep].copy()
     if arr.shape != (LOOKUP_SIZE, LOOKUP_SIZE, 3):
@@ -584,7 +585,7 @@ def verify_correspondence(windows: int = 6, size: int = 384) -> int:
         if im.size != (LOOKUP_SIZE, LOOKUP_SIZE):
             raise SystemExit(f"{CAMPAIGN_MAP_PNG.name} is {im.size[0]}x{im.size[1]}, "
                              f"expected {LOOKUP_SIZE}x{LOOKUP_SIZE}")
-        camp = np.asarray(im.convert("RGB"), dtype=np.float32)
+        camp = rgb_zero_transparent(im).astype(np.float32)
 
     rng = np.random.default_rng(4364)
     span = range(-OFFSET_SWEEP_LOOKUP_PX, OFFSET_SWEEP_LOOKUP_PX + 1)

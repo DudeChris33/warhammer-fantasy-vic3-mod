@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
 from PIL import Image
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from worldgen.raster import read_rgb_png  # noqa: E402
+
 from collections import Counter
 import csv
 import sys
@@ -9,7 +14,7 @@ Image.MAX_IMAGE_PIXELS = None
 
 def analyze_image(input_file, output_file):
     # Open image
-    image = Image.open(input_file).convert("RGB")
+    image = Image.fromarray(read_rgb_png(input_file))
 
     # Count every RGB color
     color_counts = Counter(image.getdata())

@@ -44,6 +44,7 @@ from scipy import ndimage
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import read_rgb_png  # noqa: E402
 from config import map_config  # noqa: E402
 from worldgen import cells, cr_partition, land_provinces, raster, schema, scope_additions  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
@@ -736,8 +737,7 @@ def main(argv: list[str] | None = None) -> int:
 
 def _globe_crop(crop_box) -> np.ndarray:
     path = sources_mod.resolve_source_path(GLOBE_SOURCE)
-    with Image.open(path) as im:
-        arr = np.array(im.convert("RGB"))
+    arr = read_rgb_png(path)
     return cr_partition.crop_box(arr, crop_box, wrap=True)
 
 

@@ -41,6 +41,7 @@ from skimage.restoration import denoise_nl_means
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "mapgen"))
+from worldgen.raster import read_rgb_png  # noqa: E402
 from config import canvas_frame  # noqa: E402
 from worldgen import ingest, reproject, schema, sources  # noqa: E402
 
@@ -402,7 +403,7 @@ def main(argv=None) -> int:
         raise SystemExit(f"missing source: {src_path}")
     if not CANVAS_ORIGINAL.is_file():
         raise SystemExit(f"missing original canvas: {CANVAS_ORIGINAL}")
-    src = np.asarray(Image.open(src_path).convert("RGB"))
+    src = read_rgb_png(src_path)
     cx0, cy0, cx1, cy1 = (int(round(v)) for v in reg.crop)
     x0, y0 = max(cx0 - BAND_PAD, 0), max(cy0 - BAND_PAD, 0)
     x1, y1 = min(cx1 + BAND_PAD + 1, src.shape[1]), min(cy1 + BAND_PAD + 1, src.shape[0])
@@ -419,7 +420,7 @@ def main(argv=None) -> int:
     keep = build_keep(td, land, trace, strips)
     log(f"keep mask {keep.sum()} px, of which inside strips {(keep & strips).sum()}", t0)
 
-    orig = np.asarray(Image.open(CANVAS_ORIGINAL).convert("RGB"))
+    orig = read_rgb_png(CANVAS_ORIGINAL)
     if args.preview:
         ov = orig.copy()
         # paint the classes on the canvas by sampling the source-space masks through the fit

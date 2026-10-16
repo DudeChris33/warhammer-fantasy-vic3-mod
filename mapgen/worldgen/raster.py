@@ -358,10 +358,26 @@ def write_rgb_png(path, rgb: np.ndarray) -> None:
     )
 
 
+def rgb_zero_transparent(im) -> np.ndarray:
+    """``(H, W, 3)`` uint8 RGB of an open PIL image with the colour under every
+    alpha-0 pixel zeroed.
+
+    A fully transparent pixel keeps whatever RGB the editor left behind (an
+    erased stroke is still red underneath), and ``convert("RGB")`` silently
+    exposes it. Every reader of a hand-drawn or art input goes through this (or
+    :func:`read_rgb_png`) so that nothing at alpha 0 is ever read as paint."""
+    if "A" in im.getbands() or "transparency" in im.info:
+        rgba = np.array(im.convert("RGBA"), dtype=np.uint8)
+        rgba[rgba[..., 3] == 0, :3] = 0
+        return np.ascontiguousarray(rgba[..., :3])
+    return np.asarray(im.convert("RGB"), dtype=np.uint8)
+
+
 def read_rgb_png(path) -> np.ndarray:
-    """Read a PNG as an ``(H, W, 3)`` uint8 array (forces RGB)."""
+    """Read an image as an ``(H, W, 3)`` uint8 array (forces RGB), RGB zeroed
+    wherever alpha is 0 (see :func:`rgb_zero_transparent`)."""
     with Image.open(path) as im:
-        return np.asarray(im.convert("RGB"), dtype=np.uint8)
+        return rgb_zero_transparent(im)
 
 
 def write_rgba_png(path, rgba: np.ndarray) -> None:

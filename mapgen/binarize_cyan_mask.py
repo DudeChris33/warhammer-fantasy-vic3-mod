@@ -22,6 +22,7 @@ from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import read_rgb_png  # noqa: E402
 from worldgen import sources  # noqa: E402
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -50,7 +51,7 @@ def main():
     args = ap.parse_args()
     out_path = args.out or args.src
 
-    a = np.array(Image.open(args.src).convert("RGB"))
+    a = read_rgb_png(args.src)
     result = binarize(a)
     Image.fromarray(result, "RGB").save(out_path)
     print("wrote", out_path)

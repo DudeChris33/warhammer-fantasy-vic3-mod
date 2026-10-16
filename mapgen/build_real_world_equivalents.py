@@ -33,6 +33,7 @@ from scipy import ndimage as ndi
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import read_rgb_png  # noqa: E402
 import measure_vanilla_arable as mva  # noqa: E402
 from measure_vanilla_frame import VANILLA_ROOT  # noqa: E402
 
@@ -136,7 +137,7 @@ def mod_state_pixels() -> tuple[np.ndarray, dict[int, str], dict[int, float]]:
 
 
 def build_zone_raster() -> np.ndarray:
-    f = np.array(Image.open(HIST / "real-world-comparisons-f.png").convert("RGB")).astype(int)
+    f = read_rgb_png(HIST / "real-world-comparisons-f.png").astype(int)
     cells = label_cells(f)
     zone = np.zeros(cells.shape, dtype=np.uint8)
     for cell, name in CELL_ZONE.items():
@@ -208,7 +209,7 @@ def vanilla_state_colours(states: list[dict], game: Path) -> dict[str, tuple[int
     idx_a = np.array(idx)[o]
     pos = np.searchsorted(cols_a, pk).clip(0, len(cols_a) - 1)
     sidx = np.where(cols_a[pos] == pk, idx_a[pos], -1)
-    r = np.array(Image.open(HIST / "real-world-comparisons-r.png").convert("RGB")).astype(int)
+    r = read_rgb_png(HIST / "real-world-comparisons-r.png").astype(int)
     H, W = r.shape[:2]
     ry, rx = np.mgrid[0:H, 0:W]
     vx = (((rx - b) / a) * (8192 / W)).round().astype(int).clip(0, 8191)

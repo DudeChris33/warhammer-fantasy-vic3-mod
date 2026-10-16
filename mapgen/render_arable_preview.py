@@ -43,6 +43,7 @@ Image.MAX_IMAGE_PIXELS = None
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import rgb_zero_transparent  # noqa: E402
 from config import canvas_frame as cf  # noqa: E402
 from config import map_config  # noqa: E402
 from worldgen import raster  # noqa: E402
@@ -88,7 +89,7 @@ def load_globe(use_globe: bool) -> np.ndarray:
         raise SystemExit(f"{GLOBE_SOURCE} not found under sources/ — pass --no-globe "
                          "to render on a flat backdrop instead")
     with Image.open(path) as im:
-        rgb = np.asarray(im.convert("RGB"), dtype=np.uint8).copy()
+        rgb = rgb_zero_transparent(im).copy()
     if rgb.shape[0] != CANVAS_H or rgb.shape[1] != CANVAS_W:
         raise SystemExit(f"{GLOBE_SOURCE} is {rgb.shape[1]}x{rgb.shape[0]}, expected "
                          f"{CANVAS_W}x{CANVAS_H} (the canvas frame)")

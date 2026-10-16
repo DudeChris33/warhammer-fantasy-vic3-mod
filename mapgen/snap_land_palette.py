@@ -11,6 +11,11 @@ import numpy as np
 from PIL import Image
 from scipy import ndimage as ndi
 
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from worldgen.raster import read_rgb_png  # noqa: E402
+
 Image.MAX_IMAGE_PIXELS = None
 PALETTE = [  # glacier, then the 8 legend land bands (mapgen/lut/terraqueous_elevation.json)
     (222, 216, 201), (167, 171, 136), (201, 197, 160), (224, 210, 165), (213, 183, 151),
@@ -31,7 +36,7 @@ SPECKLE_CLASSES = (0, 1, 2, 3)  # ...but only glacier and the 3 lowest land band
 BUFFER = 3            # px around rivers and coast exempt from all smoothing
 MODE = 9
 
-src = np.asarray(Image.open('sources/originals/terraqueous_globe_reprojected.png').convert('RGB'))
+src = read_rgb_png('sources/originals/terraqueous_globe_reprojected.png')
 land0 = np.asarray(Image.open('mapgen/derived/land_sea_mask.png')).astype(bool)
 land = ndi.binary_closing(land0, np.ones((9, 9), bool))  # rivers cut hairline holes in the fill
 h, w, _ = src.shape

@@ -54,6 +54,7 @@ import cv2
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "mapgen"))
+from worldgen.raster import read_rgb_png  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
 
 SOURCES_DIR = ROOT / "sources"
@@ -240,7 +241,7 @@ def main():
                     help="write only a colour-coded detection overlay, do not inpaint")
     args = ap.parse_args()
 
-    a = np.asarray(Image.open(args.src).convert("RGB")).astype(np.int16)
+    a = read_rgb_png(args.src).astype(np.int16)
     mask, red, dark, blue, grid = compute(a)
     print(f"red {int(red.sum())}  dark {int(dark.sum())}  blue {int(blue.sum())}  "
           f"grid {int(grid.sum())}  total_mask {int(mask.sum())}")

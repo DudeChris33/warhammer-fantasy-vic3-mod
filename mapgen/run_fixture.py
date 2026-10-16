@@ -4965,6 +4965,70 @@ def _write_test_ora(path: Path, w: int, h: int, layers: list[dict]) -> None:
         zf.writestr("stack.xml", stack_xml)
 
 
+def _selfcheck_alpha_zero() -> None:
+    """Nothing at alpha 0 is ever read as paint (Chris, 2026-10-15).
+
+    An erased brush stroke keeps its RGB under alpha 0 (a transparent pixel can
+    still be red underneath), and ``convert("RGB")`` exposes it. Two guards:
+
+    1. the shared image readers return RGB 0 under every alpha-0 pixel (flat RGBA
+       PNG through :func:`raster.read_rgb_png` / :func:`raster.rgb_zero_transparent`
+       / :func:`sources.read_source_rgba`);
+    2. a source lint: no script outside the allowlist of opaque derived/engine
+       images calls ``.convert("RGB")`` — a new reader must go through
+       ``worldgen.raster.read_rgb_png`` / ``rgb_zero_transparent``.
+    """
+    import re
+    import tempfile
+    from pathlib import Path
+
+    import numpy as np
+    from PIL import Image
+    from worldgen import raster
+    from worldgen import sources as src_mod
+
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / "ghost.png"
+        a = np.zeros((4, 4, 4), dtype=np.uint8)
+        a[..., :3] = (255, 0, 0)       # red everywhere ...
+        a[0, 0, 3] = 0                 # ... but alpha 0: an erased stroke
+        a[0, 1, 3] = 255               # one real red pixel
+        a[1:, :, 3] = 0
+        Image.fromarray(a, "RGBA").save(p)
+        for name, got in (
+            ("raster.read_rgb_png", raster.read_rgb_png(p)),
+            ("raster.rgb_zero_transparent", raster.rgb_zero_transparent(Image.open(p))),
+            ("sources.read_source_rgba", src_mod.read_source_rgba(p.name, Path(td))[..., :3]),
+        ):
+            assert got.shape == (4, 4, 3), (name, got.shape)
+            assert tuple(got[0, 1]) == (255, 0, 0), f"{name}: visible paint was lost"
+            ghost = got.copy()
+            ghost[0, 1] = 0
+            assert not ghost.any(), f"{name}: RGB under alpha 0 leaked"
+
+    root = Path(__file__).resolve().parent
+    allow = {
+        # opaque derived / engine images, art composites and size-only reads
+        "build_real_world_equivalents.py", "generate_flatmap_textures.py", "generate_map_locators.py",
+        "generate_terrain_masks.py", "render_canon_cities_preview.py", "render_tww3_text_crops.py",
+        "render_wind_patterns.py", "render_arable_preview.py", "run_fixture.py",
+        "worldgen/pop_history.py", "worldgen/raster.py", "worldgen/sources.py",
+    }
+    pat = re.compile(r"""\.convert\(["']RGB["']\)""")
+    offenders = []
+    for path in sorted(root.rglob("*.py")):
+        rel = path.relative_to(root).as_posix()
+        if rel.startswith((".venv/", "derived/", "fixtures/")) or rel in allow:
+            continue
+        for n, line in enumerate(path.read_text(encoding="utf-8", errors="replace").splitlines(), 1):
+            if pat.search(line):
+                offenders.append(f"{rel}:{n}")
+    assert not offenders, (
+        "convert('RGB') exposes the colour under alpha 0; read hand-drawn/art inputs through "
+        "worldgen.raster.read_rgb_png / rgb_zero_transparent (or add the file to the allowlist "
+        "in _selfcheck_alpha_zero if it only reads opaque output): " + ", ".join(offenders))
+
+
 def _selfcheck_ora_reader() -> None:
     """The .ora (OpenRaster) layer reader (board #5399), on synthetic archives
     built in a temp dir — no dependency on the real gitignored ``sources/``."""
@@ -6253,6 +6317,9 @@ def run_check() -> int:
           "remove retires, split keeps dominant + fresh piece, merge keeps larger overlap, "
           "reassign/no-index bootstrap, order-invariant, zero-match safety net) + "
           "seed_land_state_ids parser self-check passed.")
+    _selfcheck_alpha_zero()
+    print("alpha 0: shared image readers zero the colour under every alpha-0 pixel, and no script "
+          "outside the opaque-output allowlist calls convert('RGB') self-check passed.")
     _selfcheck_ora_reader()
     print("sources: .ora layer reader (name lookup, offset/clip composite, hidden layers, "
           "missing/duplicate-name and empty-layer refusals, malformed-archive errors, "

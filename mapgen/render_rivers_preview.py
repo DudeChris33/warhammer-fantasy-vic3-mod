@@ -29,6 +29,7 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import read_rgb_png  # noqa: E402
 Image.MAX_IMAGE_PIXELS = None
 
 import generate_rivers as gr  # noqa: E402  (reuse the exact source/extract path)
@@ -80,7 +81,7 @@ def main(argv: list[str] | None = None) -> int:
     step = args.scale
     ow, oh = CANVAS_W // step, CANVAS_H // step
     if GLOBE.is_file():
-        globe = np.asarray(Image.open(GLOBE).convert("RGB"))[:CANVAS_H, :CANVAS_W]
+        globe = read_rgb_png(GLOBE)[:CANVAS_H, :CANVAS_W]
         base = globe[::step, ::step].copy()
     else:
         base = np.where(land[::step, ::step, None], np.uint8((60, 80, 55)),

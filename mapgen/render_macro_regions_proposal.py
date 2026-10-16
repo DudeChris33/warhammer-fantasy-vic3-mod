@@ -10,6 +10,11 @@ from pathlib import Path
 import numpy as np
 from PIL import Image, ImageDraw, ImageFilter
 
+import sys as _sys
+from pathlib import Path as _Path
+_sys.path.insert(0, str(_Path(__file__).resolve().parent))
+from worldgen.raster import read_rgb_png  # noqa: E402
+
 Image.MAX_IMAGE_PIXELS = None
 ROOT = Path(__file__).resolve().parents[1]
 SRC = ROOT / "sources/originals/terraqueous_globe_reprojected.png"
@@ -95,7 +100,7 @@ def main():
     bd[:, 1:] |= lab[:, 1:] != lab[:, :-1]
     line = Image.fromarray((bd * 255).astype(np.uint8)).filter(ImageFilter.MaxFilter(3))
     line = line.resize((8192, 3616), Image.BILINEAR).filter(ImageFilter.MaxFilter(3))
-    img = Image.open(SRC).convert("RGB")
+    img = Image.fromarray(read_rgb_png(SRC))
     red = Image.new("RGB", img.size, (225, 25, 25))
     img = Image.composite(red, img, line.point(lambda v: 255 if v > 60 else 0))
     OUT.parent.mkdir(parents=True, exist_ok=True)

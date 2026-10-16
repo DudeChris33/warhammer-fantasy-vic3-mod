@@ -611,8 +611,10 @@ def load_source_image(
         return read_ora_layer(path, layer)[..., :3]
     if path.suffix.lower() == ".ora":
         raise OraError(f"{ref}: an .ora reference needs a '#layer' suffix")
+    from worldgen.raster import rgb_zero_transparent
+
     with Image.open(path) as im:
-        return np.asarray(im.convert("RGB"), dtype=np.uint8)
+        return rgb_zero_transparent(im)
 
 
 def load_source_image_rgba(
@@ -648,8 +650,10 @@ def load_source_image_rgba(
         return rgb, None
     if path.suffix.lower() == ".ora":
         raise OraError(f"{ref}: an .ora reference needs a '#layer' suffix")
+    from worldgen.raster import rgb_zero_transparent
+
     with Image.open(path) as im:
-        rgb = np.asarray(im.convert("RGB"), dtype=np.uint8)
+        rgb = rgb_zero_transparent(im)
         if im.mode in ("RGBA", "LA", "PA") or "transparency" in im.info:
             alpha = np.asarray(im.convert("RGBA"), dtype=np.uint8)[..., 3].copy()
             _snap_alpha_to_binary(alpha)

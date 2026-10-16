@@ -152,6 +152,7 @@ from PIL import Image, ImageDraw
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen.raster import rgb_zero_transparent  # noqa: E402
 from config import map_config  # noqa: E402
 from worldgen import reproject, schema  # noqa: E402
 from worldgen import sources as sources_mod  # noqa: E402
@@ -609,7 +610,7 @@ def verify_correspondence() -> int:
     # --- Candidate B: cr_oldworld_lookup non-black, direct, no registration ---
     if LOOKUP_BMP.is_file():
         with Image.open(LOOKUP_BMP) as im:
-            arr = np.asarray(im.convert("RGB"), dtype=np.uint8)
+            arr = rgb_zero_transparent(im)
         arr = arr[1:]  # drop the duplicate padding row (render_cr_lookup_overlay convention)
         lookup_land = arr.any(axis=2)
         factor = 16
