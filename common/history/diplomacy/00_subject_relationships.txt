@@ -105,26 +105,26 @@
 	}
 	c:KSV ?= {
 		# Oblast of the Tzar/Tzarina of Kislev (WFB Kislev lore) - contested
-		# Engine type is puppet, not vassal: vassal needs an unrecognized overlord and KSV is recognized (#6576); puppet is the same-autonomy recognized-overlord type.
+		# Engine type is protectorate, not vassal: vassal needs an unrecognized overlord and KSV is recognized (#6576); protectorate takes a recognized overlord.
 		create_diplomatic_pact = {
 			country = c:ERE
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:PRA
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:BOL
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:VOL
-			type = puppet
+			type = protectorate
 		}
 		create_diplomatic_pact = {
 			country = c:TRO
-			type = puppet
+			type = protectorate
 		}
 	}
 }
