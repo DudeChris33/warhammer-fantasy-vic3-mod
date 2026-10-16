@@ -4,30 +4,33 @@ The canvas (`terraqueous_globe_reprojected.png`) is the order-1 reprojection of 
 (`terraqueous_globe.jpg`, Natural Earth II) onto the Miller frame. Its apparent stretching is the
 globe's paper hatch, JPEG noise and lettering enlarged 1.8-4.5x (and sheared toward the top
 corners) by that projection change; no geography is misplaced. So this tool cleans the native
-globe first, where hatch, noise and line widths are uniform, and re-projects the clean picture
-once through the committed fit (`ingest.clamped_source_coords`), at order 3. Registration to the
-original canvas holds by construction.
+globe, where hatch, noise and line widths are uniform, and carries only the *change* to the canvas
+through the committed fit (`ingest.clamped_source_coords`, order 3): canvas = original + resampled
+(cleaned - original globe). Every pixel the cleaning does not touch stays byte-identical to the
+original, and registration holds by construction.
 
-Phase A (this file today):
-  * denoise the globe band the canvas samples (non-local means; `--h` sets the strength, sea
-    included);
-  * find the lon/lat graticule analytically (meridians every 10 deg, parallels every 15 deg),
-    centre each strip on the local dark ridge, and fill it from the nearest clean pixel of the
-    same kind -- land strips from land only, sea strips from sea only; rivers, coast and long
-    slim dark lines inside a strip are never filled;
-  * re-project and run the verify block (non-zero exit on failure);
-  * write 1:1 original-beside-cleaned review sheets.
-Phase B (land lettering and river continuity) is added after the denoise strength is chosen.
+The cleaning (Chris's rescope, 2026-10: edge-preserving, never a blur, steppes first):
+  * a light bilateral smooth of the region gives the band colour per pixel;
+  * only land pixels deep inside the two lowest land bands are touched (the whole 11x11
+    neighbourhood is low-band), so foothills, mountains and band edges stay exactly as drawn;
+  * those pixels are pulled `SNAP_PULL` of the way to their local majority band colour, which
+    removes the paper hatch and speckle and keeps the natural shading;
+  * rivers, coast and long slim dark lines (`build_keep`) are never touched.
+`--fill-grid` additionally fills the lon/lat graticule (meridians every 10 deg, parallels every
+15 deg) from the nearest clean pixel of the same kind; it is off by default until that look is
+accepted. Land lettering (Phase B) is not done yet.
+
+Regions: `steppes` (the Eastern Steppes / Kurgan Lands / Hung Lands / Great Eastern Steppes belt)
+is the testing ground; `all` runs the whole globe band.
 
 Not touched: the original canvas, the source manifest, anything committed under `sources/`. Output
 and sheets are git-ignored (`sources/WIP/`, `scratchpad/`). Not part of the offline gate.
 Supersedes `remove_map_text.py` and `snap_land_palette.py`, which are left as they are.
 
 Usage (from the repo root):
-    mapgen/.venv/Scripts/python.exe mapgen/clean_globe_canvas.py              # write output + sheets
-    mapgen/.venv/Scripts/python.exe mapgen/clean_globe_canvas.py --h 0.05 --tag h050 \\
-        --out sources/WIP/terraqueous_globe_reprojected_clean_h050.png        # one strength
-    mapgen/.venv/Scripts/python.exe mapgen/clean_globe_canvas.py --preview    # class overlay only
+    mapgen/.venv/Scripts/python.exe mapgen/clean_globe_canvas.py                    # steppes
+    mapgen/.venv/Scripts/python.exe mapgen/clean_globe_canvas.py --pull 0.9         # stronger
+    mapgen/.venv/Scripts/python.exe mapgen/clean_globe_canvas.py --preview          # class overlay only
 """
 import argparse
 import sys
@@ -37,7 +40,7 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 from scipy import ndimage as ndi
-from skimage.restoration import denoise_nl_means
+from skimage.restoration import denoise_bilateral
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "mapgen"))
@@ -56,8 +59,14 @@ LUT_PATH = ROOT / "mapgen" / "lut" / "terraqueous_elevation.json"
 SHEET_DIR = ROOT / "scratchpad"
 WIDTH, HEIGHT = canvas_frame.WIDTH, canvas_frame.HEIGHT
 
-NLM_H = 0.035         # non-local-means strength on 0..1 colour; --h overrides
-NLM_PATCH, NLM_DIST = 5, 6
+BILATERAL_COLOR, BILATERAL_SPATIAL = 0.06, 2.5   # smooth that gives each pixel its band colour
+SNAP_PULL = 0.7       # share of the way a low-band pixel is pulled to its band colour; --pull overrides
+SNAP_WIN = 7          # majority-vote window (globe px) that decides the band of a pixel
+SNAP_LOW = 2          # only the lowest this-many land bands are touched
+SNAP_DIST = 40 / 255  # a pixel farther than this from every band colour is ink or a line, not terrain
+REGIONS = {           # name: globe box (x0, y0, x1, y1) in native globe px
+    "steppes": (2100, 150, 3400, 650),
+}
 BAND_PAD = 4          # globe px kept around the registration crop so order-3 sampling sees real data
 MERIDIAN_STEP, PARALLEL_STEP = 10, 15   # degrees between printed graticule lines
 GRID_HALF = 2         # strip half-width, globe px (1 px core + 1 px shoulder each side, plus slack)
@@ -84,7 +93,7 @@ COAST_RING = 4        # verify: canvas px ring around the mask edge for the coas
 WINDOWS = {  # name: canvas (x, y) of a 512 px review window
     "ne_corner": (300, 60), "norsca": (3900, 250), "far_east": (7300, 150), "empire_n": (4000, 600),
     "equator_mid": (4200, 2000), "west": (700, 1100), "south": (4300, 3050), "east_n": (6400, 700),
-    "worlds_edge": (4600, 700),
+    "worlds_edge": (4600, 700), "steppe_w": (5000, 250), "steppe_n": (5800, 100), "steppe_e": (6200, 450),
 }
 WIN = 512
 
@@ -243,7 +252,8 @@ def build_graticule(fit, td, x0, y0, shape, t0):
 def build_keep(td, land, trace, strips):
     """Thin-dark pixels that are coast, river or part of a long slim line; never filled."""
     thin = td > TOPHAT
-    edge = (land & (ndi.distance_transform_edt(land) <= COAST_BAND)) |            (~land & (ndi.distance_transform_edt(~land) <= COAST_BAND))
+    edge = ((land & (ndi.distance_transform_edt(land) <= COAST_BAND)) |
+            (~land & (ndi.distance_transform_edt(~land) <= COAST_BAND)))
     near_trace = ndi.distance_transform_edt(~trace) <= RIVER_NEAR
     cand = thin & ~strips
     lab, n = ndi.label(cand, structure=np.ones((3, 3), int))
@@ -271,6 +281,36 @@ def fill_strips(den, strips, keep, land):
     blurred = np.stack([ndi.gaussian_filter(out[:, :, c], FILL_BLUR) for c in range(3)], -1)
     out[fillable] = blurred[fillable]
     return out, fillable
+
+
+def clean_low_bands(box, land, keep, pal, pull):
+    """Edge-preserving cleanup of the lowest land bands. `box` is 0..1 RGB; returns the same."""
+    base = denoise_bilateral(box, sigma_color=BILATERAL_COLOR, sigma_spatial=BILATERAL_SPATIAL,
+                             channel_axis=-1)
+    d = np.sqrt(((base[:, :, None, :] - pal[None, None]) ** 2).sum(-1))
+    k, dmin = d.argmin(-1), d.min(-1)
+    votes = np.stack([ndi.uniform_filter((k == i).astype(np.float32), SNAP_WIN) for i in range(len(pal))], -1)
+    mode = votes.argmax(-1)
+    low = (k < SNAP_LOW) & (dmin < SNAP_DIST)
+    interior = ndi.minimum_filter(low, size=SNAP_WIN + 4)   # whole neighbourhood is low-band
+    sel = land & interior & ~keep & (mode < SNAP_LOW)
+    out = box.copy()
+    out[sel] = (1 - pull) * base[sel] + pull * pal[mode][sel]
+    return out
+
+
+def project_delta(reg, fit, delta, box_xy):
+    """Order-3 canvas resample of a globe-space delta that is non-zero only inside `box_xy`."""
+    bx0, by0, bx1, by1 = box_xy
+    out = np.zeros((HEIGHT, WIDTH, 3), np.float32)
+    for y0 in range(0, HEIGHT, BLOCK_ROWS):
+        rows = np.arange(y0, min(y0 + BLOCK_ROWS, HEIGHT))
+        sx, sy = ingest.clamped_source_coords(reg, fit, rows, WIDTH, HEIGHT)
+        if not ((sx > bx0 - 4) & (sx < bx1 + 4) & (sy > by0 - 4) & (sy < by1 + 4)).any():
+            continue                                         # block never samples the region
+        for c in range(3):
+            out[y0:y0 + len(rows), :, c] = reproject.resample(delta[:, :, c], sx, sy, order=3)
+    return out
 
 
 # ---------------------------------------------------------------------------
@@ -386,13 +426,15 @@ def save_png(arr, path: Path) -> None:
 
 def main(argv=None) -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    p.add_argument("--h", type=float, default=NLM_H, help=f"non-local-means strength (default {NLM_H})")
+    p.add_argument("--region", choices=[*REGIONS, "all"], default="steppes")
+    p.add_argument("--pull", type=float, default=SNAP_PULL, help=f"band pull 0..1 (default {SNAP_PULL})")
+    p.add_argument("--fill-grid", action="store_true", help="also fill the lon/lat graticule")
     p.add_argument("--out", type=Path, default=DEFAULT_OUT)
-    p.add_argument("--tag", default=None, help="suffix for the review sheet names (default: h value)")
+    p.add_argument("--tag", default=None, help="suffix for the review sheet names (default: region)")
     p.add_argument("--preview", action="store_true",
                    help="write a class overlay (graticule, keep) instead of the cleaned canvas")
     args = p.parse_args(argv)
-    tag = args.tag or f"h{int(round(args.h * 1000)):03d}"
+    tag = args.tag or args.region
     t0 = time.time()
 
     regs = {r.source: r for r in schema.load_registrations(sources.REGISTRATION_DIR)}
@@ -436,18 +478,25 @@ def main(argv=None) -> int:
         log(f"wrote {path}", t0)
         return 0
 
-    den = denoise_nl_means(band / 255.0, h=args.h, patch_size=NLM_PATCH, patch_distance=NLM_DIST,
-                           fast_mode=True, channel_axis=-1) * 255.0
-    log(f"denoised (h={args.h})", t0)
-    cleaned, filled = fill_strips(den, strips, keep, land)
-    log(f"filled {filled.sum()} strip px", t0)
+    elut = schema.load_elevation_lut(LUT_PATH)
+    pal = np.array([b.rgb for b in elut.bands[elut.sea_band_count:]], np.float64) / 255
+    gx0, gy0, gx1, gy1 = (x0, y0, x1, y1) if args.region == "all" else REGIONS[args.region]
+    gx0, gy0, gx1, gy1 = max(gx0, x0), max(gy0, y0), min(gx1, x1), min(gy1, y1)
+    sl = (slice(gy0 - y0, gy1 - y0), slice(gx0 - x0, gx1 - x0))
+    box = band[sl].astype(np.float64) / 255
+    keep_b = ndi.binary_dilation(keep[sl], iterations=1)
+    cleaned = clean_low_bands(box, land[sl], keep_b, pal, args.pull)
+    log(f"cleaned region {args.region} ({gx1 - gx0}x{gy1 - gy0} globe px, pull {args.pull})", t0)
+    if args.fill_grid:
+        filled_box, filled = fill_strips(cleaned * 255, strips[sl], keep_b, land[sl])
+        cleaned = filled_box / 255
+        log(f"filled {filled.sum()} strip px", t0)
 
-    full = src.astype(np.float32)
-    full[y0:y1, x0:x1] = cleaned
-    planes = [ingest.reproject_plane(reg, fit, full[:, :, c], WIDTH, HEIGHT, block_rows=BLOCK_ROWS, order=3)
-              for c in range(3)]
-    clean = np.clip(np.rint(np.stack(planes, -1)), 0, 255).astype(np.uint8)
-    log("re-projected (order 3)", t0)
+    delta = np.zeros(src.shape, np.float32)
+    delta[gy0:gy1, gx0:gx1] = (cleaned - box) * 255
+    moved = project_delta(reg, fit, delta, (gx0, gy0, gx1, gy1))
+    clean = np.clip(np.rint(orig.astype(np.float32) + moved), 0, 255).astype(np.uint8)
+    log(f"carried to the canvas, {(np.abs(moved).max(-1) > 0.5).sum()} canvas px changed", t0)
 
     save_png(clean, args.out)
     log(f"wrote {args.out}", t0)
