@@ -1,6 +1,5 @@
 ﻿effect_starting_technology_empire_tech = {
 	# Gunpowder, state armies and universities; Steam Tanks and the Imperial Gunnery School, but little industry outside Nuln and Altdorf.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
@@ -10,7 +9,6 @@
 	add_technology_researched = lathe
 	add_technology_researched = shaft_mining
 	add_technology_researched = prospecting
-	add_technology_researched = sericulture
 	add_technology_researched = steelworking
 	add_technology_researched = atmospheric_engine
 	add_technology_researched = crystal_glass
@@ -54,7 +52,6 @@ effect_starting_technology_brettonia_tech = {
 	add_technology_researched = manufacturies
 	add_technology_researched = distillation
 	add_technology_researched = enclosure
-	add_technology_researched = sericulture
 
 	# Military
 	add_technology_researched = navigation
@@ -94,7 +91,6 @@ effect_starting_technology_kislev_tech = {
 
 effect_starting_technology_southern_tech = {
 	# Tilea, Estalia and the Border Princes: Tilean gunnery, mercenary pike-and-shot, merchant banks and glassworks.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
@@ -138,7 +134,6 @@ effect_starting_technology_southern_tech = {
 
 effect_starting_technology_cathay_tech = {
 	# Grand Cathay: ancient bureaucracy, silk and tea, gunpowder and rockets, vast granaries.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
@@ -241,13 +236,19 @@ effect_starting_technology_ind_tech = {
 }
 
 effect_starting_technology_khuresh_tech = {
-	# Khuresh: steppe and caravan-city realms; riders, bows and modest crafts.
+	# Khuresh: south-east-Asian rice and spice kingdoms - silk, cotton, tin, maritime trade, matchlocks and war elephants.
 
 	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
+	add_technology_researched = distillation
 	add_technology_researched = enclosure
 	add_technology_researched = sericulture
+	add_technology_researched = shaft_mining
 
 	# Military
+	add_technology_researched = navigation
+	add_technology_researched = admiralty
 	add_technology_researched = standing_army
 	add_technology_researched = gunsmithing
 	add_technology_researched = mandatory_service
@@ -256,6 +257,7 @@ effect_starting_technology_khuresh_tech = {
 	# Society
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = international_trade
 }
 
 effect_starting_technology_vampire_tech = {
@@ -301,7 +303,6 @@ effect_starting_technology_tomb_kings_tech = {
 
 effect_starting_technology_dwarf_tech = {
 	# Dwarfs: the finest engineers in the world - the Underway, steam and blackpowder, Thunderers and the ironclads of Barak Varr.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
@@ -360,7 +361,6 @@ effect_starting_technology_dwarf_tech = {
 
 effect_starting_technology_dark_dwarf_tech = {
 	# Chaos Dwarfs of Zharr-Naggrund: slave-driven forge-industry, hellish artillery and blackpowder.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
@@ -407,7 +407,6 @@ effect_starting_technology_dark_dwarf_tech = {
 
 effect_starting_technology_high_elf_tech = {
 	# High Elves: ancient, wealthy and scholarly; supreme navy and archery, deliberately no gunpowder.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
@@ -415,7 +414,6 @@ effect_starting_technology_high_elf_tech = {
 	add_technology_researched = distillation
 	add_technology_researched = enclosure
 	add_technology_researched = lathe
-	add_technology_researched = sericulture
 	add_technology_researched = shaft_mining
 	add_technology_researched = steelworking
 	add_technology_researched = crystal_glass
@@ -448,7 +446,6 @@ effect_starting_technology_high_elf_tech = {
 
 effect_starting_technology_dark_elf_tech = {
 	# Dark Elves: slave economy, Black Arks and cruel professional armies; no gunpowder.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
@@ -486,7 +483,6 @@ effect_starting_technology_wood_elf_tech = {
 	# Wood Elves: a hidden woodland people; hand craft, no towns or industry.
 
 	# Production
-	add_technology_researched = sericulture
 
 	# Military
 	add_technology_researched = standing_army
@@ -551,7 +547,6 @@ effect_starting_technology_orc_tech = {
 
 effect_starting_technology_skaven_tech = {
 	# Under-Empire: warpstone engineering - jezzails, Ratling guns and Doomwheels - far ahead of the surface world in arms, behind in everything else.
-	add_era_researched = era_1
 
 	# Production
 	add_technology_researched = manufacturies
