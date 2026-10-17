@@ -194,3 +194,12 @@ the_great_maw = {
 	color = { 0.55 0.20 0.12 }
 	taboos = { }
 }
+
+################ The Bloody-Handed God (Druchii) — board item #8476 ################
+
+cult_of_khaine = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_cytharai
+	color = { 0.50 0.06 0.28 }
+	taboos = { }
+}

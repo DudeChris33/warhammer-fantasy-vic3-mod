@@ -260,3 +260,15 @@ the_great_maw_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_the_great_maw_standard_of_living_add = 1
 }
+
+# ---- The Bloody-Handed God (Druchii), board item #8476 ----
+
+cult_of_khaine_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_khaine_standard_of_living_add = 1
+}
+
+cult_of_khaine_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_khaine_standard_of_living_add = 1
+}

@@ -9,6 +9,6 @@ heritage_group_greenskin_gods = { type = heritage }
 heritage_group_mortuary_cult = { type = heritage }
 heritage_group_undeath = { type = heritage }
 
-# Elven gods (the five elven cults, #8475) and the Great Maw (ogres). Board item #6379.
+# Elven gods (the five elven cults, #8475; the Druchii's Cytharai, #8476) and the Great Maw (ogres). Board item #6379.
 heritage_group_elven_gods = { type = heritage }
 heritage_group_great_maw = { type = heritage }
