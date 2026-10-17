@@ -272,3 +272,15 @@ cult_of_khaine_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_cult_of_khaine_standard_of_living_add = 1
 }
+
+# ---- The Old Ones (Lizardmen), board item #8477 ----
+
+the_old_ones_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_the_old_ones_standard_of_living_add = 1
+}
+
+the_old_ones_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_the_old_ones_standard_of_living_add = 1
+}

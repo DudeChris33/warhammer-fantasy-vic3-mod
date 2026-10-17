@@ -12,3 +12,6 @@ heritage_group_undeath = { type = heritage }
 # Elven gods (the five elven cults, #8475; the Druchii's Cytharai, #8476) and the Great Maw (ogres). Board item #6379.
 heritage_group_elven_gods = { type = heritage }
 heritage_group_great_maw = { type = heritage }
+
+# The Old Ones (Lizardmen). Board item #8477.
+heritage_group_old_ones = { type = heritage }

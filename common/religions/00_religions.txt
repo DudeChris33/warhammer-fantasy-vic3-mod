@@ -203,3 +203,12 @@ cult_of_khaine = {
 	color = { 0.50 0.06 0.28 }
 	taboos = { }
 }
+
+################ The Old Ones (Lizardmen) — board item #8477 ################
+
+the_old_ones = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_great_plan
+	color = { 0.10 0.60 0.55 }
+	taboos = { }
+}

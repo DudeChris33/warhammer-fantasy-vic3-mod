@@ -220,3 +220,13 @@ state_cult_of_khaine_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- The Old Ones (Lizardmen), board item #8477 ----
+
+state_the_old_ones_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
