@@ -206,7 +206,20 @@ canal_drackla = {
 	second_sea_endpoint = x817B7C
 }
 
-canal_dragon_isles = {
+canal_dragon_isles_n = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xC663C2
+	second_land_endpoint = xF7209E
+
+	first_sea_endpoint = x23B378
+	second_sea_endpoint = xE14F7F
+}
+
+canal_dragon_isles_nw = {
 	type = natural
 
 	total_block_requires_full_control = no
@@ -216,7 +229,33 @@ canal_dragon_isles = {
 	second_land_endpoint = xEBF4AB
 
 	first_sea_endpoint = x381163
+	second_sea_endpoint = xE14F7F
+}
+
+canal_dragon_isles_se = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x8713DF
+	second_land_endpoint = xE36953
+
+	first_sea_endpoint = x23B378
 	second_sea_endpoint = x82C48D
+}
+
+canal_dragon_isles_w = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xB2E3CB
+	second_land_endpoint = xE36953
+
+	first_sea_endpoint = x23B378
+	second_sea_endpoint = x381163
 }
 
 canal_drakefjord_bay = {
@@ -375,6 +414,19 @@ canal_isle_of_dawn = {
 	second_sea_endpoint = xC94DB5
 }
 
+canal_isles_of_doom = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = xB32998
+	second_land_endpoint = xD8832D
+
+	first_sea_endpoint = x0B2FBA
+	second_sea_endpoint = xC07C90
+}
+
 canal_isles_of_dusk = {
 	type = natural
 
@@ -401,6 +453,19 @@ canal_kraka_ravnsnake = {
 	second_sea_endpoint = x4DDDAF
 }
 
+canal_lanka_s = {
+	type = natural
+
+	total_block_requires_full_control = no
+	military_block_requires_full_control = no
+
+	first_land_endpoint = x6DE981
+	second_land_endpoint = xACCA18
+
+	first_sea_endpoint = x3ECD87
+	second_sea_endpoint = xAEDA46
+}
+
 canal_limnala = {
 	type = natural
 
@@ -424,7 +489,7 @@ canal_lower_ruin = {
 	second_land_endpoint = xA55DAE
 
 	first_sea_endpoint = x2F403E
-	second_sea_endpoint = x381163
+	second_sea_endpoint = x5A2D63
 }
 
 canal_lynsk = {

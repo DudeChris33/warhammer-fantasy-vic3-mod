@@ -1,26 +1,4 @@
-﻿STATE_DREAD_ROCK_SKERRIES = {
-    id = 180
-    subsistence_building = "building_subsistence_farm"
-    provinces = { xF7209E }
-    city = xF7209E
-    farm = xF7209E
-    mine = xF7209E
-    wood = xF7209E
-    port = xF7209E
-    arable_land = 5
-    arable_resources = { "building_millet_farm" "building_livestock_ranch" "building_coffee_plantation" "building_cotton_plantation" "building_dye_plantation" "building_tea_plantation" "building_tobacco_plantation" "building_sugar_plantation" "building_banana_plantation" }
-    capped_resources = {
-        building_coal_mine = 2
-        building_fishing_wharf = 1
-        building_logging_camp = 1
-    }
-    resource = {
-        type = "building_rubber_plantation"
-        undiscovered_amount = 1
-    }
-    naval_exit_id = 3095
-}
-STATE_DREAD_ROCK = {
+﻿STATE_DREAD_ROCK = {
     id = 181
     subsistence_building = "building_subsistence_farm"
     provinces = { x114E40 x14AC52 x19E33E x28639D x3C1FBB x4DBD32 x511B44 x58E925 x617950 x7674D9 x7BABC5 x8A2C24 xB2E3CB xB53E99 xC663C2 xEBF4AB }
@@ -47,7 +25,7 @@ STATE_DREAD_ROCK = {
         type = "building_rubber_plantation"
         undiscovered_amount = 25
     }
-    naval_exit_id = 3095
+    naval_exit_id = 3101
 }
 STATE_WEST_DARK_LANDS = {
     id = 240
@@ -467,12 +445,12 @@ STATE_DRAGONS_BREATH = {
 STATE_TOWER_OF_THE_BLOODYTOOTH = {
     id = 259
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0A8447 x0F7A39 x18C87F x553771 x59DE94 x6C4CCE x800419 x98705C xBAB1AC xBEBB31 xF36EEA xFA38E3 xFBC2EE }
-    city = x18C87F
-    farm = x98705C
-    mine = x0F7A39
-    wood = x18C87F
-    port = x800419
+    provinces = { x0A8447 x0F7A39 x18C87F x553771 x59DE94 x6C4CCE x7357C1 x800419 x8DCB30 x98705C xBAB1AC xBEBB31 xF36EEA xFA38E3 xFBC2EE }
+    city = xF36EEA
+    farm = x0A8447
+    mine = x800419
+    wood = xF36EEA
+    port = xBEBB31
     arable_land = 21
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_tobacco_plantation" "building_opium_plantation" "building_dye_plantation" "building_cotton_plantation" "building_silk_plantation" "building_vineyard" }
     capped_resources = {
@@ -485,9 +463,9 @@ STATE_TOWER_OF_THE_BLOODYTOOTH = {
     }
     resource = {
         type = "building_oil_rig"
-        undiscovered_amount = 5
+        undiscovered_amount = 6
     }
-    naval_exit_id = 3101
+    naval_exit_id = 3325
 }
 STATE_ALD_GRUNGAZ = {
     id = 262
@@ -988,7 +966,7 @@ STATE_WHEATLANDS = {
 STATE_ZORN_UZKUL = {
     id = 284
     subsistence_building = "building_subsistence_farm"
-    provinces = { x3D2CA5 x5BA999 x7D76CA x81032E }
+    provinces = { x4DFE2C x5BA999 x7D76CA x81032E }
     impassable = { x81032E }
     city = x5BA999
     farm = x5BA999
@@ -1397,12 +1375,12 @@ STATE_RUIN_S_END = {
         type = "building_oil_rig"
         undiscovered_amount = 2
     }
-    naval_exit_id = 3101
+    naval_exit_id = 3325
 }
 STATE_SWAMP_EATER_HOLD = {
     id = 610
     subsistence_building = "building_subsistence_pasture"
-    provinces = { x178D43 x18D654 x205E68 x25058B x2A789E x43A2FC x5EE25B x61747D x6A45A2 x7A9EDB x843BF0 x91B438 xB70DCD xD3BB8D xD9D540 xE2E75F xF01EAD xF0EA9D xFD19D4 }
+    provinces = { x178D43 x18D654 x205E68 x25058B x2A789E x43A2FC x5EE25B x61747D x6A45A2 x7A9EDB x843BF0 x91B438 xB70DCD xD3BB8D xD9D540 xE2E75F xEF93B7 xF01EAD xF0EA9D xFD19D4 }
     city = xF01EAD
     farm = xD9D540
     mine = x178D43
@@ -1426,7 +1404,7 @@ STATE_SWAMP_EATER_HOLD = {
 STATE_DEATHTOLL_HOLD = {
     id = 611
     subsistence_building = "building_subsistence_pasture"
-    provinces = { x01C5CA x0424C7 x1B3A24 x305FD0 x318391 x324F81 x36F6A4 x3A54B6 x493B5F x6EBE73 x7E4BBC x9E323E xA7CF53 xB712A0 xD086FA xDEA1B3 xF5E08F }
+    provinces = { x01C5CA x0424C7 x1B3A24 x318391 x324F81 x36F6A4 x3A54B6 x493B5F x6EBE73 x7E4BBC xA7CF53 xB712A0 xD086FA xDEA1B3 xF5E08F }
     city = xA7CF53
     farm = x0424C7
     mine = x324F81
@@ -1464,7 +1442,7 @@ STATE_SKRAGGLEGUTS_HOLD = {
     }
     resource = {
         type = "building_oil_rig"
-        undiscovered_amount = 2
+        undiscovered_amount = 1
     }
     naval_exit_id = 3088
 }

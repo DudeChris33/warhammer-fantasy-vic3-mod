@@ -34,6 +34,18 @@ region_beast_isle_pass_placeholder = {
 	states = { STATE_BEAST_ISLE_PASS_PLACEHOLDER }
 }
 
+region_bitter_sea_04 = {
+	states = { STATE_BITTER_SEA_04 }
+}
+
+region_bitter_sea_05 = {
+	states = { STATE_BITTER_SEA_05 }
+}
+
+region_bitter_sea_06 = {
+	states = { STATE_BITTER_SEA_06 }
+}
+
 region_black_gulf = {
 	states = { STATE_BLACK_GULF }
 }
@@ -64,10 +76,6 @@ region_central_great_ocean = {
 
 region_central_great_ocean_passage_01 = {
 	states = { STATE_CENTRAL_GREAT_OCEAN_PASSAGE_01 }
-}
-
-region_central_great_ocean_passage_02 = {
-	states = { STATE_CENTRAL_GREAT_OCEAN_PASSAGE_02 }
 }
 
 region_central_great_ocean_passage_03 = {
@@ -258,6 +266,10 @@ region_great_ocean_10 = {
 	states = { STATE_GREAT_OCEAN_10 }
 }
 
+region_great_ocean_15 = {
+	states = { STATE_GREAT_OCEAN_15 }
+}
+
 region_guano_rocks_bypass_02 = {
 	states = { STATE_GUANO_ROCKS_BYPASS_02 }
 }
@@ -290,8 +302,8 @@ region_ironfrost_bay = {
 	states = { STATE_IRONFROST_BAY }
 }
 
-region_isles_of_doom = {
-	states = { STATE_ISLES_OF_DOOM }
+region_isles_of_doom_02 = {
+	states = { STATE_ISLES_OF_DOOM_02 }
 }
 
 region_isle_of_dawn_bypass = {
@@ -368,6 +380,14 @@ region_lizard_sea_02 = {
 
 region_lizard_sea_03 = {
 	states = { STATE_LIZARD_SEA_03 }
+}
+
+region_lizard_sea_05 = {
+	states = { STATE_LIZARD_SEA_05 }
+}
+
+region_lizard_sea_06 = {
+	states = { STATE_LIZARD_SEA_06 }
 }
 
 region_lower_reik_river = {
@@ -552,6 +572,14 @@ region_sea_of_fear_04 = {
 
 region_sea_of_fear_05 = {
 	states = { STATE_SEA_OF_FEAR_05 }
+}
+
+region_sea_of_fear_08 = {
+	states = { STATE_SEA_OF_FEAR_08 }
+}
+
+region_sea_of_fear_09 = {
+	states = { STATE_SEA_OF_FEAR_09 }
 }
 
 region_sea_of_feuds = {
@@ -762,8 +790,8 @@ region_tilean_sea = {
 	states = { STATE_TILEAN_SEA }
 }
 
-region_tor_elasor = {
-	states = { STATE_TOR_ELASOR }
+region_tor_elasor_waters = {
+	states = { STATE_TOR_ELASOR_WATERS }
 }
 
 region_upper_far_ocean_passage_01 = {
@@ -814,8 +842,8 @@ region_western_albion_channel = {
 	states = { STATE_WESTERN_ALBION_CHANNEL }
 }
 
-region_western_bitter_sea = {
-	states = { STATE_WESTERN_BITTER_SEA }
+region_western_bitter_sea_02 = {
+	states = { STATE_WESTERN_BITTER_SEA_02 }
 }
 
 region_western_gates_of_calith = {

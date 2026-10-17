@@ -187,7 +187,7 @@ STATES = {
 	s:STATE_MARCHES_OF_COURONNE = {
 		create_state = {
 			country = c:COU
-			owned_provinces = { x276059 x29060E x301101 x401B6B x657500 x771277 xA1E3F2 xABA184 xC65EEF xC73D87 xCAA96E xEC971C xF3A20F }
+			owned_provinces = { x276059 x28A497 x29060E x301101 x401B6B x657500 x771277 xA1E3F2 xABA184 xC65EEF xC73D87 xCAA96E xEC971C xF3A20F }
 		}
 
 		add_homeland = cu:bretonnian

@@ -24,12 +24,14 @@ x08F13A;x20A435;sea;-1;2960;2521;2971;2521;;Clothique
 x08F13A;xBE4BE5;sea;-1;2956;2515;2933;2497;;Ulthuan
 x08F13A;xFCC203;sea;-1;2937;2539;2926;2544;;Clothique
 x09E6A9;x8B95B2;canal_straits_of_lothern;-1;2806;2097;2804;2081;;Straits of Lothern
+x0B2FBA;xC07C90;canal_isles_of_doom;-1;3713;1038;3695;1020;;Isles of Doom
 x0BFBAA;x486A9C;canal_upper_talabec;-1;4331;2834;4322;2832;;Upper Talabec River
 x0C4F4C;xC878C3;sea;-1;4610;3136;4595;3146;;Norscan Island
 x0CECEA;x664EC5;sea;-1;4165;2532;4159;2545;;Fort Soll
 x0D77E0;x231107;canal_altdorf_r;-1;4096;2764;4099;2769;;Altdorf
 x0D77E0;x84D98E;canal_altdorf_l;-1;4092;2764;4086;2765;;Altdorf
 x0D77E0;xD85DDD;canal_altdorf_t;-1;4095;2762;4096;2757;;Altdorf
+x0E644D;x7E7EE1;sea;-1;4066;2683;4042;2708;;North Grey Mountains to Axe Bite Pass
 x0EB31C;xA80278;sea;-1;4446;3136;4487;3083;;Hell Pit
 x0EB31C;xD1296B;sea;-1;4448;3138;4531;3091;;Hell Pit
 x0F59BC;xEF733A;canal_plain_of_spiders;-1;1117;2506;1128;2531;;Maelstrom
@@ -49,6 +51,9 @@ x22D4E0;x955817;sea;-1;2834;2157;2816;2164;;Ulthuan
 x22E788;xD5FEE0;sea;-1;4181;2531;4151;2507;;Under Fort Soll
 x231107;x486A9C;canal_middle_talabec;-1;4212;2804;4220;2802;;Middle Talabec River
 x233657;xE6C765;sea;-1;7044;1227;7090;1242;;Elithis
+x23B378;x381163;canal_dragon_isles_w;-1;5159;2079;5134;2081;;Dragon Isles
+x23B378;x82C48D;canal_dragon_isles_se;-1;5186;2045;5203;2027;;Dragon Isles
+x23B378;xE14F7F;canal_dragon_isles_n;-1;5195;2155;5199;2192;;Dragon Isles
 x23EF9F;x2D3DE5;sea;-1;2807;2343;2802;2320;;Ulthuan
 x23EF9F;x91FA05;sea;-1;2817;2346;2841;2328;;Ulthuan
 x266F19;xEA0027;canal_west_estalian_isles;-1;3759;2381;3777;2376;;West Estalian Isles
@@ -57,10 +62,9 @@ x27118A;x962407;sea;-1;2799;2662;2780;2650;;Ulthuan Northern Isles
 x27118A;xF43FAD;sea;-1;2832;2666;2848;2666;;Ulthuan Northern Isles
 x27EB4F;x888B42;sea;-1;4281;2736;4286;2728;;Mordheim
 x28A96A;xDE8136;sea;-1;2781;2554;2781;2585;;Ulthuan
-x28F366;x445342;sea;-1;3003;2291;3023;2284;;Ulthuan
 x2B163C;xC94DB5;canal_isle_of_dawn;-1;4331;559;4345;570;;Isle of Dawn
 x2D2B3D;xE27813;canal_sun_and_stars;-1;5481;1387;5467;1384;;Meeting of Sun and Stars
-x2F403E;x381163;canal_lower_ruin;-1;4954;2173;4949;2158;;Lower River Ruin
+x2F403E;x5A2D63;canal_lower_ruin;-1;4954;2173;4949;2158;;Lower River Ruin
 x2FB45D;xC51AB1;sea;-1;2100;3266;2129;3240;;Naggaroth
 x30894F;x55E2E4;canal_mangrove;-1;2728;1173;2710;1200;;Volcanic Isles
 x317A8F;x44AFE6;sea;-1;7229;1334;7241;1273;;Devourer
@@ -69,6 +73,7 @@ x32C3A0;x8BBB02;sea;-1;4064;3319;4082;3324;;North Norsca
 x33126F;x81A0CC;sea;-1;2488;3011;2503;3015;;Naggaroth
 x33126F;xD3DC0A;sea;-1;2471;3044;2453;3036;;Naggaroth
 x333BEE;xDF9722;sea;-1;4590;2119;4581;2108;;Sour Sea
+x3555C2;x5B0BFB;sea;-1;3938;2795;3906;2819;;Crooked Corridor to Pale Sisters
 x362F87;x7A268D;sea;-1;2981;2041;2987;2054;;Yvresse
 x36DAFA;xF2797B;sea;-1;3674;2640;3668;2650;;North Estalian Island
 x36E8CF;x50132D;sea;-1;5125;1113;5142;1136;;Stars Archipelago
@@ -76,7 +81,7 @@ x36EDA2;x45BCD0;sea;-1;3245;1981;3259;1976;;Sorcerers Islands
 x36EDA2;x729E79;sea;-1;3246;2005;3265;2004;;Sorcerers Islands
 x36EDA2;x9C9F31;sea;-1;3242;1978;3234;1961;;Sorcerers Islands
 x36FB77;xF9CE6A;sea;-1;4011;2430;3995;2381;;Queek
-x381163;x82C48D;canal_dragon_isles;-1;5112;2165;5127;2176;;Dragon Isles
+x381163;xE14F7F;canal_dragon_isles_nw;-1;5112;2165;5127;2176;;Dragon Isles
 x3902A3;xACD7ED;sea;-1;2661;2277;2650;2276;;Ulthuan
 x39BBEB;x508279;sea;-1;2996;2361;3011;2359;;Ulthuan
 x3B53CB;x3F9977;canal_lynsk;-1;4389;2945;4382;2943;;River Lynsk
@@ -85,6 +90,7 @@ x3B821D;xCA3EF5;sea;-1;2287;616;2256;615;;Lustria
 x3D8476;x42F789;canal_rage_se;-1;7426;2427;7424;2449;;Nippon
 x3D8476;x9108C5;canal_rage_sw;-1;7269;2260;7236;2259;;Nippon
 x3DA9C6;xF6A37D;sea;-1;2425;2896;2443;2905;;Naggaroth
+x3ECD87;xAEDA46;canal_lanka_s;-1;5308;1122;5258;1137;;Sun Island Southern Coast
 x3F00AC;x7D517A;canal_ash_t;-1;4103;1917;4100;1922;;Ash River
 x3F00AC;xAB7C34;canal_ash_river_r;-1;4104;1915;4112;1913;;Ash River
 x3F00AC;xC804A4;canal_ash_river_l;-1;4102;1915;4090;1912;;Ash River
@@ -95,6 +101,7 @@ x420FEF;x5E4990;sea;-1;4227;2657;4227;2645;;River Aver
 x42F789;x9108C5;canal_rage_s;-1;7247;2385;7231;2355;;Nippon
 x435900;x9F51D0;sea;-1;5239;1320;5247;1295;;Stars Archipelago
 x435900;xA059E7;sea;-1;5223;1329;5188;1308;;Southlands
+x445342;x863547;sea;-1;3023;2284;3003;2291;;Ulthuan
 x44AFE6;x488FEC;sea;-1;7237;1270;7237;1254;;Devourer
 x450C8A;x8A4CA1;canal_bay_of_uzkulak;-1;4664;3120;4672;3107;;Bay of Uzkulak
 x45BCD0;x729E79;sea;-1;3267;1976;3273;1995;;Sorcerers Islands
@@ -106,14 +113,13 @@ x4AA4ED;x866399;sea;-1;3691;2139;3692;2160;;Origo
 x4B0191;xF70021;sea;-1;4308;2942;4310;2953;;Erengrad
 x4BC8AE;xAD9135;canal_echoes_l;-1;4089;2494;4010;2505;;River of Echoes
 x4BC8AE;xB6625A;canal_limnala;-1;4094;2426;4090;2409;;River Limnala
-x4BC8AE;xE12F02;canal_echoes_r;-1;4093;2497;4161;2531;;River of Echoes
+x4BC8AE;xE12F02;canal_echoes_r;-1;4093;2497;4161;2534;;River of Echoes
 x4DDDAF;xAFA636;canal_blades;-1;4240;3137;4227;3131;;Sea of Blades
 x4E02FF;x5248AB;sea;-1;2670;2004;2660;2018;;Caledor
 x4E9BCA;xA90F62;sea;-1;3022;2345;3025;2325;;Ulthuan
 x4E9BCA;xFC323A;sea;-1;3022;2349;3039;2337;;Ulthuan
 x506FD1;xE06312;canal_isles_of_dusk;-1;3025;570;3025;550;;Isles of Dusk
 x508279;xEEDA6F;sea;-1;3017;2359;3036;2371;;Ulthuan
-x511B44;x8713DF;sea;-1;5172;2107;5196;2093;;Dragon Isles
 x513BC1;x9D6B21;canal_nuln_r;-1;4151;2717;4146;2717;;Nuln
 x558B13;x63CF4B;sea;-1;3065;2334;3062;2354;;Ulthuan
 x558B13;x79F83B;sea;-1;3070;2315;3095;2300;;Ulthuan
@@ -141,8 +147,9 @@ x6A3CA0;xA6AB92;sea;-1;4456;3180;4456;3168;;Sjotraken
 x6B575F;xF6D1CF;sea;-1;7571;2585;7593;2599;;Nippon
 x6BAF30;xE48D14;canal_maelstrom_w;-1;1027;2201;1064;2200;;Maelstrom
 x6D4BE3;xD5049E;sea;-1;3065;2430;3080;2420;;Clothique
-x6DE981;xACCA18;sea;-1;5289;1146;5275;1111;;Sun Island Southern Coast
 x6DE981;xC16DD0;sea;-1;5418;1242;5427;1219;;Southlands
+x6DE981;xE4EE8B;sea;-1;5304;1269;5264;1285;;Stars Archipelago
+x6DE981;xF2D61F;sea;-1;5285;1207;5261;1200;;Stars Archipelago
 x733744;xA6D511;canal_chill_s;-1;2361;3194;2363;3213;;Naggaroth
 x748055;xB0EF47;canal_bitter_sea;-1;4616;2089;4622;2071;;Bitter Sea
 x75C966;x8CDEC3;canal_gates_of_calith;-1;6459;684;6493;690;;Gates of Calith
@@ -157,8 +164,9 @@ x82F7B2;xD30B47;sea;-1;4920;2799;4932;2803;;Zharr Naggrund
 x8481BD;x8721B4;sea;-1;4153;2789;4138;2793;;Lower Talabec River
 x84D98E;xCF8CB8;canal_marienburg;-1;3985;2814;3991;2823;;Marienburg
 x84FEDE;xD9ABC1;sea;-1;2755;1171;2755;1147;;Volcanic Isles
-x8713DF;xE36953;sea;-1;5208;2046;5181;2026;;Dragon Isles
+x8713DF;xF7209E;sea;-1;5217;2150;5214;2168;;Dragon Isles
 x8A4CA1;x931DC6;canal_uzkulak;-1;4795;3025;4897;2917;;Uzkulak Canal
+x8BB62F;xAE33A6;sea;-1;3967;2746;3999;2723;;Crooked Corridor to Axe Bite Pass
 x8C86F2;x91FA05;sea;-1;2791;2237;2827;2253;;Ulthuan
 x8C86F2;xFADB54;sea;-1;2731;2200;2714;2187;;Ulthuan
 x8DAAB3;x9D6B21;canal_nuln_l;-1;4139;2713;4143;2716;;Nuln
@@ -173,6 +181,7 @@ x9B22FB;xEEA74A;canal_elithis_w;-1;6882;832;6897;809;;Elithis
 x9D6B21;xD85DDD;canal_nuln_t;-1;4144;2720;4142;2725;;Nuln
 x9F4CFD;xAD9135;canal_miragliano;-1;3930;2474;3941;2474;;Miragliano
 x9F4CFD;xEA0027;canal_east_estalian_isles;-1;3817;2358;3801;2373;;East Estalian Isles
+xA166D1;xFB4AA0;sea;-1;4064;2950;4053;2588;;Laurelorn Forest
 xA29D3A;xF50B9D;sea;-1;7857;1313;7826;1329;;Lumbria
 xA406C8;xFB4AA0;sea;-1;4379;2557;4055;2586;;Forest of Gloom
 xA70836;xFB4AA0;sea;-1;3837;2781;4051;2584;;Oak of Prophecy
@@ -184,14 +193,11 @@ xAA5873;xF274A8;sea;-1;5138;1206;5146;1167;;Southlands
 xAA5873;xF2D61F;sea;-1;5159;1241;5192;1239;;Southlands
 xABF053;xC51AB1;sea;-1;2332;3024;2315;2998;;Naggaroth
 xABF053;xF6A37D;sea;-1;2336;3027;2362;3027;;Naggaroth
-xAD9135;xE12F02;canal_echoes_t;-1;4012;2508;4161;2535;;River of Echoes
+xAD9135;xE12F02;canal_echoes_t;-1;4012;2508;4160;2537;;River of Echoes
 xB0D39D;xFCC203;sea;-1;2894;2536;2905;2557;;Ulthuan
 xB16366;xF3F0DE;sea;-1;4541;3182;4548;3171;;Drakefjord Bay
-xB2E3CB;xE36953;sea;-1;5151;2095;5145;2064;;Dragon Isles
-xB32998;xD8832D;sea;-1;3716;1017;3686;1046;;Isles of Doom
 xB6625A;xDBBBEF;canal_myrmidens;-1;3999;2318;4007;2305;;Myrmidens
 xB7539A;xC37029;sea;-1;2569;2318;2583;2312;;Ulthuan
-xB8F94F;xFB4AA0;sea;-1;4048;2915;4053;2588;;Laurelorn Forest
 xC51AB1;xDDF640;sea;-1;2233;1701;2221;1748;;Golden Isle
 xC51AB1;xDF8E20;sea;-1;2352;3263;2346;3285;;Naggaroth
 xC6BB93;xCF8CB8;canal_manaanspoort;-1;3957;2920;3966;2897;;Manaanspoort

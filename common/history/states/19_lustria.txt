@@ -42,12 +42,6 @@ STATES = {
 			owned_provinces = { x3B821D x93306E xCA3EF5 xEF85E2 }
 		}
 	}
-	s:STATE_LAND_150 = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { x2ADA15 x720EB0 x9AE6D4 xC9118E xD9ABC1 xFCAF5B xFDDCC2 }
-		}
-	}
 	s:STATE_LAND_151 = {
 		create_state = {
 			country = c:UNO
@@ -118,6 +112,12 @@ STATES = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x2E58A4 xD56142 xF1E9B2 }
+		}
+	}
+	s:STATE_VOLCANIC_ISLANDS = {
+		create_state = {
+			country = c:UNO
+			owned_provinces = { x2ADA15 x720EB0 x9AE6D4 xC9118E xD9ABC1 xFCAF5B xFDDCC2 }
 		}
 	}
 }

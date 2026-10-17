@@ -112,23 +112,15 @@ STATES = {
 	s:STATE_KREUTZHOFEN = {
 		create_state = {
 			country = c:WIS
-			owned_provinces = { x06EA0E x25D64E x2F93E0 x664EC5 x68B295 xA52187 xC8174C }
+			owned_provinces = { x06EA0E x12CA76 x2F93E0 x664EC5 x68B295 xA52187 xAA53A0 xC8174C }
 		}
 		create_state = {
 			country = c:XSI
-			owned_provinces = { x8338AC xF78B17 }
+			owned_provinces = { x25D64E xF78B17 }
 		}
 
 		add_homeland = cu:wissenlander
 		add_homeland = cu:goblin
-	}
-	s:STATE_LAND_667 = {
-		create_state = {
-			country = c:WIS
-			owned_provinces = { x12CA76 }
-		}
-
-		add_homeland = cu:wissenlander
 	}
 	s:STATE_LAURELORN_FOREST = {
 		create_state = {
@@ -189,7 +181,7 @@ STATES = {
 	s:STATE_NORTH_TALABECLAND = {
 		create_state = {
 			country = c:TAL
-			owned_provinces = { x004E67 x0148A9 x0A19CE x185E06 x30FD6E x3DB79B x54CCF8 x6BE255 x913BEA x9F8022 xC3DF75 xCDAADC xDBEF14 xF30471 xF99243 }
+			owned_provinces = { x0148A9 x0A19CE x185E06 x30FD6E x3DB79B x54CCF8 x6BE255 x913BEA x9F8022 xC3DF75 xCDAADC xDBEF14 xF30471 xF99243 }
 		}
 
 		add_homeland = cu:talabeclander
@@ -269,7 +261,7 @@ STATES = {
 	s:STATE_VOLGEN = {
 		create_state = {
 			country = c:TAL
-			owned_provinces = { x47D1D1 x6D2B66 x8481BD x8CE396 x9284FB xA99A58 xCEF3ED xD8DFD1 }
+			owned_provinces = { x47D1D1 x6D2B66 x8481BD x8CE396 xA99A58 xCEF3ED xD8DFD1 }
 		}
 		create_state = {
 			country = c:XSC
@@ -302,7 +294,7 @@ STATES = {
 		}
 		create_state = {
 			country = c:MID
-			owned_provinces = { x1D53F8 x2B9830 x50E3F0 x680722 xA6D9E4 xC9CFA9 xD4A7FA xEF293E }
+			owned_provinces = { x1D53F8 x2B9830 x50E3F0 x651389 x680722 xA6D9E4 xC9CFA9 xD4A7FA xEF293E }
 		}
 
 		add_homeland = cu:goblin
@@ -328,7 +320,7 @@ STATES = {
 		}
 		create_state = {
 			country = c:XSA
-			owned_provinces = { x27EB4F xA0C933 xC3DAA2 xEB7C5D }
+			owned_provinces = { x27EB4F xA0C933 xC3DAA2 }
 		}
 
 		add_homeland = cu:ostermarker

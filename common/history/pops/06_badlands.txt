@@ -7,8 +7,8 @@ POPS = {
 	}
 	s:STATE_BLIGHTWATER = {
 		region_state:BSB = {
-			create_pop = { culture = orc size = 63697 }
-			create_pop = { culture = goblin size = 34299 }
+			create_pop = { culture = orc size = 63710 }
+			create_pop = { culture = goblin size = 34306 }
 		}
 	}
 	s:STATE_BLOOD_RIVER_VALLEY = {
@@ -29,8 +29,8 @@ POPS = {
 	}
 	s:STATE_EASTERN_BADLANDS = {
 		region_state:BSB = {
-			create_pop = { culture = orc size = 54000 }
-			create_pop = { culture = goblin size = 29077 }
+			create_pop = { culture = orc size = 53920 }
+			create_pop = { culture = goblin size = 29034 }
 		}
 	}
 	s:STATE_EAST_BARRIER_IDOLS = {
@@ -87,8 +87,8 @@ POPS = {
 	}
 	s:STATE_OLD_STRYGOS = {
 		region_state:BSB = {
-			create_pop = { culture = orc size = 18117 }
-			create_pop = { culture = goblin size = 9756 }
+			create_pop = { culture = orc size = 18173 }
+			create_pop = { culture = goblin size = 9785 }
 		}
 		region_state:STR = {
 			create_pop = { culture = sylvanian_vampire size = 20000 }
@@ -113,14 +113,14 @@ POPS = {
 	}
 	s:STATE_THE_BLIGHT = {
 		region_state:BTO = {
-			create_pop = { culture = orc size = 54979 }
-			create_pop = { culture = goblin size = 29604 }
+			create_pop = { culture = orc size = 55007 }
+			create_pop = { culture = goblin size = 29619 }
 		}
 	}
 	s:STATE_THE_CAULDRON = {
 		region_state:BTO = {
-			create_pop = { culture = orc size = 75021 }
-			create_pop = { culture = goblin size = 40396 }
+			create_pop = { culture = orc size = 74993 }
+			create_pop = { culture = goblin size = 40381 }
 		}
 	}
 	s:STATE_VARENKA_HILLS = {
@@ -135,8 +135,8 @@ POPS = {
 	}
 	s:STATE_WORLDS_EDGE_FOOTHILLS = {
 		region_state:BSB = {
-			create_pop = { culture = orc size = 59185 }
-			create_pop = { culture = goblin size = 31869 }
+			create_pop = { culture = orc size = 59197 }
+			create_pop = { culture = goblin size = 31875 }
 		}
 	}
 }

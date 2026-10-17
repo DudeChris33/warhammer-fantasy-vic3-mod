@@ -2,13 +2,8 @@
 POPS = {
 	s:STATE_AQUILENA = {
 		region_state:AQL = {
-			create_pop = { culture = border_princer size = 85000 }
-			create_pop = { culture = goblin size = 42500 }
+			create_pop = { culture = border_princer size = 127500 }
 			create_pop = { culture = estalian size = 22500 }
-		}
-		region_state:XSJ = {
-			create_pop = { culture = goblin size = 50000 }
-			create_pop = { culture = border_princer size = 25000 }
 		}
 	}
 	s:STATE_BLACK_PENINSULA = {
@@ -24,17 +19,17 @@ POPS = {
 	}
 	s:STATE_CANTABRIO_ROAD = {
 		region_state:BIL = {
-			create_pop = { culture = estalian size = 484528 }
+			create_pop = { culture = estalian size = 483361 }
 		}
 	}
 	s:STATE_CEFIRO_HILLS = {
 		region_state:CNT = {
-			create_pop = { culture = estalian size = 283828 }
+			create_pop = { culture = estalian size = 371668 }
 		}
 	}
 	s:STATE_CENTRAL_MAGRITTA = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 551515 }
+			create_pop = { culture = estalian size = 545960 }
 		}
 	}
 	s:STATE_EASTERN_BORDER_PRINCES = {
@@ -45,27 +40,22 @@ POPS = {
 	}
 	s:STATE_EAST_BILBALI = {
 		region_state:BIL = {
-			create_pop = { culture = estalian size = 200939 }
+			create_pop = { culture = estalian size = 201326 }
 		}
 	}
 	s:STATE_EAST_MAGRITTA = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 222357 }
+			create_pop = { culture = estalian size = 220117 }
 		}
 	}
 	s:STATE_ESTALIAN_HIGHLANDS = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 52312 }
+			create_pop = { culture = estalian size = 51785 }
 		}
 	}
 	s:STATE_GASTONNE = {
 		region_state:GAS = {
 			create_pop = { culture = border_princer size = 100000 }
-		}
-	}
-	s:STATE_GEULATA = {
-		region_state:TOB = {
-			create_pop = { culture = tilean size = 94208 }
 		}
 	}
 	s:STATE_KHARNOS_FOREST = {
@@ -75,7 +65,7 @@ POPS = {
 	}
 	s:STATE_LAND_663 = {
 		region_state:BIL = {
-			create_pop = { culture = estalian size = 5729 }
+			create_pop = { culture = estalian size = 5740 }
 		}
 	}
 	s:STATE_LOST_KHYPNIA = {
@@ -86,7 +76,7 @@ POPS = {
 	}
 	s:STATE_MIDDLE_BILBALI_01 = {
 		region_state:BIL = {
-			create_pop = { culture = estalian size = 208804 }
+			create_pop = { culture = estalian size = 209573 }
 		}
 	}
 	s:STATE_MIDDLE_TILEA = {
@@ -106,8 +96,12 @@ POPS = {
 	}
 	s:STATE_NUJA = {
 		region_state:CNT = {
-			create_pop = { culture = estalian size = 150395 }
-			create_pop = { culture = wood_elf size = 75198 }
+			create_pop = { culture = estalian size = 154792 }
+			create_pop = { culture = wood_elf size = 77396 }
+		}
+		region_state:MAG = {
+			create_pop = { culture = estalian size = 16941 }
+			create_pop = { culture = wood_elf size = 8471 }
 		}
 		region_state:MGL = {
 			create_pop = { culture = wood_elf size = 26667 }
@@ -117,11 +111,6 @@ POPS = {
 	s:STATE_ORTEGETA = {
 		region_state:ORT = {
 			create_pop = { culture = border_princer size = 125000 }
-		}
-	}
-	s:STATE_PINA_WOOD = {
-		region_state:CNT = {
-			create_pop = { culture = estalian size = 83976 }
 		}
 	}
 	s:STATE_PLAINS_OF_LUCCINI = {
@@ -141,12 +130,12 @@ POPS = {
 	}
 	s:STATE_SOUTHEAST_MAGRITTA = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 179019 }
+			create_pop = { culture = estalian size = 177185 }
 		}
 	}
 	s:STATE_SOUTHERN_SIREN_ISLES = {
 		region_state:TOB = {
-			create_pop = { culture = tilean size = 266161 }
+			create_pop = { culture = tilean size = 238714 }
 		}
 	}
 	s:STATE_SUSSURRIO_WOOD = {
@@ -156,7 +145,7 @@ POPS = {
 	}
 	s:STATE_TOBARO = {
 		region_state:TOB = {
-			create_pop = { culture = tilean size = 189631 }
+			create_pop = { culture = tilean size = 311286 }
 		}
 	}
 	s:STATE_TRANTINE_HILLS = {
@@ -171,17 +160,17 @@ POPS = {
 	}
 	s:STATE_WESTERN_ESTALIAN_COAST = {
 		region_state:CNT = {
-			create_pop = { culture = estalian size = 256603 }
+			create_pop = { culture = estalian size = 246144 }
 		}
 	}
 	s:STATE_WESTERN_IRRANAS = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 101206 }
+			create_pop = { culture = estalian size = 100174 }
 		}
 	}
 	s:STATE_WEST_MAGRITTA = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 393591 }
+			create_pop = { culture = estalian size = 379367 }
 		}
 	}
 }

@@ -186,6 +186,17 @@ BUILDINGS = {
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:GDO"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
+			}
+			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
 					country = {
@@ -305,6 +316,17 @@ BUILDINGS = {
 	s:STATE_OLD_STRYGOS = {
 		region_state:STR = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:STR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -417,6 +439,17 @@ BUILDINGS = {
 	s:STATE_VARENKA_HILLS = {
 		region_state:BVR = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:BVR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -437,6 +470,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:BVR"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"

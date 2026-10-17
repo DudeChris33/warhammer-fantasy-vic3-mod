@@ -131,7 +131,7 @@ STATES = {
 	s:STATE_HELL_PIT_DEPTHS = {
 		create_state = {
 			country = c:XSD
-			owned_provinces = { x04E7B5 xA80278 xB6B5FC xDC0F91 xEA53C9 }
+			owned_provinces = { xA80278 xB6B5FC xDC0F91 }
 		}
 
 		add_homeland = cu:goblin
@@ -163,7 +163,7 @@ STATES = {
 	s:STATE_KRAKA_DRAK = {
 		create_state = {
 			country = c:KRD
-			owned_provinces = { x3340C1 x4A561E x6A3CA0 xC2E533 xDA495F xDD2A50 xF15EBC }
+			owned_provinces = { x051607 x3340C1 x4A561E x6A3CA0 xA6AB92 xC2E533 xDA495F xDD2A50 xF15EBC }
 		}
 
 		add_homeland = cu:dawi_norse
@@ -184,19 +184,13 @@ STATES = {
 
 		add_homeland = cu:norscan
 	}
-	s:STATE_LAND_670 = {
+	s:STATE_LAND_672 = {
 		create_state = {
-			country = c:KRD
-			owned_provinces = { x051607 xA6AB92 }
+			country = c:XSD
+			owned_provinces = { x04E7B5 xEA53C9 }
 		}
 
-		add_homeland = cu:dawi_norse
-	}
-	s:STATE_LAND_671 = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { xE0E506 }
-		}
+		add_homeland = cu:goblin
 	}
 	s:STATE_MERMEDUS_COAST = {
 		create_state = {
@@ -337,11 +331,11 @@ STATES = {
 	s:STATE_WEST_HELSPIRE_MOUNTAINS = {
 		create_state = {
 			country = c:BJO
-			owned_provinces = { x065F18 x3489D2 x4184F9 x766BD7 x7F3CFC x8D8134 x9BC56C xA34D80 }
+			owned_provinces = { x065F18 x4184F9 x766BD7 x7F3CFC x8D8134 x9BC56C xA34D80 }
 		}
 		create_state = {
 			country = c:SOT
-			owned_provinces = { x09BD2A x2BB8AD x59E367 x8D0413 }
+			owned_provinces = { x09BD2A x59E367 x8D0413 }
 		}
 
 		add_homeland = cu:norscan

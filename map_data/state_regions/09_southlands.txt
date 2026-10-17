@@ -1,4 +1,4 @@
-﻿STATE_LAND_152 = {
+﻿STATE_ISLES_OF_DOOM = {
     id = 152
     subsistence_building = "building_subsistence_farm"
     provinces = { xB32998 xD8832D }
@@ -18,7 +18,7 @@
         type = "building_rubber_plantation"
         undiscovered_amount = 1
     }
-    naval_exit_id = 3186
+    naval_exit_id = 3180
 }
 STATE_ISLE_OF_DAWN = {
     id = 170
@@ -44,7 +44,7 @@ STATE_ISLE_OF_DAWN = {
     }
     naval_exit_id = 3199
 }
-STATE_LAND_171 = {
+STATE_TOR_ELASOR = {
     id = 171
     subsistence_building = "building_subsistence_farm"
     provinces = { x04F58A x056003 x18E8FC x4713B6 x7AB183 x8382A8 x8DD003 x91C6E0 xA8DC3D xF38F67 }
@@ -103,7 +103,7 @@ STATE_HORN_OF_ARABY = {
     }
     naval_exit_id = 3178
 }
-STATE_LAND_173 = {
+STATE_TOWER_OF_THE_STARS = {
     id = 173
     subsistence_building = "building_subsistence_farm"
     provinces = { x02226E x435900 x476285 x5E77E2 x63EAF5 x9F51D0 xC5B37C xCF918B xCFB208 xD3D737 xE4EE8B }
@@ -221,7 +221,7 @@ STATE_LAND_182 = {
     mine = x448194
     wood = xE36953
     port = xE36953
-    arable_land = 155
+    arable_land = 156
     arable_resources = { "building_millet_farm" "building_livestock_ranch" "building_coffee_plantation" "building_cotton_plantation" "building_dye_plantation" "building_tea_plantation" "building_tobacco_plantation" "building_sugar_plantation" "building_banana_plantation" }
     capped_resources = {
         building_coal_mine = 46
@@ -240,9 +240,9 @@ STATE_LAND_182 = {
         type = "building_rubber_plantation"
         undiscovered_amount = 35
     }
-    naval_exit_id = 3101
+    naval_exit_id = 3327
 }
-STATE_LAND_468 = {
+STATE_EASTERN_COLONIES = {
     id = 468
     subsistence_building = "building_subsistence_farm"
     provinces = { x058080 xACCA18 xD06B50 }
@@ -256,5 +256,5 @@ STATE_LAND_468 = {
     capped_resources = {
         building_coal_mine = 1
     }
-    naval_exit_id = 3160
+    naval_exit_id = 3169
 }

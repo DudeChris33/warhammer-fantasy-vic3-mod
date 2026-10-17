@@ -17,7 +17,11 @@ STATES = {
 	s:STATE_APUCCINI_MOUNTAINS = {
 		create_state = {
 			country = c:BRN
-			owned_provinces = { x1656DA x36FB77 x781F61 x90B0F4 xCBA3B0 xD9E7E8 }
+			owned_provinces = { x36FB77 x781F61 x90B0F4 xCBA3B0 xD9E7E8 }
+		}
+		create_state = {
+			country = c:XSJ
+			owned_provinces = { x1656DA }
 		}
 
 		add_homeland = cu:goblin
@@ -377,13 +381,8 @@ STATES = {
 			country = c:KIZ
 			owned_provinces = { x2C30FB x37C767 x39FCE5 x4B0F66 x59539E x5D20FC x7068FB x877E58 x9E93B5 x9FEF6E xD5FEE0 xFB5875 }
 		}
-		create_state = {
-			country = c:XSH
-			owned_provinces = { x1A7307 xD23182 xE946DF }
-		}
 
 		add_homeland = cu:dawi
-		add_homeland = cu:goblin
 	}
 	s:STATE_SIX_WATCH_FORTS = {
 		create_state = {

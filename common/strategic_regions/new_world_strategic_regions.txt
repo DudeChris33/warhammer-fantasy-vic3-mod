@@ -1,5 +1,5 @@
 ﻿region_lustria = {
 	capital_province = x7F58A6
 	map_color = { 136 171 191 }
-	states = { STATE_ISLES_OF_DUSK STATE_LAND_150 }
+	states = { STATE_ISLES_OF_DUSK STATE_VOLCANIC_ISLANDS }
 }

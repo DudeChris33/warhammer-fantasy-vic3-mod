@@ -3,9 +3,9 @@
   8192,
   3616
  ],
- "sea_zones": 215,
+ "sea_zones": 216,
  "id_start": 3000,
- "sea_id_high_water": 3330,
+ "sea_id_high_water": 3331,
  "ordinal_high_water": {
   "ABASKO_COAST": 2,
   "ARABY_COAST_PLACEHOLDER": 2,
@@ -68,7 +68,7 @@
   "KAROND_KAR_BYPASS": 2,
   "KRAKEN_SEA": 2,
   "LAGOON_OF_TEARS": 2,
-  "LIZARD_SEA": 6,
+  "LIZARD_SEA": 7,
   "LOWER_REIK_RIVER": 2,
   "LOWER_RIVER_GRISMERIE": 2,
   "LOWER_RIVER_LYNSK": 2,
@@ -1070,7 +1070,7 @@
    "sea_group": "BITTER_SEA",
    "display_name": "Bitter Sea",
    "id": 3324,
-   "area": 12927,
+   "area": 7370,
    "coastal": true,
    "impassable": false
   },
@@ -1186,6 +1186,16 @@
   },
   {
    "label": 103,
+   "key": "STATE_LIZARD_SEA_06",
+   "sea_group": "LIZARD_SEA",
+   "display_name": "Lizard Sea",
+   "id": 3330,
+   "area": 5557,
+   "coastal": true,
+   "impassable": false
+  },
+  {
+   "label": 104,
    "key": "STATE_BITTER_SEA_05",
    "sea_group": "BITTER_SEA",
    "display_name": "Bitter Sea",
@@ -1195,7 +1205,7 @@
    "impassable": false
   },
   {
-   "label": 104,
+   "label": 105,
    "key": "STATE_BITTER_SEA_06",
    "sea_group": "BITTER_SEA",
    "display_name": "Bitter Sea",
@@ -1205,7 +1215,7 @@
    "impassable": false
   },
   {
-   "label": 105,
+   "label": 106,
    "key": "STATE_FAR_OCEAN_03",
    "sea_group": "FAR_OCEAN",
    "display_name": "Far Ocean",
@@ -1215,7 +1225,7 @@
    "impassable": false
   },
   {
-   "label": 106,
+   "label": 107,
    "key": "STATE_SEA_OF_SERPENTS_02",
    "sea_group": "SEA_OF_SERPENTS",
    "display_name": "Sea of Serpents",
@@ -1225,7 +1235,7 @@
    "impassable": false
   },
   {
-   "label": 107,
+   "label": 108,
    "key": "STATE_STRAITS_OF_LOTHERN",
    "sea_group": "SEA_OF_SERPENTS",
    "display_name": "Straits of Lothern",
@@ -1235,7 +1245,7 @@
    "impassable": false
   },
   {
-   "label": 108,
+   "label": 109,
    "key": "STATE_SORCERERS_ISLANDS",
    "sea_group": "CORSAIR_CHANNEL",
    "display_name": "Sorcerers Islands",
@@ -1245,7 +1255,7 @@
    "impassable": false
   },
   {
-   "label": 109,
+   "label": 110,
    "key": "STATE_LIZARD_SEA_05",
    "sea_group": "LIZARD_SEA",
    "display_name": "Lizard Sea",
@@ -1255,7 +1265,7 @@
    "impassable": false
   },
   {
-   "label": 110,
+   "label": 111,
    "key": "STATE_GREAT_MORTIS_RIVER_02",
    "sea_group": "SOUTHERN_SEA",
    "display_name": "Great Mortis River",
@@ -1265,7 +1275,7 @@
    "impassable": false
   },
   {
-   "label": 111,
+   "label": 112,
    "key": "STATE_DRAGON_ISLES_BYPASS_02",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Dragon Isles Bypass",
@@ -1275,7 +1285,7 @@
    "impassable": false
   },
   {
-   "label": 112,
+   "label": 113,
    "key": "STATE_FAR_OCEAN_04",
    "sea_group": "FAR_OCEAN",
    "display_name": "Far Ocean",
@@ -1285,7 +1295,7 @@
    "impassable": false
   },
   {
-   "label": 113,
+   "label": 114,
    "key": "STATE_JADE_SEA_01",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -1295,7 +1305,7 @@
    "impassable": false
   },
   {
-   "label": 114,
+   "label": 115,
    "key": "STATE_JADE_SEA_02",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -1305,7 +1315,7 @@
    "impassable": false
   },
   {
-   "label": 115,
+   "label": 116,
    "key": "STATE_CORSAIR_CHANNEL_02",
    "sea_group": "CORSAIR_CHANNEL",
    "display_name": "Corsair Channel",
@@ -1315,7 +1325,7 @@
    "impassable": false
   },
   {
-   "label": 116,
+   "label": 117,
    "key": "STATE_NEAR_SULPHERET_COAST",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Near Sulpheret Coast",
@@ -1325,7 +1335,7 @@
    "impassable": false
   },
   {
-   "label": 117,
+   "label": 118,
    "key": "STATE_SEA_OF_FEAR_08",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Sea of Fear",
@@ -1335,7 +1345,7 @@
    "impassable": false
   },
   {
-   "label": 118,
+   "label": 119,
    "key": "STATE_SULPHERET_ISLANDS",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Sulpheret Islands",
@@ -1345,7 +1355,7 @@
    "impassable": true
   },
   {
-   "label": 119,
+   "label": 120,
    "key": "STATE_WESTERN_BITTER_SEA_02",
    "sea_group": "BITTER_SEA",
    "display_name": "Western Bitter Sea",
@@ -1355,7 +1365,7 @@
    "impassable": false
   },
   {
-   "label": 120,
+   "label": 121,
    "key": "STATE_LIZARD_SEA_03",
    "sea_group": "LIZARD_SEA",
    "display_name": "Lizard Sea",
@@ -1365,7 +1375,7 @@
    "impassable": false
   },
   {
-   "label": 121,
+   "label": 122,
    "key": "STATE_UPPER_MORTIS_RIVER_02",
    "sea_group": "SOUTHERN_SEA",
    "display_name": "Upper Mortis River",
@@ -1375,7 +1385,7 @@
    "impassable": false
   },
   {
-   "label": 122,
+   "label": 123,
    "key": "STATE_NORTHWESTERN_GREAT_OCEAN",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Northwestern Great Ocean",
@@ -1385,7 +1395,7 @@
    "impassable": true
   },
   {
-   "label": 123,
+   "label": 124,
    "key": "STATE_JADE_SEA_03",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -1395,7 +1405,7 @@
    "impassable": false
   },
   {
-   "label": 124,
+   "label": 125,
    "key": "STATE_SOUTH_ULTHUAN_PASSAGE_PLACEHOLDER",
    "sea_group": "SEA_OF_SERPENTS",
    "display_name": "South Ulthuan Passage Placeholder",
@@ -1405,7 +1415,7 @@
    "impassable": false
   },
   {
-   "label": 125,
+   "label": 126,
    "key": "STATE_SEA_OF_WRATH_06",
    "sea_group": "SEA_OF_WRATH",
    "display_name": "Sea of Wrath",
@@ -1415,7 +1425,7 @@
    "impassable": false
   },
   {
-   "label": 126,
+   "label": 127,
    "key": "STATE_GREAT_OCEAN_01",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -1425,7 +1435,7 @@
    "impassable": false
   },
   {
-   "label": 127,
+   "label": 128,
    "key": "STATE_ASH_RIVER_03",
    "sea_group": "SOUTHERN_SEA",
    "display_name": "Ash River",
@@ -1435,7 +1445,7 @@
    "impassable": false
   },
   {
-   "label": 128,
+   "label": 129,
    "key": "STATE_MORTIS_CONFLUENCE",
    "sea_group": "SOUTHERN_SEA",
    "display_name": "Mortis Confluence",
@@ -1445,7 +1455,7 @@
    "impassable": false
   },
   {
-   "label": 129,
+   "label": 130,
    "key": "STATE_FAR_SULPHERET_COAST",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Far Sulpheret Coast",
@@ -1455,7 +1465,7 @@
    "impassable": false
   },
   {
-   "label": 130,
+   "label": 131,
    "key": "STATE_SERPENT_COAST",
    "sea_group": "BITTER_SEA",
    "display_name": "Serpent Coast",
@@ -1465,7 +1475,7 @@
    "impassable": false
   },
   {
-   "label": 131,
+   "label": 132,
    "key": "STATE_GULF_OF_LUSTRIA",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Gulf of Lustria",
@@ -1475,7 +1485,7 @@
    "impassable": false
   },
   {
-   "label": 132,
+   "label": 133,
    "key": "STATE_SCORPION_COAST",
    "sea_group": "SEA_OF_SERPENTS",
    "display_name": "Scorpion Coast",
@@ -1485,7 +1495,7 @@
    "impassable": false
   },
   {
-   "label": 133,
+   "label": 134,
    "key": "STATE_SEA_OF_SQUALLS_02",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Sea of Squalls",
@@ -1495,7 +1505,7 @@
    "impassable": false
   },
   {
-   "label": 134,
+   "label": 135,
    "key": "STATE_SEA_OF_WEIRD_WAVES_02",
    "sea_group": "SEA_OF_WEIRD_WAVES",
    "display_name": "Sea of Weird Waves",
@@ -1505,7 +1515,7 @@
    "impassable": false
   },
   {
-   "label": 135,
+   "label": 136,
    "key": "STATE_SEA_OF_FEAR_09",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Sea of Fear",
@@ -1515,7 +1525,7 @@
    "impassable": false
   },
   {
-   "label": 136,
+   "label": 137,
    "key": "STATE_LUMBRIA_NIPPON_CHANNEL_PLACEHOLDER",
    "sea_group": "JADE_SEA",
    "display_name": "Lumbria-Nippon Channel Placeholder",
@@ -1525,7 +1535,7 @@
    "impassable": false
   },
   {
-   "label": 137,
+   "label": 138,
    "key": "STATE_SEA_OF_WEIRD_WAVES_03",
    "sea_group": "SEA_OF_WEIRD_WAVES",
    "display_name": "Sea of Weird Waves",
@@ -1535,7 +1545,7 @@
    "impassable": false
   },
   {
-   "label": 138,
+   "label": 139,
    "key": "STATE_TARANTULA_COAST",
    "sea_group": "SEA_OF_SERPENTS",
    "display_name": "Tarantula Coast",
@@ -1545,7 +1555,7 @@
    "impassable": false
   },
   {
-   "label": 139,
+   "label": 140,
    "key": "STATE_ISLE_OF_RISING_SUN_BYPASS",
    "sea_group": "JADE_SEA",
    "display_name": "Isle of Rising Sun Bypass",
@@ -1555,7 +1565,7 @@
    "impassable": false
   },
   {
-   "label": 140,
+   "label": 141,
    "key": "STATE_GREAT_OCEAN_02",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -1565,7 +1575,7 @@
    "impassable": false
   },
   {
-   "label": 141,
+   "label": 142,
    "key": "STATE_GULF_OF_MEDES",
    "sea_group": "SOUTHERN_SEA",
    "display_name": "Gulf of Medes",
@@ -1575,7 +1585,7 @@
    "impassable": false
   },
   {
-   "label": 142,
+   "label": 143,
    "key": "STATE_SEA_OF_FEAR_02",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Sea of Fear",
@@ -1585,7 +1595,7 @@
    "impassable": false
   },
   {
-   "label": 143,
+   "label": 144,
    "key": "STATE_JADE_SEA_04",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -1595,7 +1605,7 @@
    "impassable": false
   },
   {
-   "label": 144,
+   "label": 145,
    "key": "STATE_ESTALIAN_PASSAGE_PLACEHOLDER",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Estalian Passage Placeholder",
@@ -1605,7 +1615,7 @@
    "impassable": false
   },
   {
-   "label": 145,
+   "label": 146,
    "key": "STATE_IND_SOUTHERN_COAST_PLACEHOLDER",
    "sea_group": "SEA_OF_WEIRD_WAVES",
    "display_name": "Ind Southern Coast Placeholder",
@@ -1615,7 +1625,7 @@
    "impassable": false
   },
   {
-   "label": 146,
+   "label": 147,
    "key": "STATE_ARABY_COAST_PLACEHOLDER",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Araby Coast Placeholder",
@@ -1625,7 +1635,7 @@
    "impassable": false
   },
   {
-   "label": 147,
+   "label": 148,
    "key": "STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER",
    "sea_group": "SEA_OF_SERPENTS",
    "display_name": "Lustria Northern Bay Placeholder",
@@ -1635,7 +1645,7 @@
    "impassable": false
   },
   {
-   "label": 148,
+   "label": 149,
    "key": "STATE_LUMBRIA_ARCHIPELAGO",
    "sea_group": "JADE_SEA",
    "display_name": "Lumbria Archipelago",
@@ -1645,7 +1655,7 @@
    "impassable": false
   },
   {
-   "label": 149,
+   "label": 150,
    "key": "STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER",
    "sea_group": "JADE_SEA",
    "display_name": "Devourer-Nippon Channel Placeholder",
@@ -1655,7 +1665,7 @@
    "impassable": false
   },
   {
-   "label": 150,
+   "label": 151,
    "key": "STATE_NORTHERN_GREAT_OCEAN",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Northern Great Ocean",
@@ -1665,7 +1675,7 @@
    "impassable": true
   },
   {
-   "label": 151,
+   "label": 152,
    "key": "STATE_GREAT_OCEAN_03",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -1675,7 +1685,7 @@
    "impassable": false
   },
   {
-   "label": 152,
+   "label": 153,
    "key": "STATE_VAMPIRE_COAST",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Vampire Coast",
@@ -1685,7 +1695,7 @@
    "impassable": false
   },
   {
-   "label": 153,
+   "label": 154,
    "key": "STATE_WESTERN_SEA_OF_WEIRD_WAVES",
    "sea_group": "SEA_OF_WEIRD_WAVES",
    "display_name": "Western Sea of Weird Waves",
@@ -1695,7 +1705,7 @@
    "impassable": false
   },
   {
-   "label": 154,
+   "label": 155,
    "key": "STATE_EASTERN_SEA_OF_WEIRD_WAVES",
    "sea_group": "SEA_OF_WEIRD_WAVES",
    "display_name": "Eastern Sea of Weird Waves",
@@ -1705,7 +1715,7 @@
    "impassable": false
   },
   {
-   "label": 155,
+   "label": 156,
    "key": "STATE_SEA_OF_SQUALLS_04",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Sea of Squalls",
@@ -1715,7 +1725,7 @@
    "impassable": false
   },
   {
-   "label": 156,
+   "label": 157,
    "key": "STATE_SEA_OF_SQUALLS_05",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Sea of Squalls",
@@ -1725,7 +1735,7 @@
    "impassable": false
   },
   {
-   "label": 157,
+   "label": 158,
    "key": "STATE_MEETING_OF_SUN_AND_STARS_PLACEHOLDER",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Meeting of Sun and Stars Placeholder",
@@ -1735,7 +1745,7 @@
    "impassable": false
   },
   {
-   "label": 158,
+   "label": 159,
    "key": "STATE_DEVOURER_LUMBRIA_CHANNEL_PLACEHOLDER",
    "sea_group": "JADE_SEA",
    "display_name": "Devourer-Lumbria Channel Placeholder",
@@ -1745,7 +1755,7 @@
    "impassable": false
   },
   {
-   "label": 159,
+   "label": 160,
    "key": "STATE_DEVOURER_ISLANDS",
    "sea_group": "JADE_SEA",
    "display_name": "Devourer Islands",
@@ -1755,7 +1765,7 @@
    "impassable": false
   },
   {
-   "label": 160,
+   "label": 161,
    "key": "STATE_JADE_SEA_05",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -1765,7 +1775,7 @@
    "impassable": false
   },
   {
-   "label": 161,
+   "label": 162,
    "key": "STATE_SEA_OF_FEAR_03",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Sea of Fear",
@@ -1775,7 +1785,7 @@
    "impassable": false
   },
   {
-   "label": 162,
+   "label": 163,
    "key": "STATE_SEA_OF_WEIRD_WAVES_04",
    "sea_group": "SEA_OF_WEIRD_WAVES",
    "display_name": "Sea of Weird Waves",
@@ -1785,7 +1795,7 @@
    "impassable": false
   },
   {
-   "label": 163,
+   "label": 164,
    "key": "STATE_GREAT_OCEAN_04",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -1795,7 +1805,7 @@
    "impassable": false
   },
   {
-   "label": 164,
+   "label": 165,
    "key": "STATE_SEA_OF_FEAR_04",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Sea of Fear",
@@ -1805,7 +1815,7 @@
    "impassable": false
   },
   {
-   "label": 165,
+   "label": 166,
    "key": "STATE_SEA_OF_FEAR_05",
    "sea_group": "SEA_OF_FEAR",
    "display_name": "Sea of Fear",
@@ -1815,7 +1825,7 @@
    "impassable": false
   },
   {
-   "label": 166,
+   "label": 167,
    "key": "STATE_CENTRAL_FAR_OCEAN_PASSAGE_01",
    "sea_group": "FAR_OCEAN",
    "display_name": "Central Far Ocean Passage",
@@ -1825,7 +1835,7 @@
    "impassable": false
   },
   {
-   "label": 167,
+   "label": 168,
    "key": "STATE_CENTRAL_FAR_OCEAN_PASSAGE_02",
    "sea_group": "FAR_OCEAN",
    "display_name": "Central Far Ocean Passage",
@@ -1835,7 +1845,7 @@
    "impassable": false
   },
   {
-   "label": 168,
+   "label": 169,
    "key": "STATE_CENTRAL_FAR_OCEAN_PASSAGE_03",
    "sea_group": "FAR_OCEAN",
    "display_name": "Central Far Ocean Passage",
@@ -1845,7 +1855,7 @@
    "impassable": false
   },
   {
-   "label": 169,
+   "label": 170,
    "key": "STATE_CENTRAL_FAR_OCEAN_PASSAGE_04",
    "sea_group": "SEA_OF_SQUALLS",
    "display_name": "Central Far Ocean Passage",
@@ -1855,7 +1865,7 @@
    "impassable": false
   },
   {
-   "label": 170,
+   "label": 171,
    "key": "STATE_SUN_ISLAND_SOUTHERN_COAST_PLACEHOLDER",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Sun Island Southern Coast Placeholder",
@@ -1865,7 +1875,7 @@
    "impassable": false
   },
   {
-   "label": 171,
+   "label": 172,
    "key": "STATE_OCEAN_OF_DREAD_01",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Ocean of Dread",
@@ -1875,7 +1885,7 @@
    "impassable": true
   },
   {
-   "label": 172,
+   "label": 173,
    "key": "STATE_GUANO_ROCKS_BYPASS_02",
    "sea_group": "FAR_OCEAN",
    "display_name": "Guano Rocks Bypass",
@@ -1885,7 +1895,7 @@
    "impassable": true
   },
   {
-   "label": 173,
+   "label": 174,
    "key": "STATE_JADE_SEA_06",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -1895,7 +1905,7 @@
    "impassable": false
   },
   {
-   "label": 174,
+   "label": 175,
    "key": "STATE_GREAT_OCEAN_05",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -1905,7 +1915,7 @@
    "impassable": false
   },
   {
-   "label": 175,
+   "label": 176,
    "key": "STATE_CENTRAL_GREAT_OCEAN_PASSAGE_01",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Central Great Ocean Passage",
@@ -1915,7 +1925,7 @@
    "impassable": false
   },
   {
-   "label": 176,
+   "label": 177,
    "key": "STATE_JADE_SEA_07",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -1925,7 +1935,7 @@
    "impassable": false
   },
   {
-   "label": 177,
+   "label": 178,
    "key": "STATE_NORTHERN_MANGROVE_COAST",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Northern Mangrove Coast",
@@ -1935,7 +1945,7 @@
    "impassable": false
   },
   {
-   "label": 178,
+   "label": 179,
    "key": "STATE_GREAT_OCEAN_06",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -1945,7 +1955,7 @@
    "impassable": false
   },
   {
-   "label": 179,
+   "label": 180,
    "key": "STATE_FAR_OCEAN_05",
    "sea_group": "FAR_OCEAN",
    "display_name": "Far Ocean",
@@ -1955,7 +1965,7 @@
    "impassable": false
   },
   {
-   "label": 180,
+   "label": 181,
    "key": "STATE_ISLES_OF_DOOM_02",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Isles of Doom",
@@ -1965,7 +1975,7 @@
    "impassable": false
   },
   {
-   "label": 181,
+   "label": 182,
    "key": "STATE_CENTRAL_GREAT_OCEAN",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Central Great Ocean",
@@ -1975,7 +1985,7 @@
    "impassable": true
   },
   {
-   "label": 182,
+   "label": 183,
    "key": "STATE_CHURNING_GULF",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Churning Gulf",
@@ -1985,7 +1995,7 @@
    "impassable": false
   },
   {
-   "label": 183,
+   "label": 184,
    "key": "STATE_FAR_OCEAN_06",
    "sea_group": "FAR_OCEAN",
    "display_name": "Far Ocean",
@@ -1995,7 +2005,7 @@
    "impassable": false
   },
   {
-   "label": 184,
+   "label": 185,
    "key": "STATE_CENTRAL_GREAT_OCEAN_PASSAGE_03",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Central Great Ocean Passage",
@@ -2005,7 +2015,7 @@
    "impassable": false
   },
   {
-   "label": 185,
+   "label": 186,
    "key": "STATE_MO_FARAH_CHANEL",
    "sea_group": "JADE_SEA",
    "display_name": "Mo Farah Chanel",
@@ -2015,7 +2025,7 @@
    "impassable": false
   },
   {
-   "label": 186,
+   "label": 187,
    "key": "STATE_OCEAN_OF_DREAD_02",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Ocean of Dread",
@@ -2025,7 +2035,7 @@
    "impassable": false
   },
   {
-   "label": 187,
+   "label": 188,
    "key": "STATE_GREAT_OCEAN_15",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -2035,7 +2045,7 @@
    "impassable": false
   },
   {
-   "label": 188,
+   "label": 189,
    "key": "STATE_OCEAN_OF_DREAD_03",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Ocean of Dread",
@@ -2045,7 +2055,7 @@
    "impassable": false
   },
   {
-   "label": 189,
+   "label": 190,
    "key": "STATE_JADE_SEA_08",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -2055,7 +2065,7 @@
    "impassable": false
   },
   {
-   "label": 190,
+   "label": 191,
    "key": "STATE_OCEAN_OF_DREAD_04",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Ocean of Dread",
@@ -2065,7 +2075,7 @@
    "impassable": false
   },
   {
-   "label": 191,
+   "label": 192,
    "key": "STATE_FAR_OCEAN_07",
    "sea_group": "FAR_OCEAN",
    "display_name": "Far Ocean",
@@ -2075,7 +2085,7 @@
    "impassable": false
   },
   {
-   "label": 192,
+   "label": 193,
    "key": "STATE_WESTERN_GATES_OF_CALITH",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Western Gates of Calith",
@@ -2085,7 +2095,7 @@
    "impassable": false
   },
   {
-   "label": 193,
+   "label": 194,
    "key": "STATE_TOR_ELASOR_WATERS",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Tor Elasor Waters",
@@ -2095,7 +2105,7 @@
    "impassable": false
   },
   {
-   "label": 194,
+   "label": 195,
    "key": "STATE_FAR_OCEAN_08",
    "sea_group": "FAR_OCEAN",
    "display_name": "Far Ocean",
@@ -2105,7 +2115,7 @@
    "impassable": false
   },
   {
-   "label": 195,
+   "label": 196,
    "key": "STATE_SOUTHERN_MANGROVE_COAST",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Southern Mangrove Coast",
@@ -2115,7 +2125,7 @@
    "impassable": false
   },
   {
-   "label": 196,
+   "label": 197,
    "key": "STATE_JADE_SEA_09",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -2125,7 +2135,7 @@
    "impassable": false
   },
   {
-   "label": 197,
+   "label": 198,
    "key": "STATE_EASTERN_GATES_OF_CALITH",
    "sea_group": "JADE_SEA",
    "display_name": "Eastern Gates of Calith",
@@ -2135,7 +2145,7 @@
    "impassable": false
   },
   {
-   "label": 198,
+   "label": 199,
    "key": "STATE_GREAT_OCEAN_07",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -2145,7 +2155,7 @@
    "impassable": false
   },
   {
-   "label": 199,
+   "label": 200,
    "key": "STATE_GREAT_OCEAN_08",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -2155,7 +2165,7 @@
    "impassable": false
   },
   {
-   "label": 200,
+   "label": 201,
    "key": "STATE_ISLE_OF_DUSK_BYPASS",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Isle of Dusk Bypass",
@@ -2165,7 +2175,7 @@
    "impassable": false
   },
   {
-   "label": 201,
+   "label": 202,
    "key": "STATE_JADE_SEA_10",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -2175,7 +2185,7 @@
    "impassable": false
   },
   {
-   "label": 202,
+   "label": 203,
    "key": "STATE_GREAT_OCEAN_09",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -2185,7 +2195,7 @@
    "impassable": false
   },
   {
-   "label": 203,
+   "label": 204,
    "key": "STATE_GREAT_OCEAN_10",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Great Ocean",
@@ -2195,7 +2205,7 @@
    "impassable": false
   },
   {
-   "label": 204,
+   "label": 205,
    "key": "STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_01",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Southern Great Ocean Passage",
@@ -2205,7 +2215,7 @@
    "impassable": false
   },
   {
-   "label": 205,
+   "label": 206,
    "key": "STATE_SOUTHERN_GREAT_OCEAN",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Southern Great Ocean",
@@ -2215,7 +2225,7 @@
    "impassable": true
   },
   {
-   "label": 206,
+   "label": 207,
    "key": "STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_02",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Southern Great Ocean Passage",
@@ -2225,7 +2235,7 @@
    "impassable": false
   },
   {
-   "label": 207,
+   "label": 208,
    "key": "STATE_ISLE_OF_DAWN_BYPASS",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Isle of Dawn Bypass",
@@ -2235,7 +2245,7 @@
    "impassable": false
   },
   {
-   "label": 208,
+   "label": 209,
    "key": "STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_03",
    "sea_group": "GREAT_OCEAN",
    "display_name": "Southern Great Ocean Passage",
@@ -2245,7 +2255,7 @@
    "impassable": false
   },
   {
-   "label": 209,
+   "label": 210,
    "key": "STATE_OCEAN_OF_DREAD_05",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Ocean of Dread",
@@ -2255,7 +2265,7 @@
    "impassable": false
   },
   {
-   "label": 210,
+   "label": 211,
    "key": "STATE_JADE_SEA_11",
    "sea_group": "JADE_SEA",
    "display_name": "Jade Sea",
@@ -2265,7 +2275,7 @@
    "impassable": false
   },
   {
-   "label": 211,
+   "label": 212,
    "key": "STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_01",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Southern Ocean of Dread Passage",
@@ -2275,7 +2285,7 @@
    "impassable": false
   },
   {
-   "label": 212,
+   "label": 213,
    "key": "STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_02",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Southern Ocean of Dread Passage",
@@ -2285,7 +2295,7 @@
    "impassable": false
   },
   {
-   "label": 213,
+   "label": 214,
    "key": "STATE_SOUTHERN_OCEAN_OF_DREAD",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Southern Ocean of Dread",
@@ -2295,7 +2305,7 @@
    "impassable": true
   },
   {
-   "label": 214,
+   "label": 215,
    "key": "STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_03",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Southern Ocean of Dread Passage",
@@ -2305,7 +2315,7 @@
    "impassable": false
   },
   {
-   "label": 215,
+   "label": 216,
    "key": "STATE_SOUTHERN_OCEAN_OF_DREAD_PASSAGE_04",
    "sea_group": "OCEAN_OF_DREAD",
    "display_name": "Southern Ocean of Dread Passage",

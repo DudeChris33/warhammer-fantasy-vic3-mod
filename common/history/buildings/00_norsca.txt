@@ -415,7 +415,7 @@ BUILDINGS = {
 			}
 		}
 	}
-	s:STATE_HELL_PIT_DEPTHS = {
+	s:STATE_HELL_PIT = {
 		region_state:XSD = {
 			create_building = {
 				building = "building_barrack"
@@ -427,19 +427,6 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_rye_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:XSD"
-						levels = 1
-						region = "STATE_HELL_PIT_DEPTHS"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
 			}
 		}
 	}
@@ -809,7 +796,7 @@ BUILDINGS = {
 	s:STATE_NORTH_NORSE_COAST = {
 		region_state:SOR = {
 			create_building = {
-				building = "building_logging_camp"
+				building = "building_rye_farm"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -819,7 +806,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
+				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
 			}
 		}
 	}
@@ -1084,25 +1071,12 @@ BUILDINGS = {
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
-				building = "building_rye_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:SOT"
-						levels = 1
-						region = "STATE_WEST_HELSPIRE_MOUNTAINS"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
 				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
 						country = "c:SOT"
-						levels = 1
+						levels = 2
 						region = "STATE_WEST_HELSPIRE_MOUNTAINS"
 					}
 				}

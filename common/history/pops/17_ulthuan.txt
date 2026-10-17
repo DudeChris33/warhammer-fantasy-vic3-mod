@@ -45,6 +45,16 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
+	s:STATE_EASTERN_ANNULII_MOUNTAINS = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_EASTERN_EATAINE = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 	s:STATE_FALLOW_MARSH = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
@@ -65,7 +75,17 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
+	s:STATE_INNER_CALEDOR = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
 	s:STATE_INNER_SEA_CHAIN = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_ISLE_OF_AESTUNIAE = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}
@@ -235,36 +255,6 @@ POPS = {
 			create_pop = { culture = goblin size = 1000 }
 		}
 	}
-	s:STATE_LAND_628 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_631 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_633 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_636 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_651 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
-	s:STATE_LAND_665 = {
-		region_state:UNO = {
-			create_pop = { culture = goblin size = 1000 }
-		}
-	}
 	s:STATE_LOTHERN_EAST = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
@@ -276,6 +266,11 @@ POPS = {
 		}
 	}
 	s:STATE_NORTHERN_ELLYRION = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_NORTHERN_SAPHERY = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}
@@ -306,6 +301,11 @@ POPS = {
 		}
 	}
 	s:STATE_SOUTHERN_ELLYRION = {
+		region_state:UNO = {
+			create_pop = { culture = goblin size = 1000 }
+		}
+	}
+	s:STATE_SOUTHERN_SAPHERY = {
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
 		}

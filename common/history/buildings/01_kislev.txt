@@ -3,31 +3,7 @@ BUILDINGS = {
 	s:STATE_CASTLE_ALEXANDRONOV = {
 		region_state:UNG = {
 			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:UNG"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:UNG"
-						levels = 3
-						region = "STATE_CASTLE_ALEXANDRONOV"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -37,14 +13,14 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_CHAMON_DHAREK = {
 		region_state:UNG = {
 			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -54,12 +30,23 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_DUSHYKA = {
 		region_state:BOL = {
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:BOL"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
+			}
 			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
@@ -246,7 +233,7 @@ BUILDINGS = {
 	s:STATE_FORT_STRAGHOV = {
 		region_state:DOL = {
 			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -256,7 +243,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -280,18 +267,7 @@ BUILDINGS = {
 	s:STATE_KISLEV_FOOTHILLS = {
 		region_state:ROP = {
 			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:ROP"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -301,7 +277,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -324,6 +300,17 @@ BUILDINGS = {
 	}
 	s:STATE_NORTHERN_OBLAST = {
 		region_state:BOL = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:BOL"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -352,7 +339,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:BOL"
-						levels = 14
+						levels = 13
 						region = "STATE_NORTHERN_OBLAST"
 					}
 				}
@@ -363,6 +350,17 @@ BUILDINGS = {
 	}
 	s:STATE_SEPUKZY = {
 		region_state:VOL = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:VOL"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -402,7 +400,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:VOL"
-						levels = 15
+						levels = 14
 						region = "STATE_SEPUKZY"
 					}
 				}
@@ -431,28 +429,17 @@ BUILDINGS = {
 	s:STATE_STUREN_RIDGE = {
 		region_state:TRO = {
 			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:TRO"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
 						country = "c:TRO"
-						levels = 4
+						levels = 3
 						region = "STATE_STUREN_RIDGE"
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -544,18 +531,7 @@ BUILDINGS = {
 	s:STATE_THE_GOLINYI = {
 		region_state:DOL = {
 			create_building = {
-				building = "building_barrack"
-				add_ownership = {
-					country = {
-						country = "c:DOL"
-						levels = 1
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_no_organization" }
-			}
-			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -565,14 +541,14 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_THE_ROPSALS = {
 		region_state:ROP = {
 			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -582,7 +558,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -606,7 +582,7 @@ BUILDINGS = {
 	s:STATE_TROLL_COUNTRY = {
 		region_state:TRO = {
 			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -616,24 +592,24 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_UNGOL_STEPPES = {
 		region_state:UNG = {
 			create_building = {
-				building = "building_wheat_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
 						country = "c:UNG"
-						levels = 4
+						levels = 3
 						region = "STATE_UNGOL_STEPPES"
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}

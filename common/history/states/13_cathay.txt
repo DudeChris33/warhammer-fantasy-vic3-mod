@@ -3,13 +3,13 @@ STATES = {
 	s:STATE_LAND_179 = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x8713DF }
+			owned_provinces = { x8713DF xF7209E }
 		}
 	}
 	s:STATE_PLACEHOLDER = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x0189A3 x2FB45D x7A6787 xA89241 xC51AB1 xDF8E20 }
+			owned_provinces = { x0189A3 x2FB45D x7A6787 xA89241 xC51AB1 xDF8E20 xE0E506 }
 		}
 	}
 }

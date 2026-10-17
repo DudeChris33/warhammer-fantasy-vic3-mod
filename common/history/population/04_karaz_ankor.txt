@@ -76,10 +76,6 @@ POPULATION = {
 		effect_starting_pop_wealth_low = yes
 		effect_starting_pop_literacy_low = yes
 	}
-	c:XSH ?= {
-		effect_starting_pop_wealth_low = yes
-		effect_starting_pop_literacy_very_low = yes
-	}
 	c:XSI ?= {
 		effect_starting_pop_wealth_low = yes
 		effect_starting_pop_literacy_very_low = yes

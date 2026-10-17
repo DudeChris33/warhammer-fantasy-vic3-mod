@@ -12,8 +12,11 @@ POPS = {
 	}
 	s:STATE_APUCCINI_MOUNTAINS = {
 		region_state:BRN = {
-			create_pop = { culture = goblin size = 54721 }
-			create_pop = { culture = orc size = 18240 }
+			create_pop = { culture = goblin size = 57040 }
+			create_pop = { culture = orc size = 19013 }
+		}
+		region_state:XSJ = {
+			create_pop = { culture = goblin size = 75000 }
 		}
 	}
 	s:STATE_AXE_BITE_PASS = {
@@ -167,24 +170,24 @@ POPS = {
 	}
 	s:STATE_KARAGRIL = {
 		region_state:KEP = {
-			create_pop = { culture = dawi_ancestral size = 102813 }
+			create_pop = { culture = dawi_ancestral size = 103095 }
 		}
 	}
 	s:STATE_KARAG_NAR = {
 		region_state:KEP = {
-			create_pop = { culture = dawi_ancestral size = 47187 }
+			create_pop = { culture = dawi_ancestral size = 46905 }
 		}
 	}
 	s:STATE_KARAG_ZIFLIN = {
 		region_state:CRM = {
-			create_pop = { culture = goblin size = 70503 }
-			create_pop = { culture = orc size = 23501 }
+			create_pop = { culture = goblin size = 69863 }
+			create_pop = { culture = orc size = 23287 }
 		}
 	}
 	s:STATE_KARAK_EIGHT_PEAKS = {
 		region_state:CRM = {
-			create_pop = { culture = goblin size = 41997 }
-			create_pop = { culture = orc size = 13999 }
+			create_pop = { culture = goblin size = 42638 }
+			create_pop = { culture = orc size = 14212 }
 		}
 	}
 	s:STATE_LAHMIA = {
@@ -195,8 +198,8 @@ POPS = {
 	}
 	s:STATE_LAND_664 = {
 		region_state:BRN = {
-			create_pop = { culture = goblin size = 14237 }
-			create_pop = { culture = orc size = 4745 }
+			create_pop = { culture = goblin size = 13676 }
+			create_pop = { culture = orc size = 4558 }
 		}
 	}
 	s:STATE_LAND_666 = {
@@ -227,13 +230,13 @@ POPS = {
 	}
 	s:STATE_NORTH_GREY_MOUNTAINS = {
 		region_state:KNO = {
-			create_pop = { culture = dawi_grey size = 179409 }
+			create_pop = { culture = dawi_grey size = 179585 }
 		}
 	}
 	s:STATE_NOVALONE_PASS = {
 		region_state:BRN = {
-			create_pop = { culture = goblin size = 43543 }
-			create_pop = { culture = orc size = 14514 }
+			create_pop = { culture = goblin size = 41785 }
+			create_pop = { culture = orc size = 13928 }
 		}
 	}
 	s:STATE_OIS_GAP = {
@@ -270,12 +273,7 @@ POPS = {
 	}
 	s:STATE_SHATTERED_TEETH = {
 		region_state:KIZ = {
-			create_pop = { culture = dawi size = 83333 }
-			create_pop = { culture = goblin size = 41667 }
-		}
-		region_state:XSH = {
-			create_pop = { culture = goblin size = 50000 }
-			create_pop = { culture = dawi size = 25000 }
+			create_pop = { culture = dawi size = 125000 }
 		}
 	}
 	s:STATE_SIX_WATCH_FORTS = {
@@ -296,7 +294,7 @@ POPS = {
 	}
 	s:STATE_SOUTH_GREY_MOUNTAINS = {
 		region_state:KNO = {
-			create_pop = { culture = dawi_grey size = 70591 }
+			create_pop = { culture = dawi_grey size = 70415 }
 		}
 	}
 	s:STATE_THUNDER_PEAKS = {
@@ -318,7 +316,7 @@ POPS = {
 	}
 	s:STATE_WINTERTEETH_PASS = {
 		region_state:WIS = {
-			create_pop = { culture = wissenlander size = 2599 }
+			create_pop = { culture = wissenlander size = 2582 }
 		}
 	}
 }

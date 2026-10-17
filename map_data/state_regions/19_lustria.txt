@@ -173,7 +173,7 @@ STATE_ISLES_OF_DUSK = {
     }
     naval_exit_id = 3204
 }
-STATE_LAND_150 = {
+STATE_VOLCANIC_ISLANDS = {
     id = 150
     subsistence_building = "building_subsistence_farm"
     provinces = { x2ADA15 x720EB0 x9AE6D4 xC9118E xD9ABC1 xFCAF5B xFDDCC2 }

@@ -14,7 +14,7 @@ BUILDINGS = {
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
-				building = "building_rye_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -24,12 +24,23 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_AQUITAINE = {
 		region_state:AQU = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:AQU"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -51,6 +62,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:AQU"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -82,7 +104,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:AQU"
-						levels = 24
+						levels = 23
 						region = "STATE_AQUITAINE"
 					}
 				}
@@ -105,7 +127,7 @@ BUILDINGS = {
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
-				building = "building_rye_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -115,12 +137,23 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_ARTOIS = {
 		region_state:ART = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:ART"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -185,6 +218,17 @@ BUILDINGS = {
 	s:STATE_BASTONNE = {
 		region_state:BAS = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:BAS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -205,6 +249,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:BAS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -236,7 +291,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:BAS"
-						levels = 7
+						levels = 6
 						region = "STATE_BASTONNE"
 					}
 				}
@@ -247,6 +302,17 @@ BUILDINGS = {
 	}
 	s:STATE_BORDELEAUX = {
 		region_state:BOR = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:BOR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -268,6 +334,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:BOR"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -324,6 +401,17 @@ BUILDINGS = {
 	s:STATE_BREGANALLE = {
 		region_state:CAR = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:CAR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -344,6 +432,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:CAR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -375,7 +474,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:CAR"
-						levels = 5
+						levels = 4
 						region = "STATE_BREGANALLE"
 					}
 				}
@@ -386,6 +485,17 @@ BUILDINGS = {
 	}
 	s:STATE_BRIONNE = {
 		region_state:BRI = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:BRI"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -407,6 +517,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:BRI"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -438,7 +559,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:BRI"
-						levels = 16
+						levels = 15
 						region = "STATE_BRIONNE"
 					}
 				}
@@ -538,6 +659,17 @@ BUILDINGS = {
 	s:STATE_COURONNE = {
 		region_state:COU = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:COU"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -558,6 +690,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:COU"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -588,6 +731,17 @@ BUILDINGS = {
 	s:STATE_GISOREUX = {
 		region_state:GIS = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:GIS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -608,6 +762,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:GIS"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -651,7 +816,7 @@ BUILDINGS = {
 	s:STATE_GLADE_OF_ETERNAL_MOONLIGHT = {
 		region_state:ANM = {
 			create_building = {
-				building = "building_rye_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -661,12 +826,23 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_GRAVE_OF_CUILEUX = {
 		region_state:QUE = {
+			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
 			create_building = {
 				building = "building_barrack"
 				add_ownership = {
@@ -688,6 +864,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:QUE"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -729,30 +916,17 @@ BUILDINGS = {
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
-				building = "building_rye_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
 						country = "c:TLS"
-						levels = 2
+						levels = 3
 						region = "STATE_KING_S_GLADE"
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:TLS"
-						levels = 1
-						region = "STATE_KING_S_GLADE"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -787,6 +961,17 @@ BUILDINGS = {
 	s:STATE_LYONESSE = {
 		region_state:LYO = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:LYO"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -807,6 +992,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:LYO"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -865,6 +1061,17 @@ BUILDINGS = {
 	s:STATE_L_ANGUILLE = {
 		region_state:LAN = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:LAN"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -885,6 +1092,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:LAN"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -971,6 +1189,17 @@ BUILDINGS = {
 	s:STATE_MONTFORT = {
 		region_state:MNF = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:MNF"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -991,6 +1220,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:MNF"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -1021,6 +1261,17 @@ BUILDINGS = {
 	s:STATE_MOUSILLON = {
 		region_state:MOU = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:MOU"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1050,7 +1301,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:MOU"
-						levels = 4
+						levels = 3
 						region = "STATE_MOUSILLON"
 					}
 				}
@@ -1077,6 +1328,17 @@ BUILDINGS = {
 	s:STATE_PARRAVON = {
 		region_state:PAR = {
 			create_building = {
+				building = "building_government_administration"
+				add_ownership = {
+					country = {
+						country = "c:PAR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_simple_organization" "pm_hereditary_bureaucrats" "pm_religious_bureaucrats" }
+			}
+			create_building = {
 				building = "building_barrack"
 				add_ownership = {
 					country = {
@@ -1097,6 +1359,17 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_wooden_buildings" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:PAR"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_anchorage" }
 			}
 			create_building = {
 				building = "building_trade_center"
@@ -1192,7 +1465,7 @@ BUILDINGS = {
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
-				building = "building_rye_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -1202,14 +1475,14 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
 	s:STATE_WATERFALL_PALACE = {
 		region_state:ARG = {
 			create_building = {
-				building = "building_rye_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
@@ -1219,7 +1492,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}
@@ -1265,30 +1538,17 @@ BUILDINGS = {
 				activate_production_methods = { "pm_no_organization" }
 			}
 			create_building = {
-				building = "building_rye_farm"
+				building = "building_logging_camp"
 				add_ownership = {
 					building = {
 						type = "building_manor_house"
 						country = "c:WYD"
-						levels = 1
+						levels = 2
 						region = "STATE_WYDRIOTH"
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "pm_simple_farming" "pm_no_secondary" "pm_tools_disabled" }
-			}
-			create_building = {
-				building = "building_livestock_ranch"
-				add_ownership = {
-					building = {
-						type = "building_manor_house"
-						country = "c:WYD"
-						levels = 1
-						region = "STATE_WYDRIOTH"
-					}
-				}
-				reserves = 1
-				activate_production_methods = { "pm_open_air_stockyards" "pm_simple_ranch" "pm_standard_fences" "pm_unrefrigerated" }
+				activate_production_methods = { "pm_simple_forestry" "pm_no_hardwood" "pm_no_equipment" "pm_road_carts" }
 			}
 		}
 	}

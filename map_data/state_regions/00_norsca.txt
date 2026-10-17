@@ -8,7 +8,7 @@
     mine = xDE7361
     wood = x4FC931
     port = x4FC931
-    arable_land = 2
+    arable_land = 3
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
         building_fishing_wharf = 1
@@ -41,8 +41,8 @@ STATE_FJORD_COAST = {
 STATE_WEST_HELSPIRE_MOUNTAINS = {
     id = 37
     subsistence_building = "building_subsistence_farm"
-    provinces = { x065F18 x09BD2A x2BB8AD x3489D2 x4184F9 x59E367 x766BD7 x7F3CFC x8D0413 x8D8134 x9BC56C xA34D80 }
-    impassable = { x065F18 x09BD2A x2BB8AD x3489D2 x766BD7 x9BC56C }
+    provinces = { x065F18 x09BD2A x4184F9 x59E367 x766BD7 x7F3CFC x8D0413 x8D8134 x9BC56C xA34D80 }
+    impassable = { x065F18 x09BD2A x766BD7 x9BC56C }
     city = xA34D80
     farm = x8D8134
     mine = x7F3CFC
@@ -207,6 +207,7 @@ STATE_FLESHWARREN = {
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
         building_coal_mine = 2
+        building_fishing_wharf = 1
         building_iron_mine = 2
         building_logging_camp = 3
     }
@@ -435,23 +436,18 @@ STATE_NAGLFARI_COAST = {
 STATE_HELL_PIT_DEPTHS = {
     id = 377
     subsistence_building = "building_subsistence_farm"
-    provinces = { x04E7B5 xA80278 xB6B5FC xDC0F91 xEA53C9 }
-    impassable = { xB6B5FC xEA53C9 }
+    provinces = { xA80278 xB6B5FC xDC0F91 }
+    impassable = { xB6B5FC }
     city = xA80278
     farm = xDC0F91
     mine = xA80278
     wood = xA80278
-    arable_land = 10
+    arable_land = 7
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 2
-        building_fishing_wharf = 1
-        building_iron_mine = 2
-        building_logging_camp = 4
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 1
+        building_coal_mine = 1
+        building_iron_mine = 1
+        building_logging_camp = 3
     }
 }
 STATE_HELL_PIT = {
@@ -526,7 +522,6 @@ STATE_HELSPIRE_MOUNTAINS = {
         building_fishing_wharf = 2
         building_iron_mine = 5
         building_logging_camp = 5
-        building_sulfur_mine = 1
     }
 }
 STATE_BJORNLING_S_GATHERING = {
@@ -631,7 +626,7 @@ STATE_VIDARHEIM = {
 STATE_KRAKA_DRAK = {
     id = 552
     subsistence_building = "building_subsistence_farm"
-    provinces = { x3340C1 x4A561E x6A3CA0 xC2E533 xDA495F xDD2A50 xF15EBC }
+    provinces = { x051607 x3340C1 x4A561E x6A3CA0 xA6AB92 xC2E533 xDA495F xDD2A50 xF15EBC }
     impassable = { x4A561E xDA495F }
     city = xC2E533
     farm = x3340C1
@@ -642,8 +637,9 @@ STATE_KRAKA_DRAK = {
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
         building_fishing_wharf = 2
-        building_iron_mine = 4
-        building_logging_camp = 4
+        building_iron_mine = 5
+        building_logging_camp = 5
+        building_sulfur_mine = 1
     }
     naval_exit_id = 3015
 }
@@ -799,35 +795,20 @@ STATE_LAND_661 = {
     }
     naval_exit_id = 3009
 }
-STATE_LAND_670 = {
-    id = 670
+STATE_LAND_672 = {
+    id = 672
     subsistence_building = "building_subsistence_farm"
-    provinces = { x051607 xA6AB92 }
-    city = x051607
-    farm = xA6AB92
-    mine = x051607
-    wood = xA6AB92
-    port = xA6AB92
-    arable_land = 1
+    provinces = { x04E7B5 xEA53C9 }
+    impassable = { xEA53C9 }
+    city = x04E7B5
+    farm = x04E7B5
+    mine = x04E7B5
+    wood = x04E7B5
+    arable_land = 4
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
+        building_coal_mine = 1
         building_iron_mine = 1
         building_logging_camp = 1
     }
-    naval_exit_id = 3015
-}
-STATE_LAND_671 = {
-    id = 671
-    subsistence_building = "building_subsistence_farm"
-    provinces = { xE0E506 }
-    city = xE0E506
-    farm = xE0E506
-    mine = xE0E506
-    wood = xE0E506
-    port = xE0E506
-    arable_land = 1
-    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
-    capped_resources = {
-    }
-    naval_exit_id = 3004
 }

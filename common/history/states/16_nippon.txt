@@ -21,7 +21,7 @@ STATES = {
 	s:STATE_LAND_367 = {
 		create_state = {
 			country = c:UNO
-			owned_provinces = { x6B575F }
+			owned_provinces = { x48BE3E x6B575F xF6D1CF }
 		}
 	}
 	s:STATE_LAND_368 = {
@@ -40,18 +40,6 @@ STATES = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x03CCF6 xA29D3A xECB799 xF50B9D xF7B969 }
-		}
-	}
-	s:STATE_LAND_471 = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { x48BE3E }
-		}
-	}
-	s:STATE_LAND_472 = {
-		create_state = {
-			country = c:UNO
-			owned_provinces = { xF6D1CF }
 		}
 	}
 }
