@@ -2,7 +2,8 @@
 # Faiths of one stock share one trait: the Old World pantheon's cults coexist, so inter-cult friction
 # comes through the religion axis, not a heritage split (decision #2 / review panel 2026-08-28). A group may hold
 # several traits where faiths are kin but hostile: the elven gods hold heritage_elven_pantheon (the five
-# elven cults) and heritage_cytharai (Druchii), board item #8476. Board item #3405 (epic #3404).
+# elven cults) and heritage_cytharai (Druchii), board item #8476; Chaos holds heritage_chaos_worship and
+# heritage_horned_rat_faith (Skaven), board item #8478. Board item #3405 (epic #3404).
 
 heritage_old_world_pantheon = { type = heritage  trait_group = heritage_group_old_world_pantheon }
 heritage_ancestor_cult = { type = heritage  trait_group = heritage_group_ancestor_gods }
@@ -21,3 +22,6 @@ heritage_cytharai = { type = heritage  trait_group = heritage_group_elven_gods }
 
 # The Old Ones (Lizardmen). Board item #8477.
 heritage_great_plan = { type = heritage  trait_group = heritage_group_old_ones }
+
+# Board item #8478. A rival Ruinous Power: its own trait in the Chaos group.
+heritage_horned_rat_faith = { type = heritage  trait_group = heritage_group_chaos }

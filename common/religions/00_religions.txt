@@ -212,3 +212,14 @@ the_old_ones = {
 	color = { 0.10 0.60 0.55 }
 	taboos = { }
 }
+
+################ The Horned Rat (Skaven) — board item #8478 ################
+# Own trait in the Chaos group, not heritage_chaos_worship: a rival Ruinous Power, worshipped alone by the
+# Skaven, who are hostile to the other Chaos powers and their followers.
+
+the_horned_rat = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_horned_rat_faith
+	color = { 0.62 0.90 0.08 }
+	taboos = { }
+}

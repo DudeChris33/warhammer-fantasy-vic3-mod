@@ -230,3 +230,13 @@ state_the_old_ones_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- The Horned Rat (Skaven), board item #8478 ----
+
+state_the_horned_rat_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

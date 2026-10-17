@@ -284,3 +284,15 @@ the_old_ones_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_the_old_ones_standard_of_living_add = 1
 }
+
+# ---- The Horned Rat (Skaven), board item #8478 ----
+
+the_horned_rat_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_the_horned_rat_standard_of_living_add = 1
+}
+
+the_horned_rat_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_the_horned_rat_standard_of_living_add = 1
+}
