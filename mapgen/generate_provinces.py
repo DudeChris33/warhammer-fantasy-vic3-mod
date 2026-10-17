@@ -519,8 +519,14 @@ def main(argv: list[str] | None = None) -> int:
             reg_ph[reg_of[1:]] = is_placeholder[1:n_land + 1]
             mixed = [g for g in groups if len({bool(reg_ph[i]) for i in g}) > 1]
             if mixed:
-                raise SystemExit(f"{STATE_MERGES_SOURCE}: {len(mixed)} prune line(s) join in-scope land "
-                                 f"to out-of-scope land (old region ids {mixed[:4]})")
+                # Chris's call (2026-10-16): a merge across the scope line is
+                # deliberate, so the whole merged state goes out of scope.
+                mixed_regs = np.zeros(n_reg + 1, dtype=bool)
+                for g in mixed:
+                    mixed_regs[list(g)] = True
+                is_placeholder[1:n_land + 1] |= mixed_regs[reg_of[1:n_land + 1]]
+                log(f"state merges: {len(mixed)} merge(s) join in-scope land to out-of-scope land; "
+                    f"both sides made out-of-scope (old region ids {mixed[:4]})", t0)
             # The merged state keeps the hub rows of its largest member only: a state
             # has one hub of each kind, and two members each brought their own set.
             primary = {i: max(g, key=lambda j: (int(old_areas[j]), -j)) for g in groups for i in g}
