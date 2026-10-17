@@ -197,16 +197,56 @@ cult_of_nagash_standard_of_living_modifier_negative = {
 	state_cult_of_nagash_standard_of_living_add = 1
 }
 
-# ---- Elven gods (Asrai), board item #6379 ----
+# ---- Elven gods, board item #8475 ----
 
-isha_and_kurnous_standard_of_living_modifier_positive = {
+cult_of_asuryan_standard_of_living_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	state_isha_and_kurnous_standard_of_living_add = 1
+	state_cult_of_asuryan_standard_of_living_add = 1
 }
 
-isha_and_kurnous_standard_of_living_modifier_negative = {
+cult_of_asuryan_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	state_isha_and_kurnous_standard_of_living_add = 1
+	state_cult_of_asuryan_standard_of_living_add = 1
+}
+
+cult_of_isha_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_isha_standard_of_living_add = 1
+}
+
+cult_of_isha_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_isha_standard_of_living_add = 1
+}
+
+cult_of_vaul_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_vaul_standard_of_living_add = 1
+}
+
+cult_of_vaul_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_vaul_standard_of_living_add = 1
+}
+
+cult_of_hoeth_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_hoeth_standard_of_living_add = 1
+}
+
+cult_of_hoeth_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_hoeth_standard_of_living_add = 1
+}
+
+cult_of_kurnous_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_kurnous_standard_of_living_add = 1
+}
+
+cult_of_kurnous_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_kurnous_standard_of_living_add = 1
 }
 
 # ---- The Great Maw (ogres), board item #6379 ----

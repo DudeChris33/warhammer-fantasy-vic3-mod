@@ -10,6 +10,6 @@ heritage_greenskin_faith = { type = heritage  trait_group = heritage_group_green
 heritage_mortuary_rites = { type = heritage  trait_group = heritage_group_mortuary_cult }
 heritage_nagashite = { type = heritage  trait_group = heritage_group_undeath }
 
-# Board item #6379. heritage_elven_pantheon is shaped so a later Asur cult can share it.
+# Board items #6379, #8475. heritage_elven_pantheon: the five elven cults (Asuryan, Isha, Vaul, Hoeth, Kurnous).
 heritage_elven_pantheon = { type = heritage  trait_group = heritage_group_elven_gods }
 heritage_great_maw_faith = { type = heritage  trait_group = heritage_group_great_maw }

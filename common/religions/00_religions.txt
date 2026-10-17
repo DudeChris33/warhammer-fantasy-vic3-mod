@@ -1,4 +1,4 @@
-﻿# The 20 Old World religions. Each carries:
+﻿# Religions. Each carries:
 #   icon    — a VANILLA religion_icons .dds used as a PLACEHOLDER (custom art is out of scope, epic #3404).
 #             Every filename below is CONFIRMED present in vanilla gfx/interface/icons/religion_icons/
 #             (board item #3541 fixed four that were not: oriental_orthodox -> coptic, confucian ->
@@ -147,12 +147,42 @@ cult_of_nagash = {
 	taboos = { }
 }
 
-################ Elven gods (Asrai) — board item #6379 ################
+################ Elven gods — all five share heritage_elven_pantheon (Asrai and Asur) — board item #8475 ################
+# Replaces the Asrai's joint Isha-and-Kurnous faith (#6379). Kingdom ties, not wired: Asuryan (Eataine), Isha (Avelorn),
+# Vaul (Caledor), Hoeth (Saphery); Kurnous is the hunters' god. Wood Elves default to Isha.
 
-isha_and_kurnous = {
+cult_of_asuryan = {
+	icon = "gfx/interface/icons/religion_icons/theravada.dds"
+	heritage = heritage_elven_pantheon
+	color = { 0.96 0.92 0.78 }
+	taboos = { }
+}
+
+cult_of_isha = {
 	icon = "gfx/interface/icons/religion_icons/animist.dds"
 	heritage = heritage_elven_pantheon
 	color = { 0.60 0.82 0.40 }
+	taboos = { }
+}
+
+cult_of_vaul = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_elven_pantheon
+	color = { 0.75 0.35 0.12 }
+	taboos = { }
+}
+
+cult_of_hoeth = {
+	icon = "gfx/interface/icons/religion_icons/atheist.dds"
+	heritage = heritage_elven_pantheon
+	color = { 0.78 0.84 0.95 }
+	taboos = { }
+}
+
+cult_of_kurnous = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_elven_pantheon
+	color = { 0.52 0.40 0.16 }
 	taboos = { }
 }
 
