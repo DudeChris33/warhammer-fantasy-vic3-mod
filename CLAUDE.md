@@ -50,6 +50,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
   - `/maestro-vibe <description>` — small change with build discipline, no board ceremony
   - `/maestro-release-note` — draft the next release note from the actual diffs
   - `/sites-verify <url>` — look at a deployed maestro site (real pixels)
+  - `/map-regen` — full map regen after Chris re-exports `full.ora`: manifest, provinces through adjacencies, offline gate, state-level renders, commit/deploy/`error.log` triage, with the stop-and-fix playbook from the 2026-10-15 run
   - `/review-panel <target>` — convene the five-expert review panel on a plan, a diff, or a rendered artifact
   - `/project-memory` — show memory state
 - `.claude/maestro.json` holds `workspace`, `board` and `project`; the maestro skills prompt to create it if missing.
