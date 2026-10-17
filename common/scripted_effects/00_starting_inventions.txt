@@ -20,6 +20,7 @@
 	add_technology_researched = army_reserves
 	add_technology_researched = gunsmithing
 	add_technology_researched = artillery
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
@@ -39,36 +40,55 @@ effect_starting_technology_brettonia_tech = {
 
 	# Production
 	add_technology_researched = manufacturies
+	add_technology_researched = cotton_gin
 	add_technology_researched = distillation
 	add_technology_researched = enclosure
+	add_technology_researched = lathe
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
 
 	# Military
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_kislev_tech = {
 	# Kislev baseline: frontier levies and handgunners. Ports and the capital's learning are per-country.
 
 	# Production
-	add_technology_researched = enclosure
 	add_technology_researched = manufacturies
+	add_technology_researched = distillation
+	add_technology_researched = enclosure
 	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = steelworking
 
 	# Military
 	add_technology_researched = standing_army
 	add_technology_researched = gunsmithing
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_southern_tech = {
@@ -92,6 +112,7 @@ effect_starting_technology_southern_tech = {
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
 	add_technology_researched = line_infantry
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
@@ -103,6 +124,7 @@ effect_starting_technology_southern_tech = {
 	add_technology_researched = currency_standards
 	add_technology_researched = international_relations
 	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_cathay_tech = {
@@ -155,9 +177,11 @@ effect_starting_technology_nippon_tech = {
 	add_technology_researched = cotton_gin
 	add_technology_researched = distillation
 	add_technology_researched = enclosure
-	add_technology_researched = sericulture
 	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = sericulture
 	add_technology_researched = steelworking
+	add_technology_researched = intensive_agriculture
 
 	# Military
 	add_technology_researched = standing_army
@@ -170,6 +194,10 @@ effect_starting_technology_nippon_tech = {
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 	add_technology_researched = rationalism
 }
 
@@ -182,9 +210,11 @@ effect_starting_technology_ind_tech = {
 	add_technology_researched = distillation
 	add_technology_researched = enclosure
 	add_technology_researched = lathe
-	add_technology_researched = sericulture
 	add_technology_researched = shaft_mining
+	add_technology_researched = prospecting
+	add_technology_researched = sericulture
 	add_technology_researched = steelworking
+	add_technology_researched = intensive_agriculture
 
 	# Military
 	add_technology_researched = navigation
@@ -203,6 +233,8 @@ effect_starting_technology_ind_tech = {
 	add_technology_researched = centralization
 	add_technology_researched = international_trade
 	add_technology_researched = currency_standards
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 	add_technology_researched = medical_degrees
 }
 
@@ -216,6 +248,7 @@ effect_starting_technology_khuresh_tech = {
 	add_technology_researched = enclosure
 	add_technology_researched = sericulture
 	add_technology_researched = shaft_mining
+	add_technology_researched = intensive_agriculture
 
 	# Military
 	add_technology_researched = navigation
@@ -228,7 +261,11 @@ effect_starting_technology_khuresh_tech = {
 	# Society
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
 	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_vampire_tech = {
@@ -241,12 +278,14 @@ effect_starting_technology_vampire_tech = {
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
 	add_technology_researched = academia
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
 }
 
 effect_starting_technology_tomb_kings_tech = {
@@ -260,14 +299,19 @@ effect_starting_technology_tomb_kings_tech = {
 
 	# Military
 	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
 	add_technology_researched = academia
-	add_technology_researched = medical_degrees
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = medical_degrees
 	add_technology_researched = urban_planning
 }
 
@@ -326,6 +370,7 @@ effect_starting_technology_dark_dwarf_tech = {
 	add_technology_researched = army_reserves
 	add_technology_researched = gunsmithing
 	add_technology_researched = artillery
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
@@ -333,6 +378,8 @@ effect_starting_technology_dark_dwarf_tech = {
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
 }
@@ -355,6 +402,7 @@ effect_starting_technology_high_elf_tech = {
 	add_technology_researched = military_drill
 	add_technology_researched = line_infantry
 	add_technology_researched = army_reserves
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
@@ -365,6 +413,7 @@ effect_starting_technology_high_elf_tech = {
 	add_technology_researched = international_trade
 	add_technology_researched = currency_standards
 	add_technology_researched = urban_planning
+	add_technology_researched = law_enforcement
 }
 
 effect_starting_technology_dark_elf_tech = {
@@ -385,6 +434,7 @@ effect_starting_technology_dark_elf_tech = {
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
 	add_technology_researched = line_infantry
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
@@ -392,8 +442,9 @@ effect_starting_technology_dark_elf_tech = {
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = centralization
-	add_technology_researched = empiricism
 	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+	add_technology_researched = empiricism
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
 }
@@ -424,13 +475,15 @@ effect_starting_technology_lizardmen_tech = {
 	add_technology_researched = standing_army
 	add_technology_researched = mandatory_service
 	add_technology_researched = military_drill
+	add_technology_researched = navigation
 
 	# Society
 	add_technology_researched = rationalism
 	add_technology_researched = academia
-	add_technology_researched = empiricism
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = empiricism
 	add_technology_researched = urban_planning
 }
 
@@ -489,6 +542,7 @@ effect_starting_technology_skaven_tech = {
 	add_technology_researched = academia
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
 }
