@@ -583,7 +583,16 @@
    "archetype": "dwarf_hold_ruined"
   },
   "KZF": {
-   "archetype": "dwarf_hold"
+   "archetype": "dwarf_hold",
+   "set": {
+    "workforce_share": 0.35
+   },
+   "justify": {
+    "workforce_share": {
+     "source": "derived: 2026-10-17 map regen",
+     "why": "STATE_CROOKED_CORRIDOR merged states, so its auto farms fill the whole job budget and the hold's own jobs push it past the 40% cap."
+    }
+   }
   },
   "LAH": {
    "archetype": "nehekharan_city"

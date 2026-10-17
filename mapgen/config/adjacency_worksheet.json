@@ -302,6 +302,21 @@
     },
     {
       "a": [
+        3695,
+        2595
+      ],
+      "b": [
+        3713,
+        2577
+      ],
+      "type": "canal_isles_of_doom",
+      "comment": "Isles of Doom",
+      "strait_type": "natural",
+      "land_a_color": "xB32998",
+      "land_b_color": "xD8832D"
+    },
+    {
+      "a": [
         4322,
         783
       ],
@@ -371,6 +386,18 @@
       ],
       "type": "canal_altdorf_t",
       "comment": "Altdorf"
+    },
+    {
+      "a": [
+        4066,
+        932
+      ],
+      "b": [
+        4042,
+        907
+      ],
+      "type": "sea",
+      "comment": "North Grey Mountains to Axe Bite Pass"
     },
     {
       "a": [
@@ -605,6 +632,49 @@
     },
     {
       "a": [
+        5159,
+        1536
+      ],
+      "b": [
+        5134,
+        1534
+      ],
+      "type": "canal_dragon_isles_w",
+      "comment": "Dragon Isles",
+      "strait_type": "natural",
+      "land_a_color": "xB2E3CB",
+      "land_b_color": "xE36953"
+    },
+    {
+      "a": [
+        5186,
+        1570
+      ],
+      "b": [
+        5203,
+        1588
+      ],
+      "type": "canal_dragon_isles_se",
+      "comment": "Dragon Isles",
+      "strait_type": "natural",
+      "land_a_color": "x8713DF",
+      "land_b_color": "xE36953"
+    },
+    {
+      "a": [
+        5195,
+        1460
+      ],
+      "b": [
+        5199,
+        1423
+      ],
+      "type": "canal_dragon_isles_n",
+      "comment": "Dragon Isles",
+      "strait_type": "natural"
+    },
+    {
+      "a": [
         2807,
         1272
       ],
@@ -695,18 +765,6 @@
       "b": [
         2781,
         1030
-      ],
-      "type": "sea",
-      "comment": "Ulthuan"
-    },
-    {
-      "a": [
-        3003,
-        1324
-      ],
-      "b": [
-        3023,
-        1331
       ],
       "type": "sea",
       "comment": "Ulthuan"
@@ -845,6 +903,18 @@
     },
     {
       "a": [
+        3938,
+        820
+      ],
+      "b": [
+        3906,
+        796
+      ],
+      "type": "sea",
+      "comment": "Crooked Corridor to Pale Sisters"
+    },
+    {
+      "a": [
         2981,
         1574
       ],
@@ -936,8 +1006,11 @@
         5112,
         1450
       ],
-      "type": "canal_dragon_isles",
-      "comment": "Dragon Isles"
+      "type": "canal_dragon_isles_nw",
+      "comment": "Dragon Isles",
+      "strait_type": "natural",
+      "land_a_color": "xEBF4AB",
+      "land_b_color": "xD086FA"
     },
     {
       "a": [
@@ -1034,6 +1107,21 @@
       ],
       "type": "sea",
       "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        5258,
+        2478
+      ],
+      "b": [
+        5308,
+        2493
+      ],
+      "type": "canal_lanka_s",
+      "comment": "Sun Island Southern Coast",
+      "strait_type": "natural",
+      "land_a_color": "x6DE981",
+      "land_b_color": "xACCA18"
     },
     {
       "a": [
@@ -1154,6 +1242,18 @@
       ],
       "type": "sea",
       "comment": "Southlands"
+    },
+    {
+      "a": [
+        3003,
+        1324
+      ],
+      "b": [
+        3023,
+        1331
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -1297,7 +1397,7 @@
       ],
       "b": [
         4161,
-        1084
+        1081
       ],
       "type": "canal_echoes_r",
       "comment": "River of Echoes",
@@ -1376,18 +1476,6 @@
       ],
       "type": "sea",
       "comment": "Ulthuan"
-    },
-    {
-      "a": [
-        5172,
-        1508
-      ],
-      "b": [
-        5196,
-        1522
-      ],
-      "type": "sea",
-      "comment": "Dragon Isles"
     },
     {
       "a": [
@@ -1715,18 +1803,6 @@
     },
     {
       "a": [
-        5289,
-        2469
-      ],
-      "b": [
-        5275,
-        2504
-      ],
-      "type": "sea",
-      "comment": "Sun Island Southern Coast"
-    },
-    {
-      "a": [
         5418,
         2373
       ],
@@ -1736,6 +1812,30 @@
       ],
       "type": "sea",
       "comment": "Southlands"
+    },
+    {
+      "a": [
+        5304,
+        2346
+      ],
+      "b": [
+        5264,
+        2330
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        5285,
+        2408
+      ],
+      "b": [
+        5261,
+        2415
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -1907,12 +2007,12 @@
     },
     {
       "a": [
-        5208,
-        1569
+        5217,
+        1465
       ],
       "b": [
-        5181,
-        1589
+        5214,
+        1447
       ],
       "type": "sea",
       "comment": "Dragon Isles"
@@ -1931,6 +2031,18 @@
       "strait_type": "artificial",
       "land_a_color": "x89D453",
       "land_b_color": "xB150BE"
+    },
+    {
+      "a": [
+        3967,
+        869
+      ],
+      "b": [
+        3999,
+        892
+      ],
+      "type": "sea",
+      "comment": "Crooked Corridor to Axe Bite Pass"
     },
     {
       "a": [
@@ -2102,6 +2214,18 @@
     },
     {
       "a": [
+        4064,
+        665
+      ],
+      "b": [
+        4053,
+        1027
+      ],
+      "type": "sea",
+      "comment": "Laurelorn Forest"
+    },
+    {
+      "a": [
         7857,
         2302
       ],
@@ -2238,8 +2362,8 @@
         1107
       ],
       "b": [
-        4161,
-        1080
+        4160,
+        1078
       ],
       "type": "canal_echoes_t",
       "comment": "River of Echoes",
@@ -2273,30 +2397,6 @@
     },
     {
       "a": [
-        5151,
-        1520
-      ],
-      "b": [
-        5145,
-        1551
-      ],
-      "type": "sea",
-      "comment": "Dragon Isles"
-    },
-    {
-      "a": [
-        3716,
-        2598
-      ],
-      "b": [
-        3686,
-        2569
-      ],
-      "type": "sea",
-      "comment": "Isles of Doom"
-    },
-    {
-      "a": [
         4007,
         1310
       ],
@@ -2318,18 +2418,6 @@
       ],
       "type": "sea",
       "comment": "Ulthuan"
-    },
-    {
-      "a": [
-        4048,
-        700
-      ],
-      "b": [
-        4053,
-        1027
-      ],
-      "type": "sea",
-      "comment": "Laurelorn Forest"
     },
     {
       "a": [
