@@ -1,0 +1,546 @@
+Per-country starting techs ON TOP OF the preset baseline in common/scripted_effects/00_starting_inventions.txt.
+Lines are paste-ready for common/history/countries/ (prerequisites already included, baseline already subtracted).
+Tags are the loc/definition tags; skaven clans are role names since clan tags are placeholders. Everything is a proposal - strike what you disagree with.
+Tags not listed get baseline only.
+
+==== empire preset (effect_starting_technology_empire_tech) ====
+
+## REI - Reikland (Altdorf)
+# Production
+add_technology_researched = mechanical_tools
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = napoleonic_warfare
+add_technology_researched = paddle_steamer
+
+# Society
+add_technology_researched = banking
+add_technology_researched = empiricism
+add_technology_researched = medical_degrees
+add_technology_researched = stock_exchange
+
+## WIS - Wissenland (Nuln, Gunnery School, Steam Tank)
+# Production
+add_technology_researched = atmospheric_engine
+add_technology_researched = mechanical_tools
+
+# Military
+add_technology_researched = napoleonic_warfare
+add_technology_researched = percussion_cap
+add_technology_researched = rifling
+add_technology_researched = shell_gun
+
+# Society
+add_technology_researched = empiricism
+
+## MAR - Marienburg (Wasteland, merchant republic)
+# Production
+add_technology_researched = canneries
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+add_technology_researched = paddle_steamer
+
+# Society
+add_technology_researched = banking
+add_technology_researched = colonization
+add_technology_researched = stock_exchange
+add_technology_researched = corporate_charters
+add_technology_researched = joint_stock_companies
+
+## NLD - Nordland (Salzenmund, Imperial coast)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+
+## TAL - Talabecland (Talabheim, walled city)
+# Production
+
+# Military
+add_technology_researched = napoleonic_warfare
+add_technology_researched = field_works
+
+# Society
+add_technology_researched = empiricism
+
+## MID - Middenland (Middenheim, Ulric)
+# Production
+
+# Military
+add_technology_researched = napoleonic_warfare
+
+# Society
+
+## CRB - Carroburg (river trade)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = paddle_steamer
+
+# Society
+add_technology_researched = banking
+
+## MOO - The Moot (halflings)
+# Production
+add_technology_researched = canneries
+
+# Military
+
+# Society
+
+==== brettonia preset (effect_starting_technology_brettonia_tech) ====
+
+## COU - Couronne (Couronne, royal court)
+# Production
+
+# Military
+
+# Society
+add_technology_researched = rationalism
+add_technology_researched = academia
+add_technology_researched = banking
+add_technology_researched = medical_degrees
+
+## QUE - Quenelles (Quenelles, university)
+# Production
+
+# Military
+
+# Society
+add_technology_researched = rationalism
+add_technology_researched = academia
+add_technology_researched = medical_degrees
+
+## BOR - Bordeleaux (port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+
+## LAN - L'Anguille (port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+## BRI - Brionne (port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+## AQU - Aquitaine (coast)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+==== kislev preset (effect_starting_technology_kislev_tech) ====
+
+## ERE - Erengrad (port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+
+## KIS - Kislev (capital)
+# Production
+
+# Military
+
+# Society
+add_technology_researched = rationalism
+add_technology_researched = academia
+add_technology_researched = banking
+
+==== southern preset (effect_starting_technology_southern_tech) ====
+
+## MIR - Miragliano (gunnery, Leonardo)
+# Production
+add_technology_researched = crystal_glass
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = artillery
+add_technology_researched = drydocks
+add_technology_researched = percussion_cap
+add_technology_researched = shell_gun
+
+# Society
+add_technology_researched = banking
+
+## LUC - Luccini (banking, glass, trade)
+# Production
+add_technology_researched = crystal_glass
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+add_technology_researched = banking
+add_technology_researched = stock_exchange
+add_technology_researched = corporate_charters
+
+## REM - Remas (port, Remas university)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+add_technology_researched = banking
+add_technology_researched = medical_degrees
+
+## PAV - Pavona (condottieri)
+# Production
+
+# Military
+add_technology_researched = artillery
+
+# Society
+
+## TRA - Trantio (port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+## SRT - Sartosa (pirate port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+add_technology_researched = paddle_steamer
+
+# Society
+
+## BIL - Bilbali (Estalian port, colonies)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+add_technology_researched = colonization
+
+## MAG - Magritta (Estalian port, colonies)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+add_technology_researched = colonization
+
+## ESS - Esselhafen (Empire border port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+==== cathay preset (effect_starting_technology_cathay_tech) ====
+
+## CTH - Grand Cathay (capital)
+# Production
+
+# Military
+
+# Society
+
+## DGF - The Grand Dragon Fleet
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+add_technology_researched = paddle_steamer
+
+# Society
+
+## GBS - The Great Bastion
+# Production
+
+# Military
+add_technology_researched = napoleonic_warfare
+add_technology_researched = field_works
+
+# Society
+
+## FUC - Eastern Provinces (Fu-Chow, coast)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+
+## FUH - Southern Provinces (Fu-Hung, coast)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+
+==== dwarf preset (effect_starting_technology_dwarf_tech) ====
+
+## ZHU - Zhufbar (Engineers Guild)
+# Production
+add_technology_researched = atmospheric_engine
+add_technology_researched = bessemer_process
+add_technology_researched = canneries
+add_technology_researched = intensive_agriculture
+add_technology_researched = mechanical_tools
+add_technology_researched = mechanized_workshops
+add_technology_researched = nitroglycerin
+add_technology_researched = railways
+add_technology_researched = watertube_boiler
+
+# Military
+add_technology_researched = napoleonic_warfare
+add_technology_researched = percussion_cap
+add_technology_researched = rifling
+add_technology_researched = shell_gun
+
+# Society
+add_technology_researched = empiricism
+
+## KAK - Karaz-a-Karak (High King, Underway hub)
+# Production
+add_technology_researched = atmospheric_engine
+add_technology_researched = crystal_glass
+add_technology_researched = mechanical_tools
+add_technology_researched = railways
+
+# Military
+add_technology_researched = napoleonic_warfare
+add_technology_researched = field_works
+add_technology_researched = percussion_cap
+add_technology_researched = rifling
+
+# Society
+add_technology_researched = banking
+
+## BVR - Barak Varr (shipyards)
+# Production
+add_technology_researched = atmospheric_engine
+add_technology_researched = mechanical_tools
+
+# Military
+add_technology_researched = navigation
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+add_technology_researched = paddle_steamer
+add_technology_researched = hydraulic_cranes
+add_technology_researched = screw_frigate
+add_technology_researched = shell_gun
+
+# Society
+
+## KEP - Karak Eight Peaks (Underway, mines)
+# Production
+add_technology_researched = atmospheric_engine
+add_technology_researched = intensive_agriculture
+add_technology_researched = mechanical_tools
+add_technology_researched = nitroglycerin
+add_technology_researched = railways
+
+# Military
+
+# Society
+
+## KAD - Karak Kadrin (Slayer Keep)
+# Production
+
+# Military
+add_technology_researched = napoleonic_warfare
+add_technology_researched = field_works
+
+# Society
+
+## AZL - Karak Azul (runesmiths)
+# Production
+add_technology_researched = bessemer_process
+
+# Military
+
+# Society
+
+==== dark_dwarf preset (effect_starting_technology_dark_dwarf_tech) ====
+
+## MZN - Mingol Zharr-Naggrund (Tower of Zharr, Hellforge)
+# Production
+add_technology_researched = atmospheric_engine
+add_technology_researched = bessemer_process
+add_technology_researched = canneries
+add_technology_researched = intensive_agriculture
+add_technology_researched = mechanical_tools
+add_technology_researched = mechanized_workshops
+add_technology_researched = nitroglycerin
+
+# Military
+add_technology_researched = napoleonic_warfare
+add_technology_researched = field_works
+add_technology_researched = logistics
+add_technology_researched = percussion_cap
+add_technology_researched = rifling
+add_technology_researched = shell_gun
+add_technology_researched = breech_loading_artillery
+
+# Society
+add_technology_researched = empiricism
+
+==== high_elf preset (effect_starting_technology_high_elf_tech) ====
+
+## LOT - Eataine (Lothern, fleet)
+# Production
+add_technology_researched = shaft_mining
+add_technology_researched = steelworking
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+add_technology_researched = international_relations
+add_technology_researched = colonization
+
+## SAP - Saphery (Tower of Hoeth, mages)
+# Production
+
+# Military
+
+# Society
+add_technology_researched = empiricism
+add_technology_researched = medical_degrees
+
+## COT - Cothique (naval)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+## YVR - Yvresse (coastal)
+# Production
+
+# Military
+
+# Society
+
+==== dark_elf preset (effect_starting_technology_dark_elf_tech) ====
+
+## CLK - Clar Karond (Black Arks)
+# Production
+
+# Military
+add_technology_researched = admiralty
+add_technology_researched = drydocks
+
+# Society
+
+## KKR - Karond Kar (port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+## NGD - Naggarond (Witch King)
+# Production
+
+# Military
+
+# Society
+add_technology_researched = medical_degrees
+
+==== tomb_kings preset (effect_starting_technology_tomb_kings_tech) ====
+
+## ZND - Zandri (port)
+# Production
+
+# Military
+add_technology_researched = admiralty
+
+# Society
+
+==== skaven preset (effect_starting_technology_skaven_tech) ====
+
+## SKRYRE - Clan Skryre (warpstone engineering)
+# Production
+add_technology_researched = atmospheric_engine
+add_technology_researched = canneries
+add_technology_researched = intensive_agriculture
+add_technology_researched = mechanical_tools
+add_technology_researched = mechanized_workshops
+add_technology_researched = nitroglycerin
+
+# Military
+add_technology_researched = artillery
+add_technology_researched = percussion_cap
+add_technology_researched = rifling
+add_technology_researched = shell_gun
+add_technology_researched = breech_loading_artillery
+add_technology_researched = repeaters
+add_technology_researched = handcranked_machine_gun
+
+# Society
+add_technology_researched = empiricism
+
+## MOULDER - Clan Moulder (beast-breeding)
+# Production
+
+# Military
+
+# Society
+add_technology_researched = medical_degrees
+add_technology_researched = pharmaceuticals
+
+## PESTILENS - Clan Pestilens (plague)
+# Production
+
+# Military
+
+# Society
+add_technology_researched = medical_degrees
+add_technology_researched = pharmaceuticals
+
+## ESHIN - Clan Eshin (assassins)
+# Production
+
+# Military
+
+# Society
+

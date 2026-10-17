@@ -41,9 +41,10 @@ sources/*/*
 !sources/originals/tww3_ie_parchment.jpg
 !sources/oldworld-first/terraqueous_globe_reprojected - full.ora
 
-# maestro skills scratch copies of workspecs
-planning/
-.claude/
+planning/.cache/
+.claude/maestro.json
+.claude/skills/maestro-**/
+.claude/skills/sites-verify/
 
 # Claude renders, previews, QA output (local only)
 scratchpad/
