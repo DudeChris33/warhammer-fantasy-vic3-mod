@@ -1,0 +1,249 @@
+{
+ "_comment": "Hand-authored input for generate_country_history.py: per-tag starting technologies ON TOP OF the culture-group preset in common/scripted_effects/00_starting_inventions.txt (prerequisites included, preset baseline already subtracted). Emitted as add_technology_researched lines after the preset. Tags that own no state at the start date are ignored. Converted 2026-10-17 from planning/starting_tech_per_country.txt (proposal, Chris approved wiring it in); the Skaven clan roles SKRYRE, MOULDER, PESTILENS, ESHIN have no tags yet and were left out (the XS* placeholders get the preset only).",
+ "tags": {
+  "REI": [
+   "mechanical_tools",
+   "admiralty",
+   "napoleonic_warfare",
+   "paddle_steamer",
+   "banking",
+   "empiricism",
+   "medical_degrees",
+   "stock_exchange"
+  ],
+  "WIS": [
+   "atmospheric_engine",
+   "mechanical_tools",
+   "napoleonic_warfare",
+   "percussion_cap",
+   "rifling",
+   "shell_gun",
+   "empiricism"
+  ],
+  "MAR": [
+   "canneries",
+   "admiralty",
+   "drydocks",
+   "paddle_steamer",
+   "banking",
+   "colonization",
+   "stock_exchange",
+   "corporate_charters",
+   "joint_stock_companies"
+  ],
+  "NLD": [
+   "admiralty",
+   "drydocks"
+  ],
+  "TAL": [
+   "napoleonic_warfare",
+   "field_works",
+   "empiricism"
+  ],
+  "MID": [
+   "napoleonic_warfare"
+  ],
+  "CRB": [
+   "admiralty",
+   "paddle_steamer",
+   "banking"
+  ],
+  "MOO": [
+   "canneries"
+  ],
+  "COU": [
+   "rationalism",
+   "academia",
+   "banking",
+   "medical_degrees"
+  ],
+  "QUE": [
+   "rationalism",
+   "academia",
+   "medical_degrees"
+  ],
+  "BOR": [
+   "admiralty",
+   "drydocks"
+  ],
+  "LAN": [
+   "admiralty"
+  ],
+  "BRI": [
+   "admiralty"
+  ],
+  "AQU": [
+   "admiralty"
+  ],
+  "ERE": [
+   "admiralty",
+   "drydocks"
+  ],
+  "KIS": [
+   "rationalism",
+   "academia",
+   "banking"
+  ],
+  "MIR": [
+   "crystal_glass",
+   "admiralty",
+   "artillery",
+   "drydocks",
+   "percussion_cap",
+   "shell_gun",
+   "banking"
+  ],
+  "LUC": [
+   "crystal_glass",
+   "admiralty",
+   "drydocks",
+   "banking",
+   "stock_exchange",
+   "corporate_charters"
+  ],
+  "REM": [
+   "admiralty",
+   "drydocks",
+   "banking",
+   "medical_degrees"
+  ],
+  "PAV": [
+   "artillery"
+  ],
+  "TRA": [
+   "admiralty"
+  ],
+  "SRT": [
+   "admiralty",
+   "drydocks",
+   "paddle_steamer"
+  ],
+  "BIL": [
+   "admiralty",
+   "drydocks",
+   "colonization"
+  ],
+  "MAG": [
+   "admiralty",
+   "drydocks",
+   "colonization"
+  ],
+  "ESS": [
+   "admiralty"
+  ],
+  "DGF": [
+   "admiralty",
+   "drydocks",
+   "paddle_steamer"
+  ],
+  "GBS": [
+   "napoleonic_warfare",
+   "field_works"
+  ],
+  "FUC": [
+   "admiralty",
+   "drydocks"
+  ],
+  "FUH": [
+   "admiralty",
+   "drydocks"
+  ],
+  "ZHU": [
+   "atmospheric_engine",
+   "bessemer_process",
+   "canneries",
+   "intensive_agriculture",
+   "mechanical_tools",
+   "mechanized_workshops",
+   "nitroglycerin",
+   "railways",
+   "watertube_boiler",
+   "napoleonic_warfare",
+   "percussion_cap",
+   "rifling",
+   "shell_gun",
+   "empiricism"
+  ],
+  "KAK": [
+   "atmospheric_engine",
+   "crystal_glass",
+   "mechanical_tools",
+   "railways",
+   "napoleonic_warfare",
+   "field_works",
+   "percussion_cap",
+   "rifling",
+   "banking"
+  ],
+  "BVR": [
+   "atmospheric_engine",
+   "mechanical_tools",
+   "navigation",
+   "admiralty",
+   "drydocks",
+   "paddle_steamer",
+   "hydraulic_cranes",
+   "screw_frigate",
+   "shell_gun"
+  ],
+  "KEP": [
+   "atmospheric_engine",
+   "intensive_agriculture",
+   "mechanical_tools",
+   "nitroglycerin",
+   "railways"
+  ],
+  "KAD": [
+   "napoleonic_warfare",
+   "field_works"
+  ],
+  "AZL": [
+   "bessemer_process"
+  ],
+  "MZN": [
+   "atmospheric_engine",
+   "bessemer_process",
+   "canneries",
+   "intensive_agriculture",
+   "mechanical_tools",
+   "mechanized_workshops",
+   "nitroglycerin",
+   "napoleonic_warfare",
+   "field_works",
+   "logistics",
+   "percussion_cap",
+   "rifling",
+   "shell_gun",
+   "breech_loading_artillery",
+   "empiricism"
+  ],
+  "LOT": [
+   "shaft_mining",
+   "steelworking",
+   "admiralty",
+   "drydocks",
+   "international_relations",
+   "colonization"
+  ],
+  "SAP": [
+   "empiricism",
+   "medical_degrees"
+  ],
+  "COT": [
+   "admiralty"
+  ],
+  "CLK": [
+   "admiralty",
+   "drydocks"
+  ],
+  "KKR": [
+   "admiralty"
+  ],
+  "NGD": [
+   "medical_degrees"
+  ],
+  "ZND": [
+   "admiralty"
+  ]
+ }
+}

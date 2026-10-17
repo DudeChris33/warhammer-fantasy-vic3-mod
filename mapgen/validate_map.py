@@ -582,9 +582,12 @@ def _check_country_history(history_path: Path, ownership_path: Path, country_def
     if not ownership_path.is_file():
         return [f"state ownership not found at {ownership_path} -- run read_state_ownership.py"], []
     doc = json.loads(ownership_path.read_text(encoding="utf-8"))
-    errors, held_back = ch.check(ch.load_history_dir(history_path), doc, ch.load_country_tiers(country_definitions_dir),
+    root = country_definitions_dir.parents[1]
+    errors, held_back = ch.check(ch.load_history_dir(history_path), doc, ch.load_country_cultures(country_definitions_dir),
                                  ch.load_effect_names(scripted_effects_dir),
-                                 ch.load_country_names(country_definitions_dir.parents[1] / "localization"))
+                                 ch.load_country_names(country_definitions_dir.parents[1] / "localization"),
+                                 ch.load_tech_extras(root / "mapgen" / "config" / "starting_tech_extras.json"),
+                                 ch.load_tech_ids(root / "common" / "technology" / "technologies"))
     notes = [f"country history: owner tag(s) with no country definition get no block: {', '.join(held_back)}"]         if held_back else []
     return [f"country history: {e}" for e in errors], notes
 

@@ -5972,21 +5972,21 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
 def _selfcheck_country_history(ownership_doc: dict) -> None:
     """Starting country setup (#6375), on the golden assignment of
     :func:`_selfcheck_state_ownership` (owners REI and MID, plus UNO for the
-    unowned / placeholder states, #6391): tier -> technology effect, byte
-    stability, the CRLF-insensitive compare, held-back undefined tags, an
-    unmapped tier, and the validator refusing hand-broken text.
+    unowned / placeholder states, #6391): first culture -> technology preset,
+    byte stability, the CRLF-insensitive compare, held-back undefined tags, an
+    unmapped culture, and the validator refusing hand-broken text.
     """
     from worldgen import country_history as ch
     from worldgen import state_ownership as so
 
-    tiers = {"REI": "grand_principality", "MID": "city_state", "UNO": "principality"}
-    effects = {"effect_starting_technology_tier_5_tech", "effect_starting_technology_tier_6_tech",
+    tiers = {"REI": ("reiklander",), "MID": ("middenlander", "ungol"), "UNO": ("goblin",)}
+    effects = {"effect_starting_technology_empire_tech", "effect_starting_technology_goblin_tech",
                "effect_starting_politics_traditional"}
     p = ch.plan(ownership_doc, tiers)
-    assert p.blocks == [("MID", ["effect_starting_technology_tier_6_tech", ch.POLITICS_EFFECT]),
-                        ("REI", ["effect_starting_technology_tier_5_tech", ch.POLITICS_EFFECT]),
-                        ("UNO", ["effect_starting_technology_tier_6_tech", ch.POLITICS_EFFECT])] \
-        and not p.held_back, "one block per owner (UNO included), sorted, tier -> technology effect"
+    assert p.blocks == [("MID", ["effect_starting_technology_empire_tech", ch.POLITICS_EFFECT]),
+                        ("REI", ["effect_starting_technology_empire_tech", ch.POLITICS_EFFECT]),
+                        ("UNO", [ch.POLITICS_EFFECT])] \
+        and not p.held_back, "one block per owner (UNO included, no technology), sorted, first culture -> preset"
     # UNO is an owner only while some state or slice is unowned / placeholder
     states = ownership_doc["states"]
     assert ch.owner_tags(ownership_doc) == {"REI", "MID", "UNO"}
@@ -5999,27 +5999,47 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
     assert texts == ch.render(ch.plan(ownership_doc, tiers).blocks, names), "byte-stable"
     assert sorted(texts) == ["mid - middenland the wolf.txt", "rei - reikland.txt", "uno.txt"], "one file per tag, vanilla's layout"
     text = texts["rei - reikland.txt"]
-    assert "\tc:REI ?= {\n\t\teffect_starting_technology_tier_5_tech = yes\n" in text, \
+    assert "\tc:REI ?= {\n\t\teffect_starting_technology_empire_tech = yes\n" in text, \
         "vanilla shape: tabs, c: scope, ?="
     assert "c:MID" not in text, "one block per file"
     crlf = {n: "\ufeff" + t.replace("\n", "\r\n") for n, t in texts.items()}
     errs, held = ch.check(crlf, ownership_doc, tiers, effects, names)
     assert errs == [] and held == [], errs
     assert ch.parse_history_text(crlf["rei - reikland.txt"]) == [p.blocks[1]]
-    assert ch.parse_country_tiers("\ufeffREI = {\n\ttier = kingdom\n}\nXXX = {\n}\n"
-                                  "D00 = {\n\tdynamic_country_definition = yes\n}\n") == {"REI": "kingdom", "XXX": None}
+    assert ch.parse_country_cultures("\ufeffREI = {\n\tcultures = { reiklander middenlander }\n}\nXXX = {\n}\n"
+                                     "D00 = {\n\tdynamic_country_definition = yes\n}\n") \
+        == {"REI": ("reiklander", "middenlander"), "XXX": ()}
 
     # an undefined owner is held back (no block) and reported
-    hp = ch.plan(ownership_doc, {"REI": "kingdom"})
+    hp = ch.plan(ownership_doc, {"REI": ("reiklander",)})
     assert [t for t, _ in hp.blocks] == ["REI"] and hp.held_back == ["MID", "UNO"], hp.held_back
-    # a defined owner whose tier has no technology mapping is an error, never a default
-    for bad in ({"REI": "kingdom", "MID": None}, {"REI": "kingdom", "MID": "duchy"}):
+    # a defined owner whose first culture has no technology preset is an error, never a default
+    for bad in ({"REI": ("reiklander",), "MID": ()}, {"REI": ("reiklander",), "MID": ("duchy",)}):
         try:
             ch.plan(ownership_doc, bad)
         except so.OwnershipError:
             pass
         else:
-            raise AssertionError("plan() must refuse a tier with no starting-technology mapping")
+            raise AssertionError("plan() must refuse a culture with no starting-technology preset")
+    # the per-tag table wins over the culture (placeholder Skaven clans), and a nomad culture means no technology
+    assert ch.tech_effect("XSA", ("goblin",)) == "effect_starting_technology_skaven_tech"
+    assert ch.tech_effect("UNG", ("ungol",)) is None
+
+    # per-country extras follow the preset, in file order, before the politics effect; the validator reads them back
+    # and refuses a technology id that common/technology does not define
+    extras = {"REI": ["mechanical_tools", "banking"], "ZZZ": ["banking"]}
+    xp = ch.plan(ownership_doc, tiers, extras)
+    assert xp.blocks[1] == ("REI", ["effect_starting_technology_empire_tech", "add_technology_researched = mechanical_tools",
+                                    "add_technology_researched = banking", ch.POLITICS_EFFECT]), xp.blocks[1]
+    xtexts = ch.render(xp.blocks, names)
+    assert "\t\tadd_technology_researched = banking\n" in xtexts["rei - reikland.txt"]
+    assert ch.parse_history_text(xtexts["rei - reikland.txt"]) == [xp.blocks[1]]
+    xerrs, _ = ch.check(xtexts, ownership_doc, tiers, effects, names, extras, {"mechanical_tools", "banking"})
+    assert xerrs == [], xerrs
+    xerrs, _ = ch.check(xtexts, ownership_doc, tiers, effects, names, extras, {"banking"})
+    assert any("mechanical_tools names no technology" in e for e in xerrs), xerrs
+    xerrs, _ = ch.check(texts, ownership_doc, tiers, effects, names, extras, {"mechanical_tools", "banking"})
+    assert any("differs from what the generator emits" in e for e in xerrs), "extras missing from the file are stale"
 
     def refused(texts_: dict | None, frag: str, tiers_: dict = tiers, effects_: set = effects) -> None:
         e, _ = ch.check(texts_, ownership_doc, tiers_, effects_, names)
@@ -6033,11 +6053,11 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
     refused({**texts, "mid.txt": texts["rei - reikland.txt"]}, "lives in mid.txt, expected one block per file in rei - reikland.txt")
     refused({**texts, "00_start_setup.txt": texts["mid - middenland the wolf.txt"]}, "appears 2 times")
     refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("c:MID", "c:QQQ")), "no (non-dynamic) common/country_definitions")
-    refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("tier_6_tech", "tier_9_tech")), "not a scripted effect")
+    refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("empire_tech", "nonesuch_tech")), "not a scripted effect")
     refused(texts, "not a scripted effect", effects_=effects - {ch.POLITICS_EFFECT})
-    refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("tier_6_tech", "tier_5_tech")), "differs from what the generator emits")
+    refused(swap("mid - middenland the wolf.txt", lambda t: t.replace("empire_tech", "goblin_tech")), "differs from what the generator emits")
     refused({**texts, "zzz.txt": ch.render_file("ZZZ", [ch.POLITICS_EFFECT])},
-            "has a country history block but owns no state", {**tiers, "ZZZ": "kingdom"})
+            "has a country history block but owns no state", {**tiers, "ZZZ": ("reiklander",)})
 
 
 COUNTRY_HISTORY_DIR = TOOLS_DIR / "fixtures" / "country_history"
@@ -6165,8 +6185,8 @@ def run_check() -> int:
           "dropped or replaced c:UNO) and add_homeland derivation (owner cultures, UNO skip, unknown-culture "
           "refusal) self-check passed.")
     _selfcheck_country_history(ownership_doc)
-    print("country_history: tier -> starting-technology blocks (UNO from the unowned/placeholder tokens, "
-          "held-back tags, unmapped tier, CRLF compare, hand-broken history refusals) self-check passed.")
+    print("country_history: culture -> starting-technology blocks (UNO from the unowned/placeholder tokens, "
+          "held-back tags, unmapped culture, CRLF compare, hand-broken history refusals) self-check passed.")
     _selfcheck_pop_history()
     print("pop_history: pops/population emission (split state, skipped owner + culture, religion override, "
           "exact-sum rounding, dropped small pop, UNO's fixed unclaimed pop, created pair without pops, "
