@@ -280,3 +280,13 @@ state_spirits_of_nippon_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Gods of Araby (Araby; Southlands colonists), board item #8484 ----
+
+state_gods_of_araby_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

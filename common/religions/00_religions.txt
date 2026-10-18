@@ -265,3 +265,15 @@ spirits_of_nippon = {
 	color = { 0.90 0.20 0.45 }
 	taboos = { }
 }
+
+################ Gods of Araby (Araby; Southlands colonists) — board item #8484 ################
+# Own trait and group: the living Arabyans are not the Mortuary Cult (that is the Tomb Kings' faith,
+# heritage_mortuary_rites), whom they fear and fight. Canon names no reliable Arabyan gods, so the
+# faith takes a descriptive name. Southlander humans, if authored, use this faith too.
+
+gods_of_araby = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_arabyan_faith
+	color = { 0.05 0.45 0.70 }
+	taboos = { }
+}

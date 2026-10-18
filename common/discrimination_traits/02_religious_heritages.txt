@@ -37,3 +37,6 @@ heritage_serpent_cult = { type = heritage  trait_group = heritage_group_serpent_
 
 # Spirits of Nippon (Nippon). Board item #8483.
 heritage_spirit_veneration = { type = heritage  trait_group = heritage_group_nippon_spirits }
+
+# Gods of Araby (Araby; Southlands colonists). Board item #8484.
+heritage_arabyan_faith = { type = heritage  trait_group = heritage_group_arabyan_gods }

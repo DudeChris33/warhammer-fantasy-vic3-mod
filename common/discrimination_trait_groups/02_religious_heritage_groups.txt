@@ -27,3 +27,6 @@ heritage_group_serpent_queens = { type = heritage }
 
 # Spirits of Nippon (Nippon). Board item #8483.
 heritage_group_nippon_spirits = { type = heritage }
+
+# Gods of Araby (Araby; Southlands colonists). Board item #8484.
+heritage_group_arabyan_gods = { type = heritage }
