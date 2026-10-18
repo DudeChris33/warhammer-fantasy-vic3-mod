@@ -234,3 +234,13 @@ celestial_dragons = {
 	color = { 0.85 0.15 0.10 }
 	taboos = { }
 }
+
+################ Gods of Ind — board item #8481 ################
+# Canon gives Ind many gods and great temples and names none; one faith covers them all.
+
+gods_of_ind = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_thousand_gods
+	color = { 0.93 0.55 0.08 }
+	taboos = { }
+}

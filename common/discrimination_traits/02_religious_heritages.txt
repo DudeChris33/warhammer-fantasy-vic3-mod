@@ -28,3 +28,6 @@ heritage_horned_rat_faith = { type = heritage  trait_group = heritage_group_chao
 
 # Celestial Dragons (Cathay). Board item #8480.
 heritage_dragon_faith = { type = heritage  trait_group = heritage_group_celestial }
+
+# Gods of Ind. Board item #8481.
+heritage_thousand_gods = { type = heritage  trait_group = heritage_group_gods_of_ind }

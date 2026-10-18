@@ -308,3 +308,15 @@ celestial_dragons_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_celestial_dragons_standard_of_living_add = 1
 }
+
+# ---- Gods of Ind, board item #8481 ----
+
+gods_of_ind_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_gods_of_ind_standard_of_living_add = 1
+}
+
+gods_of_ind_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_gods_of_ind_standard_of_living_add = 1
+}
