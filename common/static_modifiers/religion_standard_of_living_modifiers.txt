@@ -296,3 +296,15 @@ the_horned_rat_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_the_horned_rat_standard_of_living_add = 1
 }
+
+# ---- Celestial Dragons (Cathay), board item #8480 ----
+
+celestial_dragons_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_celestial_dragons_standard_of_living_add = 1
+}
+
+celestial_dragons_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_celestial_dragons_standard_of_living_add = 1
+}

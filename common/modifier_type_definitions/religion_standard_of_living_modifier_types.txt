@@ -240,3 +240,13 @@ state_the_horned_rat_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Celestial Dragons (Cathay), board item #8480 ----
+
+state_celestial_dragons_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

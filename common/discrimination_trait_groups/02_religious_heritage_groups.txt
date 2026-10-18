@@ -15,3 +15,6 @@ heritage_group_great_maw = { type = heritage }
 
 # The Old Ones (Lizardmen). Board item #8477.
 heritage_group_old_ones = { type = heritage }
+
+# Celestial Dragons (Cathay). Board item #8480.
+heritage_group_celestial = { type = heritage }

@@ -25,3 +25,6 @@ heritage_great_plan = { type = heritage  trait_group = heritage_group_old_ones }
 
 # Board item #8478. A rival Ruinous Power: its own trait in the Chaos group.
 heritage_horned_rat_faith = { type = heritage  trait_group = heritage_group_chaos }
+
+# Celestial Dragons (Cathay). Board item #8480.
+heritage_dragon_faith = { type = heritage  trait_group = heritage_group_celestial }

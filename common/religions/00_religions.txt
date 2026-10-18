@@ -223,3 +223,14 @@ the_horned_rat = {
 	color = { 0.62 0.90 0.08 }
 	taboos = { }
 }
+
+################ Celestial Dragons (Cathay) — board item #8480 ################
+# The Dragon Emperor, the Moon Empress and their dragon children, revered with the celestial ancestors.
+# Own group: no faith kinship with the dwarfs' ancestor gods or anyone else.
+
+celestial_dragons = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_dragon_faith
+	color = { 0.85 0.15 0.10 }
+	taboos = { }
+}
