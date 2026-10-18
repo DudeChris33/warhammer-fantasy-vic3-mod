@@ -1,0 +1,74 @@
+﻿# Old World cultures — the Skaven, the ratmen of the Under-Empire. Schema mirrors
+# common/cultures/ogre.txt and common/cultures/greenskin.txt, the verified non-human reference entries for
+# this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. An acid warpstone green, a darker kin of
+#                the_horned_rat's icon colour. NOT taken from a legend entry: the ten XS* legend colours are
+#                dull olives picked to sit among goblin tags and no one of them is "the" Skaven owner. It is
+#                set apart from the crowded greens (goblin, halfling, wood_elf) by saturation.
+#   religion   — the_horned_rat, from common/religions/00_religions.txt (board item #8478).
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+# graphics/ethnicities — vanilla ships NO rat portrait set. The values used below are deliberate
+#                STAND-INS chosen only so the culture renders at all, pending custom art, and carry no lore
+#                claim whatsoever about what Skaven look like.
+# FEMALE NAME LISTS: canon gives female Skaven no names (they are breeders), but the engine generates
+#                female characters, so female_common_first_names is the male list minus the canon named
+#                characters (no female character gets a hero's name). An engine accommodation, not lore;
+#                it adds no new keys.
+# No regal lists: the Council of Thirteen is seats, not dynasties (orc/ogre precedent).
+# The XS* clan placeholder tags still use goblin; moving them onto this culture is a follow-up item.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_skaven_l_english.yml.
+# Board item #8466 (epic #8462).
+
+################ Skaven — the Under-Empire; the Horned Rat and the Council of Thirteen ################
+# Register: Queekish — squeaks and clicks, short clipped sk-, kr-, gn-, -ik, -ix, -ch syllables.
+# Canon (army books, Total War lords, the Thanquol novels): Queek, Ikit, Thanquol, Skrolk, Throt,
+# Snikch, Tretch, Kritislik, the five Great Clans, Rictus, and Headtaker/Claw/Craventail. Canon from
+# memory, high confidence: Skweel Gnawtooth, Gnawdwell, Lurk Snitchtongue, Nurglitch, Skreech, Clans
+# Skab, Fester, Morbidus, Mordkin and Sleekit. Medium confidence: Ska Bloodtail and Clan Volkn. INVENTED
+# in the same register (for Chris to review): Skritch, Vrisk, Snikrat, Kreek, Rattik, Grisk, Sniktik,
+# Gnawl and the ten common last names after Bloodtail. A Skaven's standing is his clan, so noble last
+# names are of_Clan_<Clan> ("Queek of Clan Mors"); common last names are earned epithets (orc/ogre
+# precedent).
+
+skaven = {
+	color= rgb{ 140 200 0 }
+	religion = the_horned_rat
+	heritage = heritage_skaven
+	language = sphere_queekish
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Queek Ikit Thanquol Skrolk Throt Snikch Tretch Skweel
+		Kritislik Gnawdwell Lurk Nurglitch Skreech Ska Skritch Vrisk
+		Snikrat Kreek Rattik Grisk Sniktik Gnawl
+	}
+
+	female_common_first_names = {
+		Skritch Vrisk Snikrat Kreek Rattik Grisk Sniktik Gnawl
+	}
+
+	noble_last_names = {
+		of_Clan_Mors of_Clan_Pestilens of_Clan_Skryre of_Clan_Eshin of_Clan_Moulder of_Clan_Rictus
+		of_Clan_Skab of_Clan_Fester of_Clan_Morbidus of_Clan_Volkn of_Clan_Mordkin of_Clan_Sleekit
+	}
+
+	common_last_names = {
+		Headtaker Claw Craventail Gnawtooth Snitchtongue Bloodtail Rotfang Blacktail
+		Gnawbone Scabtail Sharpclaw Rustfang Plaguetooth Warpburn Scuttletail Mangefur
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_northern_brown_hair
+	}
+}

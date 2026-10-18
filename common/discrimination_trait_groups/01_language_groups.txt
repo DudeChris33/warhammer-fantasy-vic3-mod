@@ -16,3 +16,6 @@ sphere_group_grumbarth = { type = language }
 
 # Saurian, the Lizardmen tongue. Board item #8465.
 sphere_group_saurian = { type = language }
+
+# Queekish, the Skaven tongue. Board item #8466.
+sphere_group_queekish = { type = language }

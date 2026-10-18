@@ -30,3 +30,6 @@ sphere_druhir = { type = language  trait_group = sphere_group_eltharin }
 
 # Saurian, spoken by Skinks and Saurus (the Slann also speak mind to mind). Board item #8465.
 sphere_saurian = { type = language  trait_group = sphere_group_saurian }
+
+# Queekish, the Skaven tongue. Board item #8466.
+sphere_queekish = { type = language  trait_group = sphere_group_queekish }

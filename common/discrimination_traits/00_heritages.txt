@@ -45,3 +45,6 @@ heritage_druchii = { type = heritage  trait_group = heritage_group_elf }
 
 # Lizardmen — Slann, Saurus, Skinks and Kroxigor are castes of one people. Board item #8465.
 heritage_lizardmen = { type = heritage  trait_group = heritage_group_lizardmen }
+
+# Skaven. Board item #8466.
+heritage_skaven = { type = heritage  trait_group = heritage_group_skaven }

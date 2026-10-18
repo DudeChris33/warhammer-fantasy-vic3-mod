@@ -416,3 +416,15 @@ lizardmen_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_lizardmen_cultural_acceptance_add = 1
 }
+
+# ---- Board item #8466, skaven ----
+
+skaven_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_skaven_cultural_acceptance_add = 1
+}
+
+skaven_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_skaven_cultural_acceptance_add = 1
+}

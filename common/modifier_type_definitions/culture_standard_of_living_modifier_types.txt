@@ -334,3 +334,13 @@ state_lizardmen_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8466, skaven ----
+
+state_skaven_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

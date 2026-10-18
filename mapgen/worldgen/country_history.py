@@ -83,12 +83,13 @@ CULTURE_TECH: dict[str, str | None] = {
     "high_elf": "effect_starting_technology_high_elf_tech",
     "dark_elf": "effect_starting_technology_dark_elf_tech",
     "lizardmen": "effect_starting_technology_lizardmen_tech",
+    "skaven": "effect_starting_technology_skaven_tech",
     "orc": "effect_starting_technology_orc_tech",
     **dict.fromkeys(("goblin", "hobgoblin"), _GOBLIN),
 }
 #: Per-tag exceptions to the culture rule.
 TAG_TECH: dict[str, str | None] = {
-    # No Skaven culture exists yet: the clan placeholders (board #6373) borrow goblin.
+    # skaven exists (#8466) but the XS* clan placeholders (board #6373) still list goblin until the retarget follow-up.
     **dict.fromkeys(("XSA", "XSB", "XSC", "XSD", "XSG", "XSH", "XSI", "XSJ", "XSK", "XSL"),
                     "effect_starting_technology_skaven_tech"),
     "UNO": None,   # Unclaimed Lands: no polity, no technology
