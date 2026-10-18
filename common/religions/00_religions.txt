@@ -244,3 +244,14 @@ gods_of_ind = {
 	color = { 0.93 0.55 0.08 }
 	taboos = { }
 }
+
+################ The Serpent Queens (Khuresh) — board item #8482 ################
+# Canon is thin: the faith of the human Khureshi in the serpent queens who rule the snake-men of their
+# land. Its own trait and group, kin to no other faith (no Chaos tie, no shared eastern group).
+
+the_serpent_queens = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_serpent_cult
+	color = { 0.60 0.20 0.75 }
+	taboos = { }
+}

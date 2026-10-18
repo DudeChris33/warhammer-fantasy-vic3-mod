@@ -31,3 +31,6 @@ heritage_dragon_faith = { type = heritage  trait_group = heritage_group_celestia
 
 # Gods of Ind. Board item #8481.
 heritage_thousand_gods = { type = heritage  trait_group = heritage_group_gods_of_ind }
+
+# The Serpent Queens (Khuresh). Board item #8482.
+heritage_serpent_cult = { type = heritage  trait_group = heritage_group_serpent_queens }

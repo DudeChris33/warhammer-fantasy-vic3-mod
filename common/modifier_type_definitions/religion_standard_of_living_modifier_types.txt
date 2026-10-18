@@ -260,3 +260,13 @@ state_gods_of_ind_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- The Serpent Queens (Khuresh), board item #8482 ----
+
+state_the_serpent_queens_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

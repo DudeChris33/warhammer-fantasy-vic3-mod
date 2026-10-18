@@ -21,3 +21,6 @@ heritage_group_celestial = { type = heritage }
 
 # Gods of Ind. Board item #8481.
 heritage_group_gods_of_ind = { type = heritage }
+
+# The Serpent Queens (Khuresh). Board item #8482.
+heritage_group_serpent_queens = { type = heritage }

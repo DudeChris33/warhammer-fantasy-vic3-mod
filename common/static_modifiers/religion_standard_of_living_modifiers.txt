@@ -320,3 +320,15 @@ gods_of_ind_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_gods_of_ind_standard_of_living_add = 1
 }
+
+# ---- The Serpent Queens (Khuresh), board item #8482 ----
+
+the_serpent_queens_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_the_serpent_queens_standard_of_living_add = 1
+}
+
+the_serpent_queens_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_the_serpent_queens_standard_of_living_add = 1
+}
