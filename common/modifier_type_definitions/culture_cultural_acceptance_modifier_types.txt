@@ -324,3 +324,13 @@ country_dark_elf_cultural_acceptance_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8465, lizardmen ----
+
+country_lizardmen_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

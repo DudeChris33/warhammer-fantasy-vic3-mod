@@ -42,3 +42,6 @@ heritage_asur = { type = heritage  trait_group = heritage_group_elf }
 
 # Elves — the Druchii (dark elves) of Naggaroth. Board item #8464.
 heritage_druchii = { type = heritage  trait_group = heritage_group_elf }
+
+# Lizardmen — Slann, Saurus, Skinks and Kroxigor are castes of one people. Board item #8465.
+heritage_lizardmen = { type = heritage  trait_group = heritage_group_lizardmen }

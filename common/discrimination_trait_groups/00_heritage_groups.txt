@@ -14,3 +14,6 @@ heritage_group_undead = { type = heritage }
 # Board item #6379.
 heritage_group_elf = { type = heritage }
 heritage_group_ogre = { type = heritage }
+
+# Lizardmen — the spawn of the Old Ones (no kin race). Board item #8465.
+heritage_group_lizardmen = { type = heritage }

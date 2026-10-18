@@ -1,1 +1,81 @@
-﻿
+﻿# Old World cultures — the Lizardmen of Lustria: Slann, Saurus, Skinks and Kroxigor, spawned by the Old
+# Ones. Schema mirrors common/cultures/ogre.txt and common/cultures/greenskin.txt, the verified
+# non-human reference entries for this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. Copied from the Itza (ITZ) entry of
+#                mapgen/config/state_ownership_legend.json (still `proposed`): the First City, Lord Kroak's
+#                seat and the capital of the LUS formable. No Lustria state is painted yet, so a "largest
+#                owner" rule cannot be computed. Re-sync this colour if ITZ's changes.
+#   religion   — the_old_ones, from common/religions/00_religions.txt (board item #8477).
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+# CASTES ARE ONE CULTURE: Slann, Saurus, Skinks, Kroxigor and Chameleon Skinks are castes spawned for
+#                roles inside one temple-city society, not peoples. If castes are ever modelled, pop types
+#                are the place, not cultures.
+# graphics/ethnicities — vanilla ships NO reptile portrait or unit set. The values used below are
+#                deliberate STAND-INS chosen only so the culture renders at all, pending custom art, and
+#                carry no lore claim about what Lizardmen look like. decentralised_americas matches their
+#                Mesoamerican register (as hobgoblin's east_asian does in greenskin.txt). Side effects: the
+#                mod disables native clothing, so portraits show Native American faces in generic
+#                clothes; and unit art keys on this graphics value (common/combat_unit_types, the
+#                gfx/map/front_entities files and vanilla's support entities), so Lizardmen infantry,
+#                cavalry and support units get the Native American irregular look.
+# FEMALE NAME LISTS: Lizardmen have no sexes in canon, but the engine generates female characters, so
+#                female_common_first_names is the male list minus the canon named characters (no female
+#                character gets a hero's name). An engine accommodation, not lore; it adds no new keys.
+# No regal lists: Slann rule by age and the Old Ones' plan, not dynasty (ogre/greenskin precedent).
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_lizardmen_l_english.yml.
+# Board item #8465 (epic #8462).
+
+################ Lizardmen — the temple-cities of Lustria; the Old Ones' Great Plan ################
+# Register: Saurian — Mesoamerican, with tl-, x-, tz-, qu- clusters and hard -ok, -ak, -al endings for
+# the Saurus. Canon (army books, Total War lords): Mazdamundi, Kroak, Kroq-Gar, Gor-Rok, Chakax,
+# Tiktaq'to, Tehenhauin, Oxyotl, Nakai, Tetto'eko; Tenehuini and Inxi-Huinzi are canon from memory,
+# medium confidence. INVENTED in the same register (for Chris to review): the twelve Slann/Skink and
+# Saurus names Xaltec to Zhaltok, and every surname. Lizardmen have no surnames in canon: noble last
+# names read as the temple-city whose spawning pool or temple raised the bearer (of_<City>, nehekharan
+# precedent; living cities with a start tag only), and common last names are earned scale-and-crest
+# epithets (ogre precedent). Keys drop apostrophes and turn hyphens into underscores (Kroq_Gar,
+# Tizoqua); the loc value keeps the canon spelling.
+
+lizardmen = {
+	color= rgb{ 0 216 114 }
+	religion = the_old_ones
+	heritage = heritage_lizardmen
+	language = sphere_saurian
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Mazdamundi Kroak Kroq_Gar Gor_Rok Chakax Tiktaqto Tehenhauin Tettoeko
+		Oxyotl Nakai Tenehuini Inxi_Huinzi Xaltec Tlacoatl Itzahuan Huiztec
+		Quexotl Tlazoc Tizoqua Xetlan Grakkor Toqrak Kroxal Zhaltok
+	}
+
+	female_common_first_names = {
+		Xaltec Tlacoatl Itzahuan Huiztec Quexotl Tlazoc Tizoqua Xetlan
+		Grakkor Toqrak Kroxal Zhaltok
+	}
+
+	noble_last_names = {
+		of_Itza of_Hexoatl of_Xlanhuapec of_Tlaxtlan of_Chaqua
+		of_Pahuax of_Xhotl of_Axlotl of_Zlatlan
+	}
+
+	common_last_names = {
+		Sunscale Starmarked Jadeclaw Goldcrest Moonscale Coldblood Stonehide Mistcrest
+		Glyphkeeper Starwatcher Plumecrest Firecrest Swampstrider Jungleborn Serpentmark Obsidianfang
+	}
+
+	graphics = decentralised_americas
+	ethnicities = {
+		1 = native_american
+	}
+}

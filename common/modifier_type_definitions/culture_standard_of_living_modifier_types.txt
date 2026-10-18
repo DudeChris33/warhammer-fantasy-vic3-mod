@@ -324,3 +324,13 @@ state_dark_elf_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8465, lizardmen ----
+
+state_lizardmen_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

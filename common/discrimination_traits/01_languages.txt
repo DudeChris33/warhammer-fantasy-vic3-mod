@@ -27,3 +27,6 @@ sphere_eltharin = { type = language  trait_group = sphere_group_eltharin }
 
 # Druhir, the Druchii dialect of the elven tongue. Board item #8464.
 sphere_druhir = { type = language  trait_group = sphere_group_eltharin }
+
+# Saurian, spoken by Skinks and Saurus (the Slann also speak mind to mind). Board item #8465.
+sphere_saurian = { type = language  trait_group = sphere_group_saurian }

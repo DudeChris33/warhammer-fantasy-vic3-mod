@@ -13,3 +13,6 @@ sphere_group_greenskin = { type = language }
 # Board item #6379.
 sphere_group_eltharin = { type = language }
 sphere_group_grumbarth = { type = language }
+
+# Saurian, the Lizardmen tongue. Board item #8465.
+sphere_group_saurian = { type = language }

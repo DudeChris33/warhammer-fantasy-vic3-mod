@@ -404,3 +404,15 @@ dark_elf_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_dark_elf_add = 1
 }
+
+# ---- Board item #8465, lizardmen ----
+
+lizardmen_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_lizardmen_add = 1
+}
+
+lizardmen_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_lizardmen_add = 1
+}
