@@ -306,6 +306,7 @@ def validate(
     state_ownership_path: Path | None = None,
     country_definitions_dir: Path | None = None,
     cultures_dir: Path | None = None,
+    homelands_path: Path | None = None,
     country_history_path: Path | None = None,
     scripted_effects_dir: Path | None = None,
     buildings_dir: Path | None = None,
@@ -513,7 +514,7 @@ def validate(
             and country_definitions_dir is not None):
         sh_errors, sh_warnings = _check_state_history(
             state_history_dir, state_regions_dir, state_ownership_path, country_definitions_dir,
-            cultures_dir)
+            cultures_dir, homelands_path)
         errors += sh_errors
         if warnings is not None:
             warnings.extend(sh_warnings)
@@ -537,11 +538,13 @@ HELD_BACK_IS_ERROR = True
 
 def _check_state_history(history_dir: Path, state_regions_dir: Path, ownership_path: Path,
                          country_definitions_dir: Path,
-                         cultures_dir: Path | None = None) -> tuple[list[str], list[str]]:
+                         cultures_dir: Path | None = None,
+                         homelands_path: Path | None = None) -> tuple[list[str], list[str]]:
     """``common/history/states/NN_*.txt`` against map_data, state_ownership.json and
     the defined (non-dynamic) country tags -- see ``worldgen.state_history.check``.
     With ``cultures_dir`` the ``add_homeland`` lines are checked against
-    ``common/cultures`` and the owners' ``cultures`` (#6374).
+    ``common/cultures`` and ``homelands_path`` (``state_homelands.json``, #8604); a missing
+    config is an error then.
     Returns ``(errors, warnings)``."""
     import json
 
@@ -552,11 +555,20 @@ def _check_state_history(history_dir: Path, state_regions_dir: Path, ownership_p
     doc = json.loads(ownership_path.read_text(encoding="utf-8"))
     texts = {p.name: p.read_bytes().decode("utf-8") for p in sorted(history_dir.glob("*.txt"))} \
         if history_dir.is_dir() else {}
+    config = None
+    pre: list[str] = []
+    if cultures_dir is not None and homelands_path is not None:
+        if not homelands_path.is_file():
+            pre.append(f"{homelands_path} not found -- run generate_state_history.py --seed-homelands")
+        else:
+            try:
+                config = sh.load_homelands(homelands_path)
+            except sh.OwnershipError as exc:
+                pre.append(str(exc))
     errors, held_back = sh.check(
         texts, doc, sh.load_states_by_file(state_regions_dir), sh.load_country_tags(country_definitions_dir),
-        sh.load_country_cultures(country_definitions_dir) if cultures_dir is not None else None,
-        sh.load_culture_ids(cultures_dir) if cultures_dir is not None else None)
-    errors = [f"state history: {e}" for e in errors]
+        config, sh.load_culture_ids(cultures_dir) if cultures_dir is not None else None)
+    errors = [f"state history: {e}" for e in pre + errors]
     notes: list[str] = []
     if held_back:
         tags = sorted({t for _, t in held_back})
@@ -2547,6 +2559,7 @@ def main(argv: list[str] | None = None) -> int:
         state_ownership_path=None if args.fixture else TOOLS_DIR / "derived" / "state_ownership.json",
         country_definitions_dir=None if args.fixture else REPO_ROOT / "common" / "country_definitions",
         cultures_dir=None if args.fixture else REPO_ROOT / "common" / "cultures",
+        homelands_path=None if args.fixture else REPO_ROOT / "mapgen" / "config" / "state_homelands.json",
         country_history_path=None if args.fixture else REPO_ROOT / "common" / "history" / "countries",
         scripted_effects_dir=None if args.fixture else REPO_ROOT / "common" / "scripted_effects",
         buildings_dir=None if args.fixture else (args.buildings_dir or REPO_ROOT / "common" / "buildings"),

@@ -5925,49 +5925,146 @@ def _selfcheck_state_history(ownership_doc: dict) -> None:
     else:
         raise AssertionError("plan() must refuse a JSON id that differs from map_data")
 
-    # homelands (#6374): derived from the owners' cultures, UNO contributes none
+    # homelands (#8604): state_homelands.json decides; owner cultures only seed it
     cc = {"REI": ["reiklander", "middenlander"], "MID": ["middenlander", "stirlander"], "UNO": ["wilderness"]}
     ids = {"reiklander", "middenlander", "stirlander", "wilderness"}
     assert sh.parse_country_cultures(
-        "﻿REI = {\n\tcultures = { reiklander middenlander }\n}\n# QQQ = { cultures = { zz } }\n"
+        "\ufeffREI = {\n\tcultures = { reiklander middenlander }\n}\n# QQQ = { cultures = { zz } }\n"
         "NOC = {\n\tcolor = { 1 2 3 }\n}\nD00 = {\n\tdynamic_country_definition = yes\n\tcultures = { zz }\n}\n"
     ) == {"REI": ["reiklander", "middenlander"], "NOC": []}, "tag cultures: ordered, comments/dynamic skipped"
     assert sh.parse_culture_ids(
-        "﻿# c\nreiklander = {\n\tcolor = rgb{ 1 2 3 }\n\ttraditions = { }\n}\nstirlander = {\n\tobsessions = { }\n}\n"
+        "\ufeff# c\nreiklander = {\n\tcolor = rgb{ 1 2 3 }\n\ttraditions = { }\n}\nstirlander = {\n\tobsessions = { }\n}\n"
     ) == {"reiklander", "stirlander"}, "culture ids: top-level keys only"
-    hp2 = sh.plan(ownership_doc, by_file, tags, cc)
+
+    def cultures_of(rows: dict) -> dict:
+        return {k: v[1] for k, v in rows.items()}
+
+    # the seed: owner cultures, UNO and unowned/placeholder land give []
+    seeded, rep = sh.sync_homelands(None, ownership_doc, by_file, tags, cc)
+    assert cultures_of(seeded) == {"STATE_ALPHA": ["reiklander", "middenlander"], "STATE_BETA": [],
+                                   "STATE_GAMMA": ["middenlander", "stirlander", "reiklander"],
+                                   "STATE_DELTA": []}, seeded
+    assert rep == {"added": ["STATE_ALPHA", "STATE_BETA", "STATE_DELTA", "STATE_GAMMA"], "rekeyed": [],
+                   "adopted": [], "stale": []}, rep
+    hp2 = sh.plan(ownership_doc, by_file, tags, seeded)
     assert hp2.homelands == {"STATE_ALPHA": ["reiklander", "middenlander"],
                              "STATE_GAMMA": ["middenlander", "stirlander", "reiklander"]}, hp2.homelands
-    assert sh.plan(ownership_doc, by_file, tags).homelands == {}, "no cultures supplied, no homelands"
+    assert sh.plan(ownership_doc, by_file, tags).homelands == {}, "no config supplied, no homelands"
     assert {f: sh.render_file(e) for f, e in hp2.files.items()} == texts, "render without homelands is unchanged"
     htx = {f: sh.render_file(e, hp2.homelands) for f, e in hp2.files.items()}
     assert ("\t\t}\n\n\t\tadd_homeland = cu:reiklander\n\t\tadd_homeland = cu:middenlander\n\t}\n"
             in htx["03_mainland.txt"]), "vanilla shape: blank line, then one add_homeland per culture"
     assert sh.parse_homelands("\ufeff" + htx["03_mainland.txt"].replace("\n", "\r\n")) == {
         k: hp2.homelands[k] for k, _ in hp2.files["03_mainland.txt"] if k in hp2.homelands}
-    assert sh.check(htx, ownership_doc, by_file, tags, cc, ids) == ([], []), "homelands validate clean"
-    assert sh.check(texts, ownership_doc, by_file, tags) == ([], []), "no culture args: homelands not checked"
-    # UNO's states (BETA unowned, DELTA placeholder) get a create_state but no homeland
-    hcreates2 = {k for e in hp2.files.values() for k, _ in e}
-    assert {"STATE_BETA", "STATE_DELTA"} <= hcreates2 and not {"STATE_BETA", "STATE_DELTA"} & set(hp2.homelands)
+    assert sh.check(htx, ownership_doc, by_file, tags, seeded, ids) == ([], []), "seeded config validates clean"
+    assert sh.check(texts, ownership_doc, by_file, tags) == ([], []), "no config: homelands not checked"
 
-    def refused_h(texts_: dict, frag: str, cult: dict = cc, cids: set = ids) -> None:
-        e, _ = sh.check(texts_, ownership_doc, by_file, tags, cult, cids)
+    # the formatter round-trips and writes one state per line; BOM / CRLF text parses the same
+    dumped = sh.dump_homelands(seeded)
+    assert sh.parse_homelands_config(dumped) == seeded
+    assert sh.parse_homelands_config("\ufeff" + dumped.replace("\n", "\r\n")) == seeded
+    assert sum(1 for ln in dumped.splitlines() if ln.lstrip().startswith('"STATE_')) == 4
+    assert dumped.endswith("}\n") and "\r" not in dumped and sh.dump_homelands(seeded) == dumped
+
+    def refused_h(texts_: dict, frag: str, cfg: dict = seeded, cids: set = ids, doc: dict = ownership_doc) -> None:
+        e, _ = sh.check(texts_, doc, by_file, tags, cfg, cids)
         assert any(frag in x for x in e), f"expected {frag!r} in {e}"
 
     m2 = htx["03_mainland.txt"]
     refused_h({**htx, "03_mainland.txt": m2.replace("cu:reiklander", "cu:nonesuch")}, "has no common/cultures definition")
-    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:reiklander\n", "")}, "differs from the")
-    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:middenlander\n", "", 1)}, "differs from the")
-    refused_h(texts, "differs from the")                       # homelands never emitted
-    refused_h(htx, "owned state gets no homeland", {**cc, "REI": []})
-    # a homeland on UNO's state is refused (UNO gives none, though it has a culture)
-    uno_home = sh.render_file(hp2.files["03_mainland.txt"], {**hp2.homelands, "STATE_BETA": ["wilderness"]})
-    refused_h({**htx, "03_mainland.txt": uno_home}, "whose owner(s) give no homelands")
+    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:reiklander\n", "")}, "differs from state_homelands.json")
+    refused_h({**htx, "03_mainland.txt": m2.replace("\t\tadd_homeland = cu:middenlander\n", "", 1)},
+              "differs from state_homelands.json")
+    refused_h(texts, "differs from state_homelands.json")            # homelands never emitted
+    refused_h(htx, "has no common/cultures definition", {**seeded, "STATE_BETA": (None, ["nonesuch"])})
+    refused_h(htx, "has no row", {k: v for k, v in seeded.items() if k != "STATE_BETA"})
+    refused_h(htx, "names no land state", {**seeded, "STATE_GONE": ((9, 9), [])})
     stray = sh.render_file([e for e in hp2.files["03_mainland.txt"] if e[0] != "STATE_BETA"] + [("STATE_BETA", [])],
                            {**hp2.homelands, "STATE_BETA": ["reiklander"]})
     refused_h({**htx, "03_mainland.txt": stray}, "without a create_state")
 
+    # config [] on an owned state: no lines, validates clean (replaces "owned state gets no homeland")
+    empty = {**seeded, "STATE_ALPHA": (None, [])}
+    ep = sh.plan(ownership_doc, by_file, tags, empty)
+    assert "STATE_ALPHA" not in ep.homelands
+    etx = {f: sh.render_file(e, ep.homelands) for f, e in ep.files.items()}
+    assert "STATE_ALPHA" in etx["03_mainland.txt"] and sh.parse_homelands(etx["03_mainland.txt"]).get("STATE_ALPHA") is None
+    assert sh.check(etx, ownership_doc, by_file, tags, empty, ids) == ([], [])
+    # an edited row emits what it says: a culture not among the owner's, and homelands on UNO's BETA
+    edited = {**seeded, "STATE_ALPHA": (None, ["stirlander"]), "STATE_BETA": (None, ["wilderness", "reiklander"])}
+    dp = sh.plan(ownership_doc, by_file, tags, edited)
+    assert dp.homelands["STATE_ALPHA"] == ["stirlander"] and dp.homelands["STATE_BETA"] == ["wilderness", "reiklander"]
+    dtx = {f: sh.render_file(e, dp.homelands) for f, e in dp.files.items()}
+    assert sh.check(dtx, ownership_doc, by_file, tags, edited, ids) == ([], [])
+    refused_h(htx, "differs from state_homelands.json", edited)      # config edited, history not regenerated
+    # a non-empty row on a state that gets no create_state: plan() raises (ALPHA's owner REI is held back)
+    try:
+        sh.plan(ownership_doc, by_file, {"MID", "UNO"}, seeded)
+    except so.OwnershipError as exc:
+        assert "STATE_ALPHA" in str(exc) and "no create_state" in str(exc), exc
+    else:
+        raise AssertionError("plan() must refuse homelands on a held-back state")
+
+    # structural refusals of the loader
+    for frag, text in (
+            ("duplicate culture", '{"states": {"STATE_A": {"anchor": null, "cultures": ["x", "x"]}}}'),
+            ("duplicate key", '{"states": {"STATE_A": {"anchor": null, "cultures": []}, '
+                              '"STATE_A": {"anchor": null, "cultures": ["x"]}}}'),
+            ("exactly", '{"states": {"STATE_A": {"cultures": []}}}'),
+            ("anchor must be", '{"states": {"STATE_A": {"anchor": [1], "cultures": []}}}'),
+            ("list of culture ids", '{"states": {"STATE_A": {"anchor": null, "cultures": "x"}}}'),
+            ("'states' object", '{"stats": {}}'),
+            ("unknown top-level", '{"states": {}, "extra": 1}')):
+        try:
+            sh.parse_homelands_config(text)
+        except so.OwnershipError as exc:
+            assert frag in str(exc), f"expected {frag!r} in {exc}"
+        else:
+            raise AssertionError(f"parse_homelands_config must refuse {frag!r}")
+
+    # anchors, sync and rekeys, on a copy of the golden doc with named (anchored) states
+    adoc = copy.deepcopy(ownership_doc)
+    anch = {"STATE_ALPHA": (10, 10), "STATE_BETA": (20, 20), "STATE_GAMMA": (30, 30), "STATE_DELTA": (40, 40)}
+    for k, a_ in anch.items():
+        adoc["states"][k]["naming_anchor"] = list(a_)
+    aseed, _ = sh.sync_homelands(None, adoc, by_file, tags, cc)
+    assert {k: v[0] for k, v in aseed.items()} == anch, "the seed copies the naming anchors"
+    assert sh.check_homelands(aseed, adoc, by_file, ids) == ([], [])
+    errs, _ = sh.check_homelands({**aseed, "STATE_ALPHA": ((77, 77), aseed["STATE_ALPHA"][1])}, adoc, by_file, ids)
+    assert any("STATE_ALPHA" in e and "differs from state_ownership.json naming_anchor" in e for e in errs), errs
+    # sync keeps an edit and adds only the absent key
+    kept = {**aseed, "STATE_ALPHA": ((10, 10), ["stirlander"])}
+    del kept["STATE_BETA"]
+    rows, rep = sh.sync_homelands(kept, adoc, by_file, tags, cc)
+    assert rows["STATE_ALPHA"] == ((10, 10), ["stirlander"]) and rows["STATE_BETA"] == aseed["STATE_BETA"], rows
+    assert rep == {"added": ["STATE_BETA"], "rekeyed": [], "adopted": [], "stale": []}, rep
+    # a rename with a unique anchor match: an error until synced, then moved with its cultures intact
+    renamed = {("STATE_OLD" if k == "STATE_ALPHA" else k): (a_, ["stirlander"] if k == "STATE_ALPHA" else c_)
+               for k, (a_, c_) in aseed.items()}
+    errs, rekeys = sh.check_homelands(renamed, adoc, by_file, ids)
+    assert rekeys == [("STATE_OLD", "STATE_ALPHA")] and any("STATE_OLD is now STATE_ALPHA" in e for e in errs), errs
+    assert not any("has no row" in e or "names no land state" in e for e in errs), errs
+    rows, rep = sh.sync_homelands(renamed, adoc, by_file, tags, cc)
+    assert rows["STATE_ALPHA"] == ((10, 10), ["stirlander"]) and "STATE_OLD" not in rows, rows
+    assert rep["rekeyed"] == ["STATE_OLD -> STATE_ALPHA"] and rep["added"] == [] and rep["stale"] == [], rep
+    # an unmatched stale row stays in place and is reported; so does a moved anchor on a stale row
+    rows, rep = sh.sync_homelands({**aseed, "STATE_GONE": ((99, 99), ["stirlander"])}, adoc, by_file, tags, cc)
+    assert rows["STATE_GONE"] == ((99, 99), ["stirlander"]) and rep["stale"] == ["STATE_GONE"], rep
+    errs, rekeys = sh.check_homelands(rows, adoc, by_file, ids)
+    assert rekeys == [] and any("STATE_GONE names no land state" in e for e in errs), errs
+    # null anchors never pair: two stale null rows and two new null-anchor states stay unmatched
+    nulled = {"STATE_X1": (None, ["stirlander"]), "STATE_X2": (None, ["reiklander"])}
+    _, rekeys = sh.check_homelands({**{k: v for k, v in seeded.items() if k not in ("STATE_ALPHA", "STATE_BETA")},
+                                    **nulled}, ownership_doc, by_file, ids)
+    assert rekeys == [], rekeys
+    rows, rep = sh.sync_homelands({**{k: v for k, v in seeded.items() if k not in ("STATE_ALPHA", "STATE_BETA")},
+                                   **nulled}, ownership_doc, by_file, tags, cc)
+    assert rep["stale"] == ["STATE_X1", "STATE_X2"] and rep["rekeyed"] == [], rep
+    # a null anchor that gains a value is adopted, not an error; a stored value that drifts is
+    nullrow = {**aseed, "STATE_ALPHA": (None, ["stirlander"])}
+    assert sh.check_homelands(nullrow, adoc, by_file, ids) == ([], [])
+    rows, rep = sh.sync_homelands(nullrow, adoc, by_file, tags, cc)
+    assert rows["STATE_ALPHA"] == ((10, 10), ["stirlander"]) and rep["adopted"] == ["STATE_ALPHA"], rep
 
 def _selfcheck_country_history(ownership_doc: dict) -> None:
     """Starting country setup (#6375), on the golden assignment of
@@ -6182,8 +6279,9 @@ def run_check() -> int:
     _selfcheck_state_history(ownership_doc)
     print("state_history: create_state emission (whole + split, unowned + placeholder -> c:UNO, held-back "
           "tag incl. UNO, 3-way split with a UNO slice, CRLF compare, hand-broken history refusals incl. a "
-          "dropped or replaced c:UNO) and add_homeland derivation (owner cultures, UNO skip, unknown-culture "
-          "refusal) self-check passed.")
+          "dropped or replaced c:UNO) and the state_homelands.json config (seed from owner cultures, edited and "
+          "empty rows, UNO homelands, coverage/anchor/culture/duplicate refusals, formatter round-trip, sync: "
+          "keep edits, add absent keys, unique-anchor rekey, null anchors) self-check passed.")
     _selfcheck_country_history(ownership_doc)
     print("country_history: culture -> starting-technology blocks (UNO from the unowned/placeholder tokens, "
           "held-back tags, unmapped culture, CRLF compare, hand-broken history refusals) self-check passed.")

@@ -39,11 +39,15 @@ Rules
 * Generator and validator take the expected owners from one helper,
   :func:`owner_slices`, so a missing or wrong ``c:UNO`` block fails ``check()`` the
   same way any other owner mismatch does.
-* Homelands (#6374): each emitted state gets ``add_homeland = cu:<c>`` for every culture of
-  its ``create_state`` owners' ``common/country_definitions`` ``cultures`` (owner tags in sorted
-  order, de-duplicated). ``UNO`` contributes none, and a state with no create_state carries
-  none. No override table: derived data cannot go stale on a repaint. ``check()`` fails a
-  homeland id with no ``common/cultures`` definition.
+* Homelands (#8604): ``add_homeland = cu:<c>`` lines come only from the hand-authored
+  ``mapgen/config/state_homelands.json`` (one row per land state, keyed ``STATE_<NAME>`` plus
+  its ``naming_anchor``, value = ordered culture ids, ``[]`` = no homelands, any state). Owner
+  ``cultures`` no longer feed it; :func:`derive_homelands` survives only as the seeder behind
+  :func:`sync_homelands` (``--seed-homelands`` / ``--sync-homelands``), which adds new states from
+  their owners, carries a rename with a unique anchor match over with its edits, and never deletes
+  or edits an existing row. :func:`check_homelands` (config vs map_data/ownership/cultures) is the
+  one source of the config errors for generator and validator. A state with no create_state
+  carries none.
 * Ordering is stable: states by key, ``create_state`` blocks by tag, provinces
   by hex token -- a land-regions regen that reorders blocks does not churn this.
 
@@ -52,6 +56,7 @@ Pure and deterministic: no clock, no filesystem beyond the paths handed in.
 
 from __future__ import annotations
 
+import json
 import re
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -282,12 +287,13 @@ def owner_slices(key: str, rec: dict, state: State,
 
 
 def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_tags: set[str],
-         country_cultures: dict[str, list[str]] | None = None) -> Plan:
+         homelands: "Homelands | None" = None) -> Plan:
     """What to emit, per history file. Raises :class:`OwnershipError` when the
-    JSON does not match ``map_data`` (stale read) or a split is malformed.
-    With ``country_cultures``, ``Plan.homelands`` carries each owned state's derived
-    homelands. ``Plan.unowned`` / ``Plan.placeholder`` list the whole states that
-    went to ``UNO`` through each token."""
+    JSON does not match ``map_data`` (stale read), a split is malformed, or ``homelands``
+    gives a non-empty list to a state that gets no ``create_state``.
+    With ``homelands`` (:func:`load_homelands`), ``Plan.homelands`` carries each emitted
+    state's non-empty configured list. ``Plan.unowned`` / ``Plan.placeholder`` list the
+    whole states that went to ``UNO`` through each token."""
     states = _check_doc(ownership_doc, states_by_file)
     out = Plan(files={})
     for fname in sorted(states_by_file):
@@ -300,14 +306,191 @@ def plan(ownership_doc: dict, states_by_file: dict[str, list[State]], defined_ta
                 out.unowned.append(st.key)
             creates, held = owner_slices(st.key, rec, st, defined_tags)
             out.held_back += [(st.key, tag) for tag in held]
+            row = homelands.get(st.key) if homelands is not None else None
             if creates:
                 entries.append((st.key, creates))
-                if country_cultures is not None:
-                    homes = derive_homelands((t for t, _ in creates), country_cultures)
-                    if homes:
-                        out.homelands[st.key] = homes
+                if row is not None and row[1]:
+                    out.homelands[st.key] = list(row[1])
+            elif row is not None and row[1]:
+                raise OwnershipError(f"{st.key}: state_homelands.json gives homelands {row[1]} to a state "
+                                     "that gets no create_state (owner tag held back)")
         out.files[fname] = entries
     return out
+
+
+# ---------------------------------------------------------------------------
+# Homelands config (#8604)
+# ---------------------------------------------------------------------------
+
+#: ``{state key: (naming anchor | None, [culture id, ...])}``
+Homelands = dict[str, tuple[tuple[int, int] | None, list[str]]]
+
+HOMELANDS_COMMENT = [
+    "HAND-AUTHORED (#8604). The only source of add_homeland in common/history/states: edit the lists, then",
+    "run generate_state_history.py and generate_pop_history.py (a homeland edit changes the pop mix) and load the game.",
+    "One row per land state, keyed STATE_<NAME> plus its naming anchor (from state_ownership.json; null for unnamed states).",
+    "cultures = ordered culture ids from common/cultures; [] = no homelands (any state). Owner cultures do not feed this.",
+    "After a map regen run generate_state_history.py --sync-homelands: it adds new states from their owners and moves a",
+    "rename with a unique anchor match, edits intact; anything it cannot match stays a hard error for you to fix by hand.",
+]
+
+
+def _no_dupes(pairs):
+    seen: dict = {}
+    for k, v in pairs:
+        if k in seen:
+            raise OwnershipError(f"state_homelands.json: duplicate key {k!r}")
+        seen[k] = v
+    return seen
+
+
+def _anchor(v, where: str) -> tuple[int, int] | None:
+    if v is None:
+        return None
+    if (isinstance(v, (list, tuple)) and len(v) == 2
+            and all(isinstance(n, int) and not isinstance(n, bool) for n in v)):
+        return (v[0], v[1])
+    raise OwnershipError(f"{where}: anchor must be null or [x, y] integers, got {v!r}")
+
+
+def parse_homelands_config(text: str) -> Homelands:
+    """Structural parse of ``state_homelands.json`` text (BOM and CRLF tolerated). Raises
+    :class:`OwnershipError` naming the state for a malformed row, a duplicate state key or a
+    culture id repeated within a row."""
+    try:
+        doc = json.loads(text.lstrip("﻿"), object_pairs_hook=_no_dupes)
+    except ValueError as exc:
+        raise OwnershipError(f"state_homelands.json: {exc}") from None
+    if not isinstance(doc, dict) or not isinstance(doc.get("states"), dict):
+        raise OwnershipError("state_homelands.json: needs a top-level 'states' object")
+    extra = sorted(set(doc) - {"_comment", "states"})
+    if extra:
+        raise OwnershipError(f"state_homelands.json: unknown top-level key(s) {extra}")
+    out: Homelands = {}
+    for key, row in doc["states"].items():
+        if not isinstance(row, dict) or set(row) != {"anchor", "cultures"}:
+            raise OwnershipError(f"state_homelands.json {key}: row must be exactly "
+                                 '{"anchor": [x, y] | null, "cultures": [...]}')
+        cultures = row["cultures"]
+        if not isinstance(cultures, list) or not all(isinstance(c, str) and c for c in cultures):
+            raise OwnershipError(f"state_homelands.json {key}: 'cultures' must be a list of culture ids")
+        dup = sorted({c for c in cultures if cultures.count(c) > 1})
+        if dup:
+            raise OwnershipError(f"state_homelands.json {key}: duplicate culture id(s) {dup}")
+        out[key] = (_anchor(row["anchor"], f"state_homelands.json {key}"), list(cultures))
+    return out
+
+
+def load_homelands(path: Path) -> Homelands:
+    return parse_homelands_config(Path(path).read_text(encoding="utf-8-sig"))
+
+
+def dump_homelands(rows: Homelands) -> str:
+    """The config text: one state per line, keys sorted, cultures in emit order, LF, trailing newline."""
+    lines = ["{", '  "_comment": [']
+    lines += [f"    {json.dumps(c)}" + ("," if i < len(HOMELANDS_COMMENT) - 1 else "")
+              for i, c in enumerate(HOMELANDS_COMMENT)]
+    lines += ["  ],", '  "states": {']
+    keys = sorted(rows)
+    for i, key in enumerate(keys):
+        anchor, cultures = rows[key]
+        row = json.dumps({"anchor": list(anchor) if anchor else None, "cultures": cultures})
+        lines.append(f"    {json.dumps(key)}: {row}" + ("," if i < len(keys) - 1 else ""))
+    lines += ["  }", "}"]
+    return "\n".join(lines) + "\n"
+
+
+def _current_anchors(ownership_doc: dict, states_by_file: dict[str, list[State]]) -> dict[str, tuple[int, int] | None]:
+    states = _check_doc(ownership_doc, states_by_file)
+    return {s.key: _anchor(states[s.key].get("naming_anchor"), f"state_ownership.json {s.key}")
+            for ss in states_by_file.values() for s in ss}
+
+
+def _find_rekeys(config: Homelands, current: dict[str, tuple[int, int] | None]) -> list[tuple[str, str]]:
+    """``[(old key, new key)]``: a stale row whose non-null anchor is the anchor of exactly one
+    current state without a row, and no other stale row shares that anchor. A null anchor never matches."""
+    new_by_anchor: dict[tuple[int, int], list[str]] = {}
+    for key, a in current.items():
+        if key not in config and a is not None:
+            new_by_anchor.setdefault(a, []).append(key)
+    stale_by_anchor: dict[tuple[int, int], list[str]] = {}
+    for key, (a, _) in config.items():
+        if key not in current and a is not None:
+            stale_by_anchor.setdefault(a, []).append(key)
+    out = []
+    for a, olds in stale_by_anchor.items():
+        news = new_by_anchor.get(a, [])
+        if len(olds) == 1 and len(news) == 1:
+            out.append((olds[0], news[0]))
+    return sorted(out)
+
+
+def check_homelands(config: Homelands, ownership_doc: dict, states_by_file: dict[str, list[State]],
+                    culture_ids: set[str] | None = None) -> tuple[list[str], list[tuple[str, str]]]:
+    """Errors in the homelands config against the land states, their naming anchors and the
+    ``common/cultures`` ids, plus the ``rekeys`` (:func:`_find_rekeys`) that
+    :func:`sync_homelands` would apply. A rekey is still an error until applied. A stored null
+    anchor on a state that now has one is not an error (sync adopts it)."""
+    try:
+        current = _current_anchors(ownership_doc, states_by_file)
+    except OwnershipError as exc:
+        return [str(exc)], []
+    errors: list[str] = []
+    rekeys = _find_rekeys(config, current)
+    old_new = dict(rekeys)
+    new_old = {n: o for o, n in rekeys}
+    for old, new in rekeys:
+        errors.append(f"state_homelands.json: {old} is now {new} (same anchor): run "
+                      "generate_state_history.py --sync-homelands")
+    for key in sorted(current):
+        if key in config:
+            stored, current_a = config[key][0], current[key]
+            if stored is not None and stored != current_a:
+                errors.append(f"state_homelands.json {key}: anchor {list(stored)} differs from "
+                              f"state_ownership.json naming_anchor {list(current_a) if current_a else None}"
+                              " -- fix the row by hand")
+        elif key not in new_old:
+            errors.append(f"state_homelands.json: land state {key} has no row -- run "
+                          "generate_state_history.py --sync-homelands")
+    for key in sorted(config):
+        if key not in current and key not in old_new:
+            errors.append(f"state_homelands.json: {key} names no land state (stale after a regen) -- "
+                          "move its row by hand or delete it")
+    if culture_ids is not None:
+        for key in sorted(config):
+            for c in config[key][1]:
+                if c not in culture_ids:
+                    errors.append(f"state_homelands.json {key}: culture {c!r} has no common/cultures definition")
+    return errors, rekeys
+
+
+def sync_homelands(config: Homelands | None, ownership_doc: dict, states_by_file: dict[str, list[State]],
+                   defined_tags: set[str], country_cultures: dict[str, list[str]]
+                   ) -> tuple[Homelands, dict[str, list[str]]]:
+    """Bring the config in line with the land states without touching an edit: apply the
+    unambiguous rekeys, adopt a null anchor that now has a value, and seed every state with no
+    row from its owners (:func:`derive_homelands`; held-back tags and ``UNO`` give ``[]``). Never
+    deletes a row or changes an existing row's cultures. ``config=None`` seeds everything.
+    Returns ``(rows, report)``; ``report`` has ``added``, ``rekeyed``, ``adopted`` and ``stale``."""
+    states = _check_doc(ownership_doc, states_by_file)
+    land = {s.key: s for ss in states_by_file.values() for s in ss}
+    current = _current_anchors(ownership_doc, states_by_file)
+    rows: Homelands = dict(config or {})
+    report: dict[str, list[str]] = {"added": [], "rekeyed": [], "adopted": [], "stale": []}
+    for old, new in _find_rekeys(rows, current):
+        rows[new] = rows.pop(old)
+        report["rekeyed"].append(f"{old} -> {new}")
+    for key in sorted(land):
+        if key in rows:
+            if rows[key][0] is None and current[key] is not None:
+                rows[key] = (current[key], rows[key][1])
+                report["adopted"].append(key)
+            continue
+        creates, _ = owner_slices(key, states[key], land[key], defined_tags)
+        rows[key] = (current[key], derive_homelands((t for t, _ in creates), country_cultures))
+        report["added"].append(key)
+    report["stale"] = sorted(set(rows) - set(land))
+    return rows, report
 
 
 # ---------------------------------------------------------------------------
@@ -397,7 +580,7 @@ def normalize_text(text: str) -> str:
 # ---------------------------------------------------------------------------
 
 def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: dict[str, list[State]],
-          defined_tags: set[str], country_cultures: dict[str, list[str]] | None = None,
+          defined_tags: set[str], homelands: Homelands | None = None,
           culture_ids: set[str] | None = None) -> tuple[list[str], list[tuple[str, str]]]:
     """Validate emitted history against ``map_data``, the JSON and the defined
     tags. Returns ``(errors, held_back)``; ``held_back`` lists JSON owners whose
@@ -407,15 +590,17 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
     an owner mismatch.
 
     ``culture_ids`` (the ``common/cultures`` ids) makes every emitted ``add_homeland``
-    id without a culture definition an error; ``country_cultures`` makes the emitted
-    homelands of each state equal the ones its owners imply (see
-    :func:`derive_homelands`), requires an owned state to have at least one, and
-    refuses homelands on a state without a ``create_state``."""
+    id without a culture definition an error. ``homelands`` (the config, #8604) runs
+    :func:`check_homelands` and makes each land state's emitted list equal its config row
+    (``[]`` included -- an owned state may have none), and refuses homelands on a state
+    without a ``create_state``."""
     errors: list[str] = []
     try:
         states = _check_doc(ownership_doc, states_by_file)
     except OwnershipError as exc:
         return [str(exc)], []
+    if homelands is not None:
+        errors += check_homelands(homelands, ownership_doc, states_by_file, culture_ids)[0]
     land = {s.key: s for ss in states_by_file.values() for s in ss}
     file_of = {s.key: f for f, ss in states_by_file.items() for s in ss}
 
@@ -460,7 +645,7 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
             for c in homes:
                 if c not in culture_ids:
                     errors.append(f"s:{key}: add_homeland = cu:{c} has no common/cultures definition")
-        if country_cultures is not None and homes and not creates:
+        if homelands is not None and homes and not creates:
             errors.append(f"s:{key}: add_homeland on a state without a create_state")
         for tag, provs in creates:
             if tag is None:
@@ -481,16 +666,9 @@ def check(history_texts: dict[str, str], ownership_doc: dict, states_by_file: di
             errors.append(str(exc))
             continue
         held_back += [(key, tag) for tag in held]
-        if country_cultures is not None and creates:
-            want = derive_homelands((t for t, _ in expected), country_cultures)
-            if not want and any(t != UNO_TAG for t, _ in expected):
-                errors.append(f"s:{key}: owned state gets no homeland (owner tag(s) "
-                              f"{sorted({t for t, _ in expected})} have no cultures)")
-            elif homes != want:
-                errors.append(f"s:{key}: add_homeland {homes} differs from the {want} its owner(s) "
-                              f"{sorted({t for t, _ in expected})} imply -- regenerate"
-                              if want else
-                              f"s:{key}: add_homeland {homes} on a state whose owner(s) give no homelands")
+        if homelands is not None and key in homelands and creates and homes != homelands[key][1]:
+            errors.append(f"s:{key}: add_homeland {homes} differs from state_homelands.json "
+                          f"{homelands[key][1]} -- regenerate")
         got = sorted((t or "", sorted(p)) for t, p in creates)
         if got != sorted(expected):
             if not expected and creates:
