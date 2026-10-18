@@ -344,3 +344,13 @@ country_fervor_target_skaven_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8467, Beastmen ----
+
+country_fervor_target_beastmen_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

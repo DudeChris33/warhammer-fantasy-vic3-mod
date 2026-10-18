@@ -428,3 +428,15 @@ skaven_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_skaven_cultural_acceptance_add = 1
 }
+
+# ---- Board item #8467, Beastmen ----
+
+beastmen_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_beastmen_cultural_acceptance_add = 1
+}
+
+beastmen_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_beastmen_cultural_acceptance_add = 1
+}

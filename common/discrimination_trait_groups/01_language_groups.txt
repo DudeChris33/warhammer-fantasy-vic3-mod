@@ -19,3 +19,6 @@ sphere_group_saurian = { type = language }
 
 # Queekish, the Skaven tongue. Board item #8466.
 sphere_group_queekish = { type = language }
+
+# Beastspeech, the Beastmen's crude tongue (name invented). Board item #8467.
+sphere_group_beastspeech = { type = language }

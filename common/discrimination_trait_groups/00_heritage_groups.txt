@@ -20,3 +20,6 @@ heritage_group_lizardmen = { type = heritage }
 
 # Skaven — the ratmen of the Under-Empire; no kin race. Board item #8466.
 heritage_group_skaven = { type = heritage }
+
+# Beastmen — the Children of Chaos; a mutant race, kin to no one. Board item #8467.
+heritage_group_beastmen = { type = heritage }

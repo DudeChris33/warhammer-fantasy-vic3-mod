@@ -428,3 +428,15 @@ skaven_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_skaven_standard_of_living_add = 1
 }
+
+# ---- Board item #8467, Beastmen ----
+
+beastmen_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_beastmen_standard_of_living_add = 1
+}
+
+beastmen_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_beastmen_standard_of_living_add = 1
+}

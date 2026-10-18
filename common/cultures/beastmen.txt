@@ -1,0 +1,69 @@
+﻿# Old World cultures — the Beastmen, the Children of Chaos of the forests and the Wastes. Schema mirrors
+# common/cultures/ogre.txt and common/cultures/greenskin.txt, the verified non-human reference entries for
+# this mod. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. A tawny hide colour picked for distance:
+#                warm hues are crowded, and this is the furthest free point from the existing culture colours
+#                (nearest are tilean, estalian and sartosan). There is no Beastmen tag in the legend.
+#   religion   — chaos_undivided, from common/religions/00_religions.txt (recorded by board item #8484):
+#                no single god holds the herds.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+# graphics/ethnicities — vanilla ships NO beastman portrait set. The values used below are deliberate
+#                STAND-INS (the same as orc) chosen only so the culture renders at all, pending custom art,
+#                and carry no lore claim whatsoever about what Beastmen look like.
+# FEMALE NAME LISTS: canon has no Beastmen women, but the engine generates female characters, so
+#                female_common_first_names is the male list minus the canon named characters (no female
+#                character gets a hero's name). An engine accommodation, not lore; it adds no new keys.
+# No noble_last_names (the list is optional; vanilla omits it on 32 cultures): herds follow whoever is
+#                strongest and have no lineage (orc/ogre precedent). No regal lists either.
+# Beastmen get their own heritage and language groups: a mutant race, kin to no one, so they gain no
+# acceptance bonuses with Old World humans (cf. heritage_group_dawi_zharr). Only Beastmen are authored
+# here: the Norse are the existing norscan, and the steppe and Wastes marauders (Kurgan, Hung, Kul, Tong)
+# belong to the Eastern Steppes item (#8468).
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_beastmen_l_english.yml.
+# Board item #8467 (epic #8462).
+
+################ Beastmen — the herds; Chaos Undivided and the law of the strongest ################
+# Register: Beastspeech (an invented name; canon says only a crude bestial tongue) — guttural, with
+# kh-, gh-, -rr-, -ox, -ak, -or. Canon (army books, Total War lords): Khazrak (One-Eye), Gorthor (the
+# Cruel), Malagor (the Dark Omen), Morghur, Taurox (the Brass Bull), Ghorros (Warhoof). Every other
+# name, and every epithet other than OneEye and Warhoof, is INVENTED in the same register (for Chris to
+# review). Last names are earned epithets; OneEye displays as "One-Eye".
+
+beastmen = {
+	color= rgb{ 188 104 20 }
+	religion = chaos_undivided
+	heritage = heritage_beastmen
+	language = sphere_beastspeech
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Khazrak Gorthor Malagor Morghur Taurox Ghorros Gharrak Urghul Kraxor Bragor
+		Thrask Gorrox Vulgor Khorrak Murrag Ghorvak Zhorgul Rakhar Uzrak Graxx
+		Hurrok Mhorgal Tharrog Khoral
+	}
+
+	female_common_first_names = {
+		Gharrak Urghul Kraxor Bragor Thrask Gorrox Vulgor Khorrak Murrag Ghorvak
+		Zhorgul Rakhar Uzrak Graxx Hurrok Mhorgal Tharrog Khoral
+	}
+
+	common_last_names = {
+		OneEye Warhoof Bloodhorn Goreclaw Skullhoof Ironhorn Blackmane Manflayer
+		Treebane Stonehoof Ripfang Gorehide Ashhorn Brasshorn Doomhorn Hoofbreaker
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_dark_hair
+	}
+}

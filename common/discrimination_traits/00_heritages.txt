@@ -48,3 +48,6 @@ heritage_lizardmen = { type = heritage  trait_group = heritage_group_lizardmen }
 
 # Skaven. Board item #8466.
 heritage_skaven = { type = heritage  trait_group = heritage_group_skaven }
+
+# Beastmen. Board item #8467.
+heritage_beastmen = { type = heritage  trait_group = heritage_group_beastmen }
