@@ -380,3 +380,15 @@ ogre_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_ogre_cultural_acceptance_add = 1
 }
+
+# ---- Board item #8463, high elves ----
+
+high_elf_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_high_elf_cultural_acceptance_add = 1
+}
+
+high_elf_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_high_elf_cultural_acceptance_add = 1
+}

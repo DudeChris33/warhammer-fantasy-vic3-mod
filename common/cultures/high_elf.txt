@@ -1,1 +1,80 @@
-﻿
+﻿# Old World cultures — the Asur, the high elves of Ulthuan and its colonies (Lustria, the Southlands, the
+# Gates of Calith, the Lost Isles of Elithis). Schema mirrors common/cultures/wood_elf.txt, the reference
+# elf entry. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. Copied from the Lothern (LOT) entry of
+#                mapgen/config/state_ownership_legend.json (still `proposed`): the Phoenix King's seat and
+#                the canon centre of Ulthuan. No Ulthuan state is painted yet, so a "largest owner" rule
+#                cannot be computed. Re-sync this colour if the countries item (#8444) changes LOT's.
+#   religion   — a religion id from common/religions/00_religions.txt. cult_of_asuryan is the default;
+#                Isha, Vaul, Hoeth and Kurnous stay available for later pop overrides.
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+#   noble_last_names / male_regal_first_names / female_regal_first_names are OPTIONAL and used here
+#                because the Asur have a real aristocracy: the ten kingdoms, the Phoenix King and the
+#                Everqueen.
+# graphics/ethnicities — vanilla ships no elf portrait set. The values used below are deliberate
+#                STAND-INS chosen only so the culture renders at all, pending custom art (out of scope).
+# Multi-word names use vanilla's underscore convention (of_Eataine), displayed via the loc key.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
+# six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_high_elf_l_english.yml.
+# Board item #8463 (epic #8462).
+
+################ High elf (Asur) — the kingdoms of Ulthuan; Asuryan, the Phoenix King ################
+# Register: Eltharin — long, vowel-rich, with -ion, -ith, -iel, -ar, -elle endings and Tor-/Bel-
+# prefixes. Canon-first where it fits (army books, Total War lords, novels), recalled from memory:
+# Tyrion, Teclis, Eltharion, Finubar, Imrik, Caradryan, Korhil, Alith, Belannaer, Imladrik, Caledor,
+# Tethlis, Bel-Korhadris, Bel-Shanaar, Caradryel, Bel-Hathor, Morvael, Aethis, Aislinn (Alith Anar's
+# house, Anar, is medium confidence), and Alarielle, Astarielle, Eldyra. INVENTED in the same register
+# (for Chris to review): Thalorien and the 17 female names Aelindra to Lathariel, and the 15 common
+# last names after Anar. The Asur carry few family names, so common last names are epithets. Noble last
+# names are the ten kingdoms of Ulthuan (of_<Realm>, nehekharan precedent). No gods, no Druchii names.
+
+high_elf = {
+	color= rgb{ 126 138 252 }
+	religion = cult_of_asuryan
+	heritage = heritage_asur
+	language = sphere_eltharin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Tyrion Teclis Eltharion Finubar Imrik Caradryan Korhil Alith Belannaer Imladrik
+		Caledor Tethlis Bel_Korhadris Bel_Shanaar Caradryel Bel_Hathor Morvael Aethis Aislinn Thalorien
+	}
+
+	female_common_first_names = {
+		Alarielle Astarielle Eldyra Aelindra Mirithel Sariel Lirael Nimriel Taliesse Ithrielle
+		Vaelyra Eluviel Thaluria Anariel Sylvanthe Meliath Ilyrielle Cyrandel Orieth Lathariel
+	}
+
+	noble_last_names = {
+		of_Eataine of_Caledor of_Saphery of_Nagarythe of_Tiranoc
+		of_Chrace of_Avelorn of_Yvresse of_Ellyrion of_Cothique
+	}
+
+	common_last_names = {
+		Anar Seaguard Starwood Silverhelm Dawnspire Moonwhisper Sunwarden Tidecaller
+		Stormwatch Lightbearer Starweaver Whitetower Goldenwing Skyrender Dawnbringer Swanfeather
+	}
+
+	male_regal_first_names = {
+		Finubar Bel_Shanaar Caledor Tethlis Bel_Korhadris
+	}
+
+	female_regal_first_names = {
+		Alarielle Astarielle Eldyra Aelindra Mirithel
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_blond
+		1 = caucasian_dark_hair
+	}
+}

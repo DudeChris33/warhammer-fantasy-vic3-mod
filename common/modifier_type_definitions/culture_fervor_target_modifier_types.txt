@@ -304,3 +304,13 @@ country_fervor_target_ogre_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8463, high elves ----
+
+country_fervor_target_high_elf_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

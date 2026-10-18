@@ -21,3 +21,6 @@ sphere_greenskin = { type = language  trait_group = sphere_group_greenskin }
 # Grumbarth, the ogre tongue. Board item #6379.
 sphere_fan_eltharin = { type = language  trait_group = sphere_group_eltharin }
 sphere_grumbarth = { type = language  trait_group = sphere_group_grumbarth }
+
+# Eltharin, the Asur tongue and root of the elven dialects. Board item #8463.
+sphere_eltharin = { type = language  trait_group = sphere_group_eltharin }

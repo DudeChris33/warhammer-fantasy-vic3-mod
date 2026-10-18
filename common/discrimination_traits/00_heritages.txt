@@ -36,3 +36,6 @@ heritage_asrai = { type = heritage  trait_group = heritage_group_elf }
 
 # Ogres. Board item #6379.
 heritage_ogre = { type = heritage  trait_group = heritage_group_ogre }
+
+# Elves — the Asur (high elves) of Ulthuan and its colonies. Board item #8463.
+heritage_asur = { type = heritage  trait_group = heritage_group_elf }

@@ -380,3 +380,15 @@ ogre_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_ogre_add = 1
 }
+
+# ---- Board item #8463, high elves ----
+
+high_elf_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_high_elf_add = 1
+}
+
+high_elf_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_high_elf_add = 1
+}

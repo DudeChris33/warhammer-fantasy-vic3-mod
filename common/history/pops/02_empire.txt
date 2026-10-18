@@ -95,6 +95,7 @@ POPS = {
 			create_pop = { culture = marienburger size = 601746 }
 			create_pop = { culture = dawi size = 27045 }
 			create_pop = { culture = halfling size = 27045 }
+			create_pop = { culture = high_elf size = 20283 }
 		}
 	}
 	s:STATE_MIDDENHEIM = {
