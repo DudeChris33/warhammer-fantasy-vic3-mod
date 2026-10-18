@@ -1,1 +1,82 @@
-﻿
+﻿# Old World cultures — the Druchii, the dark elves of Naggaroth. Schema mirrors
+# common/cultures/wood_elf.txt, the reference elf entry. Each culture carries:
+#   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. Copied from the Naggarond (NGD) entry of
+#                mapgen/config/state_ownership_legend.json (still `proposed`): the Witch King's seat and
+#                the canon centre of Naggaroth. No Naggaroth state is painted yet, so a "largest owner"
+#                rule cannot be computed. Re-sync this colour if NGD's changes.
+#   religion   — cult_of_khaine, from common/religions/00_religions.txt (board item #8476).
+#   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
+#   language   — a language discrimination-trait id from common/discrimination_traits/01_languages.txt.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions — required field; an empty block is valid and is what this mod uses for now.
+#   obsessions — goods ids; empty until this mod authors common/goods/.
+#   noble_last_names / male_regal_first_names / female_regal_first_names are OPTIONAL and used here
+#                because the Druchii have a real aristocracy: the Witch King, the Hag Queen and the
+#                cities' nobles.
+# graphics/ethnicities — vanilla ships no elf portrait set. The values used below are deliberate
+#                STAND-INS chosen only so the culture renders at all (dark-haired morphs for the pale,
+#                black-haired Druchii), pending custom art (out of scope).
+# Heritage and language groups are shared with the Asur and Asrai (heritage_group_elf,
+# sphere_group_eltharin), confirmed by Chris on 2026-10-18. This gives real partial acceptance between
+# Druchii and the other elves under several laws; a Druchii-specific penalty is a possible follow-up.
+# Multi-word names use vanilla's underscore convention (of_Clar_Karond), displayed via the loc key.
+# Every name string used below also needs a matching localization key unless vanilla already ships
+# one (Morathi) — see localization/english/cultures_names_l_english.yml. Every culture additionally
+# needs its six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_dark_elf_l_english.yml.
+# Board item #8464 (epic #8462).
+
+################ Dark elf (Druchii) — Naggaroth; the Cult of Khaine and the Witch King ################
+# Register: Druhir — hard, sibilant and clipped, with -ith, -ir, -ar, -ak, -ra endings and kh-/dr-/
+# vh- clusters. Canon (army books, Total War lords, the Malus Darkblade and Sundering novels), recalled
+# from memory: Malekith, Morathi, Malus, Lokhir, Hellebron, Rakarth, Kouran, Tullaris, Lurhan,
+# Bruglir, Isilvar, Urial, Hauclir, Silar, Vanhir, Fuerlan, Dalvar, Nagaira, Eldire, Yasmir, Lhunara,
+# Tanithra. Medium confidence: Yeasir, Drusala. INVENTED in the same register (for Chris to review):
+# Kaldrath, Sethrak, Vorhaal, Draeloth and the twelve female names Kethra to Saelith, and the twelve
+# common last names after Darkhand. Noble last names are the six Black Cities plus Nagarythe and Anlec
+# (of_<Realm>, nehekharan precedent); common last names are earned epithets.
+
+dark_elf = {
+	color= rgb{ 114 24 138 }
+	religion = cult_of_khaine
+	heritage = heritage_druchii
+	language = sphere_druhir
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Malekith Malus Lokhir Rakarth Kouran Tullaris Lurhan Bruglir Isilvar Urial
+		Hauclir Silar Vanhir Fuerlan Dalvar Yeasir Kaldrath Sethrak Vorhaal Draeloth
+	}
+
+	female_common_first_names = {
+		Morathi Hellebron Nagaira Eldire Yasmir Lhunara Tanithra Drusala Kethra Ithrana
+		Sylsara Morvaine Khelra Lirassa Vaelith Sharelle Draeva Asheth Neriska Saelith
+	}
+
+	noble_last_names = {
+		of_Naggarond of_Ghrond of_Clar_Karond of_Karond_Kar
+		of_Hag_Graef of_Har_Ganeth of_Nagarythe of_Anlec
+	}
+
+	common_last_names = {
+		Darkblade Fellheart Dreadbringer Darkhand Coldheart Bloodhand Spitefang Grimthorn
+		Hateborn Venomtongue Blackbriar Shadeblade Cruelstar Ironwhip Duskfang Ashenheart
+	}
+
+	male_regal_first_names = {
+		Malekith Malus Lokhir Rakarth Lurhan
+	}
+
+	female_regal_first_names = {
+		Morathi Hellebron Eldire Nagaira Yasmir
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_dark_hair
+		1 = caucasian_northern_dark_hair
+	}
+}

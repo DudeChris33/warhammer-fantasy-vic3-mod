@@ -24,3 +24,6 @@ sphere_grumbarth = { type = language  trait_group = sphere_group_grumbarth }
 
 # Eltharin, the Asur tongue and root of the elven dialects. Board item #8463.
 sphere_eltharin = { type = language  trait_group = sphere_group_eltharin }
+
+# Druhir, the Druchii dialect of the elven tongue. Board item #8464.
+sphere_druhir = { type = language  trait_group = sphere_group_eltharin }

@@ -1,0 +1,5 @@
+﻿l_english:
+ # Culture display names for common/cultures/dark_elf.txt.
+ # One loc file per culture script file (per-name display keys live in the shared
+ # cultures_names_l_english.yml). Board item #8464 (epic #8462).
+ dark_elf:0 "Druchii"
