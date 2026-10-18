@@ -20,7 +20,7 @@ Hand-authored input for `python mapgen/generate_pop_history.py`, which writes `c
 | `state_overrides.json` | `tags{TAG: {mix}}` a tag-wide default mix (shares sum to exactly 100); `states[]` (`key` + `anchor`, `tag` when split, `mode`, `mix`). Mix entries: `culture`, `share` (percent), optional `religion` (only when not the culture's default; one equal to the default is folded away), optional `pop_type` (deliberate only; `slaves` needs the owner's `lawgroup_slavery` ≠ `law_slavery_banned` in `country_history/`), `source`, `why`. `mode: "add"` carves minorities (sum above 0, below 100) out of the default; `mode: "replace"` is the whole mix (sum exactly 100). |
 | `population.json` | Per tag `wealth` (`very_high high medium low`) and `literacy` (`very_high high middling low very_low baseline`), `source`, `why`. The generator warns when a literacy level is outside the usual band for the tag's tech tier in `country_history/`. |
 
-**Default mix** for a state with no override: the state's homelands (`add_homeland` in `common/history/states`, themselves derived from the owner's `cultures`), the owner's primary cultures counting double.
+**Default mix** for a state with no override: the state's homelands (`add_homeland` in `common/history/states`, set by hand in `mapgen/config/state_homelands.json`; a state with `[]` falls back to the owner's primary cultures alone), the owner's primary cultures counting double.
 
 Per-state keys are the canon `STATE_<NAME>` plus `anchor` (the `naming_anchor` in `state_ownership.json`); a key that no longer exists, or an anchor that moved, is a hard error, so a repaint or rename cannot silently re-target an override.
 

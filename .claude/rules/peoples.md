@@ -121,7 +121,7 @@ TAG = {
   must have a non-dynamic entry here (the D00-D99 `dynamic_country_definition` slots don't count), or
   `generate_state_history.py` holds its states back and `validate_map.py` fails ([testing.md](testing.md)).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
-- A tag's `cultures` also drive the generated state homelands (every tag but `UNO`, below): every state it owns at start gets one `add_homeland = cu:<culture>` per entry ([testing.md](testing.md), #6374), so list only the peoples that should be homeland in its states. A multi-culture tag that owns a state (today ERE, UVE, MOR) gives that state all of them.
+- A tag's `cultures` no longer drive homelands (#8604): `add_homeland` comes only from the hand-authored `mapgen/config/state_homelands.json` ([testing.md](testing.md)). The owner's `cultures` only seed a new state's row (`--sync-homelands`) and still set the pop-mix fallback for a state whose list is `[]`.
 - **Placeholder tags (`XS*`).** A state owner the setting needs but no culture can yet represent gets
   a deliberately generic stand-in rather than an invented nation. The `XS*` codes are the Skaven ones:
   "Skaven Clan <letter> (placeholder)", adjective "Skaven", `goblin` culture,

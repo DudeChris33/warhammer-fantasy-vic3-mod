@@ -1,7 +1,7 @@
 {
  "_comment": [
   "Per-state culture/religion mix, keyed on canon state key + naming anchor (never the Hilbert STATE number).",
-  "Default mix: the state's homelands (common/history/states add_homeland), the owner's primary cultures counting double.",
+  "Default mix: the state's homelands (common/history/states add_homeland, from mapgen/config/state_homelands.json; none = owner's primary cultures only), the owner's primary cultures counting double.",
   "'tags': a tag-wide default mix (shares sum to exactly 100). 'states': mode 'add' = minorities (shares sum < 100) are carved out of the default; mode 'replace' = the full mix (sum exactly 100).",
   "religion only where it differs from the culture's default; pop_type only where deliberate ('slaves' only where the owner's slavery law allows it)."
  ],
