@@ -34,3 +34,6 @@ heritage_thousand_gods = { type = heritage  trait_group = heritage_group_gods_of
 
 # The Serpent Queens (Khuresh). Board item #8482.
 heritage_serpent_cult = { type = heritage  trait_group = heritage_group_serpent_queens }
+
+# Spirits of Nippon (Nippon). Board item #8483.
+heritage_spirit_veneration = { type = heritage  trait_group = heritage_group_nippon_spirits }

@@ -24,3 +24,6 @@ heritage_group_gods_of_ind = { type = heritage }
 
 # The Serpent Queens (Khuresh). Board item #8482.
 heritage_group_serpent_queens = { type = heritage }
+
+# Spirits of Nippon (Nippon). Board item #8483.
+heritage_group_nippon_spirits = { type = heritage }

@@ -332,3 +332,15 @@ the_serpent_queens_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_the_serpent_queens_standard_of_living_add = 1
 }
+
+# ---- Spirits of Nippon (Nippon), board item #8483 ----
+
+spirits_of_nippon_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_spirits_of_nippon_standard_of_living_add = 1
+}
+
+spirits_of_nippon_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_spirits_of_nippon_standard_of_living_add = 1
+}

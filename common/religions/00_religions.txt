@@ -255,3 +255,13 @@ the_serpent_queens = {
 	color = { 0.60 0.20 0.75 }
 	taboos = { }
 }
+
+################ Spirits of Nippon (Nippon) — board item #8483 ################
+# Canon names no Nipponese faith: name, heritage and colour are disclosed inventions.
+
+spirits_of_nippon = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_spirit_veneration
+	color = { 0.90 0.20 0.45 }
+	taboos = { }
+}
