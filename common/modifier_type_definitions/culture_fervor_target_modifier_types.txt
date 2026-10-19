@@ -424,3 +424,13 @@ country_fervor_target_necrarch_add={
 	}
 }
 
+
+# ---- Board item #8469, Cathay ----
+
+country_fervor_target_cathayan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

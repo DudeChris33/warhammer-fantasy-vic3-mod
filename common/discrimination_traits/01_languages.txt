@@ -36,3 +36,6 @@ sphere_queekish = { type = language  trait_group = sphere_group_queekish }
 
 # Beastspeech. Board item #8467.
 sphere_beastspeech = { type = language  trait_group = sphere_group_beastspeech }
+
+# Cathayan. Board item #8469.
+sphere_cathayan = { type = language  trait_group = sphere_group_cathayan }

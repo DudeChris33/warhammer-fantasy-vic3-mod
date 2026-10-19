@@ -526,3 +526,15 @@ necrarch_cultural_acceptance_modifier_negative = {
 	country_necrarch_cultural_acceptance_add = 1
 }
 
+
+# ---- Board item #8469, Cathay ----
+
+cathayan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_cathayan_cultural_acceptance_add = 1
+}
+
+cathayan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_cathayan_cultural_acceptance_add = 1
+}

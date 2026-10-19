@@ -1,1 +1,64 @@
-﻿
+﻿# Old World cultures - Cathay. Schema mirrors common/cultures/beastmen.txt (verified reference entry). Each culture carries:
+#   color      - rgb{ R G B } with 0-255 integers. Cosmetic only. Copied from the WEI entry (Imperial Provinces,
+#                Wei-jin, the capital) in mapgen/config/state_ownership_legend.json, as high_elf, dark_elf and
+#                lizardmen copy their capital tag's legend colour: imperial red.
+#   religion   - celestial_dragons, from common/religions/00_religions.txt (board item #8480).
+#   heritage   - heritage_cathayan_human, in its own group: Cathayans are human but not Old Worlders, so they
+#                gain no acceptance bonus with the Empire's peoples.
+#   language   - sphere_cathayan, in its own group. heritage and language are SEPARATE top-level fields.
+#   traditions / obsessions - empty blocks, as everywhere in this mod.
+#   name_format = last_first - canon writes Cathayan names surname-first (Zhao Ming); vanilla han does the same.
+# graphics/ethnicities - STAND-INS: vanilla han's own values (east_asian / asian), pending custom art; no lore claim.
+# No regal name lists and no seal_and_signature_texture (vanilla han points it at a real-world seal).
+# Every name string used below also needs a matching localization key unless vanilla already ships one - see
+# localization/english/cultures_names_l_english.yml. Every culture additionally needs its six static modifier
+# definitions - see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_cathayan_humans_l_english.yml.
+# Board item #8469 (epic #8462).
+
+################ Cathayan - the Celestial Dragons' Middle Kingdom ################
+# Naming (Chris, 2026-10-18): peoples with rich canon use real-language personal names in the canon style.
+# Cathay's characters (Zhao Ming, Miao Ying, Yuan Bo) are written in Mandarin-style syllables, so these are
+# Mandarin-style names. CANON: the given names Ming, Bo, Ying and the surnames Zhao, Miao, Yuan (a random
+# character can come out as "Zhao Ming"; accepted). Every other name is INVENTED in the same register.
+# Banned and left out: ethnonyms, dynasties, religious figures, and names that point to one famous person.
+
+cathayan = {
+	color= rgb{ 252 0 0 }
+	religion = celestial_dragons
+	heritage = heritage_cathayan_human
+	language = sphere_cathayan
+
+	obsessions = { }
+
+	traditions = { }
+
+	name_format = last_first
+
+	male_common_first_names = {
+		Ming Bo Jian Hao Lun Feng Kai Tao Jun Sheng
+		Long Rui Bao Gang Ren Heng Lei Zhong Zhen Kang
+		Hui Wen Cheng Zhi
+	}
+
+	female_common_first_names = {
+		Ying Mei Lan Hua Lian Xiu Yue Jing Fen Ling
+		Qing Yan Shu Lin Hong Yun Rou Wan Juan Ning
+		Meilin Yuelan
+	}
+
+	noble_last_names = {
+		Zhao Miao Yuan Bai Xu Pei Ruan Xue Lu Gong
+		Ou Fang
+	}
+
+	common_last_names = {
+		Chen Guo He Luo Tan Ye Qiu Zeng Du Qiao
+		Fei Pan Cai Peng Shi Ding
+	}
+
+	graphics = east_asian
+	ethnicities = {
+		1 = asian
+	}
+}

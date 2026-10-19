@@ -51,3 +51,6 @@ heritage_skaven = { type = heritage  trait_group = heritage_group_skaven }
 
 # Beastmen. Board item #8467.
 heritage_beastmen = { type = heritage  trait_group = heritage_group_beastmen }
+
+# Cathayans. Board item #8469.
+heritage_cathayan_human = { type = heritage  trait_group = heritage_group_cathayan_human }

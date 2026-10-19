@@ -22,3 +22,6 @@ sphere_group_queekish = { type = language }
 
 # Beastspeech, the Beastmen's crude tongue (name invented). Board item #8467.
 sphere_group_beastspeech = { type = language }
+
+# Cathayan, the tongue of Cathay. Board item #8469.
+sphere_group_cathayan = { type = language }

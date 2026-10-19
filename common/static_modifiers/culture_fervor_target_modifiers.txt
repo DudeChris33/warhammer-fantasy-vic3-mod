@@ -526,3 +526,15 @@ necrarch_fervor_target_modifier_negative = {
 	country_fervor_target_necrarch_add = 1
 }
 
+
+# ---- Board item #8469, Cathay ----
+
+cathayan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_cathayan_add = 1
+}
+
+cathayan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_cathayan_add = 1
+}

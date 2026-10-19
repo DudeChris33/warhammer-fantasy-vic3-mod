@@ -526,3 +526,15 @@ necrarch_standard_of_living_modifier_negative = {
 	state_necrarch_standard_of_living_add = 1
 }
 
+
+# ---- Board item #8469, Cathay ----
+
+cathayan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cathayan_standard_of_living_add = 1
+}
+
+cathayan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cathayan_standard_of_living_add = 1
+}

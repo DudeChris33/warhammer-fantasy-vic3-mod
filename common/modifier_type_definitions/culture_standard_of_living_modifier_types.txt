@@ -424,3 +424,13 @@ state_necrarch_standard_of_living_add={
 	}
 }
 
+
+# ---- Board item #8469, Cathay ----
+
+state_cathayan_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

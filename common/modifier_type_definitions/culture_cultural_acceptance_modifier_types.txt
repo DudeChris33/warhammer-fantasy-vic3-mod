@@ -424,3 +424,13 @@ country_necrarch_cultural_acceptance_add={
 	}
 }
 
+
+# ---- Board item #8469, Cathay ----
+
+country_cathayan_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
