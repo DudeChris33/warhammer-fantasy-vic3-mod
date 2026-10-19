@@ -5,6 +5,8 @@ STATES = {
 			country = c:UNO
 			owned_provinces = { x06ADE7 x266144 x34A57C x7F58A6 x8D60B7 x966E03 xA4E560 xBBC798 xC0FE84 xE1212D xE9F252 xF1A8B8 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_LAND_012 = {
 		create_state = {

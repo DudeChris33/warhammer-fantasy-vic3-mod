@@ -35,6 +35,8 @@ STATES = {
 			country = c:UNO
 			owned_provinces = { x17024D x1F68F9 x31476A x42E9B4 x512DEC x56A0FF x64E537 x684349 x7BFA94 x8F75B8 x930FF1 xB2F673 xC6ADBE xCA0BD0 xDDC31B xEC0753 xFDA99D }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_STARSAND_PORT = {
 		create_state = {

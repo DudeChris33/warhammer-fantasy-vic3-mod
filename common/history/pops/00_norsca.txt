@@ -12,7 +12,8 @@ POPS = {
 	}
 	s:STATE_BLACK_BLOOD_PASS = {
 		region_state:KRV = {
-			create_pop = { culture = dawi_norse size = 125000 }
+			create_pop = { culture = dawi_norse size = 83333 }
+			create_pop = { culture = norscan size = 41667 }
 		}
 	}
 	s:STATE_BRENNUN_S_ENCAMPMENT = {
@@ -27,7 +28,8 @@ POPS = {
 	}
 	s:STATE_EAGLE_S_PEAK = {
 		region_state:KOR = {
-			create_pop = { culture = dawi_norse size = 125000 }
+			create_pop = { culture = dawi_norse size = 83333 }
+			create_pop = { culture = norscan size = 41667 }
 		}
 	}
 	s:STATE_ELDAGRIMM_GULF = {
@@ -42,7 +44,7 @@ POPS = {
 	}
 	s:STATE_FLESHWARREN = {
 		region_state:XSD = {
-			create_pop = { culture = goblin size = 82342 }
+			create_pop = { culture = skaven size = 82342 }
 		}
 	}
 	s:STATE_FOREST_OF_KNIVES = {
@@ -57,7 +59,8 @@ POPS = {
 	}
 	s:STATE_GIANTHOME_MOUNTAINS = {
 		region_state:KRD = {
-			create_pop = { culture = dawi_norse size = 43927 }
+			create_pop = { culture = dawi_norse size = 29285 }
+			create_pop = { culture = norscan size = 14642 }
 		}
 	}
 	s:STATE_GLOOMWRACK_COAST = {
@@ -72,17 +75,18 @@ POPS = {
 	}
 	s:STATE_GOROMADNY_HOLD = {
 		region_state:VOL = {
-			create_pop = { culture = gospodar size = 41315 }
+			create_pop = { culture = dawi size = 20658 }
+			create_pop = { culture = mountain_orc size = 20657 }
 		}
 	}
 	s:STATE_HELL_PIT = {
 		region_state:XSD = {
-			create_pop = { culture = goblin size = 84433 }
+			create_pop = { culture = skaven size = 84433 }
 		}
 	}
 	s:STATE_HELL_PIT_DEPTHS = {
 		region_state:XSD = {
-			create_pop = { culture = goblin size = 62533 }
+			create_pop = { culture = skaven size = 62533 }
 		}
 	}
 	s:STATE_HELSPIRE_COAST = {
@@ -92,17 +96,21 @@ POPS = {
 	}
 	s:STATE_HELSPIRE_MOUNTAINS = {
 		region_state:GRA = {
-			create_pop = { culture = norscan size = 31394 }
+			create_pop = { culture = norscan size = 20929 }
+			create_pop = { culture = wood_elf size = 10465 }
 		}
 	}
 	s:STATE_HIGH_PASS = {
 		region_state:VLG = {
-			create_pop = { culture = dawi size = 150000 }
+			create_pop = { culture = dawi size = 75000 }
+			create_pop = { culture = mountain_orc size = 37500 }
+			create_pop = { culture = ungol size = 37500 }
 		}
 	}
 	s:STATE_KRAKA_DRAK = {
 		region_state:KRD = {
-			create_pop = { culture = dawi_norse size = 106073 }
+			create_pop = { culture = dawi_norse size = 70715 }
+			create_pop = { culture = norscan size = 35358 }
 		}
 	}
 	s:STATE_KRAKEN_COAST = {
@@ -117,7 +125,7 @@ POPS = {
 	}
 	s:STATE_LAND_672 = {
 		region_state:XSD = {
-			create_pop = { culture = goblin size = 70692 }
+			create_pop = { culture = skaven size = 70692 }
 		}
 	}
 	s:STATE_MERMEDUS_COAST = {
@@ -132,7 +140,8 @@ POPS = {
 	}
 	s:STATE_MOUNTAINS_OF_HEL = {
 		region_state:AES = {
-			create_pop = { culture = norscan size = 26395 }
+			create_pop = { culture = norscan size = 17597 }
+			create_pop = { culture = dawi_norse size = 8798 }
 		}
 	}
 	s:STATE_NAGLFARI_COAST = {
@@ -207,12 +216,10 @@ POPS = {
 	}
 	s:STATE_WEST_HELSPIRE_MOUNTAINS = {
 		region_state:BJO = {
-			create_pop = { culture = norscan size = 10891 }
-			create_pop = { culture = wood_elf size = 5446 }
+			create_pop = { culture = norscan size = 16337 }
 		}
 		region_state:SOT = {
-			create_pop = { culture = wood_elf size = 33333 }
-			create_pop = { culture = norscan size = 16667 }
+			create_pop = { culture = norscan size = 50000 }
 		}
 	}
 }

@@ -2,7 +2,7 @@
 POPS = {
 	s:STATE_AGRIL_MIGDHAL = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 71717 }
+			create_pop = { culture = dark_lands_orc size = 71717 }
 		}
 	}
 	s:STATE_ALD_GRUNGAZ = {
@@ -49,7 +49,7 @@ POPS = {
 	}
 	s:STATE_CAUSEWAY_OF_ZHARR = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 125695 }
+			create_pop = { culture = dark_lands_orc size = 125695 }
 		}
 	}
 	s:STATE_DAEMON_S_RUIN = {
@@ -69,7 +69,7 @@ POPS = {
 	}
 	s:STATE_DESOLATION_OF_AZGORH = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 38683 }
+			create_pop = { culture = dark_lands_orc size = 38683 }
 		}
 	}
 	s:STATE_DIRETOWN = {
@@ -109,7 +109,8 @@ POPS = {
 	}
 	s:STATE_FIVE_RIVERS = {
 		region_state:MAW = {
-			create_pop = { culture = ogre size = 200000 }
+			create_pop = { culture = dark_lands_orc size = 100000 }
+			create_pop = { culture = dawi_zharr size = 100000 }
 		}
 	}
 	s:STATE_FOUNDRY_DISTRICT = {
@@ -131,12 +132,14 @@ POPS = {
 	}
 	s:STATE_GORGOTHDRINAZ = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 43676 }
+			create_pop = { culture = dark_lands_orc size = 21838 }
+			create_pop = { culture = dawi_zharr size = 21838 }
 		}
 	}
 	s:STATE_GREY_HAG_MOUNTAIN = {
 		region_state:GOR = {
-			create_pop = { culture = dawi_zharr size = 153835 }
+			create_pop = { culture = dawi_zharr size = 102557 }
+			create_pop = { culture = dark_lands_orc size = 51278 }
 		}
 	}
 	s:STATE_HEART_OF_ZHARRDUK = {
@@ -151,7 +154,7 @@ POPS = {
 	}
 	s:STATE_IVORY_ROAD = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 52110 }
+			create_pop = { culture = dark_lands_orc size = 52110 }
 		}
 	}
 	s:STATE_LAND_668 = {
@@ -178,17 +181,21 @@ POPS = {
 	}
 	s:STATE_MOUNT_AZGORH = {
 		region_state:GOR = {
-			create_pop = { culture = dawi_zharr size = 346165 }
+			create_pop = { culture = dawi_zharr size = 230777 }
+			create_pop = { culture = dark_lands_orc size = 115388 }
 		}
 	}
 	s:STATE_MOUNT_SILVERSPEAR = {
 		region_state:SLV = {
-			create_pop = { culture = dawi size = 125000 }
+			create_pop = { culture = dawi size = 62500 }
+			create_pop = { culture = mountain_orc size = 31250 }
+			create_pop = { culture = skaven size = 31250 }
 		}
 	}
 	s:STATE_NAGGRUNDRINAZ = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 65504 }
+			create_pop = { culture = dawi_zharr size = 43669 }
+			create_pop = { culture = dark_lands_orc size = 21835 }
 		}
 	}
 	s:STATE_NORTH_DARK_LANDS = {
@@ -198,7 +205,7 @@ POPS = {
 	}
 	s:STATE_NORTH_HOWLING_WASTES = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 82541 }
+			create_pop = { culture = dark_lands_orc size = 82541 }
 		}
 	}
 	s:STATE_OLD_SILK_ROAD = {
@@ -220,7 +227,7 @@ POPS = {
 	}
 	s:STATE_PLAINS_OF_GRIEF = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 83528 }
+			create_pop = { culture = dark_lands_orc size = 83528 }
 		}
 	}
 	s:STATE_PLAIN_OF_BONES = {
@@ -245,12 +252,14 @@ POPS = {
 	}
 	s:STATE_SKULL_CLIFFS = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 183826 }
+			create_pop = { culture = dawi_zharr size = 122551 }
+			create_pop = { culture = dark_lands_orc size = 61275 }
 		}
 	}
 	s:STATE_SKULL_ROAD = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 68999 }
+			create_pop = { culture = dawi_zharr size = 45999 }
+			create_pop = { culture = dark_lands_orc size = 23000 }
 		}
 	}
 	s:STATE_SKULL_STEPPES = {
@@ -265,12 +274,12 @@ POPS = {
 	}
 	s:STATE_SOUTH_HOWLING_WASTES = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 73517 }
+			create_pop = { culture = dark_lands_orc size = 73517 }
 		}
 	}
 	s:STATE_STEEL_PLAINS = {
 		region_state:MZN = {
-			create_pop = { culture = dawi_zharr size = 45402 }
+			create_pop = { culture = dark_lands_orc size = 45402 }
 		}
 	}
 	s:STATE_SWAMP_EATER_HOLD = {
@@ -280,12 +289,13 @@ POPS = {
 	}
 	s:STATE_THE_SENTINELS = {
 		region_state:EYB = {
-			create_pop = { culture = ogre size = 150000 }
+			create_pop = { culture = dark_lands_orc size = 75000 }
+			create_pop = { culture = dawi_zharr size = 75000 }
 		}
 	}
 	s:STATE_TOWER_OF_THE_BLOODYTOOTH = {
 		region_state:THG = {
-			create_pop = { culture = ogre size = 150000 }
+			create_pop = { culture = dark_lands_orc size = 150000 }
 		}
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }
@@ -298,7 +308,8 @@ POPS = {
 	}
 	s:STATE_WHEATLANDS = {
 		region_state:UZK = {
-			create_pop = { culture = dawi_zharr size = 173356 }
+			create_pop = { culture = dawi_zharr size = 115571 }
+			create_pop = { culture = dark_lands_orc size = 57785 }
 		}
 	}
 	s:STATE_WOLF_EDGE = {
@@ -308,7 +319,7 @@ POPS = {
 	}
 	s:STATE_WOLF_LANDS = {
 		region_state:DLO = {
-			create_pop = { culture = mountain_orc size = 111074 }
+			create_pop = { culture = dark_lands_orc size = 111074 }
 		}
 	}
 	s:STATE_ZORN_DUM = {

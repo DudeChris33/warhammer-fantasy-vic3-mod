@@ -22,7 +22,7 @@ POPS = {
 	}
 	s:STATE_MORTIS_TARN = {
 		region_state:NUM = {
-			create_pop = { culture = nehekharan size = 9792 }
+			create_pop = { culture = dawi_ancestral size = 9792 }
 		}
 		region_state:UNO = {
 			create_pop = { culture = goblin size = 1000 }

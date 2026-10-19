@@ -12,12 +12,13 @@ POPS = {
 	}
 	s:STATE_DUSHYKA = {
 		region_state:BOL = {
-			create_pop = { culture = gospodar size = 110832 }
+			create_pop = { culture = ungol size = 110832 }
 		}
 	}
 	s:STATE_EASTERN_OBLAST = {
 		region_state:PRA = {
-			create_pop = { culture = gospodar size = 471018 }
+			create_pop = { culture = gospodar size = 314012 }
+			create_pop = { culture = ungol size = 157006 }
 		}
 	}
 	s:STATE_ERENGRAD = {
@@ -38,22 +39,24 @@ POPS = {
 	}
 	s:STATE_KISLEV_FOOTHILLS = {
 		region_state:ROP = {
-			create_pop = { culture = ungol size = 114169 }
+			create_pop = { culture = ungol size = 76113 }
+			create_pop = { culture = mountain_orc size = 38056 }
 		}
 	}
 	s:STATE_MAZHOROD = {
 		region_state:KSV = {
-			create_pop = { culture = gospodar size = 129346 }
+			create_pop = { culture = gospodar size = 86231 }
+			create_pop = { culture = ungol size = 43115 }
 		}
 	}
 	s:STATE_NORTHERN_OBLAST = {
 		region_state:BOL = {
-			create_pop = { culture = gospodar size = 239168 }
+			create_pop = { culture = ungol size = 239168 }
 		}
 	}
 	s:STATE_SEPUKZY = {
 		region_state:VOL = {
-			create_pop = { culture = gospodar size = 258685 }
+			create_pop = { culture = ungol size = 258685 }
 		}
 	}
 	s:STATE_SOUTHERN_OBLAST = {
@@ -81,12 +84,14 @@ POPS = {
 	}
 	s:STATE_THE_ROPSALS = {
 		region_state:ROP = {
-			create_pop = { culture = ungol size = 85831 }
+			create_pop = { culture = ungol size = 57221 }
+			create_pop = { culture = mountain_orc size = 28610 }
 		}
 	}
 	s:STATE_THE_TAIGA = {
 		region_state:PRA = {
-			create_pop = { culture = gospodar size = 78982 }
+			create_pop = { culture = gospodar size = 52655 }
+			create_pop = { culture = ungol size = 26327 }
 		}
 	}
 	s:STATE_TROLL_COUNTRY = {

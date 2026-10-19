@@ -29,12 +29,10 @@ POPS = {
 	}
 	s:STATE_DRAKWALD_FOREST = {
 		region_state:CRB = {
-			create_pop = { culture = middenlander size = 83333 }
-			create_pop = { culture = goblin size = 41667 }
+			create_pop = { culture = middenlander size = 125000 }
 		}
 		region_state:XSB = {
-			create_pop = { culture = goblin size = 66667 }
-			create_pop = { culture = middenlander size = 33333 }
+			create_pop = { culture = middenlander size = 100000 }
 		}
 	}
 	s:STATE_EAST_AVERLAND = {
@@ -66,7 +64,8 @@ POPS = {
 	}
 	s:STATE_GRYPHON_WOOD = {
 		region_state:GRW = {
-			create_pop = { culture = wood_elf size = 40000 }
+			create_pop = { culture = wood_elf size = 26667 }
+			create_pop = { culture = ostermarker size = 13333 }
 		}
 	}
 	s:STATE_HOCHLAND = {
@@ -78,16 +77,17 @@ POPS = {
 	s:STATE_KREUTZHOFEN = {
 		region_state:WIS = {
 			create_pop = { culture = wissenlander size = 90437 }
-			create_pop = { culture = goblin size = 45219 }
+			create_pop = { culture = sollander size = 45219 }
 		}
 		region_state:XSI = {
-			create_pop = { culture = goblin size = 33333 }
-			create_pop = { culture = wissenlander size = 16667 }
+			create_pop = { culture = sollander size = 25000 }
+			create_pop = { culture = wissenlander size = 25000 }
 		}
 	}
 	s:STATE_LAURELORN_FOREST = {
 		region_state:NLD = {
-			create_pop = { culture = nordlander size = 93514 }
+			create_pop = { culture = nordlander size = 62343 }
+			create_pop = { culture = wood_elf size = 31171 }
 		}
 	}
 	s:STATE_MARIENBURG = {
@@ -113,12 +113,13 @@ POPS = {
 	}
 	s:STATE_MIDDLE_MOUNTAINS = {
 		region_state:BRK = {
-			create_pop = { culture = norscan size = 150000 }
+			create_pop = { culture = hochlander size = 150000 }
 		}
 	}
 	s:STATE_MOOTLAND = {
 		region_state:MOO = {
-			create_pop = { culture = halfling size = 368000 }
+			create_pop = { culture = halfling size = 245333 }
+			create_pop = { culture = averlander size = 122667 }
 			create_pop = { culture = reiklander size = 32000 }
 		}
 	}
@@ -142,17 +143,20 @@ POPS = {
 	}
 	s:STATE_REIKWALD_FOREST = {
 		region_state:REI = {
-			create_pop = { culture = reiklander size = 253682 }
+			create_pop = { culture = reiklander size = 169121 }
+			create_pop = { culture = blood_dragon size = 84561 }
 		}
 	}
 	s:STATE_SCHADENSUMPF = {
 		region_state:MID = {
-			create_pop = { culture = middenlander size = 94964 }
+			create_pop = { culture = mountain_orc size = 47482 }
+			create_pop = { culture = nordlander size = 47482 }
 		}
 	}
 	s:STATE_SOLLAND = {
 		region_state:WIS = {
-			create_pop = { culture = wissenlander size = 403771 }
+			create_pop = { culture = wissenlander size = 269181 }
+			create_pop = { culture = sollander size = 134590 }
 		}
 	}
 	s:STATE_SOUTH_MIDDENLAND = {
@@ -175,7 +179,8 @@ POPS = {
 	}
 	s:STATE_THE_VELDT = {
 		region_state:OSM = {
-			create_pop = { culture = ostermarker size = 180327 }
+			create_pop = { culture = ostermarker size = 120218 }
+			create_pop = { culture = gospodar size = 60109 }
 		}
 	}
 	s:STATE_THE_WASTELAND = {
@@ -185,12 +190,10 @@ POPS = {
 	}
 	s:STATE_VOLGEN = {
 		region_state:TAL = {
-			create_pop = { culture = talabeclander size = 123398 }
-			create_pop = { culture = goblin size = 61699 }
+			create_pop = { culture = talabeclander size = 185097 }
 		}
 		region_state:XSC = {
-			create_pop = { culture = goblin size = 50000 }
-			create_pop = { culture = talabeclander size = 25000 }
+			create_pop = { culture = talabeclander size = 75000 }
 		}
 	}
 	s:STATE_VORBERGLAND = {
@@ -209,28 +212,23 @@ POPS = {
 			create_pop = { culture = mountain_orc size = 25000 }
 		}
 		region_state:MID = {
-			create_pop = { culture = middenlander size = 168929 }
-			create_pop = { culture = goblin size = 84464 }
+			create_pop = { culture = middenlander size = 253393 }
 		}
 	}
 	s:STATE_WEST_NORDLAND = {
 		region_state:LAU = {
-			create_pop = { culture = wood_elf size = 33333 }
-			create_pop = { culture = nordlander size = 16667 }
+			create_pop = { culture = nordlander size = 50000 }
 		}
 		region_state:NLD = {
-			create_pop = { culture = nordlander size = 118441 }
-			create_pop = { culture = wood_elf size = 59220 }
+			create_pop = { culture = nordlander size = 177661 }
 		}
 	}
 	s:STATE_WEST_OSTERMARK = {
 		region_state:OSM = {
-			create_pop = { culture = ostermarker size = 141973 }
-			create_pop = { culture = goblin size = 70986 }
+			create_pop = { culture = ostermarker size = 212959 }
 		}
 		region_state:XSA = {
-			create_pop = { culture = goblin size = 66667 }
-			create_pop = { culture = ostermarker size = 33333 }
+			create_pop = { culture = ostermarker size = 100000 }
 		}
 	}
 	s:STATE_WEST_STIRLAND = {
@@ -246,7 +244,8 @@ POPS = {
 	}
 	s:STATE_WISSENLAND = {
 		region_state:WIS = {
-			create_pop = { culture = wissenlander size = 881352 }
+			create_pop = { culture = wissenlander size = 587568 }
+			create_pop = { culture = blood_dragon size = 293784 }
 			create_pop = { culture = dawi size = 57479 }
 			create_pop = { culture = halfling size = 19160 }
 		}

@@ -78,6 +78,7 @@ STATES = {
 			owned_provinces = { x1F1A2A x4473BF x80E2B1 xA513B2 xE1AC23 xF9C095 }
 		}
 
+		add_homeland = cu:bretonnian
 		add_homeland = cu:mousillon
 	}
 	s:STATE_CASTLE_SANGASSE = {
@@ -198,8 +199,8 @@ STATES = {
 			owned_provinces = { x002DEA x13B6E3 x174347 x25877F x33CBB7 x3F6FF8 x4AE114 x5E6A0D x61F671 x703AA9 xDAD455 xF0E19B }
 		}
 
+		add_homeland = cu:bretonnian
 		add_homeland = cu:mountain_orc
-		add_homeland = cu:goblin
 	}
 	s:STATE_MONTFORT = {
 		create_state = {
@@ -215,6 +216,7 @@ STATES = {
 			owned_provinces = { x0E51A5 x48EC90 x52B7F7 x5B891C x855B82 x8F26E9 xA63C46 xBD51A3 xCB95DB xDF3A7E xDF3F51 xEEAC1D }
 		}
 
+		add_homeland = cu:bretonnian
 		add_homeland = cu:mousillon
 	}
 	s:STATE_OAK_OF_PROPHECY = {
@@ -223,6 +225,7 @@ STATES = {
 			owned_provinces = { x6A9944 xA70836 }
 		}
 
+		add_homeland = cu:bretonnian
 		add_homeland = cu:wood_elf
 	}
 	s:STATE_PARRAVON = {

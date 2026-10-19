@@ -5,108 +5,144 @@ STATES = {
 			country = c:UNO
 			owned_provinces = { x22D4E0 x482E75 x52D874 x5F43D2 x955817 xB2C821 xD80139 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_AVELORN = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x04091D x097C30 x124D55 x1B1E7A x1B7B1E x1D4623 x20918D x23EF9F x2BB8AD x37A6EA x3D2CA5 x40780F x40D4B3 x45EB22 x5D007F x65D1A4 x662E48 x70F8C4 x825A14 x8B2B39 xA24096 xA7B3A9 xAB11BB xB084CE xBEC906 xC79A2B xCD0D3E xD5DE63 xE4229B xE780AD xECF3C0 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_BLIGHTED_ISLE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x27118A x293460 x2EE86D x5CD22D x61E89C x962407 xA21244 xAB2463 xB927A1 xDE8136 xF43FAD }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_CENTRAL_ELLYRION = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x15EC61 x17511C x2681C1 x29DFD3 x38240B x3D971E x4F3968 x62F0B3 x6BC1D8 x8BA85A xB58895 xCD8A5F xF2E3F4 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_CHRACE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0457EC x07B5FE x108723 x15FA36 x243E6E x37F5B9 x499803 x5B3A4D x6EF198 x8093E2 x811103 x8B7A08 x8F1914 xB0D39D xB80CE2 xBD02D4 xBF17D5 xC275E7 xCB470C xEB2D8E }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_CLOTHIQUE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x038BFC x094009 x3A46E1 x3FFAEE x54FB4A x7DE143 x81DCF3 x8AAE18 x90212B xA2533E xAA741D xBE4BE5 xDE3267 xEC769F }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_DESOLATION_OF_TETHLIS = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0F3E12 x1E4E3A x28A96A x2C9272 x2F2494 x334E96 x3F7DCD x44F0E0 x46B712 x58A82B x5C063D x90ED1B x93021C x98752F x98F250 xAC2C7A xB3B48E xB646B0 xBA21E3 xDFCA47 xE6866B }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_DRAKE_ISLES = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0572AB x07D67B x170720 x362F87 x7A268D xF08024 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_EAGLE_GATE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x2257BF xBB1C25 xEFE286 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_EASTERN_ANNULII_MOUNTAINS = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0176FB x04D50D x08331F x24BB8F x3872DA x48AB96 x4A1524 x4C2A25 x4F8837 x5A6E5D x5BB76E x5DCC6F x65FFF6 x69FBA6 x783FDE x8BF729 x8F553B x96DD4F x9D9973 x9FAE74 xA30C86 xA56281 xAD550E xADF2AC xBD7FF5 xCBC42D xD34C41 xD49552 xDC1D66 xED2212 xF9EEE7 xFC03E8 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_EASTERN_EATAINE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x04376F x17EEBA x1A7307 x20BFDF x4EEA99 x599498 x6B7309 x79B741 xB605B6 xD60CB5 xF29525 xFB664A }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_FALLOW_MARSH = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0C8B73 x1E0D40 x23A0D0 x402940 x93AD8F x958669 xB90724 xE731DE }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_FINUVAL_PLAIN = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0C0E52 x2323AF x3489D2 x3A390C x56C17C x6863C6 x6DD6D9 x9B1526 xA4D2B8 xAA45CB xAFB8DE xC6CE3B xCA2C4D xCF9F60 xFA6C08 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_GAEAN_VALE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x07E450 x2D3DE5 x6CA070 xC5C624 xCB755E }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_GRIFFON_GATE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x1DB09C x34C5F9 x3CAAB1 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_INNER_CALEDOR = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x004E67 x02EE5E x1A03BB x311918 x434B2B x8A107A xA125D7 xC67F6C xCF5091 xF4AA26 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_INNER_SEA_CHAIN = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x8C86F2 x91FA05 xFADB54 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_ISLE_OF_AESTUNIAE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x445342 x4E9BCA x508279 xA61BC9 xA90F62 xE28ABB xEEDA6F xF9A018 xFC323A }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_LAND_001 = {
 		create_state = {
@@ -311,107 +347,143 @@ STATES = {
 			country = c:UNO
 			owned_provinces = { x1066A6 x35C03B x520C84 x9788C2 xEB0D11 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_LOTHERN_WEST = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x079581 x125B2A x1EAADE x2CEF16 x5B19D0 x807365 x9ED4AF xA5CCFA xBCE257 xE23BEC }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_NORTHERN_ELLYRION = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x01F41C x15AB67 x274DB1 x3B04FC x4B9F2F x521A59 x7AD200 x9CCD83 xA02B95 xAE6FCD xB9B297 xBCB405 xC5852A xF051D2 xFE960A }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_NORTHERN_SAPHERY = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x02713D x0B4262 x19869A x27CAD2 x309BF7 x360F0A x47B154 x6439C4 x6CCEC2 x97D791 xA0A8B6 xCED370 xF42D05 xFE26BE }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_NORTHERN_YVRESSE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x246CC0 x305FD0 x32B0F8 x525B53 x52977A x580A8D x7D6422 x863547 x8F066C x94797F xAB8EDC xB46001 xD9B996 xDF2CA9 xE7FDCE xFF132B }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_NORTH_SHIFTING_ISLES = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x08F13A x20A435 xF539EF xFCC203 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_PHOENIX_GATE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x152E46 x23727E x9C5062 xF547C4 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_SHADOW_MARCH = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0E7222 x15BE0F x178441 x1CB65A x1CE4AC x3C9CDC x505427 x53B239 x53E08B x55C73A x59254C x640B72 x676984 x790BCE x7B20CF x8338AC x875006 x95943E x9B0751 xA07A64 xA3D876 xACA99B xB57AC0 xB78FC1 xBAEDD3 xC060E6 xC3BEF8 xD20330 xD58F94 xD77643 xF75CC5 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_SKYHAVEN_PLATEAU = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x02C00C x39BBEB x4D7336 x50D148 x52F8F1 x56445B x72CCCB x7B9DF0 x846F15 x8D403A x9B8472 xA0F785 xA9C8AA xBF94F6 xCF223F }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_SOUTHERN_ELLYRION = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0EA074 x11FE86 x1CA885 x25B5D1 x2E86F6 x3902A3 x3CCB2E x5CB1B0 x6224C3 x6AF5E8 x8E19FF x9920A2 xACD7ED xC3ED4A xF21804 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_SOUTHERN_SAPHERY = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x086171 x1F76CE x2DBB06 x6158D3 x898584 x9C428D xD4C3A4 xE87AEF }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_SOUTHERN_YVRESSE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0A7672 x0FE985 x11C25F x155C98 x24C964 x2C71F5 x4C5877 x613856 x77251F xA54FD9 xB6F223 xC300DD xCE0780 xD69C7E xD8EDA6 xE51CDD xFE473B }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_SOUTH_SHIFTING_ISLES = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x558B13 x63CF4B x6D4BE3 x79F83B xD5049E }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_STONESUNG_PLATEAU = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x064C70 x59D0BF x62A1E4 x87FB79 xAD3491 xE0F2DB }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_THE_DRAGON_SPINE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x0D0894 x15D9B9 x1B4CCC x326229 x497786 x4E02FF x5248AB x608CE3 xC2556A xDEDDDA xF5F337 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_THE_WHEELED_MARCH = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x134797 x218BCF x332E19 x38A12C x3FED19 x66CBE6 x6F9D0B x7E9F5E x94F6A0 xA232C1 xB17F10 xF6BF27 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_TIRANOC = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x00EC05 x0AC541 x2538B0 x38EFFB x671AB5 x6FEBDA x755EED x870137 xA8FCBA xB7539A xC37029 xCC414E xF70DF6 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 	s:STATE_UNICORN_GATE = {
 		create_state = {
 			country = c:UNO
 			owned_provinces = { x67E6A5 xF266D3 xF7D9E6 }
 		}
+
+		add_homeland = cu:high_elf
 	}
 }

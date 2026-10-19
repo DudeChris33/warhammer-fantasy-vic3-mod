@@ -38,7 +38,7 @@ STATES = {
 			owned_provinces = { x0EDC9B x1D20D3 x25F1F8 x2BC682 x2D0AC0 x343630 x34B824 x486F6F x4B4B8D x5D3CA6 x6979B2 x7EE95A x8ED347 x940A33 xA442EF xABCB03 xAFCB86 xC42971 xCB4239 xCE9749 xD07925 xD5CBBB xF5D2BA }
 		}
 
-		add_homeland = cu:nehekharan
+		add_homeland = cu:dawi_ancestral
 	}
 	s:STATE_PYRAMID_OF_TUTANKHANUT = {
 		create_state = {

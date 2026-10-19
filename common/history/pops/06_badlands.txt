@@ -45,7 +45,7 @@ POPS = {
 	}
 	s:STATE_HOWLING_RIVER_VALLEY = {
 		region_state:RAA = {
-			create_pop = { culture = border_princer size = 125000 }
+			create_pop = { culture = dawi size = 125000 }
 		}
 	}
 	s:STATE_MARG_BEH_MARD = {
@@ -61,18 +61,19 @@ POPS = {
 	}
 	s:STATE_MOUNT_BLOODHORN = {
 		region_state:EKR = {
-			create_pop = { culture = dawi_ancestral size = 125000 }
+			create_pop = { culture = badlands_orc size = 62500 }
+			create_pop = { culture = mountain_orc size = 62500 }
 		}
 	}
 	s:STATE_MYRMIDIA_S_COAST = {
 		region_state:GDO = {
-			create_pop = { culture = border_princer size = 112500 }
+			create_pop = { culture = badlands_orc size = 112500 }
 			create_pop = { culture = tilean size = 37500 }
 		}
 	}
 	s:STATE_NORTHERN_BADLANDS = {
 		region_state:DUN = {
-			create_pop = { culture = border_princer size = 125000 }
+			create_pop = { culture = badlands_orc size = 125000 }
 		}
 	}
 	s:STATE_NORTH_BADLAND_HILLS = {
@@ -91,8 +92,7 @@ POPS = {
 			create_pop = { culture = goblin size = 9785 }
 		}
 		region_state:STR = {
-			create_pop = { culture = sylvanian_vampire size = 20000 }
-			create_pop = { culture = mountain_orc size = 10000 }
+			create_pop = { culture = strigoi size = 30000 }
 		}
 	}
 	s:STATE_SOUTH_BADLAND_HILLS = {
@@ -125,7 +125,8 @@ POPS = {
 	}
 	s:STATE_VARENKA_HILLS = {
 		region_state:BVR = {
-			create_pop = { culture = dawi size = 300000 }
+			create_pop = { culture = dawi size = 200000 }
+			create_pop = { culture = badlands_orc size = 100000 }
 		}
 	}
 	s:STATE_WESTERN_BADLANDS = {

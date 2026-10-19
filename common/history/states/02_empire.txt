@@ -6,6 +6,8 @@ STATES = {
 			owned_provinces = { x3C4E0D x5664D8 x61A7A2 x78BCFF x9B5620 x9E1694 x9FCA1E xA6E7B9 xDA8586 }
 		}
 
+		add_homeland = cu:averlander
+		add_homeland = cu:sylvanian
 		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_AVERHEIM = {
@@ -38,6 +40,8 @@ STATES = {
 			owned_provinces = { x1ECB5B x20146C x26C2BB x332044 x456E01 x85B826 xB60A89 xBC528E xFBD596 xFFDF1B }
 		}
 
+		add_homeland = cu:stirlander
+		add_homeland = cu:sylvanian
 		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_DRAKWALD_FOREST = {
@@ -51,7 +55,6 @@ STATES = {
 		}
 
 		add_homeland = cu:middenlander
-		add_homeland = cu:goblin
 	}
 	s:STATE_EAST_AVERLAND = {
 		create_state = {
@@ -83,6 +86,8 @@ STATES = {
 			owned_provinces = { x08FF0F x26F10D x561609 x59B515 xCFCDB2 xE3A57A xEA821B xF44D82 }
 		}
 
+		add_homeland = cu:stirlander
+		add_homeland = cu:sylvanian
 		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_EAST_TALABECLAND = {
@@ -99,6 +104,7 @@ STATES = {
 			owned_provinces = { x14FFF4 x3A5989 x76C87B xD89102 xEB4E0B xF48E7C }
 		}
 
+		add_homeland = cu:ostermarker
 		add_homeland = cu:wood_elf
 	}
 	s:STATE_HOCHLAND = {
@@ -119,8 +125,8 @@ STATES = {
 			owned_provinces = { x25D64E xF78B17 }
 		}
 
+		add_homeland = cu:sollander
 		add_homeland = cu:wissenlander
-		add_homeland = cu:goblin
 	}
 	s:STATE_LAURELORN_FOREST = {
 		create_state = {
@@ -129,6 +135,7 @@ STATES = {
 		}
 
 		add_homeland = cu:nordlander
+		add_homeland = cu:wood_elf
 	}
 	s:STATE_MARIENBURG = {
 		create_state = {
@@ -160,7 +167,7 @@ STATES = {
 			owned_provinces = { x68F38F x8123AB xC1CA74 xE72409 xFA2FE1 }
 		}
 
-		add_homeland = cu:norscan
+		add_homeland = cu:hochlander
 	}
 	s:STATE_MOOTLAND = {
 		create_state = {
@@ -168,6 +175,7 @@ STATES = {
 			owned_provinces = { x301ED6 x30BC74 x6C8DC8 x91E75D xAB4DE2 xC67197 xCE564F }
 		}
 
+		add_homeland = cu:averlander
 		add_homeland = cu:halfling
 	}
 	s:STATE_NORTH_OSTLAND = {
@@ -201,6 +209,7 @@ STATES = {
 		}
 
 		add_homeland = cu:reiklander
+		add_homeland = cu:blood_dragon
 	}
 	s:STATE_SCHADENSUMPF = {
 		create_state = {
@@ -208,7 +217,8 @@ STATES = {
 			owned_provinces = { x0C7D9E x21CCC9 x31D733 x609F8B x939FBA xAAB517 xB2AC77 xC00442 xF56841 }
 		}
 
-		add_homeland = cu:middenlander
+		add_homeland = cu:mountain_orc
+		add_homeland = cu:nordlander
 	}
 	s:STATE_SOLLAND = {
 		create_state = {
@@ -216,6 +226,7 @@ STATES = {
 			owned_provinces = { x10747B x1DFF6B x210EAE x466843 x5D7DA0 x7492FD x7ECDB0 x82D735 x99EC92 xAEABF4 xB101EF xBF4627 xD65B84 xE19079 xE43543 xE49FBC xFD6D76 }
 		}
 
+		add_homeland = cu:sollander
 		add_homeland = cu:wissenlander
 	}
 	s:STATE_SOUTH_MIDDENLAND = {
@@ -248,6 +259,7 @@ STATES = {
 			owned_provinces = { x1DD119 x374A46 x675BAF x688443 x68CE3F x7F99A0 xCA4CCA xD31DEF xE16227 xE4AD91 xF87784 }
 		}
 
+		add_homeland = cu:gospodar
 		add_homeland = cu:ostermarker
 	}
 	s:STATE_THE_WASTELAND = {
@@ -269,7 +281,6 @@ STATES = {
 		}
 
 		add_homeland = cu:talabeclander
-		add_homeland = cu:goblin
 	}
 	s:STATE_VORBERGLAND = {
 		create_state = {
@@ -297,7 +308,6 @@ STATES = {
 			owned_provinces = { x1D53F8 x2B9830 x50E3F0 x651389 x680722 xA6D9E4 xC9CFA9 xD4A7FA xEF293E }
 		}
 
-		add_homeland = cu:goblin
 		add_homeland = cu:middenlander
 	}
 	s:STATE_WEST_NORDLAND = {
@@ -310,7 +320,6 @@ STATES = {
 			owned_provinces = { x1A44B5 x2888ED x28D7BC x48E7BD x64F7DF x7175E5 x7C0D3C xC6C066 xDDD5C3 xE71F36 }
 		}
 
-		add_homeland = cu:wood_elf
 		add_homeland = cu:nordlander
 	}
 	s:STATE_WEST_OSTERMARK = {
@@ -324,7 +333,6 @@ STATES = {
 		}
 
 		add_homeland = cu:ostermarker
-		add_homeland = cu:goblin
 	}
 	s:STATE_WEST_STIRLAND = {
 		create_state = {
@@ -340,6 +348,8 @@ STATES = {
 			owned_provinces = { x0FDBB0 x2D0F93 x4424F0 x5A4DE0 x63DD20 x71633D x722158 x888B42 x8ED81A xA5ED77 xAC19D2 xF0A0A1 }
 		}
 
+		add_homeland = cu:stirlander
+		add_homeland = cu:sylvanian
 		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_WISSENLAND = {
@@ -348,6 +358,7 @@ STATES = {
 			owned_provinces = { x2C43A3 x312BC0 x519D38 x8E0C2A xB365BF xBBA71B xF8160D }
 		}
 
+		add_homeland = cu:blood_dragon
 		add_homeland = cu:wissenlander
 	}
 	s:STATE_WURTBAD = {

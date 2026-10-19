@@ -22,7 +22,7 @@ STATES = {
 			owned_provinces = { x39AE16 x3D5AF7 x67D8D0 x6E94F4 x761D08 x880E21 x96038A xA8CE68 xBB5D1F xC42E44 xD2727C xFD3F24 }
 		}
 
-		add_homeland = cu:gospodar
+		add_homeland = cu:ungol
 	}
 	s:STATE_EASTERN_OBLAST = {
 		create_state = {
@@ -31,6 +31,7 @@ STATES = {
 		}
 
 		add_homeland = cu:gospodar
+		add_homeland = cu:ungol
 	}
 	s:STATE_ERENGRAD = {
 		create_state = {
@@ -63,6 +64,7 @@ STATES = {
 			owned_provinces = { x091F8C x3AA385 x3E5539 x458E7E x5BF868 x5CA3DB x73C70D x81FD70 x9912CD x9AAAAD xA8EEE5 xCBD6D5 xD8DAFE xE3C5F7 }
 		}
 
+		add_homeland = cu:mountain_orc
 		add_homeland = cu:ungol
 	}
 	s:STATE_MAZHOROD = {
@@ -72,6 +74,7 @@ STATES = {
 		}
 
 		add_homeland = cu:gospodar
+		add_homeland = cu:ungol
 	}
 	s:STATE_NORTHERN_OBLAST = {
 		create_state = {
@@ -79,7 +82,7 @@ STATES = {
 			owned_provinces = { x07C3D3 x0EE16E x1D25A6 x2D1D68 x343B03 x427F3B x4B5060 x5B4822 x698C5A x6D9AB2 x70A9F5 x7EEE2D x87BF52 x94DAF6 xA447C2 xB28BFA xC9A157 xDDA771 xE0B6B4 xEEFAEC xF7CC11 }
 		}
 
-		add_homeland = cu:gospodar
+		add_homeland = cu:ungol
 	}
 	s:STATE_SEPUKZY = {
 		create_state = {
@@ -87,7 +90,7 @@ STATES = {
 			owned_provinces = { x009D36 x03FB48 x17B293 x322602 x379915 x3D0C28 x4A074F x542185 x65C3CF x6B0890 x740807 x797B1A x824C3F x84B00F x8B1D64 xB79D96 xB8F47C xCEB2F3 xD149E8 xD5D08E xE414C6 xEB3B63 xFD8DF3 }
 		}
 
-		add_homeland = cu:gospodar
+		add_homeland = cu:ungol
 	}
 	s:STATE_SOUTHERN_OBLAST = {
 		create_state = {
@@ -127,6 +130,7 @@ STATES = {
 			owned_provinces = { x18FBA4 x4A27CC x4EFD41 x556A96 x6C7FF3 x839550 x91D988 x939AE7 xC21943 xE55DD7 xE9188D xEBBD57 xF5636E }
 		}
 
+		add_homeland = cu:mountain_orc
 		add_homeland = cu:ungol
 	}
 	s:STATE_THE_TAIGA = {
@@ -136,6 +140,7 @@ STATES = {
 		}
 
 		add_homeland = cu:gospodar
+		add_homeland = cu:ungol
 	}
 	s:STATE_TROLL_COUNTRY = {
 		create_state = {

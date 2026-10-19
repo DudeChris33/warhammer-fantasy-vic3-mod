@@ -14,7 +14,9 @@ POPS = {
 	}
 	s:STATE_BLIGHTED_MARSHES = {
 		region_state:XSG = {
-			create_pop = { culture = goblin size = 150000 }
+			create_pop = { culture = mountain_orc size = 50000 }
+			create_pop = { culture = skaven size = 50000 }
+			create_pop = { culture = tilean size = 50000 }
 		}
 	}
 	s:STATE_CANTABRIO_ROAD = {
@@ -50,7 +52,8 @@ POPS = {
 	}
 	s:STATE_ESTALIAN_HIGHLANDS = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 51785 }
+			create_pop = { culture = estalian size = 34523 }
+			create_pop = { culture = mountain_orc size = 17262 }
 		}
 	}
 	s:STATE_GASTONNE = {
@@ -70,8 +73,7 @@ POPS = {
 	}
 	s:STATE_LOST_KHYPNIA = {
 		region_state:UVE = {
-			create_pop = { culture = gospodar size = 75000 }
-			create_pop = { culture = ungol size = 75000 }
+			create_pop = { culture = border_princer size = 150000 }
 		}
 	}
 	s:STATE_MIDDLE_BILBALI_01 = {
@@ -86,7 +88,8 @@ POPS = {
 	}
 	s:STATE_MONTE_CASTELLO = {
 		region_state:DON = {
-			create_pop = { culture = tilean size = 250000 }
+			create_pop = { culture = tilean size = 166667 }
+			create_pop = { culture = border_princer size = 83333 }
 		}
 	}
 	s:STATE_NORTH_TILEA = {
@@ -125,7 +128,8 @@ POPS = {
 	}
 	s:STATE_SARTOSA = {
 		region_state:SRT = {
-			create_pop = { culture = sartosan size = 150000 }
+			create_pop = { culture = sartosan size = 100000 }
+			create_pop = { culture = tilean size = 50000 }
 		}
 	}
 	s:STATE_SOUTHEAST_MAGRITTA = {
@@ -135,17 +139,20 @@ POPS = {
 	}
 	s:STATE_SOUTHERN_SIREN_ISLES = {
 		region_state:TOB = {
-			create_pop = { culture = tilean size = 238714 }
+			create_pop = { culture = tilean size = 159143 }
+			create_pop = { culture = estalian size = 79571 }
 		}
 	}
 	s:STATE_SUSSURRIO_WOOD = {
 		region_state:LUC = {
-			create_pop = { culture = tilean size = 119787 }
+			create_pop = { culture = tilean size = 79858 }
+			create_pop = { culture = border_princer size = 39929 }
 		}
 	}
 	s:STATE_TOBARO = {
 		region_state:TOB = {
-			create_pop = { culture = tilean size = 311286 }
+			create_pop = { culture = tilean size = 207524 }
+			create_pop = { culture = estalian size = 103762 }
 		}
 	}
 	s:STATE_TRANTINE_HILLS = {
@@ -165,7 +172,8 @@ POPS = {
 	}
 	s:STATE_WESTERN_IRRANAS = {
 		region_state:MAG = {
-			create_pop = { culture = estalian size = 100174 }
+			create_pop = { culture = estalian size = 66783 }
+			create_pop = { culture = mountain_orc size = 33391 }
 		}
 	}
 	s:STATE_WEST_MAGRITTA = {

@@ -23,6 +23,7 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi_norse
+		add_homeland = cu:norscan
 	}
 	s:STATE_BRENNUN_S_ENCAMPMENT = {
 		create_state = {
@@ -47,6 +48,7 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi_norse
+		add_homeland = cu:norscan
 	}
 	s:STATE_ELDAGRIMM_GULF = {
 		create_state = {
@@ -70,7 +72,7 @@ STATES = {
 			owned_provinces = { x3DD818 x909077 x9FA09F xAC3A4F }
 		}
 
-		add_homeland = cu:goblin
+		add_homeland = cu:skaven
 	}
 	s:STATE_FOREST_OF_KNIVES = {
 		create_state = {
@@ -95,6 +97,7 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi_norse
+		add_homeland = cu:norscan
 	}
 	s:STATE_GLOOMWRACK_COAST = {
 		create_state = {
@@ -118,7 +121,8 @@ STATES = {
 			owned_provinces = { x096E5B x4F7A62 x7DA51C xA2FEB1 xD1296B }
 		}
 
-		add_homeland = cu:gospodar
+		add_homeland = cu:dawi
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_HELL_PIT = {
 		create_state = {
@@ -126,7 +130,7 @@ STATES = {
 			owned_provinces = { xAAD594 xC382D1 xC4FA34 }
 		}
 
-		add_homeland = cu:goblin
+		add_homeland = cu:skaven
 	}
 	s:STATE_HELL_PIT_DEPTHS = {
 		create_state = {
@@ -134,7 +138,7 @@ STATES = {
 			owned_provinces = { xA80278 xB6B5FC xDC0F91 }
 		}
 
-		add_homeland = cu:goblin
+		add_homeland = cu:skaven
 	}
 	s:STATE_HELSPIRE_COAST = {
 		create_state = {
@@ -151,6 +155,7 @@ STATES = {
 		}
 
 		add_homeland = cu:norscan
+		add_homeland = cu:wood_elf
 	}
 	s:STATE_HIGH_PASS = {
 		create_state = {
@@ -159,6 +164,8 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi
+		add_homeland = cu:mountain_orc
+		add_homeland = cu:ungol
 	}
 	s:STATE_KRAKA_DRAK = {
 		create_state = {
@@ -167,6 +174,7 @@ STATES = {
 		}
 
 		add_homeland = cu:dawi_norse
+		add_homeland = cu:norscan
 	}
 	s:STATE_KRAKEN_COAST = {
 		create_state = {
@@ -190,7 +198,7 @@ STATES = {
 			owned_provinces = { x04E7B5 xEA53C9 }
 		}
 
-		add_homeland = cu:goblin
+		add_homeland = cu:skaven
 	}
 	s:STATE_MERMEDUS_COAST = {
 		create_state = {
@@ -214,6 +222,7 @@ STATES = {
 			owned_provinces = { x46C9BA x490D0D x7737C7 x8BC8D7 x948C27 xB3A6B9 xB687AA xBFD5F0 xD02F29 xE74486 xFC44E2 xFE59E3 }
 		}
 
+		add_homeland = cu:dawi_norse
 		add_homeland = cu:norscan
 	}
 	s:STATE_NAGLFARI_COAST = {
@@ -339,6 +348,5 @@ STATES = {
 		}
 
 		add_homeland = cu:norscan
-		add_homeland = cu:wood_elf
 	}
 }

@@ -22,7 +22,9 @@ STATES = {
 			owned_provinces = { x000D6D x241DF1 x32467F x596646 x604BE9 x78EB51 x7E508F x867641 xA5BF25 xB55A43 xC39E7B xDAB3D8 xF1C935 }
 		}
 
-		add_homeland = cu:goblin
+		add_homeland = cu:mountain_orc
+		add_homeland = cu:skaven
+		add_homeland = cu:tilean
 	}
 	s:STATE_CANTABRIO_ROAD = {
 		create_state = {
@@ -79,6 +81,7 @@ STATES = {
 		}
 
 		add_homeland = cu:estalian
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_GASTONNE = {
 		create_state = {
@@ -110,8 +113,7 @@ STATES = {
 			owned_provinces = { x03BA4E x34F44B x53A464 x6582D5 x782D36 x8A2322 x9A570B xAAFF13 xADD22F xBC1667 xD747F1 xEA4121 xF10B1A xF88559 }
 		}
 
-		add_homeland = cu:gospodar
-		add_homeland = cu:ungol
+		add_homeland = cu:border_princer
 	}
 	s:STATE_MIDDLE_BILBALI_01 = {
 		create_state = {
@@ -136,6 +138,7 @@ STATES = {
 		}
 
 		add_homeland = cu:tilean
+		add_homeland = cu:border_princer
 	}
 	s:STATE_NORTH_TILEA = {
 		create_state = {
@@ -193,6 +196,7 @@ STATES = {
 		}
 
 		add_homeland = cu:sartosan
+		add_homeland = cu:tilean
 	}
 	s:STATE_SOUTHEAST_MAGRITTA = {
 		create_state = {
@@ -209,6 +213,7 @@ STATES = {
 		}
 
 		add_homeland = cu:tilean
+		add_homeland = cu:estalian
 	}
 	s:STATE_SUSSURRIO_WOOD = {
 		create_state = {
@@ -216,6 +221,7 @@ STATES = {
 			owned_provinces = { x2B8588 x67F47A x7F09D7 x81CF1E xB5966A }
 		}
 
+		add_homeland = cu:border_princer
 		add_homeland = cu:tilean
 	}
 	s:STATE_TOBARO = {
@@ -224,6 +230,7 @@ STATES = {
 			owned_provinces = { x10F66F x2D01BE x5DABF2 x80326B x9ECFDC xA85F1C xACEA95 xD52048 xD689D6 xE4CE0E }
 		}
 
+		add_homeland = cu:estalian
 		add_homeland = cu:tilean
 	}
 	s:STATE_TRANTINE_HILLS = {
@@ -257,6 +264,7 @@ STATES = {
 		}
 
 		add_homeland = cu:estalian
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_WEST_MAGRITTA = {
 		create_state = {

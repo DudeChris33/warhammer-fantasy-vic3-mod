@@ -47,7 +47,8 @@ POPS = {
 	}
 	s:STATE_CASTLE_MOUSILLON = {
 		region_state:MOU = {
-			create_pop = { culture = mousillon size = 177796 }
+			create_pop = { culture = mousillon size = 118531 }
+			create_pop = { culture = bretonnian size = 59265 }
 		}
 	}
 	s:STATE_CASTLE_SANGASSE = {
@@ -133,12 +134,14 @@ POPS = {
 	}
 	s:STATE_MOUSILLON = {
 		region_state:MOU = {
-			create_pop = { culture = mousillon size = 322204 }
+			create_pop = { culture = mousillon size = 214803 }
+			create_pop = { culture = bretonnian size = 107401 }
 		}
 	}
 	s:STATE_OAK_OF_PROPHECY = {
 		region_state:OKP = {
-			create_pop = { culture = wood_elf size = 15000 }
+			create_pop = { culture = wood_elf size = 10000 }
+			create_pop = { culture = bretonnian size = 5000 }
 		}
 	}
 	s:STATE_PARRAVON = {
