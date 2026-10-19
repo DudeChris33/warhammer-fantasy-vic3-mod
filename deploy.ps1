@@ -55,7 +55,9 @@ foreach ($d in $shipDirs) {
     if (-not (Test-Path $dst)) { continue }
     if (-not (Test-Path $src)) { $src = Join-Path $env:TEMP 'deploy-empty-src' ; New-Item -ItemType Directory -Force $src | Out-Null }
     # Lists files in Dest that are newer than, or absent from, the repo copy.
-    $out = robocopy $dst $src /L /E /XO /XF .gitkeep /NJH /NJS /NDL /NP /FP /NC /R:0 /W:0
+    # /XX drops repo-only files from the listing: with /NC they were indistinguishable from drift,
+    # so every newly added repo file tripped the guard.
+    $out = robocopy $dst $src /L /E /XO /XX /XF .gitkeep /NJH /NJS /NDL /NP /FP /NC /R:0 /W:0
     $drift += $out | Where-Object { $_ -match '\S' } | ForEach-Object { $_.Trim() -replace '^\d+\s+', '' }
 }
 $drift = $drift | Where-Object { $_ } | Sort-Object -Unique
