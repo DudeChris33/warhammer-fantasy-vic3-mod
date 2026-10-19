@@ -1,4 +1,97 @@
 {
   "_comment": "Hand-authored climate lore patches (board #8208). Each patch is a canvas polygon (all vertices inside the canvas) with a feathered edge (feather_px, centred on the drawn line) that ADDS temp_c to both seasons and MULTIPLIES both seasons' rain by rain_factor, after the model's feedbacks and before Koppen classification. It never forces a zone: target lists the zone codes the patch is meant to produce at its core, source must start 'canon:', reason says why. The index reports each patch's measured target_share. Lore only, never for re-tuning the physical model; changing this file changes the accepted picture and needs Chris's acceptance on the before/after render. patches: [] is the physical model alone.",
-  "patches": []
+  "patches": [
+    {
+      "name": "nagarythe_shadowlands",
+      "polygon": [
+        [
+          2480,
+          1090
+        ],
+        [
+          2700,
+          1030
+        ],
+        [
+          2770,
+          1040
+        ],
+        [
+          2770,
+          1160
+        ],
+        [
+          2700,
+          1215
+        ],
+        [
+          2620,
+          1290
+        ],
+        [
+          2560,
+          1330
+        ],
+        [
+          2480,
+          1330
+        ]
+      ],
+      "feather_px": 60,
+      "temp_c": -13.0,
+      "rain_factor": 0.7,
+      "target": [
+        "Dc",
+        "ET"
+      ],
+      "reason": "After the Sundering, Nagarythe became the Shadowlands: cold, barren and mist-bound. North-west arc of Ulthuan's outer ring from Anlec to the Eagle Gate, Chrace, Ellyrion and Tiranoc left out.",
+      "source": "canon: Warhammer Armies: High Elves (the Sundering of Nagarythe, the Shadowlands)"
+    },
+    {
+      "name": "dark_lands_desolation",
+      "polygon": [
+        [
+          4610,
+          1000
+        ],
+        [
+          4800,
+          1010
+        ],
+        [
+          5000,
+          1100
+        ],
+        [
+          5000,
+          1400
+        ],
+        [
+          4880,
+          1440
+        ],
+        [
+          4700,
+          1480
+        ],
+        [
+          4660,
+          1420
+        ],
+        [
+          4620,
+          1250
+        ]
+      ],
+      "feather_px": 60,
+      "temp_c": 0.0,
+      "rain_factor": 0.55,
+      "target": [
+        "BWk",
+        "BWh"
+      ],
+      "reason": "The Dark Lands are a volcanic ash waste poisoned by Chaos Dwarf industry. Plateau east of the Worlds Edge Mountains; the tundra around Zorn Uzkul and the mountains are left physical.",
+      "source": "canon: Warhammer Armies: Chaos Dwarfs / Tamurkhan (the Dark Lands)"
+    }
+  ]
 }

@@ -56,8 +56,8 @@
         0,
         0
       ],
-      "land_px": 856120,
-      "land_share": 0.07663
+      "land_px": 858216,
+      "land_share": 0.07681
     },
     {
       "id": 4,
@@ -68,8 +68,8 @@
         150,
         150
       ],
-      "land_px": 468661,
-      "land_share": 0.04195
+      "land_px": 584741,
+      "land_share": 0.05234
     },
     {
       "id": 5,
@@ -80,8 +80,8 @@
         165,
         0
       ],
-      "land_px": 594782,
-      "land_share": 0.05324
+      "land_px": 595853,
+      "land_share": 0.05333
     },
     {
       "id": 6,
@@ -92,8 +92,8 @@
         220,
         100
       ],
-      "land_px": 822629,
-      "land_share": 0.07363
+      "land_px": 713802,
+      "land_share": 0.06389
     },
     {
       "id": 7,
@@ -104,7 +104,7 @@
         255,
         0
       ],
-      "land_px": 81580,
+      "land_px": 81544,
       "land_share": 0.0073
     },
     {
@@ -116,8 +116,8 @@
         255,
         80
       ],
-      "land_px": 575035,
-      "land_share": 0.05147
+      "land_px": 562697,
+      "land_share": 0.05036
     },
     {
       "id": 9,
@@ -128,8 +128,8 @@
         255,
         80
       ],
-      "land_px": 557681,
-      "land_share": 0.04991
+      "land_px": 538432,
+      "land_share": 0.04819
     },
     {
       "id": 10,
@@ -140,8 +140,8 @@
         255,
         255
       ],
-      "land_px": 925215,
-      "land_share": 0.08281
+      "land_px": 923679,
+      "land_share": 0.08267
     },
     {
       "id": 11,
@@ -152,8 +152,8 @@
         125,
         125
       ],
-      "land_px": 1570256,
-      "land_share": 0.14054
+      "land_px": 1572224,
+      "land_share": 0.14072
     },
     {
       "id": 12,
@@ -164,8 +164,8 @@
         178,
         178
       ],
-      "land_px": 1490096,
-      "land_share": 0.13337
+      "land_px": 1510867,
+      "land_share": 0.13523
     },
     {
       "id": 13,
@@ -185,8 +185,105 @@
     "heightmap.png": "a48e97c1877baf9d380344cf60c32fe07dddc0ff49e0ec34e511410c74762381",
     "winds_and_currents.png": "a19d25fd52da4ccde9a6126d4d81f1d2d70e22fa02d7a20b16b2c7589f2ea9bf",
     "climate_settings.json": "ac4e66705207cfe625cf14aee18085bd624e94aaa8b03f1c3191b81aa8d18796",
-    "climate_lore.json": "efc25a9208ac3597a1470185741c759bef68888f23cb30f4dc4bdf6306d95e88"
+    "climate_lore.json": "39624f927bade3ab680ffff1936c585c6a44c1a2474f4258a0f49b58ca77bc73"
   },
-  "lore_patches": [],
-  "grid_sha256": "ca53ad569cb4a8544193935bfbe468183003ae9584bafd7edcd3cbfe957b58f3"
+  "lore_patches": [
+    {
+      "name": "nagarythe_shadowlands",
+      "target": [
+        "Dc",
+        "ET"
+      ],
+      "temp_c": -13.0,
+      "rain_factor": 0.7,
+      "feather_px": 60.0,
+      "polygon": [
+        [
+          2480,
+          1090
+        ],
+        [
+          2700,
+          1030
+        ],
+        [
+          2770,
+          1040
+        ],
+        [
+          2770,
+          1160
+        ],
+        [
+          2700,
+          1215
+        ],
+        [
+          2620,
+          1290
+        ],
+        [
+          2560,
+          1330
+        ],
+        [
+          2480,
+          1330
+        ]
+      ],
+      "source": "canon: Warhammer Armies: High Elves (the Sundering of Nagarythe, the Shadowlands)",
+      "reason": "After the Sundering, Nagarythe became the Shadowlands: cold, barren and mist-bound. North-west arc of Ulthuan's outer ring from Anlec to the Eagle Gate, Chrace, Ellyrion and Tiranoc left out.",
+      "core_cells": 1674,
+      "target_share": 0.822
+    },
+    {
+      "name": "dark_lands_desolation",
+      "target": [
+        "BWk",
+        "BWh"
+      ],
+      "temp_c": 0.0,
+      "rain_factor": 0.55,
+      "feather_px": 60.0,
+      "polygon": [
+        [
+          4610,
+          1000
+        ],
+        [
+          4800,
+          1010
+        ],
+        [
+          5000,
+          1100
+        ],
+        [
+          5000,
+          1400
+        ],
+        [
+          4880,
+          1440
+        ],
+        [
+          4700,
+          1480
+        ],
+        [
+          4660,
+          1420
+        ],
+        [
+          4620,
+          1250
+        ]
+      ],
+      "source": "canon: Warhammer Armies: Chaos Dwarfs / Tamurkhan (the Dark Lands)",
+      "reason": "The Dark Lands are a volcanic ash waste poisoned by Chaos Dwarf industry. Plateau east of the Worlds Edge Mountains; the tundra around Zorn Uzkul and the mountains are left physical.",
+      "core_cells": 9686,
+      "target_share": 0.8432
+    }
+  ],
+  "grid_sha256": "a626febed2aacd25392e293d34cb2c73c83b3f66a37787e1a428921991a33edf"
 }
