@@ -55,6 +55,7 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   - `sartosan` — a melting-pot Tilean-pirate culture for Sartosa (modeled on vanilla's Maltese).
   - `lahmian_vampire` — the Lahmian vampire bloodline (Neferata's) for the tomb-city of Lahmia.
   - `savage_orc` — the Savage Orc subculture (Southlands heartland); see region 09.
+  - `dark_lands_orc`, `badlands_orc`, `cathayan_orc`, `lustrian_orc` — orc subcultures, defined in `common/cultures/greenskin.txt` beside `mountain_orc` (the former `orc`); not yet assigned to any tag or state.
 
 ## Conventions
 
@@ -503,7 +504,7 @@ Mousillon's cursed culture is excluded, parallel to EMP excluding the vampire cu
 **`MOR` Massif Orcal** added on manual audit (2026-09-03) — not a dukedom, a remnant Orc & Goblin
 holdout in the Bretonnian heartland above the Forest of Chalons, never fully cleared when the
 kingdom was founded. Lives here rather than in `06_badlands` because `common/country_definitions/`
-files are organized by geography, not culture (see that region's entry); its `orc`/`goblin`
+files are organized by geography, not culture (see that region's entry); its `mountain_orc`/`goblin`
 culture ids are a cross-file reference to `common/cultures/greenskin.txt`, the mod's only
 Greenskin cultures. Named by location rather than tribe — a flagged exception to this mod's
 tribal-society naming convention — because no well-attested tribe/warlord name exists for it;
@@ -514,7 +515,7 @@ checked tabletop, *Warhammer: The Old World* Lexicanum, and Total War, and rejec
 **`SKZ` Skullsmasherz** moved here from `06_badlands` on manual audit (2026-09-03) — Ugrok
 Craktoof's orc tribe, holding the Grey Mountains on Bretonnia's southern flank. Reclassified as
 Bretonnian geography (the border range itself, not Badlands territory beyond it), same
-geography-not-culture filing principle as `MOR` above; `orc` culture id is a cross-file reference
+geography-not-culture filing principle as `MOR` above; `mountain_orc` culture id is a cross-file reference
 to `common/cultures/greenskin.txt`.
 
 **Athel Loren (#6373 phase B, 2026-10-01).** The wood-elf realms of Athel Loren — `ANM` Anmyr, `ARG`
@@ -540,8 +541,8 @@ no region file of their own (see *Conventions*). All carry `wood_elf` and are
 | LAN | `03_brettonia` | L'Anguille | start | `bretonnian` | L'Anguille |  |
 | PAR | `03_brettonia` | Parravon | start | `bretonnian` | Parravon |  |
 | MOU | `03_brettonia` | Mousillon | start | `mousillon` | Mousillon | the cursed city / undead |
-| MOR | `03_brettonia` | Massif Orcal | start | `orc`, `goblin` | Massif Orcal | remnant Greenskin holdout, Bretonnian heartland; named by location, no tribe attested — TODO revisit |
-| SKZ | `03_brettonia` | Skullsmasherz | start | `orc` | Pale Sisters (non-canon) | Ugrok Craktoof; Grey Mtns, Bretonnia's southern flank |
+| MOR | `03_brettonia` | Massif Orcal | start | `mountain_orc`, `goblin` | Massif Orcal | remnant Greenskin holdout, Bretonnian heartland; named by location, no tribe attested — TODO revisit |
+| SKZ | `03_brettonia` | Skullsmasherz | start | `mountain_orc` | Pale Sisters (non-canon) | Ugrok Craktoof; Grey Mtns, Bretonnia's southern flank |
 | ANM | `03_brettonia` | Anmyr | start | `wood_elf` | Anmyr | `principality`/`unrecognized`; realm of Athel Loren (#6373) |
 | ARG | `03_brettonia` | Argwylon | start | `wood_elf` | Argwylon | `principality`/`unrecognized`; realm of Athel Loren (Durthu's, TW:W) (#6373) |
 | TLS | `03_brettonia` | Talsyn | start | `wood_elf` | Talsyn | `principality`/`unrecognized`; realm of Athel Loren (Orion's, TW:W) (#6373) |
@@ -712,7 +713,7 @@ defined in `03_brettonia.txt` instead of here — Massif Orcal (`MOR`, the Breto
 above the Forest of Chalons) from the start, and Skullsmasherz (`SKZ`, the Grey Mountains on
 Bretonnia's southern flank) moved there on a later manual audit the same day, once Chris confirmed
 the border range itself reads as Bretonnian rather than Badlands geography — see that region's
-entry for both tags' full writeup. Both still use `orc`/`goblin` culture ids from
+entry for both tags' full writeup. Both still use `mountain_orc`/`goblin` culture ids from
 `common/cultures/greenskin.txt` (a cross-file culture reference; those are the mod's only
 Greenskin cultures).
 
@@ -725,14 +726,14 @@ instead).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
-| RED | `06_badlands` | Red Eye | start | `orc` | Red Eye | Grimgor Ironhide's 'Ardboyz; ex-Karak Ungor |
+| RED | `06_badlands` | Red Eye | start | `mountain_orc` | Red Eye | Grimgor Ironhide's 'Ardboyz; ex-Karak Ungor |
 | CRM | `06_badlands` | Crooked Moon | start | `goblin` | Karak Eight Peaks | Skarsnik's Night Goblins; Karak Eight Peaks |
 | BKA | `06_badlands` | Broken Axe | start | `goblin` | Misty Mountain (Sour Crags) | Grom the Paunch (Goblin); Misty Mountain |
-| RFG | `06_badlands` | Red Fangs | start | `orc` | Black Crag | Gorfang Rotgut; holds Black Crag (ex-Karak Drazh) |
-| ICL | `06_badlands` | Ironclaw | start | `orc` | Iron Rock | Gorbad Ironclaw; holds Iron Rock (N. Badlands) |
-| BSB | `06_badlands` | Bloody Sunz | start | `orc` | Blightwater (non-canon) | Grumlok & Gazbag; Badlands orc tribe |
-| BNR | `06_badlands` | Bonerattlaz | start | `orc` | Northern World's Edge (non-canon) | Azhag the Slaughterer; N. World's Edge |
-| BTO | `06_badlands` | Broken Tooth | start | `orc` | The Cauldron (non-canon) | Crusher Zogoth; pre-Gorbad Iron Rock (historical) |
+| RFG | `06_badlands` | Red Fangs | start | `mountain_orc` | Black Crag | Gorfang Rotgut; holds Black Crag (ex-Karak Drazh) |
+| ICL | `06_badlands` | Ironclaw | start | `mountain_orc` | Iron Rock | Gorbad Ironclaw; holds Iron Rock (N. Badlands) |
+| BSB | `06_badlands` | Bloody Sunz | start | `mountain_orc` | Blightwater (non-canon) | Grumlok & Gazbag; Badlands orc tribe |
+| BNR | `06_badlands` | Bonerattlaz | start | `mountain_orc` | Northern World's Edge (non-canon) | Azhag the Slaughterer; N. World's Edge |
+| BTO | `06_badlands` | Broken Tooth | start | `mountain_orc` | The Cauldron (non-canon) | Crusher Zogoth; pre-Gorbad Iron Rock (historical) |
 | BRN | `06_badlands` | Broken Nose | start | `goblin` | Novalone Pass (non-canon) | Goblin tribe of the Vaults |
 | BLV | `06_badlands` | Black Venom | start | `goblin` | West Middenland (non-canon, BLV slice) | Forest Goblin tribe, S. of Black Fire Pass |
 | RDV | `06_badlands` | Redvenom | start | `goblin` | Marshes of Madness (non-canon) | Snagla Grobspit's Forest Goblins |
@@ -773,7 +774,7 @@ The Chaos Dwarfs (Dawi Zharr) and their hobgoblin vassals. Canon-thin beyond Zha
 (Chris approved as-is). Two formables — Chaos Dwarfs and hobgoblins are distinct peoples with separate
 unifiers. (Approved 2026-08-30. Closes the Old World tranche.) **`DLO` Dark Land Orcs** (a TW:W
 Greenskins faction, reserved here at approval) was added by #6373 (2026-10-01) once the painted
-start map gave it states: `orc` culture, `unrecognized`/`principality`.
+start map gave it states: `mountain_orc` culture, `unrecognized`/`principality`.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -783,7 +784,7 @@ start map gave it states: `orc` culture, `unrecognized`/`principality`.
 | UZK | `10_dark_lands` | Uzkulak | start | `dawi_zharr` | Uzkulak | Port of Zharr |
 | KHN | `10_dark_lands` | Great Khanate | formable | `hobgoblin` | — | Hobgobla-Khan unites the hobgoblins |
 | HGK | `10_dark_lands` | Hobgobla-Khan | start | `hobgoblin` | — | the great hobgoblin realm |
-| DLO | `10_dark_lands` | Dark Land Orcs | start | `orc` | Causeway of Zharr (non-canon) | greenskin tribes of the Dark Lands; TW:W faction (#6373) |
+| DLO | `10_dark_lands` | Dark Land Orcs | start | `mountain_orc` | Causeway of Zharr (non-canon) | greenskin tribes of the Dark Lands; TW:W faction (#6373) |
 
 ### 08 ARABY (PLACEHOLDER + bretonnian crusaders) — 10 tags; ARB formable
 

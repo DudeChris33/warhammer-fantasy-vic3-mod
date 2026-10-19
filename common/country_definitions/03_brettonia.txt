@@ -200,7 +200,7 @@ MOR = {
 	color = { 92 118 56 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc goblin }
+	cultures = { mountain_orc goblin }
 	capital = STATE_MASSIF_ORCAL
 }
 
@@ -214,7 +214,7 @@ SKZ = {
 	color = { 72 110 54 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	capital = STATE_PALE_SISTERS # non-canon (C2): its only holding, in the Grey Mountains
 }
 

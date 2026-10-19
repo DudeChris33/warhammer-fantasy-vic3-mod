@@ -85,7 +85,7 @@ different (and, since `common/cultures/` now groups by race rather than region, 
 `common/cultures/` file — that's a legal cross-file reference, since culture ids are global. Example:
 `MOR` (Massif Orcal, a Greenskin holdout in the Bretonnian heartland) and `SKZ` (Skullsmasherz, the
 Grey Mountains on Bretonnia's southern flank) are both defined in `03_brettonia.txt` and use
-`orc`/`goblin` culture ids from `common/cultures/greenskin.txt`, because both sit geographically
+`mountain_orc`/`goblin` culture ids from `common/cultures/greenskin.txt`, because both sit geographically
 inside/against Bretonnia even though their population isn't bretonnian. A tag near a region border
 needs a real judgment call on which side it reads as.
 

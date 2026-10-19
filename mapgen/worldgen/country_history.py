@@ -85,7 +85,8 @@ CULTURE_TECH: dict[str, str | None] = {
     "lizardmen": "effect_starting_technology_lizardmen_tech",
     "skaven": "effect_starting_technology_skaven_tech",
     "beastmen": "effect_starting_technology_beastmen_tech",
-    "orc": "effect_starting_technology_orc_tech",
+    **dict.fromkeys(("mountain_orc", "savage_orc", "dark_lands_orc", "badlands_orc", "cathayan_orc", "lustrian_orc"),
+                    "effect_starting_technology_orc_tech"),
     **dict.fromkeys(("goblin", "hobgoblin"), _GOBLIN),
 }
 #: Per-tag exceptions to the culture rule.

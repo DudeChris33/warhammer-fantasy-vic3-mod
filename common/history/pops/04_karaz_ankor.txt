@@ -13,7 +13,7 @@ POPS = {
 	s:STATE_APUCCINI_MOUNTAINS = {
 		region_state:BRN = {
 			create_pop = { culture = goblin size = 57040 }
-			create_pop = { culture = orc size = 19013 }
+			create_pop = { culture = mountain_orc size = 19013 }
 		}
 		region_state:XSJ = {
 			create_pop = { culture = goblin size = 75000 }
@@ -96,7 +96,7 @@ POPS = {
 	}
 	s:STATE_DELVED_HEIGHTS = {
 		region_state:RED = {
-			create_pop = { culture = orc size = 81250 }
+			create_pop = { culture = mountain_orc size = 81250 }
 			create_pop = { culture = goblin size = 43750 }
 		}
 	}
@@ -122,13 +122,13 @@ POPS = {
 	}
 	s:STATE_EAST_DEATH_PASS = {
 		region_state:RFG = {
-			create_pop = { culture = orc size = 18494 }
+			create_pop = { culture = mountain_orc size = 18494 }
 			create_pop = { culture = goblin size = 9959 }
 		}
 	}
 	s:STATE_EAST_MAD_DOG_PASS = {
 		region_state:RFG = {
-			create_pop = { culture = orc size = 32065 }
+			create_pop = { culture = mountain_orc size = 32065 }
 			create_pop = { culture = goblin size = 17266 }
 		}
 	}
@@ -181,13 +181,13 @@ POPS = {
 	s:STATE_KARAG_ZIFLIN = {
 		region_state:CRM = {
 			create_pop = { culture = goblin size = 69863 }
-			create_pop = { culture = orc size = 23287 }
+			create_pop = { culture = mountain_orc size = 23287 }
 		}
 	}
 	s:STATE_KARAK_EIGHT_PEAKS = {
 		region_state:CRM = {
 			create_pop = { culture = goblin size = 42638 }
-			create_pop = { culture = orc size = 14212 }
+			create_pop = { culture = mountain_orc size = 14212 }
 		}
 	}
 	s:STATE_LAHMIA = {
@@ -199,7 +199,7 @@ POPS = {
 	s:STATE_LAND_664 = {
 		region_state:BRN = {
 			create_pop = { culture = goblin size = 13676 }
-			create_pop = { culture = orc size = 4558 }
+			create_pop = { culture = mountain_orc size = 4558 }
 		}
 	}
 	s:STATE_LAND_666 = {
@@ -224,7 +224,7 @@ POPS = {
 	}
 	s:STATE_NORTHERN_WORLD_S_EDGE = {
 		region_state:BNR = {
-			create_pop = { culture = orc size = 81250 }
+			create_pop = { culture = mountain_orc size = 81250 }
 			create_pop = { culture = goblin size = 43750 }
 		}
 	}
@@ -236,7 +236,7 @@ POPS = {
 	s:STATE_NOVALONE_PASS = {
 		region_state:BRN = {
 			create_pop = { culture = goblin size = 41785 }
-			create_pop = { culture = orc size = 13928 }
+			create_pop = { culture = mountain_orc size = 13928 }
 		}
 	}
 	s:STATE_OIS_GAP = {
@@ -251,7 +251,7 @@ POPS = {
 	}
 	s:STATE_PALE_SISTERS = {
 		region_state:SKZ = {
-			create_pop = { culture = orc size = 81250 }
+			create_pop = { culture = mountain_orc size = 81250 }
 			create_pop = { culture = goblin size = 43750 }
 		}
 	}
@@ -284,7 +284,7 @@ POPS = {
 	s:STATE_SOUR_CRAGS = {
 		region_state:BKA = {
 			create_pop = { culture = goblin size = 131250 }
-			create_pop = { culture = orc size = 43750 }
+			create_pop = { culture = mountain_orc size = 43750 }
 		}
 	}
 	s:STATE_SOUTHERN_WORLDS_EDGE = {
@@ -304,13 +304,13 @@ POPS = {
 	}
 	s:STATE_WEST_DEATH_PASS = {
 		region_state:RFG = {
-			create_pop = { culture = orc size = 50625 }
+			create_pop = { culture = mountain_orc size = 50625 }
 			create_pop = { culture = goblin size = 27260 }
 		}
 	}
 	s:STATE_WEST_MAD_DOG_PASS = {
 		region_state:RFG = {
-			create_pop = { culture = orc size = 61315 }
+			create_pop = { culture = mountain_orc size = 61315 }
 			create_pop = { culture = goblin size = 33016 }
 		}
 	}

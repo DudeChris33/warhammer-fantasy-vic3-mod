@@ -235,7 +235,7 @@ country_fervor_target_hobgoblin_add={
 
 # ---- Board item #3409, Badlands & Nehekhara cultures ----
 
-country_fervor_target_orc_add={
+country_fervor_target_mountain_orc_add={
 	decimals=1
 	color=good
 	game_data={
@@ -354,3 +354,46 @@ country_fervor_target_beastmen_add={
 		ai_value=0
 	}
 }
+
+# ---- Orc subcultures: savage, dark lands, badlands, Cathayan, Lustrian ----
+
+country_fervor_target_savage_orc_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_dark_lands_orc_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_badlands_orc_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_cathayan_orc_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_lustrian_orc_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+

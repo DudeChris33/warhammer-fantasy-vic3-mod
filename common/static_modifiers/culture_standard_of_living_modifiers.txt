@@ -295,14 +295,14 @@ hobgoblin_standard_of_living_modifier_negative = {
 
 # ---- Board item #3409, Badlands & Nehekhara cultures ----
 
-orc_standard_of_living_modifier_positive = {
+mountain_orc_standard_of_living_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	state_orc_standard_of_living_add = 1
+	state_mountain_orc_standard_of_living_add = 1
 }
 
-orc_standard_of_living_modifier_negative = {
+mountain_orc_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	state_orc_standard_of_living_add = 1
+	state_mountain_orc_standard_of_living_add = 1
 }
 
 goblin_standard_of_living_modifier_positive = {
@@ -440,3 +440,56 @@ beastmen_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_beastmen_standard_of_living_add = 1
 }
+
+# ---- Orc subcultures: savage, dark lands, badlands, Cathayan, Lustrian ----
+
+savage_orc_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_savage_orc_standard_of_living_add = 1
+}
+
+savage_orc_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_savage_orc_standard_of_living_add = 1
+}
+
+dark_lands_orc_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_dark_lands_orc_standard_of_living_add = 1
+}
+
+dark_lands_orc_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_dark_lands_orc_standard_of_living_add = 1
+}
+
+badlands_orc_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_badlands_orc_standard_of_living_add = 1
+}
+
+badlands_orc_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_badlands_orc_standard_of_living_add = 1
+}
+
+cathayan_orc_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cathayan_orc_standard_of_living_add = 1
+}
+
+cathayan_orc_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cathayan_orc_standard_of_living_add = 1
+}
+
+lustrian_orc_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_lustrian_orc_standard_of_living_add = 1
+}
+
+lustrian_orc_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_lustrian_orc_standard_of_living_add = 1
+}
+

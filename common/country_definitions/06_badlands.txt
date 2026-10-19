@@ -42,7 +42,7 @@ RED = {
 	color = { 96 124 50 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	capital = STATE_DELVED_HEIGHTS # Red Eye Mountain (Karak Ungor)
 }
 
@@ -75,7 +75,7 @@ RFG = {
 	color = { 78 100 40 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	capital = STATE_WEST_DEATH_PASS # Black Crag (Karak Drazh)
 }
 
@@ -86,7 +86,7 @@ ICL = {
 	color = { 110 132 58 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	capital = STATE_BLOOD_RIVER_VALLEY # Iron Rock
 }
 
@@ -97,7 +97,7 @@ BSB = {
 	color = { 66 96 42 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	# No canon seat. Largest owned state: Blightwater 40 provinces (Worlds Edge Foothills 30,
 	# Eastern Badlands 19, Old Strygos slice 7).
 	capital = STATE_BLIGHTWATER # non-canon: largest owned state (40 provinces)
@@ -110,7 +110,7 @@ BNR = {
 	color = { 88 108 52 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	capital = STATE_NORTHERN_WORLD_S_EDGE # non-canon: its only state (5 provinces)
 }
 
@@ -121,7 +121,7 @@ BTO = {
 	color = { 102 116 44 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	capital = STATE_THE_CAULDRON # non-canon: largest owned state (23 provinces; The Blight 15)
 }
 

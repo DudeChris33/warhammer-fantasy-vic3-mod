@@ -2,6 +2,11 @@
  # Culture display names for common/cultures/greenskin.txt.
  # One loc file per culture script file (per-name display keys live in the shared
  # cultures_names_l_english.yml). Board items #3408, #3409 (epic #3404).
- orc:0 "Orc"
+ mountain_orc:0 "Mountain Orc"
  goblin:0 "Goblin"
  hobgoblin:0 "Hobgoblin"
+ savage_orc:0 "Savage Orc"
+ dark_lands_orc:0 "Dark Lands Orc"
+ badlands_orc:0 "Badlands Orc"
+ cathayan_orc:0 "Cathayan Orc"
+ lustrian_orc:0 "Lustrian Orc"

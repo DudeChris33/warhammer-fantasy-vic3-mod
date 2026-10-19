@@ -140,7 +140,7 @@ STATES = {
 			owned_provinces = { x18ACD5 x217DFA x49D8FD x4C4AA2 x635FFF x6C3124 x88B994 x918AB9 xB0282A xCE487A }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_DESOLATION_OF_NAGASH = {
 		create_state = {
@@ -174,7 +174,7 @@ STATES = {
 			owned_provinces = { x2C5178 x3A95B0 x68C06A x754C45 x7704A2 xA3692A xD8CD29 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_EAST_MAD_DOG_PASS = {
 		create_state = {
@@ -182,7 +182,7 @@ STATES = {
 			owned_provinces = { x0AA4C4 x2BD457 x2FFE59 x35431A x3E4291 x639C26 x88F5BB x970BA1 xA00B18 xA4F335 xA5010A xA5B150 xC21470 xCE35D2 xF8368A xF8D428 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_FOREST_OF_GLOOM = {
 		create_state = {
@@ -314,7 +314,7 @@ STATES = {
 			owned_provinces = { x16E6A3 x8FC487 xCC3379 xDA77B1 xF18D0E }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_NORTH_GREY_MOUNTAINS = {
 		create_state = {
@@ -352,7 +352,7 @@ STATES = {
 			owned_provinces = { x2CE141 x5B0BFB xCB18BA xD4D64C xE22E17 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_PEAK_PASS = {
 		create_state = {
@@ -430,7 +430,7 @@ STATES = {
 			owned_provinces = { x003BBF x21C7F6 x259554 x2E6679 x394C9F x398D99 x457BD6 x53C00E x6D6C60 x7919A3 x81EAC8 x9E7338 xB22A83 xC0AFB5 xC3CCCD xDAE22A xE10583 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_WEST_MAD_DOG_PASS = {
 		create_state = {
@@ -438,7 +438,7 @@ STATES = {
 			owned_provinces = { x0D85B5 x689218 x8DEBAD x9EC207 xC1897A xD8345E xD89ED7 xDC5E60 xF36115 xF9DC3F xFEA8B2 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_WINTERTEETH_PASS = {
 		create_state = {

@@ -102,6 +102,6 @@ DLO = {
 	color = { 114 150 90 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { orc }
+	cultures = { mountain_orc }
 	capital = STATE_CAUSEWAY_OF_ZHARR # non-canon: largest of its 8 states (112 provinces)
 }

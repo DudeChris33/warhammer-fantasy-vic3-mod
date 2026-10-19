@@ -38,7 +38,7 @@
 # ancestry and no inheritance, so there is no noble list and no regal list either: a Warboss
 # is whoever is currently biggest, and stops being one the moment he is not.
 
-orc = {
+mountain_orc = {
 	color= rgb{ 74 106 46 }
 	religion = gork_and_mork
 	heritage = heritage_orc
@@ -152,5 +152,165 @@ hobgoblin = {
 	graphics = east_asian
 	ethnicities = {
 		1 = central_asian
+	}
+}
+
+################ Savage Orc — the jungle tribes of the Southlands; painted, fetish-bearing, deep-woods Waaagh! ################
+# Register: Mountain Orc hammer-and-clatter softened with open vowels and doubled syllables (-wa, -bu, -zza, -ukk). All names and epithets are INVENTED (canon names no individual Savage Orcs here), for Chris to review. Epithets are jungle trades: paint, fetish, snake, skull.
+# Same religion, heritage and language as mountain_orc (the Waaagh! is one race); no noble or regal lists (orc precedent). Color is cosmetic.
+
+savage_orc = {
+	color= rgb{ 52 128 92 }
+	religion = gork_and_mork
+	heritage = heritage_orc
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Gutzog Mukkabu Zoggwa Ngorka Bwuga Kazukk Umbaza Throgga Grubaka Mogwa Zuluk Hurakk
+	}
+
+	female_common_first_names = {
+		Gutzoga Mukkabga Zoggwga Ngorkga Bwugga Kazukka Umbazga Throggga Grubakga Mogwga Zuluka Hurakka
+	}
+
+	common_last_names = {
+		Bonepainta Fetishbearer Junglestalka Headshrinka Spearthrowa Mudsmeara Totemsmasha Snakebiter
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Dark Lands Orc — the Black Orc stock of the Dark Lands, bred under the Chaos Dwarfs' lash ################
+# Register: heavy, sour, slave-pen Orcish — hard stops and dull ends (-ug, -zul, -grud, -mok). All names and epithets are INVENTED, for Chris to review; epithets are the furnace, the chain and the whip, since Dark Lands orcs are as often servile as free.
+# Same religion, heritage and language as mountain_orc (the Waaagh! is one race); no noble or regal lists (orc precedent). Color is cosmetic.
+
+dark_lands_orc = {
+	color= rgb{ 92 60 48 }
+	religion = gork_and_mork
+	heritage = heritage_orc
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Zhargut Hashgrul Kazgrud Dargug Morzhak Gorzul Vazgrim Tuzgrud Azgul Burzhag Nokzul Ghurmok
+	}
+
+	female_common_first_names = {
+		Zharguta Hashgrula Kazgruda Darguga Morzhaka Gorzula Vazgrima Tuzgruda Azgula Burzhaga Nokzula Ghurmoka
+	}
+
+	common_last_names = {
+		Slavechaina Blackiron Ashmouth Furnaceborn Whipscarred Smokeeater Anvilkrumpa Sootfist
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Badlands Orc — the tribes of the Badlands and the Southern wastes; dust, bone and endless feud ################
+# Register: scrappy, mean and quick, with short clipped names (-rash, -agga, -ak, -ug). All names and epithets are INVENTED, for Chris to review; epithets are dust, scorpions and cheap violence.
+# Same religion, heritage and language as mountain_orc (the Waaagh! is one race); no noble or regal lists (orc precedent). Color is cosmetic.
+
+badlands_orc = {
+	color= rgb{ 166 108 44 }
+	religion = gork_and_mork
+	heritage = heritage_orc
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Ruktuk Dagrash Skragga Zakrul Bashgut Gruzkul Naggrok Thuggar Mazrug Orgdrak Kazbad Ghuzzik
+	}
+
+	female_common_first_names = {
+		Ruktuka Dagrasha Skraggga Zakrula Bashguta Gruzkula Naggroka Thuggara Mazruga Orgdraka Kazbada Ghuzzika
+	}
+
+	common_last_names = {
+		Dustchokka Sandkrumpa Cactusgrinda Scorpionbitah Boneyardkingz Dryguts Wyvernbaita Gullyrida
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_dark_hair
+	}
+}
+
+################ Cathayan Orc — the greenskins of Cathay, driven against the Great Bastion and the Dragon Emperor's marches ################
+# Register: a steppe-tinged Orcish (-gai, -khan, -gun, -jak) reflecting the Khanate-side border; the east-Asian steppe set is a portrait STAND-IN only. All names and epithets are INVENTED, for Chris to review; epithets are walls, gates, dragons and burning.
+# Same religion, heritage and language as mountain_orc (the Waaagh! is one race); no noble or regal lists (orc precedent). Color is cosmetic.
+
+cathayan_orc = {
+	color= rgb{ 88 134 124 }
+	religion = gork_and_mork
+	heritage = heritage_orc
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Gorzhu Ukhan Borgai Zhugrak Mughai Tekhut Dorjak Khazgai Sorgun Urguk Nogai Batuk
+	}
+
+	female_common_first_names = {
+		Gorzhga Ukhana Borgaga Zhugraka Mughaga Tekhuta Dorjaka Khazgaga Sorguna Urguka Nogaga Batuka
+	}
+
+	common_last_names = {
+		Wallbreaka Dragonbaita Silkstealah Riverkrumpa Paddyburna Gatecrasha Lanternsmasha Teakicka
+	}
+
+	graphics = east_asian
+	ethnicities = {
+		1 = central_asian
+	}
+}
+
+################ Lustrian Orc — the orc bands that have found their way into the jungles and temple-cities of Lustria ################
+# Register: Orcish chewed through by the jungle (-atl, -kka, -zza, -ok). All names and epithets are INVENTED, for Chris to review; epithets are looting, lizards and swamp.
+# Same religion, heritage and language as mountain_orc (the Waaagh! is one race); no noble or regal lists (orc precedent). Color is cosmetic.
+
+lustrian_orc = {
+	color= rgb{ 30 112 56 }
+	religion = gork_and_mork
+	heritage = heritage_orc
+	language = sphere_greenskin
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Mokuzza Zapotl Gruzatl Orkotl Xokka Tlakgor Zugatl Grokal Mazkatl Kuzatl Tzogg Ihuk
+	}
+
+	female_common_first_names = {
+		Mokuzzga Zapotla Gruzatla Orkotla Xokkga Tlakgora Zugatla Grokala Mazkatla Kuzatla Tzogga Ihuka
+	}
+
+	common_last_names = {
+		Lizardstompa Templeloota Vinecutta Goldgrabba Swampwader Feathertaka Starstoneknick Rivertroller
+	}
+
+	graphics = european
+	ethnicities = {
+		1 = caucasian_dark_hair
 	}
 }

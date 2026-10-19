@@ -122,7 +122,7 @@ POPS = {
 	}
 	s:STATE_MASSIF_ORCAL = {
 		region_state:MOR = {
-			create_pop = { culture = orc size = 97500 }
+			create_pop = { culture = mountain_orc size = 97500 }
 			create_pop = { culture = goblin size = 52500 }
 		}
 	}

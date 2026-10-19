@@ -12,7 +12,7 @@ STATES = {
 			owned_provinces = { x001B42 x023043 x08EC67 x0B0168 x17309F x1C59B6 x209F62 x2216C5 x2789D8 x29A3AC x305AFD x37B4BF x47705A x484EF2 x4CE36D x50417F x55B492 x5D0E54 x5D4A7B x5E85B7 x63F8CA x66129E x6CC9EF x702801 x78AF2A x78CFA7 x7B0E27 x814D2A x82A410 x900E83 x997D46 xA39C4F xAA1779 xAC6D74 xB77D19 xBED6DB xBF1302 xC04E3E xD1F088 xEEC7C7 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_BLOOD_RIVER_VALLEY = {
 		create_state = {
@@ -20,7 +20,7 @@ STATES = {
 			owned_provinces = { x207110 x25C879 x2EB548 x3CF980 x45CAA5 x5342ED x540EDD x6E9021 x71E05E x80860D x823997 x907DCF x994EF4 xA7932C xB5D764 xC779AE xCCECC1 xEE1C54 xF5B23D xFB177B xFDEA97 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_CENTRAL_BADLANDS = {
 		create_state = {
@@ -40,7 +40,7 @@ STATES = {
 			owned_provinces = { x136814 x1ADD80 x23AEA5 x403715 x54ED75 x601D97 x672D5D x6E61CF x7CA607 xA1FF9C xAAD0C1 xB4BCA5 xB914F9 xC1E61E xD02A56 xDE6E8E xE73FB3 xF583EB xFE5510 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_EAST_BARRIER_IDOLS = {
 		create_state = {
@@ -122,7 +122,7 @@ STATES = {
 			owned_provinces = { x07595A x0840F4 x093B36 x0EAE49 x177F6E x25C3A6 x3407DE x3CD903 x49083A x4B1D3B x53EE60 x582637 x596173 x623298 x6A097B x6B03BD x7076D0 x7947F5 x7E01C0 x878C2D x8C45F8 x95D065 x9EA18A xA2D961 xA6786D xA772AF xB5B6E7 xC3FB1F xCCCC44 xD23F57 xDB107C xEE0E7F xF225D9 xF798EC }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 		add_homeland = cu:sylvanian_vampire
 	}
 	s:STATE_SOUTH_BADLAND_HILLS = {
@@ -151,7 +151,7 @@ STATES = {
 			owned_provinces = { x05EFCC x13271A x17CE3D x1BF83F x202241 x4151D4 x5C9133 x66AB69 x8C04FE xA31A5B xA376FF xB15E93 xF69EAA }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_THE_CAULDRON = {
 		create_state = {
@@ -159,7 +159,7 @@ STATES = {
 			owned_provinces = { x0184D0 x0206C4 x26DE65 x2FAF8A x35229D x3DF3C2 x4C37FA x4FF2B0 x55091F x634D57 x7A62B4 x88A6EC x902F00 x917811 x96EB24 x9FBC49 xCC9DF2 xCDE703 xD35A16 xDC2B3B xEA6F73 xEFCFDE xF8B3AB }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 	s:STATE_VARENKA_HILLS = {
 		create_state = {
@@ -181,6 +181,6 @@ STATES = {
 			owned_provinces = { x0DE259 x16B37E x22B463 x24F7B6 x2DC8DB x39C9C0 x3C0D13 x45115D x480DF8 x4A514B x532270 x59EC69 x6166A8 x6A37CD x6FAAE0 x787C05 x86C03D x8F9162 x965B5B xA6A6BF xB4EAF7 xBDBC1C xCC0054 xDA448C xE315B1 xE64571 xE888C4 xF159E9 xF823E2 xFA3DB6 }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 	}
 }

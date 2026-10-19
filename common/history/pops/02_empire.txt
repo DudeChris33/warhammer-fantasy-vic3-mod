@@ -206,7 +206,7 @@ POPS = {
 	s:STATE_WEST_MIDDENLAND = {
 		region_state:BLV = {
 			create_pop = { culture = goblin size = 75000 }
-			create_pop = { culture = orc size = 25000 }
+			create_pop = { culture = mountain_orc size = 25000 }
 		}
 		region_state:MID = {
 			create_pop = { culture = middenlander size = 168929 }

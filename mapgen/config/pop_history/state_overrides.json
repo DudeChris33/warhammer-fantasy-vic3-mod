@@ -9,7 +9,7 @@
   "BNR": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -25,7 +25,7 @@
   "BSB": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -41,7 +41,7 @@
   "BTO": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -57,7 +57,7 @@
   "ICL": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -73,7 +73,7 @@
   "RED": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -89,7 +89,7 @@
   "RFG": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -105,7 +105,7 @@
   "SKZ": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -121,7 +121,7 @@
   "MOR": {
    "mix": [
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 65,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orcs the core of the tribe."
@@ -143,7 +143,7 @@
      "why": "Goblin tribe."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 25,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orc bosses and boyz."
@@ -159,7 +159,7 @@
      "why": "Goblin tribe."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 25,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orc bosses and boyz."
@@ -175,7 +175,7 @@
      "why": "Goblin tribe."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 25,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orc bosses and boyz."
@@ -191,7 +191,7 @@
      "why": "Goblin tribe."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 25,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orc bosses and boyz."
@@ -207,7 +207,7 @@
      "why": "Goblin tribe."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 25,
      "source": "canon: Night Goblins and Orcs march together (WFB Orcs & Goblins)",
      "why": "Orc bosses and boyz."
@@ -632,7 +632,7 @@
      "why": "Hobgoblin slave labour."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 10,
      "pop_type": "slaves",
      "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
@@ -656,7 +656,7 @@
      "why": "Hobgoblin slave labour."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 10,
      "pop_type": "slaves",
      "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
@@ -680,7 +680,7 @@
      "why": "Hobgoblin slave labour."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 10,
      "pop_type": "slaves",
      "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",
@@ -704,7 +704,7 @@
      "why": "Hobgoblin slave labour."
     },
     {
-     "culture": "orc",
+     "culture": "mountain_orc",
      "share": 10,
      "pop_type": "slaves",
      "source": "canon: Chaos Dwarf economy runs on slave labour (WFB Chaos Dwarfs)",

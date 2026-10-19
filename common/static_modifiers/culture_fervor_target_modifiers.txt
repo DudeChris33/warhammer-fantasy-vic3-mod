@@ -295,14 +295,14 @@ hobgoblin_fervor_target_modifier_negative = {
 
 # ---- Board item #3409, Badlands & Nehekhara cultures ----
 
-orc_fervor_target_modifier_positive = {
+mountain_orc_fervor_target_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	country_fervor_target_orc_add = 1
+	country_fervor_target_mountain_orc_add = 1
 }
 
-orc_fervor_target_modifier_negative = {
+mountain_orc_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	country_fervor_target_orc_add = 1
+	country_fervor_target_mountain_orc_add = 1
 }
 
 goblin_fervor_target_modifier_positive = {
@@ -440,3 +440,56 @@ beastmen_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_beastmen_add = 1
 }
+
+# ---- Orc subcultures: savage, dark lands, badlands, Cathayan, Lustrian ----
+
+savage_orc_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_savage_orc_add = 1
+}
+
+savage_orc_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_savage_orc_add = 1
+}
+
+dark_lands_orc_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_dark_lands_orc_add = 1
+}
+
+dark_lands_orc_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_dark_lands_orc_add = 1
+}
+
+badlands_orc_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_badlands_orc_add = 1
+}
+
+badlands_orc_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_badlands_orc_add = 1
+}
+
+cathayan_orc_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_cathayan_orc_add = 1
+}
+
+cathayan_orc_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_cathayan_orc_add = 1
+}
+
+lustrian_orc_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_lustrian_orc_add = 1
+}
+
+lustrian_orc_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_lustrian_orc_add = 1
+}
+

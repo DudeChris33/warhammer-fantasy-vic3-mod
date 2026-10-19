@@ -198,7 +198,7 @@ STATES = {
 			owned_provinces = { x002DEA x13B6E3 x174347 x25877F x33CBB7 x3F6FF8 x4AE114 x5E6A0D x61F671 x703AA9 xDAD455 xF0E19B }
 		}
 
-		add_homeland = cu:orc
+		add_homeland = cu:mountain_orc
 		add_homeland = cu:goblin
 	}
 	s:STATE_MONTFORT = {

@@ -295,14 +295,14 @@ hobgoblin_cultural_acceptance_modifier_negative = {
 
 # ---- Board item #3409, Badlands & Nehekhara cultures ----
 
-orc_cultural_acceptance_modifier_positive = {
+mountain_orc_cultural_acceptance_modifier_positive = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
-	country_orc_cultural_acceptance_add = 1
+	country_mountain_orc_cultural_acceptance_add = 1
 }
 
-orc_cultural_acceptance_modifier_negative = {
+mountain_orc_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
-	country_orc_cultural_acceptance_add = 1
+	country_mountain_orc_cultural_acceptance_add = 1
 }
 
 goblin_cultural_acceptance_modifier_positive = {
@@ -440,3 +440,56 @@ beastmen_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_beastmen_cultural_acceptance_add = 1
 }
+
+# ---- Orc subcultures: savage, dark lands, badlands, Cathayan, Lustrian ----
+
+savage_orc_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_savage_orc_cultural_acceptance_add = 1
+}
+
+savage_orc_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_savage_orc_cultural_acceptance_add = 1
+}
+
+dark_lands_orc_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dark_lands_orc_cultural_acceptance_add = 1
+}
+
+dark_lands_orc_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dark_lands_orc_cultural_acceptance_add = 1
+}
+
+badlands_orc_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_badlands_orc_cultural_acceptance_add = 1
+}
+
+badlands_orc_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_badlands_orc_cultural_acceptance_add = 1
+}
+
+cathayan_orc_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_cathayan_orc_cultural_acceptance_add = 1
+}
+
+cathayan_orc_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_cathayan_orc_cultural_acceptance_add = 1
+}
+
+lustrian_orc_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_lustrian_orc_cultural_acceptance_add = 1
+}
+
+lustrian_orc_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_lustrian_orc_cultural_acceptance_add = 1
+}
+
