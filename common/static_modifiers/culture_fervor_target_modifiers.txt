@@ -574,3 +574,15 @@ nipponese_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_nipponese_add = 1
 }
+
+# ---- Board item #8473, Arabyan ----
+
+arabyan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_arabyan_add = 1
+}
+
+arabyan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_arabyan_add = 1
+}

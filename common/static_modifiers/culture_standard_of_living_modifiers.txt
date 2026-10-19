@@ -574,3 +574,15 @@ nipponese_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_nipponese_standard_of_living_add = 1
 }
+
+# ---- Board item #8473, Arabyan ----
+
+arabyan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_arabyan_standard_of_living_add = 1
+}
+
+arabyan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_arabyan_standard_of_living_add = 1
+}

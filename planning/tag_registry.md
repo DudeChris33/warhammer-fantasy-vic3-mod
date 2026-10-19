@@ -795,6 +795,8 @@ historically *fell* (Fyrus to an Arabyan uprising; Antoch razed by Lizardmen), s
 crusader-revival starts. Fyrus itself is kept as a releasable **Arabyan** tag; the Knights of Origo
 (the order that once held it) are a separate Bretonnian tag. (Approved 2026-08-30.)
 
+Culture update (#8473): the Arabyan culture now exists as `arabyan`; the tag rows below stay `PLACEHOLDER` and are retargeted when the tags are authored.
+
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | ARB | `08_araby` | Sultanate of Araby | formable | `PLACEHOLDER` | Al-Haikk | the sultanates unite |

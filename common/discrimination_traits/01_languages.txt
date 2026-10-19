@@ -48,3 +48,6 @@ sphere_khureshi = { type = language  trait_group = sphere_group_khureshi }
 
 # Nipponese. Board item #8472.
 sphere_nipponese = { type = language  trait_group = sphere_group_nipponese }
+
+# Arabyan. Board item #8473.
+sphere_arabyan = { type = language  trait_group = sphere_group_arabyan }

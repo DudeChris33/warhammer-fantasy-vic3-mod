@@ -35,3 +35,6 @@ heritage_group_khureshi_human = { type = heritage }
 
 # Nipponese - the humans of Nippon, kin to no other people. Board item #8472.
 heritage_group_nipponese_human = { type = heritage }
+
+# Arabyans - the humans of Araby and its Southlands colonies. Board item #8473.
+heritage_group_arabyan_human = { type = heritage }

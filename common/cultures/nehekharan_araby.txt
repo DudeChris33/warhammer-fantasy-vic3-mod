@@ -17,8 +17,8 @@
 # one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs
 # its six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.
 # Culture display names live in localization/english/cultures_nehekharan_araby_l_english.yml.
-# Araby is NOT YET AUTHORED (pending scoping); nehekharan below is this file's only culture so far.
-# Board item #3409 (epic #3404).
+# arabyan (appended below) is the living Arabyans; nehekharan is the Tomb Kings.
+# Board items #3409 (epic #3404), #8473 (epic #8462).
 
 ################ Nehekharan — the Tomb Kings; the living dead of the Great Land ################
 # heritage_nehekharan sits in its OWN trait group (heritage_group_nehekharan), deliberately apart
@@ -73,6 +73,59 @@ nehekharan = {
 
 	female_regal_first_names = {
 		Khalida Amenirdis Merytamun Sitamun Neithira
+	}
+
+	graphics = arabic
+	ethnicities = {
+		1 = arab
+	}
+}
+
+################ Arabyan - the living humans of Araby and its Southlands colonies (#8473) ################
+# color is AHK Al-Haikk's legend colour (mapgen/config/state_ownership_legend.json). religion gods_of_araby (#8484).
+# heritage_arabyan_human / sphere_arabyan, each in its own group. graphics/ethnicities (arabic / arab) are the same
+# vanilla STAND-INS nehekharan loads. Names (Chris, 2026-10-18): Araby is canon-rich, so real-language Arabic
+# personal names under the shared ban (no place names, ethnonyms, dynasties, religious figures, or names that point
+# to one famous person). CANON: Jaffar, Muktar. INVENTED: the nisba surnames (al-Haikki and the other city nisbas,
+# ibn_Jaffar, ibn_Kasim) and the trade nisbas.
+
+arabyan = {
+	color= rgb{ 246 186 150 }
+	religion = gods_of_araby
+	heritage = heritage_arabyan_human
+	language = sphere_arabyan
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Jaffar Muktar Kasim Tariq Farid Karim Rashid Nabil Hakim Jamal
+		Nadim Nasir Samir Wasim Rafiq Khalid Bashir Fahad Mansur Marwan
+		Nizar Rami Adil Sayf
+	}
+
+	female_common_first_names = {
+		Layla Yasmin Samira Amira Nadia Farida Jamila Salma Rania Dalia
+		Hana Lina Nur Rasha Suha Shirin Soraya Badra Ghada Najla
+		Lubna Widad
+	}
+
+	noble_last_names = {
+		ibn_Jaffar ibn_Kasim al-Haikki al-Copheri al-Lashieki al-Marteki al-Kalabadi al-Qasri al-Fyrusi al-Muktari
+	}
+
+	common_last_names = {
+		al-Haddad al-Najjar al-Khayyat al-Attar al-Sabbagh al-Tahhan al-Jammal al-Bahri al-Sahrawi al-Qassab
+		al-Fakhuri al-Saffar al-Warraq al-Dabbagh al-Copheri al-Lashieki
+	}
+
+	male_regal_first_names = {
+		Jaffar Kasim Nasir Rashid Karim Samir
+	}
+
+	female_regal_first_names = {
+		Layla Amira Shirin Soraya
 	}
 
 	graphics = arabic
