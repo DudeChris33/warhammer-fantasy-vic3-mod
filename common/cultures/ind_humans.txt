@@ -1,1 +1,62 @@
-﻿
+﻿# Old World cultures - Ind. Schema mirrors common/cultures/beastmen.txt (verified reference entry). Each culture carries:
+#   color      - rgb{ R G B } with 0-255 integers. Cosmetic only. A lotus pink picked for distance: the furthest
+#                clear point from the shipped culture colours, and clear of the faith's saffron and of beastmen.
+#                There is no Ind tag in the legend.
+#   religion   - gods_of_ind, from common/religions/00_religions.txt (board item #8481).
+#   heritage   - heritage_ind_human, in its own group: Ind humans are not Old Worlders and claim no kinship with
+#                Cathay or Nippon. language - sphere_indish, in its own group. heritage and language are SEPARATE
+#                top-level fields, each taking a single id.
+#   traditions / obsessions - empty blocks, as everywhere in this mod.
+# graphics/ethnicities - STAND-INS: vanilla's South Asian portrait ids (south_asian / indian), referenced not
+#                authored, pending custom art; no lore claim.
+# INVENTED (canon for Ind is thin; approved by Chris): the adjective "Indish"; Ind as its own kin-less heritage
+#                family; one tongue for all Ind; the colour; the naming phonology; every name below; noble houses.
+# Every name string used below also needs a matching localization key unless vanilla already ships one - see
+# localization/english/cultures_names_l_english.yml. Every culture additionally needs its six static modifier
+# definitions - see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_ind_humans_l_english.yml.
+# Board item #8470 (epic #8462).
+
+################ Indish - the land of many gods ################
+# Register (invented): aspirated pairs bh/dh/kh/th plus lh, zh, rr, v, s, sh, m, n, y; vowels a i u e o (aa in nobles
+# only). Male first names end -an -in -ur -aru -vek -adh -ar; female -ai -i -ira -ali -ya; noble houses are a root plus
+# -ondhi -arrath -ivaan -akhar -ushar; common surnames are one or two syllables. No real name pieces (raj deva singh
+# kumar ananda esh mahal pur yash suddh shuddh bahad), no whole real names or gods.
+
+ind = {
+	color= rgb{ 230 120 170 }
+	religion = gods_of_ind
+	heritage = heritage_ind_human
+	language = sphere_indish
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Thelvarin Dhavek Kaltharu Morrasan Tavushan Vellahar Kethavin Lhumran Ozhavan Paltheru
+		Narrudh Kevadhan Thulmaru Zhovek Ambhorin Dhelkaru Hulvadh Sarrovan Ithumar Rhudan
+		Chavrel Gaudhur Velketh Orrabhin
+	}
+
+	female_common_first_names = {
+		Bhavai Dhelira Kaushti Mirrali Tavenya Vellushi Suvadhi Lhumai Ozhira Paltheri
+		Naruvai Kethali Thulvia Ambhali Dhorvi Sarrima Ithuvai Rhudai Chavelli Gaudhira
+		Velkarri Orrabhai Shelunai Tirravi
+	}
+
+	noble_last_names = {
+		Bhalondhi Dhavarrath Kesudhan Morrivaan Tavakhar Vellondhi Kethakhar Lhumivaan Ozhakhar Palushar
+		Narrondhi Thulivaan Ambrakhar Chavushar Gaudharrath Orrivaan
+	}
+
+	common_last_names = {
+		Bharru Dovan Khelu Marrak Nudhi Ozhan Pethru Rhasvo Suvekh Tulkh
+		Vudhren Yerru Chovhu Gavvi Lhoru Ombhu Ithar Shevu
+	}
+
+	graphics = south_asian
+	ethnicities = {
+		1 = indian
+	}
+}

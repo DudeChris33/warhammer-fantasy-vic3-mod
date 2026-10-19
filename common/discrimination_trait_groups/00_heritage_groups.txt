@@ -26,3 +26,6 @@ heritage_group_beastmen = { type = heritage }
 
 # Cathayans - the humans of Cathay, kin to no other human people. Board item #8469.
 heritage_group_cathayan_human = { type = heritage }
+
+# Ind humans - their own family, kin to no other people. Board item #8470.
+heritage_group_ind_human = { type = heritage }

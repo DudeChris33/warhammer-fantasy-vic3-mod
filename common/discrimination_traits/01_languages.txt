@@ -39,3 +39,6 @@ sphere_beastspeech = { type = language  trait_group = sphere_group_beastspeech }
 
 # Cathayan. Board item #8469.
 sphere_cathayan = { type = language  trait_group = sphere_group_cathayan }
+
+# Indish. Board item #8470.
+sphere_indish = { type = language  trait_group = sphere_group_indish }

@@ -538,3 +538,15 @@ cathayan_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_cathayan_standard_of_living_add = 1
 }
+
+# ---- Board item #8470, Ind ----
+
+ind_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_ind_standard_of_living_add = 1
+}
+
+ind_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_ind_standard_of_living_add = 1
+}

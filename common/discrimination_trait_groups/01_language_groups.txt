@@ -25,3 +25,6 @@ sphere_group_beastspeech = { type = language }
 
 # Cathayan, the tongue of Cathay. Board item #8469.
 sphere_group_cathayan = { type = language }
+
+# Indish, the tongue of Ind. Board item #8470.
+sphere_group_indish = { type = language }
