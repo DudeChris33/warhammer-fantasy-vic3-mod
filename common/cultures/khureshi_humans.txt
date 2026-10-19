@@ -1,1 +1,60 @@
-﻿
+﻿# Old World cultures - Khuresh. Schema mirrors common/cultures/beastmen.txt (verified reference entry). Each culture carries:
+#   color      - rgb{ R G B } with 0-255 integers. Cosmetic only. A serpent-scale turquoise: the farthest free point
+#                in that hue from the shipped culture colours, kept away from the faith's purple. There is no
+#                Khuresh tag in the legend.
+#   religion   - the_serpent_queens, from common/religions/00_religions.txt (board item #8482).
+#   heritage   - heritage_khureshi_human, in its own group: canon gives the Khureshi no kinship with anyone.
+#   language   - sphere_khureshi, in its own group. heritage and language are SEPARATE top-level fields.
+#   traditions / obsessions - empty blocks, as everywhere in this mod.
+# graphics/ethnicities - STAND-INS: east_asian + south_east_asian, the pair vanilla khmer and champa use, pending
+#                custom art; no lore claim.
+# INVENTED (canon for Khuresh is thin; approved by Chris): that the human Khureshi exist as a people at all, the
+#                name "Khureshi", their kin-less heritage, the tongue, the naming register, every name below, noble
+#                houses. The Snake Men and their queens are NOT authored here.
+# No regal name lists (optional; the acceptance criteria name four lists).
+# Every name string used below also needs a matching localization key unless vanilla already ships one - see
+# localization/english/cultures_names_l_english.yml. Every culture additionally needs its six static modifier
+# definitions - see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_khureshi_humans_l_english.yml.
+# Board item #8471 (epic #8462).
+
+################ Khureshi - the hissing courts ################
+# Register (invented): the sounds of "Khuresh" itself - kh-, sh-, zh-, hissing double s, r, l. Fixed endings per
+# list: male -ix -oth -esk -azh; female -esse -ysse -yth -ethe; noble -ssyr -vyr; common -ith -orr.
+
+khureshi = {
+	color= rgb{ 0 170 200 }
+	religion = the_serpent_queens
+	heritage = heritage_khureshi_human
+	language = sphere_khureshi
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Khessoth Sharrix Zhuloth Vessix Thazesk Khyrazh Zherroth Lyssoth Khurix Shoresk
+		Zhavix Thessazh Vorrix Khelesk Yshoth Sazzix Zhyresk Thulazh Kessoth Shyrix
+		Vazhesk Khorrazh Lessix Zhessoth
+	}
+
+	female_common_first_names = {
+		Sheresse Zhalyth Vessethe Khyrysse Thalesse Lyssethe Zhuresse Sharyth Khelysse Ysmethe
+		Vazhyth Shessethe Zhyresse Kharyth Thessysse Lazhethe Sazyth Khoresse Zhivysse Shalethe
+	}
+
+	noble_last_names = {
+		Kheressyr Zhalavyr Shoressyr Thuravyr Lyssavyr Khoravyr Yshessyr Zhuressyr Vazhavyr Sazessyr
+		Thelavyr Kyrrassyr Shalavyr Zhivassyr Khalassyr Vorrassyr
+	}
+
+	common_last_names = {
+		Khesith Zharorr Shalith Vessorr Thurith Lazorr Yshith Khavorr Zhelith Sathorr
+		Kyrith Shovorr Vazith Thessorr Zhurith Lyrorr
+	}
+
+	graphics = east_asian
+	ethnicities = {
+		1 = south_east_asian
+	}
+}

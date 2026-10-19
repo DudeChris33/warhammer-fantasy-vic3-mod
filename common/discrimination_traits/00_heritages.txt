@@ -57,3 +57,6 @@ heritage_cathayan_human = { type = heritage  trait_group = heritage_group_cathay
 
 # Ind humans. Board item #8470.
 heritage_ind_human = { type = heritage  trait_group = heritage_group_ind_human }
+
+# Khureshi. Board item #8471.
+heritage_khureshi_human = { type = heritage  trait_group = heritage_group_khureshi_human }

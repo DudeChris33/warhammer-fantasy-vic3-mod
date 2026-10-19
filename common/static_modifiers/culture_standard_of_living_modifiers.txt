@@ -550,3 +550,15 @@ ind_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_ind_standard_of_living_add = 1
 }
+
+# ---- Board item #8471, Khureshi ----
+
+khureshi_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_khureshi_standard_of_living_add = 1
+}
+
+khureshi_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_khureshi_standard_of_living_add = 1
+}

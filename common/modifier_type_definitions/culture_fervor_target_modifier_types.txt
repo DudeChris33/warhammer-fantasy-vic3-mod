@@ -444,3 +444,13 @@ country_fervor_target_ind_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8471, Khureshi ----
+
+country_fervor_target_khureshi_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

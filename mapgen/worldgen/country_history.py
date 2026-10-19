@@ -85,6 +85,7 @@ CULTURE_TECH: dict[str, str | None] = {
     "lizardmen": "effect_starting_technology_lizardmen_tech",
     "skaven": "effect_starting_technology_skaven_tech",
     "beastmen": "effect_starting_technology_beastmen_tech",
+    "khureshi": "effect_starting_technology_khuresh_tech",
     "ind": "effect_starting_technology_ind_tech",
     "cathayan": "effect_starting_technology_cathay_tech",
     **dict.fromkeys(("mountain_orc", "savage_orc", "dark_lands_orc", "badlands_orc", "cathayan_orc", "lustrian_orc"),

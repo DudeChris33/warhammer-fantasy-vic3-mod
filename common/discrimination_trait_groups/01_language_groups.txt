@@ -28,3 +28,6 @@ sphere_group_cathayan = { type = language }
 
 # Indish, the tongue of Ind. Board item #8470.
 sphere_group_indish = { type = language }
+
+# Khureshi, the tongue of Khuresh. Board item #8471.
+sphere_group_khureshi = { type = language }

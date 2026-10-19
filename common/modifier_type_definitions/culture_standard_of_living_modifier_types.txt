@@ -444,3 +444,13 @@ state_ind_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8471, Khureshi ----
+
+state_khureshi_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
