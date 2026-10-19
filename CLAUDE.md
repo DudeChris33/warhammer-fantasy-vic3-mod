@@ -40,7 +40,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
 
 ## How to work here
 
-- **Skills** in `.claude/skills/`, invoked with `/<name>`. Work tracking runs on the **maestro board** (via the maestro MCP), not local files; the board item's markdown workspec is the work record. `maestro-*` and `sites-verify` are Maestro pack skills — don't edit them locally. `review-panel` and `project-memory` belong to this repo.
+- **Skills** in `.claude/skills/`, invoked with `/<name>`. Work tracking runs on the **maestro board** (via the maestro MCP), not local files; the board item's markdown workspec is the work record. `maestro-*` and `sites-verify` are Maestro pack skills — don't edit them locally. `review-panel`, `project-memory`, `map-regen` and `anchor-dots` belong to this repo.
   - `/maestro-task <description>` — explore, clarify, file work item(s) (stage=inbox)
   - `/maestro-scope <item-ids>` — scope item(s), append a `## Approach`, push back (stage=planned)
   - `/maestro-build <item-ids>` — claim, execute the plan with full build discipline, land at review/done
@@ -51,6 +51,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
   - `/maestro-release-note` — draft the next release note from the actual diffs
   - `/sites-verify <url>` — look at a deployed maestro site (real pixels)
   - `/map-regen` — full map regen after Chris re-exports `full.ora`: manifest, provinces through adjacencies, offline gate, state-level renders, commit/deploy/`error.log` triage, with the stop-and-fix playbook from the 2026-10-15 run
+  - `/anchor-dots <source>` — propose paired anchor dots between any source image and the canvas for Chris's review: precise shared landmarks, leave-one-out fit, disagreement renders and the two dot sheets, all in `scratchpad/dots/`
   - `/review-panel <target>` — convene the five-expert review panel on a plan, a diff, or a rendered artifact
   - `/project-memory` — show memory state
 - `.claude/maestro.json` holds `workspace`, `board` and `project`; the maestro skills prompt to create it if missing.
