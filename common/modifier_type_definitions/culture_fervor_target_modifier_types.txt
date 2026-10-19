@@ -397,3 +397,30 @@ country_fervor_target_lustrian_orc_add={
 	}
 }
 
+
+# ---- Strigoi, Blood Dragon, Necrarch vampires ----
+
+country_fervor_target_strigoi_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_blood_dragon_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_fervor_target_necrarch_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+

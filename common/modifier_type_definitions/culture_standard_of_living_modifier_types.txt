@@ -397,3 +397,30 @@ state_lustrian_orc_standard_of_living_add={
 	}
 }
 
+
+# ---- Strigoi, Blood Dragon, Necrarch vampires ----
+
+state_strigoi_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_blood_dragon_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+state_necrarch_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+

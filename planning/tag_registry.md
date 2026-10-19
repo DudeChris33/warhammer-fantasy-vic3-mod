@@ -56,6 +56,7 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   - `lahmian_vampire` — the Lahmian vampire bloodline (Neferata's) for the tomb-city of Lahmia.
   - `savage_orc` — the Savage Orc subculture (Southlands heartland); see region 09.
   - `dark_lands_orc`, `badlands_orc`, `cathayan_orc`, `lustrian_orc` — orc subcultures, defined in `common/cultures/greenskin.txt` beside `mountain_orc` (the former `orc`); not yet assigned to any tag or state.
+  - `strigoi`, `blood_dragon`, `necrarch` — vampire bloodlines, defined in `common/cultures/vampire.txt` beside `lahmian_vampire`; not yet assigned to any tag or state (`STR` still uses `sylvanian_vampire` as a stand-in).
 
 ## Conventions
 

@@ -138,3 +138,133 @@ lahmian_vampire = {
 		1 = caucasian_northern_brown_hair
 	}
 }
+
+################ Strigoi — the degenerate, ghoul-like vampire bloodline; cave-dwelling, feral, hated by the other lines ################
+# Register: Carpathian-sounding given names (Radu, Ileana) for the Strigany stock they rose from; surnames are the charnel trades of ghouls. Language is a disclosed stand-in (sphere_reikspiel, the Sylvanian tongue); canon gives the Strigoi no tongue of their own. No regal list: Strigoi have no courts.
+# All names are INVENTED, for Chris to review. Same religion/heritage as the other vampire lines; ethnicities are the palest morphs, as sylvanian_vampire. Color is cosmetic.
+
+strigoi = {
+	color= rgb{ 72 62 52 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_reikspiel
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Radu Mircea Dragos Vasile Costin Lucian Bogdan Stelian Tiberiu Vlaicu Ilie Marek
+	}
+
+	female_common_first_names = {
+		Ileana Zamfira Corina Anca Mihaela Roxana Dorina Tereza Viorica Lavinia Ecaterina Sorina
+	}
+
+	noble_last_names = {
+		Ghoulking Cryptlord Gravecrowned of_the_Deep_Caves Carrionprince
+	}
+
+	common_last_names = {
+		Ghoulkin Cavedweller Gravegnawer Bonegnaw Carrionborn Mistwalker Cryptcrawler Moonhowl
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}
+
+################ Blood Dragon — Abhorash's knightly bloodline; the warrior-vampires of the Blood Keep ################
+# Register: martial Latin/Tilean/Estalian given names for the chivalric order's mixed recruits; surnames are oaths and arms. Language sphere_nehekharan (Abhorash was Nehekharan-born), as lahmian_vampire. Founder names (Abhorash, Ushoran, W'soran) are reserved for lahmian_vampire's list and not reused.
+# All names are INVENTED, for Chris to review. Same religion/heritage as the other vampire lines; ethnicities are the palest morphs, as sylvanian_vampire. Color is cosmetic.
+
+blood_dragon = {
+	color= rgb{ 130 24 30 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_nehekharan
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Aurelian Valerius Cassian Lucan Septimus Marcellus Thaddeus Rodrigo Alcazar Domitian Aldric
+		Ruprecht
+	}
+
+	female_common_first_names = {
+		Aurelia Valentina Cassandra Lucrezia Seraphine Isolde Beatrix Dominika Camilla Octavia Valeria
+		Lysandra
+	}
+
+	noble_last_names = {
+		of_the_Blood_Keep Dragonsworn Silverpinnacle Bloodhelm Crimsonlance Ironcrowned Drakenshield
+	}
+
+	common_last_names = {
+		Bloodsworn Vowkeeper Lancebearer Shieldbrother Oathbound Redsteel Wardsman Dragonsquire
+	}
+
+	male_regal_first_names = {
+		Aurelian Valerius Cassian Marcellus Domitian
+	}
+
+	female_regal_first_names = {
+		Aurelia Valentina Cassandra Lucrezia Octavia
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}
+
+################ Necrarch — W'soran's bloodline; vampire necromancers of Nagashizzar and the Dark Lands ################
+# Register: learned, antiquarian given names; surnames are the scholar-necromancer's tools and tombs. Language sphere_nehekharan (the Nagashite root), as lahmian_vampire.
+# All names are INVENTED, for Chris to review. Same religion/heritage as the other vampire lines; ethnicities are the palest morphs, as sylvanian_vampire. Color is cosmetic.
+
+necrarch = {
+	color= rgb{ 52 38 82 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_nehekharan
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Valnir Mordecai Aethelbert Cornelius Lazarus Octavian Severin Tobias Ignatius Hieronymus Balthasar
+		Ambrose
+	}
+
+	female_common_first_names = {
+		Ligeia Morgana Perdita Cordelia Evanthe Zenobia Helvetia Ophelia Lenore Sybilla Thessaly Mirabel
+	}
+
+	noble_last_names = {
+		of_Nagashizzar Boneweaver Deathscribe Grimoirekeeper Charnelborn Lichmarked Ossuary Tombwright
+	}
+
+	common_last_names = {
+		Bonescribe Gravedigger Candlewraith Inkblood Skullmender Crypthand Ashenhand Plaguewarden
+	}
+
+	male_regal_first_names = {
+		Valnir Mordecai Severin Balthasar Lazarus
+	}
+
+	female_regal_first_names = {
+		Ligeia Zenobia Cordelia Morgana Sybilla
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}

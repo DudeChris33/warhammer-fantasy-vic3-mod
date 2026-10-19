@@ -493,3 +493,36 @@ lustrian_orc_cultural_acceptance_modifier_negative = {
 	country_lustrian_orc_cultural_acceptance_add = 1
 }
 
+
+# ---- Strigoi, Blood Dragon, Necrarch vampires ----
+
+strigoi_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_strigoi_cultural_acceptance_add = 1
+}
+
+strigoi_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_strigoi_cultural_acceptance_add = 1
+}
+
+blood_dragon_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_blood_dragon_cultural_acceptance_add = 1
+}
+
+blood_dragon_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_blood_dragon_cultural_acceptance_add = 1
+}
+
+necrarch_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_necrarch_cultural_acceptance_add = 1
+}
+
+necrarch_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_necrarch_cultural_acceptance_add = 1
+}
+

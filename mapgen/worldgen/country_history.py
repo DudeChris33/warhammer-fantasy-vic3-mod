@@ -75,7 +75,7 @@ CULTURE_TECH: dict[str, str | None] = {
     **dict.fromkeys(("tilean", "estalian", "border_princer", "sartosan"), _SOUTHERN),
     **dict.fromkeys(("dawi", "dawi_grey", "dawi_norse", "dawi_ancestral"), _DWARF),
     "dawi_zharr": "effect_starting_technology_dark_dwarf_tech",
-    **dict.fromkeys(("sylvanian_vampire", "lahmian_vampire"), _VAMPIRE),
+    **dict.fromkeys(("sylvanian_vampire", "lahmian_vampire", "strigoi", "blood_dragon", "necrarch"), _VAMPIRE),
     "nehekharan": "effect_starting_technology_tomb_kings_tech",
     "norscan": "effect_starting_technology_norsca_tech",
     "ogre": "effect_starting_technology_ogre_tech",

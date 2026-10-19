@@ -493,3 +493,36 @@ lustrian_orc_standard_of_living_modifier_negative = {
 	state_lustrian_orc_standard_of_living_add = 1
 }
 
+
+# ---- Strigoi, Blood Dragon, Necrarch vampires ----
+
+strigoi_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_strigoi_standard_of_living_add = 1
+}
+
+strigoi_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_strigoi_standard_of_living_add = 1
+}
+
+blood_dragon_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_blood_dragon_standard_of_living_add = 1
+}
+
+blood_dragon_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_blood_dragon_standard_of_living_add = 1
+}
+
+necrarch_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_necrarch_standard_of_living_add = 1
+}
+
+necrarch_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_necrarch_standard_of_living_add = 1
+}
+

@@ -493,3 +493,36 @@ lustrian_orc_fervor_target_modifier_negative = {
 	country_fervor_target_lustrian_orc_add = 1
 }
 
+
+# ---- Strigoi, Blood Dragon, Necrarch vampires ----
+
+strigoi_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_strigoi_add = 1
+}
+
+strigoi_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_strigoi_add = 1
+}
+
+blood_dragon_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_blood_dragon_add = 1
+}
+
+blood_dragon_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_blood_dragon_add = 1
+}
+
+necrarch_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_necrarch_add = 1
+}
+
+necrarch_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_necrarch_add = 1
+}
+

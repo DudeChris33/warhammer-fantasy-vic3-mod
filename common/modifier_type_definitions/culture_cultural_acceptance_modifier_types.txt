@@ -397,3 +397,30 @@ country_lustrian_orc_cultural_acceptance_add={
 	}
 }
 
+
+# ---- Strigoi, Blood Dragon, Necrarch vampires ----
+
+country_strigoi_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_blood_dragon_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_necrarch_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
