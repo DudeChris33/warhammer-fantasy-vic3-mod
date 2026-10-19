@@ -454,3 +454,13 @@ country_fervor_target_khureshi_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8472, Nipponese ----
+
+country_fervor_target_nipponese_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

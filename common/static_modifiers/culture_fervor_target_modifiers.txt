@@ -562,3 +562,15 @@ khureshi_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_khureshi_add = 1
 }
+
+# ---- Board item #8472, Nipponese ----
+
+nipponese_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_nipponese_add = 1
+}
+
+nipponese_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_nipponese_add = 1
+}

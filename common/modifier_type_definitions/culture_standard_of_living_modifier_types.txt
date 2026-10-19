@@ -454,3 +454,13 @@ state_khureshi_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8472, Nipponese ----
+
+state_nipponese_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

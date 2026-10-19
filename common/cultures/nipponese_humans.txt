@@ -1,1 +1,64 @@
-﻿
+﻿# Old World cultures - Nippon. Schema mirrors common/cultures/beastmen.txt (verified reference entry). Each culture carries:
+#   color      - rgb{ R G B } with 0-255 integers. Cosmetic only. The faith's colour (spirits_of_nippon, 0.90 0.20
+#                0.45) converted to 0-255, so faith and people read as one. There is no Nippon tag in the legend.
+#   religion   - spirits_of_nippon, from common/religions/00_religions.txt (board item #8483).
+#   heritage   - heritage_nipponese_human, in its own group: canon states no kinship with Cathay or anyone.
+#   language   - sphere_nipponese, in its own group. heritage and language are SEPARATE top-level fields.
+#   traditions / obsessions - empty blocks, as everywhere in this mod.
+#   name_format = last_first - as vanilla japanese and the Cathayan culture.
+# graphics/ethnicities - STAND-INS: vanilla japanese's own values (east_asian / asian), pending custom art; no lore claim.
+# No taboos and no seal_and_signature_texture (a real-world seal asset).
+# INVENTED (canon for Nippon is thin; approved by Chris): that the Nipponese are one people with one culture, heritage
+#                and language, the display name "Nipponese", noble houses, the colour.
+# Every name string used below also needs a matching localization key unless vanilla already ships one - see
+# localization/english/cultures_names_l_english.yml. Every culture additionally needs its six static modifier
+# definitions - see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_nipponese_humans_l_english.yml.
+# Board item #8472 (epic #8462).
+
+################ Nipponese - the land of the rising sun ################
+# Naming (Chris, 2026-10-18): real names are fine - ordinary Japanese names, as the Empire has people named Karl.
+# Banned and left out: the great clans and shogunates (Tokugawa, Oda, Toyotomi, Minamoto, Taira, Fujiwara, Ashikaga,
+# Hojo, Takeda, Date, Uesugi ...), imperial-line names, given names tied to one figure (Nobunaga, Ieyasu, Hideyoshi,
+# Musashi ...), place names, deities and religious terms. Noble houses use lesser-daimyo or old-family surnames.
+
+nipponese = {
+	color= rgb{ 230 51 115 }
+	religion = spirits_of_nippon
+	heritage = heritage_nipponese_human
+	language = sphere_nipponese
+
+	obsessions = { }
+
+	traditions = { }
+
+	name_format = last_first
+
+	male_common_first_names = {
+		Hiroshi Kenji Takeshi Akira Daisuke Haruki Kazuo Makoto Minoru Noboru
+		Osamu Ryota Satoshi Shigeru Shinji Tadashi Takumi Tetsuya Tomoya Yasuo
+		Yuji Kenta Kaito Isamu Jun Katsuo Masaru Norio Sadao Toru
+	}
+
+	female_common_first_names = {
+		Akiko Haruka Keiko Kumiko Mariko Naoko Noriko Sachiko Sakura Tomoko
+		Yoko Yumiko Ayumi Chiyo Emi Fumiko Hana Kaori Midori Nanami
+		Rei Shizuka Yui Megumi
+	}
+
+	noble_last_names = {
+		Akizuki Hachiya Ikeda Kanamori Kuroda Makino Matsuura Mizuno Niwa Ogasawara
+		Tsuchiya Kamiya Kutsuki Nagai Okochi Tozawa
+	}
+
+	common_last_names = {
+		Sato Suzuki Takahashi Tanaka Watanabe Ito Yamamoto Nakamura Kobayashi Kato
+		Yoshida Yamada Sasaki Yamaguchi Matsumoto Inoue Kimura Hayashi Shimizu Yamazaki
+		Hashimoto Ishikawa Ogawa Okada
+	}
+
+	graphics = east_asian
+	ethnicities = {
+		1 = asian
+	}
+}

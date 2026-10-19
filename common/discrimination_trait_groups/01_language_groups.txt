@@ -31,3 +31,6 @@ sphere_group_indish = { type = language }
 
 # Khureshi, the tongue of Khuresh. Board item #8471.
 sphere_group_khureshi = { type = language }
+
+# Nipponese, the tongue of Nippon. Board item #8472.
+sphere_group_nipponese = { type = language }

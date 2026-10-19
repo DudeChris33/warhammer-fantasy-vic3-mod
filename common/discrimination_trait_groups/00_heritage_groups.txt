@@ -32,3 +32,6 @@ heritage_group_ind_human = { type = heritage }
 
 # Khureshi - the humans of Khuresh, kin to no other people. Board item #8471.
 heritage_group_khureshi_human = { type = heritage }
+
+# Nipponese - the humans of Nippon, kin to no other people. Board item #8472.
+heritage_group_nipponese_human = { type = heritage }
