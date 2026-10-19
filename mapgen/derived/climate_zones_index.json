@@ -184,7 +184,9 @@
     "land_sea_mask.png": "b48bd691e167654228e394b70be4d9eec455142e5105edb74004891e314a4ba4",
     "heightmap.png": "a48e97c1877baf9d380344cf60c32fe07dddc0ff49e0ec34e511410c74762381",
     "winds_and_currents.png": "a19d25fd52da4ccde9a6126d4d81f1d2d70e22fa02d7a20b16b2c7589f2ea9bf",
-    "climate_settings.json": "ac4e66705207cfe625cf14aee18085bd624e94aaa8b03f1c3191b81aa8d18796"
+    "climate_settings.json": "ac4e66705207cfe625cf14aee18085bd624e94aaa8b03f1c3191b81aa8d18796",
+    "climate_lore.json": "efc25a9208ac3597a1470185741c759bef68888f23cb30f4dc4bdf6306d95e88"
   },
+  "lore_patches": [],
   "grid_sha256": "ca53ad569cb4a8544193935bfbe468183003ae9584bafd7edcd3cbfe957b58f3"
 }

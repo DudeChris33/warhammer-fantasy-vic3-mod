@@ -3515,6 +3515,59 @@ def _selfcheck_climate() -> None:
         "land at the polar edge must come out tundra or ice cap"
     assert "cur_sig" in climate.DEFAULT and "pole_ice" in climate.DEFAULT
 
+    # --- lore patches (board #8208): empty is identity, a patch moves T/P by exactly its amount ----
+    assert np.array_equal(climate.run(inp, {"pole_ice": 7.0}, lore=[])["k"], k1),         "an empty lore list must leave the class grid unchanged"
+    poly = [(2000, 1000), (4000, 1000), (4000, 1800), (2000, 1800)]       # canvas px, over the continent
+    wgt = climate.lore_weight(poly, 256.0, W, H, S)
+    cy, cx = 1400 // S, 3000 // S
+    assert wgt.shape == (H, W) and wgt.dtype == np.float32
+    assert wgt[cy, cx] == 1.0 and wgt[0, 0] == 0.0, "weight is 1 at the centre and 0 far outside"
+    assert 0.3 <= wgt[cy, 2000 // S] <= 0.7 or 0.3 <= wgt[cy, 2000 // S - 1] <= 0.7, "edge cell near 0.5"
+    assert np.array_equal(wgt, climate.lore_weight(poly, 256.0, W, H, S)), "lore_weight is deterministic"
+    base = climate.run(inp, {"pole_ice": 7.0}, want_fields=True)
+    for kw, field, check in (((-10.0, 1.0), "Tsum", lambda b, a_: abs((b - a_) - 10.0) < 0.01),
+                             ((0.0, 0.5), "Psum", lambda b, a_: abs(a_ / b - 0.5) < 1e-3)):
+        out = climate.run(inp, {"pole_ice": 7.0}, want_fields=True, lore=[(wgt, kw[0], kw[1])])
+        assert check(base[field][cy, cx], out[field][cy, cx]), f"patch {kw} must move {field} by its amount"
+        far = (slice(0, 6), slice(0, 6))
+        assert np.array_equal(base[field][far], out[field][far]), f"{field} outside the patch must not move"
+
+    # --- climate_lore.json loader --------------------------------------------------------------
+    from worldgen import schema as _schema
+    good = {"name": "p", "polygon": [[10, 10], [50, 10], [50, 50]], "feather_px": 8, "temp_c": -5,
+            "target": ["Dc"], "reason": "r", "source": "canon: Test Book"}
+
+    def _lore(patches, raw=None):
+        with _tf.TemporaryDirectory() as td:
+            f = Path(td) / "climate_lore.json"
+            f.write_text(json.dumps(raw if raw is not None else {"patches": patches}), encoding="utf-8")
+            return _schema.load_climate_lore(f, (_cf.WIDTH, _cf.HEIGHT), codes_)
+
+    codes_ = [c[0] for c in climate.CLASSES]
+    assert _lore([]) == [] and len(_lore([good])) == 1, "empty list and one good patch must load"
+    for label, bad in (("missing source", {k: v for k, v in good.items() if k != "source"}),
+                       ("non-canon source", {**good, "source": "invented"}),
+                       ("target not a zone", {**good, "target": ["Zz"]}),
+                       ("empty target", {**good, "target": []}),
+                       ("vertex off canvas", {**good, "polygon": [[10, 10], [50, 10], [_cf.WIDTH, 50]]}),
+                       ("two vertices", {**good, "polygon": [[10, 10], [50, 10]]}),
+                       ("temp out of bounds", {**good, "temp_c": 40}),
+                       ("rain out of bounds", {**good, "rain_factor": 9.0}),
+                       ("neutral patch", {k: v for k, v in good.items() if k != "temp_c"}),
+                       ("misspelt key", {**good, "rain_factr": 0.5}),
+                       ("zero feather", {**good, "feather_px": 0})):
+        try:
+            _lore([bad])
+        except _schema.SchemaError:
+            continue
+        raise AssertionError(f"climate lore loader accepted a patch with {label}")
+    try:
+        _lore([good, good])
+    except _schema.SchemaError:
+        pass
+    else:
+        raise AssertionError("climate lore loader accepted a duplicate name")
+
     # --- per-state share helper: shares sum to 1, ties to the lowest id, empty -> no dominant --
     codes = [c[0] for c in climate.CLASSES]
     row = np.zeros(len(codes), np.int64)
@@ -6393,7 +6446,7 @@ def run_check() -> int:
           "impassable-collision non-blocking warning, export-absent skip) self-check passed.")
     _selfcheck_climate()
     print("climate: stroke reader (red/cyan, land and sea fill ignored) + core on a synthetic canvas "
-          "(uint8 grid in range, polar land is tundra/ice, array-equal across runs) + per-state shares "
+          "(uint8 grid in range, polar land is tundra/ice, array-equal across runs) + lore patches (empty = identity, exact T/P shift inside, none outside, feather 0.5 on the line, loader refusals) + per-state shares "
           "(sum to 1, ties to lowest id, empty -> none) + class-map loader and clim_* columns "
           "(clean skip, unknown class refused, highland never flagged) self-check passed.")
     _selfcheck_cr_partition()

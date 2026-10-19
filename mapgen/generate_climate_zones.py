@@ -9,12 +9,15 @@ I/O the core forbids itself and writes:
   ``worldgen.climate.CLASSES``), 255 = sea or lake;
 * ``mapgen/derived/climate_zones_index.json`` -- class ids, names, colours, land share per class and the
   SHA-256 of every input and of the 904x2048 class grid;
+* the lore patches of ``mapgen/config/climate_lore.json`` (board #8208) are applied inside the model and listed in
+  the index with each patch's measured ``target_share``; ``"patches": []`` reproduces the physical layer;
 * with ``--states``: ``mapgen/derived/state_climate_index.json`` -- per drawn state the dominant zone and the
   share of each zone, keyed on ``state_key`` with the worksheet name as anchor (never the state number).
 
 Inputs: ``derived/land_sea_mask.png``, ``map_data/heightmap.png``, the drawing registered as source layer
 ``climate_currents`` (``sources/geology/winds_and_currents.png``), and
-``mapgen/config/climate_settings.json`` merged over ``climate.DEFAULT``. The drawing is Chris's; this stage
+``mapgen/config/climate_settings.json`` merged over ``climate.DEFAULT``, plus the hand-authored
+``mapgen/config/climate_lore.json`` (required; an empty patch list is valid). The drawing is Chris's; this stage
 never edits it. The model runs at 1/4 canvas scale (about 30 s) and the class of each model cell is
 nearest-filled to the canvas over the full-resolution mask. No clock, randomness or network.
 
@@ -23,7 +26,7 @@ Usage::
     python mapgen/generate_climate_zones.py             # write layer + index
     python mapgen/generate_climate_zones.py --dry-run   # compute + report, write nothing
     python mapgen/generate_climate_zones.py --check     # regenerate, diff the committed files
-    python mapgen/generate_climate_zones.py --render    # flat picture + preview to scratchpad/
+    python mapgen/generate_climate_zones.py --render    # flat picture + preview (+ lore before/after) to scratchpad/
     python mapgen/generate_climate_zones.py --states    # per-state table (after generate_land_regions.py)
     python mapgen/generate_climate_zones.py --states --check
 
@@ -50,7 +53,7 @@ Image.MAX_IMAGE_PIXELS = None
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import climate, raster, sources  # noqa: E402
+from worldgen import climate, raster, schema, sources  # noqa: E402
 
 TOOLS_DIR = Path(__file__).resolve().parent
 REPO_ROOT = TOOLS_DIR.parent
@@ -62,6 +65,7 @@ HEIGHTMAP_PATH = REPO_ROOT / "map_data" / "heightmap.png"
 SETTINGS_PATH = TOOLS_DIR / "config" / "climate_settings.json"
 LAYERS_PATH = TOOLS_DIR / "config" / "source_layers.json"
 SOURCE_LAYER_KEY = "climate_currents"
+LORE_PATH = TOOLS_DIR / "config" / "climate_lore.json"
 
 OUT_PNG = DERIVED_DIR / "climate_zones.png"
 OUT_INDEX = DERIVED_DIR / "climate_zones_index.json"
@@ -85,11 +89,12 @@ def drawing_path() -> Path:
     return sources.resolve_source_path(layers[SOURCE_LAYER_KEY])
 
 
-def compute(t0: float) -> tuple[np.ndarray, np.ndarray, dict]:
-    """Return ``(grid, layer, index)``: the 904x2048 class grid, the canvas class raster and the index."""
+def compute(t0: float) -> tuple[np.ndarray, np.ndarray, dict, dict]:
+    """Return ``(grid, layer, index, ctx)``: the 904x2048 class grid, the canvas class raster, the index and
+    the prepared model inputs/settings/patches (``ctx``) that ``render`` reuses for the physical baseline."""
     drawing = drawing_path()
     for pth, hint in ((MASK_PATH, "generate_coastline_mask.py"), (HEIGHTMAP_PATH, "generate_heightmap.py"),
-                      (SETTINGS_PATH, "(hand-authored)")):
+                      (SETTINGS_PATH, "(hand-authored)"), (LORE_PATH, "(hand-authored)")):
         if not pth.is_file():
             raise SystemExit(f"{pth} not found -- run mapgen/{hint} first")
     if not drawing.is_file():
@@ -110,10 +115,13 @@ def compute(t0: float) -> tuple[np.ndarray, np.ndarray, dict]:
     unknown = sorted(set(settings) - set(climate.DEFAULT))
     if unknown:
         raise SystemExit(f"{SETTINGS_PATH}: unknown parameters {unknown}")
+    patches = schema.load_climate_lore(LORE_PATH, (CANVAS_W, CANVAS_H), [c[0] for c in climate.CLASSES])
     log("running the model at 1/4 scale...", t0)
     inp = climate.prepare_inputs(land_full, hm, red, cya, climate.SCALE)
     del hm
-    grid = climate.run(inp, settings)["k"].astype(np.uint8)
+    weights = [climate.lore_weight(pt.polygon, pt.feather_px, inp["W"], inp["H"], climate.SCALE) for pt in patches]
+    lore = [(w, pt.temp_c, pt.rain_factor) for w, pt in zip(weights, patches)]
+    grid = climate.run(inp, settings, lore=lore)["k"].astype(np.uint8)
     log("filling to the canvas...", t0)
     S = climate.SCALE
     # the fill reference is the block mean > 0.5 (the accepted render's), not the model's BOX-resized mask
@@ -140,10 +148,24 @@ def compute(t0: float) -> tuple[np.ndarray, np.ndarray, dict]:
             "heightmap.png": _sha(HEIGHTMAP_PATH),
             "winds_and_currents.png": _sha(drawing),
             "climate_settings.json": _sha(SETTINGS_PATH),
+            "climate_lore.json": _sha(LORE_PATH),
         },
+        "lore_patches": [lore_entry(pt, w, grid, inp["land"]) for pt, w in zip(patches, weights)],
         "grid_sha256": hashlib.sha256(np.ascontiguousarray(grid).tobytes()).hexdigest(),
     }
-    return grid, layer, index
+    return grid, layer, index, dict(inp=inp, settings=settings, patches=patches, weights=weights, index_patches=index["lore_patches"])
+
+
+def lore_entry(pt: "schema.ClimateLorePatch", weight: np.ndarray, grid: np.ndarray, land: np.ndarray) -> dict:
+    """Index row for one patch: its inputs and the measured ``target_share`` -- the share of its core land
+    cells (weight >= 0.5) whose patched class is in ``target``. Reported, not a gate."""
+    core = (weight >= 0.5) & land
+    n = int(core.sum())
+    tgt = np.isin(grid, [climate.IDX[c] for c in pt.target])
+    share = round(float((core & tgt).sum()) / n, 4) if n else 0.0
+    return {"name": pt.name, "target": list(pt.target), "temp_c": pt.temp_c, "rain_factor": pt.rain_factor,
+            "feather_px": pt.feather_px, "polygon": [list(v) for v in pt.polygon], "source": pt.source,
+            "reason": pt.reason, "core_cells": n, "target_share": share}
 
 
 def write_outputs(layer: np.ndarray, index: dict, png: Path, idx_path: Path) -> None:
@@ -183,6 +205,51 @@ def render(layer: np.ndarray, index: dict, out_dir: Path) -> None:
         comp = comp * (1 - t) + np.array(col, np.float32) * t
     legend(small(comp.astype(np.uint8))).save(out_dir / "climate_zones_preview.png")
     log(f"wrote {out_dir / 'climate_zones_flat.png'} and climate_zones_preview.png")
+
+
+def render_lore(grid: np.ndarray, ctx: dict, out_dir: Path, t0: float) -> None:
+    """``climate_lore_before_after.png``: per patch a crop of its polygon box (padded by the feather), the
+    physical result on the left and the patched one on the right, polygon outlined, x2, labelled. The
+    physical grid is a second model run (about 30 s) so the baseline never depends on committed pixels."""
+    log("running the physical baseline (no lore) for the before/after crops...", t0)
+    phys = climate.run(ctx["inp"], ctx["settings"], lore=[])["k"].astype(np.uint8)
+    land, S = ctx["inp"]["land"], climate.SCALE
+    pal = np.array([c[2] for c in climate.CLASSES] + [(30, 40, 90)], np.uint8)
+    try:
+        font = ImageFont.truetype("arial.ttf", 22)
+    except OSError:
+        font = ImageFont.load_default()
+
+    def pic(g):
+        return pal[np.where(land, g, len(climate.CLASSES))]
+
+    before, after = pic(phys), pic(grid)
+    panels = []
+    for pt, w in zip(ctx["patches"], ctx["weights"]):
+        xs, ys = [v[0] for v in pt.polygon], [v[1] for v in pt.polygon]
+        pad = pt.feather_px
+        x0, x1 = int(max(0, (min(xs) - pad) // S)), int(min(grid.shape[1], (max(xs) + pad) // S + 1))
+        y0, y1 = int(max(0, (min(ys) - pad) // S)), int(min(grid.shape[0], (max(ys) + pad) // S + 1))
+        sides = []
+        for pic_ in (before, after):
+            im = Image.fromarray(pic_[y0:y1, x0:x1]).resize(((x1 - x0) * 4, (y1 - y0) * 4), Image.NEAREST)
+            ImageDraw.Draw(im).line([((x - x0 * S) / S * 4, (y - y0 * S) / S * 4) for x, y in pt.polygon + (pt.polygon[0],)],
+                                    fill=(0, 0, 0), width=2)
+            sides.append(im)
+        entry = next(e for e in ctx["index_patches"] if e["name"] == pt.name)
+        head = f"{pt.name}  target {'/'.join(pt.target)}  share {entry['target_share']:.0%} of {entry['core_cells']} core cells"
+        panel = Image.new("RGB", (sides[0].width * 2 + 10, sides[0].height + 36), (255, 255, 255))
+        ImageDraw.Draw(panel).text((6, 6), f"{head}   [left physical | right patched]", fill=(0, 0, 0), font=font)
+        panel.paste(sides[0], (0, 36))
+        panel.paste(sides[1], (sides[0].width + 10, 36))
+        panels.append(panel)
+    sheet = Image.new("RGB", (max(p.width for p in panels), sum(p.height for p in panels)), (255, 255, 255))
+    y = 0
+    for pn in panels:
+        sheet.paste(pn, (0, y))
+        y += pn.height
+    sheet.save(out_dir / "climate_lore_before_after.png")
+    log(f"wrote {out_dir / 'climate_lore_before_after.png'}")
 
 
 def zone_shares(row: np.ndarray, codes: list[str]) -> tuple[int, str | None, dict]:
@@ -267,11 +334,13 @@ def main(argv: list[str] | None = None) -> int:
             log(f"wrote {OUT_STATES}", t0)
         return 0
 
-    grid, layer, index = compute(t0)
+    grid, layer, index, ctx = compute(t0)
     for c in index["classes"]:
         log(f"  {c['code']:4s} {c['name']:20s} {100 * c['land_share']:5.1f}%")
     if args.render:
         render(layer, index, SCRATCH_DIR)
+        if ctx["patches"]:
+            render_lore(grid, ctx, SCRATCH_DIR, t0)
     if args.check:
         if not (OUT_PNG.is_file() and OUT_INDEX.is_file()):
             log("--check: the layer is not committed yet -- nothing to diff against.", t0)

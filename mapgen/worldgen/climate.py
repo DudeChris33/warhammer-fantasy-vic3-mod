@@ -28,7 +28,13 @@ Known limits (recorded, not fixed here):
 * A current stroke only reaches about 240 km (``cur_sig``) from a coast; strokes in open ocean do nothing.
 * Tilea and inland Estalia come out cold steppe, the Estalian coast Mediterranean; southern Araby grades
   to steppe and savanna.
-* The prototype's soft rainfall patches ("lore nudges") are not ported; keep it that way unless Chris asks.
+* Lore overrides are an explicit input, not model nudges (board #8208). ``mapgen/config/climate_lore.json``
+  lists polygon patches; each adds ``temp_c`` to both seasons and scales both seasons' rain by
+  ``rain_factor``, weighted by a feathered polygon edge, after the feedbacks and before classification.
+  Adjust-only: a patch never forces a zone, it names the zones it should produce (``target``) and cites
+  canon (``source``), and the index reports ``target_share``. Never use one to re-tune the physical model.
+  An empty list leaves the grid bit-identical to the accepted one. The snow feedback (above 55 degrees)
+  runs before the patches, so a patched cell that turns snowy misses its -5 C: do not patch above 55.
 
 The layer depends on ``map_data/heightmap.png`` and ``mapgen/derived/land_sea_mask.png``: regenerating
 either moves the picture. ``generate_climate_zones.py --check`` then reports stale; the response is to
@@ -123,8 +129,36 @@ def prepare_inputs(land_full, heightmap, red_full, cya_full, S=SCALE):
     return dict(W=W, H=H, R=R, Y0=Y0, S=S, land=land, elev=elev, red=box(red_full), cya=box(cya_full))
 
 
-def run(I, P=None, want_fields=False):
-    """Class grid for prepared inputs ``I`` (see :func:`prepare_inputs`) at the scale ``I["S"]``."""
+def _smoothstep(e0, e1, x):
+    t = np.clip((x - e0) / (e1 - e0), 0.0, 1.0)
+    return t * t * (3.0 - 2.0 * t)
+
+
+def lore_weight(polygon, feather_px, W, H, S):
+    """Weight (float32, H x W) of a lore patch: 1 inside its canvas polygon, 0 outside, with a smoothstep
+    feather centred on the drawn line (0.5 on the line), ``feather_px`` canvas px wide in total.
+
+    ``polygon`` is a list of canvas ``(x, y)`` vertices, all inside the canvas, so there is no seam wrap.
+    Pure: rasterizes at model scale (canvas / ``S``) and measures distance to the edge in model cells."""
+    from PIL import ImageDraw
+    img = Image.new("L", (W, H), 0)
+    ImageDraw.Draw(img).polygon([((x + 0.5) / S - 0.5, (y + 0.5) / S - 0.5) for x, y in polygon], fill=1)
+    inside = np.asarray(img) > 0
+    if not inside.any():
+        return np.zeros((H, W), np.float32)
+    far = float(W + H)
+    d_in = ndi.distance_transform_edt(inside) if not inside.all() else np.full((H, W), far)
+    d_out = ndi.distance_transform_edt(~inside)
+    sd = np.where(inside, d_in - 0.5, -(d_out - 0.5))
+    h = feather_px / S / 2.0
+    return _smoothstep(-h, h, sd).astype(np.float32)
+
+
+def run(I, P=None, want_fields=False, lore=None):
+    """Class grid for prepared inputs ``I`` (see :func:`prepare_inputs`) at the scale ``I["S"]``.
+
+    ``lore`` is a list of ``(weight, temp_c, rain_factor)`` from :func:`lore_weight`; falsy means the
+    physical model alone."""
     p = dict(DEFAULT)
     if P:
         p.update(P)
@@ -299,6 +333,11 @@ def run(I, P=None, want_fields=False):
     snow = (np.maximum(T[1], T[-1]) < 5) & land & (alat > 55)
     for s in (1, -1):
         T[s] = T[s] - 5.0 * G(snow, 3)
+    for w, dt, rf in lore or ():                  # lore patches (#8208): after the feedbacks, before the classifier
+        w = w * land
+        for s in (1, -1):
+            T[s] = T[s] + dt * w
+            Pm[s] = Pm[s] * (1 + (rf - 1) * w)
 
     # ---- Koppen
     Tsum = np.where(hemi > 0, T[1], T[-1]); Twin = np.where(hemi > 0, T[-1], T[1])

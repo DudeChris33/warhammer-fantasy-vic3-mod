@@ -1,0 +1,4 @@
+{
+  "_comment": "Hand-authored climate lore patches (board #8208). Each patch is a canvas polygon (all vertices inside the canvas) with a feathered edge (feather_px, centred on the drawn line) that ADDS temp_c to both seasons and MULTIPLIES both seasons' rain by rain_factor, after the model's feedbacks and before Koppen classification. It never forces a zone: target lists the zone codes the patch is meant to produce at its core, source must start 'canon:', reason says why. The index reports each patch's measured target_share. Lore only, never for re-tuning the physical model; changing this file changes the accepted picture and needs Chris's acceptance on the before/after render. patches: [] is the physical model alone.",
+  "patches": []
+}

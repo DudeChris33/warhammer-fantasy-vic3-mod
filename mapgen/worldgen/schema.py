@@ -1113,6 +1113,105 @@ def load_arable_lore(path: Path, canvas: tuple[int, int] | None = None) -> list[
 
 
 # ---------------------------------------------------------------------------
+# Climate lore patches (board #8208)
+# ---------------------------------------------------------------------------
+#
+# Hand-authored places where the setting overrules the physical climate model
+# (``worldgen.climate``). A patch is a canvas polygon with a feathered edge that
+# adds ``temp_c`` to both seasons' temperature and multiplies both seasons' rain
+# by ``rain_factor``; the classifier then decides the zone. It never forces one.
+# ``target`` names the zones the patch is meant to produce and ``source`` cites the
+# canon; the index reports how often it hits (``target_share``).
+
+_CLIMATE_LORE_KEYS = frozenset({"name", "polygon", "feather_px", "temp_c", "rain_factor",
+                                "target", "reason", "source", "_comment", "note"})
+CLIMATE_LORE_TEMP_BOUNDS = (-15.0, 15.0)
+CLIMATE_LORE_RAIN_BOUNDS = (0.2, 3.0)
+
+
+@dataclass(frozen=True)
+class ClimateLorePatch:
+    """One lore climate patch (see the section comment). Polygon vertices are canvas
+    px and must lie inside the canvas; the drawn line is the 50% line of the feather."""
+
+    name: str
+    polygon: tuple[tuple[int, int], ...]
+    feather_px: float
+    temp_c: float
+    rain_factor: float
+    target: tuple[str, ...]
+    reason: str
+    source: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None,
+                  codes: "list[str] | tuple[str, ...]") -> "ClimateLorePatch":
+        if not isinstance(d, dict):
+            raise SchemaError(f"{ctx}: expected an object, got {type(d).__name__}")
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        ctx = f"{ctx}({name})"
+        unknown = sorted(set(d) - _CLIMATE_LORE_KEYS)
+        if unknown:
+            raise SchemaError(f"{ctx}: unknown keys {unknown} (a misspelt key would be silently ignored)")
+        polygon = _as_seed_list(_require(d, "polygon", ctx), f"{ctx}.polygon", canvas)
+        if len(polygon) < 3:
+            raise SchemaError(f"{ctx}.polygon: needs at least 3 vertices, got {len(polygon)}")
+        feather = _as_number(_require(d, "feather_px", ctx), f"{ctx}.feather_px")
+        if feather <= 0:
+            raise SchemaError(f"{ctx}.feather_px: must be > 0, got {feather}")
+        temp_c = _as_number(d.get("temp_c", 0.0), f"{ctx}.temp_c")
+        rain = _as_number(d.get("rain_factor", 1.0), f"{ctx}.rain_factor")
+        lo, hi = CLIMATE_LORE_TEMP_BOUNDS
+        if not lo <= temp_c <= hi:
+            raise SchemaError(f"{ctx}.temp_c: must be within [{lo}, {hi}], got {temp_c}")
+        lo, hi = CLIMATE_LORE_RAIN_BOUNDS
+        if not lo <= rain <= hi:
+            raise SchemaError(f"{ctx}.rain_factor: must be within [{lo}, {hi}], got {rain}")
+        if temp_c == 0.0 and rain == 1.0:
+            raise SchemaError(f"{ctx}: neutral patch (temp_c 0 and rain_factor 1) changes nothing")
+        target_raw = _require(d, "target", ctx)
+        if not isinstance(target_raw, list) or not target_raw:
+            raise SchemaError(f"{ctx}.target: expected a non-empty list of zone codes")
+        target = tuple(_as_str(t, f"{ctx}.target[{i}]") for i, t in enumerate(target_raw))
+        bad = [t for t in target if t not in codes]
+        if bad:
+            raise SchemaError(f"{ctx}.target: unknown zone codes {bad}; valid: {list(codes)}")
+        reason = _as_str(_require(d, "reason", ctx), f"{ctx}.reason")
+        if not reason:
+            raise SchemaError(f"{ctx}.reason: must be a non-empty string")
+        source = _as_str(_require(d, "source", ctx), f"{ctx}.source")
+        if not source.startswith("canon:") or not source[len("canon:"):].strip():
+            raise SchemaError(f"{ctx}.source: must start with 'canon:' and cite a source, got {source!r}")
+        return cls(name=name, polygon=polygon, feather_px=float(feather), temp_c=float(temp_c),
+                   rain_factor=float(rain), target=target, reason=reason, source=source)
+
+
+def load_climate_lore(path: Path, canvas: tuple[int, int] | None,
+                      codes: "list[str] | tuple[str, ...]") -> list[ClimateLorePatch]:
+    """Load + validate the committed climate lore patches (authored order kept).
+
+    Top-level ``{"patches": [...]}``. Unlike :func:`load_arable_lore` an empty list is
+    valid and means the physical model alone. A missing file is an error: it is
+    committed and always read, so a deletion cannot silently drop the lore.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    raw = _require(data, "patches", ctx)
+    if not isinstance(raw, list):
+        raise SchemaError(f"{ctx}.patches: expected a list")
+    patches = [ClimateLorePatch.from_dict(p, f"{ctx}.patches[{i}]", canvas, codes)
+               for i, p in enumerate(raw)]
+    seen: set[str] = set()
+    for p in patches:
+        if p.name in seen:
+            raise SchemaError(f"{ctx}: duplicate patch name '{p.name}'")
+        seen.add(p.name)
+    return patches
+
+
+# ---------------------------------------------------------------------------
 # Canon sea groups (the sea-zone naming config generate_sea_zones.py reads)
 # ---------------------------------------------------------------------------
 #
