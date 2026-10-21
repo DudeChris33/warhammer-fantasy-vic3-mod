@@ -19,7 +19,7 @@
 #                characters (no female character gets a hero's name). An engine accommodation, not lore;
 #                it adds no new keys.
 # No regal lists: the Council of Thirteen is seats, not dynasties (orc/ogre precedent).
-# The XS* clan placeholder tags still use goblin; moving them onto this culture is a follow-up item.
+# The XS* clan placeholder tags use this culture since #8646.
 # Every name string used below also needs a matching localization key unless vanilla already ships
 # one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
 # six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.

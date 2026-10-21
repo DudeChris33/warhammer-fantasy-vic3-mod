@@ -108,7 +108,7 @@ TAG = {
 }
 ```
 
-- A start-owner's starting technology comes from its first listed `cultures` entry, not its `tier`: `generate_country_history.py` maps each culture to a culture-group preset (`effect_starting_technology_<group>_tech` in `common/scripted_effects/00_starting_inventions.txt`) through `CULTURE_TECH` in `mapgen/worldgen/country_history.py`, with `TAG_TECH` for exceptions (the Skaven clan placeholders, `UNO`). A new culture, or a tag with no `cultures`, needs a row there or the generator errors ([testing.md](testing.md)).
+- A start-owner's starting technology comes from its first listed `cultures` entry, not its `tier`: `generate_country_history.py` maps each culture to a culture-group preset (`effect_starting_technology_<group>_tech` in `common/scripted_effects/00_starting_inventions.txt`) through `CULTURE_TECH` in `mapgen/worldgen/country_history.py`, with `TAG_TECH` for exceptions (`UNO`). A new culture, or a tag with no `cultures`, needs a row there or the generator errors ([testing.md](testing.md)).
 - `color` uses the **brace** form `{ R G B }` (0-255 integers), not `common/cultures/`' `rgb{ }`.
   Convention: reuse the polity's already-shipped culture color so tag and culture read as one thing;
   a formable that has no culture of its own takes a distinct shade of its heartland's color.
@@ -122,9 +122,9 @@ TAG = {
   `generate_state_history.py` holds its states back and `validate_map.py` fails ([testing.md](testing.md)).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
 - A tag's `cultures` no longer drive homelands (#8604): `add_homeland` comes only from the hand-authored `mapgen/config/state_homelands.json` ([testing.md](testing.md)). The owner's `cultures` only seed a new state's row (`--sync-homelands`) and still set the pop-mix fallback for a state whose list is `[]`.
-- **Placeholder tags (`XS*`).** A state owner the setting needs but no culture can yet represent gets
+- **Placeholder tags (`XS*`).** A state owner the setting needs but no named polity can yet represent gets
   a deliberately generic stand-in rather than an invented nation. The `XS*` codes are the Skaven ones:
-  "Skaven Clan <letter> (placeholder)", adjective "Skaven", `goblin` culture,
+  "Skaven Clan <letter> (placeholder)", adjective "Skaven", `skaven` culture (#8646; goblin until then),
   `unrecognized`/`principality`, filed by the geography of their states, heraldry per
   [heraldry.md](heraldry.md)'s placeholder rule. Each block's comment states the limits. The codes
   are frozen like any shipped tag, so real clans get **new** codes and supersede these tags; a

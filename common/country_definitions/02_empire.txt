@@ -245,52 +245,55 @@ CRB = {
 
 ################ XSA — Skaven Clan A (placeholder); STATE_WEST_OSTERMARK ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
-# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
+# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
+# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
-# Filed here by geography: its state sits in map_data/state_regions/02_empire.txt. goblin is a
-# cross-file culture ref to common/cultures/greenskin.txt.
+# Filed here by geography: its state sits in map_data/state_regions/02_empire.txt. skaven is a
+# cross-file culture ref to common/cultures/skaven.txt.
 
 XSA = {
 	color = { 150 150 24 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { goblin }
+	cultures = { skaven }
 	capital = STATE_WEST_OSTERMARK # non-canon (C2): its only holding, a slice of the state; OSM holds the rest
 }
 
 ################ XSB — Skaven Clan B (placeholder); STATE_DRAKWALD_FOREST ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
-# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
+# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
+# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
-# Filed here by geography: its state sits in map_data/state_regions/02_empire.txt. goblin is a
-# cross-file culture ref to common/cultures/greenskin.txt.
+# Filed here by geography: its state sits in map_data/state_regions/02_empire.txt. skaven is a
+# cross-file culture ref to common/cultures/skaven.txt.
 
 XSB = {
 	color = { 42 102 18 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { goblin }
+	cultures = { skaven }
 	capital = STATE_DRAKWALD_FOREST # non-canon (C2): its only holding, a slice of the state; CRB holds the rest
 }
 
 ################ XSC — Skaven Clan C (placeholder); STATE_VOLGEN ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
-# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
+# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
+# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
 # Filed here by geography: STATE_VOLGEN sits in map_data/state_regions/02_empire.txt.
-# goblin is a cross-file culture ref to common/cultures/greenskin.txt.
+# skaven is a cross-file culture ref to common/cultures/skaven.txt.
 
 XSC = {
 	color = { 126 120 24 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { goblin }
+	cultures = { skaven }
 	capital = STATE_VOLGEN # non-canon (C2): its only holding, a slice of the state; TAL holds the rest
 }
 

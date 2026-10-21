@@ -77,8 +77,8 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
 - **`XS*` = Skaven placeholder tags** (board #6373, 2026-10-01). `XSA`–`XSD` and `XSG`–`XSL` (no
   `XSE`/`XSF`) are deliberately generic stand-ins for unnamed Skaven clans that own states on the
   painted start map — not real nations. Display names "Skaven Clan A–J (placeholder)" in code order,
-  adjective "Skaven", `goblin` culture, greenskin house-style heraldry with no rat iconography. Their
-  limits (greenskin pops, culture and arms) are deliberate until a Skaven culture exists. The codes are
+  adjective "Skaven", `skaven` culture, greenskin house-style heraldry with no rat iconography. They
+  carry `skaven` since #8646 (goblin until then) and keep the greenskin arms they shipped with. The codes are
   frozen once shipped like any other: real clans get **new** codes and supersede these tags, which are
   never renamed into a clan.
 - **#6373 additions take the painted legend colour.** Tags defined for the start-ownership map take
@@ -411,7 +411,7 @@ state (the Forest of Sighs, in Norsca's state file); see the wood-elves conventi
 | SNA | `00_norsca` | Snaegr | start | `norscan` | Hall of Snaegr (Ulfwrenar Mountains) | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook) |
 | SOR | `00_norsca` | Sortsvinaer | start | `norscan` | Sortsvinaer (Helspire Coast) | `principality`/`unrecognized`; lesser tribe (*WH: The Old World* Rulebook); re-supports the seed name dropped in the original draft |
 | URS | `00_norsca` | Ursfjordings | start | `norscan` | Ursfjord (Frozen Coast) | `principality`/`unrecognized`; lesser tribe, Goromadny Mtns; home hold of Beorg Bearstruck's Bearmen of Urslo warband; absorbed review tag GMD (#6373) |
-| XSD | `00_norsca` | Skaven Clan D (placeholder) | start | `goblin` | Hell Pit (Hell Pit Depths) | Skaven placeholder (Hell Pit); `principality`/`unrecognized`; see *Conventions* (#6373) |
+| XSD | `00_norsca` | Skaven Clan D (placeholder) | start | `skaven` | Hell Pit (Hell Pit Depths) | Skaven placeholder (Hell Pit); `principality`/`unrecognized`; see *Conventions* (#6373) |
 | SOT | `00_norsca` | Sisters of Twilight | start | `wood_elf` | Forest of Sighs (West Helspire Mountains, SOT slice) | `principality`/`unrecognized`; Naestra and Arahan's wood-elf realm; filed by state geography (#6373) |
 
 ### 01 KISLEV (gospodar, ungol) — 10 tags; KIS formable
@@ -489,9 +489,9 @@ Phase B added two wood-elf realms filed here by the geography of their states: `
 | MAR | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
 | BRK | `02_empire` | Brass Keep | start | `norscan` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket"; `norscan` is a disclosed stand-in culture (#6373) |
 | CRB | `02_empire` | Carroburg | start | `middenlander` | Carroburg | `recognized`/`city_state`; Middenland free city on the Reik (#6373) |
-| XSA | `02_empire` | Skaven Clan A (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
-| XSB | `02_empire` | Skaven Clan B (placeholder) | start | `goblin` | — | Skaven placeholder; see *Conventions* (#6373) |
-| XSC | `02_empire` | Skaven Clan C (placeholder) | start | `goblin` | — | Skaven placeholder (West Talabecland); see *Conventions* (#6373) |
+| XSA | `02_empire` | Skaven Clan A (placeholder) | start | `skaven` | — | Skaven placeholder; see *Conventions* (#6373) |
+| XSB | `02_empire` | Skaven Clan B (placeholder) | start | `skaven` | — | Skaven placeholder; see *Conventions* (#6373) |
+| XSC | `02_empire` | Skaven Clan C (placeholder) | start | `skaven` | — | Skaven placeholder (West Talabecland); see *Conventions* (#6373) |
 | GRW | `02_empire` | Gryphon Wood | start | `wood_elf` | Gryphon Wood | `principality`/`unrecognized`; wood-elf enclave; name provisional, Chris to redo (#6373) |
 | LAU | `02_empire` | Laurelorn | start | `wood_elf` | Laurelorn | `principality`/`unrecognized`; elven enclave of the Laurelorn Forest (#6373) |
 
@@ -613,11 +613,11 @@ Eastern Irranas. Plus the Skaven placeholders `XSH`–`XSL` (see *Conventions*).
 | KRV | `04_karaz_ankor` | Kraka Ravnsvake | start | `dawi_norse` | Kraka Ravnsvake | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
 | VMP | `04_karaz_ankor` | Kemmler's Host | start | `sylvanian_vampire` | Eastern Irranas (non-canon) | Heinrich Kemmler the Lichemaster (human lich); `unrecognized`; name and culture are disclosed stand-ins (#6373) |
 | LHX | `04_karaz_ankor` | Lahmian Exiles | start | `lahmian_vampire` | New Lahmia | Lahmian vampire exiles in STATE_NEW_LAHMIA; `unrecognized`; new tag distinct from `LAH` (Chris, 2026-10-03) |
-| XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | start | `goblin` | Shattered Teeth (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
-| XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | start | `goblin` | Kreutzhofen (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
-| XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | start | `goblin` | Aquilena (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
-| XSK | `04_karaz_ankor` | Skaven Clan I (placeholder) | start | `goblin` | Dark Maiden Pass (non-canon) | Skaven placeholder (Dark Maiden Pass); see *Conventions* (#6373) |
-| XSL | `04_karaz_ankor` | Skaven Clan J (placeholder) | start | `goblin` | Cripple Peak (non-canon) | Skaven placeholder (Cripple Peak); see *Conventions* (#6373) |
+| XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | start | `skaven` | Shattered Teeth (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
+| XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | start | `skaven` | Kreutzhofen (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
+| XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | start | `skaven` | Aquilena (non-canon) | Skaven placeholder; see *Conventions* (#6373) |
+| XSK | `04_karaz_ankor` | Skaven Clan I (placeholder) | start | `skaven` | Dark Maiden Pass (non-canon) | Skaven placeholder (Dark Maiden Pass); see *Conventions* (#6373) |
+| XSL | `04_karaz_ankor` | Skaven Clan J (placeholder) | start | `skaven` | Cripple Peak (non-canon) | Skaven placeholder (Cripple Peak); see *Conventions* (#6373) |
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
@@ -695,7 +695,7 @@ convention.
 | UVE | `05_southern_realms` | Uvetovsk | start | `gospodar`, `ungol` | Uvetovsk | Kislevite-founded bear realm, Old Silk Road; cross-file culture ref |
 | HKN | `05_southern_realms` | Harkon | start | `sylvanian_vampire` | — (Harkon has no hub; owns nothing) | `unrecognized`; undead chalice realm, Forest of Gloom; cross-file culture ref |
 | PON | `05_southern_realms` | Pontenne | start | `sylvanian_vampire` | — (Pontenne has no hub; owns nothing) | `unrecognized`; undead chalice realm by the Chateau de Morsuil; cross-file culture ref |
-| XSG | `05_southern_realms` | Skaven Clan E (placeholder) | start | `goblin` | Blighted Marshes (non-canon) | Skaven placeholder (Blighted Marshes); see *Conventions* (#6373) |
+| XSG | `05_southern_realms` | Skaven Clan E (placeholder) | start | `skaven` | Blighted Marshes (non-canon) | Skaven placeholder (Blighted Marshes); see *Conventions* (#6373) |
 | MGL | `05_southern_realms` | Miramar Glade | start | `wood_elf` | Nuja (non-canon, MGL slice) | `principality`/`unrecognized`; wood-elf glade, Miramar Hills; name provisional, Chris to redo (#6373) |
 
 ### 06 BADLANDS (orc, goblin) — 11 tags; no formable

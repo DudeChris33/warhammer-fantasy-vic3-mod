@@ -236,8 +236,9 @@ URS = {
 # XSD — Skaven Clan D (placeholder). A four-pointed star, skewed.
 # PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
 # generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (a rat device would assert a
-# Skaven identity the tag's goblin culture does not carry). Each XS* tag takes a different charge
+# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
+# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
+# are not redrawn). Each XS* tag takes a different charge
 # so the placeholders read apart; disclosed invention, no canon device exists.
 # ce_star_04 is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
 # common/coat_of_arms/coat_of_arms/02_countries.txt:16832, NTU).

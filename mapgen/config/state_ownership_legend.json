@@ -2076,7 +2076,7 @@
     150,
     24
    ],
-   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSB": {
@@ -2086,7 +2086,7 @@
     102,
     18
    ],
-   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSC": {
@@ -2096,7 +2096,7 @@
     120,
     24
    ],
-   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSD": {
@@ -2106,7 +2106,7 @@
     66,
     12
    ],
-   "note": "defined in common/country_definitions/00_norsca.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/00_norsca.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSG": {
@@ -2116,7 +2116,7 @@
     72,
     12
    ],
-   "note": "defined in common/country_definitions/05_southern_realms.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/05_southern_realms.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSH": {
@@ -2126,7 +2126,7 @@
     150,
     54
    ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSI": {
@@ -2136,7 +2136,7 @@
     90,
     24
    ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSJ": {
@@ -2146,7 +2146,7 @@
     126,
     24
    ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSK": {
@@ -2156,7 +2156,7 @@
     132,
     42
    ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "XSL": {
@@ -2166,7 +2166,7 @@
     150,
     24
    ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: goblin culture, greenskin heraldry, code frozen, superseded by real clan tags",
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
    "placeholder_for": "Skaven"
   },
   "KIZ": {

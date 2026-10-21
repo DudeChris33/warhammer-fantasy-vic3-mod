@@ -6171,8 +6171,10 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
             pass
         else:
             raise AssertionError("plan() must refuse a culture with no starting-technology preset")
-    # the per-tag table wins over the culture (placeholder Skaven clans), and a nomad culture means no technology
-    assert ch.tech_effect("XSA", ("goblin",)) == "effect_starting_technology_skaven_tech"
+    # the per-tag table wins over the culture (UNO), the Skaven clans go through CULTURE_TECH, and a nomad culture
+    # means no technology
+    assert ch.tech_effect("UNO", ("goblin",)) is None
+    assert ch.tech_effect("XSA", ("skaven",)) == "effect_starting_technology_skaven_tech"
     assert ch.tech_effect("UNG", ("ungol",)) is None
 
     # per-country extras follow the preset, in file order, before the politics effect; the validator reads them back

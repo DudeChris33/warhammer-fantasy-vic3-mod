@@ -28,8 +28,7 @@ Rules
   like the state history.
 * Starting technology comes from the tag's **first listed culture** in its
   ``common/country_definitions`` entry (``CULTURE_TECH``), unless ``TAG_TECH``
-  names the tag (the placeholder Skaven clans carry a goblin stand-in culture; UNO
-  is unclaimed land with no technology). A culture, or a tag without one, that
+  names the tag (UNO is unclaimed land with no technology). A culture, or a tag without one, that
   neither table covers is an error, never a default. A preset of ``None`` emits
   no technology effect. After the preset, the tag's extras from
   ``mapgen/config/starting_tech_extras.json`` (``add_technology_researched``, one per
@@ -96,9 +95,6 @@ CULTURE_TECH: dict[str, str | None] = {
 }
 #: Per-tag exceptions to the culture rule.
 TAG_TECH: dict[str, str | None] = {
-    # skaven exists (#8466) but the XS* clan placeholders (board #6373) still list goblin until the retarget follow-up.
-    **dict.fromkeys(("XSA", "XSB", "XSC", "XSD", "XSG", "XSH", "XSI", "XSJ", "XSK", "XSL"),
-                    "effect_starting_technology_skaven_tech"),
     "UNO": None,   # Unclaimed Lands: no polity, no technology
 }
 POLITICS_EFFECT = "effect_starting_politics_traditional"

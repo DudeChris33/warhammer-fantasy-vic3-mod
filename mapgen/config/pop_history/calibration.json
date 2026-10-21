@@ -819,61 +819,61 @@
   },
   "XSA": {
    "canon": 20000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSB": {
    "canon": 20000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSC": {
    "canon": 15000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSD": {
    "canon": 60000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSG": {
    "canon": 30000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSH": {
    "canon": 15000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSI": {
    "canon": 10000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSJ": {
    "canon": 15000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSK": {
    "canon": 10000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "XSL": {
    "canon": 20000,
-   "source": "inferred: Skaven placeholder clans (no culture exists; goblin stand-in per common/country_definitions)",
+   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
    "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },

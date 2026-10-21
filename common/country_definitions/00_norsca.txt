@@ -161,19 +161,20 @@ URS = {
 
 ################ XSD — Skaven Clan D (placeholder); Hell Pit ################
 # PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: goblin pops/culture and
-# greenskin house-style heraldry stand in because no Skaven culture exists yet. The code is frozen
+# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
+# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
+# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
 # once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
 # is superseded, not renamed.
 # Filed here by geography: STATE_HELL_PIT and its three neighbours STATE_FLESHWARREN, STATE_HELL_PIT_DEPTHS and
 # STATE_CLAWMARKET sit in
-# map_data/state_regions/00_norsca.txt. goblin is a cross-file culture ref to common/cultures/greenskin.txt.
+# map_data/state_regions/00_norsca.txt. skaven is a cross-file culture ref to common/cultures/skaven.txt.
 
 XSD = {
 	color = { 24 66 12 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { goblin }
+	cultures = { skaven }
 	# The Hell Pit's city hub fell in STATE_HELL_PIT_DEPTHS, not the eponymous STATE_HELL_PIT
 	# (both XSD-held). LORE FLAG.
 	capital = STATE_HELL_PIT_DEPTHS # Hell Pit

@@ -121,14 +121,15 @@ tag files:
 
 A placeholder tag — a deliberately generic stand-in such as the `XS*` Skaven
 clans (see [peoples.md](peoples.md)) — wears the house style of the culture it
-actually carries, not of the people it stands in for: the `XS*` tags carry
-`goblin`, so they follow the greenskin house style above. Give each placeholder
+actually carries, not of the people it stands in for. Give each placeholder
 **one** distinct charge (no two placeholders share a texture) and **no
-iconography of the people it stands in for** (no rat device on an `XS*` tag): a
-Skaven charge on goblin pops would assert an identity the tag does not have.
-The block comment says it is a placeholder and that the device is a disclosed
-invention. When the real people get a culture and their own tags, those tags
-get their own heraldry; the placeholder's arms are not migrated. `UNO`
+iconography of the people it stands in for**. The block comment says it is a
+placeholder and that the device is a disclosed invention. When the real people
+get their own tags, those tags get their own heraldry; the placeholder's arms
+are not migrated. The `XS*` arms were drawn in greenskin house style, with no
+rat device, while the tags carried `goblin`, and are kept as shipped since the
+#8646 retarget to `skaven` (no Skaven house style exists; placeholder arms are
+not redrawn; real clans get their own heraldry). `UNO`
 (Unclaimed Lands, `98_unclaimed.txt`) follows the same rule: goblin stand-in, so
 greenskin house style, with an open hand (`ce_hand`) as its one charge.
 
