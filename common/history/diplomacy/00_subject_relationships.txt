@@ -127,4 +127,74 @@
 			type = protectorate
 		}
 	}
+	c:LOT ?= {
+		# The Phoenix King rules all Ten Kingdoms; Finubar, the Phoenix King at start, is Lothern's prince (WFB High Elves army book) (#8444).
+		# Protectorates, not vassals (the REI pattern): each prince rules his kingdom in his own right, and protectorate takes a recognized overlord.
+		# The six colonies are colonial tags, so they take subject_type_colony (vanilla precedent: c:SPA -> CUB/PCO/PHI); puppet/protectorate accept only recognized/unrecognized subjects.
+		# Both types need LOT at least minor_power and higher-ranked than each subject (vanilla common/subject_types/00_subject_types.txt: overlord_must_be_higher_rank).
+		# Rank is prestige-based (tier + GDP + subject GDP + power projection, vanilla defines); enforce_subject_rank_check (common/country_ranks) makes a rank invalid for a subject whose overlord holds that rank or higher.
+		# Precedent: COU holds BOR and CAR above. If error.log shows initializefrombookmark.cpp:1430 for these pacts, the agreed fallback drops the nine
+		# protectorates first, then (if the colony pacts also break) makes the colonies recognized with no pact.
+		create_diplomatic_pact = {
+			country = c:CAL
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:SAP
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:NGY
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:TIR
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:CHR
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:AVL
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:YVR
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:ELL
+			type = protectorate
+		}
+		create_diplomatic_pact = {
+			country = c:COT
+			type = protectorate
+		}
+		# High Elf colonies (High_Elf_Outposts.JPG); shown in LOT's map colour (use_overlord_map_color = yes).
+		create_diplomatic_pact = {
+			country = c:CDU
+			type = colony
+		}
+		create_diplomatic_pact = {
+			country = c:FDW
+			type = colony
+		}
+		create_diplomatic_pact = {
+			country = c:TEL
+			type = colony
+		}
+		create_diplomatic_pact = {
+			country = c:TOS
+			type = colony
+		}
+		create_diplomatic_pact = {
+			country = c:GCL
+			type = colony
+		}
+		create_diplomatic_pact = {
+			country = c:TEH
+			type = colony
+		}
+	}
 }

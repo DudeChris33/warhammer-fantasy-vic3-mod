@@ -886,5 +886,39 @@
    "source": "inferred: tech tier 5 (mapgen/config/country_history)",
    "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
   }
- }
+ },
+ "groups": [
+  {
+   "tags": [
+    "LOT",
+    "CAL",
+    "SAP",
+    "NGY",
+    "TIR",
+    "CHR",
+    "AVL",
+    "YVR",
+    "ELL",
+    "COT"
+   ],
+   "wealth": "high",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history/17_ulthuan.json); WFB 8e High Elves",
+   "why": "Tier 3, top of its literacy band: an ancient, lettered and prosperous elven society of temple-schools and craftsmen."
+  },
+  {
+   "tags": [
+    "CDU",
+    "FDW",
+    "TEL",
+    "TOS",
+    "GCL",
+    "TEH"
+   ],
+   "wealth": "medium",
+   "literacy": "high",
+   "source": "inferred: tech tier 3 (mapgen/config/country_history/17_ulthuan.json); WFB 8e High Elves",
+   "why": "Tier 3 literacy like the homeland; frontier outposts of garrisons and traders hold less wealth."
+  }
+ ]
 }

@@ -361,6 +361,36 @@
    "workforce_share": 0.15,
    "source": "canon: Warhammer Armies: Vampire Counts / Warriors of Chaos",
    "why": "Host and warband strongholds: soldiers first."
+  },
+  "asur_kingdom": {
+   "admin": 1,
+   "barracks_levels": 3,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 2,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.6,
+   "logging_share": 0.4,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Armies: High Elves (8th edition)",
+   "why": "A kingdom of Ulthuan: a citizen-militia levy and Sea Guard harbours, a princely court, and elven craft over mass farming."
+  },
+  "asur_colony": {
+   "admin": 0,
+   "barracks_levels": 1,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.3,
+   "logging_share": 0.3,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Armies: High Elves (8th edition); sources/originals/High_Elf_Outposts.JPG",
+   "why": "A fortress-port outpost: garrison, harbour and trading post with little worked hinterland."
   }
  },
  "tags": {
@@ -384,6 +414,9 @@
   },
   "AVE": {
    "archetype": "imperial_rich"
+  },
+  "AVL": {
+   "archetype": "asur_kingdom"
   },
   "AZL": {
    "archetype": "dwarf_hold"
@@ -448,11 +481,23 @@
     }
    }
   },
+  "CAL": {
+   "archetype": "asur_kingdom"
+  },
   "CAR": {
    "archetype": "bretonnian_duchy"
   },
+  "CDU": {
+   "archetype": "asur_colony"
+  },
+  "CHR": {
+   "archetype": "asur_kingdom"
+  },
   "CNT": {
    "archetype": "estalian_kingdom"
+  },
+  "COT": {
+   "archetype": "asur_kingdom"
   },
   "COU": {
    "archetype": "bretonnian_duchy"
@@ -481,6 +526,9 @@
   "EKR": {
    "archetype": "dwarf_hold_ruined"
   },
+  "ELL": {
+   "archetype": "asur_kingdom"
+  },
   "ERE": {
    "archetype": "kislev_oblast",
    "set": {
@@ -504,8 +552,14 @@
   "EYB": {
    "archetype": "greenskin_horde"
   },
+  "FDW": {
+   "archetype": "asur_colony"
+  },
   "GAS": {
    "archetype": "border_prince"
+  },
+  "GCL": {
+   "archetype": "asur_colony"
   },
   "GDO": {
    "archetype": "border_prince"
@@ -606,6 +660,23 @@
   "LHX": {
    "archetype": "vampire_realm"
   },
+  "LOT": {
+   "archetype": "asur_kingdom",
+   "set": {
+    "port_level": 2,
+    "trade_level": 2
+   },
+   "justify": {
+    "port_level": {
+     "source": "canon: Warhammer Armies: High Elves (8th edition)",
+     "why": "Lothern is Ulthuan's gateway port, home of the Sea Guard and the Phoenix King's fleets."
+    },
+    "trade_level": {
+     "source": "canon: Warhammer Armies: High Elves (8th edition)",
+     "why": "Lothern is the one port where foreign merchants may trade with Ulthuan."
+    }
+   }
+  },
   "LUC": {
    "archetype": "merchant_city_state"
   },
@@ -668,6 +739,9 @@
   "MZN": {
    "archetype": "chaos_dwarf"
   },
+  "NGY": {
+   "archetype": "asur_kingdom"
+  },
   "NLD": {
    "archetype": "imperial_frontier"
   },
@@ -725,6 +799,9 @@
   "ROP": {
    "archetype": "kislev_tribe"
   },
+  "SAP": {
+   "archetype": "asur_kingdom"
+  },
   "SAR": {
    "archetype": "norse_tribe"
   },
@@ -767,6 +844,12 @@
   "TAL": {
    "archetype": "imperial_rich"
   },
+  "TEH": {
+   "archetype": "asur_colony"
+  },
+  "TEL": {
+   "archetype": "asur_colony"
+  },
   "THG": {
    "archetype": "ogre_tribe",
    "set": {
@@ -779,11 +862,17 @@
     }
    }
   },
+  "TIR": {
+   "archetype": "asur_kingdom"
+  },
   "TLS": {
    "archetype": "wood_elf_realm"
   },
   "TOB": {
    "archetype": "merchant_city_state"
+  },
+  "TOS": {
+   "archetype": "asur_colony"
   },
   "TRA": {
    "archetype": "merchant_city_state"
@@ -868,6 +957,9 @@
   },
   "XSL": {
    "archetype": "skaven_clan"
+  },
+  "YVR": {
+   "archetype": "asur_kingdom"
   },
   "ZHU": {
    "archetype": "dwarf_hold"

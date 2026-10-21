@@ -2,7 +2,7 @@
 STATES = {
 	s:STATE_ISLES_OF_DUSK = {
 		create_state = {
-			country = c:UNO
+			country = c:CDU
 			owned_provinces = { x06ADE7 x266144 x34A57C x7F58A6 x8D60B7 x966E03 xA4E560 xBBC798 xC0FE84 xE1212D xE9F252 xF1A8B8 }
 		}
 
@@ -118,7 +118,7 @@ STATES = {
 	}
 	s:STATE_VOLCANIC_ISLANDS = {
 		create_state = {
-			country = c:UNO
+			country = c:LOT
 			owned_provinces = { x2ADA15 x720EB0 x9AE6D4 xC9118E xD9ABC1 xFCAF5B xFDDCC2 }
 		}
 	}

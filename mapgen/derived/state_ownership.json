@@ -47,7 +47,7 @@
     2849,
     1468
    ],
-   "owner": "unowned",
+   "owner": "LOT",
    "scope": "drawn"
   },
   "STATE_ANMYR": {
@@ -154,7 +154,7 @@
     2823,
     1222
    ],
-   "owner": "unowned",
+   "owner": "AVL",
    "scope": "drawn"
   },
   "STATE_AVERHEIM": {
@@ -307,7 +307,7 @@
     2774,
     977
    ],
-   "owner": "unowned",
+   "owner": "NGY",
    "scope": "drawn"
   },
   "STATE_BLIGHTED_MARSHES": {
@@ -505,7 +505,7 @@
     2667,
     1276
    ],
-   "owner": "unowned",
+   "owner": "ELL",
    "scope": "drawn"
   },
   "STATE_CENTRAL_MAGRITTA": {
@@ -541,7 +541,7 @@
     2843,
     1103
    ],
-   "owner": "unowned",
+   "owner": "CHR",
    "scope": "drawn"
   },
   "STATE_CITY_OF_KINGS": {
@@ -577,7 +577,7 @@
     2915,
     1138
    ],
-   "owner": "unowned",
+   "owner": "COT",
    "scope": "drawn"
   },
   "STATE_COURONNE": {
@@ -694,7 +694,7 @@
     2748,
     1099
    ],
-   "owner": "unowned",
+   "owner": "NGY",
    "scope": "drawn"
   },
   "STATE_DIRETOWN": {
@@ -784,7 +784,7 @@
     3015,
     1517
    ],
-   "owner": "unowned",
+   "owner": "YVR",
    "scope": "drawn"
   },
   "STATE_DRAKWALD_FOREST": {
@@ -850,7 +850,7 @@
     2607,
     1344
    ],
-   "owner": "unowned",
+   "owner": "TIR",
    "scope": "drawn"
   },
   "STATE_EAGLE_S_PEAK": {
@@ -868,7 +868,7 @@
     2869,
     1172
    ],
-   "owner": "unowned",
+   "owner": "CHR",
    "scope": "drawn"
   },
   "STATE_EASTERN_BADLANDS": {
@@ -895,7 +895,7 @@
     5271,
     2510
    ],
-   "owner": "unowned",
+   "owner": "TOS",
    "scope": "drawn"
   },
   "STATE_EASTERN_EATAINE": {
@@ -904,7 +904,7 @@
     2897,
     1510
    ],
-   "owner": "unowned",
+   "owner": "LOT",
    "scope": "drawn"
   },
   "STATE_EASTERN_IRRANAS": {
@@ -1030,7 +1030,7 @@
     7033,
     2780
    ],
-   "owner": "unowned",
+   "owner": "TEH",
    "scope": "drawn"
   },
   "STATE_ERENGRAD": {
@@ -1066,7 +1066,7 @@
     2573,
     1357
    ],
-   "owner": "unowned",
+   "owner": "TIR",
    "scope": "drawn"
   },
   "STATE_FALLS_DISTRICT": {
@@ -1084,7 +1084,7 @@
     2916,
     1257
    ],
-   "owner": "unowned",
+   "owner": "AVL",
    "scope": "drawn"
   },
   "STATE_FIVE_RIVERS": {
@@ -1165,7 +1165,7 @@
     2782,
     1308
    ],
-   "owner": "unowned",
+   "owner": "AVL",
    "scope": "drawn"
   },
   "STATE_GASTONNE": {
@@ -1318,7 +1318,7 @@
     2630,
     1261
    ],
-   "owner": "unowned",
+   "owner": "ELL",
    "scope": "drawn"
   },
   "STATE_GROM_RIDGE": {
@@ -1462,7 +1462,7 @@
     2702,
     1496
    ],
-   "owner": "unowned",
+   "owner": "CAL",
    "scope": "drawn"
   },
   "STATE_INNER_SEA_CHAIN": {
@@ -1471,7 +1471,7 @@
     2781,
     1384
    ],
-   "owner": "unowned",
+   "owner": "LOT",
    "scope": "drawn"
   },
   "STATE_IRINASGRAD": {
@@ -1516,7 +1516,7 @@
     3089,
     3036
    ],
-   "owner": "unowned",
+   "owner": "CDU",
    "scope": "drawn"
   },
   "STATE_ISLE_OF_AESTUNIAE": {
@@ -1525,7 +1525,7 @@
     3032,
     1305
    ],
-   "owner": "unowned",
+   "owner": "YVR",
    "scope": "drawn"
   },
   "STATE_ISLE_OF_DAWN": {
@@ -1534,7 +1534,7 @@
     4374,
     3116
    ],
-   "owner": "unowned",
+   "owner": "FDW",
    "scope": "drawn"
   },
   "STATE_IVORY_ROAD": {
@@ -2527,7 +2527,7 @@
     2843,
     1531
    ],
-   "owner": "unowned",
+   "owner": "LOT",
    "scope": "drawn"
   },
   "STATE_LOTHERN_WEST": {
@@ -2536,7 +2536,7 @@
     2768,
     1536
    ],
-   "owner": "unowned",
+   "owner": "LOT",
    "scope": "drawn"
   },
   "STATE_LYONESSE": {
@@ -2904,7 +2904,7 @@
     2729,
     1222
    ],
-   "owner": "unowned",
+   "owner": "ELL",
    "scope": "drawn"
   },
   "STATE_NORTHERN_OBLAST": {
@@ -2922,7 +2922,7 @@
     2944,
     1354
    ],
-   "owner": "unowned",
+   "owner": "SAP",
    "scope": "drawn"
   },
   "STATE_NORTHERN_WORLD_S_EDGE": {
@@ -2940,7 +2940,7 @@
     2983,
     1313
    ],
-   "owner": "unowned",
+   "owner": "YVR",
    "scope": "drawn"
   },
   "STATE_NORTH_BADLAND_HILLS": {
@@ -3003,7 +3003,7 @@
     6991,
     2673
    ],
-   "owner": "unowned",
+   "owner": "TEH",
    "scope": "drawn"
   },
   "STATE_NORTH_NORSE_COAST": {
@@ -3030,7 +3030,7 @@
     2984,
     1081
    ],
-   "owner": "unowned",
+   "owner": "COT",
    "scope": "drawn"
   },
   "STATE_NORTH_TALABECLAND": {
@@ -3241,7 +3241,7 @@
     2745,
     1157
    ],
-   "owner": "unowned",
+   "owner": "AVL",
    "scope": "drawn"
   },
   "STATE_PIGBARTER_ROAD": {
@@ -3412,7 +3412,7 @@
     2636,
     1162
    ],
-   "owner": "unowned",
+   "owner": "NGY",
    "scope": "drawn"
   },
   "STATE_SHANIDAAR": {
@@ -3484,7 +3484,7 @@
     2970,
     1213
    ],
-   "owner": "unowned",
+   "owner": "COT",
    "scope": "drawn"
   },
   "STATE_SOLLAND": {
@@ -3520,7 +3520,7 @@
     2633,
     1386
    ],
-   "owner": "unowned",
+   "owner": "ELL",
    "scope": "drawn"
   },
   "STATE_SOUTHERN_GATE_OF_CALITH": {
@@ -3529,7 +3529,7 @@
     6505,
     2976
    ],
-   "owner": "unowned",
+   "owner": "GCL",
    "scope": "drawn"
   },
   "STATE_SOUTHERN_OBLAST": {
@@ -3547,7 +3547,7 @@
     2903,
     1439
    ],
-   "owner": "unowned",
+   "owner": "SAP",
    "scope": "drawn"
   },
   "STATE_SOUTHERN_SIREN_ISLES": {
@@ -3574,7 +3574,7 @@
     2953,
     1434
    ],
-   "owner": "unowned",
+   "owner": "YVR",
    "scope": "drawn"
   },
   "STATE_SOUTH_BADLAND_HILLS": {
@@ -3637,7 +3637,7 @@
     3061,
     1279
    ],
-   "owner": "unowned",
+   "owner": "YVR",
    "scope": "drawn"
   },
   "STATE_SOUTH_TALABECLAND": {
@@ -3664,7 +3664,7 @@
     6962,
     2861
    ],
-   "owner": "unowned",
+   "owner": "TEH",
    "scope": "drawn"
   },
   "STATE_STARS_ARCHIPELAGO": {
@@ -3673,7 +3673,7 @@
     5162,
     2390
    ],
-   "owner": "unowned",
+   "owner": "TOS",
    "scope": "drawn"
   },
   "STATE_STEEL_PLAINS": {
@@ -3700,7 +3700,7 @@
     2653,
     1484
    ],
-   "owner": "unowned",
+   "owner": "CAL",
    "scope": "drawn"
   },
   "STATE_STROVENGAARD": {
@@ -3817,7 +3817,7 @@
     2680,
     1559
    ],
-   "owner": "unowned",
+   "owner": "CAL",
    "scope": "drawn"
   },
   "STATE_THE_GOLINYI": {
@@ -3889,7 +3889,7 @@
     2598,
     1430
    ],
-   "owner": "unowned",
+   "owner": "TIR",
    "scope": "drawn"
   },
   "STATE_THORSHAFN": {
@@ -3916,7 +3916,7 @@
     2583,
     1267
    ],
-   "owner": "unowned",
+   "owner": "TIR",
    "scope": "drawn"
   },
   "STATE_TOBARO": {
@@ -3943,7 +3943,7 @@
     5088,
     2772
    ],
-   "owner": "unowned",
+   "owner": "TEL",
    "scope": "drawn"
   },
   "STATE_TOR_ELITHIS": {
@@ -3952,7 +3952,7 @@
     6853,
     2837
    ],
-   "owner": "unowned",
+   "owner": "TEH",
    "scope": "drawn"
   },
   "STATE_TOWER_OF_THE_BLOODYTOOTH": {
@@ -3996,7 +3996,7 @@
     6922,
     2756
    ],
-   "owner": "unowned",
+   "owner": "TEH",
    "scope": "drawn"
   },
   "STATE_TOWER_OF_THE_STARS": {
@@ -4005,7 +4005,7 @@
     5235,
     2249
    ],
-   "owner": "unowned",
+   "owner": "TOS",
    "scope": "drawn"
   },
   "STATE_TRANTINE_HILLS": {
@@ -4077,7 +4077,7 @@
     2673,
     1204
    ],
-   "owner": "unowned",
+   "owner": "NGY",
    "scope": "drawn"
   },
   "STATE_UPPER_ASH_RIVER": {
@@ -4140,7 +4140,7 @@
     2771,
     2480
    ],
-   "owner": "unowned",
+   "owner": "LOT",
    "scope": "drawn"
   },
   "STATE_VOLGEN": {

@@ -163,6 +163,12 @@
    "why": "Karaz-a-Karak, the Everpeak, is the greatest living hold; Zhufbar, Karak Kadrin, Karak Azul and the Thunder Peaks follow; Barak Varr is the Dwarf port. Dwarf holds are dense and underground, so a hold holds a province's worth of people on a tiny surface footprint.",
    "confidence": "medium"
   },
+  "CAL": {
+   "canon": 70000,
+   "source": "inferred: Caledor, the Dragon Princes' kingdom and the old seat of Phoenix Kings (WFB 8e High Elves)",
+   "why": "The proudest of the outer kingdoms, second only to Eataine; set above the other eight.",
+   "confidence": "low"
+  },
   "CAR": {
    "canon": 200000,
    "source": "inferred: Bretonnia relative to the Empire (WFB Bretonnia army book: a dense peasantry under few nobles)",
@@ -431,6 +437,12 @@
    "canon": 8000,
    "source": "inferred: single-state vampire remnant (WFB Vampire Counts; Chris 2026-10-03)",
    "why": "Lahmian exiles hold a single Black Mountains state; a small refugee following.",
+   "confidence": "low"
+  },
+  "LOT": {
+   "canon": 160000,
+   "source": "inferred: Eataine and Lothern, the Phoenix King's seat and Ulthuan's gateway port (WFB 8e High Elves)",
+   "why": "The largest High Elf kingdom: the great port-city of Lothern and the Phoenix King's court. Asur are long-lived and few, so even the first kingdom is well below an Imperial province. Size does not set LOT's rank over its protectorates by itself: rank is prestige-based (tier, GDP, subject GDP, power projection).",
    "confidence": "low"
   },
   "LUC": {
@@ -889,5 +901,37 @@
    "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
    "confidence": "low"
   }
- }
+ },
+ "groups": [
+  {
+   "tags": [
+    "SAP",
+    "NGY",
+    "TIR",
+    "CHR",
+    "AVL",
+    "YVR",
+    "ELL",
+    "COT"
+   ],
+   "canon": 45000,
+   "source": "inferred: the other Kingdoms of Ulthuan (WFB 8e High Elves)",
+   "why": "Long-lived, slow-breeding Asur in kingdoms of comparable standing; nothing in canon ranks the eight against one another, so they share one figure below Caledor.",
+   "confidence": "low"
+  },
+  {
+   "tags": [
+    "CDU",
+    "FDW",
+    "TEL",
+    "TOS",
+    "GCL",
+    "TEH"
+   ],
+   "canon": 6000,
+   "source": "inferred: High Elf colonies and outposts (High_Elf_Outposts.JPG; WFB 8e High Elves)",
+   "why": "Each outpost is a fortress-port with its garrison and settlers, a small fraction of a kingdom.",
+   "confidence": "low"
+  }
+ ]
 }
