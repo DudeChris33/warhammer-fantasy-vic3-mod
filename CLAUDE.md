@@ -31,6 +31,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
 | `localization/english/`, `localization/replace/english/` | New loc, and loc that overrides vanilla text |
 | `map_data/` | Map and state regions — generated; see [testing.md](.claude/rules/testing.md) |
 | `mapgen/` | Offline map generator + validator toolchain (Python); named `mapgen`, not `tools`, because vanilla reserves a `tools` folder — see [testing.md](.claude/rules/testing.md) and `mapgen/MAP_RUNBOOK.md` |
+| `artgen/` | Offline interface-art generator (Python, runs in `mapgen/.venv`): rebuilds vanilla icons by recipe from the vanilla file plus a committed master, as overrides at their vanilla `gfx/` paths. Not shipped (not in `deploy.ps1`) — see [interface.md](.claude/rules/interface.md) and `artgen/README.md` |
 | `sources/` | Git-ignored, local-only reference imagery (provenance in `mapgen/SOURCES.md`) |
 | `scratchpad/` | Git-ignored, local-only: Claude's renders, previews and QA overlays (the `render_*.py` and `--render` outputs). `mapgen/derived/` keeps only the artifacts other stages read — see [testing.md](.claude/rules/testing.md) |
 | `docs/` | Read-only game-generated script reference (`docs/*.log`) |
