@@ -1,0 +1,276 @@
+﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of this file does
+# NOT load. Placeholder heraldry per board item #8444 for the 17 tags of
+# common/country_definitions/17_ulthuan.txt (same order): ULT, the ten kingdoms, the six colonies.
+# Bespoke arms are #3621.
+# Composed from vanilla gfx/coat_of_arms/ art (pattern + colored_emblems, neither blanked by
+# replace_paths) and this mod's named_colors palette. High Elf (Asur) house style
+# (.claude/rules/heraldry.md): fields from white/pearl/blue_light/azure/lapis_blue/ice_blue,
+# charges golden or white, one distinct charge per tag, no greenskin or extremist devices.
+# Every texture and colour-slot count is confirmed against a real vanilla usage, cited per block
+# (game/common/coat_of_arms/coat_of_arms/); where vanilla fills one slot only, slot 2 is set to
+# slot 1's tone (the AVE convention). Each block names its canon-confidence bucket.
+# Requires common/flag_definitions/17_ulthuan.txt to render in-game (this mod's DEFAULT
+# flag_definitions block is unconditional at priority = 0).
+
+# ULT — Ulthuan, the Phoenix King's realm united. Disclosed invention: Asuryan's radiant flame as a golden sunburst on azure.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:23042).
+ULT = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_sunburst.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# LOT — Eataine (Lothern), realm of the Sea Lords. Disclosed invention: a golden ship's wheel for Ulthuan's gateway port and its fleets. Disclosed reuse: 04_karaz_ankor.txt ZHU wears ce_ship_wheel in red_dark over waves on blue; LOT's is golden, alone, on lapis_blue.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:12461 (one slot; slot 2 set to slot 1's tone)).
+LOT = {
+	pattern = "pattern_solid.tga"
+	color1 = "lapis_blue"
+	color2 = "lapis_blue"
+
+	colored_emblem = {
+		texture = "ce_ship_wheel.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# CAL — Caledor, the Dragon Princes. Canon-soft: the dragon of Caledor, golden on azure. Disclosed reuse: 04_karaz_ankor.txt also uses ce_dragon_wales; CAL's is golden on azure.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:1012).
+CAL = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_dragon_wales.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# SAP — Saphery, land of mages. Disclosed invention: a sixteen-rayed golden star for the White Tower's lore, on white.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:13417 (one slot; slot 2 set to slot 1's tone)).
+SAP = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "white"
+
+	colored_emblem = {
+		texture = "ce_star_16.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# NGY — Nagarythe, the Shadowlands. Disclosed invention: a white moon for the Shadow Warriors' night-war, on lapis_blue. Disclosed reuse: 04_karaz_ankor.txt also uses ce_moon_face; NGY's is white on lapis_blue.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:16279).
+NGY = {
+	pattern = "pattern_solid.tga"
+	color1 = "lapis_blue"
+	color2 = "lapis_blue"
+
+	colored_emblem = {
+		texture = "ce_moon_face.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# TIR — Tiranoc, the drowned kingdom. Canon-soft: white waves over the land the sea took in the Sundering, on blue_light. Disclosed reuse: ce_waves appears in 01_kislev.txt, 04_karaz_ankor.txt and 07_nehekhara.txt in their own tinctures; TIR's is white on blue_light.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:483).
+TIR = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	color2 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
+	}
+}
+
+# CHR — Chrace, home of the White Lions. Canon-firm: the white lion of Chrace, on azure. Disclosed reuse: 03_brettonia.txt uses ce_lion_rampant in its own tinctures; CHR's is white on azure.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:33).
+CHR = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_lion_rampant.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# AVL — Avelorn, the Everqueen's forest realm. Disclosed invention: a golden tree on pearl. Disclosed reuse: 03_brettonia.txt uses ce_tree_new_england twice (ART in green_dark); AVL's is golden on pearl.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:1517).
+AVL = {
+	pattern = "pattern_solid.tga"
+	color1 = "pearl"
+	color2 = "pearl"
+
+	colored_emblem = {
+		texture = "ce_tree_new_england.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# YVR — Yvresse, the misty realm on the Sea of Chaos. Disclosed invention: a white comet-star, on lapis_blue.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/99_countries_IP2.txt:1583).
+YVR = {
+	pattern = "pattern_solid.tga"
+	color1 = "lapis_blue"
+	color2 = "lapis_blue"
+
+	colored_emblem = {
+		texture = "ce_star_06_comet.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# ELL — Ellyrion, horse-country of the Reaver Knights. Canon-soft: a golden horse on ice_blue. Disclosed reuse: ce_horse appears in 01_kislev.txt, 03_brettonia.txt and 07_nehekhara.txt in their own tinctures; ELL's is golden on ice_blue.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:579).
+ELL = {
+	pattern = "pattern_solid.tga"
+	color1 = "ice_blue"
+	color2 = "ice_blue"
+
+	colored_emblem = {
+		texture = "ce_horse.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# COT — Cothique, the eastern coastal realm. Disclosed invention: a golden falcon on blue_light. Disclosed reuse: ce_falcon appears in four other region files in their own tinctures; COT's is golden on blue_light.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:2563).
+COT = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	color2 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_falcon.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
+# CDU — Citadel of Dusk. Canon-soft, from its roundel on High_Elf_Outposts.JPG (a red citadel under rays on dark blue): the citadel kept, recoloured golden on lapis_blue to the Asur house style. Disclosed reuse: ce_castle is common across region files; CDU's is golden on lapis_blue.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:804).
+CDU = {
+	pattern = "pattern_solid.tga"
+	color1 = "lapis_blue"
+	color2 = "lapis_blue"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# FDW — Fortress of Dawn. Canon-soft, from its roundel on High_Elf_Outposts.JPG: a golden sun rising over the sea, on azure.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:24829).
+FDW = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_sun_waves.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.78 0.78 } }
+	}
+}
+
+# TEL — Tor Elasor. Disclosed invention: a golden elven harp on pearl.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:54).
+TEL = {
+	pattern = "pattern_solid.tga"
+	color1 = "pearl"
+	color2 = "pearl"
+
+	colored_emblem = {
+		texture = "ce_harp.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# TOS — Tower of the Stars. Disclosed invention, name-derived: a white ring of stars on lapis_blue.
+# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:8147 (one slot; slot 2 set to slot 1's tone)).
+TOS = {
+	pattern = "pattern_solid.tga"
+	color1 = "lapis_blue"
+	color2 = "lapis_blue"
+
+	colored_emblem = {
+		texture = "ce_stars_circle_06.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}
+
+# GCL — Gates of Calith. Disclosed invention: a white eagle's head, the warden of the gates, on blue_light. Disclosed reuse: 04_karaz_ankor.txt also uses ce_eagle_head; GCL's is white on blue_light.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries_2.txt:231).
+GCL = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue_light"
+	color2 = "blue_light"
+
+	colored_emblem = {
+		texture = "ce_eagle_head.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# TEH — Tor Elithis, the Lost Isles of Elithis. Disclosed invention: a white swan, on azure. Disclosed reuse: ce_swan appears in 03_brettonia.txt and 05_southern_realms.txt in their own tinctures; TEH's is white on azure.
+# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:24763).
+TEH = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+
+	colored_emblem = {
+		texture = "ce_swan.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+	}
+}

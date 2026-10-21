@@ -9,7 +9,7 @@ paths:
 
 # Heraldry (`coat_of_arms`, `flag_definitions`)
 
-**Read when:** you are editing a coat of arms, a flag definition, the colour palette (`common/named_colors/`), or emblem textures. **Covers:** the COA and flag-definition schema, the greenskin house style and power bloc arms. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
+**Read when:** you are editing a coat of arms, a flag definition, the colour palette (`common/named_colors/`), or emblem textures. **Covers:** the COA and flag-definition schema, the greenskin, wood-elf, ogre and High Elf house styles, and power bloc arms. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
 
 **Related guides:**
 - [peoples.md](peoples.md) — tags, region-file order, culture colours
@@ -147,6 +147,18 @@ Established by #6373 for the `wood_elf` and `ogre` tags; binding on later tags o
   tribes' own culture: the gut-plate (a plain disc), the Great Maw (a horns-up crescent), or a
   blast for a gut-cannon tribe. Never an eye (RED's reserved device) and never a lightning bolt
   (too close to the banned `ce_lightning_bolt_nacista`).
+
+## High Elf (Asur) house style
+
+Established by #8444 for `common/coat_of_arms/coat_of_arms/17_ulthuan.txt` (placeholder arms; bespoke
+arms are #3621); binding on later `high_elf` tags.
+
+- Fields from `white`, `pearl`, `blue_light`, `azure`, `lapis_blue`, `ice_blue` (one tincture, `pattern_solid`).
+- Charges in `golden` or `white`, one distinct charge per tag (no two Asur tags share a texture).
+- Charges follow canon where it gives one (Chrace's white lion, Caledor's dragon, Ellyrion's horse) and
+  the colonies' roundels on `sources/originals/High_Elf_Outposts.JPG` (Citadel of Dusk's citadel,
+  Fortress of Dawn's sun over the sea), recoloured into this palette; otherwise a disclosed invention.
+- No greenskin devices and nothing from rules 5-6 of the greenskin list above.
 
 ## Power bloc coats of arms
 

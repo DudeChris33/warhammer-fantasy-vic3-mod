@@ -1,0 +1,142 @@
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list
+# (00_flag_definitions.txt) ships one unconditionally-applicable block at priority = 0, so without
+# a higher-priority tag-named list here every bespoke COA in
+# common/coat_of_arms/coat_of_arms/17_ulthuan.txt (board #8444) would parse but sit unused behind
+# default_flag. Each list below is a single unconditional block at priority = 100, the same shape
+# as every other region file. `always = yes` confirmed valid at docs/triggers.log.
+
+ULT = {
+	flag_definition = {
+		coa = ULT
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LOT = {
+	flag_definition = {
+		coa = LOT
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+CAL = {
+	flag_definition = {
+		coa = CAL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SAP = {
+	flag_definition = {
+		coa = SAP
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+NGY = {
+	flag_definition = {
+		coa = NGY
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TIR = {
+	flag_definition = {
+		coa = TIR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+CHR = {
+	flag_definition = {
+		coa = CHR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+AVL = {
+	flag_definition = {
+		coa = AVL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+YVR = {
+	flag_definition = {
+		coa = YVR
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ELL = {
+	flag_definition = {
+		coa = ELL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+COT = {
+	flag_definition = {
+		coa = COT
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+CDU = {
+	flag_definition = {
+		coa = CDU
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+FDW = {
+	flag_definition = {
+		coa = FDW
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TEL = {
+	flag_definition = {
+		coa = TEL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TOS = {
+	flag_definition = {
+		coa = TOS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+GCL = {
+	flag_definition = {
+		coa = GCL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TEH = {
+	flag_definition = {
+		coa = TEH
+		priority = 100
+		trigger = { always = yes }
+	}
+}
