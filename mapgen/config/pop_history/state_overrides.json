@@ -3,7 +3,8 @@
   "Per-state culture/religion mix, keyed on canon state key + naming anchor (never the Hilbert STATE number).",
   "Default mix: the state's homelands (common/history/states add_homeland, from mapgen/config/state_homelands.json; none = owner's primary cultures only), the owner's primary cultures counting double.",
   "'tags': a tag-wide default mix (shares sum to exactly 100). 'states': mode 'add' = minorities (shares sum < 100) are carved out of the default; mode 'replace' = the full mix (sum exactly 100).",
-  "religion only where it differs from the culture's default; pop_type only where deliberate ('slaves' only where the owner's slavery law allows it)."
+  "religion only where it differs from the culture's default; pop_type only where deliberate ('slaves' only where the owner's slavery law allows it).",
+  "'religion_splits': per listed tag, 'share' percent of that culture's default-faith people (not of the state) follow 'religion'; the rest keep the culture default. Applied after the mix is rounded, so no other pop moves."
  ],
  "tags": {
   "BNR": {
@@ -735,6 +736,47 @@
      "why": "Norse captives."
     }
    ]
+  }
+ ],
+ "religion_splits": [
+  {
+   "tags": [
+    "TLS",
+    "ANM",
+    "ARG",
+    "TRG",
+    "WYD",
+    "OKP"
+   ],
+   "culture": "wood_elf",
+   "religion": "cult_of_kurnous",
+   "share": 40,
+   "source": "invented, not canon: canon gives no per-realm split of Wood Elf devotion; share approved by Chris on 2026-10-21",
+   "why": "Athel Loren: Orion and Ariel co-rule, so the realm leans Isha."
+  },
+  {
+   "tags": [
+    "GRW",
+    "NLD",
+    "GRA"
+   ],
+   "culture": "wood_elf",
+   "religion": "cult_of_kurnous",
+   "share": 65,
+   "source": "invented, not canon: canon gives no per-realm split of Wood Elf devotion; share approved by Chris on 2026-10-21",
+   "why": "The marches: frontier hunting holds lean Kurnous."
+  },
+  {
+   "tags": [
+    "CNT",
+    "MAG",
+    "MGL"
+   ],
+   "culture": "wood_elf",
+   "religion": "cult_of_kurnous",
+   "share": 25,
+   "source": "invented, not canon: canon gives no per-realm split of Wood Elf devotion; share approved by Chris on 2026-10-21",
+   "why": "Nuja: a settled enclave among farmers, mostly Isha."
   }
  ]
 }

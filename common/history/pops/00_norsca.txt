@@ -97,7 +97,8 @@ POPS = {
 	s:STATE_HELSPIRE_MOUNTAINS = {
 		region_state:GRA = {
 			create_pop = { culture = norscan size = 20929 }
-			create_pop = { culture = wood_elf size = 10465 }
+			create_pop = { culture = wood_elf religion = cult_of_kurnous size = 6802 }
+			create_pop = { culture = wood_elf size = 3663 }
 		}
 	}
 	s:STATE_HIGH_PASS = {

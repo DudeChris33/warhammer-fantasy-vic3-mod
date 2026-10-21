@@ -64,8 +64,9 @@ POPS = {
 	}
 	s:STATE_GRYPHON_WOOD = {
 		region_state:GRW = {
-			create_pop = { culture = wood_elf size = 26667 }
+			create_pop = { culture = wood_elf religion = cult_of_kurnous size = 17334 }
 			create_pop = { culture = ostermarker size = 13333 }
+			create_pop = { culture = wood_elf size = 9333 }
 		}
 	}
 	s:STATE_HOCHLAND = {
@@ -87,7 +88,8 @@ POPS = {
 	s:STATE_LAURELORN_FOREST = {
 		region_state:NLD = {
 			create_pop = { culture = nordlander size = 62343 }
-			create_pop = { culture = wood_elf size = 31171 }
+			create_pop = { culture = wood_elf religion = cult_of_kurnous size = 20261 }
+			create_pop = { culture = wood_elf size = 10910 }
 		}
 	}
 	s:STATE_MARIENBURG = {
