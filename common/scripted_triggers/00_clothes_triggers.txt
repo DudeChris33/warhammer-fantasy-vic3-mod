@@ -1,8 +1,15 @@
 ﻿# Clothes/portrait selection triggers — vanilla exception (WH keeps real-world human portraits).
-# Bodies stubbed to inert `always = no` so every trigger NAME stays defined (portrait_modifiers
-# reference these) while carrying no reference to now-blanked cultures/tags/heritages.
-# Effect: humans fall through to default vanilla clothing. Revisit if WH cultures ever map to
-# graphical cultures. Regenerate from vanilla 00_clothes_triggers.txt if the trigger set changes.
+# Every trigger NAME in vanilla's 00_clothes_triggers.txt stays defined here, because
+# gfx/portraits/portrait_modifiers/ references them.
+# [#6639] Twelve character-role triggers are live so rulers, heirs, generals, admirals, IG leaders,
+# agitators, executives and magnates get rank clothing: eight clean ports, three partial ports, and
+# european_clothes_trigger, a WH-native gate keyed on the culture's `graphics` field
+# (has_culture_graphics = european). Real-world national art in the templates these reach is pinned
+# to generic pieces in the portrait_modifiers files (tagged [#6639]).
+# Every other trigger stays an inert `always = no` stub with no reference to the blanked real-world
+# cultures, tags or heritages: pops, and characters of non-European-graphics cultures, fall through
+# to default clothing.
+# Never overwrite this file with vanilla's. If vanilla's trigger set changes, add or remove names here.
 
 british_empire_clothes_trigger = { always = no }
 british_empire_clothes_pop_trigger = { always = no }
@@ -85,28 +92,139 @@ arabic_fez_trigger = { always = no }
 arabic_military_fez_pop_trigger = { always = no }
 arabic_clothes_trigger = { always = no }
 ethiopian_clothes_trigger = { always = no }
-european_clothes_trigger = { always = no }
+# [#6639] WH-native replacement (not a port) of vanilla 00_clothes_triggers.txt:1453. Vanilla ORs
+# three real-world branches, all dangling here: cu:japanese modernizers, the AST_william_light
+# template, and heritage_group_european minus cu:circassian and Ottoman/Egyptian-serving cu:albanian
+# characters. This mod gates on the culture's art family instead: true for any character whose
+# culture declares graphics = european (monstrous cultures included; their portraits are human
+# placeholders). Other graphics families keep default clothing.
+european_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		culture = { has_culture_graphics = european }
+	}
+}
 indian_clothes_trigger = { always = no }
 siamese_clothes_trigger = { always = no }
 american_clothes_trigger = { always = no }
 american_clothes_pop_trigger = { always = no }
-politician_clothes_trigger = { always = no }
-junta_clothes_trigger = { always = no }
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:1548.
+politician_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		AND = {
+			has_role_of_type = politician
+			is_ruler_of_own_country = no
+		}
+	}
+}
+# [#6639] Partial port of vanilla 00_clothes_triggers.txt:1558. Dropped the three
+# gov_peru_bolivia_*_dictatorship government types (real-world, not defined in this mod). Prunes
+# nothing in play: no country can hold them.
+junta_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		AND = {
+			is_ruler_of_own_country = yes
+			is_interest_group_type = ig_armed_forces
+			owner ?= {
+				OR = {
+					has_government_type = gov_junta
+					has_government_type = gov_military_dictatorship
+				}
+			}
+		}
+	}
+}
 generic_military_uniform_clothes_trigger = { always = no }
+# [#6639] Inert stub, deliberately `no`. Vanilla's body is a NOR catch-all (true for anyone not
+# military, junta, military governor or monarch), which would normally stub to `yes`; but every
+# portrait_modifiers caller ANDs it with a stubbed national trigger, so `no` and `yes` select the
+# same variants. True no-op.
 generic_civilian_clothes_trigger = { always = no }
 communist_clothes_trigger = { always = no }
 recognized_country_trigger = { always = no }
 recognized_country_pop_trigger = { always = no }
 christian_clothes_trigger = { always = no }
 devout_clothes_trigger = { always = no }
-armed_forces_clothes_trigger = { always = no }
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:1679.
+armed_forces_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		is_interest_group_type = ig_armed_forces
+	}
+}
 military_governor_clothes_trigger = { always = no }
-ruler_clothes_trigger = { always = no }
-military_clothes_trigger = { always = no }
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:1697.
+ruler_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		is_ruler_of_own_country = yes
+	}
+}
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:1704.
+military_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		OR = {
+			has_role_of_type = general
+			has_role_of_type = admiral
+		}
+	}
+}
 military_marshal_clothes_trigger = { always = no }
-monarchy_clothes_trigger = { always = no }
-republic_clothes_trigger = { always = no }
-regency_clothes_trigger = { always = no }
+# [#6639] Partial port of vanilla 00_clothes_triggers.txt:1732. Dropped `NOT = { culture = cu:griqua }`
+# (real-world culture, not defined in this mod; the NOT was always true here). Prunes nothing in play.
+monarchy_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		exists = owner
+		OR = {
+			AND = {
+				OR = {
+					is_female = yes # Female Regents wear more stylish clothes than male ones, as female regents trend towards being royals themselves
+					owner ?= { has_gov_regency = no }
+				}
+				is_ruler_of_own_country = yes
+			}
+			is_heir_of_own_country = yes
+		}
+		owner = {
+			OR = {
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_social_monarchy
+			}
+		}
+	}
+}
+# [#6639] Partial port of vanilla 00_clothes_triggers.txt:1756. Dropped the `culture = cu:griqua`
+# OR branch (real-world culture, not defined in this mod; always false here). Prunes nothing in play.
+republic_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		exists = home_country
+		is_ruler_of_own_country = yes
+		OR = {
+			home_country = {
+				NOR = {
+					has_law_or_variant = law_type:law_monarchy
+					has_law_or_variant = law_type:law_social_monarchy
+				}
+			}
+		}
+	}
+}
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:1773.
+regency_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		exists = owner
+		is_ruler_of_own_country = yes
+		owner ?= {
+			has_gov_regency = yes
+		}
+	}
+}
 overweight_trigger = { always = no }
 army_traits_trigger = { always = no }
 navy_traits_trigger = { always = no }
@@ -162,9 +280,26 @@ slightly_overweight_pop_trigger = { always = no }
 overweight_pop_trigger = { always = no }
 very_overweight_pop_trigger = { always = no }
 struggling_pop_trigger = { always = no }
-agitator_character_trigger = { always = no }
-executive_clothes_trigger = { always = no }
-magnate_clothes_trigger = { always = no }
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:2455.
+agitator_character_trigger = {
+	scope:character ?= {
+		has_role_of_type = agitator
+	}
+}
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:2461.
+executive_clothes_trigger = {
+	scope:character ?= {
+		has_role_of_type = executive
+	}
+}
+# [#6639] Clean port: vanilla 00_clothes_triggers.txt:2467.
+magnate_clothes_trigger = {
+	monarchy_clothes_trigger = no
+	military_clothes_trigger = no
+	scope:character ?= {
+		has_role_of_type = magnate
+	}
+}
 should_be_naked_trigger = { always = no }
 should_be_fully_naked_portrait_trigger = { always = no }
 is_in_cold_land_hq_trigger = { always = no }
