@@ -622,7 +622,9 @@
                 mode = add
                 gene = headgear
                 template = european_military_headgear
-                range = { 0 1 } # For the randomness to work correctly
+                # [#6639] Template order is _02, _03, _08, _09, _10. 0.45 keeps the pick off _09 (colonial black-swan badge)
+                # and _10 (crowned eagle plate with cipher) whether the engine maps the value by x5 or x4, floor or round (exact mapping unconfirmed).
+                range = { 0 0.45 } # [#6639] was: range = { 0 1 } # For the randomness to work correctly
             }
         }
         weight = {

@@ -1897,7 +1897,7 @@ clothes = {
                mode = add
                gene = coats
                template = european_late_military_coats
-               range = { 0 1 }
+               accessory = male_coat_european_military_01 # [#6639] was: range = { 0 1 }
             }
             accessory = {
                 mode = add
@@ -1909,7 +1909,7 @@ clothes = {
                 mode = add
                 gene = legwear
                 template = european_late_military_legwear
-               range = { 0 1 }
+               accessory = male_legwear_european_military_01 # [#6639] was: range = { 0 1 }
             }
             accessory = {
                 mode = add
@@ -13819,7 +13819,7 @@ indigenous_oceanic_pop_clothes = {
                 mode = add
                 gene = legwear
                 template = brazilian_white_legwear
-                accessory = male_legwear_south_american_01_brazilian
+                accessory = male_legwear_european_01_white # [#6639] was: accessory = male_legwear_south_american_01_brazilian
             }
         }
         weight = {
