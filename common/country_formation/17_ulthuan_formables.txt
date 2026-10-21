@@ -1,0 +1,29 @@
+﻿# Country formation — Ulthuan. Board item #8444 (epic #3414).
+# ONE formable in this region: ULT, the Phoenix King's realm united, formed when the Ten Kingdoms
+# are brought under one crown. Every other 17_ulthuan tag is a start tag.
+#
+# Deliberately minor/culture-based in shape: no unification_play, leadership_play or
+# geographic_region key. common/diplomatic_plays holds no unification or leadership play and
+# common/geographic_regions is empty, so referencing either would point at content that does not
+# exist. Revisit when those databases are authored.
+# Triggers used below are confirmed in docs/triggers.log (both country scope):
+#   is_country_type = <country type>
+#   country_has_primary_culture = <culture>
+#
+# is_country_type = recognized admits the ten kingdoms and excludes the six colonial outposts.
+# Open (#8444): at start LOT holds the other nine kingdoms as protectorates and the colonies as
+# colonies, so its subjects' Asur homelands may already count towards use_culture_states. Whether
+# ULT forms on day 1 is checked in game; a gating trigger is Chris's call and a follow-up if needed.
+
+################ ULT — Ulthuan ################
+
+ULT = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		is_country_type = recognized
+		country_has_primary_culture = cu:high_elf
+	}
+}

@@ -1,0 +1,214 @@
+﻿# Country tags — Ulthuan and the High Elf colonies. Board item #8444 (epic #3414); roster frozen in
+# planning/tag_registry.md, region "17 ULTHUAN".
+#
+# Entry schema (see .claude/rules/peoples.md):
+#   color        — { R G B } with 0-255 integers.
+#   country_type — recognized | unrecognized | colonial | company | decentralized
+#   tier         — city_state | principality | grand_principality | kingdom | hegemony | empire
+#   cultures     — culture ids from common/cultures/high_elf.txt (#8463; cross-file reference)
+#   capital      — STATE_* key from map_data/state_regions/ (field order as vanilla: after cultures)
+#
+# COLOUR NOTE: every start tag below copies its colour EXACTLY from
+# mapgen/config/state_ownership_legend.json — the painted ownership map is keyed on that RGB, so the
+# legend wins over the usual reuse-the-culture-colour convention (#6373). LOT's legend colour is also
+# the high_elf culture colour. ULT, the formable, is not painted and takes a darker shade of LOT's.
+#
+# FILING NOTE: the six colonies (CDU FDW TEL TOS GCL TEH) follow the registry's region column
+# (17_ulthuan), not the geography of their states: STATE_ISLES_OF_DUSK sits in
+# map_data/state_regions/19_lustria.txt, the Fortress of Dawn, Tor Elasor and Tower of the Stars
+# states in 09_southlands.txt, and the Gates of Calith and Lost Isles of Elithis states in
+# 15_khuresh.txt. The High Elves are one people with one region file (the exception KRD and the ogre
+# tribes take). Their names come from sources/originals/High_Elf_Outposts.JPG (Chris's source).
+#
+# The ten kingdoms are recognized kingdoms, protectorates of LOT at start; the six colonies are
+# colonial principalities, LOT's colonies at start (common/history/diplomacy/00_subject_relationships.txt).
+# The colonies take gov_principality: law_colonial_administration is not emitted (see
+# mapgen/config/country_history/README.md, Mechanics gaps).
+#
+# capital convention (#3658; full rule in .claude/rules/peoples.md). No Ulthuan or colony state has
+# a named hub, so C1 is read as the state judged to hold the canon seat from the state name and canon
+# geography (Chris-accepted reading, #8444), commented "seat inferred: no named hub":
+#   C1 a tag's capital is the state holding its canon seat, whoever owns that state at start;
+#   C2 a land-owning tag with no seat placeable with confidence takes its largest owned state
+#      (province count in mapgen/derived/state_ownership.json, ties on higher arable_land),
+#      commented "non-canon";
+#   C3 a tag that owns nothing at start and has no canon seat omits capital.
+# Never use a STATE_LAND_<n> key. No offline gate checks these keys: after any state rename or
+# regeneration, grep "capital =" in common/country_definitions/ against map_data/state_regions/.
+#
+# Country display names/adjectives live in localization/english/countries_17_ulthuan_l_english.yml
+# and, for tags whose key collides with vanilla (ULT CAL NGY TIR), in
+# localization/replace/english/countries_17_ulthuan_l_english.yml.
+# The ULT formation rule lives in common/country_formation/17_ulthuan_formables.txt.
+
+################ ULT — Ulthuan; the Phoenix King's realm united ################
+# Formable only. Empire tier like EMP: one realm over ten kingdoms. Lothern is the Phoenix King's
+# seat, so ULT takes LOT's capital.
+
+ULT = {
+	color = { 100 110 220 }
+	country_type = recognized
+	tier = empire
+	cultures = { high_elf }
+	capital = STATE_LOTHERN_WEST # Lothern, held by LOT at start; seat inferred: no named hub
+}
+
+################ LOT — Eataine (Lothern); realm of the Sea Lords, the Phoenix King's seat ################
+
+LOT = {
+	color = { 126 138 252 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_LOTHERN_WEST # Lothern; straddles its straits, the larger Lothern state (10 vs 5 provinces); seat inferred: no named hub
+}
+
+################ CAL — Caledor; the Dragon Princes ################
+
+CAL = {
+	color = { 126 240 252 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_THE_DRAGON_SPINE # non-canon: largest owned state (11 provinces); Tor Caled not placeable
+}
+
+################ SAP — Saphery; land of mages ################
+
+SAP = {
+	color = { 180 186 252 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_NORTHERN_SAPHERY # non-canon: largest owned state (14 provinces)
+}
+
+################ NGY — Nagarythe; the Shadowlands ################
+
+NGY = {
+	color = { 132 210 252 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_SHADOW_MARCH # non-canon: largest owned state (31 provinces)
+}
+
+################ TIR — Tiranoc; the drowned kingdom ################
+
+TIR = {
+	color = { 210 216 246 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_TIRANOC # Tor Anroc; seat inferred: no named hub
+}
+
+################ CHR — Chrace; home of the White Lions ################
+
+CHR = {
+	color = { 162 210 216 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_CHRACE # Tor Achare; seat inferred: no named hub
+}
+
+################ AVL — Avelorn; the Everqueen's realm ################
+
+AVL = {
+	color = { 126 162 252 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_GAEAN_VALE # the Gaen Vale, the Everqueen's court; seat inferred: no named hub
+}
+
+################ YVR — Yvresse; the misty realm ################
+
+YVR = {
+	color = { 108 120 204 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_SOUTHERN_YVRESSE # non-canon: largest owned state (17 provinces)
+}
+
+################ ELL — Ellyrion; horse-country ################
+
+ELL = {
+	color = { 126 186 252 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_SOUTHERN_ELLYRION # non-canon: largest owned state (15 provinces, tie with Northern Ellyrion broken on arable 72 > 67)
+}
+
+################ COT — Cothique; the eastern coastal realm ################
+
+COT = {
+	color = { 114 180 204 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { high_elf }
+	capital = STATE_SKYHAVEN_PLATEAU # non-canon: largest owned state (15 provinces)
+}
+
+################ CDU — Citadel of Dusk; High Elf outpost off southern Lustria ################
+
+CDU = {
+	color = { 81 75 250 }
+	country_type = colonial
+	tier = principality
+	cultures = { high_elf }
+	capital = STATE_ISLES_OF_DUSK # the Citadel of Dusk (High_Elf_Outposts.JPG); seat inferred: no named hub
+}
+
+################ FDW — Fortress of Dawn; High Elf outpost off the southern Southlands ################
+
+FDW = {
+	color = { 63 81 212 }
+	country_type = colonial
+	tier = principality
+	cultures = { high_elf }
+	capital = STATE_ISLE_OF_DAWN # the Fortress of Dawn (High_Elf_Outposts.JPG); seat inferred: no named hub
+}
+
+################ TEL — Tor Elasor; High Elf outpost east of the Southlands ################
+
+TEL = {
+	color = { 54 82 181 }
+	country_type = colonial
+	tier = principality
+	cultures = { high_elf }
+	capital = STATE_TOR_ELASOR # Tor Elasor (High_Elf_Outposts.JPG); seat inferred: no named hub
+}
+
+################ TOS — Tower of the Stars; High Elf outpost and archipelago east of the Southlands ################
+
+TOS = {
+	color = { 146 141 204 }
+	country_type = colonial
+	tier = principality
+	cultures = { high_elf }
+	capital = STATE_TOWER_OF_THE_STARS # the Tower of Stars (High_Elf_Outposts.JPG); seat inferred: no named hub
+}
+
+################ GCL — Gates of Calith; High Elf outpost on the southern cape of Khuresh ################
+
+GCL = {
+	color = { 110 97 250 }
+	country_type = colonial
+	tier = principality
+	cultures = { high_elf }
+	capital = STATE_SOUTHERN_GATE_OF_CALITH # the Gates of Calith, both caps (High_Elf_Outposts.JPG); seat inferred: no named hub
+}
+
+################ TEH — Tor Elithis; the Lost Isles of Elithis ################
+
+TEH = {
+	color = { 90 117 250 }
+	country_type = colonial
+	tier = principality
+	cultures = { high_elf }
+	capital = STATE_TOR_ELITHIS # Tor Elithis (High_Elf_Outposts.JPG); seat inferred: no named hub
+}

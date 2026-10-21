@@ -1610,8 +1610,7 @@
     138,
     252
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "CAL": {
    "name": "Caledor",
@@ -1620,8 +1619,7 @@
     240,
     252
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "SAP": {
    "name": "Saphery",
@@ -1630,8 +1628,7 @@
     186,
     252
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "NGY": {
    "name": "Nagarythe",
@@ -1640,8 +1637,7 @@
     210,
     252
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "TIR": {
    "name": "Tiranoc",
@@ -1650,8 +1646,7 @@
     216,
     246
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "CHR": {
    "name": "Chrace",
@@ -1660,8 +1655,7 @@
     210,
     216
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "AVL": {
    "name": "Avelorn",
@@ -1670,8 +1664,7 @@
     162,
     252
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "YVR": {
    "name": "Yvresse",
@@ -1680,8 +1673,7 @@
     120,
     204
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "ELL": {
    "name": "Ellyrion",
@@ -1690,8 +1682,7 @@
     186,
     252
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "COT": {
    "name": "Cothique",
@@ -1700,8 +1691,7 @@
     180,
     204
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444)."
   },
   "CDU": {
    "name": "Citadel of Dusk",
@@ -1710,8 +1700,7 @@
     75,
     250
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444). High Elf colony, filed under 17_ulthuan."
   },
   "FDW": {
    "name": "Fortress of Dawn",
@@ -1720,8 +1709,7 @@
     81,
     212
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444). High Elf colony, filed under 17_ulthuan."
   },
   "TEL": {
    "name": "Tor Elasor",
@@ -1730,8 +1718,7 @@
     82,
     181
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444). High Elf colony, filed under 17_ulthuan."
   },
   "TOS": {
    "name": "Tower of the Stars",
@@ -1740,8 +1727,7 @@
     141,
     204
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444). High Elf colony, filed under 17_ulthuan."
   },
   "GCL": {
    "name": "Gates of Calith",
@@ -1750,8 +1736,7 @@
     97,
     250
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444). High Elf colony, filed under 17_ulthuan."
   },
   "TEH": {
    "name": "Tor Elithis",
@@ -1760,8 +1745,7 @@
     117,
     250
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+   "note": "defined in common/country_definitions/17_ulthuan.txt (#8444). High Elf colony, filed under 17_ulthuan."
   },
   "NGD": {
    "name": "Naggarond",

@@ -120,6 +120,9 @@ TAG = {
 - **A painted start owner needs a definition.** Every owner tag in `mapgen/derived/state_ownership.json`
   must have a non-dynamic entry here (the D00-D99 `dynamic_country_definition` slots don't count), or
   `generate_state_history.py` holds its states back and `validate_map.py` fails ([testing.md](testing.md)).
+  It also needs a `mapgen/config/pop_history/calibration.json` total and a `population.json`
+  wealth/literacy entry (directly or through a `groups` row), or `generate_pop_history.py` errors, and a
+  `mapgen/config/building_history/profiles.json` `tags` row, or `generate_building_history.py` errors (#8444).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
 - A tag's `cultures` no longer drive homelands (#8604): `add_homeland` comes only from the hand-authored `mapgen/config/state_homelands.json` ([testing.md](testing.md)). The owner's `cultures` only seed a new state's row (`--sync-homelands`) and still set the pop-mix fallback for a state whose list is `[]`.
 - **Placeholder tags (`XS*`).** A state owner the setting needs but no named polity can yet represent gets
@@ -144,8 +147,14 @@ TAG = {
     type), whoever owns that state at start. Claimants and formables keep their canon seat as
     capital even when another tag holds it; vanilla does the same (`POL`, `ITA`, and 12 tags on
     `STATE_AMHARA`). Comment the seat where the state name doesn't make it obvious.
+    **Where no named hub exists** (Ulthuan and the High Elf colonies, #8444, Chris-accepted
+    2026-10-21), C1 is the state judged to hold the canon seat from the state name and canon
+    geography, commented `seat inferred: no named hub`; a seat that cannot be placed with
+    confidence falls to C2. A seat that straddles states takes the larger by province count
+    (Lothern: `STATE_LOTHERN_WEST`).
   - **C2 no canon seat, owns land.** Use its largest owned state by province count in
-    `mapgen/derived/state_ownership.json`, commented `non-canon`.
+    `mapgen/derived/state_ownership.json`, commented `non-canon`; a tie goes to the higher
+    `arable_land` (#8444).
   - **C3 no canon seat, owns nothing.** Omit `capital` and write `# capital: none - <reason>`.
   - Never use a `STATE_LAND_<n>` key: it is an unnamed state's key and changes on regeneration.
   - No offline gate checks these keys. After a state rename or regeneration
@@ -158,6 +167,7 @@ TAG = {
   - `00_norsca.txt`, `01_kislev.txt`, `03_brettonia.txt` — done (#3659).
   - `04_karaz_ankor.txt`, `10_dark_lands.txt` — done (#3660).
   - `05_southern_realms.txt`, `06_badlands.txt`, `07_nehekhara.txt` — done (#3661).
+  - `17_ulthuan.txt` — done (#8444).
   - `11_ogre_kingdoms.txt` — pending. `98_unclaimed.txt` (`UNO`) has no capital by design, and
     `99_dynamic.txt` holds the dynamic slots.
 

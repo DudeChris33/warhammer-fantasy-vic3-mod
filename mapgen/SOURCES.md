@@ -353,7 +353,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 <!-- MANIFEST:BEGIN -->
 | File | Dims | Bytes | SHA-256 | Origin | Role | Registered |
 |---|---|---|---|---|---|---|
-| High_Elf_Outposts.JPG | 3942x2586 | 1,321,940 | 680dd8d730f60efcf77a119ec132cdfa979d9caee5a9fbe6689e6ae639314d38 | TBD | TBD | no |
+| High_Elf_Outposts.JPG | 3942x2586 | 1,321,940 | 680dd8d730f60efcf77a119ec132cdfa979d9caee5a9fbe6689e6ae639314d38 | Chris's source | Manifest only, unregistered — names the six High Elf colony tags (CDU FDW TEL TOS GCL TEH) and is the source of the CDU and FDW roundel arms (#8444) | no |
 | Major_Trade_Routes_of_the_Old_World_Map.png | 1947x1404 | 690,310 | 12026b1e21ad7b9467ff1e3d597e98492739af19e2d8cf97407ddf5d28f7b919 | Games Workshop — "Major Trade Routes of the Old World" | Manifest only, unregistered — S6 reference | no |
 | bretonnia_black_white_colored.png | 4210x4700 | 14,643,218 | 05d03cf362e17d8c805ead02915b66334be75f01d52346936f2ac611675a3610 | Internet find; the user colored the ocean blue | Primarily Bretonnia village placement; secondarily other Bretonnia features | no |
 | climate_zones_flat.png | 4096x1808 | 227,993 | 0e45a6cffc9755e4f5f6142fe3ebec8d63513e36dd5130ef095a3f51b49a520b | TBD | TBD | no |

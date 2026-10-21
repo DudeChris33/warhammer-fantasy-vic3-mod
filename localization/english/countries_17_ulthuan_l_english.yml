@@ -1,8 +1,10 @@
 ﻿l_english:
- # Country display names and adjectives for the 17 Ulthuan tag roster (planning/tag_registry.md).
- # Loc-only registry parity: common/country_definitions/ for this region is deferred until
- # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
- # Board item #3420 (epic #3414).
+ # Country display names and adjectives for the 17 Ulthuan tag roster (planning/tag_registry.md),
+ # defined in common/country_definitions/17_ulthuan.txt (#8444). One name key (the tag) + one
+ # adjective key (<TAG>_ADJ) per tag. ULT, CAL, NGY and TIR collide with vanilla loc keys and live in
+ # localization/replace/english/countries_17_ulthuan_l_english.yml instead.
+ # Kingdoms: board item #3420 (epic #3414). Colonies (CDU FDW TEL TOS GCL TEH): #8444, names from
+ # sources/originals/High_Elf_Outposts.JPG; the adjectives are invented.
  LOT:0 "Eataine (Lothern)"
  LOT_ADJ:0 "Eatainian"
  SAP:0 "Saphery"
@@ -17,3 +19,15 @@
  ELL_ADJ:0 "Ellyrian"
  COT:0 "Cothique"
  COT_ADJ:0 "Cothiquean"
+ CDU:0 "Citadel of Dusk"
+ CDU_ADJ:0 "Dusk"
+ FDW:0 "Fortress of Dawn"
+ FDW_ADJ:0 "Dawn"
+ TEL:0 "Tor Elasor"
+ TEL_ADJ:0 "Elasorian"
+ TOS:0 "Tower of the Stars"
+ TOS_ADJ:0 "Star Tower"
+ GCL:0 "Gates of Calith"
+ GCL_ADJ:0 "Calithian"
+ TEH:0 "Tor Elithis"
+ TEH_ADJ:0 "Elithisian"
