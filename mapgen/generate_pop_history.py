@@ -144,6 +144,10 @@ def markdown_report(cfg: ph.Config, world: ph.World, p: ph.Plan) -> str:
     for o in cfg.state_mixes:
         for m in o["mix"]:
             L.append(f"| {o['key']} | {o['mode']} | {m['culture']} | {m.get('religion', '')} | {m.get('pop_type', '')} | {m['share']} | {m['source']} |")
+    for (tag, cu), rules in sorted(cfg.religion_splits.items()):
+        for r in rules:
+            # share is percent of the culture's people in the tag, not of the state
+            L.append(f"| (all {tag}) | religion split | {cu} | {r['religion']} | | {r['share']} | {r['source']} |")
     L += ["\n## Wealth / literacy\n", "| Tag | Wealth | Literacy | Why |", "|---|---|---|---|"]
     for tag in sorted(set(tot) | ({sh.UNO_TAG} if uno else set())):
         e = cfg.population[tag]
@@ -219,18 +223,22 @@ def run_fixture_check(fixture: Path) -> None:
     stripped = {f: ph.render_pops([u for u in us if u.tag != sh.UNO_TAG]) for f, us in p.files.items()}
     assert any("region_state:UNO is created" in e for e in ph.check_texts(stripped, population, world))
 
-    def refuses(mutate, needle: str) -> None:
+    def planned(mutate) -> ph.Plan:
         tmp = Path(tempfile.mkdtemp())
         try:
             shutil.copytree(fixture / "config", tmp / "config")
             mutate(tmp / "config")
-            ph.plan(ph.load_config(tmp / "config"), world)
+            return ph.plan(ph.load_config(tmp / "config"), world)
+        finally:
+            shutil.rmtree(tmp, ignore_errors=True)
+
+    def refuses(mutate, needle: str) -> None:
+        try:
+            planned(mutate)
         except ph.PopHistoryError as exc:
             assert needle in str(exc), f"expected {needle!r} in {exc}"
         else:
             raise AssertionError(f"expected a PopHistoryError containing {needle!r}")
-        finally:
-            shutil.rmtree(tmp, ignore_errors=True)
 
     def edit(name, fn):
         def go(d: Path) -> None:
@@ -249,6 +257,59 @@ def run_fixture_check(fixture: Path) -> None:
             "unclaimed_pop: culture")
     refuses(edit("calibration.json", lambda d: d["unclaimed_pop"].__setitem__("size", 5)), "min_pop_size")
     refuses(edit("population.json", lambda d: d["tags"].pop("UNO")), "no population.json entry")
+
+    # religion splits (#8492): REI and MID move 25% of their default-faith middenlanders to Sigmar
+    def pops_of(u: ph.Unit) -> list[tuple]:
+        return [(x.culture, x.religion, x.pop_type, x.size) for x in u.pops]
+
+    # homeland path: REI's 11,112 middenlanders in GAMMA split 8,334 / 2,778; the reiklanders do not move
+    assert pops_of(by[("STATE_GAMMA", "REI")]) == [
+        ("reiklander", None, None, 22223), ("middenlander", None, None, 8334),
+        ("middenlander", "cult_of_sigmar", None, 2778)], pops_of(by[("STATE_GAMMA", "REI")])
+    # add-row path, explicit default-faith entry and merge: ZETA/MID base middenlander 968 -> 726/242, the
+    # explicit cult_of_ulric (default) entry 75 -> 56/19, both Sigmar parts merge with the explicit 450
+    assert pops_of(by[("STATE_ZETA", "MID")]) == [
+        ("middenlander", None, None, 782), ("middenlander", "cult_of_sigmar", None, 711)], \
+        pops_of(by[("STATE_ZETA", "MID")])
+    assert p.split_moved == {("REI", "middenlander", "cult_of_sigmar"): 2778,
+                             ("MID", "middenlander", "cult_of_sigmar"): 2251 + 242 + 19}, p.split_moved
+    assert not any("religion_splits" in w for w in p.warnings), p.warnings
+    # without the rule: every other pop identical, each unit's middenlander total equal
+    plain = planned(edit("state_overrides.json", lambda d: d.pop("religion_splits")))
+    assert not plain.split_moved
+    plain_by = {(u.key, u.tag): u for u in plain.units}
+    assert set(plain_by) == set(by)
+    for k, u in by.items():
+        v = plain_by[k]
+        assert [x for x in pops_of(u) if x[0] != "middenlander"] == \
+            [x for x in pops_of(v) if x[0] != "middenlander"], k
+        assert sum(x.size for x in u.pops if x.culture == "middenlander") == \
+            sum(x.size for x in v.pops if x.culture == "middenlander"), k
+        assert (u.allot, u.skipped, u.dropped) == (v.allot, v.skipped, v.dropped), k
+    # share 100 is allowed: the whole culture moves, no empty default pop is emitted
+    whole = planned(edit("state_overrides.json", lambda d: d["religion_splits"][1].__setitem__("share", 100)))
+    whole_zeta = next(u for u in whole.units if (u.key, u.tag) == ("STATE_ZETA", "MID"))
+    assert pops_of(whole_zeta) == [("middenlander", "cult_of_sigmar", None, 1493)], pops_of(whole_zeta)
+    # warnings: MID has no halfling (rule unused); REI holds halflings with no rule of its own
+    warned = planned(edit("state_overrides.json", lambda d: d["religion_splits"].append(
+        {"tags": ["MID"], "culture": "halfling", "religion": "cult_of_sigmar", "share": 10,
+         "source": "fixture", "why": "no halflings in MID"}))).warnings
+    assert "religion_splits: c:MID has no halfling people to split; rule unused" in warned, warned
+    assert any(w.startswith("religion_splits: c:REI has ") and "halfling people but no rule" in w
+               for w in warned), warned
+
+    def split_row(**kw):
+        return lambda d: d["religion_splits"][0].update(kw)
+
+    refuses(edit("state_overrides.json", split_row(share=0)), "above 0")
+    refuses(edit("state_overrides.json", lambda d: d["religion_splits"].append(
+        {**d["religion_splits"][0], "religion": "old_faith", "share": 80})), "over 100")
+    refuses(edit("state_overrides.json", split_row(religion="cult_of_ulric")), "culture default")
+    refuses(edit("state_overrides.json", lambda d: d["religion_splits"].append(dict(d["religion_splits"][0]))),
+            "twice")
+    refuses(edit("state_overrides.json", split_row(religion="nowhere")), "not defined")
+    refuses(edit("state_overrides.json", split_row(culture="high_elf")), "not defined")
+    refuses(edit("state_overrides.json", split_row(tags=["ZZZ"])), "country definition")
     # a stale emitted file is caught by check_texts
     bad = dict(pops)
     first = next(f for f, t in pops.items() if "POPS" in t)

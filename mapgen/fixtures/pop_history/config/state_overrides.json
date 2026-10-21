@@ -59,5 +59,27 @@
     }
    ]
   }
+ ],
+ "religion_splits": [
+  {
+   "tags": [
+    "REI"
+   ],
+   "culture": "middenlander",
+   "religion": "cult_of_sigmar",
+   "share": 25,
+   "source": "fixture",
+   "why": "homeland path: REI's middenlanders in STATE_GAMMA"
+  },
+  {
+   "tags": [
+    "MID"
+   ],
+   "culture": "middenlander",
+   "religion": "cult_of_sigmar",
+   "share": 25,
+   "source": "fixture",
+   "why": "add-row path in STATE_ZETA: the base, the explicit default-faith entry and the merge with the explicit Sigmar entry"
+  }
  ]
 }

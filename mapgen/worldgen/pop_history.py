@@ -38,6 +38,13 @@ Rules
   and reported (never emitted); ``slaves`` is emitted only where the owner's
   slavery law (``mapgen/config/country_history``) allows it and that data is
   present. A pop under ``min_pop_size`` is dropped and reported.
+* ``state_overrides.json`` ``religion_splits`` move a percent of one culture's
+  default-faith people in a tag to another religion. The split runs after the
+  per-entry rounding, inside each already-rounded entry (largest remainder), so
+  every other culture's pops are untouched and the culture's per-unit total is
+  preserved. Undefined ids, a tag with no definition, a religion equal to the
+  culture's default and shares over 100 are hard errors; a rule that finds no
+  people, and a tag holding a ruled culture with no rule of its own, are warnings.
 * ``UNO`` (the owner of unowned and out-of-scope land, #6391) is not a start nation
   and has no calibration total. Each (state, ``UNO``) pair instead gets one fixed
   pop, ``calibration.json`` ``unclaimed_pop`` (``culture``, ``size``; #6395), so no
@@ -200,6 +207,8 @@ class Config:
     population: dict[str, dict]            # tag -> {wealth, literacy, source, why}
     weights: dict[str, dict]               # state key -> {area_px, arable_milli, cities, canon_cities}
     unclaimed: dict | None = None          # calibration.json unclaimed_pop: {culture, size, source, why}
+    # (tag, culture) -> [{religion, share (Fraction, percent of the culture's people), source, why}]
+    religion_splits: dict[tuple[str, str], list[dict]] = field(default_factory=dict)
 
 
 def _need(d: dict, keys: tuple[str, ...], where: str) -> None:
@@ -278,6 +287,29 @@ def load_config(config_dir: Path) -> Config:
         if e["mode"] not in ("add", "replace"):
             raise PopHistoryError(f"state_overrides.json {e['key']}: mode must be 'add' or 'replace'")
 
+    splits: dict[tuple[str, str], list[dict]] = {}
+    seen_splits: set[tuple[str, str, str]] = set()
+    for n, r in enumerate(so.get("religion_splits", [])):
+        where = f"state_overrides.json religion_splits {n}"
+        _need(r, ("tags", "culture", "religion", "share", "source", "why"), where)
+        if not isinstance(r["tags"], list) or not r["tags"]:
+            raise PopHistoryError(f"{where}: 'tags' must be a non-empty list")
+        s = frac(r["share"], f"{where} share")
+        if not 0 < s <= 100:
+            raise PopHistoryError(f"{where}: share {r['share']} must be above 0 and at most 100")
+        for tag in r["tags"]:
+            k = (tag, r["culture"], r["religion"])
+            if k in seen_splits:
+                raise PopHistoryError(f"{where}: c:{tag} {r['culture']} -> {r['religion']} listed twice")
+            seen_splits.add(k)
+            splits.setdefault((tag, r["culture"]), []).append(
+                {"religion": r["religion"], "share": s, "source": r["source"], "why": r["why"]})
+    for (tag, cu), rules in splits.items():
+        total = sum((x["share"] for x in rules), Fraction(0))
+        if total > 100:
+            raise PopHistoryError(f"state_overrides.json religion_splits: c:{tag} {cu} shares sum to "
+                                  f"{float(total)}, over 100")
+
     pop = _expand_groups(rd("population.json"), ("wealth", "literacy", "source", "why"), "population.json")
     for tag, e in pop.items():
         if e["wealth"] not in WEALTH_LEVELS:
@@ -292,7 +324,7 @@ def load_config(config_dir: Path) -> Config:
         city_boost=frac(dist.get("city_boost", "0"), "distribution.json city_boost"),
         canon_city_boost=frac(dist.get("canon_city_boost", "0"), "distribution.json canon_city_boost"),
         dist_overrides=ovr, tag_mixes=tag_mixes, state_mixes=states, population=pop,
-        weights=w.get("states", {}), unclaimed=unclaimed,
+        weights=w.get("states", {}), unclaimed=unclaimed, religion_splits=splits,
     )
 
 
@@ -344,6 +376,7 @@ class Plan:
     skipped_owners: list[tuple[str, str]]      # (state key, tag): owner has no definition
     unowned_overrides: list[str]
     warnings: list[str]
+    split_moved: dict[tuple[str, str, str], int] = field(default_factory=dict)   # (tag, culture, religion) -> people
 
 
 def _anchors(world: World) -> dict[str, list[int]]:
@@ -516,12 +549,46 @@ def plan(cfg: Config, world: World) -> Plan:
             if (u.key, u.tag) in smix:
                 raise PopHistoryError(f"state_overrides.json: {u.key}/{u.tag} has two overrides")
             smix[(u.key, u.tag)] = o
+    # religion splits: a deliberate authoring step, so every id must resolve (no silent skip)
+    for (tag, cu), rules in sorted(cfg.religion_splits.items()):
+        where = f"state_overrides.json religion_splits c:{tag} {cu}"
+        if tag not in world.countries:
+            raise PopHistoryError(f"{where}: c:{tag} has no country definition")
+        if cu not in world.cultures:
+            raise PopHistoryError(f"{where}: culture '{cu}' is not defined in this mod")
+        for r in rules:
+            if r["religion"] not in world.religions:
+                raise PopHistoryError(f"{where}: religion '{r['religion']}' is not defined in this mod")
+            if r["religion"] == world.cultures[cu]:
+                raise PopHistoryError(f"{where}: religion '{r['religion']}' equals the culture default; "
+                                      "the unsplit remainder already follows it")
+    split_cultures = {cu for _, cu in cfg.religion_splits}
+    split_moved = {(t, cu, r["religion"]): 0 for (t, cu), rs in cfg.religion_splits.items() for r in rs}
+    split_pool: dict[tuple[str, str], int] = {}    # (tag, culture) -> default-faith people of a ruled culture
     slavery = world.slavery
     for u in units:
         entries = _mix_shares(u, cfg, world, smix.get((u.key, u.tag)))
         sizes = largest_remainder(u.allot, [p for _, p in entries]) if u.allot else [0] * len(entries)
-        merged: dict[tuple, Pop] = {}
+        # split after rounding, inside each entry's integer: other cultures never move
+        parts: list[tuple[dict, int]] = []
         for (e, _), size in zip(entries, sizes):
+            cu, rel = e["culture"], e.get("religion")
+            if cu not in split_cultures or (rel is not None and rel != world.cultures.get(cu)):
+                parts.append((e, size))
+                continue
+            split_pool[(u.tag, cu)] = split_pool.get((u.tag, cu), 0) + size
+            rules = cfg.religion_splits.get((u.tag, cu), [])
+            if not rules:
+                parts.append((e, size))
+                continue
+            rest = 100 - sum((r["share"] for r in rules), Fraction(0))
+            cut = largest_remainder(size, [rest] + [r["share"] for r in rules])
+            parts.append((e, cut[0]))
+            for r, n in zip(rules, cut[1:]):
+                parts.append(({**e, "religion": r["religion"]}, n))
+                split_moved[(u.tag, cu, r["religion"])] += n
+        merged: dict[tuple, Pop] = {}
+        for e, size in parts:
             cu, rel, pt = e["culture"], e.get("religion"), e.get("pop_type")
             reason = None
             if cu not in world.cultures:
@@ -550,6 +617,12 @@ def plan(cfg: Config, world: World) -> Plan:
             (u.dropped if p.size < cfg.min_pop else u.pops).append(p)
         u.pops.sort(key=lambda p: (-p.size, p.culture, p.religion or "", p.pop_type or ""))
         u.dropped.sort(key=lambda p: (p.culture, p.religion or "", p.pop_type or ""))
+    for tag, cu in sorted(cfg.religion_splits):
+        if not split_pool.get((tag, cu)):
+            warnings.append(f"religion_splits: c:{tag} has no {cu} people to split; rule unused")
+    for (tag, cu), n in sorted(split_pool.items()):
+        if n and (tag, cu) not in cfg.religion_splits:
+            warnings.append(f"religion_splits: c:{tag} has {n:,} {cu} people but no rule (all default faith)")
 
     # --- unclaimed land (UNO): one fixed pop per state, outside calibration ---
     if uno_units:
@@ -585,7 +658,7 @@ def plan(cfg: Config, world: World) -> Plan:
     for tag in cfg.population:
         if tag not in tag_units:
             warnings.append(f"population.json: c:{tag} owns no emitted state; entry unused")
-    return Plan(units, files, population, skipped_owners, sorted(set(unowned)), warnings)
+    return Plan(units, files, population, skipped_owners, sorted(set(unowned)), warnings, split_moved)
 
 
 #: literacy bands per tech tier (a warning, not an error: a deliberate exception carries a why)
@@ -794,6 +867,7 @@ def summary(p: Plan, cfg: Config) -> str:
     lines += [f"  {n:>10,}  {r}" for r, n in sorted(by.items())]
     lines.append(f"dropped pops under {cfg.min_pop}: {len(dropped)}, {sum(d.size for _, d in dropped):,} people")
     lines += [f"  {u.key}/{u.tag}: {d.culture} {d.size}" for u, d in dropped]
+    lines.append(f"religion splits: {len(p.split_moved)} rules, {sum(p.split_moved.values()):,} people moved")
     lines += [f"warning: {w}" for w in p.warnings]
     return "\n".join(lines)
 
