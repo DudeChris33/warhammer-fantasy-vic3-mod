@@ -89,7 +89,27 @@ on_five_year_pulse_country = {}
 on_decade_pulse_country = {}
 
 # Only fires for countries with Elections enabled
-on_monthly_pulse_country_elections = {}
+# PARTIAL PORT (#6640) - vanilla 00_code_on_actions.txt:1921, effect body verbatim.
+# Dropped: the on_actions = { elections_monthly_events } child. events/ is blanked via
+# replace_paths and this mod defines no elections_monthly_events on_action, so it would
+# dangle. Prunes vanilla's random monthly election events.
+# Not ported: vanilla's electoral-confidence block in on_game_started_after_lobby (:38-78).
+# Its GBR/SWI/NOR/BEL/FRA/USA/NET/BRZ branches are real-world tags, and its else branch is
+# this hook one pulse earlier.
+# This hook initializes countries that start with a voting franchise; franchise laws adopted
+# mid-game initialize in their own on_activate (common/laws/00_distribution_of_power.txt).
+on_monthly_pulse_country_elections = {
+	effect = {
+		if = {
+			limit = {
+				NOT = {
+					has_variable = electoral_confidence_initialized
+				}
+			}
+			initialize_electoral_confidence = yes
+		}
+	}
+}
 
 on_half_yearly_pulse_country_elections = { }
 on_yearly_pulse_country_elections = { }
