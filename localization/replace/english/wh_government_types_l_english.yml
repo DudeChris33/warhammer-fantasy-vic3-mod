@@ -1,0 +1,56 @@
+﻿l_english:
+ # Government type names, descriptions, ruler titles and transfer-of-power labels in setting voice (#6642).
+ # Overrides of vanilla keys in government_l_english.yml. The governance principle names and the base
+ # gov_corporate_state / gov_social_monarchy / gov_council_* names stay in wh_laws_governance_l_english.yml (#6575).
+
+ # Presidential republics (Elective Principality)
+ gov_technate_presidential:0 "Elective Technocracy"
+ gov_banana_republic:0 "Plantation State"
+ gov_banana_republic_desc:0 "This is a [concept_government_type] where the [concept_country] is ruled by a [Concept('concept_ruler','Dictator')] in league with the great plantation owners, and lives by shipping the produce of their estates abroad.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+ gov_fascist_state:0 "Iron State"
+ gov_fascist_state_desc:0 "This is a [concept_government_type] defined by its adherence to a militant [concept_ideology] of iron order and unquestioning obedience. It is a cruel and dictatorial regime.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+ gov_presidential_dictatorship:0 "Elective Dictatorship"
+ gov_presidential_oligarchy:0 "Elective Oligarchy"
+ gov_presidential_democracy:0 "Elective Principality"
+ gov_presidential_democracy_desc:0 "This is a [concept_government_type] where the [concept_country] is ruled by a [Concept('concept_ruler','$RULER_TITLE_PRESIDENT$')], a prince [Concept('concept_election','$concept_elected$')] to the seat rather than born to it.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+ gov_presidential_single_party_state:0 "Faction State"
+ gov_presidential_single_party_state_desc:0 "This is a [concept_government_type] where the [concept_country] is ruled by a [Concept('concept_ruler','$RULER_TITLE_PRESIDENT$')] whom the members of a single sanctioned faction have [Concept('concept_election','$concept_elected$')] from among their own number.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+
+ # Parliamentary republics (Burgher Republic)
+ gov_technate_parliamentary:0 "Burgher Technocracy"
+ gov_parliamentary_dictatorship:0 "Burgher Dictatorship"
+ gov_parliamentary_oligarchy:0 "Burgher Oligarchy"
+ gov_parliamentary_single_party_state:0 "Faction Republic"
+ gov_parliamentary_democracy:0 "Burgher Republic"
+
+ # Council republics (Free Commune)
+ gov_council_republic_desc:0 "This is a [concept_government_type] where the [concept_country] is ruled by a council of delegates [Concept('concept_election','$concept_elected$')] directly by the craftsmen, laborers and townsfolk of the commune.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+ gov_council_single_party_state_desc:0 "This is a [concept_government_type] where the [concept_country] is ruled by a council [Concept('concept_election','$concept_elected$')] by the craftsmen and laborers of the commune through a single sanctioned faction.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+ gov_cybernetic_state:0 "Technocratic Commune"
+ gov_cybernetic_state_desc:0 "This is a [concept_government_type] where the [concept_country] is ruled by a council of master craftsmen and engineers, appointed by the guild halls and workshops of the commune.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+
+ # Corporate states (Guild State)
+ gov_fascist_corporate_state:0 "Iron State"
+ gov_fascist_corporate_state_desc:0 "$gov_fascist_state_desc$"
+ gov_corporate_state_desc:0 "This is a [concept_government_type] organized around the chartered guilds and orders of the realm, within which the state officially serves as the arbiter between its estates and trades. It is headed by a [Concept('concept_ruler','$RULER_TITLE_PRESIDENT$')] chosen by the enfranchised guilds.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+ gov_technate_corporate:0 "Guild Technocracy"
+ gov_technate_corporate_desc:0 "This is a [concept_government_type] ruled by the [Concept('concept_ruler','$RULER_TITLE_CHIEF_EXECUTIVE$')], a qualified figure entrusted with administration by a board of master engineers drawn from the chartered guilds.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+
+ # Social monarchies (Estates Monarchy). The seven *_fascist names are "$gov_fascist_state$" in vanilla and inherit "Iron State".
+ gov_social_monarchy_desc:0 "This is a [concept_government_type] organized around the estates of the realm, in which the crown officially serves as the arbiter between the nobility, the clergy, the burghers and the guilds."
+ gov_social_monarchy_fascist_desc1:0 "This is a [concept_government_type] organized around the estates of the realm under a creed of iron order, within which the crown officially serves as the arbiter between the estates."
+ gov_social_monarchy_fascist_desc2:0 "while the government is dominated by a militant faction sworn to that creed."
+ gov_social_monarchy_absolutist_desc2:0 "The monarch is understood as the supreme embodiment of the realm and the final arbiter between its estates."
+
+ # Colonial administrations. gov_crown_colony is shadowed by gov_colonial_administration, so this text is not seen in play today.
+ gov_crown_colony_desc:0 "This is a colony of a distant crown, ruled by colonial administrators with limited autonomy.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
+
+ # Ruler titles. Sovereign-Elect also titles the dictatorial variants, keeping vanilla's elective facade.
+ RULER_TITLE_PRESIDENT:0 "Sovereign-Elect"
+ RULER_TITLE_CHIEF_EXECUTIVE:0 "Chief Engineer"
+
+ # Transfer of power
+ transfer_of_power_presidential_elective:0 "Electoral"
+ transfer_of_power_presidential_elective_desc:0 "Under Electoral [concept_transfer_of_power], [Concept('concept_ruler', '$concept_rulers$')] are chosen from the leader of the [concept_interest_group] with the most [concept_clout] at the end of each [concept_election]."
+ transfer_of_power_parliamentary_elective:0 "Assembly"
+ transfer_of_power_parliamentary_elective_desc:0 "Under Assembly [concept_transfer_of_power], [Concept('concept_ruler', '$concept_rulers$')] are chosen from the leader of the [concept_interest_group] in [concept_government_type] with the most [concept_clout]."
