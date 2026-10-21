@@ -168,6 +168,7 @@ Canon-city anchors (`mapgen/config/canon_cities.json`) are read off Chris's cyan
 - **Per-state hand-authored tables** key on the canon state key `STATE_<NAME>` plus the naming anchor (`anchor_x`/`anchor_y`), never the Hilbert STATE number or a province colour — both reshuffle on regen.
 - **LFS.** Seven `map_data/` paths and the three generated DDS under `gfx/map/` are Git-LFS (see `.gitattributes`); a clone needs git-lfs (else 133-byte pointer files) and `core.longpaths` on Windows. Before rewriting history, back up with `git bundle create … --all`, not just a branch.
 - **Symptom.** A coastline regen reporting "0 land regions" or 100% ocean means `--from-fill` was not passed.
+- **Strategic-region errors after a hot deploy (#6572).** `strategicregions.cpp` "missing provinces for a capital" and "has capital outside it, ignoring" on (nearly) every region, with a runtime flood of `has_strategic_region_interest_tier ... Invalid Country or StrategicRegion!`, came from one session (2026-10-02) in which files were deployed while the game was running, and never recurred on a fresh load; hot reload is the leading but unproven cause. Close the game before `deploy.ps1`, relaunch fresh and confirm before counting or filing these errors. Capital-less water and placeholder strategic regions are vanilla-shaped and legal (vanilla `water_strategic_regions.txt` ships 105 regions with no `capital_province`); land-region capital membership is already enforced by the generator and `validate_map.py`.
 
 ## Vanilla map-keyed data overridden
 
