@@ -10,7 +10,6 @@ folders. Conventions and the leave list live in
 | `dds.py` | DDS I/O shared by every generator: read a top mip, write an override with the vanilla file's own header, size, format and mip chain, check one against vanilla |
 | `currency_icons.py` | Replaces the £ painted into vanilla icons with the mod's crown (#6641) |
 | `currency_icons.json` | One recipe per icon; the list of files `currency_icons.py` owns |
-| `law_icons.py` | Rebuilds the two fasces law icons, Guild State (`corporate_state`) and Estates Monarchy (`social_monarchy`), from vanilla art (#6642). Same `--preview DIR` / `--write` / `--check` modes; the preview sheet shows vanilla and new at 256, 64 and 48 px |
 
 ## Running
 
