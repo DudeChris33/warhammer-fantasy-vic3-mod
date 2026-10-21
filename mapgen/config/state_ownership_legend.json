@@ -1703,6 +1703,66 @@
    "proposed": true,
    "note": "proposed: no country definition yet (17_ulthuan family)"
   },
+  "CDU": {
+   "name": "Citadel of Dusk",
+   "color": [
+    81,
+    75,
+    250
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+  },
+  "FDW": {
+   "name": "Fortress of Dawn",
+   "color": [
+    63,
+    81,
+    212
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+  },
+  "TEL": {
+   "name": "Tor Elasor",
+   "color": [
+    54,
+    82,
+    181
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+  },
+  "TOS": {
+   "name": "Tower of the Stars",
+   "color": [
+    146,
+    141,
+    204
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+  },
+  "GCL": {
+   "name": "Gates of Calith",
+   "color": [
+    110,
+    97,
+    250
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+  },
+  "TEH": {
+   "name": "Tor Elithis",
+   "color": [
+    90,
+    117,
+    250
+   ],
+   "proposed": true,
+   "note": "proposed: no country definition yet (17_ulthuan family; High Elf colony, #8444)"
+  },
   "NGD": {
    "name": "Naggarond",
    "color": [

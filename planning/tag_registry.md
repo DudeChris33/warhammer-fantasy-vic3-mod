@@ -31,11 +31,11 @@ Filed by epic #3414 (child #3415).
 - [~] 14 Ind — **DEFERRED** (0 tags; no canon supply in tabletop or Total War — Chris, 2026-08-30)
 - [~] 15 Khuresh — **DEFERRED** (0 tags; near-zero canon, no Total War faction — Chris, 2026-08-30)
 - [~] 16 Nippon — **DEFERRED** (0 tags; only medium-confidence secondary-source names, no Total War faction — Chris, 2026-08-30)
-- [x] 17 Ulthuan (11)
+- [x] 17 Ulthuan (17)
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (19)
 
-**Total: 240 tags** (16 formables, 224 starts) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 247 tags** (16 formables, 231 starts; recounted from the roster rows in #8444) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0), plus the `98_unclaimed` placeholder owner `UNO` (#6391). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -90,7 +90,8 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   `00_norsca`. All are `unrecognized`/`principality`. `GRW` (Gryphon Wood) and `MGL` (Miramar Glade)
   carry provisional names that Chris will redo; the codes stay frozen.
 - **Ogre rows carry `ogre`.** The `ogre` culture now exists (#6379), so every 11 Ogre Kingdoms row
-  takes it in place of `PLACEHOLDER`. The other distant regions keep `PLACEHOLDER`.
+  takes it in place of `PLACEHOLDER`. Likewise every 17 Ulthuan row carries `high_elf` (#8463,
+  #8444). The other distant regions keep `PLACEHOLDER`.
 - **`UNO` = Unclaimed Lands, the decentralized placeholder owner** (board #6391, Chris 2026-10-02).
   It owns every state the start map gives no nation — the drawn Old World's `unowned` wilderness and
   every out-of-scope `placeholder` state — and is **generator-mapped, never painted** (no legend entry;
@@ -153,6 +154,7 @@ BTO
 BVR
 CAL
 CAR
+CDU
 CHQ
 CHR
 CHU
@@ -179,12 +181,14 @@ ERE
 ESS
 EST
 EYB
+FDW
 FSM
 FUC
 FUH
 FYR
 GAS
 GBS
+GCL
 GDO
 GGT
 GHR
@@ -305,6 +309,8 @@ SRT
 STI
 SYL
 TAL
+TEH
+TEL
 THG
 TIL
 TIR
@@ -314,6 +320,7 @@ TLS
 TLX
 TOB
 TON
+TOS
 TPK
 TRA
 TRG
@@ -659,8 +666,11 @@ map showed that wasn't already tagged — the map's other Tilean shields all mat
 (the green Trantine-Hills shield is Trantio's own arms, `TRA`, not a separate realm). Its purple
 color is deliberately off the Tilean ochre/terracotta/sea-green family, matching its own heraldry
 (as `SRT` is off-palette). Two kite shields on the Black Peninsula (near Tor Anrok
-and Monte Castello) were left untagged — High Elf colonies (Chris, 2026-09-06), deferred to the
-future Ulthuan / elven-colonies pass (region 17), not Tilean city-states.
+and Monte Castello) were left untagged — High Elf colonies (Chris, 2026-09-06), not Tilean
+city-states. The #8444 colonies pass (region 17) tagged only the six outposts that are drawn as
+their own states; these two stay **deferred**, because they sit inside states other tags own
+(`STATE_MYRMIDIA_S_COAST`, `GDO`; `STATE_MONTE_CASTELLO`, `DON`) and a tag for them would need a
+border change.
 
 **`MGL` Miramar Glade** (#6373 phase B, 2026-10-01) — a wood-elf glade in the Miramar Hills, filed
 here by the geography of its state; the name is provisional (Chris will redo it). See the wood-elves
@@ -903,33 +913,48 @@ Bei-Sang = unsourced). All PLACEHOLDER culture. (Approved 2026-08-30.)
 > either tabletop or Total War; Nippon has only medium-confidence secondary-source names. All three are
 > left for a future epic rather than padded with invented or low-confidence tags. (Chris, 2026-08-30.)
 
-### 17 ULTHUAN (High Elves, PLACEHOLDER) — 11 tags; ULT formable
+### 17 ULTHUAN (high_elf) — 17 tags; ULT formable
 
 The Ten Kingdoms of Ulthuan — confirmed complete canon (high confidence). ULT is the Phoenix King
 reuniting them. Nagarythe is kept as a normal High Elf kingdom (Shadow Warriors era, post-Sundering).
-All PLACEHOLDER culture (High Elf cultures are a future epic). (Approved 2026-08-30.)
+(Approved 2026-08-30.) Every row carries `high_elf` (Asur), authored in #8463.
+
+**High Elf colonies** (#8444, Chris 2026-10-18) — six outposts named on
+`sources/originals/High_Elf_Outposts.JPG` (Chris's source; `mapgen/SOURCES.md`), one tag per outpost,
+each drawn as its own state(s). Filed here, not by the geography of their states (09 Southlands,
+15 Khuresh, 19 Lustria), under the own-region exception (`.claude/rules/peoples.md`). All are
+`colonial`/`principality`, Lothern's colonies at start. The map's "Tower of Stars" is the
+`STATE_TOWER_OF_THE_STARS` outpost. Not tagged: the Tower of the Sun (its island is out-of-scope
+placeholder land) and the two Black Peninsula outposts (see 05 Southern Realms).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
-| ULT | `17_ulthuan` | Ulthuan | formable | `PLACEHOLDER` | Lothern | the Phoenix King's realm united |
-| LOT | `17_ulthuan` | Eataine (Lothern) | start | `PLACEHOLDER` | Lothern | realm of the Sea Lords; the capital |
-| CAL | `17_ulthuan` | Caledor | start | `PLACEHOLDER` | Tor Caled | dragon princes |
-| SAP | `17_ulthuan` | Saphery | start | `PLACEHOLDER` | Saphery | land of mages |
-| NGY | `17_ulthuan` | Nagarythe | start | `PLACEHOLDER` | — | the Shadowlands (Shadow Warriors) |
-| TIR | `17_ulthuan` | Tiranoc | start | `PLACEHOLDER` | Tor Anroc | the drowned kingdom / charioteers |
-| CHR | `17_ulthuan` | Chrace | start | `PLACEHOLDER` | Tor Achare | home of the White Lions |
-| AVL | `17_ulthuan` | Avelorn | start | `PLACEHOLDER` | — | the Everqueen's realm |
-| YVR | `17_ulthuan` | Yvresse | start | `PLACEHOLDER` | Tor Yvresse | the misty realm |
-| ELL | `17_ulthuan` | Ellyrion | start | `PLACEHOLDER` | Tor Elyr | horse-country |
-| COT | `17_ulthuan` | Cothique | start | `PLACEHOLDER` | — | eastern coastal realm |
+| ULT | `17_ulthuan` | Ulthuan | formable | `high_elf` | Lothern | the Phoenix King's realm united |
+| LOT | `17_ulthuan` | Eataine (Lothern) | start | `high_elf` | Lothern | realm of the Sea Lords; the capital |
+| CAL | `17_ulthuan` | Caledor | start | `high_elf` | Tor Caled | dragon princes |
+| SAP | `17_ulthuan` | Saphery | start | `high_elf` | Saphery | land of mages |
+| NGY | `17_ulthuan` | Nagarythe | start | `high_elf` | — | the Shadowlands (Shadow Warriors) |
+| TIR | `17_ulthuan` | Tiranoc | start | `high_elf` | Tor Anroc | the drowned kingdom / charioteers |
+| CHR | `17_ulthuan` | Chrace | start | `high_elf` | Tor Achare | home of the White Lions |
+| AVL | `17_ulthuan` | Avelorn | start | `high_elf` | — | the Everqueen's realm |
+| YVR | `17_ulthuan` | Yvresse | start | `high_elf` | Tor Yvresse | the misty realm |
+| ELL | `17_ulthuan` | Ellyrion | start | `high_elf` | Tor Elyr | horse-country |
+| COT | `17_ulthuan` | Cothique | start | `high_elf` | — | eastern coastal realm |
+| CDU | `17_ulthuan` | Citadel of Dusk | start | `high_elf` | Citadel of Dusk | `principality`/`colonial`; High Elf outpost off southern Lustria, Lothern's colony; named on `High_Elf_Outposts.JPG` (#8444) |
+| FDW | `17_ulthuan` | Fortress of Dawn | start | `high_elf` | Fortress of Dawn | `principality`/`colonial`; High Elf outpost off the southern Southlands, Lothern's colony; named on `High_Elf_Outposts.JPG` (#8444) |
+| TEL | `17_ulthuan` | Tor Elasor | start | `high_elf` | Tor Elasor | `principality`/`colonial`; High Elf outpost in the southern ocean east of the Southlands, Lothern's colony; named on `High_Elf_Outposts.JPG` (#8444) |
+| TOS | `17_ulthuan` | Tower of the Stars | start | `high_elf` | Tower of the Stars | `principality`/`colonial`; High Elf outpost and its archipelago east of the Southlands, Lothern's colony; named on `High_Elf_Outposts.JPG` ("Tower of Stars", #8444) |
+| GCL | `17_ulthuan` | Gates of Calith | start | `high_elf` | Gates of Calith | `principality`/`colonial`; High Elf outpost on the southern cape of Khuresh, Lothern's colony; named on `High_Elf_Outposts.JPG` (#8444) |
+| TEH | `17_ulthuan` | Tor Elithis | start | `high_elf` | Tor Elithis | `principality`/`colonial`; High Elf outpost on the Lost Isles of Elithis, Lothern's colony; named on `High_Elf_Outposts.JPG` (#8444) |
 
 ### 18 NAGGAROTH (Dark Elves, PLACEHOLDER) — 7 tags; NAG formable
 
 The six Black Cities of Naggaroth + NAG formable (Malekith unites Naggaroth under the Witch King). All
 PLACEHOLDER culture (Dark Elf cultures are a future epic). **Open question — Athel Toralien & elven
-colonies:** Athel Toralien was dropped here; it and other Sundering-era/Old-World elf colonies (High &
-Dark) are deferred to a future "elven colonies" pass, likely their own cross-region treatment rather
-than one Naggaroth row. (Approved 2026-08-30.)
+colonies:** Athel Toralien was dropped here; it and the other Sundering-era/Old-World elf colonies stay
+deferred, as do all Dark Elf colonies. The High Elf colonies pass (#8444) tagged only the six drawn
+outposts, filed under 17 Ulthuan (`CDU`, `FDW`, `TEL`, `TOS`, `GCL`, `TEH`); the Tower of the Sun,
+Tor Anrok and Monte Castello stay untagged. (Approved 2026-08-30.)
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
