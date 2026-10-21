@@ -14,9 +14,9 @@ POPS = {
 	}
 	s:STATE_BLIGHTED_MARSHES = {
 		region_state:XSG = {
-			create_pop = { culture = mountain_orc size = 50000 }
-			create_pop = { culture = skaven size = 50000 }
-			create_pop = { culture = tilean size = 50000 }
+			create_pop = { culture = skaven size = 75000 }
+			create_pop = { culture = mountain_orc size = 37500 }
+			create_pop = { culture = tilean size = 37500 }
 		}
 	}
 	s:STATE_CANTABRIO_ROAD = {
