@@ -22,6 +22,7 @@ OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else HERE / "traced_climate.png"
 LEGEND = (2040, 0, 2471, 400)
 
 INK_DROP, INK_MAX = 45, 130   # ink: this much darker than the local fill, and dark
+DARK_ABS = 60
 SOLID_COMP = 30      # 8-connected ink pieces this big are solid strokes; less = dashes
 DASH_BRIDGE = 3
 SNAP = 7             # thin endpoints reach to a line within this many px
@@ -87,7 +88,8 @@ river = segment.drop_small_components(river, 60, wrap_x=False)
 river = ndi.binary_dilation(river, disk(RIVER_GROW))
 
 bg = ndi.median_filter(V, 11)
-ink = (V < np.minimum(bg - INK_DROP, INK_MAX)) & land & ~river
+# dark fills (jungle olive) leave little headroom: below DARK_ABS is ink whatever the fill
+ink = ((V < np.minimum(bg - INK_DROP, INK_MAX)) | ((V < DARK_ABS) & (V < bg - 22))) & land & ~river
 line = ink
 
 
