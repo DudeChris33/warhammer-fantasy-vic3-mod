@@ -17,6 +17,7 @@ HERE = ROOT / "scratchpad" / "ie_borders"   # intermediates, git-ignored
 HERE.mkdir(parents=True, exist_ok=True)
 import json
 OVERRIDES = ROOT / "mapgen" / "config" / "ie_border_overrides.json"
+# OUT (.png) is written alongside a same-named .ora: layers magenta, red, parchment
 OUT = Path(sys.argv[1]) if len(sys.argv) > 1 else ROOT / "sources" / "tww3_ie_parchment - state_borders.png"
 
 CONFIRM_V = 165      # a climate segment must have parchment ink this dark beside it
@@ -278,10 +279,51 @@ thick, thin = apply_overrides(thick, thin)
 np.save(HERE / "cand_missing.npy", cand & ~ndi.binary_dilation(thick | thin, disk(5)))
 
 np.savez_compressed(HERE / "skeletons.npz", thick=thick, thin=thin)
+thin_px = ndi.binary_dilation(thin, disk(PAINT_THIN))
+thick_px = ndi.binary_dilation(thick, disk(PAINT_THICK))
 out = master.copy()
-out[ndi.binary_dilation(thin, disk(PAINT_THIN))] = RED
-out[ndi.binary_dilation(thick, disk(PAINT_THICK))] = MAGENTA
+out[thin_px] = RED
+out[thick_px] = MAGENTA
 Image.fromarray(out).save(OUT)
+
+
+def write_ora(path, layers, merged):
+    """OpenRaster, top layer first: (name, RGBA array) pairs plus the flattened image."""
+    import io
+    import zipfile
+
+    def png(a):
+        buf = io.BytesIO()
+        Image.fromarray(a).save(buf, "PNG")
+        return buf.getvalue()
+
+    h, w = merged.shape[:2]
+    stack = "".join(f'<layer name="{n}" src="data/{n}.png" x="0" y="0" opacity="1.0" visibility="visible"/>'
+                    for n, _ in layers)
+    thumb = Image.fromarray(merged)
+    thumb.thumbnail((256, 256))
+    tbuf = io.BytesIO()
+    thumb.save(tbuf, "PNG")
+    with zipfile.ZipFile(path, "w", zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("mimetype", b"image/openraster", compress_type=zipfile.ZIP_STORED)
+        zf.writestr("stack.xml", '<?xml version="1.0" encoding="UTF-8"?>\n'
+                                 f'<image version="0.0.3" w="{w}" h="{h}"><stack>{stack}</stack></image>')
+        for n, a in layers:
+            zf.writestr(f"data/{n}.png", png(a))
+        zf.writestr("mergedimage.png", png(merged))
+        zf.writestr("Thumbnails/thumbnail.png", tbuf.getvalue())
+
+
+def line_layer(mask, rgb):
+    a = np.zeros(mask.shape + (4,), np.uint8)
+    a[mask] = (*rgb, 255)
+    return a
+
+
+parch = np.dstack([master, np.full(master.shape[:2], 255, np.uint8)])
+write_ora(OUT.with_suffix(".ora"),
+          [("magenta", line_layer(thick_px, MAGENTA)), ("red", line_layer(thin_px, RED)),
+           ("parchment", parch)], out)
 Image.fromarray(out).resize((1851, 1440), Image.LANCZOS).save(HERE / "traced_half.png")
 for name, (x0, y0) in {"crop_empire": (1200, 900), "crop_cathay": (2900, 1100),
                        "crop_lustria": (100, 1700), "crop_naggaroth": (0, 300),
