@@ -31,7 +31,7 @@ KIS = {
 	capital = STATE_THE_DOBRYRION # Kislev city, held by KSV at start
 }
 
-################ KSV — Kislev; the capital oblast and the Tzarina's seat ################
+################ KSV — Kislev; the capital oblast and the Tzar's seat ################
 
 KSV = {
 	color = { 122 146 178 }

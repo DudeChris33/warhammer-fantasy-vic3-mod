@@ -8,7 +8,7 @@
       "lawgroup_bureaucracy": "law_appointed_bureaucrats",
       "lawgroup_church_and_state": "law_state_religion",
       "lawgroup_citizenship": "law_subjecthood",
-      "lawgroup_distribution_of_power": "law_landed_voting",
+      "lawgroup_distribution_of_power": "law_oligarchy",
       "lawgroup_governance_principles": "law_monarchy",
       "lawgroup_internal_security": "law_no_home_affairs",
       "lawgroup_navy_model": "law_merchant_navy",
@@ -41,14 +41,13 @@
       "institution_schools": 1,
       "institution_health_system": 1
     },
-    "next_election": "2504.1.1",
-    "expected_government_type": "gov_constitutional_principality",
+    "expected_government_type": "gov_principality",
     "suggested_ig_names": {
       "ig_landowners": "Elector Counts and Nobility",
       "ig_devout": "Cult of Sigmar"
     },
-    "source": "canon: WFB 8e Empire army book; WH: The Old World (2023+) Empire background (Emperor elected by the Electors; Sigmar the state cult; Imperial State Troops)",
-    "why": "An electoral aristocracy (landed voting) under a hereditary Elector Count, Sigmarite state cult, provincial militias (state troops), Shallyan hospices, and gunpowder-plus-guild tech at tier 3"
+    "source": "canon: WFB 8e Empire army book; WH: The Old World (2023+) Empire background (hereditary Elector Counts rule their provinces with their nobles; Sigmar the state cult; Imperial State Troops). The Emperor's election is gap #2 in README.md, not modelled",
+    "why": "A hereditary Elector Count ruling with his nobles (oligarchy, no provincial election: the only Imperial election is the Emperor's), Sigmarite state cult, provincial militias (state troops), Shallyan hospices, and gunpowder-plus-guild tech at tier 3"
   },
   "profiles": {
     "chaos_warband": {
@@ -57,7 +56,6 @@
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_citizenship": "law_national_supremacy",
-        "lawgroup_distribution_of_power": "law_oligarchy",
         "lawgroup_trade_policy": "law_isolationism",
         "lawgroup_taxation": "law_consumption_based_taxation",
         "lawgroup_policing": "law_no_police",
@@ -73,11 +71,9 @@
       ],
       "tax_level": "low",
       "institutions": {},
-      "expected_government_type": "gov_principality",
       "suggested_ig_names": {
         "ig_devout": "Cult of Nurgle"
       },
-      "next_election": null,
       "source": "canon: WFB 8e Warriors of Chaos; WH: The Old World (Brass Keep held by Nurgle warbands since 2302 IC)",
       "why": "A fortress held by a Chaos warband is a tribal raiding host, not an Imperial province"
     },
@@ -108,8 +104,7 @@
         "ig_devout": "Grey Seers"
       },
       "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
-      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source",
-      "next_election": null
+      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
     },
     "wood_elf_realm": {
       "tech_tier": 6,
@@ -117,7 +112,6 @@
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_citizenship": "law_national_supremacy",
-        "lawgroup_distribution_of_power": "law_oligarchy",
         "lawgroup_education_system": "law_no_schools",
         "lawgroup_health_system": "law_no_health_system",
         "lawgroup_labour_associations": "law_combination_acts",
@@ -136,10 +130,8 @@
         "ig_rural_folk": "Glade Kin",
         "ig_devout": "Spellsingers and Waystalkers"
       },
-      "next_election": null,
       "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
-      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)",
-      "expected_government_type": "gov_principality"
+      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)"
     }
   },
   "tags": {
@@ -154,12 +146,20 @@
     "CRB": {
       "confidence": "low",
       "note": "Baseline unchanged: Middenland free city on the Reik.",
-      "expected_government_type": "gov_constitutional_county",
+      "expected_government_type": "gov_county",
       "justify": {
         "expected_government_type": {
           "source": "derived",
-          "why": "Follows from the tag's laws at city-state tier."
+          "why": "Follows from the tag's laws at county tier."
+        },
+        "suggested_ig_names": {
+          "source": "canon: WFB 8e Empire army book (Middenheim, city of Ulric; Middenland is Ulric's heartland)",
+          "why": "Ulric, not Sigmar, is the province's dominant cult."
         }
+      },
+      "suggested_ig_names": {
+        "ig_landowners": "Elector Counts and Nobility",
+        "ig_devout": "Cult of Ulric"
       }
     },
     "GRW": {
@@ -279,18 +279,31 @@
         "expected_government_type": {
           "source": "inferred",
           "why": "Republic with a franchise."
+        },
+        "next_election": {
+          "source": "inferred",
+          "why": "Starting elections are spread over four dates (REM, MAR, MOO, VER) so they do not fall on one day; #6640 governs how they run."
         }
-      }
+      },
+      "next_election": "2503.4.1"
     },
     "MID": {
       "confidence": "high",
-      "note": "Middenheim/Ulric: state cult really is Ulric, but religion is not modelled in history data.",
-      "expected_government_type": "gov_constitutional_grand_principality",
+      "note": "Middenheim, city of Ulric: the province's devout interest group is the Cult of Ulric.",
+      "expected_government_type": "gov_grand_principality",
       "justify": {
         "expected_government_type": {
           "source": "derived",
           "why": "Follows from the tag's laws at grand_principality tier."
+        },
+        "suggested_ig_names": {
+          "source": "canon: WFB 8e Empire army book (Middenheim, city of Ulric; Middenland is Ulric's heartland)",
+          "why": "Ulric, not Sigmar, is the province's dominant cult."
         }
+      },
+      "suggested_ig_names": {
+        "ig_landowners": "Elector Counts and Nobility",
+        "ig_devout": "Cult of Ulric"
       }
     },
     "MOO": {
@@ -303,7 +316,8 @@
         "lawgroup_army_model": "law_peasant_levies",
         "lawgroup_education_system": "law_no_schools",
         "lawgroup_health_system": "law_no_health_system",
-        "lawgroup_policing": "law_no_police"
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_distribution_of_power": "law_landed_voting"
       },
       "ruling_igs": [
         "ig_rural_folk",
@@ -350,8 +364,17 @@
         "expected_government_type": {
           "source": "inferred",
           "why": "Republic with a franchise."
+        },
+        "laws.lawgroup_distribution_of_power": {
+          "source": "canon: WFB Empire (the Moot is led by an Elder chosen from village elders; sends a vote to the Imperial election)",
+          "why": "The Elder is chosen by the village elders (landed voting), pinned on the tag so it does not follow the Empire baseline."
+        },
+        "next_election": {
+          "source": "inferred",
+          "why": "Starting elections are spread over four dates (REM, MAR, MOO, VER) so they do not fall on one day; #6640 governs how they run."
         }
-      }
+      },
+      "next_election": "2504.1.1"
     },
     "NLD": {
       "confidence": "medium",
@@ -374,7 +397,7 @@
     "REI": {
       "confidence": "high",
       "note": "Home of Altdorf, the Imperial capital; the Emperor is its Elector Count.",
-      "expected_government_type": "gov_constitutional_grand_principality",
+      "expected_government_type": "gov_grand_principality",
       "justify": {
         "expected_government_type": {
           "source": "derived",
@@ -402,7 +425,8 @@
           "source": "inferred",
           "why": "Tier 4 has no medical_degrees for Shallyan hospices."
         }
-      }
+      },
+      "note": "Claimant: Solland was destroyed (1707 IC) and owns no land at start."
     },
     "STI": {
       "confidence": "medium"
@@ -411,20 +435,14 @@
       "confidence": "low",
       "tech_tier": 4,
       "laws": {
-        "lawgroup_distribution_of_power": "law_oligarchy",
         "lawgroup_army_model": "law_professional_army",
         "lawgroup_health_system": "law_no_health_system"
       },
       "expected_government_type": "gov_grand_principality",
-      "next_election": null,
       "justify": {
         "tech_tier": {
           "source": "inferred",
           "why": "Cut off and terrorised by the von Carsteins next door."
-        },
-        "laws.lawgroup_distribution_of_power": {
-          "source": "canon: WFB 8e Vampire Counts (Sylvania stripped of its Elector vote; human remnants ruled by fear)",
-          "why": "No functioning Landtag."
         },
         "laws.lawgroup_army_model": {
           "source": "inferred",
@@ -437,16 +455,22 @@
         "expected_government_type": {
           "source": "derived",
           "why": "Follows from the tag's laws at grand_principality tier."
-        },
-        "next_election": {
-          "source": "derived",
-          "why": "Elections exist only where a voting-franchise law is active."
         }
       }
     },
     "TAL": {
       "confidence": "medium",
-      "note": "Talabheim, the Eye of the Empire, fortified city in a crater."
+      "note": "Talabheim, the Eye of the Empire, fortified city in a crater.",
+      "suggested_ig_names": {
+        "ig_landowners": "Elector Counts and Nobility",
+        "ig_devout": "Cults of Taal and Sigmar"
+      },
+      "justify": {
+        "suggested_ig_names": {
+          "source": "inferred (unverified): Talabheim as the centre of the cult of Taal is from memory of WFRP 2e Sigmar's Heirs",
+          "why": "Taal's cult is strong in Talabecland beside Sigmar."
+        }
+      }
     },
     "VSY": {
       "confidence": "high",
@@ -470,7 +494,6 @@
       ],
       "tax_level": "low",
       "institutions": {},
-      "next_election": null,
       "expected_government_type": "gov_absolute_kingdom",
       "justify": {
         "tech_tier": {
@@ -533,10 +556,6 @@
           "source": "inferred",
           "why": "No public schools or health."
         },
-        "next_election": {
-          "source": "inferred",
-          "why": "No elections."
-        },
         "expected_government_type": {
           "source": "inferred",
           "why": "Absolute rule at kingdom tier."
@@ -554,7 +573,7 @@
         "ig_armed_forces",
         "ig_industrialists"
       ],
-      "expected_government_type": "gov_constitutional_grand_principality",
+      "expected_government_type": "gov_grand_principality",
       "justify": {
         "tech_tier": {
           "source": "canon: WFB 8e Empire (Imperial Gunnery School and steam-tank works at Nuln)",

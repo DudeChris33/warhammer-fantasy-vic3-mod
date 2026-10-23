@@ -430,7 +430,7 @@ oblast depth is wanted. United Kislev (KIS) carries both founding cultures. (App
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | KIS | `01_kislev` | Kislev (Tzardom) | formable | `gospodar`, `ungol` | Kislev (The Dobryrion) | United Kislev — both founding peoples |
-| KSV | `01_kislev` | Kislev | start | `gospodar` | Kislev | the capital oblast, Tzarina's seat |
+| KSV | `01_kislev` | Kislev | start | `gospodar` | Kislev | the capital oblast, Tzar's seat |
 | ERE | `01_kislev` | Erengrad | start | `gospodar`, `ungol` | Erengrad | western port city, gospodar-founded amid Ungol lands |
 | PRA | `01_kislev` | Praag | start | `gospodar` | Praag | northern frontier city |
 | UNG | `01_kislev` | Ungol Horse-Tribes | start | `ungol` | Ungol Steppes (non-canon) | nomadic steppe Ungols |

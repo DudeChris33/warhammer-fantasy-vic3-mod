@@ -43,7 +43,7 @@
       "ig_landowners": "Boyars",
       "ig_devout": "Cults of Ursun, Dazh and Tor"
     },
-    "source": "canon: WH: The Old World (2023+) Kislev background (Boyars under the Tzar/Tzarina); TW:WH3 Kislev; inferred for mundane law groups",
+    "source": "canon: WH: The Old World (2023+) Kislev background (Boyars under the Tzar); TW:WH3 Kislev; inferred for mundane law groups",
     "why": "Kislev is a boyar-ruled steppe monarchy with a gunpowder-capable but agrarian, cult-heavy society: peasant levies, hereditary boyar administration, land tax, guilds in its cities"
   },
   "profiles": {
@@ -55,7 +55,6 @@
         "lawgroup_trade_policy": "law_isolationism",
         "lawgroup_taxation": "law_consumption_based_taxation",
         "lawgroup_migration": "law_closed_borders",
-        "lawgroup_slavery": "law_slave_trade",
         "lawgroup_labour_associations": "law_combination_acts"
       },
       "ruling_igs": [
@@ -67,7 +66,7 @@
         "ig_rural_folk": "Herdsmen"
       },
       "source": "canon: WFB Kislev / Ungol horse-nomads (Ungols are nomadic steppe riders bound by clan)",
-      "why": "Nomadic clans keep no schools, bureaucracy or standing host beyond the clan warband, so they take the tribal package at tier 7 (no technology)"
+      "why": "Nomadic clans keep no schools, bureaucracy or standing host beyond the clan warband, so they take the tribal package at tier 7 (no technology); no source shows Ungol slave-trading, so slavery is left at the baseline ban"
     }
   },
   "tags": {
@@ -110,12 +109,12 @@
       "expected_government_type": "gov_absolute_grand_principality",
       "justify": {
         "laws.lawgroup_distribution_of_power": {
-          "source": "canon: WH: The Old World (2023+) Kislev background (ruled by the Tzarina from Kislev city)",
-          "why": "The Tzarina holds the Ice Court and the seat of the realm: autocracy for the capital oblast."
+          "source": "canon: WH: The Old World (2023+) Kislev background (ruled by the Tzar from Kislev city)",
+          "why": "The Tzar holds the Ice Court and the seat of the realm: autocracy for the capital oblast."
         },
         "laws.lawgroup_army_model": {
           "source": "canon: WFB Kislev (Tzar's Guard, Winged Lancers, Streltsi handgunners are standing troops)",
-          "why": "The Tzarina's own regiments are professional, unlike boyar levies elsewhere."
+          "why": "The Tzar's own regiments are professional, unlike boyar levies elsewhere."
         },
         "ruling_igs": {
           "source": "canon: WFB Kislev (Winged Lancers and Tzar's Guard beside the boyars)",

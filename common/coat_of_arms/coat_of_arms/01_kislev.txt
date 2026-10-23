@@ -55,7 +55,7 @@ KIS = {
 	}
 }
 
-# KSV — the capital oblast, the Ice Court and the Tzarina's seat. Gospodar-only
+# KSV — the capital oblast, the Ice Court and the Tzar's seat. Gospodar-only
 # (cultures = { gospodar }, no ungol) — eagle beneath the imperial crown, no bear.
 # The bear/no-bear split from KIS is a deliberate, data-grounded distinction
 # between the two paramount tags.

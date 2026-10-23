@@ -8,8 +8,8 @@
       "lawgroup_bureaucracy": "law_elected_bureaucrats",
       "lawgroup_church_and_state": "law_state_religion",
       "lawgroup_citizenship": "law_national_supremacy",
-      "lawgroup_distribution_of_power": "law_wealth_voting",
-      "lawgroup_governance_principles": "law_presidential_republic",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_monarchy",
       "lawgroup_internal_security": "law_no_home_affairs",
       "lawgroup_navy_model": "law_professional_navy",
       "lawgroup_colonization": "law_no_colonial_affairs",
@@ -40,14 +40,13 @@
     "institutions": {
       "institution_schools": 1
     },
-    "next_election": "2504.1.1",
-    "expected_government_type": "gov_presidential_democracy",
+    "expected_government_type": "gov_county",
     "suggested_ig_names": {
       "ig_petty_bourgeoisie": "Merchant Houses",
       "ig_armed_forces": "Condottieri Companies"
     },
-    "source": "canon: WFB Dogs of War / Tilea (independent city-states of merchant-princes, mercenary companies, Myrmidia cult); WH: The Old World (2023+) Tilea background",
-    "why": "Tilean city-states are merchant republics that hire professional mercenary companies, trade under mercantilist rules and elect magistrates from the propertied houses (wealth voting)"
+    "source": "canon: WFB Dogs of War / Tilea (independent city-states ruled by merchant princes, mercenary companies, Myrmidia cult); WH: The Old World (2023+) Tilea background",
+    "why": "Tilean city-states are ruled by merchant princes with the great houses (monarchy + oligarchy, no elections), hire professional mercenary companies and trade under mercantilist rules"
   },
   "profiles": {
     "estalian_kingdom": {
@@ -55,8 +54,6 @@
       "laws": {
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_citizenship": "law_subjecthood",
-        "lawgroup_distribution_of_power": "law_oligarchy",
-        "lawgroup_governance_principles": "law_monarchy",
         "lawgroup_navy_model": "law_merchant_navy",
         "lawgroup_economic_system": "law_traditionalism",
         "lawgroup_taxation": "law_land_based_taxation",
@@ -66,7 +63,6 @@
         "ig_landowners",
         "ig_devout"
       ],
-      "next_election": null,
       "institutions": {},
       "expected_government_type": "gov_principality",
       "suggested_ig_names": {
@@ -83,7 +79,6 @@
         "lawgroup_church_and_state": "law_freedom_of_conscience",
         "lawgroup_citizenship": "law_subjecthood",
         "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_governance_principles": "law_monarchy",
         "lawgroup_navy_model": "law_merchant_navy",
         "lawgroup_economic_system": "law_traditionalism",
         "lawgroup_taxation": "law_land_based_taxation",
@@ -95,7 +90,6 @@
         "ig_armed_forces",
         "ig_landowners"
       ],
-      "next_election": null,
       "institutions": {},
       "tax_level": "low",
       "expected_government_type": "gov_absolute_principality",
@@ -112,7 +106,6 @@
         "lawgroup_army_model": "law_peasant_levies",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_governance_principles": "law_monarchy",
         "lawgroup_navy_model": "law_merchant_navy",
         "lawgroup_economic_system": "law_traditionalism",
         "lawgroup_trade_policy": "law_isolationism",
@@ -127,7 +120,6 @@
         "ig_armed_forces",
         "ig_devout"
       ],
-      "next_election": null,
       "institutions": {},
       "tax_level": "low",
       "taxed_goods": [
@@ -149,7 +141,6 @@
         "lawgroup_distribution_of_power": "law_autocracy",
         "lawgroup_economic_system": "law_traditionalism",
         "lawgroup_education_system": "law_no_schools",
-        "lawgroup_governance_principles": "law_monarchy",
         "lawgroup_labour_associations": "law_combination_acts",
         "lawgroup_navy_model": "law_merchant_navy",
         "lawgroup_policing": "law_no_police",
@@ -171,18 +162,15 @@
         "ig_devout": "Grey Seers"
       },
       "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
-      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source",
-      "next_election": null
+      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
     },
     "wood_elf_realm": {
       "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_distribution_of_power": "law_oligarchy",
         "lawgroup_economic_system": "law_traditionalism",
         "lawgroup_education_system": "law_no_schools",
-        "lawgroup_governance_principles": "law_monarchy",
         "lawgroup_labour_associations": "law_combination_acts",
         "lawgroup_navy_model": "law_merchant_navy",
         "lawgroup_policing": "law_no_police",
@@ -199,7 +187,6 @@
         "ig_rural_folk": "Glade Kin",
         "ig_devout": "Spellsingers and Waystalkers"
       },
-      "next_election": null,
       "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
       "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)",
       "expected_government_type": "gov_principality"
@@ -263,7 +250,7 @@
     },
     "LUC": {
       "confidence": "low",
-      "note": "Baseline unchanged: source silent on Luccini's constitution."
+      "note": "Prince Lorenzo Lupo of Luccini (from memory of WFB 6e Dogs of War, unverified); ruled like the baseline."
     },
     "MAG": {
       "profile": "estalian_kingdom",
@@ -302,7 +289,7 @@
     },
     "MIR": {
       "confidence": "medium",
-      "note": "Miragliano: a republic with the strongest guild/engineering tradition of Tilea."
+      "note": "Miragliano: Prince Borgio the Besieger (from memory of WFB 6e Dogs of War, unverified); strongest guild/engineering tradition of Tilea."
     },
     "MON": {
       "profile": "border_prince",
@@ -327,7 +314,31 @@
     },
     "REM": {
       "confidence": "low",
-      "note": "Baseline unchanged."
+      "note": "Republic (non-tabletop sources); the other Tilean cities are merchant-prince ruled.",
+      "laws": {
+        "lawgroup_governance_principles": "law_presidential_republic",
+        "lawgroup_distribution_of_power": "law_wealth_voting"
+      },
+      "expected_government_type": "gov_presidential_democracy",
+      "next_election": "2502.10.1",
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
+          "why": "A presidential republic of the propertied houses."
+        },
+        "laws.lawgroup_distribution_of_power": {
+          "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
+          "why": "Wealth voting: the propertied houses elect the magistrates."
+        },
+        "expected_government_type": {
+          "source": "inferred",
+          "why": "Republic with a franchise."
+        },
+        "next_election": {
+          "source": "inferred",
+          "why": "Starting elections are spread over four dates (REM, MAR, MOO, VER) so they do not fall on one day; #6640 governs how they run."
+        }
+      }
     },
     "SRT": {
       "confidence": "medium",
@@ -372,7 +383,8 @@
           "source": "canon: WFB Pirates of Sartosa (captains and brokers)",
           "why": "Captains and merchant-brokers share the take."
         }
-      }
+      },
+      "note": "A council of captains under a pirate prince; inherits the Tilean baseline."
     },
     "TOB": {
       "confidence": "low",
@@ -389,7 +401,31 @@
     },
     "VER": {
       "confidence": "low",
-      "note": "Baseline unchanged."
+      "note": "Republic (non-tabletop sources); the other Tilean cities are merchant-prince ruled.",
+      "laws": {
+        "lawgroup_governance_principles": "law_presidential_republic",
+        "lawgroup_distribution_of_power": "law_wealth_voting"
+      },
+      "expected_government_type": "gov_presidential_democracy",
+      "next_election": "2505.7.1",
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
+          "why": "A presidential republic of the propertied houses."
+        },
+        "laws.lawgroup_distribution_of_power": {
+          "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
+          "why": "Wealth voting: the propertied houses elect the magistrates."
+        },
+        "expected_government_type": {
+          "source": "inferred",
+          "why": "Republic with a franchise."
+        },
+        "next_election": {
+          "source": "inferred",
+          "why": "Starting elections are spread over four dates (REM, MAR, MOO, VER) so they do not fall on one day; #6640 governs how they run."
+        }
+      }
     },
     "XSG": {
       "profile": "skaven_placeholder",
