@@ -6176,6 +6176,10 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
     assert ch.tech_effect("UNO", ("goblin",)) is None
     assert ch.tech_effect("XSA", ("skaven",)) == "effect_starting_technology_skaven_tech"
     assert ch.tech_effect("UNG", ("ungol",)) is None
+    # fallen holds and Mousillon start behind their culture (#9034): the per-tag table wins
+    assert ch.tech_effect("KVN", ("dawi",)) == "effect_starting_technology_fallen_hold_tech"
+    assert ch.tech_effect("MOU", ("mousillon",)) == "effect_starting_technology_mousillon_tech"
+    assert ch.tech_effect("KAK", ("dawi",)) == "effect_starting_technology_dwarf_tech", "living holds keep the culture preset"
 
     # per-country extras follow the preset, in file order, before the politics effect; the validator reads them back
     # and refuses a technology id that common/technology does not define

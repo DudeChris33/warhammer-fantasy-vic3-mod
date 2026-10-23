@@ -74,6 +74,8 @@ _SOUTHERN = "effect_starting_technology_southern_tech"
 _DWARF = "effect_starting_technology_dwarf_tech"
 _VAMPIRE = "effect_starting_technology_vampire_tech"
 _GOBLIN = "effect_starting_technology_goblin_tech"
+_FALLEN_HOLD = "effect_starting_technology_fallen_hold_tech"
+_MOUSILLON = "effect_starting_technology_mousillon_tech"
 CULTURE_TECH: dict[str, str | None] = {
     **dict.fromkeys(("reiklander", "middenlander", "nordlander", "hochlander", "ostlander", "ostermarker",
                      "talabeclander", "stirlander", "averlander", "wissenlander", "sollander", "sylvanian",
@@ -106,6 +108,11 @@ CULTURE_TECH: dict[str, str | None] = {
 #: Per-tag exceptions to the culture rule.
 TAG_TECH: dict[str, str | None] = {
     "UNO": None,   # Unclaimed Lands: no polity, no technology
+    # Fallen Dwarf holds (#9034): exiles and garrisons start behind a living hold (no workshops, artillery train,
+    # libraries or civic order); both presets keep international_trade, so Mercantilism stays legal (#9256)
+    **dict.fromkeys(("KEP", "EKR", "KVN", "SLV", "VLG", "DRZ"), _FALLEN_HOLD),
+    # Mousillon (#9034): a cursed, decayed duchy, behind Bretonnia (the culture's preset)
+    "MOU": _MOUSILLON,
 }
 POLITICS_EFFECT = "effect_starting_politics_traditional"
 

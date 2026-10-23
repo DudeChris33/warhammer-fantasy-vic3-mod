@@ -63,6 +63,29 @@ effect_starting_technology_brettonia_tech = {
 	add_technology_researched = law_enforcement
 }
 
+effect_starting_technology_mousillon_tech = {
+	# Mousillon (#9034): the Bretonnia preset minus cotton_gin, distillation, lathe, urban_planning and law_enforcement: a cursed, decayed duchy. Keeps international_trade (Mercantilism needs it) and the techs that gate its buildings.
+
+	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = enclosure
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
+
+	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+
+	# Society
+	add_technology_researched = navigation
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
+}
+
 effect_starting_technology_kislev_tech = {
 	# Kislev baseline: frontier levies and handgunners. Ports and the capital's learning are per-country.
 
@@ -348,6 +371,31 @@ effect_starting_technology_dwarf_tech = {
 	add_technology_researched = urban_planning
 	add_technology_researched = law_enforcement
 	add_technology_researched = central_archives
+}
+
+effect_starting_technology_fallen_hold_tech = {
+	# Fallen Dwarf holds (#9034): the Dwarf preset minus lathe, cotton_gin, distillation, prospecting, army_reserves, artillery, academia, central_archives, urban_planning and law_enforcement. Exiled clans keep the handgun and the forge but lose a living hold's workshops, artillery train, libraries and civic order. Keeps international_trade (Mercantilism needs it).
+
+	# Production
+	add_technology_researched = manufacturies
+	add_technology_researched = enclosure
+	add_technology_researched = shaft_mining
+	add_technology_researched = steelworking
+
+	# Military
+	add_technology_researched = standing_army
+	add_technology_researched = mandatory_service
+	add_technology_researched = military_drill
+	add_technology_researched = line_infantry
+	add_technology_researched = gunsmithing
+
+	# Society
+	add_technology_researched = rationalism
+	add_technology_researched = urbanization
+	add_technology_researched = tech_bureaucracy
+	add_technology_researched = centralization
+	add_technology_researched = international_trade
+	add_technology_researched = currency_standards
 }
 
 effect_starting_technology_dark_dwarf_tech = {

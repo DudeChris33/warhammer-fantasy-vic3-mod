@@ -2,6 +2,10 @@
 COUNTRIES = {
 	c:KSV ?= {
 		effect_starting_technology_kislev_tech = yes
+		add_technology_researched = rationalism
+		add_technology_researched = academia
+		add_technology_researched = banking
+		add_technology_researched = artillery
 		effect_starting_politics_traditional = yes
 		activate_law = law_type:law_slavery_banned
 	}

@@ -77,12 +77,17 @@
   ],
   "ERE": [
    "admiralty",
-   "drydocks"
+   "drydocks",
+   "artillery"
   ],
-  "KIS": [
+  "KSV": [
    "rationalism",
    "academia",
-   "banking"
+   "banking",
+   "artillery"
+  ],
+  "PRA": [
+   "artillery"
   ],
   "MIR": [
    "crystal_glass",
@@ -187,11 +192,8 @@
    "shell_gun"
   ],
   "KEP": [
-   "atmospheric_engine",
-   "intensive_agriculture",
-   "mechanical_tools",
-   "nitroglycerin",
-   "railways"
+   "artillery",
+   "army_reserves"
   ],
   "KAD": [
    "napoleonic_warfare",
