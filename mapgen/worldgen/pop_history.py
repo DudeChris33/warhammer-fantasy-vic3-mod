@@ -75,7 +75,7 @@ HEADER_POPULATION = HEADER_POPS
 WEALTH_LEVELS = ("very_high", "high", "medium", "low")
 LITERACY_LEVELS = ("very_high", "high", "middling", "low", "very_low", "baseline")
 CONFIDENCES = ("high", "medium", "low")
-SLAVERY_BANNED = "law_slavery_banned"
+from .country_config import SLAVERY_BANNED, load_resolved, slavery_law  # noqa: E402  (re-exported)
 
 
 class PopHistoryError(ValueError):
@@ -172,20 +172,11 @@ def load_ids(path_or_dir: Path) -> set[str]:
 
 def load_slavery(country_history_dir: Path | None) -> dict[str, str] | None:
     """``{tag: slavery law}`` from ``mapgen/config/country_history/*.json`` (baseline
-    <- profile <- tag), or ``None`` when that data is not in the tree."""
-    if country_history_dir is None or not Path(country_history_dir).is_dir():
+    <- profile <- tag, via ``country_config``), or ``None`` when that data is not in the tree."""
+    resolved = load_resolved(country_history_dir)
+    if resolved is None:
         return None
-    files = sorted(Path(country_history_dir).glob("*.json"))
-    if not files:
-        return None
-    out: dict[str, str] = {}
-    for f in files:
-        d = json.loads(f.read_text(encoding="utf-8"))
-        for tag, v in d.get("tags", {}).items():
-            prof = d.get("profiles", {}).get(v.get("profile"), {})
-            laws = {**d.get("baseline", {}).get("laws", {}), **prof.get("laws", {}), **v.get("laws", {})}
-            out[tag] = laws.get("lawgroup_slavery", SLAVERY_BANNED)
-    return out
+    return {tag: slavery_law(resolved, tag) for tag in resolved}
 
 
 # ---------------------------------------------------------------------------

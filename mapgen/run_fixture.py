@@ -6211,6 +6211,66 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
     refused({**texts, "zzz.txt": ch.render_file("ZZZ", [ch.POLITICS_EFFECT])},
             "has a country history block but owns no state", {**tiers, "ZZZ": ("reiklander",)})
 
+    # starting laws (#9028): one activate_law per listed law, after the politics effect; UNO gets the engine
+    # default written out; a defined owner missing from the map is an error; check() reads the lines back
+    law_ids = {"law_slave_trade": "lawgroup_slavery", "law_slavery_banned": "lawgroup_slavery",
+               "law_isolationism": "lawgroup_trade_policy"}
+    laws = {"REI": ["law_slave_trade"], "MID": ["law_slavery_banned"]}
+    lp = ch.plan(ownership_doc, tiers, None, laws)
+    assert lp.blocks[1] == ("REI", ["effect_starting_technology_empire_tech", ch.POLITICS_EFFECT,
+                                    "activate_law = law_type:law_slave_trade"]), lp.blocks[1]
+    assert lp.blocks[2] == ("UNO", [ch.POLITICS_EFFECT, "activate_law = law_type:law_slavery_banned"]), lp.blocks[2]
+    ltexts = ch.render(lp.blocks, names)
+    assert "\t\teffect_starting_politics_traditional = yes\n\t\tactivate_law = law_type:law_slave_trade\n" \
+        in ltexts["rei - reikland.txt"]
+    crlf_l = {n: "\ufeff" + t.replace("\n", "\r\n") for n, t in ltexts.items()}
+    assert ch.parse_history_text(crlf_l["rei - reikland.txt"]) == [lp.blocks[1]], "activate_law round-trips"
+    lerrs, _ = ch.check(crlf_l, ownership_doc, tiers, effects, names, None, None, laws, law_ids)
+    assert lerrs == [], lerrs
+    try:
+        ch.plan(ownership_doc, tiers, None, {"REI": ["law_slave_trade"]})
+    except so.OwnershipError as exc:
+        assert "c:MID" in str(exc), exc
+    else:
+        raise AssertionError("a defined owner with no starting laws must raise when laws are given")
+    lerrs, _ = ch.check(ltexts, ownership_doc, tiers, effects, names, None, None, laws, {"law_slavery_banned": "lawgroup_slavery"})
+    assert any("law_slave_trade names no law" in e for e in lerrs), lerrs
+    two = {**laws, "REI": ["law_slave_trade", "law_slavery_banned"]}
+    tp = ch.plan(ownership_doc, tiers, None, two)
+    lerrs, _ = ch.check(ch.render(tp.blocks, names), ownership_doc, tiers, effects, names, None, None, two, law_ids)
+    assert any("both in lawgroup_slavery" in e for e in lerrs), lerrs
+    lerrs, _ = ch.check(texts, ownership_doc, tiers, effects, names, None, None, laws, law_ids)
+    assert any("differs from what the generator emits" in e for e in lerrs), "a missing law line is stale"
+    _selfcheck_country_config()
+
+
+def _selfcheck_country_config() -> None:
+    """The shared resolver (#9028): baseline <- profile <- tag, and the pop gate reads the same value."""
+    import json
+    import tempfile
+
+    from worldgen import country_config as cc
+    from worldgen import pop_history as ph
+
+    with tempfile.TemporaryDirectory() as tmp:
+        d = Path(tmp)
+        (d / "01_a.json").write_text(json.dumps({
+            "baseline": {"tech_tier": 3, "laws": {"lawgroup_slavery": "law_slavery_banned", "lawgroup_taxation": "law_a"}},
+            "profiles": {"tribe": {"tech_tier": 7, "laws": {"lawgroup_slavery": "law_debt_slavery"}}},
+            "tags": {"AAA": {}, "BBB": {"profile": "tribe"},
+                     "CCC": {"profile": "tribe", "tech_tier": 5, "laws": {"lawgroup_slavery": "law_slave_trade"}}}}),
+            encoding="utf-8")
+        (d / "02_b.json").write_text(json.dumps({"baseline": {"tech_tier": 4, "laws": {}}, "tags": {"DDD": {}}}),
+                                     encoding="utf-8")
+        r = cc.load_resolved(d)
+        assert {t: cc.slavery_law(r, t) for t in sorted(r)} == {
+            "AAA": "law_slavery_banned", "BBB": "law_debt_slavery", "CCC": "law_slave_trade", "DDD": "law_slavery_banned"}, r
+        assert {t: v.tech_tier for t, v in r.items()} == {"AAA": 3, "BBB": 7, "CCC": 5, "DDD": 4}, r
+        assert ph.load_slavery(d) == {t: cc.slavery_law(r, t) for t in r}, "pop gate and emitter share one resolver"
+        assert cc.starting_laws(r)["BBB"] == ["law_debt_slavery"]
+        assert cc.slavery_law(r, "ZZZ") == cc.SLAVERY_BANNED
+    assert cc.load_resolved(None) is None and ph.load_slavery(Path(tmp) / "absent") is None
+
 
 COUNTRY_HISTORY_DIR = TOOLS_DIR / "fixtures" / "country_history"
 COUNTRY_HISTORY_EXPECTED = COUNTRY_HISTORY_DIR / "expected" / "report.txt"

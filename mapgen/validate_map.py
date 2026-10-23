@@ -589,17 +589,21 @@ def _check_country_history(history_path: Path, ownership_path: Path, country_def
     check, so it is only noted here."""
     import json
 
+    from worldgen import country_config
     from worldgen import country_history as ch
 
     if not ownership_path.is_file():
         return [f"state ownership not found at {ownership_path} -- run read_state_ownership.py"], []
     doc = json.loads(ownership_path.read_text(encoding="utf-8"))
     root = country_definitions_dir.parents[1]
+    resolved = country_config.load_resolved(root / "mapgen" / "config" / "country_history")
+    laws = None if resolved is None else country_config.starting_laws(resolved)
     errors, held_back = ch.check(ch.load_history_dir(history_path), doc, ch.load_country_cultures(country_definitions_dir),
                                  ch.load_effect_names(scripted_effects_dir),
                                  ch.load_country_names(country_definitions_dir.parents[1] / "localization"),
                                  ch.load_tech_extras(root / "mapgen" / "config" / "starting_tech_extras.json"),
-                                 ch.load_tech_ids(root / "common" / "technology" / "technologies"))
+                                 ch.load_tech_ids(root / "common" / "technology" / "technologies"),
+                                 laws, ch.load_law_ids(root / "common" / "laws"))
     notes = [f"country history: owner tag(s) with no country definition get no block: {', '.join(held_back)}"]         if held_back else []
     return [f"country history: {e}" for e in errors], notes
 

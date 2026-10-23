@@ -1501,7 +1501,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_cotton_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_cotton_plantation" "slave_exploitation_cotton" "pm_road_carts" }
 			}
 		}
 	}

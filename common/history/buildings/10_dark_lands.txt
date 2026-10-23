@@ -95,7 +95,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_dye_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_dye_plantation" "slave_exploitation_dye" "pm_road_carts" }
 			}
 			create_building = {
 				building = "building_cotton_plantation"
@@ -108,7 +108,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_cotton_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_cotton_plantation" "slave_exploitation_cotton" "pm_road_carts" }
 			}
 		}
 	}
@@ -403,7 +403,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_dye_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_dye_plantation" "slave_exploitation_dye" "pm_road_carts" }
 			}
 		}
 	}
@@ -852,7 +852,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_dye_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_dye_plantation" "slave_exploitation_dye" "pm_road_carts" }
 			}
 			create_building = {
 				building = "building_cotton_plantation"
@@ -865,7 +865,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_cotton_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_cotton_plantation" "slave_exploitation_cotton" "pm_road_carts" }
 			}
 		}
 	}
@@ -1048,7 +1048,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_dye_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_dye_plantation" "slave_exploitation_dye" "pm_road_carts" }
 			}
 		}
 	}
@@ -1188,7 +1188,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_dye_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_dye_plantation" "slave_exploitation_dye" "pm_road_carts" }
 			}
 			create_building = {
 				building = "building_cotton_plantation"
@@ -1201,7 +1201,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_cotton_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_cotton_plantation" "slave_exploitation_cotton" "pm_road_carts" }
 			}
 		}
 	}
@@ -1494,7 +1494,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_dye_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_dye_plantation" "slave_exploitation_dye" "pm_road_carts" }
 			}
 			create_building = {
 				building = "building_cotton_plantation"
@@ -1507,7 +1507,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_cotton_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_cotton_plantation" "slave_exploitation_cotton" "pm_road_carts" }
 			}
 		}
 	}
@@ -1617,7 +1617,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_dye_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_dye_plantation" "slave_exploitation_dye" "pm_road_carts" }
 			}
 			create_building = {
 				building = "building_cotton_plantation"
@@ -1630,7 +1630,7 @@ BUILDINGS = {
 					}
 				}
 				reserves = 1
-				activate_production_methods = { "default_building_cotton_plantation" "default_labour" "pm_road_carts" }
+				activate_production_methods = { "default_building_cotton_plantation" "slave_exploitation_cotton" "pm_road_carts" }
 			}
 			create_building = {
 				building = "building_logging_camp"

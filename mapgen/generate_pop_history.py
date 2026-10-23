@@ -27,6 +27,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen import country_config  # noqa: E402
 from worldgen import pop_history as ph  # noqa: E402
 from worldgen import state_history as sh  # noqa: E402
 
@@ -55,15 +56,8 @@ def load_world(root: Path) -> ph.World:
 
 
 def _tiers(d: Path) -> dict[str, int] | None:
-    if not d.is_dir() or not list(d.glob("*.json")):
-        return None
-    out: dict[str, int] = {}
-    for f in sorted(d.glob("*.json")):
-        doc = json.loads(f.read_text(encoding="utf-8"))
-        for tag, v in doc.get("tags", {}).items():
-            prof = doc.get("profiles", {}).get(v.get("profile"), {})
-            out[tag] = v.get("tech_tier", prof.get("tech_tier", doc.get("baseline", {}).get("tech_tier")))
-    return out
+    resolved = country_config.load_resolved(d)
+    return None if resolved is None else {tag: r.tech_tier for tag, r in resolved.items()}
 
 
 def build(root: Path, config_dir: Path) -> tuple[ph.Config, ph.World, ph.Plan, dict[str, str], dict[str, str]]:
