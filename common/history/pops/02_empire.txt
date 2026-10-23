@@ -32,7 +32,8 @@ POPS = {
 			create_pop = { culture = middenlander size = 125000 }
 		}
 		region_state:XSB = {
-			create_pop = { culture = middenlander size = 100000 }
+			create_pop = { culture = middenlander size = 50000 }
+			create_pop = { culture = skaven size = 50000 }
 		}
 	}
 	s:STATE_EAST_AVERLAND = {
@@ -81,8 +82,9 @@ POPS = {
 			create_pop = { culture = sollander size = 45219 }
 		}
 		region_state:XSI = {
-			create_pop = { culture = sollander size = 25000 }
-			create_pop = { culture = wissenlander size = 25000 }
+			create_pop = { culture = skaven size = 25000 }
+			create_pop = { culture = sollander size = 12500 }
+			create_pop = { culture = wissenlander size = 12500 }
 		}
 	}
 	s:STATE_LAURELORN_FOREST = {
@@ -195,7 +197,8 @@ POPS = {
 			create_pop = { culture = talabeclander size = 185097 }
 		}
 		region_state:XSC = {
-			create_pop = { culture = talabeclander size = 75000 }
+			create_pop = { culture = skaven size = 37500 }
+			create_pop = { culture = talabeclander size = 37500 }
 		}
 	}
 	s:STATE_VORBERGLAND = {
@@ -230,7 +233,8 @@ POPS = {
 			create_pop = { culture = ostermarker size = 212959 }
 		}
 		region_state:XSA = {
-			create_pop = { culture = ostermarker size = 100000 }
+			create_pop = { culture = ostermarker size = 50000 }
+			create_pop = { culture = skaven size = 50000 }
 		}
 	}
 	s:STATE_WEST_STIRLAND = {

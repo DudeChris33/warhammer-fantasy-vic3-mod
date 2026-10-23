@@ -80,7 +80,9 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   adjective "Skaven", `skaven` culture, greenskin house-style heraldry with no rat iconography. They
   carry `skaven` since #8646 (goblin until then) and keep the greenskin arms they shipped with. The codes are
   frozen once shipped like any other: real clans get **new** codes and supersede these tags, which are
-  never renamed into a clan.
+  never renamed into a clan. A clan whose state has no `skaven` homeland gets a Skaven share through
+  `mapgen/config/pop_history/state_overrides.json` `add` rows (#9026, 50% by default, pending Chris's
+  confirmation), not through `state_homelands.json`.
 - **#6373 additions take the painted legend colour.** Tags defined for the start-ownership map take
   their colour exactly from `mapgen/config/state_ownership_legend.json`, not from their culture.
 - **Wood elves (Asrai) have no region file of their own** (board #6373, 2026-10-01). Their realms

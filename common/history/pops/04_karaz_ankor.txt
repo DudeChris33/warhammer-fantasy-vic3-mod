@@ -17,8 +17,9 @@ POPS = {
 			create_pop = { culture = mountain_orc size = 19013 }
 		}
 		region_state:XSJ = {
-			create_pop = { culture = dawi_grey size = 37500 }
-			create_pop = { culture = mountain_orc size = 37500 }
+			create_pop = { culture = skaven size = 37500 }
+			create_pop = { culture = dawi_grey size = 18750 }
+			create_pop = { culture = mountain_orc size = 18750 }
 		}
 	}
 	s:STATE_AXE_BITE_PASS = {
@@ -78,8 +79,9 @@ POPS = {
 	}
 	s:STATE_CRIPPLE_PEAK = {
 		region_state:XSL = {
-			create_pop = { culture = mountain_orc size = 50000 }
-			create_pop = { culture = necrarch size = 50000 }
+			create_pop = { culture = skaven size = 50000 }
+			create_pop = { culture = mountain_orc size = 25000 }
+			create_pop = { culture = necrarch size = 25000 }
 		}
 	}
 	s:STATE_CROOKED_CORRIDOR = {
@@ -100,8 +102,9 @@ POPS = {
 	}
 	s:STATE_DARK_MAIDEN_PASS = {
 		region_state:XSK = {
-			create_pop = { culture = border_princer size = 25000 }
-			create_pop = { culture = tilean size = 25000 }
+			create_pop = { culture = skaven size = 25000 }
+			create_pop = { culture = border_princer size = 12500 }
+			create_pop = { culture = tilean size = 12500 }
 		}
 	}
 	s:STATE_DELVED_HEIGHTS = {
