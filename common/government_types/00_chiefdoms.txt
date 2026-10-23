@@ -1,4 +1,35 @@
-﻿gov_chiefdom = {
+﻿# [#9037] Greenskin warbands, ahead of gov_chiefdom (the first government type whose possible passes wins).
+# UNO is decentralized and goblin: the NOT keeps it on the plain Chiefdom.
+gov_greenskin_warband = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_WARBOSS"
+	female_ruler = "RULER_TITLE_WARBOSS"
+
+	possible = {
+		has_law_or_variant = law_type:law_chiefdom
+		NOT = { is_country_type = decentralized }
+		OR = {
+			country_has_primary_culture = cu:mountain_orc
+			country_has_primary_culture = cu:savage_orc
+			country_has_primary_culture = cu:dark_lands_orc
+			country_has_primary_culture = cu:badlands_orc
+			country_has_primary_culture = cu:cathayan_orc
+			country_has_primary_culture = cu:lustrian_orc
+			country_has_primary_culture = cu:goblin
+			country_has_primary_culture = cu:hobgoblin
+		}
+	}
+
+	on_government_type_change = {
+		change_to_dictatorial = yes
+	}
+	on_post_government_type_change = {
+		post_change_to_dictatorial = yes
+	}
+}
+
+gov_chiefdom = {
 	transfer_of_power = hereditary
 
 	male_ruler = "RULER_CHIEFTAIN"

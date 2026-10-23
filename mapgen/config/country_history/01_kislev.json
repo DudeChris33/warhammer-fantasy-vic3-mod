@@ -55,7 +55,8 @@
         "lawgroup_trade_policy": "law_isolationism",
         "lawgroup_taxation": "law_consumption_based_taxation",
         "lawgroup_migration": "law_closed_borders",
-        "lawgroup_labour_associations": "law_combination_acts"
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_governance_principles": "law_chiefdom"
       },
       "ruling_igs": [
         "ig_armed_forces",
@@ -66,7 +67,8 @@
         "ig_rural_folk": "Herdsmen"
       },
       "source": "canon: WFB Kislev / Ungol horse-nomads (Ungols are nomadic steppe riders bound by clan)",
-      "why": "Nomadic clans keep no schools, bureaucracy or standing host beyond the clan warband, so they take the tribal package at tier 7 (no technology); no source shows Ungol slave-trading, so slavery is left at the baseline ban"
+      "why": "Nomadic clans keep no schools, bureaucracy or standing host beyond the clan warband, so they take the tribal package at tier 7 (no technology); no source shows Ungol slave-trading, so slavery is left at the baseline ban; the clans are led by chieftains (law_chiefdom, made visible to tribal realms by #9037)",
+      "expected_government_type": "gov_chiefdom"
     }
   },
   "tags": {

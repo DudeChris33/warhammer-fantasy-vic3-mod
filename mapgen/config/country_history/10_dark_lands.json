@@ -89,7 +89,7 @@
         "lawgroup_economic_system": "law_traditionalism",
         "lawgroup_education_system": "law_no_schools",
         "lawgroup_free_speech": "law_right_of_assembly",
-        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_governance_principles": "law_chiefdom",
         "lawgroup_internal_security": "law_no_home_affairs",
         "lawgroup_migration": "law_no_migration_controls",
         "lawgroup_policing": "law_no_police",
@@ -101,13 +101,13 @@
         "ig_armed_forces",
         "ig_devout"
       ],
-      "expected_government_type": "gov_absolute_principality",
+      "expected_government_type": "gov_greenskin_warband",
       "suggested_ig_names": {
         "ig_armed_forces": "Boyz and Warbosses",
         "ig_devout": "Shamans of Gork and Mork"
       },
       "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
-      "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved"
+      "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; a horde ruled by a Warboss (law_chiefdom, #9037)"
     }
   },
   "tags": {

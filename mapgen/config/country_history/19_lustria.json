@@ -58,7 +58,7 @@
       "laws": {
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_distribution_of_power": "law_oligarchy",
-        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_governance_principles": "law_chiefdom",
         "lawgroup_education_system": "law_no_schools",
         "lawgroup_rights_of_women": "law_women_own_property",
         "lawgroup_slavery": "law_slave_trade"
@@ -67,13 +67,13 @@
         "ig_armed_forces",
         "ig_landowners"
       ],
-      "expected_government_type": "gov_principality",
+      "expected_government_type": "gov_chiefdom",
       "suggested_ig_names": {
         "ig_armed_forces": "Hird Warbands",
         "ig_landowners": "Jarls and Hersirs"
       },
       "source": "canon: White Dwarf 309 \"The Norse of Lustria\" (Skeggi founded 888 IC by Losteriksson of the Bjornlings); Norsca tribal package",
-      "why": "A Norse colony keeps its homeland's jarl-and-warband institutions"
+      "why": "A Norse colony keeps its homeland's jarl-and-warband institutions; Norse settlers keep their chieftains (law_chiefdom, #9037)"
     }
   },
   "tags": {

@@ -143,6 +143,16 @@
     },
     "FXZ": {
       "confidence": "low"
+    },
+    "FXN": {
+      "confidence": "high",
+      "expected_government_type": "gov_tribal",
+      "justify": {
+        "expected_government_type": {
+          "source": "fixture",
+          "why": "culture does not match"
+        }
+      }
     }
   }
 }

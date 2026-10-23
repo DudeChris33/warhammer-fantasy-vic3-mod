@@ -235,7 +235,11 @@ law_elder_council = {
 	}
 
 	is_visible = {
-		is_country_type = decentralized
+		# [#9037] was: is_country_type = decentralized
+		OR = {
+			is_country_type = decentralized
+			wh_country_is_tribal_realm = yes
+		}
 	}
 
 	on_activate = {

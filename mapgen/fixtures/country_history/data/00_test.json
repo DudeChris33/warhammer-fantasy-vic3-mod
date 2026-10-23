@@ -78,6 +78,16 @@
           "why": "needs currency_standards"
         }
       }
+    },
+    "FXM": {
+      "confidence": "high",
+      "expected_government_type": "gov_tribal",
+      "justify": {
+        "expected_government_type": {
+          "source": "fixture",
+          "why": "culture-tested government type"
+        }
+      }
     }
   }
 }

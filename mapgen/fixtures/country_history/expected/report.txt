@@ -1,7 +1,7 @@
 note: no common/goods on disk; using the bundled goods list
 note: no common/institutions on disk; using the bundled institutions list
 warning: 00_test.json: FXC: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
-OK 00_test.json: 3 tag(s)
+OK 00_test.json: 4 tag(s)
 warning: 01_bad.json: FXH: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
 warning: 01_bad.json: FXI: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
 warning: 01_bad.json: FXZ: gov_absolute_kingdom not fully evaluable (no country definition (tier/type unknown))
@@ -42,7 +42,8 @@ ERROR: 01_bad.json: FXL: law_estate_rights is locked: needs law law_republic (ti
 ERROR: 01_bad.json: FXL: law_landed_voting is locked: needs tech democracy (tier 3 + extra_techs + chosen laws do not provide it)
 ERROR: 01_bad.json: FXL: laws hold elections (voting franchise) but next_election is missing
 ERROR: 01_bad.json: FXL: laws do not satisfy gov_absolute_kingdom's possible trigger
-FAIL 01_bad.json: 37 error(s)
+ERROR: 01_bad.json: FXN: laws do not satisfy gov_tribal's possible trigger
+FAIL 01_bad.json: 38 error(s)
 ERROR: 02_bad_baseline.json: baseline missing why
 ERROR: 02_bad_baseline.json: baseline needs a non-empty source and why
 ERROR: 02_bad_baseline.json baseline: missing law group lawgroup_land_reform

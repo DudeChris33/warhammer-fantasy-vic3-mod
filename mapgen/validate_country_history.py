@@ -195,6 +195,7 @@ class GameData:
                 self.definitions[key] = {
                     "tier": next(iter(_vals(body, "tier")), None),
                     "country_type": next(iter(_vals(body, "country_type")), None),
+                    "cultures": set(_bare(next(iter(_vals(body, "cultures")), []))),
                 }
 
         self.goods = self._id_set([vanilla_root, game_root], "common/goods", BUNDLED_GOODS, "goods")
@@ -227,12 +228,14 @@ def load_registry(path: Path) -> dict[str, tuple[str, str]]:
 # ----------------------------------------------------------------------------------------
 
 class Ctx:
-    def __init__(self, game: GameData, laws: set[str], tier, country_type, igs: set[str]):
+    def __init__(self, game: GameData, laws: set[str], tier, country_type, igs: set[str],
+                 cultures: set[str] | None = None):
         self.game = game
         self.laws = laws
         self.tier = tier
         self.country_type = country_type
         self.igs = igs
+        self.cultures = cultures
         self.franchise = bool(laws & VOTING_LAWS)
         self.unsupported: set[str] = set()
 
@@ -276,6 +279,8 @@ def _eval_one(key: str, value, ctx: Ctx):
         return _yes(value)
     if key in ("has_law", "has_law_or_variant"):
         return value.split(":", 1)[-1] in ctx.laws
+    if key == "country_has_primary_culture":
+        return None if ctx.cultures is None else value.split(":", 1)[-1] in ctx.cultures
     if key == "country_tier":
         return None if ctx.tier is None else ctx.tier == value
     if key == "is_country_type":
@@ -448,7 +453,8 @@ def check_package(pkg: dict, game: GameData, where: str, defn: dict | None,
         err(f"unknown expected_government_type {gov!r}")
     elif evaluate_gov and len(chosen) == len(game.law_groups):
         ctx = Ctx(game, active, defn["tier"] if defn else None,
-                  defn["country_type"] if defn else None, set(pkg.get("ruling_igs", [])))
+                  defn["country_type"] if defn else None, set(pkg.get("ruling_igs", [])),
+                  defn["cultures"] if defn else None)
         verdict = eval_items(game.gov_possible[gov], ctx)
         if verdict is False:
             err(f"laws do not satisfy {gov}'s possible trigger")

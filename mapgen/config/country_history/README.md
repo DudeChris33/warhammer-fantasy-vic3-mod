@@ -70,7 +70,7 @@ Ranking, high to low: Chaos Dwarfs > Dwarf engineer-holds ≈ Nuln ≈ Cathay's 
 
 - **Electoral aristocracies** (Ulthuan's princes, the Moot's Elder) → `law_landed_voting`; **hereditary Elector Counts and Tilean merchant princes** → `law_oligarchy` (no provincial election; the Emperor's election is gap #2); **merchant republics** (Marienburg, and Remas and Verezzo on non-tabletop sources) → `law_wealth_voting`; **absolute rulers** (Tzar, Sultan, Witch King, Dragon Emperor, Tyrants, Warbosses) → `law_autocracy`; **council-of-nobles rule** → `law_oligarchy`. Priest-rule (Chaos Dwarf Sorcerer-Prophets, Slann, the Everqueen, Khainite Har Ganeth, the Knights of Origo) → `law_theocracy`.
 - **Knights, Slayers, Saurus and Executioners** → `law_warrior_caste`; **state troops** → `law_national_militia`; **mercenary and standing regiments** → `law_professional_army`; **raised dead** → `law_peasant_levies`.
-- **Tribes** never take `law_chiefdom`: it is `is_visible = is_country_type = decentralized`, and Norsca/Ungol/greenskin tags are defined `unrecognized`. They take monarchy + oligarchy/autocracy at low tier (see gaps).
+- **Tribes** (Norse, Ungol, Kurgan, greenskin) take `law_chiefdom`: #9037 widened it, and `law_elder_council`'s visibility, from decentralized countries to `wh_country_is_tribal_realm` (`unrecognized` and a tribal culture, `common/scripted_triggers/02_wh_tribal_triggers.txt`). Greenskins read as `gov_greenskin_warband` (Warboss), the others as `gov_chiefdom` (Chieftain). `generate_country_history.py` emits the law (ahead of #6638). Vampire, Skaven, wood elf and ogre tags keep monarchy.
 - **Species with no gendered social structure** (greenskins, Ogres, Lizardmen) take the group default `law_no_womens_rights` as filler; Dwarfs, Elves and humans take `law_women_own_property` unless canon says otherwise. `rights_of_women`, `welfare`, `childrens_rights`, `labor_rights` and `free_speech` are otherwise the only choices the lower tiers can reach, so they are rarely a canon claim.
 - `taxed_goods` (liquor, wine, tea, coffee, meat…) and institution levels are flavour picks marked `inferred` through the baseline `source`; they carry no canon claim.
 - Where the tier cannot reach a law (its tech is not in the helper), the data uses the next reachable law or adds a prerequisite chain through `extra_techs`, and says so in `justify`.
@@ -99,7 +99,7 @@ Modelling assumptions (verify in game when the history files load):
 
 Warhammer concepts the mod's laws, IGs and techs cannot express (reported, not authored):
 
-1. **Tribal governance.** `law_chiefdom`/`law_elder_council` are decentralized-only; the Norse, Ungol, Kurgan and greenskin tags are `unrecognized` principalities, so they read as monarchies. Either the tag types change or a tribal law is authored.
+1. **Tribal governance.** *Resolved (#9037):* `law_chiefdom` and `law_elder_council` are visible to tribal realms through `wh_country_is_tribal_realm`; tribal tags start under Chiefdom (greenskins as a Warband).
 2. **Electoral college.** No law for an Emperor chosen by Electors; `law_landed_voting` gives *provincial* elections that canon does not have.
 3. **Undead and vampiric rule.** Eternal rulers, raised legions, blood-stock peasantry: approximated by autocracy, `peasant_levies`/`professional_army`, `serfdom` and `debt_slavery`.
 4. **Chaos worship and cult schisms.** No law or IG for a Ruinous Power; approximated by `ig_devout` in the ruling bloc.

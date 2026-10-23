@@ -8,7 +8,7 @@
       "lawgroup_church_and_state": "law_state_religion",
       "lawgroup_citizenship": "law_national_supremacy",
       "lawgroup_distribution_of_power": "law_autocracy",
-      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_governance_principles": "law_chiefdom",
       "lawgroup_internal_security": "law_no_home_affairs",
       "lawgroup_navy_model": "law_merchant_navy",
       "lawgroup_colonization": "law_no_colonial_affairs",
@@ -37,140 +37,77 @@
       "liquor"
     ],
     "institutions": {},
-    "expected_government_type": "gov_principality",
+    "expected_government_type": "gov_greenskin_warband",
     "suggested_ig_names": {
       "ig_armed_forces": "Boyz and Warbosses",
       "ig_devout": "Shamans of Gork and Mork"
     },
     "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
-    "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved",
+    "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; orc and goblin warbands are ruled by a Warboss (law_chiefdom, gov_greenskin_warband; #9037)",
     "extra_techs": []
   },
   "tags": {
     "BKA": {
       "confidence": "low",
-      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "BLV": {
       "confidence": "low",
-      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "BNR": {
       "confidence": "low",
-      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "BRN": {
       "confidence": "low",
-      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "BSB": {
       "confidence": "low",
-      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "BTO": {
       "confidence": "low",
-      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "CRM": {
       "confidence": "medium",
-      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "ICL": {
       "confidence": "low",
-      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "RDV": {
       "confidence": "low",
-      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Goblin tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "RED": {
       "confidence": "medium",
-      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "RFG": {
       "confidence": "low",
-      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions.",
-      "expected_government_type": "gov_absolute_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
-        }
-      }
+      "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "STR": {
       "confidence": "low",
-      "note": "Strigoi remnant: undead holding filed in the Badlands by geography; the greenskin baseline does not describe it, source silent on its institutions."
+      "note": "Strigoi remnant: undead holding filed in the Badlands by geography; the greenskin baseline does not describe it, source silent on its institutions.",
+      "laws": {
+        "lawgroup_governance_principles": "law_monarchy"
+      },
+      "expected_government_type": "gov_principality",
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: WFB Vampire Counts (Strigoi ghouls are a vampire brood, not a greenskin warband)",
+          "why": "Excluded from the tribal law: vampire realm, #9029."
+        },
+        "expected_government_type": {
+          "source": "derived",
+          "why": "Follows from the tag's laws."
+        }
+      }
     }
   }
 }

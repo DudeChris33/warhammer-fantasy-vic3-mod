@@ -6357,7 +6357,7 @@ def check_country_history() -> int:
         print("country_history: the unresolved-government warning disappeared.", file=sys.stderr)
         return 1
     good_code, good_report = _country_history_run(["00_test.json"])
-    if good_code != 0 or "OK 00_test.json: 3 tag(s)" not in good_report:
+    if good_code != 0 or "OK 00_test.json: 4 tag(s)" not in good_report:
         print("country_history: the valid fixture region file was rejected:\n" + good_report, file=sys.stderr)
         return 1
     expected = COUNTRY_HISTORY_EXPECTED.read_text(encoding="utf-8")

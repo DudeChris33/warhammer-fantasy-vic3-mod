@@ -1,0 +1,20 @@
+﻿# Tribal realms (#9037): the Norse, Ungol and greenskin peoples that start as unrecognized countries.
+# law_chiefdom and law_elder_council are visible/enactable to these as well as to decentralized countries.
+# Kurgan realms join once their culture is defined (#8468): add its id to the OR below.
+# unrecognized AND a tribal culture, so the Skaven, Tomb Kings, Lizardmen and Strigoi do not qualify,
+# nor the recognized Kislev realms with an Ungol culture (KIS, ERE, UVE).
+wh_country_is_tribal_realm = {
+	is_country_type = unrecognized
+	OR = {
+		country_has_primary_culture = cu:norscan
+		country_has_primary_culture = cu:ungol
+		country_has_primary_culture = cu:mountain_orc
+		country_has_primary_culture = cu:savage_orc
+		country_has_primary_culture = cu:dark_lands_orc
+		country_has_primary_culture = cu:badlands_orc
+		country_has_primary_culture = cu:cathayan_orc
+		country_has_primary_culture = cu:lustrian_orc
+		country_has_primary_culture = cu:goblin
+		country_has_primary_culture = cu:hobgoblin
+	}
+}

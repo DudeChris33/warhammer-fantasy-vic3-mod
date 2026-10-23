@@ -58,7 +58,8 @@
         "lawgroup_rights_of_women": "law_no_womens_rights",
         "lawgroup_migration": "law_no_migration_controls",
         "lawgroup_slavery": "law_slave_trade",
-        "lawgroup_labour_associations": "law_combination_acts"
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_governance_principles": "law_chiefdom"
       },
       "ruling_igs": [
         "ig_armed_forces",
@@ -67,13 +68,13 @@
       "taxed_goods": [
         "liquor"
       ],
-      "expected_government_type": "gov_absolute_principality",
+      "expected_government_type": "gov_greenskin_warband",
       "suggested_ig_names": {
         "ig_armed_forces": "Boyz and Warbosses",
         "ig_devout": "Shamans of Gork and Mork"
       },
       "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
-      "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved"
+      "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; a warband ruled by a Warboss (law_chiefdom, #9037)"
     },
     "wood_elf_realm": {
       "tech_tier": 6,

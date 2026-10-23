@@ -9,7 +9,7 @@
       "lawgroup_church_and_state": "law_state_religion",
       "lawgroup_citizenship": "law_national_supremacy",
       "lawgroup_distribution_of_power": "law_oligarchy",
-      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_governance_principles": "law_chiefdom",
       "lawgroup_internal_security": "law_no_home_affairs",
       "lawgroup_navy_model": "law_merchant_navy",
       "lawgroup_colonization": "law_no_colonial_affairs",
@@ -36,13 +36,13 @@
     "tax_level": "low",
     "taxed_goods": [],
     "institutions": {},
-    "expected_government_type": "gov_principality",
+    "expected_government_type": "gov_chiefdom",
     "suggested_ig_names": {
       "ig_armed_forces": "Warhosts",
       "ig_devout": "Shamans and Chaos Sorcerers"
     },
     "source": "canon: WFB 8e Warriors of Chaos (Kurgan, Hung, Kul and Tong marauder tribes of the eastern steppes: horse-raiders under warlords and Chaos shamans)",
-    "why": "Loose marauder confederations under warlords with Chaos shamans; no schooling, police or bureaucracy; tribal package at tier 7"
+    "why": "Loose marauder confederations under warlords with Chaos shamans; no schooling, police or bureaucracy; tribal package at tier 7; Kurgan tribes follow their chieftains (law_chiefdom; no effect until the tags are defined, #9037)"
   },
   "tags": {
     "HUN": {

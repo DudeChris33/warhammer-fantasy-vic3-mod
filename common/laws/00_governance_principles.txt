@@ -10,11 +10,19 @@ law_chiefdom = {
 	progressiveness = -100
 
 	can_enact = {
-		is_country_type = decentralized
+		# [#9037] was: is_country_type = decentralized
+		OR = {
+			is_country_type = decentralized
+			wh_country_is_tribal_realm = yes
+		}
 	}
 
 	is_visible = {
-		is_country_type = decentralized
+		# [#9037] was: is_country_type = decentralized
+		OR = {
+			is_country_type = decentralized
+			wh_country_is_tribal_realm = yes
+		}
 	}
 
 	modifier = {

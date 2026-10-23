@@ -17,6 +17,8 @@ from pathlib import Path
 
 SLAVERY_BANNED = "law_slavery_banned"
 SLAVERY_GROUP = "lawgroup_slavery"
+GOVERNANCE_GROUP = "lawgroup_governance_principles"
+CHIEFDOM = "law_chiefdom"
 
 
 @dataclass(frozen=True)
@@ -51,6 +53,13 @@ def slavery_law(resolved: dict[str, Resolved], tag: str) -> str:
 
 
 def starting_laws(resolved: dict[str, Resolved]) -> dict[str, list[str]]:
-    """``{tag: [law id, ...]}`` the generator activates after the politics effect. Only the
-    slavery law for now; later items append their laws to the same lists."""
-    return {tag: [slavery_law(resolved, tag)] for tag in sorted(resolved)}
+    """``{tag: [law id, ...]}`` the generator activates after the politics effect: the slavery law
+    (#9028) and, for a tag whose governance principle resolves to ``law_chiefdom``, that law (#9037;
+    the rest of the governance group waits for #6638)."""
+    out: dict[str, list[str]] = {}
+    for tag in sorted(resolved):
+        laws = [slavery_law(resolved, tag)]
+        if resolved[tag].laws.get(GOVERNANCE_GROUP) == CHIEFDOM:
+            laws.append(CHIEFDOM)
+        out[tag] = laws
+    return out
