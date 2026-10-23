@@ -6241,6 +6241,44 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
     assert any("both in lawgroup_slavery" in e for e in lerrs), lerrs
     lerrs, _ = ch.check(texts, ownership_doc, tiers, effects, names, None, None, laws, law_ids)
     assert any("differs from what the generator emits" in e for e in lerrs), "a missing law line is stale"
+
+    # trade-law fallback (#9256): Mercantilism is locked without the gate tech, so a tag whose preset + extras
+    # lack it gets law_isolationism after the politics effect; extras adding the tech remove it; a changed gate raises
+    presets = {"effect_starting_technology_empire_tech": {"manufacturies", ch.TRADE_GATE_TECH},
+               "effect_starting_technology_goblin_tech": {"manufacturies"}}
+    gcult = {"REI": ("reiklander",), "MID": ("goblin",), "UNO": ("goblin",)}
+    gp = ch.plan(ownership_doc, gcult, None, laws, presets, ch.TRADE_GATE_TECH)
+    assert gp.blocks[0] == ("MID", ["effect_starting_technology_goblin_tech", ch.POLITICS_EFFECT,
+                                    "activate_law = law_type:law_slavery_banned", "activate_law = law_type:law_isolationism"]), gp.blocks[0]
+    assert gp.blocks[1][1][-1] == "activate_law = law_type:law_slave_trade", "an empire tag keeps Mercantilism"
+    assert gp.blocks[2][1][-2:] == ["activate_law = law_type:law_slavery_banned", "activate_law = law_type:law_isolationism"], \
+        "UNO has no technology"
+    assert laws["MID"] == ["law_slavery_banned"], "the input mapping is not mutated"
+    gx = ch.plan(ownership_doc, gcult, {"MID": [ch.TRADE_GATE_TECH]}, laws, presets, ch.TRADE_GATE_TECH)
+    assert "activate_law = law_type:law_isolationism" not in gx.blocks[0][1], "extras that add the gate tech remove the fallback"
+    gtexts = ch.render(gp.blocks, names)
+    gerrs, _ = ch.check(gtexts, ownership_doc, gcult, effects, names, None, None, laws,
+                        {**law_ids, "law_isolationism": "lawgroup_trade_policy"}, presets, ch.TRADE_GATE_TECH)
+    assert gerrs == [], gerrs
+    gerrs, _ = ch.check(ltexts, ownership_doc, gcult, effects, names, None, None, laws,
+                        {**law_ids, "law_isolationism": "lawgroup_trade_policy"}, presets, ch.TRADE_GATE_TECH)
+    assert any("differs from what the generator emits" in e for e in gerrs), "a missing fallback line is stale"
+    import tempfile
+    with tempfile.TemporaryDirectory() as tmp:
+        (Path(tmp) / "01.txt").write_text("law_mercantilism = {\n\tunlocking_technologies = {\n\t\tinternational_trade\n\t}\n}\n",
+                                          encoding="utf-8")
+        assert ch.load_trade_gate(Path(tmp)) == ch.TRADE_GATE_TECH
+        (Path(tmp) / "01.txt").write_text("law_mercantilism = {\n\tunlocking_technologies = {\n\t\tbanking\n\t}\n}\n",
+                                          encoding="utf-8")
+        try:
+            ch.load_trade_gate(Path(tmp))
+        except so.OwnershipError as exc:
+            assert "expected" in str(exc), exc
+        else:
+            raise AssertionError("a changed law_mercantilism gate must raise")
+        (Path(tmp) / "02.txt").write_text("effect_starting_technology_x_tech = {\n\t# c\n\tadd_technology_researched = a\n"
+                                          "\tadd_technology_researched = b\n}\nother = { }\n", encoding="utf-8")
+        assert ch.load_preset_techs(Path(tmp)) == {"effect_starting_technology_x_tech": {"a", "b"}}
     _selfcheck_country_config()
 
 

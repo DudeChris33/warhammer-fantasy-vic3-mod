@@ -40,7 +40,10 @@ Rules
   ``activate_law = law_type:<id>`` each, in list order; today only the slavery law, #9028). With
   ``laws`` given, a defined owner with no entry is an error (fail closed); ``UNO`` is the
   exception and gets ``law_slavery_banned`` written out, the engine default. ``laws=None`` emits
-  none. The rest is placeholder-grade: it makes each country valid, not historically differentiated.
+  none. A tag whose preset techs plus extras lack the tech that ``law_mercantilism`` unlocks
+  (``international_trade``, read from ``common/laws``; a changed gate is an error) also gets
+  ``law_isolationism``, because ``effect_starting_politics_traditional`` sets Mercantilism for
+  everyone and the engine refuses to keep a locked law (#9256). The rest is placeholder-grade: it makes each country valid, not historically differentiated.
 * Ordering is stable (tags sorted), so an ownership repaint does not churn
   unrelated blocks.
 
@@ -112,6 +115,9 @@ _EFFECT_USE = re.compile(r"\badd_technology_researched\s*=\s*(\w+)|\bactivate_la
 _EFFECT_DEF = re.compile(r"^(\w+)\s*=\s*\{", re.M)
 ADD_TECH = "add_technology_researched"
 ACTIVATE_LAW = "activate_law = law_type:"
+ISOLATIONISM = "law_isolationism"
+TRADE_GATE_TECH = "international_trade"
+_UNLOCKING = re.compile(r"\bunlocking_technologies\s*=\s*\{([^}]*)\}")
 
 
 @dataclass
@@ -186,6 +192,37 @@ def load_tech_ids(technologies_dir: Path) -> set[str]:
     return ids
 
 
+def load_preset_techs(scripted_effects_dir: Path) -> dict[str, set[str]]:
+    """``{effect name: techs it researches}`` for the ``effect_starting_technology_*`` presets (flat
+    ``add_technology_researched`` lists)."""
+    out: dict[str, set[str]] = {}
+    for path in sorted(Path(scripted_effects_dir).glob("*.txt")):
+        text = sh._strip_comments(path.read_text(encoding="utf-8-sig"))
+        for m in _EFFECT_DEF.finditer(text):
+            if m.group(1).startswith("effect_starting_technology_"):
+                open_idx = text.index("{", m.end() - 1)
+                body = text[open_idx + 1:sh._match_brace(text, open_idx)]
+                out[m.group(1)] = set(re.findall(r"\badd_technology_researched\s*=\s*(\w+)", body))
+    return out
+
+
+def load_trade_gate(laws_dir: Path) -> str:
+    """The tech ``law_mercantilism`` unlocks on. Raises :class:`OwnershipError` unless it is exactly
+    :data:`TRADE_GATE_TECH`, so a changed gate fails loudly instead of drifting."""
+    for path in sorted(Path(laws_dir).glob("*.txt")):
+        text = sh._strip_comments(path.read_text(encoding="utf-8-sig"))
+        for m in _EFFECT_DEF.finditer(text):
+            if m.group(1) == "law_mercantilism":
+                open_idx = text.index("{", m.end() - 1)
+                um = _UNLOCKING.search(text[open_idx + 1:sh._match_brace(text, open_idx)])
+                techs = um.group(1).split() if um else []
+                if techs != [TRADE_GATE_TECH]:
+                    raise OwnershipError(f"law_mercantilism unlocks on {techs}, expected [{TRADE_GATE_TECH!r}]: "
+                                         f"update country_history.TRADE_GATE_TECH and the fallback rule (#9256)")
+                return TRADE_GATE_TECH
+    raise OwnershipError(f"no law_mercantilism in {laws_dir}")
+
+
 def load_law_ids(laws_dir: Path) -> dict[str, str]:
     """``{law id: law group}`` for the laws in ``common/laws/*.txt`` (top-level blocks with a ``group =``)."""
     out: dict[str, str] = {}
@@ -225,7 +262,9 @@ def owner_tags(ownership_doc: dict) -> set[str]:
 
 def plan(ownership_doc: dict, cultures: dict[str, tuple[str, ...]],
          extras: dict[str, list[str]] | None = None,
-         laws: dict[str, list[str]] | None = None) -> Plan:
+         laws: dict[str, list[str]] | None = None,
+         preset_techs: dict[str, set[str]] | None = None,
+         trade_gate: str | None = None) -> Plan:
     """What to emit. Raises :class:`OwnershipError` for a defined owner whose culture
     has no starting-technology preset, or (when ``laws`` is given) one with no entry in it."""
     blocks: list[tuple[str, list[str]]] = []
@@ -245,6 +284,10 @@ def plan(ownership_doc: dict, cultures: dict[str, tuple[str, ...]],
             else:
                 raise OwnershipError(f"c:{tag}: no starting laws in mapgen/config/country_history "
                                      f"(every defined owner needs an entry)")
+        if laws is not None and preset_techs is not None and trade_gate:
+            have = (preset_techs.get(tech, set()) if tech else set()) | set((extras or {}).get(tag, []))
+            if trade_gate not in have and ISOLATIONISM not in tag_laws:
+                tag_laws = [*tag_laws, ISOLATIONISM]   # Mercantilism is locked without the gate tech
         blocks.append((tag, ([tech] if tech else []) + techs + [POLITICS_EFFECT]
                        + [f"{ACTIVATE_LAW}{law}" for law in tag_laws]))
     return Plan(blocks=blocks, held_back=held)
@@ -311,12 +354,14 @@ def check(texts: dict[str, str] | None, ownership_doc: dict, cultures: dict[str,
           extras: dict[str, list[str]] | None = None,
           tech_ids: set[str] | None = None,
           laws: dict[str, list[str]] | None = None,
-          law_ids: dict[str, str] | None = None) -> tuple[list[str], list[str]]:
+          law_ids: dict[str, str] | None = None,
+          preset_techs: dict[str, set[str]] | None = None,
+          trade_gate: str | None = None) -> tuple[list[str], list[str]]:
     """Validate the emitted files (``{file name: text}``). Returns ``(errors, held_back)``;
     ``held_back`` lists JSON owners with no definition (the caller decides whether that is
     an error)."""
     try:
-        p = plan(ownership_doc, cultures, extras, laws)
+        p = plan(ownership_doc, cultures, extras, laws, preset_techs, trade_gate)
     except OwnershipError as exc:
         return [str(exc)], []
     if not texts:

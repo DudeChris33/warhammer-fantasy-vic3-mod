@@ -8,7 +8,7 @@ the starting-technology preset of its first culture (``worldgen/country_history.
 the tag's extras from ``mapgen/config/starting_tech_extras.json``,
 ``effect_starting_politics_traditional`` and the tag's starting laws (today the slavery law, resolved from
 ``mapgen/config/country_history/*.json`` by ``worldgen/country_config``, the same resolver the slave-pop
-gate reads). Rules are in
+gate reads), plus ``law_isolationism`` for a tag whose technologies lack the trade-law gate. Rules are in
 ``worldgen/country_history.py``.
 
 Runs after ``read_state_ownership.py`` (the same input as
@@ -41,6 +41,8 @@ MOD_ROOT = Path(__file__).resolve().parent.parent
 OWNERSHIP_PATH = MOD_ROOT / "mapgen" / "derived" / "state_ownership.json"
 COUNTRY_DEFS_DIR = MOD_ROOT / "common" / "country_definitions"
 LOC_DIR = MOD_ROOT / "localization"
+LAWS_DIR = MOD_ROOT / "common" / "laws"
+SCRIPTED_EFFECTS_DIR = MOD_ROOT / "common" / "scripted_effects"
 COUNTRY_HISTORY_CONFIG_DIR = MOD_ROOT / "mapgen" / "config" / "country_history"
 TECH_EXTRAS_PATH = MOD_ROOT / "mapgen" / "config" / "starting_tech_extras.json"
 TECHNOLOGIES_DIR = MOD_ROOT / "common" / "technology" / "technologies"
@@ -54,7 +56,7 @@ def summary(p: ch.Plan) -> str:
     laws = [x for _, effects in p.blocks for x in effects if x.startswith(ch.ACTIVATE_LAW)]
     if laws:
         counts = {law: laws.count(law) for law in sorted(set(laws))}
-        lines.append("  slavery laws: " + ", ".join(f"{k[len(ch.ACTIVATE_LAW):]} x{v}" for k, v in counts.items()))
+        lines.append("  starting laws: " + ", ".join(f"{k[len(ch.ACTIVATE_LAW):]} x{v}" for k, v in counts.items()))
     if p.held_back:
         lines.append(f"  held back (owner tag undefined): {', '.join(p.held_back)}")
     return "\n".join(lines)
@@ -66,6 +68,9 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--country-definitions", type=Path, default=COUNTRY_DEFS_DIR)
     ap.add_argument("--localization", type=Path, default=LOC_DIR)
     ap.add_argument("--tech-extras", type=Path, default=TECH_EXTRAS_PATH)
+    ap.add_argument("--laws", type=Path, default=LAWS_DIR, help="common/laws (the trade-law tech gate)")
+    ap.add_argument("--scripted-effects", type=Path, default=SCRIPTED_EFFECTS_DIR,
+                    help="common/scripted_effects (the starting-technology presets)")
     ap.add_argument("--country-history", type=Path, default=COUNTRY_HISTORY_CONFIG_DIR,
                     help="mapgen/config/country_history (the starting laws)")
     ap.add_argument("--technologies", type=Path, default=TECHNOLOGIES_DIR)
@@ -81,7 +86,8 @@ def main(argv: list[str] | None = None) -> int:
                                  + ", ".join(f"{t}:{x}" for t, x in unknown))
         resolved = country_config.load_resolved(args.country_history)
         laws = None if resolved is None else country_config.starting_laws(resolved)
-        p = ch.plan(doc, ch.load_country_cultures(args.country_definitions), extras, laws)
+        p = ch.plan(doc, ch.load_country_cultures(args.country_definitions), extras, laws,
+                    ch.load_preset_techs(args.scripted_effects), ch.load_trade_gate(args.laws))
     except OwnershipError as exc:
         print(f"generate_country_history: ERROR: {exc}", file=sys.stderr)
         return 1
