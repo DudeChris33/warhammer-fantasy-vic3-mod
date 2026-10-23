@@ -1,0 +1,3 @@
+﻿l_english:
+ # Overrides a vanilla name key (names_l_english.yml has "Séraphine"); the mod keeps the unaccented form.
+ Seraphine:0 "Seraphine"
