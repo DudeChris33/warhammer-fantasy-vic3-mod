@@ -122,7 +122,7 @@ TAG = {
   `generate_state_history.py` holds its states back and `validate_map.py` fails ([testing.md](testing.md)).
   It also needs a `mapgen/config/pop_history/calibration.json` total and a `population.json`
   wealth/literacy entry (directly or through a `groups` row), or `generate_pop_history.py` errors, and a
-  `mapgen/config/building_history/profiles.json` `tags` row, or `generate_building_history.py` errors (#8444).
+  `mapgen/config/building_history/profiles.json` `tags` row, or `generate_building_history.py` errors (#8444). It also needs a `mapgen/config/country_history/NN_<stem>.json` entry (or a `profile` from `profiles.json`): `validate_country_history.py` fails an owner with no entry, and `generate_country_history.py` errors on one with no starting laws (#9036).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
 - A tag's `cultures` no longer drive homelands (#8604): `add_homeland` comes only from the hand-authored `mapgen/config/state_homelands.json` ([testing.md](testing.md)). The owner's `cultures` only seed a new state's row (`--sync-homelands`) and still set the pop-mix fallback for a state whose list is `[]`.
 - **Placeholder tags (`XS*`).** A state owner the setting needs but no named polity can yet represent gets

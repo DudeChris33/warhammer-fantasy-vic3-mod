@@ -1,4 +1,5 @@
 {
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
   "region": "13_cathay",
   "baseline": {
     "laws": {
@@ -38,7 +39,6 @@
     "institutions": {
       "institution_schools": 1
     },
-    "expected_government_type": "gov_absolute_principality",
     "suggested_ig_names": {
       "ig_landowners": "Dragon-Regents and Provincial Nobility",
       "ig_intelligentsia": "Celestial Mandarins"
@@ -152,14 +152,7 @@
       }
     },
     "WEI": {
-      "confidence": "medium",
-      "expected_government_type": "gov_absolute_grand_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
-        }
-      }
+      "confidence": "medium"
     }
   }
 }

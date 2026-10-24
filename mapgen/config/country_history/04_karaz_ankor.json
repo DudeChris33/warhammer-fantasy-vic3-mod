@@ -39,79 +39,13 @@
     "institutions": {
       "institution_schools": 1
     },
-    "expected_government_type": "gov_principality",
     "suggested_ig_names": {
       "ig_landowners": "Clan Thanes",
       "ig_industrialists": "Engineers' and Miners' Guilds",
       "ig_devout": "Runesmiths and the Ancestor Cult"
     },
     "source": "canon: WFB 8e Dwarfs army book; WH: The Old World (2023+) Dwarfs background (King and Thanes, guilds of Engineers/Runesmiths/Miners, ancestor cult, Book of Grudges)",
-    "why": "A hold is a hereditary kingdom of clan Thanes with guild masters, standing regiments, guild-controlled trade and industry, insular borders and gunpowder-plus-steam engineering (tier 3)"
-  },
-  "profiles": {
-    "overrun_hold": {
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_devout"
-      ],
-      "tax_level": "low",
-      "institutions": {},
-      "source": "canon: WFB 8e Dwarfs / Lexicanum (Karak Eight Peaks, Ekrund, Karak Varn, Mount Gunbad, Karak Ungor, Karak Vlag and Mount Silverspear are overrun, besieged or half-lost to greenskins, Skaven and Chaos)",
-      "why": "A besieged remnant holds the deep vaults with garrison and priests, has lost industrial capacity (one tier down) and cannot fund schools"
-    },
-    "skaven_placeholder": {
-      "laws": {
-        "lawgroup_army_model": "law_warrior_caste",
-        "lawgroup_citizenship": "law_national_supremacy",
-        "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_migration": "law_no_migration_controls",
-        "lawgroup_policing": "law_no_police",
-        "lawgroup_rights_of_women": "law_no_womens_rights",
-        "lawgroup_slavery": "law_slave_trade",
-        "lawgroup_taxation": "law_consumption_based_taxation",
-        "lawgroup_trade_policy": "law_isolationism"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_devout"
-      ],
-      "expected_government_type": "gov_absolute_principality",
-      "suggested_ig_names": {
-        "ig_armed_forces": "Clanrats and Warlords",
-        "ig_devout": "Grey Seers"
-      },
-      "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
-      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
-    },
-    "undead_host": {
-      "laws": {
-        "lawgroup_army_model": "law_peasant_levies",
-        "lawgroup_citizenship": "law_national_supremacy",
-        "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_land_reform": "law_serfdom",
-        "lawgroup_policing": "law_no_police",
-        "lawgroup_rights_of_women": "law_no_womens_rights",
-        "lawgroup_slavery": "law_debt_slavery",
-        "lawgroup_trade_policy": "law_isolationism"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_devout"
-      ],
-      "institutions": {},
-      "tax_level": "low",
-      "expected_government_type": "gov_absolute_principality",
-      "suggested_ig_names": {
-        "ig_armed_forces": "Legions of the Dead",
-        "ig_devout": "Necromantic Cult"
-      },
-      "source": "canon: WFB 8e Vampire Counts (Heinrich Kemmler, human lich, leads an undead host of raised legions); TW:WH vampire lord package reused",
-      "why": "Kemmler rules as an absolute lich-lord over raised levies; same undead package as the vampire lords of the Southern Realms"
-    }
+    "why": "A hold is a hereditary kingdom of clan Thanes with guild masters, standing regiments, guild-controlled trade and industry, insular borders and gunpowder-plus-steam engineering"
   },
   "tags": {
     "AZL": {
@@ -141,20 +75,9 @@
     },
     "DRZ": {
       "confidence": "low",
-      "note": "Baseline unchanged; source thin.",
-      "expected_government_type": "gov_grand_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
-        }
-      }
+      "note": "Baseline unchanged; source thin."
     },
     "EKR": {
-      "profile": "overrun_hold",
-      "confidence": "medium"
-    },
-    "GUN": {
       "profile": "overrun_hold",
       "confidence": "medium"
     },
@@ -179,30 +102,12 @@
         }
       }
     },
-    "KAG": {
-      "confidence": "low",
-      "note": "Baseline unchanged; source thin."
-    },
     "KAK": {
-      "confidence": "high",
-      "expected_government_type": "gov_grand_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
-        }
-      }
+      "confidence": "high"
     },
     "KEP": {
       "profile": "overrun_hold",
-      "confidence": "medium",
-      "expected_government_type": "gov_grand_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
-        }
-      }
+      "confidence": "medium"
     },
     "KHI": {
       "confidence": "low",
@@ -227,10 +132,6 @@
     "KRV": {
       "confidence": "low",
       "note": "Dwarf hold; baseline unchanged."
-    },
-    "KUN": {
-      "profile": "overrun_hold",
-      "confidence": "medium"
     },
     "KVN": {
       "profile": "overrun_hold",
@@ -257,11 +158,6 @@
       "profile": "undead_host",
       "confidence": "low",
       "note": "Kemmler's Host; stand-in culture, no country definition yet."
-    },
-    "XSH": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
     },
     "XSI": {
       "profile": "skaven_placeholder",

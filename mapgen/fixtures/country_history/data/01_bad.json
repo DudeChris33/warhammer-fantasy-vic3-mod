@@ -18,7 +18,6 @@
     "institutions": {
       "institution_schools": 1
     },
-    "expected_government_type": "gov_absolute_kingdom",
     "source": "fixture",
     "why": "synthetic baseline"
   },
@@ -129,12 +128,17 @@
       "confidence": "low"
     },
     "FXN": {
-      "confidence": "high",
-      "expected_government_type": "gov_tribal",
+      "confidence": "high"
+    },
+    "FXO": {
+      "confidence": "low",
+      "laws": {
+        "lawgroup_governance_principles": "law_theocracy"
+      },
       "justify": {
-        "expected_government_type": {
+        "laws.lawgroup_governance_principles": {
           "source": "fixture",
-          "why": "culture does not match"
+          "why": "a law no government type accepts"
         }
       }
     }

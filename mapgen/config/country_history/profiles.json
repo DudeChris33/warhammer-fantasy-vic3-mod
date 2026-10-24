@@ -1,0 +1,733 @@
+{
+  "_comment": "Shared law packages, one per people, used by tags in any region (#9036). Each profile is a FULL package (all 24 law groups and every baseline field except the computed government type): a tag that names one skips its region baseline, so the same people resolve the same way everywhere. Tag-level overrides still need their own justify rows.",
+  "profiles": {
+    "asur_colony": {
+      "laws": {
+        "lawgroup_army_model": "law_national_militia",
+        "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_religious_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_charitable_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_guild_system",
+        "lawgroup_land_reform": "law_peasant_proprietorship",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_professional_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_devout"
+      ],
+      "tax_level": "medium",
+      "taxed_goods": [
+        "wine"
+      ],
+      "institutions": {
+        "institution_schools": 1,
+        "institution_health_system": 1
+      },
+      "suggested_ig_names": {
+        "ig_landowners": "Princes and Noble Houses",
+        "ig_devout": "Priesthoods of the Elven Gods"
+      },
+      "source": "derived",
+      "why": "Follows from the laws at principality tier; gov_kingdom requires country_tier = kingdom. A colony would run as gov_colonial_administration only with law_colonial_administration, which the generator does not emit (README, Mechanics gaps)."
+    },
+    "border_prince": {
+      "laws": {
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_freedom_of_conscience",
+        "lawgroup_citizenship": "law_subjecthood",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "wine"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Sell-sword Companies",
+        "ig_landowners": "Robber Barons"
+      },
+      "source": "canon: WFB Border Princes (petty warlord-princes and mercenaries on the Old World's wild frontier); Dogs of War background",
+      "why": "A Border Prince rules his hold by force with hired sellswords, tolerates every cult and lets refugees in; institutions are minimal"
+    },
+    "chaos_warband": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_devout": "Cult of Nurgle"
+      },
+      "source": "canon: WFB 8e Warriors of Chaos; WH: The Old World (Brass Keep held by Nurgle warbands since 2302 IC)",
+      "why": "A fortress held by a Chaos warband is a tribal raiding host, not an Imperial province"
+    },
+    "crusader_holding": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_subjecthood",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_guild_system",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_armed_forces"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "coffee"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_landowners": "Crusader Knights",
+        "ig_armed_forces": "Order Chapter"
+      },
+      "source": "canon: WFB 8e Bretonnia (Great Crusade against Araby; knights carve out fiefs); tag_registry.md 08 notes",
+      "why": "A crusader holding is a Bretonnian knightly fief transplanted overseas: warrior caste, hereditary offices, no local peasantry to tie to the land"
+    },
+    "estalian_kingdom": {
+      "laws": {
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_subjecthood",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_religious_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_guild_system",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_local_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_devout"
+      ],
+      "tax_level": "medium",
+      "taxed_goods": [
+        "wine"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_landowners": "Grandees",
+        "ig_devout": "Cult of Myrmidia"
+      },
+      "source": "canon: WFB Tilea and Estalia background (Estalian kingdoms: feudal grandees, Myrmidian state cult, sea-trade)",
+      "why": "Estalia is a group of feudal kingdoms under a proud landed nobility and the Myrmidian church, less mercantile than Tilea, one tier behind the Tilean cities"
+    },
+    "greenskin_holdout": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_chiefdom",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Boyz and Warbosses",
+        "ig_devout": "Shamans of Gork and Mork"
+      },
+      "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
+      "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; a warband ruled by a Warboss (law_chiefdom, #9037)"
+    },
+    "greenskin_horde": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_chiefdom",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "high",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Boyz and Warbosses",
+        "ig_devout": "Shamans of Gork and Mork"
+      },
+      "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
+      "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; a horde ruled by a Warboss (law_chiefdom, #9037) No institutions: law_no_police grants no police institution, so the Dark Lands baseline level is dropped (#9036)."
+    },
+    "hobgoblin_khanate": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Wolf-Rider Warbands",
+        "ig_landowners": "Khan's Kin"
+      },
+      "source": "canon: WFB / TW:WH3 Hobgoblin Khans (Wolf Riders, tributaries of the Chaos Dwarfs; Hobgoblin steppe raiders under a Khan)",
+      "why": "Steppe raiders under an absolute Khan, standing warband, slave-taking, no schooling"
+    },
+    "norse_colony": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_chiefdom",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_landowners"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Hird Warbands",
+        "ig_landowners": "Jarls and Hersirs"
+      },
+      "source": "canon: White Dwarf 309 \"The Norse of Lustria\" (Skeggi founded 888 IC by Losteriksson of the Bjornlings); Norsca tribal package",
+      "why": "A Norse colony keeps its homeland's jarl-and-warband institutions; Norse settlers keep their chieftains (law_chiefdom, #9037)"
+    },
+    "overrun_hold": {
+      "laws": {
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_racial_segregation",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_religious_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_guild_system",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_local_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_landowners": "Clan Thanes",
+        "ig_industrialists": "Engineers' and Miners' Guilds",
+        "ig_devout": "Runesmiths and the Ancestor Cult"
+      },
+      "source": "canon: WFB 8e Dwarfs / Lexicanum (Karak Eight Peaks, Ekrund, Karak Varn, Mount Gunbad, Karak Ungor, Karak Vlag and Mount Silverspear are overrun, besieged or half-lost to greenskins, Skaven and Chaos)",
+      "why": "A besieged remnant holds the deep vaults with garrison and priests, has lost industrial capacity (one tier down) and cannot fund schools"
+    },
+    "ruined_temple_city": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_theocracy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_devout",
+        "ig_armed_forces"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_devout": "Slann Mage-Priests and Skink Priests",
+        "ig_armed_forces": "Saurus Legions"
+      },
+      "source": "canon: WFB 8e Lizardmen / TW:WH3 (Xahutec, Oyxl, Tlanxla, Spektazuma, Tlax and Chupayotl are ruined, sunk or destroyed; Quetza is defiled by Clan Pestilens; Huatl is being refounded; Konquata is not yet founded at the 2502 start)",
+      "why": "A ruined or unfounded city has lost the temple-schools and a tier of organisation"
+    },
+    "skaven_placeholder": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slave_trade",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "medium",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Clanrats and Warlords",
+        "ig_devout": "Grey Seers"
+      },
+      "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
+      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; kept generic for lack of a clan-specific source; keeps the monarchy baseline: not a Norse tribe (#9037). No schools or health system: the package sets law_no_schools and law_no_health_system, and an institution exists only under a law that names it; tax is medium in every region (#9036)."
+    },
+    "temple_city": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_religious_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_theocracy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_devout",
+        "ig_armed_forces"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_devout": "Slann Mage-Priests and Skink Priests",
+        "ig_armed_forces": "Saurus Legions"
+      },
+      "source": "canon: WFB 8e Lizardmen army book (Slann Mage-Priests rule temple-cities through Skink priests, Saurus spawn as the warrior host, isolated by the Old Ones' design)",
+      "why": "Lizardmen temple-cities are ruled absolutely by a Slann theocracy with a Saurus warrior caste"
+    },
+    "undead_host": {
+      "laws": {
+        "lawgroup_army_model": "law_peasant_levies",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_serfdom",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_no_womens_rights",
+        "lawgroup_slavery": "law_debt_slavery",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Legions of the Dead",
+        "ig_devout": "Necromantic Cult"
+      },
+      "source": "canon: WFB 8e Vampire Counts (Heinrich Kemmler, human lich, leads an undead host of raised legions); TW:WH vampire lord package reused",
+      "why": "Kemmler rules as an absolute lich-lord over raised levies; same undead package as the vampire lords of the Southern Realms"
+    },
+    "ungol_tribe": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_chiefdom",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_rural_folk"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Horse-Lords",
+        "ig_rural_folk": "Herdsmen"
+      },
+      "source": "canon: WFB Kislev / Ungol horse-nomads (Ungols are nomadic steppe riders bound by clan)",
+      "why": "Nomadic clans keep no schools, bureaucracy or standing host beyond the clan warband, so they take the tribal package (no starting technology); no source shows Ungol slave-trading, so slavery is left at the baseline ban; the clans are led by chieftains (law_chiefdom, made visible to tribal realms by #9037)"
+    },
+    "vampire_lord": {
+      "laws": {
+        "lawgroup_army_model": "law_peasant_levies",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_guild_system",
+        "lawgroup_land_reform": "law_serfdom",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_debt_slavery",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Legions of the Dead",
+        "ig_devout": "Necromantic Cult"
+      },
+      "source": "canon: WFB 8e Vampire Counts (vampire lords rule feudal domains with undead levies over cowed living peasants)",
+      "why": "Same package as Sylvania: absolute vampire lord, levies raised by necromancy, serf peasants, closed borders"
+    },
+    "wood_elf_realm": {
+      "laws": {
+        "lawgroup_army_model": "law_warrior_caste",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_national_supremacy",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_combination_acts",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_no_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_consumption_based_taxation",
+        "lawgroup_trade_policy": "law_isolationism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_rural_folk",
+        "ig_devout"
+      ],
+      "tax_level": "very_low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_rural_folk": "Glade Kin",
+        "ig_devout": "Spellsingers and Waystalkers"
+      },
+      "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
+      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; the mod's lowest elven rung (no industry); keeps the monarchy baseline: not a Norse tribe (#9037) Taxed goods are liquor in every region: wine needs building_vineyard (enclosure, which the wood elf preset lacks) while liquor comes from subsistence home workshops (#9036)."
+    }
+  }
+}

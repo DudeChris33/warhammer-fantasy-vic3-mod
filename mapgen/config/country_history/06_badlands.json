@@ -36,7 +36,6 @@
       "liquor"
     ],
     "institutions": {},
-    "expected_government_type": "gov_greenskin_warband",
     "suggested_ig_names": {
       "ig_armed_forces": "Boyz and Warbosses",
       "ig_devout": "Shamans of Gork and Mork"
@@ -95,15 +94,10 @@
       "laws": {
         "lawgroup_governance_principles": "law_monarchy"
       },
-      "expected_government_type": "gov_principality",
       "justify": {
         "laws.lawgroup_governance_principles": {
           "source": "canon: WFB Vampire Counts (Strigoi ghouls are a vampire brood, not a greenskin warband)",
           "why": "Excluded from the tribal law: vampire realm, #9029."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws."
         }
       }
     }

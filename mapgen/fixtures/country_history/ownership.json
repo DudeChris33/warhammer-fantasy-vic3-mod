@@ -1,0 +1,57 @@
+{
+ "states": {
+  "STATE_A": {
+   "owner": "FXA"
+  },
+  "STATE_B": {
+   "owner": "FXB"
+  },
+  "STATE_C": {
+   "owner": "FXC"
+  },
+  "STATE_D1": {
+   "owner": "FXD"
+  },
+  "STATE_D2": {
+   "owner": "FXD"
+  },
+  "STATE_E": {
+   "owners": [
+    {
+     "owner": "FXE",
+     "provinces": [
+      1,
+      2
+     ]
+    },
+    {
+     "owner": "FXK",
+     "provinces": [
+      3
+     ]
+    }
+   ]
+  },
+  "STATE_E2": {
+   "owner": "FXE"
+  },
+  "STATE_J": {
+   "owner": "FXJ"
+  },
+  "STATE_L": {
+   "owner": "FXL"
+  },
+  "STATE_M": {
+   "owner": "FXM"
+  },
+  "STATE_N": {
+   "owner": "FXN"
+  },
+  "STATE_O": {
+   "owner": "FXO"
+  },
+  "STATE_U": {
+   "scope": "placeholder"
+  }
+ }
+}

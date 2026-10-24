@@ -18,24 +18,8 @@
     "institutions": {
       "institution_schools": 1
     },
-    "expected_government_type": "gov_absolute_kingdom",
     "source": "fixture",
     "why": "synthetic baseline"
-  },
-  "profiles": {
-    "republic": {
-      "laws": {
-        "lawgroup_governance_principles": "law_republic",
-        "lawgroup_distribution_of_power": "law_landed_voting"
-      },
-      "ruling_igs": [
-        "ig_a"
-      ],
-      "next_election": "2504.1.1",
-      "expected_government_type": "gov_armed_republic",
-      "source": "fixture",
-      "why": "a landed-franchise republic bundle"
-    }
   },
   "tags": {
     "FXA": {
@@ -61,18 +45,16 @@
         "laws.lawgroup_taxation": {
           "source": "fixture",
           "why": "needs currency_standards"
+        },
+        "institutions": {
+          "source": "fixture",
+          "why": "per-head tax grants no schools"
         }
-      }
+      },
+      "institutions": {}
     },
     "FXM": {
-      "confidence": "high",
-      "expected_government_type": "gov_tribal",
-      "justify": {
-        "expected_government_type": {
-          "source": "fixture",
-          "why": "culture-tested government type"
-        }
-      }
+      "confidence": "high"
     }
   }
 }

@@ -2,8 +2,10 @@
 
 Hand-authored input for a later generator that writes `common/history/countries/`. **Two generators read this folder** (everything else here is still unread by the game): `generate_pop_history.py` (each tag's slavery law gates `slaves` pops) and, since #9028, `generate_country_history.py` (the slavery law only, as `activate_law`, until #6638 emits the rest), both through `mapgen/worldgen/country_config.py`. The files describe what each start tag looks like in **2502 IC** in this mod's Victoria 3 mechanics. `python mapgen/validate_country_history.py` is the gate; `python mapgen/run_fixture.py --check` regression-tests the validator against `mapgen/fixtures/country_history/`.
 
-- One file per region, `NN_<stem>.json`, the same `NN_<stem>` as `common/country_definitions/` and the region files in `planning/tag_registry.md` (17 files: 00–13, 17–19; regions 14–16 are deferred with no tags).
-- One entry per **start** tag of that region in the registry (231 in all, counted from the files; `UNO` has none). Formables are out of scope and rejected. Tags with no `common/country_definitions/` entry yet (most of 08–13 and 17–19) still get entries; the generator skips them until their definitions exist.
+- One file per region, `NN_<stem>.json`, the same `NN_<stem>` as `common/country_definitions/` and the region files in `planning/tag_registry.md` (11 files today; a region whose tags own no land is not here, it is in `dormant/`).
+- One entry per tag of that region that **owns land at the start** (`mapgen/derived/state_ownership.json`, split-state slices count; `UNO` has none): 158 today. The validator gate covers owners only: an owner with no entry is an error, and so is an entry for a tag that owns nothing ("owns no state at start; move to dormant/"). Formables are out of scope and rejected.
+- `dormant/NN_<stem>.json` keeps the entries of start tags that own nothing yet (73 at #9036, same shape, a `_note` header). **Nothing reads `dormant/`**: the entries are not validated and may be stale. When a tag gains land, move its entry back into the region file (and the region's baseline with it if the region file is gone), then validate.
+- `profiles.json` holds the packages shared by whole peoples (wood elf, Skaven, vampire, greenskin, ...), defined once and usable from any region.
 - Every non-default choice carries a `source` and a one-line `why`. Sources are `canon: …` (tabletop first), `TW:…` where tabletop is silent, `derived` (follows mechanically from other fields) or `inferred`. Anything the mod cannot express is listed under *Mechanics gaps*, never authored around.
 
 ## Starting technology
@@ -15,11 +17,10 @@ This folder holds **no** technology. A tag's starting tech is what `generate_cou
 ```jsonc
 {
   "region": "02_empire",              // = file stem
-  "baseline": { … },                  // the region default, every tag inherits it
-  "profiles": { "name": { … } },      // optional named partial packages (see below)
+  "baseline": { … },                  // the region default, every tag without a profile inherits it
   "tags": {
     "REI": {
-      "profile": "name",              // optional: layer this profile over the baseline
+      "profile": "name",              // optional: a shared profile from profiles.json, used INSTEAD of the baseline
       "confidence": "high",           // high | medium | low  (low = baseline left for lack of canon)
       "note": "free text",            // optional
       "tax_level": "high",            // any baseline field: only what differs
@@ -44,13 +45,12 @@ This folder holds **no** technology. A tag's starting tech is what `generate_cou
 | `tariffs` | optional `[{goods, kind: import\|export, level}]` → `set_<kind>_tariff_level` |
 | `institutions` | `{institution_id: 0–5}` → `set_institution_investment_level` |
 | `next_election` | `YYYY.M.D` ≥ 2502.1.1 → `set_next_election_date`; **present iff a voting-franchise law is active** (`null` in a tag removes an inherited date) |
-| `expected_government_type` | a `common/government_types/` id whose `possible` the laws must satisfy; the generator does not emit it |
 | `suggested_ig_names` | `{ig: "Setting name"}` — **note only**, no loc is authored here |
 | `source`, `why` | required on the baseline and on every profile |
 
-**Profiles are an extension of the brief.** A region whose tags fall into two or three genuinely different packages (a tribal confederation inside feudal Kislev, greenskin holdouts inside Bretonnia, vampire lords inside the Southern Realms) would otherwise repeat 20 law overrides per tag with 20 identical justifications. A profile is a named partial package with **one** `source`/`why` for the whole bundle; a tag layers `baseline ← profile ← its own overrides`. Tag-level overrides on top of a profile still need their own `justify` entries. Profiles are region-local.
+**Profiles are shared full packages.** A region whose tags fall into two or three genuinely different packages (a tribal confederation inside feudal Kislev, greenskin holdouts inside Bretonnia, vampire lords inside the Southern Realms) would otherwise repeat 20 law overrides per tag. A profile in `profiles.json` is a **full** package: all 24 law groups and every baseline field (`ruling_igs`, `tax_level`, `taxed_goods`, `institutions`, plus `next_election`/`tariffs`/`suggested_ig_names` where used) and **one** `source`/`why` for the whole bundle. A tag that names a profile resolves `profile <- its own overrides` and **skips its region baseline**, so the same people resolve the same way in every region (a partial profile layered over each region's baseline drifted: wood elves taxed wine in some regions and liquor in others). Tag-level overrides on top of a profile still need their own `justify` entries, and may not repeat the profile's value. `mapgen/worldgen/country_config.py` is the one resolver; the validator and both generators read through it.
 
-`expected_government_type` overrides on a tag and the matching `next_election` changes are generated mechanically from the tag's laws and country tier (`source: derived`); the substantive choices are the laws.
+**The government type is computed, not written.** The validator evaluates `common/government_types` in file order and takes the first entry whose `possible` passes (the engine's rule, inferred from `.claude/rules/scripting.md`). The inputs are the laws, the country definition's tier and type, the ruling IGs, the subject type (the `create_diplomatic_pact` blocks in `common/history/diplomacy`: REI, COU and KSV hold protectorates, LOT protectorates and colonies) and the owned-state count (`any_scope_state = { count <= N }`, as `gov_free_city` uses). An undecidable entry before the pick (a ruler- or market-dependent trigger) is a warning; no entry passing is an error. `python mapgen/validate_country_history.py --dump-resolved <path>` writes every owner's resolved package and computed type as sorted JSON, which is how a restructure is proved to change nothing.
 
 ## Mapping conventions
 
@@ -66,19 +66,20 @@ This folder holds **no** technology. A tag's starting tech is what `generate_cou
 ```
 python mapgen/validate_country_history.py                 # all regions
 python mapgen/validate_country_history.py 02_empire.json  # one
+python mapgen/validate_country_history.py --dump-resolved scratchpad/x.json   # resolved packages + computed government type
 python mapgen/validate_country_history.py --vanilla "<Victoria 3>/game"   # read goods/institutions from vanilla
 python mapgen/run_fixture.py --check                       # includes the validator fixture
 ```
 
-Hard errors (exit 1): unknown law, law group, interest group, tech, good, institution or tax/tariff level; a law under the wrong group, several laws in one group, or a missing group; a law whose unlock (`unlocking_technologies` or `unlocking_laws`) is not covered; an extra in `starting_tech_extras.json` that is an unknown tech, lacks its prerequisite or is keyed on a formable; chosen laws where one `disallowing_laws` the other; a tag not in the registry, in another region, a formable, or a start tag with no entry; laws that fail `expected_government_type`'s `possible`; missing/stale/redundant `justify` entries or a missing `confidence`; a malformed or inconsistent `next_election`. Output is sorted and deterministic.
+Hard errors (exit 1): unknown law, law group, interest group, tech, good, institution or tax/tariff level; a law under the wrong group, several laws in one group, or a missing group; a law whose unlock (`unlocking_technologies` or `unlocking_laws`) is not covered; an extra in `starting_tech_extras.json` that is an unknown tech, lacks its prerequisite or is keyed on a formable; chosen laws where one `disallowing_laws` the other; a tag not in the registry, in another region or a formable; an owner with no entry or an entry for a tag that owns nothing; a profile that is not a full package; a non-zero institution level that no chosen law grants (`institution =` on the law); laws for which no government type matches; missing/stale/redundant `justify` entries or a missing `confidence`; a malformed or inconsistent `next_election`. Output is sorted and deterministic.
 
 Modelling assumptions (verify in game when the history files load):
 
 - The presets list every tech they grant (no `add_era_researched`; `load_preset_techs` ignores it), so the validator and the generator see the same techs.
 - A law is unlocked when **any** of its `unlocking_technologies` is covered **or any** `unlocking_laws` is active.
 - `country_has_voting_franchise` = one of `law_landed_voting`, `law_wealth_voting`, `law_census_voting`, `law_universal_suffrage`.
-- Start tags are independent (`is_subject_type` false), have no regency and no runtime variables; `ruler ?= { … }` triggers are unresolvable.
-- Government tier and country type come from `common/country_definitions/`. Without a definition, tier-dependent government triggers cannot be evaluated: the validator **warns** (60 tags today) instead of failing, and the check turns into an error the day a definition lands with a different tier.
+- Subject status comes from `common/history/diplomacy` (`is_subject_type = subject_type_<pact type>`); other tags are not subjects. Tags have no regency and no runtime variables; `ruler ?= { … }` triggers are unresolvable, and `overlord`/`top_overlord` scopes are undecidable for a subject.
+- Government tier and country type come from `common/country_definitions/`. Every owner has a definition, so the type is always decidable for the real data; a tag without one (a dormant entry revived early) warns instead of failing.
 - Goods and institutions are vanilla's (`common/goods`, `common/institutions` are not in `replace_paths`). The vanilla install was not reachable while authoring, so the validator carries a bundled list (Victoria 3 1.13, cross-checked against ids the mod's laws and `docs/*.log` mention) and uses `--vanilla` or the game root when those folders exist.
 
 ## Mechanics gaps

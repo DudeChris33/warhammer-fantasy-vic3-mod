@@ -2,10 +2,12 @@
 """Validate the starting-country data files in ``mapgen/config/country_history/``.
 
 Each ``NN_<stem>.json`` describes, per region, a ``baseline`` package plus per-tag
-overrides for every *start* tag of that region in ``planning/tag_registry.md`` (schema:
-``mapgen/config/country_history/README.md``). A later task generates
-``common/history/countries/`` from these files; this linter is the gate that keeps them
-consistent with the mod's own laws, interest groups, technologies and government types.
+overrides for every tag of that region that **owns land at the start**
+(``mapgen/derived/state_ownership.json``; schema: ``mapgen/config/country_history/README.md``).
+``profiles.json`` holds the full packages shared by whole peoples. Entries for tags that own
+nothing live in ``dormant/`` and are not read. Generators turn these files into
+``common/history/``; this linter is the gate that keeps them consistent with the mod's own
+laws, interest groups, technologies and government types.
 
 Hard errors (exit 1):
 
@@ -20,15 +22,21 @@ Hard errors (exit 1):
   formable. The preset and extras come from ``worldgen/country_history.py`` (the generator's own
   inputs), so linter and generator cannot disagree;
 * two chosen laws where one lists the other in ``disallowing_laws``;
-* a tag that is not in the registry, is a formable, is in another region, or a start tag of
-  the region with no entry;
-* laws that do not satisfy the trigger of the tag's ``expected_government_type``;
+* a tag that is not in the registry, is a formable, is in another region, owns no state at the
+  start (move it to ``dormant/``), or an owner with no entry; a profile that is not a full package;
+* a non-zero institution level that no chosen law grants (``institution =`` on the law);
+* laws for which no government type matches (see below);
 * a non-default choice with no ``source`` / ``why`` (a ``profile`` carries one for its whole
   bundle), or a justification with nothing to justify;
 * a malformed ``next_election`` (or one that disagrees with whether the laws hold elections).
 
+The government type is computed, never written: the first ``common/government_types`` entry, in
+file order, whose ``possible`` passes (the engine's rule), from the laws, the definition's tier and
+type, the ruling IGs, the subject type (``common/history/diplomacy`` pacts) and the owned-state
+count (``any_scope_state = { count <= N }``).
+
 Warnings never change the exit code: a government-type trigger that cannot be fully
-evaluated (tier or ruler unknown), a tag with no country definition (its tech is not
+evaluated before the pick (ruler- or market-dependent), a tag with no country definition (its tech is not
 evaluated), an extra its preset already grants.
 
 Deterministic: pure stdlib, sorted output, no clock, no environment reads.
@@ -37,6 +45,7 @@ Usage::
 
     python mapgen/validate_country_history.py                 # every region file
     python mapgen/validate_country_history.py 02_empire.json  # one file
+    python mapgen/validate_country_history.py --dump-resolved scratchpad/x.json  # resolved packages + computed type
     python mapgen/validate_country_history.py --vanilla "<Victoria 3>/game"
 """
 
@@ -46,17 +55,21 @@ import argparse
 import json
 import re
 import sys
+from dataclasses import dataclass, field
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
+from worldgen import country_config as cc  # noqa: E402
 from worldgen import country_history as ch  # noqa: E402
 from worldgen.state_ownership import OwnershipError  # noqa: E402
 
 DEFAULT_DATA_DIR = REPO / "mapgen" / "config" / "country_history"
 DEFAULT_REGISTRY = REPO / "planning" / "tag_registry.md"
 DEFAULT_EXTRAS = REPO / "mapgen" / "config" / "starting_tech_extras.json"
+DEFAULT_OWNERSHIP = REPO / "mapgen" / "derived" / "state_ownership.json"
+DEFAULT_SUBJECTS = REPO / "common" / "history" / "diplomacy"
 
 TAX_LEVELS = ("very_low", "low", "medium", "high", "very_high")
 CONFIDENCE = ("high", "medium", "low")
@@ -111,7 +124,7 @@ def parse_pdx(text: str) -> list:
                 pos += 1
                 return items
             if pos + 1 < len(toks) and toks[pos + 1] in ("=", "?=", "!=", "<", ">", "<=", ">="):
-                key = tok
+                key = tok + toks[pos + 1] if toks[pos + 1] in ("<", ">", "<=", ">=") else tok   # `count <= 2` -> `count<=`
                 pos += 2
                 if pos < len(toks) and toks[pos] == "{":
                     pos += 1
@@ -166,6 +179,7 @@ class GameData:
                 "unlock_techs": [t for b in _vals(body, "unlocking_technologies") for t in _bare(b)],
                 "unlock_laws": [t for b in _vals(body, "unlocking_laws") for t in _bare(b)],
                 "disallow": [t for b in _vals(body, "disallowing_laws") for t in _bare(b)],
+                "institution": next(iter(_vals(body, "institution")), None),
             }
 
         self.igs = {k for k, _ in _read_dir(game_root, "common/interest_groups")}
@@ -260,8 +274,11 @@ def load_registry(path: Path) -> dict[str, tuple[str, str]]:
 
 class Ctx:
     def __init__(self, game: GameData, laws: set[str], tier, country_type, igs: set[str],
-                 cultures: set[str] | None = None):
+                 cultures: set[str] | None = None, subject: str | None = None,
+                 state_count: int | None = None):
         self.game = game
+        self.subject = subject            # subject_type_<x> when the tag is a subject at the start
+        self.state_count = state_count
         self.laws = laws
         self.tier = tier
         self.country_type = country_type
@@ -318,8 +335,20 @@ def _eval_one(key: str, value, ctx: Ctx):
         return None if ctx.country_type is None else ctx.country_type == value
     if key == "country_has_voting_franchise":
         return ctx.franchise == _yes(value)
-    if key in ("is_subject_type", "has_variable", "has_modifier", "overlord", "top_overlord"):
-        return False  # start tags are independent, have no regency and carry no runtime flags
+    if key == "is_subject_type":
+        return ctx.subject == value
+    if key in ("overlord", "top_overlord"):
+        return False if ctx.subject is None else None   # the overlord's own laws are not resolved here
+    if key in ("has_variable", "has_modifier"):
+        return False  # start tags carry no runtime flags
+    if key == "any_scope_state" and isinstance(value, list):
+        ops = {"count<=": lambda n, x: n <= x, "count>=": lambda n, x: n >= x,
+               "count<": lambda n, x: n < x, "count>": lambda n, x: n > x}
+        inner = [(k, v) for k, v in value if k is not None]
+        if ctx.state_count is not None and inner and all(k in ops for k, _ in inner):
+            return _and([ops[k](ctx.state_count, int(v)) for k, v in inner])
+        ctx.unsupported.add(key)
+        return None
     if key == "has_gov_regency":
         return not _yes(value)
     if key.startswith("ig:") and isinstance(value, list):
@@ -353,34 +382,60 @@ def _load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_no_dupes)
 
 
-BASELINE_REQUIRED = ("laws", "ruling_igs", "tax_level", "taxed_goods",
-                     "institutions", "expected_government_type", "source", "why")
-TAG_FIELDS = ("laws", "ruling_igs", "tax_level", "taxed_goods",
-              "tariffs", "institutions", "next_election", "expected_government_type",
-              "suggested_ig_names")
-DIRECT_FIELDS = tuple(f for f in TAG_FIELDS if f != "laws")
+BASELINE_REQUIRED = ("laws", "ruling_igs", "tax_level", "taxed_goods", "institutions", "source", "why")
+TAG_FIELDS = ("laws",) + cc.DIRECT_FIELDS
+DIRECT_FIELDS = cc.DIRECT_FIELDS
 
 
-def _layer(base: dict, top: dict) -> dict:
-    """``top`` over ``base``: fields replace, ``laws`` merge per law group."""
-    eff = {k: v for k, v in base.items() if k in TAG_FIELDS}
-    eff["laws"] = dict(base.get("laws", {}))
-    for field in DIRECT_FIELDS:
-        if field in top:
-            eff[field] = top[field]
-    eff["laws"].update(top.get("laws", {}))
-    return eff
+@dataclass
+class Inputs:
+    """Everything a region file is checked against besides the game data."""
+    extras: dict = field(default_factory=dict)        # tag -> extra techs (starting_tech_extras.json)
+    profiles: dict | None = None                      # profiles.json (None = file absent)
+    owners: set | None = None                         # tags that own land at start (None = gate off)
+    counts: dict = field(default_factory=dict)        # tag -> states owned at start
+    subjects: dict = field(default_factory=dict)      # tag -> subject type id (subject_type_protectorate, ...)
 
 
-def check_package(pkg: dict, game: GameData, where: str, defn: dict | None,
-                  errors: list[str], warnings: list[str], evaluate_gov: bool = True,
-                  covered: set[str] | None = None, label: str = "") -> None:
-    """Check one *effective* package (baseline, profile or baseline+overrides).
+SUBJECT_PACT = re.compile(r"create_diplomatic_pact\s*=\s*\{\s*country\s*=\s*c:(\w+)\s*type\s*=\s*(\w+)")
 
-    ``evaluate_gov`` is off for baselines and profiles: a government trigger depends on the
-    tag's tier and country type, so only the resolved tag is evaluated. ``covered`` is the
-    tag's starting technology (``None`` = not evaluable, so the unlock check is skipped, as
-    for baselines and profiles)."""
+
+def load_subjects(folder: Path) -> dict[str, str]:
+    """``{subject tag: subject_type_<type>}`` from the ``create_diplomatic_pact`` blocks of ``common/history/diplomacy``."""
+    out: dict[str, str] = {}
+    if folder.is_dir():
+        for path in sorted(folder.glob("*.txt")):
+            text = re.sub(r"#[^\n]*", "", path.read_text(encoding="utf-8-sig"))
+            for tag, kind in SUBJECT_PACT.findall(text):
+                out[tag] = f"subject_type_{kind}"
+    return out
+
+
+def compute_government(game: GameData, laws: set[str], defn: dict | None, igs: set[str],
+                       subject: str | None, state_count: int | None):
+    """The government type the engine picks: the first ``common/government_types`` entry, in file order,
+    whose ``possible`` passes. Returns ``(name | None, undecided names before it, unsupported triggers)``."""
+    ctx = Ctx(game, laws, defn["tier"] if defn else None, defn["country_type"] if defn else None, igs,
+              defn["cultures"] if defn else None, subject=subject, state_count=state_count)
+    undecided: list[str] = []
+    for name, possible in game.gov_possible.items():
+        verdict = eval_items(possible, ctx)
+        if verdict is True:
+            return name, undecided, ctx.unsupported
+        if verdict is None:
+            undecided.append(name)
+    return None, undecided, ctx.unsupported
+
+
+def check_package(pkg: dict, game: GameData, where: str,
+                  errors: list[str], warnings: list[str],
+                  covered: set[str] | None = None, label: str = "",
+                  check_institutions: bool = False) -> None:
+    """Check one *effective* package (a baseline, a shared profile or a resolved tag).
+
+    ``covered`` is the tag's starting technology (``None`` = not evaluable, so the unlock check is
+    skipped, as for baselines and profiles). ``check_institutions`` makes a non-zero institution level
+    need an active law that names the institution (``institution =`` on the law)."""
     def err(msg):
         errors.append(f"{where}: {msg}")
 
@@ -441,11 +496,15 @@ def check_package(pkg: dict, game: GameData, where: str, defn: dict | None,
             err(f"malformed tariff entry {entry!r} (kind import|export, level in {sorted(TARIFF_LEVELS)})")
         elif entry.get("goods") not in game.goods:
             err(f"unknown good {entry.get('goods')} in tariffs")
+    granted = {game.laws[l]["institution"] for l in active if game.laws[l].get("institution")}
     for inst, level in pkg.get("institutions", {}).items():
         if inst not in game.institutions:
             err(f"unknown institution {inst}")
-        if level not in INSTITUTION_LEVELS or isinstance(level, bool):
+        elif level not in INSTITUTION_LEVELS or isinstance(level, bool):
             err(f"institution level for {inst} must be 0-5 (got {level!r})")
+        elif check_institutions and level and inst not in granted:
+            err(f"{inst} level {level} but no chosen law grants it (an institution exists only under a law "
+                f"that names it); drop the level or choose the law")
     for ig in pkg.get("suggested_ig_names", {}):
         if ig not in game.igs:
             err(f"unknown interest group {ig} in suggested_ig_names")
@@ -462,21 +521,6 @@ def check_package(pkg: dict, game: GameData, where: str, defn: dict | None,
     if not holds_elections and election is not None:
         err("next_election set but the laws hold no elections")
 
-    gov = pkg.get("expected_government_type")
-    if gov not in game.gov_possible:
-        err(f"unknown expected_government_type {gov!r}")
-    elif evaluate_gov and len(chosen) == len(game.law_groups):
-        ctx = Ctx(game, active, defn["tier"] if defn else None,
-                  defn["country_type"] if defn else None, set(pkg.get("ruling_igs", [])),
-                  defn["cultures"] if defn else None)
-        verdict = eval_items(game.gov_possible[gov], ctx)
-        if verdict is False:
-            err(f"laws do not satisfy {gov}'s possible trigger")
-        elif verdict is None:
-            why = "no country definition (tier/type unknown)" if defn is None else "ruler-dependent trigger"
-            extra = f"; unsupported trigger(s) {', '.join(sorted(ctx.unsupported))}" if ctx.unsupported else ""
-            warnings.append(f"{where}: {gov} not fully evaluable ({why}{extra})")
-
 
 def _justify_keys(tag: dict) -> set[str]:
     keys = {f for f in DIRECT_FIELDS if f in tag}
@@ -484,13 +528,45 @@ def _justify_keys(tag: dict) -> set[str]:
     return keys
 
 
-def validate_region_file(path: Path, game: GameData, registry: dict,
-                         extras: dict | None = None) -> tuple[list[str], list[str], int]:
+def _source_why(obj: dict) -> bool:
+    return all(isinstance(obj.get(f), str) and obj.get(f).strip() for f in ("source", "why"))
+
+
+def validate_profiles(path: Path, game: GameData, profiles: dict | None) -> tuple[list[str], list[str], int]:
+    """``profiles.json``: each profile is a full package (every baseline field, one source and why)."""
+    errors: list[str] = []
+    warnings: list[str] = []
+    name = path.name
+    if profiles is None:
+        return errors, warnings, 0
+    if not isinstance(profiles, dict):
+        return [f"{name}: 'profiles' must be an object"], warnings, 0
+    for pname in sorted(profiles):
+        prof = profiles[pname]
+        where = f"{name} profile {pname}"
+        if not isinstance(prof, dict):
+            errors.append(f"{where}: must be an object")
+            continue
+        for fld in BASELINE_REQUIRED:
+            if fld not in prof:
+                errors.append(f"{where}: incomplete profile, missing {fld} (a profile is a full package)")
+        for fld in sorted(set(prof) - set(TAG_FIELDS) - {"source", "why"}):
+            errors.append(f"{where}: unknown field {fld}")
+        if not _source_why(prof):
+            errors.append(f"{where}: needs a non-empty source and why")
+        check_package(prof, game, where, errors, warnings, check_institutions=True)
+    return errors, warnings, len(profiles)
+
+
+def validate_region_file(path: Path, game: GameData, registry: dict, inp: Inputs | None = None,
+                         collect: dict | None = None) -> tuple[list[str], list[str], int]:
+    """Check one region file. ``collect`` receives ``{tag: (resolved package, computed government type)}``."""
+    inp = inp or Inputs()
     errors: list[str] = []
     warnings: list[str] = []
     stem = path.stem
     name = path.name
-    extras = extras or {}
+    profiles = inp.profiles or {}
 
     try:
         data = _load_json(path)
@@ -501,42 +577,18 @@ def validate_region_file(path: Path, game: GameData, registry: dict,
         return [f"{name}: needs top-level 'region', 'baseline' and 'tags' objects"], [], 0
     if data.get("region") != stem:
         errors.append(f"{name}: 'region' is {data.get('region')!r}, expected {stem!r}")
+    if "profiles" in data:
+        errors.append(f"{name}: region-local profiles are gone; define the profile once in profiles.json")
 
     baseline = data["baseline"]
-    profiles = data.get("profiles", {})
-    if not isinstance(profiles, dict):
-        errors.append(f"{name}: profiles must be an object")
-        profiles = {}
-    for field in BASELINE_REQUIRED:
-        if field not in baseline:
-            errors.append(f"{name}: baseline missing {field}")
-    for field in sorted(set(baseline) - set(TAG_FIELDS) - {"source", "why"}):
-        errors.append(f"{name}: baseline has unknown field {field}")
-    if not all(isinstance(baseline.get(f), str) and baseline.get(f).strip() for f in ("source", "why")):
+    for fld in BASELINE_REQUIRED:
+        if fld not in baseline:
+            errors.append(f"{name}: baseline missing {fld}")
+    for fld in sorted(set(baseline) - set(TAG_FIELDS) - {"source", "why"}):
+        errors.append(f"{name}: baseline has unknown field {fld}")
+    if not _source_why(baseline):
         errors.append(f"{name}: baseline needs a non-empty source and why")
-    check_package(baseline, game, f"{name} baseline", None, errors, warnings, evaluate_gov=False)
-
-    # Profiles: named partial packages layered over the baseline (one source/why for the
-    # whole bundle) that several tags share, e.g. a tribal confederacy in a feudal region.
-    profile_pkgs: dict[str, dict] = {}
-    for pname in sorted(profiles):
-        prof = profiles[pname]
-        pwhere = f"{name} profile {pname}"
-        if not isinstance(prof, dict):
-            errors.append(f"{pwhere}: must be an object")
-            continue
-        for field in sorted(set(prof) - set(TAG_FIELDS) - {"source", "why"}):
-            errors.append(f"{pwhere}: unknown field {field}")
-        if not all(isinstance(prof.get(f), str) and prof.get(f).strip() for f in ("source", "why")):
-            errors.append(f"{pwhere}: needs a non-empty source and why")
-        for field in sorted(DIRECT_FIELDS):
-            if field in prof and prof[field] == baseline.get(field):
-                errors.append(f"{pwhere}: {field} repeats the baseline; drop it")
-        for group, law in sorted(prof.get("laws", {}).items()):
-            if baseline.get("laws", {}).get(group) == law:
-                errors.append(f"{pwhere}: laws.{group} repeats the baseline; drop it")
-        profile_pkgs[pname] = _layer(baseline, prof)
-        check_package(profile_pkgs[pname], game, pwhere, None, errors, warnings, evaluate_gov=False)
+    check_package(baseline, game, f"{name} baseline", errors, warnings)
 
     region_tags = {t: kind for t, (r, kind) in registry.items() if r == stem}
     for tag in sorted(data["tags"]):
@@ -546,10 +598,12 @@ def validate_region_file(path: Path, game: GameData, registry: dict,
             errors.append(f"{name}: {tag}: registry places it in {registry[tag][0]}")
         elif registry[tag][1] == "formable":
             errors.append(f"{name}: {tag}: is a formable (formables are out of scope)")
+        if inp.owners is not None and tag not in inp.owners:
+            errors.append(f"{name}: {tag}: owns no state at start; move the entry to dormant/")
     for tag, kind in sorted(region_tags.items()):
-        if kind == "start" and tag not in data["tags"]:
-            errors.append(f"{name}: {tag}: start tag has no entry")
-        if kind == "formable" and tag in extras:
+        if inp.owners is not None and tag in inp.owners and tag not in data["tags"]:
+            errors.append(f"{name}: {tag}: owner has no entry")
+        if kind == "formable" and tag in inp.extras:
             errors.append(f"{name}: {tag}: is a formable; starting_tech_extras.json keys only start tags")
 
     for tag in sorted(data["tags"]):
@@ -558,26 +612,29 @@ def validate_region_file(path: Path, game: GameData, registry: dict,
         if not isinstance(entry, dict):
             errors.append(f"{where}: entry must be an object")
             continue
-        for field in sorted(set(entry) - set(TAG_FIELDS) - {"justify", "confidence", "note", "profile"}):
-            errors.append(f"{where}: unknown field {field}")
+        for fld in sorted(set(entry) - set(TAG_FIELDS) - {"justify", "confidence", "note", "profile"}):
+            errors.append(f"{where}: unknown field {fld}")
         base_pkg = baseline
+        kind = "baseline"
         if "profile" in entry:
-            if entry["profile"] not in profile_pkgs:
-                errors.append(f"{where}: unknown profile {entry['profile']!r}")
+            if entry["profile"] not in profiles:
+                errors.append(f"{where}: unknown profile {entry['profile']!r}"
+                              + (" (profiles.json is missing)" if inp.profiles is None else ""))
             else:
-                base_pkg = profile_pkgs[entry["profile"]]
+                base_pkg = profiles[entry["profile"]]
+                kind = "profile"
         if entry.get("confidence") not in CONFIDENCE:
             errors.append(f"{where}: confidence must be one of {', '.join(CONFIDENCE)}")
         justify = entry.get("justify", {})
         if not isinstance(justify, dict):
             errors.append(f"{where}: justify must be an object")
             justify = {}
-        for field in sorted(DIRECT_FIELDS):
-            if field in entry and entry[field] == base_pkg.get(field):
-                errors.append(f"{where}: {field} repeats the {'profile' if base_pkg is not baseline else 'baseline'}; drop it")
+        for fld in sorted(DIRECT_FIELDS):
+            if fld in entry and entry[fld] == base_pkg.get(fld):
+                errors.append(f"{where}: {fld} repeats the {kind}; drop it")
         for group, law in sorted(entry.get("laws", {}).items()):
             if base_pkg.get("laws", {}).get(group) == law:
-                errors.append(f"{where}: laws.{group} repeats the {'profile' if base_pkg is not baseline else 'baseline'}; drop it")
+                errors.append(f"{where}: laws.{group} repeats the {kind}; drop it")
         needed = _justify_keys(entry)
         for key in sorted(needed):
             j = justify.get(key)
@@ -587,33 +644,78 @@ def validate_region_file(path: Path, game: GameData, registry: dict,
         for key in sorted(set(justify) - needed):
             errors.append(f"{where}: justify.{key} has no matching override")
 
-        eff = _layer(base_pkg, entry)
-        covered, label, tech_errs, tech_warns = game.coverage(tag, extras.get(tag, []))
+        eff = cc.layer(base_pkg, entry)
+        covered, label, tech_errs, tech_warns = game.coverage(tag, inp.extras.get(tag, []))
         errors.extend(f"{where}: {e}" for e in tech_errs)
         warnings.extend(f"{where}: {w}" for w in tech_warns)
-        check_package(eff, game, where, game.definitions.get(tag), errors, warnings,
-                      covered=covered, label=label)
+        check_package(eff, game, where, errors, warnings, covered=covered, label=label, check_institutions=True)
+
+        # the government type the engine would pick
+        if len(eff.get("laws", {})) == len(game.law_groups):
+            defn = game.definitions.get(tag)
+            gov, undecided, unsupported = compute_government(
+                game, set(eff["laws"].values()), defn, set(eff.get("ruling_igs", [])),
+                inp.subjects.get(tag), inp.counts.get(tag))
+            if gov is None and not undecided:
+                errors.append(f"{where}: no government type matches these laws")
+            elif undecided:
+                extra = f"; unsupported trigger(s) {', '.join(sorted(unsupported))}" if unsupported else ""
+                head = ", ".join(undecided[:3]) + (" ..." if len(undecided) > 3 else "")
+                why = "no country definition (tier/type unknown)" if defn is None else "ruler- or market-dependent trigger"
+                where_pick = f"before the pick {gov}" if gov else "and no entry passes"
+                warnings.append(f"{where}: government type not fully decidable ({len(undecided)} undecided "
+                                f"{where_pick}: {head}; {why}{extra})")
+            if collect is not None:
+                collect[tag] = (eff, gov)
+        elif collect is not None:
+            collect[tag] = (eff, None)
 
     return errors, warnings, len(data["tags"])
 
 
 def run(game_root: Path, data_dir: Path, registry_path: Path, files: list[str] | None = None,
-        vanilla_root: Path | None = None, extras_path: Path = DEFAULT_EXTRAS) -> tuple[int, str]:
+        vanilla_root: Path | None = None, extras_path: Path = DEFAULT_EXTRAS,
+        ownership_path: Path | None = DEFAULT_OWNERSHIP, subjects_dir: Path | None = DEFAULT_SUBJECTS,
+        dump_path: Path | None = None) -> tuple[int, str]:
     """Validate; return ``(exit_code, report_text)`` (deterministic)."""
     game = GameData(game_root, vanilla_root)
     registry = load_registry(registry_path)
-    extras = ch.load_tech_extras(extras_path) if extras_path.is_file() else {}
-    paths = sorted(data_dir.glob("[0-9][0-9]_*.json"))
+    inp = Inputs(extras=ch.load_tech_extras(extras_path) if extras_path.is_file() else {})
+    profiles_path = data_dir / cc.PROFILES_FILE
+    if profiles_path.is_file():
+        try:
+            inp.profiles = _load_json(profiles_path).get("profiles", {})
+        except (ValueError, OSError) as exc:
+            return 1, "\n".join(game.notes + [f"ERROR: {cc.PROFILES_FILE}: cannot read: {exc}"]) + "\n"
+    if ownership_path is not None and ownership_path.is_file():
+        doc = json.loads(ownership_path.read_text(encoding="utf-8"))
+        inp.owners = ch.owner_tags(doc) - {"UNO"}
+        inp.counts = ch.owner_state_counts(doc)
+    if subjects_dir is not None:
+        inp.subjects = load_subjects(subjects_dir)
+    paths = cc.region_files(data_dir)
     if files:
         wanted = {Path(f).name for f in files}
         paths = [p for p in paths if p.name in wanted]
     lines = list(game.notes)
     failed = 0
+    total = len(paths)
     if not paths:
         lines.append("no region files found")
         return 1, "\n".join(lines) + "\n"
+    collect: dict = {}
+    if inp.profiles is not None and not files:
+        errors, warnings, n = validate_profiles(profiles_path, game, inp.profiles)
+        total += 1
+        lines.extend(f"warning: {w}" for w in warnings)
+        if errors:
+            failed += 1
+            lines.extend(f"ERROR: {e}" for e in errors)
+            lines.append(f"FAIL {profiles_path.name}: {len(errors)} error(s)")
+        else:
+            lines.append(f"OK {profiles_path.name}: {n} profile(s)")
     for path in paths:
-        errors, warnings, n_tags = validate_region_file(path, game, registry, extras)
+        errors, warnings, n_tags = validate_region_file(path, game, registry, inp, collect)
         for w in warnings:
             lines.append(f"warning: {w}")
         if errors:
@@ -623,12 +725,20 @@ def run(game_root: Path, data_dir: Path, registry_path: Path, files: list[str] |
         else:
             lines.append(f"OK {path.name}: {n_tags} tag(s)")
     if not files:
-        for tag in sorted(set(extras) - set(registry)):   # keys on tags outside the roster (future tags)
-            for tech in extras[tag]:
+        for tag in sorted(set(inp.extras) - set(registry)):   # keys on tags outside the roster (future tags)
+            for tech in inp.extras[tag]:
                 if tech not in game.techs:
                     failed += 1
                     lines.append(f"ERROR: starting_tech_extras.json: {tag}: unknown tech {tech}")
-    lines.append(f"{len(paths) - failed}/{len(paths)} region file(s) valid")
+    if dump_path is not None:
+        dump = {}
+        for tag in sorted(collect):
+            pkg, gov = collect[tag]
+            dump[tag] = {**pkg, "_gov": gov}
+        dump_path.parent.mkdir(parents=True, exist_ok=True)
+        dump_path.write_text(json.dumps(dump, indent=1, sort_keys=True), encoding="utf-8", newline="\n")
+        lines.append(f"dumped {len(dump)} resolved package(s) to {dump_path}")
+    lines.append(f"{total - failed}/{total} file(s) valid")
     return (1 if failed else 0), "\n".join(lines) + "\n"
 
 
@@ -640,12 +750,18 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY)
     parser.add_argument("--extras", type=Path, default=DEFAULT_EXTRAS,
                         help="starting_tech_extras.json (default: the generator's)")
+    parser.add_argument("--ownership", type=Path, default=DEFAULT_OWNERSHIP,
+                        help="state_ownership.json: who owns land at the start (the gate covers owners only)")
+    parser.add_argument("--subjects", type=Path, default=DEFAULT_SUBJECTS,
+                        help="common/history/diplomacy folder (subject pacts feed the government triggers)")
+    parser.add_argument("--dump-resolved", type=Path, default=None,
+                        help="write every checked tag's resolved package and computed government type as sorted JSON")
     parser.add_argument("--vanilla", type=Path, default=None,
                         help="vanilla install `game` folder or mirror (goods/institutions)")
     parser.add_argument("--quiet", action="store_true", help="hide warnings")
     args = parser.parse_args(argv)
     code, report = run(args.game_root, args.data_dir, args.registry, args.files or None, args.vanilla,
-                       args.extras)
+                       args.extras, args.ownership, args.subjects, args.dump_resolved)
     if args.quiet:
         report = "".join(l for l in report.splitlines(True) if not l.startswith("warning:"))
     sys.stdout.write(report)

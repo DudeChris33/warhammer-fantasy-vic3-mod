@@ -1,0 +1,87 @@
+{
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
+  "region": "02_empire",
+  "baseline": {
+    "laws": {
+      "lawgroup_army_model": "law_national_militia",
+      "lawgroup_bureaucracy": "law_appointed_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_subjecthood",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_mercantilism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_local_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_charitable_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_migration_controls",
+      "lawgroup_slavery": "law_slavery_banned",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_devout"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {
+      "institution_schools": 1,
+      "institution_health_system": 1
+    },
+    "suggested_ig_names": {
+      "ig_landowners": "Elector Counts and Nobility",
+      "ig_devout": "Cult of Sigmar"
+    },
+    "source": "canon: WFB 8e Empire army book; WH: The Old World (2023+) Empire background (hereditary Elector Counts rule their provinces with their nobles; Sigmar the state cult; Imperial State Troops). The Emperor's election is gap #2 in README.md, not modelled",
+    "why": "A hereditary Elector Count ruling with his nobles (oligarchy, no provincial election: the only Imperial election is the Emperor's), Sigmarite state cult, provincial militias (state troops), Shallyan hospices, and gunpowder-plus-guild tech at tier 3"
+  },
+  "tags": {
+    "SOL": {
+      "confidence": "low",
+      "laws": {
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_health_system": "law_no_health_system"
+      },
+      "justify": {
+        "laws.lawgroup_army_model": {
+          "source": "inferred",
+          "why": "Tier 4 has no mandatory_service; a paid standing force replaces the provincial militia."
+        },
+        "laws.lawgroup_health_system": {
+          "source": "inferred",
+          "why": "Tier 4 has no medical_degrees for Shallyan hospices."
+        }
+      },
+      "note": "Claimant: Solland was destroyed (1707 IC) and owns no land at start."
+    },
+    "SYL": {
+      "confidence": "low",
+      "laws": {
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_health_system": "law_no_health_system"
+      },
+      "justify": {
+        "laws.lawgroup_army_model": {
+          "source": "inferred",
+          "why": "Tier 4 has no mandatory_service."
+        },
+        "laws.lawgroup_health_system": {
+          "source": "inferred",
+          "why": "Tier 4 has no medical_degrees."
+        }
+      }
+    }
+  }
+}

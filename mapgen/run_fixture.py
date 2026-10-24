@@ -6298,10 +6298,11 @@ def _selfcheck_country_config() -> None:
         d = Path(tmp)
         (d / "01_a.json").write_text(json.dumps({
             "baseline": {"laws": {"lawgroup_slavery": "law_slavery_banned", "lawgroup_taxation": "law_a"}},
-            "profiles": {"tribe": {"laws": {"lawgroup_slavery": "law_debt_slavery"}}},
             "tags": {"AAA": {}, "BBB": {"profile": "tribe"},
                      "CCC": {"profile": "tribe", "laws": {"lawgroup_slavery": "law_slave_trade"}}}}),
             encoding="utf-8")
+        (d / "profiles.json").write_text(json.dumps({"profiles": {"tribe": {
+            "laws": {"lawgroup_slavery": "law_debt_slavery", "lawgroup_taxation": "law_t"}}}}), encoding="utf-8")
         (d / "02_b.json").write_text(json.dumps({"baseline": {"laws": {}}, "tags": {"DDD": {}}}),
                                      encoding="utf-8")
         r = cc.load_resolved(d)
@@ -6309,6 +6310,8 @@ def _selfcheck_country_config() -> None:
             "AAA": "law_slavery_banned", "BBB": "law_debt_slavery", "CCC": "law_slave_trade", "DDD": "law_slavery_banned"}, r
         assert ph.load_slavery(d) == {t: cc.slavery_law(r, t) for t in r}, "pop gate and emitter share one resolver"
         assert cc.starting_laws(r)["BBB"] == ["law_debt_slavery"]
+        # a shared profile is a full package: it skips the region baseline (law_a) and reads the same in any region
+        assert [r[t].laws["lawgroup_taxation"] for t in ("AAA", "BBB", "CCC")] == ["law_a", "law_t", "law_t"], r
         assert cc.slavery_law(r, "ZZZ") == cc.SLAVERY_BANNED
     assert cc.load_resolved(None) is None and ph.load_slavery(Path(tmp) / "absent") is None
 
@@ -6320,23 +6323,26 @@ COUNTRY_HISTORY_EXPECTED = COUNTRY_HISTORY_DIR / "expected" / "report.txt"
 #: files; ``--update`` cannot silently drop one by regenerating the golden report.
 COUNTRY_HISTORY_NEEDLES = (
     "duplicate key", "baseline missing", "unknown field tech_tier", "ruling_igs must be", "missing law group",
-    "not in the tag registry", "is a formable", "registry places it in", "start tag has no entry",
+    "not in the tag registry", "is a formable", "registry places it in", "owner has no entry", "owns no state at start",
     "more than one law for", "unknown law group", "unknown law ", "unknown tech ", "unknown interest group",
     "unknown tax_level", "unknown good", "unknown institution", "is locked: needs tech",
     "is locked: needs law", "extra tech currency_standards needs", "is disallowed alongside",
-    "possible trigger", "next_election", "laws hold elections", "needs justify.", "has no matching override",
+    "no government type matches", "no chosen law grants it", "incomplete profile", "next_election", "laws hold elections", "needs justify.", "has no matching override",
     "repeats the baseline", "unknown field", "unknown profile", "confidence must be",
     "tech not evaluable", "unknown tech tech_zzz in starting_tech_extras.json",
     "is a formable; starting_tech_extras.json keys only start tags",
 )
 
 
-def _country_history_run(files=None):
+def _country_history_run(files=None, dump=None):
     import validate_country_history as vch
 
     return vch.run(COUNTRY_HISTORY_DIR / "game", COUNTRY_HISTORY_DIR / "data",
                    COUNTRY_HISTORY_DIR / "registry.md", files,
-                   extras_path=COUNTRY_HISTORY_DIR / "data" / "starting_tech_extras.json")
+                   extras_path=COUNTRY_HISTORY_DIR / "data" / "starting_tech_extras.json",
+                   ownership_path=COUNTRY_HISTORY_DIR / "ownership.json",
+                   subjects_dir=COUNTRY_HISTORY_DIR / "game" / "common" / "history" / "diplomacy",
+                   dump_path=dump)
 
 
 def _write_country_history_golden() -> None:
@@ -6359,8 +6365,23 @@ def check_country_history() -> int:
     if missing:
         print(f"country_history: error class(es) no longer reported: {missing}", file=sys.stderr)
         return 1
-    if "not fully evaluable" not in report:
-        print("country_history: the unresolved-government warning disappeared.", file=sys.stderr)
+    if "not fully decidable" not in report:
+        print("country_history: the undecidable-government warning disappeared.", file=sys.stderr)
+        return 1
+    import tempfile
+
+    with tempfile.TemporaryDirectory() as tmp:
+        dump = Path(tmp) / "resolved.json"
+        _country_history_run(dump=dump)
+        picked = {t: v["_gov"] for t, v in json.loads(dump.read_text(encoding="utf-8")).items()}
+    want = {"FXA": "gov_kingdom",         # shadows gov_absolute_kingdom, which also passes
+            "FXB": "gov_free_city",       # any_scope_state { count <= 1 } from the owned-state count; shadows gov_republic
+            "FXC": None,                  # no definition: the tier trigger cannot be decided
+            "FXE": "gov_protected",       # a protectorate in common/history/diplomacy
+            "FXM": "gov_tribal", "FXN": "gov_scripted",
+            "FXO": None}                  # no entry passes: an error
+    if {t: picked.get(t) for t in want} != want:
+        print(f"country_history: computed government types are {picked}, expected {want}", file=sys.stderr)
         return 1
     good_code, good_report = _country_history_run(["00_test.json"])
     if good_code != 0 or "OK 00_test.json: 4 tag(s)" not in good_report:

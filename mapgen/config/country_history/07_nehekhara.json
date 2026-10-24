@@ -36,25 +36,12 @@
       "liquor"
     ],
     "institutions": {},
-    "expected_government_type": "gov_absolute_kingdom",
     "suggested_ig_names": {
       "ig_devout": "Mortuary Cult (Liche Priests)",
       "ig_armed_forces": "Legions of the Dead"
     },
     "source": "canon: WFB 8e Tomb Kings (Priest-King dynasties, Mortuary Cult, eternal legions of the dead, caste-bound living population)",
     "why": "An undead Tomb King rules absolutely through the Mortuary Cult with tireless standing legions; a closed, caste-bound society with no schools or police beyond the guard of the dead"
-  },
-  "profiles": {
-    "vampire_lord": {
-      "laws": {
-        "lawgroup_army_model": "law_peasant_levies",
-        "lawgroup_land_reform": "law_serfdom",
-        "lawgroup_labour_associations": "law_guild_system"
-      },
-      "expected_government_type": "gov_absolute_principality",
-      "source": "canon: WFB 8e Vampire Counts / Lahmian bloodline (Neferata's court of vampire nobility)",
-      "why": "A vampire queen rules a court of blood-kin over cowed subjects: same package as other vampire realms"
-    }
   },
   "tags": {
     "BHA": {
@@ -73,11 +60,22 @@
       "profile": "vampire_lord",
       "confidence": "medium",
       "note": "Lahmia under Neferata; confidence medium because the tag models an undead city-state.",
-      "expected_government_type": "gov_absolute_county",
+      "ruling_igs": [
+        "ig_devout",
+        "ig_armed_forces"
+      ],
+      "suggested_ig_names": {
+        "ig_devout": "Mortuary Cult (Liche Priests)",
+        "ig_armed_forces": "Legions of the Dead"
+      },
       "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at city_state tier."
+        "ruling_igs": {
+          "source": "canon: Nehekharan mortuary cult of Khemri/Lahmia (carried over from the 07 profile copy)",
+          "why": "Lahmia keeps the Mortuary Cult and its liche priests ahead of the legions."
+        },
+        "suggested_ig_names": {
+          "source": "canon: Nehekharan mortuary cult of Khemri/Lahmia (carried over from the 07 profile copy)",
+          "why": "Lahmia keeps the Mortuary Cult and its liche priests ahead of the legions."
         }
       }
     },

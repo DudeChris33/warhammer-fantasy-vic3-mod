@@ -1,4 +1,5 @@
 {
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
   "region": "12_eastern_steppes",
   "baseline": {
     "laws": {
@@ -34,7 +35,6 @@
     "tax_level": "low",
     "taxed_goods": [],
     "institutions": {},
-    "expected_government_type": "gov_chiefdom",
     "suggested_ig_names": {
       "ig_armed_forces": "Warhosts",
       "ig_devout": "Shamans and Chaos Sorcerers"

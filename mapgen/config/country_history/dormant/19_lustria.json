@@ -1,4 +1,5 @@
 {
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
   "region": "19_lustria",
   "baseline": {
     "laws": {
@@ -34,43 +35,12 @@
     "tax_level": "low",
     "taxed_goods": [],
     "institutions": {},
-    "expected_government_type": "gov_theocratic_dictatorship",
     "suggested_ig_names": {
       "ig_devout": "Slann Mage-Priests and Skink Priests",
       "ig_armed_forces": "Saurus Legions"
     },
     "source": "canon: WFB 8e Lizardmen army book (Slann Mage-Priests rule temple-cities through Skink priests, Saurus spawn as the warrior host, isolated by the Old Ones' design)",
     "why": "Lizardmen temple-cities are ruled absolutely by a Slann theocracy with a Saurus warrior caste, isolated, without markets or schooling beyond temple lore"
-  },
-  "profiles": {
-    "ruined_temple_city": {
-      "laws": {
-        "lawgroup_education_system": "law_no_schools"
-      },
-      "source": "canon: WFB 8e Lizardmen / TW:WH3 (Xahutec, Oyxl, Tlanxla, Spektazuma, Tlax and Chupayotl are ruined, sunk or destroyed; Quetza is defiled by Clan Pestilens; Huatl is being refounded; Konquata is not yet founded at the 2502 start)",
-      "why": "A ruined or unfounded city has lost the temple-schools and a tier of organisation"
-    },
-    "norse_colony": {
-      "laws": {
-        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_distribution_of_power": "law_oligarchy",
-        "lawgroup_governance_principles": "law_chiefdom",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_rights_of_women": "law_women_own_property",
-        "lawgroup_slavery": "law_slave_trade"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_landowners"
-      ],
-      "expected_government_type": "gov_chiefdom",
-      "suggested_ig_names": {
-        "ig_armed_forces": "Hird Warbands",
-        "ig_landowners": "Jarls and Hersirs"
-      },
-      "source": "canon: White Dwarf 309 \"The Norse of Lustria\" (Skeggi founded 888 IC by Losteriksson of the Bjornlings); Norsca tribal package",
-      "why": "A Norse colony keeps its homeland's jarl-and-warband institutions; Norse settlers keep their chieftains (law_chiefdom, #9037)"
-    }
   },
   "tags": {
     "AXL": {

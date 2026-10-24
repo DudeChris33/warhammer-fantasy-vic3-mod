@@ -263,6 +263,22 @@ def owner_tags(ownership_doc: dict) -> set[str]:
     return {sh.TOKEN_OWNER.get(t, t) for t in tokens}
 
 
+def owner_state_counts(ownership_doc: dict) -> dict[str, int]:
+    """``{tag: states it owns or holds a slice of}`` at the start date (a split state counts once for each
+    of its owners; the ``unowned`` / ``placeholder`` tokens count for ``UNO``)."""
+    counts: dict[str, int] = {}
+    for key, rec in ownership_doc["states"].items():
+        if rec.get("scope") == "placeholder":
+            tokens = {PLACEHOLDER}
+        elif "owner" in rec:
+            tokens = {rec["owner"]}
+        else:
+            tokens = {sl["owner"] for sl in rec["owners"]}
+        for tag in {sh.TOKEN_OWNER.get(t, t) for t in tokens}:
+            counts[tag] = counts.get(tag, 0) + 1
+    return counts
+
+
 # ---------------------------------------------------------------------------
 # Plan / render
 # ---------------------------------------------------------------------------

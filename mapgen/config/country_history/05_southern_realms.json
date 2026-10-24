@@ -38,152 +38,12 @@
     "institutions": {
       "institution_schools": 1
     },
-    "expected_government_type": "gov_county",
     "suggested_ig_names": {
       "ig_petty_bourgeoisie": "Merchant Houses",
       "ig_armed_forces": "Condottieri Companies"
     },
     "source": "canon: WFB Dogs of War / Tilea (independent city-states ruled by merchant princes, mercenary companies, Myrmidia cult); WH: The Old World (2023+) Tilea background",
     "why": "Tilean city-states are ruled by merchant princes with the great houses (monarchy + oligarchy, no elections), hire professional mercenary companies and trade under mercantilist rules"
-  },
-  "profiles": {
-    "estalian_kingdom": {
-      "laws": {
-        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_citizenship": "law_subjecthood",
-        "lawgroup_navy_model": "law_merchant_navy",
-        "lawgroup_economic_system": "law_traditionalism",
-        "lawgroup_taxation": "law_land_based_taxation",
-        "lawgroup_migration": "law_migration_controls"
-      },
-      "ruling_igs": [
-        "ig_landowners",
-        "ig_devout"
-      ],
-      "institutions": {},
-      "expected_government_type": "gov_principality",
-      "suggested_ig_names": {
-        "ig_landowners": "Grandees",
-        "ig_devout": "Cult of Myrmidia"
-      },
-      "source": "canon: WFB Tilea and Estalia background (Estalian kingdoms: feudal grandees, Myrmidian state cult, sea-trade)",
-      "why": "Estalia is a group of feudal kingdoms under a proud landed nobility and the Myrmidian church, less mercantile than Tilea, one tier behind the Tilean cities"
-    },
-    "border_prince": {
-      "laws": {
-        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_church_and_state": "law_freedom_of_conscience",
-        "lawgroup_citizenship": "law_subjecthood",
-        "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_navy_model": "law_merchant_navy",
-        "lawgroup_economic_system": "law_traditionalism",
-        "lawgroup_taxation": "law_land_based_taxation",
-        "lawgroup_policing": "law_no_police",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_labour_associations": "law_combination_acts"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_landowners"
-      ],
-      "institutions": {},
-      "tax_level": "low",
-      "expected_government_type": "gov_absolute_principality",
-      "suggested_ig_names": {
-        "ig_armed_forces": "Sell-sword Companies",
-        "ig_landowners": "Robber Barons"
-      },
-      "source": "canon: WFB Border Princes (petty warlord-princes and mercenaries on the Old World's wild frontier); Dogs of War background",
-      "why": "A Border Prince rules his hold by force with hired sellswords, tolerates every cult and lets refugees in; institutions are minimal"
-    },
-    "vampire_lord": {
-      "laws": {
-        "lawgroup_army_model": "law_peasant_levies",
-        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_navy_model": "law_merchant_navy",
-        "lawgroup_economic_system": "law_traditionalism",
-        "lawgroup_trade_policy": "law_isolationism",
-        "lawgroup_taxation": "law_land_based_taxation",
-        "lawgroup_land_reform": "law_serfdom",
-        "lawgroup_policing": "law_no_police",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_migration": "law_closed_borders",
-        "lawgroup_slavery": "law_debt_slavery"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_devout"
-      ],
-      "institutions": {},
-      "tax_level": "low",
-      "taxed_goods": [
-        "liquor"
-      ],
-      "expected_government_type": "gov_absolute_principality",
-      "suggested_ig_names": {
-        "ig_armed_forces": "Legions of the Dead",
-        "ig_devout": "Necromantic Cult"
-      },
-      "source": "canon: WFB 8e Vampire Counts (vampire lords rule feudal domains with undead levies over cowed living peasants)",
-      "why": "Same package as Sylvania: absolute vampire lord, levies raised by necromancy, serf peasants, closed borders"
-    },
-    "skaven_placeholder": {
-      "laws": {
-        "lawgroup_army_model": "law_warrior_caste",
-        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_economic_system": "law_traditionalism",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_navy_model": "law_merchant_navy",
-        "lawgroup_policing": "law_no_police",
-        "lawgroup_rights_of_women": "law_no_womens_rights",
-        "lawgroup_slavery": "law_slave_trade",
-        "lawgroup_taxation": "law_consumption_based_taxation",
-        "lawgroup_trade_policy": "law_isolationism"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_devout"
-      ],
-      "taxed_goods": [
-        "liquor"
-      ],
-      "expected_government_type": "gov_absolute_principality",
-      "suggested_ig_names": {
-        "ig_armed_forces": "Clanrats and Warlords",
-        "ig_devout": "Grey Seers"
-      },
-      "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
-      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
-    },
-    "wood_elf_realm": {
-      "laws": {
-        "lawgroup_army_model": "law_warrior_caste",
-        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_economic_system": "law_traditionalism",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_navy_model": "law_merchant_navy",
-        "lawgroup_policing": "law_no_police",
-        "lawgroup_taxation": "law_consumption_based_taxation",
-        "lawgroup_trade_policy": "law_isolationism"
-      },
-      "ruling_igs": [
-        "ig_rural_folk",
-        "ig_devout"
-      ],
-      "tax_level": "very_low",
-      "institutions": {},
-      "suggested_ig_names": {
-        "ig_rural_folk": "Glade Kin",
-        "ig_devout": "Spellsingers and Waystalkers"
-      },
-      "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
-      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)",
-      "expected_government_type": "gov_principality"
-    }
   },
   "tags": {
     "AQL": {
@@ -192,25 +52,11 @@
     },
     "BIL": {
       "profile": "estalian_kingdom",
-      "confidence": "medium",
-      "expected_government_type": "gov_grand_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
-        }
-      }
+      "confidence": "medium"
     },
     "BPR": {
       "profile": "border_prince",
-      "confidence": "low",
-      "expected_government_type": "gov_absolute_kingdom",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at kingdom tier."
-        }
-      }
+      "confidence": "low"
     },
     "CNT": {
       "profile": "estalian_kingdom",
@@ -236,11 +82,6 @@
       "profile": "border_prince",
       "confidence": "low"
     },
-    "HKN": {
-      "profile": "vampire_lord",
-      "confidence": "low",
-      "note": "Vampire holding; source silent on its ruler."
-    },
     "LUC": {
       "confidence": "low",
       "note": "Prince Lorenzo Lupo of Luccini (from memory of WFB 6e Dogs of War, unverified); ruled like the baseline."
@@ -252,7 +93,6 @@
         "lawgroup_colonization": "law_frontier_colonization",
         "lawgroup_navy_model": "law_professional_navy"
       },
-      "expected_government_type": "gov_grand_principality",
       "justify": {
         "laws.lawgroup_colonization": {
           "source": "canon: WFB Estalia background (Magritta's Lustrian expeditions)",
@@ -261,10 +101,6 @@
         "laws.lawgroup_navy_model": {
           "source": "canon: WFB Estalia background (Magritta is Estalia's seagoing power)",
           "why": "A professional navy for the expeditions."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
         }
       }
     },
@@ -289,11 +125,6 @@
       "confidence": "low",
       "note": "Baseline unchanged."
     },
-    "PON": {
-      "profile": "vampire_lord",
-      "confidence": "low",
-      "note": "Vampire holding; source silent on its ruler."
-    },
     "RAA": {
       "profile": "border_prince",
       "confidence": "low"
@@ -305,7 +136,6 @@
         "lawgroup_governance_principles": "law_parliamentary_republic",
         "lawgroup_distribution_of_power": "law_wealth_voting"
       },
-      "expected_government_type": "gov_parliamentary_democracy",
       "next_election": "2502.10.1",
       "justify": {
         "laws.lawgroup_governance_principles": {
@@ -315,10 +145,6 @@
         "laws.lawgroup_distribution_of_power": {
           "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
           "why": "Wealth voting: the propertied houses elect the magistrates."
-        },
-        "expected_government_type": {
-          "source": "inferred",
-          "why": "Republic with a franchise."
         },
         "next_election": {
           "source": "inferred",
@@ -358,14 +184,19 @@
         },
         "laws.lawgroup_taxation": {
           "source": "inferred",
-          "why": "Tier 4 has no currency_standards for per-head tax; the haven levies harbour dues on goods."
+          "why": "A flavour choice, not a tech limit: the southern preset has currency_standards, but the haven levies harbour dues on goods rather than a head tax."
         },
         "ruling_igs": {
           "source": "canon: WFB Pirates of Sartosa (captains and brokers)",
           "why": "Captains and merchant-brokers share the take."
+        },
+        "institutions": {
+          "source": "derived: an institution exists only under a law that names it (law_no_schools, law_no_health_system and law_no_police grant none)",
+          "why": "Drops the institution level the baseline would give; #9036."
         }
       },
-      "note": "A council of captains under a pirate prince; inherits the Tilean baseline."
+      "note": "A council of captains under a pirate prince; inherits the Tilean baseline.",
+      "institutions": {}
     },
     "TOB": {
       "confidence": "low",
@@ -396,7 +227,6 @@
         "lawgroup_governance_principles": "law_presidential_republic",
         "lawgroup_distribution_of_power": "law_wealth_voting"
       },
-      "expected_government_type": "gov_presidential_democracy",
       "next_election": "2505.7.1",
       "justify": {
         "laws.lawgroup_governance_principles": {
@@ -406,10 +236,6 @@
         "laws.lawgroup_distribution_of_power": {
           "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
           "why": "Wealth voting: the propertied houses elect the magistrates."
-        },
-        "expected_government_type": {
-          "source": "inferred",
-          "why": "Republic with a franchise."
         },
         "next_election": {
           "source": "inferred",

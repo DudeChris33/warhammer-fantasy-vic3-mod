@@ -1,4 +1,5 @@
 {
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
   "region": "08_araby",
   "baseline": {
     "laws": {
@@ -36,7 +37,6 @@
       "coffee"
     ],
     "institutions": {},
-    "expected_government_type": "gov_absolute_principality",
     "suggested_ig_names": {
       "ig_landowners": "Emirs and Viziers",
       "ig_petty_bourgeoisie": "Caravan and Spice Merchants"
@@ -44,41 +44,10 @@
     "source": "canon: WFB Araby background (sultans, viziers, caravan and corsair trade); TW:WH3 Araby background; inferred where silent",
     "why": "Absolute sultans govern through appointed viziers with paid guards, tax land and caravans, trade under mercantile rules, keep slaves and run temple schools; tier 4 reflects Arabyan learning without gunpowder industry"
   },
-  "profiles": {
-    "crusader_holding": {
-      "laws": {
-        "lawgroup_army_model": "law_warrior_caste",
-        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
-        "lawgroup_distribution_of_power": "law_oligarchy",
-        "lawgroup_policing": "law_no_police",
-        "lawgroup_education_system": "law_no_schools",
-        "lawgroup_slavery": "law_slavery_banned"
-      },
-      "ruling_igs": [
-        "ig_landowners",
-        "ig_armed_forces"
-      ],
-      "tax_level": "low",
-      "expected_government_type": "gov_principality",
-      "suggested_ig_names": {
-        "ig_landowners": "Crusader Knights",
-        "ig_armed_forces": "Order Chapter"
-      },
-      "source": "canon: WFB 8e Bretonnia (Great Crusade against Araby; knights carve out fiefs); tag_registry.md 08 notes",
-      "why": "A crusader holding is a Bretonnian knightly fief transplanted overseas: warrior caste, hereditary offices, no local peasantry to tie to the land"
-    }
-  },
   "tags": {
     "AHK": {
       "confidence": "medium",
-      "note": "Al-Haikk, the Golden City: capital of the Arabyan Sultan.",
-      "expected_government_type": "gov_absolute_grand_principality",
-      "justify": {
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
-        }
-      }
+      "note": "Al-Haikk, the Golden City: capital of the Arabyan Sultan."
     },
     "ANT": {
       "profile": "crusader_holding",
@@ -130,15 +99,10 @@
       "laws": {
         "lawgroup_governance_principles": "law_theocracy"
       },
-      "expected_government_type": "gov_theocratic_oligarchy",
       "justify": {
         "laws.lawgroup_governance_principles": {
           "source": "canon: WFB Bretonnia (Knights of Origo: a holy military order under a Grand Master)",
           "why": "A crusading order rules as a religious body."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
         }
       }
     }

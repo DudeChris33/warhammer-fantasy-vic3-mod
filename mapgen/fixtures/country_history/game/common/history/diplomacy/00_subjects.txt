@@ -1,0 +1,9 @@
+DIPLOMACY = {
+	# FXE is a protectorate of FXA
+	c:FXA ?= {
+		create_diplomatic_pact = {
+			country = c:FXE
+			type = protectorate
+		}
+	}
+}

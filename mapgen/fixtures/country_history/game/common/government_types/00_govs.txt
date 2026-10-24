@@ -1,3 +1,6 @@
+gov_protected = {
+	possible = { is_subject_type = subject_type_protectorate }
+}
 gov_kingdom = {
 	possible = {
 		has_law = law_type:law_monarchy
@@ -19,6 +22,12 @@ gov_absolute_kingdom = {
 		country_tier = kingdom
 	}
 }
+gov_free_city = {
+	possible = {
+		any_scope_state = { count <= 1 }
+		has_law_or_variant = law_type:law_republic
+	}
+}
 gov_republic = {
 	possible = { has_law_or_variant = law_type:law_republic }
 }
@@ -28,15 +37,15 @@ gov_armed_republic = {
 		ig:ig_a = { is_in_government = yes }
 	}
 }
-gov_scripted = {
-	possible = {
-		test_monarchy = yes
-		NOT = { country_tier = kingdom }
-	}
-}
 gov_tribal = {
 	possible = {
 		has_law = law_type:law_monarchy
 		country_has_primary_culture = cu:ungol
+	}
+}
+gov_scripted = {
+	possible = {
+		test_monarchy = yes
+		NOT = { country_tier = kingdom }
 	}
 }

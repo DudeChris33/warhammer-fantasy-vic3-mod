@@ -1,0 +1,33 @@
+{
+  "profiles": {
+    "republic": {
+      "laws": {
+        "lawgroup_governance_principles": "law_republic",
+        "lawgroup_distribution_of_power": "law_landed_voting",
+        "lawgroup_taxation": "law_consumption_tax",
+        "lawgroup_land_reform": "law_tenants"
+      },
+      "ruling_igs": [
+        "ig_a"
+      ],
+      "tax_level": "medium",
+      "taxed_goods": [
+        "grain"
+      ],
+      "institutions": {
+        "institution_schools": 1
+      },
+      "next_election": "2504.1.1",
+      "source": "fixture",
+      "why": "a landed-franchise republic package shared across regions"
+    },
+    "incomplete": {
+      "laws": {
+        "lawgroup_governance_principles": "law_monarchy"
+      },
+      "tax_level": "medium",
+      "source": "fixture",
+      "why": "a profile that is not a full package"
+    }
+  }
+}

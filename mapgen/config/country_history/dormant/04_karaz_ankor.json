@@ -1,0 +1,70 @@
+{
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
+  "region": "04_karaz_ankor",
+  "baseline": {
+    "laws": {
+      "lawgroup_army_model": "law_professional_army",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_racial_segregation",
+      "lawgroup_distribution_of_power": "law_oligarchy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_mercantilism",
+      "lawgroup_taxation": "law_land_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_local_police",
+      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_women_own_property",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_closed_borders",
+      "lawgroup_slavery": "law_slavery_banned",
+      "lawgroup_labour_associations": "law_guild_system"
+    },
+    "ruling_igs": [
+      "ig_landowners",
+      "ig_industrialists",
+      "ig_devout"
+    ],
+    "tax_level": "medium",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {
+      "institution_schools": 1
+    },
+    "suggested_ig_names": {
+      "ig_landowners": "Clan Thanes",
+      "ig_industrialists": "Engineers' and Miners' Guilds",
+      "ig_devout": "Runesmiths and the Ancestor Cult"
+    },
+    "source": "canon: WFB 8e Dwarfs army book; WH: The Old World (2023+) Dwarfs background (King and Thanes, guilds of Engineers/Runesmiths/Miners, ancestor cult, Book of Grudges)",
+    "why": "A hold is a hereditary kingdom of clan Thanes with guild masters, standing regiments, guild-controlled trade and industry, insular borders and gunpowder-plus-steam engineering (tier 3)"
+  },
+  "tags": {
+    "GUN": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "KAG": {
+      "confidence": "low",
+      "note": "Baseline unchanged; source thin."
+    },
+    "KUN": {
+      "profile": "overrun_hold",
+      "confidence": "medium"
+    },
+    "XSH": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven placeholder; no country definition yet."
+    }
+  }
+}

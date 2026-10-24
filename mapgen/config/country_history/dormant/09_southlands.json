@@ -1,0 +1,82 @@
+{
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
+  "region": "09_southlands",
+  "baseline": {
+    "laws": {
+      "lawgroup_army_model": "law_warrior_caste",
+      "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+      "lawgroup_church_and_state": "law_state_religion",
+      "lawgroup_citizenship": "law_national_supremacy",
+      "lawgroup_distribution_of_power": "law_autocracy",
+      "lawgroup_governance_principles": "law_monarchy",
+      "lawgroup_internal_security": "law_no_home_affairs",
+      "lawgroup_navy_model": "law_merchant_navy",
+      "lawgroup_colonization": "law_no_colonial_affairs",
+      "lawgroup_economic_system": "law_traditionalism",
+      "lawgroup_trade_policy": "law_isolationism",
+      "lawgroup_taxation": "law_consumption_based_taxation",
+      "lawgroup_land_reform": "law_tenant_farmers",
+      "lawgroup_policing": "law_no_police",
+      "lawgroup_education_system": "law_no_schools",
+      "lawgroup_health_system": "law_no_health_system",
+      "lawgroup_free_speech": "law_right_of_assembly",
+      "lawgroup_labor_rights": "law_no_workers_rights",
+      "lawgroup_childrens_rights": "law_child_labor_allowed",
+      "lawgroup_rights_of_women": "law_no_womens_rights",
+      "lawgroup_welfare": "law_no_social_security",
+      "lawgroup_migration": "law_no_migration_controls",
+      "lawgroup_slavery": "law_slave_trade",
+      "lawgroup_labour_associations": "law_combination_acts"
+    },
+    "ruling_igs": [
+      "ig_armed_forces",
+      "ig_devout"
+    ],
+    "tax_level": "low",
+    "taxed_goods": [
+      "liquor"
+    ],
+    "institutions": {},
+    "suggested_ig_names": {
+      "ig_armed_forces": "Boyz and Warbosses",
+      "ig_devout": "Shamans of Gork and Mork"
+    },
+    "source": "canon: WFB 8e Orcs & Goblins (Savage Orcs of the Southlands jungles: tribes led by Big Bosses and Shamans, fetish-and-war-paint cultists); TW:WH Wurrzag",
+    "why": "Savage Orc tribes are the same warband package as other greenskins at tier 7 (no technology), led by a Big Boss and a shaman"
+  },
+  "tags": {
+    "BCB": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions."
+    },
+    "BHZ": {
+      "confidence": "medium",
+      "note": "Wurrzag da Great Green Prophet's tribe: shaman-led, but no institutional change."
+    },
+    "HHZ": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions."
+    },
+    "SNK": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions."
+    },
+    "TPK": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions."
+    },
+    "WSK": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions."
+    },
+    "WWG": {
+      "confidence": "low",
+      "note": "Savage Orc tribe: greenskin baseline unchanged; source gives names, not institutions."
+    },
+    "ZLA": {
+      "profile": "temple_city",
+      "confidence": "medium",
+      "note": "Zlatlan: Southlands temple-city."
+    }
+  }
+}

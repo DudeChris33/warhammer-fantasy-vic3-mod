@@ -1,4 +1,5 @@
 {
+  "_note": "Dormant: these start tags own no state at the start date (mapgen/derived/state_ownership.json), so the validator and the generators do not read this folder and the entries may be stale. When a tag gains land, move its entry back into the region file (and its baseline here if the region file is gone).",
   "region": "18_naggaroth",
   "baseline": {
     "laws": {
@@ -39,7 +40,6 @@
     "institutions": {
       "institution_police": 1
     },
-    "expected_government_type": "gov_absolute_grand_principality",
     "suggested_ig_names": {
       "ig_landowners": "Noble Houses",
       "ig_armed_forces": "Black Guard and Corsairs",
@@ -85,7 +85,6 @@
         "ig_devout",
         "ig_armed_forces"
       ],
-      "expected_government_type": "gov_theocratic_dictatorship",
       "justify": {
         "laws.lawgroup_governance_principles": {
           "source": "canon: WFB 8e Dark Elves (Har Ganeth, the City of Executioners: cult of Khaine)",
@@ -98,10 +97,6 @@
         "ruling_igs": {
           "source": "canon: WFB 8e Dark Elves (Cult of Khaine)",
           "why": "Priests first, then Executioners."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
         }
       }
     },
@@ -128,15 +123,10 @@
         "ig_armed_forces",
         "ig_landowners"
       ],
-      "expected_government_type": "gov_absolute_kingdom",
       "justify": {
         "ruling_igs": {
           "source": "canon: WFB 8e Dark Elves (Naggarond, Malekith's Black Guard)",
           "why": "The Witch King's seat is ruled by his guard and noble retinue."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at kingdom tier."
         }
       }
     }

@@ -36,37 +36,12 @@
       "liquor"
     ],
     "institutions": {},
-    "expected_government_type": "gov_principality",
     "suggested_ig_names": {
       "ig_landowners": "Boyars",
       "ig_devout": "Cults of Ursun, Dazh and Tor"
     },
     "source": "canon: WH: The Old World (2023+) Kislev background (Boyars under the Tzar); TW:WH3 Kislev; inferred for mundane law groups",
     "why": "Kislev is a boyar-ruled steppe monarchy with a gunpowder-capable but agrarian, cult-heavy society: peasant levies, hereditary boyar administration, land tax, guilds in its cities"
-  },
-  "profiles": {
-    "ungol_tribe": {
-      "laws": {
-        "lawgroup_army_model": "law_warrior_caste",
-        "lawgroup_citizenship": "law_national_supremacy",
-        "lawgroup_trade_policy": "law_isolationism",
-        "lawgroup_taxation": "law_consumption_based_taxation",
-        "lawgroup_migration": "law_closed_borders",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_governance_principles": "law_chiefdom"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_rural_folk"
-      ],
-      "suggested_ig_names": {
-        "ig_armed_forces": "Horse-Lords",
-        "ig_rural_folk": "Herdsmen"
-      },
-      "source": "canon: WFB Kislev / Ungol horse-nomads (Ungols are nomadic steppe riders bound by clan)",
-      "why": "Nomadic clans keep no schools, bureaucracy or standing host beyond the clan warband, so they take the tribal package at tier 7 (no technology); no source shows Ungol slave-trading, so slavery is left at the baseline ban; the clans are led by chieftains (law_chiefdom, made visible to tribal realms by #9037)",
-      "expected_government_type": "gov_chiefdom"
-    }
   },
   "tags": {
     "BOL": {
@@ -83,15 +58,10 @@
         "ig_landowners",
         "ig_petty_bourgeoisie"
       ],
-      "expected_government_type": "gov_grand_principality",
       "justify": {
         "ruling_igs": {
           "source": "canon: WFB Kislev (Erengrad is the realm's trade port at the mouth of the Lynsk)",
           "why": "Merchants share power with the boyars in the port city."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
         }
       }
     },
@@ -105,7 +75,6 @@
         "ig_landowners",
         "ig_armed_forces"
       ],
-      "expected_government_type": "gov_absolute_grand_principality",
       "justify": {
         "laws.lawgroup_distribution_of_power": {
           "source": "canon: WH: The Old World (2023+) Kislev background (ruled by the Tzar from Kislev city)",
@@ -118,10 +87,6 @@
         "ruling_igs": {
           "source": "canon: WFB Kislev (Winged Lancers and Tzar's Guard beside the boyars)",
           "why": "Court plus standing regiments rather than the cults."
-        },
-        "expected_government_type": {
-          "source": "inferred",
-          "why": "Follows from autocracy at grand_principality tier."
         }
       }
     },
@@ -131,15 +96,10 @@
         "ig_armed_forces",
         "ig_landowners"
       ],
-      "expected_government_type": "gov_grand_principality",
       "justify": {
         "ruling_igs": {
           "source": "canon: WFB Kislev (Praag is the northern fortress-city facing Chaos)",
           "why": "Garrison and boyars run a frontier city under permanent siege."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at grand_principality tier."
         }
       }
     },

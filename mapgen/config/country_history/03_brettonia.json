@@ -36,64 +36,12 @@
       "wine"
     ],
     "institutions": {},
-    "expected_government_type": "gov_principality",
     "suggested_ig_names": {
       "ig_landowners": "Knights and Nobility",
       "ig_devout": "Cult of the Lady (Damsels and Grail Pilgrims)"
     },
     "source": "canon: WFB 8e Bretonnia army book; WH: The Old World (2023+) Bretonnia background (knightly caste over peasant serfs, Lady of the Lake, dukes and barons)",
-    "why": "Hereditary knightly warrior caste over bound peasants, hereditary feudal offices, the Lady as state cult, land tax, guilds only in the port cities, and knights' disdain for gunpowder (tier 5)"
-  },
-  "profiles": {
-    "greenskin_holdout": {
-      "laws": {
-        "lawgroup_citizenship": "law_national_supremacy",
-        "lawgroup_distribution_of_power": "law_autocracy",
-        "lawgroup_trade_policy": "law_isolationism",
-        "lawgroup_taxation": "law_consumption_based_taxation",
-        "lawgroup_land_reform": "law_tenant_farmers",
-        "lawgroup_rights_of_women": "law_no_womens_rights",
-        "lawgroup_migration": "law_no_migration_controls",
-        "lawgroup_slavery": "law_slave_trade",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_governance_principles": "law_chiefdom"
-      },
-      "ruling_igs": [
-        "ig_armed_forces",
-        "ig_devout"
-      ],
-      "taxed_goods": [
-        "liquor"
-      ],
-      "expected_government_type": "gov_greenskin_warband",
-      "suggested_ig_names": {
-        "ig_armed_forces": "Boyz and Warbosses",
-        "ig_devout": "Shamans of Gork and Mork"
-      },
-      "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
-      "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; a warband ruled by a Warboss (law_chiefdom, #9037)"
-    },
-    "wood_elf_realm": {
-      "laws": {
-        "lawgroup_citizenship": "law_national_supremacy",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_land_reform": "law_tenant_farmers",
-        "lawgroup_migration": "law_no_migration_controls",
-        "lawgroup_taxation": "law_consumption_based_taxation",
-        "lawgroup_trade_policy": "law_isolationism"
-      },
-      "ruling_igs": [
-        "ig_rural_folk",
-        "ig_devout"
-      ],
-      "tax_level": "very_low",
-      "suggested_ig_names": {
-        "ig_rural_folk": "Glade Kin",
-        "ig_devout": "Spellsingers and Waystalkers"
-      },
-      "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
-      "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; held at tier 6 as the mod's lowest elven rung (no industry)"
-    }
+    "why": "Hereditary knightly warrior caste over bound peasants, hereditary feudal offices, the Lady as state cult, land tax, guilds only in the port cities, and knights' disdain for gunpowder"
   },
   "tags": {
     "ANM": {
@@ -144,15 +92,10 @@
       "laws": {
         "lawgroup_distribution_of_power": "law_autocracy"
       },
-      "expected_government_type": "gov_absolute_principality",
       "justify": {
         "laws.lawgroup_distribution_of_power": {
           "source": "canon: WFB 8e Bretonnia (the King is Duke of Couronne and rules his own domain directly)",
           "why": "The royal duchy is ruled by the crown, not a council of peers."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at principality tier."
         }
       }
     },
@@ -190,7 +133,7 @@
       "justify": {
         "laws.lawgroup_trade_policy": {
           "source": "canon: WFB 8e Bretonnia (Mousillon is shunned; no trade)",
-          "why": "Tier 6 lacks international_trade; the shunned duchy is isolated anyway."
+          "why": "Canon alone: the shunned duchy is cut off. The Mousillon preset keeps international_trade, so Mercantilism would be legal."
         },
         "laws.lawgroup_migration": {
           "source": "canon: WFB 8e Bretonnia (Mousillon's borders are closed by curse and quarantine)",

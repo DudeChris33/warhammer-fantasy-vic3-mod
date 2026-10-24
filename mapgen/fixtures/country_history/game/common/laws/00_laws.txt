@@ -1,5 +1,6 @@
 # Synthetic laws that exercise every validator rule.
 law_monarchy = { group = lawgroup_governance_principles }
+law_theocracy = { group = lawgroup_governance_principles }
 law_republic = {
 	group = lawgroup_governance_principles
 	unlocking_technologies = { democracy }
@@ -13,7 +14,10 @@ law_landed_voting = {
 	unlocking_technologies = { democracy }
 	disallowing_laws = { law_serfdom }
 }
-law_consumption_tax = { group = lawgroup_taxation }
+law_consumption_tax = {
+	group = lawgroup_taxation
+	institution = institution_schools
+}
 law_per_capita_tax = {
 	group = lawgroup_taxation
 	unlocking_technologies = { currency_standards }

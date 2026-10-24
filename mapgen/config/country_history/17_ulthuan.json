@@ -39,20 +39,12 @@
       "institution_schools": 1,
       "institution_health_system": 1
     },
-    "expected_government_type": "gov_kingdom",
     "suggested_ig_names": {
       "ig_landowners": "Princes and Noble Houses",
       "ig_devout": "Priesthoods of the Elven Gods"
     },
     "source": "canon: WFB 8e High Elves army book (Phoenix King and princes of the Ten Kingdoms; citizen-militia levy of every able elf; Sea Guard; Isha healers; closed to outsiders)",
-    "why": "Each kingdom is a hereditary realm of princely houses whose every able adult serves in the militia, backed by a great navy, healers and temple-schools, closed to outsiders, with elven craftsmanship at tier 3"
-  },
-  "profiles": {
-    "asur_colony": {
-      "expected_government_type": "gov_principality",
-      "source": "derived",
-      "why": "Follows from the laws at principality tier; gov_kingdom requires country_tier = kingdom. A colony would run as gov_colonial_administration only with law_colonial_administration, which the generator does not emit (README, Mechanics gaps)."
-    }
+    "why": "Each kingdom is a hereditary realm of princely houses whose every able adult serves in the militia, backed by a great navy, healers and temple-schools, closed to outsiders, with elven craftsmanship"
   },
   "tags": {
     "AVL": {
@@ -64,7 +56,6 @@
         "ig_devout",
         "ig_landowners"
       ],
-      "expected_government_type": "gov_theocratic_oligarchy",
       "justify": {
         "laws.lawgroup_governance_principles": {
           "source": "canon: WFB 8e High Elves (Avelorn: the Everqueen rules as Isha's priestess-queen)",
@@ -73,10 +64,6 @@
         "ruling_igs": {
           "source": "canon: WFB 8e High Elves (Avelorn's sisterhood of Isha)",
           "why": "The priesthood first."
-        },
-        "expected_government_type": {
-          "source": "derived",
-          "why": "Follows from the tag's laws at kingdom tier."
         }
       }
     },

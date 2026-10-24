@@ -16,3 +16,4 @@
 | FXJ | `01_bad` | Eta | start | `x` | — | start tag with no entry |
 | FXH | `01_bad` | Theta | formable | `x` | — | formable given an entry |
 | FXI | `02_bad_baseline` | Iota | start | `x` | — | other region |
+| FXO | `01_bad` | Omicron | start | `x` | — | a law no government type accepts |
