@@ -405,8 +405,8 @@
         479
       ],
       "b": [
-        4487,
-        532
+        4485,
+        529
       ],
       "type": "sea",
       "comment": "Hell Pit"
@@ -461,6 +461,18 @@
       "strait_type": "artificial",
       "land_a_color": "x07A829",
       "land_b_color": "xCB3937"
+    },
+    {
+      "a": [
+        5285,
+        2408
+      ],
+      "b": [
+        5261,
+        2415
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -584,6 +596,18 @@
     },
     {
       "a": [
+        5147,
+        2357
+      ],
+      "b": [
+        5140,
+        2374
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
         2834,
         1458
       ],
@@ -617,18 +641,6 @@
       ],
       "type": "canal_middle_talabec",
       "comment": "Middle Talabec River"
-    },
-    {
-      "a": [
-        7044,
-        2388
-      ],
-      "b": [
-        7090,
-        2373
-      ],
-      "type": "sea",
-      "comment": "Elithis"
     },
     {
       "a": [
@@ -1026,15 +1038,15 @@
     },
     {
       "a": [
-        2996,
-        1254
+        4247,
+        901
       ],
       "b": [
-        3011,
-        1256
+        4251,
+        890
       ],
       "type": "sea",
-      "comment": "Ulthuan"
+      "comment": "River Stir"
     },
     {
       "a": [
@@ -1071,6 +1083,18 @@
       ],
       "type": "sea",
       "comment": "Lustria"
+    },
+    {
+      "a": [
+        2996,
+        1254
+      ],
+      "b": [
+        3011,
+        1256
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -1803,42 +1827,6 @@
     },
     {
       "a": [
-        5418,
-        2373
-      ],
-      "b": [
-        5427,
-        2396
-      ],
-      "type": "sea",
-      "comment": "Southlands"
-    },
-    {
-      "a": [
-        5304,
-        2346
-      ],
-      "b": [
-        5264,
-        2330
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
-    },
-    {
-      "a": [
-        5285,
-        2408
-      ],
-      "b": [
-        5261,
-        2415
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
-    },
-    {
-      "a": [
         2361,
         421
       ],
@@ -1887,18 +1875,6 @@
     },
     {
       "a": [
-        4247,
-        901
-      ],
-      "b": [
-        4251,
-        890
-      ],
-      "type": "sea",
-      "comment": "River Stir"
-    },
-    {
-      "a": [
         3802,
         1213
       ],
@@ -1908,6 +1884,18 @@
       ],
       "type": "sea",
       "comment": "East Estalian Isles"
+    },
+    {
+      "a": [
+        5418,
+        2373
+      ],
+      "b": [
+        5427,
+        2396
+      ],
+      "type": "sea",
+      "comment": "Southlands"
     },
     {
       "a": [
@@ -1935,18 +1923,6 @@
     },
     {
       "a": [
-        5147,
-        2357
-      ],
-      "b": [
-        5140,
-        2374
-      ],
-      "type": "sea",
-      "comment": "Stars Archipelago"
-    },
-    {
-      "a": [
         3097,
         3036
       ],
@@ -1956,6 +1932,18 @@
       ],
       "type": "sea",
       "comment": "Isles of Dusk"
+    },
+    {
+      "a": [
+        7044,
+        2388
+      ],
+      "b": [
+        7090,
+        2373
+      ],
+      "type": "sea",
+      "comment": "Elithis"
     },
     {
       "a": [
@@ -2166,18 +2154,6 @@
     },
     {
       "a": [
-        6882,
-        2783
-      ],
-      "b": [
-        6897,
-        2806
-      ],
-      "type": "canal_elithis_w",
-      "comment": "Elithis"
-    },
-    {
-      "a": [
         4142,
         890
       ],
@@ -2262,7 +2238,7 @@
     },
     {
       "a": [
-        4490,
+        4491,
         533
       ],
       "b": [
@@ -3204,6 +3180,30 @@
       ],
       "type": "canal_sun_island_southern_coast",
       "comment": "Sun Island Southern Coast"
+    },
+    {
+      "a": [
+        5304,
+        2346
+      ],
+      "b": [
+        5264,
+        2330
+      ],
+      "type": "sea",
+      "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        6882,
+        2783
+      ],
+      "b": [
+        6897,
+        2806
+      ],
+      "type": "canal_elithis_w",
+      "comment": "Elithis"
     }
   ]
 }

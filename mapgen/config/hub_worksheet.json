@@ -752,7 +752,6 @@
   {"state": "Crooked Mounts", "hub": "city", "name": "Crooked Fang Fort", "anchor": [4303, 1329], "source": "canon: cr_oldworld_campaign/crooked_fang_fort (TWW3 Old World mod region table)"},
   {"state": "Crooked Mounts", "hub": "mine", "name": "Grimmaz Drakk", "anchor": [4353, 1334], "source": "canon: cr_oldworld_campaign/grimmaz_drakk (TWW3 Old World mod region table)"},
   {"state": "Crooked Mounts", "hub": "farm", "name": "Fangrot Patch", "anchor": [4303, 1329], "source": "invented", "note": "greenskin coinage (greenskin-held state); stacked, state too small for its own seed", "stack_on": "city"},
-  {"state": "Crooked Mounts", "hub": "wood", "name": "Crookwood", "anchor": [4303, 1329], "source": "invented", "note": "wood: eyeballed, no forest data layer; stacked, state too small for its own seed", "stack_on": "city"},
   {"state": "Winterteeth Pass", "hub": "city", "name": "Fort Soll", "anchor": [4160, 1090], "source": "canon: cr_oldworld_campaign/fort_soll (TWW3 Old World mod region table)"},
   {"state": "Winterteeth Pass", "hub": "port", "name": "Soll Landing", "anchor": [4160, 1090], "source": "invented", "note": "stacked port on a coastal host; stacked, state too small for its own seed", "stack_on": "city"},
   {"state": "Winterteeth Pass", "hub": "farm", "name": "Winterteeth Crofts", "anchor": [4160, 1090], "source": "invented", "note": "stacked, state too small for its own seed", "stack_on": "city"},
