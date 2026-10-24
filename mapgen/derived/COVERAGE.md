@@ -9,8 +9,8 @@ would help rather than the build silently coarsening.
 
 - Target: **659 land states** (vanilla's own count) at a mean
   of **16,953 canvas px** each, plus **103 sea zones**.
-- Achieved: **1114 land cells** (mean 10,029 px, median 8,492 px, min 6, max 43,102) and **113 sea zones**.
-- Cells traced from a source before filling: **2,565**.
+- Achieved: **1116 land cells** (mean 10,011 px, median 8,492 px, min 6, max 43,102) and **113 sea zones**.
+- Cells traced from a source before filling: **1,816**.
 
 ## Lettering bridge (the parchment master)
 
@@ -20,7 +20,7 @@ would help rather than the build silently coarsening.
 
 - Within the parchment master's own footprint, **73.5%** of land carries a traced cell (the rest falls through to the mask-wide seeded fallback below, same as everywhere else).
 
-- **Drawn versus tessellated**: **67.6%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
+- **Drawn versus tessellated**: **67.5%** of final land area belongs to a cell that carries a traced source boundary (an upper bound — `split_large` can still cut a synthetic border through a traced cell's interior if it comes out oversized, so the true drawn share is this number or lower, never higher). The rest is seeded fallback or nearest-label fill: tessellated, not drawn.
 
 ## Old World density (this request's gate)
 
@@ -36,13 +36,12 @@ Boundary sources, highest precedence first — the area a layer *offers*, not
 the area it wins:
 
 ```
-  precedence  95  tww3_colored.png                                 covers  70.0% of canvas
   precedence 100  tww3_ie_parchment.jpg                            covers  71.3% of canvas
 ```
 
 ## The gap
 
-**4.0% of land has no boundary source at all** and is partitioned by
+**4.2% of land has no boundary source at all** and is partitioned by
 seeded fallback cells at the target density. This is expected, not a defect:
 the Immortal Empires frame stops around Cathay, so the Kingdoms of Ind,
 Khuresh, Nippon, the far Eastern Steppes and the polar Chaos Wastes have no
