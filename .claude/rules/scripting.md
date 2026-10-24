@@ -74,10 +74,9 @@ those stubs when the folder is added. A folder that only replaces *some* of vani
 files for a database (leaving the rest to merge in normally) does not qualify (see
 the loading-behaviour paragraph above).
 
-Every folder listed in `replace_paths` must be tracked by git even when this mod hasn't
-authored any content for it yet — git doesn't track empty directories, so give it a
-`.gitkeep`. A folder that already carries real authored files doesn't need one; add
-`.gitkeep` only where nothing else keeps the folder present.
+A folder's presence in `replace_paths` is enough: it does not need to exist in git, so no
+`.gitkeep` is required for it (Chris, 2026-10-23). That is also why generated, gitignored folders
+such as `common/history/{states,pops,population,countries,buildings}` carry none.
 
 ## Patterns
 
