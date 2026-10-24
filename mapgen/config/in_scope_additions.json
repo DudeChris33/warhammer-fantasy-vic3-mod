@@ -34,7 +34,10 @@
     { "realm": "ulthuan",    "file_stem": "ulthuan",    "continent": "ulthuan" },
     { "realm": "lustria",    "file_stem": "lustria",    "continent": "new_world" },
     { "realm": "southlands", "file_stem": "southlands", "continent": "southlands" },
-    { "realm": "khuresh",    "file_stem": "khuresh",    "continent": "far_east" }
+    { "realm": "khuresh",    "file_stem": "khuresh",    "continent": "far_east" },
+    { "realm": "naggaroth", "file_stem": "naggaroth", "continent": "new_world" },
+    { "realm": "nippon", "file_stem": "nippon", "continent": "far_east" },
+    { "realm": "cathay", "file_stem": "cathay", "continent": "far_east" }
   ],
   "additions": [
     { "name": "ulthuan", "realm": "ulthuan", "box": [2432, 859, 3159, 1727],
@@ -52,6 +55,20 @@
     { "name": "gates_of_calith", "realm": "khuresh", "points": [[6469, 2899], [6485, 2964]],
       "note": "The two caps Chris cut with border strokes either side of the strait (label: GATES OF CALITH). They are two regions, so two states, unless he joins them with a state_merges line." },
     { "name": "lost_isles_of_elithis", "realm": "khuresh", "box": [6804, 2581, 7122, 2942],
-      "note": "The two large islands east of Khuresh (label: LOST ISLES OF ELITHIS). Realm is the nearest named land; Nippon is the other candidate." }
+      "note": "The two large islands east of Khuresh (label: LOST ISLES OF ELITHIS). Realm is the nearest named land; Nippon is the other candidate." },
+    { "name": "islets_cathay", "realm": "cathay", "points": [[5211, 1527]],
+      "note": "1 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." },
+    { "name": "islets_khuresh", "realm": "khuresh", "points": [[6171, 2237]],
+      "note": "1 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." },
+    { "name": "islets_lustria", "realm": "lustria", "points": [[1650, 2376], [1661, 2066], [1663, 1928], [1687, 2693], [1710, 1857], [1716, 2506], [1772, 2634], [1827, 2596], [1831, 2724], [2215, 1855], [2244, 3004], [2330, 2029], [2376, 2002], [2436, 1959], [2579, 2001], [2592, 2041], [2612, 2076], [2778, 2412]],
+      "note": "18 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." },
+    { "name": "islets_naggaroth", "realm": "naggaroth", "points": [[2075, 1165], [2188, 200], [2300, 572], [2358, 0], [2382, 781], [2401, 636], [2403, 180], [2431, 471], [2443, 317], [2471, 608], [2482, 462], [2518, 489], [2919, 0], [3226, 0], [3237, 1628], [3324, 692], [3338, 782], [3611, 0], [3780, 0], [3922, 0], [4319, 0]],
+      "note": "21 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." },
+    { "name": "islets_nippon", "realm": "nippon", "points": [[6997, 2436], [7230, 2283], [7457, 1161], [7549, 1042], [7916, 2252]],
+      "note": "5 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." },
+    { "name": "islets_southlands", "realm": "southlands", "points": [[3688, 2571], [5145, 1587]],
+      "note": "2 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." },
+    { "name": "islets_ulthuan", "realm": "ulthuan", "points": [[877, 770], [882, 1161], [886, 312], [898, 1110], [914, 1209], [935, 336], [940, 469], [945, 964], [959, 1106], [967, 1261], [983, 1139], [988, 955], [988, 1455], [1001, 1046], [1022, 1133], [1023, 989], [1025, 1358], [1037, 1020], [1042, 1469], [1053, 931], [1069, 1496], [1070, 901], [1076, 1197], [1080, 1142], [1089, 1038], [1097, 1572], [1105, 1424], [1120, 1475], [1132, 1597], [1142, 1353], [1218, 1634], [1270, 1538], [1285, 1638]],
+      "note": "33 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." }
   ]
 }

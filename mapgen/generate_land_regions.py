@@ -12,7 +12,7 @@ colour authority ``mapgen/derived/provinces_index.json`` and the sea canon
   realm's ``file_stem`` names (``worldgen.land_naming``, board #2931 — real
   per-realm split superseding #2930's single-``00_norsca.txt`` placeholder).
   Realm assignment is a per-region pixel-plurality vote against
-  ``sources/terraqueous_globe_reprojected - strategic_regions.png``, classified
+  the ``strategic_regions`` layer of ``full.ora`` (``source_layers.json``), classified
   by exact RGB via ``mapgen/config/strategic_region_colors.json``; a region with
   zero votes (outside the painting's coverage) is an out-of-scope placeholder,
   named from its nearest continent in ``mapgen/config/out_of_scope_continents.json``.
@@ -122,7 +122,7 @@ SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
 WORKSHEET_PATH = TOOLS_DIR / "config" / "land_regions_worksheet.csv"
 VANILLA_STATE_LOC_KEYS_PATH = TOOLS_DIR / "config" / "vanilla_state_loc_keys.txt"
 STRATEGIC_COLORS_PATH = TOOLS_DIR / "config" / "strategic_region_colors.json"
-STRATEGIC_PNG_PATH = sources.resolve_source_path("terraqueous_globe_reprojected - strategic_regions.png")
+STRATEGIC_SOURCE = sources.source_ref("strategic_regions")
 OUT_OF_SCOPE_CONTINENTS_PATH = TOOLS_DIR / "config" / "out_of_scope_continents.json"
 #: In-scope land outside the painted realms, with the realm each piece takes
 #: (worldgen.scope_additions); the same file generate_provinces.py reads.
@@ -513,22 +513,26 @@ def main(argv: list[str] | None = None) -> int:
     log("region ids stably matched into STATE numbers", t0)
 
     # --- realm assignment from the strategic-regions painting (board #2931) -
-    for path in (WORKSHEET_PATH, STRATEGIC_COLORS_PATH, STRATEGIC_PNG_PATH, OUT_OF_SCOPE_CONTINENTS_PATH):
+    for path in (WORKSHEET_PATH, STRATEGIC_COLORS_PATH, OUT_OF_SCOPE_CONTINENTS_PATH):
         if not path.is_file():
             raise SystemExit(f"{path} not found")
 
     legend = land_naming.load_strategic_region_colors(STRATEGIC_COLORS_PATH)
-    strategic_rgb = raster.read_rgb_png(STRATEGIC_PNG_PATH)
+    # an .ora layer: alpha snapped to 0/255, RGB zeroed under alpha 0 (no legend colour is black)
+    strategic_rgba = sources.read_source_rgba(STRATEGIC_SOURCE)
+    if strategic_rgba is None:
+        raise SystemExit(f"{STRATEGIC_SOURCE}: source file not found under sources/")
+    strategic_rgb = strategic_rgba[..., :3]
     crop_h, crop_w = strategic_rgb.shape[:2]
     if crop_h > CANVAS_H or crop_w > CANVAS_W:
-        raise SystemExit(f"{STRATEGIC_PNG_PATH.name}: {crop_w}x{crop_h} does not fit inside the "
-                         f"{CANVAS_W}x{CANVAS_H} canvas — it must be a top-left crop of it")
+        raise SystemExit(f"{STRATEGIC_SOURCE}: {crop_w}x{crop_h} does not fit inside the "
+                         f"{CANVAS_W}x{CANVAS_H} canvas")
     labels_crop = labels[:crop_h, :crop_w]
     land_crop_mask = (labels_crop >= 1) & (labels_crop <= n_land)
     region_of_pixel_crop = np.zeros((crop_h, crop_w), dtype=np.int64)
     region_of_pixel_crop[land_crop_mask] = region_of[labels_crop[land_crop_mask]]
     assignments = land_naming.assign_realms(region_of_pixel_crop, n_regions, strategic_rgb, legend)
-    log(f"realm votes computed for {n_regions} regions against {STRATEGIC_PNG_PATH.name}", t0)
+    log(f"realm votes computed for {n_regions} regions against {STRATEGIC_SOURCE}", t0)
 
     weak_margin = land_naming.weak_confidence_regions(assignments)
     if weak_margin:
@@ -558,8 +562,10 @@ def main(argv: list[str] | None = None) -> int:
             added = scope_additions.region_realms(region_of_pixel, additions)
         except scope_additions.ScopeAdditionError as e:
             raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: {e}")
-        painted = {f.realm for f in legend.fills}
-        clash = sorted(set(additions.realms) & painted)
+        # an addition may reuse a painted realm only if it names the same stub and continent
+        painted = {f.realm: (f.file_stem, f.continent) for f in legend.fills}
+        clash = sorted(r for r, d in additions.realms.items()
+                       if r in painted and painted[r] != (d.file_stem, d.continent))
         if clash:
             raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: realm(s) {clash} are already painted "
                              f"realms in {STRATEGIC_COLORS_PATH.name}")

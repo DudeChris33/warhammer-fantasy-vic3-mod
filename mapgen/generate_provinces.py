@@ -151,7 +151,12 @@ MERGE_FLOOR = 150
 #: 1,439,192 -> 1,657,506 px): 421 + (6000 - 343) * 1657506 / 1439192, which
 #: keeps the seats-per-px the Old World had. Left at 6000, 206 Old World states
 #: lost 372 provinces between them.
-PROVINCE_TARGET = 6936
+#: Raised 6936 -> 8258 on 2026-10-24 when 81 non-continent islands left the
+#: placeholders (Chris: every island that is not a continent is in scope; the two
+#: largest, 126k and 111k px, stay out until he draws interior state borders):
+#: 384 -> 465 drawn regions, 1,738,194 -> 2,067,357 px, by the same rule at the
+#: current drawn area: 465 + (6936 - 384) * 2067357 / 1738194.
+PROVINCE_TARGET = 8258
 #: A province piece below this many px is swallowed into a same-region neighbour
 #: (never across a magenta boundary — the merge stays inside one region).
 MIN_PROVINCE_AREA = 120

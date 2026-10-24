@@ -9,5 +9,6 @@
   "state_merges": "terraqueous_globe_reprojected - full.ora#state_merges",
   "cities": "terraqueous_globe_reprojected - full.ora#cities",
   "adjacencies": "terraqueous_globe_reprojected - full.ora#adjacencies",
+  "strategic_regions": "terraqueous_globe_reprojected - full.ora#strategic_regions",
   "climate_currents": "winds_and_currents.png"
 }
