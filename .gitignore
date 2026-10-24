@@ -48,3 +48,18 @@ planning/.cache/
 
 # Claude renders, previews, QA output (local only)
 scratchpad/
+
+# Generated outputs that rebuild byte-for-byte from tracked inputs (verified 2026-10-23: regenerated in a
+# clean worktree with these removed, git diff against HEAD was empty). After a fresh clone, run
+# generate_state_history.py, generate_pop_history.py, generate_country_history.py,
+# generate_building_history.py and generate_map_locators.py (in that order) before deploy.ps1.
+# NOT listed on purpose: map_data/state_regions, common/strategic_regions, the map loc and
+# mapgen/derived/land_state_ids.json keep ids stable by overlap-matching the previously committed
+# output, so they are not reproducible from scratch; PNG/DDS rasters depend on library versions;
+# mapgen/derived/state_ownership.json is a checkpoint of Chris's painted map.
+/common/history/states/
+/common/history/pops/
+/common/history/population/
+/common/history/countries/
+/common/history/buildings/
+/gfx/map/map_object_data/generated_map_object_locators_*.txt
