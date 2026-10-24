@@ -586,3 +586,15 @@ arabyan_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_arabyan_cultural_acceptance_add = 1
 }
+
+# ---- Board item #8468, Kurgan ----
+
+kurgan_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_kurgan_cultural_acceptance_add = 1
+}
+
+kurgan_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_kurgan_cultural_acceptance_add = 1
+}

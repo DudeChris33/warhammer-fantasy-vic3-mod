@@ -469,8 +469,8 @@ Chaos tags: a Nurgle-held fortress in the Middle Mountains (Hochland/Middenland/
 captured in the Great War against Chaos (2302 IC per *Warhammer: The Old World*/Lexicanum) and
 never retaken; the Empire contains rather than besieges it via "the Picket." Defined by #6373
 (2026-10-01, Chris) with **`norscan` as a disclosed stand-in culture** for its Chaos-worshipping
-garrison — no Chaos-marauder/cultist culture is authored anywhere in `common/cultures/` yet (possibly
-a culture shared with the Eastern Steppes marauders, a later decision); `unrecognized`/`principality`.
+garrison. A Chaos-marauder culture now exists as `kurgan` (#8468, for the steppe and Wastes marauders), but
+`BRK`'s garrison stays `norscan` by decision (Chris, 2026-10-18); `unrecognized`/`principality`.
 
 **#6373 additions (2026-10-01):** `CRB` Carroburg, the Middenland free city on the Reik
 (`recognized`/`city_state`), and the Skaven placeholders `XSA`, `XSB`, `XSC` (see *Conventions*).
@@ -881,6 +881,8 @@ the 4 confederations (Chris) — the many named Hung/Kurgan sub-tribes (Yin, Chi
 generic marauder flavor and left as a reserve. **No formable** (no canon united-steppes polity). Their
 loose confederation status is intended to be represented by a government/law variant (as with the
 Border Princes) — a later `common/` authoring task, out of scope here. (Approved 2026-08-30.)
+
+Culture update (#8468): the marauder culture now exists as `kurgan` (covering Kurgan, Hung, Kul, Tong and the Wastes); the tag rows below stay `PLACEHOLDER` and are retargeted when the tags are authored.
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|

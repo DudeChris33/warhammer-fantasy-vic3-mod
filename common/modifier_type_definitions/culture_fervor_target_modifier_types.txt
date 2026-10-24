@@ -474,3 +474,13 @@ country_fervor_target_arabyan_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8468, Kurgan ----
+
+country_fervor_target_kurgan_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

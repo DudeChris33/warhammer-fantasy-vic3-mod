@@ -66,3 +66,6 @@ heritage_nipponese_human = { type = heritage  trait_group = heritage_group_nippo
 
 # Arabyans. Board item #8473.
 heritage_arabyan_human = { type = heritage  trait_group = heritage_group_arabyan_human }
+
+# ---- Board item #8468, Kurgan ----
+heritage_kurgan_human = { type = heritage  trait_group = heritage_group_kurgan_human }

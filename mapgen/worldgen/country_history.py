@@ -96,6 +96,7 @@ CULTURE_TECH: dict[str, str | None] = {
     "lizardmen": "effect_starting_technology_lizardmen_tech",
     "skaven": "effect_starting_technology_skaven_tech",
     "beastmen": "effect_starting_technology_beastmen_tech",
+    "kurgan": "effect_starting_technology_chaos_tech",
     "arabyan": _SOUTHERN,
     "nipponese": "effect_starting_technology_nippon_tech",
     "khureshi": "effect_starting_technology_khuresh_tech",

@@ -220,8 +220,8 @@ MAR = {
 ################ BRK — Brass Keep; the Nurgle-held fortress in the Middle Mountains ################
 # Captured in the Great War against Chaos and never retaken; the Empire contains it ("the Picket").
 # CULTURE IS A DISCLOSED STAND-IN: norscan (cross-file ref to common/cultures/norscan_humans.txt)
-# represents its Chaos-worshipping garrison because no Chaos-marauder/cultist culture exists yet
-# (Chris, 2026-10-01). Revisit when an Eastern Steppes marauder culture is authored.
+# represents its Chaos-worshipping garrison; kept as norscan by decision (Chris, 2026-10-18, #8468) although
+# `kurgan` now exists for the steppe and Wastes marauders.
 # unrecognized: no Imperial or foreign power recognises a Chaos-held keep.
 
 BRK = {

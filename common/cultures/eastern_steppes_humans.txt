@@ -1,1 +1,71 @@
-﻿
+﻿# Old World cultures - the Kurgan, the Chaos marauders of the eastern steppes and the Chaos Wastes. Schema mirrors
+# common/cultures/beastmen.txt and the far-lands human cultures (khureshi_humans.txt). One culture covers the
+# Kurgan, Hung, Kul and Tong tribes and the marauders of the Wastes (basic division, no tribe split; the many sub-tribes
+# are flavour). Not authored here: the Norse (the existing norscan), Beastmen (beastmen.txt, #8467) and the
+# Ungol (ungol, Kislevite on Ursun). Each culture carries:
+#   color      - rgb{ 150 24 54 }, the legend colour of KUR (mapgen/config/state_ownership_legend.json), as high_elf (LOT),
+#                dark_elf (NGD) and lizardmen (ITZ) take theirs. The nearest shipped culture colour is dawi (156 44 40),
+#                which shares no border with the steppes.
+#   religion   - chaos_undivided, from common/religions/00_religions.txt (recorded by board items #8479 and #8484).
+#   heritage   - heritage_kurgan_human, in its own heritage_group_kurgan_human (common/discrimination_traits/00_heritages.txt).
+#   language   - sphere_kurgan, in its own sphere_group_kurgan (01_languages.txt). INVENTED name: canon names no everyday
+#                marauder tongue ("Dark Tongue" is the Chaos ritual language and is not used here).
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions - required field; an empty block is valid and is what this mod uses for now.
+#   obsessions - goods ids; empty until this mod authors common/goods/.
+# The Kurgan get their own heritage and language groups: kin to no one, so they gain none of the +20 / +15 citizenship
+# acceptance a shared trait or trait group gives with Norscans or Old World humans (common/laws/00_citizenship.txt).
+# Kinship with the Norse already comes through the shared chaos_undivided religion.
+# graphics/ethnicities - vanilla ships NO Kurgan portrait set. east_asian + central_asian is a deliberate STAND-IN (the
+#                vanilla kazak, tatar and mongol cultures use the same pair) pending custom art, with caucasian_dark_hair
+#                as the second ethnicity; it carries no lore claim. east_asian rather than european keeps marauder rulers out
+#                of European rank clothing (european_clothes_trigger, #6639).
+# NAMES ARE INVENTED (for Chris to review): canon gives the Kurgan almost no ordinary names. Register: steppe-hard
+# consonants (kh-, zh-, gh-, sk-) with the endings -ar, -uk, -ul, -ag, -ash, -ai for men and -a, -ai, -ka for women. Noble
+# houses are invented warlord lineages; common last names are earned epithets, as for norscan and beastmen. Banned and
+# avoided: canon tribe names (Khazag, Dolgan, Tokmar, Avag, Yusak, Kul, Tong, Yin, Mung, Aghol), famous canon figures
+# (Vardek Crom, Tamurkhan, Kholek, Valkia, Surtha Ek, Ghazak Khan, Asavar Kul) and famous real people (Temujin, Batu,
+# Toghrul, Timur). Every name was checked against vanilla names_l_english.yml, the mod's name files and the other cultures.
+# Every name string used below also needs a matching localization key - see localization/english/cultures_names_l_english.yml.
+# Every culture additionally needs its six static modifier definitions - see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_eastern_steppes_humans_l_english.yml.
+# Board item #8468 (epic #8462).
+
+################ Kurgan - the horse tribes of the steppes and the Wastes; Chaos Undivided ################
+
+kurgan = {
+	color= rgb{ 150 24 54 }
+	religion = chaos_undivided
+	heritage = heritage_kurgan_human
+	language = sphere_kurgan
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Khorgar Zhatuk Ulgrak Bardek Tarkhul Vorsag Durgai Kesharr Ogruk Tuvak
+		Skarag Ilgash Gorvath Khazhur Ruzhan Zharuk Ostrag Hargul Turgash Bekhar
+		Amrak Shagul Morgai Kharuk
+	}
+
+	female_common_first_names = {
+		Ashka Zhaali Tavra Ulmara Borsha Yarai Khadra Saruka Tazhai Vesska
+		Ilmai Durana Kirsha Oghla Zhenka Marukai Shakara Temai Agrata Haskai
+	}
+
+	noble_last_names = {
+		Khordai Vashgar Ulgarid Zhurdai Torgaith Borsagai Keldarak Moruthai Ashgarid Tazhrak
+	}
+
+	common_last_names = {
+		Skullbinder Horsebreaker Ironmane Blackbow Gorehand Steelbrand Ashrider Bloodmare Steedflayer Spearbreaker
+		Flayskin Darkspear Eyetaker Brandscar Redsaddle Stormhoof
+	}
+
+	graphics = east_asian
+	ethnicities = {
+		1 = central_asian
+		1 = caucasian_dark_hair
+	}
+}

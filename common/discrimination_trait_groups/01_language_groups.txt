@@ -37,3 +37,7 @@ sphere_group_nipponese = { type = language }
 
 # Arabyan, the tongue of Araby. Board item #8473.
 sphere_group_arabyan = { type = language }
+
+# ---- Board item #8468, Kurgan ----
+# Kurgan, the marauders' tongue (invented name).
+sphere_group_kurgan = { type = language }

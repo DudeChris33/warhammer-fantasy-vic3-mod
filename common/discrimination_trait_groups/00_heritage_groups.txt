@@ -38,3 +38,7 @@ heritage_group_nipponese_human = { type = heritage }
 
 # Arabyans - the humans of Araby and its Southlands colonies. Board item #8473.
 heritage_group_arabyan_human = { type = heritage }
+
+# ---- Board item #8468, Kurgan ----
+# Kurgan - the steppe and Wastes marauders, kin to no other people.
+heritage_group_kurgan_human = { type = heritage }

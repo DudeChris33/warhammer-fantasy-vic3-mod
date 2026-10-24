@@ -474,3 +474,13 @@ state_arabyan_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8468, Kurgan ----
+
+state_kurgan_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

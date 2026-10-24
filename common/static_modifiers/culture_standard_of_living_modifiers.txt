@@ -586,3 +586,15 @@ arabyan_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_arabyan_standard_of_living_add = 1
 }
+
+# ---- Board item #8468, Kurgan ----
+
+kurgan_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_kurgan_standard_of_living_add = 1
+}
+
+kurgan_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_kurgan_standard_of_living_add = 1
+}

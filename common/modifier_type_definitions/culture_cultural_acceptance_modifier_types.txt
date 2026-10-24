@@ -474,3 +474,13 @@ country_arabyan_cultural_acceptance_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #8468, Kurgan ----
+
+country_kurgan_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

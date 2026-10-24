@@ -586,3 +586,15 @@ arabyan_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_arabyan_add = 1
 }
+
+# ---- Board item #8468, Kurgan ----
+
+kurgan_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_kurgan_add = 1
+}
+
+kurgan_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_kurgan_add = 1
+}
