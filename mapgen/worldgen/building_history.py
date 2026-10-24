@@ -505,7 +505,14 @@ def _need(d: dict, keys, where: str) -> None:
 
 
 ARCH_FIELDS = ("admin", "barracks_levels", "barracks_states", "construction", "port_level", "port_states",
-               "trade_level", "trade_states", "farm_share", "logging_share", "workforce_share")
+               "trade_level", "trade_states", "farm_share", "logging_share", "workforce_share", "industry")
+INDUSTRY_FILE = "01_industry.txt"
+
+
+def _check_industry(value, where: str) -> None:
+    if not isinstance(value, dict) or not all(isinstance(b, str) and isinstance(n, int) and not isinstance(n, bool)
+                                              and n >= 0 for b, n in value.items()):
+        raise BuildingHistoryError(f"{where}: industry must be an object {{building id: levels >= 0}}")
 
 
 def load_config(d: Path) -> Config:
@@ -519,6 +526,7 @@ def load_config(d: Path) -> Config:
         _need(a, ARCH_FIELDS + ("source", "why"), f"profiles.json archetype {n}")
         if a["workforce_share"] > cap:
             raise BuildingHistoryError(f"profiles.json archetype {n}: workforce_share {a['workforce_share']} exceeds job_share_cap {cap}")
+        _check_industry(a["industry"], f"profiles.json archetype {n}")
     for t, e in prof["tags"].items():
         _need(e, ("archetype",), f"profiles.json tag {t}")
         if e["archetype"] not in prof["archetypes"]:
@@ -528,6 +536,8 @@ def load_config(d: Path) -> Config:
                 raise BuildingHistoryError(f"profiles.json tag {t}: unknown field {f!r}")
             if f not in e.get("justify", {}) or not {"source", "why"} <= set(e["justify"][f]):
                 raise BuildingHistoryError(f"profiles.json tag {t}: field {f!r} override needs a justify entry with source and why")
+            if f == "industry":
+                _check_industry(val, f"profiles.json tag {t}")
     for n, o in enumerate(ov["states"]):
         _need(o, ("key", "anchor", "buildings", "source", "why"), f"state_overrides.json state {n}")
     for n, o in enumerate(bl["blocked_by_resources"]):
@@ -603,8 +613,21 @@ def _check_override_keys(cfg: Config, world: World) -> None:
                     raise BuildingHistoryError(f"{where} {n}: unknown building {b!r}")
 
 
+def _check_industry_ids(cfg: Config, world: World) -> None:
+    rows = [(f"profiles.json archetype {n}", a["industry"]) for n, a in cfg.archetypes.items()]
+    rows += [(f"profiles.json tag {t}", e["set"]["industry"]) for t, e in cfg.tags.items() if "industry" in e.get("set", {})]
+    for where, industry in rows:
+        for bid in industry:
+            b = world.buildings.get(bid)
+            if b is None:
+                raise BuildingHistoryError(f"{where}: industry names unknown building {bid!r}")
+            if b.file != INDUSTRY_FILE:
+                raise BuildingHistoryError(f"{where}: industry building {bid!r} is not in common/buildings/{INDUSTRY_FILE}")
+
+
 def plan(cfg: Config, world: World) -> Plan:
     _check_override_keys(cfg, world)
+    _check_industry_ids(cfg, world)
     warnings: list[str] = []
     by_tag: dict[str, list[Unit]] = {}
     for key, tags in world.owners.items():
@@ -762,6 +785,10 @@ def _plan_tag(tag, units, ts, prof, cfg, world) -> None:
             auto(u, "building_barrack", lv, "profile barracks")
         if prof["construction"]:
             auto(units[0], "building_construction_sector", prof["construction"], "profile construction")
+        # industry goes to the capital before ports, trade and farms, so the capital's workforce share feeds it first;
+        # the tech gate drops what the owner cannot build (reported as a drop)
+        for bid, lv in sorted(prof["industry"].items()):
+            auto(units[0], bid, lv, "profile industry")
         ports = [u for u in units if world.res[u.key].port]
         if prof["port_level"]:
             for u in ports[:prof["port_states"]]:
@@ -780,6 +807,30 @@ def _plan_tag(tag, units, ts, prof, cfg, world) -> None:
             for bid, cap in r.capped:
                 if bid == "building_logging_camp":
                     auto(u, bid, int(prof["logging_share"] * cap + 0.5), "profile logging")
+    # small-state minimum: a unit that ended with no job-bearing building gets one level of its first eligible farm,
+    # else its logging camp, even past its workforce share, but never past the hard job cap (the owner building's
+    # jobs count against it). A unit too small for one level stays on subsistence.
+    for u in units:
+        if u.jobs:
+            continue
+        r = world.res[u.key]
+        candidates = list(r.arable) + (["building_logging_camp"] if "building_logging_camp" in dict(r.capped) else [])
+        s = state[u.key]
+        mark, placed_before = len(u.dropped), len(u.placed)
+        for bid in candidates:
+            b = world.buildings[bid]
+            owner_jobs = 0
+            private = _ownership_mode(b, ts.laws, ts.resolved)
+            if private is not None and private in world.buildings:
+                opms, _ = choose_pms(world.buildings[private], world.groups, world.pms, ts)
+                owner_jobs = sum(world.pms[m].jobs for m in opms) if opms else 0
+            budget = [int(JOB_SHARE_CAP * u.pop) - owner_jobs]
+            _try_place(u, bid, 1, ctx, budget, s["ar"], s["cap"], False, "small-state minimum")
+            if len(u.placed) > placed_before:
+                break
+        if len(u.placed) == placed_before:
+            del u.dropped[mark:]
+            u.dropped.append(("small-state minimum", "nothing fits within the job cap (rest stays on subsistence)"))
     # the game creates the owner buildings (manor house / financial district) from add_ownership; their
     # employment still counts against the job share, so add it here without emitting them
     for u in units:

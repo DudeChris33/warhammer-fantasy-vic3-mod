@@ -14,7 +14,10 @@
    "logging_share": 1.0,
    "workforce_share": 0.35,
    "source": "inferred",
-   "why": "fixture"
+   "why": "fixture",
+   "industry": {
+    "building_fix_mill": 1
+   }
   }
  },
  "tags": {

@@ -22,4 +22,14 @@ POPS = {
 			create_pop = { culture = test size = 200000 }
 		}
 	}
+	s:STATE_EPSILON = {
+		region_state:AAA = {
+			create_pop = { culture = test size = 4000 }
+		}
+	}
+	s:STATE_ZETA = {
+		region_state:AAA = {
+			create_pop = { culture = test size = 3000 }
+		}
+	}
 }

@@ -103,6 +103,19 @@ BUILDINGS = {
 				activate_production_methods = { "pm_admin_simple" }
 			}
 			create_building = {
+				building = "building_fix_mill"
+				add_ownership = {
+					building = {
+						type = "building_financial_district"
+						country = "c:AAA"
+						levels = 1
+						region = "STATE_DELTA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_mill" }
+			}
+			create_building = {
 				building = "building_trade_center"
 				add_ownership = {
 					country = {
@@ -138,6 +151,23 @@ BUILDINGS = {
 				}
 				reserves = 1
 				activate_production_methods = { "pm_logging_simple" }
+			}
+		}
+	}
+	s:STATE_EPSILON = {
+		region_state:AAA = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:AAA"
+						levels = 1
+						region = "STATE_EPSILON"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_advanced_farming" }
 			}
 		}
 	}

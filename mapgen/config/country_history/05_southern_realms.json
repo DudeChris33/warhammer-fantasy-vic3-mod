@@ -77,16 +77,7 @@
     },
     "DUN": {
       "profile": "border_prince",
-      "confidence": "low",
-      "taxed_goods": [
-        "wine"
-      ],
-      "justify": {
-        "taxed_goods": {
-          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
-          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
-        }
-      }
+      "confidence": "low"
     },
     "ESS": {
       "profile": "border_prince",

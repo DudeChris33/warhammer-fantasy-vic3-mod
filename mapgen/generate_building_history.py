@@ -122,6 +122,14 @@ def run_fixture_check(fixture: Path) -> None:
     assert "building_wheat_farm" not in ccc
     # split state: one block per owner
     assert {t for k, t in by if k == "STATE_GAMMA"} == {"AAA", "BBB"}
+    # industry (#6637): in the owner's most populous state when it has the tech; a tag without it reports the drop
+    mill = [(u.key, u.tag, x.levels) for u in p.units for x in u.placed if x.building == "building_fix_mill"]
+    assert mill == [("STATE_DELTA", "AAA", 1)], mill
+    assert any(b == "building_fix_mill" and "tech gate" in why for u in p.units if u.tag == "BBB" for b, why in u.dropped),         "BBB lacks manufacturies: the industry is dropped and the drop is reported"
+    # small-state minimum (#6637): just above the floor one farm level fits the 40 % job cap, below it the unit stays empty
+    eps, zeta = by[("STATE_EPSILON", "AAA")], by[("STATE_ZETA", "AAA")]
+    assert [(x.building, x.levels, x.why) for x in eps.placed] == [("building_wheat_farm", 1, "small-state minimum")], eps.placed
+    assert not zeta.placed and any(b == "small-state minimum" for b, _ in zeta.dropped), (zeta.placed, zeta.dropped)
 
     def refuses(mutate, needle: str, *needles: str) -> None:
         tmp = Path(tempfile.mkdtemp())
@@ -153,6 +161,10 @@ def run_fixture_check(fixture: Path) -> None:
     refuses(edit("state_overrides.json", lambda d: d["states"][0].__setitem__("key", "STATE_NOWHERE")), "not a state")
     refuses(edit("state_overrides.json", lambda d: d["states"][0].__setitem__("anchor", [1, 1])), "anchor")
     refuses(edit("state_overrides.json", lambda d: d["states"][0]["buildings"].__setitem__("building_nope", 1)), "unknown building")
+    refuses(edit("profiles.json", lambda d: d["archetypes"]["basic"].__setitem__("industry", {"building_nope": 1})), "unknown building")
+    refuses(edit("profiles.json", lambda d: d["archetypes"]["basic"].__setitem__("industry", {"building_wheat_farm": 1})),
+            "is not in common/buildings/01_industry.txt")
+    refuses(edit("profiles.json", lambda d: d["archetypes"]["basic"].__setitem__("industry", {"building_fix_mill": -1})), "industry must be")
     refuses(edit("profiles.json", lambda d: d["tags"].pop("BBB")), "no profiles.json entry")
     refuses(edit("profiles.json", lambda d: d["archetypes"]["basic"].__setitem__("workforce_share", 0.9)), "job_share_cap")
     # the verifier catches hand-broken output files

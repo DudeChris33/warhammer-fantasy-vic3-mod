@@ -1,0 +1,6 @@
+building_fix_mill = {
+	unlocking_technologies = { manufacturies }
+	production_method_groups = { pmg_mill }
+	city_type = city
+	ownership_type = self
+}

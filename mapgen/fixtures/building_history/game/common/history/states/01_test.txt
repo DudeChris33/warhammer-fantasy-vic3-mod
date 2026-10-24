@@ -27,4 +27,16 @@ STATES = {
 			owned_provinces = { x000006 }
 		}
 	}
+	s:STATE_EPSILON = {
+		create_state = {
+			country = c:AAA
+			owned_provinces = { x000007 }
+		}
+	}
+	s:STATE_ZETA = {
+		create_state = {
+			country = c:AAA
+			owned_provinces = { x000008 }
+		}
+	}
 }

@@ -44,6 +44,22 @@
    ],
    "owner": "AAA",
    "scope": "drawn"
+  },
+  "STATE_EPSILON": {
+   "naming_anchor": [
+    35,
+    35
+   ],
+   "owner": "AAA",
+   "scope": "drawn"
+  },
+  "STATE_ZETA": {
+   "naming_anchor": [
+    40,
+    40
+   ],
+   "owner": "AAA",
+   "scope": "drawn"
   }
  }
 }

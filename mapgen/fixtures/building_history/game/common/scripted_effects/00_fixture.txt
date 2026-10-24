@@ -11,6 +11,7 @@ effect_fixture_laws = {
 effect_fixture_tier_5 = {
 	add_era_researched = era_1
 	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = intensive_agriculture
 	effect_fixture_laws = yes

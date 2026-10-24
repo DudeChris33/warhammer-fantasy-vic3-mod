@@ -36,3 +36,15 @@ STATE_DELTA = {
         building_logging_camp = 4
     }
 }
+STATE_EPSILON = {
+    id = 5
+    provinces = { x000007 }
+    arable_land = 4
+    arable_resources = { "building_wheat_farm" }
+}
+STATE_ZETA = {
+    id = 6
+    provinces = { x000008 }
+    arable_land = 4
+    arable_resources = { "building_wheat_farm" }
+}

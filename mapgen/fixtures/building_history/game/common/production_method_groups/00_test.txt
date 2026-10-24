@@ -7,3 +7,4 @@ pmg_admin = { production_methods = { pm_admin_hereditary pm_admin_simple } }
 pmg_training = { production_methods = { pm_training_basic } }
 pmg_manor = { production_methods = { pm_manor_private } }
 pmg_fin = { production_methods = { pm_fin_private } }
+pmg_mill = { production_methods = { pm_mill } }
