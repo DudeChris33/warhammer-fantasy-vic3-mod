@@ -34,7 +34,7 @@
       ],
       "tax_level": "medium",
       "taxed_goods": [
-        "wine"
+        "liquor"
       ],
       "institutions": {
         "institution_schools": 1,
@@ -45,7 +45,7 @@
         "ig_devout": "Priesthoods of the Elven Gods"
       },
       "source": "derived",
-      "why": "Follows from the laws at principality tier; gov_kingdom requires country_tier = kingdom. A colony would run as gov_colonial_administration only with law_colonial_administration, which the generator does not emit (README, Mechanics gaps)."
+      "why": "Follows from the laws at principality tier; gov_kingdom requires country_tier = kingdom. A colony would run as gov_colonial_administration only with law_colonial_administration, which the generator does not emit (README, Mechanics gaps). Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
     },
     "border_prince": {
       "laws": {
@@ -80,7 +80,7 @@
       ],
       "tax_level": "low",
       "taxed_goods": [
-        "wine"
+        "liquor"
       ],
       "institutions": {},
       "suggested_ig_names": {
@@ -88,7 +88,7 @@
         "ig_landowners": "Robber Barons"
       },
       "source": "canon: WFB Border Princes (petty warlord-princes and mercenaries on the Old World's wild frontier); Dogs of War background",
-      "why": "A Border Prince rules his hold by force with hired sellswords, tolerates every cult and lets refugees in; institutions are minimal"
+      "why": "A Border Prince rules his hold by force with hired sellswords, tolerates every cult and lets refugees in; institutions are minimal Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
     },
     "chaos_warband": {
       "laws": {
@@ -208,7 +208,7 @@
       ],
       "tax_level": "medium",
       "taxed_goods": [
-        "wine"
+        "liquor"
       ],
       "institutions": {},
       "suggested_ig_names": {
@@ -216,7 +216,7 @@
         "ig_devout": "Cult of Myrmidia"
       },
       "source": "canon: WFB Tilea and Estalia background (Estalian kingdoms: feudal grandees, Myrmidian state cult, sea-trade)",
-      "why": "Estalia is a group of feudal kingdoms under a proud landed nobility and the Myrmidian church, less mercantile than Tilea, one tier behind the Tilean cities"
+      "why": "Estalia is a group of feudal kingdoms under a proud landed nobility and the Myrmidian church, less mercantile than Tilea, one tier behind the Tilean cities Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
     },
     "greenskin_holdout": {
       "laws": {

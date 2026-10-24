@@ -33,7 +33,7 @@
     ],
     "tax_level": "medium",
     "taxed_goods": [
-      "wine"
+      "liquor"
     ],
     "institutions": {
       "institution_schools": 1
@@ -43,7 +43,7 @@
       "ig_armed_forces": "Condottieri Companies"
     },
     "source": "canon: WFB Dogs of War / Tilea (independent city-states ruled by merchant princes, mercenary companies, Myrmidia cult); WH: The Old World (2023+) Tilea background",
-    "why": "Tilean city-states are ruled by merchant princes with the great houses (monarchy + oligarchy, no elections), hire professional mercenary companies and trade under mercantilist rules"
+    "why": "Tilean city-states are ruled by merchant princes with the great houses (monarchy + oligarchy, no elections), hire professional mercenary companies and trade under mercantilist rules Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
   },
   "tags": {
     "AQL": {
@@ -52,7 +52,16 @@
     },
     "BIL": {
       "profile": "estalian_kingdom",
-      "confidence": "medium"
+      "confidence": "medium",
+      "taxed_goods": [
+        "wine"
+      ],
+      "justify": {
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
+        }
+      }
     },
     "BPR": {
       "profile": "border_prince",
@@ -68,7 +77,16 @@
     },
     "DUN": {
       "profile": "border_prince",
-      "confidence": "low"
+      "confidence": "low",
+      "taxed_goods": [
+        "wine"
+      ],
+      "justify": {
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
+        }
+      }
     },
     "ESS": {
       "profile": "border_prince",
@@ -80,7 +98,16 @@
     },
     "GDO": {
       "profile": "border_prince",
-      "confidence": "low"
+      "confidence": "low",
+      "taxed_goods": [
+        "wine"
+      ],
+      "justify": {
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
+        }
+      }
     },
     "LUC": {
       "confidence": "low",
@@ -101,8 +128,15 @@
         "laws.lawgroup_navy_model": {
           "source": "canon: WFB Estalia background (Magritta is Estalia's seagoing power)",
           "why": "A professional navy for the expeditions."
+        },
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
         }
-      }
+      },
+      "taxed_goods": [
+        "wine"
+      ]
     },
     "MGL": {
       "profile": "wood_elf_realm",
@@ -111,7 +145,16 @@
     },
     "MIR": {
       "confidence": "medium",
-      "note": "Miragliano: Prince Borgio the Besieger (from memory of WFB 6e Dogs of War, unverified); strongest guild/engineering tradition of Tilea."
+      "note": "Miragliano: Prince Borgio the Besieger (from memory of WFB 6e Dogs of War, unverified); strongest guild/engineering tradition of Tilea.",
+      "taxed_goods": [
+        "wine"
+      ],
+      "justify": {
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
+        }
+      }
     },
     "MON": {
       "profile": "border_prince",
@@ -123,7 +166,16 @@
     },
     "PAV": {
       "confidence": "low",
-      "note": "Baseline unchanged."
+      "note": "Baseline unchanged.",
+      "taxed_goods": [
+        "wine"
+      ],
+      "justify": {
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
+        }
+      }
     },
     "RAA": {
       "profile": "border_prince",
@@ -200,7 +252,16 @@
     },
     "TOB": {
       "confidence": "low",
-      "note": "Baseline unchanged."
+      "note": "Baseline unchanged.",
+      "taxed_goods": [
+        "wine"
+      ],
+      "justify": {
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
+        }
+      }
     },
     "TRA": {
       "confidence": "low",

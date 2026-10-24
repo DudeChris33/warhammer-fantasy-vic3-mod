@@ -6,7 +6,7 @@ tags that own a state at the start date, and ``common/country_definitions/*.txt`
 for each tag's ``cultures``, and writes one file per owner (vanilla's layout), each holding one ``c:TAG ?= { ... }`` block:
 the starting-technology preset of its first culture (``worldgen/country_history.CULTURE_TECH``) plus
 the tag's extras from ``mapgen/config/starting_tech_extras.json``,
-``effect_starting_politics_traditional`` and the tag's starting laws (today the slavery law, resolved from
+``effect_starting_politics_traditional``, the tag's ``set_tax_level`` and ``add_taxed_goods`` lines (#6638 phase A) and its starting laws (today the slavery law, resolved from
 ``mapgen/config/country_history/*.json`` by ``worldgen/country_config``, the same resolver the slave-pop
 gate reads), plus ``law_isolationism`` for a tag whose technologies lack the trade-law gate. Rules are in
 ``worldgen/country_history.py``.
@@ -86,8 +86,9 @@ def main(argv: list[str] | None = None) -> int:
                                  + ", ".join(f"{t}:{x}" for t, x in unknown))
         resolved = country_config.load_resolved(args.country_history)
         laws = None if resolved is None else country_config.starting_laws(resolved)
+        budget = None if resolved is None else country_config.starting_budget(resolved)
         p = ch.plan(doc, ch.load_country_cultures(args.country_definitions), extras, laws,
-                    ch.load_preset_techs(args.scripted_effects), ch.load_trade_gate(args.laws))
+                    ch.load_preset_techs(args.scripted_effects), ch.load_trade_gate(args.laws), budget)
     except OwnershipError as exc:
         print(f"generate_country_history: ERROR: {exc}", file=sys.stderr)
         return 1

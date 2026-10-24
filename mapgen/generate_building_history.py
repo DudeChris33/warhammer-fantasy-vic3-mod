@@ -54,6 +54,8 @@ def run(root: Path, config_dir: Path, check: bool, report_md: Path | None = None
     cfg, world, p, texts = build(root, config_dir)
     errors = bh.invariants(p, cfg, world) + bh.check_texts(texts, world)
     errors += vbh.verify_texts(texts, root)          # the independent gate, on what would be written
+    errors += [f"c:{t}: owns a building but its country history does not resolve (techs and laws unknown)"
+               for t in sorted({u.tag for u in p.units}) if not (world.tags.get(t) and world.tags[t].resolved)]
     print(bh.summary(p, world))
     for w in p.warnings:
         print(f"WARNING: {w}", file=sys.stderr)

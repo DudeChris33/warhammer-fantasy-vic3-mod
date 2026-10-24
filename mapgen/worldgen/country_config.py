@@ -97,6 +97,12 @@ def slavery_law(resolved: dict[str, Resolved], tag: str) -> str:
     return r.laws.get(SLAVERY_GROUP, SLAVERY_BANNED) if r else SLAVERY_BANNED
 
 
+def starting_budget(resolved: dict[str, Resolved]) -> dict[str, tuple[str, list[str]]]:
+    """``{tag: (tax_level, taxed goods in file order)}`` from the resolved packages (#6638 phase A)."""
+    return {tag: (r.package["tax_level"], list(r.package.get("taxed_goods", [])))
+            for tag, r in sorted(resolved.items()) if "tax_level" in r.package}
+
+
 def starting_laws(resolved: dict[str, Resolved]) -> dict[str, list[str]]:
     """``{tag: [law id, ...]}`` the generator activates after the politics effect: the slavery law
     (#9028) and, for a tag whose governance principle resolves to ``law_chiefdom``, that law (#9037;

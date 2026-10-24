@@ -274,8 +274,8 @@ def _run_effects(items, ctype, techs: set, laws: dict, defs, law_groups, stack: 
         prev, last_if = last_if, None
         if k == "add_technology_researched" and isinstance(v, str):
             techs.add(v)
-        elif k == "add_era_researched":
-            pass
+        elif k == "add_era_researched" or k in ("set_tax_level", "add_taxed_goods"):
+            pass   # no effect on the techs or laws a building is gated on
         elif k == "activate_law" and isinstance(v, str) and v.startswith("law_type:"):
             law = v[len("law_type:"):]
             laws[law_groups.get(law, law)] = law

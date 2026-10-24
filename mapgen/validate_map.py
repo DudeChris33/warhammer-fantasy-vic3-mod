@@ -598,13 +598,15 @@ def _check_country_history(history_path: Path, ownership_path: Path, country_def
     root = country_definitions_dir.parents[1]
     resolved = country_config.load_resolved(root / "mapgen" / "config" / "country_history")
     laws = None if resolved is None else country_config.starting_laws(resolved)
+    budget = None if resolved is None else country_config.starting_budget(resolved)
     errors, held_back = ch.check(ch.load_history_dir(history_path), doc, ch.load_country_cultures(country_definitions_dir),
                                  ch.load_effect_names(scripted_effects_dir),
                                  ch.load_country_names(country_definitions_dir.parents[1] / "localization"),
                                  ch.load_tech_extras(root / "mapgen" / "config" / "starting_tech_extras.json"),
                                  ch.load_tech_ids(root / "common" / "technology" / "technologies"),
                                  laws, ch.load_law_ids(root / "common" / "laws"),
-                                 ch.load_preset_techs(scripted_effects_dir), ch.load_trade_gate(root / "common" / "laws"))
+                                 ch.load_preset_techs(scripted_effects_dir), ch.load_trade_gate(root / "common" / "laws"),
+                                 budget)
     notes = [f"country history: owner tag(s) with no country definition get no block: {', '.join(held_back)}"]         if held_back else []
     return [f"country history: {e}" for e in errors], notes
 

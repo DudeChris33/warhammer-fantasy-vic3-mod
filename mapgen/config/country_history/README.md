@@ -1,6 +1,6 @@
 # Starting-country data (`mapgen/config/country_history/`)
 
-Hand-authored input for a later generator that writes `common/history/countries/`. **Two generators read this folder** (everything else here is still unread by the game): `generate_pop_history.py` (each tag's slavery law gates `slaves` pops) and, since #9028, `generate_country_history.py` (the slavery law only, as `activate_law`, until #6638 emits the rest), both through `mapgen/worldgen/country_config.py`. The files describe what each start tag looks like in **2502 IC** in this mod's Victoria 3 mechanics. `python mapgen/validate_country_history.py` is the gate; `python mapgen/run_fixture.py --check` regression-tests the validator against `mapgen/fixtures/country_history/`.
+Hand-authored input for a later generator that writes `common/history/countries/`. **Two generators read this folder** (everything else here is still unread by the game): `generate_pop_history.py` (each tag's slavery law gates `slaves` pops) and, since #9028, `generate_country_history.py` (the slavery law and `law_chiefdom` as `activate_law`, plus `set_tax_level` and `add_taxed_goods` since #6638 phase A; the other law groups, ruling IGs and institutions wait for phase B), both through `mapgen/worldgen/country_config.py`. The files describe what each start tag looks like in **2502 IC** in this mod's Victoria 3 mechanics. `python mapgen/validate_country_history.py` is the gate; `python mapgen/run_fixture.py --check` regression-tests the validator against `mapgen/fixtures/country_history/`.
 
 - One file per region, `NN_<stem>.json`, the same `NN_<stem>` as `common/country_definitions/` and the region files in `planning/tag_registry.md` (11 files today; a region whose tags own no land is not here, it is in `dormant/`).
 - One entry per tag of that region that **owns land at the start** (`mapgen/derived/state_ownership.json`, split-state slices count; `UNO` has none): 158 today. The validator gate covers owners only: an owner with no entry is an error, and so is an entry for a tag that owns nothing ("owns no state at start; move to dormant/"). Formables are out of scope and rejected.
@@ -40,8 +40,8 @@ This folder holds **no** technology. A tag's starting tech is what `generate_cou
 |---|---|
 | `laws` | **all 24** law groups → `activate_law = law_type:<law>`; overrides merge per group. Presets (`effect_starting_politics_*`) are not used, so nothing fills a group silently |
 | `ruling_igs` | 1–3 distinct ids → `ig:<ig> = { add_ruling_interest_group = yes }` |
-| `tax_level` | `very_low … very_high` → `set_tax_level` |
-| `taxed_goods` | good ids (no `g:`) → `add_taxed_goods = g:<good>` |
+| `tax_level` | `very_low … very_high` → `set_tax_level` (emitted since #6638 phase A) |
+| `taxed_goods` | good ids (no `g:`) → `add_taxed_goods = g:<good>` (emitted since #6638 phase A; each good must be produced in the tag's own market, `python mapgen/validate_taxed_goods.py`) |
 | `tariffs` | optional `[{goods, kind: import\|export, level}]` → `set_<kind>_tariff_level` |
 | `institutions` | `{institution_id: 0–5}` → `set_institution_investment_level` |
 | `next_election` | `YYYY.M.D` ≥ 2502.1.1 → `set_next_election_date`; **present iff a voting-franchise law is active** (`null` in a tag removes an inherited date) |

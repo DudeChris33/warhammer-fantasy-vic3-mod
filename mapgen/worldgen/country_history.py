@@ -118,10 +118,14 @@ POLITICS_EFFECT = "effect_starting_politics_traditional"
 
 _CULTURES = re.compile(r"\bcultures\s*=\s*\{([^}]*)\}")
 _BLOCK = re.compile(r"\bc:(\w+)\s*\?=\s*\{")
-_EFFECT_USE = re.compile(r"\badd_technology_researched\s*=\s*(\w+)|\bactivate_law\s*=\s*law_type:(\w+)|\b(\w+)\s*=\s*yes\b")
+_EFFECT_USE = re.compile(r"\badd_technology_researched\s*=\s*(\w+)|\bactivate_law\s*=\s*law_type:(\w+)"
+                         r"|\bset_tax_level\s*=\s*(\w+)|\badd_taxed_goods\s*=\s*g:(\w+)|\b(\w+)\s*=\s*yes\b")
 _EFFECT_DEF = re.compile(r"^(\w+)\s*=\s*\{", re.M)
 ADD_TECH = "add_technology_researched"
 ACTIVATE_LAW = "activate_law = law_type:"
+SET_TAX_LEVEL = "set_tax_level = "
+ADD_TAXED_GOODS = "add_taxed_goods = g:"
+TAX_LEVELS = ("very_low", "low", "medium", "high", "very_high")
 ISOLATIONISM = "law_isolationism"
 TRADE_GATE_TECH = "international_trade"
 _UNLOCKING = re.compile(r"\bunlocking_technologies\s*=\s*\{([^}]*)\}")
@@ -287,7 +291,8 @@ def plan(ownership_doc: dict, cultures: dict[str, tuple[str, ...]],
          extras: dict[str, list[str]] | None = None,
          laws: dict[str, list[str]] | None = None,
          preset_techs: dict[str, set[str]] | None = None,
-         trade_gate: str | None = None) -> Plan:
+         trade_gate: str | None = None,
+         budget: dict[str, tuple[str, list[str]]] | None = None) -> Plan:
     """What to emit. Raises :class:`OwnershipError` for a defined owner whose culture
     has no starting-technology preset, or (when ``laws`` is given) one with no entry in it."""
     blocks: list[tuple[str, list[str]]] = []
@@ -311,7 +316,13 @@ def plan(ownership_doc: dict, cultures: dict[str, tuple[str, ...]],
             have = (preset_techs.get(tech, set()) if tech else set()) | set((extras or {}).get(tag, []))
             if trade_gate not in have and ISOLATIONISM not in tag_laws:
                 tag_laws = [*tag_laws, ISOLATIONISM]   # Mercantilism is locked without the gate tech
-        blocks.append((tag, ([tech] if tech else []) + techs + [POLITICS_EFFECT]
+        tax: list[str] = []
+        if budget is not None and tag in budget:
+            level, goods = budget[tag]
+            if level not in TAX_LEVELS:
+                raise OwnershipError(f"c:{tag}: tax_level {level!r} is not one of {', '.join(TAX_LEVELS)}")
+            tax = [f"{SET_TAX_LEVEL}{level}"] + [f"{ADD_TAXED_GOODS}{g}" for g in goods]
+        blocks.append((tag, ([tech] if tech else []) + techs + [POLITICS_EFFECT] + tax
                        + [f"{ACTIVATE_LAW}{law}" for law in tag_laws]))
     return Plan(blocks=blocks, held_back=held)
 
@@ -366,8 +377,9 @@ def parse_history_text(text: str) -> list[tuple[str, list[str]]]:
             break
         open_idx = text.index("{", m.end() - 1)
         close_idx = sh._match_brace(text, open_idx)
-        out.append((m.group(1), [f"{ADD_TECH} = {tech}" if tech else f"{ACTIVATE_LAW}{law}" if law else eff
-                                 for tech, law, eff in _EFFECT_USE.findall(text[open_idx + 1:close_idx])]))
+        out.append((m.group(1), [f"{ADD_TECH} = {tech}" if tech else f"{ACTIVATE_LAW}{law}" if law
+                                 else f"{SET_TAX_LEVEL}{lvl}" if lvl else f"{ADD_TAXED_GOODS}{good}" if good else eff
+                                 for tech, law, lvl, good, eff in _EFFECT_USE.findall(text[open_idx + 1:close_idx])]))
         idx = close_idx + 1
     return out
 
@@ -379,12 +391,13 @@ def check(texts: dict[str, str] | None, ownership_doc: dict, cultures: dict[str,
           laws: dict[str, list[str]] | None = None,
           law_ids: dict[str, str] | None = None,
           preset_techs: dict[str, set[str]] | None = None,
-          trade_gate: str | None = None) -> tuple[list[str], list[str]]:
+          trade_gate: str | None = None,
+          budget: dict[str, tuple[str, list[str]]] | None = None) -> tuple[list[str], list[str]]:
     """Validate the emitted files (``{file name: text}``). Returns ``(errors, held_back)``;
     ``held_back`` lists JSON owners with no definition (the caller decides whether that is
     an error)."""
     try:
-        p = plan(ownership_doc, cultures, extras, laws, preset_techs, trade_gate)
+        p = plan(ownership_doc, cultures, extras, laws, preset_techs, trade_gate, budget)
     except OwnershipError as exc:
         return [str(exc)], []
     if not texts:
@@ -415,6 +428,8 @@ def check(texts: dict[str, str] | None, ownership_doc: dict, cultures: dict[str,
                         errors.append(f"c:{tag}: {law} and {groups[law_ids[law]]} are both in {law_ids[law]}")
                     else:
                         groups[law_ids[law]] = law
+                elif e.startswith((SET_TAX_LEVEL, ADD_TAXED_GOODS)):
+                    continue   # compared byte for byte against the plan below
                 elif e.startswith(ADD_TECH + " = "):
                     if tech_ids is not None and e.split(" = ", 1)[1] not in tech_ids:
                         errors.append(f"c:{tag}: {e} names no technology in common/technology")

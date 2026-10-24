@@ -33,7 +33,7 @@
     ],
     "tax_level": "low",
     "taxed_goods": [
-      "wine"
+      "liquor"
     ],
     "institutions": {},
     "suggested_ig_names": {
@@ -41,7 +41,7 @@
       "ig_devout": "Cult of the Lady (Damsels and Grail Pilgrims)"
     },
     "source": "canon: WFB 8e Bretonnia army book; WH: The Old World (2023+) Bretonnia background (knightly caste over peasant serfs, Lady of the Lake, dukes and barons)",
-    "why": "Hereditary knightly warrior caste over bound peasants, hereditary feudal offices, the Lady as state cult, land tax, guilds only in the port cities, and knights' disdain for gunpowder"
+    "why": "Hereditary knightly warrior caste over bound peasants, hereditary feudal offices, the Lady as state cult, land tax, guilds only in the port cities, and knights' disdain for gunpowder Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
   },
   "tags": {
     "ANM": {
@@ -76,8 +76,15 @@
         "ruling_igs": {
           "source": "canon: WFB 8e Bretonnia (Bordeleaux is the great trading port)",
           "why": "Merchant houses share power with the duke in the port city."
+        },
+        "taxed_goods": {
+          "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
+          "why": "Keeps wine, the good its market produces at the start, while the region's other tags tax liquor."
         }
-      }
+      },
+      "taxed_goods": [
+        "wine"
+      ]
     },
     "BRI": {
       "confidence": "low",

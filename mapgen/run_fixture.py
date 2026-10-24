@@ -6283,7 +6283,72 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
         (Path(tmp) / "02.txt").write_text("effect_starting_technology_x_tech = {\n\t# c\n\tadd_technology_researched = a\n"
                                           "\tadd_technology_researched = b\n}\nother = { }\n", encoding="utf-8")
         assert ch.load_preset_techs(Path(tmp)) == {"effect_starting_technology_x_tech": {"a", "b"}}
+    # tax level and taxed goods (#6638 phase A): after the politics effect, before the laws; round-trip; a bad level raises
+    budget = {"REI": ("high", ["liquor", "wine"]), "MID": ("low", [])}
+    bp = ch.plan(ownership_doc, tiers, None, laws, None, None, budget)
+    assert bp.blocks[1] == ("REI", ["effect_starting_technology_empire_tech", ch.POLITICS_EFFECT, "set_tax_level = high",
+                                    "add_taxed_goods = g:liquor", "add_taxed_goods = g:wine",
+                                    "activate_law = law_type:law_slave_trade"]), bp.blocks[1]
+    assert bp.blocks[0][1][-2:] == ["set_tax_level = low", "activate_law = law_type:law_slavery_banned"], bp.blocks[0]
+    assert bp.blocks[2] == ("UNO", [ch.POLITICS_EFFECT, "activate_law = law_type:law_slavery_banned"]), "no budget, no lines"
+    btexts = ch.render(bp.blocks, names)
+    assert "\t\tset_tax_level = high\n\t\tadd_taxed_goods = g:liquor\n" in btexts["rei - reikland.txt"]
+    bcrlf = {n: "\ufeff" + t.replace("\n", "\r\n") for n, t in btexts.items()}
+    assert ch.parse_history_text(bcrlf["rei - reikland.txt"]) == [bp.blocks[1]], "tax lines round-trip"
+    berrs, _ = ch.check(bcrlf, ownership_doc, tiers, effects, names, None, None, laws, law_ids, None, None, budget)
+    assert berrs == [], berrs
+    berrs, _ = ch.check(ltexts, ownership_doc, tiers, effects, names, None, None, laws, law_ids, None, None, budget)
+    assert any("differs from what the generator emits" in e for e in berrs), "missing tax lines are stale"
+    try:
+        ch.plan(ownership_doc, tiers, None, laws, None, None, {"REI": ("astronomical", [])})
+    except so.OwnershipError as exc:
+        assert "tax_level" in str(exc), exc
+    else:
+        raise AssertionError("an unknown tax level must raise")
+    _selfcheck_taxed_goods()
     _selfcheck_country_config()
+
+
+def _selfcheck_taxed_goods() -> None:
+    """A taxed good must be produced in the tag's own market (#6638 phase A): emitted PMs, the subsistence
+    building's allowed methods, default methods, and the law that disallows home workshops."""
+    from worldgen import building_history as bh
+    from worldgen import taxed_goods as tg
+
+    outputs = {"pm_vine": frozenset({"wine"}), "pm_grain": frozenset({"grain"}),
+               "pm_workshops": frozenset({"liquor", "clothes"}), "pm_plain": frozenset({"fabric"})}
+    pms = {
+        "pm_vine": bh.Pm("pm_vine", (), (), (), (), (), True, 0),
+        "pm_grain": bh.Pm("pm_grain", (), (), (), (), (), True, 0),
+        "pm_workshops": bh.Pm("pm_workshops", (), (), ("law_collectivized_agriculture",), (), (), False, 0),
+        "pm_plain": bh.Pm("pm_plain", (), (), (), (), (), True, 0),
+    }
+    buildings = {
+        "building_vineyard": bh.Building("building_vineyard", (), ("pmg_vine",), False, "", True, "farm", "02_agro.txt"),
+        "building_mill": bh.Building("building_mill", (), ("pmg_plain",), False, "", True, "farm", "01_industry.txt"),
+        "building_subsistence_farm": bh.Building("building_subsistence_farm", (), ("pmg_base", "pmg_home"), False, "",
+                                                 False, "farm", "12_subsistence.txt"),
+    }
+    groups = {"pmg_vine": ["pm_vine"], "pmg_plain": ["pm_plain"], "pmg_base": ["pm_grain"], "pmg_home": ["pm_workshops"]}
+    world = bh.World({}, {}, {}, {"STATE_A": ["AAA"], "STATE_B": ["BBB"], "STATE_C": ["CCC"]}, {}, buildings, groups, pms,
+                     {"AAA": bh.TagState(frozenset(), frozenset(), True),
+                      "BBB": bh.TagState(frozenset(), frozenset({"law_collectivized_agriculture"}), True),
+                      "CCC": bh.TagState(frozenset(), frozenset(), True)}, {}, {"AAA", "BBB", "CCC"})
+    sub = {"STATE_A": "building_subsistence_farm", "STATE_B": "building_subsistence_farm", "STATE_C": "building_subsistence_farm"}
+    emitted = {"00.txt": 'BUILDINGS = {\n\ts:STATE_A = {\n\t\tregion_state:AAA = {\n\t\t\tcreate_building = {\n'
+                         '\t\t\t\tbuilding = "building_vineyard"\n\t\t\t\tlevel = 1\n'
+                         '\t\t\t\tactivate_production_methods = { "pm_vine" }\n\t\t\t}\n\t\t}\n\t}\n'
+                         '\ts:STATE_C = {\n\t\tregion_state:CCC = {\n\t\t\tcreate_building = {\n'
+                         '\t\t\t\tbuilding = "building_mill"\n\t\t\t\tlevel = 1\n\t\t\t}\n\t\t}\n\t}\n}\n'}
+    got = tg.produced_goods(world, outputs, sub, emitted)
+    assert got["AAA"] == {"wine", "grain", "liquor", "clothes"}, got["AAA"]
+    assert got["BBB"] == {"grain"}, "collectivized agriculture disallows the home-workshops method (no liquor)"
+    assert got["CCC"] == {"fabric", "grain", "liquor", "clothes"}, "a building with no activate_production_methods uses its defaults"
+    taxed = {"AAA": ["wine", "liquor"], "BBB": ["liquor", "wine"], "CCC": ["wine"]}
+    assert tg.check(taxed, got) == [
+        "c:BBB: taxes liquor but no building or subsistence method in its own states produces it",
+        "c:BBB: taxes wine but no building or subsistence method in its own states produces it",
+        "c:CCC: taxes wine but no building or subsistence method in its own states produces it"], tg.check(taxed, got)
 
 
 def _selfcheck_country_config() -> None:

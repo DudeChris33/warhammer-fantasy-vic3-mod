@@ -1,6 +1,8 @@
 COUNTRIES = {
 	c:AAA ?= {
 		effect_fixture_tier_5 = yes
+		set_tax_level = medium
+		add_taxed_goods = g:grain
 	}
 	c:BBB ?= {
 		effect_fixture_tier_6 = yes

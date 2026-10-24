@@ -167,7 +167,7 @@ def _run(body: str, ctype, techs: set, laws: dict, effects, law_group, stack=())
         was, prev = prev, None
         if key == "add_technology_researched" and kind == "=":
             techs.add(val)
-        elif key == "add_era_researched":
+        elif key == "add_era_researched" or key in ("set_tax_level", "add_taxed_goods"):
             pass
         elif key == "activate_law" and kind == "=" and val.startswith("law_type:"):
             law = val.split(":", 1)[1]
