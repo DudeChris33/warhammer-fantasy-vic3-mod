@@ -1,7 +1,6 @@
 {
   "region": "09_southlands",
   "baseline": {
-    "tech_tier": 7,
     "laws": {
       "lawgroup_army_model": "law_warrior_caste",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -43,12 +42,10 @@
       "ig_devout": "Shamans of Gork and Mork"
     },
     "source": "canon: WFB 8e Orcs & Goblins (Savage Orcs of the Southlands jungles: tribes led by Big Bosses and Shamans, fetish-and-war-paint cultists); TW:WH Wurrzag",
-    "why": "Savage Orc tribes are the same warband package as other greenskins at tier 7 (no technology), led by a Big Boss and a shaman",
-    "extra_techs": []
+    "why": "Savage Orc tribes are the same warband package as other greenskins at tier 7 (no technology), led by a Big Boss and a shaman"
   },
   "profiles": {
     "temple_city": {
-      "tech_tier": 5,
       "laws": {
         "lawgroup_bureaucracy": "law_appointed_bureaucrats",
         "lawgroup_governance_principles": "law_theocracy",

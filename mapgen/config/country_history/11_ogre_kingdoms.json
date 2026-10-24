@@ -1,8 +1,6 @@
 {
   "region": "11_ogre_kingdoms",
   "baseline": {
-    "tech_tier": 6,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_warrior_caste",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -49,14 +47,7 @@
   "tags": {
     "AGF": {
       "confidence": "medium",
-      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions.",
-      "tech_tier": 5,
-      "justify": {
-        "tech_tier": {
-          "source": "canon: tag_registry.md (Angry Fist: the most advanced tribe, assailed Karak Azorn)",
-          "why": "The one tribe organised enough to besiege a Dwarf hold."
-        }
-      }
+      "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
     },
     "BGZ": {
       "confidence": "low",

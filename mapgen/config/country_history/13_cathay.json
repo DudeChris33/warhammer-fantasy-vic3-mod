@@ -1,8 +1,6 @@
 {
   "region": "13_cathay",
   "baseline": {
-    "tech_tier": 3,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_professional_army",
       "lawgroup_bureaucracy": "law_appointed_bureaucrats",
@@ -108,16 +106,11 @@
     },
     "MKY": {
       "confidence": "low",
-      "tech_tier": 4,
       "ruling_igs": [
         "ig_armed_forces",
         "ig_rural_folk"
       ],
       "justify": {
-        "tech_tier": {
-          "source": "inferred",
-          "why": "A mountain-holding usurper without Cathay's workshops."
-        },
         "ruling_igs": {
           "source": "inferred",
           "why": "A warlord's band among hill folk."
@@ -147,16 +140,11 @@
     },
     "SKT": {
       "confidence": "low",
-      "tech_tier": 5,
       "ruling_igs": [
         "ig_armed_forces",
         "ig_devout"
       ],
       "justify": {
-        "tech_tier": {
-          "source": "canon: tag_registry.md (the Sky-Titans gifted gunpowder to Cathay)",
-          "why": "Ancient giants keep old lore and the powder secret, but no industry."
-        },
         "ruling_igs": {
           "source": "inferred",
           "why": "Giant war-lords and their sage-priests."
@@ -165,13 +153,8 @@
     },
     "WEI": {
       "confidence": "medium",
-      "tech_tier": 2,
       "expected_government_type": "gov_absolute_grand_principality",
       "justify": {
-        "tech_tier": {
-          "source": "canon: TW:WH3 Grand Cathay (Sky-Lanterns, Grand Cannons and Fire Rain rocket batteries fielded from the Celestial City)",
-          "why": "The Imperial court is the technological front of Cathay."
-        },
         "expected_government_type": {
           "source": "derived",
           "why": "Follows from the tag's laws at grand_principality tier."

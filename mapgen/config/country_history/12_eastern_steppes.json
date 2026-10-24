@@ -1,8 +1,6 @@
 {
   "region": "12_eastern_steppes",
   "baseline": {
-    "tech_tier": 7,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_warrior_caste",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",

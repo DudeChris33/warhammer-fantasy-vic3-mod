@@ -1,8 +1,6 @@
 {
   "region": "18_naggaroth",
   "baseline": {
-    "tech_tier": 3,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_professional_army",
       "lawgroup_bureaucracy": "law_appointed_bureaucrats",

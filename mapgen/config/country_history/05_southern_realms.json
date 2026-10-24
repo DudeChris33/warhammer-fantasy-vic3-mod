@@ -1,8 +1,6 @@
 {
   "region": "05_southern_realms",
   "baseline": {
-    "tech_tier": 3,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_professional_army",
       "lawgroup_bureaucracy": "law_elected_bureaucrats",
@@ -50,7 +48,6 @@
   },
   "profiles": {
     "estalian_kingdom": {
-      "tech_tier": 4,
       "laws": {
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_citizenship": "law_subjecthood",
@@ -73,7 +70,6 @@
       "why": "Estalia is a group of feudal kingdoms under a proud landed nobility and the Myrmidian church, less mercantile than Tilea, one tier behind the Tilean cities"
     },
     "border_prince": {
-      "tech_tier": 5,
       "laws": {
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_church_and_state": "law_freedom_of_conscience",
@@ -101,7 +97,6 @@
       "why": "A Border Prince rules his hold by force with hired sellswords, tolerates every cult and lets refugees in; institutions are minimal"
     },
     "vampire_lord": {
-      "tech_tier": 5,
       "laws": {
         "lawgroup_army_model": "law_peasant_levies",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -134,7 +129,6 @@
       "why": "Same package as Sylvania: absolute vampire lord, levies raised by necromancy, serf peasants, closed borders"
     },
     "skaven_placeholder": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -165,7 +159,6 @@
       "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
     },
     "wood_elf_realm": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -255,19 +248,12 @@
     "MAG": {
       "profile": "estalian_kingdom",
       "confidence": "medium",
-      "extra_techs": [
-        "colonization"
-      ],
       "laws": {
         "lawgroup_colonization": "law_frontier_colonization",
         "lawgroup_navy_model": "law_professional_navy"
       },
       "expected_government_type": "gov_grand_principality",
       "justify": {
-        "extra_techs": {
-          "source": "canon: WFB Estalia background (Magritta sent expeditions to Lustria)",
-          "why": "Overseas ventures need colonization (prerequisite international_relations is in tier 4)."
-        },
         "laws.lawgroup_colonization": {
           "source": "canon: WFB Estalia background (Magritta's Lustrian expeditions)",
           "why": "Frontier colonisation."
@@ -314,17 +300,17 @@
     },
     "REM": {
       "confidence": "low",
-      "note": "Republic (non-tabletop sources); the other Tilean cities are merchant-prince ruled.",
+      "note": "Republic (non-tabletop sources); a council of merchant families (#8459); the other Tilean cities are merchant-prince ruled.",
       "laws": {
-        "lawgroup_governance_principles": "law_presidential_republic",
+        "lawgroup_governance_principles": "law_parliamentary_republic",
         "lawgroup_distribution_of_power": "law_wealth_voting"
       },
-      "expected_government_type": "gov_presidential_democracy",
+      "expected_government_type": "gov_parliamentary_democracy",
       "next_election": "2502.10.1",
       "justify": {
         "laws.lawgroup_governance_principles": {
-          "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
-          "why": "A presidential republic of the propertied houses."
+          "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; loremaster 2026-10-24 (wiki-rank source, confidence medium): Remas is ruled by a council of merchant families, with a triumvirate chosen by lot",
+          "why": "A parliamentary republic: the council of merchant families, not a president."
         },
         "laws.lawgroup_distribution_of_power": {
           "source": "non-tabletop: Warhammer Online lore page (everquest.allakhazam.com/wiki/tilea_(war_lore)) and a 2007 Wikipedia 'Tilea' mirror call Remas and Verezzo republics; approved by Chris 2026-10-23",
@@ -342,7 +328,6 @@
     },
     "SRT": {
       "confidence": "medium",
-      "tech_tier": 4,
       "laws": {
         "lawgroup_slavery": "law_slave_trade",
         "lawgroup_church_and_state": "law_freedom_of_conscience",
@@ -355,10 +340,6 @@
         "ig_petty_bourgeoisie"
       ],
       "justify": {
-        "tech_tier": {
-          "source": "inferred",
-          "why": "A pirate haven lags the mainland cities in learning and manufacture."
-        },
         "laws.lawgroup_slavery": {
           "source": "canon: WFB / TW:WH2 Pirates of Sartosa (raiders and slavers)",
           "why": "Corsairs take and sell captives."
@@ -397,7 +378,16 @@
     "UVE": {
       "profile": "border_prince",
       "confidence": "low",
-      "note": "Kislevite-cultured Border Princes town; package as other princes."
+      "note": "Kislevite-cultured Border Princes town; package as other princes.",
+      "laws": {
+        "lawgroup_church_and_state": "law_state_religion"
+      },
+      "justify": {
+        "laws.lawgroup_church_and_state": {
+          "source": "derived: effect_starting_technology_kislev_tech lacks rationalism, which law_freedom_of_conscience needs (#8459)",
+          "why": "Uvetovsk's Kislevite culture starts without rationalism, so it keeps the established church; the other Border Princes (southern preset) keep freedom of conscience."
+        }
+      }
     },
     "VER": {
       "confidence": "low",

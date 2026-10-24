@@ -1,8 +1,6 @@
 {
   "region": "19_lustria",
   "baseline": {
-    "tech_tier": 5,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_warrior_caste",
       "lawgroup_bureaucracy": "law_appointed_bureaucrats",
@@ -46,7 +44,6 @@
   },
   "profiles": {
     "ruined_temple_city": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_education_system": "law_no_schools"
       },
@@ -54,7 +51,6 @@
       "why": "A ruined or unfounded city has lost the temple-schools and a tier of organisation"
     },
     "norse_colony": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
         "lawgroup_distribution_of_power": "law_oligarchy",

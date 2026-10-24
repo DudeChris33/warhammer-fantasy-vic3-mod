@@ -1,7 +1,6 @@
 {
   "region": "06_badlands",
   "baseline": {
-    "tech_tier": 7,
     "laws": {
       "lawgroup_army_model": "law_warrior_caste",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -43,8 +42,7 @@
       "ig_devout": "Shamans of Gork and Mork"
     },
     "source": "canon: WFB 8e Orcs & Goblins army book (Warboss-led mobs, Gork and Mork shamans, goblins bullied by orcs); TW:WH3 greenskin tribes",
-    "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; orc and goblin warbands are ruled by a Warboss (law_chiefdom, gov_greenskin_warband; #9037)",
-    "extra_techs": []
+    "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; orc and goblin warbands are ruled by a Warboss (law_chiefdom, gov_greenskin_warband; #9037)"
   },
   "tags": {
     "BKA": {

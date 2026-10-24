@@ -1,5 +1,5 @@
 {
- "_comment": "Hand-authored input for generate_country_history.py: per-tag starting technologies ON TOP OF the culture-group preset in common/scripted_effects/00_starting_inventions.txt (prerequisites included, preset baseline already subtracted). Emitted as add_technology_researched lines after the preset. Tags that own no state at the start date are ignored. Converted 2026-10-17 from planning/starting_tech_per_country.txt (proposal, Chris approved wiring it in); the Skaven clan roles SKRYRE, MOULDER, PESTILENS, ESHIN have no tags yet and were left out (the XS* placeholders get the preset only).",
+ "_comment": "Hand-authored input for generate_country_history.py: per-tag starting technologies ON TOP OF the culture-group preset in common/scripted_effects/00_starting_inventions.txt (prerequisites included, preset baseline already subtracted). Emitted as add_technology_researched lines after the preset. Tags that own no state at the start date are ignored. Converted 2026-10-17 from planning/starting_tech_per_country.txt (proposal, Chris approved wiring it in); the Skaven clan roles SKRYRE, MOULDER, PESTILENS, ESHIN have no tags yet and were left out (the XS* placeholders get the preset only). 2026-10-24 (#8459): BJO keeps its trade techs (moved here from mapgen/config/country_history, which no longer holds tech); MAR, REM, VER and MOO gain democracy, so their republic and franchise laws are unlocked (loremaster: republics or elective in the setting). REI and SAP lose medical_degrees: the empire and high_elf presets now grant it.",
  "tags": {
   "REI": [
    "mechanical_tools",
@@ -8,7 +8,6 @@
    "paddle_steamer",
    "banking",
    "empiricism",
-   "medical_degrees",
    "stock_exchange"
   ],
   "WIS": [
@@ -29,7 +28,8 @@
    "colonization",
    "stock_exchange",
    "corporate_charters",
-   "joint_stock_companies"
+   "joint_stock_companies",
+   "democracy"
   ],
   "NLD": [
    "admiralty",
@@ -49,7 +49,8 @@
    "banking"
   ],
   "MOO": [
-   "canneries"
+   "canneries",
+   "democracy"
   ],
   "COU": [
    "rationalism",
@@ -110,7 +111,8 @@
    "admiralty",
    "drydocks",
    "banking",
-   "medical_degrees"
+   "medical_degrees",
+   "democracy"
   ],
   "PAV": [
    "artillery"
@@ -228,8 +230,7 @@
    "colonization"
   ],
   "SAP": [
-   "empiricism",
-   "medical_degrees"
+   "empiricism"
   ],
   "COT": [
    "admiralty"
@@ -246,6 +247,14 @@
   ],
   "ZND": [
    "admiralty"
+  ],
+  "BJO": [
+   "urbanization",
+   "tech_bureaucracy",
+   "international_trade"
+  ],
+  "VER": [
+   "democracy"
   ]
  }
 }

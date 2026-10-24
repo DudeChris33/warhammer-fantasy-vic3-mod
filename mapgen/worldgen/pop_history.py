@@ -331,7 +331,6 @@ class World:
     pop_types: set[str]
     slavery: dict[str, str] | None             # None: country_history data absent
     homelands: dict[str, list[str]] = field(default_factory=dict)   # state key -> add_homeland culture ids
-    tech_tier: dict[str, int] | None = None
 
 
 # ---------------------------------------------------------------------------
@@ -644,25 +643,10 @@ def plan(cfg: Config, world: World) -> Plan:
         stem = world.countries[tag].stem
         fname = stem + ".txt" if stem in stems else tag_units[tag][0].fname
         population[fname].append((tag, cfg.population[tag]))
-        if world.tech_tier is not None and tag in world.tech_tier:
-            _tier_warning(tag, world.tech_tier[tag], cfg.population[tag], warnings)
     for tag in cfg.population:
         if tag not in tag_units:
             warnings.append(f"population.json: c:{tag} owns no emitted state; entry unused")
     return Plan(units, files, population, skipped_owners, sorted(set(unowned)), warnings, split_moved)
-
-
-#: literacy bands per tech tier (a warning, not an error: a deliberate exception carries a why)
-TIER_LITERACY = {1: {"very_high", "high"}, 2: {"very_high", "high"}, 3: {"high", "middling"},
-                 4: {"high", "middling", "low"}, 5: {"middling", "low"}, 6: {"low", "very_low"},
-                 7: {"very_low", "baseline"}}
-
-
-def _tier_warning(tag: str, tier: int, entry: dict, warnings: list[str]) -> None:
-    allowed = TIER_LITERACY.get(tier)
-    if allowed and entry["literacy"] not in allowed:
-        warnings.append(f"population.json: c:{tag} literacy '{entry['literacy']}' is outside the usual band "
-                        f"{sorted(allowed)} for tech tier {tier}")
 
 
 # ---------------------------------------------------------------------------

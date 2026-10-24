@@ -1,0 +1,17 @@
+{
+ "_comment": "Fixture extras: FXA good, FXD unknown tech, FXL missing prerequisite (its preset has no democracy), FXH keyed on a formable.",
+ "tags": {
+  "FXA": [
+   "currency_standards"
+  ],
+  "FXD": [
+   "tech_zzz"
+  ],
+  "FXL": [
+   "currency_standards"
+  ],
+  "FXH": [
+   "currency_standards"
+  ]
+ }
+}

@@ -6297,17 +6297,16 @@ def _selfcheck_country_config() -> None:
     with tempfile.TemporaryDirectory() as tmp:
         d = Path(tmp)
         (d / "01_a.json").write_text(json.dumps({
-            "baseline": {"tech_tier": 3, "laws": {"lawgroup_slavery": "law_slavery_banned", "lawgroup_taxation": "law_a"}},
-            "profiles": {"tribe": {"tech_tier": 7, "laws": {"lawgroup_slavery": "law_debt_slavery"}}},
+            "baseline": {"laws": {"lawgroup_slavery": "law_slavery_banned", "lawgroup_taxation": "law_a"}},
+            "profiles": {"tribe": {"laws": {"lawgroup_slavery": "law_debt_slavery"}}},
             "tags": {"AAA": {}, "BBB": {"profile": "tribe"},
-                     "CCC": {"profile": "tribe", "tech_tier": 5, "laws": {"lawgroup_slavery": "law_slave_trade"}}}}),
+                     "CCC": {"profile": "tribe", "laws": {"lawgroup_slavery": "law_slave_trade"}}}}),
             encoding="utf-8")
-        (d / "02_b.json").write_text(json.dumps({"baseline": {"tech_tier": 4, "laws": {}}, "tags": {"DDD": {}}}),
+        (d / "02_b.json").write_text(json.dumps({"baseline": {"laws": {}}, "tags": {"DDD": {}}}),
                                      encoding="utf-8")
         r = cc.load_resolved(d)
         assert {t: cc.slavery_law(r, t) for t in sorted(r)} == {
             "AAA": "law_slavery_banned", "BBB": "law_debt_slavery", "CCC": "law_slave_trade", "DDD": "law_slavery_banned"}, r
-        assert {t: v.tech_tier for t, v in r.items()} == {"AAA": 3, "BBB": 7, "CCC": 5, "DDD": 4}, r
         assert ph.load_slavery(d) == {t: cc.slavery_law(r, t) for t in r}, "pop gate and emitter share one resolver"
         assert cc.starting_laws(r)["BBB"] == ["law_debt_slavery"]
         assert cc.slavery_law(r, "ZZZ") == cc.SLAVERY_BANNED
@@ -6320,13 +6319,15 @@ COUNTRY_HISTORY_EXPECTED = COUNTRY_HISTORY_DIR / "expected" / "report.txt"
 #: Every error class the country-history linter must still report on the broken fixture
 #: files; ``--update`` cannot silently drop one by regenerating the golden report.
 COUNTRY_HISTORY_NEEDLES = (
-    "duplicate key", "baseline missing", "unknown tech_tier", "ruling_igs must be", "missing law group",
+    "duplicate key", "baseline missing", "unknown field tech_tier", "ruling_igs must be", "missing law group",
     "not in the tag registry", "is a formable", "registry places it in", "start tag has no entry",
     "more than one law for", "unknown law group", "unknown law ", "unknown tech ", "unknown interest group",
     "unknown tax_level", "unknown good", "unknown institution", "is locked: needs tech",
     "is locked: needs law", "extra tech currency_standards needs", "is disallowed alongside",
     "possible trigger", "next_election", "laws hold elections", "needs justify.", "has no matching override",
     "repeats the baseline", "unknown field", "unknown profile", "confidence must be",
+    "tech not evaluable", "unknown tech tech_zzz in starting_tech_extras.json",
+    "is a formable; starting_tech_extras.json keys only start tags",
 )
 
 
@@ -6334,7 +6335,8 @@ def _country_history_run(files=None):
     import validate_country_history as vch
 
     return vch.run(COUNTRY_HISTORY_DIR / "game", COUNTRY_HISTORY_DIR / "data",
-                   COUNTRY_HISTORY_DIR / "registry.md", files)
+                   COUNTRY_HISTORY_DIR / "registry.md", files,
+                   extras_path=COUNTRY_HISTORY_DIR / "data" / "starting_tech_extras.json")
 
 
 def _write_country_history_golden() -> None:

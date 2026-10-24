@@ -1,8 +1,6 @@
 {
   "region": "08_araby",
   "baseline": {
-    "tech_tier": 4,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_professional_army",
       "lawgroup_bureaucracy": "law_appointed_bureaucrats",
@@ -48,7 +46,6 @@
   },
   "profiles": {
     "crusader_holding": {
-      "tech_tier": 5,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -89,14 +86,7 @@
       "note": "Antoch the Crusader City: a Bretonnian kingdom-in-exile; razed by Lizardmen per registry."
     },
     "BEL": {
-      "confidence": "low",
-      "tech_tier": 5,
-      "justify": {
-        "tech_tier": {
-          "source": "canon: tag_registry.md (Bel-Aliad, the ruined City of Dust)",
-          "why": "A ruined city has lost a tier of learning."
-        }
-      }
+      "confidence": "low"
     },
     "COP": {
       "confidence": "low",

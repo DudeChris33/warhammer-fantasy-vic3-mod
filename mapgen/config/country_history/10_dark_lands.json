@@ -1,8 +1,6 @@
 {
   "region": "10_dark_lands",
   "baseline": {
-    "tech_tier": 2,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_professional_army",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -14,7 +12,7 @@
       "lawgroup_navy_model": "law_merchant_navy",
       "lawgroup_colonization": "law_no_colonial_affairs",
       "lawgroup_economic_system": "law_interventionism",
-      "lawgroup_trade_policy": "law_protectionism",
+      "lawgroup_trade_policy": "law_isolationism",
       "lawgroup_taxation": "law_land_based_taxation",
       "lawgroup_land_reform": "law_tenant_farmers",
       "lawgroup_policing": "law_dedicated_police",
@@ -48,18 +46,16 @@
       "ig_armed_forces": "Infernal Guard"
     },
     "source": "canon: WFB Chaos Dwarfs (Forge World lists; Storm of Chaos era): rule by Sorcerer-Prophets of Hashut, slave-driven hell-forges, Overseer castes, Infernal Guard; TW:WH3 Chaos Dwarfs",
-    "why": "A theocracy of the Priests of Hashut over a caste of Overseers and Daemonsmiths: state-run industry, slave economy, censorship and police-terror, forge-armed standing regiments (tier 2)"
+    "why": "A theocracy of the Priests of Hashut over a caste of Overseers and Daemonsmiths: state-run industry, slave economy, censorship and police-terror, forge-armed standing regiments (tier 2); trade policy is isolationism because the Chaos Dwarf preset lacks stock_exchange, which protectionism needs (#8459)"
   },
   "profiles": {
     "hobgoblin_khanate": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_distribution_of_power": "law_autocracy",
         "lawgroup_governance_principles": "law_monarchy",
         "lawgroup_internal_security": "law_no_home_affairs",
         "lawgroup_economic_system": "law_traditionalism",
-        "lawgroup_trade_policy": "law_isolationism",
         "lawgroup_taxation": "law_consumption_based_taxation",
         "lawgroup_policing": "law_no_police",
         "lawgroup_education_system": "law_no_schools",
@@ -82,7 +78,6 @@
       "why": "Steppe raiders under an absolute Khan, standing warband, slave-taking, no schooling"
     },
     "greenskin_horde": {
-      "tech_tier": 7,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_distribution_of_power": "law_autocracy",
@@ -94,8 +89,7 @@
         "lawgroup_migration": "law_no_migration_controls",
         "lawgroup_policing": "law_no_police",
         "lawgroup_rights_of_women": "law_no_womens_rights",
-        "lawgroup_taxation": "law_consumption_based_taxation",
-        "lawgroup_trade_policy": "law_isolationism"
+        "lawgroup_taxation": "law_consumption_based_taxation"
       },
       "ruling_igs": [
         "ig_armed_forces",
@@ -133,20 +127,7 @@
     },
     "MZN": {
       "confidence": "high",
-      "tech_tier": 1,
-      "laws": {
-        "lawgroup_internal_security": "law_secret_police"
-      },
-      "justify": {
-        "tech_tier": {
-          "source": "canon: WFB Chaos Dwarfs / TW:WH3 Chaos Dwarfs (Zharr-Naggrund: Iron Daemons, Hellcannons, Dreadquake mortars, hell-forge industry)",
-          "why": "The only industrialised power in the tree's sense: hell-forges, steam engines and cannon works, so it takes the cutting-edge tier."
-        },
-        "laws.lawgroup_internal_security": {
-          "source": "canon: WFB Chaos Dwarfs (spies of the Sorcerer-Prophets and Overseers)",
-          "why": "Central archives unlock a secret police."
-        }
-      }
+      "note": "Chaos Dwarf city; baseline unchanged. The secret police (central_archives) is dropped: the Chaos Dwarf preset lacks that tech, and the baseline dedicated police and censorship carry the tone (#8459)."
     },
     "UZK": {
       "confidence": "medium",

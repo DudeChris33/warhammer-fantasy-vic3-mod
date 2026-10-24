@@ -1,8 +1,6 @@
 {
   "region": "00_norsca",
   "baseline": {
-    "tech_tier": 6,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_warrior_caste",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -67,18 +65,10 @@
     },
     "BJO": {
       "confidence": "medium",
-      "extra_techs": [
-        "tech_bureaucracy",
-        "international_trade"
-      ],
       "laws": {
         "lawgroup_trade_policy": "law_mercantilism"
       },
       "justify": {
-        "extra_techs": {
-          "source": "canon: WFB Norsca tribe notes (Bjornlings trade and fish); tag_registry.md",
-          "why": "Traders need international_trade (and its tech_bureaucracy prerequisite) to unlock mercantilism."
-        },
         "laws.lawgroup_trade_policy": {
           "source": "canon: WFB Norsca tribe notes (Bjornlings trade and fish); tag_registry.md",
           "why": "The one Norse tribe known for dealing with the south trades rather than isolates."

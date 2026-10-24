@@ -1,8 +1,6 @@
 {
   "region": "02_empire",
   "baseline": {
-    "tech_tier": 3,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_national_militia",
       "lawgroup_bureaucracy": "law_appointed_bureaucrats",
@@ -51,7 +49,6 @@
   },
   "profiles": {
     "chaos_warband": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -78,7 +75,6 @@
       "why": "A fortress held by a Chaos warband is a tribal raiding host, not an Imperial province"
     },
     "skaven_placeholder": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -107,7 +103,6 @@
       "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
     },
     "wood_elf_realm": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -177,10 +172,6 @@
     },
     "MAR": {
       "confidence": "high",
-      "extra_techs": [
-        "banking",
-        "stock_exchange"
-      ],
       "laws": {
         "lawgroup_governance_principles": "law_parliamentary_republic",
         "lawgroup_distribution_of_power": "law_wealth_voting",
@@ -208,10 +199,6 @@
       },
       "expected_government_type": "gov_parliamentary_democracy",
       "justify": {
-        "extra_techs": {
-          "source": "inferred",
-          "why": "Banking and stock_exchange unlock protectionism/free-trade era finance for the richest port on the coast; not in tier 3."
-        },
         "laws.lawgroup_governance_principles": {
           "source": "canon: WFRP Marienburg (the seceded Wasteland is run by merchant councils, no hereditary monarch)",
           "why": "A council republic of merchant houses."
@@ -308,7 +295,6 @@
     },
     "MOO": {
       "confidence": "medium",
-      "tech_tier": 4,
       "laws": {
         "lawgroup_governance_principles": "law_presidential_republic",
         "lawgroup_citizenship": "law_national_supremacy",
@@ -325,10 +311,6 @@
       ],
       "expected_government_type": "gov_presidential_democracy",
       "justify": {
-        "tech_tier": {
-          "source": "canon: WFB Empire (Halflings of the Moot: farms, inns, no industry)",
-          "why": "A pastoral realm with Imperial trade goods but no industry of its own."
-        },
         "laws.lawgroup_governance_principles": {
           "source": "canon: WFB Empire (the Moot is led by an Elder chosen from village elders; sends a vote to the Imperial election)",
           "why": "An elected Elder rather than a hereditary monarch."
@@ -407,16 +389,11 @@
     },
     "SOL": {
       "confidence": "low",
-      "tech_tier": 4,
       "laws": {
         "lawgroup_army_model": "law_professional_army",
         "lawgroup_health_system": "law_no_health_system"
       },
       "justify": {
-        "tech_tier": {
-          "source": "inferred",
-          "why": "Solland was ravaged by Orcs (1707 IC) and only partly rebuilt; one tier below its neighbours."
-        },
         "laws.lawgroup_army_model": {
           "source": "inferred",
           "why": "Tier 4 has no mandatory_service; a paid standing force replaces the provincial militia."
@@ -433,17 +410,12 @@
     },
     "SYL": {
       "confidence": "low",
-      "tech_tier": 4,
       "laws": {
         "lawgroup_army_model": "law_professional_army",
         "lawgroup_health_system": "law_no_health_system"
       },
       "expected_government_type": "gov_grand_principality",
       "justify": {
-        "tech_tier": {
-          "source": "inferred",
-          "why": "Cut off and terrorised by the von Carsteins next door."
-        },
         "laws.lawgroup_army_model": {
           "source": "inferred",
           "why": "Tier 4 has no mandatory_service."
@@ -474,7 +446,6 @@
     },
     "VSY": {
       "confidence": "high",
-      "tech_tier": 5,
       "laws": {
         "lawgroup_distribution_of_power": "law_autocracy",
         "lawgroup_army_model": "law_peasant_levies",
@@ -496,10 +467,6 @@
       "institutions": {},
       "expected_government_type": "gov_absolute_kingdom",
       "justify": {
-        "tech_tier": {
-          "source": "canon: WFB 8e Vampire Counts (undead armies of ancient arms; Sylvania is agrarian, mist-bound)",
-          "why": "Wight and zombie levies use old arms; Sylvania has none of Nuln's industry."
-        },
         "laws.lawgroup_distribution_of_power": {
           "source": "canon: WFB 8e Vampire Counts (the Count of Sylvania rules absolutely)",
           "why": "A vampire lord answers to no assembly."
@@ -564,7 +531,6 @@
     },
     "WIS": {
       "confidence": "high",
-      "tech_tier": 2,
       "laws": {
         "lawgroup_economic_system": "law_interventionism"
       },
@@ -575,10 +541,6 @@
       ],
       "expected_government_type": "gov_grand_principality",
       "justify": {
-        "tech_tier": {
-          "source": "canon: WFB 8e Empire (Imperial Gunnery School and steam-tank works at Nuln)",
-          "why": "Nuln is the Empire's engineering heartland; tier 2 reaches atmospheric_engine and mechanical_tools."
-        },
         "laws.lawgroup_economic_system": {
           "source": "canon: WFB 8e Empire (Nuln foundries and the gunnery school are state-directed)",
           "why": "Directed industry rather than pure guild tradition (interventionism needs manufacturies)."

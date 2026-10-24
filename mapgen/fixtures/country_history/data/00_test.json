@@ -1,8 +1,6 @@
 {
   "region": "00_test",
   "baseline": {
-    "tech_tier": 2,
-    "extra_techs": [],
     "laws": {
       "lawgroup_governance_principles": "law_monarchy",
       "lawgroup_distribution_of_power": "law_autocracy",
@@ -56,23 +54,10 @@
     },
     "FXC": {
       "confidence": "low",
-      "tech_tier": 3,
-      "extra_techs": [
-        "democracy",
-        "currency_standards"
-      ],
       "laws": {
         "lawgroup_taxation": "law_per_capita_tax"
       },
       "justify": {
-        "tech_tier": {
-          "source": "fixture",
-          "why": "lower tier"
-        },
-        "extra_techs": {
-          "source": "fixture",
-          "why": "extras chain: currency_standards needs democracy"
-        },
         "laws.lawgroup_taxation": {
           "source": "fixture",
           "why": "needs currency_standards"

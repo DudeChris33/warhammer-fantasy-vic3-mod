@@ -25,6 +25,7 @@
 	# Society
 	add_technology_researched = rationalism
 	add_technology_researched = academia
+	add_technology_researched = medical_degrees
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = centralization
@@ -455,6 +456,7 @@ effect_starting_technology_high_elf_tech = {
 	# Society
 	add_technology_researched = rationalism
 	add_technology_researched = academia
+	add_technology_researched = medical_degrees
 	add_technology_researched = urbanization
 	add_technology_researched = tech_bureaucracy
 	add_technology_researched = centralization

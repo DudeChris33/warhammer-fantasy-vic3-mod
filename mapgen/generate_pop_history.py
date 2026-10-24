@@ -27,7 +27,6 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from worldgen import country_config  # noqa: E402
 from worldgen import pop_history as ph  # noqa: E402
 from worldgen import state_history as sh  # noqa: E402
 
@@ -51,13 +50,7 @@ def load_world(root: Path) -> ph.World:
         slavery=ph.load_slavery(root / "mapgen" / "config" / "country_history"),
         homelands={k: v for p in sorted((root / "common" / "history" / "states").glob("*.txt"))
                    for k, v in sh.parse_homelands(p.read_text(encoding="utf-8-sig")).items()},
-        tech_tier=_tiers(root / "mapgen" / "config" / "country_history"),
     )
-
-
-def _tiers(d: Path) -> dict[str, int] | None:
-    resolved = country_config.load_resolved(d)
-    return None if resolved is None else {tag: r.tech_tier for tag, r in resolved.items()}
 
 
 def build(root: Path, config_dir: Path) -> tuple[ph.Config, ph.World, ph.Plan, dict[str, str], dict[str, str]]:

@@ -1,8 +1,6 @@
 {
   "region": "03_brettonia",
   "baseline": {
-    "tech_tier": 5,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_warrior_caste",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -48,7 +46,6 @@
   },
   "profiles": {
     "greenskin_holdout": {
-      "tech_tier": 7,
       "laws": {
         "lawgroup_citizenship": "law_national_supremacy",
         "lawgroup_distribution_of_power": "law_autocracy",
@@ -77,7 +74,6 @@
       "why": "A greenskin horde is run by the strongest Warboss with shamans of Gork and Mork; no bureaucracy or schooling, tribute taxed at the mob's pleasure, captives and goblins enslaved; a warband ruled by a Warboss (law_chiefdom, #9037)"
     },
     "wood_elf_realm": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_citizenship": "law_national_supremacy",
         "lawgroup_labour_associations": "law_combination_acts",
@@ -183,7 +179,6 @@
     },
     "MOU": {
       "confidence": "medium",
-      "tech_tier": 6,
       "laws": {
         "lawgroup_trade_policy": "law_isolationism",
         "lawgroup_migration": "law_closed_borders"
@@ -193,10 +188,6 @@
         "ig_landowners"
       ],
       "justify": {
-        "tech_tier": {
-          "source": "canon: WFB 8e Bretonnia (Mousillon: the Accursed City, plague-blighted and cut off)",
-          "why": "A ruined duchy falls a tier below its neighbours."
-        },
         "laws.lawgroup_trade_policy": {
           "source": "canon: WFB 8e Bretonnia (Mousillon is shunned; no trade)",
           "why": "Tier 6 lacks international_trade; the shunned duchy is isolated anyway."

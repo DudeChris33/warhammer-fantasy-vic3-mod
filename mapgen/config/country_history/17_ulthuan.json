@@ -1,8 +1,6 @@
 {
   "region": "17_ulthuan",
   "baseline": {
-    "tech_tier": 3,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_national_militia",
       "lawgroup_bureaucracy": "law_appointed_bureaucrats",

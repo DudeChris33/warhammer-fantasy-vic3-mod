@@ -1,8 +1,6 @@
 {
   "region": "04_karaz_ankor",
   "baseline": {
-    "tech_tier": 3,
-    "extra_techs": [],
     "laws": {
       "lawgroup_army_model": "law_professional_army",
       "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
@@ -52,7 +50,6 @@
   },
   "profiles": {
     "overrun_hold": {
-      "tech_tier": 4,
       "ruling_igs": [
         "ig_armed_forces",
         "ig_devout"
@@ -63,7 +60,6 @@
       "why": "A besieged remnant holds the deep vaults with garrison and priests, has lost industrial capacity (one tier down) and cannot fund schools"
     },
     "skaven_placeholder": {
-      "tech_tier": 6,
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
         "lawgroup_citizenship": "law_national_supremacy",
@@ -90,7 +86,6 @@
       "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; held at tier 6 for lack of a clan-specific source"
     },
     "undead_host": {
-      "tech_tier": 5,
       "laws": {
         "lawgroup_army_model": "law_peasant_levies",
         "lawgroup_citizenship": "law_national_supremacy",
@@ -190,13 +185,8 @@
     },
     "KAK": {
       "confidence": "high",
-      "tech_tier": 2,
       "expected_government_type": "gov_grand_principality",
       "justify": {
-        "tech_tier": {
-          "source": "canon: WFB 8e Dwarfs (seat of the High King, foremost Engineers' Guild works, gyrocopters and organ guns)",
-          "why": "The High King's hold is the Karaz Ankor's technological front; tier 2 reaches atmospheric_engine and mechanical_tools."
-        },
         "expected_government_type": {
           "source": "derived",
           "why": "Follows from the tag's laws at grand_principality tier."
@@ -294,14 +284,7 @@
       "note": "Skaven placeholder; no country definition yet."
     },
     "ZHU": {
-      "confidence": "high",
-      "tech_tier": 2,
-      "justify": {
-        "tech_tier": {
-          "source": "canon: WFB 8e Dwarfs (Zhufbar is the seat of the Engineers' Guild)",
-          "why": "The guild's home hold sits at the industrial frontier."
-        }
-      }
+      "confidence": "high"
     }
   }
 }

@@ -1,8 +1,8 @@
 """The resolved per-tag view of ``mapgen/config/country_history/*.json``.
 
-One merge (baseline <- profile <- tag, per law group; ``tech_tier`` the same way) serves every
-consumer, so they cannot disagree: the slave-pop gate (``pop_history.load_slavery``), the tech-tier
-warning (``generate_pop_history``) and the law lines ``generate_country_history`` emits
+One merge (baseline <- profile <- tag, per law group) serves every
+consumer, so they cannot disagree: the slave-pop gate (``pop_history.load_slavery``)
+and the law lines ``generate_country_history`` emits
 (``country_history.plan(laws=...)``). Neutral on purpose: the pop generator must not import the
 country emitter.
 
@@ -24,7 +24,6 @@ CHIEFDOM = "law_chiefdom"
 @dataclass(frozen=True)
 class Resolved:
     laws: dict[str, str] = field(default_factory=dict)   # law group -> law id, merged
-    tech_tier: int | None = None
 
 
 def load_resolved(country_history_dir: Path | None) -> dict[str, Resolved] | None:
@@ -42,7 +41,7 @@ def load_resolved(country_history_dir: Path | None) -> dict[str, Resolved] | Non
         for tag, v in d.get("tags", {}).items():
             prof = d.get("profiles", {}).get(v.get("profile"), {})
             laws = {**base.get("laws", {}), **prof.get("laws", {}), **v.get("laws", {})}
-            out[tag] = Resolved(laws=laws, tech_tier=v.get("tech_tier", prof.get("tech_tier", base.get("tech_tier"))))
+            out[tag] = Resolved(laws=laws)
     return out
 
 

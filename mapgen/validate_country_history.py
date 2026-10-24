@@ -9,13 +9,16 @@ consistent with the mod's own laws, interest groups, technologies and government
 
 Hard errors (exit 1):
 
-* an unknown law, law group, interest group, technology, good, institution, tax level,
-  tariff level or tech-tier helper;
+* an unknown law, law group, interest group, technology, good, institution, tax level or
+  tariff level;
 * a law that does not belong to its group key, more than one law for a group, or a law
   group with no law;
 * a law whose unlock (``unlocking_technologies`` / ``unlocking_laws``) is not covered by the
-  tag's tier helper + ``extra_techs`` / chosen laws, or an ``extra_tech`` whose own
-  prerequisite is not covered;
+  tag's starting technology (its culture preset, with the generator's ``TAG_TECH`` exceptions,
+  plus its row in ``mapgen/config/starting_tech_extras.json``) or the chosen laws; an extra that
+  is an unknown technology, whose own prerequisite is not covered, or that is keyed on a
+  formable. The preset and extras come from ``worldgen/country_history.py`` (the generator's own
+  inputs), so linter and generator cannot disagree;
 * two chosen laws where one lists the other in ``disallowing_laws``;
 * a tag that is not in the registry, is a formable, is in another region, or a start tag of
   the region with no entry;
@@ -25,7 +28,8 @@ Hard errors (exit 1):
 * a malformed ``next_election`` (or one that disagrees with whether the laws hold elections).
 
 Warnings never change the exit code: a government-type trigger that cannot be fully
-evaluated (tier or ruler unknown), redundant ``extra_techs``.
+evaluated (tier or ruler unknown), a tag with no country definition (its tech is not
+evaluated), an extra its preset already grants.
 
 Deterministic: pure stdlib, sorted output, no clock, no environment reads.
 
@@ -45,8 +49,14 @@ import sys
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parent.parent
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+
+from worldgen import country_history as ch  # noqa: E402
+from worldgen.state_ownership import OwnershipError  # noqa: E402
+
 DEFAULT_DATA_DIR = REPO / "mapgen" / "config" / "country_history"
 DEFAULT_REGISTRY = REPO / "planning" / "tag_registry.md"
+DEFAULT_EXTRAS = REPO / "mapgen" / "config" / "starting_tech_extras.json"
 
 TAX_LEVELS = ("very_low", "low", "medium", "high", "very_high")
 CONFIDENCE = ("high", "medium", "low")
@@ -169,17 +179,9 @@ class GameData:
                 "requires": [t for b in _vals(body, "unlocking_technologies") for t in _bare(b)],
             }
 
-        self.tier_helpers: dict[int, set[str]] = {}
-        for key, body in _read_dir(game_root, "common/scripted_effects"):
-            m = re.fullmatch(r"effect_starting_technology_tier_(\d)_tech", key)
-            if not m or not isinstance(body, list):
-                continue
-            eras = set(_vals(body, "add_era_researched"))
-            techs = set(_vals(body, "add_technology_researched"))
-            for tech, info in self.techs.items():
-                if info["era"] in eras:
-                    techs.add(tech)
-            self.tier_helpers[int(m.group(1))] = techs
+        # starting technology: the generator's own inputs (preset effects, culture of each definition)
+        self.presets = ch.load_preset_techs(game_root / "common/scripted_effects")
+        self.cultures = ch.load_country_cultures(game_root / "common/country_definitions")
 
         self.gov_possible: dict[str, list] = {}
         for key, body in _read_dir(game_root, "common/government_types"):
@@ -210,6 +212,35 @@ class GameData:
                     return frozenset(found)
         self.notes.append(f"note: no {rel} on disk; using the bundled {what} list")
         return fallback
+
+    def coverage(self, tag: str, extras: list[str]):
+        """``(covered techs | None, label, errors, warnings)`` for one tag: its preset plus its extras.
+        ``None`` = not evaluable (no country definition, or no preset for its culture)."""
+        if tag not in self.cultures:
+            return None, "", [], ["tech not evaluable: no country definition"]
+        try:
+            preset = ch.tech_effect(tag, self.cultures[tag])
+        except OwnershipError as exc:
+            return None, "", [str(exc)], []
+        if preset is not None and preset not in self.presets:
+            return None, "", [f"starting-technology preset {preset} is not defined in common/scripted_effects"], []
+        base = set(self.presets[preset]) if preset else set()
+        label = f"preset {preset}" if preset else "no preset"
+        errors: list[str] = []
+        warnings: list[str] = []
+        covered = set(base)
+        for tech in extras:
+            if tech not in self.techs:
+                errors.append(f"unknown tech {tech} in starting_tech_extras.json")
+            elif tech in base:
+                warnings.append(f"extra tech {tech} is already granted by {label}")
+        covered |= {t for t in extras if t in self.techs}
+        for tech in sorted(set(extras)):
+            if tech in self.techs:
+                reqs = self.techs[tech]["requires"]
+                if reqs and not any(r in covered for r in reqs):
+                    errors.append(f"extra tech {tech} needs one of {', '.join(reqs)}")
+        return covered, label, errors, warnings
 
 
 def load_registry(path: Path) -> dict[str, tuple[str, str]]:
@@ -322,9 +353,9 @@ def _load_json(path: Path):
     return json.loads(path.read_text(encoding="utf-8"), object_pairs_hook=_no_dupes)
 
 
-BASELINE_REQUIRED = ("tech_tier", "extra_techs", "laws", "ruling_igs", "tax_level", "taxed_goods",
+BASELINE_REQUIRED = ("laws", "ruling_igs", "tax_level", "taxed_goods",
                      "institutions", "expected_government_type", "source", "why")
-TAG_FIELDS = ("tech_tier", "extra_techs", "laws", "ruling_igs", "tax_level", "taxed_goods",
+TAG_FIELDS = ("laws", "ruling_igs", "tax_level", "taxed_goods",
               "tariffs", "institutions", "next_election", "expected_government_type",
               "suggested_ig_names")
 DIRECT_FIELDS = tuple(f for f in TAG_FIELDS if f != "laws")
@@ -342,11 +373,14 @@ def _layer(base: dict, top: dict) -> dict:
 
 
 def check_package(pkg: dict, game: GameData, where: str, defn: dict | None,
-                  errors: list[str], warnings: list[str], evaluate_gov: bool = True) -> None:
+                  errors: list[str], warnings: list[str], evaluate_gov: bool = True,
+                  covered: set[str] | None = None, label: str = "") -> None:
     """Check one *effective* package (baseline, profile or baseline+overrides).
 
     ``evaluate_gov`` is off for baselines and profiles: a government trigger depends on the
-    tag's tier and country type, so only the resolved tag is evaluated."""
+    tag's tier and country type, so only the resolved tag is evaluated. ``covered`` is the
+    tag's starting technology (``None`` = not evaluable, so the unlock check is skipped, as
+    for baselines and profiles)."""
     def err(msg):
         errors.append(f"{where}: {msg}")
 
@@ -373,37 +407,17 @@ def check_package(pkg: dict, game: GameData, where: str, defn: dict | None,
     for group in sorted(game.law_groups - set(laws)):
         err(f"missing law group {group}")
 
-    # technology coverage
-    tier = pkg.get("tech_tier")
-    covered: set[str] = set()
-    if tier not in game.tier_helpers:
-        err(f"unknown tech_tier {tier!r} (helpers: {sorted(game.tier_helpers)})")
-    else:
-        covered |= game.tier_helpers[tier]
-    extras = pkg.get("extra_techs", [])
-    for tech in extras:
-        if tech not in game.techs:
-            err(f"unknown tech {tech} in extra_techs")
-        elif tech in covered:
-            warnings.append(f"{where}: extra tech {tech} is already granted by tier {tier}")
-    covered |= {t for t in extras if t in game.techs}
-    for tech in sorted(set(extras)):
-        if tech in game.techs:
-            reqs = game.techs[tech]["requires"]
-            if reqs and not any(r in covered for r in reqs):
-                err(f"extra tech {tech} needs one of {', '.join(reqs)}")
-
     active = set(chosen.values())
     for law in sorted(active):
         info = game.laws[law]
-        if not (info["unlock_techs"] or info["unlock_laws"]):
+        if covered is None or not (info["unlock_techs"] or info["unlock_laws"]):
             continue
         if any(t in covered for t in info["unlock_techs"]) or \
                 any(l in active for l in info["unlock_laws"]):
             continue
         needs = [f"tech {t}" for t in info["unlock_techs"]] + \
                 [f"law {l}" for l in info["unlock_laws"]]
-        err(f"{law} is locked: needs {' or '.join(needs)} (tier {tier} + extra_techs "
+        err(f"{law} is locked: needs {' or '.join(needs)} ({label} + extras "
             f"+ chosen laws do not provide it)")
     for law in sorted(active):
         for other in game.laws[law]["disallow"]:
@@ -470,11 +484,13 @@ def _justify_keys(tag: dict) -> set[str]:
     return keys
 
 
-def validate_region_file(path: Path, game: GameData, registry: dict) -> tuple[list[str], list[str], int]:
+def validate_region_file(path: Path, game: GameData, registry: dict,
+                         extras: dict | None = None) -> tuple[list[str], list[str], int]:
     errors: list[str] = []
     warnings: list[str] = []
     stem = path.stem
     name = path.name
+    extras = extras or {}
 
     try:
         data = _load_json(path)
@@ -533,6 +549,8 @@ def validate_region_file(path: Path, game: GameData, registry: dict) -> tuple[li
     for tag, kind in sorted(region_tags.items()):
         if kind == "start" and tag not in data["tags"]:
             errors.append(f"{name}: {tag}: start tag has no entry")
+        if kind == "formable" and tag in extras:
+            errors.append(f"{name}: {tag}: is a formable; starting_tech_extras.json keys only start tags")
 
     for tag in sorted(data["tags"]):
         entry = data["tags"][tag]
@@ -570,16 +588,21 @@ def validate_region_file(path: Path, game: GameData, registry: dict) -> tuple[li
             errors.append(f"{where}: justify.{key} has no matching override")
 
         eff = _layer(base_pkg, entry)
-        check_package(eff, game, where, game.definitions.get(tag), errors, warnings)
+        covered, label, tech_errs, tech_warns = game.coverage(tag, extras.get(tag, []))
+        errors.extend(f"{where}: {e}" for e in tech_errs)
+        warnings.extend(f"{where}: {w}" for w in tech_warns)
+        check_package(eff, game, where, game.definitions.get(tag), errors, warnings,
+                      covered=covered, label=label)
 
     return errors, warnings, len(data["tags"])
 
 
 def run(game_root: Path, data_dir: Path, registry_path: Path, files: list[str] | None = None,
-        vanilla_root: Path | None = None) -> tuple[int, str]:
+        vanilla_root: Path | None = None, extras_path: Path = DEFAULT_EXTRAS) -> tuple[int, str]:
     """Validate; return ``(exit_code, report_text)`` (deterministic)."""
     game = GameData(game_root, vanilla_root)
     registry = load_registry(registry_path)
+    extras = ch.load_tech_extras(extras_path) if extras_path.is_file() else {}
     paths = sorted(data_dir.glob("[0-9][0-9]_*.json"))
     if files:
         wanted = {Path(f).name for f in files}
@@ -590,7 +613,7 @@ def run(game_root: Path, data_dir: Path, registry_path: Path, files: list[str] |
         lines.append("no region files found")
         return 1, "\n".join(lines) + "\n"
     for path in paths:
-        errors, warnings, n_tags = validate_region_file(path, game, registry)
+        errors, warnings, n_tags = validate_region_file(path, game, registry, extras)
         for w in warnings:
             lines.append(f"warning: {w}")
         if errors:
@@ -599,6 +622,12 @@ def run(game_root: Path, data_dir: Path, registry_path: Path, files: list[str] |
             lines.append(f"FAIL {path.name}: {len(errors)} error(s)")
         else:
             lines.append(f"OK {path.name}: {n_tags} tag(s)")
+    if not files:
+        for tag in sorted(set(extras) - set(registry)):   # keys on tags outside the roster (future tags)
+            for tech in extras[tag]:
+                if tech not in game.techs:
+                    failed += 1
+                    lines.append(f"ERROR: starting_tech_extras.json: {tag}: unknown tech {tech}")
     lines.append(f"{len(paths) - failed}/{len(paths)} region file(s) valid")
     return (1 if failed else 0), "\n".join(lines) + "\n"
 
@@ -609,11 +638,14 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--game-root", type=Path, default=REPO)
     parser.add_argument("--data-dir", type=Path, default=DEFAULT_DATA_DIR)
     parser.add_argument("--registry", type=Path, default=DEFAULT_REGISTRY)
+    parser.add_argument("--extras", type=Path, default=DEFAULT_EXTRAS,
+                        help="starting_tech_extras.json (default: the generator's)")
     parser.add_argument("--vanilla", type=Path, default=None,
                         help="vanilla install `game` folder or mirror (goods/institutions)")
     parser.add_argument("--quiet", action="store_true", help="hide warnings")
     args = parser.parse_args(argv)
-    code, report = run(args.game_root, args.data_dir, args.registry, args.files or None, args.vanilla)
+    code, report = run(args.game_root, args.data_dir, args.registry, args.files or None, args.vanilla,
+                       args.extras)
     if args.quiet:
         report = "".join(l for l in report.splitlines(True) if not l.startswith("warning:"))
     sys.stdout.write(report)
