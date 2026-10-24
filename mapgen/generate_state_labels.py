@@ -161,7 +161,6 @@ BOUNDARY_LAYER = "boundaries"
 #: already-committed ``state_labels.png``/``state_labels_index.json`` are
 #: untouched either way.
 BOUNDARY_SOURCES = {
-    "tww3_colored.png": "flat_colour",
     "tww3_ie_parchment.jpg": "ink_bridged",
 }
 
@@ -177,9 +176,7 @@ BOUNDARY_SOURCES = {
 OLD_WORLD_CROP_MIN_STATES: dict[str, tuple[str, int]] = {}
 
 #: Off-map background and legend panels, in each source's own pixels.
-BOUNDARY_EXCLUDE = {
-    "tww3_colored.png": [(0, 2450, 330, 3010)],
-}
+BOUNDARY_EXCLUDE: dict[str, list[tuple[int, int, int, int]]] = {}
 
 #: The clean counterpart the macro-annotated twin is differenced against. Named
 #: by filename rather than looked up by registration role: it contributes no

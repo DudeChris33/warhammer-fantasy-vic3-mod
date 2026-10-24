@@ -90,7 +90,7 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
 from worldgen import (land_economics, land_naming, land_state_numbering, raster,  # noqa: E402
-                      real_world_economics, schema, scope_additions)
+                      real_world_economics, schema, scope_additions, sources)
 from worldgen.statefile import (  # noqa: E402
     ProvinceInfo,
     pick_hubs,
@@ -122,7 +122,7 @@ SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
 WORKSHEET_PATH = TOOLS_DIR / "config" / "land_regions_worksheet.csv"
 VANILLA_STATE_LOC_KEYS_PATH = TOOLS_DIR / "config" / "vanilla_state_loc_keys.txt"
 STRATEGIC_COLORS_PATH = TOOLS_DIR / "config" / "strategic_region_colors.json"
-STRATEGIC_PNG_PATH = MOD_ROOT / "sources" / "terraqueous_globe_reprojected - strategic_regions.png"
+STRATEGIC_PNG_PATH = sources.resolve_source_path("terraqueous_globe_reprojected - strategic_regions.png")
 OUT_OF_SCOPE_CONTINENTS_PATH = TOOLS_DIR / "config" / "out_of_scope_continents.json"
 #: In-scope land outside the painted realms, with the realm each piece takes
 #: (worldgen.scope_additions); the same file generate_provinces.py reads.

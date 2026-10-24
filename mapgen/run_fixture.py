@@ -5066,6 +5066,9 @@ def _selfcheck_alpha_zero() -> None:
         "generate_terrain_masks.py", "render_canon_cities_preview.py", "render_tww3_text_crops.py",
         "render_wind_patterns.py", "render_arable_preview.py", "run_fixture.py",
         "worldgen/pop_history.py", "worldgen/raster.py", "worldgen/sources.py",
+        # IE border trace: every input is a JPEG (no alpha channel)
+        "ie_borders/combine.py", "ie_borders/land_mask.py", "ie_borders/trace_climate.py",
+        "ie_borders/trace_ie.py",
     }
     pat = re.compile(r"""\.convert\(["']RGB["']\)""")
     offenders = []
