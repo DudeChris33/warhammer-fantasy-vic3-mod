@@ -1,7 +1,5 @@
 ﻿l_english:
  # Tribal government (#9037). The greenskin warband; Norse and Ungol realms keep vanilla's Chiefdom/Chieftain.
  gov_greenskin_warband:0 "Warband"
- gov_greenskin_warband_desc:0 "This is a [concept_government_type] where the power rests completely with the [Concept('concept_ruler','$RULER_TITLE_WARBOSS$')], the strongest boss the warband has not yet seen beaten.
-
-$TRANSFER_OF_POWER_NAME_DESC$"
+ gov_greenskin_warband_desc:0 "This is a [concept_government_type] where the power rests completely with the [Concept('concept_ruler','$RULER_TITLE_WARBOSS$')], the strongest boss the warband has not yet seen beaten.\n\n$TRANSFER_OF_POWER_NAME_DESC$"
  RULER_TITLE_WARBOSS:0 "Warboss"
