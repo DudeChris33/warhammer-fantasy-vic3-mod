@@ -1,0 +1,1 @@
+bash scratchpad/full_pipeline.sh > scratchpad/regen/full_pipeline.out 2>&1
