@@ -91,7 +91,7 @@ What the table shows, from the files:
 
 - TLS's own buildings produce grain, wood, fabric and meat, and have no goods inputs at all (no `goods_input_*` appears in any selected PM; `pm_no_organization` and the farm methods carry none). So the generated economy is self-contained and produces no processed good.
 - Every processing building needs `manufacturies` (food, textile, furniture, glass, tooling, paper; `common/buildings/01_industry.txt:3-127`) or later, none of which tier 6 grants. Under tier-6 tech no processed good can be built. The planned data keeps wood elves at tier 6 on purpose ("held at tier 6 as the mod's lowest elven rung (no industry)", `mapgen/config/country_history/03_brettonia.json:97-98`, profile at `:78`), so this is a **design question** (FU-3), not a defect in the generator.
-- `building_construction_sector` needs only `urbanization` (`common/buildings/13_construction.txt:3`), which TLS has, so one could be built; the history places none for TLS (`wood_elf_realm` `construction: 0`).
+- `building_construction_sector` needs only `urbanization` (`common/buildings/13_construction.txt:3`), which TLS lacks at HEAD (corrected in #6637: the wood elf preset has no `urbanization`), so none can be built; `wood_elf_realm` keeps `construction: 0`.
 
 ### 4.3 The +75% prices and the timber/grain discount
 
@@ -128,9 +128,9 @@ Verdict: **intended**. AC3 asks for the decision to be "noted where players will
 
 Follow-up drafts (to be filed after a duplicate check on the board, finished items included):
 
-- **FU-1 (gap): Building history places no industry.** Add an industry/manufactory field to the archetypes (or a per-tag `set`) so tier-5+ tags start with food, textile and furniture where canon supports it; review the small-state quantization (under about 25,000 pops gives no buildings) and the construction-sector-0 archetypes. Touches `mapgen/config/building_history/`, `mapgen/worldgen/building_history.py`, the validator and the regenerated `common/history/buildings/`.
+- **FU-1 (gap): Building history places no industry.** **Done in #6637 (commit 428a020):** archetypes carry an `industry` field and a small-state minimum level exists (units below about 12,900 pops stay on subsistence, intended). Add an industry/manufactory field to the archetypes (or a per-tag `set`) so tier-5+ tags start with food, textile and furniture where canon supports it; review the small-state quantization (under about 25,000 pops gives no buildings) and the construction-sector-0 archetypes. Touches `mapgen/config/building_history/`, `mapgen/worldgen/building_history.py`, the validator and the regenerated `common/history/buildings/`.
 - **FU-2 (gap): Generate country history from `mapgen/config/country_history/`** (laws, tax level, taxed goods, institutions) instead of `effect_starting_politics_traditional`, with a rule that `taxed_goods` must be producible by the tag's market. TLS's entry is only `profile: wood_elf_realm` at low confidence, so this changes little for TLS until per-tag laws exist. Cite `mapgen/validate_country_history.py:6` and `mapgen/config/country_history/README.md:3`, which already call the generator "a later task", when checking for duplicates.
-- **FU-3 (design question, Chris and game-designer): tier-6 isolated markets.** Should tier-6 realms get `manufacturies` through `extra_techs`, or is a permanent processed-goods shortage acceptable? May fold into FU-1.
+- **FU-3 (design question, Chris and game-designer): tier-6 isolated markets.** **Now #9035** (22 realms lack `manufacturies`; the industry values are already written and dropped by the tech gate until it decides). Should tier-6 realms get `manufacturies` through `extra_techs`, or is a permanent processed-goods shortage acceptable? May fold into FU-1.
 - Resource placeholders are not a new item: comment on #3684 instead.
 
 ## 7. Open question: AC3
