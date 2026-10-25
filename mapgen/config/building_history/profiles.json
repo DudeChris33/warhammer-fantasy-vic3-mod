@@ -930,12 +930,12 @@
   "THG": {
    "archetype": "ogre_tribe",
    "set": {
-    "farm_share": 0.1
+    "farm_share": 0.2
    },
    "justify": {
     "farm_share": {
      "source": "inferred",
-     "why": "A named ogre tribe: herds, not fields."
+     "why": "A named ogre tribe: herds, not fields. At least 0.2 so the 8 arable levels it holds in the split Tower of the Bloodytooth still give the livestock ranch a level (its taxed meat has no other producer)."
     }
    }
   },

@@ -423,6 +423,23 @@ class World:
     tags: dict[str, TagState]
     eras: dict[str, int]
     known_tags: set[str]
+    # (state, tag) -> (passable provinces the owner holds, passable provinces in the state), split states only
+    shares: dict[tuple[str, str], tuple[int, int]] = field(default_factory=dict)
+
+    def res_for(self, key: str, tag: str) -> StateRes:
+        """The state's resources as one owner of a split state gets them.
+
+        The engine hands a region_state the share of the state's arable land and capped resources that matches the
+        passable provinces it holds (observed 2026-10-24 in error.log: a lone impassable province gets 0 arable, 2 of
+        6 passable provinces get 1 of a cap of 4). Rounded down, so the plan never asks for more than the engine
+        supports; the engine's own rounding is not documented, so this is the safe side of it."""
+        r = self.res[key]
+        sh_ = self.shares.get((key, tag))
+        if sh_ is None:
+            return r
+        num, den = sh_
+        return StateRes(key, r.arable_land * num // den, r.arable,
+                        tuple((b, c * num // den) for b, c in r.capped), r.port)
 
 
 def parse_state_resources(text: str) -> dict[str, StateRes]:
@@ -435,6 +452,15 @@ def parse_state_resources(text: str) -> dict[str, StateRes]:
         capped = tuple((a, int(c)) for a, _, c in cap if a and isinstance(c, str)) if isinstance(cap, list) else ()
         out[k] = StateRes(k, int(al) if isinstance(al, str) else 0, tuple(_list_field(v, "arable_resources")),
                           capped, _get(v, "port") is not None)
+    return out
+
+
+def parse_state_provinces(text: str) -> dict[str, tuple[list[str], list[str]]]:
+    """state key -> (all province colours, impassable province colours) from a state-region file."""
+    out: dict[str, tuple[list[str], list[str]]] = {}
+    for k, _, v in parse(text):
+        if k and k.startswith("STATE_") and isinstance(v, list):
+            out[k] = (_list_field(v, "provinces"), _list_field(v, "impassable"))
     return out
 
 
@@ -459,11 +485,13 @@ def load_world(root: Path) -> World:
     sr = root / "map_data" / "state_regions"
     files: dict[str, list[str]] = {}
     res: dict[str, StateRes] = {}
+    provs: dict[str, tuple[list[str], list[str]]] = {}
     for p in sorted(sr.glob("*.txt")):
         if p.name.startswith("99_"):
             continue
         text = p.read_text(encoding="utf-8-sig")
         r = parse_state_resources(text)
+        provs.update(parse_state_provinces(text))
         files[p.name] = list(r)
         res.update(r)
     own = json.loads((root / "mapgen" / "derived" / "state_ownership.json").read_text(encoding="utf-8"))
@@ -482,9 +510,18 @@ def load_world(root: Path) -> World:
     law_groups = load_law_groups(c / "laws")
     tags = resolve_tags("\n".join(f.read_text(encoding="utf-8-sig") for f in setup),
                         load_effect_defs(c / "scripted_effects"), law_groups, load_country_types(c / "country_definitions"))
+    shares: dict[tuple[str, str], tuple[int, int]] = {}
+    for key, st in own["states"].items():
+        split = st.get("owners")
+        if not split or len(split) < 2 or key not in provs:
+            continue
+        passable = {c for c in provs[key][0] if c not in set(provs[key][1])}
+        for o in split:
+            shares[(key, o["owner"])] = (len(passable & set(o["provinces"])), max(len(passable), 1))
     return World(files, res, anchors, owners, pops, load_buildings(c / "buildings"),
                  load_groups(c / "production_method_groups"), load_pms(c / "production_methods"), tags,
-                 load_tech_eras(c / "technology" / "technologies"), set(load_country_types(c / "country_definitions")))
+                 load_tech_eras(c / "technology" / "technologies"), set(load_country_types(c / "country_definitions")),
+                 shares)
 
 
 @dataclass
@@ -683,7 +720,7 @@ def _try_place(u: Unit, bid: str, levels: int, ctx: _Ctx, remaining: list[int], 
     """Place ``levels`` of ``bid`` in ``u`` or record why not. Overrides raise instead of dropping."""
     w, ts = ctx.world, ctx.ts
     b = w.buildings[bid]
-    res = w.res[u.key]
+    res = w.res_for(u.key, u.tag)
 
     def fail(msg: str, tech: bool = False) -> None:
         if override:
@@ -753,7 +790,7 @@ def _plan_tag(tag, units, ts, prof, cfg, world) -> None:
     ctx = _Ctx(tag, ts, world, cfg)
     state: dict[str, dict] = {}
     for u in units:
-        r = world.res[u.key]
+        r = world.res_for(u.key, u.tag)
         state[u.key] = {"rem": [int(prof["workforce_share"] * u.pop)], "ar": {"n": r.arable_land}, "cap": {}}
 
     def put(u, bid, levels, override=False, why=""):
@@ -789,16 +826,16 @@ def _plan_tag(tag, units, ts, prof, cfg, world) -> None:
         # the tech gate drops what the owner cannot build (reported as a drop)
         for bid, lv in sorted(prof["industry"].items()):
             auto(units[0], bid, lv, "profile industry")
-        ports = [u for u in units if world.res[u.key].port]
+        ports = [u for u in units if world.res_for(u.key, u.tag).port]
         if prof["port_level"]:
             for u in ports[:prof["port_states"]]:
                 auto(u, "building_port", prof["port_level"], "profile port")
         if prof["trade_level"]:
-            order = ports + [u for u in units if not world.res[u.key].port]
+            order = ports + [u for u in units if not world.res_for(u.key, u.tag).port]
             for u in order[:prof["trade_states"]]:
                 auto(u, "building_trade_center", prof["trade_level"], "profile trade")
         for u in units:
-            r = world.res[u.key]
+            r = world.res_for(u.key, u.tag)
             n_ar = int(prof["farm_share"] * r.arable_land + 0.5)
             if r.arable:
                 for i, bid in enumerate(r.arable):
@@ -813,7 +850,7 @@ def _plan_tag(tag, units, ts, prof, cfg, world) -> None:
     for u in units:
         if u.jobs:
             continue
-        r = world.res[u.key]
+        r = world.res_for(u.key, u.tag)
         candidates = list(r.arable) + (["building_logging_camp"] if "building_logging_camp" in dict(r.capped) else [])
         s = state[u.key]
         mark, placed_before = len(u.dropped), len(u.placed)
@@ -928,7 +965,7 @@ def parse_emitted(text: str) -> list[tuple[str, str, list[dict]]]:
 def invariants(p: Plan, cfg: Config, world: World) -> list[str]:
     errs: list[str] = []
     for u in p.units:
-        r = world.res[u.key]
+        r = world.res_for(u.key, u.tag)
         arable = sum(x.levels for x in u.placed if world.buildings[x.building].file in ARABLE_FILES)
         if arable > r.arable_land:
             errs.append(f"{u.key}/{u.tag}: {arable} arable levels exceed arable_land {r.arable_land}")

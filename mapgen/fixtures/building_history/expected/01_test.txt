@@ -179,7 +179,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:AAA"
-						levels = 3
+						levels = 2
 						region = "STATE_GAMMA"
 					}
 				}
@@ -192,7 +192,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:AAA"
-						levels = 4
+						levels = 2
 						region = "STATE_GAMMA"
 					}
 				}
@@ -207,7 +207,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:BBB"
-						levels = 3
+						levels = 2
 						region = "STATE_GAMMA"
 					}
 				}
@@ -220,7 +220,7 @@ BUILDINGS = {
 					building = {
 						type = "building_manor_house"
 						country = "c:BBB"
-						levels = 4
+						levels = 2
 						region = "STATE_GAMMA"
 					}
 				}
