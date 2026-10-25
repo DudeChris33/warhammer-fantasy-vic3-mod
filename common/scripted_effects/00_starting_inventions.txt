@@ -293,7 +293,8 @@ effect_starting_technology_khuresh_tech = {
 }
 
 effect_starting_technology_vampire_tech = {
-	# Vampire Counts: static, scholarly necrocracies; no industry beyond the manor.
+	# Vampire Counts. Since #9035 only STR (and the strigoi/blood_dragon/necrarch culture keys) use this preset; Sylvanian vampires take the
+	# Empire's, Lahmians the Tomb Kings', Kemmler's host Bretonnia's.
 
 	# Production
 	add_technology_researched = enclosure
@@ -500,9 +501,11 @@ effect_starting_technology_dark_elf_tech = {
 }
 
 effect_starting_technology_wood_elf_tech = {
-	# Wood Elves: a hidden woodland people; hand craft, no towns or industry.
+	# Wood Elves: a hidden woodland people; hand craft, no factories. Enclosure and urbanization (#9035, Chris 2026-10-25) give farms and
+	# construction; manufacturies stays out on purpose, so no industry.
 
 	# Production
+	add_technology_researched = enclosure
 
 	# Military
 	add_technology_researched = standing_army
@@ -510,6 +513,7 @@ effect_starting_technology_wood_elf_tech = {
 
 	# Society
 	add_technology_researched = rationalism
+	add_technology_researched = urbanization
 }
 
 effect_starting_technology_lizardmen_tech = {
@@ -549,6 +553,7 @@ effect_starting_technology_goblin_tech = {
 	add_technology_researched = standing_army
 
 	# Society
+	add_technology_researched = urbanization
 }
 
 effect_starting_technology_orc_tech = {
@@ -565,6 +570,7 @@ effect_starting_technology_orc_tech = {
 	add_technology_researched = mandatory_service
 
 	# Society
+	add_technology_researched = urbanization
 }
 
 effect_starting_technology_skaven_tech = {
@@ -602,6 +608,7 @@ effect_starting_technology_ogre_tech = {
 
 	# Production
 	add_technology_researched = enclosure
+	add_technology_researched = manufacturies
 
 	# Military
 	add_technology_researched = standing_army
@@ -644,6 +651,20 @@ effect_starting_technology_norsca_tech = {
 	add_technology_researched = mandatory_service
 
 	# Society
+	add_technology_researched = urbanization
+}
+
+effect_starting_technology_ungol_tech = {
+	# Ungol: steppe horse-nomads with walled camps and a standing warrior host (#9035, Chris 2026-10-25).
+
+	# Production
+	add_technology_researched = enclosure
+
+	# Military
+	add_technology_researched = standing_army
+
+	# Society
+	add_technology_researched = urbanization
 }
 
 effect_starting_technology_beastmen_tech = {

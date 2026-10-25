@@ -8,7 +8,7 @@ the starting-technology preset of its first culture (``worldgen/country_history.
 the tag's extras from ``mapgen/config/starting_tech_extras.json``,
 ``effect_starting_politics_traditional``, the tag's ``set_tax_level`` and ``add_taxed_goods`` lines (#6638 phase A) and its starting laws (today the slavery law, resolved from
 ``mapgen/config/country_history/*.json`` by ``worldgen/country_config``, the same resolver the slave-pop
-gate reads), plus ``law_isolationism`` for a tag whose technologies lack the trade-law gate. Rules are in
+gate reads), plus ``law_isolationism`` for a tag whose technologies lack the trade-law gate or whose data says it (#9035). Rules are in
 ``worldgen/country_history.py``.
 
 Runs after ``read_state_ownership.py`` (the same input as

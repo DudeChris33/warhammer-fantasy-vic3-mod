@@ -19,6 +19,8 @@ SLAVERY_BANNED = "law_slavery_banned"
 SLAVERY_GROUP = "lawgroup_slavery"
 GOVERNANCE_GROUP = "lawgroup_governance_principles"
 CHIEFDOM = "law_chiefdom"
+TRADE_GROUP = "lawgroup_trade_policy"
+ISOLATIONISM = "law_isolationism"
 
 
 PROFILES_FILE = "profiles.json"
@@ -106,11 +108,14 @@ def starting_budget(resolved: dict[str, Resolved]) -> dict[str, tuple[str, list[
 def starting_laws(resolved: dict[str, Resolved]) -> dict[str, list[str]]:
     """``{tag: [law id, ...]}`` the generator activates after the politics effect: the slavery law
     (#9028) and, for a tag whose governance principle resolves to ``law_chiefdom``, that law (#9037;
-    the rest of the governance group waits for #6638)."""
+    the rest of the governance group waits for #6638) and, for a tag whose trade policy resolves to
+    ``law_isolationism``, that law (#9035: closed markets come from the data, not from missing tech)."""
     out: dict[str, list[str]] = {}
     for tag in sorted(resolved):
         laws = [slavery_law(resolved, tag)]
         if resolved[tag].laws.get(GOVERNANCE_GROUP) == CHIEFDOM:
             laws.append(CHIEFDOM)
+        if resolved[tag].laws.get(TRADE_GROUP) == ISOLATIONISM:
+            laws.append(ISOLATIONISM)
         out[tag] = laws
     return out

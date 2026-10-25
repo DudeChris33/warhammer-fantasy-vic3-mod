@@ -6178,7 +6178,7 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
     # means no technology
     assert ch.tech_effect("UNO", ("goblin",)) is None
     assert ch.tech_effect("XSA", ("skaven",)) == "effect_starting_technology_skaven_tech"
-    assert ch.tech_effect("UNG", ("ungol",)) is None
+    assert ch.tech_effect("UNG", ("ungol",)) == "effect_starting_technology_ungol_tech"   # #9035: no longer a no-tech nomad
     # fallen holds and Mousillon start behind their culture (#9034): the per-tag table wins
     assert ch.tech_effect("KVN", ("dawi",)) == "effect_starting_technology_fallen_hold_tech"
     assert ch.tech_effect("MOU", ("mousillon",)) == "effect_starting_technology_mousillon_tech"
@@ -6378,6 +6378,10 @@ def _selfcheck_country_config() -> None:
             "AAA": "law_slavery_banned", "BBB": "law_debt_slavery", "CCC": "law_slave_trade", "DDD": "law_slavery_banned"}, r
         assert ph.load_slavery(d) == {t: cc.slavery_law(r, t) for t in r}, "pop gate and emitter share one resolver"
         assert cc.starting_laws(r)["BBB"] == ["law_debt_slavery"]
+        # #9035: a tag whose data says law_isolationism emits it (closed market is policy, whatever it knows)
+        (d / "03_c.json").write_text(json.dumps({"baseline": {"laws": {"lawgroup_trade_policy": "law_isolationism"}},
+                                                  "tags": {"EEE": {}}}), encoding="utf-8")
+        assert cc.starting_laws(cc.load_resolved(d))["EEE"] == ["law_slavery_banned", "law_isolationism"]
         # a shared profile is a full package: it skips the region baseline (law_a) and reads the same in any region
         assert [r[t].laws["lawgroup_taxation"] for t in ("AAA", "BBB", "CCC")] == ["law_a", "law_t", "law_t"], r
         assert cc.slavery_law(r, "ZZZ") == cc.SLAVERY_BANNED

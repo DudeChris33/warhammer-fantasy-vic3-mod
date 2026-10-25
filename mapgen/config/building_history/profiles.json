@@ -169,11 +169,8 @@
    "logging_share": 0.7,
    "workforce_share": 0.2,
    "source": "canon: Warhammer Armies: Wood Elves",
-   "why": "Forest realms of Athel Loren: wardens, not barracks; almost no farming, woodcraft instead. Industry (textile, furniture) is written for when the realm can build it; the tech gate drops it today (#9035 decides).",
-   "industry": {
-    "building_textile_mill": 1,
-    "building_furniture_manufactory": 1
-   }
+   "why": "Forest realms of Athel Loren: wardens, not barracks; almost no farming, woodcraft instead. No industry: wood elves keep no manufacturies on purpose (#9035, Chris 2026-10-25).",
+   "industry": {}
   },
   "greenskin_horde": {
    "admin": 0,
