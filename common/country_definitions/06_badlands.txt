@@ -115,7 +115,7 @@ BNR = {
 }
 
 ################ BTO — Broken Tooth ################
-# Crusher Zogoth; the Iron Rock before Gorbad took it
+# Absorbed by Gorbad's Ironclaws before 1707 IC (Wikipedia summary of the O&G army books); no source places the tribe in 2502, so this is a disclosed revival. Ruler "Crusher Zogoth" is unsourced.
 
 BTO = {
 	color = { 102 116 44 }

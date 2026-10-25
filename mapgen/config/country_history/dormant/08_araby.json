@@ -49,11 +49,6 @@
       "confidence": "medium",
       "note": "Al-Haikk, the Golden City: capital of the Arabyan Sultan."
     },
-    "ANT": {
-      "profile": "crusader_holding",
-      "confidence": "medium",
-      "note": "Antoch the Crusader City: a Bretonnian kingdom-in-exile; razed by Lizardmen per registry."
-    },
     "BEL": {
       "confidence": "low"
     },

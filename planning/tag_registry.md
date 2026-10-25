@@ -35,7 +35,7 @@ Filed by epic #3414 (child #3415).
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (19)
 
-**Total: 247 tags** (16 formables, 231 starts; recounted from the roster rows in #8444) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 247 tags** (16 formables, 230 starts, 1 reserved; recounted from the roster rows in #8444) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0), plus the `98_unclaimed` placeholder owner `UNO` (#6391). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -63,8 +63,10 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
 - **3 uppercase ASCII letters**, mnemonic per polity (Vic3 vanilla convention: `GBR`, `FRA`).
 - **Formable = the iconic national code; start fragments = polity codes.** `EMP` is the formable
   *The Empire*; `REI` (Reikland) etc. are the start tags that form it.
-- **One row per tag**, columns: `TAG | region file | polity | kind (formable/start) | primary culture
-  | placeholder capital | notes`.
+- **One row per tag**, columns: `TAG | region file | polity | kind (formable/start/reserved) | primary culture
+  | placeholder capital | notes`. `reserved` (#9032) means the code is taken and frozen but no polity
+  exists at 2502: no `country_history` entry (`dormant/` included) and no legend colour; the validator
+  does not load it.
 - **The placeholder-capital column is a human-readable seat note, not the authority.** The real
   `capital = STATE_*` of every tag is in `common/country_definitions/` (convention in
   `.claude/rules/peoples.md`); where the two differ, the definition wins.
@@ -746,7 +748,7 @@ instead).
 | ICL | `06_badlands` | Ironclaw | start | `mountain_orc` | Iron Rock | Gorbad Ironclaw; holds Iron Rock (N. Badlands) |
 | BSB | `06_badlands` | Bloody Sunz | start | `mountain_orc` | Blightwater (non-canon) | Grumlok & Gazbag; Badlands orc tribe |
 | BNR | `06_badlands` | Bonerattlaz | start | `mountain_orc` | Northern World's Edge (non-canon) | Azhag the Slaughterer; N. World's Edge |
-| BTO | `06_badlands` | Broken Tooth | start | `mountain_orc` | The Cauldron (non-canon) | Crusher Zogoth; pre-Gorbad Iron Rock (historical) |
+| BTO | `06_badlands` | Broken Tooth | start | `mountain_orc` | The Cauldron (non-canon) | absorbed by Gorbad's Ironclaws before 1707 IC, and Gorbad built the Iron Rock (Wikipedia summary of the O&G army books); no source places the tribe in 2502; disclosed revival, owner under review in #9038; ruler "Crusher Zogoth" unsourced |
 | BRN | `06_badlands` | Broken Nose | start | `goblin` | Novalone Pass (non-canon) | Goblin tribe of the Vaults |
 | BLV | `06_badlands` | Black Venom | start | `goblin` | West Middenland (non-canon, BLV slice) | Forest Goblin tribe, S. of Black Fire Pass |
 | RDV | `06_badlands` | Redvenom | start | `goblin` | Marshes of Madness (non-canon) | Snagla Grobspit's Forest Goblins |
@@ -803,7 +805,7 @@ start map gave it states: `mountain_orc` culture, `unrecognized`/`principality`.
 
 Arabyan city-states (culture `PLACEHOLDER` until a future epic) + two **Bretonnian crusader** holdings
 from the Great Crusade Against Araby (both `bretonnian`, sourced tabletop canon). Both crusader colonies
-historically *fell* (Fyrus to an Arabyan uprising; Antoch razed by Lizardmen), so they are reclaim /
+historically *fell* (Fyrus to an Arabyan uprising; Antoch, reserved and unsourced, is not a 2502 polity), so they are reclaim /
 crusader-revival starts. Fyrus itself is kept as a releasable **Arabyan** tag; the Knights of Origo
 (the order that once held it) are a separate Bretonnian tag. (Approved 2026-08-30.)
 
@@ -820,7 +822,7 @@ Culture update (#8473): the Arabyan culture now exists as `arabyan`; the tag row
 | ELK | `08_araby` | El-Kalabad | start | `PLACEHOLDER` | El-Kalabad | desert city |
 | FYR | `08_araby` | Fyrus | start | `PLACEHOLDER` | Fyrus | Arabyan island (releasable; once held by the Knights of Origo) |
 | ORG | `08_araby` | Knights of Origo | start | `bretonnian` | Fyrus | Bretonnian crusader order (Holy Order of Saint Origo) |
-| ANT | `08_araby` | Antoch | start | `bretonnian` | Antoch | "the Crusader City", Gulf of Medes (razed by Lizardmen) |
+| ANT | `08_araby` | Antoch | reserved | `bretonnian` | Antoch | no source found for Antoch (searched 2026-10-23); "Crusader City" and "razed by Lizardmen" unverified; no 2502 polity |
 
 ### 09 SOUTHLANDS (PLACEHOLDER + savage_orc) — 8 tags; no formable
 
@@ -888,7 +890,7 @@ Culture update (#8468): the marauder culture now exists as `kurgan` (covering Ku
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | KUR | `12_eastern_steppes` | Kurgan | start | `PLACEHOLDER` | — | Chaos marauder confederation; decentralization → a later law/government-type variant |
 | HUN | `12_eastern_steppes` | Hung | start | `PLACEHOLDER` | — | eastern Chaos marauder confederation |
-| KUL | `12_eastern_steppes` | Kul | start | `PLACEHOLDER` | — | Asavar Kul's great host (Great War against Chaos) |
+| KUL | `12_eastern_steppes` | Kul | start | `PLACEHOLDER` | — | Kul tribe of the Kurgan steppes (Old World Almanack – The Marauder Tribes, warhammer-community.com, 2025-11-18); not Asavar Kul's host, which was destroyed at Kislev in 2302 IC |
 | TON | `12_eastern_steppes` | Tong | start | `PLACEHOLDER` | — | steppe tribe |
 
 ### 13 CATHAY (PLACEHOLDER) — 11 tags; CTH formable
@@ -1005,7 +1007,7 @@ matches the tier/type given to Norsca's own new lesser-tribe tags the same pass 
 | XHO | `19_lustria` | Xhotl | start | `PLACEHOLDER` | Xhotl | City of Fate (Kroq-Gar's stand) |
 | AXL | `19_lustria` | Axlotl | start | `PLACEHOLDER` | Axlotl | the Star City |
 | CHU | `19_lustria` | Chupayotl | start | `PLACEHOLDER` | Chupayotl | the Sunken City (SE Lustria) |
-| KON | `19_lustria` | Konquata | start | `PLACEHOLDER` | Konquata | youngest temple-city (founded 2520 IC) |
+| KON | `19_lustria` | Konquata | start | `PLACEHOLDER` | Konquata | Lizardmen tag, not present at the 2502 start (Konquata's building begins 2520 IC, in Albion; Lexicanum, fan wiki; book source not checked); releasable later |
 | TLN | `19_lustria` | Tlanxla | start | `PLACEHOLDER` | Tlanxla | City of the Sky (destroyed in the Catastrophe) |
 | SPZ | `19_lustria` | Spektazuma | start | `PLACEHOLDER` | Spektazuma | City of Lenses (ruined) |
 | TLA | `19_lustria` | Tlax | start | `PLACEHOLDER` | Tlax | City of Ghosts (ruined) |
