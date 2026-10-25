@@ -24,7 +24,7 @@
       "lawgroup_rights_of_women": "law_women_own_property",
       "lawgroup_welfare": "law_no_social_security",
       "lawgroup_migration": "law_closed_borders",
-      "lawgroup_slavery": "law_debt_slavery",
+      "lawgroup_slavery": "law_slavery_banned",
       "lawgroup_labour_associations": "law_combination_acts"
     },
     "ruling_igs": [
@@ -40,8 +40,8 @@
       "ig_devout": "Mortuary Cult (Liche Priests)",
       "ig_armed_forces": "Legions of the Dead"
     },
-    "source": "canon: WFB 8e Tomb Kings (Priest-King dynasties, Mortuary Cult, eternal legions of the dead, caste-bound living population)",
-    "why": "An undead Tomb King rules absolutely through the Mortuary Cult with tireless standing legions; a closed, caste-bound society with no schools or police beyond the guard of the dead"
+    "source": "canon: WFB 8e Tomb Kings (Priest-King dynasties, the Mortuary Cult, legions of the dead raised by Nagash's Great Ritual, which slew Nehekhara's living; the army-book text is from memory, corroborated by Bell of Lost Souls 2025 (Alcadizaar the last living Nehekharan) and Warhammer Community's Old World Almanack (kings bound to their remains))",
+    "why": "An undead Tomb King rules absolutely through the Mortuary Cult with tireless legions; with no living subjects left there is no one to enslave, so slavery is banned and undead labour is Mechanics gap #3; no schools or police beyond the guard of the dead"
   },
   "tags": {
     "BHA": {
@@ -58,24 +58,16 @@
     },
     "LAH": {
       "profile": "vampire_lord",
-      "confidence": "medium",
-      "note": "Lahmia under Neferata; confidence medium because the tag models an undead city-state.",
-      "ruling_igs": [
-        "ig_devout",
-        "ig_armed_forces"
-      ],
+      "confidence": "low",
+      "note": "Leaderless remnant in the ruins of Lahmia; Neferata's court is LHX. Whether the tag should exist at start is #9032/#9038.",
       "suggested_ig_names": {
-        "ig_devout": "Mortuary Cult (Liche Priests)",
-        "ig_armed_forces": "Legions of the Dead"
+        "ig_armed_forces": "Restless Dead of Lahmia",
+        "ig_devout": "Blood-Cult of the Ruins"
       },
       "justify": {
-        "ruling_igs": {
-          "source": "canon: Nehekharan mortuary cult of Khemri/Lahmia (carried over from the 07 profile copy)",
-          "why": "Lahmia keeps the Mortuary Cult and its liche priests ahead of the legions."
-        },
         "suggested_ig_names": {
-          "source": "canon: Nehekharan mortuary cult of Khemri/Lahmia (carried over from the 07 profile copy)",
-          "why": "Lahmia keeps the Mortuary Cult and its liche priests ahead of the legions."
+          "source": "inferred",
+          "why": "Lahmia has been a ruin since the Nehekharan alliance cast out its vampires, and Neferata rules from the Silver Pinnacle; the remnant has no named ruler or cult (names invented)."
         }
       }
     },
@@ -101,33 +93,7 @@
     },
     "ZND": {
       "confidence": "medium",
-      "laws": {
-        "lawgroup_trade_policy": "law_mercantilism",
-        "lawgroup_army_model": "law_peasant_levies",
-        "lawgroup_slavery": "law_slavery_banned"
-      },
-      "ruling_igs": [
-        "ig_petty_bourgeoisie",
-        "ig_devout"
-      ],
-      "justify": {
-        "laws.lawgroup_trade_policy": {
-          "source": "canon: WFB Tomb Kings (Zandri is the living trading port of Nehekhara)",
-          "why": "A merchant port trades openly with the outside world."
-        },
-        "laws.lawgroup_army_model": {
-          "source": "inferred",
-          "why": "A living merchant city relies on its citizen levies, not legions of the dead."
-        },
-        "laws.lawgroup_slavery": {
-          "source": "inferred",
-          "why": "A living merchant city; the pyramid-era bondage of the Tomb Kings does not apply."
-        },
-        "ruling_igs": {
-          "source": "canon: WFB Tomb Kings (Zandri is the living trading port of Nehekhara)",
-          "why": "Merchants share power with the temple."
-        }
-      }
+      "note": "Zandri: Tomb King port, the realm's largest harbour, from which the Tomb Kings launch their expeditions (Lexicanum snippet; page not readable); tomb-kingdom baseline. No source found for a living port."
     }
   }
 }

@@ -89,15 +89,17 @@
       "note": "Orc tribe: greenskin baseline unchanged; canon shows shifting Waaagh! coalitions, not fixed institutions."
     },
     "STR": {
+      "profile": "vampire_lord",
       "confidence": "low",
-      "note": "Strigoi remnant: undead holding filed in the Badlands by geography; the greenskin baseline does not describe it, source silent on its institutions.",
-      "laws": {
-        "lawgroup_governance_principles": "law_monarchy"
+      "note": "Strigoi remnant in the Badlands by geography; vampire_lord package; source silent on institutions.",
+      "suggested_ig_names": {
+        "ig_armed_forces": "Ghoul Packs and Crypt Horrors",
+        "ig_devout": "Cult of Ushoran"
       },
       "justify": {
-        "laws.lawgroup_governance_principles": {
-          "source": "canon: WFB Vampire Counts (Strigoi ghouls are a vampire brood, not a greenskin warband)",
-          "why": "Excluded from the tribal law: vampire realm, #9029."
+        "suggested_ig_names": {
+          "source": "canon: WFB Vampire Counts (the Strigoi descend from Ushoran of Strygos and lead ghoul packs; from memory, page not checked)",
+          "why": "A feral vampire bloodline over its ghoul-kin; the cult name is inferred."
         }
       }
     }

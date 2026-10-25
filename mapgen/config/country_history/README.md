@@ -88,7 +88,7 @@ Warhammer concepts the mod's laws, IGs and techs cannot express (reported, not a
 
 1. **Tribal governance.** *Resolved (#9037):* `law_chiefdom` and `law_elder_council` are visible to tribal realms through `wh_country_is_tribal_realm`; tribal tags start under Chiefdom (greenskins as a Warband).
 2. **Electoral college.** No law for an Emperor chosen by Electors; `law_landed_voting` gives *provincial* elections that canon does not have.
-3. **Undead and vampiric rule.** Eternal rulers, raised legions, blood-stock peasantry: approximated by autocracy, `peasant_levies`/`professional_army`, `serfdom` and `debt_slavery`.
+3. **Undead and vampiric rule.** Eternal rulers, raised legions, undead labour: approximated by autocracy and `peasant_levies`/`professional_army`; the vampire realms add `serfdom` and `debt_slavery` over their living blood-stock. The Tomb Kings have no living subjects and take `law_slavery_banned`, because the mod cannot express undead labour.
 4. **Chaos worship and cult schisms.** No law or IG for a Ruinous Power; approximated by `ig_devout` in the ruling bloc.
 5. **Confederation of warbands** (Border Princes, Eastern Steppes, greenskin Waaagh!) — the registry already asks for a law/government variant.
 6. **Merchant-house republics** with no head of state (Marienburg, Tilea) fit parliamentary/presidential republic + wealth voting only loosely; no "Doge" or council-of-ten.

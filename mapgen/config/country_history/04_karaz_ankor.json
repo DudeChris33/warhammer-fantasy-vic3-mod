@@ -142,9 +142,27 @@
       "note": "Dwarf hold; baseline unchanged."
     },
     "LHX": {
-      "profile": "undead_host",
-      "confidence": "low",
-      "note": "Lahmian exiles in New Lahmia; vampire holding, source silent on institutions."
+      "profile": "vampire_lord",
+      "confidence": "medium",
+      "note": "Neferata's court at the Silver Pinnacle (hub in STATE_NEW_LAHMIA); vampire_lord package with the Lahmian Sisterhood ruling.",
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_armed_forces"
+      ],
+      "suggested_ig_names": {
+        "ig_landowners": "Lahmian Sisterhood",
+        "ig_armed_forces": "Dead of the Silver Pinnacle"
+      },
+      "justify": {
+        "ruling_igs": {
+          "source": "canon: Josh Reynolds, Neferata (Black Library, 2013; Neferata takes the dwarf hold Silver Pinnacle as her seat, per the publisher blurb); canon: WFB Vampire Counts (the Lahmian Sisterhood; from memory, page not checked); TW:WH3 (Neferata and the Lahmian Sisterhood at the Silver Pinnacle, per third-party guides)",
+          "why": "The Sisterhood is the court's ruling nobility and the raised dead its garrison."
+        },
+        "suggested_ig_names": {
+          "source": "canon: Josh Reynolds, Neferata (Black Library, 2013; Neferata takes the dwarf hold Silver Pinnacle as her seat, per the publisher blurb); canon: WFB Vampire Counts (the Lahmian Sisterhood; from memory, page not checked); TW:WH3 (Neferata and the Lahmian Sisterhood at the Silver Pinnacle, per third-party guides)",
+          "why": "The Sisterhood is the court's ruling nobility and the raised dead its garrison; the name \"Dead of the Silver Pinnacle\" is invented."
+        }
+      }
     },
     "SLV": {
       "profile": "overrun_hold",
