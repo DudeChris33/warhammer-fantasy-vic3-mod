@@ -74,12 +74,14 @@
       }
     },
     "DRZ": {
-      "confidence": "low",
-      "note": "Baseline unchanged; source thin."
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); the orc occupier at Black Crag is a separate tag. Exiled claimant clan."
     },
     "EKR": {
-      "profile": "overrun_hold",
-      "confidence": "medium"
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
     },
     "KAD": {
       "confidence": "high",
@@ -107,7 +109,8 @@
     },
     "KEP": {
       "profile": "overrun_hold",
-      "confidence": "medium"
+      "confidence": "low",
+      "note": "Contested (registry): Belegar's reclamation; the besieged-hold package. Source is a fan wiki, so confidence is low."
     },
     "KHI": {
       "confidence": "low",
@@ -134,8 +137,9 @@
       "note": "Dwarf hold; baseline unchanged."
     },
     "KVN": {
-      "profile": "overrun_hold",
-      "confidence": "medium"
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined and flooded (registry); occupier is a separate tag. Exiled claimant clan."
     },
     "KZF": {
       "confidence": "low",
@@ -165,12 +169,14 @@
       }
     },
     "SLV": {
-      "profile": "overrun_hold",
-      "confidence": "medium"
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
     },
     "VLG": {
-      "profile": "overrun_hold",
-      "confidence": "medium"
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
     },
     "VMP": {
       "profile": "undead_host",

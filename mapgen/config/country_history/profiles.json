@@ -218,6 +218,49 @@
       "source": "canon: WFB Tilea and Estalia background (Estalian kingdoms: feudal grandees, Myrmidian state cult, sea-trade)",
       "why": "Estalia is a group of feudal kingdoms under a proud landed nobility and the Myrmidian church, less mercantile than Tilea, one tier behind the Tilean cities Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
     },
+    "exiled_hold": {
+      "laws": {
+        "lawgroup_army_model": "law_peasant_levies",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_racial_segregation",
+        "lawgroup_colonization": "law_no_colonial_affairs",
+        "lawgroup_distribution_of_power": "law_oligarchy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_no_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_guild_system",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_closed_borders",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_no_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_landowners",
+        "ig_devout"
+      ],
+      "tax_level": "low",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_landowners": "Exiled Clan Thanes",
+        "ig_devout": "Grudge-keepers and the Ancestor Cult"
+      },
+      "source": "inferred: planning/tag_registry.md marks each hold ruined with a separate occupier tag; common/country_definitions/04_karaz_ankor.txt keeps them as releasable reclaim realms",
+      "why": "The hold has fallen and its occupier is another tag: what survives is the royal clan's claim, its thanes and the ancestor cult that keeps the grudge, with clan levies instead of regiments, no schools and no industry"
+    },
     "greenskin_holdout": {
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",
@@ -429,8 +472,8 @@
         "ig_industrialists": "Engineers' and Miners' Guilds",
         "ig_devout": "Runesmiths and the Ancestor Cult"
       },
-      "source": "canon: WFB 8e Dwarfs / Lexicanum (Karak Eight Peaks, Ekrund, Karak Varn, Mount Gunbad, Karak Ungor, Karak Vlag and Mount Silverspear are overrun, besieged or half-lost to greenskins, Skaven and Chaos)",
-      "why": "A besieged remnant holds the deep vaults with garrison and priests, has lost industrial capacity (one tier down) and cannot fund schools"
+      "source": "non-tabletop: Lexicanum (fan wiki), Karak Eight Peaks (Belegar Ironhammer's reclamation; the WFB 8e Dwarfs army book was not checked)",
+      "why": "Belegar's reclamation: a Dwarf king holds part of Karak Eight Peaks against greenskins and Skaven with garrison and priests, and has lost a living hold's industry and schools"
     },
     "ruined_temple_city": {
       "laws": {
