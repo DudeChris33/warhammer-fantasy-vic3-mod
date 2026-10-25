@@ -41,7 +41,7 @@
     },
     "suggested_ig_names": {
       "ig_landowners": "Princes and Noble Houses",
-      "ig_devout": "Priesthoods of the Elven Gods"
+      "ig_devout": "Cults of Asuryan, Isha, Vaul and Hoeth"
     },
     "source": "canon: WFB 8e High Elves army book (Phoenix King and princes of the Ten Kingdoms; citizen-militia levy of every able elf; Sea Guard; Isha healers; closed to outsiders)",
     "why": "Each kingdom is a hereditary realm of princely houses whose every able adult serves in the militia, backed by a great navy, healers and temple-schools, closed to outsiders, with elven craftsmanship Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."

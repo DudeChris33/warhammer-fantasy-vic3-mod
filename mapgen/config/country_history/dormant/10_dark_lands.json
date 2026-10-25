@@ -45,7 +45,7 @@
       "ig_industrialists": "Daemonsmiths and Overseers",
       "ig_armed_forces": "Infernal Guard"
     },
-    "source": "canon: WFB Chaos Dwarfs (Forge World lists; Storm of Chaos era): rule by Sorcerer-Prophets of Hashut, slave-driven hell-forges, Overseer castes, Infernal Guard; TW:WH3 Chaos Dwarfs",
+    "source": "canon: Forge World Tamurkhan: The Throne of Chaos (Chaos Dwarf army list and background): rule by Sorcerer-Prophets of Hashut, slave-driven hell-forges, Overseer castes, Infernal Guard; TW:WH3 Chaos Dwarfs",
     "why": "A theocracy of the Priests of Hashut over a caste of Overseers and Daemonsmiths: state-run industry, slave economy, censorship and police-terror, forge-armed standing regiments (tier 2); trade policy is isolationism because the Chaos Dwarf preset lacks stock_exchange, which protectionism needs (#8459)"
   },
   "tags": {

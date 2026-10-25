@@ -43,12 +43,12 @@
       "ig_landowners": "Dragon-Regents and Provincial Nobility",
       "ig_intelligentsia": "Celestial Mandarins"
     },
-    "source": "canon: TW:WH3 Grand Cathay / WH: The Old World (2023+) Cathay background (Dragon Emperor and Moon Empress; mandarin bureaucracy; the Great Bastion closes the borders; Ivory Road trade); inferred for mundane law groups",
+    "source": "TW:WH3 Grand Cathay (Dragon Emperor and Moon Empress; mandarin bureaucracy; the Great Bastion closes the borders; Ivory Road trade); inferred for mundane law groups",
     "why": "An absolute Celestial monarchy administered by appointed mandarins with standing armies, gunpowder and rocket engineering (tier 3), guild trade, closed borders and ancestor-cult schooling"
   },
   "tags": {
     "DGF": {
-      "confidence": "medium",
+      "confidence": "low",
       "laws": {
         "lawgroup_navy_model": "law_professional_navy"
       },
@@ -58,17 +58,17 @@
       ],
       "justify": {
         "laws.lawgroup_navy_model": {
-          "source": "canon: tag_registry.md (Grand Dragon Fleet is Cathay's imperial navy)",
+          "source": "inferred (tag_registry.md: Grand Dragon Fleet is Cathay's imperial navy)",
           "why": "An imperial navy is a standing fleet."
         },
         "ruling_igs": {
-          "source": "canon: tag_registry.md (the Jade Fleet)",
+          "source": "inferred (tag_registry.md: the Jade Fleet)",
           "why": "Admirals and shipping guilds run the fleet."
         }
       }
     },
     "FUC": {
-      "confidence": "medium",
+      "confidence": "low",
       "laws": {
         "lawgroup_navy_model": "law_professional_navy"
       },
@@ -78,11 +78,11 @@
       ],
       "justify": {
         "laws.lawgroup_navy_model": {
-          "source": "canon: tag_registry.md (Fu-Chow, Cathay's greatest port; Sea-Dragon)",
+          "source": "inferred (tag_registry.md: Fu-Chow, Cathay's greatest port; Sea-Dragon)",
           "why": "The great port keeps a standing fleet."
         },
         "ruling_igs": {
-          "source": "canon: tag_registry.md (Fu-Chow, Cathay's greatest port)",
+          "source": "inferred (tag_registry.md: Fu-Chow, Cathay's greatest port)",
           "why": "Port merchants lead the ruling bloc."
         }
       }
@@ -99,7 +99,7 @@
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: TW:WH3 Grand Cathay (the Great Bastion garrisons and its Dragon, Snake and Turtle Gates)",
+          "source": "TW:WH3 Grand Cathay (the Great Bastion garrisons and its Dragon, Snake and Turtle Gates)",
           "why": "A fortress line ruled by its garrison commanders."
         }
       }
@@ -126,14 +126,14 @@
       "note": "Administrator of the Realm; baseline (mandarin-led) unchanged."
     },
     "SHY": {
-      "confidence": "medium",
+      "confidence": "low",
       "ruling_igs": [
         "ig_landowners",
         "ig_petty_bourgeoisie"
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: tag_registry.md (Shang-Yang commands the Ivory Road trade)",
+          "source": "inferred (tag_registry.md: Shang-Yang commands the Ivory Road trade)",
           "why": "Caravan merchants share power with the Iron-Dragon's nobility."
         }
       }

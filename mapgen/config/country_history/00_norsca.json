@@ -41,7 +41,7 @@
       "ig_landowners": "Jarls and Hersirs",
       "ig_devout": "Skalds and Shamans"
     },
-    "source": "canon: WFB 8e Warriors of Chaos (Norse tribes); WH: The Old World (2023+) Rulebook, Norsca; inferred where the books are silent; canon: WFB Warhammer Armies: Norsca (tribes led by Chieftains and Jarls); the mod's tribal law is law_chiefdom (#9037)",
+    "source": "canon: WFB 8e Warriors of Chaos (Norse tribes); inferred where the books are silent; canon: WFB Warhammer Armies: Norsca (tribes led by Chieftains and Jarls); the mod's tribal law is law_chiefdom (#9037)",
     "why": "Norse tribes are jarl-led raiding confederacies: warrior caste, thing-moot assembly, consumption taxes, slave-taking, no schools or police; tribal Norse realms are Chiefdoms under a Chieftain, not monarchies (#9037)"
   },
   "tags": {
@@ -53,7 +53,7 @@
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); inferred (tag_registry.md tribe notes)",
           "why": "Slaanesh devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
@@ -69,7 +69,7 @@
       },
       "justify": {
         "laws.lawgroup_trade_policy": {
-          "source": "canon: WFB Norsca tribe notes (Bjornlings trade and fish); tag_registry.md",
+          "source": "canon: WFB Norsca tribe notes (Bjornlings trade and fish); inferred (tag_registry.md)",
           "why": "The one Norse tribe known for dealing with the south trades rather than isolates."
         }
       }
@@ -82,7 +82,7 @@
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); inferred (tag_registry.md tribe notes)",
           "why": "Tzeentch devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
@@ -95,7 +95,7 @@
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); inferred (tag_registry.md tribe notes)",
           "why": "Chaos Wastes border devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
@@ -108,7 +108,7 @@
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); inferred (tag_registry.md tribe notes)",
           "why": "Chaos Wastes border devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
@@ -125,27 +125,27 @@
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); inferred (tag_registry.md tribe notes)",
           "why": "Khorne devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
     },
     "SNA": {
       "confidence": "low",
-      "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
+      "note": "Lesser tribe (WH: The Old World Rulebook, set before 2502; its survival to 2502 is assumed): baseline unchanged, no canon institutional detail."
     },
     "SOR": {
       "confidence": "low",
-      "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
+      "note": "Lesser tribe (WH: The Old World Rulebook, set before 2502; its survival to 2502 is assumed): baseline unchanged, no canon institutional detail."
     },
     "SOT": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Naestra and Arahan's wood-elf realm; no country definition yet."
+      "note": "Naestra and Arahan's wood-elf realm."
     },
     "URS": {
       "confidence": "low",
-      "note": "Lesser tribe (Old World Rulebook): baseline unchanged, no canon institutional detail."
+      "note": "Lesser tribe (WH: The Old World Rulebook, set before 2502; its survival to 2502 is assumed): baseline unchanged, no canon institutional detail."
     },
     "VAR": {
       "confidence": "medium",
@@ -155,7 +155,7 @@
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); tag_registry.md tribe notes",
+          "source": "canon: WFB 8e Warriors of Chaos (tribes devoted to a Ruinous Power); inferred (tag_registry.md tribe notes)",
           "why": "Chaos-touched northern devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
@@ -163,7 +163,7 @@
     "XSD": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder (Hell Pit); no country definition yet."
+      "note": "Skaven placeholder (Hell Pit)."
     }
   }
 }

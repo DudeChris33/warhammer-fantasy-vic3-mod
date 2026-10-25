@@ -40,14 +40,14 @@
       "ig_landowners": "Knights and Nobility",
       "ig_devout": "Cult of the Lady (Damsels and Grail Pilgrims)"
     },
-    "source": "canon: WFB 8e Bretonnia army book; WH: The Old World (2023+) Bretonnia background (knightly caste over peasant serfs, Lady of the Lake, dukes and barons)",
+    "source": "canon: WFB 8e Bretonnia army book (knightly caste over peasant serfs, Lady of the Lake, dukes and barons)",
     "why": "Hereditary knightly warrior caste over bound peasants, hereditary feudal offices, the Lady as state cult, land tax, guilds only in the port cities, and knights' disdain for gunpowder Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
   },
   "tags": {
     "ANM": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+      "note": "Wood-elf realm of Athel Loren."
     },
     "AQU": {
       "confidence": "low",
@@ -56,7 +56,7 @@
     "ARG": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+      "note": "Wood-elf realm of Athel Loren."
     },
     "ART": {
       "confidence": "low",
@@ -147,15 +147,15 @@
           "why": "Closed borders."
         },
         "ruling_igs": {
-          "source": "canon: WFB 8e Bretonnia (Mousillon's cannibal warlords and fallen knights)",
-          "why": "Warlords and the last landed knights."
+          "source": "canon: WFB 8e Bretonnia (Mousillon's fallen knights)",
+          "why": "Fallen knights and their armed retinues."
         }
       }
     },
     "OKP": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+      "note": "Wood-elf realm of Athel Loren."
     },
     "PAR": {
       "confidence": "low",
@@ -173,17 +173,17 @@
     "TLS": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+      "note": "Wood-elf realm of Athel Loren."
     },
     "TRG": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+      "note": "Wood-elf realm of Athel Loren."
     },
     "WYD": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf realm of Athel Loren; no country definition yet."
+      "note": "Wood-elf realm of Athel Loren."
     }
   }
 }

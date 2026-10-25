@@ -42,7 +42,7 @@
       "ig_petty_bourgeoisie": "Merchant Houses",
       "ig_armed_forces": "Condottieri Companies"
     },
-    "source": "canon: WFB Dogs of War / Tilea (independent city-states ruled by merchant princes, mercenary companies, Myrmidia cult); WH: The Old World (2023+) Tilea background",
+    "source": "canon: WFB Dogs of War / Tilea (independent city-states ruled by merchant princes, mercenary companies, Myrmidia cult)",
     "why": "Tilean city-states are ruled by merchant princes with the great houses (monarchy + oligarchy, no elections), hire professional mercenary companies and trade under mercantilist rules Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
   },
   "tags": {
@@ -113,12 +113,12 @@
       },
       "justify": {
         "laws.lawgroup_colonization": {
-          "source": "canon: WFB Estalia background (Magritta's Lustrian expeditions)",
-          "why": "Frontier colonisation."
+          "source": "inferred",
+          "why": "Frontier colonisation, assumed for Estalia's seagoing power; no canon expedition found."
         },
         "laws.lawgroup_navy_model": {
           "source": "canon: WFB Estalia background (Magritta is Estalia's seagoing power)",
-          "why": "A professional navy for the expeditions."
+          "why": "Estalia's seagoing power keeps a professional navy."
         },
         "taxed_goods": {
           "source": "derived: validate_taxed_goods.py finds a building_vineyard in this tag's own states",
@@ -210,7 +210,7 @@
       ],
       "justify": {
         "laws.lawgroup_slavery": {
-          "source": "canon: WFB / TW:WH2 Pirates of Sartosa (raiders and slavers)",
+          "source": "canon: WFB (Pirates of Sartosa, raiders and slavers); TW:WH2 (Pirates of Sartosa)",
           "why": "Corsairs take and sell captives."
         },
         "laws.lawgroup_church_and_state": {
@@ -298,7 +298,7 @@
     "XSG": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder (Blighted Marshes); no country definition yet."
+      "note": "Skaven placeholder (Blighted Marshes)."
     }
   }
 }

@@ -44,13 +44,13 @@
       "ig_industrialists": "Engineers' and Miners' Guilds",
       "ig_devout": "Runesmiths and the Ancestor Cult"
     },
-    "source": "canon: WFB 8e Dwarfs army book; WH: The Old World (2023+) Dwarfs background (King and Thanes, guilds of Engineers/Runesmiths/Miners, ancestor cult, Book of Grudges)",
+    "source": "canon: WFB 8e Dwarfs army book (King and Thanes, guilds of Engineers/Runesmiths/Miners, ancestor cult, Book of Grudges)",
     "why": "A hold is a hereditary kingdom of clan Thanes with guild masters, standing regiments, guild-controlled trade and industry, insular borders and gunpowder-plus-steam engineering"
   },
   "tags": {
     "AZL": {
       "confidence": "low",
-      "note": "Iron Hills hold; baseline unchanged (source silent on its institutions)."
+      "note": "Karak Azul, the southern hold in the Iron Peaks; baseline unchanged (source silent on its institutions)."
     },
     "BVR": {
       "confidence": "medium",
@@ -181,27 +181,27 @@
     "VMP": {
       "profile": "undead_host",
       "confidence": "low",
-      "note": "Kemmler's Host; stand-in culture, no country definition yet."
+      "note": "Kemmler's Host; stand-in culture."
     },
     "XSI": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
+      "note": "Skaven placeholder."
     },
     "XSJ": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
+      "note": "Skaven placeholder."
     },
     "XSK": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
+      "note": "Skaven placeholder."
     },
     "XSL": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
+      "note": "Skaven placeholder."
     },
     "ZHU": {
       "confidence": "high"

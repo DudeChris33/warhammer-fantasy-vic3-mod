@@ -44,7 +44,7 @@
       "ig_landowners": "Elector Counts and Nobility",
       "ig_devout": "Cult of Sigmar"
     },
-    "source": "canon: WFB 8e Empire army book; WH: The Old World (2023+) Empire background (hereditary Elector Counts rule their provinces with their nobles; Sigmar the state cult; Imperial State Troops). The Emperor's election is gap #2 in README.md, not modelled",
+    "source": "canon: WFB 8e Empire army book (hereditary Elector Counts rule their provinces with their nobles; Sigmar the state cult; Imperial State Troops). The Emperor's election is gap #2 in README.md, not modelled",
     "why": "A hereditary Elector Count ruling with his nobles (oligarchy, no provincial election: the only Imperial election is the Emperor's), Sigmarite state cult, provincial militias (state troops), Shallyan hospices, and gunpowder-plus-guild tech at tier 3"
   },
   "tags": {

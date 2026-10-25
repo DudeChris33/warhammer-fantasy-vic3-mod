@@ -54,14 +54,14 @@
       "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions."
     },
     "CXC": {
-      "confidence": "medium",
+      "confidence": "low",
       "note": "Ogre tribe: baseline unchanged; source names the tyrant but not institutions.",
       "ruling_igs": [
         "ig_armed_forces"
       ],
       "justify": {
         "ruling_igs": {
-          "source": "canon: tag_registry.md (Crossed Clubs are roaming braggart Maneaters)",
+          "source": "inferred (tag_registry.md: Crossed Clubs are roaming braggart Maneaters)",
           "why": "A roaming Maneater band has no priesthood of its own."
         }
       }

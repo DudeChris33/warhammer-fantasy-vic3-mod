@@ -43,7 +43,7 @@
       "ig_landowners": "Elector Counts and Nobility",
       "ig_devout": "Cult of Sigmar"
     },
-    "source": "canon: WFB 8e Empire army book; WH: The Old World (2023+) Empire background (hereditary Elector Counts rule their provinces with their nobles; Sigmar the state cult; Imperial State Troops). The Emperor's election is gap #2 in README.md, not modelled",
+    "source": "canon: WFB 8e Empire army book (hereditary Elector Counts rule their provinces with their nobles; Sigmar the state cult; Imperial State Troops). The Emperor's election is gap #2 in README.md, not modelled",
     "why": "A hereditary Elector Count ruling with his nobles (oligarchy, no provincial election: the only Imperial election is the Emperor's), Sigmarite state cult, provincial militias (state troops), Shallyan hospices, and gunpowder-plus-guild tech"
   },
   "tags": {
@@ -53,7 +53,7 @@
     "BRK": {
       "profile": "chaos_warband",
       "confidence": "low",
-      "note": "No country definition yet (PLACEHOLDER culture); entry kept for the later generator."
+      "note": "Brass Keep's Chaos garrison; `norscan` is a disclosed stand-in culture (tag_registry.md)."
     },
     "CRB": {
       "confidence": "low",
@@ -72,7 +72,7 @@
     "GRW": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf enclave; no country definition yet."
+      "note": "Wood-elf enclave."
     },
     "HOC": {
       "confidence": "medium"
@@ -80,7 +80,7 @@
     "LAU": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Wood-elf enclave; no country definition yet."
+      "note": "Wood-elf enclave."
     },
     "MAR": {
       "confidence": "high",
@@ -403,17 +403,17 @@
     "XSA": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
+      "note": "Skaven placeholder."
     },
     "XSB": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
+      "note": "Skaven placeholder."
     },
     "XSC": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
+      "note": "Skaven placeholder."
     }
   }
 }

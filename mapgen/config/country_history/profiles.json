@@ -42,7 +42,7 @@
       },
       "suggested_ig_names": {
         "ig_landowners": "Princes and Noble Houses",
-        "ig_devout": "Priesthoods of the Elven Gods"
+        "ig_devout": "Cult of Asuryan"
       },
       "source": "derived",
       "why": "Follows from the laws at principality tier; gov_kingdom requires country_tier = kingdom. A colony would run as gov_colonial_administration only with law_colonial_administration, which the generator does not emit (README, Mechanics gaps). Taxed goods are liquor, not wine: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
@@ -129,7 +129,7 @@
       "suggested_ig_names": {
         "ig_devout": "Cult of Nurgle"
       },
-      "source": "canon: WFB 8e Warriors of Chaos; WH: The Old World (Brass Keep held by Nurgle warbands since 2302 IC)",
+      "source": "canon: WFB 8e Warriors of Chaos; canon: WFRP 4e The Enemy Within campaign (the Picket contains the Chaos-held Brass Keep); fall date unverified",
       "why": "A fortress held by a Chaos warband is a tribal raiding host, not an Imperial province"
     },
     "crusader_holding": {
@@ -172,7 +172,7 @@
         "ig_landowners": "Crusader Knights",
         "ig_armed_forces": "Order Chapter"
       },
-      "source": "canon: WFB 8e Bretonnia (Great Crusade against Araby; knights carve out fiefs); tag_registry.md 08 notes",
+      "source": "canon: WFB 8e Bretonnia (Great Crusade against Araby; knights carve out fiefs); inferred (tag_registry.md: 08 notes)",
       "why": "A crusader holding is a Bretonnian knightly fief transplanted overseas: warrior caste, hereditary offices, no local peasantry to tie to the land"
     },
     "estalian_kingdom": {
@@ -387,7 +387,7 @@
         "ig_armed_forces": "Wolf-Rider Warbands",
         "ig_landowners": "Khan's Kin"
       },
-      "source": "canon: WFB / TW:WH3 Hobgoblin Khans (Wolf Riders, tributaries of the Chaos Dwarfs; Hobgoblin steppe raiders under a Khan)",
+      "source": "canon: WFB (Hobgoblin Wolf Riders, tributaries of the Chaos Dwarfs); TW:WH3 (Hobgoblin steppe raiders under a Khan)",
       "why": "Steppe raiders under an absolute Khan, standing warband, slave-taking, no schooling"
     },
     "norse_colony": {
@@ -428,7 +428,7 @@
         "ig_armed_forces": "Hird Warbands",
         "ig_landowners": "Jarls and Hersirs"
       },
-      "source": "canon: White Dwarf 309 \"The Norse of Lustria\" (Skeggi founded 888 IC by Losteriksson of the Bjornlings); Norsca tribal package",
+      "source": "canon: WFRP 4e Lustria (Skeggi, the Norse foothold in Lustria); non-tabletop: Lexicanum (fan wiki) (founded 888 IC by Losteriksson of the Bjornlings); Norsca tribal package",
       "why": "A Norse colony keeps its homeland's jarl-and-warband institutions; Norse settlers keep their chieftains (law_chiefdom, #9037)"
     },
     "overrun_hold": {
@@ -513,7 +513,7 @@
         "ig_devout": "Slann Mage-Priests and Skink Priests",
         "ig_armed_forces": "Saurus Legions"
       },
-      "source": "canon: WFB 8e Lizardmen / TW:WH3 (Xahutec, Oyxl, Tlanxla, Spektazuma, Tlax and Chupayotl are ruined, sunk or destroyed; Quetza is defiled by Clan Pestilens; Huatl is being refounded)",
+      "source": "canon: WFB 8e Lizardmen; TW:WH3 (Xahutec, Oyxl, Tlanxla, Spektazuma, Tlax and Chupayotl are ruined, sunk or destroyed; Quetza is defiled by Clan Pestilens; Huatl is being refounded)",
       "why": "A ruined city has lost the temple-schools and a tier of organisation"
     },
     "skaven_placeholder": {
@@ -557,7 +557,7 @@
         "ig_devout": "Grey Seers"
       },
       "source": "canon: WFB 8e Skaven army book (clans under Warlords, Grey Seers of the Horned Rat, slave-taking); placeholder clans, no named canon clan",
-      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; kept generic for lack of a clan-specific source; keeps the monarchy baseline: not a Norse tribe (#9037). No schools or health system: the package sets law_no_schools and law_no_health_system, and an institution exists only under a law that names it; tax is medium in every region (#9036)."
+      "why": "An unnamed Skaven clan is a warlord-ruled swarm with no schooling, tribute-taxed and slave-raiding; kept generic because the tags are placeholder clans (tag_registry.md Skaven convention); keeps the monarchy baseline: not a Norse tribe (#9037). No schools or health system: the package sets law_no_schools and law_no_health_system, and an institution exists only under a law that names it; tax is medium in every region (#9036)."
     },
     "temple_city": {
       "laws": {
@@ -767,7 +767,7 @@
       "institutions": {},
       "suggested_ig_names": {
         "ig_rural_folk": "Glade Kin",
-        "ig_devout": "Spellsingers and Waystalkers"
+        "ig_devout": "Spellsingers and Wardancers"
       },
       "source": "canon: WFB 8e Wood Elves army book (Athel Loren and the Asrai enclaves ruled by Glade Lords and Spellweavers, closed to outsiders); TW:WH2 Wood Elves",
       "why": "Secretive forest realms: warrior-caste Glade Guard, no trade or migration, little taxation, no slavery, no schooling beyond the Spellsingers' lore; the mod's lowest elven rung (no industry); keeps the monarchy baseline: not a Norse tribe (#9037) Taxed goods are liquor in every region: wine needs building_vineyard (enclosure, which the wood elf preset lacks) while liquor comes from subsistence home workshops (#9036)."

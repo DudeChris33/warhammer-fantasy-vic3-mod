@@ -40,7 +40,7 @@
       "ig_landowners": "Boyars",
       "ig_devout": "Cults of Ursun, Dazh and Tor"
     },
-    "source": "canon: WH: The Old World (2023+) Kislev background (Boyars under the Tzar); TW:WH3 Kislev; inferred for mundane law groups",
+    "source": "canon: WFB Kislev background (Boyars under the Tzar); TW:WH3 Kislev; inferred for mundane law groups",
     "why": "Kislev is a boyar-ruled steppe monarchy with a gunpowder-capable but agrarian, cult-heavy society: peasant levies, hereditary boyar administration, land tax, guilds in its cities"
   },
   "tags": {
@@ -77,7 +77,7 @@
       ],
       "justify": {
         "laws.lawgroup_distribution_of_power": {
-          "source": "canon: WH: The Old World (2023+) Kislev background (ruled by the Tzar from Kislev city)",
+          "source": "canon: WFB Kislev (ruled by the Tzar from Kislev city)",
           "why": "The Tzar holds the Ice Court and the seat of the realm: autocracy for the capital oblast."
         },
         "laws.lawgroup_army_model": {
