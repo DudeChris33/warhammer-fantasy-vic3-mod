@@ -1,0 +1,31 @@
+# Inert stubs for scripted GUIs that vanilla's gui files still look up.
+# common/scripted_guis is in replace_paths, so vanilla's definitions are gone;
+# without these, GetScriptedGui() fails every frame and floods error.log.
+# They never show and never validate, so the Japan-only panel branches stay hidden.
+# Scopes and saved_scopes match vanilla's journal_entry_sguis.txt.
+
+# Read by vanilla gui/character_panel.gui (portrait backgrounds).
+je_meiji_restoration_japanese_emperor_check_sgui = {
+	scope = character
+	saved_scopes = { meiji_reform_state }
+
+	is_shown = { always = no }
+	is_valid = { always = no }
+}
+
+# Read by vanilla gui/journal_entry_widgets/ep2_japan_widgets.gui.
+je_meiji_restoration_japanese_emperor_sgui = {
+	scope = country
+
+	is_shown = { always = no }
+	is_valid = { always = no }
+}
+
+# Read by vanilla gui/journal_entry_widgets/ep2_japan_widgets.gui and gui/states_panel.gui.
+je_meiji_restoration_get_faction_sgui = {
+	scope = state
+	saved_scopes = { frame }
+
+	is_shown = { always = no }
+	is_valid = { always = no }
+}
