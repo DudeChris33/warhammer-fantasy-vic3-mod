@@ -35,7 +35,7 @@
   },
   "STATE_ANMYR": {
    "area_px": 1786,
-   "arable_milli": 752965,
+   "arable_milli": 752966,
    "cities": 1,
    "canon_cities": []
   },
@@ -265,7 +265,7 @@
   },
   "STATE_BROKEN_TEETH": {
    "area_px": 7687,
-   "arable_milli": 530239,
+   "arable_milli": 530238,
    "cities": 1,
    "canon_cities": []
   },
@@ -475,7 +475,7 @@
   },
   "STATE_DRAGONS_LANDING": {
    "area_px": 8229,
-   "arable_milli": 923828,
+   "arable_milli": 923829,
    "cities": 1,
    "canon_cities": []
   },
@@ -540,8 +540,8 @@
    "canon_cities": []
   },
   "STATE_EAGLE_S_PEAK": {
-   "area_px": 7610,
-   "arable_milli": 815239,
+   "area_px": 7385,
+   "arable_milli": 756394,
    "cities": 1,
    "canon_cities": []
   },
@@ -696,8 +696,8 @@
    "canon_cities": []
   },
   "STATE_FJORD_COAST": {
-   "area_px": 4474,
-   "arable_milli": 1062234,
+   "area_px": 6701,
+   "arable_milli": 1667499,
    "cities": 1,
    "canon_cities": []
   },
@@ -888,8 +888,8 @@
    "canon_cities": []
   },
   "STATE_HELSPIRE_MOUNTAINS": {
-   "area_px": 3876,
-   "arable_milli": 194417,
+   "area_px": 3881,
+   "arable_milli": 194698,
    "cities": 1,
    "canon_cities": []
   },
@@ -1103,7 +1103,7 @@
   },
   "STATE_LAND_020": {
    "area_px": 15343,
-   "arable_milli": 5919145,
+   "arable_milli": 5919144,
    "cities": 0,
    "canon_cities": []
   },
@@ -1558,8 +1558,8 @@
    "canon_cities": []
   },
   "STATE_MONOLITH_OF_INGVAR": {
-   "area_px": 7629,
-   "arable_milli": 511446,
+   "area_px": 7631,
+   "arable_milli": 511807,
    "cities": 1,
    "canon_cities": []
   },
@@ -1642,8 +1642,8 @@
    "canon_cities": []
   },
   "STATE_NAGLFARI_COAST": {
-   "area_px": 6917,
-   "arable_milli": 1815774,
+   "area_px": 4743,
+   "arable_milli": 1224398,
    "cities": 1,
    "canon_cities": []
   },
@@ -1714,8 +1714,8 @@
    "canon_cities": []
   },
   "STATE_NORTH_CAPE": {
-   "area_px": 4414,
-   "arable_milli": 736602,
+   "area_px": 4412,
+   "arable_milli": 736206,
    "cities": 1,
    "canon_cities": []
   },
@@ -2131,7 +2131,7 @@
   },
   "STATE_STARS_ARCHIPELAGO": {
    "area_px": 6574,
-   "arable_milli": 1888773,
+   "arable_milli": 1888774,
    "cities": 0,
    "canon_cities": []
   },
@@ -2388,8 +2388,8 @@
    "canon_cities": []
   },
   "STATE_VANNHEIM_MOUNTAINS": {
-   "area_px": 3717,
-   "arable_milli": 349397,
+   "area_px": 3720,
+   "arable_milli": 349477,
    "cities": 1,
    "canon_cities": []
   },
@@ -2400,8 +2400,8 @@
    "canon_cities": []
   },
   "STATE_VARG_CAMP": {
-   "area_px": 3131,
-   "arable_milli": 828440,
+   "area_px": 3303,
+   "arable_milli": 873434,
    "cities": 1,
    "canon_cities": []
   },
@@ -2490,8 +2490,8 @@
    "canon_cities": []
   },
   "STATE_WEST_HELSPIRE_MOUNTAINS": {
-   "area_px": 3572,
-   "arable_milli": 292280,
+   "area_px": 3564,
+   "arable_milli": 291920,
    "cities": 2,
    "canon_cities": []
   },
