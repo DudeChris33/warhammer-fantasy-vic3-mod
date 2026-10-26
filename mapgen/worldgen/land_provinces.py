@@ -773,7 +773,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     pieces (exactly one province each, on top of the budget - so ``target`` is a
     floor for painted regions). No province straddles the boundary. Impassable
     pieces smaller than ``min_area`` px are folded back to passable (paint
-    dust). Paint on a ``keep_whole`` archipelago or a placeholder region, a
+    dust). Paint on a ``keep_whole`` archipelago makes that whole province impassable
+    (it is never split). Paint on a placeholder region, a
     region that is wholly impassable, or a hub anchor that lands on impassable
     paint is a hard :class:`cells.CellError`. ``None`` / no paint => byte-identical
     to before. Paint on an out-of-scope placeholder region is **disregarded**
@@ -858,9 +859,12 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             ys, xs = np.nonzero(imp & (reg == rid))
             where = f"{len(xs):,} px around ({int(xs.mean())}, {int(ys.mean())})"
             if rid in keep:
-                problems.append(
-                    f"region {rid} ({where}) is a keep_whole island-override archipelago - "
-                    f"it cannot be split into passable/impassable provinces")
+                # A keep_whole archipelago is one province: paint anywhere on it makes
+                # the whole province impassable (Chris, 2026-10-24).
+                imp = imp | (land & (reg == rid))
+                if log:
+                    log(f"  keep_whole archipelago region {rid} ({where}): "
+                        f"whole province made impassable")
             elif rid not in drawn_set2 and not strict_placeholder_paint:
                 imp = imp & ~(reg == rid)  # explicit opt-in: placeholder land stays passable
                 if log:
