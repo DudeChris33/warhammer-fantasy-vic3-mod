@@ -91,13 +91,16 @@ def load(path: Path, canvas: tuple[int, int]) -> ScopeAdditions:
     return ScopeAdditions(realms, tuple(additions))
 
 
-def region_realms(region_of_pixel: np.ndarray, cfg: ScopeAdditions) -> dict[int, str]:
+def region_realms(region_of_pixel: np.ndarray, cfg: ScopeAdditions,
+                  skip: frozenset[int] | set[int] = frozenset()) -> dict[int, str]:
     """``region id -> realm`` for every land region an addition takes.
 
     ``region_of_pixel`` is the canvas-shaped region label array, 0 off land. A
     point on a pixel with no region, a box that takes nothing, and a region
     claimed by two additions of different realms are errors: each means the
-    config no longer matches the map.
+    config no longer matches the map. Regions in ``skip`` (placeholders a state
+    merge joined to out-of-scope land) are not claimed, so two additions may
+    land in one without a clash.
     """
     n = int(region_of_pixel.max())
     areas = np.bincount(region_of_pixel.ravel(), minlength=n + 1)
@@ -105,6 +108,8 @@ def region_realms(region_of_pixel: np.ndarray, cfg: ScopeAdditions) -> dict[int,
     owner: dict[int, str] = {}
 
     def claim(rid: int, add: Addition) -> None:
+        if rid in skip:
+            return
         if rid in out and out[rid] != add.realm:
             raise ScopeAdditionError(
                 f"region {rid} is taken by both '{owner[rid]}' ({out[rid]}) and "

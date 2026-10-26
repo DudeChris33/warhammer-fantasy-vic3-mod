@@ -2350,11 +2350,11 @@ def _selfcheck_impassable_land() -> None:
         raise AssertionError("strict mode: paint on a placeholder region must raise")
     except C.CellError:
         pass
-    try:
-        cut(wall, keep_whole={1})
-        raise AssertionError("paint on a keep_whole region must raise")
-    except C.CellError:
-        pass
+    labkw, _, _, _, impkw = cut(wall, keep_whole={1})
+    kwp = np.unique(labkw[land & (reg == 1)])
+    assert impkw[kwp].all(), "paint on a keep_whole region makes all of it impassable"
+    assert not impkw[np.unique(labkw[land & (reg == 2)])].any(), \
+        "paint on a keep_whole region leaves other regions passable"
     try:
         cut(land & (reg == 1))
         raise AssertionError("a wholly impassable region must raise")

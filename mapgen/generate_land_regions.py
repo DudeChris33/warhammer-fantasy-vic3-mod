@@ -559,7 +559,9 @@ def main(argv: list[str] | None = None) -> int:
             region_of_pixel = np.zeros(labels.shape, dtype=np.int64)
             land_px = (labels >= 1) & (labels <= n_land)
             region_of_pixel[land_px] = region_of[labels[land_px]]
-            added = scope_additions.region_realms(region_of_pixel, additions)
+            added = scope_additions.region_realms(
+                region_of_pixel, additions,
+                skip={int(c["region"]) for c in land_regions["cells"] if c["kind"] != "drawn"})
         except scope_additions.ScopeAdditionError as e:
             raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: {e}")
         # an addition may reuse a painted realm only if it names the same stub and continent
@@ -569,10 +571,16 @@ def main(argv: list[str] | None = None) -> int:
         if clash:
             raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: realm(s) {clash} are already painted "
                              f"realms in {STRATEGIC_COLORS_PATH.name}")
-        not_drawn = sorted(int(state_number[r]) for r in added if r not in drawn_region_ids)
+        # An addition's region that a state_merges line joined to out-of-scope land is a
+        # placeholder by design (Chris, 2026-10-16: the whole merged state goes out of
+        # scope), so the merge wins over the addition (Chris, 2026-10-25).
+        not_drawn = sorted(r for r in added if r not in drawn_region_ids)
         if not_drawn:
-            raise SystemExit(f"{IN_SCOPE_ADDITIONS_PATH.name}: STATE number(s) {not_drawn} are taken by an "
-                             f"addition but were cut as placeholders - re-run generate_provinces.py")
+            for r in not_drawn:
+                del added[r]
+            log(f"in-scope additions: {len(not_drawn)} region(s) stay out of scope because a state "
+                f"merge joins them to out-of-scope land: STATE number(s) "
+                f"{sorted(int(state_number[r]) for r in not_drawn)}", t0)
         for r, realm_name in added.items():
             realm_def = additions.realms[realm_name]
             if realm_def.file_stem not in STATE_FILE_STEMS:
