@@ -1,4 +1,4 @@
-# Inert stubs for scripted GUIs that vanilla's gui files still look up.
+﻿# Inert stubs for scripted GUIs that vanilla's gui files still look up.
 # common/scripted_guis is in replace_paths, so vanilla's definitions are gone;
 # without these, GetScriptedGui() fails every frame and floods error.log.
 # They never show and never validate, so the Japan-only panel branches stay hidden.
