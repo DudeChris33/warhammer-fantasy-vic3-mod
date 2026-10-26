@@ -71,6 +71,7 @@ PROVINCES_INDEX_PATH = DERIVED_DIR / "provinces_index.json"
 
 LOC_DIR = MOD_ROOT / "localization" / "english" / "map"
 LOC_PATH = LOC_DIR / "wh_seas_l_english.yml"
+REGION_LOC_PATH = LOC_DIR / "wh_water_strategic_regions_l_english.yml"
 SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
 DEFAULT_MAP_PATH = MOD_ROOT / "map_data" / "default.map"
 STRATEGIC_REGIONS_PATH = MOD_ROOT / "common" / "strategic_regions" / "water_strategic_regions.txt"
@@ -180,6 +181,17 @@ def _render_sea_state(key: str, state_id: int, colors: list[raster.Color],
         lines.append(f"{INDENT}impassable = {{ {' '.join(hexes)} }}")
     lines.append("}")
     return "\n".join(lines)
+
+
+def _render_water_region_loc(cells: list[dict]) -> str:
+    """``region_<state>`` display name = the state's own name (board #9548); the key
+    derivation matches :func:`_render_water_strategic_regions`."""
+    names = {}
+    for c in sorted(cells, key=lambda c: c["key"]):
+        names.setdefault(c["key"], c["display_name"])
+    lines = ["l_english:"]
+    lines += [f' region_{k[len("STATE_"):].lower()}:0 "{names[k]}"' for k in sorted(names)]
+    return "\n".join(lines) + "\n"
 
 
 def _render_99_seas(cells: list[dict], colors: dict[int, raster.Color]) -> str:
@@ -370,6 +382,7 @@ def main(argv: list[str] | None = None) -> int:
     # --- 4. water strategic regions --------------------------------------
     _write_bytes(STRATEGIC_REGIONS_PATH, _render_water_strategic_regions(cells), bom=True)
     n_regions = len({c["key"] for c in cells})
+    _write_bytes(REGION_LOC_PATH, _render_water_region_loc(cells), bom=True)
     print(f"wrote {STRATEGIC_REGIONS_PATH.relative_to(MOD_ROOT)}  ({n_regions} regions)")
 
     # --- 5. adjacencies.csv (header-only when absent) --------------------

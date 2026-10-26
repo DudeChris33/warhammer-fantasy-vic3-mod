@@ -1,0 +1,36 @@
+{
+  "_comment": [
+    "Hand-authored display names for the land strategic regions (board #9548), keyed by",
+    "the realm slug in strategic_region_colors.json / in_scope_additions.json. The slug",
+    "spelling is an id, never display text. generate_land_regions.py renders these into",
+    "localization/english/map/wh_land_strategic_regions_l_english.yml and refuses a",
+    "realm with no entry. Water regions need no table: each takes its state's own name."
+  ],
+  "realms": {
+    "the_empire": "The Empire",
+    "brettonia": "Bretonnia",
+    "athel_loren": "Athel Loren",
+    "southern_realms": "The Southern Realms",
+    "western_ranges": "The Western Mountains",
+    "kislev": "Kislev",
+    "norsca": "Norsca",
+    "northern_badlands": "The Northern Badlands",
+    "southern_badlands": "The Southern Badlands",
+    "northern_worlds_edge_mountains": "Northern World's Edge Mountains",
+    "central_worlds_edge_mountains": "Central World's Edge Mountains",
+    "southern_worlds_edge_mountains": "Southern World's Edge Mountains",
+    "northern_dark_lands": "The Northern Dark Lands",
+    "southern_dark_lands": "The Southern Dark Lands",
+    "ulthuan": "Ulthuan",
+    "lustria": "Lustria",
+    "naggaroth": "Naggaroth",
+    "southlands": "The Southlands",
+    "land_of_the_dead": "The Land of the Dead",
+    "ocean_of_dread_islands": "Islands of the Dread Ocean",
+    "far_ocean_islands": "Eastern Ocean Islands",
+    "khuresh": "Khuresh",
+    "nippon": "Nippon",
+    "cathay": "Cathay"
+  },
+  "out_of_scope_placeholders": "Distant Lands"
+}

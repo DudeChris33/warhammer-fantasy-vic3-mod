@@ -122,6 +122,7 @@ SEAS_TXT_PATH = MOD_ROOT / "map_data" / "state_regions" / "99_seas.txt"
 WORKSHEET_PATH = TOOLS_DIR / "config" / "land_regions_worksheet.csv"
 VANILLA_STATE_LOC_KEYS_PATH = TOOLS_DIR / "config" / "vanilla_state_loc_keys.txt"
 STRATEGIC_COLORS_PATH = TOOLS_DIR / "config" / "strategic_region_colors.json"
+STRATEGIC_NAMES_PATH = TOOLS_DIR / "config" / "strategic_region_names.json"
 STRATEGIC_SOURCE = sources.source_ref("strategic_regions")
 OUT_OF_SCOPE_CONTINENTS_PATH = TOOLS_DIR / "config" / "out_of_scope_continents.json"
 #: In-scope land outside the painted realms, with the realm each piece takes
@@ -141,6 +142,9 @@ STRATEGIC_REGIONS_DIR = MOD_ROOT / "common" / "strategic_regions"
 LOC_PATH = MOD_ROOT / "localization" / "replace" / "english" / "map" / "states_l_english.yml"
 # replace/ so STATE_AQUITAINE (also a vanilla state) overrides vanilla's HUB_NAME_STATE_AQUITAINE_* instead of erroring as a duplicate key
 HUB_LOC_PATH = MOD_ROOT / "localization" / "replace" / "english" / "map" / "wh_hub_names_l_english.yml"
+#: Generated display names for the land strategic regions (board #9548); new, not a
+#: vanilla override: no vanilla ``region_*`` key collides with a mod region.
+STRATEGIC_LOC_PATH = MOD_ROOT / "localization" / "english" / "map" / "wh_land_strategic_regions_l_english.yml"
 BUILDINGS_DIR = MOD_ROOT / "common" / "buildings"
 BUILDING_GROUPS_DIR = MOD_ROOT / "common" / "building_groups"
 #: Hand-authored per-state economics (#3678), keyed on the canon state key + naming anchor;
@@ -951,6 +955,17 @@ def main(argv: list[str] | None = None) -> int:
         path = STRATEGIC_REGIONS_DIR / "out_of_scope_strategic_regions.txt"
         _write_bytes(path, oos_block + "\n", bom=True)
         log(f"wrote {path.relative_to(MOD_ROOT)}  (1 region, {len(oos_keys)} states)", t0)
+
+    region_names = json.loads(STRATEGIC_NAMES_PATH.read_text(encoding="utf-8"))
+    loc_regions = sorted(keys_by_realm) + (["out_of_scope_placeholders"] if oos_keys else [])
+    nameless = [r for r in loc_regions
+                if not (region_names["realms"].get(r) or region_names.get(r))]
+    if nameless:
+        raise SystemExit(f"{STRATEGIC_NAMES_PATH.name}: no display name for realm(s) {nameless}")
+    _write_bytes(STRATEGIC_LOC_PATH, "l_english:\n" + "".join(
+        f' region_{r}:0 "{region_names["realms"].get(r) or region_names[r]}"\n'
+        for r in loc_regions), bom=True)
+    log(f"wrote {STRATEGIC_LOC_PATH.relative_to(MOD_ROOT)}  ({len(loc_regions)} region names)", t0)
 
     # --- assertions -----------------------------------------------------------
     ids = [int(re.search(r"\bid\s*=\s*(\d+)", b).group(1))
