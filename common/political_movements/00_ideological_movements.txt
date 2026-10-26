@@ -2229,9 +2229,9 @@ movement_socialist = {
 	disband_trigger = {
 		any_interest_group = {
 			OR = {
-				has_variable = chose_anarchism
-				has_variable = chose_communism
-				has_variable = chose_vanguardism
+				always = no  # [#6573] was: has_variable = chose_anarchism
+				always = no  # [#6573] was: has_variable = chose_communism
+				always = no  # [#6573] was: has_variable = chose_vanguardism
 			}
 		}
 	}

@@ -1,25 +1,25 @@
 ﻿strike_goal_complete_trigger = {
 	trigger_if = {
 		limit = {
-			has_variable = strike_promised_pensions
+			always = no  # [#6573] was: has_variable = strike_promised_pensions
 		}
 		has_law_or_variant = law_type:law_old_age_pension
 	}
 	trigger_else_if = {
 		limit = {
-			has_variable = strike_promised_wage_controls
+			always = no  # [#6573] was: has_variable = strike_promised_wage_controls
 		}
 		has_law_or_variant = law_type:law_wage_subsidies
 	}
 	trigger_else_if = {
 		limit = {
-			has_variable = strike_promised_regulatory_bodies
+			always = no  # [#6573] was: has_variable = strike_promised_regulatory_bodies
 		}
 		has_law_or_variant = law_type:law_regulatory_bodies
 	}
 	trigger_else_if = {
 		limit = {
-			has_variable = strike_promised_worker_protections
+			always = no  # [#6573] was: has_variable = strike_promised_worker_protections
 		}
 		has_law_or_variant = law_type:law_worker_protections
 	}
@@ -43,7 +43,7 @@
 	}
 	trigger_else_if = {
 		limit = {
-			has_variable = strike_breaker
+			always = no  # [#6573] was: has_variable = strike_breaker
 		}
 		any_scope_state = {
 			custom_tooltip = {

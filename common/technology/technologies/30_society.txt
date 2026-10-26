@@ -690,7 +690,7 @@ labor_movement = {
 	}
 
 	on_researched = {
-		set_global_variable = labour_movement_researched
+		# [#6573] removed: set_global_variable = labour_movement_researched
 	}
 
 	ai_weight = {

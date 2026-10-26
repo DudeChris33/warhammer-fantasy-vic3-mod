@@ -576,10 +576,10 @@ negotiate_app_increase = { #IG Scope. Use gdp to add the expected amount of troo
 	#multiply by 0.15 x quest degree
 	if = {
 		limit = {
-			exists = var:promise_quest_degree
+			always = no  # [#6573] was: exists = var:promise_quest_degree
 		}
 		multiply = { #1.1 x 1.6 depending on how hard the negotiations were
-			value = scope:ig.var:promise_quest_degree
+			value = 0  # [#6573] was: scope:ig.var:promise_quest_degree
 			multiply = 0.15
 			add = 1
 		}
@@ -601,7 +601,7 @@ neg_promised_sol_level = {
 	multiply = 0.1
 	min = 0.5
 	max = 2 #late game SOL peaks
-	multiply = var:promise_quest_degree
+	multiply = 0  # [#6573] was: var:promise_quest_degree
 	max = 8 #maximum possible plausible amount
 	add = owner.average_sol
 	round = yes
@@ -647,7 +647,7 @@ building_levels_to_increase_value = { #uses IG scope
 				add = 1
 				multiply = building_scaler
 				min = 1
-				multiply = scope:ig_for_calc.var:promise_quest_degree
+				multiply = 0  # [#6573] was: scope:ig_for_calc.var:promise_quest_degree
 				round = 1
 			}
 			else_if = { #trade centers and gov admin get a discount.
@@ -662,7 +662,7 @@ building_levels_to_increase_value = { #uses IG scope
 				add = 4
 				multiply = building_scaler
 				min = 1
-				multiply = scope:ig_for_calc.var:promise_quest_degree
+				multiply = 0  # [#6573] was: scope:ig_for_calc.var:promise_quest_degree
 				round = 1
 			}
 			else_if = {
@@ -688,7 +688,7 @@ building_levels_to_increase_value = { #uses IG scope
 						multiply = 0.80 #Being a bit nicer since we are asking for specific building types, as opposed to groups. '
 					}
 					min = 1
-					multiply = scope:ig_for_calc.var:promise_quest_degree
+					multiply = 0  # [#6573] was: scope:ig_for_calc.var:promise_quest_degree
 					round = 1
 				}
 			}
@@ -791,7 +791,7 @@ building_group_levels_to_increase_value = { #requires scope:ig, building group s
 		}
 		multiply = building_scaler
 		min = 1
-		multiply = scope:ig_for_calc.var:promise_quest_degree
+		multiply = 0  # [#6573] was: scope:ig_for_calc.var:promise_quest_degree
 		round = 1
 		add = "owner.country_has_building_group_levels(scope:ig_for_calc.var:promised_building_group)"
 	}
@@ -829,20 +829,20 @@ law_enactment_change = { #uses IG scope. For Loc
 }
 
 neg_quest_failure_degree = { #scales failure penalty based on proximity to goal for negotiation quests.
-	value = scope:ig.var:promise_quest_degree
+	value = 0  # [#6573] was: scope:ig.var:promise_quest_degree
 	##taxes
 	if = {
 		limit = {
-			scope:ig.var:promise_quest_type ?= 4
-			exists = root.var:neg_taxes_remaining_months
+			always = no  # [#6573] was: scope:ig.var:promise_quest_type ?= 4
+			always = no  # [#6573] was: exists = root.var:neg_taxes_remaining_months
 		}
 		multiply = {
-			value = root.var:neg_taxes_remaining_months
+			value = 0  # [#6573] was: root.var:neg_taxes_remaining_months
 			divide = {
 				value = 48
 				if = {
 					limit = {
-						scope:ig.var:promise_quest_degree ?= 1
+						always = no  # [#6573] was: scope:ig.var:promise_quest_degree ?= 1
 					}
 					multiply = 0.5
 				}
@@ -858,16 +858,16 @@ neg_quest_failure_degree = { #scales failure penalty based on proximity to goal 
 	##buildings
 	else_if = {
 		limit = {
-			scope:ig.var:promise_quest_type ?= 3
-			exists = scope:ig.var:starting_building_amount
-			exists = scope:ig.var:current_building_amount
+			always = no  # [#6573] was: scope:ig.var:promise_quest_type ?= 3
+			always = no  # [#6573] was: exists = scope:ig.var:starting_building_amount
+			always = no  # [#6573] was: exists = scope:ig.var:current_building_amount
 		}
 		multiply = {
 			value = 1
 			subtract = {
 				value = {
-					add = scope:ig.var:current_building_amount
-					subtract = scope:ig.var:starting_building_amount
+					add = 0  # [#6573] was: scope:ig.var:current_building_amount
+					subtract = 0  # [#6573] was: scope:ig.var:starting_building_amount
 				}
 				divide = { #these other variables are shared
 					if = { #switch on quest type, building group vs individual buildings
@@ -880,7 +880,7 @@ neg_quest_failure_degree = { #scales failure penalty based on proximity to goal 
 					else = {
 						add = scope:ig.var:building_group_level_increase
 					}
-					subtract = scope:ig.var:starting_building_amount
+					subtract = 0  # [#6573] was: scope:ig.var:starting_building_amount
 				}
 				multiply = 10
 				round = yes
@@ -896,7 +896,7 @@ neg_quest_failure_degree = { #scales failure penalty based on proximity to goal 
 	##law
 	else_if = { #if enactment goes on for more than 2 years, half.
 		limit = {
-			scope:ig.var:promise_quest_type ?= 2
+			always = no  # [#6573] was: scope:ig.var:promise_quest_type ?= 2
 			exists = scope:ig.var:law_attempt_months
 			scope:ig.var:law_attempt_months >= 24
 		}
@@ -905,20 +905,20 @@ neg_quest_failure_degree = { #scales failure penalty based on proximity to goal 
 	###SOL
 	else_if = {
 		limit = {
-			scope:ig.var:promise_quest_type ?= 5
-			exists = scope:ig.var:starting_sol
-			exists = scope:ig.var:current_sol
+			always = no  # [#6573] was: scope:ig.var:promise_quest_type ?= 5
+			always = no  # [#6573] was: exists = scope:ig.var:starting_sol
+			always = no  # [#6573] was: exists = scope:ig.var:current_sol
 		}
 		multiply = {
 			value = 1
 			subtract = {
 				value = {
-					add = scope:ig.var:current_sol
-					subtract = scope:ig.var:starting_sol
+					add = 0  # [#6573] was: scope:ig.var:current_sol
+					subtract = 0  # [#6573] was: scope:ig.var:starting_sol
 				}
 				divide = { #these other variables are shared
 					add = scope:ig.var:promised_sol_level
-					subtract = scope:ig.var:starting_sol
+					subtract = 0  # [#6573] was: scope:ig.var:starting_sol
 				}
 				multiply = 10
 				round = yes
@@ -934,20 +934,20 @@ neg_quest_failure_degree = { #scales failure penalty based on proximity to goal 
 	##army_size
 	else_if = {
 		limit = {
-			scope:ig.var:promise_quest_type ?= 1
-			exists = scope:ig.var:starting_army_amount
-			exists = scope:ig.var:current_army_amount
+			always = no  # [#6573] was: scope:ig.var:promise_quest_type ?= 1
+			always = no  # [#6573] was: exists = scope:ig.var:starting_army_amount
+			always = no  # [#6573] was: exists = scope:ig.var:current_army_amount
 		}
 		multiply = {
 			value = 1
 			subtract = {
 				value = {
-					add = scope:ig.var:current_army_amount
-					subtract = scope:ig.var:starting_army_amount
+					add = 0  # [#6573] was: scope:ig.var:current_army_amount
+					subtract = 0  # [#6573] was: scope:ig.var:starting_army_amount
 				}
 				divide = { #these other variables are shared
 					add = scope:ig.var:desired_army_size
-					subtract = scope:ig.var:starting_army_amount
+					subtract = 0  # [#6573] was: scope:ig.var:starting_army_amount
 				}
 				multiply = 10
 				round = yes
@@ -965,13 +965,13 @@ neg_quest_failure_degree = { #scales failure penalty based on proximity to goal 
 min_mult_value_per_quest_degree = {
 	if = {
 		limit = {
-			scope:ig.var:promise_quest_degree ?= 1
+			always = no  # [#6573] was: scope:ig.var:promise_quest_degree ?= 1
 		}
 		value = 0.20
 	}
 	else_if = {
 		limit = {
-			scope:ig.var:promise_quest_degree ?= 2
+			always = no  # [#6573] was: scope:ig.var:promise_quest_degree ?= 2
 		}
 		value = 0.10
 	}

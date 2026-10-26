@@ -54,13 +54,13 @@ ideology_moderate = {
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -108,13 +108,13 @@ ideology_moderate = {
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -226,12 +226,12 @@ ideology_traditionalist = { # Average Progressiveness - -70
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -269,12 +269,12 @@ ideology_traditionalist = { # Average Progressiveness - -70
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -390,12 +390,12 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -433,12 +433,12 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -634,13 +634,13 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -742,13 +742,13 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -930,13 +930,13 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -1011,13 +1011,13 @@ ideology_republican_leader = { # Average Progressiveness - 75
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -1313,13 +1313,13 @@ ideology_radical = { # Average Progressiveness - 62.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -1451,13 +1451,13 @@ ideology_radical = { # Average Progressiveness - 62.5
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -1624,13 +1624,13 @@ ideology_reformer = { # Average Progressiveness - 10
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -1698,13 +1698,13 @@ ideology_reformer = { # Average Progressiveness - 10
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -1867,13 +1867,13 @@ ideology_feminist = { # Average Progressiveness - 50
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -1951,13 +1951,13 @@ ideology_feminist = { # Average Progressiveness - 50
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -2084,13 +2084,13 @@ ideology_abolitionist = { # Average Progressiveness - 75
 				if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -2133,13 +2133,13 @@ ideology_abolitionist = { # Average Progressiveness - 75
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -2215,13 +2215,13 @@ ideology_slaver = { # Average Progressiveness - -50
 						if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -2259,13 +2259,13 @@ ideology_slaver = { # Average Progressiveness - -50
 						if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = 0.1
@@ -2421,13 +2421,13 @@ ideology_pacifist = { # Average Progressiveness - 0
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -2517,13 +2517,13 @@ ideology_pacifist = { # Average Progressiveness - 0
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -2660,13 +2660,13 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -2726,13 +2726,13 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -2866,13 +2866,13 @@ ideology_royalist = { # Average Progressiveness - 0
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -2917,13 +2917,13 @@ ideology_royalist = { # Average Progressiveness - 0
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -3131,13 +3131,13 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -3216,13 +3216,13 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -3451,7 +3451,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		}
 		if = {
 			limit = {
-				owner = { has_variable = election_communist_support }
+				owner = { always = no }  # [#6573] was: has_variable = election_communist_support
 			}
 			add = {
 				value = 50
@@ -3460,7 +3460,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		}
 		if = {
 			limit = {
-				owner = { has_variable = communism_1_done }
+				owner = { always = no }  # [#6573] was: has_variable = communism_1_done
 			}
 			add = {
 				value = 100
@@ -3484,11 +3484,11 @@ ideology_communist = { # Average Progressiveness - 112.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = {
@@ -3619,11 +3619,11 @@ ideology_communist = { # Average Progressiveness - 112.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = 0.1
@@ -3927,7 +3927,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# Variables
 		if = {
 			limit = {
-				owner = { has_variable = election_vanguardist_support }
+				owner = { always = no }  # [#6573] was: has_variable = election_vanguardist_support
 			}
 			add = {
 				value = 50
@@ -3936,7 +3936,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		}
 		if = {
 			limit = {
-				owner = { has_variable = communism_1_done }
+				owner = { always = no }  # [#6573] was: has_variable = communism_1_done
 			}
 			add = {
 				value = 100
@@ -3960,11 +3960,11 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		if = {
 			limit = {
 				OR = {
-					has_variable = chose_communism
-					has_variable = chose_anarchism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = {
@@ -4143,13 +4143,13 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# Variables
 		if = {
 			limit = {
-				owner = { has_variable = election_vanguardist_support }
+				owner = { always = no }  # [#6573] was: has_variable = election_vanguardist_support
 			}
 			add = 50
 		}
 		if = {
 			limit = {
-				owner = { has_variable = communism_1_done }
+				owner = { always = no }  # [#6573] was: has_variable = communism_1_done
 			}
 			add = 100
 		}
@@ -4168,11 +4168,11 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		if = {
 			limit = {
 				OR = {
-					has_variable = chose_communism
-					has_variable = chose_anarchism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = 0.1
@@ -4473,7 +4473,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# red scare can make you more fascist
 		if = {
 			limit = {
-				has_variable = fascist_uptick
+				always = no  # [#6573] was: has_variable = fascist_uptick
 			}
 			multiply = {
 				value = 1.5
@@ -4483,11 +4483,11 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = {
@@ -4666,18 +4666,18 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# red scare can make you more fascist
 		if = {
 			limit = {
-				has_variable = fascist_uptick
+				always = no  # [#6573] was: has_variable = fascist_uptick
 			}
 			multiply = 1.5
 		}
 				if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = 0.1
@@ -4933,7 +4933,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		# Variables
 		if = {
 			limit = {
-				owner = { has_variable = election_anarchist_support }
+				owner = { always = no }  # [#6573] was: has_variable = election_anarchist_support
 			}
 			add = {
 				value = 50
@@ -4942,7 +4942,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		}
 		if = {
 			limit = {
-				owner = { has_variable = communism_1_done }
+				owner = { always = no }  # [#6573] was: has_variable = communism_1_done
 			}
 			add = {
 				value = 100
@@ -4952,11 +4952,11 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		if = {
 			limit = {
 				OR = {
-					has_variable = chose_vanguardism
-					has_variable = chose_communism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = {
@@ -5083,11 +5083,11 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		if = {
 			limit = {
 				OR = {
-					has_variable = chose_vanguardism
-					has_variable = chose_communism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = 0.1
@@ -5245,11 +5245,11 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -5349,11 +5349,11 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = 0.1
@@ -5475,13 +5475,13 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -5541,13 +5541,13 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -5810,13 +5810,13 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -5939,13 +5939,13 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -6077,13 +6077,13 @@ ideology_luddite = { # Average Progressiveness - -50
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -6154,13 +6154,13 @@ ideology_luddite = { # Average Progressiveness - -50
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -6340,13 +6340,13 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -6441,13 +6441,13 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -6607,13 +6607,13 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -6702,13 +6702,13 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -6904,13 +6904,13 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -6984,9 +6984,9 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -6996,10 +6996,10 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
 					}
 				}
 			}
@@ -7203,13 +7203,13 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -7284,13 +7284,13 @@ ideology_positivist = { # Average Progressiveness - 37.5
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -7455,13 +7455,13 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -7552,13 +7552,13 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -7843,7 +7843,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# red scare can make you more fascist
 		if = {
 			limit = {
-				has_variable = fascist_uptick
+				always = no  # [#6573] was: has_variable = fascist_uptick
 			}
 			multiply = {
 				value = 1.5
@@ -7855,11 +7855,11 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = {
@@ -8011,7 +8011,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# red scare can make you more fascist
 		if = {
 			limit = {
-				has_variable = fascist_uptick
+				always = no  # [#6573] was: has_variable = fascist_uptick
 			}
 			multiply = 1.5
 		}
@@ -8020,11 +8020,11 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = 0.1
@@ -8202,13 +8202,13 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -8309,13 +8309,13 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -8459,7 +8459,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		# corporatist boosts
 		if = {
 			limit = {
-				has_variable = corporatist_leaders_boost
+				always = no  # [#6573] was: has_variable = corporatist_leaders_boost
 			}
 			add = 50
 		}
@@ -8496,13 +8496,13 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -8593,13 +8593,13 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -8811,13 +8811,13 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -8904,13 +8904,13 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
 					}
 				}
 			}
@@ -9018,13 +9018,13 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -9056,13 +9056,13 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}
@@ -9130,13 +9130,13 @@ ideology_sovereignist_leader = { # For colonised peoples - Average Progressivene
 		if = {
 			limit = {
 				OR = {
-					has_variable = communist_ig_var
-					has_variable = chose_vanguardism
-					has_variable = chose_anarchism
-					has_variable = chose_communism
-					has_variable = chose_ethno_nationalism
-					has_variable = chose_conservatism
-					has_variable = chose_fascism
+					always = no  # [#6573] was: has_variable = communist_ig_var
+					always = no  # [#6573] was: has_variable = chose_vanguardism
+					always = no  # [#6573] was: has_variable = chose_anarchism
+					always = no  # [#6573] was: has_variable = chose_communism
+					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#6573] was: has_variable = chose_conservatism
+					always = no  # [#6573] was: has_variable = chose_fascism
 				}
 			}
 			multiply = {
@@ -9158,13 +9158,13 @@ ideology_sovereignist_leader = { # For colonised peoples - Average Progressivene
 			limit = {
 				interest_group ?= {
 					OR = {
-						has_variable = communist_ig_var
-						has_variable = chose_vanguardism
-						has_variable = chose_anarchism
-						has_variable = chose_communism
-						has_variable = chose_ethno_nationalism
-						has_variable = chose_conservatism
-						has_variable = chose_fascism
+						always = no  # [#6573] was: has_variable = communist_ig_var
+						always = no  # [#6573] was: has_variable = chose_vanguardism
+						always = no  # [#6573] was: has_variable = chose_anarchism
+						always = no  # [#6573] was: has_variable = chose_communism
+						always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+						always = no  # [#6573] was: has_variable = chose_conservatism
+						always = no  # [#6573] was: has_variable = chose_fascism
 					}
 				}
 			}

@@ -360,7 +360,7 @@ exile_character = {
 			text = pending_coup_event_tt
 			NOT = {
 				owner = {
-					has_variable = coup_event_active
+					always = no  # [#6573] was: has_variable = coup_event_active
 				}
 			}
 		}
@@ -688,7 +688,7 @@ invite_exile = {
 
 	effect = {
 		transfer_character = scope:actor
-		set_variable = exile_to_ruler_var
+		# [#6573] removed: set_variable = exile_to_ruler_var
 		add_career_length = {
 			role = agitator
 			months = 60
@@ -821,7 +821,7 @@ retire_commander = {
 			text = pending_coup_event_tt
 			NOT = {
 				owner = {
-					has_variable = coup_event_active
+					always = no  # [#6573] was: has_variable = coup_event_active
 				}
 			}
 		}

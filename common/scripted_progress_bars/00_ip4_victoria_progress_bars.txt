@@ -11,7 +11,7 @@ je_ip4_coup_progress_bar = {
 			if = { # Does the general actually want to coup the government?
 				limit = {
 					any_scope_character = {
-						has_variable = golpista_var
+						always = no  # [#6573] was: has_variable = golpista_var
 						loyalty >= define:NCharacters|LOYALTY_NEUTRAL_THRESHOLD
 					}
 				}
@@ -19,7 +19,7 @@ je_ip4_coup_progress_bar = {
 					desc = "appeased_golpista_igs_tt"
 					every_scope_character = {
 						limit = {
-							has_variable = golpista_var
+							always = no  # [#6573] was: has_variable = golpista_var
 						}
 						value = this.loyalty
 						divide = 10
@@ -30,7 +30,7 @@ je_ip4_coup_progress_bar = {
 				desc = "commander_coup_strength_tt"
 				every_scope_character = {
 					limit = {
-						has_variable = golpista_var
+						always = no  # [#6573] was: has_variable = golpista_var
 					}
 					value = commander_coup_strength
 				}

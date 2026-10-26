@@ -132,7 +132,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 		desc = "coup_popularity_vs_legitimacy_tt"
 		every_scope_character = {
 			limit = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 			}
 			value = popularity
 			divide = 10
@@ -142,7 +142,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 		limit = {
 			army_size_including_raised_conscripts > 0
 			any_scope_character = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 				has_role_of_type = general
 			}
 		}
@@ -150,7 +150,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 			desc = "coup_commander_rank_progress_tt"
 			every_scope_character = {
 				limit = {
-					has_variable = golpista_var
+					always = no  # [#6573] was: has_variable = golpista_var
 					has_role_of_type = general
 				}
 				value = this.commander_rank
@@ -163,7 +163,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 		limit = {
 			navy_size > 0
 			any_scope_character = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 				has_role_of_type = admiral
 			}
 		}
@@ -171,7 +171,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 			desc = "coup_commander_rank_progress_tt"
 			every_scope_character = {
 				limit = {
-					has_variable = golpista_var
+					always = no  # [#6573] was: has_variable = golpista_var
 					has_role_of_type = admiral
 				}
 				value = this.commander_rank
@@ -183,7 +183,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 	if = {
 		limit = {
 			any_scope_character = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 				exists = this.commander_military_formation.current_hq
 				this.commander_military_formation.current_hq.region ?= owner.capital.region
 			}
@@ -196,7 +196,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 	else_if = {
 		limit = {
 			any_scope_character = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 				exists = this.commander_military_formation.current_hq
 				this.commander_military_formation.current_hq.region ?= {
 					any_scope_state = {
@@ -214,7 +214,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 	else_if = {
 		limit = {
 			any_scope_character = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 				exists = this.commander_military_formation.current_hq
 				this.commander_military_formation.current_hq.region ?= {
 					any_scope_state = {
@@ -232,7 +232,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 	else_if = {
 		limit = {
 			any_scope_character = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 				exists = this.commander_military_formation
 				NOT = {
 					exists = this.commander_military_formation.current_hq
@@ -247,7 +247,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 	else_if = {
 		limit = {
 			any_scope_character = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 				NOT = {
 					exists = this.commander_military_formation
 				}
@@ -262,7 +262,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 		desc = "coup_clout_of_golpista_ig_tt"
 		every_interest_group = {
 			limit = {
-				has_variable = golpista_ig_var
+				always = no  # [#6573] was: has_variable = golpista_ig_var
 			}
 			value = ig_clout
 			multiply = 10
@@ -272,7 +272,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 		desc = "coup_strength_modifier_add_tt"
 		every_scope_character = {
 			limit = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 			}
 			value = 1
 			add = modifier:character_coup_strength_add
@@ -282,7 +282,7 @@ commander_coup_strength_country_display = { # Note - absolute fraud script value
 		desc = "coup_strength_modifier_tt"
 		every_scope_character = {
 			limit = {
-				has_variable = golpista_var
+				always = no  # [#6573] was: has_variable = golpista_var
 			}
 			value = 1
 			add = modifier:character_coup_strength_mult

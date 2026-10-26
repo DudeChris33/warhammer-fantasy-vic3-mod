@@ -35,7 +35,7 @@ arrange_accident = {
 			text = pending_coup_event_tt
 			NOT = {
 				owner = {
-					has_variable = coup_event_active
+					always = no  # [#6573] was: has_variable = coup_event_active
 				}
 			}
 		}

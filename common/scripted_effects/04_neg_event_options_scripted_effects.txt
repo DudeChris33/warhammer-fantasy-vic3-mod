@@ -488,8 +488,8 @@ je_government_petition_negotiation_immediate = {
     random_interest_group = {
         limit = {
             has_variable = ig_new_quest_starting
-            has_variable = promise_quest_type
-            var:promise_quest_type = 2 #law
+            always = no  # [#6573] was: has_variable = promise_quest_type
+            always = no  # [#6573] was: var:promise_quest_type = 2
         }
         save_scope_as = ig
         remove_variable = ig_new_quest_starting

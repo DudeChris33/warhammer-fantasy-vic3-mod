@@ -3,7 +3,7 @@ strike_state_add_modifier_effect_strong = {
 	if = {
 		limit = {
 			owner = {
-				has_variable = industrial_strike
+				always = no  # [#6573] was: has_variable = industrial_strike
 			}
 		}
 		add_modifier = {
@@ -15,7 +15,7 @@ strike_state_add_modifier_effect_strong = {
 	else_if = {
 		limit = {
 			owner = {
-				has_variable = mining_strike
+				always = no  # [#6573] was: has_variable = mining_strike
 			}
 		}
 		add_modifier = {
@@ -27,7 +27,7 @@ strike_state_add_modifier_effect_strong = {
 	else_if = {
 		limit = {
 			owner = {
-				has_variable = railway_strike
+				always = no  # [#6573] was: has_variable = railway_strike
 			}
 		}
 		add_modifier = {
@@ -69,7 +69,7 @@ strike_state_add_modifier_effect_weak = {
 	if = {
 		limit = {
 			owner = {
-				has_variable = industrial_strike
+				always = no  # [#6573] was: has_variable = industrial_strike
 			}
 		}
 		add_modifier = {
@@ -80,7 +80,7 @@ strike_state_add_modifier_effect_weak = {
 	else_if = {
 		limit = {
 			owner = {
-				has_variable = mining_strike
+				always = no  # [#6573] was: has_variable = mining_strike
 			}
 		}
 		add_modifier = {
@@ -91,7 +91,7 @@ strike_state_add_modifier_effect_weak = {
 	else_if = {
 		limit = {
 			owner = {
-				has_variable = railway_strike
+				always = no  # [#6573] was: has_variable = railway_strike
 			}
 		}
 		add_modifier = {
@@ -102,17 +102,17 @@ strike_state_add_modifier_effect_weak = {
 }
 
 strike_end_effect = {
-	remove_variable = strike_breaker
-	remove_variable = strike_negotiator
-	remove_variable = industrial_strike
-	remove_variable = mining_strike
-	remove_variable = railway_strike
-	remove_variable = strike_promised_pensions
-	remove_variable = strike_police_crackdown_var
-	remove_variable = strike_promised_regulatory_bodies
-	remove_variable = strike_promised_wage_controls
-	remove_variable = strike_promised_worker_protections
-	remove_variable = strike_strikebreakers_var
+	# [#6573] removed: remove_variable = strike_breaker
+	# [#6573] removed: remove_variable = strike_negotiator
+	# [#6573] removed: remove_variable = industrial_strike
+	# [#6573] removed: remove_variable = mining_strike
+	# [#6573] removed: remove_variable = railway_strike
+	# [#6573] removed: remove_variable = strike_promised_pensions
+	# [#6573] removed: remove_variable = strike_police_crackdown_var
+	# [#6573] removed: remove_variable = strike_promised_regulatory_bodies
+	# [#6573] removed: remove_variable = strike_promised_wage_controls
+	# [#6573] removed: remove_variable = strike_promised_worker_protections
+	# [#6573] removed: remove_variable = strike_strikebreakers_var
 	every_scope_state = {
 		remove_modifier = strike_suppression
 		remove_modifier = industrial_strike_modifier

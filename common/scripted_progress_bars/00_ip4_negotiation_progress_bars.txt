@@ -12,7 +12,7 @@ neg_taxes_progress_bar = {
 		       	NOT = {
 			       	trigger_if = {
 			            limit = {
-			                owner.var:promise_quest_degree_country <= 2
+			                always = yes  # [#6573] was: owner.var:promise_quest_degree_country <= 2
 			            }
 			            tax_level > low
 			        }
@@ -25,7 +25,7 @@ neg_taxes_progress_bar = {
         		add = 1
 	    	    if = { #easier promises are only 5 years
 	    			limit = {
-	    				owner.var:promise_quest_degree_country <= 1
+	    				always = yes  # [#6573] was: owner.var:promise_quest_degree_country <= 1
 	    			}
 	    			multiply = 2
 	    		}

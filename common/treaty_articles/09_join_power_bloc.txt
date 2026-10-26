@@ -401,8 +401,8 @@
 				if = {
 					limit = {
 						scope:target_country = {
-							has_variable = pro_lobby_proposal_power_bloc
-							var:pro_lobby_opportunity_target ?= scope:source_country
+							always = no  # [#6573] was: has_variable = pro_lobby_proposal_power_bloc
+							always = no  # [#6573] was: var:pro_lobby_opportunity_target ?= scope:source_country
 						}
 					}
 					add = {
@@ -414,8 +414,8 @@
 				if = {
 					limit = {
 						scope:target_country = {
-							has_variable = anti_lobby_proposal_power_bloc
-							var:anti_lobby_opportunity_target ?= scope:source_country
+							always = no  # [#6573] was: has_variable = anti_lobby_proposal_power_bloc
+							always = no  # [#6573] was: var:anti_lobby_opportunity_target ?= scope:source_country
 						}
 					}
 					add = {
@@ -428,8 +428,8 @@
 				if = {
 					limit = {
 						scope:target_country = {
-							has_variable = pro_lobby_proposal_power_bloc
-							var:pro_lobby_opportunity_target ?= scope:source_country
+							always = no  # [#6573] was: has_variable = pro_lobby_proposal_power_bloc
+							always = no  # [#6573] was: var:pro_lobby_opportunity_target ?= scope:source_country
 						}
 					}
 					add = {
@@ -441,8 +441,8 @@
 				if = {
 					limit = {
 						scope:target_country = {
-							has_variable = anti_lobby_proposal_power_bloc
-							var:anti_lobby_opportunity_target ?= scope:source_country
+							always = no  # [#6573] was: has_variable = anti_lobby_proposal_power_bloc
+							always = no  # [#6573] was: var:anti_lobby_opportunity_target ?= scope:source_country
 						}
 					}
 					add = {

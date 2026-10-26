@@ -13,7 +13,7 @@ post_change_to_parliamentary_elective = {
 	if = {
 		limit = {
 			NOT = {
-				has_variable = keep_current_ruler_var
+				always = no  # [#6573] was: has_variable = keep_current_ruler_var
 			}
 		}
 		get_ruler_for:parliamentary_elective = {
@@ -37,7 +37,7 @@ post_change_to_presidential_elective = {
 	if = {
 		limit = {
 			NOT = {
-				has_variable = keep_current_ruler_var
+				always = no  # [#6573] was: has_variable = keep_current_ruler_var
 			}
 		}
 		get_ruler_for:presidential_elective = {
@@ -61,7 +61,7 @@ post_change_to_dictatorial = {
 	if = {
 		limit = {
 			NOT = {
-				has_variable = keep_current_ruler_var
+				always = no  # [#6573] was: has_variable = keep_current_ruler_var
 			}
 		}
 		get_ruler_for:dictatorial = {

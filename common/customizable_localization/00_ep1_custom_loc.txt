@@ -21,7 +21,7 @@ army_or_navy_custom_loc = {
 
 	text = {
 		trigger = {
-			has_variable = army_is_strongest_var
+			always = no  # [#6573] was: has_variable = army_is_strongest_var
 		}
 		localization_key = x_army_custom_loc
 	}

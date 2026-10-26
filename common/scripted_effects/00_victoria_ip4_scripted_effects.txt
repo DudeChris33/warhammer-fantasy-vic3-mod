@@ -138,12 +138,12 @@ remove_regency_modifier = {
 		limit = {
 			ruler ?= {
 				is_immortal = yes
-				has_variable = regent_immortality_var
+				always = no  # [#6573] was: has_variable = regent_immortality_var
 			}
 		}
 		ruler ?= {
 			set_character_immortal = no
-			remove_variable = regent_immortality_var
+			# [#6573] removed: remove_variable = regent_immortality_var
 		}
 	}
 	if = {

@@ -53,13 +53,13 @@ GetPromisedTaxLevelOneWord = {
 	#log_loc_errors = no
 	text = {
 		trigger = {
-			var:promise_quest_degree_country <= 2
+			always = yes  # [#6573] was: var:promise_quest_degree_country <= 2
 		}
 		localization_key = tax_low
 	}
 	text = {
 		trigger = {
-			var:promise_quest_degree_country > 2
+			always = no  # [#6573] was: var:promise_quest_degree_country > 2
 		}
 		localization_key = tax_very_low
 	}

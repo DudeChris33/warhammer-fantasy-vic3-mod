@@ -570,8 +570,8 @@
 				if = {
 					limit = {
 						scope:other_country = {
-							has_variable = pro_lobby_proposal_alliance
-							var:pro_lobby_opportunity_target ?= root
+							always = no  # [#6573] was: has_variable = pro_lobby_proposal_alliance
+							always = no  # [#6573] was: var:pro_lobby_opportunity_target ?= root
 						}
 					}
 					add = {
@@ -583,8 +583,8 @@
 				if = {
 					limit = {
 						scope:other_country = {
-							has_variable = anti_lobby_proposal_alliance
-							var:anti_lobby_opportunity_target ?= root
+							always = no  # [#6573] was: has_variable = anti_lobby_proposal_alliance
+							always = no  # [#6573] was: var:anti_lobby_opportunity_target ?= root
 						}
 					}
 					add = {
@@ -597,8 +597,8 @@
 				if = {
 					limit = {
 						scope:other_country = {
-							has_variable = pro_lobby_proposal_alliance
-							var:pro_lobby_opportunity_target ?= root
+							always = no  # [#6573] was: has_variable = pro_lobby_proposal_alliance
+							always = no  # [#6573] was: var:pro_lobby_opportunity_target ?= root
 						}
 					}
 					add = {
@@ -610,8 +610,8 @@
 				if = {
 					limit = {
 						scope:other_country = {
-							has_variable = anti_lobby_proposal_alliance
-							var:anti_lobby_opportunity_target ?= root
+							always = no  # [#6573] was: has_variable = anti_lobby_proposal_alliance
+							always = no  # [#6573] was: var:anti_lobby_opportunity_target ?= root
 						}
 					}
 					add = {

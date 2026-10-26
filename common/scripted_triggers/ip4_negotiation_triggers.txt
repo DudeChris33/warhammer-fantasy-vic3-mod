@@ -237,9 +237,9 @@ neg_option_5_trigger = { #checks if a valid promise building_type was set.
     }
     NOT = { #Other building quest is not too severe
         any_interest_group = {
-            has_variable = promise_quest_type
-            var:promise_quest_type = 3 #buildings
-            var:promise_quest_degree != 4
+            always = no  # [#6573] was: has_variable = promise_quest_type
+            always = no  # [#6573] was: var:promise_quest_type = 3
+            always = no  # [#6573] was: var:promise_quest_degree != 4
         }
     }
 }
@@ -259,9 +259,9 @@ neg_option_6_trigger = { #checks if a valid promise building_group was set. Arab
     }
     NOT = {  #Other building quest is not too severe
         any_interest_group = {
-            has_variable = promise_quest_type
-            var:promise_quest_type = 3 #buildings
-            var:promise_quest_degree != 4
+            always = no  # [#6573] was: has_variable = promise_quest_type
+            always = no  # [#6573] was: var:promise_quest_type = 3
+            always = no  # [#6573] was: var:promise_quest_degree != 4
         }
     }
 }
@@ -317,7 +317,7 @@ neg_option_9_trigger = { #cannot be easy promise, too easy.
     NOT = {
         scope:ig = {
             has_modifier = active_ig_promise
-            var:promise_quest_degree != 1
+            always = yes  # [#6573] was: var:promise_quest_degree != 1
         }
     }
 }
@@ -329,7 +329,7 @@ amendment_is_valid_for_promise_quest_degree = { # Inside an any_possible_amendme
     }
     trigger_if = {
         limit = {
-            scope:ig.var:promise_quest_degree = 1
+            always = no  # [#6573] was: scope:ig.var:promise_quest_degree = 1
         }
         NOR = { # Enables any amendment for easy negotiations
             this = amendment_type:amendment_generic_sponsor_polstr_increase_negotiation_2
@@ -338,7 +338,7 @@ amendment_is_valid_for_promise_quest_degree = { # Inside an any_possible_amendme
     }
     trigger_else_if = {
         limit = {
-            scope:ig.var:promise_quest_degree = 2
+            always = no  # [#6573] was: scope:ig.var:promise_quest_degree = 2
         }
         OR = {
             this = amendment_type:amendment_redemption_payments
@@ -348,7 +348,7 @@ amendment_is_valid_for_promise_quest_degree = { # Inside an any_possible_amendme
     }
     trigger_else_if = {
         limit = {
-            scope:ig.var:promise_quest_degree >= 3
+            always = no  # [#6573] was: scope:ig.var:promise_quest_degree >= 3
         }
         OR = {
             this = amendment_type:amendment_redemption_payments

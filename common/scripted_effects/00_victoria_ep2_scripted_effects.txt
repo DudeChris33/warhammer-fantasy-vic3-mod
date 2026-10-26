@@ -30,10 +30,10 @@ transition_off_of_monarchy_law_effects = {
 # weaker than vanilla's - a country that has already begun abolishing the monarchy is no
 # longer detected by its journal entry, only by monarchy_stamped_out_var, so
 # abolishing_monarchy_var can be re-zeroed in a case vanilla would have skipped.
-# The set_variable IS preserved. [#6573] monarchy_stamped_out_var is only set by real-world
-# content that was never restored, so its read below is neutralized and the guard is always
-# true here; abolishing_monarchy_var is written (here and in common/on_actions/) but never
-# read in this mod, an accepted set-but-never-used lint warning until the abolition JE returns.
+# [#6573] monarchy_stamped_out_var is only set by real-world content that was never
+# restored, so its read below is neutralized and the guard is always true here; the
+# abolishing_monarchy_var writes (here and in common/on_actions/) were removed because
+# nothing reads it until the abolition JE returns.
 # A follow-up should author a WH-native je_abolish_monarchy and restore the full guard.
 transition_off_of_monarchy_effects = {
 	crown_land_republic_effect = yes
@@ -56,9 +56,9 @@ transition_off_of_monarchy_effects = {
 		limit = {
 			NOT = { always = no }  # [#6573] was: NOT = { has_variable = monarchy_stamped_out_var }
 		}
-		set_variable = {
-			name = abolishing_monarchy_var
-			value = 0
-		}
+		# [#6573] removed: set_variable = {
+			# [#6573] removed: name = abolishing_monarchy_var
+			# [#6573] removed: value = 0
+		# [#6573] removed: }
 	}
 }

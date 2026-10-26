@@ -42,26 +42,26 @@ on_monthly_pulse = {
 	effect = {
 		every_character_in_jail = { # Music too loud? Right to jail. Right away. Driving too fast? Jail. Slow? Jail. You undercook fish? Believe it or not, jail.
 			save_scope_as = prisoner_scope
-			change_variable = { name = prison_time_var subtract = 1 }
+			# [#6573] removed: change_variable = { name = prison_time_var subtract = 1 }
 			if = {
 				limit = {
 					NOT = {
-						exists = var:prison_country
+						always = no  # [#6573] was: exists = var:prison_country
 					}
 				}
 				kill_character = yes
 			}
 			else_if = {
 				limit = {
-					exists = var:prison_country
-					var:prison_time_var <= 0
+					always = no  # [#6573] was: exists = var:prison_country
+					always = no  # [#6573] was: var:prison_time_var <= 0
 				}
 				free_character_from_void = yes
 				owner ?= {
 					post_notification = prisoner_out_of_jail
 				}
-				remove_variable = prison_country
-				remove_variable = prison_time_var
+				# [#6573] removed: remove_variable = prison_country
+				# [#6573] removed: remove_variable = prison_time_var
 			}
 		}
 	}
@@ -126,23 +126,23 @@ on_monthly_pulse_character = {
 					has_role_of_type = general
 				}
 			}
-			set_variable = { name = monthly_cached_units_share value = this.num_units_share }
+			# [#6573] removed: set_variable = { name = monthly_cached_units_share value = this.num_units_share }
 			set_variable = { name = monthly_cached_commander_coup_strength value = this.commander_coup_strength }
 		}
 
 		if = {
 			limit = {
 				is_immortal = yes
-				has_variable = temporary_immortality_var
-				var:temporary_immortality_var != 0
+				always = no  # [#6573] was: has_variable = temporary_immortality_var
+				always = no  # [#6573] was: var:temporary_immortality_var != 0
 			}
-			change_variable = { name = temporary_immortality_var subtract = 1 }
+			# [#6573] removed: change_variable = { name = temporary_immortality_var subtract = 1 }
 		}
 		else_if = {
 			limit = {
 				is_immortal = yes
-				has_variable = temporary_immortality_var
-				var:temporary_immortality_var = 0
+				always = no  # [#6573] was: has_variable = temporary_immortality_var
+				always = no  # [#6573] was: var:temporary_immortality_var = 0
 			}
 			set_character_immortal = no
 		}
@@ -444,7 +444,7 @@ on_character_creation = {
 					has_role_of_type = general
 				}
 			}
-			set_variable = { name = monthly_cached_units_share value = this.num_units_share }
+			# [#6573] removed: set_variable = { name = monthly_cached_units_share value = this.num_units_share }
 			set_variable = { name = monthly_cached_commander_coup_strength value = this.commander_coup_strength }
 		}
 	}
@@ -479,7 +479,7 @@ on_new_ruler = {
 				limit = {
 					owner = {
 						NOT = {
-							has_variable = hide_ruler_change_notification
+							always = no  # [#6573] was: has_variable = hide_ruler_change_notification
 						}
 					}
 					is_adult = yes
@@ -534,7 +534,7 @@ on_character_spawned_in_pool = {
 on_ruler_selected = {
 	effect = {
 		root.owner = {
-			set_variable = ruler_selector_var
+			# [#6573] removed: set_variable = ruler_selector_var
 		}
 	}
 }
@@ -897,7 +897,7 @@ on_treaty_article_removed = {
 on_country_released_as_independent = {
 	effect = {
 		scope:target = {
-			set_variable = { name = newly_released_country days = 90 }
+			# [#6573] removed: set_variable = { name = newly_released_country days = 90 }
 		}
 	}
 }
@@ -907,7 +907,7 @@ on_country_released_as_independent = {
 on_country_released_as_own_subject = {
 	effect = {
 		scope:target = {
-			set_variable = { name = newly_released_country days = 90 }
+			# [#6573] removed: set_variable = { name = newly_released_country days = 90 }
 		}
 	}
 }
@@ -917,7 +917,7 @@ on_country_released_as_own_subject = {
 on_country_released_as_company_subject = {
 	effect = {
 		scope:target = {
-			set_variable = { name = newly_released_country days = 90 }
+			# [#6573] removed: set_variable = { name = newly_released_country days = 90 }
 		}
 		activate_law = law_type:law_colonial_administration
 		activate_law = law_type:law_oligarchy
@@ -942,7 +942,7 @@ on_country_released_as_company_subject = {
 on_country_released_as_overlord_subject = {
 	effect = {
 		scope:target = {
-			set_variable = { name = newly_released_country days = 90 }
+			# [#6573] removed: set_variable = { name = newly_released_country days = 90 }
 		}
 	}
 }
@@ -1005,15 +1005,15 @@ on_peace_agreement_signed_non_participant = {
 # Root = Country
 on_capitulation = {
 	effect = {
-		set_variable = {
-            name = recently_lost_war
-            days = 1825
-            value = yes
-        }
-		set_variable = {
-			name = recent_capitulation
-			days = short_modifier_time
-		}
+		# [#6573] removed: set_variable = {
+            # [#6573] removed: name = recently_lost_war
+            # [#6573] removed: days = 1825
+            # [#6573] removed: value = yes
+        # [#6573] removed: }
+		# [#6573] removed: set_variable = {
+			# [#6573] removed: name = recent_capitulation
+			# [#6573] removed: days = short_modifier_time
+		# [#6573] removed: }
 	}
 }
 
@@ -1085,7 +1085,7 @@ on_diplo_play_back_down = {
 					is_player = no
 				}
 			}
-			set_global_variable = achievement_mightier_than_the_sword
+			# [#6573] removed: set_global_variable = achievement_mightier_than_the_sword
 		}
 	}
 }
@@ -1250,10 +1250,10 @@ on_law_enactment_started = {
 					is_enacting_law = law_type:law_council_republic
 				}
 			}
-			set_variable = {
-				name = abolishing_monarchy_var
-				value = 0
-			}
+			# [#6573] removed: set_variable = {
+				# [#6573] removed: name = abolishing_monarchy_var
+				# [#6573] removed: value = 0
+			# [#6573] removed: }
 			# [#3410] dropped add_journal_entry je_abolish_monarchy — common/journal_entries is blanked, type never restored, silently inert per scripting.md taxonomy
 		}
 		# Negotiation achievement
@@ -1318,7 +1318,7 @@ on_law_enactment_pass = {
 					count = 0
 				}
 			}
-			set_variable = unanimity_achievement_var
+			# [#6573] removed: set_variable = unanimity_achievement_var
 		}
 	}
 }
@@ -1425,7 +1425,7 @@ on_revolution_start = {
 			}
 			set_variable = anti_monarchist_revolution
 		}
-		set_variable = { name = recent_coup_or_revolution_var value = 0 }
+		# [#6573] removed: set_variable = { name = recent_coup_or_revolution_var value = 0 }
 	}
 }
 
@@ -1462,7 +1462,7 @@ on_civil_war_won = {
 			limit = {
 				has_global_variable = achievement_revo_needed
 			}
-			set_global_variable = achievement_revolutionary
+			# [#6573] removed: set_global_variable = achievement_revolutionary
 		}
 		if = {
 			limit = {
@@ -1474,10 +1474,10 @@ on_civil_war_won = {
 						has_law = law_type:law_monarchy
 					}
 				}
-				set_variable = {
-					name = abolishing_monarchy_var
-					value = 0
-				}
+				# [#6573] removed: set_variable = {
+					# [#6573] removed: name = abolishing_monarchy_var
+					# [#6573] removed: value = 0
+				# [#6573] removed: }
 				# [#3410] dropped add_journal_entry je_abolish_monarchy — common/journal_entries is blanked, type never restored, silently inert per scripting.md taxonomy
 			}
 			remove_variable = anti_monarchist_revolution
@@ -1519,11 +1519,11 @@ on_political_movement_supported_law_cancelled = {
 # scope:wargoal_impact = the impact of the wargoal enforced
 on_wargoal_enforced = {
 	effect = {
-		set_variable = {
-            name = recently_won_war
-            days = 1825
-            value = yes
-        }
+		# [#6573] removed: set_variable = {
+            # [#6573] removed: name = recently_won_war
+            # [#6573] removed: days = 1825
+            # [#6573] removed: value = yes
+        # [#6573] removed: }
 
         if = { # recently crushed a secession
 			limit = {
@@ -1532,10 +1532,10 @@ on_wargoal_enforced = {
 				}
 			}
 			ROOT ?= {
-				set_variable = {
-					name = crushed_secession
-					days = 90
-				}
+				# [#6573] removed: set_variable = {
+					# [#6573] removed: name = crushed_secession
+					# [#6573] removed: days = 90
+				# [#6573] removed: }
 			}
 		}
 
@@ -1652,18 +1652,18 @@ on_wargoal_removed = {
 on_war_end = {
 	effect = {
 		scope:actor = {
-			set_variable = {
-		        name = recently_had_war
-		        days = 1825
-		        value = yes
-		    }
+			# [#6573] removed: set_variable = {
+		        # [#6573] removed: name = recently_had_war
+		        # [#6573] removed: days = 1825
+		        # [#6573] removed: value = yes
+		    # [#6573] removed: }
 		}
 		scope:target ?= {
-			set_variable = {
-		        name = recently_had_war
-		        days = 1825
-		        value = yes
-		    }
+			# [#6573] removed: set_variable = {
+		        # [#6573] removed: name = recently_had_war
+		        # [#6573] removed: days = 1825
+		        # [#6573] removed: value = yes
+		    # [#6573] removed: }
 		}
 	}
 }
@@ -1853,7 +1853,7 @@ on_election_campaign_end = {
 on_government_reformed = {
 	effect = {
 		# Government Petition
-		set_variable = gov_petition_coin_toss
+		# [#6573] removed: set_variable = gov_petition_coin_toss
 	}
 }
 
@@ -2036,7 +2036,7 @@ on_character_recruitment = {
 					has_role_of_type = general
 				}
 			}
-			set_variable = { name = monthly_cached_units_share value = this.num_units_share }
+			# [#6573] removed: set_variable = { name = monthly_cached_units_share value = this.num_units_share }
 			set_variable = { name = monthly_cached_commander_coup_strength value = this.commander_coup_strength }
 		}
 		owner = {
@@ -2262,9 +2262,9 @@ on_amendment_timeout = {
 # Root = Character (the promoted commander)
 # scope:count = number of IGs that received unnecessary_promotion modifier (0 if promotion was not unnecessary)
 # CLEAN PORT (#3537) - vanilla body verbatim. Pure variable bookkeeping, no real-world
-# content. Note that achievement_everyone_disliked_that_var is currently written but never
-# read: common/achievements is blanked, so nothing consumes it. Harmless, and it keeps the
-# hook faithful to vanilla for whenever achievements are restored.
+# content. [#6573] The achievement_everyone_disliked_that_var write was removed: it was
+# written but never read (common/achievements is blanked), a set-but-never-used lint warning.
+# Restore it with the achievements.
 on_commander_promoted = {
 	effect = {
 		if = {
@@ -2272,7 +2272,7 @@ on_commander_promoted = {
 				scope:count >= 7
 			}
 			owner = {
-				set_variable = achievement_everyone_disliked_that_var
+				# [#6573] removed: set_variable = achievement_everyone_disliked_that_var
 			}
 		}
 	}
@@ -2306,7 +2306,7 @@ on_invasion_succeeded = {
 					is_capital = yes
 				}
 			}
-			set_variable = has_taken_enemy_capital_with_marines
+			# [#6573] removed: set_variable = has_taken_enemy_capital_with_marines
 		}
 	}
 }

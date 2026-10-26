@@ -94,7 +94,7 @@ negotiation_extension_button = {
 		scope:ig = {
 			add_modifier = {
 				name = negotiation_extended_quest
-				multiplier = scope:ig.var:promise_quest_degree
+				multiplier = 0  # [#6573] was: scope:ig.var:promise_quest_degree
 				days = normal_modifier_time
 			}
 		}

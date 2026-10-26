@@ -128,11 +128,11 @@
 		}
 		if = {
 			limit = {
-				exists = owner.var:communism_progress_from_laws
+				always = no  # [#6573] was: exists = owner.var:communism_progress_from_laws
 			}
 			if = {
 				limit = {
-					owner.var:communism_progress_from_laws = 0
+					always = yes  # [#6573] was: owner.var:communism_progress_from_laws = 0
 				}
 				add = {
 					desc = "communism_progress_from_no_laws_tt"
@@ -142,20 +142,20 @@
 			else ={
 				add = {
 					desc = "communism_progress_from_laws_tt"
-					value = owner.var:communism_progress_from_laws
+					value = 0  # [#6573] was: owner.var:communism_progress_from_laws
 				}
 			}
 		}
 		if = {
 			limit = {
-				exists = owner.var:communism_progress_var_add
+				always = no  # [#6573] was: exists = owner.var:communism_progress_var_add
 				NOT = {
-					owner.var:communism_progress_var_add = 0
+					always = yes  # [#6573] was: owner.var:communism_progress_var_add = 0
 				}
 			}
 			add = {
 				desc = "communism_progress_from_events_tt"
-				value = owner.var:communism_progress_var_add
+				value = 0  # [#6573] was: owner.var:communism_progress_var_add
 			}
 		}
 	}
@@ -275,26 +275,26 @@
 		}
 		if = {
 			limit = {
-				exists = owner.var:populism_progress_from_laws
+				always = no  # [#6573] was: exists = owner.var:populism_progress_from_laws
 				NOT = {
-					owner.var:populism_progress_from_laws = 0
+					always = yes  # [#6573] was: owner.var:populism_progress_from_laws = 0
 				}
 			}
 			add = {
 				desc = "populism_progress_from_laws_tt"
-				value = owner.var:populism_progress_from_laws
+				value = 0  # [#6573] was: owner.var:populism_progress_from_laws
 			}
 		}
 		if = {
 			limit = {
-				exists = owner.var:populism_progress_var_add
+				always = no  # [#6573] was: exists = owner.var:populism_progress_var_add
 				NOT = {
-					owner.var:populism_progress_var_add = 0
+					always = yes  # [#6573] was: owner.var:populism_progress_var_add = 0
 				}
 			}
 			add = {
 				desc = "populism_progress_from_events_tt"
-				value = owner.var:populism_progress_var_add
+				value = 0  # [#6573] was: owner.var:populism_progress_var_add
 			}
 		}
 	}
