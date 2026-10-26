@@ -1,5 +1,23 @@
-﻿region_khuresh = {
+﻿region_cathay = {
+	capital_province = xB690AC
+	map_color = { 15 205 219 }
+	states = { STATE_LAND_179 }
+}
+
+region_far_ocean_islands = {
+	capital_province = xA1874E
+	map_color = { 76 60 205 }
+	states = { STATE_LAND_369 STATE_LAND_673 STATE_LAND_678 }
+}
+
+region_khuresh = {
 	capital_province = xC34FAC
-	map_color = { 174 5 84 }
-	states = { STATE_TOR_ELITHIS STATE_NORTH_ISLE STATE_LAND_365 STATE_LAND_369 STATE_SOUTHERN_GATE_OF_CALITH STATE_STARSAND_PORT STATE_ELITHISIAN_GROVE STATE_LAND_673 STATE_LAND_674 STATE_LAND_677 STATE_LAND_678 }
+	map_color = { 234 116 70 }
+	states = { STATE_TOR_ELITHIS STATE_NORTH_ISLE STATE_SOUTHERN_GATE_OF_CALITH STATE_STARSAND_PORT STATE_ELITHISIAN_GROVE STATE_LAND_674 }
+}
+
+region_nippon = {
+	capital_province = xC2A439
+	map_color = { 1 137 163 }
+	states = { STATE_LAND_365 STATE_LAND_366 STATE_LAND_677 }
 }

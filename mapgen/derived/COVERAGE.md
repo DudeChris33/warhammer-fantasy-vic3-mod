@@ -64,7 +64,7 @@ Named candidates for closing it, in order of expected value:
 ## Macro grouping
 
 - **⚠ SKIPPED — macro grouping did not run.**
-  the only macro source (tww3_states_per_strat_region.jpg, role 'named_macro_regions') is a frame_alias of tww3_ie_parchment.jpg (scale 1.808), not a frame-aligned twin. macro.annotation_mask differences the twin against the clean master pixel-for-pixel and needs matching dims, so a rescaled alias cannot feed it. Warping the alias into the master frame is a separate request.
+  no source carries a macro-grouping role (neither a frame-aligned 'ie_macro_grouping' twin nor 'named_macro_regions').
   Every land cell reports macro 0 (unassigned) below; the Old World per-crop
   counts above stand in for the macros this round.
 

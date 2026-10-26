@@ -25,7 +25,7 @@
 STATE_MORTIS_TARN = {
     id = 190
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0EDC9B x1D20D3 x25F1F8 x2BC682 x2D0AC0 x343630 x34B824 x486F6F x4B4B8D x5D3CA6 x6979B2 x7EE95A x8ED347 x940A33 xA442EF xABCB03 xAFCB86 xC42971 xCB4239 xCE9749 xD5CBBB xF5D2BA xFAA82F }
+    provinces = { x0EDC9B x1D20D3 x25F1F8 x2BC682 x2D0AC0 x343630 x34B824 x486F6F x4B4B8D x5D3CA6 x6979B2 x7EE95A x8ED347 x940A33 xA442EF xABAA86 xABCB03 xAFCB86 xC42971 xCB4239 xCE9749 xD5CBBB xF5D2BA xFAA82F }
     impassable = { x5D3CA6 xAFCB86 }
     city = x0EDC9B
     farm = x2BC682
@@ -99,7 +99,7 @@ STATE_THE_SCARAB_CITY = {
     mine = xB5E539
     wood = xF2542B
     port = x26536F
-    arable_land = 10
+    arable_land = 9
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
         building_fishing_wharf = 1
@@ -155,7 +155,7 @@ STATE_SPHINX_OF_PHAA = {
 STATE_FALLOW_FIELDS = {
     id = 609
     subsistence_building = "building_subsistence_farm"
-    provinces = { x03AC79 x03F675 x059C2A x0B0F3D x0E6D4F x1CB187 x22249A x277C03 x2CCE99 x33C6E4 x3939F7 x420B1C x4639F1 x4ADC41 x504F54 x55C267 x5E938C x606C66 x6764B1 x6B9386 x6CD7C4 x7035D6 x73B938 x75A8E9 x7E7A0E x83ED21 x89448A x8CBE46 x923159 x958F6B x9B027E xA946B6 xACA4C8 xB78AEE xBAE900 xC05C13 xCEA04B xCEC59B xD77170 xE4716A xE5B5A8 xED630C xEE86CD xF05FA7 xF757F2 xFCCB05 xFEA3DF }
+    provinces = { x03AC79 x03F675 x059C2A x0B0F3D x0E6D4F x1CB187 x22249A x277C03 x2CCE99 x33C6E4 x3939F7 x420B1C x4639F1 x4ADC41 x504F54 x55C267 x5E938C x606C66 x6764B1 x6B9386 x6CD7C4 x7035D6 x73B938 x75A8E9 x7E7A0E x83ED21 x89448A x8CBE46 x923159 x958F6B x97F33B x9B027E xA946B6 xACA4C8 xB78AEE xBAE900 xC05C13 xCEA04B xCEC59B xD77170 xE4716A xE5B5A8 xED630C xEE86CD xF05FA7 xF757F2 xFCCB05 xFEA3DF }
     city = x9B027E
     farm = x8CBE46
     mine = x0B0F3D
@@ -230,10 +230,6 @@ STATE_SWAMP_OF_TERROR = {
     arable_land = 3
     arable_resources = { "building_livestock_ranch" }
     capped_resources = {
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 1
     }
     naval_exit_id = 3110
 }

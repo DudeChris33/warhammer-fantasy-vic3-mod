@@ -70,9 +70,12 @@
      "owner": "BRN",
      "provinces": [
       "x36FB77",
+      "x5B96F1",
       "x781F61",
+      "xC3FFF2",
       "xCBA3B0",
-      "xD9E7E8"
+      "xD9E7E8",
+      "xF9CE6A"
      ]
     },
     {
@@ -571,12 +574,38 @@
    "scope": "drawn"
   },
   "STATE_CLOTHIQUE": {
-   "id": 138,
+   "id": 636,
    "naming_anchor": [
     2915,
     1138
    ],
-   "owner": "COT",
+   "owners": [
+    {
+     "owner": "CHR",
+     "provinces": [
+      "x4F8837"
+     ]
+    },
+    {
+     "owner": "COT",
+     "provinces": [
+      "x038BFC",
+      "x094009",
+      "x3FFAEE",
+      "x54FB4A",
+      "x7DE143",
+      "x81DCF3",
+      "x8AAE18",
+      "x90212B",
+      "x962D09",
+      "xA2533E",
+      "xAA741D",
+      "xBE4BE5",
+      "xDE3267",
+      "xEC769F"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_COURONNE": {
@@ -818,7 +847,8 @@
     {
      "owner": "XSB",
      "provinces": [
-      "x11A1E2"
+      "x11A1E2",
+      "xED0F6A"
      ]
     }
    ],
@@ -858,15 +888,6 @@
     287
    ],
    "owner": "KOR",
-   "scope": "drawn"
-  },
-  "STATE_EASTERN_ANNULII_MOUNTAINS": {
-   "id": 636,
-   "naming_anchor": [
-    2869,
-    1172
-   ],
-   "owner": "CHR",
    "scope": "drawn"
   },
   "STATE_EASTERN_BADLANDS": {
@@ -911,7 +932,25 @@
     3904,
     1085
    ],
-   "owner": "VMP",
+   "owners": [
+    {
+     "owner": "VMP",
+     "provinces": [
+      "x391E4D",
+      "xB4035D",
+      "xD755C6",
+      "xF5D78D"
+     ]
+    },
+    {
+     "owner": "XSG",
+     "provinces": [
+      "x000D6D",
+      "xA5BF25",
+      "xC39E7B"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_EASTERN_OBLAST": {
@@ -1640,6 +1679,7 @@
       "x2F93E0",
       "x664EC5",
       "x68B295",
+      "x9CE92D",
       "xA52187",
       "xC8174C"
      ]
@@ -1663,47 +1703,11 @@
    "owner": "LAH",
    "scope": "drawn"
   },
-  "STATE_LAND_001": {
-   "id": 1,
-   "naming_anchor": [
-    945,
-    355
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_002": {
-   "id": 2,
-   "naming_anchor": [
-    933,
-    474
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_006": {
    "id": 6,
    "naming_anchor": [
     902,
     772
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_007": {
-   "id": 7,
-   "naming_anchor": [
-    904,
-    1220
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_008": {
-   "id": 8,
-   "naming_anchor": [
-    1224,
-    1514
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1714,23 +1718,14 @@
     1117,
     1334
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_010": {
    "id": 10,
    "naming_anchor": [
     1145,
     1606
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_011": {
-   "id": 11,
-   "naming_anchor": [
-    1289,
-    1639
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -1744,23 +1739,14 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_015": {
-   "id": 15,
-   "naming_anchor": [
-    2179,
-    195
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_017": {
    "id": 17,
    "naming_anchor": [
     2385,
     7
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_018": {
    "id": 18,
@@ -1777,8 +1763,8 @@
     2434,
     359
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_021": {
    "id": 21,
@@ -1786,17 +1772,8 @@
     2483,
     464
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_024": {
-   "id": 24,
-   "naming_anchor": [
-    2381,
-    771
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_025": {
    "id": 25,
@@ -1813,8 +1790,8 @@
     2309,
     576
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_027": {
    "id": 27,
@@ -1831,8 +1808,8 @@
     2915,
     16
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_031": {
    "id": 31,
@@ -1840,8 +1817,8 @@
     3283,
     56
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_032": {
    "id": 32,
@@ -1849,8 +1826,8 @@
     3612,
     24
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_033": {
    "id": 33,
@@ -1858,8 +1835,8 @@
     3781,
     12
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_034": {
    "id": 34,
@@ -1867,8 +1844,8 @@
     3986,
     28
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_078": {
    "id": 78,
@@ -1876,8 +1853,8 @@
     3336,
     782
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_079": {
    "id": 79,
@@ -1885,8 +1862,8 @@
     3350,
     673
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_126": {
    "id": 126,
@@ -1903,17 +1880,8 @@
     2574,
     2036
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_144": {
-   "id": 144,
-   "naming_anchor": [
-    2071,
-    1176
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_145": {
    "id": 145,
@@ -1921,8 +1889,8 @@
     2431,
     1949
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_146": {
    "id": 146,
@@ -1930,8 +1898,8 @@
     2330,
     2031
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_147": {
    "id": 147,
@@ -1939,8 +1907,8 @@
     2215,
     1856
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_148": {
    "id": 148,
@@ -1957,8 +1925,8 @@
     2781,
     2405
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_155": {
    "id": 155,
@@ -1975,8 +1943,8 @@
     1769,
     2613
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_157": {
    "id": 157,
@@ -1984,8 +1952,8 @@
     1827,
     2600
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_158": {
    "id": 158,
@@ -2002,8 +1970,8 @@
     1653,
     2290
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_160": {
    "id": 160,
@@ -2032,15 +2000,6 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_168": {
-   "id": 168,
-   "naming_anchor": [
-    6164,
-    2236
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_169": {
    "id": 169,
    "naming_anchor": [
@@ -2056,8 +2015,8 @@
     5225,
     1514
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_182": {
    "id": 182,
@@ -2074,8 +2033,8 @@
     4321,
     6
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_365": {
    "id": 365,
@@ -2092,8 +2051,8 @@
     7471,
     1150
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_367": {
    "id": 367,
@@ -2131,92 +2090,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_386": {
-   "id": 386,
-   "naming_anchor": [
-    900,
-    352
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_391": {
-   "id": 391,
-   "naming_anchor": [
-    946,
-    926
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_392": {
-   "id": 392,
-   "naming_anchor": [
-    1019,
-    954
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_393": {
-   "id": 393,
-   "naming_anchor": [
-    985,
-    969
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_395": {
-   "id": 395,
-   "naming_anchor": [
-    1001,
-    1475
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_396": {
-   "id": 396,
-   "naming_anchor": [
-    999,
-    1377
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_397": {
    "id": 397,
    "naming_anchor": [
     968,
     1298
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_400": {
-   "id": 400,
-   "naming_anchor": [
-    906,
-    1161
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_403": {
-   "id": 403,
-   "naming_anchor": [
-    965,
-    1106
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_404": {
-   "id": 404,
-   "naming_anchor": [
-    971,
-    1142
    ],
    "owner": "placeholder",
    "scope": "placeholder"
@@ -2230,86 +2108,14 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_406": {
-   "id": 406,
-   "naming_anchor": [
-    990,
-    1039
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_407": {
-   "id": 407,
-   "naming_anchor": [
-    1074,
-    1138
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_408": {
-   "id": 408,
-   "naming_anchor": [
-    1055,
-    1097
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_409": {
-   "id": 409,
-   "naming_anchor": [
-    1092,
-    1198
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_410": {
-   "id": 410,
-   "naming_anchor": [
-    1058,
-    1451
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_411": {
-   "id": 411,
-   "naming_anchor": [
-    1108,
-    1421
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_412": {
-   "id": 412,
-   "naming_anchor": [
-    1138,
-    1496
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_413": {
-   "id": 413,
-   "naming_anchor": [
-    1052,
-    1507
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
   "STATE_LAND_415": {
    "id": 415,
    "naming_anchor": [
     1121,
     1553
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_416": {
    "id": 416,
@@ -2326,35 +2132,8 @@
     1661,
     1925
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_424": {
-   "id": 424,
-   "naming_anchor": [
-    1097,
-    1011
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_425": {
-   "id": 425,
-   "naming_anchor": [
-    1033,
-    1021
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_426": {
-   "id": 426,
-   "naming_anchor": [
-    1071,
-    954
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_427": {
    "id": 427,
@@ -2362,17 +2141,8 @@
     1072,
     893
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
-  },
-  "STATE_LAND_429": {
-   "id": 429,
-   "naming_anchor": [
-    2522,
-    484
-   ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_430": {
    "id": 430,
@@ -2380,8 +2150,8 @@
     2434,
     469
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_443": {
    "id": 443,
@@ -2389,8 +2159,8 @@
     2579,
     1998
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_454": {
    "id": 454,
@@ -2398,8 +2168,8 @@
     2375,
     2003
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_458": {
    "id": 458,
@@ -2407,8 +2177,8 @@
     2614,
     2076
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "unowned",
+   "scope": "drawn"
   },
   "STATE_LAND_464": {
    "id": 464,
@@ -2418,48 +2188,6 @@
    ],
    "owner": "placeholder",
    "scope": "placeholder"
-  },
-  "STATE_LAND_660": {
-   "id": 660,
-   "naming_anchor": null,
-   "owner": "LYO",
-   "scope": "drawn"
-  },
-  "STATE_LAND_661": {
-   "id": 661,
-   "naming_anchor": null,
-   "owner": "BAE",
-   "scope": "drawn"
-  },
-  "STATE_LAND_663": {
-   "id": 663,
-   "naming_anchor": null,
-   "owner": "BIL",
-   "scope": "drawn"
-  },
-  "STATE_LAND_664": {
-   "id": 664,
-   "naming_anchor": null,
-   "owner": "BRN",
-   "scope": "drawn"
-  },
-  "STATE_LAND_666": {
-   "id": 666,
-   "naming_anchor": null,
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_669": {
-   "id": 669,
-   "naming_anchor": null,
-   "owner": "UZK",
-   "scope": "drawn"
-  },
-  "STATE_LAND_672": {
-   "id": 672,
-   "naming_anchor": null,
-   "owner": "XSD",
-   "scope": "drawn"
   },
   "STATE_LAND_673": {
    "id": 673,
@@ -2496,6 +2224,12 @@
    "naming_anchor": null,
    "owner": "unowned",
    "scope": "drawn"
+  },
+  "STATE_LAND_679": {
+   "id": 679,
+   "naming_anchor": null,
+   "owner": "placeholder",
+   "scope": "placeholder"
   },
   "STATE_LAURELORN_FOREST": {
    "id": 625,
@@ -2753,6 +2487,7 @@
       "x8ED347",
       "x940A33",
       "xA442EF",
+      "xABAA86",
       "xABCB03",
       "xAFCB86",
       "xC42971",
@@ -4348,6 +4083,7 @@
       "x1A44B5",
       "x2888ED",
       "x48E7BD",
+      "x628F3C",
       "x64F7DF",
       "x7175E5",
       "x7C0D3C",

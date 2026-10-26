@@ -692,6 +692,11 @@ STATE_LUMBRIA_NIPPON_CHANNEL_PLACEHOLDER = {
 	provinces = { x9D37FC }
 }
 
+STATE_SEA_OF_FEAR_10 = {
+	id = 3331
+	provinces = { x61C34C }
+}
+
 STATE_SEA_OF_WEIRD_WAVES_03 = {
 	id = 3135
 	provinces = { x3B6F75 }

@@ -186,8 +186,8 @@ canal_chill_s = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x550DF2
-	second_land_endpoint = xC51AB1
+	first_land_endpoint = x38DD53
+	second_land_endpoint = xD35EE9
 
 	first_sea_endpoint = x733744
 	second_sea_endpoint = xA6D511
@@ -199,7 +199,7 @@ canal_drackla = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = xC51AB1
+	first_land_endpoint = xD35EE9
 	second_land_endpoint = xE85F45
 
 	first_sea_endpoint = x032A85
@@ -277,8 +277,8 @@ canal_east_estalian_isles = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x778696
-	second_land_endpoint = xCEE618
+	first_land_endpoint = x6050BC
+	second_land_endpoint = xEDD258
 
 	first_sea_endpoint = x9F4CFD
 	second_sea_endpoint = xEA0027
@@ -421,7 +421,7 @@ canal_isles_of_dusk = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x34A57C
-	second_land_endpoint = xC51AB1
+	second_land_endpoint = xD35EE9
 
 	first_sea_endpoint = x506FD1
 	second_sea_endpoint = xE06312
@@ -498,7 +498,7 @@ canal_maelstrom_e = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x1C7A33
+	first_land_endpoint = xB4EFCA
 	second_land_endpoint = xEAF167
 
 	first_sea_endpoint = x5D6AF8
@@ -511,8 +511,8 @@ canal_maelstrom_se = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x1C7A33
-	second_land_endpoint = x5C4737
+	first_land_endpoint = x0F880E
+	second_land_endpoint = x49E1FF
 
 	first_sea_endpoint = x047396
 	second_sea_endpoint = x5D6AF8
@@ -525,7 +525,7 @@ canal_maelstrom_sw = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x6B1665
-	second_land_endpoint = x7E42BA
+	second_land_endpoint = x6F3B94
 
 	first_sea_endpoint = x047396
 	second_sea_endpoint = x4F26C0
@@ -563,24 +563,11 @@ canal_mangrove = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x84FEDE
-	second_land_endpoint = xC51AB1
+	first_land_endpoint = x07340A
+	second_land_endpoint = xD35EE9
 
 	first_sea_endpoint = x30894F
 	second_sea_endpoint = x55E2E4
-}
-
-canal_marienburg = {
-	type = natural
-
-	total_block_requires_full_control = no
-	military_block_requires_full_control = no
-
-	first_land_endpoint = x021499
-	second_land_endpoint = xE2B90D
-
-	first_sea_endpoint = x84D98E
-	second_sea_endpoint = xCF8CB8
 }
 
 canal_middle_talabec = {
@@ -668,7 +655,7 @@ canal_plain_of_spiders = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x6E17D3
-	second_land_endpoint = xC51AB1
+	second_land_endpoint = xD35EE9
 
 	first_sea_endpoint = x0F59BC
 	second_sea_endpoint = xEF733A
@@ -694,7 +681,7 @@ canal_rage_se = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x542F5A
-	second_land_endpoint = xE79355
+	second_land_endpoint = xEAFA69
 
 	first_sea_endpoint = x3D8476
 	second_sea_endpoint = x42F789
@@ -719,7 +706,7 @@ canal_red_desert = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = xC51AB1
+	first_land_endpoint = xD35EE9
 	second_land_endpoint = xF9B2C0
 
 	first_sea_endpoint = x032A85
@@ -784,8 +771,8 @@ canal_tarantula = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x7C2DB9
-	second_land_endpoint = xC51AB1
+	first_land_endpoint = x9B514D
+	second_land_endpoint = xD35EE9
 
 	first_sea_endpoint = x699A2F
 	second_sea_endpoint = xD9A6EE
@@ -824,7 +811,7 @@ canal_west_estalian_isles = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x111FEE
-	second_land_endpoint = xCEE618
+	second_land_endpoint = x5E0D69
 
 	first_sea_endpoint = x266F19
 	second_sea_endpoint = xEA0027

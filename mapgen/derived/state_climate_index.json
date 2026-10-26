@@ -66,23 +66,23 @@
       "state_key": "STATE_ANMYR",
       "worksheet_name": "Anmyr",
       "name": "Anmyr",
-      "land_px": 1529,
+      "land_px": 1383,
       "dominant": "Cfb",
       "shares": {
-        "Cfb": 0.62,
-        "Df": 0.38
+        "Cfb": 0.5886,
+        "Df": 0.4114
       }
     },
     {
       "state_key": "STATE_APUCCINI_MOUNTAINS",
       "worksheet_name": "Apuccini Mountains",
       "name": "Apuccini Mountains",
-      "land_px": 868,
+      "land_px": 1005,
       "dominant": "BSk",
       "shares": {
-        "BSk": 0.5196,
-        "Df": 0.1659,
-        "Dc": 0.3145
+        "BSk": 0.5851,
+        "Df": 0.1433,
+        "Dc": 0.2716
       }
     },
     {
@@ -373,13 +373,13 @@
       "state_key": "STATE_BLIGHTED_MARSHES",
       "worksheet_name": "Blighted Marshes",
       "name": "Blighted Marshes",
-      "land_px": 2967,
+      "land_px": 2592,
       "dominant": "BSk",
       "shares": {
-        "BSk": 0.6323,
-        "Cs": 0.1837,
-        "Cfa": 0.1678,
-        "Cfb": 0.0162
+        "BSk": 0.5791,
+        "Cs": 0.2103,
+        "Cfa": 0.1921,
+        "Cfb": 0.0185
       }
     },
     {
@@ -466,25 +466,25 @@
       "state_key": "STATE_BREGANALLE",
       "worksheet_name": "Breganalle",
       "name": "Breganalle",
-      "land_px": 2703,
+      "land_px": 2701,
       "dominant": "Cfa",
       "shares": {
-        "BSk": 0.2575,
-        "Cfa": 0.4366,
-        "Cfb": 0.2408,
-        "Df": 0.0651
+        "BSk": 0.2569,
+        "Cfa": 0.4369,
+        "Cfb": 0.241,
+        "Df": 0.0652
       }
     },
     {
       "state_key": "STATE_BRENNUN_S_ENCAMPMENT",
       "worksheet_name": "Brennun's Encampment",
       "name": "Brennun's Encampment",
-      "land_px": 2284,
+      "land_px": 2282,
       "dominant": "EF",
       "shares": {
         "BSk": 0.0355,
-        "ET": 0.4571,
-        "EF": 0.5074
+        "ET": 0.4575,
+        "EF": 0.507
       }
     },
     {
@@ -524,23 +524,23 @@
       "state_key": "STATE_CANTABRIO_ROAD",
       "worksheet_name": "Cantabrio Road",
       "name": "Cantabrio Road",
-      "land_px": 3308,
+      "land_px": 3365,
       "dominant": "Cfa",
       "shares": {
-        "Cfa": 0.7675,
-        "Cfb": 0.2325
+        "Cfa": 0.7545,
+        "Cfb": 0.2455
       }
     },
     {
       "state_key": "STATE_CARCASSONNE",
       "worksheet_name": "Carcassonne",
       "name": "Carcassonne",
-      "land_px": 2410,
+      "land_px": 2398,
       "dominant": "Df",
       "shares": {
-        "BSk": 0.4739,
+        "BSk": 0.4762,
         "Cfb": 0.005,
-        "Df": 0.5212
+        "Df": 0.5188
       }
     },
     {
@@ -766,13 +766,13 @@
       "state_key": "STATE_CURSED_WAY",
       "worksheet_name": "Cursed Way (weak)",
       "name": "Cursed Way",
-      "land_px": 2189,
+      "land_px": 2463,
       "dominant": "Cfa",
       "shares": {
-        "Aw": 0.2773,
-        "BSh": 0.2366,
-        "Cfa": 0.4322,
-        "Cfb": 0.0539
+        "Aw": 0.2972,
+        "BSh": 0.2708,
+        "Cfa": 0.3841,
+        "Cfb": 0.0479
       }
     },
     {
@@ -810,12 +810,12 @@
       "state_key": "STATE_DEATH_S_SIDE",
       "worksheet_name": "Death's Side",
       "name": "Death's Side",
-      "land_px": 4096,
+      "land_px": 3813,
       "dominant": "EF",
       "shares": {
-        "Dc": 0.2617,
-        "ET": 0.2397,
-        "EF": 0.4985
+        "Dc": 0.2811,
+        "ET": 0.2539,
+        "EF": 0.465
       }
     },
     {
@@ -1104,7 +1104,7 @@
       "state_key": "STATE_EASTERN_IRRANAS",
       "worksheet_name": "Eastern Irranas",
       "name": "Eastern Irranas",
-      "land_px": 435,
+      "land_px": 740,
       "dominant": "BSk",
       "shares": {
         "BSk": 1.0
@@ -1237,13 +1237,13 @@
       "state_key": "STATE_ELDAGRIMM_GULF",
       "worksheet_name": "Eldagrimm Gulf",
       "name": "Eldagrimm Gulf",
-      "land_px": 2481,
+      "land_px": 2705,
       "dominant": "Df",
       "shares": {
-        "Cfb": 0.2447,
-        "Df": 0.4772,
-        "Dc": 0.2108,
-        "ET": 0.0673
+        "Cfb": 0.2288,
+        "Df": 0.4377,
+        "Dc": 0.2717,
+        "ET": 0.0617
       }
     },
     {
@@ -1478,18 +1478,18 @@
       "state_key": "STATE_GLADE_OF_ETERNAL_MIDNIGHT",
       "worksheet_name": "Glade of Eternal Midnight",
       "name": "Glade of Eternal Midnight",
-      "land_px": 608,
+      "land_px": 612,
       "dominant": "Df",
       "shares": {
-        "BSk": 0.0148,
-        "Df": 0.9852
+        "BSk": 0.0147,
+        "Df": 0.9853
       }
     },
     {
       "state_key": "STATE_GLADE_OF_ETERNAL_MOONLIGHT",
       "worksheet_name": "Glade of Eternal Moonlight",
       "name": "Glade of Eternal Moonlight",
-      "land_px": 865,
+      "land_px": 740,
       "dominant": "Df",
       "shares": {
         "Df": 1.0
@@ -1659,7 +1659,7 @@
       "state_key": "STATE_HELL_PIT_DEPTHS",
       "worksheet_name": "Hell Pit Depths",
       "name": "Hell Pit Depths",
-      "land_px": 482,
+      "land_px": 851,
       "dominant": "ET",
       "shares": {
         "ET": 1.0
@@ -2038,7 +2038,7 @@
       "state_key": "STATE_LYONESSE",
       "worksheet_name": "Lyonesse",
       "name": "Lyonesse",
-      "land_px": 3127,
+      "land_px": 3186,
       "dominant": "Cfb",
       "shares": {
         "Cfb": 1.0
@@ -2838,12 +2838,12 @@
       "state_key": "STATE_QUENELLES",
       "worksheet_name": "Quenelles",
       "name": "Quenelles",
-      "land_px": 4898,
+      "land_px": 4959,
       "dominant": "Df",
       "shares": {
-        "Cfb": 0.4765,
-        "Df": 0.489,
-        "Dc": 0.0345
+        "Cfb": 0.4707,
+        "Df": 0.4953,
+        "Dc": 0.0341
       }
     },
     {
@@ -3087,7 +3087,7 @@
       "state_key": "STATE_SOUTHEAST_MAGRITTA",
       "worksheet_name": "Southeast Magritta",
       "name": "Southeast Magritta",
-      "land_px": 2137,
+      "land_px": 2139,
       "dominant": "Cs",
       "shares": {
         "Cs": 1.0
@@ -3600,11 +3600,11 @@
       "state_key": "STATE_TOBARO",
       "worksheet_name": "Tobaro",
       "name": "Tobaro",
-      "land_px": 2240,
+      "land_px": 2238,
       "dominant": "Cs",
       "shares": {
-        "Cs": 0.646,
-        "Cfb": 0.3496,
+        "Cs": 0.6457,
+        "Cfb": 0.3499,
         "Df": 0.0045
       }
     },
@@ -3612,7 +3612,7 @@
       "state_key": "STATE_TORGOVANN",
       "worksheet_name": "Torgovann",
       "name": "Torgovann",
-      "land_px": 1520,
+      "land_px": 1467,
       "dominant": "Df",
       "shares": {
         "Df": 1.0
@@ -3684,11 +3684,11 @@
       "state_key": "STATE_TROLLHEIM_MOUNTAINS",
       "worksheet_name": "Trollheim Mountains",
       "name": "Trollheim Mountains",
-      "land_px": 3011,
+      "land_px": 3008,
       "dominant": "EF",
       "shares": {
-        "ET": 0.3341,
-        "EF": 0.6659
+        "ET": 0.3334,
+        "EF": 0.6666
       }
     },
     {
@@ -4143,7 +4143,7 @@
       "state_key": "STATE_ZORN_DUM",
       "worksheet_name": "Zorn Dum",
       "name": "Zorn Dum",
-      "land_px": 4386,
+      "land_px": 4385,
       "dominant": "Dc",
       "shares": {
         "Dc": 0.9932,
@@ -4154,11 +4154,12 @@
       "state_key": "STATE_ZORN_UZKUL",
       "worksheet_name": "Zorn Uzkul",
       "name": "Zorn Uzkul",
-      "land_px": 1056,
+      "land_px": 2050,
       "dominant": "Dc",
       "shares": {
-        "Dc": 0.9536,
-        "ET": 0.0464
+        "Dc": 0.7039,
+        "ET": 0.2956,
+        "EF": 0.0005
       }
     }
   ]

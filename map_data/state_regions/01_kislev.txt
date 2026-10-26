@@ -49,7 +49,7 @@ STATE_WESTERN_OBLAST = {
 STATE_ERENGRAD = {
     id = 330
     subsistence_building = "building_subsistence_farm"
-    provinces = { x002015 x138891 x2A9DEE x4812CB x4FF783 x58C8A8 x670CE0 x755118 x7E223D x83E41F x8696BE x8C6675 x8E7B76 x95379A xA37BD2 xBA912F xC8D567 xD7199F xDFEAC4 xEE2EFC xF70021 }
+    provinces = { x002015 x138891 x2A9DEE x4812CB x4FF783 x58C8A8 x670CE0 x755118 x7E223D x83E41F x8696BE x8C6675 x8E7B76 x95379A xA37BD2 xBA912F xC457C3 xC8D567 xD7199F xDFEAC4 xEE2EFC xF70021 }
     city = x7E223D
     farm = xBA912F
     mine = xC8D567
@@ -213,7 +213,7 @@ STATE_THE_DOBRYRION = {
 STATE_THE_TAIGA = {
     id = 342
     subsistence_building = "building_subsistence_farm"
-    provinces = { x026368 x10A7A0 x27BCFD x3ED25A x4D1692 x55E7B7 x642BEF x64C98D x7AC42B x7B414C xA09AE1 xAE0081 xAEDF19 xBC36E4 xC5F476 xDD09D3 }
+    provinces = { x026368 x10A7A0 x27BCFD x3ED25A x4D1692 x55E7B7 x642BEF x7AC42B x7B414C xA09AE1 xAE0081 xAEDF19 xC5F476 xDD09D3 }
     city = x026368
     farm = xA09AE1
     mine = xDD09D3
@@ -300,10 +300,52 @@ STATE_SEPUKZY = {
         undiscovered_amount = 13
     }
 }
+STATE_GOROMADNY_HOLD = {
+    id = 346
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x096E5B x4F7A62 x7DA51C xA2FEB1 xD1296B }
+    impassable = { x4F7A62 xA2FEB1 }
+    city = x096E5B
+    farm = x7DA51C
+    mine = xD1296B
+    wood = x096E5B
+    arable_land = 31
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 5
+        building_fishing_wharf = 1
+        building_iron_mine = 6
+        building_lead_mine = 1
+        building_logging_camp = 11
+        building_sulfur_mine = 1
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 1
+    }
+}
+STATE_FLESHWARREN = {
+    id = 347
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x3DD818 x909077 x9FA09F xAC3A4F }
+    impassable = { x3DD818 }
+    city = xAC3A4F
+    farm = x9FA09F
+    mine = x909077
+    wood = xAC3A4F
+    arable_land = 9
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 2
+        building_fishing_wharf = 1
+        building_iron_mine = 2
+        building_logging_camp = 3
+    }
+}
 STATE_STUREN_RIDGE = {
     id = 354
     subsistence_building = "building_subsistence_farm"
-    provinces = { x200697 x2A414A x5C7589 x6546AE x98E47B xB8CAFD xBE3E10 xC64345 xD4877D xE397A5 xEC68CA xFAAD02 }
+    provinces = { x200697 x2A414A x5C7589 x62121B x6546AE x98E47B xB8CAFD xBE3E10 xC64345 xD4877D xE397A5 xEC68CA xFAAD02 }
     city = x200697
     farm = xEC68CA
     mine = x98E47B
@@ -324,10 +366,49 @@ STATE_STUREN_RIDGE = {
     }
     naval_exit_id = 3017
 }
+STATE_HELL_PIT_DEPTHS = {
+    id = 377
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x04E7B5 xA80278 xB6B5FC xDC0F91 xEA53C9 }
+    impassable = { xB6B5FC xEA53C9 }
+    city = xA80278
+    farm = xDC0F91
+    mine = xA80278
+    wood = xA80278
+    arable_land = 10
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 2
+        building_fishing_wharf = 1
+        building_iron_mine = 2
+        building_logging_camp = 4
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 1
+    }
+}
+STATE_HELL_PIT = {
+    id = 379
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xAAD594 xC382D1 xC4FA34 }
+    impassable = { xC382D1 }
+    city = xAAD594
+    farm = xC4FA34
+    mine = xAAD594
+    wood = xC4FA34
+    arable_land = 8
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 1
+        building_iron_mine = 1
+        building_logging_camp = 3
+    }
+}
 STATE_FORT_STRAGHOV = {
     id = 380
     subsistence_building = "building_subsistence_farm"
-    provinces = { x037E27 x1EBD86 x371BF4 x4E3151 x5557EE x570276 x5E2913 x7A95D9 x7C5C0B xAFF9D8 xB72075 xC70F35 xCDCB59 xDE2492 xE95987 }
+    provinces = { x004994 x037E27 x1EBD86 x371BF4 x4E3151 x5557EE x570276 x5E2913 x7A95D9 x7C5C0B xAFF9D8 xB72075 xC70F35 xCDCB59 xDE2492 xE95987 }
     city = xB72075
     farm = xDE2492
     mine = x5557EE
@@ -347,6 +428,30 @@ STATE_FORT_STRAGHOV = {
         undiscovered_amount = 11
     }
     naval_exit_id = 3017
+}
+STATE_HIGH_PASS = {
+    id = 534
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0D985D x358414 x3C11E6 x51DE32 x69CD54 x7880D8 x8F9635 x9DDA6D xB02357 xB4A0FB xD9FA90 }
+    impassable = { x358414 x69CD54 xB02357 xB4A0FB xD9FA90 }
+    city = x3C11E6
+    farm = x7880D8
+    mine = x51DE32
+    wood = x3C11E6
+    arable_land = 48
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 8
+        building_fishing_wharf = 2
+        building_iron_mine = 9
+        building_lead_mine = 1
+        building_logging_camp = 18
+        building_sulfur_mine = 1
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 2
+    }
 }
 STATE_IRINASGRAD = {
     id = 536
@@ -375,7 +480,7 @@ STATE_IRINASGRAD = {
 STATE_CHAMON_DHAREK = {
     id = 545
     subsistence_building = "building_subsistence_farm"
-    provinces = { x006EE4 x06DC39 x4FE4DB x5A6088 x624540 x7FBA1D x96CF7A xA8C093 xADE4D7 xCA6D47 xD33E6C xE182A4 }
+    provinces = { x006EE4 x06DC39 x4FE4DB x5A6088 x624540 x7FBA1D x96CF7A x9E810D xA8C093 xADE4D7 xCA6D47 xD33E6C xE182A4 }
     city = x5A6088
     farm = x06DC39
     mine = x624540
@@ -399,7 +504,7 @@ STATE_CHAMON_DHAREK = {
 STATE_CASTLE_ALEXANDRONOV = {
     id = 546
     subsistence_building = "building_subsistence_farm"
-    provinces = { x2298B9 x2F16BF x563686 x846140 xA9BAD5 xAB03E6 xC0D032 xCF146A xDD58A2 xE629C7 xE88D97 }
+    provinces = { x2298B9 x26204A x2F16BF x563686 x846140 xA9BAD5 xAB03E6 xC0D032 xCF146A xDD58A2 xE629C7 xE88D97 }
     city = xDD58A2
     farm = xC0D032
     mine = xCF146A

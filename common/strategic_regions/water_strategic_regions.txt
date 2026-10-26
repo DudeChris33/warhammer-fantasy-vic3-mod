@@ -582,6 +582,10 @@ region_sea_of_fear_09 = {
 	states = { STATE_SEA_OF_FEAR_09 }
 }
 
+region_sea_of_fear_10 = {
+	states = { STATE_SEA_OF_FEAR_10 }
+}
+
 region_sea_of_feuds = {
 	states = { STATE_SEA_OF_FEUDS }
 }

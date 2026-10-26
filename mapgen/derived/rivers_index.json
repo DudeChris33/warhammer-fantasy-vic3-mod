@@ -41,7 +41,7 @@
       "width": 3,
       "name": "river_0003",
       "state_keys": [
-        "STATE_FOREST_OF_KNIVES",
+        "STATE_BAY_OF_BLADES",
         "STATE_MONOLITH_OF_INGVAR",
         "STATE_NAGLFARI_COAST"
       ]
@@ -1204,8 +1204,8 @@
       "width": 3,
       "name": "river_0103",
       "state_keys": [
-        "STATE_BLIGHTED_MARSHES",
         "STATE_BREGANALLE",
+        "STATE_EASTERN_IRRANAS",
         "STATE_EAST_BILBALI",
         "STATE_WESTERN_IRRANAS"
       ]
@@ -1335,7 +1335,6 @@
       "state_keys": [
         "STATE_APUCCINI_MOUNTAINS",
         "STATE_DARK_MAIDEN_PASS",
-        "STATE_LAND_664",
         "STATE_VEREZZI"
       ]
     },
@@ -1356,7 +1355,6 @@
       "width": 4,
       "name": "river_0116",
       "state_keys": [
-        "STATE_LAND_664",
         "STATE_MIDDLE_TILEA"
       ]
     },
@@ -1368,7 +1366,7 @@
       "name": "river_0117",
       "state_keys": [
         "STATE_AVELORN",
-        "STATE_EASTERN_ANNULII_MOUNTAINS"
+        "STATE_CLOTHIQUE"
       ]
     },
     {
@@ -1533,7 +1531,7 @@
       "name": "river_0131",
       "state_keys": [
         "STATE_CENTRAL_BADLANDS",
-        "STATE_DRAGON_CRAG",
+        "STATE_CROOKED_MOUNTS",
         "STATE_EASTERN_BADLANDS",
         "STATE_MOUNT_BLOODHORN",
         "STATE_NORTH_BADLAND_HILLS",
@@ -1808,9 +1806,9 @@
       "state_keys": [
         "STATE_AMBER_SKULL",
         "STATE_CLIFFS_OF_DAWN",
+        "STATE_CURSED_WAY",
         "STATE_HORN_OF_ARABY",
-        "STATE_HOUSE_OF_EVERLASTING_LIFE",
-        "STATE_LAND_666"
+        "STATE_HOUSE_OF_EVERLASTING_LIFE"
       ]
     },
     {

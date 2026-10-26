@@ -1,10 +1,10 @@
 ﻿STATE_LAND_179 = {
     id = 179
     subsistence_building = "building_subsistence_farm"
-    provinces = { x8713DF xF7209E }
-    city = x8713DF
-    farm = xF7209E
-    mine = x8713DF
+    provinces = { x0A14FB x185933 x2DCDAE x2F6E90 x54C825 x6BDD82 x7A21BA x8713DF x913717 xA84C74 xB690AC xCDA609 xDBEA41 xF2FF9E xF7209E }
+    city = xB690AC
+    farm = x0A14FB
+    mine = x7A21BA
     wood = xF7209E
     port = x8713DF
     arable_land = 137
@@ -30,37 +30,36 @@
 STATE_PLACEHOLDER = {
     id = 364
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0189A3 x2FB45D x7A6787 xA89241 xC51AB1 xDF8E20 xE0E506 }
-    city = xA89241
-    farm = x0189A3
-    mine = x7A6787
-    wood = xE0E506
+    provinces = { x934316 xC51AB1 xE0E506 }
+    city = x934316
+    farm = xC51AB1
+    mine = xE0E506
+    wood = x934316
     port = xC51AB1
-    arable_land = 28619
+    arable_land = 19536
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 3844
-        building_fishing_wharf = 907
-        building_gold_mine = 53
-        building_iron_mine = 2912
-        building_lead_mine = 1164
-        building_logging_camp = 3630
-        building_sulfur_mine = 1517
-        building_whaling_station = 120
+        building_coal_mine = 2824
+        building_fishing_wharf = 597
+        building_gold_mine = 24
+        building_iron_mine = 1923
+        building_lead_mine = 716
+        building_logging_camp = 2166
+        building_sulfur_mine = 932
+        building_whaling_station = 63
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 253
+        undiscovered_amount = 175
     }
     resource = {
         type = "building_oil_rig"
-        undiscovered_amount = 2763
+        undiscovered_amount = 1389
     }
     resource = {
         type = "building_rubber_plantation"
-        discovered_amount = 162
-        undiscovered_amount = 464
+        undiscovered_amount = 297
     }
     naval_exit_id = 3077
 }
