@@ -61,9 +61,9 @@ ZND = {
 	country_type = unrecognized
 	tier = kingdom
 	cultures = { nehekharan }
-	# LORE FLAG: the tag's only state; no hub carries Zandri (canonically the western port at
-	# the mouth of the Mortis), so the state stands in for the seat.
-	capital = STATE_SHANIDAAR # Zandri
+	# LORE FLAG: the tag's only state is the Great Mortis Delta (#9038); no hub carries Zandri
+	# (canonically the western port at the mouth of the Mortis), so the delta state stands in for the seat.
+	capital = STATE_GREAT_MORTIS_DELTA # Zandri
 }
 
 ################ NUM — Numas ################

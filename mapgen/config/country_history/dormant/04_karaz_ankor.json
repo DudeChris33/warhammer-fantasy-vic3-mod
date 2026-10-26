@@ -49,6 +49,16 @@
     "why": "A hold is a hereditary kingdom of clan Thanes with guild masters, standing regiments, guild-controlled trade and industry, insular borders and gunpowder-plus-steam engineering (tier 3)"
   },
   "tags": {
+    "DRZ": {
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); the orc occupier at Black Crag is a separate tag. Exiled claimant clan."
+    },
+    "EKR": {
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
+    },
     "GUN": {
       "profile": "exiled_hold",
       "confidence": "medium",
@@ -59,6 +69,21 @@
       "note": "Baseline unchanged; source thin."
     },
     "KUN": {
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
+    },
+    "KVN": {
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined and flooded (registry); occupier is a separate tag. Exiled claimant clan."
+    },
+    "SLV": {
+      "profile": "exiled_hold",
+      "confidence": "medium",
+      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
+    },
+    "VLG": {
       "profile": "exiled_hold",
       "confidence": "medium",
       "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."

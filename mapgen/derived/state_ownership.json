@@ -255,7 +255,7 @@
     4353,
     1029
    ],
-   "owner": "KVN",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_BLACK_MOUNTAINS": {
@@ -1319,7 +1319,7 @@
     3945,
     1578
    ],
-   "owner": "unowned",
+   "owner": "ZND",
    "scope": "drawn"
   },
   "STATE_GREY_HAG_MOUNTAIN": {
@@ -1436,7 +1436,7 @@
     4637,
     574
    ],
-   "owner": "VLG",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_HOCHLAND": {
@@ -2533,7 +2533,7 @@
     4139,
     1368
    ],
-   "owner": "EKR",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_MOUNT_GUNBAD": {
@@ -2551,7 +2551,7 @@
     4582,
     1061
    ],
-   "owner": "SLV",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_MOUSILLON": {
@@ -3147,7 +3147,7 @@
     4736,
     1716
    ],
-   "owner": "ZND",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_SHATTERED_TEETH": {
@@ -3633,7 +3633,7 @@
     4484,
     1203
    ],
-   "owner": "DRZ",
+   "owner": "RFG",
    "scope": "drawn"
   },
   "STATE_TIRANOC": {

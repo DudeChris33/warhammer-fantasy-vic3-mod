@@ -28,7 +28,8 @@
 # each is occupied by greenskins or Skaven at game start — they are releasable "reclaim" realms.
 # Their occupiers are separate tags (the greenskin ones in 06_badlands). Tiers set 2026-09-04
 # (Chris): DRZ is grand_principality, the other six ruined holds are principality — the earlier
-# city_state tier (rump claimant, not a functioning hold) was dropped.
+# city_state tier (rump claimant, not a functioning hold) was dropped. None of the ruined holds (nor KAG)
+# owns land at the start (#9038, Chris 2026-10-25); only the 13 standing holds and KEP do.
 
 ################ KAZ — Karaz Ankor; the Everlasting Realm reunited ################
 # Formable only: carries ALL FOUR dwarf cultures — the reunion of the whole Dawi people, not of
@@ -214,7 +215,7 @@ DRZ = {
 	tier = grand_principality
 	cultures = { dawi_ancestral }
 	# Canon seat Karak Drazh, the Black Crag (the state's city hub), held by RFG at start. DRZ
-	# itself owns only STATE_THUNDER_PEAKS (hub Karak Krum); Chris denied that fallback. LORE FLAG.
+	# itself owns nothing at the start (#9038: STATE_THUNDER_PEAKS, hub Karak Krum, went to RFG). LORE FLAG.
 	capital = STATE_WEST_DEATH_PASS # Black Crag (Karak Drazh), held by RFG at start
 }
 
@@ -292,7 +293,7 @@ VMP = {
 }
 
 ################ LHX — Lahmian Exiles; STATE_NEW_LAHMIA ################
-# Vampires of the Lahmian bloodline cast out of Lahmia, holding on in the Black Mountains. A new
+# Vampires of the Lahmian bloodline cast out of Lahmia, holding on in the World's Edge Mountains around the Silver Pinnacle, near Karak Ungor. A new
 # start tag (Chris, 2026-10-03), distinct from LAH (the city itself); the registry freezes both.
 # Culture lahmian_vampire (cross-file ref to common/cultures/vampire.txt). unrecognized like VSY/VMP.
 # Colour is the painted-ownership legend colour (state_ownership_legend.json), not the culture colour,

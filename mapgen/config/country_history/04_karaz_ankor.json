@@ -73,16 +73,6 @@
         }
       }
     },
-    "DRZ": {
-      "profile": "exiled_hold",
-      "confidence": "medium",
-      "note": "Ruined (registry); the orc occupier at Black Crag is a separate tag. Exiled claimant clan."
-    },
-    "EKR": {
-      "profile": "exiled_hold",
-      "confidence": "medium",
-      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
-    },
     "KAD": {
       "confidence": "high",
       "laws": {
@@ -136,11 +126,6 @@
       "confidence": "low",
       "note": "Dwarf hold; baseline unchanged."
     },
-    "KVN": {
-      "profile": "exiled_hold",
-      "confidence": "medium",
-      "note": "Ruined and flooded (registry); occupier is a separate tag. Exiled claimant clan."
-    },
     "KZF": {
       "confidence": "low",
       "note": "Dwarf hold; baseline unchanged."
@@ -167,16 +152,6 @@
           "why": "The Sisterhood is the court's ruling nobility and the raised dead its garrison; the name \"Dead of the Silver Pinnacle\" is invented."
         }
       }
-    },
-    "SLV": {
-      "profile": "exiled_hold",
-      "confidence": "medium",
-      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
-    },
-    "VLG": {
-      "profile": "exiled_hold",
-      "confidence": "medium",
-      "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
     },
     "VMP": {
       "profile": "undead_host",
