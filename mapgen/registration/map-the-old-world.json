@@ -1,5 +1,5 @@
 {
-  "source": "old_world_terrain.jpg",
+  "source": "old_world_1.jpg",
   "role": "old_world_state_boundaries",
   "projection": "control_point_warp",
   "precedence": 70,
