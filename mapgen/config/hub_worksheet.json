@@ -810,7 +810,7 @@
   {"state": "Blizzard Peaks", "hub": "mine", "name": "Glowpit", "anchor": [4536, 1091], "source": "canon: cr_oldworld_campaign/glowpit (TWW3 Old World mod region table)"},
   {"state": "Blizzard Peaks", "hub": "wood", "name": "The High Place", "anchor": [4523, 1137], "source": "canon: cr_oldworld_campaign/the_high_place (TWW3 Old World mod region table)", "note": "wood: eyeballed, no forest data layer; TWW3 landmark name used for this hub (a landmark, not a settlement)"},
   {"state": "Broken Teeth", "hub": "city", "name": "Split Tusk", "anchor": [4637, 1458], "source": "canon: cr_oldworld_campaign/split_tusk (TWW3 Old World mod region table)"},
-  {"state": "Broken Teeth", "hub": "port", "name": "Gumrot Jetty", "anchor": [4650, 1535], "source": "invented", "note": "greenskin coinage (greenskin-held state)"},
+  {"state": "Broken Teeth", "hub": "port", "name": "Gumrot Jetty", "anchor": [4615, 1517], "source": "invented", "note": "greenskin coinage (greenskin-held state)"},
   {"state": "Broken Teeth", "hub": "farm", "name": "Fractured Fang", "anchor": [4677, 1498], "source": "canon: cr_oldworld_campaign/fractured_fang (TWW3 Old World mod region table)"},
   {"state": "Broken Teeth", "hub": "mine", "name": "Chipped Tooth", "anchor": [4660, 1476], "source": "canon: cr_oldworld_campaign/chipped_tooth (TWW3 Old World mod region table)"},
   {"state": "Broken Teeth", "hub": "wood", "name": "Cracked Molar", "anchor": [4628, 1493], "source": "canon: cr_oldworld_campaign/cracked_molar (TWW3 Old World mod region table)", "note": "wood: eyeballed, no forest data layer"},
