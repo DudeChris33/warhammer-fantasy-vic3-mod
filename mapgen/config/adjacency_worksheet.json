@@ -9,8 +9,8 @@
         960,
         921
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -21,8 +21,8 @@
         988,
         912
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -141,7 +141,7 @@
         5140,
         1665
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Dragon Isles"
     },
     {
@@ -177,8 +177,8 @@
         2591,
         2011
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -321,7 +321,7 @@
         876,
         741
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -333,7 +333,7 @@
         833,
         736
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -345,7 +345,7 @@
         908,
         695
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -420,8 +420,8 @@
         5159,
         1158
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "River Ruin"
     },
     {
       "a": [
@@ -468,7 +468,7 @@
         1015,
         956
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -516,7 +516,7 @@
         4049,
         914
       ],
-      "type": "",
+      "type": "sea",
       "comment": "North Grey Mountains to Axe Bite Pass"
     },
     {
@@ -564,8 +564,8 @@
         3799,
         1228
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -603,8 +603,8 @@
         2455,
         483
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -615,8 +615,8 @@
         2410,
         459
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -639,7 +639,7 @@
         4158,
         1060
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Fort Soll"
     },
     {
@@ -651,7 +651,7 @@
         1085,
         1109
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -711,8 +711,8 @@
         2603,
         2043
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -747,8 +747,8 @@
         983,
         1184
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -771,7 +771,7 @@
         2461,
         607
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Naggaroth"
     },
     {
@@ -783,8 +783,8 @@
         2728,
         1483
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Ulthuan"
     },
     {
       "a": [
@@ -795,7 +795,7 @@
         1088,
         1621
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -819,7 +819,7 @@
         1151,
         1527
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -831,7 +831,7 @@
         1166,
         1552
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -891,7 +891,7 @@
         1271,
         1694
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -1011,7 +1011,7 @@
         4012,
         846
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Drakwald Forest"
     },
     {
@@ -1198,8 +1198,8 @@
         939,
         791
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1210,8 +1210,8 @@
         903,
         879
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1222,8 +1222,8 @@
         854,
         820
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1234,8 +1234,8 @@
         987,
         832
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1246,8 +1246,8 @@
         928,
         1260
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1270,7 +1270,7 @@
         1172,
         1566
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -1282,8 +1282,8 @@
         5146,
         1239
       ],
-      "type": "",
-      "comment": "River Ruin"
+      "type": "canal_ruin_m",
+      "comment": "Middle Ruin"
     },
     {
       "a": [
@@ -1294,8 +1294,8 @@
         5014,
         901
       ],
-      "type": "",
-      "comment": "River Ruin"
+      "type": "canal_ruin_u",
+      "comment": "Upper Ruin"
     },
     {
       "a": [
@@ -1366,7 +1366,7 @@
         1104,
         1160
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -1402,8 +1402,8 @@
         4281,
         787
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Upper Talabec River"
     },
     {
       "a": [
@@ -1438,8 +1438,8 @@
         3795,
         1249
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -1450,8 +1450,8 @@
         3802,
         1216
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -1462,8 +1462,8 @@
         3817,
         1242
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -1546,8 +1546,8 @@
         1699,
         2451
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_turtle_2",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1558,8 +1558,8 @@
         1679,
         2104
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_turtle_1",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1693,8 +1693,8 @@
         2448,
         435
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -1705,7 +1705,7 @@
         1106,
         1440
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -1717,8 +1717,8 @@
         2403,
         246
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -1765,8 +1765,8 @@
         937,
         953
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1777,8 +1777,8 @@
         951,
         870
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1789,7 +1789,7 @@
         1021,
         1100
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -1801,7 +1801,7 @@
         1011,
         1060
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -1813,7 +1813,7 @@
         996,
         1099
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -1825,8 +1825,8 @@
         910,
         1087
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1837,8 +1837,8 @@
         912,
         1028
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1984,7 +1984,7 @@
         1125,
         1562
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2164,8 +2164,8 @@
         3973,
         1624
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Great Mortis Delta"
     },
     {
       "a": [
@@ -2242,7 +2242,7 @@
         2432,
         577
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Naggaroth"
     },
     {
@@ -2350,7 +2350,7 @@
         1065,
         1521
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2362,7 +2362,7 @@
         1131,
         1526
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2374,7 +2374,7 @@
         1059,
         1075
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2386,7 +2386,7 @@
         1037,
         1044
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2398,7 +2398,7 @@
         1091,
         952
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2458,7 +2458,7 @@
         1071,
         1150
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2494,7 +2494,7 @@
         2845,
         1348
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Ulthuan"
     },
     {
@@ -2506,7 +2506,7 @@
         2844,
         1289
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Ulthuan"
     },
     {
@@ -2566,8 +2566,8 @@
         2373,
         2032
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -2578,8 +2578,8 @@
         2340,
         2021
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -2590,8 +2590,8 @@
         859,
         1214
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -2614,8 +2614,8 @@
         4141,
         1040
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Fort Soll"
     },
     {
       "a": [
@@ -2626,8 +2626,8 @@
         3791,
         1249
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "West Estalian Isles"
     },
     {
       "a": [
@@ -2638,8 +2638,8 @@
         3783,
         1264
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "West Estalian Isles"
     },
     {
       "a": [
@@ -2650,7 +2650,7 @@
         1052,
         930
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2662,7 +2662,7 @@
         990,
         906
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2674,7 +2674,7 @@
         1038,
         1007
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2686,7 +2686,7 @@
         1044,
         889
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2698,8 +2698,8 @@
         977,
         1285
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -2710,8 +2710,8 @@
         1015,
         1248
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -2758,8 +2758,8 @@
         3799,
         1268
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "East Estalian Isles"
     },
     {
       "a": [
@@ -2770,8 +2770,8 @@
         978,
         1016
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -2782,8 +2782,8 @@
         1004,
         1009
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -2794,7 +2794,7 @@
         1222,
         1626
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2818,7 +2818,7 @@
         1093,
         1439
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2830,7 +2830,7 @@
         1068,
         1493
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2842,7 +2842,7 @@
         1039,
         1487
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2866,8 +2866,8 @@
         4269,
         461
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Sea of Blades"
     },
     {
       "a": [
@@ -2878,7 +2878,7 @@
         1222,
         1707
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2890,7 +2890,7 @@
         1365,
         1689
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2938,8 +2938,8 @@
         952,
         1030
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -2974,7 +2974,7 @@
         1005,
         1268
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -2986,7 +2986,7 @@
         1071,
         1327
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3082,7 +3082,7 @@
         996,
         1102
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3094,7 +3094,7 @@
         1018,
         1157
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3106,8 +3106,8 @@
         2584,
         2100
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -3118,7 +3118,7 @@
         1104,
         1421
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3130,7 +3130,7 @@
         4351,
         753
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Upper Talabec River"
     },
     {
@@ -3142,8 +3142,8 @@
         1443,
         1730
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3166,8 +3166,8 @@
         2322,
         3
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -3214,7 +3214,7 @@
         5107,
         1511
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Dread Rock"
     },
     {
@@ -3238,7 +3238,7 @@
         1125,
         1471
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3262,8 +3262,8 @@
         3826,
         1216
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Estalian Isles"
     },
     {
       "a": [
@@ -3274,8 +3274,8 @@
         1001,
         1021
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3334,8 +3334,8 @@
         947,
         1153
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3358,8 +3358,8 @@
         930,
         1093
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3370,7 +3370,7 @@
         7084,
         2375
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Elithis"
     },
     {
@@ -3418,7 +3418,7 @@
         3988,
         787
       ],
-      "type": "",
+      "type": "canal_marienburg",
       "comment": "Marienburg"
     },
     {
@@ -3430,8 +3430,8 @@
         953,
         974
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3442,8 +3442,8 @@
         960,
         997
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3454,7 +3454,7 @@
         1195,
         1605
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3493,7 +3493,7 @@
         2785,
         1380
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Ulthuan"
     },
     {
@@ -3541,8 +3541,8 @@
         950,
         996
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3649,7 +3649,7 @@
         1046,
         1210
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3661,7 +3661,7 @@
         1119,
         1235
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3697,8 +3697,8 @@
         867,
         1167
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3709,7 +3709,7 @@
         6897,
         2806
       ],
-      "type": "",
+      "type": "canal_elithis_w",
       "comment": "Elithis"
     },
     {
@@ -3721,7 +3721,7 @@
         993,
         1118
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3781,8 +3781,8 @@
         902,
         1108
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -3877,8 +3877,8 @@
         5185,
         2388
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -3937,7 +3937,7 @@
         1045,
         1286
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3949,7 +3949,7 @@
         1031,
         1171
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -3976,8 +3976,8 @@
         5244,
         2394
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Stars Archipelago"
     },
     {
       "a": [
@@ -3988,7 +3988,7 @@
         5285,
         2320
       ],
-      "type": "",
+      "type": "canal_stars_sun",
       "comment": "Meeting of Sun and Stars"
     },
     {
@@ -4024,8 +4024,8 @@
         1970,
         2748
       ],
-      "type": "",
-      "comment": ""
+      "type": "canal_turtle_4",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4048,8 +4048,8 @@
         4088,
         1143
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "River of Echoes"
     },
     {
       "a": [
@@ -4060,7 +4060,7 @@
         1158,
         1483
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -4072,7 +4072,7 @@
         1054,
         1346
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -4108,8 +4108,8 @@
         2325,
         2061
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -4120,7 +4120,7 @@
         1033,
         1494
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -4132,7 +4132,7 @@
         1119,
         1477
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -4180,8 +4180,8 @@
         991,
         351
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -4204,8 +4204,8 @@
         2515,
         490
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -4216,7 +4216,7 @@
         2718,
         1464
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Ulthuan"
     },
     {
@@ -4228,8 +4228,8 @@
         2141,
         190
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -4264,8 +4264,8 @@
         2375,
         756
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -4300,8 +4300,8 @@
         888,
         1018
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -4336,7 +4336,7 @@
         1056,
         1005
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -4348,7 +4348,7 @@
         1069,
         905
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
@@ -4360,8 +4360,8 @@
         867,
         791
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -4372,7 +4372,7 @@
         1040,
         887
       ],
-      "type": "",
+      "type": "sea",
       "comment": "Maelstrom"
     },
     {
