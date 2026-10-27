@@ -148,8 +148,10 @@ cult_of_nagash = {
 }
 
 ################ Elven gods — all five share heritage_elven_pantheon (Asrai and Asur) — board item #8475 ################
-# Replaces the Asrai's joint Isha-and-Kurnous faith (#6379). Kingdom ties, not wired: Asuryan (Eataine), Isha (Avelorn),
-# Vaul (Caledor), Hoeth (Saphery); Kurnous is the hunters' god. Wood Elves default to Isha.
+# Replaced the Asrai's joint Isha-and-Kurnous faith (#6379); the joint faith is back as cult_of_isha_and_kurnous
+# (2026-10-26). Kingdom ties, not wired: Asuryan (Eataine), Isha (Avelorn), Vaul (Caledor), Hoeth (Saphery);
+# Kurnous is the hunters' god. Wood Elves default to cult_of_isha_and_kurnous; cult_of_isha and cult_of_kurnous
+# are currently unused.
 
 cult_of_asuryan = {
 	icon = "gfx/interface/icons/religion_icons/theravada.dds"
@@ -183,6 +185,15 @@ cult_of_kurnous = {
 	icon = "gfx/interface/icons/religion_icons/animist.dds"
 	heritage = heritage_elven_pantheon
 	color = { 0.52 0.40 0.16 }
+	taboos = { }
+}
+
+# The Asrai faith: Isha and Kurnous revered together as the divine couple (Ariel and Orion co-rule Athel Loren).
+# Wood Elf default. Loremaster ruling 2026-10-26: separate Isha/Kurnous confessions have no canon basis.
+cult_of_isha_and_kurnous = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_elven_pantheon
+	color = { 0.60 0.82 0.40 }
 	taboos = { }
 }
 

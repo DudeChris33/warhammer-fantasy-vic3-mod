@@ -35,7 +35,7 @@
 
 wood_elf = {
 	color= rgb{ 168 228 96 }
-	religion = cult_of_isha
+	religion = cult_of_isha_and_kurnous
 	heritage = heritage_asrai
 	language = sphere_fan_eltharin
 
