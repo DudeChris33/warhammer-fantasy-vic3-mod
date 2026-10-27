@@ -811,7 +811,16 @@
    "archetype": "bretonnian_cursed"
   },
   "MZN": {
-   "archetype": "chaos_dwarf"
+   "archetype": "chaos_dwarf",
+   "set": {
+    "workforce_share": 0.35
+   },
+   "justify": {
+    "workforce_share": {
+     "source": "derived: the 2026-10-26 ownership repaint gave two of MZN's states to DLO, so its barracks and construction land on fewer, smaller pop bases",
+     "why": "Keeps Market District under the 40% job cap (19,450 jobs vs 47,684 pops at the 0.4 share)."
+    }
+   }
   },
   "NGY": {
    "archetype": "asur_kingdom"

@@ -282,7 +282,7 @@
     4581,
     988
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_BLACK_WATER": {
@@ -579,33 +579,7 @@
     2915,
     1138
    ],
-   "owners": [
-    {
-     "owner": "CHR",
-     "provinces": [
-      "x4F8837"
-     ]
-    },
-    {
-     "owner": "COT",
-     "provinces": [
-      "x038BFC",
-      "x094009",
-      "x3FFAEE",
-      "x54FB4A",
-      "x7DE143",
-      "x81DCF3",
-      "x8AAE18",
-      "x90212B",
-      "x962D09",
-      "xA2533E",
-      "xAA741D",
-      "xBE4BE5",
-      "xDE3267",
-      "xEC769F"
-     ]
-    }
-   ],
+   "owner": "COT",
    "scope": "drawn"
   },
   "STATE_COURONNE": {
@@ -794,7 +768,7 @@
     4584,
     889
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_DRAKEN_RIDGE": {
@@ -2271,7 +2245,7 @@
     4063,
     661
    ],
-   "owner": "NLD",
+   "owner": "LAU",
    "scope": "drawn"
   },
   "STATE_LOST_KHYPNIA": {
@@ -2594,7 +2568,7 @@
     3773,
     846
    ],
-   "owner": "MOU",
+   "owner": "LYO",
    "scope": "drawn"
   },
   "STATE_MYRMIDIA_S_COAST": {
@@ -2738,7 +2712,7 @@
     4665,
     844
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_NORTH_GREY_MOUNTAINS": {
@@ -2756,7 +2730,7 @@
     4942,
     1025
    ],
-   "owner": "MZN",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_NORTH_ISLE": {
@@ -2896,7 +2870,7 @@
     4650,
     1300
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_OLD_STRYGOS": {
@@ -2905,58 +2879,7 @@
     4217,
     1432
    ],
-   "owners": [
-    {
-     "owner": "BSB",
-     "provinces": [
-      "x05DD24",
-      "x1CF281",
-      "x271F5F",
-      "x7EBB08",
-      "x8B3DE1",
-      "xE0838F",
-      "xEF246B"
-     ]
-    },
-    {
-     "owner": "STR",
-     "provinces": [
-      "x07595A",
-      "x093B36",
-      "x0EAE49",
-      "x177F6E",
-      "x25C3A6",
-      "x3407DE",
-      "x3CD903",
-      "x49083A",
-      "x4B1D3B",
-      "x53EE60",
-      "x582637",
-      "x596173",
-      "x623298",
-      "x6A097B",
-      "x6B03BD",
-      "x7076D0",
-      "x7947F5",
-      "x7E01C0",
-      "x878C2D",
-      "x8C45F8",
-      "x95D065",
-      "x9EA18A",
-      "xA2D961",
-      "xA6786D",
-      "xA772AF",
-      "xB5B6E7",
-      "xC3FB1F",
-      "xCCCC44",
-      "xD23F57",
-      "xDB107C",
-      "xEE0E7F",
-      "xF225D9",
-      "xF798EC"
-     ]
-    }
-   ],
+   "owner": "STR",
    "scope": "drawn"
   },
   "STATE_ORTEGETA": {
@@ -3235,7 +3158,7 @@
     4712,
     693
    ],
-   "owner": "unowned",
+   "owner": "UZK",
    "scope": "drawn"
   },
   "STATE_SKYHAVEN_PLATEAU": {
@@ -3442,7 +3365,7 @@
     4710,
     803
    ],
-   "owner": "MZN",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_STINKLANDS": {
@@ -4002,7 +3925,7 @@
     4594,
     1106
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_WEST_DEATH_PASS": {
@@ -4101,33 +4024,7 @@
     4058,
     686
    ],
-   "owners": [
-    {
-     "owner": "LAU",
-     "provinces": [
-      "x56B3A7",
-      "x6DC904",
-      "x9565EC",
-      "xAA37F6",
-      "xB8F94F"
-     ]
-    },
-    {
-     "owner": "NLD",
-     "provinces": [
-      "x1A44B5",
-      "x2888ED",
-      "x48E7BD",
-      "x628F3C",
-      "x64F7DF",
-      "x7175E5",
-      "x7C0D3C",
-      "xC6C066",
-      "xDDD5C3",
-      "xE71F36"
-     ]
-    }
-   ],
+   "owner": "NLD",
    "scope": "drawn"
   },
   "STATE_WEST_OSTERMARK": {
@@ -4219,7 +4116,7 @@
     4643,
     1214
    ],
-   "owner": "unowned",
+   "owner": "DLO",
    "scope": "drawn"
   },
   "STATE_WOLF_LANDS": {
