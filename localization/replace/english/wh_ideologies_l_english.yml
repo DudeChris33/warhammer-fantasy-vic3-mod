@@ -1,0 +1,21 @@
+﻿l_english:
+ # Ideology renames (#9197). Ids stay (has_ideology = ideology:ideology_fascist is used across common/); only display text changes.
+ # Overrides of vanilla keys in laws_l_english.yml, content_204_l_english.yml, parties_l_english.yml, political_movements_l_english.yml and content_104_l_english.yml.
+ # The *_movement names and the state_pop_support_movement_fascist_* modifier names inherit through $...$ and need no key here.
+ # Kept as-is by Chris's verdict (2026-10-29): Communist, Anarchist, Social Democrat, Vanguardist, Luddite, Utilitarian; fasces icons stay.
+ ideology_fascist:0 "Ironist"
+ ideology_fascist_desc:0 "#lore This leader holds that order is iron and obedience a virtue, and that the realm must be hammered into a single will.#!"
+ ideology_fascist_movement_desc:0 "#lore This movement seeks a realm hammered into a single will, ruled by iron order and unquestioning obedience.#!"
+ ideology_integralist:0 "Dogmatist"
+ ideology_integralist_desc:0 "#lore This leader supports rule by unbending doctrine and the priesthood that keeps it, and rejects conventional conservatism and parliamentarianism.#!"
+ ideology_integralist_movement_desc:0 "#lore This movement desires a return to rule by unbending doctrine and the priesthood that keeps it, and rejects conventional conservatism and parliamentarianism.#!"
+ party_fascist:0 "Iron Party"
+ from_fascism:0 "Ironist Leader Ideology"
+ from_weak_conservatives_fascism:0 "Stronger Ironist Interest Group"
+ movement_fascist:0 "Ironist Movement"
+ movement_fascist_short:0 "Ironist"
+ fascists_in_government_tt:0 "#tooltippable;tooltip:[GetPlayer.GetTooltipTag],fascist_ideologies_list_tt Ironist#! [Concept('concept_politician', '$concept_politicians$')] are currently [concept_in_government]"
+ fascists_out_of_government_tt:0 "#tooltippable;tooltip:[GetPlayer.GetTooltipTag],fascist_ideologies_list_tt Ironist#! [Concept('concept_politician', '$concept_politicians$')] are currently #bold not#! [concept_in_government]"
+ fascist_ideologies_list_tt:0 "#bold Ironist#! [Concept('concept_ideology','$concept_ideologies$')] include:\n• [GetIdeology('ideology_fascist').GetName]\n• [GetIdeology('ideology_integralist').GetName]"
+ fascist_characters_return_to_normal_tt:0 "The rate at which #tooltippable;tooltip:[GetPlayer.GetTooltipTag],fascist_ideologies_list_tt Ironist#! characters appear will return to normal"
+ fascist_characters_stays_increased_tt:0 "The rate at which #tooltippable;tooltip:[GetPlayer.GetTooltipTag],fascist_ideologies_list_tt Ironist#! characters appear will remain elevated"
