@@ -685,6 +685,15 @@ def impassable_mask(rgba: np.ndarray, land: np.ndarray) -> np.ndarray:
 #: passable gaps of at most this many px are noise.
 PAINT_NOISE_PX = 4
 
+#: Snap thresholds (Chris, 2026-10-29, #9833), measured on the real paint against the
+#: state-region boundary the cut follows: paint-edge distances spike at 4 px (2,055 vs
+#: 1,621 at 3 and 1,438 at 5) and 50 passable strips of width <= 4 px can stand as a
+#: province (91 at 5, 185 at 8). Paint ending within ``SNAP_EXTEND_PX`` of a boundary is
+#: extended to it; an overshoot of at most ``SNAP_TRIM_PX`` is trimmed when its tract is
+#: clearly deeper (> 2x) elsewhere. :func:`subdivide_ex` takes them as kwargs (0 = off).
+SNAP_EXTEND_PX = 4
+SNAP_TRIM_PX = 4
+
 
 def clean_paint(imp: np.ndarray, land: np.ndarray, wrap_x: bool = True,
                 max_px: int = PAINT_NOISE_PX) -> np.ndarray:
@@ -710,6 +719,153 @@ def clean_paint(imp: np.ndarray, land: np.ndarray, wrap_x: bool = True,
     return imp | fill
 
 
+def _boundary_mask(reg: np.ndarray, land: np.ndarray, wrap_x: bool) -> np.ndarray:
+    """Land pixels with a 4-neighbour land pixel of a different ``reg`` label — the
+    state-region boundary the cut follows (x seam compared when ``wrap_x``)."""
+    b = np.zeros(land.shape, dtype=bool)
+    pairs = [(slice(None), slice(0, -1), slice(None), slice(1, None)),
+             (slice(0, -1), slice(None), slice(1, None), slice(None))]
+    for ya, xa, yb, xb in pairs:
+        d = land[ya, xa] & land[yb, xb] & (reg[ya, xa] != reg[yb, xb])
+        b[ya, xa] |= d
+        b[yb, xb] |= d
+    if wrap_x:
+        d = land[:, -1] & land[:, 0] & (reg[:, -1] != reg[:, 0])
+        b[:, -1] |= d
+        b[:, 0] |= d
+    return b
+
+
+def _snap_region_paint(m_c, imp_c, d_B_c, B_c, tract_c, deep_tracts, extend_px, trim_px,
+                       wrap_x, keep_pts, keep_mask_c, min_area):
+    """Snap one region's impassable paint to its state-region boundary (#9833).
+
+    All arrays are the region's row band (full width); nothing is mutated. Returns
+    ``(paint, stats)``: ``paint`` is the region's own paint (``m_c & imp_c`` after the
+    snap). Neighbour-region paint is ignored throughout (the cut is per region).
+
+    *Trim* first: an in-region paint piece whose deepest pixel is at most ``trim_px``
+    from the boundary is erased when its tract reaches > ``2 * trim_px`` elsewhere
+    (``deep_tracts``), so an even straddle is left alone. *Extend* next: passable
+    pixels within ``extend_px`` of the paint and on the way to the region's own edge
+    (the edge pixel itself, when its nearest paint is off the edge, or strictly between
+    the paint and the edge) become paint,
+    per 8-connected candidate component, refusing a component that touches two
+    different in-region paint pieces, holds a hub anchor / canon city / city-blob
+    pixel, or touches no paint; and the whole extension is dropped if it would raise
+    the region's count of passable components of at least ``min_area`` px.
+    """
+    stats = {"extended": 0, "trimmed": 0, "pieces_trimmed": 0, "two_piece": 0,
+             "protected": 0, "isolated": 0, "reverted": 0, "warn": []}
+    paint = m_c & imp_c
+    if trim_px > 0 and paint.any():
+        pcomp = cells.renumber(np.where(paint, cells.components(paint.astype(np.int32), wrap_x), 0))
+        n = int(pcomp.max())
+        if n:
+            ids = np.arange(1, n + 1)
+            depth = np.asarray(ndimage.maximum(d_B_c, pcomp, ids))
+            tid = np.asarray(ndimage.maximum(tract_c, pcomp, ids)).astype(np.int64)
+            drop = np.zeros(n + 1, dtype=bool)
+            for k in range(n):
+                if depth[k] <= trim_px and deep_tracts[tid[k]]:
+                    drop[k + 1] = True
+                elif trim_px < depth[k] <= 2 * trim_px and ((tract_c == tid[k]) & ~m_c).any():
+                    ys, xs = np.nonzero(pcomp == k + 1)
+                    stats["warn"].append((int(xs.mean()), int(ys.mean())))
+            if drop.any():
+                gone = drop[pcomp]
+                stats["trimmed"] = int(gone.sum())
+                stats["pieces_trimmed"] = int(drop.sum())
+                paint = paint & ~gone
+    if extend_px > 0 and paint.any():
+        bown = B_c & m_c
+        if bown.any():
+            pad = min(extend_px + 2, m_c.shape[1]) if wrap_x else 0
+            P, Bo, M = (cells._pad_x(a, pad) for a in (paint, bown, m_c))
+            d_p, ip = ndimage.distance_transform_edt(~P, return_indices=True)
+            d_b, ib = ndimage.distance_transform_edt(~Bo, return_indices=True)
+            cand = M & ~P & (d_p <= extend_px) & (d_p + d_b <= extend_px + 1)
+            gy, gx = np.nonzero(cand)
+            dot = ((ip[0][gy, gx] - gy) * (ib[0][gy, gx] - gy)
+                   + (ip[1][gy, gx] - gx) * (ib[1][gy, gx] - gx))
+            # A boundary pixel qualifies only when its nearest paint is itself off the
+            # boundary: paint already touching the border does not creep along it.
+            off_edge = cells._pad_x(d_B_c, pad)[ip[0][gy, gx], ip[1][gy, gx]] >= 1
+            ok = (Bo[gy, gx] & off_edge) | (dot < 0)
+            cand[:] = False
+            cand[gy[ok], gx[ok]] = True
+            cand = cells._unpad_x(cand, pad) if wrap_x else cand
+            if cand.any():
+                pieces = cells.renumber(np.where(paint, cells.components(paint.astype(np.int32), wrap_x), 0))
+                lab, nl = ndimage.label(cand, structure=np.ones((3, 3), dtype=bool))
+                if wrap_x and nl:
+                    # join candidate components 8-connected across the x seam
+                    parent = list(range(nl + 1))
+
+                    def _find(v):
+                        while parent[v] != v:
+                            parent[v] = parent[parent[v]]
+                            v = parent[v]
+                        return v
+
+                    for dy in (-1, 0, 1):
+                        ya = slice(max(0, -dy), cand.shape[0] - max(0, dy))
+                        yb = slice(max(0, dy), cand.shape[0] - max(0, -dy))
+                        la, lb = lab[ya, 0], lab[yb, -1]
+                        for u, v in zip(la[(la > 0) & (lb > 0)].tolist(), lb[(la > 0) & (lb > 0)].tolist()):
+                            ru, rv = _find(u), _find(v)
+                            if ru != rv:
+                                parent[max(ru, rv)] = min(ru, rv)
+                    remap = np.array([_find(v) for v in range(nl + 1)], dtype=np.int64)
+                    lab = remap[lab]
+                # paint pieces 8-adjacent to each candidate component (wrap-aware)
+                touch = set()
+                for dy in (-1, 0, 1):
+                    for dx in (-1, 0, 1):
+                        if dy == 0 and dx == 0:
+                            continue
+                        sh = np.roll(pieces, dx, axis=1) if wrap_x else np.pad(pieces, ((0, 0), (1, 1)))[:, 1 - dx:pieces.shape[1] + 1 - dx]
+                        if dy:
+                            z = np.zeros_like(sh)
+                            if dy > 0:
+                                z[dy:] = sh[:-dy]
+                            else:
+                                z[:dy] = sh[-dy:]
+                            sh = z
+                        hit = (lab > 0) & (sh > 0)
+                        touch.update(zip(lab[hit].tolist(), sh[hit].tolist()))
+                pieces_of: dict[int, set[int]] = {}
+                for cid_, pid_ in touch:
+                    pieces_of.setdefault(cid_, set()).add(pid_)
+                held_ids = set()
+                if keep_mask_c is not None:
+                    held_ids.update(np.unique(lab[keep_mask_c & (lab > 0)]).tolist())
+                held_ids.update(int(lab[y, x]) for x, y in keep_pts
+                                if 0 <= y < lab.shape[0] and 0 <= x < lab.shape[1] and lab[y, x] > 0)
+                accepted = np.zeros(cand.shape, dtype=bool)
+                for cid in np.unique(lab[lab > 0]).tolist():
+                    n_touch = len(pieces_of.get(cid, ()))
+                    if n_touch == 0:
+                        stats["isolated"] += 1
+                    elif n_touch > 1:
+                        stats["two_piece"] += 1
+                    elif cid in held_ids:
+                        stats["protected"] += 1
+                    else:
+                        accepted |= lab == cid
+                if accepted.any():
+                    def _big(mask):
+                        c = cells.components(mask.astype(np.int32), wrap_x)
+                        sz = np.bincount(c[mask].ravel())
+                        return int((sz >= min_area).sum())
+                    if _big(m_c & ~(paint | accepted)) > _big(m_c & ~paint):
+                        stats["reverted"] += 1
+                    else:
+                        stats["extended"] = int(accepted.sum())
+                        paint = paint | accepted
+    return paint, stats
+
+
 def subdivide(*args, **kwargs) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """:func:`subdivide_ex` without the impassable table — the original 4-tuple
     ``(labels, is_placeholder, reg_of, is_archipelago)``. With no ``impassable``
@@ -729,7 +885,8 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                  city_line: np.ndarray | None = None,
                  city_seeds: list[tuple[int, int]] | None = None,
                  city_seed_sep: int = 16,
-                 city_seed_cap: bool = False
+                 city_seed_cap: bool = False,
+                 snap_extend_px: int = 0, snap_trim_px: int = 0
                  ) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     """Cut the drawn regions into provinces to reach ``target`` land provinces.
 
@@ -782,6 +939,12 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
     comes into scope; Chris, 2026-09-24); ``strict_placeholder_paint=True`` (the
     generator's ``--strict-placeholder-paint``) makes it a hard error instead. Every
     other unsupported case stays a hard error.
+
+    ``snap_extend_px`` / ``snap_trim_px`` (#9833) snap a painted region's paint to its
+    state-region boundary inside the cut (see :func:`_snap_region_paint`; the source
+    layer is untouched): paint ending within ``snap_extend_px`` of the boundary is
+    extended to it, and an overshoot of at most ``snap_trim_px`` is trimmed when its
+    tract is clearly deeper elsewhere. 0 (the default) is off and byte-identical.
 
     Returns ``(labels, is_placeholder, reg_of, is_archipelago, is_impassable)``
     (:func:`subdivide` drops the last):
@@ -884,6 +1047,27 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 f"impassable paint on {len(problems)} region(s) that cannot take it:\n  "
                 + "\n  ".join(problems))
 
+    # Paint snap (#9833): region boundary, distance to it, and which paint tracts
+    # reach clearly deeper than the trim threshold. Dormant unless a threshold is set.
+    snap_on = bool(imp_regions) and (snap_extend_px > 0 or snap_trim_px > 0)
+    snap_tot = {"extended": 0, "trimmed": 0, "pieces_trimmed": 0, "two_piece": 0,
+                "protected": 0, "isolated": 0, "reverted": 0}
+    snap_regions = 0
+    snap_warn: list[tuple[int, int]] = []
+    if snap_on:
+        B_all = _boundary_mask(reg, land, wrap_x)
+        spad = min(max(2 * snap_trim_px, snap_extend_px) + 2, reg.shape[1]) if wrap_x else 0
+        d_B_all = ndimage.distance_transform_edt(~cells._pad_x(B_all, spad))
+        d_B_all = (cells._unpad_x(d_B_all, spad) if wrap_x else d_B_all).astype(np.float32)
+        kmask = np.zeros(n + 1, dtype=bool)
+        if keep:
+            kmask[list(keep)] = True
+        tract_all = cells.components((imp & ~kmask[reg]).astype(np.int32), wrap_x)
+        deep_ids = np.unique(tract_all[imp & ~kmask[reg] & (d_B_all > 2 * snap_trim_px)])
+        deep_tracts = np.zeros(int(tract_all.max()) + 1, dtype=bool)
+        deep_tracts[deep_ids] = True
+        blob_pts = np.concatenate(city_blobs) if city_blobs else np.zeros((0, 2), dtype=np.int64)
+
     # Largest-remainder seat allocation across the drawn regions: one each, then
     # the remaining seats by area share, so the totals add up exactly.
     seats = np.ones(len(drawn_ids), dtype=int)
@@ -968,6 +1152,22 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             anchors_c = [(ax, ay - y0) for ax, ay in (anchors or ())]
             keep_c = [(ax, ay - y0) for ax, ay in (keep_passable or ())
                       if y0 <= ay < y1] + anchors_c
+            if snap_on:
+                bl = blob_pts[(blob_pts[:, 0] >= y0) & (blob_pts[:, 0] < y1)]
+                keep_mask_c = None
+                if bl.size:
+                    keep_mask_c = np.zeros(m_c.shape, dtype=bool)
+                    keep_mask_c[bl[:, 0] - y0, bl[:, 1]] = True
+                snapped, st = _snap_region_paint(
+                    m_c, imp[y0:y1], d_B_all[y0:y1], B_all[y0:y1], tract_all[y0:y1],
+                    deep_tracts, snap_extend_px, snap_trim_px, wrap_x, keep_c, keep_mask_c,
+                    min_area)
+                if st["extended"] or st["trimmed"]:
+                    snap_regions += 1
+                for k_ in snap_tot:
+                    snap_tot[k_] += st[k_]
+                snap_warn.extend((x_, y_ + y0) for x_, y_ in st["warn"])
+                imp[y0:y1] = (imp[y0:y1] & ~m_c) | snapped
             # A state-region border can slice a paint tract into a sliver inside this
             # region: paint pieces below min_area *within the region* revert to
             # passable (the global dust rule only sees whole-canvas components).
@@ -1149,6 +1349,16 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
                 ids[j] = nxt
                 nxt += 1
             out[pm] = ids[sub[pm]]
+
+    if snap_on and log:
+        log(f"  snap: +{snap_tot['extended']} px extended, -{snap_tot['trimmed']} px trimmed in "
+            f"{snap_tot['pieces_trimmed']} piece(s), {snap_regions} region(s) changed; refused: "
+            f"two-piece {snap_tot['two_piece']}, protected {snap_tot['protected']}, "
+            f"isolated {snap_tot['isolated']}, disconnect {snap_tot['reverted']} region(s)")
+        if snap_warn:
+            log(f"  WARNING: {len(snap_warn)} overshoot piece(s) deeper than SNAP_TRIM_PX (no deeper "
+                f"than twice it) left as drawn: "
+                + ", ".join(f"({x},{y})" for x, y in snap_warn[:12]) + (" ..." if len(snap_warn) > 12 else ""))
 
     if city_blobs:
         # City blobs (#5679): one province per painted blob. Region labels used as

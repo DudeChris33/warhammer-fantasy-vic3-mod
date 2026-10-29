@@ -487,7 +487,9 @@ def main(argv: list[str] | None = None) -> int:
                 keep_passable=canon_cities or None,
                 city_blobs=city_blobs or None, city_line=mag,
                 city_seeds=city_dots or None, city_seed_sep=MIN_ANCHOR_SEP,
-                city_seed_cap=True)
+                city_seed_cap=True,
+                snap_extend_px=land_provinces.SNAP_EXTEND_PX,
+                snap_trim_px=land_provinces.SNAP_TRIM_PX)
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())

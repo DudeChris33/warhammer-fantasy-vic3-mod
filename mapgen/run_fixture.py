@@ -2422,10 +2422,10 @@ def _selfcheck_impassable_land() -> None:
     # --- #9784: an impassable SEA is no coast and no naval exit
     class _SeaAwareBitmap:               # B touches SEA_BAD and SEA_OK; C touches only SEA_BAD
         def coastal_colors(self, sea_colors):
-            touch = {B: {SEA_OK, SEA_BAD}, C: {SEA_BAD}}
+            touch = {B: {SEA_OK, SEA_BAD}, PC: {SEA_BAD}}
             return {col for col, seas in touch.items() if seas & set(sea_colors)}
 
-    C, SEA_OK, SEA_BAD = (70, 80, 90), (0, 0, 200), (0, 0, 100)
+    PC, SEA_OK, SEA_BAD = (70, 80, 90), (0, 0, 200), (0, 0, 100)
     sbmp = _SeaAwareBitmap()
     ok_sea = vm.ParsedState("STATE_OKSEA", "s.txt")
     ok_sea.id, ok_sea.provinces = 3001, [SEA_OK]
@@ -2434,7 +2434,7 @@ def _selfcheck_impassable_land() -> None:
     seas = [ok_sea, bad_sea]
     both = {SEA_OK, SEA_BAD}
     only_bad = vm.ParsedState("STATE_ONLYBAD", "t.txt")
-    only_bad.provinces, only_bad.port_declared, only_bad.naval_exit_id = [C], True, 3001
+    only_bad.provinces, only_bad.port_declared, only_bad.naval_exit_id = [PC], True, 3001
     _e = vm._check_coastal_naval_exit([only_bad], seas, sbmp, both)
     assert any("landlocked" in x for x in _e), f"port on an impassable-sea-only coast must fail, got {_e}"
     only_bad.port_declared, only_bad.naval_exit_id = False, None
@@ -2469,6 +2469,90 @@ def _selfcheck_impassable_land() -> None:
         {"key": "A", "id": 3001, "impassable": False},
         {"key": "B", "id": 3002, "impassable": False}, {"key": "B", "id": 3003, "impassable": True},
     ]) == {3002}, "a group is impassable if any member is, keyed by its min id"
+
+    # --- #9833: snap paint to a nearby state border (extend short, trim overshoot)
+    from scipy import ndimage as _ndi
+
+    def _snap(reg_, imp_, rid, wrap, keep_pts=(), ext=4, trim=4, min_a=20):
+        land_ = reg_ > 0
+        B_ = lp._boundary_mask(reg_, land_, wrap)
+        pad_ = 10 if wrap else 0
+        d_ = _ndi.distance_transform_edt(~C._pad_x(B_, pad_))
+        d_ = (C._unpad_x(d_, pad_) if wrap else d_).astype(np.float32)
+        tract_ = C.components(imp_.astype(np.int32), wrap)
+        deep_ = np.zeros(int(tract_.max()) + 1, dtype=bool)
+        deep_[np.unique(tract_[imp_ & (d_ > 2 * trim)])] = True
+        return lp._snap_region_paint(reg_ == rid, imp_, d_, B_, tract_, deep_, ext, trim, wrap,
+                                     list(keep_pts), None, min_a)
+
+    H2, W2 = 40, 60
+    reg2 = np.ones((H2, W2), dtype=np.int32)
+    reg2[:, 30:] = 2                     # boundary between col 29 (region 1) and col 30 (region 2)
+
+    def _paint(rows, cols):
+        m_ = np.zeros((H2, W2), dtype=bool)
+        m_[rows, cols] = True
+        return m_
+
+    # (a) paint ends 3 px short: the gap and the boundary pixel itself become paint
+    a = _paint(slice(5, 35), slice(10, 27))
+    got, st = _snap(reg2, a, 1, False)
+    assert got[5:35, 27:30].all() and 90 <= st["extended"] <= 130, f"3px gap not filled: {st}"
+    # the fill squares off the stroke's end caps a few px, but stays on the near side of the border
+    assert not got[:, 30:].any() and not got[:, :10].any() and not got[:2].any() and not got[38:].any(), "fill strays"
+    # (b) 6 px short is geometry, not a near miss
+    b = _paint(slice(5, 35), slice(10, 24))
+    got, st = _snap(reg2, b, 1, False)
+    assert np.array_equal(got, b) and st["extended"] == 0, "a 6px gap is left alone"
+    # (c) a lip crossing by 3 px, tract clearly deeper on the other side, is trimmed
+    c = _paint(slice(10, 15), slice(5, 33))
+    got, st = _snap(reg2, c, 2, False)
+    assert not got.any() and st["trimmed"] == 5 * 3 and st["pieces_trimmed"] == 1, f"lip kept: {st}"
+    got1, _ = _snap(reg2, c, 1, False)
+    assert np.array_equal(got1, c & (reg2 == 1)), "the deep side is not trimmed"
+    # (d) an even 5/5 straddle (a ridge on the border) is left alone on both sides
+    d = _paint(slice(10, 15), slice(25, 35))
+    for rid in (1, 2):
+        got, st = _snap(reg2, d, rid, False)
+        assert np.array_equal(got, d & (reg2 == rid)) and st["trimmed"] == 0, f"even straddle changed: {st}"
+    # (f) two in-region pieces within range of one gap are not joined (refused whole)
+    f = _paint(slice(5, 15), slice(10, 27)) | _paint(slice(18, 31), slice(10, 27))
+    got, st = _snap(reg2, f, 1, False)
+    assert np.array_equal(got, f) and st["two_piece"] >= 1 and st["extended"] == 0, f"pieces joined: {st}"
+    # (g) neighbour-region paint touching the boundary does not block the fill
+    g = _paint(slice(5, 35), slice(10, 27)) | _paint(slice(5, 35), slice(30, 40))
+    got, st = _snap(reg2, g, 1, False)
+    assert got[5:35, 27:30].all(), f"neighbour paint blocked the near miss: {st}"
+    # (h) a 1 px stroke 2 px from the border grows toward it, never inward
+    h = _paint(slice(5, 35), slice(27, 28))
+    got, st = _snap(reg2, h, 1, False)
+    assert got[5:35, 28:30].all() and not got[:, :27].any(), f"stroke thickened inward: {st}"
+    # (i) a fill that splits the region's passable land is refused
+    i_ = _paint(slice(18, 20), slice(0, 27))
+    got, st = _snap(reg2, i_, 1, False)
+    assert np.array_equal(got, i_) and st["reverted"] == 1, f"a splitting fill went through: {st}"
+    # (j) a hub anchor in the gap protects that component
+    got, st = _snap(reg2, a, 1, False, keep_pts=[(28, 10)])
+    assert np.array_equal(got, a & (reg2 == 1)) and st["protected"] >= 1, f"anchor not protected: {st}"
+    # (e) across the x seam: region 1 spans cols 77..79 and 0..19, its left edge at col 77
+    reg3 = np.full((H2, 80), 2, dtype=np.int32)
+    reg3[:, 77:] = 1
+    reg3[:, :20] = 1
+    e = np.zeros((H2, 80), dtype=bool)
+    e[5:35, 1:15] = True
+    got, st = _snap(reg3, e, 1, True)
+    assert got[5:35, 77:80].all() and got[5:35, 0].all() and st["extended"] >= 30 * 4, f"seam fill: {st}"
+    # (k) deterministic
+    assert np.array_equal(_snap(reg2, a, 1, False)[0], _snap(reg2, a, 1, False)[0]), "deterministic"
+    # in the cut: dormant by default, and on it the extended paint is one impassable province
+    reg4 = np.ones((H2, W2), dtype=np.int32)
+    reg4[:, 30:] = 2
+    land4 = np.ones((H2, W2), dtype=bool)
+    kw4 = dict(wrap_x=False, min_area=20)
+    off = lp.subdivide_ex(reg4, land4, land4, 4, impassable=a, **kw4)
+    on = lp.subdivide_ex(reg4, land4, land4, 4, impassable=a, snap_extend_px=4, snap_trim_px=4, **kw4)
+    assert not off[4][off[0][10, 28]], "snap off: the gap stays passable (today's behaviour)"
+    assert on[4][on[0][10, 28]] and on[0][10, 29] == on[0][10, 20], "snap on: the gap joins the paint"
     print("impassable land: cut/pockets/validator/stable-ids checks passed.")
 
 
