@@ -3,7 +3,7 @@
  "states": {
   "STATE_AGRILDRIN": {
    "area_px": 7976,
-   "arable_milli": 377826,
+   "arable_milli": 377673,
    "cities": 1,
    "canon_cities": [
     "Karaz-a-Karak"
@@ -11,175 +11,175 @@
   },
   "STATE_AGRIL_MIGDHAL": {
    "area_px": 3273,
-   "arable_milli": 1053014,
+   "arable_milli": 1053226,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ALD_GRUNGAZ": {
    "area_px": 1403,
-   "arable_milli": 147803,
+   "arable_milli": 147833,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_AMBER_SKULL": {
    "area_px": 2896,
-   "arable_milli": 64099,
+   "arable_milli": 64111,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ANGERRIAL": {
    "area_px": 1714,
-   "arable_milli": 186973,
+   "arable_milli": 187008,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_ANMYR": {
    "area_px": 1786,
-   "arable_milli": 752966,
+   "arable_milli": 749702,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_APUCCINI_MOUNTAINS": {
    "area_px": 5710,
-   "arable_milli": 593343,
+   "arable_milli": 593435,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_AQUILENA": {
    "area_px": 6328,
-   "arable_milli": 1674912,
+   "arable_milli": 1675220,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_AQUITAINE": {
    "area_px": 2699,
-   "arable_milli": 2597522,
+   "arable_milli": 2597722,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ARGWYLON": {
    "area_px": 880,
-   "arable_milli": 398652,
+   "arable_milli": 398210,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ARTOIS": {
    "area_px": 3029,
-   "arable_milli": 2303048,
+   "arable_milli": 2303503,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ASHEN_PLAINS": {
    "area_px": 4409,
-   "arable_milli": 1317641,
+   "arable_milli": 1317908,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ASH_RIDGE_MOUNTAINS": {
    "area_px": 9574,
-   "arable_milli": 715928,
+   "arable_milli": 716049,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_AULD_RYDING": {
    "area_px": 2247,
-   "arable_milli": 71022,
+   "arable_milli": 71034,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_AVELORN": {
    "area_px": 8019,
-   "arable_milli": 2984184,
+   "arable_milli": 2984755,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_AVERHEIM": {
    "area_px": 2767,
-   "arable_milli": 2255978,
+   "arable_milli": 2256247,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_AXE_BITE_PASS": {
    "area_px": 1617,
-   "arable_milli": 384853,
+   "arable_milli": 384910,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BADLANDS_COAST": {
    "area_px": 4395,
-   "arable_milli": 139028,
+   "arable_milli": 139053,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BASTONNE": {
    "area_px": 3249,
-   "arable_milli": 2163526,
+   "arable_milli": 2163724,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BAY_OF_BLADES": {
    "area_px": 9726,
-   "arable_milli": 1316407,
+   "arable_milli": 1316648,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_BECHAFEN": {
    "area_px": 5002,
-   "arable_milli": 1650051,
+   "arable_milli": 1650381,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BELYEROVOTA": {
    "area_px": 5198,
-   "arable_milli": 402171,
+   "arable_milli": 402231,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BJORNLING_S_GATHERING": {
    "area_px": 2211,
-   "arable_milli": 446639,
+   "arable_milli": 446722,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLACK_BLOOD_PASS": {
    "area_px": 6589,
-   "arable_milli": 502945,
+   "arable_milli": 503019,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLACK_FIRE_PASS": {
    "area_px": 771,
-   "arable_milli": 12868,
+   "arable_milli": 12806,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLACK_MOUNDS": {
    "area_px": 3722,
-   "arable_milli": 199117,
+   "arable_milli": 199132,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLACK_MOUNTAINS": {
    "area_px": 3242,
-   "arable_milli": 191467,
+   "arable_milli": 182894,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLACK_PENINSULA": {
    "area_px": 3490,
-   "arable_milli": 1736371,
+   "arable_milli": 1736709,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLACK_WASTES": {
    "area_px": 10587,
-   "arable_milli": 958203,
+   "arable_milli": 958377,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLACK_WATER": {
    "area_px": 3724,
-   "arable_milli": 153068,
+   "arable_milli": 153095,
    "cities": 1,
    "canon_cities": [
     "Zhufbar"
@@ -187,775 +187,775 @@
   },
   "STATE_BLASTED_DISTRICT": {
    "area_px": 5327,
-   "arable_milli": 1911074,
+   "arable_milli": 1911459,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLIGHTED_ISLE": {
    "area_px": 5421,
-   "arable_milli": 5311091,
+   "arable_milli": 5311672,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_BLIGHTED_MARSHES": {
    "area_px": 2592,
-   "arable_milli": 784375,
+   "arable_milli": 784528,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLIGHTWATER": {
    "area_px": 10726,
-   "arable_milli": 299635,
+   "arable_milli": 299691,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLISTERING_PEAKS": {
    "area_px": 7138,
-   "arable_milli": 304417,
+   "arable_milli": 304469,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLIZZARD_PEAKS": {
    "area_px": 7041,
-   "arable_milli": 262939,
+   "arable_milli": 262982,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BLOOD_RIVER_VALLEY": {
    "area_px": 5981,
-   "arable_milli": 2388413,
+   "arable_milli": 2388890,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BOHSENFELS": {
    "area_px": 3212,
-   "arable_milli": 1438962,
+   "arable_milli": 1439254,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BORDELEAUX": {
    "area_px": 3396,
-   "arable_milli": 3354869,
+   "arable_milli": 3354971,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BOULDERBELLIES_HOLD": {
    "area_px": 4244,
-   "arable_milli": 1479210,
+   "arable_milli": 1479509,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BREGANALLE": {
    "area_px": 2701,
-   "arable_milli": 960384,
+   "arable_milli": 960567,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BRENNUN_S_ENCAMPMENT": {
    "area_px": 7671,
-   "arable_milli": 622454,
+   "arable_milli": 622568,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BRIONNE": {
    "area_px": 2860,
-   "arable_milli": 2627499,
+   "arable_milli": 2627889,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BROKEN_TEETH": {
    "area_px": 7687,
-   "arable_milli": 530238,
+   "arable_milli": 530340,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_BURY_BONE_HILLS": {
    "area_px": 4190,
-   "arable_milli": 1010080,
+   "arable_milli": 1010284,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CANTABRIO_ROAD": {
    "area_px": 3365,
-   "arable_milli": 3091368,
+   "arable_milli": 3091662,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CARCASSONNE": {
    "area_px": 2547,
-   "arable_milli": 701612,
+   "arable_milli": 706742,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CASTLE_ALEXANDRONOV": {
    "area_px": 2766,
-   "arable_milli": 1400176,
+   "arable_milli": 1400461,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CASTLE_MOUSILLON": {
    "area_px": 1742,
-   "arable_milli": 1516957,
+   "arable_milli": 1517177,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CASTLE_SANGASSE": {
    "area_px": 1441,
-   "arable_milli": 1246438,
+   "arable_milli": 1246550,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CAUSEWAY_OF_ZHARR": {
    "area_px": 30407,
-   "arable_milli": 9141693,
+   "arable_milli": 9143517,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CEFIRO_HILLS": {
    "area_px": 4485,
-   "arable_milli": 4087743,
+   "arable_milli": 4088252,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_CENTRAL_BADLANDS": {
    "area_px": 6308,
-   "arable_milli": 899878,
+   "arable_milli": 900059,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CENTRAL_ELLYRION": {
    "area_px": 3388,
-   "arable_milli": 799560,
+   "arable_milli": 799712,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_CENTRAL_MAGRITTA": {
    "area_px": 4006,
-   "arable_milli": 2390780,
+   "arable_milli": 2391245,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CHAMON_DHAREK": {
    "area_px": 3349,
-   "arable_milli": 650097,
+   "arable_milli": 650228,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CHATEAU_LOVARRE": {
    "area_px": 229,
-   "arable_milli": 12282,
+   "arable_milli": 12284,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CHRACE": {
    "area_px": 9980,
-   "arable_milli": 1437868,
+   "arable_milli": 1438133,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_CITY_OF_KINGS": {
    "area_px": 3470,
-   "arable_milli": 122716,
+   "arable_milli": 122739,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CLAW_COAST": {
    "area_px": 4982,
-   "arable_milli": 624951,
+   "arable_milli": 625057,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CLIFFS_OF_DAWN": {
    "area_px": 10871,
-   "arable_milli": 248106,
+   "arable_milli": 248153,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CLOTHIQUE": {
    "area_px": 7981,
-   "arable_milli": 908548,
+   "arable_milli": 908706,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_COURONNE": {
    "area_px": 5407,
-   "arable_milli": 4840461,
+   "arable_milli": 4840754,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CRIPPLE_PEAK": {
    "area_px": 3834,
-   "arable_milli": 54495,
+   "arable_milli": 54505,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CROOKED_CORRIDOR": {
    "area_px": 2145,
-   "arable_milli": 668499,
+   "arable_milli": 668609,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CROOKED_MOUNTS": {
    "area_px": 5329,
-   "arable_milli": 777319,
+   "arable_milli": 777478,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_CURSED_WAY": {
    "area_px": 3329,
-   "arable_milli": 142039,
+   "arable_milli": 142066,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DAEMON_S_RUIN": {
    "area_px": 5859,
-   "arable_milli": 2007623,
+   "arable_milli": 2008027,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DARK_MAIDEN_PASS": {
    "area_px": 792,
-   "arable_milli": 51578,
+   "arable_milli": 51586,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DEATHTOLL_HOLD": {
    "area_px": 4232,
-   "arable_milli": 833521,
+   "arable_milli": 833691,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_DEATH_S_SIDE": {
    "area_px": 10097,
-   "arable_milli": 253409,
+   "arable_milli": 253452,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DELVED_HEIGHTS": {
    "area_px": 8605,
-   "arable_milli": 227415,
+   "arable_milli": 227449,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DESOLATION_OF_AZGORH": {
    "area_px": 29165,
-   "arable_milli": 5104369,
+   "arable_milli": 5105380,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DESOLATION_OF_NAGASH": {
    "area_px": 5873,
-   "arable_milli": 103036,
+   "arable_milli": 103050,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DESOLATION_OF_TETHLIS": {
    "area_px": 5614,
-   "arable_milli": 1057763,
+   "arable_milli": 1057948,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_DIRETOWN": {
    "area_px": 8383,
-   "arable_milli": 1599482,
+   "arable_milli": 1599804,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAGONBACK_MOUNTAINS": {
    "area_px": 4851,
-   "arable_milli": 833975,
+   "arable_milli": 834119,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAGONS_BREATH": {
    "area_px": 2104,
-   "arable_milli": 201260,
+   "arable_milli": 201301,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAGONS_LANDING": {
    "area_px": 8229,
-   "arable_milli": 923829,
+   "arable_milli": 924017,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAGON_BARROWS": {
    "area_px": 4955,
-   "arable_milli": 448590,
+   "arable_milli": 448676,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAGON_CRAG": {
    "area_px": 5000,
-   "arable_milli": 402416,
+   "arable_milli": 402491,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAKENHOF": {
    "area_px": 3023,
-   "arable_milli": 333069,
+   "arable_milli": 333129,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAKENMOOR": {
    "area_px": 3190,
-   "arable_milli": 118399,
+   "arable_milli": 118419,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAKEN_RIDGE": {
    "area_px": 8306,
-   "arable_milli": 367124,
+   "arable_milli": 367187,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DRAKE_ISLES": {
    "area_px": 2824,
-   "arable_milli": 351823,
+   "arable_milli": 351893,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_DRAKWALD_FOREST": {
    "area_px": 5137,
-   "arable_milli": 4957669,
+   "arable_milli": 4957802,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_DREAD_ROCK": {
    "area_px": 3905,
-   "arable_milli": 489510,
+   "arable_milli": 489604,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_DUSHYKA": {
    "area_px": 2970,
-   "arable_milli": 977364,
+   "arable_milli": 977551,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAGLE_GATE": {
    "area_px": 1986,
-   "arable_milli": 215303,
+   "arable_milli": 215341,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_EAGLE_S_PEAK": {
    "area_px": 7385,
-   "arable_milli": 756394,
+   "arable_milli": 756528,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EASTERN_BADLANDS": {
    "area_px": 4960,
-   "arable_milli": 459483,
+   "arable_milli": 459576,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EASTERN_BORDER_PRINCES": {
    "area_px": 4311,
-   "arable_milli": 1016795,
+   "arable_milli": 1016490,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EASTERN_COLONIES": {
    "area_px": 12624,
-   "arable_milli": 2612683,
+   "arable_milli": 2613197,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_EASTERN_EATAINE": {
    "area_px": 3506,
-   "arable_milli": 143418,
+   "arable_milli": 143444,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_EASTERN_IRRANAS": {
    "area_px": 3863,
-   "arable_milli": 237184,
+   "arable_milli": 237222,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_EASTERN_OBLAST": {
    "area_px": 5285,
-   "arable_milli": 3168323,
+   "arable_milli": 3168957,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_AVERLAND": {
    "area_px": 2806,
-   "arable_milli": 434216,
+   "arable_milli": 434277,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_BARRIER_IDOLS": {
    "area_px": 6040,
-   "arable_milli": 82914,
+   "arable_milli": 82930,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_BILBALI": {
    "area_px": 3222,
-   "arable_milli": 1838017,
+   "arable_milli": 1838348,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_DEATH_PASS": {
    "area_px": 5069,
-   "arable_milli": 163180,
+   "arable_milli": 163211,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_MAD_DOG_PASS": {
    "area_px": 6013,
-   "arable_milli": 421691,
+   "arable_milli": 421762,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_MAGRITTA": {
    "area_px": 4416,
-   "arable_milli": 1659587,
+   "arable_milli": 1659890,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_NORDLAND": {
    "area_px": 5632,
-   "arable_milli": 3491367,
+   "arable_milli": 3492074,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_STIRLAND": {
    "area_px": 3296,
-   "arable_milli": 2269117,
+   "arable_milli": 2269545,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_SYLVANIA": {
    "area_px": 2509,
-   "arable_milli": 358248,
+   "arable_milli": 358308,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_EAST_TALABECLAND": {
    "area_px": 3534,
-   "arable_milli": 1706516,
+   "arable_milli": 1706859,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ELDAGRIMM_GULF": {
-   "area_px": 2705,
-   "arable_milli": 1582225,
+   "area_px": 2569,
+   "arable_milli": 1466227,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ELITHISIAN_GROVE": {
    "area_px": 14489,
-   "arable_milli": 755472,
+   "arable_milli": 755615,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_ERENGRAD": {
    "area_px": 5482,
-   "arable_milli": 3182621,
+   "arable_milli": 3183267,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ESTALIAN_HIGHLANDS": {
    "area_px": 2960,
-   "arable_milli": 736765,
+   "arable_milli": 736883,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FALLOW_FIELDS": {
    "area_px": 12314,
-   "arable_milli": 238955,
+   "arable_milli": 239004,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FALLOW_MARSH": {
    "area_px": 2509,
-   "arable_milli": 268790,
+   "arable_milli": 268836,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_FALLS_DISTRICT": {
    "area_px": 2454,
-   "arable_milli": 864872,
+   "arable_milli": 865048,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FINUVAL_PLAIN": {
    "area_px": 4655,
-   "arable_milli": 1196859,
+   "arable_milli": 1197072,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_FIVE_RIVERS": {
    "area_px": 4563,
-   "arable_milli": 2239644,
+   "arable_milli": 2240095,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FJORD_COAST": {
    "area_px": 6701,
-   "arable_milli": 1667499,
+   "arable_milli": 1667820,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FLESHWARREN": {
    "area_px": 1081,
-   "arable_milli": 44202,
+   "arable_milli": 44209,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FOREST_OF_GLOOM": {
    "area_px": 1873,
-   "arable_milli": 348404,
+   "arable_milli": 347076,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FORT_STRAGHOV": {
    "area_px": 4326,
-   "arable_milli": 723913,
+   "arable_milli": 724051,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FOUNDRY_DISTRICT": {
    "area_px": 2827,
-   "arable_milli": 996398,
+   "arable_milli": 996599,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_FROZEN_COAST": {
    "area_px": 4064,
-   "arable_milli": 1127738,
+   "arable_milli": 1127937,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GAEAN_VALE": {
    "area_px": 1555,
-   "arable_milli": 720711,
+   "arable_milli": 720856,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_GASTONNE": {
    "area_px": 3344,
-   "arable_milli": 491615,
+   "arable_milli": 491246,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GATE_DISTRICT": {
    "area_px": 4598,
-   "arable_milli": 1528562,
+   "arable_milli": 1528870,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GIANTHOME_MOUNTAINS": {
    "area_px": 3559,
-   "arable_milli": 243677,
+   "arable_milli": 243716,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GIANT_STOMPING_GROUNDS": {
    "area_px": 4584,
-   "arable_milli": 934068,
+   "arable_milli": 934235,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GISOREUX": {
    "area_px": 3684,
-   "arable_milli": 2805929,
+   "arable_milli": 2806398,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GLADE_OF_ETERNAL_MIDNIGHT": {
-   "area_px": 608,
-   "arable_milli": 352871,
+   "area_px": 764,
+   "arable_milli": 446721,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GLADE_OF_ETERNAL_MOONLIGHT": {
    "area_px": 868,
-   "arable_milli": 455908,
+   "arable_milli": 456000,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GLOOMWRACK_COAST": {
    "area_px": 4700,
-   "arable_milli": 1504674,
+   "arable_milli": 1504965,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GNOBLAR_HILLS": {
    "area_px": 2536,
-   "arable_milli": 452505,
+   "arable_milli": 452597,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GORGOTHDRINAZ": {
    "area_px": 2464,
-   "arable_milli": 617761,
+   "arable_milli": 617884,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GOROMADNY_COAST": {
    "area_px": 4581,
-   "arable_milli": 1815991,
+   "arable_milli": 1816323,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GOROMADNY_HOLD": {
    "area_px": 3766,
-   "arable_milli": 149617,
+   "arable_milli": 149641,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GRAVE_OF_CUILEUX": {
    "area_px": 5391,
-   "arable_milli": 3564502,
+   "arable_milli": 3565208,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GREAT_MORTIS_DELTA": {
    "area_px": 2389,
-   "arable_milli": 81227,
+   "arable_milli": 81244,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_GREY_HAG_MOUNTAIN": {
    "area_px": 2641,
-   "arable_milli": 417541,
+   "arable_milli": 417616,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GREY_LADY_PASS": {
    "area_px": 285,
-   "arable_milli": 69505,
+   "arable_milli": 69515,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GRIFFON_GATE": {
    "area_px": 2553,
-   "arable_milli": 426012,
+   "arable_milli": 426090,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_GROM_RIDGE": {
    "area_px": 6461,
-   "arable_milli": 10969,
+   "arable_milli": 10971,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_GRYPHON_WOOD": {
    "area_px": 1294,
-   "arable_milli": 758006,
+   "arable_milli": 758156,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HALLS_OF_EQUOS": {
    "area_px": 360,
-   "arable_milli": 111561,
+   "arable_milli": 108192,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HEART_OF_ZHARRDUK": {
    "area_px": 3831,
-   "arable_milli": 1834757,
+   "arable_milli": 1835127,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HELL_PIT": {
    "area_px": 868,
-   "arable_milli": 57347,
+   "arable_milli": 57357,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HELL_PIT_DEPTHS": {
    "area_px": 1465,
-   "arable_milli": 85716,
+   "arable_milli": 85729,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_HELMGART": {
    "area_px": 332,
-   "arable_milli": 160006,
+   "arable_milli": 160031,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HELSPIRE_COAST": {
    "area_px": 3115,
-   "arable_milli": 914494,
+   "arable_milli": 914675,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HELSPIRE_MOUNTAINS": {
    "area_px": 3881,
-   "arable_milli": 194698,
+   "arable_milli": 194728,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HIGH_PASS": {
    "area_px": 5686,
-   "arable_milli": 181508,
+   "arable_milli": 181534,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HOCHLAND": {
    "area_px": 3415,
-   "arable_milli": 1473011,
+   "arable_milli": 1473294,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HORN_OF_ARABY": {
    "area_px": 1260433,
-   "arable_milli": 135152791,
+   "arable_milli": 135179645,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_HOUSE_OF_EVERLASTING_LIFE": {
    "area_px": 2465,
-   "arable_milli": 81046,
+   "arable_milli": 81061,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HOWLING_DISTRICT": {
    "area_px": 3874,
-   "arable_milli": 1649978,
+   "arable_milli": 1650313,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_HOWLING_RIVER_VALLEY": {
    "area_px": 4273,
-   "arable_milli": 1281728,
+   "arable_milli": 1281972,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_INNER_CALEDOR": {
    "area_px": 2612,
-   "arable_milli": 224096,
+   "arable_milli": 224136,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_INNER_SEA_CHAIN": {
    "area_px": 1571,
-   "arable_milli": 488219,
+   "arable_milli": 488320,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_IRINASGRAD": {
    "area_px": 1861,
-   "arable_milli": 1273152,
+   "arable_milli": 1273404,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_IRONCRAFT_MOUNTAINS": {
    "area_px": 5956,
-   "arable_milli": 454955,
+   "arable_milli": 455037,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_IRON_PEAKS": {
    "area_px": 3963,
-   "arable_milli": 120515,
+   "arable_milli": 120534,
    "cities": 1,
    "canon_cities": [
     "Karak Azul"
@@ -963,37 +963,37 @@
   },
   "STATE_ISLES_OF_DOOM": {
    "area_px": 822,
-   "arable_milli": 58091,
+   "arable_milli": 58103,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_ISLES_OF_DUSK": {
    "area_px": 3128,
-   "arable_milli": 1840017,
+   "arable_milli": 1840392,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_ISLE_OF_AESTUNIAE": {
    "area_px": 2140,
-   "arable_milli": 985167,
+   "arable_milli": 985366,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_ISLE_OF_DAWN": {
    "area_px": 4177,
-   "arable_milli": 2552679,
+   "arable_milli": 2553182,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_IVORY_ROAD": {
    "area_px": 2905,
-   "arable_milli": 738787,
+   "arable_milli": 738937,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KARAGRIL": {
    "area_px": 2153,
-   "arable_milli": 31074,
+   "arable_milli": 31079,
    "cities": 1,
    "canon_cities": []
   },
@@ -1005,13 +1005,13 @@
   },
   "STATE_KARAG_ZIFLIN": {
    "area_px": 2523,
-   "arable_milli": 225539,
+   "arable_milli": 225579,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KARAK_EIGHT_PEAKS": {
    "area_px": 2127,
-   "arable_milli": 60589,
+   "arable_milli": 60598,
    "cities": 1,
    "canon_cities": [
     "Karak Eight Peaks"
@@ -1019,829 +1019,823 @@
   },
   "STATE_KHARNOS_FOREST": {
    "area_px": 3159,
-   "arable_milli": 979386,
+   "arable_milli": 978927,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KHEMRIAN_DESERT": {
    "area_px": 5246,
-   "arable_milli": 79310,
+   "arable_milli": 79324,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KING_S_GLADE": {
    "area_px": 1431,
-   "arable_milli": 636526,
+   "arable_milli": 618336,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KISLEV_FOOTHILLS": {
    "area_px": 4849,
-   "arable_milli": 1396333,
+   "arable_milli": 1396605,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KRAKA_DRAK": {
    "area_px": 4005,
-   "arable_milli": 817862,
+   "arable_milli": 818006,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KRAKEN_COAST": {
    "area_px": 5518,
-   "arable_milli": 1598797,
+   "arable_milli": 1599106,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_KREUTZHOFEN": {
-   "area_px": 2281,
-   "arable_milli": 474740,
+   "area_px": 2781,
+   "arable_milli": 601261,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_LAHMIA": {
    "area_px": 2204,
-   "arable_milli": 111754,
+   "arable_milli": 111776,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_LAND_006": {
    "area_px": 13082,
-   "arable_milli": 11955621,
+   "arable_milli": 11957216,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_009": {
    "area_px": 18698,
-   "arable_milli": 7075479,
+   "arable_milli": 7076905,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_010": {
    "area_px": 15131,
-   "arable_milli": 1398074,
+   "arable_milli": 1398358,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_012": {
    "area_px": 3735,
-   "arable_milli": 821297,
+   "arable_milli": 821462,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_017": {
    "area_px": 1390,
-   "arable_milli": 210841,
+   "arable_milli": 210884,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_018": {
    "area_px": 8126,
-   "arable_milli": 1932331,
+   "arable_milli": 1932724,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_020": {
    "area_px": 15343,
-   "arable_milli": 5919144,
+   "arable_milli": 5920341,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_021": {
    "area_px": 2936,
-   "arable_milli": 1619991,
+   "arable_milli": 1620320,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_025": {
    "area_px": 7496,
-   "arable_milli": 5335644,
+   "arable_milli": 5336717,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_026": {
    "area_px": 739,
-   "arable_milli": 529267,
+   "arable_milli": 529375,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_027": {
    "area_px": 3229,
-   "arable_milli": 2316478,
+   "arable_milli": 2316951,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_030": {
    "area_px": 1291,
-   "arable_milli": 177568,
+   "arable_milli": 177602,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_031": {
    "area_px": 42928,
-   "arable_milli": 5520106,
+   "arable_milli": 5521221,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_032": {
    "area_px": 3478,
-   "arable_milli": 476358,
+   "arable_milli": 476453,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_033": {
    "area_px": 987,
-   "arable_milli": 143890,
+   "arable_milli": 143921,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_034": {
    "area_px": 14367,
-   "arable_milli": 1831715,
+   "arable_milli": 1832079,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_078": {
    "area_px": 563,
-   "arable_milli": 545041,
+   "arable_milli": 545151,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_079": {
    "area_px": 26315,
-   "arable_milli": 16225089,
+   "arable_milli": 16228316,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_126": {
    "area_px": 1204,
-   "arable_milli": 59506,
+   "arable_milli": 59516,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_127": {
    "area_px": 1221,
-   "arable_milli": 593844,
+   "arable_milli": 593965,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_145": {
    "area_px": 2131,
-   "arable_milli": 773954,
+   "arable_milli": 774110,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_146": {
    "area_px": 668,
-   "arable_milli": 323412,
+   "arable_milli": 323478,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_147": {
    "area_px": 2012,
-   "arable_milli": 455215,
+   "arable_milli": 455307,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_148": {
    "area_px": 4060,
-   "arable_milli": 1959668,
+   "arable_milli": 1960067,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_151": {
    "area_px": 6600,
-   "arable_milli": 1099020,
+   "arable_milli": 1099230,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_155": {
    "area_px": 3666,
-   "arable_milli": 188830,
+   "arable_milli": 188869,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_156": {
    "area_px": 9775,
-   "arable_milli": 542598,
+   "arable_milli": 542711,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_157": {
    "area_px": 461,
-   "arable_milli": 28060,
+   "arable_milli": 28067,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_158": {
    "area_px": 3889,
-   "arable_milli": 291132,
+   "arable_milli": 291193,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_159": {
    "area_px": 16870,
-   "arable_milli": 5916180,
+   "arable_milli": 5917358,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_160": {
    "area_px": 2568,
-   "arable_milli": 359931,
+   "arable_milli": 360005,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_162": {
    "area_px": 874,
-   "arable_milli": 367608,
+   "arable_milli": 367682,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_166": {
    "area_px": 8634,
-   "arable_milli": 1475850,
+   "arable_milli": 1476136,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_169": {
    "area_px": 126012,
-   "arable_milli": 70015399,
+   "arable_milli": 70029346,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_179": {
    "area_px": 4770,
-   "arable_milli": 488436,
+   "arable_milli": 488533,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_182": {
    "area_px": 5400,
-   "arable_milli": 223131,
+   "arable_milli": 223176,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_362": {
    "area_px": 432,
-   "arable_milli": 64264,
+   "arable_milli": 64277,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_365": {
    "area_px": 8094,
-   "arable_milli": 3090940,
+   "arable_milli": 3091548,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_366": {
    "area_px": 4080,
-   "arable_milli": 2742173,
+   "arable_milli": 2742721,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_367": {
    "area_px": 2949,
-   "arable_milli": 2652293,
+   "arable_milli": 2652829,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_368": {
    "area_px": 110626,
-   "arable_milli": 7983358,
+   "arable_milli": 7984934,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_369": {
    "area_px": 5768,
-   "arable_milli": 946783,
+   "arable_milli": 946970,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_385": {
    "area_px": 3287,
-   "arable_milli": 1557554,
+   "arable_milli": 1557871,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_397": {
    "area_px": 9559,
-   "arable_milli": 5527011,
+   "arable_milli": 5528135,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_405": {
    "area_px": 11136,
-   "arable_milli": 9418645,
+   "arable_milli": 9420550,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_415": {
    "area_px": 6381,
-   "arable_milli": 816431,
+   "arable_milli": 816597,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_416": {
    "area_px": 11632,
-   "arable_milli": 660728,
+   "arable_milli": 660860,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_421": {
    "area_px": 2083,
-   "arable_milli": 666207,
+   "arable_milli": 666343,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_427": {
    "area_px": 7145,
-   "arable_milli": 7018256,
+   "arable_milli": 7018932,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_430": {
    "area_px": 254,
-   "arable_milli": 142550,
+   "arable_milli": 142578,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_443": {
    "area_px": 1057,
-   "arable_milli": 464905,
+   "arable_milli": 465000,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_454": {
    "area_px": 229,
-   "arable_milli": 104130,
+   "arable_milli": 104151,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_458": {
    "area_px": 366,
-   "arable_milli": 193143,
+   "arable_milli": 193183,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_464": {
    "area_px": 4701,
-   "arable_milli": 2181387,
+   "arable_milli": 2181829,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_673": {
    "area_px": 16046,
-   "arable_milli": 945599,
+   "arable_milli": 945777,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_674": {
    "area_px": 2140,
-   "arable_milli": 489329,
+   "arable_milli": 489428,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_675": {
    "area_px": 12853,
-   "arable_milli": 3119587,
+   "arable_milli": 3120185,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_676": {
    "area_px": 11926,
-   "arable_milli": 2576981,
+   "arable_milli": 2577483,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_677": {
    "area_px": 7589,
-   "arable_milli": 2847069,
+   "arable_milli": 2847636,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_678": {
    "area_px": 6578,
-   "arable_milli": 1155604,
+   "arable_milli": 1155835,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAND_679": {
    "area_px": 2678061,
-   "arable_milli": 473653251,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_681": {
-   "area_px": 396,
-   "arable_milli": 190156,
+   "arable_milli": 473746617,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LAURELORN_FOREST": {
    "area_px": 1487,
-   "arable_milli": 1277619,
+   "arable_milli": 1277858,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LOST_KHYPNIA": {
    "area_px": 3619,
-   "arable_milli": 1342410,
+   "arable_milli": 1342422,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_LOTHERN_EAST": {
    "area_px": 1630,
-   "arable_milli": 96795,
+   "arable_milli": 96813,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LOTHERN_WEST": {
    "area_px": 2510,
-   "arable_milli": 124791,
+   "arable_milli": 124813,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_LYONESSE": {
    "area_px": 3186,
-   "arable_milli": 3135663,
+   "arable_milli": 3135828,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_LYONESSE_HILLS": {
    "area_px": 2307,
-   "arable_milli": 2273268,
+   "arable_milli": 2273435,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_L_ANGUILLE": {
    "area_px": 4387,
-   "arable_milli": 4215443,
+   "arable_milli": 4215789,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MANUFACTORY_DISTRICT": {
    "area_px": 2094,
-   "arable_milli": 777349,
+   "arable_milli": 777505,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MARCHES_OF_COURONNE": {
    "area_px": 3622,
-   "arable_milli": 2143812,
+   "arable_milli": 2144125,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MARG_BEH_MARD": {
    "area_px": 2570,
-   "arable_milli": 43283,
+   "arable_milli": 43290,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MARIENBURG": {
    "area_px": 2728,
-   "arable_milli": 1479961,
+   "arable_milli": 1480163,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MARKET_DISTRICT": {
    "area_px": 2427,
-   "arable_milli": 698479,
+   "arable_milli": 698620,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MARSHES_OF_MADNESS": {
    "area_px": 7008,
-   "arable_milli": 174578,
+   "arable_milli": 174613,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MASSIF_ORCAL": {
    "area_px": 5245,
-   "arable_milli": 996832,
+   "arable_milli": 996982,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MAZHOROD": {
    "area_px": 2739,
-   "arable_milli": 1653457,
+   "arable_milli": 1653782,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MERMEDUS_COAST": {
    "area_px": 3599,
-   "arable_milli": 1487757,
+   "arable_milli": 1488037,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MIDDENHEIM": {
    "area_px": 4293,
-   "arable_milli": 2018941,
+   "arable_milli": 2019345,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MIDDENLAND_PROPER": {
    "area_px": 4267,
-   "arable_milli": 2786479,
+   "arable_milli": 2786848,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MIDDLE_BILBALI_01": {
    "area_px": 3450,
-   "arable_milli": 1813916,
+   "arable_milli": 1814254,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_MIDDLE_MOUNTAINS": {
    "area_px": 2778,
-   "arable_milli": 1125789,
+   "arable_milli": 1126011,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MIDDLE_TILEA": {
    "area_px": 1646,
-   "arable_milli": 596555,
+   "arable_milli": 596656,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MONOLITH_OF_INGVAR": {
    "area_px": 7631,
-   "arable_milli": 511807,
+   "arable_milli": 511896,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MONTE_CASTELLO": {
    "area_px": 2673,
-   "arable_milli": 1125286,
+   "arable_milli": 1125506,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MONTFORT": {
    "area_px": 1205,
-   "arable_milli": 914325,
+   "arable_milli": 914446,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOOTLAND": {
    "area_px": 1611,
-   "arable_milli": 609653,
+   "arable_milli": 609768,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MORTIS_TARN": {
    "area_px": 7502,
-   "arable_milli": 87171,
+   "arable_milli": 87187,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOUNTAINS_OF_DAWN": {
    "area_px": 8820,
-   "arable_milli": 183270,
+   "arable_milli": 183298,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOUNTAINS_OF_HEL": {
    "area_px": 6093,
-   "arable_milli": 367626,
+   "arable_milli": 367685,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOUNT_AZGORH": {
    "area_px": 5376,
-   "arable_milli": 967905,
+   "arable_milli": 968084,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOUNT_BLOODHORN": {
    "area_px": 6027,
-   "arable_milli": 906274,
+   "arable_milli": 906449,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOUNT_GUNBAD": {
    "area_px": 6412,
-   "arable_milli": 60341,
+   "arable_milli": 60350,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOUNT_SILVERSPEAR": {
    "area_px": 2879,
-   "arable_milli": 376709,
+   "arable_milli": 376782,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MOUSILLON": {
    "area_px": 3384,
-   "arable_milli": 2737703,
+   "arable_milli": 2738121,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_MYRMIDIA_S_COAST": {
    "area_px": 4684,
-   "arable_milli": 1500175,
+   "arable_milli": 1500450,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NAGGRUNDRINAZ": {
    "area_px": 3176,
-   "arable_milli": 1024675,
+   "arable_milli": 1024881,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NAGLFARI_COAST": {
    "area_px": 4743,
-   "arable_milli": 1224398,
+   "arable_milli": 1224646,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NAGLFARI_MOUNTAINS": {
    "area_px": 7724,
-   "arable_milli": 472789,
+   "arable_milli": 472874,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NEW_LAHMIA": {
    "area_px": 7574,
-   "arable_milli": 861998,
+   "arable_milli": 862159,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORSVEG_PLAIN": {
    "area_px": 4326,
-   "arable_milli": 582783,
+   "arable_milli": 582896,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTHERN_BADLANDS": {
    "area_px": 6182,
-   "arable_milli": 2077634,
+   "arable_milli": 2078046,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTHERN_ELLYRION": {
    "area_px": 4269,
-   "arable_milli": 1080291,
+   "arable_milli": 1080496,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_NORTHERN_OBLAST": {
    "area_px": 5769,
-   "arable_milli": 2141080,
+   "arable_milli": 2141508,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTHERN_SAPHERY": {
    "area_px": 4728,
-   "arable_milli": 992075,
+   "arable_milli": 992253,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_NORTHERN_WORLD_S_EDGE": {
    "area_px": 3415,
-   "arable_milli": 244745,
+   "arable_milli": 244791,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTHERN_YVRESSE": {
    "area_px": 4952,
-   "arable_milli": 315967,
+   "arable_milli": 316020,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_NORTH_BADLAND_HILLS": {
    "area_px": 4991,
-   "arable_milli": 281716,
+   "arable_milli": 281762,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_BARRIER_IDOLS": {
    "area_px": 3425,
-   "arable_milli": 47718,
+   "arable_milli": 47725,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_CAPE": {
    "area_px": 4412,
-   "arable_milli": 736206,
+   "arable_milli": 736338,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_DARK_LANDS": {
    "area_px": 5503,
-   "arable_milli": 1597462,
+   "arable_milli": 1597774,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_GREY_MOUNTAINS": {
    "area_px": 2110,
-   "arable_milli": 440653,
+   "arable_milli": 440723,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_HOWLING_WASTES": {
    "area_px": 27410,
-   "arable_milli": 8571439,
+   "arable_milli": 8573155,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_ISLE": {
    "area_px": 17051,
-   "arable_milli": 537769,
+   "arable_milli": 537870,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_NORTH_NORSE_COAST": {
    "area_px": 1972,
-   "arable_milli": 345856,
+   "arable_milli": 345923,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_OSTLAND": {
    "area_px": 2636,
-   "arable_milli": 1207841,
+   "arable_milli": 1208085,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_SHIFTING_ISLES": {
    "area_px": 2950,
-   "arable_milli": 2591191,
+   "arable_milli": 2591718,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_NORTH_TALABECLAND": {
    "area_px": 3682,
-   "arable_milli": 2555954,
+   "arable_milli": 2556441,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NORTH_TILEA": {
    "area_px": 4392,
-   "arable_milli": 1626504,
+   "arable_milli": 1626800,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NOVALONE_PASS": {
    "area_px": 4487,
-   "arable_milli": 237531,
+   "arable_milli": 237521,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_NUJA": {
    "area_px": 4368,
-   "arable_milli": 3304249,
+   "arable_milli": 3304905,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_OAK_OF_PROPHECY": {
    "area_px": 487,
-   "arable_milli": 368849,
+   "arable_milli": 368923,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_OIS_GAP": {
    "area_px": 487,
-   "arable_milli": 66255,
+   "arable_milli": 66264,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_OLD_DWARF_ROAD": {
    "area_px": 4818,
-   "arable_milli": 1213730,
+   "arable_milli": 1212312,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_OLD_SILK_ROAD": {
    "area_px": 6721,
-   "arable_milli": 882740,
+   "arable_milli": 882914,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_OLD_STRYGOS": {
    "area_px": 10783,
-   "arable_milli": 793938,
+   "arable_milli": 794102,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_ORTEGETA": {
    "area_px": 2443,
-   "arable_milli": 177933,
+   "arable_milli": 174774,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PALE_SISTERS": {
    "area_px": 3268,
-   "arable_milli": 1337831,
+   "arable_milli": 1338067,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PARRAVON": {
    "area_px": 1240,
-   "arable_milli": 664875,
+   "arable_milli": 664962,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PEAK_PASS": {
    "area_px": 6187,
-   "arable_milli": 588702,
+   "arable_milli": 588798,
    "cities": 1,
    "canon_cities": [
     "Karak Kadrin"
@@ -1849,763 +1843,763 @@
   },
   "STATE_PHOENIX_GATE": {
    "area_px": 4947,
-   "arable_milli": 694219,
+   "arable_milli": 694337,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_PIGBARTER_ROAD": {
    "area_px": 7100,
-   "arable_milli": 1293021,
+   "arable_milli": 1293280,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PITS_DISTRICT": {
    "area_px": 4071,
-   "arable_milli": 1195784,
+   "arable_milli": 1196024,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PLACEHOLDER": {
    "area_px": 4938590,
-   "arable_milli": 766773133,
+   "arable_milli": 766925129,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_PLAINS_OF_GRIEF": {
    "area_px": 5667,
-   "arable_milli": 1133692,
+   "arable_milli": 1133923,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PLAINS_OF_LUCCINI": {
    "area_px": 3234,
-   "arable_milli": 1744350,
+   "arable_milli": 1744703,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PLAIN_OF_BONES": {
    "area_px": 19647,
-   "arable_milli": 2059162,
+   "arable_milli": 2059576,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_PYRAMID_OF_TUTANKHANUT": {
    "area_px": 2551,
-   "arable_milli": 35818,
+   "arable_milli": 35826,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_QUENELLES": {
-   "area_px": 4959,
-   "arable_milli": 2186963,
+   "area_px": 4898,
+   "arable_milli": 2141315,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_RED_CLOUD_MOUNTAINS": {
    "area_px": 15946,
-   "arable_milli": 167473,
+   "arable_milli": 167503,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_REIKLAND_PROPER": {
    "area_px": 2779,
-   "arable_milli": 1832180,
+   "arable_milli": 1832495,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_REIKWALD_FOREST": {
    "area_px": 3243,
-   "arable_milli": 1503515,
+   "arable_milli": 1503772,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_REMAS": {
    "area_px": 2080,
-   "arable_milli": 1628910,
+   "arable_milli": 1629236,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_RIVER_DISTRICT": {
    "area_px": 1545,
-   "arable_milli": 739434,
+   "arable_milli": 739583,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ROAD_OF_KINGS": {
    "area_px": 1579,
-   "arable_milli": 26349,
+   "arable_milli": 26355,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_RUIN_S_END": {
    "area_px": 1401,
-   "arable_milli": 222015,
+   "arable_milli": 222060,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SARTOSA": {
    "area_px": 1062,
-   "arable_milli": 449751,
+   "arable_milli": 449844,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SCHADENSUMPF": {
    "area_px": 2338,
-   "arable_milli": 1848353,
+   "arable_milli": 1848725,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SEPUKZY": {
    "area_px": 5942,
-   "arable_milli": 1818714,
+   "arable_milli": 1819068,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SHADOW_MARCH": {
    "area_px": 8808,
-   "arable_milli": 2310014,
+   "arable_milli": 2310436,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SHANIDAAR": {
    "area_px": 4268,
-   "arable_milli": 297922,
+   "arable_milli": 297985,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SHATTERED_TEETH": {
-   "area_px": 4545,
-   "arable_milli": 264413,
-   "cities": 1,
+   "area_px": 4568,
+   "arable_milli": 256852,
+   "cities": 2,
    "canon_cities": []
   },
   "STATE_SIX_WATCH_FORTS": {
    "area_px": 3458,
-   "arable_milli": 130300,
+   "arable_milli": 130323,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SKRAGGLEGUTS_HOLD": {
    "area_px": 3982,
-   "arable_milli": 1169809,
+   "arable_milli": 1170045,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SKULL_CLIFFS": {
    "area_px": 10727,
-   "arable_milli": 2779328,
+   "arable_milli": 2779881,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SKULL_ROAD": {
    "area_px": 4267,
-   "arable_milli": 408920,
+   "arable_milli": 408988,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SKULL_STEPPES": {
    "area_px": 4959,
-   "arable_milli": 1170400,
+   "arable_milli": 1170629,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SKYHAVEN_PLATEAU": {
    "area_px": 4853,
-   "arable_milli": 500618,
+   "arable_milli": 500705,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SOLLAND": {
-   "area_px": 4482,
-   "arable_milli": 3701766,
+   "area_px": 4481,
+   "arable_milli": 3690248,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUR_CRAGS": {
    "area_px": 13154,
-   "arable_milli": 349618,
+   "arable_milli": 349676,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTHEAST_MAGRITTA": {
    "area_px": 2490,
-   "arable_milli": 1390868,
+   "arable_milli": 1391138,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTHERN_ELLYRION": {
    "area_px": 4585,
-   "arable_milli": 595075,
+   "arable_milli": 595184,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SOUTHERN_GATE_OF_CALITH": {
    "area_px": 2242,
-   "arable_milli": 839331,
+   "arable_milli": 839496,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SOUTHERN_OBLAST": {
    "area_px": 4697,
-   "arable_milli": 2403798,
+   "arable_milli": 2404272,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTHERN_SAPHERY": {
    "area_px": 2591,
-   "arable_milli": 265988,
+   "arable_milli": 266036,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SOUTHERN_SIREN_ISLES": {
    "area_px": 1138,
-   "arable_milli": 683768,
+   "arable_milli": 683904,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SOUTHERN_WORLDS_EDGE": {
    "area_px": 15818,
-   "arable_milli": 128440,
+   "arable_milli": 128464,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTHERN_YVRESSE": {
    "area_px": 4883,
-   "arable_milli": 321881,
+   "arable_milli": 321932,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SOUTH_BADLAND_HILLS": {
    "area_px": 5524,
-   "arable_milli": 133759,
+   "arable_milli": 133783,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTH_DARKLANDS": {
    "area_px": 1664,
-   "arable_milli": 170313,
+   "arable_milli": 170347,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTH_GREY_MOUNTAINS": {
    "area_px": 1643,
-   "arable_milli": 129426,
+   "arable_milli": 129287,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTH_HOWLING_WASTES": {
    "area_px": 15447,
-   "arable_milli": 3384985,
+   "arable_milli": 3385664,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTH_MIDDENLAND": {
    "area_px": 3009,
-   "arable_milli": 2040631,
+   "arable_milli": 2040959,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTH_OSTLAND": {
    "area_px": 4658,
-   "arable_milli": 1691313,
+   "arable_milli": 1691648,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SOUTH_SHIFTING_ISLES": {
    "area_px": 3282,
-   "arable_milli": 1819952,
+   "arable_milli": 1820322,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_SOUTH_TALABECLAND": {
    "area_px": 3679,
-   "arable_milli": 3208805,
+   "arable_milli": 3209185,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SPHINX_OF_PHAA": {
    "area_px": 749,
-   "arable_milli": 20459,
+   "arable_milli": 20462,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_STARSAND_PORT": {
    "area_px": 11736,
-   "arable_milli": 1759740,
+   "arable_milli": 1760085,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_STARS_ARCHIPELAGO": {
    "area_px": 6574,
-   "arable_milli": 1888774,
+   "arable_milli": 1889153,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_STEEL_PLAINS": {
    "area_px": 4583,
-   "arable_milli": 1411414,
+   "arable_milli": 1411695,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_STINKLANDS": {
    "area_px": 4907,
-   "arable_milli": 830716,
+   "arable_milli": 830877,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_STONESUNG_PLATEAU": {
    "area_px": 2475,
-   "arable_milli": 206873,
+   "arable_milli": 206911,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_STROVENGAARD": {
    "area_px": 3883,
-   "arable_milli": 2528052,
+   "arable_milli": 2528559,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_STUREN_RIDGE": {
    "area_px": 3586,
-   "arable_milli": 815936,
+   "arable_milli": 816097,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SUNKEN_KHEMARCH": {
    "area_px": 5590,
-   "arable_milli": 325478,
+   "arable_milli": 325545,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SUSSURRIO_WOOD": {
    "area_px": 1301,
-   "arable_milli": 626386,
+   "arable_milli": 626511,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SWAMP_EATER_HOLD": {
    "area_px": 6000,
-   "arable_milli": 1058568,
+   "arable_milli": 1058781,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_SWAMP_OF_TERROR": {
    "area_px": 1448,
-   "arable_milli": 40762,
+   "arable_milli": 40772,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_TALDURSFJORD": {
    "area_px": 3848,
-   "arable_milli": 1312456,
+   "arable_milli": 1312708,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_TALSYN": {
    "area_px": 535,
-   "arable_milli": 164925,
+   "arable_milli": 162268,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_TAL_ESTH": {
    "area_px": 489,
-   "arable_milli": 97959,
+   "arable_milli": 97971,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_BLIGHT": {
    "area_px": 4320,
-   "arable_milli": 869894,
+   "arable_milli": 870066,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_THE_CAULDRON": {
    "area_px": 6370,
-   "arable_milli": 1232438,
+   "arable_milli": 1232684,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_DOBRYRION": {
    "area_px": 5911,
-   "arable_milli": 3042170,
+   "arable_milli": 3042782,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_DRAGON_SPINE": {
    "area_px": 4148,
-   "arable_milli": 137140,
+   "arable_milli": 137168,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_THE_GOLINYI": {
    "area_px": 5784,
-   "arable_milli": 1177648,
+   "arable_milli": 1177865,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_ROPSALS": {
    "area_px": 5612,
-   "arable_milli": 951412,
+   "arable_milli": 951591,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_SCARAB_CITY": {
    "area_px": 5449,
-   "arable_milli": 84702,
+   "arable_milli": 84717,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_THE_SENTINELS": {
    "area_px": 4048,
-   "arable_milli": 857407,
+   "arable_milli": 857578,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_TAIGA": {
    "area_px": 4337,
-   "arable_milli": 2255552,
+   "arable_milli": 2256006,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_THE_VELDT": {
    "area_px": 3163,
-   "arable_milli": 1176599,
+   "arable_milli": 1176834,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_WASTELAND": {
    "area_px": 4515,
-   "arable_milli": 4435126,
+   "arable_milli": 4435372,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THE_WHEELED_MARCH": {
    "area_px": 3392,
-   "arable_milli": 348422,
+   "arable_milli": 348485,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_THORSHAFN": {
    "area_px": 4008,
-   "arable_milli": 685480,
+   "arable_milli": 685612,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_THUNDER_PEAKS": {
    "area_px": 4068,
-   "arable_milli": 269195,
+   "arable_milli": 269240,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_TIRANOC": {
    "area_px": 4658,
-   "arable_milli": 967180,
+   "arable_milli": 967358,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_TOBARO": {
    "area_px": 2701,
-   "arable_milli": 448567,
+   "arable_milli": 448643,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_TORGOVANN": {
-   "area_px": 1476,
-   "arable_milli": 788854,
+   "area_px": 1462,
+   "arable_milli": 752865,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_TOR_ELASOR": {
    "area_px": 2488,
-   "arable_milli": 241770,
+   "arable_milli": 241818,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_TOR_ELITHIS": {
    "area_px": 7932,
-   "arable_milli": 1371087,
+   "arable_milli": 1371361,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_TOWER_OF_THE_BLOODYTOOTH": {
    "area_px": 3720,
-   "arable_milli": 531854,
+   "arable_milli": 531962,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_TOWER_OF_THE_STARS": {
    "area_px": 3049,
-   "arable_milli": 1323742,
+   "arable_milli": 1324011,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_TRANTINE_HILLS": {
    "area_px": 4084,
-   "arable_milli": 2310353,
+   "arable_milli": 2310795,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_TROLLHEIM_MOUNTAINS": {
    "area_px": 7498,
-   "arable_milli": 230612,
+   "arable_milli": 230653,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_TROLL_COUNTRY": {
    "area_px": 3472,
-   "arable_milli": 553408,
+   "arable_milli": 553520,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_TYR_VANNA": {
    "area_px": 419,
-   "arable_milli": 69954,
+   "arable_milli": 69689,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ULFWRENAR_COAST": {
    "area_px": 3420,
-   "arable_milli": 1264501,
+   "arable_milli": 1264743,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ULFWRENAR_MOUNTAINS": {
    "area_px": 5607,
-   "arable_milli": 278030,
+   "arable_milli": 278076,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_UNGOL_STEPPES": {
    "area_px": 3708,
-   "arable_milli": 1072888,
+   "arable_milli": 1073101,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_UNICORN_GATE": {
    "area_px": 3356,
-   "arable_milli": 488267,
+   "arable_milli": 488350,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_UPPER_ASH_RIVER": {
    "area_px": 3880,
-   "arable_milli": 124449,
+   "arable_milli": 124474,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_VANNHEIM_MOUNTAINS": {
    "area_px": 3720,
-   "arable_milli": 349477,
+   "arable_milli": 349534,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_VARENKA_HILLS": {
    "area_px": 4611,
-   "arable_milli": 2739265,
+   "arable_milli": 2739818,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_VARG_CAMP": {
    "area_px": 3303,
-   "arable_milli": 873434,
+   "arable_milli": 873609,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_VEREZZI": {
    "area_px": 3388,
-   "arable_milli": 1507182,
+   "arable_milli": 1507468,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_VIDARHEIM": {
    "area_px": 3033,
-   "arable_milli": 918946,
+   "arable_milli": 919123,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_VOLCANIC_ISLANDS": {
    "area_px": 1564,
-   "arable_milli": 244607,
+   "arable_milli": 244656,
    "cities": 0,
    "canon_cities": []
   },
   "STATE_VOLGEN": {
    "area_px": 2553,
-   "arable_milli": 2517504,
+   "arable_milli": 2517623,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_VORBERGLAND": {
    "area_px": 3600,
-   "arable_milli": 1469248,
+   "arable_milli": 1469502,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WATERFALL_PALACE": {
    "area_px": 774,
-   "arable_milli": 322307,
+   "arable_milli": 322365,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WESTERN_BADLANDS": {
    "area_px": 4631,
-   "arable_milli": 170208,
+   "arable_milli": 170237,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WESTERN_ESTALIAN_COAST": {
    "area_px": 3371,
-   "arable_milli": 2823130,
+   "arable_milli": 2823590,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WESTERN_IRRANAS": {
    "area_px": 4897,
-   "arable_milli": 611006,
+   "arable_milli": 611102,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WESTERN_OBLAST": {
    "area_px": 5600,
-   "arable_milli": 2190885,
+   "arable_milli": 2191329,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_AVERLAND": {
    "area_px": 2562,
-   "arable_milli": 2200639,
+   "arable_milli": 2200874,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_CARCASSONNE": {
    "area_px": 2568,
-   "arable_milli": 816784,
+   "arable_milli": 816936,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_DARK_LANDS": {
    "area_px": 6884,
-   "arable_milli": 1254166,
+   "arable_milli": 1254396,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_DEATH_PASS": {
    "area_px": 6360,
-   "arable_milli": 822457,
+   "arable_milli": 822613,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_HELSPIRE_MOUNTAINS": {
    "area_px": 3564,
-   "arable_milli": 291920,
+   "arable_milli": 291971,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_WEST_MAD_DOG_PASS": {
    "area_px": 6106,
-   "arable_milli": 1075968,
+   "arable_milli": 1076168,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_MAGRITTA": {
    "area_px": 4132,
-   "arable_milli": 3034200,
+   "arable_milli": 3034804,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_MIDDENLAND": {
    "area_px": 3440,
-   "arable_milli": 2497628,
+   "arable_milli": 2498121,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_WEST_NORDLAND": {
    "area_px": 3849,
-   "arable_milli": 3310066,
+   "arable_milli": 3310568,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_WEST_OSTERMARK": {
    "area_px": 4759,
-   "arable_milli": 1548799,
+   "arable_milli": 1549110,
    "cities": 2,
    "canon_cities": []
   },
   "STATE_WEST_STIRLAND": {
    "area_px": 1668,
-   "arable_milli": 1665136,
+   "arable_milli": 1665161,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WEST_SYLVANIA": {
    "area_px": 3040,
-   "arable_milli": 1245767,
+   "arable_milli": 1246013,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WHEATLANDS": {
    "area_px": 5043,
-   "arable_milli": 1311262,
+   "arable_milli": 1311516,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WINTERTEETH_PASS": {
-   "area_px": 192,
-   "arable_milli": 6837,
+   "area_px": 263,
+   "arable_milli": 4624,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WISSENLAND": {
    "area_px": 1910,
-   "arable_milli": 1068817,
+   "arable_milli": 1068994,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WOLF_EDGE": {
    "area_px": 4821,
-   "arable_milli": 799768,
+   "arable_milli": 799922,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WOLF_LANDS": {
    "area_px": 19790,
-   "arable_milli": 5291683,
+   "arable_milli": 5292741,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WORLDS_EDGE_FOOTHILLS": {
    "area_px": 7787,
-   "arable_milli": 387366,
+   "arable_milli": 387438,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WURTBAD": {
    "area_px": 2179,
-   "arable_milli": 1901460,
+   "arable_milli": 1901654,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_WYDRIOTH": {
    "area_px": 1265,
-   "arable_milli": 468759,
+   "arable_milli": 468079,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_YI_EDRI_ETERNOS": {
    "area_px": 241,
-   "arable_milli": 130479,
+   "arable_milli": 126684,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ZORN_DUM": {
    "area_px": 5594,
-   "arable_milli": 1400176,
+   "arable_milli": 1400450,
    "cities": 1,
    "canon_cities": []
   },
   "STATE_ZORN_UZKUL": {
    "area_px": 7342,
-   "arable_milli": 1324800,
+   "arable_milli": 1325044,
    "cities": 1,
    "canon_cities": []
   }
