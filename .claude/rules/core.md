@@ -73,3 +73,5 @@ Domain logic lives in `common/` and `events/`; presentation text in `localizatio
 - [ ] Mod loaded in-game and `logs/error.log` checked clean for this mod's files
 - [ ] Only specific, relevant files staged — no `git add -A`
 - [ ] Board item landed at `review`/`done` with its activity trail updated (commits, verification) — via the maestro MCP, not a local file move
+
+**When to move an item to `review`** (Chris, 2026-10-28): as soon as the files for the task are written and committed and all that remains is a final check — a deploy and in-game load Chris must unblock, an offline gate that could not run, an accepted render. That is exactly what `review` is for. State the unrun checks in the activity trail; do not hold the item at `building` waiting for them. `building` means files are still being written.
