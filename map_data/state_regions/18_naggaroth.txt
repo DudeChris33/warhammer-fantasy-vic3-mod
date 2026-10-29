@@ -162,11 +162,10 @@ STATE_LAND_030 = {
     id = 30
     subsistence_building = "building_subsistence_farm"
     provinces = { x054459 x0FCDDB x38E226 x41B34B x8338AC }
-    city = x38E226
+    city = x0FCDDB
     farm = x054459
     mine = x41B34B
     wood = x8338AC
-    port = x0FCDDB
     arable_land = 3
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
@@ -176,7 +175,6 @@ STATE_LAND_030 = {
         type = "building_oil_rig"
         undiscovered_amount = 1
     }
-    naval_exit_id = 3002
 }
 STATE_LAND_031 = {
     id = 31
@@ -184,9 +182,8 @@ STATE_LAND_031 = {
     provinces = { x02CDE1 x03BA4E x05C17A x0812A2 x0840F4 x08A26B x098A05 x09CAFF x0B1410 x0DB407 x0F8CE1 x0FC908 x1482D3 x150DC9 x17E0E5 x18E8FC x19B4EC x1A2438 x1B8DC6 x1D824A x1E5C0F x1FE61A x20B20A x2323AF x235201 x238053 x23C14D x23FD74 x28B73F x2BD457 x2C71F5 x2DBB06 x2E2A52 x2FF084 x307B7A x3233D7 x360F0A x37B4BF x38C1A9 x3CAAB1 x40C6DE x4156A7 x44456D x480DF8 x4BBAD9 x4BFBD3 x4F18EB x56445B x5BD7EB x5D5D23 x5E6A0D x5EA634 x631F05 x6505B4 x66BE11 x6863C6 x6B528C x6BB403 x6D393B x6F7C8E x701A2C x70E61C x722158 x77F10F x7BABC5 x7BFA94 x7CF4D6 x8548DA x86F362 x875DDB x87ACAA x8B390E x8CA29C x8D403A x8D6E8C x8DDDD8 x90AC21 x945902 x9C5062 x9CDB58 x9F5FA5 xA125D7 xA1D14A xA24E6B xA68B15 xA7445D xA88D6E xA94B89 xA9A82D xA9C8AA xAA45CB xAB8EDC xAC891E xAE0554 xAE9E1F xAFAB09 xAFB8DE xB0E172 xB22A83 xB46001 xB4DD22 xB58895 xB6957F xB6A354 xB740F2 xB80CE2 xBA21E3 xBB78C9 xBCE257 xBE2B68 xC6FC8D xC873F0 xC903B9 xCB755E xCC9DF2 xD00EAC xD07925 xD116C3 xD28E26 xD2A0CE xD4C3A4 xD4F1F6 xD5EC38 xD64DAF xD72774 xD80139 xD84233 xD8EDA6 xD94A4A xD99919 xDCC8D9 xDE11EA xDF2CA9 xE0A40C xE0F2DB xE2E75F xE5C850 xE64571 xE78E82 xE86D1A xE8A941 xEABE42 xED0195 xED143D xED5064 xEE1C54 xEE6B23 xEFF52E xF21804 xF29525 xF35340 xF36115 xF547C4 xF62189 xF6DFA4 xF94374 xF97F9B xFA6C08 xFF0556 }
     city = x235201
     farm = x02CDE1
-    mine = x9CDB58
+    mine = x9F5FA5
     wood = xFF0556
-    port = xD28E26
     arable_land = 114
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
@@ -207,17 +204,15 @@ STATE_LAND_031 = {
         type = "building_oil_rig"
         undiscovered_amount = 14
     }
-    naval_exit_id = 3002
 }
 STATE_LAND_032 = {
     id = 32
     subsistence_building = "building_subsistence_farm"
     provinces = { x056003 x077504 x275B86 x302CAB x38FDD0 x44B4B9 x4C3CCD x52282E x756CC2 x7ADFD5 xCB0612 xE21B6F }
-    city = x275B86
+    city = x4C3CCD
     farm = x056003
-    mine = x52282E
+    mine = x44B4B9
     wood = xE21B6F
-    port = x077504
     arable_land = 9
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
@@ -231,22 +226,19 @@ STATE_LAND_032 = {
         type = "building_oil_rig"
         undiscovered_amount = 1
     }
-    naval_exit_id = 3002
 }
 STATE_LAND_033 = {
     id = 33
     subsistence_building = "building_subsistence_farm"
     provinces = { x6A869C x819BF9 xA6F58E xEA7446 }
-    city = x6A869C
-    farm = x819BF9
-    mine = xA6F58E
-    wood = xEA7446
-    port = xEA7446
+    city = xEA7446
+    farm = x6A869C
+    mine = x819BF9
+    wood = xA6F58E
     arable_land = 3
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
     }
-    naval_exit_id = 3002
 }
 STATE_LAND_034 = {
     id = 34
@@ -256,7 +248,6 @@ STATE_LAND_034 = {
     farm = x02AD64
     mine = x7B8B48
     wood = xFF4F52
-    port = x88ABBF
     arable_land = 38
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
@@ -271,7 +262,6 @@ STATE_LAND_034 = {
         type = "building_oil_rig"
         undiscovered_amount = 5
     }
-    naval_exit_id = 3002
 }
 STATE_LAND_078 = {
     id = 78
@@ -343,12 +333,10 @@ STATE_LAND_362 = {
     farm = x26E338
     mine = x26E338
     wood = x26E338
-    port = x26E338
     arable_land = 1
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
     }
-    naval_exit_id = 3002
 }
 STATE_LAND_430 = {
     id = 430

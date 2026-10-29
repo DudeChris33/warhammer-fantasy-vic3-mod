@@ -281,12 +281,57 @@ def _sea_state_of_zone(sea_cells: list[dict], n_sea: int) -> np.ndarray:
     return out
 
 
+def _impassable_sea_states(sea_cells: list[dict]) -> set[int]:
+    """Sea **state** ids that are impassable: a group (cells sharing a ``key``)
+    is impassable if any member is, and is keyed by the group's ``min(id)`` —
+    mirrors ``generate_sea_regions._render_99_seas`` (#9784)."""
+    groups: dict[str, list[dict]] = {}
+    for c in sea_cells:
+        groups.setdefault(c["key"], []).append(c)
+    return {min(int(m["id"]) for m in members)
+            for members in groups.values()
+            if any(m.get("impassable", False) for m in members)}
+
+
+def _neighbour_shifts(arr: np.ndarray) -> list[np.ndarray]:
+    """The four 4-neighbour views of ``arr`` (x wraps, y does not — matching
+    ``validate_map.ProvinceBitmap.coastal_colors``); 0 where a neighbour is off-canvas."""
+    up = np.zeros_like(arr)
+    up[:-1, :] = arr[1:, :]
+    down = np.zeros_like(arr)
+    down[1:, :] = arr[:-1, :]
+    return [np.roll(arr, 1, axis=1), np.roll(arr, -1, axis=1), up, down]
+
+
+def _passable_coastal_labels(labels: np.ndarray, n_land: int, sea_state_of_zone: np.ndarray,
+                             impassable: set[int]) -> np.ndarray:
+    """bool array over land labels ``0..n_land``: the province has a pixel
+    4-adjacent to a sea pixel whose sea state is passable (#9784). A port on a
+    province that touches only impassable sea has no lane."""
+    n_sea = len(sea_state_of_zone) - 1
+    sea_mask = (labels > n_land) & (labels <= n_land + n_sea)
+    sea_full = np.zeros(labels.shape, dtype=np.int64)
+    sea_full[sea_mask] = sea_state_of_zone[labels[sea_mask] - n_land]
+    if impassable:
+        sea_full[np.isin(sea_full, list(impassable))] = 0
+    land_mask = (labels >= 1) & (labels <= n_land)
+    touch = np.zeros(labels.shape, dtype=bool)
+    for shifted in _neighbour_shifts(sea_full):
+        touch |= shifted > 0
+    out = np.zeros(n_land + 1, dtype=bool)
+    out[np.unique(labels[land_mask & touch])] = True
+    return out
+
+
 def _naval_exit_choices(labels: np.ndarray, n_land: int, region_of: np.ndarray,
-                        sea_state_of_zone: np.ndarray) -> dict[int, int]:
-    """region id -> the sea-state id bordering the most of its coastline
-    (ties -> lowest sea id), by 4-neighbour adjacency between every land pixel
-    and every sea pixel (x wraps, y does not — matching
-    ``validate_map.ProvinceBitmap.coastal_colors``)."""
+                        sea_state_of_zone: np.ndarray,
+                        impassable: set[int] | None = None) -> dict[int, int]:
+    """region id -> the **passable** sea-state id bordering the most of its
+    coastline (ties -> lowest sea id), by 4-neighbour adjacency between every
+    land pixel and every sea pixel (x wraps, y does not — matching
+    ``validate_map.ProvinceBitmap.coastal_colors``). Impassable seas are never
+    candidates (#9784: the engine draws no lane to one); a region bordering only
+    impassable sea gets no entry."""
     land_mask = (labels >= 1) & (labels <= n_land)
     n_sea = len(sea_state_of_zone) - 1  # sea_state_of_zone is sized n_sea + 1 (index 0 unused)
     sea_mask = (labels > n_land) & (labels <= n_land + n_sea)  # excludes lake labels above it
@@ -296,6 +341,8 @@ def _naval_exit_choices(labels: np.ndarray, n_land: int, region_of: np.ndarray,
 
     sea_full = np.zeros(labels.shape, dtype=np.int64)
     sea_full[sea_mask] = sea_state_of_zone[labels[sea_mask] - n_land]
+    if impassable:
+        sea_full[np.isin(sea_full, list(impassable))] = 0
 
     pair_counts: dict[int, int] = {}
 
@@ -308,14 +355,8 @@ def _naval_exit_choices(labels: np.ndarray, n_land: int, region_of: np.ndarray,
         for k, c in zip(uniq.tolist(), counts.tolist()):
             pair_counts[k] = pair_counts.get(k, 0) + c
 
-    _accumulate(np.roll(sea_full, 1, axis=1))
-    _accumulate(np.roll(sea_full, -1, axis=1))
-    up = np.zeros_like(sea_full)
-    up[:-1, :] = sea_full[1:, :]
-    down = np.zeros_like(sea_full)
-    down[1:, :] = sea_full[:-1, :]
-    _accumulate(up)
-    _accumulate(down)
+    for shifted in _neighbour_shifts(sea_full):
+        _accumulate(shifted)
 
     best: dict[int, tuple[int, int]] = {}  # region -> (count, sea_id)
     for key, count in pair_counts.items():
@@ -484,6 +525,19 @@ def main(argv: list[str] | None = None) -> int:
     labels = _build_label_array(rgb, prov_index["cells"])
     land_mask = (labels >= 1) & (labels <= n_land)
     log("province bitmap indexed", t0)
+
+    # --- passable coast (#9784): ports and naval exits consider passable seas only.
+    # Overrides province_info["coastal"] here only; provinces_index.json keeps its own flag.
+    sea_state_of_zone = _sea_state_of_zone(sea_index["cells"], n_sea)
+    impassable_seas = _impassable_sea_states(sea_index["cells"])
+    passable_coast = _passable_coastal_labels(labels, n_land, sea_state_of_zone, impassable_seas)
+    n_demoted = 0
+    for label, info in province_info.items():
+        info["any_coast"] = info["coastal"]  # touches any sea, passable or not
+        info["coastal"] = bool(passable_coast[label])
+        n_demoted += int(info["any_coast"] and not info["coastal"])
+    log(f"{len(impassable_seas)} impassable sea state(s); {n_demoted} coastal province(s) touch "
+        f"only impassable sea and are no longer port candidates", t0)
 
     lab, cos_t, sin_t, y = _land_pixel_theta(labels, land_mask, CANVAS_W)
     identity = np.arange(n_land + 1, dtype=np.int64)
@@ -690,8 +744,8 @@ def main(argv: list[str] | None = None) -> int:
     log(f"{len(placeholder_region_ids)} out-of-scope placeholder region(s) classified to a continent", t0)
 
     # --- naval_exit: region -> bordering sea-state id ----------------------
-    sea_state_of_zone = _sea_state_of_zone(sea_index["cells"], n_sea)
-    naval_exit_choice = _naval_exit_choices(labels, n_land, region_of, sea_state_of_zone)
+    naval_exit_choice = _naval_exit_choices(labels, n_land, region_of, sea_state_of_zone,
+                                            impassable_seas)
     log(f"naval_exit adjacency resolved for {len(naval_exit_choice)} coastal region(s)", t0)
 
     # --- per-state economics worksheet (#3678) -------------------------------
@@ -810,11 +864,13 @@ def main(argv: list[str] | None = None) -> int:
             )
             for p in members
         ]
-        # A port needs a PASSABLE coastal province: a state whose only coast is
-        # impassable paint has no usable port, so it is emitted non-coastal (no
-        # port / naval_exit) rather than failing the hub pick (#3704).
+        # A port needs a PASSABLE coastal province on a PASSABLE sea ("coastal" is
+        # already the passable-sea test, above): a state whose only coast is
+        # impassable paint or faces only impassable sea has no usable port, so it
+        # is emitted non-coastal (no port / naval_exit) rather than failing the
+        # hub pick (#3704, #9784).
         coastal = any(info.coastal and not info.impassable for info in infos)
-        if not coastal and any(info.coastal for info in infos):
+        if not coastal and any(province_info[p]["any_coast"] for p in members):
             n_sealed_coast += 1
             sealed_coast_keys.append(key)
         needed = 5 if coastal else 4
@@ -899,7 +955,7 @@ def main(argv: list[str] | None = None) -> int:
         f"{f', {n_sealed_stacked} of them downgraded by impassable provinces' if n_sealed_stacked else ''})", t0)
     if n_sealed_coast:
         log(f"{n_sealed_coast} coastal state(s) emitted without a port: every coastal province "
-            f"is impassable ({', '.join(sealed_coast_keys)}) - paint a passable coastal "
+            f"is impassable or borders only impassable sea ({', '.join(sealed_coast_keys)}) - paint a passable coastal "
             f"pocket for a port", t0)
 
     for w in econ_warnings:

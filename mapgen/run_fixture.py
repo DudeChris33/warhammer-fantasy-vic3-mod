@@ -2418,6 +2418,57 @@ def _selfcheck_impassable_land() -> None:
     cst.impassable = [B]
     _e = vm._check_coastal_naval_exit([cst], [sea_st], cbmp, {SEA})
     assert _e == [], f"a state whose only coast is impassable is not coastal, got {_e}"
+
+    # --- #9784: an impassable SEA is no coast and no naval exit
+    class _SeaAwareBitmap:               # B touches SEA_BAD and SEA_OK; C touches only SEA_BAD
+        def coastal_colors(self, sea_colors):
+            touch = {B: {SEA_OK, SEA_BAD}, C: {SEA_BAD}}
+            return {col for col, seas in touch.items() if seas & set(sea_colors)}
+
+    C, SEA_OK, SEA_BAD = (70, 80, 90), (0, 0, 200), (0, 0, 100)
+    sbmp = _SeaAwareBitmap()
+    ok_sea = vm.ParsedState("STATE_OKSEA", "s.txt")
+    ok_sea.id, ok_sea.provinces = 3001, [SEA_OK]
+    bad_sea = vm.ParsedState("STATE_BADSEA", "s.txt")
+    bad_sea.id, bad_sea.provinces, bad_sea.impassable = 3002, [SEA_BAD], [SEA_BAD]
+    seas = [ok_sea, bad_sea]
+    both = {SEA_OK, SEA_BAD}
+    only_bad = vm.ParsedState("STATE_ONLYBAD", "t.txt")
+    only_bad.provinces, only_bad.port_declared, only_bad.naval_exit_id = [C], True, 3001
+    _e = vm._check_coastal_naval_exit([only_bad], seas, sbmp, both)
+    assert any("landlocked" in x for x in _e), f"port on an impassable-sea-only coast must fail, got {_e}"
+    only_bad.port_declared, only_bad.naval_exit_id = False, None
+    assert vm._check_coastal_naval_exit([only_bad], seas, sbmp, both) == [], "no port there is correct"
+    bad_exit = vm.ParsedState("STATE_BADEXIT", "t.txt")
+    bad_exit.provinces, bad_exit.port_declared, bad_exit.naval_exit_id = [B], True, 3002
+    _e = vm._check_coastal_naval_exit([bad_exit], seas, sbmp, both)
+    assert any("impassable sea" in x for x in _e), f"naval_exit_id on an impassable sea must fail, got {_e}"
+    bad_exit.naval_exit_id = 3001
+    assert vm._check_coastal_naval_exit([bad_exit], seas, sbmp, both) == [], "passable exit passes"
+
+    # --- #9784: _naval_exit_choices / _passable_coastal_labels skip impassable seas
+    import generate_land_regions as glr
+    lab = np.zeros((6, 12), dtype=np.int64)
+    lab[1:5, 1:5] = 1                     # land region 1 (label 1)
+    lab[1:5, 7:9] = 2                     # land region 2 (label 2)
+    lab[0:6, 0:1] = 3                     # sea label 3 (sea state 3001, passable): thin strip, 4 px of region 1's coast
+    lab[0, 1:5] = 4                       # sea label 4 (state 3002, impassable): 4 px on top of region 1
+    lab[5, 1:5] = 4                       # ... and 4 px below -> impassable borders 8 px of region 1
+    lab[1:5, 6] = 4                       # impassable also borders region 2 on its left only
+    lab[1:5, 9] = 4
+    n_land = 2
+    sz = np.array([0, 3001, 3002], dtype=np.int64)       # zone label 1,2 -> sea-state ids (labels n_land+1, n_land+2)
+    region_of = np.array([0, 1, 2], dtype=np.int64)
+    plain = glr._naval_exit_choices(lab, n_land, region_of, sz)
+    assert plain[1] == 3002, f"unfiltered, the larger impassable coast wins, got {plain}"
+    guarded = glr._naval_exit_choices(lab, n_land, region_of, sz, {3002})
+    assert guarded == {1: 3001}, f"an impassable sea is never an exit and region 2 gets none, got {guarded}"
+    pc = glr._passable_coastal_labels(lab, n_land, sz, {3002})
+    assert bool(pc[1]) and not bool(pc[2]), f"region 2 touches only impassable sea, got {pc}"
+    assert glr._impassable_sea_states([
+        {"key": "A", "id": 3001, "impassable": False},
+        {"key": "B", "id": 3002, "impassable": False}, {"key": "B", "id": 3003, "impassable": True},
+    ]) == {3002}, "a group is impassable if any member is, keyed by its min id"
     print("impassable land: cut/pockets/validator/stable-ids checks passed.")
 
 

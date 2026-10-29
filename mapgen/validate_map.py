@@ -1120,11 +1120,18 @@ def _check_coastal_naval_exit(
     sea_colors: set[Color],
 ) -> list[str]:
     errors = []
-    coastal_colors = bitmap.coastal_colors(sea_colors)
+    # A port needs a PASSABLE sea (#9784): the engine draws no lane to an
+    # impassable one. A sea state is impassable when all its provinces are.
+    impassable_sea_states = [s for s in sea_states
+                             if s.provinces and all(c in set(s.impassable) for c in s.provinces)]
+    impassable_sea_ids = {s.id for s in impassable_sea_states if s.id is not None}
+    impassable_sea_colors = {c for s in impassable_sea_states for c in s.provinces}
+    coastal_colors = bitmap.coastal_colors(sea_colors - impassable_sea_colors)
     sea_ids = {s.id for s in sea_states if s.id is not None}
     for st in land_states:
         # An impassable province can't host a port, so a state whose only coast is
-        # impassable is treated as not coastal (the emitter leaves it port-less, #3704).
+        # impassable, or that faces only impassable sea, is treated as not coastal
+        # (the emitter leaves it port-less, #3704, #9784).
         impassable = set(st.impassable)
         has_coastal_pixels = any(c in coastal_colors and c not in impassable
                                  for c in st.provinces)
@@ -1137,6 +1144,11 @@ def _check_coastal_naval_exit(
                 errors.append(
                     f"{st.key} ({st.filename}): naval_exit_id {st.naval_exit_id} "
                     f"is not a real sea-zone id"
+                )
+            elif st.naval_exit_id in impassable_sea_ids:
+                errors.append(
+                    f"{st.key} ({st.filename}): naval_exit_id {st.naval_exit_id} "
+                    f"is an impassable sea"
                 )
         else:
             if st.port_declared:

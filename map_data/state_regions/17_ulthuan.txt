@@ -21,7 +21,7 @@
         type = "building_oil_rig"
         undiscovered_amount = 4
     }
-    naval_exit_id = 3027
+    naval_exit_id = 3024
 }
 STATE_LAND_009 = {
     id = 9
@@ -51,7 +51,7 @@ STATE_LAND_009 = {
         type = "building_oil_rig"
         undiscovered_amount = 6
     }
-    naval_exit_id = 3027
+    naval_exit_id = 3070
 }
 STATE_LAND_010 = {
     id = 10
@@ -76,7 +76,7 @@ STATE_LAND_010 = {
         type = "building_oil_rig"
         undiscovered_amount = 5
     }
-    naval_exit_id = 3104
+    naval_exit_id = 3106
 }
 STATE_BLIGHTED_ISLE = {
     id = 28
@@ -226,7 +226,7 @@ STATE_LAND_397 = {
         type = "building_oil_rig"
         undiscovered_amount = 3
     }
-    naval_exit_id = 3027
+    naval_exit_id = 3066
 }
 STATE_LAND_405 = {
     id = 405
@@ -236,7 +236,7 @@ STATE_LAND_405 = {
     farm = x020FC6
     mine = x8060BD
     wood = xF3CB8E
-    port = x3C8F07
+    port = x6E17D3
     arable_land = 29
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
@@ -250,7 +250,7 @@ STATE_LAND_405 = {
         type = "building_oil_rig"
         undiscovered_amount = 4
     }
-    naval_exit_id = 3027
+    naval_exit_id = 3066
 }
 STATE_LAND_415 = {
     id = 415
@@ -274,7 +274,7 @@ STATE_LAND_415 = {
         type = "building_oil_rig"
         undiscovered_amount = 2
     }
-    naval_exit_id = 3104
+    naval_exit_id = 3090
 }
 STATE_LAND_416 = {
     id = 416
@@ -298,7 +298,7 @@ STATE_LAND_416 = {
         type = "building_oil_rig"
         undiscovered_amount = 4
     }
-    naval_exit_id = 3118
+    naval_exit_id = 3117
 }
 STATE_LAND_427 = {
     id = 427
@@ -322,7 +322,7 @@ STATE_LAND_427 = {
         type = "building_oil_rig"
         undiscovered_amount = 2
     }
-    naval_exit_id = 3027
+    naval_exit_id = 3052
 }
 STATE_DRAKE_ISLES = {
     id = 438
