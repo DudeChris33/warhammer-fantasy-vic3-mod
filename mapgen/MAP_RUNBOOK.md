@@ -361,4 +361,26 @@ Then load the mod and check `logs/error.log` for lines naming `map_data/`. A ren
 its row fail with the current key named: `python mapgen/generate_land_regions.py --rekey-economics`
 rewrites just those key cells (anchors are never touched).
 
-<!-- ## S5 — object locators + spline regeneration -->
+## Route network (desktop naval step)
+
+`gfx/map/spline_network/spline_network.splnet` is written by `mapgen/generate_spline_network.py`
+(#9555). The script owns the land layer: hubs at our locators, an in-state star and one routed
+road per adjacent state pair. It keeps the naval layer (harbour hubs, sea lanes) that the map
+editor generates, unchanged. Re-run the naval step only when sea zones, ports or state ids
+change; the writer then refuses with "naval layer is stale for the current map" until it is done:
+
+1. Close the game, `.\deploy.ps1` (so the editor sees the current map). The deployed
+   `spline_network.splnet` must be the repo's; an empty one is fine, since the step appends.
+2. Launch the map editor with the mod; in the console:
+   `SplineNetwork.SetAssetGenerationMode naval`, then `SplineNetwork.AppendAssets`.
+3. **Move** (not copy) the output into the repo's `gfx/map/spline_network/`. On 2026-10-29 the
+   engine wrote it to the deployed mod folder
+   (`Documents/Paradox Interactive/Victoria 3/mod/warhammer-fantasy/gfx/map/spline_network/`),
+   and the user-dir copy under `Documents/Paradox Interactive/Victoria 3/gfx/map/spline_network/`
+   was 0 bytes. Take whichever is non-empty and newest. `navmesh2.cache` stays in the user dir.
+4. `python mapgen/generate_spline_network.py` (keeps that naval layer, rebuilds the land layer),
+   then `--check` and `--render` (`scratchpad/spline_network_preview*.png`); `git status` for any
+   other file the editor wrote.
+
+About a fifth of the editor's naval paths fail on this map (#9784). A harbour left with no lane
+on an island state with no land neighbour logs `travel_connection_definition.cpp:252`.

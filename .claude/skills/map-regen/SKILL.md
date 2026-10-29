@@ -35,6 +35,7 @@ Full regen after a source change (`/map-regen`). Distilled from the 2026-10-15 r
 | building history: `N jobs exceed 40% of M pops` | merged state's auto farms fill the whole budget, owner (manor) jobs added later push it over | tag-level `set` in `profiles.json` (e.g. `workforce_share` 0.35) with a `justify` entry; state it in the report. |
 | adjacencies `--sync` parked rows / new blank rows | lines redrawn | see Adjacencies. |
 | adjacencies `--write`: type 'sea' joins land to land (or reverse) | a line's endpoints changed province | Chris retypes the row. |
+| splines: `naval layer is stale for the current map` | state ids or ports changed, so the shipped harbours no longer match | after the deploy, Chris runs the desktop naval step (`mapgen/MAP_RUNBOOK.md`, "Route network"); move its output into the repo, then `--from splines`. |
 
 ## Adjacencies
 
@@ -59,7 +60,7 @@ Specific paths, no `git add -A`, no push, end with the `Co-Authored-By` line fro
 `.\deploy.ps1`. Its drift guard counts files that exist only in the repo (new files) as "drift" and refuses. Before `-Force`, prove there is no real drift: scan the mod folder for files missing from the repo or newer **and** different. Only then `.\deploy.ps1 -Force`. Verify a few deployed hashes. Chris loads the game; then read `Documents/Paradox Interactive/Victoria 3/logs/error.log`.
 
 Triage by source tag (the log names no files; normalise tags/numbers and count):
-- `travel_connection_definition` "no connection node": known non-fatal noise (baseline 681, scales with state count; `testing.md`).
+- `travel_connection_definition`: the route network (`generate_spline_network.py`, #9555) cleared the "no connection node" lines (0 on 2026-10-29). Any `:393`/`:398` line, or a `route_graphics.cpp:734` "non-adjacent" line, is this regen's: the land layer is stale or `PAIR_RULE` no longer matches the engine. `:252` "none of the nodes are connected to another state region" on an island state is a harbour the editor's naval step gave no strip (#9784).
 - `country_law_manager` Mercantilism, `concept_religious_trait` loc, `je_meiji_restoration_get_faction_sgui`, `culture_graphics_type`, variable lint: not map output; report, don't fix unprompted.
 - Anything naming `map_data`, a state, province, adjacency, pop or building is this regen's: fix the script, never the log.
 - The log cannot say whether a session started; ask Chris. Don't call the in-game gate passed without it.

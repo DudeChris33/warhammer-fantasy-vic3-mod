@@ -46,6 +46,7 @@ STEPS = [
     ("adj_sync", "generate_adjacencies.py --sync"),
     ("adj_write", "generate_adjacencies.py --write"),
     ("locators", "generate_map_locators.py"),
+    ("splines", "generate_spline_network.py"),
     ("heatmap", "generate_arable_heatmap.py"),
 ]
 DEFAULT_FROM = "provinces"
@@ -56,6 +57,7 @@ GATE = [
     "generate_pop_history.py --check",
     "generate_country_history.py --check",
     "generate_map_locators.py --check",
+    "generate_spline_network.py --check",
     "generate_building_history.py --check",
     "validate_building_history.py",
     "worldgen/sources.py --verify",
