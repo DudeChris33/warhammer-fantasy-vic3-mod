@@ -19,15 +19,22 @@ Output
 
 Per icon (keys are the recipe fields, documented in ``README.md``):
     1. Read the vanilla top mip (RGB under alpha 0 ignored).
-    2. Glyph mask inside ``region``: ``bright`` / ``dark`` (luminance against
-       ``thresh``, a number or ``"otsu"``), ``solid`` (a bare glyph: the opaque
-       components centred in the region), or ``cutout`` (alpha holes enclosed by
-       the silhouette). Minus ``protect``; specks under ``min_blob`` dropped;
+    2. Glyph mask inside ``region`` (a box, circle or polygon): ``bright`` /
+       ``dark`` (luminance against ``thresh``, a number or ``"otsu"``), ``red`` /
+       ``warm`` / ``cool`` (a hue ratio against ``thresh``, for ink or metal of
+       the field's own luminance), ``solid`` (a bare glyph: the opaque
+       components centred in the region, or wholly inside it with ``within``),
+       or ``cutout`` (alpha holes enclosed by the silhouette); plus ``ink``
+       (opaque pixels darker than it: a half-painted cut-out, a black drop
+       shadow). Minus ``protect``; specks under ``min_blob`` dropped;
        closed, then grown by ``dilate`` px (``erase: region`` refills the whole
        region instead, for an embossed glyph whose edges fade into the field).
     3. Remove the glyph: ``inpaint`` continues the field under it (biharmonic,
        all four channels; for a cut-out only inside the silhouette), ``clear``
        erases a bare glyph and its drop shadow, keeping everything else.
+       ``inpaint: harmonic`` fills a cut-out by Laplace instead (no overshoot in
+       a grainy field). Each ``clean`` region (a torn-off piece of the glyph, a
+       second emblem) is then refilled the same way, outside the crown's box.
     4. Place the crown, scaled to fit the glyph's box times ``scale``:
        ``painted`` is the master itself; ``stencil`` is a flat crown cut from the
        master's own alpha outline with two cap windows punched where the
@@ -41,8 +48,15 @@ Per icon (keys are the recipe fields, documented in ``README.md``):
        field (cut-out glyphs).
     6. A ``clear`` icon gets a drop shadow fitted to the vanilla glyph's own
        (Gaussian width and strength by least squares, colour from the halo).
-    7. ``protect`` pixels (a polygon in front, or the red no-sign stroke) are
-       restored from vanilla on top.
+    7. ``protect`` pixels (a polygon in front, ``cool`` limiting it to what shows
+       through a tear, or the red no-sign stroke) are restored from vanilla on top.
+
+Opt-in extras: ``grain`` (the field's own high-pass, from ``offset`` away, over
+a smooth refill); ``disc`` (rebuild a round object the glyph stood in front
+of); ``underlay`` (part of another vanilla icon set behind the crown);
+``coin`` (a gold disc behind the crown, so it reads as currency, not a
+monarch); ``rotate`` (crown tilt in degrees); ``then`` (further glyphs in the
+same icon, each a pass with overriding fields).
 
 Twin icons (``*_not``) are separate recipes, usually ``like`` their base: each
 takes its colours from its own vanilla glyph, so vanilla's own recolouring
@@ -140,6 +154,8 @@ def region_mask(h: int, w: int, reg) -> np.ndarray:
     if isinstance(reg, dict) and "circle" in reg:
         cx, cy, r = reg["circle"]
         return (xx - cx) ** 2 + (yy - cy) ** 2 <= r * r
+    if isinstance(reg, dict) and "poly" in reg:
+        return polygon_mask(h, w, reg["poly"]) > 0.5
     x0, y0, x1, y1 = reg
     return (xx >= x0) & (xx < x1) & (yy >= y0) & (yy < y1)
 
@@ -243,6 +259,12 @@ def protect_mask(src: np.ndarray, spec) -> np.ndarray:
     m = np.zeros((h, w))
     if "poly" in spec:
         poly = polygon_mask(h, w, spec["poly"])
+        if spec.get("cool"):
+            # only what shows through a tear: cool-coloured pixels (not the warm tag) inside the polygon
+            r, b = src[..., 0], src[..., 2]
+            cool = (b > r - 0.05) & (src[..., 3] > 0.5)
+            seen = cool | (ndimage.binary_dilation(cool, iterations=1) & (lum(src[..., :3]) < 0.3))  # + its dark lip
+            poly = poly * seen
         if spec.get("grow"):
             poly = np.clip(ndimage.grey_dilation(poly, size=2 * spec["grow"] + 1), 0, 1)
         m = np.maximum(m, poly)
@@ -270,12 +292,28 @@ def glyph_masks(src: np.ndarray, r: dict, prot: np.ndarray):
         m = reg & (L > t) & (A > 0.5)
     elif kind == "dark":
         m = reg & (L < t) & (A > 0.05)
+    elif kind == "red":
+        # red ink on a field of similar luminance (a stamp on a shaded tag): (red - green) / red
+        # above ``thresh``, a ratio so the ink's dark strokes count as much as its bright ones
+        red = src[..., 0]
+        m = reg & ((red - src[..., 1]) / np.maximum(red, 1e-3) > t) & (A > 0.5)
+    elif kind == "cool":
+        # teal or blue paint on a warm field (a sack): (blue - red) / blue above ``thresh``
+        blue = src[..., 2]
+        m = reg & ((blue - src[..., 0]) / np.maximum(blue, 1e-3) > t) & (A > 0.5)
+    elif kind == "warm":
+        # gold or brass in front of a cool field (a globe): (red - blue) / red above ``thresh``
+        red = src[..., 0]
+        m = reg & ((red - src[..., 2]) / np.maximum(red, 1e-3) > t) & (A > 0.5)
     elif kind == "solid":
         # a bare glyph: the opaque components whose centre lies in the region
+        # (``within``: and that lie wholly inside it, e.g. a glyph ringed by a chain)
         m = (A > t) & (prot < 0.5)
         lab, n = ndimage.label(m)
         cents = ndimage.center_of_mass(m, lab, range(1, n + 1)) if n else []
         keep = [i + 1 for i, (cy, cx) in enumerate(cents) if reg[int(cy), int(cx)]]
+        if r.get("within"):
+            keep = [k for k in keep if not (m & (lab == k) & ~reg).any()]
         m = np.isin(lab, keep)
         reg = np.ones_like(reg)
     elif kind == "cutout":
@@ -283,6 +321,10 @@ def glyph_masks(src: np.ndarray, r: dict, prot: np.ndarray):
         m = reg & ndimage.binary_fill_holes(solid) & ~solid
     else:
         raise ValueError(f"unknown glyph kind {kind!r}")
+    if r.get("ink") is not None and kind != "solid":
+        # dark paint that belongs to the glyph (a cut-out half painted instead of
+        # punched, a black drop shadow): opaque region pixels below luminance ``ink``
+        m |= reg & (A > 0.5) & (L < r["ink"])
     m &= prot < 0.5
     m = drop_specks(m, r.get("min_blob", 12))
     core = ndimage.binary_closing(m, iterations=1) & reg
@@ -323,6 +365,22 @@ def shadow_layer(alpha: np.ndarray, sh: dict) -> np.ndarray:
     return np.concatenate([np.broadcast_to(sh["rgb"], alpha.shape + (3,)), a[..., None]], -1)
 
 
+def harmonic_fill(ch: np.ndarray, hole: np.ndarray, iters: int = 3000) -> np.ndarray:
+    """Laplace fill of ``hole`` from its border (no overshoot, unlike biharmonic).
+
+    For a large hole in a grainy field, where biharmonic continuation rings into
+    light and dark blotches. Jacobi iterations from a mean start; deterministic.
+    """
+    out = ch.copy()
+    border = ndimage.binary_dilation(hole) & ~hole
+    out[hole] = ch[border].mean() if border.any() else 0.0
+    for _ in range(iters):
+        p = np.pad(out, 1, mode="edge")
+        avg = (p[:-2, 1:-1] + p[2:, 1:-1] + p[1:-1, :-2] + p[1:-1, 2:]) / 4.0
+        out[hole] = avg[hole]
+    return out
+
+
 def remove_glyph(src: np.ndarray, r: dict, core: np.ndarray, grown: np.ndarray, sh):
     fill = r.get("fill", "inpaint")
     out = src.copy()
@@ -331,8 +389,13 @@ def remove_glyph(src: np.ndarray, r: dict, core: np.ndarray, grown: np.ndarray, 
             inside = ndimage.binary_fill_holes(src[..., 3] > 0.5)
             hole = ndimage.binary_dilation(grown, iterations=r.get("rim", 2)) & inside
             for c in range(3):
-                out[..., c] = inpaint_biharmonic(src[..., c], hole)
+                if r.get("inpaint") == "harmonic":
+                    out[..., c] = harmonic_fill(src[..., c], hole)
+                else:
+                    out[..., c] = inpaint_biharmonic(src[..., c], hole)
             out[..., 3] = np.where(hole, 1.0, src[..., 3])
+            if r.get("grain"):
+                out = add_grain(out, src, hole, r["grain"])
         else:
             for c in range(4):
                 out[..., c] = inpaint_biharmonic(src[..., c], grown)
@@ -408,7 +471,62 @@ def place(canvas_hw, layer: np.ndarray, cx: float, cy: float) -> np.ndarray:
     return out
 
 
-def build_icon(src_u8: np.ndarray, r: dict, master: np.ndarray, geo: dict):
+def rotate_layer(layer: np.ndarray, deg: float) -> np.ndarray:
+    """Rotate straight RGBA (through premultiplied channels) or a 2-D mask by ``deg`` (counter-clockwise), expanding."""
+    if not deg:
+        return layer
+    flat = layer.ndim == 2
+    p = layer[..., None] if flat else premul(layer)
+    chans = [np.asarray(Image.fromarray(p[..., c].astype(np.float32), "F")
+                        .rotate(deg, resample=Image.BICUBIC, expand=True), dtype=np.float64)
+             for c in range(p.shape[-1])]
+    out = np.clip(np.stack(chans, -1), 0, 1)
+    return out[..., 0] if flat else unpremul(out)
+
+
+def coin_disc(d: float, palette_px: np.ndarray) -> np.ndarray:
+    """A round coin of diameter ``d`` px, shaded as a raised disc and coloured from ``palette_px``.
+
+    Light from the top left: a domed face, a groove, a rim bevelled the other
+    way and a dark outer edge. Each pixel takes the palette colour at its
+    luminance rank (the crown master's own gold ramp), so the coin is the same
+    metal as the crown.
+    """
+    n = int(np.ceil(d)) + 2
+    yy, xx = np.mgrid[0:n, 0:n] + 0.5 - n / 2
+    rad = d / 2
+    dist = np.hypot(xx, yy)
+    a = np.clip(rad - dist + 0.5, 0, 1)
+    t = -(xx + yy) / (rad * np.sqrt(2))           # +1 top left .. -1 bottom right
+    rr = dist / rad
+    # face kept in the darker half of the ramp so a light crown stands out on it
+    L = np.where(rr < 0.82, 0.38 + 0.14 * t, 0.62 - 0.3 * t)
+    L = L - 0.25 * np.exp(-((rr - 0.82) / 0.03) ** 2) - 0.2 * np.clip((rr - 0.94) / 0.06, 0, 1)
+    out = np.zeros((n, n, 4))
+    vis = a > 0
+    order = np.argsort(lum(palette_px[:, :3]), kind="stable")
+    g = palette_px[order]
+    pr = np.argsort(np.argsort(L[vis], kind="stable"), kind="stable") / max(1, vis.sum() - 1)
+    out[..., :3][vis] = g[np.clip(np.rint(pr * (len(g) - 1)).astype(int), 0, len(g) - 1), :3]
+    out[..., 3] = a
+    return out
+
+
+def add_grain(field: np.ndarray, src: np.ndarray, hole: np.ndarray, spec: dict) -> np.ndarray:
+    """Lay the source's own fine grain over a smooth refill: the high-pass of ``src``
+    shifted by ``offset`` (fractions of the icon) from untouched field nearby."""
+    h, w = src.shape[:2]
+    fx, fy = spec["offset"]
+    sig = spec.get("sigma", 1.5)
+    out = field.copy()
+    for c in range(3):
+        hp = src[..., c] - ndimage.gaussian_filter(src[..., c], sig)
+        hp = np.roll(hp, (-int(round(fy * h)), -int(round(fx * w))), axis=(0, 1))  # pixel p takes p + offset
+        out[..., c] = np.where(hole, out[..., c] + spec.get("gain", 1.0) * hp, out[..., c])
+    return np.clip(out, 0, 1)
+
+
+def build_icon(src_u8: np.ndarray, r: dict, master: np.ndarray, geo: dict, underlay=None):
     src = to_float(src_u8)
     h, w = src.shape[:2]
     prot = protect_mask(src, r.get("protect"))
@@ -417,6 +535,17 @@ def build_icon(src_u8: np.ndarray, r: dict, master: np.ndarray, geo: dict):
         raise RuntimeError(f"{r['id']}: no glyph pixels found")
     sh = fit_shadow(src, core) if r.get("fill") == "clear" else None
     field = remove_glyph(src, r, core, grown, sh)
+    refilled = grown.copy()
+    for item in r.get("clean", []):
+        # a further piece of the old art to refill (a torn-off part of the glyph, a
+        # second emblem): inpainted, but not part of the glyph box the crown fits;
+        # ``{"region": ..., "grain": ...}`` also lays the field's own grain over it
+        reg, grain = (item["region"], item.get("grain")) if isinstance(item, dict) and "region" in item else (item, None)
+        hole = region_mask(h, w, reg) & (prot < 0.5)
+        field = np.stack([harmonic_fill(field[..., c], hole) for c in range(4)], -1).clip(0, 1)
+        if grain:
+            field = add_grain(field, src, hole, grain)
+        refilled |= hole
 
     ys, xs = np.nonzero(core)
     gx0, gy0, gx1, gy1 = xs.min(), ys.min(), xs.max() + 1, ys.max() + 1
@@ -425,6 +554,65 @@ def build_icon(src_u8: np.ndarray, r: dict, master: np.ndarray, geo: dict):
     cw, ch = max(1, round(mw * s)), max(1, round(mh * s))
     cx = (gx0 + gx1) / 2 + r.get("dx", 0.0) * w
     cy = (gy0 + gy1) / 2 + r.get("dy", 0.0) * h
+
+    if r.get("disc"):
+        # the glyph sat in front of a round object (a globe) and its clear zone bit
+        # an arbitrary notch out of it: rebuild the disc whole under the old glyph,
+        # colour continued from the visible part, so the crown's bite is its own
+        cxd, cyd, rd = r["disc"]["circle"]
+        yy, xx = np.mgrid[0:h, 0:w] + 0.5
+        dmask = np.clip(rd * w - np.hypot(xx - cxd * w, yy - cyd * h) + 0.5, 0, 1)
+        if r["disc"].get("whole"):
+            lost = dmask > 0                       # every hidden part of the disc, not only behind the glyph
+        else:
+            lost = ndimage.binary_dilation(core, iterations=int(np.ceil(3 * (sh["sigma"] if sh else 1.0))) + 2)
+            lost &= dmask > 0
+        # hidden: see-through, or (``whole``) the old glyph's black drop shadow
+        hidden = field[..., 3] < 0.98
+        if r["disc"].get("whole"):
+            hidden |= lum(field[..., :3]) < 0.15
+        lost &= hidden
+        # colour from the disc's own visible pixels only (normalised blur, coarse to fine),
+        # so the transparent background never bleeds in
+        known = ~hidden & (dmask > 0.5)
+        est = np.zeros((h, w, 3))
+        for sig in (48.0, 24.0, 12.0, 6.0, 3.0):
+            den = ndimage.gaussian_filter(known.astype(np.float64), sig)
+            num = np.stack([ndimage.gaussian_filter(field[..., c] * known, sig) for c in range(3)], -1)
+            ok = den > 0.05
+            est[ok] = num[ok] / den[ok][:, None]
+        field[..., :3] = np.where(lost[..., None], est, field[..., :3])
+        field[..., 3] = np.where(lost, dmask, field[..., 3])
+        field = np.clip(field, 0, 1)
+        refilled |= lost
+
+    if underlay is not None:
+        # a part of another vanilla icon set behind the crown (e.g. a ballot box)
+        ul = r["underlay"]
+        uh, uw = underlay.shape[:2]
+        k = ul.get("scale", 1.0)
+        lay = resize_premul(underlay, (max(1, round(uw * k)), max(1, round(uh * k))))
+        lay = place((h, w), lay, ul["x"] * w + lay.shape[1] / 2, ul["y"] * h + lay.shape[0] / 2)
+        field = over(lay, field)
+
+    coin = r.get("coin")
+    ccy = cy
+    if coin:
+        # a gold coin behind the crown, so it reads as the currency, not a monarch
+        d = coin["d"] * w
+        pal_px = master[master[..., 3] > 0.9]
+        if coin.get("blue"):
+            # blues only: a navy-to-pale-blue ramp in place of the crown master's gold
+            t = np.linspace(0.0, 1.0, 256)[:, None]
+            dk, md, lt = np.array([0.05, 0.12, 0.30]), np.array([0.25, 0.50, 0.85]), np.array([0.80, 0.91, 1.0])
+            pal_px = np.concatenate([np.where(t < 0.5, dk + (md - dk) * (t / 0.5), md + (lt - md) * ((t - 0.5) / 0.5)), np.ones((256, 1))], axis=1)
+        disc = place((h, w), coin_disc(d, pal_px), cx, cy)
+        if sh:
+            field = over(field, shadow_layer(disc[..., 3], sh))
+        field = over(disc, field)
+        s = d * coin.get("crown", 0.6) / mw
+        cw, ch = max(1, round(mw * s)), max(1, round(mh * s))
+        ccy = cy + coin.get("crown_dy", 0.0) * h
 
     style = r.get("crown", "painted")
     colour = r.get("colour", "transfer")
@@ -441,14 +629,32 @@ def build_icon(src_u8: np.ndarray, r: dict, master: np.ndarray, geo: dict):
             crown = tint(painted, glyph_px)
         else:
             raise ValueError(f"{r['id']}: painted crown takes colour transfer or tint, not {colour!r}")
-        layer = place((h, w), crown, cx, cy)
-        if sh:
+        layer = place((h, w), rotate_layer(crown, r.get("rotate", 0.0)), cx, ccy)
+        bite = (r.get("disc") or {}).get("bite")
+        if bite:
+            # a clean gap round the crown where it stands in front of the disc
+            cut = ndimage.grey_dilation(layer[..., 3], size=2 * int(bite) + 1)
+            field = field.copy()
+            field[..., 3] *= 1.0 - np.clip(ndimage.gaussian_filter(cut, 0.7), 0, 1)
+        if sh and r.get("disc"):
+            # in front of a rebuilt disc: the shadow falls on the disc, not only behind it
+            shade = shadow_layer(layer[..., 3], sh)
+            shade[..., 3] *= r["disc"].get("shade", 0.6)
+            field = over(shade, field)
+        elif sh:
             field = over(field, shadow_layer(layer[..., 3], sh))
         out = over(layer, field)
     elif style == "stencil":
         stroke = r.get("stencil_stroke", 1.0) / s          # least arch width, target px -> master px
-        st = resize_mask(crown_stencil(geo, stroke), (cw, ch))
-        S = place((h, w), st, cx, cy)
+        big = crown_stencil(geo, stroke)
+        if r.get("rotate"):
+            # rotate at stencil resolution, then reduce, so the edges stay crisp
+            k = cw / big.shape[1]
+            big = rotate_layer(big, r["rotate"])
+            st = resize_mask(big, (max(1, round(big.shape[1] * k)), max(1, round(big.shape[0] * k))))
+        else:
+            st = resize_mask(big, (cw, ch))
+        S = place((h, w), st, cx, ccy)
         if colour == "punch":
             out = field.copy()
             out[..., 3] = field[..., 3] * (1.0 - S)
@@ -467,7 +673,7 @@ def build_icon(src_u8: np.ndarray, r: dict, master: np.ndarray, geo: dict):
         p = prot[..., None]
         out = unpremul(premul(src) * p + premul(out) * (1.0 - p))
     info = {"glyph_box": [int(gx0), int(gy0), int(gx1), int(gy1)], "crown_px": [cw, ch],
-            "thresh": round(float(thresh), 3), "masks": (core, grown, prot)}
+            "thresh": round(float(thresh), 3), "masks": (core, refilled, prot)}
     if sh:
         info["shadow"] = {"sigma": sh["sigma"], "gain": round(sh["gain"], 3), "rms": round(sh["rms"], 4)}
     return to_u8(out), info
@@ -504,7 +710,19 @@ def generate(recipes, game: Path, repo: Path):
     geo = crown_geometry(master)
     for r in recipes:
         src = dds.read_top(game / r["path"])
-        img, info = build_icon(src, r, master, geo)
+        ul = r.get("underlay")
+        under = to_float(dds.read_top(game / ul["path"])) if ul else None
+        if under is not None:
+            ys, xs = np.nonzero(under[..., 3] > 0)
+            under = under[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+        base = {k: v for k, v in r.items() if k != "then"}
+        img, info = build_icon(src, base, master, geo, under)
+        # ``then``: further glyphs in the same icon, each a pass over the previous
+        # pass's output with these fields overriding the recipe's
+        for extra in r.get("then", []):
+            img, more = build_icon(img, {**base, **extra, "underlay": None, "coin": extra.get("coin")}, master, geo)
+            info["masks"] = tuple(np.maximum(a, b) for a, b in zip(info["masks"], more["masks"]))
+            info.setdefault("then", []).append({k: v for k, v in more.items() if k != "masks"})
         yield r, src, img, info
 
 

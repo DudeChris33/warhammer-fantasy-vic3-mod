@@ -72,4 +72,11 @@ matched better than a plain box: vanilla's exact filter is not known.
 | `colour` | Painted: `transfer` (the £'s own colours by luminance rank; `palette: region` ranks the whole region) or `tint` (master shading in the £'s median colour, for one-tone glyphs). Stencil: `flat` (the £'s median colour and alpha) or `punch` (cut out of the field) |
 | `scale`, `dx`, `dy` | Crown size relative to the £'s box; offset in fractions of the icon |
 | `stencil_stroke` | Least arch width in output px for a stencil (default 1) |
-| `protect` | Restored from vanilla on top: `{"poly": [[x, y], ...], "grow": px}` (something in front of the £) and/or `{"red": true}` (a red no-sign stroke) |
+| `protect` | Restored from vanilla on top: `{"poly": [[x, y], ...], "grow": px}` (something in front of the £) and/or `{"red": true}` (a red no-sign stroke); `"cool": true` on a poly limits it to what shows through a tear (#9195) |
+| `region` (polygon) | `{"poly": [[x, y], ...]}` as an alternative to the box and circle (#9195) |
+| `glyph` (colour) | `red` / `warm` / `cool` find the £ by hue ratio against `thresh` instead of brightness; `within` keeps only a bare glyph wholly inside `region`; `ink` also takes dark paint as part of the glyph (#9195) |
+| `inpaint`, `clean`, `grain` | `inpaint: "harmonic"` is a smoother refill; `clean` lists extra boxes to refill that the crown is not fitted to; `grain: {"offset": [x, y]}` lays the field's own fine texture over a smooth refill, also allowed inside a `clean` entry (#9195) |
+| `coin` | `{"d": fraction, "blue": true}`: a shaded coin disc behind the crown so it reads as currency, not a monarch; `blue` swaps the master's gold for a blue ramp (`privately_owned`) (#9195) |
+| `underlay` | Part of another vanilla icon placed behind the crown, read from the vanilla install (`wealth_voting` uses the `universal_suffrage` ballot box) |
+| `disc` | Rebuild a round object the £ stood in front of (the globe in `filter_icons_foreign_owners`) |
+| `rotate`, `then` | Crown tilt in degrees; `then` is a list of further glyphs in the same icon, each its own pass (`notification_company`) |
