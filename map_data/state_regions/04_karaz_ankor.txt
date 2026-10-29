@@ -477,13 +477,11 @@ STATE_WINTERTEETH_PASS = {
     farm = x0CECEA
     mine = x0CECEA
     wood = x0CECEA
-    port = x0CECEA
     arable_land = 2
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
         building_logging_camp = 1
     }
-    naval_exit_id = 3060
 }
 STATE_SHATTERED_TEETH = {
     id = 224
@@ -967,7 +965,7 @@ STATE_PEAK_PASS = {
     farm = xE1DF48
     mine = xF8F4A5
     wood = x12D84B
-    arable_land = 85
+    arable_land = 84
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
         building_coal_mine = 33

@@ -431,7 +431,6 @@
  STATE_LAND_677:0 "Land 677" # AUTOGEN
  STATE_LAND_678:0 "Land 678" # AUTOGEN
  STATE_LAND_679:0 "Naggaroth"
- STATE_LAND_681:0 "Land 681" # AUTOGEN
 # Retained: no longer emitted by the current region cut; kept so no name is lost.
  STATE_BILIOUS_BASILICA:0 "Bilious Basilica"
  STATE_BILIOUS_BASILICA_01:0 "Bilious Basilica"
@@ -753,6 +752,7 @@
  STATE_LAND_671:0 "Land 671" # AUTOGEN
  STATE_LAND_672:0 "Land 672" # AUTOGEN
  STATE_LAND_680:0 "Land 680" # AUTOGEN
+ STATE_LAND_681:0 "Land 681" # AUTOGEN
  STATE_LOWER_ASH_RIVER:0 "Lower Ash River"
  STATE_LOWER_RIVER_MORTIS:0 "Lower River Mortis"
  STATE_MIDDLE_BILBALI:0 "Middle Bilbali"

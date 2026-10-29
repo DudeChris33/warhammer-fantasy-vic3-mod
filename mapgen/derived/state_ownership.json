@@ -1683,6 +1683,7 @@
      "owner": "WIS",
      "provinces": [
       "x06EA0E",
+      "x12CA76",
       "x2F93E0",
       "x664EC5",
       "x68B295",
@@ -2236,12 +2237,6 @@
    "naming_anchor": null,
    "owner": "placeholder",
    "scope": "placeholder"
-  },
-  "STATE_LAND_681": {
-   "id": 681,
-   "naming_anchor": null,
-   "owner": "WIS",
-   "scope": "drawn"
   },
   "STATE_LAURELORN_FOREST": {
    "id": 625,

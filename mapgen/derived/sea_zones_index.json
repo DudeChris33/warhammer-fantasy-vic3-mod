@@ -260,7 +260,7 @@
    "sea_group": "SEA_OF_CHAOS",
    "display_name": "Gloomwrack Strait",
    "id": 3009,
-   "area": 41383,
+   "area": 41465,
    "coastal": true,
    "impassable": false
   },
@@ -380,7 +380,7 @@
    "sea_group": "SEA_OF_CLAWS",
    "display_name": "Sea of Claws",
    "id": 3021,
-   "area": 20319,
+   "area": 20373,
    "coastal": true,
    "impassable": false
   },
@@ -750,7 +750,7 @@
    "sea_group": "BLACK_GULF",
    "display_name": "Upper Reik River",
    "id": 3060,
-   "area": 924,
+   "area": 727,
    "coastal": true,
    "impassable": false
   },
@@ -790,7 +790,7 @@
    "sea_group": "BLACK_GULF",
    "display_name": "River Brienne",
    "id": 3065,
-   "area": 1178,
+   "area": 1097,
    "coastal": true,
    "impassable": false
   },

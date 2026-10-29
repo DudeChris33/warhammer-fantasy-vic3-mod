@@ -108,7 +108,7 @@ STATE_VANNHEIM_MOUNTAINS = {
     capped_resources = {
         building_fishing_wharf = 2
         building_iron_mine = 4
-        building_logging_camp = 5
+        building_logging_camp = 4
     }
 }
 STATE_GLOOMWRACK_COAST = {
@@ -135,7 +135,7 @@ STATE_GLOOMWRACK_COAST = {
 STATE_ELDAGRIMM_GULF = {
     id = 44
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0F4BE7 x3B2579 x44943C x69EDD1 x7DC599 x86C510 x8F4766 xA65CC3 xB9481E xCBB658 xE2AB38 }
+    provinces = { x0F4BE7 x69EDD1 x7DC599 x86C510 x8F4766 xA65CC3 xB9481E xCBB658 xE2AB38 }
     city = xCBB658
     farm = x86C510
     mine = x69EDD1
@@ -166,7 +166,7 @@ STATE_GOROMADNY_COAST = {
         building_fishing_wharf = 3
         building_iron_mine = 5
         building_lead_mine = 1
-        building_logging_camp = 5
+        building_logging_camp = 6
         building_sulfur_mine = 1
     }
     naval_exit_id = 3004

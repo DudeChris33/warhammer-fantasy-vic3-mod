@@ -10,7 +10,8 @@
       "name": "river_0000",
       "state_keys": [
         "STATE_EAGLE_S_PEAK",
-        "STATE_TROLLHEIM_MOUNTAINS"
+        "STATE_TROLLHEIM_MOUNTAINS",
+        "STATE_VARG_CAMP"
       ]
     },
     {
@@ -1005,12 +1006,12 @@
     {
       "head": "source",
       "mouth": "sea",
-      "length_px": 36,
+      "length_px": 35,
       "width": 3,
       "name": "river_0086",
       "state_keys": [
         "STATE_BLACK_MOUNTAINS",
-        "STATE_KREUTZHOFEN",
+        "STATE_LAND_681",
         "STATE_SOLLAND"
       ]
     },
@@ -1039,12 +1040,13 @@
     {
       "head": "source",
       "mouth": "sea",
-      "length_px": 111,
+      "length_px": 124,
       "width": 3,
       "name": "river_0089",
       "state_keys": [
         "STATE_GLADE_OF_ETERNAL_MIDNIGHT",
         "STATE_HALLS_OF_EQUOS",
+        "STATE_RIVER_BRIENNE",
         "STATE_SHATTERED_TEETH",
         "STATE_TALSYN",
         "STATE_TYR_VANNA"
@@ -1165,13 +1167,14 @@
     },
     {
       "head": "source",
-      "mouth": "sea",
-      "length_px": 37,
+      "mouth": "endorheic",
+      "length_px": 65,
       "width": 3,
       "name": "river_0100",
       "state_keys": [
         "STATE_BLACK_MOUNTAINS",
-        "STATE_KREUTZHOFEN"
+        "STATE_LAND_681",
+        "STATE_UPPER_REIK_RIVER"
       ]
     },
     {

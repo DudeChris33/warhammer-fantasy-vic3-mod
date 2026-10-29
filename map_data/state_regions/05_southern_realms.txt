@@ -334,7 +334,7 @@ STATE_TRANTINE_HILLS = {
         building_fishing_wharf = 21
         building_iron_mine = 44
         building_lead_mine = 24
-        building_logging_camp = 29
+        building_logging_camp = 30
         building_sulfur_mine = 28
     }
     resource = {

@@ -8,8 +8,8 @@ would help rather than the build silently coarsening.
 ## Density
 
 - Target: **659 land states** (vanilla's own count) at a mean
-  of **16,953 canvas px** each, plus **103 sea zones**.
-- Achieved: **1116 land cells** (mean 10,011 px, median 8,492 px, min 6, max 43,102) and **113 sea zones**.
+  of **16,954 canvas px** each, plus **103 sea zones**.
+- Achieved: **1117 land cells** (mean 10,002 px, median 8,531 px, min 6, max 43,102) and **113 sea zones**.
 - Cells traced from a source before filling: **1,816**.
 
 ## Lettering bridge (the parchment master)
