@@ -15,7 +15,8 @@ colour authority ``mapgen/derived/provinces_index.json`` and the sea canon
   the ``strategic_regions`` layer of ``full.ora`` (``source_layers.json``), classified
   by exact RGB via ``mapgen/config/strategic_region_colors.json``; a region with
   zero votes (outside the painting's coverage) is an out-of-scope placeholder,
-  named from its nearest continent in ``mapgen/config/out_of_scope_continents.json``.
+  filed under its nearest continent in ``mapgen/config/out_of_scope_continents.json``
+  (the state file only; it keeps its numeric ``STATE_LAND_NNN`` name).
   ``NNN`` is **not** the raw ``land_regions_index.json`` region label (flood-fill
   discovery order, geographically scattered) — see
   ``worldgen.land_state_numbering.assign_state_numbers`` (board #4188), which
@@ -35,10 +36,10 @@ colour authority ``mapgen/derived/provinces_index.json`` and the sea canon
   ``out_of_scope_strategic_regions.txt`` (states-only, no capital/map_color —
   the minimal shape vanilla's own water regions already prove loads fine).
 * ``localization/replace/english/map/states_l_english.yml`` — the canon name
-  from ``mapgen/config/land_regions_worksheet.csv`` (or the out-of-scope
-  placeholder's continent name) per state; ``AUTOGEN_MARKER`` only survives for
-  a state with neither — a real content gap to fix in the worksheet, not to
-  invent here. Deliberately in ``localization/replace/`` and named after
+  from ``mapgen/config/land_regions_worksheet.csv`` per state; ``AUTOGEN_MARKER``
+  survives for a state with none, which is every out-of-scope placeholder
+  (Chris, 2026-10-29: they keep ``Land NNN``) and any drawn state with a real
+  content gap to fix in the worksheet, not to invent here. Deliberately in ``localization/replace/`` and named after
   vanilla's own file (not ``wh_land_states_l_english.yml`` under
   ``localization/english/``) — an Old-World name can coincide with a
   real-world vanilla state name (found via ``STATE_AQUITAINE``), and the
@@ -796,8 +797,6 @@ def main(argv: list[str] | None = None) -> int:
             realm = None
 
         name = worksheet.names.get(state_num)
-        if not name and not is_drawn:
-            name = " ".join(part.capitalize() for part in oos_continent_of[region_id].split("_"))
         if name:
             canon_names[key] = name
 
