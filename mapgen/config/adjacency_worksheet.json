@@ -189,8 +189,8 @@
         1668,
         2460
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -201,8 +201,8 @@
         1693,
         2508
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -213,8 +213,8 @@
         1695,
         2548
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -249,8 +249,8 @@
         3760,
         3
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -449,18 +449,6 @@
     },
     {
       "a": [
-        4165,
-        1083
-      ],
-      "b": [
-        4159,
-        1070
-      ],
-      "type": "sea",
-      "comment": "Fort Soll"
-    },
-    {
-      "a": [
         994,
         956
       ],
@@ -632,18 +620,6 @@
     },
     {
       "a": [
-        4171,
-        1060
-      ],
-      "b": [
-        4158,
-        1060
-      ],
-      "type": "sea",
-      "comment": "Fort Soll"
-    },
-    {
-      "a": [
         1085,
         1130
       ],
@@ -675,8 +651,8 @@
         1638,
         2019
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -843,8 +819,8 @@
         1877,
         2731
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -855,8 +831,8 @@
         1905,
         2748
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -867,8 +843,8 @@
         1945,
         2760
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -879,8 +855,8 @@
         1863,
         2695
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -903,8 +879,8 @@
         3578,
         3
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -1083,6 +1059,18 @@
     },
     {
       "a": [
+        4153,
+        1039
+      ],
+      "b": [
+        4141,
+        1040
+      ],
+      "type": "sea",
+      "comment": "Fort Soll"
+    },
+    {
+      "a": [
         3777,
         1239
       ],
@@ -1102,8 +1090,8 @@
         4142,
         2
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -1114,8 +1102,8 @@
         4375,
         2
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -1162,8 +1150,8 @@
         1760,
         1846
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1306,8 +1294,8 @@
         2040,
         1155
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1330,8 +1318,8 @@
         1678,
         1980
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1378,8 +1366,8 @@
         1701,
         1887
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1510,8 +1498,8 @@
         1824,
         2718
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1657,8 +1645,8 @@
         3037,
         3
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -2140,8 +2128,8 @@
         1716,
         2662
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -2209,11 +2197,11 @@
     {
       "a": [
         4093,
-        1118
+        1117
       ],
       "b": [
-        4161,
-        1081
+        4163,
+        1059
       ],
       "type": "canal_echoes_r",
       "comment": "River of Echoes",
@@ -2230,8 +2218,8 @@
         1738,
         2536
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -2338,8 +2326,8 @@
         1747,
         2628
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -2470,8 +2458,8 @@
         1861,
         2714
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -2482,8 +2470,8 @@
         1896,
         2753
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -2604,18 +2592,6 @@
       ],
       "type": "canal_maelstrom_e",
       "comment": "Maelstrom"
-    },
-    {
-      "a": [
-        4153,
-        1039
-      ],
-      "b": [
-        4141,
-        1040
-      ],
-      "type": "sea",
-      "comment": "Fort Soll"
     },
     {
       "a": [
@@ -2926,8 +2902,8 @@
         1723,
         1900
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -3034,8 +3010,8 @@
         3847,
         3
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -3058,8 +3034,8 @@
         1683,
         1970
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -3154,8 +3130,8 @@
         2893,
         3
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -3553,8 +3529,8 @@
         3348,
         771
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Albion"
     },
     {
       "a": [
@@ -3625,8 +3601,8 @@
         6208,
         2182
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Out of scope"
     },
     {
       "a": [
@@ -3913,8 +3889,8 @@
         1860,
         2612
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -3925,8 +3901,8 @@
         1809,
         2630
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -3958,8 +3934,8 @@
         1107
       ],
       "b": [
-        4160,
-        1078
+        4164,
+        1056
       ],
       "type": "canal_echoes_t",
       "comment": "River of Echoes",
@@ -4036,8 +4012,8 @@
         1703,
         2014
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4144,8 +4120,8 @@
         1648,
         2082
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4156,8 +4132,8 @@
         1939,
         2765
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4192,8 +4168,8 @@
         1697,
         2478
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4276,8 +4252,8 @@
         1710,
         2015
       ],
-      "type": "",
-      "comment": ""
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -5244,6 +5220,36 @@
       ],
       "type": "sea",
       "comment": "North Norsca"
+    },
+    {
+      "a": [
+        4093,
+        1118
+      ],
+      "b": [
+        4161,
+        1081
+      ],
+      "type": "canal_echoes_r",
+      "comment": "River of Echoes",
+      "strait_type": "artificial",
+      "land_a_color": "x877E58",
+      "land_b_color": "x664EC5"
+    },
+    {
+      "a": [
+        4012,
+        1107
+      ],
+      "b": [
+        4160,
+        1078
+      ],
+      "type": "canal_echoes_t",
+      "comment": "River of Echoes",
+      "strait_type": "artificial",
+      "land_a_color": "x5DE819",
+      "land_b_color": "x664EC5"
     }
   ]
 }

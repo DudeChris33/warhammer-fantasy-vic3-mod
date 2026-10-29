@@ -160,8 +160,8 @@
    "canon_cities": []
   },
   "STATE_BLACK_MOUNTAINS": {
-   "area_px": 3260,
-   "arable_milli": 193971,
+   "area_px": 3242,
+   "arable_milli": 191467,
    "cities": 1,
    "canon_cities": []
   },
@@ -1054,8 +1054,8 @@
    "canon_cities": []
   },
   "STATE_KREUTZHOFEN": {
-   "area_px": 2578,
-   "arable_milli": 657995,
+   "area_px": 2281,
+   "arable_milli": 474740,
    "cities": 2,
    "canon_cities": []
   },
@@ -1428,6 +1428,12 @@
   "STATE_LAND_679": {
    "area_px": 2678061,
    "arable_milli": 473653251,
+   "cities": 0,
+   "canon_cities": []
+  },
+  "STATE_LAND_681": {
+   "area_px": 396,
+   "arable_milli": 190156,
    "cities": 0,
    "canon_cities": []
   },
@@ -1968,8 +1974,8 @@
    "canon_cities": []
   },
   "STATE_SHATTERED_TEETH": {
-   "area_px": 4646,
-   "arable_milli": 271693,
+   "area_px": 4545,
+   "arable_milli": 264413,
    "cities": 1,
    "canon_cities": []
   },
@@ -2544,8 +2550,8 @@
    "canon_cities": []
   },
   "STATE_WINTERTEETH_PASS": {
-   "area_px": 172,
-   "arable_milli": 3953,
+   "area_px": 192,
+   "arable_milli": 6837,
    "cities": 1,
    "canon_cities": []
   },

@@ -245,6 +245,7 @@
     "STATE_LAND_677": {"anchor": null, "cultures": []},
     "STATE_LAND_678": {"anchor": null, "cultures": []},
     "STATE_LAND_679": {"anchor": null, "cultures": []},
+    "STATE_LAND_681": {"anchor": null, "cultures": ["wissenlander"]},
     "STATE_LAURELORN_FOREST": {"anchor": [4063, 661], "cultures": ["nordlander", "wood_elf"]},
     "STATE_LOST_KHYPNIA": {"anchor": [4231, 1136], "cultures": ["border_princer"]},
     "STATE_LOTHERN_EAST": {"anchor": [2843, 1531], "cultures": ["high_elf"]},
