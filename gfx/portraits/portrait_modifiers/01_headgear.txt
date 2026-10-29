@@ -453,6 +453,7 @@
             base = 0
             modifier = {
                add = 100
+               always = no # [#9046] gated off: Qing imperial hat; chinese_imperial_clothes_trigger is live for Cathayan rulers
                chinese_imperial_clothes_trigger = yes
             }
         }
@@ -3800,7 +3801,7 @@
                 mode = add
                 gene = headgear
                 template = arabic_turban
-                range = { 0 0.5 } # For the randomness to work correctly
+                range = { 0 0.25 } # [#9046] was: range = { 0 0.5 } -- drops male_headgear_indian_radhakanta_deb (Tatya Tope turban)
             }
         }
         weight = {

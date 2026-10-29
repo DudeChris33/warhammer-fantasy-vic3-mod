@@ -373,7 +373,7 @@ clothes = {
                 add = 100
                 scope:character ?= {
                     OR = {
-                        always = no  # [#3662] was: culture = cu:japanese
+                        culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: culture = cu:japanese
                         AND = {
                             always = no  # [#3662] was: culture = cu:ainu
                             home_country ?= {
@@ -3827,10 +3827,10 @@ clothes = {
                 add = 11000
                 NOT = { has_dlc_feature = ep2_cosmetics }
                 scope:pop ?= {
-                    always = no  # [#3662] was: culture = cu:japanese
+                    culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: culture = cu:japanese
                     is_pop_type = officers
                     owner ?= {
-                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
+                        country_has_primary_culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3855,7 +3855,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
+                        country_has_primary_culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3887,7 +3887,7 @@ clothes = {
                 mode = add
                 gene = top_layer
                 template = ep2_character_top_layers
-                range = { 0 1 }
+                accessory = male_top_layer_japanese_kataginu_01 # [#9046] was: range = { 0 1 } -- template holds only the _seishisai (Aizawa Seishisai) kataginu
             }
         }
         weight = {
@@ -3896,10 +3896,10 @@ clothes = {
                 add  = 11000
                 has_dlc_feature = ep2_cosmetics
                 scope:pop ?= {
-                    always = no  # [#3662] was: culture = cu:japanese
+                    culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: culture = cu:japanese
                     is_pop_type = officers
                     owner ?= {
-                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
+                        country_has_primary_culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -3924,7 +3924,7 @@ clothes = {
                         }
                     }
                     owner ?= {
-                        always = no  # [#3662] was: country_has_primary_culture = cu:japanese
+                        country_has_primary_culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: country_has_primary_culture = cu:japanese
                     }
                     japanese_restoration_trigger = no
                 }
@@ -10424,7 +10424,7 @@ clothes = {
 
                 scope:character ?= {
                     OR = {
-                        always = no  # [#3662] was: culture = cu:japanese
+                        culture = cu:nipponese  # [#9046] restored for Nipponese; [#3662] was: culture = cu:japanese
                         AND = {
                             always = no  # [#3662] was: culture = cu:ainu
                             home_country ?= {

@@ -6,9 +6,12 @@
 # european_clothes_trigger, a WH-native gate keyed on the culture's `graphics` field
 # (has_culture_graphics = european). Real-world national art in the templates these reach is pinned
 # to generic pieces in the portrait_modifiers files (tagged [#6639]).
+# [#9046] Six national character triggers are live too: arabic_clothes_trigger (graphics = arabic),
+# indian_clothes_trigger (graphics = south_asian), chinese_court/chinese_imperial (cu:cathayan) and
+# japanese/japanese_imperial (cu:nipponese); european_clothes_trigger also takes khureshi, hobgoblin,
+# cathayan_orc, kurgan and lizardmen by culture id. Pins are tagged [#9046] in portrait_modifiers.
 # Every other trigger stays an inert `always = no` stub with no reference to the blanked real-world
-# cultures, tags or heritages: pops, and characters of non-European-graphics cultures, fall through
-# to default clothing.
+# cultures, tags or heritages: pops fall through to default clothing.
 # Never overwrite this file with vanilla's. If vanilla's trigger set changes, add or remove names here.
 
 british_empire_clothes_trigger = { always = no }
@@ -81,16 +84,68 @@ hindu_clothes_pop_trigger = { always = no }
 african_diaspora_clothes_trigger = { always = no }
 african_diaspora_pop_clothes_trigger = { always = no }
 japanese_shogun_clothes_trigger = { always = no }
-japanese_imperial_clothes_trigger = { always = no }
-chinese_imperial_clothes_trigger = { always = no }
+# [#9046] Partial port of vanilla 00_clothes_triggers.txt:1085, restored for Nipponese rulers. Dropped
+# the law_bakufu branch (shogunate emperor via special_character_japanese_emperor) and the
+# gov_domain_alliance/gov_domain_frontier exclusions (real-world Japanese law and government types);
+# the language_japanese / c:JAP culture test becomes culture = cu:nipponese. What remains: a Nipponese
+# ruler of a monarchy. Shogun and restoration triggers stay `no`.
+japanese_imperial_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		exists = home_country
+		is_ruler_of_own_country = yes
+		home_country ?= {
+			OR = {
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_social_monarchy
+			}
+		}
+		culture = cu:nipponese
+	}
+}
+# [#9046] Partial port of vanilla 00_clothes_triggers.txt:1121, restored for Cathayan rulers. The
+# heritage_han / c:CHI test becomes culture = cu:cathayan (by culture, not graphics: east_asian is
+# shared with kurgan, khureshi, nipponese, hobgoblin and cathayan_orc). Monarchy/ruler shape kept.
+chinese_imperial_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		is_ruler_of_own_country = yes
+		exists = home_country
+		home_country = {
+			OR = {
+				has_law = law_type:law_monarchy
+				has_law = law_type:law_social_monarchy
+			}
+		}
+		culture = cu:cathayan
+	}
+}
 chinese_manchu_queue_hairstyle_character_trigger = { always = no }
 chinese_manchu_queue_hairstyle_pops_trigger = { always = no }
-chinese_court_clothes_trigger = { always = no }
+# [#9046] Partial port of vanilla 00_clothes_triggers.txt:1213, restored for Cathayan characters.
+# Dropped the NOT-branch excluding Tai-heritage monarchs (heritage_tai / heritage_group_southeast_asian,
+# real-world; always false here, so the NOT was always true) and the sinosphere/han/tibetan/mongolic/
+# tai/hmong culture test with its cu:kalmyk/cu:korean exclusions; replaced by culture = cu:cathayan.
+chinese_court_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		culture = cu:cathayan
+	}
+}
 chinese_court_clothes_pop_trigger = { always = no }
 african_clothes_trigger = { always = no }
 arabic_fez_trigger = { always = no }
 arabic_military_fez_pop_trigger = { always = no }
-arabic_clothes_trigger = { always = no }
+# [#9046] WH-native replacement of vanilla 00_clothes_triggers.txt:1392 (nehekharan, arabyan). Vanilla's
+# heritage_group_middle_eastern/central_asian, Abyssinian, cu:circassian and Ottoman/Egyptian cu:albanian
+# branches all dangle here; gated on the culture's art family instead, as european_clothes_trigger is.
+# The Tatya Tope turban in the arabic_turban template is excluded by a range pin in 01_headgear.txt.
+arabic_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		culture = { has_culture_graphics = arabic }
+	}
+}
 ethiopian_clothes_trigger = { always = no }
 # [#6639] WH-native replacement (not a port) of vanilla 00_clothes_triggers.txt:1453. Vanilla ORs
 # three real-world branches, all dangling here: cu:japanese modernizers, the AST_william_light
@@ -98,13 +153,31 @@ ethiopian_clothes_trigger = { always = no }
 # characters. This mod gates on the culture's art family instead: true for any character whose
 # culture declares graphics = european (monstrous cultures included; their portraits are human
 # placeholders). Other graphics families keep default clothing.
+# [#9046] Also true, by culture id, for the non-European-graphics cultures that have no restored
+# national dress of their own: khureshi, hobgoblin, cathayan_orc, kurgan (east_asian) and lizardmen
+# (decentralised_americas). Native-American and american_clothes triggers stay `no`.
 european_clothes_trigger = {
 	exists = scope:character
 	scope:character = {
-		culture = { has_culture_graphics = european }
+		OR = {
+			culture = { has_culture_graphics = european }
+			culture = cu:khureshi
+			culture = cu:hobgoblin
+			culture = cu:cathayan_orc
+			culture = cu:kurgan
+			culture = cu:lizardmen
+		}
 	}
 }
-indian_clothes_trigger = { always = no }
+# [#9046] WH-native replacement of vanilla 00_clothes_triggers.txt:1498 (ind). Vanilla's
+# heritage_group_south_asian, cu:pathan and rel:sikh branches dangle here; gated on the culture's art
+# family instead (has_culture_graphics = south_asian).
+indian_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		culture = { has_culture_graphics = south_asian }
+	}
+}
 siamese_clothes_trigger = { always = no }
 american_clothes_trigger = { always = no }
 american_clothes_pop_trigger = { always = no }
@@ -245,7 +318,14 @@ cold_clothes_pop_trigger = { always = no }
 japanese_restoration_trigger = { always = no }
 japanese_modernizer_character_trigger = { always = no }
 japanese_clothes_pop_trigger = { always = no }
-japanese_clothes_trigger = { always = no }
+# [#9046] Partial port of vanilla 00_clothes_triggers.txt:2098. cu:japanese becomes cu:nipponese;
+# dropped the cu:ryukyuan and cu:ainu-in-Japan branches (real-world cultures, always false here).
+japanese_clothes_trigger = {
+	exists = scope:character
+	scope:character = {
+		culture = cu:nipponese
+	}
+}
 indian_clothes_pop_trigger = { always = no }
 slavic_clothes_pop_trigger = { always = no }
 slavic_clothes_trigger = { always = no }
