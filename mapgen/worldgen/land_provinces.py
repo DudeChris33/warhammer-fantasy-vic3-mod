@@ -1067,6 +1067,57 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
         deep_tracts = np.zeros(int(tract_all.max()) + 1, dtype=bool)
         deep_tracts[deep_ids] = True
         blob_pts = np.concatenate(city_blobs) if city_blobs else np.zeros((0, 2), dtype=np.int64)
+        ext_all = np.zeros(imp.shape, dtype=bool)
+        for i in sorted(imp_regions):
+            m_i = reg == i
+            rows_i = np.flatnonzero(m_i.any(axis=1))
+            y0_, y1_ = int(rows_i[0]), int(rows_i[-1]) + 1
+            m_c = m_i[y0_:y1_]
+            keep_c = [(ax, ay - y0_) for ax, ay in (keep_passable or ())
+                      if y0_ <= ay < y1_] + [(ax, ay - y0_) for ax, ay in seeds_by_region.get(i, ())]
+            bl = blob_pts[(blob_pts[:, 0] >= y0_) & (blob_pts[:, 0] < y1_)]
+            keep_mask_c = None
+            if bl.size:
+                keep_mask_c = np.zeros(m_c.shape, dtype=bool)
+                keep_mask_c[bl[:, 0] - y0_, bl[:, 1]] = True
+            snapped, st = _snap_region_paint(
+                m_c, imp[y0_:y1_], d_B_all[y0_:y1_], B_all[y0_:y1_], tract_all[y0_:y1_],
+                deep_tracts, snap_extend_px, snap_trim_px, wrap_x, keep_c, keep_mask_c, min_area)
+            ext_all[y0_:y1_] |= snapped & ~imp[y0_:y1_]
+            imp[y0_:y1_] = (imp[y0_:y1_] & ~m_c) | snapped
+            if st["extended"] or st["trimmed"]:
+                snap_regions += 1
+            for k_ in snap_tot:
+                snap_tot[k_] += st[k_]
+            snap_warn.extend((x_, y_ + y0_) for x_, y_ in st["warn"])
+        # State merges join regions after the cut, so a strip a region fills can be the
+        # only passable link across a border. Drop the extension in every region whose
+        # fill splits a passable land component (>= min_area px both sides) of the whole
+        # map; repeat until none does.
+        for _ in range(5):
+            if not ext_all.any():
+                break
+            pas_after = land & ~imp
+            cb = cells.components((pas_after | ext_all).astype(np.int32), wrap_x)
+            ca = cells.components(pas_after.astype(np.int32), wrap_x)
+            sz_a = np.bincount(ca[pas_after].ravel(), minlength=int(ca.max()) + 1)
+            sz_b = np.bincount(cb[pas_after | ext_all].ravel(), minlength=int(cb.max()) + 1)
+            big_a = pas_after & (sz_a[ca] >= min_area)
+            keys = np.unique(cb[big_a].astype(np.int64) * (int(ca.max()) + 1) + ca[big_a])
+            owners = keys // (int(ca.max()) + 1)
+            multi = np.unique(owners[np.bincount(owners, minlength=1)[owners] > 1]) if keys.size else owners
+            multi = multi[sz_b[multi] >= min_area] if multi.size else multi
+            if not multi.size:
+                break
+            bad = np.unique(reg[ext_all & np.isin(cb, multi)])
+            bad = bad[bad > 0]
+            if not bad.size:
+                break
+            drop = ext_all & np.isin(reg, bad)
+            imp[drop] = False
+            ext_all &= ~drop
+            snap_tot["reverted"] += int(bad.size)
+            snap_tot["extended"] -= int(drop.sum())
 
     # Largest-remainder seat allocation across the drawn regions: one each, then
     # the remaining seats by area share, so the totals add up exactly.
@@ -1152,22 +1203,6 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
             anchors_c = [(ax, ay - y0) for ax, ay in (anchors or ())]
             keep_c = [(ax, ay - y0) for ax, ay in (keep_passable or ())
                       if y0 <= ay < y1] + anchors_c
-            if snap_on:
-                bl = blob_pts[(blob_pts[:, 0] >= y0) & (blob_pts[:, 0] < y1)]
-                keep_mask_c = None
-                if bl.size:
-                    keep_mask_c = np.zeros(m_c.shape, dtype=bool)
-                    keep_mask_c[bl[:, 0] - y0, bl[:, 1]] = True
-                snapped, st = _snap_region_paint(
-                    m_c, imp[y0:y1], d_B_all[y0:y1], B_all[y0:y1], tract_all[y0:y1],
-                    deep_tracts, snap_extend_px, snap_trim_px, wrap_x, keep_c, keep_mask_c,
-                    min_area)
-                if st["extended"] or st["trimmed"]:
-                    snap_regions += 1
-                for k_ in snap_tot:
-                    snap_tot[k_] += st[k_]
-                snap_warn.extend((x_, y_ + y0) for x_, y_ in st["warn"])
-                imp[y0:y1] = (imp[y0:y1] & ~m_c) | snapped
             # A state-region border can slice a paint tract into a sliver inside this
             # region: paint pieces below min_area *within the region* revert to
             # passable (the global dust rule only sees whole-canvas components).
