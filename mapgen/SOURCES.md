@@ -55,13 +55,15 @@ wrong relative sizes.
 
 ## Layout: `sources/` is organized into subfolders by role
 
-Files live directly under `sources/`, or in one of six searched subfolders:
+Files live directly under `sources/`, or in one of seven searched subfolders:
 `originals/` (raw reference imagery), `oldworld-first/` (the current
 canvas-scale GIMP masters and their exports — see the .ora convention below),
 `dots-triangles/` and `dots-mega/` (the paired-anchor-dot registration
 workflow's active crops), `ulthuan/` (Ulthuan's paired-anchor-dot sheets —
 see below) and `geology/` (physical-geography drawings; today the ocean-current
-drawing the climate stage reads, board #8202). `archive/` (retired sources — including the five
+drawing the climate stage reads, board #8202) and `iee/` (ChaosRobie's
+expanded Immortal Empires parchment and its hand-drawn layers; `mapgen/project_ie_borders.py`
+reads the aligned `borders` layer, #9016). `archive/` (retired sources — including the five
 per-region dot-marking sheets retired by board #5403), `WIP/` (local scratch),
 `dots-claude/` (an earlier whole-parchment dot experiment; it holds the clean
 PNG of the expanded parchment, `cr_combi_expanded_map.png`),
@@ -360,8 +362,16 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | climate_zones_flat.xcf | n/a | 26,222,158 | b6b61cd664e8d734bdcc490626058a9515d57b4c0751405826adcd16996505f5 | TBD | TBD | no |
 | climates.xcf | n/a | 90,175,963 | e4cdce579ed4c28719366ccb04d108ae8a144fbea78bc4ff3b806da8a75abc4b | TBD | TBD | no |
 | colored_globe.jpg | 1680x1214 | 429,642 | 91e12fbb2938d2ec61ed78abd1d42ad10615a3d427068acd5830a9598bf214c0 | Fan cartography — David "Fahran" Mills "Warhammer World Map" (war-rvr.net, 2006), a whole-world relief/satellite render with a blue ocean. Added by the user 2026-08-13 | Whole-world COASTLINE silhouette (`blue_sea` kind: ocean is blue-dominant but brightness-varying). Balanced land/sea (0.366 vs mask 0.369) so it registers globally, unlike the land-heavy regional tiles. A DIFFERENT source from the terraqueous globe (different projection — a freehand rectangular/cylindrical relief render, ~1.38:1, closest to a latitude-cropped equirectangular but NOT an analytic projection, so it stays a `control_point_warp`, not an analytic inverse; identified 2026-08-15), registered against the mask for coastline agreement; mask stays the sole authority | yes |
-| cr_combi_expanded_map.xcf | n/a | 16,120,227 | 0aa2149f1c462bbb2016b8c28cb0210919d35ecbee106955136a06ac7860d570 | GIMP editable master, added by the user 2026-10-11 | A GIMP document of the expanded parchment kept beside the Ulthuan sheets; not read by any tool. Role inferred from the filename, Chris to confirm | no |
+| cr_combi_expanded_map-dots.ora | 1580x950 | 3,868,857 | 41de0a00f52a5838392a14d7aee89f202e7ad80050ea45f3ee4994ff620c4a0a | TBD | TBD | no |
+| cr_combi_expanded_map-dots.png | 1580x950 | 148,426 | 5c75dc95b368814bc22a45cf22a5870735931f3ebf5c3afe7f2c07a9b6a0574f | TBD | TBD | no |
+| cr_combi_expanded_map-dots.xcf | n/a | 7,155,102 | d5be1fd7edebfe2bcada46ef3bb23247d99fd1f7d00890c00da3616ec1b269d4 | TBD | TBD | no |
+| cr_combi_expanded_map.ora | 1600x970 | 3,876,352 | d947511053dc633e9d90cde02362b06777b4410066a20adebd7280c6802cfc81 | TBD | TBD | no |
+| cr_combi_expanded_map.xcf | n/a | 7,151,405 | 1fc993badcd2bf9704afc997f18dfc144db6aaf842982f679b3c28784029772d | GIMP editable master, added by the user 2026-10-11 | A GIMP document of the expanded parchment kept beside the Ulthuan sheets; not read by any tool. Role inferred from the filename, Chris to confirm | no |
 | fanmade_colored.png | 4726x3010 | 1,467,069 | d3962b9e28a49765c6c6f236b89b67924d06019835bcc857a51b41e5602b3817 | TBD | TBD | no |
+| iee_parchment - borders_aligned.ora | 6400x4480 | 98,577,403 | f8bd8223f49523f8e410b553896ee6bbb71dc2e4513ea21c3352281b8d82a877 | Written by `mapgen/ie_borders/align_iee_borders.py` from `iee_parchment.ora` (2026-10-22): a copy with only the `borders` layer replaced; accepted by Chris 2026-11-03 and moved here by him | The aligned IEE border lines: Chris's hand-drawn `borders` network snapped onto the printed ink of its own `main surface` (ChaosRobie's expanded IE frame, the IE master scaled by 4480/2880). Its `borders` layer is read by `mapgen/project_ie_borders.py` (#9016), which projects it zone by zone onto the canvas as a scratchpad diagnostic | no |
+| iee_parchment-quarter.xcf | n/a | 16,861,024 | cfcef9f73a8832c3d556e3314aa2755bf313cf87e204b918fc2751577bddb5ea | TBD | TBD | no |
+| iee_parchment.ora | 6400x4480 | 105,189,867 | 8ec919c10c20889550216aa8b0f406f1a66fcf1efbf6cbb5a575731457cf0ce3 | TBD | TBD | no |
+| iee_parchment.xcf | n/a | 82,937,374 | 18935d4248c51aeea1d6f438996694a1286c2b5dcc7189f56f69f6a1e0544357 | TBD | TBD | no |
 | land_sea_mask.png | 8192x3616 | 260,579 | 1834efba0d602c4b8a7427ced724c37ccd9772f99083ac44c557b5216aa5b775 | PNG export of `land_sea_mask.xcf`, now under `oldworld-first/` | The real land/sea mask in use — binarized first via `binarize_cyan_mask.py`; the `coastline_fill` `source_layers.json` ref (board #5399) | no |
 | land_sea_mask.xcf | n/a | 901,276 | 08a6327878c0513d2157fbc1cc976ff63a8fa2a969e9f322a0203cb480c7d886 | GIMP editable master | Editable master of `land_sea_mask.png`; not read directly by any tool | no |
 | lustria_1.jpg | 2362x3271 | 1,059,627 | 2eac6ae87ada14619b4fcc285a00dd7247c47fa6c832d6fe2551bf122133097a | TBD | TBD | no |
@@ -393,13 +403,18 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | terraqueous_globe_reprojected - dots_7.xcf | n/a | 164,259,326 | 3d4af433759570c24695c6c020379cd3c138bb8f629821ead461e11f0cf2e55d | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Editable master of the dots_7.png export above | no |
 | terraqueous_globe_reprojected - full.ora | 8192x3616 | 96,203,358 | 2d43a8ee936cc60317b9eb7e113a9041c467266f3f5f8d002b9c2916f27cdd75 | GIMP OpenRaster export of `terraqueous_globe_reprojected - full.xcf` | The canvas master (board #5399): layers `coasts`/`rivers`/`cities`/`borders`/`impassable`/`sea_zones`/`canvas`, read by name via `mapgen/config/source_layers.json` | no |
 | terraqueous_globe_reprojected - full.png | 8192x3616 | 33,453,057 | 070ad9583e7be75efb8bd88181636e7d482b89692c8974679009fb1efe04066b | TBD | TBD | no |
-| terraqueous_globe_reprojected - full.xcf | n/a | 111,489,491 | a1c53edbbf62fd592e0393917bb112877ce5e01789ad8ccbaa5f02a28d782e99 | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
+| terraqueous_globe_reprojected - full.xcf | n/a | 111,523,407 | f51fc0c6dbc5278609737049d036aeb27ded6d15e1f9adcee625b32f57397b3b | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
 | terraqueous_globe_reprojected - grayscale.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Grayscale copy of `terraqueous_globe_reprojected.png` | Same role as `terraqueous_globe_reprojected.png`, in grayscale | no |
 | terraqueous_globe_reprojected - grayscale_dots.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Dot-marked derivative of `terraqueous_globe_reprojected - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | terraqueous_globe_reprojected - grayscale_dots.xcf | n/a | 87,438,501 | cf32f13c5a5cd9c9ebd727d5ae6b358e5140a22f35253c2219d3c794b0391316 | TBD | TBD | no |
+| terraqueous_globe_reprojected-dots.ora | 8192x3616 | 74,281,838 | 947b7abb08232bb4fbeb801682e6e617dfff02da2af68ee72869965e05233141 | TBD | TBD | no |
+| terraqueous_globe_reprojected-dots.png | 8192x3616 | 33,036,644 | 94426decb3117b725ac0977428ce5c348106dfb938c3f8a3c97c21c3f7e383c9 | TBD | TBD | no |
+| terraqueous_globe_reprojected-dots.xcf | n/a | 87,574,596 | 1899c6920be2cec00b0ee8b33e2788c2ef8cf5d82282d9bd6635f1840c5cf6a7 | TBD | TBD | no |
 | terraqueous_globe_reprojected.png | 8192x3616 | 30,471,432 | 604fc9f92848fc25590f0a7d69b54a46dea79bd1acbc578f250304d36b06888c | Derived from `terraqueous_globe.jpg` (user, August 2026) | `terraqueous_globe.jpg` reprojected from its native Natural Earth II to Miller cylindrical — the mod canvas's own projection (see `config/canvas_frame.py`). Canvas-sized (8192x3616 = WIDTH x HEIGHT). Not yet consumed by any script; `generate_heightmap.py` currently reprojects `terraqueous_globe.jpg` itself via its NE-II fit rather than reading a pre-reprojected copy | no |
 | terraqueous_globe_reprojected_full-southland-mountain-rework.xcf | n/a | 109,866,869 | 44a6a3a62c9c53e5635e81e41b2e39ef5f3b595ebb82386161e72a034d8262d3 | TBD | TBD | no |
 | terraqueous_globe_with_NS_lines.jpg | 4000x3256 | 4,397,707 | 179ea7271e2adc0d509bce5358d40c3a60a36c251309dac4377a5acef0ca1c9c | Derived from `terraqueous_globe.jpg` (user) | `terraqueous_globe.jpg` with a north-south graticule drawn on, used as a registration/projection-check reference; contributes no geometry (globe stays the coastline authority) | no |
+| tgr-lustria-naggaroth-dots.png | 8192x3616 | 30,471,432 | 604fc9f92848fc25590f0a7d69b54a46dea79bd1acbc578f250304d36b06888c | TBD | TBD | no |
+| tgr-lustria-naggaroth-dots.xcf | n/a | 87,395,267 | c80ed01ae0754173d3e8e5d9bf5b99ddc100cf207b8a614a70238397427019fe | TBD | TBD | no |
 | the_empire_1.jpg | 5426x5091 | 22,888,291 | d12726947a3afaee43bbc174dbe95cba1288e7bf4dbf542e0a6a86065642bb29 | Internet find | Very detailed map of the Empire — villages, terrain, rivers, names, etc. | no |
 | the_empire_2.jpg | 1920x1301 | 1,466,126 | 8c3f93454483dc261f933ad3d43530495cb11111071de2511669ac50f5ad2528 | Games Workshop / Warhammer Community — "The Empire of Man" map | Clean counterpart of the annotated map — differencing the two isolates the annotation | no |
 | tww3_climate.jpg | 2471x1922 | 2,022,554 | fae9e090f0b2ffba1f82008dec5c2c36cf6a03dd0eaca0808b8822ba7b413edb | Total War: Warhammer 3 | Shows the (super-abstracted) climate used in the Total War game | no |
@@ -429,7 +444,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 
 Every source `load_source_image`/`load_source_image_rgba` actually reads —
 anything with a manifest row above — is found by `resolve_source_path()`
-across `sources/` and the five searched subfolders (see Layout above); a
+across `sources/` and the seven searched subfolders (see Layout above); a
 `<file>.ora#<layer>` reference resolves its container file the same way, then
 reads the named layer directly from the zip. A file dropped in an unsearched
 folder (`archive/`, `WIP/`, `dots-claude/`, `history/`, `cr_oldworld_campaign/`, `cr_immortal_empires_expanded/`) is invisible to

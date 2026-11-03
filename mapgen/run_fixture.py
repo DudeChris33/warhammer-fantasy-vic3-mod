@@ -5569,6 +5569,174 @@ def _selfcheck_piecewise_affine() -> None:
     assert raised, "schema accepted a piecewise_affine_warp with fewer than 3 control points"
 
 
+def _selfcheck_ie_projection() -> None:
+    """The per-zone IE border projection (#9016), on synthetic data only.
+
+    * **Pairs file**: a valid CSV parses and writes back byte-identically; each
+      refusal (duplicate id, rejected with a zone, held_out on pending or on a seam
+      pair, unknown zone, out-of-frame px) raises.
+    * **Review sync**: status and coordinates come from the database, an existing
+      zone never changes, a newly rejected row loses zone and held_out, a new zoneless
+      row gets no zone, a CSV-only id is kept, mismatched image hashes are refused.
+    * **Method rule**: exact thin-plate is exact at the pairs and smoothing is not;
+      a crossed pair folds the exact warp and the rule picks a smoothed one; a fold
+      between the lines (land grid only) still disqualifies; with no fold-free
+      candidate the zone is flagged and ``fold_attribution`` names a crossed pair.
+    * **Triangle report**: a mirrored triangle is listed and its line px counted.
+    * **Held-out**: deterministic, append-only, floor (N = 5 holds none), near-twin
+      and seam-pair exclusions; holding out never changes the drawn warp.
+    * **Seams, snap, known answer**: short bridges drawn, long ones listed; an
+      80/20 face snaps, 60/40 stays; lines on a border score 0 against a larger
+      shifted baseline.
+    """
+    from worldgen import ie_projection as iep
+
+    hdr = ",".join(iep.PAIR_COLUMNS)
+    good = (hdr + "\nA1,1,accepted,,10,20,30,40,coast,0.5,codex:x,R,\"a, b\",\n"
+            "A2,3;4,pending,,11,21,31,41,coast,0.35,claude:anchor-dots,R,d,n\n"
+            "A3,,rejected,,12,22,32,42,coast,0,codex:x,R,d,why\n")
+    rows = iep.parse_pairs_text(good)
+    iep.validate_rows(rows)
+    assert iep.format_pairs(rows) == good, "pairs CSV does not round-trip byte-identically"
+    assert iep.parse_pairs_text(good.replace("\n", "\r\n"))[1].zones == (3, 4)
+    bad = {
+        "duplicate id": good.replace("A2,", "A1,"),
+        "rejected with zone": good.replace("A3,,rejected", "A3,2,rejected"),
+        "held_out on pending": good.replace("A2,3;4,pending,", "A2,3,pending,1"),
+        "held_out on seam pair": good.replace("A2,3;4,pending,", "A2,3;4,accepted,1"),
+        "unknown zone": good.replace("A1,1,", "A1,7,"),
+        "out-of-frame px": good.replace("A1,1,accepted,,10,", "A1,1,accepted,,5000,"),
+    }
+    for what, text in bad.items():
+        try:
+            iep.validate_rows(iep.parse_pairs_text(text))
+        except iep.PairsError:
+            continue
+        raise AssertionError(f"pairs validation accepted a {what}")
+
+    # Review sync.
+    sha = {"source": "s" * 64, "target": "t" * 64}
+    db = {"images": {"source": {"sha256": sha["source"]}, "target": {"sha256": sha["target"]}},
+          "anchors": [
+              {"id": "A1", "review_status": "rejected", "source_x": 10, "source_y": 20, "target_x": 30,
+               "target_y": 40, "zone": "2", "provenance": "codex", "proposal_method": "x"},
+              {"id": "A2", "review_status": "accepted", "source_x": 15, "source_y": 21, "target_x": 31,
+               "target_y": 41, "zone": "1", "provenance": "claude", "proposal_method": "anchor-dots"},
+              {"id": "N1", "review_status": "accepted", "source_x": 50, "source_y": 50, "target_x": 60,
+               "target_y": 60, "suggested_zone": "4"},
+          ]}
+    pre = iep.parse_pairs_text(good)
+    pre[0].held_out = "1"
+    pre = [r for r in pre if r.id != "A3"] + [iep.PairRow("K1", "2", "accepted", "", 1, 1, 1, 1)]
+    out, log = iep.sync_rows(pre, db, sha)
+    by = {r.id: r for r in out}
+    assert by["A1"].review_status == "rejected" and not by["A1"].zone and not by["A1"].held_out, \
+        "sync kept a zone or held_out on a newly rejected row"
+    assert by["A2"].zone == "3;4" and by["A2"].src == (15.0, 21.0), "sync changed a zone or missed a move"
+    assert by["N1"].zone == "", "sync took a suggested_zone"
+    assert "K1" in by and any("kept K1" in line for line in log), "sync dropped a CSV-only id"
+    try:
+        iep.sync_rows(pre, db, {"source": "x" * 64, "target": sha["target"]})
+        raise AssertionError("sync accepted a database with mismatched image hashes")
+    except iep.PairsError:
+        pass
+
+    # Warps and the method rule: a 5x5 affine grid, one pair crossed.
+    g = np.array([[x, y] for y in range(0, 401, 100) for x in range(0, 401, 100)], np.float64)
+    dst = g * 1.5 + 10
+    ids = [f"P{i:02d}" for i in range(len(g))]
+    f0 = iep._rbf(g, dst, 0.0)
+    assert np.allclose(f0(g), dst, atol=1e-6), "exact thin-plate not exact at the pairs"
+    bump = dst.copy()
+    bump[12] += [40, -30]
+    assert not np.allclose(iep._rbf(g, bump, 1e4)(g), bump, atol=1.0), "smoothed thin-plate is exact"
+    crossed = dst.copy()
+    crossed[[11, 12]] = crossed[[12, 11]]   # (100,200) and (200,200) swap targets
+    line = np.c_[np.linspace(60, 240, 60), np.full(60, 200.0)]
+    yy, xx = np.mgrid[0:401:4, 0:401:4]
+    grid = np.c_[xx.ravel(), yy.ravel()].astype(np.float64)
+    m = iep.choose_method(g, crossed, ids, line, grid, lambdas=(0.0, 1e6))
+    assert m["candidates"][0]["folds_lines"] > 0, "a crossed pair did not fold the exact warp"
+    assert m["lam"] == 1e6 and not m["flags"], "the rule did not pick the fold-free smoothed warp"
+    far = np.c_[np.linspace(0, 400, 40), np.full(40, 400.0)]
+    m2 = iep.choose_method(g, crossed, ids, far, grid, lambdas=(0.0, 1e6))
+    c0 = m2["candidates"][0]
+    assert c0["folds_lines"] == 0 and c0["folds_land_grid"] > 0 and m2["lam"] == 1e6, \
+        "a fold between the lines did not disqualify the exact warp"
+    m3 = iep.choose_method(g, crossed, ids, line, grid, lambdas=(0.0,))
+    assert "no_fold_free_method" in m3["flags"] and m3["lam"] == 0.0
+    assert {"P11", "P12"} & {r["id"] for r in m3["fold_attribution"]}, "fold_attribution missed the crossed pair"
+
+    # Triangle report: one mirrored triangle.
+    ts = np.array([[0, 0], [100, 0], [0, 100], [100, 100]], np.float64)
+    td = ts.copy()
+    td[3] = [-20, -20]
+    tline = np.c_[np.linspace(55, 95, 20), np.linspace(95, 55, 20)]
+    tr = iep.triangle_report(ts, td, ["a", "b", "c", "d"], tline)
+    assert tr["flipped_triangles"] and tr["folds_lines"] > 0, "triangle report missed a mirrored triangle"
+
+    # Held-out rule.
+    cfg = {"fraction": 0.1, "min": 2, "max": 4, "min_eval_pairs": 8, "correlated_px": 100}
+    hrows = [iep.PairRow(i, "1", "accepted", "", float(x) * 3, float(y) * 3, float(x) * 3, float(y) * 3)
+             for i, (x, y) in zip(ids, g)]
+    p1 = iep.plan_held_out(hrows, 1, cfg)
+    assert p1["want"] == 3 and len(p1["add"]) == 3 and p1 == iep.plan_held_out(hrows, 1, cfg), \
+        "held-out plan wrong or not deterministic"
+    assert iep.plan_held_out(hrows[:5], 1, cfg)["want"] == 0, "held-out floor: N = 5 must hold none"
+    twin = hrows + [iep.PairRow("T1", "1", "accepted", "", g[12, 0] * 3 + 30, g[12, 1] * 3, 1, 1)]
+    assert "P12" not in iep.plan_held_out(twin, 1, cfg)["add"], "held out a pair with a near twin"
+    seam = [iep.PairRow(r.id, "1;2" if r.id == p1["add"][0] else "1", "accepted", "", *r.src, *r.dst)
+            for r in hrows]
+    assert p1["add"][0] not in iep.plan_held_out(seam, 1, cfg)["add"], "held out a seam pair"
+    for r in hrows:
+        r.held_out = "1" if r.id in p1["add"] else ""
+    assert iep.plan_held_out(hrows, 1, cfg)["add"] == [], "held-out top-up is not append-only"
+    w_a = iep.ZoneWarp(1, 0.0, tuple(ids), g, dst)
+    w_b = iep.ZoneWarp(1, 0.0, tuple(ids), iep._xy(iep.fit_rows(hrows, 1), "src") / 3, dst)
+    assert np.array_equal(w_a.forward(grid), w_b.forward(grid)), "held-out flags changed the drawn warp"
+
+    # Seams: owner 1 left of x=5, owner 2 right; a short and a long bridge.
+    owner = np.array([1, 1, 2, 2], np.int8)
+    edges = np.array([[0, 1], [1, 2], [2, 3]])
+    cxy = np.array([[0, 0], [1, 0], [10, 0], [11, 0]], np.float64)
+    draw, long_, st = iep.seam_edges(edges, owner, cxy, 15)
+    assert draw.all() and not long_.any() and st["1/2"]["crossings"] == 1
+    cxy[2:] += 40
+    draw, long_, st = iep.seam_edges(edges, owner, cxy, 15)
+    assert long_.tolist() == [False, True, False] and not draw[1] and st["1/2"]["long"] == 1
+    z = np.zeros((40, 40), np.int8)
+    z[:, :4] = 1
+    z[:, 4:] = 3
+    xy = np.array([[2.0, 20.0], [12.0, 20.0], [7.0, 20.0]])
+    assert iep.assign_owners(z, xy, (1, 3, 2, 4), 4).tolist() == [1, 3, 3], "owner priority wrong"
+    z2 = np.zeros((40, 40), np.int8)
+    z2[5:12, 4:36] = 3
+    z2[12:14, 4:36] = 1
+    assert iep.assign_owners(z2, np.array([[20.0, 11.0]]), (1, 3, 2, 4), 4).tolist() == [3]
+    assert iep.assign_owners(np.where(z2 == 3, 0, z2), np.array([[20.0, 9.0]]), (1, 3, 2, 4), 4).tolist() == [1]
+
+    # Snap: two faces split by a wall; 80/20 snaps, 60/40 stays.
+    land = np.ones((60, 120), bool)
+    net = np.zeros_like(land)
+    net[:, 60] = True
+    zz = np.full(land.shape, 2, np.int8)
+    zz[:, :12] = 1                       # left face: 80% zone 2
+    zz[:, 60:84] = 1                     # right face: 60% zone 2
+    snapped, uns = iep.snap_zones(zz, land, net, {"erode_px": 2, "dilate_px": 1, "majority": 0.75,
+                                                  "report_unsnapped_over_px": 0})
+    assert (snapped[:, :55] == 2).all(), "an 80/20 face did not snap"
+    assert (snapped[:, 66:84] == 1).all() and len(uns) == 1, "a 60/40 face snapped"
+
+    # Known answer: two states meeting at x=50, lines exactly on the border.
+    sid = np.zeros((100, 100), np.int32)
+    sid[:, :50], sid[:, 50:] = 1, 2
+    border = iep.state_border_px(sid, sid > 0)
+    lp = np.c_[np.full(80, 49), np.arange(10, 90)]
+    ka = iep.known_answer_stats(border, sid > 0, lp, 20)
+    assert ka["median"] == 0 and ka["baseline_median"] > 0 and ka["ratio_median"] == 0, \
+        "known-answer statistic wrong"
+
+
 def _selfcheck_composite() -> None:
     """Precedence resolution + tie rejection for worldgen.composite."""
     shape = (4, 4)
@@ -6689,6 +6857,10 @@ def run_check() -> int:
     _selfcheck_piecewise_affine()
     print("reproject: piecewise-affine warp (exact dots, local scale, no-tear continuity, "
           "outside-hull sentinel, determinism, schema) self-check passed.")
+    _selfcheck_ie_projection()
+    print("ie_projection: pairs CSV round-trip + refusals, review sync, thin-plate method rule (line and "
+          "land-grid folds, attribution), triangle report, held-out rule, seams, snap, known answer "
+          "self-check passed.")
     _selfcheck_composite()
     print("composite: precedence + tie-rejection self-check passed.")
     _selfcheck_cells()
