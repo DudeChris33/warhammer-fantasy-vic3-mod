@@ -33,9 +33,9 @@ Filed by epic #3414 (child #3415).
 - [~] 16 Nippon — **DEFERRED** (0 tags; only medium-confidence secondary-source names, no Total War faction — Chris, 2026-08-30)
 - [x] 17 Ulthuan (17)
 - [x] 18 Naggaroth (7)
-- [x] 19 Lustria (19)
+- [x] 19 Lustria (30)
 
-**Total: 247 tags** (16 formables, 230 starts, 1 reserved; recounted from the roster rows in #8444) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 259 tags** (16 formables, 240 starts, 3 reserved; recounted from the roster rows in #10177, UNO included) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0), plus the `98_unclaimed` placeholder owner `UNO` (#6391). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -123,6 +123,7 @@ and loc, and are painful to rename later.
 AES
 AGF
 AHK
+AMZ
 ANM
 ANT
 AQL
@@ -149,6 +150,7 @@ BNR
 BOL
 BOR
 BPR
+BRC
 BRE
 BRI
 BRK
@@ -182,6 +184,7 @@ ELK
 ELL
 EMP
 ERE
+ESC
 ESS
 EST
 EYB
@@ -248,6 +251,11 @@ LUC
 LUS
 LYB
 LYO
+LZA
+LZB
+LZC
+LZD
+LZE
 MAG
 MAH
 MAR
@@ -281,6 +289,7 @@ PAR
 PAV
 PON
 PRA
+PST
 QTZ
 QUA
 QUE
@@ -319,6 +328,7 @@ THG
 TIL
 TIR
 TLA
+TLC
 TLN
 TLS
 TLX
@@ -337,6 +347,7 @@ USR
 UVE
 UZK
 VAR
+VCO
 VEM
 VER
 VLG
@@ -972,7 +983,7 @@ Tor Anrok and Monte Castello stay untagged. (Approved 2026-08-30.)
 | KKR | `18_naggaroth` | Karond Kar | start | `PLACEHOLDER` | Karond Kar | Slaver's Gate / Tower of Despair |
 | HGF | `18_naggaroth` | Hag Graef | start | `PLACEHOLDER` | Hag Graef | the Dark Crag (second city) |
 
-### 19 LUSTRIA (Lizardmen, PLACEHOLDER + norscan) — 19 tags; LUS formable
+### 19 LUSTRIA (Lizardmen, PLACEHOLDER + norscan) — 30 tags; LUS formable
 
 The temple-cities of the Lizardmen, at max density (Chris approved TW:W as a name source, as with the
 greenskins/Cathay). LUS is the Slann reuniting the Old Ones' dominion. All Lizardmen rows are
@@ -990,27 +1001,54 @@ Araby's Bretonnian crusader tags (`ORG`/`ANT`) carrying a real culture inside an
 region. `principality` tier, `unrecognized` type (a colony, not a recognized Lustrian power) —
 matches the tier/type given to Norsca's own new lesser-tribe tags the same pass (Chris, 2026-09-04).
 
+**Start roster at 2502 (#10177, accepted by Chris 2026-11-04).** Source tier throughout: *recalled* from
+memory of the 8e Lizardmen army book (2012) / 6e (2003) and Total War; no book was on hand, so no row is
+page-cited, and city locations are proposals for #10181. **Living Lizardmen starts:** `HEX` (regional
+power, about 6 states), `ITZ`, `XLA`, `TLX`, `CHQ`, `PAH`, plus `SKG`, about 22 states in all; cities sit
+on the small states and the giant jungle states are not theirs. **Dormant** (code has a `dormant/` entry,
+releasable): `XAH`, `QTZ`, `HUA`, `OYX`, `XHO`, `AXL`, `CHU`, `SPZ`, `TLA`; kind stays `start` as for the
+fallen Dwarf holds. **Reserved** (code frozen, no polity): `TLN` and `KON`; their `dormant/19_lustria.json`
+entries are removed by the definitions child (#10181), not here. **New presences (Chris):** Clan
+Pestilens `PST` (definite), the Vampire Coast `VCO` (in for gameplay; no lore support at 2502), Amazons
+`AMZ` (weakly attested), and Tilean/Estalian/Bretonnian colonies `TLC`/`ESC`/`BRC` (`invented`). **Out:**
+Sartosan settlements (raiding only; at most a few `sartosan` pops) and Dark Elves (raiders, no holding).
+**Unclaimed jungle:** about 24 states go to five decentralized Lizardmen holdings `LZA`-`LZE`, not to `UNO`
+(Chris), so colonization tension and native uprisings stay per region; the Vic3 expert's reading of that
+mechanic is inferred, about 70% confident, and worth one in-game test. Citadel of Dusk siting stays open
+against #8444. The Tlaxtlan/Chaqua "City of Gold" epithet may be swapped; check before loc ships.
+
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | LUS | `19_lustria` | Lustria | formable | `PLACEHOLDER` | Itza | the Old Ones' dominion united |
 | SKG | `19_lustria` | Skeggi | start | `norscan` | Skeggi | `principality`/`unrecognized`; Norscan colony, founded 888 IC by Losteriksson of the Bjornlings |
-| ITZ | `19_lustria` | Itza | start | `PLACEHOLDER` | Itza | the First City (Lord Kroak / Gor-Rok) |
-| HEX | `19_lustria` | Hexoatl | start | `PLACEHOLDER` | Hexoatl | City of the Sun (Mazdamundi) |
-| XLA | `19_lustria` | Xlanhuapec | start | `PLACEHOLDER` | Xlanhuapec | City of Mists |
-| TLX | `19_lustria` | Tlaxtlan | start | `PLACEHOLDER` | Tlaxtlan | City of the Moon |
-| CHQ | `19_lustria` | Chaqua | start | `PLACEHOLDER` | Chaqua | City of Gold |
-| PAH | `19_lustria` | Pahuax | start | `PLACEHOLDER` | Pahuax | Oxyotl's home (Ghosts of Pahuax) |
-| XAH | `19_lustria` | Xahutec | start | `PLACEHOLDER` | Xahutec | City of Echoes (ruined by a Chaos portal) |
-| QTZ | `19_lustria` | Quetza | start | `PLACEHOLDER` | Quetza | the Defiled (Clan Pestilens) |
-| HUA | `19_lustria` | Huatl | start | `PLACEHOLDER` | Huatl | City of Reawakening (being re-founded) |
-| OYX | `19_lustria` | Oyxl | start | `PLACEHOLDER` | Oyxl | the Eternal City (ruined by Daemons) |
-| XHO | `19_lustria` | Xhotl | start | `PLACEHOLDER` | Xhotl | City of Fate (Kroq-Gar's stand) |
-| AXL | `19_lustria` | Axlotl | start | `PLACEHOLDER` | Axlotl | the Star City |
-| CHU | `19_lustria` | Chupayotl | start | `PLACEHOLDER` | Chupayotl | the Sunken City (SE Lustria) |
-| KON | `19_lustria` | Konquata | start | `PLACEHOLDER` | Konquata | Lizardmen tag, not present at the 2502 start (Konquata's building begins 2520 IC, in Albion; Lexicanum, fan wiki; book source not checked); releasable later |
-| TLN | `19_lustria` | Tlanxla | start | `PLACEHOLDER` | Tlanxla | City of the Sky (destroyed in the Catastrophe) |
-| SPZ | `19_lustria` | Spektazuma | start | `PLACEHOLDER` | Spektazuma | City of Lenses (ruined) |
-| TLA | `19_lustria` | Tlax | start | `PLACEHOLDER` | Tlax | City of Ghosts (ruined) |
+| ITZ | `19_lustria` | Itza | start | `PLACEHOLDER` | Itza | the First City (Lord Kroak / Gor-Rok); about 4 states north-central, `principality` (#10177) |
+| HEX | `19_lustria` | Hexoatl | start | `PLACEHOLDER` | Hexoatl | City of the Sun (Mazdamundi); the regional power, about 6 states on the east/south-east coast, `kingdom`/recognized (#10177; source tier recalled) |
+| XLA | `19_lustria` | Xlanhuapec | start | `PLACEHOLDER` | Xlanhuapec | City of Mists; about 3 states, north-west coast (#10177) |
+| TLX | `19_lustria` | Tlaxtlan | start | `PLACEHOLDER` | Tlaxtlan | City of the Moon (epithet unverified: may be swapped with Chaqua's "City of Gold"); about 3 states, west coast (#10177) |
+| CHQ | `19_lustria` | Chaqua | start | `PLACEHOLDER` | Chaqua | City of Gold (epithet unverified, see TLX); about 3 states, south coast (#10177) |
+| PAH | `19_lustria` | Pahuax | start | `PLACEHOLDER` | Pahuax | Oxyotl's home (Ghosts of Pahuax); weak, about 2 small central states (#10177) |
+| XAH | `19_lustria` | Xahutec | start | `PLACEHOLDER` | Xahutec | **dormant** (#10177); City of Echoes (ruined by a Chaos portal; epithet unverified) |
+| QTZ | `19_lustria` | Quetza | start | `PLACEHOLDER` | Quetza | **dormant** (#10177); the Defiled, the fallen city; the Clan Pestilens presence is the separate tag `PST` |
+| HUA | `19_lustria` | Huatl | start | `PLACEHOLDER` | Huatl | **dormant** (#10177; TW-only living claim); "Reawakening" is a TW-derived epithet (tier TW) |
+| OYX | `19_lustria` | Oyxl | start | `PLACEHOLDER` | Oyxl | **dormant** (#10177); ruined by Daemons; "Eternal City" is a TW-derived epithet (tier TW) |
+| XHO | `19_lustria` | Xhotl | start | `PLACEHOLDER` | Xhotl | **dormant** (#10177); City of Fate. The "Kroq-Gar's stand" note was dropped: Kroq-Gar is a Southlands hero, no Xhotl link sourced |
+| AXL | `19_lustria` | Axlotl | start | `PLACEHOLDER` | Axlotl | **dormant** (#10177; TW-only living claim); the Star City |
+| CHU | `19_lustria` | Chupayotl | start | `PLACEHOLDER` | Chupayotl | **dormant** (#10177); "Sunken City" and the SE placement are TW-derived (tier TW) |
+| KON | `19_lustria` | Konquata | reserved | `PLACEHOLDER` | Konquata | Lizardmen tag, not present at the 2502 start: Konquata's building begins 2520 IC, in Albion, which is out-of-scope placeholder land; code frozen, no polity (#10177; source Lexicanum/fan wiki, tier unverified, book not checked) |
+| TLN | `19_lustria` | Tlanxla | reserved | `PLACEHOLDER` | Tlanxla | City of the Sky (destroyed in the Catastrophe); no refounding, code frozen, no polity (#10177) |
+| SPZ | `19_lustria` | Spektazuma | start | `PLACEHOLDER` | Spektazuma | **dormant** (#10177); City of Lenses (ruined) |
+| TLA | `19_lustria` | Tlax | start | `PLACEHOLDER` | Tlax | **dormant** (#10177); City of Ghosts (ruined; fate recalled weakly, unverified) |
+| PST | `19_lustria` | Clan Pestilens | start | `skaven` | Quetza (fallen city) | about 2 states: Quetza's state plus one neighbour; plague-cult Skaven; a real clan tag, not an `XS*` rename; `principality`/`unrecognized` (#10177, Chris: definite in; 8e Lizardmen book recalled) |
+| VCO | `19_lustria` | Vampire Coast | start | `PLACEHOLDER` | — | Luthor Harkon's coast, about 2 states on the north-east/east coast; **in for gameplay, not lore-supported at 2502** (Chris, #10177; TW2, WFRP4e *Lustria* ~2512 recalled); vampire-group culture stand-in until #10179; `principality`/`unrecognized` |
+| AMZ | `19_lustria` | Amazons | start | `PLACEHOLDER` | — | about 2 states, southern interior jungle; weakly attested (6e-era lists, recalled); new Amazon culture is #10179's; `principality`/`unrecognized` |
+| TLC | `19_lustria` | Tilean Colony | start | `tilean` | — | about 1 state; Tilean New World outpost, `invented` tier (no named settlement recalled; Chris, #10177); `principality`/`unrecognized` |
+| ESC | `19_lustria` | Estalian Colony | start | `estalian` | — | about 1 state; Estalian New World outpost, `invented` tier (Chris, #10177); `principality`/`unrecognized` |
+| BRC | `19_lustria` | Bretonnian Colony | start | `bretonnian` | — | about 1 state; Bretonnian New World outpost, `invented` tier (Chris, #10177); `principality`/`unrecognized` |
+| LZA | `19_lustria` | Lustrian Holdings A (placeholder) | start | `PLACEHOLDER` | — | decentralized Lizardmen holdings, about 5 states of the empty jungle; `decentralized`/`principality`; regional split and names set by #10178/#10181; never renamed into a polity (#10177, Chris: jungle goes to decentralized Lizardmen) |
+| LZB | `19_lustria` | Lustrian Holdings B (placeholder) | start | `PLACEHOLDER` | — | as `LZA` |
+| LZC | `19_lustria` | Lustrian Holdings C (placeholder) | start | `PLACEHOLDER` | — | as `LZA` |
+| LZD | `19_lustria` | Lustrian Holdings D (placeholder) | start | `PLACEHOLDER` | — | as `LZA` |
+| LZE | `19_lustria` | Lustrian Holdings E (placeholder) | start | `PLACEHOLDER` | — | as `LZA` |
 
 ### 98 UNCLAIMED (goblin stand-in) — 1 tag; no formable
 
