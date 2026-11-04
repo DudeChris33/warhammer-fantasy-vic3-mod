@@ -156,7 +156,10 @@ MERGE_FLOOR = 150
 #: largest, 126k and 111k px, stay out until he draws interior state borders):
 #: 384 -> 465 drawn regions, 1,738,194 -> 2,067,357 px, by the same rule at the
 #: current drawn area: 465 + (6936 - 384) * 2067357 / 1738194.
-PROVINCE_TARGET = 8258
+#: Raised 8258 -> 12033 on 2026-11-03 when Chris drew Lustria's states (521 -> 574
+#: subdivided regions, 1,933,906 -> 2,864,193 drawn px): 574 + (8258 - 521) *
+#: 2864193 / 1933906.
+PROVINCE_TARGET = 12033
 #: A province piece below this many px is swallowed into a same-region neighbour
 #: (never across a magenta boundary — the merge stays inside one region).
 MIN_PROVINCE_AREA = 120
