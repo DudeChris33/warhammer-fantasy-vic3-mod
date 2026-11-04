@@ -1,8 +1,8 @@
 ﻿STATE_LAND_179 = {
     id = 179
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0A14FB x185933 x2DCDAE x2F6E90 x54C825 x6BDD82 x7A21BA x8713DF x913717 xA84C74 xB690AC xCDA609 xDBEA41 xF2FF9E xF7209E }
-    city = xB690AC
+    provinces = { x0A14FB x185933 x2DCDAE x343630 x54C825 x6BDD82 x7A21BA x8713DF x913717 xA84C74 xCDA609 xDBEA41 xF2FF9E xF7209E xF7C73E }
+    city = xF7C73E
     farm = x0A14FB
     mine = x7A21BA
     wood = xF7209E
@@ -30,36 +30,132 @@
 STATE_PLACEHOLDER = {
     id = 364
     subsistence_building = "building_subsistence_farm"
-    provinces = { x934316 xC51AB1 xE0E506 }
-    city = x934316
+    provinces = { xC51AB1 }
+    city = xC51AB1
     farm = xC51AB1
-    mine = xE0E506
-    wood = x934316
+    mine = xC51AB1
+    wood = xC51AB1
     port = xC51AB1
-    arable_land = 19536
+    arable_land = 1827
     arable_resources = { "building_rye_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 2824
-        building_fishing_wharf = 597
-        building_gold_mine = 24
-        building_iron_mine = 1923
-        building_lead_mine = 716
-        building_logging_camp = 2166
-        building_sulfur_mine = 932
-        building_whaling_station = 63
+        building_coal_mine = 643
+        building_fishing_wharf = 48
+        building_gold_mine = 2
+        building_iron_mine = 321
+        building_lead_mine = 111
+        building_logging_camp = 453
+        building_sulfur_mine = 117
+        building_whaling_station = 14
     }
     resource = {
         type = "building_gold_field"
         depleted_type = "building_gold_mine"
-        undiscovered_amount = 175
+        undiscovered_amount = 48
     }
     resource = {
         type = "building_oil_rig"
-        undiscovered_amount = 1389
+        undiscovered_amount = 330
+    }
+    naval_exit_id = 3000
+}
+STATE_LAND_731 = {
+    id = 731
+    subsistence_building = "building_subsistence_rice_farm"
+    provinces = { x0176FB }
+    city = x0176FB
+    farm = x0176FB
+    mine = x0176FB
+    wood = x0176FB
+    port = x0176FB
+    arable_land = 12276
+    arable_resources = { "building_rice_farm" "building_livestock_ranch" "building_banana_plantation" "building_dye_plantation" "building_tobacco_plantation" "building_tea_plantation" "building_sugar_plantation" "building_silk_plantation" }
+    capped_resources = {
+        building_coal_mine = 1071
+        building_fishing_wharf = 287
+        building_gold_mine = 17
+        building_iron_mine = 849
+        building_lead_mine = 255
+        building_logging_camp = 922
+        building_sulfur_mine = 325
+        building_whaling_station = 16
+    }
+    resource = {
+        type = "building_gold_field"
+        depleted_type = "building_gold_mine"
+        undiscovered_amount = 43
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 598
     }
     resource = {
         type = "building_rubber_plantation"
-        undiscovered_amount = 297
+        undiscovered_amount = 75
+    }
+    naval_exit_id = 3077
+}
+STATE_LAND_732 = {
+    id = 732
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xD95CF2 xE0E506 }
+    city = xD95CF2
+    farm = xE0E506
+    mine = xD95CF2
+    wood = xE0E506
+    port = xD95CF2
+    arable_land = 599
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 311
+        building_fishing_wharf = 17
+        building_gold_mine = 3
+        building_iron_mine = 235
+        building_lead_mine = 98
+        building_logging_camp = 208
+        building_sulfur_mine = 55
+        building_whaling_station = 3
+    }
+    resource = {
+        type = "building_gold_field"
+        depleted_type = "building_gold_mine"
+        undiscovered_amount = 21
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 292
+    }
+    naval_exit_id = 3049
+}
+STATE_LAND_733 = {
+    id = 733
+    subsistence_building = "building_subsistence_rice_farm"
+    provinces = { xFC03E8 }
+    city = xFC03E8
+    farm = xFC03E8
+    mine = xFC03E8
+    wood = xFC03E8
+    port = xFC03E8
+    arable_land = 3505
+    arable_resources = { "building_rice_farm" "building_livestock_ranch" "building_cotton_plantation" "building_silk_plantation" "building_tea_plantation" "building_tobacco_plantation" }
+    capped_resources = {
+        building_coal_mine = 380
+        building_fishing_wharf = 50
+        building_gold_mine = 2
+        building_iron_mine = 201
+        building_lead_mine = 65
+        building_logging_camp = 225
+        building_sulfur_mine = 152
+        building_whaling_station = 10
+    }
+    resource = {
+        type = "building_gold_field"
+        depleted_type = "building_gold_mine"
+        undiscovered_amount = 21
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 44
     }
     naval_exit_id = 3077
 }

@@ -11,13 +11,13 @@ region_ocean_of_dread_islands = {
 }
 
 region_southern_worlds_edge_mountains = {
-	capital_province = x00F9DA
+	capital_province = x331B71
 	map_color = { 145 124 228 }
 	states = { STATE_SOUTHERN_WORLDS_EDGE STATE_CLIFFS_OF_DAWN STATE_AMBER_SKULL STATE_CURSED_WAY STATE_SHANIDAAR STATE_LAHMIA STATE_HOUSE_OF_EVERLASTING_LIFE STATE_SIX_WATCH_FORTS }
 }
 
 region_southlands = {
-	capital_province = xE47F3F
+	capital_province = x05B7D4
 	map_color = { 47 180 93 }
 	states = { STATE_ISLE_OF_DAWN STATE_TOR_ELASOR STATE_TOWER_OF_THE_STARS STATE_STARS_ARCHIPELAGO }
 }
