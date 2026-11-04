@@ -146,6 +146,18 @@
     },
     {
       "a": [
+        6178,
+        2204
+      ],
+      "b": [
+        6208,
+        2182
+      ],
+      "type": "sea",
+      "comment": "Out of scope"
+    },
+    {
+      "a": [
         3050,
         1472
       ],
@@ -182,36 +194,12 @@
     },
     {
       "a": [
-        1657,
-        2485
-      ],
-      "b": [
-        1668,
-        2460
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
         1666,
         2511
       ],
       "b": [
         1693,
         2508
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
-        1668,
-        2518
-      ],
-      "b": [
-        1695,
-        2548
       ],
       "type": "sea",
       "comment": "Turtle Isles"
@@ -263,18 +251,6 @@
       ],
       "type": "sea",
       "comment": "North Kislev River"
-    },
-    {
-      "a": [
-        3941,
-        1039
-      ],
-      "b": [
-        3946,
-        1030
-      ],
-      "type": "sea",
-      "comment": "River Brionne"
     },
     {
       "a": [
@@ -398,6 +374,18 @@
     },
     {
       "a": [
+        2219,
+        2989
+      ],
+      "b": [
+        2180,
+        2976
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
         3695,
         2595
       ],
@@ -409,7 +397,7 @@
       "comment": "Isles of Doom",
       "strait_type": "natural",
       "land_a_color": "xB32998",
-      "land_b_color": "xD8832D"
+      "land_b_color": "xD1813C"
     },
     {
       "a": [
@@ -446,18 +434,6 @@
       ],
       "type": "sea",
       "comment": "Norscan Island"
-    },
-    {
-      "a": [
-        994,
-        956
-      ],
-      "b": [
-        1015,
-        956
-      ],
-      "type": "sea",
-      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -509,27 +485,15 @@
     },
     {
       "a": [
-        4446,
-        479
+        1729,
+        2514
       ],
       "b": [
-        4485,
-        529
+        1738,
+        2536
       ],
       "type": "sea",
-      "comment": "Hell Pit"
-    },
-    {
-      "a": [
-        4448,
-        477
-      ],
-      "b": [
-        4531,
-        524
-      ],
-      "type": "sea",
-      "comment": "Hell Pit"
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -584,6 +548,18 @@
     },
     {
       "a": [
+        1668,
+        2518
+      ],
+      "b": [
+        1695,
+        2548
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         2436,
         469
       ],
@@ -620,18 +596,6 @@
     },
     {
       "a": [
-        1085,
-        1130
-      ],
-      "b": [
-        1085,
-        1109
-      ],
-      "type": "sea",
-      "comment": "Maelstrom"
-    },
-    {
-      "a": [
         2560,
         1412
       ],
@@ -641,18 +605,6 @@
       ],
       "type": "sea",
       "comment": "Ulthuan"
-    },
-    {
-      "a": [
-        1656,
-        2040
-      ],
-      "b": [
-        1638,
-        2019
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -776,18 +728,6 @@
     },
     {
       "a": [
-        3829,
-        1033
-      ],
-      "b": [
-        3829,
-        1022
-      ],
-      "type": "sea",
-      "comment": "River Brionne"
-    },
-    {
-      "a": [
         1184,
         1527
       ],
@@ -812,15 +752,15 @@
     },
     {
       "a": [
-        1895,
-        2714
+        1256,
+        1685
       ],
       "b": [
-        1877,
-        2731
+        1271,
+        1694
       ],
       "type": "sea",
-      "comment": "Turtle Isles"
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -836,39 +776,15 @@
     },
     {
       "a": [
-        1934,
-        2738
+        1877,
+        2741
       ],
       "b": [
-        1945,
-        2760
+        1896,
+        2753
       ],
       "type": "sea",
       "comment": "Turtle Isles"
-    },
-    {
-      "a": [
-        1892,
-        2702
-      ],
-      "b": [
-        1863,
-        2695
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
-        1256,
-        1685
-      ],
-      "b": [
-        1271,
-        1694
-      ],
-      "type": "sea",
-      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -881,6 +797,18 @@
       ],
       "type": "sea",
       "comment": "North Pole"
+    },
+    {
+      "a": [
+        4153,
+        1039
+      ],
+      "b": [
+        4141,
+        1040
+      ],
+      "type": "sea",
+      "comment": "Fort Soll"
     },
     {
       "a": [
@@ -941,6 +869,18 @@
       ],
       "type": "sea",
       "comment": "Stars Archipelago"
+    },
+    {
+      "a": [
+        2412,
+        1965
+      ],
+      "b": [
+        2378,
+        1999
+      ],
+      "type": "sea",
+      "comment": "Scorpion Coast"
     },
     {
       "a": [
@@ -1059,15 +999,15 @@
     },
     {
       "a": [
-        4153,
-        1039
+        4458,
+        774
       ],
       "b": [
-        4141,
-        1040
+        4466,
+        762
       ],
       "type": "sea",
-      "comment": "Fort Soll"
+      "comment": "Urskoy River"
     },
     {
       "a": [
@@ -1140,18 +1080,6 @@
       ],
       "type": "sea",
       "comment": "Ulthuan Northern Isles"
-    },
-    {
-      "a": [
-        1734,
-        1857
-      ],
-      "b": [
-        1760,
-        1846
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1251,15 +1179,27 @@
     },
     {
       "a": [
-        1160,
-        1581
+        4446,
+        479
       ],
       "b": [
-        1172,
-        1566
+        4485,
+        529
       ],
       "type": "sea",
-      "comment": "Maelstrom"
+      "comment": "Hell Pit"
+    },
+    {
+      "a": [
+        4448,
+        477
+      ],
+      "b": [
+        4531,
+        524
+      ],
+      "type": "sea",
+      "comment": "Hell Pit"
     },
     {
       "a": [
@@ -1311,15 +1251,15 @@
     },
     {
       "a": [
-        1656,
-        1991
+        1026,
+        1141
       ],
       "b": [
-        1678,
-        1980
+        1018,
+        1157
       ],
       "type": "sea",
-      "comment": "Turtle Isles"
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -1383,18 +1323,6 @@
     },
     {
       "a": [
-        4288,
-        796
-      ],
-      "b": [
-        4281,
-        787
-      ],
-      "type": "sea",
-      "comment": "Upper Talabec River"
-    },
-    {
-      "a": [
         7229,
         2281
       ],
@@ -1416,6 +1344,18 @@
       ],
       "type": "sea",
       "comment": "Devourer"
+    },
+    {
+      "a": [
+        2377,
+        2007
+      ],
+      "b": [
+        2373,
+        2032
+      ],
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -1500,6 +1440,18 @@
       ],
       "type": "sea",
       "comment": "Turtle Isles"
+    },
+    {
+      "a": [
+        3829,
+        1033
+      ],
+      "b": [
+        3829,
+        1022
+      ],
+      "type": "sea",
+      "comment": "River Brionne"
     },
     {
       "a": [
@@ -1722,30 +1674,6 @@
     },
     {
       "a": [
-        2290,
-        3003
-      ],
-      "b": [
-        2310,
-        2974
-      ],
-      "type": "sea",
-      "comment": "Lustria"
-    },
-    {
-      "a": [
-        2287,
-        2999
-      ],
-      "b": [
-        2256,
-        3000
-      ],
-      "type": "sea",
-      "comment": "Lustria"
-    },
-    {
-      "a": [
         926,
         931
       ],
@@ -1830,18 +1758,6 @@
     },
     {
       "a": [
-        2996,
-        1254
-      ],
-      "b": [
-        3011,
-        1256
-      ],
-      "type": "sea",
-      "comment": "Ulthuan"
-    },
-    {
-      "a": [
         3246,
         1610
       ],
@@ -1851,6 +1767,18 @@
       ],
       "type": "sea",
       "comment": "Sorcerers Islands"
+    },
+    {
+      "a": [
+        2233,
+        1914
+      ],
+      "b": [
+        2221,
+        1867
+      ],
+      "type": "sea",
+      "comment": "Golden Isle"
     },
     {
       "a": [
@@ -1887,6 +1815,18 @@
       ],
       "type": "sea",
       "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        1734,
+        1857
+      ],
+      "b": [
+        1760,
+        1846
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -1977,6 +1917,18 @@
     },
     {
       "a": [
+        1737,
+        2021
+      ],
+      "b": [
+        1710,
+        2015
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         3508,
         1164
       ],
@@ -1998,6 +1950,18 @@
       ],
       "type": "sea",
       "comment": "River Aver"
+    },
+    {
+      "a": [
+        4777,
+        586
+      ],
+      "b": [
+        4779,
+        597
+      ],
+      "type": "sea",
+      "comment": "Uzkulak"
     },
     {
       "a": [
@@ -2070,6 +2034,18 @@
       ],
       "type": "canal_bay_of_uzkulak",
       "comment": "Bay of Uzkulak"
+    },
+    {
+      "a": [
+        3264,
+        1643
+      ],
+      "b": [
+        3311,
+        1669
+      ],
+      "type": "sea",
+      "comment": "Sorcerers Islands"
     },
     {
       "a": [
@@ -2211,18 +2187,6 @@
     },
     {
       "a": [
-        1729,
-        2514
-      ],
-      "b": [
-        1738,
-        2536
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
         2408,
         589
       ],
@@ -2295,6 +2259,18 @@
     },
     {
       "a": [
+        2996,
+        1254
+      ],
+      "b": [
+        3011,
+        1256
+      ],
+      "type": "sea",
+      "comment": "Ulthuan"
+    },
+    {
+      "a": [
         3017,
         1256
       ],
@@ -2316,18 +2292,6 @@
       ],
       "type": "canal_nuln_r",
       "comment": "Nuln"
-    },
-    {
-      "a": [
-        1726,
-        2613
-      ],
-      "b": [
-        1747,
-        2628
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -2451,27 +2415,15 @@
     },
     {
       "a": [
-        1871,
-        2735
+        2721,
+        2394
       ],
       "b": [
-        1861,
-        2714
+        2721,
+        2376
       ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
-        1877,
-        2741
-      ],
-      "b": [
-        1896,
-        2753
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
+      "type": "canal_volcanic_isles",
+      "comment": "Volcanic Isles"
     },
     {
       "a": [
@@ -2523,18 +2475,6 @@
     },
     {
       "a": [
-        4777,
-        586
-      ],
-      "b": [
-        4779,
-        597
-      ],
-      "type": "sea",
-      "comment": "Uzkulak"
-    },
-    {
-      "a": [
         4769,
         584
       ],
@@ -2544,18 +2484,6 @@
       ],
       "type": "sea",
       "comment": "Uzkulak"
-    },
-    {
-      "a": [
-        2377,
-        2007
-      ],
-      "b": [
-        2373,
-        2032
-      ],
-      "type": "sea",
-      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -2595,6 +2523,18 @@
     },
     {
       "a": [
+        1657,
+        2485
+      ],
+      "b": [
+        1668,
+        2460
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         3777,
         1252
       ],
@@ -2616,6 +2556,18 @@
       ],
       "type": "sea",
       "comment": "West Estalian Isles"
+    },
+    {
+      "a": [
+        994,
+        956
+      ],
+      "b": [
+        1015,
+        956
+      ],
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -2871,6 +2823,18 @@
     },
     {
       "a": [
+        1934,
+        2738
+      ],
+      "b": [
+        1945,
+        2760
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         3048,
         1215
       ],
@@ -2967,6 +2931,30 @@
     },
     {
       "a": [
+        2208,
+        2956
+      ],
+      "b": [
+        2186,
+        2961
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
+        2375,
+        1974
+      ],
+      "b": [
+        2370,
+        1946
+      ],
+      "type": "canal_scorpion_coast",
+      "comment": "Scorpion Coast"
+    },
+    {
+      "a": [
         2430,
         1996
       ],
@@ -3015,6 +3003,30 @@
     },
     {
       "a": [
+        1895,
+        2714
+      ],
+      "b": [
+        1877,
+        2731
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
+        1892,
+        2702
+      ],
+      "b": [
+        1863,
+        2695
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         1027,
         1414
       ],
@@ -3024,6 +3036,18 @@
       ],
       "type": "canal_maelstrom_w",
       "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        1841,
+        2626
+      ],
+      "b": [
+        1846,
+        2595
+      ],
+      "type": "canal_turtle_3",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -3063,12 +3087,12 @@
     },
     {
       "a": [
-        1026,
-        1141
+        1085,
+        1130
       ],
       "b": [
-        1018,
-        1157
+        1085,
+        1109
       ],
       "type": "sea",
       "comment": "Maelstrom"
@@ -3363,6 +3387,18 @@
     },
     {
       "a": [
+        1871,
+        2735
+      ],
+      "b": [
+        1861,
+        2714
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         4920,
         816
       ],
@@ -3423,6 +3459,18 @@
     },
     {
       "a": [
+        4288,
+        796
+      ],
+      "b": [
+        4281,
+        787
+      ],
+      "type": "sea",
+      "comment": "Upper Talabec River"
+    },
+    {
+      "a": [
         1205,
         1588
       ],
@@ -3445,7 +3493,7 @@
       "type": "canal_uzkulak",
       "comment": "Uzkulak Canal",
       "strait_type": "artificial",
-      "land_a_color": "x89D453",
+      "land_a_color": "x5BA999",
       "land_b_color": "xB150BE"
     },
     {
@@ -3534,18 +3582,6 @@
     },
     {
       "a": [
-        2219,
-        2989
-      ],
-      "b": [
-        2180,
-        2976
-      ],
-      "type": "sea",
-      "comment": "Lustria"
-    },
-    {
-      "a": [
         5154,
         2466
       ],
@@ -3582,27 +3618,15 @@
     },
     {
       "a": [
-        2208,
-        2956
+        1686,
+        1921
       ],
       "b": [
-        2186,
-        2961
+        1718,
+        1915
       ],
       "type": "sea",
-      "comment": "Lustria"
-    },
-    {
-      "a": [
-        6178,
-        2204
-      ],
-      "b": [
-        6208,
-        2182
-      ],
-      "type": "sea",
-      "comment": "Out of scope"
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -3663,6 +3687,31 @@
       ],
       "type": "sea",
       "comment": "Ulthuan Northern Isles"
+    },
+    {
+      "a": [
+        1160,
+        1581
+      ],
+      "b": [
+        1172,
+        1566
+      ],
+      "type": "sea",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        1656,
+        2040
+      ],
+      "b": [
+        1638,
+        2019
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles",
+      "b_color": "x98BF2B"
     },
     {
       "a": [
@@ -3738,6 +3787,54 @@
     },
     {
       "a": [
+        2225,
+        379
+      ],
+      "b": [
+        2229,
+        404
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        2332,
+        591
+      ],
+      "b": [
+        2315,
+        617
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        2352,
+        352
+      ],
+      "b": [
+        2346,
+        330
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
+        2349,
+        755
+      ],
+      "b": [
+        2375,
+        756
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
+    },
+    {
+      "a": [
         2385,
         119
       ],
@@ -3798,18 +3895,6 @@
     },
     {
       "a": [
-        2225,
-        379
-      ],
-      "b": [
-        2229,
-        404
-      ],
-      "type": "sea",
-      "comment": "Naggaroth"
-    },
-    {
-      "a": [
         3039,
         1281
       ],
@@ -3858,6 +3943,18 @@
     },
     {
       "a": [
+        1726,
+        2613
+      ],
+      "b": [
+        1747,
+        2628
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         2336,
         588
       ],
@@ -3867,30 +3964,6 @@
       ],
       "type": "sea",
       "comment": "Naggaroth"
-    },
-    {
-      "a": [
-        2332,
-        591
-      ],
-      "b": [
-        2315,
-        617
-      ],
-      "type": "sea",
-      "comment": "Naggaroth"
-    },
-    {
-      "a": [
-        1831,
-        2609
-      ],
-      "b": [
-        1860,
-        2612
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4113,6 +4186,18 @@
     },
     {
       "a": [
+        3941,
+        1039
+      ],
+      "b": [
+        3946,
+        1030
+      ],
+      "type": "sea",
+      "comment": "River Brionne"
+    },
+    {
+      "a": [
         1661,
         2114
       ],
@@ -4137,6 +4222,18 @@
     },
     {
       "a": [
+        2290,
+        3003
+      ],
+      "b": [
+        2310,
+        2974
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
         3966,
         718
       ],
@@ -4146,6 +4243,18 @@
       ],
       "type": "canal_manaanspoort",
       "comment": "Manaanspoort"
+    },
+    {
+      "a": [
+        848,
+        810
+      ],
+      "b": [
+        867,
+        791
+      ],
+      "type": "sea",
+      "comment": "Maelstrom"
     },
     {
       "a": [
@@ -4209,54 +4318,6 @@
     },
     {
       "a": [
-        2233,
-        1914
-      ],
-      "b": [
-        2221,
-        1867
-      ],
-      "type": "sea",
-      "comment": "Golden Isle"
-    },
-    {
-      "a": [
-        2352,
-        352
-      ],
-      "b": [
-        2346,
-        330
-      ],
-      "type": "sea",
-      "comment": "Naggaroth"
-    },
-    {
-      "a": [
-        2349,
-        755
-      ],
-      "b": [
-        2375,
-        756
-      ],
-      "type": "sea",
-      "comment": "Naggaroth"
-    },
-    {
-      "a": [
-        1737,
-        2021
-      ],
-      "b": [
-        1710,
-        2015
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
         4427,
         1387
       ],
@@ -4278,6 +4339,18 @@
       ],
       "type": "sea",
       "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        4691,
+        485
+      ],
+      "b": [
+        4676,
+        493
+      ],
+      "type": "sea",
+      "comment": "Bay of Uzkulak"
     },
     {
       "a": [
@@ -4305,6 +4378,18 @@
     },
     {
       "a": [
+        2287,
+        2999
+      ],
+      "b": [
+        2256,
+        3000
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
         1057,
         973
       ],
@@ -4323,18 +4408,6 @@
       "b": [
         1069,
         905
-      ],
-      "type": "sea",
-      "comment": "Maelstrom"
-    },
-    {
-      "a": [
-        848,
-        810
-      ],
-      "b": [
-        867,
-        791
       ],
       "type": "sea",
       "comment": "Maelstrom"
@@ -4374,6 +4447,19 @@
       ],
       "type": "sea",
       "comment": "Yvresse"
+    },
+    {
+      "a": [
+        1656,
+        1991
+      ],
+      "b": [
+        1678,
+        1980
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles",
+      "a_color": "xFA87B2"
     },
     {
       "a": [
