@@ -90,11 +90,12 @@ CULTURE_TECH: dict[str, str | None] = {
     "dawi_zharr": "effect_starting_technology_dark_dwarf_tech",
     "sylvanian_vampire": _EMPIRE,   # #9035: Sylvanian vampires know what the Empire knows; closed trade is law data
     "lahmian_vampire": "effect_starting_technology_tomb_kings_tech",
-    **dict.fromkeys(("strigoi", "blood_dragon", "necrarch"), _VAMPIRE),
+    **dict.fromkeys(("strigoi", "blood_dragon", "necrarch", "vampire_coast"), _VAMPIRE),
     "nehekharan": "effect_starting_technology_tomb_kings_tech",
     "norscan": "effect_starting_technology_norsca_tech",
     "ogre": "effect_starting_technology_ogre_tech",
     "wood_elf": "effect_starting_technology_wood_elf_tech",
+    "amazon": "effect_starting_technology_wood_elf_tech",   # #10179: hand craft, no industry or gunpowder
     "high_elf": "effect_starting_technology_high_elf_tech",
     "dark_elf": "effect_starting_technology_dark_elf_tech",
     "lizardmen": "effect_starting_technology_lizardmen_tech",

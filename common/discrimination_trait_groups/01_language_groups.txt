@@ -41,3 +41,7 @@ sphere_group_arabyan = { type = language }
 # ---- Board item #8468, Kurgan ----
 # Kurgan, the marauders' tongue (invented name).
 sphere_group_kurgan = { type = language }
+
+# ---- Board item #10179, Amazons ----
+# Amazon, the Sisterhood's tongue (invented name).
+sphere_group_amazon = { type = language }

@@ -288,3 +288,13 @@ gods_of_araby = {
 	color = { 0.05 0.45 0.70 }
 	taboos = { }
 }
+
+################ The Cult of Rigg (Amazons) - board item #10179 ################
+# Rigg, the outcast Old One and Mother of Kalith (7e Lizardmen p.37; WD307). Own trait inside the Old Ones group.
+
+cult_of_rigg = {
+	icon = "gfx/interface/icons/religion_icons/animist.dds"
+	heritage = heritage_rigg
+	color = { 0.45 0.20 0.55 }
+	taboos = { }
+}

@@ -40,3 +40,7 @@ heritage_spirit_veneration = { type = heritage  trait_group = heritage_group_nip
 
 # Gods of Araby (Araby; Southlands colonists). Board item #8484.
 heritage_arabyan_faith = { type = heritage  trait_group = heritage_group_arabyan_gods }
+
+# Cult of Rigg (Amazons). Board item #10179. Inside heritage_group_old_ones: Rigg is an outcast Old One, so Rigg and the Old Ones
+# are kindred but estranged (shared-group acceptance tier, not the shared-religion tier).
+heritage_rigg = { type = heritage  trait_group = heritage_group_old_ones }

@@ -54,3 +54,6 @@ sphere_arabyan = { type = language  trait_group = sphere_group_arabyan }
 
 # ---- Board item #8468, Kurgan ----
 sphere_kurgan = { type = language  trait_group = sphere_group_kurgan }
+
+# ---- Board item #10179, Amazons ----
+sphere_amazon = { type = language  trait_group = sphere_group_amazon }

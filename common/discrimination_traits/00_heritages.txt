@@ -69,3 +69,6 @@ heritage_arabyan_human = { type = heritage  trait_group = heritage_group_arabyan
 
 # ---- Board item #8468, Kurgan ----
 heritage_kurgan_human = { type = heritage  trait_group = heritage_group_kurgan_human }
+
+# ---- Board item #10179, Amazons ----
+heritage_amazon_human = { type = heritage  trait_group = heritage_group_amazon_human }

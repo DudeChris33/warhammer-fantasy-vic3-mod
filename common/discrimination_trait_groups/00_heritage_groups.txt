@@ -42,3 +42,7 @@ heritage_group_arabyan_human = { type = heritage }
 # ---- Board item #8468, Kurgan ----
 # Kurgan - the steppe and Wastes marauders, kin to no other people.
 heritage_group_kurgan_human = { type = heritage }
+
+# ---- Board item #10179, Amazons ----
+# Amazons - the warrior-women of Amazonia, kin to no other people.
+heritage_group_amazon_human = { type = heritage }

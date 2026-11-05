@@ -484,3 +484,23 @@ country_kurgan_cultural_acceptance_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #10179, vampire_coast ----
+
+country_vampire_coast_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Board item #10179, amazon ----
+
+country_amazon_cultural_acceptance_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

@@ -598,3 +598,27 @@ kurgan_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_kurgan_add = 1
 }
+
+# ---- Board item #10179, vampire_coast ----
+
+vampire_coast_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_vampire_coast_add = 1
+}
+
+vampire_coast_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_vampire_coast_add = 1
+}
+
+# ---- Board item #10179, amazon ----
+
+amazon_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_amazon_add = 1
+}
+
+amazon_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_amazon_add = 1
+}

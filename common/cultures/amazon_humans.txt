@@ -1,0 +1,57 @@
+﻿# Old World cultures - the Amazons of Lustria. Schema mirrors common/cultures/eastern_steppes_humans.txt (Kurgan, #8468).
+# Board item #10179 (epic #10176). Each culture carries:
+#   color      - rgb{ 120 56 150 }: cosmetic, no legend entry. Canon Amazon feathers are purple and blue.
+#   religion   - cult_of_rigg (new, common/religions/00_religions.txt): Rigg, an outcast Old One, "Mother of Kalith" (7e Lizardmen
+#                p.37; WD307), served by the Amazon Sisterhood (2e Bestiary). Via fan-wiki dump footnotes; medium confidence (the
+#                sources are thin and old). Panel ruling 2026-11-05: heritage_rigg sits inside heritage_group_old_ones, so in a
+#                Lizardmen state the shared-group tier gives -10, not the +25 of the state religion: kindred but estranged.
+#   heritage   - heritage_amazon_human, in its own heritage_group_amazon_human: kin to no one (the Kurgan precedent).
+#   language   - sphere_amazon, in its own sphere_group_amazon. INVENTED name: canon gives no Amazon tongue.
+#                heritage and language are SEPARATE top-level culture fields, each taking a single id.
+#   traditions - required field; an empty block is valid and is what this mod uses for now.
+#   obsessions - goods ids; empty until this mod authors common/goods/.
+# graphics/ethnicities - Amazons are "physically identical to the Men of the Old World" (2e Bestiary), so european graphics with
+#                European ethnicities; european_clothes_trigger then dresses their rulers with no trigger edit.
+# FEMALE-LED WARRIOR SOCIETY: the female list is the main list and the male list is an engine accommodation (the inverse of
+#                lizardmen.txt). The engine's default character template is female = no (common/character_templates/
+#                00_default_template.txt:28): a female Amazon ruler needs a per-tag template, handed to #10182.
+# No noble or regal lists: tribal society (greenskin precedent).
+# NAMES ARE INVENTED (for Chris to review) under the canon rule that Amazons take their names from jungle beasts after a rite of
+# passage (WD308): beast stems (jaguar, ocelot, harpy eagle, anaconda, tapir, piranha, caiman, quetzal, condor, macaw, puma,
+# toucan) with -a / -ara endings for women. Common last names are earned epithets. Every name was checked against vanilla
+# names_l_english.yml and the mod's name files.
+# Every name string used below also needs a matching localization key - see localization/english/cultures_names_l_english.yml.
+# Every culture additionally needs its six static modifier definitions - see common/static_modifiers/culture_*_modifiers.txt.
+# Culture display names live in localization/english/cultures_amazon_humans_l_english.yml.
+
+################ Amazon - the warrior-women of Amazonia; the Cult of Rigg ################
+
+amazon = {
+	color= rgb{ 120 56 150 }
+	religion = cult_of_rigg
+	heritage = heritage_amazon_human
+	language = sphere_amazon
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Yaguar Ocelo Harpyo Anacon Tapiro Piray Kaiman Condoro Pumaro Tucano
+	}
+
+	female_common_first_names = {
+		Yaguara Ocelona Harpyra Anacona Tapira Piraya Kaimana Quetzala Condara Macawa Pumara Toucana
+	}
+
+	common_last_names = {
+		Quillfeather Treewalker Vinebow Bloodfeather Swiftspear Darkcanopy Riverwatch Jungleshade Featherbound
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+		1 = caucasian_dark_hair
+	}
+}

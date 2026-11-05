@@ -268,3 +268,57 @@ necrarch = {
 		1 = caucasian_northern_brown_hair
 	}
 }
+
+################ Vampire Coast - Luthor Harkon's undead pirates of the north-east Lustrian coast ################
+# Board item #10179 (epic #10176). CANON at 2502 IC (loremaster, 2026-11-05): Harkon's realm on Lustria's north-eastern
+# coast appears in the 4e Undead book, the 5e/6e Lizardmen books and WD306; he was wrecked there in 876 IC; its port is
+# New Bechafen (WFRP4e). Cited via the local fan-wiki dump's book footnotes, not a book opened (tier: army book/WD).
+# heritage_vampire and cult_of_nagash like every vampire line (DISCLOSED: canon gives Harkon no Nagash worship; the shared
+# vampire preset keeps the culture inside the undead heritage group). Language sphere_tilean (panel ruling 2026-11-05, over
+# the loremaster's sphere_reikspiel): the living crews are Sartosan, and sartosan speaks sphere_tilean, so the coast shares a
+# tongue (+20 acceptance, common/laws/00_citizenship.txt) with the only living pops it holds. Harkon's eastern-Imperial origin
+# (WFRP4e p.65) is carried by the Imperial-register names. graphics = european and the palest morphs, as the other lines.
+# Names: canon Luthor, Harkon, Black Jens (a ghoul) and Cylostra (cited TW, not canon); NOT Aranessa (a living Sartosan pirate
+# queen) and NOT Noctilus (a von Carstein, Dreadfleet). The rest are INVENTED in an Imperial/Tilean sea register, for Chris to
+# review. Harkon and ship-and-sea surnames serve as noble last names. Colour is cosmetic (no legend entry).
+
+vampire_coast = {
+	color= rgb{ 34 72 82 }
+	religion = cult_of_nagash
+	heritage = heritage_vampire
+	language = sphere_tilean
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Luthor Harkon Black_Jens Corvo Matteo Dario Baltasar Orsino Gregor Lorenz Anselm Wilhelm
+	}
+
+	female_common_first_names = {
+		Cylostra Fiametta Serafina Brigitta Marietta Giulia Annelise Ottilie Perpetua Rosalba Salome Isolina
+	}
+
+	noble_last_names = {
+		Harkon Deadwater Blackhull Grimtide Drownbell Saltgrave
+	}
+
+	common_last_names = {
+		Saltrot Barnaclehide Rigginghand Wreckmaster Gallowsmast Tidecursed Bilgesoul Driftbone
+	}
+
+	male_regal_first_names = {
+		Luthor Harkon Corvo
+	}
+
+	female_regal_first_names = {
+		Cylostra Serafina
+	}
+
+	graphics = european
+	ethnicities = {
+		3 = caucasian_northern_dark_hair
+		1 = caucasian_northern_brown_hair
+	}
+}

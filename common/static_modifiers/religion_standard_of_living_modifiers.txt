@@ -366,3 +366,15 @@ gods_of_araby_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_gods_of_araby_standard_of_living_add = 1
 }
+
+# ---- The Cult of Rigg (Amazons), board item #10179 ----
+
+cult_of_rigg_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_cult_of_rigg_standard_of_living_add = 1
+}
+
+cult_of_rigg_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_cult_of_rigg_standard_of_living_add = 1
+}

@@ -484,3 +484,23 @@ state_kurgan_standard_of_living_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #10179, vampire_coast ----
+
+state_vampire_coast_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Board item #10179, amazon ----
+
+state_amazon_standard_of_living_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

@@ -484,3 +484,23 @@ country_fervor_target_kurgan_add={
 		ai_value=0
 	}
 }
+
+# ---- Board item #10179, vampire_coast ----
+
+country_fervor_target_vampire_coast_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+# ---- Board item #10179, amazon ----
+
+country_fervor_target_amazon_add={
+	decimals=1
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

@@ -598,3 +598,27 @@ kurgan_standard_of_living_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	state_kurgan_standard_of_living_add = 1
 }
+
+# ---- Board item #10179, vampire_coast ----
+
+vampire_coast_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_vampire_coast_standard_of_living_add = 1
+}
+
+vampire_coast_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_vampire_coast_standard_of_living_add = 1
+}
+
+# ---- Board item #10179, amazon ----
+
+amazon_standard_of_living_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	state_amazon_standard_of_living_add = 1
+}
+
+amazon_standard_of_living_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	state_amazon_standard_of_living_add = 1
+}
