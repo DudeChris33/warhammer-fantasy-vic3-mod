@@ -307,3 +307,15 @@ OKP = {
 	cultures = { wood_elf }
 	capital = STATE_OAK_OF_PROPHECY
 }
+
+################ ALN — Athel Loren; formable, the united wood-elf realm ################
+# Formable only (no start owner): the five realms of Athel Loren unite under one throne.
+# Filed here by geography with ANM/ARG/TLS/TRG/WYD. Colour: a distinct shade of ANM's (heartland) green.
+# capital = STATE_WATERFALL_PALACE: the Everqueen's court (Ariel's seat, Waterfall Palace).
+ALN = {
+	color = { 98 160 74 }
+	country_type = unrecognized
+	tier = kingdom
+	cultures = { wood_elf }
+	capital = STATE_WATERFALL_PALACE # Waterfall Palace, canon seat
+}

@@ -581,6 +581,7 @@ no region file of their own (see *Conventions*). All carry `wood_elf` and are
 | TRG | `03_brettonia` | Torgovann | start | `wood_elf` | Torgovann | `principality`/`unrecognized`; realm of Athel Loren (#6373) |
 | WYD | `03_brettonia` | Wydrioth | start | `wood_elf` | Wydrioth | `principality`/`unrecognized`; realm of Athel Loren (#6373) |
 | OKP | `03_brettonia` | Oak of Prophecy | start | `wood_elf` | Oak of Prophecy | `principality`/`unrecognized`; wood-elf glade beyond Athel Loren's eaves (#6373) |
+| ALN | `03_brettonia` | Athel Loren | formable | `wood_elf` | Waterfall Palace | `kingdom`/`unrecognized`; the five realms united; explicit 13-state list (not culture states: `wood_elf` is also homeland elsewhere) |
 
 ### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_ancestral, sylvanian_vampire, goblin) — 28 tags; KAZ formable
 

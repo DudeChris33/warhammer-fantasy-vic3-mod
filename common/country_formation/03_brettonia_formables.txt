@@ -22,3 +22,32 @@ BRE = {
 		country_has_primary_culture = cu:bretonnian
 	}
 }
+
+# ALN (Athel Loren): explicit state list, not use_culture_states, because wood_elf is also the
+# homeland culture of Gryphon Wood, Laurelorn, Nuja and others far outside the forest. The thirteen
+# Athel Loren states (the realms' states plus the glades), 0.75 of them (10) must be held.
+# The wood elves are unrecognized, so the gate is unrecognized (BRE's recognized gate would lock them out).
+ALN = {
+	states = {
+		STATE_ANMYR
+		STATE_ARGWYLON
+		STATE_GLADE_OF_ETERNAL_MIDNIGHT
+		STATE_GLADE_OF_ETERNAL_MOONLIGHT
+		STATE_HALLS_OF_EQUOS
+		STATE_KING_S_GLADE
+		STATE_TALSYN
+		STATE_TAL_ESTH
+		STATE_TORGOVANN
+		STATE_TYR_VANNA
+		STATE_WATERFALL_PALACE
+		STATE_WYDRIOTH
+		STATE_YI_EDRI_ETERNOS
+	}
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		is_country_type = unrecognized
+		country_has_primary_culture = cu:wood_elf
+	}
+}

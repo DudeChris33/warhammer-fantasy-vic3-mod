@@ -198,3 +198,11 @@ OKP = {
 		trigger = { always = yes }
 	}
 }
+
+ALN = {
+	flag_definition = {
+		coa = ALN
+		priority = 100
+		trigger = { always = yes }
+	}
+}
