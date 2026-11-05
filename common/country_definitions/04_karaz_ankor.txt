@@ -36,7 +36,7 @@
 # one branch. Deeper than KAK's heartland red so the formable reads distinctly on the map.
 
 KAZ = {
-	color = { 122 30 26 }
+	color = { 128 35 23 }
 	country_type = recognized
 	tier = hegemony
 	cultures = { dawi dawi_grey dawi_norse dawi_ancestral }
@@ -76,7 +76,7 @@ KAD = {
 ################ BVR — Barak Varr; the sea-hold ################
 
 BVR = {
-	color = { 140 52 66 }
+	color = { 133 36 57 }
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
@@ -120,7 +120,7 @@ KAG = {
 ################ KNO — Karak Norn; the Grey Mountains ################
 
 KNO = {
-	color = { 118 126 138 }
+	color = { 147 138 150 }
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_grey }
@@ -130,7 +130,7 @@ KNO = {
 ################ KHI — Karak Hirn; the Vaults ################
 
 KHI = {
-	color = { 96 104 118 }
+	color = { 83 96 101 }
 	country_type = recognized
 	tier = principality
 	cultures = { dawi_grey }
@@ -170,7 +170,7 @@ KVN = {
 ################ GUN — Mount Gunbad; ruined, the brightstone mines ################
 
 GUN = {
-	color = { 134 92 84 }
+	color = { 118 91 86 }
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
@@ -180,7 +180,7 @@ GUN = {
 ################ VLG — Karak Vlag; ruined, the far north, destroyed by Chaos ################
 
 VLG = {
-	color = { 96 66 68 }
+	color = { 101 57 58 }
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }

@@ -125,9 +125,9 @@
   "KSV": {
    "name": "Kislev",
    "color": [
-    122,
-    146,
-    178
+    133,
+    143,
+    182
    ]
   },
   "ERE": {
@@ -165,9 +165,9 @@
   "BOL": {
    "name": "Bolgasgrad",
    "color": [
-    110,
-    122,
-    150
+    126,
+    139,
+    162
    ],
    "nudged_from": [
     108,
@@ -193,9 +193,9 @@
   "DOL": {
    "name": "Dolgan",
    "color": [
-    166,
-    150,
-    112
+    176,
+    161,
+    126
    ]
   },
   "ROP": {
@@ -263,9 +263,9 @@
   "TAL": {
    "name": "Talabecland",
    "color": [
-    90,
-    116,
-    70
+    99,
+    127,
+    85
    ],
    "nudged_from": [
     88,
@@ -366,9 +366,9 @@
   "ART": {
    "name": "Artois",
    "color": [
-    164,
-    138,
-    64
+    157,
+    143,
+    68
    ],
    "nudged_from": [
     168,
@@ -482,9 +482,9 @@
   "SKZ": {
    "name": "Skullsmasherz",
    "color": [
-    73,
-    112,
-    51
+    61,
+    106,
+    42
    ],
    "nudged_from": [
     72,
@@ -536,9 +536,9 @@
   "BVR": {
    "name": "Barak Varr",
    "color": [
-    136,
-    48,
-    68
+    133,
+    36,
+    57
    ],
    "nudged_from": [
     140,
@@ -550,9 +550,9 @@
   "KNO": {
    "name": "Karak Norn",
    "color": [
-    115,
-    129,
-    141
+    147,
+    138,
+    150
    ],
    "nudged_from": [
     118,
@@ -564,9 +564,9 @@
   "KHI": {
    "name": "Karak Hirn",
    "color": [
-    88,
-    100,
-    111
+    83,
+    96,
+    101
    ],
    "nudged_from": [
     96,
@@ -624,9 +624,9 @@
   "GUN": {
    "name": "Mount Gunbad",
    "color": [
-    131,
-    95,
-    83
+    118,
+    91,
+    86
    ],
    "nudged_from": [
     134,
@@ -646,9 +646,9 @@
   "VLG": {
    "name": "Karak Vlag",
    "color": [
-    96,
-    64,
-    60
+    101,
+    57,
+    58
    ],
    "nudged_from": [
     96,
@@ -690,9 +690,9 @@
   "REM": {
    "name": "Remas",
    "color": [
-    160,
-    104,
-    64
+    153,
+    93,
+    49
    ],
    "nudged_from": [
     158,
@@ -728,9 +728,9 @@
   "VER": {
    "name": "Verezzo",
    "color": [
-    168,
-    152,
-    96
+    151,
+    144,
+    86
    ]
   },
   "DON": {
@@ -744,9 +744,9 @@
   "SRT": {
    "name": "Sartosa",
    "color": [
-    42,
-    20,
-    24
+    84,
+    58,
+    70
    ]
   },
   "BIL": {
@@ -760,9 +760,9 @@
   "MAG": {
    "name": "Magritta",
    "color": [
-    169,
-    64,
-    55
+    160,
+    62,
+    58
    ],
    "nudged_from": [
     172,
@@ -782,9 +782,9 @@
   "BPR": {
    "name": "Border Princes",
    "color": [
-    132,
-    116,
-    96
+    145,
+    119,
+    98
    ]
   },
   "ORT": {
@@ -814,9 +814,9 @@
   "MON": {
    "name": "Monteaux",
    "color": [
-    151,
-    81,
-    70
+    152,
+    74,
+    64
    ],
    "nudged_from": [
     150,
@@ -866,9 +866,9 @@
   "UVE": {
    "name": "Uvetovsk",
    "color": [
-    93,
-    118,
-    153
+    73,
+    106,
+    138
    ],
    "nudged_from": [
     96,
@@ -910,17 +910,17 @@
   "CRM": {
    "name": "Crooked Moon",
    "color": [
-    42,
-    62,
-    38
+    39,
+    78,
+    57
    ]
   },
   "BKA": {
    "name": "Broken Axe",
    "color": [
-    46,
-    82,
-    50
+    66,
+    71,
+    46
    ],
    "nudged_from": [
     54,
@@ -932,17 +932,17 @@
   "RFG": {
    "name": "Red Fangs",
    "color": [
-    78,
-    100,
-    40
+    72,
+    96,
+    22
    ]
   },
   "ICL": {
    "name": "Ironclaw",
    "color": [
-    113,
-    129,
-    57
+    125,
+    141,
+    64
    ],
    "nudged_from": [
     110,
@@ -955,8 +955,8 @@
    "name": "Bloody Sunz",
    "color": [
     64,
-    96,
-    43
+    90,
+    41
    ],
    "nudged_from": [
     66,
@@ -968,9 +968,9 @@
   "BNR": {
    "name": "Bonerattlaz",
    "color": [
-    90,
-    107,
-    55
+    82,
+    92,
+    31
    ],
    "nudged_from": [
     88,
@@ -982,9 +982,9 @@
   "BTO": {
    "name": "Broken Tooth",
    "color": [
-    103,
-    114,
-    42
+    100,
+    110,
+    39
    ],
    "nudged_from": [
     102,
@@ -1010,9 +1010,9 @@
   "BLV": {
    "name": "Black Venom",
    "color": [
-    51,
-    64,
-    27
+    36,
+    79,
+    38
    ],
    "nudged_from": [
     48,
@@ -1038,9 +1038,9 @@
   "KHM": {
    "name": "Khemri",
    "color": [
-    204,
-    178,
-    96
+    188,
+    176,
+    90
    ]
   },
   "ZND": {
@@ -1114,9 +1114,9 @@
   "BHA": {
    "name": "Bhagar",
    "color": [
-    213,
-    166,
-    91
+    225,
+    177,
+    102
    ],
    "nudged_from": [
     210,
@@ -1128,9 +1128,9 @@
   "KAS": {
    "name": "Ka-Sabar",
    "color": [
-    152,
-    111,
-    53
+    151,
+    108,
+    44
    ],
    "nudged_from": [
     150,
@@ -1142,9 +1142,9 @@
   "MZN": {
    "name": "Mingol Zharr-Naggrund",
    "color": [
-    72,
-    60,
-    58
+    74,
+    65,
+    69
    ]
   },
   "GOR": {
@@ -1980,36 +1980,36 @@
   "SOT": {
    "name": "Sisters of Twilight",
    "color": [
-    168,
-    228,
-    132
+    165,
+    207,
+    139
    ],
    "note": "defined in common/country_definitions/00_norsca.txt (#6373). Wood-elf realm (wood_elf culture). Filed by the geography of the Forest of Sighs."
   },
   "GRW": {
    "name": "Gryphon Wood",
    "color": [
-    138,
-    228,
-    60
+    146,
+    205,
+    92
    ],
    "note": "defined in common/country_definitions/02_empire.txt (#6373). Wood-elf realm (wood_elf culture). Name provisional (Chris will revisit)."
   },
   "LAU": {
    "name": "Laurelorn",
    "color": [
-    60,
-    228,
-    60
+    102,
+    204,
+    90
    ],
    "note": "defined in common/country_definitions/02_empire.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "OKP": {
    "name": "Oak of Prophecy",
    "color": [
-    126,
-    228,
-    108
+    137,
+    205,
+    121
    ],
    "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
@@ -2025,17 +2025,17 @@
   "WYD": {
    "name": "Wydrioth",
    "color": [
-    156,
-    228,
-    192
+    157,
+    207,
+    181
    ],
    "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
   "ARG": {
    "name": "Argwylon",
    "color": [
-    126,
-    228,
+    136,
+    206,
     150
    ],
    "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
@@ -2043,9 +2043,9 @@
   "TLS": {
    "name": "Talsyn",
    "color": [
-    168,
-    228,
-    96
+    166,
+    207,
+    115
    ],
    "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
@@ -2061,9 +2061,9 @@
   "TRG": {
    "name": "Torgovann",
    "color": [
-    72,
-    228,
-    96
+    106,
+    204,
+    112
    ],
    "note": "defined in common/country_definitions/03_brettonia.txt (#6373). Wood-elf realm (wood_elf culture)."
   },
@@ -2097,9 +2097,9 @@
   "CRB": {
    "name": "Carroburg",
    "color": [
-    252,
-    162,
-    192
+    112,
+    122,
+    154
    ],
    "note": "defined in common/country_definitions/02_empire.txt (#6373)."
   },

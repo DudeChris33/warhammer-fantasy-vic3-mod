@@ -73,7 +73,7 @@ LUC = {
 ################ REM — Remas; the greatest of the Tilean city-states ################
 
 REM = {
-	color = { 158 106 62 }
+	color = { 153 93 49 }
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
@@ -114,7 +114,7 @@ PAV = {
 ################ VER — Verezzo; the city of scholars and merchant-clerks ################
 
 VER = {
-	color = { 168 152 96 }
+	color = { 151 144 86 }
 	country_type = recognized
 	tier = city_state
 	cultures = { tilean }
@@ -140,7 +140,7 @@ DON = {
 # order, however Tilean its people are. Black and blood-red, deliberately off the Tilean palette.
 
 SRT = {
-	color = { 42 20 24 }
+	color = { 84 58 70 }
 	country_type = unrecognized
 	tier = city_state
 	cultures = { sartosan }
@@ -171,7 +171,7 @@ BIL = {
 ################ MAG — Magritta; the southern port kingdom ################
 
 MAG = {
-	color = { 172 62 56 }
+	color = { 160 62 58 }
 	country_type = recognized
 	tier = grand_principality
 	cultures = { estalian }
@@ -197,7 +197,7 @@ CNT = {
 # task; that no longer rides on this tag's country_type.
 
 BPR = {
-	color = { 132 116 96 }
+	color = { 145 119 98 }
 	country_type = recognized
 	tier = kingdom
 	cultures = { border_princer }
@@ -258,7 +258,7 @@ GDO = {
 ################ MON — Monteaux; the towered realm on the Black Gulf coast ################
 
 MON = {
-	color = { 150 84 68 }
+	color = { 152 74 64 }
 	country_type = recognized
 	tier = principality
 	cultures = { border_princer }
@@ -314,7 +314,7 @@ RAA = {
 # founding stock. Cross-file culture reference to common/cultures/kislevite_humans.txt.
 
 UVE = {
-	color = { 96 120 150 }
+	color = { 73 106 138 }
 	country_type = recognized
 	tier = principality
 	cultures = { gospodar ungol }

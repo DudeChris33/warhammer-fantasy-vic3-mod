@@ -101,7 +101,7 @@ OSM = {
 ################ TAL — Talabecland; the great forest ################
 
 TAL = {
-	color = { 88 118 68 }
+	color = { 99 127 85 }
 	country_type = recognized
 	tier = principality
 	cultures = { talabeclander }
@@ -236,7 +236,7 @@ BRK = {
 # A city-state within Middenland's sphere, famed for the Carroburg Greatswords' stand in its siege.
 
 CRB = {
-	color = { 252 162 192 }
+	color = { 112 122 154 }
 	country_type = recognized
 	tier = city_state
 	cultures = { middenlander }
@@ -312,7 +312,7 @@ XSC = {
 # map_data/state_regions/02_empire.txt.
 
 GRW = {
-	color = { 138 228 60 }
+	color = { 146 205 92 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
@@ -324,7 +324,7 @@ GRW = {
 # STATE_WEST_NORDLAND sits in map_data/state_regions/02_empire.txt.
 
 LAU = {
-	color = { 60 228 60 }
+	color = { 102 204 90 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }

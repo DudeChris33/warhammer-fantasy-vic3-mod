@@ -37,7 +37,7 @@ ZHA = {
 # The capital polity of the Chaos Dwarfs — the ziggurat-city itself.
 
 MZN = {
-	color = { 72 60 58 }
+	color = { 74 65 69 }
 	country_type = recognized
 	tier = kingdom
 	cultures = { dawi_zharr }

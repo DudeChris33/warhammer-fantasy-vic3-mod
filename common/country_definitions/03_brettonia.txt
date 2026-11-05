@@ -60,7 +60,7 @@ LYO = {
 ################ ART — Artois; the forested north ################
 
 ART = {
-	color = { 168 140 60 }
+	color = { 157 143 68 }
 	country_type = recognized
 	tier = principality
 	cultures = { bretonnian }
@@ -211,7 +211,7 @@ MOR = {
 # common/cultures/greenskin.txt (cross-file reference, as with MOR above).
 
 SKZ = {
-	color = { 72 110 54 }
+	color = { 61 106 42 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { mountain_orc }
@@ -249,7 +249,7 @@ ANM = {
 # map_data/state_regions/03_brettonia.txt.
 
 ARG = {
-	color = { 126 228 150 }
+	color = { 136 206 150 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
@@ -263,7 +263,7 @@ ARG = {
 # sit in map_data/state_regions/03_brettonia.txt.
 
 TLS = {
-	color = { 168 228 96 }
+	color = { 166 207 115 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
@@ -277,7 +277,7 @@ TLS = {
 # in map_data/state_regions/03_brettonia.txt.
 
 TRG = {
-	color = { 72 228 96 }
+	color = { 106 204 112 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
@@ -289,7 +289,7 @@ TRG = {
 # in map_data/state_regions/03_brettonia.txt.
 
 WYD = {
-	color = { 156 228 192 }
+	color = { 157 207 181 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
@@ -301,7 +301,7 @@ WYD = {
 # map_data/state_regions/03_brettonia.txt.
 
 OKP = {
-	color = { 126 228 108 }
+	color = { 137 205 121 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }

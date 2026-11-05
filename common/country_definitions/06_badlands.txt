@@ -50,7 +50,7 @@ RED = {
 # Skarsnik’s Night Goblins, squatting in Karak Eight Peaks
 
 CRM = {
-	color = { 42 62 38 }
+	color = { 39 78 57 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
@@ -61,7 +61,7 @@ CRM = {
 # Grom the Paunch’s goblins of the Misty Mountain
 
 BKA = {
-	color = { 54 74 42 }
+	color = { 66 71 46 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }
@@ -72,7 +72,7 @@ BKA = {
 # Gorfang Rotgut; holds Black Crag, the ex-dwarf Karak Drazh
 
 RFG = {
-	color = { 78 100 40 }
+	color = { 72 96 22 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { mountain_orc }
@@ -83,7 +83,7 @@ RFG = {
 # Gorbad Ironclaw; holds the Iron Rock in the northern Badlands
 
 ICL = {
-	color = { 110 132 58 }
+	color = { 125 141 64 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { mountain_orc }
@@ -94,7 +94,7 @@ ICL = {
 # Grumlok and Gazbag’s Badlands orc tribe
 
 BSB = {
-	color = { 66 96 42 }
+	color = { 64 90 41 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { mountain_orc }
@@ -107,7 +107,7 @@ BSB = {
 # Azhag the Slaughterer; the northern World’s Edge
 
 BNR = {
-	color = { 88 108 52 }
+	color = { 82 92 31 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { mountain_orc }
@@ -118,7 +118,7 @@ BNR = {
 # Absorbed by Gorbad's Ironclaws before 1707 IC (Wikipedia summary of the O&G army books); no source places the tribe in 2502, so this is a disclosed revival. Ruler "Crusher Zogoth" is unsourced.
 
 BTO = {
-	color = { 102 116 44 }
+	color = { 100 110 39 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { mountain_orc }
@@ -142,7 +142,7 @@ BRN = {
 # Forest Goblins south of Black Fire Pass
 
 BLV = {
-	color = { 48 66 30 }
+	color = { 36 79 38 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { goblin }

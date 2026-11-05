@@ -195,7 +195,7 @@ XSD = {
 # unrecognized/principality, like every wood-elf realm.
 
 SOT = {
-	color = { 168 228 132 }
+	color = { 165 207 139 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
