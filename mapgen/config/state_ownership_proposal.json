@@ -103,7 +103,7 @@
    "note": "review round 3"
   },
   "STATE_BILIOUS_BASILICA": {
-   "owner": "XSG",
+   "owner": "SRY",
    "confidence": "directed",
    "note": "review round 2"
   },
@@ -158,9 +158,9 @@
    "note": "review: Laurelorn Forest wood elves"
   },
   "STATE_BLIGHTED_MARSHES": {
-   "owner": "XSG",
+   "owner": "SRY",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_BLIGHTWATER": {
    "owner": "BSB",
@@ -280,9 +280,9 @@
    "note": "Khemri hub"
   },
   "STATE_CLAWMARKET": {
-   "owner": "XSD",
+   "owner": "MDR",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_CLAW_COAST": {
    "owner": "SNA",
@@ -299,9 +299,9 @@
    "note": "Couronne hub"
   },
   "STATE_CRIPPLE_PEAK": {
-   "owner": "XSL",
+   "owner": "unowned",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_CROOKED_CORRIDOR": {
    "owner": "KZF",
@@ -324,9 +324,9 @@
    "note": "wilderness; no roster tag"
   },
   "STATE_DARK_MAIDEN_PASS": {
-   "owner": "XSK",
+   "owner": "SAA",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_DEATHTOLL_HOLD": {
    "owner": "unowned",
@@ -516,9 +516,9 @@
    "note": "district of Zharr-Naggrund"
   },
   "STATE_FESTER_SPIKE": {
-   "owner": "XSJ",
+   "owner": "SAA",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_FIVE_RIVERS": {
    "owner": "MAW",
@@ -530,9 +530,9 @@
    "confidence": "inferred"
   },
   "STATE_FLESHWARREN": {
-   "owner": "XSD",
+   "owner": "MDR",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_FOREST_OF_GLOOM": {
    "owner": "unowned",
@@ -607,9 +607,9 @@
    "note": "review: Athel Loren divided among wood elf tags (kindred by name/adjacency)"
   },
   "STATE_GLIMDWARROW": {
-   "owner": "XSB",
+   "owner": "SCU",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_GLOOMWRACK_COAST": {
    "owner": "BJO",
@@ -656,9 +656,9 @@
    "note": "Castle Sanglac"
   },
   "STATE_GRISTLE_VALLEY": {
-   "owner": "XSI",
+   "owner": "SKB",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_GROM_RIDGE": {
    "owner": "unowned",
@@ -686,14 +686,14 @@
    "note": "Zharr-Naggrund hub"
   },
   "STATE_HELL_PIT": {
-   "owner": "XSD",
+   "owner": "MDR",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_HELL_PIT_DEPTHS": {
-   "owner": "XSD",
+   "owner": "MDR",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_HELMGART": {
    "owner": "REI",
@@ -806,9 +806,9 @@
    "note": "Kreutzhofen / Meissen hubs"
   },
   "STATE_KRUGENHEIM": {
-   "owner": "XSA",
+   "owner": "ESH",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_LAHMIA": {
    "owner": "LAH",
@@ -1584,18 +1584,18 @@
    "note": "review"
   },
   "STATE_WEST_TALABECLAND": {
-   "owner": "XSC",
+   "owner": "TAL",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_WHEATLANDS": {
    "owner": "UZK",
    "confidence": "inferred"
   },
   "STATE_WINTERTEETH_FOOTHILLS": {
-   "owner": "XSH",
+   "owner": "unowned",
    "confidence": "directed",
-   "note": "review: greenskin placeholder for a future Skaven tag"
+   "note": "review; Skaven placeholder replaced (#10199)"
   },
   "STATE_WINTERTEETH_PASS": {
    "owner": "WIS",

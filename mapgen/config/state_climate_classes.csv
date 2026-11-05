@@ -67,7 +67,7 @@ STATE_CENTRAL_MAGRITTA,82,southern_realms_badlands,Estalia: Magritta coast,medit
 STATE_CHAMON_DHAREK,545,norsca_kislev,Kislev far north,arctic_boreal_coast,,T,TW: cr_oldworld_campaign/chamon_dharek (TWW3 Old World mod region table; no Lexicanum page for the name); lex:Kislev#Geography (realm) [Realm of the Ice Queen pp. 6-8]
 STATE_CHATEAU_LOVARRE,500,karaz_ankor,Western ranges (no lore),highland_alpine,,T,TW: cr_oldworld_campaign/chateau_lovarre (TWW3 Old World mod region table; no Lexicanum page for the name); no extract names this state; physically expected class kept
 STATE_CITY_OF_KINGS,570,nehekhara,Great Mortis strip: Khemri,desert_river,NEH-01,A,"lex:Khemri (zone via hub Khemri) [Tomb Kings 6e pp. 8-21]; lex:Great_Mortis_River#lead/Overview/History (zone) [Tomb Kings 6e pp. 10, 16-17; Tomb Kings 8e pp. 14-19; Liber Necris]"
-STATE_CLAWMARKET,550,norsca_kislev,Hell Pit,highland_alpine,NK-04,B,lex:Hell_Pit (zone via owner XSD) [Skaven 4e p. 8; Skaven 7e p. 15; White Dwarf 311 pp. 106-108]; name invented (worksheet)
+STATE_CLAWMARKET,550,norsca_kislev,Hell Pit,highland_alpine,NK-04,B,lex:Hell_Pit (zone via owner MDR) [Skaven 4e p. 8; Skaven 7e p. 15; White Dwarf 311 pp. 106-108]; name invented (worksheet)
 STATE_CLAW_COAST,39,norsca_kislev,Norsca mountains,highland_alpine,,B,lex:Norsca#lead/Society (realm) [Tome of Corruption pp. 139-140; Sea of Claws]; name is a coast but the drawn state is highland-flagged with no coastal province; class follows the flag
 STATE_CLIFFS_OF_DAWN,374,karaz_ankor,Southern World's Edge foot (no lore),open_desert,,T,TW: cr_oldworld_campaign/cliffs_of_dawn (TWW3 Old World mod region table; no Lexicanum page for the name); no extract names this state; physically expected class kept
 STATE_COURONNE,50,brettonia,Couronne proper,temperate_forest_hill,,A,lex:Couronne#Geography (zone) [Knights of the Grail pp. 67-70]
@@ -119,7 +119,7 @@ STATE_FALLS_DISTRICT,279,dark_lands,Plain of Zharr (TW district),open_desert,DL-
 STATE_FESTER_SPIKE,506,karaz_ankor,Western ranges (no lore),highland_alpine,,T,TW: cr_oldworld_campaign/fester_spike (TWW3 Old World mod region table; no Lexicanum page for the name); no extract names this state; physically expected class kept
 STATE_FIVE_RIVERS,273,dark_lands,Five Rivers (no lore),steppe,,C,[unverified] no extract names this state; physically expected class kept; name is weak in the naming worksheet
 STATE_FJORD_COAST,36,norsca_kislev,Norsca coast,arctic_boreal_coast,,A,name (fjord coast); lex:Norsca#lead/Society (realm) [Tome of Corruption pp. 139-140; Sea of Claws]
-STATE_FLESHWARREN,347,norsca_kislev,Hell Pit,highland_alpine,NK-04,B,lex:Hell_Pit (zone via owner XSD) [Skaven 4e p. 8; Skaven 7e p. 15; White Dwarf 311 pp. 106-108]; name invented (worksheet)
+STATE_FLESHWARREN,347,norsca_kislev,Hell Pit,highland_alpine,NK-04,B,lex:Hell_Pit (zone via owner MDR) [Skaven 4e p. 8; Skaven 7e p. 15; White Dwarf 311 pp. 106-108]; name invented (worksheet)
 STATE_FOREST_OF_GLOOM,230,karaz_ankor,Forest of Gloom,temperate_forest_hill,KA-02,A,name (forest)
 STATE_FOREST_OF_KNIVES,555,norsca_kislev,Norsca mountains,highland_alpine,,T,TW: cr_oldworld_campaign/forest_of_knives (TWW3 Old World mod region table; no Lexicanum page for the name); no extract names this state; physically expected class kept
 STATE_FOREST_OF_SIGHS,41,norsca_kislev,Forest of Sighs,boreal_forest,NK-03,A,name (forest); lex:Norsca#lead/Society (realm) [Tome of Corruption pp. 139-140; Sea of Claws]
@@ -152,7 +152,7 @@ STATE_HALLS_OF_EQUOS,505,brettonia,Athel Loren,temperate_forest_hill,BRE-03,T,"T
 STATE_HAUNTED_GROVE,612,dark_lands,Dark Lands south (no lore),steppe,,T,TW: cr_oldworld_campaign/haunted_grove (TWW3 Old World mod region table; no Lexicanum page for the name); no extract names this state; physically expected class kept
 STATE_HEART_OF_ZHARRDUK,278,dark_lands,Plain of Zharr (Zharr-Naggrund),open_desert,DL-02,A,lex:Dark_Lands#Features Plain of Zharr (zone) [Warhammer Armies: Orcs & Goblins]; lex:Dark_Lands#Features Zharr-Naggrund (zone via hub Zharr-Naggrund) [Warhammer Armies: Orcs & Goblins]
 STATE_HELL_PIT,379,norsca_kislev,Hell Pit,highland_alpine,NK-04,A,lex:Hell_Pit (zone) [Skaven 4e p. 8; Skaven 7e p. 15; White Dwarf 311 pp. 106-108]
-STATE_HELL_PIT_DEPTHS,377,norsca_kislev,Hell Pit,highland_alpine,NK-04,B,"lex:Hell_Pit (zone via owner XSD) [Skaven 4e p. 8; Skaven 7e p. 15; White Dwarf 311 pp. 106-108]; name invented (worksheet), carries Hell Pit"
+STATE_HELL_PIT_DEPTHS,377,norsca_kislev,Hell Pit,highland_alpine,NK-04,B,"lex:Hell_Pit (zone via owner MDR) [Skaven 4e p. 8; Skaven 7e p. 15; White Dwarf 311 pp. 106-108]; name invented (worksheet), carries Hell Pit"
 STATE_HELMGART,487,karaz_ankor,Axe Bite Pass foot (Reikland),temperate_forest_hill,,B,lex:Reikland#Trade (zone via owner REI) [Sigmar's Heirs ch. VI pp. 77-84]
 STATE_HELSPIRE_COAST,473,norsca_kislev,Norsca coast,arctic_boreal_coast,,A,name (coast); lex:Norsca#lead/Society (realm) [Tome of Corruption pp. 139-140; Sea of Claws]
 STATE_HELSPIRE_MOUNTAINS,475,norsca_kislev,Norsca mountains,highland_alpine,,A,name (mountains); lex:Norsca#lead/Society (realm) [Tome of Corruption pp. 139-140; Sea of Claws]

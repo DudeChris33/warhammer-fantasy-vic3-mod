@@ -241,6 +241,12 @@
    "why": "Kislev City is one of the Old World's great cities but the Oblasts are sparse; the five Gospodar-held tags together hold about a third of the Empire's people.",
    "confidence": "low"
   },
+  "ESH": {
+   "canon": 20000,
+   "source": "inferred: Clan Eshin (West Ostermark, near Mordheim); the clan total carries the placeholder it replaces (#10199); no canon population figure",
+   "why": "Warren-clan total sized as the placeholder was; clan canon places it here (see the #10199 decision table).",
+   "confidence": "low"
+  },
   "ESS": {
    "canon": 25000,
    "source": "inferred: Border Princes petty realms (WFB Border Princes)",
@@ -487,6 +493,12 @@
    "why": "Ogre tribes are few but large-bodied; the Mountains of Mourn tribes are comparable to an Imperial hold.",
    "confidence": "low"
   },
+  "MDR": {
+   "canon": 60000,
+   "source": "inferred: Clan Moulder (Hell Pit); the clan total carries the placeholder it replaces (#10199); no canon population figure",
+   "why": "Warren-clan total sized as the placeholder was; clan canon places it here (see the #10199 decision table).",
+   "confidence": "low"
+  },
   "MGL": {
    "canon": 8000,
    "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
@@ -655,16 +667,34 @@
    "why": "Nomad and frontier populations are small; the three-state Ungol Steppes tag is the largest.",
    "confidence": "low"
   },
+  "SAA": {
+   "canon": 25000,
+   "source": "inferred: Clan Skaar (Apuccini mine and Dark Maiden Pass); the clan total carries the placeholder it replaces plus the Apuccini placeholder (XSJ) (#10199); no canon population figure",
+   "why": "Warren-clan total sized as the placeholder was; clan canon places it here (see the #10199 decision table).",
+   "confidence": "low"
+  },
   "SAR": {
    "canon": 35000,
    "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
    "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
    "confidence": "low"
   },
+  "SCU": {
+   "canon": 20000,
+   "source": "inferred: Clan Scruten (Drakwald, near Middenheim); the clan total carries the placeholder it replaces (#10199); no canon population figure",
+   "why": "Warren-clan total sized as the placeholder was; clan canon places it here (see the #10199 decision table).",
+   "confidence": "low"
+  },
   "SKA": {
    "canon": 25000,
    "source": "inferred: Norscan tribes (WFB Warriors of Chaos; TW Norsca)",
    "why": "Norsca is a harsh land of widely separated tribes; each hold is a small fraction of an Imperial province, the larger coastal tribes (Graeling, Sarl, Snaekling) above the mountain ones. BRK is a Chaos garrison in the Middle Mountains.",
+   "confidence": "low"
+  },
+  "SKB": {
+   "canon": 10000,
+   "source": "inferred: Clan Skab (Kreutzhofen, near Nuln); the clan total carries the placeholder it replaces (#10199); no canon population figure",
+   "why": "Warren-clan total sized as the placeholder was; clan canon places it here (see the #10199 decision table).",
    "confidence": "low"
   },
   "SKZ": {
@@ -702,6 +732,12 @@
    "source": "inferred: Tilean city-states (WFRP Tilea; TW Tilea)",
    "why": "Miragliano is the largest Tilean city; Tobaro, Luccini, Remas and Pavona are major; Sartosa is a pirate island.",
    "confidence": "medium"
+  },
+  "SRY": {
+   "canon": 30000,
+   "source": "inferred: Clan Skryre (Skavenblight); the clan total carries the placeholder it replaces (#10199); no canon population figure",
+   "why": "Warren-clan total sized as the placeholder was; clan canon places it here (see the #10199 decision table).",
+   "confidence": "low"
   },
   "STI": {
    "canon": 190000,
@@ -827,66 +863,6 @@
    "canon": 18000,
    "source": "inferred: Wood Elf realms (WFB Wood Elves; Athel Loren is lightly settled)",
    "why": "Asrai are long-lived and few; each realm is a small fraction of a human province.",
-   "confidence": "low"
-  },
-  "XSA": {
-   "canon": 20000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSB": {
-   "canon": 20000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSC": {
-   "canon": 15000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSD": {
-   "canon": 60000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSG": {
-   "canon": 30000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSH": {
-   "canon": 15000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSI": {
-   "canon": 10000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSJ": {
-   "canon": 15000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSK": {
-   "canon": 10000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
-   "confidence": "low"
-  },
-  "XSL": {
-   "canon": 20000,
-   "source": "inferred: Skaven placeholder clans (no named canon clan; skaven culture per common/country_definitions)",
-   "why": "Placeholders are sized like a goblin tribe; XSD holds four states.",
    "confidence": "low"
   },
   "ZHU": {

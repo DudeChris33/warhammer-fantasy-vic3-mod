@@ -78,7 +78,7 @@
      ]
     },
     {
-     "owner": "XSJ",
+     "owner": "SAA",
      "provinces": [
       "x1656DA"
      ]
@@ -317,7 +317,7 @@
     3837,
     1108
    ],
-   "owner": "XSG",
+   "owner": "SRY",
    "scope": "drawn"
   },
   "STATE_BLIGHTWATER": {
@@ -596,7 +596,7 @@
     4582,
     1452
    ],
-   "owner": "XSL",
+   "owner": "unowned",
    "scope": "drawn"
   },
   "STATE_CROOKED_CORRIDOR": {
@@ -641,7 +641,7 @@
     4004,
     1212
    ],
-   "owner": "XSK",
+   "owner": "SAA",
    "scope": "drawn"
   },
   "STATE_DEATHTOLL_HOLD": {
@@ -818,7 +818,7 @@
      ]
     },
     {
-     "owner": "XSB",
+     "owner": "SCU",
      "provinces": [
       "x04A6BB",
       "x11A1E2"
@@ -907,20 +907,20 @@
    ],
    "owners": [
     {
+     "owner": "SRY",
+     "provinces": [
+      "x000D6D",
+      "xA5BF25",
+      "xC39E7B"
+     ]
+    },
+    {
      "owner": "VMP",
      "provinces": [
       "x391E4D",
       "xB4035D",
       "xD755C6",
       "xF5D78D"
-     ]
-    },
-    {
-     "owner": "XSG",
-     "provinces": [
-      "x000D6D",
-      "xA5BF25",
-      "xC39E7B"
      ]
     }
    ],
@@ -1155,7 +1155,7 @@
     4482,
     514
    ],
-   "owner": "XSD",
+   "owner": "MDR",
    "scope": "drawn"
   },
   "STATE_FOREST_OF_GLOOM": {
@@ -1398,7 +1398,7 @@
     4484,
     498
    ],
-   "owner": "XSD",
+   "owner": "MDR",
    "scope": "drawn"
   },
   "STATE_HELL_PIT_DEPTHS": {
@@ -1407,7 +1407,7 @@
     4502,
     517
    ],
-   "owner": "XSD",
+   "owner": "MDR",
    "scope": "drawn"
   },
   "STATE_HELMGART": {
@@ -1679,6 +1679,13 @@
    ],
    "owners": [
     {
+     "owner": "SKB",
+     "provinces": [
+      "x2042BE",
+      "xF78B17"
+     ]
+    },
+    {
      "owner": "WIS",
      "provinces": [
       "x06EA0E",
@@ -1688,13 +1695,6 @@
       "x664EC5",
       "x68B295",
       "xC8174C"
-     ]
-    },
-    {
-     "owner": "XSI",
-     "provinces": [
-      "x2042BE",
-      "xF78B17"
      ]
     }
    ],
@@ -4084,28 +4084,7 @@
     4139,
     852
    ],
-   "owners": [
-    {
-     "owner": "TAL",
-     "provinces": [
-      "x47D1D1",
-      "x6D2B66",
-      "x8481BD",
-      "x8CE396",
-      "x9FFD43",
-      "xA99A58",
-      "xCEF3ED"
-     ]
-    },
-    {
-     "owner": "XSC",
-     "provinces": [
-      "x01C5CA",
-      "x9000AE",
-      "xBC290F"
-     ]
-    }
-   ],
+   "owner": "TAL",
    "scope": "drawn"
   },
   "STATE_VORBERGLAND": {
@@ -4296,6 +4275,14 @@
    ],
    "owners": [
     {
+     "owner": "ESH",
+     "provinces": [
+      "x27EB4F",
+      "xA0C933",
+      "xF38192"
+     ]
+    },
+    {
      "owner": "OSM",
      "provinces": [
       "x0291BA",
@@ -4313,14 +4300,6 @@
       "xDD3825",
       "xE64A44",
       "xFF74A2"
-     ]
-    },
-    {
-     "owner": "XSA",
-     "provinces": [
-      "x27EB4F",
-      "xA0C933",
-      "xF38192"
      ]
     }
    ],

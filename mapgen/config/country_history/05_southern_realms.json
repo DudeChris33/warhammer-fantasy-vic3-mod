@@ -241,6 +241,11 @@
       "note": "A council of captains under a pirate prince; inherits the Tilean baseline.",
       "institutions": {}
     },
+    "SRY": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Skryre (Skavenblight); replaces the placeholder (#10199)."
+    },
     "TOB": {
       "confidence": "low",
       "note": "Baseline unchanged.",
@@ -294,11 +299,6 @@
           "why": "Starting elections are spread over four dates (REM, MAR, MOO, VER) so they do not fall on one day; #6640 governs how they run."
         }
       }
-    },
-    "XSG": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder (Blighted Marshes)."
     }
   }
 }

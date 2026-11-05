@@ -87,11 +87,6 @@
       "profile": "exiled_hold",
       "confidence": "medium",
       "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
-    },
-    "XSH": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder; no country definition yet."
     }
   }
 }

@@ -125,13 +125,13 @@ TAG = {
   `mapgen/config/building_history/profiles.json` `tags` row, or `generate_building_history.py` errors (#8444). It also needs a `mapgen/config/country_history/NN_<stem>.json` entry (or a `profile` from `profiles.json`): `validate_country_history.py` fails an owner with no entry, and `generate_country_history.py` errors on one with no starting laws (#9036).
 - `cultures` ids must exist somewhere under `common/cultures/` — in whichever race/group file that culture is defined (see *Naming* above; no longer a matching-region file).
 - A tag's `cultures` no longer drive homelands (#8604): `add_homeland` comes only from the hand-authored `mapgen/config/state_homelands.json` ([testing.md](testing.md)). The owner's `cultures` only seed a new state's row (`--sync-homelands`) and still set the pop-mix fallback for a state whose list is `[]`.
-- **Placeholder tags (`XS*`).** A state owner the setting needs but no named polity can yet represent gets
-  a deliberately generic stand-in rather than an invented nation. The `XS*` codes are the Skaven ones:
-  "Skaven Clan <letter> (placeholder)", adjective "Skaven", `skaven` culture (#8646; goblin until then),
-  `unrecognized`/`principality`, filed by the geography of their states, heraldry per
-  [heraldry.md](heraldry.md)'s placeholder rule. Each block's comment states the limits. The codes
-  are frozen like any shipped tag, so real clans get **new** codes and supersede these tags; a
-  placeholder is never renamed into a real polity. Record each one in `planning/tag_registry.md`.
+- **Placeholder tags.** A state owner the setting needs but no named polity can yet represent may get
+  a deliberately generic stand-in rather than an invented nation, filed by the geography of its states,
+  with heraldry per [heraldry.md](heraldry.md)'s placeholder rule and each block's comment stating its
+  limits. The codes are frozen like any shipped tag, so a real polity gets a **new** code and supersedes
+  the placeholder, which is never renamed. The one set so far, the ten Skaven `XS*` tags, is retired
+  (#10199): six real clans (`MDR SRY SAA SKB SCU ESH`) replaced seven of them, and **every Skaven tag is a
+  clan**, never a city or council polity. Record each tag in `planning/tag_registry.md`.
 - **`UNO` (Unclaimed Lands)** is the one placeholder that is not painted: the `decentralized`
   owner of every `unowned` and out-of-scope `placeholder` state, mapped from those tokens by
   `generate_state_history.py` (#6391). `common/country_definitions/98_unclaimed.txt`,

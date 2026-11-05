@@ -69,6 +69,11 @@
         "ig_devout": "Cult of Ulric"
       }
     },
+    "ESH": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Eshin (West Ostermark, near Mordheim); replaces the placeholder (#10199)."
+    },
     "GRW": {
       "profile": "wood_elf_realm",
       "confidence": "low",
@@ -282,6 +287,11 @@
       "confidence": "high",
       "note": "Home of Altdorf, the Imperial capital; the Emperor is its Elector Count."
     },
+    "SCU": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Scruten (Drakwald, near Middenheim); replaces the placeholder (#10199)."
+    },
     "STI": {
       "confidence": "medium"
     },
@@ -399,21 +409,6 @@
           "why": "Gunnery officers and foundry masters share the ruling bloc."
         }
       }
-    },
-    "XSA": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder."
-    },
-    "XSB": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder."
-    },
-    "XSC": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder."
     }
   }
 }

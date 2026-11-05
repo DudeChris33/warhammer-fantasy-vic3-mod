@@ -2,7 +2,7 @@
 
 Hand-authored starting characters, one template per character in `common/character_templates/<region>.txt` and one `create_character` per template in `common/history/characters/<region>.txt`. Display names are in `localization/english/wh_characters_l_english.yml`. **Not loaded in-game**: nothing here is tested; Chris still has to check `logs/error.log`.
 
-**Coverage:** 63 characters across 51 of 144 start tags (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`). The other 93 tags have no attested canon ruler and fall back to the culture-based `default` template.
+**Coverage:** 63 characters across 51 of 140 start tags (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`). The other 89 tags have no attested canon ruler and fall back to the culture-based `default` template.
 
 **Start date:** 2502 IC, from `mapgen/config/country_history/README.md`; no separate defines entry pins it.
 
@@ -15,6 +15,12 @@ Hand-authored starting characters, one template per character in `common/charact
 
 ## Roster
 
+| ESH | no canon ruler found | — | — | — | — |
+| MDR | no canon ruler found | — | — | — | — |
+| SAA | no canon ruler found | — | — | — | — |
+| SCU | no canon ruler found | — | — | — | — |
+| SKB | no canon ruler found | — | — | — | — |
+| SRY | no canon ruler found | — | — | — | — |
 | TAG | Ruler | Heir | Others | Source | Confidence |
 |---|---|---|---|---|---|
 | AES | no canon ruler found | — | — | — | — |
@@ -149,27 +155,17 @@ Hand-authored starting characters, one template per character in `common/charact
 | VSY | Mannfred von Carstein | — | — | Warhammer Armies: Vampire Counts (Mannfred von Carstein) | high |
 | WIS | Emmanuelle von Liebwitz | — | — | Lexicanum "Elector Countess of Wissenland" / Warhammer Fantasy Roleplay (Emmanuelle von Liebwitz, Countess of Nuln) | low |
 | WYD | no canon ruler found | — | — | — | — |
-| XSA | no canon ruler found | — | — | — | — |
-| XSB | no canon ruler found | — | — | — | — |
-| XSC | no canon ruler found | — | — | — | — |
-| XSD | no canon ruler found | — | — | — | — |
-| XSG | no canon ruler found | — | — | — | — |
-| XSH | no canon ruler found | — | — | — | — |
-| XSI | no canon ruler found | — | — | — | — |
-| XSJ | no canon ruler found | — | — | — | — |
-| XSK | no canon ruler found | — | — | — | — |
-| XSL | no canon ruler found | — | — | — | — |
 | ZHU | Barundin Stoneheart | — | Burlok Damminson (IG leader) | Warhammer Armies: Dwarfs (Burlok Damminson, Engineers Guild); Warhammer Chronicles / novel Grudgebearer (King Barundin Stoneheart of Zhufbar) | low |
 | ZND | no canon ruler found | — | — | — | — |
 
-## No canon ruler found (93 tags)
+## No canon ruler found (89 tags)
 
 Left to the `default` template and procedural generation. No placeholder was authored.
 
 - **other** (69): AES AQL ART BAE BHA BIL BJO BLV BOL BPR BRK BRN BTO CNT CRB DLO DOL DON DUN ERE ESS GAS GDO GIS GOR GRA HAS HKN KAS KOR KRD KRV KVE LAN LUC MAG MAH MAR MIR MNF MON MOO MOR MOU NUM ORT PAR PAV PRA QUA RAA RAS REM ROP SAR SNA SOR SRT THG TOB TRA TRO UNG UVE UZK VAR VER VOL ZND
 - **Wood Elf realm** (7): ANM GRW LAU MGL OKP TRG WYD
 - **ruined/abandoned Dwarf hold** (7): DRZ EKR GUN KVN KZF SLV VLG
-- **Skaven placeholder** (10): XSA XSB XSC XSD XSG XSH XSI XSJ XSK XSL
+- **Skaven clan** (6): ESH MDR SAA SKB SCU SRY
 
 Most of these are tribes, city-states, ducal or oblast seats and ruins that tabletop canon never names a 2502 ruler for. Marienburg (Directorate of Burgomeisters), Remas (triumvirate) and the Moot (council of Elders) have collective rule with no single named head.
 

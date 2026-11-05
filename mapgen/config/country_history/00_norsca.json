@@ -113,6 +113,11 @@
         }
       }
     },
+    "MDR": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Moulder (Hell Pit); replaces the placeholder (#10199)."
+    },
     "SAR": {
       "confidence": "low",
       "note": "Baseline unchanged: Sarls have no canon detail beyond the coastal-raider identity."
@@ -159,11 +164,6 @@
           "why": "Chaos-touched northern devotion puts the champion-priests beside the warbands in the ruling bloc."
         }
       }
-    },
-    "XSD": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder (Hell Pit)."
     }
   }
 }

@@ -2103,105 +2103,59 @@
    ],
    "note": "defined in common/country_definitions/02_empire.txt (#6373)."
   },
-  "XSA": {
-   "name": "Skaven Clan A (placeholder)",
+  "ESH": {
+   "name": "Clan Eshin",
    "color": [
     150,
     150,
     24
    ],
-   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
+   "note": "defined in common/country_definitions/02_empire.txt (#10199); Skaven clan; West Ostermark slice (Mordheim-adjacent, soft)"
   },
-  "XSB": {
-   "name": "Skaven Clan B (placeholder)",
+  "SCU": {
+   "name": "Clan Scruten",
    "color": [
     42,
     102,
     18
    ],
-   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
+   "note": "defined in common/country_definitions/02_empire.txt (#10199); Skaven clan; Drakwald slice (Middenheim-adjacent, inferred placement)"
   },
-  "XSC": {
-   "name": "Skaven Clan C (placeholder)",
-   "color": [
-    126,
-    120,
-    24
-   ],
-   "note": "defined in common/country_definitions/02_empire.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
-  },
-  "XSD": {
-   "name": "Skaven Clan D (placeholder)",
+  "MDR": {
+   "name": "Clan Moulder",
    "color": [
     24,
     66,
     12
    ],
-   "note": "defined in common/country_definitions/00_norsca.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
+   "note": "defined in common/country_definitions/00_norsca.txt (#10199); Skaven clan; Hell Pit (Moulder stronghold, canon-firm)"
   },
-  "XSG": {
-   "name": "Skaven Clan E (placeholder)",
+  "SRY": {
+   "name": "Clan Skryre",
    "color": [
     60,
     72,
     12
    ],
-   "note": "defined in common/country_definitions/05_southern_realms.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
+   "note": "defined in common/country_definitions/05_southern_realms.txt (#10199); Skaven clan; Skavenblight (Skryre precincts, canon-firm; sole ownership is the adaptation)"
   },
-  "XSH": {
-   "name": "Skaven Clan F (placeholder)",
-   "color": [
-    138,
-    150,
-    54
-   ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
-  },
-  "XSI": {
-   "name": "Skaven Clan G (placeholder)",
+  "SKB": {
+   "name": "Clan Skab",
    "color": [
     96,
     90,
     24
    ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#10199); Skaven clan; Kreutzhofen slice (Nuln-adjacent, canon-firm region, inferred placement)"
   },
-  "XSJ": {
-   "name": "Skaven Clan H (placeholder)",
-   "color": [
-    102,
-    126,
-    24
-   ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
-  },
-  "XSK": {
-   "name": "Skaven Clan I (placeholder)",
+  "SAA": {
+   "name": "Clan Skaar",
    "color": [
     78,
     132,
     42
    ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
-  },
-  "XSL": {
-   "name": "Skaven Clan J (placeholder)",
-   "color": [
-    48,
-    150,
-    24
-   ],
-   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#6373); generic Skaven stand-in: skaven culture (#8646), greenskin heraldry, code frozen, superseded by real clan tags",
-   "placeholder_for": "Skaven"
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#10199); Skaven clan; Dark Maiden Pass (inferred) plus the Apuccini slice (canon-firm); absorbs the former XSJ"
   },
   "KIZ": {
    "name": "Karak Izor",

@@ -226,6 +226,12 @@
    "source": "inferred: tech tier 5 (mapgen/config/country_history)",
    "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
   },
+  "ESH": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
   "ESS": {
    "wealth": "low",
    "literacy": "low",
@@ -466,6 +472,12 @@
    "source": "inferred: tech tier 6 (mapgen/config/country_history)",
    "why": "Tier 6: tribal floor."
   },
+  "MDR": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
   "MGL": {
    "wealth": "medium",
    "literacy": "low",
@@ -634,13 +646,31 @@
    "source": "inferred: tech tier 7 (mapgen/config/country_history)",
    "why": "Tier 7: nomads and mobs; no schooling."
   },
+  "SAA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
   "SAR": {
    "wealth": "low",
    "literacy": "very_low",
    "source": "inferred: tech tier 6 (mapgen/config/country_history)",
    "why": "Tier 6: tribal floor."
   },
+  "SCU": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
   "SKA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
+  },
+  "SKB": {
    "wealth": "low",
    "literacy": "very_low",
    "source": "inferred: tech tier 6 (mapgen/config/country_history)",
@@ -681,6 +711,12 @@
    "literacy": "middling",
    "source": "inferred: tech tier 4 (mapgen/config/country_history)",
    "why": "Tier 4: learned but pre-industrial."
+  },
+  "SRY": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
+   "why": "Tier 6: tribal floor."
   },
   "STI": {
    "wealth": "medium",
@@ -813,66 +849,6 @@
    "literacy": "low",
    "source": "inferred: tech tier 6 (mapgen/config/country_history)",
    "why": "Asrai lore is oral and kin-bound; tier 6 economy"
-  },
-  "XSA": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSB": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSC": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSD": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSG": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSH": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSI": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSJ": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSK": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
-  },
-  "XSL": {
-   "wealth": "low",
-   "literacy": "very_low",
-   "source": "inferred: tech tier 6 (mapgen/config/country_history)",
-   "why": "Tier 6: tribal floor."
   },
   "ZHU": {
    "wealth": "high",

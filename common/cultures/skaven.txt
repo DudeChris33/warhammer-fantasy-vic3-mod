@@ -2,8 +2,9 @@
 # common/cultures/ogre.txt and common/cultures/greenskin.txt, the verified non-human reference entries for
 # this mod. Each culture carries:
 #   color      — rgb{ R G B } with 0-255 integers. Cosmetic only. An acid warpstone green, a darker kin of
-#                the_horned_rat's icon colour. NOT taken from a legend entry: the ten XS* legend colours are
-#                dull olives picked to sit among goblin tags and no one of them is "the" Skaven owner. It is
+#                the_horned_rat's icon colour. NOT taken from a legend entry: the six Skaven clan tags (MDR SRY SAA SKB SCU ESH)
+#                carry olive legend colours inherited from the retired XS* placeholders, and no one of them
+#                is "the" Skaven owner. It is
 #                set apart from the crowded greens (goblin, halfling, wood_elf) by saturation.
 #   religion   — the_horned_rat, from common/religions/00_religions.txt (board item #8478).
 #   heritage   — a heritage discrimination-trait id from common/discrimination_traits/00_heritages.txt.
@@ -19,7 +20,8 @@
 #                characters (no female character gets a hero's name). An engine accommodation, not lore;
 #                it adds no new keys.
 # No regal lists: the Council of Thirteen is seats, not dynasties (orc/ogre precedent).
-# The XS* clan placeholder tags use this culture since #8646.
+# The six Skaven clan tags (MDR SRY SAA SKB SCU ESH, #10199) use this culture; they replaced the XS*
+# placeholders that carried it since #8646.
 # Every name string used below also needs a matching localization key unless vanilla already ships
 # one — see localization/english/cultures_names_l_english.yml. Every culture additionally needs its
 # six static modifier definitions — see common/static_modifiers/culture_*_modifiers.txt.

@@ -153,30 +153,20 @@
         }
       }
     },
+    "SAA": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Skaar (Apuccini mine and Dark Maiden Pass); replaces the placeholder (#10199)."
+    },
+    "SKB": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Skab (Kreutzhofen, near Nuln); replaces the placeholder (#10199)."
+    },
     "VMP": {
       "profile": "undead_host",
       "confidence": "low",
       "note": "Kemmler's Host; stand-in culture."
-    },
-    "XSI": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder."
-    },
-    "XSJ": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder."
-    },
-    "XSK": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder."
-    },
-    "XSL": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven placeholder."
     },
     "ZHU": {
       "confidence": "high"

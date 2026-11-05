@@ -620,6 +620,9 @@
     }
    }
   },
+  "ESH": {
+   "archetype": "skaven_clan"
+  },
   "ESS": {
    "archetype": "border_prince"
   },
@@ -786,6 +789,9 @@
   "MAW": {
    "archetype": "greenskin_horde"
   },
+  "MDR": {
+   "archetype": "skaven_clan"
+  },
   "MGL": {
    "archetype": "wood_elf_realm"
   },
@@ -882,14 +888,23 @@
   "ROP": {
    "archetype": "kislev_tribe"
   },
+  "SAA": {
+   "archetype": "skaven_clan"
+  },
   "SAP": {
    "archetype": "asur_kingdom"
   },
   "SAR": {
    "archetype": "norse_tribe"
   },
+  "SCU": {
+   "archetype": "skaven_clan"
+  },
   "SKA": {
    "archetype": "norse_tribe"
+  },
+  "SKB": {
+   "archetype": "skaven_clan"
   },
   "SKZ": {
    "archetype": "greenskin_horde"
@@ -917,6 +932,9 @@
      "why": "The Pirate Isle is nothing but harbour (dropped today: no navigation)."
     }
    }
+  },
+  "SRY": {
+   "archetype": "skaven_clan"
   },
   "STI": {
    "archetype": "imperial_frontier"
@@ -1010,36 +1028,6 @@
   },
   "WYD": {
    "archetype": "wood_elf_realm"
-  },
-  "XSA": {
-   "archetype": "skaven_clan"
-  },
-  "XSB": {
-   "archetype": "skaven_clan"
-  },
-  "XSC": {
-   "archetype": "skaven_clan"
-  },
-  "XSD": {
-   "archetype": "skaven_clan"
-  },
-  "XSG": {
-   "archetype": "skaven_clan"
-  },
-  "XSH": {
-   "archetype": "skaven_clan"
-  },
-  "XSI": {
-   "archetype": "skaven_clan"
-  },
-  "XSJ": {
-   "archetype": "skaven_clan"
-  },
-  "XSK": {
-   "archetype": "skaven_clan"
-  },
-  "XSL": {
-   "archetype": "skaven_clan"
   },
   "YVR": {
    "archetype": "asur_kingdom"

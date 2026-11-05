@@ -739,7 +739,7 @@
   },
   {
    "key": "STATE_WEST_OSTERMARK",
-   "tag": "XSA",
+   "tag": "ESH",
    "anchor": [
     4334,
     866
@@ -749,14 +749,14 @@
     {
      "culture": "skaven",
      "share": 50,
-     "source": "invented, not canon: placeholder clans have no canon warren sizes; 50% is the recommended default (matches XSG), pending Chris's confirmation (#9026)",
+     "source": "invented, not canon: Clan Eshin has no canon warren size; 50% is the recommended default, pending Chris's confirmation (#9026, #10199)",
      "why": "The ruling clan's own warren beneath the state."
     }
    ]
   },
   {
    "key": "STATE_DRAKWALD_FOREST",
-   "tag": "XSB",
+   "tag": "SCU",
    "anchor": [
     4037,
     810
@@ -766,31 +766,14 @@
     {
      "culture": "skaven",
      "share": 50,
-     "source": "invented, not canon: placeholder clans have no canon warren sizes; 50% is the recommended default (matches XSG), pending Chris's confirmation (#9026)",
-     "why": "The ruling clan's own warren beneath the state."
-    }
-   ]
-  },
-  {
-   "key": "STATE_VOLGEN",
-   "tag": "XSC",
-   "anchor": [
-    4139,
-    852
-   ],
-   "mode": "add",
-   "mix": [
-    {
-     "culture": "skaven",
-     "share": 50,
-     "source": "invented, not canon: placeholder clans have no canon warren sizes; 50% is the recommended default (matches XSG), pending Chris's confirmation (#9026)",
+     "source": "invented, not canon: Clan Scruten has no canon warren size; 50% is the recommended default, pending Chris's confirmation (#9026, #10199)",
      "why": "The ruling clan's own warren beneath the state."
     }
    ]
   },
   {
    "key": "STATE_KREUTZHOFEN",
-   "tag": "XSI",
+   "tag": "SKB",
    "anchor": [
     4144,
     1041
@@ -800,14 +783,14 @@
     {
      "culture": "skaven",
      "share": 50,
-     "source": "invented, not canon: placeholder clans have no canon warren sizes; 50% is the recommended default (matches XSG), pending Chris's confirmation (#9026)",
+     "source": "invented, not canon: Clan Skab has no canon warren size; 50% is the recommended default, pending Chris's confirmation (#9026, #10199)",
      "why": "The ruling clan's own warren beneath the state."
     }
    ]
   },
   {
    "key": "STATE_APUCCINI_MOUNTAINS",
-   "tag": "XSJ",
+   "tag": "SAA",
    "anchor": [
     4018,
     1174
@@ -817,14 +800,14 @@
     {
      "culture": "skaven",
      "share": 50,
-     "source": "invented, not canon: placeholder clans have no canon warren sizes; 50% is the recommended default (matches XSG), pending Chris's confirmation (#9026)",
+     "source": "invented, not canon: Clan Skaar has no canon warren size; 50% is the recommended default, pending Chris's confirmation (#9026, #10199)",
      "why": "The ruling clan's own warren beneath the state."
     }
    ]
   },
   {
    "key": "STATE_DARK_MAIDEN_PASS",
-   "tag": "XSK",
+   "tag": "SAA",
    "anchor": [
     4004,
     1212
@@ -834,24 +817,7 @@
     {
      "culture": "skaven",
      "share": 50,
-     "source": "invented, not canon: placeholder clans have no canon warren sizes; 50% is the recommended default (matches XSG), pending Chris's confirmation (#9026)",
-     "why": "The ruling clan's own warren beneath the state."
-    }
-   ]
-  },
-  {
-   "key": "STATE_CRIPPLE_PEAK",
-   "tag": "XSL",
-   "anchor": [
-    4582,
-    1452
-   ],
-   "mode": "add",
-   "mix": [
-    {
-     "culture": "skaven",
-     "share": 50,
-     "source": "invented, not canon: placeholder clans have no canon warren sizes; 50% is the recommended default (matches XSG), pending Chris's confirmation (#9026)",
+     "source": "invented, not canon: Clan Skaar has no canon warren size; 50% is the recommended default, pending Chris's confirmation (#9026, #10199)",
      "why": "The ruling clan's own warren beneath the state."
     }
    ]
