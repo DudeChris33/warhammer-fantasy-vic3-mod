@@ -37,12 +37,10 @@
  # Board item #6373 phase A (2026-10-01): newly defined owner tags.
  CRB:0 "Carroburg"
  CRB_ADJ:0 "Carroburger"
- XSA:0 "Skaven Clan A (placeholder)"
- XSA_ADJ:0 "Skaven"
- XSB:0 "Skaven Clan B (placeholder)"
- XSB_ADJ:0 "Skaven"
- XSC:0 "Skaven Clan C (placeholder)"
- XSC_ADJ:0 "Skaven"
+ ESH:0 "Clan Eshin"
+ ESH_ADJ:0 "Eshin"
+ SCU:0 "Clan Scruten"
+ SCU_ADJ:0 "Scruten"
 
  # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms.
  LAU:0 "Laurelorn"

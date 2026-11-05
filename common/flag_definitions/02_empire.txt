@@ -166,25 +166,17 @@ CRB = {
 	}
 }
 
-XSA = {
+ESH = {
 	flag_definition = {
-		coa = XSA
+		coa = ESH
 		priority = 100
 		trigger = { always = yes }
 	}
 }
 
-XSB = {
+SCU = {
 	flag_definition = {
-		coa = XSB
-		priority = 100
-		trigger = { always = yes }
-	}
-}
-
-XSC = {
-	flag_definition = {
-		coa = XSC
+		coa = SCU
 		priority = 100
 		trigger = { always = yes }
 	}

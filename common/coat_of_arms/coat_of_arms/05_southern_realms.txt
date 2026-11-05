@@ -551,28 +551,20 @@ PON = {
 # Matching flag_definitions blocks are in common/flag_definitions/05_southern_realms.txt.
 ################################################################################
 
-# XSG — Skaven Clan E (placeholder). A crocodile for the Blighted Marshes, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# ce_crocodile (vanilla) is used nowhere else in this mod — 07_nehekhara.txt's ZND uses the
-# separate vendored ce_roe_crocodile texture. A swamp beast, not one of the house style's banned
-# "civilised" full beasts (lion/eagle). Confirmed 3 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/02_countries.txt:3407, BST).
-XSG = {
-	pattern = "pattern_horizontal_split_01.tga"
-	color1 = "goblin_moss"
-	color2 = "green_dark"
+# SRY — Clan Skryre. A cogwheel in warpstone green, for the clan of warlock-engineers.
+# Heraldry (#10199): soft: Skryre's engineer-sorcerer identity is canon, the blazon is invented. Disclosed substitution: ce_ship_wheel stands in for a cogwheel (no vanilla cog texture has confirmed slots)
+# Texture and colour-slot count confirmed from existing usage in this mod's COA files. Own charge,
+# shared by no other tag.
+SRY = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
 
 	colored_emblem = {
-		texture = "ce_crocodile.dds"
-		color1 = "bone"
-		color2 = "gore_red"
-		color3 = "bone"
-		instance = { position = { 0.5 0.55 } scale = { 0.9 0.9 } rotation = 350 }
+		texture = "ce_ship_wheel.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
 	}
 }
 

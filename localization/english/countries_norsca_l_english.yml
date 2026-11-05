@@ -23,8 +23,8 @@
  SOR_ADJ:0 "Sortsvinaer"
  URS:0 "Ursfjordings"
  URS_ADJ:0 "Ursfjording"
- XSD:0 "Skaven Clan D (placeholder)"
- XSD_ADJ:0 "Skaven"
+ MDR:0 "Clan Moulder"
+ MDR_ADJ:0 "Moulder"
 
  # Board item #6373 phase B (2026-10-01): newly defined wood-elf realms.
  SOT:0 "Sisters of Twilight"

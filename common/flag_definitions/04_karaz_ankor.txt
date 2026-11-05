@@ -206,42 +206,19 @@ LHX = {
 	}
 }
 
-XSH = {
+SAA = {
 	flag_definition = {
-		coa = XSH
+		coa = SAA
 		priority = 100
 		trigger = { always = yes }
 	}
 }
 
-XSI = {
+SKB = {
 	flag_definition = {
-		coa = XSI
+		coa = SKB
 		priority = 100
 		trigger = { always = yes }
 	}
 }
 
-XSJ = {
-	flag_definition = {
-		coa = XSJ
-		priority = 100
-		trigger = { always = yes }
-	}
-}
-
-XSK = {
-	flag_definition = {
-		coa = XSK
-		priority = 100
-		trigger = { always = yes }
-	}
-}
-
-XSL = {
-	flag_definition = {
-		coa = XSL
-		priority = 100
-		trigger = { always = yes }
-	}
-}

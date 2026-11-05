@@ -110,9 +110,9 @@ URS = {
 	}
 }
 
-XSD = {
+MDR = {
 	flag_definition = {
-		coa = XSD
+		coa = MDR
 		priority = 100
 		trigger = { always = yes }
 	}

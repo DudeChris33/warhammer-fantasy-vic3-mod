@@ -233,25 +233,21 @@ URS = {
 	}
 }
 
-# XSD — Skaven Clan D (placeholder). A four-pointed star, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# ce_star_04 is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/02_countries.txt:16832, NTU).
-XSD = {
-	pattern = "pattern_per_bend.dds"
-	color1 = "green_dark"
-	color2 = "black"
+# MDR — Clan Moulder. A horned beast-head, for the stitched flesh-beasts of the Hell Pit.
+# Heraldry (#10199): soft: no canon blazon read; device from the clan's beastmaster trade. Disclosed substitution: ce_aurochs_head for the Moulder beast-trade; BNR (06_badlands) also uses it, recoloured bone on red, not black
+# Texture and colour-slot count confirmed from existing usage in this mod's COA files. Own charge,
+# shared by no other tag.
+MDR = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
 
 	colored_emblem = {
-		texture = "ce_star_04.dds"
-		color1 = "yellow_dark"
-		color2 = "yellow_dark"
-		instance = { position = { 0.55 0.46 } scale = { 0.82 0.82 } rotation = 15 }
+		texture = "ce_aurochs_head.dds"
+		color1 = "bone"
+		color2 = "bone"
+		color3 = "black_light"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
 	}
 }
 

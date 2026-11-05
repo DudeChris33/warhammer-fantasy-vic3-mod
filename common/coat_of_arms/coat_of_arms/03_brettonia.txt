@@ -437,7 +437,7 @@ TRG = {
 # the Asrai's glade guard archers, saffron on brown. Disclosed reuse: ce_spearhead.dds (drawn as an
 # arrowhead here) is 04_karaz_ankor.txt's SLV (pearl on tan) and XSJ (bone on a gore-red/black
 # bend, tilted); WYD is a saffron point upright on a brown field. Confirmed 2 colour slots (vanilla
-# usage, common/coat_of_arms/coat_of_arms/02_countries.txt:13646, LAH; also SLV, XSJ). The point
+# usage, common/coat_of_arms/coat_of_arms/02_countries.txt:13646, LAH; also SLV). The point
 # fills only a small part of its texture, so it is scaled 2.2; scales above 1 are used by vanilla
 # (02_countries_2.txt:257, scale 3.4).
 WYD = {

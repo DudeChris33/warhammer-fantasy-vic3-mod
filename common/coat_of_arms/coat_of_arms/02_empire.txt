@@ -387,69 +387,37 @@ CRB = {
 	}
 }
 
-# XSA — Skaven Clan A (placeholder). A chain-net, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# ce_chains is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/02_countries.txt:16033, NAV).
-XSA = {
+# ESH — Clan Eshin. A punch-dagger, skewed, for the clan of assassins.
+# Heraldry (#10199): soft: Eshin is the assassin clan in canon, the blazon is invented. Disclosed substitution: ce_katar for an assassin's blade (XSC, now retired, wore it in bone on red)
+# Texture and colour-slot count confirmed from existing usage in this mod's COA files. Own charge,
+# shared by no other tag.
+ESH = {
 	pattern = "pattern_solid.tga"
-	color1 = "black_light"
-	color2 = "black_light"
-
-	colored_emblem = {
-		texture = "ce_chains.dds"
-		color1 = "dirty_iron"
-		color2 = "gore_red"
-		instance = { position = { 0.53 0.52 } scale = { 0.8 0.8 } rotation = 12 }
-	}
-}
-
-# XSB — Skaven Clan B (placeholder). A torch with a sickly green flame, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# ce_torch is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/01_subs.txt:2405, sub_SIL_coa).
-XSB = {
-	pattern = "pattern_per_bend.dds"
-	color1 = "goblin_moss"
+	color1 = "black"
 	color2 = "black"
 
 	colored_emblem = {
-		texture = "ce_torch.dds"
+		texture = "ce_katar.dds"
 		color1 = "dirty_iron"
-		color2 = "morrslieb_green"
-		instance = { position = { 0.46 0.5 } scale = { 0.85 0.85 } rotation = 20 }
+		color2 = "dirty_iron"
+		instance = { position = { 0.54 0.5 } scale = { 0.85 0.85 } rotation = 330 }
 	}
 }
 
-# XSC — Skaven Clan C (placeholder). A punch-dagger, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# ce_katar is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/02_countries.txt:1750, AWA_absolute_monarchy).
-XSC = {
+# SCU — Clan Scruten. A key, for the clan that holds the under-city enclaves.
+# Heraldry (#10199): soft: no canon blazon read. Disclosed substitution: ce_key_bremen (also KHI in 04_karaz_ankor, golden on green) for the keys to the cities above
+# Texture and colour-slot count confirmed from existing usage in this mod's COA files. Own charge,
+# shared by no other tag.
+SCU = {
 	pattern = "pattern_solid.tga"
-	color1 = "red_dark"
-	color2 = "red_dark"
+	color1 = "brown"
+	color2 = "brown"
 
 	colored_emblem = {
-		texture = "ce_katar.dds"
-		color1 = "bone"
-		color2 = "bone"
-		instance = { position = { 0.54 0.5 } scale = { 0.85 0.85 } rotation = 330 }
+		texture = "ce_key_bremen.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
 	}
 }
 

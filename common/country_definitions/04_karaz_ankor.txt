@@ -234,7 +234,7 @@ KIZ = {
 	country_type = recognized
 	tier = principality
 	cultures = { dawi }
-	capital = STATE_SHATTERED_TEETH # Karak Izor; split state, XSH holds the rest
+	capital = STATE_SHATTERED_TEETH # Karak Izor; KIZ holds the whole state
 }
 
 ################ KZF — Karak Ziflin; the Grey Mountains hold above Axe Bite Pass ################
@@ -308,92 +308,31 @@ LHX = {
 	capital = STATE_NEW_LAHMIA
 }
 
-################ XSH — Skaven Clan F (placeholder); STATE_WINTERTEETH_FOOTHILLS ################
-# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
-# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
-# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
-# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
-# is superseded, not renamed.
-# Filed here by geography: its state sits in map_data/state_regions/04_karaz_ankor.txt. skaven is
-# a cross-file culture ref to common/cultures/skaven.txt.
-
-XSH = {
-	color = { 138 150 54 }
-	country_type = unrecognized
-	tier = principality
-	cultures = { skaven }
-	capital = STATE_SHATTERED_TEETH # non-canon: its only holding (3-province slice; KIZ holds the rest)
-}
-
-################ XSI — Skaven Clan G (placeholder); STATE_GRISTLE_VALLEY ################
-# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
-# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
-# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
-# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
-# is superseded, not renamed.
-# Filed here by geography: its state sits in map_data/state_regions/04_karaz_ankor.txt. skaven is
-# a cross-file culture ref to common/cultures/skaven.txt.
-
-XSI = {
-	color = { 96 90 24 }
-	country_type = unrecognized
-	tier = principality
-	cultures = { skaven }
-	capital = STATE_KREUTZHOFEN # non-canon: its only holding (2-province slice of 9)
-}
-
-################ XSJ — Skaven Clan H (placeholder); STATE_FESTER_SPIKE ################
-# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
-# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
-# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
-# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
-# is superseded, not renamed.
-# Filed here by geography: its state sits in map_data/state_regions/04_karaz_ankor.txt. skaven is
-# a cross-file culture ref to common/cultures/skaven.txt.
-
-XSJ = {
-	color = { 102 126 24 }
-	country_type = unrecognized
-	tier = principality
-	cultures = { skaven }
-	capital = STATE_AQUILENA # non-canon: its only holding (2-province slice of 25)
-}
-
-################ XSK — Skaven Clan I (placeholder); Dark Maiden Pass ################
-# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
-# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
-# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
-# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
-# is superseded, not renamed.
-# Filed here by geography: STATE_DARK_MAIDEN_PASS sits in map_data/state_regions/04_karaz_ankor.txt.
+################ SAA — Clan Skaar; Apuccini Mountains and Dark Maiden Pass ################
+# Board item #10199: a real Skaven clan replacing the generic placeholder stand-in(s). Every Skaven
+# tag is a clan (Chris, 2026-11-04). Canon basis: canon-firm (Apuccini stronghold under Pavona, Queekwell mine; Children of the Horned Rat ch. 4 p. 55); Dark Maiden Pass placement inferred.
+# Colour inherited exactly from the placeholder it replaces (mapgen/config/state_ownership_legend.json).
 # skaven is a cross-file culture ref to common/cultures/skaven.txt.
 
-XSK = {
+SAA = {
 	color = { 78 132 42 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { skaven }
-	capital = STATE_DARK_MAIDEN_PASS # non-canon: its only state (2 provinces)
+	capital = STATE_DARK_MAIDEN_PASS # C2: largest owned state (2 provinces; the Apuccini slice has 1); canon seat Pavona (Middle Tilea, held by another tag)
 }
 
-################ XSL — Skaven Clan J (placeholder); Cripple Peak ################
-# PLACEHOLDER (board #6373, decision D5): a deliberately generic stand-in for an unnamed Skaven
-# clan, not a real nation. Its limits are deliberate and disclosed: it carries the skaven culture
-# (goblin until #8646) but no clan identity; its pops follow the state homelands, and its
-# greenskin house-style arms were drawn under goblin and are kept as shipped. The code is frozen
-# once shipped; when Skaven cultures and clans are authored, real clans get NEW codes and this tag
-# is superseded, not renamed.
-# Filed here by geography: STATE_CRIPPLE_PEAK sits in map_data/state_regions/04_karaz_ankor.txt.
+################ SKB — Clan Skab; Kreutzhofen ################
+# Board item #10199: a real Skaven clan replacing the generic placeholder stand-in(s). Every Skaven
+# tag is a clan (Chris, 2026-11-04). Canon basis: canon-firm (hidden under Nuln after the failed 2499 IC assault; Thanquol's Doom); Kreutzhofen placement inferred.
+# Colour inherited exactly from the placeholder it replaces (mapgen/config/state_ownership_legend.json).
 # skaven is a cross-file culture ref to common/cultures/skaven.txt.
 
-XSL = {
-	color = { 48 150 24 }
+SKB = {
+	color = { 96 90 24 }
 	country_type = unrecognized
 	tier = principality
 	cultures = { skaven }
-	capital = STATE_CRIPPLE_PEAK # non-canon: its only state (4 provinces)
+	capital = STATE_KREUTZHOFEN # C2: its only holding (2-province slice of 9); canon seat under Nuln (Wissenland, held by another tag)
 }
+

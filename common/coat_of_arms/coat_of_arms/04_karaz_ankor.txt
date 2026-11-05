@@ -517,116 +517,37 @@ LHX = {
 	}
 }
 
-# XSH — Skaven Clan F (placeholder). A field gun, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# Disclosed reuse: ce_cannon.dds is 02_empire.txt's WIS (grey/black/orange on white/grey); here
-# dirty_iron with a green barrel on black, oversized and tilted. Confirmed 3 colour slots (vanilla
-# usage, common/coat_of_arms/coat_of_arms/02_countries.txt:6730, DES; also WIS).
-XSH = {
+# SAA — Clan Skaar. A pair of raking claws, for the pale clan of the Apuccini mine.
+# Heraldry (#10199): soft: no canon blazon read. Disclosed substitution: ce_eagle_claws stands in for rat claws
+# Texture and colour-slot count confirmed from existing usage in this mod's COA files. Own charge,
+# shared by no other tag.
+SAA = {
 	pattern = "pattern_solid.tga"
-	color1 = "black"
-	color2 = "black"
-
-	colored_emblem = {
-		texture = "ce_cannon.dds"
-		color1 = "dirty_iron"
-		color2 = "morrslieb_green"
-		color3 = "dirty_iron"
-		instance = { position = { 0.5 0.55 } scale = { 0.85 0.85 } rotation = 345 }
-	}
-}
-
-# XSI — Skaven Clan G (placeholder). A trident, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# Disclosed reuse: ce_trident.dds is 03_brettonia.txt's BOR (white/pearl on purple); here black on
-# saffron, tilted. Confirmed 2 colour slots (BOR's usage).
-XSI = {
-	pattern = "pattern_solid.tga"
-	color1 = "saffron"
-	color2 = "saffron"
-
-	colored_emblem = {
-		texture = "ce_trident.dds"
-		color1 = "black"
-		color2 = "black"
-		instance = { position = { 0.47 0.52 } scale = { 0.85 0.85 } rotation = 20 }
-	}
-}
-
-# XSJ — Skaven Clan H (placeholder). A spearhead, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# Disclosed reuse: ce_spearhead.dds is SLV's charge (this file, pearl on tan); here bone on a
-# gore-red/black bend, much larger and tilted. Confirmed 2 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/02_countries.txt:13646, LAH; also SLV).
-XSJ = {
-	pattern = "pattern_per_bend.dds"
-	color1 = "gore_red"
-	color2 = "black"
-
-	colored_emblem = {
-		texture = "ce_spearhead.dds"
-		color1 = "bone"
-		color2 = "bone"
-		instance = { position = { 0.54 0.48 } scale = { 1.0 1.0 } rotation = 30 }
-	}
-}
-
-# XSK — Skaven Clan I (placeholder). Crossed curved blades, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# ce_crossed_scimitars_horizontal is used nowhere else in this mod (03_brettonia.txt's SKZ uses the
-# separate upright ce_crossed_scimitars texture); confirmed 2 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/02_countries.txt:230, ACE_absolute_monarchy).
-XSK = {
-	pattern = "pattern_solid.tga"
-	color1 = "orc_green"
-	color2 = "orc_green"
-
-	colored_emblem = {
-		texture = "ce_crossed_scimitars_horizontal.dds"
-		color1 = "black"
-		color2 = "black"
-		instance = { position = { 0.47 0.53 } scale = { 0.85 0.85 } rotation = 10 }
-	}
-}
-
-# XSL — Skaven Clan J (placeholder). A seven-pointed star, skewed.
-# PLACEHOLDER heraldry (#6373 D5): greenskin house style (.claude/rules/heraldry.md) for a
-# generic Skaven-clan stand-in — one oversized, skewed charge on a two-colour field from the
-# closed greenskin palette, and deliberately NO rat iconography (the arms were drawn while the
-# tag carried goblin and are kept as shipped after the #8646 retarget to skaven; placeholder arms
-# are not redrawn). Each XS* tag takes a different charge
-# so the placeholders read apart; disclosed invention, no canon device exists.
-# ce_star_07 is used nowhere else in this mod; confirmed 2 colour slots (vanilla usage,
-# common/coat_of_arms/coat_of_arms/01_subs.txt:1732, sub_CHE_stars).
-XSL = {
-	pattern = "pattern_verical_bicolor_offset.dds"
-	color1 = "black_light"
+	color1 = "grey"
 	color2 = "grey"
 
 	colored_emblem = {
-		texture = "ce_star_07.dds"
-		color1 = "gore_red"
-		color2 = "gore_red"
-		instance = { position = { 0.55 0.5 } scale = { 0.85 0.85 } rotation = 20 }
+		texture = "ce_eagle_claws.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
 	}
 }
+
+# SKB — Clan Skab. A coiled serpent in sickly green, for the clan of plague-ridden lairs.
+# Heraldry (#10199): soft: no canon blazon read. Disclosed substitution: ce_cobra_coiled stands in for a disease-and-venom motif
+# Texture and colour-slot count confirmed from existing usage in this mod's COA files. Own charge,
+# shared by no other tag.
+SKB = {
+	pattern = "pattern_solid.tga"
+	color1 = "goblin_moss"
+	color2 = "goblin_moss"
+
+	colored_emblem = {
+		texture = "ce_cobra_coiled.dds"
+		color1 = "black"
+		color2 = "green_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+}
+
