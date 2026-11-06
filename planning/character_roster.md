@@ -2,7 +2,7 @@
 
 Hand-authored starting characters, one template per character in `common/character_templates/<region>.txt` and one `create_character` per template in `common/history/characters/<region>.txt`. Display names are in `localization/english/wh_characters_l_english.yml`. **Not loaded in-game**: nothing here is tested; Chris still has to check `logs/error.log`.
 
-**Coverage:** 63 characters across 51 of 140 start tags (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`). The other 89 tags have no attested canon ruler and fall back to the culture-based `default` template.
+**Coverage:** 70 characters across 58 of 140 start tags (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`). The other 89 tags have no attested canon ruler and fall back to the culture-based `default` template.
 
 **Start date:** 2502 IC, from `mapgen/config/country_history/README.md`; no separate defines entry pins it.
 
@@ -60,6 +60,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | DUN | no canon ruler found | — | — | — | — |
 | EKR | no canon ruler found | — | — | — | — |
 | ERE | no canon ruler found | — | — | — | — |
+| ESC | Blas Elcano | — | — | WFRP Lustria p.211 (the Comandante of Santa Magritta; personal name from the #10182 scoping pass) | medium |
 | ESS | no canon ruler found | — | — | — | — |
 | EYB | Malron Eyebiter | — | — | Total War: Warhammer III (Grandfather Malron Eyebiter) | medium |
 | GAS | no canon ruler found | — | — | — | — |
@@ -70,10 +71,12 @@ Hand-authored starting characters, one template per character in `common/charact
 | GRW | no canon ruler found | — | — | — | — |
 | GUN | no canon ruler found | — | — | — | — |
 | HAS | no canon ruler found | — | — | — | — |
+| HEX | Mazdamundi | — | — | Warhammer Armies: Lizardmen (Lord Mazdamundi, Slann Mage-Priest of Hexoatl) | high |
 | HKN | no canon ruler found | — | — | — | — |
 | HOC | Aldebrand Ludenhof | — | — | https://warhammerfantasy.fandom.com/wiki/Aldebrand_Ludenhof | high |
 | ICL | Gorbad Ironclaw | — | — | Warhammer Armies: Orcs & Goblins (Gorbad Ironclaw) | high |
 | IRN | Ghark Ironskin | — | — | Total War: Warhammer III (Ghark Ironskin, Ironskin tribe) | medium |
+| ITZ | Xltloc | — | — | Warhammer Armies: Lizardmen (Lord Xltloc of Itza; Chris, 2026-11-06: not Kroak) | medium |
 | KAD | Ungrim Ironfist | — | — | Warhammer Armies: Dwarfs (Ungrim Ironfist, Slayer King of Karak Kadrin) | high |
 | KAK | Thorgrim Grudgebearer | — | — | Warhammer Armies: Dwarfs (High King Thorgrim Grudgebearer) | high |
 | KAS | no canon ruler found | — | — | — | — |
@@ -129,6 +132,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | ROP | no canon ruler found | — | — | — | — |
 | SAR | no canon ruler found | — | — | — | — |
 | SKA | Wulfrik the Wanderer | — | — | Warhammer Armies: Warriors of Chaos (8th ed.), "Wulfrik the Wanderer" | low |
+| SKG | Adella of the Thousand Mouths | — | — | WFRP Lustria (Adella of the Thousand Mouths, ruler of Skeggi; from the #10182 scoping pass) | medium |
 | SKZ | Ugrok Craktoof | — | — | planning/tag_registry.md SKZ row (Skullsmasherz, Ugrok Craktoof) | medium |
 | SLV | no canon ruler found | — | — | — | — |
 | SNA | no canon ruler found | — | — | — | — |
@@ -139,6 +143,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | TAL | Helmut Feuerbach | — | — | https://whfb.lexicanum.com/wiki/Helmut_Feuerbach | medium |
 | THG | no canon ruler found | — | — | — | — |
 | TLS | Orion | — | — | Warhammer Armies: Wood Elves (Orion, King in the Woods) | high |
+| TLX | Adohi-Tehga | — | — | Warhammer Armies: Lizardmen (Lord Adohi-Tehga of Tlaxtlan); Lexicanum | medium |
 | TOB | no canon ruler found | — | — | — | — |
 | TRA | no canon ruler found | — | — | — | — |
 | TRG | no canon ruler found | — | — | — | — |
@@ -148,6 +153,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | UVE | no canon ruler found | — | — | — | — |
 | UZK | no canon ruler found | — | — | — | — |
 | VAR | no canon ruler found | — | — | — | — |
+| VCO | Luthor Harkon | — | — | Warhammer Armies: Vampire Counts / WFB 8e (Luthor Harkon; captured 2471 IC, active by 2524) | medium |
 | VER | no canon ruler found | — | — | — | — |
 | VLG | no canon ruler found | — | — | — | — |
 | VMP | Heinrich Kemmler | — | — | Warhammer Armies: Vampire Counts (Heinrich Kemmler, the Lichemaster) | high |
@@ -155,6 +161,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | VSY | Mannfred von Carstein | — | — | Warhammer Armies: Vampire Counts (Mannfred von Carstein) | high |
 | WIS | Emmanuelle von Liebwitz | — | — | Lexicanum "Elector Countess of Wissenland" / Warhammer Fantasy Roleplay (Emmanuelle von Liebwitz, Countess of Nuln) | low |
 | WYD | no canon ruler found | — | — | — | — |
+| XLA | Huinitenuchli | — | — | Warhammer Armies: Lizardmen (Lord Huinitenuchli of Xlanhuapec); Lexicanum | medium |
 | ZHU | Barundin Stoneheart | — | Burlok Damminson (IG leader) | Warhammer Armies: Dwarfs (Burlok Damminson, Engineers Guild); Warhammer Chronicles / novel Grudgebearer (King Barundin Stoneheart of Zhufbar) | low |
 | ZND | no canon ruler found | — | — | — | — |
 
@@ -187,7 +194,7 @@ The mod's trait and ideology lists are vanilla's industrial-era set. Substitutio
 
 ## Canon that cannot be represented
 
-- **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Mannfred, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
+- **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Mannfred, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan, the Slann Mazdamundi, Xltloc, Huinitenuchli and Adohi-Tehga, and the vampire Harkon) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
 - **Heirs.** Only Katarin Bokha is an heir; tabletop names no heir for any other ruler.
 - **Admirals.** None authored: no named canon admiral is attached to any existing tag.
 - **Canon skipped (no matching tag or not alive at 2502):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2502), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2502 holder unclear), Ariel and Alarielle (no matching tag), Teclis and Tyrion (Ulthuan has no tags yet).

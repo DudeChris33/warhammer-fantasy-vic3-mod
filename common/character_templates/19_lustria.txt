@@ -1,0 +1,147 @@
+﻿# Historical characters of the Lustria tags, start date 2502 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2502 IC; long-lived and undead characters are shortened and set immortal (see roster).
+
+# Source: WFRP Lustria p.211 (the Comandante of Santa Magritta)
+# Confidence: medium
+# Note: The Comandante's personal name is the scoping pass's reading and is not re-read from print here; birth date inferred.
+ESC_blas_elcano_template = {
+	first_name = WHCHAR_ESC_blas_elcano_first
+	last_name = WHCHAR_ESC_blas_elcano_last
+	historical = yes
+	culture = cu:estalian
+	ruler = yes
+	birth_date = 2455.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	home_region = STATE_VOLCANIC_ISLANDS
+	traits = {
+		brave
+		direct
+	}
+}
+
+# Source: Warhammer Armies: Lizardmen (Lord Mazdamundi, Slann Mage-Priest of Hexoatl)
+# Confidence: high
+# Note: Canon age in the thousands of years; immortal with a prime-of-life birth_date. Hexoatl lies north of the drawn map, so the home_region is the tag's capital state (non-canon).
+HEX_mazdamundi_template = {
+	first_name = WHCHAR_HEX_mazdamundi_first
+	historical = yes
+	culture = cu:lizardmen
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_FLOATING_PYRAMID
+	traits = {
+		erudite
+		persistent
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Lizardmen (Lord Xltloc, Slann of Itza)
+# Confidence: medium
+# Note: Canon age in the thousands of years; immortal with a prime-of-life birth_date. Chris's decision (2026-11-06): Lord Xltloc rules Itza; Lord Kroak is not authored.
+ITZ_xltloc_template = {
+	first_name = WHCHAR_ITZ_xltloc_first
+	historical = yes
+	culture = cu:lizardmen
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_ITZA
+	traits = {
+		erudite
+		cautious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: WFRP Lustria (Adella of the Thousand Mouths, ruler of Skeggi)
+# Confidence: medium
+# Note: Name and rule supplied by the scoping pass for #10182; not re-read from print here. Birth date inferred.
+SKG_adella_of_the_thousand_mouths_template = {
+	first_name = WHCHAR_SKG_adella_of_the_thousand_mouths_first
+	last_name = WHCHAR_SKG_adella_of_the_thousand_mouths_last
+	historical = yes
+	culture = cu:norscan
+	ruler = yes
+	female = yes
+	birth_date = 2460.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	home_region = STATE_BITING_BOGS
+	traits = {
+		ambitious
+		ruthless
+	}
+}
+
+# Source: Warhammer Armies: Lizardmen (Lord Adohi-Tehga, Slann of Tlaxtlan); Lexicanum
+# Confidence: medium
+# Note: Canon age in the thousands of years; immortal with a prime-of-life birth_date.
+TLX_adohi_tehga_template = {
+	first_name = WHCHAR_TLX_adohi_tehga_first
+	historical = yes
+	culture = cu:lizardmen
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_TLAXTLAN
+	traits = {
+		erudite
+		cautious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Vampire Counts / Warhammer Fantasy 8e (Luthor Harkon, Count of the Vampire Coast)
+# Confidence: medium
+# Note: Captured 2471 IC per 8e and active by 2524; his rule at 2502 is inferred, hence medium. Undead, so immortal with a prime-of-life birth_date.
+VCO_luthor_harkon_template = {
+	first_name = WHCHAR_VCO_luthor_harkon_first
+	last_name = WHCHAR_VCO_luthor_harkon_last
+	historical = yes
+	culture = cu:vampire_coast
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	home_region = STATE_VAMPIRE_COAST
+	traits = {
+		ruthless
+		brave
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Warhammer Armies: Lizardmen (Lord Huinitenuchli, Slann of Xlanhuapec); Lexicanum
+# Confidence: medium
+# Note: Canon age in the thousands of years; immortal with a prime-of-life birth_date.
+XLA_huinitenuchli_template = {
+	first_name = WHCHAR_XLA_huinitenuchli_first
+	historical = yes
+	culture = cu:lizardmen
+	ruler = yes
+	birth_date = 2440.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_XLANHUAPEC
+	traits = {
+		erudite
+		pious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}

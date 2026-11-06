@@ -1,0 +1,37 @@
+﻿CHARACTERS = {
+	c:ESC ?= {
+		create_character = { # Blas Elcano
+			template = ESC_blas_elcano_template
+		}
+	}
+	c:HEX ?= {
+		create_character = { # Mazdamundi
+			template = HEX_mazdamundi_template
+		}
+	}
+	c:ITZ ?= {
+		create_character = { # Xltloc
+			template = ITZ_xltloc_template
+		}
+	}
+	c:SKG ?= {
+		create_character = { # Adella of the Thousand Mouths
+			template = SKG_adella_of_the_thousand_mouths_template
+		}
+	}
+	c:TLX ?= {
+		create_character = { # Adohi-Tehga
+			template = TLX_adohi_tehga_template
+		}
+	}
+	c:VCO ?= {
+		create_character = { # Luthor Harkon
+			template = VCO_luthor_harkon_template
+		}
+	}
+	c:XLA ?= {
+		create_character = { # Huinitenuchli
+			template = XLA_huinitenuchli_template
+		}
+	}
+}
