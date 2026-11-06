@@ -60,6 +60,14 @@
    ],
    "owner": "AAA",
    "scope": "drawn"
+  },
+  "STATE_ETA": {
+   "naming_anchor": [
+    45,
+    45
+   ],
+   "owner": "DDD",
+   "scope": "drawn"
   }
  }
 }

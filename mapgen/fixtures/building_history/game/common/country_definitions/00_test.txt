@@ -10,3 +10,7 @@ CCC = {
 	country_type = unrecognized
 	tier = principality
 }
+DDD = {
+	country_type = decentralized
+	tier = principality
+}

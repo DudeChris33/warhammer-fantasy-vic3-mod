@@ -120,6 +120,10 @@ def run_fixture_check(fixture: Path) -> None:
     ccc = {x.building for t, _, x in allp if t == "CCC"}
     assert ccc and all(not world.buildings[b].techs for b in ccc), f"CCC got tech-gated buildings: {ccc}"
     assert "building_wheat_farm" not in ccc
+    # a decentralized owner has no economy (#10181): no buildings, and no profiles.json entry is needed
+    assert world.tags["DDD"].techs is not None and "DDD" not in cfg.tags
+    assert not any(t == "DDD" for t, _, _ in allp) and not any(k == "STATE_ETA" for k, _ in by), "decentralized DDD must get no buildings"
+    assert not any("DDD" in t for t in texts.values()), "decentralized DDD must not appear in the emitted text"
     # split state: one block per owner
     assert {t for k, t in by if k == "STATE_GAMMA"} == {"AAA", "BBB"}
     # industry (#6637): in the owner's most populous state when it has the tech; a tag without it reports the drop
@@ -179,6 +183,7 @@ def run_fixture_check(fixture: Path) -> None:
     broken({first: base.replace('"pm_basic_farming"', '"pm_advanced_farming"', 1)}, "needs tech intensive_agriculture")
     broken({first: base.replace("region_state:BBB", "region_state:UNO", 1)}, "c:UNO")
     broken({first: base.replace("region_state:BBB", "region_state:CCC", 1)}, "history/states does not create")
+    broken({first: base.replace("region_state:BBB", "region_state:DDD", 1)}, "decentralized c:DDD")
     broken({first: base.rstrip("\n}\n") + "\n"}, "balance")
     drop = base.replace('activate_production_methods = { "pm_basic_farming" }', "activate_production_methods = { }", 1)
     broken({first: drop}, "no method for group")

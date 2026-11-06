@@ -10,4 +10,7 @@ COUNTRIES = {
 	c:CCC ?= {
 		effect_fixture_undefined = yes
 	}
+	c:DDD ?= {
+		effect_fixture_tier_6 = yes
+	}
 }

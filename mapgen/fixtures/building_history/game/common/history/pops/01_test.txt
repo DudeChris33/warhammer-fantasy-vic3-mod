@@ -32,4 +32,9 @@ POPS = {
 			create_pop = { culture = test size = 3000 }
 		}
 	}
+	s:STATE_ETA = {
+		region_state:DDD = {
+			create_pop = { culture = test size = 50000 }
+		}
+	}
 }

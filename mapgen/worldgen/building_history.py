@@ -497,9 +497,14 @@ def load_world(root: Path) -> World:
     own = json.loads((root / "mapgen" / "derived" / "state_ownership.json").read_text(encoding="utf-8"))
     anchors = {k: v.get("naming_anchor") for k, v in own["states"].items()}
     owners: dict[str, list[str]] = {}
+    # A decentralized country has no economy (vanilla ``has_economy = no``, country_types:53,60), so it
+    # gets no buildings: its states are left out of the owners, like UNO. A zero-level archetype would
+    # not do: the small-state minimum places a farm in every unit with no jobs (#10181).
+    ctypes = load_country_types(root / "common" / "country_definitions")
+    decentralized = {t for t, ct in ctypes.items() if ct == "decentralized"}
     for p in sorted((root / "common" / "history" / "states").glob("*.txt")):
         for key, creates in sh.parse_history_text(p.read_text(encoding="utf-8-sig")):
-            tags = sorted({t for t, _ in creates if t and t != UNO})
+            tags = sorted({t for t, _ in creates if t and t != UNO and t not in decentralized})
             if tags:
                 owners[key] = tags
     pops: dict[tuple[str, str], int] = {}

@@ -39,4 +39,10 @@ STATES = {
 			owned_provinces = { x000008 }
 		}
 	}
+	s:STATE_ETA = {
+		create_state = {
+			country = c:DDD
+			owned_provinces = { x000009 }
+		}
+	}
 }

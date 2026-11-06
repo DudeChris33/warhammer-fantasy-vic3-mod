@@ -273,6 +273,8 @@ def verify_texts(texts: dict[str, str], root: Path) -> list[str]:
                     where = f"{name}: {state}/c:{tag}"
                     if tag == "UNO":
                         errs.append(f"{where}: buildings for c:UNO")
+                    if ctypes.get(tag) == "decentralized":
+                        errs.append(f"{where}: buildings for decentralized c:{tag} (no economy)")
                     if tag not in owners.get(state, set()):
                         errs.append(f"{where}: history/states does not create this (state, owner)")
                     if tag not in sets:

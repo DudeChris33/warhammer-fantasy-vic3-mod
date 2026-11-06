@@ -48,3 +48,9 @@ STATE_ZETA = {
     arable_land = 4
     arable_resources = { "building_wheat_farm" }
 }
+STATE_ETA = {
+    id = 7
+    provinces = { x000009 }
+    arable_land = 40
+    arable_resources = { "building_wheat_farm" }
+}
