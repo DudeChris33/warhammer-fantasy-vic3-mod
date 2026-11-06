@@ -38,7 +38,7 @@
     2593,
     2671
    ],
-   "owner": "unowned",
+   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_AMAZONIA": {
@@ -47,7 +47,7 @@
     1464,
     875
    ],
-   "owner": "unowned",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_AMBER_SKULL": {
@@ -200,7 +200,7 @@
     2418,
     2574
    ],
-   "owner": "unowned",
+   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_BADLANDS_COAST": {
@@ -254,7 +254,7 @@
     1773,
     2156
    ],
-   "owner": "unowned",
+   "owner": "SKG",
    "scope": "drawn"
   },
   "STATE_BJORNLING_S_GATHERING": {
@@ -389,7 +389,7 @@
     1653,
     2290
    ],
-   "owner": "unowned",
+   "owner": "AMZ",
    "scope": "drawn"
   },
   "STATE_BLOOD_RIVER_VALLEY": {
@@ -407,7 +407,7 @@
     2522,
     2456
    ],
-   "owner": "unowned",
+   "owner": "XLA",
    "scope": "drawn"
   },
   "STATE_BOHSENFELS": {
@@ -488,7 +488,7 @@
     1883,
     1942
    ],
-   "owner": "unowned",
+   "owner": "TLC",
    "scope": "drawn"
   },
   "STATE_CANTABRIO_ROAD": {
@@ -650,7 +650,7 @@
     2251,
     2846
    ],
-   "owner": "unowned",
+   "owner": "LZC",
    "scope": "drawn"
   },
   "STATE_COURONNE": {
@@ -668,7 +668,7 @@
     1932,
     2021
    ],
-   "owner": "unowned",
+   "owner": "HEX",
    "scope": "drawn"
   },
   "STATE_CRIPPLE_PEAK": {
@@ -704,7 +704,7 @@
     2648,
     2805
    ],
-   "owner": "unowned",
+   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_CURSED_WAY": {
@@ -848,7 +848,7 @@
     1653,
     2185
    ],
-   "owner": "unowned",
+   "owner": "AMZ",
    "scope": "drawn"
   },
   "STATE_DRAKENHOF": {
@@ -950,7 +950,7 @@
     2419,
     2927
    ],
-   "owner": "unowned",
+   "owner": "LZC",
    "scope": "drawn"
   },
   "STATE_EAGLE_GATE": {
@@ -1272,7 +1272,7 @@
     1765,
     1915
    ],
-   "owner": "unowned",
+   "owner": "HEX",
    "scope": "drawn"
   },
   "STATE_FOREST_OF_GLOOM": {
@@ -1290,7 +1290,7 @@
     2239,
     2999
    ],
-   "owner": "unowned",
+   "owner": "BRC",
    "scope": "drawn"
   },
   "STATE_FORT_STRAGHOV": {
@@ -1452,7 +1452,7 @@
     2285,
     2386
    ],
-   "owner": "unowned",
+   "owner": "ITZ",
    "scope": "drawn"
   },
   "STATE_GREAT_MORTIS_DELTA": {
@@ -1515,7 +1515,7 @@
     2055,
     2519
    ],
-   "owner": "unowned",
+   "owner": "PST",
    "scope": "drawn"
   },
   "STATE_HALLS_OF_EQUOS": {
@@ -1596,7 +1596,7 @@
     2330,
     2031
    ],
-   "owner": "unowned",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_HOCHLAND": {
@@ -1650,7 +1650,7 @@
     1808,
     2386
    ],
-   "owner": "unowned",
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_HUATL": {
@@ -1659,7 +1659,7 @@
     2646,
     2383
    ],
-   "owner": "unowned",
+   "owner": "XLA",
    "scope": "drawn"
   },
   "STATE_INNER_CALEDOR": {
@@ -1749,7 +1749,7 @@
     1702,
     1893
    ],
-   "owner": "unowned",
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_ITZA": {
@@ -1758,7 +1758,7 @@
     2204,
     2509
    ],
-   "owner": "unowned",
+   "owner": "ITZ",
    "scope": "drawn"
   },
   "STATE_ITZAHOTEC": {
@@ -1767,7 +1767,7 @@
     2495,
     2182
    ],
-   "owner": "unowned",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_IVORY_ROAD": {
@@ -1785,7 +1785,7 @@
     2690,
     2171
    ],
-   "owner": "unowned",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_KALAX": {
@@ -1794,7 +1794,7 @@
     2582,
     3028
    ],
-   "owner": "unowned",
+   "owner": "LZC",
    "scope": "drawn"
   },
   "STATE_KARAGRIL": {
@@ -2402,7 +2402,7 @@
     1959,
     2582
    ],
-   "owner": "unowned",
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_MANUFACTORY_DISTRICT": {
@@ -2537,7 +2537,7 @@
     2131,
     2718
    ],
-   "owner": "unowned",
+   "owner": "SSD",
    "scope": "drawn"
   },
   "STATE_MONOLITH_OF_INGVAR": {
@@ -2688,7 +2688,7 @@
     1846,
     2713
    ],
-   "owner": "unowned",
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_MYRMIDIA_S_COAST": {
@@ -2769,7 +2769,7 @@
     2615,
     2554
    ],
-   "owner": "unowned",
+   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_NORTHERN_OBLAST": {
@@ -2981,7 +2981,7 @@
     1913,
     1855
    ],
-   "owner": "unowned",
+   "owner": "PAH",
    "scope": "drawn"
   },
   "STATE_OIS_GAP": {
@@ -3035,7 +3035,7 @@
     2435,
     2706
    ],
-   "owner": "unowned",
+   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_PAHUAX": {
@@ -3044,7 +3044,7 @@
     1873,
     1792
    ],
-   "owner": "unowned",
+   "owner": "PAH",
    "scope": "drawn"
   },
   "STATE_PALE_SISTERS": {
@@ -3098,7 +3098,7 @@
     1866,
     2176
    ],
-   "owner": "unowned",
+   "owner": "TLX",
    "scope": "drawn"
   },
   "STATE_PITS_DISTRICT": {
@@ -3152,7 +3152,7 @@
     2813,
     2169
    ],
-   "owner": "unowned",
+   "owner": "VCO",
    "scope": "drawn"
   },
   "STATE_PYRAMID_OF_TUTANKHANUT": {
@@ -3179,7 +3179,7 @@
     2034,
     2344
    ],
-   "owner": "unowned",
+   "owner": "TLX",
    "scope": "drawn"
   },
   "STATE_RED_CLOUD_MOUNTAINS": {
@@ -3269,7 +3269,7 @@
     2215,
     1856
    ],
-   "owner": "unowned",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_SEPUKZY": {
@@ -3413,7 +3413,7 @@
     2762,
     2924
    ],
-   "owner": "unowned",
+   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_SOUTHERN_OBLAST": {
@@ -3440,7 +3440,7 @@
     2611,
     2932
    ],
-   "owner": "unowned",
+   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_SOUTHERN_SIREN_ISLES": {
@@ -3548,7 +3548,7 @@
     1923,
     2097
    ],
-   "owner": "unowned",
+   "owner": "HEX",
    "scope": "drawn"
   },
   "STATE_SPHINX_OF_PHAA": {
@@ -3566,7 +3566,7 @@
     2371,
     2782
    ],
-   "owner": "unowned",
+   "owner": "LZC",
    "scope": "drawn"
   },
   "STATE_STARSAND_PORT": {
@@ -3674,7 +3674,7 @@
     2746,
     3046
    ],
-   "owner": "unowned",
+   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_TALDURSFJORD": {
@@ -3710,7 +3710,7 @@
     2431,
     1949
    ],
-   "owner": "unowned",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_THE_BLIGHT": {
@@ -3836,7 +3836,7 @@
     2517,
     2866
    ],
-   "owner": "unowned",
+   "owner": "LZC",
    "scope": "drawn"
   },
   "STATE_THUNDER_PEAKS": {
@@ -3863,7 +3863,7 @@
     1924,
     2368
    ],
-   "owner": "unowned",
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_TLAX": {
@@ -3872,7 +3872,7 @@
     2569,
     2294
    ],
-   "owner": "unowned",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_TLAXTLAN": {
@@ -3881,7 +3881,7 @@
     2016,
     2210
    ],
-   "owner": "unowned",
+   "owner": "TLX",
    "scope": "drawn"
   },
   "STATE_TOBARO": {
@@ -3926,7 +3926,7 @@
     2084,
     2610
    ],
-   "owner": "unowned",
+   "owner": "PST",
    "scope": "drawn"
   },
   "STATE_TOWER_OF_THE_BLOODYTOOTH": {
@@ -4006,7 +4006,7 @@
     1769,
     2613
    ],
-   "owner": "unowned",
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_TYR_VANNA": {
@@ -4069,7 +4069,7 @@
     2734,
     2267
    ],
-   "owner": "unowned",
+   "owner": "VCO",
    "scope": "drawn"
   },
   "STATE_VANNHEIM_MOUNTAINS": {
@@ -4125,19 +4125,7 @@
    ],
    "owners": [
     {
-     "owner": "LOT",
-     "provinces": [
-      "x0964B5",
-      "x2ADA15",
-      "x720EB0",
-      "x9AE6D4",
-      "xA79C2E",
-      "xD9ABC1",
-      "xFDDCC2"
-     ]
-    },
-    {
-     "owner": "unowned",
+     "owner": "ESC",
      "provinces": [
       "x07340A",
       "x0FA3B8",
@@ -4163,6 +4151,18 @@
       "xD90950",
       "xEA4A23",
       "xF8EFD2"
+     ]
+    },
+    {
+     "owner": "LOT",
+     "provinces": [
+      "x0964B5",
+      "x2ADA15",
+      "x720EB0",
+      "x9AE6D4",
+      "xA79C2E",
+      "xD9ABC1",
+      "xFDDCC2"
      ]
     }
    ],
@@ -4201,7 +4201,7 @@
     2392,
     2326
    ],
-   "owner": "unowned",
+   "owner": "XLA",
    "scope": "drawn"
   },
   "STATE_WESTERN_BADLANDS": {
@@ -4500,7 +4500,7 @@
     2246,
     2279
    ],
-   "owner": "unowned",
+   "owner": "ITZ",
    "scope": "drawn"
   },
   "STATE_XHOTL": {
@@ -4509,7 +4509,7 @@
     2182,
     2662
    ],
-   "owner": "unowned",
+   "owner": "ITZ",
    "scope": "drawn"
   },
   "STATE_XLANHUAPEC": {
@@ -4518,7 +4518,7 @@
     2412,
     2437
    ],
-   "owner": "unowned",
+   "owner": "XLA",
    "scope": "drawn"
   },
   "STATE_XLANZEC": {
@@ -4527,7 +4527,7 @@
     2906,
     3035
    ],
-   "owner": "unowned",
+   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_YI_EDRI_ETERNOS": {
