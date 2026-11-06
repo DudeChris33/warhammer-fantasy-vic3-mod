@@ -54,4 +54,25 @@
 			member = c:UZK
 		}
 	}
+
+	# Temple-Cities of Lustria: Hexoatl and the other living temple-cities serve the Great Plan of the Slann (Lexicanum: Great Plan, Hexoatl).
+	# Members, not subjects. identity_religious needs law_state_religion or law_freedom_of_conscience; effect_starting_politics_traditional
+	# (common/scripted_effects/00_political_setup.txt) activates law_state_religion for every tag, so HEX qualifies. Ruined cities and the
+	# decentralized LZA-LZE holdings are left out. No leader-rank requirement is stated in docs/effects.log for create_power_bloc (HEX is a recognized kingdom,
+	# the members unrecognized principalities) - confirm in the in-game load (#10185).
+	c:HEX ?= {
+		create_power_bloc = {
+			name = WH_BLOC_TEMPLE_CITIES
+			map_color = { 74 140 92 }
+
+			founding_date = 2502.1.1
+			identity = identity_religious
+			principle = principle_defensive_cooperation_1
+
+			member = c:ITZ
+			member = c:XLA
+			member = c:TLX
+			member = c:PAH
+		}
+	}
 }

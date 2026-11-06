@@ -162,4 +162,136 @@
 		# Von Carstein wars against the Emperors (WFB Vampire Counts army book)
 		set_relations = { country = c:REI value = -60 }
 	}
+	c:HEX ?= {
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:ITZ value = 60 }
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:XLA value = 60 }
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:TLX value = 60 }
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:PAH value = 60 }
+		# Lizardmen against the Sartosan pirates, who raid and loot Lustrian shores (Lexicanum: Lizardmen, Pirates of Sartosa)
+		set_relations = { country = c:PST value = -80 }
+		# Lizardmen against the Vampire Coast: undead raiders of the Lustrian shore (Lexicanum: Vampire Coast, Lizardmen)
+		set_relations = { country = c:VCO value = -70 }
+		# Lizardmen against the Tilean colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:TLC value = -40 }
+		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:ESC value = -40 }
+		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:BRC value = -40 }
+		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
+		set_relations = { country = c:AMZ value = -30 }
+		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
+		set_relations = { country = c:CDU value = 15 }
+		# Lizardmen and the Skeggi: Norse raiders on the Lustrian coast (Lexicanum: Skeggi, Lizardmen); mild - Hexoatl lies far from them
+		set_relations = { country = c:SKG value = -20 }
+	}
+	c:ITZ ?= {
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:XLA value = 60 }
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:TLX value = 60 }
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:PAH value = 60 }
+		# Lizardmen against the Sartosan pirates, who raid and loot Lustrian shores (Lexicanum: Lizardmen, Pirates of Sartosa)
+		set_relations = { country = c:PST value = -80 }
+		# Lizardmen against the Vampire Coast: undead raiders of the Lustrian shore (Lexicanum: Vampire Coast, Lizardmen)
+		set_relations = { country = c:VCO value = -70 }
+		# Lizardmen against the Tilean colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:TLC value = -40 }
+		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:ESC value = -40 }
+		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:BRC value = -40 }
+		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
+		set_relations = { country = c:AMZ value = -30 }
+		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
+		set_relations = { country = c:CDU value = 15 }
+		# Lizardmen and the Skeggi: Norse raiders on the Lustrian coast (Lexicanum: Skeggi, Lizardmen)
+		set_relations = { country = c:SKG value = -40 }
+	}
+	c:XLA ?= {
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:TLX value = 60 }
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:PAH value = 60 }
+		# Lizardmen against the Sartosan pirates, who raid and loot Lustrian shores (Lexicanum: Lizardmen, Pirates of Sartosa)
+		set_relations = { country = c:PST value = -80 }
+		# Lizardmen against the Vampire Coast: undead raiders of the Lustrian shore (Lexicanum: Vampire Coast, Lizardmen)
+		set_relations = { country = c:VCO value = -70 }
+		# Lizardmen against the Tilean colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:TLC value = -40 }
+		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:ESC value = -40 }
+		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:BRC value = -40 }
+		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
+		set_relations = { country = c:AMZ value = -30 }
+		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
+		set_relations = { country = c:CDU value = 15 }
+		# Lizardmen and the Skeggi: Norse raiders on the Lustrian coast (Lexicanum: Skeggi, Lizardmen)
+		set_relations = { country = c:SKG value = -40 }
+	}
+	c:TLX ?= {
+		# The temple-cities of Lustria serve one Great Plan under the Slann (Lexicanum: Great Plan, Lizardmen)
+		set_relations = { country = c:PAH value = 60 }
+		# Lizardmen against the Sartosan pirates, who raid and loot Lustrian shores (Lexicanum: Lizardmen, Pirates of Sartosa)
+		set_relations = { country = c:PST value = -80 }
+		# Lizardmen against the Vampire Coast: undead raiders of the Lustrian shore (Lexicanum: Vampire Coast, Lizardmen)
+		set_relations = { country = c:VCO value = -70 }
+		# Lizardmen against the Tilean colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:TLC value = -40 }
+		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:ESC value = -40 }
+		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:BRC value = -40 }
+		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
+		set_relations = { country = c:AMZ value = -30 }
+		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
+		set_relations = { country = c:CDU value = 15 }
+		# Lizardmen and the Skeggi: Norse raiders on the Lustrian coast (Lexicanum: Skeggi, Lizardmen)
+		set_relations = { country = c:SKG value = -40 }
+	}
+	c:PAH ?= {
+		# Lizardmen against the Sartosan pirates, who raid and loot Lustrian shores (Lexicanum: Lizardmen, Pirates of Sartosa)
+		set_relations = { country = c:PST value = -80 }
+		# Lizardmen against the Vampire Coast: undead raiders of the Lustrian shore (Lexicanum: Vampire Coast, Lizardmen)
+		set_relations = { country = c:VCO value = -70 }
+		# Lizardmen against the Tilean colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:TLC value = -40 }
+		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:ESC value = -40 }
+		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
+		set_relations = { country = c:BRC value = -40 }
+		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
+		set_relations = { country = c:AMZ value = -30 }
+		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
+		set_relations = { country = c:CDU value = 15 }
+		# Lizardmen and the Skeggi: Norse raiders on the Lustrian coast (Lexicanum: Skeggi, Lizardmen)
+		set_relations = { country = c:SKG value = -40 }
+	}
+	c:SKG ?= {
+		# Skeggi are Norse kin of the Bjornlings (WFRP4e Sea of Claws p.59; Lexicanum: Skeggi)
+		set_relations = { country = c:BJO value = 30 }
+		# Skeggi against the Vampire Coast: rival sea-raiders (Lexicanum: Skeggi, Vampire Coast)
+		set_relations = { country = c:VCO value = -50 }
+	}
+	c:TLC ?= {
+		# Nuevo Luccini is a colony of Luccini (Lexicanum; WFRP Lustria)
+		set_relations = { country = c:LUC value = 30 }
+	}
+	c:ESC ?= {
+		# Santa Magritta and Nuevo Luccini: rival Old World colonies (WFRP Lustria p.75)
+		set_relations = { country = c:TLC value = -30 }
+	}
+	c:AMZ ?= {
+		# Amazons against the Old World colonists who push into their jungle (Lexicanum: Amazons)
+		set_relations = { country = c:TLC value = -40 }
+		# Amazons against the Old World colonists who push into their jungle (Lexicanum: Amazons)
+		set_relations = { country = c:ESC value = -40 }
+		# Amazons against the Old World colonists who push into their jungle (Lexicanum: Amazons)
+		set_relations = { country = c:BRC value = -40 }
+	}
 }

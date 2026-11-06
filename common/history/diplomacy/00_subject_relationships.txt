@@ -102,6 +102,12 @@
 			country = c:PAR
 			type = protectorate
 		}
+		# Bretonnian colony in the Lustrian Forgotten Isles (invented: no canon Bretonnian Lustrian colony; #10185). Colonial tag, so the colony subject type.
+		# Needs COU at least minor_power and above BRC (error.log initializefrombookmark.cpp:1430 otherwise); the fallback is a recognized BRC with no pact.
+		create_diplomatic_pact = {
+			country = c:BRC
+			type = colony
+		}
 	}
 	c:KSV ?= {
 		# Oblast of the Tzar/Tzarina of Kislev (WFB Kislev lore) - contested
@@ -194,6 +200,14 @@
 		}
 		create_diplomatic_pact = {
 			country = c:TEH
+			type = colony
+		}
+	}
+	c:MAG ?= {
+		# Santa Magritta, a colony of Estalia (WFRP Lustria p.75, Town Cryer 15 p.17; Lexicanum) (#10185).
+		# Colonial tag, so the colony subject type; needs MAG at least minor_power and above ESC (error.log initializefrombookmark.cpp:1430 otherwise).
+		create_diplomatic_pact = {
+			country = c:ESC
 			type = colony
 		}
 	}
