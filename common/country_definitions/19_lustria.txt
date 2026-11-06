@@ -125,7 +125,7 @@ TLC = {
 
 ESC = {
 	color = { 102 49 41 }
-	country_type = unrecognized
+	country_type = colonial # colony of MAG (#10185): the colony subject type accepts only colonial/company tags
 	tier = principality
 	cultures = { estalian }
 	capital = STATE_VOLCANIC_ISLANDS # Columbo's Island; seat inferred: no named hub
@@ -135,7 +135,7 @@ ESC = {
 
 BRC = {
 	color = { 81 40 81 }
-	country_type = unrecognized
+	country_type = colonial # colony of COU (#10185): the colony subject type accepts only colonial/company tags
 	tier = principality
 	cultures = { bretonnian }
 	capital = STATE_FORGOTTEN_ISLES # non-canon: largest owned state
