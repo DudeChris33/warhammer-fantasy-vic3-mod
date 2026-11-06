@@ -1,0 +1,230 @@
+﻿# common/flag_definitions is a replace_paths folder. This mod's DEFAULT list (00_flag_definitions.txt) ships one
+# unconditionally-applicable block at priority = 0, so without a higher-priority tag-named list here every bespoke COA in
+# common/coat_of_arms/coat_of_arms/19_lustria.txt (board #10186) would parse but sit unused behind default_flag. Each list
+# below is a single unconditional block at priority = 100, the same shape as every other region file. `always = yes`
+# confirmed valid at docs/triggers.log. Commit and deploy with or after #10181's definitions: a flag list for an
+# undefined tag is untested.
+
+LUS = {
+	flag_definition = {
+		coa = LUS
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SKG = {
+	flag_definition = {
+		coa = SKG
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ITZ = {
+	flag_definition = {
+		coa = ITZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+HEX = {
+	flag_definition = {
+		coa = HEX
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XLA = {
+	flag_definition = {
+		coa = XLA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TLX = {
+	flag_definition = {
+		coa = TLX
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+CHQ = {
+	flag_definition = {
+		coa = CHQ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+PAH = {
+	flag_definition = {
+		coa = PAH
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XAH = {
+	flag_definition = {
+		coa = XAH
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+QTZ = {
+	flag_definition = {
+		coa = QTZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+HUA = {
+	flag_definition = {
+		coa = HUA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+OYX = {
+	flag_definition = {
+		coa = OYX
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+XHO = {
+	flag_definition = {
+		coa = XHO
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+AXL = {
+	flag_definition = {
+		coa = AXL
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SPZ = {
+	flag_definition = {
+		coa = SPZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TLA = {
+	flag_definition = {
+		coa = TLA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+PST = {
+	flag_definition = {
+		coa = PST
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+VCO = {
+	flag_definition = {
+		coa = VCO
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+AMZ = {
+	flag_definition = {
+		coa = AMZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+TLC = {
+	flag_definition = {
+		coa = TLC
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+ESC = {
+	flag_definition = {
+		coa = ESC
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+BRC = {
+	flag_definition = {
+		coa = BRC
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+SSD = {
+	flag_definition = {
+		coa = SSD
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LZA = {
+	flag_definition = {
+		coa = LZA
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LZB = {
+	flag_definition = {
+		coa = LZB
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LZC = {
+	flag_definition = {
+		coa = LZC
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LZD = {
+	flag_definition = {
+		coa = LZD
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
+LZE = {
+	flag_definition = {
+		coa = LZE
+		priority = 100
+		trigger = { always = yes }
+	}
+}

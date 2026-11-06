@@ -24,4 +24,10 @@ colors = {
 	bone         = hsv360 { 47 16 91 }
 	gore_red     = hsv360 { 3 87 41 }
 	dirty_iron   = hsv360 { 40 17 42 }
+
+	# Lustria heraldry (#10186): the Lizardmen house style's two field tinctures. The palette has nothing nearer
+	# than CIELAB dE 29 to the legend's 0,216,114-type (jade) and 0,192,198-type (turquoise) entries; vanilla's
+	# `pink` is in fact a cyan (hsv 187) and is not to be used.
+	lustrian_jade = hsv360 { 150 95 65 }
+	lustrian_turquoise = hsv360 { 183 95 70 }
 }

@@ -160,6 +160,17 @@ arms are #3621); binding on later `high_elf` tags.
   Fortress of Dawn's sun over the sea), recoloured into this palette; otherwise a disclosed invention.
 - No greenskin devices and nothing from rules 5-6 of the greenskin list above.
 
+## Lizardmen house style
+
+Established by #10186 for `common/coat_of_arms/coat_of_arms/19_lustria.txt`; binding on later `lizardmen` tags (e.g. Southlands Zlatlan).
+
+1. **Fields** come from the green-teal family, one tincture per tag: the palette tincture nearest the tag's `state_ownership_legend.json` colour (`green_light`, `green`, `green_dark`, `teal`, `blue_light`, plus the mod-native `lustrian_jade` and `lustrian_turquoise` in `01_wh_coa_colors.txt`; vanilla's `pink` is really a cyan and is not used).
+2. **Family cue**: every temple-city and the `LUS` formable carries a `ce_border_thin.dds` frame in `golden` (1 slot, slot 2 = slot 1). It encodes no start status (arms outlive the start date and canon disagrees with the roster in places). The holdings `LZA`-`LZE` have no frame.
+3. **Charges**: one per tag, `golden` (or `pearl` for pale, ghost and moon devices), drawn at scale 0.6 or more; no two Lizardmen tags share a texture except the composed pyramids.
+4. **Bans**: no AoS Seraphon iconography (constellations, Starhost); no 8-point star (reads as the Chaos star) and no eye (the greenskin reserved device); the greenskin rule 5-6 bans apply; no living-culture sacred art, real national emblem, letter or place-named national pattern (for example `ce_leftraru`, `ce_sun_peru`, `ce_armillary_sphere`, `ce_delta`, `pattern_border_triangles_morocco`, `ce_clouds_china_*`).
+5. **Stepped pyramid**: vanilla has none. Compose it from four `instance`s of `ce_solid.dds` (3 slots) as literal-size bars: widths about 0.56, 0.42, 0.28, 0.14, each 0.12 tall, centres at y 0.74, 0.62, 0.50, 0.38. Each block discloses it as a composition.
+6. **Colonies** difference the homeland's arms: the parent charge in the upper half of a `pattern_horizontal_split_01` field over `green_dark`.
+
 ## Power bloc coats of arms
 
 Established by #6574. A power bloc's arms are rolled by the engine from vanilla's random

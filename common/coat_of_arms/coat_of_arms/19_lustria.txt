@@ -1,0 +1,553 @@
+﻿# Lustria heraldry, board item #10186 (epic #10176): the 28 tags that
+# common/country_definitions/19_lustria.txt (#10181) defines (SSD, the Dwarf mine, wears the Dwarf hold house style), in planning/tag_registry.md order. The reserved TLN, KON and CHU
+# have no definition and so no arms. Placeholder-grade arms in the Lizardmen house style (.claude/rules/heraldry.md):
+# a green-teal family field per tag (the palette tincture nearest its legend colour; lustrian_jade and lustrian_turquoise
+# in named_colors/01_wh_coa_colors.txt), one charge per tag in golden or pearl, a thin golden frame (ce_border_thin) on
+# every city and on LUS, no frame on the holdings LZA-LZE, the colonies, SSD or the outsiders. No AoS Seraphon iconography.
+# The stepped pyramid is vanilla-free: it is composed from four instances of ce_solid.dds used as literal-size bars.
+# Every texture and colour-slot count is cited per block against a real usage (game/common/coat_of_arms/coat_of_arms/
+# unless marked RoE or mod); where vanilla fills one slot only, slot 2 is set to slot 1's tone (the AVE convention).
+# Each block names its canon-confidence bucket.
+# Requires common/flag_definitions/19_lustria.txt to render in-game (this mod's DEFAULT flag_definitions block is
+# unconditional at priority = 0). Commit and deploy with or after #10181's definitions, so no flag list names an
+# undefined tag.
+
+# LUS - the Old Ones' dominion: the First Temple under the sun. Disclosed invention (registry planning/tag_registry.md:1022): a composed stepped pyramid (four ce_solid bars) with ce_sun above. A formable with no legend entry takes a darker shade of its heartland.
+# Slots: ce_solid 3 (01_subs.txt:846, literal bar 01_subs.txt:850); ce_sun 2 (02_countries.txt:4984); ce_border_thin 1 (02_countries.txt:4161 BUL_rome; slot 2 = slot 1).
+LUS = {
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+	color2 = "teal"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.74 } scale = { 0.56 0.12 } }
+		instance = { position = { 0.5 0.62 } scale = { 0.42 0.12 } }
+		instance = { position = { 0.5 0.5 } scale = { 0.28 0.12 } }
+		instance = { position = { 0.5 0.38 } scale = { 0.14 0.12 } }
+	}
+
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.22 } scale = { 0.24 0.24 } }
+	}
+}
+
+# SKG - Skeggi, the Bjornlings' bear differenced for the colony. WFRP4e: Losteriksson, son of the Bjornling explorer Erik the Lost (Sea of Claws p.59, via fan-wiki dump); Skeggi itself is WD309/5e; the bear is also TW tier. Norse cadency: the parent charge on a differenced field.
+# Slots: ce_bear_smo 3 (mod-vendored, 00_norsca.txt:76 BJO). Reuse disclosed: BJO's bear in brown/pearl/green_dark on a per-bend field.
+SKG = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "lustrian_turquoise"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_bear_smo.dds"
+		color1 = "brown"
+		color2 = "pearl"
+		color3 = "green_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# ITZ - Itza, the First City: stepped pyramid. Disclosed invention (Itza's antiquity is canon; the device is invented).
+# Slots: ce_solid 3 (01_subs.txt:846); frame ce_border_thin 1 (02_countries.txt:4161).
+ITZ = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_turquoise"
+	color2 = "lustrian_turquoise"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.74 } scale = { 0.56 0.12 } }
+		instance = { position = { 0.5 0.62 } scale = { 0.42 0.12 } }
+		instance = { position = { 0.5 0.5 } scale = { 0.28 0.12 } }
+		instance = { position = { 0.5 0.38 } scale = { 0.14 0.12 } }
+	}
+}
+
+# HEX - Hexoatl, City of the Sun. Canon-soft: the epithet is canon, the device follows from it.
+# Slots: ce_roe_sun_tribal 2 (RoE 04_west_zalaron.txt:621).
+HEX = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_turquoise"
+	color2 = "lustrian_turquoise"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_sun_tribal.dds), reuse grant
+	colored_emblem = {
+		texture = "ce_roe_sun_tribal.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# XLA - Xlanhuapec, City of Mists. Canon-soft (epithet 7e/8e); the device is invented: vanilla's only cloud emblems (ce_clouds_china_*) are Chinese art, so a coiled serpent stands in, with no Sotek-city tie (Sotek's canon city is Chaqua). Disclosed reuse: AQL, RAA, BLV, RDV, KHM, LYB.
+# Slots: ce_cobra_coiled 2 (02_countries.txt:9541).
+XLA = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_jade"
+	color2 = "lustrian_jade"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_cobra_coiled.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# TLX - Tlaxtlan, City of the Moon. Canon-soft: epithet canon (lunamancers); the device (a full moon) follows.
+# Slots: ce_circle 3 (02_countries.txt:12320, via template variables).
+TLX = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_light"
+	color2 = "green_light"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# CHQ - Chaqua, City of Gold. CANON: "Chaqua's glyph shows a gold ingot" (7e Lizardmen p.39, via fan-wiki dump).
+# Slots: ce_rhombus 3 (02_countries.txt:18427).
+CHQ = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_turquoise"
+	color2 = "lustrian_turquoise"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_rhombus.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# PAH - Pahuax, City of Ash. Disclosed invention anchored on canon: Pahuax was the sole spawning site of Chameleon Skinks (8e p.39; 7e p.51), shown as a blowpipe dart. Oxyotl is absent until 2517 IC.
+# Slots: ce_roe_arrow 2 (RoE 02_central_zalaron.txt:782).
+PAH = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_jade"
+	color2 = "lustrian_jade"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_arrow.dds), reuse grant
+	colored_emblem = {
+		texture = "ce_roe_arrow.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# XAH - Xahutec, City of Echoes, ruined: the broken temple (the pyramid with its top step missing). Disclosed invention.
+# Slots: ce_solid 3 (01_subs.txt:846).
+XAH = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_light"
+	color2 = "green_light"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.74 } scale = { 0.56 0.12 } }
+		instance = { position = { 0.5 0.62 } scale = { 0.42 0.12 } }
+		instance = { position = { 0.5 0.5 } scale = { 0.28 0.12 } }
+	}
+}
+
+# QTZ - Quetza, the Defiled: a tainted temple. Disclosed invention. Reuse disclosed: KHM (golden) and BTO (bone on black_light/bone) use ce_triangle; QTZ's plague-green charge on a green_light/black_light bend keeps it apart.
+# Slots: ce_triangle 2 (02_countries.txt:11451).
+QTZ = {
+	pattern = "pattern_per_bend.dds"
+	color1 = "green_light"
+	color2 = "black_light"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_triangle.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# HUA - Huatl, Reawakening: the flame rekindled. Canon-soft: City of (Re)awakening (7e p.32; WFRP4e p.97).
+# Slots: ce_hand_flame 2 (99_countries_IP2.txt:189, via template variables).
+HUA = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	color2 = "green"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_hand_flame.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# OYX - Oyxl, the Eternal City: the eternal flame. Canon-soft (WFRP4e p.97). Reuse disclosed: XSB.
+# Slots: ce_torch 2 (01_subs.txt:2405).
+OYX = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_jade"
+	color2 = "lustrian_jade"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_torch.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# XHO - Xhotl, City of Fate: the star the Slann read. Disclosed invention: Slann astromancy is WHFB canon, and a single star is not an AoS constellation. Reuse disclosed: XSL.
+# Slots: ce_star_07 2 (01_subs.txt:1733).
+XHO = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_jade"
+	color2 = "lustrian_jade"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_star_07.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# AXL - Axlotl, the Star City. Disclosed invention, from the name (one star, not a constellation).
+# Slots: ce_star_12 2 (02_countries.txt:13465 KUT).
+AXL = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_turquoise"
+	color2 = "lustrian_turquoise"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_star_12.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# SPZ - Spektazuma, City of Lenses: focused light. Disclosed invention.
+# Slots: ce_star_16_bright 1 (02_countries.txt:15782; slot 2 = slot 1).
+SPZ = {
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+	color2 = "teal"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_star_16_bright.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# TLA - Tlax, City of Ghosts: a pale hand. Canon-soft: City of Ghosts (7e p.32). Reuse disclosed: UNO.
+# Slots: ce_hand 3 (RoE 00_noricum.txt:388).
+TLA = {
+	pattern = "pattern_solid.tga"
+	color1 = "lustrian_turquoise"
+	color2 = "lustrian_turquoise"
+
+	colored_emblem = {
+		texture = "ce_border_thin.dds"
+		color1 = "golden"
+		color2 = "golden"
+	}
+
+	colored_emblem = {
+		texture = "ce_hand.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		color3 = "pearl"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# PST - Clan Pestilens. Canon-soft: plague-green and the rat are recalled. PST is a real clan, so a rat is allowed (heraldry.md placeholder rule).
+# Slots: ce_rat_emblem 1 (RoE 01_settlers_coast.txt:315; slot 2 = slot 1). # emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_rat_emblem.dds), reuse grant
+PST = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_rat_emblem.dds"
+		color1 = "morrslieb_green"
+		color2 = "morrslieb_green"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# VCO - Vampire Coast: the ghost ship. Disclosed substitution: TW2's skull-and-bat flags, but neither vanilla nor RoE has a skull (#3621's sweep and this one).
+# Slots: ce_lymphad 3 (01_subs.txt:2125).
+VCO = {
+	pattern = "pattern_solid.tga"
+	color1 = "black"
+	color2 = "black"
+
+	colored_emblem = {
+		texture = "ce_lymphad.dds"
+		color1 = "bone"
+		color2 = "morrslieb_green"
+		color3 = "red_dark"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# AMZ - the Amazons. Disclosed invention: canon feathers are purple and blue, so the red field is invented (no legend entry yet; proposed). Reuse disclosed: WYD, SLV, XSJ.
+# Slots: ce_spearhead 2 (02_countries.txt:13646).
+AMZ = {
+	pattern = "pattern_solid.tga"
+	color1 = "red_dark"
+	color2 = "red_dark"
+
+	colored_emblem = {
+		texture = "ce_spearhead.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 1 1 } }
+	}
+}
+
+# TLC - Tilean colony. Disclosed invention (the colony itself is `invented`): the parent TIL winged lion, differenced on a split field over the colonial green base.
+# Slots: ce_ahom_winged_lion 3 (as 05_southern_realms.txt:59-64 TIL).
+TLC = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "golden"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_ahom_winged_lion.dds"
+		color1 = "brown"
+		color2 = "brown"
+		color3 = "red_dark"
+		instance = { position = { 0.5 0.34 } scale = { 0.5 0.5 } }
+	}
+}
+
+# ESC - Estalian colony. As TLC: the parent EST castle on a split field over the colonial green base.
+# Slots: ce_castle 3 (01_subs.txt:804).
+ESC = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "red"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.34 } scale = { 0.5 0.5 } }
+	}
+}
+
+# BRC - Bretonnian colony. As TLC: the parent BRE fleur-de-lis on a split field over the colonial green base.
+# Slots: ce_fleur_de_lis 2 (as 03_brettonia.txt:28-33 BRE).
+BRC = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "azure"
+	color2 = "green_dark"
+
+	colored_emblem = {
+		texture = "ce_fleur_de_lis.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.34 } scale = { 0.5 0.5 } }
+	}
+}
+
+# SSD - Spine of Sotek Dwarfs, the Mine of the Bearded Skulls. Total War minor faction (Hugrim Redaxe), tier 3 (registry planning/tag_registry.md:1069). Dwarf (dawi) hold house style of 04_karaz_ankor.txt: one charge on a solid brown field, no Lizardmen frame. Canon-soft, name-derived: the Spine of Sotek is a mountain range, so a mountain in gold. Disclosed reuse: ce_roe_mountain is also KIZ (orange on green_dark/brown), VLG and DRZ (grey on black) and TRA. The field is brown_light, the palette tincture nearest the legend colour 115,81,63 (CIELAB dE 13.4).
+# Slots: ce_roe_mountain 2 (04_karaz_ankor.txt:420 KIZ, VLG, DRZ, 05_southern_realms.txt TRA).
+SSD = {
+	pattern = "pattern_solid.tga"
+	color1 = "brown_light"
+	color2 = "brown_light"
+
+	# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_mountain.dds), reuse grant
+	colored_emblem = {
+		texture = "ce_roe_mountain.dds"
+		color1 = "golden"
+		color2 = "black_light"
+		instance = { position = { 0.5 0.52 } scale = { 0.8 0.8 } }
+	}
+}
+
+# LZA - placeholder (the Lizardmen holdings are not cities), disclosed invention. Crocodile.
+# Slots: ce_crocodile 3 (01_subs.txt:1644).
+LZA = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_light"
+	color2 = "green_light"
+
+	colored_emblem = {
+		texture = "ce_crocodile.dds"
+		color1 = "bone"
+		color2 = "bone"
+		color3 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# LZB - placeholder (the Lizardmen holdings are not cities), disclosed invention. Chevron.
+# Slots: ce_chevron 3 (02_countries.txt:16932).
+LZB = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_light"
+	color2 = "green_light"
+
+	colored_emblem = {
+		texture = "ce_chevron.dds"
+		color1 = "bone"
+		color2 = "bone"
+		color3 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# LZC - placeholder (the Lizardmen holdings are not cities), disclosed invention. Palm tree.
+# Slots: ce_palm_tree 2 (01_subs.txt:2275).
+LZC = {
+	pattern = "pattern_solid.tga"
+	color1 = "green"
+	color2 = "green"
+
+	colored_emblem = {
+		texture = "ce_palm_tree.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# LZD - placeholder (the Lizardmen holdings are not cities), disclosed invention. Nine-point star.
+# Slots: ce_star_09 2 (02_countries.txt:12686).
+LZD = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_light"
+	color2 = "green_light"
+
+	colored_emblem = {
+		texture = "ce_star_09.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}
+
+# LZE - placeholder (the Lizardmen holdings are not cities), disclosed invention. Anchor (the panel rejected the pineapple as off-tone; an anchor suits a coastal holding).
+# Slots: ce_anchor 1 (00_noricum.txt:643; slot 2 = slot 1).
+LZE = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_light"
+	color2 = "green_light"
+
+	colored_emblem = {
+		texture = "ce_anchor.dds"
+		color1 = "bone"
+		color2 = "bone"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+	}
+}

@@ -1007,7 +1007,7 @@ Xeti and 8 lower-detail cities held as reserve. All Lizardmen rows PLACEHOLDER c
 2026-08-30.)
 
 **`SKG` Skeggi** added on a lore-audit pass (2026-09-04, Chris) — the Norscan colony in Lustria
-founded 888 IC by Losteriksson of the Bjornlings, who named it for his daughter, the first child
+founded 888 IC by Losteriksson, son of the Bjornling explorer Erik the Lost (WFRP4e *Sea of Claws* p.59), who named it for his daughter, the first child
 born there (White Dwarf 309, "The Norse of Lustria"). Unlike the Lizardmen rows, it takes the real
 `norscan` culture (already authored, #3404) rather than `PLACEHOLDER` — the same precedent as 08
 Araby's Bretonnian crusader tags (`ORG`/`ANT`) carrying a real culture inside an otherwise-placeholder
