@@ -390,6 +390,49 @@
       "source": "canon: WFB (Hobgoblin Wolf Riders, tributaries of the Chaos Dwarfs); TW:WH3 (Hobgoblin steppe raiders under a Khan)",
       "why": "Steppe raiders under an absolute Khan, standing warband, slave-taking, no schooling"
     },
+    "lustrian_colony": {
+      "laws": {
+        "lawgroup_army_model": "law_professional_army",
+        "lawgroup_bureaucracy": "law_hereditary_bureaucrats",
+        "lawgroup_childrens_rights": "law_child_labor_allowed",
+        "lawgroup_church_and_state": "law_state_religion",
+        "lawgroup_citizenship": "law_subjecthood",
+        "lawgroup_colonization": "law_frontier_colonization",
+        "lawgroup_distribution_of_power": "law_autocracy",
+        "lawgroup_economic_system": "law_traditionalism",
+        "lawgroup_education_system": "law_religious_schools",
+        "lawgroup_free_speech": "law_right_of_assembly",
+        "lawgroup_governance_principles": "law_monarchy",
+        "lawgroup_health_system": "law_no_health_system",
+        "lawgroup_internal_security": "law_no_home_affairs",
+        "lawgroup_labor_rights": "law_no_workers_rights",
+        "lawgroup_labour_associations": "law_guild_system",
+        "lawgroup_land_reform": "law_tenant_farmers",
+        "lawgroup_migration": "law_migration_controls",
+        "lawgroup_navy_model": "law_merchant_navy",
+        "lawgroup_policing": "law_local_police",
+        "lawgroup_rights_of_women": "law_women_own_property",
+        "lawgroup_slavery": "law_slavery_banned",
+        "lawgroup_taxation": "law_land_based_taxation",
+        "lawgroup_trade_policy": "law_mercantilism",
+        "lawgroup_welfare": "law_no_social_security"
+      },
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_petty_bourgeoisie"
+      ],
+      "tax_level": "medium",
+      "taxed_goods": [
+        "liquor"
+      ],
+      "institutions": {},
+      "suggested_ig_names": {
+        "ig_armed_forces": "Colonial Garrison",
+        "ig_petty_bourgeoisie": "Colonial Traders"
+      },
+      "source": "canon: WFRP Lustria p.211 (Santa Magritta: the Comandante rules Columbo's Island by decree); non-tabletop: Town Cryer 15 via Lexicanum (fan wiki) (Nuevo Luccini, a captain-ruled Tilean port); inferred (a Lustrian colony is a garrison-and-trade outpost and must be able to colonize: Chris, 2026-11-06, #10185)",
+      "why": "A Lustrian colony is ruled by one commander or captain, backed by the garrison and the port traders, without a landed gentry or a local church hierarchy. It takes law_frontier_colonization, the colonial-affairs law that lets it colonize the neighbouring decentralized holdings (law_no_colonial_affairs blocks colonization; law_frontier_colonization unlocks on the colonization tech, which the Southern and Brettonia presets hold, and is enacted only next to a decentralized country, as the colonies are). Taxed goods are liquor: the check in validate_taxed_goods.py finds no vineyard in the tag's own market, while subsistence home workshops make liquor everywhere (#6638 phase A)."
+    },
     "norse_colony": {
       "laws": {
         "lawgroup_army_model": "law_warrior_caste",

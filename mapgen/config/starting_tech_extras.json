@@ -254,6 +254,16 @@
   ],
   "VER": [
    "democracy"
+  ],
+  "TLC": [
+   "colonization"
+  ],
+  "ESC": [
+   "colonization"
+  ],
+  "BRC": [
+   "international_relations",
+   "colonization"
   ]
  }
 }

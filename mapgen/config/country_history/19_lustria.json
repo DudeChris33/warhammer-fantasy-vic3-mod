@@ -7,7 +7,7 @@
       "lawgroup_church_and_state": "law_state_religion",
       "lawgroup_citizenship": "law_national_supremacy",
       "lawgroup_distribution_of_power": "law_autocracy",
-      "lawgroup_governance_principles": "law_theocracy",
+      "lawgroup_governance_principles": "law_chiefdom",
       "lawgroup_internal_security": "law_no_home_affairs",
       "lawgroup_navy_model": "law_merchant_navy",
       "lawgroup_colonization": "law_no_colonial_affairs",
@@ -16,7 +16,7 @@
       "lawgroup_taxation": "law_consumption_based_taxation",
       "lawgroup_land_reform": "law_tenant_farmers",
       "lawgroup_policing": "law_no_police",
-      "lawgroup_education_system": "law_religious_schools",
+      "lawgroup_education_system": "law_no_schools",
       "lawgroup_health_system": "law_no_health_system",
       "lawgroup_free_speech": "law_right_of_assembly",
       "lawgroup_labor_rights": "law_no_workers_rights",
@@ -35,79 +35,135 @@
     "taxed_goods": [],
     "institutions": {},
     "suggested_ig_names": {
-      "ig_devout": "Slann Mage-Priests and Skink Priests",
-      "ig_armed_forces": "Saurus Legions"
+      "ig_devout": "Skink Priests and Elders",
+      "ig_armed_forces": "Saurus Warbands"
     },
-    "source": "canon: WFB 8e Lizardmen army book (Slann Mage-Priests rule temple-cities through Skink priests, Saurus spawn as the warrior host, isolated by the Old Ones' design)",
-    "why": "Lizardmen temple-cities are ruled absolutely by a Slann theocracy with a Saurus warrior caste, isolated, without markets or schooling beyond temple lore"
+    "source": "engine: common/scripted_effects/00_political_setup.txt:68-79 (effect_starting_politics_traditional activates law_chiefdom for decentralized countries; common/laws/00_governance_principles.txt:12-25: law_theocracy cannot be enacted by one) and vanilla common/history/countries/pat - patagonia.txt (a decentralized start country takes effect_native_conscription_10); canon: WFB 8e Lizardmen army book (the wild Lizardmen holdings keep a Saurus warrior caste, Skink priests and no schooling beyond temple lore)",
+    "why": "This package is used only by the decentralized Lizardmen holdings LZA-LZE. A decentralized country has no politics beyond the engine's: Chiefdom, no schools, and a native-conscription level in place of a military law; the other laws follow the temple-city package. The living and ruined temple-cities take the temple_city and ruined_temple_city profiles instead.",
+    "native_conscription": 10
   },
   "tags": {
     "HEX": {
+      "profile": "temple_city",
       "confidence": "high",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+      "note": "Living temple-city: temple_city package; source names the city and its lord (Mazdamundi), not its institutions."
     },
     "ITZ": {
+      "profile": "temple_city",
       "confidence": "high",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+      "note": "Living temple-city: temple_city package; source names the city and its lord (Lord Xltloc), not its institutions."
     },
     "XLA": {
+      "profile": "temple_city",
       "confidence": "medium",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+      "note": "Living temple-city: temple_city package; source names the city and its lord, not its institutions."
     },
     "TLX": {
+      "profile": "temple_city",
       "confidence": "medium",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+      "note": "Living temple-city: temple_city package; source names the city and its lord, not its institutions."
     },
     "PAH": {
+      "profile": "ruined_temple_city",
       "confidence": "medium",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
+      "note": "Pahuax, a fallen temple-city: ruined_temple_city package (priests and Saurus remnant, no schools)."
     },
     "SKG": {
       "profile": "norse_colony",
-      "confidence": "medium"
+      "confidence": "medium",
+      "ruling_igs": [
+        "ig_armed_forces",
+        "ig_petty_bourgeoisie"
+      ],
+      "suggested_ig_names": {
+        "ig_armed_forces": "Jakkers",
+        "ig_petty_bourgeoisie": "Traders"
+      },
+      "justify": {
+        "ruling_igs": {
+          "source": "inferred (scope decision 2026-11-06, #10182; not re-verified against WFRP Lustria)",
+          "why": "Skeggi is a trading and raiding foothold, not a landed jarldom: its armed Jakkers and its traders rule, where the Norse package puts landowners."
+        },
+        "suggested_ig_names": {
+          "source": "inferred (scope decision 2026-11-06, #10182; not re-verified against WFRP Lustria)",
+          "why": "Setting names for the two ruling groups; note only, no loc is authored from it."
+        }
+      }
     },
     "PST": {
       "profile": "skaven_placeholder",
       "confidence": "low",
-      "note": "Clan Pestilens remnant: provisional (#10181); #10182 sets laws."
+      "note": "Clan Pestilens remnant: skaven_placeholder package with priest-rule.",
+      "laws": {
+        "lawgroup_governance_principles": "law_theocracy"
+      },
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: WFB 8e Skaven army book (Clan Pestilens is a plague cult led by its Plague Priests and Plague Furnace)",
+          "why": "Pestilens is a cult-clan, ruled by its priests rather than a warlord's monarchy; the armed forces and devout already rule in the profile."
+        }
+      }
     },
     "VCO": {
       "profile": "vampire_lord",
-      "confidence": "low",
-      "note": "Harkon's Vampire Coast: provisional (#10181); #10182 sets laws."
+      "confidence": "medium",
+      "note": "Luthor Harkon's Vampire Coast: vampire_lord package unchanged. Harkon captured the Dreadfleet's flagship in 2471 IC (8e) and is active by 2524; his rule at 2502 is inferred, hence medium."
     },
     "AMZ": {
       "profile": "wood_elf_realm",
       "confidence": "low",
-      "note": "Amazon island realm: provisional (#10181); #10182 sets laws."
-    },
-    "TLC": {
-      "profile": "crusader_holding",
-      "confidence": "low",
-      "note": "Tilean colony Nuevo Luccini: provisional (#10181); #10182 sets laws.",
-      "taxed_goods": [
-        "grain"
+      "note": "Amazon island realm: wood_elf_realm package with priest-rule and a warrior bloc.",
+      "laws": {
+        "lawgroup_governance_principles": "law_theocracy"
+      },
+      "ruling_igs": [
+        "ig_devout",
+        "ig_armed_forces"
       ],
+      "suggested_ig_names": {
+        "ig_devout": "Amazon Priestesses",
+        "ig_armed_forces": "Amazon Warriors"
+      },
       "justify": {
-        "taxed_goods": {
-          "source": "validate_taxed_goods.py (#10181)",
-          "why": "The profile taxes coffee, but the colony has no coffee plantation; its subsistence farm and maize land produce grain, so grain is taxed."
+        "laws.lawgroup_governance_principles": {
+          "source": "inferred (scope decision 2026-11-06, #10182; Amazon rule by priestesses not re-verified against tabletop print)",
+          "why": "The Amazons are a priestess-led warrior society rather than a Glade Lord's monarchy."
+        },
+        "ruling_igs": {
+          "source": "inferred (scope decision 2026-11-06, #10182)",
+          "why": "Priestesses and warriors rule; the wood elf package's Glade Kin are elven folk the Amazons do not have."
+        },
+        "suggested_ig_names": {
+          "source": "inferred (scope decision 2026-11-06, #10182)",
+          "why": "Setting names for the two ruling groups; note only, no loc is authored from it."
         }
       }
     },
-    "ESC": {
-      "profile": "estalian_kingdom",
+    "TLC": {
+      "profile": "lustrian_colony",
       "confidence": "low",
-      "note": "Estalian colony Santa Magritta: provisional (#10181); #10182 sets laws."
+      "note": "Tilean colony Nuevo Luccini: lustrian_colony package (a captain-ruled pirate port)."
+    },
+    "ESC": {
+      "profile": "lustrian_colony",
+      "confidence": "medium",
+      "note": "Estalian colony Santa Magritta: lustrian_colony package (the Comandante rules, WFRP Lustria p.211)."
     },
     "BRC": {
       "profile": "crusader_holding",
       "confidence": "low",
-      "note": "invented Bretonnian colony: provisional (#10181); #10182 sets laws.",
+      "note": "invented Bretonnian colony: crusader_holding package with a colonial-affairs law.",
+      "laws": {
+        "lawgroup_colonization": "law_frontier_colonization"
+      },
       "taxed_goods": [
         "grain"
       ],
       "justify": {
+        "laws.lawgroup_colonization": {
+          "source": "inferred (Chris, 2026-11-06, #10185: Lustrian colonies must be able to colonize)",
+          "why": "law_frontier_colonization is the colonial-affairs law that lets a colony colonize the neighbouring decentralized holdings; law_no_colonial_affairs blocks it."
+        },
         "taxed_goods": {
           "source": "validate_taxed_goods.py (#10181)",
           "why": "The profile taxes coffee, but the colony has no coffee plantation; its subsistence farm and maize land produce grain, so grain is taxed."
@@ -117,72 +173,27 @@
     "SSD": {
       "profile": "exiled_hold",
       "confidence": "low",
-      "note": "Spine of Sotek Dwarfs (TW-sourced, tier 3): provisional (#10181); #10182 sets laws."
+      "note": "Spine of Sotek Dwarfs (TW-sourced, tier 3): exiled_hold package unchanged."
     },
     "LZA": {
       "confidence": "low",
-      "laws": {
-        "lawgroup_governance_principles": "law_chiefdom"
-      },
-      "justify": {
-        "laws.lawgroup_governance_principles": {
-          "source": "engine: common/scripted_effects/00_political_setup.txt:68-79 (effect_starting_politics_traditional activates law_chiefdom for decentralized countries); common/laws/00_governance_principles.txt:12-25 (law_theocracy cannot be enacted by a decentralized country)",
-          "why": "A decentralized holding has no politics; the engine sets law_chiefdom, and the generator and validator must agree."
-        }
-      },
-      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): provisional (#10181); #10182 sets laws."
+      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): decentralized-holding baseline."
     },
     "LZB": {
       "confidence": "low",
-      "laws": {
-        "lawgroup_governance_principles": "law_chiefdom"
-      },
-      "justify": {
-        "laws.lawgroup_governance_principles": {
-          "source": "engine: common/scripted_effects/00_political_setup.txt:68-79 (effect_starting_politics_traditional activates law_chiefdom for decentralized countries); common/laws/00_governance_principles.txt:12-25 (law_theocracy cannot be enacted by a decentralized country)",
-          "why": "A decentralized holding has no politics; the engine sets law_chiefdom, and the generator and validator must agree."
-        }
-      },
-      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): provisional (#10181); #10182 sets laws."
+      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): decentralized-holding baseline."
     },
     "LZC": {
       "confidence": "low",
-      "laws": {
-        "lawgroup_governance_principles": "law_chiefdom"
-      },
-      "justify": {
-        "laws.lawgroup_governance_principles": {
-          "source": "engine: common/scripted_effects/00_political_setup.txt:68-79 (effect_starting_politics_traditional activates law_chiefdom for decentralized countries); common/laws/00_governance_principles.txt:12-25 (law_theocracy cannot be enacted by a decentralized country)",
-          "why": "A decentralized holding has no politics; the engine sets law_chiefdom, and the generator and validator must agree."
-        }
-      },
-      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): provisional (#10181); #10182 sets laws."
+      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): decentralized-holding baseline."
     },
     "LZD": {
       "confidence": "low",
-      "laws": {
-        "lawgroup_governance_principles": "law_chiefdom"
-      },
-      "justify": {
-        "laws.lawgroup_governance_principles": {
-          "source": "engine: common/scripted_effects/00_political_setup.txt:68-79 (effect_starting_politics_traditional activates law_chiefdom for decentralized countries); common/laws/00_governance_principles.txt:12-25 (law_theocracy cannot be enacted by a decentralized country)",
-          "why": "A decentralized holding has no politics; the engine sets law_chiefdom, and the generator and validator must agree."
-        }
-      },
-      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): provisional (#10181); #10182 sets laws."
+      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): decentralized-holding baseline."
     },
     "LZE": {
       "confidence": "low",
-      "laws": {
-        "lawgroup_governance_principles": "law_chiefdom"
-      },
-      "justify": {
-        "laws.lawgroup_governance_principles": {
-          "source": "engine: common/scripted_effects/00_political_setup.txt:68-79 (effect_starting_politics_traditional activates law_chiefdom for decentralized countries); common/laws/00_governance_principles.txt:12-25 (law_theocracy cannot be enacted by a decentralized country)",
-          "why": "A decentralized holding has no politics; the engine sets law_chiefdom, and the generator and validator must agree."
-        }
-      },
-      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): provisional (#10181); #10182 sets laws."
+      "note": "Decentralized Lizardmen holding, no buildings (generator exclusion, #10181): decentralized-holding baseline."
     }
   }
 }
