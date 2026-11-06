@@ -139,7 +139,8 @@ TAG = {
   states, no legend entry. Never paint it and never rename it into a real polity.
 - **Other decentralized start tags** exist besides `UNO`: `LZA`-`LZE` (Lustria's wild Lizardmen holdings,
   #10181). They are painted and have legend entries, take `law_chiefdom` (the engine's own politics effect
-  does), and get **no buildings**: `building_history.py` leaves decentralized owners out (vanilla
+  does) and a native-conscription level (`native_conscription` in their `country_history` data, emitted as
+  `effect_native_conscription_<N>`; a decentralized tag gets no tax lines, #10182), and get **no buildings**: `building_history.py` leaves decentralized owners out (vanilla
   `has_economy = no`), so they need no `profiles.json` row.
 - **Disclosed stand-in cultures.** When no authored culture fits a tag, use the most honest existing
   one and say in the block comment and the registry row what it does not describe (e.g. `BRK`
