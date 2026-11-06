@@ -262,6 +262,214 @@
      "why": "Lahmian court and thralls."
     }
    ]
+  },
+  "HEX": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "ITZ": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "XLA": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "TLX": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "PAH": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "LZA": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "LZB": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "LZC": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "LZD": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "LZE": {
+   "mix": [
+    {
+     "culture": "lizardmen",
+     "share": 100,
+     "source": "canon: Lizardmen temple-cities (WFB Lizardmen); species split deferred to #8465",
+     "why": "Lizardmen population until the species split (#8465)."
+    }
+   ]
+  },
+  "PST": {
+   "mix": [
+    {
+     "culture": "skaven",
+     "share": 70,
+     "source": "canon: Skaven keep their own kind as slaves (WFB Skaven)",
+     "why": "Free clanrats."
+    },
+    {
+     "culture": "skaven",
+     "share": 30,
+     "pop_type": "slaves",
+     "source": "canon: Skaven keep their own kind as slaves (WFB Skaven)",
+     "why": "Skaven slave-rats."
+    }
+   ]
+  },
+  "VCO": {
+   "mix": [
+    {
+     "culture": "vampire_coast",
+     "share": 85,
+     "source": "canon: Vampire Coast crews (WFB Vampire Coast)",
+     "why": "Free crews and settlers."
+    },
+    {
+     "culture": "estalian",
+     "share": 15,
+     "pop_type": "slaves",
+     "source": "invented: no canon figure (#10183)",
+     "why": "Captured Old World sailors under law_debt_slavery."
+    }
+   ]
+  },
+  "SKG": {
+   "mix": [
+    {
+     "culture": "norscan",
+     "share": 90,
+     "source": "canon: Skaggi are Norse raiders on the Lustrian coast (WFB Norse)",
+     "why": "Free Norse raiders and settlers."
+    },
+    {
+     "culture": "estalian",
+     "share": 5,
+     "pop_type": "slaves",
+     "source": "invented: no canon figure (#10183)",
+     "why": "Captured colonists (Chris, 2026-11-06)."
+    },
+    {
+     "culture": "lizardmen",
+     "share": 5,
+     "pop_type": "slaves",
+     "source": "invented: no canon figure (#10183)",
+     "why": "Captured Lizardmen (Chris, 2026-11-06)."
+    }
+   ]
+  },
+  "AMZ": {
+   "mix": [
+    {
+     "culture": "amazon",
+     "share": 100,
+     "source": "canon: the Amazons of the southern jungle (WFB Amazons)",
+     "why": "Amazon population."
+    }
+   ]
+  },
+  "ESC": {
+   "mix": [
+    {
+     "culture": "estalian",
+     "share": 100,
+     "source": "canon: Old World colonists in Lustria (WFB Lustria)",
+     "why": "Colonist culture of the owning realm."
+    }
+   ]
+  },
+  "TLC": {
+   "mix": [
+    {
+     "culture": "tilean",
+     "share": 100,
+     "source": "canon: Old World colonists in Lustria (WFB Lustria)",
+     "why": "Colonist culture of the owning realm."
+    }
+   ]
+  },
+  "BRC": {
+   "mix": [
+    {
+     "culture": "bretonnian",
+     "share": 100,
+     "source": "canon: Old World colonists in Lustria (WFB Lustria)",
+     "why": "Colonist culture of the owning realm."
+    }
+   ]
+  },
+  "SSD": {
+   "mix": [
+    {
+     "culture": "dawi",
+     "share": 100,
+     "source": "canon: Dwarf colony in Lustria (WFB Dwarfs)",
+     "why": "Dwarf settlers."
+    }
+   ]
   }
  },
  "states": [

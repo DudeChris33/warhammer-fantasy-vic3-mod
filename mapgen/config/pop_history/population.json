@@ -863,112 +863,112 @@
    "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
   },
   "HEX": {
-   "wealth": "low",
-   "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "ITZ": {
-   "wealth": "low",
-   "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "wealth": "medium",
+   "literacy": "middling",
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "XLA": {
    "wealth": "low",
-   "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "literacy": "middling",
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "TLX": {
    "wealth": "low",
-   "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "literacy": "middling",
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "PAH": {
    "wealth": "low",
    "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "PST": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "VCO": {
    "wealth": "low",
    "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "SKG": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "AMZ": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "TLC": {
    "wealth": "medium",
    "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "ESC": {
    "wealth": "medium",
    "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "BRC": {
    "wealth": "medium",
    "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "SSD": {
    "wealth": "low",
    "literacy": "low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "LZA": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "LZB": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "LZC": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "LZD": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   },
   "LZE": {
    "wealth": "low",
    "literacy": "very_low",
-   "source": "invented: provisional (#10181) until #10183",
-   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+   "source": "inferred: canon rank (#10183); canon gives no figures",
+   "why": "Hexoatl and Itza keep scribes and priests (middling); other jungle holdings low; Skaven, Amazon, Norse and lesser temple societies little schooling; colonies medium wealth, low literacy."
   }
  },
  "groups": [
