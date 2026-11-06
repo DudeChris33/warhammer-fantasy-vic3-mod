@@ -375,6 +375,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | land_sea_mask.png | 8192x3616 | 260,579 | 1834efba0d602c4b8a7427ced724c37ccd9772f99083ac44c557b5216aa5b775 | PNG export of `land_sea_mask.xcf`, now under `oldworld-first/` | The real land/sea mask in use — binarized first via `binarize_cyan_mask.py`; the `coastline_fill` `source_layers.json` ref (board #5399) | no |
 | land_sea_mask.xcf | n/a | 901,276 | 08a6327878c0513d2157fbc1cc976ff63a8fa2a969e9f322a0203cb480c7d886 | GIMP editable master | Editable master of `land_sea_mask.png`; not read directly by any tool | no |
 | lustria_1.jpg | 2362x3271 | 1,059,627 | 2eac6ae87ada14619b4fcc285a00dd7247c47fa6c832d6fe2551bf122133097a | TBD | TBD | no |
+| lustria_2.jpg | 753x1200 | 444,362 | cfda0978b95b1b7ed0aae35bf26efb2820622c457af2063b481d05f7576ce0d0 | TBD | TBD | no |
 | mega_detailed_old_world.jpg | n/a | 385,900,884 | 99b89752c24766a968cd4023a6450aa75bb34a3b01ac6ee6bcda3a698b7c7906 | Internet find | Primarily Old World town and forest placement; secondarily other Old World features | no |
 | naggaroth_1.png | 2378x3166 | 11,505,584 | 0e44e34913a54852318400a1ed60591d1a422df29d8390fadefdfcb8bbb497ff | TBD | TBD | no |
 | naggaroth_2.png | 1589x2267 | 2,339,450 | d27ab99b6d467e3adabf0ead64db4618510d6b56189d026411c926c1fb4ee885 | TBD | TBD | no |
@@ -387,8 +388,8 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | old_world_map - full.xcf | n/a | 16,393,362 | c4adac9c16213237c60fa1134474631c595639bdd479eb4f5a0c8b922c8d74c4 | GIMP editable master | Editable master of `old_world_map - full.ora` | no |
 | old_world_map - stretched.xcf | n/a | 16,453,660 | 8fe1a631ce7d59306514f7733a092a1e2f8c1f56fe57ee91362d34da2fc2d662 | GIMP editable master | Editable master of the `old_world_map - stretched.png` working copy `render_old_world_map_overlay.py --source` can drape | no |
 | old_world_map.xcf | n/a | 33,101,805 | 60f1e3e88d6660fa7989e2c0f726584b6093ba599d79735ec76efd029530f421 | GIMP editable master | Editable master, predecessor of `old_world_map - full.xcf`/`- stretched.xcf` — inferred from filename, Chris to confirm/correct | no |
-| old_world_mod_political.png | 4384x4363 | 8,228,277 | 1c63357d4f3730b07f79852afb3bce1739cb8ddcb162f43d6ac851b12016e3ca | TBD | TBD | no |
-| old_world_political.jpg | 927x862 | 155,847 | 753558933d03910b8e5081183371955728020fa669adfc90c13f3a4d6b677993 | TBD | TBD | no |
+| old_world_mod_political_1.png | 4384x4363 | 8,228,277 | 1c63357d4f3730b07f79852afb3bce1739cb8ddcb162f43d6ac851b12016e3ca | TBD | TBD | no |
+| old_world_political_2.jpg | 927x862 | 155,847 | 753558933d03910b8e5081183371955728020fa669adfc90c13f3a4d6b677993 | TBD | TBD | no |
 | old_world_z10 - grayscale.png | 6658x9824 | 70,851,835 | c2b19d3cd0ce5c0551f9c628f17160ea9dc1cf03eec23320549758be1f43a095 | Grayscale copy of `old_world_z10.png` | Same role as `old_world_z10.png`, in grayscale | no |
 | old_world_z10 - grayscale_dots.png | 6658x9824 | 70,851,835 | c2b19d3cd0ce5c0551f9c628f17160ea9dc1cf03eec23320549758be1f43a095 | Dot-marked derivative of `old_world_z10 - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | old_world_z10 - grayscale_dots.xcf | n/a | 185,840,861 | ba1ccd86e97db14d324be589b20548e3c09648316de5f2bf1219e63348cade88 | TBD | TBD | no |
@@ -403,7 +404,7 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | terraqueous_globe_reprojected - dots_7.xcf | n/a | 164,259,326 | 3d4af433759570c24695c6c020379cd3c138bb8f629821ead461e11f0cf2e55d | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Editable master of the dots_7.png export above | no |
 | terraqueous_globe_reprojected - full.ora | 8192x3616 | 96,211,382 | 8a0df851b8f994bb40696504969e69b20301cb9bbcffedb7ff8d9beb77063826 | GIMP OpenRaster export of `terraqueous_globe_reprojected - full.xcf` | The canvas master (board #5399): layers `coasts`/`rivers`/`cities`/`borders`/`impassable`/`sea_zones`/`canvas`, read by name via `mapgen/config/source_layers.json` | no |
 | terraqueous_globe_reprojected - full.png | 8192x3616 | 33,453,057 | 070ad9583e7be75efb8bd88181636e7d482b89692c8974679009fb1efe04066b | TBD | TBD | no |
-| terraqueous_globe_reprojected - full.xcf | n/a | 111,659,903 | eefb03460d74d4892177d5c4a8548ca5b2a9689a06e279e463d9dcc1ceaf042c | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
+| terraqueous_globe_reprojected - full.xcf | n/a | 111,660,483 | 42b81ce2c4905ae7bb4e14210a48ae963d6ebf84d8da59d63a491dd49620239a | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
 | terraqueous_globe_reprojected - grayscale.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Grayscale copy of `terraqueous_globe_reprojected.png` | Same role as `terraqueous_globe_reprojected.png`, in grayscale | no |
 | terraqueous_globe_reprojected - grayscale_dots.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Dot-marked derivative of `terraqueous_globe_reprojected - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | terraqueous_globe_reprojected - grayscale_dots.xcf | n/a | 87,438,501 | cf32f13c5a5cd9c9ebd727d5ae6b358e5140a22f35253c2219d3c794b0391316 | TBD | TBD | no |

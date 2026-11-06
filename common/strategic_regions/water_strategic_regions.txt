@@ -474,8 +474,8 @@ region_northern_great_ocean = {
 	states = { STATE_NORTHERN_GREAT_OCEAN }
 }
 
-region_northern_mangrove_coast = {
-	states = { STATE_NORTHERN_MANGROVE_COAST }
+region_northern_mangrove_coast_waters = {
+	states = { STATE_NORTHERN_MANGROVE_COAST_WATERS }
 }
 
 region_northern_shifting_isles = {
@@ -530,8 +530,8 @@ region_river_of_echoes = {
 	states = { STATE_RIVER_OF_ECHOES }
 }
 
-region_scorpion_coast = {
-	states = { STATE_SCORPION_COAST }
+region_scorpion_coast_waters = {
+	states = { STATE_SCORPION_COAST_WATERS }
 }
 
 region_sea_of_blades = {
@@ -718,8 +718,8 @@ region_southern_great_ocean_passage_03 = {
 	states = { STATE_SOUTHERN_GREAT_OCEAN_PASSAGE_03 }
 }
 
-region_southern_mangrove_coast = {
-	states = { STATE_SOUTHERN_MANGROVE_COAST }
+region_southern_mangrove_coast_waters = {
+	states = { STATE_SOUTHERN_MANGROVE_COAST_WATERS }
 }
 
 region_southern_ocean_of_dread = {
@@ -778,8 +778,8 @@ region_sun_island_southern_coast_placeholder = {
 	states = { STATE_SUN_ISLAND_SOUTHERN_COAST_PLACEHOLDER }
 }
 
-region_tarantula_coast = {
-	states = { STATE_TARANTULA_COAST }
+region_tarantula_coast_waters = {
+	states = { STATE_TARANTULA_COAST_WATERS }
 }
 
 region_the_broken_lands = {
@@ -838,8 +838,8 @@ region_urskoy_river = {
 	states = { STATE_URSKOY_RIVER }
 }
 
-region_vampire_coast = {
-	states = { STATE_VAMPIRE_COAST }
+region_vampire_coast_waters = {
+	states = { STATE_VAMPIRE_COAST_WATERS }
 }
 
 region_western_albion_channel = {

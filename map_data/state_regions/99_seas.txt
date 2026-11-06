@@ -667,7 +667,7 @@ STATE_GULF_OF_LUSTRIA = {
 	provinces = { x86229F }
 }
 
-STATE_SCORPION_COAST = {
+STATE_SCORPION_COAST_WATERS = {
 	id = 3131
 	provinces = { xC29191 }
 }
@@ -702,7 +702,7 @@ STATE_SEA_OF_WEIRD_WAVES_03 = {
 	provinces = { x3B6F75 }
 }
 
-STATE_TARANTULA_COAST = {
+STATE_TARANTULA_COAST_WATERS = {
 	id = 3136
 	provinces = { xD9A6EE }
 }
@@ -773,7 +773,7 @@ STATE_GREAT_OCEAN_03 = {
 	provinces = { x1EE705 }
 }
 
-STATE_VAMPIRE_COAST = {
+STATE_VAMPIRE_COAST_WATERS = {
 	id = 3152
 	provinces = { xBD1E7E }
 }
@@ -900,7 +900,7 @@ STATE_JADE_SEA_07 = {
 	provinces = { x9251D6 }
 }
 
-STATE_NORTHERN_MANGROVE_COAST = {
+STATE_NORTHERN_MANGROVE_COAST_WATERS = {
 	id = 3177
 	provinces = { x30894F }
 }
@@ -991,7 +991,7 @@ STATE_FAR_OCEAN_08 = {
 	provinces = { xB23858 }
 }
 
-STATE_SOUTHERN_MANGROVE_COAST = {
+STATE_SOUTHERN_MANGROVE_COAST_WATERS = {
 	id = 3195
 	provinces = { x506FD1 }
 }
