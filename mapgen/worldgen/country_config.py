@@ -21,12 +21,14 @@ GOVERNANCE_GROUP = "lawgroup_governance_principles"
 CHIEFDOM = "law_chiefdom"
 TRADE_GROUP = "lawgroup_trade_policy"
 ISOLATIONISM = "law_isolationism"
+COLONIZATION_GROUP = "lawgroup_colonization"
+NO_COLONIAL_AFFAIRS = "law_no_colonial_affairs"
 
 
 PROFILES_FILE = "profiles.json"
 #: Package fields other than ``laws`` (which merge per law group); a tag value replaces the whole field.
 DIRECT_FIELDS = ("ruling_igs", "tax_level", "taxed_goods", "tariffs", "institutions", "next_election",
-                 "suggested_ig_names")
+                 "suggested_ig_names", "native_conscription")
 
 
 class ConfigError(ValueError):
@@ -105,11 +107,21 @@ def starting_budget(resolved: dict[str, Resolved]) -> dict[str, tuple[str, list[
             for tag, r in sorted(resolved.items()) if "tax_level" in r.package}
 
 
+def starting_conscription(resolved: dict[str, Resolved]) -> dict[str, int]:
+    """``{tag: N}`` for the tags whose package sets ``native_conscription``: the generator emits
+    ``effect_native_conscription_<N>`` for them. Only a decentralized country may carry one (the effect is
+    guarded by ``is_country_type = decentralized``); ``country_history.plan`` and the validator enforce it."""
+    return {tag: r.package["native_conscription"] for tag, r in sorted(resolved.items())
+            if "native_conscription" in r.package}
+
+
 def starting_laws(resolved: dict[str, Resolved]) -> dict[str, list[str]]:
     """``{tag: [law id, ...]}`` the generator activates after the politics effect: the slavery law
     (#9028) and, for a tag whose governance principle resolves to ``law_chiefdom``, that law (#9037;
     the rest of the governance group waits for #6638) and, for a tag whose trade policy resolves to
-    ``law_isolationism``, that law (#9035: closed markets come from the data, not from missing tech)."""
+    ``law_isolationism``, that law (#9035: closed markets come from the data, not from missing tech) and, for a
+    tag whose colonization law is not ``law_no_colonial_affairs``, that law (#10182: a colony must be able to
+    colonize, and the group's default blocks it)."""
     out: dict[str, list[str]] = {}
     for tag in sorted(resolved):
         laws = [slavery_law(resolved, tag)]
@@ -117,5 +129,8 @@ def starting_laws(resolved: dict[str, Resolved]) -> dict[str, list[str]]:
             laws.append(CHIEFDOM)
         if resolved[tag].laws.get(TRADE_GROUP) == ISOLATIONISM:
             laws.append(ISOLATIONISM)
+        colonial = resolved[tag].laws.get(COLONIZATION_GROUP)
+        if colonial not in (None, NO_COLONIAL_AFFAIRS):
+            laws.append(colonial)
         out[tag] = laws
     return out

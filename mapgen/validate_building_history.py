@@ -167,8 +167,8 @@ def _run(body: str, ctype, techs: set, laws: dict, effects, law_group, stack=())
         was, prev = prev, None
         if key == "add_technology_researched" and kind == "=":
             techs.add(val)
-        elif key == "add_era_researched" or key in ("set_tax_level", "add_taxed_goods"):
-            pass
+        elif key == "add_era_researched" or key in ("set_tax_level", "add_taxed_goods", "add_modifier"):
+            pass   # effect_native_conscription_N adds a modifier; no effect on techs or laws
         elif key == "activate_law" and kind == "=" and val.startswith("law_type:"):
             law = val.split(":", 1)[1]
             laws[law_group.get(law, law)] = law

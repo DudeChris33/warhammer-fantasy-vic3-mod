@@ -28,7 +28,11 @@ Hard errors (exit 1):
 * laws for which no government type matches (see below);
 * a non-default choice with no ``source`` / ``why`` (a ``profile`` carries one for its whole
   bundle), or a justification with nothing to justify;
-* a malformed ``next_election`` (or one that disagrees with whether the laws hold elections).
+* a malformed ``next_election`` (or one that disagrees with whether the laws hold elections);
+* a ``native_conscription`` that is not an integer 1-12 naming an ``effect_native_conscription_N`` in
+  ``common/scripted_effects``, one on an owner whose country definition is not ``decentralized`` (the effect only
+  acts on decentralized countries), or none on a decentralized owner (#10182: it is the only military setup such a
+  country has, and the generator emits no tax lines for it).
 
 The government type is computed, never written: the first ``common/government_types`` entry, in
 file order, whose ``possible`` passes (the engine's rule), from the laws, the definition's tier and
@@ -183,6 +187,9 @@ class GameData:
             }
 
         self.igs = {k for k, _ in _read_dir(game_root, "common/interest_groups")}
+
+        self.conscription_levels = {int(m.group(1)) for name in ch.load_effect_names(game_root / "common/scripted_effects")
+                                    if (m := re.fullmatch(r"effect_native_conscription_(\d+)", name))}
 
         self.techs: dict[str, dict] = {}
         for key, body in _read_dir(game_root, "common/technology/technologies"):
@@ -508,6 +515,12 @@ def check_package(pkg: dict, game: GameData, where: str,
     for ig in pkg.get("suggested_ig_names", {}):
         if ig not in game.igs:
             err(f"unknown interest group {ig} in suggested_ig_names")
+    if "native_conscription" in pkg:
+        level = pkg["native_conscription"]
+        if isinstance(level, bool) or not isinstance(level, int) or not 1 <= level <= 12:
+            err(f"native_conscription must be an integer 1-12 (got {level!r})")
+        elif level not in game.conscription_levels:
+            err(f"native_conscription {level}: no effect_native_conscription_{level} in common/scripted_effects")
 
     election = pkg.get("next_election")
     if election is not None:
@@ -649,6 +662,12 @@ def validate_region_file(path: Path, game: GameData, registry: dict, inp: Inputs
         errors.extend(f"{where}: {e}" for e in tech_errs)
         warnings.extend(f"{where}: {w}" for w in tech_warns)
         check_package(eff, game, where, errors, warnings, covered=covered, label=label, check_institutions=True)
+        ctype = (game.definitions.get(tag) or {}).get("country_type")
+        if "native_conscription" in eff and ctype is not None and ctype != ch.DECENTRALIZED:
+            errors.append(f"{where}: native_conscription is set but the tag is {ctype}, not decentralized; "
+                          f"the effect only acts on decentralized countries")
+        if "native_conscription" not in eff and ctype == ch.DECENTRALIZED:
+            errors.append(f"{where}: a decentralized owner needs native_conscription (its only military setup)")
 
         # the government type the engine would pick
         if len(eff.get("laws", {})) == len(game.law_groups):

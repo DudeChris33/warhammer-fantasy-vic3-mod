@@ -17,3 +17,8 @@
 | FXH | `01_bad` | Theta | formable | `x` | — | formable given an entry |
 | FXI | `02_bad_baseline` | Iota | start | `x` | — | other region |
 | FXO | `01_bad` | Omicron | start | `x` | — | a law no government type accepts |
+| FXP | `00_test` | Pi | start | `x` | — | decentralized owner with a valid native_conscription |
+| FXQ | `01_bad` | Rho | start | `x` | — | decentralized owner with no native_conscription |
+| FXR | `01_bad` | Sigma | start | `x` | — | native_conscription on a recognized owner |
+| FXS | `01_bad` | Tau | start | `x` | — | native_conscription out of range |
+| FXT | `01_bad` | Upsilon | start | `x` | — | native_conscription with no matching scripted effect |

@@ -8,3 +8,8 @@ FXN = { country_type = unrecognized tier = principality cultures = { reiklander 
 FXL = { country_type = recognized tier = kingdom cultures = { bretonnian } }
 FXO = { country_type = recognized tier = principality cultures = { reiklander } }
 FXJ = { country_type = recognized tier = kingdom cultures = { reiklander } }
+FXP = { country_type = decentralized tier = kingdom cultures = { reiklander } }
+FXQ = { country_type = decentralized tier = kingdom cultures = { reiklander } }
+FXR = { country_type = recognized tier = kingdom cultures = { reiklander } }
+FXS = { country_type = decentralized tier = kingdom cultures = { reiklander } }
+FXT = { country_type = decentralized tier = kingdom cultures = { reiklander } }

@@ -35,7 +35,12 @@ Rules
   neither table covers is an error, never a default. A preset of ``None`` emits
   no technology effect. After the preset, the tag's extras from
   ``mapgen/config/starting_tech_extras.json`` (``add_technology_researched``, one per
-  tech, file order; a tech id missing from ``common/technology`` is an error). Every tag gets
+  tech, file order; a tech id missing from ``common/technology`` is an error). A decentralized tag
+  with a ``native_conscription`` level (``plan(conscription=...)``, #10182) then gets
+  ``effect_native_conscription_<N> = yes``; on any other tag it is an error, because the effect is
+  guarded by ``is_country_type = decentralized`` and would do nothing. A decentralized tag
+  (``plan(country_types=...)``) gets no ``set_tax_level`` or ``add_taxed_goods`` (vanilla's decentralized
+  countries have no economy, so the lines are dead). Every tag gets
   ``effect_starting_politics_traditional``, then the tag's ``laws`` (``plan(laws=...)``, one
   ``activate_law = law_type:<id>`` each, in list order; today only the slavery law, #9028). With
   ``laws`` given, a defined owner with no entry is an error (fail closed); ``UNO`` is the
@@ -126,6 +131,7 @@ TAG_TECH: dict[str, str | None] = {
 POLITICS_EFFECT = "effect_starting_politics_traditional"
 
 _CULTURES = re.compile(r"\bcultures\s*=\s*\{([^}]*)\}")
+_COUNTRY_TYPE = re.compile(r"\bcountry_type\s*=\s*(\w+)")
 _BLOCK = re.compile(r"\bc:(\w+)\s*\?=\s*\{")
 _EFFECT_USE = re.compile(r"\badd_technology_researched\s*=\s*(\w+)|\bactivate_law\s*=\s*law_type:(\w+)"
                          r"|\bset_tax_level\s*=\s*(\w+)|\badd_taxed_goods\s*=\s*g:(\w+)|\b(\w+)\s*=\s*yes\b")
@@ -134,6 +140,8 @@ ADD_TECH = "add_technology_researched"
 ACTIVATE_LAW = "activate_law = law_type:"
 SET_TAX_LEVEL = "set_tax_level = "
 ADD_TAXED_GOODS = "add_taxed_goods = g:"
+CONSCRIPTION_EFFECT = "effect_native_conscription_"
+DECENTRALIZED = "decentralized"
 TAX_LEVELS = ("very_low", "low", "medium", "high", "very_high")
 ISOLATIONISM = "law_isolationism"
 TRADE_GATE_TECH = "international_trade"
@@ -163,6 +171,28 @@ def parse_country_cultures(text: str) -> dict[str, tuple[str, ...]]:
             continue
         cm = _CULTURES.search(body)
         out[m.group(1)] = tuple(cm.group(1).split()) if cm else ()
+    return out
+
+
+def parse_country_types(text: str) -> dict[str, str | None]:
+    """``{tag: country_type}`` for the non-dynamic tags one ``country_definitions`` file defines (same tag
+    rule as :func:`parse_country_cultures`); ``None`` when a tag has no ``country_type``."""
+    text = sh._strip_comments(text.lstrip("﻿"))
+    out: dict[str, str | None] = {}
+    for m in sh._TAG_HEADER.finditer(text):
+        open_idx = text.index("{", m.end() - 1)
+        body = text[open_idx + 1:sh._match_brace(text, open_idx)]
+        if sh._DYNAMIC.search(body):
+            continue
+        tm = _COUNTRY_TYPE.search(body)
+        out[m.group(1)] = tm.group(1) if tm else None
+    return out
+
+
+def load_country_types(country_definitions_dir: Path) -> dict[str, str | None]:
+    out: dict[str, str | None] = {}
+    for path in sorted(Path(country_definitions_dir).glob("*.txt")):
+        out.update(parse_country_types(path.read_text(encoding="utf-8-sig")))
     return out
 
 
@@ -301,9 +331,12 @@ def plan(ownership_doc: dict, cultures: dict[str, tuple[str, ...]],
          laws: dict[str, list[str]] | None = None,
          preset_techs: dict[str, set[str]] | None = None,
          trade_gate: str | None = None,
-         budget: dict[str, tuple[str, list[str]]] | None = None) -> Plan:
+         budget: dict[str, tuple[str, list[str]]] | None = None,
+         country_types: dict[str, str | None] | None = None,
+         conscription: dict[str, int] | None = None) -> Plan:
     """What to emit. Raises :class:`OwnershipError` for a defined owner whose culture
-    has no starting-technology preset, or (when ``laws`` is given) one with no entry in it."""
+    has no starting-technology preset, or (when ``laws`` is given) one with no entry in it, or a
+    ``conscription`` level on a tag that is not decentralized (or when ``country_types`` is not given)."""
     blocks: list[tuple[str, list[str]]] = []
     held: list[str] = []
     for tag in sorted(owner_tags(ownership_doc)):
@@ -325,13 +358,21 @@ def plan(ownership_doc: dict, cultures: dict[str, tuple[str, ...]],
             have = (preset_techs.get(tech, set()) if tech else set()) | set((extras or {}).get(tag, []))
             if trade_gate not in have and ISOLATIONISM not in tag_laws:
                 tag_laws = [*tag_laws, ISOLATIONISM]   # Mercantilism is locked without the gate tech
+        decentralized = (country_types or {}).get(tag) == DECENTRALIZED
+        conscript: list[str] = []
+        if conscription and tag in conscription:
+            if not decentralized:
+                raise OwnershipError(f"c:{tag}: native_conscription is set but the tag is not a decentralized "
+                                     f"country (country_type {(country_types or {}).get(tag)!r}); the effect "
+                                     f"only acts on decentralized countries")
+            conscript = [f"{CONSCRIPTION_EFFECT}{conscription[tag]}"]
         tax: list[str] = []
-        if budget is not None and tag in budget:
+        if budget is not None and tag in budget and not decentralized:
             level, goods = budget[tag]
             if level not in TAX_LEVELS:
                 raise OwnershipError(f"c:{tag}: tax_level {level!r} is not one of {', '.join(TAX_LEVELS)}")
             tax = [f"{SET_TAX_LEVEL}{level}"] + [f"{ADD_TAXED_GOODS}{g}" for g in goods]
-        blocks.append((tag, ([tech] if tech else []) + techs + [POLITICS_EFFECT] + tax
+        blocks.append((tag, ([tech] if tech else []) + techs + conscript + [POLITICS_EFFECT] + tax
                        + [f"{ACTIVATE_LAW}{law}" for law in tag_laws]))
     return Plan(blocks=blocks, held_back=held)
 
@@ -401,12 +442,14 @@ def check(texts: dict[str, str] | None, ownership_doc: dict, cultures: dict[str,
           law_ids: dict[str, str] | None = None,
           preset_techs: dict[str, set[str]] | None = None,
           trade_gate: str | None = None,
-          budget: dict[str, tuple[str, list[str]]] | None = None) -> tuple[list[str], list[str]]:
+          budget: dict[str, tuple[str, list[str]]] | None = None,
+          country_types: dict[str, str | None] | None = None,
+          conscription: dict[str, int] | None = None) -> tuple[list[str], list[str]]:
     """Validate the emitted files (``{file name: text}``). Returns ``(errors, held_back)``;
     ``held_back`` lists JSON owners with no definition (the caller decides whether that is
     an error)."""
     try:
-        p = plan(ownership_doc, cultures, extras, laws, preset_techs, trade_gate, budget)
+        p = plan(ownership_doc, cultures, extras, laws, preset_techs, trade_gate, budget, country_types, conscription)
     except OwnershipError as exc:
         return [str(exc)], []
     if not texts:

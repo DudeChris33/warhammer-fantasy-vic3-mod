@@ -1,0 +1,12 @@
+effect_native_conscription_3 = {
+	if = {
+		limit = { is_country_type = decentralized }
+		add_modifier = { name = native_conscription_3 months = -1 }
+	}
+}
+effect_native_conscription_10 = {
+	if = {
+		limit = { is_country_type = decentralized }
+		add_modifier = { name = native_conscription_10 months = -1 }
+	}
+}

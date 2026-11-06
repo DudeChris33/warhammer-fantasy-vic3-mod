@@ -52,6 +52,21 @@
   },
   "STATE_U": {
    "scope": "placeholder"
+  },
+  "STATE_P": {
+   "owner": "FXP"
+  },
+  "STATE_Q": {
+   "owner": "FXQ"
+  },
+  "STATE_R": {
+   "owner": "FXR"
+  },
+  "STATE_S": {
+   "owner": "FXS"
+  },
+  "STATE_T": {
+   "owner": "FXT"
   }
  }
 }

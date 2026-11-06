@@ -141,6 +141,39 @@
           "why": "a law no government type accepts"
         }
       }
+    },
+    "FXQ": {
+      "confidence": "low"
+    },
+    "FXR": {
+      "confidence": "low",
+      "native_conscription": 10,
+      "justify": {
+        "native_conscription": {
+          "source": "fixture",
+          "why": "misplaced: a recognized owner"
+        }
+      }
+    },
+    "FXS": {
+      "confidence": "low",
+      "native_conscription": 13,
+      "justify": {
+        "native_conscription": {
+          "source": "fixture",
+          "why": "out of range"
+        }
+      }
+    },
+    "FXT": {
+      "confidence": "low",
+      "native_conscription": 11,
+      "justify": {
+        "native_conscription": {
+          "source": "fixture",
+          "why": "no scripted effect for this level"
+        }
+      }
     }
   }
 }

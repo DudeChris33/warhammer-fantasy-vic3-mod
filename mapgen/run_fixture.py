@@ -6611,6 +6611,38 @@ def _selfcheck_country_history(ownership_doc: dict) -> None:
         assert "tax_level" in str(exc), exc
     else:
         raise AssertionError("an unknown tax level must raise")
+    # native conscription (#10182): a decentralized tag gets effect_native_conscription_<N> after its tech extras and
+    # before the politics effect, and no tax lines; on any other tag it is an error; it round-trips and check() reads it back
+    ctypes = {"REI": "recognized", "MID": "recognized", "UNO": "decentralized"}
+    cons = {"UNO": 10}
+    nb = {**budget, "UNO": ("low", ["grain"])}
+    np_ = ch.plan(ownership_doc, tiers, None, laws, None, None, nb, ctypes, cons)
+    assert np_.blocks[2] == ("UNO", ["effect_native_conscription_10", ch.POLITICS_EFFECT,
+                                     "activate_law = law_type:law_slavery_banned"]), np_.blocks[2]
+    assert np_.blocks[1] == bp.blocks[1], "a recognized tag keeps its tax lines"
+    ex_cons = ch.plan(ownership_doc, tiers, {"UNO": ["banking"]}, laws, None, None, nb, ctypes, cons)
+    assert ex_cons.blocks[2][1][:3] == ["add_technology_researched = banking", "effect_native_conscription_10",
+                                        ch.POLITICS_EFFECT], "after the tech extras, before the politics effect"
+    ntexts = ch.render(np_.blocks, names)
+    assert "\t\teffect_native_conscription_10 = yes\n\t\teffect_starting_politics_traditional = yes\n" in ntexts["uno.txt"]
+    ncrlf = {n: "﻿" + t.replace("\n", "\r\n") for n, t in ntexts.items()}
+    assert ch.parse_history_text(ncrlf["uno.txt"]) == [np_.blocks[2]], "the conscription line round-trips"
+    neffects = effects | {"effect_native_conscription_10"}
+    nerrs, _ = ch.check(ncrlf, ownership_doc, tiers, neffects, names, None, None, laws, law_ids, None, None, nb, ctypes, cons)
+    assert nerrs == [], nerrs
+    nerrs, _ = ch.check(btexts, ownership_doc, tiers, neffects, names, None, None, laws, law_ids, None, None, nb, ctypes, cons)
+    assert any("differs from what the generator emits" in e for e in nerrs), "missing conscription / stale tax lines are stale"
+    for bad_cons, bad_types in (({"REI": 10}, ctypes), ({"UNO": 10}, None), ({"UNO": 10}, {**ctypes, "UNO": "recognized"})):
+        try:
+            ch.plan(ownership_doc, tiers, None, laws, None, None, None, bad_types, bad_cons)
+        except so.OwnershipError as exc:
+            assert "native_conscription" in str(exc), exc
+        else:
+            raise AssertionError("native_conscription on a tag that is not decentralized must raise")
+    assert ch.parse_country_types("﻿REI = {\n\tcountry_type = recognized\n}\nXXX = {\n}\nD00 = {\n"
+                                  "\tdynamic_country_definition = yes\n\tcountry_type = decentralized\n}\n"
+                                  "UNO = {\n\tcountry_type = decentralized\n}\n") \
+        == {"REI": "recognized", "XXX": None, "UNO": "decentralized"}
     _selfcheck_taxed_goods()
     _selfcheck_country_config()
 
@@ -6685,6 +6717,18 @@ def _selfcheck_country_config() -> None:
         (d / "03_c.json").write_text(json.dumps({"baseline": {"laws": {"lawgroup_trade_policy": "law_isolationism"}},
                                                   "tags": {"EEE": {}}}), encoding="utf-8")
         assert cc.starting_laws(cc.load_resolved(d))["EEE"] == ["law_slavery_banned", "law_isolationism"]
+        # #10182: native_conscription is a direct field (a tag value replaces the profile's), and a colonization law
+        # other than law_no_colonial_affairs is emitted after the others
+        (d / "04_d.json").write_text(json.dumps({"baseline": {"laws": {"lawgroup_colonization": "law_no_colonial_affairs"},
+                                                               "native_conscription": 10},
+                                                  "tags": {"FFF": {}, "GGG": {"native_conscription": 3},
+                                                           "HHH": {"laws": {"lawgroup_colonization": "law_frontier_colonization"}}}}),
+                                     encoding="utf-8")
+        r4 = cc.load_resolved(d)
+        assert cc.starting_conscription(r4) == {"FFF": 10, "GGG": 3, "HHH": 10}, cc.starting_conscription(r4)
+        assert "native_conscription" not in r4["EEE"].package and "EEE" not in cc.starting_conscription(r4)
+        assert cc.starting_laws(r4)["FFF"] == ["law_slavery_banned"], "the default colonization law is not emitted"
+        assert cc.starting_laws(r4)["HHH"] == ["law_slavery_banned", "law_frontier_colonization"]
         # a shared profile is a full package: it skips the region baseline (law_a) and reads the same in any region
         assert [r[t].laws["lawgroup_taxation"] for t in ("AAA", "BBB", "CCC")] == ["law_a", "law_t", "law_t"], r
         assert cc.slavery_law(r, "ZZZ") == cc.SLAVERY_BANNED
@@ -6706,6 +6750,8 @@ COUNTRY_HISTORY_NEEDLES = (
     "repeats the baseline", "unknown field", "unknown profile", "confidence must be",
     "tech not evaluable", "unknown tech tech_zzz in starting_tech_extras.json",
     "is a formable; starting_tech_extras.json keys only start tags",
+    "native_conscription must be an integer 1-12", "no effect_native_conscription_11",
+    "native_conscription is set but the tag is recognized", "a decentralized owner needs native_conscription",
 )
 
 
@@ -6754,12 +6800,13 @@ def check_country_history() -> int:
             "FXC": None,                  # no definition: the tier trigger cannot be decided
             "FXE": "gov_protected",       # a protectorate in common/history/diplomacy
             "FXM": "gov_tribal", "FXN": "gov_scripted",
+            "FXP": "gov_kingdom",         # a decentralized owner with native_conscription (#10182) is a plain tag otherwise
             "FXO": None}                  # no entry passes: an error
     if {t: picked.get(t) for t in want} != want:
         print(f"country_history: computed government types are {picked}, expected {want}", file=sys.stderr)
         return 1
     good_code, good_report = _country_history_run(["00_test.json"])
-    if good_code != 0 or "OK 00_test.json: 4 tag(s)" not in good_report:
+    if good_code != 0 or "OK 00_test.json: 5 tag(s)" not in good_report:
         print("country_history: the valid fixture region file was rejected:\n" + good_report, file=sys.stderr)
         return 1
     expected = COUNTRY_HISTORY_EXPECTED.read_text(encoding="utf-8")

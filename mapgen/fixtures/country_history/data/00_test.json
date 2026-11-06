@@ -55,6 +55,16 @@
     },
     "FXM": {
       "confidence": "high"
+    },
+    "FXP": {
+      "confidence": "high",
+      "native_conscription": 10,
+      "justify": {
+        "native_conscription": {
+          "source": "fixture",
+          "why": "the decentralized path: a valid level on a decentralized owner"
+        }
+      }
     }
   }
 }
