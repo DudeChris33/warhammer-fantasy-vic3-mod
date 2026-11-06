@@ -51,46 +51,20 @@
       "confidence": "medium",
       "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
     },
-    "CHU": {
-      "profile": "ruined_temple_city",
-      "confidence": "low",
-      "note": "Ruined, defiled or refounding city per the registry notes."
-    },
-    "HEX": {
-      "confidence": "high",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
-    },
     "HUA": {
       "profile": "ruined_temple_city",
       "confidence": "low",
       "note": "Ruined, defiled or refounding city per the registry notes."
-    },
-    "ITZ": {
-      "confidence": "high",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
-    },
-    "KON": {
-      "profile": "ruined_temple_city",
-      "confidence": "low",
-      "note": "Lizardmen tag, not present at the 2502 start (Konquata's building begins 2520 IC, in Albion; Lexicanum, fan wiki; book source not checked); releasable later. Dormant, like the fallen Dwarf holds."
     },
     "OYX": {
       "profile": "ruined_temple_city",
       "confidence": "low",
       "note": "Ruined, defiled or refounding city per the registry notes."
     },
-    "PAH": {
-      "confidence": "medium",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
-    },
     "QTZ": {
       "profile": "ruined_temple_city",
       "confidence": "low",
       "note": "Defiled by Clan Pestilens; no Skaven-controlled ruling package is modelled."
-    },
-    "SKG": {
-      "profile": "norse_colony",
-      "confidence": "medium"
     },
     "SPZ": {
       "profile": "ruined_temple_city",
@@ -102,25 +76,12 @@
       "confidence": "low",
       "note": "Ruined, defiled or refounding city per the registry notes."
     },
-    "TLN": {
-      "profile": "ruined_temple_city",
-      "confidence": "low",
-      "note": "Ruined, defiled or refounding city per the registry notes."
-    },
-    "TLX": {
-      "confidence": "medium",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
-    },
     "XAH": {
       "profile": "ruined_temple_city",
       "confidence": "low",
       "note": "Ruined, defiled or refounding city per the registry notes."
     },
     "XHO": {
-      "confidence": "medium",
-      "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
-    },
-    "XLA": {
       "confidence": "medium",
       "note": "Living temple-city: Lizardmen baseline unchanged; source names the city and its lord, not its institutions."
     }

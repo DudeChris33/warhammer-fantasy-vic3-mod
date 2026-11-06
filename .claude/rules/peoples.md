@@ -137,6 +137,10 @@ TAG = {
   `generate_state_history.py` (#6391). `common/country_definitions/98_unclaimed.txt`,
   `principality`, `goblin` as a disclosed stand-in culture, no capital, no homelands in its
   states, no legend entry. Never paint it and never rename it into a real polity.
+- **Other decentralized start tags** exist besides `UNO`: `LZA`-`LZE` (Lustria's wild Lizardmen holdings,
+  #10181). They are painted and have legend entries, take `law_chiefdom` (the engine's own politics effect
+  does), and get **no buildings**: `building_history.py` leaves decentralized owners out (vanilla
+  `has_economy = no`), so they need no `profiles.json` row.
 - **Disclosed stand-in cultures.** When no authored culture fits a tag, use the most honest existing
   one and say in the block comment and the registry row what it does not describe (e.g. `BRK`
   `norscan` for a Chaos garrison, `VMP` `sylvanian_vampire` for Kemmler's non-vampire host). Do not
@@ -168,6 +172,7 @@ TAG = {
   - `04_karaz_ankor.txt`, `10_dark_lands.txt` — done (#3660).
   - `05_southern_realms.txt`, `06_badlands.txt`, `07_nehekhara.txt` — done (#3661).
   - `17_ulthuan.txt` — done (#8444).
+  - `19_lustria.txt` — done (#10181).
   - `11_ogre_kingdoms.txt` — pending. `98_unclaimed.txt` (`UNO`) has no capital by design, and
     `99_dynamic.txt` holds the dynamic slots.
 

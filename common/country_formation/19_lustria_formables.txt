@@ -1,0 +1,20 @@
+﻿# Country formation - Lustria. Board item #10181 (epic #10176).
+# ONE formable in this region: LUS, the Old Ones' dominion united under a Slann-ruled realm.
+# Every other 19_lustria tag is a start tag. Shape copied from 17_ulthuan_formables.txt (minor/culture).
+# Triggers used (confirmed in docs/triggers.log, country scope): is_country_type, country_has_primary_culture.
+# Open: only HEX is recognized at start. Lustria's homelands are [] until #10180, so use_culture_states
+# may never reach the fraction, and whether it counts homelands or owned states is unverified: checked in
+# game (#10181 step 8). Likelier outcome is "never" rather than "day 1".
+
+################ LUS - Lustria ################
+
+LUS = {
+	use_culture_states = yes
+	required_states_fraction = 0.75
+	ai_will_do = { always = yes }
+
+	possible = {
+		is_country_type = recognized
+		country_has_primary_culture = cu:lizardmen
+	}
+}

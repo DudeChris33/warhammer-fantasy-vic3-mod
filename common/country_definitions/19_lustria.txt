@@ -1,0 +1,292 @@
+﻿# Country tags - Lustria: the temple-cities, the colonies and the wild Lizardmen holdings.
+# Board item #10181 (epic #10176); roster in planning/tag_registry.md, region "19 LUSTRIA".
+#
+# Entry schema and capital convention: see .claude/rules/peoples.md and common/country_definitions/17_ulthuan.txt.
+# COLOUR NOTE: every colour copies EXACTLY from mapgen/config/state_ownership_legend.json. LUS, the
+# formable, is not painted and takes a darker shade of ITZ's.
+# DORMANT tags (XAH QTZ CHQ HUA OYX XHO AXL SPZ TLA) own nothing at start and keep their canon seat
+# (C1, whoever owns that state). TLN KON CHU are reserved: no definition.
+# LZA-LZE are decentralized holdings (colonizable, no economy, law_chiefdom, no buildings).
+# SSD is TW-sourced (tier 3), kept at Chris's call 2026-11-06.
+# The `lizardmen` culture may be split by #10188; the cultures lines and the formable then change there.
+# Names: localization/english/countries_19_lustria_l_english.yml (AMZ XHO KON in localization/replace/).
+
+################ LUS - Lustria; the Old Ones' dominion united ################
+
+LUS = {
+	color = { 0 134 139 }
+	country_type = recognized
+	tier = empire
+	cultures = { lizardmen }
+	capital = STATE_ITZA # Itza, ITZ's capital
+}
+
+################ HEX - Hexoatl; City of the Sun, the northern isthmus power (8e Lizardmen book, via Lexicanum) ################
+
+HEX = {
+	color = { 0 217 195 }
+	country_type = recognized
+	tier = kingdom
+	cultures = { lizardmen }
+	capital = STATE_FLOATING_PYRAMID # non-canon: largest owned state; Hexoatl lies north of the drawn map (#10178)
+}
+
+################ ITZ - Itza; the First City, home of Lord Kroak ################
+
+ITZ = {
+	color = { 0 192 199 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_ITZA # Itza
+}
+
+################ XLA - Xlanhuapec; City of Mists, also holds Huatl's land while it is rebuilt (loremaster 2026-11-05) ################
+
+XLA = {
+	color = { 0 217 157 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_XLANHUAPEC # Xlanhuapec
+}
+
+################ TLX - Tlaxtlan; City of the Moon ################
+
+TLX = {
+	color = { 15 162 134 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_TLAXTLAN # Tlaxtlan
+}
+
+################ PAH - Pahuax; City of Ash, lost and refounded six times ################
+
+PAH = {
+	color = { 0 217 118 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_PAHUAX # Pahuax
+}
+
+################ SKG - Skeggi; Norscan colony founded 888 IC (WD 309) ################
+
+SKG = {
+	color = { 123 165 178 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { norscan }
+	capital = STATE_BITING_BOGS # Skeggi; seat inferred: no named hub
+}
+
+################ PST - Clan Pestilens; a plague-cult foothold after the beaten 2489 IC return. A design choice against canon (Chris, #10177), not Quetza's pyramids ################
+
+PST = {
+	color = { 92 115 89 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { skaven }
+	capital = STATE_ITZA # Quetza's hub, held by ITZ at start
+}
+
+################ VCO - Vampire Coast; Harkon's coast, New Bechafen (WFRP Lustria pp. 64-68, via Lexicanum) ################
+
+VCO = {
+	color = { 11 56 46 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { vampire_coast }
+	capital = STATE_VAMPIRE_COAST # New Bechafen; seat inferred: no named hub
+}
+
+################ AMZ - Amazons; the sisterhood on islands off Tlaxtlan (Lexicanum) ################
+
+AMZ = {
+	color = { 124 87 35 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { amazon }
+	capital = STATE_DRAGON_ISLES # seat inferred: no named hub
+}
+
+################ TLC - Nuevo Luccini; Tilean pirate port on the Cactus Coast (Town Cryer 15, via Lexicanum) ################
+
+TLC = {
+	color = { 128 99 57 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { tilean }
+	capital = STATE_CACTUS_COAST # Nuevo Luccini
+}
+
+################ ESC - Santa Magritta; Estalian settlement on Columbo's Island (Town Cryer 15, via Lexicanum) ################
+
+ESC = {
+	color = { 102 49 41 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { estalian }
+	capital = STATE_VOLCANIC_ISLANDS # Columbo's Island; seat inferred: no named hub
+}
+
+################ BRC - Bretonnian Colony; invented tier, no Lexicanum settlement ################
+
+BRC = {
+	color = { 81 40 81 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { bretonnian }
+	capital = STATE_FORGOTTEN_ISLES # non-canon: largest owned state
+}
+
+################ SSD - Spine of Sotek Dwarfs; TW-sourced minor faction (Hugrim Redaxe), no tabletop hold: WFRP4e has only the Mine of the Bearded Skulls and an unlaunched expedition. Tier 3, kept at Chris's call 2026-11-06 ################
+
+SSD = {
+	color = { 115 81 63 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { dawi }
+	capital = STATE_MINE_OF_THE_BEARDED_SKULLS # the Mine of the Bearded Skulls (TW province capital)
+}
+
+################ LZA - Skinks of the Northern Coasts; decentralized Lizardmen holding, invented name over canon regions ################
+
+LZA = {
+	color = { 159 166 66 }
+	country_type = decentralized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_SCORPION_COAST # non-canon: largest owned state
+}
+
+################ LZB - Skinks of the Malliente Swamps; decentralized Lizardmen holding ################
+
+LZB = {
+	color = { 150 166 108 }
+	country_type = decentralized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_HUALOTAL # non-canon: largest owned state
+}
+
+################ LZC - Skinks of the Spine of Sotek; decentralized Lizardmen holding ################
+
+LZC = {
+	color = { 111 106 56 }
+	country_type = decentralized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_DUST_GATE # non-canon: largest owned state
+}
+
+################ LZD - Skinks of the Culchan Plains; decentralized Lizardmen holding ################
+
+LZD = {
+	color = { 117 157 78 }
+	country_type = decentralized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_CULCHAN_PLAINS # non-canon: largest owned state
+}
+
+################ LZE - Skinks of the Lambada; decentralized Lizardmen holding ################
+
+LZE = {
+	color = { 166 157 66 }
+	country_type = decentralized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_NORTHERN_MANGROVE_COAST # non-canon: largest owned state
+}
+
+################ XAH - Xahutec; City of Echoes. Dormant: owns nothing at start ################
+
+XAH = {
+	color = { 0 144 91 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_XAHUTEC # Xahutec
+}
+
+################ QTZ - Quetza; diseased ruin. Dormant ################
+
+QTZ = {
+	color = { 0 107 59 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_ITZA # Quetza's hub lies in Itza's state (#10178)
+}
+
+################ CHQ - Chaqua; plague-ruined City of Gold. Dormant ################
+
+CHQ = {
+	color = { 0 181 217 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_ITZA # Chaqua's hub lies in Itza's state (#10178)
+}
+
+################ HUA - Huatl; the Awakening, a reconstruction site held by Xlanhuapec. Dormant (loremaster 2026-11-05) ################
+
+HUA = {
+	color = { 29 107 82 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_HUATL # Huatl
+}
+
+################ OYX - Oyxl; the Eternal City, ruined. Dormant ################
+
+OYX = {
+	color = { 98 217 173 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_OYXL # Oyxl
+}
+
+################ XHO - Xhotl; City of Destiny, ruined. Dormant ################
+
+XHO = {
+	color = { 0 180 130 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_XHOTL # Xhotl
+}
+
+################ AXL - Axlotl; the Star City, razed 1351 IC. Dormant (loremaster 2026-11-05) ################
+
+AXL = {
+	color = { 89 199 183 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_AXLOTL # Axlotl
+}
+
+################ SPZ - Spektazuma; City of Lenses, ruined; no Lexicanum page. Dormant ################
+
+SPZ = {
+	color = { 0 89 88 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_SPEKTAZUMA # Spektazuma
+}
+
+################ TLA - Tlax; City of Ghosts. Dormant ################
+
+TLA = {
+	color = { 44 162 156 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { lizardmen }
+	capital = STATE_TLAX # Tlax
+}

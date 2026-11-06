@@ -1,7 +1,6 @@
 ﻿l_english:
  # Country display names and adjectives for the 19 Lustria tag roster (planning/tag_registry.md).
- # Loc-only registry parity: common/country_definitions/ for this region is deferred until
- # real cultures exist for it. One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
+ # Definitions: common/country_definitions/19_lustria.txt (#10181). One name key (the tag) + one adjective key (<TAG>_ADJ) per tag.
  # Board item #3420 (epic #3414).
  LUS:0 "Lustria"
  LUS_ADJ:0 "Lustrian"
@@ -35,3 +34,27 @@
  SPZ_ADJ:0 "Spektazuma"
  TLA:0 "Tlax"
  TLA_ADJ:0 "Tlax"
+ SKG:0 "Skeggi"
+ SKG_ADJ:0 "Skeggian"
+ PST:0 "Clan Pestilens"
+ PST_ADJ:0 "Pestilens"
+ VCO:0 "the Vampire Coast"
+ VCO_ADJ:0 "Vampire Coast"
+ TLC:0 "Nuevo Luccini"
+ TLC_ADJ:0 "Tilean"
+ ESC:0 "Santa Magritta"
+ ESC_ADJ:0 "Estalian"
+ BRC:0 "Bretonnian Colony"
+ BRC_ADJ:0 "Bretonnian"
+ SSD:0 "Spine of Sotek Dwarfs"
+ SSD_ADJ:0 "Sotek Dwarf"
+ LZA:0 "Skinks of the Northern Coasts"
+ LZA_ADJ:0 "Lustrian"
+ LZB:0 "Skinks of the Malliente Swamps"
+ LZB_ADJ:0 "Lustrian"
+ LZC:0 "Skinks of the Spine of Sotek"
+ LZC_ADJ:0 "Lustrian"
+ LZD:0 "Skinks of the Culchan Plains"
+ LZD_ADJ:0 "Lustrian"
+ LZE:0 "Skinks of the Lambada"
+ LZE_ADJ:0 "Lustrian"

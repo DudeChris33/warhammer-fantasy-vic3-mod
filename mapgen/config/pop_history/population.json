@@ -861,6 +861,114 @@
    "literacy": "low",
    "source": "inferred: tech tier 5 (mapgen/config/country_history)",
    "why": "Tier 5: agrarian realm; most pops are poor and unlettered."
+  },
+  "HEX": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "ITZ": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "XLA": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "TLX": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "PAH": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "PST": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "VCO": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "SKG": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "AMZ": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "TLC": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "ESC": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "BRC": {
+   "wealth": "medium",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "SSD": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "LZA": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "LZB": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "LZC": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "LZD": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
+  },
+  "LZE": {
+   "wealth": "low",
+   "literacy": "very_low",
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional wealth/literacy until #10183; isolated tribal and temple societies, low literacy outside the temples."
   }
  },
  "groups": [

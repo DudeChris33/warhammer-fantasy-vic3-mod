@@ -1800,182 +1800,266 @@
   "SKG": {
    "name": "Skeggi",
    "color": [
-    0,
-    216,
-    192
+    123,
+    165,
+    178
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Norscan colony."
   },
   "ITZ": {
    "name": "Itza",
    "color": [
     0,
-    216,
-    114
+    192,
+    199
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). The First City."
   },
   "HEX": {
    "name": "Hexoatl",
    "color": [
     0,
-    192,
-    198
+    217,
+    195
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in common/country_definitions/19_lustria.txt (#10181). City of the Sun, regional Lizardmen power."
   },
   "XLA": {
    "name": "Xlanhuapec",
    "color": [
     0,
-    156,
-    126
+    217,
+    157
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Also holds Huatl's land while it is rebuilt."
   },
   "TLX": {
    "name": "Tlaxtlan",
    "color": [
-    0,
-    216,
-    156
+    15,
+    162,
+    134
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181)."
   },
   "CHQ": {
    "name": "Chaqua",
    "color": [
     0,
-    156,
-    204
+    181,
+    217
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "PAH": {
    "name": "Pahuax",
    "color": [
     0,
-    90,
-    66
+    217,
+    118
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181)."
   },
   "XAH": {
    "name": "Xahutec",
    "color": [
     0,
-    114,
-    54
+    144,
+    91
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "QTZ": {
    "name": "Quetza",
    "color": [
-    90,
-    180,
-    162
+    0,
+    107,
+    59
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "HUA": {
    "name": "Huatl",
    "color": [
-    0,
-    168,
-    72
+    29,
+    107,
+    82
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "OYX": {
    "name": "Oyxl",
    "color": [
-    0,
-    180,
-    210
+    98,
+    217,
+    173
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "XHO": {
    "name": "Xhotl",
    "color": [
     0,
-    150,
-    90
+    180,
+    130
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "AXL": {
    "name": "Axlotl",
    "color": [
-    102,
-    216,
-    168
+    89,
+    199,
+    183
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "CHU": {
    "name": "Chupayotl",
    "color": [
-    0,
-    180,
-    132
+    65,
+    144,
+    118
    ],
    "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "reserved, no definition (#10181)"
+  },
+  "PST": {
+   "name": "Clan Pestilens",
+   "color": [
+    92,
+    115,
+    89
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Skaven plague-cult remnant."
+  },
+  "VCO": {
+   "name": "Vampire Coast",
+   "color": [
+    11,
+    56,
+    46
+   ],
+   "note": "defined in 19_lustria.txt (#10181)."
+  },
+  "AMZ": {
+   "name": "Amazons",
+   "color": [
+    124,
+    87,
+    35
+   ],
+   "note": "defined in 19_lustria.txt (#10181)."
+  },
+  "TLC": {
+   "name": "Nuevo Luccini",
+   "color": [
+    128,
+    99,
+    57
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Tilean colony."
+  },
+  "ESC": {
+   "name": "Santa Magritta",
+   "color": [
+    102,
+    49,
+    41
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Estalian colony."
+  },
+  "BRC": {
+   "name": "Bretonnian Colony",
+   "color": [
+    81,
+    40,
+    81
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Invented tier."
+  },
+  "LZA": {
+   "name": "Skinks of the Northern Coasts",
+   "color": [
+    159,
+    166,
+    66
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Decentralized Lizardmen holding."
+  },
+  "LZB": {
+   "name": "Skinks of the Malliente Swamps",
+   "color": [
+    150,
+    166,
+    108
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Decentralized Lizardmen holding."
+  },
+  "LZC": {
+   "name": "Skinks of the Spine of Sotek",
+   "color": [
+    111,
+    106,
+    56
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Decentralized Lizardmen holding."
+  },
+  "LZD": {
+   "name": "Skinks of the Culchan Plains",
+   "color": [
+    117,
+    157,
+    78
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Decentralized Lizardmen holding."
+  },
+  "LZE": {
+   "name": "Skinks of the Lambada",
+   "color": [
+    166,
+    157,
+    66
+   ],
+   "note": "defined in 19_lustria.txt (#10181). Decentralized Lizardmen holding."
   },
   "KON": {
    "name": "Konquata",
    "color": [
-    102,
-    216,
-    204
+    0,
+    180,
+    90
    ],
    "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "reserved, no definition (#10181)"
   },
   "TLN": {
    "name": "Tlanxla",
    "color": [
-    0,
-    96,
-    96
+    98,
+    202,
+    217
    ],
    "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "reserved, no definition (#10181)"
   },
   "SPZ": {
    "name": "Spektazuma",
    "color": [
     0,
-    120,
-    90
+    89,
+    88
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "TLA": {
    "name": "Tlax",
    "color": [
-    0,
-    156,
+    44,
+    162,
     156
    ],
-   "proposed": true,
-   "note": "proposed: no country definition yet (19_lustria family)"
+   "note": "defined in 19_lustria.txt (#10181). Dormant: owns nothing at start."
   },
   "SOT": {
    "name": "Sisters of Twilight",
@@ -2199,6 +2283,15 @@
     90,
     70
    ]
+  },
+  "SSD": {
+   "name": "Spine of Sotek Dwarfs",
+   "color": [
+    115,
+    81,
+    63
+   ],
+   "note": "defined in 19_lustria.txt (#10181). TW-sourced (Hugrim Redaxe); no tabletop hold, tier 3, optional. Seat: Mine of the Bearded Skulls."
   }
  }
 }

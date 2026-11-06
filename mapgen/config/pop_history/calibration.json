@@ -876,6 +876,114 @@
    "source": "inferred: Nehekhara's living cities and tomb-kingdoms (WFB Tomb Kings)",
    "why": "Few living folk survive between the necropoli: Khemri and Numas are the largest, the outlying kingdoms are small.",
    "confidence": "low"
+  },
+  "HEX": {
+   "canon": 90000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "ITZ": {
+   "canon": 60000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "XLA": {
+   "canon": 30000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "TLX": {
+   "canon": 30000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "PAH": {
+   "canon": 15000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "PST": {
+   "canon": 20000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "VCO": {
+   "canon": 15000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "SKG": {
+   "canon": 8000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "AMZ": {
+   "canon": 6000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "TLC": {
+   "canon": 3000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "ESC": {
+   "canon": 3000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "BRC": {
+   "canon": 3000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "SSD": {
+   "canon": 6000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "LZA": {
+   "canon": 10000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "LZB": {
+   "canon": 10000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "LZC": {
+   "canon": 10000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "LZD": {
+   "canon": 10000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
+  },
+  "LZE": {
+   "canon": 10000,
+   "source": "invented: provisional (#10181) until #10183",
+   "why": "Provisional first figure so the generators run; #10183 replaces it. About 333k canon across Lustria against Ulthuan's about 590k, low on purpose: Lustria holds 9% of world arable but canonically few people (epic #10176).",
+   "confidence": "low"
   }
  },
  "groups": [

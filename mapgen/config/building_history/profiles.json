@@ -471,6 +471,9 @@
   "AES": {
    "archetype": "norse_tribe"
   },
+  "AMZ": {
+   "archetype": "wood_elf_realm"
+  },
   "ANM": {
    "archetype": "wood_elf_realm"
   },
@@ -527,6 +530,9 @@
   },
   "BPR": {
    "archetype": "border_prince"
+  },
+  "BRC": {
+   "archetype": "asur_colony"
   },
   "BRI": {
    "archetype": "bretonnian_duchy"
@@ -620,6 +626,9 @@
     }
    }
   },
+  "ESC": {
+   "archetype": "asur_colony"
+  },
   "ESH": {
    "archetype": "skaven_clan"
   },
@@ -659,6 +668,9 @@
   "HAS": {
    "archetype": "norse_tribe"
   },
+  "HEX": {
+   "archetype": "nehekharan_city"
+  },
   "HKN": {
    "archetype": "border_prince"
   },
@@ -670,6 +682,9 @@
   },
   "IRN": {
    "archetype": "greenskin_horde"
+  },
+  "ITZ": {
+   "archetype": "nehekharan_city"
   },
   "KAD": {
    "archetype": "dwarf_hold"
@@ -849,6 +864,9 @@
   "OST": {
    "archetype": "imperial_frontier"
   },
+  "PAH": {
+   "archetype": "nehekharan_city"
+  },
   "PAR": {
    "archetype": "bretonnian_duchy"
   },
@@ -857,6 +875,9 @@
   },
   "PRA": {
    "archetype": "kislev_oblast"
+  },
+  "PST": {
+   "archetype": "skaven_clan"
   },
   "QUA": {
    "archetype": "nehekharan_city"
@@ -906,6 +927,9 @@
   "SKB": {
    "archetype": "skaven_clan"
   },
+  "SKG": {
+   "archetype": "norse_tribe"
+  },
   "SKZ": {
    "archetype": "greenskin_horde"
   },
@@ -935,6 +959,9 @@
   },
   "SRY": {
    "archetype": "skaven_clan"
+  },
+  "SSD": {
+   "archetype": "dwarf_hold_ruined"
   },
   "STI": {
    "archetype": "imperial_frontier"
@@ -966,8 +993,14 @@
   "TIR": {
    "archetype": "asur_kingdom"
   },
+  "TLC": {
+   "archetype": "asur_colony"
+  },
   "TLS": {
    "archetype": "wood_elf_realm"
+  },
+  "TLX": {
+   "archetype": "nehekharan_city"
   },
   "TOB": {
    "archetype": "merchant_city_state"
@@ -1008,6 +1041,9 @@
   "VAR": {
    "archetype": "norse_tribe"
   },
+  "VCO": {
+   "archetype": "vampire_realm"
+  },
   "VER": {
    "archetype": "merchant_city_state"
   },
@@ -1028,6 +1064,9 @@
   },
   "WYD": {
    "archetype": "wood_elf_realm"
+  },
+  "XLA": {
+   "archetype": "nehekharan_city"
   },
   "YVR": {
    "archetype": "asur_kingdom"
