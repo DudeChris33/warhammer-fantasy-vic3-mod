@@ -140,90 +140,96 @@ is_at_war_with_overlord = {
 }
 
 is_china_unification_pair = {
-	OR = {
-		has_journal_entry = je_reunify_china
-		global_var:chinese_central_government ?= THIS
-		c:CHI ?= this
-	}
-	$TARGET$ = {
-		OR = {
-			has_journal_entry = je_reunify_china
-			global_var:chinese_central_government ?= THIS
-			country_has_primary_culture = cu:han
-			country_has_primary_culture = cu:manchu
-		}
-	}
+	always = no
+	# [#10326] was: OR = {
+	# [#10326] was: has_journal_entry = je_reunify_china
+	# [#10326] was: global_var:chinese_central_government ?= THIS
+	# [#10326] was: c:CHI ?= this
+	# [#10326] was: }
+	# [#10326] was: $TARGET$ = {
+	# [#10326] was: OR = {
+	# [#10326] was: has_journal_entry = je_reunify_china
+	# [#10326] was: global_var:chinese_central_government ?= THIS
+	# [#10326] was: country_has_primary_culture = cu:han
+	# [#10326] was: country_has_primary_culture = cu:manchu
+	# [#10326] was: }
+	# [#10326] was: }
 }
 
 is_ethiopia_unification_pair = {
-	NOT = { exists = c:ETH }
-	has_journal_entry = je_age_of_princes
-	$TARGET$ = {
-		custom_tooltip = {
-			text = ETH_tt
-			can_form_nation = ETH
-		}
-	}
+	always = no
+	# [#10326] was: NOT = { exists = c:ETH }
+	# [#10326] was: has_journal_entry = je_age_of_princes
+	# [#10326] was: $TARGET$ = {
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = ETH_tt
+	# [#10326] was: can_form_nation = ETH
+	# [#10326] was: }
+	# [#10326] was: }
 }
 
 is_arabia_unification_pair = {
-	NOT = { exists = c:ARA }
-	can_form_nation = ARA
-	$TARGET$ = {
-		custom_tooltip = {
-			text = ARA_tt
-			can_form_nation = ARA
-		}
-	}
+	always = no
+	# [#10326] was: NOT = { exists = c:ARA }
+	# [#10326] was: can_form_nation = ARA
+	# [#10326] was: $TARGET$ = {
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = ARA_tt
+	# [#10326] was: can_form_nation = ARA
+	# [#10326] was: }
+	# [#10326] was: }
 }
 
 is_india_unification_pair = {
-	OR = {
-		custom_tooltip = {
-			text = BHT_tt
-			can_form_nation = BHT
-		}
-		c:BHT ?= this
-	}
-	$TARGET$ = {
-		OR = {
-			custom_tooltip = {
-				text = BHT_tt
-				can_form_nation = BHT
-			}
-			AND = {
-				is_in_geographic_region = geographic_region_india
-				custom_tooltip = {
-					text = indian_primary_culture_tt
-					has_indian_primary_culture = yes
-				}
-			}
-		}
-	}
+	always = no
+	# [#10326] was: OR = {
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = BHT_tt
+	# [#10326] was: can_form_nation = BHT
+	# [#10326] was: }
+	# [#10326] was: c:BHT ?= this
+	# [#10326] was: }
+	# [#10326] was: $TARGET$ = {
+	# [#10326] was: OR = {
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = BHT_tt
+	# [#10326] was: can_form_nation = BHT
+	# [#10326] was: }
+	# [#10326] was: AND = {
+	# [#10326] was: is_in_geographic_region = geographic_region_india
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = indian_primary_culture_tt
+	# [#10326] was: has_indian_primary_culture = yes
+	# [#10326] was: }
+	# [#10326] was: }
+	# [#10326] was: }
+	# [#10326] was: }
 }
 
 is_indonesia_unification_pair = {
-	NOT = { exists = c:IDN }
-	custom_tooltip = {
-		text = IDN_tt
-		can_form_nation = IDN
-	}
-	$TARGET$ = {
-		custom_tooltip = {
-			text = IDN_tt
-			can_form_nation = IDN
-		}
-	}
+	always = no
+	# [#10326] was: NOT = { exists = c:IDN }
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = IDN_tt
+	# [#10326] was: can_form_nation = IDN
+	# [#10326] was: }
+	# [#10326] was: $TARGET$ = {
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = IDN_tt
+	# [#10326] was: can_form_nation = IDN
+	# [#10326] was: }
+	# [#10326] was: }
 }
 
 is_russia_unification_pair = {
-	has_variable = rcw_russian_faction
-	$TARGET$ = {
-		custom_tooltip = {
-			text = rcw_russian_faction_tt
-			has_variable = rcw_russian_faction
-		}
-	}
+	always = no
+	# [#10326] was: has_variable = rcw_russian_faction
+	# [#10326] was: $TARGET$ = {
+	# [#10326] was: custom_tooltip = {
+	# [#10326] was: text = rcw_russian_faction_tt
+	# [#10326] was: has_variable = rcw_russian_faction
+	# [#10326] was: }
+	# [#10326] was: }
 }
 
 is_scripted_unification_conquest = {

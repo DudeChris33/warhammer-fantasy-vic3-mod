@@ -26,11 +26,12 @@ building_rye_farm = {
 		if = {
 			limit = {
 				owner ?= {
-					has_journal_entry = je_five_year_plan
-					je:je_five_year_plan ?= {
-						has_variable = five_year_plan_agriculture_var
-					}
-					five_year_plan_agriculture_goal_met = no
+					always = no
+					# [#10326] was: has_journal_entry = je_five_year_plan
+					# [#10326] was: je:je_five_year_plan ?= {
+					# [#10326] was: has_variable = five_year_plan_agriculture_var
+					# [#10326] was: }
+					# [#10326] was: five_year_plan_agriculture_goal_met = no
 				}
 			}
 			add = 2500
@@ -69,11 +70,12 @@ building_wheat_farm = {
 		if = {
 			limit = {
 				owner ?= {
-					has_journal_entry = je_five_year_plan
-					je:je_five_year_plan ?= {
-						has_variable = five_year_plan_agriculture_var
-					}
-					five_year_plan_agriculture_goal_met = no
+					always = no
+					# [#10326] was: has_journal_entry = je_five_year_plan
+					# [#10326] was: je:je_five_year_plan ?= {
+					# [#10326] was: has_variable = five_year_plan_agriculture_var
+					# [#10326] was: }
+					# [#10326] was: five_year_plan_agriculture_goal_met = no
 				}
 			}
 			add = 2500
@@ -112,11 +114,12 @@ building_rice_farm = {
 		if = {
 			limit = {
 				owner ?= {
-					has_journal_entry = je_five_year_plan
-					je:je_five_year_plan ?= {
-						has_variable = five_year_plan_agriculture_var
-					}
-					five_year_plan_agriculture_goal_met = no
+					always = no
+					# [#10326] was: has_journal_entry = je_five_year_plan
+					# [#10326] was: je:je_five_year_plan ?= {
+					# [#10326] was: has_variable = five_year_plan_agriculture_var
+					# [#10326] was: }
+					# [#10326] was: five_year_plan_agriculture_goal_met = no
 				}
 			}
 			add = 2500
@@ -155,11 +158,12 @@ building_maize_farm = {
 		if = {
 			limit = {
 				owner ?= {
-					has_journal_entry = je_five_year_plan
-					je:je_five_year_plan ?= {
-						has_variable = five_year_plan_agriculture_var
-					}
-					five_year_plan_agriculture_goal_met = no
+					always = no
+					# [#10326] was: has_journal_entry = je_five_year_plan
+					# [#10326] was: je:je_five_year_plan ?= {
+					# [#10326] was: has_variable = five_year_plan_agriculture_var
+					# [#10326] was: }
+					# [#10326] was: five_year_plan_agriculture_goal_met = no
 				}
 			}
 			add = 2500
@@ -198,11 +202,12 @@ building_millet_farm = {
 		if = {
 			limit = {
 				owner ?= {
-					has_journal_entry = je_five_year_plan
-					je:je_five_year_plan ?= {
-						has_variable = five_year_plan_agriculture_var
-					}
-					five_year_plan_agriculture_goal_met = no
+					always = no
+					# [#10326] was: has_journal_entry = je_five_year_plan
+					# [#10326] was: je:je_five_year_plan ?= {
+					# [#10326] was: has_variable = five_year_plan_agriculture_var
+					# [#10326] was: }
+					# [#10326] was: five_year_plan_agriculture_goal_met = no
 				}
 			}
 			add = 2500
@@ -255,11 +260,12 @@ building_vineyard = {
 		if = {
 			limit = {
 				owner ?= {
-					has_journal_entry = je_five_year_plan
-					je:je_five_year_plan ?= {
-						has_variable = five_year_plan_agriculture_var
-					}
-					five_year_plan_agriculture_goal_met = no
+					always = no
+					# [#10326] was: has_journal_entry = je_five_year_plan
+					# [#10326] was: je:je_five_year_plan ?= {
+					# [#10326] was: has_variable = five_year_plan_agriculture_var
+					# [#10326] was: }
+					# [#10326] was: five_year_plan_agriculture_goal_met = no
 				}
 			}
 			add = 2500

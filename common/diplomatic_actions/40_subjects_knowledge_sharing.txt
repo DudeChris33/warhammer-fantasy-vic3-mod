@@ -116,7 +116,7 @@
 			modifier:country_tech_spread_mult > -0.25 # don't compromise tech spread more than -25%
 			NOT = { is_country_type = unrecognized }
 			OR = {
-				ai_russia_wants_to_placate_poland = yes
+				always = no  # [#10326] was: ai_russia_wants_to_placate_poland = yes
 				AND = {
 					has_attitude = {
 						who = scope:target_country
@@ -142,7 +142,7 @@
 		will_break = {
 			OR = {
 				AND = {
-					ai_russia_wants_to_placate_poland = no
+					always = yes  # [#10326] was: ai_russia_wants_to_placate_poland = no
 					has_attitude = {
 						who = scope:target_country
 						attitude = domineering
@@ -364,7 +364,7 @@ da_request_knowledge_sharing = {
 
 		will_propose = {
 			techs_researched < scope:target_country.techs_researched
-			NOT = { has_variable = ai_poland_red }
+			NOT = { always = no }  # [#10326] was: NOT = { has_variable = ai_poland_red }
 		}
 
 		will_break = {

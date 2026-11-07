@@ -120,7 +120,7 @@
 
 			if = { # Russia wants passage through the Bosporus
 				limit = {
-					c:RUS ?= this
+					always = no  # [#10326] was: c:RUS ?= this
 					root = scope:target_country
 					scope:source_country = {
 						any_scope_state = {

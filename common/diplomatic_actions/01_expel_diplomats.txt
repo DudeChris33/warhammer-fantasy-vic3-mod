@@ -67,10 +67,10 @@
 		}
 		if = {
 			limit = {
-				has_journal_entry = je_red_summer
-				has_variable = tp_counter_revolution_ukaz_var
+				always = no  # [#10326] was: has_journal_entry = je_red_summer
+				always = no  # [#10326] was: has_variable = tp_counter_revolution_ukaz_var
 				scope:target_country ?= {
-					has_journal_entry = je_tsarpoints_master
+					always = no  # [#10326] was: has_journal_entry = je_tsarpoints_master
 				}
 			}
 			remove_variable = tp_counter_revolution_ukaz_var

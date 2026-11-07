@@ -97,10 +97,10 @@
 			if = {
 				limit = {
 					scope:diplomatic_play ?= {
-						is_diplomatic_play_type = dp_unify_russia
+						always = no  # [#10326] was: is_diplomatic_play_type = dp_unify_russia
 					}
 				}
-				multiply = rcw_unify_russia_annex_infamy_mult
+				multiply = 1  # [#10326] was: multiply = rcw_unify_russia_annex_infamy_mult
 			}
 		}
 	}

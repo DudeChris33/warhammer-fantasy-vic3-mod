@@ -96,7 +96,7 @@ law_right_of_assembly = {
 		}
 
 		if = {
-			limit = { congress_poland_ai_rejects_law = yes }
+			limit = { always = no }  # [#10326] was: limit = { congress_poland_ai_rejects_law = yes }
 			add = -750
 		}
 	}
@@ -145,7 +145,7 @@ law_protected_speech = {
 		}
 
 		if = {
-			limit = { congress_poland_ai_rejects_law = yes }
+			limit = { always = no }  # [#10326] was: limit = { congress_poland_ai_rejects_law = yes }
 			add = -750
 		}
 	}

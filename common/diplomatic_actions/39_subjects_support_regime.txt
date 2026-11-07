@@ -78,7 +78,7 @@
 
 		will_propose = {
 			OR = {
-				ai_russia_wants_to_placate_poland = yes
+				always = no  # [#10326] was: ai_russia_wants_to_placate_poland = yes
 				AND = {
 					government_legitimacy > 90
 					"ai_ideological_opinion(scope:target_country)" >= 25
@@ -104,7 +104,7 @@
 		}
 
 		will_break = {
-			ai_russia_wants_to_placate_poland = no
+			always = yes  # [#10326] was: ai_russia_wants_to_placate_poland = no
 			OR = {
 				government_legitimacy < 50
 				"ai_ideological_opinion(scope:target_country)" <= -25
@@ -334,7 +334,7 @@ da_request_support_regime = {
 		will_propose = {
 			government_legitimacy < 50
 			liberty_desire_weekly_progress > -0.2
-			NOT = { has_variable = ai_poland_red }
+			NOT = { always = no }  # [#10326] was: NOT = { has_variable = ai_poland_red }
 		}
 
 		will_break = {
