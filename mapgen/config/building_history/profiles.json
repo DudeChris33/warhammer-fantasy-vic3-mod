@@ -465,6 +465,75 @@
    "source": "canon: Warhammer Armies: High Elves (8th edition); sources/originals/High_Elf_Outposts.JPG",
    "why": "A fortress-port outpost: garrison, harbour and trading post with little worked hinterland. One construction sector: its tags have urbanization (#6637).",
    "industry": {}
+  },
+  "lizardmen_temple_city": {
+   "admin": 2,
+   "barracks_levels": 6,
+   "barracks_states": 2,
+   "construction": 1,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 0,
+   "trade_states": 0,
+   "farm_share": 0.3,
+   "logging_share": 0.1,
+   "workforce_share": 0.3,
+   "source": "canon: Warhammer Armies: Lizardmen; Total War: Warhammer II (Lustria)",
+   "why": "Temple-cities run by the Slann and priest-skinks: a large Saurus garrison, a small priestly bureaucracy, no trade (the Lizardmen do not trade as men do), little farming or logging. Skink craftwork stands in as a little textile and furniture industry in the capital; canon is thin on Lizardmen industry, so this is inferred.",
+   "industry": {
+    "building_textile_mill": 1,
+    "building_furniture_manufactory": 1
+   }
+  },
+  "pirate_coast": {
+   "admin": 1,
+   "barracks_levels": 3,
+   "barracks_states": 2,
+   "construction": 0,
+   "port_level": 2,
+   "port_states": 2,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.2,
+   "logging_share": 0.3,
+   "workforce_share": 0.25,
+   "source": "canon: Warhammer Fantasy Roleplay 4e (Sartosa); Total War: Warhammer III (Vampire Coast)",
+   "why": "A corsair coast: a crew-garrison, working harbours and a trading cove, one yard in the capital where the owner has navigation. The Vampire Coast's undead fleet is the point; farming and logging are scant.",
+   "industry": {
+    "building_shipyard": 1
+   }
+  },
+  "norse_colony": {
+   "admin": 0,
+   "barracks_levels": 2,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.1,
+   "logging_share": 0.3,
+   "workforce_share": 0.25,
+   "source": "canon: Warhammer Armies: Warriors of Chaos (Norscan raiders); inferred",
+   "why": "A raiders' landing in the Lustrian marsh: a war-band garrison, a harbour and a trading beach; little tilled land, some timber, no industry.",
+   "industry": {}
+  },
+  "lustrian_colony": {
+   "admin": 0,
+   "barracks_levels": 1,
+   "barracks_states": 1,
+   "construction": 0,
+   "port_level": 1,
+   "port_states": 1,
+   "trade_level": 1,
+   "trade_states": 1,
+   "farm_share": 0.3,
+   "logging_share": 0.3,
+   "workforce_share": 0.4,
+   "source": "canon: Warhammer Armies: Empire/Bretonnia colonial notes; inferred",
+   "why": "A fortified landing on the Lustrian coast: a small garrison, harbour and trading post, a clearing of farm and timber worked by settlers. Wider workforce than an outpost, as colonists live off the land.",
+   "industry": {}
   }
  },
  "tags": {
@@ -532,7 +601,7 @@
    "archetype": "border_prince"
   },
   "BRC": {
-   "archetype": "asur_colony"
+   "archetype": "lustrian_colony"
   },
   "BRI": {
    "archetype": "bretonnian_duchy"
@@ -627,7 +696,7 @@
    }
   },
   "ESC": {
-   "archetype": "asur_colony"
+   "archetype": "lustrian_colony"
   },
   "ESH": {
    "archetype": "skaven_clan"
@@ -669,7 +738,7 @@
    "archetype": "norse_tribe"
   },
   "HEX": {
-   "archetype": "nehekharan_city"
+   "archetype": "lizardmen_temple_city"
   },
   "HKN": {
    "archetype": "border_prince"
@@ -684,7 +753,16 @@
    "archetype": "greenskin_horde"
   },
   "ITZ": {
-   "archetype": "nehekharan_city"
+   "archetype": "lizardmen_temple_city",
+   "set": {
+    "admin": 0
+   },
+   "justify": {
+    "admin": {
+     "source": "canon: Warhammer Armies: Lizardmen (Itza)",
+     "why": "Admin otherwise lands in the most populous state, Xahutec; the Lizardmen seat is Itza, whose administration is set by a state override instead."
+    }
+   }
   },
   "KAD": {
    "archetype": "dwarf_hold"
@@ -865,7 +943,31 @@
    "archetype": "imperial_frontier"
   },
   "PAH": {
-   "archetype": "nehekharan_city"
+   "archetype": "lizardmen_temple_city",
+   "set": {
+    "admin": 1,
+    "barracks_levels": 2,
+    "barracks_states": 1,
+    "industry": {}
+   },
+   "justify": {
+    "admin": {
+     "source": "inferred",
+     "why": "Pahuax is a lesser temple-city (Total War Lizardmen minor settlement): one administrative level, not the two of a great city."
+    },
+    "barracks_levels": {
+     "source": "inferred",
+     "why": "A single-state realm with a minor garrison, not the 6 levels of the great temple-cities."
+    },
+    "barracks_states": {
+     "source": "inferred",
+     "why": "One state, so the garrison sits there."
+    },
+    "industry": {
+     "source": "inferred",
+     "why": "A lesser temple-city has no craft quarter; skink craftwork is kept to the great cities."
+    }
+   }
   },
   "PAR": {
    "archetype": "bretonnian_duchy"
@@ -928,7 +1030,7 @@
    "archetype": "skaven_clan"
   },
   "SKG": {
-   "archetype": "norse_tribe"
+   "archetype": "norse_colony"
   },
   "SKZ": {
    "archetype": "greenskin_horde"
@@ -961,7 +1063,16 @@
    "archetype": "skaven_clan"
   },
   "SSD": {
-   "archetype": "dwarf_hold_ruined"
+   "archetype": "dwarf_hold_ruined",
+   "set": {
+    "workforce_share": 0.25
+   },
+   "justify": {
+    "workforce_share": {
+     "source": "inferred",
+     "why": "Mining colony of exiled dwarfs with a working mine: a quarter of its pops staff the shaft instead of the ruined-hold trickle."
+    }
+   }
   },
   "STI": {
    "archetype": "imperial_frontier"
@@ -994,13 +1105,13 @@
    "archetype": "asur_kingdom"
   },
   "TLC": {
-   "archetype": "asur_colony"
+   "archetype": "lustrian_colony"
   },
   "TLS": {
    "archetype": "wood_elf_realm"
   },
   "TLX": {
-   "archetype": "nehekharan_city"
+   "archetype": "lizardmen_temple_city"
   },
   "TOB": {
    "archetype": "merchant_city_state"
@@ -1042,7 +1153,7 @@
    "archetype": "norse_tribe"
   },
   "VCO": {
-   "archetype": "vampire_realm"
+   "archetype": "pirate_coast"
   },
   "VER": {
    "archetype": "merchant_city_state"
@@ -1066,7 +1177,7 @@
    "archetype": "wood_elf_realm"
   },
   "XLA": {
-   "archetype": "nehekharan_city"
+   "archetype": "lizardmen_temple_city"
   },
   "YVR": {
    "archetype": "asur_kingdom"

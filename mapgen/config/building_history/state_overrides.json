@@ -149,6 +149,98 @@
    },
    "source": "canon: Warhammer Fantasy Roleplay 4e, Verezzo",
    "why": "Verezzo's merchants and clerks run the Tilean banking trade."
+  },
+  {
+   "key": "STATE_ITZA",
+   "anchor": [
+    2204,
+    2509
+   ],
+   "owner": "ITZ",
+   "buildings": {
+    "building_government_administration": 2,
+    "building_livestock_ranch": 2
+   },
+   "source": "canon: Warhammer Armies: Lizardmen (Itza, seat of the Slann)",
+   "why": "Itza is the Lizardmen's seat; its administration stands here, and its cold-one pens are the largest."
+  },
+  {
+   "key": "STATE_FLOATING_PYRAMID",
+   "anchor": [
+    1765,
+    1915
+   ],
+   "owner": "HEX",
+   "buildings": {
+    "building_livestock_ranch": 2
+   },
+   "source": "canon: Warhammer Armies: Lizardmen (Cold Ones)",
+   "why": "Cold-one pens: the Saurus cavalry mounts are bred and kept in the temple-cities."
+  },
+  {
+   "key": "STATE_XLANHUAPEC",
+   "anchor": [
+    2412,
+    2437
+   ],
+   "owner": "XLA",
+   "buildings": {
+    "building_livestock_ranch": 2
+   },
+   "source": "canon: Warhammer Armies: Lizardmen (Cold Ones)",
+   "why": "Cold-one pens: the Saurus cavalry mounts are bred and kept in the temple-cities."
+  },
+  {
+   "key": "STATE_TLAXTLAN",
+   "anchor": [
+    2016,
+    2210
+   ],
+   "owner": "TLX",
+   "buildings": {
+    "building_livestock_ranch": 2
+   },
+   "source": "canon: Warhammer Armies: Lizardmen (Cold Ones)",
+   "why": "Cold-one pens: the Saurus cavalry mounts are bred and kept in the temple-cities."
+  },
+  {
+   "key": "STATE_BITING_BOGS",
+   "anchor": [
+    1773,
+    2156
+   ],
+   "owner": "SKG",
+   "buildings": {
+    "building_fishing_wharf": 1
+   },
+   "source": "inferred",
+   "why": "Norscan landing in the bogs: a fishing wharf feeds the raiders."
+  },
+  {
+   "key": "STATE_MINE_OF_THE_BEARDED_SKULLS",
+   "anchor": [
+    2131,
+    2718
+   ],
+   "owner": "SSD",
+   "buildings": {
+    "building_gold_mine": 1
+   },
+   "source": "inferred (state name; Total War: Warhammer II region)",
+   "why": "The Dwarf mining colony works gold in the Mine of the Bearded Skulls; low confidence on the metal."
+  },
+  {
+   "key": "STATE_CACTUS_COAST",
+   "anchor": [
+    1883,
+    1942
+   ],
+   "owner": "TLC",
+   "buildings": {
+    "building_gold_mine": 1
+   },
+   "source": "inferred (conquistador gold, Warhammer Fantasy Roleplay 4e)",
+   "why": "Tilean colony Tlaxcala-style gold prospecting on the cactus coast; low confidence."
   }
  ]
 }

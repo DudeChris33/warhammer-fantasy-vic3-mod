@@ -371,6 +371,17 @@
    "building": "building_naval_administration",
    "source": "inferred",
    "why": "Estalia's admiralty: needs admiralty."
+  },
+  {
+   "key": "STATE_VAMPIRE_COAST",
+   "anchor": [
+    2734,
+    2267
+   ],
+   "tag": "VCO",
+   "building": "building_naval_administration",
+   "source": "inferred",
+   "why": "Vampire Coast admiralty: needs admiralty."
   }
  ],
  "gaps": [
@@ -405,6 +416,10 @@
   {
    "concept": "Tomb complexes and necropolises",
    "why": "Nehekhara's great pyramids are building_power_bloc_statue-like monuments only through events; none are placed."
+  },
+  {
+   "concept": "Lizardmen spawning pools / Old Ones' geomantic web",
+   "why": "The Slann's spawning pools and the Old Ones' geomantic web have no fitting building; none are placed."
   }
  ]
 }
