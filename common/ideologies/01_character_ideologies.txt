@@ -68,6 +68,11 @@ ideology_moderate = {
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_moderate_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -120,6 +125,11 @@ ideology_moderate = {
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_moderate_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -128,18 +138,18 @@ ideology_traditionalist = { # Average Progressiveness - -70
 
 	character_ideology = yes
 
-	lawgroup_rights_of_women = {
-		law_no_womens_rights = approve
-		law_women_own_property = neutral
-		law_women_in_the_workplace = disapprove
-		law_womens_suffrage = strongly_disapprove
-	}
-
 	lawgroup_church_and_state = {
 		law_state_religion = approve
 		law_freedom_of_conscience = disapprove
 		law_total_separation = strongly_disapprove
 		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
+	}
+
+	lawgroup_rights_of_women = {
+		law_no_womens_rights = approve
+		law_women_own_property = neutral
+		law_women_in_the_workplace = disapprove
+		law_womens_suffrage = strongly_disapprove
 	}
 
 	lawgroup_labour_associations = {
@@ -151,7 +161,11 @@ ideology_traditionalist = { # Average Progressiveness - -70
 		law_factory_councils = strongly_disapprove
 	}
 
-
+	country_trigger = {
+		NOT = {
+			always = no  # [#10327] was: c:FRA ?= this
+		}
+	}
 
 	interest_group_leader_trigger = {
 		ideology_traditionalist_valid_trigger = yes
@@ -161,7 +175,7 @@ ideology_traditionalist = { # Average Progressiveness - -70
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_no_womens_rights
 				has_law_or_variant = law_type:law_state_religion
 				# [#3410] dropped has_law_or_variant = law_type:law_hindu_caste_enforced (India-caste DLC law, never restored)
@@ -239,6 +253,11 @@ ideology_traditionalist = { # Average Progressiveness - -70
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_traditionalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -280,6 +299,11 @@ ideology_traditionalist = { # Average Progressiveness - -70
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_traditionalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -288,18 +312,18 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 
 	character_ideology = yes
 
-	lawgroup_rights_of_women = {
-		law_no_womens_rights = approve
-		law_women_own_property = neutral
-		law_women_in_the_workplace = disapprove
-		law_womens_suffrage = strongly_disapprove
-	}
-
 	lawgroup_church_and_state = {
 		law_state_religion = strongly_disapprove
 		law_freedom_of_conscience = disapprove
 		law_total_separation = approve
 		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
+	}
+
+	lawgroup_rights_of_women = {
+		law_no_womens_rights = approve
+		law_women_own_property = neutral
+		law_women_in_the_workplace = disapprove
+		law_womens_suffrage = strongly_disapprove
 	}
 
 	lawgroup_labour_associations = {
@@ -310,8 +334,6 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 		law_right_to_associate = disapprove
 		law_factory_councils = strongly_disapprove
 	}
-
-
 
 	interest_group_leader_trigger = {
 		ideology_traditionalist_minoritarian_valid_trigger = yes
@@ -326,7 +348,7 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 		}
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_no_womens_rights
 				has_law_or_variant = law_type:law_total_separation
 			}
@@ -403,6 +425,11 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_traditionalist_minoritarian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -444,10 +471,15 @@ ideology_traditionalist_minoritarian = { # Average Progressiveness - -50
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_traditionalist_minoritarian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_nihilist = { # Average Progressiveness - 108.33
+ideology_nihilist = { # Average Progressiveness - 91.66
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_nihilist.dds"
 
 	character_ideology = yes
@@ -469,7 +501,6 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		# [#3410] dropped law_state_atheism = strongly_approve (law removed)
 	}
 
-
 	country_trigger = {
 		has_technology_researched = realism
 	}
@@ -482,7 +513,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				OR = {
 					has_law_or_variant = law_type:law_presidential_republic
 					has_law_or_variant = law_type:law_parliamentary_republic
@@ -494,7 +525,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 
 		# Monarchs cannot be republicans
 		NAND = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -540,7 +571,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		# will emerge to counter a powerful Devout IG
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					exists = ig:ig_devout
 					ig:ig_devout ?= {
 						is_powerful = yes
@@ -570,7 +601,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -582,7 +613,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -594,7 +625,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -609,7 +640,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -621,13 +652,28 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
 			add = {
 				value = -50
 				desc = "CORPORATIZED_UNIONS_LAW"
+			}
+		}
+
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = {
+				value = 75
+				desc = "FACTORY_COUNCILS_AMENDMENT"
 			}
 		}
 
@@ -647,6 +693,11 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 				value = 0.1
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
+		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_nihilist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 
@@ -678,7 +729,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		# will emerge to counter a powerful Devout IG
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					exists = ig:ig_devout
 					ig:ig_devout ?= {
 						is_powerful = yes
@@ -692,7 +743,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -701,7 +752,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -710,7 +761,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -722,7 +773,7 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -731,11 +782,23 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
 			add = -50
+		}
+
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = 75
 		}
 
 		if = {
@@ -753,6 +816,11 @@ ideology_nihilist = { # Average Progressiveness - 108.33
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_nihilist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -774,8 +842,10 @@ ideology_republican_leader = { # Average Progressiveness - 75
 
 	lawgroup_bureaucracy = {
 		law_elected_bureaucrats = approve
+		law_military_bureaucrats = neutral
 		law_appointed_bureaucrats = neutral
 		law_hereditary_bureaucrats = disapprove
+		law_communal_administration = disapprove
 	}
 
 	interest_group_leader_trigger = {
@@ -786,7 +856,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				OR = {
 					has_law_or_variant = law_type:law_presidential_republic
 					has_law_or_variant = law_type:law_parliamentary_republic
@@ -797,7 +867,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 
 		# Monarchs cannot be republicans
 		NAND = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -843,7 +913,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		# more likely if the IG is unhappy with the monarchy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 				}
 				ig_approval < 0
@@ -910,7 +980,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 
 		if = {
 			limit = {
-				owner = { has_modifier = post_revolutionary_fervor }
+				owner ?= { has_modifier = post_revolutionary_fervor }
 			}
 			multiply = {
 				value = 1.5
@@ -919,7 +989,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		}
 		if = {
 			limit = {
-				owner = { has_modifier = counter_revolutionary_fervor }
+				owner ?= { has_modifier = counter_revolutionary_fervor }
 			}
 			multiply = {
 				value = 0.5
@@ -943,6 +1013,11 @@ ideology_republican_leader = { # Average Progressiveness - 75
 				value = 0.1
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
+		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_republican_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 
@@ -974,7 +1049,7 @@ ideology_republican_leader = { # Average Progressiveness - 75
 		# more likely if the IG is unhappy with the monarchy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 				}
 				interest_group.ig_approval < 0
@@ -996,13 +1071,13 @@ ideology_republican_leader = { # Average Progressiveness - 75
 
 		if = {
 			limit = {
-				owner = { has_modifier = post_revolutionary_fervor }
+				owner ?= { has_modifier = post_revolutionary_fervor }
 			}
 			multiply = { value = 1.5 }
 		}
 		if = {
 			limit = {
-				owner = { has_modifier = counter_revolutionary_fervor }
+				owner ?= { has_modifier = counter_revolutionary_fervor }
 			}
 			multiply = { value = 0.5 }
 		}
@@ -1022,6 +1097,11 @@ ideology_republican_leader = { # Average Progressiveness - 75
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_republican_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -1051,13 +1131,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		law_oligarchy = strongly_disapprove
 		law_autocracy = strongly_disapprove
 		law_single_party_state = disapprove
-	}
-
-	lawgroup_free_speech = {
-		law_protected_speech = strongly_approve
-		law_right_of_assembly = approve
-		law_censorship = disapprove
-		law_outlawed_dissent = strongly_disapprove
+		law_labour_suffrage = strongly_disapprove
 	}
 
 	lawgroup_internal_security = {
@@ -1065,6 +1139,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		law_no_home_affairs = neutral
 		law_national_guard = approve
 		law_secret_police = strongly_disapprove
+		law_extraordinary_commission = disapprove
 	}
 
 	lawgroup_education_system = {
@@ -1072,6 +1147,13 @@ ideology_radical = { # Average Progressiveness - 62.5
 		law_private_schools = neutral
 		law_no_schools = disapprove
 		law_religious_schools = disapprove
+	}
+
+	lawgroup_free_speech = {
+		law_protected_speech = strongly_approve
+		law_right_of_assembly = approve
+		law_censorship = disapprove
+		law_outlawed_dissent = strongly_disapprove
 	}
 
 	lawgroup_labour_associations = { # The Sans-Culottes resented the ban on workers' associations.
@@ -1082,7 +1164,6 @@ ideology_radical = { # Average Progressiveness - 62.5
 		law_right_to_associate = neutral
 		law_factory_councils = strongly_disapprove
 	}
-
 
 	country_trigger = {
 		has_technology_researched = egalitarianism
@@ -1096,7 +1177,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				OR = {
 					has_law_or_variant = law_type:law_presidential_republic
 					has_law_or_variant = law_type:law_parliamentary_republic
@@ -1109,7 +1190,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 
 		# Monarchs cannot be republicans
 		NOT = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -1159,7 +1240,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		if = {
 			limit = {
 				NOT = {
-					owner = {
+					owner ?= {
 						has_technology_researched = socialism
 					}
 				}
@@ -1167,7 +1248,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						has_law_or_variant = law_type:law_combination_acts
 					}
 				}
@@ -1179,7 +1260,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			else_if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						OR = {
 							has_law_or_variant = law_type:law_guild_system
 							has_law_or_variant = law_type:law_anti_strike_laws
@@ -1194,7 +1275,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			else_if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						has_law_or_variant = law_type:law_right_to_associate
 					}
 				}
@@ -1206,7 +1287,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			else_if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						has_law_or_variant = law_type:law_corporatized_unions
 					}
 				}
@@ -1271,7 +1352,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 
 		if = {
 			limit = {
-				owner = { has_modifier = post_revolutionary_fervor }
+				owner ?= { has_modifier = post_revolutionary_fervor }
 			}
 			multiply = {
 				value = 1.5
@@ -1280,7 +1361,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		}
 		if = {
 			limit = {
-				owner = { has_modifier = counter_revolutionary_fervor }
+				owner ?= { has_modifier = counter_revolutionary_fervor }
 			}
 			multiply = {
 				value = 0.5
@@ -1290,7 +1371,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		# Becomes less prevalent after socialism is researched
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 				}
 			}
@@ -1326,6 +1407,11 @@ ideology_radical = { # Average Progressiveness - 62.5
 				value = 0.1
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
+		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_radical_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 
@@ -1371,7 +1457,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 		if = {
 			limit = {
 				NOT = {
-					owner = {
+					owner ?= {
 						has_technology_researched = socialism
 					}
 				}
@@ -1379,7 +1465,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						has_law_or_variant = law_type:law_combination_acts
 					}
 				}
@@ -1388,7 +1474,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			else_if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						OR = {
 							has_law_or_variant = law_type:law_guild_system
 							has_law_or_variant = law_type:law_anti_strike_laws
@@ -1400,7 +1486,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			else_if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						has_law_or_variant = law_type:law_right_to_associate
 					}
 				}
@@ -1409,7 +1495,7 @@ ideology_radical = { # Average Progressiveness - 62.5
 			else_if = {
 				limit = {
 					is_interest_group_type = ig_trade_unions
-					owner = {
+					owner ?= {
 						has_law_or_variant = law_type:law_corporatized_unions
 					}
 				}
@@ -1418,20 +1504,20 @@ ideology_radical = { # Average Progressiveness - 62.5
 		}
 				if = {
 			limit = {
-				owner = { has_modifier = post_revolutionary_fervor }
+				owner ?= { has_modifier = post_revolutionary_fervor }
 			}
 			multiply = { value = 1.5 }
 		}
 		if = {
 			limit = {
-				owner = { has_modifier = counter_revolutionary_fervor }
+				owner ?= { has_modifier = counter_revolutionary_fervor }
 			}
 			multiply = { value = 0.5 }
 		}
 		# Becomes less prevalent after socialism is researched
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 				}
 			}
@@ -1463,6 +1549,11 @@ ideology_radical = { # Average Progressiveness - 62.5
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_radical_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -1480,17 +1571,17 @@ ideology_reformer = { # Average Progressiveness - 10
 		law_cultural_exclusion = approve
 	}
 
+	lawgroup_childrens_rights = {
+		law_child_labor_allowed = disapprove
+		law_restricted_child_labor = neutral
+		law_compulsory_primary_school = approve
+	}
+
 	lawgroup_rights_of_women = {
 		law_no_womens_rights = neutral
 		law_women_own_property = approve
 		law_women_in_the_workplace = neutral
 		law_womens_suffrage = neutral
-	}
-
-	lawgroup_childrens_rights = {
-		law_child_labor_allowed = disapprove
-		law_restricted_child_labor = neutral
-		law_compulsory_primary_school = approve
 	}
 
 	lawgroup_labour_associations = {
@@ -1501,7 +1592,6 @@ ideology_reformer = { # Average Progressiveness - 10
 		law_right_to_associate = approve
 		law_factory_councils = strongly_disapprove
 	}
-
 
 	country_trigger = {
 		has_technology_researched = egalitarianism
@@ -1514,7 +1604,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_cultural_exclusion
 				has_law_or_variant = law_type:law_compulsory_primary_school
 			}
@@ -1553,7 +1643,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		# less likely among more progressive IG's if they're angry and socialism is researched
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 				}
 				OR = {
@@ -1638,6 +1728,11 @@ ideology_reformer = { # Average Progressiveness - 10
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_reformer_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -1679,7 +1774,7 @@ ideology_reformer = { # Average Progressiveness - 10
 		# less likely among more progressive IG's if they're angry and socialism is researched
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 				}
 				OR = {
@@ -1710,6 +1805,11 @@ ideology_reformer = { # Average Progressiveness - 10
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_reformer_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -1737,7 +1837,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_womens_suffrage
 			}
 		}
@@ -1754,7 +1854,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# Less likely if women already have rights
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_womens_suffrage
 						AND = {
@@ -1772,7 +1872,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# more likely with limited women's rights
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_no_womens_rights
 						has_law_or_variant = law_type:law_women_own_property
@@ -1852,7 +1952,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# more likely if character is a woman after mass propaganda
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = mass_propaganda
 				}
 				leader ?= {
@@ -1881,6 +1981,11 @@ ideology_feminist = { # Average Progressiveness - 50
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_feminist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -1888,7 +1993,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# Less likely if women already have rights
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_womens_suffrage
 						AND = {
@@ -1903,7 +2008,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# more likely with limited women's rights
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_no_womens_rights
 						has_law_or_variant = law_type:law_women_own_property
@@ -1938,7 +2043,7 @@ ideology_feminist = { # Average Progressiveness - 50
 		# more likely if character is a woman after mass propaganda
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = mass_propaganda
 				}
 				is_female = yes
@@ -1963,6 +2068,11 @@ ideology_feminist = { # Average Progressiveness - 50
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_feminist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -1971,20 +2081,20 @@ ideology_abolitionist = { # Average Progressiveness - 75
 
 	character_ideology = yes
 
-	lawgroup_slavery = {
-		law_slavery_banned = neutral
-		law_legacy_slavery = disapprove
-		law_colonial_slavery = disapprove
-		law_debt_slavery = strongly_disapprove
-		law_slave_trade = strongly_disapprove
-	}
-
 	lawgroup_land_reform = {
 		law_serfdom = strongly_disapprove
 		law_tenant_farmers = neutral
 		law_peasant_proprietorship = neutral
 		law_collectivized_agriculture = neutral
 		law_commercialized_agriculture = neutral
+	}
+
+	lawgroup_slavery = {
+		law_slavery_banned = neutral
+		law_legacy_slavery = disapprove
+		law_colonial_slavery = disapprove
+		law_debt_slavery = strongly_disapprove
+		law_slave_trade = strongly_disapprove
 	}
 
 	country_trigger = {
@@ -2098,6 +2208,11 @@ ideology_abolitionist = { # Average Progressiveness - 75
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_abolitionist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -2144,6 +2259,11 @@ ideology_abolitionist = { # Average Progressiveness - 75
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_abolitionist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -2229,6 +2349,11 @@ ideology_slaver = { # Average Progressiveness - -50
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_slaver_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -2270,10 +2395,15 @@ ideology_slaver = { # Average Progressiveness - -50
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_slaver_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_pacifist = { # Average Progressiveness - 0
+ideology_pacifist = { # Average Progressiveness - -8.33
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_pacifist.dds"
 
 	character_ideology = yes
@@ -2283,6 +2413,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		law_professional_army = disapprove
 		law_peasant_levies = disapprove
 		law_mass_conscription = disapprove
+		law_revolutionary_guard = strongly_disapprove
 	}
 
 	lawgroup_navy_model = {
@@ -2294,6 +2425,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 
 	lawgroup_colonization = {
 		law_no_colonial_affairs = approve
+		law_internal_colonization = disapprove
 		law_colonial_resettlement = strongly_disapprove
 		law_colonial_exploitation = strongly_disapprove
 		law_frontier_colonization = strongly_disapprove
@@ -2315,7 +2447,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# emerges to counter powerful armed forces
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					exists = ig:ig_armed_forces
 					ig:ig_armed_forces ?= {
 						is_powerful = yes
@@ -2330,7 +2462,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# less likely if issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_colonial_resettlement
 						has_law_or_variant = law_type:law_colonial_exploitation
@@ -2347,13 +2479,13 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# more likely if a war you started isn't going well
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_at_war = yes
 					any_scope_war = {
 						attacker_warleader ?= { this = ROOT.owner }
 						has_war_support = {
 							target = root.owner
-							value < 0
+							value < 50
 						}
 					}
 				}
@@ -2366,7 +2498,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# more likely with devastation in incorporated states
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						is_incorporated = yes
 						devastation > 0.2
@@ -2435,6 +2567,11 @@ ideology_pacifist = { # Average Progressiveness - 0
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_pacifist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -2442,7 +2579,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# emerges to counter powerful armed forces
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					exists = ig:ig_armed_forces
 					ig:ig_armed_forces ?= {
 						is_powerful = yes
@@ -2454,7 +2591,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# less likely if issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_colonial_resettlement
 						has_law_or_variant = law_type:law_colonial_exploitation
@@ -2468,13 +2605,13 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# more likely if a war you started isn't going well
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_at_war = yes
 					any_scope_war = {
 						attacker_warleader ?= { this = ROOT.owner }
 						has_war_support = {
 							target = root.owner
-							value < 0
+							value < 50
 						}
 					}
 				}
@@ -2484,7 +2621,7 @@ ideology_pacifist = { # Average Progressiveness - 0
 		# more likely with devastation in incorporated states
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						is_incorporated = yes
 						devastation > 0.2
@@ -2529,10 +2666,15 @@ ideology_pacifist = { # Average Progressiveness - 0
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_pacifist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_jingoist_leader = { # Average Progressiveness - 12.5
+ideology_jingoist_leader = { # Average Progressiveness - 8.33
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_jingoist.dds"
 
 	character_ideology = yes
@@ -2542,6 +2684,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		law_professional_army = approve
 		law_national_militia = neutral
 		law_peasant_levies = disapprove
+		law_revolutionary_guard = disapprove
 	}
 
 	lawgroup_navy_model = {
@@ -2552,7 +2695,8 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 	}
 
 	lawgroup_colonization = {
-		law_no_colonial_affairs = neutral
+		law_no_colonial_affairs = disapprove
+		law_internal_colonization = neutral
 		law_colonial_resettlement = approve
 		law_frontier_colonization = approve
 		law_colonial_exploitation = strongly_approve
@@ -2566,7 +2710,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_mass_conscription
 				has_law_or_variant = law_type:law_colonial_exploitation
 			}
@@ -2584,7 +2728,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# less likely if issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_colonial_exploitation
 					has_law_or_variant = law_type:law_mass_conscription
 				}
@@ -2609,7 +2753,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# more likely if you border a rival
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_rival_country = {
 						any_neighbouring_state = {
 							owner = root.owner
@@ -2625,7 +2769,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# more likely if you're the defender in a war
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_at_war = yes
 					any_scope_war = {
 						defender_warleader ?= { this = ROOT.owner }
@@ -2674,6 +2818,11 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_jingoist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -2681,7 +2830,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# less likely if issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_colonial_exploitation
 					has_law_or_variant = law_type:law_mass_conscription
 				}
@@ -2700,7 +2849,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# more likely if you border a rival
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_rival_country = {
 						any_neighbouring_state = {
 							owner = root.owner
@@ -2713,7 +2862,7 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 		# more likely if you're the defender in a war
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_at_war = yes
 					any_scope_war = {
 						defender_warleader ?= { this = ROOT.owner }
@@ -2737,6 +2886,11 @@ ideology_jingoist_leader = { # Average Progressiveness - 12.5
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_jingoist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -2779,7 +2933,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 		}
@@ -2796,7 +2950,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# less likely in a theocracy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_theocracy
 				}
 			}
@@ -2808,7 +2962,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# less likely if IG is happy in a republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { country_has_monarchy_law = yes }
 				}
 				ig_approval > 0
@@ -2821,7 +2975,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# more likely if IG is happy in a monarchy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 				}
 				ig_approval >= define:NPolitics|APPROVAL_THRESHOLD_HAPPY
@@ -2880,6 +3034,11 @@ ideology_royalist = { # Average Progressiveness - 0
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_royalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -2887,7 +3046,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# less likely in a theocracy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_theocracy
 				}
 			}
@@ -2896,7 +3055,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# less likely if IG is happy in a republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { country_has_monarchy_law = yes }
 				}
 				interest_group.ig_approval > 0
@@ -2906,7 +3065,7 @@ ideology_royalist = { # Average Progressiveness - 0
 		# more likely if IG is happy in a monarchy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 				}
 				interest_group.ig_approval >= define:NPolitics|APPROVAL_THRESHOLD_HAPPY
@@ -2929,22 +3088,21 @@ ideology_royalist = { # Average Progressiveness - 0
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_royalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_social_democrat = { # Average Progressiveness - 67.85
-	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_social_democrat.dds"
+ideology_state_socialist = { # Average Progressiveness - 65.62
+	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_socialist.dds"
 
 	character_ideology = yes
 
-	lawgroup_labor_rights = {
-		law_worker_protections = strongly_approve
-		law_regulatory_bodies = approve
-		law_no_workers_rights = neutral
-	}
-
 	lawgroup_distribution_of_power = {
-		law_universal_suffrage = strongly_approve
+		law_universal_suffrage = approve
 		law_census_voting = neutral
 		law_wealth_voting = disapprove
 		law_landed_voting = disapprove
@@ -2952,7 +3110,19 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		law_technocracy = disapprove
 		law_oligarchy = strongly_disapprove
 		law_autocracy = strongly_disapprove
-		law_single_party_state = strongly_disapprove
+		law_single_party_state = neutral
+		law_labour_suffrage = strongly_disapprove
+	}
+
+	lawgroup_economic_system = {
+		law_command_economy = strongly_approve
+		law_cooperative_ownership = approve
+		law_interventionism = neutral
+		law_agrarianism = disapprove
+		law_traditionalism = disapprove
+		law_laissez_faire = strongly_disapprove
+		law_industry_banned = strongly_disapprove
+		law_extraction_economy = strongly_disapprove
 	}
 
 	lawgroup_taxation = {
@@ -2963,8 +3133,14 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		law_graduated_taxation = strongly_approve
 	}
 
+	lawgroup_labor_rights = {
+		law_worker_protections = strongly_approve
+		law_regulatory_bodies = approve
+		law_no_workers_rights = disapprove
+	}
+
 	lawgroup_welfare = {
-		law_poor_laws = strongly_disapprove
+		law_poor_laws = disapprove
 		law_no_social_security = strongly_disapprove
 		law_wage_subsidies = approve
 		law_old_age_pension = strongly_approve
@@ -2979,21 +3155,19 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		law_factory_councils = strongly_disapprove
 	}
 
-
-
 	country_trigger = {
 		has_technology_researched = socialism
 	}
 
 	interest_group_leader_trigger = {
-		ideology_social_democrat_valid_trigger = yes
+		ideology_state_socialist_valid_trigger = yes
 	}
 
 	non_interest_group_leader_trigger = {
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_universal_suffrage
 				has_law_or_variant = law_type:law_graduated_taxation
 				has_law_or_variant = law_type:law_old_age_pension
@@ -3001,7 +3175,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 			}
 		}
 		interest_group ?= {
-			ideology_social_democrat_valid_trigger = yes
+			ideology_state_socialist_valid_trigger = yes
 		}
 	}
 
@@ -3014,11 +3188,11 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		# More likely if issues are relevant
 		if = {
 			limit = {
-				owner.ideology_social_democrat_disfavoured_laws > 0
+				owner.ideology_state_socialist_disfavoured_laws > 0
 			}
 			add = {
-				value = owner.ideology_social_democrat_disfavoured_laws
-				multiply = 10 # Caste laws don't count by default
+				value = owner.ideology_state_socialist_disfavoured_laws
+				multiply = 9 # Caste laws don't count by default
 				desc = "DISFAVORED_LAWS"
 			}
 		}
@@ -3039,7 +3213,7 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 			limit = {
 				is_interest_group_type = ig_devout
 				ig_approval > 0
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -3048,12 +3222,12 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 				desc = "CONTENT_IN_CR"
 			}
 		}
-		# more likely for content trade unions outside of council republic
+		# more likely for content Trade Unions outside of council republic
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
 				ig_approval > 0
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 			}
@@ -3106,8 +3280,8 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		# Pedro JE victory
 		if = {
 			limit = {
-				owner = {
-					always = no  # [#6573] was: has_variable = brz_enduring_empire
+				owner ?= {
+					always = no  # [#10327] was: has_variable = brz_enduring_empire
 				}
 			}
 			add = {
@@ -3115,17 +3289,30 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 				desc = "BRZ_ENDURING_EMPIRE"
 			}
 		}
-		# extremely unlikely for trade unions in council republic
+		# extremely unlikely for Trade Unions in council republic
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
 			multiply = {
 				value = 0.01
 				desc = "COUNCIL_REPUBLIC_LAW"
+			}
+		}
+		# National Liberation Alliance
+		if = {
+			limit = {
+				owner ?= {
+					always = no  # [#10327] was: has_variable = national_liberation_alliance_variable
+					always = no  # [#10327] was: has_journal_entry = je_new_republic
+				}
+			}
+			multiply = {
+				value = 1.20
+				desc = "NATIONAL_LIBERATION_ALLIANCE"
 			}
 		}
 		if = {
@@ -3145,6 +3332,11 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_state_socialist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -3153,11 +3345,11 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 		# More likely if issues are relevant
 		if = {
 			limit = {
-				owner.ideology_social_democrat_disfavoured_laws > 0
+				owner.ideology_state_socialist_disfavoured_laws > 0
 			}
 			add = {
-				value = owner.ideology_social_democrat_disfavoured_laws
-				multiply = 10 # Caste laws don't count by default
+				value = owner.ideology_state_socialist_disfavoured_laws
+				multiply = 9 # Caste laws don't count by default
 			}
 		}
 
@@ -3174,18 +3366,18 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 			limit = {
 				is_interest_group_type = ig_devout
 				interest_group.ig_approval > 0
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
 			add = 75
 		}
-		# more likely for content trade unions outside of council republic
+		# more likely for content Trade Unions outside of council republic
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
 				interest_group.ig_approval > 0
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 			}
@@ -3202,11 +3394,11 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 			}
 			add = 50
 		}
-		# extremely unlikely for trade unions in council republic
+		# extremely unlikely for Trade Unions in council republic
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -3228,19 +3420,18 @@ ideology_social_democrat = { # Average Progressiveness - 67.85
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_state_socialist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_communist = { # Average Progressiveness - 112.5
+ideology_communist_leader = { # Average Progressiveness - 104.16
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_communist.dds"
 
 	character_ideology = yes
-
-	lawgroup_labor_rights = {
-		law_worker_protections = strongly_approve
-		law_regulatory_bodies = approve
-		law_no_workers_rights = neutral
-	}
 
 	lawgroup_governance_principles = {
 		law_monarchy = strongly_disapprove
@@ -3249,18 +3440,20 @@ ideology_communist = { # Average Progressiveness - 112.5
 		law_corporate_state = strongly_disapprove
 		law_social_monarchy = strongly_disapprove
 		law_theocracy = strongly_disapprove
-		law_council_republic = strongly_approve
+		law_council_republic = approve
 	}
 
-	lawgroup_economic_system = {
-		law_command_economy = strongly_approve
-		law_cooperative_ownership = strongly_approve
-		law_interventionism = neutral
-		law_agrarianism = disapprove
-		law_traditionalism = disapprove
-		law_laissez_faire = strongly_disapprove
-		law_industry_banned = strongly_disapprove
-		law_extraction_economy = strongly_disapprove
+	lawgroup_distribution_of_power = {
+		law_oligarchy = strongly_disapprove
+		law_autocracy = strongly_disapprove
+		law_anarchy = neutral
+		law_universal_suffrage = disapprove
+		law_census_voting = strongly_disapprove
+		law_wealth_voting = strongly_disapprove
+		law_landed_voting = strongly_disapprove
+		law_technocracy = disapprove
+		law_single_party_state = disapprove
+		law_labour_suffrage = approve
 	}
 
 	lawgroup_church_and_state = {
@@ -3270,18 +3463,26 @@ ideology_communist = { # Average Progressiveness - 112.5
 		# [#3410] dropped law_state_atheism = approve (law removed)
 	}
 
-	lawgroup_land_reform = {
-		law_serfdom = strongly_disapprove
-		law_commercialized_agriculture = disapprove
-		law_tenant_farmers = disapprove
-		law_peasant_proprietorship = neutral
-		law_collectivized_agriculture = approve
+	lawgroup_bureaucracy = {
+		law_elected_bureaucrats = disapprove
+		law_military_bureaucrats = strongly_disapprove
+		law_appointed_bureaucrats = disapprove
+		law_hereditary_bureaucrats = strongly_disapprove
+		law_communal_administration = approve
+	}
+
+	lawgroup_army_model = {
+		law_mass_conscription = neutral
+		law_professional_army = disapprove
+		law_national_militia = neutral
+		law_peasant_levies = strongly_disapprove
+		law_revolutionary_guard = approve
 	}
 
 	lawgroup_labour_associations = {
-		law_combination_acts = disapprove
+		law_combination_acts = strongly_disapprove
 		law_guild_system = strongly_disapprove
-		law_anti_strike_laws = neutral
+		law_anti_strike_laws = disapprove
 		law_corporatized_unions = strongly_disapprove
 		law_right_to_associate = neutral
 		law_factory_councils = approve
@@ -3292,14 +3493,14 @@ ideology_communist = { # Average Progressiveness - 112.5
 	}
 
 	interest_group_leader_trigger = {
-		ideology_communist_valid_trigger = yes
+		ideology_communist_leader_valid_trigger = yes
 	}
 
 	non_interest_group_leader_trigger = {
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_collectivized_agriculture
 				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
 				has_law_or_variant = law_type:law_council_republic
@@ -3308,7 +3509,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		}
 		# Monarchs cannot be republicans
 		NAND = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -3317,7 +3518,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 			}
 		}
 		interest_group ?= {
-			ideology_communist_valid_trigger = yes
+			ideology_communist_leader_valid_trigger = yes
 		}
 	}
 
@@ -3326,20 +3527,34 @@ ideology_communist = { # Average Progressiveness - 112.5
 			add = 50
 			desc = "base_value"
 		}
-		# More likely if people are angry
-		add = {
-			value = owner.radical_fraction
-			multiply = 100
-			desc = "COUNTRY_RADICALS"
+		# More likely if people are angry, or content under a Council Republic
+		if = {
+			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_council_republic
+				}
+			}
+			add = {
+				value = owner.loyalist_fraction
+				multiply = 100
+				desc = "COUNTRY_LOYALISTS"
+			}
+		}
+		else = {
+			add = {
+				value = owner.radical_fraction
+				multiply = 100
+				desc = "COUNTRY_RADICALS"
+			}
 		}
 
 		# More likely if issues are relevant
 		if = {
 			limit = {
-				owner.ideology_communist_disfavoured_laws > 0
+				owner.ideology_communist_leader_disfavoured_laws > 0
 			}
 			add = {
-				value = owner.ideology_communist_disfavoured_laws
+				value = owner.ideology_communist_leader_disfavoured_laws
 				multiply = 8
 				desc = "DISFAVORED_LAWS"
 			}
@@ -3348,10 +3563,10 @@ ideology_communist = { # Average Progressiveness - 112.5
 		# Less likely if issues are not relevant
 		if = {
 			limit = {
-				owner.ideology_communist_favoured_laws > 0
+				owner.ideology_communist_leader_favoured_laws > 0
 			}
 			subtract = {
-				value = owner.ideology_communist_favoured_laws
+				value = owner.ideology_communist_leader_favoured_laws
 				multiply = 8
 				desc = "FAVORED_LAWS"
 			}
@@ -3360,7 +3575,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		# More likely for angry IG's outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 				NOT = { is_interest_group_type = ig_armed_forces }
@@ -3375,7 +3590,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol < average_expected_sol
 				}
@@ -3389,7 +3604,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -3401,7 +3616,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -3413,7 +3628,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -3428,7 +3643,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -3440,7 +3655,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
@@ -3451,7 +3666,48 @@ ideology_communist = { # Average Progressiveness - 112.5
 		}
 		if = {
 			limit = {
-				owner = { always = no }  # [#6573] was: has_variable = election_communist_support
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = {
+				value = 75
+				desc = "FACTORY_COUNCILS_AMENDMENT"
+			}
+		}
+		# Communal Administration favours the Trade Unions
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					has_law_or_variant = law_type:law_communal_administration
+				}
+			}
+			add = {
+				value = 50
+				desc = "COMMUNAL_ADMINISTRATION_LAW"
+			}
+		}
+		# Revolutionary Guard favours the Armed Forces
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				owner ?= {
+					has_law_or_variant = law_type:law_revolutionary_guard
+				}
+			}
+			add = {
+				value = 50
+				desc = "REVOLUTIONARY_GUARD_LAW"
+			}
+		}
+
+		if = {
+			limit = {
+				owner ?= { always = no }  # [#10327] was: owner ?= { has_variable = election_communist_support }
 			}
 			add = {
 				value = 50
@@ -3460,16 +3716,62 @@ ideology_communist = { # Average Progressiveness - 112.5
 		}
 		if = {
 			limit = {
-				owner = { always = no }  # [#6573] was: has_variable = communism_1_done
+				owner ?= { always = no }  # [#10327] was: owner ?= { has_variable = communism_1_done }
 			}
 			add = {
 				value = 100
 				desc = "COMMUNISM_1_COMPLETE"
 			}
 		}
+
+		# Multiplied by inverse percent of peasants
+		if = {
+			limit = {
+				owner ?= {
+					"owner.pop_type_percent_country(pop_type:peasants)" < 0.25
+				}
+			}
+			multiply = {
+				value = 1
+				add = {
+					value = 1
+					subtract = "owner.pop_type_percent_country(pop_type:peasants)"
+				}
+				desc = "LOW_PEASANTS_PERCENT"
+			}
+		}
+		else = {
+			multiply = {
+				value = 0.5
+				desc = "PEASANTS_PERCENT"
+			}
+		}
+
+		# Multiplied by inverse GDP per capita percentage
+		if = {
+			limit = {
+				owner.gdp_per_capita_ranking < 20 # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+			}
+			multiply = {
+				value = 1
+				add = {
+					value = 100
+					subtract = owner.gdp_per_capita_ranking # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+					divide = 100
+				}
+				desc = "HIGH_GDP_PER_CAPITA"
+			}
+		}
+		else = {
+			multiply = {
+				value = 0.5
+				desc = "LOW_GDP_PER_CAPITA"
+			}
+		}
+
 		if = { #Armed Forces should not become communist too often outside CRs.
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
 					}
@@ -3481,14 +3783,37 @@ ideology_communist = { # Average Progressiveness - 112.5
 				desc = "ig_armed_forces"
 			}
 		}
+		# National Liberation Alliance
+		if = {
+			limit = {
+				owner ?= {
+					always = no  # [#10327] was: has_variable = national_liberation_alliance_variable
+					always = no  # [#10327] was: has_journal_entry = je_new_republic
+				}
+			}
+			multiply = {
+				value = 1.25
+				desc = "NATIONAL_LIBERATION_ALLIANCE"
+			}
+		}
 		if = {
 			limit = {
 				OR = {
-					always = no  # [#6573] was: has_variable = chose_vanguardism
-					always = no  # [#6573] was: has_variable = chose_anarchism
-					always = no  # [#6573] was: has_variable = chose_conservatism
-					always = no  # [#6573] was: has_variable = chose_fascism
-					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#10327] was: has_variable = chose_vanguardism
+					always = no  # [#10327] was: has_variable = chose_anarchism
+				}
+			}
+			multiply = {
+				value = 0.5
+				desc = "CHOSE_A_DIFFERENT_RADICAL_PATH"
+			}
+		}
+		if = {
+			limit = {
+				OR = {
+					always = no  # [#10327] was: has_variable = chose_conservatism
+					always = no  # [#10327] was: has_variable = chose_fascism
+					always = no  # [#10327] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = {
@@ -3496,24 +3821,42 @@ ideology_communist = { # Average Progressiveness - 112.5
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_communist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
 		value = 50
 
-		# More likely if people are angry
-		add = {
-			value = owner.radical_fraction
-			multiply = 100
+		# More likely if people are angry, or content under a Council Republic
+		if = {
+			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_council_republic
+				}
+			}
+			add = {
+				value = owner.loyalist_fraction
+				multiply = 100
+			}
+		}
+		else = {
+			add = {
+				value = owner.radical_fraction
+				multiply = 100
+			}
 		}
 
 		# More likely if issues are relevant
 		if = {
 			limit = {
-				owner.ideology_communist_disfavoured_laws > 0
+				owner.ideology_communist_leader_disfavoured_laws > 0
 			}
 			add = {
-				value = owner.ideology_communist_disfavoured_laws
+				value = owner.ideology_communist_leader_disfavoured_laws
 				multiply = 8
 			}
 		}
@@ -3521,10 +3864,10 @@ ideology_communist = { # Average Progressiveness - 112.5
 		# Less likely if issues are not relevant
 		if = {
 			limit = {
-				owner.ideology_communist_favoured_laws > 0
+				owner.ideology_communist_leader_favoured_laws > 0
 			}
 			subtract = {
-				value = owner.ideology_communist_favoured_laws
+				value = owner.ideology_communist_leader_favoured_laws
 				multiply = 8
 			}
 		}
@@ -3532,7 +3875,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		# More likely for angry IG's outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 				NOT = { is_interest_group_type = ig_armed_forces }
@@ -3547,7 +3890,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol < average_expected_sol
 				}
@@ -3559,7 +3902,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -3568,7 +3911,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -3577,7 +3920,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -3589,7 +3932,7 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -3598,16 +3941,85 @@ ideology_communist = { # Average Progressiveness - 112.5
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
 			add = -50
 		}
 
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = 75
+		}
+		# Communal Administration favours the Trade Unions
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					has_law_or_variant = law_type:law_communal_administration
+				}
+			}
+			add = 50
+		}
+		# Revolutionary Guard favours the Armed Forces
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				owner ?= {
+					has_law_or_variant = law_type:law_revolutionary_guard
+				}
+			}
+			add = 50
+		}
+
+		# Multiplied by inverse percent of peasants
+		if = {
+			limit = {
+				owner ?= {
+					"owner.pop_type_percent_country(pop_type:peasants)" < 0.25
+				}
+			}
+			multiply = {
+				value = 1
+				add = {
+					value = 1
+					subtract = "owner.pop_type_percent_country(pop_type:peasants)"
+				}
+			}
+		}
+		else = {
+			multiply = 0.5
+		}
+
+		# Multiplied by inverse GDP per capita percentage
+		if = {
+			limit = {
+				owner.gdp_per_capita_ranking < 20 # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+			}
+			multiply = {
+				value = 1
+				add = {
+					value = 100
+					subtract = owner.gdp_per_capita_ranking # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+					divide = 100
+				}
+			}
+		}
+		else = {
+			multiply = 0.5
+		}
+
 		if = { #Armed Forces should not become communist too often outside CRs.
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
 					}
@@ -3619,19 +4031,31 @@ ideology_communist = { # Average Progressiveness - 112.5
 		if = {
 			limit = {
 				OR = {
-					always = no  # [#6573] was: has_variable = chose_vanguardism
-					always = no  # [#6573] was: has_variable = chose_anarchism
-					always = no  # [#6573] was: has_variable = chose_conservatism
-					always = no  # [#6573] was: has_variable = chose_fascism
-					always = no  # [#6573] was: has_variable = chose_ethno_nationalism
+					always = no  # [#10327] was: has_variable = chose_vanguardism
+					always = no  # [#10327] was: has_variable = chose_anarchism
+				}
+			}
+			multiply = 0.5
+		}
+		if = {
+			limit = {
+				OR = {
+					always = no  # [#10327] was: has_variable = chose_conservatism
+					always = no  # [#10327] was: has_variable = chose_fascism
+					always = no  # [#10327] was: has_variable = chose_ethno_nationalism
 				}
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_communist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_vanguardist = { # Average Progressiveness - 83.33
+ideology_vanguardist = { # Average Progressiveness - 70.83
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_vanguardist.dds"
 
 	character_ideology = yes
@@ -3643,7 +4067,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		law_corporate_state = strongly_disapprove
 		law_social_monarchy = strongly_disapprove
 		law_theocracy = strongly_disapprove
-		law_council_republic = strongly_approve
+		law_council_republic = approve
 	}
 
 	lawgroup_distribution_of_power = {
@@ -3654,8 +4078,26 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		law_census_voting = strongly_disapprove
 		law_wealth_voting = strongly_disapprove
 		law_landed_voting = strongly_disapprove
-		law_technocracy = approve
+		law_technocracy = neutral
 		law_single_party_state = strongly_approve
+		law_labour_suffrage = approve
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_disapprove
+		law_freedom_of_conscience = disapprove
+		law_total_separation = neutral
+		# [#3410] dropped law_state_atheism = approve (law removed)
+	}
+
+	# Inherits Bureaucracy stances from IG
+
+	lawgroup_internal_security = {
+		law_national_guard = neutral
+		law_guaranteed_liberties = disapprove
+		law_no_home_affairs = disapprove
+		law_secret_police = strongly_disapprove
+		law_extraordinary_commission = approve
 	}
 
 	lawgroup_economic_system = {
@@ -3663,31 +4105,26 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		law_cooperative_ownership = approve
 		law_interventionism = neutral
 		law_agrarianism = disapprove
-		law_traditionalism = disapprove
-		law_laissez_faire = strongly_disapprove
+		law_traditionalism = strongly_disapprove
+		law_laissez_faire = disapprove
 		law_industry_banned = strongly_disapprove
 		law_extraction_economy = strongly_disapprove
 	}
 
-	lawgroup_trade_policy = {
-		law_protectionism = approve
-		law_mercantilism = disapprove
-		law_isolationism = approve
-		law_free_trade = strongly_disapprove
+	lawgroup_land_reform = {
+		law_collectivized_agriculture = approve
+		law_serfdom = strongly_disapprove
+		law_tenant_farmers = strongly_disapprove
+		law_peasant_proprietorship = disapprove
+		law_commercialized_agriculture = disapprove
 	}
 
-	lawgroup_land_reform = {
-		law_commercialized_agriculture = strongly_disapprove
-		law_serfdom = strongly_disapprove
-		law_tenant_farmers = disapprove
-		law_peasant_proprietorship = neutral
-		law_collectivized_agriculture = approve
-	}
+	# Inherits Army Model stances from IG
 
 	lawgroup_labour_associations = {
-		law_combination_acts = disapprove
+		law_combination_acts = strongly_disapprove
 		law_guild_system = strongly_disapprove
-		law_anti_strike_laws = neutral
+		law_anti_strike_laws = disapprove
 		law_corporatized_unions = strongly_disapprove
 		law_right_to_associate = neutral
 		law_factory_councils = approve
@@ -3705,7 +4142,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_collectivized_agriculture
 				has_law_or_variant = law_type:law_council_republic
 				has_law_or_variant = law_type:law_command_economy
@@ -3715,7 +4152,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		}
 		# Monarchs cannot be republicans
 		NAND = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -3733,11 +4170,25 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			add = 50
 			desc = "base_value"
 		}
-		# More likely if people are angry
-		add = {
-			value = owner.radical_fraction
-			multiply = 100
-			desc = "COUNTRY_RADICALS"
+		# More likely if people are angry, or content under a Council Republic
+		if = {
+			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_council_republic
+				}
+			}
+			add = {
+				value = owner.loyalist_fraction
+				multiply = 100
+				desc = "COUNTRY_LOYALISTS"
+			}
+		}
+		else = {
+			add = {
+				value = owner.radical_fraction
+				multiply = 100
+				desc = "COUNTRY_RADICALS"
+			}
 		}
 
 		# More likely if issues are relevant
@@ -3747,7 +4198,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			}
 			add = {
 				value = owner.ideology_vanguardist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "DISFAVORED_LAWS"
 			}
 		}
@@ -3759,7 +4210,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			}
 			subtract = {
 				value = owner.ideology_vanguardist_favoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "FAVORED_LAWS"
 			}
 		}
@@ -3767,7 +4218,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# More likely for angry IG's outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 				NOT = { is_interest_group_type = ig_armed_forces }
@@ -3783,7 +4234,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol < average_expected_sol
 				}
@@ -3796,14 +4247,11 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# More likely in an autocracy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
 					}
-					OR = {
-						has_law_or_variant = law_type:law_autocracy
-						has_law_or_variant = law_type:law_oligarchy
-					}
+					country_has_voting_franchise = no
 				}
 			}
 			add = {
@@ -3814,7 +4262,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# Unlikely for content IG's under anarchism
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_anarchy
 				}
 				ig_approval >= define:NPolitics|APPROVAL_THRESHOLD_HAPPY
@@ -3828,7 +4276,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# Extremely likely for content Armed Forces in Council Republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 				is_interest_group_type = ig_armed_forces
@@ -3840,31 +4288,25 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 				desc = "CONTENT_IN_CR"
 			}
 		}
-		# Power corrupts
+		# Being part of the Party encourages supporting the Party
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
-					OR = {
-						has_law_or_variant = law_type:law_autocracy
-						has_law_or_variant = law_type:law_oligarchy
-						has_law_or_variant = law_type:law_single_party_state
-						has_law_or_variant = law_type:law_technocracy
-					}
+					has_law_or_variant = law_type:law_single_party_state
 				}
 				is_in_government = yes
 			}
 			add = {
 				value = 50
-				desc = "AUTOCRACY_OLIGARCHY_SPS_TECHNOCRACY_LAW"
+				desc = "CR_SPS_LAW"
 			}
 		}
-
 		# Labour Association Laws
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -3876,7 +4318,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -3888,7 +4330,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -3903,7 +4345,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -3915,7 +4357,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
@@ -3924,6 +4366,48 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 				desc = "CORPORATIZED_UNIONS_LAW"
 			}
 		}
+
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = {
+				value = 75
+				desc = "FACTORY_COUNCILS_AMENDMENT"
+			}
+		}
+		# Communal Administration favours the Trade Unions
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					has_law_or_variant = law_type:law_communal_administration
+				}
+			}
+			add = {
+				value = 50
+				desc = "COMMUNAL_ADMINISTRATION_LAW"
+			}
+		}
+		# Revolutionary Guard favours the Armed Forces
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				owner ?= {
+					has_law_or_variant = law_type:law_revolutionary_guard
+				}
+			}
+			add = {
+				value = 50
+				desc = "REVOLUTIONARY_GUARD_LAW"
+			}
+		}
+
 		# Variables
 		if = {
 			limit = {
@@ -3943,9 +4427,51 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 				desc = "COMMUNISM_1_COMPLETE"
 			}
 		}
+
+		# Multiplied by percent of peasants
+		if = {
+			limit = {
+				owner ?= {
+					"owner.pop_type_percent_country(pop_type:peasants)" >= 0.25
+				}
+			}
+			multiply = {
+				value = 1
+				add = "owner.pop_type_percent_country(pop_type:peasants)"
+				desc = "PEASANTS_PERCENT"
+			}
+		}
+		else = {
+			multiply = {
+				value = 0.5
+				desc = "LOW_PEASANTS_PERCENT"
+			}
+		}
+
+		# Multiplied by GDP per capita percentage
+		if = {
+			limit = {
+				owner.gdp_per_capita_ranking >= 20 # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+			}
+			multiply = {
+				value = 1
+				add = {
+					value = owner.gdp_per_capita_ranking # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+					divide = 100
+				}
+				desc = "STATE_AND_REVOLUTION_POOR_GDP_PER_CAPITA_TT"
+			}
+		}
+		else = {
+			multiply = {
+				value = 0.5
+				desc = "HIGH_GDP_PER_CAPITA"
+			}
+		}
+
 		if = { #Armed Forces should not become communist too often outside CRs.
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
 					}
@@ -3972,15 +4498,33 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_vanguardist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
 		value = 50
 
-		# More likely if people are angry
-		add = {
-			value = owner.radical_fraction
-			multiply = 100
+		# More likely if people are angry, or content under a Council Republic
+		if = {
+			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_council_republic
+				}
+			}
+			add = {
+				value = owner.loyalist_fraction
+				multiply = 100
+			}
+		}
+		else = {
+			add = {
+				value = owner.radical_fraction
+				multiply = 100
+			}
 		}
 
 		# More likely if issues are relevant
@@ -3990,7 +4534,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			}
 			add = {
 				value = owner.ideology_vanguardist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
@@ -4001,14 +4545,14 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			}
 			subtract = {
 				value = owner.ideology_vanguardist_favoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
 		# More likely for angry IG's outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 				interest_group.ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
@@ -4023,7 +4567,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol <= 10
 				}
@@ -4034,11 +4578,11 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# More likely in an autocracy
 		if = {
 			limit = {
-				owner = {
-					OR = {
-						has_law_or_variant = law_type:law_autocracy
-						has_law_or_variant = law_type:law_oligarchy
+				owner ?= {
+					NOT = {
+						has_law_or_variant = law_type:law_council_republic
 					}
+					country_has_voting_franchise = no
 				}
 			}
 			add = 50
@@ -4047,7 +4591,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# Unlikely for content IG's under anarchism
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_anarchy
 				}
 				interest_group.ig_approval >= define:NPolitics|APPROVAL_THRESHOLD_HAPPY
@@ -4061,7 +4605,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		# Extremely likely for content Armed Forces in Council Republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 				is_interest_group_type = ig_armed_forces
@@ -4073,17 +4617,12 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			}
 		}
 
-		# Power corrupts
+		# Being part of the Party encourages supporting the Party
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
-					OR = {
-						has_law_or_variant = law_type:law_autocracy
-						has_law_or_variant = law_type:law_oligarchy
-						has_law_or_variant = law_type:law_single_party_state
-						has_law_or_variant = law_type:law_technocracy
-					}
+					has_law_or_variant = law_type:law_single_party_state
 				}
 				is_in_government = yes
 			}
@@ -4094,7 +4633,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -4103,7 +4642,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -4112,7 +4651,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -4124,7 +4663,7 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -4133,11 +4672,43 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
 			add = -50
+		}
+
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = 75
+		}
+		# Communal Administration favours the Trade Unions
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					has_law_or_variant = law_type:law_communal_administration
+				}
+			}
+			add = 50
+		}
+		# Revolutionary Guard favours the Armed Forces
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				owner ?= {
+					has_law_or_variant = law_type:law_revolutionary_guard
+				}
+			}
+			add = 50
 		}
 
 		# Variables
@@ -4154,9 +4725,42 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			add = 100
 		}
 
+		# Multiplied by percent of peasants
+		if = {
+			limit = {
+				owner ?= {
+					"owner.pop_type_percent_country(pop_type:peasants)" >= 0.25
+				}
+			}
+			multiply = {
+				value = 1
+				add = "owner.pop_type_percent_country(pop_type:peasants)"
+			}
+		}
+		else = {
+			multiply = 0.5
+		}
+
+		# Multiplied by GDP per capita percentage
+		if = {
+			limit = {
+				owner.gdp_per_capita_ranking >= 20 # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+			}
+			multiply = {
+				value = 1
+				add = {
+					value = owner.gdp_per_capita_ranking # TODO PRCAL-46014: change this out for the ratio of global average gdp per capita to gdp per capita
+					divide = 100
+				}
+			}
+		}
+		else = {
+			multiply = 0.5
+		}
+
 		if = { #Armed Forces should not become communist too often outside CRs.
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
 					}
@@ -4177,19 +4781,27 @@ ideology_vanguardist = { # Average Progressiveness - 83.33
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_vanguardist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_fascist = { # Average Progressiveness - 4.17
+ideology_fascist = { # Average Progressiveness - 7.14
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_fascist.dds"
 
 	character_ideology = yes
 
-	lawgroup_internal_security = {
-		law_guaranteed_liberties = strongly_disapprove
-		law_no_home_affairs = neutral
-		law_national_guard = approve
-		law_secret_police = strongly_approve
+	lawgroup_governance_principles = {
+		law_theocracy = disapprove
+		law_monarchy = neutral
+		law_presidential_republic = neutral
+		law_parliamentary_republic = neutral
+		law_corporate_state = strongly_approve
+		law_social_monarchy = approve
+		law_council_republic = strongly_disapprove
 	}
 
 	lawgroup_distribution_of_power = {
@@ -4202,6 +4814,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		law_census_voting = disapprove
 		law_wealth_voting = disapprove
 		law_landed_voting = disapprove
+		law_labour_suffrage = strongly_disapprove
 	}
 
 	lawgroup_citizenship = {
@@ -4217,7 +4830,16 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		law_mass_conscription = strongly_approve
 		law_professional_army = approve
 		law_national_militia = disapprove
-		law_peasant_levies = disapprove
+		law_peasant_levies = strongly_disapprove
+		law_revolutionary_guard = strongly_disapprove
+	}
+
+	lawgroup_internal_security = {
+		law_guaranteed_liberties = strongly_disapprove
+		law_no_home_affairs = neutral
+		law_national_guard = approve
+		law_secret_police = strongly_approve
+		law_extraordinary_commission = strongly_disapprove
 	}
 
 	lawgroup_free_speech = {
@@ -4225,16 +4847,6 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		law_right_of_assembly = disapprove
 		law_censorship = neutral
 		law_outlawed_dissent = strongly_approve
-	}
-
-	lawgroup_governance_principles = {
-		law_theocracy = disapprove
-		law_monarchy = neutral
-		law_presidential_republic = neutral
-		law_parliamentary_republic = neutral
-		law_corporate_state = strongly_approve
-		law_social_monarchy = approve
-		law_council_republic = strongly_disapprove
 	}
 
 	lawgroup_labour_associations = {
@@ -4258,7 +4870,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_autocracy
 				has_law_or_variant = law_type:law_ethnostate
 				has_law_or_variant = law_type:law_outlawed_dissent
@@ -4289,7 +4901,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 			}
 			add = {
 				value = owner.ideology_fascist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "DISFAVORED_LAWS"
 			}
 		}
@@ -4301,7 +4913,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 			}
 			subtract = {
 				value = owner.ideology_fascist_favoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "FAVORED_LAWS"
 			}
 		}
@@ -4310,13 +4922,11 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		if = {
 			limit = {
 				owner ?= {
-					any_diplomatically_relevant_country = {
-						any_scope_treaty = {
-							is_enforced = yes
-							any_scope_article = {
-								has_type = money_transfer
-								source_country = root.owner
-							}
+					any_scope_treaty = {
+						is_enforced = yes
+						any_scope_article = {
+							has_type = money_transfer
+							source_country = root.owner
 						}
 					}
 				}
@@ -4329,7 +4939,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# More likely with a convenient scapegoat
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						is_incorporated = yes
 						any_scope_pop = {
@@ -4348,7 +4958,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# more likely if bankrupt
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						in_default = yes
 						has_modifier = declared_bankruptcy
@@ -4363,7 +4973,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# Less likely in council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -4387,7 +4997,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# less likely if content without ethnostate or Corporate State
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_ethnostate
 						has_law_or_variant = law_type:law_corporate_state
@@ -4430,7 +5040,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# more likely if in government with ethnostate or Corporate State
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_ethnostate
 						has_law_or_variant = law_type:law_corporate_state
@@ -4495,6 +5105,11 @@ ideology_fascist = { # Average Progressiveness - 4.17
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_fascist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -4513,7 +5128,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 			}
 			add = {
 				value = owner.ideology_fascist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
@@ -4524,7 +5139,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 			}
 			subtract = {
 				value = owner.ideology_fascist_favoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
@@ -4532,11 +5147,11 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		if = {
 			limit = {
 				owner ?= {
-					any_diplomatically_relevant_country = {
-						has_diplomatic_pact = {
-							who = root.owner
-							type = war_reparations
-							is_initiator = yes
+					any_scope_treaty = {
+						is_enforced = yes
+						any_scope_article = {
+							has_type = money_transfer
+							source_country = root.owner
 						}
 					}
 				}
@@ -4546,7 +5161,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# More likely with a convenient scapegoat
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						is_incorporated = yes
 						any_scope_pop = {
@@ -4562,7 +5177,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# more likely if bankrupt
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						in_default = yes
 						has_modifier = declared_bankruptcy
@@ -4574,7 +5189,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# Less likely in council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -4594,7 +5209,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# less likely if content without ethnostate or Corporate State
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_ethnostate
 						has_law_or_variant = law_type:law_corporate_state
@@ -4630,7 +5245,7 @@ ideology_fascist = { # Average Progressiveness - 4.17
 		# more likely if in government with ethnostate or Corporate State
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_ethnostate
 						has_law_or_variant = law_type:law_corporate_state
@@ -4682,21 +5297,27 @@ ideology_fascist = { # Average Progressiveness - 4.17
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_fascist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_anarchist = { # Average Progressiveness - 110.71
+ideology_anarchist = { # Average Progressiveness - 100
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_anarchist.dds"
 
 	character_ideology = yes
 
-	lawgroup_citizenship = {
-		law_ethnostate = strongly_disapprove
-		law_national_supremacy = strongly_disapprove
-		law_subjecthood = strongly_disapprove
-		law_racial_segregation = disapprove
-		law_cultural_exclusion = approve
-		law_multicultural = strongly_approve
+	lawgroup_governance_principles = {
+		law_monarchy = strongly_disapprove
+		law_presidential_republic = disapprove
+		law_parliamentary_republic = disapprove
+		law_corporate_state = strongly_disapprove
+		law_social_monarchy = strongly_disapprove
+		law_theocracy = strongly_disapprove
+		law_council_republic = approve
 	}
 
 	lawgroup_distribution_of_power = {
@@ -4709,6 +5330,24 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		law_oligarchy = strongly_disapprove
 		law_autocracy = strongly_disapprove
 		law_single_party_state = disapprove
+		law_labour_suffrage = approve
+	}
+
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = strongly_disapprove
+		law_subjecthood = strongly_disapprove
+		law_racial_segregation = disapprove
+		law_cultural_exclusion = approve
+		law_multicultural = strongly_approve
+	}
+
+	lawgroup_bureaucracy = {
+		law_elected_bureaucrats = disapprove
+		law_military_bureaucrats = strongly_disapprove
+		law_appointed_bureaucrats = disapprove
+		law_hereditary_bureaucrats = strongly_disapprove
+		law_communal_administration = approve
 	}
 
 	lawgroup_economic_system = {
@@ -4722,13 +5361,11 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		law_extraction_economy = strongly_disapprove
 	}
 
-	lawgroup_labour_associations = {
-		law_combination_acts = disapprove
-		law_guild_system = strongly_disapprove
-		law_anti_strike_laws = neutral
-		law_corporatized_unions = strongly_disapprove
-		law_right_to_associate = neutral
-		law_factory_councils = approve
+	lawgroup_policing = {
+		law_no_police = approve
+		law_local_police = disapprove
+		law_dedicated_police = disapprove
+		law_militarized_police = strongly_disapprove
 	}
 
 	lawgroup_free_speech = {
@@ -4738,21 +5375,13 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		law_outlawed_dissent = strongly_disapprove
 	}
 
-	lawgroup_policing = {
-		law_no_police = approve
-		law_local_police = disapprove
-		law_dedicated_police = disapprove
-		law_militarized_police = strongly_disapprove
-	}
-
-	lawgroup_governance_principles = {
-		law_monarchy = strongly_disapprove
-		law_presidential_republic = disapprove
-		law_parliamentary_republic = disapprove
-		law_corporate_state = strongly_disapprove
-		law_social_monarchy = strongly_disapprove
-		law_theocracy = strongly_disapprove
-		law_council_republic = strongly_approve
+	lawgroup_labour_associations = {
+		law_combination_acts = disapprove
+		law_guild_system = strongly_disapprove
+		law_anti_strike_laws = neutral
+		law_corporatized_unions = strongly_disapprove
+		law_right_to_associate = neutral
+		law_factory_councils = approve
 	}
 
 	country_trigger = {
@@ -4767,7 +5396,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_anarchy
 				has_law_or_variant = law_type:law_national_militia
 				has_law_or_variant = law_type:law_protected_speech
@@ -4777,7 +5406,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		}
 		# Monarchs cannot be republicans
 		NAND = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -4795,11 +5424,25 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 			add = 50
 			desc = "base_value"
 		}
-		# More likely if people are angry
-		add = {
-			value = owner.radical_fraction
-			multiply = 100
-			desc = "COUNTRY_RADICALS"
+		# More likely if people are angry, or content under Anarchy
+		if = {
+			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_anarchy
+				}
+			}
+			add = {
+				value = owner.loyalist_fraction
+				multiply = 100
+				desc = "COUNTRY_LOYALISTS"
+			}
+		}
+		else = {
+			add = {
+				value = owner.radical_fraction
+				multiply = 100
+				desc = "COUNTRY_RADICALS"
+			}
 		}
 
 		# More likely if issues are relevant
@@ -4809,7 +5452,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 			}
 			add = {
 				value = owner.ideology_anarchist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "DISFAVORED_LAWS"
 			}
 		}
@@ -4821,7 +5464,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 			}
 			subtract = {
 				value = owner.ideology_anarchist_favoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "FAVORED_LAWS"
 			}
 		}
@@ -4829,7 +5472,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		# More likely for angry IG's outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 				ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
@@ -4843,7 +5486,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol <= 10
 				}
@@ -4856,7 +5499,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		# More likely if in "government" under anarchy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_anarchy
 				}
 				is_in_government = yes
@@ -4870,7 +5513,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -4882,7 +5525,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -4894,7 +5537,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -4909,7 +5552,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -4921,7 +5564,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
@@ -4930,6 +5573,48 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 				desc = "CORPORATIZED_UNIONS_LAW"
 			}
 		}
+
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = {
+				value = 75
+				desc = "FACTORY_COUNCILS_AMENDMENT"
+			}
+		}
+		# Communal Administration favours the Trade Unions
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					has_law_or_variant = law_type:law_communal_administration
+				}
+			}
+			add = {
+				value = 50
+				desc = "COMMUNAL_ADMINISTRATION_LAW"
+			}
+		}
+		# Revolutionary Guard favours the Armed Forces
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				owner ?= {
+					has_law_or_variant = law_type:law_revolutionary_guard
+				}
+			}
+			add = {
+				value = 50
+				desc = "REVOLUTIONARY_GUARD_LAW"
+			}
+		}
+
 		# Variables
 		if = {
 			limit = {
@@ -4964,15 +5649,33 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_anarchist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
 		value = 50
 
-		# More likely if people are angry
-		add = {
-			value = owner.radical_fraction
-			multiply = 100
+		# More likely if people are angry, or content under Anarchy
+		if = {
+			limit = {
+				owner ?= {
+					has_law_or_variant = law_type:law_anarchy
+				}
+			}
+			add = {
+				value = owner.loyalist_fraction
+				multiply = 100
+			}
+		}
+		else = {
+			add = {
+				value = owner.radical_fraction
+				multiply = 100
+			}
 		}
 
 		# More likely if issues are relevant
@@ -4982,7 +5685,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 			}
 			add = {
 				value = owner.ideology_anarchist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
@@ -4993,14 +5696,14 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 			}
 			subtract = {
 				value = owner.ideology_anarchist_favoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
 		# More likely for angry IG's outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 				}
 				interest_group.ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
@@ -5013,7 +5716,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol <= 10
 				}
@@ -5023,7 +5726,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		# More likely if in "government" under anarchy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_anarchy
 				}
 				is_in_government = yes
@@ -5035,7 +5738,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_factory_councils
 				}
 			}
@@ -5044,7 +5747,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_combination_acts
 				}
 			}
@@ -5053,7 +5756,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_guild_system
 						has_law_or_variant = law_type:law_anti_strike_laws
@@ -5065,7 +5768,7 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_right_to_associate
 				}
 			}
@@ -5074,12 +5777,45 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 		else_if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
 			add = -50
 		}
+
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					active_law:lawgroup_labour_associations ?= {
+						has_amendment = amendment_type:amendment_factory_councils
+					}
+				}
+			}
+			add = 75
+		}
+		# Communal Administration favours the Trade Unions
+		if = {
+			limit = {
+				is_interest_group_type = ig_trade_unions
+				owner ?= {
+					has_law_or_variant = law_type:law_communal_administration
+				}
+			}
+			add = 50
+		}
+		# Revolutionary Guard favours the Armed Forces
+		if = {
+			limit = {
+				is_interest_group_type = ig_armed_forces
+				owner ?= {
+					has_law_or_variant = law_type:law_revolutionary_guard
+				}
+			}
+			add = 50
+		}
+
 		if = {
 			limit = {
 				OR = {
@@ -5091,6 +5827,11 @@ ideology_anarchist = { # Average Progressiveness - 110.71
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_anarchist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -5127,7 +5868,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_ethnostate
 				has_law_or_variant = law_type:law_migration_controls
 			}
@@ -5165,7 +5906,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# More likely with a convenient scapegoat
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						is_incorporated = yes
 						any_scope_pop = {
@@ -5181,7 +5922,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 			}
 			if = { # And if angry without ethnostate
 				limit = {
-					owner = {
+					owner ?= {
 						NOT = { has_law_or_variant = law_type:law_ethnostate }
 					}
 					ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
@@ -5197,7 +5938,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# Less likely in council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -5209,7 +5950,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# less likely if content without ethnostate
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_ethnostate
 					}
@@ -5257,6 +5998,11 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_ethno_nationalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -5283,7 +6029,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# More likely with a convenient scapegoat
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						is_incorporated = yes
 						any_scope_pop = {
@@ -5296,7 +6042,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 			add = 25
 			if = { # And if angry without ethnostate
 				limit = {
-					owner = {
+					owner ?= {
 						NOT = { has_law_or_variant = law_type:law_ethnostate }
 					}
 					interest_group.ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
@@ -5311,7 +6057,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# Less likely in council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -5320,7 +6066,7 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 		# less likely if content without ethnostate
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_ethnostate
 					}
@@ -5358,6 +6104,11 @@ ideology_ethno_nationalist = { # Average Progressiveness - -37.5
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_ethno_nationalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -5365,13 +6116,6 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_theocrat.dds"
 
 	character_ideology = yes
-
-	lawgroup_church_and_state = {
-		law_state_religion = approve
-		law_freedom_of_conscience = disapprove
-		law_total_separation = strongly_disapprove
-		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
-	}
 
 	lawgroup_governance_principles = {
 		law_theocracy = strongly_approve
@@ -5383,6 +6127,13 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		law_council_republic = disapprove
 	}
 
+	lawgroup_church_and_state = {
+		law_state_religion = approve
+		law_freedom_of_conscience = disapprove
+		law_total_separation = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
+	}
+
 	interest_group_leader_trigger = {
 		ideology_theocrat_valid_trigger = yes
 	}
@@ -5391,7 +6142,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_theocracy
 				has_law_or_variant = law_type:law_state_religion
 			}
@@ -5418,7 +6169,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 			if = { # Even more likely if the issues are relevant and the Devout are angry.
 				limit = {
 					ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
-					owner = {
+					owner ?= {
 						NOR = {
 							has_law_or_variant = law_type:law_theocracy
 							country_has_monarchy_law = yes
@@ -5439,7 +6190,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		if = {
 			limit = {
 				ig_approval >= define:NPolitics|APPROVAL_THRESHOLD_HAPPY
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_state_religion
 						has_law_or_variant = law_type:law_theocracy
@@ -5489,6 +6240,11 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_theocrat_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -5503,7 +6259,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 			if = { # Even more likely if the issues are relevant and the Devout are angry.
 				limit = {
 					interest_group.ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
-					owner = {
+					owner ?= {
 						NOR = {
 							has_law_or_variant = law_type:law_theocracy
 							country_has_monarchy_law = yes
@@ -5524,7 +6280,7 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 		if = {
 			limit = {
 				interest_group.ig_approval >= define:NPolitics|APPROVAL_THRESHOLD_HAPPY
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_state_religion
 						has_law_or_variant = law_type:law_theocracy
@@ -5553,13 +6309,25 @@ ideology_theocrat = { # Average Progressiveness - -37.5
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_theocrat_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_market_liberal = { # Average Progressiveness - 4
+ideology_market_liberal = { # Average Progressiveness - 3.57
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_market_liberal.dds"
 
 	character_ideology = yes
+
+	lawgroup_navy_model = {
+		law_merchant_navy = approve
+		law_jeune_ecole = neutral
+		law_professional_navy = disapprove
+		law_diplomatic_navy = neutral
+	}
 
 	lawgroup_economic_system = {
 		law_laissez_faire = strongly_approve
@@ -5572,30 +6340,11 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		law_extraction_economy = strongly_disapprove
 	}
 
-	lawgroup_childrens_rights = {
-		law_child_labor_allowed = approve
-		law_restricted_child_labor = disapprove
-		law_compulsory_primary_school = strongly_disapprove
-	}
-
 	lawgroup_trade_policy = {
 		law_free_trade = strongly_approve
 		law_mercantilism = disapprove
 		law_protectionism = disapprove
 		law_isolationism = strongly_disapprove
-	}
-
-	lawgroup_navy_model = {
-		law_merchant_navy = approve
-		law_jeune_ecole = neutral
-		law_professional_navy = disapprove
-		law_diplomatic_navy = neutral
-	}
-
-	lawgroup_labor_rights = {
-		law_worker_protections = strongly_disapprove
-		law_regulatory_bodies = disapprove
-		law_no_workers_rights = neutral
 	}
 
 	lawgroup_land_reform = {
@@ -5604,6 +6353,18 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		law_tenant_farmers = neutral
 		law_peasant_proprietorship = neutral
 		law_commercialized_agriculture = approve
+	}
+
+	lawgroup_labor_rights = {
+		law_worker_protections = strongly_disapprove
+		law_regulatory_bodies = disapprove
+		law_no_workers_rights = neutral
+	}
+
+	lawgroup_childrens_rights = {
+		law_child_labor_allowed = approve
+		law_restricted_child_labor = disapprove
+		law_compulsory_primary_school = strongly_disapprove
 	}
 
 	lawgroup_labour_associations = {
@@ -5636,7 +6397,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_laissez_faire
 				has_law_or_variant = law_type:law_child_labor_allowed
 				has_law_or_variant = law_type:law_free_trade
@@ -5673,7 +6434,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			}
 			add = {
 				value = owner.ideology_market_liberal_disfavoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "DISFAVORED_LAWS"
 			}
 		}
@@ -5685,7 +6446,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			}
 			subtract = {
 				value = owner.ideology_market_liberal_favoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "FAVORED_LAWS"
 			}
 		}
@@ -5695,7 +6456,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			limit = {
 				is_interest_group_type = ig_landowners
 				is_powerful = no
-				owner = {
+				owner ?= {
 					exists = ig:ig_industrialists
 					ig:ig_industrialists ?= {
 						is_powerful = yes
@@ -5712,7 +6473,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			limit = {
 				is_interest_group_type = ig_landowners
 				is_powerful = yes
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_traditionalism
@@ -5727,7 +6488,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# very unlikely in countries without a large urban center
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						any_scope_state = {
 							any_scope_building = {
@@ -5746,7 +6507,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# Less likely for unrecognized countries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_country_type = unrecognized
 				}
 			}
@@ -5758,7 +6519,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# More likely for GP's
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_rank = rank_value:great_power
 				}
 			}
@@ -5824,6 +6585,11 @@ ideology_market_liberal = { # Average Progressiveness - 4
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_market_liberal_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -5843,7 +6609,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			}
 			add = {
 				value = owner.ideology_market_liberal_disfavoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
@@ -5854,7 +6620,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			}
 			subtract = {
 				value = owner.ideology_market_liberal_favoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
@@ -5865,7 +6631,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 				interest_group ?= {
 					is_powerful = no
 				}
-				owner = {
+				owner ?= {
 					exists = ig:ig_industrialists
 					ig:ig_industrialists ?= {
 						is_powerful = yes
@@ -5881,7 +6647,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 				interest_group ?= {
 					is_powerful = yes
 				}
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_traditionalism
@@ -5893,7 +6659,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# very unlikely in countries without a large urban center
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						any_scope_state = {
 							any_scope_building = {
@@ -5920,7 +6686,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# Less likely for unrecognized countries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_country_type = unrecognized
 				}
 			}
@@ -5929,7 +6695,7 @@ ideology_market_liberal = { # Average Progressiveness - 4
 		# More likely for GP's
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_rank = rank_value:great_power
 				}
 			}
@@ -5951,10 +6717,15 @@ ideology_market_liberal = { # Average Progressiveness - 4
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_market_liberal_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_luddite = { # Average Progressiveness - -50
+ideology_luddite = { # Average Progressiveness - -33.33
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/luddite.dds"
 
 	character_ideology = yes
@@ -5977,6 +6748,15 @@ ideology_luddite = { # Average Progressiveness - -50
 		law_isolationism = strongly_approve
 	}
 
+	lawgroup_labour_associations = {
+		law_combination_acts = strongly_disapprove
+		law_guild_system = approve
+		law_anti_strike_laws = disapprove
+		law_corporatized_unions = neutral
+		law_right_to_associate = approve
+		law_factory_councils = strongly_disapprove
+	}
+
 	country_trigger = {
 		has_technology_researched = romanticism
 		OR = {
@@ -5994,9 +6774,13 @@ ideology_luddite = { # Average Progressiveness - -50
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_isolationism
 				has_law_or_variant = law_type:law_industry_banned
+				OR = {
+					has_law_or_variant = law_type:law_guild_system
+					has_law_or_variant = law_type:law_right_to_associate
+				}
 			}
 		}
 		interest_group ?= {
@@ -6022,10 +6806,28 @@ ideology_luddite = { # Average Progressiveness - -50
 			}
 		}
 
+		if = { # Likely if angry as early-game PB
+			limit = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				owner ?= {
+					NOR = {
+						has_technology_researched = egalitarianism
+						has_law_or_variant = law_type:law_guild_system
+					}
+				}
+				ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
+			}
+			subtract = {
+				value = ig_approval
+				multiply = 3
+				desc = "IG_APPROVAL_BELOW_UNHAPPY"
+			}
+		}
+
 		# More likely to support with large industries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_building = {
 						is_building_group = bg_heavy_industry
 						level >= 5
@@ -6041,7 +6843,7 @@ ideology_luddite = { # Average Progressiveness - -50
 		# More likely with high unemployment and large industries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						any_scope_building = {
 							is_building_group = bg_heavy_industry
@@ -6060,7 +6862,7 @@ ideology_luddite = { # Average Progressiveness - -50
 		# More likely with pollution
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						state_region = {
 							pollution_amount > 100
@@ -6091,6 +6893,11 @@ ideology_luddite = { # Average Progressiveness - -50
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_luddite_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -6107,10 +6914,27 @@ ideology_luddite = { # Average Progressiveness - -50
 			}
 		}
 
+		if = { # Likely if angry as early-game PB
+			limit = {
+				is_interest_group_type = ig_petty_bourgeoisie
+				owner ?= {
+					NOR = {
+						has_technology_researched = egalitarianism
+						has_law_or_variant = law_type:law_guild_system
+					}
+				}
+				interest_group.ig_approval <= define:NPolitics|APPROVAL_THRESHOLD_UNHAPPY
+			}
+			subtract = {
+				value = interest_group.ig_approval
+				multiply = 3
+			}
+		}
+
 		# More likely to support with large industries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_building = {
 						is_building_group = bg_heavy_industry
 						level >= 5
@@ -6123,7 +6947,7 @@ ideology_luddite = { # Average Progressiveness - -50
 		# More likely with high unemployment and large industries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						any_scope_building = {
 							is_building_group = bg_heavy_industry
@@ -6139,7 +6963,7 @@ ideology_luddite = { # Average Progressiveness - -50
 		# More likely with pollution
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						state_region = {
 							pollution_amount > 100
@@ -6166,6 +6990,11 @@ ideology_luddite = { # Average Progressiveness - -50
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_luddite_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -6183,13 +7012,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		law_oligarchy = approve
 		law_autocracy = approve
 		law_single_party_state = approve
-	}
-
-	lawgroup_free_speech = {
-		law_protected_speech = strongly_disapprove
-		law_right_of_assembly = disapprove
-		law_censorship = approve
-		law_outlawed_dissent = strongly_approve
+		law_labour_suffrage = strongly_disapprove
 	}
 
 	lawgroup_internal_security = {
@@ -6197,6 +7020,14 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		law_no_home_affairs = neutral
 		law_national_guard = approve
 		law_secret_police = strongly_approve
+		law_extraordinary_commission = strongly_disapprove
+	}
+
+	lawgroup_free_speech = {
+		law_protected_speech = strongly_disapprove
+		law_right_of_assembly = disapprove
+		law_censorship = approve
+		law_outlawed_dissent = strongly_approve
 	}
 
 	interest_group_leader_trigger = {
@@ -6207,7 +7038,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_outlawed_dissent
 				has_law_or_variant = law_type:law_secret_police
 				OR = {
@@ -6229,7 +7060,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# less likely if issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_single_party_state
@@ -6284,7 +7115,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# more likely for loyal IGs in a dictatorship
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_oligarchy
@@ -6302,7 +7133,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# less likely for loyal IGs in a democracy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_oligarchy
@@ -6354,6 +7185,11 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_authoritarian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -6361,7 +7197,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# less likely if issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_single_party_state
@@ -6406,7 +7242,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# more likely for loyal IGs in a dictatorship
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_oligarchy
@@ -6423,7 +7259,7 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 		# less likely for loyal IGs in a democracy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_oligarchy
@@ -6452,6 +7288,11 @@ ideology_authoritarian = { # Average Progressiveness - -27.77
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_authoritarian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -6500,7 +7341,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_protectionism
 				has_law_or_variant = law_type:law_interventionism
 			}
@@ -6533,7 +7374,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 					is_interest_group_type = ig_intelligentsia
 					is_interest_group_type = ig_industrialists
 				}
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_traditionalism
@@ -6552,7 +7393,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 			limit = {
 				is_interest_group_type = ig_landowners
 				is_powerful = yes
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_traditionalism
@@ -6567,7 +7408,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		# less likely when issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_protectionism
 						has_law_or_variant = law_type:law_mercantilism
@@ -6583,7 +7424,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		# More likely for unrecognized countries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_country_type = unrecognized
 				}
 			}
@@ -6595,7 +7436,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		# less likely for GP's
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_rank = rank_value:great_power
 				}
 			}
@@ -6621,6 +7462,11 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_protectionist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -6640,7 +7486,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 					is_interest_group_type = ig_intelligentsia
 					is_interest_group_type = ig_industrialists
 				}
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_traditionalism
@@ -6658,7 +7504,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 				interest_group ?= {
 					is_powerful = yes
 				}
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_traditionalism
@@ -6670,7 +7516,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		# less likely when issues are not relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_protectionism
 						has_law_or_variant = law_type:law_mercantilism
@@ -6683,7 +7529,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		# More likely for unrecognized countries
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_country_type = unrecognized
 				}
 			}
@@ -6692,7 +7538,7 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 		# less likely for GP's
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_rank = rank_value:great_power
 				}
 			}
@@ -6713,6 +7559,11 @@ ideology_protectionist = { # Average Progressiveness - 37.5
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_protectionist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -6736,6 +7587,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		law_national_guard = neutral
 		law_no_home_affairs = neutral
 		law_secret_police = strongly_disapprove
+		law_extraordinary_commission = strongly_disapprove
 	}
 
 	lawgroup_free_speech = {
@@ -6745,17 +7597,17 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 		law_outlawed_dissent = strongly_disapprove
 	}
 
+	lawgroup_childrens_rights = {
+		law_child_labor_allowed = strongly_disapprove
+		law_restricted_child_labor = disapprove
+		law_compulsory_primary_school = approve
+	}
+
 	lawgroup_rights_of_women = {
 		law_no_womens_rights = strongly_disapprove
 		law_women_own_property = disapprove
 		law_women_in_the_workplace = neutral
 		law_womens_suffrage = approve
-	}
-
-	lawgroup_childrens_rights = {
-		law_child_labor_allowed = strongly_disapprove
-		law_restricted_child_labor = disapprove
-		law_compulsory_primary_school = approve
 	}
 
 	lawgroup_migration = {
@@ -6775,7 +7627,7 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 	non_interest_group_leader_trigger = {
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_multicultural
 				has_law_or_variant = law_type:law_guaranteed_liberties
 				has_law_or_variant = law_type:law_protected_speech
@@ -6829,10 +7681,10 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 			}
 		}
 
-		# less likely for angry trade unions outside of Council Republic, they should go communist instead
+		# less likely for angry Trade Unions outside of Council Republic, they should go communist instead
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
@@ -6918,6 +7770,11 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_humanitarian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -6965,10 +7822,10 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 			}
 		}
 
-		# less likely for angry trade unions outside of Council Republic, they should go communist instead
+		# less likely for angry Trade Unions outside of Council Republic, they should go communist instead
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
@@ -7005,6 +7862,11 @@ ideology_humanitarian = { # Average Progressiveness - 66.66
 			}
 			multiply = 0.5
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_humanitarian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -7023,13 +7885,6 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		law_presidential_republic = approve
 	}
 
-	lawgroup_church_and_state = {
-		law_state_religion = strongly_disapprove
-		law_freedom_of_conscience = disapprove
-		law_total_separation = approve
-		# [#3410] dropped law_state_atheism = strongly_approve (law removed)
-	}
-
 	lawgroup_distribution_of_power = {
 		law_technocracy = strongly_approve
 		law_single_party_state = approve
@@ -7040,12 +7895,22 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		law_landed_voting = disapprove
 		law_universal_suffrage = strongly_disapprove
 		law_anarchy = strongly_disapprove
+		law_labour_suffrage = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_disapprove
+		law_freedom_of_conscience = disapprove
+		law_total_separation = approve
+		# [#3410] dropped law_state_atheism = strongly_approve (law removed)
 	}
 
 	lawgroup_bureaucracy = {
 		law_appointed_bureaucrats = strongly_approve
+		law_military_bureaucrats = approve
 		law_elected_bureaucrats = disapprove
 		law_hereditary_bureaucrats = strongly_disapprove
+		law_communal_administration = strongly_disapprove
 	}
 
 	country_trigger = {
@@ -7061,7 +7926,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_appointed_bureaucrats
 				has_law_or_variant = law_type:law_technocracy
 				# [#3410] dropped has_law_or_variant = law_type:law_state_atheism (law removed)
@@ -7070,7 +7935,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		}
 		# Monarchs cannot be republicans
 		NAND = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -7093,7 +7958,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				ig_approval <= unhappy
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_technocracy
 					}
@@ -7108,7 +7973,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		# Modified directly by IG approval in a technocracy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_technocracy
 				}
 			}
@@ -7134,7 +7999,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		# More likely in constitutional monarchies
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 					OR = {
 						has_law_or_variant = law_type:law_wealth_voting
@@ -7217,6 +8082,11 @@ ideology_positivist = { # Average Progressiveness - 37.5
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_positivist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -7228,7 +8098,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 				interest_group ?= {
 					ig_approval <= unhappy
 				}
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_technocracy
 					}
@@ -7242,7 +8112,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		# Modified directly by IG approval in a technocracy
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_technocracy
 				}
 			}
@@ -7266,7 +8136,7 @@ ideology_positivist = { # Average Progressiveness - 37.5
 		# More likely in constitutional monarchies
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 					OR = {
 						has_law_or_variant = law_type:law_wealth_voting
@@ -7296,6 +8166,11 @@ ideology_positivist = { # Average Progressiveness - 37.5
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_positivist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -7316,8 +8191,8 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		law_serfdom = strongly_disapprove
 		law_tenant_farmers = disapprove
 		law_commercialized_agriculture = neutral
-		law_peasant_proprietorship = approve
-		law_collectivized_agriculture = approve
+		law_peasant_proprietorship = strongly_approve
+		law_collectivized_agriculture = neutral
 	}
 
 	country_trigger = {
@@ -7332,7 +8207,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				NOT = {
 					has_law_or_variant = law_type:law_land_based_taxation
 				}
@@ -7355,7 +8230,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# more likely when issues are relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_serfdom
 						has_law_or_variant = law_type:law_tenant_farmers
@@ -7373,7 +8248,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 			limit = {
 				is_interest_group_type = ig_rural_folk
 				ig_approval <= 0
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_serfdom
 						has_law_or_variant = law_type:law_tenant_farmers
@@ -7391,7 +8266,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# likely to emerge if landowners are powerful
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					exists = ig:ig_landowners
 					ig:ig_landowners ?= {
 						is_powerful = yes
@@ -7407,7 +8282,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# likely to emerge if agrarian
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_industry_banned
@@ -7436,7 +8311,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# will not happen if land reform is essentially done
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_land_based_taxation
 					}
@@ -7469,6 +8344,11 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_land_reformer_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -7477,7 +8357,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# more likely when issues are relevant
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_serfdom
 						has_law_or_variant = law_type:law_tenant_farmers
@@ -7492,7 +8372,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 			limit = {
 				is_interest_group_type = ig_rural_folk
 				interest_group.ig_approval <= 0
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_serfdom
 						has_law_or_variant = law_type:law_tenant_farmers
@@ -7509,7 +8389,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# likely to emerge if landowners are powerful
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					exists = ig:ig_landowners
 					ig:ig_landowners ?= {
 						is_powerful = yes
@@ -7522,7 +8402,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# likely to emerge if agrarian
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_agrarianism
 						has_law_or_variant = law_type:law_industry_banned
@@ -7535,7 +8415,7 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 		# will not happen if land reform is essentially done
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = {
 						has_law_or_variant = law_type:law_land_based_taxation
 					}
@@ -7564,42 +8444,27 @@ ideology_land_reformer = { # Average Progressiveness - 43.75
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_land_reformer_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_integralist = { # Average Progressiveness - -41.66
+ideology_integralist = { # Average Progressiveness - -32.14
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_integralist.dds"
 
 	character_ideology = yes
 
-	lawgroup_internal_security = {
-		law_guaranteed_liberties = strongly_disapprove
-		law_no_home_affairs = neutral
-		law_national_guard = approve
-		law_secret_police = strongly_approve
-	}
-
-	lawgroup_policing = {
-		law_militarized_police = strongly_approve
-		law_local_police = approve
-		law_dedicated_police = approve
-		law_no_police = disapprove
-	}
-
-	lawgroup_church_and_state = {
-		law_state_religion = strongly_approve
-		law_freedom_of_conscience = disapprove
-		law_total_separation = strongly_disapprove
-		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
-	}
-
-	lawgroup_citizenship = {
-		law_cultural_exclusion = neutral
-		law_racial_segregation = neutral
-		law_multicultural = disapprove
-		law_ethnostate = disapprove
-		law_national_supremacy = disapprove
-		law_subjecthood = approve
+	lawgroup_governance_principles = {
+		law_theocracy = approve
+		law_monarchy = approve
+		law_presidential_republic = neutral
+		law_parliamentary_republic = neutral
+		law_corporate_state = neutral
+		law_social_monarchy = strongly_approve
+		law_council_republic = strongly_disapprove
 	}
 
 	lawgroup_distribution_of_power = {
@@ -7612,16 +8477,38 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		law_census_voting = strongly_disapprove
 		law_universal_suffrage = strongly_disapprove
 		law_anarchy = strongly_disapprove
+		law_labour_suffrage = strongly_disapprove
 	}
 
-	lawgroup_governance_principles = {
-		law_theocracy = approve
-		law_monarchy = approve
-		law_presidential_republic = neutral
-		law_parliamentary_republic = neutral
-		law_corporate_state = neutral
-		law_social_monarchy = strongly_approve
-		law_council_republic = strongly_disapprove
+	lawgroup_citizenship = {
+		law_cultural_exclusion = neutral
+		law_racial_segregation = neutral
+		law_multicultural = disapprove
+		law_ethnostate = disapprove
+		law_national_supremacy = disapprove
+		law_subjecthood = approve
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = strongly_approve
+		law_freedom_of_conscience = disapprove
+		law_total_separation = strongly_disapprove
+		# [#3410] dropped law_state_atheism = strongly_disapprove (law removed)
+	}
+
+	lawgroup_internal_security = {
+		law_guaranteed_liberties = strongly_disapprove
+		law_no_home_affairs = neutral
+		law_national_guard = approve
+		law_secret_police = strongly_approve
+		law_extraordinary_commission = strongly_disapprove
+	}
+
+	lawgroup_policing = {
+		law_militarized_police = strongly_approve
+		law_local_police = approve
+		law_dedicated_police = approve
+		law_no_police = disapprove
 	}
 
 	lawgroup_labour_associations = {
@@ -7645,7 +8532,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_autocracy
 				has_law_or_variant = law_type:law_cultural_exclusion
 				has_law_or_variant = law_type:law_state_religion
@@ -7677,7 +8564,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 			}
 			add = {
 				value = owner.ideology_integralist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "DISFAVORED_LAWS"
 			}
 		}
@@ -7689,7 +8576,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 			}
 			subtract = {
 				value = owner.ideology_integralist_favoured_laws
-				multiply = 8
+				multiply = 7
 				desc = "FAVORED_LAWS"
 			}
 		}
@@ -7697,7 +8584,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# More likely if paying war reparations
 		if = {
 			limit = {
-				any_diplomatically_relevant_country = {
+				owner ?= {
 					any_scope_treaty = {
 						is_enforced = yes
 						any_scope_article = {
@@ -7715,7 +8602,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# more likely if bankrupt
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						in_default = yes
 						has_modifier = declared_bankruptcy
@@ -7730,7 +8617,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# Less likely in council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -7755,7 +8642,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# less likely if content without Integralist laws
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_corporatized_unions
@@ -7804,7 +8691,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# more likely if in government with integralist laws
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_corporatized_unions
@@ -7867,6 +8754,11 @@ ideology_integralist = { # Average Progressiveness - -41.66
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_integralist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -7885,7 +8777,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 			}
 			add = {
 				value = owner.ideology_integralist_disfavoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
@@ -7896,18 +8788,20 @@ ideology_integralist = { # Average Progressiveness - -41.66
 			}
 			subtract = {
 				value = owner.ideology_integralist_favoured_laws
-				multiply = 8
+				multiply = 7
 			}
 		}
 
 		# More likely if paying war reparations
 		if = {
 			limit = {
-				any_diplomatically_relevant_country = {
-					has_diplomatic_pact = {
-						who = root.owner
-						type = war_reparations
-						is_initiator = yes
+				owner ?= {
+					any_scope_treaty = {
+						is_enforced = yes
+						any_scope_article = {
+							has_type = money_transfer
+							source_country = root.owner
+						}
 					}
 				}
 			}
@@ -7917,7 +8811,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# more likely if bankrupt
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						in_default = yes
 						has_modifier = declared_bankruptcy
@@ -7930,7 +8824,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# Less likely in council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_council_republic
 				}
 			}
@@ -7952,7 +8846,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# less likely if content without Integralist laws
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_corporatized_unions
@@ -7994,7 +8888,7 @@ ideology_integralist = { # Average Progressiveness - -41.66
 		# more likely if in government with integralist laws
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_corporatized_unions
@@ -8029,6 +8923,11 @@ ideology_integralist = { # Average Progressiveness - -41.66
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_integralist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -8047,12 +8946,15 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		law_oligarchy = disapprove
 		law_autocracy = strongly_disapprove
 		law_anarchy = strongly_disapprove
+		law_labour_suffrage = strongly_disapprove
 	}
 
 	lawgroup_bureaucracy = {
 		law_elected_bureaucrats = approve
+		law_military_bureaucrats = disapprove
 		law_appointed_bureaucrats = disapprove
 		law_hereditary_bureaucrats = strongly_disapprove
+		law_communal_administration = strongly_disapprove
 	}
 
 	lawgroup_internal_security = {
@@ -8060,6 +8962,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		law_no_home_affairs = neutral
 		law_national_guard = approve
 		law_secret_police = disapprove
+		law_extraordinary_commission = strongly_disapprove
 	}
 
 	lawgroup_free_speech = {
@@ -8077,7 +8980,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				OR = {
 					has_law_or_variant = law_type:law_universal_suffrage
 					has_law_or_variant = law_type:law_census_voting
@@ -8094,7 +8997,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# not very relevant if issues are already addressed
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_universal_suffrage
 						has_law_or_variant = law_type:law_census_voting
@@ -8109,7 +9012,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# IGs will not sabotage their own dictatorships
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_oligarchy
@@ -8147,7 +9050,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# More common in republics
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						country_has_monarchy_law = yes
 						has_law_or_variant = law_type:law_theocracy
@@ -8216,6 +9119,11 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_liberal_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -8223,7 +9131,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# not very relevant if issues are already addressed
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_universal_suffrage
 						has_law_or_variant = law_type:law_census_voting
@@ -8238,7 +9146,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# IGs will not sabotage their own dictatorships
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					OR = {
 						has_law_or_variant = law_type:law_autocracy
 						has_law_or_variant = law_type:law_oligarchy
@@ -8292,7 +9200,7 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 		# More common in republics
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOR = {
 						country_has_monarchy_law = yes
 						has_law_or_variant = law_type:law_theocracy
@@ -8321,10 +9229,15 @@ ideology_liberal_leader = { # Average Progressiveness - 64.06
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_liberal_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_corporatist_leader = { # Average Progressiveness - 37.5
+ideology_corporatist_leader = { # Average Progressiveness - 42.5
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_corporatist.dds"
 
 	character_ideology = yes
@@ -8376,7 +9289,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				NOT = {
 					has_law_or_variant = law_type:law_council_republic
 				}
@@ -8417,7 +9330,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		# Modified directly by IG approval in a corporate state
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporate_state
 				}
 			}
@@ -8441,7 +9354,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 			}
 			add = -75
 		}
-		# more likely for content trade unions and rural folk outside of council republic
+		# more likely for content Trade Unions and rural folk outside of council republic
 		if = {
 			limit = {
 				OR = {
@@ -8449,7 +9362,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 					is_interest_group_type = ig_rural_folk
 				}
 				ig_approval > 0
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					# [#3410] dropped NOT = { has_law_or_variant = law_type:law_state_atheism } (law removed)
 				}
@@ -8467,7 +9380,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
@@ -8510,6 +9423,11 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_corporatist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -8540,7 +9458,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		# Modified directly by IG approval in a corporate state
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporate_state
 				}
 			}
@@ -8564,7 +9482,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 			}
 			add = -75
 		}
-		# more likely for content trade unions and rural folk outside of council republic
+		# more likely for content Trade Unions and rural folk outside of council republic
 		if = {
 			limit = {
 				OR = {
@@ -8572,7 +9490,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 					is_interest_group_type = ig_rural_folk
 				}
 				interest_group.ig_approval > 0
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					# [#3410] dropped NOT = { has_law_or_variant = law_type:law_state_atheism } (law removed)
 				}
@@ -8583,7 +9501,7 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 		if = {
 			limit = {
 				is_interest_group_type = ig_trade_unions
-				owner = {
+				owner ?= {
 					has_law_or_variant = law_type:law_corporatized_unions
 				}
 			}
@@ -8604,6 +9522,11 @@ ideology_corporatist_leader = { # Average Progressiveness - 37.5
 				}
 			}
 			multiply = 0.1
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_corporatist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
@@ -8639,17 +9562,17 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		law_outlawed_dissent = strongly_disapprove
 	}
 
+	lawgroup_childrens_rights = {
+		law_child_labor_allowed = strongly_disapprove
+		law_restricted_child_labor = disapprove
+		law_compulsory_primary_school = approve
+	}
+
 	lawgroup_rights_of_women = {
 		law_no_womens_rights = strongly_disapprove
 		law_women_own_property = disapprove
 		law_women_in_the_workplace = neutral
 		law_womens_suffrage = approve
-	}
-
-	lawgroup_childrens_rights = {
-		law_child_labor_allowed = strongly_disapprove
-		law_restricted_child_labor = disapprove
-		law_compulsory_primary_school = approve
 	}
 
 	country_trigger = {
@@ -8663,7 +9586,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 	non_interest_group_leader_trigger = {
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law = law_type:law_monarchy
 				has_law_or_variant = law_type:law_multicultural
 				has_law_or_variant = law_type:law_protected_speech
@@ -8696,7 +9619,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		# Massively more likely in Monarchy, less so in republics
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 				}
 			}
@@ -8715,10 +9638,10 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		# More likely if issues are relevant - greater bonus to this than usual
 		if = {
 			limit = {
-				owner.ideology_humanitarian_disfavoured_laws > 0
+				owner.ideology_humanitarian_royalist_disfavoured_laws > 0
 			}
 			add = {
-				value = owner.ideology_humanitarian_disfavoured_laws
+				value = owner.ideology_humanitarian_royalist_disfavoured_laws
 				multiply = 16
 				desc = "DISFAVORED_LAWS"
 			}
@@ -8736,10 +9659,10 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 			}
 		}
 
-		# less likely for angry trade unions outside of Council Republic, they should go communist instead
+		# less likely for angry Trade Unions outside of Council Republic, they should go communist instead
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
@@ -8825,6 +9748,11 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_humanitarian_royalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -8841,7 +9769,7 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 		# Massively more likely in Monarchy, less so in republics
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					country_has_monarchy_law = yes
 				}
 			}
@@ -8885,10 +9813,10 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 			add = 50
 		}
 
-		# less likely for angry trade unions outside of Council Republic, they should go communist instead
+		# less likely for angry Trade Unions outside of Council Republic, they should go communist instead
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_technology_researched = socialism
 					NOT = {
 						has_law_or_variant = law_type:law_council_republic
@@ -8916,6 +9844,11 @@ ideology_humanitarian_royalist = { # Average Progressiveness - 55
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_humanitarian_royalist_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -8924,10 +9857,12 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 
 	character_ideology = yes
 
-	lawgroup_childrens_rights = {
-		law_compulsory_primary_school = strongly_approve
-		law_restricted_child_labor = neutral
-		law_child_labor_allowed = neutral
+	lawgroup_taxation = {
+		law_consumption_based_taxation = disapprove
+		law_per_capita_based_taxation = neutral
+		law_proportional_taxation = approve
+		law_graduated_taxation = strongly_approve
+		law_land_based_taxation = disapprove
 	}
 
 	lawgroup_education_system = {
@@ -8935,6 +9870,12 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 		law_private_schools = neutral
 		law_religious_schools = neutral
 		law_no_schools = disapprove
+	}
+
+	lawgroup_childrens_rights = {
+		law_compulsory_primary_school = strongly_approve
+		law_restricted_child_labor = neutral
+		law_child_labor_allowed = neutral
 	}
 
 	lawgroup_rights_of_women = {
@@ -8952,15 +9893,6 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 		law_colonial_slavery = approve
 	}
 
-	lawgroup_taxation = {
-		law_consumption_based_taxation = disapprove
-		law_per_capita_based_taxation = neutral
-		law_proportional_taxation = approve
-		law_graduated_taxation = strongly_approve
-		law_land_based_taxation = disapprove
-	}
-
-
 	country_trigger = {
 		has_technology_researched = empiricism
 	}
@@ -8973,7 +9905,7 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				OR = {
 					has_law_or_variant = law_type:law_compulsory_primary_school
 					has_law_or_variant = law_type:law_public_schools
@@ -9006,7 +9938,7 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 		# More likely if EIC
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_government_type = gov_chartered_company
 				}
 			}
@@ -9032,6 +9964,11 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_utilitarian_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -9046,7 +9983,7 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 		# More likely if EIC
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					has_government_type = gov_chartered_company
 				}
 			}
@@ -9068,6 +10005,11 @@ ideology_utilitarian_leader = { # Average Progressiveness - 54.16
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_utilitarian_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
@@ -9076,17 +10018,20 @@ ideology_sovereignist_leader = { # For colonised peoples - Average Progressivene
 
 	character_ideology = yes
 
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_subjecthood = neutral
+		law_national_supremacy = disapprove
+		law_racial_segregation = disapprove
+		law_cultural_exclusion = neutral
+		law_multicultural = approve
+	}
+
 	lawgroup_policing = {
 		law_local_police = approve
 		law_no_police = neutral
 		law_dedicated_police = disapprove
 		law_militarized_police = strongly_disapprove
-	}
-
-	lawgroup_migration = {
-		law_closed_borders = approve
-		law_migration_controls = strongly_approve
-		law_no_migration_controls = disapprove
 	}
 
 	lawgroup_free_speech = {
@@ -9096,13 +10041,10 @@ ideology_sovereignist_leader = { # For colonised peoples - Average Progressivene
 		law_protected_speech = strongly_approve
 	}
 
-	lawgroup_citizenship = {
-		law_ethnostate = strongly_disapprove
-		law_subjecthood = neutral
-		law_national_supremacy = disapprove
-		law_racial_segregation = disapprove
-		law_cultural_exclusion = neutral
-		law_multicultural = approve
+	lawgroup_migration = {
+		law_closed_borders = approve
+		law_migration_controls = strongly_approve
+		law_no_migration_controls = disapprove
 	}
 
 	country_trigger = {
@@ -9114,7 +10056,7 @@ ideology_sovereignist_leader = { # For colonised peoples - Average Progressivene
 	}
 
 	non_interest_group_leader_trigger = {
-		owner = {
+		owner ?= {
 			country_average_culture_pop_acceptance = { culture = prev.culture value <= acceptance_status_4 }
 		}
 		interest_group ?= {
@@ -9144,6 +10086,11 @@ ideology_sovereignist_leader = { # For colonised peoples - Average Progressivene
 				desc = "CHOSE_A_DIFFERENT_PATH"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_sovereignist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -9170,18 +10117,27 @@ ideology_sovereignist_leader = { # For colonised peoples - Average Progressivene
 			}
 			multiply = 0.1
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_sovereignist_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_utopian = { # Average Progressiveness - 101.38
+ideology_utopian = { # Average Progressiveness - 98.61
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/ideology_leader_utopian.dds"
 
 	character_ideology = yes
 
-	lawgroup_labor_rights = {
-		law_worker_protections = strongly_approve
-		law_regulatory_bodies = approve
-		law_no_workers_rights = neutral
+	lawgroup_governance_principles = {
+		law_monarchy = strongly_disapprove
+		law_presidential_republic = approve
+		law_parliamentary_republic = approve
+		law_corporate_state = neutral
+		law_social_monarchy = neutral
+		law_theocracy = strongly_disapprove
+		law_council_republic = approve
 	}
 
 	lawgroup_distribution_of_power = {
@@ -9194,16 +10150,7 @@ ideology_utopian = { # Average Progressiveness - 101.38
 		law_oligarchy = strongly_disapprove
 		law_autocracy = strongly_disapprove
 		law_single_party_state = disapprove
-	}
-
-	lawgroup_governance_principles = {
-		law_monarchy = strongly_disapprove
-		law_presidential_republic = approve
-		law_parliamentary_republic = approve
-		law_corporate_state = neutral
-		law_social_monarchy = neutral
-		law_theocracy = strongly_disapprove
-		law_council_republic = approve
+		law_labour_suffrage = approve
 	}
 
 	lawgroup_economic_system = {
@@ -9223,6 +10170,12 @@ ideology_utopian = { # Average Progressiveness - 101.38
 		law_tenant_farmers = disapprove
 		law_peasant_proprietorship = approve
 		law_collectivized_agriculture = approve
+	}
+
+	lawgroup_labor_rights = {
+		law_worker_protections = strongly_approve
+		law_regulatory_bodies = approve
+		law_no_workers_rights = neutral
 	}
 
 	lawgroup_slavery = {
@@ -9250,7 +10203,7 @@ ideology_utopian = { # Average Progressiveness - 101.38
 		# Agitator ideologies should disapprove of a current law
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_cooperative_ownership
 				has_law_or_variant = law_type:law_universal_suffrage
 				has_law_or_variant = law_type:law_worker_protections
@@ -9267,7 +10220,7 @@ ideology_utopian = { # Average Progressiveness - 101.38
 		}
 		# Monarchs cannot be republicans
 		NAND = {
-			owner = {
+			owner ?= {
 				country_has_monarchy_law = yes
 			}
 			OR = {
@@ -9307,7 +10260,7 @@ ideology_utopian = { # Average Progressiveness - 101.38
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol < average_expected_sol
 				}
@@ -9316,6 +10269,11 @@ ideology_utopian = { # Average Progressiveness - 101.38
 				value = 50
 				desc = "SOL_BELOW_EXPECTED"
 			}
+		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_utopian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 
@@ -9339,27 +10297,25 @@ ideology_utopian = { # Average Progressiveness - 101.38
 		# More likely when SoL is low outside of council republic
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					average_sol < average_expected_sol
 				}
 			}
 			add = 50
 		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_utopian_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 }
 
-ideology_modernizer_leader = { # Average Progressiveness - 34.82
+ideology_modernizer_leader = { # Average Progressiveness - 35.71
 	icon = "gfx/interface/icons/ideology_icons/ideology_leader/idealogy_leader_modernizer.dds"
 
 	character_ideology = yes
-
-	lawgroup_trade_policy = {
-		law_protectionism = approve
-		law_isolationism = strongly_disapprove
-		law_mercantilism = disapprove
-		law_free_trade = neutral
-	}
 
 	lawgroup_economic_system = {
 		law_extraction_economy = strongly_disapprove
@@ -9372,12 +10328,27 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		law_industry_banned = strongly_disapprove
 	}
 
+	lawgroup_trade_policy = {
+		law_protectionism = approve
+		law_isolationism = strongly_disapprove
+		law_mercantilism = disapprove
+		law_free_trade = neutral
+	}
+
 	lawgroup_taxation = {
 		law_per_capita_based_taxation = approve
 		law_proportional_taxation = strongly_approve
 		law_graduated_taxation = strongly_approve
 		law_land_based_taxation = neutral
 		law_consumption_based_taxation = disapprove
+	}
+
+	lawgroup_land_reform = {
+		law_serfdom = disapprove
+		law_tenant_farmers = neutral
+		law_peasant_proprietorship = neutral
+		law_collectivized_agriculture = disapprove
+		law_commercialized_agriculture = approve
 	}
 
 	lawgroup_education_system = {
@@ -9392,18 +10363,9 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		law_guild_system = disapprove
 		law_anti_strike_laws = neutral
 		law_corporatized_unions = neutral
-		law_right_to_associate = neutral
+		law_right_to_associate = disapprove
 		law_factory_councils = strongly_disapprove
 	}
-
-	lawgroup_land_reform = {
-		law_serfdom = disapprove
-		law_tenant_farmers = neutral
-		law_peasant_proprietorship = neutral
-		law_collectivized_agriculture = disapprove
-		law_commercialized_agriculture = approve
-	}
-
 
 	country_trigger = {
 		has_technology_researched = academia
@@ -9417,7 +10379,7 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		# Agitators should have an ideology at odds with current laws
 		NAND = {
 			has_role_of_type = agitator
-			owner = {
+			owner ?= {
 				has_law_or_variant = law_type:law_protectionism
 				has_law_or_variant = law_type:law_compulsory_primary_school
 				has_law_or_variant = law_type:law_public_schools
@@ -9452,7 +10414,7 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		# More likely if Unrecognized Country
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_country_type = unrecognized
 				}
 			}
@@ -9461,10 +10423,25 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 				desc = "unrecognized_power"
 			}
 		}
+		# More likely under Alexander II
+		if = {
+			limit = {
+				owner ?= {
+					any_scope_character = {
+						has_template = RUS_alexander_ii
+						is_ruler_of_own_country = yes
+					}
+				}
+			}
+			add = {
+				value = 75
+				desc = "ALEXANDER_II"
+			}
+		}
 		# More likely in countries with a large urban center
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						any_scope_building = {
 							is_building_type = building_urban_center
@@ -9487,6 +10464,11 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 				desc = "POR_INCREASED_REGENERATOR_CHANCE"
 			}
 		}
+		multiply = {
+			value = 1
+			add = modifier:interest_group_ideology_modernizer_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
+		}
 	}
 
 	non_interest_group_leader_weight = {
@@ -9494,7 +10476,7 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		# More likely if Unrecognized Country
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					is_country_type = unrecognized
 				}
 			}
@@ -9503,7 +10485,7 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 		# More likely in countries with a large urban center
 		if = {
 			limit = {
-				owner = {
+				owner ?= {
 					any_scope_state = {
 						any_scope_building = {
 							is_building_type = building_urban_center
@@ -9514,6 +10496,18 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 			}
 			add = 25
 		}
+		# More likely under Alexander II
+		if = {
+			limit = {
+				owner ?= {
+					any_scope_character = {
+						has_template = RUS_alexander_ii
+						is_ruler_of_own_country = yes
+					}
+				}
+			}
+			add = 75
+		}
 		if = {
 			limit = {
 				interest_group ?= {
@@ -9523,6 +10517,11 @@ ideology_modernizer_leader = { # Average Progressiveness - 34.82
 			add = {
 				value = 0  # [#6573] was: value = interest_group.var:por_increased_regenerator_likelihood
 			}
+		}
+		multiply = {
+			value = 1
+			add = interest_group.modifier:interest_group_ideology_modernizer_leader_leader_chance_mult
+			desc = "EVENTS_AND_OTHER_EFFECTS"
 		}
 	}
 }
