@@ -11,6 +11,7 @@
 	icon = "gfx/interface/icons/diplomatic_treaties_articles_icons/offer_embassy.dds"
 
 	flags = {
+		show_in_lens
 		can_be_renegotiated
 		friendly
 	}
@@ -26,6 +27,11 @@
 	}
 
 	possible = {
+	}
+
+	show_in_lens = {
+		is_country_type = unrecognized
+		always = no # [#10329] was: has_journal_entry = je_earn_recognition (JE not in this mod)
 	}
 
 	can_ratify = {
@@ -77,7 +83,7 @@
 				hidden_effect = {
 					create_diplomatic_catalyst = {
 						type = catalyst_recognition_requested
-						target = scope:source_country
+						target = scope:article_options.source_country
 					}
 				}
 			}

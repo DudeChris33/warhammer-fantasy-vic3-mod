@@ -172,6 +172,84 @@ ai_strategy_resource_expansion = {
 		wood = { stance = wants_export }
 		hardwood = { stance = wants_export }
 		sulfur = { stance = wants_export }
+		copper = { stance = wants_export }
+		steel = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_unshakable_autocracy
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_heavy_industry
+					}
+				}
+			}
+		}
+		engines = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_unshakable_autocracy
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_heavy_industry
+					}
+				}
+			}
+		}
+		ammunition = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_great_reform
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_military_industry
+					}
+				}
+			}
+		}
+		small_arms = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_great_reform
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_military_industry
+					}
+				}
+			}
+		}
+		artillery = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_military_industry
+					}
+				}
+			}
+		}
+		clothes = {
+			stance = wants_high_supply
+			trigger = {
+				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+				var:tp_fav_industry_group ?= bg:bg_light_industry
+			}
+		}
+		paper = {
+			stance = wants_high_supply
+			trigger = {
+				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+				var:tp_fav_industry_group ?= bg:bg_light_industry
+			}
+		}
 	}
 
 
@@ -192,12 +270,25 @@ ai_strategy_resource_expansion = {
 					}
 				}
 			}
-			add = 25
+			add = {
+				value = 25
+				multiply = {
+					value = 1
+					add = modifier:country_other_country_socialist_government_hostility_impact_mult
+				}
+			}
 		}
 
 		if = {
 			limit = { is_country_type = unrecognized }
 			multiply = 0.5
+		}
+
+		if = { # Five-Year Plan transportation objective
+			limit = {
+				always = no  # [#10329] was: je:je_five_year_plan ?= { has_variable = five_year_plan_transportation_var } (Five-Year Plan JE not in this mod)
+			}
+			add = 50
 		}
 
 		if = {
@@ -271,6 +362,64 @@ ai_strategy_industrial_expansion = {
 		sugar = { stance = wants_high_supply }
 		explosives = { stance = wants_export }
 		fertilizer = { stance = wants_export }
+		copper = { stance = wants_high_supply }
+		engines = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_unshakable_autocracy
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_heavy_industry
+					}
+				}
+			}
+		}
+		ammunition = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_great_reform
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_military_industry
+					}
+				}
+			}
+		}
+		artillery = {
+			stance = wants_high_supply
+			trigger = {
+				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+				var:tp_fav_industry_group ?= bg:bg_military_industry
+			}
+		}
+		small_arms = {
+			stance = wants_high_supply
+			trigger = {
+				OR = {
+					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_great_reform
+					AND = {
+						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+						var:tp_fav_industry_group ?= bg:bg_military_industry
+					}
+				}
+			}
+		}
+		clothes = {
+			stance = wants_high_supply
+			trigger = {
+				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+				var:tp_fav_industry_group ?= bg:bg_light_industry
+			}
+		}
+		paper = {
+			stance = wants_high_supply
+			trigger = {
+				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
+				var:tp_fav_industry_group ?= bg:bg_light_industry
+			}
+		}
 	}
 
 	building_group_weights = {
@@ -303,7 +452,13 @@ ai_strategy_industrial_expansion = {
 					}
 				}
 			}
-			add = 50
+			add = {
+				value = 50
+				multiply = {
+					value = 1
+					add = modifier:country_other_country_socialist_government_hostility_impact_mult
+				}
+			}
 		}
 
 		if = {
@@ -484,6 +639,7 @@ ai_strategy_colonial_extraction = {
         tobacco = { stance = wants_export }
         dye = { stance = wants_export }
         silk = { stance = wants_export }
+		copper = { stance = wants_export }
     }
     possible = {
     	is_subject = yes

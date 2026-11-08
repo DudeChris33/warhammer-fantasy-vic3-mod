@@ -232,6 +232,15 @@
 					add = 0.05
 				}
 
+				if = {
+					limit = {
+						any_scope_regional_objective = {
+							type = aro:ai_regional_objective_acquire_states
+							is_active = yes
+						}
+					}
+					add = 0.05
+				}
 			}
 		}
 
@@ -252,6 +261,16 @@
 
 		propose_score = {
 			value = 5
+
+			if = {
+				limit = {
+					ai_is_regional_objective_state = {
+						TYPE = aro:ai_regional_objective_acquire_states
+						STATE = scope:second_state
+					}
+				}
+				add = 20
+			}
 
 			if = {
 				limit = {
@@ -278,6 +297,10 @@
 			OR = {
 				scope:target_country = {
 					is_country_type = decentralized
+				}
+				ai_is_regional_objective_state = {
+					TYPE = aro:ai_regional_objective_acquire_states
+					STATE = scope:second_state
 				}
 				has_attitude = {
 					who = scope:target_country

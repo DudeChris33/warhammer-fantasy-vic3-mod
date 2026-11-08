@@ -68,7 +68,7 @@ joint_front = {
 
 imperial_circle = {
 	trigger = {
-		coa_monarchy_trigger = yes
+		scope:selected_identity = identity:identity_sovereign_empire
 	}
 }
 

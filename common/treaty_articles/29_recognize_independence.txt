@@ -5,6 +5,8 @@
 	icon = "gfx/interface/icons/diplomatic_treaties_articles_icons/offer_embassy.dds"
 
 	flags = {
+		show_in_lens
+		is_one_time
 	}
 
 	maintenance_paid_by = source_country
@@ -16,6 +18,10 @@
 	possible = {
 		always = no # Recognition effect gutted: the modifier it removed does not exist in this mod
 		is_at_war = no
+	}
+
+	show_in_lens = {
+		has_modifier = modifier_not_recognized_by_spain
 	}
 
 	can_ratify = {

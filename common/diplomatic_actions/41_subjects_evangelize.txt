@@ -111,20 +111,24 @@
 		}
 
 		will_propose = {
-			has_attitude = {
-				who = scope:target_country
-				attitude = protective
-			}
 			OR = {
-				ig:ig_devout ?= {
-					is_in_government = yes
-				}
-				any_interest_group = {
-					is_in_government = yes
-					leader = {
-						OR = {
-							has_ideology = ideology:ideology_traditionalist
-							has_ideology = ideology:ideology_theocrat
+				AND = {
+					has_attitude = {
+						who = scope:target_country
+						attitude = protective
+					}
+					OR = {
+						ig:ig_devout ?= {
+							is_in_government = yes
+						}
+						any_interest_group = {
+							is_in_government = yes
+							leader = {
+								OR = {
+									has_ideology = ideology:ideology_traditionalist
+									has_ideology = ideology:ideology_theocrat
+								}
+							}
 						}
 					}
 				}
