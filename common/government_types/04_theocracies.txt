@@ -10,6 +10,7 @@
 	possible = {
 		has_law_or_variant = law_type:law_theocracy
 		has_law_or_variant = law_type:law_technocracy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -29,6 +30,7 @@ gov_theocratic_oligarchy = {
 	possible = {
 		has_law_or_variant = law_type:law_theocracy
 		has_law_or_variant = law_type:law_oligarchy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -48,6 +50,7 @@ gov_theocracy = {
 	possible = {
 		has_law_or_variant = law_type:law_theocracy
 		country_has_voting_franchise = no
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -67,6 +70,7 @@ gov_theocratic_democracy = {
 	possible = {
 		has_law_or_variant = law_type:law_theocracy
 		country_has_voting_franchise = yes
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -89,6 +93,7 @@ gov_theocratic_single_party_state = {
 		NOT = {
 			has_law_or_variant = law_type:law_single_party_state
 		}
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -108,6 +113,7 @@ gov_theocratic_dictatorship = {
 	possible = {
 		has_law_or_variant = law_type:law_theocracy
 		has_law_or_variant = law_type:law_autocracy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {

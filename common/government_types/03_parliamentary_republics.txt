@@ -7,6 +7,7 @@
 	possible = {
 		has_law_or_variant = law_type:law_parliamentary_republic
 		has_law_or_variant = law_type:law_technocracy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -26,6 +27,7 @@ gov_parliamentary_dictatorship = {
 	possible = {
 		has_law_or_variant = law_type:law_parliamentary_republic
 		has_law_or_variant = law_type:law_autocracy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -45,6 +47,7 @@ gov_parliamentary_oligarchy = {
 	possible = {
 		has_law_or_variant = law_type:law_parliamentary_republic
 		country_has_voting_franchise = no
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -65,6 +68,7 @@ gov_parliamentary_single_party_state = {
 	possible = {
 		has_law_or_variant = law_type:law_parliamentary_republic
 		has_law_or_variant = law_type:law_single_party_state
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -88,6 +92,7 @@ gov_parliamentary_democracy = {
 		NOT = {
 			has_law_or_variant = law_type:law_single_party_state
 		}
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {

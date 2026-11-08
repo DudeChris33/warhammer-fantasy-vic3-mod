@@ -76,7 +76,10 @@ gov_warlord_state = {
 	possible = {
 		has_law_or_variant = law_type:law_presidential_republic
 		has_law_or_variant = law_type:law_autocracy
-		has_law_or_variant = law_type:law_peasant_levies
+		OR = {
+			has_law_or_variant = law_type:law_peasant_levies
+			always = no  # [#10327] was: has_variable = russian_warlord_country
+		}
 
 	}
 
@@ -105,6 +108,7 @@ gov_fascist_state = {
 			has_law_or_variant = law_type:law_single_party_state
 		}
 		coa_fascist_trigger = yes
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -229,6 +233,7 @@ gov_presidential_democracy = {
 			has_law_or_variant = law_type:law_single_party_state
 			has_law_or_variant = law_type:law_technocracy
 		}
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {

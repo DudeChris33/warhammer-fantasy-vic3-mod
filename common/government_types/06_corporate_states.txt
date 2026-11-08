@@ -33,6 +33,7 @@ gov_corporate_state = {
 		NOT = {
 			has_law_or_variant = law_type:law_single_party_state
 		}
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -52,6 +53,7 @@ gov_technate_corporate = {
 	possible = {
 		has_law = law_type:law_corporate_state
 		has_law_or_variant = law_type:law_technocracy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {

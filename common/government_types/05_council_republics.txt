@@ -10,6 +10,7 @@
 			has_law_or_variant = law_type:law_autocracy
 			has_law_or_variant = law_type:law_oligarchy
 		}
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -29,6 +30,7 @@ gov_cybernetic_state = {
 	possible = {
 		has_law_or_variant = law_type:law_council_republic
 		has_law_or_variant = law_type:law_technocracy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -48,6 +50,7 @@ gov_council_single_party_state = {
 	possible = {
 		has_law_or_variant = law_type:law_council_republic
 		has_law_or_variant = law_type:law_single_party_state
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -71,6 +74,7 @@ gov_council_republic = {
 		NOT = {
 			has_law_or_variant = law_type:law_single_party_state
 		}
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {
@@ -91,6 +95,7 @@ gov_anarchist_commune = {
 	possible = {
 		has_law_or_variant = law_type:law_council_republic
 		has_law_or_variant = law_type:law_anarchy
+		NOT = { always = no }  # [#10327] was: NOT = { has_journal_entry = je_russia_provisional_government }
 	}
 
 	on_government_type_change = {

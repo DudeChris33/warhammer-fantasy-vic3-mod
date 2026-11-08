@@ -27,6 +27,7 @@
 	}
 
 	on_enable = {
+		# ONLY HANDLE IG TRAITS IN THIS BLOCK
 		ig:ig_landowners ?= {
 			# else = {
 				set_ig_trait = ig_trait:ig_trait_noble_privileges
@@ -235,15 +236,15 @@
 	commander_weight = {
 		value = 2.0
 	}
-	
+
 	magnate_weight = {
 		value = 2.0
-		
+
 		if = {
 			limit = {
 				owner = { has_law_or_variant = law_type:law_traditionalism }
 			}
-		
+
 			add = 10.0
 		}
 		else_if = {
@@ -253,7 +254,7 @@
 
 			add = 3.0
 		}
-	}	
+	}
 
 	executive_weight = {
 		value = 0.25
@@ -340,7 +341,7 @@
 	commander_leader_weight = {
 		value = 1.5
 	}
-	
+
 	# Multiplier applied to the weight for an appropriate magnate will be selected from the character pool to lead the IG
 	# root = interest group
 	magnate_leader_weight = {

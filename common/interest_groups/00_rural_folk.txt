@@ -27,12 +27,27 @@
 	}
 
 	on_enable = {
+		# ONLY HANDLE IG TRAITS IN THIS BLOCK
 		ig:ig_rural_folk ?= {
 			# else = {
 				set_ig_trait = ig_trait:ig_trait_old_ways
 				set_ig_trait = ig_trait:ig_trait_honest_work
 				set_ig_trait = ig_trait:ig_trait_farmers_markets
 			# }
+		}
+		else_if = {
+			limit = {
+				always = no  # [#10327] was: c:EGY ?= this
+			}
+			ig:ig_rural_folk ?= { set_interest_group_name = ig_fellahin }
+		}
+		else_if = { # Germans
+			limit = {
+				any_primary_culture = {
+					has_discrimination_trait = language_germanophone
+				}
+			}
+			ig:ig_rural_folk ?= { set_interest_group_name = ig_landvolk }
 		}
 	}
 	on_disable = {}
@@ -232,10 +247,10 @@
 	commander_weight = {
 		value = 1.0
 	}
-	
+
 	magnate_weight = {
 		value = 0.25
-	}	
+	}
 
 	executive_weight = {
 		value = 0.1

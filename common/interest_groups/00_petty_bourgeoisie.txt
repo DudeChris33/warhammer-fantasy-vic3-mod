@@ -30,24 +30,25 @@
 	}
 
 	on_enable = {
+		# ONLY HANDLE IG TRAITS IN THIS BLOCK
 		ig:ig_petty_bourgeoisie ?= {
 			# else = {
 				set_ig_trait = ig_trait:ig_trait_xenophobia
 				set_ig_trait = ig_trait:ig_trait_middle_managers
 				set_ig_trait = ig_trait:ig_trait_treasury_bonds
 			# }
+		}
 
-			if = { # For newly-released countries. For game-start, initialisation is handled in global history
-				limit = {
-					owner = {
-						OR = {
-							has_law_or_variant = law_type:law_traditionalism
-							has_law_or_variant = law_type:law_isolationism
-						}
+		if = { # For newly-released countries. For game-start, initialisation is handled in global history
+			limit = {
+				owner = {
+					OR = {
+						has_law_or_variant = law_type:law_traditionalism
+						has_law_or_variant = law_type:law_isolationism
 					}
 				}
-				add_ideology = ideology_mercantile
 			}
+			ig:ig_petty_bourgeoisie ?= { add_ideology = ideology_mercantile }
 		}
 	}
 
@@ -170,6 +171,19 @@
 					}
 					value = 50
 				}
+			}
+		}
+
+		if = {
+			limit = {
+				is_pop_type = bureaucrats
+				owner.ig:ig_intelligentsia ?= {
+					has_ideology = ideology:ideology_managerial
+				}
+			}
+			multiply = {
+				desc = "POP_BUREAUCRATS_MANAGERIAL_INTELLIGENTSIA"
+				value = 0.5
 			}
 		}
 
@@ -342,10 +356,10 @@
 	commander_weight = {
 		value = 1.0
 	}
-	
+
 	magnate_weight = {
 		value = 0.25
-	}	
+	}
 
 	executive_weight = {
 		value = 1.5
@@ -431,7 +445,7 @@
 	commander_leader_weight = {
 		value = 1.0
 	}
-	
+
 	# Multiplier applied to the weight for an appropriate magnate will be selected from the character pool to lead the IG
 	# root = interest group
 	magnate_leader_weight = {

@@ -7,7 +7,7 @@
 	ideologies = {
 		ideology_jingoist
 		ideology_loyalist
-		ideology_patriotic
+		ideology_militarist
 	}
 
 	character_ideologies = {
@@ -27,12 +27,22 @@
 	}
 
 	on_enable = {
+		# ONLY HANDLE IG TRAITS IN THIS BLOCK
 		ig:ig_armed_forces ?= {
 			# else = {
 				set_ig_trait = ig_trait:ig_trait_materiel_waste
 				set_ig_trait = ig_trait:ig_trait_veteran_consultation
 				set_ig_trait = ig_trait:ig_trait_patriotic_fervor
 			# }
+		}
+		# Russia
+		else_if = {
+			limit = {
+				always = no  # [#10327] was: c:RUS ?= this
+			}
+			ig:ig_armed_forces ?= {
+				# [#10327] dropped add_ideology = ideology_tsarist (ideology absent)
+			}
 		}
 	}
 	on_disable = {}
@@ -67,6 +77,7 @@
 							OR = {
 								has_law_or_variant = law_type:law_colonial_resettlement
 								has_law_or_variant = law_type:law_frontier_colonization
+								has_law_or_variant = law_type:law_internal_colonization
 							}
 						}
 						state = {
@@ -163,6 +174,14 @@
 					}
 					add = 50
 				}
+				if = {
+					limit = {
+						owner = {
+							has_law = law_type:law_military_bureaucrats
+						}
+					}
+					add = 50
+				}
 			}
 		}
 
@@ -194,6 +213,19 @@
 					}
 					value = 150
 				}
+			}
+		}
+
+		if = {
+			limit = {
+				is_pop_type = bureaucrats
+				owner = {
+					has_law = law_type:law_military_bureaucrats
+				}
+			}
+			add = {
+				desc = "POP_MILITARY_BUREAUCRACY"
+				value = 100
 			}
 		}
 
@@ -334,10 +366,10 @@
 	commander_weight = {
 		value = 5.0
 	}
-	
+
 	magnate_weight = {
 		value = 1.0
-	}	
+	}
 
 	executive_weight = {
 		value = 0.2
@@ -423,7 +455,7 @@
 	commander_leader_weight = {
 		value = 3.0
 	}
-	
+
 	# Multiplier applied to the weight for an appropriate magnate will be selected from the character pool to lead the IG
 	# root = interest group
 	magnate_leader_weight = {

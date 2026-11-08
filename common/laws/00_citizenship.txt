@@ -39,6 +39,12 @@ law_subjecthood = {
 		law_colonial_administration
 	}
 
+	is_visible = {
+		NOT = {
+			always = no  # [#10327] was: c:RUS ?= this
+		}
+	}
+
 	modifier = {
 		country_authority_add = 100
 		state_assimilation_mult = -0.25
@@ -474,6 +480,14 @@ law_racial_segregation = {
 			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
 			add = 750
 		}
+
+		if = {
+			limit = {
+				always = no  # [#10327] was: has_journal_entry = je_tp_pool_cultural_dominance
+				scope:law.type.progressiveness > active_law:lawgroup_citizenship.type.progressiveness
+			}
+			add = -750
+		}
 	}
 }
 
@@ -593,6 +607,14 @@ law_cultural_exclusion = {
 			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
 			add = 750
 		}
+
+		if = {
+			limit = {
+				always = no  # [#10327] was: has_journal_entry = je_tp_pool_cultural_dominance
+				scope:law.type.progressiveness > active_law:lawgroup_citizenship.type.progressiveness
+			}
+			add = -750
+		}
 	}
 }
 
@@ -697,6 +719,24 @@ law_multicultural = {
 		if = {
 			limit = { ai_has_enact_weight_modifier_journal_entries = yes }
 			add = 750
+		}
+
+		if = {
+			limit = {
+				always = no  # [#10327] was: has_journal_entry = je_tp_pool_cultural_dominance
+				scope:law.type.progressiveness > active_law:lawgroup_citizenship.type.progressiveness
+			}
+			add = -750
+		}
+
+		if = {
+			limit = {
+				OR = {
+					always = no  # [#10327] was: has_variable = ai_ukraine_renaissance_repress
+					always = no  # [#10327] was: has_variable = ai_belarus_renaissance_repress
+				}
+			}
+			add = -750
 		}
 	}
 }
