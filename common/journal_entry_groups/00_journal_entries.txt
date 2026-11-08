@@ -7,8 +7,10 @@
 je_group_objectives = {
 	context = country
 	updates_strategic_region_stances = yes
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_objectives.dds"
 }
 
 je_group_tutorial = {
 	context = country
+	illustration = "gfx/interface/illustrations/journal/je_group_illu_tutorial.dds"
 }

@@ -200,6 +200,12 @@ grant_leadership_to_agitator = {
 			}
 			add = 50
 		}
+		if = {
+			limit = {
+				character_is_rival_french_house = yes
+			}
+			multiply = 0
+		}
 	}
 }
 
@@ -217,8 +223,21 @@ grant_command_to_agitator = {
 
 	possible = {
 		is_adult = yes
-		is_female = no
+		OR = {
+			is_female = no
+			owner ?= {
+				has_law_or_variant = law_type:law_womens_suffrage
+			}
+		}
 		exists = owner.capital.land_hq
+		trigger_if = {
+    		limit = {
+        		has_template = nemo_prince
+			}
+    		NOT = {
+        		has_template = nemo_prince
+    		}
+		}
 	}
 
 	effect = {
@@ -278,6 +297,7 @@ exile_character = {
 			has_law_or_variant = law_type:law_single_party_state
 			has_law_or_variant = law_type:law_secret_police
 			has_law_or_variant = law_type:law_outlawed_dissent
+			divided_monarchists_ai_active = yes
 		}
 	}
 
@@ -630,6 +650,27 @@ exile_character = {
 				multiply = 0.25
 			}
 		}
+		if = {
+			limit = {
+				character_is_rival_french_house = yes
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				owner ?= {
+					ai_wants_radicals = yes
+				}
+				character_is_french_house = yes
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				has_template = RUS_alexander_pushkin
+			}
+			multiply = 0
+		}
 	}
 }
 
@@ -651,8 +692,11 @@ invite_exile = {
 	# required for AI to evaluate if interaction is possible on characters in exile pool
 	ai_considers_exiles = yes
 
+	actor_capacity = {
+		empty_agitator_slots >= 1
+	}
+
 	possible = {
-		scope:actor ?= { empty_agitator_slots >= 1 }
 		# Devout exiles must have country religion
 		trigger_if = {
 			limit = {
@@ -969,6 +1013,21 @@ retire_commander = {
 				}
 			}
 			add = -150
+		}
+		if = {
+			limit = {
+				character_is_rival_french_house = yes
+				owner ?= {
+					is_at_war = no
+				}
+			}
+			add = 50
+		}
+		if = {
+			limit = {
+				has_template = RUS_alexander_pushkin
+			}
+			multiply = 0
 		}
 	}
 }

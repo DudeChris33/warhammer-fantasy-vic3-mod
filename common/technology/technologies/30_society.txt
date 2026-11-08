@@ -349,6 +349,7 @@ empiricism = {
 	modifier = {
 		country_influence_mult = 0.25
 		country_diplomatic_play_maneuvers_mult = 0.25
+		country_infamy_generation_mult = -0.05
 		country_institution_schools_max_investment_add = 1
 		state_education_access_wealth_add = 0.005
 	}
@@ -384,7 +385,6 @@ egalitarianism = {
 
 	ai_weight = {
 		value = 1
-
 		if = {
 			limit = {
 				has_strategy = ai_strategy_progressive_agenda
@@ -616,6 +616,7 @@ psychiatry = {
 	modifier = {
 		country_influence_mult = 0.25
 		country_diplomatic_play_maneuvers_mult = 0.25
+		country_infamy_generation_mult = -0.05
 		state_bureaucracy_population_base_cost_factor_mult = -0.05
 	}
 
@@ -657,6 +658,7 @@ nationalism = {
 	modifier = {
 		country_authority_mult = 0.1
 		country_voting_power_mult = 0.1
+		country_homeland_infamy_reduction_bool = yes
 	}
 
 	unlocking_technologies = {
@@ -751,6 +753,7 @@ human_rights = {
 
 	modifier = {
 		country_institution_social_security_max_investment_add = 1
+		country_ban_slavery_no_infamy_bool = yes
 	}
 
 	unlocking_technologies = {
@@ -811,6 +814,13 @@ feminism = {
 					}
 					remove_ideology = ideology_egalitarian
 					add_ideology = ideology_egalitarian_modern
+				}
+				every_interest_group = {
+					limit = {
+						has_ideology = ideology:ideology_universalist
+					}
+					remove_ideology = ideology_universalist
+					add_ideology = ideology_universalist_modern
 				}
 			}
 		}
@@ -956,9 +966,6 @@ socialism = {
 				NOT = { has_variable = socialism_researched }
 			}
 			set_variable = socialism_researched
-			ig:ig_trade_unions ?= {
-				add_ideology = ideology_socialist
-			}
 		}
 	}
 
@@ -1012,7 +1019,7 @@ corporatism = {
 
 	unlocking_technologies = {
 		labor_movement
-		nationalism
+		pan-nationalism
 	}
 
 	ai_weight = {
@@ -1047,6 +1054,7 @@ pan-nationalism = {
 		country_authority_mult = 0.1
 		country_support_separatism_strength_mult = 0.25
 		country_voting_power_mult = 0.1
+		country_shared_language_infamy_reduction_bool = yes
 	}
 
 	unlocking_technologies = {
@@ -1127,6 +1135,7 @@ philosophical_pragmatism = {
 	modifier = {
 		country_influence_mult = 0.25
 		country_diplomatic_play_maneuvers_mult = 0.25
+		country_infamy_generation_mult = -0.05
 		state_bureaucracy_population_base_cost_factor_mult = -0.05
 		state_literacy_growth_add = 0.0001
 	}
@@ -1353,6 +1362,7 @@ psychoanalysis = {
 	modifier = {
 		country_influence_mult = 0.25
 		country_diplomatic_play_maneuvers_mult = 0.25
+		country_infamy_generation_mult = -0.05
 		state_bureaucracy_population_base_cost_factor_mult = -0.05
 	}
 
@@ -1466,6 +1476,8 @@ mass_propaganda = {
 		state_expected_sol_from_literacy = 1
 		country_agitator_slots_add = 1
 		country_support_separatism_strength_mult = 0.25
+		country_war_support_battles_increase_mult = 0.25
+		country_war_support_battles_decrease_mult = -0.2
 	}
 
 	unlocking_technologies = {
@@ -1524,6 +1536,7 @@ behaviorism = {
 	modifier = {
 		country_influence_mult = 0.5
 		country_diplomatic_play_maneuvers_mult = 0.5
+		country_infamy_generation_mult = -0.05
 		state_bureaucracy_population_base_cost_factor_mult = -0.05
 	}
 

@@ -1,3 +1,19 @@
-﻿# Intentionally empty: overrides vanilla's real-world character_role_emperor_of_japan
-# (suppressed, no Warhammer Fantasy equivalent yet). common/character_roles is not in
-# replace_paths, so this same-filename override is what removes it.
+﻿# Overrides vanilla's real-world character_role_emperor_of_japan (suppressed, no Warhammer
+# Fantasy equivalent yet). common/character_roles is not in replace_paths, so this
+# same-filename override is what removes it. Because it replaces vanilla's whole file, it also
+# has to carry the generic roles that file defines: 1.15 adds character_role_notable (#10330).
+
+# For characters that dont neatly fit into any other role and dont warrant their own role, but are still needed for narrative purposes
+character_role_notable = {
+	texture = "gfx/interface/icons/character_role_icons/notable.dds"
+
+	priority = 1
+
+	character_modifier = {
+		character_prominence_add = 5
+	}
+
+	character_background = {
+		texture = "gfx/interface/character_panel/backgrounds/char_role_politician.dds"
+	}
+}

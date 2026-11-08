@@ -6,7 +6,7 @@
 # victoria3_01260804_200904, where the flag cache-miss disappeared but this assertion
 # remained). #3540 flagged this "DEFAULT character-template assertion" to track separately.
 #
-# CLEAN PORT of vanilla common/character_templates/00_default_template.txt (1.13.11):
+# CLEAN PORT of vanilla common/character_templates/00_default_template.txt (1.15.0, re-merged by #10330):
 # every trait/trait-group its trait_generation block references — trait_child and the
 # personality/skill/condition groups — exists in this mod's restored common/character_traits
 # (epic #3292 item #3293), so the body ports verbatim with nothing pruned.
@@ -22,16 +22,16 @@
 default = {
 	first_name = culture 		# Picks a random first and last name from the culture, combines those together to make one name
 	last_name = culture
-	historical = no
-	religion = random_accepted # Valid inputs: random_accepted/random/specific key. random & random_accepted weight based on share of political strength within the character's culture. If home region is specified, random is based on home state, otherwise home country.
-	culture = ig_before_random_accepted # Valid inputs: primary_culture/random_accepted/random/ig_before_primary_culture/ig_before_random_accepted/ig_before_random/specific key. random/random_accepted weight based on share of political strength within the country. If home region is specified, random is based on home state, otherwise home country.
 	female = no
+	dna = random 				# Generate random dna from a random ethnicity in the culture
+	historical = no
+	age = default 				# A random age base on AGE_GENERATION_STARTVAL + ( random_int % ( AGE_GENERATION_DICE_ROLL_MAGNITUDE + 1 ) )
+	commander_rank = default	# commander rank if this character would be a military commander
+	culture = ig_before_random_accepted # Valid inputs: primary_culture/random_accepted/random/ig_before_primary_culture/ig_before_random_accepted/ig_before_random/specific key. random/random_accepted weight based on share of political strength within the country. If home region is specified, random is based on home state, otherwise home country.
+	religion = random_accepted # Valid inputs: random_accepted/random/specific key. random & random_accepted weight based on share of political strength within the character's culture. If home region is specified, random is based on home state, otherwise home country.
+	interest_group = random 	# Select a random interest group based on clout
 	home_region = random		# valid inputs: state region key, state scope, random
 	holding_type = random		# valid inputs: building type key, building type scope, random
-	dna = random 				# Generate random dna from a random ethnicity in the culture
-	age = default 				# A random age base on AGE_GENERATION_STARTVAL + ( random_int % ( AGE_GENERATION_DICE_ROLL_MAGNITUDE + 1 ) )
-	interest_group = random 	# Select a random interest group based on clout
-	commander_rank = default	# commander rank if this character would be a military commander
 	trait_generation = { 		# this effect will run as soon as the character is created (should only be used for traits)
 		if = {
 			limit = {

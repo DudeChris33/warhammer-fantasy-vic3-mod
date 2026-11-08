@@ -1,0 +1,144 @@
+﻿# Ported from vanilla 1.15 common/scripted_effects/00_victoria_cleanup_scripted_effects.txt (356 effects there).
+# Only the journal-entry cleanup effects the Hegemon / Economic Dominance / Egalitarian Society objectives and the tutorial call are carried
+# (#10330); the rest belong to real-world journal entries. 1.15 JE outcomes call <je>_cleanup = yes.
+# je_new_world_colonies_cleanup is this mod's rename of vanilla je_african_colonies_cleanup.
+
+je_colonization_laws_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_egalitarian_society_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_expand_navy_and_army_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_expanding_the_market_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_exporting_profits_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_form_alliance_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_great_power_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_greater_power_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_greatest_power_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_increase_technology_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_liberate_the_slaves_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_lower_production_costs_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_objective_encourage_liberal_ideas_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_objective_expand_goods_production_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_pass_laws_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_public_services_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_raise_exports_value_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_refining_goods_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_specialized_goods_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_specialized_inputs_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_strong_market_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_subject_liberty_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_take_subject_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_the_hegemon_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_unrecognized_power_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_utilizing_our_strength_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_women_and_children_cleanup = {
+	hidden_effect = {
+	}
+}
+
+je_new_world_colonies_cleanup = {
+	hidden_effect = {
+	}
+}

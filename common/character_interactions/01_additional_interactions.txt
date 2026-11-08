@@ -64,6 +64,12 @@ arrange_accident = {
 		}
 		if = {
 			limit = {
+				rlit_pushkin_needed_for_golden_age = yes
+			}
+			rlit_pushkin_force_duel_effect = yes
+		}
+		else_if = {
+			limit = {
 				exists = owner.institution:institution_home_affairs
 			}
 			random_list = {
@@ -334,6 +340,16 @@ arrange_accident = {
 			}
 			add = 10
 		}
+		if = {
+			limit = {
+				character_is_rival_french_house = yes
+				OR = {
+					is_interest_group_leader = yes
+					has_role_of_type = agitator
+				}
+			}
+			add = 40
+		}
 		if = { # Dangerous agitators have a greater chance of getting booted
 			limit = {
 				has_role_of_type = agitator
@@ -346,6 +362,19 @@ arrange_accident = {
 				}
 			}
 			multiply = 1.5
+		}
+		if = {
+			limit = {
+				has_template = RUS_grigoriy_rasputin
+				has_role = character_role_favorite
+			}
+			multiply = 0
+		}
+		if = {
+			limit = {
+				has_template = RUS_alexander_pushkin
+			}
+			multiply = 0
 		}
 	}
 }
@@ -397,12 +426,6 @@ patronize = {
 						has_reactionary_ideology = yes
 					}
 					has_progressive_ideology = yes
-				}
-				AND = {
-					owner.ruler ?= {
-						has_liberal_ideology = yes
-					}
-					has_liberal_ideology = yes
 				}
 				AND = {
 					owner.ruler ?= {
@@ -752,12 +775,6 @@ ostracize = {
 					}
 					AND = {
 						owner.ruler ?= {
-							has_liberal_ideology = yes
-						}
-						has_liberal_ideology = yes
-					}
-					AND = {
-						owner.ruler ?= {
 							has_socialist_ideology = yes
 						}
 						has_conservative_ideology = yes
@@ -882,12 +899,6 @@ grant_peerage = {
 						has_reactionary_ideology = yes
 					}
 					has_progressive_ideology = yes
-				}
-				AND = {
-					owner.ruler ?= {
-						has_liberal_ideology = yes
-					}
-					has_liberal_ideology = yes
 				}
 				AND = {
 					owner.ruler ?= {

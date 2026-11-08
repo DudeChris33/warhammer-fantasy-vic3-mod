@@ -778,3 +778,16 @@ bg_dye_plantations = { default_building = building_dye_plantation }
 bg_opium_plantations = { default_building = building_opium_plantation }
 bg_tea_plantations = { default_building = building_tea_plantation }
 bg_sugar_plantations = { default_building = building_sugar_plantation }
+
+bg_cossack_host = {
+	parent_group = bg_ranching
+
+	min_productivity_to_hire = 2.0
+
+	always_possible = yes
+
+	reserves_arable_land = yes
+
+	urbanization = 0
+	infrastructure_usage_per_level = 0
+}
