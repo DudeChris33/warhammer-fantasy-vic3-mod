@@ -1,2 +1,6 @@
-﻿concept_raiding_frequency = {}
-concept_raiding = {}
+﻿concept_raiding_frequency = {
+    shown_in_encyclopedia = no
+}
+concept_raiding = {
+    shown_in_encyclopedia = no
+}

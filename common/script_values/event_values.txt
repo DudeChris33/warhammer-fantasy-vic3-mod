@@ -198,5 +198,5 @@ display_stupidly_long_modifier_time = 50 # 18250 days
 # for je_vernacular_policy
 official_culture_fraction = { # for loc
 	value = 0
-	add = "primary_cultures_percent_state"
+	add = "primary_cultures_percent_state(owner)"
 }

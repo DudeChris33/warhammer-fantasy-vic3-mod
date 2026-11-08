@@ -8,7 +8,7 @@ je_ip4_coup_progress_bar = {
 
 	weekly_progress = {
 		owner = {
-			if = { # Does the general actually want to coup the government?
+			progress_condition = { # Does the general actually want to coup the government?
 				limit = {
 					any_scope_character = {
 						always = no  # [#6573] was: has_variable = golpista_var
@@ -35,7 +35,7 @@ je_ip4_coup_progress_bar = {
 					value = commander_coup_strength
 				}
 			}
-			if = {
+			progress_condition = {
 				limit = {
 					has_variable = orchestrate_coup_aborted
 				}

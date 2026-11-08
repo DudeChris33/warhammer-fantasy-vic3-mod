@@ -82,6 +82,8 @@ ai_desires_target_state = {
 has_enactment_je_or_law_commitment = {
 	OR = {
 		has_any_law_commitment = yes
+		je_tsarpoints_has_law_agenda = yes
+		congress_poland_ai_has_law_agenda = yes
 	}
 }
 
@@ -133,6 +135,10 @@ has_powerful_protectors = {
 				}
 			}
 		}
+		OR = {
+			can_reach_target_country_to_protect = { TARGET_COUNTRY = root }
+			can_reach_target_country_to_conquer = { TARGET_COUNTRY = $ACTOR_SCOPE$ }
+		}
 	}
 }
 
@@ -149,16 +155,27 @@ target_is_our_or_fellow_subject = {
 ai_can_incorporate_state = {
 	OR = {
 		is_homeland_of_country_cultures = root
+		primary_cultures_percent_state = {
+			target_country = root
+			value >= 0.5
+		}
+		AND = {
+			primary_cultures_percent_state = {
+				target_country = root
+				value >= 0.25
+			}
+			any_neighbouring_state = {
+				owner = root
+				is_incorporated = yes
+			}
+		}
 		"years_to_incorporate(root)" <= define:NAI|INCORPORATE_STATE_MAX_YEARS
 	}
 }
 
 ai_will_incorporate_state = {
-	OR = {
-		is_homeland_of_country_cultures = root
-		"years_to_incorporate(root)" <= define:NAI|INCORPORATE_STATE_MAX_YEARS
-	}
 	state_population >= define:NAI|INCORPORATE_STATE_MIN_POPULATION
+	ai_can_incorporate_state = yes
 }
 
 ai_country_is_valid_colonization_target = {

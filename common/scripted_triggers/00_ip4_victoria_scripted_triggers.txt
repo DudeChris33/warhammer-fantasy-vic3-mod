@@ -1,17 +1,14 @@
 ﻿has_gov_regency = {
-    custom_tooltip = {
-        text = has_gov_regency_tt
-        OR = {
-            has_modifier = modifier_regency
-            has_modifier = modifier_regency_landowners
-            has_modifier = modifier_regency_devout
-            has_modifier = modifier_regency_petty_bourgeoisie
-            has_modifier = modifier_regency_industrialists
-            has_modifier = modifier_regency_trade_unions
-            has_modifier = modifier_regency_intelligentsia
-            has_modifier = modifier_regency_armed_forces
-            has_modifier = modifier_regency_rural_folk
-        }
+    OR = {
+        has_modifier = modifier_regency
+        has_modifier = modifier_regency_landowners
+        has_modifier = modifier_regency_devout
+        has_modifier = modifier_regency_petty_bourgeoisie
+        has_modifier = modifier_regency_industrialists
+        has_modifier = modifier_regency_trade_unions
+        has_modifier = modifier_regency_intelligentsia
+        has_modifier = modifier_regency_armed_forces
+        has_modifier = modifier_regency_rural_folk
     }
 }
 

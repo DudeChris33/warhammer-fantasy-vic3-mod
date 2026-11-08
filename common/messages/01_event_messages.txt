@@ -85,6 +85,7 @@ rival_supports_trade_unions = {
 
 ig_leader_assassination = {
 	type = country
+	group = "assassination_attempt_notification_group"
 	texture = "gfx/interface/icons/notification_icons/death.dds"
 	notification_type = feed
 }
@@ -98,6 +99,7 @@ rival_comdemns_slavery = {
 
 ig_leader_assassination_failed = {
 	type = country
+	group = "assassination_attempt_notification_group"
 	texture = "gfx/interface/icons/notification_icons/character.dds"
 	notification_type = feed
 }
@@ -159,6 +161,7 @@ imposition_deferred = {
 
 colonial_conflict_region_demands_refused = {
 	type = country
+	group = "colonial_conflict_demands_notification_group"
 	texture = "gfx/interface/icons/notification_icons/colonial.dds"
 
 	notification_type = feed
@@ -166,6 +169,7 @@ colonial_conflict_region_demands_refused = {
 
 colonial_conflict_region_demands_met = {
 	type = country
+	group = "colonial_conflict_demands_notification_group"
 	texture = "gfx/interface/icons/notification_icons/colonial.dds"
 
 	notification_type = feed
@@ -173,6 +177,7 @@ colonial_conflict_region_demands_met = {
 
 colonial_conflict_claim_demands_refused = {
 	type = country
+	group = "colonial_conflict_demands_notification_group"
 	texture = "gfx/interface/icons/notification_icons/colonial.dds"
 
 	notification_type = feed
@@ -180,6 +185,7 @@ colonial_conflict_claim_demands_refused = {
 
 colonial_conflict_claim_demands_met = {
 	type = country
+	group = "colonial_conflict_demands_notification_group"
 	texture = "gfx/interface/icons/notification_icons/colonial.dds"
 
 	notification_type = feed
@@ -264,6 +270,7 @@ swap_negotiations_fail = {
 
 arranged_accident_failed = {
 	type = country
+	group = "assassination_attempt_notification_group"
 	texture = "gfx/interface/icons/notification_icons/influence_bad.dds"
 
 	notification_type = feed
@@ -283,6 +290,7 @@ neg_failed_quest_toast = {
 
 arranged_accident_failed_incrimination = {
 	type = country
+	group = "assassination_attempt_notification_group"
 	texture = "gfx/interface/icons/notification_icons/influence_bad.dds"
 
 	notification_type = feed

@@ -8,5 +8,5 @@
 # vanilla: common/static_modifiers/07_sphere_of_influence_2_modifiers.txt:125
 modifier_has_annexed_another_subject = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
-	country_liberty_desire_add = 0.2
+	country_liberty_desire_add = 1
 }

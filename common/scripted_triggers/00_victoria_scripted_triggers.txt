@@ -625,7 +625,10 @@ ideology_vanguardist_valid_trigger = {
 		is_interest_group_type = ig_rural_folk
 		is_interest_group_type = ig_intelligentsia
 		is_interest_group_type = ig_trade_unions
-		is_interest_group_type = ig_armed_forces
+		AND = {
+			is_interest_group_type = ig_armed_forces
+			has_ideology = ideology:ideology_militant
+		}
 	}
 }
 
@@ -674,19 +677,20 @@ ideology_luddite_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_rural_folk
 		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_petty_bourgeoisie
 	}
 }
 
 ideology_authoritarian_valid_trigger = {
-	# trade unions should always go vanguardist instead if available
+	# Trade Unions should always go vanguardist instead if available
 	NAND = {
-		owner = { has_technology_researched = socialism }
+		owner ?= { has_technology_researched = socialism }
 		is_interest_group_type = ig_trade_unions
 	}
 	# PB should always go fascist instead if available
 	NAND = {
 		is_interest_group_type = ig_petty_bourgeoisie
-		owner = { has_technology_researched = mass_propaganda }
+		owner ?= { has_technology_researched = mass_propaganda }
 	}
 }
 

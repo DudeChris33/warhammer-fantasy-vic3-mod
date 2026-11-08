@@ -104,7 +104,6 @@ concept_naval_hostilities = {
 
 concept_building = {
 	texture = "gfx/interface/icons/notification_icons/buildings.dds"
-	is_loading_tip = yes
 }
 
 concept_building_group = {}
@@ -238,12 +237,10 @@ concept_money = {
 concept_timed_modifier = {}
 
 concept_tariffs = {
-	is_loading_tip = yes
 	texture = "gfx/interface/icons/trade_icons/max_tariffs.dds"
 }
 
 concept_subventions = {
-	is_loading_tip = yes
 	texture = "gfx/interface/icons/trade_icons/max_subvention.dds"
 }
 
@@ -279,7 +276,6 @@ concept_market_area = {}
 
 concept_trade = {
 	texture = "gfx/interface/main_hud/trade_overview_btn.dds"
-	is_loading_tip = yes
 }
 
 concept_trade_potential = {}
@@ -288,7 +284,6 @@ concept_trade_revenue = {}
 
 concept_trade_capacity = {
 	texture = "gfx/interface/main_hud/trade_overview_btn.dds"
-	is_loading_tip = yes
 }
 
 concept_traded_quantity = {}
@@ -968,7 +963,6 @@ concept_isolated_state = {
 
 concept_shortage = {
 	texture = "gfx/interface/icons/generic_icons/goods_shortage.dds"
-	is_loading_tip = yes
 }
 
 concept_market = {
@@ -976,7 +970,6 @@ concept_market = {
 }
 
 concept_world_market = {
-	is_loading_tip = yes
 	texture = "gfx/interface/icons/generic_icons/world_market.dds"
 }
 
@@ -1259,7 +1252,6 @@ concept_devastation = {
 
 concept_pollution_impact = {
 	texture = "gfx/interface/icons/state_status_icons/pollution.dds"
-	is_loading_tip = yes
 }
 
 concept_generated_pollution = {
@@ -1804,13 +1796,21 @@ concept_social_hierarchy = {}
 
 concept_social_class = {}
 
-concept_presidency_stability = {}
+concept_presidency_stability = {
+	shown_in_encyclopedia = no
+}
 
-concept_presidency = {}
+concept_presidency = {
+	shown_in_encyclopedia = no
+}
 
-concept_court_intrigue = {}
+concept_court_intrigue = {
+	shown_in_encyclopedia = no
+}
 
-concept_empire_stability = {}
+concept_empire_stability = {
+	shown_in_encyclopedia = no
+}
 
 concept_georegion = {}
 
@@ -1826,9 +1826,13 @@ concept_company_monopoly = {
 
 concept_country_monopoly = {}
 
-concept_privy_purse = {}
+concept_privy_purse = {
+	shown_in_encyclopedia = no
+}
 
-concept_dynastic_loyalty = {}
+concept_dynastic_loyalty = {
+	shown_in_encyclopedia = no
+}
 
 concept_company_hq = {}
 
@@ -1844,7 +1848,9 @@ concept_coup_strength = {}
 
 concept_coup_resistance = {}
 
-concept_pronunciamento = {}
+concept_pronunciamento = {
+	shown_in_encyclopedia = no
+}
 
 concept_negotiation = {
 	texture = "gfx/interface/icons/generic_icons/negotiate.dds"
@@ -1857,11 +1863,17 @@ concept_obstinance = {
 	texture = "gfx/interface/icons/state_status_icons/state_obstinance.dds"
 }
 
-concept_guerilla_war = {}
+concept_guerilla_war = {
+	shown_in_encyclopedia = no
+}
 
-concept_disqualified_culture = {}
+concept_disqualified_culture = {
+	shown_in_encyclopedia = no
+}
 
-concept_integrated_culture = {}
+concept_integrated_culture = {
+	shown_in_encyclopedia = no
+}
 
 concept_strait = {
 	texture = "gfx/interface/icons/state_trait_icons/straits.dds"

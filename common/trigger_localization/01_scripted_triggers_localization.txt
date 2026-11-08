@@ -3,4 +3,6 @@
 	global_not = has_gov_regency_not_tt
 	first = has_gov_regency_tt
 	first_not = has_gov_regency_not_tt
+	third = has_gov_regency_third_tt
+	third_not = has_gov_regency_third_not_tt
 }

@@ -1,26 +1,23 @@
 ﻿country_has_voting_franchise = {
-	custom_tooltip = {
-		text = is_democratic_tt
-		OR = {
-			modifier:country_voting_power_base_add > 0
-			modifier:country_voting_power_from_literacy_add > 0
-			modifier:country_voting_power_wealth_threshold_add > 0
-			modifier:country_academics_voting_power_add > 0
-			modifier:country_aristocrats_voting_power_add > 0
-			modifier:country_bureaucrats_voting_power_add > 0
-			modifier:country_capitalists_voting_power_add > 0
-			modifier:country_clergymen_voting_power_add > 0
-			modifier:country_clerks_voting_power_add > 0
-			modifier:country_engineers_voting_power_add > 0
-			modifier:country_farmers_voting_power_add > 0
-			modifier:country_laborers_voting_power_add > 0
-			modifier:country_machinists_voting_power_add > 0
-			modifier:country_officers_voting_power_add > 0
-			modifier:country_peasants_voting_power_add > 0
-			modifier:country_shopkeepers_voting_power_add > 0
-			modifier:country_slaves_voting_power_add > 0
-			modifier:country_soldiers_voting_power_add > 0
-		}
+	OR = {
+		modifier:country_voting_power_base_add > 0
+		modifier:country_voting_power_from_literacy_add > 0
+		modifier:country_voting_power_wealth_threshold_add > 0
+		modifier:country_academics_voting_power_add > 0
+		modifier:country_aristocrats_voting_power_add > 0
+		modifier:country_bureaucrats_voting_power_add > 0
+		modifier:country_capitalists_voting_power_add > 0
+		modifier:country_clergymen_voting_power_add > 0
+		modifier:country_clerks_voting_power_add > 0
+		modifier:country_engineers_voting_power_add > 0
+		modifier:country_farmers_voting_power_add > 0
+		modifier:country_laborers_voting_power_add > 0
+		modifier:country_machinists_voting_power_add > 0
+		modifier:country_officers_voting_power_add > 0
+		modifier:country_peasants_voting_power_add > 0
+		modifier:country_shopkeepers_voting_power_add > 0
+		modifier:country_slaves_voting_power_add > 0
+		modifier:country_soldiers_voting_power_add > 0
 	}
 }
 
@@ -89,37 +86,7 @@ is_being_incorporated = {
 }
 
 violate_sovereignty_war_check = {
-	save_temporary_scope_as = relevant_war
-
-	scope:target_country = {
-		any_scope_theater = {
-			is_land_theater = yes
-
-			save_temporary_scope_as = target_theater
-
-			scope:relevant_war.attacker_warleader = {
-				any_scope_theater = {
-					is_land_theater = yes
-
-					check_area = {
-						mode = adjacent
-						target = scope:target_theater
-					}
-				}
-			}
-
-			scope:relevant_war.defender_warleader = {
-				any_scope_theater = {
-					is_land_theater = yes
-
-					check_area = {
-						mode = adjacent
-						target = scope:target_theater
-					}
-				}
-			}
-		}
-	}
+	connects_important_war_theaters = scope:target_country
 }
 
 has_industrialized_pm = {
@@ -787,7 +754,7 @@ civil_war_is_reactionary_revolution = {
 
 ig_is_socialist = {
 	OR = {
-		has_ideology = ideology:ideology_socialist
+		#has_ideology = ideology:ideology_socialist
 		leader = {
 			has_ideology = ideology:ideology_vanguardist
 		}
@@ -798,7 +765,7 @@ ig_is_socialist = {
 			has_ideology = ideology:ideology_anarchist
 		}
 		leader = {
-			has_ideology = ideology:ideology_communist
+			has_ideology = ideology:ideology_communist_leader
 		}
 		law_stance = {
 			law = law_type:law_council_republic
@@ -811,7 +778,9 @@ ig_is_liberal = {
 	OR = {
 		has_ideology = ideology:ideology_republican
 		has_ideology = ideology:ideology_liberal
+		has_ideology = ideology:ideology_universalist
 		has_ideology = ideology:ideology_liberal_modern
+		has_ideology = ideology:ideology_universalist_modern
 		leader = {
 			has_ideology = ideology:ideology_radical
 		}
@@ -819,7 +788,7 @@ ig_is_liberal = {
 			has_ideology = ideology:ideology_republican_leader
 		}
 		leader = {
-			has_ideology = ideology:ideology_social_democrat
+			has_ideology = ideology:ideology_state_socialist
 		}
 		AND = {
 			law_stance = {
@@ -894,11 +863,11 @@ civil_war_progress_low = {
 
 civil_war_progress_medium = {
 	civil_war_progress >= 0.34
-	civil_war_progress < 0.67
+	civil_war_progress <= 0.75
 }
 
 civil_war_progress_high = { # In a civil_war scope
-	civil_war_progress >= 0.67
+	civil_war_progress > 0.75
 }
 
 government_ig_supports_enaction = {
@@ -995,7 +964,7 @@ ig_is_dreyfusard = {
 			has_ideology = ideology:ideology_anarchist
 		}
 		leader = {
-			has_ideology = ideology:ideology_communist
+			has_ideology = ideology:ideology_communist_leader
 		}
 		leader = {
 			has_ideology = ideology:ideology_republican_leader
@@ -1013,7 +982,7 @@ ig_is_dreyfusard = {
 			has_ideology = ideology:ideology_pacifist
 		}
 		leader = {
-			has_ideology = ideology:ideology_social_democrat
+			has_ideology = ideology:ideology_state_socialist
 		}
 		leader = {
 			has_ideology = ideology:ideology_humanitarian
@@ -1123,10 +1092,8 @@ ig_type_matches_former = { #Temporary Workaround
 
 #It is intended that some of these categories overlap.
 interest_group_has_liberal_ideology = {
-	OR = {
-		leader = {
-			has_liberal_ideology = yes
-		}
+	leader = {
+		has_liberal_ideology = yes
 	}
 }
 
@@ -1174,7 +1141,7 @@ has_progressive_ideology = {
 		OR = {
 			has_ideology = ideology:ideology_radical
 			has_ideology = ideology:ideology_feminist
-			has_ideology = ideology:ideology_social_democrat
+			has_ideology = ideology:ideology_state_socialist
 			has_ideology = ideology:ideology_humanitarian
 			has_ideology = ideology:ideology_humanitarian_royalist
 		}
@@ -1185,7 +1152,7 @@ has_socialist_ideology = {
 	custom_tooltip = {
 		text = has_socialist_ideology_tt
 		OR = {
-			has_ideology = ideology:ideology_communist
+			has_ideology = ideology:ideology_communist_leader
 			has_ideology = ideology:ideology_vanguardist
 			has_ideology = ideology:ideology_anarchist
 			has_ideology = ideology:ideology_nihilist

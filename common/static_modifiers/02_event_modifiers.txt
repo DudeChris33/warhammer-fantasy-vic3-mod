@@ -630,6 +630,7 @@ modifier_crop_failure = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_negative.dds
 	building_group_bg_agriculture_throughput_add = -0.6
 	building_group_bg_plantations_throughput_add = -0.6
+	state_peasants_consumption_multiplier_add = 0.1
 }
 
 modifier_crop_failure_relief = {
@@ -642,6 +643,7 @@ modifier_crop_failure_relief_effect = {
 	state_welfare_payments_add = 0.15
 	building_group_bg_agriculture_throughput_add = -0.3
 	building_group_bg_plantations_throughput_add = -0.3
+	state_peasants_consumption_multiplier_add = 0.05
 }
 
 modifier_cyclone_relief = {

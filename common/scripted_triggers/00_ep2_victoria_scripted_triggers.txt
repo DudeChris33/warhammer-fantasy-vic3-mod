@@ -176,7 +176,10 @@ country_has_springtime_revolution = {
             }
         }
     }
-    capital = {
-        is_in_revolt = yes
+    custom_tooltip = {
+        text = capital_in_revolt_tt
+        capital = {
+            is_in_revolt = yes
+        }
     }
 }

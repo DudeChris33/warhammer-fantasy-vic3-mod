@@ -157,4 +157,10 @@ getDecadeName = {
 		}
 		localization_key = decade_new_age
 	}
+	text = {
+		trigger = {
+			always = yes
+		}
+		localization_key = decade_forties
+	}
 }
