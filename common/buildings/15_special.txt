@@ -1,0 +1,29 @@
+﻿# SPECIAL AND UNIQUE TYPES
+# Partial port of vanilla 1.15 common/buildings/15_special.txt (#10331 E4). INERT stand-in: the engine names this building
+# (define COSSACK_HOST_BUILDING, gui/states_panel.gui), so it has to exist, but it can never be built: potential = { always = no }
+# and buildable = no, and nothing in this mod calls establish_cossack_host. Dropped vs vanilla: valid_pop_culture_traits
+# (heritage_east_slavic, tradition_cossacks), which name real-world discrimination traits this mod lacks.
+# Displayed as "Frontier Host" (localization/replace/english/buildings_l_english.yml).
+
+building_cossack_host = {
+	building_group = bg_cossack_host
+
+	icon = "gfx/interface/icons/building_icons/cossack_host.dds"
+
+	production_method_groups = {
+		pmg_base_building_cossack_host
+		pmg_special_building_cossack_host
+	}
+
+	potential = {
+		always = no # Cannot be constructed manually so we filter it out from the GUI
+	}
+
+	buildable = no
+	expandable = no
+	downsizeable = no
+	can_switch_owner = no
+	ownership_type = self
+
+	background = "gfx/interface/icons/building_icons/backgrounds/building_panel_bg_farming.dds"
+}

@@ -1,0 +1,16 @@
+﻿# Partial port of vanilla 1.15 common/production_method_groups/15_special.txt (#10331 E4): the inert Frontier Host's groups.
+
+pmg_base_building_cossack_host = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_refining.dds"
+	production_methods = {
+		pm_cossack_host
+	}
+}
+
+pmg_special_building_cossack_host = {
+	texture = "gfx/interface/icons/generic_icons/mixed_icon_military.dds"
+	production_methods = {
+		pm_cossack_recruitment
+		pm_no_cossack_recruitment
+	}
+}

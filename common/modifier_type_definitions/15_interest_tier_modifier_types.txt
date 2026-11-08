@@ -1,0 +1,56 @@
+﻿# Clean port of vanilla 1.15 common/modifier_type_definitions/15_interest_tier_modifier_types.txt (#10331 E5): engine-generated
+# per interest tier, no real-world content. common/modifier_type_definitions is a replace_paths folder, so it has to be carried here.
+
+country_interest_tier_none_trade_advantage_mult={
+	decimals=0
+	percent=yes
+	color=neutral
+	game_data={
+		ai_value=0
+	}
+}
+
+country_interest_tier_observant_trade_advantage_mult={
+	decimals=0
+	percent=yes
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_interest_tier_engaged_trade_advantage_mult={
+	decimals=0
+	percent=yes
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_interest_tier_influential_trade_advantage_mult={
+	decimals=0
+	percent=yes
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_interest_tier_pervasive_trade_advantage_mult={
+	decimals=0
+	percent=yes
+	color=good
+	game_data={
+		ai_value=0
+	}
+}
+
+country_interest_tier_hegemonic_trade_advantage_mult={
+	decimals=0
+	percent=yes
+	color=good
+	game_data={
+		ai_value=0
+	}
+}

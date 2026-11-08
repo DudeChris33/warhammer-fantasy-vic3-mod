@@ -1,0 +1,6 @@
+﻿l_english:
+ # Overrides of vanilla 1.15 buildings_l_english.yml keys (#10331 D3): the engine-required cossack host stand-in is inert and
+ # must not carry a real-world name.
+ building_cossack_host:0 "Frontier Host"
+ building_cossack_host_lens_option:0 "Expand $building_cossack_host$"
+ bg_cossack_host:0 "Frontier Hosts"

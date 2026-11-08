@@ -8,69 +8,69 @@ harsh_ai_behavior_trigger = {
 	scope:target_country = { is_player = yes }
 }
 
-# Removed by vanilla in 1.15; kept while ai_strategies/00_default_strategy.txt (#10329) still calls it. #10331 removes it once no caller is left.
-ai_strongly_desires_target_state = {
-	OR = {
-		AND = {
-			has_secret_goal = { # AI wants to conquer the state owner
-				who = scope:target_state.owner
-				secret_goal = conquer
-			}
-			OR = {
-				has_strategic_land_adjacency = scope:target_state # Will limit its ambitions to land borders
-				AND = {
-					scope:target_state.region ?= capital.region # Will try to annex states in its capital region regardless of whether they border it or not
-					can_reach_target_state = yes
-				}
-			}
-		}
-		scope:target_state = { has_claim_by = root } # AI always wants claims
-	}
-}
+# Removed in 1.15 (no successor): vanilla deleted ai_strongly_desires_target_state; its last caller (ai_strategies, wave C) is gone, so it is commented out (#10331).
+#ai_strongly_desires_target_state = {
+#	OR = {
+#		AND = {
+#			has_secret_goal = { # AI wants to conquer the state owner
+#				who = scope:target_state.owner
+#				secret_goal = conquer
+#			}
+#			OR = {
+#				has_strategic_land_adjacency = scope:target_state # Will limit its ambitions to land borders
+#				AND = {
+#					scope:target_state.region ?= capital.region # Will try to annex states in its capital region regardless of whether they border it or not
+#					can_reach_target_state = yes
+#				}
+#			}
+#		}
+#		scope:target_state = { has_claim_by = root } # AI always wants claims
+#	}
+#}
 
-# Removed by vanilla in 1.15; kept while ai_strategies/00_default_strategy.txt (#10329) still calls it. #10331 removes it once no caller is left.
-ai_desires_target_state = {
-	OR = {
-		ai_strongly_desires_target_state = yes
-		scope:target_state = { is_homeland_of_country_cultures = root } # AI is interested in homelands
-		AND = { # AI wants to unify split states
-			scope:target_state = {
-				is_split_state = yes
-				state_region = {
-					any_scope_state = {
-						owner = root
-						is_treaty_port = no
-					}
-				}
-			}
-		}
-		AND = { # Aggressive AI wants nearby land
-			OR = {
-				has_strategy = ai_strategy_world_revolution
-				has_strategy = ai_strategy_territorial_expansion
-			}
-			OR = {
-				has_strategic_land_adjacency = scope:target_state # Will limit its ambitions to land borders
-				AND = {
-					scope:target_state.region ?= capital.region # Will try to annex states in its capital region regardless of whether they border it or not
-					can_reach_target_state = yes
-				}
-			}
-		}
-		AND = { # Colonialist AI wants colonies
-			OR = {
-				has_strategy = ai_strategy_economic_imperialism
-				has_strategy = ai_strategy_colonial_expansion
-			}
-			scope:target_state.owner = { is_country_type = unrecognized }
-			can_reach_target_state = yes  # Willing to go overseas to acquire territories
-		}
-		AND = { # AI wants nearby states if gifted them by overlord
-			has_strategic_adjacency = scope:target_state
-			any_overlord_or_above = { this = scope:target_country }
-		}
-	}
-}
+# Removed in 1.15 (no successor): vanilla deleted ai_desires_target_state; its last caller (ai_strategies, wave C) is gone, so it is commented out (#10331).
+#ai_desires_target_state = {
+#	OR = {
+#		ai_strongly_desires_target_state = yes
+#		scope:target_state = { is_homeland_of_country_cultures = root } # AI is interested in homelands
+#		AND = { # AI wants to unify split states
+#			scope:target_state = {
+#				is_split_state = yes
+#				state_region = {
+#					any_scope_state = {
+#						owner = root
+#						is_treaty_port = no
+#					}
+#				}
+#			}
+#		}
+#		AND = { # Aggressive AI wants nearby land
+#			OR = {
+#				has_strategy = ai_strategy_world_revolution
+#				has_strategy = ai_strategy_territorial_expansion
+#			}
+#			OR = {
+#				has_strategic_land_adjacency = scope:target_state # Will limit its ambitions to land borders
+#				AND = {
+#					scope:target_state.region ?= capital.region # Will try to annex states in its capital region regardless of whether they border it or not
+#					can_reach_target_state = yes
+#				}
+#			}
+#		}
+#		AND = { # Colonialist AI wants colonies
+#			OR = {
+#				has_strategy = ai_strategy_economic_imperialism
+#				has_strategy = ai_strategy_colonial_expansion
+#			}
+#			scope:target_state.owner = { is_country_type = unrecognized }
+#			can_reach_target_state = yes  # Willing to go overseas to acquire territories
+#		}
+#		AND = { # AI wants nearby states if gifted them by overlord
+#			has_strategic_adjacency = scope:target_state
+#			any_overlord_or_above = { this = scope:target_country }
+#		}
+#	}
+#}
 
 # NOTE (board #3540, epic #3292): this trigger and the two below it originally
 # reasoned about je_government_petition / je_government_petition_negotiation_version(_b)

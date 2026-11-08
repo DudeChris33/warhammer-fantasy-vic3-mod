@@ -629,44 +629,44 @@ has_hierarchic_ideology = {
 	}
 }
 
-# Removed by vanilla in 1.15; kept while ai_strategies/00_default_strategy, 02_diplomatic_strategies, 02_subject_diplomatic_strategies and treaty_articles/07_foreign_investment_rights (#10329) still calls it. #10331 removes it once no caller is left.
-can_reach_target_country = {
-	has_diplomatic_relevance = scope:target_country
-	OR = {
-		has_strategic_adjacency = scope:target_country
-		AND = {
-			has_port_country = yes
-			navy_size >= 10
-			scope:target_country = { has_port_country = yes }
-		}
-	}
-}
+# Removed in 1.15 (no successor): vanilla deleted can_reach_target_country; its last caller (ai_strategies, wave C) is gone, so it is commented out (#10331).
+#can_reach_target_country = {
+#	has_diplomatic_relevance = scope:target_country
+#	OR = {
+#		has_strategic_adjacency = scope:target_country
+#		AND = {
+#			has_port_country = yes
+#			navy_size >= 10
+#			scope:target_country = { has_port_country = yes }
+#		}
+#	}
+#}
 
-# Removed by vanilla in 1.15; kept while ai_strategies/02_subject_diplomatic_strategies (#10329) still calls it. #10331 removes it once no caller is left.
-can_be_reached_by_target_country = {
-	has_diplomatic_relevance = scope:target_country
-	OR = {
-		has_strategic_adjacency = scope:target_country
-		AND = {
-			has_port_country = yes
-			scope:target_country = { has_port_country = yes }
-			scope:target_country = { navy_size >= 10 }
-		}
-	}
-}
+# Removed in 1.15 (no successor): vanilla deleted can_be_reached_by_target_country; its last caller (ai_strategies, wave C) is gone, so it is commented out (#10331).
+#can_be_reached_by_target_country = {
+#	has_diplomatic_relevance = scope:target_country
+#	OR = {
+#		has_strategic_adjacency = scope:target_country
+#		AND = {
+#			has_port_country = yes
+#			scope:target_country = { has_port_country = yes }
+#			scope:target_country = { navy_size >= 10 }
+#		}
+#	}
+#}
 
-# Removed by vanilla in 1.15; kept while ai_strategies/00_default_strategy and 02_diplomatic_strategies (#10329) still calls it. #10331 removes it once no caller is left.
-can_reach_target_state = {
-	has_diplomatic_relevance = scope:target_state.owner
-	OR = {
-		has_strategic_adjacency = scope:target_state
-		AND = {
-			navy_size >= 10
-			has_port_country = yes
-			scope:target_state = { is_coastal = yes }
-		}
-	}
-}
+# Removed in 1.15 (no successor): vanilla deleted can_reach_target_state; its last caller (ai_strategies, wave C) is gone, so it is commented out (#10331).
+#can_reach_target_state = {
+#	has_diplomatic_relevance = scope:target_state.owner
+#	OR = {
+#		has_strategic_adjacency = scope:target_state
+#		AND = {
+#			navy_size >= 10
+#			has_port_country = yes
+#			scope:target_state = { is_coastal = yes }
+#		}
+#	}
+#}
 
 is_peasant_under_serfdom = {
 	is_pop_type = peasants

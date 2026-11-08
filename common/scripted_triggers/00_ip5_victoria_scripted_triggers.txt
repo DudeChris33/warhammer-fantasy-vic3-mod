@@ -1,0 +1,10 @@
+﻿# Partial port of vanilla 1.15 common/scripted_triggers/00_ip5_victoria_scripted_triggers.txt (#10331 E7). Only the trigger that the
+# ported pop_types (laborers, machinists) call is carried; the rest of that file is Russia/IP5 content. Needs law_factory_councils
+# from the laws; amendment_factory_councils is not in this mod's amendments, so that leaf is neutralised.
+
+has_factory_councils_law_or_amendment = {
+	OR = {
+		has_law_or_variant = law_type:law_factory_councils
+		always = no # [#10331] was: active_law:lawgroup_labour_associations ?= { has_amendment = amendment_type:amendment_factory_councils }
+	}
+}
