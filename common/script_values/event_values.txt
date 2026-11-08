@@ -200,3 +200,6 @@ official_culture_fraction = { # for loc
 	value = 0
 	add = "primary_cultures_percent_state(owner)"
 }
+very_huge_radicals = 0.5
+revolution_retreat_exceptionally_large = -0.50
+revolution_advance_exceptionally_large = 0.50

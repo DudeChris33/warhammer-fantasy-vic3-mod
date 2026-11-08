@@ -6,3 +6,10 @@
 	third = has_gov_regency_third_tt
 	third_not = has_gov_regency_third_not_tt
 }
+
+country_has_voting_franchise = {
+	global = is_democratic_tt
+	global_not = is_democratic_not_tt
+	first = is_democratic_tt
+	first_not = is_democratic_not_tt
+}

@@ -431,6 +431,18 @@ on_spreading_technology = {
 # scope:target = Target of the play
 on_diplomatic_play_started = {
 	effect = {
+		# [#10328] 1.15: a subject whose own overlord turns on it starts looking for the exit
+		# (vanilla's other branches in this hook are Indian-federation, Egyptian-crisis and unification-supporter content)
+		if = {
+			limit = {
+				scope:target ?= {
+					is_direct_subject_of = scope:initiator
+				}
+			}
+			scope:target ?= {
+				add_liberty_desire = define:NDiplomacy|LIBERTY_DESIRE_FROM_OVERLORD_DIPLOMATIC_PLAY
+			}
+		}
 	}
 }
 
@@ -814,7 +826,13 @@ on_treaty_enforced = {
 # Fires when the binding period is not active
 on_country_withdrawn_from_treaty = {
 	effect = {
-		post_notification = country_withdrawn_from_treaty
+		if = {
+			limit = { scope:partial_withdrawal = yes }
+			post_notification = country_partially_withdrawn_from_treaty
+		}
+		else = {
+			post_notification = country_withdrawn_from_treaty
+		}
 	}
 }
 
@@ -824,7 +842,13 @@ on_country_withdrawn_from_treaty = {
 # Fires instead of on_country_withdrawn_from_treaty when the binding period is still active
 on_country_broke_treaty = {
 	effect = {
-		post_notification = country_broke_treaty
+		if = {
+			limit = { scope:partial_withdrawal = yes }
+			post_notification = country_partially_broke_treaty
+		}
+		else = {
+			post_notification = country_broke_treaty
+		}
 
 		scope:withdrawing_country = {
 			create_diplomatic_catalyst = {
@@ -1668,6 +1692,68 @@ on_war_end = {
 	}
 }
 
+# Root = Character
+on_character_returned_from_exile = {
+	effect = {
+		post_notification = character_returned_from_exile
+	}
+}
+
+# Root = Diplomatic Play
+on_diplo_play_overlord_protects_subject = {
+	effect = {
+		post_notification = diplo_play_overlord_protects_subject_notification
+	}
+}
+
+# Root = Diplomatic Play
+# actor = Subject leaving the play/war
+# overlord = The overlord they are rebelling against
+on_diplo_play_subject_backstab_overlord = {
+	effect = {
+		post_notification = diplo_play_subject_backstab_overlord_notification
+	}
+}
+
+# Fires when a goal is taken via occupation timer during a war. Goals that are not reversed before the end of the war also fire on_wargoal_enforced at the conclusion of peace.
+# Root = Country
+# scope:actor = the country that enforced the wargoal
+# scope:target = the country the wargoal was enforced against
+# scope:diplomatic_play = the relevant diplomatic play
+# scope:wargoal_impact = the impact of the wargoal enforced
+# scope:war_goal_enforced = the wargoal that was enforced
+on_wargoal_enforced_by_timer = {
+	effect = {
+		scope:diplomatic_play ?= {
+			post_notification = wargoal_enforced
+		}
+	}
+}
+
+# [#10328] Vanilla 1.15 sets recently_won_war / recently_lost_war (1825 days) here. Nothing in this mod reads those variables, so the
+# setters are dropped per the #6573 variable policy: set_variable = { name = recently_won_war days = 1825 value = yes } when exists = scope:benefitted_from_wargoal
+on_won_war = {
+	effect = {
+	}
+}
+
+# [#10328] same as on_won_war: recently_lost_war (when exists = scope:victim_of_wargoal) has no reader here.
+on_lost_war = {
+	effect = {
+	}
+}
+
+on_inconclusive_war = {}
+
+# This on-action is triggered every time a Power Bloc is formed after the game has started, once its founding members have joined.
+# Root = Country that formed the Power Bloc (its leader)
+# scope:power_bloc = The newly formed Power Bloc
+# [#10328] vanilla's only branch removes modifier russian_mandates_refund (a hard load error here), so the hook is empty.
+on_power_bloc_formed = {
+	effect = {
+	}
+}
+
 # Root = journal entry
 on_journal_entry_activated = {
 	effect = {
@@ -1682,15 +1768,25 @@ on_journal_entry_deactivated = {
 	}
 }
 
+# Superseded by vanilla on_journal_entry_concluded (00_code_on_actions.txt) in 1.15; 1.15 no longer fires these two
+# [#10328] Root = journal entry
+#on_journal_entry_completed = {
+#	effect = {
+#		post_notification = journal_entry_completed
+#	}
+#}
+#
 # Root = journal entry
-on_journal_entry_completed = {
-	effect = {
-		post_notification = journal_entry_completed
-	}
-}
+#on_journal_entry_failed = {
+#}
 
 # Root = journal entry
-on_journal_entry_failed = {
+# [#10328] 1.15 merged completed/failed into this. Vanilla's body is the Russian Tsar-points notification branch
+# (je_tp_*, tp_*_je_var) plus `else = { post_notification = journal_entry_concluded }`; only the else branch is generic.
+on_journal_entry_concluded = {
+	effect = {
+		post_notification = journal_entry_concluded
+	}
 }
 
 # Root = country
@@ -1824,14 +1920,9 @@ on_election_campaign_start = {
 		debug_log = "[TimeKeeper.GetCurrentDate.GetString]: Election Campaign Started - [THIS.GetCountry.GetNameNoFormatting]"
 		if = {
 			limit = {
-				active_law:lawgroup_distribution_of_power ?= {
-					has_amendment = amendment_type:amendment_tradition_of_free_elections
-				}
+				electoral_confidence_campaign_start_gain > 0
 			}
-			add_electoral_confidence = {
-				value = eagle_burger_freedom_index
-				divide = 10
-			}
+			add_electoral_confidence = electoral_confidence_campaign_start_gain
 		}
 	}
 }

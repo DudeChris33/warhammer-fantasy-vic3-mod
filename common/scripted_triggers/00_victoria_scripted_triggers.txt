@@ -601,6 +601,7 @@ ideology_royalist_valid_trigger = {
 	}
 }
 
+# Removed by vanilla in 1.15; kept while ideologies/01_character_ideologies.txt (#10327) still calls it. #10331 removes it once no caller is left.
 ideology_social_democrat_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_devout
@@ -611,6 +612,7 @@ ideology_social_democrat_valid_trigger = {
 	}
 }
 
+# Removed by vanilla in 1.15; kept while ideologies/01_character_ideologies.txt (#10327) still calls it. #10331 removes it once no caller is left.
 ideology_communist_valid_trigger = {
 	OR = {
 		is_interest_group_type = ig_rural_folk
@@ -769,5 +771,26 @@ ideology_utopian_valid_trigger = {
 		is_interest_group_type = ig_petty_bourgeoisie
 		is_interest_group_type = ig_intelligentsia
 		is_interest_group_type = ig_trade_unions
+	}
+}
+
+ideology_state_socialist_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_devout
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		is_interest_group_type = ig_petty_bourgeoisie
+	}
+}
+ideology_communist_leader_valid_trigger = {
+	OR = {
+		is_interest_group_type = ig_rural_folk
+		is_interest_group_type = ig_intelligentsia
+		is_interest_group_type = ig_trade_unions
+		AND = {
+			is_interest_group_type = ig_armed_forces
+			has_ideology = ideology:ideology_militant
+		}
 	}
 }

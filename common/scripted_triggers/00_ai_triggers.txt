@@ -8,6 +8,7 @@ harsh_ai_behavior_trigger = {
 	scope:target_country = { is_player = yes }
 }
 
+# Removed by vanilla in 1.15; kept while ai_strategies/00_default_strategy.txt (#10329) still calls it. #10331 removes it once no caller is left.
 ai_strongly_desires_target_state = {
 	OR = {
 		AND = {
@@ -27,6 +28,7 @@ ai_strongly_desires_target_state = {
 	}
 }
 
+# Removed by vanilla in 1.15; kept while ai_strategies/00_default_strategy.txt (#10329) still calls it. #10331 removes it once no caller is left.
 ai_desires_target_state = {
 	OR = {
 		ai_strongly_desires_target_state = yes
@@ -225,4 +227,352 @@ has_je_conquest_reason = {
 has_je_subjugation_reason = {
 	always = no
 	$TARGET$ = { always = yes }
+}
+
+# root = country
+# scope:target_state = state
+# scope:target_country = state owner
+ai_state_ambition_claim = {
+	scope:target_state = { has_claim_by = root }
+}
+ai_state_ambition_homeland = {
+	scope:target_state = { is_homeland_of_country_cultures = root }
+}
+ai_state_ambition_capital_region = {
+	scope:target_state.region ?= capital.region # Always desire states in home region
+	can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
+}
+ai_state_ambition_split_state = { # The AI wants to unify split states
+	scope:target_state = {
+		is_split_state = yes
+		state_region = {
+			any_scope_state = {
+				owner = root
+				is_treaty_port = no
+			}
+		}
+	}
+}
+ai_state_ambition_border = {
+	scope:target_state = {
+		any_neighbouring_state = {
+			owner = {
+				OR = {
+					this = root
+					is_subject_of = root
+				}
+			}
+		}
+	}
+}
+ai_state_ambition_colonial = {
+	scope:target_country = { ai_country_is_valid_colonization_target = yes }
+	can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
+}
+ai_state_ambition_overlord_gift = { # The AI wants nearby states if gifted them by its overlord
+	has_strategic_adjacency = scope:target_state
+	any_overlord_or_above = { this = scope:target_country }
+}
+ai_state_ambition_sphere = {
+	scope:target_state.region ?= {
+		root = {
+			OR = {
+				has_strategic_region_interest_tier = {
+					strategic_region = prev
+					value >= interest_tier_effect_can_start_diplomatic_plays_min_tier
+				}
+				has_region_stance = {
+					region = prev
+					stance = stance_conquer_region
+				}
+				has_region_stance = {
+					region = prev
+					stance = stance_colonize_region
+				}
+			}
+		}
+	}
+	can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
+}
+ai_state_ambition_regional_objective = {
+	OR = {
+		is_regional_objective_target_state = {
+			type = aro:ai_regional_objective_acquire_states
+			target = scope:target_state
+		}
+		is_regional_objective_target_state = {
+			type = aro:ai_regional_objective_recover_claims
+			target = scope:target_state
+		}
+	}
+	can_reach_target_state_to_conquer = { TARGET_STATE = scope:target_state }
+}
+# A state the AI treats as a core national interest rather than an opportunity
+ai_state_has_core_ambition = {
+	OR = {
+		ai_state_ambition_claim = yes
+		ai_state_ambition_homeland = yes
+		ai_state_ambition_capital_region = yes
+		ai_state_ambition_split_state = yes
+		ai_state_ambition_regional_objective = yes
+	}
+}
+ai_state_is_invalid_target = {
+	scope:target_country = { is_still_learning = yes } # Be nice to tutorial players
+}
+ai_is_regional_objective_local_country = {
+	is_regional_objective_target_country = {
+		type = $TYPE$
+		target = $TARGET$
+	}
+}
+ai_is_regional_objective_state = {
+	is_regional_objective_target_state = {
+		type = $TYPE$
+		target = $STATE$
+	}
+}
+ai_is_regional_objective_subjugate_target = {
+	is_regional_objective_target_country = {
+		type = aro:ai_regional_objective_subjugate_country
+		target = $TARGET$
+	}
+}
+ai_is_regional_objective_protect_target = {
+	is_regional_objective_target_country = {
+		type = aro:ai_regional_objective_protect_country
+		target = $TARGET$
+	}
+}
+ai_has_regional_objective_befriend_reason = {
+	ai_is_regional_objective_local_country = {
+		TYPE = aro:ai_regional_objective_befriend_countries
+		TARGET = $TARGET$
+	}
+}
+aro_is_befriend_countries_target = {
+	is_local_country = $REGION$
+	country_rank < root.country_rank
+	relations:root <= relations_threshold:cordial
+	root = { can_reach_target_country_to_protect = { TARGET_COUNTRY = prev } }
+}
+aro_is_acquire_states_candidate = {
+	state_region = {
+		NOT = {
+			any_scope_state = { owner = root }
+		}
+	}
+	root = { can_reach_target_state_to_conquer = { TARGET_STATE = prev } }
+}
+aro_is_acquire_states_target = {
+	root = {
+		has_variable_map = aro_acquire_states_targets
+		is_key_in_variable_map = {
+			name = aro_acquire_states_targets
+			target = prev.state_region
+		}
+	}
+}
+ai_has_systemic_conquest_reason = {
+	OR = {
+		$TARGET$ = { # They hold states we claim
+			any_scope_state = { has_claim_by = root }
+		}
+
+		$TARGET$ = { # They hold our cultural homelands
+			any_scope_state = { is_homeland_of_country_cultures = root }
+		}
+
+		has_diplomatic_pact = { # Our Rival
+			who = $TARGET$
+			type = rivalry
+		}
+
+		AND = { # Larger nations competing with eachother
+			has_overlapping_interests = $TARGET$
+			country_rank >= rank_value:major_power
+			$TARGET$ = { country_rank >= rank_value:major_power }
+		}
+
+		AND = { # Our glorious right to self-determination..
+			is_subject_of = $TARGET$
+			liberty_desire >= 50
+		}
+
+		AND = { # ..and our ungrateful rebellious subjects!
+			$TARGET$ = {
+				is_subject_of = root
+				liberty_desire >= 50
+			}
+		}
+
+		AND = { # Global pariah
+			country_rank >= rank_value:great_power
+			$TARGET$ = { infamy >= infamy_threshold:pariah }
+		}
+
+		ai_is_regional_objective_local_country = {
+			TYPE = aro:ai_regional_objective_acquire_states
+			TARGET = $TARGET$
+		}
+	}
+
+	can_reach_target_country_to_conquer = { TARGET_COUNTRY = $TARGET$ }
+}
+ai_has_systemic_subjugation_reason = {
+	country_rank > $TARGET$.country_rank
+	$TARGET$.country_rank <= rank_value:minor_power
+
+	OR = {
+		$TARGET$ = { ai_country_is_valid_colonization_target = yes }
+		AND = {
+			has_overlapping_interests = $TARGET$
+			relations:root <= relations_threshold:poor
+			NOT = { is_in_customs_union_with = $TARGET$ }
+			$TARGET$ = {
+				is_subject = no
+				NOT = { is_subject_of = root }
+			}
+		}
+		AND = { # Rebellious subject
+			$TARGET$ = {
+				is_subject_of = root
+				liberty_desire >= 50
+			}
+		}
+
+		ai_is_regional_objective_subjugate_target = { TARGET = $TARGET$ }
+	}
+
+	can_reach_target_country_to_subjugate = { TARGET_COUNTRY = $TARGET$ }
+}
+ai_has_systemic_befriend_reason = {
+	country_rank <= $TARGET$.country_rank
+
+	OR = {
+		AND = { # A stronger country we already have good relations with
+			has_overlapping_interests = $TARGET$
+			$TARGET$ = { relations:root >= relations_threshold:cordial }
+		}
+		any_rival_country = { # Potential ally against rival
+			has_overlapping_interests = $TARGET$
+		}
+	}
+
+	can_reach_target_country_to_protect = { TARGET_COUNTRY = $TARGET$ }
+}
+ai_has_systemic_protect_reason = {
+	country_rank > $TARGET$.country_rank
+
+	OR = {
+		AND = { # A weaker independent country
+			has_overlapping_interests = $TARGET$
+			$TARGET$ = { is_subject = no }
+		}
+		any_rival_country = { # Potential buffer state against rival
+			has_strategic_adjacency = $TARGET$
+		}
+
+		ai_is_regional_objective_protect_target = { TARGET = $TARGET$ }
+	}
+
+	can_reach_target_country_to_protect = { TARGET_COUNTRY = $TARGET$ }
+}
+# Recognised country should hold each other to a standard that unrecognised nations arent subject to
+ai_conquest_requires_justification = {
+	NOR = {
+		is_country_type = unrecognized
+		is_country_type = decentralized
+	}
+	$TARGET$ = {
+		NOR = {
+			is_country_type = unrecognized
+			is_country_type = decentralized
+		}
+	}
+}
+ai_colony_will_incorporate_state = {
+	state_population >= define:NAI|INCORPORATE_STATE_MIN_POPULATION
+	OR = {
+		region = root.capital.region
+		any_neighbouring_state = {
+			owner = root
+			is_incorporated = yes
+		}
+		ai_can_incorporate_state = yes
+	}
+}
+ai_avoids_radicals = {
+	# [#10328] was: has_journal_entry = je_divided_monarchists + divided_monarchists_ai_monarchist = yes (French Divided Monarchists content, not in this mod)
+	always = no
+}
+ai_wants_radicals = {
+	# [#10328] was: has_journal_entry = je_divided_monarchists + divided_monarchists_ai_republican = yes (French Divided Monarchists content, not in this mod)
+	always = no
+}
+character_matches_divided_monarchists_ai_path = {
+	OR = {
+		AND = {
+			owner ?= { divided_monarchists_ai_backs_orleanist = yes }
+			has_ideology = ideology:ideology_orleanist
+		}
+		AND = {
+			owner ?= { divided_monarchists_ai_backs_legitimist = yes }
+			has_ideology = ideology:ideology_legitimist
+		}
+		AND = {
+			owner ?= { divided_monarchists_ai_backs_bonapartist = yes }
+			has_ideology = ideology:ideology_bonapartist
+		}
+		AND = {
+			owner ?= { divided_monarchists_ai_republican = yes }
+			OR = {
+				has_ideology = ideology:ideology_republican_leader
+				has_ideology = ideology:ideology_radical
+				has_ideology = ideology:ideology_positivist
+			}
+		}
+	}
+}
+divided_monarchists_ai_rejects_law = {
+	ai_wants_radicals = yes
+	OR = {
+		scope:law.type ?= law_type:law_secret_police
+		scope:law.type ?= law_type:law_outlawed_dissent
+	}
+}
+ai_ceding_state_would_isolate_states = {
+	$STATE$ = { has_port_state = yes }
+	$RECEIVER$ = {
+		NOT = { market = $CEDER$.market }
+	}
+	NOT = {
+		$CEDER$.market = {
+			any_scope_country = {
+				any_scope_state = {
+					NOT = { this = $STATE$ }
+					has_port_state = yes
+					is_in_same_market_area = $STATE$
+				}
+			}
+		}
+	}
+	OR = {
+		AND = {
+			$STATE$ = {
+				NOT = { is_in_same_market_area = $CEDER$.capital }
+				any_neighbouring_state = {
+					is_in_same_market_area = $STATE$
+				}
+			}
+		}
+		AND = {
+			$STATE$ = { is_in_same_market_area = $CEDER$.capital }
+			$CEDER$ = {
+				any_scope_state = {
+					NOT = { is_in_same_market_area = $CEDER$.capital }
+				}
+			}
+		}
+	}
 }

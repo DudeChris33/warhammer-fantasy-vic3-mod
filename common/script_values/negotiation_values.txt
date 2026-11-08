@@ -1036,3 +1036,5 @@ min_mult_value_per_quest_degree = {
 		value = 0.05
 	}
 }
+
+negotiation_min_enactment_chance = 0

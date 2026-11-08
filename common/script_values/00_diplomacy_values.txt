@@ -1045,3 +1045,54 @@ interest_tier_effect_can_sign_foreign_investment_rights_min_tier = 2
 interest_tier_effect_stake_colonial_claim_min_tier = 3
 interest_tier_effect_stake_colonial_claim_unrecognized_min_tier = 4
 interest_tier_effect_can_establish_missions_min_tier = 3
+
+annex_subject_prestige_full_impact_fraction = 0.25	# The annexed subject reaching this fraction of its overlord's prestige causes the full liberty desire impact
+annex_subject_prestige_min_fraction = 0.25	# Smallest fraction of the full liberty desire impact an annexation can cause
+annex_subject_liberty_desire_modifier_months = 60	# How long other subjects keep their liberty desire modifier after an annexation
+annex_subject_liberty_desire_weekly_max = 0.4	# Weekly liberty desire other subjects gain from an annexation at full impact, scaled down by annex_subject_prestige_ratio
+annex_subject_prestige_ratio = {
+	add = {
+		add = scope:target_country.prestige
+		desc = ANNEX_SUBJECT_TARGET_PRESTIGE
+	}
+	divide = {
+		add = scope:annexing_overlord.prestige
+		min = 1
+		desc = ANNEX_SUBJECT_OVERLORD_PRESTIGE
+	}
+	divide = annex_subject_prestige_full_impact_fraction
+	min = annex_subject_prestige_min_fraction
+	max = 1
+}
+annex_subject_liberty_desire_weekly_change = {
+	add = annex_subject_liberty_desire_weekly_max
+	multiply = annex_subject_prestige_ratio
+}
+# root = evaluating country
+treaty_binding_period_commitment_acceptance = {
+	value = 0
+
+	if = {
+		limit = {
+			NOT = { exists = scope:is_treaty_active }
+			scope:treaty.binding_period > 1825
+		}
+
+		if = {
+			limit = {
+				scope:source_country ?= this
+			}
+			value = scope:treaty.binding_period
+			subtract = 1825
+			divide = 365
+			multiply = -2
+			min = -50
+		}
+		else = {
+			value = scope:treaty.binding_period
+			subtract = 1825
+			divide = 365
+			max = 25
+		}
+	}
+}

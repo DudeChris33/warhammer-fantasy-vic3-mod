@@ -2,6 +2,11 @@
 # Restored from vanilla 00_victoria_scripted_effects.txt with real-world content
 # removed (the Metternich hidden_effect that un-immortalised a specific historical
 # character template).
+#
+# [#10328] 1.15 split this into exile_character_with_martyrdom + exile_character_martyrdom_setup_effect. The two are the same
+# behaviour as this one body (checked by expanding 1.15's helper against 1.13). The override is kept rather than superseded
+# (survey D5 assumed 1.15 dropped the Metternich branch; it did not: has_template = aus_klemens_von_metternich is still in the
+# 1.15 setup effect). Taking 1.15's version would reference a template this mod lacks.
 
 exile_character_with_martyrdom = {
 	save_scope_as = martyred_exile_scope

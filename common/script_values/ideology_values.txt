@@ -354,6 +354,7 @@ ideology_reformer_disfavoured_laws = {
 	}
 }
 
+# Removed by vanilla in 1.15; kept while ideologies/01_character_ideologies.txt (#10327) still calls it. #10331 removes it once no caller is left.
 ideology_social_democrat_disfavoured_laws = {
 	# Laws that ideology_social_democrat likes the least.
 	# Maximum value = 6
@@ -400,43 +401,45 @@ ideology_social_democrat_disfavoured_laws = {
 	}
 }
 
-ideology_social_democrat_favoured_laws = {
-	# Laws that ideology_social_democrat likes the most.
-	# Maximum value = 5
-	# [#3410] dropped the law_affirmative_action branch (India-caste DLC law, never restored)
-	value = 0
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_worker_protections
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_universal_suffrage
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_graduated_taxation
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_old_age_pension
-		}
-		add = 1
-	}
-	if = {
-		limit = {
-			has_law_or_variant = law_type:law_right_to_associate
-		}
-		add = 1
-	}
-}
+# Superseded by vanilla in 1.15 (removed; no caller left)
+#ideology_social_democrat_favoured_laws = {
+#	# Laws that ideology_social_democrat likes the most.
+#	# Maximum value = 5
+#	# [#3410] dropped the law_affirmative_action branch (India-caste DLC law, never restored)
+#	value = 0
+#	if = {
+#		limit = {
+#			has_law_or_variant = law_type:law_worker_protections
+#		}
+#		add = 1
+#	}
+#	if = {
+#		limit = {
+#			has_law_or_variant = law_type:law_universal_suffrage
+#		}
+#		add = 1
+#	}
+#	if = {
+#		limit = {
+#			has_law_or_variant = law_type:law_graduated_taxation
+#		}
+#		add = 1
+#	}
+#	if = {
+#		limit = {
+#			has_law_or_variant = law_type:law_old_age_pension
+#		}
+#		add = 1
+#	}
+#	if = {
+#		limit = {
+#			has_law_or_variant = law_type:law_right_to_associate
+#		}
+#		add = 1
+#	}
+#}
 
+# Removed by vanilla in 1.15; kept while ideologies/01_character_ideologies.txt (#10327) still calls it. #10331 removes it once no caller is left.
 ideology_communist_disfavoured_laws = {
 	# Laws that ideology_communist likes the least.
 	# Maximum value = 6
@@ -491,6 +494,7 @@ ideology_communist_disfavoured_laws = {
 	}
 }
 
+# Removed by vanilla in 1.15; kept while ideologies/01_character_ideologies.txt (#10327) still calls it. #10331 removes it once no caller is left.
 ideology_communist_favoured_laws = {
 	# Laws that ideology_communist likes the most.
 	# Maximum value = 5
@@ -1434,4 +1438,48 @@ eagle_burger_freedom_index_uncapped = {
 	multiply = eagle_burger_freedom_elected_bureaucrats_factor
 	multiply = eagle_burger_freedom_crownland_diets_factor
 	multiply = eagle_burger_freedom_second_amendment_factor
+}
+eagle_burger_freedom_full_urbanization_rate = 0.25
+eagle_burger_freedom_full_literacy_rate = 0.5
+eagle_burger_freedom_literacy = {
+	value = literacy_rate
+}
+eagle_burger_freedom_urbanization_per_million = {
+	value = country_urbanization_rate
+	multiply = 1000
+}
+eagle_burger_freedom_full_urbanization_per_million = {
+	value = eagle_burger_freedom_full_urbanization_rate
+	multiply = 1000
+}
+eagle_burger_freedom_urbanization_factor = {
+	value = country_urbanization_rate
+	divide = eagle_burger_freedom_full_urbanization_rate
+	max = 1
+	min = 0.05
+}
+eagle_burger_freedom_literacy_factor = {
+	value = eagle_burger_freedom_literacy
+	divide = eagle_burger_freedom_full_literacy_rate
+	max = 1
+	min = 0.05
+}
+eagle_burger_freedom_elected_bureaucrats_factor = {
+	value = 1
+	if = {
+		limit = {
+			has_law_or_variant = law_type:law_elected_bureaucrats
+		}
+		value = 1.10
+	}
+}
+eagle_burger_freedom_crownland_diets_factor = {
+	value = 1
+	if = {
+		limit = {
+			NOT = { has_law_or_variant = law_type:law_elected_bureaucrats }
+			has_law = law_type:law_crownland_diets
+		}
+		value = 1.10
+	}
 }

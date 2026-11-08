@@ -1313,7 +1313,6 @@ concept_commander = {}
 
 concept_war_support = {}
 
-concept_war_exhaustion = {}
 
 concept_pop_qualifications = {}
 
@@ -1891,3 +1890,18 @@ concept_radicalized_interest_group = {
 }
 
 concept_government_premium = {}
+
+concept_cold = {
+	texture = "gfx/interface/icons/generic_icons/cold_value.dds"
+}
+concept_cold_intensity = {
+	texture = "gfx/interface/icons/generic_icons/cold_value.dds"
+}
+concept_favorite = {
+	texture = "gfx/interface/icons/character_role_icons/favorite.dds"
+}
+concept_war_pressure = {}
+concept_regional_objective = {}
+concept_notable = {
+	texture = "gfx/interface/icons/character_role_icons/notable.dds"
+}
