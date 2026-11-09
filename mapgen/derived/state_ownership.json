@@ -1893,27 +1893,7 @@
     4144,
     1041
    ],
-   "owners": [
-    {
-     "owner": "SKB",
-     "provinces": [
-      "x2042BE",
-      "xF78B17"
-     ]
-    },
-    {
-     "owner": "WIS",
-     "provinces": [
-      "x06EA0E",
-      "x12CA76",
-      "x2F93E0",
-      "x53E08B",
-      "x664EC5",
-      "x68B295",
-      "xC8174C"
-     ]
-    }
-   ],
+   "owner": "WIS",
    "scope": "drawn"
   },
   "STATE_LAHMIA": {
@@ -4372,36 +4352,7 @@
     4334,
     866
    ],
-   "owners": [
-    {
-     "owner": "ESH",
-     "provinces": [
-      "x27EB4F",
-      "xA0C933",
-      "xF38192"
-     ]
-    },
-    {
-     "owner": "OSM",
-     "provinces": [
-      "x0291BA",
-      "x19A717",
-      "x2B1B0F",
-      "x37094C",
-      "x3E34BC",
-      "x6C5F76",
-      "x89B3D6",
-      "xC2B20E",
-      "xCE27FD",
-      "xD46700",
-      "xD5536D",
-      "xDC6C35",
-      "xDD3825",
-      "xE64A44",
-      "xFF74A2"
-     ]
-    }
-   ],
+   "owner": "OSM",
    "scope": "drawn"
   },
   "STATE_WEST_STIRLAND": {

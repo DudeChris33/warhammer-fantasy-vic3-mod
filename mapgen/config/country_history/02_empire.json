@@ -69,11 +69,6 @@
         "ig_devout": "Cult of Ulric"
       }
     },
-    "ESH": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven clan: Clan Eshin (West Ostermark, near Mordheim); replaces the placeholder (#10199)."
-    },
     "GRW": {
       "profile": "wood_elf_realm",
       "confidence": "low",

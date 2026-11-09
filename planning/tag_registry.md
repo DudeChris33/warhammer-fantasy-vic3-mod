@@ -518,7 +518,7 @@ Phase B added two wood-elf realms filed here by the geography of their states: `
 | MAR | `02_empire` | Marienburg (the Wasteland) | start | `marienburger` | Marienburg | seceded province Westerland; mercantile city-state |
 | BRK | `02_empire` | Brass Keep | start | `norscan` | Brass Keep | Nurgle-held fortress, Middle Mountains; captured 2302 IC, never retaken; contained by the Empire's "the Picket"; `norscan` is a disclosed stand-in culture (#6373) |
 | CRB | `02_empire` | Carroburg | start | `middenlander` | Carroburg | `recognized`/`city_state`; Middenland free city on the Reik (#6373) |
-| ESH | `02_empire` | Clan Eshin | start | `skaven` | West Ostermark (non-canon) | Skaven clan; assassins near Mordheim (soft); `principality`/`unrecognized` (#10199) |
+| ESH | `02_empire` | Clan Eshin | start | `skaven` | — (owns nothing at start; Mordheim slice returned to OSM, 2026-11-09) | Skaven clan; assassins near Mordheim (soft); `principality`/`unrecognized` (#10199). Owns no land so no HQ port-travel error; entry in `dormant/` |
 | XSA | `02_empire` | Skaven Clan A (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by ESH (#10199); never reuse |
 | SCU | `02_empire` | Clan Scruten | start | `skaven` | Drakwald Forest (non-canon) | Skaven clan; Under-Middenheim enclave (canon-firm), Drakwald placement inferred; `principality`/`unrecognized` (#10199) |
 | XSB | `02_empire` | Skaven Clan B (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by SCU (#10199); never reuse |
@@ -646,7 +646,7 @@ Eastern Irranas. Plus the retired Skaven placeholders `XSH`–`XSL` (see *Conven
 | VMP | `04_karaz_ankor` | Kemmler's Host | start | `sylvanian_vampire` | Eastern Irranas (non-canon) | Heinrich Kemmler the Lichemaster (human lich); `unrecognized`; name and culture are disclosed stand-ins (#6373) |
 | LHX | `04_karaz_ankor` | Lahmian Exiles | start | `lahmian_vampire` | New Lahmia | Lahmian vampire exiles in STATE_NEW_LAHMIA; `unrecognized`; new tag distinct from `LAH` (Chris, 2026-10-03) |
 | XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by nothing: held nothing (#10199); never reuse |
-| SKB | `04_karaz_ankor` | Clan Skab | start | `skaven` | Kreutzhofen (non-canon) | Skaven clan; hidden under Nuln (canon-firm), Kreutzhofen placement inferred; `principality`/`unrecognized` (#10199) |
+| SKB | `04_karaz_ankor` | Clan Skab | start | `skaven` | — (owns nothing at start; Kreutzhofen slice returned to WIS, 2026-11-09) | Skaven clan; hidden under Nuln (canon-firm); `principality`/`unrecognized` (#10199). Owns no land so no HQ port-travel error; entry in `dormant/` |
 | XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by SKB (#10199); never reuse |
 | SAA | `04_karaz_ankor` | Clan Skaar | start | `skaven` | Dark Maiden Pass (non-canon) | Skaven clan; Apuccini mine stronghold (canon-firm), Dark Maiden Pass inferred; holds the Apuccini slice too; `principality`/`unrecognized` (#10199) |
 | XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by SAA (#10199); never reuse |

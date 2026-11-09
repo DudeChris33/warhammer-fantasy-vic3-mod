@@ -87,6 +87,11 @@
       "profile": "exiled_hold",
       "confidence": "medium",
       "note": "Ruined (registry); occupier is a separate tag. Exiled claimant clan."
+    },
+    "SKB": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Skab (Kreutzhofen, near Nuln); replaces the placeholder (#10199)."
     }
   }
 }

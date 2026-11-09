@@ -158,11 +158,6 @@
       "confidence": "low",
       "note": "Skaven clan: Clan Skaar (Apuccini mine and Dark Maiden Pass); replaces the placeholder (#10199)."
     },
-    "SKB": {
-      "profile": "skaven_placeholder",
-      "confidence": "low",
-      "note": "Skaven clan: Clan Skab (Kreutzhofen, near Nuln); replaces the placeholder (#10199)."
-    },
     "VMP": {
       "profile": "undead_host",
       "confidence": "low",

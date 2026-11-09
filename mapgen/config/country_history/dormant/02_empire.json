@@ -82,6 +82,11 @@
           "why": "Tier 4 has no medical_degrees."
         }
       }
+    },
+    "ESH": {
+      "profile": "skaven_placeholder",
+      "confidence": "low",
+      "note": "Skaven clan: Clan Eshin (West Ostermark, near Mordheim); replaces the placeholder (#10199)."
     }
   }
 }
