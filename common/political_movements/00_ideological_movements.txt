@@ -3149,7 +3149,7 @@ movement_communist = {
 
 	creation_trigger = {
 		has_technology_researched = socialism
-		global_var:reform_or_revolution_conclusion ?= flag:reform
+		always = no # [#10327] was: global_var:reform_or_revolution_conclusion ?= flag:reform
 		country_has_laws_in_need_of_critical_modernization = no
 		ig:ig_trade_unions ?= {
 			is_marginal = no # Not counts-as-marginal
@@ -3184,7 +3184,7 @@ movement_communist = {
 				has_technology_researched = socialism
 			}
 			NOT = {
-				global_var:reform_or_revolution_conclusion ?= flag:reform
+				always = no # [#10327] was: global_var:reform_or_revolution_conclusion ?= flag:reform
 			}
 		}
 	}

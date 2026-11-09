@@ -1115,11 +1115,11 @@ red_summer_counter_revolution_progress_bar = {
 		}
 		progress_condition = {
 			limit = {
-				has_variable = tp_counter_revolution_ukaz_var
+				always = no # [#10327] was: has_variable = tp_counter_revolution_ukaz_var
 			}
 			add = {
 				desc = "red_summer_counter_revolution_ukaz_tt"
-				value = var:tp_counter_revolution_ukaz_var
+				value = 0 # [#10327] was: value = var:tp_counter_revolution_ukaz_var
 			}
 		}
 	}

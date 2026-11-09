@@ -587,16 +587,13 @@ decree_encourage_manufacturing_industry = {
 		if = {
 			limit = {
 				scope:country ?= {
-					has_variable_map = industrial_states_map
-					is_key_in_variable_map = {
-						name = industrial_states_map
-						target = root
-					}
+					always = no # [#10327] was: has_variable_map = industrial_states_map
+					always = no # [#10327] was: is_key_in_variable_map = { name = industrial_states_map target = root }
 				}
 			}
 			add = {
 				value = 5
-				subtract = "scope:country.variable_map(industrial_states_map|root)"
+				subtract = 0 # [#10327] was: subtract = "scope:country.variable_map(industrial_states_map|root)"
 				multiply = 20
 			}
 		}
@@ -622,7 +619,7 @@ decree_encourage_manufacturing_industry = {
 				scope:country ?= {
 					always = no  # [#10327] was: has_journal_entry = je_tp_fav_parochial
 					always = no  # [#10327] was: has_variable = tp_fav_home_state
-					var:tp_fav_home_state ?= root
+					always = no # [#10327] was: var:tp_fav_home_state ?= root
 				}
 			}
 			multiply = 1.5
@@ -698,16 +695,13 @@ decree_encourage_agricultural_industry = {
 		if = {
 			limit = {
 				scope:country ?= {
-					has_variable_map = agricultural_states_map
-					is_key_in_variable_map = {
-						name = agricultural_states_map
-						target = root
-					}
+					always = no # [#10327] was: has_variable_map = agricultural_states_map
+					always = no # [#10327] was: is_key_in_variable_map = { name = agricultural_states_map target = root }
 				}
 			}
 			add = {
 				value = 5
-				subtract = "scope:country.variable_map(agricultural_states_map|root)"
+				subtract = 0 # [#10327] was: subtract = "scope:country.variable_map(agricultural_states_map|root)"
 				multiply = 20
 			}
 		}
@@ -736,7 +730,7 @@ decree_encourage_agricultural_industry = {
 				scope:country ?= {
 					always = no  # [#10327] was: has_journal_entry = je_tp_fav_parochial
 					always = no  # [#10327] was: has_variable = tp_fav_home_state
-					var:tp_fav_home_state ?= root
+					always = no # [#10327] was: var:tp_fav_home_state ?= root
 				}
 			}
 			multiply = 1.5
@@ -821,16 +815,13 @@ decree_encourage_resource_industry = {
 		if = {
 			limit = {
 				scope:country ?= {
-					has_variable_map = resource_states_map
-					is_key_in_variable_map = {
-						name = resource_states_map
-						target = root
-					}
+					always = no # [#10327] was: has_variable_map = resource_states_map
+					always = no # [#10327] was: is_key_in_variable_map = { name = resource_states_map target = root }
 				}
 			}
 			add = {
 				value = 5
-				subtract = "scope:country.variable_map(resource_states_map|root)"
+				subtract = 0 # [#10327] was: subtract = "scope:country.variable_map(resource_states_map|root)"
 				multiply = 20
 			}
 		}
@@ -856,7 +847,7 @@ decree_encourage_resource_industry = {
 				scope:country ?= {
 					always = no  # [#10327] was: has_journal_entry = je_tp_fav_parochial
 					always = no  # [#10327] was: has_variable = tp_fav_home_state
-					var:tp_fav_home_state ?= root
+					always = no # [#10327] was: var:tp_fav_home_state ?= root
 				}
 			}
 			multiply = 1.5
@@ -981,16 +972,13 @@ decree_enlistment_efforts = {
 		if = {
 			limit = {
 				scope:country ?= {
-					has_variable_map = army_states_map
-					is_key_in_variable_map = {
-						name = army_states_map
-						target = root
-					}
+					always = no # [#10327] was: has_variable_map = army_states_map
+					always = no # [#10327] was: is_key_in_variable_map = { name = army_states_map target = root }
 				}
 			}
 			add = {
 				value = 5
-				subtract = "scope:country.variable_map(army_states_map|root)"
+				subtract = 0 # [#10327] was: subtract = "scope:country.variable_map(army_states_map|root)"
 				multiply = 20
 			}
 		}

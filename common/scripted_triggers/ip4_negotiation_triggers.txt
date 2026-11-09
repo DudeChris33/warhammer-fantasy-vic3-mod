@@ -370,8 +370,8 @@ amendment_is_generic = { # Inside an any_possible_amendment_type
 
 ig_could_coup_government = {
     owner = {
-        NOT = { has_variable = coup_cooldown_var }
-        NOT = { has_variable = coup_immunity }
+        NOT = { always = no } # [#10327] was: has_variable = coup_cooldown_var
+        NOT = { always = no } # [#10327] was: has_variable = coup_immunity
     }
     any_scope_character = {
         OR = {

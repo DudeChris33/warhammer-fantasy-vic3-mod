@@ -1154,7 +1154,7 @@ favorite_can_be_appointed_alert = {
 	valid = {
 		has_dlc_feature = ip5_content
 		can_have_favorites = yes
-		NOT = { has_variable = rasputin1_active_var }
+		NOT = { always = no } # [#10327] was: has_variable = rasputin1_active_var
 		NOT = {
 			any_scope_character = {
 				has_role = character_role_favorite

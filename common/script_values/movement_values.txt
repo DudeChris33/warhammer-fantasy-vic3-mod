@@ -2,7 +2,7 @@
     value = 0
     if = {
         limit = {
-            has_global_variable = global_democracy_index
+            always = no # [#10327] was: has_global_variable = global_democracy_index
             owner ?= {
                 has_technology_researched = egalitarianism
                 country_has_voting_franchise = no
@@ -10,7 +10,7 @@
         }
         add = {
             desc = "LACK_OF_SUFFRAGE"
-            value = global_var:global_democracy_index
+            value = 0 # [#10327] was: value = global_var:global_democracy_index
             multiply = {
                 value = owner.modifier:state_expected_sol_from_literacy
                 multiply = 0.10

@@ -441,7 +441,7 @@ amenability = { #runs in IG scope. owner is the county.
 		else_if = {
 			limit = {
 				ig_could_coup_government = yes
-				has_variable = golpista_ig_var
+				always = no # [#10327] was: has_variable = golpista_ig_var
 			}
 			add = {
 				value = -100

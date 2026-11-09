@@ -1,0 +1,211 @@
+﻿# [#10327] Override of vanilla gfx/map/air_graphics/02_birds.txt: breeding and wintering regions remapped from vanilla's Earth strategic
+# regions to this mod's (north to south by position; a cosmetic choice, adjust freely). Only the two region lists changed.
+bird_flock_east_atlantic = {
+	entities = {
+		
+		skin_1 = {
+			name = "bird_canadagoose_migrating_01_entity"
+			possible = {
+			}
+			
+			weight = {
+				value = 1
+			}
+		}
+	}
+	
+	
+	breeding_latitude = { 2600 3400 }
+	wintering_latitude = { 900 2044 }
+	
+	breeding_regions = { region_norsca region_brettonia region_the_empire } # [#10327] was: region_northern_europe region_western_europe region_russia
+	wintering_regions = { region_southern_realms region_southlands } # [#10327] was: region_west_africa region_north_africa
+	
+	depart_in = { spring }
+	return_in = { autumn }
+	
+	entity_length = 3.0
+	speed = 5.0
+	max_count = 15
+	height = 6.0
+}
+
+bird_flock_black_sea_mediterranean = {
+	entities = {
+		
+		skin_1 = {
+			name = "bird_canadagoose_migrating_01_entity"
+			possible = {
+			}
+			
+			weight = {
+				value = 1
+			}
+		}
+	}
+	
+	
+	breeding_latitude = { 2600 3400 }
+	wintering_latitude = { 900 2044 }
+	
+	breeding_regions = { region_the_empire region_kislev region_northern_badlands } # [#10327] was: region_central_europe region_eastern_europe region_russia
+	wintering_regions = { region_land_of_the_dead region_southlands } # [#10327] was: region_nile_basin region_east_africa
+	
+	depart_in = { spring }
+	return_in = { autumn }
+	
+	entity_length = 3.0
+	speed = 5.0
+	max_count = 15
+	height = 6.0
+}
+
+bird_flock_west_asian_east_african = {
+	entities = {
+		
+		skin_1 = {
+			name = "bird_canadagoose_migrating_01_entity"
+			possible = {
+			}
+			
+			weight = {
+				value = 1
+			}
+		}
+	}
+	
+	
+	breeding_latitude = { 2600 3400 }
+	wintering_latitude = { 900 2044 }
+	
+	breeding_regions = { region_kislev region_northern_worlds_edge_mountains } # [#10327] was: region_russia region_central_asia
+	wintering_regions = { region_southern_badlands region_land_of_the_dead } # [#10327] was: region_arabia region_east_africa
+	
+	depart_in = { spring }
+	return_in = { autumn }
+	
+	entity_length = 3.0
+	speed = 5.0
+	max_count = 15
+	height = 6.0
+}
+
+bird_flock_central_asian = {
+	entities = {
+		
+		skin_1 = {
+			name = "bird_canadagoose_migrating_01_entity"
+			possible = {
+			}
+			
+			weight = {
+				value = 1
+			}
+		}
+	}
+	
+	
+	breeding_latitude = { 2600 3400 }
+	wintering_latitude = { 900 2044 }
+	
+	breeding_regions = { region_northern_worlds_edge_mountains region_northern_dark_lands } # [#10327] was: region_siberia region_central_asia
+	wintering_regions = { region_khuresh region_southern_dark_lands } # [#10327] was: region_north_india region_south_india
+	
+	depart_in = { spring }
+	return_in = { autumn }
+	
+	entity_length = 3.0
+	speed = 5.0
+	max_count = 15
+	height = 6.0
+}
+
+bird_flock_east_asian_australasian = {
+	entities = {
+		
+		skin_1 = {
+			name = "bird_canadagoose_migrating_01_entity"
+			possible = {
+			}
+			
+			weight = {
+				value = 1
+			}
+		}
+	}
+	
+	
+	breeding_latitude = { 2600 3400 }
+	wintering_latitude = { 900 2044 }
+	
+	breeding_regions = { region_northern_dark_lands region_cathay } # [#10327] was: region_siberia region_northeast_asia
+	wintering_regions = { region_khuresh region_nippon region_far_ocean_islands } # [#10327] was: region_indochina region_indonesia region_oceania
+	
+	depart_in = { spring }
+	return_in = { autumn }
+	
+	entity_length = 3.0
+	speed = 5.0
+	max_count = 15
+	height = 6.0
+}
+
+bird_flock_americas_atlantic = {
+	entities = {
+		
+		skin_1 = {
+			name = "bird_canadagoose_migrating_01_entity"
+			possible = {
+			}
+			
+			weight = {
+				value = 1
+			}
+		}
+	}
+	
+	
+	breeding_latitude = { 2600 3400 }
+	wintering_latitude = { 900 2044 }
+	
+	breeding_regions = { region_naggaroth } # [#10327] was: region_canada
+	wintering_regions = { region_lustria } # [#10327] was: region_central_america region_gran_colombia
+	
+	depart_in = { spring }
+	return_in = { autumn }
+	
+	entity_length = 3.0
+	speed = 5.0
+	max_count = 15
+	height = 6.0
+}
+
+bird_flock_americas_pacific = {
+	entities = {
+		
+		skin_1 = {
+			name = "bird_canadagoose_migrating_01_entity"
+			possible = {
+			}
+			
+			weight = {
+				value = 1
+			}
+		}
+	}
+	
+	
+	breeding_latitude = { 2600 3400 }
+	wintering_latitude = { 900 2044 }
+	
+	breeding_regions = { region_naggaroth } # [#10327] was: region_pacific_coast
+	wintering_regions = { region_lustria } # [#10327] was: region_central_america region_andes
+	
+	depart_in = { spring }
+	return_in = { autumn }
+	
+	entity_length = 3.0
+	speed = 5.0
+	max_count = 15
+	height = 6.0
+}

@@ -180,7 +180,7 @@ ai_strategy_resource_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_unshakable_autocracy
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_heavy_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_heavy_industry
 					}
 				}
 			}
@@ -193,7 +193,7 @@ ai_strategy_resource_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_heavy_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_heavy_industry
 					}
 				}
 			}
@@ -206,7 +206,7 @@ ai_strategy_resource_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_military_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_military_industry
 					}
 				}
 			}
@@ -219,7 +219,7 @@ ai_strategy_resource_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_military_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_military_industry
 					}
 				}
 			}
@@ -231,7 +231,7 @@ ai_strategy_resource_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_heir_of_alexander
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_military_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_military_industry
 					}
 				}
 			}
@@ -240,14 +240,14 @@ ai_strategy_resource_expansion = {
 			stance = wants_high_supply
 			trigger = {
 				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-				var:tp_fav_industry_group ?= bg:bg_light_industry
+				always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_light_industry
 			}
 		}
 		paper = {
 			stance = wants_high_supply
 			trigger = {
 				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-				var:tp_fav_industry_group ?= bg:bg_light_industry
+				always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_light_industry
 			}
 		}
 	}
@@ -370,7 +370,7 @@ ai_strategy_industrial_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_unshakable_autocracy
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_heavy_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_heavy_industry
 					}
 				}
 			}
@@ -382,7 +382,7 @@ ai_strategy_industrial_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_great_reform
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_military_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_military_industry
 					}
 				}
 			}
@@ -391,7 +391,7 @@ ai_strategy_industrial_expansion = {
 			stance = wants_high_supply
 			trigger = {
 				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-				var:tp_fav_industry_group ?= bg:bg_military_industry
+				always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_military_industry
 			}
 		}
 		small_arms = {
@@ -401,7 +401,7 @@ ai_strategy_industrial_expansion = {
 					always = no  # [#10329] was: has_journal_entry = je_tp_tsar_great_reform
 					AND = {
 						always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-						var:tp_fav_industry_group ?= bg:bg_military_industry
+						always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_military_industry
 					}
 				}
 			}
@@ -410,14 +410,14 @@ ai_strategy_industrial_expansion = {
 			stance = wants_high_supply
 			trigger = {
 				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-				var:tp_fav_industry_group ?= bg:bg_light_industry
+				always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_light_industry
 			}
 		}
 		paper = {
 			stance = wants_high_supply
 			trigger = {
 				always = no  # [#10329] was: has_journal_entry = je_tp_fav_industry
-				var:tp_fav_industry_group ?= bg:bg_light_industry
+				always = no # [#10327] was: var:tp_fav_industry_group ?= bg:bg_light_industry
 			}
 		}
 	}

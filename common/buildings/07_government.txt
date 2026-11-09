@@ -64,7 +64,7 @@ building_university = {
 		custom_tooltip = {
 			text = pol_cannot_build_unis
 			owner = {
-				NOT = { has_variable = poland_universities_closed_var }
+				NOT = { always = no } # [#10327] was: has_variable = poland_universities_closed_var
 			}
 		}
 	}

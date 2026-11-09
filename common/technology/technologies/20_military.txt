@@ -413,7 +413,7 @@ modern_nursing = {
 
 		if = {
 			limit = {
-				has_variable = save_nixa_var
+				always = no # [#10327] was: has_variable = save_nixa_var
 				game_date >= 1850.1.1
 			}
 			add = 100

@@ -1828,7 +1828,7 @@ ai_strategy_world_revolution = {
 		}
 		else_if = {
 			limit = {
-				has_global_variable = socialist_world_republic
+				always = no # [#10327] was: has_global_variable = socialist_world_republic
 			}
 			add = 200
 		}

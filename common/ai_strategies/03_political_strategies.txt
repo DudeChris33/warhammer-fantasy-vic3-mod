@@ -1250,7 +1250,7 @@ ai_strategy_confrontation_agenda = {
 
 		if = {
 			limit = {
-				has_global_variable = socialist_world_republic
+				always = no # [#10327] was: has_global_variable = socialist_world_republic
 			}
 			add = 15
 		}
