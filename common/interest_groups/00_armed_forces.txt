@@ -35,15 +35,6 @@
 				set_ig_trait = ig_trait:ig_trait_patriotic_fervor
 			# }
 		}
-		# Russia
-		else_if = {
-			limit = {
-				always = no  # [#10327] was: c:RUS ?= this
-			}
-			ig:ig_armed_forces ?= {
-				# [#10327] dropped add_ideology = ideology_tsarist (ideology absent)
-			}
-		}
 	}
 	on_disable = {}
 

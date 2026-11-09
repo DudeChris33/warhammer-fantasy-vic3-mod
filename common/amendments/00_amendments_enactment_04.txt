@@ -560,7 +560,7 @@ amendment_draconian_blasphemy_laws = {
 	allowed_laws = {
 		law_theocracy
 		law_state_religion
-		law_caesaropapism
+		# [#10327] dropped law_caesaropapism (law not carried, Russia-gated)
 	}
 
 	modifier = {
