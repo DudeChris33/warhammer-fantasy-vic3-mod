@@ -35,7 +35,7 @@
 				set_ig_trait = ig_trait:ig_trait_farmers_markets
 			# }
 		}
-		else_if = {
+		if = { # [#10327] was: else_if (no preceding if after the EGY neutralization)
 			limit = {
 				always = no  # [#10327] was: c:EGY ?= this
 			}
@@ -44,7 +44,7 @@
 		else_if = { # Germans
 			limit = {
 				any_primary_culture = {
-					has_discrimination_trait = language_germanophone
+					always = no # [#10327] was: has_discrimination_trait = language_germanophone
 				}
 			}
 			ig:ig_rural_folk ?= { set_interest_group_name = ig_landvolk }

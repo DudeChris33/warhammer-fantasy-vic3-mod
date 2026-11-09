@@ -96,11 +96,9 @@ building_power_plant = {
 		if = {
 			limit = {
 				owner ?= {
-					has_journal_entry = je_five_year_plan
-					je:je_five_year_plan ?= {
-						has_variable = five_year_plan_electrification_var
-					}
-					five_year_plan_electrification_goal_met = no
+					always = no # [#10327] was: has_journal_entry = je_five_year_plan
+					# [#10327] removed (JE scope not in this mod): je:je_five_year_plan ?= { has_variable = five_year_plan_electrification_var }
+					always = no # [#10327] was: five_year_plan_electrification_goal_met = no (Soviet five-year-plan JE, not in this mod)
 				}
 			}
 			add = 2500

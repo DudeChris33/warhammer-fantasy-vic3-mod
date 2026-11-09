@@ -55,3 +55,65 @@ is_in_guerilla_war = {
 is_princely_state = {
 	always = no
 }
+
+# [#10327] Inert stubs (1.15 port). Vanilla common/character_roles/00_auto_assigned_roles.txt
+# (common/character_roles is not in replace_paths, so it still loads) calls these four triggers, and
+# common/scripted_triggers is blanked. Vanilla bodies (00_scripted_triggers.txt:2611-2632): has_trait
+# special_character_japanese_emperor; RUS ruler under law_monarchy/law_social_monarchy; has_template
+# nemo_prince; has_variable japan_emperor_restored. All real-world content absent from this setting.
+# TRUE NO-OPS for play: the role branches they gate (emperor of Japan, tsar of Russia, Captain Nemo,
+# Meiji restoration) have no matching character or country here, so "no" is vanilla's own result.
+character_is_emperor_of_japan = {
+	always = no
+}
+
+character_is_tsar_of_russia = {
+	always = no
+}
+
+character_is_captain_nemo = {
+	always = no
+}
+
+country_meiji_reform_emperor_restored = {
+	always = no
+}
+
+# [#10327] Compatibility triggers called by this mod's own restored files (ai_strategies, character_interactions)
+# and by gfx/map/city_data/city_types/russian_*.txt.
+
+# Clean port of vanilla 00_scripted_triggers.txt:1197. Every law named exists in this mod (wave A, #10327).
+has_revolutionary_socialist_laws = {
+	OR = {
+		has_law_or_variant = law_type:law_factory_councils
+		has_law_or_variant = law_type:law_council_republic
+		has_law_or_variant = law_type:law_communal_administration
+		has_law_or_variant = law_type:law_revolutionary_guard
+	}
+}
+
+# Inert stub. Vanilla 00_geography_triggers.txt:297 lists six real-world strait states (Andalusia, Al Rif,
+# Sinai, North Sumatra, Malaya, Panama), none of which exist here. TRUE NO-OP: the AI branches gated on it
+# fall through to the generic behaviour.
+is_important_strait_state_region = {
+	always = no
+}
+
+# Inert stub. Vanilla 00_ai_triggers.txt:1352 is the French Divided Monarchists mechanic (not in this mod).
+# TRUE NO-OP: the character-interaction branches gated on it never fire, as for any non-French country.
+character_is_rival_french_house = {
+	always = no
+}
+
+# Inert stub. Vanilla 00_gfx_buildings_graphics_triggers.txt:54 selects Russian city art by geographic
+# region (common/geographic_regions is blanked). TRUE NO-OP: a false result falls through to the default art.
+russian_buildings_trigger = {
+	always = no
+}
+
+# Clean port of vanilla 00_scripted_triggers.txt:1225 (called by this mod's at_war_with_revolutionary_council_republic).
+# Both laws exist here (wave A, #10327); vanilla lists them as an implicit AND.
+is_revolutionary_council_republic = {
+	has_law_or_variant = law_type:law_council_republic
+	has_law_or_variant = law_type:law_factory_councils
+}

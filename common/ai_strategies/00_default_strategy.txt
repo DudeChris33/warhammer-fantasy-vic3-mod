@@ -925,7 +925,7 @@ ai_strategy_default = {
 			# Restore Natural Borders of France
 			if = {
 				limit = {
-					has_strategy = ai_strategy_restore_natural_borders
+					always = no # [#10327] was: has_strategy = ai_strategy_restore_natural_borders
 					ai_state_ambition_homeland = yes
 				}
 				add = {
@@ -936,7 +936,7 @@ ai_strategy_default = {
 
 			if = {
 				limit = {
-					has_strategy = ai_strategy_restore_natural_borders
+					always = no # [#10327] was: has_strategy = ai_strategy_restore_natural_borders
 					ai_state_ambition_claim = yes
 				}
 				add = {
@@ -3224,11 +3224,7 @@ ai_strategy_default = {
 	# root = liberator
 	# scope:target = oppressor
 	liberate_country_scores = {
-		HOL = {
-		}
-		BUL = {
-			# Russia is inclined to want to release Bulgaria, but not before the Eastern Question or Pan-Nationalism
-		}
+		# [#10327] removed: empty HOL and BUL blocks (tags not defined in this mod; ai_strategy.cpp:73)
 	}
 
 	# How important is it that the AI maintains an interest in a specific strategic region (added on top of region value calculations set in defines)
@@ -5723,7 +5719,7 @@ ai_strategy_default = {
 				limit = {
 					OR = {
 						has_law_or_variant = law_type:law_council_republic
-						has_law_or_variant = law_type:law_state_atheism
+						always = no # [#10327] was: has_law_or_variant = law_type:law_state_atheism
 						has_law_or_variant = law_type:law_command_economy
 						has_law_or_variant = law_type:law_multicultural
 					}
@@ -5757,7 +5753,7 @@ ai_strategy_default = {
 				limit = {
 					NOT = { has_law_or_variant = law_type:law_council_republic }
 					any_primary_culture = {
-						has_discrimination_trait = heritage_east_slavic
+						always = no # [#10327] was: has_discrimination_trait = heritage_east_slavic
 					}
 				}
 				multiply = 0.5

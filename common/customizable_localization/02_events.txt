@@ -4,9 +4,7 @@
 	text = {
 		trigger = {
 			has_law_or_variant = law_type:law_council_republic
-			cu:russian = {
-				is_primary_culture_of = root
-			}
+			always = no # [#10327] was: cu:russian = { is_primary_culture_of = root }
 		}
 		localization_key = custom_newspaper_pravda
 	}

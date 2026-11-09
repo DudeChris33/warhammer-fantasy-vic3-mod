@@ -33,7 +33,7 @@
 	}
 
 	possible = {
-		NOT = { has_law = law_type:law_canton_system }
+		NOT = { always = no } # [#10327] was: has_law = law_type:law_canton_system
 
 		scope:other_country = {
 			NOT = { is_subject_of = root }

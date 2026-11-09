@@ -21,7 +21,7 @@
 	}
 
 	show_in_lens = {
-		has_modifier = modifier_not_recognized_by_spain
+		always = no # [#10327] was: has_modifier = modifier_not_recognized_by_spain
 	}
 
 	can_ratify = {

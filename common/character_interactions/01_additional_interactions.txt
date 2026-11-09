@@ -64,9 +64,9 @@ arrange_accident = {
 		}
 		if = {
 			limit = {
-				rlit_pushkin_needed_for_golden_age = yes
+				always = no # [#10327] was: rlit_pushkin_needed_for_golden_age = yes
 			}
-			rlit_pushkin_force_duel_effect = yes
+			# [#10327] removed (Pushkin duel effect not in this mod; branch gated by always = no): rlit_pushkin_force_duel_effect = yes
 		}
 		else_if = {
 			limit = {
@@ -365,14 +365,14 @@ arrange_accident = {
 		}
 		if = {
 			limit = {
-				has_template = RUS_grigoriy_rasputin
+				always = no # [#10327] was: has_template = RUS_grigoriy_rasputin
 				has_role = character_role_favorite
 			}
 			multiply = 0
 		}
 		if = {
 			limit = {
-				has_template = RUS_alexander_pushkin
+				always = no # [#10327] was: has_template = RUS_alexander_pushkin
 			}
 			multiply = 0
 		}

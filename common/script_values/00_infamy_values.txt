@@ -189,7 +189,7 @@ state_infamy_value = {
 	else_if = {
 		limit = {
 			root = {
-				is_scripted_unification_conquest = { TARGET = scope:infamy_target_state.owner }
+				is_scripted_unification_conquest = yes # [#10327] was: is_scripted_unification_conquest = { TARGET = scope:infamy_target_state.owner }
 			}
 		}
 		multiply = {

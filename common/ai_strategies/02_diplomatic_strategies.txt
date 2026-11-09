@@ -1535,13 +1535,13 @@ ai_strategy_socialism_in_one_country = {
 			}
 			add = {
 				value = 50
-				subtract = state_and_revolution_average_confrontation
+				subtract = 0 # [#10327] was: subtract = state_and_revolution_average_confrontation (Russian JE value)
 				multiply = 5
 			}
 		}
 		else_if = {
 			limit = {
-				has_modifier = modifier_state_and_revolution_conciliation
+				always = no # [#10327] was: has_modifier = modifier_state_and_revolution_conciliation
 			}
 			add = 200
 		}
@@ -1821,7 +1821,7 @@ ai_strategy_world_revolution = {
 				always = no  # [#10329] was: has_journal_entry = je_state_and_revolution
 			}
 			add = {
-				value = state_and_revolution_average_confrontation
+				value = 0 # [#10327] was: value = state_and_revolution_average_confrontation (Russian JE value)
 				subtract = 50
 				multiply = 5
 			}

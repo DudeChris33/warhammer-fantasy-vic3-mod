@@ -63,7 +63,7 @@
 		if = { # Republics - for newly-released countries. For game-start, initialisation is handled in global history
 			limit = {
 				OR = {
-					is_in_geographic_region = geographic_region_french_revolution_zone
+					always = no # [#10327] was: is_in_geographic_region = geographic_region_french_revolution_zone
 					AND = {
 						has_law = law_type:law_colonial_administration
 						NOT = {

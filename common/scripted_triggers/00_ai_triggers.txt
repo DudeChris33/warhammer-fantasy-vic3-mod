@@ -84,8 +84,8 @@ harsh_ai_behavior_trigger = {
 has_enactment_je_or_law_commitment = {
 	OR = {
 		has_any_law_commitment = yes
-		je_tsarpoints_has_law_agenda = yes
-		congress_poland_ai_has_law_agenda = yes
+		# [#10327] removed (Russian JE agendas not in this mod): je_tsarpoints_has_law_agenda = yes
+		# [#10327] removed (Russian JE agendas not in this mod): congress_poland_ai_has_law_agenda = yes
 	}
 }
 
@@ -513,19 +513,19 @@ ai_wants_radicals = {
 character_matches_divided_monarchists_ai_path = {
 	OR = {
 		AND = {
-			owner ?= { divided_monarchists_ai_backs_orleanist = yes }
+			always = no # [#10327] was: owner ?= { divided_monarchists_ai_backs_orleanist = yes }
 			has_ideology = ideology:ideology_orleanist
 		}
 		AND = {
-			owner ?= { divided_monarchists_ai_backs_legitimist = yes }
+			always = no # [#10327] was: owner ?= { divided_monarchists_ai_backs_legitimist = yes }
 			has_ideology = ideology:ideology_legitimist
 		}
 		AND = {
-			owner ?= { divided_monarchists_ai_backs_bonapartist = yes }
+			always = no # [#10327] was: owner ?= { divided_monarchists_ai_backs_bonapartist = yes }
 			has_ideology = ideology:ideology_bonapartist
 		}
 		AND = {
-			owner ?= { divided_monarchists_ai_republican = yes }
+			always = no # [#10327] was: owner ?= { divided_monarchists_ai_republican = yes }
 			OR = {
 				has_ideology = ideology:ideology_republican_leader
 				has_ideology = ideology:ideology_radical

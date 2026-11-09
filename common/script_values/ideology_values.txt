@@ -822,7 +822,7 @@ ideology_vanguardist_favoured_laws = {
 	}
 	if = {
 		limit = {
-			has_law_or_variant = law_type:law_state_atheism
+			always = no # [#10327] was: has_law_or_variant = law_type:law_state_atheism
 		}
 		add = 1
 	}
@@ -1464,7 +1464,7 @@ ideology_integralist_disfavoured_laws = {
 		limit = {
 			OR = {
 				has_law_or_variant = law_type:law_total_separation
-				has_law_or_variant = law_type:law_state_atheism
+				always = no # [#10327] was: has_law_or_variant = law_type:law_state_atheism
 			}
 		}
 		add = 1
@@ -1633,7 +1633,7 @@ eagle_burger_freedom_index_uncapped = {
 	multiply = eagle_burger_freedom_literacy_factor
 	multiply = eagle_burger_freedom_elected_bureaucrats_factor
 	multiply = eagle_burger_freedom_crownland_diets_factor
-	multiply = eagle_burger_freedom_second_amendment_factor
+	# [#10327] removed (american second amendment, not in this mod; factor was 1): multiply = eagle_burger_freedom_second_amendment_factor
 }
 eagle_burger_freedom_full_urbanization_rate = 0.25
 eagle_burger_freedom_full_literacy_rate = 0.5
@@ -1674,7 +1674,7 @@ eagle_burger_freedom_crownland_diets_factor = {
 	if = {
 		limit = {
 			NOT = { has_law_or_variant = law_type:law_elected_bureaucrats }
-			has_law = law_type:law_crownland_diets
+			always = no # [#10327] was: has_law = law_type:law_crownland_diets
 		}
 		value = 1.10
 	}

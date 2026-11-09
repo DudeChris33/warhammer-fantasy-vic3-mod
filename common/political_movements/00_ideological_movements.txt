@@ -1014,7 +1014,7 @@ movement_royalist_absolutist = {
 					always = no  # [#10327] was: country_has_primary_culture = cu:russian
 				}
 			}
-			set_core_ideology = ideology_tsarist_movement
+			# [#10327] removed (ideology_tsarist_movement not defined; branch gated by always = no): set_core_ideology = ideology_tsarist_movement
 		}
 	}
 
@@ -1374,7 +1374,7 @@ movement_royalist_constitutional = {
 					always = no  # [#10327] was: country_has_primary_culture = cu:russian
 				}
 			}
-			set_core_ideology = ideology_tsarist_constitutional_movement
+			# [#10327] removed (ideology_tsarist_constitutional_movement not defined; branch gated by always = no): set_core_ideology = ideology_tsarist_constitutional_movement
 		}
 	}
 
@@ -7826,8 +7826,8 @@ movement_anti_communist = {
 			}
 			add = {
 				desc = "STATE_AND_REVOLUTION_CONFRONTATION"
-				value = "owner.state_and_revolution_political_confrontation_progress"
-				add = "owner.state_and_revolution_economic_confrontation_progress"
+				value = 0 # [#10327] was: value = "owner.state_and_revolution_political_confrontation_progress"
+				add = 0 # [#10327] was: add = "owner.state_and_revolution_economic_confrontation_progress"
 				divide = 4
 			}
 		}

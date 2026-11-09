@@ -102,18 +102,12 @@
         "lawgroup_taxation": "law_per_capita_based_taxation",
         "lawgroup_land_reform": "law_peasant_proprietorship",
         "lawgroup_migration": "law_no_migration_controls",
-        "lawgroup_labour_associations": "law_combination_acts",
-        "lawgroup_colonization": "law_frontier_colonization"
+        "lawgroup_labour_associations": "law_combination_acts"
       },
       "ruling_igs": [
         "ig_petty_bourgeoisie",
         "ig_industrialists"
       ],
-      "institutions": {
-        "institution_schools": 1,
-        "institution_health_system": 1,
-        "institution_colonial_affairs": 1
-      },
       "justify": {
         "laws.lawgroup_governance_principles": {
           "source": "canon: WFRP Marienburg (the seceded Wasteland is run by merchant councils, no hereditary monarch)",
@@ -167,17 +161,9 @@
           "source": "inferred",
           "why": "Laissez-faire disallows the guild system."
         },
-        "laws.lawgroup_colonization": {
-          "source": "canon: WFRP Marienburg (trading posts and overseas ventures)",
-          "why": "Merchant venture colonisation."
-        },
         "ruling_igs": {
           "source": "canon: WFRP Marienburg (merchant houses and shipping magnates)",
           "why": "Merchants and shipping magnates."
-        },
-        "institutions": {
-          "source": "inferred",
-          "why": "Marienburg invests in colonial affairs beside schools and health."
         },
         "next_election": {
           "source": "inferred",

@@ -232,10 +232,10 @@ grant_command_to_agitator = {
 		exists = owner.capital.land_hq
 		trigger_if = {
     		limit = {
-        		has_template = nemo_prince
+        		always = no # [#10327] was: has_template = nemo_prince
 			}
     		NOT = {
-        		has_template = nemo_prince
+        		always = no # [#10327] was: has_template = nemo_prince
     		}
 		}
 	}
@@ -297,7 +297,7 @@ exile_character = {
 			has_law_or_variant = law_type:law_single_party_state
 			has_law_or_variant = law_type:law_secret_police
 			has_law_or_variant = law_type:law_outlawed_dissent
-			divided_monarchists_ai_active = yes
+			always = no # [#10327] was: divided_monarchists_ai_active = yes
 		}
 	}
 
@@ -661,13 +661,13 @@ exile_character = {
 				owner ?= {
 					ai_wants_radicals = yes
 				}
-				character_is_french_house = yes
+				always = no # [#10327] was: character_is_french_house = yes
 			}
 			add = 50
 		}
 		if = {
 			limit = {
-				has_template = RUS_alexander_pushkin
+				always = no # [#10327] was: has_template = RUS_alexander_pushkin
 			}
 			multiply = 0
 		}
@@ -1025,7 +1025,7 @@ retire_commander = {
 		}
 		if = {
 			limit = {
-				has_template = RUS_alexander_pushkin
+				always = no # [#10327] was: has_template = RUS_alexander_pushkin
 			}
 			multiply = 0
 		}

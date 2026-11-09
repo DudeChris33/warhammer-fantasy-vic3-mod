@@ -1,0 +1,502 @@
+﻿weight = {
+  usage = game
+
+  very_overweight_character = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = 0.7 # We try to be slightly more conservative with characters than with pops
+      }
+    }
+    weight = {
+      base = 0
+
+      modifier = {
+        add = 75
+        scope:character ?= {
+          has_trait = expensive_tastes
+        }
+      }
+      modifier = {
+        add = 5
+        scope:character ?= {
+          OR = {
+            has_trait = alcoholic
+            has_trait = opium_addiction
+          }
+        }
+      }
+      modifier = {
+        add = 5
+        scope:character ?= {
+          owner ?= {
+            average_sol >= 30
+          }
+        }
+      }
+      modifier = {
+        factor = 1.1
+        scope:character ?= {
+          OR = {
+            is_interest_group_type = ig_landowners
+            is_interest_group_type = ig_industrialists
+          }
+        }
+      }
+      modifier = {
+        factor = 0 # Ensure commanders never go overboard
+        scope:character ?= {
+          OR = {
+            has_role_of_type = general
+            has_role_of_type = admiral
+            is_interest_group_type = ig_armed_forces
+          }
+        }
+      }
+      modifier = {
+        factor = 0
+        scope:character ?= {
+          is_historical = yes # do not alter the shape of characters that are sculpted to appear a certain way
+        }
+      }
+    }
+  }
+  overweight_character = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = 0.5
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+          add = 5
+          exists = scope:character
+      }
+      modifier = {
+        add = 50
+        scope:character ?= {
+          has_trait = expensive_tastes
+        }
+      }
+      modifier = {
+        add = 10
+        scope:character ?= {
+          OR = {
+            is_noble = yes
+            has_role_of_type = magnate
+            has_role_of_type = executive
+          }
+        }
+      }
+      modifier = {
+        add = 5
+        scope:character ?= {
+          OR = {
+            has_trait = alcoholic
+            has_trait = opium_addiction
+          }
+        }
+      }
+      modifier = {
+        add = 5
+        scope:character ?= {
+          owner ?= {
+            average_sol >= 20
+          }
+        }
+      }
+      modifier = {
+        factor = 1.25
+        scope:character ?= {
+          OR = {
+            is_interest_group_type = ig_landowners
+            is_interest_group_type = ig_industrialists
+          }
+        }
+      }
+      modifier = {
+        factor = 0 # Ensure commanders never go overboard
+        scope:character ?= {
+          OR = {
+            has_role_of_type = general
+            has_role_of_type = admiral
+            is_interest_group_type = ig_armed_forces
+          }
+        }
+      }
+      modifier = {
+        factor = 0
+        scope:character ?= {
+          is_historical = yes # do not alter the shape of characters that are sculpted to appear a certain way
+        }
+      }
+    }
+  }
+
+  slightly_overweight_character = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = 0.25
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+          add = 10
+          exists = scope:character
+      }
+      modifier = {
+        add = 15
+        scope:character ?= {
+          has_trait = expensive_tastes
+        }
+      }
+      modifier = {
+        add = 5
+        scope:character ?= {
+          OR = {
+            is_noble = yes
+            has_role_of_type = magnate
+            has_role_of_type = executive
+          }
+        }
+      }
+      modifier = {
+        add = 10
+        scope:character ?= {
+          OR = { # Can go either way so these are included on both ends, generally making addicts more likely to deviate from the default weight
+            has_trait = alcoholic
+            has_trait = opium_addiction
+          }
+        }
+      }
+      modifier = {
+        add = 10
+        scope:character ?= {
+          owner ?= {
+            average_sol >= 20
+          }
+        }
+      }
+      modifier = {
+        factor = 1.25
+        scope:character ?= {
+          OR = {
+            is_interest_group_type = ig_landowners
+            is_interest_group_type = ig_industrialists
+          }
+        }
+      }
+      modifier = {
+        factor = 0.25
+        scope:character ?= {
+          OR = {
+            has_role_of_type = general
+            has_role_of_type = admiral
+            is_interest_group_type = ig_armed_forces
+          }
+        }
+      }
+      modifier = {
+        factor = 0
+        exists = scope:character
+        scope:character ?= {
+          is_historical = yes # do not alter the shape of characters that are sculpted to appear a certain way
+        }
+      }
+    }
+  }
+
+  default_weight_character = {
+    dna_modifiers = {}
+    weight = {
+      base = 0
+      modifier = {
+          add = 99
+          exists = scope:character
+      }
+      modifier = {
+        factor = 0
+        exists = scope:character
+        scope:character ?= {
+          is_historical = yes # do not alter the shape of characters that are sculpted to appear a certain way
+        }
+      }
+    }
+  }
+
+  slightly_underweight_character = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = -0.15
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+          add = 10
+          exists = scope:character
+      }
+      modifier = {
+        add = 40
+        scope:character ?= {
+          OR = {
+            has_trait = tuberculosis
+            has_trait = cancer
+          }
+        }
+      }
+      modifier = {
+        add = 10
+        scope:character ?= {
+          OR = { # Can go either way so these are included on both ends, generally making addicts more likely to deviate from the default weight
+            has_trait = alcoholic
+            has_trait = opium_addiction
+            has_trait = cocaine_addiction # Only included in underweight
+          }
+        }
+      }
+      modifier = {
+        add = 10
+        scope:character ?= {
+          is_interest_group_type = ig_devout
+          religion = {
+				    always = no # For the odd ascetic # [#10327] was: has_discrimination_trait = heritage_dharmic
+			    }
+        }
+      }
+      modifier = {
+        add = 10
+        scope:character ?= {
+          owner ?= {
+            average_sol <= 10
+          }
+        }
+      }
+      modifier = {
+        factor = 0.25
+        scope:character ?= {
+          OR = {
+            has_role_of_type = general
+            has_role_of_type = admiral
+            is_interest_group_type = ig_armed_forces
+          }
+        }
+      }
+      modifier = {
+        factor = 1.50
+        scope:character ?= {
+          age >= 60
+        }
+      }
+      modifier = {
+        factor = 0
+        exists = scope:character
+        scope:character ?= {
+          is_historical = yes # do not alter the shape of characters that are sculpted to appear a certain way
+        }
+      }
+    }
+  }
+
+  underweight_character = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = -0.3
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+          add = 5
+          exists = scope:character
+      }
+      modifier = {
+        add = 70
+        scope:character ?= {
+          OR = {
+            has_trait = tuberculosis
+            has_trait = cancer
+          }
+        }
+      }
+      modifier = {
+        add = 5
+        scope:character ?= {
+          OR = {
+            has_trait = alcoholic
+            has_trait = opium_addiction
+            has_trait = cocaine_addiction
+          }
+        }
+      }
+      modifier = {
+        add = 5
+        scope:character ?= {
+          owner ?= {
+            average_sol <= 10
+          }
+        }
+      }
+      modifier = {
+        factor = 0 # Ensure commanders never go overboard
+        scope:character ?= {
+          OR = {
+            has_role_of_type = general
+            has_role_of_type = admiral
+            is_interest_group_type = ig_armed_forces
+          }
+        }
+      }
+      modifier = {
+        factor = 1.50
+        scope:character ?= {
+          age >= 60
+        }
+      }
+      modifier = {
+        factor = 0
+        exists = scope:character
+        scope:character ?= {
+          is_historical = yes # do not alter the shape of characters that are sculpted to appear a certain way
+        }
+      }
+    }
+  }
+
+  very_underweight_character = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = -0.45
+      }
+    }
+    weight = { # Currently unused, added here for future consideration and modders
+      base = 0
+      #modifier = {
+      #    add = 0
+      #    exists = scope:character
+      #}
+      #modifier = {
+      #  factor = 0
+      #  exists = scope:character
+      #  scope:character ?= {
+      #    is_historical = yes # do not alter the shape of characters that are sculpted to appear a certain way
+      #  }
+      #}
+    }
+  }
+
+  slightly_underweight_pop = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = -0.15
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+        add = 100
+        slightly_underweight_pop_trigger = yes
+      }
+    }
+  }
+
+  underweight_pop = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = -0.25
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+        add = 100
+        underweight_pop_trigger = yes
+      }
+    }
+  }
+
+  very_underweight_pop = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = -0.45
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+          add = 100
+          very_underweight_pop_trigger = yes
+      }
+    }
+  }
+
+  slightly_overweight_pop = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = 0.25
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+        add = 100
+        slightly_overweight_pop_trigger = yes
+      }
+    }
+  }
+
+  overweight_pop = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = 0.5
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+          add = 100
+          overweight_pop_trigger = yes
+      }
+    }
+  }
+
+  very_overweight_pop = {
+    dna_modifiers = {
+      morph = {
+        mode = modify
+        gene = gene_bs_body_type
+        value = 0.75
+      }
+    }
+    weight = {
+      base = 0
+      modifier = {
+        add = 100
+        very_overweight_pop_trigger = yes
+      }
+    }
+  }
+}

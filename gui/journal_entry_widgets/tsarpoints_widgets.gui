@@ -1,0 +1,6 @@
+# [#10327] Blank override of vanilla gui/journal_entry_widgets/tsarpoints_widgets.gui (Russian tsar-points
+# journal widgets). common/game_concepts is replaced, so vanilla widgets that read concept_tsarpoints fail
+# to parse. Nothing in this mod references tsarpoints_widget_types.
+types tsarpoints_widget_types
+{
+}

@@ -76,14 +76,12 @@
 
  # ==== Board item #3407 — Northern & Western Realms ====
  # gospodar — male common first names
- Kazimir:0 "Kazimir"
  Yevgeni:0 "Yevgeni"
  Grigori:0 "Grigori"
  Ratibor:0 "Ratibor"
  Sviatopolk:0 "Sviatopolk"
  Yaromir:0 "Yaromir"
  Danil:0 "Danil"
- Lubomir:0 "Lubomir"
  Zorislav:0 "Zorislav"
 
  # gospodar — female common first names
@@ -128,7 +126,6 @@
  # gospodar — common last names
  Volkov:0 "Volkov"
  Medvedin:0 "Medvedin"
- Sokolov:0 "Sokolov"
  Bortnik:0 "Bortnik"
  Zimin:0 "Zimin"
  Rybakov:0 "Rybakov"
@@ -138,8 +135,6 @@
  Yablonev:0 "Yablonev"
  Dubrov:0 "Dubrov"
  Vetrov:0 "Vetrov"
- Kamenev:0 "Kamenev"
- Belov:0 "Belov"
  Chernin:0 "Chernin"
  Ledov:0 "Ledov"
 
@@ -171,11 +166,9 @@
  Borka:0 "Borka"
  Chelka:0 "Chelka"
  Dilnara:0 "Dilnara"
- Ganna:0 "Ganna"
  Ilka:0 "Ilka"
  Jarka:0 "Jarka"
  Kesha:0 "Kesha"
- Malka:0 "Malka"
  Narin:0 "Narin"
  Oksa:0 "Oksa"
  Radka:0 "Radka"
@@ -202,7 +195,6 @@
  Tarkanov:0 "Tarkanov"
  Yarukov:0 "Yarukov"
  Bataarin:0 "Bataarin"
- Tuganov:0 "Tuganov"
  Ulanov:0 "Ulanov"
  Zhelkov:0 "Zhelkov"
  Hawkfeather:0 "Hawkfeather"
@@ -805,14 +797,12 @@
  Erdwin:0 "Erdwin"
  Zbignev:0 "Zbignev"
  Vlastimir:0 "Vlastimir"
- Marek:0 "Marek"
  Radek:0 "Radek"
  Borislav:0 "Borislav"
 
  # ostermarker — female common first names
  Zdenka:0 "Zdenka"
  Bozena:0 "Bozena"
- Wanda:0 "Wanda"
  Radmila:0 "Radmila"
  Vlasta:0 "Vlasta"
  Hanka:0 "Hanka"
@@ -1008,7 +998,6 @@
  Philippa:0 "Philippa"
  Rosalinde:0 "Rosalinde"
  Seraphina:0 "Seraphina"
- Sibylla:0 "Sibylla"
  Wilhelmia:0 "Wilhelmia"
  Xaveria:0 "Xaveria"
  Zenobia:0 "Zenobia"
@@ -1160,7 +1149,6 @@
  Olenka:0 "Olenka"
  Radica:0 "Radica"
  Vesna:0 "Vesna"
- Zorina:0 "Zorina"
 
  # sylvanian — noble last names
  Sczarny:0 "Sczarny"
@@ -1199,7 +1187,6 @@
  Mannfred:0 "Mannfred"
  Walach:0 "Walach"
  Kryzstoff:0 "Kryzstoff"
- Vitalis:0 "Vitalis"
  Malachar:0 "Malachar"
  Cassimir:0 "Cassimir"
  Dieterich:0 "Dieterich"
@@ -2813,7 +2800,6 @@
  Mihaela:0 "Mihaela"
  Dorina:0 "Dorina"
  Viorica:0 "Viorica"
- Lavinia:0 "Lavinia"
  Sorina:0 "Sorina"
  Ghoulking:0 "Ghoulking"
  Cryptlord:0 "Cryptlord"
@@ -3280,7 +3266,6 @@
  Corvo:0 "Corvo"
  Dario:0 "Dario"
  Cylostra:0 "Cylostra"
- Marietta:0 "Marietta"
  Perpetua:0 "Perpetua"
  Isolina:0 "Isolina"
  Deadwater:0 "Deadwater"

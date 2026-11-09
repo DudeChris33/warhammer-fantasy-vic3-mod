@@ -3886,7 +3886,7 @@ clothes = {
             accessory = {
                 mode = add
                 gene = top_layer
-                template = ep2_character_top_layers
+                template = japanese_top_layer # [#10327] 1.15: kataginu_01 lives in japanese_top_layer, ep2_character_top_layers holds only the _seishisai variant
                 accessory = male_top_layer_japanese_kataginu_01 # [#9046] was: range = { 0 1 } -- template holds only the _seishisai (Aizawa Seishisai) kataginu
             }
         }

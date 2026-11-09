@@ -31,7 +31,7 @@ $ErrorActionPreference = 'Stop'
 $repo = $PSScriptRoot
 
 # Folders and files the game (or the launcher) reads. Everything else stays in the repo.
-$shipDirs  = @('.metadata', 'common', 'events', 'gfx', 'gui', 'interface', 'localization', 'map_data')
+$shipDirs  = @('.metadata', 'common', 'events', 'gfx', 'gui', 'interface', 'localization', 'map_data', 'music')
 $shipFiles = @('thumbnail.png')
 
 $repoFull = [IO.Path]::GetFullPath($repo).TrimEnd('\')

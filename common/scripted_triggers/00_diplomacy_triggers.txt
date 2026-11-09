@@ -233,14 +233,18 @@ is_russia_unification_pair = {
 }
 
 is_scripted_unification_conquest = {
-	OR = {
-		is_china_unification_pair = { TARGET = $TARGET$ }
-		is_ethiopia_unification_pair = { TARGET = $TARGET$ }
-		is_arabia_unification_pair = { TARGET = $TARGET$ }
-		is_india_unification_pair = { TARGET = $TARGET$ }
-		is_indonesia_unification_pair = { TARGET = $TARGET$ }
-		is_russia_unification_pair = { TARGET = $TARGET$ }
-	}
+	# [#10327] The six *_unification_pair children no longer read $TARGET$ (their real-world bodies are
+	# neutralized above), so passing TARGET fails to compile ("unknown arguments: TARGET"). Parent and
+	# its one caller (00_infamy_values.txt) now take no argument; result is unchanged (always no).
+	always = no
+	# [#10327] was: OR = {
+	# [#10327] was: is_china_unification_pair = { TARGET = $TARGET$ }
+	# [#10327] was: is_ethiopia_unification_pair = { TARGET = $TARGET$ }
+	# [#10327] was: is_arabia_unification_pair = { TARGET = $TARGET$ }
+	# [#10327] was: is_india_unification_pair = { TARGET = $TARGET$ }
+	# [#10327] was: is_indonesia_unification_pair = { TARGET = $TARGET$ }
+	# [#10327] was: is_russia_unification_pair = { TARGET = $TARGET$ }
+	# [#10327] was: }
 }
 
 has_any_strait_province_in_hierarchy = {

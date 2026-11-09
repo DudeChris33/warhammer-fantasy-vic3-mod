@@ -251,8 +251,8 @@ cultural_community_creation_weight = {
 				scope:culture = {
 					is_primary_culture_of = root.owner
 					OR = {
-						has_discrimination_trait = heritage_east_slavic
-						has_discrimination_trait = tradition_cossacks
+						always = no # [#10327] was: has_discrimination_trait = heritage_east_slavic
+						always = no # [#10327] was: has_discrimination_trait = tradition_cossacks
 					}
 				}
 			}

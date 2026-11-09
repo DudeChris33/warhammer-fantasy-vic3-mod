@@ -108,14 +108,9 @@
       "profile": "estalian_kingdom",
       "confidence": "medium",
       "laws": {
-        "lawgroup_colonization": "law_frontier_colonization",
         "lawgroup_navy_model": "law_professional_navy"
       },
       "justify": {
-        "laws.lawgroup_colonization": {
-          "source": "inferred",
-          "why": "Frontier colonisation, assumed for Estalia's seagoing power; no canon expedition found."
-        },
         "laws.lawgroup_navy_model": {
           "source": "canon: WFB Estalia background (Magritta is Estalia's seagoing power)",
           "why": "Estalia's seagoing power keeps a professional navy."

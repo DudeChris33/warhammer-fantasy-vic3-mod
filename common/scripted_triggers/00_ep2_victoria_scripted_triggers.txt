@@ -122,7 +122,7 @@ character_has_valid_reason_for_coup = {
         }
         this.interest_group = {
             OR = {
-                has_modifier = modifier_failed_to_meet_petition # Case 2 - owner has failed a petition for this.interest_group
+                always = no # [#10327] was: has_modifier = modifier_failed_to_meet_petition # Case 2 - owner has failed a petition for this.interest_group
                 has_modifier = negotiation_failed_quest # Case 3 - owner has failed a negotiation for this.interest_group
             }
         }

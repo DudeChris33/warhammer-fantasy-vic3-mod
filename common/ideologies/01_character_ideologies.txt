@@ -10428,7 +10428,7 @@ ideology_modernizer_leader = { # Average Progressiveness - 35.71
 			limit = {
 				owner ?= {
 					any_scope_character = {
-						has_template = RUS_alexander_ii
+						always = no # [#10327] was: has_template = RUS_alexander_ii
 						is_ruler_of_own_country = yes
 					}
 				}
@@ -10501,7 +10501,7 @@ ideology_modernizer_leader = { # Average Progressiveness - 35.71
 			limit = {
 				owner ?= {
 					any_scope_character = {
-						has_template = RUS_alexander_ii
+						always = no # [#10327] was: has_template = RUS_alexander_ii
 						is_ruler_of_own_country = yes
 					}
 				}
