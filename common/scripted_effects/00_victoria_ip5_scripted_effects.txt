@@ -1,0 +1,49 @@
+﻿fold_movement_into_anti_communist_movement_effect = {
+	if = {
+		limit = {
+			owner ?= {
+				has_council_republic_law = yes
+				NOT = {
+					any_political_movement = {
+						is_political_movement_type = movement_anti_communist
+					}
+				}
+			}
+		}
+		owner ?= {
+			create_political_movement = { type = movement_anti_communist }
+		}
+	}
+}
+
+assign_random_revolutionary_ideology = {
+	random_list = {
+		10 = {
+			set_ideology = ideology:ideology_communist_leader
+		}
+		1 = {
+			modifier = {
+				if = {
+					limit = {
+						owner = {
+							has_law_or_variant = law_type:law_anarchy
+						}
+					}
+					add = 19
+				}
+			}
+			set_ideology = ideology:ideology_anarchist
+		}
+		10 = {
+			trigger = {
+				owner = {
+					has_technology_researched = political_agitation
+				}
+			}
+			set_ideology = ideology:ideology_communist_leader
+		}
+		10 = {
+			# Keep default ideology
+		}
+	}
+}
