@@ -1,0 +1,5 @@
+# [#10327] Empty override of vanilla common/travel_network/naval_network.txt (1.15 moved the naval graph here).
+# Vanilla's nodes are Earth-map provinces; on this map they are all invalid and the loader discards them
+# (travel_network_definition.cpp:1225), then crashes. replace_paths alone did not stop the vanilla file loading.
+nodes={ }
+connections={ }

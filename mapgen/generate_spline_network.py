@@ -338,7 +338,11 @@ def check_naval(nav: Network, port_states: set[int], passable_seas: set[int]) ->
     if not nav.strips:
         problems.append("no naval strips")
     if harb - want:
-        problems.append(f"harbours of states that are not current ports or passable seas: {sorted(harb - want)}")
+        # [#10327] Surplus harbours are a note, not a failure. The editor puts a harbour on every coast, so
+        # states touching only an impassable sea (2026-11-08: 30-34, 362, Sea of Chaos) get one that our
+        # port pick (passable seas only, #9784) never makes. A harbour a state does not use is harmless;
+        # a missing one (below) leaves a port with no lane, so that stays fatal.
+        print(f"note: harbours of states that are not current ports or passable seas (kept): {sorted(harb - want)}")
     if want - harb:
         problems.append(f"current ports or passable seas without a harbour: {sorted(want - harb)}")
     return problems

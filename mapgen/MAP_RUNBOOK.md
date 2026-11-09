@@ -370,7 +370,10 @@ editor generates, unchanged. Re-run the naval step only when sea zones, ports or
 change; the writer then refuses with "naval layer is stale for the current map" until it is done:
 
 1. Close the game, `.\deploy.ps1` (so the editor sees the current map). The deployed
-   `spline_network.splnet` must be the repo's; an empty one is fine, since the step appends.
+   `spline_network.splnet` must be **empty (0 bytes)**, not the repo's: the step appends, so on
+   2026-11-08 a run over the stale repo file kept its 16 stale harbours beside the new ones and
+   `generate_spline_network.py --check` still said "naval layer is stale". Truncate the deployed
+   copy after `deploy.ps1` (`: > "<mod folder>/gfx/map/spline_network/spline_network.splnet"`).
 2. Launch the map editor with the mod; in the console:
    `SplineNetwork.SetAssetGenerationMode naval`, then `SplineNetwork.AppendAssets`.
 3. **Move** (not copy) the output into the repo's `gfx/map/spline_network/`. On 2026-10-29 the
