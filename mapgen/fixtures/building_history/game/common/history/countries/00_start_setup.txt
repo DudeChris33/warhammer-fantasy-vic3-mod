@@ -13,4 +13,7 @@ COUNTRIES = {
 	c:DDD ?= {
 		effect_fixture_tier_6 = yes
 	}
+	c:EEE ?= {
+		effect_fixture_tier_7 = yes
+	}
 }

@@ -6894,7 +6894,7 @@ def run_check() -> int:
     _selfcheck_building_history()
     print("building_history: tech-gated building emission (railway without the tech refused, locked method "
           "never chosen, unresolved tech set -> tech-free only, resource/anchor/id/job-cap errors, "
-          "independent verifier on hand-broken output and changed country history) self-check passed.")
+          "independent verifier on hand-broken output and changed country history, port coverage of cut-off pieces) self-check passed.")
     _selfcheck_smooth_cr_borders()
     print("smooth_cr_borders: deterministic label-field smoothing keeps states, coast ends and the seal "
           "self-check passed.")

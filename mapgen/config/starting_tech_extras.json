@@ -1,5 +1,5 @@
 {
- "_comment": "Hand-authored input for generate_country_history.py: per-tag starting technologies ON TOP OF the culture-group preset in common/scripted_effects/00_starting_inventions.txt (prerequisites included, preset baseline already subtracted). Emitted as add_technology_researched lines after the preset. Tags that own no state at the start date are ignored. Converted 2026-10-17 from planning/starting_tech_per_country.txt (proposal, Chris approved wiring it in); the Skaven clan roles SKRYRE, MOULDER, PESTILENS, ESHIN have no tags yet and were left out (the XS* placeholders get the preset only). 2026-10-24 (#8459): BJO keeps its trade techs (moved here from mapgen/config/country_history, which no longer holds tech); MAR, REM, VER and MOO gain democracy, so their republic and franchise laws are unlocked (loremaster: republics or elective in the setting). REI and SAP lose medical_degrees: the empire and high_elf presets now grant it.",
+ "_comment": "Hand-authored input for generate_country_history.py: per-tag starting technologies ON TOP OF the culture-group preset in common/scripted_effects/00_starting_inventions.txt (prerequisites included, preset baseline already subtracted). Emitted as add_technology_researched lines after the preset. Tags that own no state at the start date are ignored. Converted 2026-10-17 from planning/starting_tech_per_country.txt (proposal, Chris approved wiring it in); the Skaven clan roles SKRYRE, MOULDER, PESTILENS, ESHIN have no tags yet and were left out (the XS* placeholders get the preset only). 2026-10-24 (#8459): BJO keeps its trade techs (moved here from mapgen/config/country_history, which no longer holds tech); MAR, REM, VER and MOO gain democracy, so their republic and franchise laws are unlocked (loremaster: republics or elective in the setting). REI and SAP lose medical_degrees: the empire and high_elf presets now grant it. 2026-11-09 (#10453): AMZ gains navigation (an island people needs boats; lore call, flagged for Chris), so its Dragon Isles and Blood Hall start with a port.",
  "tags": {
   "REI": [
    "mechanical_tools",
@@ -264,6 +264,9 @@
   "BRC": [
    "international_relations",
    "colonization"
+  ],
+  "AMZ": [
+   "navigation"
   ]
  }
 }

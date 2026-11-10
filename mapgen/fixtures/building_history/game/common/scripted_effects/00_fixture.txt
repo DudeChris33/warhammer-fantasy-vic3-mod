@@ -20,3 +20,8 @@ effect_fixture_tier_6 = {
 	add_technology_researched = enclosure
 	effect_fixture_laws = yes
 }
+effect_fixture_tier_7 = {
+	add_technology_researched = enclosure
+	add_technology_researched = navigation
+	effect_fixture_laws = yes
+}

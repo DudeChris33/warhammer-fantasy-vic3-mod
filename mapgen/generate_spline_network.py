@@ -40,7 +40,7 @@ whose harbours are not exactly the current port states plus the passable sea
 states: state ids or ports changed, so the desktop naval step must be re-run.
 There are no port-to-harbour strips; the loader pairs them by id.
 
-``PAIR_RULE``: two land states are adjacent when a passable province of one
+``PAIR_RULE`` (lives in ``worldgen/state_adjacency.py``, shared with the starting-buildings generator, #10453): two land states are adjacent when a passable province of one
 shares a pixel edge with a passable province of the other (4-neighbourhood, x
 wraps under ``map_config.WRAP_X``). Pairs touching only through impassable
 provinces, and strait-only pairs (the loader builds ``strait_crossing_*``
@@ -101,7 +101,9 @@ TOOLS_DIR = Path(__file__).resolve().parent
 sys.path.insert(0, str(TOOLS_DIR))
 
 from config import map_config  # noqa: E402
-from worldgen.raster import read_gray16_png, read_rgb_png  # noqa: E402
+from worldgen.raster import read_gray16_png  # noqa: E402
+from worldgen.state_adjacency import (  # noqa: E402
+    PAIR_RULE, adjacent_pairs, parse_state_files as _parse_state_files, state_rasters)
 
 MOD_ROOT = TOOLS_DIR.parent
 STATE_DIR = MOD_ROOT / "map_data" / "state_regions"
@@ -139,8 +141,6 @@ NAVAL_TYPES = (2, 3)  # naval_route, coastal_naval_route (vanilla spline_types/0
 SLOTS = {"city": 0, "farm": 1, "mine": 2, "port": 3, "wood": 4}
 #: Spline type of every land road: 1 railroad (0 would be dirtroad).
 LAND_SPLINE_TYPE = 1
-#: Adjacency rule, see the module docstring.
-PAIR_RULE = "passable-contact"
 
 # --- routing --------------------------------------------------------------
 #: High enough that a road crosses an impassable province only when its states touch nowhere else (Chris, 2026-10-29).
@@ -362,30 +362,9 @@ class MapData:
     passable_seas: set[int]
 
 
-def _hex_code(h: str) -> int:
-    return int(h.lstrip("xX"), 16)
-
-
 def parse_state_files() -> tuple[dict[int, dict], dict[int, dict]]:
-    """``(land, sea)`` as ``{state id: {"provinces": [...], "impassable": set}}``."""
-    land: dict[int, dict] = {}
-    sea: dict[int, dict] = {}
-    for f in sorted(STATE_DIR.glob("*.txt")):
-        text = f.read_text(encoding="utf-8-sig")
-        for m in re.finditer(r"(STATE_\w+)\s*=\s*\{(.*?)\n\}", text, re.S):
-            body = m.group(2)
-            sid = int(re.search(r"\bid\s*=\s*(\d+)", body).group(1))
-            provs = re.search(r"\bprovinces\s*=\s*\{([^}]*)\}", body).group(1).replace('"', "").split()
-            imp = re.search(r"\bimpassable\s*=\s*\{([^}]*)\}", body)
-            rec = {
-                "provinces": [_hex_code(p) for p in provs],
-                "impassable": {_hex_code(p) for p in imp.group(1).replace('"', "").split()} if imp else set(),
-            }
-            target = sea if f.name.startswith("99_") else land
-            if sid in land or sid in sea:
-                raise SystemExit(f"duplicate state id {sid}")
-            target[sid] = rec
-    return land, sea
+    """``(land, sea)`` as ``{state id: {"provinces": [...], "impassable": set}}`` (``worldgen.state_adjacency``)."""
+    return _parse_state_files(STATE_DIR)
 
 
 def read_locators() -> dict[int, tuple[float, float]]:
@@ -400,27 +379,7 @@ def read_locators() -> dict[int, tuple[float, float]]:
 
 def load_map() -> MapData:
     land, sea = parse_state_files()
-    rgb = read_rgb_png(PROVINCES_PNG)
-    code = (rgb[..., 0].astype(np.int64) << 16) | (rgb[..., 1].astype(np.int64) << 8) | rgb[..., 2]
-    uniq, inv = np.unique(code.ravel(), return_inverse=True)
-    lut_all = np.zeros(len(uniq), dtype=np.int32)
-    lut_pass = np.zeros(len(uniq), dtype=np.int32)
-    lut_imp = np.zeros(len(uniq), dtype=bool)
-    pos = {int(c): i for i, c in enumerate(uniq.tolist())}
-    for sid, rec in land.items():
-        for p in rec["provinces"]:
-            i = pos.get(p)
-            if i is None:
-                raise SystemExit(f"state {sid}: province x{p:06X} is not in provinces.png")
-            lut_all[i] = sid
-            if p in rec["impassable"]:
-                lut_imp[i] = True
-            else:
-                lut_pass[i] = sid
-    inv = inv.reshape(code.shape)
-    land_state = lut_all[inv]
-    passable_state = lut_pass[inv]
-    impassable = lut_imp[inv]
+    land_state, passable_state, impassable = state_rasters(PROVINCES_PNG, land)
 
     h16 = read_gray16_png(HEIGHTMAP_PNG).astype(np.float64)
     fy, fx = h16.shape[0] // CANVAS_H, h16.shape[1] // CANVAS_W
@@ -437,21 +396,6 @@ def load_map() -> MapData:
         if hid // 100 not in land:
             raise SystemExit(f"locator hub {hid}: state {hid // 100} is not a land state")
     return MapData(land_state, passable_state, cost, hubs, port_states, passable_seas)
-
-
-def adjacent_pairs(passable_state: np.ndarray) -> list[tuple[int, int]]:
-    """State pairs sharing a pixel edge between passable provinces (x wraps under WRAP_X)."""
-    s = passable_state
-    parts = [(s[:, :-1], s[:, 1:]), (s[:-1, :], s[1:, :])]
-    if WRAP_X:
-        parts.append((s[:, -1:], s[:, :1]))
-    found: set[int] = set()
-    for a, b in parts:
-        m = (a != b) & (a > 0) & (b > 0)
-        lo = np.minimum(a[m], b[m]).astype(np.int64)
-        hi = np.maximum(a[m], b[m]).astype(np.int64)
-        found.update(np.unique((lo << 32) | hi).tolist())
-    return sorted((p >> 32, p & 0xFFFFFFFF) for p in found)
 
 
 # ---------------------------------------------------------------------------
