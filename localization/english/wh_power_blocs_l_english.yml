@@ -4,3 +4,226 @@
  WH_BLOC_KARAZ_ANKOR:0 "Karaz Ankor"
  WH_BLOC_DOMINION_OF_HASHUT:0 "Dominion of Hashut"
  WH_BLOC_TEMPLE_CITIES:0 "Temple-Cities of Lustria"
+
+ # Generic bloc names drawn by common/power_bloc_names/00_power_bloc_names.txt (#10451); every key has a Source or invented comment.
+ # imperial
+ # Source: Lexicanum "Elector Counts"
+ wh_bloc_name_imperial_council:0 "Imperial Council"
+ # invented
+ wh_bloc_name_compact_of_the_electors:0 "Compact of the Electors"
+ # invented
+ wh_bloc_name_heirs_of_sigmar:0 "Heirs of Sigmar"
+
+ # bretonnian
+ # Source: Lexicanum "Grail Knight"
+ wh_bloc_name_companions_of_the_grail:0 "Companions of the Grail"
+ # invented
+ wh_bloc_name_fealty_of_the_dukedoms:0 "Fealty of the Dukedoms"
+ # Source: Lexicanum "Errantry War"
+ wh_bloc_name_errantry_crusade:0 "Errantry Crusade"
+
+ # kislevite
+ # invented
+ wh_bloc_name_court_of_the_tzars:0 "Court of the Tzars"
+ # invented
+ wh_bloc_name_boyars_compact:0 "Boyars' Compact"
+ # invented
+ wh_bloc_name_gospodar_host:0 "Gospodar Host"
+
+ # tilean
+ # Source: Lexicanum "Tilea"
+ wh_bloc_name_free_cities_of_tilea:0 "Free Cities of Tilea"
+ # invented
+ wh_bloc_name_league_of_merchant_princes:0 "League of Merchant Princes"
+
+ # estalian
+ # Source: Lexicanum "Estalia"
+ wh_bloc_name_estalian_kingdoms:0 "Estalian Kingdoms"
+ # invented
+ wh_bloc_name_concord_of_the_estalian_crowns:0 "Concord of the Estalian Crowns"
+
+ # border_prince
+ # Source: Lexicanum "Border Princes"
+ wh_bloc_name_northern_border_confederacy:0 "Northern Border Confederacy"
+ # invented
+ wh_bloc_name_princes_compact:0 "Princes' Compact"
+
+ # norscan
+ # invented
+ wh_bloc_name_jarls_council:0 "Jarls' Council"
+ # invented
+ wh_bloc_name_reaver_fleets:0 "Reaver Fleets"
+
+ # halfling
+ # Source: Lexicanum "Elder of the Moot"
+ wh_bloc_name_elders_of_the_moot:0 "Elders of the Moot"
+ # invented
+ wh_bloc_name_fellowship_of_the_mootland:0 "Fellowship of the Mootland"
+
+ # dawi
+ # invented
+ wh_bloc_name_council_of_the_holds:0 "Council of the Holds"
+ # invented
+ wh_bloc_name_throng_of_the_holds:0 "Throng of the Holds"
+ # invented
+ wh_bloc_name_oathbound_holds:0 "Oathbound Holds"
+
+ # dawi_zharr
+ # Source: Lexicanum "Chaos Dwarfs"; Lexicanum "Zharr-Naggrund"
+ wh_bloc_name_conclave_of_zharr_naggrund:0 "Conclave of Zharr-Naggrund"
+ # Source: Lexicanum "Hashut"
+ wh_bloc_name_sons_of_the_father_of_darkness:0 "Sons of the Father of Darkness"
+ # invented
+ wh_bloc_name_brotherhood_of_the_bull:0 "Brotherhood of the Bull"
+
+ # orc_goblin
+ # invented
+ wh_bloc_name_da_big_waaagh:0 "Da Big Waaagh!"
+ # invented
+ wh_bloc_name_great_waaagh:0 "Great Waaagh!"
+ # invented
+ wh_bloc_name_warbosses_pact:0 "Warbosses' Pact"
+
+ # hobgoblin
+ # Source: Lexicanum "Hobgobla Khan"
+ wh_bloc_name_great_horde:0 "Great Horde"
+ # invented
+ wh_bloc_name_wolf_rider_hosts:0 "Wolf-Rider Hosts"
+
+ # nehekharan
+ # Source: Lexicanum "Nehekhara"
+ wh_bloc_name_great_land:0 "Great Land"
+ # Source: Lexicanum "Vampire Counts"
+ wh_bloc_name_alliance_of_the_priest_kings:0 "Alliance of the Priest Kings"
+ # invented
+ wh_bloc_name_covenant_of_the_mortuary_cult:0 "Covenant of the Mortuary Cult"
+
+ # undead
+ # invented
+ wh_bloc_name_court_of_the_undying_lords:0 "Court of the Undying Lords"
+ # invented; phrase: Lexicanum "Vampire Counts"
+ wh_bloc_name_empire_of_the_undead:0 "Empire of the Undead"
+ # invented
+ wh_bloc_name_compact_of_the_night:0 "Compact of the Night"
+
+ # asrai
+ # Source: Lexicanum "Wood Elves"
+ wh_bloc_name_kindreds_of_athel_loren:0 "Kindreds of Athel Loren"
+ # invented
+ wh_bloc_name_council_of_the_kinbands:0 "Council of the Kinbands"
+ # invented
+ wh_bloc_name_court_of_the_woods:0 "Court of the Woods"
+
+ # asur
+ # Source: Lexicanum "Ulthuan"
+ wh_bloc_name_twin_thrones:0 "Twin Thrones"
+ # invented
+ wh_bloc_name_court_of_the_phoenix_throne:0 "Court of the Phoenix Throne"
+ # invented
+ wh_bloc_name_concord_of_the_ten_kingdoms:0 "Concord of the Ten Kingdoms"
+
+ # druchii
+ # Source: Lexicanum "Black Council"
+ wh_bloc_name_black_council:0 "Black Council"
+ # invented
+ wh_bloc_name_dominion_of_the_witch_king:0 "Dominion of the Witch King"
+ # invented
+ wh_bloc_name_black_ark_fleets:0 "Black Ark Fleets"
+
+ # ogre
+ # Source: Lexicanum "Ogre Kingdoms"
+ wh_bloc_name_great_feast:0 "Great Feast"
+ # Source: Lexicanum "Ogre Kingdoms"
+ wh_bloc_name_ogre_kingdoms:0 "Ogre Kingdoms"
+ # invented
+ wh_bloc_name_tribes_of_the_overtyrant:0 "Tribes of the Overtyrant"
+
+ # lizardmen
+ # invented
+ wh_bloc_name_servants_of_the_great_plan:0 "Servants of the Great Plan"
+ # invented
+ wh_bloc_name_council_of_the_mage_priests:0 "Council of the Mage-Priests"
+
+ # skaven
+ # Source: Lexicanum "Skaven"
+ wh_bloc_name_under_empire:0 "Under-Empire"
+ # Source: Lexicanum "Skaven"
+ wh_bloc_name_great_clans:0 "Great Clans"
+ # invented
+ wh_bloc_name_pact_of_the_warlord_clans:0 "Pact of the Warlord Clans"
+
+ # beastmen
+ # invented
+ wh_bloc_name_gathering_at_the_herdstone:0 "Gathering at the Herdstone"
+ # invented
+ wh_bloc_name_great_warherd:0 "Great Warherd"
+
+ # cathayan
+ # Source: Lexicanum "Cathay"
+ wh_bloc_name_kingdom_of_the_dragon:0 "Kingdom of the Dragon"
+ # invented
+ wh_bloc_name_wardens_of_the_great_bastion:0 "Wardens of the Great Bastion"
+
+ # ind
+ # Source: Lexicanum "Ind"
+ wh_bloc_name_kingdoms_of_ind:0 "Kingdoms of Ind"
+ # invented
+ wh_bloc_name_concord_of_the_thousand_gods:0 "Concord of the Thousand Gods"
+
+ # khureshi
+ # invented
+ wh_bloc_name_court_of_the_naga_queens:0 "Court of the Naga Queens"
+ # invented
+ wh_bloc_name_serpent_compact:0 "Serpent Compact"
+
+ # nipponese
+ # invented; phrase: Lexicanum "Khuresh"
+ wh_bloc_name_island_empire:0 "Island Empire"
+ # invented
+ wh_bloc_name_compact_of_the_samurai_lords:0 "Compact of the Samurai Lords"
+
+ # arabyan
+ # invented
+ wh_bloc_name_realm_of_the_sultan:0 "Realm of the Sultan"
+ # invented
+ wh_bloc_name_caravan_compact:0 "Caravan Compact"
+
+ # kurgan
+ # invented
+ wh_bloc_name_host_of_the_zars:0 "Host of the Zars"
+ # invented; phrase: Lexicanum "Kurgan"
+ wh_bloc_name_gathering_of_warbands:0 "Gathering of Warbands"
+
+ # amazon
+ # Source: Lexicanum "Amazons"
+ wh_bloc_name_amazon_sisterhood:0 "Amazon Sisterhood"
+ # Source: Lexicanum "Amazons"
+ wh_bloc_name_handmaids_of_the_gods:0 "Handmaids of the Gods"
+
+ # trade leagues
+ # invented
+ wh_bloc_name_ivory_road_compact:0 "Ivory Road Compact"
+ # invented; Marienburg
+ wh_bloc_name_freetraders_league:0 "Freetraders' League"
+
+ # ideology blocs
+ # invented
+ wh_bloc_name_brotherhood_of_toil:0 "Brotherhood of Toil"
+ # invented
+ wh_bloc_name_common_hearth:0 "Common Hearth"
+ # invented
+ wh_bloc_name_fellowship_of_the_unbound:0 "Fellowship of the Unbound"
+ # invented
+ wh_bloc_name_burghers_league:0 "Burghers' League"
+ # invented
+ wh_bloc_name_council_of_free_towns:0 "Council of Free Towns"
+ # invented
+ wh_bloc_name_iron_compact:0 "Iron Compact"
+
+ # fallback
+ # invented
+ wh_bloc_name_compact_of_the_realms:0 "Compact of the Realms"
+ # invented
+ wh_bloc_name_concord_of_princes:0 "Concord of Princes"
+ # invented
+ wh_bloc_name_grand_muster:0 "Grand Muster"

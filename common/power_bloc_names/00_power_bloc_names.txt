@@ -1,337 +1,490 @@
-﻿##### generic and near-generic power bloc names #####
+﻿##### Warhammer power bloc names (#10451). Replaces vanilla's stock list (the folder is in replace_paths).
+# Entry key = loc key (localization/english/wh_power_blocs_l_english.yml). Triggers run in the leader country scope with scope:selected_identity.
+# Heritage gates come from common/scripted_triggers/03_wh_power_bloc_name_triggers.txt; every family keeps >= 2 names with no identity gate.
+# The four start-date blocs (common/history/power_blocs/00_power_blocs.txt) use their own WH_BLOC_* keys and do not draw from this list.
 
-great_alliance = {
+### imperial ###
+wh_bloc_name_imperial_council = {
 	trigger = {
-		always = yes
+		wh_pb_leader_imperial = yes
+	}
+}
+wh_bloc_name_compact_of_the_electors = {
+	trigger = {
+		wh_pb_leader_imperial = yes
+	}
+}
+wh_bloc_name_heirs_of_sigmar = {
+	trigger = {
+		wh_pb_leader_imperial = yes
 	}
 }
 
-grand_coalition = {
+### bretonnian ###
+wh_bloc_name_companions_of_the_grail = {
 	trigger = {
-		always = yes
+		wh_pb_leader_bretonnian = yes
 	}
 }
-
-council_of_nations = {
+wh_bloc_name_fealty_of_the_dukedoms = {
 	trigger = {
-		always = yes
+		wh_pb_leader_bretonnian = yes
 	}
 }
-
-universal_league = {
+wh_bloc_name_errantry_crusade = {
 	trigger = {
-		always = yes
-	}
-}
-
-steadfast_union = {
-	trigger = {
-		always = yes
-	}
-}
-
-glorious_union = {
-	trigger = {
-		always = yes
-	}
-}
-
-unity_league = {
-	trigger = {
-		always = yes
-	}
-}
-
-supreme_alliance = {
-	trigger = {
-		always = yes
-	}
-}
-
-coalition_of_states = {
-	trigger = {
-		always = yes
-	}
-}
-
-united_front = {
-	trigger = {
-		NOT = { scope:selected_identity = identity:identity_religious }
-	}
-}
-
-joint_front = {
-	trigger = {
-		NOT = { scope:selected_identity = identity:identity_religious }
-	}
-}
-
-imperial_circle = {
-	trigger = {
-		scope:selected_identity = identity:identity_sovereign_empire
-	}
-}
-
-imperial_conference = {
-	trigger = {
-		scope:selected_identity = identity:identity_sovereign_empire
-	}
-}
-
-virtuous_league = {
-	trigger = {
-	    scope:selected_identity = identity:identity_religious
-	}
-}
-
-coalition_of_innocents = {
-	trigger = {
-	    scope:selected_identity = identity:identity_religious
-	}
-}
-
-league_of_the_faithful = {
-	trigger = {
-	    scope:selected_identity = identity:identity_religious
-	}
-}
-
-mutual_treaty_organization = {
-	trigger = {
-	    scope:selected_identity = identity:identity_ideological_union
-	}
-}
-
-league_of_allied_states = {
-	trigger = {
-	    scope:selected_identity = identity:identity_ideological_union
-	}
-}
-
-congress_of_states = {
-	trigger = {
-	    scope:selected_identity = identity:identity_ideological_union
-	}
-}
-
-democratic_ring = {
-	trigger = {
-		coa_republic_trigger = yes
-		coa_autocracy_trigger = no
-		scope:selected_identity = identity:identity_ideological_union
-	}
-}
-
-self_rule_league = {
-	trigger = {
-	    scope:selected_identity = identity:identity_ideological_union
-	    NOT = {
-	    	any_subject_or_below = {
-	    		always = yes
-	    	}
-	    }
-	}
-}
-
-association_of_syndicates = {
-	trigger = {
-		scope:selected_identity = identity:identity_trade_league
-	}
-}
-
-free_commerce_committee = {
-	trigger = {
-		scope:selected_identity = identity:identity_trade_league
-	}
-}
-
-league_of_preferential_states = {
-	trigger = {
-		scope:selected_identity = identity:identity_trade_league
-	}
-}
-
-pact_of_friendship = {
-	trigger = {
+		wh_pb_leader_bretonnian = yes
 		OR = {
 			scope:selected_identity = identity:identity_military_treaty_organization
-			scope:selected_identity = identity:identity_ideological_union
-		}
-		coa_fascist_trigger = yes
-	}
-}
-
-anti_communist_agreement = {
-	trigger = {
-		OR = {
-			scope:selected_identity = identity:identity_military_treaty_organization
-			scope:selected_identity = identity:identity_ideological_union
-		}
-		coa_fascist_trigger = yes
-		any_rival_country = {
-			coa_communist_trigger = yes
-		}
-	}
-}
-
-moral_international = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_republic_trigger = yes
-	}
-}
-
-anti_monarchist_congress = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_republic_trigger = yes
-		NOT = {
-			any_scope_ally = {
-				coa_monarchy_trigger = yes
-			}
-		}
-	}
-}
-
-league_of_liberty = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_republic_trigger = yes
-	}
-}
-
-democratic_pact = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_republic_trigger = yes
-	}
-}
-
-communist_international = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_communist_trigger = yes
-	}
-}
-
-socialist_conference = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_communist_trigger = yes
-	}
-}
-
-socialist_international = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_communist_trigger = yes
-		NOT = { has_law_or_variant = law_type:law_autocracy }
-	}
-}
-
-workingmens_association = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		OR = {
-			coa_anarchy_trigger = yes
-			coa_communist_trigger = yes
-		}
-	}
-}
-
-workingmens_international = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		OR = {
-			coa_anarchy_trigger = yes
-			coa_communist_trigger = yes
-		}
-	}
-}
-
-international_committee = {
-	trigger = {
-		OR = {
-			scope:selected_identity = identity:identity_military_treaty_organization
-			scope:selected_identity = identity:identity_ideological_union
-		}
-		OR = {
-			coa_anarchy_trigger = yes
-			coa_communist_trigger = yes
-		}
-	}
-}
-
-international_secretariat = {
-	trigger = {
-		OR = {
-			scope:selected_identity = identity:identity_military_treaty_organization
-			scope:selected_identity = identity:identity_ideological_union
-		}
-		OR = {
-			coa_anarchy_trigger = yes
-			coa_communist_trigger = yes
-		}
-	}
-}
-
-anarchist_international = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_anarchy_trigger = yes
-	}
-}
-
-anarchist_congress = {
-	trigger = {
-		OR = {
-			scope:selected_identity = identity:identity_military_treaty_organization
-			scope:selected_identity = identity:identity_ideological_union
-		}
-		coa_anarchy_trigger = yes
-	}
-}
-
-anarchist_conference = {
-	trigger = {
-		OR = {
-			scope:selected_identity = identity:identity_military_treaty_organization
-			scope:selected_identity = identity:identity_ideological_union
-		}
-		coa_anarchy_trigger = yes
-	}
-}
-
-meeting_of_anarchists = {
-	trigger = {
-		scope:selected_identity = identity:identity_ideological_union
-		coa_anarchy_trigger = yes
-	}
-}
-
-non_aligned_conference = {
-	trigger = {
-		NOR = {
 			scope:selected_identity = identity:identity_religious
-			scope:selected_identity = identity:identity_sovereign_empire
-		}
-		country_rank < rank_value:great_power
-		NOT = {
-			any_scope_ally = {
-				country_rank = rank_value:great_power
-			}
 		}
 	}
 }
 
-organization_of_free_nations = {
+### kislevite ###
+wh_bloc_name_court_of_the_tzars = {
+	trigger = {
+		wh_pb_leader_kislevite = yes
+	}
+}
+wh_bloc_name_boyars_compact = {
+	trigger = {
+		wh_pb_leader_kislevite = yes
+	}
+}
+wh_bloc_name_gospodar_host = {
+	trigger = {
+		wh_pb_leader_kislevite = yes
+	}
+}
+
+### tilean ###
+wh_bloc_name_free_cities_of_tilea = {
+	trigger = {
+		wh_pb_leader_tilean = yes
+	}
+}
+wh_bloc_name_league_of_merchant_princes = {
+	trigger = {
+		wh_pb_leader_tilean = yes
+	}
+}
+
+### estalian ###
+wh_bloc_name_estalian_kingdoms = {
+	trigger = {
+		wh_pb_leader_estalian = yes
+	}
+}
+wh_bloc_name_concord_of_the_estalian_crowns = {
+	trigger = {
+		wh_pb_leader_estalian = yes
+	}
+}
+
+### border_prince ###
+wh_bloc_name_northern_border_confederacy = {
+	trigger = {
+		wh_pb_leader_border_prince = yes
+	}
+}
+wh_bloc_name_princes_compact = {
+	trigger = {
+		wh_pb_leader_border_prince = yes
+	}
+}
+
+### norscan ###
+wh_bloc_name_jarls_council = {
+	trigger = {
+		wh_pb_leader_norscan = yes
+	}
+}
+wh_bloc_name_reaver_fleets = {
+	trigger = {
+		wh_pb_leader_norscan = yes
+	}
+}
+
+### halfling ###
+wh_bloc_name_elders_of_the_moot = {
+	trigger = {
+		wh_pb_leader_halfling = yes
+	}
+}
+wh_bloc_name_fellowship_of_the_mootland = {
+	trigger = {
+		wh_pb_leader_halfling = yes
+	}
+}
+
+### dawi ###
+wh_bloc_name_council_of_the_holds = {
+	trigger = {
+		wh_pb_leader_dawi = yes
+	}
+}
+wh_bloc_name_throng_of_the_holds = {
+	trigger = {
+		wh_pb_leader_dawi = yes
+	}
+}
+wh_bloc_name_oathbound_holds = {
+	trigger = {
+		wh_pb_leader_dawi = yes
+	}
+}
+
+### dawi_zharr ###
+wh_bloc_name_conclave_of_zharr_naggrund = {
+	trigger = {
+		wh_pb_leader_dawi_zharr = yes
+	}
+}
+wh_bloc_name_sons_of_the_father_of_darkness = {
+	trigger = {
+		wh_pb_leader_dawi_zharr = yes
+	}
+}
+wh_bloc_name_brotherhood_of_the_bull = {
+	trigger = {
+		wh_pb_leader_dawi_zharr = yes
+	}
+}
+
+### orc_goblin ###
+wh_bloc_name_da_big_waaagh = {
+	trigger = {
+		wh_pb_leader_orc_goblin = yes
+	}
+}
+wh_bloc_name_great_waaagh = {
+	trigger = {
+		wh_pb_leader_orc_goblin = yes
+	}
+}
+wh_bloc_name_warbosses_pact = {
+	trigger = {
+		wh_pb_leader_orc_goblin = yes
+	}
+}
+
+### hobgoblin ###
+wh_bloc_name_great_horde = {
+	trigger = {
+		wh_pb_leader_hobgoblin = yes
+	}
+}
+wh_bloc_name_wolf_rider_hosts = {
+	trigger = {
+		wh_pb_leader_hobgoblin = yes
+	}
+}
+
+### nehekharan ###
+wh_bloc_name_great_land = {
+	trigger = {
+		wh_pb_leader_nehekharan = yes
+	}
+}
+wh_bloc_name_alliance_of_the_priest_kings = {
+	trigger = {
+		wh_pb_leader_nehekharan = yes
+	}
+}
+wh_bloc_name_covenant_of_the_mortuary_cult = {
+	trigger = {
+		wh_pb_leader_nehekharan = yes
+	}
+}
+
+### undead ###
+wh_bloc_name_court_of_the_undying_lords = {
+	trigger = {
+		wh_pb_leader_undead = yes
+	}
+}
+wh_bloc_name_empire_of_the_undead = {
+	trigger = {
+		wh_pb_leader_undead = yes
+	}
+}
+wh_bloc_name_compact_of_the_night = {
+	trigger = {
+		wh_pb_leader_undead = yes
+	}
+}
+
+### asrai ###
+wh_bloc_name_kindreds_of_athel_loren = {
+	trigger = {
+		wh_pb_leader_asrai = yes
+	}
+}
+wh_bloc_name_council_of_the_kinbands = {
+	trigger = {
+		wh_pb_leader_asrai = yes
+	}
+}
+wh_bloc_name_court_of_the_woods = {
+	trigger = {
+		wh_pb_leader_asrai = yes
+	}
+}
+
+### asur ###
+wh_bloc_name_twin_thrones = {
+	trigger = {
+		wh_pb_leader_asur = yes
+	}
+}
+wh_bloc_name_court_of_the_phoenix_throne = {
+	trigger = {
+		wh_pb_leader_asur = yes
+	}
+}
+wh_bloc_name_concord_of_the_ten_kingdoms = {
+	trigger = {
+		wh_pb_leader_asur = yes
+	}
+}
+
+### druchii ###
+wh_bloc_name_black_council = {
+	trigger = {
+		wh_pb_leader_druchii = yes
+	}
+}
+wh_bloc_name_dominion_of_the_witch_king = {
+	trigger = {
+		wh_pb_leader_druchii = yes
+	}
+}
+wh_bloc_name_black_ark_fleets = {
+	trigger = {
+		wh_pb_leader_druchii = yes
+	}
+}
+
+### ogre ###
+wh_bloc_name_great_feast = {
+	trigger = {
+		wh_pb_leader_ogre = yes
+	}
+}
+wh_bloc_name_ogre_kingdoms = {
+	trigger = {
+		wh_pb_leader_ogre = yes
+	}
+}
+wh_bloc_name_tribes_of_the_overtyrant = {
+	trigger = {
+		wh_pb_leader_ogre = yes
+	}
+}
+
+### lizardmen ###
+wh_bloc_name_servants_of_the_great_plan = {
+	trigger = {
+		wh_pb_leader_lizardmen = yes
+	}
+}
+wh_bloc_name_council_of_the_mage_priests = {
+	trigger = {
+		wh_pb_leader_lizardmen = yes
+	}
+}
+
+### skaven ###
+wh_bloc_name_under_empire = {
+	trigger = {
+		wh_pb_leader_skaven = yes
+	}
+}
+wh_bloc_name_great_clans = {
+	trigger = {
+		wh_pb_leader_skaven = yes
+	}
+}
+wh_bloc_name_pact_of_the_warlord_clans = {
+	trigger = {
+		wh_pb_leader_skaven = yes
+	}
+}
+
+### beastmen ###
+wh_bloc_name_gathering_at_the_herdstone = {
+	trigger = {
+		wh_pb_leader_beastmen = yes
+	}
+}
+wh_bloc_name_great_warherd = {
+	trigger = {
+		wh_pb_leader_beastmen = yes
+	}
+}
+
+### cathayan ###
+wh_bloc_name_kingdom_of_the_dragon = {
+	trigger = {
+		wh_pb_leader_cathayan = yes
+	}
+}
+wh_bloc_name_wardens_of_the_great_bastion = {
+	trigger = {
+		wh_pb_leader_cathayan = yes
+	}
+}
+
+### ind ###
+wh_bloc_name_kingdoms_of_ind = {
+	trigger = {
+		wh_pb_leader_ind = yes
+	}
+}
+wh_bloc_name_concord_of_the_thousand_gods = {
+	trigger = {
+		wh_pb_leader_ind = yes
+	}
+}
+
+### khureshi ###
+wh_bloc_name_court_of_the_naga_queens = {
+	trigger = {
+		wh_pb_leader_khureshi = yes
+	}
+}
+wh_bloc_name_serpent_compact = {
+	trigger = {
+		wh_pb_leader_khureshi = yes
+	}
+}
+
+### nipponese ###
+wh_bloc_name_island_empire = {
+	trigger = {
+		wh_pb_leader_nipponese = yes
+	}
+}
+wh_bloc_name_compact_of_the_samurai_lords = {
+	trigger = {
+		wh_pb_leader_nipponese = yes
+	}
+}
+
+### arabyan ###
+wh_bloc_name_realm_of_the_sultan = {
+	trigger = {
+		wh_pb_leader_arabyan = yes
+	}
+}
+wh_bloc_name_caravan_compact = {
+	trigger = {
+		wh_pb_leader_arabyan = yes
+	}
+}
+
+### kurgan ###
+wh_bloc_name_host_of_the_zars = {
+	trigger = {
+		wh_pb_leader_kurgan = yes
+	}
+}
+wh_bloc_name_gathering_of_warbands = {
+	trigger = {
+		wh_pb_leader_kurgan = yes
+	}
+}
+
+### amazon ###
+wh_bloc_name_amazon_sisterhood = {
+	trigger = {
+		wh_pb_leader_amazon = yes
+	}
+}
+wh_bloc_name_handmaids_of_the_gods = {
+	trigger = {
+		wh_pb_leader_amazon = yes
+	}
+}
+
+### trade leagues ###
+wh_bloc_name_ivory_road_compact = {
+	trigger = {
+		scope:selected_identity = identity:identity_trade_league
+		OR = {
+			wh_pb_leader_cathayan = yes
+			wh_pb_leader_ind = yes
+			wh_pb_leader_arabyan = yes
+			wh_pb_leader_ogre = yes
+			wh_pb_leader_tilean = yes
+			wh_pb_leader_dawi = yes
+		}
+	}
+}
+wh_bloc_name_freetraders_league = {
+	trigger = {
+		scope:selected_identity = identity:identity_trade_league
+		any_primary_culture = {
+			has_discrimination_trait_group = heritage_group_old_world_human
+		}
+	}
+}
+
+### ideology blocs (no family gate) ###
+wh_bloc_name_brotherhood_of_toil = {
+	trigger = {
+		scope:selected_identity = identity:identity_ideological_union
+		coa_communist_trigger = yes
+	}
+}
+wh_bloc_name_common_hearth = {
+	trigger = {
+		scope:selected_identity = identity:identity_ideological_union
+		coa_communist_trigger = yes
+	}
+}
+wh_bloc_name_fellowship_of_the_unbound = {
+	trigger = {
+		scope:selected_identity = identity:identity_ideological_union
+		coa_anarchy_trigger = yes
+	}
+}
+wh_bloc_name_burghers_league = {
+	trigger = {
+		scope:selected_identity = identity:identity_ideological_union
+		coa_republic_trigger = yes
+	}
+}
+wh_bloc_name_council_of_free_towns = {
+	trigger = {
+		scope:selected_identity = identity:identity_ideological_union
+		coa_republic_trigger = yes
+	}
+}
+wh_bloc_name_iron_compact = {
 	trigger = {
 		OR = {
 			scope:selected_identity = identity:identity_ideological_union
 			scope:selected_identity = identity:identity_military_treaty_organization
 		}
-		any_rival_country = {
-			coa_fascist_trigger = yes
-		}
+		coa_fascist_trigger = yes
+	}
+}
+
+### fallback: leader with no heritage family above ###
+wh_bloc_name_compact_of_the_realms = {
+	trigger = {
+		wh_pb_leader_has_name_family = no
+	}
+}
+wh_bloc_name_concord_of_princes = {
+	trigger = {
+		wh_pb_leader_has_name_family = no
+	}
+}
+wh_bloc_name_grand_muster = {
+	trigger = {
+		wh_pb_leader_has_name_family = no
 	}
 }
