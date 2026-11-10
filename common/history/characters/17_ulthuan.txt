@@ -1,0 +1,97 @@
+﻿CHARACTERS = {
+	c:AVL ?= {
+		create_character = { # Alarielle the Radiant
+			template = AVL_alarielle_template
+		}
+	}
+	c:CAL ?= {
+		create_character = { # Imrik
+			template = CAL_imrik_template
+		}
+	}
+	c:CDU ?= {
+		create_character = { # Jahuthryn Seagleam
+			template = CDU_jahuthryn_seagleam_template
+		}
+	}
+	c:CHR ?= {
+		create_character = { # Thalorien Stormwatch
+			template = CHR_thalorien_stormwatch_template
+		}
+	}
+	c:COT ?= {
+		create_character = { # Dalloran
+			template = COT_dalloran_template
+		}
+	}
+	c:COT ?= {
+		create_character = { # Tyrion
+			template = COT_tyrion_template
+		}
+	}
+	c:ELL ?= {
+		create_character = { # Aelindra Goldenwing
+			template = ELL_aelindra_goldenwing_template
+		}
+	}
+	c:FDW ?= {
+		create_character = { # Mirithel Seaguard
+			template = FDW_mirithel_seaguard_template
+		}
+	}
+	c:GCL ?= {
+		create_character = { # Torinubar
+			template = GCL_torinubar_template
+		}
+	}
+	c:LOT ?= {
+		create_character = { # Aislinn
+			template = LOT_aislinn_template
+		}
+	}
+	c:LOT ?= {
+		create_character = { # Finubar the Seafarer
+			template = LOT_finubar_the_seafarer_template
+		}
+	}
+	c:LOT ?= {
+		create_character = { # Korhil Lionmane
+			template = LOT_korhil_lionmane_template
+		}
+	}
+	c:NGY ?= {
+		create_character = { # Alith Anar
+			template = NGY_alith_anar_template
+		}
+	}
+	c:SAP ?= {
+		create_character = { # Teclis
+			template = SAP_teclis_template
+		}
+	}
+	c:TEH ?= {
+		create_character = { # Ingmir
+			template = TEH_ingmir_template
+		}
+	}
+	c:TEL ?= {
+		create_character = { # Amon
+			template = TEL_amon_template
+		}
+	}
+	c:TIR ?= {
+		create_character = { # Eldyra
+			template = TIR_eldyra_template
+		}
+	}
+	c:TOS ?= {
+		create_character = { # Althyria
+			template = TOS_althyria_template
+		}
+	}
+	c:YVR ?= {
+		create_character = { # Eltharion the Grim
+			template = YVR_eltharion_the_grim_template
+		}
+	}
+}

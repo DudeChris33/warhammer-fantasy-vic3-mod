@@ -1,0 +1,461 @@
+﻿# Historical characters of the Ulthuan and High Elf colony tags, start date 2502 IC. Hand-authored; see planning/character_roster.md for sources and confidence.
+# Birth dates are inferred from canon ages at 2502 IC; all are long-lived and set immortal with a prime-of-life birth_date (see roster).
+
+# Source: Lexicanum "Alarielle"; Warhammer Armies: High Elves 8e pp.58-59
+# Confidence: high
+AVL_alarielle_template = {
+	first_name = WHCHAR_AVL_alarielle_first
+	last_name = WHCHAR_AVL_alarielle_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	female = yes
+	noble = yes
+	birth_date = 2470.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_GAEAN_VALE
+	traits = {
+		charismatic
+		pious
+		honorable
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Imrik", "Caledor"; Warhammer Armies: High Elves 6e pp.64-65
+# Confidence: high
+# Note: Home region is the tag's non-canon capital state (Tor Caled is not placeable).
+CAL_imrik_template = {
+	first_name = WHCHAR_CAL_imrik_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	role = general
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_THE_DRAGON_SPINE
+	traits = {
+		brave
+		imposing
+		basic_cavalry_commander
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Citadel of Dusk"; WFRP 4e High Elf Players Guide
+# Confidence: medium
+# Note: Gender unverified; read as male.
+CDU_jahuthryn_seagleam_template = {
+	first_name = WHCHAR_CDU_jahuthryn_seagleam_first
+	last_name = WHCHAR_CDU_jahuthryn_seagleam_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	birth_date = 2455.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_authoritarian
+	home_region = STATE_ISLES_OF_DUSK
+	traits = {
+		cautious
+		persistent
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: INVENTED (canon names no ruler of Chrace in 2502 IC)
+# Confidence: -
+# Note: INVENTED in-setting name.
+CHR_thalorien_stormwatch_template = {
+	first_name = WHCHAR_CHR_thalorien_stormwatch_first
+	last_name = WHCHAR_CHR_thalorien_stormwatch_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	noble = yes
+	birth_date = 2465.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_CHRACE
+	traits = {
+		brave
+		direct
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Dalloran"; WFRP 4e Sea Wardens of Cothique pp.23-26
+# Confidence: medium-high
+# Note: Home region is the tag's non-canon capital state.
+COT_dalloran_template = {
+	first_name = WHCHAR_COT_dalloran_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	noble = yes
+	birth_date = 2445.1.1
+	interest_group = ig_landowners
+	ideology = ideology_market_liberal
+	home_region = STATE_SKYHAVEN_PLATEAU
+	traits = {
+		tactful
+		tolerant
+		basic_entrepreneur
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Tyrion" (defeated Erik Redaxe's fleet in 2502 IC); Warhammer Armies: High Elves 5e pp.95-98
+# Confidence: high (placement medium)
+# Note: Placed under Cothique as the 2502 defender of the colonies' sea lanes; home region is Cothique's capital state (non-canon). Canon age in the centuries; immortal with a prime-of-life birth_date.
+COT_tyrion_template = {
+	first_name = WHCHAR_COT_tyrion_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	role = general
+	noble = yes
+	birth_date = 2470.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	home_region = STATE_SKYHAVEN_PLATEAU
+	traits = {
+		brave
+		charismatic
+		basic_cavalry_commander
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: INVENTED (canon names no ruler of Ellyrion in 2502 IC)
+# Confidence: -
+# Note: INVENTED in-setting name. Home region is the tag's non-canon capital state.
+ELL_aelindra_goldenwing_template = {
+	first_name = WHCHAR_ELL_aelindra_goldenwing_first
+	last_name = WHCHAR_ELL_aelindra_goldenwing_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	female = yes
+	noble = yes
+	birth_date = 2470.1.1
+	interest_group = ig_landowners
+	ideology = ideology_traditionalist
+	home_region = STATE_SOUTHERN_ELLYRION
+	traits = {
+		brave
+		wrathful
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: INVENTED (canon names no ruler of the Fortress of Dawn)
+# Confidence: -
+# Note: INVENTED in-setting name.
+FDW_mirithel_seaguard_template = {
+	first_name = WHCHAR_FDW_mirithel_seaguard_first
+	last_name = WHCHAR_FDW_mirithel_seaguard_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	female = yes
+	noble = yes
+	birth_date = 2460.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	home_region = STATE_ISLE_OF_DAWN
+	traits = {
+		persistent
+		cautious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Gates of Calith"; Warhammer Armies: Skaven 7e pp.29,31
+# Confidence: medium-high
+GCL_torinubar_template = {
+	first_name = WHCHAR_GCL_torinubar_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	noble = yes
+	birth_date = 2450.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_traditionalist
+	home_region = STATE_SOUTHERN_GATE_OF_CALITH
+	traits = {
+		erudite
+		cautious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Aislinn"; Warhammer Armies: High Elves 7e p.50
+# Confidence: high
+# Note: Admiral of the Lothern fleet, not a ruler. basic_naval_commander needs admiralty; if error.log refuses it, swap to dockyard_master.
+LOT_aislinn_template = {
+	first_name = WHCHAR_LOT_aislinn_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	role = admiral
+	noble = yes
+	birth_date = 2455.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_LOTHERN_WEST
+	traits = {
+		cruel
+		arrogant
+		basic_naval_commander
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Finubar"; Warhammer Armies: High Elves 4e p.27, 8e pp.28-31
+# Confidence: high
+# Note: Canon age in the centuries; immortal with a prime-of-life birth_date.
+LOT_finubar_the_seafarer_template = {
+	first_name = WHCHAR_LOT_finubar_the_seafarer_first
+	last_name = WHCHAR_LOT_finubar_the_seafarer_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	noble = yes
+	birth_date = 2445.1.1
+	interest_group = ig_landowners
+	ideology = ideology_reformer
+	home_region = STATE_LOTHERN_WEST
+	traits = {
+		tactful
+		cautious
+		explorer
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Korhil"; Warhammer Armies: High Elves 7e p.70
+# Confidence: high
+LOT_korhil_lionmane_template = {
+	first_name = WHCHAR_LOT_korhil_lionmane_first
+	last_name = WHCHAR_LOT_korhil_lionmane_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	role = general
+	birth_date = 2460.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_royalist
+	home_region = STATE_LOTHERN_WEST
+	traits = {
+		honorable
+		imposing
+		basic_defensive_strategist
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Alith Anar"; Warhammer Armies: High Elves 5e pp.81-82
+# Confidence: medium-high
+# Note: Home region is the tag's non-canon capital state.
+NGY_alith_anar_template = {
+	first_name = WHCHAR_NGY_alith_anar_first
+	last_name = WHCHAR_NGY_alith_anar_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	role = general
+	noble = yes
+	birth_date = 2460.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	home_region = STATE_SHADOW_MARCH
+	traits = {
+		ruthless
+		persistent
+		forest_commander
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Teclis", "Tower of Hoeth"
+# Confidence: medium (ruler is our reading)
+# Note: Teclis as head of Saphery is the scoping pass's reading, not an attested title. Home region is the tag's non-canon capital state.
+SAP_teclis_template = {
+	first_name = WHCHAR_SAP_teclis_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	noble = yes
+	birth_date = 2470.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_reformer
+	home_region = STATE_NORTHERN_SAPHERY
+	traits = {
+		erudite
+		arrogant
+		sickly
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Tor Elithis"; High Elf Players Guide p.31
+# Confidence: low-medium (rule is our reading)
+# Note: Ruling role is the scoping pass's reading.
+TEH_ingmir_template = {
+	first_name = WHCHAR_TEH_ingmir_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	female = yes
+	birth_date = 2465.1.1
+	interest_group = ig_devout
+	ideology = ideology_theocrat
+	home_region = STATE_TOR_ELITHIS
+	traits = {
+		pious
+		cautious
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Tor Elasor"; High Elf Players Guide pp.30-31
+# Confidence: medium
+TEL_amon_template = {
+	first_name = WHCHAR_TEL_amon_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	noble = yes
+	birth_date = 2465.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	home_region = STATE_TOR_ELASOR
+	traits = {
+		persistent
+		meticulous
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Eldyra"; Warhammer Armies: High Elves 8e pp.30-31
+# Confidence: low-medium (rule is our reading)
+# Note: Ruling Tiranoc is the scoping pass's reading.
+TIR_eldyra_template = {
+	first_name = WHCHAR_TIR_eldyra_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	role = general
+	female = yes
+	noble = yes
+	birth_date = 2470.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_traditionalist
+	home_region = STATE_TIRANOC
+	traits = {
+		brave
+		direct
+		basic_cavalry_commander
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Tower of Stars"; High Elf Players Guide p.31
+# Confidence: medium
+# Note: Gender unverified; read as female.
+TOS_althyria_template = {
+	first_name = WHCHAR_TOS_althyria_first
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	female = yes
+	birth_date = 2460.1.1
+	interest_group = ig_intelligentsia
+	ideology = ideology_moderate
+	home_region = STATE_TOWER_OF_THE_STARS
+	traits = {
+		erudite
+		reserved
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
+# Source: Lexicanum "Eltharion"; Warhammer Armies: High Elves 4e pp.76-81
+# Confidence: high
+# Note: Home region is the tag's non-canon capital state.
+YVR_eltharion_the_grim_template = {
+	first_name = WHCHAR_YVR_eltharion_the_grim_first
+	last_name = WHCHAR_YVR_eltharion_the_grim_last
+	historical = yes
+	culture = cu:high_elf
+	religion = rel:cult_of_asuryan
+	ruler = yes
+	role = general
+	noble = yes
+	birth_date = 2465.1.1
+	interest_group = ig_armed_forces
+	ideology = ideology_jingoist_leader
+	home_region = STATE_SOUTHERN_YVRESSE
+	traits = {
+		direct
+		persistent
+		basic_defensive_strategist
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
