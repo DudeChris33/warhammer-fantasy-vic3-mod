@@ -56,6 +56,8 @@
       "note": "The two caps Chris cut with border strokes either side of the strait (label: GATES OF CALITH). They are two regions, so two states, unless he joins them with a state_merges line." },
     { "name": "lost_isles_of_elithis", "realm": "khuresh", "box": [6804, 2581, 7122, 2942],
       "note": "The two large islands east of Khuresh (label: LOST ISLES OF ELITHIS). Realm is the nearest named land; Nippon is the other candidate." },
+    { "name": "isles_of_doom", "realm": "southlands", "points": [[3679, 2560], [3691, 2580], [3720, 2604]],
+      "note": "STATE_ISLES_OF_DOOM (Eataine's, #10449, 2026-11-09): Chris's state_merges lines join the three island provinces into one state, and a merge across the scope line makes the whole merged state out-of-scope, so one deepest-interior point per merged region (provinces x0CCC6D, xD1813C, xB32998) brings it in. Precedent islets_lustria_west." },
     { "name": "islets_cathay", "realm": "cathay", "points": [[5211, 1527]],
       "note": "1 formerly-placeholder islands (Chris 2026-10-24: every island that is not a continent is in scope; the three continents stay placeholders). One point per island, taken from the placeholder province; realm is the nearest drawn land." },
     { "name": "islets_khuresh", "realm": "khuresh", "points": [[6171, 2237]],

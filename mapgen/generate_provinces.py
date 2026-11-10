@@ -159,7 +159,11 @@ MERGE_FLOOR = 150
 #: Raised 8258 -> 12033 on 2026-11-03 when Chris drew Lustria's states (521 -> 574
 #: subdivided regions, 1,933,906 -> 2,864,193 drawn px): 574 + (8258 - 521) *
 #: 2864193 / 1933906.
-PROVINCE_TARGET = 12033
+#: Raised 12033 -> 12039 on 2026-11-09 (#10449) when the Isles of Doom (822 px, three
+#: regions) came into scope: the same rule written as a delta, 12033 + 3 + (12033 - 574)
+#: * 822 / 2864193 = 12039.3. (The run's own log reads 583 drawn regions at 12033; its
+#: area line is the pre-cut drawn zone, so the delta form is used.)
+PROVINCE_TARGET = 12039
 #: A province piece below this many px is swallowed into a same-region neighbour
 #: (never across a magenta boundary — the merge stays inside one region).
 MIN_PROVINCE_AREA = 120
