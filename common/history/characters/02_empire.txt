@@ -65,8 +65,8 @@
 		}
 	}
 	c:VSY ?= {
-		create_character = { # Mannfred von Carstein
-			template = VSY_mannfred_template
+		create_character = { # Vlad von Carstein (non-canon at 2502, #10450)
+			template = VSY_vlad_template
 		}
 	}
 }

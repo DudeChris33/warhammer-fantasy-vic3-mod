@@ -2,7 +2,7 @@
 
 Hand-authored starting characters, one template per character in `common/character_templates/<region>.txt` and one `create_character` per template in `common/history/characters/<region>.txt`. Display names are in `localization/english/wh_characters_l_english.yml`. **Not loaded in-game**: nothing here is tested; Chris still has to check `logs/error.log`.
 
-**Coverage:** 70 characters across 58 of 140 start tags (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`). The other 89 tags have no attested canon ruler and fall back to the culture-based `default` template.
+**Coverage:** 89 characters across 74 tags (the 58 of the original 140 start tags, plus the 16 High Elf realms and colonies added by #10456 (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`; the 140 and the 89 below predate the Ulthuan tags)). The other 89 tags have no attested canon ruler and fall back to the culture-based `default` template.
 
 **Start date:** 2502 IC, from `mapgen/config/country_history/README.md`; no separate defines entry pins it.
 
@@ -30,6 +30,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | ARG | Durthu | — | — | Warhammer Armies: Wood Elves (Durthu, Eldest of the Treemen) | medium |
 | ART | no canon ruler found | — | — | — | — |
 | AVE | Marius Leitdorf | — | — | Warhammer Armies: Empire (Elector Count Marius Leitdorf) | high |
+| AVL | Alarielle the Radiant | — | — | Lexicanum "Alarielle"; Warhammer Armies: High Elves 8e pp.58-59 | high |
 | AZL | Kazador Thunderhorn | — | — | https://whfb.lexicanum.com/wiki/Karak_Azul (King Kazador Thunderhorn, Donarkhun clan) | low |
 | BAE | no canon ruler found | — | — | — | — |
 | BAS | Bohemond de Bastonne | — | — | https://whfb.lexicanum.com/wiki/Bastonne (Duke Bohemond Beastslayer) | medium |
@@ -48,8 +49,12 @@ Hand-authored starting characters, one template per character in `common/charact
 | BSB | Grumlok | — | Gazbag (general) | planning/tag_registry.md BSB row (Bloody Sunz, Grumlok & Gazbag) | low |
 | BTO | no canon ruler found | — | — | — | — |
 | BVR | Byrrnoth Grundadrakk | — | — | Warhammer Armies: Dwarfs (King Byrrnoth Grundadrakk of Barak Varr) | medium |
+| CAL | Imrik | — | — | Lexicanum "Imrik", "Caledor"; Warhammer Armies: High Elves 6e pp.64-65 | high |
 | CAR | Huebald de Carcassonne | — | — | https://whfb.lexicanum.com/wiki/Carcassone (Duke Huebald) | medium |
+| CDU | Jahuthryn Seagleam | — | — | Lexicanum "Citadel of Dusk"; WFRP 4e High Elf Players Guide (gender unverified) | medium |
+| CHR | Thalorien Stormwatch (INVENTED) | — | — | invented; canon names no ruler of Chrace | — |
 | CNT | no canon ruler found | — | — | — | — |
+| COT | Dalloran | — | Tyrion (general) | Lexicanum "Dalloran"; WFRP 4e Sea Wardens of Cothique pp.23-26; Lexicanum "Tyrion" (placement under Cothique is ours) | medium |
 | COU | Louen Leoncoeur | — | Morgiana le Fay (IG leader) | Warhammer Armies: Bretonnia (Fay Enchantress Morgiana le Fay); Warhammer Armies: Bretonnia (King Louen Leoncoeur) | medium |
 | CRB | no canon ruler found | — | — | — | — |
 | CRM | Skarsnik | — | — | Warhammer Armies: Orcs & Goblins (Skarsnik, Warlord of the Eight Peaks) | high |
@@ -59,11 +64,14 @@ Hand-authored starting characters, one template per character in `common/charact
 | DRZ | no canon ruler found | — | — | — | — |
 | DUN | no canon ruler found | — | — | — | — |
 | EKR | no canon ruler found | — | — | — | — |
+| ELL | Aelindra Goldenwing (INVENTED) | — | — | invented; canon names no ruler of Ellyrion | — |
 | ERE | no canon ruler found | — | — | — | — |
 | ESC | Blas Elcano | — | — | WFRP Lustria p.211 (the Comandante of Santa Magritta; personal name from the #10182 scoping pass) | medium |
 | ESS | no canon ruler found | — | — | — | — |
 | EYB | Malron Eyebiter | — | — | Total War: Warhammer III (Grandfather Malron Eyebiter) | medium |
+| FDW | Mirithel Seaguard (INVENTED) | — | — | invented; canon names no ruler of the Fortress of Dawn | — |
 | GAS | no canon ruler found | — | — | — | — |
+| GCL | Torinubar | — | — | Lexicanum "Gates of Calith"; Warhammer Armies: Skaven 7e pp.29,31 | medium |
 | GDO | no canon ruler found | — | — | — | — |
 | GIS | no canon ruler found | — | — | — | — |
 | GOR | no canon ruler found | — | — | — | — |
@@ -95,6 +103,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | LAH | Neferata | — | — | Warhammer Armies: Vampire Counts (Neferata, Queen of Mysteries) | high |
 | LAN | no canon ruler found | — | — | — | — |
 | LAU | no canon ruler found | — | — | — | — |
+| LOT | Finubar the Seafarer | — | Korhil Lionmane (general), Aislinn (admiral) | Lexicanum "Finubar", "Korhil", "Aislinn"; Warhammer Armies: High Elves 4e p.27, 7e pp.50,70, 8e pp.28-31 | high |
 | LUC | no canon ruler found | — | — | — | — |
 | LYB | Khalida Neferher | — | — | Warhammer Armies: Tomb Kings (Queen Khalida of Lybaras) | medium |
 | LYO | Adalhard de Lyonesse | — | — | https://warhammerfantasy.fandom.com/wiki/Lyonesse (Duke Adalhard) | medium |
@@ -111,6 +120,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | MOR | no canon ruler found | — | — | — | — |
 | MOU | no canon ruler found | — | — | — | — |
 | MZN | Astragoth Ironhand | — | Zhatan the Black (general) | Chaos Dwarfs lore (Astragoth Ironhand, High Priest of Hashut); Chaos Dwarfs lore (Zhatan the Black, commander of the Tower of Zharr) | low |
+| NGY | Alith Anar | — | — | Lexicanum "Alith Anar"; Warhammer Armies: High Elves 5e pp.81-82 | medium |
 | NLD | Theoderic Gausser | — | — | https://whfb.lexicanum.com/wiki/Elector_Count_of_Nordland | medium |
 | NUM | no canon ruler found | — | — | — | — |
 | OKP | no canon ruler found | — | — | — | — |
@@ -130,6 +140,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | REM | no canon ruler found | — | — | — | — |
 | RFG | Gorfang Rotgut | — | — | planning/tag_registry.md RFG row (Red Fangs, Gorfang Rotgut) | medium |
 | ROP | no canon ruler found | — | — | — | — |
+| SAP | Teclis | — | — | Lexicanum "Teclis", "Tower of Hoeth" (ruling Saphery is our reading) | medium |
 | SAR | no canon ruler found | — | — | — | — |
 | SKA | Wulfrik the Wanderer | — | — | Warhammer Armies: Warriors of Chaos (8th ed.), "Wulfrik the Wanderer" | low |
 | SKG | Adella of the Thousand Mouths | — | — | WFRP Lustria (Adella of the Thousand Mouths, ruler of Skeggi; from the #10182 scoping pass) | medium |
@@ -141,10 +152,14 @@ Hand-authored starting characters, one template per character in `common/charact
 | SRT | no canon ruler found | — | — | — | — |
 | STI | Alberich Haupt-Anderssen | — | — | https://whfb.lexicanum.com/wiki/Alberich_Haupt-Anderssen | high |
 | TAL | Helmut Feuerbach | — | — | https://whfb.lexicanum.com/wiki/Helmut_Feuerbach | medium |
+| TEH | Ingmir | — | — | Lexicanum "Tor Elithis"; High Elf Players Guide p.31 (rule is our reading) | low |
+| TEL | Amon | — | — | Lexicanum "Tor Elasor"; High Elf Players Guide pp.30-31 | medium |
 | THG | no canon ruler found | — | — | — | — |
+| TIR | Eldyra | — | — | Lexicanum "Eldyra"; Warhammer Armies: High Elves 8e pp.30-31 (rule is our reading) | low |
 | TLS | Orion | — | — | Warhammer Armies: Wood Elves (Orion, King in the Woods) | high |
 | TLX | Adohi-Tehga | — | — | Warhammer Armies: Lizardmen (Lord Adohi-Tehga of Tlaxtlan); Lexicanum | medium |
 | TOB | no canon ruler found | — | — | — | — |
+| TOS | Althyria | — | — | Lexicanum "Tower of Stars"; High Elf Players Guide p.31 (gender unverified) | medium |
 | TRA | no canon ruler found | — | — | — | — |
 | TRG | no canon ruler found | — | — | — | — |
 | TRO | no canon ruler found | — | — | — | — |
@@ -158,10 +173,11 @@ Hand-authored starting characters, one template per character in `common/charact
 | VLG | no canon ruler found | — | — | — | — |
 | VMP | Heinrich Kemmler | — | — | Warhammer Armies: Vampire Counts (Heinrich Kemmler, the Lichemaster) | high |
 | VOL | no canon ruler found | — | — | — | — |
-| VSY | Mannfred von Carstein | — | — | Warhammer Armies: Vampire Counts (Mannfred von Carstein) | high |
+| VSY | Vlad von Carstein | — | — | Lexicanum "Vlad von Carstein" / "Von Carstein". NON-CANON placement at 2502 (Chris, #10450): Vlad died at Altdorf in 2051 and returns only in 2524 (End Times). Mannfred's template is held for #7820 | low |
 | WIS | Emmanuelle von Liebwitz | — | — | Lexicanum "Elector Countess of Wissenland" / Warhammer Fantasy Roleplay (Emmanuelle von Liebwitz, Countess of Nuln) | low |
 | WYD | no canon ruler found | — | — | — | — |
 | XLA | Huinitenuchli | — | — | Warhammer Armies: Lizardmen (Lord Huinitenuchli of Xlanhuapec); Lexicanum | medium |
+| YVR | Eltharion the Grim | — | — | Lexicanum "Eltharion"; Warhammer Armies: High Elves 4e pp.76-81 | high |
 | ZHU | Barundin Stoneheart | — | Burlok Damminson (IG leader) | Warhammer Armies: Dwarfs (Burlok Damminson, Engineers Guild); Warhammer Chronicles / novel Grudgebearer (King Barundin Stoneheart of Zhufbar) | low |
 | ZND | no canon ruler found | — | — | — | — |
 
@@ -185,7 +201,7 @@ Total War: Warhammer is used only where `planning/tag_registry.md` folds it in. 
 The mod's trait and ideology lists are vanilla's industrial-era set. Substitutions, so nothing was invented:
 
 - No Chaos, necromantic, engineering-lore or Slayer traits: Wulfrik, Beorg, Kemmler, Astragoth and the Slayer King use plain `brave`/`wrathful`/`ruthless`/`erudite` plus commander skills where a general.
-- `imperious`, `reserved` and `cruel` are gated to the agitator role in `common/character_traits/personality_traits.txt`; characters who wanted them use `arrogant`, `cautious` or `ruthless`.
+- `imperious`, `reserved` and `cruel` are barred from the agitator role (not agitator-only) in `common/character_traits/personality_traits.txt`; the Empire and Lustria characters who wanted them use `arrogant`, `cautious` or `ruthless`, while the Ulthuan characters (#10456) use `reserved` (Althyria) and `cruel` (Aislinn) directly.
 - Ruler-commander skills (`pillager`, `*_commander`, `traditionalist_commander`, `stalwart_defender`) need the general role, so those characters carry both `ruler = yes` and `role = general`.
 - No Chaos or undead ideology: Kemmler is `ideology_nihilist`; the vampires and Tomb Kings are `ideology_authoritarian` / `ideology_royalist`.
 - Dwarf grudge-lore, Elf and Tomb King kingship have no matching ideology; all use `ideology_traditionalist` or `ideology_royalist`.
@@ -194,10 +210,10 @@ The mod's trait and ideology lists are vanilla's industrial-era set. Substitutio
 
 ## Canon that cannot be represented
 
-- **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Mannfred, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan, the Slann Mazdamundi, Xltloc, Huinitenuchli and Adohi-Tehga, and the vampire Harkon) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
+- **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Vlad, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan, every High Elf character (#10456), the Slann Mazdamundi, Xltloc, Huinitenuchli and Adohi-Tehga, and the vampire Harkon) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
 - **Heirs.** Only Katarin Bokha is an heir; tabletop names no heir for any other ruler.
 - **Admirals.** None authored: no named canon admiral is attached to any existing tag.
-- **Canon skipped (no matching tag or not alive at 2502):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2502), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2502 holder unclear), Ariel and Alarielle (no matching tag), Teclis and Tyrion (Ulthuan has no tags yet).
+- **Canon skipped (no matching tag or not alive at 2502):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Mannfred von Carstein (template held for #7820, his return arc; canon return 2505 IC), Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2502), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2502 holder unclear), Ariel and Alarielle (no matching tag), Morvai (End Times only), Caradryan (takes no worldly orders), ULT (formable only, no characters). Invented rulers (no canon name): Thalorien Stormwatch (CHR), Aelindra Goldenwing (ELL), Mirithel Seaguard (FDW).
 - **Conflict flagged:** Zhufbar's king is Barundin Stoneheart in the novel *Grudgebearer* and Morgrim Ironforge in WFRP 4th ed.; Barundin was used. Talabecland's Helmut Feuerbach is shown at game start though canon has him go missing late in 2512.
 
 ## Cross-cutting notes for Chris

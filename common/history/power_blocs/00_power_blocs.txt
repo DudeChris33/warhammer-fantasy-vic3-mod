@@ -1,5 +1,5 @@
 ﻿POWER_BLOCS = {
-	# Bloc names are mod loc keys (localization/english/power_blocs_l_english.yml). founding_date is the start date for all
+	# Bloc names are mod loc keys (localization/english/wh_power_blocs_l_english.yml). founding_date is the start date for all
 	# blocs; the lore dates are far earlier than Vic3's calendar. No DLC-gated extra principle is added (vanilla adds one).
 
 	# The Empire of Sigmar: the Elector Counts and the Emperor (WFB Empire army book). Electors are REI's subjects and join

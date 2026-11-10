@@ -1,0 +1,211 @@
+﻿# Power bloc name gates (#10451). Run in country scope (the bloc leader). Each wh_pb_leader_<family> reads the leader's primary-culture heritage,
+# which is static culture data, so it is deterministic. Every heritage_* trait in common/discrimination_traits/00_heritages.txt belongs to exactly one family.
+# A new heritage must join a family here (or get a new one) and keep >= 2 names with no identity gate in common/power_bloc_names/.
+
+wh_pb_leader_imperial = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_imperial_human
+	}
+}
+
+wh_pb_leader_bretonnian = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_bretonnian_human
+	}
+}
+
+wh_pb_leader_kislevite = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_kislevite_human
+	}
+}
+
+wh_pb_leader_tilean = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_tilean_human
+	}
+}
+
+wh_pb_leader_estalian = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_estalian_human
+	}
+}
+
+wh_pb_leader_border_prince = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_border_prince_human
+	}
+}
+
+wh_pb_leader_norscan = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_norscan_human
+	}
+}
+
+wh_pb_leader_halfling = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_halfling
+	}
+}
+
+wh_pb_leader_dawi = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_dawi
+	}
+}
+
+wh_pb_leader_dawi_zharr = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_dawi_zharr
+	}
+}
+
+wh_pb_leader_orc_goblin = {
+	any_primary_culture = {
+		OR = {
+			has_discrimination_trait = heritage_orc
+			has_discrimination_trait = heritage_goblin
+		}
+	}
+}
+
+wh_pb_leader_hobgoblin = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_hobgoblin
+	}
+}
+
+wh_pb_leader_nehekharan = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_nehekharan
+	}
+}
+
+wh_pb_leader_undead = {
+	any_primary_culture = {
+		OR = {
+			has_discrimination_trait = heritage_vampire
+			has_discrimination_trait = heritage_mousillon
+		}
+	}
+}
+
+wh_pb_leader_asrai = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_asrai
+	}
+}
+
+wh_pb_leader_asur = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_asur
+	}
+}
+
+wh_pb_leader_druchii = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_druchii
+	}
+}
+
+wh_pb_leader_ogre = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_ogre
+	}
+}
+
+wh_pb_leader_lizardmen = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_lizardmen
+	}
+}
+
+wh_pb_leader_skaven = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_skaven
+	}
+}
+
+wh_pb_leader_beastmen = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_beastmen
+	}
+}
+
+wh_pb_leader_cathayan = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_cathayan_human
+	}
+}
+
+wh_pb_leader_ind = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_ind_human
+	}
+}
+
+wh_pb_leader_khureshi = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_khureshi_human
+	}
+}
+
+wh_pb_leader_nipponese = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_nipponese_human
+	}
+}
+
+wh_pb_leader_arabyan = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_arabyan_human
+	}
+}
+
+wh_pb_leader_kurgan = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_kurgan_human
+	}
+}
+
+wh_pb_leader_amazon = {
+	any_primary_culture = {
+		has_discrimination_trait = heritage_amazon_human
+	}
+}
+
+# Umbrella: the leader has at least one family above. The fallback names apply only when this is no.
+wh_pb_leader_has_name_family = {
+	OR = {
+		wh_pb_leader_imperial = yes
+		wh_pb_leader_bretonnian = yes
+		wh_pb_leader_kislevite = yes
+		wh_pb_leader_tilean = yes
+		wh_pb_leader_estalian = yes
+		wh_pb_leader_border_prince = yes
+		wh_pb_leader_norscan = yes
+		wh_pb_leader_halfling = yes
+		wh_pb_leader_dawi = yes
+		wh_pb_leader_dawi_zharr = yes
+		wh_pb_leader_orc_goblin = yes
+		wh_pb_leader_hobgoblin = yes
+		wh_pb_leader_nehekharan = yes
+		wh_pb_leader_undead = yes
+		wh_pb_leader_asrai = yes
+		wh_pb_leader_asur = yes
+		wh_pb_leader_druchii = yes
+		wh_pb_leader_ogre = yes
+		wh_pb_leader_lizardmen = yes
+		wh_pb_leader_skaven = yes
+		wh_pb_leader_beastmen = yes
+		wh_pb_leader_cathayan = yes
+		wh_pb_leader_ind = yes
+		wh_pb_leader_khureshi = yes
+		wh_pb_leader_nipponese = yes
+		wh_pb_leader_arabyan = yes
+		wh_pb_leader_kurgan = yes
+		wh_pb_leader_amazon = yes
+	}
+}
