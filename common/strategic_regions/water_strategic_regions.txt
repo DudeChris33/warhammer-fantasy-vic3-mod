@@ -138,10 +138,6 @@ region_devourer_nippon_channel_placeholder = {
 	states = { STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER }
 }
 
-region_dragon_isles_bypass_02 = {
-	states = { STATE_DRAGON_ISLES_BYPASS_02 }
-}
-
 region_drakefjord_bay = {
 	states = { STATE_DRAKEFJORD_BAY }
 }
@@ -314,10 +310,6 @@ region_isle_of_dusk_bypass = {
 	states = { STATE_ISLE_OF_DUSK_BYPASS }
 }
 
-region_isle_of_rising_sun_bypass = {
-	states = { STATE_ISLE_OF_RISING_SUN_BYPASS }
-}
-
 region_jade_sea_01 = {
 	states = { STATE_JADE_SEA_01 }
 }
@@ -352,10 +344,6 @@ region_jade_sea_08 = {
 
 region_jade_sea_09 = {
 	states = { STATE_JADE_SEA_09 }
-}
-
-region_jade_sea_10 = {
-	states = { STATE_JADE_SEA_10 }
 }
 
 region_jade_sea_11 = {
@@ -584,6 +572,10 @@ region_sea_of_fear_09 = {
 
 region_sea_of_fear_10 = {
 	states = { STATE_SEA_OF_FEAR_10 }
+}
+
+region_sea_of_fear_11 = {
+	states = { STATE_SEA_OF_FEAR_11 }
 }
 
 region_sea_of_feuds = {

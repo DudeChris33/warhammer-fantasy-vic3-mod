@@ -7,7 +7,7 @@
 region_ocean_of_dread_islands = {
 	capital_province = xEBF4AB
 	map_color = { 24 159 0 }
-	states = { STATE_DREAD_ROCK STATE_EASTERN_COLONIES STATE_DEATHTOLL_HOLD STATE_LAND_675 STATE_LAND_676 }
+	states = { STATE_DREAD_ROCK STATE_EASTERN_COLONIES STATE_LAND_675 STATE_LAND_676 }
 }
 
 region_southern_worlds_edge_mountains = {
@@ -17,7 +17,7 @@ region_southern_worlds_edge_mountains = {
 }
 
 region_southlands = {
-	capital_province = x05B7D4
+	capital_province = xD1813C
 	map_color = { 47 180 93 }
-	states = { STATE_ISLE_OF_DAWN STATE_TOR_ELASOR STATE_TOWER_OF_THE_STARS STATE_STARS_ARCHIPELAGO }
+	states = { STATE_ISLES_OF_DOOM STATE_ISLE_OF_DAWN STATE_TOR_ELASOR STATE_TOWER_OF_THE_STARS STATE_STARS_ARCHIPELAGO }
 }

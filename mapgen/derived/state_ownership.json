@@ -137,7 +137,31 @@
     3807,
     806
    ],
-   "owner": "ART",
+   "owners": [
+    {
+     "owner": "ART",
+     "provinces": [
+      "x164905",
+      "x1714F5",
+      "x2D5E62",
+      "x5383E7",
+      "x6F4067",
+      "x78DD7C",
+      "x7BB098",
+      "x8EF897",
+      "xB54C6E",
+      "xCC61CB",
+      "xDAA603"
+     ]
+    },
+    {
+     "owner": "OKP",
+     "provinces": [
+      "x6A9944",
+      "xA70836"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_ASHEN_PLAINS": {
@@ -1018,7 +1042,9 @@
      "owner": "SRY",
      "provinces": [
       "x000D6D",
+      "x1CCD31",
       "xA5BF25",
+      "xBB04AA",
       "xC39E7B"
      ]
     },
@@ -1446,15 +1472,6 @@
    "owner": "QUE",
    "scope": "drawn"
   },
-  "STATE_GREAT_JUNGLE": {
-   "id": 697,
-   "naming_anchor": [
-    2285,
-    2386
-   ],
-   "owner": "ITZ",
-   "scope": "drawn"
-  },
   "STATE_GREAT_MORTIS_DELTA": {
    "id": 623,
    "naming_anchor": [
@@ -1515,7 +1532,7 @@
     2055,
     2519
    ],
-   "owner": "PST",
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_HALLS_OF_EQUOS": {
@@ -1713,8 +1730,8 @@
     3698,
     2582
    ],
-   "owner": "placeholder",
-   "scope": "placeholder"
+   "owner": "LOT",
+   "scope": "drawn"
   },
   "STATE_ISLES_OF_DUSK": {
    "id": 149,
@@ -1797,31 +1814,32 @@
    "owner": "LZC",
    "scope": "drawn"
   },
-  "STATE_KARAGRIL": {
-   "id": 527,
-   "naming_anchor": [
-    4468,
-    1272
-   ],
-   "owner": "KEP",
-   "scope": "drawn"
-  },
-  "STATE_KARAG_NAR": {
-   "id": 522,
-   "naming_anchor": [
-    4509,
-    1299
-   ],
-   "owner": "KEP",
-   "scope": "drawn"
-  },
   "STATE_KARAG_ZIFLIN": {
    "id": 201,
    "naming_anchor": [
     4418,
     1283
    ],
-   "owner": "CRM",
+   "owners": [
+    {
+     "owner": "CRM",
+     "provinces": [
+      "x16852C",
+      "x52F41E",
+      "x8691EB",
+      "xABEB80"
+     ]
+    },
+    {
+     "owner": "KEP",
+     "provinces": [
+      "x0A0726",
+      "x3BDEC1",
+      "x4A22F9",
+      "x965259"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_KARAK_EIGHT_PEAKS": {
@@ -1830,7 +1848,25 @@
     4456,
     1312
    ],
-   "owner": "CRM",
+   "owners": [
+    {
+     "owner": "CRM",
+     "provinces": [
+      "x20633B",
+      "x784DB3",
+      "xCBD202"
+     ]
+    },
+    {
+     "owner": "KEP",
+     "provinces": [
+      "xBE59BA",
+      "xD251FF",
+      "xF12B97",
+      "xFF6FCF"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_KHARNOS_FOREST": {
@@ -1932,15 +1968,6 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_017": {
-   "id": 17,
-   "naming_anchor": [
-    2385,
-    7
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_018": {
    "id": 18,
    "naming_anchor": [
@@ -1995,38 +2022,11 @@
    "owner": "placeholder",
    "scope": "placeholder"
   },
-  "STATE_LAND_030": {
-   "id": 30,
-   "naming_anchor": [
-    2915,
-    16
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
   "STATE_LAND_031": {
    "id": 31,
    "naming_anchor": [
     3283,
     56
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_032": {
-   "id": 32,
-   "naming_anchor": [
-    3612,
-    24
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_LAND_033": {
-   "id": 33,
-   "naming_anchor": [
-    3781,
-    12
    ],
    "owner": "unowned",
    "scope": "drawn"
@@ -2111,15 +2111,6 @@
    ],
    "owner": "placeholder",
    "scope": "placeholder"
-  },
-  "STATE_LAND_362": {
-   "id": 362,
-   "naming_anchor": [
-    4321,
-    6
-   ],
-   "owner": "unowned",
-   "scope": "drawn"
   },
   "STATE_LAND_365": {
    "id": 365,
@@ -2235,12 +2226,6 @@
    "owner": "unowned",
    "scope": "drawn"
   },
-  "STATE_LAND_674": {
-   "id": 674,
-   "naming_anchor": null,
-   "owner": "GCL",
-   "scope": "drawn"
-  },
   "STATE_LAND_675": {
    "id": 675,
    "naming_anchor": null,
@@ -2312,6 +2297,18 @@
    "naming_anchor": null,
    "owner": "placeholder",
    "scope": "placeholder"
+  },
+  "STATE_LAND_734": {
+   "id": 734,
+   "naming_anchor": null,
+   "owner": "placeholder",
+   "scope": "placeholder"
+  },
+  "STATE_LAND_735": {
+   "id": 735,
+   "naming_anchor": null,
+   "owner": "QUE",
+   "scope": "drawn"
   },
   "STATE_LAURELORN_FOREST": {
    "id": 625,
@@ -2743,6 +2740,15 @@
    "owner": "ELL",
    "scope": "drawn"
   },
+  "STATE_NORTHERN_GATE_OF_CALITH": {
+   "id": 674,
+   "naming_anchor": [
+    6478,
+    2883
+   ],
+   "owner": "GCL",
+   "scope": "drawn"
+  },
   "STATE_NORTHERN_MANGROVE_COAST": {
    "id": 715,
    "naming_anchor": [
@@ -2946,15 +2952,6 @@
    ],
    "scope": "drawn"
   },
-  "STATE_OAK_OF_PROPHECY": {
-   "id": 493,
-   "naming_anchor": [
-    3835,
-    835
-   ],
-   "owner": "OKP",
-   "scope": "drawn"
-  },
   "STATE_OBSIDIAN_FACE": {
    "id": 683,
    "naming_anchor": [
@@ -3015,7 +3012,7 @@
     2435,
     2706
    ],
-   "owner": "LZE",
+   "owner": "PST",
    "scope": "drawn"
   },
   "STATE_PAHUAX": {
@@ -3906,7 +3903,7 @@
     2084,
     2610
    ],
-   "owner": "PST",
+   "owner": "ITZ",
    "scope": "drawn"
   },
   "STATE_TOWER_OF_THE_BLOODYTOOTH": {
@@ -4175,15 +4172,6 @@
    "owner": "ARG",
    "scope": "drawn"
   },
-  "STATE_WELL_OF_TIME": {
-   "id": 693,
-   "naming_anchor": [
-    2392,
-    2326
-   ],
-   "owner": "XLA",
-   "scope": "drawn"
-  },
   "STATE_WESTERN_BADLANDS": {
    "id": 566,
    "naming_anchor": [
@@ -4352,7 +4340,39 @@
     4334,
     866
    ],
-   "owner": "OSM",
+   "owners": [
+    {
+     "owner": "OSM",
+     "provinces": [
+      "x0291BA",
+      "x19A717",
+      "x27EB4F",
+      "x2B1B0F",
+      "x321C5C",
+      "x37094C",
+      "x3E34BC",
+      "x6C5F76",
+      "x89B3D6",
+      "xA0C933",
+      "xC2B20E",
+      "xCE27FD",
+      "xD46700",
+      "xD5536D",
+      "xDC6C35",
+      "xDD3825",
+      "xE64A44",
+      "xF38192",
+      "xFF74A2"
+     ]
+    },
+    {
+     "owner": "VSY",
+     "provinces": [
+      "x5A4DE0",
+      "x6EB571"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_WEST_STIRLAND": {
@@ -4451,7 +4471,236 @@
     2246,
     2279
    ],
-   "owner": "ITZ",
+   "owners": [
+    {
+     "owner": "ITZ",
+     "provinces": [
+      "x00E25F",
+      "x02E98B",
+      "x06479D",
+      "x085C9E",
+      "x09B384",
+      "x0B6BE1",
+      "x0BBAB0",
+      "x0E3EFD",
+      "x0F18C2",
+      "x112DC3",
+      "x1284A9",
+      "x143D06",
+      "x148BD5",
+      "x16A0D6",
+      "x17F7BC",
+      "x19B019",
+      "x19FEE8",
+      "x1D5CFA",
+      "x1DE7F0",
+      "x1F71FB",
+      "x20C8E1",
+      "x22813E",
+      "x22D00D",
+      "x262E1F",
+      "x263BF4",
+      "x284320",
+      "x299A06",
+      "x2BA132",
+      "x2DB633",
+      "x2F0D19",
+      "x30C576",
+      "x311445",
+      "x347257",
+      "x34FD4D",
+      "x368758",
+      "x37DE3E",
+      "x39969B",
+      "x39E56A",
+      "x3BFA6B",
+      "x3D5151",
+      "x3F09AE",
+      "x3F587D",
+      "x42B68F",
+      "x434185",
+      "x44CB90",
+      "x462276",
+      "x47DAD3",
+      "x4829A2",
+      "x4B87B4",
+      "x4D9CB5",
+      "x4EF39B",
+      "x50FAC7",
+      "x530FC8",
+      "x5466AE",
+      "x561F0B",
+      "x566DDA",
+      "x59CBEC",
+      "x5A56E2",
+      "x5BE0ED",
+      "x5D37D3",
+      "x5EF030",
+      "x5F3EFF",
+      "x615400",
+      "x62AAE6",
+      "x64B212",
+      "x681024",
+      "x6A2525",
+      "x6B7C0B",
+      "x6D3468",
+      "x6D8337",
+      "x70E149",
+      "x716C3F",
+      "x72F64A",
+      "x744D30",
+      "x76058D",
+      "x76545C",
+      "x78695D",
+      "x79C043",
+      "x7B78A0",
+      "x7BC76F",
+      "x7F2581",
+      "x7FB077",
+      "x813A82",
+      "x829168",
+      "x8449C5",
+      "x849894",
+      "x87F6A6",
+      "x88047B",
+      "x8A0BA7",
+      "x8B628D",
+      "x8D69B9",
+      "x8F7EBA",
+      "x90D5A0",
+      "x928DFD",
+      "x92DCCC",
+      "x963ADE",
+      "x96C5D4",
+      "x984FDF",
+      "x99A6C5",
+      "x9B5F22",
+      "x9BADF1",
+      "x9DC2F2",
+      "xA0D235",
+      "xA12104",
+      "xA47F16",
+      "xA50A0C",
+      "xA69417",
+      "xA7EAFD",
+      "xA9A35A",
+      "xA9F229",
+      "xAD503B",
+      "xAF653C",
+      "xB0BC22",
+      "xB2747F",
+      "xB2C34E",
+      "xB4D84F",
+      "xB62F35",
+      "xB7E792",
+      "xB83661",
+      "xBB9473",
+      "xBC1F69",
+      "xBDA974",
+      "xBF005A",
+      "xC0B8B7",
+      "xC10786",
+      "xC46598",
+      "xC4736D",
+      "xC67A99",
+      "xC7D17F",
+      "xC9D8AB",
+      "xCBEDAC",
+      "xCD4492",
+      "xCEFCEF",
+      "xCF4BBE",
+      "xD2A9D0",
+      "xD334C6",
+      "xD4BED1",
+      "xD615B7",
+      "xD7CE14",
+      "xD81CE3",
+      "xDA31E4",
+      "xDB88CA",
+      "xDD4127",
+      "xDD8FF6",
+      "xE0EE08",
+      "xE178FE",
+      "xE30309",
+      "xE459EF",
+      "xE6124C",
+      "xE6611B",
+      "xE93437",
+      "xE9BF2D",
+      "xE9CD02",
+      "xEBD42E",
+      "xED2B14",
+      "xEF3240",
+      "xF14741",
+      "xF29E27",
+      "xF45684",
+      "xF4A553",
+      "xF80365",
+      "xF88E5B",
+      "xFA1866",
+      "xFB6F4C",
+      "xFD27A9",
+      "xFD7678",
+      "xFF8B79"
+     ]
+    },
+    {
+     "owner": "XLA",
+     "provinces": [
+      "x058982",
+      "x06C4BE",
+      "x0C37D1",
+      "x1508F6",
+      "x1C9EDF",
+      "x1DDA1B",
+      "x234D2E",
+      "x2C1E53",
+      "x319166",
+      "x33B43C",
+      "x3A628B",
+      "x41F874",
+      "x4333B0",
+      "x48A6C3",
+      "x5177E8",
+      "x56EAFB",
+      "x590DD1",
+      "x5A490D",
+      "x5FBC20",
+      "x675209",
+      "x688D45",
+      "x6E0058",
+      "x76D17D",
+      "x7E6766",
+      "x7FA2A2",
+      "x8515B5",
+      "x8DE6DA",
+      "x9359ED",
+      "x957CC3",
+      "x9C2B12",
+      "x9CE92D",
+      "xA3C0FB",
+      "xA4FC37",
+      "xAA6F4A",
+      "xB3406F",
+      "xBAD658",
+      "xBC1194",
+      "xC184A7",
+      "xC91A90",
+      "xCA55CC",
+      "xCFC8DF",
+      "xD1EBB5",
+      "xD89A04",
+      "xE02FED",
+      "xE16B29",
+      "xE6DE3C",
+      "xEFAF61",
+      "xF52274",
+      "xF7454A",
+      "xF88086",
+      "xFDF399"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_XHOTL": {

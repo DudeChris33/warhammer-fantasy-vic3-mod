@@ -862,8 +862,8 @@ canal_turtle_1 = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x16EFA5
-	second_land_endpoint = x1D0056
+	first_land_endpoint = x1D0056
+	second_land_endpoint = x3CB3B3
 
 	first_sea_endpoint = x35FC62
 	second_sea_endpoint = x86229F

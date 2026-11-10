@@ -188,7 +188,7 @@ STATE_ELITHISIAN_GROVE = {
     }
     naval_exit_id = 3176
 }
-STATE_LAND_674 = {
+STATE_NORTHERN_GATE_OF_CALITH = {
     id = 674
     subsistence_building = "building_subsistence_rice_farm"
     provinces = { x17024D x56A0FF x64E537 xC6ADBE xCB5DE3 xDBE13F xDDC31B xEC0753 }
