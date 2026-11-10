@@ -313,9 +313,36 @@ WIS_emmanuelle_von_liebwitz_template = {
 	}
 }
 
+# Source: Lexicanum "Vlad von Carstein", "Von Carstein" (https://whfb.lexicanum.com/wiki/Vlad_von_Carstein)
+# Confidence: low
+# Note: NON-CANON PLACEMENT (Chris's request, #10450). Vlad died at the Siege of Altdorf in 2051 IC and is restored only in 2524 IC (End Times, out of scope), so he is dead at 2502 in every edition. Traits from Lexicanum ("feral charm", "ferocious temper"; led every Vampire War campaign). Immortal with a prime-of-life birth_date.
+VSY_vlad_template = {
+	first_name = WHCHAR_VSY_vlad_first
+	last_name = WHCHAR_VSY_vlad_last
+	historical = yes
+	culture = cu:sylvanian_vampire
+	religion = rel:cult_of_nagash
+	ruler = yes
+	role = general
+	noble = yes
+	birth_date = 2462.1.1
+	interest_group = ig_landowners
+	ideology = ideology_authoritarian
+	home_region = STATE_DRAKENHOF
+	traits = {
+		charismatic
+		wrathful
+		pillager
+	}
+	on_created = {
+		set_character_immortal = yes
+	}
+}
+
 # Source: Warhammer Armies: Vampire Counts (Mannfred von Carstein); https://whfb.lexicanum.com/wiki/Mannfred
 # Confidence: high
 # Note: Canon age in the centuries; immortal with a prime-of-life birth_date.
+# Note: HELD for #7820 (Mannfred's return arc); not created at start since #10450. Revisit `ruler = yes` before use. Canon return is 2505 IC (Lexicanum).
 VSY_mannfred_template = {
 	first_name = WHCHAR_VSY_mannfred_first
 	last_name = WHCHAR_VSY_mannfred_last

@@ -158,7 +158,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | VLG | no canon ruler found | — | — | — | — |
 | VMP | Heinrich Kemmler | — | — | Warhammer Armies: Vampire Counts (Heinrich Kemmler, the Lichemaster) | high |
 | VOL | no canon ruler found | — | — | — | — |
-| VSY | Mannfred von Carstein | — | — | Warhammer Armies: Vampire Counts (Mannfred von Carstein) | high |
+| VSY | Vlad von Carstein | — | — | Lexicanum "Vlad von Carstein" / "Von Carstein". NON-CANON placement at 2502 (Chris, #10450): Vlad died at Altdorf in 2051 and returns only in 2524 (End Times). Mannfred's template is held for #7820 | low |
 | WIS | Emmanuelle von Liebwitz | — | — | Lexicanum "Elector Countess of Wissenland" / Warhammer Fantasy Roleplay (Emmanuelle von Liebwitz, Countess of Nuln) | low |
 | WYD | no canon ruler found | — | — | — | — |
 | XLA | Huinitenuchli | — | — | Warhammer Armies: Lizardmen (Lord Huinitenuchli of Xlanhuapec); Lexicanum | medium |
@@ -194,10 +194,10 @@ The mod's trait and ideology lists are vanilla's industrial-era set. Substitutio
 
 ## Canon that cannot be represented
 
-- **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Mannfred, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan, the Slann Mazdamundi, Xltloc, Huinitenuchli and Adohi-Tehga, and the vampire Harkon) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
+- **Lifespans.** Age handling is not tuned for long-lived races, so birth dates were shortened to a prime-of-life age: Dwarfs (Thorgrim, Ungrim, Belegar, Barundin, Byrrnoth, Alrik, Brokk, Kazador, Kazran, Burlok) have canon ages of one to several centuries, shown as roughly 60 to 90. Gelt (centuries), Kemmler and Astragoth are shortened the same way. Undead, Elves and the Treeman (Vlad, Neferata, Settra, Khatep, Khalida, Kemmler, Orion, Durthu, Naestra, Arahan, the Slann Mazdamundi, Xltloc, Huinitenuchli and Adohi-Tehga, and the vampire Harkon) are also set `set_character_immortal = yes`. **Decision for Chris:** whether Dwarfs should be immortal too, since age-based death would end their reigns far earlier than canon.
 - **Heirs.** Only Katarin Bokha is an heir; tabletop names no heir for any other ruler.
 - **Admirals.** None authored: no named canon admiral is attached to any existing tag.
-- **Canon skipped (no matching tag or not alive at 2502):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2502), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2502 holder unclear), Ariel and Alarielle (no matching tag), Teclis and Tyrion (Ulthuan has no tags yet).
+- **Canon skipped (no matching tag or not alive at 2502):** Luthor Huss, Valten, Josef Bugman, Gotrek, Arkhan the Black, Mannfred von Carstein (template held for #7820, his return arc; canon return 2505 IC), Drazhoath the Ashen (Black Fortress is not a tag), Crusher Zogoth (Broken Tooth; dead before 2502), Greasus Goldtooth (no `GGT` start tag), Mallobaude and Merovech of Mousillon (2502 holder unclear), Ariel and Alarielle (no matching tag), Teclis and Tyrion (Ulthuan has no tags yet).
 - **Conflict flagged:** Zhufbar's king is Barundin Stoneheart in the novel *Grudgebearer* and Morgrim Ironforge in WFRP 4th ed.; Barundin was used. Talabecland's Helmut Feuerbach is shown at game start though canon has him go missing late in 2512.
 
 ## Cross-cutting notes for Chris
