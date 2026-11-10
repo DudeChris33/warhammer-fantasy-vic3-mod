@@ -37,4 +37,27 @@ POPS = {
 			create_pop = { culture = test size = 50000 }
 		}
 	}
+	s:STATE_THETA = {
+		region_state:EEE = {
+			create_pop = { culture = test size = 150000 }
+		}
+	}
+	s:STATE_IOTA = {
+		region_state:EEE = {
+			create_pop = { culture = test size = 60000 }
+		}
+	}
+	s:STATE_KAPPA = {
+		region_state:EEE = {
+			create_pop = { culture = test size = 40000 }
+		}
+	}
+	s:STATE_LAMBDA = {
+		region_state:EEE = {
+			create_pop = { culture = test size = 30000 }
+		}
+		region_state:BBB = {
+			create_pop = { culture = test size = 20000 }
+		}
+	}
 }

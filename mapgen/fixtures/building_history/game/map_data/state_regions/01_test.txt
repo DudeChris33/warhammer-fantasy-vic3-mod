@@ -54,3 +54,42 @@ STATE_ETA = {
     arable_land = 40
     arable_resources = { "building_wheat_farm" }
 }
+STATE_THETA = {
+    id = 8
+    provinces = { x00000A }
+    port = x00000A
+    arable_land = 6
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+        building_logging_camp = 4
+    }
+}
+STATE_IOTA = {
+    id = 9
+    provinces = { x00000B }
+    port = x00000B
+    arable_land = 6
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+        building_logging_camp = 4
+    }
+}
+STATE_KAPPA = {
+    id = 10
+    provinces = { x00000C }
+    arable_land = 6
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+        building_logging_camp = 4
+    }
+}
+STATE_LAMBDA = {
+    id = 11
+    provinces = { x00000D x00000E }
+    port = x00000E
+    arable_land = 6
+    arable_resources = { "building_wheat_farm" }
+    capped_resources = {
+        building_logging_camp = 4
+    }
+}

@@ -45,4 +45,32 @@ STATES = {
 			owned_provinces = { x000009 }
 		}
 	}
+	s:STATE_THETA = {
+		create_state = {
+			country = c:EEE
+			owned_provinces = { x00000A }
+		}
+	}
+	s:STATE_IOTA = {
+		create_state = {
+			country = c:EEE
+			owned_provinces = { x00000B }
+		}
+	}
+	s:STATE_KAPPA = {
+		create_state = {
+			country = c:EEE
+			owned_provinces = { x00000C }
+		}
+	}
+	s:STATE_LAMBDA = {
+		create_state = {
+			country = c:EEE
+			owned_provinces = { x00000D }
+		}
+		create_state = {
+			country = c:BBB
+			owned_provinces = { x00000E }
+		}
+	}
 }

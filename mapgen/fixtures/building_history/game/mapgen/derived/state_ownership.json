@@ -68,6 +68,51 @@
    ],
    "owner": "DDD",
    "scope": "drawn"
+  },
+  "STATE_THETA": {
+   "naming_anchor": [
+    50,
+    50
+   ],
+   "owner": "EEE",
+   "scope": "drawn"
+  },
+  "STATE_IOTA": {
+   "naming_anchor": [
+    55,
+    55
+   ],
+   "owner": "EEE",
+   "scope": "drawn"
+  },
+  "STATE_KAPPA": {
+   "naming_anchor": [
+    60,
+    60
+   ],
+   "owner": "EEE",
+   "scope": "drawn"
+  },
+  "STATE_LAMBDA": {
+   "naming_anchor": [
+    65,
+    65
+   ],
+   "owners": [
+    {
+     "owner": "EEE",
+     "provinces": [
+      "x00000D"
+     ]
+    },
+    {
+     "owner": "BBB",
+     "provinces": [
+      "x00000E"
+     ]
+    }
+   ],
+   "scope": "drawn"
   }
  }
 }

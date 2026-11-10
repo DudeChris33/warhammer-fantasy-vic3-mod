@@ -1,16 +1,24 @@
 AAA = {
 	country_type = recognized
 	tier = kingdom
+	capital = STATE_DELTA
 }
 BBB = {
 	country_type = recognized
 	tier = principality
+	capital = STATE_ALPHA
 }
 CCC = {
 	country_type = unrecognized
 	tier = principality
+	capital = STATE_BETA
 }
 DDD = {
 	country_type = decentralized
 	tier = principality
+}
+EEE = {
+	country_type = recognized
+	tier = principality
+	capital = STATE_THETA
 }

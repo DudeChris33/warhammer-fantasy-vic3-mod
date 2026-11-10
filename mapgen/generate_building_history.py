@@ -135,6 +135,22 @@ def run_fixture_check(fixture: Path) -> None:
     assert [(x.building, x.levels, x.why) for x in eps.placed] == [("building_wheat_farm", 1, "small-state minimum")], eps.placed
     assert not zeta.placed and any(b == "small-state minimum" for b, _ in zeta.dropped), (zeta.placed, zeta.dropped)
 
+    # port coverage (#10453): a piece the profile port missed gets a level-1 port in its best host; a piece with no port
+    # site is reported; a tag without the port's tech is reported, not an error; a split state's other owner holds the hub
+    ports = {(u.key, u.tag): [(x.levels, x.why) for x in u.placed if x.building == "building_port"] for u in p.units}
+    assert ports[("STATE_THETA", "EEE")] == [(1, "profile port")], ports[("STATE_THETA", "EEE")]
+    assert ports[("STATE_IOTA", "EEE")] == [(1, "port coverage (#10453)")], "EEE's second piece must get a coverage port"
+    assert not ports[("STATE_KAPPA", "EEE")], "KAPPA has no port hub"
+    assert not ports[("STATE_LAMBDA", "EEE")], "EEE does not hold LAMBDA's hub province (BBB does)"
+    assert not any(v for (k, t), v in ports.items() if t == "BBB"), "BBB lacks navigation: no port anywhere"
+    cov = {(pc.tag, pc.states): pc.outcome for pc in p.coverage}
+    assert cov == {("EEE", ("STATE_THETA",)): "covered", ("EEE", ("STATE_IOTA",)): "placed",
+                   ("EEE", ("STATE_KAPPA",)): "landlocked", ("EEE", ("STATE_LAMBDA",)): "landlocked",
+                   ("BBB", ("STATE_ALPHA", "STATE_GAMMA")): "tech-dropped", ("BBB", ("STATE_LAMBDA",)): "tech-dropped",
+                   ("AAA", ("STATE_DELTA", "STATE_GAMMA")): "tech-dropped", ("AAA", ("STATE_EPSILON",)): "landlocked",
+                   ("AAA", ("STATE_ZETA",)): "landlocked",
+                   ("CCC", ("STATE_BETA",)): "landlocked"}, cov    # CCC: one piece, but off the largest landmass
+
     def refuses(mutate, needle: str, *needles: str) -> None:
         tmp = Path(tempfile.mkdtemp())
         try:

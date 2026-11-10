@@ -229,4 +229,196 @@ BUILDINGS = {
 			}
 		}
 	}
+	s:STATE_IOTA = {
+		region_state:EEE = {
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:EEE"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_port" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 3
+						region = "STATE_IOTA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_basic_farming" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 4
+						region = "STATE_IOTA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_logging_simple" }
+			}
+		}
+	}
+	s:STATE_KAPPA = {
+		region_state:EEE = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 3
+						region = "STATE_KAPPA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_basic_farming" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 4
+						region = "STATE_KAPPA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_logging_simple" }
+			}
+		}
+	}
+	s:STATE_LAMBDA = {
+		region_state:BBB = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:BBB"
+						levels = 2
+						region = "STATE_LAMBDA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_basic_farming" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:BBB"
+						levels = 2
+						region = "STATE_LAMBDA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_logging_simple" }
+			}
+		}
+		region_state:EEE = {
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 2
+						region = "STATE_LAMBDA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_basic_farming" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 2
+						region = "STATE_LAMBDA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_logging_simple" }
+			}
+		}
+	}
+	s:STATE_THETA = {
+		region_state:EEE = {
+			create_building = {
+				building = "building_barrack"
+				add_ownership = {
+					country = {
+						country = "c:EEE"
+						levels = 2
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_training_basic" }
+			}
+			create_building = {
+				building = "building_port"
+				add_ownership = {
+					country = {
+						country = "c:EEE"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_port" }
+			}
+			create_building = {
+				building = "building_trade_center"
+				add_ownership = {
+					country = {
+						country = "c:EEE"
+						levels = 1
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_trade" }
+			}
+			create_building = {
+				building = "building_wheat_farm"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 3
+						region = "STATE_THETA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_basic_farming" }
+			}
+			create_building = {
+				building = "building_logging_camp"
+				add_ownership = {
+					building = {
+						type = "building_manor_house"
+						country = "c:EEE"
+						levels = 4
+						region = "STATE_THETA"
+					}
+				}
+				reserves = 1
+				activate_production_methods = { "pm_logging_simple" }
+			}
+		}
+	}
 }
