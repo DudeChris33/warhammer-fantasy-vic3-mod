@@ -1442,3 +1442,150 @@ def subdivide_ex(reg: np.ndarray, land: np.ndarray, drawn: np.ndarray, target: i
         is_impassable[out[imp]] = True
     is_impassable[0] = False
     return out, is_placeholder, reg_of, is_archipelago, is_impassable
+
+
+#: Manual-province paint at or below this many px is a stray dab, not a province.
+MANUAL_DUST_PX = 4
+
+
+def manual_province_components(rgba: np.ndarray, land: np.ndarray, wrap_x: bool = True
+                               ) -> list[np.ndarray]:
+    """One boolean mask per hand-drawn province in the ``manual_provinces`` layer.
+
+    A province is a wrap-aware 4-connected piece of one exact RGB colour (alpha > 0,
+    on land). Two touching pieces of different colours are two provinces; two
+    separate pieces of one colour are also two (a province is never non-contiguous
+    here). Pieces of at most :data:`MANUAL_DUST_PX` px are dropped. Ordered by
+    (row, column) of the first pixel so the result is deterministic.
+    """
+    hit = (rgba[..., 3] > 0) & land
+    if not hit.any():
+        return []
+    rgb = rgba[..., :3].astype(np.int64)
+    code = np.where(hit, ((rgb[..., 0] << 16) | (rgb[..., 1] << 8) | rgb[..., 2]) + 1, 0)
+    comp = cells.components(code.astype(np.int64), wrap_x)
+    comp[~hit] = 0
+    n = int(comp.max())
+    if n == 0:
+        return []
+    sizes = np.bincount(comp.ravel(), minlength=n + 1)
+    flat_first = np.full(n + 1, comp.size, dtype=np.int64)
+    idx = np.flatnonzero(comp.ravel())
+    np.minimum.at(flat_first, comp.ravel()[idx], idx)
+    out = []
+    for c in sorted(range(1, n + 1), key=lambda k: int(flat_first[k])):
+        if sizes[c] > MANUAL_DUST_PX:
+            out.append(comp == c)
+    return out
+
+
+def apply_manual_provinces(land_lab: np.ndarray, reg_of: np.ndarray, is_placeholder: np.ndarray,
+                           is_archipelago: np.ndarray, is_impassable: np.ndarray,
+                           reg: np.ndarray, masks: list[np.ndarray], wrap_x: bool = True,
+                           min_area: int = 120, log=None):
+    """Carve the hand-drawn ``masks`` into ``land_lab`` as provinces exactly as drawn.
+
+    Chris's ``manual_provinces`` layer (2026-11-11): provinces he draws by hand and
+    wants kept (today, the strip that carries the northern-Lustria canal). Run after
+    :func:`subdivide_ex`; each mask becomes one new province (labels ``N+1..``), its
+    state region the one holding most of its pixels (``reg_of``). A province the strip
+    cuts through is repaired: its largest remaining piece keeps the label, a smaller
+    piece of at least ``min_area`` px becomes a new province of the same region, and a
+    sliver below that joins the neighbour it shares most border with (same region
+    preferred). Nothing is carved out of an island-override archipelago, a placeholder
+    region or impassable land - those are hard :class:`cells.CellError`.
+
+    Returns ``(land_lab, reg_of, is_placeholder, is_archipelago, is_impassable)``.
+    """
+    if not masks:
+        return land_lab, reg_of, is_placeholder, is_archipelago, is_impassable
+    lab = land_lab.copy()
+    n0 = int(lab.max())
+    rof = list(reg_of.tolist())
+    ph = list(is_placeholder.tolist())
+    arch = list(is_archipelago.tolist())
+    imp = list(is_impassable.tolist())
+    problems: list[str] = []
+    touched: set[int] = set()
+    new_labels: list[int] = []
+    for m in masks:
+        ys, xs = np.nonzero(m)
+        where = f"{len(xs):,} px around ({int(xs.mean())}, {int(ys.mean())})"
+        old = np.unique(lab[m])
+        old = [int(o) for o in old if o > 0]
+        bad = [o for o in old if o > n0 or arch[o] or ph[o] or imp[o]]
+        if bad:
+            why = []
+            if any(arch[o] for o in bad if o <= n0):
+                why.append("an island-override archipelago")
+            if any(ph[o] for o in bad if o <= n0):
+                why.append("an out-of-scope placeholder")
+            if any(imp[o] for o in bad if o <= n0):
+                why.append("impassable land")
+            if any(o > n0 for o in bad):
+                why.append("another manual province")
+            problems.append(f"manual province ({where}) overlaps {', '.join(why)}")
+            continue
+        regs, cnt = np.unique(reg[m], return_counts=True)
+        rid = int(regs[int(np.argmax(cnt))])
+        if len(regs) > 1 and log:
+            log(f"  WARNING: manual province ({where}) straddles {len(regs)} state regions; "
+                f"takes region {rid} ({int(cnt.max()):,} of {int(m.sum()):,} px)")
+        new = len(rof)
+        rof.append(rid)
+        ph.append(False)
+        arch.append(False)
+        imp.append(False)
+        lab[m] = new
+        new_labels.append(new)
+        touched.update(old)
+    if problems:
+        raise cells.CellError("manual_provinces layer:\n  " + "\n  ".join(problems))
+
+    nsplit = nmerged = 0
+    for o in sorted(touched):
+        m = lab == o
+        if not m.any():
+            continue
+        comp = cells.components(m.astype(np.int32), wrap_x)
+        comp[~m] = 0
+        k = int(comp.max())
+        if k <= 1:
+            continue
+        sizes = np.bincount(comp.ravel(), minlength=k + 1)
+        sizes[0] = 0
+        keep = int(np.argmax(sizes))
+        for c in range(1, k + 1):
+            if c == keep:
+                continue
+            piece = comp == c
+            if int(sizes[c]) >= min_area:
+                new = len(rof)
+                rof.append(rof[o]); ph.append(False); arch.append(False); imp.append(False)
+                lab[piece] = new
+                nsplit += 1
+                continue
+            ring = ndimage.binary_dilation(piece, structure=ndimage.generate_binary_structure(2, 1)) & ~piece
+            nb = lab[ring]
+            nb = nb[nb > 0]
+            if nb.size == 0:
+                new = len(rof)
+                rof.append(rof[o]); ph.append(False); arch.append(False); imp.append(False)
+                lab[piece] = new
+                continue
+            labs, cn = np.unique(nb, return_counts=True)
+            same = [(int(c2), int(l)) for l, c2 in zip(labs, cn) if rof[int(l)] == rof[o] and int(l) != o]
+            pick = max(same, key=lambda t: (t[0], -t[1]))[1] if same else int(labs[int(np.argmax(cn))])
+            lab[piece] = pick
+            nmerged += 1
+    # Renumber to 1..N (a label can have emptied) keeping the table rows in step.
+    used = np.unique(lab[lab > 0])
+    remap = np.zeros(len(rof), dtype=np.int64)
+    remap[used] = np.arange(1, len(used) + 1)
+    lab = remap[lab].astype(land_lab.dtype)
+    keep_rows = np.concatenate([[0], used])
+    mk = lambda a, dt: np.asarray(a, dtype=dt)[keep_rows]  # noqa: E731
+    if log:
+        log(f"  manual provinces: {len(masks)} carved, {nsplit} torn piece(s) kept as provinces, "
+            f"{nmerged} sliver(s) merged; {n0} -> {int(lab.max())} land provinces")
+    return (lab, mk(rof, reg_of.dtype), mk(ph, bool), mk(arch, bool), mk(imp, bool))

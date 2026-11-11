@@ -1317,6 +1317,52 @@ def _selfcheck_land_provinces() -> None:
     assert np.array_equal(is_archipelago, ia2), "archipelago flags must be byte-identical too"
 
 
+def _selfcheck_manual_provinces() -> None:
+    """Hand-drawn provinces (worldgen.land_provinces, Chris 2026-11-11), in isolation.
+
+    A diagonal two-colour strip across one province: each colour is exactly one new
+    province with exactly its drawn pixels; the province it cuts in two keeps its
+    larger half under the old label and its smaller half (>= min_area) becomes its own
+    province of the same region; the result tiles the land, every province is
+    connected, and nothing is carved when the layer is empty. Paint over an
+    archipelago or a placeholder is a hard error.
+    """
+    from worldgen import cells, land_provinces as lp
+
+    H, W = 20, 30
+    land = np.ones((H, W), dtype=bool)
+    reg = np.ones((H, W), dtype=np.int32)
+    lab = np.ones((H, W), dtype=np.int32)
+    lab[:, 15:] = 2
+    reg_of = np.array([0, 1, 1])
+    flags = lambda *v: np.array(v, dtype=bool)  # noqa: E731
+    rgba = np.zeros((H, W, 4), dtype=np.uint8)
+    rgba[:, 5:8] = (255, 0, 0, 255)      # red band, full height
+    rgba[:, 8:10] = (0, 0, 255, 255)     # blue band, full height
+    masks = lp.manual_province_components(rgba, land, wrap_x=False)
+    assert len(masks) == 2 and int(masks[0].sum()) == 60 and int(masks[1].sum()) == 40,         "each colour is one manual province with exactly its drawn pixels"
+    assert not lp.manual_province_components(np.zeros((H, W, 4), np.uint8), land, False),         "an empty layer carves nothing"
+    out = lp.apply_manual_provinces(lab, reg_of, flags(0, 0, 0), flags(0, 0, 0), flags(0, 0, 0),
+                                    reg, masks, wrap_x=False, min_area=20)
+    nl, nrof, nph, narch, nimp = out
+    assert int(nl.max()) == 5 and (nl > 0).all(), "tiles the land: 2 old + 2 manual + 1 torn half"
+    for m in masks:
+        assert len(np.unique(nl[m])) == 1, "a manual province is one label"
+    assert (nl[:, 5:10] > 0).all() and len({int(v) for v in np.unique(nl[:, 5:10])}) == 2
+    comp = cells.components(nl, wrap_x=False)
+    pairs = {(int(a), int(b)) for a, b in zip(nl.ravel(), comp.ravel())}
+    assert len(pairs) == len(np.unique(nl)), "every province is connected"
+    assert (nrof[1:] == 1).all() and not nph.any() and not narch.any() and not nimp.any()
+    arch = flags(0, 1, 0)
+    try:
+        lp.apply_manual_provinces(lab, reg_of, flags(0, 0, 0), arch, flags(0, 0, 0),
+                                  reg, masks, wrap_x=False, min_area=20)
+    except cells.CellError:
+        pass
+    else:
+        raise AssertionError("paint over an archipelago must be a hard error")
+
+
 def _selfcheck_province_merges() -> None:
     """Tiny-island override merge (worldgen.land_provinces), in isolation.
 
@@ -6943,6 +6989,7 @@ def run_check() -> int:
     print("land_provinces: drawn-region cut (barrier-respecting subdivision, placeholder whole) "
           "self-check passed.")
     _selfcheck_province_merges()
+    _selfcheck_manual_provinces()
     print("land_provinces: tiny-island override merge (line -> zone -> forced single "
           "province) self-check passed.")
     _selfcheck_merge_fused()

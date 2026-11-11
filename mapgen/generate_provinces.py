@@ -104,6 +104,10 @@ CITIES_SOURCE = sources.source_ref("cities")
 #: Chris's `state_merges` layer: a (63,191,0) line from a too-small state to the
 #: neighbour it joins. Applied after the province cut (see main).
 STATE_MERGES_SOURCE = sources.source_ref("state_merges")
+#: Chris's `manual_provinces` layer (2026-11-11): provinces drawn by hand and kept
+#: exactly as drawn, one per connected piece of one exact colour. Carved into the cut
+#: after it runs (see main). Absent or empty -> byte-identical to a run without it.
+MANUAL_PROVINCES_SOURCE = sources.source_ref("manual_provinces")
 CANON_CITY_PROVINCES_INDEX_PATH = DERIVED_DIR / "canon_city_provinces_index.json"
 #: Two hub anchors of the SAME state closer than this (Euclidean px) are a hard
 #: error at generate time — defence-in-depth so a seeded piece can't collapse below
@@ -500,6 +504,23 @@ def main(argv: list[str] | None = None) -> int:
     except cells.CellError as e:
         raise SystemExit(f"impassable/cut error: {e}")
     n_land = int(land_lab.max())
+
+    # Hand-drawn provinces (Chris, 2026-11-11): carved in after the cut, before the state
+    # merges, so they take part in everything downstream like any other province.
+    manual_rgba = sources.read_source_rgba(MANUAL_PROVINCES_SOURCE, allow_empty=True)
+    if manual_rgba is not None and manual_rgba[..., 3].any():
+        if manual_rgba.shape[:2] != (CANVAS_H, CANVAS_W):
+            raise SystemExit(f"{MANUAL_PROVINCES_SOURCE}: expected {CANVAS_W}x{CANVAS_H}, got "
+                             f"{manual_rgba.shape[1]}x{manual_rgba.shape[0]}")
+        manual_masks = land_provinces.manual_province_components(manual_rgba, land, WRAP_X)
+        try:
+            land_lab, reg_of, is_placeholder, is_archipelago, is_impassable =                 land_provinces.apply_manual_provinces(
+                    land_lab, reg_of, is_placeholder, is_archipelago, is_impassable, reg,
+                    manual_masks, WRAP_X, args.min_area, log=lambda m: log(m, t0))
+        except cells.CellError as e:
+            raise SystemExit(f"{MANUAL_PROVINCES_SOURCE}: {e}")
+        n_land = int(land_lab.max())
+    del manual_rgba
 
     # Small-state prune. Applied to the finished cut, not to `reg` before it: the
     # provinces are then exactly what they would be without the sheet, and only

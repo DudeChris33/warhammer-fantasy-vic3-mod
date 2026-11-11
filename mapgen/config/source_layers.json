@@ -6,6 +6,7 @@
   "state_borders": "terraqueous_globe_reprojected - full.ora#borders",
   "impassable": "terraqueous_globe_reprojected - full.ora#impassable",
   "province_merges": "terraqueous_globe_reprojected - full.ora#province_merges",
+  "manual_provinces": "terraqueous_globe_reprojected - full.ora#manual_provinces",
   "state_merges": "terraqueous_globe_reprojected - full.ora#state_merges",
   "cities": "terraqueous_globe_reprojected - full.ora#cities",
   "adjacencies": "terraqueous_globe_reprojected - full.ora#adjacencies",
