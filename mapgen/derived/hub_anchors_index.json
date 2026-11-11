@@ -30751,6 +30751,5418 @@
     41
    ],
    "province_hex": "x25A329"
+  },
+  {
+   "state": "Tarantula Coast",
+   "hub": "city",
+   "name": "Spider Haven",
+   "source": "invented",
+   "anchor": [
+    2510,
+    2067
+   ],
+   "resolved": [
+    2510,
+    2067
+   ],
+   "region": 401,
+   "province_label": 6190,
+   "province_color": [
+    32,
+    140,
+    186
+   ],
+   "province_hex": "x208CBA"
+  },
+  {
+   "state": "Tarantula Coast",
+   "hub": "port",
+   "name": "Tarantula Landing",
+   "source": "invented",
+   "anchor": [
+    2460,
+    2010
+   ],
+   "resolved": [
+    2460,
+    2010
+   ],
+   "region": 401,
+   "province_label": 535,
+   "province_color": [
+    89,
+    83,
+    158
+   ],
+   "province_hex": "x59539E"
+  },
+  {
+   "state": "Tarantula Coast",
+   "hub": "farm",
+   "name": "Tarantula Maize Fields",
+   "source": "invented",
+   "anchor": [
+    2438,
+    2063
+   ],
+   "resolved": [
+    2438,
+    2063
+   ],
+   "region": 401,
+   "province_label": 6187,
+   "province_color": [
+    94,
+    22,
+    107
+   ],
+   "province_hex": "x5E166B"
+  },
+  {
+   "state": "Tarantula Coast",
+   "hub": "mine",
+   "name": "Tarantula Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2499,
+    2117
+   ],
+   "resolved": [
+    2499,
+    2117
+   ],
+   "region": 401,
+   "province_label": 6213,
+   "province_color": [
+    64,
+    115,
+    60
+   ],
+   "province_hex": "x40733C"
+  },
+  {
+   "state": "Tarantula Coast",
+   "hub": "wood",
+   "name": "Tarantula Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    2445,
+    2120
+   ],
+   "resolved": [
+    2445,
+    2120
+   ],
+   "region": 401,
+   "province_label": 6214,
+   "province_color": [
+    37,
+    5,
+    139
+   ],
+   "province_hex": "x25058B"
+  },
+  {
+   "state": "High Sentinel",
+   "hub": "city",
+   "name": "The High Sentinel",
+   "source": "WFRP4e: The High Sentinel (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2380,
+    2069
+   ],
+   "resolved": [
+    2380,
+    2069
+   ],
+   "region": 404,
+   "province_label": 6253,
+   "province_color": [
+    35,
+    234,
+    204
+   ],
+   "province_hex": "x23EACC"
+  },
+  {
+   "state": "High Sentinel",
+   "hub": "port",
+   "name": "High Sentinel Harbour",
+   "source": "invented",
+   "anchor": [
+    2262,
+    2067
+   ],
+   "resolved": [
+    2262,
+    2067
+   ],
+   "region": 404,
+   "province_label": 6252,
+   "province_color": [
+    180,
+    44,
+    220
+   ],
+   "province_hex": "xB42CDC"
+  },
+  {
+   "state": "High Sentinel",
+   "hub": "farm",
+   "name": "Sunken Temple of Itzabelo",
+   "source": "WFRP4e: Sunken Temple of Itzabelo (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2332,
+    2164
+   ],
+   "resolved": [
+    2332,
+    2164
+   ],
+   "region": 404,
+   "province_label": 6333,
+   "province_color": [
+    94,
+    68,
+    189
+   ],
+   "province_hex": "x5E44BD"
+  },
+  {
+   "state": "High Sentinel",
+   "hub": "mine",
+   "name": "High Sentinel Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2214,
+    2031
+   ],
+   "resolved": [
+    2214,
+    2031
+   ],
+   "region": 404,
+   "province_label": 6231,
+   "province_color": [
+    193,
+    216,
+    73
+   ],
+   "province_hex": "xC1D849"
+  },
+  {
+   "state": "High Sentinel",
+   "hub": "wood",
+   "name": "High Sentinel Grove",
+   "source": "invented",
+   "anchor": [
+    2194,
+    2119
+   ],
+   "resolved": [
+    2194,
+    2119
+   ],
+   "region": 404,
+   "province_label": 6300,
+   "province_color": [
+    16,
+    51,
+    129
+   ],
+   "province_hex": "x103381"
+  },
+  {
+   "state": "Scorpion Coast",
+   "hub": "city",
+   "name": "Scorpion Haven",
+   "source": "invented",
+   "anchor": [
+    2190,
+    1992
+   ],
+   "resolved": [
+    2190,
+    1992
+   ],
+   "region": 398,
+   "province_label": 5873,
+   "province_color": [
+    32,
+    15,
+    153
+   ],
+   "province_hex": "x200F99"
+  },
+  {
+   "state": "Scorpion Coast",
+   "hub": "port",
+   "name": "Scorpion Wharf",
+   "source": "invented",
+   "anchor": [
+    2050,
+    1825
+   ],
+   "resolved": [
+    2050,
+    1825
+   ],
+   "region": 398,
+   "province_label": 522,
+   "province_color": [
+    36,
+    187,
+    143
+   ],
+   "province_hex": "x24BB8F"
+  },
+  {
+   "state": "Scorpion Coast",
+   "hub": "farm",
+   "name": "Scorpion Orchards",
+   "source": "invented",
+   "anchor": [
+    2043,
+    1885
+   ],
+   "resolved": [
+    2043,
+    1885
+   ],
+   "region": 398,
+   "province_label": 5776,
+   "province_color": [
+    164,
+    159,
+    147
+   ],
+   "province_hex": "xA49F93"
+  },
+  {
+   "state": "Scorpion Coast",
+   "hub": "mine",
+   "name": "Scorpion Gold Seam",
+   "source": "invented",
+   "anchor": [
+    1981,
+    1888
+   ],
+   "resolved": [
+    1981,
+    1888
+   ],
+   "region": 398,
+   "province_label": 5777,
+   "province_color": [
+    15,
+    57,
+    63
+   ],
+   "province_hex": "x0F393F"
+  },
+  {
+   "state": "Scorpion Coast",
+   "hub": "wood",
+   "name": "Scorpion Canopy",
+   "source": "invented",
+   "anchor": [
+    2263,
+    1914
+   ],
+   "resolved": [
+    2263,
+    1914
+   ],
+   "region": 398,
+   "province_label": 5789,
+   "province_color": [
+    159,
+    44,
+    128
+   ],
+   "province_hex": "x9F2C80"
+  },
+  {
+   "state": "Forgotten Isles",
+   "hub": "city",
+   "name": "Isle Watch",
+   "source": "invented",
+   "anchor": [
+    2233,
+    2982
+   ],
+   "resolved": [
+    2233,
+    2982
+   ],
+   "region": 459,
+   "province_label": 633,
+   "province_color": [
+    169,
+    98,
+    96
+   ],
+   "province_hex": "xA96260"
+  },
+  {
+   "state": "Forgotten Isles",
+   "hub": "port",
+   "name": "Forgotten Quay",
+   "source": "invented",
+   "anchor": [
+    2244,
+    3026
+   ],
+   "resolved": [
+    2244,
+    3026
+   ],
+   "region": 459,
+   "province_label": 9589,
+   "province_color": [
+    166,
+    180,
+    148
+   ],
+   "province_hex": "xA6B494"
+  },
+  {
+   "state": "Forgotten Isles",
+   "hub": "farm",
+   "name": "Forgotten Terraces",
+   "source": "invented",
+   "anchor": [
+    2257,
+    3000
+   ],
+   "resolved": [
+    2257,
+    3000
+   ],
+   "region": 459,
+   "province_label": 9586,
+   "province_color": [
+    241,
+    103,
+    190
+   ],
+   "province_hex": "xF167BE"
+  },
+  {
+   "state": "Forgotten Isles",
+   "hub": "mine",
+   "name": "Forgotten Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2235,
+    3006
+   ],
+   "resolved": [
+    2235,
+    3006
+   ],
+   "region": 459,
+   "province_label": 9587,
+   "province_color": [
+    45,
+    214,
+    176
+   ],
+   "province_hex": "x2DD6B0"
+  },
+  {
+   "state": "Forgotten Isles",
+   "hub": "wood",
+   "name": "Forgotten Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2218,
+    2989
+   ],
+   "resolved": [
+    2218,
+    2989
+   ],
+   "region": 459,
+   "province_label": 9585,
+   "province_color": [
+    11,
+    42,
+    231
+   ],
+   "province_hex": "x0B2AE7"
+  },
+  {
+   "state": "Isles of Dusk",
+   "hub": "city",
+   "name": "Citadel of Dusk",
+   "source": "canon: Citadel of Dusk, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Citadel_of_Dusk)",
+   "anchor": [
+    3036,
+    3054
+   ],
+   "resolved": [
+    3036,
+    3054
+   ],
+   "region": 465,
+   "province_label": 9656,
+   "province_color": [
+    52,
+    165,
+    124
+   ],
+   "province_hex": "x34A57C"
+  },
+  {
+   "state": "Isles of Dusk",
+   "hub": "port",
+   "name": "Dusk Landing",
+   "source": "invented",
+   "anchor": [
+    3066,
+    3043
+   ],
+   "resolved": [
+    3066,
+    3043
+   ],
+   "region": 465,
+   "province_label": 9655,
+   "province_color": [
+    246,
+    140,
+    2
+   ],
+   "province_hex": "xF68C02"
+  },
+  {
+   "state": "Isles of Dusk",
+   "hub": "farm",
+   "name": "Dusk Maize Fields",
+   "source": "invented",
+   "anchor": [
+    3079,
+    3069
+   ],
+   "resolved": [
+    3079,
+    3069
+   ],
+   "region": 465,
+   "province_label": 9659,
+   "province_color": [
+    233,
+    242,
+    82
+   ],
+   "province_hex": "xE9F252"
+  },
+  {
+   "state": "Isles of Dusk",
+   "hub": "mine",
+   "name": "Dusk Jade Cut",
+   "source": "invented",
+   "anchor": [
+    3055,
+    3060
+   ],
+   "resolved": [
+    3055,
+    3060
+   ],
+   "region": 465,
+   "province_label": 9657,
+   "province_color": [
+    164,
+    229,
+    96
+   ],
+   "province_hex": "xA4E560"
+  },
+  {
+   "state": "Isles of Dusk",
+   "hub": "wood",
+   "name": "Dusk Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    3053,
+    3080
+   ],
+   "resolved": [
+    3053,
+    3080
+   ],
+   "region": 465,
+   "province_label": 9660,
+   "province_color": [
+    38,
+    97,
+    68
+   ],
+   "province_hex": "x266144"
+  },
+  {
+   "state": "Volcanic Islands",
+   "hub": "city",
+   "name": "City of the Dead",
+   "source": "WFRP4e: City of the Dead (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2823,
+    2386
+   ],
+   "resolved": [
+    2823,
+    2386
+   ],
+   "region": 430,
+   "province_label": 7760,
+   "province_color": [
+    217,
+    9,
+    80
+   ],
+   "province_hex": "xD90950"
+  },
+  {
+   "state": "Volcanic Islands",
+   "hub": "port",
+   "name": "Santa Magritta",
+   "source": "canon: Santa Magritta, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Santa_Magritta) (Estalian colony on Columbo's Island, eastern seaboard; sited at the Volcanic Islands port by the #10455 plan)",
+   "anchor": [
+    2748,
+    2360
+   ],
+   "resolved": [
+    2748,
+    2360
+   ],
+   "region": 430,
+   "province_label": 7753,
+   "province_color": [
+    47,
+    184,
+    140
+   ],
+   "province_hex": "x2FB88C"
+  },
+  {
+   "state": "Volcanic Islands",
+   "hub": "farm",
+   "name": "Fuming Serpent",
+   "source": "WFRP4e: Fuming Serpent (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2731,
+    2421
+   ],
+   "resolved": [
+    2731,
+    2421
+   ],
+   "region": 430,
+   "province_label": 7771,
+   "province_color": [
+    7,
+    52,
+    10
+   ],
+   "province_hex": "x07340A"
+  },
+  {
+   "state": "Volcanic Islands",
+   "hub": "mine",
+   "name": "Spitting Serpent",
+   "source": "WFRP4e: Spitting Serpent (Lustria endpaper map, C7; lustria_2.jpg) (anchor moved off its dot into the state's main region: state_merges drops hub rows of absorbed members)",
+   "anchor": [
+    2789,
+    2437
+   ],
+   "resolved": [
+    2789,
+    2437
+   ],
+   "region": 430,
+   "province_label": 7776,
+   "province_color": [
+    234,
+    74,
+    35
+   ],
+   "province_hex": "xEA4A23"
+  },
+  {
+   "state": "Volcanic Islands",
+   "hub": "wood",
+   "name": "Volcano Canopy",
+   "source": "invented",
+   "anchor": [
+    2777,
+    2394
+   ],
+   "resolved": [
+    2777,
+    2394
+   ],
+   "region": 430,
+   "province_label": 7761,
+   "province_color": [
+    132,
+    254,
+    222
+   ],
+   "province_hex": "x84FEDE"
+  },
+  {
+   "state": "Turtle Isles",
+   "hub": "city",
+   "name": "Turtle Hold",
+   "source": "invented",
+   "anchor": [
+    1756,
+    2626
+   ],
+   "resolved": [
+    1756,
+    2626
+   ],
+   "region": 438,
+   "province_label": 8463,
+   "province_color": [
+    131,
+    112,
+    0
+   ],
+   "province_hex": "x837000"
+  },
+  {
+   "state": "Turtle Isles",
+   "hub": "port",
+   "name": "Turtle Quay",
+   "source": "invented",
+   "anchor": [
+    1750,
+    2532
+   ],
+   "resolved": [
+    1750,
+    2532
+   ],
+   "region": 438,
+   "province_label": 599,
+   "province_color": [
+    147,
+    238,
+    137
+   ],
+   "province_hex": "x93EE89"
+  },
+  {
+   "state": "Turtle Isles",
+   "hub": "farm",
+   "name": "Turtle Terraces",
+   "source": "invented",
+   "anchor": [
+    1841,
+    2659
+   ],
+   "resolved": [
+    1841,
+    2659
+   ],
+   "region": 438,
+   "province_label": 8474,
+   "province_color": [
+    125,
+    252,
+    237
+   ],
+   "province_hex": "x7DFCED"
+  },
+  {
+   "state": "Turtle Isles",
+   "hub": "mine",
+   "name": "Turtle Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    1697,
+    2561
+   ],
+   "resolved": [
+    1697,
+    2561
+   ],
+   "region": 438,
+   "province_label": 8449,
+   "province_color": [
+    62,
+    47,
+    233
+   ],
+   "province_hex": "x3E2FE9"
+  },
+  {
+   "state": "Turtle Isles",
+   "hub": "wood",
+   "name": "Turtle Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    1787,
+    2673
+   ],
+   "resolved": [
+    1787,
+    2673
+   ],
+   "region": 438,
+   "province_label": 8476,
+   "province_color": [
+    65,
+    141,
+    251
+   ],
+   "province_hex": "x418DFB"
+  },
+  {
+   "state": "Mud Isles",
+   "hub": "city",
+   "name": "Mudhaven",
+   "source": "invented",
+   "anchor": [
+    1862,
+    2682
+   ],
+   "resolved": [
+    1862,
+    2682
+   ],
+   "region": 447,
+   "province_label": 612,
+   "province_color": [
+    248,
+    105,
+    175
+   ],
+   "province_hex": "xF869AF"
+  },
+  {
+   "state": "Mud Isles",
+   "hub": "port",
+   "name": "Mud Harbour",
+   "source": "invented",
+   "anchor": [
+    1854,
+    2716
+   ],
+   "resolved": [
+    1854,
+    2716
+   ],
+   "region": 447,
+   "province_label": 8979,
+   "province_color": [
+    157,
+    227,
+    111
+   ],
+   "province_hex": "x9DE36F"
+  },
+  {
+   "state": "Mud Isles",
+   "hub": "farm",
+   "name": "Mud Floodplots",
+   "source": "invented",
+   "anchor": [
+    1838,
+    2731
+   ],
+   "resolved": [
+    1838,
+    2731
+   ],
+   "region": 447,
+   "province_label": 8981,
+   "province_color": [
+    218,
+    82,
+    97
+   ],
+   "province_hex": "xDA5261"
+  },
+  {
+   "state": "Mud Isles",
+   "hub": "mine",
+   "name": "Mud Stone Delve",
+   "source": "invented",
+   "anchor": [
+    1820,
+    2718
+   ],
+   "resolved": [
+    1820,
+    2718
+   ],
+   "region": 447,
+   "province_label": 8980,
+   "province_color": [
+    120,
+    137,
+    218
+   ],
+   "province_hex": "x7889DA"
+  },
+  {
+   "state": "Mud Isles",
+   "hub": "wood",
+   "name": "Mud Grove",
+   "source": "invented",
+   "anchor": [
+    1852,
+    2698
+   ],
+   "resolved": [
+    1852,
+    2698
+   ],
+   "region": 447,
+   "province_label": 8976,
+   "province_color": [
+    239,
+    152,
+    138
+   ],
+   "province_hex": "xEF988A"
+  },
+  {
+   "state": "Blood Hall",
+   "hub": "city",
+   "name": "The Blood Hall",
+   "source": "WFRP4e: The Blood Hall (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    1681,
+    2395
+   ],
+   "resolved": [
+    1681,
+    2395
+   ],
+   "region": 423,
+   "province_label": 7464,
+   "province_color": [
+    3,
+    213,
+    248
+   ],
+   "province_hex": "x03D5F8"
+  },
+  {
+   "state": "Blood Hall",
+   "hub": "port",
+   "name": "Blood Hall Wharf",
+   "source": "invented",
+   "anchor": [
+    1652,
+    2273
+   ],
+   "resolved": [
+    1652,
+    2273
+   ],
+   "region": 423,
+   "province_label": 564,
+   "province_color": [
+    9,
+    73,
+    11
+   ],
+   "province_hex": "x09490B"
+  },
+  {
+   "state": "Blood Hall",
+   "hub": "farm",
+   "name": "Blood Hall Orchards",
+   "source": "invented",
+   "anchor": [
+    1630,
+    2385
+   ],
+   "resolved": [
+    1630,
+    2385
+   ],
+   "region": 423,
+   "province_label": 7462,
+   "province_color": [
+    101,
+    158,
+    127
+   ],
+   "province_hex": "x659E7F"
+  },
+  {
+   "state": "Blood Hall",
+   "hub": "mine",
+   "name": "Blood Hall Gold Seam",
+   "source": "invented",
+   "anchor": [
+    1636,
+    2461
+   ],
+   "resolved": [
+    1636,
+    2461
+   ],
+   "region": 423,
+   "province_label": 7475,
+   "province_color": [
+    12,
+    167,
+    29
+   ],
+   "province_hex": "x0CA71D"
+  },
+  {
+   "state": "Blood Hall",
+   "hub": "wood",
+   "name": "Blood Hall Canopy",
+   "source": "invented",
+   "anchor": [
+    1635,
+    2334
+   ],
+   "resolved": [
+    1635,
+    2334
+   ],
+   "region": 423,
+   "province_label": 7453,
+   "province_color": [
+    55,
+    115,
+    197
+   ],
+   "province_hex": "x3773C5"
+  },
+  {
+   "state": "Isle of the Crimson Skull",
+   "hub": "city",
+   "name": "Crimson Skull",
+   "source": "WFRP4e: Isle of the Crimson Skull (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    1725,
+    1845
+   ],
+   "resolved": [
+    1725,
+    1845
+   ],
+   "region": 397,
+   "province_label": 5756,
+   "province_color": [
+    16,
+    209,
+    31
+   ],
+   "province_hex": "x10D11F"
+  },
+  {
+   "state": "Isle of the Crimson Skull",
+   "hub": "port",
+   "name": "Crimson Skull Quay",
+   "source": "invented",
+   "anchor": [
+    1702,
+    1872
+   ],
+   "resolved": [
+    1702,
+    1872
+   ],
+   "region": 397,
+   "province_label": 5761,
+   "province_color": [
+    63,
+    190,
+    199
+   ],
+   "province_hex": "x3FBEC7"
+  },
+  {
+   "state": "Isle of the Crimson Skull",
+   "hub": "farm",
+   "name": "Crimson Skull Terraces",
+   "source": "invented",
+   "anchor": [
+    1665,
+    1857
+   ],
+   "resolved": [
+    1665,
+    1857
+   ],
+   "region": 397,
+   "province_label": 5759,
+   "province_color": [
+    143,
+    150,
+    53
+   ],
+   "province_hex": "x8F9635"
+  },
+  {
+   "state": "Isle of the Crimson Skull",
+   "hub": "mine",
+   "name": "Crimson Skull Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    1692,
+    1834
+   ],
+   "resolved": [
+    1692,
+    1834
+   ],
+   "region": 397,
+   "province_label": 5754,
+   "province_color": [
+    114,
+    153,
+    166
+   ],
+   "province_hex": "x7299A6"
+  },
+  {
+   "state": "Isle of the Crimson Skull",
+   "hub": "wood",
+   "name": "Crimson Skull Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    1735,
+    1820
+   ],
+   "resolved": [
+    1735,
+    1820
+   ],
+   "region": 397,
+   "province_label": 521,
+   "province_color": [
+    93,
+    65,
+    121
+   ],
+   "province_hex": "x5D4179"
+  },
+  {
+   "state": "Floating Pyramid",
+   "hub": "city",
+   "name": "The Floating Pyramid",
+   "source": "WFRP4e: Floating Pyramid (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    1798,
+    2014
+   ],
+   "resolved": [
+    1798,
+    2014
+   ],
+   "region": 400,
+   "province_label": 5997,
+   "province_color": [
+    4,
+    208,
+    58
+   ],
+   "province_hex": "x04D03A"
+  },
+  {
+   "state": "Floating Pyramid",
+   "hub": "port",
+   "name": "Pyramid Harbour",
+   "source": "invented",
+   "anchor": [
+    1730,
+    1893
+   ],
+   "resolved": [
+    1730,
+    1893
+   ],
+   "region": 400,
+   "province_label": 526,
+   "province_color": [
+    120,
+    63,
+    222
+   ],
+   "province_hex": "x783FDE"
+  },
+  {
+   "state": "Floating Pyramid",
+   "hub": "farm",
+   "name": "Pyramid Floodplots",
+   "source": "invented",
+   "anchor": [
+    1867,
+    1994
+   ],
+   "resolved": [
+    1867,
+    1994
+   ],
+   "region": 400,
+   "province_label": 5990,
+   "province_color": [
+    200,
+    97,
+    72
+   ],
+   "province_hex": "xC86148"
+  },
+  {
+   "state": "Floating Pyramid",
+   "hub": "mine",
+   "name": "Pyramid Stone Delve",
+   "source": "invented",
+   "anchor": [
+    1765,
+    2076
+   ],
+   "resolved": [
+    1765,
+    2076
+   ],
+   "region": 400,
+   "province_label": 6015,
+   "province_color": [
+    134,
+    127,
+    67
+   ],
+   "province_hex": "x867F43"
+  },
+  {
+   "state": "Floating Pyramid",
+   "hub": "wood",
+   "name": "Pyramid Grove",
+   "source": "invented",
+   "anchor": [
+    1727,
+    1960
+   ],
+   "resolved": [
+    1727,
+    1960
+   ],
+   "region": 400,
+   "province_label": 5978,
+   "province_color": [
+    56,
+    110,
+    7
+   ],
+   "province_hex": "x386E07"
+  },
+  {
+   "state": "Obsidian Face",
+   "hub": "city",
+   "name": "The Obsidian Face",
+   "source": "WFRP4e: The Obsidian Face (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    1872,
+    1848
+   ],
+   "resolved": [
+    1872,
+    1848
+   ],
+   "region": 395,
+   "province_label": 5699,
+   "province_color": [
+    54,
+    167,
+    213
+   ],
+   "province_hex": "x36A7D5"
+  },
+  {
+   "state": "Obsidian Face",
+   "hub": "port",
+   "name": "Obsidian Wharf",
+   "source": "invented",
+   "anchor": [
+    2001,
+    1835
+   ],
+   "resolved": [
+    2001,
+    1835
+   ],
+   "region": 395,
+   "province_label": 5695,
+   "province_color": [
+    212,
+    223,
+    78
+   ],
+   "province_hex": "xD4DF4E"
+  },
+  {
+   "state": "Obsidian Face",
+   "hub": "farm",
+   "name": "Obsidian Orchards",
+   "source": "invented",
+   "anchor": [
+    1884,
+    1924
+   ],
+   "resolved": [
+    1884,
+    1924
+   ],
+   "region": 395,
+   "province_label": 5730,
+   "province_color": [
+    34,
+    240,
+    138
+   ],
+   "province_hex": "x22F08A"
+  },
+  {
+   "state": "Obsidian Face",
+   "hub": "mine",
+   "name": "Obsidian Gold Seam",
+   "source": "invented",
+   "anchor": [
+    1952,
+    1796
+   ],
+   "resolved": [
+    1952,
+    1796
+   ],
+   "region": 395,
+   "province_label": 5676,
+   "province_color": [
+    24,
+    205,
+    82
+   ],
+   "province_hex": "x18CD52"
+  },
+  {
+   "state": "Obsidian Face",
+   "hub": "wood",
+   "name": "Obsidian Canopy",
+   "source": "invented",
+   "anchor": [
+    1890,
+    1789
+   ],
+   "resolved": [
+    1890,
+    1789
+   ],
+   "region": 395,
+   "province_label": 519,
+   "province_color": [
+    74,
+    21,
+    36
+   ],
+   "province_hex": "x4A1524"
+  },
+  {
+   "state": "Cactus Coast",
+   "hub": "city",
+   "name": "Nuevo Luccini",
+   "source": "canon: Nuevo Luccini, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Nuevo_Luccini)",
+   "anchor": [
+    1837,
+    1922
+   ],
+   "resolved": [
+    1837,
+    1922
+   ],
+   "region": 399,
+   "province_label": 5939,
+   "province_color": [
+    76,
+    37,
+    82
+   ],
+   "province_hex": "x4C2552"
+  },
+  {
+   "state": "Cactus Coast",
+   "hub": "port",
+   "name": "Cactus Quay",
+   "source": "invented",
+   "anchor": [
+    1765,
+    1905
+   ],
+   "resolved": [
+    1765,
+    1905
+   ],
+   "region": 399,
+   "province_label": 5936,
+   "province_color": [
+    187,
+    88,
+    76
+   ],
+   "province_hex": "xBB584C"
+  },
+  {
+   "state": "Cactus Coast",
+   "hub": "farm",
+   "name": "Cactus Terraces",
+   "source": "invented",
+   "anchor": [
+    1904,
+    1972
+   ],
+   "resolved": [
+    1904,
+    1972
+   ],
+   "region": 399,
+   "province_label": 5958,
+   "province_color": [
+    243,
+    45,
+    240
+   ],
+   "province_hex": "xF32DF0"
+  },
+  {
+   "state": "Cactus Coast",
+   "hub": "mine",
+   "name": "Cactus Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    1783,
+    1952
+   ],
+   "resolved": [
+    1783,
+    1952
+   ],
+   "region": 399,
+   "province_label": 5952,
+   "province_color": [
+    61,
+    225,
+    26
+   ],
+   "province_hex": "x3DE11A"
+  },
+  {
+   "state": "Cactus Coast",
+   "hub": "wood",
+   "name": "Cactus Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    1843,
+    1986
+   ],
+   "resolved": [
+    1843,
+    1986
+   ],
+   "region": 399,
+   "province_label": 5962,
+   "province_color": [
+    205,
+    212,
+    91
+   ],
+   "province_hex": "xCDD45B"
+  },
+  {
+   "state": "Creeping Jungle",
+   "hub": "city",
+   "name": "Creeper's Gate",
+   "source": "invented",
+   "anchor": [
+    1951,
+    2021
+   ],
+   "resolved": [
+    1951,
+    2021
+   ],
+   "region": 402,
+   "province_label": 6039,
+   "province_color": [
+    212,
+    149,
+    82
+   ],
+   "province_hex": "xD49552"
+  },
+  {
+   "state": "Creeping Jungle",
+   "hub": "farm",
+   "name": "Creeping Maize Fields",
+   "source": "invented",
+   "anchor": [
+    1923,
+    2068
+   ],
+   "resolved": [
+    1923,
+    2068
+   ],
+   "region": 402,
+   "province_label": 6045,
+   "province_color": [
+    115,
+    101,
+    150
+   ],
+   "province_hex": "x736596"
+  },
+  {
+   "state": "Creeping Jungle",
+   "hub": "mine",
+   "name": "Creeping Jade Cut",
+   "source": "invented",
+   "anchor": [
+    1977,
+    2032
+   ],
+   "resolved": [
+    1977,
+    2032
+   ],
+   "region": 402,
+   "province_label": 6041,
+   "province_color": [
+    36,
+    182,
+    188
+   ],
+   "province_hex": "x24B6BC"
+  },
+  {
+   "state": "Creeping Jungle",
+   "hub": "wood",
+   "name": "Creeping Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    1926,
+    2044
+   ],
+   "resolved": [
+    1926,
+    2044
+   ],
+   "region": 402,
+   "province_label": 6042,
+   "province_color": [
+    97,
+    37,
+    174
+   ],
+   "province_hex": "x6125AE"
+  },
+  {
+   "state": "Pahuax",
+   "hub": "city",
+   "name": "Pahuax",
+   "source": "canon: Pahuax, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Pahuax)",
+   "anchor": [
+    1882,
+    1736
+   ],
+   "resolved": [
+    1882,
+    1736
+   ],
+   "region": 393,
+   "province_label": 517,
+   "province_color": [
+    163,
+    12,
+    134
+   ],
+   "province_hex": "xA30C86"
+  },
+  {
+   "state": "Pahuax",
+   "hub": "port",
+   "name": "Pahuax Harbour",
+   "source": "invented",
+   "anchor": [
+    1843,
+    1784
+   ],
+   "resolved": [
+    1843,
+    1784
+   ],
+   "region": 393,
+   "province_label": 5653,
+   "province_color": [
+    198,
+    233,
+    229
+   ],
+   "province_hex": "xC6E9E5"
+  },
+  {
+   "state": "Pahuax",
+   "hub": "farm",
+   "name": "Pahuax Floodplots",
+   "source": "invented",
+   "anchor": [
+    1886,
+    1760
+   ],
+   "resolved": [
+    1886,
+    1760
+   ],
+   "region": 393,
+   "province_label": 5648,
+   "province_color": [
+    78,
+    12,
+    1
+   ],
+   "province_hex": "x4E0C01"
+  },
+  {
+   "state": "Pahuax",
+   "hub": "mine",
+   "name": "Pahuax Stone Delve",
+   "source": "invented",
+   "anchor": [
+    1862,
+    1757
+   ],
+   "resolved": [
+    1862,
+    1757
+   ],
+   "region": 393,
+   "province_label": 5647,
+   "province_color": [
+    236,
+    67,
+    122
+   ],
+   "province_hex": "xEC437A"
+  },
+  {
+   "state": "Pahuax",
+   "hub": "wood",
+   "name": "Pahuax Grove",
+   "source": "invented",
+   "anchor": [
+    1867,
+    1782
+   ],
+   "resolved": [
+    1867,
+    1782
+   ],
+   "region": 393,
+   "province_label": 5651,
+   "province_color": [
+    138,
+    122,
+    243
+   ],
+   "province_hex": "x8A7AF3"
+  },
+  {
+   "state": "Amazonia",
+   "hub": "city",
+   "name": "Zarmuda",
+   "source": "canon: Zarmuda, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/ (placement by region only: Zarmuda lies north-centre on the endpaper; state 690 holds the north-central dot))",
+   "anchor": [
+    2121,
+    2135
+   ],
+   "resolved": [
+    2121,
+    2135
+   ],
+   "region": 403,
+   "province_label": 6128,
+   "province_color": [
+    141,
+    59,
+    103
+   ],
+   "province_hex": "x8D3B67"
+  },
+  {
+   "state": "Amazonia",
+   "hub": "farm",
+   "name": "Amazon Floodplots",
+   "source": "invented",
+   "anchor": [
+    2028,
+    1986
+   ],
+   "resolved": [
+    2028,
+    1986
+   ],
+   "region": 403,
+   "province_label": 533,
+   "province_color": [
+    146,
+    179,
+    77
+   ],
+   "province_hex": "x92B34D"
+  },
+  {
+   "state": "Amazonia",
+   "hub": "mine",
+   "name": "Amazon Stone Delve",
+   "source": "invented",
+   "anchor": [
+    1985,
+    2067
+   ],
+   "resolved": [
+    1985,
+    2067
+   ],
+   "region": 403,
+   "province_label": 6081,
+   "province_color": [
+    77,
+    110,
+    99
+   ],
+   "province_hex": "x4D6E63"
+  },
+  {
+   "state": "Amazonia",
+   "hub": "wood",
+   "name": "Amazon Grove",
+   "source": "invented",
+   "anchor": [
+    2202,
+    2177
+   ],
+   "resolved": [
+    2202,
+    2177
+   ],
+   "region": 403,
+   "province_label": 6155,
+   "province_color": [
+    188,
+    128,
+    224
+   ],
+   "province_hex": "xBC80E0"
+  },
+  {
+   "state": "Xahutec",
+   "hub": "city",
+   "name": "Xahutec",
+   "source": "canon: Xahutec, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Xahutec)",
+   "anchor": [
+    2245,
+    2258
+   ],
+   "resolved": [
+    2245,
+    2258
+   ],
+   "region": 416,
+   "province_label": 6997,
+   "province_color": [
+    2,
+    233,
+    139
+   ],
+   "province_hex": "x02E98B"
+  },
+  {
+   "state": "Xahutec",
+   "hub": "farm",
+   "name": "Well of Time",
+   "source": "WFRP4e: Well of Time (Lustria endpaper map, C7; lustria_2.jpg) (anchor moved off its dot into the state's main region: state_merges drops hub rows of absorbed members)",
+   "anchor": [
+    2292,
+    2214
+   ],
+   "resolved": [
+    2292,
+    2214
+   ],
+   "region": 416,
+   "province_label": 6956,
+   "province_color": [
+    136,
+    4,
+    123
+   ],
+   "province_hex": "x88047B"
+  },
+  {
+   "state": "Xahutec",
+   "hub": "mine",
+   "name": "Ruins of Huanabic",
+   "source": "WFRP4e: The Ruins of Huanabic (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2395,
+    2212
+   ],
+   "resolved": [
+    2395,
+    2212
+   ],
+   "region": 416,
+   "province_label": 6955,
+   "province_color": [
+    218,
+    49,
+    228
+   ],
+   "province_hex": "xDA31E4"
+  },
+  {
+   "state": "Xahutec",
+   "hub": "wood",
+   "name": "The Great Jungle",
+   "source": "WFRP4e: The Great Jungle (Lustria endpaper map, C7; lustria_2.jpg) (anchor moved off its dot into the state's main region: state_merges drops hub rows of absorbed members)",
+   "anchor": [
+    2162,
+    2226
+   ],
+   "resolved": [
+    2162,
+    2226
+   ],
+   "region": 416,
+   "province_label": 6970,
+   "province_color": [
+    31,
+    113,
+    251
+   ],
+   "province_hex": "x1F71FB"
+  },
+  {
+   "state": "Itzahotec",
+   "hub": "city",
+   "name": "Ruins of Itzahotec",
+   "source": "WFRP4e: Ruins of Itzahotec (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2490,
+    2181
+   ],
+   "resolved": [
+    2490,
+    2181
+   ],
+   "region": 413,
+   "province_label": 6776,
+   "province_color": [
+    92,
+    172,
+    221
+   ],
+   "province_hex": "x5CACDD"
+  },
+  {
+   "state": "Itzahotec",
+   "hub": "port",
+   "name": "Itzahotec Quay",
+   "source": "invented",
+   "anchor": [
+    2564,
+    2115
+   ],
+   "resolved": [
+    2564,
+    2115
+   ],
+   "region": 413,
+   "province_label": 6741,
+   "province_color": [
+    46,
+    111,
+    123
+   ],
+   "province_hex": "x2E6F7B"
+  },
+  {
+   "state": "Itzahotec",
+   "hub": "farm",
+   "name": "Itzahotec Terraces",
+   "source": "invented",
+   "anchor": [
+    2414,
+    2230
+   ],
+   "resolved": [
+    2414,
+    2230
+   ],
+   "region": 413,
+   "province_label": 6801,
+   "province_color": [
+    185,
+    2,
+    81
+   ],
+   "province_hex": "xB90251"
+  },
+  {
+   "state": "Itzahotec",
+   "hub": "mine",
+   "name": "Itzahotec Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2571,
+    2188
+   ],
+   "resolved": [
+    2571,
+    2188
+   ],
+   "region": 413,
+   "province_label": 6777,
+   "province_color": [
+    115,
+    194,
+    58
+   ],
+   "province_hex": "x73C23A"
+  },
+  {
+   "state": "Itzahotec",
+   "hub": "wood",
+   "name": "Itzahotec Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2477,
+    2246
+   ],
+   "resolved": [
+    2477,
+    2246
+   ],
+   "region": 413,
+   "province_label": 6806,
+   "province_color": [
+    245,
+    113,
+    67
+   ],
+   "province_hex": "xF57143"
+  },
+  {
+   "state": "Blood Swamps",
+   "hub": "city",
+   "name": "Bloodwater Haven",
+   "source": "invented",
+   "anchor": [
+    2520,
+    2470
+   ],
+   "resolved": [
+    2520,
+    2470
+   ],
+   "region": 432,
+   "province_label": 7989,
+   "province_color": [
+    168,
+    215,
+    106
+   ],
+   "province_hex": "xA8D76A"
+  },
+  {
+   "state": "Blood Swamps",
+   "hub": "port",
+   "name": "Blood Swamp Harbour",
+   "source": "invented",
+   "anchor": [
+    2575,
+    2471
+   ],
+   "resolved": [
+    2575,
+    2471
+   ],
+   "region": 432,
+   "province_label": 7991,
+   "province_color": [
+    19,
+    48,
+    28
+   ],
+   "province_hex": "x13301C"
+  },
+  {
+   "state": "Blood Swamps",
+   "hub": "farm",
+   "name": "Blood Swamp Floodplots",
+   "source": "invented",
+   "anchor": [
+    2545,
+    2400
+   ],
+   "resolved": [
+    2545,
+    2400
+   ],
+   "region": 432,
+   "province_label": 7970,
+   "province_color": [
+    1,
+    206,
+    204
+   ],
+   "province_hex": "x01CECC"
+  },
+  {
+   "state": "Blood Swamps",
+   "hub": "mine",
+   "name": "Blood Swamp Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2529,
+    2528
+   ],
+   "resolved": [
+    2529,
+    2528
+   ],
+   "region": 432,
+   "province_label": 8004,
+   "province_color": [
+    215,
+    2,
+    36
+   ],
+   "province_hex": "xD70224"
+  },
+  {
+   "state": "Blood Swamps",
+   "hub": "wood",
+   "name": "Blood Swamp Grove",
+   "source": "invented",
+   "anchor": [
+    2470,
+    2454
+   ],
+   "resolved": [
+    2470,
+    2454
+   ],
+   "region": 432,
+   "province_label": 7984,
+   "province_color": [
+    255,
+    74,
+    127
+   ],
+   "province_hex": "xFF4A7F"
+  },
+  {
+   "state": "Xlanhuapec",
+   "hub": "city",
+   "name": "Xlanhuapec",
+   "source": "canon: Xlanhuapec, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Xlanhuapec)",
+   "anchor": [
+    2369,
+    2481
+   ],
+   "resolved": [
+    2369,
+    2481
+   ],
+   "region": 424,
+   "province_label": 7551,
+   "province_color": [
+    246,
+    107,
+    133
+   ],
+   "province_hex": "xF66B85"
+  },
+  {
+   "state": "Xlanhuapec",
+   "hub": "farm",
+   "name": "Xlanhuapec Orchards",
+   "source": "invented",
+   "anchor": [
+    2519,
+    2298
+   ],
+   "resolved": [
+    2519,
+    2298
+   ],
+   "region": 424,
+   "province_label": 568,
+   "province_color": [
+    209,
+    208,
+    11
+   ],
+   "province_hex": "xD1D00B"
+  },
+  {
+   "state": "Xlanhuapec",
+   "hub": "mine",
+   "name": "Xlanhuapec Gold Seam",
+   "source": "invented",
+   "anchor": [
+    2446,
+    2351
+   ],
+   "resolved": [
+    2446,
+    2351
+   ],
+   "region": 424,
+   "province_label": 7490,
+   "province_color": [
+    196,
+    226,
+    185
+   ],
+   "province_hex": "xC4E2B9"
+  },
+  {
+   "state": "Xlanhuapec",
+   "hub": "wood",
+   "name": "Xlanhuapec Canopy",
+   "source": "invented",
+   "anchor": [
+    2494,
+    2422
+   ],
+   "resolved": [
+    2494,
+    2422
+   ],
+   "region": 424,
+   "province_label": 7519,
+   "province_color": [
+    93,
+    167,
+    31
+   ],
+   "province_hex": "x5DA71F"
+  },
+  {
+   "state": "Itza",
+   "hub": "city",
+   "name": "Itza",
+   "source": "WFRP4e: Itza (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2224,
+    2520
+   ],
+   "resolved": [
+    2224,
+    2520
+   ],
+   "region": 431,
+   "province_label": 7871,
+   "province_color": [
+    185,
+    48,
+    163
+   ],
+   "province_hex": "xB930A3"
+  },
+  {
+   "state": "Itza",
+   "hub": "farm",
+   "name": "Chaqua",
+   "source": "canon: Chaqua, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Chaqua)",
+   "anchor": [
+    2149,
+    2376
+   ],
+   "resolved": [
+    2149,
+    2376
+   ],
+   "region": 431,
+   "province_label": 581,
+   "province_color": [
+    172,
+    118,
+    118
+   ],
+   "province_hex": "xAC7676"
+  },
+  {
+   "state": "Itza",
+   "hub": "mine",
+   "name": "Quetza",
+   "source": "canon: Quetza, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Quetza)",
+   "anchor": [
+    2232,
+    2415
+   ],
+   "resolved": [
+    2232,
+    2415
+   ],
+   "region": 431,
+   "province_label": 7788,
+   "province_color": [
+    122,
+    61,
+    100
+   ],
+   "province_hex": "x7A3D64"
+  },
+  {
+   "state": "Itza",
+   "hub": "wood",
+   "name": "Emerald Pools",
+   "source": "WFRP4e: Emerald Pools (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2071,
+    2439
+   ],
+   "resolved": [
+    2071,
+    2439
+   ],
+   "region": 431,
+   "province_label": 7807,
+   "province_color": [
+    75,
+    56,
+    229
+   ],
+   "province_hex": "x4B38E5"
+  },
+  {
+   "state": "Gwakmol Crater",
+   "hub": "city",
+   "name": "Gwakmol Crater",
+   "source": "WFRP4e: Gwakmol Crater (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    1976,
+    2555
+   ],
+   "resolved": [
+    1976,
+    2555
+   ],
+   "region": 434,
+   "province_label": 8147,
+   "province_color": [
+    164,
+    173,
+    104
+   ],
+   "province_hex": "xA4AD68"
+  },
+  {
+   "state": "Gwakmol Crater",
+   "hub": "farm",
+   "name": "Gwakmol Floodplots",
+   "source": "invented",
+   "anchor": [
+    1996,
+    2446
+   ],
+   "resolved": [
+    1996,
+    2446
+   ],
+   "region": 434,
+   "province_label": 588,
+   "province_color": [
+    185,
+    25,
+    204
+   ],
+   "province_hex": "xB919CC"
+  },
+  {
+   "state": "Gwakmol Crater",
+   "hub": "mine",
+   "name": "Gwakmol Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2135,
+    2539
+   ],
+   "resolved": [
+    2135,
+    2539
+   ],
+   "region": 434,
+   "province_label": 8141,
+   "province_color": [
+    202,
+    6,
+    253
+   ],
+   "province_hex": "xCA06FD"
+  },
+  {
+   "state": "Gwakmol Crater",
+   "hub": "wood",
+   "name": "Gwakmol Grove",
+   "source": "invented",
+   "anchor": [
+    2088,
+    2597
+   ],
+   "resolved": [
+    2088,
+    2597
+   ],
+   "region": 434,
+   "province_label": 8158,
+   "province_color": [
+    89,
+    250,
+    62
+   ],
+   "province_hex": "x59FA3E"
+  },
+  {
+   "state": "Tower of Lightning",
+   "hub": "city",
+   "name": "Tower of Lightning",
+   "source": "WFRP4e: Tower of Lightning (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2137,
+    2579
+   ],
+   "resolved": [
+    2137,
+    2579
+   ],
+   "region": 441,
+   "province_label": 602,
+   "province_color": [
+    127,
+    139,
+    203
+   ],
+   "province_hex": "x7F8BCB"
+  },
+  {
+   "state": "Tower of Lightning",
+   "hub": "farm",
+   "name": "Lightning Orchards",
+   "source": "invented",
+   "anchor": [
+    2098,
+    2619
+   ],
+   "resolved": [
+    2098,
+    2619
+   ],
+   "region": 441,
+   "province_label": 8542,
+   "province_color": [
+    74,
+    234,
+    22
+   ],
+   "province_hex": "x4AEA16"
+  },
+  {
+   "state": "Tower of Lightning",
+   "hub": "mine",
+   "name": "Lightning Gold Seam",
+   "source": "invented",
+   "anchor": [
+    2139,
+    2603
+   ],
+   "resolved": [
+    2139,
+    2603
+   ],
+   "region": 441,
+   "province_label": 8541,
+   "province_color": [
+    255,
+    250,
+    197
+   ],
+   "province_hex": "xFFFAC5"
+  },
+  {
+   "state": "Tower of Lightning",
+   "hub": "wood",
+   "name": "Lightning Canopy",
+   "source": "invented",
+   "anchor": [
+    2113,
+    2600
+   ],
+   "resolved": [
+    2113,
+    2600
+   ],
+   "region": 441,
+   "province_label": 8540,
+   "province_color": [
+    150,
+    105,
+    48
+   ],
+   "province_hex": "x966930"
+  },
+  {
+   "state": "Xhotl",
+   "hub": "city",
+   "name": "Xhotl",
+   "source": "canon: Xhotl, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Xhotl)",
+   "anchor": [
+    2181,
+    2642
+   ],
+   "resolved": [
+    2181,
+    2642
+   ],
+   "region": 442,
+   "province_label": 8551,
+   "province_color": [
+    97,
+    255,
+    115
+   ],
+   "province_hex": "x61FF73"
+  },
+  {
+   "state": "Xhotl",
+   "hub": "farm",
+   "name": "Xhotl Terraces",
+   "source": "invented",
+   "anchor": [
+    2257,
+    2721
+   ],
+   "resolved": [
+    2257,
+    2721
+   ],
+   "region": 442,
+   "province_label": 8564,
+   "province_color": [
+    83,
+    187,
+    59
+   ],
+   "province_hex": "x53BB3B"
+  },
+  {
+   "state": "Xhotl",
+   "hub": "mine",
+   "name": "Xhotl Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2124,
+    2622
+   ],
+   "resolved": [
+    2124,
+    2622
+   ],
+   "region": 442,
+   "province_label": 8547,
+   "province_color": [
+    68,
+    184,
+    232
+   ],
+   "province_hex": "x44B8E8"
+  },
+  {
+   "state": "Xhotl",
+   "hub": "wood",
+   "name": "Xhotl Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2234,
+    2680
+   ],
+   "resolved": [
+    2234,
+    2680
+   ],
+   "region": 442,
+   "province_label": 8560,
+   "province_color": [
+    218,
+    221,
+    87
+   ],
+   "province_hex": "xDADD57"
+  },
+  {
+   "state": "Mine of the Bearded Skulls",
+   "hub": "city",
+   "name": "Mine of the Bearded Skulls",
+   "source": "WFRP4e: Mine of the Bearded Skulls (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2058,
+    2729
+   ],
+   "resolved": [
+    2058,
+    2729
+   ],
+   "region": 445,
+   "province_label": 8785,
+   "province_color": [
+    166,
+    115,
+    154
+   ],
+   "province_hex": "xA6739A"
+  },
+  {
+   "state": "Mine of the Bearded Skulls",
+   "hub": "port",
+   "name": "Bearded Skulls Landing",
+   "source": "invented",
+   "anchor": [
+    2173,
+    2786
+   ],
+   "resolved": [
+    2173,
+    2786
+   ],
+   "region": 445,
+   "province_label": 8834,
+   "province_color": [
+    72,
+    9,
+    37
+   ],
+   "province_hex": "x480925"
+  },
+  {
+   "state": "Mine of the Bearded Skulls",
+   "hub": "farm",
+   "name": "Bearded Skulls Maize Fields",
+   "source": "invented",
+   "anchor": [
+    2087,
+    2641
+   ],
+   "resolved": [
+    2087,
+    2641
+   ],
+   "region": 445,
+   "province_label": 8737,
+   "province_color": [
+    223,
+    132,
+    122
+   ],
+   "province_hex": "xDF847A"
+  },
+  {
+   "state": "Mine of the Bearded Skulls",
+   "hub": "mine",
+   "name": "Bearded Skulls Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2211,
+    2712
+   ],
+   "resolved": [
+    2211,
+    2712
+   ],
+   "region": 445,
+   "province_label": 8774,
+   "province_color": [
+    88,
+    191,
+    2
+   ],
+   "province_hex": "x58BF02"
+  },
+  {
+   "state": "Mine of the Bearded Skulls",
+   "hub": "wood",
+   "name": "Bearded Skulls Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    1983,
+    2734
+   ],
+   "resolved": [
+    1983,
+    2734
+   ],
+   "region": 445,
+   "province_label": 8794,
+   "province_color": [
+    54,
+    102,
+    219
+   ],
+   "province_hex": "x3666DB"
+  },
+  {
+   "state": "Copper Desert",
+   "hub": "city",
+   "name": "Copper Rest",
+   "source": "invented",
+   "anchor": [
+    2262,
+    2769
+   ],
+   "resolved": [
+    2262,
+    2769
+   ],
+   "region": 453,
+   "province_label": 622,
+   "province_color": [
+    83,
+    127,
+    20
+   ],
+   "province_hex": "x537F14"
+  },
+  {
+   "state": "Copper Desert",
+   "hub": "port",
+   "name": "Copper Harbour",
+   "source": "invented",
+   "anchor": [
+    2266,
+    2924
+   ],
+   "resolved": [
+    2266,
+    2924
+   ],
+   "region": 453,
+   "province_label": 9223,
+   "province_color": [
+    172,
+    99,
+    206
+   ],
+   "province_hex": "xAC63CE"
+  },
+  {
+   "state": "Copper Desert",
+   "hub": "farm",
+   "name": "Copper Floodplots",
+   "source": "invented",
+   "anchor": [
+    2163,
+    2851
+   ],
+   "resolved": [
+    2163,
+    2851
+   ],
+   "region": 453,
+   "province_label": 9194,
+   "province_color": [
+    182,
+    93,
+    135
+   ],
+   "province_hex": "xB65D87"
+  },
+  {
+   "state": "Copper Desert",
+   "hub": "mine",
+   "name": "Copper Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2320,
+    2865
+   ],
+   "resolved": [
+    2320,
+    2865
+   ],
+   "region": 453,
+   "province_label": 9201,
+   "province_color": [
+    224,
+    1,
+    155
+   ],
+   "province_hex": "xE0019B"
+  },
+  {
+   "state": "Copper Desert",
+   "hub": "wood",
+   "name": "Copper Grove",
+   "source": "invented",
+   "anchor": [
+    2210,
+    2893
+   ],
+   "resolved": [
+    2210,
+    2893
+   ],
+   "region": 453,
+   "province_label": 9218,
+   "province_color": [
+    209,
+    189,
+    99
+   ],
+   "province_hex": "xD1BD63"
+  },
+  {
+   "state": "Dust Gate",
+   "hub": "city",
+   "name": "The Dust Gate",
+   "source": "WFRP4e: The Dust Gate (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2328,
+    2949
+   ],
+   "resolved": [
+    2328,
+    2949
+   ],
+   "region": 457,
+   "province_label": 9404,
+   "province_color": [
+    4,
+    143,
+    64
+   ],
+   "province_hex": "x048F40"
+  },
+  {
+   "state": "Dust Gate",
+   "hub": "port",
+   "name": "Dust Gate Wharf",
+   "source": "invented",
+   "anchor": [
+    2464,
+    3018
+   ],
+   "resolved": [
+    2464,
+    3018
+   ],
+   "region": 457,
+   "province_label": 9440,
+   "province_color": [
+    240,
+    215,
+    245
+   ],
+   "province_hex": "xF0D7F5"
+  },
+  {
+   "state": "Dust Gate",
+   "hub": "farm",
+   "name": "Dust Gate Orchards",
+   "source": "invented",
+   "anchor": [
+    2515,
+    2878
+   ],
+   "resolved": [
+    2515,
+    2878
+   ],
+   "region": 457,
+   "province_label": 9339,
+   "province_color": [
+    112,
+    206,
+    161
+   ],
+   "province_hex": "x70CEA1"
+  },
+  {
+   "state": "Dust Gate",
+   "hub": "mine",
+   "name": "Dust Gate Gold Seam",
+   "source": "invented",
+   "anchor": [
+    2530,
+    2963
+   ],
+   "resolved": [
+    2530,
+    2963
+   ],
+   "region": 457,
+   "province_label": 9419,
+   "province_color": [
+    142,
+    238,
+    241
+   ],
+   "province_hex": "x8EEEF1"
+  },
+  {
+   "state": "Dust Gate",
+   "hub": "wood",
+   "name": "Dust Gate Canopy",
+   "source": "invented",
+   "anchor": [
+    2361,
+    2877
+   ],
+   "resolved": [
+    2361,
+    2877
+   ],
+   "region": 457,
+   "province_label": 9333,
+   "province_color": [
+    113,
+    61,
+    237
+   ],
+   "province_hex": "x713DED"
+  },
+  {
+   "state": "Thrice-cursed Peak",
+   "hub": "city",
+   "name": "Thrice-cursed Peak",
+   "source": "WFRP4e: Thrice-cursed Peak (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2505,
+    2831
+   ],
+   "resolved": [
+    2505,
+    2831
+   ],
+   "region": 456,
+   "province_label": 625,
+   "province_color": [
+    136,
+    92,
+    240
+   ],
+   "province_hex": "x885CF0"
+  },
+  {
+   "state": "Thrice-cursed Peak",
+   "hub": "farm",
+   "name": "Cursed Peak Terraces",
+   "source": "invented",
+   "anchor": [
+    2484,
+    2859
+   ],
+   "resolved": [
+    2484,
+    2859
+   ],
+   "region": 456,
+   "province_label": 9320,
+   "province_color": [
+    43,
+    253,
+    214
+   ],
+   "province_hex": "x2BFDD6"
+  },
+  {
+   "state": "Thrice-cursed Peak",
+   "hub": "mine",
+   "name": "Cursed Peak Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2515,
+    2854
+   ],
+   "resolved": [
+    2515,
+    2854
+   ],
+   "region": 456,
+   "province_label": 9319,
+   "province_color": [
+    46,
+    37,
+    127
+   ],
+   "province_hex": "x2E257F"
+  },
+  {
+   "state": "Thrice-cursed Peak",
+   "hub": "wood",
+   "name": "Cursed Peak Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2528,
+    2831
+   ],
+   "resolved": [
+    2528,
+    2831
+   ],
+   "region": 456,
+   "province_label": 9318,
+   "province_color": [
+    52,
+    95,
+    175
+   ],
+   "province_hex": "x345FAF"
+  },
+  {
+   "state": "Oyxl",
+   "hub": "city",
+   "name": "Oyxl",
+   "source": "canon: Oyxl, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Oyxl)",
+   "anchor": [
+    2443,
+    2709
+   ],
+   "resolved": [
+    2443,
+    2709
+   ],
+   "region": 444,
+   "province_label": 8689,
+   "province_color": [
+    61,
+    238,
+    239
+   ],
+   "province_hex": "x3DEEEF"
+  },
+  {
+   "state": "Oyxl",
+   "hub": "farm",
+   "name": "Oyxl Maize Fields",
+   "source": "invented",
+   "anchor": [
+    2332,
+    2630
+   ],
+   "resolved": [
+    2332,
+    2630
+   ],
+   "region": 444,
+   "province_label": 8629,
+   "province_color": [
+    72,
+    213,
+    21
+   ],
+   "province_hex": "x48D515"
+  },
+  {
+   "state": "Oyxl",
+   "hub": "mine",
+   "name": "Oyxl Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2534,
+    2711
+   ],
+   "resolved": [
+    2534,
+    2711
+   ],
+   "region": 444,
+   "province_label": 8694,
+   "province_color": [
+    168,
+    229,
+    63
+   ],
+   "province_hex": "xA8E53F"
+  },
+  {
+   "state": "Oyxl",
+   "hub": "wood",
+   "name": "Oyxl Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    2498,
+    2796
+   ],
+   "resolved": [
+    2498,
+    2796
+   ],
+   "region": 444,
+   "province_label": 8731,
+   "province_color": [
+    200,
+    111,
+    29
+   ],
+   "province_hex": "xC86F1D"
+  },
+  {
+   "state": "Spine of Sotek",
+   "hub": "city",
+   "name": "Subatuun",
+   "source": "canon: Subatuun, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/ (placement by region only: the subterranean city is charted south of Itza on the endpaper))",
+   "anchor": [
+    2288,
+    2691
+   ],
+   "resolved": [
+    2288,
+    2691
+   ],
+   "region": 448,
+   "province_label": 613,
+   "province_color": [
+    181,
+    71,
+    155
+   ],
+   "province_hex": "xB5479B"
+  },
+  {
+   "state": "Spine of Sotek",
+   "hub": "farm",
+   "name": "Sotek Terraces",
+   "source": "invented",
+   "anchor": [
+    2335,
+    2839
+   ],
+   "resolved": [
+    2335,
+    2839
+   ],
+   "region": 448,
+   "province_label": 9030,
+   "province_color": [
+    62,
+    108,
+    16
+   ],
+   "province_hex": "x3E6C10"
+  },
+  {
+   "state": "Spine of Sotek",
+   "hub": "mine",
+   "name": "Sotek Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2456,
+    2791
+   ],
+   "resolved": [
+    2456,
+    2791
+   ],
+   "region": 448,
+   "province_label": 9011,
+   "province_color": [
+    207,
+    135,
+    229
+   ],
+   "province_hex": "xCF87E5"
+  },
+  {
+   "state": "Spine of Sotek",
+   "hub": "wood",
+   "name": "Sotek Grove",
+   "source": "invented",
+   "anchor": [
+    2290,
+    2767
+   ],
+   "resolved": [
+    2290,
+    2767
+   ],
+   "region": 448,
+   "province_label": 9001,
+   "province_color": [
+    67,
+    223,
+    35
+   ],
+   "province_hex": "x43DF23"
+  },
+  {
+   "state": "Axlotl",
+   "hub": "city",
+   "name": "Axlotl",
+   "source": "canon: Axlotl, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Axlotl)",
+   "anchor": [
+    2443,
+    2550
+   ],
+   "resolved": [
+    2443,
+    2550
+   ],
+   "region": 437,
+   "province_label": 8385,
+   "province_color": [
+    220,
+    242,
+    88
+   ],
+   "province_hex": "xDCF258"
+  },
+  {
+   "state": "Axlotl",
+   "hub": "farm",
+   "name": "Axlotl Orchards",
+   "source": "invented",
+   "anchor": [
+    2314,
+    2554
+   ],
+   "resolved": [
+    2314,
+    2554
+   ],
+   "region": 437,
+   "province_label": 8388,
+   "province_color": [
+    244,
+    7,
+    181
+   ],
+   "province_hex": "xF407B5"
+  },
+  {
+   "state": "Axlotl",
+   "hub": "mine",
+   "name": "Axlotl Gold Seam",
+   "source": "invented",
+   "anchor": [
+    2357,
+    2637
+   ],
+   "resolved": [
+    2357,
+    2637
+   ],
+   "region": 437,
+   "province_label": 8438,
+   "province_color": [
+    247,
+    101,
+    199
+   ],
+   "province_hex": "xF765C7"
+  },
+  {
+   "state": "Axlotl",
+   "hub": "wood",
+   "name": "Axlotl Canopy",
+   "source": "invented",
+   "anchor": [
+    2527,
+    2553
+   ],
+   "resolved": [
+    2527,
+    2553
+   ],
+   "region": 437,
+   "province_label": 8387,
+   "province_color": [
+    82,
+    253,
+    32
+   ],
+   "province_hex": "x52FD20"
+  },
+  {
+   "state": "Altar of the Horned Rat",
+   "hub": "city",
+   "name": "Altar of the Horned Rat",
+   "source": "WFRP4e: Altar of the Horned Rat (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2606,
+    2674
+   ],
+   "resolved": [
+    2606,
+    2674
+   ],
+   "region": 443,
+   "province_label": 8602,
+   "province_color": [
+    236,
+    127,
+    161
+   ],
+   "province_hex": "xEC7FA1"
+  },
+  {
+   "state": "Altar of the Horned Rat",
+   "hub": "port",
+   "name": "Horned Rat Quay",
+   "source": "invented",
+   "anchor": [
+    2689,
+    2671
+   ],
+   "resolved": [
+    2689,
+    2671
+   ],
+   "region": 443,
+   "province_label": 8597,
+   "province_color": [
+    40,
+    238,
+    147
+   ],
+   "province_hex": "x28EE93"
+  },
+  {
+   "state": "Altar of the Horned Rat",
+   "hub": "farm",
+   "name": "Horned Rat Terraces",
+   "source": "invented",
+   "anchor": [
+    2507,
+    2676
+   ],
+   "resolved": [
+    2507,
+    2676
+   ],
+   "region": 443,
+   "province_label": 8600,
+   "province_color": [
+    17,
+    217,
+    54
+   ],
+   "province_hex": "x11D936"
+  },
+  {
+   "state": "Altar of the Horned Rat",
+   "hub": "mine",
+   "name": "Horned Rat Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2549,
+    2756
+   ],
+   "resolved": [
+    2549,
+    2756
+   ],
+   "region": 443,
+   "province_label": 8628,
+   "province_color": [
+    110,
+    46,
+    170
+   ],
+   "province_hex": "x6E2EAA"
+  },
+  {
+   "state": "Altar of the Horned Rat",
+   "hub": "wood",
+   "name": "Horned Rat Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2645,
+    2616
+   ],
+   "resolved": [
+    2645,
+    2616
+   ],
+   "region": 443,
+   "province_label": 8577,
+   "province_color": [
+    204,
+    153,
+    31
+   ],
+   "province_hex": "xCC991F"
+  },
+  {
+   "state": "Culchan Plains",
+   "hub": "city",
+   "name": "Culchan Watch",
+   "source": "invented",
+   "anchor": [
+    2720,
+    2753
+   ],
+   "resolved": [
+    2720,
+    2753
+   ],
+   "region": 446,
+   "province_label": 8873,
+   "province_color": [
+    187,
+    115,
+    246
+   ],
+   "province_hex": "xBB73F6"
+  },
+  {
+   "state": "Culchan Plains",
+   "hub": "port",
+   "name": "Chupayotl",
+   "source": "canon: Chupayotl, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/ (placement by region only: charted on the east coast beside the Culchan Plains))",
+   "anchor": [
+    2743,
+    2797
+   ],
+   "resolved": [
+    2743,
+    2797
+   ],
+   "region": 446,
+   "province_label": 8904,
+   "province_color": [
+    167,
+    188,
+    171
+   ],
+   "province_hex": "xA7BCAB"
+  },
+  {
+   "state": "Culchan Plains",
+   "hub": "farm",
+   "name": "Culchan Maize Fields",
+   "source": "invented",
+   "anchor": [
+    2645,
+    2701
+   ],
+   "resolved": [
+    2645,
+    2701
+   ],
+   "region": 446,
+   "province_label": 8850,
+   "province_color": [
+    118,
+    51,
+    223
+   ],
+   "province_hex": "x7633DF"
+  },
+  {
+   "state": "Culchan Plains",
+   "hub": "mine",
+   "name": "Culchan Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2557,
+    2779
+   ],
+   "resolved": [
+    2557,
+    2779
+   ],
+   "region": 446,
+   "province_label": 8890,
+   "province_color": [
+    98,
+    124,
+    148
+   ],
+   "province_hex": "x627C94"
+  },
+  {
+   "state": "Culchan Plains",
+   "hub": "wood",
+   "name": "Culchan Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    2704,
+    2880
+   ],
+   "resolved": [
+    2704,
+    2880
+   ],
+   "region": 446,
+   "province_label": 8956,
+   "province_color": [
+    198,
+    182,
+    192
+   ],
+   "province_hex": "xC6B6C0"
+  },
+  {
+   "state": "Southern Sentinels",
+   "hub": "city",
+   "name": "The Sentinel of Time",
+   "source": "WFRP4e: The Sentinel of Time (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2641,
+    2928
+   ],
+   "resolved": [
+    2641,
+    2928
+   ],
+   "region": 455,
+   "province_label": 9307,
+   "province_color": [
+    193,
+    100,
+    42
+   ],
+   "province_hex": "xC1642A"
+  },
+  {
+   "state": "Southern Sentinels",
+   "hub": "farm",
+   "name": "Sentinel Floodplots",
+   "source": "invented",
+   "anchor": [
+    2548,
+    2845
+   ],
+   "resolved": [
+    2548,
+    2845
+   ],
+   "region": 455,
+   "province_label": 9294,
+   "province_color": [
+    207,
+    168,
+    98
+   ],
+   "province_hex": "xCFA862"
+  },
+  {
+   "state": "Southern Sentinels",
+   "hub": "mine",
+   "name": "Sentinel Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2663,
+    2999
+   ],
+   "resolved": [
+    2663,
+    2999
+   ],
+   "region": 455,
+   "province_label": 9315,
+   "province_color": [
+    81,
+    87,
+    107
+   ],
+   "province_hex": "x51576B"
+  },
+  {
+   "state": "Southern Sentinels",
+   "hub": "wood",
+   "name": "Sentinel Grove",
+   "source": "invented",
+   "anchor": [
+    2547,
+    2898
+   ],
+   "resolved": [
+    2547,
+    2898
+   ],
+   "region": 455,
+   "province_label": 9301,
+   "province_color": [
+    72,
+    134,
+    70
+   ],
+   "province_hex": "x488646"
+  },
+  {
+   "state": "Kalax",
+   "hub": "city",
+   "name": "Kalax",
+   "source": "WFRP4e: Kalax (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2540,
+    3054
+   ],
+   "resolved": [
+    2540,
+    3054
+   ],
+   "region": 462,
+   "province_label": 9567,
+   "province_color": [
+    135,
+    135,
+    90
+   ],
+   "province_hex": "x87875A"
+  },
+  {
+   "state": "Kalax",
+   "hub": "port",
+   "name": "Kalax Wharf",
+   "source": "invented",
+   "anchor": [
+    2648,
+    3088
+   ],
+   "resolved": [
+    2648,
+    3088
+   ],
+   "region": 462,
+   "province_label": 9580,
+   "province_color": [
+    60,
+    212,
+    48
+   ],
+   "province_hex": "x3CD430"
+  },
+  {
+   "state": "Kalax",
+   "hub": "farm",
+   "name": "Kalax Orchards",
+   "source": "invented",
+   "anchor": [
+    2555,
+    2962
+   ],
+   "resolved": [
+    2555,
+    2962
+   ],
+   "region": 462,
+   "province_label": 632,
+   "province_color": [
+    167,
+    3,
+    99
+   ],
+   "province_hex": "xA70363"
+  },
+  {
+   "state": "Kalax",
+   "hub": "mine",
+   "name": "Kalax Gold Seam",
+   "source": "invented",
+   "anchor": [
+    2624,
+    2975
+   ],
+   "resolved": [
+    2624,
+    2975
+   ],
+   "region": 462,
+   "province_label": 9525,
+   "province_color": [
+    57,
+    118,
+    30
+   ],
+   "province_hex": "x39761E"
+  },
+  {
+   "state": "Kalax",
+   "hub": "wood",
+   "name": "Kalax Canopy",
+   "source": "invented",
+   "anchor": [
+    2585,
+    3100
+   ],
+   "resolved": [
+    2585,
+    3100
+   ],
+   "region": 462,
+   "province_label": 9583,
+   "province_color": [
+    83,
+    233,
+    141
+   ],
+   "province_hex": "x53E98D"
+  },
+  {
+   "state": "Swirling Swamps",
+   "hub": "city",
+   "name": "Mire Hold",
+   "source": "invented",
+   "anchor": [
+    2723,
+    3020
+   ],
+   "resolved": [
+    2723,
+    3020
+   ],
+   "region": 463,
+   "province_label": 9601,
+   "province_color": [
+    69,
+    165,
+    85
+   ],
+   "province_hex": "x45A555"
+  },
+  {
+   "state": "Swirling Swamps",
+   "hub": "port",
+   "name": "Swirling Quay",
+   "source": "invented",
+   "anchor": [
+    2825,
+    3069
+   ],
+   "resolved": [
+    2825,
+    3069
+   ],
+   "region": 463,
+   "province_label": 9630,
+   "province_color": [
+    3,
+    195,
+    80
+   ],
+   "province_hex": "x03C350"
+  },
+  {
+   "state": "Swirling Swamps",
+   "hub": "farm",
+   "name": "Swirling Terraces",
+   "source": "invented",
+   "anchor": [
+    2673,
+    3095
+   ],
+   "resolved": [
+    2673,
+    3095
+   ],
+   "region": 463,
+   "province_label": 9644,
+   "province_color": [
+    49,
+    238,
+    10
+   ],
+   "province_hex": "x31EE0A"
+  },
+  {
+   "state": "Swirling Swamps",
+   "hub": "mine",
+   "name": "Swirling Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2807,
+    2990
+   ],
+   "resolved": [
+    2807,
+    2990
+   ],
+   "region": 463,
+   "province_label": 9590,
+   "province_color": [
+    242,
+    33,
+    6
+   ],
+   "province_hex": "xF22106"
+  },
+  {
+   "state": "Swirling Swamps",
+   "hub": "wood",
+   "name": "Swirling Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2659,
+    3033
+   ],
+   "resolved": [
+    2659,
+    3033
+   ],
+   "region": 463,
+   "province_label": 9615,
+   "province_color": [
+    213,
+    152,
+    150
+   ],
+   "province_hex": "xD59896"
+  },
+  {
+   "state": "Southern Mangrove Coast",
+   "hub": "city",
+   "name": "Southern Mangrove Quay",
+   "source": "invented",
+   "anchor": [
+    2784,
+    2859
+   ],
+   "resolved": [
+    2784,
+    2859
+   ],
+   "region": 454,
+   "province_label": 9233,
+   "province_color": [
+    218,
+    142,
+    136
+   ],
+   "province_hex": "xDA8E88"
+  },
+  {
+   "state": "Southern Mangrove Coast",
+   "hub": "port",
+   "name": "South Mangrove Landing",
+   "source": "invented",
+   "anchor": [
+    2833,
+    2953
+   ],
+   "resolved": [
+    2833,
+    2953
+   ],
+   "region": 454,
+   "province_label": 9271,
+   "province_color": [
+    175,
+    193,
+    224
+   ],
+   "province_hex": "xAFC1E0"
+  },
+  {
+   "state": "Southern Mangrove Coast",
+   "hub": "farm",
+   "name": "South Mangrove Maize Fields",
+   "source": "invented",
+   "anchor": [
+    2672,
+    2952
+   ],
+   "resolved": [
+    2672,
+    2952
+   ],
+   "region": 454,
+   "province_label": 9272,
+   "province_color": [
+    77,
+    249,
+    89
+   ],
+   "province_hex": "x4DF959"
+  },
+  {
+   "state": "Southern Mangrove Coast",
+   "hub": "mine",
+   "name": "South Mangrove Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2744,
+    3006
+   ],
+   "resolved": [
+    2744,
+    3006
+   ],
+   "region": 454,
+   "province_label": 9291,
+   "province_color": [
+    176,
+    234,
+    116
+   ],
+   "province_hex": "xB0EA74"
+  },
+  {
+   "state": "Southern Mangrove Coast",
+   "hub": "wood",
+   "name": "South Mangrove Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    2723,
+    2862
+   ],
+   "resolved": [
+    2723,
+    2862
+   ],
+   "region": 454,
+   "province_label": 9234,
+   "province_color": [
+    158,
+    31,
+    150
+   ],
+   "province_hex": "x9E1F96"
+  },
+  {
+   "state": "Xlanzec",
+   "hub": "city",
+   "name": "Xlanzec",
+   "source": "WFRP4e: Xlanzec (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    2873,
+    2993
+   ],
+   "resolved": [
+    2873,
+    2993
+   ],
+   "region": 460,
+   "province_label": 9458,
+   "province_color": [
+    68,
+    92,
+    68
+   ],
+   "province_hex": "x445C44"
+  },
+  {
+   "state": "Xlanzec",
+   "hub": "port",
+   "name": "Xlanzec Harbour",
+   "source": "invented",
+   "anchor": [
+    2843,
+    3085
+   ],
+   "resolved": [
+    2843,
+    3085
+   ],
+   "region": 460,
+   "province_label": 9503,
+   "province_color": [
+    229,
+    241,
+    207
+   ],
+   "province_hex": "xE5F1CF"
+  },
+  {
+   "state": "Xlanzec",
+   "hub": "farm",
+   "name": "Xlanzec Terraces",
+   "source": "invented",
+   "anchor": [
+    2960,
+    3058
+   ],
+   "resolved": [
+    2960,
+    3058
+   ],
+   "region": 460,
+   "province_label": 9489,
+   "province_color": [
+    62,
+    233,
+    49
+   ],
+   "province_hex": "x3EE931"
+  },
+  {
+   "state": "Xlanzec",
+   "hub": "mine",
+   "name": "Xlanzec Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2862,
+    2933
+   ],
+   "resolved": [
+    2862,
+    2933
+   ],
+   "region": 460,
+   "province_label": 629,
+   "province_color": [
+    76,
+    107,
+    31
+   ],
+   "province_hex": "x4C6B1F"
+  },
+  {
+   "state": "Xlanzec",
+   "hub": "wood",
+   "name": "Xlanzec Grove",
+   "source": "invented",
+   "anchor": [
+    3015,
+    3042
+   ],
+   "resolved": [
+    3015,
+    3042
+   ],
+   "region": 460,
+   "province_label": 9480,
+   "province_color": [
+    100,
+    66,
+    198
+   ],
+   "province_hex": "x6442C6"
+  },
+  {
+   "state": "Northern Mangrove Coast",
+   "hub": "city",
+   "name": "Mangrove Hold",
+   "source": "invented",
+   "anchor": [
+    2671,
+    2554
+   ],
+   "resolved": [
+    2671,
+    2554
+   ],
+   "region": 433,
+   "province_label": 8063,
+   "province_color": [
+    204,
+    27,
+    254
+   ],
+   "province_hex": "xCC1BFE"
+  },
+  {
+   "state": "Northern Mangrove Coast",
+   "hub": "port",
+   "name": "North Mangrove Wharf",
+   "source": "invented",
+   "anchor": [
+    2598,
+    2478
+   ],
+   "resolved": [
+    2598,
+    2478
+   ],
+   "region": 433,
+   "province_label": 8018,
+   "province_color": [
+    65,
+    155,
+    208
+   ],
+   "province_hex": "x419BD0"
+  },
+  {
+   "state": "Northern Mangrove Coast",
+   "hub": "farm",
+   "name": "North Mangrove Orchards",
+   "source": "invented",
+   "anchor": [
+    2697,
+    2435
+   ],
+   "resolved": [
+    2697,
+    2435
+   ],
+   "region": 433,
+   "province_label": 587,
+   "province_color": [
+    232,
+    229,
+    104
+   ],
+   "province_hex": "xE8E568"
+  },
+  {
+   "state": "Northern Mangrove Coast",
+   "hub": "mine",
+   "name": "North Mangrove Gold Seam",
+   "source": "invented",
+   "anchor": [
+    2524,
+    2579
+   ],
+   "resolved": [
+    2524,
+    2579
+   ],
+   "region": 433,
+   "province_label": 8077,
+   "province_color": [
+    77,
+    91,
+    187
+   ],
+   "province_hex": "x4D5BBB"
+  },
+  {
+   "state": "Northern Mangrove Coast",
+   "hub": "wood",
+   "name": "North Mangrove Canopy",
+   "source": "invented",
+   "anchor": [
+    2578,
+    2637
+   ],
+   "resolved": [
+    2578,
+    2637
+   ],
+   "region": 433,
+   "province_label": 8113,
+   "province_color": [
+    147,
+    11,
+    30
+   ],
+   "province_hex": "x930B1E"
+  },
+  {
+   "state": "Huatl",
+   "hub": "city",
+   "name": "Huatl",
+   "source": "canon: Huatl, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Huatl)",
+   "anchor": [
+    2634,
+    2412
+   ],
+   "resolved": [
+    2634,
+    2412
+   ],
+   "region": 425,
+   "province_label": 7612,
+   "province_color": [
+    77,
+    77,
+    230
+   ],
+   "province_hex": "x4D4DE6"
+  },
+  {
+   "state": "Huatl",
+   "hub": "port",
+   "name": "Huatl Quay",
+   "source": "invented",
+   "anchor": [
+    2701,
+    2333
+   ],
+   "resolved": [
+    2701,
+    2333
+   ],
+   "region": 425,
+   "province_label": 7589,
+   "province_color": [
+    8,
+    13,
+    207
+   ],
+   "province_hex": "x080DCF"
+  },
+  {
+   "state": "Huatl",
+   "hub": "farm",
+   "name": "Huatl Terraces",
+   "source": "invented",
+   "anchor": [
+    2575,
+    2446
+   ],
+   "resolved": [
+    2575,
+    2446
+   ],
+   "region": 425,
+   "province_label": 7618,
+   "province_color": [
+    100,
+    99,
+    67
+   ],
+   "province_hex": "x646343"
+  },
+  {
+   "state": "Huatl",
+   "hub": "mine",
+   "name": "Huatl Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2644,
+    2317
+   ],
+   "resolved": [
+    2644,
+    2317
+   ],
+   "region": 425,
+   "province_label": 7585,
+   "province_color": [
+    203,
+    158,
+    221
+   ],
+   "province_hex": "xCB9EDD"
+  },
+  {
+   "state": "Huatl",
+   "hub": "wood",
+   "name": "Huatl Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2701,
+    2389
+   ],
+   "resolved": [
+    2701,
+    2389
+   ],
+   "region": 425,
+   "province_label": 7606,
+   "province_color": [
+    124,
+    82,
+    101
+   ],
+   "province_hex": "x7C5265"
+  },
+  {
+   "state": "Vampire Coast",
+   "hub": "city",
+   "name": "New Bechafen",
+   "source": "canon: New Bechafen, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/New_Bechafen) (capital of the Vampire Coast; siting against state 715 is uncertain)",
+   "anchor": [
+    2769,
+    2260
+   ],
+   "resolved": [
+    2769,
+    2260
+   ],
+   "region": 415,
+   "province_label": 6930,
+   "province_color": [
+    125,
+    220,
+    112
+   ],
+   "province_hex": "x7DDC70"
+  },
+  {
+   "state": "Vampire Coast",
+   "hub": "port",
+   "name": "Vampire Landing",
+   "source": "invented",
+   "anchor": [
+    2725,
+    2331
+   ],
+   "resolved": [
+    2725,
+    2331
+   ],
+   "region": 415,
+   "province_label": 6949,
+   "province_color": [
+    195,
+    28,
+    135
+   ],
+   "province_hex": "xC31C87"
+  },
+  {
+   "state": "Vampire Coast",
+   "hub": "farm",
+   "name": "Vampire Maize Fields",
+   "source": "invented",
+   "anchor": [
+    2778,
+    2182
+   ],
+   "resolved": [
+    2778,
+    2182
+   ],
+   "region": 415,
+   "province_label": 551,
+   "province_color": [
+    57,
+    127,
+    196
+   ],
+   "province_hex": "x397FC4"
+  },
+  {
+   "state": "Vampire Coast",
+   "hub": "mine",
+   "name": "Vampire Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2662,
+    2294
+   ],
+   "resolved": [
+    2662,
+    2294
+   ],
+   "region": 415,
+   "province_label": 6942,
+   "province_color": [
+    21,
+    69,
+    29
+   ],
+   "province_hex": "x15451D"
+  },
+  {
+   "state": "Vampire Coast",
+   "hub": "wood",
+   "name": "Vampire Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    2744,
+    2215
+   ],
+   "resolved": [
+    2744,
+    2215
+   ],
+   "region": 415,
+   "province_label": 6918,
+   "province_color": [
+    140,
+    32,
+    168
+   ],
+   "province_hex": "x8C20A8"
+  },
+  {
+   "state": "Tlax",
+   "hub": "city",
+   "name": "Tlax",
+   "source": "canon: Tlax, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Tlax)",
+   "anchor": [
+    2543,
+    2326
+   ],
+   "resolved": [
+    2543,
+    2326
+   ],
+   "region": 414,
+   "province_label": 6881,
+   "province_color": [
+    62,
+    15,
+    108
+   ],
+   "province_hex": "x3E0F6C"
+  },
+  {
+   "state": "Tlax",
+   "hub": "farm",
+   "name": "Tlax Floodplots",
+   "source": "invented",
+   "anchor": [
+    2608,
+    2174
+   ],
+   "resolved": [
+    2608,
+    2174
+   ],
+   "region": 414,
+   "province_label": 550,
+   "province_color": [
+    2,
+    252,
+    51
+   ],
+   "province_hex": "x02FC33"
+  },
+  {
+   "state": "Tlax",
+   "hub": "mine",
+   "name": "Tlax Stone Delve",
+   "source": "invented",
+   "anchor": [
+    2457,
+    2263
+   ],
+   "resolved": [
+    2457,
+    2263
+   ],
+   "region": 414,
+   "province_label": 6841,
+   "province_color": [
+    104,
+    220,
+    20
+   ],
+   "province_hex": "x68DC14"
+  },
+  {
+   "state": "Tlax",
+   "hub": "wood",
+   "name": "Tlax Grove",
+   "source": "invented",
+   "anchor": [
+    2572,
+    2411
+   ],
+   "resolved": [
+    2572,
+    2411
+   ],
+   "region": 414,
+   "province_label": 6912,
+   "province_color": [
+    19,
+    66,
+    196
+   ],
+   "province_hex": "x1342C4"
+  },
+  {
+   "state": "Jungle of Webs",
+   "hub": "city",
+   "name": "Web Hold",
+   "source": "invented",
+   "anchor": [
+    2697,
+    2168
+   ],
+   "resolved": [
+    2697,
+    2168
+   ],
+   "region": 407,
+   "province_label": 6512,
+   "province_color": [
+    38,
+    124,
+    238
+   ],
+   "province_hex": "x267CEE"
+  },
+  {
+   "state": "Jungle of Webs",
+   "hub": "port",
+   "name": "Webs Wharf",
+   "source": "invented",
+   "anchor": [
+    2773,
+    2115
+   ],
+   "resolved": [
+    2773,
+    2115
+   ],
+   "region": 407,
+   "province_label": 6477,
+   "province_color": [
+    164,
+    205,
+    229
+   ],
+   "province_hex": "xA4CDE5"
+  },
+  {
+   "state": "Jungle of Webs",
+   "hub": "farm",
+   "name": "Webs Orchards",
+   "source": "invented",
+   "anchor": [
+    2618,
+    2115
+   ],
+   "resolved": [
+    2618,
+    2115
+   ],
+   "region": 407,
+   "province_label": 6479,
+   "province_color": [
+    202,
+    39,
+    122
+   ],
+   "province_hex": "xCA277A"
+  },
+  {
+   "state": "Jungle of Webs",
+   "hub": "mine",
+   "name": "Webs Gold Seam",
+   "source": "invented",
+   "anchor": [
+    2645,
+    2249
+   ],
+   "resolved": [
+    2645,
+    2249
+   ],
+   "region": 407,
+   "province_label": 6546,
+   "province_color": [
+    229,
+    37,
+    223
+   ],
+   "province_hex": "xE525DF"
+  },
+  {
+   "state": "Jungle of Webs",
+   "hub": "wood",
+   "name": "Webs Canopy",
+   "source": "invented",
+   "anchor": [
+    2687,
+    2105
+   ],
+   "resolved": [
+    2687,
+    2105
+   ],
+   "region": 407,
+   "province_label": 6473,
+   "province_color": [
+    239,
+    129,
+    15
+   ],
+   "province_hex": "xEF810F"
+  },
+  {
+   "state": "Pox Marsh",
+   "hub": "city",
+   "name": "Pox Haven",
+   "source": "invented",
+   "anchor": [
+    2852,
+    2134
+   ],
+   "resolved": [
+    2852,
+    2134
+   ],
+   "region": 410,
+   "province_label": 6691,
+   "province_color": [
+    66,
+    57,
+    110
+   ],
+   "province_hex": "x42396E"
+  },
+  {
+   "state": "Pox Marsh",
+   "hub": "port",
+   "name": "Pox Quay",
+   "source": "invented",
+   "anchor": [
+    2811,
+    2227
+   ],
+   "resolved": [
+    2811,
+    2227
+   ],
+   "region": 410,
+   "province_label": 6713,
+   "province_color": [
+    135,
+    121,
+    133
+   ],
+   "province_hex": "x877985"
+  },
+  {
+   "state": "Pox Marsh",
+   "hub": "farm",
+   "name": "Pox Terraces",
+   "source": "invented",
+   "anchor": [
+    2797,
+    2109
+   ],
+   "resolved": [
+    2797,
+    2109
+   ],
+   "region": 410,
+   "province_label": 546,
+   "province_color": [
+    63,
+    139,
+    162
+   ],
+   "province_hex": "x3F8BA2"
+  },
+  {
+   "state": "Pox Marsh",
+   "hub": "mine",
+   "name": "Pox Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2858,
+    2205
+   ],
+   "resolved": [
+    2858,
+    2205
+   ],
+   "region": 410,
+   "province_label": 6709,
+   "province_color": [
+    75,
+    10,
+    147
+   ],
+   "province_hex": "x4B0A93"
+  },
+  {
+   "state": "Pox Marsh",
+   "hub": "wood",
+   "name": "Pox Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2786,
+    2148
+   ],
+   "resolved": [
+    2786,
+    2148
+   ],
+   "region": 410,
+   "province_label": 6695,
+   "province_color": [
+    187,
+    23,
+    82
+   ],
+   "province_hex": "xBB1752"
+  },
+  {
+   "state": "Malliente Swamps",
+   "hub": "city",
+   "name": "Malliente Hold",
+   "source": "invented",
+   "anchor": [
+    1921,
+    2464
+   ],
+   "resolved": [
+    1921,
+    2464
+   ],
+   "region": 436,
+   "province_label": 592,
+   "province_color": [
+    37,
+    84,
+    90
+   ],
+   "province_hex": "x25545A"
+  },
+  {
+   "state": "Malliente Swamps",
+   "hub": "port",
+   "name": "Malliente Landing",
+   "source": "invented",
+   "anchor": [
+    1816,
+    2532
+   ],
+   "resolved": [
+    1816,
+    2532
+   ],
+   "region": 436,
+   "province_label": 8243,
+   "province_color": [
+    144,
+    246,
+    29
+   ],
+   "province_hex": "x90F61D"
+  },
+  {
+   "state": "Malliente Swamps",
+   "hub": "farm",
+   "name": "Malliente Maize Fields",
+   "source": "invented",
+   "anchor": [
+    2037,
+    2559
+   ],
+   "resolved": [
+    2037,
+    2559
+   ],
+   "region": 436,
+   "province_label": 8262,
+   "province_color": [
+    55,
+    254,
+    187
+   ],
+   "province_hex": "x37FEBB"
+  },
+  {
+   "state": "Malliente Swamps",
+   "hub": "mine",
+   "name": "Malliente Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2018,
+    2647
+   ],
+   "resolved": [
+    2018,
+    2647
+   ],
+   "region": 436,
+   "province_label": 8329,
+   "province_color": [
+    165,
+    246,
+    121
+   ],
+   "province_hex": "xA5F679"
+  },
+  {
+   "state": "Malliente Swamps",
+   "hub": "wood",
+   "name": "Malliente Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    1868,
+    2620
+   ],
+   "resolved": [
+    1868,
+    2620
+   ],
+   "region": 436,
+   "province_label": 8307,
+   "province_color": [
+    171,
+    105,
+    140
+   ],
+   "province_hex": "xAB698C"
+  },
+  {
+   "state": "Hualotal",
+   "hub": "city",
+   "name": "Hualotal",
+   "source": "WFRP4e: Hualotal (Lustria endpaper map, C7; lustria_2.jpg); Lexicanum spells it Hualotl",
+   "anchor": [
+    1845,
+    2241
+   ],
+   "resolved": [
+    1845,
+    2241
+   ],
+   "region": 419,
+   "province_label": 557,
+   "province_color": [
+    4,
+    240,
+    183
+   ],
+   "province_hex": "x04F0B7"
+  },
+  {
+   "state": "Hualotal",
+   "hub": "port",
+   "name": "Hualotal Harbour",
+   "source": "invented",
+   "anchor": [
+    1751,
+    2288
+   ],
+   "resolved": [
+    1751,
+    2288
+   ],
+   "region": 419,
+   "province_label": 7103,
+   "province_color": [
+    46,
+    255,
+    68
+   ],
+   "province_hex": "x2EFF44"
+  },
+  {
+   "state": "Hualotal",
+   "hub": "farm",
+   "name": "Hualotal Floodplots",
+   "source": "invented",
+   "anchor": [
+    1722,
+    2412
+   ],
+   "resolved": [
+    1722,
+    2412
+   ],
+   "region": 419,
+   "province_label": 7174,
+   "province_color": [
+    59,
+    46,
+    123
+   ],
+   "province_hex": "x3B2E7B"
+  },
+  {
+   "state": "Hualotal",
+   "hub": "mine",
+   "name": "Hualotal Stone Delve",
+   "source": "invented",
+   "anchor": [
+    1885,
+    2433
+   ],
+   "resolved": [
+    1885,
+    2433
+   ],
+   "region": 419,
+   "province_label": 7185,
+   "province_color": [
+    82,
+    81,
+    173
+   ],
+   "province_hex": "x5251AD"
+  },
+  {
+   "state": "Hualotal",
+   "hub": "wood",
+   "name": "Hualotal Grove",
+   "source": "invented",
+   "anchor": [
+    1789,
+    2474
+   ],
+   "resolved": [
+    1789,
+    2474
+   ],
+   "region": 419,
+   "province_label": 7211,
+   "province_color": [
+    7,
+    158,
+    131
+   ],
+   "province_hex": "x079E83"
+  },
+  {
+   "state": "Tlanxla",
+   "hub": "city",
+   "name": "Tlanxla",
+   "source": "canon: Tlanxla, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Tlanxla)",
+   "anchor": [
+    1877,
+    2385
+   ],
+   "resolved": [
+    1877,
+    2385
+   ],
+   "region": 421,
+   "province_label": 7287,
+   "province_color": [
+    192,
+    59,
+    150
+   ],
+   "province_hex": "xC03B96"
+  },
+  {
+   "state": "Tlanxla",
+   "hub": "farm",
+   "name": "Tlanxla Orchards",
+   "source": "invented",
+   "anchor": [
+    1874,
+    2246
+   ],
+   "resolved": [
+    1874,
+    2246
+   ],
+   "region": 421,
+   "province_label": 559,
+   "province_color": [
+    5,
+    225,
+    247
+   ],
+   "province_hex": "x05E1F7"
+  },
+  {
+   "state": "Tlanxla",
+   "hub": "mine",
+   "name": "Tlanxla Gold Seam",
+   "source": "invented",
+   "anchor": [
+    1976,
+    2432
+   ],
+   "resolved": [
+    1976,
+    2432
+   ],
+   "region": 421,
+   "province_label": 7295,
+   "province_color": [
+    19,
+    191,
+    229
+   ],
+   "province_hex": "x13BFE5"
+  },
+  {
+   "state": "Tlanxla",
+   "hub": "wood",
+   "name": "Tlanxla Canopy",
+   "source": "invented",
+   "anchor": [
+    1909,
+    2299
+   ],
+   "resolved": [
+    1909,
+    2299
+   ],
+   "region": 421,
+   "province_label": 7277,
+   "province_color": [
+    62,
+    154,
+    98
+   ],
+   "province_hex": "x3E9A62"
+  },
+  {
+   "state": "Quittax",
+   "hub": "city",
+   "name": "Quittax",
+   "source": "WFRP4e: Quittax (state name per land_regions_worksheet, Lustria endpaper map C7; no Lexicanum page, not located on the image)",
+   "anchor": [
+    1917,
+    2257
+   ],
+   "resolved": [
+    1917,
+    2257
+   ],
+   "region": 422,
+   "province_label": 561,
+   "province_color": [
+    42,
+    213,
+    66
+   ],
+   "province_hex": "x2AD542"
+  },
+  {
+   "state": "Quittax",
+   "hub": "farm",
+   "name": "Quittax Terraces",
+   "source": "invented",
+   "anchor": [
+    2117,
+    2299
+   ],
+   "resolved": [
+    2117,
+    2299
+   ],
+   "region": 422,
+   "province_label": 7320,
+   "province_color": [
+    112,
+    21,
+    89
+   ],
+   "province_hex": "x701559"
+  },
+  {
+   "state": "Quittax",
+   "hub": "mine",
+   "name": "Quittax Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    2120,
+    2389
+   ],
+   "resolved": [
+    2120,
+    2389
+   ],
+   "region": 422,
+   "province_label": 7373,
+   "province_color": [
+    236,
+    81,
+    79
+   ],
+   "province_hex": "xEC514F"
+  },
+  {
+   "state": "Quittax",
+   "hub": "wood",
+   "name": "Quittax Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    2029,
+    2429
+   ],
+   "resolved": [
+    2029,
+    2429
+   ],
+   "region": 422,
+   "province_label": 7386,
+   "province_color": [
+    42,
+    227,
+    23
+   ],
+   "province_hex": "x2AE317"
+  },
+  {
+   "state": "Tlaxtlan",
+   "hub": "city",
+   "name": "Tlaxtlan",
+   "source": "canon: Tlaxtlan, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Tlaxtlan)",
+   "anchor": [
+    1993,
+    2209
+   ],
+   "resolved": [
+    1993,
+    2209
+   ],
+   "region": 409,
+   "province_label": 6624,
+   "province_color": [
+    30,
+    244,
+    218
+   ],
+   "province_hex": "x1EF4DA"
+  },
+  {
+   "state": "Tlaxtlan",
+   "hub": "farm",
+   "name": "Tlaxtlan Maize Fields",
+   "source": "invented",
+   "anchor": [
+    1945,
+    2103
+   ],
+   "resolved": [
+    1945,
+    2103
+   ],
+   "region": 409,
+   "province_label": 545,
+   "province_color": [
+    72,
+    171,
+    150
+   ],
+   "province_hex": "x48AB96"
+  },
+  {
+   "state": "Tlaxtlan",
+   "hub": "mine",
+   "name": "Tlaxtlan Jade Cut",
+   "source": "invented",
+   "anchor": [
+    2106,
+    2200
+   ],
+   "resolved": [
+    2106,
+    2200
+   ],
+   "region": 409,
+   "province_label": 6619,
+   "province_color": [
+    68,
+    78,
+    111
+   ],
+   "province_hex": "x444E6F"
+  },
+  {
+   "state": "Tlaxtlan",
+   "hub": "wood",
+   "name": "Tlaxtlan Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    1907,
+    2187
+   ],
+   "resolved": [
+    1907,
+    2187
+   ],
+   "region": 409,
+   "province_label": 6606,
+   "province_color": [
+    143,
+    1,
+    153
+   ],
+   "province_hex": "x8F0199"
+  },
+  {
+   "state": "Spektazuma",
+   "hub": "city",
+   "name": "Spektazuma",
+   "source": "WFRP4e: Spektazuma (Lustria endpaper map, C7; lustria_2.jpg)",
+   "anchor": [
+    1892,
+    2064
+   ],
+   "resolved": [
+    1892,
+    2064
+   ],
+   "region": 406,
+   "province_label": 541,
+   "province_color": [
+    237,
+    34,
+    18
+   ],
+   "province_hex": "xED2212"
+  },
+  {
+   "state": "Spektazuma",
+   "hub": "farm",
+   "name": "Spektazuma Floodplots",
+   "source": "invented",
+   "anchor": [
+    1866,
+    2095
+   ],
+   "resolved": [
+    1866,
+    2095
+   ],
+   "region": 406,
+   "province_label": 6466,
+   "province_color": [
+    253,
+    197,
+    71
+   ],
+   "province_hex": "xFDC547"
+  },
+  {
+   "state": "Spektazuma",
+   "hub": "mine",
+   "name": "Spektazuma Stone Delve",
+   "source": "invented",
+   "anchor": [
+    1922,
+    2096
+   ],
+   "resolved": [
+    1922,
+    2096
+   ],
+   "region": 406,
+   "province_label": 6465,
+   "province_color": [
+    76,
+    97,
+    121
+   ],
+   "province_hex": "x4C6179"
+  },
+  {
+   "state": "Spektazuma",
+   "hub": "wood",
+   "name": "Spektazuma Grove",
+   "source": "invented",
+   "anchor": [
+    1889,
+    2088
+   ],
+   "resolved": [
+    1889,
+    2088
+   ],
+   "region": 406,
+   "province_label": 6464,
+   "province_color": [
+    193,
+    86,
+    85
+   ],
+   "province_hex": "xC15655"
+  },
+  {
+   "state": "Piranha Swamps",
+   "hub": "city",
+   "name": "Piranha Hold",
+   "source": "invented",
+   "anchor": [
+    1901,
+    2109
+   ],
+   "resolved": [
+    1901,
+    2109
+   ],
+   "region": 408,
+   "province_label": 544,
+   "province_color": [
+    18,
+    197,
+    163
+   ],
+   "province_hex": "x12C5A3"
+  },
+  {
+   "state": "Piranha Swamps",
+   "hub": "farm",
+   "name": "Piranha Orchards",
+   "source": "invented",
+   "anchor": [
+    1898,
+    2242
+   ],
+   "resolved": [
+    1898,
+    2242
+   ],
+   "region": 408,
+   "province_label": 6567,
+   "province_color": [
+    223,
+    39,
+    214
+   ],
+   "province_hex": "xDF27D6"
+  },
+  {
+   "state": "Piranha Swamps",
+   "hub": "mine",
+   "name": "Piranha Gold Seam",
+   "source": "invented",
+   "anchor": [
+    1842,
+    2217
+   ],
+   "resolved": [
+    1842,
+    2217
+   ],
+   "region": 408,
+   "province_label": 6563,
+   "province_color": [
+    252,
+    59,
+    60
+   ],
+   "province_hex": "xFC3B3C"
+  },
+  {
+   "state": "Piranha Swamps",
+   "hub": "wood",
+   "name": "Piranha Canopy",
+   "source": "invented",
+   "anchor": [
+    1878,
+    2142
+   ],
+   "resolved": [
+    1878,
+    2142
+   ],
+   "region": 408,
+   "province_label": 6554,
+   "province_color": [
+    33,
+    148,
+    209
+   ],
+   "province_hex": "x2194D1"
+  },
+  {
+   "state": "Biting Bogs",
+   "hub": "city",
+   "name": "Skeggi",
+   "source": "canon: Skeggi, Lustria (via Lexicanum https://whfb.lexicanum.com/wiki/Skeggi); canon: Norse settlement on the isthmus, undrawn, kept here to match SKG's paint",
+   "anchor": [
+    1756,
+    2122
+   ],
+   "resolved": [
+    1756,
+    2122
+   ],
+   "region": 405,
+   "province_label": 6402,
+   "province_color": [
+    143,
+    205,
+    137
+   ],
+   "province_hex": "x8FCD89"
+  },
+  {
+   "state": "Biting Bogs",
+   "hub": "port",
+   "name": "Biting Bogs Quay",
+   "source": "invented",
+   "anchor": [
+    1739,
+    2257
+   ],
+   "resolved": [
+    1739,
+    2257
+   ],
+   "region": 405,
+   "province_label": 6457,
+   "province_color": [
+    72,
+    120,
+    113
+   ],
+   "province_hex": "x487871"
+  },
+  {
+   "state": "Biting Bogs",
+   "hub": "farm",
+   "name": "Biting Bogs Terraces",
+   "source": "invented",
+   "anchor": [
+    1832,
+    2054
+   ],
+   "resolved": [
+    1832,
+    2054
+   ],
+   "region": 405,
+   "province_label": 540,
+   "province_color": [
+    149,
+    64,
+    156
+   ],
+   "province_hex": "x95409C"
+  },
+  {
+   "state": "Biting Bogs",
+   "hub": "mine",
+   "name": "Biting Bogs Obsidian Quarry",
+   "source": "invented",
+   "anchor": [
+    1685,
+    2179
+   ],
+   "resolved": [
+    1685,
+    2179
+   ],
+   "region": 405,
+   "province_label": 6429,
+   "province_color": [
+    138,
+    90,
+    118
+   ],
+   "province_hex": "x8A5A76"
+  },
+  {
+   "state": "Biting Bogs",
+   "hub": "wood",
+   "name": "Biting Bogs Ironwood Stand",
+   "source": "invented",
+   "anchor": [
+    1841,
+    2127
+   ],
+   "resolved": [
+    1841,
+    2127
+   ],
+   "region": 405,
+   "province_label": 6403,
+   "province_color": [
+    8,
+    171,
+    109
+   ],
+   "province_hex": "x08AB6D"
+  },
+  {
+   "state": "Dragon Isles",
+   "hub": "city",
+   "name": "Dragon Watch",
+   "source": "invented",
+   "anchor": [
+    1611,
+    2195
+   ],
+   "resolved": [
+    1611,
+    2195
+   ],
+   "region": 411,
+   "province_label": 6728,
+   "province_color": [
+    196,
+    8,
+    244
+   ],
+   "province_hex": "xC408F4"
+  },
+  {
+   "state": "Dragon Isles",
+   "hub": "port",
+   "name": "Dragon Landing",
+   "source": "invented",
+   "anchor": [
+    1690,
+    2268
+   ],
+   "resolved": [
+    1690,
+    2268
+   ],
+   "region": 411,
+   "province_label": 6738,
+   "province_color": [
+    144,
+    56,
+    2
+   ],
+   "province_hex": "x903802"
+  },
+  {
+   "state": "Dragon Isles",
+   "hub": "farm",
+   "name": "Dragon Maize Fields",
+   "source": "invented",
+   "anchor": [
+    1662,
+    2110
+   ],
+   "resolved": [
+    1662,
+    2110
+   ],
+   "region": 411,
+   "province_label": 547,
+   "province_color": [
+    189,
+    114,
+    32
+   ],
+   "province_hex": "xBD7220"
+  },
+  {
+   "state": "Dragon Isles",
+   "hub": "mine",
+   "name": "Dragon Jade Cut",
+   "source": "invented",
+   "anchor": [
+    1642,
+    2240
+   ],
+   "resolved": [
+    1642,
+    2240
+   ],
+   "region": 411,
+   "province_label": 6733,
+   "province_color": [
+    83,
+    252,
+    53
+   ],
+   "province_hex": "x53FC35"
+  },
+  {
+   "state": "Dragon Isles",
+   "hub": "wood",
+   "name": "Dragon Rubber Grove",
+   "source": "invented",
+   "anchor": [
+    1623,
+    2142
+   ],
+   "resolved": [
+    1623,
+    2142
+   ],
+   "region": 411,
+   "province_label": 6718,
+   "province_color": [
+    247,
+    166,
+    193
+   ],
+   "province_hex": "xF7A6C1"
   }
  ]
 }
