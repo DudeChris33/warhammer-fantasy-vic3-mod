@@ -12,12 +12,12 @@ region_far_ocean_islands = {
 
 region_khuresh = {
 	capital_province = x711D70
-	map_color = { 234 116 70 }
+	map_color = { 38 227 56 }
 	states = { STATE_TOR_ELITHIS STATE_NORTH_ISLE STATE_SOUTHERN_GATE_OF_CALITH STATE_STARSAND_PORT STATE_ELITHISIAN_GROVE STATE_NORTHERN_GATE_OF_CALITH }
 }
 
 region_nippon = {
 	capital_province = xE71161
-	map_color = { 1 137 163 }
+	map_color = { 159 193 28 }
 	states = { STATE_LAND_365 STATE_LAND_366 STATE_LAND_677 }
 }

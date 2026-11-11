@@ -169,7 +169,7 @@ bird_flock_americas_atlantic = {
 	wintering_latitude = { 900 2044 }
 	
 	breeding_regions = { region_naggaroth } # [#10327] was: region_canada
-	wintering_regions = { region_lustria } # [#10327] was: region_central_america region_gran_colombia
+	wintering_regions = { region_great_jungle region_western_lustria region_southeastern_lustria region_spine_of_sotek region_isthmus_of_pahuax } # [#10327] was: region_central_america region_gran_colombia
 	
 	depart_in = { spring }
 	return_in = { autumn }
@@ -199,7 +199,7 @@ bird_flock_americas_pacific = {
 	wintering_latitude = { 900 2044 }
 	
 	breeding_regions = { region_naggaroth } # [#10327] was: region_pacific_coast
-	wintering_regions = { region_lustria } # [#10327] was: region_central_america region_andes
+	wintering_regions = { region_great_jungle region_western_lustria region_southeastern_lustria region_spine_of_sotek region_isthmus_of_pahuax } # [#10327] was: region_central_america region_andes
 	
 	depart_in = { spring }
 	return_in = { autumn }

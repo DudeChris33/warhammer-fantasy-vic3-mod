@@ -45,8 +45,14 @@
     "full.ora of 2026-11-04, measured by pixel overlap, #10449), not a lore ruling: the_empire/",
     "kislev, southern_realms/brettonia/athel_loren, norsca/northern_dark_lands and",
     "northern_badlands/western_ranges colours straddle old realms (overlap 60-89%), and the five",
-    "Lustria colours, which have no old counterpart, all map to the realm 'lustria' (stub",
-    "lustria, continent new_world, as in in_scope_additions.json). western_ranges and the old",
+    "Lustria colours, which have no old counterpart, are Chris's five Lustria strategic",
+    "regions (2026-11-10), all on stub lustria, continent new_world: (0, 220, 120) the Great",
+    "Jungle (north-central and north-east core), (0, 220, 20) Western Lustria, (0, 220, 220)",
+    "Southeastern Lustria, (0, 20, 160) the Spine of Sotek, (0, 20, 240) the Isthmus of Pahuax.",
+    "Names come from the states each covers; only Isthmus of Pahuax and Spine of Sotek are",
+    "canon region names, the other three are plain descriptive and invented (see",
+    "strategic_region_names.json). The old realm 'lustria' is gone: the Lustrian islets of",
+    "in_scope_additions.json now take the realm of the colour beside them. western_ranges and the old",
     "(0, 0, 20..120), (0, 0, 160), (0, 20, 0), (0, 20, 40) swatches are no longer painted, so",
     "they are gone. Chris to confirm each realm."
   ],
@@ -74,11 +80,11 @@
     { "rgb": [0, 20, 100], "realm": "far_ocean_islands", "file_stem": "nippon", "continent": "far_east" },
     { "rgb": [0, 20, 120], "realm": "land_of_the_dead", "file_stem": "nehekhara", "continent": "southlands" },
     { "rgb": [0, 20, 140], "realm": "southern_worlds_edge_mountains", "file_stem": "karaz_ankor", "continent": "southlands" },
-    { "rgb": [0, 220, 120], "realm": "lustria", "file_stem": "lustria", "continent": "new_world" },
-    { "rgb": [0, 220, 20], "realm": "lustria", "file_stem": "lustria", "continent": "new_world" },
-    { "rgb": [0, 220, 220], "realm": "lustria", "file_stem": "lustria", "continent": "new_world" },
-    { "rgb": [0, 20, 160], "realm": "lustria", "file_stem": "lustria", "continent": "new_world" },
-    { "rgb": [0, 20, 240], "realm": "lustria", "file_stem": "lustria", "continent": "new_world" }
+    { "rgb": [0, 220, 120], "realm": "great_jungle", "file_stem": "lustria", "continent": "new_world" },
+    { "rgb": [0, 220, 20], "realm": "western_lustria", "file_stem": "lustria", "continent": "new_world" },
+    { "rgb": [0, 220, 220], "realm": "southeastern_lustria", "file_stem": "lustria", "continent": "new_world" },
+    { "rgb": [0, 20, 160], "realm": "spine_of_sotek", "file_stem": "lustria", "continent": "new_world" },
+    { "rgb": [0, 20, 240], "realm": "isthmus_of_pahuax", "file_stem": "lustria", "continent": "new_world" }
   ],
   "excluded": [
     { "rgb": [0, 255, 255], "reason": "coastline reference tracery, not a realm fill -- see _comment" }
