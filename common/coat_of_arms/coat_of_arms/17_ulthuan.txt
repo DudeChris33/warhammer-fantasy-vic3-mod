@@ -27,7 +27,7 @@ ULT = {
 	}
 }
 
-# LOT — Eataine (Lothern), realm of the Sea Lords. Disclosed invention: a golden ship's wheel for Ulthuan's gateway port and its fleets. Disclosed reuse: 04_karaz_ankor.txt ZHU wears ce_ship_wheel in red_dark over waves on blue; LOT's is golden, alone, on lapis_blue.
+# LOT — Eataine, realm of the Sea Lords. Disclosed invention: a golden ship's wheel for Ulthuan's gateway port and its fleets. Disclosed reuse: 04_karaz_ankor.txt ZHU wears ce_ship_wheel in red_dark over waves on blue; LOT's is golden, alone, on lapis_blue.
 # Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:12461 (one slot; slot 2 set to slot 1's tone)).
 LOT = {
 	pattern = "pattern_solid.tga"

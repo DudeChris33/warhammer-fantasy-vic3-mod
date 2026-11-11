@@ -230,18 +230,6 @@
     },
     {
       "a": [
-        3651,
-        3
-      ],
-      "b": [
-        3760,
-        3
-      ],
-      "type": "sea",
-      "comment": "North Pole"
-    },
-    {
-      "a": [
         4367,
         476
       ],
@@ -1023,27 +1011,15 @@
     },
     {
       "a": [
-        4307,
-        2
-      ],
-      "b": [
-        4142,
-        2
-      ],
-      "type": "sea",
-      "comment": "North Pole"
-    },
-    {
-      "a": [
         4335,
         2
       ],
       "b": [
-        4375,
+        4429,
         2
       ],
-      "type": "sea",
-      "comment": "North Pole"
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -2571,6 +2547,18 @@
     },
     {
       "a": [
+        1026,
+        992
+      ],
+      "b": [
+        1038,
+        1007
+      ],
+      "type": "sea",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
         1030,
         945
       ],
@@ -2589,18 +2577,6 @@
       "b": [
         990,
         906
-      ],
-      "type": "sea",
-      "comment": "Maelstrom"
-    },
-    {
-      "a": [
-        1026,
-        992
-      ],
-      "b": [
-        1038,
-        1007
       ],
       "type": "sea",
       "comment": "Maelstrom"
@@ -2772,6 +2748,18 @@
       ],
       "type": "sea",
       "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        5418,
+        2373
+      ],
+      "b": [
+        5427,
+        2396
+      ],
+      "type": "sea",
+      "comment": "Southlands"
     },
     {
       "a": [
@@ -3159,15 +3147,27 @@
     },
     {
       "a": [
-        2342,
+        2426,
         3
       ],
       "b": [
-        2322,
+        2377,
         3
       ],
-      "type": "sea",
-      "comment": "Naggaroth"
+      "type": "",
+      "comment": ""
+    },
+    {
+      "a": [
+        2744,
+        2486
+      ],
+      "b": [
+        2713,
+        2514
+      ],
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -3279,18 +3279,6 @@
     },
     {
       "a": [
-        5418,
-        2373
-      ],
-      "b": [
-        5427,
-        2396
-      ],
-      "type": "sea",
-      "comment": "Southlands"
-    },
-    {
-      "a": [
         3065,
         1360
       ],
@@ -3336,6 +3324,18 @@
       ],
       "type": "sea",
       "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        2342,
+        3
+      ],
+      "b": [
+        2322,
+        3
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -3456,6 +3456,18 @@
       ],
       "type": "sea",
       "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        1829,
+        1801
+      ],
+      "b": [
+        1906,
+        1748
+      ],
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -3760,6 +3772,18 @@
       ],
       "type": "canal_nuln_t",
       "comment": "Nuln"
+    },
+    {
+      "a": [
+        3651,
+        3
+      ],
+      "b": [
+        3760,
+        3
+      ],
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -5336,6 +5360,30 @@
       "strait_type": "artificial",
       "land_a_color": "x5DE819",
       "land_b_color": "x664EC5"
+    },
+    {
+      "a": [
+        4307,
+        2
+      ],
+      "b": [
+        4142,
+        2
+      ],
+      "type": "sea",
+      "comment": "North Pole"
+    },
+    {
+      "a": [
+        4335,
+        2
+      ],
+      "b": [
+        4375,
+        2
+      ],
+      "type": "sea",
+      "comment": "North Pole"
     }
   ]
 }

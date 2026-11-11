@@ -53,7 +53,7 @@ ULT = {
 	capital = STATE_LOTHERN_WEST # Lothern, held by LOT at start; seat inferred: no named hub
 }
 
-################ LOT — Eataine (Lothern); realm of the Sea Lords, the Phoenix King's seat ################
+################ LOT — Eataine; realm of the Sea Lords, the Phoenix King's seat ################
 
 LOT = {
 	color = { 126 138 252 }

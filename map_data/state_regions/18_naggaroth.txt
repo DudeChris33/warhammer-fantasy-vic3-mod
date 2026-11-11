@@ -1,25 +1,4 @@
-﻿STATE_LAND_017 = {
-    id = 17
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x719662 }
-    city = x719662
-    farm = x719662
-    mine = x719662
-    wood = x719662
-    port = x719662
-    arable_land = 4
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_coal_mine = 1
-        building_logging_camp = 1
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 1
-    }
-    naval_exit_id = 3001
-}
-STATE_LAND_018 = {
+﻿STATE_LAND_018 = {
     id = 18
     subsistence_building = "building_subsistence_farm"
     provinces = { x1A1663 x207EE5 x45D87A x48411D x598FC5 x6260EA x63522A x6B320F x6D9AB2 x730DC5 x740334 x7BDEEA x7CD459 x8B1891 x908BA4 x95FEB7 x995CC9 x9FC11C xAD1414 xAF7CB7 xB07226 xB9434B xC78783 xDDA771 xDE9CE0 xE0B1E1 xE98306 xE9A856 xEBEBA9 xF4BCCE xFB2550 }
@@ -34,7 +13,7 @@ STATE_LAND_018 = {
         building_coal_mine = 3
         building_iron_mine = 1
         building_lead_mine = 1
-        building_logging_camp = 4
+        building_logging_camp = 3
         building_sulfur_mine = 1
     }
     resource = {
@@ -86,7 +65,6 @@ STATE_LAND_021 = {
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
         building_coal_mine = 1
-        building_iron_mine = 1
         building_logging_camp = 1
     }
     resource = {
@@ -157,42 +135,25 @@ STATE_LAND_027 = {
     }
     naval_exit_id = 3013
 }
-STATE_LAND_030 = {
-    id = 30
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x0FCDDB x38E226 x41B34B x82E9DD x8338AC }
-    city = x0FCDDB
-    farm = x38E226
-    mine = x82E9DD
-    wood = x8338AC
-    arable_land = 3
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_coal_mine = 1
-        building_logging_camp = 1
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 1
-    }
-}
 STATE_LAND_031 = {
     id = 31
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0283E5 x05E1F7 x07F6F8 x0812A2 x0840F4 x098A05 x0B1410 x0B550A x0DB407 x0EB31C x10C81D x12DD1E x1482D3 x17E0E5 x18E8FC x19B4EC x1A2438 x1AE253 x1B8DC6 x1BAE43 x1D824A x1F0C55 x1FE61A x20B20A x2323AF x235201 x238053 x23C14D x23FD74 x247F68 x28B73F x2BD457 x2C71F5 x2E2A52 x2FF084 x307B7A x3233D7 x360F0A x3621B2 x397FC4 x403BE8 x40C6DE x4156A7 x4399FA x44456D x47C3FC x480DF8 x4C6B1F x4F18EB x4F4C10 x52AA22 x53F333 x5AAF57 x5B7B47 x60226A x62376B x631F05 x6505B4 x65957D x69BF7F x6B528C x6D393B x6E66A2 x701A2C x70E61C x71C4B4 x722158 x7290A4 x7BABC5 x7BFA94 x8548DA x86F362 x875DDB x87ACAA x8B390E x8BBB02 x8CA29C x8D0413 x8D403A x8D6E8C x8F1914 x90AC21 x945902 x95D538 x971E49 x99334A x9C5062 x9CDB58 x9F5FA5 xA125D7 xA1D14A xA24E6B xA68B15 xA7445D xA77782 xA88D6E xA94B89 xA9C8AA xAA45CB xAB8EDC xAC891E xACEA95 xAE0554 xAE9E1F xAFAB09 xAFB8DE xB0E172 xB22A83 xB472A9 xB58895 xB5BBBA xB6A354 xB740F2 xB919CC xB9E5BC xBB78C9 xBCE257 xBE2B68 xBF58CF xC2B6E1 xC3FFF2 xC6FC8D xC873F0 xC903B9 xD00EAC xD07925 xD28E26 xD2A0CE xD5EC38 xD64DAF xD80139 xD99919 xDCC8D9 xDD2A50 xDE11EA xDF2CA9 xE0A40C xE0F2DB xE29D63 xE2E75F xE5C850 xE64571 xE78E82 xE86D1A xEABE42 xEB6E88 xED0195 xED143D xED5064 xEE1C54 xF21804 xF29525 xF35340 xF36115 xF62189 xF6DFA4 xF97F9B xFA6C08 xFF0556 }
-    city = x235201
-    farm = x0283E5
-    mine = x8F1914
+    provinces = { x04C265 x056003 x06D766 x077504 x07F6F8 x0812A2 x0840F4 x098A05 x0B1410 x0B550A x0DB407 x0EB31C x0FCDDB x12DD1E x1482D3 x17E0E5 x18E8FC x19B4EC x1A2438 x1AE253 x1B8DC6 x1BAE43 x1D824A x1F0C55 x1FE61A x20B20A x2323AF x235201 x238053 x23C14D x23FD74 x247F68 x28B73F x2BD457 x2C71F5 x2E2A52 x2FF084 x302CAB x307B7A x3233D7 x35E9BA x360F0A x3621B2 x38E226 x38FDD0 x403BE8 x40C6DE x4156A7 x41B34B x4399FA x44456D x44B4B9 x47C3FC x480DF8 x4C3CCD x4F18EB x4F4C10 x52AA22 x53F333 x5AAF57 x5B7B47 x60226A x62376B x631F05 x6505B4 x65957D x68BB97 x69BF7F x6B528C x6D393B x6E66A2 x701A2C x70E61C x71C4B4 x722158 x7ADFD5 x7BABC5 x7BFA94 x82E9DD x8338AC x86F362 x875DDB x87ACAA x8B390E x8BBB02 x8CA29C x8D0413 x8D403A x8D6E8C x8F1914 x90AC21 x945902 x95D538 x971E49 x99334A x9C5062 x9CDB58 x9F19D8 x9F5FA5 xA125D7 xA1D14A xA24E6B xA68B15 xA7445D xA77782 xA88D6E xA9C8AA xAA45CB xAB8EDC xAC891E xACEA95 xAE0554 xAFAB09 xAFB8DE xB0E172 xB22A83 xB58895 xB6A354 xB704CB xB740F2 xB798C3 xB9E5BC xBB78C9 xBCE257 xBE2B68 xBF58CF xC2B6E1 xC3FFF2 xC6FC8D xC873F0 xC903B9 xCB0612 xD00EAC xD02583 xD07925 xD28E26 xD2A0CE xD5EC38 xD64DAF xD80139 xD99919 xDCC8D9 xDD2A50 xDE11EA xDF2CA9 xE0A40C xE0F2DB xE0FBDD xE21B6F xE29D63 xE2E75F xE5C850 xE64571 xE78E82 xE86D1A xEABE42 xEB6E88 xED0195 xED143D xED5064 xEE1C54 xF21804 xF225D9 xF29525 xF36115 xF62189 xF6DFA4 xF97F9B xFA6C08 xFF0556 }
+    impassable = { x056003 x18E8FC x82E9DD }
+    city = x701A2C
+    farm = x04C265
+    mine = x8D403A
     wood = xFF0556
-    arable_land = 114
+    arable_land = 126
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 16
-        building_fishing_wharf = 1
-        building_iron_mine = 7
+        building_coal_mine = 17
+        building_fishing_wharf = 2
+        building_iron_mine = 8
         building_lead_mine = 6
-        building_logging_camp = 18
-        building_sulfur_mine = 6
+        building_logging_camp = 21
+        building_sulfur_mine = 7
+        building_whaling_station = 1
     }
     resource = {
         type = "building_gold_field"
@@ -201,60 +162,32 @@ STATE_LAND_031 = {
     }
     resource = {
         type = "building_oil_rig"
-        undiscovered_amount = 14
-    }
-}
-STATE_LAND_032 = {
-    id = 32
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x056003 x077504 x18CD52 x302CAB x38FDD0 x44B4B9 x4C3CCD x63807C x7ADFD5 xB704CB xCB0612 xE21B6F }
-    city = x4C3CCD
-    farm = x056003
-    mine = x44B4B9
-    wood = xE21B6F
-    arable_land = 9
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-        building_coal_mine = 1
-        building_iron_mine = 1
-        building_logging_camp = 2
-        building_sulfur_mine = 1
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 1
-    }
-}
-STATE_LAND_033 = {
-    id = 33
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x6A869C x91AB36 xA6F58E xEA7446 }
-    city = xEA7446
-    farm = x6A869C
-    mine = x91AB36
-    wood = xA6F58E
-    arable_land = 3
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
+        undiscovered_amount = 16
     }
 }
 STATE_LAND_034 = {
     id = 34
     subsistence_building = "building_subsistence_farm"
-    provinces = { x02AD64 x051607 x060B76 x0B7E89 x0DE72C x10F19C x144FAE x1664AF x1F35D4 x2806F9 x28A497 x2A6F9C x2B650B x30D81E x3A46E1 x3BBE44 x427A68 x448F69 x44E30B x4D608E x52D3A1 x532743 x5BA4C6 x6475EB x67D3FD x6FAFB3 x845C6D x86C510 x88ABBF x8D2D92 x8F9635 x9D86CB xA4683F xA4E08D xA8C093 xAA53A0 xAC1EA5 xAF2915 xB191B8 xB49C28 xBD6D4D xC63E72 xC99C84 xCC0527 xD4D64C xD6EB4D xD9F5BD xE2C6E2 xEB9807 xEE00AA xEEF619 xFF4F52 }
-    city = x10F19C
+    provinces = { x02AD64 x051607 x060B76 x0B7E89 x0DE72C x10F19C x144FAE x1664AF x1F35D4 x2211F2 x2806F9 x28A497 x2B650B x30D81E x3A46E1 x3BBE44 x427A68 x448F69 x44E30B x4D608E x52D3A1 x532743 x5BA4C6 x6475EB x67D3FD x6A869C x6FAFB3 x845C6D x86C510 x88ABBF x8D2D92 x91AB36 x9D86CB xA4683F xA4E08D xA6F58E xA8C093 xAA53A0 xAC1EA5 xAF2915 xB191B8 xB49C28 xBD6D4D xC63E72 xC99C84 xCC0527 xD4D64C xD9F5BD xE2C6E2 xEA7446 xEB9807 xEE00AA xFF4F52 }
+    impassable = { x8D2D92 x91AB36 }
+    city = x532743
     farm = x02AD64
-    mine = x845C6D
+    mine = x6FAFB3
     wood = xFF4F52
-    arable_land = 38
+    arable_land = 41
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
-        building_coal_mine = 5
+        building_coal_mine = 6
         building_fishing_wharf = 1
-        building_iron_mine = 2
+        building_iron_mine = 3
         building_lead_mine = 2
-        building_logging_camp = 6
+        building_logging_camp = 7
         building_sulfur_mine = 2
+    }
+    resource = {
+        type = "building_gold_field"
+        depleted_type = "building_gold_mine"
+        undiscovered_amount = 1
     }
     resource = {
         type = "building_oil_rig"
@@ -323,19 +256,6 @@ STATE_LAND_126 = {
     }
     naval_exit_id = 3109
 }
-STATE_LAND_362 = {
-    id = 362
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x26E338 }
-    city = x26E338
-    farm = x26E338
-    mine = x26E338
-    wood = x26E338
-    arable_land = 1
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-    }
-}
 STATE_LAND_430 = {
     id = 430
     subsistence_building = "building_subsistence_farm"
@@ -354,22 +274,22 @@ STATE_LAND_430 = {
 STATE_LAND_679 = {
     id = 679
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0189A3 x7A6787 xCDEBD6 xD35EE9 xDC300E }
+    provinces = { x0189A3 x719662 x7A6787 x7B2EA4 x83B5CD x878C2D xCDEBD6 xD35EE9 xDC300E }
     city = xCDEBD6
     farm = x0189A3
-    mine = x7A6787
+    mine = x7B2EA4
     wood = xDC300E
     port = xD35EE9
-    arable_land = 1762
+    arable_land = 1766
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
         building_coal_mine = 241
         building_fishing_wharf = 22
-        building_iron_mine = 113
+        building_iron_mine = 114
         building_lead_mine = 89
-        building_logging_camp = 286
+        building_logging_camp = 287
         building_sulfur_mine = 98
-        building_whaling_station = 6
+        building_whaling_station = 5
     }
     resource = {
         type = "building_gold_field"
@@ -458,7 +378,7 @@ STATE_LAND_689 = {
     capped_resources = {
         building_coal_mine = 156
         building_fishing_wharf = 14
-        building_iron_mine = 74
+        building_iron_mine = 73
         building_lead_mine = 58
         building_logging_camp = 185
         building_sulfur_mine = 63

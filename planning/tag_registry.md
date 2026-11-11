@@ -960,7 +960,7 @@ placeholder land) and the two Black Peninsula outposts (see 05 Southern Realms).
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
 | ULT | `17_ulthuan` | Ulthuan | formable | `high_elf` | Lothern | the Phoenix King's realm united |
-| LOT | `17_ulthuan` | Eataine (Lothern) | start | `high_elf` | Lothern | realm of the Sea Lords; the capital |
+| LOT | `17_ulthuan` | Eataine | start | `high_elf` | Lothern | realm of the Sea Lords; the capital |
 | CAL | `17_ulthuan` | Caledor | start | `high_elf` | Tor Caled | dragon princes |
 | SAP | `17_ulthuan` | Saphery | start | `high_elf` | Saphery | land of mages |
 | NGY | `17_ulthuan` | Nagarythe | start | `high_elf` | — | the Shadowlands (Shadow Warriors) |
@@ -1060,7 +1060,7 @@ of Xlanhuapec and Tlaxtlan, and the Bretonnian colony.
 | TLN | `19_lustria` | Tlanxla | reserved | `PLACEHOLDER` | Tlanxla | City of the Sky; ruined by Daemons, nested over by Ripperdactyls and Terradons; no refounding, code frozen, no polity (#10177; 5e/6e/7e via Lexicanum 2026-11-05) |
 | SPZ | `19_lustria` | Spektazuma | start | `lizardmen` | Spektazuma | **dormant** (#10177); City of Lenses (ruined); **not found on Lexicanum** (no page, 2026-11-05), source unverified |
 | TLA | `19_lustria` | Tlax | start | `lizardmen` | Tlax | **dormant** (#10177); City of Ghosts, in the east about 50 km from the Tarantula Coast, haunted ruins the Slann revisit each decade for a ritual (Lexicanum 2026-11-05) |
-| PST | `19_lustria` | Clan Pestilens | start | `skaven` | Itza (Quetza's hub) | about 2 states: Quetza's state plus one neighbour; plague-cult Skaven; a real clan tag, not an `XS*` rename; `principality`/`unrecognized` (#10177, Chris: definite in; 8e Lizardmen book recalled) Painted (#10181): Gwakmol Crater, Tower of Lightning. |
+| PST | `19_lustria` | Clan Pestilens | start | `skaven` | Oyxl | starts in Oyxl (#10449; Chris's "Oxyl" read as the city Oyxl; Lexicanum has Oxyotl spawned in Pahuax, flagged for Chris), one state; plague-cult Skaven; a real clan tag, not an `XS*` rename; `principality`/`unrecognized` (#10177, Chris: definite in; 8e Lizardmen book recalled) Painted (#10181): Gwakmol Crater, Tower of Lightning; repainted #10449: those two go to LZB and ITZ, PST holds Oyxl. |
 | VCO | `19_lustria` | Vampire Coast | start | `vampire_coast` | Vampire Coast | Luthor Harkon's coast, about 2 states on the east coast between Cape Ruin and the Qurvesa; established since 876 IC (WFRP *Lustria* pp. 64-68; 5e *Lustria* p. 13; WD 306), capital New Bechafen with an Imperial District; Harkon's 2471 IC capture is reported by one source and needs a check; in by Chris's call, now lore-supported; vampire-group culture stand-in until #10179; `principality`/`unrecognized` Painted (#10181): Vampire Coast, Pox Marsh. |
 | AMZ | `19_lustria` | Amazons | start | `amazon` | Dragon Isles | the Amazon Sisterhood, about 2 states; Lexicanum puts most of them on an island off Tlaxtlan's coast (6e-era Amazon list, 8e map p. 25); culture is #10179's; `principality`/`unrecognized` Painted (#10181): Dragon Isles, Blood Hall. |
 | TLC | `19_lustria` | Nuevo Luccini | start | `tilean` | Cactus Coast | about 1 state; Nuevo Luccini, a Tilean pirate port on the Cactus Coast (Town Cryer 15, *Lustria: Cities of Gold* p. 17, via Lexicanum 2026-11-05), a named settlement so not `invented`; `principality`/`unrecognized` Painted (#10181): Cactus Coast. |

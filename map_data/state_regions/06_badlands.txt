@@ -23,31 +23,6 @@
     }
     naval_exit_id = 3084
 }
-STATE_MONTE_CASTELLO = {
-    id = 105
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x049413 x0630C6 x665C9A x8333D9 x89FDD2 x901356 x9A4936 xC35D81 xFC11BD }
-    city = x8333D9
-    farm = x0630C6
-    mine = x89FDD2
-    wood = xFC11BD
-    port = x9A4936
-    arable_land = 101
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" "building_cotton_plantation" "building_silk_plantation" "building_vineyard" }
-    capped_resources = {
-        building_coal_mine = 15
-        building_fishing_wharf = 15
-        building_iron_mine = 32
-        building_lead_mine = 18
-        building_logging_camp = 20
-        building_sulfur_mine = 21
-    }
-    resource = {
-        type = "building_oil_rig"
-        undiscovered_amount = 3
-    }
-    naval_exit_id = 3081
-}
 STATE_NORTH_BADLAND_HILLS = {
     id = 107
     subsistence_building = "building_subsistence_orchard"
@@ -514,6 +489,20 @@ STATE_LOST_KHYPNIA = {
     }
     naval_exit_id = 3081
 }
+STATE_WINTERTEETH_PASS = {
+    id = 222
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x0CECEA }
+    city = x0CECEA
+    farm = x0CECEA
+    mine = x0CECEA
+    wood = x0CECEA
+    arable_land = 2
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_logging_camp = 1
+    }
+}
 STATE_ORTEGETA = {
     id = 223
     subsistence_building = "building_subsistence_farm"
@@ -536,6 +525,56 @@ STATE_ORTEGETA = {
         undiscovered_amount = 2
     }
 }
+STATE_SHATTERED_TEETH = {
+    id = 224
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x2C30FB x37C767 x4B0F66 x5D20FC x7068FB x877E58 x9E93B5 x9FEF6E xD5FEE0 xFB5875 }
+    impassable = { x4B0F66 x7068FB x9E93B5 }
+    city = x37C767
+    farm = xFB5875
+    mine = x2C30FB
+    wood = xD5FEE0
+    port = x877E58
+    arable_land = 49
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 13
+        building_fishing_wharf = 2
+        building_iron_mine = 10
+        building_lead_mine = 4
+        building_logging_camp = 16
+        building_sulfur_mine = 1
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 2
+    }
+    naval_exit_id = 3072
+}
+STATE_BLACK_MOUNTAINS = {
+    id = 226
+    subsistence_building = "building_subsistence_farm"
+    provinces = { x22E788 x55F58C x842046 x92647E xA979DB xE44318 }
+    impassable = { x55F58C x92647E }
+    city = x22E788
+    farm = x842046
+    mine = xE44318
+    wood = xA979DB
+    arable_land = 29
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 5
+        building_fishing_wharf = 1
+        building_iron_mine = 5
+        building_lead_mine = 1
+        building_logging_camp = 11
+        building_sulfur_mine = 1
+    }
+    resource = {
+        type = "building_oil_rig"
+        undiscovered_amount = 1
+    }
+}
 STATE_EASTERN_BORDER_PRINCES = {
     id = 227
     subsistence_building = "building_subsistence_farm"
@@ -556,6 +595,22 @@ STATE_EASTERN_BORDER_PRINCES = {
     resource = {
         type = "building_oil_rig"
         undiscovered_amount = 3
+    }
+}
+STATE_BLACK_FIRE_PASS = {
+    id = 228
+    subsistence_building = "building_subsistence_farm"
+    provinces = { xBEDBAE xD0E871 xF6BF27 }
+    city = xD0E871
+    farm = xD0E871
+    mine = xD0E871
+    wood = xD0E871
+    arable_land = 7
+    arable_resources = { "building_rye_farm" "building_livestock_ranch" }
+    capped_resources = {
+        building_coal_mine = 1
+        building_iron_mine = 1
+        building_logging_camp = 2
     }
 }
 STATE_FOREST_OF_GLOOM = {

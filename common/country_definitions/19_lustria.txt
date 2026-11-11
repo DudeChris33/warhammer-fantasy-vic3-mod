@@ -88,7 +88,7 @@ PST = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { skaven }
-	capital = STATE_ITZA # Quetza's hub, held by ITZ at start
+	capital = STATE_OYXL # Oyxl, the Eternal City; Clan Pestilens starts here (#10449)
 }
 
 ################ VCO - Vampire Coast; Harkon's coast, New Bechafen (WFRP Lustria pp. 64-68, via Lexicanum) ################

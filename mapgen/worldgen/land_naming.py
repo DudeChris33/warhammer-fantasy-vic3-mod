@@ -150,10 +150,14 @@ def load_strategic_region_colors(path: Path) -> RealmLegend:
     if excluded & seen:
         raise ValueError(f"{path.name}: a colour is both a fill and excluded: {excluded & seen}")
     border = tuple(int(v) for v in data["border"]["rgb"])
-    realms = [f.realm for f in fills]
-    dupes = {r for r in realms if realms.count(r) > 1}
-    if dupes:
-        raise ValueError(f"{path.name}: duplicate realm name(s) {sorted(dupes)}")
+    # several colours may paint one realm (the recoloured layer splits a realm into
+    # sub-areas), but they must agree on stub and continent
+    first: dict[str, RealmFill] = {}
+    for f in fills:
+        g = first.setdefault(f.realm, f)
+        if (g.file_stem, g.continent) != (f.file_stem, f.continent):
+            raise ValueError(f"{path.name}: realm {f.realm!r} is painted with different "
+                             f"file_stem/continent on {g.rgb} and {f.rgb}")
     return RealmLegend(fills=fills, excluded_rgbs=excluded, border_rgb=border)
 
 
@@ -206,6 +210,14 @@ def assign_realms(region_of_pixel: np.ndarray, n_regions: int,
     uniq, counts = np.unique(keys, return_counts=True)
     votes = np.zeros((n_regions + 1, n_fills + 1), dtype=np.int64)
     votes[uniq // (n_fills + 1), uniq % (n_fills + 1)] = counts
+    # fold the colours of one realm into the column of its first colour, so a realm
+    # painted in several shades votes as one
+    first_idx: dict[str, int] = {}
+    for i, fl in enumerate(legend.fills, start=1):
+        j = first_idx.setdefault(fl.realm, i)
+        if j != i:
+            votes[:, j] += votes[:, i]
+            votes[:, i] = 0
 
     out: dict[int, RealmAssignment] = {}
     for region_id in range(1, n_regions + 1):

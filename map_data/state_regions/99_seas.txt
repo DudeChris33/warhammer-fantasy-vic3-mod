@@ -560,7 +560,7 @@ STATE_GREAT_MORTIS_RIVER_02 = {
 	provinces = { xC804A4 }
 }
 
-STATE_DRAGON_ISLES_BYPASS_02 = {
+STATE_SEA_OF_FEAR_11 = {
 	id = 3111
 	provinces = { x663C1D }
 }
@@ -707,11 +707,6 @@ STATE_TARANTULA_COAST_WATERS = {
 	provinces = { xD9A6EE }
 }
 
-STATE_ISLE_OF_RISING_SUN_BYPASS = {
-	id = 3137
-	provinces = { x77DE67 }
-}
-
 STATE_GREAT_OCEAN_02 = {
 	id = 3138
 	provinces = { x1615E0 }
@@ -737,6 +732,11 @@ STATE_ESTALIAN_PASSAGE_PLACEHOLDER = {
 	provinces = { x8EF3C4 }
 }
 
+STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER = {
+	id = 3147
+	provinces = { xA60921 }
+}
+
 STATE_IND_SOUTHERN_COAST_PLACEHOLDER = {
 	id = 3143
 	provinces = { x2D2B3D }
@@ -755,11 +755,6 @@ STATE_LUSTRIA_NORTHERN_BAY_PLACEHOLDER = {
 STATE_LUMBRIA_ARCHIPELAGO = {
 	id = 3146
 	provinces = { x07D1A8 }
-}
-
-STATE_DEVOURER_NIPPON_CHANNEL_PLACEHOLDER = {
-	id = 3147
-	provinces = { xA60921 }
 }
 
 STATE_NORTHERN_GREAT_OCEAN = {
@@ -1019,11 +1014,6 @@ STATE_GREAT_OCEAN_08 = {
 STATE_ISLE_OF_DUSK_BYPASS = {
 	id = 3200
 	provinces = { x67852E }
-}
-
-STATE_JADE_SEA_10 = {
-	id = 3201
-	provinces = { x05BCA7 }
 }
 
 STATE_GREAT_OCEAN_09 = {
