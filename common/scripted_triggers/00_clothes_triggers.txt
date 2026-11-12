@@ -380,6 +380,20 @@ magnate_clothes_trigger = {
 		has_role_of_type = magnate
 	}
 }
+# [1.15.1 port] WH-native port of vanilla common_child_outfit_trigger (00_clothes_triggers.txt:2712). Vanilla's second
+# branch lists real-world heritage groups that don't exist in this mod; only the european-clothes branch is ported.
+common_child_outfit_trigger = {
+	exists = scope:character
+	scope:character = {
+		age < 14
+	}
+	european_clothes_trigger = yes
+	scope:character = {
+		is_noble = no
+		is_heir_of_own_country = no
+		is_ruler_of_own_country = no
+	}
+}
 should_be_naked_trigger = { always = no }
 should_be_fully_naked_portrait_trigger = { always = no }
 is_in_cold_land_hq_trigger = { always = no }

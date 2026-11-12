@@ -264,6 +264,8 @@
 	}
 
 	secession = {
+		can_secede_during_revolution = yes
+
 		possible = {
 			political_movement_support >= 0.05
 			scope:clout <= 0
@@ -650,6 +652,8 @@ movement_religious_minority = {
 	}
 
 	secession = {
+		can_secede_during_revolution = yes
+
 		possible = {
 			owner ?= {
 				any_scope_state = {
