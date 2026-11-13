@@ -48,7 +48,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
   - `/maestro-auto <item-ids>` — scope + build in one mostly-autonomous run, one approval gate
   - `/maestro-run <plan-id>` — execute an approved Plan in waves with fresh sub-agents
   - `/maestro-review` — commit-bound verdict for a teammate's ask, or the closing pass of your own build
-  - `/maestro-vibe <description>` — small change with build discipline, no board ceremony
+  - `/maestro-vibe <description>` — small change with build discipline, no board ceremony; in this repo it files no history item (skip the skill's step 10) — the commit is the record
   - `/maestro-release-note` — draft the next release note from the actual diffs
   - `/sites-verify <url>` — look at a deployed maestro site (real pixels)
   - `/map-regen` — full map regen after Chris re-exports `full.ora`: manifest, provinces through adjacencies, offline gate, state-level renders, commit/deploy/`error.log` triage, with the stop-and-fix playbook from the 2026-10-15 run
@@ -56,6 +56,7 @@ Auto-loading and the routing table below are a starting point, not a limit: read
   - `/review-panel <target>` — convene the five-expert review panel on a plan, a diff, or a rendered artifact
   - `/project-memory` — show memory state
 - `.claude/maestro.json` holds `workspace`, `board` and `project`; the maestro skills prompt to create it if missing.
+- **No `Apply rules:` lines.** A new workspec names the guide file to read (`.claude/rules/<name>.md`) instead. Older items carry `Apply rules: rules-<name>`; those slugs pointed at the Maestro copy of the guides, retired 2026-11-12 (#10780), so a work packet lists them under `rules.missing`. That is expected: read `.claude/rules/<name>.md` and carry on.
 - **Sub-agents** in `.claude/agents/`: `docs-updater` (update docs from a diff) and `security-review` (MP-desync and content-integrity review) are spawned by the build skills; `loremaster` (canon), `cartographer` (map craft), `geographer` (physical plausibility), `vic3-modding-expert` (engine correctness) and `game-designer` (play and scope) are the read-only `/review-panel` reviewers. Each starts from the guides named in its brief and may read others.
 
 ### Workflow chain
@@ -73,7 +74,7 @@ Bug or feature idea
 /maestro-build  ── executes ─►  commits + activity trail, stage=review/done
 ```
 
-`/maestro-scope` must never be skipped — it is where file-level decisions get pinned down. `/maestro-auto` runs scope + build as one approval-once run; `/maestro-vibe` is the lightweight path for a change too small to track. `/review-panel` is optional and can run at any point; its ruling is advisory and on anything visual the user is the final gate.
+`/maestro-scope` must never be skipped — it is where file-level decisions get pinned down. `/maestro-auto` runs scope + build as one approval-once run; `/maestro-vibe` is the lightweight path for a change too small to track, and leaves no board item here. `/review-panel` is optional and can run at any point; its ruling is advisory and on anything visual the user is the final gate.
 
 ### Autonomy model
 
@@ -86,5 +87,5 @@ The generation/iteration loop is where to run long and unattended; sourcing and 
 ## Memory layers
 
 - **Claude Code memory** (`~/.claude/projects/.../memory/`) — per-device, per the memory-system instructions in the system prompt.
-- **Maestro knowledge** — durable and visible to every session and agent via the MCP. Whenever you save a Claude Code memory, also call the maestro MCP's `add_knowledge` (project id in `.claude/maestro.json`) with the same content. Map `type` to `kind`: `feedback` → `rule`, `project` → `decision` (or `pattern`/`reference`), `reference` → `reference`, `user` → `rule`. **Maestro knowledge can be stale** (entries are written once and rarely updated; some still describe `tools/`, old decisions or superseded workflows): treat a hit as a lead, not a fact, and verify it against the repo (`.claude/rules/`, the code, `git log`) or the current Claude Code memory before acting on it. When the two disagree, the repo wins; fix or supersede the stale entry. Chris works on a single machine today (2026-09-28); the mirror is how conventions survive a machine change and reach Maestro agents.
+- **Maestro knowledge** — one base: the workspace (`workspace` in `.claude/maestro.json`), which work packets read automatically. Do not mirror Claude Code memories into it, and do not write to the project knowledge base (the `project` id): it is frozen as a searchable archive (2026-11-12, #10780 — nothing surfaced it, so the memory copies written there were never read). A decision or measured fact that a later session needs from a work packet goes to the workspace once, through the maestro skills' own knowledge step (`upsert_workspace_doc`), and not at all when a guide in `.claude/rules/` already carries it. **Maestro knowledge can be stale**: treat a hit as a lead, not a fact, and verify it against the repo (`.claude/rules/`, the code, `git log`) or the current Claude Code memory before acting on it. When the two disagree, the repo wins; correct the entry with `update_knowledge` or retire it with `deprecate_knowledge`. Chris works on a single machine with no Maestro agents (2026-11-12), so the repo and Claude Code memory are the record.
 - Current work state lives on the maestro board, not in a repo scratchpad. Long-lived conventions belong in a guide under `.claude/rules/`.

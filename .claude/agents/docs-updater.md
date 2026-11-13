@@ -5,9 +5,9 @@ tools: Bash, Read, Edit, Grep, Glob
 model: sonnet
 ---
 
-Update Warhammer Fantasy Overhaul documentation to reflect recent script/content changes. **Start from** `.claude/rules/docs.md` (mirror sync rules); read any other guide that helps.
+Update Warhammer Fantasy Overhaul documentation to reflect recent script/content changes. **Start from** `.claude/rules/docs.md`; read any other guide that helps.
 
-You have no MCP: in your summary, list which `.claude/rules/*.md` files you edited so the caller can re-run `upsert_workspace_doc` for their `rules-<name>` slugs.
+In your summary, list which `.claude/rules/*.md` files you edited.
 
 ## Steps
 

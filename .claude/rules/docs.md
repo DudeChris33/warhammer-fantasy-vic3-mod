@@ -7,7 +7,7 @@ paths:
 
 # Docs Rules
 
-**Read when:** you are editing `CLAUDE.md`, `.claude/rules/`, agents, skills or `planning/`. **Covers:** what is authored vs generated, what gets updated when, and the Maestro mirror sync. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
+**Read when:** you are editing `CLAUDE.md`, `.claude/rules/`, agents, skills or `planning/`. **Covers:** what is authored vs generated and what gets updated when. Loads automatically when you open a matching file with the Read tool — a starting point, not a boundary: read any other guide that would help, and read a neighbour whenever your work touches its area.
 
 **Related guides:**
 - [core.md](core.md) — always-loaded guardrails and trust order
@@ -23,7 +23,7 @@ paths:
 - Script changes (`common/`, `events/`) — no doc update needed unless they change a project-specific convention worth capturing in `.claude/rules/scripting.md`.
 - New reusable pattern established (e.g. first naming convention for a folder) — record it in the matching guide (routing table in `CLAUDE.md`) so the next task doesn't reinvent it.
 - Work-tracking records — the workspec, its `## Approach` (legacy name `## Plan`), and the activity trail — live on the **maestro board** and are updated by the `/maestro-task`, `/maestro-scope`, `/maestro-build` (and `/maestro-auto`, `/maestro-vibe`) skills via the maestro MCP, not by hand. `planning/` no longer tracks open work (see `CLAUDE.md`).
-- **`.claude/rules/*.md` is mirrored to the maestro workspace (id 70) as `rule`-kind workspace docs** (`upsert_workspace_doc`, slugs `rules-core`/`rules-docs`/`rules-heraldry`/`rules-interface`/`rules-localization`/`rules-peoples`/`rules-scripting`/`rules-testing`; see the `rules-sync-maintenance` doc for the full mapping) so conventions survive a machine change and reach Maestro agents — Chris works on a single machine today; Claude Code's own rule-loading is per-machine, not synced. **Whenever a rule file changes, re-run `upsert_workspace_doc` for its matching slug** to push the update; a new rule file needs a new `rules-<name>` slug added to the mapping doc. The mirror can lag the repo, so agents reading it from Maestro must verify against `.claude/rules/` before trusting it; the repo copy wins. Path-scoped guides load only when a matching file is Read, so keep every guardrail in `core.md`.
+- **`.claude/rules/*.md` lives only in the repo.** The Maestro copy (the `rules-*` workspace docs) was retired on 2026-11-12 (#10780): it lagged the repo, had to be retyped by hand, and only work packets read it. Never upsert a rule file to Maestro. Path-scoped guides load only when a matching file is Read, so keep every guardrail in `core.md`.
 
 ## Rules
 
