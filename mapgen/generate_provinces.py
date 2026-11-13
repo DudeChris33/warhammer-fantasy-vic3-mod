@@ -167,7 +167,13 @@ MERGE_FLOOR = 150
 #: regions) came into scope: the same rule written as a delta, 12033 + 3 + (12033 - 574)
 #: * 822 / 2864193 = 12039.3. (The run's own log reads 583 drawn regions at 12033; its
 #: area line is the pre-cut drawn zone, so the delta form is used.)
-PROVINCE_TARGET = 12039
+#: Raised 12039 -> 12150 on 2026-11-12 when Albion (26,878 land px, four regions that
+#: make three states once the state_merges line joins the islet) came into scope: the
+#: same delta rule on the last recorded drawn zone (586 regions, 2,865,015 px):
+#: 12039 + 4 + (12039 - 586) * 26878 / 2865015 = 12150.4. Chris's later Lustria redraws
+#: have since changed the region count, so read the next run's own log before trusting
+#: the density to the last province.
+PROVINCE_TARGET = 12150
 #: A province piece below this many px is swallowed into a same-region neighbour
 #: (never across a magenta boundary — the merge stays inside one region).
 MIN_PROVINCE_AREA = 120
