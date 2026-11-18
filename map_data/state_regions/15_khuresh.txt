@@ -1,12 +1,12 @@
 ﻿STATE_TOR_ELITHIS = {
     id = 164
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0E02D6 x0F54E9 x21BA21 x2C077C x34AE7E x36BA7D x4A71C8 x4BC3DB x618725 x66FA38 x6F8F36 x711D70 x73296F x789C82 x7E0F95 x8832CD x9524F2 x967705 xAD8C62 xBDDC99 xBFF19A xC8C2BF xD2E5F7 xDA6509 xDA935B xDFD81C xE9FB54 xF6ED79 xFA4B8B xFFECF0 }
+    provinces = { x0E02D6 x0F54E9 x21BA21 x2C077C x34AE7E x35E9BA x36BA7D x4A71C8 x4BC3DB x618725 x66FA38 x6F8F36 x711D70 x73296F x789C82 x7E0F95 x8832CD x9524F2 x967705 xAD8C62 xBDDC99 xBFF19A xC8C2BF xD2E5F7 xDA6509 xDA935B xDFD81C xE9FB54 xF6ED79 xFA4B8B xFFECF0 }
     city = x711D70
     farm = x0E02D6
-    mine = x8832CD
+    mine = x7E0F95
     wood = xFFECF0
-    port = xF6ED79
+    port = xDA935B
     arable_land = 61
     arable_resources = { "building_rice_farm" "building_livestock_ranch" "building_coffee_plantation" "building_tobacco_plantation" "building_sugar_plantation" "building_banana_plantation" }
     capped_resources = {
@@ -30,7 +30,7 @@
         type = "building_rubber_plantation"
         undiscovered_amount = 16
     }
-    naval_exit_id = 3196
+    naval_exit_id = 3197
 }
 STATE_NORTH_ISLE = {
     id = 165
@@ -65,7 +65,7 @@ STATE_NORTH_ISLE = {
         type = "building_rubber_plantation"
         undiscovered_amount = 33
     }
-    naval_exit_id = 3176
+    naval_exit_id = 3177
 }
 STATE_LAND_169 = {
     id = 169
@@ -94,7 +94,7 @@ STATE_LAND_169 = {
         type = "building_oil_rig"
         undiscovered_amount = 39
     }
-    naval_exit_id = 3210
+    naval_exit_id = 3212
 }
 STATE_SOUTHERN_GATE_OF_CALITH = {
     id = 655
@@ -116,7 +116,7 @@ STATE_SOUTHERN_GATE_OF_CALITH = {
         type = "building_oil_rig"
         undiscovered_amount = 1
     }
-    naval_exit_id = 3197
+    naval_exit_id = 3198
 }
 STATE_STARSAND_PORT = {
     id = 657
@@ -151,7 +151,7 @@ STATE_STARSAND_PORT = {
         type = "building_rubber_plantation"
         undiscovered_amount = 23
     }
-    naval_exit_id = 3196
+    naval_exit_id = 3197
 }
 STATE_ELITHISIAN_GROVE = {
     id = 659
@@ -186,7 +186,7 @@ STATE_ELITHISIAN_GROVE = {
         type = "building_rubber_plantation"
         undiscovered_amount = 28
     }
-    naval_exit_id = 3176
+    naval_exit_id = 3177
 }
 STATE_NORTHERN_GATE_OF_CALITH = {
     id = 674
@@ -211,5 +211,5 @@ STATE_NORTHERN_GATE_OF_CALITH = {
         type = "building_rubber_plantation"
         undiscovered_amount = 1
     }
-    naval_exit_id = 3197
+    naval_exit_id = 3198
 }

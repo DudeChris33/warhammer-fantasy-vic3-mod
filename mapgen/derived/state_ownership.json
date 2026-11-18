@@ -33,12 +33,12 @@
    "scope": "drawn"
   },
   "STATE_ALTAR_OF_THE_HORNED_RAT": {
-   "id": 708,
+   "id": 715,
    "naming_anchor": [
-    2593,
-    2671
+    2615,
+    2554
    ],
-   "owner": "LZD",
+   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_AMAZONIA": {
@@ -88,6 +88,7 @@
      "owner": "BRN",
      "provinces": [
       "x36FB77",
+      "x56D424",
       "x5B96F1",
       "x781F61",
       "xCBA3B0",
@@ -219,12 +220,12 @@
    "scope": "drawn"
   },
   "STATE_AXLOTL": {
-   "id": 707,
+   "id": 694,
    "naming_anchor": [
-    2418,
-    2574
+    2522,
+    2456
    ],
-   "owner": "LZE",
+   "owner": "XLA",
    "scope": "drawn"
   },
   "STATE_BADLANDS_COAST": {
@@ -270,15 +271,6 @@
     594
    ],
    "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_BITING_BOGS": {
-   "id": 728,
-   "naming_anchor": [
-    1773,
-    2156
-   ],
-   "owner": "SKG",
    "scope": "drawn"
   },
   "STATE_BJORNLING_S_GATHERING": {
@@ -425,15 +417,6 @@
    "owner": "ICL",
    "scope": "drawn"
   },
-  "STATE_BLOOD_SWAMPS": {
-   "id": 694,
-   "naming_anchor": [
-    2522,
-    2456
-   ],
-   "owner": "XLA",
-   "scope": "drawn"
-  },
   "STATE_BOHSENFELS": {
    "id": 331,
    "naming_anchor": [
@@ -504,15 +487,6 @@
     1222
    ],
    "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_CACTUS_COAST": {
-   "id": 684,
-   "naming_anchor": [
-    1883,
-    1942
-   ],
-   "owner": "TLC",
    "scope": "drawn"
   },
   "STATE_CANTABRIO_ROAD": {
@@ -605,6 +579,15 @@
    "owner": "MAG",
    "scope": "drawn"
   },
+  "STATE_CHAMBER_OF_VISIONS": {
+   "id": 723,
+   "naming_anchor": [
+    1924,
+    2368
+   ],
+   "owner": "LZB",
+   "scope": "drawn"
+  },
   "STATE_CHAMON_DHAREK": {
    "id": 545,
    "naming_anchor": [
@@ -630,6 +613,15 @@
     1103
    ],
    "owner": "CHR",
+   "scope": "drawn"
+  },
+  "STATE_CITADEL_OF_DUSK": {
+   "id": 714,
+   "naming_anchor": [
+    2906,
+    3035
+   ],
+   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_CITY_OF_KINGS": {
@@ -668,15 +660,6 @@
    "owner": "COT",
    "scope": "drawn"
   },
-  "STATE_COPPER_DESERT": {
-   "id": 702,
-   "naming_anchor": [
-    2251,
-    2846
-   ],
-   "owner": "LZC",
-   "scope": "drawn"
-  },
   "STATE_COURONNE": {
    "id": 50,
    "naming_anchor": [
@@ -684,15 +667,6 @@
     720
    ],
    "owner": "COU",
-   "scope": "drawn"
-  },
-  "STATE_CREEPING_JUNGLE": {
-   "id": 685,
-   "naming_anchor": [
-    1932,
-    2021
-   ],
-   "owner": "HEX",
    "scope": "drawn"
   },
   "STATE_CRIPPLE_PEAK": {
@@ -968,6 +942,15 @@
    "owner": "BOL",
    "scope": "drawn"
   },
+  "STATE_DUSK_PEAKS": {
+   "id": 713,
+   "naming_anchor": [
+    2762,
+    2924
+   ],
+   "owner": "LZD",
+   "scope": "drawn"
+  },
   "STATE_DUST_GATE": {
    "id": 703,
    "naming_anchor": [
@@ -1042,9 +1025,9 @@
      "owner": "SRY",
      "provinces": [
       "x000D6D",
-      "x1CCD31",
+      "x01EF49",
       "xA5BF25",
-      "xBB04AA",
+      "xAE6AFA",
       "xC39E7B"
      ]
     },
@@ -1292,15 +1275,6 @@
    "owner": "MDR",
    "scope": "drawn"
   },
-  "STATE_FLOATING_PYRAMID": {
-   "id": 682,
-   "naming_anchor": [
-    1765,
-    1915
-   ],
-   "owner": "HEX",
-   "scope": "drawn"
-  },
   "STATE_FOREST_OF_GLOOM": {
    "id": 230,
    "naming_anchor": [
@@ -1532,7 +1506,7 @@
     2055,
     2519
    ],
-   "owner": "LZB",
+   "owner": "PST",
    "scope": "drawn"
   },
   "STATE_HALLS_OF_EQUOS": {
@@ -1670,15 +1644,6 @@
    "owner": "LZB",
    "scope": "drawn"
   },
-  "STATE_HUATL": {
-   "id": 716,
-   "naming_anchor": [
-    2646,
-    2383
-   ],
-   "owner": "XLA",
-   "scope": "drawn"
-  },
   "STATE_INNER_CALEDOR": {
    "id": 651,
    "naming_anchor": [
@@ -1770,21 +1735,12 @@
    "scope": "drawn"
   },
   "STATE_ITZA": {
-   "id": 696,
+   "id": 695,
    "naming_anchor": [
-    2204,
-    2509
+    2412,
+    2437
    ],
-   "owner": "ITZ",
-   "scope": "drawn"
-  },
-  "STATE_ITZAHOTEC": {
-   "id": 692,
-   "naming_anchor": [
-    2495,
-    2182
-   ],
-   "owner": "LZA",
+   "owner": "XLA",
    "scope": "drawn"
   },
   "STATE_IVORY_ROAD": {
@@ -1796,16 +1752,16 @@
    "owner": "DLO",
    "scope": "drawn"
   },
-  "STATE_JUNGLE_OF_WEBS": {
-   "id": 719,
+  "STATE_IZZATAL_PASS": {
+   "id": 726,
    "naming_anchor": [
-    2690,
-    2171
+    1923,
+    2097
    ],
-   "owner": "LZA",
+   "owner": "HEX",
    "scope": "drawn"
   },
-  "STATE_KALAX": {
+  "STATE_KAIAX": {
    "id": 711,
    "naming_anchor": [
     2582,
@@ -2310,6 +2266,12 @@
    "owner": "QUE",
    "scope": "drawn"
   },
+  "STATE_LAND_736": {
+   "id": 736,
+   "naming_anchor": null,
+   "owner": "unowned",
+   "scope": "drawn"
+  },
   "STATE_LAURELORN_FOREST": {
    "id": 625,
    "naming_anchor": [
@@ -2373,15 +2335,6 @@
    "owner": "LAN",
    "scope": "drawn"
   },
-  "STATE_MALLIENTE_SWAMPS": {
-   "id": 721,
-   "naming_anchor": [
-    1959,
-    2582
-   ],
-   "owner": "LZB",
-   "scope": "drawn"
-  },
   "STATE_MANUFACTORY_DISTRICT": {
    "id": 277,
    "naming_anchor": [
@@ -2425,6 +2378,15 @@
     805
    ],
    "owner": "MZN",
+   "scope": "drawn"
+  },
+  "STATE_MARKS_OF_THE_OLD_ONES": {
+   "id": 708,
+   "naming_anchor": [
+    2593,
+    2671
+   ],
+   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_MARSHES_OF_MADNESS": {
@@ -2509,12 +2471,12 @@
    "scope": "drawn"
   },
   "STATE_MINE_OF_THE_BEARDED_SKULLS": {
-   "id": 701,
+   "id": 699,
    "naming_anchor": [
-    2131,
-    2718
+    2084,
+    2610
    ],
-   "owner": "SSD",
+   "owner": "PST",
    "scope": "drawn"
   },
   "STATE_MONOLITH_OF_INGVAR": {
@@ -2542,6 +2504,15 @@
     863
    ],
    "owner": "MNF",
+   "scope": "drawn"
+  },
+  "STATE_MONUMENT_OF_IZZATAL": {
+   "id": 685,
+   "naming_anchor": [
+    1932,
+    2021
+   ],
+   "owner": "HEX",
    "scope": "drawn"
   },
   "STATE_MOOTLAND": {
@@ -2577,6 +2548,7 @@
       "x2D0AC0",
       "x31D260",
       "x34B824",
+      "x362AB4",
       "x486F6F",
       "x572BF5",
       "x5D3CA6",
@@ -2749,15 +2721,6 @@
    "owner": "GCL",
    "scope": "drawn"
   },
-  "STATE_NORTHERN_MANGROVE_COAST": {
-   "id": 715,
-   "naming_anchor": [
-    2615,
-    2554
-   ],
-   "owner": "LZE",
-   "scope": "drawn"
-  },
   "STATE_NORTHERN_OBLAST": {
    "id": 339,
    "naming_anchor": [
@@ -2926,6 +2889,7 @@
       "x2A5CF4",
       "x417251",
       "x5DFAC1",
+      "x7B2EA4",
       "x823997",
       "x8C257B",
       "x9A69B3",
@@ -3012,7 +2976,7 @@
     2435,
     2706
    ],
-   "owner": "PST",
+   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_PAHUAX": {
@@ -3067,6 +3031,15 @@
     1251
    ],
    "owner": "unowned",
+   "scope": "drawn"
+  },
+  "STATE_PILLARS_OF_UNSEEN_CONSTELLATIONS": {
+   "id": 728,
+   "naming_anchor": [
+    1773,
+    2156
+   ],
+   "owner": "SKG",
    "scope": "drawn"
   },
   "STATE_PIRANHA_SWAMPS": {
@@ -3150,13 +3123,254 @@
    "owner": "QUE",
    "scope": "drawn"
   },
-  "STATE_QUITTAX": {
-   "id": 724,
+  "STATE_QUETZA": {
+   "id": 707,
    "naming_anchor": [
-    2034,
-    2344
+    2418,
+    2574
    ],
-   "owner": "TLX",
+   "owner": "LZE",
+   "scope": "drawn"
+  },
+  "STATE_QUITTAX": {
+   "id": 691,
+   "naming_anchor": [
+    2246,
+    2279
+   ],
+   "owners": [
+    {
+     "owner": "ITZ",
+     "provinces": [
+      "x02E98B",
+      "x06479D",
+      "x085C9E",
+      "x08E794",
+      "x09B384",
+      "x0B6BE1",
+      "x0BBAB0",
+      "x0E3EFD",
+      "x0F18C2",
+      "x112DC3",
+      "x1284A9",
+      "x143D06",
+      "x148BD5",
+      "x165FDC",
+      "x17F7BC",
+      "x19B019",
+      "x19FEE8",
+      "x1D5CFA",
+      "x1DE7F0",
+      "x1F71FB",
+      "x20C8E1",
+      "x22813E",
+      "x22D00D",
+      "x263BF4",
+      "x284320",
+      "x299A06",
+      "x2BA132",
+      "x2DB633",
+      "x2F0D19",
+      "x30C576",
+      "x347257",
+      "x34FD4D",
+      "x368758",
+      "x37DE3E",
+      "x39969B",
+      "x39E56A",
+      "x3D5151",
+      "x3DCE72",
+      "x3F09AE",
+      "x3F587D",
+      "x3FE373",
+      "x42B68F",
+      "x434185",
+      "x44CB90",
+      "x462276",
+      "x47DAD3",
+      "x4829A2",
+      "x4B87B4",
+      "x4D9CB5",
+      "x4EF39B",
+      "x50FAC7",
+      "x530FC8",
+      "x539ABE",
+      "x5466AE",
+      "x561F0B",
+      "x566DDA",
+      "x5A56E2",
+      "x5BE0ED",
+      "x5D37D3",
+      "x5E80E4",
+      "x5EF030",
+      "x5F3EFF",
+      "x615400",
+      "x61DEF6",
+      "x62AAE6",
+      "x64B212",
+      "x681024",
+      "x6A2525",
+      "x6B7C0B",
+      "x6D3468",
+      "x6D8337",
+      "x70E149",
+      "x716C3F",
+      "x744D30",
+      "x74CA51",
+      "x76058D",
+      "x76545C",
+      "x782863",
+      "x78695D",
+      "x78F453",
+      "x79C043",
+      "x7B78A0",
+      "x7BC76F",
+      "x7F2581",
+      "x7FB077",
+      "x813A82",
+      "x829168",
+      "x8449C5",
+      "x849894",
+      "x87F6A6",
+      "x88047B",
+      "x8A0BA7",
+      "x8D69B9",
+      "x921EB1",
+      "x928DFD",
+      "x92DCCC",
+      "x963ADE",
+      "x96C5D4",
+      "x984FDF",
+      "x98DAD5",
+      "x99A6C5",
+      "x9B5F22",
+      "x9BADF1",
+      "x9DC2F2",
+      "xA0D235",
+      "xA12104",
+      "xA47F16",
+      "xA50A0C",
+      "xA69417",
+      "xA7EAFD",
+      "xA9A35A",
+      "xA9F229",
+      "xAD503B",
+      "xAF653C",
+      "xB2747F",
+      "xB2C34E",
+      "xB62F35",
+      "xB7E792",
+      "xB83661",
+      "xBA0A68",
+      "xBB9473",
+      "xBC1F69",
+      "xBDA974",
+      "xBF005A",
+      "xC0B8B7",
+      "xC10786",
+      "xC46598",
+      "xC4736D",
+      "xC67A99",
+      "xC7D17F",
+      "xC84EA0",
+      "xC9D8AB",
+      "xCBEDAC",
+      "xCD4492",
+      "xCEFCEF",
+      "xCF4BBE",
+      "xD1FE5D",
+      "xD2A9D0",
+      "xD334C6",
+      "xD4BED1",
+      "xD615B7",
+      "xD7CE14",
+      "xD81CE3",
+      "xDA31E4",
+      "xDB88CA",
+      "xDD4127",
+      "xDD8FF6",
+      "xE0EE08",
+      "xE178FE",
+      "xE30309",
+      "xE459EF",
+      "xE5A300",
+      "xE6124C",
+      "xE93437",
+      "xE9BF2D",
+      "xE9CD02",
+      "xEBD42E",
+      "xED2B14",
+      "xF1E4DF",
+      "xF29E27",
+      "xF3E738",
+      "xF45684",
+      "xF4A553",
+      "xF80365",
+      "xF88E5B",
+      "xFA1866",
+      "xFAA35C",
+      "xFD27A9",
+      "xFD7678",
+      "xFF8B79"
+     ]
+    },
+    {
+     "owner": "XLA",
+     "provinces": [
+      "x058982",
+      "x06C4BE",
+      "x0C37D1",
+      "x1508F6",
+      "x1C9EDF",
+      "x1DDA1B",
+      "x234D2E",
+      "x2C1E53",
+      "x319166",
+      "x33B43C",
+      "x3A628B",
+      "x41F874",
+      "x4333B0",
+      "x48A6C3",
+      "x5177E8",
+      "x56EAFB",
+      "x590DD1",
+      "x5A490D",
+      "x5FBC20",
+      "x675209",
+      "x688D45",
+      "x6E0058",
+      "x76D17D",
+      "x7E6766",
+      "x7FA2A2",
+      "x8515B5",
+      "x8DE6DA",
+      "x9359ED",
+      "x957CC3",
+      "x9C2B12",
+      "x9CE92D",
+      "xA3C0FB",
+      "xA4FC37",
+      "xAA6F4A",
+      "xB3406F",
+      "xBAD658",
+      "xBC1194",
+      "xC184A7",
+      "xC91A90",
+      "xCA55CC",
+      "xCFC8DF",
+      "xD1EBB5",
+      "xD89A04",
+      "xE02FED",
+      "xE16B29",
+      "xE6DE3C",
+      "xEFAF61",
+      "xF52274",
+      "xF7454A",
+      "xF88086",
+      "xFDF399"
+     ]
+    }
+   ],
    "scope": "drawn"
   },
   "STATE_RED_CLOUD_MOUNTAINS": {
@@ -3247,6 +3461,15 @@
     1856
    ],
    "owner": "LZA",
+   "scope": "drawn"
+  },
+  "STATE_SENTINELS_OF_XETI": {
+   "id": 721,
+   "naming_anchor": [
+    1959,
+    2582
+   ],
+   "owner": "LZB",
    "scope": "drawn"
   },
   "STATE_SEPUKZY": {
@@ -3384,15 +3607,6 @@
    "owner": "GCL",
    "scope": "drawn"
   },
-  "STATE_SOUTHERN_MANGROVE_COAST": {
-   "id": 713,
-   "naming_anchor": [
-    2762,
-    2924
-   ],
-   "owner": "LZD",
-   "scope": "drawn"
-  },
   "STATE_SOUTHERN_OBLAST": {
    "id": 307,
    "naming_anchor": [
@@ -3409,15 +3623,6 @@
     1439
    ],
    "owner": "SAP",
-   "scope": "drawn"
-  },
-  "STATE_SOUTHERN_SENTINELS": {
-   "id": 710,
-   "naming_anchor": [
-    2611,
-    2932
-   ],
-   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_SOUTHERN_SIREN_ISLES": {
@@ -3520,12 +3725,12 @@
    "scope": "drawn"
   },
   "STATE_SPEKTAZUMA": {
-   "id": 726,
+   "id": 684,
    "naming_anchor": [
-    1923,
-    2097
+    1883,
+    1942
    ],
-   "owner": "HEX",
+   "owner": "TLC",
    "scope": "drawn"
   },
   "STATE_SPHINX_OF_PHAA": {
@@ -3535,15 +3740,6 @@
     1686
    ],
    "owner": "KAS",
-   "scope": "drawn"
-  },
-  "STATE_SPINE_OF_SOTEK": {
-   "id": 706,
-   "naming_anchor": [
-    2371,
-    2782
-   ],
-   "owner": "LZC",
    "scope": "drawn"
   },
   "STATE_STARSAND_PORT": {
@@ -3609,6 +3805,15 @@
    "owner": "TRO",
    "scope": "drawn"
   },
+  "STATE_SUBATUUN": {
+   "id": 700,
+   "naming_anchor": [
+    2182,
+    2662
+   ],
+   "owner": "ITZ",
+   "scope": "drawn"
+  },
   "STATE_SUNKEN_KHEMARCH": {
    "id": 574,
    "naming_anchor": [
@@ -3643,15 +3848,6 @@
     1644
    ],
    "owner": "unowned",
-   "scope": "drawn"
-  },
-  "STATE_SWIRLING_SWAMPS": {
-   "id": 712,
-   "naming_anchor": [
-    2746,
-    3046
-   ],
-   "owner": "LZD",
    "scope": "drawn"
   },
   "STATE_TALDURSFJORD": {
@@ -3690,6 +3886,15 @@
    "owner": "LZA",
    "scope": "drawn"
   },
+  "STATE_THE_AWAKENING": {
+   "id": 717,
+   "naming_anchor": [
+    2734,
+    2267
+   ],
+   "owner": "VCO",
+   "scope": "drawn"
+  },
   "STATE_THE_BLIGHT": {
    "id": 213,
    "naming_anchor": [
@@ -3699,6 +3904,15 @@
    "owner": "BTO",
    "scope": "drawn"
   },
+  "STATE_THE_BLOOD_SWAMPS": {
+   "id": 716,
+   "naming_anchor": [
+    2646,
+    2383
+   ],
+   "owner": "XLA",
+   "scope": "drawn"
+  },
   "STATE_THE_CAULDRON": {
    "id": 216,
    "naming_anchor": [
@@ -3706,6 +3920,15 @@
     1285
    ],
    "owner": "BTO",
+   "scope": "drawn"
+  },
+  "STATE_THE_COPPER_LANDING": {
+   "id": 702,
+   "naming_anchor": [
+    2251,
+    2846
+   ],
+   "owner": "LZC",
    "scope": "drawn"
   },
   "STATE_THE_DOBRYRION": {
@@ -3724,6 +3947,15 @@
     1559
    ],
    "owner": "CAL",
+   "scope": "drawn"
+  },
+  "STATE_THE_GOLDEN_COLOSSUS": {
+   "id": 701,
+   "naming_anchor": [
+    2131,
+    2718
+   ],
+   "owner": "SSD",
    "scope": "drawn"
   },
   "STATE_THE_GOLINYI": {
@@ -3760,6 +3992,24 @@
     1159
    ],
    "owner": "EYB",
+   "scope": "drawn"
+  },
+  "STATE_THE_SENTINEL_OF_TIME": {
+   "id": 704,
+   "naming_anchor": [
+    2517,
+    2866
+   ],
+   "owner": "LZC",
+   "scope": "drawn"
+  },
+  "STATE_THE_SOUTHERN_SENTINELS": {
+   "id": 710,
+   "naming_anchor": [
+    2611,
+    2932
+   ],
+   "owner": "LZE",
    "scope": "drawn"
   },
   "STATE_THE_TAIGA": {
@@ -3808,10 +4058,10 @@
    "scope": "drawn"
   },
   "STATE_THRICE_CURSED_PEAK": {
-   "id": 704,
+   "id": 706,
    "naming_anchor": [
-    2517,
-    2866
+    2371,
+    2782
    ],
    "owner": "LZC",
    "scope": "drawn"
@@ -3834,20 +4084,11 @@
    "owner": "TIR",
    "scope": "drawn"
   },
-  "STATE_TLANXLA": {
-   "id": 723,
-   "naming_anchor": [
-    1924,
-    2368
-   ],
-   "owner": "LZB",
-   "scope": "drawn"
-  },
   "STATE_TLAX": {
-   "id": 718,
+   "id": 719,
    "naming_anchor": [
-    2569,
-    2294
+    2690,
+    2171
    ],
    "owner": "LZA",
    "scope": "drawn"
@@ -3895,15 +4136,6 @@
     2837
    ],
    "owner": "TEH",
-   "scope": "drawn"
-  },
-  "STATE_TOWER_OF_LIGHTNING": {
-   "id": 699,
-   "naming_anchor": [
-    2084,
-    2610
-   ],
-   "owner": "ITZ",
    "scope": "drawn"
   },
   "STATE_TOWER_OF_THE_BLOODYTOOTH": {
@@ -4040,15 +4272,6 @@
    "owner": "QUA",
    "scope": "drawn"
   },
-  "STATE_VAMPIRE_COAST": {
-   "id": 717,
-   "naming_anchor": [
-    2734,
-    2267
-   ],
-   "owner": "VCO",
-   "scope": "drawn"
-  },
   "STATE_VANNHEIM_MOUNTAINS": {
    "id": 40,
    "naming_anchor": [
@@ -4105,12 +4328,13 @@
      "owner": "ESC",
      "provinces": [
       "x07340A",
+      "x09E1D6",
       "x0FA3B8",
       "x157842",
       "x1E4967",
       "x26B915",
       "x2C8D9F",
-      "x2FB88C",
+      "x380C90",
       "x3AD1D7",
       "x4C12AA",
       "x5AB859",
@@ -4120,14 +4344,14 @@
       "x84FEDE",
       "x88819C",
       "x8E5626",
-      "x97A46C",
       "x9C9A5E",
       "xA56B83",
       "xADDB31",
       "xB5EA0C",
-      "xB78AEE",
       "xC1F3F3",
       "xCAC518",
+      "xCD72E4",
+      "xD1AF8E",
       "xD90950",
       "xEA4A23"
      ]
@@ -4174,6 +4398,15 @@
    "owner": "ARG",
    "scope": "drawn"
   },
+  "STATE_WELLSPRINGS_OF_ETERNITY": {
+   "id": 682,
+   "naming_anchor": [
+    1765,
+    1915
+   ],
+   "owner": "HEX",
+   "scope": "drawn"
+  },
   "STATE_WESTERN_BADLANDS": {
    "id": 566,
    "naming_anchor": [
@@ -4208,6 +4441,15 @@
     716
    ],
    "owner": "KSV",
+   "scope": "drawn"
+  },
+  "STATE_WESTERN_QUITTAX": {
+   "id": 724,
+   "naming_anchor": [
+    2034,
+    2344
+   ],
+   "owner": "TLX",
    "scope": "drawn"
   },
   "STATE_WEST_AVERLAND": {
@@ -4350,9 +4592,9 @@
       "x19A717",
       "x27EB4F",
       "x2B1B0F",
-      "x321C5C",
       "x37094C",
       "x3E34BC",
+      "x45E64F",
       "x6C5F76",
       "x89B3D6",
       "xA0C933",
@@ -4468,267 +4710,210 @@
    "scope": "drawn"
   },
   "STATE_XAHUTEC": {
-   "id": 691,
+   "id": 692,
    "naming_anchor": [
-    2246,
-    2279
+    2495,
+    2182
+   ],
+   "owner": "LZA",
+   "scope": "drawn"
+  },
+  "STATE_XHOTL": {
+   "id": 696,
+   "naming_anchor": [
+    2204,
+    2509
    ],
    "owners": [
     {
      "owner": "ITZ",
      "provinces": [
-      "x02E98B",
-      "x06479D",
-      "x085C9E",
-      "x09B384",
-      "x0B6BE1",
-      "x0BBAB0",
-      "x0E3EFD",
-      "x0F18C2",
-      "x112DC3",
-      "x1284A9",
-      "x143D06",
-      "x148BD5",
-      "x17F7BC",
-      "x19B019",
-      "x19FEE8",
-      "x1D5CFA",
-      "x1DE7F0",
-      "x1F71FB",
-      "x20C8E1",
-      "x22813E",
-      "x22D00D",
-      "x23BC7A",
-      "x25D17B",
-      "x263BF4",
-      "x284320",
-      "x299A06",
-      "x2BA132",
-      "x2C5A7A",
-      "x2DB633",
-      "x2F0D19",
-      "x2FEBB1",
-      "x30C576",
-      "x347257",
-      "x34FD4D",
-      "x368758",
-      "x37DE3E",
-      "x39969B",
-      "x39E56A",
-      "x3A05E7",
-      "x3CE6D8",
-      "x3D5151",
-      "x3F09AE",
-      "x3F587D",
-      "x42B68F",
-      "x434185",
-      "x44CB90",
-      "x45B7FD",
-      "x462276",
-      "x47DAD3",
-      "x4829A2",
-      "x4B2B10",
-      "x4B87B4",
-      "x4D9CB5",
-      "x4E8922",
-      "x4EF39B",
-      "x50FAC7",
-      "x51B40F",
-      "x530FC8",
-      "x5466AE",
-      "x561F0B",
-      "x566DDA",
-      "x5A56E2",
-      "x5BE0ED",
-      "x5D37D3",
-      "x5EF030",
-      "x5F3EFF",
-      "x615400",
-      "x62AAE6",
-      "x64B212",
-      "x681024",
-      "x68C96C",
-      "x6A2525",
-      "x6B7C0B",
-      "x6D3468",
-      "x6D8337",
-      "x70E149",
-      "x716C3F",
+      "x0085BB",
+      "x015F80",
+      "x04BD92",
+      "x05F8CE",
+      "x0741DF",
+      "x08AB6D",
+      "x0956E0",
+      "x0A30A5",
+      "x0CB4F2",
+      "x0EC9F3",
+      "x101304",
+      "x109DFA",
+      "x122805",
+      "x158617",
+      "x179B18",
+      "x1874DD",
+      "x1AF92A",
+      "x1D0E2B",
+      "x1E573C",
+      "x1EE232",
+      "x206C3D",
+      "x214602",
+      "x23CA4F",
+      "x272861",
+      "x293D62",
+      "x29C858",
+      "x2A1727",
+      "x2B5263",
+      "x2D266A",
+      "x2F8A3A",
+      "x320E87",
+      "x342388",
+      "x356C99",
+      "x37819A",
+      "x385B5F",
+      "x3ADFAC",
+      "x3CF4AD",
+      "x4052BF",
+      "x4267C0",
+      "x43B0D1",
+      "x443BC7",
+      "x45C5D2",
+      "x469F97",
+      "x4923E4",
+      "x4B38E5",
+      "x4C81F6",
+      "x4E96F7",
+      "x50ABF8",
+      "x51F509",
+      "x540A0A",
+      "x54E3CF",
+      "x57681C",
+      "x5841E1",
+      "x597D1D",
+      "x5AC62E",
+      "x5CDB2F",
+      "x603941",
+      "x624E42",
+      "x632807",
+      "x65AC54",
+      "x668619",
+      "x690A66",
+      "x6B1F67",
+      "x6BF92C",
+      "x6E7D79",
+      "x6F086F",
+      "x70927A",
+      "x71DB8B",
       "x72F64A",
-      "x744D30",
-      "x76058D",
-      "x76545C",
-      "x78695D",
-      "x79C043",
-      "x7B78A0",
-      "x7BC76F",
-      "x7F2581",
-      "x7FB077",
-      "x813A82",
-      "x829168",
-      "x8449C5",
-      "x849894",
-      "x879A02",
-      "x87F6A6",
-      "x88047B",
-      "x8A0BA7",
-      "x8D69B9",
-      "x8E2301",
-      "x928DFD",
-      "x92DCCC",
-      "x963ADE",
-      "x96C5D4",
-      "x984FDF",
-      "x99A6C5",
-      "x9B5F22",
-      "x9BADF1",
-      "x9DC2F2",
-      "xA0D235",
-      "xA12104",
-      "xA47F16",
-      "xA50A0C",
-      "xA69417",
-      "xA7EAFD",
-      "xA9A35A",
-      "xA9F229",
-      "xAD503B",
-      "xAF653C",
-      "xB0BC22",
-      "xB2747F",
-      "xB2C34E",
-      "xB5C4BC",
-      "xB62F35",
-      "xB7E792",
-      "xB83661",
-      "xBB9473",
-      "xBC1F69",
-      "xBDA974",
-      "xBF005A",
-      "xC0B8B7",
-      "xC10786",
-      "xC46598",
-      "xC4736D",
-      "xC67A99",
-      "xC7D17F",
-      "xC9D8AB",
-      "xCBEDAC",
-      "xCD4492",
-      "xCEFCEF",
-      "xCF4BBE",
-      "xD2A9D0",
-      "xD334C6",
-      "xD4BED1",
-      "xD615B7",
-      "xD7CE14",
-      "xD81CE3",
-      "xDA31E4",
-      "xDB88CA",
-      "xDD4127",
-      "xDD8FF6",
-      "xE0EE08",
-      "xE178FE",
-      "xE30309",
-      "xE459EF",
-      "xE6124C",
-      "xE93437",
-      "xE9BF2D",
-      "xE9CD02",
-      "xEBD42E",
-      "xED2B14",
-      "xEFEB88",
-      "xF29E27",
-      "xF45684",
-      "xF4A553",
-      "xF80365",
-      "xF88E5B",
-      "xFA1866",
-      "xFD27A9",
-      "xFD7678",
-      "xFF8B79"
+      "x774E9E",
+      "x79639F",
+      "x7A3D64",
+      "x7CC1B1",
+      "x7D9B76",
+      "x7ED6B2",
+      "x801FC3",
+      "x8234C4",
+      "x830E89",
+      "x8592D6",
+      "x85E1A5",
+      "x87A7D7",
+      "x88F0E8",
+      "x893FB7",
+      "x8B05E9",
+      "x8B90DF",
+      "x8BDFAE",
+      "x8D1AEA",
+      "x9078FC",
+      "x9152C1",
+      "x93D70E",
+      "x95EC0F",
+      "x994A21",
+      "x9A23E6",
+      "x9CA833",
+      "x9D3329",
+      "x9EBD34",
+      "x9F96F9",
+      "xA21B46",
+      "xA2F50B",
+      "xA43047",
+      "xA57958",
+      "xA78E59",
+      "xA8681E",
+      "xAAEC6B",
+      "xAC7676",
+      "xAD016C",
+      "xAE4A7D",
+      "xB13943",
+      "xB3BD90",
+      "xB5D291",
+      "xB6AC56",
+      "xB76A71",
+      "xB7A698",
+      "xB930A3",
+      "xBB45A4",
+      "xBC8EB5",
+      "xBF7D7B",
+      "xC201C8",
+      "xC28CBE",
+      "xC416C9",
+      "xC4F08E",
+      "xC55FDA",
+      "xC774DB",
+      "xC7FFD1",
+      "xCAD2ED",
+      "xCCE7EE",
+      "xCDC1B3",
+      "xD04600",
+      "xD25B01",
+      "xD3A412",
+      "xD5B913",
+      "xD692D8",
+      "xD91725",
+      "xD9A21B",
+      "xDB2C26",
+      "xDC05EB",
+      "xDE8A38",
+      "xDF63FD",
+      "xE09F39",
+      "xE1E84A",
+      "xE27340",
+      "xE4D710",
+      "xE75B5D",
+      "xE9705E",
+      "xEAB96F",
+      "xECCE70",
+      "xEDA835",
+      "xEEE371",
+      "xF02C82",
+      "xF24183",
+      "xF31B48",
+      "xF3D963",
+      "xF4158A",
+      "xF59F95",
+      "xF7B496",
+      "xF8FDA7",
+      "xFAE456",
+      "xFB12A8",
+      "xFBEC6D",
+      "xFE70BA"
      ]
     },
     {
      "owner": "XLA",
      "provinces": [
-      "x058982",
-      "x06C4BE",
-      "x0C37D1",
-      "x1508F6",
-      "x1C9EDF",
-      "x1DDA1B",
-      "x234D2E",
-      "x2C1E53",
-      "x319166",
-      "x33B43C",
-      "x3A628B",
-      "x41F874",
-      "x4333B0",
-      "x48A6C3",
-      "x5177E8",
-      "x56EAFB",
-      "x590DD1",
-      "x5A490D",
-      "x5FBC20",
-      "x675209",
-      "x688D45",
-      "x6E0058",
-      "x76D17D",
-      "x7E6766",
-      "x7FA2A2",
-      "x8515B5",
-      "x8DE6DA",
-      "x9359ED",
-      "x957CC3",
-      "x9C2B12",
-      "x9CE92D",
-      "xA3C0FB",
-      "xA4FC37",
-      "xAA6F4A",
-      "xB3406F",
-      "xBAD658",
-      "xBC1194",
-      "xC184A7",
-      "xC91A90",
-      "xCA55CC",
-      "xCFC8DF",
-      "xD1EBB5",
-      "xD89A04",
-      "xE02FED",
-      "xE16B29",
-      "xE6DE3C",
-      "xEFAF61",
-      "xF52274",
-      "xF7454A",
-      "xF88086",
-      "xFDF399"
+      "xD111F0",
+      "xEC5F24"
      ]
     }
    ],
    "scope": "drawn"
   },
-  "STATE_XHOTL": {
-   "id": 700,
-   "naming_anchor": [
-    2182,
-    2662
-   ],
-   "owner": "ITZ",
-   "scope": "drawn"
-  },
   "STATE_XLANHUAPEC": {
-   "id": 695,
+   "id": 718,
    "naming_anchor": [
-    2412,
-    2437
+    2569,
+    2294
    ],
-   "owner": "XLA",
+   "owner": "LZA",
    "scope": "drawn"
   },
   "STATE_XLANZEC": {
-   "id": 714,
+   "id": 712,
    "naming_anchor": [
-    2906,
-    3035
+    2746,
+    3046
    ],
    "owner": "LZD",
    "scope": "drawn"

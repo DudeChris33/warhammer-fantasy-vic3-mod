@@ -329,8 +329,8 @@ canal_elithis_n = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = xD33999
-	second_land_endpoint = xFE7E8F
+	first_land_endpoint = xAFE730
+	second_land_endpoint = xD33999
 
 	first_sea_endpoint = x9251D6
 	second_sea_endpoint = x9B22FB
@@ -425,19 +425,6 @@ canal_isles_of_doom = {
 
 	first_sea_endpoint = x0B2FBA
 	second_sea_endpoint = xC07C90
-}
-
-canal_isles_of_dusk = {
-	type = natural
-
-	total_block_requires_full_control = no
-	military_block_requires_full_control = no
-
-	first_land_endpoint = x34A57C
-	second_land_endpoint = xB7C715
-
-	first_sea_endpoint = x506FD1
-	second_sea_endpoint = xE06312
 }
 
 canal_kraka_ravnsnake = {
@@ -577,7 +564,7 @@ canal_mangrove = {
 	military_block_requires_full_control = no
 
 	first_land_endpoint = x07340A
-	second_land_endpoint = x137116
+	second_land_endpoint = xE8E568
 
 	first_sea_endpoint = x30894F
 	second_sea_endpoint = x55E2E4
@@ -862,8 +849,8 @@ canal_turtle_1 = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x1D0056
-	second_land_endpoint = x3CB3B3
+	first_land_endpoint = x16EFA5
+	second_land_endpoint = x1D0056
 
 	first_sea_endpoint = x35FC62
 	second_sea_endpoint = x86229F
@@ -901,7 +888,7 @@ canal_turtle_4 = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x3666DB
+	first_land_endpoint = x276488
 	second_land_endpoint = xEC27D0
 
 	first_sea_endpoint = xB23858
@@ -940,7 +927,7 @@ canal_volcanic_isles = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x7740C9
+	first_land_endpoint = x09E1D6
 	second_land_endpoint = x7C5265
 
 	first_sea_endpoint = x55E2E4

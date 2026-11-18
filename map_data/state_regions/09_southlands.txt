@@ -1,10 +1,10 @@
 ﻿STATE_ISLES_OF_DOOM = {
     id = 152
     subsistence_building = "building_subsistence_farm"
-    provinces = { x0CCC6D x23D824 xB2E89E xB32998 xD1813C }
+    provinces = { x0CCC6D x23D824 x554546 xB32998 xD1813C }
     city = xD1813C
     farm = x0CCC6D
-    mine = xB2E89E
+    mine = x554546
     wood = xB32998
     port = x23D824
     arable_land = 3
@@ -18,7 +18,7 @@
         type = "building_rubber_plantation"
         undiscovered_amount = 1
     }
-    naval_exit_id = 3180
+    naval_exit_id = 3181
 }
 STATE_ISLE_OF_DAWN = {
     id = 170
@@ -42,7 +42,7 @@ STATE_ISLE_OF_DAWN = {
         type = "building_rubber_plantation"
         undiscovered_amount = 4
     }
-    naval_exit_id = 3199
+    naval_exit_id = 3200
 }
 STATE_TOR_ELASOR = {
     id = 171
@@ -64,7 +64,7 @@ STATE_TOR_ELASOR = {
         type = "building_rubber_plantation"
         undiscovered_amount = 2
     }
-    naval_exit_id = 3193
+    naval_exit_id = 3194
 }
 STATE_HORN_OF_ARABY = {
     id = 172
@@ -101,7 +101,7 @@ STATE_HORN_OF_ARABY = {
         type = "building_rubber_plantation"
         undiscovered_amount = 888
     }
-    naval_exit_id = 3178
+    naval_exit_id = 3179
 }
 STATE_TOWER_OF_THE_STARS = {
     id = 173
@@ -124,7 +124,7 @@ STATE_TOWER_OF_THE_STARS = {
         type = "building_rubber_plantation"
         undiscovered_amount = 3
     }
-    naval_exit_id = 3149
+    naval_exit_id = 3157
 }
 STATE_STARS_ARCHIPELAGO = {
     id = 176
@@ -149,12 +149,12 @@ STATE_STARS_ARCHIPELAGO = {
         type = "building_rubber_plantation"
         undiscovered_amount = 6
     }
-    naval_exit_id = 3160
+    naval_exit_id = 3161
 }
 STATE_DREAD_ROCK = {
     id = 181
     subsistence_building = "building_subsistence_farm"
-    provinces = { x114E40 x1BD7C2 x28639D x32ED1F x3C1FBB x4DBD32 x511B44 x617950 x7674D9 x8A2C24 xB2E3CB xB53E99 xC663C2 xDF68D0 xEBF4AB }
+    provinces = { x114E40 x1BD7C2 x28639D x32ED1F x3C1FBB x3C69B7 x4DBD32 x511B44 x617950 x7674D9 x8A2C24 xB2E3CB xB53E99 xC663C2 xDF68D0 xEBF4AB }
     city = xEBF4AB
     farm = xC663C2
     mine = x28639D
@@ -183,7 +183,7 @@ STATE_DREAD_ROCK = {
 STATE_LAND_182 = {
     id = 182
     subsistence_building = "building_subsistence_farm"
-    provinces = { x04A1E8 x12E620 x383FB5 x448194 x666A6F x74AEA7 x7F667B x84B00F x8BC404 x9A083C xB11D99 xC832F6 xCA19A5 xE36953 xE6A215 xED8C8B xFBD0C3 }
+    provinces = { x04A1E8 x12E620 x383FB5 x448194 x4F5512 x666A6F x74AEA7 x7F667B x84B00F x8BC404 x9A083C xB11D99 xC832F6 xCA19A5 xE36953 xE6A215 xED8C8B xFBD0C3 }
     city = x12E620
     farm = x04A1E8
     mine = x9A083C
@@ -213,7 +213,7 @@ STATE_LAND_182 = {
 STATE_EASTERN_COLONIES = {
     id = 468
     subsistence_building = "building_subsistence_farm"
-    provinces = { x058080 x07A356 x09B857 x12897C x1516CB x15E78E x17FC8F x1B5AA1 x1D6FA2 x2C2C28 x33B90F x3484FF x3A7060 x3B4123 x3D5624 x441248 x4B9A5C x5C9A35 x62AFB9 x689B1A x6DE981 x745203 x76DF52 x82963B x88094E x8DF4AF x90DA73 x990927 xACCA18 xAD62E3 xB34E44 xC16DD0 xC1A9F7 xC47840 xCA63A1 xD06B50 xD2BC78 xD61A8A xD8832D xD8A7D9 xDB8D9D xDEEBAF xE83522 xEFBD36 xEFD4B1 xF08DF9 xFAD1AE xFB741F }
+    provinces = { x058080 x07A356 x09B857 x12897C x1516CB x15E78E x17FC8F x1B5AA1 x1D6FA2 x2C2C28 x33B90F x3484FF x3A7060 x3B4123 x3D5624 x441248 x4865C9 x4B9A5C x62AFB9 x689B1A x6DE981 x745203 x76DF52 x82963B x88094E x8DF4AF x90DA73 xA15D2B xAA2E50 xACCA18 xAD62E3 xB34E44 xC16DD0 xC1A9F7 xC47840 xCA63A1 xD06B50 xD2BC78 xD61A8A xD8832D xD8A7D9 xDB8D9D xDEEBAF xE83522 xEFBD36 xEFD4B1 xF08DF9 xFB741F }
     city = xB34E44
     farm = x058080
     mine = x82963B
@@ -242,15 +242,15 @@ STATE_EASTERN_COLONIES = {
         type = "building_rubber_plantation"
         undiscovered_amount = 11
     }
-    naval_exit_id = 3169
+    naval_exit_id = 3171
 }
 STATE_LAND_675 = {
     id = 675
     subsistence_building = "building_subsistence_farm"
-    provinces = { x006A11 x022B70 x072635 x0B5037 x0C9948 x106FA8 x14215C x156A6D x205093 x226594 x278505 x2B36B9 x2E94CB x31F2DD x35C93D x45AA28 x4CDE9A x50904E x63F3F7 x67A5AB x6D18BE x72382F x7732F4 x82191A x894D8C x905D52 x9791C4 xA8BBC0 xA987B0 xAA949A xACE5C2 xAEA721 xB258D5 xB6FFF8 xBB29FA xBC730B xC09D0D xC5BC7E xC96E32 xD38868 xD400B6 xD7B26A xE5F6A2 xEB1613 xF010D8 xFAF6FE xFD0BFF }
+    provinces = { x006A11 x022B70 x072635 x0B5037 x0C9948 x106FA8 x14215C x156A6D x205093 x226594 x278505 x2B36B9 x2E94CB x31F2DD x35C93D x45AA28 x4CDE9A x50904E x63F3F7 x67A5AB x6D18BE x72382F x7732F4 x82191A x894D8C x905D52 x96D87C x9791C4 xA8BBC0 xA987B0 xAA949A xACE5C2 xAEA721 xB258D5 xB6FFF8 xBB29FA xBC730B xC09D0D xC5BC7E xC96E32 xD38868 xD400B6 xD7B26A xE5F6A2 xEB1613 xF010D8 xFAF6FE xFD0BFF }
     city = x50904E
     farm = x006A11
-    mine = x894D8C
+    mine = x905D52
     wood = xFD0BFF
     port = x82191A
     arable_land = 48
@@ -277,7 +277,7 @@ STATE_LAND_675 = {
         type = "building_rubber_plantation"
         undiscovered_amount = 12
     }
-    naval_exit_id = 3149
+    naval_exit_id = 3157
 }
 STATE_LAND_676 = {
     id = 676
@@ -307,5 +307,5 @@ STATE_LAND_676 = {
         type = "building_rubber_plantation"
         undiscovered_amount = 11
     }
-    naval_exit_id = 3169
+    naval_exit_id = 3171
 }

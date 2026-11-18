@@ -1,23 +1,23 @@
 ﻿region_cathay = {
 	capital_province = xF7C73E
-	map_color = { 15 205 219 }
+	map_color = { 174 5 84 }
 	states = { STATE_LAND_179 }
 }
 
 region_far_ocean_islands = {
 	capital_province = xA1874E
-	map_color = { 76 60 205 }
+	map_color = { 234 116 70 }
 	states = { STATE_LAND_369 STATE_LAND_673 STATE_LAND_678 }
 }
 
 region_khuresh = {
 	capital_province = x711D70
-	map_color = { 38 227 56 }
+	map_color = { 197 26 177 }
 	states = { STATE_TOR_ELITHIS STATE_NORTH_ISLE STATE_SOUTHERN_GATE_OF_CALITH STATE_STARSAND_PORT STATE_ELITHISIAN_GROVE STATE_NORTHERN_GATE_OF_CALITH }
 }
 
 region_nippon = {
 	capital_province = xE71161
-	map_color = { 159 193 28 }
+	map_color = { 61 248 149 }
 	states = { STATE_LAND_365 STATE_LAND_366 STATE_LAND_677 }
 }
