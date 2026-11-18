@@ -524,6 +524,18 @@ on_new_ruler = {
 			}
 			set_variable = { name = year_in_power value = 1 } # In case all else fails
 		}
+
+		# [#10567] restored from vanilla 1.15.1 00_code_on_actions.txt:1584 (clean port)
+		# Dismiss any existing favorites when a new ruler takes power
+		owner = {
+			every_scope_character = {
+				limit = {
+					has_role = character_role_favorite
+				}
+				remove_character_role = favorite
+				retire_character_if_should_be_culled = { hidden = yes }
+			}
+		}
 	}
 }
 
@@ -1401,6 +1413,23 @@ on_law_activated = {
 					}
 				}
 				cancel_enactment = yes
+			}
+		}
+
+		# [#10567] restored from vanilla 1.15.1 00_code_on_actions.txt:3183 (clean port)
+		# Dismiss favorites if the new law makes them incompatible
+		owner = {
+			if = {
+				limit = {
+					NOT = { can_have_favorites = yes }
+				}
+				every_scope_character = {
+					limit = {
+						has_role = character_role_favorite
+					}
+					remove_character_role = favorite
+					retire_character_if_should_be_culled = { hidden = yes }
+				}
 			}
 		}
 	}
