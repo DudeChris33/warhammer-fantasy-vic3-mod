@@ -50,15 +50,15 @@
     },
     {
       "a": [
-        2212,
-        2955
+        2426,
+        3
       ],
       "b": [
-        2217,
-        2979
+        2377,
+        3
       ],
-      "type": "sea",
-      "comment": "Lustria"
+      "type": "",
+      "comment": ""
     },
     {
       "a": [
@@ -362,6 +362,18 @@
     },
     {
       "a": [
+        2212,
+        2955
+      ],
+      "b": [
+        2217,
+        2979
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
         2219,
         2989
       ],
@@ -497,6 +509,18 @@
     },
     {
       "a": [
+        1734,
+        1857
+      ],
+      "b": [
+        1760,
+        1846
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
+    },
+    {
+      "a": [
         3785,
         1228
       ],
@@ -545,6 +569,18 @@
       ],
       "type": "sea",
       "comment": "Turtle Isles"
+    },
+    {
+      "a": [
+        2608,
+        2078
+      ],
+      "b": [
+        2584,
+        2100
+      ],
+      "type": "sea",
+      "comment": "Tarantula Coast"
     },
     {
       "a": [
@@ -1794,18 +1830,6 @@
     },
     {
       "a": [
-        1734,
-        1857
-      ],
-      "b": [
-        1760,
-        1846
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
         5258,
         2478
       ],
@@ -1890,18 +1914,6 @@
       ],
       "type": "sea",
       "comment": "Maelstrom"
-    },
-    {
-      "a": [
-        1737,
-        2021
-      ],
-      "b": [
-        1710,
-        2015
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -2223,18 +2235,6 @@
     },
     {
       "a": [
-        3025,
-        3045
-      ],
-      "b": [
-        3025,
-        3065
-      ],
-      "type": "canal_isles_of_dusk",
-      "comment": "Isles of Dusk"
-    },
-    {
-      "a": [
         2996,
         1254
       ],
@@ -2535,24 +2535,24 @@
     },
     {
       "a": [
-        994,
-        956
-      ],
-      "b": [
-        1015,
-        956
-      ],
-      "type": "sea",
-      "comment": "Maelstrom"
-    },
-    {
-      "a": [
         1026,
         992
       ],
       "b": [
         1038,
         1007
+      ],
+      "type": "sea",
+      "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        994,
+        956
+      ],
+      "b": [
+        1015,
+        956
       ],
       "type": "sea",
       "comment": "Maelstrom"
@@ -3003,18 +3003,6 @@
     },
     {
       "a": [
-        1892,
-        2702
-      ],
-      "b": [
-        1863,
-        2695
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
-    },
-    {
-      "a": [
         1027,
         1414
       ],
@@ -3087,18 +3075,6 @@
     },
     {
       "a": [
-        2608,
-        2078
-      ],
-      "b": [
-        2584,
-        2100
-      ],
-      "type": "sea",
-      "comment": "Tarantula Coast"
-    },
-    {
-      "a": [
         1099,
         1439
       ],
@@ -3144,18 +3120,6 @@
       ],
       "type": "sea",
       "comment": "North Pole"
-    },
-    {
-      "a": [
-        2426,
-        3
-      ],
-      "b": [
-        2377,
-        3
-      ],
-      "type": "",
-      "comment": ""
     },
     {
       "a": [
@@ -3327,18 +3291,6 @@
     },
     {
       "a": [
-        2342,
-        3
-      ],
-      "b": [
-        2322,
-        3
-      ],
-      "type": "sea",
-      "comment": "Naggaroth"
-    },
-    {
-      "a": [
         3097,
         3036
       ],
@@ -3348,6 +3300,18 @@
       ],
       "type": "sea",
       "comment": "Isles of Dusk"
+    },
+    {
+      "a": [
+        3651,
+        3
+      ],
+      "b": [
+        3760,
+        3
+      ],
+      "type": "sea",
+      "comment": "North Pole"
     },
     {
       "a": [
@@ -3408,6 +3372,18 @@
       ],
       "type": "sea",
       "comment": "Zharr Naggrund"
+    },
+    {
+      "a": [
+        1726,
+        2613
+      ],
+      "b": [
+        1747,
+        2628
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -3582,18 +3558,6 @@
     },
     {
       "a": [
-        3345,
-        750
-      ],
-      "b": [
-        3348,
-        771
-      ],
-      "type": "sea",
-      "comment": "Albion"
-    },
-    {
-      "a": [
         5154,
         2466
       ],
@@ -3675,6 +3639,18 @@
       ],
       "type": "sea",
       "comment": "Maelstrom"
+    },
+    {
+      "a": [
+        2342,
+        3
+      ],
+      "b": [
+        2322,
+        3
+      ],
+      "type": "sea",
+      "comment": "Naggaroth"
     },
     {
       "a": [
@@ -3775,18 +3751,6 @@
     },
     {
       "a": [
-        3651,
-        3
-      ],
-      "b": [
-        3760,
-        3
-      ],
-      "type": "sea",
-      "comment": "North Pole"
-    },
-    {
-      "a": [
         3941,
         1141
       ],
@@ -3883,6 +3847,18 @@
     },
     {
       "a": [
+        3345,
+        750
+      ],
+      "b": [
+        3348,
+        771
+      ],
+      "type": "sea",
+      "comment": "Albion"
+    },
+    {
+      "a": [
         7887,
         2267
       ],
@@ -3964,18 +3940,6 @@
       ],
       "type": "sea",
       "comment": "Stars Archipelago"
-    },
-    {
-      "a": [
-        1726,
-        2613
-      ],
-      "b": [
-        1747,
-        2628
-      ],
-      "type": "sea",
-      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4063,6 +4027,18 @@
       ],
       "type": "canal_stars_sun",
       "comment": "Meeting of Sun and Stars"
+    },
+    {
+      "a": [
+        1737,
+        2021
+      ],
+      "b": [
+        1710,
+        2015
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
     },
     {
       "a": [
@@ -4210,6 +4186,18 @@
     },
     {
       "a": [
+        2290,
+        3003
+      ],
+      "b": [
+        2310,
+        2974
+      ],
+      "type": "sea",
+      "comment": "Lustria"
+    },
+    {
+      "a": [
         3941,
         1039
       ],
@@ -4243,18 +4231,6 @@
       ],
       "type": "sea",
       "comment": "Turtle Isles"
-    },
-    {
-      "a": [
-        2290,
-        3003
-      ],
-      "b": [
-        2310,
-        2974
-      ],
-      "type": "sea",
-      "comment": "Lustria"
     },
     {
       "a": [
@@ -5384,6 +5360,30 @@
       ],
       "type": "sea",
       "comment": "North Pole"
+    },
+    {
+      "a": [
+        3025,
+        3045
+      ],
+      "b": [
+        3025,
+        3065
+      ],
+      "type": "canal_isles_of_dusk",
+      "comment": "Isles of Dusk"
+    },
+    {
+      "a": [
+        1892,
+        2702
+      ],
+      "b": [
+        1863,
+        2695
+      ],
+      "type": "sea",
+      "comment": "Turtle Isles"
     }
   ]
 }
