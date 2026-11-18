@@ -163,9 +163,12 @@ TAG = {
     `arable_land` (#8444).
   - **C3 no canon seat, owns nothing.** Omit `capital` and write `# capital: none - <reason>`.
   - Never use a `STATE_LAND_<n>` key: it is an unnamed state's key and changes on regeneration.
-  - No offline gate checks these keys. After a state rename or regeneration
-    (`generate_land_regions`), grep `capital =` in `common/country_definitions/` against
-    `map_data/state_regions/*.txt`.
+  - Full `validate_map.py` fails a `capital` that names no land state in `map_data/state_regions`
+    (#11541; the game logs it as `country_definition.cpp:266` "invalid capital"). It checks the key
+    exists, not that it is the right land: a key remap or redraw can leave a capital resolving to
+    other land, silently. After one, remap capitals (and character `home_region`s) by seat hub,
+    reading `wh_hub_names_l_english.yml`, not by old key or state id (#11541: the Lustria TWW3
+    remap moved the land under kept ids).
 
   Per-file status (a file still marked pending keeps its `# capital: <Name> — TODO` comments and
   is not yet out of compliance):

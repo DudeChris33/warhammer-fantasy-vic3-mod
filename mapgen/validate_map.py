@@ -525,6 +525,9 @@ def validate(
             errors += ch_errors
             if warnings is not None:
                 warnings.extend(ch_warnings)
+    # Capitals (#11541): None under --fixture.
+    if country_definitions_dir is not None:
+        errors += _check_capitals(country_definitions_dir, state_regions_dir)
     return errors
 
 
@@ -578,6 +581,19 @@ def _check_state_history(history_dir: Path, state_regions_dir: Path, ownership_p
                f"{', ...' if len(held_back) > 10 else ''})")
         (errors if HELD_BACK_IS_ERROR else notes).append(msg)
     return errors, notes
+
+
+def _check_capitals(country_definitions_dir: Path, state_regions_dir: Path) -> list[str]:
+    """Every non-dynamic tag's ``capital`` names a land state in ``map_data/state_regions``.
+    A state merge or key remap otherwise leaves it dangling, which only the game log
+    reports (``country_definition.cpp:266``, #11541). Key existence only: a capital
+    that resolves to the wrong land after a remap is not caught here (peoples.md)."""
+    from worldgen.building_history import load_capitals
+    from worldgen.state_history import load_states_by_file
+
+    keys = {s.key for states in load_states_by_file(state_regions_dir).values() for s in states}
+    return [f"country_definitions: {tag} capital {cap} is not a land state in map_data/state_regions"
+            for tag, cap in sorted(load_capitals(country_definitions_dir).items()) if cap not in keys]
 
 
 def _check_country_history(history_path: Path, ownership_path: Path, country_definitions_dir: Path,
