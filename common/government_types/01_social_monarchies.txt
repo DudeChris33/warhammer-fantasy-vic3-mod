@@ -66,6 +66,7 @@ gov_social_monarchy_grand_principality = {
 		coa_fascist_trigger = no
 		coa_absolute_monarchy_trigger = no
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -91,6 +92,7 @@ gov_social_monarchy_grand_duchy = {
 		coa_fascist_trigger = no
 		coa_absolute_monarchy_trigger = no
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -114,8 +116,9 @@ gov_social_monarchy_principality = {
 		has_law = law_type:law_social_monarchy
 		coa_fascist_trigger = no
 		coa_absolute_monarchy_trigger = no
-		has_law = law_type:law_autocracy
+		# [#9394] removed: has_law = law_type:law_autocracy (vanilla pairs it with a Europe/real-tag OR; kept, it leaves non-autocratic non-ducal principality regencies with no government type)
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -141,6 +144,7 @@ gov_social_monarchy_duchy = {
 		coa_fascist_trigger = no
 		coa_absolute_monarchy_trigger = no
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -245,6 +249,7 @@ gov_social_monarchy_grand_principality_fascist = {
 		coa_fascist_trigger = yes
 		coa_absolute_monarchy_trigger = no
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -270,6 +275,7 @@ gov_social_monarchy_grand_duchy_fascist = {
 		coa_fascist_trigger = yes
 		coa_absolute_monarchy_trigger = no
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -293,8 +299,9 @@ gov_social_monarchy_principality_fascist = {
 		has_law = law_type:law_social_monarchy
 		coa_fascist_trigger = yes
 		coa_absolute_monarchy_trigger = no
-		has_law = law_type:law_autocracy
+		# [#9394] removed: has_law = law_type:law_autocracy (vanilla pairs it with a Europe/real-tag OR; kept, it leaves non-autocratic non-ducal principality regencies with no government type)
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		NOT = { has_law = law_type:law_technocracy }
 	}
 
@@ -320,6 +327,7 @@ gov_social_monarchy_duchy_fascist = {
 		coa_fascist_trigger = yes
 		coa_absolute_monarchy_trigger = no
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -420,6 +428,7 @@ gov_social_monarchy_grand_principality_absolutist = {
 		has_law = law_type:law_social_monarchy
 		coa_absolute_monarchy_trigger = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -444,6 +453,7 @@ gov_social_monarchy_grand_duchy_absolutist = {
 		has_law = law_type:law_social_monarchy
 		coa_absolute_monarchy_trigger = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -466,8 +476,9 @@ gov_social_monarchy_principality_absolutist = {
 	possible = {
 		has_law = law_type:law_social_monarchy
 		coa_absolute_monarchy_trigger = yes
-		has_law = law_type:law_autocracy
+		# [#9394] removed: has_law = law_type:law_autocracy (vanilla pairs it with a Europe/real-tag OR; kept, it leaves non-autocratic non-ducal principality regencies with no government type)
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		NOT = { has_law = law_type:law_technocracy }
 	}
 
@@ -492,6 +503,7 @@ gov_social_monarchy_duchy_absolutist = {
 		has_law = law_type:law_social_monarchy
 		coa_absolute_monarchy_trigger = yes
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 

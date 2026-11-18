@@ -64,6 +64,7 @@ gov_regency_grand_principality = {
 	possible = {
 		country_has_monarchy_law = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = yes
 		NOT = { has_law = law_type:law_technocracy }
 		country_has_voting_franchise = no
@@ -89,6 +90,7 @@ gov_regency_grand_duchy = {
 	possible = {
 		country_has_monarchy_law = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = yes
 		NOT = { has_law = law_type:law_technocracy }
 		country_has_voting_franchise = no
@@ -112,8 +114,9 @@ gov_regency_principality = {
 
 	possible = {
 		country_has_monarchy_law = yes
-		has_law = law_type:law_autocracy
+		# [#9394] removed: has_law = law_type:law_autocracy (vanilla pairs it with a Europe/real-tag OR; kept, it leaves non-autocratic non-ducal principality regencies with no government type)
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		NOT = { has_law = law_type:law_technocracy }
 		country_has_voting_franchise = no
 		has_gov_regency = yes
@@ -139,6 +142,7 @@ gov_regency_duchy = {
 	possible = {
 		country_has_monarchy_law = yes
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = yes
 		NOT = { has_law = law_type:law_technocracy }
 		country_has_voting_franchise = no
@@ -240,6 +244,7 @@ gov_regency_grand_principality_constitutional = {
 	possible = {
 		country_has_monarchy_law = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = yes
 		country_has_voting_franchise = yes
 	}
@@ -264,6 +269,7 @@ gov_regency_grand_duchy_constitutional = {
 	possible = {
 		country_has_monarchy_law = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = yes
 		country_has_voting_franchise = yes
 	}
@@ -286,8 +292,9 @@ gov_regency_principality_constitutional = {
 
 	possible = {
 		country_has_monarchy_law = yes
-		has_law = law_type:law_autocracy
+		# [#9394] removed: has_law = law_type:law_autocracy (vanilla pairs it with a Europe/real-tag OR; kept, it leaves non-autocratic non-ducal principality regencies with no government type)
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		country_has_voting_franchise = yes
 		has_gov_regency = yes
 	}
@@ -312,6 +319,7 @@ gov_regency_duchy_constitutional = {
 	possible = {
 		country_has_monarchy_law = yes
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = yes
 		country_has_voting_franchise = yes
 	}

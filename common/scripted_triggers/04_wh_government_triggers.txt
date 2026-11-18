@@ -1,0 +1,16 @@
+﻿# Ducal titles (#9394): stands in for vanilla's geographic_region_europe gate on the duchy/principality pairs
+# in common/government_types (01_monarchies, 01_regencies, 01_social_monarchies). Every duchy and grand-duchy
+# variant requires this = yes and every principality and grand-principality variant requires it = no, so each
+# pair is mutually exclusive again and file order no longer decides the title.
+# Canon: Bretonnia's dukedoms and Mousillon; the Empire's Grand Dukes of Middenland, Stirland and Talabecland
+# (Sigmar's Heirs, WFRP 2e, pp. 53, 85, 89). Adding a culture here moves that people's principality-tier
+# monarchies from Prince to Duke titles.
+wh_country_has_ducal_titles = {
+	OR = {
+		country_has_primary_culture = cu:bretonnian
+		country_has_primary_culture = cu:mousillon
+		country_has_primary_culture = cu:middenlander
+		country_has_primary_culture = cu:stirlander
+		country_has_primary_culture = cu:talabeclander
+	}
+}

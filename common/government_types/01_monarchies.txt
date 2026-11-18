@@ -419,6 +419,7 @@ gov_absolute_duchy = {
 		has_law = law_type:law_monarchy
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
 	}
@@ -446,6 +447,7 @@ gov_constitutional_duchy = {
 		has_law = law_type:law_monarchy
 		country_has_voting_franchise = yes
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
 	}
@@ -476,6 +478,7 @@ gov_duchy = {
 			has_law_or_variant = law_type:law_technocracy
 		}
 		country_tier = principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		NOT = { is_subject_type = subject_type_crown_land }
 		has_gov_regency = no
 	}
@@ -501,6 +504,7 @@ gov_absolute_principality = {
 		has_law = law_type:law_monarchy
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		NOT = {
 			always = no  # [#6573] was: has_variable = king_sounds_better
 		}
@@ -531,6 +535,7 @@ gov_principality = {
 			has_law_or_variant = law_type:law_technocracy
 		}
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -556,6 +561,7 @@ gov_constitutional_principality = {
 		has_law = law_type:law_monarchy
 		country_has_voting_franchise = yes
 		country_tier = principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -580,6 +586,7 @@ gov_absolute_grand_duchy = {
 		has_law = law_type:law_monarchy
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -607,6 +614,7 @@ gov_grand_duchy = {
 			has_law_or_variant = law_type:law_technocracy
 		}
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 
 		has_gov_regency = no
 	}
@@ -633,6 +641,7 @@ gov_constitutional_grand_duchy = {
 		has_law = law_type:law_monarchy
 		country_has_voting_franchise = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = yes  # [#9394] was: is_in_geographic_region = geographic_region_europe
 
 		has_gov_regency = no
 	}
@@ -658,6 +667,7 @@ gov_absolute_grand_principality = {
 		has_law = law_type:law_monarchy
 		has_law_or_variant = law_type:law_autocracy
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -685,6 +695,7 @@ gov_grand_principality = {
 			has_law_or_variant = law_type:law_technocracy
 		}
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
@@ -710,6 +721,7 @@ gov_constitutional_grand_principality = {
 		has_law = law_type:law_monarchy
 		country_has_voting_franchise = yes
 		country_tier = grand_principality
+		wh_country_has_ducal_titles = no  # [#9394] was: is_not_in_geographic_region = geographic_region_europe
 		has_gov_regency = no
 	}
 
