@@ -67,6 +67,7 @@ from __future__ import annotations
 
 import argparse
 import io
+import json
 import re
 import sys
 import time
@@ -80,7 +81,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import reproject, schema  # noqa: E402
+from worldgen import raster, reproject, schema  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -177,7 +178,29 @@ PALETTE = {
 }
 PALETTE_TOL = 60           # L1 distance in RGB
 FILL_MAX_CELLS = 12        # nearest-known fill radius, in working-grid cells
-BLEND_SIGMA = 3.5          # Gaussian blend of the per-material weights, working cells
+
+# --- tuning (each constant has a value that switches its rule off, used for before/after renders)
+BLEND_SIGMA = 8.0          # Gaussian blend of the per-material weights, working cells (prototype 3.5)
+EDGE_WARP_CELLS = 8.0      # amplitude of the seeded displacement of the biome lookup, working cells (0 = off)
+EDGE_WARP_SIGMA = 10.0     # smoothness of that displacement field, working cells
+MOUNTAIN_RELIEF_M = 700.0  # TWW3 `mountain` kept only at or above this mean elevation (m) or on a cliff slope;
+                           # elsewhere the nearest other class (-inf = keep every mountain cell)
+HIGH_ROCK_M = (1200.0, 2200.0)  # smoothstep band: rock on high ground in every class
+HIGH_ROCK_STRENGTH = 0.7   # share of the cell's weight given to rock at the top of the band (0 = off)
+SNOW_LINE_M = (4800.0, 1800.0)  # snow line at <=20 deg and at >=70 deg latitude, metres
+SNOW_BAND_M = 250.0        # half-width of the snow fade around the line, metres
+CLIFF_SLOPE = (18.0, 55.0) # smoothstep band of cliff material, metres of rise per canvas px
+FAR_NORTH_FROM_CLIMATE = True   # gaps in the TWW3 map take the climate model's class (False = latitude proxy)
+
+#: Climate-model zone code (``climate_zones_index.json``) -> biome class, for the
+#: cells the TWW3 map has no say on. An unmapped code is a hard error.
+CLIMATE_CODE_BIOME = {
+    "Af": JUNGLE, "Am": JUNGLE, "Aw": SAVANNA, "BSh": SAVANNA, "BWh": DESERT, "BWk": DESERT,
+    "BSk": WASTE, "Cs": TEMPERATE, "Cfa": TEMPERATE, "Cfb": TEMPERATE, "Df": TEMPERATE,
+    "Dc": TEMPERATE, "ET": FROZEN, "EF": FROZEN,
+}
+CLIMATE_PNG = DERIVED_DIR / "climate_zones.png"
+CLIMATE_INDEX = DERIVED_DIR / "climate_zones_index.json"
 
 
 def log(msg: str) -> None:
@@ -195,6 +218,7 @@ class Inputs:
     arable: np.ndarray      # float32 [H, W], arable heatmap value
     biome_tww3: np.ndarray  # uint8 [H/Q, W/Q], climate-map class (UNKNOWN where none)
     covered: np.ndarray     # bool [H/Q, W/Q], inside the climate map's frame
+    biome_model: np.ndarray  # uint8 [H/Q, W/Q], climate-model class (UNKNOWN on its sea)
 
 
 def load_elevation() -> np.ndarray:
@@ -259,6 +283,24 @@ def climate_biomes() -> tuple[np.ndarray, np.ndarray]:
     return biome, inside
 
 
+def model_biomes() -> np.ndarray:
+    """The accepted climate model as biome classes on the working grid (cell-centre sample).
+
+    Its sea value maps to UNKNOWN; :func:`build` gives a land cell carrying it the
+    nearest land class.
+    """
+    layer, _ = raster.read_indexed_png(CLIMATE_PNG)
+    index = json.loads(CLIMATE_INDEX.read_text(encoding="utf-8"))
+    lut = np.full(256, UNKNOWN, np.uint8)
+    for c in index["classes"]:
+        if c["code"] not in CLIMATE_CODE_BIOME:
+            raise SystemExit(f"{CLIMATE_INDEX.name}: zone code {c['code']!r} has no CLIMATE_CODE_BIOME entry")
+        lut[c["id"]] = CLIMATE_CODE_BIOME[c["code"]]
+    if layer.shape != (H, W):
+        raise SystemExit(f"{CLIMATE_PNG.name}: expected {W}x{H}, got {layer.shape[1]}x{layer.shape[0]}")
+    return lut[layer[Q // 2::Q, Q // 2::Q]]
+
+
 def load_inputs() -> Inputs:
     log("loading inputs")
     land = np.asarray(Image.open(DERIVED_DIR / "land_sea_mask.png"), dtype=bool)
@@ -270,7 +312,7 @@ def load_inputs() -> Inputs:
         if a.shape != (H, W):
             raise SystemExit(f"{name}: expected {W}x{H}, got {a.shape[1]}x{a.shape[0]}")
     return Inputs(land=land & ~lake, lake=lake, elev=elev, arable=arable,
-                  biome_tww3=biome, covered=covered)
+                  biome_tww3=biome, covered=covered, biome_model=model_biomes())
 
 
 # --------------------------------------------------------------------------- rules
@@ -285,6 +327,46 @@ def fill_unknown(biome: np.ndarray, land: np.ndarray, covered: np.ndarray) -> np
     fill = land & ~known & covered & (dist <= FILL_MAX_CELLS)
     out[fill] = biome[iy[fill], ix[fill]]
     return out
+
+
+def nearest_of(biome: np.ndarray, valid: np.ndarray, where: np.ndarray) -> np.ndarray:
+    """``biome`` with the cells in ``where`` replaced by the nearest ``valid`` cell's class."""
+    out = biome.copy()
+    if not valid.any() or not where.any():
+        return out
+    _d, (iy, ix) = ndimage.distance_transform_edt(~valid, return_indices=True)
+    out[where] = biome[iy[where], ix[where]]
+    return out
+
+
+def demote_mountains(biome: np.ndarray, land: np.ndarray, elev4: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    """Keep TWW3 ``mountain`` only where our relief agrees; elsewhere the nearest other land class.
+
+    Relief agrees at a cell mean elevation of :data:`MOUNTAIN_RELIEF_M` or more, or a
+    working-grid slope above the cliff onset. Returns ``(biome, demoted mask)``.
+    """
+    gy, gx = np.gradient(elev4)
+    slope = np.hypot(gx, gy) / Q                                        # m of rise per canvas px
+    relief = (elev4 >= MOUNTAIN_RELIEF_M) | (slope > CLIFF_SLOPE[0])
+    demote = land & (biome == MOUNTAIN) & ~relief
+    valid = land & (biome != MOUNTAIN) & (biome != UNKNOWN)
+    return nearest_of(biome, valid, demote), demote
+
+
+def warp_biome(biome: np.ndarray, land: np.ndarray, seed: int) -> np.ndarray:
+    """Displace the biome lookup by two seeded smooth fields, so class edges stop following
+    the TWW3 polygons' straight lines. Land classes are first extended over the sea so a
+    coastal cell never samples a sea cell; sea cells keep their own value."""
+    if EDGE_WARP_CELLS <= 0:
+        return biome
+    h4, w4 = biome.shape
+    ext = nearest_of(biome, land & (biome != UNKNOWN), ~land | (biome == UNKNOWN))
+    dx = smooth_noise(np.random.default_rng([seed, 1]), EDGE_WARP_SIGMA, (h4, w4)) * EDGE_WARP_CELLS
+    dy = smooth_noise(np.random.default_rng([seed, 2]), EDGE_WARP_SIGMA, (h4, w4)) * EDGE_WARP_CELLS
+    yy, xx = np.mgrid[0:h4, 0:w4]
+    sy = np.clip(np.rint(yy + dy), 0, h4 - 1).astype(np.intp)
+    sx = np.clip(np.rint(xx + dx), 0, w4 - 1).astype(np.intp)
+    return np.where(land, ext[sy, sx], biome).astype(np.uint8)
 
 
 def proxy_biome(lat: np.ndarray, elev4: np.ndarray, fert4: np.ndarray) -> np.ndarray:
@@ -385,7 +467,26 @@ def build_weights(biome, land, lake, elev4, fert4, coast_dist, rng) -> np.ndarra
     # --- shoreline sand on any land (not on mountains/ice), thin
     shore = land & (coast_dist < 2.0) & ~np.isin(biome, [MOUNTAIN, FROZEN, DESERT])
     add("beach_01", 0.5, shore)
+    # --- rock on high ground in every class, from our own elevation: ranges the climate
+    #     map does not mark still read as mountains
+    if HIGH_ROCK_STRENGTH > 0:
+        hr = (HIGH_ROCK_STRENGTH * smoothstep(elev4, *HIGH_ROCK_M) * land).astype(np.float32)
+        tot = s.sum(axis=0)
+        s *= 1.0 - hr
+        s[M["rocks_01"]] += 0.55 * hr * tot
+        cliff_of = cliff_lut()[biome]
+        for mi in np.unique(cliff_of[hr > 0]):
+            s[mi] += np.where(cliff_of == mi, 0.45 * hr * tot, 0.0).astype(np.float32)
     return s
+
+
+def cliff_lut() -> np.ndarray:
+    """Cliff material per biome class."""
+    lut = np.full(11, M["cliff_granite_06"], np.uint8)
+    lut[[WASTE, DESERT, SAVANNA]] = M["cliff_sandstone_04"]
+    lut[CHAOS] = M["cliff_granite_07"]
+    lut[JUNGLE] = M["cliff_granite_01"]
+    return lut
 
 
 def top3(stack: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
@@ -464,9 +565,17 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
 
     say("biome")
     biome = fill_unknown(inp.biome_tww3, land4, inp.covered)
-    prox = proxy_biome(lat4, elev4, fert4)
     use_proxy = land4 & (biome == UNKNOWN)
+    if FAR_NORTH_FROM_CLIMATE:
+        model = inp.biome_model
+        model = nearest_of(model, land4 & (model != UNKNOWN), land4 & (model == UNKNOWN))
+        prox = model
+    else:
+        prox = proxy_biome(lat4, elev4, fert4)
     biome = np.where(use_proxy, prox, biome).astype(np.uint8)
+    biome, demoted = demote_mountains(biome, land4, elev4)
+    say(f"  mountain demoted to its neighbours on {demoted.sum() / max(int(land4.sum()), 1) * 100:.1f}% of land cells")
+    biome = warp_biome(biome, land4, seed)
     nland = max(int(land4.sum()), 1)
     say(f"  proxy fallback on {use_proxy.sum() / nland * 100:.1f}% of land cells")
     for k, nme in enumerate(BIOME_NAMES[1:], 1):
@@ -480,10 +589,7 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     del stack
 
     # cliff material per biome (lookup by working-grid biome class)
-    cliff_lut = np.full(11, M["cliff_granite_06"], np.uint8)
-    cliff_lut[[WASTE, DESERT, SAVANNA]] = M["cliff_sandstone_04"]
-    cliff_lut[CHAOS] = M["cliff_granite_07"]
-    cliff_lut[JUNGLE] = M["cliff_granite_01"]
+    clut = cliff_lut()
 
     say("full-resolution pass")
     idx = np.empty((3, h, w), np.uint8)
@@ -493,7 +599,8 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     slope = np.hypot(gx_full, gy_full)
     del gy_full, gx_full
     lat_rows = reproject.canvas_lonlat(np.arange(h), w, h)[1][:, 0]
-    snowline = 4800.0 - 3000.0 * np.clip((np.abs(lat_rows) - 20.0) / 50.0, 0, 1)    # m by latitude
+    s_eq, s_pole = SNOW_LINE_M
+    snowline = s_eq - (s_eq - s_pole) * np.clip((np.abs(lat_rows) - 20.0) / 50.0, 0, 1)    # m by latitude
 
     t0 = time.time()
     for y0 in range(0, h, BLOCK):
@@ -514,12 +621,12 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
         bio_here = biome[near_y, near_x]
         sl = slope[y0:y1]
         el = elev_c[y0:y1]
-        cliff = smoothstep(sl, 18.0, 55.0) * landb                      # m of rise per canvas px
-        snow = smoothstep(el, snowline[y0:y1, None] - 250, snowline[y0:y1, None] + 250) * landb
+        cliff = smoothstep(sl, *CLIFF_SLOPE) * landb
+        snow = smoothstep(el, snowline[y0:y1, None] - SNOW_BAND_M, snowline[y0:y1, None] + SNOW_BAND_M) * landb
         snow *= 1.0 - 0.5 * cliff
         keep = np.clip(1.0 - cliff - snow, 0.0, 1.0)
         cand_w[:3] *= keep
-        cand_i[3] = cliff_lut[bio_here]
+        cand_i[3] = clut[bio_here]
         cand_w[3] = cliff
         cand_i[4] = M["snow"]
         cand_w[4] = snow
@@ -763,10 +870,15 @@ def synthetic_inputs(h: int = 452, w: int = 1024) -> Inputs:
     h4, w4 = h // Q, w // Q
     biome = np.full((h4, w4), TEMPERATE, np.uint8)
     biome[:, w4 // 2:] = DESERT
-    biome[:4, :] = UNKNOWN                                               # exercises fill + proxy
-    covered = np.ones((h4, w4), bool)
-    covered[:2, :] = False
-    return Inputs(land=land, lake=lake, elev=elev, arable=arable, biome_tww3=biome, covered=covered)
+    biome[h4 // 2 - 20:h4 // 2 - 10, w4 // 4:w4 // 4 + 20] = MOUNTAIN   # flat: demoted to its neighbours
+    gap = (slice(h4 // 2 + 5, h4 // 2 + 25), slice(w4 // 4, w4 // 4 + 30))
+    biome[gap] = UNKNOWN                                                 # outside the climate map:
+    covered = np.ones((h4, w4), bool)                                    # taken from the climate model
+    covered[gap] = False
+    model = np.full((h4, w4), FROZEN, np.uint8)
+    model[h4 // 2 + 10:h4 // 2 + 15, w4 // 4:w4 // 4 + 10] = UNKNOWN     # model sea on our land: nearest
+    return Inputs(land=land, lake=lake, elev=elev, arable=arable, biome_tww3=biome, covered=covered,
+                  biome_model=model)
 
 
 def selftest() -> int:
@@ -776,6 +888,12 @@ def selftest() -> int:
     idx, wts = build(inp, map_config.SEED, verbose=False)          # validates the format invariants
     idx2, wts2 = build(inp, map_config.SEED, verbose=False)
     assert idx.tobytes() == idx2.tobytes() and wts.tobytes() == wts2.tobytes(), "not deterministic"
+    land4 = block_mean(inp.land.astype(np.float32)) > 0.5
+    _b, demoted = demote_mountains(inp.biome_tww3, land4, block_mean(inp.elev))
+    assert demoted.any(), "flat TWW3 mountain was not demoted"
+    h4, w4 = inp.biome_tww3.shape
+    gap = idx[0, (h4 // 2 + 10) * Q:(h4 // 2 + 20) * Q, (w4 // 4 + 5) * Q:(w4 // 4 + 25) * Q]
+    assert (gap == M["snow"]).mean() > 0.5, "the climate model did not fill the TWW3 gap"
     used = set(np.unique(idx).tolist())
     for name in ("snow", "cliff_granite_06", "cliff_sandstone_04", "beach_01", "desert_01", "grasslands_02"):
         assert M[name] in used, f"selftest world never produced {name}"
