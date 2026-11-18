@@ -76,6 +76,16 @@ if ($drift.Count -gt 0 -and -not $Force) {
     throw "$($drift.Count) file(s) in the mod folder are newer than / missing from the repo (editor or game output?). Run '.\deploy.ps1 -Pull' to copy them into the repo first, or '.\deploy.ps1 -Force' to discard them."
 }
 
+# 0b. Terrain guard. Only the material masks are committed; the two detail TGAs are rebuilt from
+#     them. Shipping masks without the TGAs would leave vanilla Earth materials under our land.
+$terrain = Join-Path $repoFull 'gfx\map\terrain'
+if (Get-ChildItem (Join-Path $terrain 'mask_*.png') -ErrorAction SilentlyContinue) {
+    $missing = @('detail_index.tga', 'detail_intensity.tga') | Where-Object { -not (Test-Path (Join-Path $terrain $_)) }
+    if ($missing) {
+        throw "gfx/map/terrain is missing $($missing -join ', '). Run 'mapgen/.venv/Scripts/python.exe mapgen/generate_terrain_masks.py --from-masks' first."
+    }
+}
+
 # 1. Mirror shipping folders.
 foreach ($d in $shipDirs) {
     $src = Join-Path $repoFull $d

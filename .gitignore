@@ -63,3 +63,9 @@ scratchpad/
 /common/history/countries/
 /common/history/buildings/
 /gfx/map/map_object_data/generated_map_object_locators_*.txt
+
+# Terrain-material TGAs (118 MB each): an exact function of the committed gfx/map/terrain/mask_*.png.
+# After a fresh clone run `mapgen/.venv/Scripts/python.exe mapgen/generate_terrain_masks.py --from-masks`
+# before deploy.ps1 (it refuses to deploy without them).
+/gfx/map/terrain/detail_index.tga
+/gfx/map/terrain/detail_intensity.tga
