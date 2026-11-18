@@ -796,3 +796,19 @@ retired_commander_career_end_becomes_politician_roll_effect = {
 		retired_commander_becomes_politician_roll_effect = { CHANCE_MULT = 1 }
 	}
 }
+
+# [#10567] PARTIAL PORT of vanilla 1.15.1 common/scripted_effects/00_scripted_effects.txt:1431 (revoke_favorite_effect),
+# called by common/character_interactions/02_favorite_interactions.txt. Dropped: the "No faith healing for Alexei
+# without Rasputin" if-branch (has_template = RUS_grigoriy_rasputin / RUS_alexei_ii, je_tp_fav_rasputin_complete_var,
+# modifier_faith_healing): real-world characters and an undefined modifier. Prunes nothing in play here.
+revoke_favorite_effect = {
+	remove_character_role = favorite
+	add_modifier = {
+		name = revoked_favorite
+		years = 10
+	}
+	# [#10567] removed: Rasputin/Alexei faith-healing removal branch
+	hidden_effect = {
+		retire_character_if_should_be_culled = { hidden = yes }
+	}
+}

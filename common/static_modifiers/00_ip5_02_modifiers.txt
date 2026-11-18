@@ -1,0 +1,7 @@
+﻿# [#10567] Clean port of one generic entry from vanilla 1.15.1 common/static_modifiers/00_ip5_02_modifiers.txt:98, applied
+# by this mod's common/character_interactions/02_favorite_interactions.txt (appoint_favorite controversy penalty on
+# objecting interest groups). Nothing real-world in it.
+modifier_controversial_favorite = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	interest_group_approval_add = -1
+}
