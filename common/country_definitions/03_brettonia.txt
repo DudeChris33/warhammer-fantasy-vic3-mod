@@ -297,7 +297,7 @@ WYD = {
 }
 
 ################ OKP — Oak of Prophecy; a wood-elf glade beyond Athel Loren's eaves ################
-# Soft: named for its sacred oak. Filed here by geography: STATE_OAK_OF_PROPHECY sits in
+# Soft: named for its sacred oak. Filed here by geography: STATE_OAK_OF_PROPHECY (merged into STATE_ARTOIS, #10449) sat in
 # map_data/state_regions/03_brettonia.txt.
 
 OKP = {
@@ -305,7 +305,7 @@ OKP = {
 	country_type = unrecognized
 	tier = principality
 	cultures = { wood_elf }
-	capital = STATE_OAK_OF_PROPHECY
+	capital = STATE_ARTOIS # Oak of Prophecy merged into Artois (#10449); OKP holds a 2-of-13-province slice; seat inferred: no named hub
 }
 
 ################ ALN — Athel Loren; formable, the united wood-elf realm ################

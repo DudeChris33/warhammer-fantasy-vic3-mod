@@ -33,7 +33,7 @@ HEX_mazdamundi_template = {
 	birth_date = 2440.1.1
 	interest_group = ig_devout
 	ideology = ideology_theocrat
-	home_region = STATE_FLOATING_PYRAMID
+	home_region = STATE_WELLSPRINGS_OF_ETERNITY
 	traits = {
 		erudite
 		persistent
@@ -55,7 +55,7 @@ ITZ_xltloc_template = {
 	birth_date = 2440.1.1
 	interest_group = ig_devout
 	ideology = ideology_theocrat
-	home_region = STATE_ITZA
+	home_region = STATE_XHOTL
 	traits = {
 		erudite
 		cautious
@@ -79,7 +79,7 @@ SKG_adella_of_the_thousand_mouths_template = {
 	birth_date = 2460.1.1
 	interest_group = ig_armed_forces
 	ideology = ideology_traditionalist
-	home_region = STATE_BITING_BOGS
+	home_region = STATE_PILLARS_OF_UNSEEN_CONSTELLATIONS
 	traits = {
 		ambitious
 		ruthless
@@ -121,7 +121,7 @@ VCO_luthor_harkon_template = {
 	birth_date = 2440.1.1
 	interest_group = ig_armed_forces
 	ideology = ideology_authoritarian
-	home_region = STATE_VAMPIRE_COAST
+	home_region = STATE_THE_AWAKENING
 	traits = {
 		ruthless
 		brave
@@ -143,7 +143,7 @@ XLA_huinitenuchli_template = {
 	birth_date = 2440.1.1
 	interest_group = ig_devout
 	ideology = ideology_theocrat
-	home_region = STATE_XLANHUAPEC
+	home_region = STATE_ITZA
 	traits = {
 		erudite
 		pious
