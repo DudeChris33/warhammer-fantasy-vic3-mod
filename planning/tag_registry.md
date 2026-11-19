@@ -18,7 +18,7 @@ Filed by epic #3414 (child #3415).
 - [x] 01 Kislev (10)
 - [x] 02 Empire (24)
 - [x] 03 Bretonnia (23)
-- [x] 04 Karaz Ankor (28)
+- [x] 04 Karaz Ankor (29)
 - [x] 05 Southern Realms (29)
 - [x] 06 Badlands (11)
 - [x] 07 Nehekhara (11)
@@ -35,7 +35,7 @@ Filed by epic #3414 (child #3415).
 - [x] 18 Naggaroth (7)
 - [x] 19 Lustria (30)
 
-**Total: 265 tags** (16 formables, 235 starts, 14 reserved; recounted from the roster rows in #10177, UNO included) — all 20 regions resolved (17 with tags; Ind, Khuresh,
+**Total: 268 tags** (17 formables, 237 starts, 14 reserved; recounted from the roster rows in #10215, UNO included) — all 20 regions resolved (17 with tags; Ind, Khuresh,
 Nippon deferred with 0), plus the `98_unclaimed` placeholder owner `UNO` (#6391). Content is **honest, well-attested Warhammer
 Fantasy Battle canon** — Total War video-game inventions excluded unless explicitly folded into
 Warhammer: The Old World (2023+) and confirmed by Chris.
@@ -81,7 +81,7 @@ Warhammer: The Old World (2023+) and confirmed by Chris.
   `reserved` rows: the codes are frozen and never reused or renamed, their definitions, arms, flags, loc and
   per-tag configs are gone. Six real clans replaced seven of them: `MDR` Moulder (XSD), `SRY` Skryre (XSG),
   `SAA` Skaar (XSJ+XSK), `SKB` Skab (XSI), `SCU` Scruten (XSB), `ESH` Eshin (XSA). `XSL` (Cripple Peak) became
-  unowned and `XSC` (the Volgen slice) went to `TAL`; `XSH` held nothing. **Every Skaven tag is a clan** (Chris,
+  unowned (Cripple Peak is `NGZ` since #10215) and `XSC` (the Volgen slice) went to `TAL`; `XSH` held nothing. **Every Skaven tag is a clan** (Chris,
   2026-11-04): no city or Council polity. A clan whose state has no `skaven` homeland gets a Skaven share through
   `mapgen/config/pop_history/state_overrides.json` `add` rows (#9026, 50% by default, pending Chris's
   confirmation), not through `state_homelands.json`.
@@ -278,6 +278,7 @@ NEH
 NGA
 NGD
 NGY
+NGZ
 NLD
 NUM
 OKP
@@ -583,7 +584,7 @@ no region file of their own (see *Conventions*). All carry `wood_elf` and are
 | OKP | `03_brettonia` | Oak of Prophecy | start | `wood_elf` | Oak of Prophecy | `principality`/`unrecognized`; wood-elf glade beyond Athel Loren's eaves (#6373) |
 | ALN | `03_brettonia` | Athel Loren | formable | `wood_elf` | Waterfall Palace | `kingdom`/`unrecognized`; the five realms united; explicit 13-state list (not culture states: `wood_elf` is also homeland elsewhere) |
 
-### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_ancestral, sylvanian_vampire, goblin) — 28 tags; KAZ formable
+### 04 KARAZ ANKOR (dawi, dawi_grey, dawi_norse, dawi_ancestral, sylvanian_vampire, necrarch, goblin) — 29 tags; KAZ formable
 
 10 active holds + Karak Angazbar (seed "Karak Azgaraz" corrected) + 7 ruined/fallen holds (all
 sourced). **Ruined holds keep a dwarf tag even though they are occupied at game start** — they are
@@ -620,6 +621,7 @@ a disclosed name choice (canon names no realm for him), and `sylvanian_vampire` 
 culture (the only one with undead heritage and the `cult_of_nagash` religion; it does not describe a
 non-vampire, non-Sylvanian following). `unrecognized`/`principality`, filed here by the geography of
 Eastern Irranas. Plus the retired Skaven placeholders `XSH`–`XSL` (see *Conventions*; `SAA` and `SKB` replace some of them).
+**`NGZ` Nagashizzar (#10215, Chris 2026-11-18)** holds Cripple Peak: Nagash's cult and undead garrison, `necrarch` as a disclosed stand-in culture, `unrecognized`/`principality`, theocracy, no ruler character (row below).
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|
@@ -645,13 +647,14 @@ Eastern Irranas. Plus the retired Skaven placeholders `XSH`–`XSL` (see *Conven
 | KRV | `04_karaz_ankor` | Kraka Ravnsvake | start | `dawi_norse` | Kraka Ravnsvake | Norse dwarf hold; state in Norsca, filed here on the KRD precedent (#6373) |
 | VMP | `04_karaz_ankor` | Kemmler's Host | start | `sylvanian_vampire` | Eastern Irranas (non-canon) | Heinrich Kemmler the Lichemaster (human lich); `unrecognized`; name and culture are disclosed stand-ins (#6373) |
 | LHX | `04_karaz_ankor` | Lahmian Exiles | start | `lahmian_vampire` | New Lahmia | Lahmian vampire exiles in STATE_NEW_LAHMIA; `unrecognized`; new tag distinct from `LAH` (Chris, 2026-10-03) |
+| NGZ | `04_karaz_ankor` | Nagashizzar | start | `necrarch` | Cripple Peak (Nagashizzar) | Nagash's cult and undead garrison at Nagashizzar (#10215): the disciples of Nagash are the only living things in the fortress in the 2502 present (*Warhammer Armies: Undead* 4e, Undead Gazetteer pp. 6-10); Nagash slew Clan Rikek c. 100 IC (*Warhammer Armies: Skaven* 4e pp. 13-15, Timeline p. 22). Continuity conflict disclosed: the End Times (*Warhammer: Nagash*, 2014, pp. 122-123) has Nagash dead until 2524 IC; either way his cult holds it, so no ruler character. `necrarch` is a disclosed stand-in: W'soran's Necrarchs left in -1150 IC (*Vampire Counts* 8e p. 22) and it does not describe the human disciples or mindless undead; `principality`/`unrecognized`, `law_theocracy` |
 | XSH | `04_karaz_ankor` | Skaven Clan F (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by nothing: held nothing (#10199); never reuse |
 | SKB | `04_karaz_ankor` | Clan Skab | start | `skaven` | — (owns nothing at start; Kreutzhofen slice returned to WIS, 2026-11-09) | Skaven clan; hidden under Nuln (canon-firm); `principality`/`unrecognized` (#10199). Owns no land so no HQ port-travel error; entry in `dormant/` |
 | XSI | `04_karaz_ankor` | Skaven Clan G (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by SKB (#10199); never reuse |
 | SAA | `04_karaz_ankor` | Clan Skaar | start | `skaven` | Dark Maiden Pass (non-canon) | Skaven clan; Apuccini mine stronghold (canon-firm), Dark Maiden Pass inferred; holds the Apuccini slice too; `principality`/`unrecognized` (#10199) |
 | XSJ | `04_karaz_ankor` | Skaven Clan H (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by SAA (#10199); never reuse |
 | XSK | `04_karaz_ankor` | Skaven Clan I (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by SAA (#10199); never reuse |
-| XSL | `04_karaz_ankor` | Skaven Clan J (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by nothing: unowned (Cripple Peak, Nagash) (#10199); never reuse |
+| XSL | `04_karaz_ankor` | Skaven Clan J (placeholder) | reserved | `skaven` | — | retired Skaven placeholder, superseded by nothing: unowned (Cripple Peak, Nagash) (#10199); Cripple Peak is NGZ since #10215; never reuse |
 | VLG | `04_karaz_ankor` | Karak Vlag | start | `dawi` | Karak Vlag | ruined, far north, destroyed by Chaos |
 | SLV | `04_karaz_ankor` | Mount Silverspear | start | `dawi` | Mount Silverspear | ruined mine, Silver Road |
 
@@ -790,8 +793,9 @@ future under-empire epic (no region yet).
 The tomb-cities of the Tomb Kings. **Lahmia (`LAH`) carries a bespoke `lahmian_vampire` culture** —
 Neferata's bloodline, the cradle of vampires (culture authored by #3419). All other cities are
 `nehekharan` (the ancient Tomb Kings civilization). NEH (Settra reunites the Land of the Dead) is
-`nehekharan` only — the Lahmian vampires are Settra's enemies, not part of his realm. **Nagashizzar has
-no tag** — reserved for a future Skaven clan (no Skaven region yet). (Approved 2026-08-30.)
+`nehekharan` only — the Lahmian vampires are Settra's enemies, not part of his realm. **Nagashizzar is
+`NGZ`**, filed in `04_karaz_ankor` by the geography of Cripple Peak (#10215; it was first reserved for a Skaven
+clan, but Nagash destroyed the Skaven there c. 100 IC). (Approved 2026-08-30; revised 2026-11-18.)
 
 | TAG | Region file | Polity | Kind | Primary culture | Placeholder capital | Notes |
 |-----|-------------|--------|------|-----------------|---------------------|-------|

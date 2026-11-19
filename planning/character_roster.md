@@ -2,7 +2,7 @@
 
 Hand-authored starting characters, one template per character in `common/character_templates/<region>.txt` and one `create_character` per template in `common/history/characters/<region>.txt`. Display names are in `localization/english/wh_characters_l_english.yml`. **Not loaded in-game**: nothing here is tested; Chris still has to check `logs/error.log`.
 
-**Coverage:** 89 characters across 74 tags (the 58 of the original 140 start tags, plus the 16 High Elf realms and colonies added by #10456 (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`; the 140 and the 89 below predate the Ulthuan tags)). The other 89 tags have no attested canon ruler and fall back to the culture-based `default` template.
+**Coverage:** 89 characters across 74 tags (the 58 of the original 140 start tags, plus the 16 High Elf realms and colonies added by #10456 (every `c:TAG` block in `00_start_setup.txt` except the placeholder owner `UNO`; the 140 and the 89 below predate the Ulthuan tags)). The other 90 tags have no attested canon ruler and fall back to the culture-based `default` template.
 
 **Start date:** 2502 IC, from `mapgen/config/country_history/README.md`; no separate defines entry pins it.
 
@@ -121,6 +121,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | MOU | no canon ruler found | — | — | — | — |
 | MZN | Astragoth Ironhand | — | Zhatan the Black (general) | Chaos Dwarfs lore (Astragoth Ironhand, High Priest of Hashut); Chaos Dwarfs lore (Zhatan the Black, commander of the Tower of Zharr) | low |
 | NGY | Alith Anar | — | — | Lexicanum "Alith Anar"; Warhammer Armies: High Elves 5e pp.81-82 | medium |
+| NGZ | no ruler character: Nagash is out of scope (#10215) | — | — | — | — |
 | NLD | Theoderic Gausser | — | — | https://whfb.lexicanum.com/wiki/Elector_Count_of_Nordland | medium |
 | NUM | no canon ruler found | — | — | — | — |
 | OKP | no canon ruler found | — | — | — | — |
@@ -181,7 +182,7 @@ Hand-authored starting characters, one template per character in `common/charact
 | ZHU | Barundin Stoneheart | — | Burlok Damminson (IG leader) | Warhammer Armies: Dwarfs (Burlok Damminson, Engineers Guild); Warhammer Chronicles / novel Grudgebearer (King Barundin Stoneheart of Zhufbar) | low |
 | ZND | no canon ruler found | — | — | — | — |
 
-## No canon ruler found (89 tags)
+## No canon ruler found (90 tags)
 
 Left to the `default` template and procedural generation. No placeholder was authored.
 
@@ -189,6 +190,7 @@ Left to the `default` template and procedural generation. No placeholder was aut
 - **Wood Elf realm** (7): ANM GRW LAU MGL OKP TRG WYD
 - **ruined/abandoned Dwarf hold** (7): DRZ EKR GUN KVN KZF SLV VLG
 - **Skaven clan** (6): ESH MDR SAA SKB SCU SRY
+- **Nagash's cult** (1): NGZ (canon has Nagash's husk, or in the End Times no Nagash, in 2502; his cult rules, #10215)
 
 Most of these are tribes, city-states, ducal or oblast seats and ruins that tabletop canon never names a 2502 ruler for. Marienburg (Directorate of Burgomeisters), Remas (triumvirate) and the Moot (council of Elders) have collective rule with no single named head.
 
