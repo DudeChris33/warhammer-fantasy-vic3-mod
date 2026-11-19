@@ -18,23 +18,32 @@ Inputs (all committed or already-registered sources; nothing new is sourced):
 * ``mapgen/derived/land_sea_mask.png`` / ``lake_mask.png`` -> land, sea, lake.
 * ``mapgen/derived/arable_heatmap.png`` -> fertility (grass lushness, forest).
 * ``sources/originals/tww3_climate.jpg`` -> biome class (temperate, mountain,
-  wasteland, jungle, desert, ...): **the only biome source**. The setting does not follow
-  physical climate, so the wind-based climate model (``generate_climate_zones.py``) is
-  not read (Chris, 2026-11-19). The map is classified by its measured fill colours
+  wasteland, jungle, desert, ...): the biome source here. Chosen on output (2026-11-19):
+  the wind-based climate model (``generate_climate_zones.py``, kept for its own uses)
+  gave non-canon ground when compared side by side (savannah Lustria, temperate Norsca
+  and Naggaroth, no Chaos Wastes or magic forests). Where TWW3 is silent (its frame edges,
+  Ind and Khuresh beyond its east edge, 10% of land) the model's class is used
+  (:data:`CLIMATE_CODE_BIOME`): it gave tropical jungle, savannah and desert there, where the
+  nearest TWW3 class gave Cathay's temperate and Ulthuan-style island grass. Where the model
+  has sea (its layer predates the 2026-10-29 coast) the nearest TWW3 class fills in. Inputs
+  are chosen by output, not policy (Chris, 2026-11-19). The map is classified by its measured fill colours
   (:data:`PALETTE`, :func:`classify_climate`) and placed on the canvas, best first:
   Chris's Ulthuan dot registration (``cr_combi_expanded_map_ulthuan``); the #9016 zone
   warps (``worldgen/ie_projection.py``: Naggaroth + Lustria, Nehekhara + the Southlands,
   Norsca, the Dark Lands and east), carried forward; over the drawn Old World, the
   named-place pairs in ``config/climate_oldworld_pairs.json``; elsewhere the
   ``tww3_ie_parchment.jpg`` frame registration (the climate map is its ``frame_alias``
-  sibling, ``registration/seeds/ie_climate_map.json``). Land it does not reach takes the
-  nearest TWW3 class; south of :data:`SOUTH_CHAOS_LAT` it is chaotic waste.
+  sibling, ``registration/seeds/ie_climate_map.json``). The Old World thin-plate gets no
+  weight where it folds. Two polar rules: TWW3 gap land south of :data:`SOUTH_CHAOS_LAT`
+  is chaotic waste; north of :data:`NORTH_FROZEN_LAT`, land outside every pair-based
+  placement is frozen unless TWW3 says mountain or chaos.
+* ``mapgen/derived/climate_zones.png`` + index (the wind model), for TWW3's gaps only.
 * ``mapgen/registration/`` and the #9016 pairs (``config/ie_projection_pairs.csv``).
 
 Output is a pure function of those inputs plus ``map_config.SEED``.
 
 Rules, in order: a biome class per 4x4 working cell (climate map, nearest-known
-fill, nearest TWW3 class in gaps, TWW3 mountain demoted where our relief disagrees,
+fill, wind-model class in gaps, polar rules, TWW3 mountain demoted where our relief disagrees,
 seeded displacement of class edges), a weight per material per cell from biome,
 fertility, elevation and seeded smooth noise (rock on high ground in every class),
 a Gaussian blend, the top three per cell; then at full
@@ -91,7 +100,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import reproject, schema  # noqa: E402
+from worldgen import raster, reproject, schema  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -198,6 +207,7 @@ CLIMATE_MEDIAN_PX = 5      # median filter before classifying: removes the fills
 MIN_FILL_PX = 400          # a class fill smaller than this is UNKNOWN: 202 jungle-coloured specks of 60-400 px sit in the shaded sea; real regions are larger
 LEGEND_BOX = (2110, 0, 2400, 350)   # climate px of the printed legend, never land
 SPLAT_STEP = 2             # IE master px between points carried through the #9016 zone warps
+ZONE_HULL_MARGIN = 150.0   # IE master px a #9016 zone may carry classes past its pair hull
 ULTHUAN_SOURCE = "cr_combi_expanded_map_ulthuan.png"   # accepted dot registration over Ulthuan
 ULTHUAN_BUFFER_PX = 40     # canvas px the Ulthuan triangulation may extrapolate past its outer dots
 PALETTE_TOL = 45           # L1 distance in RGB to the nearest fill colour
@@ -218,6 +228,16 @@ SNOW_LINE_M = (4800.0, 1800.0)  # snow line at <=20 deg and at >=70 deg latitude
 SNOW_BAND_M = 250.0        # half-width of the snow fade around the line, metres
 CLIFF_SLOPE = (18.0, 55.0) # smoothstep band of cliff material, metres of rise per canvas px
 SOUTH_CHAOS_LAT = 50.0     # TWW3 gap land south of this latitude is chaotic waste
+#: Wind-model zone code (``climate_zones_index.json``) -> biome class, used only on land the
+#: TWW3 map does not reach (Ind, Khuresh, the far rims). An unmapped code is a hard error.
+CLIMATE_CODE_BIOME = {
+    "Af": JUNGLE, "Am": JUNGLE, "Aw": SAVANNA, "BSh": SAVANNA, "BWh": DESERT, "BWk": DESERT,
+    "BSk": WASTE, "Cs": TEMPERATE, "Cfa": TEMPERATE, "Cfb": TEMPERATE, "Df": TEMPERATE,
+    "Dc": TEMPERATE, "ET": FROZEN, "EF": FROZEN,
+}
+CLIMATE_PNG = DERIVED_DIR / "climate_zones.png"
+CLIMATE_INDEX = DERIVED_DIR / "climate_zones_index.json"
+NORTH_FROZEN_LAT = 62.0    # north of this, land outside every pair-based placement is frozen unless TWW3 says mountain or chaos
 
 
 def log(msg: str) -> None:
@@ -235,6 +255,8 @@ class Inputs:
     arable: np.ndarray      # float32 [H, W], arable heatmap value
     biome_tww3: np.ndarray  # uint8 [H/Q, W/Q], climate-map class (UNKNOWN where none)
     covered: np.ndarray     # bool [H/Q, W/Q], inside the climate map's frame
+    placed: np.ndarray      # bool [H/Q, W/Q], sampled through a pair-based placement, not the frame warp
+    biome_model: np.ndarray  # uint8 [H/Q, W/Q], wind-model class (UNKNOWN on its sea)
 
 
 def load_elevation() -> np.ndarray:
@@ -358,9 +380,16 @@ def climate_lattice():
     wgt = 1.0 - smoothstep(dist, *ow.blend)
     near = wgt > 0
     o = ow.fit(pts[near.ravel()])
-    sx[near] = wgt[near] * o[:, 0] + (1 - wgt[near]) * sx[near]
-    sy[near] = wgt[near] * o[:, 1] + (1 - wgt[near]) * sy[near]
-    return sx, sy, fit, ow
+    # past its northernmost pairs the thin-plate folds (canvas north mapped back onto Kislev,
+    # loremaster 2026-11-19): no weight where its Jacobian is not positive
+    ox = ow.fit(pts[near.ravel()] + [1.0, 0.0]) - o
+    oy = ow.fit(pts[near.ravel()] + [0.0, 1.0]) - o
+    det = ox[:, 0] * oy[:, 1] - ox[:, 1] * oy[:, 0]
+    w_near = np.where(det > 0, wgt[near], 0.0)
+    wgt[near] = w_near
+    sx[near] = w_near * o[:, 0] + (1 - w_near) * sx[near]
+    sy[near] = w_near * o[:, 1] + (1 - w_near) * sy[near]
+    return sx, sy, fit, ow, wgt
 
 
 def ulthuan_cells(px: np.ndarray, py: np.ndarray) -> np.ndarray:
@@ -390,6 +419,28 @@ def ulthuan_cells(px: np.ndarray, py: np.ndarray) -> np.ndarray:
     return out
 
 
+def zone_hull_near(warp, pts: np.ndarray) -> np.ndarray:
+    """Points inside a #9016 zone's pair hull or within :data:`ZONE_HULL_MARGIN` IE px of it.
+
+    Beyond that the zone's thin-plate extrapolates without a pair to hold it: zone 1 carried
+    TWW3's mid-west Naggaroth desert onto the Arctic coast (loremaster, 2026-11-19).
+    """
+    inside = warp.inside_hull(pts)
+    if inside.all():
+        return inside
+    edges = warp._hull.convex_hull
+    a, b = warp.src[edges[:, 0]], warp.src[edges[:, 1]]
+    out = np.nonzero(~inside)[0]
+    q = pts[out]
+    best = np.full(len(q), np.inf)
+    for (ax, ay), (bx, by) in zip(a, b):
+        dx, dy = bx - ax, by - ay
+        tt = np.clip(((q[:, 0] - ax) * dx + (q[:, 1] - ay) * dy) / max(dx * dx + dy * dy, 1e-9), 0, 1)
+        best = np.minimum(best, np.hypot(q[:, 0] - (ax + tt * dx), q[:, 1] - (ay + tt * dy)))
+    inside[out] = best <= ZONE_HULL_MARGIN
+    return inside
+
+
 def zone_splat(cls_px: np.ndarray, shape4: tuple[int, int]):
     """Climate classes carried forward through the #9016 zone warps (IE px -> canvas).
 
@@ -409,6 +460,8 @@ def zone_splat(cls_px: np.ndarray, shape4: tuple[int, int]):
         mx, my = xs * float(SPLAT_STEP), ys * float(SPLAT_STEP)
         cx = np.clip(np.rint(mx / CLIMATE_SCALE[0]), 0, cw - 1).astype(np.intp)
         cy = np.clip(np.rint(my / CLIMATE_SCALE[1]), 0, ch - 1).astype(np.intp)
+        near = zone_hull_near(warp, np.c_[mx, my])      # a thin-plate is unconstrained far past its pairs
+        mx, my, cx, cy = mx[near], my[near], cx[near], cy[near]
         cls = cls_px[cy, cx]
         dst = warp.forward(np.c_[mx, my])
         gx = np.floor(dst[:, 0] / Q).astype(np.intp)
@@ -423,10 +476,10 @@ def zone_splat(cls_px: np.ndarray, shape4: tuple[int, int]):
     return biome, reached
 
 
-def climate_biomes() -> tuple[np.ndarray, np.ndarray]:
+def climate_biomes() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     """Biome class per working-grid cell, and where the climate map covers it.
 
-    Returns ``(biome uint8 [H4,W4], covered bool [H4,W4])``, sampled through
+    Returns ``(biome uint8 [H4,W4], covered bool [H4,W4], placed bool [H4,W4])``, sampled through
     :func:`climate_lattice` interpolated to the grid.
     """
     if not CLIMATE_JPG.exists():
@@ -435,7 +488,7 @@ def climate_biomes() -> tuple[np.ndarray, np.ndarray]:
     t = time.time()
     h4, w4 = H // Q, W // Q
     step = CLIMATE_LATTICE_STEP
-    sx, sy, fit, ow = climate_lattice()
+    sx, sy, fit, ow, wgt = climate_lattice()
     fy = np.arange(h4)[:, None] / step
     fx = np.arange(w4)[None, :] / step
     coords = np.stack([np.broadcast_to(fy, (h4, w4)), np.broadcast_to(fx, (h4, w4))])
@@ -452,11 +505,27 @@ def climate_biomes() -> tuple[np.ndarray, np.ndarray]:
     zb, reached = zone_splat(cls_px, (h4, w4))
     biome = np.where(reached, zb, biome).astype(np.uint8)
     inside = inside | reached
+    ow_w = ndimage.map_coordinates(wgt, coords, order=1, mode="nearest")
+    placed = reached | ulth | (ow_w >= 0.5)
     log(f"  climate warp+classify: {time.time() - t:.1f}s  frame rms {fit.rms_px:.1f}px; Old World "
         f"placement smoothing {ow.smoothing:g}, leave-one-out median {ow.loo_median:.0f} climate px; "
         f"#9016 zones reach {reached.mean() * 100:.1f}% of grid; Ulthuan registration {ulth.sum()} cells; "
         f"known {(biome > 0).mean() * 100:.1f}% of grid")
-    return biome, inside
+    return biome, inside, placed
+
+
+def model_biomes() -> np.ndarray:
+    """The wind-based climate model as biome classes on the working grid (cell-centre sample)."""
+    layer, _ = raster.read_indexed_png(CLIMATE_PNG)
+    index = json.loads(CLIMATE_INDEX.read_text(encoding="utf-8"))
+    lut = np.full(256, UNKNOWN, np.uint8)
+    for c in index["classes"]:
+        if c["code"] not in CLIMATE_CODE_BIOME:
+            raise SystemExit(f"{CLIMATE_INDEX.name}: zone code {c['code']!r} has no CLIMATE_CODE_BIOME entry")
+        lut[c["id"]] = CLIMATE_CODE_BIOME[c["code"]]
+    if layer.shape != (H, W):
+        raise SystemExit(f"{CLIMATE_PNG.name}: expected {W}x{H}, got {layer.shape[1]}x{layer.shape[0]}")
+    return lut[layer[Q // 2::Q, Q // 2::Q]]
 
 
 def load_inputs() -> Inputs:
@@ -465,12 +534,12 @@ def load_inputs() -> Inputs:
     lake = np.asarray(Image.open(DERIVED_DIR / "lake_mask.png"), dtype=bool)
     elev = load_elevation()
     arable = np.asarray(Image.open(DERIVED_DIR / "arable_heatmap.png"), dtype=np.float32)
-    biome, covered = climate_biomes()
+    biome, covered, placed = climate_biomes()
     for name, a in (("land_sea_mask", land), ("lake_mask", lake), ("arable_heatmap", arable)):
         if a.shape != (H, W):
             raise SystemExit(f"{name}: expected {W}x{H}, got {a.shape[1]}x{a.shape[0]}")
     return Inputs(land=land & ~lake, lake=lake, elev=elev, arable=arable,
-                  biome_tww3=biome, covered=covered)
+                  biome_tww3=biome, covered=covered, placed=placed, biome_model=model_biomes())
 
 
 # --------------------------------------------------------------------------- rules
@@ -711,13 +780,21 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     say("biome")
     biome = fill_unknown(inp.biome_tww3, land4, inp.covered)
     # gaps (land the TWW3 map does not reach: its frame edges, Ind and Khuresh beyond its
-    # east edge, specks it leaves unpainted) take the nearest TWW3 class. The setting does not
-    # follow physical climate, so the TWW3 map is the only biome source (Chris, 2026-11-19).
+    # east edge, specks it leaves unpainted) take the wind model's class; where the model has
+    # sea (it predates the 2026-10-29 coast), the nearest TWW3 class (module docstring)
     use_proxy = land4 & (biome == UNKNOWN)
-    biome = nearest_of(biome, biome != UNKNOWN, use_proxy).astype(np.uint8)
+    model = inp.biome_model
+    biome = np.where(use_proxy & (model != UNKNOWN), model, biome).astype(np.uint8)
+    biome = nearest_of(biome, biome != UNKNOWN, land4 & (biome == UNKNOWN)).astype(np.uint8)
     # the far south: TWW3 paints the whole southern rim of its map as the Southern Chaos
     # Wastes, and the polar land beyond its frame belongs to them (loremaster 2026-11-18)
     biome = np.where(use_proxy & (lat4 < -SOUTH_CHAOS_LAT), CHAOS, biome).astype(np.uint8)
+    # the far north: nothing poleward of Norsca on the TWW3 map is anything but frozen, mountain
+    # or chaotic waste, but our canvas has far more Arctic land, which only the coarse frame
+    # warp reaches (it put TWW3's mid-west Naggaroth desert on the Arctic coast). There, any
+    # other class becomes frozen (loremaster 2026-11-19).
+    arctic = land4 & ~inp.placed & (lat4 > NORTH_FROZEN_LAT) & ~np.isin(biome, [FROZEN, MOUNTAIN, CHAOS])
+    biome = np.where(arctic, FROZEN, biome).astype(np.uint8)
     biome, demoted = demote_mountains(biome, land4, elev4)
     say(f"  mountain demoted to its neighbours on {demoted.sum() / max(int(land4.sum()), 1) * 100:.1f}% of land cells")
     biome = warp_biome(biome, land4, seed)
@@ -1020,7 +1097,10 @@ def synthetic_inputs(h: int = 452, w: int = 1024) -> Inputs:
     biome[gap] = UNKNOWN                                                 # outside the climate map:
     covered = np.ones((h4, w4), bool)                                    # takes the nearest class
     covered[gap] = False
-    return Inputs(land=land, lake=lake, elev=elev, arable=arable, biome_tww3=biome, covered=covered)
+    model = np.full((h4, w4), JUNGLE, np.uint8)
+    model[gap[0].start:gap[0].start + 5, gap[1]] = UNKNOWN               # model sea on our land: nearest TWW3
+    return Inputs(land=land, lake=lake, elev=elev, arable=arable, biome_tww3=biome, covered=covered,
+                  placed=np.ones((h4, w4), bool), biome_model=model)
 
 
 def selftest() -> int:
@@ -1035,8 +1115,8 @@ def selftest() -> int:
     assert demoted.any(), "flat TWW3 mountain was not demoted"
     h4, w4 = inp.biome_tww3.shape
     gap = idx[0, (h4 // 2 + 10) * Q:(h4 // 2 + 20) * Q, (w4 // 4 + 5) * Q:(w4 // 4 + 25) * Q]
-    grass = np.isin(gap, [M[n] for n in ("grasslands_01", "grasslands_02", "grasslands_05", "woodlands_01", "marchlands_01")])
-    assert grass.mean() > 0.9, "the TWW3 gap did not take its temperate neighbours' class"
+    jungle = np.isin(gap, [M[n] for n in ("woodlands_03", "marchlands_03", "grasslands_06")])
+    assert jungle.mean() > 0.9, "the TWW3 gap did not take the wind model's class"
     used = set(np.unique(idx).tolist())
     for name in ("snow", "cliff_granite_06", "cliff_sandstone_04", "beach_01", "desert_01", "grasslands_02"):
         assert M[name] in used, f"selftest world never produced {name}"

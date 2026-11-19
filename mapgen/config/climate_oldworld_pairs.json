@@ -41,6 +41,11 @@
     {"name": "Black Blood Pass", "canvas": [4420, 451], "source": [1202, 327], "feature": "the IE wasteland fill"},
     {"name": "Troll Country", "canvas": [4273, 498], "source": [1140, 362], "feature": "IE label"},
     {"name": "Marienburg", "canvas": [3995, 786], "source": [800, 627], "feature": "mouth of the Reik on the IE map"},
-    {"name": "The Wasteland", "canvas": [4004, 717], "source": [797, 565], "feature": "IE label"}
+    {"name": "The Wasteland", "canvas": [4004, 717], "source": [797, 565], "feature": "IE label"},
+    {"name": "Mountains of Hel", "canvas": [4378, 351], "source": [1080, 195], "feature": "IE label (added 2026-11-19: eastern Norsca read as grassland, loremaster)"},
+    {"name": "Gianthome Mountains", "canvas": [4436, 380], "source": [1225, 265], "feature": "IE label (added 2026-11-19)"},
+    {"name": "Albion", "canvas": [3349, 672], "source": [603, 460], "feature": "centroid of the island on both maps (added 2026-11-19)"},
+    {"name": "Albion north tip", "canvas": [3412, 526], "source": [607, 419], "feature": "northernmost point of the island on both maps"},
+    {"name": "Albion south-west tip", "canvas": [3261, 817], "source": [577, 500], "feature": "south-western end of the island on both maps"}
   ]
 }
