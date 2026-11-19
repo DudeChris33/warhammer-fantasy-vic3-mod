@@ -153,6 +153,36 @@
         }
       }
     },
+    "NGZ": {
+      "profile": "undead_host",
+      "confidence": "low",
+      "note": "Nagash's cult and undead garrison at Nagashizzar (#10215); undead_host package ruled by the cult as a theocracy; stand-in culture necrarch; no ruler character.",
+      "laws": {
+        "lawgroup_governance_principles": "law_theocracy"
+      },
+      "ruling_igs": [
+        "ig_devout",
+        "ig_armed_forces"
+      ],
+      "suggested_ig_names": {
+        "ig_devout": "Disciples of Nagash",
+        "ig_armed_forces": "Nagashizzar Guard"
+      },
+      "justify": {
+        "laws.lawgroup_governance_principles": {
+          "source": "canon: Warhammer Armies: Undead 4e, Undead Gazetteer pp. 6-10 (the disciples of Nagash, the only living things in Nagashizzar, lead his cult; many hundreds of undead garrison it)",
+          "why": "In 2502 the disciples of Nagash, madmen who lead his cult, rule the fortress in his name; priest-rule maps to law_theocracy."
+        },
+        "ruling_igs": {
+          "source": "canon: Warhammer Armies: Undead 4e, Undead Gazetteer pp. 6-10 (the disciples of Nagash, the only living things in Nagashizzar, lead his cult; many hundreds of undead garrison it)",
+          "why": "The cult rules first and the undead garrison second, the reverse of the undead_host package's order."
+        },
+        "suggested_ig_names": {
+          "source": "canon: Warhammer Armies: Undead 4e, Undead Gazetteer pp. 6-10 (the disciples of Nagash, the only living things in Nagashizzar, lead his cult; many hundreds of undead garrison it); non-tabletop: Lexicanum \"Nagashizzar\" (fan wiki; \"Nagashizzar Guard\", no page)",
+          "why": "The cult's disciples and the fortress garrison, named as canon names them."
+        }
+      }
+    },
     "SAA": {
       "profile": "skaven_placeholder",
       "confidence": "low",

@@ -2276,6 +2276,15 @@
     104
    ]
   },
+  "NGZ": {
+   "name": "Nagashizzar",
+   "color": [
+    52,
+    38,
+    82
+   ],
+   "note": "defined in common/country_definitions/04_karaz_ankor.txt (#10215). Nagash's cult and undead garrison at Cripple Peak; culture necrarch is a disclosed stand-in; colour is the necrarch culture colour."
+  },
   "STR": {
    "name": "Strigoi Remnants",
    "color": [

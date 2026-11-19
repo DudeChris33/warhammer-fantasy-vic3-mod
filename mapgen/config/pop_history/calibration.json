@@ -553,6 +553,12 @@
    "why": "The Chaos Dwarf hegemony is the setting's industrial power, worked by a large slave underclass; Zharr-Naggrund and Uzkulak are the big blocks.",
    "confidence": "low"
   },
+  "NGZ": {
+   "canon": 8000,
+   "source": "inferred: single-state undead fortress (Warhammer Armies: Undead 4e, Undead Gazetteer pp. 6-10; Chris 2026-11-18, #10215)",
+   "why": "Nagash's cult and undead garrison hold one mountain fortress; a small following, sized like the other single-state undead remnants.",
+   "confidence": "low"
+  },
   "NLD": {
    "canon": 120000,
    "source": "inferred: Empire provinces ranked by canon prominence (WFRP 4e Empire in Flames / Sigmar's Heirs, Total War)",

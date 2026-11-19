@@ -299,9 +299,9 @@
    "note": "Couronne hub"
   },
   "STATE_CRIPPLE_PEAK": {
-   "owner": "unowned",
+   "owner": "NGZ",
    "confidence": "directed",
-   "note": "review; Skaven placeholder replaced (#10199)"
+   "note": "Nagash's cult (#10215)"
   },
   "STATE_CROOKED_CORRIDOR": {
    "owner": "KZF",

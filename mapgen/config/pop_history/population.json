@@ -532,6 +532,12 @@
    "source": "inferred: tech tier 1 (mapgen/config/country_history)",
    "why": "Zharr-Naggrund's hell-forges (slave-built wealth)"
   },
+  "NGZ": {
+   "wealth": "low",
+   "literacy": "low",
+   "source": "inferred: tech tier 5 (mapgen/config/country_history)",
+   "why": "Tier 5: a fortress cult of madmen and undead; most pops are poor and unlettered."
+  },
   "NLD": {
    "wealth": "medium",
    "literacy": "middling",
