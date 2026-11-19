@@ -206,6 +206,14 @@ LHX = {
 	}
 }
 
+NGZ = {
+	flag_definition = {
+		coa = NGZ
+		priority = 100
+		trigger = { always = yes }
+	}
+}
+
 SAA = {
 	flag_definition = {
 		coa = SAA

@@ -308,6 +308,36 @@ LHX = {
 	capital = STATE_NEW_LAHMIA
 }
 
+################ NGZ — Nagashizzar; Nagash's cult at Cripple Peak ################
+# Board item #10215. Display name "Nagashizzar" (adjective "Nagashite"): the realm is named for the
+# fortress, not the religion, so it does not repeat cult_of_nagash's name.
+# Canon (Lexicanum "Nagashizzar", "Cripple_Peak", "Nagash", "Arkhan", "W'soran", "Necrarch"):
+# - Nagash slew Clan Rikek c. 100 IC and reclaimed Cripple Peak (Warhammer Armies: Skaven 4e
+#   pp. 13-15, Timeline p. 22); Arkhan drove off later Skaven attempts (Battle of Death Rock, -15 IC;
+#   Warhammer Armies: Undead 4e, Undead Timeline p. 30).
+# - In the 2502 present the only living things in the fortress are the disciples of Nagash, madmen
+#   who lead his cult, with many hundreds of undead and Nagash's husk on a skull throne (Warhammer
+#   Armies: Undead 4e, Undead Gazetteer pp. 6-10). "Nagashizzar Guard" is named on Lexicanum
+#   "Nagashizzar" (no page).
+# CONTINUITY CONFLICT, disclosed: the End Times (Warhammer: Nagash, 2014, pp. 122-123) has Nagash
+# dead until 2524 IC; in either line the holder in 2502 is his cult and garrison. So this tag has no
+# ruler character: Nagash is out of scope.
+# CULTURE IS A DISCLOSED STAND-IN: necrarch (cross-file ref to common/cultures/vampire.txt) is the
+# only undead culture tied to Nagashizzar, but W'soran's Necrarchs left it in -1150 IC (Vampire
+# Counts 8e, A Lineage of Blood p. 22) and canon has no Necrarch there in 2502. It does not describe
+# the living human disciples or the mindless undead garrison. Revisit if a necromancer/undead-host
+# culture is authored. Colour is the culture colour, copied into state_ownership_legend.json.
+# unrecognized like VSY/VMP/LHX. Filed here by geography: STATE_CRIPPLE_PEAK sits in
+# map_data/state_regions/04_karaz_ankor.txt.
+
+NGZ = {
+	color = { 52 38 82 }
+	country_type = unrecognized
+	tier = principality
+	cultures = { necrarch }
+	capital = STATE_CRIPPLE_PEAK # C1: Nagashizzar city hub
+}
+
 ################ SAA — Clan Skaar; Apuccini Mountains and Dark Maiden Pass ################
 # Board item #10199: a real Skaven clan replacing the generic placeholder stand-in(s). Every Skaven
 # tag is a clan (Chris, 2026-11-04). Canon basis: canon-firm (Apuccini stronghold under Pavona, Queekwell mine; Children of the Horned Rat ch. 4 p. 55); Dark Maiden Pass placement inferred.
