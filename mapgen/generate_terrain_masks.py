@@ -167,17 +167,32 @@ MAT_RGB = {
     "savanna_03": (120, 93, 61),
 }
 
-# Biome classes of the TWW3 climate map (legend colours measured from the image).
+# Biome classes of the TWW3 climate map.
 UNKNOWN, TEMPERATE, MOUNTAIN, WASTE, MAGIC, ISLAND, FROZEN, CHAOS, JUNGLE, SAVANNA, DESERT = range(11)
 BIOME_NAMES = ["unknown", "temperate", "mountain", "wasteland", "magic_forest", "island",
                "frozen", "chaotic_waste", "jungle", "savannah", "desert"]
+#: Fill colour per class, measured 2026-11-19 as the median of 13x13 windows inside
+#: named regions of each class on the 5 px median-filtered map (jungle: Lustria and the
+#: Central Jungle; savannah: the Southlands' south). The legend swatches are NOT the fills
+#: (the fills are paler, blended over parchment): the prototype used the swatches, so
+#: jungle (21, 76, 11) matched only outline fringes and real jungle went unclassified.
 PALETTE = {
-    TEMPERATE: (74, 171, 42), MOUNTAIN: (139, 138, 136), WASTE: (172, 102, 43),
-    MAGIC: (37, 216, 239), ISLAND: (81, 179, 218), FROZEN: (228, 227, 223),
-    CHAOS: (99, 33, 97), JUNGLE: (21, 76, 11), SAVANNA: (165, 136, 6), DESERT: (220, 180, 22),
+    TEMPERATE: (104, 179, 62), MOUNTAIN: (145, 137, 130), WASTE: (187, 117, 65),
+    MAGIC: (79, 215, 233), ISLAND: (115, 170, 205), FROZEN: (216, 212, 209),
+    CHAOS: (125, 70, 105), JUNGLE: (99, 102, 55), SAVANNA: (166, 140, 50), DESERT: (222, 187, 50),
 }
-PALETTE_TOL = 60           # L1 distance in RGB
+#: Colours that are not land fills: the brown sea (49 L1 from the wasteland fill), the
+#: parchment and its dark shading, and outline ink. A pixel nearest one of these is UNKNOWN.
+NOT_LAND = [(168, 127, 85), (201, 163, 115), (179, 144, 100), (131, 96, 61), (91, 62, 39), (30, 25, 20)]
+CLIMATE_MEDIAN_PX = 5      # median filter before classifying: removes the fills' paper texture
+MIN_FILL_PX = 400          # a class fill smaller than this is UNKNOWN: 202 jungle-coloured specks of 60-400 px sit in the shaded sea; real regions are larger
+LEGEND_BOX = (2110, 0, 2400, 350)   # climate px of the printed legend, never land
+SPLAT_STEP = 2             # IE master px between points carried through the #9016 zone warps
+PALETTE_TOL = 45           # L1 distance in RGB to the nearest fill colour
 FILL_MAX_CELLS = 12        # nearest-known fill radius, in working-grid cells
+FRINGE_PX = 1              # opening iterations per class: removes outline-fringe lines (anti-aliasing)
+OLDWORLD_PAIRS = TOOLS_DIR / "config" / "climate_oldworld_pairs.json"
+OLDWORLD_SMOOTHING = (0.0, 1e2, 1e3, 1e4, 3e4, 1e5, 3e5, 1e6)   # thin-plate candidates, as #9016 plus finer steps
 
 # --- tuning (each constant has a value that switches its rule off, used for before/after renders)
 BLEND_SIGMA = 8.0          # Gaussian blend of the per-material weights, working cells (prototype 3.5)
@@ -191,6 +206,7 @@ SNOW_LINE_M = (4800.0, 1800.0)  # snow line at <=20 deg and at >=70 deg latitude
 SNOW_BAND_M = 250.0        # half-width of the snow fade around the line, metres
 CLIFF_SLOPE = (18.0, 55.0) # smoothstep band of cliff material, metres of rise per canvas px
 FAR_NORTH_FROM_CLIMATE = True   # gaps in the TWW3 map take the climate model's class (False = latitude proxy)
+SOUTH_CHAOS_LAT = 50.0     # TWW3 gap land south of this latitude is chaotic waste
 
 #: Climate-model zone code (``climate_zones_index.json``) -> biome class, for the
 #: cells the TWW3 map has no say on. An unmapped code is a hard error.
@@ -239,46 +255,178 @@ def block_mean(a: np.ndarray, q: int = Q) -> np.ndarray:
     return a[:h // q * q, :w // q * q].reshape(h // q, q, w // q, q).mean(axis=(1, 3), dtype=np.float32)
 
 
+def classify_climate(img: Image.Image) -> np.ndarray:
+    """Biome class per climate-map pixel; UNKNOWN on sea, parchment, ink and outline fringes.
+
+    The map is median-filtered (:data:`CLIMATE_MEDIAN_PX`), each pixel takes the nearest of
+    :data:`PALETTE` and :data:`NOT_LAND` (a fill only within :data:`PALETTE_TOL`), and each
+    class is opened by :data:`FRINGE_PX` so the thin anti-aliased edge where a black outline
+    meets a fill (about (27, 56, 15) beside green) cannot pose as a region; fills under
+    :data:`MIN_FILL_PX` (speckle in the shaded sea) are dropped.
+    """
+    from PIL import ImageFilter
+    a = np.asarray(img.filter(ImageFilter.MedianFilter(CLIMATE_MEDIAN_PX)), dtype=np.int16)
+    best = np.full(a.shape[:2], 10 ** 6, np.int32)
+    cls_px = np.zeros(a.shape[:2], np.uint8)
+    for cls, rgb in list(PALETTE.items()) + [(UNKNOWN, c) for c in NOT_LAND]:
+        d = np.abs(a - np.array(rgb, np.int16)).sum(axis=2)
+        hit = d < best
+        best[hit] = d[hit]
+        cls_px[hit] = cls
+    cls_px[best > PALETTE_TOL] = UNKNOWN
+    lx0, ly0, lx1, ly1 = LEGEND_BOX
+    cls_px[ly0:ly1, lx0:lx1] = UNKNOWN
+    out = np.zeros_like(cls_px)
+    st = ndimage.generate_binary_structure(2, 2)
+    for cls in PALETTE:
+        m = ndimage.binary_opening(cls_px == cls, st, iterations=FRINGE_PX)
+        lab, n = ndimage.label(m, st)
+        if n:
+            size = ndimage.sum(m, lab, np.arange(1, n + 1))
+            m = np.isin(lab, np.nonzero(size >= MIN_FILL_PX)[0] + 1)
+        out[m] = cls
+    return out
+
+
+@dataclass
+class OldWorldPlacement:
+    """Smoothed thin-plate canvas -> climate px through the named pairs, and its blend."""
+    fit: object               # RBFInterpolator canvas (x, y) -> climate (x, y)
+    smoothing: float
+    loo_median: float
+    hull: object              # scipy Delaunay of the canvas pairs
+    blend: tuple[float, float]
+
+
+def oldworld_placement() -> OldWorldPlacement:
+    """Fit :data:`OLDWORLD_PAIRS`: fold-free smoothing with the lowest leave-one-out median.
+
+    The same rule as the #9016 zone projection (``worldgen/ie_projection.choose_method``),
+    applied to region-scale pairs, so the smoothing is chosen on every run, deterministically.
+    """
+    from scipy.interpolate import RBFInterpolator
+    from scipy.spatial import Delaunay
+    cfg = json.loads(OLDWORLD_PAIRS.read_text(encoding="utf-8"))
+    c = np.array([p["canvas"] for p in cfg["pairs"]], float)
+    s = np.array([p["source"] for p in cfg["pairs"]], float)
+    xs, ys = np.meshgrid(np.arange(c[:, 0].min(), c[:, 0].max(), 20.0), np.arange(c[:, 1].min(), c[:, 1].max(), 20.0))
+    grid = np.c_[xs.ravel(), ys.ravel()]
+    best = None
+    for lam in OLDWORLD_SMOOTHING:
+        f = RBFInterpolator(c, s, kernel="thin_plate_spline", smoothing=lam)
+        a, b, d = f(grid), f(grid + [1.0, 0.0]), f(grid + [0.0, 1.0])
+        if ((b - a)[:, 0] * (d - a)[:, 1] - (b - a)[:, 1] * (d - a)[:, 0] <= 0).any():
+            continue
+        r = []
+        for i in range(len(c)):
+            m = np.arange(len(c)) != i
+            g = RBFInterpolator(c[m], s[m], kernel="thin_plate_spline", smoothing=lam)
+            r.append(float(np.hypot(*(g(c[i][None])[0] - s[i]))))
+        med = float(np.median(r))
+        if best is None or med < best[1] - 1e-9:
+            best = (lam, med, f)
+    if best is None:
+        raise SystemExit(f"{OLDWORLD_PAIRS.name}: no fold-free smoothing among {OLDWORLD_SMOOTHING}")
+    return OldWorldPlacement(best[2], best[0], best[1], Delaunay(c), tuple(cfg["blend_px"]))
+
+
+CLIMATE_LATTICE_STEP = 4  # working cells between evaluations of the canvas -> climate map
+
+
+def climate_lattice():
+    """Canvas -> climate px on a lattice every :data:`CLIMATE_LATTICE_STEP` working cells.
+
+    The frame registration (a whole-map lattice) blended into :func:`oldworld_placement`
+    over the drawn Old World: full weight inside the pairs' hull grown by ``blend_px[0]``,
+    fading to the frame registration by ``blend_px[1]``. Returns ``(sx, sy, frame fit,
+    placement)``; lattice node (i, j) is canvas ((j * step + 0.5) * Q, (i * step + 0.5) * Q).
+    """
+    h4, w4 = H // Q, W // Q
+    step = CLIMATE_LATTICE_STEP
+    regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
+    parent = regs[CLIMATE_PARENT]
+    fit = reproject.AliasFit(reproject.fit_warp(parent), parent.source, CLIMATE_SCALE, (0.0, 0.0))
+    gx = np.arange(0, w4 + step, step)
+    gy = np.arange(0, h4 + step, step)
+    cx = (gx[None, :] * Q + Q / 2.0) * np.ones((len(gy), 1))
+    cy = (gy[:, None] * Q + Q / 2.0) * np.ones((1, len(gx)))
+    sx, sy = fit.to_source_px(cx, cy)
+    ow = oldworld_placement()
+    pts = np.c_[cx.ravel(), cy.ravel()]
+    inside_hull = (ow.hull.find_simplex(pts) >= 0).reshape(cx.shape)
+    dist = ndimage.distance_transform_edt(~inside_hull) * (Q * step)      # canvas px
+    wgt = 1.0 - smoothstep(dist, *ow.blend)
+    near = wgt > 0
+    o = ow.fit(pts[near.ravel()])
+    sx[near] = wgt[near] * o[:, 0] + (1 - wgt[near]) * sx[near]
+    sy[near] = wgt[near] * o[:, 1] + (1 - wgt[near]) * sy[near]
+    return sx, sy, fit, ow
+
+
+def zone_splat(cls_px: np.ndarray, shape4: tuple[int, int]):
+    """Climate classes carried forward through the #9016 zone warps (IE px -> canvas).
+
+    The four mapped zones (1 Naggaroth + Lustria, 2 Nehekhara + the Southlands, 3 Norsca,
+    4 the Dark Lands and east; ``worldgen/ie_projection.py``) are fitted through Chris's
+    reviewed landmark pairs, so where one reaches a working cell it replaces the frame
+    registration. Every :data:`SPLAT_STEP`-th IE master px of a zone votes its class into
+    the cell it lands in; a cell takes its majority class. Returns ``(biome, reached)``.
+    """
+    from worldgen import ie_projection
+    proj = ie_projection.load_projection()
+    h4, w4 = shape4
+    votes = np.zeros((len(BIOME_NAMES), h4, w4), np.int32)
+    ch, cw = cls_px.shape
+    for z, warp in sorted(proj.warps.items()):
+        ys, xs = np.nonzero(proj.zones[::SPLAT_STEP, ::SPLAT_STEP] == z)
+        mx, my = xs * float(SPLAT_STEP), ys * float(SPLAT_STEP)
+        cx = np.clip(np.rint(mx / CLIMATE_SCALE[0]), 0, cw - 1).astype(np.intp)
+        cy = np.clip(np.rint(my / CLIMATE_SCALE[1]), 0, ch - 1).astype(np.intp)
+        cls = cls_px[cy, cx]
+        dst = warp.forward(np.c_[mx, my])
+        gx = np.floor(dst[:, 0] / Q).astype(np.intp)
+        gy = np.floor(dst[:, 1] / Q).astype(np.intp)
+        ok = (gx >= 0) & (gx < w4) & (gy >= 0) & (gy < h4)
+        np.add.at(votes, (cls[ok], gy[ok], gx[ok]), 1)
+    reached = votes.sum(axis=0) > 0
+    known_votes = votes[1:].sum(axis=0)
+    biome = np.where(known_votes > 0, votes[1:].argmax(axis=0) + 1, UNKNOWN).astype(np.uint8)
+    # close one-cell holes between splatted points so a zone's footprint is solid
+    reached = ndimage.binary_closing(reached, iterations=1)
+    return biome, reached
+
+
 def climate_biomes() -> tuple[np.ndarray, np.ndarray]:
     """Biome class per working-grid cell, and where the climate map covers it.
 
-    Returns ``(biome uint8 [H4,W4], covered bool [H4,W4])``. The warp is evaluated on
-    a coarse lattice (it is a thin-plate spline) and interpolated to the grid.
+    Returns ``(biome uint8 [H4,W4], covered bool [H4,W4])``, sampled through
+    :func:`climate_lattice` interpolated to the grid.
     """
     if not CLIMATE_JPG.exists():
         raise SystemExit(f"missing climate source {CLIMATE_JPG.relative_to(REPO_ROOT)} "
                          "(sources/ is local-only; see mapgen/SOURCES.md)")
     t = time.time()
     h4, w4 = H // Q, W // Q
-    regs = {r.source: r for r in schema.load_registrations(REGISTRATION_DIR)}
-    parent = regs[CLIMATE_PARENT]
-    fit = reproject.AliasFit(reproject.fit_warp(parent), parent.source, CLIMATE_SCALE, (0.0, 0.0))
-    step = 4                                    # lattice spacing in working cells
-    gx = np.arange(0, w4 + step, step)
-    gy = np.arange(0, h4 + step, step)
-    cx = (gx[None, :] * Q + Q / 2.0) * np.ones((len(gy), 1))
-    cy = (gy[:, None] * Q + Q / 2.0) * np.ones((1, len(gx)))
-    sx, sy = fit.to_source_px(cx, cy)
+    step = CLIMATE_LATTICE_STEP
+    sx, sy, fit, ow = climate_lattice()
     fy = np.arange(h4)[:, None] / step
     fx = np.arange(w4)[None, :] / step
     coords = np.stack([np.broadcast_to(fy, (h4, w4)), np.broadcast_to(fx, (h4, w4))])
     px = ndimage.map_coordinates(sx, coords, order=1, mode="nearest")
     py = ndimage.map_coordinates(sy, coords, order=1, mode="nearest")
-    clim = np.asarray(Image.open(CLIMATE_JPG).convert("RGB"), dtype=np.int16)   # JPEG: no alpha
-    ch, cw = clim.shape[:2]
+    cls_px = classify_climate(Image.open(CLIMATE_JPG).convert("RGB"))   # JPEG: no alpha
+    ch, cw = cls_px.shape
     inside = (px >= 20) & (px <= cw - 20) & (py >= 20) & (py <= ch - 20)
     ix = np.clip(np.rint(px), 0, cw - 1).astype(np.int32)
     iy = np.clip(np.rint(py), 0, ch - 1).astype(np.int32)
-    samp = clim[iy, ix]
-    best = np.full((h4, w4), 10 ** 6, np.int32)
-    biome = np.zeros((h4, w4), np.uint8)
-    for cls, rgb in PALETTE.items():
-        d = np.abs(samp - np.array(rgb, np.int16)).sum(axis=2)
-        hit = d < best
-        best[hit] = d[hit]
-        biome[hit] = cls
-    biome[(best > PALETTE_TOL) | ~inside] = UNKNOWN
-    log(f"  climate warp+classify: {time.time() - t:.1f}s  rms {fit.rms_px:.1f}px  "
+    biome = cls_px[iy, ix]
+    biome[~inside] = UNKNOWN
+    zb, reached = zone_splat(cls_px, (h4, w4))
+    biome = np.where(reached, zb, biome).astype(np.uint8)
+    inside = inside | reached
+    log(f"  climate warp+classify: {time.time() - t:.1f}s  frame rms {fit.rms_px:.1f}px; Old World "
+        f"placement smoothing {ow.smoothing:g}, leave-one-out median {ow.loo_median:.0f} climate px; "
+        f"#9016 zones reach {reached.mean() * 100:.1f}% of grid; "
         f"known {(biome > 0).mean() * 100:.1f}% of grid")
     return biome, inside
 
@@ -573,6 +721,9 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     else:
         prox = proxy_biome(lat4, elev4, fert4)
     biome = np.where(use_proxy, prox, biome).astype(np.uint8)
+    # the far south: TWW3 paints the whole southern rim of its map as the Southern Chaos
+    # Wastes, and the polar land beyond its frame belongs to them (loremaster 2026-11-18)
+    biome = np.where(use_proxy & (lat4 < -SOUTH_CHAOS_LAT), CHAOS, biome).astype(np.uint8)
     biome, demoted = demote_mountains(biome, land4, elev4)
     say(f"  mountain demoted to its neighbours on {demoted.sum() / max(int(land4.sum()), 1) * 100:.1f}% of land cells")
     biome = warp_biome(biome, land4, seed)
