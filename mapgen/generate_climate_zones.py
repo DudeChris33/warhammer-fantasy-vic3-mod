@@ -8,7 +8,9 @@ I/O the core forbids itself and writes:
 * ``mapgen/derived/climate_zones.png`` -- 8192x3616 indexed PNG, value = class id (index into
   ``worldgen.climate.CLASSES``), 255 = sea or lake;
 * ``mapgen/derived/climate_zones_index.json`` -- class ids, names, colours, land share per class and the
-  SHA-256 of every input and of the 904x2048 class grid;
+  SHA-256 of every input (the two JSON inputs newline-normalized, the rasters as raw bytes), of the
+  904x2048 class grid (``grid_sha256``) and of the decoded canvas layer (``layer_sha256``, what the
+  farmland stamp of #3677 and the terrain biome grid record);
 * the lore patches of ``mapgen/config/climate_lore.json`` (board #8208) are applied inside the model and listed in
   the index with each patch's measured ``target_share``; ``"patches": []`` reproduces the physical layer;
 * with ``--states``: ``mapgen/derived/state_climate_index.json`` -- per drawn state the dominant zone and the
@@ -80,8 +82,22 @@ def log(msg: str, t0: float | None = None) -> None:
     print(f"{msg}{stamp}", flush=True)
 
 
-def _sha(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+def _sha(path: Path, text: bool = False) -> str:
+    """SHA-256 of an input. A ``text`` input is hashed with a BOM stripped and ``\\r\\n`` -> ``\\n``:
+    ``core.autocrlf`` checks committed LF files out as CRLF, and the index must not move with it
+    (#3677). Binary inputs are hashed as raw bytes."""
+    data = path.read_bytes()
+    if text:
+        if data.startswith(b"\xef\xbb\xbf"):
+            data = data[3:]
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
+
+
+def layer_sha256(layer: np.ndarray) -> str:
+    """SHA-256 of the decoded canvas class raster (uint8, row order): the identity of the layer a
+    reader actually decodes, whatever the PNG encoder wrote (#3677)."""
+    return hashlib.sha256(np.ascontiguousarray(layer, dtype=np.uint8).tobytes()).hexdigest()
 
 
 def drawing_path() -> Path:
@@ -147,11 +163,12 @@ def compute(t0: float) -> tuple[np.ndarray, np.ndarray, dict, dict]:
             "land_sea_mask.png": _sha(MASK_PATH),
             "heightmap.png": _sha(HEIGHTMAP_PATH),
             "winds_and_currents.png": _sha(drawing),
-            "climate_settings.json": _sha(SETTINGS_PATH),
-            "climate_lore.json": _sha(LORE_PATH),
+            "climate_settings.json": _sha(SETTINGS_PATH, text=True),
+            "climate_lore.json": _sha(LORE_PATH, text=True),
         },
         "lore_patches": [lore_entry(pt, w, grid, inp["land"]) for pt, w in zip(patches, weights)],
         "grid_sha256": hashlib.sha256(np.ascontiguousarray(grid).tobytes()).hexdigest(),
+        "layer_sha256": layer_sha256(layer),
     }
     return grid, layer, index, dict(inp=inp, settings=settings, patches=patches, weights=weights, index_patches=index["lore_patches"])
 
