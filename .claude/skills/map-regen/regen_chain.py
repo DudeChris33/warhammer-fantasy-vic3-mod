@@ -35,7 +35,9 @@ STEPS = [
     ("sea_zones", "generate_sea_zones.py"),
     ("provinces", "generate_provinces.py"),
     ("sea_regions", "generate_sea_regions.py"),
-    ("land_regions", "generate_land_regions.py"),
+    ("climate", "generate_climate_zones.py --render"),     # the wind layer on the current coast + heightmap; a changed picture goes to Chris (#3677)
+    ("biome_grid", "generate_terrain_masks.py --biome-grid"),  # reads the province cut, hubs and the wind layer; farmland reads it (#3677)
+    ("land_regions", "generate_land_regions.py"),          # farmland from the biome grid + wind layer + the economics worksheet
     ("ownership", "read_state_ownership.py"),
     ("state_history", "generate_state_history.py"),
     ("country_history", "generate_country_history.py"),
@@ -70,6 +72,8 @@ GATE = [
     "validate_map.py",
     "generate_flatmap_textures.py --check",
     "generate_sea_surface_textures.py --check",
+    "generate_climate_zones.py --check",
+    "generate_terrain_masks.py --biome-grid --check",
     "generate_terrain_masks.py --check",
     "generate_dynamic_masks.py --check",
     "generate_season_masks.py --check",

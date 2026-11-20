@@ -4,6 +4,10 @@ Research for the per-state farmland rows of the arable epic, written 2026-11-19/
 sub-agents of the `/maestro-run 3675` session, one per realm state file. **These are proposals with their
 evidence, not accepted values.** Nothing here is read by a generator.
 
+The rows were seeded into `mapgen/config/land_economics_worksheet.csv` on 2026-11-20 (#3677) and fourteen of
+them were changed at Chris's stop-2 verdict the same day, so the worksheet is the live copy and `all_rows.csv`
+the frozen proposal.
+
 - `NN_<stem>.md` — one dossier per `map_data/state_regions/NN_<stem>.txt` as it stood on 2026-11-20
   (before the #10454 regen): the realm's canon farmland picture, the real-world analogue around 1800–1850,
   vanilla's analogue states, an entry per state, the proposed rows, disagreements with the climate layer
