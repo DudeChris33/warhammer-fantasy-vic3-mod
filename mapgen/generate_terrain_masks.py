@@ -40,7 +40,9 @@ Inputs (all committed or already-registered sources; nothing new is sourced):
   wanders by a seeded smooth field (:data:`POLAR_NOISE_DEG`), so neither draws a parallel.
 * ``sources/cr_oldworld_campaign/db/campaign_map_settlements_tables/cr_oldworld_campaign.tsv``
   (ChaosRobie's Old World mod: a ``climate_type`` per settlement) with
-  ``config/hub_worksheet.json``, ``map_data/provinces.png`` and ``map_data/state_regions/``:
+  ``config/hub_worksheet.json``, ``map_data/provinces.png`` and the state membership in
+  ``mapgen/derived/land_regions_index.json`` + ``provinces_index.json`` (#3677: not
+  ``map_data/state_regions/``, which ``generate_land_regions.py`` writes after reading the grid):
   every hub citing ``cr_oldworld_campaign/<slug>`` (818) carries its settlement's climate,
   and each cell of that hub's state takes its nearest such hub's class
   (:func:`settlement_biomes`). This **replaces** the TWW3 sample there (the drawn Old World),
@@ -90,7 +92,17 @@ Usage::
     python mapgen/generate_terrain_masks.py --out DIR --no-write --render   # tuning loop: preview only
     python mapgen/generate_terrain_masks.py --from-masks    # rebuild the two TGAs from the committed masks
     python mapgen/generate_terrain_masks.py --check         # regenerate in memory, compare with disk
+    python mapgen/generate_terrain_masks.py --biome-grid    # write mapgen/derived/biome_grid.png + index
+    python mapgen/generate_terrain_masks.py --biome-grid --check   # regenerate the grid, compare, write nothing
     python mapgen/generate_terrain_masks.py --selftest      # synthetic 1/8-scale world, needs no files
+
+The biome grid is also a committed artifact (#3677): ``--biome-grid`` writes the composed class
+per working cell (:func:`compose_biome`, the same function the masks are painted from), sea
+cells filled from the nearest land cell, as the indexed ``mapgen/derived/biome_grid.png`` with
+``biome_grid_index.json`` (classes, seed, input hashes with text inputs newline-normalized, and
+``grid_sha256`` of the decoded array). ``generate_land_regions.py`` reads it for farmland. A mask
+run refuses to write when its composed grid differs from the committed one: run ``--biome-grid``,
+then ``generate_land_regions.py``.
 
 Run with ``mapgen/.venv/Scripts/python.exe`` (needs scipy). A change to any input
 (a coastline or heightmap regen, the arable heatmap, the climate source) makes
@@ -101,6 +113,7 @@ again. ``generate_colormap.py`` (#6618) reads the TGAs and goes stale with them.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import io
 import json
 import re
@@ -237,8 +250,17 @@ OLDWORLD_PAIRS = TOOLS_DIR / "config" / "climate_oldworld_pairs.json"
 OW_SETTLEMENTS = (REPO_ROOT / "sources" / "cr_oldworld_campaign" / "db" / "campaign_map_settlements_tables"
                   / "cr_oldworld_campaign.tsv")
 HUB_WORKSHEET = TOOLS_DIR / "config" / "hub_worksheet.json"
-STATE_REGIONS_DIR = REPO_ROOT / "map_data" / "state_regions"
 PROVINCES_PNG = REPO_ROOT / "map_data" / "provinces.png"
+#: State membership of every land province (#3677): ``generate_provinces.py``'s two indices, not
+#: ``map_data/state_regions/``, so the biome grid can be built before ``generate_land_regions.py``
+#: (which reads the grid and writes the state files). Same partition by construction.
+PROVINCES_INDEX = DERIVED_DIR / "provinces_index.json"
+LAND_REGIONS_INDEX = DERIVED_DIR / "land_regions_index.json"
+#: The biome grid as a committed artifact (#3677): the composed class per working cell, sea
+#: cells filled from the nearest land cell. ``generate_land_regions.py`` reads it for farmland.
+BIOME_GRID_PNG = DERIVED_DIR / "biome_grid.png"
+BIOME_GRID_INDEX = DERIVED_DIR / "biome_grid_index.json"
+BIOME_GRID_STALE = "biome grid stale: run --biome-grid, then generate_land_regions.py"
 OW_CLIMATE_BIOME = {
     "climate_temperate": TEMPERATE, "climate_mountain": MOUNTAIN, "climate_wasteland": WASTE,
     "climate_desert": DESERT, "climate_frozen": FROZEN, "climate_chaotic": CHAOS,
@@ -595,11 +617,15 @@ def settlement_biomes(state4: np.ndarray, hub_xy: np.ndarray, hub_state: np.ndar
 
 
 def ow_settlement_biomes() -> np.ndarray:
-    """:func:`settlement_biomes` for every hub that cites an Old World mod settlement."""
+    """:func:`settlement_biomes` for every hub that cites an Old World mod settlement.
+
+    State membership comes from :data:`LAND_REGIONS_INDEX` + :data:`PROVINCES_INDEX` (the state
+    index is the land region id). A ``climate_overrides.json`` ``states`` row is resolved by the
+    region its anchor lies in; that the region still carries the row's state key is checked by
+    ``generate_land_regions.py``, which knows the keys (#3677)."""
     if not OW_SETTLEMENTS.exists():
         raise SystemExit(f"missing {OW_SETTLEMENTS.relative_to(REPO_ROOT)} "
                          "(sources/ is local-only; see mapgen/SOURCES.md)")
-    from worldgen.state_ownership import load_land_states
     climate = {}
     prefix = "settlement:cr_oldworld_region_"
     for i, line in enumerate(OW_SETTLEMENTS.read_text(encoding="utf-8").splitlines()):
@@ -613,11 +639,20 @@ def ow_settlement_biomes() -> np.ndarray:
     if prov.shape[:2] != (H, W):
         raise SystemExit(f"{PROVINCES_PNG.name}: expected {W}x{H}")
     packed = (prov[..., 0] << 16) | (prov[..., 1] << 8) | prov[..., 2]
-    colour_state, key_index = {}, {}
-    for k, st in enumerate(load_land_states(STATE_REGIONS_DIR)):
-        key_index[st.key] = k
-        for c in st.provinces:
-            colour_state[int(c[1:], 16)] = k
+    for pth in (PROVINCES_INDEX, LAND_REGIONS_INDEX):
+        if not pth.is_file():
+            raise SystemExit(f"missing {pth.relative_to(REPO_ROOT)}: run generate_provinces.py first")
+    region_of_label = {int(p): int(cell["region"])
+                       for cell in json.loads(LAND_REGIONS_INDEX.read_text(encoding="utf-8"))["cells"]
+                       for p in cell["provinces"]}
+    colour_state = {}
+    for c in json.loads(PROVINCES_INDEX.read_text(encoding="utf-8"))["cells"]:
+        if c["kind"] != "land":
+            continue
+        if int(c["label"]) not in region_of_label:
+            raise SystemExit(f"{LAND_REGIONS_INDEX.name} does not cover land province label {c['label']}")
+        r, g, b = (int(v) for v in c["color"])
+        colour_state[(r << 16) | (g << 8) | b] = region_of_label[int(c["label"])]
     over = json.loads(CLIMATE_OVERRIDES.read_text(encoding="utf-8"))
 
     def class_of(row: dict) -> int:
@@ -655,10 +690,12 @@ def ow_settlement_biomes() -> np.ndarray:
     hub_state = state_of(packed[iy, ix])
     out = settlement_biomes(state4, xy, hub_state, np.array(cls, np.uint8))
     for row in over["states"]:
-        k = key_index.get(row["state"])
         ax, ay = (int(v) for v in row["anchor"])
-        if k is None or int(state_of(packed[ay:ay + 1, ax:ax + 1])[0, 0]) != k:
-            raise SystemExit(f"{CLIMATE_OVERRIDES.name}: anchor {row['anchor']} is not in {row['state']}")
+        if not (0 <= ax < W and 0 <= ay < H):
+            raise SystemExit(f"{CLIMATE_OVERRIDES.name}: anchor {row['anchor']} of {row['state']} is off the canvas")
+        k = int(state_of(packed[ay:ay + 1, ax:ax + 1])[0, 0])
+        if k < 0:
+            raise SystemExit(f"{CLIMATE_OVERRIDES.name}: anchor {row['anchor']} of {row['state']} is not on a land state")
         out[state4 == k] = class_of(row)
     log(f"  Old World settlement climates: {len(xy)} hubs ({len(slug_class)} re-classed), "
         f"{len(over['states'])} state overrides, {(out > 0).mean() * 100:.1f}% of grid")
@@ -922,39 +959,11 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     land4 = landf4 > 0.5
     lake4 = block_mean(lake_c.astype(np.float32)) > 0.5
     elev4 = block_mean(elev_c)
-    _lon, lat = reproject.canvas_lonlat(np.arange(h4), w4, h4)
-    lat4 = np.broadcast_to(lat, (h4, w4))
     coast_dist = np.where(land4, ndimage.distance_transform_edt(land4),
                           ndimage.distance_transform_edt(~land4)).astype(np.float32)
 
     say("biome")
-    biome = fill_unknown(inp.biome_tww3, land4, inp.covered)
-    # gaps (land the TWW3 map does not reach: its frame edges, Ind and Khuresh beyond its
-    # east edge, specks it leaves unpainted) take the wind model's class; where the model has
-    # sea (it predates the 2026-10-29 coast), the nearest TWW3 class (module docstring)
-    use_proxy = land4 & (biome == UNKNOWN)
-    model = inp.biome_model
-    biome = np.where(use_proxy & (model != UNKNOWN), model, biome).astype(np.uint8)
-    biome = nearest_of(biome, biome != UNKNOWN, land4 & (biome == UNKNOWN)).astype(np.uint8)
-    # the far south: TWW3 paints the whole southern rim of its map as the Southern Chaos
-    # Wastes, and the polar land beyond its frame belongs to them (loremaster 2026-11-18)
-    # both polar cut-offs test a latitude that wanders by a seeded smooth field: a hard
-    # parallel drew a ruled line across north Cathay and Khuresh (cartographer 2026-11-19)
-    latn = lat4 + smooth_noise(np.random.default_rng([seed, 3]), POLAR_NOISE_SIGMA, (h4, w4)) * POLAR_NOISE_DEG
-    biome = np.where(use_proxy & (latn < -SOUTH_CHAOS_LAT), CHAOS, biome).astype(np.uint8)
-    # the far north: nothing poleward of Norsca on the TWW3 map is anything but frozen, mountain
-    # or chaotic waste, but our canvas has far more Arctic land, which only the coarse frame
-    # warp reaches (it put TWW3's mid-west Naggaroth desert on the Arctic coast). There, any
-    # other class becomes frozen (loremaster 2026-11-19).
-    arctic = land4 & ~inp.placed & (latn > NORTH_FROZEN_LAT) & ~np.isin(biome, [FROZEN, MOUNTAIN, CHAOS])
-    biome = np.where(arctic, FROZEN, biome).astype(np.uint8)
-    # the warp hides TWW3's straight polygon edges; the settlement classes below follow our
-    # own state borders and are state-scale, so they go in after it, unwarped
-    biome = warp_biome(biome, land4, seed)
-    # over the drawn Old World the mod's own settlement climates replace the TWW3 sample:
-    # they sit on our own hub anchors, so nothing has to be registered
-    biome = np.where(land4 & (inp.biome_ow != UNKNOWN), inp.biome_ow, biome).astype(np.uint8)
-    biome, demoted = demote_mountains(biome, land4, elev4)
+    biome, _land4, demoted, use_proxy = compose_biome(inp, seed)
     say(f"  mountain demoted to its neighbours on {demoted.sum() / max(int(land4.sum()), 1) * 100:.1f}% of land cells")
     nland = max(int(land4.sum()), 1)
     say(f"  TWW3 gaps filled from the nearest TWW3 class on {use_proxy.sum() / nland * 100:.1f}% of land cells")
@@ -1030,6 +1039,155 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     say(f"  {time.time() - t0:.0f}s")
     validate(idx, wts)
     return idx, wts
+
+
+def compose_biome(inp: Inputs, seed: int) -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
+    """The biome class per working cell: ``(biome, land4, demoted, use_proxy)``.
+
+    The one composing function (#3677): :func:`build` paints the materials from it and
+    :func:`biome_grid` turns it into the committed artifact farmland reads, so the two can never
+    disagree. ``land4`` is the working-grid land mask (block mean > 0.5), ``demoted`` the TWW3
+    mountain cells given to their neighbours, ``use_proxy`` the land cells TWW3 does not reach.
+    Its seeded fields use their own streams (``[seed, 1..3]``), independent of :func:`build`'s."""
+    h, w = inp.land.shape
+    h4, w4 = h // Q, w // Q
+    land4 = block_mean(inp.land.astype(np.float32)) > 0.5
+    elev4 = block_mean(inp.elev)
+    _lon, lat = reproject.canvas_lonlat(np.arange(h4), w4, h4)
+    lat4 = np.broadcast_to(lat, (h4, w4))
+    biome = fill_unknown(inp.biome_tww3, land4, inp.covered)
+    # gaps (land the TWW3 map does not reach: its frame edges, Ind and Khuresh beyond its
+    # east edge, specks it leaves unpainted) take the wind model's class; where the model has
+    # sea (it predates the 2026-10-29 coast), the nearest TWW3 class (module docstring)
+    use_proxy = land4 & (biome == UNKNOWN)
+    model = inp.biome_model
+    biome = np.where(use_proxy & (model != UNKNOWN), model, biome).astype(np.uint8)
+    biome = nearest_of(biome, biome != UNKNOWN, land4 & (biome == UNKNOWN)).astype(np.uint8)
+    # the far south: TWW3 paints the whole southern rim of its map as the Southern Chaos
+    # Wastes, and the polar land beyond its frame belongs to them (loremaster 2026-11-18)
+    # both polar cut-offs test a latitude that wanders by a seeded smooth field: a hard
+    # parallel drew a ruled line across north Cathay and Khuresh (cartographer 2026-11-19)
+    latn = lat4 + smooth_noise(np.random.default_rng([seed, 3]), POLAR_NOISE_SIGMA, (h4, w4)) * POLAR_NOISE_DEG
+    biome = np.where(use_proxy & (latn < -SOUTH_CHAOS_LAT), CHAOS, biome).astype(np.uint8)
+    # the far north: nothing poleward of Norsca on the TWW3 map is anything but frozen, mountain
+    # or chaotic waste, but our canvas has far more Arctic land, which only the coarse frame
+    # warp reaches (it put TWW3's mid-west Naggaroth desert on the Arctic coast). There, any
+    # other class becomes frozen (loremaster 2026-11-19).
+    arctic = land4 & ~inp.placed & (latn > NORTH_FROZEN_LAT) & ~np.isin(biome, [FROZEN, MOUNTAIN, CHAOS])
+    biome = np.where(arctic, FROZEN, biome).astype(np.uint8)
+    # the warp hides TWW3's straight polygon edges; the settlement classes below follow our
+    # own state borders and are state-scale, so they go in after it, unwarped
+    biome = warp_biome(biome, land4, seed)
+    # over the drawn Old World the mod's own settlement climates replace the TWW3 sample:
+    # they sit on our own hub anchors, so nothing has to be registered
+    biome = np.where(land4 & (inp.biome_ow != UNKNOWN), inp.biome_ow, biome).astype(np.uint8)
+    biome, demoted = demote_mountains(biome, land4, elev4)
+    return biome, land4, demoted, use_proxy
+
+
+# --------------------------------------------------------------------------- biome grid artifact (#3677)
+
+def fill_grid(biome: np.ndarray, land4: np.ndarray) -> np.ndarray:
+    """The composed class on land cells; every other cell takes its nearest land cell's class.
+
+    A canvas pixel is looked up by ``[y // Q, x // Q]``, and a coastal land pixel can sit in a
+    cell the working grid calls sea, so no cell is left ``unknown``."""
+    if (land4 & (biome == UNKNOWN)).any():
+        raise SystemExit(f"biome grid: {int((land4 & (biome == UNKNOWN)).sum())} land cell(s) have no class")
+    if not land4.any():
+        raise SystemExit("biome grid: no land cell")
+    return nearest_of(biome, land4, ~land4).astype(np.uint8)
+
+
+def biome_grid(inp: Inputs, seed: int) -> tuple[np.ndarray, np.ndarray]:
+    """``(grid uint8 [H/Q, W/Q], land4)``: :func:`compose_biome` through :func:`fill_grid`."""
+    biome, land4, _demoted, _proxy = compose_biome(inp, seed)
+    return fill_grid(biome, land4), land4
+
+
+def _input_sha(path: Path, text: bool = False) -> str:
+    """SHA-256 of an input; a ``text`` input with a BOM stripped and ``\\r\\n`` -> ``\\n``
+    (``core.autocrlf`` checks committed LF files out as CRLF), a binary one as raw bytes."""
+    data = path.read_bytes()
+    if text:
+        if data.startswith(b"\xef\xbb\xbf"):
+            data = data[3:]
+        data = data.replace(b"\r\n", b"\n")
+    return hashlib.sha256(data).hexdigest()
+
+
+def grid_sha256(grid: np.ndarray) -> str:
+    """SHA-256 of the decoded grid (uint8, row order): what a reader of the PNG gets."""
+    return hashlib.sha256(np.ascontiguousarray(grid, dtype=np.uint8).tobytes()).hexdigest()
+
+
+def biome_grid_index(grid: np.ndarray, land4: np.ndarray, seed: int) -> dict:
+    wind = json.loads(CLIMATE_INDEX.read_text(encoding="utf-8"))
+    if "layer_sha256" not in wind:
+        raise SystemExit(f"{CLIMATE_INDEX.name} has no layer_sha256: regenerate generate_climate_zones.py")
+    text_inputs = (PROVINCES_INDEX, LAND_REGIONS_INDEX, HUB_WORKSHEET, CLIMATE_OVERRIDES, OLDWORLD_PAIRS)
+    binary_inputs = (DERIVED_DIR / "land_sea_mask.png", DERIVED_DIR / "lake_mask.png",
+                     REPO_ROOT / "map_data" / "heightmap.png")
+    inputs = {p.name: _input_sha(p, text=True) for p in text_inputs}
+    inputs.update({p.name: _input_sha(p) for p in binary_inputs})
+    inputs["climate_zones.png layer_sha256"] = wind["layer_sha256"]
+    return {
+        "schema": 1,
+        "board": 3677,
+        "canvas": [W, H],
+        "grid": [int(grid.shape[1]), int(grid.shape[0])],
+        "q": Q,
+        "classes": [{"id": i, "name": n, "land_cells": int(((grid == i) & land4).sum())}
+                    for i, n in enumerate(BIOME_NAMES)],
+        "seed": int(seed),
+        "inputs": inputs,
+        "grid_sha256": grid_sha256(grid),
+    }
+
+
+def _grid_palette() -> list[tuple[int, int, int]]:
+    extra = {UNKNOWN: (0, 0, 0), SWAMP: (70, 110, 90), HILLS: (150, 170, 110)}
+    return [PALETTE.get(i, extra.get(i, (0, 0, 0))) for i in range(len(BIOME_NAMES))]
+
+
+def read_biome_grid() -> np.ndarray | None:
+    """The committed grid's decoded class ids, or ``None`` when it is absent."""
+    if not BIOME_GRID_PNG.is_file():
+        return None
+    return raster.read_indexed_png(BIOME_GRID_PNG)[0]
+
+
+def require_current_biome_grid(grid: np.ndarray) -> None:
+    """A mask run refuses to proceed on a committed grid that differs from the composed one:
+    farmland was computed from the committed one."""
+    disk = read_biome_grid()
+    if disk is None or disk.shape != grid.shape or not np.array_equal(disk, grid):
+        raise SystemExit(BIOME_GRID_STALE)
+
+
+def biome_grid_main(check_only: bool) -> int:
+    t = time.time()
+    seed = map_config.SEED
+    grid, land4 = biome_grid(load_inputs(), seed)
+    index = biome_grid_index(grid, land4, seed)
+    if check_only:
+        disk = read_biome_grid()
+        same_px = disk is not None and disk.shape == grid.shape and np.array_equal(disk, grid)
+        same_idx = (BIOME_GRID_INDEX.is_file()
+                    and json.loads(BIOME_GRID_INDEX.read_text(encoding="utf-8")) == index)
+        if same_px and same_idx:
+            log(f"biome grid current ({time.time() - t:.0f}s)")
+            return 0
+        print(f"{BIOME_GRID_PNG.relative_to(REPO_ROOT)}: grid cells {'match' if same_px else 'DIFFER'}, "
+              f"index {'matches' if same_idx else 'DIFFERS'}")
+        print(BIOME_GRID_STALE)
+        return 1
+    DERIVED_DIR.mkdir(parents=True, exist_ok=True)
+    raster.write_indexed_png(BIOME_GRID_PNG, grid, _grid_palette())
+    BIOME_GRID_INDEX.write_text(json.dumps(index, indent=2) + "\n", encoding="utf-8", newline="\n")
+    log(f"wrote {BIOME_GRID_PNG.relative_to(REPO_ROOT)} and {BIOME_GRID_INDEX.name} "
+        f"({grid.shape[1]}x{grid.shape[0]}, {int(land4.sum())} land cells, {time.time() - t:.0f}s)")
+    return 0
 
 
 # --------------------------------------------------------------------------- masks and TGAs
@@ -1293,6 +1451,27 @@ def selftest() -> int:
     got = settlement_biomes(st, np.array([[2.0, 2.0], [10.0, 14.0], [22.0, 2.0]]), np.array([0, 0, 1]),
                             np.array([SWAMP, HILLS, DESERT], np.uint8))
     assert got[0, 0] == SWAMP and got[3, 2] == HILLS and got[0, 5] == DESERT and got[3, 5] == UNKNOWN, got
+    # the biome grid artifact (#3677): no unknown cell, land cells are compose_biome's, a sea
+    # cell carries the class of a nearest land cell
+    comp, c_land, _dem, _prx = compose_biome(inp, map_config.SEED)
+    grid, g_land = biome_grid(inp, map_config.SEED)
+    assert np.array_equal(g_land, c_land) and grid.dtype == np.uint8 and grid.shape == comp.shape
+    assert (grid != UNKNOWN).all(), "the biome grid has an unknown cell"
+    assert np.array_equal(grid[c_land], comp[c_land]), "the biome grid changed a land cell"
+    ly, lx = np.nonzero(c_land)
+    for sy, sx in ((0, 0), (0, w4 - 1), (h4 - 1, 0), (h4 - 1, w4 - 1), (h4 // 2, int(w4 * 0.35))):
+        assert not c_land[sy, sx], "selftest sea cell is land"
+        d2 = (ly - sy) ** 2 + (lx - sx) ** 2
+        near = d2 == d2.min()
+        assert grid[sy, sx] in set(comp[ly[near], lx[near]].tolist()), "a sea cell is not its nearest land cell's class"
+    assert np.array_equal(biome_grid(inp, map_config.SEED)[0], grid), "biome grid not deterministic"
+    assert grid_sha256(grid) == grid_sha256(grid.copy()) != grid_sha256(np.where(grid == DESERT, TEMPERATE, grid))
+    try:
+        fill_grid(np.zeros((2, 2), np.uint8), np.ones((2, 2), bool))
+    except SystemExit:
+        pass
+    else:
+        raise AssertionError("fill_grid accepted a land cell with no class")
     used = set(np.unique(idx).tolist())
     for name in ("snow", "cliff_granite_06", "cliff_sandstone_04", "beach_01", "desert_01", "grasslands_02"):
         assert M[name] in used, f"selftest world never produced {name}"
@@ -1341,6 +1520,8 @@ def main(argv: list[str] | None = None) -> int:
     ap.add_argument("--tag", default="", help="suffix for the preview file names (before/after pairs)")
     ap.add_argument("--from-masks", action="store_true", help="rebuild the two TGAs from the masks in --out")
     ap.add_argument("--check", action="store_true", help="regenerate in memory and compare with --out")
+    ap.add_argument("--biome-grid", action="store_true",
+                    help="write mapgen/derived/biome_grid.png + index (with --check: compare, write nothing)")
     ap.add_argument("--selftest", action="store_true", help="synthetic world, needs no files")
     args = ap.parse_args(argv)
     out = args.out if args.out.is_absolute() else (Path.cwd() / args.out)
@@ -1348,11 +1529,16 @@ def main(argv: list[str] | None = None) -> int:
         return selftest()
     if args.from_masks:
         return from_masks(out)
+    if args.biome_grid:
+        return biome_grid_main(check_only=args.check)
     if args.check:
         return check(out)
 
     t = time.time()
     inp = load_inputs()
+    if not args.no_write:
+        # farmland reads the committed grid: never paint masks from a newer one (#3677)
+        require_current_biome_grid(biome_grid(inp, map_config.SEED)[0])
     idx, wts = build(inp, map_config.SEED)
     if not args.no_write:
         write_layer(out, idx, wts)
