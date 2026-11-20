@@ -9,9 +9,10 @@ Outside the offline gate; no ``sources/`` pixels are read or drawn.
 It computes, once and identically for every drawn state, the numbers all of #3675's content
 children and #3687 read: the 16 core columns (#3687's shared contract, verbatim and first),
 then this item's descriptors (latitude band, elevation, canon rivers, heatmap within-realm
-rank ``heat_realm_pct``, ...). With ``--classes`` it joins the hand-authored
-``mapgen/config/state_climate_classes.csv`` (lore assigns the class) and runs the physical
-expectation table: a state whose assigned class is not physically expected is
+rank ``heat_realm_pct``, ...). With ``--classes`` it joins a class CSV (columns as the part-A
+draft ``mapgen/config/state_climate_classes.csv`` had: that file was deleted unseeded with #3677,
+whose lore rows live in ``land_economics_worksheet.csv`` as ``arable_class``; no committed file
+feeds this option any more) and runs the physical expectation table: a state whose assigned class is not physically expected is
 ``phys_disagree`` and MUST carry an ``override_ref`` (hard error otherwise), so the lore
 override list is exactly the lore-vs-physics disagreement list. ``heat_disagree`` is a
 non-blocking note: #4921's lore zones are a first draft and the raster never vetoes lore.
@@ -19,7 +20,8 @@ non-blocking note: #4921's lore zones are a first draft and the raster never vet
 Usage::
 
     python mapgen/tabulate_state_prior.py                      # physical columns only
-    python mapgen/tabulate_state_prior.py --classes mapgen/config/state_climate_classes.csv \\
+    python mapgen/tabulate_state_prior.py --rivers mapgen/config/canon_rivers.csv --markdown
+    python mapgen/tabulate_state_prior.py --classes <class CSV> \\
         --rivers mapgen/config/canon_rivers.csv --markdown --render
 
 Outputs: ``scratchpad/state_physical_prior.csv`` (always), ``state_prior_generated.md``
@@ -643,7 +645,9 @@ def render(rows: list[dict], extras: dict, out_path: Path) -> None:
 
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--classes", metavar="CSV", help="mapgen/config/state_climate_classes.csv")
+    ap.add_argument("--classes", metavar="CSV",
+                    help="a state class CSV in the shape of the deleted part-A draft (state_key, climate_class, "
+                         "override_ref, ...); #3677's classes live in land_economics_worksheet.csv")
     ap.add_argument("--rivers", metavar="CSV", help="mapgen/config/canon_rivers.csv")
     ap.add_argument("--markdown", action="store_true", help="print the generated note blocks")
     ap.add_argument("--render", action="store_true", help="write state_prior_class_review.png (needs --classes)")

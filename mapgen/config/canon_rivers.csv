@@ -1,11 +1,11 @@
 # Owner: board #3677. Consumers: #3687 (river traits) / #2968 (province terrains) / mapgen/tabulate_state_prior.py (canon_river) / mapgen/validate_map.py (reads river and state_key by header name).
 # One row per (river + state). The traced map_data/rivers.png is unnamed and incomplete so this hand-authored layer is the canon river source.
 # validate_map.py warns (never errors) where a river is not in rivers_index.json: pin the name through canon_river_names.json (handoff to #3703/#3687).
-# Source grammar as in state_climate_classes.csv: lex:<Page>#<section> (zone | zone via hub X | zone via owner TAG | realm) [GW publication the page footnotes]; name (...) = the state's canon name carries the river.
+# Source grammar: lex:<Page>#<section> (zone | zone via hub X | zone via owner TAG | realm) [GW publication the page footnotes]; name (...) = the state's canon name carries the river.
 # Tier A = an extract places the river in the state by name or hub or the state is named for the river feature itself. Tier B = the state is named for the river's province and the extract only describes the river.
 # Tier C = [unverified]: nothing in the extracts; no climate class or override may rest on a C row. Lexicanum pages were read 2026-10-04 and are paraphrased - never quoted.
 # These comment lines carry no comma on purpose: validate_map.py's reader does not skip comment lines and would read a comma-bearing one as a row.
-# After editing re-run: python mapgen/tabulate_state_prior.py --classes mapgen/config/state_climate_classes.csv --rivers mapgen/config/canon_rivers.csv --markdown
+# After editing re-run: python mapgen/tabulate_state_prior.py --rivers mapgen/config/canon_rivers.csv --markdown
 river,state_key,state_id,tier,source,note
 Ash River,STATE_UPPER_ASH_RIVER,607,A,"name (river); lex:Great_Mortis_River#Overview (zone) [Tomb Kings 6e pp. 10, 16-17; Tomb Kings 8e pp. 14-19; Liber Necris]",the Ash (once the Golden River) joins the Great Mortis
 Aver,STATE_AVERHEIM,317,B,"name (Averheim, Averland: named for the river); lex:Aver (realm) [Empire 8e pp. 22-25]",
