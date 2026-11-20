@@ -48,6 +48,7 @@ STEPS = [
     ("locators", "generate_map_locators.py"),
     ("splines", "generate_spline_network.py"),
     ("heatmap", "generate_arable_heatmap.py"),
+    ("terrain", "generate_terrain_masks.py --render"),   # reads the heatmap, provinces, hubs; preview to Chris
 ]
 DEFAULT_FROM = "provinces"
 
@@ -66,6 +67,7 @@ GATE = [
     "run_fixture.py --check",
     "validate_map.py",
     "generate_flatmap_textures.py --check",
+    "generate_terrain_masks.py --check",
     "generate_adjacencies.py --check",
 ]
 

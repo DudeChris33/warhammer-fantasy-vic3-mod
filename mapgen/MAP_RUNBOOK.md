@@ -339,10 +339,35 @@ root cause". Facts learned running this section:
   `game/map_data/` hash was unchanged; the July file dates come from a Steam patch. Judge by
   hash, never by timestamp, and note that `git status` in the mod cannot see base-game edits.
 - **The pack looks stale or wrong in the editor for a separate reason.** The materials, colour
-  map, land mask, flat map and vegetation placement still come from vanilla's Earth layers
+  map, land mask, flat map and vegetation placement came from vanilla's Earth layers
   under `gfx/map/` (`terrain/detail_index.tga`, `detail_intensity.tga`, `textures/colormap.dds`,
   `flatmap*.dds`, `land_mask.dds`, `dynamic_masks/exclusion_mask.dds`,
-  `map_object_data/generated/*`), which the mod does not override. A repack cannot fix those.
+  `map_object_data/generated/*`). A repack cannot fix those. Since then the flat map, land mask,
+  exclusion mask (#6613) and the terrain materials (#6617) are ours; `colormap.dds` is #6618.
+
+## Terrain materials (no desktop step)
+
+`gfx/map/terrain/` (the close-zoom ground materials) is written by
+`mapgen/generate_terrain_masks.py` (#6617): 36 committed `mask_<material>.png` (Git LFS) and the
+two gitignored TGAs the game reads. On a fresh clone, before the first `.\deploy.ps1`:
+
+```
+python mapgen/generate_terrain_masks.py --from-masks   # rebuild the two TGAs from the committed masks (seconds)
+```
+
+`deploy.ps1` refuses to ship the masks without both TGAs. After a map regen or an edit to
+`mapgen/config/climate_overrides.json` / `climate_oldworld_pairs.json`:
+
+```
+python mapgen/generate_terrain_masks.py --render       # regenerate + scratchpad/terrain_preview{,_oldworld}.png
+python mapgen/generate_terrain_masks.py --check        # then this must say current
+```
+
+Send the preview and commit the masks only after Chris accepts it. Never hand-paint the masks in
+the map editor for the mod: change the inputs and regenerate. Where an editor Save writes terrain
+masks (the mod folder or the base install) is **not yet checked**. The first time, hash
+`game/gfx/map/terrain/` and the deployed `gfx/map/terrain/` before and after a save, then record
+the answer here.
 
 ## Land state economics (no desktop step)
 

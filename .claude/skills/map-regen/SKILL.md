@@ -16,9 +16,9 @@ Full regen after a source change (`/map-regen`). Distilled from the 2026-10-15 r
 ## Steps
 
 1. `python mapgen/worldgen/sources.py --update-manifest` (after his say-so), then `--verify`. Report the CHANGED lines.
-2. `python .claude/skills/map-regen/regen_chain.py` (provinces -> adjacencies -> locators -> heatmap, then the offline gate). `--from <step>` resumes; `--from rivers` when coast/river/sea sources changed; `--list` shows steps. Run in the background, it takes 10-15 min (provinces ~6). It re-anchors drifted pop/building overrides itself (<= 40 px) and stops on anything else.
+2. `python .claude/skills/map-regen/regen_chain.py` (provinces -> adjacencies -> locators -> heatmap -> terrain masks, then the offline gate). `--from <step>` resumes; `--from rivers` when coast/river/sea sources changed; `--list` shows steps. Run in the background, it takes 10-15 min (provinces ~6). It re-anchors drifted pop/building overrides itself (<= 40 px) and stops on anything else.
 3. Fix the stop with the playbook below, resume with `--from`.
-4. Offline gate green is a precondition only. **Render and send**: `render_states.py` (state-level, never the province partition) and, for adjacencies, `generate_adjacencies.py --review` (`scratchpad/adjacencies_preview.png`). Say what you see, wait for the verdict.
+4. Offline gate green is a precondition only. **Render and send**: `render_states.py` (state-level, never the province partition) and, for adjacencies, `generate_adjacencies.py --review` (`scratchpad/adjacencies_preview.png`), and the terrain-material preview the `terrain` step wrote (`scratchpad/terrain_preview{,_oldworld}.png`; its 36 masks are binary, so they wait for the verdict too). Say what you see, wait for the verdict.
 5. Commit only after Chris accepts the visual (below), then deploy and have him load the game; triage `error.log`.
 
 ## Stop playbook
