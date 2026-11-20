@@ -59,16 +59,16 @@ Files live directly under `sources/`, or in one of seven searched subfolders:
 `originals/` (raw reference imagery), `oldworld-first/` (the current
 canvas-scale GIMP masters and their exports — see the .ora convention below),
 `dots-triangles/` and `dots-mega/` (the paired-anchor-dot registration
-workflow's active crops), `ulthuan/` (Ulthuan's paired-anchor-dot sheets —
-see below) and `geology/` (physical-geography drawings; today the ocean-current
+workflow's active crops), `geology/` (physical-geography drawings; today the ocean-current
 drawing the climate stage reads, board #8202) and `iee/` (ChaosRobie's
 expanded Immortal Empires parchment and its hand-drawn layers; `mapgen/project_ie_borders.py`
 reads the aligned `borders` layer, #9016). `archive/` (retired sources — including the five
-per-region dot-marking sheets retired by board #5403), `WIP/` (local scratch),
+per-region dot-marking sheets retired by board #5403 and Ulthuan's dot sheets, see below), `WIP/` (local scratch),
 `dots-claude/` (an earlier whole-parchment dot experiment; it holds the clean
 PNG of the expanded parchment, `cr_combi_expanded_map.png`),
 `history/` (finished reference artefacts kept for the record — see below) and
-`cr_oldworld_campaign/` (its own dataset loader) and `cr_immortal_empires_expanded/` (see below) are deliberately **not**
+`cr_oldworld_campaign/` (its own dataset loader), `cr_immortal_empires_expanded/` and `wiki/` (the
+exported lore wiki; see below for both) are deliberately **not**
 searched. `mapgen/worldgen/sources.py`'s `resolve_source_path()` searches the
 root plus those six by bare filename, so the **File** column below stays a
 bare filename regardless of which subfolder a source actually sits in — the
@@ -180,9 +180,19 @@ Lua, battle terrain, pathing and UI skins were deleted). What remains and why:
   reader in the repo); settlement positions and starting ownership.
 - `ui/flags/`: his faction flags, a starting point for heraldry.
 
-## `ulthuan/`: Ulthuan's paired-anchor-dot sheets (2026-10-11)
+## `ulthuan/`: Ulthuan's paired-anchor-dot sheets (2026-10-11, archived 2026-11-19)
 
-Ulthuan joined the mod's scope on 2026-10-11 (Chris). `sources/ulthuan/` is a
+**Archived 2026-11-19 (Chris):** Ulthuan's borders are done, so the four files
+below moved to `sources/archive/ulthuan/` (not searched) and their manifest rows
+were removed. The fitted record `cr_combi_expanded_map_ulthuan.json` stays
+committed and live: `generate_terrain_masks.py` and `propose_cr_borders.py` read
+it, not the sheets. The seed's `dots_archived` field tells `sources.py --verify`
+that the missing `dots_source` row is intended. `adjust_ring_borders.py`,
+`render_anchor_dot_example.py` and `reseed_registration_dots.py` need the sheets:
+to re-fit, move them back to `sources/ulthuan/`, re-add `ulthuan` to
+`SOURCE_SUBDIRS`, drop `dots_archived` and run `--update-manifest`.
+
+Ulthuan joined the mod's scope on 2026-10-11 (Chris). `sources/ulthuan/` was a
 searched subfolder holding the two sheets that place ChaosRobie's expanded
 parchment onto the canvas over Ulthuan, each with its GIMP `.xcf` master:
 
@@ -271,6 +281,29 @@ warped parchment coast lands a mean 6.1 px (p90 12.5, max 53.9) from the
 canvas trace. What is left is the parchment drawing the land wider than the
 canvas does along the east coast and the inner sea's south-west shore.
 Nothing downstream reads the record yet.
+
+## `wiki/`: the Fandom Warhammer Wiki, exported (2026-10-03)
+
+`sources/wiki/` is a full export of the Fandom Warhammer Wiki
+(`warhammerfantasy.fandom.com`, database `warhammerfb`): the site's
+current-revision page dump `warhammerfb_pages_current.xml` (about 76 MB; the
+`.7z` beside it is the downloaded archive), split by the local
+`split_dump.py` into:
+
+- `pages/<Title>.wiki`: one raw-wikitext file per main-namespace article (9,408),
+  each under a one-line comment header giving the title, revision timestamp and
+  live URL. Characters Windows forbids in a filename become `_`; titles that
+  differ only in case get a `~2` suffix.
+- `index.tsv`: title, file, revision, chars and categories, one row per article.
+- `redirects.tsv`: redirect title to target title (5,432 rows).
+
+Re-run `split_dump.py` after replacing the dump; it rebuilds `pages/` from
+scratch. It is not searched, has no manifest rows, and no generator reads it.
+Its one consumer is the loremaster review agent (`.claude/agents/loremaster.md`),
+which looks up canon claims here first and corroborates them on Lexicanum.
+Rank: a fan wiki, so below the Games Workshop publications that its pages cite.
+Text is the wiki's (CC BY-SA on Fandom). Reference only: nothing from it is
+copied into shipped files.
 
 ## `history/`: finished reference artefacts (2026-10-05)
 
@@ -401,11 +434,12 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | state_regions_on_parchment - dots_7.xcf | n/a | 43,446,175 | c7ae77cd95d04671abc69af3e31a68653608824f4fb4d8433ba7de9cc13a70f6 | Archive of the state border line drawing generator, dot-marked by the user | Editable master of the dots_7.png export above | no |
 | stylized_world_map.jpg | 2048x1939 | 838,790 | 52e4c4b4be443b517b56ef5725eda8a08ae1bfd7485d66bd20694464068ec687 | TBD | TBD | no |
 | terraqueous_globe.jpg | 4000x3256 | 2,292,545 | c4021e28d8d58bc3f91733df72ee9b7b398f922bb565b0478d3743446d8c15f3 | Fan cartography — "Terraqueous Globe", Kartografia Niepraktyczna 2022 | Whole-world heightmap (NE-II colour-to-height ramp) + coastline. **The single geometric authority** (S3a decision #1) — every other source projects onto it | yes |
+| terraqueous_globe_reprojected - climate.xcf | n/a | 113,794,951 | f61472e4e735c23c23ce3b65ff3c31ec9de6ed6eed59a32a413ee9ff1ddc682c | TBD | TBD | no |
 | terraqueous_globe_reprojected - dots_7.png | 8192x3616 | 33,040,662 | be218e8678b0ce6134742b68ba9fa7f8afa794ac42d8b47794e29d5a4afc8c87 | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Region 7 dot-picking reference for the paired-anchor-dot workflow, same role as dots_1-6 | no |
 | terraqueous_globe_reprojected - dots_7.xcf | n/a | 164,259,326 | 3d4af433759570c24695c6c020379cd3c138bb8f629821ead461e11f0cf2e55d | Derived from `terraqueous_globe_reprojected.png`, dot-marked by the user | Editable master of the dots_7.png export above | no |
 | terraqueous_globe_reprojected - full.ora | 8192x3616 | 98,314,825 | 1bd4a54affb2e8a51f6aaac25009e0a2d2d8888a5c22878663a7eb6a747766b7 | GIMP OpenRaster export of `terraqueous_globe_reprojected - full.xcf` | The canvas master (board #5399): layers `coasts`/`rivers`/`cities`/`borders`/`impassable`/`sea_zones`/`canvas`, read by name via `mapgen/config/source_layers.json` | no |
 | terraqueous_globe_reprojected - full.png | 8192x3616 | 36,963,398 | b3a41a7e272415acc5d5dd7974bd70dc87b733fc5c00f293143c69e8ffc4279a | TBD | TBD | no |
-| terraqueous_globe_reprojected - full.xcf | n/a | 113,514,175 | b2321e541311cd2fdf4cabefdb9103ceaf0d3368091a5fe72f9506a55b9b9a2c | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
+| terraqueous_globe_reprojected - full.xcf | n/a | 113,514,175 | 66e67c1fa61d0f9edb4d89cb9eaaa693cb35e29fc1415c6b5a3da3518ff43dfb | GIMP editable master | Editable master of `terraqueous_globe_reprojected - full.ora` | no |
 | terraqueous_globe_reprojected - grayscale.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Grayscale copy of `terraqueous_globe_reprojected.png` | Same role as `terraqueous_globe_reprojected.png`, in grayscale | no |
 | terraqueous_globe_reprojected - grayscale_dots.png | 8192x3616 | 24,587,697 | e5a40962048ea5fa68d752899cc89ee61ddab565b0e49c851bfe4905f56e4b7c | Dot-marked derivative of `terraqueous_globe_reprojected - grayscale.png` (see that row) | Dot-picking reference — inferred from filename/sibling pattern, Chris to confirm/correct | no |
 | terraqueous_globe_reprojected - grayscale_dots.xcf | n/a | 87,438,501 | cf32f13c5a5cd9c9ebd727d5ae6b358e5140a22f35253c2219d3c794b0391316 | TBD | TBD | no |
@@ -430,10 +464,6 @@ edit the Origin/Role cells by hand, let `--update-manifest` fill Dims/Bytes/SHA.
 | ulthuan_1.jpg | 764x771 | 188,484 | 7517492e515be7712c933e98f43095e078ddd1b0911538ba47ddec90c11e2edb | TBD | TBD | no |
 | ulthuan_2.png | 1080x1080 | 126,002 | eb168dc9852441b1f885128bdac216d12d32d6c4c88127fc5e7c8cce2195658a | TBD | TBD | no |
 | ulthuan_3.png | 781x830 | 286,800 | 978142cc35e9919c88d4b46240e02bbdc0a09cd891bb86eb2034554b73964da1 | TBD | TBD | no |
-| ulthuan_parchment.png | 6400x4480 | 56,463,651 | 7ab020f36ba96d4e4a2a858ba7dd3a2233008f5fc88debf1414d20114ab73f85 | ChaosRobie's expanded Immortal Empires parchment (`cr_combi_expanded_map`, see the `cr_immortal_empires_expanded/` section), dot-marked by the user 2026-10-11 | Ulthuan paired-anchor-dot sheet, parchment side: the dots, a cyan trace of Ulthuan's coast and the magenta state-border network. `dots_source` of the `cr_combi_expanded_map_ulthuan` seed; the clean parchment is derived from it on demand | no |
-| ulthuan_parchment.xcf | n/a | 80,912,404 | fc0b1ffa17f366ac7fbe8b1b4106f5f20e0c7166deaaf73b3fe878aa5fdc05e1 | GIMP editable master | Editable master of `ulthuan_parchment.png`; not read by any tool | no |
-| ulthuan_terraqueous.png | 4096x1808 | 9,085,020 | 3c3860b49013dde1ccaa987ef9cd9f7c0394f3b7c3d91f35130e533a91c92aea | Top-left 4096x1808 of `terraqueous_globe_reprojected.png` (canvas pixels, zero offset), dot-marked by the user 2026-10-11 | Ulthuan paired-anchor-dot sheet, canvas side: the same dots plus the cyan coast trace. `dots_reseed.canvas_dots` of the `cr_combi_expanded_map_ulthuan` seed | no |
-| ulthuan_terraqueous.xcf | n/a | 22,453,440 | 2bac967a3efbcde8bd842f0a0ab1006151f033c51bce2372df3b5b2f7237d958 | GIMP editable master | Editable master of `ulthuan_terraqueous.png`; not read by any tool | no |
 | warhammer-world-map-8k-cropped.png | 2867x2029 | 10,012,338 | de82489649b1780fd34d0e855f48574efcf6d6a731f9aec03daee028f23eb53a | TBD | TBD | no |
 | warhammer-world-map-8k.png | 4389x2029 | 1,787,168 | 81d3c4150a7df1dc345dfa9186b8d14d110278b4679038a5a7a8fc3f4fc68055 | TBD | TBD | no |
 | white_dwarf_world_map.png | 4524x3093 | 1,960,224 | c5a4c6708600fedbfe404c59a7c8d6ab5745eea6e4d35a28180ef13932b37be7 | Games Workshop — official Warhammer world map (boxed / White Dwarf fold-out poster; the sheet prints "© Games Workshop Ltd 2000–2004" and "Product code 60440199034"). Fold seams visible | **Projection: oval pseudocylindrical, flattened-pole (Winkel Tripel / Robinson / Natural Earth family — NOT pointed-pole Mollweide/Aitoff)** — identified 2026-08-15. The world's printed neat-line is a smooth arc bowing down to clipped corners, ~360° of longitude wrapping (HUNG at both far edges); the broad clipped top is a pole line, not a point. Same oval family the terraqueous NE-II globe reproduces. Manifest/naming/extent reference only; unregistered — a fit would try the `natural_earth_2` kind, falling back to a `control_point_warp` if its oval isn't exactly NE-II | no |

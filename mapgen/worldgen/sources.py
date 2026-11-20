@@ -63,13 +63,13 @@ SOURCE_LAYERS_PATH = TOOLS_DIR / "config" / "source_layers.json"
 #: The folders under ``sources/`` that tools search, alongside the root itself:
 #: raw references (``originals/``), the current canvas-scale GIMP masters and
 #: their per-.xcf .ora exports (``oldworld-first/``), the two paired-anchor-
-#: dot batches still in active use (``dots-triangles/``, ``dots-mega/``) and
-#: Ulthuan's paired-anchor-dot sheets (``ulthuan/``).
+#: dot batches still in active use (``dots-triangles/``, ``dots-mega/``), the
+#: physical-geography drawings (``geology/``) and the IEE layers (``iee/``).
 #: ``archive/`` (retired sources, including the five-crop dot-marking sheets —
-#: board #5403), ``WIP/`` (local scratch, not manifest-tracked) and
+#: board #5403 — and Ulthuan's dot sheets, 2026-11-19), ``WIP/`` (local scratch, not manifest-tracked) and
 #: ``cr_oldworld_campaign/`` (its own dataset loader) are deliberately excluded
 #: from both search and refresh.
-SOURCE_SUBDIRS = ("originals", "oldworld-first", "dots-triangles", "dots-mega", "ulthuan", "geology", "iee")
+SOURCE_SUBDIRS = ("originals", "oldworld-first", "dots-triangles", "dots-mega", "geology", "iee")
 
 MANIFEST_BEGIN = "<!-- MANIFEST:BEGIN -->"
 MANIFEST_END = "<!-- MANIFEST:END -->"
@@ -459,7 +459,9 @@ def verify(
         seed = _derived_seed(reg.source)
         if seed is None:
             errors.append(f"registration '{reg.source}' has no row in {manifest_path.name}")
-        elif seed["dots_source"] not in by_file:
+        elif seed["dots_source"] not in by_file and "dots_archived" not in seed:
+            # a seed whose sheets were archived after the fit was accepted keeps
+            # its record live without them (seed field ``dots_archived``)
             errors.append(
                 f"registration '{reg.source}' derives from '{seed['dots_source']}' "
                 f"which has no row in {manifest_path.name}"
