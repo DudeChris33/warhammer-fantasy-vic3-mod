@@ -49,6 +49,8 @@ STEPS = [
     ("splines", "generate_spline_network.py"),
     ("heatmap", "generate_arable_heatmap.py"),
     ("terrain", "generate_terrain_masks.py --render"),   # reads the heatmap, provinces, hubs; preview to Chris
+    ("dynamic", "generate_dynamic_masks.py --render"),   # reads the hubs, heatmap, woodland masks; preview to Chris (#11536)
+    ("seasons", "generate_season_masks.py --render"),    # reads the terrain masks, climate zones, heightmap; preview to Chris (#11535)
 ]
 DEFAULT_FROM = "provinces"
 
@@ -68,6 +70,8 @@ GATE = [
     "validate_map.py",
     "generate_flatmap_textures.py --check",
     "generate_terrain_masks.py --check",
+    "generate_dynamic_masks.py --check",
+    "generate_season_masks.py --check",
     "generate_adjacencies.py --check",
 ]
 
