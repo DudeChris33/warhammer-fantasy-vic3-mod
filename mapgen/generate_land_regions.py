@@ -45,6 +45,10 @@ colour authority ``mapgen/derived/provinces_index.json`` and the sea canon
   real-world vanilla state name (found via ``STATE_AQUITAINE``), and the
   mod's own name should override vanilla's outright rather than dodge the
   collision with a numeric fallback key (user decision 2026-09-06).
+* ``localization/replace/english/map/wh_hub_names_l_english.yml`` — one
+  ``HUB_NAME_<state key>_<slot>`` per emitted hub slot of every land state
+  (#9823): the ``hub_worksheet.json`` name for a listed hub, else the provisional
+  ``"<state name> (<slot>)"`` marked ``AUTOGEN_MARKER``, so no raw key renders.
 
 Each drawn state's ``subsistence_building`` / ``arable_land`` / ``arable_resources`` come from
 ``mapgen/config/land_economics_worksheet.csv`` (hand-authored; rows keyed on the canon state key
@@ -423,14 +427,31 @@ def _render_loc(keys: list[str], canon_names: dict[str, str],
     return "\n".join(lines) + "\n"
 
 
-def _render_hub_loc(entries: list[tuple[str, str]]) -> str:
+#: Fixed order the provisional hub names are appended in (#9823).
+HUB_SLOT_ORDER = ("city", "port", "farm", "mine", "wood")
+
+
+def _provisional_hub_entries(key: str, display: str, hubs: dict,
+                             listed: set[str]) -> list[tuple[str, str, bool]]:
+    """One provisional ``(loc key, "<display> (<slot>)", True)`` per emitted hub
+    slot with no listed (worksheet) name (#9823), in :data:`HUB_SLOT_ORDER`, so no
+    hub slot ever renders its raw ``HUB_NAME_…`` key in game. ``display`` is the
+    state's shipped display name, the same text ``_render_loc`` writes."""
+    return [(f"HUB_NAME_{key}_{slot}", f"{display} ({slot})", True)
+            for slot in HUB_SLOT_ORDER if slot in hubs and slot not in listed]
+
+
+def _render_hub_loc(entries: list[tuple[str, str, bool]]) -> str:
     """The ``HUB_NAME_<STATE_KEY>_<hub>`` loc file (board #3665), vanilla's shape in
-    ``game/localization/english/hub_names_l_english.yml``. Only listed hubs get a
-    key — an unlisted hub falls through to the engine default (no entry)."""
+    ``game/localization/english/hub_names_l_english.yml``. Every emitted hub slot
+    has a key (#9823): a listed hub carries its worksheet name; an unlisted slot
+    carries the provisional ``"<state name> (<slot>)"`` with the ``AUTOGEN_MARKER``
+    so ``validate_map`` can count it. ``entries`` are ``(key, name, provisional)``."""
     lines = ["l_english:"]
-    for loc_key, name in entries:
+    for loc_key, name, provisional in entries:
         escaped = name.replace('"', '\\"')
-        lines.append(f' {loc_key}:0 "{escaped}"')
+        tail = f" {map_config.AUTOGEN_MARKER}" if provisional else ""
+        lines.append(f' {loc_key}:0 "{escaped}"{tail}')
     return "\n".join(lines) + "\n"
 
 
@@ -820,8 +841,9 @@ def main(argv: list[str] | None = None) -> int:
                     f"{HUB_ANCHORS_INDEX_PATH.name}: region {rid} has two '{h['hub']}' hubs "
                     f"('{slot[h['hub']][1]}' and '{h['name']}') — one worksheet row per (state, hub)")
             slot[h["hub"]] = (tuple(int(v) for v in h["province_color"]), h["name"])
-    hub_loc_entries: list[tuple[str, str]] = []
-    hub_unlisted_states = 0          # in-scope drawn states with an auto-picked slot
+    hub_loc_entries: list[tuple[str, str, bool]] = []  # (key, name, provisional)
+    hub_slots_total = 0
+    hub_provisional_by_stem: dict[str, int] = {}  # #9823: unlisted slots per state file
     hub_unnamed_regions: list[str] = []  # listed hubs whose region has no canon name
 
     for cell in sorted(land_regions["cells"], key=lambda c: int(state_number[int(c["region"])])):
@@ -920,13 +942,18 @@ def main(argv: list[str] | None = None) -> int:
         # HUB_NAME loc for every listed hub, keyed on the state's EMITTED key (never
         # a stored key — the emitted key is what actually ships).
         for hub, (_col, hubname) in anchor_hubs.items():
-            hub_loc_entries.append((f"HUB_NAME_{key}_{hub}", hubname))
+            hub_loc_entries.append((f"HUB_NAME_{key}_{hub}", hubname, False))
         if anchor_hubs and is_drawn and not name:
             hub_unnamed_regions.append(key)  # a churny STATE_LAND_NNN key
-        if is_drawn:
-            slots = {"city", "port", "farm", "mine", "wood"} if coastal else {"city", "farm", "mine", "wood"}
-            if slots - set(anchor_hubs):
-                hub_unlisted_states += 1
+        # Every other emitted slot (auto-picked or stacked; drawn and placeholder
+        # states alike) gets a provisional "<state name> (<slot>)" (#9823).
+        provisional = _provisional_hub_entries(
+            key, canon_names.get(key) or _pretty_name(key), hubs, set(anchor_hubs))
+        hub_loc_entries.extend(provisional)
+        hub_slots_total += len(hubs)
+        if provisional:
+            hub_provisional_by_stem[file_stem] = (
+                hub_provisional_by_stem.get(file_stem, 0) + len(provisional))
 
         naval_exit_id = None
         if coastal:
@@ -983,9 +1010,11 @@ def main(argv: list[str] | None = None) -> int:
     if hub_loc_entries:
         _write_bytes(HUB_LOC_PATH, _render_hub_loc(hub_loc_entries), bom=True)
         log(f"wrote {HUB_LOC_PATH.relative_to(MOD_ROOT)}  ({len(hub_loc_entries)} hub name(s))", t0)
-        if hub_unlisted_states:
-            log(f"  note: {hub_unlisted_states} in-scope drawn state(s) have auto-picked "
-                f"(unlisted) hub slots — name them in hub_worksheet.json to override", t0)
+        if hub_provisional_by_stem:
+            n_prov = sum(hub_provisional_by_stem.values())
+            per = ", ".join(f"{s} {n}" for s, n in sorted(hub_provisional_by_stem.items()))
+            log(f"  hub names: {n_prov} of {hub_slots_total} slots provisional "
+                f"({map_config.AUTOGEN_MARKER}): {per} — name them in hub_worksheet.json", t0)
         if hub_unnamed_regions:
             log(f"  WARNING: {len(hub_unnamed_regions)} listed hub(s) sit in an unnamed region "
                 f"(churny STATE_LAND_NNN loc key): {sorted(set(hub_unnamed_regions))[:8]}", t0)

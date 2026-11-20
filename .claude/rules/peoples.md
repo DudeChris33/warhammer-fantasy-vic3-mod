@@ -168,7 +168,8 @@ TAG = {
     exists, not that it is the right land: a key remap or redraw can leave a capital resolving to
     other land, silently. After one, remap capitals (and character `home_region`s) by seat hub,
     reading `wh_hub_names_l_english.yml`, not by old key or state id (#11541: the Lustria TWW3
-    remap moved the land under kept ids).
+    remap moved the land under kept ids). Skip its `# AUTOGEN` lines: they are provisional
+    "<state> (<slot>)" names (#9823), not seats.
 
   Per-file status (a file still marked pending keeps its `# capital: <Name> — TODO` comments and
   is not yet out of compliance):

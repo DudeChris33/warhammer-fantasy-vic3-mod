@@ -2658,6 +2658,54 @@ def _selfcheck_hub_validator() -> None:
     assert stacked == [], f"a stack_on row sharing its host's province must pass, got {stacked}"
 
 
+def _selfcheck_hub_loc_coverage() -> None:
+    """#9823: every emitted hub slot needs a HUB_NAME key; provisional
+    (# AUTOGEN) lines are counted per state file. Covers the generator's
+    provisional entries and the validator, with failing cases."""
+    import validate_map as vm
+    import generate_land_regions as glr
+    from pathlib import Path
+
+    inland = vm.ParsedState("STATE_INLAND", "02_empire.txt")
+    inland.hubs = {"city": (1, 1, 1), "farm": (1, 1, 2), "mine": (1, 1, 3), "wood": (1, 1, 4)}
+    coast = vm.ParsedState("STATE_COAST", "17_ulthuan.txt")
+    coast.hubs = {"city": (2, 2, 1), "port": (2, 2, 2), "farm": (2, 2, 1),
+                  "mine": (2, 2, 1), "wood": (2, 2, 1)}  # stacked: every slot still needs a key
+    states = [inland, coast]
+
+    # Generator: listed slots keep their names, the rest are "<display> (<slot>)" in fixed order.
+    prov = glr._provisional_hub_entries("STATE_COAST", 'Say "Hi" Coast', coast.hubs, {"city"})
+    assert [k for k, _n, _p in prov] == [f"HUB_NAME_STATE_COAST_{s}" for s in ("port", "farm", "mine", "wood")], prov
+    assert prov[0][1] == 'Say "Hi" Coast (port)' and all(p for _k, _n, p in prov), prov
+    entries = ([("HUB_NAME_STATE_COAST_city", "Lothern", False)] + prov
+               + glr._provisional_hub_entries("STATE_INLAND", "Inland", inland.hubs, set()))
+    text = glr._render_hub_loc(entries)
+    assert ' HUB_NAME_STATE_COAST_city:0 "Lothern"\n' in text, "a real name carries no marker"
+    assert f' HUB_NAME_STATE_COAST_port:0 "Say \\"Hi\\" Coast (port)" {map_config.AUTOGEN_MARKER}\n' in text, text
+    assert text.count(map_config.AUTOGEN_MARKER) == 8, text
+
+    all_keys = {k for k, _n, _p in entries}
+    with tempfile.TemporaryDirectory() as td:
+        path = Path(td) / "hub.yml"
+        path.write_text(text, encoding="utf-8-sig")
+        # Full coverage passes, and the count is reported per file (real name not counted).
+        errs, warns = vm._check_hub_loc_coverage(states, all_keys, path)
+        assert errs == [], f"full coverage must pass, got {errs}"
+        assert warns == [f"hub names: 8 of 9 slots provisional ({map_config.AUTOGEN_MARKER}): "
+                         "02_empire.txt 4, 17_ulthuan.txt 4"], warns
+        # A missing slot key fails.
+        errs, _w = vm._check_hub_loc_coverage(states, all_keys - {"HUB_NAME_STATE_INLAND_mine"}, path)
+        assert len(errs) == 1 and "'mine'" in errs[0], f"a missing slot key must fail, got {errs}"
+        # A coastal state's port slot is required.
+        errs, _w = vm._check_hub_loc_coverage(states, all_keys - {"HUB_NAME_STATE_COAST_port"}, path)
+        assert len(errs) == 1 and "'port'" in errs[0], f"a missing port key must fail, got {errs}"
+        # No provisional lines -> no warning; no path -> coverage still checked.
+        path.write_text(glr._render_hub_loc([(k, "Real", False) for k in sorted(all_keys)]),
+                        encoding="utf-8-sig")
+        assert vm._check_hub_loc_coverage(states, all_keys, path) == ([], []), "real names only: no warning"
+        assert vm._check_hub_loc_coverage(states, set(), None)[0], "coverage is checked without a path"
+
+
 def _selfcheck_hub_stack() -> None:
     """Board #3666 unified stacking contract: ``stack_on`` rows bind to their host
     by exact anchor equality, seed nothing, are indexed with the host's colour and
@@ -7014,6 +7062,9 @@ def run_check() -> int:
     _selfcheck_hub_validator()
     print("validate_map: hub-anchor check (own-state hub, port coastal, HUB_NAME loc, "
           "stale-index detection, passable-only sharing rule) self-check passed.")
+    _selfcheck_hub_loc_coverage()
+    print("hub names (#9823): every emitted slot keyed, provisional '<state> (<slot>)' "
+          "# AUTOGEN lines, missing-key failures, per-file provisional count self-check passed.")
     _selfcheck_hub_stack()
     _selfcheck_adjacencies()
     print("adjacencies: line extraction (straight/bent/seam ok; T/loop/dot/touching/ambiguous/"

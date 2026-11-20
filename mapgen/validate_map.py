@@ -312,6 +312,7 @@ def validate(
     buildings_dir: Path | None = None,
     building_groups_dir: Path | None = None,
     economics_worksheet: Path | None = None,
+    hub_loc_path: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -488,6 +489,15 @@ def validate(
             warnings.extend(cc_warnings)
 
     errors += _check_loc_coverage(states, loc_dir, extra_loc_dirs)
+    # Hub-name coverage (#9823): None under --fixture, so the goldens do not churn.
+    if hub_loc_path is not None:
+        all_loc_keys = _parse_loc_keys(loc_dir)
+        for extra in extra_loc_dirs:
+            all_loc_keys |= _parse_loc_keys(extra)
+        hl_errors, hl_warnings = _check_hub_loc_coverage(land_states, all_loc_keys, hub_loc_path)
+        errors += hl_errors
+        if warnings is not None:
+            warnings.extend(hl_warnings)
 
     # Per-state economics (#3678): the emitted fields against the shared rules; the catalog,
     # worksheet and ownership cross-checks run only when their inputs are given.
@@ -1474,6 +1484,38 @@ def _check_loc_coverage(states: list[ParsedState], loc_dir: Path,
         if st.key not in loc_keys:
             errors.append(f"{st.key}: no localization entry under {all_dirs}")
     return errors
+
+
+def _check_hub_loc_coverage(land_states: list[ParsedState], loc_keys: set[str],
+                            hub_loc_path: Path | None) -> tuple[list[str], list[str]]:
+    """Every hub slot of every land state needs ``HUB_NAME_<key>_<slot>`` (#9823):
+    a slot with no key renders its raw key in game, and neither ``error.log`` nor
+    the per-anchor check in ``_check_hub_anchors`` sees an auto-picked slot.
+    ``loc_keys`` is the union over every loc dir. The one warning counts the
+    provisional (``AUTOGEN_MARKER``) lines of ``hub_loc_path`` per state file, so
+    the naming gap stays a tracked number. Returns ``(errors, warnings)``."""
+    errors: list[str] = []
+    file_of: dict[str, str] = {}
+    for st in sorted(land_states, key=lambda s: s.key):
+        for slot in sorted(st.hubs):
+            lk = f"HUB_NAME_{st.key}_{slot}"
+            file_of[lk] = st.filename
+            if lk not in loc_keys:
+                errors.append(f"{st.key} ({st.filename}): hub slot '{slot}' has no loc key {lk}")
+    warnings: list[str] = []
+    if hub_loc_path is not None and hub_loc_path.is_file():
+        per_file: dict[str, int] = {}
+        for line in hub_loc_path.read_text(encoding="utf-8-sig").splitlines():
+            km = _LOC_KEY.match(line)
+            if km and line.rstrip().endswith(map_config.AUTOGEN_MARKER) and km.group(1) in file_of:
+                fn = file_of[km.group(1)]
+                per_file[fn] = per_file.get(fn, 0) + 1
+        if per_file:
+            per = ", ".join(f"{fn} {n}" for fn, n in sorted(per_file.items()))
+            warnings.append(
+                f"hub names: {sum(per_file.values())} of {len(file_of)} slots provisional "
+                f"({map_config.AUTOGEN_MARKER}): {per}")
+    return errors, warnings
 
 
 # ---------------------------------------------------------------------------
@@ -2603,6 +2645,8 @@ def main(argv: list[str] | None = None) -> int:
         (args.building_groups_dir or REPO_ROOT / "common" / "building_groups"),
         economics_worksheet=None if args.fixture else
         (args.economics_worksheet or TOOLS_DIR / "config" / "land_economics_worksheet.csv"),
+        hub_loc_path=None if args.fixture else
+        REPO_ROOT / "localization" / "replace" / "english" / "map" / "wh_hub_names_l_english.yml",
     )
     # Warnings are advisory (canon-city impassable collisions, #3789) — printed
     # whether the gate passes or fails, but never gating the exit code: a hold in
