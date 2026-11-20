@@ -69,6 +69,7 @@ GATE = [
     "run_fixture.py --check",
     "validate_map.py",
     "generate_flatmap_textures.py --check",
+    "generate_sea_surface_textures.py --check",
     "generate_terrain_masks.py --check",
     "generate_dynamic_masks.py --check",
     "generate_season_masks.py --check",
