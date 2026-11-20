@@ -96,7 +96,7 @@ from scipy import ndimage
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from config import map_config  # noqa: E402
-from worldgen import state_ownership  # noqa: E402
+from worldgen import raster, state_ownership  # noqa: E402
 
 Image.MAX_IMAGE_PIXELS = None
 
@@ -343,7 +343,7 @@ def load_land_and_family():
     tok_sorted, fam_sorted = tok[order], np.array(fam_of_tok, np.uint8)[order]
     if len(np.unique(tok_sorted)) != len(tok_sorted):
         raise SystemExit("a province is listed in two land states")
-    prov = np.asarray(Image.open(PROVINCES_PNG).convert("RGB"))
+    prov = raster.read_rgb_png(PROVINCES_PNG)  # alpha-aware reader (run_fixture's alpha-zero lint)
     if prov.shape[:2] != (H, W):
         raise SystemExit(f"{PROVINCES_PNG.name}: expected {W}x{H}, got {prov.shape[1]}x{prov.shape[0]}")
     fam = np.full((H, W), FAMILY_NONE, np.uint8)
