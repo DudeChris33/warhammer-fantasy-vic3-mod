@@ -3277,6 +3277,7 @@ def _selfcheck_economics() -> None:
     plus determinism. The validator-side rules are `_selfcheck_economics_validator`.
     """
     import csv
+    from fractions import Fraction
 
     from worldgen import land_economics as le
     from worldgen.statefile import render_land_state
@@ -3294,7 +3295,8 @@ def _selfcheck_economics() -> None:
     full = {"state_key": "STATE_FULL", "anchor_x": "10", "anchor_y": "20", "arable_land": "40",
             "subsistence_building": "building_subsistence_orchard",
             "arable_resources": "building_rye_farm building_vineyard", "arable_note": "n", "arable_source": "s"}
-    partial = {"state_key": "STATE_PARTIAL", "anchor_x": "11", "anchor_y": "21", "arable_land": "25"}
+    partial = {"state_key": "STATE_PARTIAL", "anchor_x": "11", "anchor_y": "21", "arable_land": "25",
+               "arable_note": "n", "arable_source": "s"}  # a value row needs its note and source (#3677)
     empty = {"state_key": "STATE_EMPTY", "anchor_x": "12", "anchor_y": "22"}
 
     with tempfile.TemporaryDirectory() as td:
@@ -3314,8 +3316,29 @@ def _selfcheck_economics() -> None:
         assert not em.has_values() and em.arable_land is None
         # optional columns absent, BOM, CRLF, blank lines and cell whitespace tolerated
         bom = tmp / "bom.csv"
-        bom.write_bytes("﻿state_key,anchor_x,anchor_y,arable_land\r\n\r\n STATE_B , 1 , 2 , 7 \r\n".encode("utf-8"))
+        bom.write_bytes("﻿state_key,anchor_x,anchor_y,arable_land,arable_note,arable_source\r\n\r\n"
+                        " STATE_B , 1 , 2 , 7 , n , s \r\n".encode("utf-8"))
         assert le.load_economics_worksheet(bom).rows["STATE_B"].arable_land == 7
+
+        # (a2) the climate-model columns (#3677): arable_class and arable_factor
+        lore_cols = ["state_key", "anchor_x", "anchor_y", "arable_land", "subsistence_building",
+                     "arable_resources", "arable_class", "arable_factor", "arable_note", "arable_source"]
+        assert le.FARMLAND_COLUMNS[-2:] == ("arable_class", "arable_factor") and set(lore_cols) == set(le.KNOWN_COLUMNS)
+        lp = tmp / "lore.csv"
+        lore = {"state_key": "STATE_LORE", "anchor_x": "1", "anchor_y": "2", "arable_class": "steppe",
+                "arable_factor": "0.67", "arable_note": "[A] dry, grazed", "arable_source": "canon: x"}
+        write(lp, [lore, {**lore, "state_key": "STATE_HI", "arable_factor": "5", "arable_class": ""},
+                   {**lore, "state_key": "STATE_LO", "arable_factor": "0.1"},
+                   {"state_key": "STATE_BARE", "anchor_x": "3", "anchor_y": "4"}], lore_cols)
+        ls = le.load_economics_worksheet(lp).rows
+        assert ls["STATE_LORE"].arable_class == "steppe" and ls["STATE_LORE"].arable_factor == Fraction(67, 100)
+        assert ls["STATE_LORE"].has_values() and ls["STATE_LORE"].arable_land is None
+        assert ls["STATE_HI"].arable_class is None and ls["STATE_HI"].arable_factor == 5 and ls["STATE_HI"].has_values()
+        assert ls["STATE_LO"].arable_factor == Fraction(1, 10)
+        assert not ls["STATE_BARE"].has_values() and ls["STATE_BARE"].arable_class is None
+        assert le.EconomicsRow("K", (0, 0), None, None, None, "", "", 1).arable_factor is None, "new fields default"
+        # a class or a factor leaves resolve_economics' three columns on the default (the model acts upstream)
+        assert le.resolve_economics(ls["STATE_LORE"], le.default_economics()) == le.default_economics()
 
         # (b) per-column fallback
         d = le.default_economics()
@@ -3352,6 +3375,17 @@ def _selfcheck_economics() -> None:
         rejects([{**base, "anchor_x": "x"}], cols, "a non-integer anchor")
         rejects([{**base, "arable_resources": "building_rye_farm,building_vineyard"}], cols,
                 "comma-joined ids")
+        noted = {**base, "arable_note": "n", "arable_source": "s"}
+        for bad_factor in ("1e0", "abc", "-1", ".5", "1.", "1/2", "0.05", "0.0999", "5.01", "6"):
+            rejects([{**noted, "arable_factor": bad_factor}], lore_cols, f"arable_factor {bad_factor}")
+        rejects([{**noted, "arable_class": "tundra"}], lore_cols, "an unknown arable_class")
+        rejects([{**noted, "arable_class": "Steppe"}], lore_cols, "a capitalised arable_class")
+        rejects([{**noted, "arable_land": "40", "arable_class": "steppe"}], lore_cols, "arable_land with arable_class")
+        rejects([{**noted, "arable_land": "40", "arable_factor": "1.5"}], lore_cols, "arable_land with arable_factor")
+        for col, val in (("arable_land", "40"), ("subsistence_building", "building_subsistence_farm"),
+                         ("arable_resources", "building_rye_farm"), ("arable_class", "steppe"), ("arable_factor", "1.5")):
+            rejects([{**base, col: val, "arable_source": "s"}], lore_cols, f"a {col} value with no note")
+            rejects([{**base, col: val, "arable_note": "n"}], lore_cols, f"a {col} value with no source")
 
         # (d) check_economics against a synthetic catalog
         cat = le.BuildingCatalog(
@@ -3443,6 +3477,34 @@ def _selfcheck_economics() -> None:
         out = le.rekey_worksheet_text(csv_text, [(row("STATE_OLD", 10, 20), "STATE_NEW")])
         assert out == "state_key,anchor_x,anchor_y\r\nSTATE_NEW,10,20\r\nSTATE_OLD_2,10,20\r\n", repr(out)
 
+        # re-anchoring by containment (#3677): only a row whose old anchor pixel is still inside its
+        # own state is proposed; an anchor that now lies in a neighbour, on water or on a
+        # placeholder is not, and a current anchor needs nothing
+        inside = {(11, 21): "STATE_NEW", (31, 41): "STATE_NEW", (51, 61): "STATE_LAND_001"}
+        cand = le.reanchor_candidates(
+            {"STATE_NEW": row("STATE_NEW", 11, 21, 3)}, ident, lambda x, y: inside.get((x, y)))
+        assert [(r.state_key, a) for r, a in cand] == [("STATE_NEW", (10, 20))], cand
+        for stale in ({"STATE_OTHER": row("STATE_OTHER", 31, 41)},      # old anchor now inside a neighbour
+                      {"STATE_OTHER": row("STATE_OTHER", 99, 99)},      # old anchor on water
+                      {"STATE_NEW": row("STATE_NEW", 10, 20)},          # anchor current
+                      {"STATE_GONE": row("STATE_GONE", 11, 21)},        # key unknown: a rekey, not a re-anchor
+                      {"STATE_LAND_001": row("STATE_LAND_001", 51, 61)}):  # placeholder
+            assert le.reanchor_candidates(stale, ident, lambda x, y: inside.get((x, y))) == [], stale
+        sheet_text = ('arable_note,anchor_y,state_key,anchor_x\r\n'
+                      '"dry, grazed, 11 herds",21,STATE_NEW,11\r\n'
+                      ',21,STATE_NEWER,11\r\n')
+        out = le.reanchor_worksheet_text(sheet_text, cand)
+        assert out == ('arable_note,anchor_y,state_key,anchor_x\r\n'
+                       '"dry, grazed, 11 herds",20,STATE_NEW,10\r\n'
+                       ',21,STATE_NEWER,11\r\n'), repr(out)
+        assert le.reanchor_worksheet_text(sheet_text, []) == sheet_text
+        try:
+            le.reanchor_worksheet_text("state_key,anchor_x,anchor_y\nSTATE_Q,1,2\n", cand)
+        except schema.SchemaError:
+            pass
+        else:
+            raise AssertionError("re-anchoring a row that is not in the text must raise")
+
         # (g) determinism
         assert le.load_economics_worksheet(p) == sheet
         assert le.check_economics("K", econ(land=5, res=["building_nope", "building_nope"]), False, cat) == \
@@ -3505,23 +3567,14 @@ def _selfcheck_economics_validator() -> None:
     errs, _ = run([st("STATE_A", sub=le.FISHING_VILLAGE, port=False)])
     assert len(errs) == 1 and "port hub" in errs[0], errs
     assert run([st("STATE_A", sub=le.FISHING_VILLAGE, port=True)])[0] == []
-    # Without the real-world-equivalents input a placeholder must carry the default economics;
-    # with it (Chris, 2026-10-12) a placeholder carries its zone's share and any valid value passes.
-    real_cfg = vm._REAL_WORLD_CONFIG
-    try:
-        vm._REAL_WORLD_CONFIG = Path("/nonexistent/real_world_equivalents.json")
-        errs, _ = run([st("STATE_LAND_001", land=40)])
-        assert any("default economics" in e for e in errs), "a placeholder off-default must error"
-        errs, _ = run([st("STATE_X", land=40, provs=((9, 9, 9),))], ph={(9, 9, 9)}, ownership=None)
-        assert any("default economics" in e for e in errs), "placeholder by province colour"
-    finally:
-        vm._REAL_WORLD_CONFIG = real_cfg
-    vm._REAL_WORLD_CONFIG = Path(__file__)  # any existing file stands in for the present input
-    try:
-        errs, _ = run([st("STATE_LAND_001", land=40)])
-        assert errs == [], errs
-    finally:
-        vm._REAL_WORLD_CONFIG = real_cfg
+    # A placeholder carries the climate model's farmland like any state (#3677): any valid value
+    # passes, by scope or by province colour, and its <10 warning stays off the list.
+    errs, warns = run([st("STATE_LAND_001", land=3, sub="building_subsistence_pasture",
+                          res=("building_livestock_ranch",))])
+    assert errs == [] and warns == [], (errs, warns)
+    errs, _ = run([st("STATE_X", land=40, provs=((9, 9, 9),))], ph={(9, 9, 9)}, ownership=None)
+    assert errs == [], errs
+    assert not hasattr(vm, "_REAL_WORLD_CONFIG"), "the placeholder-default rule and its switch are gone"
     errs, _ = run([st("STATE_A", res=())])
     assert any("missing" in e for e in errs), errs
     errs, warns = run([st("STATE_A", land=5)])
@@ -3530,7 +3583,7 @@ def _selfcheck_economics_validator() -> None:
     states = [st("STATE_A", land=40), st("STATE_B")]
     errs, warns = run(states, sheet(row("STATE_A", 10, 20, land=40), row("STATE_B", 30, 40)))
     assert errs == [], errs
-    assert warns == ["1 drawn state(s) still on default economics (no worksheet values)"], warns
+    assert warns == ["1 drawn state(s) carry no worksheet lore row (climate model only)"], warns
     errs, _ = run(states, sheet(row("STATE_A", 10, 20, land=41)))
     assert len(errs) == 1 and "disagrees with the worksheet" in errs[0], errs
     errs, _ = run(states, sheet(row("STATE_A", 10, 20, sub="building_subsistence_orchard")))
@@ -3549,6 +3602,399 @@ def _selfcheck_economics_validator() -> None:
                              '\tarable_resources = { "building_rye_farm" "building_vineyard" }\n', "t.txt")
     assert (parsed.subsistence_building, parsed.arable_land, parsed.arable_resources) == (
         "building_subsistence_orchard", 25, ["building_rye_farm", "building_vineyard"]), vars(parsed)
+
+    # the farmland stamp (#3677): what generate_land_regions.py recorded against what is on disk
+    from worldgen import climate_economics as ce
+    from worldgen import raster as _raster
+
+    with tempfile.TemporaryDirectory() as td:
+        d = Path(td)
+        ws_lf = b"state_key,anchor_x,anchor_y,arable_class,arable_note,arable_source\nSTATE_A,10,20,steppe,n,s\n"
+        ws = d / "land_economics_worksheet.csv"
+        ws.write_bytes(b"\xef\xbb\xbf" + ws_lf.replace(b"\n", b"\r\n"))    # as core.autocrlf checks it out, with a BOM
+        wind = np.array([[0, 1], [2, 255]], np.uint8)
+        grid = np.array([[1, 2]], np.uint8)
+        pal = [(i, i, i) for i in range(4)]
+        _raster.write_indexed_png(d / "climate_zones.png", wind, pal)
+        _raster.write_indexed_png(d / "biome_grid.png", grid, pal)
+        stamp = {"schema": 1, "worksheet_sha256": ce.text_sha256(ws_lf), "climate_layer_sha256": ce.array_sha256(wind),
+                 "biome_grid_sha256": ce.array_sha256(grid), "model_sha256": ce.model_sha256()}
+        sp = d / "land_economics_stamp.json"
+
+        def stamp_errs(s: dict | None = stamp) -> list[str]:
+            if s is None:
+                sp.unlink(missing_ok=True)
+            else:
+                sp.write_text(json.dumps(s), encoding="utf-8")
+            return vm._check_economics_stamp(ws, d)
+
+        assert stamp_errs() == [], "a CRLF + BOM worksheet must match the stamp of its LF text"
+        errs = stamp_errs(None)
+        assert len(errs) == 1 and "missing" in errs[0] and "generate_land_regions.py" in errs[0], errs
+        for field, what in (("worksheet_sha256", "worksheet"), ("climate_layer_sha256", "wind layer"),
+                            ("biome_grid_sha256", "biome grid"), ("model_sha256", "climate model")):
+            errs = stamp_errs({**stamp, field: "0" * 64})
+            assert len(errs) == 1 and what in errs[0] and "stale farmland" in errs[0], (field, errs)
+        # the inputs moving under an unchanged stamp
+        ws.write_bytes(ws_lf.replace(b"steppe", b"boreal_forest"))
+        assert len(stamp_errs()) == 1 and "worksheet" in stamp_errs()[0]
+        ws.write_bytes(ws_lf)
+        _raster.write_indexed_png(d / "climate_zones.png", np.array([[0, 1], [3, 255]], np.uint8), pal)
+        assert len(stamp_errs()) == 1 and "wind layer" in stamp_errs()[0]
+        _raster.write_indexed_png(d / "climate_zones.png", wind, pal)
+        _raster.write_indexed_png(d / "biome_grid.png", np.array([[1, 3]], np.uint8), pal)
+        assert len(stamp_errs()) == 1 and "biome grid" in stamp_errs()[0]
+        _raster.write_indexed_png(d / "biome_grid.png", grid, pal)
+        version = ce.MODEL_VERSION
+        try:
+            ce.MODEL_VERSION = version + 1
+            assert len(stamp_errs()) == 1 and "climate model" in stamp_errs()[0]
+        finally:
+            ce.MODEL_VERSION = version
+        assert stamp_errs() == []
+        (d / "biome_grid.png").unlink()
+        errs = stamp_errs()
+        assert len(errs) == 1 and "--biome-grid" in errs[0], errs
+        # wiring: validate() runs the stamp check only when a worksheet is given
+        golden = dict(provinces_path=EXPECTED_DIR / "provinces.png", state_regions_dir=EXPECTED_DIR / "state_regions",
+                      default_map_path=EXPECTED_DIR / "default.map", loc_dir=EXPECTED_DIR / "loc",
+                      min_province_area=4, wrap_x=map_config.WRAP_X)
+        empty = d / "empty"
+        empty.mkdir()
+        assert not any("land_economics_stamp" in e for e in vm.validate(**golden, economics_derived_dir=empty))
+        header_only = d / "header_only.csv"
+        header_only.write_text("state_key,anchor_x,anchor_y\n", encoding="utf-8")
+        errs = vm.validate(**golden, economics_worksheet=header_only, economics_derived_dir=empty)
+        assert sum("land_economics_stamp.json: missing" in e for e in errs) == 1, errs
+
+
+def _selfcheck_climate_economics() -> None:
+    """The hybrid-climate farmland model (``worldgen.climate_economics``, board #3677), in isolation.
+
+    Guards first (one class vocabulary shared with #3676's measurer, the terrain generator and the
+    wind model; densities and the world total equal the research note's tables 4.4 and 4.0; the
+    latitude edges fall on the canvas rows the plan measured). Then the class of a pixel (every
+    ``BIOME_CLASS`` row, rules R1-R5 on and off, the 60 and 45 degree edges, no tropical override of
+    ``island``; the vectorized form equals the scalar one over the whole cross product), the
+    ``[y // q, x // q]`` lookup and its three refusals, exact apportionment, local lore (a swap or a
+    factor moves only its own state), the floor, the class by farmland weight, the prototype's
+    ``keep_confirmed_mix``, subsistence, determinism, the model hash and the newline-proof input
+    hashes of the two index writers."""
+    import re as _re
+    from decimal import Decimal
+    from fractions import Fraction
+
+    import generate_climate_zones as gcz
+    import generate_terrain_masks as gtm
+    import measure_vanilla_arable as mva
+    from config import canvas_frame as _cf
+    from worldgen import climate
+    from worldgen import climate_economics as ce
+
+    C, R = ce.CLASS_IDS, ce.RULES
+    wind_names = [c[0] for c in climate.CLASSES]
+
+    # --- guards -----------------------------------------------------------------------------
+    assert ce.CLASS_IDS == mva.CLASS_IDS, "climate_economics and measure_vanilla_arable disagree on the classes"
+    assert set(ce.CLASS_DENSITY_X100) == set(C) == set(ce.CLASS_CROPS), "a table does not cover CLASS_IDS exactly"
+    assert set(ce.BIOME_CLASS) == set(gtm.BIOME_NAMES) - {"unknown"}, "BIOME_CLASS does not cover the terrain biomes"
+    assert set(ce.KOPPEN_CLASS) == set(wind_names), "KOPPEN_CLASS does not cover the wind model's zones"
+    assert {v for v in ce.BIOME_CLASS.values() if v != "frozen"} <= set(C)
+    assert {v for v in ce.KOPPEN_CLASS.values() if v != "ET"} <= set(C)
+    assert set(ce.TEMPERATE_FAMILY) <= set(ce.BIOME_CLASS) and set(ce.WIND_REFINES) <= set(C)
+    assert R == ("wind_refines_temperate", "dry_temperate_is_mediterranean", "frozen_under_ice",
+                 "polar_mountain", "desert_waste"), R
+    for cls, crops in ce.CLASS_CROPS.items():
+        assert crops and len(set(crops)) == len(crops) and "building_livestock_ranch" in crops, (cls, crops)
+    # the tables as #3677's Approach states them (step 4): a changed row is a changed ruling
+    assert ce.BIOME_CLASS == {
+        "temperate": "temperate_forest_hill", "magic_forest": "temperate_forest_hill", "hills": "temperate_forest_hill",
+        "mountain": "highland_alpine", "wasteland": "steppe", "island": "mediterranean",
+        "chaotic_waste": "arctic_boreal_coast", "jungle": "tropical_forest", "savannah": "tropical_savanna",
+        "desert": "open_desert", "swamp": "boreal_forest", "frozen": "frozen"}, ce.BIOME_CLASS
+    assert ce.KOPPEN_CLASS == {
+        "Af": "tropical_forest", "Am": "tropical_forest", "Aw": "tropical_savanna", "BWh": "open_desert",
+        "BWk": "open_desert", "BSh": "steppe", "BSk": "steppe", "Cs": "mediterranean",
+        "Cfa": "temperate_forest_hill", "Cfb": "temperate_forest_hill", "Df": "temperate_forest_hill",
+        "Dc": "boreal_forest", "EF": "arctic_boreal_coast", "ET": "ET"}, ce.KOPPEN_CLASS
+    assert ce.TEMPERATE_FAMILY == ("temperate", "hills", "magic_forest", "island")
+    assert ce.WIND_REFINES == ("temperate_forest_hill", "mediterranean", "boreal_forest")
+    b_ = "building_"
+    assert {c: [x[len(b_):] for x in v] for c, v in ce.CLASS_CROPS.items()} == {
+        "arctic_boreal_coast": ["livestock_ranch"], "open_desert": ["livestock_ranch"],
+        "boreal_forest": ["livestock_ranch", "rye_farm"], "temperate_forest_hill": ["livestock_ranch", "rye_farm"],
+        "temperate_river_plain": ["livestock_ranch", "wheat_farm", "vineyard"],
+        "steppe": ["livestock_ranch", "wheat_farm", "vineyard"],
+        "highland_alpine": ["livestock_ranch", "wheat_farm", "vineyard"],
+        "mediterranean": ["vineyard", "livestock_ranch", "wheat_farm", "cotton_plantation"],
+        "desert_river": ["livestock_ranch", "tobacco_plantation", "wheat_farm", "cotton_plantation", "opium_plantation"],
+        "tropical_savanna": ["livestock_ranch", "sugar_plantation", "cotton_plantation", "banana_plantation",
+                             "tobacco_plantation", "coffee_plantation"],
+        "tropical_forest": ["banana_plantation", "livestock_ranch", "coffee_plantation", "sugar_plantation", "rice_farm",
+                            "tobacco_plantation", "dye_plantation", "cotton_plantation", "tea_plantation"]}, ce.CLASS_CROPS
+    note_path = Path(__file__).resolve().parent.parent / "planning" / "economics" / "arable_land_engine_research.md"
+    note = note_path.read_text(encoding="utf-8")
+    m = _re.search(r"#### 4\.0 Headline.*?total arable \*\*([\d,]+)\*\*", note, _re.S)
+    assert m and int(m.group(1).replace(",", "")) == ce.WORLD_ARABLE == 53_616, "WORLD_ARABLE is not table 4.0's total"
+    table_44 = note.split("#### 4.4 By climate class: world", 1)[1].split("####", 1)[0]
+    density = {}
+    for line in table_44.splitlines():
+        cells = [c.strip() for c in line.strip().strip("|").split("|")]
+        if len(cells) == 9 and cells[0] in C:
+            density[cells[0]] = int(Decimal(cells[3]) * 100)
+    assert density == ce.CLASS_DENSITY_X100, f"CLASS_DENSITY_X100 is not table 4.4's per-1,000-px column: {density}"
+    assert ce.ARABLE_FLOOR == 2
+    lat_rows = np.abs(np.asarray(_cf.canvas_to_lonlat(0.0, np.arange(_cf.HEIGHT) + 0.5)[1], dtype=np.float64))
+    below60 = np.nonzero(lat_rows < ce.FROZEN_SPLIT_LAT)[0]
+    below45 = np.nonzero(lat_rows < ce.DRY_TEMPERATE_LAT)[0]
+    assert ce.FROZEN_SPLIT_LAT == ce.ALPINE_TUNDRA_LAT == 60.0 and ce.DRY_TEMPERATE_LAT == 45.0
+    assert (int(below60[0]), int(below60[-1]), len(below60)) == (582, 3615, 3616 - 582), "the 60 degree row moved"
+    assert (int(below45[0]), int(below45[-1]), len(below45)) == (1043, 3240, 3240 - 1043 + 1), "the 45 degree rows moved"
+
+    # --- the class of a pixel, scalar ---------------------------------------------------------
+    def h(biome: str, code: str, lat: float = 30.0):
+        return ce.hybrid_class(biome, code, lat)
+
+    for biome, want in ce.BIOME_CLASS.items():          # every row, under wind classes that fire no rule
+        if biome == "frozen":
+            assert h(biome, "Af", 59.9) == ("boreal_forest", None) and h(biome, "Af", 60.0) == ("arctic_boreal_coast", None)
+        else:
+            assert h(biome, "Af") == h(biome, "Aw") == h(biome, "Am", 70.0) == (want, None), biome
+    # a tropical wind class never overrides the biome (R6 was withdrawn): Ulthuan's island stays mediterranean
+    assert h("island", "Af") == h("island", "Am") == h("island", "Aw") == ("mediterranean", None)
+    for biome in ce.TEMPERATE_FAMILY:                    # R1 on: the wind class replaces the biome's
+        assert h(biome, "Cs") == ("mediterranean", R[0]) and h(biome, "Dc") == ("boreal_forest", R[0]), biome
+        assert h(biome, "Cfb") == h(biome, "Cfa") == h(biome, "Df") == ("temperate_forest_hill", R[0]), biome
+        for off in ("BWh", "BWk", "EF", "Af"):           # R1 off: not a refining class
+            assert h(biome, off) == (ce.BIOME_CLASS[biome], None), (biome, off)
+        assert h(biome, "ET", 59.9) == h(biome, "ET", 60.0) == (ce.BIOME_CLASS[biome], None)  # alpine / arctic: neither refines
+        # R2 and its edge: steppe wind makes temperate land mediterranean below 45 degrees only
+        assert h(biome, "BSk", 44.9) == h(biome, "BSh", 0.0) == ("mediterranean", R[1]), biome
+        assert h(biome, "BSk", 45.0) == h(biome, "BSh", 60.0) == (ce.BIOME_CLASS[biome], None), biome
+    for biome in ("mountain", "wasteland", "jungle", "savannah", "desert", "swamp", "chaotic_waste"):
+        assert h(biome, "Cs")[1] is None and h(biome, "BSk", 10.0)[1] is None, biome   # R1, R2 off outside the family
+    # R3: frozen ground under an arctic wind class is arctic at any latitude; the 60 degree edges
+    assert h("frozen", "EF", 50.0) == ("arctic_boreal_coast", R[2])
+    assert h("frozen", "ET", 59.9) == ("boreal_forest", None) and h("frozen", "ET", 60.0) == ("arctic_boreal_coast", R[2])
+    assert h("frozen", "Dc", 59.9) == ("boreal_forest", None) and h("frozen", "Dc", 60.0) == ("arctic_boreal_coast", None)
+    # R4: a mountain under an arctic wind class
+    assert h("mountain", "EF") == ("arctic_boreal_coast", R[3])
+    assert h("mountain", "ET", 59.9) == ("highland_alpine", None) and h("mountain", "ET", 60.0) == ("arctic_boreal_coast", R[3])
+    assert h("mountain", "Dc", 70.0) == ("highland_alpine", None)
+    # R5: wasteland under a desert wind class
+    assert h("wasteland", "BWh") == h("wasteland", "BWk") == ("open_desert", R[4])
+    assert h("wasteland", "BSk") == h("wasteland", "Cfb") == ("steppe", None) and h("desert", "BWh") == ("open_desert", None)
+    for biome in ("jungle", "savannah", "desert", "swamp", "chaotic_waste"):     # no rule ever touches these
+        for code in wind_names:
+            for lat in (0.0, 44.9, 59.9, 60.0, 74.0):
+                assert h(biome, code, lat)[1] is None, (biome, code, lat)
+    for bad in (("lava", "Cfb"), ("temperate", "Zz"), ("unknown", "Cfb")):
+        try:
+            h(*bad)
+        except KeyError:
+            pass
+        else:
+            raise AssertionError(f"hybrid_class accepted {bad}")
+
+    # --- vectorized == scalar over every biome x wind zone x latitude; rule ids follow RULES ---
+    names = list(gtm.BIOME_NAMES)
+    codes = dict(enumerate(wind_names))
+    lats = np.array([0.0, 44.9, 45.0, 59.9, 60.0, 74.0])
+    bi, wi, la = np.meshgrid(np.arange(1, len(names)), np.arange(len(codes)), lats, indexing="ij")
+    cls, rule = ce.classify(bi.astype(np.uint8), wi.astype(np.uint8), la, names, codes)
+    fired = set()
+    for idx in np.ndindex(bi.shape):
+        want_cls, want_rule = ce.hybrid_class(names[bi[idx]], codes[int(wi[idx])], float(la[idx]))
+        got_rule = R[rule[idx] - 1] if rule[idx] else None
+        assert (C[cls[idx]], got_rule) == (want_cls, want_rule), (names[bi[idx]], codes[int(wi[idx])], float(la[idx]))
+        fired.add(got_rule)
+    assert fired == set(R) | {None}, "the cross product did not exercise every rule"
+    assert int(ce.classify(np.zeros((1, 1), np.uint8), np.zeros((1, 1), np.uint8), 0.0, names, codes)[0][0, 0]) == -1
+    assert int(ce.classify(np.ones((1, 1), np.uint8), np.full((1, 1), 200, np.uint8), 0.0, names, codes)[0][0, 0]) == -1
+
+    # --- class_pixels: the [y // 4, x // 4] lookup, passable counts, the latitude of a row ------
+    B = {n: i for i, n in enumerate(names)}
+    Wc = {c: i for i, c in codes.items()}
+    region = np.zeros((8, 8), np.int32)
+    region[:, :4], region[:, 4:] = 1, 2
+    region[0, 7] = 0                                                   # one sea pixel
+    passable = np.ones((8, 8), bool)
+    passable[:4, 4:] = False                                           # region 2's desert cell is impassable paint
+    grid = np.array([[B["temperate"], B["desert"]], [B["jungle"], B["mountain"]]], np.uint8)
+    wind = np.full((8, 8), Wc["Cfb"], np.uint8)
+    wind[0, 7] = 255                                                   # wind sea on a sea pixel is fine
+    lat30 = np.full(8, 30.0)
+    all_px, pass_px = ce.class_pixels(region, passable, grid, names, wind, codes, lat30, 2)
+    assert all_px.shape == pass_px.shape == (3, 11) and all_px.dtype == np.int64
+    k = {c: i for i, c in enumerate(C)}
+    want = np.zeros((3, 11), np.int64)
+    want[1, k["temperate_forest_hill"]] = 16                           # cell [0, 0]: x 0-3, y 0-3
+    want[1, k["tropical_forest"]] = 16                                 # cell [1, 0]: x 0-3, y 4-7
+    want[2, k["open_desert"]] = 15                                     # cell [0, 1] minus the sea pixel
+    want[2, k["highland_alpine"]] = 16                                 # cell [1, 1]
+    assert np.array_equal(all_px, want), all_px
+    want_pass = want.copy()
+    want_pass[2, k["open_desert"]] = 0
+    assert np.array_equal(pass_px, want_pass), pass_px
+    one = np.ones((8, 8), np.int32)
+    south = np.array([-59.9] * 4 + [-60.0] * 4)                        # southern rows: the absolute latitude decides
+    a, _p = ce.class_pixels(one, passable, np.full((2, 2), B["frozen"], np.uint8), names,
+                            np.full((8, 8), Wc["Dc"], np.uint8), codes, south, 1)
+    assert a[1, k["boreal_forest"]] == 32 and a[1, k["arctic_boreal_coast"]] == 32, a
+    dry = np.array([44.9] * 4 + [45.0] * 4)
+    a, _p = ce.class_pixels(one, passable, np.full((2, 2), B["hills"], np.uint8), names,
+                            np.full((8, 8), Wc["BSk"], np.uint8), codes, dry, 1)
+    assert a[1, k["mediterranean"]] == 32 and a[1, k["temperate_forest_hill"]] == 32, a
+
+    def refuses(what: str, needle: str, **kw) -> None:
+        args = dict(region_px=region, passable=passable, biome_grid=grid, biome_names=names, wind=wind,
+                    wind_codes=codes, lat_of_row=lat30, n_regions=2)
+        args.update(kw)
+        try:
+            ce.class_pixels(**args)
+        except SystemExit as exc:
+            assert needle in str(exc), (what, str(exc))
+            return
+        raise AssertionError(f"class_pixels accepted {what}")
+
+    refuses("a grid of the wrong shape", "--biome-grid", biome_grid=np.ones((3, 2), np.uint8))
+    refuses("a layer of the wrong shape", "generate_climate_zones.py", wind=np.zeros((8, 9), np.uint8))
+    refuses("an unknown biome name", "BIOME_CLASS", biome_names=names[:-1] + ["lava"])
+    refuses("an unknown wind code", "KOPPEN_CLASS", wind_codes={**codes, 0: "Zz"})
+    refuses("the `unknown` biome on land", "BIOME_CLASS", biome_grid=np.zeros((2, 2), np.uint8))
+    sea_wind = wind.copy()
+    sea_wind[5, 2] = 255
+    refuses("a land pixel on wind sea", "regenerate generate_climate_zones.py", wind=sea_wind)
+
+    # --- apportion_exact: the sum, largest remainder, ties to the lower state number ------------
+    assert ce.apportion_exact(10, [1, 1, 1], [3, 1, 2]) == [3, 4, 3]
+    assert ce.apportion_exact(10, [1, 1, 1], [1, 2, 3]) == [4, 3, 3]
+    assert ce.apportion_exact(7, [5, 3, 2], [1, 2, 3]) == [4, 2, 1]
+    assert ce.apportion_exact(0, [1, 2], [1, 2]) == [0, 0]
+    big = [10 ** 18 + 1, 10 ** 18, 3, 0]
+    out = ce.apportion_exact(ce.WORLD_ARABLE, big, [4, 3, 2, 1])
+    assert sum(out) == ce.WORLD_ARABLE and out[0] - out[1] in (0, 1) and out[3] == 0, out
+    for bad_args in ((5, [0, 0], [1, 2]), (5, [1, -1], [1, 2]), (5, [1], [1, 2])):
+        try:
+            ce.apportion_exact(*bad_args)
+        except ValueError:
+            pass
+        else:
+            raise AssertionError(f"apportion_exact accepted {bad_args}")
+
+    # --- allocate: parity, local lore, the floor, the class by farmland weight ------------------
+    D = [ce.CLASS_DENSITY_X100[c] for c in C]
+    px = np.zeros((5, 11), np.int64)
+    px[1, k["temperate_forest_hill"]] = 1000
+    px[2, k["steppe"]] = 1000
+    px[3, k["arctic_boreal_coast"]], px[3, k["steppe"]] = 900, 100     # 90 % arctic by area
+    px[4, k["arctic_boreal_coast"]] = 1                                # a zero share
+    numbers = [0, 40, 30, 20, 10]
+    S = sum(int(px[r, c]) * D[c] for r in range(5) for c in range(11))
+
+    def value(weight) -> int:
+        return (Fraction(ce.WORLD_ARABLE) * weight / S + Fraction(1, 2)).__floor__()
+
+    base, base_cls, stats = ce.allocate(px, px, numbers, {}, {})
+    assert stats["climate_only_total"] == sum(stats["climate_only"]) == ce.WORLD_ARABLE
+    assert stats["climate_only"][4] == 0 and base[4] == ce.ARABLE_FLOOR == 2, "a zero share is floored to 2"
+    assert stats["floor_lifted_states"] == 1 and stats["floor_added"] == 2 and stats["lore_delta"] == 0
+    assert stats["final_total"] == sum(base) == ce.WORLD_ARABLE + 2 and stats["swaps"] == stats["factors"] == 0
+    assert base[0] == 0 and base_cls[0] is None
+    assert base_cls[1:] == ["temperate_forest_hill", "steppe", "steppe", "arctic_boreal_coast"], base_cls
+    # a swap replaces the mix of its own state and touches no other
+    got, got_cls, st = ce.allocate(px, px, numbers, {2: "mediterranean"}, {})
+    assert got[2] == value(1000 * ce.CLASS_DENSITY_X100["mediterranean"]) != base[2] and got_cls[2] == "mediterranean"
+    assert [got[r] for r in (1, 3, 4)] == [base[r] for r in (1, 3, 4)] and st["swaps"] == 1
+    assert st["lore_delta"] == got[2] - base[2] and st["climate_only_total"] == ce.WORLD_ARABLE
+    # a factor of 3/2 scales its own state's climate weight
+    got, _c, st = ce.allocate(px, px, numbers, {}, {1: Fraction(3, 2)})
+    assert got[1] == value(Fraction(1000 * ce.CLASS_DENSITY_X100["temperate_forest_hill"] * 3, 2)) and st["factors"] == 1
+    assert [got[r] for r in (2, 3, 4)] == [base[r] for r in (2, 3, 4)]
+    got, _c, st = ce.allocate(px, px, numbers, {3: "steppe"}, {3: Fraction("0.45")})
+    assert got[3] == value(Fraction(1000 * ce.CLASS_DENSITY_X100["steppe"]) * Fraction(45, 100)), got
+    # the floor applies after lore: a row valued below 2 is lifted to 2
+    got, _c, st = ce.allocate(px, px, numbers, {4: "steppe"}, {4: Fraction(1, 10)})
+    assert value(Fraction(457, 10)) == 1 and got[4] == 2 and st["floor_lifted_states"] == 1 and st["lore_delta"] == 1
+    # the class is where the farmland is: passable pixels x density; impassable farmland does not count,
+    # a state with no passable pixel is judged on all of them
+    only_arctic = px.copy()
+    only_arctic[3, k["steppe"]] = 0
+    assert ce.allocate(px, only_arctic, numbers, {}, {})[1][3] == "arctic_boreal_coast"
+    assert ce.allocate(px, only_arctic, numbers, {}, {})[0] == base, "the class never moves the weight"
+    none_passable = px.copy()
+    none_passable[3] = 0
+    assert ce.allocate(px, none_passable, numbers, {}, {})[1][3] == "steppe"
+    assert ce.state_class([5, 5] + [0] * 9, [0] * 11) == "boreal_forest" and ce.state_class([0] * 11, [0] * 11) == C[0]
+    # keep_confirmed_mix (the prototype's rule): a row naming the class with the most pixels keeps the mix
+    kept, kept_cls, st = ce.allocate(px, px, numbers, {3: "arctic_boreal_coast"}, {}, keep_confirmed_mix=True)
+    assert kept[3] == base[3] > 2 and st["swaps"] == 0 and kept_cls[3] == "arctic_boreal_coast"
+    kept, _c, st = ce.allocate(px, px, numbers, {3: "arctic_boreal_coast"}, {3: Fraction(3, 2)}, keep_confirmed_mix=True)
+    assert kept[3] == value(Fraction(900 * 6 + 100 * 457) * Fraction(3, 2)) and st["swaps"] == 0 and st["factors"] == 1
+    kept, _c, st = ce.allocate(px, px, numbers, {3: "steppe"}, {}, keep_confirmed_mix=True)
+    assert kept[3] == value(1000 * 457) and st["swaps"] == 1
+    try:
+        ce.allocate(px, px, numbers, {1: "tundra"}, {})
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("allocate accepted an unknown class")
+    # determinism, inputs untouched
+    before = px.copy()
+    assert ce.allocate(px, px, numbers, {2: "mediterranean"}, {1: Fraction(3, 2)})[:2] == \
+        ce.allocate(px, px, numbers, {2: "mediterranean"}, {1: Fraction(3, 2)})[:2]
+    assert np.array_equal(px, before)
+
+    # --- subsistence ------------------------------------------------------------------------
+    for cls in C:
+        want_sub = {"open_desert": ("building_subsistence_pasture", "building_subsistence_pasture"),
+                    "arctic_boreal_coast": ("building_subsistence_fishing_village", "building_subsistence_pasture"),
+                    }.get(cls, ("building_subsistence_farm", "building_subsistence_farm"))
+        assert (ce.subsistence(cls, True), ce.subsistence(cls, False)) == want_sub, cls
+    try:
+        ce.subsistence("tundra", True)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError("subsistence accepted an unknown class")
+
+    # --- model_sha256: stable, and sensitive to a constant and to MODEL_VERSION -------------------
+    h0 = ce.model_sha256()
+    assert h0 == ce.model_sha256() and len(h0) == 64
+    saved = (ce.MODEL_VERSION, ce.CLASS_DENSITY_X100, ce.CLASS_CROPS, ce.DRY_TEMPERATE_LAT)
+    try:
+        ce.MODEL_VERSION = saved[0] + 1
+        assert ce.model_sha256() != h0, "MODEL_VERSION is not in the model hash"
+        ce.MODEL_VERSION = saved[0]
+        ce.CLASS_DENSITY_X100 = {**saved[1], "steppe": saved[1]["steppe"] + 1}
+        assert ce.model_sha256() != h0, "a density is not in the model hash"
+        ce.CLASS_DENSITY_X100 = saved[1]
+        ce.CLASS_CROPS = {**saved[2], "steppe": tuple(reversed(saved[2]["steppe"]))}
+        assert ce.model_sha256() != h0, "crop order is not in the model hash"
+        ce.CLASS_CROPS = saved[2]
+        ce.DRY_TEMPERATE_LAT = 44.0
+        assert ce.model_sha256() != h0, "a latitude threshold is not in the model hash"
+    finally:
+        ce.MODEL_VERSION, ce.CLASS_DENSITY_X100, ce.CLASS_CROPS, ce.DRY_TEMPERATE_LAT = saved
+    assert ce.model_sha256() == h0
+
+    # --- input hashes: a CRLF checkout, an LF file and a BOM give one hash in both index writers ----
+    with tempfile.TemporaryDirectory() as td:
+        lf, crlf, bom = (Path(td) / n for n in ("lf.json", "crlf.json", "bom.json"))
+        text = b'{\n "a": 1,\n "b": [2, 3]\n}\n'
+        lf.write_bytes(text)
+        crlf.write_bytes(text.replace(b"\n", b"\r\n"))
+        bom.write_bytes(b"\xef\xbb\xbf" + text.replace(b"\n", b"\r\n"))
+        want_sha = hashlib.sha256(text).hexdigest()
+        for sha in (lambda p: gcz._sha(p, text=True), lambda p: gtm._input_sha(p, text=True),
+                    lambda p: ce.text_sha256(p.read_bytes())):
+            assert sha(lf) == sha(crlf) == sha(bom) == want_sha
+        assert gcz._sha(lf) == gtm._input_sha(lf) == want_sha, "an LF file hashes the same either way"
+        assert gcz._sha(crlf) == gtm._input_sha(crlf) == hashlib.sha256(crlf.read_bytes()).hexdigest() != want_sha, \
+            "binary inputs are hashed as raw bytes"
+    arr = np.arange(24, dtype=np.uint8).reshape(4, 6)
+    assert gcz.layer_sha256(arr) == gtm.grid_sha256(arr) == ce.array_sha256(arr) == ce.array_sha256(arr[:, :].copy())
+    assert ce.array_sha256(arr) != ce.array_sha256(arr.T), "the raster hash follows the row order"
 
 
 def _selfcheck_province_terrains() -> None:
@@ -7112,14 +7558,22 @@ def run_check() -> int:
           "preference) self-check passed.")
     _selfcheck_economics()
     print("land_economics: worksheet loader (full/partial/empty rows, permuted header, BOM/CRLF, "
-          "refuse unknown column/dup/negative/non-integer/lowercase key/missing identity/comma ids) "
+          "refuse unknown column/dup/negative/non-integer/lowercase key/missing identity/comma ids, "
+          "arable_class + arable_factor and their refusals, value rows need note + source) "
           "+ per-column fallback + check_economics (catalog ids, rural, fishing-village-needs-port, "
-          "<10 warning) + byte-identical emission + identity/rekey + catalog loader + determinism "
-          "self-check passed.")
+          "<10 warning) + byte-identical emission + identity/rekey + re-anchor by containment "
+          "+ catalog loader + determinism self-check passed.")
     _selfcheck_economics_validator()
-    print("validate_map economics: fishing-village-needs-port, placeholder-stays-default, missing "
+    print("validate_map economics: fishing-village-needs-port, placeholders on the climate model, missing "
           "field, <10 warning (non-blocking), worksheet disagreement/anchor/dead-row/placeholder-row "
-          "errors + block parser self-check passed.")
+          "errors + block parser + farmland stamp (CRLF worksheet matches, each hash stale, stamp "
+          "missing, skipped without a worksheet) self-check passed.")
+    _selfcheck_climate_economics()
+    print("climate_economics (#3677): class vocabulary and table 4.0/4.4 guards, canvas rows of the 60 and "
+          "45 degree edges, BIOME_CLASS rows, rules R1-R5 on/off (no tropical override of island), "
+          "vectorized == scalar, [y // 4, x // 4] lookup and refusals, exact apportionment and tie rule, "
+          "local swap/factor, floor of 2, class by passable px x density, keep_confirmed_mix, subsistence, "
+          "determinism, model hash, newline-proof input hashes self-check passed.")
     _selfcheck_province_terrains()
     print("province_terrains: generator (plains/ocean, id-sorted, deterministic) + validator "
           "(bijection, valid ids, negative cases) self-check passed.")

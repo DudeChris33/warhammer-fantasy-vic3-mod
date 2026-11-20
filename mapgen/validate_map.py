@@ -68,9 +68,6 @@ _LOC_KEY = re.compile(r"^\s*([A-Za-z0-9_.]+):\d*\s+\"")
 # Parsed representations
 # ---------------------------------------------------------------------------
 
-_REAL_WORLD_CONFIG = Path(__file__).resolve().parent / "config" / "real_world_equivalents.json"
-
-
 class ParsedState:
     def __init__(self, key: str, filename: str) -> None:
         self.key = key
@@ -313,6 +310,7 @@ def validate(
     building_groups_dir: Path | None = None,
     economics_worksheet: Path | None = None,
     hub_loc_path: Path | None = None,
+    economics_derived_dir: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
     errors: list[str] = []
@@ -518,6 +516,9 @@ def validate(
         econ_ownership = json.loads(state_ownership_path.read_text(encoding="utf-8"))["states"]
     errors += _check_state_economics(
         land_states, sea_states, econ_catalog, placeholder_colors, econ_sheet, econ_ownership, warnings)
+    # The farmland stamp (#3677): skipped when no worksheet is given (None under --fixture).
+    if economics_worksheet is not None and economics_derived_dir is not None:
+        errors += _check_economics_stamp(economics_worksheet, economics_derived_dir)
 
     # Starting ownership (#6372): None under --fixture (run_fixture self-checks it).
     if (state_history_dir is not None and state_ownership_path is not None
@@ -1399,18 +1400,20 @@ def _check_state_economics(land_states: list[ParsedState], sea_states: list[Pars
                            warnings: list[str] | None = None) -> list[str]:
     """Per-state economics as emitted (#3678). Each land state runs
     ``land_economics.check_economics`` (``coastal`` = the emitted ``port`` hub, which
-    ``_check_coastal_naval_exit`` ties to bitmap adjacency); a placeholder state (every province a
-    placeholder colour, or ``scope`` placeholder in ``state_ownership``) must carry the default
-    economics. With a ``worksheet``: every row names a drawn land state, its anchor equals the
-    state's ``naming_anchor`` (needs ``state_ownership``), and every non-empty cell equals the
-    emitted value (a stale state file after a worksheet edit fails here). Warnings
-    (``arable_land`` below the mass-migration floor, how many drawn states are still on defaults)
-    go to ``warnings``, never the errors."""
+    ``_check_coastal_naval_exit`` ties to bitmap adjacency). A placeholder state (every province a
+    placeholder colour, or ``scope`` placeholder in ``state_ownership``) carries the climate
+    model's farmland like any other state (#3677), so it has no rule of its own beyond never
+    having a worksheet row. With a ``worksheet``: every row names a drawn land state, its anchor
+    equals the state's ``naming_anchor`` (needs ``state_ownership``), and every non-empty
+    ``arable_land`` / ``subsistence_building`` / ``arable_resources`` cell equals the emitted value
+    (a stale state file after such an edit fails here; a stale ``arable_class`` / ``arable_factor``
+    cell, wind layer, biome grid or model fails ``_check_economics_stamp``). Warnings
+    (``arable_land`` below the mass-migration floor, how many drawn states carry no lore row) go to
+    ``warnings``, never the errors."""
     from worldgen import schema
 
     errors: list[str] = []
     warns: list[str] = []
-    default = land_economics.DEFAULT_ECONOMICS
 
     def is_placeholder(st: ParsedState) -> bool:
         if state_ownership is not None and state_ownership.get(st.key, {}).get("scope") == "placeholder":
@@ -1426,13 +1429,7 @@ def _check_state_economics(land_states: list[ParsedState], sea_states: list[Pars
         econ = schema.Economics(st.subsistence_building, st.arable_land, list(st.arable_resources), {})
         e, w = land_economics.check_economics(st.key, econ, st.port_declared, catalog)
         errors += [f"{st.filename}: {m}" for m in e]
-        if st.key in placeholder_keys:
-            # With the real-world equivalents (Chris, 2026-10-12) placeholders carry their zone's
-            # share; the default-economics rule only holds while that input is absent.
-            if not _REAL_WORLD_CONFIG.is_file() and (econ.subsistence_building, econ.arable_land, econ.arable_resources) != (
-                    default.subsistence_building, default.arable_land, default.arable_resources):
-                errors.append(f"{st.filename}: {st.key}: placeholder state must carry the default economics")
-        else:
+        if st.key not in placeholder_keys:
             warns += w
     if worksheet is not None:
         by_key = {st.key: st for st in land_states}
@@ -1460,9 +1457,57 @@ def _check_state_economics(land_states: list[ParsedState], sea_states: list[Pars
         n_on_default = sum(1 for k in by_key if k not in placeholder_keys
                            and not (k in worksheet.rows and worksheet.rows[k].has_values()))
         if n_on_default:
-            warns.append(f"{n_on_default} drawn state(s) still on default economics (no worksheet values)")
+            warns.append(f"{n_on_default} drawn state(s) carry no worksheet lore row (climate model only)")
     if warnings is not None:
         warnings.extend(warns)
+    return errors
+
+
+_ECONOMICS_STAMP_NAME = "land_economics_stamp.json"
+
+
+def _check_economics_stamp(worksheet_path: Path, derived_dir: Path) -> list[str]:
+    """The farmland stamp (#3677): ``generate_land_regions.py`` records what the emitted farmland
+    was computed from, and this recomputes the four hashes: the worksheet (BOM stripped,
+    ``\\r\\n`` -> ``\\n``), the decoded wind layer, the decoded biome grid and the model's constants
+    plus its hand-bumped version. A missing stamp or any difference means the state files are
+    stale against that input."""
+    import json
+
+    from worldgen import climate_economics
+    from worldgen.raster import read_indexed_png
+
+    regen = "regenerate with generate_land_regions.py, then generate_building_history.py"
+    stamp_path = derived_dir / _ECONOMICS_STAMP_NAME
+    if not stamp_path.is_file():
+        return [f"{_ECONOMICS_STAMP_NAME}: missing - the state files' farmland has no record of what it "
+                f"was computed from; {regen}"]
+    try:
+        stamp = json.loads(stamp_path.read_text(encoding="utf-8"))
+    except ValueError as exc:
+        return [f"{_ECONOMICS_STAMP_NAME}: unreadable ({exc}); {regen}"]
+    errors: list[str] = []
+    current: dict[str, tuple[str, str]] = {}
+    if worksheet_path.is_file():
+        current["worksheet_sha256"] = (climate_economics.text_sha256(worksheet_path.read_bytes()),
+                                       f"the worksheet {worksheet_path.name}")
+    else:
+        errors.append(f"{_ECONOMICS_STAMP_NAME}: {worksheet_path.name} not found")
+    for field, fname, what, writer in (
+            ("climate_layer_sha256", "climate_zones.png", "the wind layer", "generate_climate_zones.py"),
+            ("biome_grid_sha256", "biome_grid.png", "the terrain biome grid",
+             "generate_terrain_masks.py --biome-grid")):
+        path = derived_dir / fname
+        if not path.is_file():
+            errors.append(f"{_ECONOMICS_STAMP_NAME}: {fname} not found - run {writer}, then {regen}")
+            continue
+        current[field] = (climate_economics.array_sha256(read_indexed_png(path)[0]), f"{what} {fname}")
+    current["model_sha256"] = (climate_economics.model_sha256(),
+                               "the climate model (worldgen/climate_economics.py)")
+    for field, (digest, what) in current.items():
+        if stamp.get(field) != digest:
+            errors.append(f"{_ECONOMICS_STAMP_NAME}: {what} changed since the state files were emitted "
+                          f"(stale farmland) - {regen}")
     return errors
 
 
@@ -2647,6 +2692,7 @@ def main(argv: list[str] | None = None) -> int:
         (args.economics_worksheet or TOOLS_DIR / "config" / "land_economics_worksheet.csv"),
         hub_loc_path=None if args.fixture else
         REPO_ROOT / "localization" / "replace" / "english" / "map" / "wh_hub_names_l_english.yml",
+        economics_derived_dir=None if args.fixture else TOOLS_DIR / "derived",
     )
     # Warnings are advisory (canon-city impassable collisions, #3789) — printed
     # whether the gate passes or fails, but never gating the exit code: a hold in

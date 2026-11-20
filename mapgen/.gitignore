@@ -102,6 +102,11 @@ derived/*
 # composing. Regenerate, never hand-edit.
 !derived/biome_grid.png
 !derived/biome_grid_index.json
+# The farmland stamp (board #3677), written by generate_land_regions.py: SHA-256 of the
+# economics worksheet (newline-normalized), of the decoded wind layer and biome grid, and of
+# the climate model's constants. validate_map.py fails when any of them moved since the state
+# files were emitted. Regenerate, never hand-edit.
+!derived/land_economics_stamp.json
 
 # The city-dot -> province record (board #3704), emitted by generate_provinces.py when
 # impassable paint exists; validate_map._check_impassable_land reads it to prove every

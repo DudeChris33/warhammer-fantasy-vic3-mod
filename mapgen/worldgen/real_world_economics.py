@@ -1,4 +1,10 @@
-"""Per-state land economics from real-world equivalents (Chris, 2026-10-12).
+"""Per-state capped resources and resource blocks from real-world equivalents (Chris, 2026-10-12).
+
+Farmland left the stand-ins with #3677 (Chris, 2026-10-20: the stand-ins size the land, they
+never say what it grows): ``arable_land``, ``subsistence_building`` and ``arable_resources`` now
+come from ``worldgen.climate_economics``, and :func:`region_economics` no longer produces them.
+Capped resources and resource blocks stay here until #3684. The zones' farmland totals are still
+in the committed JSON (``Zone.arable`` / ``subsistence`` / ``arable_resources``), unread.
 
 Each WHFB zone (legend in ``mapgen/config/real_world_equivalents.json``) stands in
 for a coloured real-world area on ``sources/history/real-world-comparisons-r.png``.
@@ -11,10 +17,9 @@ the zone, weighted by overlapping pixels, with largest-remainder rounding so the
 integer totals are conserved exactly. Deterministic: pure function of the two
 committed inputs and the province bitmap labels (ties break on region id).
 
-A region's arable land / capped resources / resource blocks are the sum of its
-shares; its subsistence building and arable-resource list come from the zone it
-overlaps most. A region overlapping no zone is absent from the result and falls
-back to ``land_economics.DEFAULT_ECONOMICS``.
+A region's capped resources / resource blocks are the sum of its shares. A region
+overlapping no zone is absent from the result and takes those two fields from
+``land_economics.DEFAULT_ECONOMICS``.
 """
 from __future__ import annotations
 
@@ -88,15 +93,13 @@ def region_economics(model: Model, labels: np.ndarray, n_land: int, region_of: n
     for r, z in zip(*np.nonzero(counts[:, 1:])):
         px.setdefault(int(r), {})[int(z) + 1] = int(counts[r, z + 1])
 
-    fields: dict[int, dict] = {r: {"arable_land": 0, "capped_resources": {}, "res": {}} for r in px}
+    fields: dict[int, dict] = {r: {"capped_resources": {}, "res": {}} for r in px}
     unused: list[str] = []
     for z in model.zones:
         w = {r: float(d[z.index]) for r, d in px.items() if z.index in d}
         if not w:
             unused.append(z.name)
             continue
-        for r, n in apportion(z.arable, w).items():
-            fields[r]["arable_land"] += n
         for b, total in z.capped.items():
             for r, n in apportion(total, w).items():
                 fields[r]["capped_resources"][b] = fields[r]["capped_resources"].get(b, 0) + n
@@ -112,9 +115,6 @@ def region_economics(model: Model, labels: np.ndarray, n_land: int, region_of: n
     for r, f in fields.items():
         dom = zone_by_index[max(px[r], key=lambda z: (px[r][z], -z))]
         out[r] = {
-            "arable_land": max(1, f["arable_land"]),
-            "subsistence_building": dom.subsistence,
-            "arable_resources": list(dom.arable_resources),
             "capped_resources": dict(sorted(f["capped_resources"].items())),
             "resources": tuple((t, d, a, b) for (t, d), (a, b) in sorted(f["res"].items())),
             "zone": dom.name,

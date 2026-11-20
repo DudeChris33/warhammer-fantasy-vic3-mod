@@ -25,25 +25,42 @@ require the rows (an absent row is the same as an all-empty one).
   ``arable_resources`` (space-separated building ids). An **empty cell means
   that column's default** (:func:`resolve_economics`), per column, so a row can
   carry only some columns. Empty ``arable_resources`` is therefore not
-  expressible (vanilla ships none).
-* **Notes** (``NOTE_COLUMNS``): ``arable_note`` / ``arable_source``, documentation
-  only, never parsed.
+  expressible (vanilla ships none). Since #3677 the defaults are the climate
+  model's (``worldgen.climate_economics``), and two more value columns steer it:
+
+  * ``arable_class`` (one of ``climate_economics.CLASS_IDS``): the kind of land
+    the lore says the state is. It **replaces** the state's climate mix (the
+    state is valued as if all of it were typical land of that class) and sets
+    the subsistence and crop defaults.
+  * ``arable_factor`` (a plain decimal, 0.1 to 5): multiplies the state's
+    farmland. The step vocabulary the lore dossiers use is a chosen convention,
+    not a measurement: +1 = ``1.5``, +2 = ``2.25``, -1 = ``0.67``, -2 = ``0.45``.
+
+  A row touches only its own state: the world scale is fixed before any row is
+  read. An arctic row's factor cannot lift it off the floor of 2 at these state
+  sizes (the class density is 0.06 per 1,000 px). ``arable_land`` is an absolute
+  override outside the model, so it cannot be combined with either column.
+* **Notes** (``NOTE_COLUMNS``): ``arable_note`` / ``arable_source``, never parsed,
+  but **required on every row that carries a value** (#3677: a lore value
+  without its note and source cannot be reviewed).
 * **Extension point**: #3688 appends its resource columns to ``KNOWN_COLUMNS``
   and its own resolve/check rules to this module. An unknown header is a hard
   error, never silently ignored.
 
-Placeholders (out-of-scope land) never carry a row; they emit their real-world-equivalent
-zone share (``worldgen.real_world_economics``) or, where that input is absent,
-:data:`DEFAULT_ECONOMICS`; they are classified by scope, never by key shape.
+Placeholders (out-of-scope land) never carry a row; their farmland is the climate model's
+(``worldgen.climate_economics``) and their capped resources and resource blocks their
+real-world-equivalent zone share (``worldgen.real_world_economics``) or, where that input is
+absent, :data:`DEFAULT_ECONOMICS`'s; they are classified by scope, never by key shape.
 """
 from __future__ import annotations
 
 import csv
 import re
+from fractions import Fraction
 from pathlib import Path
-from typing import NamedTuple
+from typing import Callable, NamedTuple
 
-from . import schema
+from . import climate_economics, schema
 
 #: Today's placeholder economics, moved verbatim from ``generate_land_regions.py``.
 #: Values only need to parse; ``capped_resources`` stays the placeholder until #3688.
@@ -72,11 +89,16 @@ FISHING_VILLAGE = "building_subsistence_fishing_village"
 MASS_MIGRATION_TARGET_MIN_ARABLE_LAND = 10
 
 IDENTITY_COLUMNS = ("state_key", "anchor_x", "anchor_y")
-FARMLAND_COLUMNS = ("arable_land", "subsistence_building", "arable_resources")
+FARMLAND_COLUMNS = ("arable_land", "subsistence_building", "arable_resources",
+                    "arable_class", "arable_factor")
 NOTE_COLUMNS = ("arable_note", "arable_source")
 KNOWN_COLUMNS = (*IDENTITY_COLUMNS, *FARMLAND_COLUMNS, *NOTE_COLUMNS)
+#: ``arable_factor`` bounds (inclusive): the widest step the convention reaches is 2.25 / 0.45.
+ARABLE_FACTOR_MIN = Fraction(1, 10)
+ARABLE_FACTOR_MAX = Fraction(5)
 
 _KEY_RE = re.compile(r"^STATE_[A-Z0-9_]+$")
+_DECIMAL_RE = re.compile(r"^\d+(\.\d+)?$")
 
 
 class EconomicsRow(NamedTuple):
@@ -90,10 +112,13 @@ class EconomicsRow(NamedTuple):
     arable_note: str
     arable_source: str
     line: int
+    arable_class: str | None = None
+    arable_factor: Fraction | None = None
 
     def has_values(self) -> bool:
         return (self.arable_land is not None or self.subsistence_building is not None
-                or self.arable_resources is not None)
+                or self.arable_resources is not None or self.arable_class is not None
+                or self.arable_factor is not None)
 
 
 class EconomicsWorksheet(NamedTuple):
@@ -152,11 +177,38 @@ def load_economics_worksheet(path: Path) -> EconomicsWorksheet:
                         f"{name} line {line}: {key} arable_resources must be space-separated, "
                         f"got {cell['arable_resources']!r}")
                 resources = cell["arable_resources"].split()
-            rows[key] = EconomicsRow(
+            arable_class = cell.get("arable_class") or None
+            if arable_class is not None and arable_class not in climate_economics.CLASS_IDS:
+                raise schema.SchemaError(
+                    f"{name} line {line}: {key} arable_class {arable_class!r} is not one of "
+                    f"{list(climate_economics.CLASS_IDS)}")
+            arable_factor: Fraction | None = None
+            if cell.get("arable_factor"):
+                text = cell["arable_factor"]
+                if not _DECIMAL_RE.match(text):
+                    raise schema.SchemaError(
+                        f"{name} line {line}: {key} arable_factor {text!r} is not a plain decimal (like 0.67 or 1.5)")
+                arable_factor = Fraction(text)
+                if not (ARABLE_FACTOR_MIN <= arable_factor <= ARABLE_FACTOR_MAX):
+                    raise schema.SchemaError(
+                        f"{name} line {line}: {key} arable_factor {text} is outside "
+                        f"{float(ARABLE_FACTOR_MIN)}-{float(ARABLE_FACTOR_MAX):g}")
+            if arable_land is not None and (arable_class is not None or arable_factor is not None):
+                raise schema.SchemaError(
+                    f"{name} line {line}: {key} arable_land is an absolute override; it cannot be combined "
+                    f"with arable_class or arable_factor")
+            row = EconomicsRow(
                 state_key=key, anchor=anchor, arable_land=arable_land,
                 subsistence_building=cell.get("subsistence_building") or None,
                 arable_resources=resources, arable_note=cell.get("arable_note", ""),
-                arable_source=cell.get("arable_source", ""), line=line)
+                arable_source=cell.get("arable_source", ""), line=line,
+                arable_class=arable_class, arable_factor=arable_factor)
+            if row.has_values() and not (row.arable_note and row.arable_source):
+                raise schema.SchemaError(
+                    f"{name} line {line}: {key} carries a value but no "
+                    f"{'arable_note' if not row.arable_note else 'arable_source'}; every value row "
+                    f"needs both")
+            rows[key] = row
     return EconomicsWorksheet(rows=rows, columns=columns)
 
 
@@ -370,4 +422,72 @@ def rekey_worksheet_text(text: str, rekeys: list[tuple[EconomicsRow, str]]) -> s
                 f"cannot rekey {row.state_key}: expected exactly one line starting with it, found {len(hits)}")
         i = hits[0]
         lines[i] = new_key + lines[i][len(row.state_key):]
+    return "".join(lines)
+
+
+def reanchor_candidates(
+    rows: dict[str, EconomicsRow],
+    identity: dict[str, StateIdentity],
+    state_at: Callable[[int, int], str | None],
+) -> list[tuple[EconomicsRow, tuple[int, int]]]:
+    """Rows ``--rekey-economics`` may re-anchor (#3677): ``(row, the state's current anchor)``.
+
+    A row qualifies when its key is an emitted drawn state, its anchor no longer equals that
+    state's naming anchor, and its old anchor pixel **still lies inside that state**
+    (``state_at(x, y)`` returns the key of the land state at a canvas pixel, or ``None``).
+    Containment, no radius: drawn states' anchors sit closer together than any useful radius
+    (111 pairs within 40 px), so a nearby-anchor rule would reattach rows to neighbours."""
+    out: list[tuple[EconomicsRow, tuple[int, int]]] = []
+    for key, row in rows.items():
+        ident = identity.get(key)
+        if ident is None or ident.placeholder or ident.anchor is None or ident.anchor == row.anchor:
+            continue
+        if state_at(row.anchor[0], row.anchor[1]) == key:
+            out.append((row, ident.anchor))
+    return out
+
+
+def _cell_spans(line: str) -> list[tuple[int, int]]:
+    """``(start, end)`` of each CSV cell of one physical line, commas inside double quotes kept."""
+    body = line.rstrip("\r\n")
+    spans: list[tuple[int, int]] = []
+    start, quoted = 0, False
+    for i, ch in enumerate(body):
+        if ch == '"':
+            quoted = not quoted
+        elif ch == "," and not quoted:
+            spans.append((start, i))
+            start = i + 1
+    spans.append((start, len(body)))
+    return spans
+
+
+def reanchor_worksheet_text(text: str, reanchors: list[tuple[EconomicsRow, tuple[int, int]]]) -> str:
+    """Rewrite only each row's ``anchor_x`` / ``anchor_y`` cells, every other byte preserved.
+    Raises ``schema.SchemaError`` unless exactly one line carries the row's key."""
+    lines = text.splitlines(keepends=True)
+    if not lines:
+        raise schema.SchemaError("cannot re-anchor an empty worksheet")
+    header = [lines[0].lstrip("﻿")[a:b].strip() for a, b in _cell_spans(lines[0].lstrip("﻿"))]
+    try:
+        k_col, x_col, y_col = (header.index(c) for c in IDENTITY_COLUMNS)
+    except ValueError:
+        raise schema.SchemaError(f"cannot re-anchor: the header lacks one of {list(IDENTITY_COLUMNS)}") from None
+    for row, (new_x, new_y) in reanchors:
+        hits = []
+        for i, ln in enumerate(lines[1:], start=1):
+            spans = _cell_spans(ln)
+            if len(spans) > k_col and ln[spans[k_col][0]:spans[k_col][1]].strip() == row.state_key:
+                hits.append((i, spans))
+        if len(hits) != 1:
+            raise schema.SchemaError(
+                f"cannot re-anchor {row.state_key}: expected exactly one line carrying it, found {len(hits)}")
+        i, spans = hits[0]
+        if len(spans) <= max(x_col, y_col):
+            raise schema.SchemaError(f"cannot re-anchor {row.state_key}: its line has no anchor cells")
+        ln = lines[i]
+        for col, value in sorted(((x_col, new_x), (y_col, new_y)), reverse=True):  # right to left
+            a, b = spans[col]
+            ln = ln[:a] + str(int(value)) + ln[b:]
+        lines[i] = ln
     return "".join(lines)

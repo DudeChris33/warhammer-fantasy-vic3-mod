@@ -50,12 +50,23 @@ colour authority ``mapgen/derived/provinces_index.json`` and the sea canon
   (#9823): the ``hub_worksheet.json`` name for a listed hub, else the provisional
   ``"<state name> (<slot>)"`` marked ``AUTOGEN_MARKER``, so no raw key renders.
 
-Each drawn state's ``subsistence_building`` / ``arable_land`` / ``arable_resources`` come from
-``mapgen/config/land_economics_worksheet.csv`` (hand-authored; rows keyed on the canon state key
-with a verified naming anchor; an empty cell, a missing row and every placeholder take
-``worldgen.land_economics.DEFAULT_ECONOMICS``; rules in ``land_economics.check_economics``,
-errors collected and reported once, board #3678). ``--rekey-economics`` repairs stale key cells.
-A worksheet edit also forces ``generate_building_history.py`` (it reads the emitted fields).
+Every land state's ``subsistence_building`` / ``arable_land`` / ``arable_resources`` default comes
+from the hybrid climate model (board #3677, ``worldgen.climate_economics``): the committed terrain
+biome grid (``mapgen/derived/biome_grid.png``, written by ``generate_terrain_masks.py
+--biome-grid``) decides the class of each pixel and the wind layer (``climate_zones.png``)
+refines it inside temperate land; vanilla's world arable total is apportioned over all land
+states, placeholders included. A drawn state's row in
+``mapgen/config/land_economics_worksheet.csv`` (hand-authored; keyed on the canon state key with
+a verified naming anchor) then acts on its own state only: ``arable_class`` replaces the mix,
+``arable_factor`` multiplies, and a ``subsistence_building`` / ``arable_resources`` /
+``arable_land`` cell overrides that column (rules in ``land_economics.check_economics``, errors
+collected and reported once, board #3678). No state is emitted below
+``climate_economics.ARABLE_FLOOR``. Capped resources and resource blocks still come from the
+real-world stand-ins (``worldgen.real_world_economics``, until #3684). The run writes
+``mapgen/derived/land_economics_stamp.json`` (what the farmland was computed from), which
+``validate_map.py`` re-checks. ``--rekey-economics`` repairs stale key cells and re-anchors a row
+whose old anchor still lies inside its state. A worksheet edit, a new biome grid or a new wind
+layer forces this script and then ``generate_building_history.py`` (it reads the emitted fields).
 
 Run ``mapgen/render_land_regions_preview.py`` afterwards for the numbered
 review render + CSV worksheet — the persisted naming input this script reads
@@ -93,9 +104,9 @@ import numpy as np
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
-from config import map_config  # noqa: E402
-from worldgen import (land_economics, land_naming, land_state_numbering, raster,  # noqa: E402
-                      real_world_economics, schema, scope_additions, sources)
+from config import canvas_frame, map_config  # noqa: E402
+from worldgen import (climate_economics, land_economics, land_naming, land_state_numbering,  # noqa: E402
+                      raster, real_world_economics, schema, scope_additions, sources)
 from worldgen.statefile import (  # noqa: E402
     ProvinceInfo,
     pick_hubs,
@@ -159,6 +170,23 @@ ECONOMICS_WORKSHEET_PATH = TOOLS_DIR / "config" / "land_economics_worksheet.csv"
 #: raster, built offline by ``build_real_world_equivalents.py``; worldgen.real_world_economics.
 REAL_WORLD_CONFIG_PATH = TOOLS_DIR / "config" / "real_world_equivalents.json"
 REAL_WORLD_ZONES_PATH = TOOLS_DIR / "config" / "real_world_zones.png"
+#: The hybrid climate farmland reads (#3677; worldgen.climate_economics): the terrain biome grid
+#: and the wind layer, each with its index, and the file naming each raster's writer.
+BIOME_GRID_PATH = DERIVED_DIR / "biome_grid.png"
+BIOME_GRID_INDEX_PATH = DERIVED_DIR / "biome_grid_index.json"
+CLIMATE_LAYER_PATH = DERIVED_DIR / "climate_zones.png"
+CLIMATE_INDEX_PATH = DERIVED_DIR / "climate_zones_index.json"
+CLIMATE_INPUT_WRITERS = (
+    (BIOME_GRID_PATH, "generate_terrain_masks.py --biome-grid"),
+    (BIOME_GRID_INDEX_PATH, "generate_terrain_masks.py --biome-grid"),
+    (CLIMATE_LAYER_PATH, "generate_climate_zones.py"),
+    (CLIMATE_INDEX_PATH, "generate_climate_zones.py"),
+)
+#: The terrain generator's whole-state biome overrides: their state keys are checked here.
+CLIMATE_OVERRIDES_PATH = TOOLS_DIR / "config" / "climate_overrides.json"
+#: What the emitted farmland was computed from (hashes of the worksheet, the two decoded rasters
+#: and the model); validate_map fails when any of them moved since (#3677).
+ECONOMICS_STAMP_PATH = DERIVED_DIR / "land_economics_stamp.json"
 
 BOM = b"\xef\xbb\xbf"
 INDENT = "\t"
@@ -453,6 +481,34 @@ def _render_hub_loc(entries: list[tuple[str, str, bool]]) -> str:
         tail = f" {map_config.AUTOGEN_MARKER}" if provisional else ""
         lines.append(f' {loc_key}:0 "{escaped}"{tail}')
     return "\n".join(lines) + "\n"
+
+
+# ---------------------------------------------------------------------------
+# Hybrid-climate inputs (#3677)
+# ---------------------------------------------------------------------------
+
+def _read_climate_inputs():
+    """``(biome grid, biome names by id, q, wind layer, wind codes by id, wind sea value)``: the two
+    committed rasters farmland reads, decoded, with their indices' vocabularies. A missing file is
+    a ``SystemExit`` naming its writer; so is a raster its own index does not describe."""
+    for path, writer in CLIMATE_INPUT_WRITERS:
+        if not path.is_file():
+            raise SystemExit(f"{path} not found - run mapgen/{writer} first")
+    grid, _pal = raster.read_indexed_png(BIOME_GRID_PATH)
+    grid_index = json.loads(BIOME_GRID_INDEX_PATH.read_text(encoding="utf-8"))
+    if grid_index.get("grid_sha256") != climate_economics.array_sha256(grid):
+        raise SystemExit(f"{BIOME_GRID_PATH.name} is not the raster {BIOME_GRID_INDEX_PATH.name} describes - "
+                         f"run mapgen/generate_terrain_masks.py --biome-grid")
+    names = [""] * (max(int(c["id"]) for c in grid_index["classes"]) + 1)
+    for c in grid_index["classes"]:
+        names[int(c["id"])] = c["name"]
+    wind, _pal = raster.read_indexed_png(CLIMATE_LAYER_PATH)
+    wind_index = json.loads(CLIMATE_INDEX_PATH.read_text(encoding="utf-8"))
+    if wind_index.get("layer_sha256") != climate_economics.array_sha256(wind):
+        raise SystemExit(f"{CLIMATE_LAYER_PATH.name} is not the raster {CLIMATE_INDEX_PATH.name} describes "
+                         f"(or the index predates layer_sha256) - run mapgen/generate_climate_zones.py")
+    codes = {int(c["id"]): c["code"] for c in wind_index["classes"]}
+    return grid, names, int(grid_index["q"]), wind, codes, int(wind_index["sea_value"])
 
 
 # ---------------------------------------------------------------------------
@@ -781,37 +837,105 @@ def main(argv: list[str] | None = None) -> int:
         raise SystemExit(str(exc))
     naming_anchors = land_economics.load_naming_anchors(WORKSHEET_PATH)
     econ_identity: dict[str, land_economics.StateIdentity] = {}
+    key_of_region: dict[int, str] = {}
     for cell in land_regions["cells"]:
         rid = int(cell["region"])
         sn = int(state_number[rid])
-        econ_identity[derived_keys.get(sn, f"STATE_LAND_{sn:03d}")] = land_economics.StateIdentity(
+        key_of_region[rid] = derived_keys.get(sn, f"STATE_LAND_{sn:03d}")
+        econ_identity[key_of_region[rid]] = land_economics.StateIdentity(
             anchor=naming_anchors[sn][0] if sn in naming_anchors else None,
             placeholder=rid not in drawn_region_ids)
     sheet_errors, rekeys = land_economics.check_worksheet_identity(
         econ_sheet.rows, econ_identity, sea_keys)
+
+    def state_at(x: int, y: int) -> str | None:
+        """The key of the land state at a canvas pixel (``None`` off the canvas or on water)."""
+        if not (0 <= x < CANVAS_W and 0 <= y < CANVAS_H):
+            return None
+        lab_here = int(labels[y, x])
+        return key_of_region.get(int(region_of[lab_here])) if 1 <= lab_here <= n_land else None
+
     if args.rekey_economics:
-        if rekeys:
+        # a re-anchor needs the row's key to be current, a rekey its anchor: never both on one row
+        reanchors = land_economics.reanchor_candidates(econ_sheet.rows, econ_identity, state_at)
+        if rekeys or reanchors:
             text = ECONOMICS_WORKSHEET_PATH.read_bytes().decode("utf-8")
+            text = land_economics.reanchor_worksheet_text(text, reanchors)
             ECONOMICS_WORKSHEET_PATH.write_bytes(
                 land_economics.rekey_worksheet_text(text, rekeys).encode("utf-8"))
         for row, new_key in rekeys:
             log(f"rekeyed row {row.line}: {row.state_key} -> {new_key}", t0)
-        fixed = {f"row {r.line} {r.state_key}:" for r, _ in rekeys}
+        for row, (ax, ay) in reanchors:
+            log(f"re-anchored row {row.line} {row.state_key}: ({row.anchor[0]},{row.anchor[1]}) -> ({ax},{ay}) "
+                f"(the old anchor still lies inside the state)", t0)
+        fixed = ({f"row {r.line} {r.state_key}:" for r, _ in rekeys}
+                 | {f"row {r.line} {r.state_key}:" for r, _ in reanchors})
         for e in sheet_errors:
             if not any(e.startswith(f) for f in fixed):
                 log(f"NOT auto-fixable, edit by hand: {e}", t0)
-        log(f"{len(rekeys)} row(s) rekeyed in {ECONOMICS_WORKSHEET_PATH.name}; nothing emitted", t0)
+        log(f"{len(rekeys)} row(s) rekeyed and {len(reanchors)} re-anchored in "
+            f"{ECONOMICS_WORKSHEET_PATH.name}; nothing emitted", t0)
         return 0
     rw_model = real_world_economics.load(REAL_WORLD_CONFIG_PATH, REAL_WORLD_ZONES_PATH)
     rw_by_region: dict[int, dict] = {}
     if rw_model is not None:
         rw_by_region, rw_stats = real_world_economics.region_economics(
             rw_model, labels, n_land, region_of, n_regions)
-        log(f"real-world equivalents: {rw_stats['regions']} region(s) take their zone's share; "
-            f"zones with no mod land: {rw_stats['zones_without_land'] or 'none'}", t0)
+        log(f"real-world equivalents: {rw_stats['regions']} region(s) take their zone's share of capped "
+            f"resources and resource blocks; zones with no mod land: {rw_stats['zones_without_land'] or 'none'}", t0)
+
+    # --- farmland from the hybrid climate (#3677; worldgen.climate_economics) ----------
+    # The biome grid decides each pixel's class, the wind layer refines it inside temperate
+    # land; vanilla's world total is apportioned over every land state; a drawn state's
+    # worksheet row then swaps its class and/or scales it, touching that state only.
+    biome_grid, biome_names, biome_q, wind_layer, wind_codes, wind_sea = _read_climate_inputs()
+    region_px = np.zeros(labels.shape, dtype=np.int32)
+    region_px[land_mask] = region_of[labels[land_mask]]
+    impassable_label = np.zeros(n_land + 1, dtype=bool)
+    for label, info in province_info.items():
+        impassable_label[label] = info["impassable"]
+    passable_px = land_mask & ~impassable_label[np.where(land_mask, labels, 0)]
+    lat_of_row = np.asarray(canvas_frame.canvas_to_lonlat(0.0, np.arange(CANVAS_H) + 0.5)[1], dtype=np.float64)
+    if CLIMATE_OVERRIDES_PATH.is_file():
+        # generate_terrain_masks.py resolves a whole-state biome override by its anchor's region;
+        # that the region still carries the row's state key is checked here, where keys are known
+        for orow in json.loads(CLIMATE_OVERRIDES_PATH.read_text(encoding="utf-8")).get("states", []):
+            ax, ay = (int(v) for v in orow["anchor"])
+            if state_at(ax, ay) != orow["state"]:
+                raise SystemExit(
+                    f"{CLIMATE_OVERRIDES_PATH.name}: anchor [{ax}, {ay}] of {orow['state']} lies in "
+                    f"{state_at(ax, ay) or 'no land state'} - fix the row's state key or anchor, then run "
+                    f"generate_terrain_masks.py --biome-grid")
+    farm_swap: dict[int, str] = {}
+    farm_factor: dict = {}
+    for rid in sorted(drawn_region_ids):
+        erow = econ_sheet.rows.get(key_of_region[rid])
+        if erow is None:
+            continue
+        if erow.arable_class is not None:
+            farm_swap[rid] = erow.arable_class
+        if erow.arable_factor is not None:
+            farm_factor[rid] = erow.arable_factor
+    all_px, pass_px = climate_economics.class_pixels(
+        region_px, passable_px, biome_grid, biome_names, wind_layer, wind_codes, lat_of_row,
+        n_regions, wind_sea=wind_sea, q=biome_q)
+    farm_arable, farm_cls, farm_stats = climate_economics.allocate(
+        all_px, pass_px, state_number, farm_swap, farm_factor)
+    economics_stamp = {
+        "schema": 1,
+        "worksheet_sha256": climate_economics.text_sha256(ECONOMICS_WORKSHEET_PATH.read_bytes()),
+        "climate_layer_sha256": climate_economics.array_sha256(wind_layer),
+        "biome_grid_sha256": climate_economics.array_sha256(biome_grid),
+        "model_sha256": climate_economics.model_sha256(),
+    }
+    del region_px, passable_px, biome_grid, wind_layer
+    log(f"farmland: hybrid climate over {int(all_px.sum()):,} land px, {n_regions} states; climate-only total "
+        f"{farm_stats['climate_only_total']:,}", t0)
     econ_errors: list[str] = list(sheet_errors)
     econ_warnings: list[str] = []
     n_econ_sheet = n_econ_default = n_econ_placeholder = 0
+    subsistence_counts: dict[str, int] = {}
+    arable_emitted = 0
 
     # --- per-region emission -------------------------------------------------
     blocks_by_file: dict[str, list[str]] = {stem: [] for stem in STATE_FILE_STEMS}
@@ -901,12 +1025,19 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit(f"{key}: every province is impassable — a state needs passable land")
 
         row = econ_sheet.rows.get(key) if is_drawn else None
+        # Farmland, subsistence and crops from the climate model (#3677); capped resources and
+        # resource blocks from the real-world stand-ins as before (until #3684).
         rw = rw_by_region.get(region_id)
-        state_default = default_econ if rw is None else schema.Economics(
-            subsistence_building=rw["subsistence_building"], arable_land=rw["arable_land"],
-            arable_resources=list(rw["arable_resources"]),
-            capped_resources=dict(rw["capped_resources"]), resources=rw["resources"])
+        farm_class = farm_cls[region_id]
+        state_default = schema.Economics(
+            subsistence_building=climate_economics.subsistence(farm_class, coastal),
+            arable_land=farm_arable[region_id],
+            arable_resources=list(climate_economics.CLASS_CROPS[farm_class]),
+            capped_resources=dict(default_econ.capped_resources if rw is None else rw["capped_resources"]),
+            resources=default_econ.resources if rw is None else rw["resources"])
         econ = land_economics.resolve_economics(row, state_default)
+        subsistence_counts[econ.subsistence_building] = subsistence_counts.get(econ.subsistence_building, 0) + 1
+        arable_emitted += econ.arable_land
         errs, warns = land_economics.check_economics(key, econ, coastal, catalog)
         econ_errors.extend(errs)
         econ_warnings.extend(warns)
@@ -987,8 +1118,14 @@ def main(argv: list[str] | None = None) -> int:
 
     for w in econ_warnings:
         log(f"WARNING: {w}", t0)
-    log(f"economics: {n_econ_sheet} state(s) carry worksheet economics, {n_econ_default} on defaults, "
-        f"{n_econ_placeholder} placeholder(s) untouched", t0)
+    log(f"farmland (#3677): climate-only world total {farm_stats['climate_only_total']:,}; lore delta "
+        f"{farm_stats['lore_delta']:+,} from {farm_stats['swaps']} class row(s) and {farm_stats['factors']} "
+        f"factor row(s); the floor of {climate_economics.ARABLE_FLOOR} lifted {farm_stats['floor_lifted_states']} "
+        f"state(s) by {farm_stats['floor_added']:+,}; model total {farm_stats['final_total']:,}; emitted "
+        f"total {arable_emitted:,} (after any absolute arable_land cell)", t0)
+    log(f"economics: {n_econ_sheet} drawn state(s) carry worksheet values, {n_econ_default} drawn state(s) "
+        f"and {n_econ_placeholder} placeholder(s) are on the climate model alone; subsistence: "
+        + ", ".join(f"{k[len('building_subsistence_'):]} {v}" for k, v in sorted(subsistence_counts.items())), t0)
     if econ_errors:
         raise SystemExit(f"{len(econ_errors)} land economics error(s) in "
                          f"{ECONOMICS_WORKSHEET_PATH.name}:\n  " + "\n  ".join(econ_errors))
@@ -1071,6 +1208,10 @@ def main(argv: list[str] | None = None) -> int:
     LAND_STATE_IDS_PATH.write_text(json.dumps(new_state_ids_index, indent=1) + "\n", encoding="utf-8")
     log(f"wrote {LAND_STATE_IDS_PATH.relative_to(MOD_ROOT)}  "
         f"(high-water {new_state_ids_index['state_number_high_water']})", t0)
+
+    # --- write the farmland stamp (#3677): what the state files were computed from ---
+    ECONOMICS_STAMP_PATH.write_text(json.dumps(economics_stamp, indent=1) + "\n", encoding="utf-8", newline="\n")
+    log(f"wrote {ECONOMICS_STAMP_PATH.relative_to(MOD_ROOT)}", t0)
 
     log(f"done: {n_blocks} land states, {len(naval_exit_choice)} coastal naval exits, "
         f"{len(keys_by_realm)} realm region(s) + out-of-scope catch-all, {len(loc_keys)} loc entries", t0)
