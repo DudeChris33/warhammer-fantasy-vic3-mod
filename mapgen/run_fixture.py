@@ -2484,7 +2484,24 @@ def _selfcheck_impassable_land() -> None:
     _e = vm._check_coastal_naval_exit([only_bad], seas, sbmp, both)
     assert any("landlocked" in x for x in _e), f"port on an impassable-sea-only coast must fail, got {_e}"
     only_bad.port_declared, only_bad.naval_exit_id = False, None
-    assert vm._check_coastal_naval_exit([only_bad], seas, sbmp, both) == [], "no port there is correct"
+    # #10454: the engine still counts it coastal, so a passable province there needs a port
+    _e = vm._check_coastal_naval_exit([only_bad], seas, sbmp, both)
+    assert len(_e) == 1 and _e[0].startswith("STATE_ONLYBAD: the engine counts it coastal (province x46505A "
+                                             "touches an impassable sea) but it has no port"), \
+        f"a port-less state with a passable province on an impassable sea must fail, got {_e}"
+    only_bad.impassable = [PC]
+    assert vm._check_coastal_naval_exit([only_bad], seas, sbmp, both) == [], \
+        "no port there is correct once every sea-touching province is impassable"
+    only_bad.impassable = []
+    only_bad.port_declared, only_bad.naval_exit_id = True, 3001
+    assert not any("engine counts" in x for x in vm._check_coastal_naval_exit([only_bad], seas, sbmp, both)), \
+        "a state with a port is not held to the impassable-sea rule"
+    only_bad.port_declared, only_bad.naval_exit_id = False, None
+    mixed = vm.ParsedState("STATE_MIXED", "t.txt")      # B touches a passable and an impassable sea
+    mixed.provinces = [B]
+    _e = vm._check_coastal_naval_exit([mixed], seas, sbmp, both)
+    assert not any("engine counts" in x for x in _e) and any("has no port" in x for x in _e), \
+        f"a port-less state on a passable sea is reported once, by the existing rule, got {_e}"
     bad_exit = vm.ParsedState("STATE_BADEXIT", "t.txt")
     bad_exit.provinces, bad_exit.port_declared, bad_exit.naval_exit_id = [B], True, 3002
     _e = vm._check_coastal_naval_exit([bad_exit], seas, sbmp, both)

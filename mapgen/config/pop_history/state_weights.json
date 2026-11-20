@@ -1336,8 +1336,8 @@
    "canon_cities": []
   },
   "STATE_LAND_427": {
-   "area_px": 6928,
-   "arable_milli": 6793846,
+   "area_px": 7145,
+   "arable_milli": 7003697,
    "cities": 0,
    "canon_cities": []
   },
@@ -1422,12 +1422,6 @@
   "STATE_LAND_733": {
    "area_px": 298603,
    "arable_milli": 51320321,
-   "cities": 0,
-   "canon_cities": []
-  },
-  "STATE_LAND_734": {
-   "area_px": 217,
-   "arable_milli": 209851,
    "cities": 0,
    "canon_cities": []
   },
@@ -2401,7 +2395,7 @@
   },
   "STATE_THE_SOUTHERN_SENTINELS": {
    "area_px": 15949,
-   "arable_milli": 455019,
+   "arable_milli": 455020,
    "cities": 1,
    "canon_cities": []
   },

@@ -13,6 +13,10 @@ Inputs
     ``gfx/map/terrain/mask_<material>.png``   the 36 #6617 material masks (read by name; a missing
                                              one is a hard error naming ``generate_terrain_masks.py``)
     ``mapgen/derived/land_sea_mask.png``, ``lake_mask.png``   coast and lakes
+    ``map_data/provinces.png``, ``map_data/state_regions/NN_<realm>.txt``, ``mapgen/config/in_scope_additions.json``
+                                             the latitude-exempt ground (``LATITUDE_EXEMPT_REALMS``, Ulthuan): the realm's
+                                             states painted through the province bitmap inside its box. ``--check`` goes
+                                             stale when that state list or the province cut moves
     ``map_data/heightmap.png``                elevation, and slope from the elevation blurred by ``SLOPE_SMOOTH_PX``
                                              (``generate_terrain_masks.load_elevation``)
     ``mapgen/config/vegetation_objects.json`` the vanilla object schema (files, objects, meshes,
@@ -39,7 +43,18 @@ Rules
        material masks by name (``CLASS_MATERIALS``); woodland, grass and savanna weights are
        ``Fw``, ``Gr``, ``Sv``. ``family_values`` turns them, with latitude and elevation, into one
        0..1 value per family (the rule table in that function), times land fraction, a treeline
-       and a cliff factor (slope of the smoothed elevation, ``CLIFF_SLOPE``).
+       and a cliff factor (slope of the smoothed elevation, ``CLIFF_SLOPE``). Two pine rules add
+       up: the boreal rule (temperate class x boreal weight, by latitude or elevation) and the
+       taiga rule, which the terrain masks' class model cannot express (they have no taiga class,
+       only frozen ground that is snow plus the permafrost pair): ``pine_dense += TAIGA_DENSE *
+       tg * t_lat * t_low`` and ``pine_sparse += TAIGA_SPARSE * ...``, with ``tg`` the summed
+       ``permafrost_01`` + ``permafrost_03`` weight, ``t_lat = 1 - smoothstep(|lat|, TAIGA_LAT)``
+       (full to 62 N, gone by 68 N) and ``t_low = smoothstep(|lat|, TAIGA_MIN_LAT)`` (none on
+       alpine permafrost south of 40-48 N); both gates test a latitude that wanders by a seeded smooth
+       field (``TAIGA_LAT_NOISE_DEG``, ``TAIGA_NOISE_SIGMA``) so neither draws a ruled parallel. Snow, bare rock, cliffs and the treeline still stop it.
+       Ulthuan (Chris 2026-11-20, a temperate magical island) is exempt from the latitude rules:
+       no Mediterranean split and no latitude term of the boreal weight (its elevation term stays),
+       in the rules and in the tint (``LATITUDE_EXEMPT_REALMS``).
     2. A tree gain and a bush gain (``calibrate``, bisection) bring the expected counts to
        ``TARGET_TREES_PER_LAND_PX`` and ``TARGET_BUSHES_PER_LAND_PX`` of our land.
     3. Each schema file gets a Poisson count per cell from its layer's tier (``TIER``: the layers
@@ -97,6 +112,9 @@ DERIVED_DIR = TOOLS_DIR / "derived"
 LAND_PATH = DERIVED_DIR / "land_sea_mask.png"
 LAKE_PATH = DERIVED_DIR / "lake_mask.png"
 SCHEMA_PATH = TOOLS_DIR / "config" / "vegetation_objects.json"
+SCOPE_ADDITIONS_PATH = TOOLS_DIR / "config" / "in_scope_additions.json"
+STATE_REGIONS_DIR = REPO_DIR / "map_data" / "state_regions"
+PROVINCES_PATH = REPO_DIR / "map_data" / "provinces.png"
 DEFAULT_TERRAIN = REPO_DIR / "gfx" / "map" / "terrain"
 SCRATCH_DIR = REPO_DIR / "scratchpad"          # gitignored previews; never mapgen/derived
 GEN_REL = "gfx/map/map_object_data/generated"
@@ -107,7 +125,7 @@ CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE   # 8192 x 3616
 
 SEED = map_config.SEED
 SEED_TAG = 11534                                  # the board item; second word of every RNG key
-TINT_NOISE_KEY, WIND_NOISE_KEY = 900, 901
+TINT_NOISE_KEY, WIND_NOISE_KEY, TAIGA_NOISE_KEY = 900, 901, 902
 
 G = 2                                             # working grid = canvas / G (4096x1808)
 
@@ -137,6 +155,31 @@ ICE_LAT = (58.0, 68.0)             # |lat| band where icebergs start (off: (999,
 ICE_COAST_E = 50.0                 # iceberg e-fold distance from the coast, canvas px
 ICE_MIN_COAST_PX = 3.0             # no iceberg closer to land than this
 SCORE_FLOOR = 0.0                  # P = score / max(sum score, floor); 0 = plain share (the rule as specified)
+# latitude exemption (Chris 2026-11-20): Ulthuan is a magical island made by the gods to be temperate across its
+# whole extent, with no winter except in its mountains and the wasteland of Nagarythe, and it is excluded from
+# geography-based climate projections. Inside the exempt ground the latitude rules do not apply: no Mediterranean
+# split (``m`` = 0) and no latitude term of the boreal weight (``b`` keeps only its elevation term, so high
+# ground may still carry pine); the tint takes BROADLEAF, not MED. What grows is whatever the ground masks say.
+# Each entry is a realm key of ``config/in_scope_additions.json``: the land is that realm's state-region file
+# (``NN_<file_stem>.txt``) restricted to the box of the addition of the same name, which is the ring island and
+# the isles round it (the Shifting Isles); the realm's far-flung western islets lie outside the box and stay
+# ordinary. The High Elf colonies belong to other realms and are not exempt. (off: ())
+LATITUDE_EXEMPT_REALMS = ("ulthuan",)
+
+# taiga (Chris 2026-11-20): pine on the cold northern ground that is not snow or bare rock. The terrain
+# masks have no taiga class: their cold, non-ice ground is the permafrost pair (``TAIGA_MATERIALS``), painted
+# by the frozen and chaotic-waste biomes. The rule is NOT multiplied by a class probability; it rides the
+# material weight itself, times the same land, treeline and cliff factors as every family.
+TAIGA_MATERIALS = ("permafrost_01", "permafrost_03")   # the taiga key: summed weight is ``tg``
+TAIGA_LAT = (62.0, 68.0)           # taiga latitude factor = 1 - smoothstep(|lat|): full strength to 62, gone by 68 (off: (-2, -1))
+TAIGA_MIN_LAT = (40.0, 48.0)       # taiga latitude floor = smoothstep(lat_eff): no sea-level taiga on alpine permafrost far south;
+                                   # the masks keep permafrost in Naggaroth down to about 45 N, so the floor sits below it
+                                   # (mountain pine there is the boreal elevation rule's) (off: (-2, -1))
+TAIGA_LAT_NOISE_DEG = 2.5          # both taiga gates test lat_eff = |lat| + this * seeded smooth noise (unit std), so neither
+                                   # draws a ruled parallel, as the terrain generator's POLAR_NOISE_DEG (off: 0)
+TAIGA_NOISE_SIGMA = 60.0           # smoothness of that wander, working cells
+TAIGA_DENSE = 0.6                  # pine_dense gain of the taiga rule (off: 0)
+TAIGA_SPARSE = 0.3                 # pine_sparse gain of the taiga rule (off: 0; both 0 switches the rule off)
 
 # --- class model: materials of #6617 by name
 CLASSES = ("temperate", "magic", "jungle", "savanna", "dry", "frozen", "barren")
@@ -156,7 +199,8 @@ WOOD = ("woodlands_01", "woodlands_02", "woodlands_03")
 GRASS = ("grasslands_01", "grasslands_02", "grasslands_05")
 SAVANNA_MATS = ("savanna_01", "savanna_03")
 EXTRA_MASKS = ("grasslands_05", "woodlands_03")
-REQUIRED_MASKS = sorted({m for ms in CLASS_MATERIALS.values() for m in ms} | set(EXTRA_MASKS))
+REQUIRED_MASKS = sorted({m for ms in CLASS_MATERIALS.values() for m in ms} | set(EXTRA_MASKS)
+                        | set(TAIGA_MATERIALS))
 _KEEP_MASKS = frozenset(WOOD + GRASS + SAVANNA_MATS + ("marchlands_01", "marchlands_03", "grasslands_06"))
 
 # --- tree tint colours (sRGB) and the wind map
@@ -348,6 +392,8 @@ class Fields:
     Fw: np.ndarray                 # woodland weight
     Gr: np.ndarray                 # grass weight
     Sv: np.ndarray                 # savanna weight
+    Tg: np.ndarray                 # taiga key weight (permafrost pair, ``TAIGA_MATERIALS``)
+    Ul: np.ndarray                 # latitude-exempt fraction per working cell (``LATITUDE_EXEMPT_REALMS``)
     P: dict[str, np.ndarray]       # soft class probabilities
     lat: np.ndarray                # (h, 1) degrees at working row centres
     lat_rows: np.ndarray           # (canvas_h,) degrees at canvas row centres
@@ -358,6 +404,7 @@ class Fields:
     sea_cell: np.ndarray           # bool: open sea (not lake) at cell level
     land_full: np.ndarray          # bool canvas: land & ~lake, the exact land test
     sea_full: np.ndarray           # bool canvas: sea & ~lake, the exact iceberg test
+    exempt_full: np.ndarray | None = None   # bool canvas: latitude-exempt land (None: none)
     shape: tuple[int, int] = field(init=False)
 
     def __post_init__(self) -> None:
@@ -381,8 +428,8 @@ class _Masks:
 
 
 def fields_from_arrays(land_raw: np.ndarray, lake: np.ndarray, elev_full: np.ndarray, masks,
-                       lat_rows: np.ndarray, grid: int = G) -> Fields:
-    """Pure function of canvas-resolution land, lake and elevation, working-grid masks and latitude."""
+                       lat_rows: np.ndarray, grid: int = G, exempt: np.ndarray | None = None) -> Fields:
+    """Pure function of canvas-resolution land, lake, elevation and latitude-exempt masks and working-grid masks."""
     ch, cw = land_raw.shape
     h, w = ch // grid, cw // grid
     get = masks if isinstance(masks, _Masks) else _Masks(masks if callable(masks) else masks.__getitem__)
@@ -394,6 +441,9 @@ def fields_from_arrays(land_raw: np.ndarray, lake: np.ndarray, elev_full: np.nda
     Fw = np.clip(sum(get(n) for n in WOOD), 0.0, 1.0).astype(np.float32)
     Gr = np.clip(sum(get(n) for n in GRASS), 0.0, 1.0).astype(np.float32)
     Sv = np.clip(sum(get(n) for n in SAVANNA_MATS), 0.0, 1.0).astype(np.float32)
+    Tg = np.clip(sum(get(n) for n in TAIGA_MATERIALS), 0.0, 1.0).astype(np.float32)
+    Ul = (block_mean(exempt.astype(np.float32), grid) if exempt is not None and exempt.any()
+          else np.zeros((h, w), np.float32))
 
     scores: dict[str, np.ndarray] = {}
     for c in CLASSES:
@@ -421,8 +471,9 @@ def fields_from_arrays(land_raw: np.ndarray, lake: np.ndarray, elev_full: np.nda
     lbin = L >= 0.5
     land_px = (ndimage.distance_transform_edt(lbin) * grid).astype(np.float32)
     coast_px = (ndimage.distance_transform_edt(~lbin) * grid).astype(np.float32)
-    return Fields(cw, ch, grid, L, Fw, Gr, Sv, P, lat, np.asarray(lat_rows, np.float32), elev, slope,
-                  coast_px, land_px, sea_cell, land_full, sea_full)
+    return Fields(cw, ch, grid, L, Fw, Gr, Sv, Tg, Ul, P, lat, np.asarray(lat_rows, np.float32), elev, slope,
+                  coast_px, land_px, sea_cell, land_full, sea_full,
+                  exempt_full=(exempt & land_full) if exempt is not None else None)
 
 
 def read_mask_channel(terrain_dir: Path, name: str, grid: int = G) -> np.ndarray:
@@ -436,6 +487,42 @@ def read_mask_channel(terrain_dir: Path, name: str, grid: int = G) -> np.ndarray
     if a.ndim != 2 or a.dtype != np.uint8 or a.shape != (CANVAS_H, CANVAS_W):
         raise SystemExit(f"{p}: expected an 8-bit {CANVAS_W}x{CANVAS_H} greyscale PNG, got {a.dtype} {a.shape}")
     return (block_mean(a.astype(np.float32), grid) / 255.0).astype(np.float32)
+
+
+def latitude_exempt_mask(realms: tuple[str, ...] | None = None) -> np.ndarray:
+    """Canvas bool mask of the latitude-exempt ground (``LATITUDE_EXEMPT_REALMS``), committed data only.
+
+    For each realm key: the provinces of the land states in its ``NN_<file_stem>.txt`` state-region file,
+    painted through ``map_data/provinces.png`` (alpha-aware reader), kept inside the box of the
+    ``in_scope_additions.json`` addition of the same name. A realm with no state file or no box row is an error.
+    """
+    from worldgen import scope_additions, state_ownership
+    realms = LATITUDE_EXEMPT_REALMS if realms is None else realms
+    mask = np.zeros((CANVAS_H, CANVAS_W), bool)
+    if not realms:
+        return mask
+    cfg = scope_additions.load(SCOPE_ADDITIONS_PATH, (CANVAS_W, CANVAS_H))
+    prov = None
+    for key in realms:
+        if key not in cfg.realms:
+            raise SystemExit(f"latitude-exempt realm {key!r} is not declared in {SCOPE_ADDITIONS_PATH.name}")
+        stem = cfg.realms[key].file_stem
+        files = sorted(STATE_REGIONS_DIR.glob(f"[0-9][0-9]_{stem}.txt"))
+        boxes = [a.box for a in cfg.additions if a.name == key and a.box is not None]
+        if len(files) != 1 or len(boxes) != 1:
+            raise SystemExit(f"latitude-exempt realm {key!r}: need exactly one state file *_{stem}.txt "
+                             f"({len(files)} found) and one box addition named {key!r} ({len(boxes)} found)")
+        tokens = sorted({int(t[1:], 16) for st in state_ownership.parse_state_text(files[0].read_text(encoding="utf-8-sig"))
+                         for t in st.provinces})
+        if prov is None:
+            prov = raster.read_rgb_png(PROVINCES_PATH)
+            if prov.shape[:2] != (CANVAS_H, CANVAS_W):
+                raise SystemExit(f"{PROVINCES_PATH.name}: expected {CANVAS_W}x{CANVAS_H}, got {prov.shape[1]}x{prov.shape[0]}")
+        x0, y0, x1, y1 = boxes[0]
+        blk = prov[y0:y1, x0:x1].astype(np.uint32)
+        packed = (blk[..., 0] << 16) | (blk[..., 1] << 8) | blk[..., 2]
+        mask[y0:y1, x0:x1] |= np.isin(packed, np.array(tokens, np.uint32))
+    return mask
 
 
 def load_fields(terrain_dir: Path = DEFAULT_TERRAIN) -> Fields:
@@ -454,9 +541,11 @@ def load_fields(terrain_dir: Path = DEFAULT_TERRAIN) -> Fields:
                              "python mapgen/generate_terrain_masks.py")
     elev = gtm.load_elevation()
     lat_rows = reproject.canvas_lonlat(np.arange(CANVAS_H), CANVAS_W, CANVAS_H)[1][:, 0]
-    log(f"inputs read: land {100 * (land_raw & ~lake).mean():.2f}%", t0)
+    exempt = latitude_exempt_mask() & land_raw & ~lake
+    log(f"inputs read: land {100 * (land_raw & ~lake).mean():.2f}%; latitude-exempt land "
+        f"{int(exempt.sum()):,} px ({', '.join(LATITUDE_EXEMPT_REALMS) or 'none'})", t0)
     return fields_from_arrays(land_raw, lake, elev, _Masks(lambda n: read_mask_channel(terrain_dir, n)),
-                              lat_rows)
+                              lat_rows, exempt=exempt)
 
 
 # ---------------------------------------------------------------------------
@@ -464,10 +553,14 @@ def load_fields(terrain_dir: Path = DEFAULT_TERRAIN) -> Fields:
 # ---------------------------------------------------------------------------
 
 def climate_blend(f: Fields) -> tuple[np.ndarray, np.ndarray]:
-    """``b``: boreal weight (latitude or elevation); ``m``: Mediterranean weight (southern Old World)."""
+    """``b``: boreal weight (latitude or elevation); ``m``: Mediterranean weight (southern Old World).
+
+    On latitude-exempt ground (``f.Ul`` = 1, ``LATITUDE_EXEMPT_REALMS``) the latitude term of ``b`` and ``m`` are 0.
+    """
     alat = np.abs(f.lat)
-    b = np.maximum(smoothstep(alat, *BOREAL_LAT), smoothstep(f.elev, *BOREAL_ELEV_M))
-    m = np.float32(1.0) - smoothstep(alat, *MED_LAT)
+    keep = np.float32(1.0) - f.Ul
+    b = np.maximum(smoothstep(alat, *BOREAL_LAT) * keep, smoothstep(f.elev, *BOREAL_ELEV_M))
+    m = (np.float32(1.0) - smoothstep(alat, *MED_LAT)) * keep
     return b.astype(np.float32), m.astype(np.float32)
 
 
@@ -489,25 +582,60 @@ RULE_FAMILIES = ("oak_dense", "oak", "pine_dense", "pine_sparse", "cypress_medit
                  "palm_dense", "savanna_tree", "baobab", "bush_dry_02", "bush_02", "bush_01")
 
 
+def taiga_factor(f: Fields) -> np.ndarray:
+    """``tg * t_lat * t_low``: taiga-key weight times the latitude window (no class probability).
+
+    Both gates test ``lat_eff = |lat| + TAIGA_LAT_NOISE_DEG * noise`` (seeded, smooth, key 902)."""
+    alat = np.abs(f.lat)
+    if TAIGA_LAT_NOISE_DEG:
+        alat = alat + np.float32(TAIGA_LAT_NOISE_DEG) * unit_noise(TAIGA_NOISE_KEY, f.shape, TAIGA_NOISE_SIGMA)
+    t_lat = np.float32(1.0) - smoothstep(alat, *TAIGA_LAT)
+    t_low = smoothstep(alat, *TAIGA_MIN_LAT)
+    return (f.Tg * t_lat * t_low).astype(np.float32)
+
+
+def base_factor(f: Fields) -> np.ndarray:
+    """``L * A * C``: land fraction, treeline, cliff; the factor every family is multiplied by."""
+    A = treeline_factor(f)
+    C = np.float32(1.0) - smoothstep(f.slope, *CLIFF_SLOPE)
+    return (f.L * A * C).astype(np.float32)
+
+
+def pine_parts(f: Fields) -> dict[str, np.ndarray]:
+    """The pine families split by rule, each already times ``L * A * C`` (their sum is ``family_values``)."""
+    b, _m = climate_blend(f)
+    base = base_factor(f)
+    Pt = f.P["temperate"]
+    tgf = taiga_factor(f)
+    return {
+        "boreal_dense": np.clip(Pt * b * f.Fw * base, 0.0, None).astype(np.float32),
+        "boreal_sparse": np.clip(Pt * b * 0.25 * f.Gr * base, 0.0, None).astype(np.float32),
+        "taiga_dense": np.clip(TAIGA_DENSE * tgf * base, 0.0, None).astype(np.float32),
+        "taiga_sparse": np.clip(TAIGA_SPARSE * tgf * base, 0.0, None).astype(np.float32),
+    }
+
+
 def family_values(f: Fields) -> dict[str, np.ndarray]:
     """One 0..1 value per family on the working grid: the rule table times ``L * A * C``.
 
-    Frozen and barren ground carries no trees. ``b`` is the boreal weight, ``m`` the
-    Mediterranean one, ``A`` the treeline factor, ``C`` the cliff factor.
+    Frozen and barren ground carries no trees, except the taiga rule below. ``b`` is the
+    boreal weight, ``m`` the Mediterranean one, ``A`` the treeline factor, ``C`` the cliff
+    factor. Taiga: ``pine_dense += TAIGA_DENSE * tg * t_lat * t_low`` and ``pine_sparse +=
+    TAIGA_SPARSE * ...`` (``tg`` the permafrost weight, ``t_lat`` and ``t_low`` the latitude
+    window, :func:`taiga_factor`), times the same ``L * A * C``.
     """
     b, m = climate_blend(f)
-    A = treeline_factor(f)
-    C = np.float32(1.0) - smoothstep(f.slope, *CLIFF_SLOPE)
-    base = (f.L * A * C).astype(np.float32)
+    base = base_factor(f)
     Pt, Pm, Pj, Ps, Pd = (f.P[k] for k in ("temperate", "magic", "jungle", "savanna", "dry"))
     Fw, Gr, Sv = f.Fw, f.Gr, f.Sv
     tb = Pt * (1 - b) * (1 - m)
+    tgf = taiga_factor(f)
     palm_coast = np.exp(-f.land_px / np.float32(PALM_COAST_PX)).astype(np.float32)
     raw = {
         "oak_dense": tb * 0.6 * Fw + Pm * 0.7 * Fw,
         "oak": tb * (0.4 * Fw + 0.15 * Gr),
-        "pine_dense": Pt * b * Fw,
-        "pine_sparse": Pt * b * 0.25 * Gr,
+        "pine_dense": Pt * b * Fw + TAIGA_DENSE * tgf,
+        "pine_sparse": Pt * b * 0.25 * Gr + TAIGA_SPARSE * tgf,
         "cypress_mediterranean_dense": Pt * (1 - b) * m * 0.7 * Fw,
         "cypress_mediterranean_sparse": Pt * (1 - b) * m * 0.15 * Gr,
         "cypress_dense": Pm * 0.5 * Fw,
@@ -942,6 +1070,45 @@ def render_texture_previews(res: Result, out: Path) -> None:
         Image.fromarray(im).save(out / name)
 
 
+def pine_rule_split(res: Result) -> dict:
+    """Expected pine instances per rule (boreal vs taiga), splitting each cell's expected count by the
+    rule's share of that cell's value; ``ours`` is the placed count of the family."""
+    f = res.fields
+    parts = pine_parts(f)
+    out: dict[str, dict[str, float]] = {}
+    for fam in ("pine_dense", "pine_sparse"):
+        kind = fam.split("_")[1]
+        bo, ta = parts[f"boreal_{kind}"], parts[f"taiga_{kind}"]
+        tot = np.maximum(bo + ta, np.float32(1e-12))
+        e_bo = e_ta = 0.0
+        for r in res.schema:
+            if r["family"] != fam:
+                continue
+            lam, _v = file_lambda(r, res.values, res.gains, f)
+            if lam is None:
+                continue
+            e_bo += float((lam * (bo / tot)).sum(dtype=np.float64))
+            e_ta += float((lam * (ta / tot)).sum(dtype=np.float64))
+        ours = sum(int(len(res.arrays[o["name"]])) for r in res.schema if r["family"] == fam for o in r["objects"])
+        out[fam] = {"ours": ours, "boreal_rule_expected": round(e_bo), "taiga_rule_expected": round(e_ta)}
+    return out
+
+
+def exempt_family_counts(res: Result) -> dict:
+    """Placed instances inside the latitude-exempt ground, per family."""
+    f = res.fields
+    if f.exempt_full is None or not f.exempt_full.any():
+        return {"canvas_px": 0, "instances_by_family": {}}
+    counts: dict[str, int] = {}
+    for r in res.schema:
+        for o in r["objects"]:
+            a = res.arrays[o["name"]]
+            if len(a):
+                ix, iy = record_pixels(a[:, 0], a[:, 2], f.canvas_h, f.canvas_w)
+                counts[r["family"]] = counts.get(r["family"], 0) + int(f.exempt_full[iy, ix].sum())
+    return {"canvas_px": int(f.exempt_full.sum()), "instances_by_family": dict(sorted(counts.items()))}
+
+
 def report_dict(res: Result) -> dict:
     f = res.fields
     fams = sorted({r["family"] for r in res.schema})
@@ -977,6 +1144,14 @@ def report_dict(res: Result) -> dict:
                                       "above_40": round(float((f.slope[landc] > 40).mean()), 4),
                                       "smooth_px": SLOPE_SMOOTH_PX},
         "land_cells_carrying_trees": round(float((sum(res.values.values())[landc] > 0.01).mean()), 4),
+        "pine_by_rule": pine_rule_split(res),
+        "latitude_exempt": {"realms": list(LATITUDE_EXEMPT_REALMS), **exempt_family_counts(res)},
+        "taiga": {"materials": list(TAIGA_MATERIALS), "lat": list(TAIGA_LAT), "min_lat": list(TAIGA_MIN_LAT),
+                  "dense": TAIGA_DENSE, "sparse": TAIGA_SPARSE},
+        "land_north_of_52N": {
+            "cells": int((landc & (f.lat > 52.0)).sum()),
+            "carrying_trees_share": round(float((sum(res.values.values())[landc & (f.lat > 52.0)] > 0.01).mean()), 4)
+            if (landc & (f.lat > 52.0)).any() else 0.0},
         "instances_on_sea_or_lake": count_misplaced(res),
     }
 
@@ -1010,7 +1185,20 @@ def synthetic_schema() -> list[dict]:
     return rows
 
 
-def synthetic_fields(canvas_w: int = 1024, canvas_h: int = 452) -> Fields:
+def TAIGA_PATCH(alat: np.ndarray, w: int, min_lat: float = 56.0) -> np.ndarray:
+    """Working-grid cells of the synthetic world's permafrost patch (|lat| >= ``min_lat``, columns 140-260)."""
+    cols = np.arange(w)[None, :]
+    return (alat >= min_lat) & (cols >= 140) & (cols < 260)
+
+
+def exempt_canvas_patch(shape: tuple[int, int], land: np.ndarray) -> np.ndarray:
+    """Canvas mask of the synthetic latitude-exempt patch: Mediterranean latitudes (about 34-43 N) on the
+    northern island, where the unexempt model grows cypress."""
+    yy, xx = np.mgrid[0:shape[0], 0:shape[1]]
+    return land & (xx >= 350) & (xx < 440) & (yy >= 115) & (yy < 145)
+
+
+def synthetic_fields(canvas_w: int = 1024, canvas_h: int = 452, exempt: bool = True) -> Fields:
     from worldgen import reproject
     h, w = canvas_h // G, canvas_w // G
     yy, xx = np.mgrid[0:canvas_h, 0:canvas_w]
@@ -1040,9 +1228,17 @@ def synthetic_fields(canvas_w: int = 1024, canvas_h: int = 452) -> Fields:
     m["woodlands_02"][temp & (np.arange(w)[None, :] > w * 0.6)] = 0.4
     m["desert_01"][(alat > 18) & (alat < 30) & (np.arange(w)[None, :] > w * 0.7)] = 0.7
     m["cliff_granite_01"][block_mean(elev, G) > 1200] = 0.5
+    # a permafrost patch at high latitude with no temperate ground under it: only the taiga rule can grow pine there
+    pm = TAIGA_PATCH(alat, w)
+    for n in ("woodlands_01", "grasslands_01", "marchlands_01", "woodlands_02"):
+        m[n][pm] = 0.0
+    m["permafrost_01"][pm] = 0.5
+    m["permafrost_03"][pm] = 0.1
+    m["snow"][pm] = 0.2
     for n in m:
         m[n] = np.clip(m[n], 0, 1)
-    return fields_from_arrays(land, lake, elev, lambda n: m[n], lat_rows)
+    ex = exempt_canvas_patch(land.shape, land & ~lake) if exempt else None
+    return fields_from_arrays(land, lake, elev, lambda n: m[n], lat_rows, exempt=ex)
 
 
 def selftest() -> int:
@@ -1111,6 +1307,48 @@ def selftest() -> int:
                 assert np.abs(a[:, 4] ** 2 + a[:, 6] ** 2 - 1).max() < 1e-5, "quaternion not unit"
                 assert a[:, 0].min() >= 0 and a[:, 0].max() < f.canvas_w and a[:, 2].min() > 0 and a[:, 2].max() <= f.canvas_h
                 assert np.all(a[:, 7] == a[:, 8]) and np.all(a[:, 8] == a[:, 9])
+        # latitude exemption: the exempt patch grows oak and no Mediterranean cypress; without the exemption it does
+        epatch = block_mean(exempt_canvas_patch(f.land_full.shape, f.land_full).astype(np.float32), G) > 0.99
+        assert int(epatch.sum()) >= 30, int(epatch.sum())
+        mm = climate_blend(f)[1]
+        assert float(mm[epatch].max()) == 0.0, "exempt patch still has a Mediterranean weight"
+        for fam in ("cypress_mediterranean_dense", "cypress_mediterranean_sparse"):
+            assert r1.values[fam][epatch].sum() == 0, f"exempt patch has {fam}"
+        assert r1.values["oak_dense"][epatch].sum() > 0 and r1.values["oak"][epatch].sum() > 0, "exempt patch has no oak"
+        r_ne = generate(synthetic_fields(exempt=False), schema)
+        assert (r_ne.values["cypress_mediterranean_dense"][epatch].sum() > 0
+                and r_ne.values["cypress_mediterranean_sparse"][epatch].sum() > 0), "unexempt patch has no cypress"
+        assert r_ne.values["oak_dense"][epatch].sum() < r1.values["oak_dense"][epatch].sum(),             "the exemption did not raise the patch's oak"
+        assert float(climate_blend(f)[0][epatch].max()) < 0.25, "exempt patch (low ground) still has a boreal weight"
+        # taiga: the permafrost patch receives pine, and none with the rule switched off
+        patch = TAIGA_PATCH(np.abs(f.lat) * np.ones((1, f.shape[1])), f.shape[1], 57.0) & (f.L > 0.99)  # inside the painted patch, clear of its edge row
+        assert int(patch.sum()) >= 50, int(patch.sum())
+        pine_on = r1.values["pine_dense"][patch].sum() + r1.values["pine_sparse"][patch].sum()
+        assert pine_on > 0, "taiga: no pine value on the permafrost patch"
+
+        def pine_in_patch(res: Result) -> int:
+            n = 0
+            for rr in res.schema:
+                if rr["family"] in ("pine_dense", "pine_sparse"):
+                    for o in rr["objects"]:
+                        a = res.arrays[o["name"]]
+                        if len(a):
+                            ix, iy = record_pixels(a[:, 0], a[:, 2], f.canvas_h, f.canvas_w)
+                            n += int(patch[iy // f.grid, ix // f.grid].sum())
+            return n
+
+        n_on = pine_in_patch(r1)
+        assert n_on > 0, "taiga: no pine instance on the permafrost patch"
+        sv = TAIGA_DENSE, TAIGA_SPARSE
+        try:
+            globals()["TAIGA_DENSE"] = globals()["TAIGA_SPARSE"] = 0.0
+            r0 = generate(synthetic_fields(), schema)
+            assert r0.values["pine_dense"][patch].sum() == 0 and r0.values["pine_sparse"][patch].sum() == 0,                 "taiga off: the patch still has pine value"
+            assert pine_in_patch(r0) == 0, "taiga off: the patch still receives pine"
+        finally:
+            globals()["TAIGA_DENSE"], globals()["TAIGA_SPARSE"] = sv
+        split = pine_rule_split(r1)
+        assert split["pine_dense"]["taiga_rule_expected"] > 0 and split["pine_sparse"]["taiga_rule_expected"] > 0
         # counts hit the calibrated target
         cell = f.grid * f.grid
         land_px = int(f.land_full.sum())
@@ -1139,7 +1377,7 @@ def selftest() -> int:
         with Image.open(Path(td) / "prev" / "vegetation_families.png") as im:
             assert im.size == (PREVIEW_W, PREVIEW_H)
         assert json.loads((Path(td) / "prev" / "vegetation_report.json").read_text())["instances_on_sea_or_lake"] == 0
-    log(f"selftest ok ({n_total:,} synthetic instances, {ice} icebergs)", t0)
+    log(f"selftest ok ({n_total:,} synthetic instances, {ice} icebergs, {n_on} pine on the taiga patch)", t0)
     return 0
 
 

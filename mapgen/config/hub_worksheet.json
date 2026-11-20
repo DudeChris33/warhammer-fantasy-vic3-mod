@@ -1672,7 +1672,7 @@
   {"state": "Culchan Plains", "hub": "wood", "name": "Culchan Rubber Grove", "anchor": [2704, 2880], "source": "invented"},
   {"state": "The Southern Sentinels", "hub": "city", "name": "The Sentinel of Time", "anchor": [2641, 2928], "source": "WFRP4e: The Sentinel of Time (Lustria endpaper map, C7; lustria_2.jpg)"},
   {"state": "The Southern Sentinels", "hub": "farm", "name": "Sentinel Floodplots", "anchor": [2548, 2845], "source": "invented"},
-  {"state": "The Southern Sentinels", "hub": "mine", "name": "Sentinel Stone Delve", "anchor": [2663, 2999], "source": "invented"},
+  {"state": "The Southern Sentinels", "hub": "mine", "name": "Sentinel Stone Delve", "anchor": [2651, 2963], "source": "invented"},
   {"state": "The Southern Sentinels", "hub": "wood", "name": "Sentinel Grove", "anchor": [2547, 2898], "source": "invented"},
   {"state": "Kaiax", "hub": "city", "name": "Kalax", "anchor": [2540, 3054], "source": "WFRP4e: Kalax (Lustria endpaper map, C7; lustria_2.jpg)"},
   {"state": "Kaiax", "hub": "port", "name": "Kalax Wharf", "anchor": [2648, 3088], "source": "invented"},
