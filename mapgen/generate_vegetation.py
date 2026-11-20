@@ -50,7 +50,8 @@ Rules
        tg * t_lat * t_low`` and ``pine_sparse += TAIGA_SPARSE * ...``, with ``tg`` the summed
        ``permafrost_01`` + ``permafrost_03`` weight, ``t_lat = 1 - smoothstep(|lat|, TAIGA_LAT)``
        (full to 62 N, gone by 68 N) and ``t_low = smoothstep(|lat|, TAIGA_MIN_LAT)`` (none on
-       alpine permafrost south of 46-52 N). Snow, bare rock, cliffs and the treeline still stop it.
+       alpine permafrost south of 40-48 N); both gates test a latitude that wanders by a seeded smooth
+       field (``TAIGA_LAT_NOISE_DEG``, ``TAIGA_NOISE_SIGMA``) so neither draws a ruled parallel. Snow, bare rock, cliffs and the treeline still stop it.
        Ulthuan (Chris 2026-11-20, a temperate magical island) is exempt from the latitude rules:
        no Mediterranean split and no latitude term of the boreal weight (its elevation term stays),
        in the rules and in the tint (``LATITUDE_EXEMPT_REALMS``).
@@ -124,7 +125,7 @@ CANVAS_W, CANVAS_H = map_config.PROVINCES_SIZE   # 8192 x 3616
 
 SEED = map_config.SEED
 SEED_TAG = 11534                                  # the board item; second word of every RNG key
-TINT_NOISE_KEY, WIND_NOISE_KEY = 900, 901
+TINT_NOISE_KEY, WIND_NOISE_KEY, TAIGA_NOISE_KEY = 900, 901, 902
 
 G = 2                                             # working grid = canvas / G (4096x1808)
 
@@ -171,8 +172,12 @@ LATITUDE_EXEMPT_REALMS = ("ulthuan",)
 # material weight itself, times the same land, treeline and cliff factors as every family.
 TAIGA_MATERIALS = ("permafrost_01", "permafrost_03")   # the taiga key: summed weight is ``tg``
 TAIGA_LAT = (62.0, 68.0)           # taiga latitude factor = 1 - smoothstep(|lat|): full strength to 62, gone by 68 (off: (-2, -1))
-TAIGA_MIN_LAT = (46.0, 52.0)       # taiga latitude floor = smoothstep(|lat|): no sea-level taiga on alpine permafrost far south;
-                                   # mountain pine there is the boreal elevation rule's (off: (-2, -1))
+TAIGA_MIN_LAT = (40.0, 48.0)       # taiga latitude floor = smoothstep(lat_eff): no sea-level taiga on alpine permafrost far south;
+                                   # the masks keep permafrost in Naggaroth down to about 45 N, so the floor sits below it
+                                   # (mountain pine there is the boreal elevation rule's) (off: (-2, -1))
+TAIGA_LAT_NOISE_DEG = 2.5          # both taiga gates test lat_eff = |lat| + this * seeded smooth noise (unit std), so neither
+                                   # draws a ruled parallel, as the terrain generator's POLAR_NOISE_DEG (off: 0)
+TAIGA_NOISE_SIGMA = 60.0           # smoothness of that wander, working cells
 TAIGA_DENSE = 0.6                  # pine_dense gain of the taiga rule (off: 0)
 TAIGA_SPARSE = 0.3                 # pine_sparse gain of the taiga rule (off: 0; both 0 switches the rule off)
 
@@ -578,8 +583,12 @@ RULE_FAMILIES = ("oak_dense", "oak", "pine_dense", "pine_sparse", "cypress_medit
 
 
 def taiga_factor(f: Fields) -> np.ndarray:
-    """``tg * t_lat * t_low``: taiga-key weight times the latitude window (no class probability)."""
+    """``tg * t_lat * t_low``: taiga-key weight times the latitude window (no class probability).
+
+    Both gates test ``lat_eff = |lat| + TAIGA_LAT_NOISE_DEG * noise`` (seeded, smooth, key 902)."""
     alat = np.abs(f.lat)
+    if TAIGA_LAT_NOISE_DEG:
+        alat = alat + np.float32(TAIGA_LAT_NOISE_DEG) * unit_noise(TAIGA_NOISE_KEY, f.shape, TAIGA_NOISE_SIGMA)
     t_lat = np.float32(1.0) - smoothstep(alat, *TAIGA_LAT)
     t_low = smoothstep(alat, *TAIGA_MIN_LAT)
     return (f.Tg * t_lat * t_low).astype(np.float32)
