@@ -1,0 +1,235 @@
+{
+  "_comment": "Derived from the Victoria 3 1.15.1 install by generate_vegetation.py --dump-vanilla-schema (gfx/map/map_object_data/generated/*.txt without _dynamic_, plus the .bin they name); never hand-edited. --check-schema re-derives it and diffs; it skips cleanly without the install. scale_min and scale_max are the 0.5th and 99.5th percentile of an object's scale.",
+  "rows": [
+    {"file": "baobab_generator_1.txt", "family": "baobab", "layer": "semidynamic", "objects": [
+      {"name": "baobab_generator_1_0", "pdxmesh": "tree_baobab_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 382, "scale_min": 0.277, "scale_max": 0.346},
+      {"name": "baobab_generator_1_1", "pdxmesh": "tree_baobab_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 356, "scale_min": 0.299, "scale_max": 0.4},
+      {"name": "baobab_generator_1_2", "pdxmesh": "tree_baobab_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 400, "scale_min": 0.341, "scale_max": 0.46},
+      {"name": "baobab_generator_1_3", "pdxmesh": "tree_baobab_04_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 381, "scale_min": 0.377, "scale_max": 0.52}
+    ]},
+    {"file": "baobab_generator_2.txt", "family": "baobab", "layer": "semidynamic_medium", "objects": [
+      {"name": "baobab_generator_2_0", "pdxmesh": "tree_baobab_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 741, "scale_min": 0.189, "scale_max": 0.344},
+      {"name": "baobab_generator_2_1", "pdxmesh": "tree_baobab_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 835, "scale_min": 0.196, "scale_max": 0.399},
+      {"name": "baobab_generator_2_2", "pdxmesh": "tree_baobab_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 841, "scale_min": 0.205, "scale_max": 0.458},
+      {"name": "baobab_generator_2_3", "pdxmesh": "tree_baobab_04_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 776, "scale_min": 0.209, "scale_max": 0.519}
+    ]},
+    {"file": "baobab_generator_3.txt", "family": "baobab", "layer": "semidynamic_high", "objects": [
+      {"name": "baobab_generator_3_0", "pdxmesh": "tree_baobab_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1788, "scale_min": 0.188, "scale_max": 0.347},
+      {"name": "baobab_generator_3_1", "pdxmesh": "tree_baobab_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1795, "scale_min": 0.196, "scale_max": 0.4},
+      {"name": "baobab_generator_3_2", "pdxmesh": "tree_baobab_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1752, "scale_min": 0.206, "scale_max": 0.459},
+      {"name": "baobab_generator_3_3", "pdxmesh": "tree_baobab_04_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1713, "scale_min": 0.212, "scale_max": 0.519}
+    ]},
+    {"file": "bush_01_generator_1.txt", "family": "bush_01", "layer": "semidynamic_medium", "objects": [
+      {"name": "bush_01_generator_1_0", "pdxmesh": "tree_bush_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 52911, "scale_min": 0.128, "scale_max": 0.204},
+      {"name": "bush_01_generator_1_1", "pdxmesh": "tree_bush_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 22586, "scale_min": 0.133, "scale_max": 0.21}
+    ]},
+    {"file": "bush_01_generator_2.txt", "family": "bush_01", "layer": "semidynamic_high", "objects": [
+      {"name": "bush_01_generator_2_0", "pdxmesh": "tree_bush_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 128277, "scale_min": 0.097, "scale_max": 0.204},
+      {"name": "bush_01_generator_2_1", "pdxmesh": "tree_bush_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 54861, "scale_min": 0.103, "scale_max": 0.21}
+    ]},
+    {"file": "bush_02_generator_1.txt", "family": "bush_02", "layer": "semidynamic_medium", "objects": [
+      {"name": "bush_02_generator_1_0", "pdxmesh": "tree_bush_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2489, "scale_min": 0.164, "scale_max": 0.204},
+      {"name": "bush_02_generator_1_1", "pdxmesh": "tree_bush_04_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1076, "scale_min": 0.175, "scale_max": 0.21}
+    ]},
+    {"file": "bush_02_generator_2.txt", "family": "bush_02", "layer": "semidynamic_high", "objects": [
+      {"name": "bush_02_generator_2_0", "pdxmesh": "tree_bush_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 8271, "scale_min": 0.098, "scale_max": 0.204},
+      {"name": "bush_02_generator_2_1", "pdxmesh": "tree_bush_04_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3675, "scale_min": 0.104, "scale_max": 0.21}
+    ]},
+    {"file": "bush_dry_02_generator_1.txt", "family": "bush_dry_02", "layer": "semidynamic_medium", "objects": [
+      {"name": "bush_dry_02_generator_1_0", "pdxmesh": "tree_bush_05_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 607, "scale_min": 0.225, "scale_max": 0.25},
+      {"name": "bush_dry_02_generator_1_1", "pdxmesh": "tree_bush_06_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 632, "scale_min": 0.25, "scale_max": 0.274}
+    ]},
+    {"file": "bush_dry_02_generator_2.txt", "family": "bush_dry_02", "layer": "semidynamic_high", "objects": [
+      {"name": "bush_dry_02_generator_2_0", "pdxmesh": "tree_bush_05_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 865, "scale_min": 0.226, "scale_max": 0.25},
+      {"name": "bush_dry_02_generator_2_1", "pdxmesh": "tree_bush_06_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 885, "scale_min": 0.25, "scale_max": 0.274}
+    ]},
+    {"file": "cypress_dense_generator_1.txt", "family": "cypress_dense", "layer": "semidynamic", "objects": [
+      {"name": "cypress_dense_generator_1_0", "pdxmesh": "tree_cypress_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 8418, "scale_min": 0.191, "scale_max": 0.398},
+      {"name": "cypress_dense_generator_1_1", "pdxmesh": "tree_cypress_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 8570, "scale_min": 0.204, "scale_max": 0.517}
+    ]},
+    {"file": "cypress_dense_generator_2.txt", "family": "cypress_dense", "layer": "semidynamic_medium", "objects": [
+      {"name": "cypress_dense_generator_2_0", "pdxmesh": "tree_cypress_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 12790, "scale_min": 0.192, "scale_max": 0.398},
+      {"name": "cypress_dense_generator_2_1", "pdxmesh": "tree_cypress_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 12822, "scale_min": 0.204, "scale_max": 0.517}
+    ]},
+    {"file": "cypress_dense_generator_3.txt", "family": "cypress_dense", "layer": "semidynamic_high", "objects": [
+      {"name": "cypress_dense_generator_3_0", "pdxmesh": "tree_cypress_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 12668, "scale_min": 0.19, "scale_max": 0.399},
+      {"name": "cypress_dense_generator_3_1", "pdxmesh": "tree_cypress_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 12505, "scale_min": 0.204, "scale_max": 0.516}
+    ]},
+    {"file": "cypress_mediterranean_dense_generator_1.txt", "family": "cypress_mediterranean_dense", "layer": "semidynamic", "objects": [
+      {"name": "cypress_mediterranean_dense_generator_1_0", "pdxmesh": "tree_cypress_mediterranean_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11055, "scale_min": 0.195, "scale_max": 0.311},
+      {"name": "cypress_mediterranean_dense_generator_1_1", "pdxmesh": "tree_cypress_mediterranean_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 4734, "scale_min": 0.207, "scale_max": 0.33}
+    ]},
+    {"file": "cypress_mediterranean_dense_generator_2.txt", "family": "cypress_mediterranean_dense", "layer": "semidynamic_medium", "objects": [
+      {"name": "cypress_mediterranean_dense_generator_2_0", "pdxmesh": "tree_cypress_mediterranean_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 15474, "scale_min": 0.195, "scale_max": 0.311},
+      {"name": "cypress_mediterranean_dense_generator_2_1", "pdxmesh": "tree_cypress_mediterranean_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 6640, "scale_min": 0.208, "scale_max": 0.33}
+    ]},
+    {"file": "cypress_mediterranean_dense_generator_3.txt", "family": "cypress_mediterranean_dense", "layer": "semidynamic_high", "objects": [
+      {"name": "cypress_mediterranean_dense_generator_3_0", "pdxmesh": "tree_cypress_mediterranean_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 14621, "scale_min": 0.194, "scale_max": 0.311},
+      {"name": "cypress_mediterranean_dense_generator_3_1", "pdxmesh": "tree_cypress_mediterranean_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 6115, "scale_min": 0.207, "scale_max": 0.33}
+    ]},
+    {"file": "cypress_mediterranean_sparse_generator_1.txt", "family": "cypress_mediterranean_sparse", "layer": "semidynamic", "objects": [
+      {"name": "cypress_mediterranean_sparse_generator_1_0", "pdxmesh": "tree_cypress_mediterranean_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 584, "scale_min": 0.195, "scale_max": 0.311},
+      {"name": "cypress_mediterranean_sparse_generator_1_1", "pdxmesh": "tree_cypress_mediterranean_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 252, "scale_min": 0.207, "scale_max": 0.33}
+    ]},
+    {"file": "cypress_mediterranean_sparse_generator_2.txt", "family": "cypress_mediterranean_sparse", "layer": "semidynamic_medium", "objects": [
+      {"name": "cypress_mediterranean_sparse_generator_2_0", "pdxmesh": "tree_cypress_mediterranean_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 901, "scale_min": 0.193, "scale_max": 0.311},
+      {"name": "cypress_mediterranean_sparse_generator_2_1", "pdxmesh": "tree_cypress_mediterranean_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 380, "scale_min": 0.208, "scale_max": 0.329}
+    ]},
+    {"file": "cypress_mediterranean_sparse_generator_3.txt", "family": "cypress_mediterranean_sparse", "layer": "semidynamic_high", "objects": [
+      {"name": "cypress_mediterranean_sparse_generator_3_0", "pdxmesh": "tree_cypress_mediterranean_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 818, "scale_min": 0.195, "scale_max": 0.311},
+      {"name": "cypress_mediterranean_sparse_generator_3_1", "pdxmesh": "tree_cypress_mediterranean_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 409, "scale_min": 0.207, "scale_max": 0.328}
+    ]},
+    {"file": "iceberg_generator_1.txt", "family": "iceberg", "layer": "semidynamic", "objects": [
+      {"name": "iceberg_generator_1_0", "pdxmesh": "iceberg_01_mesh", "clamp_to_water_level": "yes", "render_under_water": "yes", "vanilla_count": 189, "scale_min": 1.0, "scale_max": 1.0},
+      {"name": "iceberg_generator_1_1", "pdxmesh": "iceberg_02_mesh", "clamp_to_water_level": "yes", "render_under_water": "yes", "vanilla_count": 116, "scale_min": 1.0, "scale_max": 1.0},
+      {"name": "iceberg_generator_1_2", "pdxmesh": "iceberg_03_mesh", "clamp_to_water_level": "yes", "render_under_water": "yes", "vanilla_count": 108, "scale_min": 1.0, "scale_max": 1.0}
+    ]},
+    {"file": "oak_dense_generator_1.txt", "family": "oak_dense", "layer": "semidynamic", "objects": [
+      {"name": "oak_dense_generator_1_0", "pdxmesh": "oak_tree_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3705, "scale_min": 0.36, "scale_max": 0.386},
+      {"name": "oak_dense_generator_1_1", "pdxmesh": "oak_tree_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3813, "scale_min": 0.376, "scale_max": 0.395},
+      {"name": "oak_dense_generator_1_2", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3870, "scale_min": 0.392, "scale_max": 0.408},
+      {"name": "oak_dense_generator_1_3", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3857, "scale_min": 0.405, "scale_max": 0.424},
+      {"name": "oak_dense_generator_1_4", "pdxmesh": "oak_tree_dense_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3832, "scale_min": 0.415, "scale_max": 0.44}
+    ]},
+    {"file": "oak_dense_generator_2.txt", "family": "oak_dense", "layer": "semidynamic_medium", "objects": [
+      {"name": "oak_dense_generator_2_0", "pdxmesh": "oak_tree_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 9031, "scale_min": 0.36, "scale_max": 0.385},
+      {"name": "oak_dense_generator_2_1", "pdxmesh": "oak_tree_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 8971, "scale_min": 0.376, "scale_max": 0.395},
+      {"name": "oak_dense_generator_2_2", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 9163, "scale_min": 0.392, "scale_max": 0.408},
+      {"name": "oak_dense_generator_2_3", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 9008, "scale_min": 0.405, "scale_max": 0.424},
+      {"name": "oak_dense_generator_2_4", "pdxmesh": "oak_tree_dense_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 9041, "scale_min": 0.415, "scale_max": 0.44}
+    ]},
+    {"file": "oak_dense_generator_3.txt", "family": "oak_dense", "layer": "semidynamic_high", "objects": [
+      {"name": "oak_dense_generator_3_0", "pdxmesh": "oak_tree_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11334, "scale_min": 0.36, "scale_max": 0.386},
+      {"name": "oak_dense_generator_3_1", "pdxmesh": "oak_tree_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11414, "scale_min": 0.376, "scale_max": 0.395},
+      {"name": "oak_dense_generator_3_2", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11139, "scale_min": 0.392, "scale_max": 0.408},
+      {"name": "oak_dense_generator_3_3", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11289, "scale_min": 0.405, "scale_max": 0.424},
+      {"name": "oak_dense_generator_3_4", "pdxmesh": "oak_tree_dense_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11291, "scale_min": 0.414, "scale_max": 0.44}
+    ]},
+    {"file": "oak_generator_1.txt", "family": "oak", "layer": "semidynamic", "objects": [
+      {"name": "oak_generator_1_0", "pdxmesh": "oak_tree_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 4254, "scale_min": 0.315, "scale_max": 0.338},
+      {"name": "oak_generator_1_1", "pdxmesh": "oak_tree_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 4239, "scale_min": 0.33, "scale_max": 0.346},
+      {"name": "oak_generator_1_2", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 4290, "scale_min": 0.343, "scale_max": 0.357},
+      {"name": "oak_generator_1_3", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 4282, "scale_min": 0.354, "scale_max": 0.371},
+      {"name": "oak_generator_1_4", "pdxmesh": "oak_tree_dense_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 4113, "scale_min": 0.362, "scale_max": 0.385}
+    ]},
+    {"file": "oak_generator_2.txt", "family": "oak", "layer": "semidynamic_medium", "objects": [
+      {"name": "oak_generator_2_0", "pdxmesh": "oak_tree_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 12055, "scale_min": 0.315, "scale_max": 0.337},
+      {"name": "oak_generator_2_1", "pdxmesh": "oak_tree_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11697, "scale_min": 0.329, "scale_max": 0.345},
+      {"name": "oak_generator_2_2", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11744, "scale_min": 0.343, "scale_max": 0.357},
+      {"name": "oak_generator_2_3", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11666, "scale_min": 0.355, "scale_max": 0.371},
+      {"name": "oak_generator_2_4", "pdxmesh": "oak_tree_dense_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11674, "scale_min": 0.363, "scale_max": 0.385}
+    ]},
+    {"file": "oak_generator_3.txt", "family": "oak", "layer": "semidynamic_high", "objects": [
+      {"name": "oak_generator_3_0", "pdxmesh": "oak_tree_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 13774, "scale_min": 0.315, "scale_max": 0.337},
+      {"name": "oak_generator_3_1", "pdxmesh": "oak_tree_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 13838, "scale_min": 0.329, "scale_max": 0.345},
+      {"name": "oak_generator_3_2", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 13961, "scale_min": 0.343, "scale_max": 0.357},
+      {"name": "oak_generator_3_3", "pdxmesh": "oak_tree_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 14083, "scale_min": 0.355, "scale_max": 0.371},
+      {"name": "oak_generator_3_4", "pdxmesh": "oak_tree_dense_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 13849, "scale_min": 0.363, "scale_max": 0.385}
+    ]},
+    {"file": "palm_dense_generator_1.txt", "family": "palm_dense", "layer": "semidynamic", "objects": [
+      {"name": "palm_dense_generator_1_0", "pdxmesh": "tree_palm_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1456, "scale_min": 0.195, "scale_max": 0.965},
+      {"name": "palm_dense_generator_1_1", "pdxmesh": "tree_palm_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1553, "scale_min": 0.41, "scale_max": 1.058},
+      {"name": "palm_dense_generator_1_2", "pdxmesh": "tree_palm_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1495, "scale_min": 0.592, "scale_max": 1.185}
+    ]},
+    {"file": "palm_dense_generator_2.txt", "family": "palm_dense", "layer": "semidynamic_medium", "objects": [
+      {"name": "palm_dense_generator_2_0", "pdxmesh": "tree_palm_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3248, "scale_min": 0.194, "scale_max": 0.965},
+      {"name": "palm_dense_generator_2_1", "pdxmesh": "tree_palm_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3065, "scale_min": 0.404, "scale_max": 1.057},
+      {"name": "palm_dense_generator_2_2", "pdxmesh": "tree_palm_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 3066, "scale_min": 0.589, "scale_max": 1.193}
+    ]},
+    {"file": "palm_dense_generator_3.txt", "family": "palm_dense", "layer": "semidynamic_high", "objects": [
+      {"name": "palm_dense_generator_3_0", "pdxmesh": "tree_palm_01_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2868, "scale_min": 0.192, "scale_max": 0.964},
+      {"name": "palm_dense_generator_3_1", "pdxmesh": "tree_palm_02_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2844, "scale_min": 0.404, "scale_max": 1.056},
+      {"name": "palm_dense_generator_3_2", "pdxmesh": "tree_palm_03_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2914, "scale_min": 0.589, "scale_max": 1.19}
+    ]},
+    {"file": "pine_dense_generator_1.txt", "family": "pine_dense", "layer": "semidynamic", "objects": [
+      {"name": "pine_dense_generator_1_0", "pdxmesh": "tree_fir_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 0, "scale_min": 0, "scale_max": 0},
+      {"name": "pine_dense_generator_1_1", "pdxmesh": "tree_fir_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 10975, "scale_min": 0.38, "scale_max": 0.572},
+      {"name": "pine_dense_generator_1_2", "pdxmesh": "tree_fir_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 11096, "scale_min": 0.39, "scale_max": 0.599},
+      {"name": "pine_dense_generator_1_3", "pdxmesh": "tree_fir_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 10836, "scale_min": 0.401, "scale_max": 0.628},
+      {"name": "pine_dense_generator_1_4", "pdxmesh": "tree_fir_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 10962, "scale_min": 0.412, "scale_max": 0.658}
+    ]},
+    {"file": "pine_dense_generator_2.txt", "family": "pine_dense", "layer": "semidynamic_medium", "objects": [
+      {"name": "pine_dense_generator_2_0", "pdxmesh": "tree_fir_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 0, "scale_min": 0, "scale_max": 0},
+      {"name": "pine_dense_generator_2_1", "pdxmesh": "tree_fir_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 57169, "scale_min": 0.382, "scale_max": 0.572},
+      {"name": "pine_dense_generator_2_2", "pdxmesh": "tree_fir_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 57143, "scale_min": 0.393, "scale_max": 0.599},
+      {"name": "pine_dense_generator_2_3", "pdxmesh": "tree_fir_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 57103, "scale_min": 0.403, "scale_max": 0.629},
+      {"name": "pine_dense_generator_2_4", "pdxmesh": "tree_fir_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 57371, "scale_min": 0.414, "scale_max": 0.658}
+    ]},
+    {"file": "pine_dense_generator_3.txt", "family": "pine_dense", "layer": "semidynamic_high", "objects": [
+      {"name": "pine_dense_generator_3_0", "pdxmesh": "tree_fir_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 44057, "scale_min": 0.38, "scale_max": 0.568},
+      {"name": "pine_dense_generator_3_1", "pdxmesh": "tree_fir_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 43956, "scale_min": 0.389, "scale_max": 0.589},
+      {"name": "pine_dense_generator_3_2", "pdxmesh": "tree_fir_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 43941, "scale_min": 0.397, "scale_max": 0.611},
+      {"name": "pine_dense_generator_3_3", "pdxmesh": "tree_fir_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 44555, "scale_min": 0.406, "scale_max": 0.635},
+      {"name": "pine_dense_generator_3_4", "pdxmesh": "tree_fir_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 44249, "scale_min": 0.415, "scale_max": 0.659}
+    ]},
+    {"file": "pine_sparse_generator_1.txt", "family": "pine_sparse", "layer": "semidynamic", "objects": [
+      {"name": "pine_sparse_generator_1_0", "pdxmesh": "tree_fir_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 535, "scale_min": 0.38, "scale_max": 0.66},
+      {"name": "pine_sparse_generator_1_1", "pdxmesh": "tree_fir_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 560, "scale_min": 0.388, "scale_max": 0.686},
+      {"name": "pine_sparse_generator_1_2", "pdxmesh": "tree_fir_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 528, "scale_min": 0.396, "scale_max": 0.712},
+      {"name": "pine_sparse_generator_1_3", "pdxmesh": "tree_fir_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 554, "scale_min": 0.405, "scale_max": 0.74},
+      {"name": "pine_sparse_generator_1_4", "pdxmesh": "tree_fir_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 534, "scale_min": 0.414, "scale_max": 0.768}
+    ]},
+    {"file": "pine_sparse_generator_2.txt", "family": "pine_sparse", "layer": "semidynamic_medium", "objects": [
+      {"name": "pine_sparse_generator_2_0", "pdxmesh": "tree_fir_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2406, "scale_min": 0.38, "scale_max": 0.661},
+      {"name": "pine_sparse_generator_2_1", "pdxmesh": "tree_fir_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2366, "scale_min": 0.389, "scale_max": 0.686},
+      {"name": "pine_sparse_generator_2_2", "pdxmesh": "tree_fir_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2323, "scale_min": 0.397, "scale_max": 0.712},
+      {"name": "pine_sparse_generator_2_3", "pdxmesh": "tree_fir_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2330, "scale_min": 0.406, "scale_max": 0.74},
+      {"name": "pine_sparse_generator_2_4", "pdxmesh": "tree_fir_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2461, "scale_min": 0.414, "scale_max": 0.769}
+    ]},
+    {"file": "pine_sparse_generator_3.txt", "family": "pine_sparse", "layer": "semidynamic_high", "objects": [
+      {"name": "pine_sparse_generator_3_0", "pdxmesh": "tree_fir_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2554, "scale_min": 0.38, "scale_max": 0.661},
+      {"name": "pine_sparse_generator_3_1", "pdxmesh": "tree_fir_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2500, "scale_min": 0.388, "scale_max": 0.686},
+      {"name": "pine_sparse_generator_3_2", "pdxmesh": "tree_fir_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2502, "scale_min": 0.397, "scale_max": 0.713},
+      {"name": "pine_sparse_generator_3_3", "pdxmesh": "tree_fir_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2525, "scale_min": 0.405, "scale_max": 0.741},
+      {"name": "pine_sparse_generator_3_4", "pdxmesh": "tree_fir_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2546, "scale_min": 0.414, "scale_max": 0.768}
+    ]},
+    {"file": "rainforest_generator_1.txt", "family": "rainforest", "layer": "semidynamic", "objects": [
+      {"name": "rainforest_generator_1_0", "pdxmesh": "tree_rainforest_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 14446, "scale_min": 0.277, "scale_max": 0.336},
+      {"name": "rainforest_generator_1_1", "pdxmesh": "tree_rainforest_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 14379, "scale_min": 0.301, "scale_max": 0.378},
+      {"name": "rainforest_generator_1_2", "pdxmesh": "tree_rainforest_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 14393, "scale_min": 0.329, "scale_max": 0.424},
+      {"name": "rainforest_generator_1_3", "pdxmesh": "tree_rainforest_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 14358, "scale_min": 0.353, "scale_max": 0.471},
+      {"name": "rainforest_generator_1_4", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 14599, "scale_min": 0.377, "scale_max": 0.519}
+    ]},
+    {"file": "rainforest_generator_2.txt", "family": "rainforest", "layer": "semidynamic_medium", "objects": [
+      {"name": "rainforest_generator_2_0", "pdxmesh": "tree_rainforest_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 28164, "scale_min": 0.189, "scale_max": 0.336},
+      {"name": "rainforest_generator_2_1", "pdxmesh": "tree_rainforest_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 28839, "scale_min": 0.194, "scale_max": 0.377},
+      {"name": "rainforest_generator_2_2", "pdxmesh": "tree_rainforest_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 28277, "scale_min": 0.199, "scale_max": 0.423},
+      {"name": "rainforest_generator_2_3", "pdxmesh": "tree_rainforest_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 28213, "scale_min": 0.204, "scale_max": 0.471},
+      {"name": "rainforest_generator_2_4", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 28189, "scale_min": 0.21, "scale_max": 0.518}
+    ]},
+    {"file": "rainforest_generator_3.txt", "family": "rainforest", "layer": "semidynamic_high", "objects": [
+      {"name": "rainforest_generator_3_0", "pdxmesh": "tree_rainforest_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 53183, "scale_min": 0.189, "scale_max": 0.336},
+      {"name": "rainforest_generator_3_1", "pdxmesh": "tree_rainforest_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 53326, "scale_min": 0.195, "scale_max": 0.377},
+      {"name": "rainforest_generator_3_2", "pdxmesh": "tree_rainforest_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 53176, "scale_min": 0.2, "scale_max": 0.423},
+      {"name": "rainforest_generator_3_3", "pdxmesh": "tree_rainforest_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 53304, "scale_min": 0.205, "scale_max": 0.471},
+      {"name": "rainforest_generator_3_4", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 53012, "scale_min": 0.211, "scale_max": 0.519}
+    ]},
+    {"file": "rainforest_sparse_generator_1.txt", "family": "rainforest_sparse", "layer": "semidynamic", "objects": [
+      {"name": "rainforest_sparse_generator_1_0", "pdxmesh": "tree_rainforest_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1482, "scale_min": 0.191, "scale_max": 0.283},
+      {"name": "rainforest_sparse_generator_1_1", "pdxmesh": "tree_rainforest_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1392, "scale_min": 0.195, "scale_max": 0.294},
+      {"name": "rainforest_sparse_generator_1_2", "pdxmesh": "tree_rainforest_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1488, "scale_min": 0.199, "scale_max": 0.306},
+      {"name": "rainforest_sparse_generator_1_3", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1514, "scale_min": 0.203, "scale_max": 0.318},
+      {"name": "rainforest_sparse_generator_1_4", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 1519, "scale_min": 0.209, "scale_max": 0.33}
+    ]},
+    {"file": "rainforest_sparse_generator_2.txt", "family": "rainforest_sparse", "layer": "semidynamic_medium", "objects": [
+      {"name": "rainforest_sparse_generator_2_0", "pdxmesh": "tree_rainforest_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2226, "scale_min": 0.191, "scale_max": 0.283},
+      {"name": "rainforest_sparse_generator_2_1", "pdxmesh": "tree_rainforest_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2286, "scale_min": 0.195, "scale_max": 0.294},
+      {"name": "rainforest_sparse_generator_2_2", "pdxmesh": "tree_rainforest_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2262, "scale_min": 0.199, "scale_max": 0.306},
+      {"name": "rainforest_sparse_generator_2_3", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2281, "scale_min": 0.205, "scale_max": 0.318},
+      {"name": "rainforest_sparse_generator_2_4", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2271, "scale_min": 0.208, "scale_max": 0.33}
+    ]},
+    {"file": "rainforest_sparse_generator_3.txt", "family": "rainforest_sparse", "layer": "semidynamic_high", "objects": [
+      {"name": "rainforest_sparse_generator_3_0", "pdxmesh": "tree_rainforest_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2109, "scale_min": 0.19, "scale_max": 0.283},
+      {"name": "rainforest_sparse_generator_3_1", "pdxmesh": "tree_rainforest_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2130, "scale_min": 0.195, "scale_max": 0.294},
+      {"name": "rainforest_sparse_generator_3_2", "pdxmesh": "tree_rainforest_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2224, "scale_min": 0.199, "scale_max": 0.306},
+      {"name": "rainforest_sparse_generator_3_3", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2170, "scale_min": 0.204, "scale_max": 0.318},
+      {"name": "rainforest_sparse_generator_3_4", "pdxmesh": "tree_rainforest_005_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 2189, "scale_min": 0.208, "scale_max": 0.33}
+    ]},
+    {"file": "savanna_tree_generator_1.txt", "family": "savanna_tree", "layer": "semidynamic", "objects": [
+      {"name": "savanna_tree_generator_1_0", "pdxmesh": "tree_savanna_001_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 436, "scale_min": 0.191, "scale_max": 0.345},
+      {"name": "savanna_tree_generator_1_1", "pdxmesh": "tree_savanna_002_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 405, "scale_min": 0.195, "scale_max": 0.4},
+      {"name": "savanna_tree_generator_1_2", "pdxmesh": "tree_savanna_003_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 364, "scale_min": 0.204, "scale_max": 0.459},
+      {"name": "savanna_tree_generator_1_3", "pdxmesh": "tree_savanna_004_mesh", "clamp_to_water_level": "no", "render_under_water": "no", "vanilla_count": 410, "scale_min": 0.211, "scale_max": 0.518}
+    ]}
+  ]
+}
