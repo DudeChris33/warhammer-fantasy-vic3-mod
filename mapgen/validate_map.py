@@ -1146,7 +1146,15 @@ def _check_coastal_naval_exit(
     bitmap: ProvinceBitmap,
     sea_colors: set[Color],
 ) -> list[str]:
+    """Port and ``naval_exit_id`` consistency against the bitmap's coast.
+
+    The engine counts a land state coastal when any of its provinces NOT in the state's
+    ``impassable`` list touches any sea province, impassable seas included, and logs "is
+    coastal but is missing a port hub" for one with no port (#10454). So a port-less state
+    must have every sea-touching province impassable (vanilla's frozen-coast states do), or
+    be merged into a neighbour."""
     errors = []
+    from worldgen.raster import color_to_hex
     # A port needs a PASSABLE sea (#9784): the engine draws no lane to an
     # impassable one. A sea state is impassable when all its provinces are.
     impassable_sea_states = [s for s in sea_states
@@ -1154,6 +1162,9 @@ def _check_coastal_naval_exit(
     impassable_sea_ids = {s.id for s in impassable_sea_states if s.id is not None}
     impassable_sea_colors = {c for s in impassable_sea_states for c in s.provinces}
     coastal_colors = bitmap.coastal_colors(sea_colors - impassable_sea_colors)
+    # Provinces touching an impassable sea: the engine's own coastal test (#10454).
+    impassable_sea_touch = (bitmap.coastal_colors(impassable_sea_colors)
+                            if impassable_sea_colors else set())
     sea_ids = {s.id for s in sea_states if s.id is not None}
     for st in land_states:
         # An impassable province can't host a port, so a state whose only coast is
@@ -1180,6 +1191,16 @@ def _check_coastal_naval_exit(
         else:
             if st.port_declared:
                 errors.append(f"{st.key} ({st.filename}): landlocked state (no coastal provinces) declares a port")
+            else:
+                bad = [c for c in st.provinces if c in impassable_sea_touch and c not in impassable]
+                if bad:
+                    shown = ", ".join(color_to_hex(c) for c in sorted(bad)[:3])
+                    noun = "province" if len(bad) == 1 else "provinces"
+                    verb = "touches" if len(bad) == 1 else "touch"
+                    errors.append(
+                        f"{st.key}: the engine counts it coastal ({noun} {shown} {verb} an "
+                        f"impassable sea) but it has no port: paint every sea-touching "
+                        f"province impassable or merge the state")
             if st.naval_exit_id is not None:
                 errors.append(f"{st.key} ({st.filename}): landlocked state declares naval_exit_id")
     return errors
