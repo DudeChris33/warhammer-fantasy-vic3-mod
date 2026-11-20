@@ -1,312 +1,323 @@
-state_key,anchor_x,anchor_y,arable_land,subsistence_building,arable_resources,arable_note,arable_source
-STATE_NORTH_NORSE_COAST,3889,374,,,,,
-STATE_FJORD_COAST,4040,304,,,,,
-STATE_WEST_HELSPIRE_MOUNTAINS,3929,408,,,,,
-STATE_ULFWRENAR_COAST,4110,496,,,,,
-STATE_CLAW_COAST,3991,476,,,,,
-STATE_VANNHEIM_MOUNTAINS,3929,476,,,,,
-STATE_GLOOMWRACK_COAST,3876,488,,,,,
-STATE_ELDAGRIMM_GULF,3910,538,,,,,
-STATE_GOROMADNY_COAST,4645,517,,,,,
-STATE_GOROMADNY_HOLD,4556,526,,,,,
-STATE_FLESHWARREN,4482,514,,,,,
-STATE_FROZEN_COAST,4528,470,,,,,
-STATE_TALDURSFJORD,4525,382,,,,,
-STATE_KRAKEN_COAST,4386,299,,,,,
-STATE_MOUNTAINS_OF_HEL,4365,351,,,,,
-STATE_GIANTHOME_MOUNTAINS,4428,380,,,,,
-STATE_BLACK_BLOOD_PASS,4415,458,,,,,
-STATE_TROLLHEIM_MOUNTAINS,4246,380,,,,,
-STATE_ULFWRENAR_MOUNTAINS,4064,454,,,,,
-STATE_BAY_OF_BLADES,4151,432,,,,,
-STATE_NAGLFARI_MOUNTAINS,4085,361,,,,,
-STATE_NAGLFARI_COAST,4152,261,,,,,
-STATE_HELL_PIT_DEPTHS,4502,517,,,,,
-STATE_HELL_PIT,4484,498,,,,,
-STATE_HELSPIRE_COAST,3926,345,,,,,
-STATE_NORSVEG_PLAIN,4003,360,,,,,
-STATE_HELSPIRE_MOUNTAINS,3991,415,,,,,
-STATE_BJORNLING_S_GATHERING,3873,416,,,,,
-STATE_STROVENGAARD,3980,541,,,,,
-STATE_MERMEDUS_COAST,4048,525,,,,,
-STATE_HIGH_PASS,4637,574,,,,,
-STATE_KRAKA_DRAK,4473,401,,,,,
-STATE_BRENNUN_S_ENCAMPMENT,4329,415,,,,,
-STATE_THORSHAFN,4246,443,,,,,
-STATE_MONOLITH_OF_INGVAR,4179,324,,,,,
-STATE_EAGLE_S_PEAK,4268,287,,,,,
-STATE_VARG_CAMP,4289,203,,,,,
-STATE_NORTH_CAPE,4323,259,,,,,
-STATE_SOUTHERN_OBLAST,4446,786,,,,,
-STATE_WESTERN_OBLAST,4330,716,,,,,
-STATE_ERENGRAD,4332,646,,,,,
-STATE_TROLL_COUNTRY,4281,504,,,,,
-STATE_UNGOL_STEPPES,4305,569,,,,,
-STATE_THE_GOLINYI,4458,550,,,,,
-STATE_NORTHERN_OBLAST,4363,594,,,,,
-STATE_MAZHOROD,4397,687,,,,,
-STATE_THE_DOBRYRION,4442,734,,,,,
-STATE_THE_TAIGA,4472,682,,,,,
-STATE_KISLEV_FOOTHILLS,4530,716,,,,,
-STATE_THE_ROPSALS,4579,622,,,,,
-STATE_SEPUKZY,4538,598,,,,,
-STATE_STUREN_RIDGE,4332,496,,,,,
-STATE_FORT_STRAGHOV,4384,525,,,,,
-STATE_IRINASGRAD,4381,769,,,,,
-STATE_CHAMON_DHAREK,4233,522,,,,,
-STATE_CASTLE_ALEXANDRONOV,4266,599,,,,,
-STATE_DUSHYKA,4416,591,,,,,
-STATE_EASTERN_OBLAST,4473,623,,,,,
-STATE_WEST_NORDLAND,4058,686,,,,,
-STATE_SCHADENSUMPF,4056,724,,,,,
-STATE_WEST_MIDDENLAND,4070,759,,,,,
-STATE_THE_WASTELAND,4005,713,,,,,
-STATE_DRAKWALD_FOREST,4037,810,,,,,
-STATE_VORBERGLAND,4003,859,,,,,
-STATE_REIKWALD_FOREST,4097,912,,,,,
-STATE_BECHAFEN,4374,837,,,,,
-STATE_MOOTLAND,4292,965,,,,,
-STATE_AULD_RYDING,4333,984,,,,,
-STATE_EAST_STIRLAND,4242,934,,,,,
-STATE_EAST_AVERLAND,4271,1008,,,,,
-STATE_AVERHEIM,4211,970,,,,,
-STATE_SOLLAND,4195,1031,,,,,
-STATE_WEST_STIRLAND,4164,931,,,,,
-STATE_SOUTH_TALABECLAND,4187,872,,,,,
-STATE_VOLGEN,4139,852,,,,,
-STATE_SOUTH_MIDDENLAND,4154,808,,,,,
-STATE_NORTH_TALABECLAND,4247,823,,,,,
-STATE_EAST_TALABECLAND,4255,861,,,,,
-STATE_WEST_OSTERMARK,4334,866,,,,,
-STATE_GRYPHON_WOOD,4326,804,,,,,
-STATE_BOHSENFELS,4259,689,,,,,
-STATE_SOUTH_OSTLAND,4282,761,,,,,
-STATE_MIDDLE_MOUNTAINS,4209,722,,,,,
-STATE_MIDDENHEIM,4153,746,,,,,
-STATE_EAST_NORDLAND,4138,677,,,,,
-STATE_REIKLAND_PROPER,4067,872,,,,,
-STATE_THE_VELDT,4426,821,,,,,
-STATE_DRAKENHOF,4353,945,,,,,
-STATE_EAST_SYLVANIA,4385,915,,,,,
-STATE_WEST_SYLVANIA,4314,912,,,,,
-STATE_WEST_AVERLAND,4200,992,,,,,
-STATE_WURTBAD,4205,909,,,,,
-STATE_MIDDENLAND_PROPER,4113,794,,,,,
-STATE_NORTH_OSTLAND,4216,690,,,,,
-STATE_HOCHLAND,4221,771,,,,,
-STATE_WISSENLAND,4125,968,,,,,
-STATE_MARIENBURG,3964,785,,,,,
-STATE_L_ANGUILLE,3801,751,,,,,
-STATE_MARCHES_OF_COURONNE,3926,739,,,,,
-STATE_COURONNE,3851,720,,,,,
-STATE_GISOREUX,3869,823,,,,,
-STATE_BASTONNE,3874,898,,,,,
-STATE_MONTFORT,3941,863,,,,,
-STATE_PARRAVON,4018,927,,,,,
-STATE_ANMYR,4009,991,,,,,
-STATE_QUENELLES,3977,975,,,,,
-STATE_GRAVE_OF_CUILEUX,3915,994,,,,,
-STATE_MASSIF_ORCAL,3933,933,,,,,
-STATE_AQUITAINE,3846,963,,,,,
-STATE_BRIONNE,3847,1004,,,,,
-STATE_BORDELEAUX,3822,918,,,,,
-STATE_MOUSILLON,3773,846,,,,,
-STATE_ARTOIS,3807,806,,,,,
-STATE_LYONESSE,3739,795,,,,,
-STATE_WEST_CARCASSONNE,3904,1052,,,,,
-STATE_TORGOVANN,4030,1023,,,,,
-STATE_YI_EDRI_ETERNOS,4051,1032,,,,,
-STATE_KING_S_GLADE,4066,1043,,,,,
-STATE_TAL_ESTH,4070,967,,,,,
-STATE_LYONESSE_HILLS,3735,748,,,,,
-STATE_CASTLE_SANGASSE,3911,869,,,,,
-STATE_WATERFALL_PALACE,4052,968,,,,,
-STATE_ARGWYLON,4049,993,,,,,
-STATE_GLADE_OF_ETERNAL_MOONLIGHT,4024,963,,,,,
-STATE_CASTLE_MOUSILLON,3820,866,,,,,
-STATE_CARCASSONNE,3974,1064,,,,,
-STATE_GLADE_OF_ETERNAL_MIDNIGHT,4024,1053,,,,,
-STATE_TYR_VANNA,4085,1068,,,,,
-STATE_TALSYN,4059,1068,,,,,
-STATE_HALLS_OF_EQUOS,4038,1067,,,,,
-STATE_WYDRIOTH,4081,1010,,,,,
-STATE_BREGANALLE,3840,1052,,,,,
-STATE_PALE_SISTERS,3887,782,,,,,
-STATE_CROOKED_CORRIDOR,3951,843,,,,,
-STATE_OIS_GAP,3926,808,,,,,
-STATE_AXE_BITE_PASS,4016,904,,,,,
-STATE_NORTH_GREY_MOUNTAINS,4085,957,,,,,
-STATE_EASTERN_IRRANAS,3904,1085,,,,,
-STATE_NOVALONE_PASS,4026,1100,,,,,
-STATE_APUCCINI_MOUNTAINS,4018,1174,,,,,
-STATE_DARK_MAIDEN_PASS,4004,1212,,,,,
-STATE_RED_CLOUD_MOUNTAINS,4391,1559,,,,,
-STATE_SOUTHERN_WORLDS_EDGE,4448,1665,,,,,
-STATE_MOUNTAINS_OF_DAWN,4525,1534,,,,,
-STATE_CRIPPLE_PEAK,4582,1452,,,,,
-STATE_BLISTERING_PEAKS,4579,1364,,,,,
-STATE_IRON_PEAKS,4551,1316,,,,,
-STATE_DESOLATION_OF_NAGASH,4519,1397,,,,,
-STATE_DRAGON_CRAG,4407,1352,,,,,
-STATE_KARAG_ZIFLIN,4418,1283,,,,,
-STATE_SOUR_CRAGS,4431,1432,,,,,
-STATE_CROOKED_MOUNTS,4333,1332,,,,,
-STATE_WINTERTEETH_PASS,4165,1092,,,,,
-STATE_SHATTERED_TEETH,4117,1092,,,,,
-STATE_BLACK_MOUNTAINS,4244,1062,,,,,
-STATE_BLACK_FIRE_PASS,4302,1043,,,,,
-STATE_BLACK_MOUNDS,4353,1029,,,,,
-STATE_FOREST_OF_GLOOM,4362,1063,,,,,
-STATE_AGRILDRIN,4468,1062,,,,,
-STATE_WEST_MAD_DOG_PASS,4447,1152,,,,,
-STATE_OLD_DWARF_ROAD,4360,1092,,,,,
-STATE_WEST_DEATH_PASS,4433,1243,,,,,
-STATE_THUNDER_PEAKS,4484,1203,,,,,
-STATE_EAST_DEATH_PASS,4561,1259,,,,,
-STATE_EAST_MAD_DOG_PASS,4575,1196,,,,,
-STATE_BLIZZARD_PEAKS,4511,1119,,,,,
-STATE_BROKEN_TEETH,4647,1485,,,,,
-STATE_NORTHERN_WORLD_S_EDGE,4639,644,,,,,
-STATE_IRONCRAFT_MOUNTAINS,4633,694,,,,,
-STATE_NEW_LAHMIA,4630,774,,,,,
-STATE_GROM_RIDGE,4526,933,,,,,
-STATE_DELVED_HEIGHTS,4554,776,,,,,
-STATE_DRAKEN_RIDGE,4541,864,,,,,
-STATE_PEAK_PASS,4450,885,,,,,
-STATE_MOUNT_GUNBAD,4477,990,,,,,
-STATE_SOUTH_GREY_MOUNTAINS,4106,1024,,,,,
-STATE_CLIFFS_OF_DAWN,4585,1626,,,,,
-STATE_HELMGART,3981,879,,,,,
-STATE_GREY_LADY_PASS,4048,928,,,,,
-STATE_CHATEAU_LOVARRE,3962,1088,,,,,
-STATE_AMBER_SKULL,4618,1697,,,,,
-STATE_KARAK_EIGHT_PEAKS,4456,1312,,,,,
-STATE_CURSED_WAY,4602,1561,,,,,
-STATE_SHANIDAAR,4736,1716,,,,,
-STATE_LAHMIA,4690,1607,,,,,
-STATE_HOUSE_OF_EVERLASTING_LIFE,4663,1633,,,,,
-STATE_SIX_WATCH_FORTS,4692,1699,,,,,
-STATE_CANTABRIO_ROAD,3683,1001,,,,,
-STATE_CEFIRO_HILLS,3595,1017,,,,,
-STATE_NUJA,3530,1122,,,,,
-STATE_ESTALIAN_HIGHLANDS,3668,1063,,,,,
-STATE_CENTRAL_MAGRITTA,3682,1121,,,,,
-STATE_WEST_MAGRITTA,3619,1119,,,,,
-STATE_SOUTHEAST_MAGRITTA,3747,1191,,,,,
-STATE_EAST_MAGRITTA,3744,1139,,,,,
-STATE_WESTERN_IRRANAS,3756,1089,,,,,
-STATE_EAST_BILBALI,3776,1041,,,,,
-STATE_NORTH_TILEA,3924,1120,,,,,
-STATE_AQUILENA,4048,1208,,,,,
-STATE_VEREZZI,3937,1259,,,,,
-STATE_REMAS,3926,1209,,,,,
-STATE_TRANTINE_HILLS,3958,1166,,,,,
-STATE_PLAINS_OF_LUCCINI,3897,1313,,,,,
-STATE_MONTE_CASTELLO,3962,1303,,,,,
-STATE_SARTOSA,3832,1332,,,,,
-STATE_BLACK_PENINSULA,4102,1218,,,,,
-STATE_LOST_KHYPNIA,4231,1136,,,,,
-STATE_ORTEGETA,4218,1092,,,,,
-STATE_EASTERN_BORDER_PRINCES,4286,1112,,,,,
-STATE_SOUTHERN_SIREN_ISLES,3802,1232,,,,,
-STATE_WESTERN_ESTALIAN_COAST,3580,1077,,,,,
-STATE_TOBARO,3790,1162,,,,,
-STATE_MIDDLE_TILEA,3960,1215,,,,,
-STATE_SUSSURRIO_WOOD,3928,1301,,,,,
-STATE_KHARNOS_FOREST,4184,1145,,,,,
-STATE_GASTONNE,4125,1147,,,,,
-STATE_NORTH_BADLAND_HILLS,4069,1419,,,,,
-STATE_EAST_BARRIER_IDOLS,4154,1573,,,,,
-STATE_WORLDS_EDGE_FOOTHILLS,4323,1474,,,,,
-STATE_EASTERN_BADLANDS,4322,1416,,,,,
-STATE_BLIGHTWATER,4288,1535,,,,,
-STATE_MARSHES_OF_MADNESS,4174,1514,,,,,
-STATE_BADLANDS_COAST,3973,1534,,,,,
-STATE_OLD_STRYGOS,4217,1432,,,,,
-STATE_MOUNT_BLOODHORN,4139,1368,,,,,
-STATE_DRAGONBACK_MOUNTAINS,4128,1316,,,,,
-STATE_STINKLANDS,4207,1306,,,,,
-STATE_CENTRAL_BADLANDS,4244,1368,,,,,
-STATE_THE_CAULDRON,4342,1285,,,,,
-STATE_VARENKA_HILLS,4288,1192,,,,,
-STATE_NORTHERN_BADLANDS,4261,1233,,,,,
-STATE_MYRMIDIA_S_COAST,4166,1246,,,,,
-STATE_HOWLING_RIVER_VALLEY,4346,1142,,,,,
-STATE_BLOOD_RIVER_VALLEY,4377,1194,,,,,
-STATE_GIANT_STOMPING_GROUNDS,4027,1394,,,,,
-STATE_SOUTH_BADLAND_HILLS,4060,1496,,,,,
-STATE_WESTERN_BADLANDS,3998,1477,,,,,
-STATE_MARG_BEH_MARD,4004,1566,,,,,
-STATE_NORTH_BARRIER_IDOLS,4062,1563,,,,,
-STATE_SUNKEN_KHEMARCH,4123,1462,,,,,
-STATE_KHEMRIAN_DESERT,4058,1628,,,,,
-STATE_MORTIS_TARN,4340,1621,,,,,
-STATE_ROAD_OF_KINGS,4008,1621,,,,,
-STATE_CITY_OF_KINGS,4057,1682,,,,,
-STATE_THE_SCARAB_CITY,4195,1613,,,,,
-STATE_UPPER_ASH_RIVER,4253,1707,,,,,
-STATE_SPHINX_OF_PHAA,4127,1686,,,,,
-STATE_FALLOW_FIELDS,4263,1664,,,,,
-STATE_PYRAMID_OF_TUTANKHANUT,4109,1623,,,,,
-STATE_GREAT_MORTIS_DELTA,3945,1578,,,,,
-STATE_SWAMP_OF_TERROR,3996,1644,,,,,
-STATE_DREAD_ROCK,5153,1476,,,,,
-STATE_WEST_DARK_LANDS,4594,1106,,,,,
-STATE_MOUNT_SILVERSPEAR,4582,1061,,,,,
-STATE_WOLF_LANDS,4694,1118,,,,,
-STATE_AGRIL_MIGDHAL,4714,1043,,,,,
-STATE_GORGOTHDRINAZ,4800,1097,,,,,
-STATE_GREY_HAG_MOUNTAIN,4734,1201,,,,,
-STATE_MOUNT_AZGORH,4806,1171,,,,,
-STATE_DESOLATION_OF_AZGORH,4821,1276,,,,,
-STATE_WOLF_EDGE,4643,1214,,,,,
-STATE_OLD_SILK_ROAD,4650,1300,,,,,
-STATE_DRAGON_BARROWS,4642,1384,,,,,
-STATE_SOUTH_DARKLANDS,4693,1460,,,,,
-STATE_PLAIN_OF_BONES,4771,1407,,,,,
-STATE_DRAGONS_LANDING,4783,1493,,,,,
-STATE_ASH_RIDGE_MOUNTAINS,4790,1333,,,,,
-STATE_GNOBLAR_HILLS,4973,1363,,,,,
-STATE_DRAGONS_BREATH,4895,1397,,,,,
-STATE_TOWER_OF_THE_BLOODYTOOTH,4882,1435,,,,,
-STATE_ALD_GRUNGAZ,4937,1419,,,,,
-STATE_BURY_BONE_HILLS,5097,1222,,,,,
-STATE_ASHEN_PLAINS,5111,1171,,,,,
-STATE_THE_SENTINELS,5033,1159,,,,,
-STATE_DIRETOWN,5044,1277,,,,,
-STATE_PIGBARTER_ROAD,4992,1251,,,,,
-STATE_PLAINS_OF_GRIEF,4922,1247,,,,,
-STATE_SOUTH_HOWLING_WASTES,4908,1151,,,,,
-STATE_IVORY_ROAD,4908,1099,,,,,
-STATE_DAEMON_S_RUIN,5067,1104,,,,,
-STATE_FIVE_RIVERS,5019,984,,,,,
-STATE_NORTH_HOWLING_WASTES,4942,1025,,,,,
-STATE_HOWLING_DISTRICT,4965,899,,,,,
-STATE_RIVER_DISTRICT,4952,856,,,,,
-STATE_MANUFACTORY_DISTRICT,4893,868,,,,,
-STATE_HEART_OF_ZHARRDUK,4914,823,,,,,
-STATE_FALLS_DISTRICT,4887,781,,,,,
-STATE_ZORN_DUM,4872,698,,,,,
-STATE_SKULL_CLIFFS,4778,750,,,,,
-STATE_WHEATLANDS,4788,685,,,,,
-STATE_ZORN_UZKUL,4790,549,,,,,
-STATE_SKULL_ROAD,4758,632,,,,,
-STATE_BELYEROVOTA,4703,594,,,,,
-STATE_SKULL_STEPPES,4712,693,,,,,
-STATE_NORTH_DARK_LANDS,4665,844,,,,,
-STATE_STEEL_PLAINS,4710,803,,,,,
-STATE_PITS_DISTRICT,4783,813,,,,,
-STATE_MARKET_DISTRICT,4850,805,,,,,
-STATE_FOUNDRY_DISTRICT,4841,852,,,,,
-STATE_BLASTED_DISTRICT,4778,871,,,,,
-STATE_GATE_DISTRICT,4871,905,,,,,
-STATE_NAGGRUNDRINAZ,4846,994,,,,,
-STATE_CAUSEWAY_OF_ZHARR,4734,961,,,,,
-STATE_BLACK_WASTES,4581,988,,,,,
-STATE_DRAKENMOOR,4584,889,,,,,
-STATE_DEATH_S_SIDE,4855,606,,,,,
-STATE_RUIN_S_END,4940,1444,,,,,
-STATE_SWAMP_EATER_HOLD,5002,1445,,,,,
-STATE_DEATHTOLL_HOLD,5078,1417,,,,,
-STATE_SKRAGGLEGUTS_HOLD,5029,1369,,,,,
-STATE_BOULDERBELLIES_HOLD,5097,1323,,,,,
+state_key,anchor_x,anchor_y,arable_land,subsistence_building,arable_resources,arable_class,arable_factor,arable_note,arable_source
+STATE_NORTH_NORSE_COAST,3889,374,,building_subsistence_fishing_village,,boreal_forest,0.67,"[B] Norscan coast default: few fields, fish and raiding; Norway analogue",lex:Norsca#Society [Tome of Corruption pp. 136-144] ; lex:Sortsvinaer [Liber Chaotica: Slaanesh] ; rw:Norway [runeberg.org/norparis/0320.html]
+STATE_FJORD_COAST,4040,304,,building_subsistence_fishing_village,,boreal_forest,0.45,[B] Far-north coast at the analogue's grain limit (68 N); ice-bound northern half,fandom:Norsca#Geography [Tome of Corruption pp. 136-141] ; rw:Norway [runeberg.org/norparis/0325.html] ; rw:Northern Norway [en.wikipedia.org/wiki/Pomor_trade]
+STATE_WEST_HELSPIRE_MOUNTAINS,3929,408,,building_subsistence_pasture,,arctic_boreal_coast,,"[B] Mountain default; settled valleys raided by Graelings, no crop named",fandom:Bjornlings#Relations [Sea of Claws pp. 59-64] ; lex:Norsca#Locations [Tome of Corruption pp. 136-144] ; rw:Scandinavia [en.wikipedia.org/wiki/Transhumance]
+STATE_ULFWRENAR_COAST,4110,496,,building_subsistence_fishing_village,,boreal_forest,0.67,"[B] South coast towns (Aarvik, Ulfennik); Skaeling Coast picture: fish, whales, fir valleys",fandom:Ulfennik [Warhammer Rulebook 8e pp. 452-454] ; lex:Skaeling_Coast [Sea of Claws p. 48] ; lex:Norsca#Society [Tome of Corruption pp. 136-144]
+STATE_CLAW_COAST,3991,476,,building_subsistence_pasture,,arctic_boreal_coast,,[C] Inland mountain state despite its name; no canon land-use text; analogue only,lex:Norsca#Locations [Tome of Corruption pp. 136-144] ; rw:Scandinavia [en.wikipedia.org/wiki/Transhumance]
+STATE_VANNHEIM_MOUNTAINS,3929,476,,building_subsistence_pasture,,arctic_boreal_coast,,"[A] Vanaheim Mountains: snow all year, beasts hunted for meat and fur",fandom:Vanaheim Mountains [Warhammer: The Old World website map] ; lex:Bjornling_Coast [Sea of Claws pp. 58-59]
+STATE_GLOOMWRACK_COAST,3876,488,,building_subsistence_fishing_village,,boreal_forest,,"[A] Bjornling Coast: fishing, raiding, trade; Bragnir's valleys unusually fertile (kelp manure)",lex:Bjornling#lead [Sea of Claws pp. 58-62] ; fandom:Bjornlings#Geography [Sea of Claws pp. 59-64]
+STATE_ELDAGRIMM_GULF,3910,538,,building_subsistence_fishing_village,,boreal_forest,,"[A] Skjold on the Eldagrimm Gulf: plunder, trade, shipyards; layer's temperate class not supported",lex:Skjold [Sea of Claws pp. 60-62] ; fandom:Skjold [Sea of Claws pp. 60-63] ; lex:Bjornling#lead [Sea of Claws pp. 58-62]
+STATE_GOROMADNY_COAST,4645,517,,building_subsistence_farm,,boreal_forest,,"[A] Vinnskor (Baersonlings): farmers and herdsmen, fields and shaggy cattle; novel-grade source","fandom:Vinnskor [Palace of the Plague Lord, novel, ch. 3] ; fandom:Baersonlings [same, ch. 1, 11] ; fandom:Aeslings [same, ch. 1]"
+STATE_GOROMADNY_HOLD,4556,526,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,,"[C] TW name; far-northern mountain range, no canon land-use text",lex:Kislev#Geography [Realm of the Ice Queen pp. 6-8]
+STATE_FLESHWARREN,4482,514,,building_subsistence_pasture,,arctic_boreal_coast,,[B] Invented name; Hell Pit's barren snowy mountain; beast-breeding clan,lex:Hell_Pit#Overview [Skaven 7e p. 15; White Dwarf 311]
+STATE_FROZEN_COAST,4528,470,,building_subsistence_fishing_village,,boreal_forest,0.67,[B] Ursfjord and the hall of Urslo on the Frozen Sea; timber; no fields named,fandom:Bearmen of Urslo [Dogs of War 5e pp. 50-51] ; lex:Frozen_Sea [Old World website map] ; lex:Norsca#Society [Tome of Corruption pp. 136-144]
+STATE_TALDURSFJORD,4525,382,,building_subsistence_fishing_village,building_livestock_ranch building_rye_farm,arctic_boreal_coast,1.5,[B] Fjord under Kraka Dorden; Skraevold's Aeslings work their own fields; novel-grade,"fandom:Skraevold [Palace of the Plague Lord, novel, ch. 1] ; lex:Kraka_Dorden [Lords of Stone and Steel p. 20] ; lex:Frozen_Sea [Old World website map]"
+STATE_KRAKEN_COAST,4386,299,,building_subsistence_fishing_village,,arctic_boreal_coast,,[B] Far-north coast; no place canon; realm canon and Finnmark analogue,fandom:Norsca#Geography [Tome of Corruption pp. 136-141] ; vanilla:STATE_NORTHERN_NORWAY ; vanilla:STATE_ICELAND
+STATE_MOUNTAINS_OF_HEL,4365,351,,building_subsistence_pasture,,arctic_boreal_coast,,[R] Ice-capped interior range (Forbidden Citadel); no land-use canon,fandom:Forbidden Citadel (Norsca) [Old World website map] ; rw:Scandinavia [en.wikipedia.org/wiki/Transhumance]
+STATE_GIANTHOME_MOUNTAINS,4428,380,,building_subsistence_farm,,boreal_forest,,[A] Kraka Dorden: conifer-forest range; Khazid Fneldruk and Grung Dobekzhulf produce grain; against the herding ruling,fandom:Norse Dwarfs [Dwarfs: Stone and Steel p. 42] ; lex:Khazid_Fneldruk [Lords of Stone and Steel p. 24] ; fandom:Kraka Dorden [Lords of Stone and Steel p. 24]
+STATE_BLACK_BLOOD_PASS,4415,458,,building_subsistence_pasture,,arctic_boreal_coast,,"[B] Kraka Ravnsvake: metal, stone, fleet; no grain listed; dwarf herding ruling stands",lex:Kraka_Ravnsvake [Sea of Claws pp. 40-47; Lords of Stone and Steel p. 24] ; lex:Khazid_Bordkarag [Lords of Stone and Steel p. 24]
+STATE_TROLLHEIM_MOUNTAINS,4246,380,,building_subsistence_pasture,,arctic_boreal_coast,,[R] Two-thirds ice cap; Black Gulch only canon place; no land-use text,fandom:Black Gulch [Old World website map] ; rw:Scandinavia [en.wikipedia.org/wiki/Transhumance]
+STATE_ULFWRENAR_MOUNTAINS,4064,454,,building_subsistence_pasture,,arctic_boreal_coast,,[B] Doomkeep and Hall of the Snaegr: Skaelings hunt and raid from the pass,fandom:Doomkeep [Old World website map] ; lex:Snaegr [Hordes of Chaos 6e p. 9; Sea of Claws p. 52]
+STATE_BAY_OF_BLADES,4151,432,,building_subsistence_fishing_village,,boreal_forest,0.67,"[A] Ormskaro: whaling, fishing, timber rafting; layer's steppe (wheat, vineyard) not supported","fandom:Ormskaro [Wulfrik, novel, ch. 2] ; fandom:Sarls [Palace of the Plague Lord, novel, ch. 10] ; fandom:Bay of Blades [Sea of Claws p. 36]"
+STATE_NAGLFARI_MOUNTAINS,4085,361,,building_subsistence_fishing_village,,arctic_boreal_coast,,[R] Ice-capped coastal range; no canon place; Lofoten-wall analogue,rw:Lofoten [en.wikipedia.org/wiki/Lofoten] ; vanilla:STATE_NORTHERN_NORWAY
+STATE_NAGLFARI_COAST,4152,261,,building_subsistence_fishing_village,,boreal_forest,0.45,"[B] Far north-west coast at 69 N, the analogue's barley limit; no place canon",fandom:Norsca#Geography [Tome of Corruption pp. 136-141] ; rw:Norway [runeberg.org/norparis/0325.html]
+STATE_HELL_PIT_DEPTHS,4502,517,,building_subsistence_pasture,,arctic_boreal_coast,,[B] Invented name; Hell Pit's barren snowy mountain; beast-breeding clan,lex:Hell_Pit#Overview [Skaven 7e p. 15; White Dwarf 311]
+STATE_HELL_PIT,4484,498,,building_subsistence_pasture,,arctic_boreal_coast,,"[A] Hell Pit: chasm in a snowy mountainside, barren surroundings; no food text",lex:Hell_Pit#Overview [Skaven 7e p. 15; White Dwarf 311] ; fandom:Troll Country#Hell Pit Hunting Grounds
+STATE_HELSPIRE_COAST,3926,345,,building_subsistence_fishing_village,,boreal_forest,0.67,[B] Sortsvinaer's northern coast; Norscan coast default,lex:Sortsvinaer [Liber Chaotica: Slaanesh] ; lex:Norsca#Society [Tome of Corruption pp. 136-144] ; rw:Norway [runeberg.org/norparis/0320.html]
+STATE_NORSVEG_PLAIN,4003,360,,building_subsistence_fishing_village,,boreal_forest,0.67,[B] Graeling coast: sea raiders and slavers; no source says the plain is farmed,lex:Bjornling#Relations [Sea of Claws p. 59] ; fandom:Norsca#Crafts and Trade [Warriors of Chaos 7e pp. 38-41] ; lex:Norsca#Society [Tome of Corruption pp. 136-144]
+STATE_HELSPIRE_MOUNTAINS,3991,415,,building_subsistence_pasture,,arctic_boreal_coast,,[B] Helspire Mountains: settled valleys raided by Graelings; tundra and ice by the layer,fandom:Bjornlings#Relations [Sea of Claws pp. 59-64] ; rw:Scandinavia [en.wikipedia.org/wiki/Transhumance]
+STATE_BJORNLING_S_GATHERING,3873,416,,building_subsistence_fishing_village,,boreal_forest,0.67,"[B] Northern Bjornling Coast: fishing, raiding, trade; no fields named",lex:Bjornling#lead [Sea of Claws pp. 58-62] ; fandom:Bjornlings#Geography [Sea of Claws pp. 59-64]
+STATE_STROVENGAARD,3980,541,,building_subsistence_fishing_village,,boreal_forest,,[B] Hall of Strovengaard (Skaelings) on the mild south coast; layer's temperate class not supported,"fandom:Egil Styrbjorn [Knight of the Realm, novel] ; fandom:Skaelings#Skaeling Coast [Sea of Claws pp. 48-49] ; lex:Skaeling_Coast [Sea of Claws p. 48]"
+STATE_MERMEDUS_COAST,4048,525,,building_subsistence_fishing_village,,boreal_forest,0.67,"[A] Skaeling Coast: sea full of fish and whales, fir in sheltered valleys, smokehouses",lex:Skaeling_Coast [Sea of Claws p. 48] ; lex:Kirkjugardur_Langskipa [Sea of Claws pp. 53-54] ; fandom:Skaelings [Sea of Claws pp. 48-49]
+STATE_HIGH_PASS,4637,574,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.45,[A] Glaciated pass where snow rarely melts; Karak Vlag lost since 2301,fandom:High Pass [Realm of the Ice Queen p. 11] ; fandom:Karak Vlag [Dwarfs: Stone and Steel p. 38]
+STATE_KRAKA_DRAK,4473,401,,building_subsistence_farm,building_rye_farm building_livestock_ranch,boreal_forest,1.5,[A] Exports grain; Khazid Ravik cheese fur grain wool; Sjoktraken grain; confirms ruling,lex:Kraka_Drak#Trade [Lords of Stone and Steel p. 24] ; lex:Khazid_Ravik [Lords of Stone and Steel p. 24] ; fandom:Norse Dwarfs [Dwarfs: Stone and Steel p. 42]
+STATE_BRENNUN_S_ENCAMPMENT,4329,415,,building_subsistence_pasture,,arctic_boreal_coast,,[C] TWW name; half ice cap; no canon land-use text; analogue only,rw:Scandinavia [en.wikipedia.org/wiki/Transhumance] ; lex:Norsca#Locations [Tome of Corruption pp. 136-144]
+STATE_THORSHAFN,4246,443,,building_subsistence_fishing_village,,boreal_forest,0.67,[C] TWW name; south-east coast; Norscan coast default; owner Hastlings are horsemen elsewhere,fandom:Hastlings [Arcane Journal: Warriors of Chaos p. 8] ; lex:Norsca#Society [Tome of Corruption pp. 136-144]
+STATE_MONOLITH_OF_INGVAR,4179,324,,building_subsistence_pasture,,arctic_boreal_coast,,[C] TWW name; northern interior tundra and ice; no canon land-use text,rw:Scandinavia [en.wikipedia.org/wiki/Transhumance] ; lex:Norsca#Locations [Tome of Corruption pp. 136-144]
+STATE_EAGLE_S_PEAK,4268,287,,building_subsistence_pasture,building_livestock_ranch building_rye_farm,arctic_boreal_coast,1.5,[A] Kraka Ornsmotek: gold hold at 68 N; Kazad Dumund grows grain and makes cheese for it,"fandom:Kraka Ornsmotek [Lords of Stone and Steel pp. 20, 24] ; lex:Kraka_Ornsmotek [Dwarfs: Stone and Steel p. 42]"
+STATE_VARG_CAMP,4289,203,,building_subsistence_fishing_village,,arctic_boreal_coast,,[B] Varg coast at 70 N: beyond the grain limit; sea economy,lex:Norsca#Tribes [Tome of Corruption pp. 136-144] ; fandom:Vargs [Games Day 2002: Hrothgar Daemonaxe pp. 1-3] ; vanilla:STATE_GREENLAND
+STATE_NORTH_CAPE,4323,259,,building_subsistence_fishing_village,,arctic_boreal_coast,,"[B] Northern cape, all tundra; Varg coast; Finnmark analogue",lex:Norsca#Tribes [Tome of Corruption pp. 136-144] ; vanilla:STATE_NORTHERN_NORWAY
+STATE_SOUTHERN_OBLAST,4446,786,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,,"[A] Kislev's main farming region: oats almost everywhere, some orchards, little steppe left",fandom:Southern Oblast [Realm of the Ice Queen pp. 54-55] ; lex:Kislev#Geography [RotIQ pp. 6-8]
+STATE_WESTERN_OBLAST,4330,716,,building_subsistence_farm,building_rye_farm building_livestock_ranch,steppe,1.5,[A] Treeless steppe; this southern Empire-facing half is farmed to a significant extent,fandom:Western Oblast [Realm of the Ice Queen p. 57] ; fandom:Milkavala [RotIQ pp. 57-58]
+STATE_ERENGRAD,4332,646,,building_subsistence_farm,building_livestock_ranch building_rye_farm,steppe,,[B] Port on the Lynsk with a mostly-steppe hinterland; coast fishes and whales,"fandom:Western Oblast [Realm of the Ice Queen p. 57] ; lex:Erengrad [RotIQ pp. 10, 61-62]"
+STATE_TROLL_COUNTRY,4281,504,,building_subsistence_pasture,,arctic_boreal_coast,,[A] No farming possible; steppe to tundra; nomads follow their herds; reindeer,fandom:Troll Country [Realm of the Ice Queen pp. 59-60] ; lex:Troll_Country [Sea of Claws pp. 34-37] ; fandom:Steppes Nomad [Realm of the Ice Queen p. 105]
+STATE_UNGOL_STEPPES,4305,569,,building_subsistence_pasture,building_livestock_ranch,steppe,0.45,[A] Southern Troll Country: no farming possible; Ungol nomads following herds,fandom:Troll Country [Realm of the Ice Queen pp. 59-60; Sea of Claws p. 34] ; lex:Troll_Country [Sea of Claws pp. 34-37]
+STATE_THE_GOLINYI,4458,550,,building_subsistence_pasture,building_livestock_ranch,steppe,0.45,"[C] Name not canon; far north beyond the Lynsk, Dolgan herders (goats, bison, cattle)",lex:Dolgan [Something Rotten in Kislev pp. 55-56] ; fandom:River Lynsk [RotIQ]
+STATE_NORTHERN_OBLAST,4363,594,,building_subsistence_pasture,building_livestock_ranch,steppe,0.67,[A] Steppe grazed by horses and cattle; no agriculture to speak of; Zoishenk cattle town,fandom:Northern Oblast [Realm of the Ice Queen pp. 58-59] ; lex:Oblast#Locations [RotIQ pp. 51-56]
+STATE_MAZHOROD,4397,687,,building_subsistence_farm,building_livestock_ranch building_rye_farm,steppe,,[C] Open central oblast; name placed by a campaign map and a novel only,fandom:Western Oblast [Realm of the Ice Queen p. 57] ; fandom:Mazhorod [Ursun's Teeth (novel)]
+STATE_THE_DOBRYRION,4442,734,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,,"[A] Kislev city on the Urskoy, largest settlement of the Southern Oblast farming region","fandom:Southern Oblast [Realm of the Ice Queen pp. 54-55] ; lex:Kislev_(city) [RotIQ pp. 9-11, 78-87]"
+STATE_THE_TAIGA,4472,682,,building_subsistence_farm,,boreal_forest,1.5,"[B] Fur taiga, but south of the Lynsk with croplands and the large stanitsa Bolgasgrad",fandom:Eastern Oblast [Realm of the Ice Queen p. 56] ; lex:Bolgasgrad [RotIQ p. 56] ; fandom:Sibyrians [Citadel Journal: Claws of the Great Bear p. 11]
+STATE_KISLEV_FOOTHILLS,4530,716,,building_subsistence_farm,,boreal_forest,,[B] Wooded World's Edge foothills; timber for the stanitsas; greenskin country,fandom:Eastern Oblast [Realm of the Ice Queen p. 56] ; lex:Kislev#Geography [RotIQ pp. 6-8]
+STATE_THE_ROPSALS,4579,622,,building_subsistence_farm,,boreal_forest,,[C] Wooded highlands NE of Praag; name only in a Total War tie-in story,fandom:Eastern Oblast [Realm of the Ice Queen p. 56] ; fandom:Mother Ostankya [Things in the Wood (short story) p. 11]
+STATE_SEPUKZY,4538,598,,building_subsistence_pasture,building_livestock_ranch building_rye_farm,steppe,0.67,[B] True steppe east of Praag; Sepukzy is an all-Ungol settled horse town,fandom:Sepukzy [Realm of the Ice Queen p. 56] ; fandom:Eastern Oblast [RotIQ p. 56]
+STATE_STUREN_RIDGE,4332,496,,building_subsistence_pasture,,arctic_boreal_coast,,"[A] Sturen Ridges in central Troll Country: no farming possible, nomad herders","fandom:Troll Country [Realm of the Ice Queen pp. 45, 59-60] ; lex:Troll_Country [Sea of Claws pp. 34-37] ; fandom:Steppes Nomad [Realm of the Ice Queen p. 105]"
+STATE_FORT_STRAGHOV,4384,525,,building_subsistence_pasture,,arctic_boreal_coast,,"[C] TWW name; read as eastern Troll Country by position; no farming, herders",fandom:Troll Country [Realm of the Ice Queen pp. 59-60] ; fandom:Steppes Nomad [Realm of the Ice Queen p. 105]
+STATE_IRINASGRAD,4381,769,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,,[C] TW name; Empire-border belt of the farmed south-west,fandom:Western Oblast [Realm of the Ice Queen p. 57] ; fandom:Southern Oblast [RotIQ pp. 54-55]
+STATE_CHAMON_DHAREK,4233,522,,building_subsistence_pasture,,arctic_boreal_coast,,"[A] Chamon Dharek mound in southern Troll Country: no farming possible, nomad herders",lex:Troll_Country#Locations [Realm of the Ice Queen p. 60; Sea of Claws p. 36] ; fandom:Troll Country [Realm of the Ice Queen pp. 59-60] ; fandom:Steppes Nomad [Realm of the Ice Queen p. 105]
+STATE_CASTLE_ALEXANDRONOV,4266,599,,building_subsistence_pasture,building_livestock_ranch,steppe,0.67,[B] Windswept plain on the Troll Country border north of Erengrad,fandom:Castle Alexandronov [Citadel Journal 14 p. 10] ; fandom:Northern Oblast [Realm of the Ice Queen pp. 58-59]
+STATE_DUSHYKA,4416,591,,building_subsistence_pasture,building_livestock_ranch,steppe,0.67,"[C] TW name; east of the Northern Oblast: grazed steppe, no agriculture",fandom:Northern Oblast [Realm of the Ice Queen pp. 58-59]
+STATE_EASTERN_OBLAST,4473,623,,building_subsistence_farm,building_livestock_ranch building_rye_farm,steppe,0.67,"[A] Praag: sickly scarce grain, tainted ground; true steppe with a few croplands",fandom:Praag [Realm of the Ice Queen pp. 69-72] ; fandom:Eastern Oblast [RotIQ p. 56]
+STATE_WEST_NORDLAND,4058,686,,building_subsistence_farm,,temperate_forest_hill,0.67,[B] Laurelorn outer wards and Salz-Demst zone: settlement and harvest capped by treaty; sheep and wool,lex:Nordland#Overview [Sigmar's Heirs p. 63ff] ; fandom:Laurelorn Forest [Archives of the Empire I] ; fandom:Hargendorf [Salzenmund: City of Salt and Silver pp. 106-107]
+STATE_SCHADENSUMPF,4056,724,,building_subsistence_farm,,temperate_forest_hill,0.45,"[A] Swampy morass north of Middenheim, little of worth; bog-iron villages",fandom:Middenland#Geography [Sigmar's Heirs pp. 53-58]
+STATE_WEST_MIDDENLAND,4070,759,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,0.67,[B] Western Drakwald: dense forest on acid soil; feeds itself; few herds; a third goblin-held,fandom:Middenland#Geography [Sigmar's Heirs pp. 53-58] ; fandom:Middenland#Economy [Middenheim: City of the White Wolf pp. 120-121]
+STATE_THE_WASTELAND,4005,713,,building_subsistence_farm,,temperate_forest_hill,0.45,"[A] Tumble Downs: boggy hillocks, garden plots, thin sheep and cattle; Aarnau farms and fishes",lex:The_Wasteland#Locations [Marienburg: Sold Down the River pp. 6-10] ; fandom:The Wasteland#North [MSDtR pp. 8-9]
+STATE_DRAKWALD_FOREST,4037,810,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,0.67,[A] Drakwald proper with the infertile Midden Moors on its west,fandom:Middenland#Geography [Sigmar's Heirs pp. 53-58] ; fandom:Midden_Moors [Archives of the Empire I p. 10] ; fandom:Drakwald_Forest [Beasts of Chaos 6e p. 11]
+STATE_VORBERGLAND,4003,859,,building_subsistence_farm,building_wheat_farm building_vineyard building_livestock_ranch,temperate_forest_hill,,[A] Fertile foothill valleys; Eilhart white wine; Boegenhafen wool and wine; wild western end,fandom:Vorbergland [WFRP 4e p. 268] ; fandom:Eilhart [WFRP 4e p. 281] ; fandom:Bögenhafen [Shadows over Bögenhafen pp. 6-8]
+STATE_REIKWALD_FOREST,4097,912,,building_subsistence_farm,building_wheat_farm building_vineyard building_livestock_ranch,temperate_forest_hill,1.5,[A] Holds the Suden Vorbergland: Reikland's most cultivated land and its wine export,"fandom:Vorbergland [WFRP 4e pp. 80, 268] ; fandom:Reikland#Vorbergland [Sigmar's Heirs pp. 77-85] ; fandom:Stromdorf [The Gathering Storm p. 9]"
+STATE_BECHAFEN,4374,837,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,,[A] Ostermark's agricultural core in the well-settled Gryphon's Wood; lumber and riverboats,lex:Ostermark [White Dwarf 326 p. 58; Sigmar's Heirs pp. 68-69] ; fandom:Ostermark [Sigmar's Heirs pp. 68-72]
+STATE_MOOTLAND,4292,965,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_tobacco_plantation building_vineyard,temperate_river_plain,1.5,[A] Best farmland of the central Empire; grain north; sheep and apples south-west; tobacco south-east,fandom:Mootland#Geography [Sigmar's Heirs pp. 59-63] ; fandom:Greenleaf [Archives of the Empire I p. 44] ; lex:The_Moot [Empire 7e p. 118]
+STATE_AULD_RYDING,4333,984,,building_subsistence_farm,,temperate_forest_hill,0.45,[C] Identity inferred: the barren marsh-and-fallow-hill tract south of Sylvania,fandom:Sylvania#Geography [Night's Dark Masters pp. 84-91] ; fandom:Stirland#Geography [Sigmar's Heirs pp. 85-86]
+STATE_EAST_STIRLAND,4242,934,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,temperate_forest_hill,,[A] Settled rolling plain for crops and cattle; a breadbasket province but a poor one,"lex:Stirland [Sigmar's Heirs pp. 7, 85-87] ; fandom:Stirland#Geography [Sigmar's Heirs pp. 85-89]"
+STATE_EAST_AVERLAND,4271,1008,,building_subsistence_farm,building_vineyard building_livestock_ranch building_wheat_farm,temperate_forest_hill,,[A] Averland's wine country (Grenzstadter White); mines and furs at the mountain edge,fandom:Averland#Geography [Sigmar's Heirs pp. 43-48] ; fandom:Grenzstadt [Realms of Sorcery p. 234]
+STATE_AVERHEIM,4211,970,,building_subsistence_farm,,temperate_river_plain,,[A] Flood-watered Aver plain; cattle stockyards; horses; wine festival,"fandom:Averland#Geography [Sigmar's Heirs pp. 43-48] ; fandom:Averheim#Economy [Sigmar's Heirs p. 46; WFRP 3e The Enemy Within pp. 23, 26]"
+STATE_SOLLAND,4195,1031,,building_subsistence_farm,building_livestock_ranch building_wheat_farm,temperate_forest_hill,,[A] Rolling sheep grassland famous for wool; farmland in the north; ruins from Gorbad,fandom:Wissenland#Geography [Sigmar's Heirs pp. 94-98] ; fandom:Solland#Geography [Archives of the Empire I]
+STATE_WEST_STIRLAND,4164,931,,building_subsistence_farm,building_livestock_ranch building_vineyard building_wheat_farm,temperate_forest_hill,,[A] Stirhuegel sheep hills (Flensburg market); western Stirland's wine,fandom:Stirland#Geography [Sigmar's Heirs pp. 85-89] ; fandom:Flensburg [Sigmar's Heirs pp. 85-86] ; fandom:Wurtbad [Sigmar's Heirs p. 88]
+STATE_SOUTH_TALABECLAND,4187,872,,building_subsistence_farm,building_rye_farm building_livestock_ranch building_vineyard,temperate_forest_hill,,[B] Reik-Stir end of the Great Forest; Kemperbad brandy (vineyard is an inference),fandom:Talabecland#Geography [Sigmar's Heirs pp. 77-81] ; fandom:Kemperbad [Sigmar's Heirs pp. 82-84]
+STATE_VOLGEN,4139,852,,building_subsistence_farm,,temperate_forest_hill,0.67,"[C] TW name, no canon page; Great Forest cap from the province text",fandom:Talabecland#Geography [Sigmar's Heirs pp. 77-81]
+STATE_SOUTH_MIDDENLAND,4154,808,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,0.67,[B] Drakwald on the Talabec bank under the barren Howling Hills,fandom:Middenland#Geography [Sigmar's Heirs pp. 53-58] ; fandom:Howling_Hills [The Nemesis Crown p. 9]
+STATE_NORTH_TALABECLAND,4247,823,,building_subsistence_farm,,temperate_forest_hill,0.67,"[B] Dark pine forest along the Talabec; timber, charcoal, pelts, river fish",fandom:Talabecland#Geography [Sigmar's Heirs pp. 77-81] ; fandom:River Talabec [WFRP 1e p. 283; Death on the Reik p. 23]
+STATE_EAST_TALABECLAND,4255,861,,building_subsistence_farm,,temperate_forest_hill,0.67,[B] Eastern Great Forest and the largely uninhabited Kolsa Hills,fandom:Talabecland#Geography [Sigmar's Heirs pp. 77-81]
+STATE_WEST_OSTERMARK,4334,866,,building_subsistence_pasture,,temperate_forest_hill,0.67,"[A] Bleak Moors and Dead Wood: fens, sheep-herding, small dairy herds, crofts",lex:Ostermark#Known features [Sigmar's Heirs pp. 68-69] ; fandom:Ostermark [Sigmar's Heirs pp. 68-72]
+STATE_GRYPHON_WOOD,4326,804,,building_subsistence_farm,,temperate_forest_hill,0.67,[A] Forest arm on the upper Talabec; timber country with small villages,lex:Ostermark#Known features [Sigmar's Heirs pp. 68-69]
+STATE_BOHSENFELS,4259,689,,building_subsistence_pasture,,temperate_forest_hill,0.67,[B] Ostland's Northern March: windswept grass; exports salted fish and sheep's-milk cheese,fandom:Ostland [Sigmar's Heirs pp. 73-76; Archives of the Empire I p. 13]
+STATE_SOUTH_OSTLAND,4282,761,,building_subsistence_farm,,temperate_forest_hill,0.67,[A] Forest of Shadows with cleared patches; plains by Wolfenburg; timber; not a breadbasket,fandom:Ostland [Sigmar's Heirs pp. 73-76] ; lex:Talabec [WFRP Companion p. 22] ; lex:Wolfenburg [Sigmar's Heirs pp. 75-76]
+STATE_MIDDLE_MOUNTAINS,4209,722,,building_subsistence_farm,building_livestock_ranch building_rye_farm,highland_alpine,0.67,[A] Barren forested peaks; a few hardy foothill farmers; held by none,fandom:Middle_Mountains [The Horned Rat Companion pp. 65-67] ; lex:Middle_Mountains [Beasts of Chaos 6e p. 10]
+STATE_MIDDENHEIM,4153,746,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,0.67,[A] Poor boggy acid land that just feeds the city; little dairy; timber,fandom:Middenland#Economy [Middenheim: City of the White Wolf pp. 119-121] ; fandom:Old_World_Trade_and_Economy [Old World Armoury p. 13]
+STATE_EAST_NORDLAND,4138,677,,building_subsistence_farm,,temperate_forest_hill,0.67,"[A] Forest-blanketed coast, people in cleared pockets; herring and cod, timber, sheep",lex:Nordland#Overview [Sigmar's Heirs p. 63ff] ; fandom:Nordland [Sigmar's Heirs pp. 63-68]
+STATE_REIKLAND_PROPER,4067,872,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_river_plain,,[A] Reik-Talabec confluence: alluvial farmland and pasture on black river soil,fandom:Altdorf#Reikdorf ; lex:Reik [WFRP 1e p. 283; Empire 8e pp. 24-26] ; fandom:Reikland [Sigmar's Heirs pp. 77-85]
+STATE_THE_VELDT,4426,821,,building_subsistence_pasture,,temperate_forest_hill,,[A] Rolling ploughable grassland kept as horse range; Heffengen horse market,lex:Ostermark#Known features [Sigmar's Heirs pp. 68-69] ; fandom:Fortenhaf [Sigmar's Heirs pp. 71-72]
+STATE_DRAKENHOF,4353,945,,building_subsistence_farm,,temperate_forest_hill,0.45,[B] Sylvania: warpstone-laced thin soil; bog and moor; low yields; goats and pigs,"fandom:Sylvania#Geography [Night's Dark Masters pp. 84-91] ; lex:Sylvania [Vampire Counts 7e pp. 20-22; Sylvania the Cursed County pp. 4-5, 10]"
+STATE_EAST_SYLVANIA,4385,915,,building_subsistence_farm,,temperate_forest_hill,0.45,[B] Sylvania round Waldenhof: same poisoned soil; the bleakest eastern part,fandom:Sylvania#Geography [Night's Dark Masters pp. 84-91] ; fandom:Stirland#Geography [Sigmar's Heirs pp. 85-89]
+STATE_WEST_SYLVANIA,4314,912,,building_subsistence_farm,,temperate_forest_hill,0.45,[A] Hel Fenn marsh; Hunger and Grim Woods; Grim Moor peat bog; county-wide famine,fandom:Stirland#Geography [Sigmar's Heirs pp. 85-89] ; fandom:Hel_Fenn [Vampire Counts 8e p. 21] ; fandom:Sylvania#The_Sylvanians [Night's Dark Masters pp. 84-91]
+STATE_WEST_AVERLAND,4200,992,,building_subsistence_farm,,temperate_river_plain,,[A] Open plain of tenant villages and longhorn herds; Heideck cattle market,fandom:Averland#Geography [Sigmar's Heirs pp. 43-48] ; lex:Heideck [Sigmar's Heirs pp. 46-47] ; fandom:Loningbruck [Sigmar's Heirs p. 44]
+STATE_WURTBAD,4205,909,,building_subsistence_farm,building_vineyard building_wheat_farm building_livestock_ranch,temperate_forest_hill,,[A] Wine capital of the Empire: vineyards round the town at the Great Forest's edge,fandom:Wurtbad [Sigmar's Heirs pp. 85-89] ; lex:Wurtbad [Sigmar's Heirs pp. 86-88]
+STATE_MIDDENLAND_PROPER,4113,794,,building_subsistence_farm,building_rye_farm building_livestock_ranch building_vineyard,temperate_forest_hill,,[B] Altdorf-Middenheim road corridor in the Drakwald; Delberz known for its wines,"fandom:Delberz [Sigmar's Heirs pp. 53, 56] ; fandom:Middenland#Economy [Middenheim: City of the White Wolf pp. 120-121]"
+STATE_NORTH_OSTLAND,4216,690,,building_subsistence_farm,,temperate_forest_hill,0.67,[A] Forest of Shadows with farms in cleared patches; cattle; Ferlangen furs and timber,lex:Ostland [Sigmar's Heirs pp. 73-74; Uniforms & Heraldry pp. 36-39] ; fandom:Ferlangen [Sigmar's Heirs p. 75]
+STATE_HOCHLAND,4221,771,,building_subsistence_farm,,temperate_forest_hill,0.67,[A] Mostly forest; fertile riverside farms keep it self-sufficient; exports timber,fandom:Hochland#Geography [Sigmar's Heirs pp. 49-52] ; lex:Hochland [Uniforms & Heraldry p. 18]
+STATE_WISSENLAND,4125,968,,building_subsistence_farm,building_wheat_farm building_vineyard building_livestock_ranch,temperate_river_plain,,[A] Fertile Reik bank from Nuln to Pfeildorf; Nuln wines; Pfeildorf wool market,fandom:Wissenland#Geography [Sigmar's Heirs pp. 94-98] ; fandom:Solland#Geography [Archives of the Empire I] ; fandom:Pfeildorf [Sigmar's Heirs p. 96]
+STATE_MARIENBURG,3964,785,,building_subsistence_fishing_village,building_livestock_ranch,temperate_forest_hill,0.45,[A] Fed by the Manaanspoort fishery; Kleinland sheep heath; marsh and moor; no polders in canon,fandom:The_Wasteland#Geography [Marienburg: Sold Down the River pp. 8-10] ; lex:Wasteland [Marienburg: Sold Down the River pp. 6-10 and 16-20]
+STATE_L_ANGUILLE,3801,751,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,temperate_river_plain,1.5,"[A] Almost all arable, fertile soil, mild weather, harvests most of the year; Sannez mouth; no vines on this coast",lex:L'Anguille#Geography [Knights of the Grail pp. 43-46] ; fandom:L'Anguille#Geography [Knights of the Grail pp. 41-46] ; rw:Normandy [EB1911 France] ; vanilla:STATE_NORMANDY arable 120
+STATE_MARCHES_OF_COURONNE,3926,739,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[A] Plains too dry for most crops; Bretonnia's horse-breeding march,fandom:Couronne#Marches_of_Couronne [Knights of the Grail pp. 67-70]
+STATE_COURONNE,3851,720,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,temperate_river_plain,,"[A] Couronne proper mostly arable, pastoral toward the Pale Sisters; horse-breeding everywhere; Sannez runs through",lex:Couronne#Geography [Knights of the Grail pp. 67-70] ; fandom:Couronne#Geography [Knights of the Grail pp. 67-70] ; lex:Bretonnia#Rivers [Knights of the Grail p. 9] ; vanilla:STATE_NORMANDY arable 120
+STATE_GISOREUX,3869,823,,building_subsistence_farm,building_livestock_ranch building_wheat_farm building_vineyard,temperate_forest_hill,,[A] Plains and North Gisoreux both mostly pastoral and hilly; arable along the Sannez; Valle Florida vineyards,fandom:Gisoreux#Geography [Knights of the Grail pp. 70-73] ; fandom:Gisoreux#Valle Florida [Knights of the Grail pp. 70-73] ; vanilla:STATE_BRITTANY arable 120
+STATE_BASTONNE,3874,898,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_forest_hill,,"[A] West mainly arable, east pastoral; much of the empty Forest of Chalons inside it","lex:Bastonne#Geography [Knights of the Grail pp. 54-57] ; fandom:Bastonne#Geography [Knights of the Grail pp. 16, 54-56] ; vanilla:STATE_POITOU arable 90"
+STATE_MONTFORT,3941,863,,building_subsistence_farm,building_livestock_ranch building_wheat_farm,highland_alpine,,[A] Almost all in the Grey Mountains; little and infertile farmland; imports food after any bad harvest,fandom:Montfort#Geography [Knights of the Grail pp. 78-79] ; lex:Bastonne#The People [Knights of the Grail pp. 54-57] ; vanilla:STATE_SAVOY arable 20
+STATE_PARRAVON,4018,927,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,highland_alpine,1.5,"[A] Mountain dukedom; most people in fertile Parravon Vale, arable centre and pastoral rim",fandom:Parravon#Geography [Knights of the Grail pp. 85-86] ; lex:Parravon#People [Knights of the Grail pp. 85-97] ; vanilla:STATE_WEST_SWITZERLAND arable 50
+STATE_ANMYR,4009,991,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,"[A] Witherhold: Morghur's blight, withering groves, barren soil; Asrai hunt, no fields",fandom:Anmyr [Wood Elves 8e p. 12] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_QUENELLES,3977,975,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_forest_hill,,"[A] North pastoral, south arable; city on the Brienne; wheat is the Bretonnian staple",lex:Quenelles [Knights of the Grail] ; fandom:Quenelles [Knights of the Grail pp. 88-90] ; lex:Bretonnia [Knights of the Grail ch. I p. 6]
+STATE_GRAVE_OF_CUILEUX,3915,994,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_forest_hill,0.67,"[A] Arable south of Quenelles, but a large tract (the Grave) is left unfarmed",lex:Quenelles [Knights of the Grail] ; fandom:Quenelles [Knights of the Grail pp. 88-90]
+STATE_MASSIF_ORCAL,3933,933,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,"[A] Barren greenskin highland, thin soil, no fertile land; few fortified human villages",fandom:Massif Orcal [White Dwarf 249 p. 19] ; fandom:Quenelles#Geography [Knights of the Grail pp. 88-90] ; rw:Massif Central [EB1911 France]
+STATE_AQUITAINE,3846,963,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_river_plain,,"[A] Almost entirely arable lowland; class used for its density, canon names no major river",lex:Aquitaine [Knights of the Grail ch. VI pp. 47-49]
+STATE_BRIONNE,3847,1004,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_river_plain,,"[A] Mostly arable, some pasture east and south; port at the Brienne mouth",fandom:Brionne [Knights of the Grail pp. 61-62] ; lex:Bretonnia [Knights of the Grail ch. I p. 6]
+STATE_BORDELEAUX,3822,918,,building_subsistence_farm,building_vineyard building_wheat_farm building_livestock_ranch,temperate_river_plain,,"[A] Largest wine exporter; mostly arable, suited to cereals and vines; Morceaux Valley wine; Gilleau mouth",fandom:Bordeleaux#lead [Knights of the Grail pp. 58-59; WFRP 1e Core p. 275] ; lex:Bordeleaux#Geography [Knights of the Grail ch. VI] ; rw:Bordeaux [en.wikipedia.org/wiki/History_of_Bordeaux_wine] ; vanilla:STATE_GUYENNE arable 90
+STATE_MOUSILLON,3773,846,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,temperate_river_plain,,"[B] Owned by Lyonesse: the fertile ex-Mousillon land, mainly arable lake and river country; not the swamp",fandom:Lyonesse#Geography [Knights of the Grail pp. 74-76] ; fandom:Mousillon#Geography [Knights of the Grail pp. 81-83] ; lex:Mousillon#lead [Barony of the Damned pp. 11-12] ; vanilla:STATE_MAINE_ANJOU arable 112
+STATE_ARTOIS,3807,806,,building_subsistence_farm,building_livestock_ranch building_wheat_farm,temperate_forest_hill,0.67,"[A] All but a western strip inside the Forest of Arden; forest villages keep stock, not crops",fandom:Artois#lead [Knights of the Grail pp. 51-52] ; lex:Artois#Geography [Knights of the Grail pp. 51-53] ; vanilla:STATE_WALLONIA arable 55
+STATE_LYONESSE,3739,795,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,temperate_forest_hill,1.5,[A] Mainly arable inland; island coast with offshore villages; motte hills; no vines (Breton analogue),fandom:Lyonesse#Geography [Knights of the Grail pp. 74-76] ; lex:Lyonesse#Geography [Knights of the Grail pp. 74-77] ; vanilla:STATE_BRITTANY arable 120
+STATE_WEST_CARCASSONNE,3904,1052,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,temperate_forest_hill,0.67,[A] Narrow arable bands on the rivers; otherwise pastoral or mountain; foothill sheep,lex:Carcassonne [Knights of the Grail ch. VI pp. 64-65]
+STATE_TORGOVANN,4030,1023,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,"[B] Forge of Starlight: smiths' realm in beech forest; Asrai hunt, no fields",fandom:Torgovann [Wood Elves 8e p. 12] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_YI_EDRI_ETERNOS,4051,1032,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,"[B] Oak of Ages, sacred heart of Athel Loren; no land use",fandom:Oak of Ages ; fandom:Talsyn [Wood Elves 8e p. 10] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_KING_S_GLADE,4066,1043,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,[B] King's Glade: clearing and living-tree city of Ariel and Orion; no fields,fandom:King's Glade ; fandom:Talsyn [Wood Elves 8e p. 10] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_TAL_ESTH,4070,967,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,"[C] Name attested only in End Times text; by owner part of Wydrioth, the Pine Crags",fandom:Wydrioth [Wood Elves 8e p. 12] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_LYONESSE_HILLS,3735,748,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,temperate_forest_hill,1.5,"[A] Northern Lyonesse: mainly arable, dotted with castled mottes; no vines (Breton analogue)",fandom:Lyonesse#Geography [Knights of the Grail pp. 74-76] ; lex:Lyonesse#Geography [Knights of the Grail pp. 74-77] ; vanilla:STATE_BRITTANY arable 120
+STATE_CASTLE_SANGASSE,3911,869,,building_subsistence_farm,building_livestock_ranch building_wheat_farm,temperate_forest_hill,,[B] Eastern Bastonne by owner and position: the pastoral side under the Massif Orcal,"fandom:Bastonne#Geography [Knights of the Grail pp. 16, 54-56] ; fandom:Castle Sangasse [Knights of Bretonnia omnibus] ; vanilla:STATE_BURGUNDY arable 80"
+STATE_WATERFALL_PALACE,4052,968,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,[B] Naiad court among waterfalls in Argwylon; no land use,fandom:Nymphs ; fandom:Argwylon [Wood Elves 8e p. 11] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_ARGWYLON,4049,993,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,[B] Moonspring Glades: mages' realm of rivers and waterfalls; no fields,fandom:Argwylon [Wood Elves 8e p. 11] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_GLADE_OF_ETERNAL_MOONLIGHT,4024,963,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,[C] Named once in the dump with no location; Athel Loren row by owner,fandom:Slaughter at Bleak Meadow ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_CASTLE_MOUSILLON,3820,866,,building_subsistence_farm,building_rye_farm building_livestock_ranch,temperate_forest_hill,0.45,"[A] Cursed rump duchy: Grismerie swamp and thorn hills, very poor farming, frogs and snails, no horses",fandom:Mousillon#Geography [Knights of the Grail pp. 81-83] ; fandom:Mousillon#Swamping [Barony of the Damned pp. 6-9] ; lex:Mousillon#Locations [Barony of the Damned pp. 7-9] ; rw:Landes of Gascony [en.wikipedia.org/wiki/Landes_of_Gascony]
+STATE_CARCASSONNE,3974,1064,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,temperate_forest_hill,0.67,[A] Narrow arable bands on the rivers; otherwise pastoral or mountain; foothill sheep,lex:Carcassonne [Knights of the Grail ch. VI pp. 64-65]
+STATE_GLADE_OF_ETERNAL_MIDNIGHT,4024,1053,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,[C] No canon text under this name; Athel Loren row by owner,fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_TYR_VANNA,4085,1068,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,[C] Name attested only in End Times text; Athel Loren row by owner,fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_TALSYN,4059,1068,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,"[B] Grove of Eternity: forest realm, not the steppe the layer reads; no fields",fandom:Talsyn [Wood Elves 8e p. 10] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_HALLS_OF_EQUOS,4038,1067,,building_subsistence_pasture,building_livestock_ranch,steppe,,"[C] Probably Cavaroc (Lord Edrael of Equos): sparsely wooded grassland plains, horsemasters",fandom:Cavaroc [Wood Elves 8e p. 11]
+STATE_WYDRIOTH,4081,1010,,building_subsistence_pasture,building_livestock_ranch,temperate_forest_hill,0.45,[B] Pine Crags: steep living fortress against dwarfs and greenskins; no fields,fandom:Wydrioth [Wood Elves 8e p. 12] ; fandom:Wood Elves#The Sundering [Wood Elves 8e pp. 15-27]
+STATE_BREGANALLE,3840,1052,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,temperate_forest_hill,0.67,[B] Western Carcassonne; dukedom text applied; the town itself was destroyed by Kemmler in 2475 IC,"lex:Carcassonne [Knights of the Grail ch. VI pp. 64-65] ; fandom:The Vaults [White Dwarf 309, Return of the Lichemaster]"
+STATE_PALE_SISTERS,3887,782,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,"[A] Largely barren white-rock range, brigands and a few goblins; pastoral fringe; greenskin owner herds",fandom:Pale Sisters#lead [WFRP 1e Core pp. 274-275; Knights of the Grail p. 71] ; lex:Couronne#Geography [Knights of the Grail pp. 67-70]
+STATE_CROOKED_CORRIDOR,3951,843,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,,[A] Snow-shut smugglers' pass known to goatherds; Karak Ziflin herds (standing dwarf ruling),"fandom:Montfort#Crooked Corridor [WFRP 4e Core p. 284] ; fandom:Karak Ziflin#Subsidiary Settlements [Lords of Stone and Steel pp. 19, 24]"
+STATE_OIS_GAP,3926,808,,building_subsistence_farm,building_livestock_ranch building_rye_farm,highland_alpine,,[B] Hill pass with Fort Bergbres; no land-use text for the gap; Gisoreux hill country is pastoral,fandom:Fort Bergbres [Marienburg: Sold Down the River p. 10] ; fandom:Gisoreux#Geography [Knights of the Grail pp. 70-73] ; rw:France rye uplands [EB1911 France]
+STATE_AXE_BITE_PASS,4016,904,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,[B] Sheer pass living on tolls; dwarf-held (pasture by standing ruling),"fandom:Axe_Bite_Pass [Knights of the Grail] ; fandom:Karak_Ziflin [Lords of Stone and Steel pp. 19, 24]"
+STATE_NORTH_GREY_MOUNTAINS,4085,957,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,highland_alpine,,"[A] Karak Azgaraz: fortified farms grow wheat, barley and hops; mountain cattle and goats; grain hold ruling holds",fandom:Karak Azgaraz#Society [Archives of the Empire I p. 69] ; fandom:Karak Azgaraz#Surface Features [WFRP 3e Book of Grudges pp. 16-29] ; vanilla:STATE_TYROL arable 30
+STATE_EASTERN_IRRANAS,3904,1085,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,"[A] Barren, cold eastern Irranas where they join the Vaults",lex:Irrana_Mountains [WFRP 1e pp. 270-279] ; fandom:Tilea#Geography [Dogs of War 5e p. 76]
+STATE_NOVALONE_PASS,4026,1100,,building_subsistence_pasture,building_livestock_ranch building_rye_farm,highland_alpine,,"[A] Vaults pass: dwarf grain fort, a cheese-and-wool town, cattle pasture and modest harvests in the valleys",fandom:Karak Eksfilaz [Lords of Stone and Steel p. 23] ; fandom:Karak Kaferkammaz [Dwarfs: Stone and Steel p. 112] ; fandom:The Vaults [WFRP 1e p. 274]
+STATE_APUCCINI_MOUNTAINS,4018,1174,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[A] Rugged, largely uninhabited range, but Karak Grom is fed by a grain fort and a grain, cheese and wool town",lex:Apuccini_Mountains [WFRP 1e pp. 270-271; Dogs of War 5e pp. 75-76] ; fandom:Karak Grom [Lords of Stone and Steel p. 24]
+STATE_DARK_MAIDEN_PASS,4004,1212,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,,[B] Canon pass across the southern Apuccini; no land-use text; range text applied,fandom:Apuccini Mountains#Dark Maiden Pass [Renegade Crowns p. 6] ; lex:Apuccini_Mountains [WFRP 1e pp. 270-271; Dogs of War 5e pp. 75-76]
+STATE_RED_CLOUD_MOUNTAINS,4391,1559,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[B] Karag Orrud volcano, Red Cloud goblins; no land-use text; herding by realm canon",fandom:Karag_Orrud [Dwarfs 6e rev p. 23; O&G 7e p. 14] ; fandom:Dwarfs#Economy [Stone and Steel p. 16]
+STATE_SOUTHERN_WORLDS_EDGE,4448,1665,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,"[B] Mahrak's mountains, Nehekhara side: drained desert land; Hejaz-type dry range",lex:Mahrak [Tomb Kings 6e pp. 18-19] ; fandom:Nehekhara [Tomb Kings 8e] ; vanilla:STATE_HEDJAZ arable 20 pasture
+STATE_MOUNTAINS_OF_DAWN,4525,1534,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Nehekharan name for the range splitting the Great Land; no land-use text; realm canon,fandom:Worlds_Edge_Mountains [Neferata ch. 13] ; fandom:Dwarfs#Economy [Stone and Steel p. 16]
+STATE_CRIPPLE_PEAK,4582,1452,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.45,"[A] Nagashizzar: warpstone-poisoned shore, sick vegetation, locals became ghouls",lex:Sour_Sea [Undead 4e pp. 14-16] ; lex:Nagashizzar [Undead 4e pp. 6-10] ; lex:Cripple_Peak
+STATE_BLISTERING_PEAKS,4579,1364,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Fire Mountain (Karag Haraz) country south of Karak Azul; no land-use text,fandom:Karak_Azul [Stone and Steel pp. 32-33] ; fandom:Dwarfs#Economy [Stone and Steel p. 16]
+STATE_IRON_PEAKS,4551,1316,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Karak Azul: mining and forge hold on a plateau; herding by realm canon,fandom:Karak_Azul [Stone and Steel pp. 32-33; Dwarfs 8e p. 24] ; fandom:Farmers_and_Herders_Guild [Stone and Steel p. 18]
+STATE_DESOLATION_OF_NAGASH,4519,1397,,building_subsistence_pasture,,open_desert,,"[A] Canon desert round Nagashizzar, made by warpstone mining",lex:Desolation_of_Nagash [Undead 4e p. 7] ; fandom:Desolation_of_Nagash [White Dwarf 249 p. 37]
+STATE_DRAGON_CRAG,4407,1352,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[B] Karak Azgal (Karag Drakk): ruin taxed for treasure, town of Deadgate; no farming text",lex:Karak_Azgal [Stone and Steel p. 38; Karak Azgal sourcebook] ; fandom:Karak_Azgal
+STATE_KARAG_ZIFLIN,4418,1283,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] One of the eight peaks (Windswept Mountain); as Karak Eight Peaks,lex:Karak_Eight_Peaks [Dwarfs 8e pp. 20-21]
+STATE_SOUR_CRAGS,4431,1432,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,[A] Sour Sea shore poisoned; Misty Mountain goblins farm cave fungus and herd squigs,lex:Sour_Sea [Undead 4e pp. 14-16] ; fandom:Misty_Mountain [O&G 8e pp. 21-23]
+STATE_CROOKED_MOUNTS,4333,1332,,building_subsistence_pasture,,open_desert,,"[B] Confirm layer. Crooked Fang Fort stands in the centre of the plains: not a mountain state, drop KA-01",lex:Badlands#Locations [Orcs & Goblins 8e p. 12; Blood in the Badlands]
+STATE_WINTERTEETH_PASS,4165,1092,,building_subsistence_farm,building_livestock_ranch building_rye_farm,highland_alpine,,"[B] One-province mountain pass watched by forts; class by name, no measurable effect",fandom:Black_Mountains [Empire 8e p. 24; Sigmar's Heirs p. 5]
+STATE_SHATTERED_TEETH,4117,1092,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,highland_alpine,1.5,[A] Karak Izor: human villages farm sheltered valleys; grain produced for trade. Grain-hold ruling stands,fandom:Karak_Izor [Stone and Steel pp. 36-37] ; fandom:Hochstadt [Stone and Steel p. 112] ; lex:Karak_Izor [Lords of Stone and Steel p. 23]
+STATE_BLACK_MOUNTAINS,4244,1062,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[A] Karak Hirn group: gazetteer villages make grain and wool; furs. Ruling kept, farm is arguable","fandom:Karak_Hirn [Lords of Stone and Steel p. 23] ; fandom:Karak_Angazhar [Lords of Stone and Steel pp. 15, 23] ; fandom:Dwarfs#Economy [Stone and Steel pp. 17-20]"
+STATE_BLACK_FIRE_PASS,4302,1043,,building_subsistence_farm,building_livestock_ranch building_rye_farm,highland_alpine,0.67,[A] Lava chasm between volcanic glass cliffs; garrison of hunters and trappers; no vines,fandom:Black_Fire_Pass [WFRP 3e Black Fire Pass] ; lex:Black_Fire_Pass [Black Fire Pass pp. 3-14]
+STATE_BLACK_MOUNDS,4353,1029,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[B] Karak Varn: flooded mining hold on the Black Water, lost to Skaven and goblins",lex:Karak_Varn [Dwarfs 8e p. 20; WD 152 p. 55] ; lex:Black_Water [WD 152 p. 54]
+STATE_FOREST_OF_GLOOM,4362,1063,,building_subsistence_farm,building_livestock_ranch building_wheat_farm,temperate_forest_hill,0.45,"[A] Real forest (Black Deeps belt), burnt 2497 IC, held by forest goblins and beastmen; untilled",fandom:Forest_of_Gloom [Renegade Crowns p. 6; Lords of Stone and Steel p. 6] ; fandom:Black_Deeps [Beastmen 7e p. 20] ; lex:Forest_of_Gloom [WD 170 pp. 50-69]
+STATE_AGRILDRIN,4468,1062,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Karaz-a-Karak and the Silver Road; no hold-level farming text; realm canon,fandom:Dwarfs#Economy [Stone and Steel pp. 16-18] ; lex:Karaz-a-Karak [Dwarfs 8e p. 24]
+STATE_WEST_MAD_DOG_PASS,4447,1152,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[B] Mountain pass riddled with Night Goblin burrows; fungus and squigs, no ploughland",lex:Mad_Dog_Pass [WFB 8e p. 196] ; fandom:Mad_Dog_Pass [Lure of the Liche Lord pp. 21-22]
+STATE_OLD_DWARF_ROAD,4360,1092,,building_subsistence_farm,,steppe,,"[A] Confirm layer. Munzig: timber, sheep, market; Akendorf: timber, hogs, furs. Logging, not ploughland",fandom:Border_Princes#Settlements [Renegade Crowns] ; fandom:Munzig [Gilead's Blood; Renegade Crowns p. 42] ; lex:Akendorf [WD 125 p. 31]
+STATE_WEST_DEATH_PASS,4433,1243,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[A] Black Crag: snow-capped pass; Red Fangs are nomads following war-boar herds,fandom:Red_Fangs [O&G Collector's Guide p. 4] ; fandom:Death_Pass [Arcane Journal O&G p. 9]
+STATE_THUNDER_PEAKS,4484,1203,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Thunder Mountain volcano and lost Karak Krum; no land-use text,lex:Thunder_Mountain [O&G 8e p. 28] ; lex:Karak_Krum [The Great Betrayal]
+STATE_EAST_DEATH_PASS,4561,1259,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,"[B] Dark Lands end of Death Pass: bleak, desolate flank",fandom:Death_Pass [Arcane Journal O&G p. 9] ; lex:Lair-Nests_of_the_Dark_Lands [Skaven 7e]
+STATE_EAST_MAD_DOG_PASS,4575,1196,,building_subsistence_pasture,,open_desert,,[B] Dark Lands apron below the pass (Crookback Mountain): dusty barren plain,lex:Lair-Nests_of_the_Dark_Lands [Skaven 7e] ; fandom:Crookback_Mountain [Skaven 4e pp. 7-8]
+STATE_BLIZZARD_PEAKS,4511,1119,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Unnamed in canon; high range east of Karaz-a-Karak; realm canon only,fandom:Dwarfs#Economy [Stone and Steel p. 16]
+STATE_BROKEN_TEETH,4647,1485,,building_subsistence_pasture,,open_desert,,[B] Canon feature beside the Plain of Bones; between the Dark Lands and Nagash's desert,fandom:Luka_Huarugoin [Dogs of War 5e p. 91] ; fandom:Dark_Lands [Chaos Dwarfs 5e p. 4] ; fandom:Bitter_Sea [Tomb Kings 8e p. 17]
+STATE_NORTHERN_WORLD_S_EDGE,4639,644,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Northern range held by orcs; name states the mountains; realm canon only,lex:Worlds_Edge_Mountains [Realm of the Ice Queen p. 7] ; fandom:Dwarfs#Economy [Stone and Steel p. 16]
+STATE_IRONCRAFT_MOUNTAINS,4633,694,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[A] Karak Angkul: pastures outside the hold give milk and cheese,lex:Karak_Angkul [Thanquol's Doom ch. 6]
+STATE_NEW_LAHMIA,4630,774,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[B] Silver Pinnacle (Karaz Bryn), tallest peak of the range; no land-use text",lex:Silver_Pinnacle [Night's Dark Masters; Neferata] ; fandom:Silver_Pinnacle
+STATE_GROM_RIDGE,4526,933,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Unnamed in canon; high ridge between Gunbad and Peak Pass; realm canon only,fandom:Dwarfs#Economy [Stone and Steel p. 16]
+STATE_DELVED_HEIGHTS,4554,776,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Karak Ungor (Red Eye Mountain): Night Goblin fortress; fungus and squigs,lex:Karak_Ungor [Dwarfs 8e p. 26] ; fandom:Night_Goblin [O&G 8e pp. 11 52]
+STATE_DRAKEN_RIDGE,4541,864,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Unnamed in canon; range north of Peak Pass; realm canon only,fandom:Dwarfs#Economy [Stone and Steel p. 16]
+STATE_PEAK_PASS,4450,885,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,highland_alpine,,[A] Karak Kadrin: river valley; village Khazid Rhyn produces grain and wool,fandom:Karak_Kadrin#Settlements [Lords of Stone and Steel; Dragonslayer ch. 6] ; lex:Karak_Kadrin
+STATE_MOUNT_GUNBAD,4477,990,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,"[B] Lost gold mine, greatest Night Goblin lair; fungus and squigs",lex:Mount_Gunbad [Old World Rulebook p. 25; O&G 8e p. 28] ; fandom:Night_Goblin [O&G 8e pp. 11 52]
+STATE_SOUTH_GREY_MOUNTAINS,4106,1024,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,highland_alpine,,[A] Karak Norn: three cereal-growing dependencies and a Fertile Valley; departs from the dwarf pasture ruling,fandom:Karak Norn#Subsidiary Settlements [Lords of Stone and Steel pp. 24-26] ; fandom:Karak Norn#Geography [Lords of Stone and Steel pp. 27-32] ; vanilla:STATE_TYROL arable 30
+STATE_CLIFFS_OF_DAWN,4585,1626,,building_subsistence_pasture,,open_desert,,[C] Total War name; Nehekhara's mountain foot by position; realm desert,fandom:Nehekhara [Tomb Kings 8e] ; lex:Nehekhara [Tomb Kings 8e p. 17]
+STATE_HELMGART,3981,879,,building_subsistence_farm,building_livestock_ranch building_rye_farm,highland_alpine,,[B] Fortress and market town in the pass mouth; no canon land-use text found,fandom:Helmgart [Sigmar's Heirs p. 83; WFRP 4e p. 285]
+STATE_GREY_LADY_PASS,4048,928,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,[B] Abandoned castle in the high Grey Mountains; the pass's valley is sheep scrub,fandom:Sanglac_Castle [Knights of the Grail p. 87] ; fandom:Teufeltal [WFRP 3e Heroes Call p. 58]
+STATE_CHATEAU_LOVARRE,3962,1088,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,,"[B] One-province pass castle in the Irranas, held by Carcassonne; no land-use text","fandom:Château Lovarre [Warhammer Monthly 27, Crusader] ; lex:Irrana_Mountains [WFRP 1e pp. 270-279]"
+STATE_AMBER_SKULL,4618,1697,,building_subsistence_pasture,,open_desert,,[C] Total War name; Nehekhara east of the mountains by hubs; realm desert,fandom:Nehekhara [Tomb Kings 8e] ; lex:Nehekhara [Tomb Kings 8e p. 17]
+STATE_KARAK_EIGHT_PEAKS,4456,1312,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[A] Bowl ringed by eight peaks; crops and cattle fed the city until -513; besieged ruin now,lex:Karak_Eight_Peaks [Dwarfs 8e pp. 20-21; WD 375 p. 33] ; fandom:Karak_Eight_Peaks [Trollslayer]
+STATE_CURSED_WAY,4602,1561,,building_subsistence_pasture,,open_desert,,[C] No canon text; coast between Nagashizzar and Lahmia by position; realm desert,fandom:Nehekhara [Tomb Kings 8e] ; fandom:Desolation_of_Nagash [WD 249 p. 37]
+STATE_SHANIDAAR,4736,1716,,building_subsistence_pasture,,open_desert,,"[C] Canon battle site of unstated location; realm desert, could be wetter near the jungle",fandom:Araby [Undead 4e p. 12] ; fandom:Nehekhara [Tomb Kings 8e] ; fandom:Lybaras [Tomb Kings 8e p. 19]
+STATE_LAHMIA,4690,1607,,building_subsistence_pasture,,open_desert,,[B] Ruined necropolis of Lahmia; Nehekhara's land is drained desert,lex:Lahmia [Tomb Kings 6e pp. 10 16-17] ; fandom:Nehekhara [Tomb Kings 8e]
+STATE_HOUSE_OF_EVERLASTING_LIFE,4663,1633,,building_subsistence_pasture,,open_desert,,[B] Named for a Lahmian mortuary temple; Lahmia's hinterland; realm desert,fandom:Lahmia#Locations [Nagash the Unbroken] ; fandom:Nehekhara [Tomb Kings 8e]
+STATE_SIX_WATCH_FORTS,4692,1699,,building_subsistence_pasture,,open_desert,,[C] Total War name; road north of Lybaras toward Lahmia; realm desert,fandom:Lybaras [Tomb Kings 8e p. 19] ; fandom:Nehekhara [Tomb Kings 8e]
+STATE_CANTABRIO_ROAD,3683,1001,,building_subsistence_farm,building_vineyard building_livestock_ranch building_wheat_farm,temperate_forest_hill,,[A] Bilbali's north coast: famous dark red wine; humid Cantabrian-coast analogue,lex:Bilbali [Sea of Claws p. 139] ; fandom:Bilbali [Realms of Sorcery p. 234] ; rw:Spain [1911 EB Spain]
+STATE_CEFIRO_HILLS,3595,1017,,building_subsistence_farm,building_livestock_ranch building_wheat_farm building_vineyard,temperate_forest_hill,,[B] North-west hill coast (canon Obregon); no land-use text; Galicia analogue,lex:Obregon [The Old World website map] ; lex:Estalia#Trade [WFRP 1e p. 277] ; rw:Spain [1911 EB Spain]
+STATE_NUJA,3530,1122,,building_subsistence_farm,building_vineyard building_wheat_farm building_livestock_ranch,mediterranean,,"[B] South-west coast (canon Avila); realm text only: fertile south coast, wine, oil, fruit",lex:Estalia#Trade [WFRP 1e p. 277] ; fandom:Estalia [The Old World RPG Player's Guide p. 187]
+STATE_ESTALIAN_HIGHLANDS,3668,1063,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[B] Barren northern hill kingdoms on the Irrana flank; grain carried in; sheep country,lex:Estalia#Geography [WFB 3e p. 201] ; lex:Irrana_Mountains [WFRP 1e pp. 270-279] ; fandom:Irrana Mountains [Old World Armoury p. 11] ; fandom:Livestock [Old World Armoury p. 83]
+STATE_CENTRAL_MAGRITTA,3682,1121,,building_subsistence_farm,building_vineyard building_wheat_farm building_livestock_ranch building_cotton_plantation,mediterranean,,"[B] Magritta on the Tagos mouth: fertile south coast exporting wine, oil and fruit",lex:Estalia#Trade [WFRP 1e p. 277] ; fandom:Estalia [The Old World RPG Player's Guide p. 187] ; rw:Andalusia [1911 EB Spain]
+STATE_WEST_MAGRITTA,3619,1119,,building_subsistence_farm,building_vineyard building_wheat_farm building_livestock_ranch building_cotton_plantation,mediterranean,,[B] South coast west of Magritta; realm text only,lex:Estalia#Trade [WFRP 1e p. 277] ; fandom:Estalia [The Old World RPG Player's Guide p. 187]
+STATE_SOUTHEAST_MAGRITTA,3747,1191,,building_subsistence_farm,building_vineyard building_wheat_farm building_livestock_ranch building_cotton_plantation,mediterranean,,[A] Aguilas: hills clad in olive groves; south-east coast,lex:Aguilas [Fell Cargo ch. 17] ; lex:Estalia#Trade [WFRP 1e p. 277]
+STATE_EAST_MAGRITTA,3744,1139,,building_subsistence_farm,building_livestock_ranch building_vineyard building_wheat_farm,mediterranean,0.67,"[A] Zaragoz: pasture round the crag, orange groves and vines on higher ground, dry thorn scrub; arid uplands",fandom:Zaragoz#Geography [Zaragoz (novel)] ; fandom:Tobaro [WFRP Companion p. 79] ; rw:Castile [1911 EB Spain]
+STATE_WESTERN_IRRANAS,3756,1089,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,,[A] Largely barren peaks; poor mountain kingdoms; pass fortresses,lex:Irrana_Mountains [WFRP 1e pp. 270-279]
+STATE_EAST_BILBALI,3776,1041,,building_subsistence_farm,building_livestock_ranch building_wheat_farm building_vineyard,temperate_forest_hill,,[B] North-east coast (canon Novareno) under the Irranas; realm text only,lex:Novareno [The Old World website map] ; lex:Estalia#Trade [WFRP 1e p. 277] ; rw:Spain [1911 EB Spain]
+STATE_NORTH_TILEA,3924,1120,,building_subsistence_farm,building_wheat_farm building_vineyard building_livestock_ranch,temperate_river_plain,,"[A] Miragliano: swamp belt, then huge grain fields, orchards, vineyards and pasture; Ravola wine; Po-plain analogue","fandom:Miragliano#Surrounding Lands [Brunner the Bounty Hunter, Beneath the Vaults] ; lex:Miragliano [Up in Arms pp. 52-53] ; fandom:Ravola [Dogs of War 5e p. 77] ; rw:Lombardy [1911 EB Lombardy]"
+STATE_AQUILENA,4048,1208,,building_subsistence_farm,,steppe,,"[R] Confirm layer. TOW prince realm, no land-use text; realm canon: thorn plains, herdsmen, limited fertile land",fandom:Border_Princes#Geography [General's Compendium pp. 48-49; WFRP 1e pp. 271-274] ; vanilla:STATE_DOBRUDJA arable 10 farm
+STATE_VEREZZI,3937,1259,,building_subsistence_farm,building_wheat_farm building_vineyard building_livestock_ranch,mediterranean,1.5,[A] Verezzo dominates a fertile plain; two large grain villages and a citrus village,lex:Verezzo [Up in Arms p. 54]
+STATE_REMAS,3926,1209,,building_subsistence_farm,building_wheat_farm building_vineyard building_livestock_ranch,mediterranean,1.5,[A] Feeds itself from its own corn fields; imported grain only when vermin ate the crop,lex:Remas ; fandom:Remas [Dogs of War 5e p. 81]
+STATE_TRANTINE_HILLS,3958,1166,,building_subsistence_farm,building_vineyard building_livestock_ranch building_wheat_farm,mediterranean,,"[A] Hill state: orchards and olive groves, an olive village, two sheep villages; stony north-east",lex:Trantio [Up in Arms p. 54] ; fandom:Trantine Hills [Inferno! 21] ; fandom:Campogrotta [Death's Dark Shadow pp. 7-11]
+STATE_PLAINS_OF_LUCCINI,3897,1313,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,mediterranean,1.5,[A] Copious granaries; horses bred on the great southern plains; exports grain and wool; vineyards and olive groves,lex:Luccini [WFRP 1e pp. 279-280; Up in Arms p. 52] ; fandom:Luccini [Dogs of War 5e pp. 24-25]
+STATE_MONTE_CASTELLO,3962,1303,,building_subsistence_farm,building_livestock_ranch building_wheat_farm building_vineyard,mediterranean,0.67,[B] Arid south-east frontier under the Apuccini; no land-use text; Calabria analogue,fandom:Tilea#Geography [Dogs of War 5e pp. 75-76] ; lex:Monte_Castello [Town Cryer 28 p. 27]
+STATE_SARTOSA,3832,1332,,building_subsistence_fishing_village,building_vineyard building_wheat_farm,mediterranean,,"[A] Fertile but stony volcanic isle: grapes, olives, wheat; most food imported; sea feeds much of the diet",lex:Sartosa [WFRP Companion pp. 72-78] ; fandom:Sartosa [WFRP Companion p. 74]
+STATE_BLACK_PENINSULA,4102,1218,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,mediterranean,0.67,"[R] Tilean-founded cliff port Myrmidens; razorbill cliffs; no farming text. Class by analogue, equals layer mix",fandom:Myrmidens [Lords of the Lance ch. 2; Renegade Crowns] ; fandom:Black_Peninsula [Imperial Zoo p. 77] ; vanilla:STATE_DALMATIA arable 20 farm
+STATE_LOST_KHYPNIA,4231,1136,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_river_plain,0.67,"[A] Malko: especially fertile, rich farms, storehouses, the breadbasket of the Border Princes",fandom:Malko [General's Compendium p. 54; AJ Orc and Goblin Tribes pp. 12-15] ; lex:Malko [AJ Orc & Goblin Tribes pp. 13-15] ; fandom:Tana_Dante [Plague Daemon]
+STATE_ORTEGETA,4218,1092,,building_subsistence_pasture,building_livestock_ranch building_rye_farm,highland_alpine,0.67,"[B] Black Mountain foot: barren waste, valleys of turnips, beets, cabbages; Zani aurochs herders. Position inferred",fandom:Khypris [Plague Daemon ch. 1] ; fandom:Zani [General's Compendium p. 49] ; lex:Khypris [WD 125 pp. 12-16]
+STATE_EASTERN_BORDER_PRINCES,4286,1112,,building_subsistence_farm,,steppe,,"[A] Confirm layer. Brovska: agriculture and cattle; Styrtia: agriculture, cattle, vineyards; ~500 people each",fandom:Border_Princes#Settlements [Renegade Crowns] ; lex:Border_Princes#Locations [Renegade Crowns]
+STATE_SOUTHERN_SIREN_ISLES,3802,1232,,building_subsistence_orchard,building_vineyard building_livestock_ranch,mediterranean,0.67,"[C] Rocky Siren isles, mostly uninhabited; Vedenza exports olives and stone; identity rests on a hub placement",lex:Vedenza [Up in Arms p. 54] ; fandom:Isles of the Sirens [Imperial Zoo pp. 86-87] ; fandom:Tobaro [WFRP Companion p. 79]
+STATE_WESTERN_ESTALIAN_COAST,3580,1077,,building_subsistence_farm,building_wheat_farm building_vineyard building_livestock_ranch,mediterranean,,[B] West coast (canon Obregon); realm text only; Portuguese-coast analogue,lex:Estalia#Trade [WFRP 1e p. 277] ; lex:Obregon [The Old World website map]
+STATE_TOBARO,3790,1162,,building_subsistence_fishing_village,building_livestock_ranch building_vineyard,mediterranean,0.45,[A] Abasko cliffs drop to the sea; fishing villages; food imported for silver; few high valleys,lex:Abasko_Mountains [WFRP 1e pp. 279-280] ; lex:Tobaro [WFRP Companion pp. 79-86]
+STATE_MIDDLE_TILEA,3960,1215,,building_subsistence_farm,building_vineyard building_livestock_ranch building_wheat_farm,mediterranean,,[A] Pavona: a wine village and a wool-and-wine town on plains under the Apuccini,lex:Pavona [Children of the Horned Rat p. 55; Up in Arms p. 53] ; fandom:Pavona [Dogs of War 5e p. 80]
+STATE_SUSSURRIO_WOOD,3928,1301,,building_subsistence_farm,building_livestock_ranch building_wheat_farm building_vineyard,mediterranean,0.67,"[B] One of the two biggest woods in Tilea, inside Luccini's lands; woodland lowers the farmed share",fandom:Sussurrio Wood [Orcs and Goblins 8e p. 13; Wood Elves 8e p. 8; WFRP 1e p. 279]
+STATE_KHARNOS_FOREST,4184,1145,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,temperate_forest_hill,,[A] Confirm layer class. Dense oak brigand forest plus the fertile Khypris patch (grain) and grazed fields,"fandom:Kharnos_Forest [TOW website; Lords of the Lance ch. 12] ; fandom:Khypris [Plague Daemon chs. 1, 6] ; lex:Khypris [WD 125 pp. 12-16]"
+STATE_GASTONNE,4125,1147,,building_subsistence_farm,building_livestock_ranch building_wheat_farm building_vineyard,temperate_forest_hill,0.67,"[C] TOW prince realm (Louen Keep); place by inference; cap on the realm text: limited fertile land, poor soil",fandom:Louen_Keep [TOW website] ; fandom:Border_Princes#Geography [General's Compendium pp. 48-49; WFRP 1e pp. 271-274]
+STATE_NORTH_BADLAND_HILLS,4069,1419,,building_subsistence_pasture,,open_desert,,"[B] Confirm layer. Barren rock and arid plain; greenskins herd and raid, none farm",fandom:Badlands [Blood in the Badlands pp. 6-11] ; fandom:Greenskins [Old World Bestiary p. 22]
+STATE_EAST_BARRIER_IDOLS,4154,1573,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Idol line on the Nehekharan border; shifting sand; Savage Orc rituals,fandom:Barrier_Idols [TOW website] ; lex:Badlands [Orcs & Goblins 8e p. 12]
+STATE_WORLDS_EDGE_FOOTHILLS,4323,1474,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Raiding tribes under the mountain front; no land-use text,"fandom:Badlands [Blood in the Badlands pp. 6-11] ; fandom:Bloody_Tusks [Orcs & Goblins 8e pp. 8, 13]"
+STATE_EASTERN_BADLANDS,4322,1416,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Arid eastern plain; ancient dwarf barley farms are pre -1500 IC and thinly sourced,fandom:Badlands [Blood in the Badlands pp. 6-11] ; fandom:Morgheim [Undead 4e pp. 19-21]
+STATE_BLIGHTWATER,4288,1535,,building_subsistence_pasture,,open_desert,0.67,"[A] Poisoned river: once fertile fields, now water that kills and raises zombies. No desert_river",fandom:Blight_Water [Blood in the Badlands p. 11] ; lex:Blight_Water [AJ Orc & Goblin Tribes p. 8; Warhammer: Nagash I p. 226]
+STATE_MARSHES_OF_MADNESS,4174,1514,,building_subsistence_pasture,,open_desert,,"[A] Virulent swamp, maddening water, no cultivation; no swamp class and no coast for a fishing village",fandom:Marshes_of_Madness [Blood in the Badlands pp. 10-11; Tomb Kings 6e p. 10] ; lex:Boglar [WD 310 p. 90]
+STATE_BADLANDS_COAST,3973,1534,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Desert coast of pirates and orc hulks; fishing villages only in a -1149 IC novel scene,fandom:Badlands [Blood in the Badlands pp. 6-11] ; fandom:Black_Gulf [Blood in the Badlands p. 8; Master of Death ch. 11]
+STATE_OLD_STRYGOS,4217,1432,,building_subsistence_pasture,,open_desert,,[A] Confirm layer. Mourkain ruins; the land was not fertile even at its height; cursed river; ghoul court,fandom:Morgheim [Undead 4e pp. 19-21; Blood in the Badlands p. 10] ; lex:Strigoi [Night's Dark Masters pp. 66-73]
+STATE_MOUNT_BLOODHORN,4139,1368,,building_subsistence_pasture,,open_desert,1.5,[A] Orc fortress breeding cave squigs in thousands for export: the one named herding industry,fandom:Mount_Bloodhorn [Blood in the Badlands p. 9] ; lex:Ekrund [Blood in the Badlands p. 9]
+STATE_DRAGONBACK_MOUNTAINS,4128,1316,,building_subsistence_pasture,,open_desert,,"[B] Confirm layer. Arid range of giants, trolls and greenskins; no valley or pasture text",fandom:Badlands [Blood in the Badlands pp. 9-10] ; lex:Dragonback_Mountains [Blood in the Badlands pp. 9-10]
+STATE_STINKLANDS,4207,1306,,building_subsistence_pasture,,open_desert,0.67,[B] Stinking Geysers: a place so foul only goblins hiding from others camp there. Weakly held step,lex:Badlands#Locations [Orcs & Goblins 8e p. 12]
+STATE_CENTRAL_BADLANDS,4244,1368,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Central arid plain with Naqqara and Stormhenge; realm text only,fandom:Badlands [Blood in the Badlands pp. 6-11] ; fandom:Naqqara [Blood in the Badlands p. 34]
+STATE_THE_CAULDRON,4342,1285,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Realm text only; Pillar of Bone,fandom:Badlands [Blood in the Badlands pp. 6-11]
+STATE_VARENKA_HILLS,4288,1192,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,steppe,1.5,"[A] Barak Varr: grain and wool industries; village of 8,000 on grain, cheese, wool. Farm, against dwarf ruling",fandom:Barak_Varr [Lords of Stone and Steel p. 23] ; fandom:Varenka_Hills [TOW website; Dwarf Player's Guide p. 111]
+STATE_NORTHERN_BADLANDS,4261,1233,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[B] Confirm layer mix. Orc-infested corner crossed by the Old Silk Road; half desert; no vineyard,fandom:Old_Silk_Road [Dawn of the Storm Dragon p. 9] ; fandom:Badlands [Blood in the Badlands p. 9] ; vanilla:STATE_KALMYKIA arable 8 pasture
+STATE_MYRMIDIA_S_COAST,4166,1246,,building_subsistence_pasture,building_vineyard building_livestock_ranch building_wheat_farm,steppe,,[B] Confirm layer. Dragonback foot south of the gulf; giants roam; no land-use text; vineyard added first so GDO's wine tax has a producer (#3677),fandom:Giant_Stomping_Grounds [Blood in the Badlands p. 10] ; fandom:Citadel_of_Myrmidia [TOW website]
+STATE_HOWLING_RIVER_VALLEY,4346,1142,,building_subsistence_farm,,steppe,,"[B] Confirm layer. Ice-cold, fast, near-lifeless river: no floodplain farming; no river-plain class",fandom:Howling_River [Lure of the Liche Lord p. 22] ; fandom:Border_Princes#Geography [General's Compendium pp. 48-49]
+STATE_BLOOD_RIVER_VALLEY,4377,1194,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[B] Confirm layer. Border river held by Iron Rock orcs; no fertility text; not desert_river,fandom:Blood_River [Night of the Daemon chs. 1-5] ; fandom:Badlands [Blood in the Badlands p. 9]
+STATE_GIANT_STOMPING_GROUNDS,4027,1394,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Dragonback foothills full of wandering giants,fandom:Giant_Stomping_Grounds [Blood in the Badlands p. 10]
+STATE_SOUTH_BADLAND_HILLS,4060,1496,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Realm text only,fandom:Badlands [Blood in the Badlands pp. 6-11]
+STATE_WESTERN_BADLANDS,3998,1477,,building_subsistence_pasture,,open_desert,,"[B] Confirm layer. Bloody Handz foothills: a tribe rich from sea raids, not from land",fandom:Bloody_Handz_Tribe [Orcs & Goblins Collectors' Guide p. 3] ; lex:Bloody_Hand_Tribe [Orcs & Goblins Collectors' Guide p. 3]
+STATE_MARG_BEH_MARD,4004,1566,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Name on neither wiki; sand toward Nehekhara; realm text only,lex:Badlands [Orcs & Goblins 8e p. 12] ; fandom:Badlands [Blood in the Badlands pp. 6-11]
+STATE_NORTH_BARRIER_IDOLS,4062,1563,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Idol line on the Nehekharan border; shifting sand,fandom:Barrier_Idols [TOW website] ; lex:Badlands [Orcs & Goblins 8e p. 12]
+STATE_SUNKEN_KHEMARCH,4123,1462,,building_subsistence_pasture,,open_desert,,"[A] Northern Marshes of Madness (canon spelling Khernarch): poison swamp, no cultivation",fandom:Marshes_of_Madness [Blood in the Badlands pp. 10-11; Tomb Kings 6e p. 10] ; lex:Marshes_of_Madness [Orcs & Goblins 8e pp. 12-13]
+STATE_KHEMRIAN_DESERT,4058,1628,,building_subsistence_pasture,,open_desert,,"[B] Open desert north of Khemri; no river, no port. Confirms the climate layer.",fandom:Nehekhara#Geography [Tomb Kings 8e p. 17] ; fandom:Nehekhara#lead [Town Cryer 16 p. 6] ; lex:Khemri [no footnote] ; vanilla:STATE_EGYPTIAN_DESERT
+STATE_MORTIS_TARN,4340,1621,,building_subsistence_pasture,,open_desert,0.67,[B] Upper valley strip and mountain foot; the tarn is where Nagash poisoned the river. Drops NEH-03 highland.,fandom:Mortis Tarn [Liber Necris p. 48] ; lex:Great_Mortis_River#History [Tomb Kings 6e p. 8; Liber Necris pp. 48-49] ; vanilla:STATE_SINAI
+STATE_ROAD_OF_KINGS,4008,1621,,building_subsistence_pasture,,open_desert,,[C] Landlocked desert margin behind the swamp; no canon place of this name. Zandri Trail (dust waste) may be it.,fandom:Zandri Trail [TheOldWorld.com interactive map] ; fandom:Nehekhara#Geography [Tomb Kings 8e p. 17] ; vanilla:STATE_MATRUH
+STATE_CITY_OF_KINGS,4057,1682,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_cotton_plantation building_tobacco_plantation building_opium_plantation,desert_river,0.67,"[A] Khemri, the City of Kings: flood-plain grain land in life; Settra had wells and canals dug in 125 IC; river still poison.",fandom:Tomb Kings Timeline [Tomb Kings 6e pp. 5-8] ; fandom:Khemri [Tomb Kings 8e p. 19] ; fandom:Nehekhara#Geography [Tomb Kings 8e p. 17] ; lex:Khemri [Tomb Kings 6e pp. 8-9] ; vanilla:STATE_MIDDLE_EGYPT
+STATE_THE_SCARAB_CITY,4195,1613,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_cotton_plantation building_tobacco_plantation building_opium_plantation,desert_river,,"[A] Numas, the Scarab City: crops grow again around it, tended by the living Scythans; food and horse country in life.","fandom:Numas [Tomb Kings 6e p. 14; Tomb Kings 8e p. 18] ; fandom:Scythans [Tomb Kings 6e p. 14] ; fandom:Tutankhanut [Tomb Kings 6e pp. 14, 65] ; lex:Numas [Arcane Journal: Tomb Kings of Khemri p. 8] ; vanilla:STATE_UPPER_EGYPT"
+STATE_UPPER_ASH_RIVER,4253,1707,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_cotton_plantation building_tobacco_plantation building_opium_plantation,desert_river,0.67,"[B] South bank of the Ash (once the Golden River); river canon, bank land use not described.","lex:Great_Mortis_River#Overview [Tomb Kings 6e pp. 10, 16-17] ; fandom:Great Mortis River [Liber Necris pp. 48-49] ; fandom:Numas [Tomb Kings 8e p. 18] ; vanilla:STATE_DEIR_EZ_ZOR"
+STATE_SPHINX_OF_PHAA,4127,1686,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_cotton_plantation building_tobacco_plantation building_opium_plantation,desert_river,0.67,"[B] Tip of the land between the rivers, across from Numas; dead interfluve nearest the farmed city.","fandom:Numas [Tomb Kings 8e p. 18; Tomb Kings 6e p. 14] ; lex:Great_Mortis_River#Overview [Tomb Kings 6e pp. 10, 16-17] ; vanilla:STATE_MIDDLE_EGYPT"
+STATE_FALLOW_FIELDS,4263,1664,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_cotton_plantation building_tobacco_plantation building_opium_plantation,desert_river,0.45,"[A] The land between Mortis and Ash: extremely fertile in life, a dead wasteland now. Biggest lever in the realm.","lex:Great_Mortis_River#Overview [Tomb Kings 6e pp. 10, 16-17] ; fandom:Numas [Tomb Kings 8e p. 18] ; fandom:Rahmohtep [White Dwarf 288 p. 35] ; vanilla:STATE_BLUE_NILE"
+STATE_PYRAMID_OF_TUTANKHANUT,4109,1623,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_cotton_plantation building_tobacco_plantation building_opium_plantation,desert_river,0.67,[C] North bank beside Numas (formerly Necropolis of Numas); covered by the fields-around-Numas text.,"fandom:Numas [Tomb Kings 6e p. 14] ; fandom:Tutankhanut [Tomb Kings 6e pp. 14, 65] ; vanilla:STATE_UPPER_EGYPT"
+STATE_GREAT_MORTIS_DELTA,3945,1578,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_cotton_plantation building_tobacco_plantation building_opium_plantation,desert_river,0.67,[A] Zandri and the delta: crops died when the river was poisoned; the poison collects at the mouth.,"fandom:Tomb Kings Timeline [Tomb Kings 8e p. 21] ; fandom:Zandri [Tomb Kings 8e p. 19] ; lex:Zandri [one paragraph unfootnoted] ; lex:Great_Mortis_River#Overview [Tomb Kings 6e pp. 10, 16-17] ; vanilla:STATE_LOWER_EGYPT"
+STATE_SWAMP_OF_TERROR,3996,1644,,building_subsistence_farm,building_livestock_ranch building_wheat_farm,desert_river,0.45,"[A] Stagnant, pestilential water from the river's death waters; banks corrupted, only undead fowl and beasts.","fandom:Swamp of Terror [TheOldWorld.com interactive map] ; lex:Great_Mortis_River#Overview [Tomb Kings 6e pp. 10, 16-17; TheOldWorld.com map] ; vanilla:STATE_BASRA"
+STATE_DREAD_ROCK,5153,1476,,,,,,,
+STATE_WEST_DARK_LANDS,4594,1106,,building_subsistence_pasture,,open_desert,,[B] Barren interior; layer agrees. Name is the mod's.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14]
+STATE_MOUNT_SILVERSPEAR,4582,1061,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.67,"[B] Mount Grimfang: lost mine on the Dark Lands flank, goblin lair raided by Skaven",fandom:Karaz_Ankor#Lost_mines [Stone and Steel p. 40] ; fandom:Crookback_Mountain [Skaven 4e pp. 7-8]
+STATE_WOLF_LANDS,4694,1118,,building_subsistence_pasture,,open_desert,,[A] Barren wind-carved plains held by wolf-rider tribes.,lex:Dark_Lands#Features Wolf Lands [Orcs & Goblins] ; fandom:Goblin_Wolf_Riders [Orcs & Goblins 8e p. 45]
+STATE_AGRIL_MIGDHAL,4714,1043,,building_subsistence_pasture,,open_desert,,[B] Barren interior; TW mod name; layer agrees.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14]
+STATE_GORGOTHDRINAZ,4800,1097,,building_subsistence_pasture,,open_desert,,[B] Barren interior on the Gorgoth approach; TW mod name.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14]
+STATE_GREY_HAG_MOUNTAIN,4734,1201,,building_subsistence_pasture,,open_desert,,[A] Mount Grey Hag in the Wolf Lands; owner GOR conflicts with the canon goblin hold.,lex:Dark_Lands#Features Wolf Lands and Mount Grey Hag [Orcs & Goblins 8e p. 14]
+STATE_MOUNT_AZGORH,4806,1171,,building_subsistence_pasture,,open_desert,0.45,[A] Tower of Gorgoth in the dead volcano; canon calls the earth infertile.,lex:Dark_Lands#Features Tower of Gorgoth [Orcs & Goblins] ; lex:Tower_of_Gorgoth [Tamurkhan p. 167]
+STATE_DESOLATION_OF_AZGORH,4821,1276,,building_subsistence_pasture,,open_desert,0.45,[A] Razor rock and toxic vents where no creature or plant will live.,lex:Dark_Lands#Features Desolation of Azgorh [Orcs & Goblins]
+STATE_WOLF_EDGE,4643,1214,,building_subsistence_pasture,,open_desert,,[B] Barren edge of the Wolf Lands; mod name; layer agrees.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14]
+STATE_OLD_SILK_ROAD,4650,1300,,building_subsistence_pasture,,open_desert,,[B] Dark Lands end of Death Pass; caravan road with no oasis attested.,lex:Dark_Lands#Overview [Orcs & Goblins 8e p. 14] ; lex:Spice_Route [Arcane Journal: Dawn of the Storm Dragon pp. 9-10]
+STATE_DRAGON_BARROWS,4642,1384,,building_subsistence_pasture,,open_desert,0.67,[C] Read as the western Plain of Bones by position and names; identification not confirmed.,lex:Plain_of_Bones [Undead 4e Undead Gazetteer p. 10]
+STATE_SOUTH_DARKLANDS,4693,1460,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[R] Layer kept: canon splits between forested coast and poisoned shore; no vineyard.,rw:Makran dry coast ; vanilla:STATE_KALMYKIA arable 8 pasture ; lex:Dark_Lands#Overview [Orcs & Goblins 8e p. 14]
+STATE_PLAIN_OF_BONES,4771,1407,,building_subsistence_pasture,,open_desert,0.67,[A] Polluted sand desert; factory fallout; greenskins ravage any life.,lex:Plain_of_Bones [Undead 4e Undead Gazetteer p. 10] ; fandom:Plain_of_Bones [Undead 4e p. 10; Vampire Counts 8e p. 49]
+STATE_DRAGONS_LANDING,4783,1493,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[R] Layer kept: wild coast with no ports; forest-versus-poison conflict unresolved.,lex:Dark_Lands#Overview [Orcs & Goblins 8e p. 14] ; lex:Dark_Lands#Features Anurell's Tomb [White Dwarf presents: Chaos Dwarfs p. 20] ; vanilla:STATE_KALMYKIA arable 8 pasture
+STATE_ASH_RIDGE_MOUNTAINS,4790,1333,,building_subsistence_pasture,,open_desert,,[B] Rim of the Azgorh blast zone; canon name but no land-use text.,lex:Dark_Lands#Features Desolation of Azgorh [Orcs & Goblins] ; lex:Plain_of_Bones [Undead 4e p. 10]
+STATE_GNOBLAR_HILLS,4973,1363,,building_subsistence_farm,,temperate_forest_hill,0.67,"[A] Gnoblar Country: relatively lush green hills, now depopulated; Pigbarter pig market.",fandom:Gnoblar_Country [White Dwarf 302 (UK) pp. 16-17] ; lex:Dark_Lands#Features Gnoblar Country [Orcs & Goblins] ; fandom:Pigbarter [White Dwarf 302 pp. 15-16]
+STATE_DRAGONS_BREATH,4895,1397,,building_subsistence_pasture,,open_desert,,[C] West bank of the lower Ruin: sulphur-pit edge of the Desolation; TW names.,fandom:River_Ruin [Ogre Kingdoms 8e pp. 14-15] ; fandom:Ivory_Road [Ogre Kingdoms 6e pp. 54-55]
+STATE_TOWER_OF_THE_BLOODYTOOTH,4882,1435,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[R] Fortress of Vorag; no land-use text; drier half of the layer kept.,lex:Fortress_of_Vorag [White Dwarf 276 (UK) p. 68] ; vanilla:STATE_KALMYKIA arable 8 pasture
+STATE_ALD_GRUNGAZ,4937,1419,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[C] Unidentified 278 px state; layer kept; floor value either way.,no canon land-use text found ; vanilla:STATE_KALMYKIA arable 8 pasture
+STATE_BURY_BONE_HILLS,5097,1222,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[R] Mourn foothills east of the Ruin; ogre hunting and rhinox country; layer kept.,fandom:Mountains_of_Mourn [Ogre Kingdoms 6e p. 14; 8e pp. 12-13] ; vanilla:STATE_ULIASTAI arable 30 pasture
+STATE_ASHEN_PLAINS,5111,1171,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,steppe,,[R] East bank at the Giant's Rocks ford; no land-use text; layer kept.,fandom:River_Ruin [Ogre Kingdoms 8e pp. 13-15] ; vanilla:STATE_ULIASTAI arable 30 pasture
+STATE_THE_SENTINELS,5033,1159,,building_subsistence_pasture,,open_desert,,"[A] Trading post in the Howling Wastes; paddock stock is traded in, not raised.",lex:Sentinels [Ogre Kingdoms 6e pp. 54-56] ; fandom:The_Sentinels [Ogre Kingdoms 6e p. 54; White Dwarf 302 pp. 16-17]
+STATE_DIRETOWN,5044,1277,,building_subsistence_pasture,,open_desert,,"[B] Black Fortress among lava cinder pits; not the Direbogs, which lie further south.",lex:Black_Fortress [Tamurkhan pp. 39-48 and 167] ; fandom:River_Ruin [Ogre Kingdoms 8e pp. 14-15]
+STATE_PIGBARTER_ROAD,4992,1251,,building_subsistence_pasture,,open_desert,0.67,[B] Road past the stinking sulphur pits of the Desolation.,fandom:Ivory_Road [Ogre Kingdoms 6e pp. 54-55]
+STATE_PLAINS_OF_GRIEF,4922,1247,,building_subsistence_pasture,,open_desert,0.45,[C] Hub names repeat the Desolation text; read as part of it.,lex:Dark_Lands#Features Desolation of Azgorh [Orcs & Goblins]
+STATE_SOUTH_HOWLING_WASTES,4908,1151,,building_subsistence_pasture,,open_desert,,[A] Flat desolate gale-scoured plain; layer agrees.,lex:Dark_Lands#Features Howling Wastes [Orcs & Goblins] ; fandom:Howling_Wastes [White Dwarf 302 (UK) p. 17]
+STATE_IVORY_ROAD,4908,1099,,building_subsistence_pasture,,open_desert,,[B] Caravan road through wasteland between Zharr and the Howling Wastes.,fandom:Ivory_Road [Ogre Kingdoms 6e pp. 54-55] ; lex:Dark_Lands#Overview [Orcs & Goblins 8e p. 14]
+STATE_DAEMON_S_RUIN,5067,1104,,building_subsistence_pasture,,open_desert,,[B] Daemon's Stump on the poisoned Ruin at the edge of the Howling Wastes.,fandom:Daemon's_Stump [Chaos Dwarfs 4e p. 6; Daemons of Chaos 8e p. 17] ; lex:Dark_Lands#Features Howling Wastes [Orcs & Goblins]
+STATE_FIVE_RIVERS,5019,984,,building_subsistence_pasture,building_livestock_ranch building_rye_farm,highland_alpine,,"[C] Mourn tributary valleys: cold, rhinox herds, ogre camps; not mixed farmland.",fandom:River_Ruin [Ogre Kingdoms 8e pp. 14-15] ; lex:Mountains_of_Mourn ; lex:Ogre_Kingdoms [Ogre Kingdoms 6e p. 52] ; vanilla:STATE_ALTAI arable 10 pasture
+STATE_NORTH_HOWLING_WASTES,4942,1025,,building_subsistence_pasture,,open_desert,,"[A] Howling Wastes; layer reads 56 % humid continental, lore says desolate plain.",lex:Dark_Lands#Features Howling Wastes [Orcs & Goblins] ; fandom:Howling_Wastes [White Dwarf 302 (UK) p. 17]
+STATE_HOWLING_DISTRICT,4965,899,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr district: nothing is able to grow.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_RIVER_DISTRICT,4952,856,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr on the poisoned Ruin; no river-plain class.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:River_Ruin [Chaos Dwarfs 4e p. 5]
+STATE_MANUFACTORY_DISTRICT,4893,868,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr district: nothing is able to grow.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_HEART_OF_ZHARRDUK,4914,823,,building_subsistence_pasture,,open_desert,0.45,[A] Zharr-Naggrund on the Plain of Zharr: nothing is able to grow.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_FALLS_DISTRICT,4887,781,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr under the Zorn Uzkul escarpment.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:River_Ruin [Chaos Dwarfs 4e pp. 6 and 8]
+STATE_ZORN_DUM,4872,698,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.45,"[B] South-east Zorn Uzkul: barren rock plateau, thin cold air.",lex:Dark_Lands#Features Zorn Uzkul [Orcs & Goblins] ; fandom:Zorn_Uzkul [Tamurkhan pp. 164-165] ; lex:Uzkulak [Tamurkhan pp. 164-165]
+STATE_SKULL_CLIFFS,4778,750,,building_subsistence_pasture,building_livestock_ranch,highland_alpine,0.45,[C] Read as the Zorn Uzkul escarpment; identity inferred.,lex:Dark_Lands#Features Zorn Uzkul [Orcs & Goblins] ; fandom:Zorn_Uzkul [Tamurkhan pp. 164-165; Chaos Dwarfs 4e pp. 6 and 8]
+STATE_WHEATLANDS,4788,685,,building_subsistence_farm,building_wheat_farm building_livestock_ranch,steppe,1.5,[A] Canon Wheatlands of Kislev: rich black crop soil at Chernozavtra; wheat first.,lex:Chernozavtra [Something Rotten in Kislev: Death Takes a Holiday pp. 47-48] ; vanilla:STATE_TOBOLSK arable 53 farm ; vanilla:STATE_TOMSK arable 90 farm
+STATE_ZORN_UZKUL,4790,549,,building_subsistence_pasture,,open_desert,,"[A] Great Skull Land: barren rock plateau, thin cold air, dusty; Uzkulak slave port",lex:Dark_Lands#Zorn Uzkul [Warhammer Armies: Orcs & Goblins] ; fandom:Zorn Uzkul [Tamurkhan pp. 164-165] ; lex:Uzkulak [Tamurkhan pp. 164-165] ; rw:Changtang [en.wikipedia.org/wiki/Changtang]
+STATE_SKULL_ROAD,4758,632,,building_subsistence_pasture,,open_desert,,[B] Road of Skulls across the Zorn Uzkul plateau; covered by the plateau text,fandom:Zorn Uzkul [White Dwarf Presents: Chaos Dwarfs p. 6; Tamurkhan pp. 164-165] ; lex:High_Pass [Realm of the Ice Queen p. 7]
+STATE_BELYEROVOTA,4703,594,,building_subsistence_pasture,,arctic_boreal_coast,,"[A] High Pass (Belyevorota): glaciers, snow rarely melts even in summer",fandom:High Pass [Realm of the Ice Queen p. 11] ; lex:High_Pass [Realm of the Ice Queen p. 7]
+STATE_SKULL_STEPPES,4712,693,,building_subsistence_pasture,building_livestock_ranch building_rye_farm,steppe,,[C] Read as Dolgan nomad steppe beside the Wheatlands; identity inferred.,lex:Dolgan#Life on the Steppes [Something Rotten in Kislev pp. 55-56] ; vanilla:STATE_AKMOLINSK arable 45 pasture
+STATE_NORTH_DARK_LANDS,4665,844,,building_subsistence_pasture,,open_desert,,[B] Barren interior; Necksnapper Black Orc country; layer reads taiga.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14]
+STATE_STEEL_PLAINS,4710,803,,building_subsistence_pasture,,open_desert,,[B] Barren western approach to the Plain of Zharr; layer reads taiga.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14]
+STATE_PITS_DISTRICT,4783,813,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr district: pits and mines; nothing grows.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_MARKET_DISTRICT,4850,805,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr district: nothing is able to grow.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_FOUNDRY_DISTRICT,4841,852,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr district: nothing is able to grow.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_BLASTED_DISTRICT,4778,871,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr district: nothing is able to grow.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_GATE_DISTRICT,4871,905,,building_subsistence_pasture,,open_desert,0.45,[B] Plain of Zharr district: nothing is able to grow.,lex:Dark_Lands#Features Plain of Zharr [Orcs & Goblins] ; fandom:Plain_of_Zharrduk [Chaos Dwarfs 4e; Battle Book 5e] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_NAGGRUNDRINAZ,4846,994,,building_subsistence_pasture,,open_desert,,[B] Barren ground south of the plain; TW mod name; layer reads forest-hill.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14]
+STATE_CAUSEWAY_OF_ZHARR,4734,961,,building_subsistence_pasture,,open_desert,,[B] Ash-desert interior; layer reads 55 % humid continental; non-canon name.,lex:Dark_Lands#Overview [White Dwarf presents: Chaos Dwarfs p. 20; Orcs & Goblins 8e p. 14] ; fandom:Chaos_Dwarfs [Tamurkhan p. 165]
+STATE_BLACK_WASTES,4581,988,,building_subsistence_pasture,,open_desert,,"[C] Read as the canon Blasted Wastes (Da Immortulz hub): parched desert, nomad goblins.",lex:Dark_Lands#Features Blasted Wastes [Orcs & Goblins] ; fandom:Grimgor_Ironhide [Orcs & Goblins 6e pp. 66-67]
+STATE_DRAKENMOOR,4584,889,,building_subsistence_pasture,building_livestock_ranch building_rye_farm,highland_alpine,,[C] Unidentified mountain-foot state; layer kept; no wheat or vineyard.,no canon land-use text found ; vanilla:STATE_ALTAI arable 10 pasture
+STATE_DEATH_S_SIDE,4855,606,,building_subsistence_pasture,,arctic_boreal_coast,,[C] Identity uncertain; half ice cap east of the High Pass; no canon land-use text,fandom:High Pass [Realm of the Ice Queen p. 11] ; fandom:Road of Skulls [Old World website map]
+STATE_RUIN_S_END,4940,1444,,building_subsistence_pasture,building_livestock_ranch,tropical_forest,0.45,"[A] Mouth of the Ruin: sulphur swamp with near-boiling water; dead river, no fishing.",fandom:Scalded_Delta [White Dwarf 302 (UK) p. 14; Monstrous Arcanum p. 10] ; lex:Dark_Lands#Features Scalded Delta [Orcs & Goblins]
+STATE_SWAMP_EATER_HOLD,5002,1445,,building_subsistence_pasture,building_livestock_ranch,tropical_forest,0.67,"[A] Swamp Eater ogres of the Scalded Delta, plus Haunted Forest coast.",fandom:Scalded_Delta [White Dwarf 302 (UK) p. 14] ; fandom:River_Ruin [Ogre Kingdoms 6e p. 54; 8e pp. 14-15] ; fandom:Kingdoms_of_Ind [Ogre Kingdoms 8e p. 15]
+STATE_DEATHTOLL_HOLD,5078,1417,,building_subsistence_pasture,,temperate_forest_hill,0.67,"[B] Death Toll ogres on the Haunted Forest coast: wooded, uncleared, ogre herding.",fandom:Kingdoms_of_Ind [Ogre Kingdoms 8e p. 15] ; fandom:Mountains_of_Mourn [Ogre Kingdoms 8e]
+STATE_SKRAGGLEGUTS_HOLD,5029,1369,,building_subsistence_pasture,,temperate_forest_hill,0.67,[B] Skraggleguts on the Ruin's east bank facing Gnoblar Country.,fandom:River_Ruin [Ogre Kingdoms 8e pp. 14-15] ; fandom:Kingdoms_of_Ind [Ogre Kingdoms 8e p. 15]
+STATE_BOULDERBELLIES_HOLD,5097,1323,,building_subsistence_pasture,,temperate_forest_hill,0.67,[B] Boulderbellies on the Ruin's east bank under the Mourn foothills.,fandom:River_Ruin [Ogre Kingdoms 8e pp. 14-15] ; fandom:Kingdoms_of_Ind [Ogre Kingdoms 8e p. 15]
+STATE_VIDARHEIM,4486,338,,building_subsistence_fishing_village,,arctic_boreal_coast,,[C] TWW name on the Frozen Sea coast; no canon; owner Kvellig are hunters,fandom:Kvellig [Arcane Journal: Warriors of Chaos p. 8] ; vanilla:STATE_NORTHERN_NORWAY
+STATE_LAURELORN_FOREST,4063,661,,building_subsistence_orchard,,temperate_forest_hill,0.45,"[A] Closed Eonir forest core, unfarmed; fruit and nut trees grown in Tor Lithanel",fandom:Laurelorn Forest [Sigmar's Heirs pp. 63-66; Archives of the Empire I pp. 71-79] ; fandom:Tor Lithanel [Archives of the Empire I p. 80]
+STATE_KREUTZHOFEN,4144,1041,,building_subsistence_farm,,temperate_forest_hill,0.45,[A] Western Wissenland: stony dry fields; barest subsistence farming; wealth from mines,fandom:Wissenland#Geography [Sigmar's Heirs pp. 94-98] ; lex:Wissenland [Sigmar's Heirs pp. 94-95]
+STATE_LAND_078,3336,782,,building_subsistence_pasture,,temperate_forest_hill,0.45,[B] South Albion: rain-bound bog and fen where few crops grow; cattle chieftains; rare stilt villages,fandom:Albion#Origins [Shadows Over Albion p. 6] ; fandom:Albion#Religion [Archives of the Empire III pp. 57-58] ; rw:Scottish Highlands [en.wikipedia.org/wiki/Scottish_Highlands] ; vanilla:STATE_HIGHLANDS arable 30
+STATE_LAND_079,3350,673,,building_subsistence_pasture,,temperate_forest_hill,0.45,"[B] Central Albion: thickest mists, marsh and moor; few crops; cattle",fandom:Albion#Origins [Shadows Over Albion p. 6] ; fandom:Albion#Geography [Town Cryer 15 pp. 4-6] ; vanilla:STATE_HIGHLANDS arable 30
+STATE_LAND_735,3975,922,,building_subsistence_farm,building_livestock_ranch building_wheat_farm,temperate_forest_hill,,"[B] Northern Quenelles on the Grismerie by owner and position: pastoral, raided from the Massif Orcal",fandom:Quenelles#Geography [Knights of the Grail pp. 88-90] ; vanilla:STATE_BURGUNDY arable 80
+STATE_LAND_736,3383,609,,building_subsistence_pasture,,temperate_forest_hill,0.45,"[B] North Albion: bog, fen and moor where few crops grow; cattle",fandom:Albion#Origins [Shadows Over Albion p. 6] ; fandom:Albion#Religion [Archives of the Empire III pp. 57-58] ; vanilla:STATE_HIGHLANDS arable 30
+STATE_BLACK_WATER,4414,984,,building_subsistence_pasture,building_livestock_ranch building_wheat_farm,highland_alpine,0.67,[A] Zhufbar: industrial canyon hold; most food comes by trade; lake holds monsters,fandom:Zhufbar [Stone and Steel p. 28] ; lex:Black_Water [WD 152 p. 54; Dwarfs 8e pp. 24-26]
+STATE_BLIGHTED_MARSHES,3837,1108,,building_subsistence_farm,building_wheat_farm,mediterranean,0.45,[A] Fog-bound swamp; only crop is black corn cut by Skaven slaves; not human farmland,lex:Blighted_Marshes [Plague Fleet pp. 51-52; Empire 4e p. 5] ; lex:Skavenblight [Skaven 4e pp. 6-7]
+STATE_MIDDLE_BILBALI_01,3696,1032,,building_subsistence_farm,building_wheat_farm building_livestock_ranch building_vineyard,mediterranean,0.67,[B] Landlocked northern interior: the arid plateau; meseta analogue,fandom:Tilea#Geography [Dogs of War 5e p. 75] ; lex:Estalia#Geography [WFB 3e p. 201] ; rw:Castile [1911 EB Spain]
+STATE_THE_BLIGHT,4264,1294,,building_subsistence_pasture,,open_desert,,[B] Confirm layer. Broken Tooth country; realm text only,"fandom:Badlands [Blood in the Badlands pp. 6-11] ; fandom:Broken_Tooth_Tribe [Orcs & Goblins 8e pp. 13, 17-19]"
