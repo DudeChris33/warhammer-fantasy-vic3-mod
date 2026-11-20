@@ -16,10 +16,14 @@ Outputs (formats, mip counts, headers and total sizes match vanilla's files):
     refraction tint); A is glossiness (255). Rivers sample the same texture at the
     same UV, so **land texels are river water colour**. Sea colour is a ramp over the
     log of the distance to the nearest land through vanilla's own distance-bin means
-    (shallow turquoise at the shore to deep blue), plus a seeded multiplicative
-    mottling that fades out within ``NOISE_FADE_PX`` of the coast. We have no
-    bathymetry (vanilla's is hand-painted from real ocean depths, and its heightmap
-    is 0 below the shelf), so the open sea is plainer than vanilla's.
+    (shallow turquoise at the shore to deep blue), read at a log distance displaced by
+    a seeded fractal warp (so the bands are not concentric with the coast; it fades out
+    within ``WARP_FADE_PX``), times a seeded multi-octave multiplicative mottling that
+    fades out within ``NOISE_FADE_PX`` of the coast, plus a per-texel sea grain of
+    +/- ``GRAIN`` levels that dithers the BC1 5:6:5 endpoint steps the DXT5 encoder
+    otherwise turns into visible bands. We have no bathymetry (vanilla's is hand-painted
+    from real ocean depths, and its heightmap is 0 below the shelf), so the open sea is
+    plainer than vanilla's.
 ``gfx/map/water/flowmap.dds`` (1024x452, uncompressed BGRA8, 11 mips, 2,468,284 bytes)
     ``FlowDir = normalize(RG * 2 - 1)`` (R east, G north); B is flow strength; A is
     unread. Within ``COAST_BAND_PX`` of a coast the flow points toward the nearest
@@ -108,8 +112,14 @@ LAKE_RGB = (35, 85, 82)      # lake interior
 LAND_RAMP_PX = 16.0
 LAKE_RAMP_PX = 16.0
 NOISE_AMP = 0.10             # multiplicative mottling strength
-NOISE_CELL = 64              # texels per noise cell
+NOISE_CELLS = (128, 64, 32, 16, 8)           # fractal mottling octaves, texels per cell
+NOISE_AMPS = (1.0, 0.6, 0.36, 0.22, 0.13)    # and their weights
 NOISE_FADE_PX = 16.0         # mottling fades to 0 at the coast
+WARP_CELLS = (256, 128, 64, 32)              # distance-warp octaves, half-resolution texels per cell
+WARP_AMPS = (1.0, 0.5, 0.25, 0.125)
+WARP_AMP = 0.6               # warp strength in log2(1 + distance) units
+WARP_FADE_PX = 24.0          # the warp fades to 0 at the coast so the shore band stays put
+GRAIN = 1.5                  # +/- levels of per-texel sea grain: dithers BC1 5:6:5 endpoint steps
 SPEC_ALPHA = 255
 FOAM_LO_PX = 32.0
 FOAM_HI_PX = 160.0
@@ -173,27 +183,47 @@ def block_mean(a: np.ndarray, k: int) -> np.ndarray:
 # Texture content (level 0, float32)
 # ---------------------------------------------------------------------------
 
-def _noise(h: int, w: int, rng: np.random.Generator) -> np.ndarray:
-    """Unit-std smooth mottling on an (h, w) texel grid, ~NOISE_CELL texel features."""
-    ch, cw = h // NOISE_CELL + 2, w // NOISE_CELL + 2
-    coarse = rng.standard_normal((ch, cw)).astype(np.float32)
-    big = np.asarray(Image.fromarray(coarse).resize((cw * NOISE_CELL, ch * NOISE_CELL), Image.BICUBIC))[:h, :w]
-    return (big / max(float(big.std()), 1e-6)).astype(np.float32)
+def fractal_noise(rng: np.random.Generator, shape: tuple[int, int], cells, amps) -> np.ndarray:
+    """Seeded multi-octave smooth noise on an (h, w) grid, normalised to unit std.
+
+    Per (cell, amp), in order: ``rng.standard_normal((h // cell + 3, w // cell + 3))``,
+    bicubic upsample by ``cell`` (so at least ``shape``), crop, scale by ``amp``; the
+    layers are summed and the sum divided by its std.
+    """
+    h, w = shape
+    total = np.zeros((h, w), dtype=np.float32)
+    for cell, amp in zip(cells, amps):
+        gh, gw = h // cell + 3, w // cell + 3
+        grid = rng.standard_normal((gh, gw)).astype(np.float32)
+        big = np.asarray(Image.fromarray(grid).resize((gw * cell, gh * cell), Image.BICUBIC))[:h, :w]
+        total += np.float32(amp) * big
+    return (total / max(float(total.std()), 1e-6)).astype(np.float32)
 
 
 def watercolor_level0(land: np.ndarray, lake: np.ndarray, d: dict[str, np.ndarray]) -> np.ndarray:
-    """(H/2, W/2, 4) RGBA: sea ramp + mottling, lake ramp, river-coloured land, A = 255."""
+    """(H/2, W/2, 4) RGBA: sea ramp + mottling, lake ramp, river-coloured land, A = 255.
+
+    Draws from one ``PCG64(SEED)`` generator in a fixed order: the mottling field (at
+    texel resolution), then the distance-warp field (half-resolution grid, upsampled x2
+    bilinear to canvas pixels), then the sea grain. The warp displaces the log distance
+    the sea ramp is read at, so the colour bands are not concentric with the coast; it
+    fades to 0 within ``WARP_FADE_PX`` of land and touches sea pixels only.
+    """
     h, w = land.shape
     h2, w2 = h // WATERCOLOR_FACTOR, w // WATERCOLOR_FACTOR
     d_water, d_land = d["d_water"], d["d_land"]
-    x = np.log2(1.0 + d_water)
     knot_x = np.log2(1.0 + np.array([k[0] for k in SEA_KNOTS], dtype=np.float64))
     lake_t = np.clip(d_water / LAKE_RAMP_PX, 0.0, 1.0)
     land_t = np.clip(d_land / LAND_RAMP_PX, 0.0, 1.0)
 
     rng = np.random.Generator(np.random.PCG64(SEED))
-    noise = _noise(h2, w2, rng)
+    noise = fractal_noise(rng, (h2, w2), NOISE_CELLS, NOISE_AMPS)
     fade = block_mean(np.clip(d_water / NOISE_FADE_PX, 0.0, 1.0), WATERCOLOR_FACTOR)
+    warp = fractal_noise(rng, (h2, w2), WARP_CELLS, WARP_AMPS)
+    warp = np.asarray(Image.fromarray(warp).resize((w, h), Image.BILINEAR), dtype=np.float32)
+    x = np.log2(1.0 + d_water) + np.float32(WARP_AMP) * warp * np.clip(d_water / WARP_FADE_PX, 0.0, 1.0)
+    x = np.maximum(x, 0.0).astype(np.float32)
+    del warp
 
     out = np.empty((h2, w2, 4), dtype=np.float32)
     for c in range(3):
@@ -204,6 +234,9 @@ def watercolor_level0(land: np.ndarray, lake: np.ndarray, d: dict[str, np.ndarra
         v = np.where(land, land_c, np.where(lake, lake_c, sea_c)).astype(np.float32)
         v2 = block_mean(v, WATERCOLOR_FACTOR)
         out[:, :, c] = v2 * (1.0 + np.float32(NOISE_AMP) * noise * fade)
+    sea_frac = block_mean((~land & ~lake).astype(np.float32), WATERCOLOR_FACTOR)
+    grain = rng.uniform(-GRAIN, GRAIN, (h2, w2, 3)).astype(np.float32)
+    out[:, :, :3] += grain * sea_frac[:, :, None]
     out[:, :, 3] = SPEC_ALPHA
     return out
 
@@ -504,10 +537,10 @@ def selftest() -> int:
     assert (flow[land[::FLOW_FACTOR, ::FLOW_FACTOR] & ~lake[::FLOW_FACTOR, ::FLOW_FACTOR]][:, 2] == B_LAND).all()
 
     wc = a["watercolor"]
-    row = wc.shape[0] // 2
-    shore_g = wc[row, 128 // WATERCOLOR_FACTOR + 1, 1]        # sea texel just east of the coast
-    far_g = wc[row, (128 + 40) // WATERCOLOR_FACTOR, 1]       # 40 px out
-    assert shore_g > far_g, f"watercolor shore G {shore_g:.1f} not above 40 px out {far_g:.1f}"
+    rows = slice(wc.shape[0] // 2 - 10, wc.shape[0] // 2 + 10)
+    shore_g = float(wc[rows, 128 // WATERCOLOR_FACTOR:128 // WATERCOLOR_FACTOR + 3, 1].mean())   # 0-6 px out
+    far_g = float(wc[rows, (128 + 40) // WATERCOLOR_FACTOR:(128 + 60) // WATERCOLOR_FACTOR, 1].mean())  # 40-60 px out
+    assert shore_g > far_g + 5, f"watercolor shore band G {shore_g:.1f} not above the 40-60 px band {far_g:.1f}"
 
     foam = a["foam"]
     assert foam.shape == (h // FOAM_FACTOR, w // FOAM_FACTOR, 4)
