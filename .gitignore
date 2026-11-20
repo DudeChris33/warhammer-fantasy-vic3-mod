@@ -69,3 +69,7 @@ scratchpad/
 # before deploy.ps1 (it refuses to deploy without them).
 /gfx/map/terrain/detail_index.tga
 /gfx/map/terrain/detail_intensity.tga
+
+# Dynamic farm/forestry/mine building placements (#11536, ~20 MB text): rebuilt from the committed
+# gfx/map/masks/mask_dynamic_*.png by `mapgen/.venv/Scripts/python.exe mapgen/generate_dynamic_masks.py --from-masks`.
+/gfx/map/map_object_data/generated/*_dynamic_*_objects_generator_*.txt
