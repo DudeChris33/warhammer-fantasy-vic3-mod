@@ -1,0 +1,26 @@
+{
+  "_comment": "Canon corrections to the terrain biome classes (#6617, read by generate_terrain_masks.py). Hand-authored. 'settlements' re-class one Old World mod settlement (its hub keeps feeding the per-state nearest-hub rule); 'states' set a whole state, keyed on the canon state key plus a naming anchor that must lie in it, and win over everything. Classes are BIOME_NAMES. Each row cites the canon lookup it rests on (loremaster pass 2026-11-19: Fandom export in sources/wiki/ first, Lexicanum to corroborate).",
+  "settlements": [
+    {"slug": "bilious_basilica", "class": "swamp", "canon": "Fandom Skavenblight, Clan Pestilens: a Pestilens district inside Skavenblight, in the Blighted Marshes; TWW3 promotes it to a settlement and tags it mountain"},
+    {"slug": "caverns_of_unyielding_shadow", "class": "swamp", "canon": "Fandom Skavenblight, Clan Eshin: the Eshin quarter of Skavenblight; Lexicanum Blighted_Marshes"},
+    {"slug": "forest_of_gloom", "class": "temperate", "canon": "Fandom + Lexicanum Forest of Gloom: a goblin-held forest, not an enchanted one"},
+    {"slug": "sussurrio_wood", "class": "temperate", "canon": "Fandom Sussurrio Wood (WFRP1; Wood Elves 8th): a dangerous but ordinary Tilean forest"},
+    {"slug": "gryphon_wood", "class": "temperate", "canon": "not found on Fandom or Lexicanum: treated as a TW name, no enchanted-forest canon"},
+    {"slug": "pina_wood", "class": "temperate", "canon": "not found on Fandom or Lexicanum: treated as a TW name"},
+    {"slug": "sharpthorn_forest", "class": "temperate", "canon": "not found on Fandom or Lexicanum: treated as a TW name"},
+    {"slug": "the_bears_teeth", "class": "temperate", "canon": "not found on Fandom or Lexicanum: treated as a TW name"},
+    {"slug": "haunted_grove", "class": "temperate", "canon": "not found on Fandom or Lexicanum: treated as a TW name"},
+    {"slug": "forest_of_knives", "class": "frozen", "canon": "Fandom Forest of Knives: a Norscan forest at the edge of the Wastes, corrupted, not an Elf wood"},
+    {"slug": "drakenmoor", "class": "hills", "canon": "Fandom Battle of Drakenmoor (11 IC), Nightmare of Drakenmoor (2037 IC, Tamurkhan): the warp storm died away within a year; no standing Chaos land at 2502"}
+  ],
+  "states": [
+    {"state": "STATE_LAND_736", "anchor": [3341, 616], "class": "swamp", "canon": "Fandom + Lexicanum Albion: predominantly bogs, marshes and fens under mist and rain (north Albion); the Forge jungle is 2520 IC, after the start"},
+    {"state": "STATE_LAND_079", "anchor": [3312, 689], "class": "hills", "canon": "Fandom + Lexicanum Albion: moors and standing stones inland (central Albion)"},
+    {"state": "STATE_LAND_078", "anchor": [3351, 730], "class": "swamp", "canon": "Fandom + Lexicanum Albion: bogs, marshes and fens (south Albion)"},
+    {"state": "STATE_MOUSILLON", "anchor": [3771, 845], "class": "swamp", "canon": "Lexicanum Mousillon: the dukedom is little more than a swamp fed by the Grismerie"},
+    {"state": "STATE_CASTLE_MOUSILLON", "anchor": [3820, 865], "class": "swamp", "canon": "Lexicanum Mousillon: the city ringed by marsh and swamp"},
+    {"state": "STATE_ERENGRAD", "anchor": [4329, 645], "class": "temperate", "canon": "Lexicanum + Fandom Kislev: grassy steppe, farmed in the south; frozen only north of the Lynsk (Troll Country); Erengrad is on the Lynsk mouth"},
+    {"state": "STATE_EASTERN_OBLAST", "anchor": [4472, 622], "class": "temperate", "canon": "Lexicanum + Fandom Kislev: steppe and taiga; Praag is on the Lynsk, Troll Country lies north of it"},
+    {"state": "STATE_EAST_SYLVANIA", "anchor": [4387, 916], "class": "hills", "canon": "Fandom Sylvania (Night's Dark Masters): thin soil, chalk hills, moors; Lexicanum: desolate moorland"}
+  ]
+}

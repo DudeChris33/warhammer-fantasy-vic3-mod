@@ -36,7 +36,8 @@ Inputs (all committed or already-registered sources; nothing new is sourced):
   sibling, ``registration/seeds/ie_climate_map.json``). The Old World thin-plate gets no
   weight where it folds. Two polar rules: TWW3 gap land south of :data:`SOUTH_CHAOS_LAT`
   is chaotic waste; north of :data:`NORTH_FROZEN_LAT`, land outside every pair-based
-  placement is frozen unless TWW3 says mountain or chaos.
+  placement is frozen unless TWW3 says mountain or chaos. Both test a latitude that
+  wanders by a seeded smooth field (:data:`POLAR_NOISE_DEG`), so neither draws a parallel.
 * ``sources/cr_oldworld_campaign/db/campaign_map_settlements_tables/cr_oldworld_campaign.tsv``
   (ChaosRobie's Old World mod: a ``climate_type`` per settlement) with
   ``config/hub_worksheet.json``, ``map_data/provinces.png`` and ``map_data/state_regions/``:
@@ -45,7 +46,13 @@ Inputs (all committed or already-registered sources; nothing new is sourced):
   (:func:`settlement_biomes`). This **replaces** the TWW3 sample there (the drawn Old World),
   needs no registration, and adds two classes TWW3 lacks: ``swamp`` and ``hills``.
   ``climate_immaterial`` (holds, Chaos Dwarf sites) and ``climate_ocean`` are skipped. It
-  goes in after the edge warp, which exists only to hide TWW3's straight polygon edges.
+  goes in after the edge warp, which exists only to hide TWW3's straight polygon edges,
+  and blends at the tighter :data:`OW_BLEND_SIGMA` so a small state keeps its shape.
+* ``config/climate_overrides.json`` (hand-authored): canon corrections, each citing its
+  lookup. ``settlements`` re-class one mod settlement (TWW3 tags Skavenblight's districts
+  mountain and ordinary woods magic forest); ``states`` set a whole state by canon key
+  plus an anchor that must lie in it (Albion, which no mod settlement covers; Mousillon;
+  Kislev on the Lynsk; East Sylvania) and win over everything.
 * ``mapgen/derived/climate_zones.png`` + index (the wind model), for TWW3's gaps only.
 * ``mapgen/registration/`` and the #9016 pairs (``config/ie_projection_pairs.csv``).
 
@@ -240,6 +247,9 @@ OW_CLIMATE_BIOME = {
 }
 #: Settlements whose climate is not ground: holds and Chaos Dwarf sites (immaterial) and sea.
 OW_CLIMATE_SKIP = {"climate_immaterial", "climate_ocean"}
+#: Hand-authored canon corrections: per-settlement re-classes and whole-state classes,
+#: each citing its lookup (loremaster, 2026-11-19).
+CLIMATE_OVERRIDES = TOOLS_DIR / "config" / "climate_overrides.json"
 OLDWORLD_SMOOTHING = (0.0, 1e2, 1e3, 1e4, 3e4, 1e5, 3e5, 1e6)   # thin-plate candidates, as #9016 plus finer steps
 
 # --- tuning (each constant has a value that switches its rule off, used for before/after renders)
@@ -264,6 +274,9 @@ CLIMATE_CODE_BIOME = {
 CLIMATE_PNG = DERIVED_DIR / "climate_zones.png"
 CLIMATE_INDEX = DERIVED_DIR / "climate_zones_index.json"
 NORTH_FROZEN_LAT = 62.0    # north of this, land outside every pair-based placement is frozen unless TWW3 says mountain or chaos
+POLAR_NOISE_DEG = 2.5      # both polar cut-offs wander by this many degrees (1 sd) so neither draws a ruled line
+POLAR_NOISE_SIGMA = 25.0   # smoothness of that wander, working cells
+OW_BLEND_SIGMA = 3.5       # blend over the settlement-class (state-scale) cells: BLEND_SIGMA smudged a small state into a disc
 
 
 def log(msg: str) -> None:
@@ -600,10 +613,23 @@ def ow_settlement_biomes() -> np.ndarray:
     if prov.shape[:2] != (H, W):
         raise SystemExit(f"{PROVINCES_PNG.name}: expected {W}x{H}")
     packed = (prov[..., 0] << 16) | (prov[..., 1] << 8) | prov[..., 2]
-    colour_state = {}
+    colour_state, key_index = {}, {}
     for k, st in enumerate(load_land_states(STATE_REGIONS_DIR)):
+        key_index[st.key] = k
         for c in st.provinces:
             colour_state[int(c[1:], 16)] = k
+    over = json.loads(CLIMATE_OVERRIDES.read_text(encoding="utf-8"))
+
+    def class_of(row: dict) -> int:
+        if row["class"] not in BIOME_NAMES[1:]:
+            raise SystemExit(f"{CLIMATE_OVERRIDES.name}: unknown class {row['class']!r}")
+        return BIOME_NAMES.index(row["class"])
+
+    slug_class = {}
+    for row in over["settlements"]:
+        if row["slug"] not in climate:
+            raise SystemExit(f"{CLIMATE_OVERRIDES.name}: settlement {row['slug']!r} is not in {OW_SETTLEMENTS.name}")
+        slug_class[row["slug"]] = class_of(row)
 
     def state_of(px: np.ndarray) -> np.ndarray:
         uniq, inv = np.unique(px, return_inverse=True)
@@ -614,16 +640,28 @@ def ow_settlement_biomes() -> np.ndarray:
     xy, cls = [], []
     for h in json.loads(HUB_WORKSHEET.read_text(encoding="utf-8"))["hubs"]:
         m = re.search(r"cr_oldworld_campaign/([\w\-]+)", h.get("source", ""))
-        if not m or m.group(1) not in climate or climate[m.group(1)] in OW_CLIMATE_SKIP:
+        if not m or m.group(1) not in climate:
             continue
+        if m.group(1) in slug_class:
+            cls.append(slug_class[m.group(1)])
+        elif climate[m.group(1)] in OW_CLIMATE_SKIP:
+            continue
+        else:
+            cls.append(OW_CLIMATE_BIOME[climate[m.group(1)]])
         xy.append(h["anchor"])
-        cls.append(OW_CLIMATE_BIOME[climate[m.group(1)]])
     xy = np.array(xy, float)
     ix = np.clip(xy[:, 0].astype(int), 0, W - 1)
     iy = np.clip(xy[:, 1].astype(int), 0, H - 1)
     hub_state = state_of(packed[iy, ix])
     out = settlement_biomes(state4, xy, hub_state, np.array(cls, np.uint8))
-    log(f"  Old World settlement climates: {len(xy)} hubs, {(out > 0).mean() * 100:.1f}% of grid")
+    for row in over["states"]:
+        k = key_index.get(row["state"])
+        ax, ay = (int(v) for v in row["anchor"])
+        if k is None or int(state_of(packed[ay:ay + 1, ax:ax + 1])[0, 0]) != k:
+            raise SystemExit(f"{CLIMATE_OVERRIDES.name}: anchor {row['anchor']} is not in {row['state']}")
+        out[state4 == k] = class_of(row)
+    log(f"  Old World settlement climates: {len(xy)} hubs ({len(slug_class)} re-classed), "
+        f"{len(over['states'])} state overrides, {(out > 0).mean() * 100:.1f}% of grid")
     return out
 
 
@@ -783,13 +821,13 @@ def build_weights(biome, land, lake, elev4, fert4, coast_dist, rng) -> np.ndarra
     add("marchlands_03", 0.8 + 0.1 * n1, sw)
     add("marchlands_04", 0.4, sw)
     add("grasslands_06", 0.2 + 0.1 * n2, sw)
-    add("woodlands_03", 0.2 * (n1 > 0.3), sw)
-    # --- hills (Old World mod only): rough grass broken by rock
+    add("woodlands_03", 0.4 * (n1 > 0.0), sw)
+    # --- hills (Old World mod and overrides): rough grass broken by rock; the rock share
+    #     (~0.4) is what tells it from temperate (cartographer 2026-11-19)
     hl = b(HILLS)
     add("grasslands_05", 0.4, hl)
-    add("grasslands_01", 0.3 * lush, hl)
-    add("rocks_01", 0.2 + 0.1 * n1, hl)
-    add("cliff_granite_06", 0.1 + 0.1 * (n3 > 0.5), hl)
+    add("rocks_01", 0.25 + 0.1 * n1, hl)
+    add("cliff_granite_06", 0.15 + 0.1 * (n3 > 0.5), hl)
     # --- shoreline sand on any land (not on mountains/ice), thin
     shore = land & (coast_dist < 2.0) & ~np.isin(biome, [MOUNTAIN, FROZEN, DESERT])
     add("beach_01", 0.5, shore)
@@ -900,12 +938,15 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     biome = nearest_of(biome, biome != UNKNOWN, land4 & (biome == UNKNOWN)).astype(np.uint8)
     # the far south: TWW3 paints the whole southern rim of its map as the Southern Chaos
     # Wastes, and the polar land beyond its frame belongs to them (loremaster 2026-11-18)
-    biome = np.where(use_proxy & (lat4 < -SOUTH_CHAOS_LAT), CHAOS, biome).astype(np.uint8)
+    # both polar cut-offs test a latitude that wanders by a seeded smooth field: a hard
+    # parallel drew a ruled line across north Cathay and Khuresh (cartographer 2026-11-19)
+    latn = lat4 + smooth_noise(np.random.default_rng([seed, 3]), POLAR_NOISE_SIGMA, (h4, w4)) * POLAR_NOISE_DEG
+    biome = np.where(use_proxy & (latn < -SOUTH_CHAOS_LAT), CHAOS, biome).astype(np.uint8)
     # the far north: nothing poleward of Norsca on the TWW3 map is anything but frozen, mountain
     # or chaotic waste, but our canvas has far more Arctic land, which only the coarse frame
     # warp reaches (it put TWW3's mid-west Naggaroth desert on the Arctic coast). There, any
     # other class becomes frozen (loremaster 2026-11-19).
-    arctic = land4 & ~inp.placed & (lat4 > NORTH_FROZEN_LAT) & ~np.isin(biome, [FROZEN, MOUNTAIN, CHAOS])
+    arctic = land4 & ~inp.placed & (latn > NORTH_FROZEN_LAT) & ~np.isin(biome, [FROZEN, MOUNTAIN, CHAOS])
     biome = np.where(arctic, FROZEN, biome).astype(np.uint8)
     # the warp hides TWW3's straight polygon edges; the settlement classes below follow our
     # own state borders and are state-scale, so they go in after it, unwarped
@@ -922,8 +963,12 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
 
     say("weights")
     stack = build_weights(biome, land4, lake4, elev4, fert4, coast_dist, rng)
+    # settlement-class cells are state-scale: a tighter blend there keeps a small state's
+    # swamp or hills from smudging into a disc (cartographer 2026-11-19)
+    ow = ndimage.gaussian_filter((land4 & (inp.biome_ow != UNKNOWN)).astype(np.float32), OW_BLEND_SIGMA)
     for k in range(len(MATERIALS)):
-        stack[k] = ndimage.gaussian_filter(stack[k], BLEND_SIGMA)
+        wide = ndimage.gaussian_filter(stack[k], BLEND_SIGMA)
+        stack[k] = wide + ow * (ndimage.gaussian_filter(stack[k], OW_BLEND_SIGMA) - wide)
     idx4, w4g = top3(stack)
     del stack
 
