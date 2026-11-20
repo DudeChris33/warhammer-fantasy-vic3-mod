@@ -150,15 +150,34 @@ Established by #6373 for the `wood_elf` and `ogre` tags; binding on later tags o
 
 ## High Elf (Asur) house style
 
-Established by #8444 for `common/coat_of_arms/coat_of_arms/17_ulthuan.txt` (placeholder arms; bespoke
-arms are #3621); binding on later `high_elf` tags.
+Established by #9411 for `common/coat_of_arms/coat_of_arms/17_ulthuan.txt` (bespoke arms, replacing
+#8444's placeholders); binding on later `high_elf` tags.
 
-- Fields from `white`, `pearl`, `blue_light`, `azure`, `lapis_blue`, `ice_blue` (one tincture, `pattern_solid`).
-- Charges in `golden` or `white`, one distinct charge per tag (no two Asur tags share a texture).
-- Charges follow canon where it gives one (Chrace's white lion, Caledor's dragon, Ellyrion's horse) and
-  the colonies' roundels on `sources/originals/High_Elf_Outposts.JPG` (Citadel of Dusk's citadel,
-  Fortress of Dawn's sun over the sea), recoloured into this palette; otherwise a disclosed invention.
-- No greenskin devices and nothing from rules 5-6 of the greenskin list above.
+1. **Canon first.** The ten kingdoms follow their shields and banners in *Uniforms & Heraldry of the High
+   Elves* (Lexicanum: `Emblems_of_the_High_Elf_Kingdoms_UHHE.JPG` and each kingdom's banner image), in
+   their canon tinctures: Eataine's black phoenix before a sunrise, Caledor's red dragon on a gold disc,
+   Saphery's crescent and star, Nagarythe's raven and moon, Tiranoc's eagle and sun over green, Chrace's
+   white lion on red and white, Avelorn's green, Yvresse's hawk and spire in mist, Ellyrion's white horse,
+   Cothique's sea-beast on sea-green. Fields and charges may take any palette tincture the canon arms
+   need. The one recorded deviation is Eataine's rays, golden for canon red (Chris, 2026-11-19: red-and-white
+   rays read as a real-world naval ensign). Citadel of Dusk and Fortress of Dawn follow their roundels on
+   `sources/originals/High_Elf_Outposts.JPG`; the other colonies have no canon arms and get a disclosed
+   invention.
+2. **One distinct primary charge per tag.** No two Asur tags share a primary-charge texture. Secondary
+   charges (disc, rays, waves, stars, bars) may recur, with a disclosure. The one exception: ULT carries
+   Eataine's phoenix (`ce_bird_glt`) as a secondary inside Asuryan's pyramid, because Asuryan's canon
+   symbol includes it.
+3. **No colony family cue.** The canon colony arms carry none, and a gold thin border is already the
+   Lizardmen temple-city cue.
+4. **The Tower of Stars (`TOS`) never takes the Tower of the Sun roundel** on `High_Elf_Outposts.JPG`:
+   that is a different, untagged outpost.
+5. **Bans**: no lightning bolt (the ogre rule above), no eye (the greenskin reserved device; Isha's
+   weeping eye included), no 8-point star (reads as the Chaos star, as in the Lizardmen rule), nothing
+   from rules 5-6 of the greenskin list above.
+6. **Only textures with a usage line.** Every texture's slot count is cited to a real vanilla or Realms of
+   Exether usage; a texture with none (e.g. RoE's `ce_vermilion_bird`, `ce_arch`, `ce_lighthouse`,
+   `ce_flag_sunbeams_low`) is not used. Where no texture draws a canon device, compose one from such
+   textures (Yvresse's spire: `ce_solid` shaft and `ce_spearhead` point) or substitute and disclose it.
 
 ## Lizardmen house style
 

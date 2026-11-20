@@ -1,271 +1,411 @@
-﻿# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of this file does
-# NOT load. Placeholder heraldry per board item #8444 for the 17 tags of
-# common/country_definitions/17_ulthuan.txt (same order): ULT, the ten kingdoms, the six colonies.
-# Bespoke arms are #3621.
-# Composed from vanilla gfx/coat_of_arms/ art (pattern + colored_emblems, neither blanked by
-# replace_paths) and this mod's named_colors palette. High Elf (Asur) house style
-# (.claude/rules/heraldry.md): fields from white/pearl/blue_light/azure/lapis_blue/ice_blue,
-# charges golden or white, one distinct charge per tag, no greenskin or extremist devices.
-# Every texture and colour-slot count is confirmed against a real vanilla usage, cited per block
-# (game/common/coat_of_arms/coat_of_arms/); where vanilla fills one slot only, slot 2 is set to
-# slot 1's tone (the AVE convention). Each block names its canon-confidence bucket.
-# Requires common/flag_definitions/17_ulthuan.txt to render in-game (this mod's DEFAULT
-# flag_definitions block is unconditional at priority = 0).
+﻿# Bespoke High Elf arms, board item #9411 (epic #3621); replaces the #8444 placeholders.
+# common/coat_of_arms/coat_of_arms is a replace_paths folder, so vanilla's copy of this file does NOT load.
+# One block per tag of common/country_definitions/17_ulthuan.txt, same order. Canon from Uniforms & Heraldry of
+# the High Elves (via Lexicanum) where it exists. House style: .claude/rules/heraldry.md, High Elf (Asur).
+# Every texture's colour-slot count is cited to a real vanilla or Realms of Exether usage; where that usage
+# fills fewer slots, the extra slots take slot 1's tone (the AVE convention).
+# Requires common/flag_definitions/17_ulthuan.txt to render in-game.
 
-# ULT — Ulthuan, the Phoenix King's realm united. Disclosed invention: Asuryan's radiant flame as a golden sunburst on azure.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:23042).
+# ULT - Ulthuan, the Phoenix King's realm united. Canon-firm device: Asuryan's symbol, a stylised pyramid with a phoenix in the centre and the eternal flame as a sun at its tip (Lexicanum: Asuryan, Symbol). Disclosed invention: tinctures (white for Asuryan's cloak of white feathers, same page). Disclosed reuse: the phoenix is LOT's main charge, here a secondary inside the pyramid (the one recorded Asur exception); ce_triangle also in 06_badlands.txt, 07_nehekhara.txt and 19_lustria.txt in their own tinctures.
+# Slots: ce_triangle 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:11627); ce_bird_glt 3 (RoE common/coat_of_arms/coat_of_arms/02_central_zalaron.txt:37); ce_sun_radiant 3 (vanilla common/coat_of_arms/coat_of_arms/99_countries_IP2.txt:1460).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_bird_glt.dds), reuse grant 2026-09-07
 ULT = {
 	pattern = "pattern_solid.tga"
-	color1 = "azure"
-	color2 = "azure"
-
+	color1 = "white"
+	color2 = "white"
 	colored_emblem = {
-		texture = "ce_sunburst.dds"
+		texture = "ce_triangle.dds"
 		color1 = "golden"
 		color2 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+		instance = { position = { 0.5 0.58 } scale = { 0.66 0.66 } }
+	}
+	colored_emblem = {
+		texture = "ce_bird_glt.dds"
+		color1 = "red"
+		color2 = "red"
+		color3 = "red"
+		instance = { position = { 0.5 0.66 } scale = { 0.34 0.34 } }
+	}
+	colored_emblem = {
+		texture = "ce_sun_radiant.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.17 } scale = { 0.34 0.34 } }
 	}
 }
 
-# LOT — Eataine, realm of the Sea Lords. Disclosed invention: a golden ship's wheel for Ulthuan's gateway port and its fleets. Disclosed reuse: 04_karaz_ankor.txt ZHU wears ce_ship_wheel in red_dark over waves on blue; LOT's is golden, alone, on lapis_blue.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:12461 (one slot; slot 2 set to slot 1's tone)).
+# LOT - Eataine, realm of the Sea Lords. Canon-firm: Eataine's shield, a black phoenix before a sunrise with rays (Uniforms & Heraldry of the High Elves via Lexicanum: Emblems_of_the_High_Elf_Kingdoms_UHHE.JPG; Eataine, 'Phoenixes are popular symbols'). Disclosed substitution: golden rays for canon red (Chris 2026-11-19; red-and-white rays read as a real-world naval ensign). Disclosed reuse: ce_circle also in 02_empire.txt, 06_badlands.txt, 11_ogre_kingdoms.txt, 19_lustria.txt.
+# Slots: ce_flag_sunbeams 1 (RoE common/coat_of_arms/coat_of_arms/02_central_zalaron.txt:732; slot 2 set to slot 1's tone); ce_circle 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:12496); ce_bird_glt 3 (RoE common/coat_of_arms/coat_of_arms/02_central_zalaron.txt:37).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_flag_sunbeams.dds), reuse grant 2026-09-07
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_bird_glt.dds), reuse grant 2026-09-07
 LOT = {
 	pattern = "pattern_solid.tga"
-	color1 = "lapis_blue"
-	color2 = "lapis_blue"
-
+	color1 = "white"
+	color2 = "white"
 	colored_emblem = {
-		texture = "ce_ship_wheel.dds"
+		texture = "ce_flag_sunbeams.dds"
 		color1 = "golden"
 		color2 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+		instance = { position = { 0.5 0.42 } scale = { 1.1 1.1 } }
+	}
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
+		instance = { position = { 0.5 0.42 } scale = { 0.42 0.42 } }
+	}
+	colored_emblem = {
+		texture = "ce_bird_glt.dds"
+		color1 = "black"
+		color2 = "black"
+		color3 = "black"
+		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
 	}
 }
 
-# CAL — Caledor, the Dragon Princes. Canon-soft: the dragon of Caledor, golden on azure. Disclosed reuse: 04_karaz_ankor.txt also uses ce_dragon_wales; CAL's is golden on azure.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:1012).
+# CAL - Caledor, the Dragon Princes. Canon-firm: a red dragon over a pale-gold disc on dark blue (UHHE emblems and Caledor_Banner.JPG via Lexicanum; Caledor, 'dragons on their shields, helms and swords'). Disclosed reuse: 04_karaz_ankor.txt also uses ce_dragon_wales; CAL's is red over a golden disc on blue.
+# Slots: ce_circle 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:12496); ce_dragon_wales 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:1025).
 CAL = {
 	pattern = "pattern_solid.tga"
-	color1 = "azure"
-	color2 = "azure"
-
+	color1 = "blue"
+	color2 = "blue"
 	colored_emblem = {
-		texture = "ce_dragon_wales.dds"
+		texture = "ce_circle.dds"
 		color1 = "golden"
 		color2 = "golden"
 		color3 = "golden"
 		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
 	}
-}
-
-# SAP — Saphery, land of mages. Disclosed invention: a sixteen-rayed golden star for the White Tower's lore, on white.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:13417 (one slot; slot 2 set to slot 1's tone)).
-SAP = {
-	pattern = "pattern_solid.tga"
-	color1 = "white"
-	color2 = "white"
-
 	colored_emblem = {
-		texture = "ce_star_16.dds"
-		color1 = "golden"
-		color2 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+		texture = "ce_dragon_wales.dds"
+		color1 = "red"
+		color2 = "red"
+		color3 = "red"
+		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
 	}
 }
 
-# NGY — Nagarythe, the Shadowlands. Disclosed invention: a white moon for the Shadow Warriors' night-war, on lapis_blue. Disclosed reuse: 04_karaz_ankor.txt also uses ce_moon_face; NGY's is white on lapis_blue.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:16279).
+# SAP - Saphery, land of mages. Canon-firm: a golden horns-up crescent under a white four-point star on dark blue, symbols of Lileath (UHHE emblems, Saphery_Banner.JPG; Saphery, Military). Disclosed omission: Lileath's figure between the horns. Disclosed reuse: 11_ogre_kingdoms.txt uses ce_crescent_pale for the Great Maw in its own tinctures.
+# Slots: ce_crescent_pale 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:3397); ce_star_04 3 (RoE common/coat_of_arms/coat_of_arms/01_settlers_coast.txt:1143).
+SAP = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "blue"
+	colored_emblem = {
+		texture = "ce_crescent_pale.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.6 } scale = { 0.62 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_04.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.22 } scale = { 0.26 0.26 } }
+	}
+}
+
+# NGY - Nagarythe, the Shadowlands. Canon-soft: a black raven across a white moon on blue (UHHE emblems, Nagarythe_Banner.JPG; Raven Heralds, Nagarythe). Disclosed substitution: ce_falcon for the raven (no raven texture). Disclosed reuse: ce_falcon also in 01_kislev.txt, 03_brettonia.txt, 04_karaz_ankor.txt, 05_southern_realms.txt.
+# Slots: ce_circle 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:12496); ce_falcon 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:2593).
 NGY = {
 	pattern = "pattern_solid.tga"
 	color1 = "lapis_blue"
 	color2 = "lapis_blue"
-
 	colored_emblem = {
-		texture = "ce_moon_face.dds"
+		texture = "ce_circle.dds"
 		color1 = "white"
 		color2 = "white"
 		color3 = "white"
-		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+		instance = { position = { 0.42 0.45 } scale = { 0.62 0.62 } }
+	}
+	colored_emblem = {
+		texture = "ce_falcon.dds"
+		color1 = "black"
+		color2 = "black"
+		color3 = "black"
+		instance = { position = { 0.55 0.52 } scale = { 0.7 0.7 } }
 	}
 }
 
-# TIR — Tiranoc, the drowned kingdom. Canon-soft: white waves over the land the sea took in the Sundering, on blue_light. Disclosed reuse: ce_waves appears in 01_kislev.txt, 04_karaz_ankor.txt and 07_nehekhara.txt in their own tinctures; TIR's is white on blue_light.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:483).
+# TIR - Tiranoc, the drowned kingdom. Canon-firm: a white eagle displayed over a golden sun, blue sky over green land (UHHE emblems, Tiranoc_Banner.JPG; Tiranoc, warriors 'bear [the Eagle Gate's] symbol on their shield').
+# Slots: ce_sun_long_rays 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:28185); ce_eagle 3 (vanilla common/coat_of_arms/coat_of_arms/01_subs.txt:837).
 TIR = {
+	pattern = "pattern_horizontal_split_01.tga"
+	color1 = "blue_light"
+	color2 = "green"
+	colored_emblem = {
+		texture = "ce_sun_long_rays.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.42 } scale = { 1.3 1.3 } }
+	}
+	colored_emblem = {
+		texture = "ce_eagle.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+}
+
+# CHR - Chrace, home of the White Lions. Canon-firm: white field, a red bar bearing the white lion, red stars (UHHE emblems, Chrace_Banner.JPG; Chrace, Heraldry: 'Red dominates Chracian heraldry', crimson and ivory, the white lion). Disclosed reuse: ce_solid also in 19_lustria.txt.
+# Slots: ce_solid 3 (vanilla common/coat_of_arms/coat_of_arms/01_subs.txt:846); ce_lion_passant_guardant 3 (vanilla common/coat_of_arms/coat_of_arms/01_subs.txt:2498); ce_star_04 3 (RoE common/coat_of_arms/coat_of_arms/01_settlers_coast.txt:1143).
+CHR = {
+	pattern = "pattern_solid.tga"
+	color1 = "white"
+	color2 = "white"
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "red"
+		color2 = "red"
+		color3 = "red"
+		instance = { position = { 0.5 0.55 } scale = { 1.0 0.34 } }
+	}
+	colored_emblem = {
+		texture = "ce_lion_passant_guardant.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.55 } scale = { 0.5 0.5 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_04.dds"
+		color1 = "red"
+		color2 = "red"
+		color3 = "red"
+		instance = { position = { 0.3 0.19 } scale = { 0.16 0.16 } }
+		instance = { position = { 0.5 0.19 } scale = { 0.16 0.16 } }
+		instance = { position = { 0.7 0.19 } scale = { 0.16 0.16 } }
+	}
+}
+
+# AVL - Avelorn, the Everqueen's realm. Canon-soft: the red rose the Everqueen holds on the Avelorn banner, on green (Avelorn_Banner.JPG via Lexicanum; Avelorn, green plumes). Disclosed substitution: the rose for the shield's hands holding a red heart (ce_sacred_heart is Catholic iconography; ce_hand is UNO's charge); Isha's weeping eye not used (the eye is a reserved device).
+# Slots: ce_wild_rose 2 (RoE common/coat_of_arms/coat_of_arms/02_central_zalaron.txt:901).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_wild_rose.dds), reuse grant 2026-09-07
+AVL = {
+	pattern = "pattern_solid.tga"
+	color1 = "green_dark"
+	color2 = "green_dark"
+	colored_emblem = {
+		texture = "ce_wild_rose.dds"
+		color1 = "red"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.6 0.6 } }
+	}
+}
+
+# YVR - Yvresse, the misty realm. Canon-firm device: a white hawk with a pale moon beside it, a black spire rising from the mist below (UHHE emblems, Yvresse_Banner.JPG; Yvresse, 'the land of mists'). Disclosed substitutions: ce_eagle_legless for the hawk (no hawk-in-flight texture with a usage line); the spire composed from ce_solid (shaft) and ce_spearhead (point). Disclosed reuse: ce_spearhead also in 03_brettonia.txt, 04_karaz_ankor.txt, 19_lustria.txt; ce_waves in 01_kislev.txt, 04_karaz_ankor.txt, 07_nehekhara.txt.
+# Slots: ce_circle 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:12496); ce_solid 3 (vanilla common/coat_of_arms/coat_of_arms/01_subs.txt:846); ce_spearhead 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:13849); ce_waves 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:496); ce_eagle_legless 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries_2.txt:166).
+YVR = {
 	pattern = "pattern_solid.tga"
 	color1 = "blue_light"
 	color2 = "blue_light"
-
+	colored_emblem = {
+		texture = "ce_circle.dds"
+		color1 = "pearl"
+		color2 = "pearl"
+		color3 = "pearl"
+		instance = { position = { 0.77 0.2 } scale = { 0.28 0.28 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "black"
+		color2 = "black"
+		color3 = "black"
+		instance = { position = { 0.5 0.79 } scale = { 0.045 0.2 } }
+	}
+	colored_emblem = {
+		texture = "ce_spearhead.dds"
+		color1 = "black"
+		color2 = "black"
+		instance = { position = { 0.5 0.68 } scale = { 0.4 0.42 } }
+	}
 	colored_emblem = {
 		texture = "ce_waves.dds"
 		color1 = "white"
 		color2 = "white"
+		instance = { position = { 0.5 0.9 } scale = { 1.0 0.28 } }
+	}
+	colored_emblem = {
+		texture = "ce_eagle_legless.dds"
+		color1 = "white"
+		color2 = "white"
+		color3 = "white"
+		instance = { position = { 0.5 0.29 } scale = { 0.56 0.56 } }
+	}
+}
+
+# ELL - Ellyrion, horse-country. Canon-firm: a white rearing horse on a dark blue sky above white peaks (UHHE emblems, Ellyrion_Banner.JPG; Ellyrion, 'shields and banners... filled with images of horses'). Disclosed omission: the banner's lightning (heraldry.md: bolts too close to the banned ce_lightning_bolt_nacista).
+# Slots: ce_top_spikes 1 (RoE common/coat_of_arms/coat_of_arms/00_noricum.txt:637; slot 2 set to slot 1's tone); ce_roe_horse 2 (RoE common/coat_of_arms/coat_of_arms/00_noricum.txt:245).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_top_spikes.dds), reuse grant 2026-09-07
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_roe_horse.dds), reuse grant 2026-09-07
+ELL = {
+	pattern = "pattern_solid.tga"
+	color1 = "azure"
+	color2 = "azure"
+	colored_emblem = {
+		texture = "ce_top_spikes.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.85 } scale = { 1.0 -0.3 } }
+	}
+	colored_emblem = {
+		texture = "ce_roe_horse.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.5 0.45 } scale = { 0.75 0.75 } }
+	}
+}
+
+# COT - Cothique, the eastern coastal realm. Canon-soft: a golden sea-beast leaping over waves, a scallop shell above, on sea-green (UHHE emblems, Cothique_Banner.JPG; Cothique, sea-serpent helms). Disclosed substitutions: ce_fish_oudh for the sea-beast, ce_conch_shell for the scallop (no scallop texture). Disclosed reuse: ce_fish_oudh also in 03_brettonia.txt; ce_conch_shell in 05_southern_realms.txt; ce_waves as YVR.
+# Slots: ce_waves 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:496); ce_fish_oudh 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:1749); ce_conch_shell 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:23148).
+COT = {
+	pattern = "pattern_solid.tga"
+	color1 = "teal"
+	color2 = "teal"
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { position = { 0.5 0.86 } scale = { 1.0 0.36 } }
+	}
+	colored_emblem = {
+		texture = "ce_fish_oudh.dds"
+		color1 = "golden"
+		color2 = "white"
+		color3 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
+	}
+	colored_emblem = {
+		texture = "ce_conch_shell.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.14 } scale = { 0.24 0.24 } }
+	}
+}
+
+# CDU - Citadel of Dusk. Canon-firm: a red citadel under red rays on blue, on black ground - its roundel on sources/originals/High_Elf_Outposts.JPG (Chris's source), corroborated by Citadel_of_Dusk_Banner.JPG on Lexicanum. Disclosed reuse: ce_castle is common across region files; CDU's is red.
+# Slots: ce_flag_sunbeams 1 (RoE common/coat_of_arms/coat_of_arms/02_central_zalaron.txt:732; slot 2 set to slot 1's tone); ce_solid 3 (vanilla common/coat_of_arms/coat_of_arms/01_subs.txt:846); ce_castle 3 (vanilla common/coat_of_arms/coat_of_arms/01_subs.txt:804).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_flag_sunbeams.dds), reuse grant 2026-09-07
+CDU = {
+	pattern = "pattern_solid.tga"
+	color1 = "blue"
+	color2 = "blue"
+	colored_emblem = {
+		texture = "ce_flag_sunbeams.dds"
+		color1 = "red"
+		color2 = "red"
+		instance = { position = { 0.5 0.85 } scale = { 1.4 1.4 } }
+	}
+	colored_emblem = {
+		texture = "ce_solid.dds"
+		color1 = "black"
+		color2 = "black"
+		color3 = "black"
+		instance = { position = { 0.5 0.93 } scale = { 1.0 0.16 } }
+	}
+	colored_emblem = {
+		texture = "ce_castle.dds"
+		color1 = "red"
+		color2 = "red"
+		color3 = "red"
+		instance = { position = { 0.5 0.72 } scale = { 0.42 0.42 } }
+	}
+}
+
+# FDW - Fortress of Dawn. Canon-firm: a golden sun rising over the sea with rays, on blue - its roundel on High_Elf_Outposts.JPG, corroborated by Fortress_of_Dawn_Banner.JPG on Lexicanum. Disclosed reuse: ce_sun also in 01_kislev.txt, 05_southern_realms.txt, 06_badlands.txt, 07_nehekhara.txt, 19_lustria.txt.
+# Slots: ce_flag_sunbeams 1 (RoE common/coat_of_arms/coat_of_arms/02_central_zalaron.txt:732; slot 2 set to slot 1's tone); ce_sun 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:5099); ce_waves 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:496).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_flag_sunbeams.dds), reuse grant 2026-09-07
+FDW = {
+	pattern = "pattern_solid.tga"
+	color1 = "medium_blue"
+	color2 = "medium_blue"
+	colored_emblem = {
+		texture = "ce_flag_sunbeams.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.72 } scale = { 1.4 1.4 } }
+	}
+	colored_emblem = {
+		texture = "ce_sun.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.72 } scale = { 0.55 0.55 } }
+	}
+	colored_emblem = {
+		texture = "ce_waves.dds"
+		color1 = "white"
+		color2 = "blue_light"
+		instance = { position = { 0.5 0.88 } scale = { 1.0 0.36 } }
+	}
+}
+
+# TEL - Tor Elasor. Disclosed invention: a broken column for the Old Ones' place of power the elves took over (Lexicanum: Tor Elasor, citing Warhammer Armies: Lizardmen 6th ed. p.14), sacked by Lokhir Fellheart's Black Arks in 2408 IC (Warhammer Armies: Dark Elves 8th ed. p.28) and only slowly re-founded (High Elf Players Guide p.31). No canon arms.
+# Slots: ce_emblem_column_ancient_broken 3 (RoE common/coat_of_arms/coat_of_arms/04_west_zalaron.txt:700).
+# emblem: Realms of Exether (gfx/coat_of_arms/colored_emblems/ce_emblem_column_ancient_broken.dds), reuse grant 2026-09-07
+TEL = {
+	pattern = "pattern_solid.tga"
+	color1 = "lapis_blue"
+	color2 = "lapis_blue"
+	colored_emblem = {
+		texture = "ce_emblem_column_ancient_broken.dds"
+		color1 = "golden"
+		color2 = "golden"
+		color3 = "golden"
 		instance = { position = { 0.5 0.5 } scale = { 0.75 0.75 } }
 	}
 }
 
-# CHR — Chrace, home of the White Lions. Canon-firm: the white lion of Chrace, on azure. Disclosed reuse: 03_brettonia.txt uses ce_lion_rampant in its own tinctures; CHR's is white on azure.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:33).
-CHR = {
-	pattern = "pattern_solid.tga"
-	color1 = "azure"
-	color2 = "azure"
-
-	colored_emblem = {
-		texture = "ce_lion_rampant.dds"
-		color1 = "white"
-		color2 = "white"
-		color3 = "white"
-		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
-	}
-}
-
-# AVL — Avelorn, the Everqueen's forest realm. Disclosed invention: a golden tree on pearl. Disclosed reuse: 03_brettonia.txt uses ce_tree_new_england twice (ART in green_dark); AVL's is golden on pearl.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:1517).
-AVL = {
-	pattern = "pattern_solid.tga"
-	color1 = "pearl"
-	color2 = "pearl"
-
-	colored_emblem = {
-		texture = "ce_tree_new_england.dds"
-		color1 = "golden"
-		color2 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
-	}
-}
-
-# YVR — Yvresse, the misty realm on the Sea of Chaos. Disclosed invention: a white comet-star, on lapis_blue.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/99_countries_IP2.txt:1583).
-YVR = {
-	pattern = "pattern_solid.tga"
-	color1 = "lapis_blue"
-	color2 = "lapis_blue"
-
-	colored_emblem = {
-		texture = "ce_star_06_comet.dds"
-		color1 = "white"
-		color2 = "white"
-		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
-	}
-}
-
-# ELL — Ellyrion, horse-country of the Reaver Knights. Canon-soft: a golden horse on ice_blue. Disclosed reuse: ce_horse appears in 01_kislev.txt, 03_brettonia.txt and 07_nehekhara.txt in their own tinctures; ELL's is golden on ice_blue.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:579).
-ELL = {
-	pattern = "pattern_solid.tga"
-	color1 = "ice_blue"
-	color2 = "ice_blue"
-
-	colored_emblem = {
-		texture = "ce_horse.dds"
-		color1 = "golden"
-		color2 = "golden"
-		color3 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
-	}
-}
-
-# COT — Cothique, the eastern coastal realm. Disclosed invention: a golden falcon on blue_light. Disclosed reuse: ce_falcon appears in four other region files in their own tinctures; COT's is golden on blue_light.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:2563).
-COT = {
-	pattern = "pattern_solid.tga"
-	color1 = "blue_light"
-	color2 = "blue_light"
-
-	colored_emblem = {
-		texture = "ce_falcon.dds"
-		color1 = "golden"
-		color2 = "golden"
-		color3 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.7 0.7 } }
-	}
-}
-
-# CDU — Citadel of Dusk. Canon-soft, from its roundel on High_Elf_Outposts.JPG (a red citadel under rays on dark blue): the citadel kept, recoloured golden on lapis_blue to the Asur house style. Disclosed reuse: ce_castle is common across region files; CDU's is golden on lapis_blue.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:804).
-CDU = {
-	pattern = "pattern_solid.tga"
-	color1 = "lapis_blue"
-	color2 = "lapis_blue"
-
-	colored_emblem = {
-		texture = "ce_castle.dds"
-		color1 = "golden"
-		color2 = "golden"
-		color3 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
-	}
-}
-
-# FDW — Fortress of Dawn. Canon-soft, from its roundel on High_Elf_Outposts.JPG: a golden sun rising over the sea, on azure.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:24829).
-FDW = {
-	pattern = "pattern_solid.tga"
-	color1 = "azure"
-	color2 = "azure"
-
-	colored_emblem = {
-		texture = "ce_sun_waves.dds"
-		color1 = "golden"
-		color2 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.78 0.78 } }
-	}
-}
-
-# TEL — Tor Elasor. Disclosed invention: a golden elven harp on pearl.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/01_subs.txt:54).
-TEL = {
-	pattern = "pattern_solid.tga"
-	color1 = "pearl"
-	color2 = "pearl"
-
-	colored_emblem = {
-		texture = "ce_harp.dds"
-		color1 = "golden"
-		color2 = "golden"
-		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
-	}
-}
-
-# TOS — Tower of the Stars. Disclosed invention, name-derived: a white ring of stars on lapis_blue.
-# Slots: 2 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:8147 (one slot; slot 2 set to slot 1's tone)).
+# TOS - Tower of the Stars. Disclosed invention, name-derived: a ring of white stars round a golden seven-pointed star, on lapis_blue (Lexicanum: Tower of Stars; no canon arms). Deliberately not the Tower of the Sun roundel on High_Elf_Outposts.JPG (a different, untagged outpost). Seven points, not eight (the eight-pointed star reads as the Star of Chaos). Disclosed reuse: ce_star_07 also in 19_lustria.txt.
+# Slots: ce_stars_circle_06 1 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:8288; slot 2 set to slot 1's tone); ce_star_07 2 (vanilla common/coat_of_arms/coat_of_arms/01_subs.txt:1838).
 TOS = {
 	pattern = "pattern_solid.tga"
 	color1 = "lapis_blue"
 	color2 = "lapis_blue"
-
 	colored_emblem = {
 		texture = "ce_stars_circle_06.dds"
 		color1 = "white"
 		color2 = "white"
-		instance = { position = { 0.5 0.5 } scale = { 0.72 0.72 } }
+		instance = { position = { 0.5 0.5 } scale = { 0.8 0.8 } }
+	}
+	colored_emblem = {
+		texture = "ce_star_07.dds"
+		color1 = "golden"
+		color2 = "golden"
+		instance = { position = { 0.5 0.5 } scale = { 0.3 0.3 } }
 	}
 }
 
-# GCL — Gates of Calith. Disclosed invention: a white eagle's head, the warden of the gates, on blue_light. Disclosed reuse: 04_karaz_ankor.txt also uses ce_eagle_head; GCL's is white on blue_light.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries_2.txt:231).
+# GCL - Gates of Calith. Canon-soft subject, disclosed invention device: two fortresses facing across the strait, for the forts the Asur hold on both shores (Lexicanum: Gates of Calith, citing Temple of Spite p.16). Disclosed reuse: ce_waves as YVR.
+# Slots: ce_waves 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:496); ce_castle_charge_kutch 2 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:13632).
 GCL = {
 	pattern = "pattern_solid.tga"
 	color1 = "blue_light"
 	color2 = "blue_light"
-
 	colored_emblem = {
-		texture = "ce_eagle_head.dds"
+		texture = "ce_waves.dds"
 		color1 = "white"
 		color2 = "white"
-		color3 = "white"
-		instance = { position = { 0.5 0.5 } scale = { 0.66 0.66 } }
+		instance = { position = { 0.5 0.82 } scale = { 1.0 0.4 } }
+	}
+	colored_emblem = {
+		texture = "ce_castle_charge_kutch.dds"
+		color1 = "white"
+		color2 = "white"
+		instance = { position = { 0.24 0.5 } scale = { 0.5 0.5 } }
+		instance = { position = { 0.76 0.5 } scale = { -0.5 0.5 } }
 	}
 }
 
-# TEH — Tor Elithis, the Lost Isles of Elithis. Disclosed invention: a white swan, on azure. Disclosed reuse: ce_swan appears in 03_brettonia.txt and 05_southern_realms.txt in their own tinctures; TEH's is white on azure.
-# Slots: 3 (vanilla usage, common/coat_of_arms/coat_of_arms/02_countries.txt:24763).
+# TEH - Tor Elithis, the Lost Isles of Elithis. Disclosed invention: a white swan, on azure (Lexicanum: Tor Elithis; no canon arms). Disclosed reuse: ce_swan also in 03_brettonia.txt and 05_southern_realms.txt in their own tinctures.
+# Slots: ce_swan 3 (vanilla common/coat_of_arms/coat_of_arms/02_countries.txt:25189).
 TEH = {
 	pattern = "pattern_solid.tga"
 	color1 = "azure"
 	color2 = "azure"
-
 	colored_emblem = {
 		texture = "ce_swan.dds"
 		color1 = "white"
