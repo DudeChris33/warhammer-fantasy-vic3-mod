@@ -37,6 +37,15 @@ Inputs (all committed or already-registered sources; nothing new is sourced):
   weight where it folds. Two polar rules: TWW3 gap land south of :data:`SOUTH_CHAOS_LAT`
   is chaotic waste; north of :data:`NORTH_FROZEN_LAT`, land outside every pair-based
   placement is frozen unless TWW3 says mountain or chaos.
+* ``sources/cr_oldworld_campaign/db/campaign_map_settlements_tables/cr_oldworld_campaign.tsv``
+  (ChaosRobie's Old World mod: a ``climate_type`` per settlement) with
+  ``config/hub_worksheet.json``, ``map_data/provinces.png`` and ``map_data/state_regions/``:
+  every hub citing ``cr_oldworld_campaign/<slug>`` (818) carries its settlement's climate,
+  and each cell of that hub's state takes its nearest such hub's class
+  (:func:`settlement_biomes`). This **replaces** the TWW3 sample there (the drawn Old World),
+  needs no registration, and adds two classes TWW3 lacks: ``swamp`` and ``hills``.
+  ``climate_immaterial`` (holds, Chaos Dwarf sites) and ``climate_ocean`` are skipped. It
+  goes in after the edge warp, which exists only to hide TWW3's straight polygon edges.
 * ``mapgen/derived/climate_zones.png`` + index (the wind model), for TWW3's gaps only.
 * ``mapgen/registration/`` and the #9016 pairs (``config/ie_projection_pairs.csv``).
 
@@ -188,8 +197,9 @@ MAT_RGB = {
 
 # Biome classes of the TWW3 climate map.
 UNKNOWN, TEMPERATE, MOUNTAIN, WASTE, MAGIC, ISLAND, FROZEN, CHAOS, JUNGLE, SAVANNA, DESERT = range(11)
+SWAMP, HILLS = 11, 12      # only the Old World mod's settlement table has these
 BIOME_NAMES = ["unknown", "temperate", "mountain", "wasteland", "magic_forest", "island",
-               "frozen", "chaotic_waste", "jungle", "savannah", "desert"]
+               "frozen", "chaotic_waste", "jungle", "savannah", "desert", "swamp", "hills"]
 #: Fill colour per class, measured 2026-11-19 as the median of 13x13 windows inside
 #: named regions of each class on the 5 px median-filtered map (jungle: Lustria and the
 #: Central Jungle; savannah: the Southlands' south). The legend swatches are NOT the fills
@@ -214,6 +224,22 @@ PALETTE_TOL = 45           # L1 distance in RGB to the nearest fill colour
 FILL_MAX_CELLS = 12        # nearest-known fill radius, in working-grid cells
 FRINGE_PX = 1              # opening iterations per class: removes outline-fringe lines (anti-aliasing)
 OLDWORLD_PAIRS = TOOLS_DIR / "config" / "climate_oldworld_pairs.json"
+#: ChaosRobie's Old World campaign mod: one ``climate_type`` per settlement. Our hubs cite
+#: its settlements (``hub_worksheet.json`` ``source``: ``cr_oldworld_campaign/<slug>``), so
+#: the climate lands on our own anchors with no registration (Chris, 2026-11-19).
+OW_SETTLEMENTS = (REPO_ROOT / "sources" / "cr_oldworld_campaign" / "db" / "campaign_map_settlements_tables"
+                  / "cr_oldworld_campaign.tsv")
+HUB_WORKSHEET = TOOLS_DIR / "config" / "hub_worksheet.json"
+STATE_REGIONS_DIR = REPO_ROOT / "map_data" / "state_regions"
+PROVINCES_PNG = REPO_ROOT / "map_data" / "provinces.png"
+OW_CLIMATE_BIOME = {
+    "climate_temperate": TEMPERATE, "climate_mountain": MOUNTAIN, "climate_wasteland": WASTE,
+    "climate_desert": DESERT, "climate_frozen": FROZEN, "climate_chaotic": CHAOS,
+    "climate_magicforest": MAGIC, "climate_jungle": JUNGLE, "climate_island": ISLAND,
+    "climate_savannah": SAVANNA, "climate_swamp": SWAMP, "climate_hills": HILLS,
+}
+#: Settlements whose climate is not ground: holds and Chaos Dwarf sites (immaterial) and sea.
+OW_CLIMATE_SKIP = {"climate_immaterial", "climate_ocean"}
 OLDWORLD_SMOOTHING = (0.0, 1e2, 1e3, 1e4, 3e4, 1e5, 3e5, 1e6)   # thin-plate candidates, as #9016 plus finer steps
 
 # --- tuning (each constant has a value that switches its rule off, used for before/after renders)
@@ -257,6 +283,7 @@ class Inputs:
     covered: np.ndarray     # bool [H/Q, W/Q], inside the climate map's frame
     placed: np.ndarray      # bool [H/Q, W/Q], sampled through a pair-based placement, not the frame warp
     biome_model: np.ndarray  # uint8 [H/Q, W/Q], wind-model class (UNKNOWN on its sea)
+    biome_ow: np.ndarray     # uint8 [H/Q, W/Q], Old World mod settlement class (UNKNOWN where none)
 
 
 def load_elevation() -> np.ndarray:
@@ -528,6 +555,78 @@ def model_biomes() -> np.ndarray:
     return lut[layer[Q // 2::Q, Q // 2::Q]]
 
 
+def settlement_biomes(state4: np.ndarray, hub_xy: np.ndarray, hub_state: np.ndarray,
+                      hub_cls: np.ndarray) -> np.ndarray:
+    """Each cell of a state takes the class of the nearest hub of that state (pure).
+
+    ``state4`` int32 [H4, W4] (-1 = no state); hubs as canvas (x, y), their state index
+    and class. Cells of a state with no hub stay UNKNOWN.
+    """
+    from scipy.spatial import cKDTree
+    out = np.zeros(state4.shape, np.uint8)
+    flat = state4.ravel()
+    order = np.argsort(flat, kind="stable")
+    sorted_ids = flat[order]
+    for s in np.unique(hub_state):
+        if s < 0:
+            continue
+        lo, hi = np.searchsorted(sorted_ids, [s, s + 1])
+        if lo == hi:
+            continue
+        cells = order[lo:hi]
+        cy, cx = np.divmod(cells, state4.shape[1])
+        mine = hub_state == s
+        _d, k = cKDTree(hub_xy[mine]).query(np.c_[(cx + 0.5) * Q, (cy + 0.5) * Q])
+        out.ravel()[cells] = hub_cls[mine][k]
+    return out
+
+
+def ow_settlement_biomes() -> np.ndarray:
+    """:func:`settlement_biomes` for every hub that cites an Old World mod settlement."""
+    if not OW_SETTLEMENTS.exists():
+        raise SystemExit(f"missing {OW_SETTLEMENTS.relative_to(REPO_ROOT)} "
+                         "(sources/ is local-only; see mapgen/SOURCES.md)")
+    from worldgen.state_ownership import load_land_states
+    climate = {}
+    prefix = "settlement:cr_oldworld_region_"
+    for i, line in enumerate(OW_SETTLEMENTS.read_text(encoding="utf-8").splitlines()):
+        cols = line.split("\t")
+        if i >= 2 and len(cols) > 1 and cols[0].startswith(prefix):
+            climate[cols[0][len(prefix):]] = cols[1]
+    bad = sorted({c for c in climate.values() if c not in OW_CLIMATE_BIOME and c not in OW_CLIMATE_SKIP})
+    if bad:
+        raise SystemExit(f"{OW_SETTLEMENTS.name}: climate types with no OW_CLIMATE_BIOME entry: {bad}")
+    prov = np.asarray(Image.open(PROVINCES_PNG).convert("RGB"), dtype=np.uint32)   # flat province colours, no alpha
+    if prov.shape[:2] != (H, W):
+        raise SystemExit(f"{PROVINCES_PNG.name}: expected {W}x{H}")
+    packed = (prov[..., 0] << 16) | (prov[..., 1] << 8) | prov[..., 2]
+    colour_state = {}
+    for k, st in enumerate(load_land_states(STATE_REGIONS_DIR)):
+        for c in st.provinces:
+            colour_state[int(c[1:], 16)] = k
+
+    def state_of(px: np.ndarray) -> np.ndarray:
+        uniq, inv = np.unique(px, return_inverse=True)
+        lut = np.array([colour_state.get(int(u), -1) for u in uniq], np.int32)
+        return lut[inv].reshape(px.shape)
+
+    state4 = state_of(packed[Q // 2::Q, Q // 2::Q])
+    xy, cls = [], []
+    for h in json.loads(HUB_WORKSHEET.read_text(encoding="utf-8"))["hubs"]:
+        m = re.search(r"cr_oldworld_campaign/([\w\-]+)", h.get("source", ""))
+        if not m or m.group(1) not in climate or climate[m.group(1)] in OW_CLIMATE_SKIP:
+            continue
+        xy.append(h["anchor"])
+        cls.append(OW_CLIMATE_BIOME[climate[m.group(1)]])
+    xy = np.array(xy, float)
+    ix = np.clip(xy[:, 0].astype(int), 0, W - 1)
+    iy = np.clip(xy[:, 1].astype(int), 0, H - 1)
+    hub_state = state_of(packed[iy, ix])
+    out = settlement_biomes(state4, xy, hub_state, np.array(cls, np.uint8))
+    log(f"  Old World settlement climates: {len(xy)} hubs, {(out > 0).mean() * 100:.1f}% of grid")
+    return out
+
+
 def load_inputs() -> Inputs:
     log("loading inputs")
     land = np.asarray(Image.open(DERIVED_DIR / "land_sea_mask.png"), dtype=bool)
@@ -539,7 +638,8 @@ def load_inputs() -> Inputs:
         if a.shape != (H, W):
             raise SystemExit(f"{name}: expected {W}x{H}, got {a.shape[1]}x{a.shape[0]}")
     return Inputs(land=land & ~lake, lake=lake, elev=elev, arable=arable,
-                  biome_tww3=biome, covered=covered, placed=placed, biome_model=model_biomes())
+                  biome_tww3=biome, covered=covered, placed=placed, biome_model=model_biomes(),
+                  biome_ow=ow_settlement_biomes())
 
 
 # --------------------------------------------------------------------------- rules
@@ -678,6 +778,18 @@ def build_weights(biome, land, lake, elev4, fert4, coast_dist, rng) -> np.ndarra
     add("grasslands_05", 0.5 * low, mt)
     add("grasslands_01", 0.35 * low * (a > 0.15), mt)
     add("woodlands_01", 0.25 * low * (a > 0.25), mt)
+    # --- swamp (Old World mod only): marsh and fen, dark wet woodland in patches
+    sw = b(SWAMP)
+    add("marchlands_03", 0.8 + 0.1 * n1, sw)
+    add("marchlands_04", 0.4, sw)
+    add("grasslands_06", 0.2 + 0.1 * n2, sw)
+    add("woodlands_03", 0.2 * (n1 > 0.3), sw)
+    # --- hills (Old World mod only): rough grass broken by rock
+    hl = b(HILLS)
+    add("grasslands_05", 0.4, hl)
+    add("grasslands_01", 0.3 * lush, hl)
+    add("rocks_01", 0.2 + 0.1 * n1, hl)
+    add("cliff_granite_06", 0.1 + 0.1 * (n3 > 0.5), hl)
     # --- shoreline sand on any land (not on mountains/ice), thin
     shore = land & (coast_dist < 2.0) & ~np.isin(biome, [MOUNTAIN, FROZEN, DESERT])
     add("beach_01", 0.5, shore)
@@ -696,7 +808,7 @@ def build_weights(biome, land, lake, elev4, fert4, coast_dist, rng) -> np.ndarra
 
 def cliff_lut() -> np.ndarray:
     """Cliff material per biome class."""
-    lut = np.full(11, M["cliff_granite_06"], np.uint8)
+    lut = np.full(len(BIOME_NAMES), M["cliff_granite_06"], np.uint8)
     lut[[WASTE, DESERT, SAVANNA]] = M["cliff_sandstone_04"]
     lut[CHAOS] = M["cliff_granite_07"]
     lut[JUNGLE] = M["cliff_granite_01"]
@@ -795,9 +907,14 @@ def build(inp: Inputs, seed: int, *, verbose: bool = True) -> tuple[np.ndarray, 
     # other class becomes frozen (loremaster 2026-11-19).
     arctic = land4 & ~inp.placed & (lat4 > NORTH_FROZEN_LAT) & ~np.isin(biome, [FROZEN, MOUNTAIN, CHAOS])
     biome = np.where(arctic, FROZEN, biome).astype(np.uint8)
+    # the warp hides TWW3's straight polygon edges; the settlement classes below follow our
+    # own state borders and are state-scale, so they go in after it, unwarped
+    biome = warp_biome(biome, land4, seed)
+    # over the drawn Old World the mod's own settlement climates replace the TWW3 sample:
+    # they sit on our own hub anchors, so nothing has to be registered
+    biome = np.where(land4 & (inp.biome_ow != UNKNOWN), inp.biome_ow, biome).astype(np.uint8)
     biome, demoted = demote_mountains(biome, land4, elev4)
     say(f"  mountain demoted to its neighbours on {demoted.sum() / max(int(land4.sum()), 1) * 100:.1f}% of land cells")
-    biome = warp_biome(biome, land4, seed)
     nland = max(int(land4.sum()), 1)
     say(f"  TWW3 gaps filled from the nearest TWW3 class on {use_proxy.sum() / nland * 100:.1f}% of land cells")
     for k, nme in enumerate(BIOME_NAMES[1:], 1):
@@ -1098,9 +1215,12 @@ def synthetic_inputs(h: int = 452, w: int = 1024) -> Inputs:
     covered = np.ones((h4, w4), bool)                                    # takes the nearest class
     covered[gap] = False
     model = np.full((h4, w4), JUNGLE, np.uint8)
+    ow = np.zeros((h4, w4), np.uint8)                                    # Old World settlement classes:
+    ow[h4 // 2 - 15:h4 // 2 + 15, w4 // 4 + 40:w4 // 4 + 70] = SWAMP     # a state-sized swamp on the flat
+    ow[h4 // 2 - 15:h4 // 2 + 15, 175:205] = HILLS                        # temperate half, hills on the desert half
     model[gap[0].start:gap[0].start + 5, gap[1]] = UNKNOWN               # model sea on our land: nearest TWW3
     return Inputs(land=land, lake=lake, elev=elev, arable=arable, biome_tww3=biome, covered=covered,
-                  placed=np.ones((h4, w4), bool), biome_model=model)
+                  placed=np.ones((h4, w4), bool), biome_model=model, biome_ow=ow)
 
 
 def selftest() -> int:
@@ -1117,6 +1237,17 @@ def selftest() -> int:
     gap = idx[0, (h4 // 2 + 10) * Q:(h4 // 2 + 20) * Q, (w4 // 4 + 5) * Q:(w4 // 4 + 25) * Q]
     jungle = np.isin(gap, [M[n] for n in ("woodlands_03", "marchlands_03", "grasslands_06")])
     assert jungle.mean() > 0.9, "the TWW3 gap did not take the wind model's class"
+    sw = idx[0, (h4 // 2 - 8) * Q:(h4 // 2 + 8) * Q, (w4 // 4 + 47) * Q:(w4 // 4 + 63) * Q]
+    assert np.isin(sw, [M["marchlands_03"], M["marchlands_04"], M["grasslands_06"]]).mean() > 0.8, \
+        "a settlement swamp did not override the TWW3 class"
+    hl = idx[:, (h4 // 2 - 8) * Q:(h4 // 2 + 8) * Q, 182 * Q:198 * Q]
+    assert (hl == M["rocks_01"]).any(), "settlement hills carry no rock"
+    # per-state nearest hub: two states, three hubs; a state with no hub stays UNKNOWN
+    st = np.full((4, 6), -1, np.int32)
+    st[:, :3], st[:2, 3:] = 0, 1
+    got = settlement_biomes(st, np.array([[2.0, 2.0], [10.0, 14.0], [22.0, 2.0]]), np.array([0, 0, 1]),
+                            np.array([SWAMP, HILLS, DESERT], np.uint8))
+    assert got[0, 0] == SWAMP and got[3, 2] == HILLS and got[0, 5] == DESERT and got[3, 5] == UNKNOWN, got
     used = set(np.unique(idx).tolist())
     for name in ("snow", "cliff_granite_06", "cliff_sandstone_04", "beach_01", "desert_01", "grasslands_02"):
         assert M[name] in used, f"selftest world never produced {name}"
