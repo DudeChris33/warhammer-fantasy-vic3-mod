@@ -1117,7 +1117,7 @@ def selftest() -> int:
     small = build_dds(np.zeros((32, 64, 2), np.uint8), mips=7, verify=False)
     assert len(small) == 148 + sum(level_bytes(w, h, "bc7") for w, h in mip_dims(64, 32, 7))
     hdr = struct.unpack_from("<31I", small, 4)
-    assert hdr[0] == 124 and hdr[1] == 0xA1007 and hdr[2] == 32 and hdr[3] == 64 and hdr[5] == 0 and hdr[6] == 7, hdr[:7]
+    assert hdr[0] == 124 and hdr[1] == 0xA1007 and hdr[2] == 32 and hdr[3] == 64 and hdr[5] == 1 and hdr[6] == 7, hdr[:7]   # depth 1, as vanilla's
     assert small[84:88] == b"DX10" and struct.unpack_from("<5I", small, 128) == (98, 3, 0, 1, 1)
     bg = build_dds(np.zeros((8, 8, 2), np.uint8), mips=4, verify=False, encoding="bgra8")
     assert len(bg) == 128 + sum(w * h * 4 for w, h in mip_dims(8, 8, 4))
