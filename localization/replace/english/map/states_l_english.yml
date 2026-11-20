@@ -463,7 +463,6 @@
  STATE_LAND_731:0 "Land 731" # AUTOGEN
  STATE_LAND_732:0 "Land 732" # AUTOGEN
  STATE_LAND_733:0 "Land 733" # AUTOGEN
- STATE_LAND_734:0 "Land 734" # AUTOGEN
  STATE_LAND_735:0 "Land 735" # AUTOGEN
  STATE_LAND_736:0 "Land 736" # AUTOGEN
 # Retained: no longer emitted by the current region cut; kept so no name is lost.
@@ -872,6 +871,7 @@
  STATE_LAND_727:0 "Land 727" # AUTOGEN
  STATE_LAND_728:0 "Land 728" # AUTOGEN
  STATE_LAND_729:0 "Land 729" # AUTOGEN
+ STATE_LAND_734:0 "Land 734" # AUTOGEN
  STATE_LOWER_ASH_RIVER:0 "Lower Ash River"
  STATE_LOWER_RIVER_MORTIS:0 "Lower River Mortis"
  STATE_MALLIENTE_SWAMPS:0 "Malliente Swamps"

@@ -18,7 +18,7 @@
     }
     resource = {
         type = "building_oil_rig"
-        undiscovered_amount = 5
+        undiscovered_amount = 4
     }
     naval_exit_id = 3024
 }
@@ -302,13 +302,13 @@ STATE_LAND_416 = {
 STATE_LAND_427 = {
     id = 427
     subsistence_building = "building_subsistence_farm"
-    provinces = { x013AD4 x156F40 x4B5E35 x553C44 x5ED959 x607A3B x64C98D x6582D5 x85B353 x85D3D0 x8E3A7C x97559D xB52BF1 xCC414E xCD8A5F xD9581F xE3E674 xED8389 xF9B2C0 }
+    provinces = { x013AD4 x156F40 x4B5E35 x553C44 x5ED959 x607A3B x64C98D x6582D5 x85B353 x85D3D0 x8B6C33 x8E3A7C x97559D xB52BF1 xCC414E xCD8A5F xD9581F xE3E674 xED8389 xF9B2C0 }
     city = x85B353
     farm = x013AD4
-    mine = x85D3D0
+    mine = x8B6C33
     wood = xED8389
     port = xF9B2C0
-    arable_land = 18
+    arable_land = 19
     arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
     capped_resources = {
         building_coal_mine = 3
@@ -319,7 +319,7 @@ STATE_LAND_427 = {
     }
     resource = {
         type = "building_oil_rig"
-        undiscovered_amount = 2
+        undiscovered_amount = 3
     }
     naval_exit_id = 3052
 }
@@ -1101,17 +1101,4 @@ STATE_ISLE_OF_AESTUNIAE = {
         undiscovered_amount = 2
     }
     naval_exit_id = 3092
-}
-STATE_LAND_734 = {
-    id = 734
-    subsistence_building = "building_subsistence_farm"
-    provinces = { x8B6C33 }
-    city = x8B6C33
-    farm = x8B6C33
-    mine = x8B6C33
-    wood = x8B6C33
-    arable_land = 1
-    arable_resources = { "building_wheat_farm" "building_livestock_ranch" }
-    capped_resources = {
-    }
 }
