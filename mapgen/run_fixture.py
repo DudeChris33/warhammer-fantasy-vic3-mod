@@ -3202,6 +3202,37 @@ def _selfcheck_canal_junctions() -> None:
     assert srows[0]["type"] == "canal_x" and srows[0]["comment"] == "Kept across redraw"
     assert tuple(srows[0]["a"]) in (c.start, c.stop), "endpoints refreshed to the sea pair"
 
+    # board #11542: a land tip that overshoots the coast ends in a province that
+    # touches neither canal sea; the arm's first province that does replaces it,
+    # with a note. Without the touching set (None) the drawn tip stands unchanged.
+    from generate_adjacencies import _touching
+
+    N, OSea1, OSea2, Coast, Inland = (20, 0, 0), (20, 1, 0), (20, 2, 0), (20, 3, 0), (20, 4, 0)
+    orgb = np.zeros((H, W, 3), dtype=np.uint8)
+    orgb[:10] = N
+    orgb[10:20, :15] = OSea1
+    orgb[10:20, 15:] = OSea2
+    orgb[20:24] = Coast
+    orgb[24:] = Inland
+    ocode = ((orgb[..., 0].astype(np.uint32) << 16) | (orgb[..., 1].astype(np.uint32) << 8)
+             | orgb[..., 2].astype(np.uint32))
+    okinds = {N: "land", OSea1: "sea", OSea2: "sea", Coast: "land", Inland: "land"}
+    plus = np.zeros((H, W), dtype=bool)
+    plus[6:27, 15] = True
+    plus[15, 6:25] = True
+    olines = adj.extract_lines(plus, wrap_x=False)
+    assert len(olines) == 1 and olines[0].leaves is not None, olines
+    oc, osk = adj.classify_lines(olines, ocode, okinds, touching=_touching(ocode, False),
+                                 wrap_x=False)
+    assert not osk and len(oc) == 1, (oc, osk)
+    assert set(oc[0].land_pair) == {N, Coast}, oc[0]
+    assert "first land province along the arm" in oc[0].land_note, oc[0]
+    assert set(oc[0].land_points) == {(15, 6), (15, 26)}, "land_points keep the drawn tips"
+    assert adj.color_code(oc[0].land_pair[0]) < adj.color_code(oc[0].land_pair[1]), oc[0]
+    on, onsk = adj.classify_lines(olines, ocode, okinds, touching=None, wrap_x=False)
+    assert not onsk and len(on) == 1 and set(on[0].land_pair) == {N, Inland}, on
+    assert on[0].land_note == "", on[0]
+
 
 def _selfcheck_stack_hubs() -> None:
     """Hub-stacking fallback (worldgen.statefile.stack_hubs), in isolation.
@@ -7074,7 +7105,8 @@ def run_check() -> int:
     _selfcheck_canal_junctions()
     print("canal junctions (#5744): '+'/'X' sea+land split, plateau collapse, touching-skip "
           "exemption, 3-leaf/no-valid-pairing/same-colour/lake skips, worksheet identity "
-          "across a redraw via land_points self-check passed.")
+          "across a redraw via land_points, coast-overshoot land-tip fallback (#11542) "
+          "self-check passed.")
     _selfcheck_stack_hubs()
     print("statefile: hub-stacking fallback (single/few-province stacking, cycling, port "
           "preference) self-check passed.")

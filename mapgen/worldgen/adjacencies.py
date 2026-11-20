@@ -10,6 +10,9 @@ A canal is drawn as a 4-arm "+"/"X" junction instead of a plain 2-endpoint line:
 one glyph combining the sea-to-sea crossing (still one ``canal_*`` row in the
 CSV, unchanged) with the two flanking land provinces (a :class:`Crossing`'s
 ``land_pair``, consumed only by ``common/strait_definitions`` — board #5744).
+A land leaf that overshoots the coast and ends in a province touching neither
+canal sea is replaced by the first land province along its arm that does
+(:func:`_landfall_pair`, board #11542); the generator reports each swap.
 Junction topology reuses ``river_network``'s topology-aware skeleton primitives
 (the same diagonal-redundancy handling that keeps a river T/Y junction from
 reading as a spurious triangle) rather than a second implementation.
@@ -87,7 +90,12 @@ class Crossing:
     the ``common/strait_definitions`` emitter; ``land_points`` lets a worksheet
     row keep its identity across a canal's redraw from a plain line to a
     junction (its ``a``/``b`` are the line's *original* endpoints, which the "+"
-    convention keeps as the land leaves — see :func:`sync_worksheet`)."""
+    convention keeps as the land leaves — see :func:`sync_worksheet`).
+
+    ``land_note`` is non-empty when :func:`_landfall_pair` replaced a drawn land
+    tip that touched neither canal sea (the mark overshoots the coast); it says
+    which province was swapped for which, and ``land_points`` still holds the
+    drawn tip coordinates."""
 
     from_color: Color
     to_color: Color
@@ -97,6 +105,7 @@ class Crossing:
     centroid: Point
     land_pair: tuple[Color, Color] | None = None
     land_points: tuple[Point, Point] | None = None
+    land_note: str = ""
 
 
 @dataclass(frozen=True)
@@ -413,6 +422,65 @@ def _classify_junction(ln: Line, code_map: np.ndarray, kinds: dict[Color, str],
     return sea_pa, sea_ca, sea_pb, sea_cb, land_pair, land_points
 
 
+def _landfall_pair(land_pair: tuple[Color, Color], land_points: tuple[Point, Point],
+                   toward: Point, seas: tuple[Color, Color], code_map: np.ndarray,
+                   kinds: dict[Color, str], touching: set[frozenset], width: int | None
+                   ) -> tuple[tuple[Color, Color], tuple[Point, Point], str]:
+    """Replace a junction land tip that overshoots the coast (board #11542).
+
+    A drawn "+" arm can end a few pixels inland, in a province that touches
+    neither canal sea; the engine then rejects it as "not a coastal province". A
+    tip that touches either sea in ``seas`` is kept as drawn. Otherwise walk from
+    the tip toward ``toward`` (the line centroid) pixel by pixel, stop at the
+    first non-land pixel, and take the first province on the way that is land, is
+    neither the tip's nor the other end's province, and touches a sea in
+    ``seas``. No such province: the tip is kept (``validate_map`` reports it).
+    The second end is checked against the first end's result. Returns the pair
+    (re-sorted by colour code, ``land_points`` swapped with it, drawn tip
+    coordinates kept) and a note, empty when nothing changed."""
+    h, w = code_map.shape
+    pair = list(land_pair)
+    pts = list(land_points)
+    notes: list[str] = []
+
+    def touches(c: Color) -> bool:
+        return any(frozenset((c, s)) in touching for s in seas)
+
+    for i in (0, 1):
+        old = pair[i]
+        if touches(old):
+            continue
+        other = pair[1 - i]
+        px, py = pts[i]
+        dx = toward[0] - px
+        dy = toward[1] - py
+        if width:
+            dx = (dx + width // 2) % width - width // 2
+        n = max(abs(dx), abs(dy))
+        for k in range(1, n + 1):
+            x = px + int(round(dx * k / n))
+            y = py + int(round(dy * k / n))
+            if width:
+                x %= width
+            if not (0 <= x < w and 0 <= y < h):
+                break
+            c = code_color(int(code_map[y, x]))
+            if kinds.get(c) != "land":
+                break
+            if c == old or c == other:
+                continue
+            if touches(c):
+                pair[i] = c
+                notes.append(f"land tip {color_token(old)} at {list(pts[i])} touches neither "
+                             f"sea endpoint; using {color_token(c)}, the first land province "
+                             "along the arm that does")
+                break
+    if color_code(pair[1]) < color_code(pair[0]):
+        pair.reverse()
+        pts.reverse()
+    return (pair[0], pair[1]), (pts[0], pts[1]), "; ".join(notes)
+
+
 def classify_lines(lines: list[Line], code_map: np.ndarray, kinds: dict[Color, str],
                    touching: set[frozenset] | None = None, pins=(), wrap_x: bool = True,
                    tol: int = MATCH_TOL) -> tuple[list[Crossing], list[Skipped]]:
@@ -426,12 +494,17 @@ def classify_lines(lines: list[Line], code_map: np.ndarray, kinds: dict[Color, s
     for ln in lines:
         land_pair: tuple[Color, Color] | None = None
         land_points: tuple[Point, Point] | None = None
+        land_note = ""
         if ln.leaves is not None:
             result = _classify_junction(ln, code_map, kinds, wrap_x)
             if isinstance(result, Skipped):
                 skipped.append(result)
                 continue
             pa, ca, pb, cb, land_pair, land_points = result
+            if touching is not None:
+                land_pair, land_points, land_note = _landfall_pair(
+                    land_pair, land_points, ln.centroid, (ca, cb), code_map, kinds,
+                    touching, width)
         elif ln.a is None or ln.b is None:
             skipped.append(Skipped(ln.centroid, ln.reason))
             continue
@@ -485,10 +558,10 @@ def classify_lines(lines: list[Line], code_map: np.ndarray, kinds: dict[Color, s
             continue
         if color_code(ca) <= color_code(cb):
             crossings.append(Crossing(ca, cb, pa, pb, ln.pixels, ln.centroid,
-                                      land_pair, land_points))
+                                      land_pair, land_points, land_note))
         else:
             crossings.append(Crossing(cb, ca, pb, pa, ln.pixels, ln.centroid,
-                                      land_pair, land_points))
+                                      land_pair, land_points, land_note))
     crossings.sort(key=lambda c: (color_code(c.from_color), color_code(c.to_color),
                                   c.start[0], c.start[1]))
     return crossings, skipped

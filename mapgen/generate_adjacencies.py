@@ -413,6 +413,8 @@ def build_straits() -> tuple[str, str, list[str]]:
         if row.land_a_color is not None and row.land_b_color is not None:
             # A worksheet pin overrides the drawn junction's derived pair.
             land = tuple(sorted((row.land_a_color, row.land_b_color), key=adj.color_code))
+        elif c.land_note:
+            notes.append(f"{row.type}: {c.land_note}")
         if land is None:
             notes.append(f"{row.type}: no land endpoints yet (draw it as a '+'/'X' junction, "
                          "or pin land_a_color/land_b_color in the worksheet)")
