@@ -836,7 +836,7 @@ canal_tarantula = {
 	total_block_requires_full_control = no
 	military_block_requires_full_control = no
 
-	first_land_endpoint = x59539E
+	first_land_endpoint = x542A87
 	second_land_endpoint = xC0AAE2
 
 	first_sea_endpoint = x699A2F
