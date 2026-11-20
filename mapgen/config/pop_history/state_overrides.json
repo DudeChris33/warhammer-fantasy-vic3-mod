@@ -451,16 +451,6 @@
     }
    ]
   },
-  "BRC": {
-   "mix": [
-    {
-     "culture": "bretonnian",
-     "share": 100,
-     "source": "canon: Old World colonists in Lustria (WFB Lustria)",
-     "why": "Colonist culture of the owning realm."
-    }
-   ]
-  },
   "SSD": {
    "mix": [
     {

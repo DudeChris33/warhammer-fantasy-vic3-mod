@@ -444,21 +444,6 @@ ESC = {
 	}
 }
 
-# BRC - Bretonnian colony. As TLC: the parent BRE fleur-de-lis on a split field over the colonial green base.
-# Slots: ce_fleur_de_lis 2 (as 03_brettonia.txt:28-33 BRE).
-BRC = {
-	pattern = "pattern_horizontal_split_01.tga"
-	color1 = "azure"
-	color2 = "green_dark"
-
-	colored_emblem = {
-		texture = "ce_fleur_de_lis.dds"
-		color1 = "golden"
-		color2 = "golden"
-		instance = { position = { 0.5 0.34 } scale = { 0.5 0.5 } }
-	}
-}
-
 # SSD - Spine of Sotek Dwarfs, the Mine of the Bearded Skulls. Total War minor faction (Hugrim Redaxe), tier 3 (registry planning/tag_registry.md:1069). Dwarf (dawi) hold house style of 04_karaz_ankor.txt: one charge on a solid brown field, no Lizardmen frame. Canon-soft, name-derived: the Spine of Sotek is a mountain range, so a mountain in gold. Disclosed reuse: ce_roe_mountain is also KIZ (orange on green_dark/brown), VLG and DRZ (grey on black) and TRA. The field is brown_light, the palette tincture nearest the legend colour 115,81,63 (CIELAB dE 13.4).
 # Slots: ce_roe_mountain 2 (04_karaz_ankor.txt:420 KIZ, VLG, DRZ, 05_southern_realms.txt TRA).
 SSD = {

@@ -173,14 +173,6 @@ ESC = {
 	}
 }
 
-BRC = {
-	flag_definition = {
-		coa = BRC
-		priority = 100
-		trigger = { always = yes }
-	}
-}
-
 SSD = {
 	flag_definition = {
 		coa = SSD

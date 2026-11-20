@@ -149,27 +149,6 @@
       "confidence": "medium",
       "note": "Estalian colony Santa Magritta: lustrian_colony package (the Comandante rules, WFRP Lustria p.211)."
     },
-    "BRC": {
-      "profile": "crusader_holding",
-      "confidence": "low",
-      "note": "invented Bretonnian colony: crusader_holding package with a colonial-affairs law.",
-      "laws": {
-        "lawgroup_colonization": "law_frontier_colonization"
-      },
-      "taxed_goods": [
-        "grain"
-      ],
-      "justify": {
-        "laws.lawgroup_colonization": {
-          "source": "inferred (Chris, 2026-11-06, #10185: Lustrian colonies must be able to colonize)",
-          "why": "law_frontier_colonization is the colonial-affairs law that lets a colony colonize the neighbouring decentralized holdings; law_no_colonial_affairs blocks it."
-        },
-        "taxed_goods": {
-          "source": "validate_taxed_goods.py (#10181)",
-          "why": "The profile taxes coffee, but the colony has no coffee plantation; its subsistence farm and maize land produce grain, so grain is taxed."
-        }
-      }
-    },
     "SSD": {
       "profile": "exiled_hold",
       "confidence": "low",

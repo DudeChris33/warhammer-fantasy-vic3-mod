@@ -131,16 +131,6 @@ ESC = {
 	capital = STATE_VOLCANIC_ISLANDS # Columbo's Island; seat inferred: no named hub
 }
 
-################ BRC - Bretonnian Colony; invented tier, no Lexicanum settlement ################
-
-BRC = {
-	color = { 81 40 81 }
-	country_type = colonial # colony of COU (#10185): the colony subject type accepts only colonial/company tags
-	tier = principality
-	cultures = { bretonnian }
-	capital = STATE_FORGOTTEN_ISLES # non-canon: largest owned state
-}
-
 ################ SSD - Spine of Sotek Dwarfs; TW-sourced minor faction (Hugrim Redaxe), no tabletop hold: WFRP4e has only the Mine of the Bearded Skulls and an unlaunched expedition. Tier 3, kept at Chris's call 2026-11-06 ################
 
 SSD = {

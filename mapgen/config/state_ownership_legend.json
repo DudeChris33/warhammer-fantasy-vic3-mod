@@ -1969,15 +1969,6 @@
    ],
    "note": "defined in 19_lustria.txt (#10181). Estalian colony."
   },
-  "BRC": {
-   "name": "Bretonnian Colony",
-   "color": [
-    81,
-    40,
-    81
-   ],
-   "note": "defined in 19_lustria.txt (#10181). Invented tier."
-  },
   "LZA": {
    "name": "Skinks of the Northern Coasts",
    "color": [

@@ -179,8 +179,6 @@
 		set_relations = { country = c:TLC value = -40 }
 		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
 		set_relations = { country = c:ESC value = -40 }
-		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
-		set_relations = { country = c:BRC value = -40 }
 		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
 		set_relations = { country = c:AMZ value = -30 }
 		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
@@ -203,8 +201,6 @@
 		set_relations = { country = c:TLC value = -40 }
 		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
 		set_relations = { country = c:ESC value = -40 }
-		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
-		set_relations = { country = c:BRC value = -40 }
 		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
 		set_relations = { country = c:AMZ value = -30 }
 		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
@@ -225,8 +221,6 @@
 		set_relations = { country = c:TLC value = -40 }
 		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
 		set_relations = { country = c:ESC value = -40 }
-		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
-		set_relations = { country = c:BRC value = -40 }
 		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
 		set_relations = { country = c:AMZ value = -30 }
 		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
@@ -245,8 +239,6 @@
 		set_relations = { country = c:TLC value = -40 }
 		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
 		set_relations = { country = c:ESC value = -40 }
-		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
-		set_relations = { country = c:BRC value = -40 }
 		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
 		set_relations = { country = c:AMZ value = -30 }
 		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
@@ -263,8 +255,6 @@
 		set_relations = { country = c:TLC value = -40 }
 		# Lizardmen against the Estalian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
 		set_relations = { country = c:ESC value = -40 }
-		# Lizardmen against the Bretonnian colony: invaders of the Great Plan's jungles (Lexicanum: Lizardmen; WFRP Lustria)
-		set_relations = { country = c:BRC value = -40 }
 		# Lizardmen and the Amazons: wary neighbours in the jungle (Lexicanum: Amazons, Lizardmen)
 		set_relations = { country = c:AMZ value = -30 }
 		# Lizardmen and the High Elves of the Citadel of Dusk share old Slann and Elven ties (Lexicanum: Citadel of Dusk, Great Plan)
@@ -291,7 +281,5 @@
 		set_relations = { country = c:TLC value = -40 }
 		# Amazons against the Old World colonists who push into their jungle (Lexicanum: Amazons)
 		set_relations = { country = c:ESC value = -40 }
-		# Amazons against the Old World colonists who push into their jungle (Lexicanum: Amazons)
-		set_relations = { country = c:BRC value = -40 }
 	}
 }
