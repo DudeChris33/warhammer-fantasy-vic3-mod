@@ -730,6 +730,9 @@ law_anarchy = {
 	}
 }
 
+# [#11808] 1.15.2 rework not ported: needs the single_party_state event chain
+# (events/law_events/single_party_state_laws.txt, set_sps_dominant_party_effect, sps_law_checkpoint_cancellation).
+# This is the 1.15.1 body.
 law_single_party_state = {
 	group = lawgroup_distribution_of_power
 

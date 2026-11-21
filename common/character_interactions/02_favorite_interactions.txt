@@ -1,7 +1,7 @@
 ﻿# PARTIAL PORT (#10567) of vanilla 1.15.1 common/character_interactions/02_favorite_interactions.txt.
 # The ruler's Favorite (State and Revolution, still gated on has_dlc_feature = ip5_content).
 # Dropped branches, each marked "# [#10567] removed:" at its site:
-# - appoint_favorite.possible and revoke_favorite.possible: the rasputin1_active_var trigger_if (Rasputin event lock)
+# - appoint_favorite.actor_capacity (possible before 1.15.2, #11808) and revoke_favorite.possible: the rasputin1_active_var trigger_if (Rasputin event lock)
 #   and the favorite_event_active_var trigger_if. Both variables are set only by vanilla events the mod blanks
 #   (events/ is in replace_paths), so the guards could never fire and would trip the "used but never set" lint.
 #   Restore the second one if favorite events are authored.
@@ -27,12 +27,10 @@ appoint_favorite = {
 
 	show_requirements = yes
 
-	possible = {
-		owner ?= {
-			can_have_favorites = yes
-		}
-		# [#10567] removed: trigger_if on owner has_variable = rasputin1_active_var (rasputin1_active_tt)
-		# [#10567] removed: trigger_if on owner has_variable = favorite_event_active_var (favorite_event_active_tt)
+	actor_capacity = {
+		can_have_favorites = yes
+		# [#10567] removed: trigger_if on has_variable = rasputin1_active_var (rasputin1_active_tt)
+		# [#10567] removed: trigger_if on has_variable = favorite_event_active_var (favorite_event_active_tt)
 	}
 
 	effect = {

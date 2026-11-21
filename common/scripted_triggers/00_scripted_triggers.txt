@@ -1639,3 +1639,12 @@ can_be_reached_by_target_country_to_protect = {
 		}
 	}
 }
+
+regime_change_target_allowed_trigger = {
+	custom_tooltip = {
+		text = WARGOAL_REGIME_CHANGE_TARGET_HAS_TRADITIONALISM
+		scope:target_country = {
+			NOT = { has_law_or_variant = law_type:law_traditionalism }
+		}
+	}
+}

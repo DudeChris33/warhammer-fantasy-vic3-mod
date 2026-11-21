@@ -46,15 +46,7 @@
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_wheat_farm
-					is_building_type = building_rye_farm
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -109,16 +101,7 @@ company_basic_agriculture_2 = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_millet_farm
-					is_building_type = building_rice_farm
-					is_building_type = building_maize_farm
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -171,15 +154,7 @@ company_basic_fabrics = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_cotton_plantation
-					is_building_type = building_livestock_ranch
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -230,15 +205,7 @@ company_basic_colonial_plantations_1 = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_opium_plantation
-					is_building_type = building_tea_plantation
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -292,16 +259,7 @@ company_basic_colonial_plantations_2 = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_coffee_plantation
-					is_building_type = building_sugar_plantation
-					is_building_type = building_tobacco_plantation
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -350,15 +308,7 @@ company_basic_silk_and_dye = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_silk_plantation
-					is_building_type = building_dye_plantation
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -406,15 +356,7 @@ company_basic_wine_and_fruit = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_vineyard
-					is_building_type = building_banana_plantation
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -467,15 +409,7 @@ company_basic_fishing = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_fishing_wharf
-					is_building_type = building_whaling_station
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -526,15 +460,7 @@ company_basic_forestry = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_logging_camp
-					is_building_type = building_rubber_plantation
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -577,12 +503,7 @@ company_basic_oil = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				is_building_type = building_oil_rig
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -626,12 +547,7 @@ company_basic_gold_mining = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				is_building_type = building_gold_mine
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -682,16 +598,7 @@ company_basic_metal_mining = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_iron_mine
-					is_building_type = building_lead_mine
-					is_building_type = building_copper_mine
-				}
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -739,15 +646,7 @@ company_basic_mineral_mining = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_sulfur_mine
-					is_building_type = building_coal_mine
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -798,13 +697,7 @@ company_basic_food = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				is_building_type = building_food_industry
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -852,13 +745,7 @@ company_basic_paper = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				is_building_type = building_paper_mill
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -911,16 +798,7 @@ company_basic_home_goods = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				OR = {
-					is_building_type = building_glassworks
-					is_building_type = building_furniture_manufactory
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -969,13 +847,7 @@ company_basic_textiles = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				is_building_type = building_textile_mill
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1024,13 +896,7 @@ company_basic_steel = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				is_building_type = building_steel_mill
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1080,17 +946,7 @@ company_basic_metalworks = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				OR = {
-					is_building_type = building_tooling_workshop
-					is_building_type = building_arms_industry
-					is_building_type = building_artillery_foundry
-				}
-				level >= 3
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1134,13 +990,7 @@ company_basic_shipyards = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				is_building_type = building_shipyard
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1193,16 +1043,7 @@ company_basic_chemicals = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				OR = {
-					is_building_type = building_chemical_plant
-					is_building_type = building_synthetics_plant
-				}
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1251,16 +1092,7 @@ company_basic_motors = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				OR = {
-					is_building_type = building_motor_industry
-					is_building_type = building_automotive_industry
-				}
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1313,16 +1145,7 @@ company_basic_munitions = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				OR = {
-					is_building_type = building_munition_plant
-					is_building_type = building_explosives_factory
-				}
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1367,12 +1190,7 @@ company_basic_electrics = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				is_building_type = building_electrics_industry
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1426,16 +1244,7 @@ company_basic_weapons = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			is_incorporated = yes
-			any_scope_building = {
-				OR = {
-					is_building_type = building_arms_industry
-					is_building_type = building_artillery_foundry
-				}
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }
 
@@ -1477,15 +1286,6 @@ company_construction_power_bloc = {
 	}
 
 	ai_will_do = {
-		any_scope_state = {
-			any_scope_building = {
-				OR = {
-					is_building_type = building_steel_mill
-					is_building_type = building_tooling_workshop
-					is_building_type = building_glassworks
-				}
-				level >= 5
-			}
-		}
+		always = yes
 	}
 }

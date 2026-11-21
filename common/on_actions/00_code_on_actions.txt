@@ -1156,20 +1156,6 @@ on_diplo_play_war_start = {
 }
 
 # Root = Diplomatic Play
-on_diplo_play_subject_released = {
-	effect = {
-		post_notification = diplo_play_subject_released_notification
-	}
-}
-
-# Root = Diplomatic Play
-on_diplo_play_subject_released_overlord = {
-	effect = {
-		post_notification = diplo_play_subject_released_overlord_notification
-	}
-}
-
-# Root = Diplomatic Play
 # country = Country switched to
 # previous = Country switched from
 on_diplo_play_switch_sides = {
