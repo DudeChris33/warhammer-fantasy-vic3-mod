@@ -1,0 +1,45 @@
+﻿# [#11808] Override of vanilla gfx/map/fleet_entities/02_nautilus_fleet_entities.txt, identical but for one leaf.
+# nemo_nautilus_captured_var is set only by vanilla events/nemo_events.txt, which the mod blanks, so the read
+# tripped the "used but never set" lint (jomini_effect.cpp:1144). Behaviour-neutral: the variable could never be set.
+ship_graphics_type_nautilus = {
+	ship_type = ship_type_submarine
+	default = no
+	weapon_type = turret
+	hull_type = steel
+	motion_intensity = 0.7
+	max_wind_lean = 3
+	length = 4.0
+
+	entity = "military_navy_skin_nautilus_entity"
+
+	trigger = {
+		always = no  # [#11808] was: has_variable = nemo_nautilus_captured_var
+	}
+
+	locator = {
+		name = loc_foam
+		position = { 0.0 0.03 0.0 }
+	}
+
+	damage_decal_positions = {
+		{ -0.1 0.04 1.5 0.0 }
+		{ 0.0 0.05 1.0 0.0 }
+		{ -0.0 0.055 1.5 0.0 }
+		{ 0.05 0.045 1.2 0.0 }
+	}
+
+	vfx_entity = {
+		entity = "vfx_ship_hull_submarine_damaged_entity"
+		attach = yes
+	}
+
+	vfx_entity = {
+		entity = "vfx_ship_submarine_damage_entity"
+		attach = yes
+	}
+
+	vfx_entity = {
+		entity = "vfx_ship_water_miss_entity"
+		locator = loc_foam
+	}
+}
