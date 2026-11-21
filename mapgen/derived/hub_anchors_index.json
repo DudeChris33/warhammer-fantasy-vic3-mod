@@ -41,7 +41,7 @@
     717
    ],
    "region": 94,
-   "province_label": 1960,
+   "province_label": 1958,
    "province_color": [
     147,
     159,
@@ -63,7 +63,7 @@
     725
    ],
    "region": 94,
-   "province_label": 1962,
+   "province_label": 1960,
    "province_color": [
     33,
     204,
@@ -85,7 +85,7 @@
     730
    ],
    "region": 94,
-   "province_label": 1963,
+   "province_label": 1961,
    "province_color": [
     12,
     125,
@@ -107,7 +107,7 @@
     745
    ],
    "region": 94,
-   "province_label": 1965,
+   "province_label": 1963,
    "province_color": [
     192,
     4,
@@ -129,7 +129,7 @@
     742
    ],
    "region": 103,
-   "province_label": 2086,
+   "province_label": 2084,
    "province_color": [
     212,
     167,
@@ -151,7 +151,7 @@
     751
    ],
    "region": 103,
-   "province_label": 2088,
+   "province_label": 2086,
    "province_color": [
     104,
     7,
@@ -173,7 +173,7 @@
     765
    ],
    "region": 103,
-   "province_label": 2090,
+   "province_label": 2088,
    "province_color": [
     201,
     207,
@@ -195,7 +195,7 @@
     745
    ],
    "region": 103,
-   "province_label": 2087,
+   "province_label": 2085,
    "province_color": [
     43,
     152,
@@ -217,7 +217,7 @@
     706
    ],
    "region": 81,
-   "province_label": 1801,
+   "province_label": 1799,
    "province_color": [
     192,
     222,
@@ -261,7 +261,7 @@
     758
    ],
    "region": 81,
-   "province_label": 1808,
+   "province_label": 1806,
    "province_color": [
     228,
     145,
@@ -283,7 +283,7 @@
     756
    ],
    "region": 81,
-   "province_label": 1809,
+   "province_label": 1807,
    "province_color": [
     70,
     90,
@@ -305,7 +305,7 @@
     712
    ],
    "region": 81,
-   "province_label": 1802,
+   "province_label": 1800,
    "province_color": [
     24,
     47,
@@ -327,7 +327,7 @@
     843
    ],
    "region": 114,
-   "province_label": 2241,
+   "province_label": 2239,
    "province_color": [
     216,
     126,
@@ -349,7 +349,7 @@
     779
    ],
    "region": 114,
-   "province_label": 2225,
+   "province_label": 2223,
    "province_color": [
     184,
     31,
@@ -371,7 +371,7 @@
     785
    ],
    "region": 106,
-   "province_label": 2137,
+   "province_label": 2135,
    "province_color": [
     174,
     144,
@@ -393,7 +393,7 @@
     817
    ],
    "region": 106,
-   "province_label": 2141,
+   "province_label": 2139,
    "province_color": [
     137,
     54,
@@ -415,7 +415,7 @@
     880
    ],
    "region": 127,
-   "province_label": 2366,
+   "province_label": 2364,
    "province_color": [
     65,
     3,
@@ -437,7 +437,7 @@
     851
    ],
    "region": 127,
-   "province_label": 2359,
+   "province_label": 2357,
    "province_color": [
     60,
     235,
@@ -481,7 +481,7 @@
     874
    ],
    "region": 127,
-   "province_label": 2364,
+   "province_label": 2362,
    "province_color": [
     144,
     111,
@@ -503,7 +503,7 @@
     833
    ],
    "region": 127,
-   "province_label": 2358,
+   "province_label": 2356,
    "province_color": [
     58,
     24,
@@ -525,7 +525,7 @@
     917
    ],
    "region": 148,
-   "province_label": 2654,
+   "province_label": 2652,
    "province_color": [
     134,
     210,
@@ -569,7 +569,7 @@
     935
    ],
    "region": 148,
-   "province_label": 2656,
+   "province_label": 2654,
    "province_color": [
     19,
     85,
@@ -591,7 +591,7 @@
     895
    ],
    "region": 148,
-   "province_label": 2648,
+   "province_label": 2646,
    "province_color": [
     254,
     57,
@@ -613,7 +613,7 @@
     904
    ],
    "region": 148,
-   "province_label": 2651,
+   "province_label": 2649,
    "province_color": [
     209,
     134,
@@ -635,7 +635,7 @@
     802
    ],
    "region": 121,
-   "province_label": 2287,
+   "province_label": 2285,
    "province_color": [
     159,
     109,
@@ -657,7 +657,7 @@
     837
    ],
    "region": 121,
-   "province_label": 2294,
+   "province_label": 2292,
    "province_color": [
     128,
     180,
@@ -679,7 +679,7 @@
     864
    ],
    "region": 121,
-   "province_label": 2301,
+   "province_label": 2299,
    "province_color": [
     38,
     162,
@@ -701,7 +701,7 @@
     812
    ],
    "region": 121,
-   "province_label": 2289,
+   "province_label": 2287,
    "province_color": [
     44,
     21,
@@ -745,7 +745,7 @@
     959
    ],
    "region": 177,
-   "province_label": 2981,
+   "province_label": 2979,
    "province_color": [
     48,
     30,
@@ -767,7 +767,7 @@
     968
    ],
    "region": 177,
-   "province_label": 2982,
+   "province_label": 2980,
    "province_color": [
     145,
     231,
@@ -789,7 +789,7 @@
     974
    ],
    "region": 177,
-   "province_label": 2983,
+   "province_label": 2981,
    "province_color": [
     108,
     141,
@@ -834,7 +834,7 @@
     986
    ],
    "region": 183,
-   "province_label": 3020,
+   "province_label": 3018,
    "province_color": [
     158,
     22,
@@ -856,7 +856,7 @@
     998
    ],
    "region": 183,
-   "province_label": 3023,
+   "province_label": 3021,
    "province_color": [
     166,
     231,
@@ -878,7 +878,7 @@
     971
    ],
    "region": 183,
-   "province_label": 3018,
+   "province_label": 3016,
    "province_color": [
     97,
     167,
@@ -922,7 +922,7 @@
     931
    ],
    "region": 161,
-   "province_label": 2733,
+   "province_label": 2731,
    "province_color": [
     140,
     195,
@@ -944,7 +944,7 @@
     958
    ],
    "region": 161,
-   "province_label": 2741,
+   "province_label": 2739,
    "province_color": [
     66,
     15,
@@ -966,7 +966,7 @@
     933
    ],
    "region": 161,
-   "province_label": 2735,
+   "province_label": 2733,
    "province_color": [
     19,
     229,
@@ -1010,7 +1010,7 @@
     940
    ],
    "region": 161,
-   "province_label": 2737,
+   "province_label": 2735,
    "province_color": [
     5,
     160,
@@ -1032,7 +1032,7 @@
     1021
    ],
    "region": 187,
-   "province_label": 3071,
+   "province_label": 3069,
    "province_color": [
     92,
     52,
@@ -1054,7 +1054,7 @@
     988
    ],
    "region": 187,
-   "province_label": 3065,
+   "province_label": 3063,
    "province_color": [
     143,
     210,
@@ -1076,7 +1076,7 @@
     1017
    ],
    "region": 187,
-   "province_label": 3070,
+   "province_label": 3068,
    "province_color": [
     129,
     142,
@@ -1098,7 +1098,7 @@
     993
    ],
    "region": 187,
-   "province_label": 3064,
+   "province_label": 3062,
    "province_color": [
     83,
     99,
@@ -1120,7 +1120,7 @@
     978
    ],
    "region": 178,
-   "province_label": 2996,
+   "province_label": 2994,
    "province_color": [
     94,
     73,
@@ -1164,7 +1164,7 @@
     956
    ],
    "region": 178,
-   "province_label": 2988,
+   "province_label": 2986,
    "province_color": [
     235,
     203,
@@ -1186,7 +1186,7 @@
     956
    ],
    "region": 178,
-   "province_label": 2990,
+   "province_label": 2988,
    "province_color": [
     131,
     163,
@@ -1208,7 +1208,7 @@
     975
    ],
    "region": 178,
-   "province_label": 2994,
+   "province_label": 2992,
    "province_color": [
     24,
     80,
@@ -1230,7 +1230,7 @@
     1018
    ],
    "region": 191,
-   "province_label": 3091,
+   "province_label": 3089,
    "province_color": [
     70,
     104,
@@ -1252,7 +1252,7 @@
     1046
    ],
    "region": 191,
-   "province_label": 3099,
+   "province_label": 3097,
    "province_color": [
     174,
     171,
@@ -1274,7 +1274,7 @@
     1019
    ],
    "region": 191,
-   "province_label": 3092,
+   "province_label": 3090,
    "province_color": [
     228,
     159,
@@ -1296,7 +1296,7 @@
     1055
    ],
    "region": 191,
-   "province_label": 3101,
+   "province_label": 3099,
    "province_color": [
     214,
     91,
@@ -1318,7 +1318,7 @@
     1043
    ],
    "region": 191,
-   "province_label": 3100,
+   "province_label": 3098,
    "province_color": [
     253,
     109,
@@ -1340,7 +1340,7 @@
     924
    ],
    "region": 162,
-   "province_label": 2743,
+   "province_label": 2741,
    "province_color": [
     17,
     208,
@@ -1362,7 +1362,7 @@
     928
    ],
    "region": 162,
-   "province_label": 2742,
+   "province_label": 2740,
    "province_color": [
     115,
     152,
@@ -1384,7 +1384,7 @@
     948
    ],
    "region": 162,
-   "province_label": 2746,
+   "province_label": 2744,
    "province_color": [
     122,
     117,
@@ -1406,7 +1406,7 @@
     945
    ],
    "region": 162,
-   "province_label": 2745,
+   "province_label": 2743,
    "province_color": [
     78,
     63,
@@ -1428,7 +1428,7 @@
     924
    ],
    "region": 162,
-   "province_label": 2743,
+   "province_label": 2741,
    "province_color": [
     17,
     208,
@@ -1451,7 +1451,7 @@
     888
    ],
    "region": 134,
-   "province_label": 2435,
+   "province_label": 2433,
    "province_color": [
     55,
     120,
@@ -1473,7 +1473,7 @@
     874
    ],
    "region": 134,
-   "province_label": 2431,
+   "province_label": 2429,
    "province_color": [
     190,
     154,
@@ -1495,7 +1495,7 @@
     878
    ],
    "region": 134,
-   "province_label": 2433,
+   "province_label": 2431,
    "province_color": [
     153,
     65,
@@ -1517,7 +1517,7 @@
     857
    ],
    "region": 134,
-   "province_label": 2429,
+   "province_label": 2427,
    "province_color": [
     9,
     77,
@@ -1583,7 +1583,7 @@
     853
    ],
    "region": 130,
-   "province_label": 2395,
+   "province_label": 2393,
    "province_color": [
     169,
     154,
@@ -1605,7 +1605,7 @@
     852
    ],
    "region": 130,
-   "province_label": 2394,
+   "province_label": 2392,
    "province_color": [
     140,
     227,
@@ -1627,7 +1627,7 @@
     879
    ],
    "region": 130,
-   "province_label": 2399,
+   "province_label": 2397,
    "province_color": [
     71,
     209,
@@ -1672,7 +1672,7 @@
     816
    ],
    "region": 120,
-   "province_label": 2284,
+   "province_label": 2282,
    "province_color": [
     37,
     89,
@@ -1694,7 +1694,7 @@
     823
    ],
    "region": 120,
-   "province_label": 2285,
+   "province_label": 2283,
    "province_color": [
     135,
     33,
@@ -1716,7 +1716,7 @@
     817
    ],
    "region": 120,
-   "province_label": 2282,
+   "province_label": 2280,
    "province_color": [
     196,
     199,
@@ -1738,7 +1738,7 @@
     798
    ],
    "region": 120,
-   "province_label": 2278,
+   "province_label": 2276,
    "province_color": [
     88,
     121,
@@ -1782,7 +1782,7 @@
     820
    ],
    "region": 123,
-   "province_label": 2306,
+   "province_label": 2304,
    "province_color": [
     219,
     239,
@@ -1804,7 +1804,7 @@
     795
    ],
    "region": 123,
-   "province_label": 2304,
+   "province_label": 2302,
    "province_color": [
     159,
     128,
@@ -1826,7 +1826,7 @@
     820
    ],
    "region": 123,
-   "province_label": 2308,
+   "province_label": 2306,
    "province_color": [
     24,
     94,
@@ -1848,7 +1848,7 @@
     823
    ],
    "region": 123,
-   "province_label": 2310,
+   "province_label": 2308,
    "province_color": [
     1,
     72,
@@ -1870,7 +1870,7 @@
     850
    ],
    "region": 123,
-   "province_label": 2316,
+   "province_label": 2314,
    "province_color": [
     10,
     25,
@@ -1892,7 +1892,7 @@
     855
    ],
    "region": 137,
-   "province_label": 2459,
+   "province_label": 2457,
    "province_color": [
     96,
     48,
@@ -1914,7 +1914,7 @@
     889
    ],
    "region": 137,
-   "province_label": 2467,
+   "province_label": 2465,
    "province_color": [
     119,
     69,
@@ -1936,7 +1936,7 @@
     893
    ],
    "region": 137,
-   "province_label": 2468,
+   "province_label": 2466,
    "province_color": [
     81,
     236,
@@ -1958,7 +1958,7 @@
     860
    ],
    "region": 137,
-   "province_label": 2463,
+   "province_label": 2461,
    "province_color": [
     58,
     214,
@@ -2002,7 +2002,7 @@
     891
    ],
    "region": 131,
-   "province_label": 2416,
+   "province_label": 2414,
    "province_color": [
     25,
     167,
@@ -2024,7 +2024,7 @@
     854
    ],
    "region": 131,
-   "province_label": 2402,
+   "province_label": 2400,
    "province_color": [
     212,
     103,
@@ -2046,7 +2046,7 @@
     866
    ],
    "region": 131,
-   "province_label": 2408,
+   "province_label": 2406,
    "province_color": [
     137,
     179,
@@ -2068,7 +2068,7 @@
     866
    ],
    "region": 131,
-   "province_label": 2407,
+   "province_label": 2405,
    "province_color": [
     2,
     145,
@@ -2090,7 +2090,7 @@
     888
    ],
    "region": 131,
-   "province_label": 2415,
+   "province_label": 2413,
    "province_color": [
     255,
     116,
@@ -2112,7 +2112,7 @@
     818
    ],
    "region": 118,
-   "province_label": 2272,
+   "province_label": 2270,
    "province_color": [
     20,
     255,
@@ -2156,7 +2156,7 @@
     792
    ],
    "region": 118,
-   "province_label": 2268,
+   "province_label": 2266,
    "province_color": [
     244,
     142,
@@ -2178,7 +2178,7 @@
     818
    ],
    "region": 118,
-   "province_label": 2272,
+   "province_label": 2270,
    "province_color": [
     20,
     255,
@@ -2201,7 +2201,7 @@
     818
    ],
    "region": 118,
-   "province_label": 2272,
+   "province_label": 2270,
    "province_color": [
     20,
     255,
@@ -2224,7 +2224,7 @@
     701
    ],
    "region": 83,
-   "province_label": 1833,
+   "province_label": 1831,
    "province_color": [
     157,
     60,
@@ -2246,7 +2246,7 @@
     668
    ],
    "region": 83,
-   "province_label": 1828,
+   "province_label": 1826,
    "province_color": [
     208,
     218,
@@ -2268,7 +2268,7 @@
     657
    ],
    "region": 83,
-   "province_label": 1827,
+   "province_label": 1825,
    "province_color": [
     246,
     52,
@@ -2290,7 +2290,7 @@
     657
    ],
    "region": 83,
-   "province_label": 1826,
+   "province_label": 1824,
    "province_color": [
     22,
     137,
@@ -2312,7 +2312,7 @@
     719
    ],
    "region": 83,
-   "province_label": 1835,
+   "province_label": 1833,
    "province_color": [
     22,
     26,
@@ -2334,7 +2334,7 @@
     749
    ],
    "region": 102,
-   "province_label": 2073,
+   "province_label": 2071,
    "province_color": [
     52,
     105,
@@ -2356,7 +2356,7 @@
     787
    ],
    "region": 102,
-   "province_label": 2083,
+   "province_label": 2081,
    "province_color": [
     135,
     237,
@@ -2400,7 +2400,7 @@
     778
    ],
    "region": 102,
-   "province_label": 2081,
+   "province_label": 2079,
    "province_color": [
     233,
     182,
@@ -2422,7 +2422,7 @@
     760
    ],
    "region": 102,
-   "province_label": 2076,
+   "province_label": 2074,
    "province_color": [
     173,
     71,
@@ -2444,7 +2444,7 @@
     738
    ],
    "region": 93,
-   "province_label": 1955,
+   "province_label": 1953,
    "province_color": [
     250,
     47,
@@ -2466,7 +2466,7 @@
     716
    ],
    "region": 93,
-   "province_label": 1954,
+   "province_label": 1952,
    "province_color": [
     193,
     202,
@@ -2510,7 +2510,7 @@
     738
    ],
    "region": 93,
-   "province_label": 1955,
+   "province_label": 1953,
    "province_color": [
     250,
     47,
@@ -2533,7 +2533,7 @@
     744
    ],
    "region": 97,
-   "province_label": 2008,
+   "province_label": 2006,
    "province_color": [
     84,
     61,
@@ -2555,7 +2555,7 @@
     722
    ],
    "region": 97,
-   "province_label": 2003,
+   "province_label": 2001,
    "province_color": [
     214,
     202,
@@ -2577,7 +2577,7 @@
     773
    ],
    "region": 97,
-   "province_label": 2013,
+   "province_label": 2011,
    "province_color": [
     217,
     204,
@@ -2599,7 +2599,7 @@
     787
    ],
    "region": 97,
-   "province_label": 2015,
+   "province_label": 2013,
    "province_color": [
     223,
     155,
@@ -2621,7 +2621,7 @@
     688
    ],
    "region": 78,
-   "province_label": 1747,
+   "province_label": 1745,
    "province_color": [
     128,
     55,
@@ -2643,7 +2643,7 @@
     657
    ],
    "region": 78,
-   "province_label": 1741,
+   "province_label": 1739,
    "province_color": [
     95,
     132,
@@ -2665,7 +2665,7 @@
     650
    ],
    "region": 78,
-   "province_label": 1736,
+   "province_label": 1734,
    "province_color": [
     230,
     166,
@@ -2687,7 +2687,7 @@
     697
    ],
    "region": 78,
-   "province_label": 1751,
+   "province_label": 1749,
    "province_color": [
     141,
     175,
@@ -2709,7 +2709,7 @@
     651
    ],
    "region": 78,
-   "province_label": 1739,
+   "province_label": 1737,
    "province_color": [
     193,
     77,
@@ -2731,7 +2731,7 @@
     696
    ],
    "region": 75,
-   "province_label": 1672,
+   "province_label": 1670,
    "province_color": [
     170,
     55,
@@ -2753,7 +2753,7 @@
     695
    ],
    "region": 75,
-   "province_label": 1674,
+   "province_label": 1672,
    "province_color": [
     109,
     201,
@@ -2775,7 +2775,7 @@
     704
    ],
    "region": 75,
-   "province_label": 1676,
+   "province_label": 1674,
    "province_color": [
     184,
     249,
@@ -2797,7 +2797,7 @@
     696
    ],
    "region": 75,
-   "province_label": 1672,
+   "province_label": 1670,
    "province_color": [
     170,
     55,
@@ -2820,7 +2820,7 @@
     664
    ],
    "region": 76,
-   "province_label": 1679,
+   "province_label": 1677,
    "province_color": [
     161,
     102,
@@ -2842,7 +2842,7 @@
     858
    ],
    "region": 141,
-   "province_label": 2492,
+   "province_label": 2490,
    "province_color": [
     186,
     112,
@@ -2864,7 +2864,7 @@
     880
    ],
    "region": 141,
-   "province_label": 2498,
+   "province_label": 2496,
    "province_color": [
     39,
     170,
@@ -2886,7 +2886,7 @@
     866
    ],
    "region": 141,
-   "province_label": 2493,
+   "province_label": 2491,
    "province_color": [
     121,
     90,
@@ -2930,7 +2930,7 @@
     887
    ],
    "region": 141,
-   "province_label": 2499,
+   "province_label": 2497,
    "province_color": [
     13,
     245,
@@ -2952,7 +2952,7 @@
     828
    ],
    "region": 124,
-   "province_label": 2323,
+   "province_label": 2321,
    "province_color": [
     29,
     209,
@@ -2974,7 +2974,7 @@
     827
    ],
    "region": 124,
-   "province_label": 2322,
+   "province_label": 2320,
    "province_color": [
     248,
     119,
@@ -2996,7 +2996,7 @@
     822
    ],
    "region": 124,
-   "province_label": 2320,
+   "province_label": 2318,
    "province_color": [
     225,
     98,
@@ -3018,7 +3018,7 @@
     807
    ],
    "region": 124,
-   "province_label": 2317,
+   "province_label": 2315,
    "province_color": [
     202,
     76,
@@ -3040,7 +3040,7 @@
     939
    ],
    "region": 168,
-   "province_label": 2904,
+   "province_label": 2902,
    "province_color": [
     32,
     20,
@@ -3062,7 +3062,7 @@
     941
    ],
    "region": 168,
-   "province_label": 2903,
+   "province_label": 2901,
    "province_color": [
     30,
     203,
@@ -3084,7 +3084,7 @@
     941
    ],
    "region": 168,
-   "province_label": 2902,
+   "province_label": 2900,
    "province_color": [
     69,
     110,
@@ -3106,7 +3106,7 @@
     941
    ],
    "region": 168,
-   "province_label": 2905,
+   "province_label": 2903,
    "province_color": [
     133,
     184,
@@ -3150,7 +3150,7 @@
     916
    ],
    "region": 156,
-   "province_label": 2711,
+   "province_label": 2709,
    "province_color": [
     234,
     130,
@@ -3172,7 +3172,7 @@
     919
    ],
    "region": 156,
-   "province_label": 2710,
+   "province_label": 2708,
    "province_color": [
     86,
     22,
@@ -3194,7 +3194,7 @@
     917
    ],
    "region": 154,
-   "province_label": 2695,
+   "province_label": 2693,
    "province_color": [
     45,
     15,
@@ -3216,7 +3216,7 @@
     902
    ],
    "region": 154,
-   "province_label": 2690,
+   "province_label": 2688,
    "province_color": [
     240,
     160,
@@ -3238,7 +3238,7 @@
     916
    ],
    "region": 154,
-   "province_label": 2694,
+   "province_label": 2692,
    "province_color": [
     142,
     216,
@@ -3260,7 +3260,7 @@
     923
    ],
    "region": 154,
-   "province_label": 2696,
+   "province_label": 2694,
    "province_color": [
     68,
     36,
@@ -3282,7 +3282,7 @@
     999
    ],
    "region": 185,
-   "province_label": 3031,
+   "province_label": 3029,
    "province_color": [
     32,
     205,
@@ -3304,7 +3304,7 @@
     1000
    ],
    "region": 185,
-   "province_label": 3032,
+   "province_label": 3030,
    "province_color": [
     241,
     154,
@@ -3326,7 +3326,7 @@
     974
    ],
    "region": 185,
-   "province_label": 3026,
+   "province_label": 3024,
    "province_color": [
     154,
     184,
@@ -3348,7 +3348,7 @@
     989
    ],
    "region": 185,
-   "province_label": 3030,
+   "province_label": 3028,
    "province_color": [
     46,
     9,
@@ -3414,7 +3414,7 @@
     901
    ],
    "region": 158,
-   "province_label": 2722,
+   "province_label": 2720,
    "province_color": [
     57,
     62,
@@ -3436,7 +3436,7 @@
     902
    ],
    "region": 158,
-   "province_label": 2721,
+   "province_label": 2719,
    "province_color": [
     247,
     236,
@@ -3458,7 +3458,7 @@
     910
    ],
    "region": 158,
-   "province_label": 2725,
+   "province_label": 2723,
    "province_color": [
     161,
     51,
@@ -3480,7 +3480,7 @@
     906
    ],
    "region": 158,
-   "province_label": 2723,
+   "province_label": 2721,
    "province_color": [
     54,
     154,
@@ -3524,7 +3524,7 @@
     846
    ],
    "region": 108,
-   "province_label": 2160,
+   "province_label": 2158,
    "province_color": [
     97,
     200,
@@ -3546,7 +3546,7 @@
     814
    ],
    "region": 108,
-   "province_label": 2156,
+   "province_label": 2154,
    "province_color": [
     14,
     67,
@@ -3568,7 +3568,7 @@
     795
    ],
    "region": 108,
-   "province_label": 2152,
+   "province_label": 2150,
    "province_color": [
     232,
     234,
@@ -3590,7 +3590,7 @@
     779
    ],
    "region": 108,
-   "province_label": 2151,
+   "province_label": 2149,
    "province_color": [
     65,
     100,
@@ -3612,7 +3612,7 @@
     702
    ],
    "region": 89,
-   "province_label": 1916,
+   "province_label": 1914,
    "province_color": [
     194,
     150,
@@ -3634,7 +3634,7 @@
     685
    ],
    "region": 89,
-   "province_label": 1912,
+   "province_label": 1910,
    "province_color": [
     171,
     129,
@@ -3656,7 +3656,7 @@
     697
    ],
    "region": 89,
-   "province_label": 1915,
+   "province_label": 1913,
    "province_color": [
     215,
     243,
@@ -3678,7 +3678,7 @@
     677
    ],
    "region": 89,
-   "province_label": 1911,
+   "province_label": 1909,
    "province_color": [
     148,
     107,
@@ -3700,7 +3700,7 @@
     780
    ],
    "region": 104,
-   "province_label": 2105,
+   "province_label": 2103,
    "province_color": [
     101,
     242,
@@ -3722,7 +3722,7 @@
     806
    ],
    "region": 104,
-   "province_label": 2109,
+   "province_label": 2107,
    "province_color": [
     222,
     208,
@@ -3744,7 +3744,7 @@
     789
    ],
    "region": 104,
-   "province_label": 2107,
+   "province_label": 2105,
    "province_color": [
     64,
     152,
@@ -3766,7 +3766,7 @@
     758
    ],
    "region": 104,
-   "province_label": 2099,
+   "province_label": 2097,
    "province_color": [
     139,
     75,
@@ -3810,7 +3810,7 @@
     1070
    ],
    "region": 195,
-   "province_label": 3119,
+   "province_label": 3117,
    "province_color": [
     102,
     78,
@@ -3854,7 +3854,7 @@
     1051
    ],
    "region": 195,
-   "province_label": 3118,
+   "province_label": 3116,
    "province_color": [
     200,
     23,
@@ -3876,7 +3876,7 @@
     1068
    ],
    "region": 195,
-   "province_label": 3120,
+   "province_label": 3118,
    "province_color": [
     18,
     202,
@@ -3898,7 +3898,7 @@
     1031
    ],
    "region": 195,
-   "province_label": 3115,
+   "province_label": 3113,
    "province_color": [
     6,
     234,
@@ -3942,7 +3942,7 @@
     988
    ],
    "region": 171,
-   "province_label": 2929,
+   "province_label": 2927,
    "province_color": [
     248,
     22,
@@ -3964,7 +3964,7 @@
     963
    ],
    "region": 171,
-   "province_label": 2926,
+   "province_label": 2924,
    "province_color": [
     187,
     167,
@@ -3986,7 +3986,7 @@
     990
    ],
    "region": 171,
-   "province_label": 2928,
+   "province_label": 2926,
    "province_color": [
     49,
     43,
@@ -4031,7 +4031,7 @@
     734
    ],
    "region": 96,
-   "province_label": 1990,
+   "province_label": 1988,
    "province_color": [
     251,
     69,
@@ -4053,7 +4053,7 @@
     725
    ],
    "region": 96,
-   "province_label": 1986,
+   "province_label": 1984,
    "province_color": [
     148,
     232,
@@ -4075,7 +4075,7 @@
     770
    ],
    "region": 96,
-   "province_label": 1997,
+   "province_label": 1995,
    "province_color": [
     36,
     220,
@@ -4097,7 +4097,7 @@
     760
    ],
    "region": 96,
-   "province_label": 1994,
+   "province_label": 1992,
    "province_color": [
     134,
     164,
@@ -4119,7 +4119,7 @@
     715
    ],
    "region": 96,
-   "province_label": 1988,
+   "province_label": 1986,
    "province_color": [
     13,
     198,
@@ -4141,7 +4141,7 @@
     741
    ],
    "region": 91,
-   "province_label": 1937,
+   "province_label": 1935,
    "province_color": [
     198,
     94,
@@ -4163,7 +4163,7 @@
     708
    ],
    "region": 91,
-   "province_label": 1932,
+   "province_label": 1930,
    "province_color": [
     171,
     161,
@@ -4185,7 +4185,7 @@
     756
    ],
    "region": 91,
-   "province_label": 1939,
+   "province_label": 1937,
    "province_color": [
     64,
     27,
@@ -4229,7 +4229,7 @@
     731
    ],
    "region": 91,
-   "province_label": 1936,
+   "province_label": 1934,
    "province_color": [
     101,
     117,
@@ -4251,7 +4251,7 @@
     743
    ],
    "region": 85,
-   "province_label": 1868,
+   "province_label": 1866,
    "province_color": [
     193,
     197,
@@ -4273,7 +4273,7 @@
     700
    ],
    "region": 85,
-   "province_label": 1854,
+   "province_label": 1852,
    "province_color": [
     12,
     218,
@@ -4295,7 +4295,7 @@
     710
    ],
    "region": 85,
-   "province_label": 1855,
+   "province_label": 1853,
    "province_color": [
     169,
     108,
@@ -4317,7 +4317,7 @@
     740
    ],
    "region": 85,
-   "province_label": 1865,
+   "province_label": 1863,
    "province_color": [
     57,
     95,
@@ -4361,7 +4361,7 @@
     840
    ],
    "region": 113,
-   "province_label": 2219,
+   "province_label": 2217,
    "province_color": [
     169,
     29,
@@ -4383,7 +4383,7 @@
     852
    ],
    "region": 113,
-   "province_label": 2220,
+   "province_label": 2218,
    "province_color": [
     252,
     161,
@@ -4427,7 +4427,7 @@
     824
    ],
    "region": 113,
-   "province_label": 2217,
+   "province_label": 2215,
    "province_color": [
     131,
     195,
@@ -4449,7 +4449,7 @@
     840
    ],
    "region": 113,
-   "province_label": 2219,
+   "province_label": 2217,
    "province_color": [
     169,
     29,
@@ -4472,7 +4472,7 @@
     886
    ],
    "region": 143,
-   "province_label": 2508,
+   "province_label": 2506,
    "province_color": [
     94,
     27,
@@ -4494,7 +4494,7 @@
     883
    ],
    "region": 143,
-   "province_label": 2507,
+   "province_label": 2505,
    "province_color": [
     33,
     172,
@@ -4516,7 +4516,7 @@
     921
    ],
    "region": 143,
-   "province_label": 2515,
+   "province_label": 2513,
    "province_color": [
     79,
     215,
@@ -4560,7 +4560,7 @@
     936
    ],
    "region": 143,
-   "province_label": 2516,
+   "province_label": 2514,
    "province_color": [
     177,
     159,
@@ -4604,7 +4604,7 @@
     870
    ],
    "region": 132,
-   "province_label": 2422,
+   "province_label": 2420,
    "province_color": [
     226,
     106,
@@ -4626,7 +4626,7 @@
     870
    ],
    "region": 132,
-   "province_label": 2422,
+   "province_label": 2420,
    "province_color": [
     226,
     106,
@@ -4649,7 +4649,7 @@
     923
    ],
    "region": 160,
-   "province_label": 2728,
+   "province_label": 2726,
    "province_color": [
     120,
     82,
@@ -4671,7 +4671,7 @@
     944
    ],
    "region": 160,
-   "province_label": 2730,
+   "province_label": 2728,
    "province_color": [
     40,
     229,
@@ -4693,7 +4693,7 @@
     923
    ],
    "region": 160,
-   "province_label": 2728,
+   "province_label": 2726,
    "province_color": [
     120,
     82,
@@ -4716,7 +4716,7 @@
     923
    ],
    "region": 160,
-   "province_label": 2728,
+   "province_label": 2726,
    "province_color": [
     120,
     82,
@@ -4739,7 +4739,7 @@
     944
    ],
    "region": 160,
-   "province_label": 2730,
+   "province_label": 2728,
    "province_color": [
     40,
     229,
@@ -4762,7 +4762,7 @@
     987
    ],
    "region": 182,
-   "province_label": 3013,
+   "province_label": 3011,
    "province_color": [
     100,
     169,
@@ -4784,7 +4784,7 @@
     1014
    ],
    "region": 182,
-   "province_label": 3016,
+   "province_label": 3014,
    "province_color": [
     220,
     154,
@@ -4828,7 +4828,7 @@
     987
    ],
    "region": 182,
-   "province_label": 3013,
+   "province_label": 3011,
    "province_color": [
     100,
     169,
@@ -4851,7 +4851,7 @@
     1039
    ],
    "region": 180,
-   "province_label": 3011,
+   "province_label": 3009,
    "province_color": [
     131,
     241,
@@ -4873,7 +4873,7 @@
     996
    ],
    "region": 180,
-   "province_label": 3005,
+   "province_label": 3003,
    "province_color": [
     108,
     220,
@@ -4917,7 +4917,7 @@
     912
    ],
    "region": 152,
-   "province_label": 2684,
+   "province_label": 2682,
    "province_color": [
     220,
     233,
@@ -4939,7 +4939,7 @@
     920
    ],
    "region": 152,
-   "province_label": 2685,
+   "province_label": 2683,
    "province_color": [
     53,
     20,
@@ -4961,7 +4961,7 @@
     973
    ],
    "region": 173,
-   "province_label": 2948,
+   "province_label": 2946,
    "province_color": [
     44,
     192,
@@ -4983,7 +4983,7 @@
     1022
    ],
    "region": 173,
-   "province_label": 2960,
+   "province_label": 2958,
    "province_color": [
     151,
     90,
@@ -5027,7 +5027,7 @@
     1021
    ],
    "region": 173,
-   "province_label": 2961,
+   "province_label": 2959,
    "province_color": [
     249,
     34,
@@ -5049,7 +5049,7 @@
     1035
    ],
    "region": 173,
-   "province_label": 2964,
+   "province_label": 2962,
    "province_color": [
     114,
     237,
@@ -5071,7 +5071,7 @@
     935
    ],
    "region": 155,
-   "province_label": 2703,
+   "province_label": 2701,
    "province_color": [
     97,
     246,
@@ -5115,7 +5115,7 @@
     913
    ],
    "region": 155,
-   "province_label": 2699,
+   "province_label": 2697,
    "province_color": [
     63,
     111,
@@ -5137,7 +5137,7 @@
     952
    ],
    "region": 155,
-   "province_label": 2705,
+   "province_label": 2703,
    "province_color": [
     240,
     225,
@@ -5159,7 +5159,7 @@
     979
    ],
    "region": 172,
-   "province_label": 2944,
+   "province_label": 2942,
    "province_color": [
     110,
     162,
@@ -5181,7 +5181,7 @@
     972
    ],
    "region": 172,
-   "province_label": 2941,
+   "province_label": 2939,
    "province_color": [
     83,
     6,
@@ -5203,7 +5203,7 @@
     942
    ],
    "region": 172,
-   "province_label": 2936,
+   "province_label": 2934,
    "province_color": [
     222,
     175,
@@ -5225,7 +5225,7 @@
     959
    ],
    "region": 172,
-   "province_label": 2937,
+   "province_label": 2935,
    "province_color": [
     185,
     85,
@@ -5247,7 +5247,7 @@
     977
    ],
    "region": 172,
-   "province_label": 2942,
+   "province_label": 2940,
    "province_color": [
     89,
     18,
@@ -5269,7 +5269,7 @@
     1010
    ],
    "region": 188,
-   "province_label": 3078,
+   "province_label": 3076,
    "province_color": [
     126,
     48,
@@ -5291,7 +5291,7 @@
     1019
    ],
    "region": 188,
-   "province_label": 3081,
+   "province_label": 3079,
    "province_color": [
     186,
     159,
@@ -5313,7 +5313,7 @@
     1001
    ],
    "region": 188,
-   "province_label": 3075,
+   "province_label": 3073,
    "province_color": [
     171,
     82,
@@ -5357,7 +5357,7 @@
     989
    ],
    "region": 188,
-   "province_label": 3073,
+   "province_label": 3071,
    "province_color": [
     5,
     82,
@@ -5379,7 +5379,7 @@
     942
    ],
    "region": 150,
-   "province_label": 2668,
+   "province_label": 2666,
    "province_color": [
     100,
     215,
@@ -5401,7 +5401,7 @@
     906
    ],
    "region": 150,
-   "province_label": 2660,
+   "province_label": 2658,
    "province_color": [
     116,
     239,
@@ -5423,7 +5423,7 @@
     925
    ],
    "region": 150,
-   "province_label": 2666,
+   "province_label": 2664,
    "province_color": [
     138,
     48,
@@ -5445,7 +5445,7 @@
     903
    ],
    "region": 150,
-   "province_label": 2662,
+   "province_label": 2660,
    "province_color": [
     133,
     59,
@@ -5489,7 +5489,7 @@
     864
    ],
    "region": 128,
-   "province_label": 2378,
+   "province_label": 2376,
    "province_color": [
     166,
     60,
@@ -5511,7 +5511,7 @@
     848
    ],
    "region": 128,
-   "province_label": 2374,
+   "province_label": 2372,
    "province_color": [
     82,
     183,
@@ -5533,7 +5533,7 @@
     834
    ],
    "region": 128,
-   "province_label": 2372,
+   "province_label": 2370,
    "province_color": [
     143,
     38,
@@ -5555,7 +5555,7 @@
     827
    ],
    "region": 128,
-   "province_label": 2371,
+   "province_label": 2369,
    "province_color": [
     223,
     58,
@@ -5577,7 +5577,7 @@
     869
    ],
    "region": 128,
-   "province_label": 2379,
+   "province_label": 2377,
    "province_color": [
     14,
     81,
@@ -5599,7 +5599,7 @@
     796
    ],
    "region": 116,
-   "province_label": 2251,
+   "province_label": 2249,
    "province_color": [
     181,
     76,
@@ -5621,7 +5621,7 @@
     808
    ],
    "region": 116,
-   "province_label": 2254,
+   "province_label": 2252,
    "province_color": [
     83,
     131,
@@ -5643,7 +5643,7 @@
     811
    ],
    "region": 116,
-   "province_label": 2255,
+   "province_label": 2253,
    "province_color": [
     120,
     221,
@@ -5665,7 +5665,7 @@
     829
    ],
    "region": 116,
-   "province_label": 2260,
+   "province_label": 2258,
    "province_color": [
     204,
     97,
@@ -5687,7 +5687,7 @@
     819
    ],
    "region": 110,
-   "province_label": 2187,
+   "province_label": 2185,
    "province_color": [
     189,
     160,
@@ -5709,7 +5709,7 @@
     793
    ],
    "region": 110,
-   "province_label": 2181,
+   "province_label": 2179,
    "province_color": [
     129,
     49,
@@ -5731,7 +5731,7 @@
     780
    ],
    "region": 110,
-   "province_label": 2178,
+   "province_label": 2176,
    "province_color": [
     68,
     194,
@@ -5753,7 +5753,7 @@
     816
    ],
    "region": 110,
-   "province_label": 2185,
+   "province_label": 2183,
    "province_color": [
     120,
     202,
@@ -5797,7 +5797,7 @@
     1045
    ],
    "region": 209,
-   "province_label": 3299,
+   "province_label": 3297,
    "province_color": [
     189,
     49,
@@ -5819,7 +5819,7 @@
     1064
    ],
    "region": 209,
-   "province_label": 3302,
+   "province_label": 3300,
    "province_color": [
     16,
     181,
@@ -5841,7 +5841,7 @@
     1036
    ],
    "region": 209,
-   "province_label": 3298,
+   "province_label": 3296,
    "province_color": [
     91,
     104,
@@ -5863,7 +5863,7 @@
     1053
    ],
    "region": 209,
-   "province_label": 3300,
+   "province_label": 3298,
    "province_color": [
     115,
     134,
@@ -5885,7 +5885,7 @@
     1022
    ],
    "region": 198,
-   "province_label": 3140,
+   "province_label": 3138,
    "province_color": [
     182,
     117,
@@ -5907,7 +5907,7 @@
     1010
    ],
    "region": 198,
-   "province_label": 3138,
+   "province_label": 3136,
    "province_color": [
     109,
     29,
@@ -5929,7 +5929,7 @@
     1022
    ],
    "region": 198,
-   "province_label": 3140,
+   "province_label": 3138,
    "province_color": [
     182,
     117,
@@ -5952,7 +5952,7 @@
     1022
    ],
    "region": 198,
-   "province_label": 3140,
+   "province_label": 3138,
    "province_color": [
     182,
     117,
@@ -6066,7 +6066,7 @@
     1049
    ],
    "region": 201,
-   "province_label": 3173,
+   "province_label": 3171,
    "province_color": [
     4,
     134,
@@ -6088,7 +6088,7 @@
     1045
    ],
    "region": 201,
-   "province_label": 3172,
+   "province_label": 3170,
    "province_color": [
     243,
     78,
@@ -6110,7 +6110,7 @@
     1040
    ],
    "region": 201,
-   "province_label": 3171,
+   "province_label": 3169,
    "province_color": [
     162,
     189,
@@ -6132,7 +6132,7 @@
     1049
    ],
    "region": 201,
-   "province_label": 3173,
+   "province_label": 3171,
    "province_color": [
     4,
     134,
@@ -6246,7 +6246,7 @@
     734
    ],
    "region": 99,
-   "province_label": 2023,
+   "province_label": 2021,
    "province_color": [
     218,
     40,
@@ -6290,7 +6290,7 @@
     759
    ],
    "region": 99,
-   "province_label": 2027,
+   "province_label": 2025,
    "province_color": [
     241,
     62,
@@ -6312,7 +6312,7 @@
     739
    ],
    "region": 99,
-   "province_label": 2024,
+   "province_label": 2022,
    "province_color": [
     22,
     151,
@@ -6334,7 +6334,7 @@
     756
    ],
    "region": 99,
-   "province_label": 2026,
+   "province_label": 2024,
    "province_color": [
     45,
     173,
@@ -6356,7 +6356,7 @@
     876
    ],
    "region": 140,
-   "province_label": 2489,
+   "province_label": 2487,
    "province_color": [
     154,
     138,
@@ -6378,7 +6378,7 @@
     849
    ],
    "region": 140,
-   "province_label": 2486,
+   "province_label": 2484,
    "province_color": [
     10,
     150,
@@ -6400,7 +6400,7 @@
     861
    ],
    "region": 140,
-   "province_label": 2487,
+   "province_label": 2485,
    "province_color": [
     71,
     5,
@@ -6422,7 +6422,7 @@
     876
    ],
    "region": 140,
-   "province_label": 2489,
+   "province_label": 2487,
    "province_color": [
     154,
     138,
@@ -6445,7 +6445,7 @@
     861
    ],
    "region": 140,
-   "province_label": 2487,
+   "province_label": 2485,
    "province_color": [
     71,
     5,
@@ -6468,7 +6468,7 @@
     980
    ],
    "region": 179,
-   "province_label": 2998,
+   "province_label": 2996,
    "province_color": [
     234,
     222,
@@ -6490,7 +6490,7 @@
     980
    ],
    "region": 179,
-   "province_label": 2998,
+   "province_label": 2996,
    "province_color": [
     234,
     222,
@@ -6513,7 +6513,7 @@
     980
    ],
    "region": 179,
-   "province_label": 2998,
+   "province_label": 2996,
    "province_color": [
     234,
     222,
@@ -6536,7 +6536,7 @@
     980
    ],
    "region": 179,
-   "province_label": 2998,
+   "province_label": 2996,
    "province_color": [
     234,
     222,
@@ -6741,7 +6741,7 @@
     893
    ],
    "region": 139,
-   "province_label": 2485,
+   "province_label": 2483,
    "province_color": [
     249,
     192,
@@ -6763,7 +6763,7 @@
     861
    ],
    "region": 139,
-   "province_label": 2482,
+   "province_label": 2480,
    "province_color": [
     31,
     26,
@@ -6785,7 +6785,7 @@
     862
    ],
    "region": 139,
-   "province_label": 2481,
+   "province_label": 2479,
    "province_color": [
     68,
     115,
@@ -6807,7 +6807,7 @@
     880
    ],
    "region": 139,
-   "province_label": 2484,
+   "province_label": 2482,
    "province_color": [
     128,
     226,
@@ -6829,7 +6829,7 @@
     862
    ],
    "region": 139,
-   "province_label": 2481,
+   "province_label": 2479,
    "province_color": [
     68,
     115,
@@ -6852,7 +6852,7 @@
     1066
    ],
    "region": 213,
-   "province_label": 3323,
+   "province_label": 3321,
    "province_color": [
     9,
     249,
@@ -6874,7 +6874,7 @@
     1057
    ],
    "region": 213,
-   "province_label": 3321,
+   "province_label": 3319,
    "province_color": [
     137,
     147,
@@ -6896,7 +6896,7 @@
     1075
    ],
    "region": 213,
-   "province_label": 3325,
+   "province_label": 3323,
    "province_color": [
     205,
     244,
@@ -6918,7 +6918,7 @@
     1051
    ],
    "region": 213,
-   "province_label": 3320,
+   "province_label": 3318,
    "province_color": [
     73,
     138,
@@ -6940,7 +6940,7 @@
     1068
    ],
    "region": 213,
-   "province_label": 3324,
+   "province_label": 3322,
    "province_color": [
     123,
     79,
@@ -6962,7 +6962,7 @@
     1051
    ],
    "region": 214,
-   "province_label": 3328,
+   "province_label": 3326,
    "province_color": [
     47,
     82,
@@ -6984,7 +6984,7 @@
     1051
    ],
    "region": 214,
-   "province_label": 3328,
+   "province_label": 3326,
    "province_color": [
     47,
     82,
@@ -7007,7 +7007,7 @@
     1051
    ],
    "region": 214,
-   "province_label": 3328,
+   "province_label": 3326,
    "province_color": [
     47,
     82,
@@ -7030,7 +7030,7 @@
     1051
    ],
    "region": 214,
-   "province_label": 3328,
+   "province_label": 3326,
    "province_color": [
     47,
     82,
@@ -7326,7 +7326,7 @@
     1011
    ],
    "region": 190,
-   "province_label": 3084,
+   "province_label": 3082,
    "province_color": [
     80,
     5,
@@ -7370,7 +7370,7 @@
     1033
    ],
    "region": 190,
-   "province_label": 3087,
+   "province_label": 3085,
    "province_color": [
     140,
     116,
@@ -7392,7 +7392,7 @@
     1011
    ],
    "region": 190,
-   "province_label": 3084,
+   "province_label": 3082,
    "province_color": [
     80,
     5,
@@ -7415,7 +7415,7 @@
     1059
    ],
    "region": 207,
-   "province_label": 3219,
+   "province_label": 3217,
    "province_color": [
     172,
     90,
@@ -7459,7 +7459,7 @@
     1062
    ],
    "region": 207,
-   "province_label": 3220,
+   "province_label": 3218,
    "province_color": [
     14,
     35,
@@ -7481,7 +7481,7 @@
     1031
    ],
    "region": 207,
-   "province_label": 3215,
+   "province_label": 3213,
    "province_color": [
     51,
     124,
@@ -7503,7 +7503,7 @@
     1043
    ],
    "region": 207,
-   "province_label": 3216,
+   "province_label": 3214,
    "province_color": [
     209,
     180,
@@ -11433,7 +11433,7 @@
     780
    ],
    "region": 109,
-   "province_label": 2164,
+   "province_label": 2162,
    "province_color": [
     73,
     105,
@@ -11477,7 +11477,7 @@
     789
    ],
    "region": 109,
-   "province_label": 2168,
+   "province_label": 2166,
    "province_color": [
     171,
     50,
@@ -11499,7 +11499,7 @@
     800
    ],
    "region": 109,
-   "province_label": 2173,
+   "province_label": 2171,
    "province_color": [
     82,
     58,
@@ -11521,7 +11521,7 @@
     792
    ],
    "region": 109,
-   "province_label": 2170,
+   "province_label": 2168,
    "province_color": [
     55,
     88,
@@ -11543,7 +11543,7 @@
     687
    ],
    "region": 88,
-   "province_label": 1892,
+   "province_label": 1890,
    "province_color": [
     75,
     1,
@@ -11565,7 +11565,7 @@
     684
    ],
    "region": 88,
-   "province_label": 1894,
+   "province_label": 1892,
    "province_color": [
     238,
     60,
@@ -11587,7 +11587,7 @@
     749
    ],
    "region": 88,
-   "province_label": 1908,
+   "province_label": 1906,
    "province_color": [
     204,
     176,
@@ -11609,7 +11609,7 @@
     717
    ],
    "region": 88,
-   "province_label": 1901,
+   "province_label": 1899,
    "province_color": [
     147,
     192,
@@ -11631,7 +11631,7 @@
     718
    ],
    "region": 88,
-   "province_label": 1902,
+   "province_label": 1900,
    "province_color": [
     218,
     244,
@@ -11653,7 +11653,7 @@
     666
    ],
    "region": 73,
-   "province_label": 1654,
+   "province_label": 1652,
    "province_color": [
     126,
     34,
@@ -11675,7 +11675,7 @@
     654
    ],
    "region": 73,
-   "province_label": 1653,
+   "province_label": 1651,
    "province_color": [
     142,
     123,
@@ -11697,7 +11697,7 @@
     665
    ],
    "region": 73,
-   "province_label": 1655,
+   "province_label": 1653,
    "province_color": [
     186,
     145,
@@ -11719,7 +11719,7 @@
     650
    ],
    "region": 73,
-   "province_label": 1648,
+   "province_label": 1646,
    "province_color": [
     200,
     213,
@@ -11741,7 +11741,7 @@
     623
    ],
    "region": 73,
-   "province_label": 1638,
+   "province_label": 1636,
    "province_color": [
     134,
     150,
@@ -12071,7 +12071,7 @@
     564
    ],
    "region": 62,
-   "province_label": 1511,
+   "province_label": 1509,
    "province_color": [
     178,
     139,
@@ -12093,7 +12093,7 @@
     607
    ],
    "region": 62,
-   "province_label": 1522,
+   "province_label": 1520,
    "province_color": [
     52,
     59,
@@ -12115,7 +12115,7 @@
     614
    ],
    "region": 62,
-   "province_label": 1523,
+   "province_label": 1521,
    "province_color": [
     112,
     169,
@@ -12137,7 +12137,7 @@
     577
    ],
    "region": 62,
-   "province_label": 1513,
+   "province_label": 1511,
    "province_color": [
     164,
     71,
@@ -12159,7 +12159,7 @@
     684
    ],
    "region": 86,
-   "province_label": 1873,
+   "province_label": 1871,
    "province_color": [
     189,
     239,
@@ -12181,7 +12181,7 @@
     685
    ],
    "region": 86,
-   "province_label": 1876,
+   "province_label": 1874,
    "province_color": [
     220,
     140,
@@ -12203,7 +12203,7 @@
     693
    ],
    "region": 86,
-   "province_label": 1877,
+   "province_label": 1875,
    "province_color": [
     17,
     115,
@@ -12225,7 +12225,7 @@
     666
    ],
    "region": 86,
-   "province_label": 1871,
+   "province_label": 1869,
    "province_color": [
     148,
     214,
@@ -12247,7 +12247,7 @@
     710
    ],
    "region": 86,
-   "province_label": 1880,
+   "province_label": 1878,
    "province_color": [
     77,
     226,
@@ -12269,7 +12269,7 @@
     747
    ],
    "region": 95,
-   "province_label": 1978,
+   "province_label": 1976,
    "province_color": [
     95,
     35,
@@ -12291,7 +12291,7 @@
     765
    ],
    "region": 95,
-   "province_label": 1985,
+   "province_label": 1983,
    "province_color": [
     53,
     53,
@@ -12313,7 +12313,7 @@
     739
    ],
    "region": 95,
-   "province_label": 1975,
+   "province_label": 1973,
    "province_color": [
     150,
     253,
@@ -12335,7 +12335,7 @@
     716
    ],
    "region": 95,
-   "province_label": 1969,
+   "province_label": 1967,
    "province_color": [
     44,
     100,
@@ -12357,7 +12357,7 @@
     720
    ],
    "region": 95,
-   "province_label": 1972,
+   "province_label": 1970,
    "province_color": [
     236,
     25,
@@ -12379,7 +12379,7 @@
     691
    ],
    "region": 84,
-   "province_label": 1846,
+   "province_label": 1844,
    "province_color": [
     2,
     99,
@@ -12401,7 +12401,7 @@
     700
    ],
    "region": 84,
-   "province_label": 1848,
+   "province_label": 1846,
    "province_color": [
     160,
     154,
@@ -12423,7 +12423,7 @@
     699
    ],
    "region": 84,
-   "province_label": 1847,
+   "province_label": 1845,
    "province_color": [
     221,
     9,
@@ -12467,7 +12467,7 @@
     697
    ],
    "region": 90,
-   "province_label": 1921,
+   "province_label": 1919,
    "province_color": [
     115,
     199,
@@ -12489,7 +12489,7 @@
     741
    ],
    "region": 90,
-   "province_label": 1928,
+   "province_label": 1926,
    "province_color": [
     153,
     18,
@@ -12511,7 +12511,7 @@
     755
    ],
    "region": 90,
-   "province_label": 1929,
+   "province_label": 1927,
    "province_color": [
     91,
     248,
@@ -12533,7 +12533,7 @@
     684
    ],
    "region": 90,
-   "province_label": 1920,
+   "province_label": 1918,
    "province_color": [
     168,
     238,
@@ -12555,7 +12555,7 @@
     587
    ],
    "region": 69,
-   "province_label": 1589,
+   "province_label": 1587,
    "province_color": [
     24,
     251,
@@ -12577,7 +12577,7 @@
     654
    ],
    "region": 69,
-   "province_label": 1595,
+   "province_label": 1593,
    "province_color": [
     131,
     149,
@@ -12599,7 +12599,7 @@
     630
    ],
    "region": 69,
-   "province_label": 1593,
+   "province_label": 1591,
    "province_color": [
     233,
     24,
@@ -12621,7 +12621,7 @@
     669
    ],
    "region": 69,
-   "province_label": 1597,
+   "province_label": 1595,
    "province_color": [
     147,
     154,
@@ -12643,7 +12643,7 @@
     562
    ],
    "region": 63,
-   "province_label": 1533,
+   "province_label": 1531,
    "province_color": [
     107,
     8,
@@ -12665,7 +12665,7 @@
     632
    ],
    "region": 63,
-   "province_label": 1546,
+   "province_label": 1544,
    "province_color": [
     3,
     251,
@@ -12687,7 +12687,7 @@
     602
    ],
    "region": 63,
-   "province_label": 1540,
+   "province_label": 1538,
    "province_color": [
     130,
     76,
@@ -12709,7 +12709,7 @@
     564
    ],
    "region": 63,
-   "province_label": 1532,
+   "province_label": 1530,
    "province_color": [
     74,
     7,
@@ -12951,7 +12951,7 @@
     780
    ],
    "region": 105,
-   "province_label": 2131,
+   "province_label": 2129,
    "province_color": [
     208,
     139,
@@ -12973,7 +12973,7 @@
     758
    ],
    "region": 105,
-   "province_label": 2127,
+   "province_label": 2125,
    "province_color": [
     87,
     173,
@@ -12995,7 +12995,7 @@
     764
    ],
    "region": 105,
-   "province_label": 2129,
+   "province_label": 2127,
    "province_color": [
     110,
     195,
@@ -13017,7 +13017,7 @@
     786
    ],
    "region": 105,
-   "province_label": 2132,
+   "province_label": 2130,
    "province_color": [
     133,
     216,
@@ -13039,7 +13039,7 @@
     758
    ],
    "region": 105,
-   "province_label": 2127,
+   "province_label": 2125,
    "province_color": [
     87,
     173,
@@ -13172,7 +13172,7 @@
     573
    ],
    "region": 66,
-   "province_label": 1571,
+   "province_label": 1569,
    "province_color": [
     221,
     88,
@@ -13194,7 +13194,7 @@
     622
    ],
    "region": 66,
-   "province_label": 1577,
+   "province_label": 1575,
    "province_color": [
     230,
     41,
@@ -13216,7 +13216,7 @@
     650
    ],
    "region": 66,
-   "province_label": 1580,
+   "province_label": 1578,
    "province_color": [
     192,
     208,
@@ -13238,7 +13238,7 @@
     598
    ],
    "region": 66,
-   "province_label": 1573,
+   "province_label": 1571,
    "province_color": [
     207,
     20,
@@ -13260,7 +13260,7 @@
     578
    ],
    "region": 66,
-   "province_label": 1572,
+   "province_label": 1570,
    "province_color": [
     86,
     54,
@@ -13282,7 +13282,7 @@
     582
    ],
    "region": 65,
-   "province_label": 1564,
+   "province_label": 1562,
    "province_color": [
     168,
     206,
@@ -13304,7 +13304,7 @@
     628
    ],
    "region": 65,
-   "province_label": 1568,
+   "province_label": 1566,
    "province_color": [
     210,
     114,
@@ -13326,7 +13326,7 @@
     607
    ],
    "region": 65,
-   "province_label": 1567,
+   "province_label": 1565,
    "province_color": [
     150,
     3,
@@ -13348,7 +13348,7 @@
     559
    ],
    "region": 65,
-   "province_label": 1560,
+   "province_label": 1558,
    "province_color": [
     57,
     174,
@@ -13370,7 +13370,7 @@
     557
    ],
    "region": 65,
-   "province_label": 1559,
+   "province_label": 1557,
    "province_color": [
     110,
     148,
@@ -13392,7 +13392,7 @@
     603
    ],
    "region": 70,
-   "province_label": 1608,
+   "province_label": 1606,
    "province_color": [
     74,
     238,
@@ -13414,7 +13414,7 @@
     653
    ],
    "region": 70,
-   "province_label": 1620,
+   "province_label": 1618,
    "province_color": [
     119,
     102,
@@ -13436,7 +13436,7 @@
     599
    ],
    "region": 70,
-   "province_label": 1606,
+   "province_label": 1604,
    "province_color": [
     69,
     221,
@@ -13458,7 +13458,7 @@
     645
    ],
    "region": 70,
-   "province_label": 1617,
+   "province_label": 1615,
    "province_color": [
     124,
     217,
@@ -13480,7 +13480,7 @@
     634
    ],
    "region": 70,
-   "province_label": 1614,
+   "province_label": 1612,
    "province_color": [
     199,
     140,
@@ -13524,7 +13524,7 @@
     796
    ],
    "region": 107,
-   "province_label": 2142,
+   "province_label": 2140,
    "province_color": [
     91,
     11,
@@ -13592,7 +13592,7 @@
     869
    ],
    "region": 125,
-   "province_label": 2338,
+   "province_label": 2336,
    "province_color": [
     139,
     182,
@@ -13636,7 +13636,7 @@
     848
    ],
    "region": 125,
-   "province_label": 2337,
+   "province_label": 2335,
    "province_color": [
     114,
     112,
@@ -13658,7 +13658,7 @@
     869
    ],
    "region": 125,
-   "province_label": 2338,
+   "province_label": 2336,
    "province_color": [
     139,
     182,
@@ -13794,7 +13794,7 @@
     907
    ],
    "region": 153,
-   "province_label": 2688,
+   "province_label": 2686,
    "province_color": [
     126,
     126,
@@ -13884,7 +13884,7 @@
     978
    ],
    "region": 169,
-   "province_label": 2911,
+   "province_label": 2909,
    "province_color": [
     118,
     246,
@@ -13906,7 +13906,7 @@
     952
    ],
    "region": 169,
-   "province_label": 2910,
+   "province_label": 2908,
    "province_color": [
     254,
     24,
@@ -13973,7 +13973,7 @@
     1083
    ],
    "region": 229,
-   "province_label": 3482,
+   "province_label": 3480,
    "province_color": [
     180,
     3,
@@ -13995,7 +13995,7 @@
     1086
    ],
    "region": 229,
-   "province_label": 3483,
+   "province_label": 3481,
    "province_color": [
     215,
     85,
@@ -14062,7 +14062,7 @@
     1102
    ],
    "region": 233,
-   "province_label": 3559,
+   "province_label": 3557,
    "province_color": [
     138,
     141,
@@ -14084,7 +14084,7 @@
     1092
    ],
    "region": 233,
-   "province_label": 3560,
+   "province_label": 3558,
    "province_color": [
     63,
     218,
@@ -14106,7 +14106,7 @@
     1110
    ],
    "region": 233,
-   "province_label": 3561,
+   "province_label": 3559,
    "province_color": [
     93,
     232,
@@ -14151,7 +14151,7 @@
     1139
    ],
    "region": 252,
-   "province_label": 3797,
+   "province_label": 3795,
    "province_color": [
     217,
     231,
@@ -14173,7 +14173,7 @@
     1163
    ],
    "region": 252,
-   "province_label": 3798,
+   "province_label": 3796,
    "province_color": [
     203,
     163,
@@ -14195,7 +14195,7 @@
     1185
    ],
    "region": 252,
-   "province_label": 3799,
+   "province_label": 3797,
    "province_color": [
     54,
     251,
@@ -14308,7 +14308,7 @@
     1522
    ],
    "region": 363,
-   "province_label": 5319,
+   "province_label": 5317,
    "province_color": [
     247,
     74,
@@ -14330,7 +14330,7 @@
     1545
    ],
    "region": 363,
-   "province_label": 5321,
+   "province_label": 5319,
    "province_color": [
     18,
     151,
@@ -14352,7 +14352,7 @@
     1543
    ],
    "region": 363,
-   "province_label": 5320,
+   "province_label": 5318,
    "province_color": [
     242,
     162,
@@ -14374,7 +14374,7 @@
     1570
    ],
    "region": 363,
-   "province_label": 5322,
+   "province_label": 5320,
    "province_color": [
     153,
     171,
@@ -14396,7 +14396,7 @@
     1634
    ],
    "region": 382,
-   "province_label": 5547,
+   "province_label": 5545,
    "province_color": [
     51,
     27,
@@ -14418,7 +14418,7 @@
     1644
    ],
    "region": 382,
-   "province_label": 5548,
+   "province_label": 5546,
    "province_color": [
     246,
     5,
@@ -14440,7 +14440,7 @@
     1694
    ],
    "region": 382,
-   "province_label": 5553,
+   "province_label": 5551,
    "province_color": [
     76,
     241,
@@ -14462,7 +14462,7 @@
     1696
    ],
    "region": 382,
-   "province_label": 5554,
+   "province_label": 5552,
    "province_color": [
     137,
     96,
@@ -14484,7 +14484,7 @@
     1536
    ],
    "region": 360,
-   "province_label": 5256,
+   "province_label": 5254,
    "province_color": [
     87,
     81,
@@ -14506,7 +14506,7 @@
     1505
    ],
    "region": 360,
-   "province_label": 5253,
+   "province_label": 5251,
    "province_color": [
     223,
     151,
@@ -14528,7 +14528,7 @@
     1505
    ],
    "region": 360,
-   "province_label": 5254,
+   "province_label": 5252,
    "province_color": [
     176,
     197,
@@ -14550,7 +14550,7 @@
     1563
    ],
    "region": 360,
-   "province_label": 5257,
+   "province_label": 5255,
    "province_color": [
     245,
     136,
@@ -14616,7 +14616,7 @@
     1443
    ],
    "region": 341,
-   "province_label": 5005,
+   "province_label": 5003,
    "province_color": [
     28,
     57,
@@ -14638,7 +14638,7 @@
     1451
    ],
    "region": 341,
-   "province_label": 5006,
+   "province_label": 5004,
    "province_color": [
     74,
     99,
@@ -14705,7 +14705,7 @@
     1373
    ],
    "region": 315,
-   "province_label": 4626,
+   "province_label": 4624,
    "province_color": [
     110,
     65,
@@ -14727,7 +14727,7 @@
     1351
    ],
    "region": 315,
-   "province_label": 4627,
+   "province_label": 4625,
    "province_color": [
     71,
     66,
@@ -14749,7 +14749,7 @@
     1397
    ],
    "region": 315,
-   "province_label": 4628,
+   "province_label": 4626,
    "province_color": [
     38,
     69,
@@ -14771,7 +14771,7 @@
     1325
    ],
    "region": 309,
-   "province_label": 4575,
+   "province_label": 4573,
    "province_color": [
     233,
     103,
@@ -14793,7 +14793,7 @@
     1317
    ],
    "region": 309,
-   "province_label": 4574,
+   "province_label": 4572,
    "province_color": [
     79,
     163,
@@ -14837,7 +14837,7 @@
     1304
    ],
    "region": 309,
-   "province_label": 4573,
+   "province_label": 4571,
    "province_color": [
     87,
     155,
@@ -14881,7 +14881,7 @@
     1446
    ],
    "region": 328,
-   "province_label": 4845,
+   "province_label": 4843,
    "province_color": [
     133,
     244,
@@ -14903,7 +14903,7 @@
     1412
    ],
    "region": 328,
-   "province_label": 4842,
+   "province_label": 4840,
    "province_color": [
     143,
     20,
@@ -14925,7 +14925,7 @@
     1404
    ],
    "region": 328,
-   "province_label": 4840,
+   "province_label": 4838,
    "province_color": [
     151,
     44,
@@ -14947,7 +14947,7 @@
     1404
    ],
    "region": 328,
-   "province_label": 4841,
+   "province_label": 4839,
    "province_color": [
     146,
     40,
@@ -14969,7 +14969,7 @@
     1331
    ],
    "region": 317,
-   "province_label": 4653,
+   "province_label": 4651,
    "province_color": [
     182,
     214,
@@ -14991,7 +14991,7 @@
     1354
    ],
    "region": 317,
-   "province_label": 4657,
+   "province_label": 4655,
    "province_color": [
     24,
     1,
@@ -15013,7 +15013,7 @@
     1334
    ],
    "region": 317,
-   "province_label": 4654,
+   "province_label": 4652,
    "province_color": [
     165,
     172,
@@ -15035,7 +15035,7 @@
     1360
    ],
    "region": 316,
-   "province_label": 4644,
+   "province_label": 4642,
    "province_color": [
     53,
     159,
@@ -15079,7 +15079,7 @@
     1292
    ],
    "region": 298,
-   "province_label": 4488,
+   "province_label": 4486,
    "province_color": [
     22,
     133,
@@ -15147,7 +15147,7 @@
     1428
    ],
    "region": 330,
-   "province_label": 4866,
+   "province_label": 4864,
    "province_color": [
     221,
     37,
@@ -15169,7 +15169,7 @@
     1443
    ],
    "region": 330,
-   "province_label": 4867,
+   "province_label": 4865,
    "province_color": [
     70,
     44,
@@ -15191,7 +15191,7 @@
     1479
    ],
    "region": 330,
-   "province_label": 4872,
+   "province_label": 4870,
    "province_color": [
     184,
     40,
@@ -15213,7 +15213,7 @@
     1466
    ],
    "region": 330,
-   "province_label": 4871,
+   "province_label": 4869,
    "province_color": [
     228,
     99,
@@ -15235,7 +15235,7 @@
     1449
    ],
    "region": 330,
-   "province_label": 4869,
+   "province_label": 4867,
    "province_color": [
     16,
     10,
@@ -15257,7 +15257,7 @@
     1329
    ],
    "region": 316,
-   "province_label": 4635,
+   "province_label": 4633,
    "province_color": [
     119,
     129,
@@ -15279,7 +15279,7 @@
     1334
    ],
    "region": 316,
-   "province_label": 4639,
+   "province_label": 4637,
    "province_color": [
     143,
     229,
@@ -15301,7 +15301,7 @@
     1329
    ],
    "region": 316,
-   "province_label": 4635,
+   "province_label": 4633,
    "province_color": [
     119,
     129,
@@ -15415,7 +15415,7 @@
     1115
    ],
    "region": 220,
-   "province_label": 3396,
+   "province_label": 3394,
    "province_color": [
     55,
     199,
@@ -15437,7 +15437,7 @@
     1113
    ],
    "region": 220,
-   "province_label": 3397,
+   "province_label": 3395,
    "province_color": [
     135,
     126,
@@ -15459,7 +15459,7 @@
     1080
    ],
    "region": 220,
-   "province_label": 3394,
+   "province_label": 3392,
    "province_color": [
     251,
     88,
@@ -15481,7 +15481,7 @@
     1089
    ],
    "region": 220,
-   "province_label": 3395,
+   "province_label": 3393,
    "province_color": [
     44,
     48,
@@ -15503,7 +15503,7 @@
     1108
    ],
    "region": 220,
-   "province_label": 3398,
+   "province_label": 3396,
    "province_color": [
     213,
     254,
@@ -15525,7 +15525,7 @@
     1084
    ],
    "region": 210,
-   "province_label": 3307,
+   "province_label": 3305,
    "province_color": [
     34,
     231,
@@ -15547,7 +15547,7 @@
     1063
    ],
    "region": 210,
-   "province_label": 3305,
+   "province_label": 3303,
    "province_color": [
     228,
     67,
@@ -15569,7 +15569,7 @@
     1069
    ],
    "region": 210,
-   "province_label": 3306,
+   "province_label": 3304,
    "province_color": [
     132,
     32,
@@ -15613,7 +15613,7 @@
     1045
    ],
    "region": 205,
-   "province_label": 3209,
+   "province_label": 3207,
    "province_color": [
     208,
     232,
@@ -15635,7 +15635,7 @@
     1045
    ],
    "region": 205,
-   "province_label": 3209,
+   "province_label": 3207,
    "province_color": [
     208,
     232,
@@ -15658,7 +15658,7 @@
     1045
    ],
    "region": 205,
-   "province_label": 3209,
+   "province_label": 3207,
    "province_color": [
     208,
     232,
@@ -15681,7 +15681,7 @@
     1045
    ],
    "region": 205,
-   "province_label": 3209,
+   "province_label": 3207,
    "province_color": [
     208,
     232,
@@ -15726,7 +15726,7 @@
     1029
    ],
    "region": 196,
-   "province_label": 3122,
+   "province_label": 3120,
    "province_color": [
     170,
     9,
@@ -15748,7 +15748,7 @@
     1029
    ],
    "region": 196,
-   "province_label": 3124,
+   "province_label": 3122,
    "province_color": [
     198,
     20,
@@ -15793,7 +15793,7 @@
     1058
    ],
    "region": 212,
-   "province_label": 3314,
+   "province_label": 3312,
    "province_color": [
     164,
     6,
@@ -15815,7 +15815,7 @@
     1077
    ],
    "region": 212,
-   "province_label": 3318,
+   "province_label": 3316,
    "province_color": [
     66,
     62,
@@ -15837,7 +15837,7 @@
     1072
    ],
    "region": 212,
-   "province_label": 3316,
+   "province_label": 3314,
    "province_color": [
     126,
     173,
@@ -15881,7 +15881,7 @@
     1037
    ],
    "region": 202,
-   "province_label": 3176,
+   "province_label": 3174,
    "province_color": [
     13,
     87,
@@ -15903,7 +15903,7 @@
     1090
    ],
    "region": 202,
-   "province_label": 3182,
+   "province_label": 3180,
    "province_color": [
     76,
     88,
@@ -15925,7 +15925,7 @@
     1059
    ],
    "region": 202,
-   "province_label": 3178,
+   "province_label": 3176,
    "province_color": [
     22,
     40,
@@ -15947,7 +15947,7 @@
     1044
    ],
    "region": 202,
-   "province_label": 3175,
+   "province_label": 3173,
    "province_color": [
     157,
     74,
@@ -15969,7 +15969,7 @@
     1171
    ],
    "region": 244,
-   "province_label": 3695,
+   "province_label": 3693,
    "province_color": [
     104,
     146,
@@ -16013,7 +16013,7 @@
     1172
    ],
    "region": 244,
-   "province_label": 3696,
+   "province_label": 3694,
    "province_color": [
     216,
     158,
@@ -16035,7 +16035,7 @@
     1151
    ],
    "region": 244,
-   "province_label": 3693,
+   "province_label": 3691,
    "province_color": [
     216,
     52,
@@ -16057,7 +16057,7 @@
     1071
    ],
    "region": 216,
-   "province_label": 3336,
+   "province_label": 3334,
    "province_color": [
     176,
     53,
@@ -16079,7 +16079,7 @@
     1088
    ],
    "region": 216,
-   "province_label": 3341,
+   "province_label": 3339,
    "province_color": [
     41,
     19,
@@ -16101,7 +16101,7 @@
     1086
    ],
    "region": 216,
-   "province_label": 3338,
+   "province_label": 3336,
    "province_color": [
     199,
     75,
@@ -16123,7 +16123,7 @@
     1088
    ],
    "region": 216,
-   "province_label": 3344,
+   "province_label": 3342,
    "province_color": [
     161,
     241,
@@ -16145,7 +16145,7 @@
     1229
    ],
    "region": 287,
-   "province_label": 4318,
+   "province_label": 4316,
    "province_color": [
     128,
     82,
@@ -16167,7 +16167,7 @@
     1241
    ],
    "region": 287,
-   "province_label": 4319,
+   "province_label": 4317,
    "province_color": [
     158,
     115,
@@ -16189,7 +16189,7 @@
     1238
    ],
    "region": 287,
-   "province_label": 4316,
+   "province_label": 4314,
    "province_color": [
     218,
     226,
@@ -16211,7 +16211,7 @@
     1259
    ],
    "region": 287,
-   "province_label": 4325,
+   "province_label": 4323,
    "province_color": [
     57,
     141,
@@ -16233,7 +16233,7 @@
     1203
    ],
    "region": 276,
-   "province_label": 4094,
+   "province_label": 4092,
    "province_color": [
     178,
     218,
@@ -16277,7 +16277,7 @@
     1203
    ],
    "region": 276,
-   "province_label": 4094,
+   "province_label": 4092,
    "province_color": [
     178,
     218,
@@ -16300,7 +16300,7 @@
     1203
    ],
    "region": 276,
-   "province_label": 4094,
+   "province_label": 4092,
    "province_color": [
     178,
     218,
@@ -16323,7 +16323,7 @@
     1254
    ],
    "region": 290,
-   "province_label": 4363,
+   "province_label": 4361,
    "province_color": [
     44,
     81,
@@ -16367,7 +16367,7 @@
     1281
    ],
    "region": 290,
-   "province_label": 4364,
+   "province_label": 4362,
    "province_color": [
     104,
     192,
@@ -16389,7 +16389,7 @@
     1254
    ],
    "region": 290,
-   "province_label": 4363,
+   "province_label": 4361,
    "province_color": [
     44,
     81,
@@ -16412,7 +16412,7 @@
     1179
    ],
    "region": 264,
-   "province_label": 3944,
+   "province_label": 3942,
    "province_color": [
     248,
     212,
@@ -16434,7 +16434,7 @@
     1219
    ],
    "region": 264,
-   "province_label": 3954,
+   "province_label": 3952,
    "province_color": [
     10,
     164,
@@ -16456,7 +16456,7 @@
     1189
    ],
    "region": 264,
-   "province_label": 3948,
+   "province_label": 3946,
    "province_color": [
     160,
     11,
@@ -16478,7 +16478,7 @@
     1205
    ],
    "region": 264,
-   "province_label": 3951,
+   "province_label": 3949,
    "province_color": [
     99,
     156,
@@ -16500,7 +16500,7 @@
     1098
    ],
    "region": 230,
-   "province_label": 3489,
+   "province_label": 3487,
    "province_color": [
     249,
     81,
@@ -16522,7 +16522,7 @@
     1119
    ],
    "region": 230,
-   "province_label": 3490,
+   "province_label": 3488,
    "province_color": [
     114,
     47,
@@ -16566,7 +16566,7 @@
     1137
    ],
    "region": 230,
-   "province_label": 3492,
+   "province_label": 3490,
    "province_color": [
     76,
     213,
@@ -16610,7 +16610,7 @@
     1517
    ],
    "region": 347,
-   "province_label": 5095,
+   "province_label": 5093,
    "province_color": [
     83,
     53,
@@ -16632,7 +16632,7 @@
     1498
    ],
    "region": 347,
-   "province_label": 5094,
+   "province_label": 5092,
    "province_color": [
     251,
     120,
@@ -16654,7 +16654,7 @@
     1476
    ],
    "region": 347,
-   "province_label": 5093,
+   "province_label": 5091,
    "province_color": [
     45,
     219,
@@ -16676,7 +16676,7 @@
     1493
    ],
    "region": 347,
-   "province_label": 5092,
+   "province_label": 5090,
    "province_color": [
     51,
     59,
@@ -16789,7 +16789,7 @@
     693
    ],
    "region": 87,
-   "province_label": 1885,
+   "province_label": 1883,
    "province_color": [
     137,
     244,
@@ -16811,7 +16811,7 @@
     687
    ],
    "region": 87,
-   "province_label": 1883,
+   "province_label": 1881,
    "province_color": [
     13,
     106,
@@ -16833,7 +16833,7 @@
     710
    ],
    "region": 87,
-   "province_label": 1886,
+   "province_label": 1884,
    "province_color": [
     129,
     81,
@@ -16877,7 +16877,7 @@
     747
    ],
    "region": 101,
-   "province_label": 2057,
+   "province_label": 2055,
    "province_color": [
     159,
     3,
@@ -16899,7 +16899,7 @@
     778
    ],
    "region": 101,
-   "province_label": 2060,
+   "province_label": 2058,
    "province_color": [
     167,
     212,
@@ -16921,7 +16921,7 @@
     795
    ],
    "region": 101,
-   "province_label": 2061,
+   "province_label": 2059,
    "province_color": [
     45,
     252,
@@ -16943,7 +16943,7 @@
     754
    ],
    "region": 101,
-   "province_label": 2058,
+   "province_label": 2056,
    "province_color": [
     152,
     103,
@@ -16965,7 +16965,7 @@
     917
    ],
    "region": 157,
-   "province_label": 2715,
+   "province_label": 2713,
    "province_color": [
     86,
     147,
@@ -17009,7 +17009,7 @@
     930
    ],
    "region": 157,
-   "province_label": 2716,
+   "province_label": 2714,
    "province_color": [
     161,
     195,
@@ -17031,7 +17031,7 @@
     917
    ],
    "region": 157,
-   "province_label": 2715,
+   "province_label": 2713,
    "province_color": [
     86,
     147,
@@ -17054,7 +17054,7 @@
     796
    ],
    "region": 92,
-   "province_label": 1948,
+   "province_label": 1946,
    "province_color": [
     24,
     172,
@@ -17098,7 +17098,7 @@
     806
    ],
    "region": 92,
-   "province_label": 1949,
+   "province_label": 1947,
    "province_color": [
     33,
     125,
@@ -17120,7 +17120,7 @@
     762
    ],
    "region": 92,
-   "province_label": 1946,
+   "province_label": 1944,
    "province_color": [
     73,
     216,
@@ -17142,7 +17142,7 @@
     851
    ],
    "region": 129,
-   "province_label": 2383,
+   "province_label": 2381,
    "province_color": [
     77,
     180,
@@ -17164,7 +17164,7 @@
     855
    ],
    "region": 129,
-   "province_label": 2381,
+   "province_label": 2379,
    "province_color": [
     17,
     69,
@@ -17186,7 +17186,7 @@
     887
    ],
    "region": 129,
-   "province_label": 2385,
+   "province_label": 2383,
    "province_color": [
     164,
     39,
@@ -17208,7 +17208,7 @@
     843
    ],
    "region": 129,
-   "province_label": 2382,
+   "province_label": 2380,
    "province_color": [
     253,
     30,
@@ -17230,7 +17230,7 @@
     882
    ],
    "region": 135,
-   "province_label": 2439,
+   "province_label": 2437,
    "province_color": [
     225,
     223,
@@ -17252,7 +17252,7 @@
     930
    ],
    "region": 135,
-   "province_label": 2441,
+   "province_label": 2439,
    "province_color": [
     248,
     244,
@@ -17296,7 +17296,7 @@
     882
    ],
    "region": 135,
-   "province_label": 2439,
+   "province_label": 2437,
    "province_color": [
     225,
     223,
@@ -17319,7 +17319,7 @@
     988
    ],
    "region": 174,
-   "province_label": 2965,
+   "province_label": 2963,
    "province_color": [
     251,
     55,
@@ -17363,7 +17363,7 @@
     1013
    ],
    "region": 174,
-   "province_label": 2966,
+   "province_label": 2964,
    "province_color": [
     116,
     21,
@@ -17385,7 +17385,7 @@
     988
    ],
    "region": 174,
-   "province_label": 2965,
+   "province_label": 2963,
    "province_color": [
     251,
     55,
@@ -17408,7 +17408,7 @@
     968
    ],
    "region": 176,
-   "province_label": 2972,
+   "province_label": 2970,
    "province_color": [
     124,
     249,
@@ -17430,7 +17430,7 @@
     976
    ],
    "region": 176,
-   "province_label": 2973,
+   "province_label": 2971,
    "province_color": [
     217,
     60,
@@ -17452,7 +17452,7 @@
     1012
    ],
    "region": 176,
-   "province_label": 2975,
+   "province_label": 2973,
    "province_color": [
     179,
     226,
@@ -17474,7 +17474,7 @@
     968
    ],
    "region": 176,
-   "province_label": 2972,
+   "province_label": 2970,
    "province_color": [
     124,
     249,
@@ -17497,7 +17497,7 @@
     1024
    ],
    "region": 193,
-   "province_label": 3110,
+   "province_label": 3108,
    "province_color": [
     216,
     19,
@@ -17541,7 +17541,7 @@
     1024
    ],
    "region": 193,
-   "province_label": 3110,
+   "province_label": 3108,
    "province_color": [
     216,
     19,
@@ -17564,7 +17564,7 @@
     1024
    ],
    "region": 193,
-   "province_label": 3110,
+   "province_label": 3108,
    "province_color": [
     216,
     19,
@@ -17951,7 +17951,7 @@
     1679
    ],
    "region": 389,
-   "province_label": 5649,
+   "province_label": 5647,
    "province_color": [
     204,
     139,
@@ -17973,7 +17973,7 @@
     1702
    ],
    "region": 389,
-   "province_label": 5653,
+   "province_label": 5651,
    "province_color": [
     167,
     49,
@@ -17995,7 +17995,7 @@
     1669
    ],
    "region": 389,
-   "province_label": 5648,
+   "province_label": 5646,
    "province_color": [
     46,
     83,
@@ -18017,7 +18017,7 @@
     1711
    ],
    "region": 389,
-   "province_label": 5654,
+   "province_label": 5652,
    "province_color": [
     227,
     160,
@@ -18061,7 +18061,7 @@
     1308
    ],
    "region": 305,
-   "province_label": 4605,
+   "province_label": 4603,
    "province_color": [
     32,
     99,
@@ -18129,7 +18129,7 @@
     1573
    ],
    "region": 367,
-   "province_label": 5357,
+   "province_label": 5355,
    "province_color": [
     95,
     206,
@@ -18151,7 +18151,7 @@
     1553
    ],
    "region": 367,
-   "province_label": 5354,
+   "province_label": 5352,
    "province_color": [
     72,
     185,
@@ -18195,7 +18195,7 @@
     1560
    ],
    "region": 367,
-   "province_label": 5356,
+   "province_label": 5354,
    "province_color": [
     35,
     95,
@@ -18217,7 +18217,7 @@
     1577
    ],
    "region": 367,
-   "province_label": 5359,
+   "province_label": 5357,
    "province_color": [
     254,
     6,
@@ -18239,7 +18239,7 @@
     1714
    ],
    "region": 391,
-   "province_label": 5667,
+   "province_label": 5665,
    "province_color": [
     17,
     203,
@@ -18261,7 +18261,7 @@
     1742
    ],
    "region": 391,
-   "province_label": 5674,
+   "province_label": 5672,
    "province_color": [
     3,
     135,
@@ -18283,7 +18283,7 @@
     1692
    ],
    "region": 391,
-   "province_label": 5661,
+   "province_label": 5659,
    "province_color": [
     152,
     237,
@@ -18327,7 +18327,7 @@
     1756
    ],
    "region": 391,
-   "province_label": 5675,
+   "province_label": 5673,
    "province_color": [
     161,
     190,
@@ -18349,7 +18349,7 @@
     1603
    ],
    "region": 374,
-   "province_label": 5441,
+   "province_label": 5439,
    "province_color": [
     194,
     113,
@@ -18393,7 +18393,7 @@
     1607
    ],
    "region": 374,
-   "province_label": 5440,
+   "province_label": 5438,
    "province_color": [
     96,
     168,
@@ -18415,7 +18415,7 @@
     1594
    ],
    "region": 374,
-   "province_label": 5439,
+   "province_label": 5437,
    "province_color": [
     36,
     57,
@@ -18437,7 +18437,7 @@
     1626
    ],
    "region": 374,
-   "province_label": 5446,
+   "province_label": 5444,
    "province_color": [
     119,
     189,
@@ -18481,7 +18481,7 @@
     1630
    ],
    "region": 383,
-   "province_label": 5567,
+   "province_label": 5565,
    "province_color": [
     62,
     173,
@@ -18503,7 +18503,7 @@
     1631
    ],
    "region": 383,
-   "province_label": 5566,
+   "province_label": 5564,
    "province_color": [
     2,
     62,
@@ -18525,7 +18525,7 @@
     1643
    ],
    "region": 383,
-   "province_label": 5568,
+   "province_label": 5566,
    "province_color": [
     160,
     117,
@@ -18547,7 +18547,7 @@
     1628
    ],
    "region": 383,
-   "province_label": 5565,
+   "province_label": 5563,
    "province_color": [
     100,
     6,
@@ -18591,7 +18591,7 @@
     1669
    ],
    "region": 387,
-   "province_label": 5626,
+   "province_label": 5624,
    "province_color": [
     196,
     87,
@@ -18613,7 +18613,7 @@
     1694
    ],
    "region": 387,
-   "province_label": 5630,
+   "province_label": 5628,
    "province_color": [
     158,
     96,
@@ -18635,7 +18635,7 @@
     1672
    ],
    "region": 387,
-   "province_label": 5625,
+   "province_label": 5623,
    "province_color": [
     37,
     130,
@@ -18657,7 +18657,7 @@
     1727
    ],
    "region": 387,
-   "province_label": 5634,
+   "province_label": 5632,
    "province_color": [
     60,
     152,
@@ -18679,7 +18679,7 @@
     1005
    ],
    "region": 184,
-   "province_label": 3041,
+   "province_label": 3039,
    "province_color": [
     63,
     172,
@@ -18723,7 +18723,7 @@
     995
    ],
    "region": 184,
-   "province_label": 3040,
+   "province_label": 3038,
    "province_color": [
     17,
     129,
@@ -18745,7 +18745,7 @@
     1026
    ],
    "region": 184,
-   "province_label": 3046,
+   "province_label": 3044,
    "province_color": [
     157,
     9,
@@ -18767,7 +18767,7 @@
     1027
    ],
    "region": 184,
-   "province_label": 3047,
+   "province_label": 3045,
    "province_color": [
     161,
     116,
@@ -18789,7 +18789,7 @@
     1031
    ],
    "region": 186,
-   "province_label": 3056,
+   "province_label": 3054,
    "province_color": [
     193,
     91,
@@ -18811,7 +18811,7 @@
     1026
    ],
    "region": 186,
-   "province_label": 3053,
+   "province_label": 3051,
    "province_color": [
     95,
     146,
@@ -18833,7 +18833,7 @@
     1004
    ],
    "region": 186,
-   "province_label": 3051,
+   "province_label": 3049,
    "province_color": [
     132,
     236,
@@ -18877,7 +18877,7 @@
     1024
    ],
    "region": 186,
-   "province_label": 3055,
+   "province_label": 3053,
    "province_color": [
     253,
     202,
@@ -18899,7 +18899,7 @@
     1143
    ],
    "region": 237,
-   "province_label": 3590,
+   "province_label": 3588,
    "province_color": [
     237,
     238,
@@ -18921,7 +18921,7 @@
     1147
    ],
    "region": 237,
-   "province_label": 3593,
+   "province_label": 3591,
    "province_color": [
     5,
     3,
@@ -18943,7 +18943,7 @@
     1099
    ],
    "region": 237,
-   "province_label": 3579,
+   "province_label": 3577,
    "province_color": [
     93,
     250,
@@ -18965,7 +18965,7 @@
     1119
    ],
    "region": 237,
-   "province_label": 3587,
+   "province_label": 3585,
    "province_color": [
     42,
     92,
@@ -18987,7 +18987,7 @@
     1123
    ],
    "region": 237,
-   "province_label": 3586,
+   "province_label": 3584,
    "province_color": [
     200,
     148,
@@ -19031,7 +19031,7 @@
     1064
    ],
    "region": 215,
-   "province_label": 3330,
+   "province_label": 3328,
    "province_color": [
     208,
     28,
@@ -19053,7 +19053,7 @@
     1067
    ],
    "region": 215,
-   "province_label": 3331,
+   "province_label": 3329,
    "province_color": [
     49,
     229,
@@ -19098,7 +19098,7 @@
     1129
    ],
    "region": 238,
-   "province_label": 3600,
+   "province_label": 3598,
    "province_color": [
     129,
     188,
@@ -19120,7 +19120,7 @@
     1147
    ],
    "region": 238,
-   "province_label": 3604,
+   "province_label": 3602,
    "province_color": [
     213,
     64,
@@ -19142,7 +19142,7 @@
     1110
    ],
    "region": 238,
-   "province_label": 3598,
+   "province_label": 3596,
    "province_color": [
     217,
     125,
@@ -19164,7 +19164,7 @@
     1112
    ],
    "region": 238,
-   "province_label": 3597,
+   "province_label": 3595,
    "province_color": [
     8,
     222,
@@ -19186,7 +19186,7 @@
     1087
    ],
    "region": 238,
-   "province_label": 3594,
+   "province_label": 3592,
    "province_color": [
     204,
     111,
@@ -19230,7 +19230,7 @@
     1141
    ],
    "region": 236,
-   "province_label": 3574,
+   "province_label": 3572,
    "province_color": [
     10,
     243,
@@ -19252,7 +19252,7 @@
     1142
    ],
    "region": 236,
-   "province_label": 3575,
+   "province_label": 3573,
    "province_color": [
     192,
     64,
@@ -19274,7 +19274,7 @@
     1130
    ],
    "region": 236,
-   "province_label": 3572,
+   "province_label": 3570,
    "province_color": [
     206,
     132,
@@ -19296,7 +19296,7 @@
     1107
    ],
    "region": 236,
-   "province_label": 3566,
+   "province_label": 3564,
    "province_color": [
     65,
     49,
@@ -19318,7 +19318,7 @@
     1193
    ],
    "region": 270,
-   "province_label": 4023,
+   "province_label": 4021,
    "province_color": [
     56,
     188,
@@ -19340,7 +19340,7 @@
     1217
    ],
    "region": 270,
-   "province_label": 4025,
+   "province_label": 4023,
    "province_color": [
     17,
     31,
@@ -19362,7 +19362,7 @@
     1179
    ],
    "region": 270,
-   "province_label": 4021,
+   "province_label": 4019,
    "province_color": [
     254,
     242,
@@ -19384,7 +19384,7 @@
     1173
    ],
    "region": 270,
-   "province_label": 4020,
+   "province_label": 4018,
    "province_color": [
     116,
     193,
@@ -19406,7 +19406,7 @@
     1125
    ],
    "region": 246,
-   "province_label": 3712,
+   "province_label": 3710,
    "province_color": [
     231,
     174,
@@ -19428,7 +19428,7 @@
     1147
    ],
    "region": 246,
-   "province_label": 3719,
+   "province_label": 3717,
    "province_color": [
     86,
     49,
@@ -19450,7 +19450,7 @@
     1151
    ],
    "region": 246,
-   "province_label": 3720,
+   "province_label": 3718,
    "province_color": [
     183,
     250,
@@ -19472,7 +19472,7 @@
     1125
    ],
    "region": 246,
-   "province_label": 3714,
+   "province_label": 3712,
    "province_color": [
     47,
     129,
@@ -19516,7 +19516,7 @@
     1094
    ],
    "region": 226,
-   "province_label": 3441,
+   "province_label": 3439,
    "province_color": [
     87,
     187,
@@ -19538,7 +19538,7 @@
     1073
    ],
    "region": 226,
-   "province_label": 3436,
+   "province_label": 3434,
    "province_color": [
     116,
     54,
@@ -19560,7 +19560,7 @@
     1093
    ],
    "region": 226,
-   "province_label": 3438,
+   "province_label": 3436,
    "province_color": [
     125,
     21,
@@ -19582,7 +19582,7 @@
     1025
    ],
    "region": 200,
-   "province_label": 3159,
+   "province_label": 3157,
    "province_color": [
     15,
     108,
@@ -19604,7 +19604,7 @@
     1024
    ],
    "region": 200,
-   "province_label": 3160,
+   "province_label": 3158,
    "province_color": [
     136,
     74,
@@ -19626,7 +19626,7 @@
     1054
    ],
    "region": 200,
-   "province_label": 3164,
+   "province_label": 3162,
    "province_color": [
     1,
     40,
@@ -19648,7 +19648,7 @@
     1059
    ],
    "region": 200,
-   "province_label": 3165,
+   "province_label": 3163,
    "province_color": [
     219,
     206,
@@ -19670,7 +19670,7 @@
     1043
    ],
    "region": 200,
-   "province_label": 3162,
+   "province_label": 3160,
    "province_color": [
     98,
     148,
@@ -19692,7 +19692,7 @@
     1103
    ],
    "region": 243,
-   "province_label": 3685,
+   "province_label": 3683,
    "province_color": [
     36,
     29,
@@ -19714,7 +19714,7 @@
     1154
    ],
    "region": 243,
-   "province_label": 3691,
+   "province_label": 3689,
    "province_color": [
     96,
     75,
@@ -19736,7 +19736,7 @@
     1110
    ],
    "region": 243,
-   "province_label": 3683,
+   "province_label": 3681,
    "province_color": [
     134,
     118,
@@ -19758,7 +19758,7 @@
     1122
    ],
    "region": 243,
-   "province_label": 3687,
+   "province_label": 3685,
    "province_color": [
     89,
     102,
@@ -19780,7 +19780,7 @@
     1136
    ],
    "region": 243,
-   "province_label": 3690,
+   "province_label": 3688,
    "province_color": [
     126,
     80,
@@ -19802,7 +19802,7 @@
     1130
    ],
    "region": 242,
-   "province_label": 3677,
+   "province_label": 3675,
    "province_color": [
     84,
     218,
@@ -19824,7 +19824,7 @@
     1156
    ],
    "region": 242,
-   "province_label": 3682,
+   "province_label": 3680,
    "province_color": [
     163,
     170,
@@ -19846,7 +19846,7 @@
     1121
    ],
    "region": 242,
-   "province_label": 3673,
+   "province_label": 3671,
    "province_color": [
     122,
     52,
@@ -19868,7 +19868,7 @@
     1122
    ],
    "region": 242,
-   "province_label": 3675,
+   "province_label": 3673,
    "province_color": [
     86,
     239,
@@ -19890,7 +19890,7 @@
     1115
    ],
    "region": 242,
-   "province_label": 3674,
+   "province_label": 3672,
    "province_color": [
     35,
     220,
@@ -19912,7 +19912,7 @@
     1207
    ],
    "region": 256,
-   "province_label": 3850,
+   "province_label": 3848,
    "province_color": [
     31,
     39,
@@ -19956,7 +19956,7 @@
     1287
    ],
    "region": 256,
-   "province_label": 3863,
+   "province_label": 3861,
    "province_color": [
     70,
     196,
@@ -19978,7 +19978,7 @@
     1178
    ],
    "region": 256,
-   "province_label": 3844,
+   "province_label": 3842,
    "province_color": [
     166,
     74,
@@ -20000,7 +20000,7 @@
     1243
    ],
    "region": 256,
-   "province_label": 3856,
+   "province_label": 3854,
    "province_color": [
     64,
     101,
@@ -20022,7 +20022,7 @@
     1257
    ],
    "region": 292,
-   "province_label": 4381,
+   "province_label": 4379,
    "province_color": [
     193,
     183,
@@ -20044,7 +20044,7 @@
     1261
    ],
    "region": 292,
-   "province_label": 4383,
+   "province_label": 4381,
    "province_color": [
     81,
     152,
@@ -20066,7 +20066,7 @@
     1251
    ],
    "region": 292,
-   "province_label": 4382,
+   "province_label": 4380,
    "province_color": [
     95,
     239,
@@ -20110,7 +20110,7 @@
     1257
    ],
    "region": 292,
-   "province_label": 4381,
+   "province_label": 4379,
    "province_color": [
     193,
     183,
@@ -20133,7 +20133,7 @@
     1196
    ],
    "region": 277,
-   "province_label": 4097,
+   "province_label": 4095,
    "province_color": [
     100,
     25,
@@ -20155,7 +20155,7 @@
     1217
    ],
    "region": 277,
-   "province_label": 4100,
+   "province_label": 4098,
    "province_color": [
     62,
     191,
@@ -20177,7 +20177,7 @@
     1233
    ],
    "region": 277,
-   "province_label": 4101,
+   "province_label": 4099,
    "province_color": [
     25,
     102,
@@ -20199,7 +20199,7 @@
     1204
    ],
    "region": 277,
-   "province_label": 4098,
+   "province_label": 4096,
    "province_color": [
     137,
     114,
@@ -20221,7 +20221,7 @@
     1196
    ],
    "region": 277,
-   "province_label": 4097,
+   "province_label": 4095,
    "province_color": [
     100,
     25,
@@ -20244,7 +20244,7 @@
     1169
    ],
    "region": 254,
-   "province_label": 3822,
+   "province_label": 3820,
    "province_color": [
     80,
     176,
@@ -20266,7 +20266,7 @@
     1145
    ],
    "region": 254,
-   "province_label": 3817,
+   "province_label": 3815,
    "province_color": [
     157,
     42,
@@ -20288,7 +20288,7 @@
     1171
    ],
    "region": 254,
-   "province_label": 3823,
+   "province_label": 3821,
    "province_color": [
     164,
     53,
@@ -20332,7 +20332,7 @@
     1187
    ],
    "region": 254,
-   "province_label": 3826,
+   "province_label": 3824,
    "province_color": [
     5,
     253,
@@ -20354,7 +20354,7 @@
     1286
    ],
    "region": 303,
-   "province_label": 4531,
+   "province_label": 4529,
    "province_color": [
     239,
     22,
@@ -20376,7 +20376,7 @@
     1344
    ],
    "region": 303,
-   "province_label": 4541,
+   "province_label": 4539,
    "province_color": [
     69,
     96,
@@ -20398,7 +20398,7 @@
     1319
    ],
    "region": 303,
-   "province_label": 4536,
+   "province_label": 4534,
    "province_color": [
     224,
     210,
@@ -20420,7 +20420,7 @@
     1340
    ],
    "region": 303,
-   "province_label": 4540,
+   "province_label": 4538,
    "province_color": [
     247,
     231,
@@ -20442,7 +20442,7 @@
     1314
    ],
    "region": 303,
-   "province_label": 4535,
+   "province_label": 4533,
    "province_color": [
     29,
     65,
@@ -20486,7 +20486,7 @@
     1309
    ],
    "region": 301,
-   "province_label": 4513,
+   "province_label": 4511,
    "province_color": [
     154,
     73,
@@ -20508,7 +20508,7 @@
     1279
    ],
    "region": 301,
-   "province_label": 4508,
+   "province_label": 4506,
    "province_color": [
     6,
     48,
@@ -20530,7 +20530,7 @@
     1328
    ],
    "region": 301,
-   "province_label": 4515,
+   "province_label": 4513,
    "province_color": [
     137,
     253,
@@ -20552,7 +20552,7 @@
     1306
    ],
    "region": 301,
-   "province_label": 4511,
+   "province_label": 4509,
    "province_color": [
     252,
     17,
@@ -20596,7 +20596,7 @@
     1341
    ],
    "region": 313,
-   "province_label": 4611,
+   "province_label": 4609,
    "province_color": [
     198,
     108,
@@ -20687,7 +20687,7 @@
     1278
    ],
    "region": 267,
-   "province_label": 3969,
+   "province_label": 3967,
    "province_color": [
     254,
     117,
@@ -20709,7 +20709,7 @@
     1197
    ],
    "region": 267,
-   "province_label": 3961,
+   "province_label": 3959,
    "province_color": [
     208,
     74,
@@ -20731,7 +20731,7 @@
     1226
    ],
    "region": 267,
-   "province_label": 3964,
+   "province_label": 3962,
    "province_color": [
     133,
     151,
@@ -20753,7 +20753,7 @@
     1202
    ],
    "region": 267,
-   "province_label": 3962,
+   "province_label": 3960,
    "province_color": [
     170,
     241,
@@ -20775,7 +20775,7 @@
     1296
    ],
    "region": 267,
-   "province_label": 3970,
+   "province_label": 3968,
    "province_color": [
     188,
     8,
@@ -20797,7 +20797,7 @@
     1150
    ],
    "region": 240,
-   "province_label": 3644,
+   "province_label": 3642,
    "province_color": [
     215,
     71,
@@ -20819,7 +20819,7 @@
     1174
    ],
    "region": 240,
-   "province_label": 3648,
+   "province_label": 3646,
    "province_color": [
     154,
     87,
@@ -20841,7 +20841,7 @@
     1137
    ],
    "region": 240,
-   "province_label": 3642,
+   "province_label": 3640,
    "province_color": [
     52,
     244,
@@ -20863,7 +20863,7 @@
     1125
    ],
    "region": 240,
-   "province_label": 3640,
+   "province_label": 3638,
    "province_color": [
     248,
     133,
@@ -20885,7 +20885,7 @@
     1120
    ],
    "region": 240,
-   "province_label": 3639,
+   "province_label": 3637,
    "province_color": [
     188,
     22,
@@ -20907,7 +20907,7 @@
     1090
    ],
    "region": 231,
-   "province_label": 3498,
+   "province_label": 3496,
    "province_color": [
     67,
     246,
@@ -20929,7 +20929,7 @@
     1087
    ],
    "region": 231,
-   "province_label": 3495,
+   "province_label": 3493,
    "province_color": [
     196,
     245,
@@ -20951,7 +20951,7 @@
     1081
    ],
    "region": 231,
-   "province_label": 3497,
+   "province_label": 3495,
    "province_color": [
     103,
     73,
@@ -20973,7 +20973,7 @@
     1107
    ],
    "region": 231,
-   "province_label": 3502,
+   "province_label": 3500,
    "province_color": [
     65,
     239,
@@ -20995,7 +20995,7 @@
     1108
    ],
    "region": 228,
-   "province_label": 3471,
+   "province_label": 3469,
    "province_color": [
     180,
     17,
@@ -21017,7 +21017,7 @@
     1112
    ],
    "region": 228,
-   "province_label": 3469,
+   "province_label": 3467,
    "province_color": [
     119,
     162,
@@ -21039,7 +21039,7 @@
     1137
    ],
    "region": 228,
-   "province_label": 3477,
+   "province_label": 3475,
    "province_color": [
     142,
     183,
@@ -21061,7 +21061,7 @@
     1079
    ],
    "region": 228,
-   "province_label": 3465,
+   "province_label": 3463,
    "province_color": [
     156,
     251,
@@ -21083,7 +21083,7 @@
     1012
    ],
    "region": 197,
-   "province_label": 3128,
+   "province_label": 3126,
    "province_color": [
     40,
     150,
@@ -21105,7 +21105,7 @@
     1063
    ],
    "region": 217,
-   "province_label": 3354,
+   "province_label": 3352,
    "province_color": [
     70,
     229,
@@ -21127,7 +21127,7 @@
     1078
    ],
    "region": 217,
-   "province_label": 3359,
+   "province_label": 3357,
    "province_color": [
     211,
     141,
@@ -21171,7 +21171,7 @@
     1097
    ],
    "region": 217,
-   "province_label": 3362,
+   "province_label": 3360,
    "province_color": [
     133,
     249,
@@ -21193,7 +21193,7 @@
     1090
    ],
    "region": 217,
-   "province_label": 3361,
+   "province_label": 3359,
    "province_color": [
     131,
     84,
@@ -21215,7 +21215,7 @@
     1034
    ],
    "region": 197,
-   "province_label": 3133,
+   "province_label": 3131,
    "province_color": [
     244,
     248,
@@ -21237,7 +21237,7 @@
     1035
    ],
    "region": 197,
-   "province_label": 3134,
+   "province_label": 3132,
    "province_color": [
     78,
     128,
@@ -21259,7 +21259,7 @@
     1049
    ],
    "region": 197,
-   "province_label": 3136,
+   "province_label": 3134,
    "province_color": [
     184,
     138,
@@ -21281,7 +21281,7 @@
     1134
    ],
    "region": 253,
-   "province_label": 3805,
+   "province_label": 3803,
    "province_color": [
     168,
     95,
@@ -21303,7 +21303,7 @@
     1168
    ],
    "region": 253,
-   "province_label": 3809,
+   "province_label": 3807,
    "province_color": [
     214,
     137,
@@ -21325,7 +21325,7 @@
     1208
    ],
    "region": 281,
-   "province_label": 4252,
+   "province_label": 4250,
    "province_color": [
     197,
     225,
@@ -21347,7 +21347,7 @@
     1230
    ],
    "region": 281,
-   "province_label": 4255,
+   "province_label": 4253,
    "province_color": [
     220,
     247,
@@ -21369,7 +21369,7 @@
     1215
    ],
    "region": 281,
-   "province_label": 4253,
+   "province_label": 4251,
    "province_color": [
     2,
     80,
@@ -21391,7 +21391,7 @@
     1208
    ],
    "region": 281,
-   "province_label": 4252,
+   "province_label": 4250,
    "province_color": [
     197,
     225,
@@ -21414,7 +21414,7 @@
     1317
    ],
    "region": 308,
-   "province_label": 4572,
+   "province_label": 4570,
    "province_color": [
     127,
     9,
@@ -21436,7 +21436,7 @@
     1297
    ],
    "region": 308,
-   "province_label": 4569,
+   "province_label": 4567,
    "province_color": [
     43,
     133,
@@ -21480,7 +21480,7 @@
     1317
    ],
    "region": 308,
-   "province_label": 4572,
+   "province_label": 4570,
    "province_color": [
     127,
     9,
@@ -21503,7 +21503,7 @@
     1169
    ],
    "region": 245,
-   "province_label": 3709,
+   "province_label": 3707,
    "province_color": [
     196,
     231,
@@ -21525,7 +21525,7 @@
     1178
    ],
    "region": 245,
-   "province_label": 3710,
+   "province_label": 3708,
    "province_color": [
     1,
     86,
@@ -21547,7 +21547,7 @@
     1153
    ],
    "region": 245,
-   "province_label": 3706,
+   "province_label": 3704,
    "province_color": [
     136,
     120,
@@ -21569,7 +21569,7 @@
     1124
    ],
    "region": 245,
-   "province_label": 3702,
+   "province_label": 3700,
    "province_color": [
     28,
     149,
@@ -21635,7 +21635,7 @@
     1171
    ],
    "region": 250,
-   "province_label": 3780,
+   "province_label": 3778,
    "province_color": [
     133,
     72,
@@ -21657,7 +21657,7 @@
     1152
    ],
    "region": 250,
-   "province_label": 3775,
+   "province_label": 3773,
    "province_color": [
     232,
     248,
@@ -21679,7 +21679,7 @@
     1130
    ],
    "region": 250,
-   "province_label": 3771,
+   "province_label": 3769,
    "province_color": [
     51,
     171,
@@ -21701,7 +21701,7 @@
     1159
    ],
    "region": 250,
-   "province_label": 3776,
+   "province_label": 3774,
    "province_color": [
     74,
     192,
@@ -21723,7 +21723,7 @@
     1144
    ],
    "region": 253,
-   "province_label": 3806,
+   "province_label": 3804,
    "province_color": [
     158,
     207,
@@ -21745,7 +21745,7 @@
     1144
    ],
    "region": 253,
-   "province_label": 3806,
+   "province_label": 3804,
    "province_color": [
     158,
     207,
@@ -21768,7 +21768,7 @@
     1144
    ],
    "region": 253,
-   "province_label": 3806,
+   "province_label": 3804,
    "province_color": [
     158,
     207,
@@ -21791,7 +21791,7 @@
     1402
    ],
    "region": 333,
-   "province_label": 4934,
+   "province_label": 4932,
    "province_color": [
     92,
     191,
@@ -21813,7 +21813,7 @@
     1430
    ],
    "region": 333,
-   "province_label": 4940,
+   "province_label": 4938,
    "province_color": [
     55,
     101,
@@ -21835,7 +21835,7 @@
     1410
    ],
    "region": 333,
-   "province_label": 4936,
+   "province_label": 4934,
    "province_color": [
     213,
     157,
@@ -21857,7 +21857,7 @@
     1433
    ],
    "region": 333,
-   "province_label": 4941,
+   "province_label": 4939,
    "province_color": [
     138,
     234,
@@ -21879,7 +21879,7 @@
     1578
    ],
    "region": 371,
-   "province_label": 5398,
+   "province_label": 5396,
    "province_color": [
     56,
     96,
@@ -21901,7 +21901,7 @@
     1581
    ],
    "region": 371,
-   "province_label": 5400,
+   "province_label": 5398,
    "province_color": [
     50,
     125,
@@ -21923,7 +21923,7 @@
     1581
    ],
    "region": 371,
-   "province_label": 5399,
+   "province_label": 5397,
    "province_color": [
     191,
     130,
@@ -21945,7 +21945,7 @@
     1588
    ],
    "region": 371,
-   "province_label": 5402,
+   "province_label": 5400,
    "province_color": [
     184,
     124,
@@ -21967,7 +21967,7 @@
     1460
    ],
    "region": 353,
-   "province_label": 5134,
+   "province_label": 5132,
    "province_color": [
     36,
     247,
@@ -21989,7 +21989,7 @@
     1485
    ],
    "region": 353,
-   "province_label": 5143,
+   "province_label": 5141,
    "province_color": [
     241,
     89,
@@ -22011,7 +22011,7 @@
     1488
    ],
    "region": 353,
-   "province_label": 5147,
+   "province_label": 5145,
    "province_color": [
     180,
     234,
@@ -22033,7 +22033,7 @@
     1446
    ],
    "region": 353,
-   "province_label": 5127,
+   "province_label": 5125,
    "province_color": [
     111,
     170,
@@ -22055,7 +22055,7 @@
     1403
    ],
    "region": 334,
-   "province_label": 4953,
+   "province_label": 4951,
    "province_color": [
     26,
     221,
@@ -22077,7 +22077,7 @@
     1406
    ],
    "region": 334,
-   "province_label": 4951,
+   "province_label": 4949,
    "province_color": [
     64,
     55,
@@ -22099,7 +22099,7 @@
     1429
    ],
    "region": 334,
-   "province_label": 4960,
+   "province_label": 4958,
    "province_color": [
     231,
     63,
@@ -22121,7 +22121,7 @@
     1417
    ],
    "region": 334,
-   "province_label": 4954,
+   "province_label": 4952,
    "province_color": [
     110,
     97,
@@ -22143,7 +22143,7 @@
     1521
    ],
    "region": 361,
-   "province_label": 5278,
+   "province_label": 5276,
    "province_color": [
     85,
     180,
@@ -22165,7 +22165,7 @@
     1506
    ],
    "region": 361,
-   "province_label": 5272,
+   "province_label": 5270,
    "province_color": [
     170,
     23,
@@ -22187,7 +22187,7 @@
     1546
    ],
    "region": 361,
-   "province_label": 5289,
+   "province_label": 5287,
    "province_color": [
     209,
     240,
@@ -22209,7 +22209,7 @@
     1575
    ],
    "region": 361,
-   "province_label": 5300,
+   "province_label": 5298,
    "province_color": [
     120,
     175,
@@ -22231,7 +22231,7 @@
     1489
    ],
    "region": 359,
-   "province_label": 5233,
+   "province_label": 5231,
    "province_color": [
     78,
     248,
@@ -22253,7 +22253,7 @@
     1525
    ],
    "region": 359,
-   "province_label": 5243,
+   "province_label": 5241,
    "province_color": [
     246,
     1,
@@ -22275,7 +22275,7 @@
     1541
    ],
    "region": 359,
-   "province_label": 5248,
+   "province_label": 5246,
    "province_color": [
     244,
     202,
@@ -22297,7 +22297,7 @@
     1529
    ],
    "region": 359,
-   "province_label": 5245,
+   "province_label": 5243,
    "province_color": [
     185,
     146,
@@ -22319,7 +22319,7 @@
     1530
    ],
    "region": 362,
-   "province_label": 5308,
+   "province_label": 5306,
    "province_color": [
     151,
     150,
@@ -22341,7 +22341,7 @@
     1691
    ],
    "region": 384,
-   "province_label": 5577,
+   "province_label": 5575,
    "province_color": [
     155,
     160,
@@ -22385,7 +22385,7 @@
     1550
    ],
    "region": 362,
-   "province_label": 5314,
+   "province_label": 5312,
    "province_color": [
     114,
     61,
@@ -22407,7 +22407,7 @@
     1514
    ],
    "region": 362,
-   "province_label": 5307,
+   "province_label": 5305,
    "province_color": [
     165,
     218,
@@ -22429,7 +22429,7 @@
     1440
    ],
    "region": 331,
-   "province_label": 4901,
+   "province_label": 4899,
    "province_color": [
     140,
     69,
@@ -22451,7 +22451,7 @@
     1450
    ],
    "region": 331,
-   "province_label": 4904,
+   "province_label": 4902,
    "province_color": [
     219,
     16,
@@ -22473,7 +22473,7 @@
     1412
    ],
    "region": 331,
-   "province_label": 4888,
+   "province_label": 4886,
    "province_color": [
     52,
     7,
@@ -22495,7 +22495,7 @@
     1444
    ],
    "region": 331,
-   "province_label": 4900,
+   "province_label": 4898,
    "province_color": [
     195,
     251,
@@ -22517,7 +22517,7 @@
     1359
    ],
    "region": 325,
-   "province_label": 4805,
+   "province_label": 4803,
    "province_color": [
     221,
     241,
@@ -22539,7 +22539,7 @@
     1359
    ],
    "region": 325,
-   "province_label": 4803,
+   "province_label": 4801,
    "province_color": [
     26,
     96,
@@ -22583,7 +22583,7 @@
     1389
    ],
    "region": 325,
-   "province_label": 4814,
+   "province_label": 4812,
    "province_color": [
     245,
     6,
@@ -22605,7 +22605,7 @@
     1317
    ],
    "region": 306,
-   "province_label": 4553,
+   "province_label": 4551,
    "province_color": [
     196,
     73,
@@ -22627,7 +22627,7 @@
     1294
    ],
    "region": 306,
-   "province_label": 4548,
+   "province_label": 4546,
    "province_color": [
     112,
     197,
@@ -22649,7 +22649,7 @@
     1324
    ],
    "region": 306,
-   "province_label": 4558,
+   "province_label": 4556,
    "province_color": [
     98,
     129,
@@ -22671,7 +22671,7 @@
     1324
    ],
    "region": 306,
-   "province_label": 4555,
+   "province_label": 4553,
    "province_color": [
     38,
     18,
@@ -22693,7 +22693,7 @@
     1297
    ],
    "region": 306,
-   "province_label": 4546,
+   "province_label": 4544,
    "province_color": [
     150,
     31,
@@ -22715,7 +22715,7 @@
     1284
    ],
    "region": 300,
-   "province_label": 4494,
+   "province_label": 4492,
    "province_color": [
     249,
     252,
@@ -22737,7 +22737,7 @@
     1318
    ],
    "region": 300,
-   "province_label": 4501,
+   "province_label": 4499,
    "province_color": [
     235,
     184,
@@ -22759,7 +22759,7 @@
     1337
    ],
    "region": 300,
-   "province_label": 4505,
+   "province_label": 4503,
    "province_color": [
     40,
     39,
@@ -22781,7 +22781,7 @@
     1305
    ],
    "region": 300,
-   "province_label": 4500,
+   "province_label": 4498,
    "province_color": [
     212,
     163,
@@ -22803,7 +22803,7 @@
     1271
    ],
    "region": 297,
-   "province_label": 4462,
+   "province_label": 4460,
    "province_color": [
     163,
     118,
@@ -22825,7 +22825,7 @@
     1303
    ],
    "region": 297,
-   "province_label": 4469,
+   "province_label": 4467,
    "province_color": [
     102,
     171,
@@ -22847,7 +22847,7 @@
     1321
    ],
    "region": 297,
-   "province_label": 4472,
+   "province_label": 4470,
    "province_color": [
     246,
     158,
@@ -22869,7 +22869,7 @@
     1273
    ],
    "region": 297,
-   "province_label": 4463,
+   "province_label": 4461,
    "province_color": [
     177,
     94,
@@ -22891,7 +22891,7 @@
     1355
    ],
    "region": 319,
-   "province_label": 4673,
+   "province_label": 4671,
    "province_color": [
     200,
     241,
@@ -22913,7 +22913,7 @@
     1381
    ],
    "region": 319,
-   "province_label": 4684,
+   "province_label": 4682,
    "province_color": [
     165,
     61,
@@ -22935,7 +22935,7 @@
     1347
    ],
    "region": 319,
-   "province_label": 4671,
+   "province_label": 4669,
    "province_color": [
     163,
     151,
@@ -22957,7 +22957,7 @@
     1383
    ],
    "region": 319,
-   "province_label": 4686,
+   "province_label": 4684,
    "province_color": [
     135,
     15,
@@ -22979,7 +22979,7 @@
     1285
    ],
    "region": 295,
-   "province_label": 4423,
+   "province_label": 4421,
    "province_color": [
     159,
     188,
@@ -23001,7 +23001,7 @@
     1304
    ],
    "region": 295,
-   "province_label": 4431,
+   "province_label": 4429,
    "province_color": [
     61,
     243,
@@ -23023,7 +23023,7 @@
     1285
    ],
    "region": 295,
-   "province_label": 4425,
+   "province_label": 4423,
    "province_color": [
     99,
     77,
@@ -23045,7 +23045,7 @@
     1268
    ],
    "region": 295,
-   "province_label": 4417,
+   "province_label": 4415,
    "province_color": [
     248,
     179,
@@ -23067,7 +23067,7 @@
     1173
    ],
    "region": 261,
-   "province_label": 3894,
+   "province_label": 3892,
    "province_color": [
     176,
     100,
@@ -23089,7 +23089,7 @@
     1191
    ],
    "region": 261,
-   "province_label": 3898,
+   "province_label": 3896,
    "province_color": [
     101,
     177,
@@ -23111,7 +23111,7 @@
     1167
    ],
    "region": 261,
-   "province_label": 3893,
+   "province_label": 3891,
    "province_color": [
     18,
     44,
@@ -23133,7 +23133,7 @@
     1194
    ],
    "region": 261,
-   "province_label": 3896,
+   "province_label": 3894,
    "province_color": [
     236,
     211,
@@ -23155,7 +23155,7 @@
     1215
    ],
    "region": 261,
-   "province_label": 3906,
+   "province_label": 3904,
    "province_color": [
     245,
     164,
@@ -23177,7 +23177,7 @@
     1231
    ],
    "region": 284,
-   "province_label": 4283,
+   "province_label": 4281,
    "province_color": [
     238,
     153,
@@ -23199,7 +23199,7 @@
     1224
    ],
    "region": 284,
-   "province_label": 4281,
+   "province_label": 4279,
    "province_color": [
     201,
     63,
@@ -23221,7 +23221,7 @@
     1249
    ],
    "region": 284,
-   "province_label": 4287,
+   "province_label": 4285,
    "province_color": [
     224,
     85,
@@ -23243,7 +23243,7 @@
     1241
    ],
    "region": 284,
-   "province_label": 4286,
+   "province_label": 4284,
    "province_color": [
     66,
     29,
@@ -23265,7 +23265,7 @@
     1214
    ],
    "region": 283,
-   "province_label": 4258,
+   "province_label": 4256,
    "province_color": [
     168,
     234,
@@ -23287,7 +23287,7 @@
     1263
    ],
    "region": 283,
-   "province_label": 4268,
+   "province_label": 4266,
    "province_color": [
     34,
     55,
@@ -23309,7 +23309,7 @@
     1210
    ],
    "region": 283,
-   "province_label": 4257,
+   "province_label": 4255,
    "province_color": [
     244,
     12,
@@ -23331,7 +23331,7 @@
     1248
    ],
    "region": 283,
-   "province_label": 4264,
+   "province_label": 4262,
    "province_color": [
     169,
     89,
@@ -23353,7 +23353,7 @@
     1273
    ],
    "region": 283,
-   "province_label": 4270,
+   "province_label": 4268,
    "province_color": [
     192,
     110,
@@ -23375,7 +23375,7 @@
     1159
    ],
    "region": 248,
-   "province_label": 3764,
+   "province_label": 3762,
    "province_color": [
     255,
     65,
@@ -23397,7 +23397,7 @@
     1156
    ],
    "region": 248,
-   "province_label": 3762,
+   "province_label": 3760,
    "province_color": [
     157,
     120,
@@ -23441,7 +23441,7 @@
     1152
    ],
    "region": 248,
-   "province_label": 3760,
+   "province_label": 3758,
    "province_color": [
     240,
     100,
@@ -23463,7 +23463,7 @@
     1181
    ],
    "region": 263,
-   "province_label": 3930,
+   "province_label": 3928,
    "province_color": [
     110,
     144,
@@ -23485,7 +23485,7 @@
     1181
    ],
    "region": 263,
-   "province_label": 3928,
+   "province_label": 3926,
    "province_color": [
     181,
     215,
@@ -23507,7 +23507,7 @@
     1237
    ],
    "region": 263,
-   "province_label": 3941,
+   "province_label": 3939,
    "province_color": [
     128,
     134,
@@ -23529,7 +23529,7 @@
     1204
    ],
    "region": 263,
-   "province_label": 3935,
+   "province_label": 3933,
    "province_color": [
     251,
     23,
@@ -23551,7 +23551,7 @@
     1382
    ],
    "region": 321,
-   "province_label": 4697,
+   "province_label": 4695,
    "province_color": [
     236,
     197,
@@ -23573,7 +23573,7 @@
     1356
    ],
    "region": 321,
-   "province_label": 4693,
+   "province_label": 4691,
    "province_color": [
     158,
     36,
@@ -23617,7 +23617,7 @@
     1392
    ],
    "region": 321,
-   "province_label": 4698,
+   "province_label": 4696,
    "province_color": [
     181,
     57,
@@ -23639,7 +23639,7 @@
     1434
    ],
    "region": 321,
-   "province_label": 4705,
+   "province_label": 4703,
    "province_color": [
     227,
     100,
@@ -23661,7 +23661,7 @@
     1517
    ],
    "region": 355,
-   "province_label": 5196,
+   "province_label": 5194,
    "province_color": [
     122,
     145,
@@ -23683,7 +23683,7 @@
     1523
    ],
    "region": 355,
-   "province_label": 5199,
+   "province_label": 5197,
    "province_color": [
     196,
     134,
@@ -23705,7 +23705,7 @@
     1501
    ],
    "region": 355,
-   "province_label": 5193,
+   "province_label": 5191,
    "province_color": [
     233,
     223,
@@ -23727,7 +23727,7 @@
     1475
    ],
    "region": 355,
-   "province_label": 5189,
+   "province_label": 5187,
    "province_color": [
     109,
     149,
@@ -23749,7 +23749,7 @@
     1474
    ],
    "region": 352,
-   "province_label": 5117,
+   "province_label": 5115,
    "province_color": [
     214,
     230,
@@ -23771,7 +23771,7 @@
     1450
    ],
    "region": 352,
-   "province_label": 5113,
+   "province_label": 5111,
    "province_color": [
     56,
     175,
@@ -23793,7 +23793,7 @@
     1465
    ],
    "region": 352,
-   "province_label": 5116,
+   "province_label": 5114,
    "province_color": [
     94,
     8,
@@ -23815,7 +23815,7 @@
     1493
    ],
    "region": 352,
-   "province_label": 5122,
+   "province_label": 5120,
    "province_color": [
     42,
     106,
@@ -23837,7 +23837,7 @@
     1496
    ],
    "region": 352,
-   "province_label": 5124,
+   "province_label": 5122,
    "province_color": [
     140,
     51,
@@ -23859,7 +23859,7 @@
     1574
    ],
    "region": 370,
-   "province_label": 5384,
+   "province_label": 5382,
    "province_color": [
     61,
     211,
@@ -23881,7 +23881,7 @@
     1556
    ],
    "region": 370,
-   "province_label": 5382,
+   "province_label": 5380,
    "province_color": [
     185,
     159,
@@ -23903,7 +23903,7 @@
     1549
    ],
    "region": 370,
-   "province_label": 5380,
+   "province_label": 5378,
    "province_color": [
     38,
     189,
@@ -23925,7 +23925,7 @@
     1552
    ],
    "region": 370,
-   "province_label": 5381,
+   "province_label": 5379,
    "province_color": [
     36,
     215,
@@ -23947,7 +23947,7 @@
     1547
    ],
    "region": 368,
-   "province_label": 5363,
+   "province_label": 5361,
    "province_color": [
     188,
     36,
@@ -23969,7 +23969,7 @@
     1580
    ],
    "region": 368,
-   "province_label": 5371,
+   "province_label": 5369,
    "province_color": [
     15,
     168,
@@ -23991,7 +23991,7 @@
     1574
    ],
    "region": 368,
-   "province_label": 5368,
+   "province_label": 5366,
    "province_color": [
     173,
     224,
@@ -24013,7 +24013,7 @@
     1551
    ],
    "region": 368,
-   "province_label": 5364,
+   "province_label": 5362,
    "province_color": [
     248,
     147,
@@ -24035,7 +24035,7 @@
     1436
    ],
    "region": 342,
-   "province_label": 5012,
+   "province_label": 5010,
    "province_color": [
     248,
     225,
@@ -24057,7 +24057,7 @@
     1426
    ],
    "region": 342,
-   "province_label": 5010,
+   "province_label": 5008,
    "province_color": [
     30,
     59,
@@ -24079,7 +24079,7 @@
     1461
    ],
    "region": 342,
-   "province_label": 5017,
+   "province_label": 5015,
    "province_color": [
     15,
     247,
@@ -24101,7 +24101,7 @@
     1497
    ],
    "region": 342,
-   "province_label": 5023,
+   "province_label": 5021,
    "province_color": [
     31,
     146,
@@ -24123,7 +24123,7 @@
     1625
    ],
    "region": 375,
-   "province_label": 5455,
+   "province_label": 5453,
    "province_color": [
     95,
     2,
@@ -24145,7 +24145,7 @@
     1670
    ],
    "region": 375,
-   "province_label": 5464,
+   "province_label": 5462,
    "province_color": [
     82,
     100,
@@ -24167,7 +24167,7 @@
     1643
    ],
    "region": 375,
-   "province_label": 5458,
+   "province_label": 5456,
    "province_color": [
     155,
     113,
@@ -24189,7 +24189,7 @@
     1597
    ],
    "region": 375,
-   "province_label": 5448,
+   "province_label": 5446,
    "province_color": [
     21,
     245,
@@ -24211,7 +24211,7 @@
     1629
    ],
    "region": 376,
-   "province_label": 5478,
+   "province_label": 5476,
    "province_color": [
     14,
     220,
@@ -24233,7 +24233,7 @@
     1650
    ],
    "region": 376,
-   "province_label": 5485,
+   "province_label": 5483,
    "province_color": [
     52,
     184,
@@ -24255,7 +24255,7 @@
     1599
    ],
    "region": 376,
-   "province_label": 5465,
+   "province_label": 5463,
    "province_color": [
     43,
     198,
@@ -24277,7 +24277,7 @@
     1615
    ],
    "region": 376,
-   "province_label": 5467,
+   "province_label": 5465,
    "province_color": [
     213,
     203,
@@ -24299,7 +24299,7 @@
     1626
    ],
    "region": 376,
-   "province_label": 5473,
+   "province_label": 5471,
    "province_color": [
     203,
     66,
@@ -24321,7 +24321,7 @@
     1657
    ],
    "region": 380,
-   "province_label": 5537,
+   "province_label": 5535,
    "province_color": [
     185,
     197,
@@ -24343,7 +24343,7 @@
     1632
    ],
    "region": 380,
-   "province_label": 5534,
+   "province_label": 5532,
    "province_color": [
     9,
     105,
@@ -24387,7 +24387,7 @@
     1612
    ],
    "region": 380,
-   "province_label": 5533,
+   "province_label": 5531,
    "province_color": [
     204,
     250,
@@ -24409,7 +24409,7 @@
     1705
    ],
    "region": 388,
-   "province_label": 5646,
+   "province_label": 5644,
    "province_color": [
     209,
     161,
@@ -24431,7 +24431,7 @@
     1700
    ],
    "region": 388,
-   "province_label": 5645,
+   "province_label": 5643,
    "province_color": [
     88,
     195,
@@ -24453,7 +24453,7 @@
     1677
    ],
    "region": 388,
-   "province_label": 5640,
+   "province_label": 5638,
    "province_color": [
     28,
     84,
@@ -24475,7 +24475,7 @@
     1690
    ],
    "region": 388,
-   "province_label": 5643,
+   "province_label": 5641,
    "province_color": [
     153,
     190,
@@ -24497,7 +24497,7 @@
     1683
    ],
    "region": 388,
-   "province_label": 5642,
+   "province_label": 5640,
    "province_color": [
     246,
     251,
@@ -24519,7 +24519,7 @@
     1643
    ],
    "region": 379,
-   "province_label": 5530,
+   "province_label": 5528,
    "province_color": [
     30,
     198,
@@ -24541,7 +24541,7 @@
     1649
    ],
    "region": 379,
-   "province_label": 5531,
+   "province_label": 5529,
    "province_color": [
     38,
     83,
@@ -24563,7 +24563,7 @@
     1612
    ],
    "region": 379,
-   "province_label": 5522,
+   "province_label": 5520,
    "province_color": [
     20,
     126,
@@ -24585,7 +24585,7 @@
     1624
    ],
    "region": 379,
-   "province_label": 5528,
+   "province_label": 5526,
    "province_color": [
     181,
     229,
@@ -24607,7 +24607,7 @@
     1623
    ],
    "region": 379,
-   "province_label": 5526,
+   "province_label": 5524,
    "province_color": [
     242,
     84,
@@ -24629,7 +24629,7 @@
     1699
    ],
    "region": 392,
-   "province_label": 5677,
+   "province_label": 5675,
    "province_color": [
     26,
     156,
@@ -24651,7 +24651,7 @@
     1713
    ],
    "region": 392,
-   "province_label": 5683,
+   "province_label": 5681,
    "province_color": [
     207,
     233,
@@ -24673,7 +24673,7 @@
     1726
    ],
    "region": 392,
-   "province_label": 5687,
+   "province_label": 5685,
    "province_color": [
     12,
     88,
@@ -24695,7 +24695,7 @@
     1718
    ],
    "region": 392,
-   "province_label": 5684,
+   "province_label": 5682,
    "province_color": [
     238,
     125,
@@ -24739,7 +24739,7 @@
     1690
    ],
    "region": 390,
-   "province_label": 5659,
+   "province_label": 5657,
    "province_color": [
     190,
     71,
@@ -24761,7 +24761,7 @@
     1690
    ],
    "region": 390,
-   "province_label": 5659,
+   "province_label": 5657,
    "province_color": [
     190,
     71,
@@ -24806,7 +24806,7 @@
     1698
    ],
    "region": 390,
-   "province_label": 5658,
+   "province_label": 5656,
    "province_color": [
     117,
     159,
@@ -24851,7 +24851,7 @@
     1660
    ],
    "region": 386,
-   "province_label": 5602,
+   "province_label": 5600,
    "province_color": [
     155,
     2,
@@ -24873,7 +24873,7 @@
     1659
    ],
    "region": 386,
-   "province_label": 5604,
+   "province_label": 5602,
    "province_color": [
     115,
     185,
@@ -24895,7 +24895,7 @@
     1671
    ],
    "region": 386,
-   "province_label": 5607,
+   "province_label": 5605,
    "province_color": [
     140,
     190,
@@ -24917,7 +24917,7 @@
     1640
    ],
    "region": 386,
-   "province_label": 5580,
+   "province_label": 5578,
    "province_color": [
     11,
     15,
@@ -24939,7 +24939,7 @@
     1686
    ],
    "region": 386,
-   "province_label": 5618,
+   "province_label": 5616,
    "province_color": [
     228,
     113,
@@ -24961,7 +24961,7 @@
     1624
    ],
    "region": 381,
-   "province_label": 5542,
+   "province_label": 5540,
    "province_color": [
     68,
     32,
@@ -24983,7 +24983,7 @@
     1667
    ],
    "region": 381,
-   "province_label": 5545,
+   "province_label": 5543,
    "province_color": [
     188,
     254,
@@ -25005,7 +25005,7 @@
     1641
    ],
    "region": 381,
-   "province_label": 5543,
+   "province_label": 5541,
    "province_color": [
     92,
     237,
@@ -25049,7 +25049,7 @@
     1620
    ],
    "region": 381,
-   "province_label": 5541,
+   "province_label": 5539,
    "province_color": [
     130,
     71,
@@ -25071,7 +25071,7 @@
     1465
    ],
    "region": 346,
-   "province_label": 5082,
+   "province_label": 5080,
    "province_color": [
     235,
     244,
@@ -25093,7 +25093,7 @@
     1509
    ],
    "region": 346,
-   "province_label": 5089,
+   "province_label": 5087,
    "province_color": [
     118,
     116,
@@ -25137,7 +25137,7 @@
     1478
    ],
    "region": 346,
-   "province_label": 5084,
+   "province_label": 5082,
    "province_color": [
     40,
     99,
@@ -25159,7 +25159,7 @@
     1512
    ],
    "region": 346,
-   "province_label": 5090,
+   "province_label": 5088,
    "province_color": [
     81,
     27,
@@ -25181,7 +25181,7 @@
     1164
    ],
    "region": 203,
-   "province_label": 3207,
+   "province_label": 3205,
    "province_color": [
     90,
     156,
@@ -25203,7 +25203,7 @@
     1131
    ],
    "region": 203,
-   "province_label": 3202,
+   "province_label": 3200,
    "province_color": [
     30,
     45,
@@ -25225,7 +25225,7 @@
     1108
    ],
    "region": 203,
-   "province_label": 3197,
+   "province_label": 3195,
    "province_color": [
     81,
     203,
@@ -25247,7 +25247,7 @@
     1073
    ],
    "region": 203,
-   "province_label": 3189,
+   "province_label": 3187,
    "province_color": [
     132,
     157,
@@ -25269,7 +25269,7 @@
     1053
    ],
    "region": 211,
-   "province_label": 3310,
+   "province_label": 3308,
    "province_color": [
     230,
     101,
@@ -25313,7 +25313,7 @@
     1053
    ],
    "region": 211,
-   "province_label": 3310,
+   "province_label": 3308,
    "province_color": [
     230,
     101,
@@ -25336,7 +25336,7 @@
     1053
    ],
    "region": 211,
-   "province_label": 3310,
+   "province_label": 3308,
    "province_color": [
     230,
     101,
@@ -25359,7 +25359,7 @@
     1121
    ],
    "region": 208,
-   "province_label": 3262,
+   "province_label": 3260,
    "province_color": [
     241,
     76,
@@ -25381,7 +25381,7 @@
     1078
    ],
    "region": 208,
-   "province_label": 3238,
+   "province_label": 3236,
    "province_color": [
     242,
     135,
@@ -25403,7 +25403,7 @@
     1110
    ],
    "region": 208,
-   "province_label": 3256,
+   "province_label": 3254,
    "province_color": [
     22,
     165,
@@ -25425,7 +25425,7 @@
     1205
    ],
    "region": 208,
-   "province_label": 3295,
+   "province_label": 3293,
    "province_color": [
     109,
     136,
@@ -25447,7 +25447,7 @@
     1044
    ],
    "region": 199,
-   "province_label": 3150,
+   "province_label": 3148,
    "province_color": [
     119,
     194,
@@ -25469,7 +25469,7 @@
     1063
    ],
    "region": 199,
-   "province_label": 3154,
+   "province_label": 3152,
    "province_color": [
     213,
     162,
@@ -25513,7 +25513,7 @@
     1064
    ],
    "region": 199,
-   "province_label": 3156,
+   "province_label": 3154,
    "province_color": [
     219,
     2,
@@ -25535,7 +25535,7 @@
     1100
    ],
    "region": 219,
-   "province_label": 3388,
+   "province_label": 3386,
    "province_color": [
     43,
     166,
@@ -25579,7 +25579,7 @@
     1114
    ],
    "region": 219,
-   "province_label": 3389,
+   "province_label": 3387,
    "province_color": [
     144,
     79,
@@ -25601,7 +25601,7 @@
     1080
    ],
    "region": 219,
-   "province_label": 3385,
+   "province_label": 3383,
    "province_color": [
     20,
     144,
@@ -25645,7 +25645,7 @@
     1211
    ],
    "region": 272,
-   "province_label": 4027,
+   "province_label": 4025,
    "province_color": [
     111,
     203,
@@ -25667,7 +25667,7 @@
     1215
    ],
    "region": 272,
-   "province_label": 4028,
+   "province_label": 4026,
    "province_color": [
     209,
     147,
@@ -25734,7 +25734,7 @@
     1166
    ],
    "region": 257,
-   "province_label": 3864,
+   "province_label": 3862,
    "province_color": [
     20,
     163,
@@ -25802,7 +25802,7 @@
     1252
    ],
    "region": 278,
-   "province_label": 4132,
+   "province_label": 4130,
    "province_color": [
     200,
     176,
@@ -25824,7 +25824,7 @@
     1220
    ],
    "region": 278,
-   "province_label": 4106,
+   "province_label": 4104,
    "province_color": [
     3,
     28,
@@ -25846,7 +25846,7 @@
     1255
    ],
    "region": 278,
-   "province_label": 4134,
+   "province_label": 4132,
    "province_color": [
     102,
     231,
@@ -25868,7 +25868,7 @@
     1227
    ],
    "region": 278,
-   "province_label": 4115,
+   "province_label": 4113,
    "province_color": [
     11,
     237,
@@ -25890,7 +25890,7 @@
     1189
    ],
    "region": 262,
-   "province_label": 3910,
+   "province_label": 3908,
    "province_color": [
     154,
     152,
@@ -25912,7 +25912,7 @@
     1236
    ],
    "region": 262,
-   "province_label": 3920,
+   "province_label": 3918,
    "province_color": [
     73,
     54,
@@ -25956,7 +25956,7 @@
     1232
    ],
    "region": 262,
-   "province_label": 3918,
+   "province_label": 3916,
    "province_color": [
     108,
     109,
@@ -25978,7 +25978,7 @@
     1296
    ],
    "region": 296,
-   "province_label": 4445,
+   "province_label": 4443,
    "province_color": [
     244,
     137,
@@ -26000,7 +26000,7 @@
     1327
    ],
    "region": 296,
-   "province_label": 4456,
+   "province_label": 4454,
    "province_color": [
     155,
     146,
@@ -26022,7 +26022,7 @@
     1266
    ],
    "region": 296,
-   "province_label": 4439,
+   "province_label": 4437,
    "province_color": [
     5,
     49,
@@ -26044,7 +26044,7 @@
     1304
    ],
    "region": 296,
-   "province_label": 4447,
+   "province_label": 4445,
    "province_color": [
     48,
     248,
@@ -26066,7 +26066,7 @@
     1363
    ],
    "region": 326,
-   "province_label": 4822,
+   "province_label": 4820,
    "province_color": [
     111,
     45,
@@ -26088,7 +26088,7 @@
     1391
    ],
    "region": 326,
-   "province_label": 4825,
+   "province_label": 4823,
    "province_color": [
     143,
     80,
@@ -26110,7 +26110,7 @@
     1408
    ],
    "region": 326,
-   "province_label": 4829,
+   "province_label": 4827,
    "province_color": [
     188,
     133,
@@ -26132,7 +26132,7 @@
     1385
    ],
    "region": 326,
-   "province_label": 4827,
+   "province_label": 4825,
    "province_color": [
     171,
     156,
@@ -26154,7 +26154,7 @@
     1471
    ],
    "region": 348,
-   "province_label": 5102,
+   "province_label": 5100,
    "province_color": [
     104,
     48,
@@ -26176,7 +26176,7 @@
     1453
    ],
    "region": 348,
-   "province_label": 5100,
+   "province_label": 5098,
    "province_color": [
     51,
     143,
@@ -26198,7 +26198,7 @@
     1471
    ],
    "region": 348,
-   "province_label": 5101,
+   "province_label": 5099,
    "province_color": [
     229,
     42,
@@ -26220,7 +26220,7 @@
     1471
    ],
    "region": 348,
-   "province_label": 5102,
+   "province_label": 5100,
    "province_color": [
     104,
     48,
@@ -26243,7 +26243,7 @@
     1395
    ],
    "region": 322,
-   "province_label": 4732,
+   "province_label": 4730,
    "province_color": [
     156,
     15,
@@ -26265,7 +26265,7 @@
     1408
    ],
    "region": 322,
-   "province_label": 4742,
+   "province_label": 4740,
    "province_color": [
     127,
     134,
@@ -26309,7 +26309,7 @@
     1368
    ],
    "region": 322,
-   "province_label": 4714,
+   "province_label": 4712,
    "province_color": [
     20,
     237,
@@ -26331,7 +26331,7 @@
     1466
    ],
    "region": 354,
-   "province_label": 5164,
+   "province_label": 5162,
    "province_color": [
     177,
     15,
@@ -26353,7 +26353,7 @@
     1484
    ],
    "region": 354,
-   "province_label": 5168,
+   "province_label": 5166,
    "province_color": [
     231,
     188,
@@ -26375,7 +26375,7 @@
     1479
    ],
    "region": 354,
-   "province_label": 5166,
+   "province_label": 5164,
    "province_color": [
     210,
     202,
@@ -26397,7 +26397,7 @@
     1490
    ],
    "region": 354,
-   "province_label": 5173,
+   "province_label": 5171,
    "province_color": [
     40,
     104,
@@ -26419,7 +26419,7 @@
     1536
    ],
    "region": 354,
-   "province_label": 5183,
+   "province_label": 5181,
    "province_color": [
     34,
     147,
@@ -26463,7 +26463,7 @@
     1344
    ],
    "region": 310,
-   "province_label": 4582,
+   "province_label": 4580,
    "province_color": [
     15,
     48,
@@ -26485,7 +26485,7 @@
     1322
    ],
    "region": 310,
-   "province_label": 4580,
+   "province_label": 4578,
    "province_color": [
     41,
     191,
@@ -26507,7 +26507,7 @@
     1321
    ],
    "region": 310,
-   "province_label": 4581,
+   "province_label": 4579,
    "province_color": [
     167,
     193,
@@ -26551,7 +26551,7 @@
     1357
    ],
    "region": 323,
-   "province_label": 4779,
+   "province_label": 4777,
    "province_color": [
     144,
     223,
@@ -26573,7 +26573,7 @@
     1388
    ],
    "region": 323,
-   "province_label": 4780,
+   "province_label": 4778,
    "province_color": [
     7,
     56,
@@ -26663,7 +26663,7 @@
     1405
    ],
    "region": 327,
-   "province_label": 4837,
+   "province_label": 4835,
    "province_color": [
     58,
     196,
@@ -26685,7 +26685,7 @@
     1417
    ],
    "region": 327,
-   "province_label": 4838,
+   "province_label": 4836,
    "province_color": [
     179,
     161,
@@ -26730,7 +26730,7 @@
     1454
    ],
    "region": 343,
-   "province_label": 5036,
+   "province_label": 5034,
    "province_color": [
     243,
     110,
@@ -26752,7 +26752,7 @@
     1483
    ],
    "region": 343,
-   "province_label": 5041,
+   "province_label": 5039,
    "province_color": [
     190,
     187,
@@ -26774,7 +26774,7 @@
     1465
    ],
    "region": 343,
-   "province_label": 5037,
+   "province_label": 5035,
    "province_color": [
     128,
     4,
@@ -26796,7 +26796,7 @@
     1466
    ],
    "region": 343,
-   "province_label": 5038,
+   "province_label": 5036,
    "province_color": [
     10,
     132,
@@ -26818,7 +26818,7 @@
     1454
    ],
    "region": 343,
-   "province_label": 5036,
+   "province_label": 5034,
    "province_color": [
     243,
     110,
@@ -26932,7 +26932,7 @@
     1246
    ],
    "region": 279,
-   "province_label": 4222,
+   "province_label": 4220,
    "province_color": [
     92,
     20,
@@ -26954,7 +26954,7 @@
     1207
    ],
    "region": 279,
-   "province_label": 4213,
+   "province_label": 4211,
    "province_color": [
     204,
     32,
@@ -26976,7 +26976,7 @@
     1223
    ],
    "region": 279,
-   "province_label": 4218,
+   "province_label": 4216,
    "province_color": [
     129,
     109,
@@ -26998,7 +26998,7 @@
     1227
    ],
    "region": 279,
-   "province_label": 4220,
+   "province_label": 4218,
    "province_color": [
     31,
     165,
@@ -27020,7 +27020,7 @@
     1199
    ],
    "region": 279,
-   "province_label": 4211,
+   "province_label": 4209,
    "province_color": [
     45,
     233,
@@ -27042,7 +27042,7 @@
     1197
    ],
    "region": 255,
-   "province_label": 3839,
+   "province_label": 3837,
    "province_color": [
     94,
     245,
@@ -27064,7 +27064,7 @@
     1157
    ],
    "region": 255,
-   "province_label": 3832,
+   "province_label": 3830,
    "province_color": [
     11,
     112,
@@ -27086,7 +27086,7 @@
     1166
    ],
    "region": 255,
-   "province_label": 3834,
+   "province_label": 3832,
    "province_color": [
     132,
     78,
@@ -27108,7 +27108,7 @@
     1177
    ],
    "region": 255,
-   "province_label": 3836,
+   "province_label": 3834,
    "province_color": [
     30,
     143,
@@ -27130,7 +27130,7 @@
     1146
    ],
    "region": 255,
-   "province_label": 3829,
+   "province_label": 3827,
    "province_color": [
     146,
     146,
@@ -27152,7 +27152,7 @@
     1174
    ],
    "region": 251,
-   "province_label": 3792,
+   "province_label": 3790,
    "province_color": [
     186,
     1,
@@ -27174,7 +27174,7 @@
     1140
    ],
    "region": 251,
-   "province_label": 3784,
+   "province_label": 3782,
    "province_color": [
     177,
     48,
@@ -27196,7 +27196,7 @@
     1158
    ],
    "region": 251,
-   "province_label": 3788,
+   "province_label": 3786,
    "province_color": [
     162,
     236,
@@ -27218,7 +27218,7 @@
     1128
    ],
    "region": 251,
-   "province_label": 3782,
+   "province_label": 3780,
    "province_color": [
     79,
     103,
@@ -27240,7 +27240,7 @@
     1255
    ],
    "region": 288,
-   "province_label": 4338,
+   "province_label": 4336,
    "province_color": [
     78,
     76,
@@ -27262,7 +27262,7 @@
     1285
    ],
    "region": 288,
-   "province_label": 4346,
+   "province_label": 4344,
    "province_color": [
     3,
     153,
@@ -27284,7 +27284,7 @@
     1306
    ],
    "region": 288,
-   "province_label": 4352,
+   "province_label": 4350,
    "province_color": [
     245,
     85,
@@ -27306,7 +27306,7 @@
     1263
    ],
    "region": 288,
-   "province_label": 4340,
+   "province_label": 4338,
    "province_color": [
     215,
     197,
@@ -27328,7 +27328,7 @@
     1323
    ],
    "region": 288,
-   "province_label": 4359,
+   "province_label": 4357,
    "province_color": [
     49,
     196,
@@ -27350,7 +27350,7 @@
     1238
    ],
    "region": 280,
-   "province_label": 4235,
+   "province_label": 4233,
    "province_color": [
     162,
     110,
@@ -27372,7 +27372,7 @@
     1221
    ],
    "region": 280,
-   "province_label": 4230,
+   "province_label": 4228,
    "province_color": [
     240,
     174,
@@ -27394,7 +27394,7 @@
     1293
    ],
    "region": 280,
-   "province_label": 4246,
+   "province_label": 4244,
    "province_color": [
     53,
     238,
@@ -27416,7 +27416,7 @@
     1329
    ],
    "region": 280,
-   "province_label": 4250,
+   "province_label": 4248,
    "province_color": [
     174,
     204,
@@ -27438,7 +27438,7 @@
     1245
    ],
    "region": 268,
-   "province_label": 3980,
+   "province_label": 3978,
    "province_color": [
     191,
     222,
@@ -27460,7 +27460,7 @@
     1240
    ],
    "region": 268,
-   "province_label": 3978,
+   "province_label": 3976,
    "province_color": [
     7,
     70,
@@ -27482,7 +27482,7 @@
     1203
    ],
    "region": 268,
-   "province_label": 3972,
+   "province_label": 3970,
    "province_color": [
     21,
     138,
@@ -27504,7 +27504,7 @@
     1283
    ],
    "region": 268,
-   "province_label": 3986,
+   "province_label": 3984,
    "province_color": [
     151,
     57,
@@ -27526,7 +27526,7 @@
     1146
    ],
    "region": 232,
-   "province_label": 3528,
+   "province_label": 3526,
    "province_color": [
     233,
     196,
@@ -27548,7 +27548,7 @@
     1096
    ],
    "region": 232,
-   "province_label": 3506,
+   "province_label": 3504,
    "province_color": [
     30,
     157,
@@ -27570,7 +27570,7 @@
     1135
    ],
    "region": 232,
-   "province_label": 3523,
+   "province_label": 3521,
    "province_color": [
     75,
     140,
@@ -27592,7 +27592,7 @@
     1147
    ],
    "region": 232,
-   "province_label": 3527,
+   "province_label": 3525,
    "province_color": [
     61,
     72,
@@ -27614,7 +27614,7 @@
     1089
    ],
    "region": 223,
-   "province_label": 3407,
+   "province_label": 3405,
    "province_color": [
     227,
     211,
@@ -27636,7 +27636,7 @@
     1080
    ],
    "region": 223,
-   "province_label": 3406,
+   "province_label": 3404,
    "province_color": [
     130,
     11,
@@ -27658,7 +27658,7 @@
     1111
    ],
    "region": 223,
-   "province_label": 3409,
+   "province_label": 3407,
    "province_color": [
     190,
     122,
@@ -27680,7 +27680,7 @@
     1139
    ],
    "region": 223,
-   "province_label": 3413,
+   "province_label": 3411,
    "province_color": [
     237,
     159,
@@ -27702,7 +27702,7 @@
     1073
    ],
    "region": 218,
-   "province_label": 3365,
+   "province_label": 3363,
    "province_color": [
     38,
     254,
@@ -27724,7 +27724,7 @@
     1108
    ],
    "region": 218,
-   "province_label": 3373,
+   "province_label": 3371,
    "province_color": [
     220,
     75,
@@ -27746,7 +27746,7 @@
     1109
    ],
    "region": 218,
-   "province_label": 3374,
+   "province_label": 3372,
    "province_color": [
     62,
     20,
@@ -27768,7 +27768,7 @@
     1129
    ],
    "region": 218,
-   "province_label": 3381,
+   "province_label": 3379,
    "province_color": [
     197,
     73,
@@ -27790,7 +27790,7 @@
     1139
    ],
    "region": 218,
-   "province_label": 3383,
+   "province_label": 3381,
    "province_color": [
     217,
     79,
@@ -27812,7 +27812,7 @@
     988
    ],
    "region": 167,
-   "province_label": 2892,
+   "province_label": 2890,
    "province_color": [
     253,
     76,
@@ -27834,7 +27834,7 @@
     1025
    ],
    "region": 167,
-   "province_label": 2897,
+   "province_label": 2895,
    "province_color": [
     178,
     153,
@@ -27856,7 +27856,7 @@
     947
    ],
    "region": 167,
-   "province_label": 2887,
+   "province_label": 2885,
    "province_color": [
     72,
     0,
@@ -27900,7 +27900,7 @@
     928
    ],
    "region": 167,
-   "province_label": 2886,
+   "province_label": 2884,
    "province_color": [
     219,
     21,
@@ -27922,7 +27922,7 @@
     1008
    ],
    "region": 166,
-   "province_label": 2816,
+   "province_label": 2814,
    "province_color": [
     65,
     67,
@@ -27944,7 +27944,7 @@
     933
    ],
    "region": 166,
-   "province_label": 2782,
+   "province_label": 2780,
    "province_color": [
     248,
     165,
@@ -27966,7 +27966,7 @@
     954
    ],
    "region": 166,
-   "province_label": 2790,
+   "province_label": 2788,
    "province_color": [
     134,
     71,
@@ -27988,7 +27988,7 @@
     1117
    ],
    "region": 166,
-   "province_label": 2880,
+   "province_label": 2878,
    "province_color": [
     63,
     46,
@@ -28010,7 +28010,7 @@
     884
    ],
    "region": 146,
-   "province_label": 2529,
+   "province_label": 2527,
    "province_color": [
     180,
     253,
@@ -28032,7 +28032,7 @@
     901
    ],
    "region": 146,
-   "province_label": 2533,
+   "province_label": 2531,
    "province_color": [
     22,
     198,
@@ -28054,7 +28054,7 @@
     906
    ],
    "region": 146,
-   "province_label": 2535,
+   "province_label": 2533,
    "province_color": [
     106,
     74,
@@ -28076,7 +28076,7 @@
     919
    ],
    "region": 146,
-   "province_label": 2538,
+   "province_label": 2536,
    "province_color": [
     33,
     237,
@@ -28098,7 +28098,7 @@
     875
    ],
    "region": 146,
-   "province_label": 2528,
+   "province_label": 2526,
    "province_color": [
     199,
     107,
@@ -28120,7 +28120,7 @@
     859
    ],
    "region": 133,
-   "province_label": 2424,
+   "province_label": 2422,
    "province_color": [
     138,
     252,
@@ -28142,7 +28142,7 @@
     854
    ],
    "region": 133,
-   "province_label": 2425,
+   "province_label": 2423,
    "province_color": [
     78,
     141,
@@ -28186,7 +28186,7 @@
     871
    ],
    "region": 133,
-   "province_label": 2426,
+   "province_label": 2424,
    "province_color": [
     176,
     86,
@@ -28208,7 +28208,7 @@
     859
    ],
    "region": 133,
-   "province_label": 2424,
+   "province_label": 2422,
    "province_color": [
     138,
     252,
@@ -28231,7 +28231,7 @@
     860
    ],
    "region": 142,
-   "province_label": 2501,
+   "province_label": 2499,
    "province_color": [
     177,
     34,
@@ -28253,7 +28253,7 @@
     877
    ],
    "region": 142,
-   "province_label": 2504,
+   "province_label": 2502,
    "province_color": [
     102,
     236,
@@ -28275,7 +28275,7 @@
     868
    ],
    "region": 142,
-   "province_label": 2503,
+   "province_label": 2501,
    "province_color": [
     163,
     91,
@@ -28297,7 +28297,7 @@
     880
    ],
    "region": 142,
-   "province_label": 2505,
+   "province_label": 2503,
    "province_color": [
     65,
     146,
@@ -28341,7 +28341,7 @@
     838
    ],
    "region": 119,
-   "province_label": 2334,
+   "province_label": 2332,
    "province_color": [
     214,
     124,
@@ -28363,7 +28363,7 @@
     836
    ],
    "region": 119,
-   "province_label": 2333,
+   "province_label": 2331,
    "province_color": [
     56,
     68,
@@ -28385,7 +28385,7 @@
     820
    ],
    "region": 119,
-   "province_label": 2329,
+   "province_label": 2327,
    "province_color": [
     93,
     158,
@@ -28407,7 +28407,7 @@
     790
    ],
    "region": 112,
-   "province_label": 2207,
+   "province_label": 2205,
    "province_color": [
     48,
     63,
@@ -28429,7 +28429,7 @@
     768
    ],
    "region": 112,
-   "province_label": 2203,
+   "province_label": 2201,
    "province_color": [
     85,
     152,
@@ -28451,7 +28451,7 @@
     774
    ],
    "region": 112,
-   "province_label": 2204,
+   "province_label": 2202,
    "province_color": [
     220,
     187,
@@ -28473,7 +28473,7 @@
     784
    ],
    "region": 112,
-   "province_label": 2205,
+   "province_label": 2203,
    "province_color": [
     146,
     7,
@@ -28495,7 +28495,7 @@
     783
    ],
    "region": 112,
-   "province_label": 2206,
+   "province_label": 2204,
    "province_color": [
     41,
     209,
@@ -28517,7 +28517,7 @@
     723
    ],
    "region": 79,
-   "province_label": 1767,
+   "province_label": 1765,
    "province_color": [
     64,
     231,
@@ -28539,7 +28539,7 @@
     700
    ],
    "region": 79,
-   "province_label": 1762,
+   "province_label": 1760,
    "province_color": [
     79,
     43,
@@ -28561,7 +28561,7 @@
     681
    ],
    "region": 79,
-   "province_label": 1758,
+   "province_label": 1756,
    "province_color": [
     56,
     22,
@@ -28583,7 +28583,7 @@
     758
    ],
    "region": 79,
-   "province_label": 1771,
+   "province_label": 1769,
    "province_color": [
     248,
     198,
@@ -28605,7 +28605,7 @@
     703
    ],
    "region": 79,
-   "province_label": 1763,
+   "province_label": 1761,
    "province_color": [
     177,
     80,
@@ -28627,7 +28627,7 @@
     767
    ],
    "region": 100,
-   "province_label": 2049,
+   "province_label": 2047,
    "province_color": [
     118,
     75,
@@ -28649,7 +28649,7 @@
     753
    ],
    "region": 100,
-   "province_label": 2040,
+   "province_label": 2038,
    "province_color": [
     244,
     156,
@@ -28671,7 +28671,7 @@
     734
    ],
    "region": 100,
-   "province_label": 2030,
+   "province_label": 2028,
    "province_color": [
     184,
     45,
@@ -28737,7 +28737,7 @@
     686
    ],
    "region": 80,
-   "province_label": 1784,
+   "province_label": 1782,
    "province_color": [
     15,
     94,
@@ -28759,7 +28759,7 @@
     694
    ],
    "region": 80,
-   "province_label": 1786,
+   "province_label": 1784,
    "province_color": [
     113,
     39,
@@ -28781,7 +28781,7 @@
     675
    ],
    "region": 80,
-   "province_label": 1781,
+   "province_label": 1779,
    "province_color": [
     115,
     217,
@@ -28893,7 +28893,7 @@
     624
    ],
    "region": 72,
-   "province_label": 1627,
+   "province_label": 1625,
    "province_color": [
     232,
     187,
@@ -28915,7 +28915,7 @@
     634
    ],
    "region": 72,
-   "province_label": 1631,
+   "province_label": 1629,
    "province_color": [
     14,
     21,
@@ -28937,7 +28937,7 @@
     640
    ],
    "region": 72,
-   "province_label": 1632,
+   "province_label": 1630,
    "province_color": [
     195,
     98,
@@ -28959,7 +28959,7 @@
     645
    ],
    "region": 72,
-   "province_label": 1633,
+   "province_label": 1631,
    "province_color": [
     74,
     132,
@@ -29003,7 +29003,7 @@
     611
    ],
    "region": 67,
-   "province_label": 1584,
+   "province_label": 1582,
    "province_color": [
     155,
     39,
@@ -29025,7 +29025,7 @@
     587
    ],
    "region": 67,
-   "province_label": 1582,
+   "province_label": 1580,
    "province_color": [
     64,
     22,
@@ -29070,7 +29070,7 @@
     664
    ],
    "region": 82,
-   "province_label": 1811,
+   "province_label": 1809,
    "province_color": [
     82,
     137,
@@ -29092,7 +29092,7 @@
     693
    ],
    "region": 82,
-   "province_label": 1817,
+   "province_label": 1815,
    "province_color": [
     42,
     171,
@@ -29114,7 +29114,7 @@
     704
    ],
    "region": 82,
-   "province_label": 1819,
+   "province_label": 1817,
    "province_color": [
     91,
     90,
@@ -29136,7 +29136,7 @@
     666
    ],
    "region": 82,
-   "province_label": 1812,
+   "province_label": 1810,
    "province_color": [
     180,
     193,
@@ -29158,7 +29158,7 @@
     861
    ],
    "region": 126,
-   "province_label": 2352,
+   "province_label": 2350,
    "province_color": [
     232,
     30,
@@ -29180,7 +29180,7 @@
     854
    ],
    "region": 126,
-   "province_label": 2350,
+   "province_label": 2348,
    "province_color": [
     96,
     252,
@@ -29202,7 +29202,7 @@
     820
    ],
    "region": 126,
-   "province_label": 2341,
+   "province_label": 2339,
    "province_color": [
     125,
     132,
@@ -29224,7 +29224,7 @@
     828
    ],
    "region": 126,
-   "province_label": 2344,
+   "province_label": 2342,
    "province_color": [
     28,
     136,
@@ -29246,7 +29246,7 @@
     783
    ],
    "region": 111,
-   "province_label": 2189,
+   "province_label": 2187,
    "province_color": [
     57,
     16,
@@ -29268,7 +29268,7 @@
     811
    ],
    "region": 111,
-   "province_label": 2196,
+   "province_label": 2194,
    "province_color": [
     238,
     93,
@@ -29290,7 +29290,7 @@
     815
    ],
    "region": 111,
-   "province_label": 2197,
+   "province_label": 2195,
    "province_color": [
     65,
     225,
@@ -29312,7 +29312,7 @@
     794
    ],
    "region": 111,
-   "province_label": 2193,
+   "province_label": 2191,
    "province_color": [
     177,
     238,
@@ -29356,7 +29356,7 @@
     818
    ],
    "region": 117,
-   "province_label": 2262,
+   "province_label": 2260,
    "province_color": [
     170,
     102,
@@ -29378,7 +29378,7 @@
     825
    ],
    "region": 117,
-   "province_label": 2263,
+   "province_label": 2261,
    "province_color": [
     230,
     213,
@@ -29400,7 +29400,7 @@
     811
    ],
    "region": 117,
-   "province_label": 2261,
+   "province_label": 2259,
    "province_color": [
     166,
     13,
@@ -29422,7 +29422,7 @@
     819
    ],
    "region": 115,
-   "province_label": 2247,
+   "province_label": 2245,
    "province_color": [
     152,
     195,
@@ -29444,7 +29444,7 @@
     804
    ],
    "region": 115,
-   "province_label": 2245,
+   "province_label": 2243,
    "province_color": [
     129,
     174,
@@ -29488,7 +29488,7 @@
     808
    ],
    "region": 115,
-   "province_label": 2246,
+   "province_label": 2244,
    "province_color": [
     250,
     140,
@@ -29510,7 +29510,7 @@
     846
    ],
    "region": 136,
-   "province_label": 2447,
+   "province_label": 2445,
    "province_color": [
     26,
     240,
@@ -29532,7 +29532,7 @@
     860
    ],
    "region": 136,
-   "province_label": 2453,
+   "province_label": 2451,
    "province_color": [
     147,
     206,
@@ -29576,7 +29576,7 @@
     844
    ],
    "region": 136,
-   "province_label": 2449,
+   "province_label": 2447,
    "province_color": [
     124,
     184,
@@ -29598,7 +29598,7 @@
     882
    ],
    "region": 138,
-   "province_label": 2478,
+   "province_label": 2476,
    "province_color": [
     24,
     219,
@@ -29620,7 +29620,7 @@
     880
    ],
    "region": 138,
-   "province_label": 2477,
+   "province_label": 2475,
    "province_color": [
     51,
     236,
@@ -29642,7 +29642,7 @@
     851
    ],
    "region": 138,
-   "province_label": 2470,
+   "province_label": 2468,
    "province_color": [
     118,
     103,
@@ -29664,7 +29664,7 @@
     863
    ],
    "region": 138,
-   "province_label": 2472,
+   "province_label": 2470,
    "province_color": [
     197,
     86,
@@ -29686,7 +29686,7 @@
     909
    ],
    "region": 151,
-   "province_label": 2677,
+   "province_label": 2675,
    "province_color": [
     137,
     101,
@@ -29708,7 +29708,7 @@
     895
    ],
    "region": 151,
-   "province_label": 2673,
+   "province_label": 2671,
    "province_color": [
     151,
     169,
@@ -29730,7 +29730,7 @@
     908
    ],
    "region": 151,
-   "province_label": 2676,
+   "province_label": 2674,
    "province_color": [
     66,
     159,
@@ -29752,7 +29752,7 @@
     923
    ],
    "region": 151,
-   "province_label": 2680,
+   "province_label": 2678,
    "province_color": [
     212,
     24,
@@ -29774,7 +29774,7 @@
     952
    ],
    "region": 170,
-   "province_label": 2915,
+   "province_label": 2913,
    "province_color": [
     234,
     97,
@@ -29796,7 +29796,7 @@
     1005
    ],
    "region": 170,
-   "province_label": 2920,
+   "province_label": 2918,
    "province_color": [
     237,
     191,
@@ -29818,7 +29818,7 @@
     985
    ],
    "region": 170,
-   "province_label": 2918,
+   "province_label": 2916,
    "province_color": [
     131,
     38,
@@ -29840,7 +29840,7 @@
     1048
    ],
    "region": 170,
-   "province_label": 2923,
+   "province_label": 2921,
    "province_color": [
     194,
     243,
@@ -29862,7 +29862,7 @@
     949
    ],
    "region": 147,
-   "province_label": 2579,
+   "province_label": 2577,
    "province_color": [
     213,
     129,
@@ -29884,7 +29884,7 @@
     1000
    ],
    "region": 147,
-   "province_label": 2618,
+   "province_label": 2616,
    "province_color": [
     234,
     157,
@@ -29906,7 +29906,7 @@
     879
    ],
    "region": 147,
-   "province_label": 2540,
+   "province_label": 2538,
    "province_color": [
     210,
     146,
@@ -29928,7 +29928,7 @@
     975
    ],
    "region": 147,
-   "province_label": 2601,
+   "province_label": 2599,
    "province_color": [
     32,
     224,
@@ -29950,7 +29950,7 @@
     979
    ],
    "region": 163,
-   "province_label": 2757,
+   "province_label": 2755,
    "province_color": [
     126,
     252,
@@ -29972,7 +29972,7 @@
     1002
    ],
    "region": 163,
-   "province_label": 2767,
+   "province_label": 2765,
    "province_color": [
     173,
     38,
@@ -29994,7 +29994,7 @@
     999
    ],
    "region": 163,
-   "province_label": 2762,
+   "province_label": 2760,
    "province_color": [
     112,
     183,
@@ -30016,7 +30016,7 @@
     956
    ],
    "region": 163,
-   "province_label": 2752,
+   "province_label": 2750,
    "province_color": [
     38,
     23,
@@ -30038,7 +30038,7 @@
     886
    ],
    "region": 144,
-   "province_label": 2520,
+   "province_label": 2518,
    "province_color": [
     201,
     193,
@@ -30060,7 +30060,7 @@
     892
    ],
    "region": 144,
-   "province_label": 2523,
+   "province_label": 2521,
    "province_color": [
     149,
     227,
@@ -30082,7 +30082,7 @@
     877
    ],
    "region": 144,
-   "province_label": 2518,
+   "province_label": 2516,
    "province_color": [
     103,
     184,
@@ -30104,7 +30104,7 @@
     904
    ],
    "region": 144,
-   "province_label": 2525,
+   "province_label": 2523,
    "province_color": [
     221,
     181,
@@ -30126,7 +30126,7 @@
     588
    ],
    "region": 61,
-   "province_label": 1494,
+   "province_label": 1492,
    "province_color": [
     245,
     183,
@@ -30148,7 +30148,7 @@
     621
    ],
    "region": 61,
-   "province_label": 1500,
+   "province_label": 1498,
    "province_color": [
     195,
     5,
@@ -30170,7 +30170,7 @@
     628
    ],
    "region": 61,
-   "province_label": 1498,
+   "province_label": 1496,
    "province_color": [
     156,
     191,
@@ -30192,7 +30192,7 @@
     667
    ],
    "region": 61,
-   "province_label": 1505,
+   "province_label": 1503,
    "province_color": [
     30,
     110,
@@ -30214,7 +30214,7 @@
     1445
    ],
    "region": 340,
-   "province_label": 5001,
+   "province_label": 4999,
    "province_color": [
     165,
     93,
@@ -30236,7 +30236,7 @@
     1445
    ],
    "region": 340,
-   "province_label": 5001,
+   "province_label": 4999,
    "province_color": [
     165,
     93,
@@ -30259,7 +30259,7 @@
     1467
    ],
    "region": 340,
-   "province_label": 5004,
+   "province_label": 5002,
    "province_color": [
     8,
     125,
@@ -30281,7 +30281,7 @@
     1445
    ],
    "region": 340,
-   "province_label": 5001,
+   "province_label": 4999,
    "province_color": [
     165,
     93,
@@ -30304,7 +30304,7 @@
     1456
    ],
    "region": 340,
-   "province_label": 5003,
+   "province_label": 5001,
    "province_color": [
     244,
     151,
@@ -30326,7 +30326,7 @@
     1437
    ],
    "region": 338,
-   "province_label": 4982,
+   "province_label": 4980,
    "province_color": [
     240,
     30,
@@ -30348,7 +30348,7 @@
     1465
    ],
    "region": 338,
-   "province_label": 4990,
+   "province_label": 4988,
    "province_color": [
     42,
     120,
@@ -30370,7 +30370,7 @@
     1410
    ],
    "region": 338,
-   "province_label": 4977,
+   "province_label": 4975,
    "province_color": [
     217,
     213,
@@ -30392,7 +30392,7 @@
     1427
    ],
    "region": 338,
-   "province_label": 4980,
+   "province_label": 4978,
    "province_color": [
     23,
     141,
@@ -30414,7 +30414,7 @@
     1483
    ],
    "region": 338,
-   "province_label": 4993,
+   "province_label": 4991,
    "province_color": [
     106,
     69,
@@ -30436,7 +30436,7 @@
     1390
    ],
    "region": 332,
-   "province_label": 4918,
+   "province_label": 4916,
    "province_color": [
     167,
     207,
@@ -30458,7 +30458,7 @@
     1415
    ],
    "region": 332,
-   "province_label": 4925,
+   "province_label": 4923,
    "province_color": [
     183,
     18,
@@ -30480,7 +30480,7 @@
     1433
    ],
    "region": 332,
-   "province_label": 4928,
+   "province_label": 4926,
    "province_color": [
     50,
     79,
@@ -30502,7 +30502,7 @@
     1436
    ],
    "region": 332,
-   "province_label": 4929,
+   "province_label": 4927,
    "province_color": [
     208,
     134,
@@ -30524,7 +30524,7 @@
     1418
    ],
    "region": 332,
-   "province_label": 4926,
+   "province_label": 4924,
    "province_color": [
     4,
     36,
@@ -30546,7 +30546,7 @@
     1347
    ],
    "region": 324,
-   "province_label": 4784,
+   "province_label": 4782,
    "province_color": [
     74,
     48,
@@ -30568,7 +30568,7 @@
     1374
    ],
    "region": 324,
-   "province_label": 4790,
+   "province_label": 4788,
    "province_color": [
     22,
     147,
@@ -30590,7 +30590,7 @@
     1377
    ],
    "region": 324,
-   "province_label": 4793,
+   "province_label": 4791,
    "province_color": [
     54,
     121,
@@ -30612,7 +30612,7 @@
     1376
    ],
    "region": 324,
-   "province_label": 4792,
+   "province_label": 4790,
    "province_color": [
     165,
     112,
@@ -30634,7 +30634,7 @@
     1346
    ],
    "region": 324,
-   "province_label": 4785,
+   "province_label": 4783,
    "province_color": [
     232,
     104,
@@ -30656,7 +30656,7 @@
     1315
    ],
    "region": 302,
-   "province_label": 4520,
+   "province_label": 4518,
    "province_color": [
     181,
     25,
@@ -30678,7 +30678,7 @@
     1339
    ],
    "region": 302,
-   "province_label": 4525,
+   "province_label": 4523,
    "province_color": [
     241,
     136,
@@ -30722,7 +30722,7 @@
     1331
    ],
    "region": 302,
-   "province_label": 4524,
+   "province_label": 4522,
    "province_color": [
     143,
     191,
@@ -30744,7 +30744,7 @@
     1366
    ],
    "region": 302,
-   "province_label": 4529,
+   "province_label": 4527,
    "province_color": [
     37,
     163,
@@ -30766,7 +30766,7 @@
     2067
    ],
    "region": 401,
-   "province_label": 6238,
+   "province_label": 6236,
    "province_color": [
     32,
     140,
@@ -30810,7 +30810,7 @@
     2063
    ],
    "region": 401,
-   "province_label": 6235,
+   "province_label": 6233,
    "province_color": [
     244,
     211,
@@ -30832,7 +30832,7 @@
     2117
    ],
    "region": 401,
-   "province_label": 6262,
+   "province_label": 6260,
    "province_color": [
     64,
     115,
@@ -30854,7 +30854,7 @@
     2120
    ],
    "region": 401,
-   "province_label": 6263,
+   "province_label": 6261,
    "province_color": [
     37,
     5,
@@ -30876,7 +30876,7 @@
     2069
    ],
    "region": 404,
-   "province_label": 6302,
+   "province_label": 6300,
    "province_color": [
     35,
     234,
@@ -30898,7 +30898,7 @@
     2067
    ],
    "region": 404,
-   "province_label": 6301,
+   "province_label": 6299,
    "province_color": [
     12,
     213,
@@ -30920,7 +30920,7 @@
     2164
    ],
    "region": 404,
-   "province_label": 6384,
+   "province_label": 6382,
    "province_color": [
     94,
     68,
@@ -30942,7 +30942,7 @@
     2031
    ],
    "region": 404,
-   "province_label": 6280,
+   "province_label": 6278,
    "province_color": [
     193,
     216,
@@ -30964,7 +30964,7 @@
     2119
    ],
    "region": 404,
-   "province_label": 6349,
+   "province_label": 6347,
    "province_color": [
     16,
     51,
@@ -30986,7 +30986,7 @@
     1992
    ],
    "region": 398,
-   "province_label": 5919,
+   "province_label": 5917,
    "province_color": [
     32,
     15,
@@ -31030,7 +31030,7 @@
     1885
    ],
    "region": 398,
-   "province_label": 5821,
+   "province_label": 5819,
    "province_color": [
     164,
     159,
@@ -31052,7 +31052,7 @@
     1888
    ],
    "region": 398,
-   "province_label": 5822,
+   "province_label": 5820,
    "province_color": [
     15,
     57,
@@ -31074,7 +31074,7 @@
     1914
    ],
    "region": 398,
-   "province_label": 5834,
+   "province_label": 5832,
    "province_color": [
     159,
     44,
@@ -31118,7 +31118,7 @@
     3026
    ],
    "region": 459,
-   "province_label": 9658,
+   "province_label": 9656,
    "province_color": [
     166,
     180,
@@ -31140,7 +31140,7 @@
     3000
    ],
    "region": 459,
-   "province_label": 9655,
+   "province_label": 9653,
    "province_color": [
     241,
     103,
@@ -31162,7 +31162,7 @@
     3006
    ],
    "region": 459,
-   "province_label": 9656,
+   "province_label": 9654,
    "province_color": [
     45,
     214,
@@ -31184,7 +31184,7 @@
     2989
    ],
    "region": 459,
-   "province_label": 9654,
+   "province_label": 9652,
    "province_color": [
     11,
     42,
@@ -31206,7 +31206,7 @@
     3054
    ],
    "region": 465,
-   "province_label": 9725,
+   "province_label": 9723,
    "province_color": [
     52,
     165,
@@ -31228,7 +31228,7 @@
     3043
    ],
    "region": 465,
-   "province_label": 9724,
+   "province_label": 9722,
    "province_color": [
     150,
     110,
@@ -31250,7 +31250,7 @@
     3069
    ],
    "region": 465,
-   "province_label": 9728,
+   "province_label": 9726,
    "province_color": [
     233,
     242,
@@ -31272,7 +31272,7 @@
     3060
    ],
    "region": 465,
-   "province_label": 9726,
+   "province_label": 9724,
    "province_color": [
     164,
     229,
@@ -31294,7 +31294,7 @@
     3080
    ],
    "region": 465,
-   "province_label": 9729,
+   "province_label": 9727,
    "province_color": [
     38,
     97,
@@ -31316,7 +31316,7 @@
     2386
    ],
    "region": 430,
-   "province_label": 7823,
+   "province_label": 7821,
    "province_color": [
     217,
     9,
@@ -31338,7 +31338,7 @@
     2360
    ],
    "region": 430,
-   "province_label": 7816,
+   "province_label": 7814,
    "province_color": [
     205,
     114,
@@ -31360,7 +31360,7 @@
     2421
    ],
    "region": 430,
-   "province_label": 7835,
+   "province_label": 7833,
    "province_color": [
     7,
     52,
@@ -31382,7 +31382,7 @@
     2437
    ],
    "region": 430,
-   "province_label": 7840,
+   "province_label": 7838,
    "province_color": [
     234,
     74,
@@ -31404,7 +31404,7 @@
     2394
    ],
    "region": 430,
-   "province_label": 7824,
+   "province_label": 7822,
    "province_color": [
     132,
     254,
@@ -31426,7 +31426,7 @@
     2626
    ],
    "region": 438,
-   "province_label": 8527,
+   "province_label": 8525,
    "province_color": [
     131,
     112,
@@ -31470,7 +31470,7 @@
     2659
    ],
    "region": 438,
-   "province_label": 8538,
+   "province_label": 8536,
    "province_color": [
     125,
     252,
@@ -31492,7 +31492,7 @@
     2561
    ],
    "region": 438,
-   "province_label": 8513,
+   "province_label": 8511,
    "province_color": [
     62,
     47,
@@ -31514,7 +31514,7 @@
     2673
    ],
    "region": 438,
-   "province_label": 8540,
+   "province_label": 8538,
    "province_color": [
     203,
     15,
@@ -31558,7 +31558,7 @@
     2716
    ],
    "region": 447,
-   "province_label": 9044,
+   "province_label": 9042,
    "province_color": [
     157,
     227,
@@ -31580,7 +31580,7 @@
     2731
    ],
    "region": 447,
-   "province_label": 9046,
+   "province_label": 9044,
    "province_color": [
     218,
     82,
@@ -31602,7 +31602,7 @@
     2718
    ],
    "region": 447,
-   "province_label": 9045,
+   "province_label": 9043,
    "province_color": [
     120,
     137,
@@ -31624,7 +31624,7 @@
     2698
    ],
    "region": 447,
-   "province_label": 9041,
+   "province_label": 9039,
    "province_color": [
     239,
     152,
@@ -31646,7 +31646,7 @@
     2395
    ],
    "region": 423,
-   "province_label": 7527,
+   "province_label": 7525,
    "province_color": [
     3,
     213,
@@ -31690,7 +31690,7 @@
     2385
    ],
    "region": 423,
-   "province_label": 7525,
+   "province_label": 7523,
    "province_color": [
     37,
     112,
@@ -31712,7 +31712,7 @@
     2461
    ],
    "region": 423,
-   "province_label": 7538,
+   "province_label": 7536,
    "province_color": [
     12,
     167,
@@ -31734,7 +31734,7 @@
     2334
    ],
    "region": 423,
-   "province_label": 7516,
+   "province_label": 7514,
    "province_color": [
     55,
     115,
@@ -31756,7 +31756,7 @@
     1845
    ],
    "region": 397,
-   "province_label": 5800,
+   "province_label": 5798,
    "province_color": [
     16,
     209,
@@ -31778,7 +31778,7 @@
     1872
    ],
    "region": 397,
-   "province_label": 5805,
+   "province_label": 5803,
    "province_color": [
     63,
     190,
@@ -31800,7 +31800,7 @@
     1857
    ],
    "region": 397,
-   "province_label": 5803,
+   "province_label": 5801,
    "province_color": [
     237,
     233,
@@ -31822,7 +31822,7 @@
     1834
    ],
    "region": 397,
-   "province_label": 5798,
+   "province_label": 5796,
    "province_color": [
     114,
     153,
@@ -31866,7 +31866,7 @@
     2014
    ],
    "region": 400,
-   "province_label": 6044,
+   "province_label": 6042,
    "province_color": [
     4,
     208,
@@ -31910,7 +31910,7 @@
     1994
    ],
    "region": 400,
-   "province_label": 6037,
+   "province_label": 6035,
    "province_color": [
     135,
     42,
@@ -31932,7 +31932,7 @@
     2076
    ],
    "region": 400,
-   "province_label": 6062,
+   "province_label": 6060,
    "province_color": [
     134,
     127,
@@ -31954,7 +31954,7 @@
     1960
    ],
    "region": 400,
-   "province_label": 6024,
+   "province_label": 6022,
    "province_color": [
     56,
     110,
@@ -31976,7 +31976,7 @@
     1848
    ],
    "region": 395,
-   "province_label": 5743,
+   "province_label": 5741,
    "province_color": [
     54,
     167,
@@ -31998,7 +31998,7 @@
     1835
    ],
    "region": 395,
-   "province_label": 5739,
+   "province_label": 5737,
    "province_color": [
     212,
     223,
@@ -32020,7 +32020,7 @@
     1924
    ],
    "region": 395,
-   "province_label": 5774,
+   "province_label": 5772,
    "province_color": [
     34,
     240,
@@ -32042,7 +32042,7 @@
     1796
    ],
    "region": 395,
-   "province_label": 5719,
+   "province_label": 5717,
    "province_color": [
     124,
     147,
@@ -32086,7 +32086,7 @@
     1922
    ],
    "region": 399,
-   "province_label": 5985,
+   "province_label": 5983,
    "province_color": [
     76,
     37,
@@ -32108,7 +32108,7 @@
     1905
    ],
    "region": 399,
-   "province_label": 5982,
+   "province_label": 5980,
    "province_color": [
     91,
     20,
@@ -32130,7 +32130,7 @@
     1972
    ],
    "region": 399,
-   "province_label": 6004,
+   "province_label": 6002,
    "province_color": [
     243,
     45,
@@ -32152,7 +32152,7 @@
     1952
    ],
    "region": 399,
-   "province_label": 5998,
+   "province_label": 5996,
    "province_color": [
     61,
     225,
@@ -32174,7 +32174,7 @@
     1986
    ],
    "region": 399,
-   "province_label": 6008,
+   "province_label": 6006,
    "province_color": [
     205,
     212,
@@ -32196,7 +32196,7 @@
     2021
    ],
    "region": 402,
-   "province_label": 6086,
+   "province_label": 6084,
    "province_color": [
     212,
     149,
@@ -32218,7 +32218,7 @@
     2068
    ],
    "region": 402,
-   "province_label": 6092,
+   "province_label": 6090,
    "province_color": [
     103,
     193,
@@ -32240,7 +32240,7 @@
     2032
    ],
    "region": 402,
-   "province_label": 6088,
+   "province_label": 6086,
    "province_color": [
     36,
     182,
@@ -32262,7 +32262,7 @@
     2044
    ],
    "region": 402,
-   "province_label": 6089,
+   "province_label": 6087,
    "province_color": [
     97,
     37,
@@ -32306,7 +32306,7 @@
     1784
    ],
    "region": 393,
-   "province_label": 5696,
+   "province_label": 5694,
    "province_color": [
     198,
     233,
@@ -32328,7 +32328,7 @@
     1760
    ],
    "region": 393,
-   "province_label": 9743,
+   "province_label": 9741,
    "province_color": [
     101,
     237,
@@ -32350,7 +32350,7 @@
     1757
    ],
    "region": 393,
-   "province_label": 5690,
+   "province_label": 5688,
    "province_color": [
     199,
     181,
@@ -32372,7 +32372,7 @@
     1782
    ],
    "region": 393,
-   "province_label": 9744,
+   "province_label": 9742,
    "province_color": [
     190,
     19,
@@ -32394,7 +32394,7 @@
     2135
    ],
    "region": 403,
-   "province_label": 6176,
+   "province_label": 6174,
    "province_color": [
     141,
     59,
@@ -32438,7 +32438,7 @@
     2067
    ],
    "region": 403,
-   "province_label": 6128,
+   "province_label": 6126,
    "province_color": [
     77,
     110,
@@ -32460,7 +32460,7 @@
     2177
    ],
    "region": 403,
-   "province_label": 6203,
+   "province_label": 6201,
    "province_color": [
     188,
     128,
@@ -32482,7 +32482,7 @@
     2258
    ],
    "region": 416,
-   "province_label": 7054,
+   "province_label": 7052,
    "province_color": [
     2,
     233,
@@ -32504,7 +32504,7 @@
     2214
    ],
    "region": 416,
-   "province_label": 7013,
+   "province_label": 7011,
    "province_color": [
     136,
     4,
@@ -32526,7 +32526,7 @@
     2212
    ],
    "region": 416,
-   "province_label": 7012,
+   "province_label": 7010,
    "province_color": [
     218,
     49,
@@ -32548,7 +32548,7 @@
     2226
    ],
    "region": 416,
-   "province_label": 7027,
+   "province_label": 7025,
    "province_color": [
     31,
     113,
@@ -32570,7 +32570,7 @@
     2181
    ],
    "region": 413,
-   "province_label": 6830,
+   "province_label": 6828,
    "province_color": [
     92,
     172,
@@ -32592,7 +32592,7 @@
     2115
    ],
    "region": 413,
-   "province_label": 6795,
+   "province_label": 6793,
    "province_color": [
     0,
     87,
@@ -32614,7 +32614,7 @@
     2230
    ],
    "region": 413,
-   "province_label": 6855,
+   "province_label": 6853,
    "province_color": [
     185,
     2,
@@ -32636,7 +32636,7 @@
     2188
    ],
    "region": 413,
-   "province_label": 6831,
+   "province_label": 6829,
    "province_color": [
     115,
     194,
@@ -32658,7 +32658,7 @@
     2246
    ],
    "region": 413,
-   "province_label": 6860,
+   "province_label": 6858,
    "province_color": [
     245,
     113,
@@ -32680,7 +32680,7 @@
     2470
    ],
    "region": 432,
-   "province_label": 8053,
+   "province_label": 8051,
    "province_color": [
     168,
     215,
@@ -32702,7 +32702,7 @@
     2471
    ],
    "region": 432,
-   "province_label": 8055,
+   "province_label": 8053,
    "province_color": [
     215,
     141,
@@ -32724,7 +32724,7 @@
     2400
    ],
    "region": 432,
-   "province_label": 8034,
+   "province_label": 8032,
    "province_color": [
     1,
     206,
@@ -32746,7 +32746,7 @@
     2528
    ],
    "region": 432,
-   "province_label": 8068,
+   "province_label": 8066,
    "province_color": [
     215,
     2,
@@ -32768,7 +32768,7 @@
     2454
    ],
    "region": 432,
-   "province_label": 8048,
+   "province_label": 8046,
    "province_color": [
     255,
     74,
@@ -32790,7 +32790,7 @@
     2481
    ],
    "region": 424,
-   "province_label": 7616,
+   "province_label": 7614,
    "province_color": [
     246,
     107,
@@ -32834,7 +32834,7 @@
     2351
    ],
    "region": 424,
-   "province_label": 7553,
+   "province_label": 7551,
    "province_color": [
     196,
     226,
@@ -32856,7 +32856,7 @@
     2422
    ],
    "region": 424,
-   "province_label": 7582,
+   "province_label": 7580,
    "province_color": [
     93,
     167,
@@ -32878,7 +32878,7 @@
     2520
    ],
    "region": 431,
-   "province_label": 7936,
+   "province_label": 7934,
    "province_color": [
     185,
     48,
@@ -32922,7 +32922,7 @@
     2415
    ],
    "region": 431,
-   "province_label": 7852,
+   "province_label": 7850,
    "province_color": [
     122,
     61,
@@ -32944,7 +32944,7 @@
     2439
    ],
    "region": 431,
-   "province_label": 7869,
+   "province_label": 7867,
    "province_color": [
     75,
     56,
@@ -32966,7 +32966,7 @@
     2555
    ],
    "region": 434,
-   "province_label": 8212,
+   "province_label": 8210,
    "province_color": [
     164,
     173,
@@ -33010,7 +33010,7 @@
     2539
    ],
    "region": 434,
-   "province_label": 8207,
+   "province_label": 8205,
    "province_color": [
     64,
     142,
@@ -33032,7 +33032,7 @@
     2597
    ],
    "region": 434,
-   "province_label": 8223,
+   "province_label": 8221,
    "province_color": [
     248,
     49,
@@ -33076,7 +33076,7 @@
     2619
    ],
    "region": 441,
-   "province_label": 8606,
+   "province_label": 8604,
    "province_color": [
     74,
     234,
@@ -33098,7 +33098,7 @@
     2603
    ],
    "region": 441,
-   "province_label": 8605,
+   "province_label": 8603,
    "province_color": [
     255,
     250,
@@ -33120,7 +33120,7 @@
     2600
    ],
    "region": 441,
-   "province_label": 8604,
+   "province_label": 8602,
    "province_color": [
     150,
     105,
@@ -33142,7 +33142,7 @@
     2642
    ],
    "region": 442,
-   "province_label": 8615,
+   "province_label": 8613,
    "province_color": [
     97,
     255,
@@ -33164,7 +33164,7 @@
     2721
    ],
    "region": 442,
-   "province_label": 8628,
+   "province_label": 8626,
    "province_color": [
     83,
     187,
@@ -33186,7 +33186,7 @@
     2622
    ],
    "region": 442,
-   "province_label": 8611,
+   "province_label": 8609,
    "province_color": [
     233,
     33,
@@ -33208,7 +33208,7 @@
     2680
    ],
    "region": 442,
-   "province_label": 8624,
+   "province_label": 8622,
    "province_color": [
     218,
     221,
@@ -33230,7 +33230,7 @@
     2729
    ],
    "region": 445,
-   "province_label": 8850,
+   "province_label": 8848,
    "province_color": [
     166,
     115,
@@ -33252,7 +33252,7 @@
     2786
    ],
    "region": 445,
-   "province_label": 8900,
+   "province_label": 8898,
    "province_color": [
     72,
     9,
@@ -33274,7 +33274,7 @@
     2641
    ],
    "region": 445,
-   "province_label": 8802,
+   "province_label": 8800,
    "province_color": [
     223,
     132,
@@ -33296,7 +33296,7 @@
     2712
    ],
    "region": 445,
-   "province_label": 8839,
+   "province_label": 8837,
    "province_color": [
     88,
     191,
@@ -33318,7 +33318,7 @@
     2734
    ],
    "region": 445,
-   "province_label": 8859,
+   "province_label": 8857,
    "province_color": [
     54,
     102,
@@ -33362,7 +33362,7 @@
     2924
    ],
    "region": 453,
-   "province_label": 9291,
+   "province_label": 9289,
    "province_color": [
     172,
     99,
@@ -33384,7 +33384,7 @@
     2851
    ],
    "region": 453,
-   "province_label": 9261,
+   "province_label": 9259,
    "province_color": [
     182,
     93,
@@ -33406,7 +33406,7 @@
     2865
    ],
    "region": 453,
-   "province_label": 9268,
+   "province_label": 9266,
    "province_color": [
     224,
     1,
@@ -33428,7 +33428,7 @@
     2893
    ],
    "region": 453,
-   "province_label": 9286,
+   "province_label": 9284,
    "province_color": [
     209,
     189,
@@ -33450,7 +33450,7 @@
     2949
    ],
    "region": 457,
-   "province_label": 9472,
+   "province_label": 9470,
    "province_color": [
     4,
     143,
@@ -33472,7 +33472,7 @@
     3018
    ],
    "region": 457,
-   "province_label": 9508,
+   "province_label": 9506,
    "province_color": [
     240,
     215,
@@ -33494,7 +33494,7 @@
     2878
    ],
    "region": 457,
-   "province_label": 9407,
+   "province_label": 9405,
    "province_color": [
     88,
     237,
@@ -33516,7 +33516,7 @@
     2963
    ],
    "region": 457,
-   "province_label": 9487,
+   "province_label": 9485,
    "province_color": [
     142,
     238,
@@ -33538,7 +33538,7 @@
     2877
    ],
    "region": 457,
-   "province_label": 9401,
+   "province_label": 9399,
    "province_color": [
     113,
     61,
@@ -33582,7 +33582,7 @@
     2859
    ],
    "region": 456,
-   "province_label": 9388,
+   "province_label": 9386,
    "province_color": [
     43,
     253,
@@ -33604,7 +33604,7 @@
     2854
    ],
    "region": 456,
-   "province_label": 9387,
+   "province_label": 9385,
    "province_color": [
     46,
     37,
@@ -33626,7 +33626,7 @@
     2831
    ],
    "region": 456,
-   "province_label": 9386,
+   "province_label": 9384,
    "province_color": [
     28,
     126,
@@ -33648,7 +33648,7 @@
     2709
    ],
    "region": 444,
-   "province_label": 8755,
+   "province_label": 8753,
    "province_color": [
     61,
     238,
@@ -33670,7 +33670,7 @@
     2630
    ],
    "region": 444,
-   "province_label": 8694,
+   "province_label": 8692,
    "province_color": [
     72,
     213,
@@ -33692,7 +33692,7 @@
     2711
    ],
    "region": 444,
-   "province_label": 8759,
+   "province_label": 8757,
    "province_color": [
     168,
     229,
@@ -33714,7 +33714,7 @@
     2796
    ],
    "region": 444,
-   "province_label": 8796,
+   "province_label": 8794,
    "province_color": [
     200,
     111,
@@ -33758,7 +33758,7 @@
     2839
    ],
    "region": 448,
-   "province_label": 9095,
+   "province_label": 9093,
    "province_color": [
     62,
     108,
@@ -33780,7 +33780,7 @@
     2791
    ],
    "region": 448,
-   "province_label": 9076,
+   "province_label": 9074,
    "province_color": [
     207,
     135,
@@ -33802,7 +33802,7 @@
     2767
    ],
    "region": 448,
-   "province_label": 9066,
+   "province_label": 9064,
    "province_color": [
     67,
     223,
@@ -33824,7 +33824,7 @@
     2550
    ],
    "region": 437,
-   "province_label": 8449,
+   "province_label": 8447,
    "province_color": [
     220,
     242,
@@ -33846,7 +33846,7 @@
     2554
    ],
    "region": 437,
-   "province_label": 8452,
+   "province_label": 8450,
    "province_color": [
     244,
     7,
@@ -33868,7 +33868,7 @@
     2637
    ],
    "region": 437,
-   "province_label": 8502,
+   "province_label": 8500,
    "province_color": [
     247,
     101,
@@ -33890,7 +33890,7 @@
     2553
    ],
    "region": 437,
-   "province_label": 8451,
+   "province_label": 8449,
    "province_color": [
     59,
     27,
@@ -33912,7 +33912,7 @@
     2674
    ],
    "region": 443,
-   "province_label": 8666,
+   "province_label": 8664,
    "province_color": [
     236,
     127,
@@ -33934,7 +33934,7 @@
     2671
    ],
    "region": 443,
-   "province_label": 8661,
+   "province_label": 8659,
    "province_color": [
     40,
     238,
@@ -33956,7 +33956,7 @@
     2676
    ],
    "region": 443,
-   "province_label": 8664,
+   "province_label": 8662,
    "province_color": [
     17,
     217,
@@ -33978,7 +33978,7 @@
     2756
    ],
    "region": 443,
-   "province_label": 8693,
+   "province_label": 8691,
    "province_color": [
     110,
     46,
@@ -34000,7 +34000,7 @@
     2616
    ],
    "region": 443,
-   "province_label": 8641,
+   "province_label": 8639,
    "province_color": [
     204,
     153,
@@ -34022,7 +34022,7 @@
     2753
    ],
    "region": 446,
-   "province_label": 8939,
+   "province_label": 8937,
    "province_color": [
     187,
     115,
@@ -34044,7 +34044,7 @@
     2797
    ],
    "region": 446,
-   "province_label": 8970,
+   "province_label": 8968,
    "province_color": [
     167,
     188,
@@ -34066,7 +34066,7 @@
     2701
    ],
    "region": 446,
-   "province_label": 8916,
+   "province_label": 8914,
    "province_color": [
     118,
     51,
@@ -34088,7 +34088,7 @@
     2779
    ],
    "region": 446,
-   "province_label": 8956,
+   "province_label": 8954,
    "province_color": [
     98,
     124,
@@ -34110,7 +34110,7 @@
     2880
    ],
    "region": 446,
-   "province_label": 9022,
+   "province_label": 9020,
    "province_color": [
     198,
     182,
@@ -34132,7 +34132,7 @@
     2928
    ],
    "region": 455,
-   "province_label": 9377,
+   "province_label": 9375,
    "province_color": [
     193,
     100,
@@ -34154,7 +34154,7 @@
     2845
    ],
    "region": 455,
-   "province_label": 9362,
+   "province_label": 9360,
    "province_color": [
     207,
     168,
@@ -34176,7 +34176,7 @@
     2963
    ],
    "region": 455,
-   "province_label": 9382,
+   "province_label": 9380,
    "province_color": [
     102,
     55,
@@ -34198,7 +34198,7 @@
     2898
    ],
    "region": 455,
-   "province_label": 9369,
+   "province_label": 9367,
    "province_color": [
     72,
     134,
@@ -34220,7 +34220,7 @@
     3054
    ],
    "region": 462,
-   "province_label": 9636,
+   "province_label": 9634,
    "province_color": [
     135,
     135,
@@ -34242,7 +34242,7 @@
     3088
    ],
    "region": 462,
-   "province_label": 9649,
+   "province_label": 9647,
    "province_color": [
     60,
     212,
@@ -34286,7 +34286,7 @@
     2975
    ],
    "region": 462,
-   "province_label": 9594,
+   "province_label": 9592,
    "province_color": [
     57,
     118,
@@ -34308,7 +34308,7 @@
     3100
    ],
    "region": 462,
-   "province_label": 9652,
+   "province_label": 9650,
    "province_color": [
     83,
     233,
@@ -34330,7 +34330,7 @@
     3020
    ],
    "region": 463,
-   "province_label": 9670,
+   "province_label": 9668,
    "province_color": [
     69,
     165,
@@ -34352,7 +34352,7 @@
     3069
    ],
    "region": 463,
-   "province_label": 9699,
+   "province_label": 9697,
    "province_color": [
     3,
     195,
@@ -34374,7 +34374,7 @@
     3095
    ],
    "region": 463,
-   "province_label": 9713,
+   "province_label": 9711,
    "province_color": [
     49,
     238,
@@ -34396,7 +34396,7 @@
     2990
    ],
    "region": 463,
-   "province_label": 9659,
+   "province_label": 9657,
    "province_color": [
     242,
     33,
@@ -34418,7 +34418,7 @@
     3033
    ],
    "region": 463,
-   "province_label": 9684,
+   "province_label": 9682,
    "province_color": [
     213,
     152,
@@ -34440,7 +34440,7 @@
     2859
    ],
    "region": 454,
-   "province_label": 9301,
+   "province_label": 9299,
    "province_color": [
     218,
     142,
@@ -34462,7 +34462,7 @@
     2953
    ],
    "region": 454,
-   "province_label": 9339,
+   "province_label": 9337,
    "province_color": [
     175,
     193,
@@ -34484,7 +34484,7 @@
     2952
    ],
    "region": 454,
-   "province_label": 9340,
+   "province_label": 9338,
    "province_color": [
     77,
     249,
@@ -34506,7 +34506,7 @@
     3006
    ],
    "region": 454,
-   "province_label": 9359,
+   "province_label": 9357,
    "province_color": [
     176,
     234,
@@ -34528,7 +34528,7 @@
     2862
    ],
    "region": 454,
-   "province_label": 9302,
+   "province_label": 9300,
    "province_color": [
     158,
     31,
@@ -34550,7 +34550,7 @@
     2993
    ],
    "region": 460,
-   "province_label": 9527,
+   "province_label": 9525,
    "province_color": [
     68,
     92,
@@ -34572,7 +34572,7 @@
     3085
    ],
    "region": 460,
-   "province_label": 9572,
+   "province_label": 9570,
    "province_color": [
     229,
     241,
@@ -34594,7 +34594,7 @@
     3058
    ],
    "region": 460,
-   "province_label": 9558,
+   "province_label": 9556,
    "province_color": [
     62,
     233,
@@ -34638,7 +34638,7 @@
     3042
    ],
    "region": 460,
-   "province_label": 9549,
+   "province_label": 9547,
    "province_color": [
     100,
     66,
@@ -34660,7 +34660,7 @@
     2554
    ],
    "region": 433,
-   "province_label": 8127,
+   "province_label": 8125,
    "province_color": [
     204,
     27,
@@ -34682,7 +34682,7 @@
     2478
    ],
    "region": 433,
-   "province_label": 8082,
+   "province_label": 8080,
    "province_color": [
     65,
     155,
@@ -34726,7 +34726,7 @@
     2579
    ],
    "region": 433,
-   "province_label": 8141,
+   "province_label": 8139,
    "province_color": [
     77,
     91,
@@ -34748,7 +34748,7 @@
     2637
    ],
    "region": 433,
-   "province_label": 8178,
+   "province_label": 8176,
    "province_color": [
     147,
     11,
@@ -34770,7 +34770,7 @@
     2412
    ],
    "region": 425,
-   "province_label": 7675,
+   "province_label": 7673,
    "province_color": [
     77,
     77,
@@ -34792,7 +34792,7 @@
     2333
    ],
    "region": 425,
-   "province_label": 7652,
+   "province_label": 7650,
    "province_color": [
     8,
     13,
@@ -34814,7 +34814,7 @@
     2446
    ],
    "region": 425,
-   "province_label": 7681,
+   "province_label": 7679,
    "province_color": [
     100,
     99,
@@ -34836,7 +34836,7 @@
     2317
    ],
    "region": 425,
-   "province_label": 7648,
+   "province_label": 7646,
    "province_color": [
     203,
     158,
@@ -34858,7 +34858,7 @@
     2389
    ],
    "region": 425,
-   "province_label": 7669,
+   "province_label": 7667,
    "province_color": [
     124,
     82,
@@ -34880,7 +34880,7 @@
     2260
    ],
    "region": 415,
-   "province_label": 6987,
+   "province_label": 6985,
    "province_color": [
     125,
     220,
@@ -34902,7 +34902,7 @@
     2331
    ],
    "region": 415,
-   "province_label": 7006,
+   "province_label": 7004,
    "province_color": [
     195,
     28,
@@ -34946,7 +34946,7 @@
     2294
    ],
    "region": 415,
-   "province_label": 6999,
+   "province_label": 6997,
    "province_color": [
     25,
     64,
@@ -34968,7 +34968,7 @@
     2215
    ],
    "region": 415,
-   "province_label": 6975,
+   "province_label": 6973,
    "province_color": [
     140,
     32,
@@ -34990,7 +34990,7 @@
     2326
    ],
    "region": 414,
-   "province_label": 6937,
+   "province_label": 6935,
    "province_color": [
     62,
     15,
@@ -35034,7 +35034,7 @@
     2263
    ],
    "region": 414,
-   "province_label": 6897,
+   "province_label": 6895,
    "province_color": [
     104,
     220,
@@ -35056,7 +35056,7 @@
     2411
    ],
    "region": 414,
-   "province_label": 6968,
+   "province_label": 6966,
    "province_color": [
     19,
     66,
@@ -35078,7 +35078,7 @@
     2168
    ],
    "region": 407,
-   "province_label": 6564,
+   "province_label": 6562,
    "province_color": [
     38,
     124,
@@ -35100,7 +35100,7 @@
     2115
    ],
    "region": 407,
-   "province_label": 6529,
+   "province_label": 6527,
    "province_color": [
     164,
     205,
@@ -35122,7 +35122,7 @@
     2115
    ],
    "region": 407,
-   "province_label": 6531,
+   "province_label": 6529,
    "province_color": [
     202,
     39,
@@ -35144,7 +35144,7 @@
     2249
    ],
    "region": 407,
-   "province_label": 6599,
+   "province_label": 6597,
    "province_color": [
     229,
     37,
@@ -35166,7 +35166,7 @@
     2105
    ],
    "region": 407,
-   "province_label": 6525,
+   "province_label": 6523,
    "province_color": [
     239,
     129,
@@ -35188,7 +35188,7 @@
     2134
    ],
    "region": 410,
-   "province_label": 6745,
+   "province_label": 6743,
    "province_color": [
     66,
     57,
@@ -35210,7 +35210,7 @@
     2227
    ],
    "region": 410,
-   "province_label": 6767,
+   "province_label": 6765,
    "province_color": [
     135,
     121,
@@ -35254,7 +35254,7 @@
     2205
    ],
    "region": 410,
-   "province_label": 6763,
+   "province_label": 6761,
    "province_color": [
     75,
     10,
@@ -35276,7 +35276,7 @@
     2148
    ],
    "region": 410,
-   "province_label": 6749,
+   "province_label": 6747,
    "province_color": [
     187,
     23,
@@ -35320,7 +35320,7 @@
     2532
    ],
    "region": 436,
-   "province_label": 8308,
+   "province_label": 8306,
    "province_color": [
     144,
     246,
@@ -35342,7 +35342,7 @@
     2559
    ],
    "region": 436,
-   "province_label": 8326,
+   "province_label": 8324,
    "province_color": [
     55,
     254,
@@ -35364,7 +35364,7 @@
     2647
    ],
    "region": 436,
-   "province_label": 8393,
+   "province_label": 8391,
    "province_color": [
     96,
     117,
@@ -35386,7 +35386,7 @@
     2620
    ],
    "region": 436,
-   "province_label": 8371,
+   "province_label": 8369,
    "province_color": [
     171,
     105,
@@ -35430,7 +35430,7 @@
     2288
    ],
    "region": 419,
-   "province_label": 7162,
+   "province_label": 7160,
    "province_color": [
     46,
     255,
@@ -35452,7 +35452,7 @@
     2412
    ],
    "region": 419,
-   "province_label": 7233,
+   "province_label": 7231,
    "province_color": [
     59,
     46,
@@ -35474,7 +35474,7 @@
     2433
    ],
    "region": 419,
-   "province_label": 7244,
+   "province_label": 7242,
    "province_color": [
     165,
     200,
@@ -35496,7 +35496,7 @@
     2474
    ],
    "region": 419,
-   "province_label": 7270,
+   "province_label": 7268,
    "province_color": [
     235,
     8,
@@ -35518,7 +35518,7 @@
     2385
    ],
    "region": 421,
-   "province_label": 7349,
+   "province_label": 7347,
    "province_color": [
     192,
     59,
@@ -35562,7 +35562,7 @@
     2432
    ],
    "region": 421,
-   "province_label": 7357,
+   "province_label": 7355,
    "province_color": [
     19,
     191,
@@ -35584,7 +35584,7 @@
     2299
    ],
    "region": 421,
-   "province_label": 7338,
+   "province_label": 7336,
    "province_color": [
     62,
     154,
@@ -35628,7 +35628,7 @@
     2299
    ],
    "region": 422,
-   "province_label": 7382,
+   "province_label": 7380,
    "province_color": [
     112,
     21,
@@ -35650,7 +35650,7 @@
     2389
    ],
    "region": 422,
-   "province_label": 7436,
+   "province_label": 7434,
    "province_color": [
     236,
     81,
@@ -35672,7 +35672,7 @@
     2429
    ],
    "region": 422,
-   "province_label": 7449,
+   "province_label": 7447,
    "province_color": [
     42,
     227,
@@ -35694,7 +35694,7 @@
     2209
    ],
    "region": 409,
-   "province_label": 6677,
+   "province_label": 6675,
    "province_color": [
     30,
     244,
@@ -35738,7 +35738,7 @@
     2200
    ],
    "region": 409,
-   "province_label": 6672,
+   "province_label": 6670,
    "province_color": [
     68,
     78,
@@ -35760,7 +35760,7 @@
     2187
    ],
    "region": 409,
-   "province_label": 6659,
+   "province_label": 6657,
    "province_color": [
     143,
     1,
@@ -35804,7 +35804,7 @@
     2095
    ],
    "region": 406,
-   "province_label": 6518,
+   "province_label": 6516,
    "province_color": [
     253,
     197,
@@ -35826,7 +35826,7 @@
     2096
    ],
    "region": 406,
-   "province_label": 6517,
+   "province_label": 6515,
    "province_color": [
     76,
     97,
@@ -35848,7 +35848,7 @@
     2088
    ],
    "region": 406,
-   "province_label": 6516,
+   "province_label": 6514,
    "province_color": [
     193,
     86,
@@ -35892,7 +35892,7 @@
     2242
    ],
    "region": 408,
-   "province_label": 6620,
+   "province_label": 6618,
    "province_color": [
     223,
     39,
@@ -35914,7 +35914,7 @@
     2217
    ],
    "region": 408,
-   "province_label": 6616,
+   "province_label": 6614,
    "province_color": [
     252,
     59,
@@ -35936,7 +35936,7 @@
     2142
    ],
    "region": 408,
-   "province_label": 6607,
+   "province_label": 6605,
    "province_color": [
     33,
     148,
@@ -35958,7 +35958,7 @@
     2122
    ],
    "region": 405,
-   "province_label": 6453,
+   "province_label": 6451,
    "province_color": [
     143,
     205,
@@ -35980,7 +35980,7 @@
     2257
    ],
    "region": 405,
-   "province_label": 6509,
+   "province_label": 6507,
    "province_color": [
     72,
     120,
@@ -36024,7 +36024,7 @@
     2179
    ],
    "region": 405,
-   "province_label": 6481,
+   "province_label": 6479,
    "province_color": [
     143,
     219,
@@ -36046,7 +36046,7 @@
     2127
    ],
    "region": 405,
-   "province_label": 6454,
+   "province_label": 6452,
    "province_color": [
     202,
     178,
@@ -36068,7 +36068,7 @@
     2195
    ],
    "region": 411,
-   "province_label": 6782,
+   "province_label": 6780,
    "province_color": [
     196,
     8,
@@ -36090,7 +36090,7 @@
     2268
    ],
    "region": 411,
-   "province_label": 6792,
+   "province_label": 6790,
    "province_color": [
     46,
     162,
@@ -36134,7 +36134,7 @@
     2240
    ],
    "region": 411,
-   "province_label": 6787,
+   "province_label": 6785,
    "province_color": [
     83,
     252,
@@ -36156,13 +36156,343 @@
     2142
    ],
    "region": 411,
-   "province_label": 6772,
+   "province_label": 6770,
    "province_color": [
     247,
     166,
     193
    ],
    "province_hex": "xF7A6C1"
+  },
+  {
+   "state": "Albion north (STATE_LAND_736)",
+   "hub": "city",
+   "name": "Citadel of Lead",
+   "source": "canon: cr_oldworld_campaign/citadel_of_lead (TWW3 Old World mod region table)",
+   "anchor": [
+    3371,
+    609
+   ],
+   "resolved": [
+    3371,
+    609
+   ],
+   "region": 59,
+   "province_label": 1449,
+   "province_color": [
+    138,
+    201,
+    194
+   ],
+   "province_hex": "x8AC9C2"
+  },
+  {
+   "state": "Albion north (STATE_LAND_736)",
+   "hub": "port",
+   "name": "Losterikson's Landing",
+   "source": "canon: cr_oldworld_campaign/losteriksons_landing (TWW3 Old World mod region table)",
+   "anchor": [
+    3412,
+    581
+   ],
+   "resolved": [
+    3412,
+    581
+   ],
+   "region": 59,
+   "province_label": 1441,
+   "province_color": [
+    167,
+    82,
+    50
+   ],
+   "province_hex": "xA75232"
+  },
+  {
+   "state": "Albion north (STATE_LAND_736)",
+   "hub": "mine",
+   "name": "Beast Peaks",
+   "source": "canon: Beast Peaks, Albion (via https://warhammerfantasy.fandom.com/wiki/Beast_Peaks; also cr_oldworld_campaign/beast_peaks)",
+   "anchor": [
+    3347,
+    628
+   ],
+   "resolved": [
+    3347,
+    628
+   ],
+   "region": 59,
+   "province_label": 1458,
+   "province_color": [
+    222,
+    78,
+    17
+   ],
+   "province_hex": "xDE4E11"
+  },
+  {
+   "state": "Albion north (STATE_LAND_736)",
+   "hub": "farm",
+   "name": "Ochness",
+   "source": "canon: Ochness, Albion (via https://whfb.lexicanum.com/wiki/Albion_Lexicon; also cr_oldworld_campaign/ochness)",
+   "anchor": [
+    3314,
+    627
+   ],
+   "resolved": [
+    3314,
+    627
+   ],
+   "region": 59,
+   "province_label": 1457,
+   "province_color": [
+    26,
+    189,
+    3
+   ],
+   "province_hex": "x1ABD03"
+  },
+  {
+   "state": "Albion north (STATE_LAND_736)",
+   "hub": "wood",
+   "name": "Ogben Wood",
+   "source": "invented",
+   "anchor": [
+    3389,
+    591
+   ],
+   "resolved": [
+    3389,
+    591
+   ],
+   "region": 59,
+   "province_label": 1442,
+   "province_color": [
+    172,
+    76,
+    247
+   ],
+   "province_hex": "xAC4CF7"
+  },
+  {
+   "state": "Albion centre (STATE_LAND_079)",
+   "hub": "city",
+   "name": "Pillar of Og-Agog",
+   "source": "canon: Pillar of Og-Agog, Albion (via Lexicanum https://whfb.lexicanum.com/wiki/Albion_Lexicon and https://warhammerfantasy.fandom.com/wiki/Pillar_of_Og-Agog)",
+   "anchor": [
+    3339,
+    686
+   ],
+   "resolved": [
+    3339,
+    686
+   ],
+   "region": 77,
+   "province_label": 1697,
+   "province_color": [
+    234,
+    125,
+    72
+   ],
+   "province_hex": "xEA7D48"
+  },
+  {
+   "state": "Albion centre (STATE_LAND_079)",
+   "hub": "port",
+   "name": "Muddy Point",
+   "source": "canon: Muddy Point, Albion (via https://whfb.lexicanum.com/wiki/Albion and https://warhammerfantasy.fandom.com/wiki/Muddy_Point)",
+   "anchor": [
+    3259,
+    815
+   ],
+   "resolved": [
+    3259,
+    815
+   ],
+   "region": 77,
+   "province_label": 1733,
+   "province_color": [
+    46,
+    176,
+    117
+   ],
+   "province_hex": "x2EB075"
+  },
+  {
+   "state": "Albion centre (STATE_LAND_079)",
+   "hub": "farm",
+   "name": "Great Hogs",
+   "source": "canon: Great Hogs, Albion (via https://warhammerfantasy.fandom.com/wiki/Great_Hogs; also cr_oldworld_campaign/great_hogs)",
+   "anchor": [
+    3263,
+    728
+   ],
+   "resolved": [
+    3263,
+    728
+   ],
+   "region": 77,
+   "province_label": 1720,
+   "province_color": [
+    13,
+    193,
+    220
+   ],
+   "province_hex": "x0DC1DC"
+  },
+  {
+   "state": "Albion centre (STATE_LAND_079)",
+   "hub": "mine",
+   "name": "Carn Mallog",
+   "source": "canon: cr_oldworld_campaign/carn_mallog (TWW3 Old World mod region table)",
+   "anchor": [
+    3303,
+    708
+   ],
+   "resolved": [
+    3303,
+    708
+   ],
+   "region": 77,
+   "province_label": 1708,
+   "province_color": [
+    116,
+    253,
+    118
+   ],
+   "province_hex": "x74FD76"
+  },
+  {
+   "state": "Albion centre (STATE_LAND_079)",
+   "hub": "wood",
+   "name": "Forest of Fagmar",
+   "source": "canon: cr_oldworld_campaign/sherweald_forest (TWW3 Old World mod region table)",
+   "anchor": [
+    3363,
+    677
+   ],
+   "resolved": [
+    3363,
+    677
+   ],
+   "region": 77,
+   "province_label": 1693,
+   "province_color": [
+    147,
+    34,
+    153
+   ],
+   "province_hex": "x932299"
+  },
+  {
+   "state": "Albion south (STATE_LAND_078)",
+   "hub": "city",
+   "name": "Great Ogham",
+   "source": "canon: Great Ogham, Albion (via https://whfb.lexicanum.com/wiki/Albion_Lexicon and https://warhammerfantasy.fandom.com/wiki/Great_Ogham; also cr_oldworld_campaign/great_ogham)",
+   "anchor": [
+    3350,
+    731
+   ],
+   "resolved": [
+    3350,
+    731
+   ],
+   "region": 98,
+   "province_label": 2016,
+   "province_color": [
+    88,
+    117,
+    6
+   ],
+   "province_hex": "x587506"
+  },
+  {
+   "state": "Albion south (STATE_LAND_078)",
+   "hub": "port",
+   "name": "Ohbuhu",
+   "source": "canon: Ohbuhu, Albion (via https://warhammerfantasy.fandom.com/wiki/Albion, citing White Dwarf 260 p.20)",
+   "anchor": [
+    3301,
+    773
+   ],
+   "resolved": [
+    3301,
+    773
+   ],
+   "region": 98,
+   "province_label": 2020,
+   "province_color": [
+    190,
+    163,
+    182
+   ],
+   "province_hex": "xBEA3B6"
+  },
+  {
+   "state": "Albion south (STATE_LAND_078)",
+   "hub": "mine",
+   "name": "Ogham Delve",
+   "source": "invented",
+   "anchor": [
+    3324,
+    737
+   ],
+   "resolved": [
+    3324,
+    737
+   ],
+   "region": 98,
+   "province_label": 2017,
+   "province_color": [
+    29,
+    255,
+    107
+   ],
+   "province_hex": "x1DFF6B"
+  },
+  {
+   "state": "Albion south (STATE_LAND_078)",
+   "hub": "farm",
+   "name": "Mud Flats",
+   "source": "canon: cr_oldworld_campaign/mud_flats (TWW3 Old World mod region table)",
+   "anchor": [
+    3313,
+    755
+   ],
+   "resolved": [
+    3313,
+    755
+   ],
+   "region": 98,
+   "province_label": 2019,
+   "province_color": [
+    203,
+    223,
+    215
+   ],
+   "province_hex": "xCBDFD7"
+  },
+  {
+   "state": "Albion south (STATE_LAND_078)",
+   "hub": "wood",
+   "name": "Hawthorn Wood",
+   "source": "invented",
+   "anchor": [
+    3340,
+    749
+   ],
+   "resolved": [
+    3340,
+    749
+   ],
+   "region": 98,
+   "province_label": 2018,
+   "province_color": [
+    255,
+    125,
+    164
+   ],
+   "province_hex": "xFF7DA4"
   }
  ]
 }
