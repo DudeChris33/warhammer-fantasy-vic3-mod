@@ -137,7 +137,7 @@ SSD = {
 	color = { 115 81 63 }
 	country_type = unrecognized
 	tier = principality
-	cultures = { dawi }
+	cultures = { dawi_sotek }
 	capital = STATE_THE_GOLDEN_COLOSSUS # the Mine of the Bearded Skulls (TW province capital; city hub, #11541)
 }
 

@@ -91,7 +91,7 @@ CULTURE_TECH: dict[str, str | None] = {
     "gospodar": "effect_starting_technology_kislev_tech",
     "ungol": "effect_starting_technology_ungol_tech",
     **dict.fromkeys(("tilean", "estalian", "border_princer", "sartosan"), _SOUTHERN),
-    **dict.fromkeys(("dawi", "dawi_grey", "dawi_norse", "dawi_ancestral"), _DWARF),
+    **dict.fromkeys(("dawi", "dawi_grey", "dawi_norse", "dawi_ancestral", "dawi_sotek"), _DWARF),
     "dawi_zharr": "effect_starting_technology_dark_dwarf_tech",
     "sylvanian_vampire": _EMPIRE,   # #9035: Sylvanian vampires know what the Empire knows; closed trade is law data
     "lahmian_vampire": "effect_starting_technology_tomb_kings_tech",

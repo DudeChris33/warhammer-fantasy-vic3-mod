@@ -399,7 +399,7 @@
     "STATE_THE_COPPER_LANDING": {"anchor": [2251, 2846], "cultures": ["lizardmen"]},
     "STATE_THE_DOBRYRION": {"anchor": [4442, 734], "cultures": ["gospodar"]},
     "STATE_THE_DRAGON_SPINE": {"anchor": [2680, 1559], "cultures": ["high_elf"]},
-    "STATE_THE_GOLDEN_COLOSSUS": {"anchor": [2131, 2718], "cultures": ["dawi", "lizardmen"]},
+    "STATE_THE_GOLDEN_COLOSSUS": {"anchor": [2131, 2718], "cultures": ["dawi_sotek", "lizardmen"]},
     "STATE_THE_GOLINYI": {"anchor": [4458, 550], "cultures": ["ungol"]},
     "STATE_THE_ROPSALS": {"anchor": [4579, 622], "cultures": ["mountain_orc", "ungol"]},
     "STATE_THE_SCARAB_CITY": {"anchor": [4195, 1613], "cultures": ["nehekharan"]},

@@ -622,3 +622,13 @@ amazon_fervor_target_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_fervor_target_amazon_add = 1
 }
+
+dawi_sotek_fervor_target_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_fervor_target_dawi_sotek_add = 1
+}
+
+dawi_sotek_fervor_target_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_fervor_target_dawi_sotek_add = 1
+}

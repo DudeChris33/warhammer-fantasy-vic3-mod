@@ -1000,7 +1000,7 @@ Tor Anrok and Monte Castello stay untagged. (Approved 2026-08-30.)
 | KKR | `18_naggaroth` | Karond Kar | start | `PLACEHOLDER` | Karond Kar | Slaver's Gate / Tower of Despair |
 | HGF | `18_naggaroth` | Hag Graef | start | `PLACEHOLDER` | Hag Graef | the Dark Crag (second city) |
 
-### 19 LUSTRIA (Lizardmen, PLACEHOLDER + norscan) — 31 tags; LUS formable
+### 19 LUSTRIA (Lizardmen, PLACEHOLDER + norscan, dawi_sotek) — 31 tags; LUS formable
 
 The temple-cities of the Lizardmen, at max density (Chris approved TW:W as a name source, as with the
 greenskins/Cathay). LUS is the Slann reuniting the Old Ones' dominion. All Lizardmen rows are
@@ -1070,7 +1070,7 @@ of Xlanhuapec and Tlaxtlan, and the Bretonnian colony.
 | TLC | `19_lustria` | Nuevo Luccini | start | `tilean` | Cactus Coast | about 1 state; Nuevo Luccini, a Tilean pirate port on the Cactus Coast (Town Cryer 15, *Lustria: Cities of Gold* p. 17, via Lexicanum 2026-11-05), a named settlement so not `invented`; `principality`/`unrecognized` Painted (#10181): Cactus Coast. |
 | ESC | `19_lustria` | Santa Magritta | start | `estalian` | Volcanic Islands | about 1 state; Santa Magritta, an Estalian settlement on Columbo's Island with a large harbour (Town Cryer 15, p. 17, via Lexicanum 2026-11-05); `principality`/`unrecognized` Painted (#10181): the unowned slice of the Volcanic Islands (LOT keeps 7 provinces); Columbo's Island not placed by #10178. |
 | BRC | `19_lustria` | Bretonnian Colony | start | `bretonnian` | Forgotten Isles | about 1 state; Bretonnian New World outpost, `invented` tier: Lexicanum names no Bretonnian settlement, only Prince Rodrik's 1847 IC raid (Chris, #10177); `principality`/`unrecognized` Painted (#10181): Forgotten Isles. |
-| SSD | `19_lustria` | Spine of Sotek Dwarfs | start | `dawi` | Mine of the Bearded Skulls | Total War minor faction (Hugrim Redaxe; TW wiki: a Creative Assembly creation), tier 3. Tabletop has only the Mine of the Bearded Skulls (WFRP4e *Lustria* p. 33, a possible lost Dwarf mine) and an unlaunched Barak Varr expedition. Kept at Chris's call (2026-11-06) as an exception to the 13-holds rule; `principality`/`unrecognized`; Painted (#10181): Mine of the Bearded Skulls |
+| SSD | `19_lustria` | Spine of Sotek Dwarfs | start | `dawi_sotek` | Mine of the Bearded Skulls | Total War minor faction (Hugrim Redaxe; TW wiki: a Creative Assembly creation), tier 3. Tabletop has only the Mine of the Bearded Skulls (WFRP4e *Lustria* p. 33, a possible lost Dwarf mine) and an unlaunched Barak Varr expedition. Kept at Chris's call (2026-11-06) as an exception to the 13-holds rule; `principality`/`unrecognized`; Painted (#10181): Mine of the Bearded Skulls |
 | LZA | `19_lustria` | Skinks of the Northern Coasts | start | `lizardmen` | Scorpion Coast | decentralized Lizardmen holdings, about 5 states of the empty jungle; `decentralized`/`principality`; regional split and names set by #10178/#10181; never renamed into a polity (#10177, Chris: jungle goes to decentralized Lizardmen) `decentralized`; 7 states (north coasts and north-east). |
 | LZB | `19_lustria` | Skinks of the Malliente Swamps | start | `lizardmen` | Hualotal | as `LZA` `decentralized`; 6 states (west and the western islands). |
 | LZC | `19_lustria` | Skinks of the Spine of Sotek | start | `lizardmen` | Dust Gate | as `LZA` `decentralized`; 5 states (Spine of Sotek, south). |

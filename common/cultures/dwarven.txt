@@ -9,7 +9,7 @@
 #   traditions — required field; an empty block is valid and is what this mod uses for now.
 #   obsessions — goods ids; empty until this mod authors common/goods/.
 #
-# GOVERNING PRINCIPLE — "one people, four cultures". All four Dawi cultures share
+# GOVERNING PRINCIPLE — "one people, five cultures". All five Dawi cultures share
 # heritage_dawi and sphere_khazalid, so they accept and assimilate one another freely with no
 # scripting at all: the shared heritage and shared language do the work. The split between them
 # is expressed ENTIRELY through surname stock and light first-name shifts, never through the
@@ -262,6 +262,62 @@ dawi_ancestral = {
 
 	female_regal_first_names = {
 		Belgrid Kazra Thargrid Halgra
+	}
+
+	graphics = european
+	ethnicities = {
+		2 = caucasian_brown_hair
+		1 = caucasian_ginger
+	}
+}
+
+################ Dawi Sotek — the Spine of Sotek, Lustria; the far prospectors ################
+# The Dwarfs of SSD (common/country_definitions/19_lustria.txt): a TW-sourced minor faction with no
+# tabletop hold (WFRP4e Lustria p. 33 has only the Mine of the Bearded Skulls). Split from dawi
+# (Chris, 2026-11-20) so an ocean-cut Lustrian colony reads as its own people; it sits outside the
+# age axis above, like dawi_grey, and is not one of KAZ's cultures (that would make a Lustrian
+# state a KAZ culture state). Everything below is invented: first names on the heartland's
+# Khazalid stems, surnames from gold-seeking, the sea crossing, jungle heat and the mine
+# (Skullbeard nods to the Bearded Skulls). Colour is SSD's painted-legend colour (115 81 63).
+
+dawi_sotek = {
+	color= rgb{ 115 81 63 }
+	religion = cult_of_ancestors
+	heritage = heritage_dawi
+	language = sphere_khazalid
+
+	obsessions = { }
+
+	traditions = { }
+
+	male_common_first_names = {
+		Brokk Durnak Hargrim Okrik Gorrik Dragnir Thordak Kazgrim Grimbrand Belrik
+		Skorri Torgrim Hurnak Galdrik Bundrik Krogar Morrak Rundak Valgrim Brondak
+		Gudrik Orgrim
+	}
+
+	female_common_first_names = {
+		Brokka Durna Hargrid Okra Gorrid Dragna Thorda Kazgrid Belra Skorra
+		Torgrid Hurna Galdra Bundra Kroga Morra Runda Valgrid Bronda Gudra
+		Orgrid
+	}
+
+	noble_last_names = {
+		Goldvein Serpentspine Farhold Seawanderer Sunforge Jadedelve
+		Longvoyage Bonemine Farkeep Oathcrossed Tidecrossed Heatforged
+	}
+
+	common_last_names = {
+		Skullbeard Vinecutter Sweatbrow Gilthand Snakebane Mudfoot Jadehand Rainbeard
+		Ropefist Fevergrim Rootcleaver Sunbeard Goldpan Saltbeard Mossbrow Stonetrail
+	}
+
+	male_regal_first_names = {
+		Hargrim Thordak Kazgrim Torgrim Valgrim
+	}
+
+	female_regal_first_names = {
+		Hargrid Thorda Kazgrid Valgrid
 	}
 
 	graphics = european

@@ -454,10 +454,10 @@
   "SSD": {
    "mix": [
     {
-     "culture": "dawi",
+     "culture": "dawi_sotek",
      "share": 100,
      "source": "canon: Dwarf colony in Lustria (WFB Dwarfs)",
-     "why": "Dwarf settlers."
+     "why": "Dwarf settlers; their own culture, dawi_sotek (Chris, 2026-11-20)."
     }
    ]
   }

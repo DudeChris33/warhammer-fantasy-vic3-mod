@@ -622,3 +622,13 @@ amazon_cultural_acceptance_modifier_negative = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
 	country_amazon_cultural_acceptance_add = 1
 }
+
+dawi_sotek_cultural_acceptance_modifier_positive = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds"
+	country_dawi_sotek_cultural_acceptance_add = 1
+}
+
+dawi_sotek_cultural_acceptance_modifier_negative = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds"
+	country_dawi_sotek_cultural_acceptance_add = 1
+}
