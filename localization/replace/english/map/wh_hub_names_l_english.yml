@@ -239,16 +239,16 @@
  HUB_NAME_STATE_CEFIRO_HILLS_farm:0 "Sahagun"
  HUB_NAME_STATE_CEFIRO_HILLS_mine:0 "Villaluz"
  HUB_NAME_STATE_CEFIRO_HILLS_wood:0 "Pinar de Cefiro"
- HUB_NAME_STATE_LAND_078_city:0 "Land 078 (city)" # AUTOGEN
- HUB_NAME_STATE_LAND_078_port:0 "Land 078 (port)" # AUTOGEN
- HUB_NAME_STATE_LAND_078_farm:0 "Land 078 (farm)" # AUTOGEN
- HUB_NAME_STATE_LAND_078_mine:0 "Land 078 (mine)" # AUTOGEN
- HUB_NAME_STATE_LAND_078_wood:0 "Land 078 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_079_city:0 "Land 079 (city)" # AUTOGEN
- HUB_NAME_STATE_LAND_079_port:0 "Land 079 (port)" # AUTOGEN
- HUB_NAME_STATE_LAND_079_farm:0 "Land 079 (farm)" # AUTOGEN
- HUB_NAME_STATE_LAND_079_mine:0 "Land 079 (mine)" # AUTOGEN
- HUB_NAME_STATE_LAND_079_wood:0 "Land 079 (wood)" # AUTOGEN
+ HUB_NAME_STATE_LAND_078_city:0 "Great Ogham"
+ HUB_NAME_STATE_LAND_078_port:0 "Ohbuhu"
+ HUB_NAME_STATE_LAND_078_mine:0 "Ogham Delve"
+ HUB_NAME_STATE_LAND_078_farm:0 "Mud Flats"
+ HUB_NAME_STATE_LAND_078_wood:0 "Hawthorn Wood"
+ HUB_NAME_STATE_LAND_079_city:0 "Pillar of Og-Agog"
+ HUB_NAME_STATE_LAND_079_port:0 "Muddy Point"
+ HUB_NAME_STATE_LAND_079_farm:0 "Great Hogs"
+ HUB_NAME_STATE_LAND_079_mine:0 "Carn Mallog"
+ HUB_NAME_STATE_LAND_079_wood:0 "Forest of Fagmar"
  HUB_NAME_STATE_NUJA_city:0 "Nuja"
  HUB_NAME_STATE_NUJA_port:0 "Puerto del Sur"
  HUB_NAME_STATE_NUJA_farm:0 "Tor Karyndis"
@@ -2138,8 +2138,8 @@
  HUB_NAME_STATE_LAND_735_city:0 "Land 735 (city)" # AUTOGEN
  HUB_NAME_STATE_LAND_735_farm:0 "Land 735 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_735_mine:0 "Land 735 (mine)" # AUTOGEN
- HUB_NAME_STATE_LAND_736_city:0 "Land 736 (city)" # AUTOGEN
- HUB_NAME_STATE_LAND_736_port:0 "Land 736 (port)" # AUTOGEN
- HUB_NAME_STATE_LAND_736_farm:0 "Land 736 (farm)" # AUTOGEN
- HUB_NAME_STATE_LAND_736_mine:0 "Land 736 (mine)" # AUTOGEN
- HUB_NAME_STATE_LAND_736_wood:0 "Land 736 (wood)" # AUTOGEN
+ HUB_NAME_STATE_LAND_736_city:0 "Citadel of Lead"
+ HUB_NAME_STATE_LAND_736_port:0 "Losterikson's Landing"
+ HUB_NAME_STATE_LAND_736_mine:0 "Beast Peaks"
+ HUB_NAME_STATE_LAND_736_farm:0 "Ochness"
+ HUB_NAME_STATE_LAND_736_wood:0 "Ogben Wood"

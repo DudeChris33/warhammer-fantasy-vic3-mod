@@ -1230,13 +1230,13 @@
   "STATE_LAND_078": {
    "area_px": 2246,
    "arable_milli": 1950725,
-   "cities": 0,
+   "cities": 1,
    "canon_cities": []
   },
   "STATE_LAND_079": {
    "area_px": 15614,
    "arable_milli": 11063979,
-   "cities": 0,
+   "cities": 1,
    "canon_cities": []
   },
   "STATE_LAND_126": {
@@ -1433,8 +1433,8 @@
   },
   "STATE_LAND_736": {
    "area_px": 9018,
-   "arable_milli": 4836249,
-   "cities": 0,
+   "arable_milli": 4836248,
+   "cities": 1,
    "canon_cities": []
   },
   "STATE_LAURELORN_FOREST": {

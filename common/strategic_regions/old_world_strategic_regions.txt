@@ -1,5 +1,5 @@
 ﻿region_albion = {
-	capital_province = xFF7DA4
+	capital_province = x587506
 	map_color = { 211 94 233 }
 	states = { STATE_LAND_078 STATE_LAND_079 STATE_LAND_736 }
 }
