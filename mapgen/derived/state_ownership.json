@@ -2256,13 +2256,19 @@
   },
   "STATE_LAND_735": {
    "id": 735,
-   "naming_anchor": null,
+   "naming_anchor": [
+    3975,
+    922
+   ],
    "owner": "QUE",
    "scope": "drawn"
   },
   "STATE_LAND_736": {
    "id": 736,
-   "naming_anchor": null,
+   "naming_anchor": [
+    3383,
+    609
+   ],
    "owner": "unowned",
    "scope": "drawn"
   },

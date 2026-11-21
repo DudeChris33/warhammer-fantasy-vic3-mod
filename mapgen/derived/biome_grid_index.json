@@ -1,0 +1,93 @@
+{
+  "schema": 1,
+  "board": 3677,
+  "canvas": [
+    8192,
+    3616
+  ],
+  "grid": [
+    2048,
+    904
+  ],
+  "q": 4,
+  "classes": [
+    {
+      "id": 0,
+      "name": "unknown",
+      "land_cells": 0
+    },
+    {
+      "id": 1,
+      "name": "temperate",
+      "land_cells": 109787
+    },
+    {
+      "id": 2,
+      "name": "mountain",
+      "land_cells": 96193
+    },
+    {
+      "id": 3,
+      "name": "wasteland",
+      "land_cells": 42752
+    },
+    {
+      "id": 4,
+      "name": "magic_forest",
+      "land_cells": 5755
+    },
+    {
+      "id": 5,
+      "name": "island",
+      "land_cells": 11021
+    },
+    {
+      "id": 6,
+      "name": "frozen",
+      "land_cells": 171380
+    },
+    {
+      "id": 7,
+      "name": "chaotic_waste",
+      "land_cells": 30489
+    },
+    {
+      "id": 8,
+      "name": "jungle",
+      "land_cells": 117491
+    },
+    {
+      "id": 9,
+      "name": "savannah",
+      "land_cells": 41983
+    },
+    {
+      "id": 10,
+      "name": "desert",
+      "land_cells": 60623
+    },
+    {
+      "id": 11,
+      "name": "swamp",
+      "land_cells": 3431
+    },
+    {
+      "id": 12,
+      "name": "hills",
+      "land_cells": 5861
+    }
+  ],
+  "seed": 20260720,
+  "inputs": {
+    "provinces_index.json": "7e872250f6250dec5c5efffd4cc1448992ee586cbf577ccaffd3f529e1b3978d",
+    "land_regions_index.json": "aa758a58ed80221aff5475df826c916944cf8e9dff7083891074ab8188a95439",
+    "hub_worksheet.json": "615aedd436e6c1cccfff344b8f1309d901802ee9a17243caef8ee61d13b9fe32",
+    "climate_overrides.json": "d606dc1c1df41d4c2a6355c11d25c08ba4556c91b36572a333e7cda2dfd2c1f2",
+    "climate_oldworld_pairs.json": "0644eb6e887302c207b9cf75265520b217bc1af65e1b08b74a1998d05eb48399",
+    "land_sea_mask.png": "b09a0e17bb1e4f218db9bd1bf38a7fdc7e812927ba7629d780f31a22c2dfc1bc",
+    "lake_mask.png": "bb924dd6cb891944e6171018f6b891e8e75bfe9d27f0b903a5e168a2be090a3e",
+    "heightmap.png": "fa42a5fcc02adcfbdd0133611f6a52b73d73d0c0a63d8ffbc4e403f2e70cfeed",
+    "climate_zones.png layer_sha256": "9b381d0f756804ab0abe11768ea079ef47a7b7b3b6ce54c070901f203e906f92"
+  },
+  "grid_sha256": "058985f1dc6473195a2920c0fc09528070f943a9a71274bc39678cc85420d87c"
+}
