@@ -330,7 +330,11 @@ root cause". Facts learned running this section:
   `fortification_locators.txt`, a 36-byte `spline_network.splnet`, and about 320 untracked
   `gfx/map/map_object_data/*.bin` files. Commit only the four pack files. Restore the tracked
   rewrites with `git restore --source=HEAD --worktree -- <paths>`; delete the untracked
-  `.bin` files with `git clean -f -- 'gfx/map/map_object_data/*.bin'`. A pixel comparison
+  `.bin` files with `git clean -f -- 'gfx/map/map_object_data/*.bin'`. **Since #11534 this mod
+  tracks `gfx/map/map_object_data/*.bin`** (the vegetation placements, owner
+  `generate_vegetation.py`, Git-LFS): after an editor save, restore those with `git restore`
+  instead of deleting them, delete only the untracked `.bin` the editor wrote (`git clean` never touches tracked files), and never run the editor's map-object
+  generation (it rebuilds Earth placement from vanilla's `content_source` masks). A pixel comparison
   (`numpy`/`PIL`, LFS-smudged HEAD copy) is the way to prove a re-encode lost nothing.
 - **`heightmap.heightmap` is the editor's output, `should_wrap_x=no`, and stays unedited.** The
   hand-edited `wrap=yes` from `1d66fdd` was not what made the game crash; `default.map`'s
