@@ -1,10 +1,10 @@
 {
 	"name": "Warhammer Fantasy Overhaul",
 	"id": "3812292509",
-	"version": "0.1",
+	"version": "0.2",
 	"game_id": "victoria3",
 	"picture": "thumbnail.png",
-	"supported_game_version": "1.15.*",
+	"supported_game_version": "1.15.2",
 	"short_description": "",
 	"tags": [],
 	"relationships": [],
