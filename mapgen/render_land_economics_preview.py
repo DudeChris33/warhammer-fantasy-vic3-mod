@@ -346,8 +346,17 @@ def main(argv: list[str] | None = None) -> int:
     log(f"labelled {n_labelled} states", t0)
 
     unit = max(14, pil.height // 90)
-    draw_legend(draw, field, used_codes,
-                (unit, pil.height - legend_height(field, used_codes, unit) - unit), unit)
+    if realm_stem is None:
+        draw_legend(draw, field, used_codes,
+                    (unit, pil.height - legend_height(field, used_codes, unit) - unit), unit)
+    else:
+        # A realm crop is small enough that an inset legend hides its states: draw it in a strip below.
+        lh = legend_height(field, used_codes, unit)
+        lw = unit * 4 + unit * 3 * (len(field.labels) + 1) + unit * 14
+        framed = Image.new("RGB", (max(pil.width, lw + 2 * unit), pil.height + lh + 2 * unit), (18, 22, 28))
+        framed.paste(pil, (0, 0))
+        pil = framed
+        draw_legend(ImageDraw.Draw(pil), field, used_codes, (unit, pil.height - lh - unit), unit)
 
     SCRATCH_DIR.mkdir(parents=True, exist_ok=True)
     if realm_stem is None:
