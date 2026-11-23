@@ -140,26 +140,6 @@
    "building": "building_fishing_wharf",
    "source": "canon: Warhammer Armies: Warriors of Chaos (Norsca)",
    "why": "Norscan fishers and whalers."
-  },
-  {
-   "key": "STATE_SOUTH_OSTLAND",
-   "anchor": [
-    4282,
-    761
-   ],
-   "building": "building_rye_farm",
-   "source": "canon: Warhammer Fantasy Roleplay 4e, Ostland",
-   "why": "Northern Empire rye."
-  },
-  {
-   "key": "STATE_THE_DOBRYRION",
-   "anchor": [
-    4442,
-    734
-   ],
-   "building": "building_rye_farm",
-   "source": "canon: Warhammer Armies: Kislev",
-   "why": "Kislevite rye."
   }
  ],
  "blocked_by_tech": [
