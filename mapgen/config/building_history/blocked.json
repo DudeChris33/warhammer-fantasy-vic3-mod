@@ -92,36 +92,6 @@
    "why": "Sulphur for the fire-works."
   },
   {
-   "key": "STATE_BORDELEAUX",
-   "anchor": [
-    3822,
-    918
-   ],
-   "building": "building_vineyard",
-   "source": "canon: Warhammer Armies: Bretonnia",
-   "why": "Bretonnian wine."
-  },
-  {
-   "key": "STATE_AQUITAINE",
-   "anchor": [
-    3846,
-    963
-   ],
-   "building": "building_vineyard",
-   "source": "canon: Warhammer Armies: Bretonnia",
-   "why": "Bretonnian wine."
-  },
-  {
-   "key": "STATE_CENTRAL_MAGRITTA",
-   "anchor": [
-    3682,
-    1121
-   ],
-   "building": "building_vineyard",
-   "source": "canon: Warhammer Fantasy Roleplay 4e, Estalia",
-   "why": "Estalian wine and sherry."
-  },
-  {
    "key": "STATE_MARIENBURG",
    "anchor": [
     3964,
