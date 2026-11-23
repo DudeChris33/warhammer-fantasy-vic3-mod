@@ -4,10 +4,10 @@ Hand-authored input for `python mapgen/generate_pop_history.py`, which writes `c
 
 ## Scale factor
 
-**game total = canon-scale figure × 5** (`scale_factor` in `calibration.json`).
+**game total = canon-scale figure × 25** (`scale_factor` in `calibration.json`).
 
 - Tabletop Warhammer gives settlements and realms medieval-sized populations (a great city in the low hundred-thousands, an Empire province in the hundreds of thousands) and is inconsistent between editions. Vanilla Victoria 3 is balanced for 1836 Earth, where one state holds hundreds of thousands to millions and the economy, buildings and pop-type ratios assume that scale.
-- Multiplying canon-scale figures by 5 puts an Imperial province at roughly 1–3 million and the Old World at about 52 million, so a typical state lands around 150–700k, in vanilla's band, while every realm keeps its canon *rank* (Reikland > Wissenland > Middenland > the north-eastern provinces; Bretonnia a dense Empire-scale peasantry; Kislev, Norsca and the Border Princes thin).
+- The factor is set by **density parity on owned land** (Chris, 2026-11-22, #10274): states with a non-`UNO` owner start at about vanilla's people per arable level, 1,022M / 53,616 ≈ 19,060. Measured at ×25 (2026-11-22): 277.95M people on 14,767 owned arable, 18,822 per level (−1.3%); owned state median 473k (vanilla's world median 593k); world total 278.1M, 27% of vanilla's, because unowned and out-of-scope land carries only `unclaimed_pop`. The factor is an integer, so 25 is the nearest to the 25.3 the target asks for. Every realm keeps its canon *rank* (Reikland > Wissenland > Middenland > the north-eastern provinces; Bretonnia a dense Empire-scale peasantry; Kislev, Norsca and the Border Princes thin).
 - The canon-scale figures themselves are **inferred from canon rank**, not quoted from a book: no tabletop source gives a population per realm that this repo can cite, and the exact city figures vary by edition and could not be checked from this environment. Each entry's `source` says `inferred: <what the rank rests on>`. Change `scale_factor` to rescale everything at once.
 
 ## Files

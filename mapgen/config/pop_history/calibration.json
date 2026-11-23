@@ -4,7 +4,7 @@
   "Canon is silent on realm populations in tabletop sources, so every figure is 'inferred' from canon *rank* (largest city, richest province, ...) and kept in proportion between realms; confidence says how far to trust it.",
   "Every tag that owns an emitted state needs an entry (the generator errors otherwise), except UNO: it takes no total, only unclaimed_pop."
  ],
- "scale_factor": 5,
+ "scale_factor": 25,
  "min_pop_size": 100,
  "unclaimed_pop": {
   "culture": "goblin",
