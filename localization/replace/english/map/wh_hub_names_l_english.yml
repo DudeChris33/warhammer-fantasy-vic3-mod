@@ -4,7 +4,7 @@
  HUB_NAME_STATE_LAND_006_farm:0 "Land 006 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_006_mine:0 "Land 006 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_006_wood:0 "Land 006 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_009_city:0 "Land 009 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_009_city:0 "Land 009" # AUTOGEN
  HUB_NAME_STATE_LAND_009_port:0 "Land 009 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_009_farm:0 "Land 009 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_009_mine:0 "Land 009 (mine)" # AUTOGEN
@@ -19,12 +19,12 @@
  HUB_NAME_STATE_LAND_018_farm:0 "Land 018 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_018_mine:0 "Land 018 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_018_wood:0 "Land 018 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_020_city:0 "Land 020 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_020_city:0 "Land 020" # AUTOGEN
  HUB_NAME_STATE_LAND_020_port:0 "Land 020 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_020_farm:0 "Land 020 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_020_mine:0 "Land 020 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_020_wood:0 "Land 020 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_021_city:0 "Land 021 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_021_city:0 "Land 021" # AUTOGEN
  HUB_NAME_STATE_LAND_021_port:0 "Land 021 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_021_farm:0 "Land 021 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_021_mine:0 "Land 021 (mine)" # AUTOGEN
@@ -34,7 +34,7 @@
  HUB_NAME_STATE_LAND_025_farm:0 "Land 025 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_025_mine:0 "Land 025 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_025_wood:0 "Land 025 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_026_city:0 "Land 026 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_026_city:0 "Land 026" # AUTOGEN
  HUB_NAME_STATE_LAND_026_port:0 "Land 026 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_026_farm:0 "Land 026 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_026_mine:0 "Land 026 (mine)" # AUTOGEN
@@ -44,16 +44,16 @@
  HUB_NAME_STATE_LAND_027_farm:0 "Land 027 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_027_mine:0 "Land 027 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_027_wood:0 "Land 027 (wood)" # AUTOGEN
- HUB_NAME_STATE_BLIGHTED_ISLE_city:0 "Blighted Isle (city)" # AUTOGEN
+ HUB_NAME_STATE_BLIGHTED_ISLE_city:0 "Blighted Isle" # AUTOGEN
  HUB_NAME_STATE_BLIGHTED_ISLE_port:0 "Blighted Isle (port)" # AUTOGEN
  HUB_NAME_STATE_BLIGHTED_ISLE_farm:0 "Blighted Isle (farm)" # AUTOGEN
  HUB_NAME_STATE_BLIGHTED_ISLE_mine:0 "Blighted Isle (mine)" # AUTOGEN
  HUB_NAME_STATE_BLIGHTED_ISLE_wood:0 "Blighted Isle (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_031_city:0 "Land 031 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_031_city:0 "Land 031" # AUTOGEN
  HUB_NAME_STATE_LAND_031_farm:0 "Land 031 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_031_mine:0 "Land 031 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_031_wood:0 "Land 031 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_034_city:0 "Land 034 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_034_city:0 "Land 034" # AUTOGEN
  HUB_NAME_STATE_LAND_034_farm:0 "Land 034 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_034_mine:0 "Land 034 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_034_wood:0 "Land 034 (wood)" # AUTOGEN
@@ -144,8 +144,8 @@
  HUB_NAME_STATE_MONTFORT_mine:0 "Tharravil"
  HUB_NAME_STATE_MONTFORT_port:0 "Pont-Tharravil"
  HUB_NAME_STATE_MONTFORT_wood:0 "Bois-de-Montfort"
- HUB_NAME_STATE_MONTFORT_city:0 "Montfort (city)" # AUTOGEN
- HUB_NAME_STATE_MONTFORT_farm:0 "Montfort (farm)" # AUTOGEN
+ HUB_NAME_STATE_MONTFORT_city:0 "Montfort"
+ HUB_NAME_STATE_MONTFORT_farm:0 "Champ-Fort"
  HUB_NAME_STATE_CROOKED_CORRIDOR_city:0 "Karak Ziflin"
  HUB_NAME_STATE_CROOKED_CORRIDOR_mine:0 "Grim Duraz"
  HUB_NAME_STATE_CROOKED_CORRIDOR_farm:0 "Blackstone Tower"
@@ -156,9 +156,9 @@
  HUB_NAME_STATE_OIS_GAP_wood:0 "Oiswood"
  HUB_NAME_STATE_DRAKWALD_FOREST_city:0 "Carroburg"
  HUB_NAME_STATE_DRAKWALD_FOREST_farm:0 "Fassberg"
+ HUB_NAME_STATE_DRAKWALD_FOREST_mine:0 "Glimmgrube"
+ HUB_NAME_STATE_DRAKWALD_FOREST_wood:0 "Glimmwald"
  HUB_NAME_STATE_DRAKWALD_FOREST_port:0 "Drakwald Forest (port)" # AUTOGEN
- HUB_NAME_STATE_DRAKWALD_FOREST_mine:0 "Drakwald Forest (mine)" # AUTOGEN
- HUB_NAME_STATE_DRAKWALD_FOREST_wood:0 "Drakwald Forest (wood)" # AUTOGEN
  HUB_NAME_STATE_VORBERGLAND_city:0 "Bögenhafen"
  HUB_NAME_STATE_VORBERGLAND_farm:0 "Eilhart"
  HUB_NAME_STATE_VORBERGLAND_port:0 "Vorbergshafen"
@@ -228,7 +228,7 @@
  HUB_NAME_STATE_LYONESSE_farm:0 "Barfleur"
  HUB_NAME_STATE_LYONESSE_mine:0 "Mont-Lyon"
  HUB_NAME_STATE_LYONESSE_wood:0 "Bois-Lyonnais"
- HUB_NAME_STATE_LYONESSE_city:0 "Lyonesse (city)" # AUTOGEN
+ HUB_NAME_STATE_LYONESSE_city:0 "Lyonesse"
  HUB_NAME_STATE_CANTABRIO_ROAD_city:0 "Bilbali"
  HUB_NAME_STATE_CANTABRIO_ROAD_port:0 "Barboza"
  HUB_NAME_STATE_CANTABRIO_ROAD_farm:0 "Alquezaro"
@@ -272,7 +272,7 @@
  HUB_NAME_STATE_SOUTHEAST_MAGRITTA_farm:0 "Aguilas"
  HUB_NAME_STATE_SOUTHEAST_MAGRITTA_mine:0 "Canteras de Almagora"
  HUB_NAME_STATE_SOUTHEAST_MAGRITTA_wood:0 "Pinar de Sitges"
- HUB_NAME_STATE_SOUTHEAST_MAGRITTA_city:0 "Southeast Magritta (city)" # AUTOGEN
+ HUB_NAME_STATE_SOUTHEAST_MAGRITTA_city:0 "Almagora"
  HUB_NAME_STATE_EAST_MAGRITTA_city:0 "Zaragoz"
  HUB_NAME_STATE_EAST_MAGRITTA_farm:0 "Guakazar"
  HUB_NAME_STATE_EAST_MAGRITTA_mine:0 "Solsona"
@@ -325,8 +325,8 @@
  HUB_NAME_STATE_APUCCINI_MOUNTAINS_city:0 "Karak Grom"
  HUB_NAME_STATE_APUCCINI_MOUNTAINS_farm:0 "Kazad Sedazund"
  HUB_NAME_STATE_APUCCINI_MOUNTAINS_wood:0 "Zarakzil"
+ HUB_NAME_STATE_APUCCINI_MOUNTAINS_mine:0 "Queekwell"
  HUB_NAME_STATE_APUCCINI_MOUNTAINS_port:0 "Apuccini Mountains (port)" # AUTOGEN
- HUB_NAME_STATE_APUCCINI_MOUNTAINS_mine:0 "Apuccini Mountains (mine)" # AUTOGEN
  HUB_NAME_STATE_AQUILENA_city:0 "Aquilena"
  HUB_NAME_STATE_AQUILENA_port:0 "Zvorak"
  HUB_NAME_STATE_AQUILENA_farm:0 "Argalis"
@@ -379,22 +379,22 @@
  HUB_NAME_STATE_LAND_126_farm:0 "Land 126 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_126_mine:0 "Land 126 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_126_wood:0 "Land 126 (wood)" # AUTOGEN
- HUB_NAME_STATE_INNER_SEA_CHAIN_city:0 "Inner Sea Chain (city)" # AUTOGEN
+ HUB_NAME_STATE_INNER_SEA_CHAIN_city:0 "Inner Sea Chain" # AUTOGEN
  HUB_NAME_STATE_INNER_SEA_CHAIN_port:0 "Inner Sea Chain (port)" # AUTOGEN
  HUB_NAME_STATE_INNER_SEA_CHAIN_farm:0 "Inner Sea Chain (farm)" # AUTOGEN
  HUB_NAME_STATE_INNER_SEA_CHAIN_mine:0 "Inner Sea Chain (mine)" # AUTOGEN
  HUB_NAME_STATE_INNER_SEA_CHAIN_wood:0 "Inner Sea Chain (wood)" # AUTOGEN
- HUB_NAME_STATE_SOUTH_SHIFTING_ISLES_city:0 "South Shifting Isles (city)" # AUTOGEN
+ HUB_NAME_STATE_SOUTH_SHIFTING_ISLES_city:0 "South Shifting Isles" # AUTOGEN
  HUB_NAME_STATE_SOUTH_SHIFTING_ISLES_port:0 "South Shifting Isles (port)" # AUTOGEN
  HUB_NAME_STATE_SOUTH_SHIFTING_ISLES_farm:0 "South Shifting Isles (farm)" # AUTOGEN
  HUB_NAME_STATE_SOUTH_SHIFTING_ISLES_mine:0 "South Shifting Isles (mine)" # AUTOGEN
  HUB_NAME_STATE_SOUTH_SHIFTING_ISLES_wood:0 "South Shifting Isles (wood)" # AUTOGEN
- HUB_NAME_STATE_NORTH_SHIFTING_ISLES_city:0 "North Shifting Isles (city)" # AUTOGEN
+ HUB_NAME_STATE_NORTH_SHIFTING_ISLES_city:0 "North Shifting Isles" # AUTOGEN
  HUB_NAME_STATE_NORTH_SHIFTING_ISLES_port:0 "North Shifting Isles (port)" # AUTOGEN
  HUB_NAME_STATE_NORTH_SHIFTING_ISLES_farm:0 "North Shifting Isles (farm)" # AUTOGEN
  HUB_NAME_STATE_NORTH_SHIFTING_ISLES_mine:0 "North Shifting Isles (mine)" # AUTOGEN
  HUB_NAME_STATE_NORTH_SHIFTING_ISLES_wood:0 "North Shifting Isles (wood)" # AUTOGEN
- HUB_NAME_STATE_GAEAN_VALE_city:0 "Gaean Vale (city)" # AUTOGEN
+ HUB_NAME_STATE_GAEAN_VALE_city:0 "Gaean Vale" # AUTOGEN
  HUB_NAME_STATE_GAEAN_VALE_port:0 "Gaean Vale (port)" # AUTOGEN
  HUB_NAME_STATE_GAEAN_VALE_farm:0 "Gaean Vale (farm)" # AUTOGEN
  HUB_NAME_STATE_GAEAN_VALE_mine:0 "Gaean Vale (mine)" # AUTOGEN
@@ -429,7 +429,7 @@
  HUB_NAME_STATE_VOLCANIC_ISLANDS_farm:0 "Fuming Serpent"
  HUB_NAME_STATE_VOLCANIC_ISLANDS_mine:0 "Spitting Serpent"
  HUB_NAME_STATE_VOLCANIC_ISLANDS_wood:0 "Volcano Canopy"
- HUB_NAME_STATE_ISLES_OF_DOOM_city:0 "Isles of Doom (city)" # AUTOGEN
+ HUB_NAME_STATE_ISLES_OF_DOOM_city:0 "Isles of Doom" # AUTOGEN
  HUB_NAME_STATE_ISLES_OF_DOOM_port:0 "Isles of Doom (port)" # AUTOGEN
  HUB_NAME_STATE_ISLES_OF_DOOM_farm:0 "Isles of Doom (farm)" # AUTOGEN
  HUB_NAME_STATE_ISLES_OF_DOOM_mine:0 "Isles of Doom (mine)" # AUTOGEN
@@ -454,12 +454,12 @@
  HUB_NAME_STATE_LAND_162_farm:0 "Land 162 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_162_mine:0 "Land 162 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_162_wood:0 "Land 162 (wood)" # AUTOGEN
- HUB_NAME_STATE_TOR_ELITHIS_city:0 "Tor Elithis (city)" # AUTOGEN
+ HUB_NAME_STATE_TOR_ELITHIS_city:0 "Tor Elithis" # AUTOGEN
  HUB_NAME_STATE_TOR_ELITHIS_port:0 "Tor Elithis (port)" # AUTOGEN
  HUB_NAME_STATE_TOR_ELITHIS_farm:0 "Tor Elithis (farm)" # AUTOGEN
  HUB_NAME_STATE_TOR_ELITHIS_mine:0 "Tor Elithis (mine)" # AUTOGEN
  HUB_NAME_STATE_TOR_ELITHIS_wood:0 "Tor Elithis (wood)" # AUTOGEN
- HUB_NAME_STATE_NORTH_ISLE_city:0 "North Isle (city)" # AUTOGEN
+ HUB_NAME_STATE_NORTH_ISLE_city:0 "North Isle" # AUTOGEN
  HUB_NAME_STATE_NORTH_ISLE_port:0 "North Isle (port)" # AUTOGEN
  HUB_NAME_STATE_NORTH_ISLE_farm:0 "North Isle (farm)" # AUTOGEN
  HUB_NAME_STATE_NORTH_ISLE_mine:0 "North Isle (mine)" # AUTOGEN
@@ -474,12 +474,12 @@
  HUB_NAME_STATE_LAND_169_farm:0 "Land 169 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_169_mine:0 "Land 169 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_169_wood:0 "Land 169 (wood)" # AUTOGEN
- HUB_NAME_STATE_ISLE_OF_DAWN_city:0 "Isle of Dawn (city)" # AUTOGEN
+ HUB_NAME_STATE_ISLE_OF_DAWN_city:0 "Isle of Dawn" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_DAWN_port:0 "Isle of Dawn (port)" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_DAWN_farm:0 "Isle of Dawn (farm)" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_DAWN_mine:0 "Isle of Dawn (mine)" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_DAWN_wood:0 "Isle of Dawn (wood)" # AUTOGEN
- HUB_NAME_STATE_TOR_ELASOR_city:0 "Tor Elasor (city)" # AUTOGEN
+ HUB_NAME_STATE_TOR_ELASOR_city:0 "Tor Elasor" # AUTOGEN
  HUB_NAME_STATE_TOR_ELASOR_port:0 "Tor Elasor (port)" # AUTOGEN
  HUB_NAME_STATE_TOR_ELASOR_farm:0 "Tor Elasor (farm)" # AUTOGEN
  HUB_NAME_STATE_TOR_ELASOR_mine:0 "Tor Elasor (mine)" # AUTOGEN
@@ -489,17 +489,17 @@
  HUB_NAME_STATE_HORN_OF_ARABY_farm:0 "Horn of Araby (farm)" # AUTOGEN
  HUB_NAME_STATE_HORN_OF_ARABY_mine:0 "Horn of Araby (mine)" # AUTOGEN
  HUB_NAME_STATE_HORN_OF_ARABY_wood:0 "Horn of Araby (wood)" # AUTOGEN
- HUB_NAME_STATE_TOWER_OF_THE_STARS_city:0 "Tower of the Stars (city)" # AUTOGEN
+ HUB_NAME_STATE_TOWER_OF_THE_STARS_city:0 "Tower of the Stars" # AUTOGEN
  HUB_NAME_STATE_TOWER_OF_THE_STARS_port:0 "Tower of the Stars (port)" # AUTOGEN
  HUB_NAME_STATE_TOWER_OF_THE_STARS_farm:0 "Tower of the Stars (farm)" # AUTOGEN
  HUB_NAME_STATE_TOWER_OF_THE_STARS_mine:0 "Tower of the Stars (mine)" # AUTOGEN
  HUB_NAME_STATE_TOWER_OF_THE_STARS_wood:0 "Tower of the Stars (wood)" # AUTOGEN
- HUB_NAME_STATE_STARS_ARCHIPELAGO_city:0 "Stars Archipelago (city)" # AUTOGEN
+ HUB_NAME_STATE_STARS_ARCHIPELAGO_city:0 "Stars Archipelago" # AUTOGEN
  HUB_NAME_STATE_STARS_ARCHIPELAGO_port:0 "Stars Archipelago (port)" # AUTOGEN
  HUB_NAME_STATE_STARS_ARCHIPELAGO_farm:0 "Stars Archipelago (farm)" # AUTOGEN
  HUB_NAME_STATE_STARS_ARCHIPELAGO_mine:0 "Stars Archipelago (mine)" # AUTOGEN
  HUB_NAME_STATE_STARS_ARCHIPELAGO_wood:0 "Stars Archipelago (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_179_city:0 "Land 179 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_179_city:0 "Land 179" # AUTOGEN
  HUB_NAME_STATE_LAND_179_port:0 "Land 179 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_179_farm:0 "Land 179 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_179_mine:0 "Land 179 (mine)" # AUTOGEN
@@ -891,7 +891,7 @@
  HUB_NAME_STATE_ZORN_UZKUL_mine:0 "Pits of Uzkulak"
  HUB_NAME_STATE_ZORN_UZKUL_farm:0 "Uzkulak Chainfields"
  HUB_NAME_STATE_ZORN_UZKUL_wood:0 "Stormvrack Pines"
- HUB_NAME_STATE_ZORN_UZKUL_port:0 "Zorn Uzkul (port)" # AUTOGEN
+ HUB_NAME_STATE_ZORN_UZKUL_port:0 "Great Slave Port"
  HUB_NAME_STATE_SKULL_ROAD_city:0 "Uzkulany"
  HUB_NAME_STATE_SKULL_ROAD_farm:0 "Ozergrany"
  HUB_NAME_STATE_SKULL_ROAD_mine:0 "Kamenny Klyk"
@@ -1159,7 +1159,7 @@
  HUB_NAME_STATE_FROZEN_COAST_port:0 "Frozen Landing"
  HUB_NAME_STATE_FROZEN_COAST_farm:0 "Ursfjord"
  HUB_NAME_STATE_FROZEN_COAST_wood:0 "Frostholt"
- HUB_NAME_STATE_FROZEN_COAST_mine:0 "Frozen Coast (mine)" # AUTOGEN
+ HUB_NAME_STATE_FROZEN_COAST_mine:0 "Isberg"
  HUB_NAME_STATE_TALDURSFJORD_city:0 "Hrothraxhall"
  HUB_NAME_STATE_TALDURSFJORD_port:0 "Drakefjord"
  HUB_NAME_STATE_TALDURSFJORD_farm:0 "Kaldeng"
@@ -1216,12 +1216,12 @@
  HUB_NAME_STATE_PLACEHOLDER_farm:0 "placeholder (farm)" # AUTOGEN
  HUB_NAME_STATE_PLACEHOLDER_mine:0 "placeholder (mine)" # AUTOGEN
  HUB_NAME_STATE_PLACEHOLDER_wood:0 "placeholder (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_365_city:0 "Land 365 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_365_city:0 "Land 365" # AUTOGEN
  HUB_NAME_STATE_LAND_365_port:0 "Land 365 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_365_farm:0 "Land 365 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_365_mine:0 "Land 365 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_365_wood:0 "Land 365 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_366_city:0 "Land 366 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_366_city:0 "Land 366" # AUTOGEN
  HUB_NAME_STATE_LAND_366_port:0 "Land 366 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_366_farm:0 "Land 366 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_366_mine:0 "Land 366 (mine)" # AUTOGEN
@@ -1236,7 +1236,7 @@
  HUB_NAME_STATE_LAND_368_farm:0 "Land 368 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_368_mine:0 "Land 368 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_368_wood:0 "Land 368 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_369_city:0 "Land 369 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_369_city:0 "Land 369" # AUTOGEN
  HUB_NAME_STATE_LAND_369_port:0 "Land 369 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_369_farm:0 "Land 369 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_369_mine:0 "Land 369 (mine)" # AUTOGEN
@@ -1262,7 +1262,7 @@
  HUB_NAME_STATE_FORT_STRAGHOV_farm:0 "Fort Ostrosk"
  HUB_NAME_STATE_FORT_STRAGHOV_mine:0 "Zvenilev"
  HUB_NAME_STATE_FORT_STRAGHOV_wood:0 "Lesnoy Ostrog"
- HUB_NAME_STATE_SOUTHERN_SIREN_ISLES_city:0 "Southern Siren Isles (city)" # AUTOGEN
+ HUB_NAME_STATE_SOUTHERN_SIREN_ISLES_city:0 "Southern Siren Isles" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_SIREN_ISLES_port:0 "Southern Siren Isles (port)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_SIREN_ISLES_farm:0 "Southern Siren Isles (farm)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_SIREN_ISLES_mine:0 "Southern Siren Isles (mine)" # AUTOGEN
@@ -1282,7 +1282,7 @@
  HUB_NAME_STATE_LAND_405_farm:0 "Land 405 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_405_mine:0 "Land 405 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_405_wood:0 "Land 405 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_415_city:0 "Land 415 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_415_city:0 "Land 415" # AUTOGEN
  HUB_NAME_STATE_LAND_415_port:0 "Land 415 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_415_farm:0 "Land 415 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_415_mine:0 "Land 415 (mine)" # AUTOGEN
@@ -1292,17 +1292,17 @@
  HUB_NAME_STATE_LAND_416_farm:0 "Land 416 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_416_mine:0 "Land 416 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_416_wood:0 "Land 416 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_427_city:0 "Land 427 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_427_city:0 "Land 427" # AUTOGEN
  HUB_NAME_STATE_LAND_427_port:0 "Land 427 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_427_farm:0 "Land 427 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_427_mine:0 "Land 427 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_427_wood:0 "Land 427 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_430_city:0 "Land 430 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_430_city:0 "Land 430" # AUTOGEN
  HUB_NAME_STATE_LAND_430_port:0 "Land 430 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_430_farm:0 "Land 430 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_430_mine:0 "Land 430 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_430_wood:0 "Land 430 (wood)" # AUTOGEN
- HUB_NAME_STATE_DRAKE_ISLES_city:0 "Drake Isles (city)" # AUTOGEN
+ HUB_NAME_STATE_DRAKE_ISLES_city:0 "Drake Isles" # AUTOGEN
  HUB_NAME_STATE_DRAKE_ISLES_port:0 "Drake Isles (port)" # AUTOGEN
  HUB_NAME_STATE_DRAKE_ISLES_farm:0 "Drake Isles (farm)" # AUTOGEN
  HUB_NAME_STATE_DRAKE_ISLES_mine:0 "Drake Isles (mine)" # AUTOGEN
@@ -1312,7 +1312,7 @@
  HUB_NAME_STATE_ISLE_OF_THE_CRIMSON_SKULL_farm:0 "Crimson Skull Terraces"
  HUB_NAME_STATE_ISLE_OF_THE_CRIMSON_SKULL_mine:0 "Crimson Skull Obsidian Quarry"
  HUB_NAME_STATE_ISLE_OF_THE_CRIMSON_SKULL_wood:0 "Crimson Skull Ironwood Stand"
- HUB_NAME_STATE_EASTERN_COLONIES_city:0 "Eastern Colonies (city)" # AUTOGEN
+ HUB_NAME_STATE_EASTERN_COLONIES_city:0 "Eastern Colonies" # AUTOGEN
  HUB_NAME_STATE_EASTERN_COLONIES_port:0 "Eastern Colonies (port)" # AUTOGEN
  HUB_NAME_STATE_EASTERN_COLONIES_farm:0 "Eastern Colonies (farm)" # AUTOGEN
  HUB_NAME_STATE_EASTERN_COLONIES_mine:0 "Eastern Colonies (mine)" # AUTOGEN
@@ -1633,9 +1633,9 @@
  HUB_NAME_STATE_NORTH_CAPE_wood:0 "Kappskog"
  HUB_NAME_STATE_MARIENBURG_farm:0 "Klessen"
  HUB_NAME_STATE_MARIENBURG_mine:0 "Erlach"
- HUB_NAME_STATE_MARIENBURG_city:0 "Marienburg (city)" # AUTOGEN
- HUB_NAME_STATE_MARIENBURG_port:0 "Marienburg (port)" # AUTOGEN
- HUB_NAME_STATE_MARIENBURG_wood:0 "Marienburg (wood)" # AUTOGEN
+ HUB_NAME_STATE_MARIENBURG_city:0 "Marienburg"
+ HUB_NAME_STATE_MARIENBURG_port:0 "Suiddock"
+ HUB_NAME_STATE_MARIENBURG_wood:0 "Kruiersgat"
  HUB_NAME_STATE_SHANIDAAR_city:0 "Shanidaar"
  HUB_NAME_STATE_SHANIDAAR_port:0 "Cape Kharpentharia"
  HUB_NAME_STATE_SHANIDAAR_farm:0 "Idol of Asaph"
@@ -1696,203 +1696,203 @@
  HUB_NAME_STATE_PYRAMID_OF_TUTANKHANUT_farm:0 "Temple-Shrine of Rahmohtep"
  HUB_NAME_STATE_PYRAMID_OF_TUTANKHANUT_mine:0 "Quarries of Nekaph"
  HUB_NAME_STATE_PYRAMID_OF_TUTANKHANUT_wood:0 "Oasis of Tahoth"
- HUB_NAME_STATE_GREAT_MORTIS_DELTA_city:0 "Great Mortis Delta (city)" # AUTOGEN
+ HUB_NAME_STATE_GREAT_MORTIS_DELTA_city:0 "Great Mortis Delta" # AUTOGEN
  HUB_NAME_STATE_GREAT_MORTIS_DELTA_port:0 "Great Mortis Delta (port)" # AUTOGEN
  HUB_NAME_STATE_GREAT_MORTIS_DELTA_farm:0 "Great Mortis Delta (farm)" # AUTOGEN
  HUB_NAME_STATE_GREAT_MORTIS_DELTA_mine:0 "Great Mortis Delta (mine)" # AUTOGEN
  HUB_NAME_STATE_GREAT_MORTIS_DELTA_wood:0 "Great Mortis Delta (wood)" # AUTOGEN
  HUB_NAME_STATE_SWAMP_OF_TERROR_port:0 "Wrekkaz Landing"
  HUB_NAME_STATE_SWAMP_OF_TERROR_farm:0 "Swamp of Terror"
- HUB_NAME_STATE_SWAMP_OF_TERROR_city:0 "Swamp of Terror (city)" # AUTOGEN
+ HUB_NAME_STATE_SWAMP_OF_TERROR_city:0 "Swamp of Terror" # AUTOGEN
  HUB_NAME_STATE_SWAMP_OF_TERROR_mine:0 "Swamp of Terror (mine)" # AUTOGEN
  HUB_NAME_STATE_SWAMP_OF_TERROR_wood:0 "Swamp of Terror (wood)" # AUTOGEN
  HUB_NAME_STATE_LAURELORN_FOREST_farm:0 "Tor Lithanel"
- HUB_NAME_STATE_LAURELORN_FOREST_city:0 "Laurelorn Forest (city)" # AUTOGEN
+ HUB_NAME_STATE_LAURELORN_FOREST_city:0 "Laurelorn Forest" # AUTOGEN
  HUB_NAME_STATE_LAURELORN_FOREST_port:0 "Laurelorn Forest (port)" # AUTOGEN
  HUB_NAME_STATE_LAURELORN_FOREST_mine:0 "Laurelorn Forest (mine)" # AUTOGEN
  HUB_NAME_STATE_LAURELORN_FOREST_wood:0 "Laurelorn Forest (wood)" # AUTOGEN
- HUB_NAME_STATE_THE_DRAGON_SPINE_city:0 "The Dragon Spine (city)" # AUTOGEN
+ HUB_NAME_STATE_THE_DRAGON_SPINE_city:0 "The Dragon Spine" # AUTOGEN
  HUB_NAME_STATE_THE_DRAGON_SPINE_port:0 "The Dragon Spine (port)" # AUTOGEN
  HUB_NAME_STATE_THE_DRAGON_SPINE_farm:0 "The Dragon Spine (farm)" # AUTOGEN
  HUB_NAME_STATE_THE_DRAGON_SPINE_mine:0 "The Dragon Spine (mine)" # AUTOGEN
  HUB_NAME_STATE_THE_DRAGON_SPINE_wood:0 "The Dragon Spine (wood)" # AUTOGEN
- HUB_NAME_STATE_SOUTHERN_YVRESSE_city:0 "Southern Yvresse (city)" # AUTOGEN
+ HUB_NAME_STATE_SOUTHERN_YVRESSE_city:0 "Southern Yvresse" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_YVRESSE_port:0 "Southern Yvresse (port)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_YVRESSE_farm:0 "Southern Yvresse (farm)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_YVRESSE_mine:0 "Southern Yvresse (mine)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_YVRESSE_wood:0 "Southern Yvresse (wood)" # AUTOGEN
- HUB_NAME_STATE_EASTERN_EATAINE_city:0 "Eastern Eataine (city)" # AUTOGEN
+ HUB_NAME_STATE_EASTERN_EATAINE_city:0 "Eastern Eataine" # AUTOGEN
  HUB_NAME_STATE_EASTERN_EATAINE_port:0 "Eastern Eataine (port)" # AUTOGEN
  HUB_NAME_STATE_EASTERN_EATAINE_farm:0 "Eastern Eataine (farm)" # AUTOGEN
  HUB_NAME_STATE_EASTERN_EATAINE_mine:0 "Eastern Eataine (mine)" # AUTOGEN
  HUB_NAME_STATE_EASTERN_EATAINE_wood:0 "Eastern Eataine (wood)" # AUTOGEN
- HUB_NAME_STATE_LOTHERN_EAST_city:0 "Lothern East (city)" # AUTOGEN
+ HUB_NAME_STATE_LOTHERN_EAST_city:0 "Lothern East" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_EAST_port:0 "Lothern East (port)" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_EAST_farm:0 "Lothern East (farm)" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_EAST_mine:0 "Lothern East (mine)" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_EAST_wood:0 "Lothern East (wood)" # AUTOGEN
- HUB_NAME_STATE_ANGERRIAL_city:0 "Angerrial (city)" # AUTOGEN
+ HUB_NAME_STATE_ANGERRIAL_city:0 "Angerrial" # AUTOGEN
  HUB_NAME_STATE_ANGERRIAL_port:0 "Angerrial (port)" # AUTOGEN
  HUB_NAME_STATE_ANGERRIAL_farm:0 "Angerrial (farm)" # AUTOGEN
  HUB_NAME_STATE_ANGERRIAL_mine:0 "Angerrial (mine)" # AUTOGEN
  HUB_NAME_STATE_ANGERRIAL_wood:0 "Angerrial (wood)" # AUTOGEN
- HUB_NAME_STATE_SOUTHERN_SAPHERY_city:0 "Southern Saphery (city)" # AUTOGEN
+ HUB_NAME_STATE_SOUTHERN_SAPHERY_city:0 "Southern Saphery" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_SAPHERY_port:0 "Southern Saphery (port)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_SAPHERY_farm:0 "Southern Saphery (farm)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_SAPHERY_mine:0 "Southern Saphery (mine)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_SAPHERY_wood:0 "Southern Saphery (wood)" # AUTOGEN
- HUB_NAME_STATE_NORTHERN_YVRESSE_city:0 "Northern Yvresse (city)" # AUTOGEN
+ HUB_NAME_STATE_NORTHERN_YVRESSE_city:0 "Northern Yvresse" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_YVRESSE_port:0 "Northern Yvresse (port)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_YVRESSE_farm:0 "Northern Yvresse (farm)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_YVRESSE_mine:0 "Northern Yvresse (mine)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_YVRESSE_wood:0 "Northern Yvresse (wood)" # AUTOGEN
- HUB_NAME_STATE_NORTHERN_SAPHERY_city:0 "Northern Saphery (city)" # AUTOGEN
+ HUB_NAME_STATE_NORTHERN_SAPHERY_city:0 "Northern Saphery" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_SAPHERY_port:0 "Northern Saphery (port)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_SAPHERY_farm:0 "Northern Saphery (farm)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_SAPHERY_mine:0 "Northern Saphery (mine)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_SAPHERY_wood:0 "Northern Saphery (wood)" # AUTOGEN
- HUB_NAME_STATE_SKYHAVEN_PLATEAU_city:0 "Skyhaven Plateau (city)" # AUTOGEN
+ HUB_NAME_STATE_SKYHAVEN_PLATEAU_city:0 "Skyhaven Plateau" # AUTOGEN
  HUB_NAME_STATE_SKYHAVEN_PLATEAU_port:0 "Skyhaven Plateau (port)" # AUTOGEN
  HUB_NAME_STATE_SKYHAVEN_PLATEAU_farm:0 "Skyhaven Plateau (farm)" # AUTOGEN
  HUB_NAME_STATE_SKYHAVEN_PLATEAU_mine:0 "Skyhaven Plateau (mine)" # AUTOGEN
  HUB_NAME_STATE_SKYHAVEN_PLATEAU_wood:0 "Skyhaven Plateau (wood)" # AUTOGEN
- HUB_NAME_STATE_CHRACE_city:0 "Chrace (city)" # AUTOGEN
+ HUB_NAME_STATE_CHRACE_city:0 "Chrace" # AUTOGEN
  HUB_NAME_STATE_CHRACE_port:0 "Chrace (port)" # AUTOGEN
  HUB_NAME_STATE_CHRACE_farm:0 "Chrace (farm)" # AUTOGEN
  HUB_NAME_STATE_CHRACE_mine:0 "Chrace (mine)" # AUTOGEN
  HUB_NAME_STATE_CHRACE_wood:0 "Chrace (wood)" # AUTOGEN
- HUB_NAME_STATE_CLOTHIQUE_city:0 "Clothique (city)" # AUTOGEN
+ HUB_NAME_STATE_CLOTHIQUE_city:0 "Clothique" # AUTOGEN
  HUB_NAME_STATE_CLOTHIQUE_port:0 "Clothique (port)" # AUTOGEN
  HUB_NAME_STATE_CLOTHIQUE_farm:0 "Clothique (farm)" # AUTOGEN
  HUB_NAME_STATE_CLOTHIQUE_mine:0 "Clothique (mine)" # AUTOGEN
  HUB_NAME_STATE_CLOTHIQUE_wood:0 "Clothique (wood)" # AUTOGEN
- HUB_NAME_STATE_FINUVAL_PLAIN_city:0 "Finuval Plain (city)" # AUTOGEN
+ HUB_NAME_STATE_FINUVAL_PLAIN_city:0 "Finuval Plain" # AUTOGEN
  HUB_NAME_STATE_FINUVAL_PLAIN_port:0 "Finuval Plain (port)" # AUTOGEN
  HUB_NAME_STATE_FINUVAL_PLAIN_farm:0 "Finuval Plain (farm)" # AUTOGEN
  HUB_NAME_STATE_FINUVAL_PLAIN_mine:0 "Finuval Plain (mine)" # AUTOGEN
  HUB_NAME_STATE_FINUVAL_PLAIN_wood:0 "Finuval Plain (wood)" # AUTOGEN
- HUB_NAME_STATE_AVELORN_city:0 "Avelorn (city)" # AUTOGEN
+ HUB_NAME_STATE_AVELORN_city:0 "Avelorn" # AUTOGEN
  HUB_NAME_STATE_AVELORN_port:0 "Avelorn (port)" # AUTOGEN
  HUB_NAME_STATE_AVELORN_farm:0 "Avelorn (farm)" # AUTOGEN
  HUB_NAME_STATE_AVELORN_mine:0 "Avelorn (mine)" # AUTOGEN
  HUB_NAME_STATE_AVELORN_wood:0 "Avelorn (wood)" # AUTOGEN
- HUB_NAME_STATE_NORTHERN_ELLYRION_city:0 "Northern Ellyrion (city)" # AUTOGEN
+ HUB_NAME_STATE_NORTHERN_ELLYRION_city:0 "Northern Ellyrion" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_ELLYRION_port:0 "Northern Ellyrion (port)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_ELLYRION_farm:0 "Northern Ellyrion (farm)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_ELLYRION_mine:0 "Northern Ellyrion (mine)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_ELLYRION_wood:0 "Northern Ellyrion (wood)" # AUTOGEN
- HUB_NAME_STATE_PHOENIX_GATE_city:0 "Phoenix Gate (city)" # AUTOGEN
+ HUB_NAME_STATE_PHOENIX_GATE_city:0 "Phoenix Gate" # AUTOGEN
  HUB_NAME_STATE_PHOENIX_GATE_farm:0 "Phoenix Gate (farm)" # AUTOGEN
  HUB_NAME_STATE_PHOENIX_GATE_mine:0 "Phoenix Gate (mine)" # AUTOGEN
  HUB_NAME_STATE_PHOENIX_GATE_wood:0 "Phoenix Gate (wood)" # AUTOGEN
- HUB_NAME_STATE_DESOLATION_OF_TETHLIS_city:0 "Desolation of Tethlis (city)" # AUTOGEN
+ HUB_NAME_STATE_DESOLATION_OF_TETHLIS_city:0 "Desolation of Tethlis" # AUTOGEN
  HUB_NAME_STATE_DESOLATION_OF_TETHLIS_port:0 "Desolation of Tethlis (port)" # AUTOGEN
  HUB_NAME_STATE_DESOLATION_OF_TETHLIS_farm:0 "Desolation of Tethlis (farm)" # AUTOGEN
  HUB_NAME_STATE_DESOLATION_OF_TETHLIS_mine:0 "Desolation of Tethlis (mine)" # AUTOGEN
  HUB_NAME_STATE_DESOLATION_OF_TETHLIS_wood:0 "Desolation of Tethlis (wood)" # AUTOGEN
- HUB_NAME_STATE_SHADOW_MARCH_city:0 "Shadow March (city)" # AUTOGEN
+ HUB_NAME_STATE_SHADOW_MARCH_city:0 "Shadow March" # AUTOGEN
  HUB_NAME_STATE_SHADOW_MARCH_port:0 "Shadow March (port)" # AUTOGEN
  HUB_NAME_STATE_SHADOW_MARCH_farm:0 "Shadow March (farm)" # AUTOGEN
  HUB_NAME_STATE_SHADOW_MARCH_mine:0 "Shadow March (mine)" # AUTOGEN
  HUB_NAME_STATE_SHADOW_MARCH_wood:0 "Shadow March (wood)" # AUTOGEN
- HUB_NAME_STATE_UNICORN_GATE_city:0 "Unicorn Gate (city)" # AUTOGEN
+ HUB_NAME_STATE_UNICORN_GATE_city:0 "Unicorn Gate" # AUTOGEN
  HUB_NAME_STATE_UNICORN_GATE_farm:0 "Unicorn Gate (farm)" # AUTOGEN
  HUB_NAME_STATE_UNICORN_GATE_mine:0 "Unicorn Gate (mine)" # AUTOGEN
  HUB_NAME_STATE_UNICORN_GATE_wood:0 "Unicorn Gate (wood)" # AUTOGEN
- HUB_NAME_STATE_CENTRAL_ELLYRION_city:0 "Central Ellyrion (city)" # AUTOGEN
+ HUB_NAME_STATE_CENTRAL_ELLYRION_city:0 "Central Ellyrion" # AUTOGEN
  HUB_NAME_STATE_CENTRAL_ELLYRION_port:0 "Central Ellyrion (port)" # AUTOGEN
  HUB_NAME_STATE_CENTRAL_ELLYRION_farm:0 "Central Ellyrion (farm)" # AUTOGEN
  HUB_NAME_STATE_CENTRAL_ELLYRION_mine:0 "Central Ellyrion (mine)" # AUTOGEN
  HUB_NAME_STATE_CENTRAL_ELLYRION_wood:0 "Central Ellyrion (wood)" # AUTOGEN
- HUB_NAME_STATE_GRIFFON_GATE_city:0 "Griffon Gate (city)" # AUTOGEN
+ HUB_NAME_STATE_GRIFFON_GATE_city:0 "Griffon Gate" # AUTOGEN
  HUB_NAME_STATE_GRIFFON_GATE_farm:0 "Griffon Gate (farm)" # AUTOGEN
  HUB_NAME_STATE_GRIFFON_GATE_mine:0 "Griffon Gate (mine)" # AUTOGEN
  HUB_NAME_STATE_GRIFFON_GATE_wood:0 "Griffon Gate (wood)" # AUTOGEN
- HUB_NAME_STATE_TIRANOC_city:0 "Tiranoc (city)" # AUTOGEN
+ HUB_NAME_STATE_TIRANOC_city:0 "Tiranoc" # AUTOGEN
  HUB_NAME_STATE_TIRANOC_port:0 "Tiranoc (port)" # AUTOGEN
  HUB_NAME_STATE_TIRANOC_farm:0 "Tiranoc (farm)" # AUTOGEN
  HUB_NAME_STATE_TIRANOC_mine:0 "Tiranoc (mine)" # AUTOGEN
  HUB_NAME_STATE_TIRANOC_wood:0 "Tiranoc (wood)" # AUTOGEN
- HUB_NAME_STATE_EAGLE_GATE_city:0 "Eagle Gate (city)" # AUTOGEN
+ HUB_NAME_STATE_EAGLE_GATE_city:0 "Eagle Gate" # AUTOGEN
  HUB_NAME_STATE_EAGLE_GATE_farm:0 "Eagle Gate (farm)" # AUTOGEN
  HUB_NAME_STATE_EAGLE_GATE_mine:0 "Eagle Gate (mine)" # AUTOGEN
  HUB_NAME_STATE_EAGLE_GATE_wood:0 "Eagle Gate (wood)" # AUTOGEN
- HUB_NAME_STATE_FALLOW_MARSH_city:0 "Fallow Marsh (city)" # AUTOGEN
+ HUB_NAME_STATE_FALLOW_MARSH_city:0 "Fallow Marsh" # AUTOGEN
  HUB_NAME_STATE_FALLOW_MARSH_port:0 "Fallow Marsh (port)" # AUTOGEN
  HUB_NAME_STATE_FALLOW_MARSH_farm:0 "Fallow Marsh (farm)" # AUTOGEN
  HUB_NAME_STATE_FALLOW_MARSH_mine:0 "Fallow Marsh (mine)" # AUTOGEN
  HUB_NAME_STATE_FALLOW_MARSH_wood:0 "Fallow Marsh (wood)" # AUTOGEN
- HUB_NAME_STATE_SOUTHERN_ELLYRION_city:0 "Southern Ellyrion (city)" # AUTOGEN
+ HUB_NAME_STATE_SOUTHERN_ELLYRION_city:0 "Southern Ellyrion" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_ELLYRION_port:0 "Southern Ellyrion (port)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_ELLYRION_farm:0 "Southern Ellyrion (farm)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_ELLYRION_mine:0 "Southern Ellyrion (mine)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_ELLYRION_wood:0 "Southern Ellyrion (wood)" # AUTOGEN
- HUB_NAME_STATE_LOTHERN_WEST_city:0 "Lothern West (city)" # AUTOGEN
+ HUB_NAME_STATE_LOTHERN_WEST_city:0 "Lothern West" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_WEST_port:0 "Lothern West (port)" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_WEST_farm:0 "Lothern West (farm)" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_WEST_mine:0 "Lothern West (mine)" # AUTOGEN
  HUB_NAME_STATE_LOTHERN_WEST_wood:0 "Lothern West (wood)" # AUTOGEN
- HUB_NAME_STATE_INNER_CALEDOR_city:0 "Inner Caledor (city)" # AUTOGEN
+ HUB_NAME_STATE_INNER_CALEDOR_city:0 "Inner Caledor" # AUTOGEN
  HUB_NAME_STATE_INNER_CALEDOR_port:0 "Inner Caledor (port)" # AUTOGEN
  HUB_NAME_STATE_INNER_CALEDOR_farm:0 "Inner Caledor (farm)" # AUTOGEN
  HUB_NAME_STATE_INNER_CALEDOR_mine:0 "Inner Caledor (mine)" # AUTOGEN
  HUB_NAME_STATE_INNER_CALEDOR_wood:0 "Inner Caledor (wood)" # AUTOGEN
- HUB_NAME_STATE_STONESUNG_PLATEAU_city:0 "Stonesung Plateau (city)" # AUTOGEN
+ HUB_NAME_STATE_STONESUNG_PLATEAU_city:0 "Stonesung Plateau" # AUTOGEN
  HUB_NAME_STATE_STONESUNG_PLATEAU_port:0 "Stonesung Plateau (port)" # AUTOGEN
  HUB_NAME_STATE_STONESUNG_PLATEAU_farm:0 "Stonesung Plateau (farm)" # AUTOGEN
  HUB_NAME_STATE_STONESUNG_PLATEAU_mine:0 "Stonesung Plateau (mine)" # AUTOGEN
  HUB_NAME_STATE_STONESUNG_PLATEAU_wood:0 "Stonesung Plateau (wood)" # AUTOGEN
- HUB_NAME_STATE_THE_WHEELED_MARCH_city:0 "The Wheeled March (city)" # AUTOGEN
+ HUB_NAME_STATE_THE_WHEELED_MARCH_city:0 "The Wheeled March" # AUTOGEN
  HUB_NAME_STATE_THE_WHEELED_MARCH_port:0 "The Wheeled March (port)" # AUTOGEN
  HUB_NAME_STATE_THE_WHEELED_MARCH_farm:0 "The Wheeled March (farm)" # AUTOGEN
  HUB_NAME_STATE_THE_WHEELED_MARCH_mine:0 "The Wheeled March (mine)" # AUTOGEN
  HUB_NAME_STATE_THE_WHEELED_MARCH_wood:0 "The Wheeled March (wood)" # AUTOGEN
- HUB_NAME_STATE_SOUTHERN_GATE_OF_CALITH_city:0 "Southern Gate of Calith (city)" # AUTOGEN
+ HUB_NAME_STATE_SOUTHERN_GATE_OF_CALITH_city:0 "Southern Gate of Calith" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_GATE_OF_CALITH_port:0 "Southern Gate of Calith (port)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_GATE_OF_CALITH_farm:0 "Southern Gate of Calith (farm)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_GATE_OF_CALITH_mine:0 "Southern Gate of Calith (mine)" # AUTOGEN
  HUB_NAME_STATE_SOUTHERN_GATE_OF_CALITH_wood:0 "Southern Gate of Calith (wood)" # AUTOGEN
- HUB_NAME_STATE_STARSAND_PORT_city:0 "Starsand Port (city)" # AUTOGEN
+ HUB_NAME_STATE_STARSAND_PORT_city:0 "Starsand Port" # AUTOGEN
  HUB_NAME_STATE_STARSAND_PORT_port:0 "Starsand Port (port)" # AUTOGEN
  HUB_NAME_STATE_STARSAND_PORT_farm:0 "Starsand Port (farm)" # AUTOGEN
  HUB_NAME_STATE_STARSAND_PORT_mine:0 "Starsand Port (mine)" # AUTOGEN
  HUB_NAME_STATE_STARSAND_PORT_wood:0 "Starsand Port (wood)" # AUTOGEN
- HUB_NAME_STATE_ELITHISIAN_GROVE_city:0 "Elithisian Grove (city)" # AUTOGEN
+ HUB_NAME_STATE_ELITHISIAN_GROVE_city:0 "Elithisian Grove" # AUTOGEN
  HUB_NAME_STATE_ELITHISIAN_GROVE_port:0 "Elithisian Grove (port)" # AUTOGEN
  HUB_NAME_STATE_ELITHISIAN_GROVE_farm:0 "Elithisian Grove (farm)" # AUTOGEN
  HUB_NAME_STATE_ELITHISIAN_GROVE_mine:0 "Elithisian Grove (mine)" # AUTOGEN
  HUB_NAME_STATE_ELITHISIAN_GROVE_wood:0 "Elithisian Grove (wood)" # AUTOGEN
- HUB_NAME_STATE_ISLE_OF_AESTUNIAE_city:0 "Isle of Aestuniae (city)" # AUTOGEN
+ HUB_NAME_STATE_ISLE_OF_AESTUNIAE_city:0 "Isle of Aestuniae" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_AESTUNIAE_port:0 "Isle of Aestuniae (port)" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_AESTUNIAE_farm:0 "Isle of Aestuniae (farm)" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_AESTUNIAE_mine:0 "Isle of Aestuniae (mine)" # AUTOGEN
  HUB_NAME_STATE_ISLE_OF_AESTUNIAE_wood:0 "Isle of Aestuniae (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_673_city:0 "Land 673 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_673_city:0 "Land 673" # AUTOGEN
  HUB_NAME_STATE_LAND_673_port:0 "Land 673 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_673_farm:0 "Land 673 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_673_mine:0 "Land 673 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_673_wood:0 "Land 673 (wood)" # AUTOGEN
- HUB_NAME_STATE_NORTHERN_GATE_OF_CALITH_city:0 "Northern Gate of Calith (city)" # AUTOGEN
+ HUB_NAME_STATE_NORTHERN_GATE_OF_CALITH_city:0 "Northern Gate of Calith" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_GATE_OF_CALITH_port:0 "Northern Gate of Calith (port)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_GATE_OF_CALITH_farm:0 "Northern Gate of Calith (farm)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_GATE_OF_CALITH_mine:0 "Northern Gate of Calith (mine)" # AUTOGEN
  HUB_NAME_STATE_NORTHERN_GATE_OF_CALITH_wood:0 "Northern Gate of Calith (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_675_city:0 "Land 675 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_675_city:0 "Land 675" # AUTOGEN
  HUB_NAME_STATE_LAND_675_port:0 "Land 675 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_675_farm:0 "Land 675 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_675_mine:0 "Land 675 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_675_wood:0 "Land 675 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_676_city:0 "Land 676 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_676_city:0 "Land 676" # AUTOGEN
  HUB_NAME_STATE_LAND_676_port:0 "Land 676 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_676_farm:0 "Land 676 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_676_mine:0 "Land 676 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_676_wood:0 "Land 676 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_677_city:0 "Land 677 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_677_city:0 "Land 677" # AUTOGEN
  HUB_NAME_STATE_LAND_677_port:0 "Land 677 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_677_farm:0 "Land 677 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_677_mine:0 "Land 677 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_677_wood:0 "Land 677 (wood)" # AUTOGEN
- HUB_NAME_STATE_LAND_678_city:0 "Land 678 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_678_city:0 "Land 678" # AUTOGEN
  HUB_NAME_STATE_LAND_678_port:0 "Land 678 (port)" # AUTOGEN
  HUB_NAME_STATE_LAND_678_farm:0 "Land 678 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_678_mine:0 "Land 678 (mine)" # AUTOGEN
@@ -2135,7 +2135,7 @@
  HUB_NAME_STATE_LAND_733_wood:0 "Land 733 (wood)" # AUTOGEN
  HUB_NAME_STATE_LAND_735_wood:0 "Viefin"
  HUB_NAME_STATE_LAND_735_port:0 "Quai-Brienne"
- HUB_NAME_STATE_LAND_735_city:0 "Land 735 (city)" # AUTOGEN
+ HUB_NAME_STATE_LAND_735_city:0 "Land 735" # AUTOGEN
  HUB_NAME_STATE_LAND_735_farm:0 "Land 735 (farm)" # AUTOGEN
  HUB_NAME_STATE_LAND_735_mine:0 "Land 735 (mine)" # AUTOGEN
  HUB_NAME_STATE_LAND_736_city:0 "Citadel of Lead"

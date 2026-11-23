@@ -1023,6 +1023,78 @@ def load_canon_cities(path: Path, canvas: tuple[int, int] | None = None) -> list
 
 
 # ---------------------------------------------------------------------------
+# Floating hub names (#9823): name-only labels for auto-picked hub slots
+# ---------------------------------------------------------------------------
+#
+# ``hub_worksheet.json`` rows are *anchored*: each seeds a province, so adding one
+# re-cuts provinces and is read by the pop, terrain and province consumers. A
+# floating row only labels whatever province the generator already picks for a slot
+# (``worldgen/statefile.py`` ``pick_hubs``), so it needs no anchor and nothing
+# downstream reads it. Identity is the ``locate`` pixel (a pixel inside the state),
+# never a ``STATE_`` key, which churns (Ulthuan's states are unnamed).
+
+@dataclass(frozen=True)
+class HubName:
+    """One floating hub name: ``name`` for slot ``hub`` of the state holding ``locate``.
+
+    ``state`` is a free-text label (logs only). ``locate`` is a canvas ``[x, y]``
+    pixel inside the state, bounds-checked like :class:`HubRow.anchor`; by
+    convention the interior of the province the generator picked for the slot, so a
+    later promotion to an anchored row is a copy of the pixel. ``source`` is a canon
+    citation, a ChaosRobie-table citation or the literal ``invented``. ``note``
+    states weak sourcing and is optional.
+    """
+
+    state: str
+    hub: str
+    name: str
+    locate: tuple[int, int]
+    source: str
+    note: str
+
+    @classmethod
+    def from_dict(cls, d: dict, ctx: str, canvas: tuple[int, int] | None = None) -> "HubName":
+        name = _as_str(_require(d, "name", ctx), f"{ctx}.name")
+        if not name:
+            raise SchemaError(f"{ctx}.name: must be a non-empty string")
+        ctx = f"{ctx}({name})"
+        state = _as_str(_require(d, "state", ctx), f"{ctx}.state")
+        hub = _as_str(_require(d, "hub", ctx), f"{ctx}.hub")
+        if hub not in _HUB_TYPES:
+            raise SchemaError(f"{ctx}.hub: must be one of {list(_HUB_TYPES)}, got '{hub}'")
+        (locate,) = _as_seed_list([_require(d, "locate", ctx)], f"{ctx}.locate", canvas)
+        source = _as_str(_require(d, "source", ctx), f"{ctx}.source")
+        if not source:
+            raise SchemaError(f"{ctx}.source: must be a non-empty string "
+                              f"(canon citation, CR-table citation or 'invented')")
+        note = _as_str(d.get("note", ""), f"{ctx}.note")
+        return cls(state=state, hub=hub, name=name, locate=locate, source=source, note=note)
+
+
+def load_hub_names(path: Path, canvas: tuple[int, int] | None = None) -> list[HubName]:
+    """Load + validate ``hub_names.json`` (authored order preserved).
+
+    Top-level ``{"names": [...]}``; an empty list is legal (the file starts empty).
+    Rejects a duplicate ``(locate, hub)``. Whether ``locate`` resolves to a state with
+    that slot is the generator's check: it alone knows the emitted states.
+    """
+    ctx = path.name
+    data = _load_json(path)
+    names_raw = _require(data, "names", ctx)
+    if not isinstance(names_raw, list):
+        raise SchemaError(f"{ctx}.names: expected a list")
+    rows = [HubName.from_dict(n, f"{ctx}.names[{i}]", canvas) for i, n in enumerate(names_raw)]
+    seen: dict[tuple[tuple[int, int], str], str] = {}
+    for r in rows:
+        k = (r.locate, r.hub)
+        if k in seen:
+            raise SchemaError(
+                f"{ctx}: ({list(r.locate)}, {r.hub}) is named by both '{seen[k]}' and '{r.name}'")
+        seen[k] = r.name
+    return rows
+
+
+# ---------------------------------------------------------------------------
 # Arable lore zones (the hand-authored lore adjustment the heatmap generator reads)
 # ---------------------------------------------------------------------------
 #

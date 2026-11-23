@@ -126,6 +126,9 @@ SEA_ZONES_INDEX_PATH = DERIVED_DIR / "sea_zones_index.json"
 #: (#3665). Present only when a hub worksheet exists; read here to pick each listed
 #: settlement's province as its state's hub and emit the HUB_NAME loc.
 HUB_ANCHORS_INDEX_PATH = DERIVED_DIR / "hub_anchors_index.json"
+#: Hand-authored floating hub names (#9823): name-only labels for auto-picked slots,
+#: keyed by a pixel inside the state (``schema.load_hub_names``). Optional.
+HUB_NAMES_PATH = TOOLS_DIR / "config" / "hub_names.json"
 #: Committed STATE-number identity authority (board #4188, mirrors #3705's
 #: provinces_index.json): state_number -> stable province-id set + a monotonic
 #: state_number_high_water. Written here, read read-only by
@@ -460,13 +463,42 @@ HUB_SLOT_ORDER = ("city", "port", "farm", "mine", "wood")
 
 
 def _provisional_hub_entries(key: str, display: str, hubs: dict,
-                             listed: set[str]) -> list[tuple[str, str, bool]]:
+                             listed: set[str],
+                             drawn: bool = False) -> list[tuple[str, str, bool]]:
     """One provisional ``(loc key, "<display> (<slot>)", True)`` per emitted hub
     slot with no listed (worksheet) name (#9823), in :data:`HUB_SLOT_ORDER`, so no
     hub slot ever renders its raw ``HUB_NAME_…`` key in game. ``display`` is the
-    state's shipped display name, the same text ``_render_loc`` writes."""
-    return [(f"HUB_NAME_{key}_{slot}", f"{display} ({slot})", True)
+    state's shipped display name, the same text ``_render_loc`` writes. In a
+    ``drawn`` (non-placeholder) state the city slot is the bare state name, with no
+    "(city)" (Chris, 2026-11-22); the other slots keep their suffix so the five
+    hubs of one state stay distinguishable. Placeholder states keep every suffix."""
+    return [(f"HUB_NAME_{key}_{slot}",
+             display if (drawn and slot == "city") else f"{display} ({slot})", True)
             for slot in HUB_SLOT_ORDER if slot in hubs and slot not in listed]
+
+
+def resolve_floating_hub_names(rows, labels: np.ndarray, n_land: int,
+                               region_of: np.ndarray) -> dict[int, dict[str, "schema.HubName"]]:
+    """``region id -> {slot: HubName}`` for the floating hub names (#9823): each
+    row's ``locate`` pixel is read through the province raster to the state region
+    holding it. A pixel outside every land province, or two rows for one
+    (region, slot), is an error (``SystemExit``); whether the state has the slot and
+    whether an anchored row already names it is checked where the slots are known."""
+    out: dict[int, dict[str, "schema.HubName"]] = {}
+    for r in rows:
+        x, y = r.locate
+        label = int(labels[y, x])
+        if not (1 <= label <= n_land):
+            raise SystemExit(f"{HUB_NAMES_PATH.name}: '{r.name}' ({r.state}): locate "
+                             f"{list(r.locate)} is not on a land province")
+        rid = int(region_of[label])
+        slot = out.setdefault(rid, {})
+        if r.hub in slot:
+            raise SystemExit(
+                f"{HUB_NAMES_PATH.name}: '{slot[r.hub].name}' and '{r.name}' both name the "
+                f"'{r.hub}' slot of the state holding {list(r.locate)} — one row per (state, slot)")
+        slot[r.hub] = r
+    return out
 
 
 def _render_hub_loc(entries: list[tuple[str, str, bool]]) -> str:
@@ -965,6 +997,14 @@ def main(argv: list[str] | None = None) -> int:
                     f"{HUB_ANCHORS_INDEX_PATH.name}: region {rid} has two '{h['hub']}' hubs "
                     f"('{slot[h['hub']][1]}' and '{h['name']}') — one worksheet row per (state, hub)")
             slot[h["hub"]] = (tuple(int(v) for v in h["province_color"]), h["name"])
+    floating_by_region: dict[int, dict[str, "schema.HubName"]] = {}
+    if HUB_NAMES_PATH.is_file():
+        try:
+            floating_rows = schema.load_hub_names(HUB_NAMES_PATH, (CANVAS_W, CANVAS_H))
+        except schema.SchemaError as e:
+            raise SystemExit(f"{HUB_NAMES_PATH.name}: {e}")
+        floating_by_region = resolve_floating_hub_names(floating_rows, labels, n_land, region_of)
+    floating_used: set[int] = set()
     hub_loc_entries: list[tuple[str, str, bool]] = []  # (key, name, provisional)
     hub_slots_total = 0
     hub_provisional_by_stem: dict[str, int] = {}  # #9823: unlisted slots per state file
@@ -1076,10 +1116,27 @@ def main(argv: list[str] | None = None) -> int:
             hub_loc_entries.append((f"HUB_NAME_{key}_{hub}", hubname, False))
         if anchor_hubs and is_drawn and not name:
             hub_unnamed_regions.append(key)  # a churny STATE_LAND_NNN key
+        # Floating names (#9823) label auto-picked slots without seeding a province.
+        floating = floating_by_region.get(region_id, {})
+        if floating:
+            floating_used.add(region_id)
+            for slot, row in floating.items():
+                if slot not in hubs:
+                    raise SystemExit(
+                        f"{HUB_NAMES_PATH.name}: '{row.name}' ({row.state}) names the '{slot}' "
+                        f"slot, which {key} does not have (slots: {sorted(hubs)})")
+                if slot in anchor_hubs:
+                    raise SystemExit(
+                        f"{HUB_NAMES_PATH.name}: '{row.name}' ({row.state}) names {key}'s '{slot}' "
+                        f"slot, which hub_worksheet.json already names ('{anchor_hubs[slot][1]}')")
+            for slot in HUB_SLOT_ORDER:
+                if slot in floating:
+                    hub_loc_entries.append((f"HUB_NAME_{key}_{slot}", floating[slot].name, False))
         # Every other emitted slot (auto-picked or stacked; drawn and placeholder
         # states alike) gets a provisional "<state name> (<slot>)" (#9823).
         provisional = _provisional_hub_entries(
-            key, canon_names.get(key) or _pretty_name(key), hubs, set(anchor_hubs))
+            key, canon_names.get(key) or _pretty_name(key), hubs,
+            set(anchor_hubs) | set(floating), drawn=is_drawn)
         hub_loc_entries.extend(provisional)
         hub_slots_total += len(hubs)
         if provisional:
@@ -1108,6 +1165,13 @@ def main(argv: list[str] | None = None) -> int:
         else:
             oos_keys.append(key)
 
+    stray = sorted(set(floating_by_region) - floating_used)
+    if stray:
+        raise SystemExit(f"{HUB_NAMES_PATH.name}: {len(stray)} floating name(s) sit in a region that "
+                         f"was not emitted as a land state (region ids {stray[:8]})")
+    if floating_used:
+        log(f"floating hub names (#9823): {sum(len(floating_by_region[r]) for r in floating_used)} "
+            f"slot(s) named in {len(floating_used)} state(s)", t0)
     n_blocks = sum(len(v) for v in blocks_by_file.values())
     log(f"{n_blocks} land states emitted ({n_stacked} hub-stacked placeholder/small regions"
         f"{f', {n_sealed_stacked} of them downgraded by impassable provinces' if n_sealed_stacked else ''})", t0)
@@ -1151,7 +1215,7 @@ def main(argv: list[str] | None = None) -> int:
             n_prov = sum(hub_provisional_by_stem.values())
             per = ", ".join(f"{s} {n}" for s, n in sorted(hub_provisional_by_stem.items()))
             log(f"  hub names: {n_prov} of {hub_slots_total} slots provisional "
-                f"({map_config.AUTOGEN_MARKER}): {per} — name them in hub_worksheet.json", t0)
+                f"({map_config.AUTOGEN_MARKER}): {per} — name them in hub_worksheet.json or hub_names.json", t0)
         if hub_unnamed_regions:
             log(f"  WARNING: {len(hub_unnamed_regions)} listed hub(s) sit in an unnamed region "
                 f"(churny STATE_LAND_NNN loc key): {sorted(set(hub_unnamed_regions))[:8]}", t0)

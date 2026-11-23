@@ -2717,10 +2717,112 @@ def _selfcheck_hub_loc_coverage() -> None:
         errs, _w = vm._check_hub_loc_coverage(states, all_keys - {"HUB_NAME_STATE_COAST_port"}, path)
         assert len(errs) == 1 and "'port'" in errs[0], f"a missing port key must fail, got {errs}"
         # No provisional lines -> no warning; no path -> coverage still checked.
-        path.write_text(glr._render_hub_loc([(k, "Real", False) for k in sorted(all_keys)]),
+        path.write_text(glr._render_hub_loc([(k, f"Real {i}", False) for i, k in enumerate(sorted(all_keys))]),
                         encoding="utf-8-sig")
         assert vm._check_hub_loc_coverage(states, all_keys, path) == ([], []), "real names only: no warning"
+        # Two slots with one display name warn (never error).
+        path.write_text(glr._render_hub_loc([(k, "Same", False) for k in sorted(all_keys)]),
+                        encoding="utf-8-sig")
+        errs, warns = vm._check_hub_loc_coverage(states, all_keys, path)
+        assert errs == [] and len(warns) == 1 and "Same x9" in warns[0], (errs, warns)
         assert vm._check_hub_loc_coverage(states, set(), None)[0], "coverage is checked without a path"
+
+
+def _selfcheck_hub_names() -> None:
+    """#9823: floating hub names (``hub_names.json``): loader, generator resolution and
+    the validator's errors and drift warning, each with failing cases."""
+    import json
+    import numpy as np
+    import generate_land_regions as glr
+    import validate_map as vm
+    from pathlib import Path
+    from worldgen import schema
+
+    def row(**kw):
+        d = {"state": "S", "hub": "city", "name": "Aldburg", "locate": [3, 2], "source": "invented"}
+        d.update(kw)
+        return d
+
+    def load(rows, canvas=(8, 6)):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "hub_names.json"
+            p.write_text(json.dumps({"names": rows}), encoding="utf-8")
+            return schema.load_hub_names(p, canvas)
+
+    def bad(rows, frag):
+        try:
+            load(rows)
+        except schema.SchemaError as e:
+            assert frag in str(e), f"expected '{frag}' in: {e}"
+            return
+        raise AssertionError(f"expected a SchemaError containing '{frag}'")
+
+    assert load([]) == [], "an empty names list is legal"
+    (ok,) = load([row(note="weak")])
+    assert ok.name == "Aldburg" and ok.hub == "city" and ok.locate == (3, 2) and ok.note == "weak"
+    bad([row(hub="castle")], "hub")
+    bad([row(source="")], "source")
+    bad([{k: v for k, v in row().items() if k != "source"}], "source")
+    bad([row(locate=[99, 2])], "locate")
+    bad([row(), row(name="Other")], "named by both")
+    assert len(load([row(), row(hub="farm")])) == 2, "one pixel may name two different slots"
+
+    # Generator resolution: pixel -> province label -> region.
+    labels = np.zeros((6, 8), dtype=np.int64)
+    labels[:, :4] = 1
+    labels[:, 4:] = 2
+    region_of = np.array([0, 7, 9])
+    rows = load([row(), row(hub="farm", name="Barrow", locate=[6, 1])])
+    got = glr.resolve_floating_hub_names(rows, labels, 2, region_of)
+    assert got == {7: {"city": rows[0]}, 9: {"farm": rows[1]}}, got
+    labels_water = labels.copy()
+    labels_water[2, 3] = 0
+    for rs, lab, frag in (
+            (load([row()]), labels_water, "not on a land province"),
+            (load([row(), row(name="Twin", locate=[1, 1])]), labels, "one row per (state, slot)")):
+        try:
+            glr.resolve_floating_hub_names(rs, lab, 2, region_of)
+        except SystemExit as e:
+            assert frag in str(e), f"expected '{frag}' in: {e}"
+        else:
+            raise AssertionError(f"expected SystemExit containing '{frag}'")
+
+    # Validator: errors and the drift warning, off a stand-in bitmap.
+    A, B = (1, 1, 1), (2, 2, 2)
+    code = np.zeros((6, 8), dtype=np.int64)
+    code[:, :4] = (A[0] << 16) | (A[1] << 8) | A[2]
+    code[:, 4:] = (B[0] << 16) | (B[1] << 8) | B[2]
+
+    class _Bmp:
+        width, height, _code = 8, 6, code
+
+    st = vm.ParsedState("STATE_ONE", "02_empire.txt")
+    st.provinces = [A, B]
+    st.hubs = {"city": A, "farm": B}
+
+    def check(rows, hub_index=None):
+        with tempfile.TemporaryDirectory() as td:
+            p = Path(td) / "hub_names.json"
+            p.write_text(json.dumps({"names": rows}), encoding="utf-8")
+            return vm._check_hub_names(p, _Bmp(), [st], set(), hub_index)
+
+    assert check([row()]) == ([], []), "pixel in the picked province: clean"
+    errs, warns = check([row(locate=[6, 2])])          # city slot is A, pixel is in B
+    assert errs == [] and len(warns) == 1 and "drift" in warns[0], (errs, warns)
+    errs, _w = check([row(hub="port")])
+    assert len(errs) == 1 and "no 'port' slot" in errs[0], errs
+    errs, _w = check([row(), row(name="Twin", locate=[2, 2])])
+    assert len(errs) == 1 and "both name" in errs[0], errs
+    errs, _w = check([row()], {"hubs": [{"province_color": list(A), "hub": "city"}]})
+    assert len(errs) == 1 and "already named by an anchored" in errs[0], errs
+    sea = {A}
+    with tempfile.TemporaryDirectory() as td:
+        p = Path(td) / "hub_names.json"
+        p.write_text(json.dumps({"names": [row()]}), encoding="utf-8")
+        errs, _w = vm._check_hub_names(p, _Bmp(), [st], sea, None)
+    assert len(errs) == 1 and "no emitted land state" in errs[0], errs
+    # A named slot is not provisional.
+    assert glr._provisional_hub_entries("STATE_ONE", "One", st.hubs, {"city"})         == [("HUB_NAME_STATE_ONE_farm", "One (farm)", True)]
 
 
 def _selfcheck_hub_stack() -> None:
@@ -7557,6 +7659,7 @@ def run_check() -> int:
     print("validate_map: hub-anchor check (own-state hub, port coastal, HUB_NAME loc, "
           "stale-index detection, passable-only sharing rule) self-check passed.")
     _selfcheck_hub_loc_coverage()
+    _selfcheck_hub_names()
     print("hub names (#9823): every emitted slot keyed, provisional '<state> (<slot>)' "
           "# AUTOGEN lines, missing-key failures, per-file provisional count self-check passed.")
     _selfcheck_hub_stack()

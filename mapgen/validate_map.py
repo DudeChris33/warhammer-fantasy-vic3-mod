@@ -310,6 +310,7 @@ def validate(
     building_groups_dir: Path | None = None,
     economics_worksheet: Path | None = None,
     hub_loc_path: Path | None = None,
+    hub_names_path: Path | None = None,
     economics_derived_dir: Path | None = None,
 ) -> list[str]:
     """Run every check and return a flat list of error strings (empty == clean)."""
@@ -425,6 +426,12 @@ def validate(
                 hub_loc_keys |= _parse_loc_keys(extra)
             errors += _check_hub_anchors(
                 bitmap, states, sea_colors, hub_loc_keys, hub_index)
+        if hub_names_path is not None and hub_names_path.is_file():
+            hn_errors, hn_warnings = _check_hub_names(
+                hub_names_path, bitmap, land_states, sea_colors, hub_index)
+            errors += hn_errors
+            if warnings is not None:
+                warnings.extend(hn_warnings)
         # Rivers (#3703): gated on the source-driven pipeline being live — the
         # names file's presence is that signal (the same file-exists idiom the
         # canon_rivers.csv cross-check uses). Absent -> the committed gate stays
@@ -1552,6 +1559,73 @@ def _check_loc_coverage(states: list[ParsedState], loc_dir: Path,
     return errors
 
 
+def _check_hub_names(names_path: Path, bitmap: "ProvinceBitmap", land_states: list[ParsedState],
+                     sea_colors: set[Color], hub_index: dict | None
+                     ) -> tuple[list[str], list[str]]:
+    """Floating hub names (#9823, ``mapgen/config/hub_names.json``), read off the bitmap.
+
+    Errors: a row whose ``locate`` pixel is in no emitted land state; two rows for one
+    (state, slot); a slot the state lacks; a slot an anchored worksheet row already
+    names. Warning (the worklist for promoting a name to an anchored row, #11763):
+    **drift**, the row's pixel lies in a province other than the one the state
+    declares for that slot. Returns ``(errors, warnings)``."""
+    from worldgen import schema
+    from worldgen.raster import color_to_hex
+
+    errors: list[str] = []
+    warnings: list[str] = []
+    try:
+        rows = schema.load_hub_names(names_path, (bitmap.width, bitmap.height))
+    except schema.SchemaError as e:
+        return [f"{names_path.name}: {e}"], warnings
+    owner: dict[Color, ParsedState] = {}
+    for st in land_states:
+        for col in st.provinces:
+            owner[col] = st
+    anchored: set[tuple[str, str]] = set()
+    for h in (hub_index or {}).get("hubs", []):
+        st = owner.get(tuple(int(v) for v in h["province_color"]))
+        if st is not None:
+            anchored.add((st.key, h["hub"]))
+    seen: dict[tuple[str, str], str] = {}
+    n_drift = 0
+    drift_examples: list[str] = []
+    for r in rows:
+        x, y = r.locate
+        code = int(bitmap._code[y, x])
+        col = ((code >> 16) & 0xFF, (code >> 8) & 0xFF, code & 0xFF)
+        st = owner.get(col)
+        if st is None or col in sea_colors:
+            errors.append(f"{names_path.name}: '{r.name}' ({r.state}): locate {list(r.locate)} "
+                          f"is in no emitted land state")
+            continue
+        declared = st.hubs.get(r.hub)
+        if declared is None:
+            errors.append(f"{names_path.name}: '{r.name}' ({r.state}): {st.key} has no '{r.hub}' slot")
+            continue
+        if (st.key, r.hub) in anchored:
+            errors.append(f"{names_path.name}: '{r.name}' ({r.state}): the '{r.hub}' slot of "
+                          f"{st.key} is already named by an anchored hub_worksheet.json row")
+            continue
+        prev = seen.get((st.key, r.hub))
+        if prev is not None:
+            errors.append(f"{names_path.name}: '{prev}' and '{r.name}' both name the '{r.hub}' "
+                          f"slot of {st.key}")
+            continue
+        seen[(st.key, r.hub)] = r.name
+        if declared != col:
+            n_drift += 1
+            if len(drift_examples) < 8:
+                drift_examples.append(f"{r.name} ({st.key} {r.hub}: pixel in {color_to_hex(col)}, "
+                                      f"slot on {color_to_hex(declared)})")
+    if n_drift:
+        warnings.append(f"hub_names drift: {n_drift} floating name(s) sit away from the province "
+                        f"the generator picked for the slot (promote to an anchored row at the next "
+                        f"province regen): " + "; ".join(drift_examples)
+                        + (" ..." if n_drift > len(drift_examples) else ""))
+    return errors, warnings
+
+
 def _check_hub_loc_coverage(land_states: list[ParsedState], loc_keys: set[str],
                             hub_loc_path: Path | None) -> tuple[list[str], list[str]]:
     """Every hub slot of every land state needs ``HUB_NAME_<key>_<slot>`` (#9823):
@@ -1571,11 +1645,21 @@ def _check_hub_loc_coverage(land_states: list[ParsedState], loc_keys: set[str],
     warnings: list[str] = []
     if hub_loc_path is not None and hub_loc_path.is_file():
         per_file: dict[str, int] = {}
+        named: dict[str, list[str]] = {}
         for line in hub_loc_path.read_text(encoding="utf-8-sig").splitlines():
             km = _LOC_KEY.match(line)
+            if km and not line.rstrip().endswith(map_config.AUTOGEN_MARKER):
+                nm = re.search(r':0 "(.*)"\s*$', line)
+                if nm:
+                    named.setdefault(nm.group(1), []).append(km.group(1))
             if km and line.rstrip().endswith(map_config.AUTOGEN_MARKER) and km.group(1) in file_of:
                 fn = file_of[km.group(1)]
                 per_file[fn] = per_file.get(fn, 0) + 1
+        dupes = {n: ks for n, ks in named.items() if len(ks) > 1}
+        if dupes:
+            ex = "; ".join(f"{n} x{len(ks)}" for n, ks in sorted(dupes.items())[:8])
+            warnings.append(f"hub names: {len(dupes)} display name(s) used by more than one slot: {ex}"
+                            + (" ..." if len(dupes) > 8 else ""))
         if per_file:
             per = ", ".join(f"{fn} {n}" for fn, n in sorted(per_file.items()))
             warnings.append(
@@ -2713,6 +2797,7 @@ def main(argv: list[str] | None = None) -> int:
         (args.economics_worksheet or TOOLS_DIR / "config" / "land_economics_worksheet.csv"),
         hub_loc_path=None if args.fixture else
         REPO_ROOT / "localization" / "replace" / "english" / "map" / "wh_hub_names_l_english.yml",
+        hub_names_path=None if args.fixture else TOOLS_DIR / "config" / "hub_names.json",
         economics_derived_dir=None if args.fixture else TOOLS_DIR / "derived",
     )
     # Warnings are advisory (canon-city impassable collisions, #3789) — printed

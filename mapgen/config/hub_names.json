@@ -1,0 +1,137 @@
+{
+  "_comment": "Floating hub names (#9823): name-only labels for hub slots the generator auto-picks. Unlike hub_worksheet.json (anchored rows seed a province and are read by the pop, terrain and province stages), a row here only labels whatever province generate_land_regions.py picks for the slot, so adding one moves nothing. Row: state (label, logs only), hub (city|port|farm|mine|wood), name, locate [x, y] (a canvas pixel inside the state, ideally inside the picked province; geometry is the identity, never a STATE_ key), source (canon citation, ChaosRobie-table citation, or 'invented'), optional note (weak sourcing is stated here, never hidden). One row per (state, slot); a slot an anchored worksheet row already names must not appear here. Post-2502 canon names are not start names (#11806). validate_map.py warns when a row's pixel is no longer in the province picked for its slot (drift) and on duplicate display names.",
+  "names": [
+    {
+      "state": "Land 485 (near Glimdwarrow)",
+      "hub": "mine",
+      "name": "Glimmgrube",
+      "locate": [
+        4041,
+        797
+      ],
+      "source": "invented",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Land 485 (near Glimdwarrow)",
+      "hub": "wood",
+      "name": "Glimmwald",
+      "locate": [
+        4041,
+        797
+      ],
+      "source": "invented",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Marienburg",
+      "hub": "city",
+      "name": "Marienburg",
+      "locate": [
+        3988,
+        777
+      ],
+      "source": "canon: cr_oldworld_campaign/marienburg (TWW3 Old World mod region table)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Marienburg",
+      "hub": "port",
+      "name": "Suiddock",
+      "locate": [
+        3999,
+        791
+      ],
+      "source": "canon: cr_oldworld_campaign/suiddock (TWW3 Old World mod region table)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Marienburg",
+      "hub": "wood",
+      "name": "Kruiersgat",
+      "locate": [
+        3999,
+        791
+      ],
+      "source": "canon: Kruiersgat, Marienburg (Warhammer Fantasy lore)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Lyonesse",
+      "hub": "city",
+      "name": "Lyonesse",
+      "locate": [
+        3690,
+        759
+      ],
+      "source": "canon: Lyonesse, Dukedom of Lyonesse (Warhammer Fantasy lore)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Land 618 (near Montfort)",
+      "hub": "city",
+      "name": "Montfort",
+      "locate": [
+        3964,
+        894
+      ],
+      "source": "canon: cr_oldworld_campaign/montfort (TWW3 Old World mod region table)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Land 618 (near Montfort)",
+      "hub": "farm",
+      "name": "Champ-Fort",
+      "locate": [
+        3964,
+        894
+      ],
+      "source": "invented",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Frozen Coast",
+      "hub": "mine",
+      "name": "Isberg",
+      "locate": [
+        4545,
+        430
+      ],
+      "source": "invented",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Apuccini Mountains",
+      "hub": "mine",
+      "name": "Queekwell",
+      "locate": [
+        3995,
+        1234
+      ],
+      "source": "canon: cr_oldworld_campaign/queekwell (TWW3 Old World mod region table)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor."
+    },
+    {
+      "state": "Southeast Magritta",
+      "hub": "city",
+      "name": "Almagora",
+      "locate": [
+        3692,
+        1193
+      ],
+      "source": "canon: cr_oldworld_campaign/almagora (TWW3 Old World mod region table)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    },
+    {
+      "state": "Land 596 (near the Great Slave Port)",
+      "hub": "port",
+      "name": "Great Slave Port",
+      "locate": [
+        4759,
+        565
+      ],
+      "source": "canon: cr_oldworld_campaign/great_slave_port (TWW3 Old World mod region table)",
+      "note": "Batch 0 (#9823): recovered from a hub_worksheet.json row dropped on a state merge; locate is the original anchor; it now lies outside the province the generator picked (drift, #11763 worklist)."
+    }
+  ]
+}
